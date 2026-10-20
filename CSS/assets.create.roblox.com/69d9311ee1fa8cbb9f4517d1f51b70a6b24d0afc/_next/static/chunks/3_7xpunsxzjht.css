@@ -1,0 +1,871 @@
+@font-face {
+    font-family: Builder Sans;
+    src: url(https://cdn.foundation.roblox.com/current/fonts/builder-sans/BuilderSans-Thin.woff2)format("woff2"), url(https://cdn.foundation.roblox.com/current/fonts/builder-sans/BuilderSans-Thin.woff)format("woff");
+    font-weight: 100;
+    font-style: normal
+}
+
+@font-face {
+    font-family: Builder Sans;
+    src: url(https://cdn.foundation.roblox.com/current/fonts/builder-sans/BuilderSans-ThinItalic.woff2)format("woff2"), url(https://cdn.foundation.roblox.com/current/fonts/builder-sans/BuilderSans-ThinItalic.woff)format("woff");
+    font-weight: 100;
+    font-style: italic
+}
+
+@font-face {
+    font-family: Builder Sans;
+    src: url(https://cdn.foundation.roblox.com/current/fonts/builder-sans/BuilderSans-Light.woff2)format("woff2"), url(https://cdn.foundation.roblox.com/current/fonts/builder-sans/BuilderSans-Light.woff)format("woff");
+    font-weight: 300;
+    font-style: normal
+}
+
+@font-face {
+    font-family: Builder Sans;
+    src: url(https://cdn.foundation.roblox.com/current/fonts/builder-sans/BuilderSans-LightItalic.woff2)format("woff2"), url(https://cdn.foundation.roblox.com/current/fonts/builder-sans/BuilderSans-LightItalic.woff)format("woff");
+    font-weight: 300;
+    font-style: italic
+}
+
+@font-face {
+    font-family: Builder Sans;
+    src: url(https://cdn.foundation.roblox.com/current/fonts/builder-sans/BuilderSans-Regular.woff2)format("woff2"), url(https://cdn.foundation.roblox.com/current/fonts/builder-sans/BuilderSans-Regular.woff)format("woff");
+    font-weight: 400;
+    font-style: normal
+}
+
+@font-face {
+    font-family: Builder Sans;
+    src: url(https://cdn.foundation.roblox.com/current/fonts/builder-sans/BuilderSans-Italic.woff2)format("woff2"), url(https://cdn.foundation.roblox.com/current/fonts/builder-sans/BuilderSans-Italic.woff)format("woff");
+    font-weight: 400;
+    font-style: italic
+}
+
+@font-face {
+    font-family: Builder Sans;
+    src: url(https://cdn.foundation.roblox.com/current/fonts/builder-sans/BuilderSans-Medium.woff2)format("woff2"), url(https://cdn.foundation.roblox.com/current/fonts/builder-sans/BuilderSans-Medium.woff)format("woff");
+    font-weight: 500;
+    font-style: normal
+}
+
+@font-face {
+    font-family: Builder Sans;
+    src: url(https://cdn.foundation.roblox.com/current/fonts/builder-sans/BuilderSans-MediumItalic.woff2)format("woff2"), url(https://cdn.foundation.roblox.com/current/fonts/builder-sans/BuilderSans-MediumItalic.woff)format("woff");
+    font-weight: 500;
+    font-style: italic
+}
+
+@font-face {
+    font-family: Builder Sans;
+    src: url(https://cdn.foundation.roblox.com/current/fonts/builder-sans/BuilderSans-SemiBold.woff2)format("woff2"), url(https://cdn.foundation.roblox.com/current/fonts/builder-sans/BuilderSans-SemiBold.woff)format("woff");
+    font-weight: 600;
+    font-style: normal
+}
+
+@font-face {
+    font-family: Builder Sans;
+    src: url(https://cdn.foundation.roblox.com/current/fonts/builder-sans/BuilderSans-SemiBoldItalic.woff2)format("woff2"), url(https://cdn.foundation.roblox.com/current/fonts/builder-sans/BuilderSans-SemiBoldItalic.woff)format("woff");
+    font-weight: 600;
+    font-style: italic
+}
+
+@font-face {
+    font-family: Builder Sans;
+    src: url(https://cdn.foundation.roblox.com/current/fonts/builder-sans/BuilderSans-Bold.woff2)format("woff2"), url(https://cdn.foundation.roblox.com/current/fonts/builder-sans/BuilderSans-Bold.woff)format("woff");
+    font-weight: 700;
+    font-style: normal
+}
+
+@font-face {
+    font-family: Builder Sans;
+    src: url(https://cdn.foundation.roblox.com/current/fonts/builder-sans/BuilderSans-BoldItalic.woff2)format("woff2"), url(https://cdn.foundation.roblox.com/current/fonts/builder-sans/BuilderSans-BoldItalic.woff)format("woff");
+    font-weight: 700;
+    font-style: italic
+}
+
+@font-face {
+    font-family: Builder Sans;
+    src: url(https://cdn.foundation.roblox.com/current/fonts/builder-sans/BuilderSans-ExtraBold.woff2)format("woff2"), url(https://cdn.foundation.roblox.com/current/fonts/builder-sans/BuilderSans-ExtraBold.woff)format("woff");
+    font-weight: 800;
+    font-style: normal
+}
+
+@font-face {
+    font-family: Builder Sans;
+    src: url(https://cdn.foundation.roblox.com/current/fonts/builder-sans/BuilderSans-ExtraBoldItalic.woff2)format("woff2"), url(https://cdn.foundation.roblox.com/current/fonts/builder-sans/BuilderSans-ExtraBoldItalic.woff)format("woff");
+    font-weight: 800;
+    font-style: italic
+}
+
+@font-face {
+    font-family: Builder Extended;
+    src: url(https://cdn.foundation.roblox.com/current/fonts/builder-extended/BuilderExtended-Light.woff2)format("woff2"), url(https://cdn.foundation.roblox.com/current/fonts/builder-extended/BuilderExtended-Light.woff)format("woff");
+    font-weight: 300;
+    font-style: normal
+}
+
+@font-face {
+    font-family: Builder Extended;
+    src: url(https://cdn.foundation.roblox.com/current/fonts/builder-extended/BuilderExtended-LightItalic.woff2)format("woff2"), url(https://cdn.foundation.roblox.com/current/fonts/builder-extended/BuilderExtended-LightItalic.woff)format("woff");
+    font-weight: 300;
+    font-style: italic
+}
+
+@font-face {
+    font-family: Builder Extended;
+    src: url(https://cdn.foundation.roblox.com/current/fonts/builder-extended/BuilderExtended-Regular.woff2)format("woff2"), url(https://cdn.foundation.roblox.com/current/fonts/builder-extended/BuilderExtended-Regular.woff)format("woff");
+    font-weight: 400;
+    font-style: normal
+}
+
+@font-face {
+    font-family: Builder Extended;
+    src: url(https://cdn.foundation.roblox.com/current/fonts/builder-extended/BuilderExtended-Italic.woff2)format("woff2"), url(https://cdn.foundation.roblox.com/current/fonts/builder-extended/BuilderExtended-Italic.woff)format("woff");
+    font-weight: 400;
+    font-style: italic
+}
+
+@font-face {
+    font-family: Builder Extended;
+    src: url(https://cdn.foundation.roblox.com/current/fonts/builder-extended/BuilderExtended-SemiBold.woff2)format("woff2"), url(https://cdn.foundation.roblox.com/current/fonts/builder-extended/BuilderExtended-SemiBold.woff)format("woff");
+    font-weight: 600;
+    font-style: normal
+}
+
+@font-face {
+    font-family: Builder Extended;
+    src: url(https://cdn.foundation.roblox.com/current/fonts/builder-extended/BuilderExtended-SemiBoldItalic.woff2)format("woff2"), url(https://cdn.foundation.roblox.com/current/fonts/builder-extended/BuilderExtended-SemiBoldItalic.woff)format("woff");
+    font-weight: 600;
+    font-style: italic
+}
+
+@font-face {
+    font-family: Builder Extended;
+    src: url(https://cdn.foundation.roblox.com/current/fonts/builder-extended/BuilderExtended-Bold.woff2)format("woff2"), url(https://cdn.foundation.roblox.com/current/fonts/builder-extended/BuilderExtended-Bold.woff)format("woff");
+    font-weight: 700;
+    font-style: normal
+}
+
+@font-face {
+    font-family: Builder Extended;
+    src: url(https://cdn.foundation.roblox.com/current/fonts/builder-extended/BuilderExtended-BoldItalic.woff2)format("woff2"), url(https://cdn.foundation.roblox.com/current/fonts/builder-extended/BuilderExtended-BoldItalic.woff)format("woff");
+    font-weight: 700;
+    font-style: italic
+}
+
+@font-face {
+    font-family: Builder Extended;
+    src: url(https://cdn.foundation.roblox.com/current/fonts/builder-extended/BuilderExtended-ExtraBold.woff2)format("woff2"), url(https://cdn.foundation.roblox.com/current/fonts/builder-extended/BuilderExtended-ExtraBold.woff)format("woff");
+    font-weight: 800;
+    font-style: normal
+}
+
+@font-face {
+    font-family: Builder Extended;
+    src: url(https://cdn.foundation.roblox.com/current/fonts/builder-extended/BuilderExtended-ExtraBoldItalic.woff2)format("woff2"), url(https://cdn.foundation.roblox.com/current/fonts/builder-extended/BuilderExtended-ExtraBoldItalic.woff)format("woff");
+    font-weight: 800;
+    font-style: italic
+}
+
+@keyframes progress-circle-rotate {
+    0% {
+        transform: rotate(0)
+    }
+
+    to {
+        transform: rotate(360deg)
+    }
+}
+
+.foundation-web-progress-circle-indeterminate {
+    transform-origin: 50%;
+    animation: 1.4s linear infinite progress-circle-rotate
+}
+
+.bg-common-backdrop {
+    background-color: var(--color-common-backdrop)
+}
+
+.shadow-transient-high {
+    box-shadow: var(--size-0) var(--size-50) var(--size-100) -.5px var(--alpha-color-shadow-subtle), var(--size-0) var(--size-250) var(--size-500) -.75px var(--alpha-color-shadow-subtle), var(--size-0) var(--size-400) var(--size-800) -1px var(--alpha-color-shadow-subtle), var(--size-0) var(--size-1200) var(--size-1400) -1.5px var(--alpha-color-shadow-subtle)
+}
+
+.shadow-transient-low {
+    box-shadow: var(--size-0) var(--size-50) var(--size-100) -.5px var(--alpha-color-shadow-subtle), var(--size-0) var(--size-250) var(--size-500) -.75px var(--alpha-color-shadow-subtle)
+}
+
+.foundation-web-portal-zindex {
+    z-index: 1050
+}
+
+.fui-future-shadow-affixed-low {
+    box-shadow: 0 0 var(--size-100) 0 var(--fui-future-alpha-color-shadow-subtle), 0 0 var(--size-500) 0 var(--fui-future-alpha-color-shadow-subtle)
+}
+
+:root {
+    --light-mode-stroke-contrast-alpha: rgba(27, 37, 75, .5);
+    --dark-mode-stroke-contrast-alpha: rgba(208, 217, 251, .4);
+    --color-stroke-contrast-alpha: var(--light-mode-stroke-contrast-alpha);
+    --alpha-light-mode-shadow-subtle: rgba(0, 0, 0, .08);
+    --alpha-dark-mode-shadow-subtle: rgba(4, 4, 8, .25);
+    --alpha-color-shadow-subtle: var(--alpha-light-mode-shadow-subtle);
+    --fui-future-alpha-color-shadow-subtle: var(--alpha-light-mode-shadow-subtle);
+    --fui-future-alpha-color-system-progress: var(--light-mode-system-contrast)
+}
+
+@media (prefers-color-scheme:dark) {
+    :root {
+        --color-stroke-contrast-alpha: var(--dark-mode-stroke-contrast-alpha);
+        --alpha-color-shadow-subtle: var(--alpha-dark-mode-shadow-subtle);
+        --fui-future-alpha-color-shadow-subtle: var(--alpha-dark-mode-shadow-subtle);
+        --fui-future-alpha-color-system-progress: var(--dark-mode-system-contrast)
+    }
+}
+
+.light-theme {
+    --color-stroke-contrast-alpha: var(--light-mode-stroke-contrast-alpha);
+    --alpha-color-shadow-subtle: var(--alpha-light-mode-shadow-subtle);
+    --fui-future-alpha-color-shadow-subtle: var(--alpha-light-mode-shadow-subtle);
+    --fui-future-alpha-color-system-progress: var(--light-mode-system-contrast)
+}
+
+.dark-theme {
+    --color-stroke-contrast-alpha: var(--dark-mode-stroke-contrast-alpha);
+    --alpha-color-shadow-subtle: var(--alpha-dark-mode-shadow-subtle);
+    --fui-future-alpha-color-shadow-subtle: var(--alpha-dark-mode-shadow-subtle);
+    --fui-future-alpha-color-system-progress: var(--dark-mode-system-contrast)
+}
+
+.system-theme {
+    --color-stroke-contrast-alpha: var(--light-mode-stroke-contrast-alpha);
+    --alpha-color-shadow-subtle: var(--alpha-light-mode-shadow-subtle);
+    --fui-future-alpha-color-shadow-subtle: var(--alpha-light-mode-shadow-subtle);
+    --fui-future-alpha-color-system-progress: var(--light-mode-system-contrast)
+}
+
+@media (prefers-color-scheme:dark) {
+    .system-theme {
+        --color-stroke-contrast-alpha: var(--dark-mode-stroke-contrast-alpha);
+        --alpha-color-shadow-subtle: var(--alpha-dark-mode-shadow-subtle);
+        --fui-future-alpha-color-shadow-subtle: var(--alpha-dark-mode-shadow-subtle);
+        --fui-future-alpha-color-system-progress: var(--dark-mode-system-contrast)
+    }
+}
+
+.stroke-contrast-alpha {
+    border-color: var(--color-stroke-contrast-alpha)
+}
+
+.foundation-web-input.focus-within\:stroke-system-emphasis:focus-within {
+    box-shadow: inset 0 0 0 1px var(--color-system-emphasis)
+}
+
+.foundation-web-input.focus-within\:stroke-system-alert:focus-within {
+    box-shadow: inset 0 0 0 1px var(--color-system-alert)
+}
+
+.data-\[state\=unchecked\]\:stroke-contrast-alpha[data-state=unchecked] {
+    border-color: var(--color-stroke-contrast-alpha)
+}
+
+.fw-segmented-control-indicator {
+    pointer-events: none;
+    z-index: 0;
+    transition: left .3s cubic-bezier(.2, 0, 0, 1), width .3s cubic-bezier(.2, 0, 0, 1), height .3s cubic-bezier(.2, 0, 0, 1), top .3s cubic-bezier(.2, 0, 0, 1), border-radius .3s cubic-bezier(.2, 0, 0, 1), opacity .1s linear
+}
+
+.fw-segmented-control button,
+.fw-segmented-control button>* {
+    z-index: 1
+}
+
+.fw-segmented-control button:not(:disabled):hover .content-default {
+    transition: color 50ms cubic-bezier(.2, 0, 0, 1)
+}
+
+.fw-segmented-control button:not(:disabled):active .icon {
+    transition: transform .2s cubic-bezier(.2, 0, 0, 1);
+    transform: scale(.975)
+}
+
+.foundation-web-number-input::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0
+}
+
+.foundation-web-number-input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0
+}
+
+.foundation-web-dialog-overlay {
+    place-items: center;
+    display: grid;
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    overflow-y: auto
+}
+
+.foundation-web-dialog-close-container {
+    top: var(--size-300);
+    right: var(--size-300);
+    z-index: 1
+}
+
+.foundation-web-dialog-hero-media {
+    margin-left: calc(var(--stroke-standard) * -1);
+    margin-right: calc(var(--stroke-standard) * -1);
+    margin-top: calc(var(--stroke-standard) * -1);
+    border-top-left-radius: var(--radius-large);
+    border-top-right-radius: var(--radius-large);
+    overflow: clip
+}
+
+.foundation-web-dialog-content[data-size=Small] {
+    min-width: calc(var(--size-100) * 75);
+    max-width: calc(var(--size-100) * 80)
+}
+
+.foundation-web-dialog-content[data-size=Medium] {
+    min-width: calc(var(--size-100) * 75);
+    max-width: calc(var(--size-100) * 120)
+}
+
+.foundation-web-dialog-content[data-size=Large] {
+    min-width: calc(var(--size-100) * 75);
+    max-width: calc(var(--size-100) * 160)
+}
+
+@keyframes foundation-web-dialog-backdrop-fade-in {
+    0% {
+        opacity: 0
+    }
+
+    to {
+        opacity: 1
+    }
+}
+
+@keyframes foundation-web-dialog-backdrop-fade-out {
+    0% {
+        opacity: 1
+    }
+
+    to {
+        opacity: 0
+    }
+}
+
+@keyframes foundation-web-dialog-content-scale-in {
+    0% {
+        transform: scale(.975)
+    }
+
+    to {
+        transform: scale(1)
+    }
+}
+
+@keyframes foundation-web-dialog-content-scale-out {
+    0% {
+        transform: scale(1)
+    }
+
+    to {
+        transform: scale(.975)
+    }
+}
+
+@media (prefers-reduced-motion:no-preference) {
+    .foundation-web-dialog-overlay[data-state=open] {
+        animation: foundation-web-dialog-backdrop-fade-in var(--time-100) var(--ease-linear)
+    }
+
+    .foundation-web-dialog-overlay[data-state=closed] {
+        animation: foundation-web-dialog-backdrop-fade-out var(--time-100) var(--ease-linear)
+    }
+
+    .foundation-web-dialog-content[data-state=open] {
+        animation: foundation-web-dialog-content-scale-in var(--time-300) var(--ease-standard-out)
+    }
+
+    .foundation-web-dialog-content[data-state=closed] {
+        animation: foundation-web-dialog-content-scale-out var(--time-300) var(--ease-standard-out)
+    }
+}
+
+.foundation-web-menu-separator {
+    border-top: 1px solid var(--color-stroke-default)
+}
+
+@keyframes progress-bar-slide {
+    0% {
+        width: 0%;
+        left: 0%
+    }
+
+    28.57% {
+        width: 40%;
+        left: 0%
+    }
+
+    71.43% {
+        width: 40%;
+        left: 60%
+    }
+
+    to {
+        width: 0%;
+        left: 100%
+    }
+}
+
+.foundation-web-progress-bar-indeterminate {
+    background-color: var(--fui-future-alpha-color-system-progress);
+    will-change: left, width;
+    animation: 2s linear infinite progress-bar-slide
+}
+
+.foundation-web-list-item-bottom-divider {
+    border-bottom: 1px solid var(--color-stroke-default)
+}
+
+.foundation-web-list-item-inset-divider {
+    border-bottom: 1px solid var(--color-stroke-default);
+    width: 100%;
+    height: 1px;
+    position: absolute;
+    bottom: 0
+}
+
+.foundation-web-list-item:focus-visible {
+    outline-offset: calc(var(--stroke-thicker) * -1)
+}
+
+.foundation-web-list {
+    margin: 0;
+    padding: 0;
+    list-style: none
+}
+
+.foundation-web-media-image {
+    object-fit: cover;
+    object-position: center;
+    width: 100%;
+    height: 100%
+}
+
+.foundation-web-accordion-content {
+    grid-template-rows: 0fr
+}
+
+.foundation-web-accordion-content[data-state=open] {
+    grid-template-rows: 1fr
+}
+
+.foundation-web-accordion-content[data-state=open][data-size=xsmall] .foundation-web-accordion-content-inner {
+    padding-top: var(--padding-xsmall);
+    padding-bottom: var(--padding-small)
+}
+
+.foundation-web-accordion-content[data-state=open][data-size=small] .foundation-web-accordion-content-inner {
+    padding-top: var(--padding-xsmall);
+    padding-bottom: var(--padding-large)
+}
+
+.foundation-web-accordion-content[data-state=open][data-size=medium] .foundation-web-accordion-content-inner,
+.foundation-web-accordion-content[data-state=open][data-size=large] .foundation-web-accordion-content-inner {
+    padding-top: var(--padding-xsmall);
+    padding-bottom: var(--padding-xlarge)
+}
+
+.foundation-web-collection-carousel-scroll {
+    scroll-behavior: smooth;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    overflow-x: auto;
+    overflow-y: hidden
+}
+
+.foundation-web-collection-carousel-scroll::-webkit-scrollbar {
+    display: none
+}
+
+.foundation-web-collection-carousel[data-has-margin=true] .foundation-web-collection-carousel-scroll {
+    padding-left: var(--padding-xlarge);
+    padding-right: var(--padding-xlarge);
+    scroll-padding-left: var(--padding-xlarge);
+    scroll-padding-right: var(--padding-xlarge)
+}
+
+.foundation-web-collection-carousel[data-discrete-position=true] .foundation-web-collection-carousel-scroll {
+    scroll-snap-type: x mandatory
+}
+
+.foundation-web-collection-carousel[data-discrete-position=true] .foundation-web-collection-carousel-item {
+    scroll-snap-align: start
+}
+
+.foundation-web-collection-carousel-nav {
+    z-index: 1;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity var(--time-200) var(--ease-standard-out);
+    top: 50%;
+    transform: translateY(-50%)
+}
+
+.foundation-web-collection-carousel-nav-previous {
+    left: var(--padding-medium)
+}
+
+.foundation-web-collection-carousel-nav-next {
+    right: var(--padding-medium)
+}
+
+.foundation-web-collection-carousel:hover .foundation-web-collection-carousel-nav[data-visible=true],
+.foundation-web-collection-carousel:focus-within .foundation-web-collection-carousel-nav[data-visible=true] {
+    opacity: 1;
+    pointer-events: auto
+}
+
+.foundation-web-collection-carousel-nav[data-visible=false] {
+    visibility: hidden
+}
+
+@media (pointer:coarse) {
+    .foundation-web-collection-carousel-nav {
+        display: none
+    }
+}
+
+@keyframes fui-base-sheet-overlay-fade-in {
+    0% {
+        background-color: transparent
+    }
+
+    to {
+        background-color: var(--color-common-backdrop)
+    }
+}
+
+@keyframes fui-base-sheet-overlay-fade-out {
+    0% {
+        background-color: var(--color-common-backdrop)
+    }
+
+    to {
+        background-color: transparent
+    }
+}
+
+@keyframes fui-base-sheet-slide-in-from-right {
+    0% {
+        transform: translate(110%)
+    }
+
+    to {
+        transform: translate(0)
+    }
+}
+
+@keyframes fui-base-sheet-slide-out-to-right {
+    0% {
+        transform: translate(0)
+    }
+
+    to {
+        transform: translate(110%)
+    }
+}
+
+@keyframes fui-base-sheet-slide-in-from-left {
+    0% {
+        transform: translate(-110%)
+    }
+
+    to {
+        transform: translate(0)
+    }
+}
+
+@keyframes fui-base-sheet-slide-out-to-left {
+    0% {
+        transform: translate(0)
+    }
+
+    to {
+        transform: translate(-110%)
+    }
+}
+
+@keyframes fui-base-sheet-fade-in {
+    0% {
+        opacity: 0
+    }
+
+    to {
+        opacity: 1
+    }
+}
+
+@keyframes fui-base-sheet-fade-out {
+    0% {
+        opacity: 1
+    }
+
+    to {
+        opacity: 0
+    }
+}
+
+@keyframes fui-base-sheet-slide-in-from-bottom {
+    0% {
+        transform: translateY(110%)
+    }
+
+    to {
+        transform: translateY(0)
+    }
+}
+
+@keyframes fui-base-sheet-slide-out-to-bottom {
+    0% {
+        transform: translateY(0)
+    }
+
+    to {
+        transform: translateY(110%)
+    }
+}
+
+.fui-base-sheet-overlay {
+    background-color: var(--color-common-backdrop)
+}
+
+.fui-base-sheet-overlay[data-state=open] {
+    animation: fui-base-sheet-overlay-fade-in var(--time-100) var(--ease-linear)
+}
+
+.fui-base-sheet-overlay[data-state=closed] {
+    animation: fui-base-sheet-overlay-fade-out var(--time-100) var(--ease-linear)
+}
+
+.fui-base-sheet-overlay[data-type=bottomSheet] {
+    justify-content: center;
+    align-items: flex-end
+}
+
+.fui-base-sheet-overlay[data-type=bottomSheet] .fui-base-sheet-content {
+    border-top-left-radius: var(--radius-large);
+    border-top-right-radius: var(--radius-large);
+    width: 100%;
+    max-width: 440px;
+    max-height: 90vh;
+    padding-bottom: env(safe-area-inset-bottom);
+    margin-right: env(safe-area-inset-right);
+    margin-left: env(safe-area-inset-left)
+}
+
+.fui-base-sheet-overlay .fui-base-sheet-content[data-state=open] {
+    animation-timing-function: var(--ease-standard-out);
+    animation-duration: var(--time-300)
+}
+
+.fui-base-sheet-overlay .fui-base-sheet-content[data-state=closed] {
+    animation-timing-function: var(--ease-standard-in);
+    animation-duration: var(--time-100)
+}
+
+.fui-base-sheet-overlay[data-type=bottomSheet] .fui-base-sheet-content[data-state=open] {
+    animation-name: fui-base-sheet-slide-in-from-bottom
+}
+
+.fui-base-sheet-overlay[data-type=bottomSheet] .fui-base-sheet-content[data-state=closed] {
+    animation-name: fui-base-sheet-slide-out-to-bottom
+}
+
+.fui-base-sheet-overlay[data-type=sideSheet][data-side=right] {
+    justify-content: flex-end;
+    align-items: stretch
+}
+
+.fui-base-sheet-overlay[data-type=sideSheet][data-side=left] {
+    justify-content: flex-start;
+    align-items: stretch
+}
+
+.fui-base-sheet-overlay[data-type=sideSheet][data-flush=true] .fui-base-sheet-content {
+    width: 100%;
+    max-height: 100vh;
+    padding-top: env(safe-area-inset-top);
+    padding-bottom: env(safe-area-inset-bottom)
+}
+
+.fui-base-sheet-overlay[data-type=sideSheet][data-flush=true][data-side=right] .fui-base-sheet-content {
+    padding-right: env(safe-area-inset-right);
+    max-width: 360px;
+    max-width: max(env(safe-area-inset-right) + 360px, 360px)
+}
+
+.fui-base-sheet-overlay[data-type=sideSheet][data-flush=true][data-side=left] .fui-base-sheet-content {
+    padding-left: env(safe-area-inset-left);
+    max-width: 360px;
+    max-width: max(env(safe-area-inset-right) + 360px, 360px)
+}
+
+.fui-base-sheet-overlay[data-type=sideSheet][data-side=right] .fui-base-sheet-content[data-state=open] {
+    animation-name: fui-base-sheet-slide-in-from-right
+}
+
+.fui-base-sheet-overlay[data-type=sideSheet][data-side=right] .fui-base-sheet-content[data-state=closed] {
+    animation-name: fui-base-sheet-slide-out-to-right
+}
+
+.fui-base-sheet-overlay[data-type=sideSheet][data-side=left] .fui-base-sheet-content[data-state=open] {
+    animation-name: fui-base-sheet-slide-in-from-left
+}
+
+.fui-base-sheet-overlay[data-type=sideSheet][data-side=left] .fui-base-sheet-content[data-state=closed] {
+    animation-name: fui-base-sheet-slide-out-to-left
+}
+
+.fui-base-sheet-overlay[data-type=sideSheet][data-flush=false] .fui-base-sheet-content {
+    max-height: 100vh;
+    margin: var(--padding-medium);
+    border-radius: var(--radius-large);
+    width: 100%;
+    max-width: 360px;
+    margin-top: max(env(safe-area-inset-top), var(--padding-medium));
+    margin-bottom: max(env(safe-area-inset-bottom), var(--padding-medium))
+}
+
+.fui-base-sheet-overlay[data-type=sideSheet][data-flush=false][data-side=right] .fui-base-sheet-content {
+    margin-right: max(env(safe-area-inset-right), var(--padding-medium))
+}
+
+.fui-base-sheet-overlay[data-type=sideSheet][data-flush=false][data-side=left] .fui-base-sheet-content {
+    margin-left: max(env(safe-area-inset-left), var(--padding-medium))
+}
+
+.fui-base-sheet-overlay[data-type=centerSheet] {
+    padding: var(--padding-medium);
+    justify-content: center;
+    align-items: center
+}
+
+.fui-base-sheet-overlay[data-type=centerSheet] .fui-base-sheet-content {
+    border-radius: var(--radius-large);
+    max-height: 90vh
+}
+
+.fui-base-sheet-overlay[data-type=centerSheet][data-size=Medium] .fui-base-sheet-content {
+    width: 100%;
+    max-width: 480px
+}
+
+.fui-base-sheet-overlay[data-type=centerSheet][data-size=Large] .fui-base-sheet-content {
+    width: 100%;
+    max-width: 640px
+}
+
+.fui-base-sheet-overlay[data-type=centerSheet] .fui-base-sheet-content[data-state=open] {
+    animation-name: fui-base-sheet-fade-in
+}
+
+.fui-base-sheet-overlay[data-type=centerSheet] .fui-base-sheet-content[data-state=closed] {
+    animation-name: fui-base-sheet-fade-out
+}
+
+@keyframes foundation-web-skeleton-shimmer {
+    0% {
+        transform: translate(-150%)skew(-15deg)
+    }
+
+    to {
+        transform: translate(150%)skew(-15deg)
+    }
+}
+
+@keyframes foundation-web-autocomplete-chip-in {
+    0% {
+        opacity: 0;
+        transform: scale(.96)
+    }
+
+    to {
+        opacity: 1;
+        transform: scale(1)
+    }
+}
+
+.foundation-web-autocomplete-chip {
+    animation: .12s ease-out foundation-web-autocomplete-chip-in
+}
+
+.foundation-web-autocomplete-helper {
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    display: -webkit-box;
+    overflow: hidden
+}
+
+@media (prefers-reduced-motion:reduce) {
+    .foundation-web-autocomplete-chip {
+        animation: none
+    }
+}
+
+.foundation-web-table {
+    border-collapse: collapse;
+    border-spacing: 0
+}
+
+.foundation-web-table-row-divider {
+    border-bottom: 1px solid var(--color-stroke-muted)
+}
+
+.foundation-web-table-body>tr:last-child>.foundation-web-table-row-divider {
+    border-bottom: none
+}
+
+.foundation-web-table-header-cell-divider {
+    border-bottom: 1px solid var(--color-stroke-default)
+}
+
+.foundation-web-table-row:focus-visible {
+    outline: var(--stroke-thick) solid var(--color-stroke-emphasis);
+    outline-offset: calc(var(--stroke-thick) * -1)
+}
+
+.foundation-web-table-pagination-select {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    font: inherit;
+    border: none;
+    outline: none
+}
+
+.foundation-web-table-pagination-select:focus-visible {
+    outline: var(--stroke-thick) solid var(--color-stroke-emphasis);
+    outline-offset: calc(var(--stroke-thick) * -1)
+}
+
+@keyframes rotation {
+    0% {
+        transform: rotate(0)
+    }
+
+    to {
+        transform: rotate(359deg)
+    }
+}
+
+.foundation-web-loading-spinner {
+    animation: 1s linear infinite rotation
+}
+
+/*# sourceMappingURL=0ml7o299m9hqg.css.map*/

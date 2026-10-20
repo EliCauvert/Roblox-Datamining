@@ -251,7 +251,7 @@ Roblox.LangDynamic["Feature.Groups"] = {
     "Label.CreateItems": "Create Avatar Items",
     "Label.ConfigureItems": "Configure Items",
     "Label.SpendGroupFunds": "Spend Community Funds",
-    "Label.ChangeOwner": "Change Owner",
+    "Label.ChangeOwner": "Transfer Group",
     "Label.Delete": "Delete",
     "Label.AdjustCurrencyAmounts": "Adjust Currency Amounts",
     "Label.Abandon": "Abandon",

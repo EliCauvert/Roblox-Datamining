@@ -294,6 +294,14 @@ button.btn-common-play-game-unplayable-lg {
     --svg: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32' width='32' height='32'%3E%3Cpath d='M16 2C8.26801 2 2 8.26801 2 16C2 23.732 8.26801 30 16 30C23.732 30 30 23.732 30 16C30 8.26801 23.732 2 16 2ZM16 8C16.5523 8 17 8.44772 17 9V15.5858L19.7071 18.2929C20.0976 18.6834 20.0976 19.3166 19.7071 19.7071C19.3166 20.0976 18.6834 20.0976 18.2929 19.7071L15.2929 16.7071C15.1054 16.5196 15 16.2652 15 16V9C15 8.44772 15.4477 8 16 8Z' fill='black'/%3E%3C/svg%3E")
 }
 
+.icon-regular-frame-collapsed {
+    --svg: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32' width='32' height='32'%3E%3Cpath d='M12 14C13.1046 14 14 13.1046 14 12V5C14 4.44771 13.5523 4 13 4C12.4477 4 12 4.44771 12 5V12H5C4.44771 12 4 12.4477 4 13C4 13.5523 4.44771 14 5 14H12Z' fill='black'/%3E %3Cpath d='M12 18C13.1046 18 14 18.8954 14 20V27C14 27.5523 13.5523 28 13 28C12.4477 28 12 27.5523 12 27V20H5C4.44771 20 4 19.5523 4 19C4 18.4477 4.44771 18 5 18H12Z' fill='black'/%3E %3Cpath d='M18 12C18 13.1046 18.8954 14 20 14H27C27.5523 14 28 13.5523 28 13C28 12.4477 27.5523 12 27 12H20V5C20 4.44771 19.5523 4 19 4C18.4477 4 18 4.44771 18 5V12Z' fill='black'/%3E %3Cpath d='M20 18C18.8954 18 18 18.8954 18 20V27C18 27.5523 18.4477 28 19 28C19.5523 28 20 27.5523 20 27V20H27C27.5523 20 28 19.5523 28 19C28 18.4477 27.5523 18 27 18H20Z' fill='black'/%3E%3C/svg%3E")
+}
+
+.icon-regular-frame-expanded {
+    --svg: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32' width='32' height='32'%3E%3Cpath d='M5 3C3.89543 3 3 3.89543 3 5V13C3 13.5523 3.44772 14 4 14C4.55228 14 5 13.5523 5 13V5H13C13.5523 5 14 4.55228 14 4C14 3.44772 13.5523 3 13 3H5Z' fill='black'/%3E %3Cpath d='M5 29C3.89543 29 3 28.1046 3 27V19C3 18.4477 3.44772 18 4 18C4.55228 18 5 18.4477 5 19V27H13C13.5523 27 14 27.4477 14 28C14 28.5523 13.5523 29 13 29H5Z' fill='black'/%3E %3Cpath d='M29 5C29 3.89543 28.1046 3 27 3H19C18.4477 3 18 3.44772 18 4C18 4.55228 18.4477 5 19 5H27V13C27 13.5523 27.4477 14 28 14C28.5523 14 29 13.5523 29 13V5Z' fill='black'/%3E %3Cpath d='M27 29C28.1046 29 29 28.1046 29 27V19C29 18.4477 28.5523 18 28 18C27.4477 18 27 18.4477 27 19V27H19C18.4477 27 18 27.4477 18 28C18 28.5523 18.4477 29 19 29H27Z' fill='black'/%3E%3C/svg%3E")
+}
+
 .icon-regular-gear {
     --svg: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32' width='32' height='32'%3E%3Cpath d='M17.8807 6.20909L17.0256 4.04306C16.688 4.01457 16.3461 4 16.0004 4C15.6548 4 15.3129 4.01456 14.9754 4.04305L14.1203 6.20907C13.8567 6.87669 13.3299 7.37564 12.7027 7.62278C12.2898 7.78548 11.8916 7.97797 11.5107 8.19772C10.9259 8.53513 10.2064 8.63632 9.51935 8.4259L7.29206 7.74376C6.82168 8.23971 6.39332 8.77561 6.01262 9.3457L7.17333 11.3655C7.53093 11.9877 7.59259 12.7106 7.39482 13.355C7.2667 13.7725 7.16811 14.2031 7.10155 14.6446C7.00088 15.3125 6.63136 15.9384 6.03825 16.3445L4.11431 17.6619C4.20928 18.3485 4.36227 19.016 4.56807 19.6595L6.87597 20.0121C7.58459 20.1204 8.18787 20.5221 8.56855 21.078C8.81846 21.4429 9.09466 21.7886 9.39445 22.1124C9.85277 22.6075 10.1108 23.2858 10.0586 24.0016L9.88886 26.3296C10.4739 26.6767 11.0907 26.9752 11.7336 27.2199L13.4488 25.6348C13.9751 25.1485 14.6651 24.9272 15.3369 24.976C15.5557 24.9919 15.777 25 16.0004 25C16.2239 25 16.4452 24.9919 16.664 24.976C17.3359 24.9272 18.0258 25.1485 18.5521 25.6348L20.2672 27.2198C20.9102 26.9752 21.527 26.6766 22.1121 26.3296L21.9423 24.0015C21.8901 23.2858 22.1482 22.6074 22.6065 22.1124C22.9062 21.7886 23.1824 21.4429 23.4323 21.078C23.813 20.5222 24.4163 20.1204 25.1249 20.0121L27.4327 19.6596C27.6385 19.016 27.7915 18.3485 27.8865 17.6618L25.9626 16.3445C25.3695 15.9384 25 15.3124 24.8993 14.6446C24.8328 14.2031 24.7342 13.7725 24.6061 13.3551C24.4083 12.7107 24.47 11.9878 24.8276 11.3655L25.9883 9.3458C25.6075 8.77569 25.1792 8.23976 24.7088 7.74379L22.4815 8.42591C21.7945 8.63633 21.075 8.53514 20.4902 8.19772C20.1093 7.97798 19.7111 7.78549 19.2982 7.62279C18.671 7.37565 18.1442 6.87671 17.8807 6.20909ZM18.178 2.16834C18.3496 2.19515 18.4927 2.31272 18.5565 2.47434L19.741 5.47468C19.7931 5.60682 19.8993 5.70996 20.0315 5.76205C20.5369 5.96122 21.024 6.19673 21.4897 6.46538C21.6129 6.53646 21.7599 6.55524 21.8959 6.51359L24.9794 5.56921C25.1454 5.51838 25.3263 5.55678 25.4543 5.67405C26.5275 6.65711 27.4469 7.80526 28.1724 9.07828C28.2584 9.2292 28.2556 9.41428 28.1691 9.56489L26.5616 12.362C26.4908 12.4852 26.4764 12.6325 26.5181 12.7683C26.675 13.2795 26.7956 13.8066 26.877 14.3465C26.8982 14.4872 26.9752 14.6139 27.0926 14.6943L29.7543 16.5168C29.8973 16.6148 29.9801 16.7799 29.9685 16.9529C29.8682 18.4452 29.534 19.8734 29.0024 21.2011C28.9379 21.3622 28.7917 21.4752 28.6202 21.5014L25.427 21.9892C25.2867 22.0106 25.1626 22.091 25.0824 22.2081C24.7772 22.6538 24.44 23.0759 24.0741 23.4711C23.9776 23.5754 23.9267 23.7144 23.937 23.8561L24.1718 27.0763C24.1844 27.2492 24.1069 27.4169 23.9644 27.5156C22.7769 28.3385 21.456 28.9823 20.0406 29.4082C19.8745 29.4582 19.695 29.4143 19.5676 29.2965L17.1947 27.1036C17.0905 27.0073 16.9504 26.9605 16.8089 26.9707C16.5419 26.9901 16.2723 27 16.0004 27C15.7286 27 15.459 26.9901 15.192 26.9707C15.0506 26.9605 14.9104 27.0074 14.8062 27.1036L12.4333 29.2966C12.3059 29.4143 12.1264 29.4582 11.9603 29.4082C10.545 28.9824 9.22402 28.3385 8.03651 27.5157C7.89398 27.417 7.81649 27.2493 7.8291 27.0764L8.06393 23.8561C8.07426 23.7144 8.02338 23.5754 7.92686 23.4712C7.56096 23.076 7.22372 22.6538 6.91844 22.2081C6.83826 22.091 6.7142 22.0106 6.57392 21.9892L3.38064 21.5013C3.20915 21.4751 3.06287 21.3622 2.99838 21.2011C2.46677 19.8734 2.13265 18.4452 2.03233 16.953C2.0207 16.78 2.10347 16.6149 2.24654 16.5169L4.9083 14.6943C5.0257 14.6139 5.10268 14.4872 5.12389 14.3465C5.20529 13.8066 5.32594 13.2795 5.48283 12.7683C5.52451 12.6324 5.51006 12.4852 5.43928 12.362L3.83178 9.56478C3.74523 9.41417 3.74247 9.22909 3.82847 9.07817C4.55395 7.80518 5.47336 6.65705 6.54649 5.67402C6.6745 5.55676 6.85544 5.51835 7.02143 5.56918L10.105 6.51358C10.241 6.55523 10.388 6.53645 10.5112 6.46537C10.9769 6.19672 11.464 5.9612 11.9695 5.76203C12.1017 5.70994 12.2078 5.6068 12.26 5.47466L13.4445 2.47432C13.5083 2.3127 13.6513 2.19513 13.823 2.16832C14.5325 2.05751 15.2598 2 16.0004 2C16.7411 2 17.4684 2.05752 18.178 2.16834ZM19.0005 16C19.0005 14.3431 17.6573 13 16.0005 13C14.3436 13 13.0005 14.3431 13.0005 16C13.0005 17.6569 14.3436 19 16.0005 19C17.6573 19 19.0005 17.6569 19.0005 16ZM21.0005 16C21.0005 18.7614 18.7619 21 16.0005 21C13.2391 21 11.0005 18.7614 11.0005 16C11.0005 13.2386 13.2391 11 16.0005 11C18.7619 11 21.0005 13.2386 21.0005 16Z' fill='black'/%3E%3C/svg%3E")
 }
@@ -332,6 +340,10 @@ button.btn-common-play-game-unplayable-lg {
 
 .icon-filled-smartphone-portrait {
     --svg: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32' width='32' height='32'%3E%3Cpath d='M10 2C7.79086 2 6 3.79086 6 6V26C6 28.2091 7.79086 30 10 30H22C24.2091 30 26 28.2091 26 26V6C26 3.79086 24.2091 2 22 2H10ZM14 24H18C18.5523 24 19 24.4477 19 25C19 25.5523 18.5523 26 18 26H14C13.4477 26 13 25.5523 13 25C13 24.4477 13.4477 24 14 24Z' fill='black'/%3E%3C/svg%3E")
+}
+
+.icon-regular-speech-bubble-round {
+    --svg: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32' width='32' height='32'%3E%3Cpath d='M16 4C23.732 4 30 9.14873 30 15.5C30 21.8513 23.732 27 16 27C15.2759 27 14.5646 26.9543 13.8701 26.8672L6.92578 29.002C6.29805 29.1702 5.65302 28.8174 5.4502 28.209C5.43456 28.1621 5.4265 28.1126 5.4209 28.0635L4.77051 22.3691C3.03009 20.4525 2 18.075 2 15.5C2 9.14873 8.26801 4 16 4ZM16 6C8.98662 6 4 10.6033 4 15.5C4 17.5184 4.80271 19.4294 6.25098 21.0244L6.68457 21.502L7.28906 26.7969L13.6934 24.8291L14.1191 24.8828C14.7321 24.9597 15.3602 25 16 25C23.0134 25 28 20.3967 28 15.5C28 10.6033 23.0134 6 16 6Z' fill='black'/%3E%3C/svg%3E")
 }
 
 .icon-filled-speech-bubble-round {
@@ -396,6 +408,98 @@ button.btn-common-play-game-unplayable-lg {
 .react-chat-top-radius {
     border-top-left-radius: var(--radius-large);
     border-top-right-radius: var(--radius-large)
+}
+
+.react-chat-window {
+    height: min(560px, 100vh - 96px);
+    width: min(720px, calc(100vw - 2*var(--margin-small)))
+}
+
+.react-chat-window-expanded {
+    height: min(85vh, 100vh - 96px);
+    width: min(1000px, calc(100vw - 2*var(--margin-small)))
+}
+
+.react-chat-window[hidden],
+.react-chat-window-list-pane[hidden],
+.react-chat-window-conversation-pane[hidden] {
+    display: none
+}
+
+.react-chat-window-list-pane {
+    width: 280px
+}
+
+.react-chat-window-list-pane:not(:-webkit-any(:lang(ae), :lang(ar), :lang(arc), :lang(bcc), :lang(bqi), :lang(ckb), :lang(dv), :lang(fa), :lang(glk), :lang(he), :lang(ku), :lang(mzn), :lang(nqo), :lang(pnb), :lang(ps), :lang(sd), :lang(ug), :lang(ur), :lang(yi))) {
+    border-right: var(--stroke-standard)solid var(--color-stroke-muted)
+}
+
+.react-chat-window-list-pane:not(:-moz-any(:lang(ae), :lang(ar), :lang(arc), :lang(bcc), :lang(bqi), :lang(ckb), :lang(dv), :lang(fa), :lang(glk), :lang(he), :lang(ku), :lang(mzn), :lang(nqo), :lang(pnb), :lang(ps), :lang(sd), :lang(ug), :lang(ur), :lang(yi))) {
+    border-right: var(--stroke-standard)solid var(--color-stroke-muted)
+}
+
+.react-chat-window-list-pane:not(:-webkit-any(:lang(ae), :lang(ar), :lang(arc), :lang(bcc), :lang(bqi), :lang(ckb), :lang(dv), :lang(fa), :lang(glk), :lang(he), :lang(ku), :lang(mzn), :lang(nqo), :lang(pnb), :lang(ps), :lang(sd), :lang(ug), :lang(ur), :lang(yi))) {
+    border-right: var(--stroke-standard)solid var(--color-stroke-muted)
+}
+
+.react-chat-window-list-pane:not(:-moz-any(:lang(ae), :lang(ar), :lang(arc), :lang(bcc), :lang(bqi), :lang(ckb), :lang(dv), :lang(fa), :lang(glk), :lang(he), :lang(ku), :lang(mzn), :lang(nqo), :lang(pnb), :lang(ps), :lang(sd), :lang(ug), :lang(ur), :lang(yi))) {
+    border-right: var(--stroke-standard)solid var(--color-stroke-muted)
+}
+
+.react-chat-window-list-pane:not(:is(:lang(ae), :lang(ar), :lang(arc), :lang(bcc), :lang(bqi), :lang(ckb), :lang(dv), :lang(fa), :lang(glk), :lang(he), :lang(ku), :lang(mzn), :lang(nqo), :lang(pnb), :lang(ps), :lang(sd), :lang(ug), :lang(ur), :lang(yi))) {
+    border-right: var(--stroke-standard)solid var(--color-stroke-muted)
+}
+
+.react-chat-window-list-pane:-webkit-any(:lang(ae), :lang(ar), :lang(arc), :lang(bcc), :lang(bqi), :lang(ckb), :lang(dv), :lang(fa), :lang(glk), :lang(he), :lang(ku), :lang(mzn), :lang(nqo), :lang(pnb), :lang(ps), :lang(sd), :lang(ug), :lang(ur), :lang(yi)) {
+    border-left: var(--stroke-standard)solid var(--color-stroke-muted)
+}
+
+.react-chat-window-list-pane:-moz-any(:lang(ae), :lang(ar), :lang(arc), :lang(bcc), :lang(bqi), :lang(ckb), :lang(dv), :lang(fa), :lang(glk), :lang(he), :lang(ku), :lang(mzn), :lang(nqo), :lang(pnb), :lang(ps), :lang(sd), :lang(ug), :lang(ur), :lang(yi)) {
+    border-left: var(--stroke-standard)solid var(--color-stroke-muted)
+}
+
+.react-chat-window-list-pane:is(:lang(ae), :lang(ar), :lang(arc), :lang(bcc), :lang(bqi), :lang(ckb), :lang(dv), :lang(fa), :lang(glk), :lang(he), :lang(ku), :lang(mzn), :lang(nqo), :lang(pnb), :lang(ps), :lang(sd), :lang(ug), :lang(ur), :lang(yi)) {
+    border-left: var(--stroke-standard)solid var(--color-stroke-muted)
+}
+
+.react-chat-window-single-pane .react-chat-window-list-pane {
+    width: 100%
+}
+
+.react-chat-window-single-pane .react-chat-window-list-pane:not(:-webkit-any(:lang(ae), :lang(ar), :lang(arc), :lang(bcc), :lang(bqi), :lang(ckb), :lang(dv), :lang(fa), :lang(glk), :lang(he), :lang(ku), :lang(mzn), :lang(nqo), :lang(pnb), :lang(ps), :lang(sd), :lang(ug), :lang(ur), :lang(yi))) {
+    border-right: none
+}
+
+.react-chat-window-single-pane .react-chat-window-list-pane:not(:-moz-any(:lang(ae), :lang(ar), :lang(arc), :lang(bcc), :lang(bqi), :lang(ckb), :lang(dv), :lang(fa), :lang(glk), :lang(he), :lang(ku), :lang(mzn), :lang(nqo), :lang(pnb), :lang(ps), :lang(sd), :lang(ug), :lang(ur), :lang(yi))) {
+    border-right: none
+}
+
+.react-chat-window-single-pane .react-chat-window-list-pane:not(:-webkit-any(:lang(ae), :lang(ar), :lang(arc), :lang(bcc), :lang(bqi), :lang(ckb), :lang(dv), :lang(fa), :lang(glk), :lang(he), :lang(ku), :lang(mzn), :lang(nqo), :lang(pnb), :lang(ps), :lang(sd), :lang(ug), :lang(ur), :lang(yi))) {
+    border-right: none
+}
+
+.react-chat-window-single-pane .react-chat-window-list-pane:not(:-moz-any(:lang(ae), :lang(ar), :lang(arc), :lang(bcc), :lang(bqi), :lang(ckb), :lang(dv), :lang(fa), :lang(glk), :lang(he), :lang(ku), :lang(mzn), :lang(nqo), :lang(pnb), :lang(ps), :lang(sd), :lang(ug), :lang(ur), :lang(yi))) {
+    border-right: none
+}
+
+.react-chat-window-single-pane .react-chat-window-list-pane:not(:is(:lang(ae), :lang(ar), :lang(arc), :lang(bcc), :lang(bqi), :lang(ckb), :lang(dv), :lang(fa), :lang(glk), :lang(he), :lang(ku), :lang(mzn), :lang(nqo), :lang(pnb), :lang(ps), :lang(sd), :lang(ug), :lang(ur), :lang(yi))) {
+    border-right: none
+}
+
+.react-chat-window-single-pane .react-chat-window-list-pane:-webkit-any(:lang(ae), :lang(ar), :lang(arc), :lang(bcc), :lang(bqi), :lang(ckb), :lang(dv), :lang(fa), :lang(glk), :lang(he), :lang(ku), :lang(mzn), :lang(nqo), :lang(pnb), :lang(ps), :lang(sd), :lang(ug), :lang(ur), :lang(yi)) {
+    border-left: none
+}
+
+.react-chat-window-single-pane .react-chat-window-list-pane:-moz-any(:lang(ae), :lang(ar), :lang(arc), :lang(bcc), :lang(bqi), :lang(ckb), :lang(dv), :lang(fa), :lang(glk), :lang(he), :lang(ku), :lang(mzn), :lang(nqo), :lang(pnb), :lang(ps), :lang(sd), :lang(ug), :lang(ur), :lang(yi)) {
+    border-left: none
+}
+
+.react-chat-window-single-pane .react-chat-window-list-pane:is(:lang(ae), :lang(ar), :lang(arc), :lang(bcc), :lang(bqi), :lang(ckb), :lang(dv), :lang(fa), :lang(glk), :lang(he), :lang(ku), :lang(mzn), :lang(nqo), :lang(pnb), :lang(ps), :lang(sd), :lang(ug), :lang(ur), :lang(yi)) {
+    border-left: none
+}
+
+.react-chat-window .react-chat-message-column {
+    max-width: 70%
 }
 
 .react-chat-dialog-shell {
@@ -629,6 +733,10 @@ button.btn-common-play-game-unplayable-lg {
 
 .react-chat-row {
     overflow: hidden
+}
+
+.react-chat-row.react-chat-row-selected {
+    background-color: var(--color-shift-200)
 }
 
 .react-chat-row-body {
