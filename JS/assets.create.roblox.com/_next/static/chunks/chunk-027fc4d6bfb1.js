@@ -3,7 +3,7 @@
     try {
         var e = "undefined" != typeof globalThis ? globalThis : "undefined" != typeof global ? global : "undefined" != typeof window ? window : "undefined" != typeof self ? self : {},
             n = (new e.Error).stack;
-        n && ((e._debugIds || (e._debugIds = {}))[n] = "c1a42799-2127-8f42-583a-7e69b3415d94")
+        n && ((e._debugIds || (e._debugIds = {}))[n] = "e97ebe2c-bb0f-bae1-0ab7-d90198d07b13")
     } catch (e) {}
 }();
 (globalThis.TURBOPACK || (globalThis.TURBOPACK = [])).push(["object" == typeof document ? document.currentScript : void 0, 523426, e => {
@@ -223,14 +223,14 @@
                                         }
                                     })
                                 }, {}),
-                                f = [],
                                 g = [],
+                                f = [],
                                 h = [];
                             for (let e = m.shift(); void 0 !== e; e = m.shift())
                                 if ("string" == typeof e && r.test(e))
-                                    if (Object.hasOwn(b, e)) g.push(e), h.push(e);
+                                    if (Object.hasOwn(b, e)) f.push(e), h.push(e);
                                     else {
-                                        let a = g.pop();
+                                        let a = f.pop();
                                         if (void 0 !== a) {
                                             let {
                                                 match: n,
@@ -244,11 +244,11 @@
                                                 e === a ? o = !0 : i.unshift(e)
                                             }
                                             let l = r(i.every(e => "string" == typeof e) ? i : (0, t.createElement)(t.Fragment, null, ...i));
-                                            0 === h.length ? f.push(l) : h.push(l)
+                                            0 === h.length ? g.push(l) : h.push(l)
                                         }
                                     }
-                            else 0 === h.length ? f.push(e) : h.push(e);
-                            return (0, t.createElement)(t.Fragment, null, ...f)
+                            else 0 === h.length ? g.push(e) : h.push(e);
+                            return (0, t.createElement)(t.Fragment, null, ...g)
                         })(m.preferLoadedTranslations && !a ? e : u(e, m), d, p)
                     }
                 })(e)
@@ -257,7 +257,7 @@
     }], 401263)
 }, 29929, e => {
     "use strict";
-    var t, a, n, r, i, o, l, s, u, c, d, p, m, b, f, g, h, v = e.i(650502),
+    var t, a, n, r, i, o, l, s, u, c, d, p, m, b, g, f, h, v = e.i(650502),
         y = e.i(864392),
         C = ((t = {}).ShowVrDeviceOption = "showVrDeviceOption", t.ShowIXPClientTest = "showIXPClientTest", t.ShowMemoryStoresDashboard = "showMemoryStoresDashboard", t.ShowAdvancedSettingsPage = "showAdvancedSettingsPage", t.EnableIA = "enableIA", t.EnableSubscriptionActivationTest = "enableSubscriptionActivationTest", t.EnableDevexEarnedRobux = "enableDevexEarnedRobux", t.EnableExperienceGenre = "enableExperienceGenre", t.EnablePlayerFeedbackTranslationsWeb = "EnablePlayerFeedbackTranslationsWeb", t.EnablePlayerFeedbackTranslationRetries = "EnablePlayerFeedbackTranslationRetries", t.EnablePlayerFeedbackDetailedFilter = "enablePlayerFeedbackDetailedFilter", t.EnableEventRequestFeaturing = "enableEventRequestFeaturing", t.EnableCollaboratorsPageV2 = "enableCollaboratorsPageV2", t),
         E = ((a = {}).EnableRightsManager = "enableRightsManager", a.EnableBulkFiling = "enableBulkFiling", a.EnableOnDemandSearch = "enableOnDemandSearch", a.EnableEditRegistration = "enableEditRegistration", a.EnableImageSearch = "enableImageSearch", a.EnableClaimsAgainstMe = "enableClaimsAgainstMe", a.EnableGenAiOptOut = "enableGenAiOptOut", a.EnableInExperienceIpReporting = "enableInExperienceIpReporting", a.EnableIpContentSearch = "enableIpContentSearch", a.EnableTrademark = "enableTrademark", a),
@@ -275,8 +275,8 @@
         O = ((p = O || {}).GameAppealsEnabled = "gameAppealsEnabled", p),
         F = ((m = F || {}).EnableExperienceDataTileV2 = "enableExperienceDataTileV2", m),
         N = ((b = N || {}).EnableChangelogCMS = "enableChangelogCMS", b),
-        M = ((f = {}).CreatorDashboard = "CreatorDashboard", f.CreatorHubHomePage = "CreatorHub.HomePage.UserId", f.CreatorHubHomePageExperienceTile = "CreatorHub.HomePage.ExperienceTile.UserId", f.CreatorHubHomePageOpportunitiesSection = "CreatorHub.HomePage.OpportunitiesSection.UserId", f.CreatorHubLandingPage = "CreatorHub.LandingPage", f.CreatorHubLandingPageUserId = "CreatorHub.LandingPage.UserId", f.CreatorHubNavigation = "CreatorHub.Navigation", f.CreatorHubNavigationUser = "CreatorHub.Navigation.User", f.CreatorHubPublishing = "CreatorHub.Publishing.UserId", f.LicenseManager = "CreatorDashboard.LicenseManager", f.RightsManager = "CreatorDashboard.RightsManager", f.CreatorSuccessOrganizations = "CreatorSuccess.OrganizationsV2", f.CreatorHubDocumentationSearch = "CreatorHub.CreatorDocumentation.Search.UserId", f.CreatorHubCreationsPermission = "CreatorHub.Creations.Permission", f.CreatorHubExperienceWebhooks = "CreatorHub.ExperienceWebhooks.UserId", f.CreatorHubGameAppeals = "CreatorHub.GameAppeals.UserId", f.CreatorHubChangelog = "CreatorHub.Changelog", f.TalentHub = "CreatorHub.TalentHub.UserId", f),
-        U = ((g = U || {}).ShowMemoryStoresDashboard = "showMemoryStoresDashboard", g.EnableSubscriptionActivationTest = "enableSubscriptionActivationTest", g.ShowSecrets = "showSecrets", g.ShowQualitySignalCards = "showQualitySignalCards", g);
+        M = ((g = {}).CreatorDashboard = "CreatorDashboard", g.CreatorHubHomePage = "CreatorHub.HomePage.UserId", g.CreatorHubHomePageExperienceTile = "CreatorHub.HomePage.ExperienceTile.UserId", g.CreatorHubHomePageOpportunitiesSection = "CreatorHub.HomePage.OpportunitiesSection.UserId", g.CreatorHubLandingPage = "CreatorHub.LandingPage", g.CreatorHubLandingPageUserId = "CreatorHub.LandingPage.UserId", g.CreatorHubNavigation = "CreatorHub.Navigation", g.CreatorHubNavigationUser = "CreatorHub.Navigation.User", g.CreatorHubPublishing = "CreatorHub.Publishing.UserId", g.LicenseManager = "CreatorDashboard.LicenseManager", g.RightsManager = "CreatorDashboard.RightsManager", g.CreatorSuccessOrganizations = "CreatorSuccess.OrganizationsV2", g.CreatorHubDocumentationSearch = "CreatorHub.CreatorDocumentation.Search.UserId", g.CreatorHubCreationsPermission = "CreatorHub.Creations.Permission", g.CreatorHubExperienceWebhooks = "CreatorHub.ExperienceWebhooks.UserId", g.CreatorHubGameAppeals = "CreatorHub.GameAppeals.UserId", g.CreatorHubChangelog = "CreatorHub.Changelog", g.TalentHub = "CreatorHub.TalentHub.UserId", g),
+        U = ((f = U || {}).ShowMemoryStoresDashboard = "showMemoryStoresDashboard", f.EnableSubscriptionActivationTest = "enableSubscriptionActivationTest", f.ShowSecrets = "showSecrets", f.ShowQualitySignalCards = "showQualitySignalCards", f);
     let G = {
         CreatorDashboard: C,
         "CreatorHub.HomePage.UserId": S,
@@ -306,7 +306,7 @@
         })).json()
     }
     let D = (0, y.default)(V);
-    e.s(["CreatorHubCreationsPermissionParameters", () => I, "IXPLayers", () => M, "LicenseManagerParameters", () => P, "TalentHubParameters", () => H, "fetchIXPParametersForCurrentUser", 0, D])
+    e.s(["CreatorHubCreationsPermissionParameters", () => I, "CreatorHubPublishingParameters", () => L, "IXPLayers", () => M, "LicenseManagerParameters", () => P, "TalentHubParameters", () => H, "fetchIXPParametersForCurrentUser", 0, D])
 }, 998683, e => {
     "use strict";
     var t = e.i(721281),
@@ -385,7 +385,7 @@
         })
     };
     var b = e.i(809576);
-    let f = (0, a.createContext)(null);
+    let g = (0, a.createContext)(null);
     e.s(["GroupsProvider", 0, e => {
         let {
             children: i
@@ -395,7 +395,7 @@
             data: s,
             isLoading: u,
             refetch: c
-        } = m(), [d, p] = (0, r.useLocalStorage)("creatorHubGroups.".concat(null == o ? void 0 : o.id), null), [g, h] = (0, r.useLocalStorage)("creatorHubGroup.".concat(null == o ? void 0 : o.id), null), [v, y] = (0, r.useLocalStorage)("creatorHubGroupData.".concat(null == o ? void 0 : o.id), {}), C = (0, a.useCallback)(e => {
+        } = m(), [d, p] = (0, r.useLocalStorage)("creatorHubGroups.".concat(null == o ? void 0 : o.id), null), [f, h] = (0, r.useLocalStorage)("creatorHubGroup.".concat(null == o ? void 0 : o.id), null), [v, y] = (0, r.useLocalStorage)("creatorHubGroupData.".concat(null == o ? void 0 : o.id), {}), C = (0, a.useCallback)(e => {
             h(e);
             let t = null != e ? e : "user";
             y(e => {
@@ -426,13 +426,13 @@
             }
         }, [d, null == s ? void 0 : s.groups]), P = (0, a.useMemo)(() => {
             var e;
-            return g && null != (e = E.find(e => {
+            return f && null != (e = E.find(e => {
                 let {
                     id: t
                 } = e;
-                return t === g
+                return t === f
             })) ? e : null
-        }, [g, E]), S = null == P ? void 0 : P.id, w = null == o ? void 0 : o.id, {
+        }, [f, E]), S = null == P ? void 0 : P.id, w = null == o ? void 0 : o.id, {
             data: x,
             error: T,
             isPending: k,
@@ -462,16 +462,16 @@
                 refreshPermissions: R
             }
         }, [P, v, E, u, I, k, L, l, x, T, c, R, C, w]);
-        return (0, t.jsx)(f.Provider, {
+        return (0, t.jsx)(g.Provider, {
             value: O,
             children: i
         })
     }, "useCurrentGroup", 0, () => {
-        let e = (0, a.useContext)(f);
+        let e = (0, a.useContext)(g);
         if (null === e) throw Error("useCurrentGroup must be used within a GroupsProvider");
         return e.currentGroup
     }, "useGroups", 0, () => {
-        let e = (0, a.useContext)(f);
+        let e = (0, a.useContext)(g);
         if (null === e) throw Error("useGroups must be used within a GroupsProvider");
         return e
     }], 745873)
@@ -517,8 +517,8 @@
             entityId: String(e)
         })).permissions) ? t : {}
     }
-    var f = e.i(759283);
-    let g = (e, t) => ["groups", e, t, "resolved-permissions"],
+    var g = e.i(759283);
+    let f = (e, t) => ["groups", e, t, "resolved-permissions"],
         h = (e, t) => ["groups", e, t, "roles", "resolved-permissions"],
         v = (e, t) => ["universe-resolved-permissions", t, void 0 === e ? e : String(e)];
     e.s(["useGroupOwnershipQuery", 0, function(e, t) {
@@ -534,7 +534,7 @@
             queryFn: () => b(e),
             staleTime: 6e4
         }), [a, n]), l = (0, t.useCallback)(e => a.fetchQuery({
-            queryKey: g(e, n),
+            queryKey: f(e, n),
             queryFn: () => c(e),
             staleTime: 6e4
         }), [a, n]), s = (0, t.useCallback)(e => a.fetchQuery({
@@ -549,7 +549,7 @@
         }), [l, s, o])
     }, "useGroupResolvedPermissionsQuery", 0, function(e, t) {
         return (0, n.useQuery)({
-            queryKey: g(e, t),
+            queryKey: f(e, t),
             queryFn: e && t ? () => c(e) : a.skipToken,
             staleTime: 6e4
         })
@@ -568,7 +568,7 @@
         } = (0, i.useRobloxAuthentication)(), r = null == t ? void 0 : t.id;
         return (0, n.useQuery)({
             queryKey: v(e, r),
-            queryFn: void 0 !== e && e !== f.uninitializedUniverseId ? () => b(e) : a.skipToken,
+            queryFn: void 0 !== e && e !== g.uninitializedUniverseId ? () => b(e) : a.skipToken,
             staleTime: 6e4
         })
     }], 809576)
@@ -748,8 +748,8 @@
         p = e.i(600317),
         m = e.i(221628),
         b = "Checkbox",
-        [f, g] = (0, o.createContextScope)(b),
-        [h, v] = f(b);
+        [g, f] = (0, o.createContextScope)(b),
+        [h, v] = g(b);
 
     function y(e) {
         let {
@@ -763,14 +763,14 @@
             onCheckedChange: c,
             required: d,
             value: p = "on",
-            internal_do_not_use_render: f
-        } = e, [g, v] = (0, s.useControllableState)({
+            internal_do_not_use_render: g
+        } = e, [f, v] = (0, s.useControllableState)({
             prop: a,
             defaultProp: null != i && i,
             onChange: c,
             caller: b
         }), [y, C] = r.useState(null), [E, P] = r.useState(null), S = r.useRef(!1), w = !y || !!l || !!y.closest("form"), x = {
-            checked: g,
+            checked: f,
             disabled: o,
             setChecked: v,
             control: y,
@@ -788,7 +788,7 @@
         return (0, m.jsx)(h, {
             scope: t,
             ...x,
-            children: "function" == typeof f ? f(x) : n
+            children: "function" == typeof g ? g(x) : n
         })
     }
     var C = "CheckboxTrigger",
@@ -803,13 +803,13 @@
                 value: c,
                 disabled: d,
                 checked: b,
-                required: f,
-                setControl: g,
+                required: g,
+                setControl: f,
                 setChecked: h,
                 hasConsumerStoppedPropagationRef: y,
                 isFormControl: E,
                 bubbleInput: P
-            } = v(C, a), S = (0, i.useComposedRefs)(t, g), w = r.useRef(b);
+            } = v(C, a), S = (0, i.useComposedRefs)(t, f), w = r.useRef(b);
             return r.useEffect(() => {
                 let e = null == u ? void 0 : u.form;
                 if (e) {
@@ -820,7 +820,7 @@
                 type: "button",
                 role: "checkbox",
                 "aria-checked": k(b) ? "mixed" : b,
-                "aria-required": f,
+                "aria-required": g,
                 "data-state": A(b),
                 "data-disabled": d ? "" : void 0,
                 disabled: d,
@@ -909,8 +909,8 @@
                 checked: s,
                 defaultChecked: d,
                 required: b,
-                disabled: f,
-                name: g,
+                disabled: g,
+                name: f,
                 value: h,
                 form: y,
                 bubbleInput: C,
@@ -933,8 +933,8 @@
                 "aria-hidden": !0,
                 defaultChecked: null != d ? d : T.current,
                 required: b,
-                disabled: f,
-                name: g,
+                disabled: g,
+                name: f,
                 value: h,
                 form: y,
                 ...n,
@@ -996,8 +996,8 @@
             onCheckedChange: p,
             id: m,
             ...b
-        } = e, f = (0, a.default)(), g = m || f, h = i && r.default.createElement("label", {
-            htmlFor: g,
+        } = e, g = (0, a.default)(), f = m || g, h = i && r.default.createElement("label", {
+            htmlFor: f,
             className: (0, n.default)("flex flex-col grow-1 gap-xsmall", !s && "cursor-pointer")
         }, r.default.createElement("span", {
             className: (0, n.default)(H[u], R[u], "content-emphasis")
@@ -1011,7 +1011,7 @@
         }, r.default.createElement(P, {
             "data-slot": "checkbox",
             className: (0, n.default)(L[u], t.interactable, !s && "cursor-pointer", "flex items-center justify-center radius-small padding-none content-default", "data-[state=unchecked]:bg-none data-[state=unchecked]:stroke-standard data-[state=unchecked]:stroke-contrast-alpha", "data-[state=indeterminate]:bg-system-contrast data-[state=indeterminate]:stroke-none", "data-[state=checked]:bg-system-contrast data-[state=checked]:stroke-none"),
-            id: g,
+            id: f,
             checked: l,
             disabled: s,
             onCheckedChange: p,
@@ -1045,12 +1045,12 @@
                 className: p,
                 size: m,
                 color: b = "Emphasis",
-                variant: f = "Standalone",
-                underline: g = "hover",
+                variant: g = "Standalone",
+                underline: f = "hover",
                 isExternal: h,
                 asChild: v,
                 ...y
-            } = e, C = (u = null != (s = y.as) ? s : "a", c = "button" === y.as ? void 0 : y.target, void 0 !== h ? h : "button" !== u && void 0 !== c && !r.has(c)), E = (0, t.default)("foundation-web-link", "button" === y.as && "bg-none stroke-none padding-none appearance-none [text-align:inherit]", ("Standalone" === f || C) && "inline-flex items-center gap-xsmall", void 0 !== m && i[m], o[b], "always" === g ? "underline" : "no-underline", "hover" === g && "hover:underline", "motion-safe:transition-opacity", "hover:cursor-pointer hover:[opacity:0.8]", "radius-xsmall focus-visible:[outline-style:solid] focus-visible:[outline-width:var(--stroke-standard)] focus-visible:[outline-color:var(--color-system-emphasis)]", p), P = C ? a.default.createElement("span", {
+            } = e, C = (u = null != (s = y.as) ? s : "a", c = "button" === y.as ? void 0 : y.target, void 0 !== h ? h : "button" !== u && void 0 !== c && !r.has(c)), E = (0, t.default)("foundation-web-link", "button" === y.as && "bg-none stroke-none padding-none appearance-none [text-align:inherit]", ("Standalone" === g || C) && "inline-flex items-center gap-xsmall", void 0 !== m && i[m], o[b], "always" === f ? "underline" : "no-underline", "hover" === f && "hover:underline", "motion-safe:transition-opacity", "hover:cursor-pointer hover:[opacity:0.8]", "radius-xsmall focus-visible:[outline-style:solid] focus-visible:[outline-width:var(--stroke-standard)] focus-visible:[outline-color:var(--color-system-emphasis)]", p), P = C ? a.default.createElement("span", {
                 "aria-hidden": !0,
                 "data-testid": "foundation-web-icon",
                 className: (0, t.default)("grow-0 shrink-0 basis-auto icon size-[1em]", "icon-regular-arrow-up-right-from-square")
@@ -1114,9 +1114,9 @@
             p = (0, a.useState)(!1),
             m = p[0],
             b = p[1],
-            f = (0, a.useState)([]),
-            g = f[0],
-            h = f[1],
+            g = (0, a.useState)([]),
+            f = g[0],
+            h = g[1],
             v = (0, a.useCallback)(function(e, a) {
                 void 0 === e && (e = {}), void 0 === a && (a = function() {
                     return !0
@@ -1131,8 +1131,8 @@
                 b(!1)
             }, [b]);
         (0, a.useEffect)(function() {
-            g.length > 0 && b(!0)
-        }, [g.length]);
+            f.length > 0 && b(!0)
+        }, [f.length]);
         var C = (0, a.useMemo)(function() {
             return {
                 ref: d,
@@ -1142,22 +1142,22 @@
         }, [y, v]);
         return a.default.createElement(a.default.Fragment, null, a.default.createElement(r.Provider, {
             value: C
-        }, u), a.default.createElement(n.S, (0, t._)({}, (null == (i = g[0]) ? void 0 : i.props) || {}, c, {
-            TransitionProps: (0, t._)((0, t._)({}, (null == (l = null == (o = g[0]) ? void 0 : o.props) ? void 0 : l.TransitionProps) || {}), {
+        }, u), a.default.createElement(n.S, (0, t._)({}, (null == (i = f[0]) ? void 0 : i.props) || {}, c, {
+            TransitionProps: (0, t._)((0, t._)({}, (null == (l = null == (o = f[0]) ? void 0 : o.props) ? void 0 : l.TransitionProps) || {}), {
                 onExited: function(e) {
                     var a, n, r, i;
                     h(function(e) {
                         var a = e.slice(1);
                         return (0, t.b)([], a, !0)
-                    }), (null == (n = null == (a = g[0]) ? void 0 : a.props.TransitionProps) ? void 0 : n.onExited) && (null == (i = null == (r = g[0]) ? void 0 : r.props.TransitionProps) || i.onExited(e))
+                    }), (null == (n = null == (a = f[0]) ? void 0 : a.props.TransitionProps) ? void 0 : n.onExited) && (null == (i = null == (r = f[0]) ? void 0 : r.props.TransitionProps) || i.onExited(e))
                 }
             }),
             onClose: function(e, t) {
                 var a, n, r;
-                (null == (a = g[0]) ? void 0 : a.shouldClose(t)) && b(!1), (null == (n = g[0]) ? void 0 : n.props.onClose) && (null == (r = g[0]) || r.props.onClose(e, t))
+                (null == (a = f[0]) ? void 0 : a.shouldClose(t)) && b(!1), (null == (n = f[0]) ? void 0 : n.props.onClose) && (null == (r = f[0]) || r.props.onClose(e, t))
             },
             open: m
-        }), null == (s = g[0]) ? void 0 : s.props.children))
+        }), null == (s = f[0]) ? void 0 : s.props.children))
     }, "useSnackbar", 0, function() {
         var e = (0, a.useContext)(r);
         return {
@@ -1198,11 +1198,11 @@
                     p = null == (s = r.fetchOptions) || null == (l = s.meta) || null == (o = l.fetchMore) ? void 0 : o.direction,
                     m = (null == (u = r.state.data) ? void 0 : u.pages) || [],
                     b = (null == (c = r.state.data) ? void 0 : c.pageParams) || [],
-                    f = {
+                    g = {
                         pages: [],
                         pageParams: []
                     },
-                    g = 0,
+                    f = 0,
                     h = async () => {
                         let i = !1,
                             o = (0, t.ensureQueryFn)(r.options, r.fetchOptions),
@@ -1239,17 +1239,17 @@
                                     pageParams: b
                                 },
                                 r = (e ? n : a)(d, t);
-                            f = await l(t, r, e)
+                            g = await l(t, r, e)
                         } else {
                             let t = null != e ? e : m.length;
                             do {
                                 var s;
-                                let e = 0 === g ? null != (s = b[0]) ? s : d.initialPageParam : a(d, f);
-                                if (g > 0 && null == e) break;
-                                f = await l(f, e), g++
-                            } while (g < t)
+                                let e = 0 === f ? null != (s = b[0]) ? s : d.initialPageParam : a(d, g);
+                                if (f > 0 && null == e) break;
+                                g = await l(g, e), f++
+                            } while (f < t)
                         }
-                        return f
+                        return g
                     };
                 r.options.persister ? r.fetchFn = () => {
                     var e, t;
@@ -1313,22 +1313,22 @@
             path: c,
             url: d,
             isReady: p = !0
-        } = e, m = null != (o = null == u ? void 0 : u.tags) ? o : n, b = null == u ? void 0 : u.rosId, f = (0, t.useMemo)(() => ({
+        } = e, m = null != (o = null == u ? void 0 : u.tags) ? o : n, b = null == u ? void 0 : u.rosId, g = (0, t.useMemo)(() => ({
             tags: m,
             rosId: b,
             path: c,
             url: d,
             isReady: p
-        }), [m, b, c, d, p]), g = (0, t.useRef)(f), h = (0, t.useRef)(f);
+        }), [m, b, c, d, p]), f = (0, t.useRef)(g), h = (0, t.useRef)(g);
         (0, t.useLayoutEffect)(() => {
-            h.current = f, void 0 === g.current.path && void 0 !== f.path && (g.current = {
-                ...g.current,
-                path: f.path
+            h.current = g, void 0 === f.current.path && void 0 !== g.path && (f.current = {
+                ...f.current,
+                path: g.path
             })
-        }, [f]), (0, t.useLayoutEffect)(() => {
+        }, [g]), (0, t.useLayoutEffect)(() => {
             let e = e => {
                 var t;
-                let a, n = (a = null == (t = e.parameters) ? void 0 : t.metricName, "webvitals" === e.eventType && void 0 !== a && i.has(a)) ? g.current : h.current;
+                let a, n = (a = null == (t = e.parameters) ? void 0 : t.metricName, "webvitals" === e.eventType && void 0 !== a && i.has(a)) ? f.current : h.current;
                 void 0 !== n.path && (e.parameters = {
                     ...e.parameters,
                     path: n.path
@@ -1344,8 +1344,8 @@
         }, [s]);
         let v = (0, t.useMemo)(() => ({
             unifiedLogger: s,
-            pageContext: f
-        }), [s, f]);
+            pageContext: g
+        }), [s, g]);
         return t.default.createElement(a.Provider, {
             value: v
         }, l)
@@ -1377,5 +1377,5 @@
     }, "useUnifiedLoggerProvider", 0, o])
 }]);
 
-//# debugId=c1a42799-2127-8f42-583a-7e69b3415d94
-//# sourceMappingURL=14xs760kw80zq.js.map
+//# debugId=e97ebe2c-bb0f-bae1-0ab7-d90198d07b13
+//# sourceMappingURL=33kgy6nws9xr1.js.map

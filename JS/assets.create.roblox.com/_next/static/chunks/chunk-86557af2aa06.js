@@ -3,7 +3,7 @@
     try {
         var e = "undefined" != typeof globalThis ? globalThis : "undefined" != typeof global ? global : "undefined" != typeof window ? window : "undefined" != typeof self ? self : {},
             n = (new e.Error).stack;
-        n && ((e._debugIds || (e._debugIds = {}))[n] = "ebaf3423-f533-c654-ae72-14fb86bbf76e")
+        n && ((e._debugIds || (e._debugIds = {}))[n] = "3a9ffd9a-4dc3-608f-62c7-f6ce47e0e17f")
     } catch (e) {}
 }();
 (globalThis.TURBOPACK || (globalThis.TURBOPACK = [])).push(["object" == typeof document ? document.currentScript : void 0, 721281, t => {
@@ -4781,8 +4781,8 @@
         } = t, {
             translateWithNamespace: a,
             ready: u
-        } = ih();
-        return u && a(n, r, i) || o
+        } = ih(), s = (u ? a(n, r, i) : "") || o;
+        return "string" == typeof s || "number" == typeof s || "bigint" == typeof s ? "" === s ? null : _.default.createElement("span", null, s) : s
     };
     t.s(["CdnTranslationResourceProvider", 0, class extends E {
         loadRuntimeLocaleInfo() {
@@ -4972,5 +4972,5 @@
     }])
 }]);
 
-//# debugId=ebaf3423-f533-c654-ae72-14fb86bbf76e
-//# sourceMappingURL=3o15o6k_2odyf.js.map
+//# debugId=3a9ffd9a-4dc3-608f-62c7-f6ce47e0e17f
+//# sourceMappingURL=1n-uzwrdgueo9.js.map

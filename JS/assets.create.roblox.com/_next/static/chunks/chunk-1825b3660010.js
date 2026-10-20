@@ -3,7 +3,7 @@
     try {
         var e = "undefined" != typeof globalThis ? globalThis : "undefined" != typeof global ? global : "undefined" != typeof window ? window : "undefined" != typeof self ? self : {},
             n = (new e.Error).stack;
-        n && ((e._debugIds || (e._debugIds = {}))[n] = "9371cf6d-2dc2-5d34-fce3-efe97e8a9840")
+        n && ((e._debugIds || (e._debugIds = {}))[n] = "bd106789-07ec-125b-305a-6d7210596d8e")
     } catch (e) {}
 }();
 (globalThis.TURBOPACK || (globalThis.TURBOPACK = [])).push(["object" == typeof document ? document.currentScript : void 0, 968284, 129882, e => {
@@ -738,7 +738,24 @@
             })
         },
         O = (e, t) => E(null == t ? void 0 : t.name) === E(e.name) && S(null == t ? void 0 : t.description) === S(e.description);
-    e.s(["DEVELOPMENT_ITEMS_INVENTORY_QUERY_KEY", 0, A, "cacheDevelopmentItemMetadataUpdate", 0, (e, t) => {
+    e.s(["DEVELOPMENT_ITEMS_INVENTORY_QUERY_KEY", 0, A, "cacheDevelopmentItemArchiveState", 0, (e, t) => {
+        let {
+            assetId: r,
+            state: a
+        } = t;
+        e.setQueriesData({
+            queryKey: A
+        }, e => null == e ? e : {
+            ...e,
+            items: e.items.map(e => e.assetId === r ? {
+                ...e,
+                state: a
+            } : e)
+        }), e.invalidateQueries({
+            queryKey: A,
+            refetchType: "none"
+        })
+    }, "cacheDevelopmentItemMetadataUpdate", 0, (e, t) => {
         let {
             assetId: r,
             description: a,
@@ -1089,5 +1106,5 @@
     }()
 }]);
 
-//# debugId=9371cf6d-2dc2-5d34-fce3-efe97e8a9840
-//# sourceMappingURL=2n2y8lkoqg8zh.js.map
+//# debugId=bd106789-07ec-125b-305a-6d7210596d8e
+//# sourceMappingURL=2zl_55fka3loj.js.map
