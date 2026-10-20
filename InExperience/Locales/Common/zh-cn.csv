@@ -3673,6 +3673,7 @@ Feature.Moments.Action.Retry,
 Feature.Moments.Action.RetryLoadingComments,重新加载评论
 Feature.Moments.Action.Return,返回图库
 Feature.Moments.Action.ReturnToEditing,返回编辑
+Feature.Moments.Action.Save,
 Feature.Moments.Action.SaveVoiceover,
 Feature.Moments.Action.ShowDetails,显示详情
 Feature.Moments.Action.ShowMore,

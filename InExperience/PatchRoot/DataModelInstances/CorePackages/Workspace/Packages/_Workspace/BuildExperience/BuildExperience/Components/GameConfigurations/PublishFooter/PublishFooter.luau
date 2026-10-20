@@ -3,6 +3,7 @@ local Parent = BuildExperience.Parent
 local FoundationModule = require(Parent.Foundation)
 local NavigationModule = require(Parent.Navigation)
 local ReactModule = require(Parent.React)
+local SharedFlagsModule = require(Parent.SharedFlags)
 local SignalsReactModule = require(Parent.SignalsReact)
 local UseOpenWebViewFunction = require(Parent.WebViewUtils).useOpenWebView
 local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
@@ -24,7 +25,8 @@ local ButtonVariant = FoundationModule.Enums.ButtonVariant
 local FillBehavior = FoundationModule.Enums.FillBehavior
 local InputSize = FoundationModule.Enums.InputSize
 local PrivacyType = UniverseConfigurationModule.PrivacyType
-local FFlagEnableShareSheet = require(Parent.SharedFlags).FFlagEnableShareSheet
+local FFlagEnableShareSheet = SharedFlagsModule.FFlagEnableShareSheet
+local FFlagShareSheetFriendsSort = SharedFlagsModule.FFlagShareSheetFriendsSort
 local FFlagBuildPublishNavigationSheetModule = require(BuildExperience.Flags.FFlagBuildPublishNavigationSheet)
 local FFlagBuildAdUpsellModule = require(BuildExperience.Flags.FFlagBuildAdUpsell)
 local FFlagBuildExperiencePlaytestCardPublishCtaModule = require(BuildExperience.Flags.FFlagBuildExperiencePlaytestCardPublishCta)
@@ -38,6 +40,7 @@ local SendBuildExperienceEventModule = require(BuildExperience.Telemetry.sendBui
 local SharePublishedExperienceModule = require(BuildExperience.utils.sharePublishedExperience)
 local SharePublishedExperienceFunction = SharePublishedExperienceModule.sharePublishedExperience
 local UseSharePublishedExperienceFunction = SharePublishedExperienceModule.useSharePublishedExperience
+local UniversalShareSheet = require(Parent.ShareSheet).UniversalShareSheet
 local t = {}
 
 local function _(p1): boolean
@@ -123,7 +126,7 @@ local function PreviewButton(p1)
 end
 
 return function(p1)
-	-- upvalues: UseLocalizationFunction (copy), LocalizationStringsModule (copy), UseSharePublishedExperienceFunction (copy), SignalsReactModule (copy), PlaceVersionHistoryModule (copy), UniverseConfigurationModule (copy), ReactModule (copy), GameConfigurationLabelsModule (copy), UniverseActivationModule (copy), ContentMaturityUtilsModule (copy), UseOpenWebViewFunction (copy), PrivacyType (copy), FFlagEnableShareSheet (copy), SharePublishedExperienceFunction (copy), GameConfigurationActionsModule (copy), RefreshPublishEligibilityModule (copy), GetVersionInformationStoreModule (copy), SendBuildExperienceEventModule (copy), GetAdUpsellEventStoreModule (copy), FFlagBuildAdUpsellModule (copy), buildPublicAudiences (copy), ExperienceGuidelinesModule (copy), t (copy), Debug (copy), FFlagBuildExperiencePlaytestCardPublishCtaModule (copy), Snackbar (copy), View (copy), FFlagBuildPublishNavigationSheetModule (copy), Button (copy), InputSize (copy), ButtonVariant (copy), FillBehavior (copy), PreviewButton (copy), FriendsOnlyShareDialogModule (copy)
+	-- upvalues: UseLocalizationFunction (copy), LocalizationStringsModule (copy), UseSharePublishedExperienceFunction (copy), SignalsReactModule (copy), PlaceVersionHistoryModule (copy), UniverseConfigurationModule (copy), ReactModule (copy), GameConfigurationLabelsModule (copy), UniverseActivationModule (copy), ContentMaturityUtilsModule (copy), UseOpenWebViewFunction (copy), PrivacyType (copy), FFlagEnableShareSheet (copy), FFlagShareSheetFriendsSort (copy), UniversalShareSheet (copy), SharePublishedExperienceFunction (copy), GameConfigurationActionsModule (copy), RefreshPublishEligibilityModule (copy), GetVersionInformationStoreModule (copy), SendBuildExperienceEventModule (copy), GetAdUpsellEventStoreModule (copy), FFlagBuildAdUpsellModule (copy), buildPublicAudiences (copy), ExperienceGuidelinesModule (copy), t (copy), Debug (copy), FFlagBuildExperiencePlaytestCardPublishCtaModule (copy), Snackbar (copy), View (copy), FFlagBuildPublishNavigationSheetModule (copy), Button (copy), InputSize (copy), ButtonVariant (copy), FillBehavior (copy), PreviewButton (copy), FriendsOnlyShareDialogModule (copy)
 	local UseLocalizationResult = UseLocalizationFunction({
 		accountTooNewError = LocalizationStringsModule.GAME_CONFIGURATION_PUBLISH_ACCOUNT_TOO_NEW_ERROR,
 		creatorHub = LocalizationStringsModule.GAME_CONFIGURATION_CREATOR_HUB,
@@ -176,12 +179,12 @@ return function(p1)
 		UseStateResult2_2(nil)
 	end, {})
 	local UseResult1 = ReactModule.useCallback(function()
-		-- upvalues: p1 (copy), UseStateResult2_2 (copy), FFlagEnableShareSheet (upval), UseSharePublishedExperienceResult (copy), SharePublishedExperienceFunction (upval), LinkCopied (copy), UseStateResult2_1 (copy)
+		-- upvalues: p1 (copy), UseStateResult2_2 (copy), FFlagEnableShareSheet (upval), UseSharePublishedExperienceResult (copy), FFlagShareSheetFriendsSort (upval), UniversalShareSheet (upval), SharePublishedExperienceFunction (upval), LinkCopied (copy), UseStateResult2_1 (copy)
 		if p1.target.placeId == nil then return end
 		UseStateResult2_2(nil)
 		
 		if FFlagEnableShareSheet then
-			UseSharePublishedExperienceResult(p1.target.placeId)
+			UseSharePublishedExperienceResult(p1.target.placeId, if FFlagShareSheetFriendsSort then UniversalShareSheet.RecipientSource.OneToOneFriends else nil)
 			
 			return
 		end

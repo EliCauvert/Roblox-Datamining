@@ -3696,6 +3696,7 @@ Feature.Moments.Action.Retry,
 Feature.Moments.Action.RetryLoadingComments,코멘트 다시 불러오기
 Feature.Moments.Action.Return,갤러리로 돌아가기
 Feature.Moments.Action.ReturnToEditing,편집으로 돌아가기
+Feature.Moments.Action.Save,
 Feature.Moments.Action.SaveVoiceover,
 Feature.Moments.Action.ShowDetails,세부 정보 표시
 Feature.Moments.Action.ShowMore,

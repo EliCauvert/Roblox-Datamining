@@ -2145,6 +2145,8 @@ Feature.Build.Description.GameConfiguration,Change how you sell items and promot
 Feature.Build.Description.GameCreationDone,I've completed creating and publishing your game. You can open it to playtest.
 Feature.Build.Description.GameSavedPlaytest,I've completed creating your game and saved a new version. You can open it to playtest.
 Feature.Build.Description.HubSettings,Manage all settings on Creator Hub
+Feature.Build.Description.InternalSpec,Leave blank for latest spec
+Feature.Build.Description.InternalTesting,Try out new model specs
 Feature.Build.Description.InviteFriendLimit,Invite up to {MAX_INVITES} friends to play while you create.
 Feature.Build.Description.LongAdCampaign,More time to reach new players and keep them coming back.
 Feature.Build.Description.MakeAudienceAvail,Publish your experience to make it available to this audience.
@@ -2247,6 +2249,8 @@ Feature.Build.Label.IconThumbnails,Icon & thumbnails
 Feature.Build.Label.Images2D,2D Images
 Feature.Build.Label.InProgress,In progress
 Feature.Build.Label.InputNeeded,Input needed
+Feature.Build.Label.InternalSpec,Internal Spec
+Feature.Build.Label.InternalTesting,Internal Testing
 Feature.Build.Label.InviteCount,{COUNT}/{MAX_INVITES}
 Feature.Build.Label.Limited,Limited
 Feature.Build.Label.Live,Published
@@ -2476,6 +2480,7 @@ Feature.Build.Notification.Title.Finished,Build finished
 Feature.Build.Notification.Title.NeedInput,Build needs your input
 Feature.Build.Placeholder.DescribeProduct,Describe what you want to sell
 Feature.Build.Placeholder.DescribeProductUpdate,Describe an update
+Feature.Build.Placeholder.InternalSpec,internal_code
 Feature.Build.Prompt.CreateDeveloperProduct,"Help me create a developer product, wire it into the game, verify and publish the changes, and make it available for purchase."
 Feature.Build.Title.AdActive,Ad campaign is active
 Feature.Build.Title.AdCampaignDuration,{durationDays}-day ad campaign
@@ -3697,6 +3702,7 @@ Feature.Moments.Action.Retry,
 Feature.Moments.Action.RetryLoadingComments,Retry loading comments
 Feature.Moments.Action.Return,Return to Gallery
 Feature.Moments.Action.ReturnToEditing,Return to Editing
+Feature.Moments.Action.Save,
 Feature.Moments.Action.SaveVoiceover,
 Feature.Moments.Action.ShowDetails,Show details
 Feature.Moments.Action.ShowMore,

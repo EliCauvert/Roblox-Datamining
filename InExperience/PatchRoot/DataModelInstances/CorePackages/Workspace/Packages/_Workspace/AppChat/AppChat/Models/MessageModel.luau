@@ -6,11 +6,6 @@ local GenerateStringIdFunction = require(Parent.AppCommonLib).GenerateStringId
 local LoggerModule = require(script.Parent.Logger)
 local GetFFlagEnableSocialCardsFunction = require(Parent.SharedFlags).GetFFlagEnableSocialCards
 local FFlagAppChatEnableAutotranslationModule = require(AppChat.Flags.FFlagAppChatEnableAutotranslation)
-local config = {
-	new = function(p1)
-		return { universeId = tostring(p1) }
-	end
-}
 local MessageModelModule = {
 	SenderTypes = {
 		User = "user",
@@ -39,50 +34,10 @@ local MessageModelModule = {
 function MessageModelModule.new(p1)
 	-- upvalues: MessageModelModule (copy)
 	MessageModelModule.__index = MessageModelModule
-	local P1 = p1 or {}
-	setmetatable(P1, MessageModelModule)
+	local P0 = p1 or {}
+	setmetatable(P0, MessageModelModule)
 	
-	return P1
-end
-
-function MessageModelModule.fromWeb(p1, p2, PreviousMessageId)
-	-- upvalues: MessageModelModule (copy), _DateTime (copy)
-	if MessageModelModule.DoRequiredFieldsPresent(p1) then
-		local NewMessageModel = MessageModelModule.new()
-		NewMessageModel.id = p1.id
-		NewMessageModel.senderTargetId = tostring(p1.senderTargetId)
-		NewMessageModel.senderType = p1.senderType
-		NewMessageModel.read = p1.read
-		NewMessageModel.sent = _DateTime.fromIsoDate(p1.sent)
-		NewMessageModel.conversationId = tostring(p2)
-		NewMessageModel.previousMessageId = PreviousMessageId
-		NewMessageModel.filteredForReceivers = false
-		NewMessageModel:parseContentWeb(p1)
-		
-		return NewMessageModel
-	else
-		return nil
-	end
-end
-
-function MessageModelModule.fromSentWeb(p1, p2)
-	-- upvalues: MessageModelModule (copy), Players (copy), _DateTime (copy)
-	if MessageModelModule.DoRequiredFieldsPresentForSent(p1) then
-		local NewMessageModel = MessageModelModule.new()
-		NewMessageModel.id = p1.messageId
-		NewMessageModel.senderTargetId = tostring(Players.LocalPlayer.UserId)
-		NewMessageModel.senderType = "User"
-		NewMessageModel.read = true
-		NewMessageModel.sent = _DateTime.fromIsoDate(p1.sent)
-		NewMessageModel.conversationId = tostring(p2)
-		NewMessageModel.previousMessageId = ""
-		NewMessageModel.filteredForReceivers = p1.filteredForReceivers
-		NewMessageModel:parseContentSentWeb(p1)
-		
-		return NewMessageModel
-	else
-		return nil
-	end
+	return P0
 end
 
 function MessageModelModule.newSendingId(): string
@@ -106,45 +61,6 @@ function MessageModelModule.newSending(p1)
 	NewMessageModel.stableKey = NewMessageModel.id
 	
 	return NewMessageModel
-end
-
-function MessageModelModule.DoRequiredFieldsPresent(p1)
-	return p1 and (p1.id and (p1.messageType and (p1.senderTargetId and p1.sent)))
-end
-
-function MessageModelModule.DoRequiredFieldsPresentForSent(p1)
-	return p1 and (p1.messageId and (p1.messageType and p1.sent))
-end
-
-function MessageModelModule.parseContentWeb(p1, p2)
-	-- upvalues: MessageModelModule (copy), config (copy)
-	p1:parseContent(p2)
-	
-	if p2.messageType == MessageModelModule.MessageTypes.Link and p2.link and p2.link.type == MessageModelModule.LinkTypes.Game and p2.link.game then
-		p1.gameLink = config.new(p2.link.game.universeId)
-	end
-end
-
-function MessageModelModule.parseContentSentWeb(p1, p2)
-	-- upvalues: MessageModelModule (copy), config (copy)
-	p1:parseContent(p2)
-	
-	if p2.messageType == MessageModelModule.MessageTypes.Link and p2.chatMessageLinkType == MessageModelModule.LinkTypes.Game then
-		p1.gameLink = config.new(p2.universeId)
-	end
-end
-
-function MessageModelModule.parseContent(p1, p2)
-	-- upvalues: MessageModelModule (copy)
-	p1.messageType = p2.messageType
-	
-	if p2.messageType == MessageModelModule.MessageTypes.PlainText then
-		p1.content = p2.content
-		
-		return
-	else
-		p1.content = nil
-	end
 end
 
 function MessageModelModule.fromChannelsApi(RepliesTo, p1, PreviousMessageId, _)

@@ -19,6 +19,7 @@ return function(p1)
 	return ReactModule.createElement(View, {
 		tag = "bg-contrast",
 		AnchorPoint = UnionResult.anchorPoint,
+		cornerRadius = UnionResult.cornerRadius,
 		Position = UnionResult.position,
 		Size = UnionResult.size,
 		ZIndex = UnionResult.zIndex or 1

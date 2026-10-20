@@ -6,6 +6,7 @@ local PromiseModule = require(Parent.Promise)
 local CreateSingleEntityResolverModule = require(DataHydration.createSingleEntityResolver)
 local FFlagDataHydrationPreserveIncompleteCatalogResultsModule = require(DataHydration.Flags.FFlagDataHydrationPreserveIncompleteCatalogResults)
 local DataHydrationUtilsModule = require(DataHydration.DataHydrationUtils)
+local IncompleteListCodeModule = require(script.Parent.incompleteListCode)
 local FetchGamePassConfigModule = require(script.Parent.fetchGamePassConfig)
 local _ = require(script.Parent.GamePassConfigTypes)
 local Frozen = table.freeze({
@@ -13,7 +14,7 @@ local Frozen = table.freeze({
 })
 
 return function(p1)
-	-- upvalues: DataHydrationUtilsModule (copy), FetchGamePassConfigModule (copy), FFlagDataHydrationPreserveIncompleteCatalogResultsModule (copy), PromiseModule (copy), CreateSingleEntityResolverModule (copy), Frozen (copy), StatusCodes (copy)
+	-- upvalues: DataHydrationUtilsModule (copy), FetchGamePassConfigModule (copy), FFlagDataHydrationPreserveIncompleteCatalogResultsModule (copy), IncompleteListCodeModule (copy), PromiseModule (copy), CreateSingleEntityResolverModule (copy), Frozen (copy), StatusCodes (copy)
 	local P0 = p1 or {}
 	local config = { network = P0.network, baseUrl = P0.baseUrl }
 	local GetLocalPlayerUserId = P0.getLocalPlayerUserId or DataHydrationUtilsModule.getLocalPlayerUserId
@@ -21,12 +22,12 @@ return function(p1)
 	local Flag = false
 	local Generation = 0
 	local SingleEntityResolverModule = CreateSingleEntityResolverModule(function(p2)
-		-- upvalues: FetchGamePassConfigModule (upval), config (copy), FFlagDataHydrationPreserveIncompleteCatalogResultsModule (upval), PromiseModule (upval)
+		-- upvalues: FetchGamePassConfigModule (upval), config (copy), FFlagDataHydrationPreserveIncompleteCatalogResultsModule (upval), IncompleteListCodeModule (upval), PromiseModule (upval)
 		local ListResult = FetchGamePassConfigModule.list(p2, config)
 		
 		return if FFlagDataHydrationPreserveIncompleteCatalogResultsModule then ListResult:catch(function(Err)
-			-- upvalues: PromiseModule (upval)
-			return if typeof(Err) == "table" and Err.code == "IncompleteGamePassList" then {
+			-- upvalues: IncompleteListCodeModule (upval), PromiseModule (upval)
+			return if typeof(Err) == "table" and Err.code == IncompleteListCodeModule then {
 				isIncomplete = true,
 				gamePasses = Err.gamePasses,
 				nextPageToken = Err.nextPageToken

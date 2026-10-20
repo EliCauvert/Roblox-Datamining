@@ -12,6 +12,7 @@ local CreationFlowStringsModule = {
 	GeneralCtaOk = "Feature.Moments.Action.Ok",
 	GeneralCtaRetry = "Feature.Moments.Action.Retry",
 	GeneralCtaReturn = "Feature.Moments.Action.Back",
+	GeneralCtaSave = "Feature.Moments.Action.Save",
 	GeneralCtaShowMore = "Feature.Moments.Action.ShowMore",
 	GeneralEmptyStateText = "Feature.Moments.Description.EmptyCapturesLibrary",
 	GeneralPhotosChipLabel = "Feature.Moments.Label.Photos",

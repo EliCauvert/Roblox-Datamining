@@ -1,4 +1,6 @@
-﻿local TypesModule = require(script.types)
+﻿local SharedFlagsModule = require(script:FindFirstAncestor("DataHydration").Parent.SharedFlags)
+local TypesModule = require(script.types)
+local FFlagBuildExperienceManageSubscription = SharedFlagsModule.FFlagBuildExperienceManageSubscription
 
 return {
 	FFlagBuildAgentAdCampaignCard = require(script.FFlagBuildAgentAdCampaignCard),
@@ -17,6 +19,8 @@ return {
 	StudioClientLogsTool = require(script.StudioClientLogsTool),
 	StudioClientDataModelTools = require(script.StudioClientDataModelTools),
 	StudioManageDevProductTool = require(script.StudioManageDevProductTool),
+	StudioManageGamePassTool = if SharedFlagsModule.FFlagBuildExperienceManageGamePass then require(script.StudioManageGamePassTool) else nil,
+	StudioManageSubscriptionTool = if FFlagBuildExperienceManageSubscription then require(script.StudioManageSubscriptionTool) else nil,
 	ClientToolItems = require(script.ClientToolItems),
 	decodeAdCampaignEligibilityResult = require(script.decodeAdCampaignEligibilityResult),
 	classifyAdCampaignFailure = require(script.classifyAdCampaignFailure),

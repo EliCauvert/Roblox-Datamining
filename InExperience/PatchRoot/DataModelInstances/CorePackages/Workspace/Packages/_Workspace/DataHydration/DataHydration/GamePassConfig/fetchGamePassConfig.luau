@@ -2,6 +2,7 @@
 local PromiseModule = require(DataHydration.Parent.Promise)
 local CreatorApiHttpModule = require(DataHydration.creatorApiHttp)
 local _ = require(script.Parent.GamePassConfigTypes)
+local IncompleteListCodeModule = require(script.Parent.incompleteListCode)
 local FFlagDataHydrationPreserveIncompleteCatalogResultsModule = require(DataHydration.Flags.FFlagDataHydrationPreserveIncompleteCatalogResults)
 
 local function collectionUrl(BaseUrlResult, p1): string
@@ -49,15 +50,15 @@ end
 
 return {
 	list = function(p1, p2)
-		-- upvalues: listPage (copy), FFlagDataHydrationPreserveIncompleteCatalogResultsModule (copy), PromiseModule (copy)
+		-- upvalues: listPage (copy), FFlagDataHydrationPreserveIncompleteCatalogResultsModule (copy), PromiseModule (copy), IncompleteListCodeModule (copy)
 		local GamePasses = {}
 		local t = {}
 		local t1 = {}
 		
 		local function fetchNext(NextPageToken, p3)
-			-- upvalues: listPage (upval), p1 (copy), p2 (copy), FFlagDataHydrationPreserveIncompleteCatalogResultsModule (upval), t1 (copy), GamePasses (copy), t (copy), PromiseModule (upval), fetchNext (copy)
+			-- upvalues: listPage (upval), p1 (copy), p2 (copy), FFlagDataHydrationPreserveIncompleteCatalogResultsModule (upval), t1 (copy), GamePasses (copy), t (copy), PromiseModule (upval), IncompleteListCodeModule (upval), fetchNext (copy)
 			return listPage(p1, NextPageToken, p2):andThen(function(Result)
-				-- upvalues: FFlagDataHydrationPreserveIncompleteCatalogResultsModule (upval), t1 (upval), GamePasses (upval), t (upval), p3 (copy), PromiseModule (upval), fetchNext (upval)
+				-- upvalues: FFlagDataHydrationPreserveIncompleteCatalogResultsModule (upval), t1 (upval), GamePasses (upval), t (upval), p3 (copy), PromiseModule (upval), IncompleteListCodeModule (upval), fetchNext (upval)
 				for _, gamePass in Result.gamePasses do
 					if FFlagDataHydrationPreserveIncompleteCatalogResultsModule then
 						assert(not t1[gamePass.gamePassId], "Game Pass list contains a duplicate ID")
@@ -71,7 +72,7 @@ return {
 					return { gamePasses = GamePasses }
 				elseif t[NextPageToken] or p3 >= 50 then
 					return PromiseModule.reject({
-						code = "IncompleteGamePassList",
+						code = IncompleteListCodeModule,
 						message = if t[NextPageToken] then "Repeated page token" else "Page limit reached",
 						gamePasses = GamePasses,
 						nextPageToken = NextPageToken

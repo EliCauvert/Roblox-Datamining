@@ -29,7 +29,10 @@ return {
 			id = "GetMorePlayers",
 			unlockMilestone = "universe_dau_5_achieved",
 			titleKey = AnalyticsKeysModule.ANALYTICS_GOAL_TITLE_GET_MORE_PLAYERS,
-			charts = { AnalyticsMetricModule.DailyActiveUsers },
+			charts = {
+				AnalyticsMetricModule.DailyActiveUsers,
+				AnalyticsMetricModule.PlaythroughRate
+			},
 			metricSummaries = {
 				{
 					kind = "number",
@@ -37,6 +40,14 @@ return {
 					titleKey = AnalyticsKeysModule.ANALYTICS_OVERVIEW_METRIC_TITLE_DAILY_ACTIVE_USERS,
 					source = GoalMetricSummarySourcesModule.summary({ metric = MetricId.DailyActiveUsers }),
 					format = { unit = AnalyticsUnitModule.Scalar }
+				},
+				{
+					kind = "number",
+					id = "PlaythroughRate",
+					requiredMilestone = "universe_first_home_recommendation_impression_achieved",
+					titleKey = AnalyticsKeysModule.ANALYTICS_METRIC_TITLE_PLAYTHROUGH_RATE,
+					source = GoalMetricSummarySourcesModule.summary({ metric = MetricId.RFYPlayThroughRate }),
+					format = { unit = AnalyticsUnitModule.Percent }
 				},
 				{
 					kind = "breakdown",

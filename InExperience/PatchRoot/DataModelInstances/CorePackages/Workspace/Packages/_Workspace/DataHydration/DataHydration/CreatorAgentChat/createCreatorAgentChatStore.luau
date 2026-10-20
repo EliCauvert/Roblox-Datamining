@@ -2,6 +2,7 @@
 local Parent = DataHydration.Parent
 local HttpClientModule = require(Parent.HttpClient)
 local SignalsModule = require(Parent.Signals)
+local SharedFlagsModule = require(Parent.SharedFlags)
 local FFlagBuildAgentAdCampaignCardModule = require(script.Parent.FFlagBuildAgentAdCampaignCard)
 local FFlagBuildAgentAdCampaignToolCallStatusFallback = require(Parent.SharedFlags).FFlagBuildAgentAdCampaignToolCallStatusFallback
 local DecodeAdCampaignToolCallStatusResultModule = if FFlagBuildAgentAdCampaignToolCallStatusFallback then require(script.Parent.decodeAdCampaignToolCallStatusResult) else nil
@@ -17,7 +18,8 @@ local OnTerminalModule = require(script.Parent.onTerminal)
 local RpcDecoderModule = require(script.Parent.rpcDecoder)
 local _ = require(script.Parent.types)
 local WithCsrfRetryModule = require(DataHydration.withCsrfRetry)
-local FFlagBuildExperiencePromptFailureTelemetry = require(Parent.SharedFlags).FFlagBuildExperiencePromptFailureTelemetry
+local FFlagBuildExperiencePromptFailureTelemetry = SharedFlagsModule.FFlagBuildExperiencePromptFailureTelemetry
+local FFlagBuildExperienceLibrary = SharedFlagsModule.FFlagBuildExperienceLibrary
 
 local function _(p1)
 	return if typeof(p1) == "string" and p1 ~= "" then p1 else nil
@@ -58,7 +60,7 @@ local config = {
 }
 
 return function(p1)
-	-- upvalues: WithCsrfRetryModule (copy), HttpClientModule (copy), AcpProtocolModule (copy), config (copy), RpcDecoderModule (copy), SignalsModule (copy), OnTerminalModule (copy), appendSessionListEntries (copy), FFlagBuildAgentAdCampaignCardModule (copy), DecodeAdCampaignToolCallStatusResultModule (copy), CreateTurnHandleModule (copy), ExperimentOverrideModule (copy), FFlagBuildExperiencePromptFailureTelemetry (copy), ClassifyRequestFailureModule (copy), HistoryIngestModule (copy), SessionRegistryModule (copy), ConstantsModule (copy), IngestFrameHandlerModule (copy), FFlagBuildAgentAdCampaignToolCallStatusFallback (copy)
+	-- upvalues: WithCsrfRetryModule (copy), HttpClientModule (copy), AcpProtocolModule (copy), config (copy), RpcDecoderModule (copy), SignalsModule (copy), OnTerminalModule (copy), appendSessionListEntries (copy), FFlagBuildAgentAdCampaignCardModule (copy), DecodeAdCampaignToolCallStatusResultModule (copy), CreateTurnHandleModule (copy), ExperimentOverrideModule (copy), FFlagBuildExperienceLibrary (copy), FFlagBuildExperiencePromptFailureTelemetry (copy), ClassifyRequestFailureModule (copy), HistoryIngestModule (copy), SessionRegistryModule (copy), ConstantsModule (copy), IngestFrameHandlerModule (copy), FFlagBuildAgentAdCampaignToolCallStatusFallback (copy)
 	local P4 = p1 or {}
 	local Network = P4.network or WithCsrfRetryModule(HttpClientModule.createRequestInternalNetwork())
 	local BaseUrl = P4.baseUrl or AcpProtocolModule.acpUrl()
@@ -397,7 +399,7 @@ return function(p1)
 	end
 	
 	local function sessionPrompt(p6)
-		-- upvalues: P4 (copy), Count (ref), CreateTurnHandleModule (upval), AcpProtocolModule (upval), rpcCall (copy), OnTerminalModule (upval), t (copy), t2 (copy), t1 (copy), ExperimentOverrideModule (upval), FFlagBuildExperiencePromptFailureTelemetry (upval), ClassifyRequestFailureModule (upval)
+		-- upvalues: P4 (copy), Count (ref), CreateTurnHandleModule (upval), AcpProtocolModule (upval), rpcCall (copy), OnTerminalModule (upval), t (copy), t2 (copy), t1 (copy), ExperimentOverrideModule (upval), FFlagBuildExperienceLibrary (upval), FFlagBuildExperiencePromptFailureTelemetry (upval), ClassifyRequestFailureModule (upval)
 		assert(p6 and (typeof(p6.sessionId) == "string" and p6.sessionId ~= ""), "sessionId is required")
 		assert(p6.prompt, "prompt is required")
 		local SessionId = p6.sessionId
@@ -459,7 +461,7 @@ return function(p1)
 			meta = p6._meta,
 			experiment = if ExperimentOverrideModule.isEnabled() then p6.experiment else nil
 		})))
-		OnTerminalModule(RpcCallResult.state, nil, function(p7, p8)
+		OnTerminalModule(RpcCallResult.state, if FFlagBuildExperienceLibrary then Entry.markAccepted else nil, function(p7, p8)
 			-- upvalues: FFlagBuildExperiencePromptFailureTelemetry (upval), ClassifyRequestFailureModule (upval), RpcCallResult (copy), Entry (copy), t (upval), t2 (upval), t1 (upval)
 			local ClassifyRequestFailureModuleResult = if FFlagBuildExperiencePromptFailureTelemetry then ClassifyRequestFailureModule(RpcCallResult.state(false)) else nil
 			task.defer(function()

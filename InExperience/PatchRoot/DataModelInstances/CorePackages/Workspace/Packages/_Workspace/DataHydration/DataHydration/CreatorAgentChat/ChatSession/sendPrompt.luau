@@ -1,14 +1,16 @@
 ﻿local Parent = script:FindFirstAncestor("DataHydration").Parent
+local SharedFlagsModule = require(Parent.SharedFlags)
 local SignalsModule = require(Parent.Signals)
 local _ = require(script.Parent.Parent.types)
-local FFlagBuildExperiencePromptFailureTelemetry = require(Parent.SharedFlags).FFlagBuildExperiencePromptFailureTelemetry
+local FFlagBuildExperiencePromptFailureTelemetry = SharedFlagsModule.FFlagBuildExperiencePromptFailureTelemetry
+local FFlagBuildExperienceLibrary = SharedFlagsModule.FFlagBuildExperienceLibrary
 
 return {
 	createSendPrompt = function(p1)
-		-- upvalues: SignalsModule (copy), FFlagBuildExperiencePromptFailureTelemetry (copy)
+		-- upvalues: SignalsModule (copy), FFlagBuildExperiencePromptFailureTelemetry (copy), FFlagBuildExperienceLibrary (copy)
 		return {
 			sendPrompt = function(p2)
-				-- upvalues: p1 (copy), SignalsModule (upval), FFlagBuildExperiencePromptFailureTelemetry (upval)
+				-- upvalues: p1 (copy), SignalsModule (upval), FFlagBuildExperiencePromptFailureTelemetry (upval), FFlagBuildExperienceLibrary (upval)
 				local IncrementAssistantTurnSequenceResult = p1.incrementAssistantTurnSequence()
 				local Signal, Signal2 = SignalsModule.createSignal(nil)
 				local Signal1, Signal2_1 = SignalsModule.createSignal(nil)
@@ -16,6 +18,7 @@ return {
 				local Flag1 = false
 				local Flag2 = false
 				local Flag3 = false
+				local Flag4 = false
 				local v1 = nil
 				local Callback1: (() -> ())? = nil
 				local Callback: (() -> ())? = nil
@@ -44,12 +47,12 @@ return {
 				end
 				
 				local function start()
-					-- upvalues: Flag (ref), Flag3 (ref), fireCompleted (copy), p1 (upval), Signal2_1 (copy), FFlagBuildExperiencePromptFailureTelemetry (upval), p2 (copy), v1 (ref), Signal2 (copy), Callback1 (ref), Callback (ref), SignalsModule (upval), Flag2 (ref)
+					-- upvalues: Flag (ref), Flag4 (ref), fireCompleted (copy), p1 (upval), Signal2_1 (copy), FFlagBuildExperiencePromptFailureTelemetry (upval), p2 (copy), v1 (ref), Signal2 (copy), Callback1 (ref), Callback (ref), SignalsModule (upval), FFlagBuildExperienceLibrary (upval), Flag3 (ref), Flag2 (ref)
 					if not Flag then
 						Flag = true
 						task.spawn(function()
-							-- upvalues: Flag3 (upval), fireCompleted (upval), p1 (upval), Signal2_1 (upval), FFlagBuildExperiencePromptFailureTelemetry (upval), p2 (upval), v1 (upval), Signal2 (upval), Callback1 (upval), Callback (upval), SignalsModule (upval), Flag2 (upval)
-							if Flag3 then
+							-- upvalues: Flag4 (upval), fireCompleted (upval), p1 (upval), Signal2_1 (upval), FFlagBuildExperiencePromptFailureTelemetry (upval), p2 (upval), v1 (upval), Signal2 (upval), Callback1 (upval), Callback (upval), SignalsModule (upval), FFlagBuildExperienceLibrary (upval), Flag3 (upval), Flag2 (upval)
+							if Flag4 then
 								fireCompleted(nil)
 								
 								return
@@ -74,7 +77,7 @@ return {
 								
 								return
 							end
-							if Flag3 then
+							if Flag4 then
 								fireCompleted(nil)
 								
 								return
@@ -87,7 +90,7 @@ return {
 							v1 = SessionPromptResult
 							Signal2(SessionPromptResult)
 							
-							if Flag3 then
+							if Flag4 then
 								SessionPromptResult.cancel()
 							end
 							Callback1 = p1.startPollingTurnFromHistory(EnsureCasSessionResult, SessionPromptResult, {
@@ -99,9 +102,17 @@ return {
 								onDroppedChatMessage = p2.onDroppedChatMessage
 							})
 							Callback = SignalsModule.createEffect(function(p3)
-								-- upvalues: SessionPromptResult (copy), p2 (upval), Flag2 (upval), fireCompleted (upval)
+								-- upvalues: SessionPromptResult (copy), FFlagBuildExperienceLibrary (upval), p2 (upval), Flag3 (upval), Flag2 (upval), fireCompleted (upval)
 								local StateResult = SessionPromptResult.state(p3)
 								
+								if FFlagBuildExperienceLibrary and p2.onAccepted ~= nil and not Flag3 then
+									local NoIsDone: boolean = SessionPromptResult.isAccepted(p3) and not StateResult.isDone
+									
+									if StateResult.status == "streaming" or StateResult.status == "succeeded" or NoIsDone then
+										Flag3 = true
+										p2.onAccepted()
+									end
+								end
 								if p2.onReceived ~= nil and not Flag2 and (StateResult.status == "streaming" or StateResult.status == "succeeded") then
 									Flag2 = true
 									p2.onReceived(SessionPromptResult.getTurnId())
@@ -117,9 +128,9 @@ return {
 				end
 				
 				local function stop()
-					-- upvalues: Flag1 (ref), Flag3 (ref), v1 (ref), Callback (ref), Callback1 (ref), fireCompleted (copy)
+					-- upvalues: Flag1 (ref), Flag4 (ref), v1 (ref), Callback (ref), Callback1 (ref), fireCompleted (copy)
 					if Flag1 then return end
-					Flag3 = true
+					Flag4 = true
 					
 					if v1 ~= nil then
 						v1.cancel()

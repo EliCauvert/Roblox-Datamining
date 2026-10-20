@@ -16,12 +16,7 @@ return function(p1)
 	if not ChatAppReducerConversations1 then
 		return {}
 	end
-	local ChatAppReducerConversationsAsyncLatestMessagesIsFetching = GetDeepValueModule(p1, "ChatAppReducer.ConversationsAsync.latestMessagesIsFetching")
-	
 	if ChatAppReducerConversations1 == ChatAppReducerConversations then
-		return v1
-	end
-	if ChatAppReducerConversationsAsyncLatestMessagesIsFetching and v1 then
 		return v1
 	end
 	local List = {}

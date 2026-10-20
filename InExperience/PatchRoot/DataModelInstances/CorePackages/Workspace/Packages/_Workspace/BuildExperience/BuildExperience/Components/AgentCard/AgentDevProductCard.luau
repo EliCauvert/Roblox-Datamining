@@ -3,6 +3,7 @@ local Parent = BuildExperience.Parent
 local FoundationModule = require(Parent.Foundation)
 local LocalizationModule = require(Parent.Localization)
 local ReactModule = require(Parent.React)
+local _ = require(BuildExperience.Chat.chatTypes)
 local LocalizationStringsModule = require(BuildExperience.LocalizationStrings)
 local FFlagBuildExperienceMonetizationNativeUIModule = require(BuildExperience.Flags.FFlagBuildExperienceMonetizationNativeUI)
 local FFlagBuildExperienceDevProductRecoveryModule = require(BuildExperience.Flags.FFlagBuildExperienceDevProductRecovery)

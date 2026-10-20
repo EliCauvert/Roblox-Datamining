@@ -20,6 +20,7 @@ local SignalREventsModule = require(ProfileQRCode.Common.SignalREvents)
 local GetFStringProfileQRCodeFriendRequestAlertsExperimentKeyModule = require(ProfileQRCode.Flags.getFStringProfileQRCodeFriendRequestAlertsExperimentKey)
 local GetFStringProfileQRCodeFriendRequestAlertsLayerModule = require(ProfileQRCode.Flags.getFStringProfileQRCodeFriendRequestAlertsLayer)
 local FFlagQRCodeFriendRequestNotificationV2Module = require(ProfileQRCode.Flags.FFlagQRCodeFriendRequestNotificationV2)
+local FFlagQRCodeHideBannerForTrustedFriendRequestModule = require(ProfileQRCode.Flags.FFlagQRCodeHideBannerForTrustedFriendRequest)
 local IconsActionsFriendsFriendAdd = UIBloxModule.App.ImageSet.Images["icons/actions/friends/friendAdd"]
 
 return (require(Parent.RoactAppExperiment).connectUserLayer({ GetFStringProfileQRCodeFriendRequestAlertsLayerModule() }, function(p1, _)
@@ -28,7 +29,7 @@ return (require(Parent.RoactAppExperiment).connectUserLayer({ GetFStringProfileQ
 		profileQRCodeFriendRequestAlertsEnabled = (p1[GetFStringProfileQRCodeFriendRequestAlertsLayerModule()] or {})[GetFStringProfileQRCodeFriendRequestAlertsExperimentKeyModule()]
 	}
 end, false)(function(p1)
-	-- upvalues: UseLocalizationFunction (copy), TextKeysModule (copy), UseAnalyticsModule (copy), ReactModule (copy), FFlagQRCodeFriendRequestNotificationV2Module (copy), IXPService (copy), GetFStringProfileQRCodeFriendRequestAlertsLayerModule (copy), CryoModule (copy), UseLocalUserIdFunction (copy), UseGetUsersInfoUrlModule (copy), UseAcceptFriendUrlModule (copy), SignalREventsModule (copy), FriendsNetworkingModule (copy), ProfileQRCodeTopBarModule (copy), Toast (copy), IconsActionsFriendsFriendAdd (copy), QRCodeFriendRequestNotificationModule (copy), EventNamesModule (copy), FriendAcceptedSnackbarModule (copy)
+	-- upvalues: UseLocalizationFunction (copy), TextKeysModule (copy), UseAnalyticsModule (copy), ReactModule (copy), FFlagQRCodeFriendRequestNotificationV2Module (copy), IXPService (copy), GetFStringProfileQRCodeFriendRequestAlertsLayerModule (copy), CryoModule (copy), UseLocalUserIdFunction (copy), UseGetUsersInfoUrlModule (copy), UseAcceptFriendUrlModule (copy), FFlagQRCodeHideBannerForTrustedFriendRequestModule (copy), SignalREventsModule (copy), FriendsNetworkingModule (copy), ProfileQRCodeTopBarModule (copy), Toast (copy), IconsActionsFriendsFriendAdd (copy), QRCodeFriendRequestNotificationModule (copy), EventNamesModule (copy), FriendAcceptedSnackbarModule (copy)
 	local UseLocalizationResult = UseLocalizationFunction({ friendAdded = TextKeysModule.FriendAdded })
 	local UseAnalyticsModuleResult = UseAnalyticsModule()
 	local ProfileQRCodeFriendRequestAlertsEnabled = p1.profileQRCodeFriendRequestAlertsEnabled
@@ -37,19 +38,19 @@ end, false)(function(p1)
 	local AcceptedFriendUserId = nil
 	local Callback2 = nil
 	local NewFriendIsTrusted = nil
-	local Callback = nil
-	local v1 = nil
 	local Callback1 = nil
+	local v1 = nil
+	local Callback = nil
 	local UseResult = nil
 	
 	if FFlagQRCodeFriendRequestNotificationV2Module then
 		AcceptedFriendUserId, Callback2 = ReactModule.useState("")
-		NewFriendIsTrusted, Callback = ReactModule.useState(false)
-		v1, Callback1 = ReactModule.useState(false)
+		NewFriendIsTrusted, Callback1 = ReactModule.useState(false)
+		v1, Callback = ReactModule.useState(false)
 		UseResult = ReactModule.useCallback(function()
-			-- upvalues: Callback1 (ref), Callback (ref)
-			Callback1(false)
+			-- upvalues: Callback (ref), Callback1 (ref)
 			Callback(false)
+			Callback1(false)
 		end, {})
 	end
 	local UseReducerResult, UseReducerResult2 = ReactModule.useReducer(function(p2, p3)
@@ -76,7 +77,8 @@ end, false)(function(p1)
 	end else nil
 	
 	local function friendshipNotificationReceived(p2)
-		-- upvalues: SignalREventsModule (upval), FriendsNetworkingModule (upval), UseLocalUserIdResult (copy), UseGetUsersInfoUrlModuleResult (copy), UseReducerResult2 (copy), FFlagQRCodeFriendRequestNotificationV2Module (upval), v2 (ref), Callback2 (ref), Callback1 (ref), Callback (ref)
+		-- upvalues: FFlagQRCodeHideBannerForTrustedFriendRequestModule (upval), SignalREventsModule (upval), FriendsNetworkingModule (upval), UseLocalUserIdResult (copy), UseGetUsersInfoUrlModuleResult (copy), UseReducerResult2 (copy), FFlagQRCodeFriendRequestNotificationV2Module (upval), v2 (ref), Callback2 (ref), Callback (ref), Callback1 (ref)
+		if FFlagQRCodeHideBannerForTrustedFriendRequestModule and p2.Type == SignalREventsModule.FriendshipRequested and p2.EventArgs.TrustedFriendSource == "QrCrossAge" then return end
 		if p2.Type == SignalREventsModule.FriendshipRequested and p2.EventArgs.SourceType == FriendsNetworkingModule.Enums.FriendshipOriginSourceType.QrCode.rawValue() then
 			local Text = tostring(p2.EventArgs.UserId1)
 			
@@ -99,10 +101,10 @@ end, false)(function(p1)
 					Text = v2
 					Text = Text(p2.EventArgs)
 					UseGetUsersInfoUrlModuleResult(Text):andThen(function()
-						-- upvalues: Callback2 (upval), Text (copy), Callback1 (upval), Callback (upval), p2 (copy)
+						-- upvalues: Callback2 (upval), Text (copy), Callback (upval), Callback1 (upval), p2 (copy)
 						Callback2(Text)
-						Callback1(true)
-						Callback(p2.EventArgs.IsTrustedFriend)
+						Callback(true)
+						Callback1(p2.EventArgs.IsTrustedFriend)
 					end)
 				end
 			end

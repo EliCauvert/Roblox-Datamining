@@ -3695,6 +3695,7 @@ Feature.Moments.Action.Retry,
 Feature.Moments.Action.RetryLoadingComments,コメントの読み込みを再試行
 Feature.Moments.Action.Return,ギャラリーに戻る
 Feature.Moments.Action.ReturnToEditing,編集に戻る
+Feature.Moments.Action.Save,
 Feature.Moments.Action.SaveVoiceover,
 Feature.Moments.Action.ShowDetails,
 Feature.Moments.Action.ShowMore,

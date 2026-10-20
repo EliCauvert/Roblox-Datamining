@@ -38,6 +38,7 @@ local function makeTurnHandle(SessionId)
 		activityItems = {},
 		toolCalls = {}
 	})
+	local Signal1, Signal2_1 = SignalsModule.createSignal(false)
 	local Flag = false
 	local TurnId = nil
 	local t = {}
@@ -98,6 +99,7 @@ local function makeTurnHandle(SessionId)
 				Total -= 1
 			end
 		end,
+		isAccepted = Signal1,
 		cancel = function()
 			-- upvalues: Flag (ref), Signal (copy), Signal2 (copy)
 			Flag = true
@@ -151,6 +153,10 @@ local function makeTurnHandle(SessionId)
 			local Copy = table.clone(Signal(false))
 			Copy.status = "streaming"
 			Signal2(Copy)
+		end,
+		markAccepted = function()
+			-- upvalues: Signal2_1 (copy)
+			Signal2_1(true)
 		end,
 		fail = function()
 			-- upvalues: Signal (copy), Signal2 (copy)

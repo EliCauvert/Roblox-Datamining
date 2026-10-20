@@ -77,12 +77,13 @@ return {
 		end, { UseLocalizationResult.gameShared, UseContextResult })
 		local MessagePlaceholder = UseLocalizationResult.messagePlaceholder
 		
-		return ReactModule.useCallback(function(p2)
+		return ReactModule.useCallback(function(p2, RecipientSource)
 			-- upvalues: UniversalShareSheet (upval), UseResult (copy), MessagePlaceholder (copy), p1 (copy), CreateExperienceShareLinkModule (upval)
 			local function showShareSheet(Result)
-				-- upvalues: UniversalShareSheet (upval), p2 (copy), UseResult (upval), MessagePlaceholder (upval)
+				-- upvalues: UniversalShareSheet (upval), RecipientSource (copy), p2 (copy), UseResult (upval), MessagePlaceholder (upval)
 				UniversalShareSheet.show({
 					context = "BuildExperienceGameShare",
+					recipientSource = RecipientSource,
 					telemetryId = tostring(p2),
 					formatSuccessSnackbarText = UseResult,
 					messagePlaceholder = MessagePlaceholder,
@@ -93,6 +94,7 @@ return {
 			if p1 == nil then
 				UniversalShareSheet.show({
 					context = "BuildExperienceGameShare",
+					recipientSource = RecipientSource,
 					telemetryId = tostring(p2),
 					formatSuccessSnackbarText = UseResult,
 					messagePlaceholder = MessagePlaceholder,
@@ -102,9 +104,10 @@ return {
 				return
 			else
 				CreateExperienceShareLinkModule(p1, false):andThen(showShareSheet, function()
-					-- upvalues: UniversalShareSheet (upval), p2 (copy), UseResult (upval), MessagePlaceholder (upval)
+					-- upvalues: UniversalShareSheet (upval), RecipientSource (copy), p2 (copy), UseResult (upval), MessagePlaceholder (upval)
 					UniversalShareSheet.show({
 						context = "BuildExperienceGameShare",
+						recipientSource = RecipientSource,
 						telemetryId = tostring(p2),
 						formatSuccessSnackbarText = UseResult,
 						messagePlaceholder = MessagePlaceholder,
@@ -115,7 +118,7 @@ return {
 		end, { UseResult, MessagePlaceholder, p1 })
 	end else function()
 		-- upvalues: ReactModule (copy), sharePublishedExperience (copy)
-		return ReactModule.useCallback(function(p1)
+		return ReactModule.useCallback(function(p1, _)
 			-- upvalues: sharePublishedExperience (upval)
 			sharePublishedExperience(p1, nil)
 		end, {})

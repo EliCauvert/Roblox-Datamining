@@ -28,11 +28,12 @@ local TotalPlaytime = {
 }
 local PlaythroughRate = {
 	overviewPath = "analytics/acquisition",
+	requiredMilestone = "universe_first_home_recommendation_impression_achieved",
 	id = MetricId.RFYPlayThroughRate,
 	titleKey = AnalyticsKeysModule.ANALYTICS_METRIC_TITLE_PLAYTHROUGH_RATE,
 	unit = AnalyticsUnitModule.Percent,
 	chartIcon = IconName.CirclePlay,
-	summaryKey = AnalyticsKeysModule.ANALYTICS_METRIC_SUMMARY_PLAYTHROUGH_RATE,
+	summaryKey = if FFlagBuildAnalyticsGoalsModule then AnalyticsKeysModule.ANALYTICS_METRIC_SUMMARY_AVERAGE_OVER_SELECTED_PERIOD else AnalyticsKeysModule.ANALYTICS_METRIC_SUMMARY_PLAYTHROUGH_RATE,
 	descriptionKey = AnalyticsKeysModule.ANALYTICS_METRIC_DESC_PLAYTHROUGH_RATE,
 	analyzeNameKey = AnalyticsKeysModule.ANALYTICS_METRIC_ANALYZE_NAME_PLAYTHROUGH_RATE
 }

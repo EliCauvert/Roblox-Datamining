@@ -42,6 +42,7 @@ local FFlagMomentsTTSDraftRestoreModule = require(MomentsCreation.Flags.FFlagMom
 local GetFFlagMomentsCreationCloseButtonZIndexFixModule = require(MomentsCreation.Flags.GetFFlagMomentsCreationCloseButtonZIndexFix)
 local FFlagMomentsCreationToolsIxpEnabledModule = require(MomentsCreation.Flags.FFlagMomentsCreationToolsIxpEnabled)
 local FFlagMomentsCreationMusicChipRemoveButtonModule = require(MomentsCreation.Flags.FFlagMomentsCreationMusicChipRemoveButton)
+local FFlagMomentsCreationMusicEditorRedesignModule = require(MomentsCreation.Flags.FFlagMomentsCreationMusicEditorRedesign)
 local FStringMomentsCreationToolsIxpLayerModule = require(MomentsCreation.Flags.FStringMomentsCreationToolsIxpLayer)
 local FFlagMomentsCreationToolsIxpEnabled2Module = require(MomentsCreation.Flags.FFlagMomentsCreationToolsIxpEnabled2)
 local FStringMomentsCreationToolsIxpLayer2Module = require(MomentsCreation.Flags.FStringMomentsCreationToolsIxpLayer2)
@@ -52,6 +53,7 @@ local LogMomentsLayerExposureFunction = MomentsCommonModule.Utils.logMomentsLaye
 local StepStubModule = require(script.Parent.StepStub)
 local CreationFlowStateModule = require(MomentsCreation.Enums.CreationFlowState)
 local DialogTypeModule = require(MomentsCreation.Enums.DialogType)
+local DockedEditorContextModule = require(MomentsCreation.Contexts.DockedEditorContext)
 local _ = require(MomentsCreation.Types.CreationFlowTypes)
 local CaptureViewModule = require(MomentsCreation.Components.CaptureView)
 local CreationMediaProviderModule = require(MomentsCreation.Components.CreationMediaProvider)
@@ -96,7 +98,7 @@ local function GallerySourceView(p1)
 end
 
 local function CreationFlowContent(p1)
-	-- upvalues: UseCreationControllerFunction (copy), GetFFlagMomentsCreationSaveDraftFunction (copy), UseDraftRestoreEffectModule (copy), UseDraftSaveEffectModule (copy), FFlagMomentsTTSDraftRestoreModule (copy), UseRestoredVoiceoverCheckModule (copy), UseDeviceInsetsFunction (copy), UseTokensFunction (copy), UseFormFactorFunction (copy), UseToggleStateFunction (copy), UseAutoDismissStateModule (copy), UseSignalStateFunction (copy), UseDescriptionKeyboardInsetModule (copy), CreationFlowStateModule (copy), GetFFlagMomentsTTSAudioOverlayModule (copy), UseCallbackFunction (copy), SessionManager (copy), FunnelEventNames (copy), CryoModule (copy), MakeCreationEventFieldsModule (copy), FireAnalyticsEventModule (copy), EventNames (copy), DialogTypeModule (copy), UseRefFunction (copy), UseEffectFunction (copy), GetFFlagMomentsStickerButtonFunction (copy), FFlagMomentsCreationToolsIxpEnabledModule (copy), LogMomentsLayerExposureFunction (copy), FStringMomentsCreationToolsIxpLayerModule (copy), FFlagMomentsCreationToolsIxpEnabled2Module (copy), FStringMomentsCreationToolsIxpLayer2Module (copy), FFlagMomentsCreationToolsIxpEnabled3Module (copy), FStringMomentsCreationToolsIxpLayer3Module (copy), ReactModule (copy), ExitConfirmationDialogModule (copy), TextFilteredDialogModule (copy), GenerateTextOptionsDialogModule (copy), VoiceoverErrorDialogModule (copy), VoiceoverDeleteConfirmDialogModule (copy), VoiceSelectorDialogModule (copy), StepStubModule (copy), UseMemoFunction (copy), SignalsModule (copy), FFlagMomentsTextOverlayDragToDeleteRefinementModule (copy), View (copy), StateLayer (copy), FormFactor (copy), noopActivated (copy), VoiceBackControlsModule (copy), GetFFlagMomentsCreationCloseButtonZIndexFixModule (copy), Icon (copy), FoundationModule (copy), CaptureViewModule (copy), GradientBackdrop (copy), MusicChipModule (copy), FFlagMomentsCreationMusicChipRemoveButtonModule (copy), PlaybackControlsModule (copy), EditCTABarModule (copy), GetFFlagEnableMomentTextGenerationFunction (copy), GetFFlagMomentsTTSCoachmarkModule (copy), GallerySourceView (copy), GalleryViewModule (copy), SampleCapturesModule1 (copy), PreviewViewModule (copy), DescriptionViewModule (copy), CreationMediaProviderModule (copy)
+	-- upvalues: UseCreationControllerFunction (copy), GetFFlagMomentsCreationSaveDraftFunction (copy), UseDraftRestoreEffectModule (copy), UseDraftSaveEffectModule (copy), FFlagMomentsTTSDraftRestoreModule (copy), UseRestoredVoiceoverCheckModule (copy), UseDeviceInsetsFunction (copy), UseTokensFunction (copy), UseFormFactorFunction (copy), UseToggleStateFunction (copy), UseAutoDismissStateModule (copy), UseSignalStateFunction (copy), UseDescriptionKeyboardInsetModule (copy), CreationFlowStateModule (copy), GetFFlagMomentsTTSAudioOverlayModule (copy), FFlagMomentsCreationMusicEditorRedesignModule (copy), ReactModule (copy), UseMemoFunction (copy), UseCallbackFunction (copy), SessionManager (copy), FunnelEventNames (copy), CryoModule (copy), MakeCreationEventFieldsModule (copy), FireAnalyticsEventModule (copy), EventNames (copy), DialogTypeModule (copy), UseRefFunction (copy), UseEffectFunction (copy), GetFFlagMomentsStickerButtonFunction (copy), FFlagMomentsCreationToolsIxpEnabledModule (copy), LogMomentsLayerExposureFunction (copy), FStringMomentsCreationToolsIxpLayerModule (copy), FFlagMomentsCreationToolsIxpEnabled2Module (copy), FStringMomentsCreationToolsIxpLayer2Module (copy), FFlagMomentsCreationToolsIxpEnabled3Module (copy), FStringMomentsCreationToolsIxpLayer3Module (copy), ExitConfirmationDialogModule (copy), TextFilteredDialogModule (copy), GenerateTextOptionsDialogModule (copy), VoiceoverErrorDialogModule (copy), VoiceoverDeleteConfirmDialogModule (copy), VoiceSelectorDialogModule (copy), StepStubModule (copy), SignalsModule (copy), FFlagMomentsTextOverlayDragToDeleteRefinementModule (copy), View (copy), StateLayer (copy), FormFactor (copy), noopActivated (copy), VoiceBackControlsModule (copy), GetFFlagMomentsCreationCloseButtonZIndexFixModule (copy), Icon (copy), FoundationModule (copy), CaptureViewModule (copy), GradientBackdrop (copy), MusicChipModule (copy), FFlagMomentsCreationMusicChipRemoveButtonModule (copy), PlaybackControlsModule (copy), EditCTABarModule (copy), GetFFlagEnableMomentTextGenerationFunction (copy), GetFFlagMomentsTTSCoachmarkModule (copy), GallerySourceView (copy), GalleryViewModule (copy), SampleCapturesModule1 (copy), PreviewViewModule (copy), DescriptionViewModule (copy), DockedEditorContextModule (copy), CreationMediaProviderModule (copy)
 	local UseCreationControllerResult = UseCreationControllerFunction()
 	
 	if GetFFlagMomentsCreationSaveDraftFunction() then
@@ -121,6 +123,17 @@ local function CreationFlowContent(p1)
 	local UseSignalStateResult6 = UseSignalStateFunction(UseCreationControllerResult.getIsGenerating)
 	local Music = UseSignalStateResult2.music
 	local UseDescriptionKeyboardInsetModuleResult, UseDescriptionKeyboardInsetModuleResult2 = UseDescriptionKeyboardInsetModule(UseSignalStateResult == CreationFlowStateModule.Description or GetFFlagMomentsTTSAudioOverlayModule and UseSignalStateResult == CreationFlowStateModule.Voice)
+	local v2 = 0
+	local Value = nil
+	
+	if FFlagMomentsCreationMusicEditorRedesignModule then
+		local UseStateResult2
+		v2, UseStateResult2 = ReactModule.useState(0)
+		Value = UseMemoFunction(function()
+			-- upvalues: UseStateResult2 (copy)
+			return { setDockedEditorHeight = UseStateResult2 }
+		end, { UseStateResult2 })
+	end
 	local CaptureSource = p1.captureSource
 	local UseCallbackResult = UseCallbackFunction(function(p2)
 		-- upvalues: UseCreationControllerResult (copy), UseAutoDismissStateModuleResult2 (copy)
@@ -331,7 +344,7 @@ local function CreationFlowContent(p1)
 			stateLayer = StateLayer
 		}, {
 			VoiceBackControls = if GetFFlagMomentsTTSAudioOverlayModule and UseSignalStateResult == CreationFlowStateModule.Voice then ReactModule.createElement(VoiceBackControlsModule) else nil,
-			CloseButtonContainer = if GetFFlagMomentsTTSAudioOverlayModule and UseSignalStateResult == CreationFlowStateModule.Voice then nil elseif FFlagMomentsTextOverlayDragToDeleteRefinementModule and UseSignalStateResult7 then nil else ReactModule.createElement(View, {
+			CloseButtonContainer = if GetFFlagMomentsTTSAudioOverlayModule and UseSignalStateResult == CreationFlowStateModule.Voice then nil elseif v2 > 0 then nil elseif FFlagMomentsTextOverlayDragToDeleteRefinementModule and UseSignalStateResult7 then nil else ReactModule.createElement(View, {
 				tag = "position-top-right anchor-top-right auto-xy",
 				padding = {
 					top = UDim.new(0, UseDeviceInsetsResult.top + UseTokensResult.Padding.Medium),
@@ -362,7 +375,8 @@ local function CreationFlowContent(p1)
 				MainView = ReactModule.createElement(View, {
 					tag = "col align-x-center",
 					Size = UseDescriptionKeyboardInsetModuleResult:map(function(p2): UDim2
-						return UDim2.new(1, 0, 1, -p2)
+						-- upvalues: v2 (ref)
+						return UDim2.new(1, 0, 1, -(p2 + v2))
 					end)
 				}, {
 					PreviewContainer = ReactModule.createElement("CanvasGroup", {
@@ -494,7 +508,7 @@ local function CreationFlowContent(p1)
 						onReturnToEditing = UseCallbackResult3
 					}) else nil
 				}),
-				MusicView = UseCallbackResult11("Overlay")
+				MusicView = if FFlagMomentsCreationMusicEditorRedesignModule then ReactModule.createElement(DockedEditorContextModule.Provider, { value = Value }, { MusicView = UseCallbackResult11("Overlay") }) else UseCallbackResult11("Overlay")
 			})
 		}),
 		Modal = UseCallbackResult10()

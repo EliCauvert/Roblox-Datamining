@@ -3695,6 +3695,7 @@ Feature.Moments.Action.Retry,
 Feature.Moments.Action.RetryLoadingComments,Actualiser les commentaires
 Feature.Moments.Action.Return,Revenir à la galerie
 Feature.Moments.Action.ReturnToEditing,Revenir aux modifications
+Feature.Moments.Action.Save,
 Feature.Moments.Action.SaveVoiceover,
 Feature.Moments.Action.ShowDetails,Afficher les détails
 Feature.Moments.Action.ShowMore,

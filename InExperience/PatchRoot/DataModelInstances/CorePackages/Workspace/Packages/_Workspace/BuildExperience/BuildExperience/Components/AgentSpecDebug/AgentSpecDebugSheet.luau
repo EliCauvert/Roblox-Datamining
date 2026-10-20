@@ -185,9 +185,11 @@ return function(p2)
 	return ReactModule.createElement(Sheet.Root, {
 		isOpen = true,
 		preferCenterSheet = true,
-		onClose = p2.onClose
+		onClose = p2.onClose,
+		ref = p2.focusRootRef,
+		testId = p2.testId
 	}, {
-		Header = ReactModule.createElement(Sheet.Header, { hasCloseAffordance = true }, {
+		Header = ReactModule.createElement(Sheet.Header, { hasCloseAffordance = p2.hasCloseAffordance ~= false }, {
 			Title = ReactModule.createElement(Text, {
 				Text = "Agent Spec",
 				tag = "auto-xy text-heading-small content-emphasis"

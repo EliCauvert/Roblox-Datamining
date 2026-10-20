@@ -3694,6 +3694,7 @@ Feature.Moments.Action.Retry,
 Feature.Moments.Action.RetryLoadingComments,重新嘗試載入留言
 Feature.Moments.Action.Return,返回圖庫
 Feature.Moments.Action.ReturnToEditing,返回編輯
+Feature.Moments.Action.Save,
 Feature.Moments.Action.SaveVoiceover,
 Feature.Moments.Action.ShowDetails,顯示詳細資訊
 Feature.Moments.Action.ShowMore,

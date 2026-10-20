@@ -2,11 +2,9 @@
 local RoactPaginator = require(AppChat.SocialLibraries).RoactPaginator
 local PromiseModule = require(AppChat.Parent.Promise)
 local FetchConversationsByPageModule = require(AppChat.Conversations.Thunks.fetchConversationsByPage)
-local NetworkingChatModule = require(AppChat.Http.NetworkingChat)
-local CreateConversationModule = require(AppChat.Conversations.Thunks.createConversation)
 
 return function(Callback)
-	-- upvalues: RoactPaginator (copy), FetchConversationsByPageModule (copy), PromiseModule (copy), NetworkingChatModule (copy), CreateConversationModule (copy)
+	-- upvalues: RoactPaginator (copy), FetchConversationsByPageModule (copy), PromiseModule (copy)
 	return {
 		[RoactPaginator.fetchInit] = function()
 			-- upvalues: Callback (copy), FetchConversationsByPageModule (upval)
@@ -29,14 +27,6 @@ return function(Callback)
 					end
 				end)()
 			end)
-		end,
-		startOneToOneConversation = function(p1)
-			-- upvalues: Callback (copy), NetworkingChatModule (upval)
-			return Callback(NetworkingChatModule.StartOneToOneConversation.API(p1))
-		end,
-		createOneToOneConversation = function(p1)
-			-- upvalues: Callback (copy), CreateConversationModule (upval)
-			return Callback(CreateConversationModule("one_to_one", { p1 }))
 		end
 	}
 end

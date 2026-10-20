@@ -31,6 +31,7 @@ local GetFFlagEnableAmpSubscriptionUpsellModule = require(AmpUpsell.Flags.GetFFl
 local GetFFlagEnableAmpVPCPrologueModule = require(AmpUpsell.Flags.GetFFlagEnableAmpVPCPrologue)
 local GetFFlagEnableAmpWizardInlineVPCForFAEModule = require(AmpUpsell.Flags.GetFFlagEnableAmpWizardInlineVPCForFAE)
 local GetFFlagEnableAmpWizardVPCNavigationFixModule = require(AmpUpsell.Flags.GetFFlagEnableAmpWizardVPCNavigationFix)
+local FFlagAmpWizardRetryKeepsNameSpaceModule = require(AmpUpsell.Flags.FFlagAmpWizardRetryKeepsNameSpace)
 local VPCPrologueModule = require(AmpUpsell.Components.Prologues.VPCPrologue)
 local LogEventOnceIfEnabledFunction = require(AmpUpsell.Common.LoggingUtils).logEventOnceIfEnabled
 local VPCApiProviderModule = require(AmpUpsell.Common.VPCApiProvider)
@@ -102,7 +103,7 @@ local function _(p1, List, p2): boolean
 end
 
 return function(p1)
-	-- upvalues: UseNavigationFunction (copy), FFlagAmpWizardEntryPointEventCtxFallback (copy), AmpApiProviderModule (copy), AnalyticsServiceModule (copy), UseRoactServiceFunction (copy), RoactNetworking (copy), ReactModule (copy), UseApolloClientFunction (copy), UseCompletionCallbackWithReturnPageModule (copy), FFlagEnableAmpWizardDeepLink (copy), ActionTypeEnum (copy), AppScreensModule (copy), CryoModule (copy), ActionStatusEnum (copy), AccessResponseEnum (copy), GetFFlagEnableAmpEmailUpsellSupportModule (copy), GetFFlagEnableAmpIDVUpsellSupportModule (copy), GetFFlagEnableAmpIDVUpsellPopOnCompletionModule (copy), GetFFlagEnableAmpWizardVPCNavigationFixModule (copy), LogEventOnceIfEnabledFunction (copy), GetFFlagEnableAmpSubscriptionUpsellModule (copy), UserSettingsSettingNameEnum (copy), GetFFlagEnableAmpVPCPrologueModule (copy), GetFFlagEnableAmpWizardInlineVPCForFAEModule (copy), AccountSettingsUpsellStringsFnFunction (copy), GetFFlagEnableAmpUpsellGqlModule (copy), getSuccessfulActions (copy), SendModalActionEventModule (copy), VPCRequestTypeEnum (copy), VPCApiProviderModule (copy), VPCPrologueController (copy), ErrorScreenModule (copy), Loading (copy), IconSize (copy)
+	-- upvalues: UseNavigationFunction (copy), FFlagAmpWizardEntryPointEventCtxFallback (copy), AmpApiProviderModule (copy), AnalyticsServiceModule (copy), UseRoactServiceFunction (copy), RoactNetworking (copy), ReactModule (copy), UseApolloClientFunction (copy), UseCompletionCallbackWithReturnPageModule (copy), FFlagEnableAmpWizardDeepLink (copy), ActionTypeEnum (copy), AppScreensModule (copy), CryoModule (copy), ActionStatusEnum (copy), AccessResponseEnum (copy), GetFFlagEnableAmpEmailUpsellSupportModule (copy), GetFFlagEnableAmpIDVUpsellSupportModule (copy), GetFFlagEnableAmpIDVUpsellPopOnCompletionModule (copy), GetFFlagEnableAmpWizardVPCNavigationFixModule (copy), LogEventOnceIfEnabledFunction (copy), GetFFlagEnableAmpSubscriptionUpsellModule (copy), UserSettingsSettingNameEnum (copy), GetFFlagEnableAmpVPCPrologueModule (copy), GetFFlagEnableAmpWizardInlineVPCForFAEModule (copy), AccountSettingsUpsellStringsFnFunction (copy), GetFFlagEnableAmpUpsellGqlModule (copy), getSuccessfulActions (copy), SendModalActionEventModule (copy), VPCRequestTypeEnum (copy), VPCApiProviderModule (copy), VPCPrologueController (copy), ErrorScreenModule (copy), FFlagAmpWizardRetryKeepsNameSpaceModule (copy), Loading (copy), IconSize (copy)
 	local UseNavigationResult = UseNavigationFunction()
 	local FeatureName = p1.featureName
 	local NameSpace = p1.nameSpace
@@ -552,9 +553,16 @@ return function(p1)
 	}) elseif UseStateResult1 then ReactModule.createElement(ErrorScreenModule, {
 		featureName = FeatureName,
 		onRetry = function()
-			-- upvalues: UseStateResult2_1 (copy), UseResult4 (copy), FeatureName (copy)
+			-- upvalues: UseStateResult2_1 (copy), FFlagAmpWizardRetryKeepsNameSpaceModule (upval), UseResult4 (copy), FeatureName (copy), NameSpace (copy)
 			UseStateResult2_1(false)
-			UseResult4(FeatureName)
+			
+			if FFlagAmpWizardRetryKeepsNameSpaceModule then
+				UseResult4(FeatureName, NameSpace)
+				
+				return
+			else
+				UseResult4(FeatureName)
+			end
 		end,
 		onCancel = function()
 			-- upvalues: Callback (copy), AccessResponseEnum (upval), UseStateResult (copy)

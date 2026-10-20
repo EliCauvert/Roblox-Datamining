@@ -15,6 +15,7 @@ local FFlagBuildExperienceManageDevProductModule = require(BuildExperience.Flags
 local FFlagEnableBuildAdPromotionModule = require(BuildExperience.Flags.FFlagEnableBuildAdPromotion)
 local FFlagBuildExperienceMenuImprovementsModule = require(BuildExperience.Flags.FFlagBuildExperienceMenuImprovements)
 local FFlagBuildExperienceAnalytics = require(Parent.SharedFlags).FFlagBuildExperienceAnalytics
+local FFlagBuildExperienceDisableNonPublicStatsModule = require(BuildExperience.Flags.FFlagBuildExperienceDisableNonPublicStats)
 local PrivacyType = UniverseConfigurationModule.PrivacyType
 
 local function _(): boolean
@@ -31,6 +32,11 @@ end
 
 local function isPlaytestDisabled(p1): boolean
 	return not (game.GameId == 0) or (p1.placeId == nil or p1.isNewGameTarget and not p1.hasPublishedTurn)
+end
+
+local function isStatsDisabled(p1): boolean
+	-- upvalues: PrivacyType (copy)
+	return p1.shareAudience ~= PrivacyType.Public
 end
 
 local function isVersionHistoryDisabled(p1): boolean
@@ -125,7 +131,7 @@ local config = {
 }
 
 return function()
-	-- upvalues: LocalizationStringsModule (copy), FFlagBuildExperiencePrivateInvitesModule (copy), isShareUnavailable (copy), onShareActivated (copy), isVersionHistoryDisabled (copy), onVersionHistoryActivated (copy), isInviteToPlaytestDisabled (copy), SendBuildExperienceEventModule (copy), GetPrivatePlaytestersStoreFunction (copy), FFlagBuildExperienceMenuImprovementsModule (copy), isAssistantDisabled (copy), onAssistantActivated (copy), isPlaytestDisabled (copy), onPlaytestActivated (copy), getPublishText (copy), FFlagBuildExperienceAnalytics (copy), FFlagBuildExperienceManageDevProductModule (copy), SignalsModule (copy), ReactModule (copy), SignalsReactModule (copy), UniverseConfigurationModule (copy), GameConfigurationLabelsModule (copy), FFlagEnableBuildAdPromotionModule (copy), PrivacyType (copy), config (copy)
+	-- upvalues: LocalizationStringsModule (copy), FFlagBuildExperiencePrivateInvitesModule (copy), isShareUnavailable (copy), onShareActivated (copy), isVersionHistoryDisabled (copy), onVersionHistoryActivated (copy), isInviteToPlaytestDisabled (copy), SendBuildExperienceEventModule (copy), GetPrivatePlaytestersStoreFunction (copy), FFlagBuildExperienceDisableNonPublicStatsModule (copy), isStatsDisabled (copy), PrivacyType (copy), FFlagBuildExperienceMenuImprovementsModule (copy), isAssistantDisabled (copy), onAssistantActivated (copy), isPlaytestDisabled (copy), onPlaytestActivated (copy), getPublishText (copy), FFlagBuildExperienceAnalytics (copy), FFlagBuildExperienceManageDevProductModule (copy), SignalsModule (copy), ReactModule (copy), SignalsReactModule (copy), UniverseConfigurationModule (copy), GameConfigurationLabelsModule (copy), FFlagEnableBuildAdPromotionModule (copy), config (copy)
 	local config1 = {
 		id = "settings",
 		text = LocalizationStringsModule.BUILD_MENU_SETTINGS,
@@ -168,8 +174,14 @@ return function()
 	local config5 = {
 		id = "stats",
 		text = LocalizationStringsModule.BUILD_MENU_STATS,
-		onActivated = function()
-			return { type = "openPage", page = "stats" }
+		isDisabled = if FFlagBuildExperienceDisableNonPublicStatsModule then isStatsDisabled else nil,
+		onActivated = function(p1)
+			-- upvalues: FFlagBuildExperienceDisableNonPublicStatsModule (upval), PrivacyType (upval)
+			if FFlagBuildExperienceDisableNonPublicStatsModule and p1.shareAudience ~= PrivacyType.Public then
+				return nil
+			else
+				return { type = "openPage", page = "stats" }
+			end
 		end
 	}
 	local config6 = {
@@ -254,7 +266,7 @@ return function()
 	return {
 		getItems = Signal,
 		useItems = function(p1)
-			-- upvalues: ReactModule (upval), SignalsModule (upval), FFlagBuildExperiencePrivateInvitesModule (upval), GetPrivatePlaytestersStoreFunction (upval), SignalsReactModule (upval), FFlagBuildExperienceAnalytics (upval), UniverseConfigurationModule (upval), GameConfigurationLabelsModule (upval), Signal (copy), FFlagEnableBuildAdPromotionModule (upval), FFlagBuildExperienceMenuImprovementsModule (upval), PrivacyType (upval), config5 (copy), FFlagBuildExperienceManageDevProductModule (upval), config6 (copy), config (upval), Value (ref)
+			-- upvalues: ReactModule (upval), SignalsModule (upval), FFlagBuildExperiencePrivateInvitesModule (upval), GetPrivatePlaytestersStoreFunction (upval), SignalsReactModule (upval), FFlagBuildExperienceAnalytics (upval), UniverseConfigurationModule (upval), GameConfigurationLabelsModule (upval), Signal (copy), FFlagEnableBuildAdPromotionModule (upval), FFlagBuildExperienceMenuImprovementsModule (upval), FFlagBuildExperienceDisableNonPublicStatsModule (upval), PrivacyType (upval), config5 (copy), FFlagBuildExperienceManageDevProductModule (upval), config6 (copy), config (upval), Value (ref)
 			local UniverseId = if p1 == nil then nil else p1.universeId
 			local UseSignalStateResult = if FFlagBuildExperienceAnalytics then SignalsReactModule.useSignalState((ReactModule.useMemo(function()
 				-- upvalues: SignalsModule (upval), UniverseId (copy), UniverseConfigurationModule (upval), GameConfigurationLabelsModule (upval)
@@ -266,11 +278,11 @@ return function()
 			local UseSignalStateResult1 = SignalsReactModule.useSignalState(Signal)
 			local IsGetUsersUserEligible: boolean = FFlagEnableBuildAdPromotionModule and (p1 ~= nil and (p1.canOpenGetUsers == true and p1.getUsersUserEligible == true))
 			local UseMemoResult = ReactModule.useMemo(function()
-				-- upvalues: FFlagBuildExperienceMenuImprovementsModule (upval), FFlagBuildExperienceAnalytics (upval), UseSignalStateResult (ref), PrivacyType (upval), config5 (upval), FFlagBuildExperienceManageDevProductModule (upval), config6 (upval), IsGetUsersUserEligible (copy), config (upval), FFlagBuildExperiencePrivateInvitesModule (upval), UseSignalStateResult1 (copy), Value (upval)
+				-- upvalues: FFlagBuildExperienceMenuImprovementsModule (upval), FFlagBuildExperienceAnalytics (upval), FFlagBuildExperienceDisableNonPublicStatsModule (upval), UseSignalStateResult (ref), PrivacyType (upval), config5 (upval), FFlagBuildExperienceManageDevProductModule (upval), config6 (upval), IsGetUsersUserEligible (copy), config (upval), FFlagBuildExperiencePrivateInvitesModule (upval), UseSignalStateResult1 (copy), Value (upval)
 				if FFlagBuildExperienceMenuImprovementsModule then
 					local List = {}
 					
-					if FFlagBuildExperienceAnalytics and UseSignalStateResult == PrivacyType.Public then
+					if FFlagBuildExperienceAnalytics and (FFlagBuildExperienceDisableNonPublicStatsModule or UseSignalStateResult == PrivacyType.Public) then
 						table.insert(List, config5)
 					end
 					if FFlagBuildExperienceManageDevProductModule then
@@ -289,7 +301,7 @@ return function()
 					end
 					return Copy
 				else
-					local IsNotUseSignalStateResultMatch: boolean = FFlagBuildExperienceAnalytics and UseSignalStateResult ~= PrivacyType.Public
+					local IsNotUseSignalStateResultMatch: boolean = FFlagBuildExperienceAnalytics and (not FFlagBuildExperienceDisableNonPublicStatsModule and UseSignalStateResult ~= PrivacyType.Public)
 					
 					if not FFlagBuildExperiencePrivateInvitesModule and not IsNotUseSignalStateResultMatch and not IsGetUsersUserEligible then
 						return UseSignalStateResult1

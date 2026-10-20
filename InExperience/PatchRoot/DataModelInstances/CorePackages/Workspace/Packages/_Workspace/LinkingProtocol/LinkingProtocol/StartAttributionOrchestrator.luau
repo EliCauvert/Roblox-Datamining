@@ -2,6 +2,7 @@
 local _ = require(Parent.LinkingProtocolTypes)
 local AttributionTelemetryModule = require(Parent.AttributionTelemetry)
 local GetFFlagEnableStartAttributionTelemetryModule = require(Parent.Flags.getFFlagEnableStartAttributionTelemetry)
+local GetFFlagAdConsentSkipOptOutAuthPublishModule = require(Parent.Flags.getFFlagAdConsentSkipOptOutAuthPublish)
 local FFlagAdConsentForwardCachedRegion = require(Parent.Parent.SharedFlags).FFlagAdConsentForwardCachedRegion
 local config = {
 	AT = true,
@@ -64,18 +65,20 @@ local StartAttributionOrchestratorModule = {
 	end
 }
 
-local _ = function(_, _): boolean
-	return true
+local _ = function(p1, Enabled): boolean
+	-- upvalues: GetFFlagAdConsentSkipOptOutAuthPublishModule (copy)
+	return not GetFFlagAdConsentSkipOptOutAuthPublishModule() or p1 ~= "Auth" or Enabled ~= false
 end
 
 local _ = function(p1): boolean
 	return p1 == nil
 end
 
-function StartAttributionOrchestratorModule.resolveAndPublish(p1, p2, Consented, p3)
-	-- upvalues: StartAttributionOrchestratorModule (copy), GetFFlagEnableStartAttributionTelemetryModule (copy), AttributionTelemetryModule (copy)
-	if Consented == nil then return end
-	local Decision = StartAttributionOrchestratorModule.computeDecision(Consented, p3)
+function StartAttributionOrchestratorModule.resolveAndPublish(p1, p2, Enabled, p3)
+	-- upvalues: GetFFlagAdConsentSkipOptOutAuthPublishModule (copy), StartAttributionOrchestratorModule (copy), GetFFlagEnableStartAttributionTelemetryModule (copy), AttributionTelemetryModule (copy)
+	if GetFFlagAdConsentSkipOptOutAuthPublishModule() and p2 == "Auth" and Enabled == false then return end
+	if Enabled == nil then return end
+	local Decision = StartAttributionOrchestratorModule.computeDecision(Enabled, p3)
 	p1:adConsentResolved(Decision)
 	
 	if GetFFlagEnableStartAttributionTelemetryModule() then

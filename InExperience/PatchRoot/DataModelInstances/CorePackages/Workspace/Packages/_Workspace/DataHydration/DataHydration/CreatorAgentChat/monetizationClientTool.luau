@@ -49,35 +49,38 @@ local function hasPersistedToolResult(ToolCall): boolean
 	return false
 end
 
+local function findRequestInTurnState(p1, Lowered, p2)
+	-- upvalues: hasPersistedToolResult (copy), toolCallLooksLikeRequest (copy)
+	local List = {}
+	
+	for toolCall in p1.toolCalls do
+		table.insert(List, toolCall)
+	end
+	table.sort(List)
+	local ToolCall = nil
+	
+	for _, value in List do
+		if not p2 or not p2[value] then
+			ToolCall = p1.toolCalls[value]
+			
+			if (ToolCall.status == nil or ToolCall.status == "pending" or ToolCall.status == "in_progress") and not hasPersistedToolResult(ToolCall) and toolCallLooksLikeRequest(ToolCall, Lowered) then
+				return value, ToolCall.rawInput, ToolCall.turnId, ToolCall.referenceId
+			end
+		end
+	end
+	return nil, nil, nil, nil
+end
+
+local _ = function(p3)
+	local Number: number? = tonumber(p3)
+	
+	return if Number == nil or Number % 1 ~= 0 then nil else Number
+end
+
 return {
 	MAXIMUM_SAFE_INTEGER = 9007199254740991,
 	toolCallLooksLikeRequest = toolCallLooksLikeRequest,
-	findRequestInTurnState = function(p1, Lowered, p2)
-		-- upvalues: hasPersistedToolResult (copy), toolCallLooksLikeRequest (copy)
-		local List = {}
-		
-		for toolCall in p1.toolCalls do
-			table.insert(List, toolCall)
-		end
-		table.sort(List)
-		local ToolCall = nil
-		
-		for _, value in List do
-			if not p2 or not p2[value] then
-				ToolCall = p1.toolCalls[value]
-				
-				if (ToolCall.status == nil or ToolCall.status == "pending" or ToolCall.status == "in_progress") and not hasPersistedToolResult(ToolCall) and toolCallLooksLikeRequest(ToolCall, Lowered) then
-					return value, ToolCall.rawInput, ToolCall.turnId, ToolCall.referenceId
-				end
-			end
-		end
-		return nil, nil, nil, nil
-	end,
-	parseInteger = function(p3)
-		local Number: number? = tonumber(p3)
-		
-		return if Number == nil or Number % 1 ~= 0 then nil else Number
-	end,
+	findRequestInTurnState = findRequestInTurnState,
 	parsePositiveSafeInteger = function(p3)
 		local Number: number? = tonumber(p3)
 		local Number1 = if Number == nil or Number % 1 ~= 0 then nil else Number
@@ -97,10 +100,46 @@ return {
 			return Number1, nil
 		end
 	end,
-	formatResultContent = function(p3)
+	parseCreateAndGoLive = function(p3, p4)
+		if p3 == nil then
+			return nil, nil
+		elseif p4 == "create" and typeof(p3) == "boolean" then
+			return if p3 then true else nil, nil
+		else
+			return nil, "createAndGoLive must be a boolean on create."
+		end
+	end,
+	parseAction = function(p3, List)
+		if typeof(p3) ~= "table" or typeof(p3.action) ~= "string" then
+			return nil, "An action is required."
+		end
+		local Lowered = string.lower(p3.action)
+		
+		if table.find(List, Lowered) then
+			return Lowered, nil
+		else
+			return nil, ("Unsupported action '%s'."):format(p3.action)
+		end
+	end,
+	checkStringFields = function(p3, List): string?
+		for _, value in List do
+			if p3[value] ~= nil and typeof(p3[value]) ~= "string" then
+				return ("%s must be a string."):format(value)
+			end
+		end
+		return nil
+	end,
+	createRequestFinder = function(p4)
+		-- upvalues: findRequestInTurnState (copy)
+		return function(p5, p6)
+			-- upvalues: findRequestInTurnState (upval), p4 (copy)
+			return findRequestInTurnState(p5, p4, p6)
+		end
+	end,
+	formatResultContent = function(p4)
 		-- upvalues: HttpService (copy)
-		local Action = if typeof(p3) == "table" and typeof(p3.action) == "string" then p3.action else "unknown"
-		local Success, Result = pcall(HttpService.JSONEncode, HttpService, p3)
+		local Action = if typeof(p4) == "table" and typeof(p4.action) == "string" then p4.action else "unknown"
+		local Success, Result = pcall(HttpService.JSONEncode, HttpService, p4)
 		
 		if Success and #Result <= 524288 then
 			return { text = Result }, false
@@ -127,7 +166,7 @@ return {
 			})
 		}
 	end,
-	getActionKind = function(p3): string
-		return if p3 == "list" then "read" else "mutation"
+	getActionKind = function(p4): string
+		return if p4 == "list" then "read" else "mutation"
 	end
 }

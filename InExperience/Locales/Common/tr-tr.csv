@@ -3651,6 +3651,7 @@ Feature.Moments.Action.Retry,
 Feature.Moments.Action.RetryLoadingComments,Yorumları yüklemeyi tekrar dene
 Feature.Moments.Action.Return,Galeriye dön
 Feature.Moments.Action.ReturnToEditing,Düzenlemeye dön
+Feature.Moments.Action.Save,
 Feature.Moments.Action.SaveVoiceover,
 Feature.Moments.Action.ShowDetails,Ayrıntıları göster
 Feature.Moments.Action.ShowMore,

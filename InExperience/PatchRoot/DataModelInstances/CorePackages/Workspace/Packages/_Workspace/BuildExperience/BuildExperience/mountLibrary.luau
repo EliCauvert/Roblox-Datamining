@@ -887,7 +887,7 @@ local function ConnectedLibrary(p2)
 				location = if UseSignalStateResult2 == nil then nil else UseSignalStateResult2.rootName
 			}
 			
-			local function onPromptReceived()
+			local function onPromptAccepted()
 				-- upvalues: Tbl (copy), SendBuildExperienceEventModule (upval), UseResult (upval)
 				local Copy = table.clone(Tbl)
 				Copy.phase = "received"
@@ -900,7 +900,7 @@ local function ConnectedLibrary(p2)
 				Copy.phase = "received"
 				SendBuildExperienceEventModule("LIBRARY_ASSET_CLICK", UseResult(), Copy)
 				returnToAppChat(p3, "prompt_return")
-			end) else OnSendFunction(onPromptReceived)
+			end) else OnSendFunction(onPromptAccepted)
 			
 			if OnSendResult then
 				UseRefResult14.current = Tbl

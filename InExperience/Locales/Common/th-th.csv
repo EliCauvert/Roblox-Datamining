@@ -3678,6 +3678,7 @@ Feature.Moments.Action.Retry,
 Feature.Moments.Action.RetryLoadingComments,ลองโหลดความคิดเห็นอีกครั้ง
 Feature.Moments.Action.Return,กลับไปยังแกลเลอรี
 Feature.Moments.Action.ReturnToEditing,กลับไปที่การแก้ไข
+Feature.Moments.Action.Save,
 Feature.Moments.Action.SaveVoiceover,
 Feature.Moments.Action.ShowDetails,แสดงรายละเอียด
 Feature.Moments.Action.ShowMore,
