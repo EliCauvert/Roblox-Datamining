@@ -3,7 +3,7 @@
     try {
         var e = "undefined" != typeof globalThis ? globalThis : "undefined" != typeof global ? global : "undefined" != typeof window ? window : "undefined" != typeof self ? self : {},
             n = (new e.Error).stack;
-        n && ((e._debugIds || (e._debugIds = {}))[n] = "6aa8d991-e67b-c409-16fb-757c73983c7c")
+        n && ((e._debugIds || (e._debugIds = {}))[n] = "88d5da9b-81ae-1745-9f4a-2eefa153d143")
     } catch (e) {}
 }();
 (globalThis.TURBOPACK || (globalThis.TURBOPACK = [])).push(["object" == typeof document ? document.currentScript : void 0, 171908, e => {
@@ -4908,12 +4908,12 @@
                             name: "NextjsClientStackFrameNormalization"
                         }
                     })({
-                        assetPrefix: "https://assets.create.roblox.com/c8b3d8a58c0112a8611d351d769556f3eb647578",
+                        assetPrefix: "https://assets.create.roblox.com/0d20ac295b260f61613cc053517abeede07b8a5a",
                         basePath: a,
-                        rewriteFramesAssetPrefixPath: "/c8b3d8a58c0112a8611d351d769556f3eb647578",
+                        rewriteFramesAssetPrefixPath: "/0d20ac295b260f61613cc053517abeede07b8a5a",
                         experimentalThirdPartyOriginStackFrames: l
                     })), r),
-                    release: "Hub-c8b3d8a58c0112a8611d351d769556f3eb647578",
+                    release: "Hub-0d20ac295b260f61613cc053517abeede07b8a5a",
                     ...e
                 };
                 ! function(e) {
@@ -4996,20 +4996,30 @@
                 denyUrls: [/extensions\//i, /^chrome(-extensions?)?:\/\//i],
                 ignoreErrors: [...t, "window.Roblox.Hybrid", "route change was aborted", "Refused to evaluate a string as JavaScript because 'unsafe-eval' is not an allowed source of script in the following Content Security Policy directive:", "Blocking route change for unsaved changes", "Failed to execute 'querySelectorAll' on 'Document': 'div:has(> iframe[id='198230182308109283091823098102938908128390'])' is not a valid selector.", "Failed to execute 'send' on 'XMLHttpRequest': Failed to load 'https://searchaggr-dra.dt.dbankcloud.com/search/api/v1/webtranslation_detect'.", "Invariant: attempted to hard navigate to the same URL", "Failed to fetch", "Load failed", "انتهت مهلة الطلب", "cancelado", "cancelled", "مُلغى", "Can't find variable: msDiscoverChatAvailable", /Refused to create a WebAssembly object/, /^\[object \w+\]$/],
                 beforeSend: (e, t) => {
-                    var n, r, a, l;
-                    let [o] = null != (n = null == (a = e.exception) ? void 0 : a.values) ? n : [], {
-                        frames: i
-                    } = null != (r = null == o ? void 0 : o.stacktrace) ? r : {};
-                    if ((null == i ? void 0 : i.every(e => !e.filename || "<anonymous>" === e.filename || "[native code]" === e.filename)) || (null == i ? void 0 : i.every(e => !e.filename || !e.filename.endsWith(".js") || e.filename.startsWith("./node_modules/@sentry/browser")))) return null;
-                    let u = t.originalException;
+                    var n, r, a, l, o;
+                    let [i] = null != (n = null == (a = e.exception) ? void 0 : a.values) ? n : [], {
+                        frames: u
+                    } = null != (r = null == i ? void 0 : i.stacktrace) ? r : {};
+                    if ((null == u ? void 0 : u.every(e => !e.filename || "<anonymous>" === e.filename || "[native code]" === e.filename)) || (null == u ? void 0 : u.every(e => !e.filename || !e.filename.endsWith(".js") || e.filename.startsWith("./node_modules/@sentry/browser")))) return null;
+                    let s = t.originalException;
+                    if ("u" > typeof HTMLScriptElement && s instanceof Event && "error" === s.type && s.target instanceof HTMLScriptElement && s.target.getAttribute("src")) try {
+                        let t = new URL(s.target.src);
+                        ("https:" === t.protocol || "http:" === t.protocol) && (e.contexts = {
+                            ...e.contexts,
+                            script_load_error: {
+                                ...null == (l = e.contexts) ? void 0 : l.script_load_error,
+                                src: "".concat(t.origin).concat(t.pathname)
+                            }
+                        })
+                    } catch (e) {}
                     if (function(e) {
                             if ("object" != typeof e || null === e || !("name" in e) || "ResponseError" !== e.name || !("response" in e)) return !1;
                             let {
                                 response: t
                             } = e;
                             return "object" == typeof t && null !== t && "url" in t && "string" == typeof t.url
-                        }(u)) {
-                        let t = null == (l = u.response) ? void 0 : l.status;
+                        }(s)) {
+                        let t = null == (o = s.response) ? void 0 : o.status;
                         if (401 === t || 403 === t || 404 === t) return null;
                         let n = function(e) {
                             let t;
@@ -5026,7 +5036,7 @@
                             if (n.startsWith("apis.")) return r.split("/")[1] || null;
                             let a = ac.find(e => n.endsWith(".".concat(e)));
                             return a && n.slice(0, -(a.length + 1)).split(".")[0] || null
-                        }(u.response.url);
+                        }(s.response.url);
                         null !== n && (e.fingerprint = ["{{ default }}", n])
                     }
                     return e
@@ -5035,7 +5045,7 @@
         }({
             environment: "production",
             enabled: !0,
-            release: "Hub-c8b3d8a58c0112a8611d351d769556f3eb647578",
+            release: "Hub-0d20ac295b260f61613cc053517abeede07b8a5a",
             dsn: "https://2c039001a72b4824851c1b3f71ce1f8f@o293668.ingest.sentry.io/5337301",
             allowUrls: [/https?:\/\/create\.roblox\.com/, /https?:\/\/create\.sitetest1\.robloxlabs\.com/, /https?:\/\/assets\.create\.roblox\.com/, /https?:\/\/assets\.create\.sitetest1\.robloxlabs\.com/],
             ...{
@@ -15148,5 +15158,5 @@
     }(), t.exports = e.r(702554)
 }]);
 
-//# debugId=6aa8d991-e67b-c409-16fb-757c73983c7c
-//# sourceMappingURL=0ytbh5rmval9u.js.map
+//# debugId=88d5da9b-81ae-1745-9f4a-2eefa153d143
+//# sourceMappingURL=3uyw9n0j8kyi7.js.map

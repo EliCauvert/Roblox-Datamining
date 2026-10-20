@@ -4478,35 +4478,6 @@ button[class^=btn] {
 }
 
 .container-footer {
-    background-color: #fff
-}
-
-.container-footer.light-theme {
-    background-color: var(--color-surface-100)
-}
-
-.container-footer.light-theme.remove-panel,
-.light-theme .container-footer.remove-panel {
-    background-color: transparent
-}
-
-.container-footer.dark-theme {
-    background-color: var(--color-surface-100)
-}
-
-.container-footer.dark-theme.remove-panel {
-    background-color: transparent
-}
-
-.dark-theme .container-footer {
-    background-color: var(--color-surface-100)
-}
-
-.dark-theme .container-footer.remove-panel {
-    background-color: transparent
-}
-
-.container-footer {
     width: 100%;
     padding: 12px;
     position: absolute;
@@ -35872,11 +35843,6 @@ textarea::placeholder {
 .dark-theme .copyright-wrapper .icon-dropdown select:active,
 .dark-theme .copyright-wrapper .icon-dropdown select:visited {
     color: var(--color-content-emphasis)
-}
-
-.light-theme .container-footer,
-.dark-theme .container-footer {
-    background-color: var(--color-surface-0)
 }
 
 /*# sourceMappingURL=https://sourcemaps.rbxcdn.com/styleGuide-06a26f05ef1f72cc.css.map*/

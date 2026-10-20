@@ -1,3 +1,7 @@
+.container-footer {
+    background-color: var(--color-none)
+}
+
 .footer {
     text-align: center;
     max-width: 1070px;
@@ -38,6 +42,11 @@
     .footer .footer-link {
         min-width: 15%
     }
+}
+
+.footer .footer-button-link {
+    background-color: transparent;
+    border: none
 }
 
 .footer .footer-postfixIcon {
@@ -155,16 +164,6 @@
 .dark-theme .copyright-container .icon-dropdown select:active,
 .dark-theme .copyright-container .icon-dropdown select:visited {
     color: var(--color-content-emphasis)
-}
-
-.light-theme .container-footer,
-.dark-theme .container-footer {
-    background-color: var(--color-surface-0)
-}
-
-.container-footer .footer-button-link {
-    background-color: transparent;
-    border: none
 }
 
 .inset-\[0\] {

@@ -3,7 +3,7 @@
     try {
         var e = "undefined" != typeof globalThis ? globalThis : "undefined" != typeof global ? global : "undefined" != typeof window ? window : "undefined" != typeof self ? self : {},
             n = (new e.Error).stack;
-        n && ((e._debugIds || (e._debugIds = {}))[n] = "f053d9ed-3d01-c7c3-f6e8-8cd50f2c9fcb")
+        n && ((e._debugIds || (e._debugIds = {}))[n] = "7ea3f299-b029-fa8e-3e16-170da8dafaa1")
     } catch (e) {}
 }();
 (globalThis.TURBOPACK || (globalThis.TURBOPACK = [])).push(["object" == typeof document ? document.currentScript : void 0, 118413, e => {
@@ -563,6 +563,8 @@
             getUserBansUrl: e => "/dashboard/creations/experiences/".concat(e, "/safety/bans"),
             getAddUsersToBanUrl: e => "/dashboard/creations/experiences/".concat(e, "/safety/bans/add"),
             getAntiCheatUrl: e => "/dashboard/creations/experiences/".concat(e, "/safety/anti-cheat"),
+            getIssuesAndAppealsUrl: e => "/dashboard/creations/experiences/".concat(e, "/safety/issues-and-appeals"),
+            getGameViolationUrl: (e, a) => "/dashboard/creations/experiences/".concat(e, "/safety/issues-and-appeals/").concat(encodeURIComponent(a)),
             getAnalyticsOverviewUrl: () => "/dashboard/analytics",
             getAnalyticsUrl: e => "/dashboard/creations/experiences/".concat(e, "/analytics"),
             getAnalyticsPerformanceUrl: e => "/dashboard/creations/experiences/".concat(e, "/analytics/performance"),
@@ -896,5 +898,5 @@
     }], 114209)
 }]);
 
-//# debugId=f053d9ed-3d01-c7c3-f6e8-8cd50f2c9fcb
-//# sourceMappingURL=0-b6lev1x1-e_.js.map
+//# debugId=7ea3f299-b029-fa8e-3e16-170da8dafaa1
+//# sourceMappingURL=1xkbccmzvrh74.js.map

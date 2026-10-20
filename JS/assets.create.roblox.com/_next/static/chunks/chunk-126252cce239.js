@@ -3,7 +3,7 @@
     try {
         var e = "undefined" != typeof globalThis ? globalThis : "undefined" != typeof global ? global : "undefined" != typeof window ? window : "undefined" != typeof self ? self : {},
             n = (new e.Error).stack;
-        n && ((e._debugIds || (e._debugIds = {}))[n] = "4649322b-92fd-f1a2-597c-fb2b54e3f577")
+        n && ((e._debugIds || (e._debugIds = {}))[n] = "f700431d-9697-e112-7ba7-2ead3b473b20")
     } catch (e) {}
 }();
 (globalThis.TURBOPACK || (globalThis.TURBOPACK = [])).push(["object" == typeof document ? document.currentScript : void 0, 105098, 995721, e => {
@@ -257,8 +257,8 @@
             }))
         });
     e.s(["Breadcrumbs", 0, W], 556499);
-    var Q = e.i(686762),
-        K = e.i(83265),
+    var K = e.i(686762),
+        Q = e.i(83265),
         J = e.i(114209),
         X = e.i(97782),
         Y = e.i(475360),
@@ -1163,12 +1163,10 @@
             "experience-questionnaire": {
                 displayName: e => {
                     let {
-                        translate: a,
-                        enableQuestionnaireV2: t,
-                        isUpdatedPublishingFlowEnabled: r
-                    } = e, n = "Heading.ExperienceQuestionnaire";
-                    return r ? n = "Heading.ContentRating" : t && (n = "Heading.ContentRatings"), er({
-                        key: n
+                        translate: a
+                    } = e;
+                    return er({
+                        key: "Heading.ContentRating"
                     }, a)
                 },
                 breadcrumbType: et.default.Questionnaire
@@ -1589,6 +1587,23 @@
                 breadcrumbType: et.default.AntiCheat,
                 getLinkPath: e => $.creatorHub.dashboard.getAntiCheatUrl(Number(e.baseId))
             },
+            "issues-and-appeals": {
+                displayName: e => {
+                    let {
+                        translate: a
+                    } = e;
+                    return er({
+                        key: "Heading.IssuesAndAppeals"
+                    }, a)
+                },
+                breadcrumbType: et.default.IssuesAndAppeals,
+                getLinkPath: e => $.creatorHub.dashboard.getIssuesAndAppealsUrl(Number(e.baseId))
+            },
+            "[violationId]": {
+                displayName: () => "",
+                breadcrumbType: et.default.GameViolation,
+                withId: !0
+            },
             add: {
                 displayName: e => {
                     let {
@@ -1767,12 +1782,10 @@
             "content-rating": {
                 displayName: e => {
                     let {
-                        translate: a,
-                        enableQuestionnaireV2: t,
-                        isUpdatedPublishingFlowEnabled: r
-                    } = e, n = "Heading.ExperienceQuestionnaire";
-                    return r ? n = "Heading.ContentRating" : t && (n = "Heading.ContentRatings"), er({
-                        key: n
+                        translate: a
+                    } = e;
+                    return er({
+                        key: "Heading.ContentRating"
                     }, a)
                 },
                 breadcrumbType: et.default.ContentRating
@@ -1780,11 +1793,10 @@
             "advanced-settings": {
                 displayName: e => {
                     let {
-                        translate: a,
-                        isUpdatedPublishingFlowEnabled: t
+                        translate: a
                     } = e;
                     return er({
-                        key: t ? "Heading.AdvancedSettings" : "Heading.AccessSettings"
+                        key: "Heading.AdvancedSettings"
                     }, a)
                 },
                 breadcrumbType: et.default.AdvancedSettings
@@ -1792,11 +1804,10 @@
             "game-join": {
                 displayName: e => {
                     let {
-                        translate: a,
-                        isUpdatedPublishingFlowEnabled: t
+                        translate: a
                     } = e;
                     return er({
-                        key: t ? "Heading.AdvancedSettings" : "Heading.GameAccess"
+                        key: "Heading.AdvancedSettings"
                     }, a)
                 },
                 breadcrumbType: et.default.GameJoin
@@ -1804,11 +1815,10 @@
             "manage-audience": {
                 displayName: e => {
                     let {
-                        translate: a,
-                        isUpdatedPublishingFlowEnabled: t
+                        translate: a
                     } = e;
                     return er({
-                        key: t ? "Heading.ManageAudience" : "Heading.Publishing"
+                        key: "Heading.ManageAudience"
                     }, a)
                 },
                 breadcrumbType: et.default.Publishing
@@ -1890,7 +1900,7 @@
                 }
             } = ec(), {
                 insideTopNavigationDrawer: b
-            } = eo(), g = (0, K.useMediaQuery)(e => e.breakpoints.down("Medium")), {
+            } = eo(), g = (0, Q.useMediaQuery)(e => e.breakpoints.down("Medium")), {
                 gameDetails: h
             } = (0, J.useCurrentGame)(), f = (0, t.useMemo)(() => {
                 let e = s.includes("/analytics/dashboards/");
@@ -1903,7 +1913,7 @@
                 href: t,
                 passHref: !0,
                 legacyBehavior: !0,
-                children: (0, a.jsx)(Q.Link, {
+                children: (0, a.jsx)(K.Link, {
                     underline: "always",
                     color: "inherit",
                     children: (0, a.jsx)(p.Typography, {
@@ -1920,7 +1930,7 @@
                 href: t,
                 passHref: !0,
                 legacyBehavior: !0,
-                children: (0, a.jsx)(Q.Link, {
+                children: (0, a.jsx)(K.Link, {
                     classes: {
                         root: o
                     },
@@ -3229,7 +3239,7 @@
                     color: "secondary",
                     component: "span",
                     children: [F, (0, a.jsx)("img", {
-                        src: "".concat("https://assets.create.roblox.com/c8b3d8a58c0112a8611d351d769556f3eb647578/assets", "/navigation/privacy_icon.png"),
+                        src: "".concat("https://assets.create.roblox.com/0d20ac295b260f61613cc053517abeede07b8a5a/assets", "/navigation/privacy_icon.png"),
                         alt: "",
                         style: {
                             marginLeft: "8px",
@@ -3312,5 +3322,5 @@
     e.s(["HourglassEmptyIcon", () => a.HourglassEmpty])
 }]);
 
-//# debugId=4649322b-92fd-f1a2-597c-fb2b54e3f577
-//# sourceMappingURL=19nskwmrmriqi.js.map
+//# debugId=f700431d-9697-e112-7ba7-2ead3b473b20
+//# sourceMappingURL=2dstkd461p9e1.js.map

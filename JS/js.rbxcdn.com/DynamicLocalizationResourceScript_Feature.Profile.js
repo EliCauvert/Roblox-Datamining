@@ -207,6 +207,9 @@ Roblox.LangDynamic["Feature.Profile"] = {
     "Description.ProfileFrameUpsell": "Spice up your profile picture with a frame.",
     "Action.TryItOut": "Try it out",
     "Heading.ProfileFrame": "Profile frame",
-    "Heading.ProfilePictureSaved": "Profile picture saved successfully"
+    "Heading.ProfilePictureSaved": "Profile picture saved successfully",
+    "Title.DoMoreWithFriends": "Do more with friends",
+    "Action.AddFriends": "Add friends",
+    "Action.ViewMarketplace": "View marketplace"
 };
 window.Roblox && window.Roblox.BundleDetector && window.Roblox.BundleDetector.bundleDetected("DynamicLocalizationResourceScript_Feature.Profile");
