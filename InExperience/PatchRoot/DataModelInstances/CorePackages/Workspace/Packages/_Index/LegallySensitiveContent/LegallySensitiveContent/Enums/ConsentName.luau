@@ -1,4 +1,6 @@
 ﻿return {
 	phoneNumberDiscoverabilityUpsell = "phoneNumberDiscoverabilityUpsell",
-	PhotoToAvatar = "PhotoToAvatar"
+	PhotoToAvatar = "PhotoToAvatar",
+	allowMarketingEmailCheckboxAccountUpgrade = "allowMarketingEmailCheckboxAccountUpgrade",
+	allowMarketingEmailAutoOptInAccountUpgrade = "allowMarketingEmailAutoOptInAccountUpgrade"
 }

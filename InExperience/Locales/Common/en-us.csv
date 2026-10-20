@@ -115,6 +115,7 @@ Authentication.SignUp.Button.OKCaptialized,OK
 Authentication.SignUp.Button.RetryLogIn,Retry log in
 Authentication.SignUp.Description.AccountAlreadyLinked,Your account on {platformAccountName} is already linked to a Roblox account. Please try to log in again.
 Authentication.SignUp.Description.BirthdayHint,Enter date
+Authentication.SignUp.Description.OptInMarketingEmailConsent,I’d like to receive emails from Roblox about news and offers.
 Authentication.SignUp.Description.SignUpAgreement.CreateAnAccount,"By creating an account, you agree to our {startTermsTag}Terms{endTermsTag}, including arbitration, and acknowledge our {startPrivacyTag}Privacy Policy{endPrivacyTag}. If you’re under 18, your parent or guardian must permit your account and agree to our Terms."
 Authentication.SignUp.Description.Try,Try
 Authentication.SignUp.Description.UsernameChanged,"All set! Your account is ready and linked to {platform}. Respawn now to see your updated username in the game, or it'll apply next time."
@@ -437,6 +438,7 @@ CommonUI.Features.Label.ControllerBar.HoldPrefix,Hold
 CommonUI.Features.Label.ControllerBar.Search,
 CommonUI.Features.Label.ControllerBar.ToPlaySuffix,to play
 CommonUI.Features.Label.CreateGames,
+CommonUI.Features.Label.DevSubs,Subscriptions
 CommonUI.Features.Label.Friends,Friends
 CommonUI.Features.Label.Game,Experiences
 CommonUI.Features.Label.Games,Games
@@ -3154,6 +3156,7 @@ Feature.Contacts.Message.ContactDiscoverable,"To help you make friends, Roblox u
 Feature.Contacts.Message.ContactsSyncWarning,Your contacts will be regularly synced and matches with other Roblox users will be stored to help you find friends. Manage this any time in device settings.
 Feature.Contacts.Message.InviteToRoblox,"Add me as a friend on Roblox so we can create, share, and explore experiences together."
 Feature.Contacts.Message.NoResults,No results.
+Feature.DeveloperProducts.Heading.Products,Products
 Feature.DeveloperProducts.Label.Product,
 Feature.DisplayName.ErrorMessage.AgedUpNameContainPII,Name might contain private information
 Feature.DisplayName.ErrorMessage.AgedUpNameHasChanged,Your Name has already been changed in the past 7 days
@@ -3488,6 +3491,7 @@ Feature.GamePage.QuickLaunch.LaunchError.GuestProhibited,Guests cannot join this
 Feature.GamePage.QuickLaunch.LaunchError.PurchaseRequired,To visit this experience purchase is required.
 Feature.GamePage.QuickLaunch.LaunchError.RequestFailed,Network request failed.
 Feature.GamePage.QuickLaunch.LaunchError.TemporarilyUnavailable,This experience cannot be visited at this time.
+Feature.GamePass.Heading.PassesForThisGame,Passes
 Feature.GamepadDisconnect.Label.Message,"Controller for user ""%s"" has been disconnected, please press '%s' on the controller you would like to continue with."
 Feature.GamepadDisconnect.Label.MessageGeneric,"Controller for user ""%s"" has been disconnected. Please reconnect your controller."
 Feature.GamepadDisconnect.Label.Title,Missing Controller
@@ -3748,6 +3752,7 @@ Feature.Moments.Label.DeleteMomentBody,You can't recover a Moment once it's gone
 Feature.Moments.Label.DeleteMomentTitle,Delete Moment?
 Feature.Moments.Label.DeleteVoiceoverBody,This clears your text and voiceover. You can start over anytime.
 Feature.Moments.Label.DeleteVoiceoverTitle,Delete voiceover?
+Feature.Moments.Label.DragHereToDelete,Drag here to delete
 Feature.Moments.Label.DurationSeconds,{seconds} sec
 Feature.Moments.Label.Engagement,Engagement
 Feature.Moments.Label.Error,

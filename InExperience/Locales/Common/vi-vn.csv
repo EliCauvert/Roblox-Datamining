@@ -436,6 +436,7 @@ CommonUI.Features.Label.ControllerBar.HoldPrefix,Giữ
 CommonUI.Features.Label.ControllerBar.Search,
 CommonUI.Features.Label.ControllerBar.ToPlaySuffix,để chơi
 CommonUI.Features.Label.CreateGames,
+CommonUI.Features.Label.DevSubs,Các gói đăng ký
 CommonUI.Features.Label.Friends,Bạn bè
 CommonUI.Features.Label.Game,Trải nghiệm
 CommonUI.Features.Label.Games,Trò chơi
@@ -3153,6 +3154,7 @@ Feature.Contacts.Message.ContactDiscoverable,"Để giúp bạn kết bạn, ng�
 Feature.Contacts.Message.ContactsSyncWarning,Danh bạ của bạn sẽ được đồng bộ hóa thường xuyên và các kết quả trùng khớp với người dùng Roblox khác sẽ được lưu trữ để giúp bạn tìm bạn bè. Quản lý tùy chọn này bất cứ lúc nào trong cài đặt thiết bị.
 Feature.Contacts.Message.InviteToRoblox,"Kết bạn với mình trên Roblox để chúng ta cùng nhau sáng tạo, chia sẻ và khám phá các trải nghiệm nhé."
 Feature.Contacts.Message.NoResults,Không có kết quả.
+Feature.DeveloperProducts.Heading.Products,
 Feature.DeveloperProducts.Label.Product,Sản phẩm
 Feature.DisplayName.ErrorMessage.AgedUpNameContainPII,Tên có thể chứa thông tin cá nhân
 Feature.DisplayName.ErrorMessage.AgedUpNameHasChanged,Tên của bạn đã được thay đổi trong 7 ngày qua
@@ -3487,6 +3489,7 @@ Feature.GamePage.QuickLaunch.LaunchError.GuestProhibited,Khách không thể tha
 Feature.GamePage.QuickLaunch.LaunchError.PurchaseRequired,Bạn phải mua để ghé thăm trải nghiệm này.
 Feature.GamePage.QuickLaunch.LaunchError.RequestFailed,Yêu cầu mạng thất bại.
 Feature.GamePage.QuickLaunch.LaunchError.TemporarilyUnavailable,Không thể truy cập trải nghiệm này trong lúc này.
+Feature.GamePass.Heading.PassesForThisGame,Vé
 Feature.GamepadDisconnect.Label.Message,"Bộ điều khiển cho người dùng ""%s"" đã bị ngắt kết nối, vui lòng nhấn ""%s"" trên bộ điều khiển mà bạn muốn tiếp tục."
 Feature.GamepadDisconnect.Label.MessageGeneric,"Bộ điều khiển điều khiển cho người dùng ""%s"" đã bị ngắt kết nối. Vui lòng kết nối lại bộ điều khiển điều khiển của bạn."
 Feature.GamepadDisconnect.Label.Title,Thiếu bộ điều khiển
@@ -3747,6 +3750,7 @@ Feature.Moments.Label.DeleteMomentBody,Bạn không thể khôi phục một Kho
 Feature.Moments.Label.DeleteMomentTitle,Xóa Khoảnh khắc?
 Feature.Moments.Label.DeleteVoiceoverBody,Thao tác này sẽ xóa văn bản và phần thuyết minh hiện tại. Bạn có thể làm lại từ đầu bất cứ lúc nào.
 Feature.Moments.Label.DeleteVoiceoverTitle,Xóa lời thuyết minh?
+Feature.Moments.Label.DragHereToDelete,Kéo vào đây để xóa
 Feature.Moments.Label.DurationSeconds,{seconds} giây
 Feature.Moments.Label.Engagement,Mức độ tương tác
 Feature.Moments.Label.Error,Đã xảy ra sự cố. Vui lòng thử lại.

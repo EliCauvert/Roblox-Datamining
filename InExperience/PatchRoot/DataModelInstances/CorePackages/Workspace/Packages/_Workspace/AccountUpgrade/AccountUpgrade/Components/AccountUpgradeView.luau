@@ -8,12 +8,16 @@ local AccountUpgradeFieldsModule = require(script.Parent.AccountUpgradeFields)
 local AccountUpgradeFieldErrorModule = require(script.Parent.AccountUpgradeFieldError)
 local BirthdayPickerSheetModule = require(script.Parent.BirthdayPickerSheet)
 local CloseConfirmationDialogModule = require(script.Parent.CloseConfirmationDialog)
+local MarketingConsentCheckboxModule = require(script.Parent.MarketingConsentCheckbox)
 local AccountUpgradeDialogModule = require(AccountUpgrade.SuccessModal.AccountUpgradeDialog)
 local AccountUpgradeDialogActionsModule = require(AccountUpgrade.SuccessModal.AccountUpgradeDialogActions)
 local AccountUpgradeFieldModule = require(AccountUpgrade.AccountUpgradeField)
 local FFlagAccountUpgradeOAuthTelemetryModule = require(AccountUpgrade.Flags.FFlagAccountUpgradeOAuthTelemetry)
 local View = FoundationModule.View
 local ButtonVariant = FoundationModule.Enums.ButtonVariant
+local InputSize = FoundationModule.Enums.InputSize
+
+local function noop() end
 
 local function createAuditContent(AuditContent)
 	-- upvalues: ReactModule (copy), RegisterAuditContent (copy)
@@ -26,7 +30,7 @@ local function createAuditContent(AuditContent)
 end
 
 return function(Form)
-	-- upvalues: AccountUpgradeFieldModule (copy), ReactModule (copy), View (copy), AccountUpgradeFieldsModule (copy), AccountUpgradeDialogActionsModule (copy), ButtonVariant (copy), AccountUpgradeFieldErrorModule (copy), LegalTextWithLinks (copy), createAuditContent (copy), AccountUpgradeDialogModule (copy), BirthdayPickerSheetModule (copy), FFlagAccountUpgradeOAuthTelemetryModule (copy), CloseConfirmationDialogModule (copy)
+	-- upvalues: AccountUpgradeFieldModule (copy), ReactModule (copy), View (copy), AccountUpgradeFieldsModule (copy), AccountUpgradeDialogActionsModule (copy), ButtonVariant (copy), AccountUpgradeFieldErrorModule (copy), MarketingConsentCheckboxModule (copy), noop (copy), InputSize (copy), LegalTextWithLinks (copy), createAuditContent (copy), AccountUpgradeDialogModule (copy), BirthdayPickerSheetModule (copy), FFlagAccountUpgradeOAuthTelemetryModule (copy), CloseConfirmationDialogModule (copy)
 	local NoIsSubmitting: boolean = not Form.isSaveEnabled and not Form.isSubmitting
 	local HasFieldState = Form.fieldStates[AccountUpgradeFieldModule.Birthday] ~= nil
 	local OnCloseFunction = Form.onClose
@@ -81,8 +85,16 @@ return function(Form)
 							testId = "AccountUpgradeSubmitError",
 							text = Form.submitError
 						}),
-						LegalText = if Form.legalText then ReactModule.createElement(LegalTextWithLinks, {
+						MarketingConsent = if Form.marketingConsentText == nil then nil else ReactModule.createElement(MarketingConsentCheckboxModule, {
 							LayoutOrder = 3,
+							text = Form.marketingConsentText,
+							isChecked = Form.isMarketingConsentChecked == true,
+							isDisabled = Form.isSubmitting or Form.isMarketingConsentDisabled == true,
+							onToggled = Form.onMarketingConsentToggled or noop,
+							size = InputSize.Medium
+						}),
+						LegalText = if Form.legalText then ReactModule.createElement(LegalTextWithLinks, {
+							LayoutOrder = 4,
 							testId = "AccountUpgradeLegalText",
 							text = Form.legalText,
 							onLinkActivated = Form.onLegalLinkActivated

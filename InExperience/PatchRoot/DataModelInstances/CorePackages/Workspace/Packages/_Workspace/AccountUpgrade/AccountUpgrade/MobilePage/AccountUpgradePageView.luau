@@ -10,6 +10,7 @@ local LegalTextWithLinks = require(Parent.AuthCommon).Components.LegalTextWithLi
 local AccountUpgradeFieldsModule = require(AccountUpgrade.Components.AccountUpgradeFields)
 local AccountUpgradeFieldErrorModule = require(AccountUpgrade.Components.AccountUpgradeFieldError)
 local CloseConfirmationDialogModule = require(AccountUpgrade.Components.CloseConfirmationDialog)
+local MarketingConsentCheckboxModule = require(AccountUpgrade.Components.MarketingConsentCheckbox)
 local AccountUpgradeFieldModule = require(AccountUpgrade.AccountUpgradeField)
 local FFlagAccountUpgradeOAuthDialogFitsContentModule = require(AccountUpgrade.Flags.FFlagAccountUpgradeOAuthDialogFitsContent)
 local FFlagAccountUpgradeOAuthTelemetryModule = require(AccountUpgrade.Flags.FFlagAccountUpgradeOAuthTelemetry)
@@ -34,6 +35,8 @@ local EventMap = {
 	[Enum.KeyCode.Escape] = FocusNavigationEventNameEnum.NavigateBack
 }
 
+local function noop() end
+
 local function sinkPress() end
 
 local function OverlayPageLayer(p1)
@@ -57,7 +60,7 @@ local function OverlayPageLayer(p1)
 end
 
 return function(Form)
-	-- upvalues: FoundationModule (copy), UseLastInputModeFunction (copy), ReactModule (copy), FocusNavigationEventNameEnum (copy), InputHandlersModule (copy), UseFocusRootFunction (copy), FocusNavigableSurfaceIdentifierEnum (copy), EventMap (copy), FFlagAccountUpgradeFullPageInOverlayModule (copy), FullscreenPageWithSafeArea (copy), OverlayPageLayer (copy), View (copy), HeaderBar (copy), Text (copy), IconName (copy), ScrollView (copy), ScrollBarVisibility (copy), AccountUpgradeFieldsModule (copy), InputSize (copy), Button (copy), ButtonVariant (copy), AccountUpgradeFieldErrorModule (copy), FFlagAccountUpgradeOAuthDialogFitsContentModule (copy), LegalTextWithLinks (copy), AccountUpgradeFieldModule (copy), BirthdaySheetModule (copy), FFlagAccountUpgradeOAuthTelemetryModule (copy), CloseConfirmationDialogModule (copy)
+	-- upvalues: FoundationModule (copy), UseLastInputModeFunction (copy), ReactModule (copy), FocusNavigationEventNameEnum (copy), InputHandlersModule (copy), UseFocusRootFunction (copy), FocusNavigableSurfaceIdentifierEnum (copy), EventMap (copy), FFlagAccountUpgradeFullPageInOverlayModule (copy), FullscreenPageWithSafeArea (copy), OverlayPageLayer (copy), View (copy), HeaderBar (copy), Text (copy), IconName (copy), ScrollView (copy), ScrollBarVisibility (copy), AccountUpgradeFieldsModule (copy), InputSize (copy), MarketingConsentCheckboxModule (copy), noop (copy), Button (copy), ButtonVariant (copy), AccountUpgradeFieldErrorModule (copy), FFlagAccountUpgradeOAuthDialogFitsContentModule (copy), LegalTextWithLinks (copy), AccountUpgradeFieldModule (copy), BirthdaySheetModule (copy), FFlagAccountUpgradeOAuthTelemetryModule (copy), CloseConfirmationDialogModule (copy)
 	local UseTokensResult = FoundationModule.Hooks.useTokens()
 	local NoIsSubmitting: boolean = not Form.isSaveEnabled and not Form.isSubmitting
 	local OnCloseFunction = Form.onClose
@@ -154,9 +157,17 @@ return function(Form)
 						form = Form,
 						size = InputSize.Large
 					}),
+					MarketingConsent = if Form.marketingConsentText == nil then nil else ReactModule.createElement(MarketingConsentCheckboxModule, {
+						LayoutOrder = 3,
+						text = Form.marketingConsentText,
+						isChecked = Form.isMarketingConsentChecked == true,
+						isDisabled = Form.isSubmitting or Form.isMarketingConsentDisabled == true,
+						onToggled = Form.onMarketingConsentToggled or noop,
+						size = InputSize.Large
+					}),
 					Actions = ReactModule.createElement(View, {
 						tag = "col gap-small size-full-0 auto-y",
-						LayoutOrder = 3,
+						LayoutOrder = 4,
 						testId = "AccountUpgradePageActions"
 					}, {
 						Save = ReactModule.createElement(Button, {

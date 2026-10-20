@@ -436,6 +436,7 @@ CommonUI.Features.Label.ControllerBar.HoldPrefix,Maintenir enfoncé
 CommonUI.Features.Label.ControllerBar.Search,
 CommonUI.Features.Label.ControllerBar.ToPlaySuffix,pour jouer
 CommonUI.Features.Label.CreateGames,
+CommonUI.Features.Label.DevSubs,Abonnements
 CommonUI.Features.Label.Friends,Amis
 CommonUI.Features.Label.Game,Expériences
 CommonUI.Features.Label.Games,Jeux
@@ -3153,6 +3154,7 @@ Feature.Contacts.Message.ContactDiscoverable,"Pour t'aider à te faire des amis,
 Feature.Contacts.Message.ContactsSyncWarning,Tes contacts seront régulièrement synchronisés et les correspondances avec d'autres utilisateurs de Roblox seront enregistrées pour t'aider à trouver des amis. Tu peux gérer cela à tout moment dans les paramètres de l'appareil.
 Feature.Contacts.Message.InviteToRoblox,"Ajoute-moi comme ami sur Roblox pour que nous puissions créer, partager et explorer des expériences ensemble."
 Feature.Contacts.Message.NoResults,Aucun résultat.
+Feature.DeveloperProducts.Heading.Products,Produits
 Feature.DeveloperProducts.Label.Product,
 Feature.DisplayName.ErrorMessage.AgedUpNameContainPII,Le nom peut contenir des informations privées
 Feature.DisplayName.ErrorMessage.AgedUpNameHasChanged,Ton nom a déjà été changé au cours des 7 derniers jours
@@ -3487,6 +3489,7 @@ Feature.GamePage.QuickLaunch.LaunchError.GuestProhibited,Les invités ne peuvent
 Feature.GamePage.QuickLaunch.LaunchError.PurchaseRequired,"Pour visiter cette expérience, un achat est nécessaire."
 Feature.GamePage.QuickLaunch.LaunchError.RequestFailed,Échec de requête réseau.
 Feature.GamePage.QuickLaunch.LaunchError.TemporarilyUnavailable,Cette expérience ne peut pas être visitée pour le moment.
+Feature.GamePass.Heading.PassesForThisGame,Passes
 Feature.GamepadDisconnect.Label.Message,"Manette pour utilisateur ""%s"" a été déconnecté, appuyer sur '%s' sur la manette avec laquelle tu souhaites continuer."
 Feature.GamepadDisconnect.Label.MessageGeneric,"La manette de l'utilisateur ""%s"" a été déconnecté. Reconnecter la manette."
 Feature.GamepadDisconnect.Label.Title,Manette manquante
@@ -3747,6 +3750,7 @@ Feature.Moments.Label.DeleteMomentBody,"Une fois disparu, un moment ne peut plus
 Feature.Moments.Label.DeleteMomentTitle,Supprimer le moment ?
 Feature.Moments.Label.DeleteVoiceoverBody,Ton texte et ta voix off seront effacés. Tu peux recommencer à tout moment.
 Feature.Moments.Label.DeleteVoiceoverTitle,Supprimer la voix off ?
+Feature.Moments.Label.DragHereToDelete,Fais glisser ici pour supprimer
 Feature.Moments.Label.DurationSeconds,{seconds} s
 Feature.Moments.Label.Engagement,Engagement
 Feature.Moments.Label.Error,Un problème s'est produit. Essaie à nouveau.

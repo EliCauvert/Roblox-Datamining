@@ -1,74 +1,107 @@
-﻿local ShareSheet = script:FindFirstAncestor("ShareSheet")
-local Parent = ShareSheet.Parent
+﻿local Parent = script:FindFirstAncestor("ShareSheet").Parent
 local ReactModule = require(Parent.React)
-local ConversationUtilsModule = require(ShareSheet.Utils.ConversationUtils)
-local _ = require(Parent.AppChat.GetConversationListStore)
+local ConversationRecipientModule = require(script.Parent.Kinds.ConversationRecipient)
 local _ = require(Parent.AppChat.GetExternalChatMessageSenderStore)
 local _ = require(Parent.LuauPolyfill)
-local UseExternalChatConversationEligibilityModule = require(Parent.AppChat.useExternalChatConversationEligibility)
+local _ = require(script.Parent.Kinds.RecipientKind)
+local _ = require(Parent.Signals)
+local UserRecipientModule = require(script.Parent.Kinds.UserRecipient)
+local Frozen = table.freeze({
+	conversation = ConversationRecipientModule.kind,
+	user = UserRecipientModule.kind
+})
+local Frozen1 = table.freeze({})
+
+local function _(p1)
+	-- upvalues: Frozen (copy)
+	return Frozen[p1.kind]
+end
 
 return {
 	canSend = function(p1, p2)
-		return p1.canSendToConversation(p2.conversation)
+		-- upvalues: Frozen (copy)
+		return Frozen[p2.kind].canSend(p1, p2)
 	end,
-	fromConversation = function(Conversation)
-		return { id = Conversation.id, conversation = Conversation }
-	end,
-	getName = function(p1)
-		-- upvalues: ConversationUtilsModule (copy)
-		return ConversationUtilsModule.getDisplayName(p1.conversation)
+	fromConversation = ConversationRecipientModule.create,
+	fromUserId = UserRecipientModule.create,
+	getName = function(p1, p2)
+		-- upvalues: Frozen (copy)
+		return Frozen[p1.kind].getName(p1, p2)
 	end,
 	getParticipantIds = function(p1, p2)
-		local List = {}
-		
-		for _, value in p1.conversation.participants or {} do
-			if value ~= p2 then
-				table.insert(List, value)
+		-- upvalues: Frozen (copy)
+		return Frozen[p1.kind].getParticipantIds(p1, p2)
+	end,
+	send = function(p1, p2, p3)
+		-- upvalues: Frozen (copy)
+		return Frozen[p2.kind].send(p1, p2, p3)
+	end,
+	useEligibleRecipients = function(KindProps)
+		-- upvalues: ReactModule (copy), Frozen1 (copy), Frozen (copy)
+		local UseMemoResult = ReactModule.useMemo(function()
+			-- upvalues: KindProps (copy)
+			local t = {}
+			
+			for _, recipient in KindProps.recipients do
+				local List = t[recipient.kind] or {}
+				table.insert(List, recipient)
+				t[recipient.kind] = List
 			end
+			return t
+		end, { KindProps.recipients })
+		
+		local function _(p1)
+			-- upvalues: UseMemoResult (copy), Frozen1 (upval), KindProps (copy)
+			return {
+				recipients = UseMemoResult[p1] or Frozen1,
+				isActive = KindProps.isActive,
+				isGroupChatEnabled = KindProps.isGroupChatEnabled,
+				maxCount = KindProps.maxCount
+			}
 		end
-		return List
-	end,
-	send = function(p3, p4, p5)
-		return p3.sendToConversation(p4.conversation, p5)
-	end,
-	useEligibleRecipients = function(p3)
-		-- upvalues: ReactModule (copy), UseExternalChatConversationEligibilityModule (copy)
-		local UseExternalChatConversationEligibilityModuleResult = UseExternalChatConversationEligibilityModule({
-			conversations = ReactModule.useMemo(function()
-				-- upvalues: p3 (copy)
-				local Buffer = table.create(#p3.recipients)
-				
-				for i, recipient in p3.recipients do
-					Buffer[i] = recipient.conversation
-				end
-				return Buffer
-			end, { p3.recipients }),
-			isActive = p3.isActive,
-			isGroupChatEnabled = p3.isGroupChatEnabled,
-			maxConversationCount = p3.maxCount
+		
+		local UseEligibilityResult = Frozen.conversation.useEligibility({
+			recipients = UseMemoResult.conversation or Frozen1,
+			isActive = KindProps.isActive,
+			isGroupChatEnabled = KindProps.isGroupChatEnabled,
+			maxCount = KindProps.maxCount
+		})
+		local UseEligibilityResult1 = Frozen.user.useEligibility({
+			recipients = UseMemoResult.user or Frozen1,
+			isActive = KindProps.isActive,
+			isGroupChatEnabled = KindProps.isGroupChatEnabled,
+			maxCount = KindProps.maxCount
 		})
 		
 		return ReactModule.useMemo(function()
-			-- upvalues: UseExternalChatConversationEligibilityModuleResult (copy), p3 (copy)
-			local t = {}
+			-- upvalues: UseEligibilityResult (copy), UseEligibilityResult1 (copy), KindProps (copy), UseMemoResult (copy)
+			local config = {
+				conversation = UseEligibilityResult,
+				user = UseEligibilityResult1
+			}
+			local NoIsActive = not KindProps.isActive
 			
-			for _, eligibleConversation in UseExternalChatConversationEligibilityModuleResult.eligibleConversations do
-				t[eligibleConversation] = true
+			for i, value in config do
+				if UseMemoResult[i] and value.isLoading then
+					NoIsActive = true
+				end
+			end
+			if NoIsActive then
+				return { isLoading = true, recipients = {} }
 			end
 			local Recipients = {}
 			
-			for _, recipient in p3.recipients do
-				if t[recipient.conversation] then
+			for _, recipient in KindProps.recipients do
+				if config[recipient.kind].isEligible(recipient) then
 					table.insert(Recipients, recipient)
+					
+					if KindProps.maxCount <= #Recipients then break end
 				end
 			end
-			return {
-				recipients = Recipients,
-				isLoading = UseExternalChatConversationEligibilityModuleResult.isLoading
-			}
+			return { isLoading = false, recipients = Recipients }
 		end, {
-			UseExternalChatConversationEligibilityModuleResult,
-			p3.recipients
+			UseEligibilityResult, KindProps.isActive, KindProps.maxCount,
+			KindProps.recipients, UseMemoResult, UseEligibilityResult1
 		})
 	end
 }

@@ -7,5 +7,6 @@
 	RequestFriendshipFromContactId = require(script.RequestFriendshipFromContactId),
 	AcceptFriendRequestFromUserId = require(script.AcceptFriendRequestFromUserId),
 	DeclineFriendRequestFromUserId = require(script.DeclineFriendRequestFromUserId),
-	UnfriendTargetUserId = require(script.UnfriendTargetUserId)
+	UnfriendTargetUserId = require(script.UnfriendTargetUserId),
+	SearchFriendsByQuery = require(script.SearchFriendsByQuery)
 }

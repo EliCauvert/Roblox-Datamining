@@ -83,13 +83,13 @@ local function getDisplayNames(p1, p2, p3, UseMemoResult, DisplayName)
 		local v2 = if FFlagShareSheetFriendsSort then nil else p2[i]
 		local v3 = if FFlagShareSheetFriendsSort then p3[i] else nil
 		local Id = if FFlagShareSheetFriendsSort then v3.id else v2.id
-		local Name = if FFlagShareSheetFriendsSort then RecipientModule.getName(v3) else ConversationUtilsModule.getDisplayName(v2)
+		local Name = if FFlagShareSheetFriendsSort then RecipientModule.getName(v3, p1) else ConversationUtilsModule.getDisplayName(v2)
 		local UseMemoResultEntry = UseMemoResult[Id]
 		
 		if UseMemoResultEntry then
 			local Primary = UseMemoResultEntry.primary
-			local IsNotReady = nil
 			local InfoResult = nil
+			local IsNotReady = nil
 			
 			if Primary == nil then
 				InfoResult = nil
@@ -195,12 +195,12 @@ return function(p5)
 	local DisplayNamesByConversationId = UseConversationDisplayNamesResult.displayNamesByConversationId
 	local UseMemoResult = ReactModule.useMemo(function()
 		-- upvalues: FFlagShareSheetFriendsSort (upval), FilterConversationsByQueryModule (upval), p5 (copy), DisplayNamesByConversationId (copy), UseConversationDisplayNamesResult (copy)
-		return if FFlagShareSheetFriendsSort then nil else FilterConversationsByQueryModule(p5.conversations, p5.debouncedQuery, DisplayNamesByConversationId, UseConversationDisplayNamesResult.descriptionsByConversationId)
+		return if FFlagShareSheetFriendsSort then nil else FilterConversationsByQueryModule(p5.conversations, p5.filterQuery, DisplayNamesByConversationId, UseConversationDisplayNamesResult.descriptionsByConversationId)
 	end, {
 		DisplayNamesByConversationId,
 		UseConversationDisplayNamesResult.descriptionsByConversationId,
 		p5.conversations,
-		p5.debouncedQuery
+		p5.filterQuery
 	})
 	local UseMemoResult1 = ReactModule.useMemo(function()
 		-- upvalues: FFlagShareSheetFriendsSort (upval), p5 (copy), DisplayNamesByConversationId (copy), UseConversationDisplayNamesResult (copy), Array (upval), MatchesQueryModule (upval)
@@ -208,13 +208,13 @@ return function(p5)
 			return nil
 		end
 		local Recipients = p5.recipients
-		local DebouncedQuery: string = p5.debouncedQuery
+		local FilterQuery: string = p5.filterQuery
 		local DescriptionsByConversationId = UseConversationDisplayNamesResult.descriptionsByConversationId
 		
-		if DebouncedQuery == "" then
+		if FilterQuery == "" then
 			return Recipients
 		else
-			local Lowered = string.lower(DebouncedQuery)
+			local Lowered = string.lower(FilterQuery)
 			
 			return (Array.filter(Recipients, function(p6)
 				-- upvalues: MatchesQueryModule (upval), Lowered (copy), DisplayNamesByConversationId (copy), DescriptionsByConversationId (copy)
@@ -224,7 +224,7 @@ return function(p5)
 	end, {
 		DisplayNamesByConversationId,
 		UseConversationDisplayNamesResult.descriptionsByConversationId,
-		p5.debouncedQuery,
+		p5.filterQuery,
 		p5.recipients
 	})
 	local UseMemoResult2 = ReactModule.useMemo(function()

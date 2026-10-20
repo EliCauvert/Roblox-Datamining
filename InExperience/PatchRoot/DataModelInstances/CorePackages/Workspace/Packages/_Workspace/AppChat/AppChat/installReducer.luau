@@ -2,11 +2,9 @@
 local Parent = AppChat.Parent
 local RoduxModule = require(Parent.Rodux)
 local FFlagAppChatPresenceStoreMigrationModule = require(AppChat.Flags.FFlagAppChatPresenceStoreMigration)
-local FFlagAppChatUnreadMessageCountStoreModule = require(AppChat.Flags.FFlagAppChatUnreadMessageCountStore)
-local FFlagAppChatRemoveToggleChatPaused = require(Parent.SharedFlags).FFlagAppChatRemoveToggleChatPaused
 
 return function()
-	-- upvalues: RoduxModule (copy), Parent (copy), AppChat (copy), FFlagAppChatPresenceStoreMigrationModule (copy), FFlagAppChatRemoveToggleChatPaused (copy), FFlagAppChatUnreadMessageCountStoreModule (copy)
+	-- upvalues: RoduxModule (copy), Parent (copy), AppChat (copy), FFlagAppChatPresenceStoreMigrationModule (copy)
 	return RoduxModule.combineReducers({
 		PlaceInfos = require(Parent.PlaceInfoRodux).Reducers.PlaceInfosReducer,
 		PlaceInfosAsync = require(Parent.PlaceInfoRodux).Reducers.PlaceInfosAsyncReducer,
@@ -22,8 +20,6 @@ return function()
 		Modals = require(script.Modals),
 		ParticipantMetadata = require(script.ParticipantMetadata),
 		Presence = if FFlagAppChatPresenceStoreMigrationModule then nil else require(script.Presence),
-		ToggleChatPaused = if FFlagAppChatRemoveToggleChatPaused then nil else require(AppChat.installReducer.ToggleChatPaused),
-		networkStatus = require(AppChat.Http.RoduxNetworking).installReducer(),
-		unreadMessageCount = if FFlagAppChatUnreadMessageCountStoreModule then nil else require(script.UnreadMessageCount)
+		networkStatus = require(AppChat.Http.RoduxNetworking).installReducer()
 	})
 end

@@ -12,6 +12,7 @@ local ViewModule = require(Foundation.Components.View)
 local UseOverlayModule = require(Foundation.Providers.Overlay.useOverlay)
 local OnCloseCallbackReasonModule = require(Foundation.Enums.OnCloseCallbackReason)
 local StateLayerAffordanceModule = require(Foundation.Enums.StateLayerAffordance)
+local FlagsModule = require(Foundation.Utility.Flags)
 local UseScaledValueModule = require(Foundation.Utility.useScaledValue)
 local UseTokensModule = require(Foundation.Providers.Style.useTokens)
 local WithCommonPropsModule = require(Foundation.Utility.withCommonProps)
@@ -36,7 +37,7 @@ local SHADOWIMAGE = ConstantsModule.SHADOW_IMAGE
 local SHADOWSIZE = ConstantsModule.SHADOW_SIZE
 
 local function Dialog(p1)
-	-- upvalues: DashModule (copy), UseDialogVariantsFunction (copy), UseScaledValueModule (copy), ReactModule (copy), UseOverlayModule (copy), UseElevationModule (copy), ElevationLayerModule (copy), UseDialogModule (copy), UseDialogResponsiveSizeModule (copy), UseTokensModule (copy), UsePreferencesModule (copy), UseAnimatedBindingFunction (copy), OtterModule (copy), ViewModule (copy), ImageModule (copy), SHADOWIMAGE (copy), SHADOWSIZE (copy), WithCommonPropsModule (copy), StateLayerAffordanceModule (copy), TypesModule (copy), CloseAffordanceModule (copy), ElevationOwnerScope (copy), OnCloseCallbackReasonModule (copy), ReactRobloxModule (copy)
+	-- upvalues: DashModule (copy), UseDialogVariantsFunction (copy), UseScaledValueModule (copy), ReactModule (copy), UseOverlayModule (copy), UseElevationModule (copy), ElevationLayerModule (copy), UseDialogModule (copy), UseDialogResponsiveSizeModule (copy), UseTokensModule (copy), UsePreferencesModule (copy), UseAnimatedBindingFunction (copy), OtterModule (copy), ViewModule (copy), FlagsModule (copy), ImageModule (copy), SHADOWIMAGE (copy), SHADOWSIZE (copy), WithCommonPropsModule (copy), StateLayerAffordanceModule (copy), TypesModule (copy), CloseAffordanceModule (copy), ElevationOwnerScope (copy), OnCloseCallbackReasonModule (copy), ReactRobloxModule (copy)
 	local AssignResult = DashModule.assign({}, p1, { LayoutOrder = 1 })
 	local UseDialogVariantsResult = UseDialogVariantsFunction()
 	local UseScaledValueModuleResult = UseScaledValueModule(UseDialogVariantsResult.inner.maxWidth)
@@ -122,7 +123,13 @@ local function Dialog(p1)
 		end
 	end, { UseMemoResult })
 	local Element = ReactModule.createElement(ViewModule, { ZIndex = 2, tag = UseDialogVariantsResult.container.tag }, {
-		Shadow = ReactModule.createElement(ImageModule, {
+		Shadow = if FlagsModule.FoundationDialogOverlayShadow then ReactModule.createElement(ViewModule, {
+			tag = "shadow-overlay-300 radius-large",
+			Size = UseBindingResult:map(function(Vector): UDim2
+				return UDim2.fromOffset(Vector.X, Vector.Y)
+			end),
+			testId = `{AssignResult.testId}--shadow`
+		}) else ReactModule.createElement(ImageModule, {
 			Image = SHADOWIMAGE,
 			Size = UseBindingResult:map(function(Vector): UDim2
 				-- upvalues: SHADOWSIZE (upval)
@@ -206,13 +213,17 @@ local function Dialog(p1)
 				return UDim2.new(0.5, 0, 0.5, YOffset)
 			end),
 			sizeConstraint = if ReducedMotion then nil else {
-				MaxSize = Vector2.new(UseScaledValueModuleResult + SHADOWSIZE * 2, 1e999)
+				MaxSize = Vector2.new(UseScaledValueModuleResult + (if FlagsModule.FoundationDialogOverlayShadow then UseTokensModuleResult.Size.Size_1400 * 2 else SHADOWSIZE * 2), 1e999)
 			},
+			testId = `{AssignResult.testId}--content-wrapper`,
 			tag = {
 				["anchor-center-center size-full"] = not ReducedMotion,
 				["size-full"] = ReducedMotion
 			},
-			GroupTransparency = if ReducedMotion or not UseStateResult or not UseAnimatedBindingResult1 then nil else UseAnimatedBindingResult1:map(function(p2)
+			GroupTransparency = if FlagsModule.FoundationDialogOverlayShadow then if ReducedMotion or not UseAnimatedBindingResult1 then nil else UseAnimatedBindingResult1:map(function(p2)
+				-- upvalues: Size800 (copy)
+				return p2 / Size800
+			end) elseif ReducedMotion or not UseStateResult or not UseAnimatedBindingResult1 then nil else UseAnimatedBindingResult1:map(function(p2)
 				-- upvalues: Size800 (copy)
 				return p2 / Size800
 			end)

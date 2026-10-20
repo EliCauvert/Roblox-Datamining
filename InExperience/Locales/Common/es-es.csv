@@ -437,6 +437,7 @@ CommonUI.Features.Label.ControllerBar.HoldPrefix,Presiona
 CommonUI.Features.Label.ControllerBar.Search,
 CommonUI.Features.Label.ControllerBar.ToPlaySuffix,para jugar
 CommonUI.Features.Label.CreateGames,
+CommonUI.Features.Label.DevSubs,Suscripciones
 CommonUI.Features.Label.Friends,Amigos
 CommonUI.Features.Label.Game,Experiencias
 CommonUI.Features.Label.Games,Juegos
@@ -3123,6 +3124,7 @@ Feature.Contacts.Message.ContactDiscoverable,"Para ayudarte a hacer amigos, los 
 Feature.Contacts.Message.ContactsSyncWarning,Tus contactos se sincronizarán regularmente y se almacenarán las coincidencias con otros usuarios de Roblox para ayudarte a encontrar amigos. Administra esto en cualquier momento en la configuración del dispositivo.
 Feature.Contacts.Message.InviteToRoblox,"Agrégame como amistad en Roblox para que podamos crear, compartir y explorar experiencias juntos."
 Feature.Contacts.Message.NoResults,Sin resultados.
+Feature.DeveloperProducts.Heading.Products,Productos
 Feature.DeveloperProducts.Label.Product,Producto
 Feature.DisplayName.ErrorMessage.AgedUpNameContainPII,El nombre puede contener información privada
 Feature.DisplayName.ErrorMessage.AgedUpNameHasChanged,Tu nombre ya cambió en los últimos 7 días
@@ -3457,6 +3459,7 @@ Feature.GamePage.QuickLaunch.LaunchError.GuestProhibited,Los invitados no pueden
 Feature.GamePage.QuickLaunch.LaunchError.PurchaseRequired,Se necesita pagar para unirse a esta experiencia.
 Feature.GamePage.QuickLaunch.LaunchError.RequestFailed,Error al solicitar la red
 Feature.GamePage.QuickLaunch.LaunchError.TemporarilyUnavailable,No puedes unirte a la experiencia en este momento.
+Feature.GamePass.Heading.PassesForThisGame,Pases
 Feature.GamepadDisconnect.Label.Message,"El mando para el usuario ""%s"" se desconectó. Presiona '%s' en el mando con el que te gustaría continuar."
 Feature.GamepadDisconnect.Label.MessageGeneric,"Se desconectó el mando para el usuario ""%s"". Vuelve a conectarlo."
 Feature.GamepadDisconnect.Label.Title,Falta el mando

@@ -436,6 +436,7 @@ CommonUI.Features.Label.ControllerBar.HoldPrefix,Oynamak için
 CommonUI.Features.Label.ControllerBar.Search,
 CommonUI.Features.Label.ControllerBar.ToPlaySuffix,düğmesine basılı tut
 CommonUI.Features.Label.CreateGames,
+CommonUI.Features.Label.DevSubs,Abonelikler
 CommonUI.Features.Label.Friends,Arkadaşlar
 CommonUI.Features.Label.Game,Deneyimler
 CommonUI.Features.Label.Games,Oyunlar
@@ -3109,6 +3110,7 @@ Feature.Contacts.Message.ContactDiscoverable,"Arkadaş edinmene yardımcı olmak
 Feature.Contacts.Message.ContactsSyncWarning,"Rehberindeki kişiler düzenli olarak senkronize edilir. Diğer Roblox kullanıcılarıyla yapılan eşleştirmeler, arkadaş bulmanda sana yardımcı olmak için saklanır. Bu seçimi, cihaz ayarlarından istediğin zaman yönetebilirsin."
 Feature.Contacts.Message.InviteToRoblox,"Birlikte deneyimler oluşturabilmemiz, paylaşabilmemiz ve keşfedebilmemiz için beni Roblox'ta arkadaş olarak ekle."
 Feature.Contacts.Message.NoResults,Sonuç yok.
+Feature.DeveloperProducts.Heading.Products,Ürünler
 Feature.DeveloperProducts.Label.Product,
 Feature.DisplayName.ErrorMessage.AgedUpNameContainPII,"Ad, özel bilgiler içerebilir"
 Feature.DisplayName.ErrorMessage.AgedUpNameHasChanged,Adın son 7 gün içinde zaten değiştirildi
@@ -3443,6 +3445,7 @@ Feature.GamePage.QuickLaunch.LaunchError.GuestProhibited,Misafirler bu deneyime 
 Feature.GamePage.QuickLaunch.LaunchError.PurchaseRequired,Bu deneyimi ziyaret etmek için satın alım gerekiyor.
 Feature.GamePage.QuickLaunch.LaunchError.RequestFailed,Ağ isteği başarısız.
 Feature.GamePage.QuickLaunch.LaunchError.TemporarilyUnavailable,Bu deneyim şu anda ziyaret edilemiyor.
+Feature.GamePass.Heading.PassesForThisGame,Biletler
 Feature.GamepadDisconnect.Label.Message,"""%s"" adlı kullanıcının kontrol cihazı bağlantısı kesildi, lütfen kullanmak istediğin kontrol cihazı ""%s"" tuşuna bas."
 Feature.GamepadDisconnect.Label.MessageGeneric,"""%s"" adlı kullanıcının kontrol cihazı bağlantısı kesildi. Lütfen kontrol cihazı yeniden bağla."
 Feature.GamepadDisconnect.Label.Title,Kontrol cihazı Yok
@@ -3703,6 +3706,7 @@ Feature.Moments.Label.DeleteMomentBody,Bir An silindikten sonra onu kurtarmak m�
 Feature.Moments.Label.DeleteMomentTitle,An silinsin mi?
 Feature.Moments.Label.DeleteVoiceoverBody,"Bu, işlem metnini ve seslendirmeni siler. İstediğin zaman baştan başlayabilirsin."
 Feature.Moments.Label.DeleteVoiceoverTitle,Seslendirme silinsin mi?
+Feature.Moments.Label.DragHereToDelete,Silmek için buraya sürükle
 Feature.Moments.Label.DurationSeconds,{seconds} sn.
 Feature.Moments.Label.Engagement,Etkileşim
 Feature.Moments.Label.Error,

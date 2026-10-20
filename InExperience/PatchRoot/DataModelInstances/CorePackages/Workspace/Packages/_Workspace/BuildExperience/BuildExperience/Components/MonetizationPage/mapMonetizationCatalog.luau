@@ -1,8 +1,11 @@
 ﻿local Parent = script:FindFirstAncestor("BuildExperience").Parent
 local _ = require(Parent.DataHydration.DeveloperProduct)
+local DeveloperSubscriptionModule = require(Parent.DataHydration.DeveloperSubscription)
 local _ = require(Parent.DataHydration.GamePassConfig)
 local _ = require(script.Parent.MonetizationPageView)
 local MapDeveloperProductsToMonetizationProductsModule = require(script.Parent.mapDeveloperProductsToMonetizationProducts)
+local CurrencyType = DeveloperSubscriptionModule.CurrencyType
+local ProductStatusType = DeveloperSubscriptionModule.ProductStatusType
 
 local function _(p1, p2): string
 	return `{p1}:{p2}`
@@ -37,14 +40,40 @@ local function mapGamePasses(GamePasses, p1, List)
 	end
 end
 
-return function(p2, p3)
-	-- upvalues: MapDeveloperProductsToMonetizationProductsModule (copy), mapGamePasses (copy)
-	local MapDeveloperProductsToMonetizationProductsModuleResult = MapDeveloperProductsToMonetizationProductsModule(p2.developerProducts, {
-		formatDefaultProductName = p3.formatDefaultProductName,
-		priceUnavailable = p3.priceUnavailable,
-		productType = p3.developerProductType,
-		onSale = p3.onSale,
-		offSale = p3.offSale
+local function mapSubscriptions(Subscriptions, p2, List)
+	-- upvalues: CurrencyType (copy), ProductStatusType (copy)
+	if Subscriptions == nil then return end
+	for _, developerSubscription in Subscriptions.developerSubscriptions do
+		local PriceInRobux = if developerSubscription.currencyType == CurrencyType.Robux then developerSubscription.priceInRobux else nil
+		local PriceUnavailable = p2.priceUnavailable
+		local PriceUnavailable1 = if PriceInRobux == nil then PriceUnavailable else tostring(PriceInRobux)
+		local IsProductStatusTypeMatch = if developerSubscription.productStatusType == nil then nil else developerSubscription.productStatusType == ProductStatusType.Active
+		table.insert(List, {
+			productKind = "Subscription",
+			canManage = false,
+			id = developerSubscription.id,
+			identity = `Subscription:{developerSubscription.id}`,
+			name = developerSubscription.name or p2.subscriptionType,
+			price = PriceUnavailable1,
+			priceInRobux = PriceInRobux,
+			showRobuxIcon = PriceInRobux ~= nil,
+			isForSale = IsProductStatusTypeMatch,
+			kind = p2.subscriptionType,
+			saleStatus = if IsProductStatusTypeMatch == nil then nil elseif IsProductStatusTypeMatch then p2.onSale else p2.offSale,
+			image = if developerSubscription.imageAssetId == nil then nil else `rbxassetid://{developerSubscription.imageAssetId}`,
+			description = developerSubscription.description or ""
+		})
+	end
+end
+
+return function(p3, p4)
+	-- upvalues: MapDeveloperProductsToMonetizationProductsModule (copy), mapGamePasses (copy), mapSubscriptions (copy)
+	local MapDeveloperProductsToMonetizationProductsModuleResult = MapDeveloperProductsToMonetizationProductsModule(p3.developerProducts, {
+		formatDefaultProductName = p4.formatDefaultProductName,
+		priceUnavailable = p4.priceUnavailable,
+		productType = p4.developerProductType,
+		onSale = p4.onSale,
+		offSale = p4.offSale
 	})
 	
 	for _, value in MapDeveloperProductsToMonetizationProductsModuleResult do
@@ -53,7 +82,8 @@ return function(p2, p3)
 		value.canManage = true
 		value.showRobuxIcon = value.priceInRobux ~= nil
 	end
-	mapGamePasses(p2.gamePasses, p3, MapDeveloperProductsToMonetizationProductsModuleResult)
+	mapGamePasses(p3.gamePasses, p4, MapDeveloperProductsToMonetizationProductsModuleResult)
+	mapSubscriptions(p3.subscriptions, p4, MapDeveloperProductsToMonetizationProductsModuleResult)
 	
 	return MapDeveloperProductsToMonetizationProductsModuleResult
 end

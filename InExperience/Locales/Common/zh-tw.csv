@@ -435,6 +435,7 @@ CommonUI.Features.Label.ControllerBar.HoldPrefix,按住
 CommonUI.Features.Label.ControllerBar.Search,
 CommonUI.Features.Label.ControllerBar.ToPlaySuffix,開始遊戲
 CommonUI.Features.Label.CreateGames,創作
+CommonUI.Features.Label.DevSubs,訂閱
 CommonUI.Features.Label.Friends,好友
 CommonUI.Features.Label.Game,體驗
 CommonUI.Features.Label.Games,遊戲
@@ -2521,7 +2522,7 @@ Feature.Build.Title.PromoteGamePaid,更多玩家正在等著你
 Feature.Build.Title.PushNotifications,推播通知
 Feature.Build.Title.RevertLastChange,是否要還原上次的變更？
 Feature.Build.Title.StopBuild,要停止建立嗎？
-Feature.Build.Title.Subscription,訂閱
+Feature.Build.Title.Subscription,
 Feature.Build.Title.Tasks,任務
 Feature.Build.Title.TurnActivity,回合活動
 Feature.Build.Title.UseYourAdCredits,使用廣告點數
@@ -3152,7 +3153,8 @@ Feature.Contacts.Message.ContactDiscoverable,為了協助您結交朋友，在�
 Feature.Contacts.Message.ContactsSyncWarning,我們將定期同步你的通訊錄，並儲存與其他 Roblox 使用者的配對結果，以協助你更輕鬆地找到。你可以隨時在裝置設定頁面管理此設定。
 Feature.Contacts.Message.InviteToRoblox,在 Roblox 上加我好友，讓我們一起創作、分享並探索體驗。
 Feature.Contacts.Message.NoResults,沒有結果。
-Feature.DeveloperProducts.Label.Product,產品
+Feature.DeveloperProducts.Heading.Products,產品
+Feature.DeveloperProducts.Label.Product,
 Feature.DisplayName.ErrorMessage.AgedUpNameContainPII,名稱可能含有私人資訊
 Feature.DisplayName.ErrorMessage.AgedUpNameHasChanged,您的名稱已在過去 7 天之內變更
 Feature.DisplayName.ErrorMessage.AgedUpNameInappropriate,Roblox 視此名稱為不當內容
@@ -3486,6 +3488,7 @@ Feature.GamePage.QuickLaunch.LaunchError.GuestProhibited,訪客無法加入此�
 Feature.GamePage.QuickLaunch.LaunchError.PurchaseRequired,必須購買此體驗的參訪權。
 Feature.GamePage.QuickLaunch.LaunchError.RequestFailed,網路請求失敗。
 Feature.GamePage.QuickLaunch.LaunchError.TemporarilyUnavailable,目前無法參訪此體驗。
+Feature.GamePass.Heading.PassesForThisGame,特權證
 Feature.GamepadDisconnect.Label.Message,"用戶控制器 ""%s"" 已斷線,請按 '%s在你想繼續使用的控制器上。"
 Feature.GamepadDisconnect.Label.MessageGeneric,使用者「%s」的控制器已斷線。請重新連線控制器。
 Feature.GamepadDisconnect.Label.Title,缺少控制器
@@ -3746,6 +3749,7 @@ Feature.Moments.Label.DeleteMomentBody,美好時光一經刪除即無法復原�
 Feature.Moments.Label.DeleteMomentTitle,要刪除美好時光嗎？
 Feature.Moments.Label.DeleteVoiceoverBody,此操作會清除你的文字和旁白。你可以隨時重新開始。
 Feature.Moments.Label.DeleteVoiceoverTitle,要刪除旁白嗎？
+Feature.Moments.Label.DragHereToDelete,拖曳到此處即可刪除
 Feature.Moments.Label.DurationSeconds,{seconds} 秒
 Feature.Moments.Label.Engagement,互動
 Feature.Moments.Label.Error,

@@ -124,7 +124,9 @@
 		LoginV2Modal = "loginV2Modal",
 		LoginV2QuickLoginModal = "loginV2QuickLoginModal",
 		LoginV2OtherSignInOptionsModal = "loginV2OtherSignInOptionsModal",
-		LoginOtherSignInOptionsModal = "loginOtherSignInOptionsModal"
+		LoginOtherSignInOptionsModal = "loginOtherSignInOptionsModal",
+		MarketingEmailConsent = "marketingEmailConsent",
+		MarketingEmailAutoOptIn = "marketingEmailAutoOptIn"
 	},
 	Context = {
 		AccountPickerLandingScreen = "accountPickerLandingScreen",

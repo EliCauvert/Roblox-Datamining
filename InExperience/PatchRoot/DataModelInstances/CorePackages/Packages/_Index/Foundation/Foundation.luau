@@ -182,6 +182,7 @@ local Foundation = require(script.Utility.strict)({
 		StatusIndicatorShape = require(script.Enums.StatusIndicatorShape),
 		StatusIndicatorSize = require(script.Enums.StatusIndicatorSize),
 		StatusIndicatorVariant = require(script.Enums.StatusIndicatorVariant),
+		TextOverflow = require(script.Enums.TextOverflow),
 		Theme = require(script.Enums.Theme),
 		ThemeName = require(script.Enums.ThemeName),
 		ThumbnailType = require(script.Enums.ThumbnailType),

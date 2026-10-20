@@ -22,18 +22,31 @@ local ButtonType = UIBloxModule.App.Button.Enum.ButtonType
 local UseScrollFrameHeightCalculationModule = require(InterventionShared.Hooks.useScrollFrameHeightCalculation)
 local UseCursorFunction = UIBloxModule.App.SelectionCursor.useCursor
 local UseInterventionPlacementModule = require(InterventionShared.Hooks.useInterventionPlacement)
+local UseDeviceInsetsFunction = require(Parent.Responsive).useDeviceInsets
 local FFlagExpChatEnableFriendsTab = require(Parent.SharedFlags).FFlagExpChatEnableFriendsTab
+local FFlagLuaAppSupportDeviceSafeInsets = require(Parent.SharedFlags).FFlagLuaAppSupportDeviceSafeInsets
+local AppChatInterventionDeviceSafeInsets = game:DefineFastFlag("AppChatInterventionDeviceSafeInsets", false)
 local FocusNavigationUtilsModule = require(Parent.FocusNavigationUtils)
 local FocusNavigableSurfaceIdentifierEnum = FocusNavigationUtilsModule.FocusNavigableSurfaceIdentifierEnum
 local FocusRoot = FocusNavigationUtilsModule.FocusRoot
 
 function InterventionDialog(p1)
-	-- upvalues: UseLayerCollectorFunction (copy), ReactModule (copy), UseTokensFunction (copy), UseStyleFunction (copy), UseInterventionPlacementModule (copy), UseLocalizationFunction (copy), ConstantsModule (copy), InterventionAnalyticsModule (copy), NotificationModalsManagerModule (copy), IconsActionsAccept (copy), UseScrollFrameHeightCalculationModule (copy), UseCursorFunction (copy), ModalWindow (copy), View (copy), ScrollView (copy), ScrollBarVisibility (copy), FocusRoot (copy), FocusNavigableSurfaceIdentifierEnum (copy), Icon (copy), Text (copy), FFlagExpChatEnableFriendsTab (copy), ButtonStack (copy), ButtonType (copy)
+	-- upvalues: UseLayerCollectorFunction (copy), ReactModule (copy), UseTokensFunction (copy), UseStyleFunction (copy), UseInterventionPlacementModule (copy), AppChatInterventionDeviceSafeInsets (copy), FFlagLuaAppSupportDeviceSafeInsets (copy), UseDeviceInsetsFunction (copy), ConstantsModule (copy), UseLocalizationFunction (copy), InterventionAnalyticsModule (copy), NotificationModalsManagerModule (copy), IconsActionsAccept (copy), UseScrollFrameHeightCalculationModule (copy), UseCursorFunction (copy), ModalWindow (copy), View (copy), ScrollView (copy), ScrollBarVisibility (copy), FocusRoot (copy), FocusNavigableSurfaceIdentifierEnum (copy), Icon (copy), Text (copy), FFlagExpChatEnableFriendsTab (copy), ButtonStack (copy), ButtonType (copy)
 	local AbsoluteSize = UseLayerCollectorFunction().absoluteSize
 	local UseRefResult = ReactModule.useRef(DateTime.now().UnixTimestampMillis)
 	local UseTokensResult = UseTokensFunction()
 	local UseStyleResult = UseStyleFunction()
 	local UseInterventionPlacementModuleResult = UseInterventionPlacementModule()
+	local v1 = nil
+	
+	if AppChatInterventionDeviceSafeInsets and FFlagLuaAppSupportDeviceSafeInsets then
+		local UseDeviceInsetsResult = UseDeviceInsetsFunction()
+		
+		if UseInterventionPlacementModuleResult == ConstantsModule.InterventionPlacementType.InApp then
+			v1 = UseDeviceInsetsResult
+			AbsoluteSize = Vector2.new(math.max(0, AbsoluteSize.X - UseDeviceInsetsResult.left - UseDeviceInsetsResult.right), (math.max(0, AbsoluteSize.Y - UseDeviceInsetsResult.top - UseDeviceInsetsResult.bottom)))
+		end
+	end
 	local UseLocalizationResult = UseLocalizationFunction(ConstantsModule.localizationKeys)
 	local UseResult = ReactModule.useCallback(function()
 		-- upvalues: InterventionAnalyticsModule (upval), p1 (copy), UseInterventionPlacementModuleResult (copy), UseRefResult (copy)
@@ -95,11 +108,10 @@ function InterventionDialog(p1)
 			duration = p1.durationForAnalytics
 		})
 	end, { UseRefResult, p1.eventId })
-	local UseScrollFrameHeightCalculationModuleResult = UseScrollFrameHeightCalculationModule({})
+	local UseScrollFrameHeightCalculationModuleResult = UseScrollFrameHeightCalculationModule({ screenSize = if v1 then AbsoluteSize else nil })
 	local GapXlarge: string = if AbsoluteSize.X > 540 then "gap-xlarge" else "gap-medium"
 	local UseCursorResult = UseCursorFunction(UDim.new(0, UseStyleResult.Tokens.Radius.Medium), UseStyleResult.Tokens.Size.Size_100, UseStyleResult.Tokens.Size.Size_50)
-	
-	return ReactModule.createElement(ModalWindow, { isFullHeight = false, screenSize = AbsoluteSize }, {
+	local Element = ReactModule.createElement(ModalWindow, { isFullHeight = false, screenSize = AbsoluteSize }, {
 		ContentContainer = ReactModule.createElement(View, {
 			tag = "padding-x-xlarge padding-y-large",
 			Size = UDim2.new(1, 0, 0, 0),
@@ -205,6 +217,12 @@ function InterventionDialog(p1)
 			})
 		})
 	})
+	
+	return if v1 then ReactModule.createElement(View, {
+		testId = "intervention-dialog-safe-area",
+		Position = UDim2.fromOffset(v1.left, v1.top),
+		Size = UDim2.new(1, -v1.left - v1.right, 1, -v1.top - v1.bottom)
+	}, { Dialog = Element }) else Element
 end
 
 return ReactModule.memo(InterventionDialog)

@@ -419,6 +419,7 @@ CommonUI.Features.Label.ControllerBar.HoldPrefix,أوقف
 CommonUI.Features.Label.ControllerBar.Search,
 CommonUI.Features.Label.ControllerBar.ToPlaySuffix,للعب
 CommonUI.Features.Label.CreateGames,
+CommonUI.Features.Label.DevSubs,اشتراكات
 CommonUI.Features.Label.Friends,الأصدقاء
 CommonUI.Features.Label.Game,الخبرات
 CommonUI.Features.Label.Games,الألعاب
@@ -3080,6 +3081,7 @@ Feature.Contacts.Message.ContactDiscoverable,لمساعدتك في إنشاء ص
 Feature.Contacts.Message.ContactsSyncWarning,ستتم مزامنة جهات اتصالك بانتظام وسيتم تخزين المطابقات مع مستخدمي منصّة Roblox الآخرين لمساعدتك في العثور على الأصدقاء. يمكنك إدارة ذلك في أي وقت في إعدادات الجهاز.
 Feature.Contacts.Message.InviteToRoblox,أضفني كصديق على منصّة Roblox حتى نتمكن من إنشاء ومشاركة واستكشاف التجارب معًا.
 Feature.Contacts.Message.NoResults,لا توجد نتائج.
+Feature.DeveloperProducts.Heading.Products,منتجات
 Feature.DeveloperProducts.Label.Product,
 Feature.DisplayName.ErrorMessage.AgedUpNameContainPII,لعل الاسم يحتوي على معلومات خاصة
 Feature.DisplayName.ErrorMessage.AgedUpNameHasChanged,لقد غيرتَ اسمك بالفعل في الأيام السبعة الماضية
@@ -3414,6 +3416,7 @@ Feature.GamePage.QuickLaunch.LaunchError.GuestProhibited,لا يستطيع ال�
 Feature.GamePage.QuickLaunch.LaunchError.PurchaseRequired,تتطلب هذه التجربة إجراء عملية شراء لتتمكن من زيارتها.
 Feature.GamePage.QuickLaunch.LaunchError.RequestFailed,فشل طلب الشبكة.
 Feature.GamePage.QuickLaunch.LaunchError.TemporarilyUnavailable,لا يمكن زيارة هذه التجربة حاليًا.
+Feature.GamePass.Heading.PassesForThisGame,باس
 Feature.GamepadDisconnect.Label.Message,"لقد تم قطع اتصال وحدة التحكم الخاصة وحدة تحكم ""%s""، يرجى الضغط على %s في وحدة حدة تحكم تريد الاستمرار بها."
 Feature.GamepadDisconnect.Label.MessageGeneric,"تم قطع اتصال وحدة التحكم للمستخدم ""%s"". الرجاء إعادة الاتصال بوحدة التحكم."
 Feature.GamepadDisconnect.Label.Title,وحدة تحكم مفقود

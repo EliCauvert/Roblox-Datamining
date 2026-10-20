@@ -51,7 +51,7 @@ return ReactModule.memo(ReactModule.forwardRef(function(p1, Ref)
 		Text = if HasValue and UseStatusIndicatorVariantsModuleResult.content.style then ReactModule.createElement(TextModule, {
 			Text = if ReactIsModule.isBinding(WithDefaultsModuleResult.value) then WithDefaultsModuleResult.value:map(UseResult) else UseResult(WithDefaultsModuleResult.value),
 			textStyle = UseStatusIndicatorVariantsModuleResult.content.style,
-			fontStyle = if FlagsModule.FoundationStatusIndicatorDesignUpdate and UseStatusIndicatorVariantsModuleResult.content.typography then {
+			fontStyle = if FlagsModule.FoundationStatusIndicatorDesignUpdate then {
 				Font = UseStatusIndicatorVariantsModuleResult.content.font,
 				FontSize = UseStatusIndicatorVariantsModuleResult.content.typography.FontSize,
 				LineHeight = UseStatusIndicatorVariantsModuleResult.content.typography.LineHeight

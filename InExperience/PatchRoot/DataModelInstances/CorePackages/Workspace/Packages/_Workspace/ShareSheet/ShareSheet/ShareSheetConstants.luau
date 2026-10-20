@@ -1,5 +1,6 @@
 ﻿return {
 	FIntShareSheetMaxConversations = game:DefineFastInt("ShareSheetMaxConversations", 10),
+	FIntShareSheetFriendsSearchPageSize = game:DefineFastInt("ShareSheetFriendsSearchPageSize", 20),
 	FIntShareSheetNumAvatarSkeletons = game:DefineFastInt("ShareSheetNumAvatarSkeletons", 6),
 	FIntShareSheetPeoplePickerMaxConversations = game:DefineFastInt("ShareSheetPeoplePickerMaxConversations", 9999),
 	FIntShareSheetPeoplePickerOverscanRows = game:DefineFastInt("ShareSheetPeoplePickerOverscanRows", 2),

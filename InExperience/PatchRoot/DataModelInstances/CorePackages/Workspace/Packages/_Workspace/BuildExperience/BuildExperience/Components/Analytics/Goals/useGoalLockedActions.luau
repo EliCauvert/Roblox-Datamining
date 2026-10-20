@@ -18,6 +18,7 @@ local CreateAdCampaignSheetContainerModule = require(BuildExperience.Components.
 local GetAdsManagerUrlFunction = require(BuildExperience.Components.Ads.getAdsManagerUrl).getAdsManagerUrl
 local UseCreateAdCampaignModule = require(BuildExperience.Components.Ads.useCreateAdCampaign)
 local UseGetAdCampaignEligibilityModule = require(BuildExperience.Components.Ads.useGetAdCampaignEligibility)
+local UseGetAdCampaignsModule = require(BuildExperience.Components.Ads.useGetAdCampaigns)
 local ExperienceShareOverlaysModule = require(BuildExperience.Components.ShareAudience.ExperienceShareOverlays)
 local LocalizationStringsModule = require(BuildExperience.LocalizationStrings)
 local BuildNavigationParamsModule = require(BuildExperience.utils.BuildNavigationParams)
@@ -25,7 +26,7 @@ local UseExperienceShareFlowModule = require(BuildExperience.utils.useExperience
 local DeveloperProducts = require(Parent.UrlBuilder).UrlBuilder.fromString("create:dashboard/creations/experiences/{universeId}/monetization/developer-products")
 
 local function useCreateAdAction(p1)
-	-- upvalues: UseLocalizationFunction (copy), LocalizationStringsModule (copy), UseOpenWebViewFunction (copy), UseGetAdCampaignEligibilityModule (copy), FFlagEnablePaidAdsModule (copy), UseCreateAdCampaignModule (copy), ReactModule (copy), AdCampaignEligibilityUtilsModule (copy), GetAdsManagerUrlFunction (copy), CreateAdCampaignSheetContainerModule (copy), FFlagBuildAdsManagerUniverseUrlModule (copy), AdCampaignScheduleUtilsModule (copy), AdCampaignCreatedToastModule (copy)
+	-- upvalues: UseLocalizationFunction (copy), LocalizationStringsModule (copy), UseOpenWebViewFunction (copy), UseGetAdCampaignEligibilityModule (copy), FFlagEnablePaidAdsModule (copy), UseCreateAdCampaignModule (copy), ReactModule (copy), AdCampaignEligibilityUtilsModule (copy), UseGetAdCampaignsModule (copy), AdCampaignScheduleUtilsModule (copy), GetAdsManagerUrlFunction (copy), CreateAdCampaignSheetContainerModule (copy), FFlagBuildAdsManagerUniverseUrlModule (copy), AdCampaignCreatedToastModule (copy)
 	local UseLocalizationResult = UseLocalizationFunction({
 		adsManager = LocalizationStringsModule.ADS_STATS_ADS_MANAGER,
 		createSuccess = LocalizationStringsModule.ADS_STATS_CREATE_SUCCESS
@@ -44,6 +45,8 @@ local function useCreateAdAction(p1)
 	local UseStateResult4, UseStateResult2_3 = ReactModule.useState(false)
 	local UseRefResult = ReactModule.useRef(nil)
 	local CanCreateCampaign = AdCampaignEligibilityUtilsModule.canCreateCampaign(UseGetAdCampaignEligibilityModuleResult)
+	local UseGetAdCampaignsModuleResult, UseGetAdCampaignsModuleResult2 = UseGetAdCampaignsModule()
+	local Inverted = not (UseGetAdCampaignsModuleResult2 == "Ready" and AdCampaignScheduleUtilsModule.hasActiveCampaign(UseGetAdCampaignsModuleResult, p1, DateTime.now().UnixTimestampMillis))
 	local UseResult = ReactModule.useCallback(function()
 		-- upvalues: UseStateResult4 (copy), FFlagEnablePaidAdsModule (upval), CanCreateCampaign (copy), UseOpenWebViewResult (copy), GetAdsManagerUrlFunction (upval), p1 (copy), AdsManager (copy), UseStateResult2_1 (copy), UseStateResult2_2 (copy), HasCreateError (copy), AdCampaignEligibilityUtilsModule (upval), UseGetAdCampaignEligibilityModuleResult (copy), UseStateResult2 (copy)
 		if UseStateResult4 then return end
@@ -138,13 +141,13 @@ local function useCreateAdAction(p1)
 	}) else nil
 	
 	return ReactModule.useMemo(function()
-		-- upvalues: UseResult (copy), Element (copy)
+		-- upvalues: UseResult (copy), Inverted (copy), Element (copy)
 		return {
-			isEligible = true,
 			onActivate = UseResult,
+			isEligible = Inverted,
 			overlay = Element
 		}
-	end, { UseResult, Element })
+	end, { UseResult, Element, Inverted })
 end
 
 local function useSellItemsAction(UniverseId, UseNavigationResult, Target)

@@ -436,6 +436,7 @@ CommonUI.Features.Label.ControllerBar.HoldPrefix,次を長押し：
 CommonUI.Features.Label.ControllerBar.Search,
 CommonUI.Features.Label.ControllerBar.ToPlaySuffix,プレイ
 CommonUI.Features.Label.CreateGames,制作
+CommonUI.Features.Label.DevSubs,サブスクリプション
 CommonUI.Features.Label.Friends,友達
 CommonUI.Features.Label.Game,バーチャル空間
 CommonUI.Features.Label.Games,ゲーム
@@ -3153,6 +3154,7 @@ Feature.Contacts.Message.ContactDiscoverable,友達作りのために、あな�
 Feature.Contacts.Message.ContactsSyncWarning,連絡先は定期的に同期され、他のRobloxユーザーと一致すると保存されるため、友達を見つけるのに役立ちます。これはいつでもデバイス設定で管理できます。
 Feature.Contacts.Message.InviteToRoblox,一緒にバーチャル空間制作したり、シェアしたり、探検したりできるように、Robloxでつながりとして追加してください。
 Feature.Contacts.Message.NoResults,結果はありません。
+Feature.DeveloperProducts.Heading.Products,
 Feature.DeveloperProducts.Label.Product,
 Feature.DisplayName.ErrorMessage.AgedUpNameContainPII,名前に個人情報が含まれている可能性があります。
 Feature.DisplayName.ErrorMessage.AgedUpNameHasChanged,過去7日間で名前がすでに変更されています
@@ -3487,6 +3489,7 @@ Feature.GamePage.QuickLaunch.LaunchError.GuestProhibited,ゲストはこのバ�
 Feature.GamePage.QuickLaunch.LaunchError.PurchaseRequired,このバーチャル空間に行くには購入が必要です。
 Feature.GamePage.QuickLaunch.LaunchError.RequestFailed,ネットワークのリクエストが失敗しました。
 Feature.GamePage.QuickLaunch.LaunchError.TemporarilyUnavailable,現在、このバーチャル空間は訪問できません。
+Feature.GamePass.Heading.PassesForThisGame,パス
 Feature.GamepadDisconnect.Label.Message,"ユーザーの ""%s"" のコントローラーへの接続が切断されました。接続したいコントローラーで '%s' を押してください。"
 Feature.GamepadDisconnect.Label.MessageGeneric,"ユーザー ""%s"" のためのコントローラーへの接続が切断されました。コントローラーを再接続してください。"
 Feature.GamepadDisconnect.Label.Title,コントローラーが見つかりません
@@ -3747,6 +3750,7 @@ Feature.Moments.Label.DeleteMomentBody,削除したモーメントは復元で�
 Feature.Moments.Label.DeleteMomentTitle,モーメントを削除しますか？
 Feature.Moments.Label.DeleteVoiceoverBody,これにより、テキストとボイスオーバーが消去されます。この操作はいつでもやり直せます。
 Feature.Moments.Label.DeleteVoiceoverTitle,ボイスオーバーを削除しますか？
+Feature.Moments.Label.DragHereToDelete,ここにドラッグして削除
 Feature.Moments.Label.DurationSeconds,{seconds}秒
 Feature.Moments.Label.Engagement,エンゲージメント
 Feature.Moments.Label.Error,

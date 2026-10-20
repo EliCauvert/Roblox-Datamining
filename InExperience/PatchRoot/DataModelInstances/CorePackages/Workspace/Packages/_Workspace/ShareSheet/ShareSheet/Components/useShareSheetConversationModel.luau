@@ -9,6 +9,7 @@ local FetchConversationListPageToSignalsModule = require(Parent.AppChat.fetchCon
 local UseExternalChatConversationEligibilityModule = require(Parent.AppChat.useExternalChatConversationEligibility)
 local ListRecipientsStatusModule = require(ShareSheet.Recipients.ListRecipientsStatus)
 local RecipientModule = require(ShareSheet.Recipients.Recipient)
+local GetSelectableRecipientsModule = require(ShareSheet.Recipients.getSelectableRecipients)
 local ShareSheetConstantsModule = require(ShareSheet.ShareSheetConstants)
 local _ = require(ShareSheet.Types)
 local UseConversationListModule = require(Parent.AppChat.useConversationList)
@@ -32,33 +33,33 @@ local function getCompactConversations(EligibleConversations, Conversations, Sel
 	return List
 end
 
-local function getCompactRecipients(Recipients, Recipients1, SelectedConversationIds, Callback)
+local function getCompactRecipients(Recipients, List, SelectedConversationIds, Callback)
 	-- upvalues: ShareSheetConstantsModule (copy)
-	local List = {}
+	local List1 = {}
 	local t = {}
 	
 	for i = 1, math.min(#Recipients, ShareSheetConstantsModule.FIntShareSheetMaxConversations) do
 		local Recipient = Recipients[i]
-		table.insert(List, Recipient)
+		table.insert(List1, Recipient)
 		t[Recipient.id] = true
 	end
-	for _, value in Recipients1 do
+	for _, value in List do
 		if SelectedConversationIds[value.id] and not t[value.id] and Callback(value) then
-			table.insert(List, value)
+			table.insert(List1, value)
 			t[value.id] = true
 		end
 	end
-	return List
+	return List1
 end
 
 return function(p1)
-	-- upvalues: FFlagShareSheetFriendsSort (copy), ReactModule (copy), ListRecipientsStatusModule (copy), UseConversationListModule (copy), RecipientModule (copy), ShareSheetConstantsModule (copy), FFlagShareSheetPeoplePickerEnabledModule (copy), getCompactRecipients (copy), UseExternalChatConversationEligibilityModule (copy), getCompactConversations (copy), FetchConversationListPageToSignalsModule (copy)
+	-- upvalues: FFlagShareSheetFriendsSort (copy), ReactModule (copy), ListRecipientsStatusModule (copy), UseConversationListModule (copy), RecipientModule (copy), ShareSheetConstantsModule (copy), FFlagShareSheetPeoplePickerEnabledModule (copy), GetSelectableRecipientsModule (copy), getCompactRecipients (copy), UseExternalChatConversationEligibilityModule (copy), getCompactConversations (copy), FetchConversationListPageToSignalsModule (copy)
 	local HasChatShare = p1.chatShare ~= nil
 	local Current = nil
 	local Current1 = nil
 	local Conversations = nil
-	local IsStatusMatch = nil
 	local v1 = nil
+	local IsStatusMatch = nil
 	local IsStatusMatch1 = nil
 	
 	if FFlagShareSheetFriendsSort then
@@ -89,7 +90,7 @@ return function(p1)
 		IsStatusMatch1 = #Conversations == 0 and ListStatus.error == nil and (ListStatus.isFetchingConversations == true or ListStatus.hasFetchedInitialPage ~= true)
 	end
 	local IsAvailable = p1.chatShare ~= nil and p1.chatShare.isAvailable
-	local V28: boolean = p1.isOpen and (IsAvailable and v1)
+	local V29: boolean = p1.isOpen and (IsAvailable and v1)
 	local IsGroupChatEnabled = if p1.chatShare then p1.chatShare.isGroupChatEnabled else false
 	local ConversationEligibility = nil
 	local EligibleRecipients = nil
@@ -100,35 +101,36 @@ return function(p1)
 		local Recipients = Current1.recipients
 		local UseEligibleRecipientsResult = RecipientModule.useEligibleRecipients({
 			recipients = Recipients,
-			isActive = V28,
+			isActive = V29,
 			isGroupChatEnabled = IsGroupChatEnabled,
 			maxCount = ShareSheetConstantsModule.FIntShareSheetMaxConversations
 		})
 		EligibleRecipients = UseEligibleRecipientsResult
 		
 		if FFlagShareSheetPeoplePickerEnabledModule then
+			local SearchResult = p1.searchResult
 			local UseEligibleRecipientsResult1 = RecipientModule.useEligibleRecipients({
-				recipients = Recipients,
-				isActive = V28 and p1.isPeoplePickerDisplayed == true,
+				recipients = if SearchResult then SearchResult.recipients else Recipients,
+				isActive = V29 and p1.isPeoplePickerDisplayed == true,
 				isGroupChatEnabled = IsGroupChatEnabled,
 				maxCount = ShareSheetConstantsModule.FIntShareSheetPeoplePickerMaxConversations
 			})
 			EligibleRecipients = {
-				recipients = getCompactRecipients(UseEligibleRecipientsResult.recipients, Recipients, p1.selectedConversationIds, function(p2)
+				recipients = getCompactRecipients(UseEligibleRecipientsResult.recipients, GetSelectableRecipientsModule(Recipients, p1.pickedRecipients), p1.selectedConversationIds, function(p2)
 					-- upvalues: p1 (copy), RecipientModule (upval)
 					return p1.chatShare ~= nil and RecipientModule.canSend(p1.chatShare, p2)
 				end),
 				isLoading = UseEligibleRecipientsResult.isLoading
 			}
 			PeoplePickerEligibleRecipients = {
-				recipients = if UseEligibleRecipientsResult1.isLoading and not UseEligibleRecipientsResult.isLoading then UseEligibleRecipientsResult.recipients else UseEligibleRecipientsResult1.recipients,
-				isLoading = not IsStatusMatch and UseEligibleRecipientsResult1.isLoading
+				recipients = if UseEligibleRecipientsResult1.isLoading and not UseEligibleRecipientsResult.isLoading and SearchResult == nil then UseEligibleRecipientsResult.recipients else UseEligibleRecipientsResult1.recipients,
+				isLoading = if SearchResult then SearchResult.status == ListRecipientsStatusModule.Loading or SearchResult.status == ListRecipientsStatusModule.Ready and UseEligibleRecipientsResult1.isLoading else not IsStatusMatch and UseEligibleRecipientsResult1.isLoading
 			}
 		end
 	else
 		local UseExternalChatConversationEligibilityModuleResult = UseExternalChatConversationEligibilityModule({
 			conversations = Conversations,
-			isActive = V28,
+			isActive = V29,
 			isGroupChatEnabled = IsGroupChatEnabled,
 			maxConversationCount = ShareSheetConstantsModule.FIntShareSheetMaxConversations
 		})
@@ -137,7 +139,7 @@ return function(p1)
 		if FFlagShareSheetPeoplePickerEnabledModule then
 			local UseExternalChatConversationEligibilityModuleResult1 = UseExternalChatConversationEligibilityModule({
 				conversations = Conversations,
-				isActive = V28 and p1.isPeoplePickerDisplayed == true,
+				isActive = V29 and p1.isPeoplePickerDisplayed == true,
 				isGroupChatEnabled = IsGroupChatEnabled,
 				maxConversationCount = ShareSheetConstantsModule.FIntShareSheetPeoplePickerMaxConversations
 			})
@@ -171,7 +173,7 @@ return function(p1)
 		listStatus = if FFlagShareSheetFriendsSort then nil else Current.listStatus,
 		peoplePickerEligibility = PeoplePickerEligibility,
 		peoplePickerEligibleRecipients = PeoplePickerEligibleRecipients,
-		listResult = if FFlagShareSheetFriendsSort then Current1 else nil,
+		peoplePickerListResult = if FFlagShareSheetFriendsSort then p1.searchResult or Current1 else nil,
 		shouldShowSocialRow = IsAvailable and (v1 or IsStatusMatch1_1)
 	}
 end

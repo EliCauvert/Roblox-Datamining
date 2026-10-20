@@ -436,6 +436,7 @@ CommonUI.Features.Label.ControllerBar.HoldPrefix,Segure
 CommonUI.Features.Label.ControllerBar.Search,
 CommonUI.Features.Label.ControllerBar.ToPlaySuffix,para jogar
 CommonUI.Features.Label.CreateGames,
+CommonUI.Features.Label.DevSubs,Assinaturas
 CommonUI.Features.Label.Friends,Amizades
 CommonUI.Features.Label.Game,Experiências
 CommonUI.Features.Label.Games,Jogos
@@ -3144,6 +3145,7 @@ Feature.Contacts.Message.ContactDiscoverable,"Para ajudar você a fazer amizades
 Feature.Contacts.Message.ContactsSyncWarning,Seus contatos serão sincronizados regularmente e suas partidas com outros usuários Roblox serão armazenadas para ajudar você a encontrar amigos. Você pode gerenciar isto a qualquer momento nas configurações do dispositivo.
 Feature.Contacts.Message.InviteToRoblox,"Me adicione aos seus amigos na Roblox para que possamos criar, compartilhar e explorar experiências juntos."
 Feature.Contacts.Message.NoResults,Nenhum resultado.
+Feature.DeveloperProducts.Heading.Products,Produtos
 Feature.DeveloperProducts.Label.Product,
 Feature.DisplayName.ErrorMessage.AgedUpNameContainPII,O nome de usuário pode conter informações privadas
 Feature.DisplayName.ErrorMessage.AgedUpNameHasChanged,Seu nome já foi trocado nos últimos 7 dias
@@ -3478,6 +3480,7 @@ Feature.GamePage.QuickLaunch.LaunchError.GuestProhibited,Convidados não podem s
 Feature.GamePage.QuickLaunch.LaunchError.PurchaseRequired,É necessário pagar para explorar esta experiência.
 Feature.GamePage.QuickLaunch.LaunchError.RequestFailed,Falha na solicitação de rede.
 Feature.GamePage.QuickLaunch.LaunchError.TemporarilyUnavailable,"No momento, esta experiência não pode ser visitada."
+Feature.GamePass.Heading.PassesForThisGame,Passes
 Feature.GamepadDisconnect.Label.Message,"O controle para o usuário ""%s"" foi desconectado, por favor pressione '%s' no controle com o qual você gostaria de continuar."
 Feature.GamepadDisconnect.Label.MessageGeneric,"O controle para o usuário ""%s"" foi desconectado. Reconecte seu controle."
 Feature.GamepadDisconnect.Label.Title,Controle desconectado

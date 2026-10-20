@@ -56,19 +56,14 @@ local function createStyleSheet(ColorMode, Device, Scale, TokenOverrides, ThemeN
 end
 
 local function createStyleRule(Rule, Tag)
-	-- upvalues: FlagsModule (copy)
 	local Text = "." .. Tag
 	local Text1: string = if Rule.modifier == nil then "" else ":" .. Rule.modifier
 	local Text2 = Text .. Text1 .. (if Rule.pseudo == nil then "" else " ::" .. Rule.pseudo)
 	
-	if FlagsModule.FoundationStyleRulePseudoName then
-		if Rule.pseudoName ~= nil then
-			Text2 ..= " #" .. Rule.pseudoName
-		end
-		if Rule.pseudo ~= nil and Rule.pseudoName == nil then
-			Text2 ..= ", " .. Text .. Text1 .. " > " .. Rule.pseudo
-		end
-	elseif Rule.pseudo ~= nil then
+	if Rule.pseudoName ~= nil then
+		Text2 ..= " #" .. Rule.pseudoName
+	end
+	if Rule.pseudo ~= nil and Rule.pseudoName == nil then
 		Text2 ..= ", " .. Text .. Text1 .. " > " .. Rule.pseudo
 	end
 	local StyleRule = Instance.new("StyleRule")
@@ -94,12 +89,12 @@ local function applyAttributes(StyleSheet, Attributes)
 end
 
 local function addRegisteredStyleSheetTags(StyleSheet, List)
-	-- upvalues: FlagsModule (copy), createStyleRule (copy), applyAttributes (copy)
+	-- upvalues: createStyleRule (copy), applyAttributes (copy)
 	for _, value in List do
 		if not StyleSheet.tags[value] then
 			local Rule = StyleSheet.rules[value]
 			
-			if Rule and (FlagsModule.FoundationStyleRulePseudoName or Rule.pseudoName == nil) then
+			if Rule then
 				createStyleRule(Rule, value).Parent = StyleSheet.instance
 				applyAttributes(StyleSheet, Rule.attributes)
 				

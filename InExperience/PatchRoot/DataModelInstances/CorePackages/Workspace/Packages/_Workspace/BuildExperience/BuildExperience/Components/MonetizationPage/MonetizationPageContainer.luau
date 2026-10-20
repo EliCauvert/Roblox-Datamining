@@ -1,6 +1,7 @@
 ﻿local BuildExperience = script:FindFirstAncestor("BuildExperience")
 local Parent = BuildExperience.Parent
 local _ = require(Parent.DataHydration.DeveloperProduct)
+local DeveloperSubscriptionModule = require(Parent.DataHydration.DeveloperSubscription)
 local GamePassConfigModule = require(Parent.DataHydration.GamePassConfig)
 local _ = require(Parent.DataHydration.MonetizationOptions)
 local UniverseConfigurationModule = require(Parent.DataHydration.UniverseConfiguration)
@@ -33,6 +34,7 @@ local Signal2 = SignalsModule.createSignal(nil)
 local Signal3 = SignalsModule.createSignal(nil)
 local Signal4 = SignalsModule.createSignal(nil)
 local Signal5 = SignalsModule.createSignal(nil)
+local Signal6 = SignalsModule.createSignal(nil)
 local Ready = SignalsModule.createSignal("Ready")
 local NotReady = SignalsModule.createSignal("NotReady")
 local Computed = SignalsModule.createComputed(function()
@@ -44,13 +46,23 @@ local Computed1 = SignalsModule.createComputed(function()
 	return CreateManageMonetizationOptionsStoreModule()
 end)
 
-local _ = function(p1, p2): string
-	return if p1 == "Failed" or p2 == "Failed" then "Failed" elseif p1 == "Ready" and p2 == "Ready" then "Ready" else "NotReady"
+local _ = function(List): string
+	local v1 = "Ready"
+	
+	for _, value in List do
+		if value.status == "Failed" then
+			return "Failed"
+		elseif value.status ~= "Ready" then
+			v1 = "NotReady"
+		end
+	end
+	return v1
 end
 
-local function useMixedCatalog(p1, p2, UseSignalStateResult, UseSignalStateResult1, p3)
-	-- upvalues: SignalsReactModule (copy), GamePassConfigModule (copy), ReactModule (copy), Signal1 (copy), Ready (copy), SendBuildExperienceEventModule (copy)
+local function useMixedCatalog(p1, p2, UseSignalStateResult, UseSignalStateResult1, ProductLocalizationKeys)
+	-- upvalues: SignalsReactModule (copy), GamePassConfigModule (copy), DeveloperSubscriptionModule (copy), ReactModule (copy), Signal1 (copy), Ready (copy), Signal2 (copy), SendBuildExperienceEventModule (copy)
 	local UseSignalStateResult2 = SignalsReactModule.useSignalState(GamePassConfigModule.getGamePassConfigStore)
+	local UseSignalStateResult3 = SignalsReactModule.useSignalState(DeveloperSubscriptionModule.getDeveloperSubscriptionStore)
 	local UseMemoResult = ReactModule.useMemo(function()
 		-- upvalues: p1 (copy), UseSignalStateResult2 (copy)
 		return if p1.products == nil and p1.universeId ~= nil then UseSignalStateResult2.fetchGamePasses(p1.universeId) else nil
@@ -60,46 +72,69 @@ local function useMixedCatalog(p1, p2, UseSignalStateResult, UseSignalStateResul
 		p1.products ~= nil,
 		p1.universeId or 0
 	})
-	local UseSignalStateResult3 = SignalsReactModule.useSignalState(if UseMemoResult == nil then Signal1 else UseMemoResult.data)
-	local UseSignalStateResult4 = SignalsReactModule.useSignalState(if UseMemoResult == nil then Ready else UseMemoResult.status)
-	local HasNextPageToken: boolean = UseSignalStateResult ~= nil and UseSignalStateResult.nextPageToken ~= nil
-	local IsIsIncomplete: boolean = UseSignalStateResult3 ~= nil and UseSignalStateResult3.isIncomplete == true
-	local Failed: string = if HasNextPageToken or UseSignalStateResult1 == "Failed" then "Failed" elseif UseSignalStateResult1 == "Ready" then "Ready" else "NotReady"
-	local Failed1: string = if IsIsIncomplete or UseSignalStateResult4 == "Failed" then "Failed" elseif UseSignalStateResult4 == "Ready" then "Ready" else "NotReady"
 	local UseMemoResult1 = ReactModule.useMemo(function()
-		-- upvalues: p1 (copy), p3 (copy), Failed (copy), UseSignalStateResult (copy), HasNextPageToken (copy), Failed1 (copy), UseSignalStateResult3 (copy), IsIsIncomplete (copy)
+		-- upvalues: p1 (copy), UseSignalStateResult3 (copy)
+		return if p1.products == nil and p1.universeId ~= nil then UseSignalStateResult3.fetchSubscriptions(p1.universeId) else nil
+	end, {
+		p1.products ~= nil,
+		p1.universeId or 0,
+		SignalsReactModule.useSignalState(UseSignalStateResult3.getAccountResetGeneration),
+		UseSignalStateResult3
+	})
+	local UseSignalStateResult4 = SignalsReactModule.useSignalState(if UseMemoResult == nil then Signal1 else UseMemoResult.data)
+	local UseSignalStateResult5 = SignalsReactModule.useSignalState(if UseMemoResult == nil then Ready else UseMemoResult.status)
+	local UseSignalStateResult6 = SignalsReactModule.useSignalState(if UseMemoResult1 == nil then Signal2 else UseMemoResult1.data)
+	local UseSignalStateResult7 = SignalsReactModule.useSignalState(if UseMemoResult1 == nil then Ready else UseMemoResult1.status)
+	local HasNextPageToken: boolean = UseSignalStateResult ~= nil and UseSignalStateResult.nextPageToken ~= nil
+	local IsIsIncomplete: boolean = UseSignalStateResult4 ~= nil and UseSignalStateResult4.isIncomplete == true
+	local IsIsIncomplete1: boolean = UseSignalStateResult6 ~= nil and UseSignalStateResult6.isIncomplete == true
+	local Failed: string = if HasNextPageToken or UseSignalStateResult1 == "Failed" then "Failed" elseif UseSignalStateResult1 == "Ready" then "Ready" else "NotReady"
+	local Failed1: string = if IsIsIncomplete or UseSignalStateResult5 == "Failed" then "Failed" elseif UseSignalStateResult5 == "Ready" then "Ready" else "NotReady"
+	local Failed2: string = if IsIsIncomplete1 or UseSignalStateResult7 == "Failed" then "Failed" elseif UseSignalStateResult7 == "Ready" then "Ready" else "NotReady"
+	local UseMemoResult2 = ReactModule.useMemo(function()
+		-- upvalues: p1 (copy), ProductLocalizationKeys (copy), Failed1 (copy), UseSignalStateResult4 (copy), IsIsIncomplete (copy), Failed (copy), UseSignalStateResult (copy), HasNextPageToken (copy), Failed2 (copy), UseSignalStateResult6 (copy), IsIsIncomplete1 (copy)
 		return if p1.products == nil then {
 			{
+				kind = "GamePass",
+				label = ProductLocalizationKeys.gamePassSection,
+				status = Failed1,
+				hasCachedProducts = UseSignalStateResult4 ~= nil and #UseSignalStateResult4.gamePasses > 0,
+				isIncomplete = IsIsIncomplete
+			},
+			{
 				kind = "DeveloperProduct",
-				label = p3.productType,
+				label = ProductLocalizationKeys.productSection,
 				status = Failed,
 				hasCachedProducts = UseSignalStateResult ~= nil and #UseSignalStateResult.developerProducts > 0,
 				isIncomplete = HasNextPageToken
 			},
 			{
-				kind = "GamePass",
-				label = p3.gamePassType,
-				status = Failed1,
-				hasCachedProducts = UseSignalStateResult3 ~= nil and #UseSignalStateResult3.gamePasses > 0,
-				isIncomplete = IsIsIncomplete
+				kind = "Subscription",
+				label = ProductLocalizationKeys.subscriptionSection,
+				status = Failed2,
+				hasCachedProducts = UseSignalStateResult6 ~= nil and #UseSignalStateResult6.developerSubscriptions > 0,
+				isIncomplete = IsIsIncomplete1
 			}
 		} else {}
 	end, {
 		Failed, Failed1,
 		if UseSignalStateResult == nil then 0 else #UseSignalStateResult.developerProducts,
-		if UseSignalStateResult3 == nil then 0 else #UseSignalStateResult3.gamePasses,
-		HasNextPageToken, IsIsIncomplete, p3.gamePassType, p3.productType,
-		p1.products ~= nil
+		if UseSignalStateResult4 == nil then 0 else #UseSignalStateResult4.gamePasses,
+		if UseSignalStateResult6 == nil then 0 else #UseSignalStateResult6.developerSubscriptions,
+		HasNextPageToken, IsIsIncomplete, IsIsIncomplete1,
+		ProductLocalizationKeys.gamePassSection,
+		ProductLocalizationKeys.productSection,
+		ProductLocalizationKeys.subscriptionSection, p1.products ~= nil, Failed2
 	})
 	local UseRefResult = ReactModule.useRef({})
 	local UseRefResult1 = ReactModule.useRef(nil)
 	ReactModule.useEffect(function()
-		-- upvalues: UseRefResult1 (copy), p1 (copy), UseRefResult (copy), UseMemoResult1 (copy), SendBuildExperienceEventModule (upval)
+		-- upvalues: UseRefResult1 (copy), p1 (copy), UseRefResult (copy), UseMemoResult2 (copy), SendBuildExperienceEventModule (upval)
 		if UseRefResult1.current ~= p1.universeId then
 			UseRefResult1.current = p1.universeId
 			table.clear(UseRefResult.current)
 		end
-		for _, value in UseMemoResult1 do
+		for _, value in UseMemoResult2 do
 			if value.status == "NotReady" then
 				UseRefResult.current[value.kind] = nil
 			elseif UseRefResult.current[value.kind] ~= value.status then
@@ -115,50 +150,96 @@ local function useMixedCatalog(p1, p2, UseSignalStateResult, UseSignalStateResul
 				})
 			end
 		end
-	end, { UseMemoResult1, p1.placeId, p1.sessionId, p1.universeId })
+	end, { UseMemoResult2, p1.placeId, p1.sessionId, p1.universeId })
+	local UseResult = ReactModule.useCallback(function()
+		-- upvalues: p1 (copy), p2 (copy), UseSignalStateResult2 (copy), UseSignalStateResult3 (copy)
+		if p1.products == nil and p1.universeId ~= nil then
+			p2.fetchProducts(p1.universeId)
+			UseSignalStateResult2.fetchGamePasses(p1.universeId)
+			UseSignalStateResult3.fetchSubscriptions(p1.universeId)
+		end
+	end, {
+		p2,
+		UseSignalStateResult2,
+		p1.products,
+		p1.universeId,
+		UseSignalStateResult3
+	})
+	local UseResult1 = ReactModule.useCallback(function(p3)
+		-- upvalues: p1 (copy), p2 (copy), UseSignalStateResult2 (copy), UseSignalStateResult3 (copy)
+		if p1.products ~= nil or p1.universeId == nil then return end
+		if p3 == "DeveloperProduct" then
+			p2.fetchProducts(p1.universeId)
+			
+			return
+		end
+		if p3 == "GamePass" then
+			UseSignalStateResult2.fetchGamePasses(p1.universeId)
+			
+			return
+		end
+		if p3 == "Subscription" then
+			UseSignalStateResult3.fetchSubscriptions(p1.universeId)
+		end
+	end, {
+		p2,
+		UseSignalStateResult2,
+		p1.products,
+		p1.universeId,
+		UseSignalStateResult3
+	})
+	local config = {
+		gamePassCatalog = UseSignalStateResult4,
+		subscriptionCatalog = UseSignalStateResult6,
+		catalogSources = UseMemoResult2
+	}
+	local v2 = "Ready"
+	local Status = nil
 	
+	for _, value in UseMemoResult2 do
+		if value.status == "Failed" then
+			Status = "Failed"
+		else
+			if value.status ~= "Ready" then
+				v2 = "NotReady"
+				continue
+			end
+			continue
+		end
+		config.status = Status
+		config.onRetryAll = UseResult
+		config.onRetrySource = UseResult1
+		
+		return config
+	end
+	Status = v2
+end
+
+local function getProductLocalizationKeys()
+	-- upvalues: LocalizationStringsModule (copy), FFlagBuildExperienceMonetizationMultiKindModule (copy)
 	return {
-		gamePassCatalog = UseSignalStateResult3,
-		catalogSources = UseMemoResult1,
-		status = if Failed == "Failed" or Failed1 == "Failed" then "Failed" elseif Failed == "Ready" and Failed1 == "Ready" then "Ready" else "NotReady",
-		onRetryAll = ReactModule.useCallback(function()
-			-- upvalues: p1 (copy), p2 (copy), UseSignalStateResult2 (copy)
-			if p1.products == nil and p1.universeId ~= nil then
-				p2.fetchProducts(p1.universeId)
-				UseSignalStateResult2.fetchGamePasses(p1.universeId)
-			end
-		end, { p2, UseSignalStateResult2, p1.products, p1.universeId }),
-		onRetrySource = ReactModule.useCallback(function(p4)
-			-- upvalues: p1 (copy), p2 (copy), UseSignalStateResult2 (copy)
-			if p1.products ~= nil or p1.universeId == nil then return end
-			if p4 == "DeveloperProduct" then
-				p2.fetchProducts(p1.universeId)
-				
-				return
-			end
-			if p4 == "GamePass" then
-				UseSignalStateResult2.fetchGamePasses(p1.universeId)
-			end
-		end, { p2, UseSignalStateResult2, p1.products, p1.universeId })
+		priceUnavailable = LocalizationStringsModule.MONETIZATION_PRICE_UNAVAILABLE,
+		productType = LocalizationStringsModule.AGENT_DEV_PRODUCT_TITLE,
+		productSection = if FFlagBuildExperienceMonetizationMultiKindModule then LocalizationStringsModule.MONETIZATION_PRODUCTS else nil,
+		gamePassType = if FFlagBuildExperienceMonetizationMultiKindModule then LocalizationStringsModule.MONETIZATION_GAME_PASS else nil,
+		gamePassSection = if FFlagBuildExperienceMonetizationMultiKindModule then LocalizationStringsModule.MONETIZATION_PASSES else nil,
+		subscriptionType = if FFlagBuildExperienceMonetizationMultiKindModule then LocalizationStringsModule.AGENT_SUBSCRIPTION_TITLE else nil,
+		subscriptionSection = if FFlagBuildExperienceMonetizationMultiKindModule then LocalizationStringsModule.MONETIZATION_SUBSCRIPTIONS else nil,
+		onSale = LocalizationStringsModule.MONETIZATION_ON_SALE,
+		offSale = LocalizationStringsModule.MONETIZATION_OFF_SALE
 	}
 end
 
 return function(Tbl)
-	-- upvalues: ReactModule (copy), LocalizationModule (copy), LocalizationStringsModule (copy), FFlagBuildExperienceMonetizationMultiKindModule (copy), Computed (copy), FFlagBuildExperienceMonetizationNativeUIModule (copy), Computed1 (copy), SignalsReactModule (copy), UniverseConfigurationModule (copy), Signal2 (copy), NotReady (copy), Signal3 (copy), Signal4 (copy), Signal5 (copy), SendBuildExperienceEventModule (copy), FFlagBuildExperienceManageDevProductModule (copy), Signal (copy), Ready (copy), useMixedCatalog (copy), MapMonetizationCatalogModule (copy), MapDeveloperProductsToMonetizationProductsModule (copy), FFlagBuildExperienceDevProductModerationReadbackModule (copy), PromiseModule (copy), FFlagBuildExperienceMonetizationProductEditingModule (copy), UseMonetizationPageViewModelModule (copy), MonetizationPageViewModule (copy)
+	-- upvalues: ReactModule (copy), LocalizationModule (copy), getProductLocalizationKeys (copy), Computed (copy), FFlagBuildExperienceMonetizationNativeUIModule (copy), Computed1 (copy), SignalsReactModule (copy), UniverseConfigurationModule (copy), Signal3 (copy), NotReady (copy), Signal4 (copy), Signal5 (copy), Signal6 (copy), SendBuildExperienceEventModule (copy), FFlagBuildExperienceMonetizationMultiKindModule (copy), FFlagBuildExperienceManageDevProductModule (copy), Signal (copy), Ready (copy), useMixedCatalog (copy), LocalizationStringsModule (copy), MapMonetizationCatalogModule (copy), MapDeveloperProductsToMonetizationProductsModule (copy), FFlagBuildExperienceDevProductModerationReadbackModule (copy), PromiseModule (copy), FFlagBuildExperienceMonetizationProductEditingModule (copy), UseMonetizationPageViewModelModule (copy), MonetizationPageViewModule (copy)
 	local UseContextResult = ReactModule.useContext(LocalizationModule.LocalizationRoactContext)
-	local UseLocalizationResult = LocalizationModule.Hooks.useLocalization({
-		priceUnavailable = LocalizationStringsModule.MONETIZATION_PRICE_UNAVAILABLE,
-		productType = LocalizationStringsModule.AGENT_DEV_PRODUCT_TITLE,
-		gamePassType = if FFlagBuildExperienceMonetizationMultiKindModule then LocalizationStringsModule.MONETIZATION_GAME_PASS else nil,
-		onSale = LocalizationStringsModule.MONETIZATION_ON_SALE,
-		offSale = LocalizationStringsModule.MONETIZATION_OFF_SALE
-	})
+	local UseLocalizationResult = LocalizationModule.Hooks.useLocalization((getProductLocalizationKeys()))
 	local ComputedResult = Computed()
-	local v1 = nil
+	local v3 = nil
 	local UseSignalStateResult = nil
 	
 	if FFlagBuildExperienceMonetizationNativeUIModule then
-		v1 = Computed1()
+		v3 = Computed1()
 		UseSignalStateResult = SignalsReactModule.useSignalState(UniverseConfigurationModule.getUniverseConfigurationStore)
 	end
 	local UseMemoResult = if FFlagBuildExperienceMonetizationNativeUIModule then ReactModule.useMemo(function()
@@ -169,37 +250,37 @@ return function(Tbl)
 	local UseSignalStateResult2 = "NotReady"
 	
 	if FFlagBuildExperienceMonetizationNativeUIModule then
-		UseSignalStateResult1 = SignalsReactModule.useSignalState(if UseMemoResult == nil then Signal2 else UseMemoResult.data)
+		UseSignalStateResult1 = SignalsReactModule.useSignalState(if UseMemoResult == nil then Signal3 else UseMemoResult.data)
 		UseSignalStateResult2 = SignalsReactModule.useSignalState(if UseMemoResult == nil then NotReady else UseMemoResult.status)
 	end
 	local UseMemoResult1 = if FFlagBuildExperienceMonetizationNativeUIModule then ReactModule.useMemo(function()
-		-- upvalues: v1 (ref), Tbl (copy), UseSignalStateResult1 (ref)
-		return if v1 == nil or Tbl.universeId == nil or UseSignalStateResult1 == nil then nil else v1.getAndFetchPermission(Tbl.universeId, UseSignalStateResult1.creatorType, UseSignalStateResult1.creatorTargetId)
-	end, { v1, Tbl.universeId, UseSignalStateResult1 }) else nil
+		-- upvalues: v3 (ref), Tbl (copy), UseSignalStateResult1 (ref)
+		return if v3 == nil or Tbl.universeId == nil or UseSignalStateResult1 == nil then nil else v3.getAndFetchPermission(Tbl.universeId, UseSignalStateResult1.creatorType, UseSignalStateResult1.creatorTargetId)
+	end, { v3, Tbl.universeId, UseSignalStateResult1 }) else nil
 	local UseSignalStateResult3 = nil
 	local Failed = "NotReady"
 	
 	if FFlagBuildExperienceMonetizationNativeUIModule then
-		UseSignalStateResult3 = SignalsReactModule.useSignalState(if UseMemoResult1 == nil then Signal3 else UseMemoResult1.data)
+		UseSignalStateResult3 = SignalsReactModule.useSignalState(if UseMemoResult1 == nil then Signal4 else UseMemoResult1.data)
 		Failed = if UseSignalStateResult2 == "Failed" then "Failed" else SignalsReactModule.useSignalState(if UseMemoResult1 == nil then NotReady else UseMemoResult1.status)
 	end
 	local UseMemoResult2 = if FFlagBuildExperienceMonetizationNativeUIModule then ReactModule.useMemo(function()
-		-- upvalues: v1 (ref), Tbl (copy)
-		return if v1 == nil or Tbl.universeId == nil then nil else v1.getAndFetchManagedPricing(Tbl.universeId)
-	end, { v1, Tbl.universeId }) else nil
+		-- upvalues: v3 (ref), Tbl (copy)
+		return if v3 == nil or Tbl.universeId == nil then nil else v3.getAndFetchManagedPricing(Tbl.universeId)
+	end, { v3, Tbl.universeId }) else nil
 	local UseMemoResult11 = if FFlagBuildExperienceMonetizationNativeUIModule then ReactModule.useMemo(function()
-		-- upvalues: v1 (ref), Tbl (copy)
-		return if v1 == nil or Tbl.universeId == nil then nil else v1.getAndFetchShops(Tbl.universeId)
-	end, { v1, Tbl.universeId }) else nil
+		-- upvalues: v3 (ref), Tbl (copy)
+		return if v3 == nil or Tbl.universeId == nil then nil else v3.getAndFetchShops(Tbl.universeId)
+	end, { v3, Tbl.universeId }) else nil
 	local UseSignalStateResult4 = nil
 	local UseSignalStateResult5 = nil
 	local UseSignalStateResult6 = "NotReady"
 	local UseSignalStateResult7 = "NotReady"
 	
 	if FFlagBuildExperienceMonetizationNativeUIModule then
-		UseSignalStateResult4 = SignalsReactModule.useSignalState(if UseMemoResult2 == nil then Signal4 else UseMemoResult2.data)
+		UseSignalStateResult4 = SignalsReactModule.useSignalState(if UseMemoResult2 == nil then Signal5 else UseMemoResult2.data)
 		UseSignalStateResult6 = SignalsReactModule.useSignalState(if UseMemoResult2 == nil then NotReady else UseMemoResult2.status)
-		UseSignalStateResult5 = SignalsReactModule.useSignalState(if UseMemoResult11 == nil then Signal5 else UseMemoResult11.data)
+		UseSignalStateResult5 = SignalsReactModule.useSignalState(if UseMemoResult11 == nil then Signal6 else UseMemoResult11.data)
 		UseSignalStateResult7 = SignalsReactModule.useSignalState(if UseMemoResult11 == nil then NotReady else UseMemoResult11.status)
 	end
 	if FFlagBuildExperienceMonetizationNativeUIModule then
@@ -246,26 +327,30 @@ return function(Tbl)
 	local UseSignalStateResult9 = SignalsReactModule.useSignalState(if UseMemoResult3 == nil then Signal else UseMemoResult3.data)
 	local UseSignalStateResult10 = SignalsReactModule.useSignalState(if UseMemoResult3 == nil then Ready else UseMemoResult3.status)
 	local UseMixedCatalogResult = if FFlagBuildExperienceMonetizationMultiKindModule then useMixedCatalog(Tbl, ComputedResult, UseSignalStateResult9, UseSignalStateResult10, {
-		productType = UseLocalizationResult.productType,
-		gamePassType = UseLocalizationResult.gamePassType
+		productSection = UseLocalizationResult.productSection,
+		gamePassSection = UseLocalizationResult.gamePassSection,
+		subscriptionSection = UseLocalizationResult.subscriptionSection
 	}) else nil
 	local GamePassCatalog = if UseMixedCatalogResult == nil then nil else UseMixedCatalogResult.gamePassCatalog
+	local SubscriptionCatalog = if UseMixedCatalogResult == nil then nil else UseMixedCatalogResult.subscriptionCatalog
 	local UseMemoResult21 = ReactModule.useMemo(function()
-		-- upvalues: Tbl (copy), UseContextResult (copy), LocalizationStringsModule (upval), FFlagBuildExperienceMonetizationMultiKindModule (upval), MapMonetizationCatalogModule (upval), UseSignalStateResult9 (copy), GamePassCatalog (copy), UseLocalizationResult (copy), MapDeveloperProductsToMonetizationProductsModule (upval)
+		-- upvalues: Tbl (copy), UseContextResult (copy), LocalizationStringsModule (upval), FFlagBuildExperienceMonetizationMultiKindModule (upval), MapMonetizationCatalogModule (upval), UseSignalStateResult9 (copy), GamePassCatalog (copy), SubscriptionCatalog (copy), UseLocalizationResult (copy), MapDeveloperProductsToMonetizationProductsModule (upval)
 		if Tbl.products == nil then
-			local function FormatDefaultProductName(p4)
+			local function FormatDefaultProductName(p3)
 				-- upvalues: UseContextResult (upval), LocalizationStringsModule (upval)
-				return UseContextResult:Format(LocalizationStringsModule.MONETIZATION_DEFAULT_PRODUCT_NAME, { PRODUCT_ID = p4 })
+				return UseContextResult:Format(LocalizationStringsModule.MONETIZATION_DEFAULT_PRODUCT_NAME, { PRODUCT_ID = p3 })
 			end
 			
 			return if FFlagBuildExperienceMonetizationMultiKindModule then MapMonetizationCatalogModule({
 				developerProducts = UseSignalStateResult9,
-				gamePasses = GamePassCatalog
+				gamePasses = GamePassCatalog,
+				subscriptions = SubscriptionCatalog
 			}, {
 				formatDefaultProductName = FormatDefaultProductName,
 				priceUnavailable = UseLocalizationResult.priceUnavailable,
 				developerProductType = UseLocalizationResult.productType,
 				gamePassType = UseLocalizationResult.gamePassType,
+				subscriptionType = UseLocalizationResult.subscriptionType,
 				onSale = UseLocalizationResult.onSale,
 				offSale = UseLocalizationResult.offSale
 			}) else MapDeveloperProductsToMonetizationProductsModule(UseSignalStateResult9, {
@@ -279,11 +364,8 @@ return function(Tbl)
 			return Tbl.products
 		end
 	end, {
-		UseSignalStateResult9,
-		UseLocalizationResult,
-		UseContextResult,
-		Tbl.products,
-		GamePassCatalog
+		UseSignalStateResult9, UseLocalizationResult, UseContextResult, Tbl.products,
+		GamePassCatalog, SubscriptionCatalog
 	})
 	local UseRefResult2 = ReactModule.useRef(nil)
 	ReactModule.useEffect(function()
@@ -319,22 +401,22 @@ return function(Tbl)
 	end, { ComputedResult, Tbl.products, Tbl.universeId })
 	local UseResult1 = if UseMixedCatalogResult == nil then UseResult else UseMixedCatalogResult.onRetryAll
 	local OnRetrySource = if UseMixedCatalogResult == nil then nil else UseMixedCatalogResult.onRetrySource
-	local UseResult2 = ReactModule.useCallback(function(p4, IsManagedPricingEnabled)
-		-- upvalues: ComputedResult (copy), Tbl (copy), FFlagBuildExperienceMonetizationNativeUIModule (upval), v1 (ref)
-		local function v89()
-			-- upvalues: ComputedResult (upval), Tbl (upval), p4 (copy), IsManagedPricingEnabled (copy)
-			return ComputedResult.update(Tbl.universeId, p4, { isManagedPricingEnabled = IsManagedPricingEnabled })
+	local UseResult2 = ReactModule.useCallback(function(p3, IsManagedPricingEnabled)
+		-- upvalues: ComputedResult (copy), Tbl (copy), FFlagBuildExperienceMonetizationNativeUIModule (upval), v3 (ref)
+		local function v105()
+			-- upvalues: ComputedResult (upval), Tbl (upval), p3 (copy), IsManagedPricingEnabled (copy)
+			return ComputedResult.update(Tbl.universeId, p3, { isManagedPricingEnabled = IsManagedPricingEnabled })
 		end
 		
-		return if FFlagBuildExperienceMonetizationNativeUIModule and IsManagedPricingEnabled then v1.ensureManagedPricingAccepted(Tbl.universeId):andThen(v89) else v89()
-	end, { ComputedResult, v1, Tbl.universeId })
-	local UseResult21 = ReactModule.useCallback(function(p4, IsForSale)
+		return if FFlagBuildExperienceMonetizationNativeUIModule and IsManagedPricingEnabled then v3.ensureManagedPricingAccepted(Tbl.universeId):andThen(v105) else v105()
+	end, { ComputedResult, v3, Tbl.universeId })
+	local UseResult21 = ReactModule.useCallback(function(p3, IsForSale)
 		-- upvalues: ComputedResult (copy), Tbl (copy)
-		return ComputedResult.update(Tbl.universeId, p4, { isForSale = IsForSale })
+		return ComputedResult.update(Tbl.universeId, p3, { isForSale = IsForSale })
 	end, { ComputedResult, Tbl.universeId })
-	local UseResult3 = ReactModule.useCallback(function(p4, p5)
+	local UseResult3 = ReactModule.useCallback(function(p3, p4)
 		-- upvalues: ComputedResult (copy), Tbl (copy), FFlagBuildExperienceDevProductModerationReadbackModule (upval)
-		return ComputedResult.update(Tbl.universeId, p4, p5, FFlagBuildExperienceDevProductModerationReadbackModule)
+		return ComputedResult.update(Tbl.universeId, p3, p4, FFlagBuildExperienceDevProductModerationReadbackModule)
 	end, { ComputedResult, Tbl.universeId })
 	local UseResult4 = nil
 	local UseResult5 = nil
@@ -343,11 +425,11 @@ return function(Tbl)
 	
 	if FFlagBuildExperienceMonetizationNativeUIModule then
 		UseResult4 = ReactModule.useCallback(function()
-			-- upvalues: v1 (ref), Tbl (copy)
-			return v1.acceptManagedPricing(Tbl.universeId)
-		end, { v1, Tbl.universeId })
-		UseResult5 = ReactModule.useCallback(function(p4, p5)
-			-- upvalues: ComputedResult (copy), Tbl (copy), v1 (ref), PromiseModule (upval)
+			-- upvalues: v3 (ref), Tbl (copy)
+			return v3.acceptManagedPricing(Tbl.universeId)
+		end, { v3, Tbl.universeId })
+		UseResult5 = ReactModule.useCallback(function(p3, p4)
+			-- upvalues: ComputedResult (copy), Tbl (copy), v3 (ref), PromiseModule (upval)
 			local function _()
 				-- upvalues: ComputedResult (upval), Tbl (upval)
 				return ComputedResult.list(Tbl.universeId):catch(function()
@@ -355,7 +437,7 @@ return function(Tbl)
 				end)
 			end
 			
-			return v1.updateDeveloperProductsManagedPricing(Tbl.universeId, p4, p5):andThen(function(Result)
+			return v3.updateDeveloperProductsManagedPricing(Tbl.universeId, p3, p4):andThen(function(Result)
 				-- upvalues: ComputedResult (upval), Tbl (upval)
 				return ComputedResult.list(Tbl.universeId):catch(function()
 					return nil
@@ -363,35 +445,35 @@ return function(Tbl)
 					-- upvalues: Result (copy)
 					return Result
 				end)
-			end, function(p6)
+			end, function(p5)
 				-- upvalues: ComputedResult (upval), Tbl (upval), PromiseModule (upval)
 				return ComputedResult.list(Tbl.universeId):catch(function()
 					return nil
 				end):andThen(function()
-					-- upvalues: PromiseModule (upval), p6 (copy)
-					return PromiseModule.reject(p6)
+					-- upvalues: PromiseModule (upval), p5 (copy)
+					return PromiseModule.reject(p5)
 				end)
 			end)
-		end, { ComputedResult, v1, Tbl.universeId })
-		UseResult6 = ReactModule.useCallback(function(p4)
-			-- upvalues: v1 (ref), Tbl (copy)
-			return v1.setShopGlobalIcon(Tbl.universeId, p4)
-		end, { v1, Tbl.universeId })
+		end, { ComputedResult, v3, Tbl.universeId })
+		UseResult6 = ReactModule.useCallback(function(p3)
+			-- upvalues: v3 (ref), Tbl (copy)
+			return v3.setShopGlobalIcon(Tbl.universeId, p3)
+		end, { v3, Tbl.universeId })
 		UseResult7 = ReactModule.useCallback(function()
-			-- upvalues: v1 (ref), Tbl (copy), UseSignalStateResult1 (ref), UseSignalStateResult2 (ref), UseSignalStateResult (ref)
-			local v2 = v1
-			v2.fetchManagedPricing(Tbl.universeId)
-			v2.fetchShops(Tbl.universeId)
+			-- upvalues: v3 (ref), Tbl (copy), UseSignalStateResult1 (ref), UseSignalStateResult2 (ref), UseSignalStateResult (ref)
+			local v4 = v3
+			v4.fetchManagedPricing(Tbl.universeId)
+			v4.fetchShops(Tbl.universeId)
 			
 			if UseSignalStateResult1 == nil or UseSignalStateResult2 == "Failed" then
 				UseSignalStateResult.fetchSummary(Tbl.universeId)
 				
 				return
 			else
-				v2.fetchPermission(Tbl.universeId, UseSignalStateResult1.creatorType, UseSignalStateResult1.creatorTargetId)
+				v4.fetchPermission(Tbl.universeId, UseSignalStateResult1.creatorType, UseSignalStateResult1.creatorTargetId)
 			end
 		end, {
-			v1,
+			v3,
 			Tbl.universeId,
 			UseSignalStateResult1,
 			UseSignalStateResult2,

@@ -4,6 +4,5 @@
 	CompleteExternalNavigationIntoChat = require(script.CompleteExternalNavigationIntoChat),
 	ReceivedChatSettings = require(script.ReceivedChatSettings),
 	SetAppLoaded = require(script.SetAppLoaded),
-	SetConnectionState = require(script.SetConnectionState),
-	ToggleChatPaused = require(script.ToggleChatPaused)
+	SetConnectionState = require(script.SetConnectionState)
 }

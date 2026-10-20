@@ -13,14 +13,13 @@ local CreateDataResolverModule = require(DataHydration.createDataResolver)
 local _ = require(DataHydration.DataHydrationTypes)
 local _ = require(script.Parent.GameDeveloperProductStoreTypes)
 local FetchGameDeveloperProductStatusesModule = require(script.Parent.fetchGameDeveloperProductStatuses)
-local FFlagLuaAppUseGameTransactionsApiForReceipts = SharedFlagsModule.FFlagLuaAppUseGameTransactionsApiForReceipts
 
 local function _(Text, Text1): string
 	return Text .. "|" .. Text1
 end
 
 return function()
-	-- upvalues: CreateDataCacheModule (copy), FFlagSduiDevStoreSeeAllSupport (copy), FFlagEnableHomeGameItemOwnershipUpdate (copy), FFlagEnableSearchGameItemOwnershipUpdate (copy), CreateDataResolverModule (copy), LogResponseErrorFunction (copy), FFlagLuaAppUseGameTransactionsApiForReceipts (copy), DiscoveryEventErrorLogger (copy), PromiseModule (copy), FetchGameDeveloperProductStatusesModule (copy)
+	-- upvalues: CreateDataCacheModule (copy), FFlagSduiDevStoreSeeAllSupport (copy), FFlagEnableHomeGameItemOwnershipUpdate (copy), FFlagEnableSearchGameItemOwnershipUpdate (copy), CreateDataResolverModule (copy), LogResponseErrorFunction (copy), DiscoveryEventErrorLogger (copy), PromiseModule (copy), FetchGameDeveloperProductStatusesModule (copy)
 	local DataCacheModule = CreateDataCacheModule()
 	local Cache = nil
 	local v1 = nil
@@ -31,8 +30,8 @@ return function()
 			supportsMultiGet = false,
 			cache = Cache,
 			logError = function(p1)
-				-- upvalues: LogResponseErrorFunction (upval), FFlagLuaAppUseGameTransactionsApiForReceipts (upval), DiscoveryEventErrorLogger (upval)
-				LogResponseErrorFunction(if FFlagLuaAppUseGameTransactionsApiForReceipts then "game-transactions/v1/receipts" else "developer-products/v1/game-transactions", {
+				-- upvalues: LogResponseErrorFunction (upval), DiscoveryEventErrorLogger (upval)
+				LogResponseErrorFunction("game-transactions/v1/receipts", {
 					StatusCode = if type(p1) == "table" and p1.StatusCode then p1.StatusCode else nil
 				})
 				DiscoveryEventErrorLogger.reportError("GameDeveloperProductStore", "Failed to fetch developer product statuses", { err = tostring(p1) })

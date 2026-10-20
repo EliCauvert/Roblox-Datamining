@@ -20,5 +20,9 @@
 		agreeButtonSourceContentId = "5409096",
 		cancelButton = "AvatarGeneration.SelfieConsent.CancelButton",
 		cancelButtonSourceContentId = "4239944"
+	},
+	allowMarketingEmailCheckboxAccountUpgrade = {
+		consent = "Authentication.SignUp.Description.OptInMarketingEmailConsent",
+		consentSourceContentId = "12131656"
 	}
 }

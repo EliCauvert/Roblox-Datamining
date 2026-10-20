@@ -16,8 +16,7 @@ function variantsFactory(p1)
 	local config = {
 		container = {
 			size = UDim2.fromOffset(p1.Size.Size_400, p1.Size.Size_400)
-		},
-		content = { typography = p1.Typography.LabelSmall }
+		}
 	}
 	local config1 = {
 		container = {
@@ -35,7 +34,11 @@ function variantsFactory(p1)
 	
 	return {
 		common = {
-			content = { tag = "auto-xy text-align-x-left", font = _Font },
+			content = {
+				tag = "auto-xy text-align-x-left",
+				font = _Font,
+				typography = p1.Typography.LabelSmall
+			},
 			stroke = if FlagsModule.FoundationStatusIndicatorDesignUpdate then { Thickness = p1.Stroke.Thicker } else nil
 		},
 		variants = {

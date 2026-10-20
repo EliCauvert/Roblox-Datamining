@@ -45,10 +45,12 @@ local MakeTextOverlayEditsForEditorModule = require(MomentsCreation.Utils.makeTe
 local FitTextOverlayFontSizeModule = require(MomentsCreation.Utils.fitTextOverlayFontSize)
 local ComputeEditorChipLayoutModule = require(MomentsCreation.Utils.computeEditorChipLayout)
 local IsPointOverTrashTargetModule = require(MomentsCreation.Utils.isPointOverTrashTarget)
+local PlayDragToDeleteHapticModule = require(MomentsCreation.Utils.playDragToDeleteHaptic)
 local FFlagMomentsTextOverlayChipGrowAboveKeyboard = MomentsCommonModule.Flags.FFlagMomentsTextOverlayChipGrowAboveKeyboard
 local FFlagMomentsTextOverlayEdgeClipFix = MomentsCommonModule.Flags.FFlagMomentsTextOverlayEdgeClipFix
 local FFlagMomentsTextOverlayChipGrowWidthModule = require(MomentsCreation.Flags.FFlagMomentsTextOverlayChipGrowWidth)
 local FFlagMomentsTextOverlayModalTextFixModule = require(MomentsCreation.Flags.FFlagMomentsTextOverlayModalTextFix)
+local FFlagMomentsTextOverlayDragToDeleteRefinementModule = require(MomentsCreation.Flags.FFlagMomentsTextOverlayDragToDeleteRefinement)
 local VerticalFontSizeSliderModule = require(MomentsCreation.Components.TextOverlay.VerticalFontSizeSlider)
 local TextOverlayToolbarModule = require(MomentsCreation.Components.TextOverlay.TextOverlayToolbar)
 local config = { dampingRatio = 0.85, frequency = 12 }
@@ -86,7 +88,7 @@ local function GenerateTextButton(p1)
 end
 
 return function(p1)
-	-- upvalues: UseSignalStateFunction (copy), GetScaleFunction (copy), UseMemoFunction (copy), SignalsModule (copy), CreationFlowStateModule (copy), UseRefFunction (copy), UseBindingFunction (copy), UseOnScreenKeyboardHeightModule (copy), FFlagMomentsTextOverlayModalTextFixModule (copy), FFlagMomentsTextOverlayV2Redesign (copy), ConstantsModule (copy), FFlagMomentsTextOverlayEdgeClipFix (copy), TextService (copy), FitTextOverlayFontSizeModule (copy), UseCallbackFunction (copy), GetFFlagMomentsStickerButtonFunction (copy), DashModule (copy), GetFFlagEnableMomentTextGenerationFunction (copy), FireAnalyticsEventModule (copy), EventNames (copy), MakeCreationEventFieldsModule (copy), UseDeviceInsetsFunction (copy), UseAnimatedBindingFunction (copy), UseIsMultiTouchActiveFunction (copy), UIDragDetectorFixEventPositionEnabledEngineFeature (copy), GuiService (copy), IsPointOverTrashTargetModule (copy), ReactOtterModule (copy), config (copy), UseEffectFunction (copy), MakeTextOverlayEditsForEditorModule (copy), MakeDefaultTextOverlayEditModule (copy), FFlagMomentsTextOverlayChipGrowAboveKeyboard (copy), ComputeEditorChipLayoutModule (copy), FFlagMomentsTextOverlayChipGrowWidthModule (copy), ReactModule (copy), View (copy), FoundationModule (copy), TextOverlay (copy), GetFFlagMomentsGenerateTextInTextOverlayModule (copy), GenerateTextButton (copy), VerticalFontSizeSliderModule (copy), NumberSequence1 (copy), TextOverlayToolbarModule (copy), OverlayDisplay (copy), TextOverlayDisplay (copy), TextOverlayTrashZoneModule (copy)
+	-- upvalues: UseSignalStateFunction (copy), GetScaleFunction (copy), UseMemoFunction (copy), SignalsModule (copy), CreationFlowStateModule (copy), UseRefFunction (copy), UseBindingFunction (copy), UseOnScreenKeyboardHeightModule (copy), FFlagMomentsTextOverlayModalTextFixModule (copy), FFlagMomentsTextOverlayV2Redesign (copy), ConstantsModule (copy), FFlagMomentsTextOverlayEdgeClipFix (copy), TextService (copy), FitTextOverlayFontSizeModule (copy), UseCallbackFunction (copy), GetFFlagMomentsStickerButtonFunction (copy), DashModule (copy), GetFFlagEnableMomentTextGenerationFunction (copy), FireAnalyticsEventModule (copy), EventNames (copy), MakeCreationEventFieldsModule (copy), UseDeviceInsetsFunction (copy), FFlagMomentsTextOverlayDragToDeleteRefinementModule (copy), UseCreationFlowStringsModule (copy), UseAnimatedBindingFunction (copy), UseIsMultiTouchActiveFunction (copy), UIDragDetectorFixEventPositionEnabledEngineFeature (copy), GuiService (copy), IsPointOverTrashTargetModule (copy), ReactOtterModule (copy), PlayDragToDeleteHapticModule (copy), config (copy), UseEffectFunction (copy), MakeTextOverlayEditsForEditorModule (copy), MakeDefaultTextOverlayEditModule (copy), FFlagMomentsTextOverlayChipGrowAboveKeyboard (copy), ComputeEditorChipLayoutModule (copy), FFlagMomentsTextOverlayChipGrowWidthModule (copy), ReactModule (copy), View (copy), FoundationModule (copy), TextOverlay (copy), GetFFlagMomentsGenerateTextInTextOverlayModule (copy), GenerateTextButton (copy), VerticalFontSizeSliderModule (copy), NumberSequence1 (copy), TextOverlayToolbarModule (copy), OverlayDisplay (copy), TextOverlayDisplay (copy), TextOverlayTrashZoneModule (copy)
 	local Controller = p1.controller
 	local UseSignalStateResult = UseSignalStateFunction(Controller.getStep)
 	local UseSignalStateResult1 = UseSignalStateFunction(p1.ctx.getItemSize)
@@ -217,29 +219,58 @@ return function(p1)
 	end
 	local UseDeviceInsetsResult = if FFlagMomentsTextOverlayV2Redesign then UseDeviceInsetsFunction() else nil
 	local UseRefResult4 = UseRefFunction(nil)
+	local CircleRef = nil
+	local v4 = nil
+	local TextOverlayDragHereToDelete = nil
+	
+	if FFlagMomentsTextOverlayDragToDeleteRefinementModule then
+		CircleRef = UseRefFunction(nil)
+		v4 = UseRefFunction(nil)
+		TextOverlayDragHereToDelete = UseCreationFlowStringsModule().TextOverlayDragHereToDelete
+	end
 	local UseRefResult5 = UseRefFunction(false)
 	local UseBindingResult1, UseBindingResult2_1 = UseBindingFunction(false)
 	local UseAnimatedBindingResult, UseAnimatedBindingResult2 = UseAnimatedBindingFunction(1)
 	local UseAnimatedBindingResult1, UseAnimatedBindingResult2_1 = UseAnimatedBindingFunction(1)
 	local UseIsMultiTouchActiveResult = if FFlagMomentsTextOverlayV2Redesign then UseIsMultiTouchActiveFunction(UseSignalStateResult == CreationFlowStateModule.Preview) else false
 	local UseCallbackResult5 = UseCallbackFunction(function(p2)
-		-- upvalues: UseRefResult4 (copy), FFlagMomentsTextOverlayV2Redesign (upval), UIDragDetectorFixEventPositionEnabledEngineFeature (upval), UseDeviceInsetsResult (ref), GuiService (upval), IsPointOverTrashTargetModule (upval)
+		-- upvalues: UseRefResult4 (copy), FFlagMomentsTextOverlayV2Redesign (upval), UIDragDetectorFixEventPositionEnabledEngineFeature (upval), UseDeviceInsetsResult (ref), GuiService (upval), FFlagMomentsTextOverlayDragToDeleteRefinementModule (upval), CircleRef (ref), v4 (ref), UseRefResult5 (copy), UseAnimatedBindingResult (copy), IsPointOverTrashTargetModule (upval)
 		local Current = UseRefResult4.current
 		
 		if Current == nil then
 			return false
 		end
 		local ZeroVector = Vector2.zero
-		local v4 = 0
+		local v5 = 0
 		
 		if FFlagMomentsTextOverlayV2Redesign and not UIDragDetectorFixEventPositionEnabledEngineFeature and UseDeviceInsetsResult ~= nil then
 			ZeroVector = GuiService:GetGuiInset() + Vector2.new(UseDeviceInsetsResult.left, UseDeviceInsetsResult.top)
 		end
 		if FFlagMomentsTextOverlayV2Redesign then
-			v4 = 24
+			v5 = 24
 		end
-		return IsPointOverTrashTargetModule(p2, ZeroVector, Current.AbsolutePosition, Current.AbsoluteSize, v4)
-	end, { UseDeviceInsetsResult })
+		if not FFlagMomentsTextOverlayV2Redesign or not FFlagMomentsTextOverlayDragToDeleteRefinementModule then
+			return IsPointOverTrashTargetModule(p2, ZeroVector, Current.AbsolutePosition, Current.AbsoluteSize, v5)
+		end
+		local Current1 = if CircleRef then CircleRef.current else nil
+		
+		if Current1 == nil or v4 == nil then
+			return false
+		end
+		local v6 = p2 - ZeroVector
+		local XRatio = Current1.AbsoluteSize.X / 2
+		local NewAbsolutePosition = Current1.AbsolutePosition + Current1.AbsoluteSize / 2
+		
+		if not UseRefResult5.current and math.abs(UseAnimatedBindingResult:getValue() - 1) < 0.01 then
+			v4.current = { center = NewAbsolutePosition, radius = XRatio }
+		end
+		local Current2 = v4.current or {
+			center = NewAbsolutePosition,
+			radius = XRatio / math.max(UseAnimatedBindingResult:getValue(), 1)
+		}
+		
+		return if UseRefResult5.current then (v6 - Current2.center).Magnitude <= Current2.radius * 1.15 + 8 or (v6 - NewAbsolutePosition).Magnitude <= XRatio + 8 else (v6 - Current2.center).Magnitude <= Current2.radius
+	end, { UseDeviceInsetsResult, UseAnimatedBindingResult })
 	local UseCallbackResult6 = UseCallbackFunction(function()
 		-- upvalues: FFlagMomentsTextOverlayV2Redesign (upval), p1 (copy), UseRefResult5 (copy), UseAnimatedBindingResult2 (copy), ReactOtterModule (upval), UseAnimatedBindingResult2_1 (copy), UseBindingResult2_1 (copy), v3 (ref), FireAnalyticsEventModule (upval), EventNames (upval), MakeCreationEventFieldsModule (upval)
 		if not FFlagMomentsTextOverlayV2Redesign then return end
@@ -262,17 +293,18 @@ return function(p1)
 		UseBindingResult2_1
 	})
 	local UseCallbackResult7 = UseCallbackFunction(function(p2)
-		-- upvalues: FFlagMomentsTextOverlayV2Redesign (upval), UseCallbackResult5 (copy), UseRefResult5 (copy), UseAnimatedBindingResult2 (copy), ReactOtterModule (upval), config (upval), UseAnimatedBindingResult2_1 (copy)
+		-- upvalues: FFlagMomentsTextOverlayV2Redesign (upval), UseCallbackResult5 (copy), UseRefResult5 (copy), FFlagMomentsTextOverlayDragToDeleteRefinementModule (upval), PlayDragToDeleteHapticModule (upval), UseAnimatedBindingResult2 (copy), ReactOtterModule (upval), config (upval), UseAnimatedBindingResult2_1 (copy)
 		if not FFlagMomentsTextOverlayV2Redesign then return end
 		local UseCallbackResultResult = UseCallbackResult5(p2)
 		
-		if UseCallbackResultResult ~= UseRefResult5.current then
-			UseRefResult5.current = UseCallbackResultResult
-			UseAnimatedBindingResult2((ReactOtterModule.spring(if UseCallbackResultResult then 1.15 else 1, config)))
-			UseAnimatedBindingResult2_1((ReactOtterModule.spring(if UseCallbackResultResult then 0.45 else 1, config)))
-			
-			return
+		if UseCallbackResultResult == UseRefResult5.current then return end
+		UseRefResult5.current = UseCallbackResultResult
+		
+		if FFlagMomentsTextOverlayDragToDeleteRefinementModule and UseCallbackResultResult then
+			PlayDragToDeleteHapticModule()
 		end
+		UseAnimatedBindingResult2((ReactOtterModule.spring(if UseCallbackResultResult then 1.15 else 1, config)))
+		UseAnimatedBindingResult2_1((ReactOtterModule.spring(if UseCallbackResultResult then 0.45 else 1, config)))
 	end, {
 		UseCallbackResult5,
 		UseAnimatedBindingResult2,
@@ -499,9 +531,11 @@ return function(p1)
 		local NoUseIsMultiTouchActiveResult: boolean = IsUseSignalStateResultMatch1 and not UseIsMultiTouchActiveResult
 		local IsUseSignalStateResultMatch1_1: boolean = FFlagMomentsTextOverlayV2Redesign and IsUseSignalStateResultMatch1
 		local IsUseSignalStateResultMatch1_2: boolean = FFlagMomentsTextOverlayV2Redesign and IsUseSignalStateResultMatch1
+		local FFlagMomentsTextOverlayDragToDeleteRefinementModule1 = FFlagMomentsTextOverlayV2Redesign and FFlagMomentsTextOverlayDragToDeleteRefinementModule
 		local Element = if GetFFlagMomentsStickerButtonFunction() then ReactModule.createElement(OverlayDisplay, {
-			clampToBoundsEnabled = true,
 			editable = false,
+			clampToBoundsEnabled = not FFlagMomentsTextOverlayDragToDeleteRefinementModule1,
+			unboundedDragEnabled = if FFlagMomentsTextOverlayDragToDeleteRefinementModule1 then true else nil,
 			draggable = NoUseIsMultiTouchActiveResult,
 			itemResolution = UseSignalStateResult2,
 			itemSize = UseSignalStateResult1,
@@ -518,8 +552,9 @@ return function(p1)
 			visualScale = if IsUseSignalStateResultMatch1_1 then UseAnimatedBindingResult1 else nil,
 			zIndex = p1.zIndex
 		}) else ReactModule.createElement(TextOverlayDisplay, {
-			clampToBoundsEnabled = true,
 			editable = false,
+			clampToBoundsEnabled = not FFlagMomentsTextOverlayDragToDeleteRefinementModule1,
+			unboundedDragEnabled = if FFlagMomentsTextOverlayDragToDeleteRefinementModule1 then true else nil,
 			draggable = NoUseIsMultiTouchActiveResult,
 			itemResolution = UseSignalStateResult2,
 			itemSize = UseSignalStateResult1,
@@ -539,7 +574,9 @@ return function(p1)
 		return if IsUseSignalStateResultMatch1_1 then ReactModule.createElement(View, { tag = "size-full", ZIndex = p1.zIndex or 1 }, {
 			Overlay = Element,
 			TrashZone = ReactModule.createElement(TextOverlayTrashZoneModule, {
+				circleRef = CircleRef,
 				highlightScale = UseAnimatedBindingResult,
+				label = TextOverlayDragHereToDelete,
 				ref = UseRefResult4,
 				visible = UseBindingResult1,
 				ZIndex = (p1.zIndex or 1) + 10

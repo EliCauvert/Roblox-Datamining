@@ -1,4 +1,7 @@
-﻿local RecipientSource = { ChatInbox = "chatInbox" }
+﻿local RecipientSource = {
+	ChatInbox = "chatInbox",
+	OneToOneFriends = "oneToOneFriends"
+}
 local t = {}
 
 for _, value in RecipientSource do

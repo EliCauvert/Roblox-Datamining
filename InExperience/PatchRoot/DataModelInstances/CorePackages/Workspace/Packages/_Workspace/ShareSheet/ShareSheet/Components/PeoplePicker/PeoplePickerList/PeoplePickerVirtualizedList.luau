@@ -98,17 +98,17 @@ return function(p1)
 	end, { UseMemoResult })
 	local UseMeasuredLayoutResult = useMeasuredLayout(PeoplePickerListViewModule.getItemLayoutMetrics((UseTokensFunction())).estimatedRowHeight)
 	local UseRefResult = ReactModule.useRef(nil)
-	local UseRefResult1 = ReactModule.useRef(p1.debouncedQuery)
+	local UseRefResult1 = ReactModule.useRef(p1.scrollResetQuery)
 	ReactModule.useEffect(function()
 		-- upvalues: UseRefResult1 (copy), p1 (copy), UseRefResult (copy)
-		if UseRefResult1.current == p1.debouncedQuery then return end
-		UseRefResult1.current = p1.debouncedQuery
+		if UseRefResult1.current == p1.scrollResetQuery then return end
+		UseRefResult1.current = p1.scrollResetQuery
 		local Current = UseRefResult.current
 		
 		if Current then
 			Current.scrollToOffset(0)
 		end
-	end, { p1.debouncedQuery })
+	end, { p1.scrollResetQuery })
 	
 	return ReactModule.createElement(ViewRecyclerModule.VirtualList, {
 		data = UseMemoResult1,

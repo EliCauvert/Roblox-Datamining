@@ -1,7 +1,6 @@
 ﻿local Foundation = script:FindFirstAncestor("Foundation")
 local ReactModule = require(Foundation.Parent.React)
 local ConstantsModule = require(script.Parent.constants)
-local FlagsModule = require(Foundation.Utility.Flags)
 local ImageModule = require(Foundation.Components.Image)
 local TextModule = require(Foundation.Components.Text)
 local _ = require(Foundation.Components.Types)
@@ -188,7 +187,7 @@ local function SpinningRing(p1)
 end
 
 return function(p1)
-	-- upvalues: WithDefaultsModule (copy), config (copy), UseTokensModule (copy), UsePreferencesModule (copy), UseProgressVariantsModule (copy), UseProgressBindingModule (copy), UseRotationModule (copy), UsePulseBindingModule (copy), ConstantsModule (copy), ReactModule (copy), ViewModule (copy), WithCommonPropsModule (copy), SpinningRing (copy), FlagsModule (copy), ProgressRing (copy), TextModule (copy), MapBindableModule (copy), getLabelFromProgress (copy)
+	-- upvalues: WithDefaultsModule (copy), config (copy), UseTokensModule (copy), UsePreferencesModule (copy), UseProgressVariantsModule (copy), UseProgressBindingModule (copy), UseRotationModule (copy), UsePulseBindingModule (copy), ConstantsModule (copy), ReactModule (copy), ViewModule (copy), WithCommonPropsModule (copy), SpinningRing (copy), ProgressRing (copy), TextModule (copy), MapBindableModule (copy), getLabelFromProgress (copy)
 	local WithDefaultsModuleResult = WithDefaultsModule(p1, config)
 	local UseTokensModuleResult = UseTokensModule()
 	local UsePreferencesModuleResult = UsePreferencesModule()
@@ -200,9 +199,9 @@ return function(p1)
 	
 	return if UseProgressBindingModuleResult2 and not UsePreferencesModuleResult.reducedMotion then ReactModule.createElement(ViewModule, WithCommonPropsModule(WithDefaultsModuleResult, { tag = "auto-xy", ref = WithDefaultsModuleResult.ref }), {
 		IndeterminateContainer = ReactModule.createElement(SpinningRing, {
+			hasCaps = true,
 			size = _UDim2,
 			rotation = UseRotationModuleResult,
-			hasCaps = FlagsModule.FoundationProgressCircleRoundCaps,
 			testId = WithDefaultsModuleResult.testId
 		})
 	}) else ReactModule.createElement(ViewModule, WithCommonPropsModule(WithDefaultsModuleResult, { Size = _UDim2, ref = WithDefaultsModuleResult.ref }), {
@@ -210,7 +209,7 @@ return function(p1)
 			progress = UseProgressBindingModuleResult,
 			isIndeterminate = UseProgressBindingModuleResult2,
 			pulse = UsePulseBindingModuleResult,
-			hasCaps = FlagsModule.FoundationProgressCircleRoundCaps and not UseProgressBindingModuleResult2,
+			hasCaps = not UseProgressBindingModuleResult2,
 			testId = WithDefaultsModuleResult.testId
 		}),
 		ProgressLabel = if UseProgressVariantsModuleResult.circle.labelFont and not UseProgressBindingModuleResult2 then ReactModule.createElement(TextModule, {

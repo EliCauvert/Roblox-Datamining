@@ -26,5 +26,6 @@
 	allowEnableGroupNotifications = "allowEnableGroupNotifications",
 	allowEnableExperienceNotifications = "allowEnableExperienceNotifications",
 	whoCanOneOnOnePartyWithMe = "whoCanOneOnOnePartyWithMe",
-	whoCanGroupPartyWithMe = "whoCanGroupPartyWithMe"
+	whoCanGroupPartyWithMe = "whoCanGroupPartyWithMe",
+	allowPromotionalOffersNotifications = "allowPromotionalOffersNotifications"
 }

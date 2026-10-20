@@ -17,7 +17,7 @@ return function(Frame)
 		Size = UDim2.fromScale(1, 1)
 	}, {
 		List = ReactModule.createElement(PeoplePickerVirtualizedListModule, {
-			debouncedQuery = Frame.debouncedQuery,
+			scrollResetQuery = Frame.scrollResetQuery,
 			items = UsePeoplePickerListViewModelModuleResult.items,
 			onConversationActivated = Frame.onConversationActivated,
 			paginationProps = Frame.paginationProps,

@@ -47,6 +47,7 @@ local FFlagMomentsCreationToolsIxpEnabled2Module = require(MomentsCreation.Flags
 local FStringMomentsCreationToolsIxpLayer2Module = require(MomentsCreation.Flags.FStringMomentsCreationToolsIxpLayer2)
 local FFlagMomentsCreationToolsIxpEnabled3Module = require(MomentsCreation.Flags.FFlagMomentsCreationToolsIxpEnabled3)
 local FStringMomentsCreationToolsIxpLayer3Module = require(MomentsCreation.Flags.FStringMomentsCreationToolsIxpLayer3)
+local FFlagMomentsTextOverlayDragToDeleteRefinementModule = require(MomentsCreation.Flags.FFlagMomentsTextOverlayDragToDeleteRefinement)
 local LogMomentsLayerExposureFunction = MomentsCommonModule.Utils.logMomentsLayerExposure
 local StepStubModule = require(script.Parent.StepStub)
 local CreationFlowStateModule = require(MomentsCreation.Enums.CreationFlowState)
@@ -95,7 +96,7 @@ local function GallerySourceView(p1)
 end
 
 local function CreationFlowContent(p1)
-	-- upvalues: UseCreationControllerFunction (copy), GetFFlagMomentsCreationSaveDraftFunction (copy), UseDraftRestoreEffectModule (copy), UseDraftSaveEffectModule (copy), FFlagMomentsTTSDraftRestoreModule (copy), UseRestoredVoiceoverCheckModule (copy), UseDeviceInsetsFunction (copy), UseTokensFunction (copy), UseFormFactorFunction (copy), UseToggleStateFunction (copy), UseAutoDismissStateModule (copy), UseSignalStateFunction (copy), UseDescriptionKeyboardInsetModule (copy), CreationFlowStateModule (copy), GetFFlagMomentsTTSAudioOverlayModule (copy), UseCallbackFunction (copy), SessionManager (copy), FunnelEventNames (copy), CryoModule (copy), MakeCreationEventFieldsModule (copy), FireAnalyticsEventModule (copy), EventNames (copy), DialogTypeModule (copy), UseRefFunction (copy), UseEffectFunction (copy), GetFFlagMomentsStickerButtonFunction (copy), FFlagMomentsCreationToolsIxpEnabledModule (copy), LogMomentsLayerExposureFunction (copy), FStringMomentsCreationToolsIxpLayerModule (copy), FFlagMomentsCreationToolsIxpEnabled2Module (copy), FStringMomentsCreationToolsIxpLayer2Module (copy), FFlagMomentsCreationToolsIxpEnabled3Module (copy), FStringMomentsCreationToolsIxpLayer3Module (copy), ReactModule (copy), ExitConfirmationDialogModule (copy), TextFilteredDialogModule (copy), GenerateTextOptionsDialogModule (copy), VoiceoverErrorDialogModule (copy), VoiceoverDeleteConfirmDialogModule (copy), VoiceSelectorDialogModule (copy), StepStubModule (copy), UseMemoFunction (copy), SignalsModule (copy), View (copy), StateLayer (copy), FormFactor (copy), noopActivated (copy), VoiceBackControlsModule (copy), GetFFlagMomentsCreationCloseButtonZIndexFixModule (copy), Icon (copy), FoundationModule (copy), CaptureViewModule (copy), GradientBackdrop (copy), MusicChipModule (copy), FFlagMomentsCreationMusicChipRemoveButtonModule (copy), PlaybackControlsModule (copy), EditCTABarModule (copy), GetFFlagEnableMomentTextGenerationFunction (copy), GetFFlagMomentsTTSCoachmarkModule (copy), GallerySourceView (copy), GalleryViewModule (copy), SampleCapturesModule1 (copy), PreviewViewModule (copy), DescriptionViewModule (copy), CreationMediaProviderModule (copy)
+	-- upvalues: UseCreationControllerFunction (copy), GetFFlagMomentsCreationSaveDraftFunction (copy), UseDraftRestoreEffectModule (copy), UseDraftSaveEffectModule (copy), FFlagMomentsTTSDraftRestoreModule (copy), UseRestoredVoiceoverCheckModule (copy), UseDeviceInsetsFunction (copy), UseTokensFunction (copy), UseFormFactorFunction (copy), UseToggleStateFunction (copy), UseAutoDismissStateModule (copy), UseSignalStateFunction (copy), UseDescriptionKeyboardInsetModule (copy), CreationFlowStateModule (copy), GetFFlagMomentsTTSAudioOverlayModule (copy), UseCallbackFunction (copy), SessionManager (copy), FunnelEventNames (copy), CryoModule (copy), MakeCreationEventFieldsModule (copy), FireAnalyticsEventModule (copy), EventNames (copy), DialogTypeModule (copy), UseRefFunction (copy), UseEffectFunction (copy), GetFFlagMomentsStickerButtonFunction (copy), FFlagMomentsCreationToolsIxpEnabledModule (copy), LogMomentsLayerExposureFunction (copy), FStringMomentsCreationToolsIxpLayerModule (copy), FFlagMomentsCreationToolsIxpEnabled2Module (copy), FStringMomentsCreationToolsIxpLayer2Module (copy), FFlagMomentsCreationToolsIxpEnabled3Module (copy), FStringMomentsCreationToolsIxpLayer3Module (copy), ReactModule (copy), ExitConfirmationDialogModule (copy), TextFilteredDialogModule (copy), GenerateTextOptionsDialogModule (copy), VoiceoverErrorDialogModule (copy), VoiceoverDeleteConfirmDialogModule (copy), VoiceSelectorDialogModule (copy), StepStubModule (copy), UseMemoFunction (copy), SignalsModule (copy), FFlagMomentsTextOverlayDragToDeleteRefinementModule (copy), View (copy), StateLayer (copy), FormFactor (copy), noopActivated (copy), VoiceBackControlsModule (copy), GetFFlagMomentsCreationCloseButtonZIndexFixModule (copy), Icon (copy), FoundationModule (copy), CaptureViewModule (copy), GradientBackdrop (copy), MusicChipModule (copy), FFlagMomentsCreationMusicChipRemoveButtonModule (copy), PlaybackControlsModule (copy), EditCTABarModule (copy), GetFFlagEnableMomentTextGenerationFunction (copy), GetFFlagMomentsTTSCoachmarkModule (copy), GallerySourceView (copy), GalleryViewModule (copy), SampleCapturesModule1 (copy), PreviewViewModule (copy), DescriptionViewModule (copy), CreationMediaProviderModule (copy)
 	local UseCreationControllerResult = UseCreationControllerFunction()
 	
 	if GetFFlagMomentsCreationSaveDraftFunction() then
@@ -294,6 +295,13 @@ local function CreationFlowContent(p1)
 		return { get = Signal, set = Signal2 }
 	end, {})
 	local UseSignalStateResult7 = UseSignalStateFunction(UseMemoResult2.get)
+	
+	if FFlagMomentsTextOverlayDragToDeleteRefinementModule then
+		UseEffectFunction(function()
+			-- upvalues: UseMemoResult2 (copy)
+			UseMemoResult2.set(false)
+		end, { UseSignalStateResult, UseMemoResult2 })
+	end
 	local UseMemoResult3 = UseMemoFunction(function()
 		-- upvalues: UseMemoResult (copy), UseMemoResult1 (copy), UseMemoResult2 (copy)
 		return {
@@ -323,7 +331,7 @@ local function CreationFlowContent(p1)
 			stateLayer = StateLayer
 		}, {
 			VoiceBackControls = if GetFFlagMomentsTTSAudioOverlayModule and UseSignalStateResult == CreationFlowStateModule.Voice then ReactModule.createElement(VoiceBackControlsModule) else nil,
-			CloseButtonContainer = if GetFFlagMomentsTTSAudioOverlayModule and UseSignalStateResult == CreationFlowStateModule.Voice then nil else ReactModule.createElement(View, {
+			CloseButtonContainer = if GetFFlagMomentsTTSAudioOverlayModule and UseSignalStateResult == CreationFlowStateModule.Voice then nil elseif FFlagMomentsTextOverlayDragToDeleteRefinementModule and UseSignalStateResult7 then nil else ReactModule.createElement(View, {
 				tag = "position-top-right anchor-top-right auto-xy",
 				padding = {
 					top = UDim.new(0, UseDeviceInsetsResult.top + UseTokensResult.Padding.Medium),
@@ -421,7 +429,7 @@ local function CreationFlowContent(p1)
 									right = UDim.new(0, (math.max(UseDeviceInsetsResult.right, UseTokensResult.Padding.Large)))
 								}
 							}, {
-								MusicIndicator = if Music and (UseSignalStateResult == CreationFlowStateModule.Preview or UseSignalStateResult == CreationFlowStateModule.Description) then ReactModule.createElement(View, { tag = "position-bottom-left anchor-bottom-left auto-xy" }, {
+								MusicIndicator = if Music and (UseSignalStateResult == CreationFlowStateModule.Preview or UseSignalStateResult == CreationFlowStateModule.Description) then if FFlagMomentsTextOverlayDragToDeleteRefinementModule and UseSignalStateResult7 then nil else ReactModule.createElement(View, { tag = "position-bottom-left anchor-bottom-left auto-xy" }, {
 									MusicChip = ReactModule.createElement(MusicChipModule, {
 										musicAssetId = Music.assetId,
 										onActivated = UseCallbackResult5,
@@ -455,6 +463,7 @@ local function CreationFlowContent(p1)
 							isLoadingMap = if UseSignalStateResult6 then { generateText = true } else nil,
 							isDisabledMap = if GetFFlagEnableMomentTextGenerationFunction() and UseSignalStateResult6 then { text = true } else nil,
 							onDisabledToolActivated = UseCreationControllerResult.onDisabledToolActivated,
+							hidden = if FFlagMomentsTextOverlayDragToDeleteRefinementModule then UseSignalStateResult7 else nil,
 							coachmark = if GetFFlagMomentsTTSAudioOverlayModule and GetFFlagMomentsTTSCoachmarkModule() then require(script.Parent.makeVoiceCoachmarkConfig)(GetFFlagMomentsTTSAudioOverlayModule, GetFFlagMomentsTTSCoachmarkModule()) else nil
 						}) else nil
 					}),

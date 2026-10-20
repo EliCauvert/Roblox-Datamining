@@ -1,6 +1,6 @@
-﻿local FFlagMomentsCreationBackCta = require(script:FindFirstAncestor("MomentsCreation").Parent.MomentsCommon).Flags.FFlagMomentsCreationBackCta
-
-return {
+﻿local MomentsCreation = script:FindFirstAncestor("MomentsCreation")
+local FFlagMomentsCreationBackCta = require(MomentsCreation.Parent.MomentsCommon).Flags.FFlagMomentsCreationBackCta
+local CreationFlowStringsModule = {
 	CommunityStandardsText = "Feature.Moments.Description.CommunityStandards",
 	CreationTooltip = "Feature.Moments.Disclaimer.EveryoneMoments",
 	EditingCtaMusic = "Feature.Moments.Label.Music",
@@ -39,3 +39,8 @@ return {
 	PublishingDescription = "Feature.Moments.Description.PublishMoment",
 	StayFriendlyModeration = "Feature.Moments.Label.StayFriendlyModeration"
 }
+
+if require(MomentsCreation.Flags.FFlagMomentsTextOverlayDragToDeleteRefinement) then
+	CreationFlowStringsModule.TextOverlayDragHereToDelete = "Feature.Moments.Label.DragHereToDelete"
+end
+return CreationFlowStringsModule

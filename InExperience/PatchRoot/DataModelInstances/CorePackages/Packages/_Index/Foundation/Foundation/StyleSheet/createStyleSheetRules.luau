@@ -10,20 +10,16 @@ local _ = require(Parent.getOverrideAttributes)
 local ScaleValueModule = require(Foundation.Utility.scaleValue)
 
 local function insertRule(List, p1, Tag)
-	-- upvalues: FlagsModule (copy), ReactModule (copy), StyleRuleModule (copy)
+	-- upvalues: ReactModule (copy), StyleRuleModule (copy)
 	local Properties = p1.properties
 	local Text = "." .. Tag
 	local Text1: string = if p1.modifier == nil then "" else ":" .. p1.modifier
 	local Text2 = Text .. Text1 .. (if p1.pseudo == nil then "" else " ::" .. p1.pseudo)
 	
-	if FlagsModule.FoundationStyleRulePseudoName then
-		if p1.pseudoName ~= nil then
-			Text2 ..= " #" .. p1.pseudoName
-		end
-		if p1.pseudo ~= nil and p1.pseudoName == nil then
-			Text2 ..= ", " .. Text .. Text1 .. " > " .. p1.pseudo
-		end
-	elseif p1.pseudo ~= nil then
+	if p1.pseudoName ~= nil then
+		Text2 ..= " #" .. p1.pseudoName
+	end
+	if p1.pseudo ~= nil and p1.pseudoName == nil then
 		Text2 ..= ", " .. Text .. Text1 .. " > " .. p1.pseudo
 	end
 	table.insert(List, ReactModule.createElement(StyleRuleModule, {
@@ -50,13 +46,13 @@ local function updateRuleAttributes(Object, Attributes, p1, p2, p3)
 end
 
 return function(p4, List, p5, p6, p7, p8)
-	-- upvalues: FlagsModule (copy), updateRuleAttributes (copy), insertRule (copy)
+	-- upvalues: updateRuleAttributes (copy), insertRule (copy)
 	local t = {}
 	
 	for i, _ in List do
 		local v2 = p4[i]
 		
-		if v2 ~= nil and (FlagsModule.FoundationStyleRulePseudoName or v2.pseudoName == nil) then
+		if v2 ~= nil then
 			if p5 and p6 then
 				updateRuleAttributes(p5, v2.attributes, p6, p7, p8)
 			end

@@ -2,6 +2,8 @@
 local Parent = ShareSheet.Parent
 local FoundationModule = require(Parent.Foundation)
 local ReactModule = require(Parent.React)
+local SignalsModule = require(Parent.Signals)
+local SignalsReactModule = require(Parent.SignalsReact)
 local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
 local Skeleton = FoundationModule.Skeleton
 local View = FoundationModule.View
@@ -102,7 +104,7 @@ local function ShareSheetConversationItem(Frame)
 end
 
 local function ShareSheetRecipientItem(Frame)
-	-- upvalues: ReactModule (copy), RecipientModule (copy), ShareSheetItemContainerModule (copy)
+	-- upvalues: ReactModule (copy), RecipientModule (copy), SignalsModule (copy), SignalsReactModule (copy), ShareSheetItemContainerModule (copy)
 	local Id = Frame.recipient.id
 	local ParticipantIds = RecipientModule.getParticipantIds(Frame.recipient, Frame.localUserId)
 	
@@ -110,7 +112,13 @@ local function ShareSheetRecipientItem(Frame)
 		primaryUserId = ParticipantIds[1] or Frame.localUserId,
 		secondUserId = ParticipantIds[2],
 		isSelected = Frame.isSelected,
-		label = RecipientModule.getName(Frame.recipient),
+		label = SignalsReactModule.useSignalState((ReactModule.useMemo(function()
+			-- upvalues: SignalsModule (upval), RecipientModule (upval), Frame (copy)
+			return SignalsModule.createComputed(function(p2)
+				-- upvalues: RecipientModule (upval), Frame (upval)
+				return RecipientModule.getName(Frame.recipient, p2)
+			end)
+		end, { Frame.recipient }))),
 		onActivated = ReactModule.useCallback(function()
 			-- upvalues: Frame (copy), Id (copy)
 			Frame.onConversationActivated(Id)

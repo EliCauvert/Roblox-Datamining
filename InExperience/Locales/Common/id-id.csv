@@ -436,6 +436,7 @@ CommonUI.Features.Label.ControllerBar.HoldPrefix,Tahan
 CommonUI.Features.Label.ControllerBar.Search,
 CommonUI.Features.Label.ControllerBar.ToPlaySuffix,untuk bermain
 CommonUI.Features.Label.CreateGames,
+CommonUI.Features.Label.DevSubs,Subscription
 CommonUI.Features.Label.Friends,Teman
 CommonUI.Features.Label.Game,Pengalaman Virtual
 CommonUI.Features.Label.Games,Game
@@ -2522,7 +2523,7 @@ Feature.Build.Title.PromoteGamePaid,Lebih banyak pemain menanti
 Feature.Build.Title.PushNotifications,Notifikasi Push
 Feature.Build.Title.RevertLastChange,Batalkan perubahan terakhir?
 Feature.Build.Title.StopBuild,Hentikan proses?
-Feature.Build.Title.Subscription,Subscription
+Feature.Build.Title.Subscription,
 Feature.Build.Title.Tasks,Tugas
 Feature.Build.Title.TurnActivity,Aktivitas chat saat ini
 Feature.Build.Title.UseYourAdCredits,Gunakan kredit iklanmu
@@ -3151,6 +3152,7 @@ Feature.Contacts.Message.ContactDiscoverable,"Untuk membantu kamu menjalin perte
 Feature.Contacts.Message.ContactsSyncWarning,"Kontak kamu akan disinkronisasi secara berkala. Jika saat sinkronisasi kontak kamu ditemukan sebagai pengguna Roblox, kontak tersebut akan disimpan untuk mempermudah kamu menemukan teman. Kelola ini kapan saja di pengaturan perangkat."
 Feature.Contacts.Message.InviteToRoblox,"Tambahkan saya sebagai teman di Roblox supaya kita bisa berkreasi, berbagi, dan menjelajahi berbagai pengalaman virtual bersama."
 Feature.Contacts.Message.NoResults,Tidak ada hasil.
+Feature.DeveloperProducts.Heading.Products,
 Feature.DeveloperProducts.Label.Product,
 Feature.DisplayName.ErrorMessage.AgedUpNameContainPII,Nama mungkin mengandung informasi pribadi
 Feature.DisplayName.ErrorMessage.AgedUpNameHasChanged,Nama kamu sudah diubah dalam 7 hari terakhir
@@ -3485,6 +3487,7 @@ Feature.GamePage.QuickLaunch.LaunchError.GuestProhibited,Tamu tidak dapat bergab
 Feature.GamePage.QuickLaunch.LaunchError.PurchaseRequired,Pembelian diperlukan untuk mengunjungi pengalaman virtual ini.
 Feature.GamePage.QuickLaunch.LaunchError.RequestFailed,Permintaan jaringan gagal.
 Feature.GamePage.QuickLaunch.LaunchError.TemporarilyUnavailable,Pengalaman virtual ini tidak dapat dikunjungi pada saat ini.
+Feature.GamePass.Heading.PassesForThisGame,Pas
 Feature.GamepadDisconnect.Label.Message,Koneksi controller untuk pengguna %s terputus. Tekan %s di controller yang ingin kamu gunakan.
 Feature.GamepadDisconnect.Label.MessageGeneric,"Controller untuk pengguna ""%s"" telah terputus. Hubungkan kembali controller."
 Feature.GamepadDisconnect.Label.Title,Tidak ada controller
@@ -3745,6 +3748,7 @@ Feature.Moments.Label.DeleteMomentBody,Kamu tidak bisa memulihkan Moment setelah
 Feature.Moments.Label.DeleteMomentTitle,Hapus Moment?
 Feature.Moments.Label.DeleteVoiceoverBody,Ini akan menghapus teks dan voiceover-mu. Kamu dapat memulai dari awal kapan saja.
 Feature.Moments.Label.DeleteVoiceoverTitle,Hapus voiceover?
+Feature.Moments.Label.DragHereToDelete,Tarik ke sini untuk menghapus
 Feature.Moments.Label.DurationSeconds,{seconds} dtk
 Feature.Moments.Label.Engagement,Interaksi
 Feature.Moments.Label.Error,

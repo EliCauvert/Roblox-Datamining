@@ -9,8 +9,10 @@ local FFlagChatInputBarGuardInvalidUtf8 = require(Parent.SharedFlags).FFlagChatI
 local FoundationFontFaceMigration = FoundationModule.Utility.Flags.FoundationFontFaceMigration
 local GetTextLengthIfValidUtf8Module = require(script.Parent.getTextLengthIfValidUtf8)
 local ChannelChipModule = require(script.Parent.ChannelChip)
+local _ = require(ChatUIPrimitives.universal.Autocomplete.AutocompleteTypes)
 local ChatAutocompleteDropdownModule = require(script.Parent.Autocomplete.ChatAutocompleteDropdown)
 local UseChatAutocompleteEngineModule = require(script.Parent.Autocomplete.useChatAutocompleteEngine)
+local UseAutocompleteSourcesModule = require(ChatUIPrimitives.universal.Autocomplete.useAutocompleteSources)
 local ExpressionTrayViewModule = require(ChatUIPrimitives.Components.ExpressionTray.ExpressionTrayView)
 local UseExpressionTrayModule = require(ChatUIPrimitives.Hooks.useExpressionTray)
 
@@ -46,7 +48,9 @@ end
 
 local function renderDropdown(p1)
 	-- upvalues: ReactModule (copy), ChatAutocompleteDropdownModule (copy)
-	if p1.props.autocomplete then
+	if p1.props.autocomplete == nil and p1.props.autocompleteOptions == nil then
+		return nil
+	else
 		local Autocomplete = p1.autocomplete
 		
 		return ReactModule.createElement(ChatAutocompleteDropdownModule, {
@@ -60,8 +64,6 @@ local function renderDropdown(p1)
 			onSelect = Autocomplete.commitSelection,
 			onDismiss = Autocomplete.dismiss
 		})
-	else
-		return nil
 	end
 end
 
@@ -425,7 +427,7 @@ local function renderComposer(p1)
 end
 
 return ReactModule.memo(function(Props)
-	-- upvalues: FoundationModule (copy), FFlagExpChatEnableFriendsTab (copy), ReactModule (copy), ReactIsModule (copy), deriveBackgroundStyle (copy), deriveTransparency (copy), UseChatAutocompleteEngineModule (copy), FFlagChatInputBarGuardInvalidUtf8 (copy), GetTextLengthIfValidUtf8Module (copy), UseExpressionTrayModule (copy), ExpressionTrayViewModule (copy), renderComposer (copy), renderLegacy (copy)
+	-- upvalues: FoundationModule (copy), FFlagExpChatEnableFriendsTab (copy), ReactModule (copy), ReactIsModule (copy), deriveBackgroundStyle (copy), deriveTransparency (copy), UseChatAutocompleteEngineModule (copy), UseAutocompleteSourcesModule (copy), FFlagChatInputBarGuardInvalidUtf8 (copy), GetTextLengthIfValidUtf8Module (copy), UseExpressionTrayModule (copy), ExpressionTrayViewModule (copy), renderComposer (copy), renderLegacy (copy)
 	local UseTokensResult = FoundationModule.Hooks.useTokens()
 	local ThemedColors = Props.themedColors
 	local SurfaceColor3 = if ThemedColors then UseTokensResult.Color.Surface.Surface_100.Color3 else UseTokensResult.DarkMode.Surface.Surface_100.Color3
@@ -495,6 +497,8 @@ return ReactModule.memo(function(Props)
 	local TextBoxRef = Props.textBoxRef or UseRefResult
 	local UseRefResult1 = ReactModule.useRef(nil)
 	local UseChatAutocompleteEngineModuleResult = UseChatAutocompleteEngineModule(TextBoxRef, Props.autocomplete)
+	local UseAutocompleteSourcesModuleResult = UseAutocompleteSourcesModule(TextBoxRef, Props.autocompleteOptions)
+	local UseChatAutocompleteEngineModuleResult1 = if Props.autocompleteOptions == nil then UseChatAutocompleteEngineModuleResult else UseAutocompleteSourcesModuleResult
 	local UseRefResult11 = ReactModule.useRef(Props.defaultValue or "")
 	local UseStateResult, UseStateResult2 = ReactModule.useState(function(): boolean
 		-- upvalues: Props (copy)
@@ -527,7 +531,7 @@ return ReactModule.memo(function(Props)
 		end
 	end, { TextBoxRef })
 	local UseResult3 = ReactModule.useCallback(function(p1)
-		-- upvalues: MaximumCharacterLimit (copy), FFlagChatInputBarGuardInvalidUtf8 (upval), GetTextLengthIfValidUtf8Module (upval), UseRefResult11 (copy), UseStateResult2 (copy), OnChangeFunction (copy), UseChatAutocompleteEngineModuleResult (copy)
+		-- upvalues: MaximumCharacterLimit (copy), FFlagChatInputBarGuardInvalidUtf8 (upval), GetTextLengthIfValidUtf8Module (upval), UseRefResult11 (copy), UseStateResult2 (copy), OnChangeFunction (copy), UseChatAutocompleteEngineModuleResult1 (copy)
 		local Text = p1.Text
 		
 		if MaximumCharacterLimit ~= nil then
@@ -558,11 +562,11 @@ return ReactModule.memo(function(Props)
 		if OnChangeFunction then
 			OnChangeFunction(Text)
 		end
-		UseChatAutocompleteEngineModuleResult.onTextChanged(Text)
+		UseChatAutocompleteEngineModuleResult1.onTextChanged(Text)
 	end, {
 		OnChangeFunction,
 		MaximumCharacterLimit,
-		UseChatAutocompleteEngineModuleResult.onTextChanged
+		UseChatAutocompleteEngineModuleResult1.onTextChanged
 	})
 	local UseResult4 = ReactModule.useCallback(function()
 		-- upvalues: Props (copy)
@@ -571,10 +575,10 @@ return ReactModule.memo(function(Props)
 		end
 	end, { Props.onFocusGained })
 	local UseResult5 = ReactModule.useCallback(function(_, p1)
-		-- upvalues: TextBoxRef (copy), UseChatAutocompleteEngineModuleResult (copy), UseResult1 (copy), Props (copy)
+		-- upvalues: TextBoxRef (copy), UseChatAutocompleteEngineModuleResult1 (copy), UseResult1 (copy), Props (copy)
 		local Current = TextBoxRef.current
 		
-		if (not Current or not UseChatAutocompleteEngineModuleResult.interceptSend(Current, p1)) and p1 then
+		if (not Current or not UseChatAutocompleteEngineModuleResult1.interceptSend(Current, p1)) and p1 then
 			UseResult1()
 		end
 		if Props.onFocusLost then
@@ -584,7 +588,7 @@ return ReactModule.memo(function(Props)
 		UseResult1,
 		Props.onFocusLost,
 		TextBoxRef,
-		UseChatAutocompleteEngineModuleResult.interceptSend
+		UseChatAutocompleteEngineModuleResult1.interceptSend
 	})
 	ReactModule.useEffect(function()
 		-- upvalues: CanLocalUserChat (copy), UseStateResult2 (copy)
@@ -606,6 +610,7 @@ return ReactModule.memo(function(Props)
 	end
 	local LeftAddon = if Element == nil then Props.leftAddon else Element
 	local HasLeftAddon = LeftAddon ~= nil
+	assert(Props.autocomplete == nil or Props.autocompleteOptions == nil, "Pass autocomplete or autocompleteOptions, not both")
 	local config = {
 		sendButtonContainerWidth = 30,
 		tokens = UseTokensResult,
@@ -630,7 +635,7 @@ return ReactModule.memo(function(Props)
 		textBoxRef = TextBoxRef,
 		barContainerRef = UseRefResult1,
 		channelChipWidth = UseBindingResult,
-		autocomplete = UseChatAutocompleteEngineModuleResult,
+		autocomplete = UseChatAutocompleteEngineModuleResult1,
 		onChannelChipAbsoluteSizeChanged = UseResult,
 		onSendActivated = UseResult1,
 		onReturnPressedFromOnScreenKeyboard = UseResult2,

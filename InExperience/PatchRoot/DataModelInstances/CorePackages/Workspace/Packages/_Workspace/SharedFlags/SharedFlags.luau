@@ -46,7 +46,7 @@ local SduiVerticalFeedPageShellSupport2 = game:DefineFastFlag("SduiVerticalFeedP
 local FixSduiEdpTtiColdStart = game:DefineFastFlag("FixSduiEdpTtiColdStart", false)
 local LuaAppPlayButtonPrivatePTSupport = game:DefineFastFlag("LuaAppPlayButtonPrivatePTSupport", false)
 local LuaAppPlayButtonPrivatePTSupport1 = game:DefineFastFlag("LuaAppPlayButtonPrivatePTEnableDualButton", false) and LuaAppPlayButtonPrivatePTSupport
-local DataHydrationAccountReset2 = game:DefineFastFlag("DataHydrationAccountReset2", false)
+local FFlagDataHydrationAccountResetModule = require(script.FFlagDataHydrationAccountReset)
 
 return {
 	FIntUserProfileStoreBatchSize = require(script.FIntUserProfileStoreBatchSize),
@@ -294,7 +294,6 @@ return {
 	FFlagDebugAppChatEnableDomLocators = require(script.FFlagDebugAppChatEnableDomLocators),
 	FFlagAppChatDomLocatorFoundationMigration = require(script.FFlagAppChatDomLocatorFoundationMigration),
 	FFlagAppChatRemoveNotifications = require(script.FFlagAppChatRemoveNotifications),
-	FFlagAppChatRemoveToggleChatPaused = require(script.FFlagAppChatRemoveToggleChatPaused),
 	FFlagAppChatMigrateChatEventReceiver = require(script.FFlagAppChatMigrateChatEventReceiver),
 	FFlagAppChatReactivePaneLayoutOnRotation = require(script.FFlagAppChatReactivePaneLayoutOnRotation),
 	FFlagAppChatSanitizeConversationTitleRichText = require(script.FFlagAppChatSanitizeConversationTitleRichText),
@@ -472,6 +471,7 @@ return {
 	FFlagUserListSurfacePresenceWins = require(script.FFlagUserListSurfacePresenceWins),
 	FFlagUserListDefaultCtaWidths = require(script.FFlagUserListDefaultCtaWidths),
 	FFlagUserListSurfaceExtensions = require(script.FFlagUserListSurfaceExtensions),
+	FFlagUserListInviteCta = require(script.FFlagUserListInviteCta),
 	FFlagSharedChatEntryPointAction = require(script.FFlagSharedChatEntryPointAction),
 	FFlagUserListUsernameFallbackConfig = require(script.FFlagUserListUsernameFallbackConfig),
 	FFlagMutualConnectionsListPagination = require(script.FFlagMutualConnectionsListPagination),
@@ -746,9 +746,9 @@ return {
 	FFlagSduiScalePlayButtonAndImageSizes = game:DefineFastFlag("SduiScalePlayButtonAndImageSizes", false),
 	FFlagSduiLinkActionSharedWebLink = game:DefineFastFlag("SduiLinkActionSharedWebLink", false),
 	FFlagSduiAlwaysCacheWithIdentifier = require(script.FFlagSduiAlwaysCacheWithIdentifier),
-	FFlagDataHydrationAccountReset = DataHydrationAccountReset2,
+	FFlagDataHydrationAccountReset = FFlagDataHydrationAccountResetModule,
 	FFlagDataHydrationStaleTime = game:DefineFastFlag("DataHydrationStaleTime", false),
-	FFlagHomePageRefetchOnDataHydrationAccountReset = game:DefineFastFlag("HomePageRefetchOnDataHydrationAccountReset", false) and DataHydrationAccountReset2,
+	FFlagHomePageRefetchOnDataHydrationAccountReset = game:DefineFastFlag("HomePageRefetchOnDataHydrationAccountReset", false) and FFlagDataHydrationAccountResetModule,
 	FFlagSduiHydrationDataCamelCasePropertyKeys = game:DefineFastFlag("SduiHydrationDataCamelCasePropertyKeys", false),
 	FFlagSduiNotificationBadgeHydration = game:DefineFastFlag("SduiNotificationBadgeHydration", false),
 	FFlagSduiSearchClientTemplateCache = game:DefineFastFlag("SduiSearchClientTemplateCache", false) and (SduiPageEntryPointResolvedSlot1 and (SduiAdvertiseRuntimeSupportSets1 and FFlagLuaAppEnableSearchStreamingEndpointModule)),
@@ -1416,7 +1416,6 @@ return {
 	FFlagEnablePasskeyLoginErrorLogging = require(script.FFlagEnablePasskeyLoginErrorLogging),
 	FFlagEnableLastLoginMethodTracking = require(script.FFlagEnableLastLoginMethodTracking),
 	FFlagUseIsAvailableCheckForIOSKeychainFetch = require(script.FFlagUseIsAvailableCheckForIOSKeychainFetch),
-	FFlagLuaAppUseGameTransactionsApiForReceipts = require(script.FFlagLuaAppUseGameTransactionsApiForReceipts),
 	FFlagEnableMagicLogin = require(script.FFlagEnableMagicLogin),
 	FFlagEnableRecordLogin = require(script.FFlagEnableRecordLogin),
 	FFlagFixPreviousAccountsListEntries = game:DefineFastFlag("FixPreviousAccountsListEntries", false),

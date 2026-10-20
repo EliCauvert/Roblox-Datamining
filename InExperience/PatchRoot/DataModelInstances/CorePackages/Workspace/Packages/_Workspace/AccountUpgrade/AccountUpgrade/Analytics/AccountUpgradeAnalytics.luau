@@ -158,5 +158,57 @@ return {
 			
 			return
 		end
+	end,
+	reportMarketingConsentShown = function(OAuth, p1, p2)
+		-- upvalues: AccountUpgradeFlowModule (copy), AuthFormInteractionFunction (copy), Context (copy), Field (copy), ActionType (copy), config (copy)
+		if OAuth == AccountUpgradeFlowModule.OAuth then
+			AuthFormInteractionFunction(Context.AccountUpgrade, Field.MarketingEmailConsent, ActionType.Shown, if OAuth == AccountUpgradeFlowModule.OAuth then config[p1] else OAuth, p2)
+			
+			return
+		end
+	end,
+	reportMarketingConsentToggled = function(OAuth, p1, p2)
+		-- upvalues: AccountUpgradeFlowModule (copy), AuthFormInteractionFunction (copy), Context (copy), Field (copy), ActionType (copy), config (copy)
+		if OAuth == AccountUpgradeFlowModule.OAuth then
+			AuthFormInteractionFunction(Context.AccountUpgrade, Field.MarketingEmailConsent, ActionType.Click, if OAuth == AccountUpgradeFlowModule.OAuth then config[p1] else OAuth, p2)
+			
+			return
+		end
+	end,
+	reportMarketingConsentSubmitted = function(OAuth, p1, p2)
+		-- upvalues: AccountUpgradeFlowModule (copy), AuthFormInteractionFunction (copy), Context (copy), Field (copy), ActionType (copy), config (copy)
+		if OAuth == AccountUpgradeFlowModule.OAuth then
+			AuthFormInteractionFunction(Context.AccountUpgrade, Field.MarketingEmailConsent, ActionType.Submit, if OAuth == AccountUpgradeFlowModule.OAuth then config[p1] else OAuth, p2)
+			
+			return
+		end
+	end,
+	reportMarketingConsentAutoOptIn = function(OAuth, p1)
+		-- upvalues: AccountUpgradeFlowModule (copy), AuthFormInteractionFunction (copy), Context (copy), Field (copy), ActionType (copy), config (copy)
+		if OAuth == AccountUpgradeFlowModule.OAuth then
+			AuthFormInteractionFunction(Context.AccountUpgrade, Field.MarketingEmailAutoOptIn, ActionType.Submit, if OAuth == AccountUpgradeFlowModule.OAuth then config[p1] else OAuth)
+			
+			return
+		end
+	end,
+	reportMarketingConsentWriteSucceeded = function(Flow, Surface)
+		-- upvalues: AccountUpgradeFlowModule (copy), TelemetryConfigs (copy), Default (copy)
+		if Flow == AccountUpgradeFlowModule.OAuth then
+			Default:logRobloxTelemetryCounter(TelemetryConfigs.AccountUpgradeMarketingConsentWriteSuccessConfig, 1, { errorCode = nil, flow = Flow, surface = Surface })
+			
+			return
+		end
+	end,
+	reportMarketingConsentWriteFailed = function(Flow, Surface, p1)
+		-- upvalues: AccountUpgradeFlowModule (copy), TelemetryConfigs (copy), State (copy), Default (copy)
+		if Flow == AccountUpgradeFlowModule.OAuth then
+			Default:logRobloxTelemetryCounter(TelemetryConfigs.AccountUpgradeMarketingConsentWriteFailureConfig, 1, {
+				flow = Flow,
+				surface = Surface,
+				errorCode = if p1 == nil then State.Unknown else tostring(p1)
+			})
+			
+			return
+		end
 	end
 }

@@ -419,6 +419,7 @@ CommonUI.Features.Label.ControllerBar.HoldPrefix,กดค้างไว้
 CommonUI.Features.Label.ControllerBar.Search,
 CommonUI.Features.Label.ControllerBar.ToPlaySuffix,เพื่อเล่น
 CommonUI.Features.Label.CreateGames,สร้างสรรค์
+CommonUI.Features.Label.DevSubs,การสมัครสมาชิก
 CommonUI.Features.Label.Friends,เพื่อน
 CommonUI.Features.Label.Game,ประสบการณ์
 CommonUI.Features.Label.Games,เกม
@@ -2505,7 +2506,7 @@ Feature.Build.Title.PromoteGamePaid,มีผู้เล่นอีกมา�
 Feature.Build.Title.PushNotifications,การแจ้งเตือนแบบพุช
 Feature.Build.Title.RevertLastChange,แปลงกลับการเปลี่ยนแปลงล่าสุดไหม?
 Feature.Build.Title.StopBuild,หยุดสร้างใช่ไหม?
-Feature.Build.Title.Subscription,การสมัครสมาชิก
+Feature.Build.Title.Subscription,
 Feature.Build.Title.Tasks,งาน
 Feature.Build.Title.TurnActivity,เปลี่ยนกิจกรรม
 Feature.Build.Title.UseYourAdCredits,ใช้เครดิตโฆษณาของคุณ
@@ -3136,6 +3137,7 @@ Feature.Contacts.Message.ContactDiscoverable,เพื่อช่วยคุ�
 Feature.Contacts.Message.ContactsSyncWarning,รายชื่อผู้ติดต่อของคุณจะถูกซิงค์อย่างสม่ำเสมอ และหากพบว่าผู้ติดต่อของคุณเป็นผู้ใช้ Roblox รายชื่อของผู้ติดต่อเหล่านั้นจะถูกบันทึกไว้เพื่อช่วยให้คุณค้นหาเพื่อนได้ง่ายขึ้น จัดการการตั้งค่านี้ได้ทุกเมื่อในการตั้งค่าอุปกรณ์
 Feature.Contacts.Message.InviteToRoblox,เพิ่มฉันเป็นเพื่อนบน Roblox เพื่อเราจะได้สร้างสรรค์ แชร์ และสำรวจประสบการณ์ต่างๆ ด้วยกัน
 Feature.Contacts.Message.NoResults,
+Feature.DeveloperProducts.Heading.Products,
 Feature.DeveloperProducts.Label.Product,
 Feature.DisplayName.ErrorMessage.AgedUpNameContainPII,ชื่อสามารถมีข้อมูลส่วนตัวได้
 Feature.DisplayName.ErrorMessage.AgedUpNameHasChanged,ชื่อของคุณได้รับการเปลี่ยนแปลงใน 7 วันที่ผ่านมา
@@ -3470,6 +3472,7 @@ Feature.GamePage.QuickLaunch.LaunchError.GuestProhibited,ผู้เยี่�
 Feature.GamePage.QuickLaunch.LaunchError.PurchaseRequired,จำเป็นต้องซื้อเพื่อเข้าถึงประสบการณ์นี้
 Feature.GamePage.QuickLaunch.LaunchError.RequestFailed,ส่งคำขอไปยังเครือข่ายไม่สำเร็จ
 Feature.GamePage.QuickLaunch.LaunchError.TemporarilyUnavailable,ไม่สามารถเยี่ยมชมประสบการณ์นี้ได้ในขณะนี้
+Feature.GamePass.Heading.PassesForThisGame,บัตรผ่าน
 Feature.GamepadDisconnect.Label.Message,"คอนโทรลเลอร์สำหรับผู้ใช้ ""%s"" ถูกตัดการเชื่อมต่อ โปรดกดปุ่ม ""%s"" บนคอนโทรลเลอร์เพื่อดำเนินการต่อ"
 Feature.GamepadDisconnect.Label.MessageGeneric,"คอนโทรลเลอร์สำหรับผู้ใช้ ""%s"" ถูกตัดการเชื่อมต่อแล้ว โปรดเชื่อมต่อคอนโทรลเลอร์ของคุณอีกครั้ง"
 Feature.GamepadDisconnect.Label.Title,ไม่พบคอนโทรลเลอร์
@@ -3730,6 +3733,7 @@ Feature.Moments.Label.DeleteMomentBody,คุณไม่สามารถก�
 Feature.Moments.Label.DeleteMomentTitle,ลบโมเมนต์ใช่ไหม?
 Feature.Moments.Label.DeleteVoiceoverBody,การดำเนินการนี้จะล้างข้อความและเสียงบรรยายของคุณ คุณสามารถเริ่มต้นใหม่ได้ทุกเมื่อ
 Feature.Moments.Label.DeleteVoiceoverTitle,ลบเสียงบรรยายใช่ไหม?
+Feature.Moments.Label.DragHereToDelete,ลากมาที่นี่เพื่อลบ
 Feature.Moments.Label.DurationSeconds,{seconds} วินาที
 Feature.Moments.Label.Engagement,การมีส่วนร่วม
 Feature.Moments.Label.Error,

@@ -419,6 +419,7 @@ CommonUI.Features.Label.ControllerBar.HoldPrefix,长按
 CommonUI.Features.Label.ControllerBar.Search,
 CommonUI.Features.Label.ControllerBar.ToPlaySuffix,以开始游戏
 CommonUI.Features.Label.CreateGames,创作
+CommonUI.Features.Label.DevSubs,订阅
 CommonUI.Features.Label.Friends,
 CommonUI.Features.Label.Game,作品
 CommonUI.Features.Label.Games,游戏
@@ -2503,7 +2504,7 @@ Feature.Build.Title.PromoteGamePaid,更多玩家正在等待
 Feature.Build.Title.PushNotifications,推送通知
 Feature.Build.Title.RevertLastChange,是否还原上次更改？
 Feature.Build.Title.StopBuild,停止构建？
-Feature.Build.Title.Subscription,订阅
+Feature.Build.Title.Subscription,
 Feature.Build.Title.Tasks,任务
 Feature.Build.Title.TurnActivity,轮次活动
 Feature.Build.Title.UseYourAdCredits,使用你的广告点数
@@ -3132,6 +3133,7 @@ Feature.Contacts.Message.ContactDiscoverable,为了帮你找到好友，通讯�
 Feature.Contacts.Message.ContactsSyncWarning,我们会定期更新你的联系人并存储其他匹配的 Roblox 用户，以帮助你找到你的好友。你可以在设备设置中随时管理此选项。
 Feature.Contacts.Message.InviteToRoblox,在 Roblox 上将我添加为好友，和我一起创作、分享并探索体验！
 Feature.Contacts.Message.NoResults,无结果。
+Feature.DeveloperProducts.Heading.Products,
 Feature.DeveloperProducts.Label.Product,
 Feature.DisplayName.ErrorMessage.AgedUpNameContainPII,名称可能包含私人信息
 Feature.DisplayName.ErrorMessage.AgedUpNameHasChanged,过去 7 天内你已更改过你的名称
@@ -3466,6 +3468,7 @@ Feature.GamePage.QuickLaunch.LaunchError.GuestProhibited,游客无法加入体�
 Feature.GamePage.QuickLaunch.LaunchError.PurchaseRequired,需购买以访问此作品。
 Feature.GamePage.QuickLaunch.LaunchError.RequestFailed,网络请求失败。
 Feature.GamePage.QuickLaunch.LaunchError.TemporarilyUnavailable,当前无法访问此作品。
+Feature.GamePass.Heading.PassesForThisGame,通行证
 Feature.GamepadDisconnect.Label.Message,玩家“%s”的控制器连接已断开。请按住控制器上的“%s”来继续。
 Feature.GamepadDisconnect.Label.MessageGeneric,用户“%s”的控制器已断开连接。请重新连接至你的控制器。
 Feature.GamepadDisconnect.Label.Title,找不到控制器
@@ -3725,6 +3728,7 @@ Feature.Moments.Label.DeleteMomentBody,精彩瞬间一旦删除，便无法恢�
 Feature.Moments.Label.DeleteMomentTitle,是否删除精彩瞬间？
 Feature.Moments.Label.DeleteVoiceoverBody,此操作将清除你的文本和旁白。你可以随时重新开始。
 Feature.Moments.Label.DeleteVoiceoverTitle,要删除旁白吗？
+Feature.Moments.Label.DragHereToDelete,拖动到此处以删除
 Feature.Moments.Label.DurationSeconds,{seconds} 秒
 Feature.Moments.Label.Engagement,参与度
 Feature.Moments.Label.Error,

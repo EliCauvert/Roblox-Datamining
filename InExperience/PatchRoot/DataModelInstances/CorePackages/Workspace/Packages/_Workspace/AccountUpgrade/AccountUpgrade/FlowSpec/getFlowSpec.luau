@@ -41,6 +41,7 @@ local config = {
 		submitTextKey = "Authentication.SignUp.Action.CreateAccountSentenceCase",
 		legalTextKey = "Authentication.SignUp.Description.SignUpAgreement.CreateAnAccount",
 		fitsDialogToContent = true,
+		showsMarketingConsent = true,
 		requiredFields = {
 			AccountUpgradeFieldModule.Birthday,
 			AccountUpgradeFieldModule.Username

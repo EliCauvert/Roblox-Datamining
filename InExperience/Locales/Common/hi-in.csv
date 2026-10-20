@@ -418,6 +418,7 @@ CommonUI.Features.Label.ControllerBar.HoldPrefix,होल्ड करें
 CommonUI.Features.Label.ControllerBar.Search,
 CommonUI.Features.Label.ControllerBar.ToPlaySuffix,खेलने के लिए
 CommonUI.Features.Label.CreateGames,
+CommonUI.Features.Label.DevSubs,सब्सक्रिप्शन
 CommonUI.Features.Label.Friends,फ़्रेंड्स
 CommonUI.Features.Label.Game,एक्सपीरिएंस
 CommonUI.Features.Label.Games,गेम्स
@@ -2503,7 +2504,7 @@ Feature.Build.Title.PromoteGamePaid,और प्लेयर्स इंतज
 Feature.Build.Title.PushNotifications,पुश नोटिफ़िकेशंस
 Feature.Build.Title.RevertLastChange,पिछला बदलाव रिवर्ट करना है?
 Feature.Build.Title.StopBuild,बिल्ड करने से रोकना है?
-Feature.Build.Title.Subscription,सब्सक्रिप्शन
+Feature.Build.Title.Subscription,
 Feature.Build.Title.Tasks,टास्क
 Feature.Build.Title.TurnActivity,टर्न ऐक्टिविटी
 Feature.Build.Title.UseYourAdCredits,अपने ऐड क्रेडिट इस्तेमाल करें
@@ -3134,6 +3135,7 @@ Feature.Contacts.Message.ContactDiscoverable,"आप फ़्रेंड्स
 Feature.Contacts.Message.ContactsSyncWarning,"आपके कॉन्टैक्ट्स को समय-समय पर सिंक किया जाएगा. साथ ही, अन्य Roblox यूज़र्स के साथ मैच होने वाले कॉन्टैक्ट्स को स्टोर किया जाएगा, ताकि फ़्रेंड्स ढूँढने में आपकी मदद की जा सके. इस डेटा को किसी भी समय डिवाइस सेटिंग में मैनेज किया जा सकता है."
 Feature.Contacts.Message.InviteToRoblox,"Roblox पर मुझे फ़्रेंड के तौर पर जोड़ें, ताकि हम साथ मिलकर एक्सपीरिएंस क्रिएट, शेयर और एक्सप्लोर कर सकें."
 Feature.Contacts.Message.NoResults,
+Feature.DeveloperProducts.Heading.Products,प्रॉडक्ट्स
 Feature.DeveloperProducts.Label.Product,
 Feature.DisplayName.ErrorMessage.AgedUpNameContainPII,नाम में निजी जानकारी हो सकती है
 Feature.DisplayName.ErrorMessage.AgedUpNameHasChanged,पिछले 7 दिनों में आपका नाम पहले ही बदला जा चुका है
@@ -3468,6 +3470,7 @@ Feature.GamePage.QuickLaunch.LaunchError.GuestProhibited,मेहमान इ�
 Feature.GamePage.QuickLaunch.LaunchError.PurchaseRequired,इस एक्सपीरिएंस पर जाने के लिए खरीदारी ज़रूरी है.
 Feature.GamePage.QuickLaunch.LaunchError.RequestFailed,नेटवर्क रिक्वेस्ट नहीं किया जा सका.
 Feature.GamePage.QuickLaunch.LaunchError.TemporarilyUnavailable,इस एक्सपीरिएंस पर फ़िलहाल नहीं जा सकते.
+Feature.GamePass.Heading.PassesForThisGame,पास
 Feature.GamepadDisconnect.Label.Message,"यूज़र ""%s"" के लिए कंट्रोलर को डिस्कनेक्ट कर दिया गया है, उस कंट्रोलर पर '%s' को दबाएँ, जिसके साथ आपको जारी रखना है."
 Feature.GamepadDisconnect.Label.MessageGeneric,"यूज़र ""%s"" के लिए कंट्रोलर को डिस्कनेक्ट कर दिया गया है. अपने कंट्रोलर को फिर से कनेक्ट करें."
 Feature.GamepadDisconnect.Label.Title,कंट्रोलर मौजूद नहीं हैं
@@ -3728,6 +3731,7 @@ Feature.Moments.Label.DeleteMomentBody,"कोई Moment मिट जाने 
 Feature.Moments.Label.DeleteMomentTitle,Moment डिलीट करना है?
 Feature.Moments.Label.DeleteVoiceoverBody,इससे आपका टेक्स्ट और वॉइसओवर मिट जाएगा. कभी भी फिर से शुरू करें.
 Feature.Moments.Label.DeleteVoiceoverTitle,वॉइसओवर डिलीट करना है?
+Feature.Moments.Label.DragHereToDelete,डिलीट करने के लिए यहाँ ड्रैग करें
 Feature.Moments.Label.DurationSeconds,{seconds} सेकंड
 Feature.Moments.Label.Engagement,इंगेजमेंट
 Feature.Moments.Label.Error,

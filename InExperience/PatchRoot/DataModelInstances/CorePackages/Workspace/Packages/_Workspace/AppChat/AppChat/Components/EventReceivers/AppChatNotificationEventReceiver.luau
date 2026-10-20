@@ -4,7 +4,6 @@ local ReactModule = require(Parent.React)
 local RealtimeDeliveryModule = require(Parent.RealtimeDelivery)
 local AppChatNetworkingModule = require(Parent.AppChatNetworking)
 local UseDispatchFunction = require(Parent.RoactUtils).Hooks.RoactRodux.useDispatch
-local UseSelectorFunction = require(Parent.RoactUtils).Hooks.RoactRodux.useSelector
 local UseSignalStateFunction = require(Parent.SignalsReact).useSignalState
 local EventNamesModule = require(AppChat.Analytics.EventNames)
 local UseAnalyticsModule = require(AppChat.Analytics.useAnalytics)
@@ -13,18 +12,15 @@ local UseUnreadMessagesDispatchModule = require(AppChat.Contexts.UnreadMessages.
 local UseChatIsVisibleModule = require(AppChat.Hooks.useChatIsVisible)
 local InExperienceAppChatModalModule = require(AppChat.App.InExperienceAppChatModal)
 local FFlagExpChatEnableFriendsTab = require(Parent.SharedFlags).FFlagExpChatEnableFriendsTab
-local FFlagAppChatUnreadMessageCountStoreModule = require(AppChat.Flags.FFlagAppChatUnreadMessageCountStore)
-local GetUnreadMessageCountStoreModule = if FFlagAppChatUnreadMessageCountStoreModule then require(AppChat.Stores.GetUnreadMessageCountStore) else nil
+local GetUnreadMessageCountStoreModule = require(AppChat.Stores.GetUnreadMessageCountStore)
 local NewResult = require(AppChat.Logger):new(script.Name)
 
 return ReactModule.memo(function(p1)
-	-- upvalues: UseAnalyticsModule (copy), UseUnreadMessagesDispatchModule (copy), UseDispatchFunction (copy), FFlagAppChatUnreadMessageCountStoreModule (copy), UseSignalStateFunction (copy), GetUnreadMessageCountStoreModule (copy), UseSelectorFunction (copy), UseChatIsVisibleModule (copy), ReactModule (copy), InExperienceAppChatModalModule (copy), FFlagExpChatEnableFriendsTab (copy), NewResult (copy), AppChatNetworkingModule (copy), EventNamesModule (copy), UseRealtimePlatformChatModule (copy), RealtimeDeliveryModule (copy)
+	-- upvalues: UseAnalyticsModule (copy), UseUnreadMessagesDispatchModule (copy), UseDispatchFunction (copy), UseSignalStateFunction (copy), GetUnreadMessageCountStoreModule (copy), UseChatIsVisibleModule (copy), ReactModule (copy), InExperienceAppChatModalModule (copy), FFlagExpChatEnableFriendsTab (copy), NewResult (copy), AppChatNetworkingModule (copy), EventNamesModule (copy), UseRealtimePlatformChatModule (copy), RealtimeDeliveryModule (copy)
 	local UseAnalyticsModuleResult = UseAnalyticsModule()
 	local UseUnreadMessagesDispatchModuleResult = UseUnreadMessagesDispatchModule()
 	local UseDispatchResult = UseDispatchFunction()
-	local UseSignalStateResult = if FFlagAppChatUnreadMessageCountStoreModule then UseSignalStateFunction(GetUnreadMessageCountStoreModule(false).getUnreadMessageCount) else UseSelectorFunction(function(p2)
-		return p2.ChatAppReducer.unreadMessageCount
-	end)
+	local UseSignalStateResult = UseSignalStateFunction(GetUnreadMessageCountStoreModule(false).getUnreadMessageCount)
 	local UseChatIsVisibleModuleResult = UseChatIsVisibleModule()
 	local UseStateResult, UseStateResult2 = ReactModule.useState(function()
 		-- upvalues: InExperienceAppChatModalModule (upval)

@@ -419,6 +419,7 @@ CommonUI.Features.Label.ControllerBar.HoldPrefix,Premi
 CommonUI.Features.Label.ControllerBar.Search,
 CommonUI.Features.Label.ControllerBar.ToPlaySuffix,per giocare
 CommonUI.Features.Label.CreateGames,
+CommonUI.Features.Label.DevSubs,Abbonamenti
 CommonUI.Features.Label.Friends,Amici
 CommonUI.Features.Label.Game,Esperienze
 CommonUI.Features.Label.Games,Giochi
@@ -3134,6 +3135,7 @@ Feature.Contacts.Message.ContactDiscoverable,"Per aiutarti a fare amicizie, Gli 
 Feature.Contacts.Message.ContactsSyncWarning,I tuoi contatti verranno sincronizzati regolarmente e le partite con altri utenti Roblox memorizzate per aiutarti a trovare gli amici. Puoi gestire questa opzione in qualsiasi momento nelle impostazioni del dispositivo.
 Feature.Contacts.Message.InviteToRoblox,"Aggiungimi agli amici su Roblox per creare, condividere e scoprire nuove esperienze insieme."
 Feature.Contacts.Message.NoResults,Nessun risultato.
+Feature.DeveloperProducts.Heading.Products,Prodotti
 Feature.DeveloperProducts.Label.Product,
 Feature.DisplayName.ErrorMessage.AgedUpNameContainPII,Il nome potrebbe contenere informazioni private
 Feature.DisplayName.ErrorMessage.AgedUpNameHasChanged,Il tuo nome è già stato cambiato negli ultimi 7 giorni
@@ -3468,6 +3470,7 @@ Feature.GamePage.QuickLaunch.LaunchError.GuestProhibited,Gli ospiti non possono 
 Feature.GamePage.QuickLaunch.LaunchError.PurchaseRequired,Per visitare questa esperienza è richiesto l'acquisto.
 Feature.GamePage.QuickLaunch.LaunchError.RequestFailed,Richiesta di rete fallita.
 Feature.GamePage.QuickLaunch.LaunchError.TemporarilyUnavailable,Questa esperienza non può essere visitata in questo momento.
+Feature.GamePass.Heading.PassesForThisGame,I Pass
 Feature.GamepadDisconnect.Label.Message,"Controller per utente ""%s"" è stato disconnesso, per favore premi '%s' sul controller con cui desideri continuare."
 Feature.GamepadDisconnect.Label.MessageGeneric,"Controller per utente ""%s"" è stato scollegato. Per favore ricollega il tuo controller."
 Feature.GamepadDisconnect.Label.Title,Controller mancante
@@ -3728,6 +3731,7 @@ Feature.Moments.Label.DeleteMomentBody,"Una volta confermato, non sarà possibil
 Feature.Moments.Label.DeleteMomentTitle,Eliminare il Momento?
 Feature.Moments.Label.DeleteVoiceoverBody,Questa operazione cancella il testo e la voce fuori campo. Puoi ricominciare in qualsiasi momento.
 Feature.Moments.Label.DeleteVoiceoverTitle,Eliminare la voce fuori campo?
+Feature.Moments.Label.DragHereToDelete,Trascina qui per eliminare
 Feature.Moments.Label.DurationSeconds,{seconds} s
 Feature.Moments.Label.Engagement,Coinvolgimento
 Feature.Moments.Label.Error,

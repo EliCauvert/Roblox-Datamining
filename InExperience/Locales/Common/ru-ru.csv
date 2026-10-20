@@ -190,6 +190,7 @@ CommonUI.Features.Label.ControllerBar.HoldPrefix,"Удерживать,"
 CommonUI.Features.Label.ControllerBar.Search,
 CommonUI.Features.Label.ControllerBar.ToPlaySuffix,чтобы играть
 CommonUI.Features.Label.CreateGames,Studio
+CommonUI.Features.Label.DevSubs,Подписки
 CommonUI.Features.Label.Friends,Друзья
 CommonUI.Features.Label.Game,Плейсы
 CommonUI.Features.Label.GiftCards,Гифткарты
@@ -1705,6 +1706,7 @@ Feature.Contacts.Message.AddFriends,
 Feature.Contacts.Message.ContactDiscoverable,"Чтобы помочь тебе найти друзей, пользователи Roblox с твоим номером телефона в контактах смогут добавить тебя и увидеть твоё имя, сохранённое на их телефоне."
 Feature.Contacts.Message.InviteToRoblox,"Добавь меня в контакты в Roblox, чтобы мы могли создавать, делиться и исследовать плейсы вместе."
 Feature.Contacts.Message.NoResults,Нет результатов.
+Feature.DeveloperProducts.Heading.Products,Товары
 Feature.DeveloperProducts.Label.Product,
 Feature.DisplayName.ErrorMessage.AgedUpNameContainPII,Имя может содержать личную информацию.
 Feature.DisplayName.ErrorMessage.AgedUpNameHasChanged,Твоё имя уже было изменено за последние 7 дней
@@ -1837,7 +1839,7 @@ Feature.Friends.Label.FewestInteractions,Меньше взаимодействи
 Feature.Friends.Label.FindFriendsHintBody,Общайся со своими друзьями или заведи новых!
 Feature.Friends.Label.Follower,Подписчик
 Feature.Friends.Label.Followers,Подписчики
-Feature.Friends.Label.Following,Подписки
+Feature.Friends.Label.Following,
 Feature.Friends.Label.FollowsYou,
 Feature.Friends.Label.Frequent,Сыграно вместе
 Feature.Friends.Label.Friend,
@@ -1921,6 +1923,7 @@ Feature.GamePage.QuickLaunch.LaunchError.GuestProhibited,Гости не мог�
 Feature.GamePage.QuickLaunch.LaunchError.PurchaseRequired,Необходимо оплатить вход в этот плейс.
 Feature.GamePage.QuickLaunch.LaunchError.RequestFailed,Ошибка запроса сети.
 Feature.GamePage.QuickLaunch.LaunchError.TemporarilyUnavailable,Сейчас невозможно зайти в этот плейс.
+Feature.GamePass.Heading.PassesForThisGame,Пропуска
 Feature.GamepadDisconnect.Label.Message,"Контроллер для пользователя ""%s"" был отключён. Нажми '%s' на контроллере, который хочешь использовать."
 Feature.GamepadDisconnect.Label.MessageGeneric,Контроллер для пользователя «%s» был отключён. Подключи контроллер.
 Feature.GamepadDisconnect.Label.Title,Отсутствующий контроллер

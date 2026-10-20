@@ -420,6 +420,7 @@ CommonUI.Features.Label.ControllerBar.HoldPrefix,Ingedrukt houden
 CommonUI.Features.Label.ControllerBar.Search,
 CommonUI.Features.Label.ControllerBar.ToPlaySuffix,om te spelen
 CommonUI.Features.Label.CreateGames,
+CommonUI.Features.Label.DevSubs,Abonnementen
 CommonUI.Features.Label.Friends,Vrienden
 CommonUI.Features.Label.Game,Ervaringen
 CommonUI.Features.Label.Games,Spelletjes
@@ -3135,6 +3136,7 @@ Feature.Contacts.Message.ContactDiscoverable,"Om je te helpen vrienden te maken,
 Feature.Contacts.Message.ContactsSyncWarning,Je contactpersonen worden regelmatig gesynchroniseerd en matches met andere Roblox-gebruikers worden opgeslagen om je te helpen vrienden te vinden. Je kunt dit op elk moment beheren in de apparaatinstellingen.
 Feature.Contacts.Message.InviteToRoblox,"Voeg me als vriend toe op Roblox, zodat we samen ervaringen kunnen creëren, delen en verkennen."
 Feature.Contacts.Message.NoResults,Geen resultaten.
+Feature.DeveloperProducts.Heading.Products,Producten
 Feature.DeveloperProducts.Label.Product,
 Feature.DisplayName.ErrorMessage.AgedUpNameContainPII,Naam kan persoonlijke gegevens bevatten
 Feature.DisplayName.ErrorMessage.AgedUpNameHasChanged,Je naam is in de afgelopen zeven dagen al gewijzigd
@@ -3469,6 +3471,7 @@ Feature.GamePage.QuickLaunch.LaunchError.GuestProhibited,Gasten kunnen niet deel
 Feature.GamePage.QuickLaunch.LaunchError.PurchaseRequired,"Om deze ervaring te bezoeken, is een aankoop vereist."
 Feature.GamePage.QuickLaunch.LaunchError.RequestFailed,Netwerkverzoek mislukt.
 Feature.GamePage.QuickLaunch.LaunchError.TemporarilyUnavailable,Deze ervaring kan op dit moment niet worden bezocht.
+Feature.GamePass.Heading.PassesForThisGame,Passen
 Feature.GamepadDisconnect.Label.Message,De verbinding met de controller voor gebruiker '%s' is verbroken. Druk op '%s' op de controller waarmee je wilt doorgaan.
 Feature.GamepadDisconnect.Label.MessageGeneric,De verbinding met de controller van gebruiker '%s' is verbroken. Maak opnieuw verbinding met je controller.
 Feature.GamepadDisconnect.Label.Title,Ontbrekende controller
@@ -3729,6 +3732,7 @@ Feature.Moments.Label.DeleteMomentBody,Je kunt een moment dat is verwijderd niet
 Feature.Moments.Label.DeleteMomentTitle,Moment verwijderen?
 Feature.Moments.Label.DeleteVoiceoverBody,Hierdoor worden je tekst en je voice-over gewist. Je kunt op elk moment opnieuw beginnen.
 Feature.Moments.Label.DeleteVoiceoverTitle,Voice-over verwijderen?
+Feature.Moments.Label.DragHereToDelete,Hierheen slepen om te verwijderen
 Feature.Moments.Label.DurationSeconds,{seconds} sec
 Feature.Moments.Label.Engagement,Betrokkenheid
 Feature.Moments.Label.Error,

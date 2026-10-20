@@ -6,6 +6,7 @@ local _ = require(script.Parent.Parent.Types)
 local MessageDraftModelModule = require(script.Parent.Parent.MessageDraftModel)
 local _ = require(ChatUIPrimitives.UniversalMessage.Types)
 local MessageDraftFromExpressionContentModule = require(script.Parent.messageDraftFromExpressionContent)
+local _ = require(ChatUIPrimitives.universal.Autocomplete.AutocompleteTypes)
 local _ = require(ChatUIPrimitives.Components.ChatInputBar.ChatInputBarView)
 local ModerationTimeoutModule = require(script.Parent.ModerationTimeout)
 
@@ -83,6 +84,7 @@ return function(p1)
 		onSideChipActivated = if DestinationSubtitle then DestinationSubtitle.onActivated else nil,
 		placeholderText = p1.placeholderText,
 		maximumCharacterLimit = p1.maximumCharacterLimit,
+		autocompleteOptions = p1.autocomplete,
 		textBoxRef = p1.textBoxRef,
 		selectionImageObject = FoundationModule.Hooks.useCursor(FoundationModule.Enums.CursorType.RoundedRect),
 		fontFace = p1.fontFace,

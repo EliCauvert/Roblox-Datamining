@@ -145,7 +145,7 @@ return function(p1)
 						local Name = nil
 						
 						if FFlagShareSheetFriendsSort then
-							Name = RecipientModule.getName(Entry)
+							Name = RecipientModule.getName(Entry, false)
 						else
 							local TitleForViewer = Entry1.titleForViewer
 							Name = if TitleForViewer and TitleForViewer ~= "" then TitleForViewer else Entry1.title or ""

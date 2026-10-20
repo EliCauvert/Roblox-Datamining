@@ -20,14 +20,15 @@ local config1 = {
 	hasUnderline = false,
 	testId = "--foundation-link",
 	variant = require(Foundation.Enums.LinkVariant).Standard,
-	size = require(Foundation.Enums.InputSize).Medium
+	size = require(Foundation.Enums.InputSize).Medium,
+	textOverflow = require(Foundation.Enums.TextOverflow).None
 }
 
 return ReactModule.memo(ReactModule.forwardRef(function(p1, Ref)
 	-- upvalues: WithDefaultsModule (copy), config1 (copy), UseTokensModule (copy), UseLinkVariantsModule (copy), ReactModule (copy), config (copy), ViewModule (copy), WithCommonPropsModule (copy), StateLayerAffordanceModule (copy), TextModule (copy), EscapeRichTextModule (copy)
 	local WithDefaultsModuleResult = WithDefaultsModule(p1, config1)
 	local UseTokensModuleResult = UseTokensModule()
-	local UseLinkVariantsModuleResult = UseLinkVariantsModule(UseTokensModuleResult, WithDefaultsModuleResult.size, WithDefaultsModuleResult.variant)
+	local UseLinkVariantsModuleResult = UseLinkVariantsModule(UseTokensModuleResult, WithDefaultsModuleResult.size, WithDefaultsModuleResult.variant, WithDefaultsModuleResult.textOverflow)
 	local Style = UseLinkVariantsModuleResult.content.style
 	local UseStateResult, UseStateResult2 = ReactModule.useState(false)
 	local HasUnderline = WithDefaultsModuleResult.hasUnderline or UseStateResult

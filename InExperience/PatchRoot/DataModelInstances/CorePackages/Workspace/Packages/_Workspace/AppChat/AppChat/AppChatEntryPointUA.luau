@@ -4,7 +4,6 @@ local CryoModule = require(Parent.Cryo)
 local NavigationModule = require(Parent.Navigation)
 local ReactModule = require(Parent.React)
 local RoactUtilsModule = require(Parent.RoactUtils)
-local SharedFlagsModule = require(Parent.SharedFlags)
 local AppNotificationService = require(Parent.RoactServiceTags).AppNotificationService
 local FullscreenPageWithSafeArea = require(Parent.AppBlox).FullscreenPageWithSafeArea
 local SetTabBarVisibleFromChatFunction = require(Parent.AppTabBarRodux).Thunks.SetTabBarVisibleFromChat
@@ -14,7 +13,6 @@ local UseAppPolicyFunction = require(Parent.UniversalAppPolicy).useAppPolicy
 local UseCallbackFunction = ReactModule.useCallback
 local UseDispatchFunction = RoactUtilsModule.Hooks.RoactRodux.useDispatch
 local UseEarlyIsFocusedFunction = NavigationModule.useEarlyIsFocused
-local UseEffectFunction = ReactModule.useEffect
 local UseMemoFunction = ReactModule.useMemo
 local UseNavigationFunction = NavigationModule.useNavigation
 local UseRoactServiceFunction = require(Parent.RobloxAppHooks).useRoactService
@@ -25,16 +23,14 @@ local UseIsWideModeFunction = require(Parent.SocialCommon).Hooks.useIsWideMode
 local AppChatEntryPointModule = require(AppChat.AppChatEntryPoint)
 local ChatEventReceiverModule = require(AppChat.Components.EventReceivers.ChatEventReceiver)
 local ContainerModule = require(AppChat.Components.ExternalNavigationHandler.Container)
-local ToggleChatPausedModule = require(AppChat.Actions.ToggleChatPaused)
 local UseExternalNavigationByScreenModule = require(AppChat.Hooks.useExternalNavigationByScreen)
 local UseAppChatIsWideModeModule = require(AppChat.Hooks.useAppChatIsWideMode)
-local FFlagAppChatRemoveToggleChatPaused = SharedFlagsModule.FFlagAppChatRemoveToggleChatPaused
-local FFlagSquadAppChatRTNFix = SharedFlagsModule.FFlagSquadAppChatRTNFix
+local FFlagSquadAppChatRTNFix = require(Parent.SharedFlags).FFlagSquadAppChatRTNFix
 local FFlagAppChatInExpSelectChatMembersMobileHeightModule = require(AppChat.Flags.FFlagAppChatInExpSelectChatMembersMobileHeight)
 local t = {}
 
 function AppChatEntryPointUA(p1)
-	-- upvalues: CryoModule (copy), t (copy), UseStyleFunction (copy), UseDispatchFunction (copy), UseEarlyIsFocusedFunction (copy), FFlagAppChatInExpSelectChatMembersMobileHeightModule (copy), UseAppChatIsWideModeModule (copy), UseIsWideModeFunction (copy), UseNavigationFunction (copy), UseAppPolicyFunction (copy), UseStateFunction (copy), UseExternalNavigationByScreenModule (copy), UseRoactServiceFunction (copy), AppNotificationService (copy), UseMemoFunction (copy), Signal (copy), UseCallbackFunction (copy), SetTabBarVisibleFromChatFunction (copy), UseSelectorFunction (copy), FFlagAppChatRemoveToggleChatPaused (copy), UseEffectFunction (copy), ToggleChatPausedModule (copy), ReactModule (copy), FullscreenPageWithSafeArea (copy), AppChatEntryPointModule (copy), ContainerModule (copy), ChatEventReceiverModule (copy), FFlagSquadAppChatRTNFix (copy), SquadAppChatEventReceiver (copy)
+	-- upvalues: CryoModule (copy), t (copy), UseStyleFunction (copy), UseDispatchFunction (copy), UseEarlyIsFocusedFunction (copy), FFlagAppChatInExpSelectChatMembersMobileHeightModule (copy), UseAppChatIsWideModeModule (copy), UseIsWideModeFunction (copy), UseNavigationFunction (copy), UseAppPolicyFunction (copy), UseStateFunction (copy), UseExternalNavigationByScreenModule (copy), UseRoactServiceFunction (copy), AppNotificationService (copy), UseMemoFunction (copy), Signal (copy), UseCallbackFunction (copy), SetTabBarVisibleFromChatFunction (copy), UseSelectorFunction (copy), ReactModule (copy), FullscreenPageWithSafeArea (copy), AppChatEntryPointModule (copy), ContainerModule (copy), ChatEventReceiverModule (copy), FFlagSquadAppChatRTNFix (copy), SquadAppChatEventReceiver (copy)
 	local JoinResult = CryoModule.Dictionary.join(t, p1)
 	local UseStyleResult = UseStyleFunction()
 	local UseDispatchResult = UseDispatchFunction()
@@ -53,30 +49,7 @@ function AppChatEntryPointUA(p1)
 		-- upvalues: Signal (upval)
 		return Signal.new()
 	end)
-	local UseMemoResult1 = UseMemoFunction(function()
-		-- upvalues: JoinResult (copy), UseRoactServiceResult (copy)
-		return JoinResult.RobloxEventReceiver.new(UseRoactServiceResult)
-	end)
-	local UseCallbackResult = UseCallbackFunction(function(p2)
-		-- upvalues: UseDispatchResult (copy), SetTabBarVisibleFromChatFunction (upval), UseAppPolicyResult (copy)
-		UseDispatchResult(SetTabBarVisibleFromChatFunction(p2 or UseAppPolicyResult.shouldSystemBarUsuallyBePresent))
-	end, {
-		UseDispatchResult,
-		UseAppPolicyResult.shouldSystemBarUsuallyBePresent
-	})
-	local UseMemoResult2 = UseMemoFunction(function()
-		return {}
-	end)
-	local UseSelectorResult = UseSelectorFunction(function(p2)
-		return p2.NotificationBadgeCounts.TopBarNotificationIcon
-	end)
 	
-	if not FFlagAppChatRemoveToggleChatPaused then
-		UseEffectFunction(function()
-			-- upvalues: UseDispatchResult (copy), ToggleChatPausedModule (upval), UseEarlyIsFocusedResult (copy)
-			UseDispatchResult(ToggleChatPausedModule(not UseEarlyIsFocusedResult))
-		end, { UseEarlyIsFocusedResult, UseDispatchResult })
-	end
 	return ReactModule.createElement(ReactModule.Fragment, {}, {
 		FullscreenPageWithSafeArea = ReactModule.createElement(FullscreenPageWithSafeArea, {
 			includeStatusBar = true,
@@ -86,10 +59,20 @@ function AppChatEntryPointUA(p1)
 			AppChatEntryPoint = ReactModule.createElement(AppChatEntryPointModule, {
 				setActiveConversationId = UseStateResult2,
 				updateExternalNavigationForScreen = UseExternalNavigationByScreenModuleResult2,
-				navigateToLuaAppPages = UseMemoResult2,
+				navigateToLuaAppPages = UseMemoFunction(function()
+					return {}
+				end),
 				rnBypassActionSignal = UseMemoResult,
-				notificationCount = UseSelectorResult,
-				setTabBarVisible = UseCallbackResult,
+				notificationCount = UseSelectorFunction(function(p2)
+					return p2.NotificationBadgeCounts.TopBarNotificationIcon
+				end),
+				setTabBarVisible = UseCallbackFunction(function(p2)
+					-- upvalues: UseDispatchResult (copy), SetTabBarVisibleFromChatFunction (upval), UseAppPolicyResult (copy)
+					UseDispatchResult(SetTabBarVisibleFromChatFunction(p2 or UseAppPolicyResult.shouldSystemBarUsuallyBePresent))
+				end, {
+					UseDispatchResult,
+					UseAppPolicyResult.shouldSystemBarUsuallyBePresent
+				}),
 				isVisible = UseEarlyIsFocusedResult,
 				wideMode = UseAppChatIsWideModeModuleResult,
 				navigation = UseNavigationResult
@@ -99,7 +82,10 @@ function AppChatEntryPointUA(p1)
 			navigationByScreen = UseExternalNavigationByScreenModuleResult
 		}),
 		ChatEventReceiver = ReactModule.createElement(ChatEventReceiverModule, {
-			robloxEventReceiver = UseMemoResult1,
+			robloxEventReceiver = UseMemoFunction(function()
+				-- upvalues: JoinResult (copy), UseRoactServiceResult (copy)
+				return JoinResult.RobloxEventReceiver.new(UseRoactServiceResult)
+			end),
 			rnBypassActionSignal = UseMemoResult,
 			activeConversationId = tostring(UseStateResult)
 		}),

@@ -47,7 +47,14 @@ local function getAuditDataForConsent(p1, p2)
 				consentStringTemplate = p2.photoToAvatarCancelButton,
 				sourceContentId = LegallySensitiveContentConstantsModule.photoToAvatar.cancelButtonSourceContentId
 			}
-		}
+		},
+		[ConsentNameModule.allowMarketingEmailCheckboxAccountUpgrade] = {
+			{
+				consentStringTemplate = p2.allowMarketingEmailCheckboxAccountUpgradeConsent,
+				sourceContentId = LegallySensitiveContentConstantsModule.allowMarketingEmailCheckboxAccountUpgrade.consentSourceContentId
+			}
+		},
+		[ConsentNameModule.allowMarketingEmailAutoOptInAccountUpgrade] = {}
 	})[p1]
 	
 	return if Entry then Entry else {}
@@ -55,7 +62,7 @@ end
 
 local function getAuditHeaderValue(List, Surface, List1)
 	-- upvalues: CryptoUtilsModule (copy)
-	local Content = {}
+	local t = {}
 	
 	for _, value in ipairs(List) do
 		local config = {
@@ -67,9 +74,12 @@ local function getAuditHeaderValue(List, Surface, List1)
 				config[i] = var
 			end
 		end
-		Content[value.sourceContentId] = config
+		t[value.sourceContentId] = config
 	end
-	local config = { surface = Surface, content = Content }
+	local config = {
+		surface = Surface,
+		content = if next(t) == nil then nil else t
+	}
 	
 	if List1 then
 		for i1, value1 in pairs(List1) do

@@ -1,1 +1,3 @@
-﻿return game:DefineFastFlag("GameTileMigrateOffLegacyPresence", false)
+﻿local FFlagDataHydrationAccountResetModule = require(script.Parent.FFlagDataHydrationAccountReset)
+
+return game:DefineFastFlag("GameTileMigrateOffLegacyPresence2", false) and FFlagDataHydrationAccountResetModule

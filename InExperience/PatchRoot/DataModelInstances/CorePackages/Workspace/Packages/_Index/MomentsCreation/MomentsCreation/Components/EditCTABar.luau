@@ -50,8 +50,8 @@ local function VoiceCoachmark(p1)
 	end, { UseStateResult })
 	
 	return if UseStateResult then ReactModule.createElement(EducationalTooltip, {
-		isOpen = true,
 		LayoutOrder = p1.layoutOrder,
+		isOpen = not p1.hidden,
 		onClose = function()
 			-- upvalues: fireVoiceCoachmarkFtuxEvent (upval), EventNames (upval), UseCreationControllerResult (copy), UseStateResult2 (copy)
 			fireVoiceCoachmarkFtuxEvent(EventNames.FTUXTooltipDismissed)
@@ -88,7 +88,8 @@ local function PersistentToolCoachmark(p1)
 			fireVoiceCoachmarkFtuxEvent(EventNames.FTUXTooltipDismissed)
 		end,
 		side = FoundationModule.Enums.PopoverSide.Bottom,
-		align = FoundationModule.Enums.PopoverAlign.End
+		align = FoundationModule.Enums.PopoverAlign.End,
+		hidden = p1.hidden
 	}, p1.children)
 end
 
@@ -154,18 +155,21 @@ return function(p1)
 				textKey = Coachmark.textKey,
 				impressionCache = Coachmark.impressionCache,
 				maxImpressions = Coachmark.maxImpressions or GetFIntMomentsCoachmarkMaxImpressionsFunction(),
-				autoDismissSeconds = Coachmark.autoDismissSeconds or GetFIntMomentsCoachmarkAutoDismissSecondsFunction()
+				autoDismissSeconds = Coachmark.autoDismissSeconds or GetFIntMomentsCoachmarkAutoDismissSecondsFunction(),
+				hidden = p1.hidden
 			}, Element)
 		else
 			Elements["Tool_" .. Kind] = ReactModule.createElement(VoiceCoachmark, {
 				layoutOrder = tool1.cta.order or i,
 				titleKey = Coachmark.titleKey,
-				textKey = Coachmark.textKey
+				textKey = Coachmark.textKey,
+				hidden = p1.hidden
 			}, Element)
 		end
 	end
 	return ReactModule.createElement(View, {
 		tag = "position-center-right anchor-center-right size-0-full auto-x",
+		Visible = not p1.hidden,
 		ZIndex = p1.zIndex
 	}, {
 		GradientBackdrop = ReactModule.createElement(GradientBackdrop, {

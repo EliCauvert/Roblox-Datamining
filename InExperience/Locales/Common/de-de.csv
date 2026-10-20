@@ -435,6 +435,7 @@ CommonUI.Features.Label.ControllerBar.HoldPrefix,Halten
 CommonUI.Features.Label.ControllerBar.Search,
 CommonUI.Features.Label.ControllerBar.ToPlaySuffix,zum Spielen
 CommonUI.Features.Label.CreateGames,
+CommonUI.Features.Label.DevSubs,Abos
 CommonUI.Features.Label.Friends,Freunde
 CommonUI.Features.Label.Game,Experiences
 CommonUI.Features.Label.Games,Spiele
@@ -3082,6 +3083,7 @@ Feature.Contacts.Message.ContactDiscoverable,"Um dir dabei zu helfen, Freundscha
 Feature.Contacts.Message.ContactsSyncWarning,"Deine Kontakte werden regelmäßig synchronisiert und Übereinstimmungen mit anderen Roblox-Benutzern werden gespeichert, um dir zu helfen, Freunde zu finden. Du kannst dies jederzeit in deinen Geräteeinstellungen verwalten."
 Feature.Contacts.Message.InviteToRoblox,"Füge mich auf Roblox als Freund hinzu, damit wir gemeinsam Experiences erkunden, erstellen und teilen können."
 Feature.Contacts.Message.NoResults,Keine Ergebnisse.
+Feature.DeveloperProducts.Heading.Products,Produkte
 Feature.DeveloperProducts.Label.Product,
 Feature.DisplayName.ErrorMessage.AgedUpNameContainPII,Name könnte private Informationen enthalten
 Feature.DisplayName.ErrorMessage.AgedUpNameHasChanged,Dein Name wurde innerhalb der letzten 7 Tage bereits geändert
@@ -3416,6 +3418,7 @@ Feature.GamePage.QuickLaunch.LaunchError.GuestProhibited,Gäste können dieser E
 Feature.GamePage.QuickLaunch.LaunchError.PurchaseRequired,"Um diese Experience zu besuchen, ist ein Kauf erforderlich."
 Feature.GamePage.QuickLaunch.LaunchError.RequestFailed,Netzwerkanforderung fehlgeschlagen.
 Feature.GamePage.QuickLaunch.LaunchError.TemporarilyUnavailable,Diese Experience kann nicht besucht werden.
+Feature.GamePass.Heading.PassesForThisGame,Pässe
 Feature.GamepadDisconnect.Label.Message,"Controller für Benutzer ""%s"" wurde getrennt. Bitte drücke ""%s"" auf dem Controller, mit dem du weiterspielen möchtest."
 Feature.GamepadDisconnect.Label.MessageGeneric,"Controller für Benutzer ""%s"" wurde getrennt. Bitte schließe deine Controller erneut an."
 Feature.GamepadDisconnect.Label.Title,Controller fehlt
@@ -3676,6 +3679,7 @@ Feature.Moments.Label.DeleteMomentBody,"Du kannst einen Moment nicht wiederherst
 Feature.Moments.Label.DeleteMomentTitle,Moment löschen?
 Feature.Moments.Label.DeleteVoiceoverBody,Dadurch werden dein Text und dein Voiceover gelöscht. Du kannst jederzeit von vorne anfangen.
 Feature.Moments.Label.DeleteVoiceoverTitle,Voiceover löschen?
+Feature.Moments.Label.DragHereToDelete,Zum Löschen hierher ziehen
 Feature.Moments.Label.DurationSeconds,{seconds} Sek.
 Feature.Moments.Label.Engagement,Engagement
 Feature.Moments.Label.Error,

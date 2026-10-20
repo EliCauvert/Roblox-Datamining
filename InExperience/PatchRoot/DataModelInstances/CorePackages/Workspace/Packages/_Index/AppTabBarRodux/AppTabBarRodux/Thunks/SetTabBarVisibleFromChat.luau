@@ -8,9 +8,7 @@ return function(TabBarVisible)
 	
 	return function(p1)
 		-- upvalues: TabBarVisible (copy), SetTabBarVisibleModule (upval)
-		local State = p1:getState()
-		
-		if not State.ChatAppReducer.ToggleChatPaused and State.TabBarVisible ~= TabBarVisible then
+		if p1:getState().TabBarVisible ~= TabBarVisible then
 			p1:dispatch(SetTabBarVisibleModule(TabBarVisible))
 		end
 	end

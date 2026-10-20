@@ -5,6 +5,8 @@
 	Join = "Feature.Profile.Action.JoinGame",
 	Pending = "Feature.Profile.Action.Pending",
 	View = "Feature.Squads.Action.View",
+	Invite = "Feature.SettingsHub.Action.InviteFriend",
+	Invited = "Feature.SettingsHub.Label.Invited",
 	FriendRequestSent = "Feature.Friends.Action.FriendRequestSent",
 	FriendAdded = "Feature.Friends.Action.FriendAdded",
 	AlreadyFriendError = "Feature.Friends.Error.AlreadyFriendError",

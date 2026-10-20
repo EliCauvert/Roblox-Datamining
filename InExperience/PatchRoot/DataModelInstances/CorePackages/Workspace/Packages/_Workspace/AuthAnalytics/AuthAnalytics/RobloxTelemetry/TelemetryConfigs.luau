@@ -511,5 +511,21 @@ return {
 		backends = { LoggingProtocolModule.TelemetryBackends.Counter },
 		throttlingPercentage = AccountUpgradeTelemetryThrottlingHundredthsPercent,
 		lastUpdated = { 26, 10, 6 }
+	},
+	AccountUpgradeMarketingConsentWriteSuccessConfig = {
+		eventName = "luaAccountUpgradeMarketingConsentWriteSuccess",
+		description = "Report when the marketing email consent write succeeds after an account upgrade.",
+		links = "https://roblox.atlassian.net/wiki/spaces/AUTH/pages/3475702046/Lua+Client-Side+Telemetry+Planning",
+		backends = { LoggingProtocolModule.TelemetryBackends.Counter },
+		throttlingPercentage = AccountUpgradeTelemetryThrottlingHundredthsPercent,
+		lastUpdated = { 26, 10, 16 }
+	},
+	AccountUpgradeMarketingConsentWriteFailureConfig = {
+		eventName = "luaAccountUpgradeMarketingConsentWriteFailure",
+		description = "Report when the marketing email consent write fails after an account upgrade, tagged with the HTTP status code as errorCode.",
+		links = "https://roblox.atlassian.net/wiki/spaces/AUTH/pages/3475702046/Lua+Client-Side+Telemetry+Planning",
+		backends = { LoggingProtocolModule.TelemetryBackends.Counter },
+		throttlingPercentage = AccountUpgradeTelemetryThrottlingHundredthsPercent,
+		lastUpdated = { 26, 10, 16 }
 	}
 }

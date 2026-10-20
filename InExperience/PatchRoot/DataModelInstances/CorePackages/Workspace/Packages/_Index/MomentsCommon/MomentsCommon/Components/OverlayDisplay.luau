@@ -111,7 +111,7 @@ return function(p1)
 					-- upvalues: UseMemoResult2 (upval)
 					return UseMemoResult2 * p2
 				end),
-				boundingUI = if IsClampToBoundsEnabled then UseRefResult1.current else UseRefResult.current,
+				boundingUI = if p1.unboundedDragEnabled == true then nil elseif IsClampToBoundsEnabled then UseRefResult1.current else UseRefResult.current,
 				containerRef = UseRefResult2,
 				draggable = p1.draggable,
 				editable = p1.editable,
@@ -123,7 +123,7 @@ return function(p1)
 				onRotationChanged = p1.onOverlayRotationChanged,
 				onScaleChanged = p1.onOverlayScaleChanged,
 				overlayEdit = OverlayEdit,
-				referenceUI = if IsClampToBoundsEnabled then UseRefResult.current else nil,
+				referenceUI = if IsClampToBoundsEnabled or p1.unboundedDragEnabled == true then UseRefResult.current else nil,
 				selected = p1.selected
 			})
 		else
@@ -132,8 +132,9 @@ return function(p1)
 	end, {
 		p1.clampToBoundsEnabled, p1.draggable, p1.editable, p1.onOverlayActivated,
 		p1.onOverlayDragBegin, p1.onOverlayDragContinue, p1.onOverlayRotationChanged,
-		p1.onOverlayScaleChanged, p1.overlayComponent, p1.selected, p1.visualScale,
-		UseMemoResult2, UseCallbackResult2, UseCallbackResult1
+		p1.onOverlayScaleChanged, p1.overlayComponent, p1.unboundedDragEnabled,
+		p1.selected, p1.visualScale, UseMemoResult2, UseCallbackResult2,
+		UseCallbackResult1
 	})
 	
 	return if p1.overlayEdits and #p1.overlayEdits ~= 0 then ReactModule.createElement(View, {

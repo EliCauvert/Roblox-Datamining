@@ -132,6 +132,10 @@ return function(Frame: Frame)
 				radius = Radius.Medium,
 				Size = UDim2.new(1, 0, 0, 64)
 			})
+			Elements.LoadingMoreSpacer = ReactModule.createElement(View, {
+				LayoutOrder = #Content.items + 2,
+				Size = UDim2.new(1, 0, 0, UseTokensResult.Padding.Large)
+			})
 		end
 		Config = Elements
 	else

@@ -436,6 +436,7 @@ CommonUI.Features.Label.ControllerBar.HoldPrefix,Przytrzymaj
 CommonUI.Features.Label.ControllerBar.Search,
 CommonUI.Features.Label.ControllerBar.ToPlaySuffix,", aby zagrać"
 CommonUI.Features.Label.CreateGames,Tworzenie
+CommonUI.Features.Label.DevSubs,Subskrypcje
 CommonUI.Features.Label.Friends,Znajomi
 CommonUI.Features.Label.Game,Projekty
 CommonUI.Features.Label.Games,Gry
@@ -3153,6 +3154,7 @@ Feature.Contacts.Message.ContactDiscoverable,"Aby łatwiej było ci odnaleźć z
 Feature.Contacts.Message.ContactsSyncWarning,"Aby pomóc Ci odnaleźć znajomych, regularnie synchronizowane będą Twoje kontakty i przechowywane będą dopasowania do innych użytkowników Robloxa. Możesz to zmienić w dowolnym momencie w ustawieniach urządzenia."
 Feature.Contacts.Message.InviteToRoblox,"Dodaj mnie do znajomych na Robloxie, abyśmy mogli wspólnie tworzyć, udostępniać i poznawać projekty."
 Feature.Contacts.Message.NoResults,Brak wyników.
+Feature.DeveloperProducts.Heading.Products,Produkty
 Feature.DeveloperProducts.Label.Product,
 Feature.DisplayName.ErrorMessage.AgedUpNameContainPII,"Możliwe, że nazwa zawiera dane osobowe"
 Feature.DisplayName.ErrorMessage.AgedUpNameHasChanged,Twoja nazwa została już zmieniona w ciągu ostatnich 7 dni
@@ -3487,6 +3489,7 @@ Feature.GamePage.QuickLaunch.LaunchError.GuestProhibited,Goście nie mogą doł�
 Feature.GamePage.QuickLaunch.LaunchError.PurchaseRequired,Do odwiedzenia tego projektu wymagane jest dokonanie zakupu.
 Feature.GamePage.QuickLaunch.LaunchError.RequestFailed,Błąd żądania sieci.
 Feature.GamePage.QuickLaunch.LaunchError.TemporarilyUnavailable,Obecnie nie można odwiedzić tego projektu.
+Feature.GamePass.Heading.PassesForThisGame,Przepustki
 Feature.GamepadDisconnect.Label.Message,"Kontroler użytkownika „%s” został odłączony. Naciśnij „%s” na kontrolerze, którego chcesz użyć."
 Feature.GamepadDisconnect.Label.MessageGeneric,Kontroler użytkownika „%s” został odłączony. Podłącz kontroler.
 Feature.GamepadDisconnect.Label.Title,Brak kontrolera
@@ -3747,6 +3750,7 @@ Feature.Moments.Label.DeleteMomentBody,Po usunięciu momentu nie będzie go moż
 Feature.Moments.Label.DeleteMomentTitle,Usunąć moment?
 Feature.Moments.Label.DeleteVoiceoverBody,Spowoduje to usunięcie tekstu i lektora. Możesz zacząć od nowa w dowolnym momencie.
 Feature.Moments.Label.DeleteVoiceoverTitle,Usunąć lektora?
+Feature.Moments.Label.DragHereToDelete,"Przeciągnij tutaj, aby usunąć"
 Feature.Moments.Label.DurationSeconds,{seconds} s
 Feature.Moments.Label.Engagement,Zaangażowanie
 Feature.Moments.Label.Error,

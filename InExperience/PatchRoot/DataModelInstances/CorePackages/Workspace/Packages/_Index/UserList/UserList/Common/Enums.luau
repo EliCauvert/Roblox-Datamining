@@ -18,7 +18,9 @@
 		Join = "Join",
 		Dismiss = "Dismiss",
 		Pending = "Pending",
-		View = "View"
+		View = "View",
+		Invite = "Invite",
+		Invited = "Invited"
 	},
 	CtaSurfaces = {
 		SocialTabsPage = "SocialTabsPage",

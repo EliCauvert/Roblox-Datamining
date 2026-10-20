@@ -1,3 +1,4 @@
 ﻿local FFlagFriendsStoreSortOnlineFriendsByRankModule = require(script.Parent.FFlagFriendsStoreSortOnlineFriendsByRank)
+local FFlagDataHydrationAccountResetModule = require(script.Parent.FFlagDataHydrationAccountReset)
 
-return game:DefineFastFlag("SduiSocialDataMigrateOffLegacyPresence", false) and FFlagFriendsStoreSortOnlineFriendsByRankModule
+return game:DefineFastFlag("SduiSocialDataMigrateOffLegacyPresence2", false) and (FFlagFriendsStoreSortOnlineFriendsByRankModule and FFlagDataHydrationAccountResetModule)

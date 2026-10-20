@@ -1,9 +1,7 @@
 ﻿local Foundation = script:FindFirstAncestor("Foundation")
 local ReactModule = require(Foundation.Parent.React)
-local OrientationModule = require(Foundation.Enums.Orientation)
 local OptionSelectorGroupSizeModule = require(Foundation.Enums.OptionSelectorGroupSize)
 local _ = require(Foundation.Enums.FillBehavior)
-local FlagsModule = require(Foundation.Utility.Flags)
 local InputLabelModule = require(Foundation.Components.InputLabel)
 local _ = require(Foundation.Components.Types)
 local ViewModule = require(Foundation.Components.View)
@@ -15,8 +13,8 @@ local UseOptionSelectorGroupVariantsModule = require(script.Parent.useOptionSele
 local config = {
 	Selectable = true,
 	testId = "--foundation-option-selector-group",
-	orientation = OrientationModule.Vertical,
-	size = if FlagsModule.FoundationOptionSelectorGroupBeta then OptionSelectorGroupSizeModule.Medium else nil
+	orientation = require(Foundation.Enums.Orientation).Vertical,
+	size = OptionSelectorGroupSizeModule.Medium
 }
 
 local function OptionSelectorGroupInner(p1)
@@ -61,7 +59,7 @@ local function OptionSelectorGroupInner(p1)
 end
 
 return ReactModule.memo(ReactModule.forwardRef(function(p1, Ref)
-	-- upvalues: WithDefaultsModule (copy), config (copy), ReactModule (copy), FlagsModule (copy), OptionSelectorGroupInner (copy), ViewModule (copy), WithCommonPropsModule (copy), OrientationModule (copy), OptionSelectorGroupContextModule (copy)
+	-- upvalues: WithDefaultsModule (copy), config (copy), ReactModule (copy), OptionSelectorGroupInner (copy)
 	local WithDefaultsModuleResult = WithDefaultsModule(p1, config)
 	local UseStateResult, UseStateResult2 = ReactModule.useState(WithDefaultsModuleResult.value)
 	ReactModule.useEffect(function()
@@ -70,45 +68,17 @@ return ReactModule.memo(ReactModule.forwardRef(function(p1, Ref)
 			UseStateResult2(WithDefaultsModuleResult.value)
 		end
 	end, { WithDefaultsModuleResult.value })
-	local UseResult = ReactModule.useCallback(function(p2)
-		-- upvalues: UseStateResult2 (copy), WithDefaultsModuleResult (copy)
-		UseStateResult2(p2)
-		WithDefaultsModuleResult.onValueChanged(p2)
-	end, { UseStateResult2, WithDefaultsModuleResult.onValueChanged })
 	
-	return if FlagsModule.FoundationOptionSelectorGroupBeta then ReactModule.createElement(OptionSelectorGroupInner, {
+	return (ReactModule.createElement(OptionSelectorGroupInner, {
 		props = WithDefaultsModuleResult,
 		sizeOverride = p1.size,
 		fillBehaviorOverride = p1.fillBehavior,
 		value = UseStateResult,
-		onValueChanged = UseResult,
+		onValueChanged = ReactModule.useCallback(function(p2)
+			-- upvalues: UseStateResult2 (copy), WithDefaultsModuleResult (copy)
+			UseStateResult2(p2)
+			WithDefaultsModuleResult.onValueChanged(p2)
+		end, { UseStateResult2, WithDefaultsModuleResult.onValueChanged }),
 		ref = Ref
-	}) else ReactModule.createElement(ViewModule, WithCommonPropsModule(WithDefaultsModuleResult, {
-		tag = {
-			["col size-full-0 auto-y"] = WithDefaultsModuleResult.orientation == OrientationModule.Vertical,
-			["row size-full-0 auto-y"] = FlagsModule.FoundationOptionSelectorGroupFixes and WithDefaultsModuleResult.orientation == OrientationModule.Horizontal,
-			["row auto-x"] = not FlagsModule.FoundationOptionSelectorGroupFixes and WithDefaultsModuleResult.orientation == OrientationModule.Horizontal,
-			["gap-small"] = true
-		},
-		ref = Ref
-	}), {
-		OptionSelectorGroupContext = ReactModule.createElement(OptionSelectorGroupContextModule.Provider, {
-			value = ReactModule.useMemo(function()
-				-- upvalues: UseStateResult (copy), UseResult (copy), WithDefaultsModuleResult (copy)
-				return {
-					value = UseStateResult,
-					onValueChanged = UseResult,
-					orientation = WithDefaultsModuleResult.orientation,
-					Selectable = WithDefaultsModuleResult.Selectable,
-					testId = WithDefaultsModuleResult.testId
-				}
-			end, {
-				UseStateResult,
-				UseResult,
-				WithDefaultsModuleResult.orientation,
-				WithDefaultsModuleResult.Selectable,
-				WithDefaultsModuleResult.testId
-			})
-		}, WithDefaultsModuleResult.children)
-	})
+	}))
 end))
