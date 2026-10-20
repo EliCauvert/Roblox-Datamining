@@ -6,7 +6,7 @@ local _UDim2 = UDim2.fromOffset(88, 36)
 
 return {
 	PLAYGROUND_TAG = "row align-x-center align-y-center padding-y-large bg-surface-0",
-	Anchor = ReactModule.forwardRef(function(Frame: Frame, Ref) --[[ Line: 22 | Named "OverlayStoryAnchor" ]]
+	Anchor = ReactModule.forwardRef(function(Frame: Frame, Ref)
 		-- upvalues: ReactModule (copy), ViewModule (copy), _UDim2 (copy), TextModule (copy)
 		return ReactModule.createElement(ViewModule, {
 			tag = "row align-x-center align-y-center radius-medium bg-shift-200",

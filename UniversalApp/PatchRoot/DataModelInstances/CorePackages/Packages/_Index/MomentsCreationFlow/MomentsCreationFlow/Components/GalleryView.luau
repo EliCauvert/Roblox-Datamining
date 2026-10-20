@@ -24,21 +24,21 @@ local ConstantsModule = require(MomentsCreationFlow.Constants)
 local CreationFlowLocalizationModule = require(MomentsCreationFlow.Enums.CreationFlowLocalization)
 local EventNamesModule = require(MomentsCreationFlow.Analytics.EventNames)
 
-return function(p1) --[[ Line: 50 ]]
+return function(p1)
 	-- upvalues: UseDeviceInsetsFunction (copy), UseTokensFunction (copy), UseContextFunction (copy), CreationFlowContextModule (copy), ReactModule (copy), CryoModule (copy), EventNamesModule (copy), UseCallbackFunction (copy), CaptureItemModule (copy), View (copy), Text (copy), CreationFlowLocalizationModule (copy), Chip (copy), FoundationModule (copy), Image (copy), VideoCamera (copy), ScrollingGridView (copy), ConstantsModule (copy), Button (copy), InputSize (copy), ButtonVariant (copy)
 	local UseDeviceInsetsResult = UseDeviceInsetsFunction()
 	local UseTokensResult = UseTokensFunction()
 	local UseContextResult = UseContextFunction(CreationFlowContextModule)
 	local UseStateResult, UseStateResult2 = ReactModule.useState(nil)
 	local UseRefResult = ReactModule.useRef(false)
-	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 57 ]]
+	local UseMemoResult = ReactModule.useMemo(function()
 		-- upvalues: UseStateResult (copy), p1 (copy), CryoModule (upval)
-		return if UseStateResult then CryoModule.List.filter(p1.captures, function(p2): boolean --[[ Line: 62 ]]
+		return if UseStateResult then CryoModule.List.filter(p1.captures, function(p2): boolean
 			-- upvalues: UseStateResult (upval)
 			return p2.CaptureType == UseStateResult
 		end) else p1.captures
 	end, { p1.captures, UseStateResult })
-	ReactModule.useEffect(function() --[[ Line: 67 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: p1 (copy), UseRefResult (copy), UseContextResult (copy), EventNamesModule (upval)
 		if #p1.captures == 0 and UseRefResult.current == false then
 			UseRefResult.current = true
@@ -65,7 +65,7 @@ return function(p1) --[[ Line: 50 ]]
 			AllChip = ReactModule.createElement(Chip, {
 				LayoutOrder = 1,
 				isChecked = UseStateResult == nil,
-				onActivated = UseCallbackFunction(function() --[[ Line: 94 ]]
+				onActivated = UseCallbackFunction(function()
 					-- upvalues: UseStateResult2 (copy)
 					UseStateResult2(nil)
 				end, {}),
@@ -76,7 +76,7 @@ return function(p1) --[[ Line: 50 ]]
 				LayoutOrder = 2,
 				isChecked = UseStateResult == Enum.CaptureType.Screenshot,
 				leading = Image,
-				onActivated = UseCallbackFunction(function() --[[ Line: 98 ]]
+				onActivated = UseCallbackFunction(function()
 					-- upvalues: UseStateResult2 (copy)
 					UseStateResult2(Enum.CaptureType.Screenshot)
 				end, {}),
@@ -87,7 +87,7 @@ return function(p1) --[[ Line: 50 ]]
 				LayoutOrder = 3,
 				isChecked = UseStateResult == Enum.CaptureType.Video,
 				leading = VideoCamera,
-				onActivated = UseCallbackFunction(function() --[[ Line: 102 ]]
+				onActivated = UseCallbackFunction(function()
 					-- upvalues: UseStateResult2 (copy)
 					UseStateResult2(Enum.CaptureType.Video)
 				end, {}),
@@ -113,12 +113,12 @@ return function(p1) --[[ Line: 50 ]]
 					minItemWidth = 100
 				},
 				items = UseMemoResult,
-				onShowMoreCallback = UseCallbackFunction(function() --[[ Line: 106 ]]
+				onShowMoreCallback = UseCallbackFunction(function()
 					-- upvalues: UseContextResult (copy)
 					UseContextResult.fetchAdditionalCaptures()
 				end, { UseContextResult }),
 				padding = { bottom = UDim.new(0, UseTokensResult.Padding.Large) },
-				renderEmptyState = UseCallbackFunction(function() --[[ Line: 83 ]]
+				renderEmptyState = UseCallbackFunction(function()
 					-- upvalues: ReactModule (upval), View (upval), Text (upval), UseContextResult (copy), CreationFlowLocalizationModule (upval)
 					return ReactModule.createElement(View, { tag = "shrink size-full-full" }, {
 						EmptyState = ReactModule.createElement(Text, {
@@ -127,7 +127,7 @@ return function(p1) --[[ Line: 50 ]]
 						})
 					})
 				end, { UseContextResult }),
-				renderItem = UseCallbackFunction(function(Capture, _) --[[ Line: 74 ]]
+				renderItem = UseCallbackFunction(function(Capture, _)
 					-- upvalues: ReactModule (upval), CaptureItemModule (upval), p1 (copy)
 					return ReactModule.createElement(CaptureItemModule, {
 						zIndex = 1,

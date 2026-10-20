@@ -7,7 +7,7 @@ local GetFFlagUGCValidateAnimationPackNoDuplicateIdsModule = require(Parent.flag
 return {
 	categories = { ValidationEnumsModule.UploadCategory.ANIMATION_PACK },
 	requiredData = { ValidationEnumsModule.SharedDataMember.contentIds },
-	fflag = function() --[[ Line: 16 ]]
+	fflag = function()
 		-- upvalues: GetFFlagUGCValidateAnimationPackNoDuplicateIdsModule (copy)
 		return GetFFlagUGCValidateAnimationPackNoDuplicateIdsModule()
 	end,
@@ -15,7 +15,7 @@ return {
 	prereqTests = {
 		ValidationEnumsModule.ValidationModule.ExpectedRootSchema
 	},
-	run = function(p1, p2) --[[ Line: 22 ]]
+	run = function(p1, p2)
 		-- upvalues: ErrorSourceStringsModule (copy)
 		for AnimationId, contentId in p2.contentIds do
 			if #contentId > 1 then

@@ -4,7 +4,7 @@ local t = {}
 local Module = {}
 Module.__index = Module
 
-function Module.new(p1) --[[ Line: 311 ]]
+function Module.new(p1)
 	-- upvalues: Module (copy)
 	return (setmetatable({
 		form_definition = if p1 == nil or p1.form_definition == nil then nil else p1.form_definition,
@@ -15,7 +15,7 @@ function Module.new(p1) --[[ Line: 311 ]]
 	}, Module))
 end
 
-function Module:encode() --[[ Line: 321 ]]
+function Module:encode()
 	-- upvalues: ProtoModule (copy)
 	local Buf = buffer.create(0)
 	local Count = 0
@@ -49,7 +49,7 @@ function Module:encode() --[[ Line: 321 ]]
 	return Buf1
 end
 
-function Module.decode(Buf) --[[ Line: 358 ]]
+function Module.decode(Buf)
 	-- upvalues: Module (copy), ProtoModule (copy), t (copy)
 	local NewModule = Module.new()
 	local v1 = 0
@@ -100,7 +100,7 @@ function Module.decode(Buf) --[[ Line: 358 ]]
 	return NewModule
 end
 
-function Module:jsonEncode() --[[ Line: 421 ]]
+function Module:jsonEncode()
 	local t = {}
 	
 	if self.form_definition ~= nil then
@@ -121,7 +121,7 @@ function Module:jsonEncode() --[[ Line: 421 ]]
 	return t
 end
 
-function Module:jsonDecode() --[[ Line: 447 ]]
+function Module:jsonDecode()
 	-- upvalues: Module (copy), t (copy)
 	local NewModule = Module.new()
 	
@@ -164,7 +164,7 @@ TypeRegistryModule.default:register(t.CustomFormData)
 local Module1 = {}
 Module1.__index = Module1
 
-function Module1.new(p1) --[[ Line: 503 ]]
+function Module1.new(p1)
 	-- upvalues: Module1 (copy)
 	return (setmetatable({
 		form_id = if p1 == nil or p1.form_id == nil then "" else p1.form_id,
@@ -174,7 +174,7 @@ function Module1.new(p1) --[[ Line: 503 ]]
 	}, Module1))
 end
 
-function Module1:encode() --[[ Line: 512 ]]
+function Module1:encode()
 	-- upvalues: ProtoModule (copy)
 	local Buf = buffer.create(0)
 	local Count = 0
@@ -204,7 +204,7 @@ function Module1:encode() --[[ Line: 512 ]]
 	return Buf1
 end
 
-function Module1.decode(Buf) --[[ Line: 544 ]]
+function Module1.decode(Buf)
 	-- upvalues: Module1 (copy), ProtoModule (copy), t (copy)
 	local NewModule = Module1.new()
 	local v2 = 0
@@ -249,7 +249,7 @@ function Module1.decode(Buf) --[[ Line: 544 ]]
 	return NewModule
 end
 
-function Module1:jsonEncode() --[[ Line: 602 ]]
+function Module1:jsonEncode()
 	local t = {}
 	
 	if self.form_id ~= nil and self.form_id ~= "" then
@@ -272,7 +272,7 @@ function Module1:jsonEncode() --[[ Line: 602 ]]
 	return t
 end
 
-function Module1:jsonDecode() --[[ Line: 628 ]]
+function Module1:jsonDecode()
 	-- upvalues: Module1 (copy), t (copy)
 	local NewModule = Module1.new()
 	
@@ -308,7 +308,7 @@ TypeRegistryModule.default:register(t.CustomFormDefinitionData)
 local Module2 = {}
 Module2.__index = Module2
 
-function Module2.new(p1) --[[ Line: 673 ]]
+function Module2.new(p1)
 	-- upvalues: Module2 (copy)
 	return (setmetatable({
 		id = if p1 == nil or p1.id == nil then "" else p1.id,
@@ -317,7 +317,7 @@ function Module2.new(p1) --[[ Line: 673 ]]
 	}, Module2))
 end
 
-function Module2:encode() --[[ Line: 681 ]]
+function Module2:encode()
 	-- upvalues: ProtoModule (copy)
 	local Buf = buffer.create(0)
 	local Count = 0
@@ -343,7 +343,7 @@ function Module2:encode() --[[ Line: 681 ]]
 	return Buf1
 end
 
-function Module2.decode(Buf) --[[ Line: 708 ]]
+function Module2.decode(Buf)
 	-- upvalues: Module2 (copy), ProtoModule (copy), t (copy)
 	local NewModule = Module2.new()
 	local v3 = 0
@@ -384,7 +384,7 @@ function Module2.decode(Buf) --[[ Line: 708 ]]
 	return NewModule
 end
 
-function Module2:jsonEncode() --[[ Line: 761 ]]
+function Module2:jsonEncode()
 	local t = {}
 	
 	if self.id ~= nil and self.id ~= "" then
@@ -404,7 +404,7 @@ function Module2:jsonEncode() --[[ Line: 761 ]]
 	return t
 end
 
-function Module2:jsonDecode() --[[ Line: 783 ]]
+function Module2:jsonDecode()
 	-- upvalues: Module2 (copy), t (copy)
 	local NewModule = Module2.new()
 	
@@ -434,7 +434,7 @@ TypeRegistryModule.default:register(t.CustomFormSectionData)
 local Module3 = {}
 Module3.__index = Module3
 
-function Module3.new(p1) --[[ Line: 820 ]]
+function Module3.new(p1)
 	-- upvalues: t (copy), Module3 (copy)
 	return (setmetatable({
 		field_id = if p1 == nil or p1.field_id == nil then "" else p1.field_id,
@@ -444,7 +444,7 @@ function Module3.new(p1) --[[ Line: 820 ]]
 	}, Module3))
 end
 
-function Module3:encode() --[[ Line: 831 ]]
+function Module3:encode()
 	-- upvalues: ProtoModule (copy), t (copy)
 	local Buf = buffer.create(0)
 	local Count = 0
@@ -474,7 +474,7 @@ function Module3:encode() --[[ Line: 831 ]]
 	return Buf1
 end
 
-function Module3.decode(Buf) --[[ Line: 870 ]]
+function Module3.decode(Buf)
 	-- upvalues: Module3 (copy), ProtoModule (copy), t (copy)
 	local NewModule = Module3.new()
 	local v4 = 0
@@ -521,7 +521,7 @@ function Module3.decode(Buf) --[[ Line: 870 ]]
 	return NewModule
 end
 
-function Module3:jsonEncode() --[[ Line: 928 ]]
+function Module3:jsonEncode()
 	-- upvalues: t (copy)
 	local t1 = {}
 	
@@ -545,7 +545,7 @@ function Module3:jsonEncode() --[[ Line: 928 ]]
 	return t1
 end
 
-function Module3:jsonDecode() --[[ Line: 962 ]]
+function Module3:jsonDecode()
 	-- upvalues: Module3 (copy), t (copy)
 	local NewModule = Module3.new()
 	
@@ -584,7 +584,7 @@ TypeRegistryModule.default:register(t.CustomFormFieldData)
 local Module4 = {}
 Module4.__index = Module4
 
-function Module4.new(p1) --[[ Line: 1015 ]]
+function Module4.new(p1)
 	-- upvalues: Module4 (copy)
 	return (setmetatable({
 		option_id = if p1 == nil or p1.option_id == nil then "" else p1.option_id,
@@ -592,7 +592,7 @@ function Module4.new(p1) --[[ Line: 1015 ]]
 	}, Module4))
 end
 
-function Module4:encode() --[[ Line: 1022 ]]
+function Module4:encode()
 	-- upvalues: ProtoModule (copy)
 	local Buf = buffer.create(0)
 	local Count = 0
@@ -611,7 +611,7 @@ function Module4:encode() --[[ Line: 1022 ]]
 	return Buf1
 end
 
-function Module4.decode(Buf) --[[ Line: 1041 ]]
+function Module4.decode(Buf)
 	-- upvalues: Module4 (copy), ProtoModule (copy)
 	local NewModule = Module4.new()
 	local v5 = 0
@@ -648,7 +648,7 @@ function Module4.decode(Buf) --[[ Line: 1041 ]]
 	return NewModule
 end
 
-function Module4:jsonEncode() --[[ Line: 1089 ]]
+function Module4:jsonEncode()
 	local t = {}
 	
 	if self.option_id ~= nil and self.option_id ~= "" then
@@ -660,7 +660,7 @@ function Module4:jsonEncode() --[[ Line: 1089 ]]
 	return t
 end
 
-function Module4:jsonDecode() --[[ Line: 1103 ]]
+function Module4:jsonDecode()
 	-- upvalues: Module4 (copy)
 	local NewModule = Module4.new()
 	
@@ -685,14 +685,14 @@ TypeRegistryModule.default:register(t.CustomFormOptionData)
 local Module5 = {}
 Module5.__index = Module5
 
-function Module5.new(p1) --[[ Line: 1135 ]]
+function Module5.new(p1)
 	-- upvalues: Module5 (copy)
 	return (setmetatable({
 		answers = if p1 == nil or p1.answers == nil then {} else p1.answers
 	}, Module5))
 end
 
-function Module5:encode() --[[ Line: 1141 ]]
+function Module5:encode()
 	-- upvalues: ProtoModule (copy)
 	local Buf = buffer.create(0)
 	local Count = 0
@@ -710,7 +710,7 @@ function Module5:encode() --[[ Line: 1141 ]]
 	return Buf1
 end
 
-function Module5.decode(Buf) --[[ Line: 1158 ]]
+function Module5.decode(Buf)
 	-- upvalues: Module5 (copy), ProtoModule (copy), t (copy)
 	local NewModule = Module5.new()
 	local v6 = 0
@@ -743,7 +743,7 @@ function Module5.decode(Buf) --[[ Line: 1158 ]]
 	return NewModule
 end
 
-function Module5:jsonEncode() --[[ Line: 1201 ]]
+function Module5:jsonEncode()
 	local t = {}
 	
 	if self.answers ~= nil and #self.answers > 0 then
@@ -757,7 +757,7 @@ function Module5:jsonEncode() --[[ Line: 1201 ]]
 	return t
 end
 
-function Module5:jsonDecode() --[[ Line: 1215 ]]
+function Module5:jsonDecode()
 	-- upvalues: Module5 (copy), t (copy)
 	local NewModule = Module5.new()
 	
@@ -781,7 +781,7 @@ TypeRegistryModule.default:register(t.CustomFormResponseData)
 local Module6 = {}
 Module6.__index = Module6
 
-function Module6.new(p1) --[[ Line: 1244 ]]
+function Module6.new(p1)
 	-- upvalues: Module6 (copy)
 	return (setmetatable({
 		field_id = if p1 == nil or p1.field_id == nil then "" else p1.field_id,
@@ -789,7 +789,7 @@ function Module6.new(p1) --[[ Line: 1244 ]]
 	}, Module6))
 end
 
-function Module6:encode() --[[ Line: 1251 ]]
+function Module6:encode()
 	-- upvalues: ProtoModule (copy)
 	local Buf = buffer.create(0)
 	local Count = 0
@@ -810,7 +810,7 @@ function Module6:encode() --[[ Line: 1251 ]]
 	return Buf1
 end
 
-function Module6.decode(Buf) --[[ Line: 1272 ]]
+function Module6.decode(Buf)
 	-- upvalues: Module6 (copy), ProtoModule (copy)
 	local NewModule = Module6.new()
 	local v7 = 0
@@ -847,7 +847,7 @@ function Module6.decode(Buf) --[[ Line: 1272 ]]
 	return NewModule
 end
 
-function Module6:jsonEncode() --[[ Line: 1320 ]]
+function Module6:jsonEncode()
 	local t = {}
 	
 	if self.field_id ~= nil and self.field_id ~= "" then
@@ -864,7 +864,7 @@ function Module6:jsonEncode() --[[ Line: 1320 ]]
 	return t
 end
 
-function Module6:jsonDecode() --[[ Line: 1338 ]]
+function Module6:jsonDecode()
 	-- upvalues: Module6 (copy)
 	local NewModule = Module6.new()
 	
@@ -902,7 +902,7 @@ TypeRegistryModule.default:register(t.CustomFormAnswerData)
 local Module7 = {}
 Module7.__index = Module7
 
-function Module7.new(p1) --[[ Line: 1384 ]]
+function Module7.new(p1)
 	-- upvalues: Module7 (copy)
 	return (setmetatable({
 		total_responses = if p1 == nil or p1.total_responses == nil then 0 else p1.total_responses,
@@ -910,7 +910,7 @@ function Module7.new(p1) --[[ Line: 1384 ]]
 	}, Module7))
 end
 
-function Module7:encode() --[[ Line: 1391 ]]
+function Module7:encode()
 	-- upvalues: ProtoModule (copy)
 	local Buf = buffer.create(0)
 	local Count = 0
@@ -932,7 +932,7 @@ function Module7:encode() --[[ Line: 1391 ]]
 	return Buf1
 end
 
-function Module7.decode(Buf) --[[ Line: 1413 ]]
+function Module7.decode(Buf)
 	-- upvalues: Module7 (copy), ProtoModule (copy), t (copy)
 	local NewModule = Module7.new()
 	local v8 = 0
@@ -969,7 +969,7 @@ function Module7.decode(Buf) --[[ Line: 1413 ]]
 	return NewModule
 end
 
-function Module7:jsonEncode() --[[ Line: 1461 ]]
+function Module7:jsonEncode()
 	local t = {}
 	
 	if self.total_responses ~= nil and self.total_responses ~= 0 then
@@ -986,7 +986,7 @@ function Module7:jsonEncode() --[[ Line: 1461 ]]
 	return t
 end
 
-function Module7:jsonDecode() --[[ Line: 1479 ]]
+function Module7:jsonDecode()
 	-- upvalues: Module7 (copy), t (copy)
 	local NewModule = Module7.new()
 	
@@ -1024,7 +1024,7 @@ TypeRegistryModule.default:register(t.CustomFormResultsData)
 local Module8 = {}
 Module8.__index = Module8
 
-function Module8.new(p1) --[[ Line: 1525 ]]
+function Module8.new(p1)
 	-- upvalues: Module8 (copy)
 	return (setmetatable({
 		field_id = if p1 == nil or p1.field_id == nil then "" else p1.field_id,
@@ -1032,7 +1032,7 @@ function Module8.new(p1) --[[ Line: 1525 ]]
 	}, Module8))
 end
 
-function Module8:encode() --[[ Line: 1534 ]]
+function Module8:encode()
 	-- upvalues: ProtoModule (copy)
 	local Buf = buffer.create(0)
 	local Count = 0
@@ -1054,7 +1054,7 @@ function Module8:encode() --[[ Line: 1534 ]]
 	return Buf1
 end
 
-function Module8.decode(Buf) --[[ Line: 1556 ]]
+function Module8.decode(Buf)
 	-- upvalues: Module8 (copy), ProtoModule (copy), t (copy)
 	local NewModule = Module8.new()
 	local v9 = 0
@@ -1091,7 +1091,7 @@ function Module8.decode(Buf) --[[ Line: 1556 ]]
 	return NewModule
 end
 
-function Module8:jsonEncode() --[[ Line: 1604 ]]
+function Module8:jsonEncode()
 	local t = {}
 	
 	if self.field_id ~= nil and self.field_id ~= "" then
@@ -1108,7 +1108,7 @@ function Module8:jsonEncode() --[[ Line: 1604 ]]
 	return t
 end
 
-function Module8:jsonDecode() --[[ Line: 1622 ]]
+function Module8:jsonDecode()
 	-- upvalues: Module8 (copy), t (copy)
 	local NewModule = Module8.new()
 	
@@ -1146,7 +1146,7 @@ TypeRegistryModule.default:register(t.CustomFormFieldResultData)
 local Module9 = {}
 Module9.__index = Module9
 
-function Module9.new(p1) --[[ Line: 1668 ]]
+function Module9.new(p1)
 	-- upvalues: Module9 (copy)
 	return (setmetatable({
 		option_id = if p1 == nil or p1.option_id == nil then "" else p1.option_id,
@@ -1155,7 +1155,7 @@ function Module9.new(p1) --[[ Line: 1668 ]]
 	}, Module9))
 end
 
-function Module9:encode() --[[ Line: 1678 ]]
+function Module9:encode()
 	-- upvalues: ProtoModule (copy)
 	local Buf = buffer.create(0)
 	local Count = 0
@@ -1178,7 +1178,7 @@ function Module9:encode() --[[ Line: 1678 ]]
 	return Buf1
 end
 
-function Module9.decode(Buf) --[[ Line: 1702 ]]
+function Module9.decode(Buf)
 	-- upvalues: Module9 (copy), ProtoModule (copy)
 	local NewModule = Module9.new()
 	local v10 = 0
@@ -1217,7 +1217,7 @@ function Module9.decode(Buf) --[[ Line: 1702 ]]
 	return NewModule
 end
 
-function Module9:jsonEncode() --[[ Line: 1755 ]]
+function Module9:jsonEncode()
 	local t = {}
 	
 	if self.option_id ~= nil and self.option_id ~= "" then
@@ -1232,7 +1232,7 @@ function Module9:jsonEncode() --[[ Line: 1755 ]]
 	return t
 end
 
-function Module9:jsonDecode() --[[ Line: 1773 ]]
+function Module9:jsonDecode()
 	-- upvalues: Module9 (copy)
 	local NewModule = Module9.new()
 	
@@ -1261,13 +1261,13 @@ Module9.descriptor = {
 t.CustomFormOptionResultData = Module9
 TypeRegistryModule.default:register(t.CustomFormOptionResultData)
 t.CustomFormFieldType = {
-	fromNumber = function(p1) --[[ Line: 1810 ]]
+	fromNumber = function(p1)
 		return if p1 == 0 then "CUSTOM_FORM_FIELD_TYPE_INVALID" elseif p1 == 1 then "CUSTOM_FORM_FIELD_TYPE_RADIO" elseif p1 == 2 then "CUSTOM_FORM_FIELD_TYPE_CHECKBOX" else nil
 	end,
-	toNumber = function(p1) --[[ Line: 1822 ]]
+	toNumber = function(p1)
 		return if p1 == "CUSTOM_FORM_FIELD_TYPE_INVALID" then 0 elseif p1 == "CUSTOM_FORM_FIELD_TYPE_RADIO" then 1 elseif p1 == "CUSTOM_FORM_FIELD_TYPE_CHECKBOX" then 2 else p1
 	end,
-	fromName = function(p1) --[[ Line: 1834 ]]
+	fromName = function(p1)
 		return if p1 == "CUSTOM_FORM_FIELD_TYPE_INVALID" then "CUSTOM_FORM_FIELD_TYPE_INVALID" elseif p1 == "CUSTOM_FORM_FIELD_TYPE_RADIO" then "CUSTOM_FORM_FIELD_TYPE_RADIO" elseif p1 == "CUSTOM_FORM_FIELD_TYPE_CHECKBOX" then "CUSTOM_FORM_FIELD_TYPE_CHECKBOX" else nil
 	end
 }

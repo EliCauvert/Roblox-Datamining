@@ -10,7 +10,7 @@ local UseTokensFunction = FoundationModule.Hooks.useTokens
 local CreationFlowContextModule = require(MomentsCreationFlow.Context.CreationFlowContext)
 local CreationFlowLocalizationModule = require(MomentsCreationFlow.Enums.CreationFlowLocalization)
 
-return function(p1) --[[ Line: 25 ]]
+return function(p1)
 	-- upvalues: UseDeviceInsetsFunction (copy), UseTokensFunction (copy), ReactModule (copy), CreationFlowContextModule (copy), UseCallbackFunction (copy), View (copy), Button (copy), FoundationModule (copy), CreationFlowLocalizationModule (copy)
 	local UseDeviceInsetsResult = UseDeviceInsetsFunction()
 	local UseTokensResult = UseTokensFunction()
@@ -35,7 +35,7 @@ return function(p1) --[[ Line: 25 ]]
 				fillBehavior = FoundationModule.Enums.FillBehavior.Fit,
 				text = UseContextResult.getLocalization(CreationFlowLocalizationModule.GeneralCtaBack),
 				variant = FoundationModule.Enums.ButtonVariant.Text,
-				onActivated = UseCallbackFunction(function() --[[ Line: 30 ]]
+				onActivated = UseCallbackFunction(function()
 					-- upvalues: p1 (copy)
 					if p1.onTextOverlayDiscard then
 						p1.onTextOverlayDiscard()
@@ -48,7 +48,7 @@ return function(p1) --[[ Line: 25 ]]
 				fillBehavior = FoundationModule.Enums.FillBehavior.Fit,
 				text = UseContextResult.getLocalization(CreationFlowLocalizationModule.GeneralCtaDone),
 				variant = FoundationModule.Enums.ButtonVariant.Text,
-				onActivated = UseCallbackFunction(function() --[[ Line: 36 ]]
+				onActivated = UseCallbackFunction(function()
 					-- upvalues: p1 (copy)
 					if p1.onTextOverlaySave then
 						p1.onTextOverlaySave()

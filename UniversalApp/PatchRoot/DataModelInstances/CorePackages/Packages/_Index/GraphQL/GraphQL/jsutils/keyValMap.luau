@@ -1,7 +1,7 @@
 ﻿local Map = require(script.Parent.Parent.Parent.LuauPolyfill).Map
 
 return {
-	keyValMap = function(List, Callback, Callback1) --[[ Line: 32 ]]
+	keyValMap = function(List, Callback, Callback1)
 		-- upvalues: Map (copy)
 		local NewMap = Map.new()
 		

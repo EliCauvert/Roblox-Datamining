@@ -4,7 +4,7 @@ local _ = require(Graphing.Types)
 local CanvasContextModule = require(Graphing.CanvasContext)
 local MathUtilModule = require(Graphing.Util.MathUtil)
 
-function InputDetector(Frame: Frame) --[[ Line: 53 ]]
+function InputDetector(Frame: Frame)
 	-- upvalues: ReactModule (copy), CanvasContextModule (copy), MathUtilModule (copy)
 	local UseContextResult = ReactModule.useContext(CanvasContextModule)
 	local Inflate = Frame.Inflate or 0
@@ -13,7 +13,7 @@ function InputDetector(Frame: Frame) --[[ Line: 53 ]]
 	local UseStateResult1, UseStateResult2_2 = ReactModule.useState(false)
 	local UseStateResult3, UseStateResult2_3 = ReactModule.useState(false)
 	local UseStateResult4, UseStateResult2_4 = ReactModule.useState(Vector2.zero)
-	local UseResult = ReactModule.useCallback(function(Vector): Vector2 --[[ Line: 64 ]]
+	local UseResult = ReactModule.useCallback(function(Vector): Vector2
 		-- upvalues: Frame (copy), MathUtilModule (upval)
 		local X = Vector.X
 		local Y = Vector.Y
@@ -35,7 +35,7 @@ function InputDetector(Frame: Frame) --[[ Line: 53 ]]
 		BackgroundColor3 = Frame.DebugColor3,
 		BorderSizePixel = 0,
 		ZIndex = Frame.ZIndex,
-		[ReactModule.Event.InputBegan] = ReactModule.useCallback(function(_, Input) --[[ Line: 77 ]]
+		[ReactModule.Event.InputBegan] = ReactModule.useCallback(function(_, Input)
 			-- upvalues: UseResult (copy), UseContextResult (copy), UseStateResult2 (copy), Frame (copy), UseStateResult2_2 (copy), UseStateResult2_3 (copy)
 			local UseResultResult = UseResult(UseContextResult.mouseToPlot(Input.Position))
 			
@@ -66,7 +66,7 @@ function InputDetector(Frame: Frame) --[[ Line: 53 ]]
 			UseStateResult2, UseStateResult2_2, UseStateResult2_3, UseContextResult,
 			Frame.OnHoverStart, Frame.OnPress, Frame.OnRightPress, UseResult
 		}),
-		[ReactModule.Event.InputChanged] = ReactModule.useCallback(function(_, Input) --[[ Line: 115 ]]
+		[ReactModule.Event.InputChanged] = ReactModule.useCallback(function(_, Input)
 			-- upvalues: Frame (copy), UseStateResult (copy), UseResult (copy), UseContextResult (copy)
 			if Frame.OnHoverMoved and UseStateResult and Input.UserInputType == Enum.UserInputType.MouseMovement then
 				Frame.OnHoverMoved(UseResult(UseContextResult.mouseToPlot(Input.Position)), Input)
@@ -83,7 +83,7 @@ function InputDetector(Frame: Frame) --[[ Line: 53 ]]
 			Frame.OnScroll,
 			UseResult
 		}),
-		[ReactModule.Event.InputEnded] = ReactModule.useCallback(function(_, Input) --[[ Line: 124 ]]
+		[ReactModule.Event.InputEnded] = ReactModule.useCallback(function(_, Input)
 			-- upvalues: UseResult (copy), UseContextResult (copy), UseStateResult2 (copy), Frame (copy), UseStateResult (copy), UseStateResult1 (copy), UseStateResult3 (copy)
 			local UseResultResult = UseResult(UseContextResult.mouseToPlot(Input.Position))
 			
@@ -121,7 +121,7 @@ function InputDetector(Frame: Frame) --[[ Line: 53 ]]
 		DragDetector = ReactModule.createElement("UIDragDetector", {
 			DragStyle = Enum.UIDragDetectorDragStyle.Scriptable,
 			ReferenceUIInstance = UseContextResult.getViewport(),
-			[ReactModule.Event.DragStart] = ReactModule.useCallback(function(p1, p2) --[[ Line: 168 ]]
+			[ReactModule.Event.DragStart] = ReactModule.useCallback(function(p1, p2)
 				-- upvalues: UseStateResult2_1 (copy), Frame (copy), UseContextResult (copy), UseStateResult2_4 (copy), UseResult (copy)
 				UseStateResult2_1(true)
 				local ZeroVector = Vector2.zero
@@ -141,7 +141,7 @@ function InputDetector(Frame: Frame) --[[ Line: 53 ]]
 				UseContextResult, UseStateResult2_4, UseStateResult2_1, Frame.OnDragStart,
 				Frame.AnchorPoint, Frame.TreatMouseAsAnchor, UseResult
 			}),
-			[ReactModule.Event.DragContinue] = ReactModule.useCallback(function(_, p1) --[[ Line: 201 ]]
+			[ReactModule.Event.DragContinue] = ReactModule.useCallback(function(_, p1)
 				-- upvalues: UseStateResult2_2 (copy), UseStateResult2_3 (copy), Frame (copy), UseContextResult (copy), UseStateResult4 (copy), UseResult (copy)
 				UseStateResult2_2(true)
 				UseStateResult2_3(true)
@@ -154,7 +154,7 @@ function InputDetector(Frame: Frame) --[[ Line: 53 ]]
 				UseContextResult, UseStateResult2_2, UseStateResult2_3, UseStateResult4,
 				Frame.OnDragMoved, UseResult
 			}),
-			[ReactModule.Event.DragEnd] = ReactModule.useCallback(function(_, p1) --[[ Line: 212 ]]
+			[ReactModule.Event.DragEnd] = ReactModule.useCallback(function(_, p1)
 				-- upvalues: UseStateResult2_1 (copy), Frame (copy), UseContextResult (copy), UseStateResult4 (copy), UseResult (copy)
 				UseStateResult2_1(false)
 				

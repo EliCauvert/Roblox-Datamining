@@ -1,7 +1,7 @@
 ﻿local LinkedListModule = {}
 LinkedListModule.__index = LinkedListModule
 
-function LinkedListModule.createNode(Value) --[[ Line: 4 ]]
+function LinkedListModule.createNode(Value)
 	-- upvalues: LinkedListModule (copy)
 	local config = { previous = nil, next = nil, value = Value }
 	setmetatable(config, LinkedListModule)
@@ -9,7 +9,7 @@ function LinkedListModule.createNode(Value) --[[ Line: 4 ]]
 	return config
 end
 
-function LinkedListModule.CreateNext(Previous, p1) --[[ Line: 17 ]]
+function LinkedListModule.CreateNext(Previous, p1)
 	-- upvalues: LinkedListModule (copy)
 	local Previous1 = {
 		previous = Previous,
@@ -26,7 +26,7 @@ function LinkedListModule.CreateNext(Previous, p1) --[[ Line: 17 ]]
 	return Previous1
 end
 
-function LinkedListModule.CreatePrevious(p1, p2) --[[ Line: 34 ]]
+function LinkedListModule.CreatePrevious(p1, p2)
 	-- upvalues: LinkedListModule (copy)
 	local Previous = { previous = p1.previous, next = p1, value = p2 or {} }
 	

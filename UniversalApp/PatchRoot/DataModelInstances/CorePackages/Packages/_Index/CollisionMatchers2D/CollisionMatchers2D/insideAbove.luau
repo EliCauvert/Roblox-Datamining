@@ -1,7 +1,7 @@
 ﻿local ToRectModule = require(script.Parent.toRect)
 local ReturnValueModule = require(script.Parent.returnValue)
 
-return function(p1, p2, MinValue: NumberRange) --[[ Line: 26 | Named "insideAbove" ]]
+return function(p1, p2, MinValue: NumberRange)
 	-- upvalues: ToRectModule (copy), ReturnValueModule (copy)
 	local Negated = -(ToRectModule(p1).Max - ToRectModule(p2).Max)
 	

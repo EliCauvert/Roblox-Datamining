@@ -18,7 +18,7 @@ local List = {
 	ValidationEnumsModule.UploadCategory.EYEBROW_EYELASH
 }
 
-local function walkInstanceTree(p1, RootInstance, p2) --[[ Line: 41 ]]
+local function walkInstanceTree(p1, RootInstance, p2)
 	-- upvalues: UGCValidationService (copy), ErrorSourceStringsModule (copy), DescribeProblematicPropertiesModule (copy)
 	local Descendants = RootInstance:GetDescendants()
 	table.insert(Descendants, RootInstance)
@@ -46,7 +46,7 @@ return {
 		ValidationEnumsModule.SharedDataMember.uploadCategory
 	},
 	expectedFailures = {},
-	run = function(p3, p4) --[[ Line: 66 ]]
+	run = function(p3, p4)
 		-- upvalues: GetEngineFeatureEngineUGCValidatePropertiesSensibleModule (copy), GetFIntUGCValidateMaxHSRDataLenModule (copy), GetFFlagUGCValidateDisallowAeroMeshDataModule (copy), GetFFlagUGCValidateWrapDataCapsModule (copy), ValidationEnumsModule (copy), GetFFlagUGCValidateTemporaryIdsBackendOnlyModule (copy), List (copy), GetFIntUGCValidateMaxHSRMeshIdDataLenModule (copy), walkInstanceTree (copy)
 		if not GetEngineFeatureEngineUGCValidatePropertiesSensibleModule() then return end
 		local config = {

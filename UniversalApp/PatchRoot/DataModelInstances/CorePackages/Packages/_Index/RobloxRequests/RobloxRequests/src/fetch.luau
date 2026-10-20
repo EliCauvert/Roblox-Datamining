@@ -1,8 +1,8 @@
 ﻿local PromiseModule = require(script.Parent.Parent.Parent.Promise)
 
-function createFetch(Callback) --[[ Line: 9 ]]
+function createFetch(Callback)
 	-- upvalues: PromiseModule (copy)
-	return function(p1, p2) --[[ Line: 10 | Named "fetch" ]]
+	return function(p1, p2)
 		-- upvalues: Callback (copy), PromiseModule (upval)
 		if p2 == nil then
 			p2 = {}
@@ -12,11 +12,11 @@ function createFetch(Callback) --[[ Line: 9 ]]
 		p2.data = p2.body
 		p2.body = nil
 		
-		return Callback(Method, p1, p2):andThen(function(Result) --[[ Line: 19 ]]
+		return Callback(Method, p1, p2):andThen(function(Result)
 			-- upvalues: PromiseModule (upval)
 			local Text = Result.text
 			
-			function Result.text() --[[ Line: 21 ]]
+			function Result.text()
 				-- upvalues: PromiseModule (upval), Text (copy)
 				return PromiseModule.resolve(Text)
 			end

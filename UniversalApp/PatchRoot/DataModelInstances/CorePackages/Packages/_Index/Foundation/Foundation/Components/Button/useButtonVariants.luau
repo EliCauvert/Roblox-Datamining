@@ -8,7 +8,7 @@ local ComposeStyleVariantModule = require(Foundation.Utility.composeStyleVariant
 local GetSharedVariantsModule = require(script.Parent.getSharedVariants)
 local _ = require(Foundation.Providers.Style.Tokens)
 
-local function v9(p1) --[[ Line: 47 ]]
+local function v9(p1)
 	-- upvalues: GetSharedVariantsModule (copy), InputSizeModule (copy)
 	local SharedVariantsModule = GetSharedVariantsModule(p1)
 	
@@ -67,7 +67,7 @@ local function v9(p1) --[[ Line: 47 ]]
 	}
 end
 
-return function(p1, p2, p3, p4) --[[ Line: 117 ]]
+return function(p1, p2, p3, p4)
 	-- upvalues: VariantsContextModule (copy), v9 (copy), ComposeStyleVariantModule (copy), ColorNamespaceModule (copy)
 	local Button = VariantsContextModule.useVariants("Button", v9, p1)
 	

@@ -9,7 +9,7 @@ local GetEditableMeshFromContextModule = require(Parent.util.getEditableMeshFrom
 local GetExpectedPartSizeModule = require(Parent.util.getExpectedPartSize)
 local GetMeshInfoModule = require(Parent.util.getMeshInfo)
 
-local function calculateMeshSizeForPart(Object, p1) --[[ Line: 30 ]]
+local function calculateMeshSizeForPart(Object, p1)
 	-- upvalues: GetEditableMeshFromContextModule (copy), GetMeshSizeModule (copy)
 	local config = {
 		fieldName = "MeshId",
@@ -28,7 +28,7 @@ local function calculateMeshSizeForPart(Object, p1) --[[ Line: 30 ]]
 	end
 end
 
-local function validateWrapTargetComparison(Scale, Object, p1, p2) --[[ Line: 49 ]]
+local function validateWrapTargetComparison(Scale, Object, p1, p2)
 	-- upvalues: GetMeshInfoModule (copy), ConstantsModule (copy), ErrorSourceStringsModule (copy), GetMeshMinMaxModule (copy)
 	local MeshInfoModule, _, MeshInfoModule3 = GetMeshInfoModule(Object, ConstantsModule.MESH_CONTENT_TYPE.RENDER_MESH, p1)
 	
@@ -88,7 +88,7 @@ return {
 		ValidationEnumsModule.SharedDataMember.outerCagesData
 	},
 	expectedFailures = {},
-	run = function(p1, p2) --[[ Line: 109 ]]
+	run = function(p1, p2)
 		-- upvalues: ValidationEnumsModule (copy), calculateMeshSizeForPart (copy), ErrorSourceStringsModule (copy), GetExpectedPartSizeModule (copy), validateWrapTargetComparison (copy), ConstantsModule (copy)
 		local RootInstance = p2.rootInstance
 		local AssetType = p2.uploadEnum.assetType
@@ -138,7 +138,7 @@ return {
 			bypassFlags = { skipPhysicsDataReset = true }
 		}
 		
-		local function validateSingleMeshPart(RootInstance) --[[ Line: 153 ]]
+		local function validateSingleMeshPart(RootInstance)
 			-- upvalues: calculateMeshSizeForPart (upval), config (copy), p1 (copy), ErrorSourceStringsModule (upval), GetExpectedPartSizeModule (upval), validateWrapTargetComparison (upval)
 			local MeshSizeForPart, MeshSizeForPart2 = calculateMeshSizeForPart(RootInstance, config)
 			

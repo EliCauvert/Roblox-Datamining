@@ -25,7 +25,7 @@ local TypeMetaFieldDef = IntrospectionModule.TypeMetaFieldDef
 local TypeNameMetaFieldDef = IntrospectionModule.TypeNameMetaFieldDef
 local TypeFromASTFunction = require(Parent.utilities.typeFromAST).typeFromAST
 
-local function _(NullModule1) --[[ Line: 79 | Named "unwrapNull" ]]
+local function _(NullModule1)
 	-- upvalues: NullModule (copy)
 	return if NullModule1 == NullModule then nil else NullModule1
 end
@@ -34,7 +34,7 @@ local TypeInfo = {}
 local config = { __index = TypeInfo }
 local GetFieldDef = nil
 
-function TypeInfo.new(_schema, p1, p2) --[[ Line: 132 ]]
+function TypeInfo.new(_schema, p1, p2)
 	-- upvalues: config (copy), GetFieldDef (ref), IsInputTypeFunction (copy), IsCompositeTypeFunction (copy), IsOutputTypeFunction (copy)
 	local self = setmetatable({}, config)
 	self._schema = _schema
@@ -62,7 +62,7 @@ function TypeInfo.new(_schema, p1, p2) --[[ Line: 132 ]]
 	return self
 end
 
-function TypeInfo.getType(p1) --[[ Line: 169 ]]
+function TypeInfo.getType(p1)
 	-- upvalues: NullModule (copy)
 	if #p1._typeStack > 0 then
 		local TypeStackEntry = p1._typeStack[#p1._typeStack]
@@ -73,7 +73,7 @@ function TypeInfo.getType(p1) --[[ Line: 169 ]]
 	end
 end
 
-function TypeInfo.getParentType(p1) --[[ Line: 176 ]]
+function TypeInfo.getParentType(p1)
 	-- upvalues: NullModule (copy)
 	if #p1._parentTypeStack > 0 then
 		local ParentTypeStackEntry = p1._parentTypeStack[#p1._parentTypeStack]
@@ -84,7 +84,7 @@ function TypeInfo.getParentType(p1) --[[ Line: 176 ]]
 	end
 end
 
-function TypeInfo.getInputType(p1) --[[ Line: 183 ]]
+function TypeInfo.getInputType(p1)
 	-- upvalues: NullModule (copy)
 	if #p1._inputTypeStack > 0 then
 		local InputTypeStackEntry = p1._inputTypeStack[#p1._inputTypeStack]
@@ -95,7 +95,7 @@ function TypeInfo.getInputType(p1) --[[ Line: 183 ]]
 	end
 end
 
-function TypeInfo.getParentInputType(p1) --[[ Line: 190 ]]
+function TypeInfo.getParentInputType(p1)
 	-- upvalues: NullModule (copy)
 	if #p1._inputTypeStack > 1 then
 		local InputTypeStackEntry = p1._inputTypeStack[#p1._inputTypeStack - 1]
@@ -106,7 +106,7 @@ function TypeInfo.getParentInputType(p1) --[[ Line: 190 ]]
 	end
 end
 
-function TypeInfo.getFieldDef(p1) --[[ Line: 197 ]]
+function TypeInfo.getFieldDef(p1)
 	-- upvalues: NullModule (copy)
 	if #p1._fieldDefStack > 0 then
 		local FieldDefStackEntry = p1._fieldDefStack[#p1._fieldDefStack]
@@ -117,7 +117,7 @@ function TypeInfo.getFieldDef(p1) --[[ Line: 197 ]]
 	end
 end
 
-function TypeInfo.getDefaultValue(p1) --[[ Line: 204 ]]
+function TypeInfo.getDefaultValue(p1)
 	-- upvalues: NullModule (copy)
 	if #p1._defaultValueStack > 0 then
 		local DefaultValueStackEntry = p1._defaultValueStack[#p1._defaultValueStack]
@@ -128,19 +128,19 @@ function TypeInfo.getDefaultValue(p1) --[[ Line: 204 ]]
 	end
 end
 
-function TypeInfo.getDirective(p1) --[[ Line: 211 ]]
+function TypeInfo.getDirective(p1)
 	return p1._directive
 end
 
-function TypeInfo.getArgument(p1) --[[ Line: 215 ]]
+function TypeInfo.getArgument(p1)
 	return p1._argument
 end
 
-function TypeInfo.getEnumValue(p1) --[[ Line: 219 ]]
+function TypeInfo.getEnumValue(p1)
 	return p1._enumValue
 end
 
-function TypeInfo.enter(p1, p2) --[[ Line: 223 ]]
+function TypeInfo.enter(p1, p2)
 	-- upvalues: Kind (copy), GetNamedTypeFunction (copy), IsCompositeTypeFunction (copy), NullModule (copy), IsOutputTypeFunction (copy), IsObjectTypeFunction (copy), TypeFromASTFunction (copy), IsInputTypeFunction (copy), Array (copy), GetNullableTypeFunction (copy), IsListTypeFunction (copy), IsInputObjectTypeFunction (copy), IsEnumTypeFunction (copy)
 	local Schema = p1._schema
 	local Kind1 = p2.kind
@@ -208,7 +208,7 @@ function TypeInfo.enter(p1, p2) --[[ Line: 223 ]]
 				local Directive1 = if Directive then Directive else p1:getFieldDef()
 				
 				if Directive1 then
-					FindResult = Array.find(Directive1.args, function(p3): boolean --[[ Line: 297 ]]
+					FindResult = Array.find(Directive1.args, function(p3): boolean
 						-- upvalues: p2 (copy)
 						return p3.name == p2.name.value
 					end)
@@ -259,7 +259,7 @@ function TypeInfo.enter(p1, p2) --[[ Line: 223 ]]
 	end
 end
 
-function TypeInfo.leave(p1, p2) --[[ Line: 343 ]]
+function TypeInfo.leave(p1, p2)
 	-- upvalues: Kind (copy)
 	local Kind1 = p2.kind
 	
@@ -307,7 +307,7 @@ function TypeInfo.leave(p1, p2) --[[ Line: 343 ]]
 	end
 end
 
-GetFieldDef = function(p1, QueryType, p2) --[[ Line: 377 | Named "getFieldDef" ]]
+GetFieldDef = function(p1, QueryType, p2)
 	-- upvalues: SchemaMetaFieldDef (copy), TypeMetaFieldDef (copy), TypeNameMetaFieldDef (copy), IsCompositeTypeFunction (copy), IsObjectTypeFunction (copy), IsInterfaceTypeFunction (copy)
 	local Value = p2.name.value
 	
@@ -316,10 +316,10 @@ end
 
 return {
 	TypeInfo = TypeInfo,
-	visitWithTypeInfo = function(p1, p2) --[[ Line: 404 ]]
+	visitWithTypeInfo = function(p1, p2)
 		-- upvalues: GetVisitFnFunction (copy), IsNodeFunction (copy)
 		return {
-			enter = function(_, p3, ...) --[[ Line: 409 ]]
+			enter = function(_, p3, ...)
 				-- upvalues: p1 (copy), GetVisitFnFunction (upval), p2 (copy), IsNodeFunction (upval)
 				p1:enter(p3)
 				local VisitFn = GetVisitFnFunction(p2, p3.kind, false)
@@ -338,7 +338,7 @@ return {
 				end
 				return VisitFnResult
 			end,
-			leave = function(_, p3, ...) --[[ Line: 428 ]]
+			leave = function(_, p3, ...)
 				-- upvalues: GetVisitFnFunction (upval), p2 (copy), p1 (copy)
 				local VisitFn = GetVisitFnFunction(p2, p3.kind, true)
 				local VisitFnResult = if VisitFn then VisitFn(p2, p3, ...) else nil

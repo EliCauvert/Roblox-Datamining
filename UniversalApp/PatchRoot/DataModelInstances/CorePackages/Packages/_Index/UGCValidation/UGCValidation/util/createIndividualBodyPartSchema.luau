@@ -5,7 +5,7 @@ local R15plusUtilsModule = require(Parent.util.R15plusUtils)
 local GetFFlagUGCValidationEnforceHRDUploadModule = require(Parent.flags.getFFlagUGCValidationEnforceHRDUpload)
 local config = { LeftHand = "LeftHand", RightHand = "RightHand" }
 
-return function(p1, Text, _) --[[ Line: 14 | Named "createIndividualBodyPartSchema" ]]
+return function(p1, Text, _)
 	-- upvalues: ConstantsModule (copy), R15plusUtilsModule (copy), GetFFlagUGCValidationEnforceHRDUploadModule (copy), config (copy)
 	local SubPart = ConstantsModule.ASSET_TYPE_INFO[p1].subParts[Text]
 	local config1 = {

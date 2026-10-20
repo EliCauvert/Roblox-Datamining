@@ -4,7 +4,7 @@ local t = {}
 local Module = {}
 Module.__index = Module
 
-function Module.new(p1) --[[ Line: 60 ]]
+function Module.new(p1)
 	-- upvalues: t (copy), Module (copy)
 	return (setmetatable({
 		recommendation_type = if p1 == nil or p1.recommendation_type == nil then assert(t.FriendRecommendationData_RecommendationType.fromNumber(0), "Enum has no 0 default") else p1.recommendation_type,
@@ -16,7 +16,7 @@ function Module.new(p1) --[[ Line: 60 ]]
 	}, Module))
 end
 
-function Module:encode() --[[ Line: 79 ]]
+function Module:encode()
 	-- upvalues: t (copy), ProtoModule (copy)
 	local Buf = buffer.create(0)
 	local Count = 0
@@ -51,7 +51,7 @@ function Module:encode() --[[ Line: 79 ]]
 	return Buf1
 end
 
-function Module.decode(Buf) --[[ Line: 128 ]]
+function Module.decode(Buf)
 	-- upvalues: Module (copy), ProtoModule (copy), t (copy)
 	local NewModule = Module.new()
 	local v1 = 0
@@ -104,7 +104,7 @@ function Module.decode(Buf) --[[ Line: 128 ]]
 	return NewModule
 end
 
-function Module:jsonEncode() --[[ Line: 198 ]]
+function Module:jsonEncode()
 	-- upvalues: t (copy)
 	local t1 = {}
 	
@@ -129,7 +129,7 @@ function Module:jsonEncode() --[[ Line: 198 ]]
 	return t1
 end
 
-function Module:jsonDecode() --[[ Line: 236 ]]
+function Module:jsonDecode()
 	-- upvalues: Module (copy), t (copy)
 	local NewModule = Module.new()
 	
@@ -179,13 +179,13 @@ Module.descriptor = {
 t.FriendRecommendationData = Module
 TypeRegistryModule.default:register(t.FriendRecommendationData)
 t.FriendRecommendationData_RecommendationType = {
-	fromNumber = function(p1) --[[ Line: 317 ]]
+	fromNumber = function(p1)
 		return if p1 == 0 then "RECOMMENDATION_TYPE_INVALID" elseif p1 == 1 then "RECOMMENDATION_TYPE_USER" elseif p1 == 2 then "RECOMMENDATION_TYPE_CONTACT" else nil
 	end,
-	toNumber = function(p1) --[[ Line: 329 ]]
+	toNumber = function(p1)
 		return if p1 == "RECOMMENDATION_TYPE_INVALID" then 0 elseif p1 == "RECOMMENDATION_TYPE_USER" then 1 elseif p1 == "RECOMMENDATION_TYPE_CONTACT" then 2 else p1
 	end,
-	fromName = function(p1) --[[ Line: 341 ]]
+	fromName = function(p1)
 		return if p1 == "RECOMMENDATION_TYPE_INVALID" then "RECOMMENDATION_TYPE_INVALID" elseif p1 == "RECOMMENDATION_TYPE_USER" then "RECOMMENDATION_TYPE_USER" elseif p1 == "RECOMMENDATION_TYPE_CONTACT" then "RECOMMENDATION_TYPE_CONTACT" else nil
 	end
 }

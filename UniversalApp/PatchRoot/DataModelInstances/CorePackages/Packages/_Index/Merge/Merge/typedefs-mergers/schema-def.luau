@@ -12,18 +12,18 @@ local config = {
 	subscription = "Subscription"
 }
 
-local function mergeOperationTypes(OperationTypes, OperationTypes1) --[[ Line: 37 ]]
+local function mergeOperationTypes(OperationTypes, OperationTypes1)
 	-- upvalues: config (copy), Array (copy), Boolean (copy)
 	local T = if OperationTypes == nil then {} else OperationTypes
 	local T1 = if OperationTypes1 == nil then {} else OperationTypes1
 	local List = {}
 	
 	for _, Operation in config do
-		local FindResult = Array.find(T, function(p1): boolean --[[ Line: 50 ]]
+		local FindResult = Array.find(T, function(p1): boolean
 			-- upvalues: Operation (copy)
 			return p1.operation == Operation
 		end)
-		local FindResult1 = Boolean.toJSBoolean(FindResult) and FindResult or Array.find(T1, function(p1): boolean --[[ Line: 54 ]]
+		local FindResult1 = Boolean.toJSBoolean(FindResult) and FindResult or Array.find(T1, function(p1): boolean
 			-- upvalues: Operation (copy)
 			return p1.operation == Operation
 		end)
@@ -37,7 +37,7 @@ end
 
 return {
 	DEFAULT_OPERATION_TYPE_NAME_MAP = config,
-	mergeSchemaDefs = function(p1, p2, p3) --[[ Line: 66 ]]
+	mergeSchemaDefs = function(p1, p2, p3)
 		-- upvalues: Boolean (copy), Kind (copy), MergeDirectivesFunction (copy), mergeOperationTypes (copy), Object (copy)
 		return if Boolean.toJSBoolean(p2) then {
 			kind = if p1.kind == Kind.SCHEMA_DEFINITION or p2.kind == Kind.SCHEMA_DEFINITION then Kind.SCHEMA_DEFINITION else Kind.SCHEMA_EXTENSION,

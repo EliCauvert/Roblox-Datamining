@@ -7,14 +7,14 @@ local UseEffectFunction = ReactModule.useEffect
 local UseRefFunction = ReactModule.useRef
 local UseToggleStateModule = require(MomentsCommon.Hooks.useToggleState)
 
-return function(_, ImageContent) --[[ Line: 22 | Named "useImageDisplay" ]]
+return function(_, ImageContent)
 	-- upvalues: UseRefFunction (copy), SignalModule (copy), UseToggleStateModule (copy), UseEffectFunction (copy), ContentProvider (copy), UseCallbackFunction (copy)
 	local UseRefResult = UseRefFunction(nil)
 	local UseRefResult1 = UseRefFunction(nil)
 	local UseRefResult2 = UseRefFunction(false)
 	local UseRefResult3 = UseRefFunction(SignalModule.new())
 	local UseToggleStateModuleResult = UseToggleStateModule(false)
-	UseEffectFunction(function() --[[ Line: 33 ]]
+	UseEffectFunction(function()
 		-- upvalues: UseRefResult (copy), ImageContent (copy), UseRefResult2 (copy), UseRefResult1 (copy), ContentProvider (upval), UseRefResult3 (copy)
 		local Current = UseRefResult.current
 		
@@ -24,9 +24,9 @@ return function(_, ImageContent) --[[ Line: 22 | Named "useImageDisplay" ]]
 			
 			if ImageContent.SourceType == Enum.ContentSourceType.Uri then
 				UseRefResult1.current = ImageContent.Uri
-				task.spawn(function() --[[ Line: 44 ]]
+				task.spawn(function()
 					-- upvalues: ContentProvider (upval), ImageContent (upval), UseRefResult1 (upval), UseRefResult2 (upval), UseRefResult3 (upval)
-					ContentProvider:PreloadAsync({ ImageContent.Uri }, function(_, AssetFetchStatus) --[[ Line: 45 ]]
+					ContentProvider:PreloadAsync({ ImageContent.Uri }, function(_, AssetFetchStatus)
 						-- upvalues: UseRefResult1 (upval), ImageContent (upval), UseRefResult2 (upval), UseRefResult3 (upval)
 						if UseRefResult1.current ~= ImageContent.Uri then return end
 						if AssetFetchStatus == Enum.AssetFetchStatus.Success then
@@ -48,7 +48,7 @@ return function(_, ImageContent) --[[ Line: 22 | Named "useImageDisplay" ]]
 		isLoadedRef = UseRefResult2,
 		onImageLoadedSignalRef = UseRefResult3,
 		ref = UseRefResult,
-		updateRef = UseCallbackFunction(function(Current) --[[ Line: 67 ]]
+		updateRef = UseCallbackFunction(function(Current)
 			-- upvalues: UseToggleStateModuleResult (copy), UseRefResult (copy)
 			UseToggleStateModuleResult.toggle()
 			UseRefResult.current = Current

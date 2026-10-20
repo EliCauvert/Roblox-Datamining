@@ -56,7 +56,7 @@ local HasOwnPropertyModule = require(Parent.luaUtils.hasOwnProperty)
 local Module = {}
 Module.__index = Module
 
-function Module.new(Cache) --[[ Line: 310 ]]
+function Module.new(Cache)
 	-- upvalues: Module (copy), Map (copy), WeakMap (copy), LocalState (copy), Boolean (copy)
 	local Cache1 = Cache.cache
 	local Link = Cache.link
@@ -100,26 +100,26 @@ function Module.new(Cache) --[[ Line: 310 ]]
 	return self
 end
 
-function Module:stop() --[[ Line: 390 ]]
+function Module:stop()
 	-- upvalues: InvariantError (copy)
-	self.queries:forEach(function(_, p1) --[[ Line: 391 ]]
+	self.queries:forEach(function(_, p1)
 		-- upvalues: self (copy)
 		self:stopQueryNoBroadcast(p1)
 	end)
 	self:cancelPendingFetches(InvariantError.new("QueryManager stopped while query was in flight"))
 end
 
-function Module:cancelPendingFetches(QueryManagerStoppedWhileQueryWasInFlight) --[[ Line: 398 ]]
-	self.fetchCancelFns:forEach(function(Callback) --[[ Line: 399 ]]
+function Module:cancelPendingFetches(QueryManagerStoppedWhileQueryWasInFlight)
+	self.fetchCancelFns:forEach(function(Callback)
 		-- upvalues: QueryManagerStoppedWhileQueryWasInFlight (copy)
 		return Callback(QueryManagerStoppedWhileQueryWasInFlight)
 	end)
 	self.fetchCancelFns:clear()
 end
 
-function Module.mutate(p1, p2) --[[ Line: 405 ]]
+function Module.mutate(p1, p2)
 	-- upvalues: PromiseModule (copy), InvariantFunction (copy), Boolean (copy), AsyncMapFunction (copy), Object (copy), GraphQLResultHasErrorFunction (copy), ApolloError (copy), IsCallableModule (copy), InstanceofFunction (copy)
-	return PromiseModule.resolve():andThen(function() --[[ Line: 408 ]]
+	return PromiseModule.resolve():andThen(function()
 		-- upvalues: p2 (copy), InvariantFunction (upval), Boolean (upval), p1 (copy), PromiseModule (upval), AsyncMapFunction (upval), Object (upval), GraphQLResultHasErrorFunction (upval), ApolloError (upval), IsCallableModule (upval), InstanceofFunction (upval)
 		local Mutation = p2.mutation
 		local Variables = p2.variables
@@ -178,9 +178,9 @@ function Module.mutate(p1, p2) --[[ Line: 405 ]]
 		end
 		p1:broadcastQueries()
 		
-		return PromiseModule.new(function(Callback, Callback1) --[[ Line: 486 ]]
+		return PromiseModule.new(function(Callback, Callback1)
 			-- upvalues: AsyncMapFunction (upval), p1 (upval), Document (ref), Object (upval), Context (copy), OptimisticResponse (copy), Variables1 (ref), GraphQLResultHasErrorFunction (upval), ErrorPolicy (ref), ApolloError (upval), Boolean (upval), Mutation1 (ref), IsCallableModule (upval), T (ref), MutationId (copy), FetchPolicy (copy), Update (copy), UpdateQueries (copy), AwaitRefetchQueries (ref), OnQueryUpdated (copy), KeepRootFields (copy), p1 (copy), InstanceofFunction (upval)
-			return AsyncMapFunction(p1:getObservableFromLink(Document, Object.assign({}, Context, { optimisticResponse = OptimisticResponse }), Variables1, false), function(p3) --[[ Line: 494 ]]
+			return AsyncMapFunction(p1:getObservableFromLink(Document, Object.assign({}, Context, { optimisticResponse = OptimisticResponse }), Variables1, false), function(p3)
 				-- upvalues: GraphQLResultHasErrorFunction (upval), ErrorPolicy (upval), ApolloError (upval), Boolean (upval), Mutation1 (upval), Object (upval), IsCallableModule (upval), T (upval), p1 (upval), MutationId (upval), Document (upval), Variables1 (upval), FetchPolicy (upval), Context (upval), Update (upval), UpdateQueries (upval), AwaitRefetchQueries (upval), OptimisticResponse (upval), OnQueryUpdated (upval), KeepRootFields (upval)
 				if GraphQLResultHasErrorFunction(p3) and ErrorPolicy == "none" then
 					error(ApolloError.new({ graphQLErrors = p3.errors }))
@@ -214,12 +214,12 @@ function Module.mutate(p1, p2) --[[ Line: 405 ]]
 					keepRootFields = KeepRootFields
 				})
 			end):subscribe({
-				next = function(_, p3) --[[ Line: 534 ]]
+				next = function(_, p3)
 					-- upvalues: p1 (upval), Callback (copy)
 					p1:broadcastQueries()
 					Callback(p3)
 				end,
-				error = function(_, NetworkError) --[[ Line: 544 ]]
+				error = function(_, NetworkError)
 					-- upvalues: Boolean (upval), Mutation1 (upval), OptimisticResponse (upval), p1 (upval), MutationId (upval), Callback1 (copy), InstanceofFunction (upval), ApolloError (upval)
 					if Boolean.toJSBoolean(Mutation1) then
 						Mutation1.loading = false
@@ -236,7 +236,7 @@ function Module.mutate(p1, p2) --[[ Line: 405 ]]
 	end)
 end
 
-function Module:markMutationResult(AssignResult, p1) --[[ Line: 563 ]]
+function Module:markMutationResult(AssignResult, p1)
 	-- upvalues: ShouldWriteResultFunction (copy), Boolean (copy), HasOwnPropertyModule (copy), GetOperationNameFunction (copy), Array (copy), Object (copy), PromiseModule (copy), ToJSBooleanFunction (copy)
 	if p1 == nil then
 		p1 = self.cache
@@ -255,7 +255,7 @@ function Module:markMutationResult(AssignResult, p1) --[[ Line: 563 ]]
 		local UpdateQueries = AssignResult.updateQueries
 		
 		if UpdateQueries ~= nil then
-			self.queries:forEach(function(p2, p3) --[[ Line: 600 ]]
+			self.queries:forEach(function(p2, p3)
 				-- upvalues: Boolean (upval), HasOwnPropertyModule (upval), UpdateQueries (copy), self (copy), p1 (ref), Result (ref), GetOperationNameFunction (upval), List (copy)
 				local ObservableQuery = p2.observableQuery
 				local QueryName = if Boolean.toJSBoolean(ObservableQuery) then ObservableQuery.queryName else ObservableQuery
@@ -303,10 +303,10 @@ function Module:markMutationResult(AssignResult, p1) --[[ Line: 563 ]]
 		local List1 = {}
 		self:refetchQueries({
 			optimistic = false,
-			updateCache = function(_, p2) --[[ Line: 667 ]]
+			updateCache = function(_, p2)
 				-- upvalues: IsNoCache (copy), Array (upval), List (copy), AssignResult (copy), Boolean (upval), self (copy), Result (ref), Object (upval)
 				if not IsNoCache then
-					Array.forEach(List, function(p3) --[[ Line: 669 ]]
+					Array.forEach(List, function(p3)
 						-- upvalues: p2 (copy)
 						return p2:write(p3)
 					end)
@@ -335,7 +335,7 @@ function Module:markMutationResult(AssignResult, p1) --[[ Line: 563 ]]
 				if not IsNoCache and not AssignResult.keepRootFields then
 					p2:modify({
 						id = "ROOT_MUTATION",
-						fields = function(_, p3, p4) --[[ Line: 711 ]]
+						fields = function(_, p3, p4)
 							local DELETE = p4.DELETE
 							
 							return if p4.fieldName == "__typename" then p3 else DELETE
@@ -346,13 +346,13 @@ function Module:markMutationResult(AssignResult, p1) --[[ Line: 563 ]]
 			include = AssignResult.refetchQueries,
 			removeOptimistic = AssignResult.removeOptimistic,
 			onQueryUpdated = Boolean.toJSBoolean(AssignResult.onQueryUpdated) and AssignResult.onQueryUpdated or nil
-		}):forEach(function(p2) --[[ Line: 737 ]]
+		}):forEach(function(p2)
 			-- upvalues: List1 (copy)
 			return table.insert(List1, p2)
 		end)
 		
 		if AssignResult.awaitRefetchQueries or Boolean.toJSBoolean(AssignResult.onQueryUpdated) then
-			return PromiseModule.all(Array.filter(List1, ToJSBooleanFunction)):andThen(function() --[[ Line: 746 ]]
+			return PromiseModule.all(Array.filter(List1, ToJSBooleanFunction)):andThen(function()
 				-- upvalues: Result (ref)
 				return Result
 			end)
@@ -361,14 +361,14 @@ function Module:markMutationResult(AssignResult, p1) --[[ Line: 563 ]]
 	return PromiseModule.resolve(Result)
 end
 
-function Module:markMutationOptimistic(Callback, p1) --[[ Line: 755 ]]
+function Module:markMutationOptimistic(Callback, p1)
 	-- upvalues: IsCallableModule (copy), Object (copy), InvariantFunction (copy)
 	local CallbackResult = nil
 	CallbackResult = if IsCallableModule(Callback) then Callback(p1.variables) else Callback
 	
-	return self.cache:recordOptimisticTransaction(function(p2) --[[ Line: 776 ]]
+	return self.cache:recordOptimisticTransaction(function(p2)
 		-- upvalues: self (copy), Object (upval), p1 (copy), CallbackResult (ref), InvariantFunction (upval)
-		local Success, Result = pcall(function() --[[ Line: 777 ]]
+		local Success, Result = pcall(function()
 			-- upvalues: self (upval), Object (upval), p1 (upval), CallbackResult (upval), p2 (copy)
 			self:markMutationResult(Object.assign({}, p1, { result = { data = CallbackResult } }), p2)
 		end)
@@ -379,13 +379,13 @@ function Module:markMutationOptimistic(Callback, p1) --[[ Line: 755 ]]
 	end, p1.mutationId)
 end
 
-function Module:fetchQuery(QueryId, p1, p2) --[[ Line: 786 ]]
+function Module:fetchQuery(QueryId, p1, p2)
 	return self:fetchQueryObservable(QueryId, p1, p2).promise
 end
 
-function Module:getQueryStore() --[[ Line: 794 ]]
+function Module:getQueryStore()
 	local t = {}
-	self.queries:forEach(function(p1, Key) --[[ Line: 796 ]]
+	self.queries:forEach(function(p1, Key)
 		-- upvalues: t (copy)
 		t[Key] = {
 			variables = p1.variables,
@@ -398,7 +398,7 @@ function Module:getQueryStore() --[[ Line: 794 ]]
 	return t
 end
 
-function Module:resetErrors(p1) --[[ Line: 807 ]]
+function Module:resetErrors(p1)
 	-- upvalues: Boolean (copy)
 	local GetResult = self.queries:get(p1)
 	
@@ -408,7 +408,7 @@ function Module:resetErrors(p1) --[[ Line: 807 ]]
 	end
 end
 
-function Module:transform(Query) --[[ Line: 815 ]]
+function Module:transform(Query)
 	-- upvalues: RemoveConnectionDirectiveFromDocumentFunction (copy), Boolean (copy), HasClientExportsFunction (copy), GetDefaultValuesFunction (copy), GetOperationDefinitionFunction (copy), Object (copy), Array (copy)
 	local TransformCache = self.transformCache
 	
@@ -425,14 +425,14 @@ function Module:transform(Query) --[[ Line: 815 ]]
 			serverQuery = ServerQueryResult,
 			defaultVars = GetDefaultValuesFunction(GetOperationDefinitionFunction(TransformDocumentResult)),
 			asQuery = Object.assign({}, TransformDocumentResult, {
-				definitions = Array.map(TransformDocumentResult.definitions, function(p1) --[[ Line: 842 ]]
+				definitions = Array.map(TransformDocumentResult.definitions, function(p1)
 					-- upvalues: Object (upval)
 					return if p1.kind == "OperationDefinition" and p1.operation ~= "query" then Object.assign({}, p1, { operation = "query" }) else p1
 				end)
 			})
 		}
 		
-		local function _(p1) --[[ Line: 851 | Named "add" ]]
+		local function _(p1)
 			-- upvalues: TransformCache (copy), config (copy)
 			if p1 ~= nil and not TransformCache:has(p1) then
 				TransformCache:set(p1, config)
@@ -455,12 +455,12 @@ function Module:transform(Query) --[[ Line: 815 ]]
 	return TransformCache:get(Query)
 end
 
-function Module:getVariables(Document, Variables) --[[ Line: 868 ]]
+function Module:getVariables(Document, Variables)
 	-- upvalues: Object (copy)
 	return Object.assign({}, self:transform(Document).defaultVars, Variables)
 end
 
-function Module:watchQuery(p1) --[[ Line: 872 ]]
+function Module:watchQuery(p1)
 	-- upvalues: Object (copy), QueryInfo (copy), ObservableQuery (copy)
 	local AssignResult = Object.assign({}, p1, { variables = self:getVariables(p1.query, p1.variables) })
 	
@@ -483,7 +483,7 @@ function Module:watchQuery(p1) --[[ Line: 872 ]]
 	return NewObservableQuery
 end
 
-function Module:query(p1, p2) --[[ Line: 900 ]]
+function Module:query(p1, p2)
 	-- upvalues: InvariantFunction (copy), Boolean (copy)
 	if p2 == nil then
 		p2 = self:generateQueryId()
@@ -493,45 +493,45 @@ function Module:query(p1, p2) --[[ Line: 900 ]]
 	InvariantFunction(not Boolean.toJSBoolean(p1.returnPartialData), "returnPartialData option only supported on watchQuery.")
 	InvariantFunction(not Boolean.toJSBoolean(p1.pollInterval), "pollInterval option only supported on watchQuery.")
 	
-	return self:fetchQuery(p2, p1):andThen(function(Result) --[[ Line: 927 ]]
+	return self:fetchQuery(p2, p1):andThen(function(Result)
 		-- upvalues: self (copy), p2 (ref)
 		self:stopQuery(p2)
 		
 		return Result
-	end):catch(function(Err) --[[ Line: 931 ]]
+	end):catch(function(Err)
 		-- upvalues: self (copy), p2 (ref)
 		self:stopQuery(p2)
 		error(Err)
 	end)
 end
 
-function Module:generateQueryId(): string --[[ Line: 937 ]]
+function Module:generateQueryId(): string
 	local QueryIdCounter = self.queryIdCounter
 	self.queryIdCounter += 1
 	
 	return (tostring(QueryIdCounter))
 end
 
-function Module:generateRequestId() --[[ Line: 944 ]]
+function Module:generateRequestId()
 	local RequestIdCounter = self.requestIdCounter
 	self.requestIdCounter += 1
 	
 	return RequestIdCounter
 end
 
-function Module:generateMutationId(): string --[[ Line: 951 ]]
+function Module:generateMutationId(): string
 	local MutationIdCounter = self.mutationIdCounter
 	self.mutationIdCounter += 1
 	
 	return (tostring(MutationIdCounter))
 end
 
-function Module:stopQueryInStore(p1) --[[ Line: 958 ]]
+function Module:stopQueryInStore(p1)
 	self:stopQueryInStoreNoBroadcast(p1)
 	self:broadcastQueries()
 end
 
-function Module:stopQueryInStoreNoBroadcast(p1) --[[ Line: 963 ]]
+function Module:stopQueryInStoreNoBroadcast(p1)
 	-- upvalues: Boolean (copy)
 	local GetResult = self.queries:get(p1)
 	
@@ -540,10 +540,10 @@ function Module:stopQueryInStoreNoBroadcast(p1) --[[ Line: 963 ]]
 	end
 end
 
-function Module:clearStore() --[[ Line: 970 ]]
+function Module:clearStore()
 	-- upvalues: InvariantError (copy), Boolean (copy), NetworkStatus (copy)
 	self:cancelPendingFetches(InvariantError.new("Store reset while query was in flight (not completed in link chain)"))
-	self.queries:forEach(function(p1, _) --[[ Line: 978 ]]
+	self.queries:forEach(function(p1, _)
 		-- upvalues: Boolean (upval), NetworkStatus (upval)
 		if Boolean.toJSBoolean(p1.observableQuery) then
 			p1.networkStatus = NetworkStatus.loading
@@ -560,14 +560,14 @@ function Module:clearStore() --[[ Line: 970 ]]
 	return self.cache:reset()
 end
 
-function Module:resetStore() --[[ Line: 996 ]]
-	return self:clearStore():andThen(function() --[[ Line: 1003 ]]
+function Module:resetStore()
+	return self:clearStore():andThen(function()
 		-- upvalues: self (copy)
 		return self:reFetchObservableQueries()
 	end)
 end
 
-function Module:getObservableQueries(All: string) --[[ Line: 1008 ]]
+function Module:getObservableQueries(All: string)
 	-- upvalues: Map (copy), Set (copy), Array (copy), IsDocumentNodeFunction (copy), IsNonNullObjectFunction (copy), Boolean (copy), MakeUniqueIdFunction (copy), ObservableQuery (copy), Object (copy), InvariantFunction (copy), HttpService (copy)
 	if All == nil then
 		All = "active"
@@ -577,7 +577,7 @@ function Module:getObservableQueries(All: string) --[[ Line: 1008 ]]
 	local NewSet = Set.new()
 	
 	if Array.isArray(All) then
-		Array.forEach(All, function(p1) --[[ Line: 1023 ]]
+		Array.forEach(All, function(p1)
 			-- upvalues: NewMap1 (copy), IsDocumentNodeFunction (upval), self (copy), IsNonNullObjectFunction (upval), Boolean (upval), NewSet (copy)
 			if typeof(p1) == "string" then
 				NewMap1:set(p1, false)
@@ -594,7 +594,7 @@ function Module:getObservableQueries(All: string) --[[ Line: 1008 ]]
 			end
 		end)
 	end
-	self.queries:forEach(function(p1, p2) --[[ Line: 1034 ]]
+	self.queries:forEach(function(p1, p2)
 		-- upvalues: Boolean (upval), All (ref), NewMap (copy), NewMap1 (copy)
 		local ObservableQuery = p1.observableQuery
 		local Document = p1.document
@@ -635,7 +635,7 @@ function Module:getObservableQueries(All: string) --[[ Line: 1008 ]]
 		end
 	end
 	if _G.__DEV__ and Boolean.toJSBoolean(NewMap1.size) then
-		NewMap1:forEach(function(p1, Input) --[[ Line: 1086 ]]
+		NewMap1:forEach(function(p1, Input)
 			-- upvalues: InvariantFunction (upval), HttpService (upval)
 			if not p1 then
 				InvariantFunction.warn(("Unknown query %s%s requested in refetchQueries options.include array"):format(if typeof(Input) == "string" then "named " else "", HttpService:JSONEncode(Input)))
@@ -645,13 +645,13 @@ function Module:getObservableQueries(All: string) --[[ Line: 1008 ]]
 	return NewMap
 end
 
-function Module:reFetchObservableQueries(p1: boolean) --[[ Line: 1101 ]]
+function Module:reFetchObservableQueries(p1: boolean)
 	-- upvalues: Boolean (copy), PromiseModule (copy), Array (copy), ToJSBooleanFunction (copy)
 	if p1 == nil then
 		p1 = false
 	end
 	local List = {}
-	self:getObservableQueries(if Boolean.toJSBoolean(p1) then "all" else "active"):forEach(function(p2, p3) --[[ Line: 1109 ]]
+	self:getObservableQueries(if Boolean.toJSBoolean(p1) then "all" else "active"):forEach(function(p2, p3)
 		-- upvalues: Boolean (upval), p1 (ref), List (copy), self (copy)
 		local FetchPolicy = p2.options.fetchPolicy
 		p2:resetLastResults()
@@ -666,11 +666,11 @@ function Module:reFetchObservableQueries(p1: boolean) --[[ Line: 1101 ]]
 	return PromiseModule.all(Array.filter(List, ToJSBooleanFunction))
 end
 
-function Module:setObservableQuery(NewResult) --[[ Line: 1124 ]]
+function Module:setObservableQuery(NewResult)
 	self:getQuery(NewResult.queryId):setObservableQuery(NewResult)
 end
 
-function Module:startGraphQLSubscription(p1) --[[ Line: 1128 ]]
+function Module:startGraphQLSubscription(p1)
 	-- upvalues: ShouldWriteResultFunction (copy), GraphQLResultHasErrorFunction (copy), ApolloError (copy), Observable (copy)
 	local FetchPolicy = p1.fetchPolicy
 	local ErrorPolicy = p1.errorPolicy
@@ -678,9 +678,9 @@ function Module:startGraphQLSubscription(p1) --[[ Line: 1128 ]]
 	local Document = self:transform(p1.query).document
 	local Variables = self:getVariables(Document, p1.variables)
 	
-	local function makeObservable(Result) --[[ Line: 1140 ]]
+	local function makeObservable(Result)
 		-- upvalues: self (copy), Document (ref), T (ref), FetchPolicy (copy), ShouldWriteResultFunction (upval), ErrorPolicy (copy), GraphQLResultHasErrorFunction (upval), ApolloError (upval)
-		return self:getObservableFromLink(Document, T, Result):map(function(p2) --[[ Line: 1141 ]]
+		return self:getObservableFromLink(Document, T, Result):map(function(p2)
 			-- upvalues: FetchPolicy (upval), ShouldWriteResultFunction (upval), ErrorPolicy (upval), self (upval), Document (upval), Result (copy), GraphQLResultHasErrorFunction (upval), ApolloError (upval)
 			if FetchPolicy ~= "no-cache" then
 				if ShouldWriteResultFunction(p2, ErrorPolicy) then
@@ -703,17 +703,17 @@ function Module:startGraphQLSubscription(p1) --[[ Line: 1128 ]]
 	if self:transform(Document).hasClientExports then
 		local Promise = self.localState:addExportedVariables(Document, Variables, T):andThen(makeObservable)
 		
-		return Observable.new(function(p2) --[[ Line: 1171 ]]
+		return Observable.new(function(p2)
 			-- upvalues: Promise (copy)
 			local SubscribeResult = nil
-			Promise:andThen(function(Result) --[[ Line: 1173 ]]
+			Promise:andThen(function(Result)
 				-- upvalues: SubscribeResult (ref), p2 (copy)
 				SubscribeResult = Result:subscribe(p2)
 				
 				return SubscribeResult
 			end, p2.error)
 			
-			return function() --[[ Line: 1177 ]]
+			return function()
 				-- upvalues: SubscribeResult (ref)
 				return if SubscribeResult == nil then SubscribeResult else SubscribeResult:unsubscribe()
 			end
@@ -723,37 +723,37 @@ function Module:startGraphQLSubscription(p1) --[[ Line: 1128 ]]
 	end
 end
 
-function Module:stopQuery(QueryId) --[[ Line: 1190 ]]
+function Module:stopQuery(QueryId)
 	self:stopQueryNoBroadcast(QueryId)
 	self:broadcastQueries()
 end
 
-function Module:stopQueryNoBroadcast(p1) --[[ Line: 1195 ]]
+function Module:stopQueryNoBroadcast(p1)
 	self:stopQueryInStoreNoBroadcast(p1)
 	self:removeQuery(p1)
 end
 
-function Module:removeQuery(p1) --[[ Line: 1200 ]]
+function Module:removeQuery(p1)
 	self.fetchCancelFns:delete(p1)
 	self:getQuery(p1):stop()
 	self.queries:delete(p1)
 end
 
-function Module:broadcastQueries() --[[ Line: 1211 ]]
+function Module:broadcastQueries()
 	-- upvalues: Boolean (copy)
 	if Boolean.toJSBoolean(self.onBroadcast) then
 		self:onBroadcast()
 	end
-	self.queries:forEach(function(p1, _) --[[ Line: 1216 ]]
+	self.queries:forEach(function(p1, _)
 		return p1:notify()
 	end)
 end
 
-function Module:getLocalState() --[[ Line: 1221 ]]
+function Module:getLocalState()
 	return self.localState
 end
 
-function Module:getObservableFromLink(Document, AssignResult, Variables, p1) --[[ Line: 1225 ]]
+function Module:getObservableFromLink(Document, AssignResult, Variables, p1)
 	-- upvalues: Boolean (copy), GetOperationNameFunction (copy), Object (copy), Map (copy), CanonicalStringifyFunction (copy), Concast (copy), ExecuteFunction (copy), Observable (copy), ToJSBooleanFunction (copy), AsyncMapFunction (copy)
 	if p1 == nil then
 		p1 = if Boolean.toJSBoolean(AssignResult) then if AssignResult.queryDeduplication == nil then self.queryDeduplication else AssignResult.queryDeduplication else self.queryDeduplication
@@ -784,7 +784,7 @@ function Module:getObservableFromLink(Document, AssignResult, Variables, p1) --[
 				local NewConcast1 = Concast.new({ (ExecuteFunction(Link, config)) })
 				NewConcast = NewConcast1
 				GetResult1:set(CanonicalStringifyResult, NewConcast)
-				NewConcast1:cleanup(function() --[[ Line: 1277 ]]
+				NewConcast1:cleanup(function()
 					-- upvalues: Boolean (upval), GetResult1 (copy), CanonicalStringifyResult (copy), InFlightLinkObservables (copy), ServerQuery (copy)
 					if Boolean.toJSBoolean(GetResult1:delete(CanonicalStringifyResult)) and GetResult1.size < 1 then
 						InFlightLinkObservables:delete(ServerQuery)
@@ -801,7 +801,7 @@ function Module:getObservableFromLink(Document, AssignResult, Variables, p1) --[
 	local ClientQuery = self:transform(Document).clientQuery
 	
 	if ToJSBooleanFunction(ClientQuery) then
-		NewConcast = AsyncMapFunction(NewConcast, function(RemoteResult) --[[ Line: 1298 ]]
+		NewConcast = AsyncMapFunction(NewConcast, function(RemoteResult)
 			-- upvalues: self (copy), ClientQuery (copy), Context (ref), Variables (copy)
 			return self.localState:runResolvers({
 				document = ClientQuery,
@@ -814,12 +814,12 @@ function Module:getObservableFromLink(Document, AssignResult, Variables, p1) --[
 	return NewConcast
 end
 
-function Module:getResultsFromLink(p1, FORBID, p2) --[[ Line: 1311 ]]
+function Module:getResultsFromLink(p1, FORBID, p2)
 	-- upvalues: AsyncMapFunction (copy), IsNonEmptyArrayFunction (copy), ApolloError (copy), Boolean (copy), NetworkStatus (copy), IsApolloErrorFunction (copy)
 	p1.lastRequestId = self:generateRequestId()
 	local LastRequestId = p1.lastRequestId
 	
-	return AsyncMapFunction(self:getObservableFromLink(p1.document, p2.context, p2.variables), function(p3) --[[ Line: 1321 ]]
+	return AsyncMapFunction(self:getObservableFromLink(p1.document, p2.context, p2.variables), function(p3)
 		-- upvalues: IsNonEmptyArrayFunction (upval), LastRequestId (copy), p1 (copy), p2 (copy), ApolloError (upval), FORBID (copy), Boolean (upval), NetworkStatus (upval)
 		local IsNonEmptyArray = IsNonEmptyArrayFunction(p3.errors)
 		
@@ -840,7 +840,7 @@ function Module:getResultsFromLink(p1, FORBID, p2) --[[ Line: 1311 ]]
 			config.errors = p3.errors
 		end
 		return config
-	end, function(NetworkError) --[[ Line: 1350 ]]
+	end, function(NetworkError)
 		-- upvalues: IsApolloErrorFunction (upval), ApolloError (upval), LastRequestId (copy), p1 (copy)
 		local NetworkError1 = if IsApolloErrorFunction(NetworkError) then NetworkError else ApolloError.new({ networkError = NetworkError })
 		
@@ -851,7 +851,7 @@ function Module:getResultsFromLink(p1, FORBID, p2) --[[ Line: 1311 ]]
 	end)
 end
 
-function Module:fetchQueryObservable(p1, p2, NetworkStatus1) --[[ Line: 1368 ]]
+function Module:fetchQueryObservable(p1, p2, NetworkStatus1)
 	-- upvalues: NetworkStatus (copy), Object (copy), PromiseModule (copy), Concast (copy), ApplyNextFetchPolicyFunction (copy)
 	if NetworkStatus1 == nil then
 		NetworkStatus1 = NetworkStatus.loading
@@ -890,7 +890,7 @@ function Module:fetchQueryObservable(p1, p2, NetworkStatus1) --[[ Line: 1368 ]]
 		context = Context
 	})
 	
-	local function fromVariables(Result) --[[ Line: 1417 ]]
+	local function fromVariables(Result)
 		-- upvalues: AssignResult (copy), self (copy), Query (copy), NetworkStatus1 (ref)
 		AssignResult.variables = Result
 		
@@ -898,18 +898,18 @@ function Module:fetchQueryObservable(p1, p2, NetworkStatus1) --[[ Line: 1368 ]]
 	end
 	
 	local NewResult = nil
-	self.fetchCancelFns:set(p1, function(p3) --[[ Line: 1430 ]]
+	self.fetchCancelFns:set(p1, function(p3)
 		-- upvalues: PromiseModule (upval), NewResult (ref)
-		PromiseModule.delay(0):andThen(function() --[[ Line: 1433 ]]
+		PromiseModule.delay(0):andThen(function()
 			-- upvalues: NewResult (upval), p3 (copy)
 			return NewResult:cancel(p3)
 		end)
 	end)
-	NewResult = Concast.new((function() --[[ Line: 1441 ]]
+	NewResult = Concast.new((function()
 		-- upvalues: self (copy), AssignResult (copy), fromVariables (copy)
 		return if self:transform(AssignResult.query).hasClientExports then self.localState:addExportedVariables(AssignResult.query, AssignResult.variables, AssignResult.context):andThen(fromVariables) else fromVariables(AssignResult.variables)
 	end)())
-	NewResult:cleanup(function() --[[ Line: 1458 ]]
+	NewResult:cleanup(function()
 		-- upvalues: self (copy), p1 (copy), ApplyNextFetchPolicyFunction (upval), p2 (copy)
 		self.fetchCancelFns:delete(p1)
 		ApplyNextFetchPolicyFunction(p2)
@@ -918,7 +918,7 @@ function Module:fetchQueryObservable(p1, p2, NetworkStatus1) --[[ Line: 1368 ]]
 	return NewResult
 end
 
-function Module:refetchQueries(p1) --[[ Line: 1466 ]]
+function Module:refetchQueries(p1)
 	-- upvalues: Boolean (copy), MakeUniqueIdFunction (copy), Map (copy), InstanceofFunction (copy), QueryInfo (copy)
 	local UpdateCache = p1.updateCache
 	local Include = p1.include
@@ -935,7 +935,7 @@ function Module:refetchQueries(p1) --[[ Line: 1466 ]]
 	local NewMap = Map.new(nil)
 	
 	if Boolean.toJSBoolean(Include) then
-		self:getObservableQueries(Include):forEach(function(Oq, p2) --[[ Line: 1490 ]]
+		self:getObservableQueries(Include):forEach(function(Oq, p2)
 			-- upvalues: NewMap (copy), self (copy)
 			NewMap:set(p2, { oq = Oq, lastDiff = self:getQuery(p2):getDiff() })
 		end)
@@ -947,7 +947,7 @@ function Module:refetchQueries(p1) --[[ Line: 1466 ]]
 			update = UpdateCache,
 			optimistic = if Optimistic and Boolean.toJSBoolean(RemoveOptimistic) then RemoveOptimistic else false,
 			removeOptimistic = RemoveOptimistic,
-			onWatchUpdated = function(_, p2, Diff, LastDiff): boolean? --[[ Line: 1545 ]]
+			onWatchUpdated = function(_, p2, Diff, LastDiff): boolean?
 				-- upvalues: InstanceofFunction (upval), QueryInfo (upval), Boolean (upval), OnQueryUpdatedFunction (copy), NewMap (copy), p1 (copy), NewMap1 (copy)
 				local ObservableQuery = if InstanceofFunction(p2.watcher, QueryInfo) then p2.watcher.observableQuery else InstanceofFunction(p2.watcher, QueryInfo)
 				
@@ -972,7 +972,7 @@ function Module:refetchQueries(p1) --[[ Line: 1466 ]]
 		})
 	end
 	if Boolean.toJSBoolean(NewMap.size) then
-		NewMap:forEach(function(p2, Text: string) --[[ Line: 1593 ]]
+		NewMap:forEach(function(p2, Text: string)
 			-- upvalues: OnQueryUpdatedFunction (copy), p1 (copy), NewMap1 (copy), self (copy)
 			local Oq = p2.oq
 			local LastDiff = p2.lastDiff
@@ -1006,7 +1006,7 @@ function Module:refetchQueries(p1) --[[ Line: 1466 ]]
 	return NewMap1
 end
 
-function Module.fetchQueryByPolicy(p1, Query, AssignResult, NetworkStatus1) --[[ Line: 1653 ]]
+function Module.fetchQueryByPolicy(p1, Query, AssignResult, NetworkStatus1)
 	-- upvalues: Boolean (copy), NetworkStatus (copy), IsNonEmptyArrayFunction (copy), EqualModule (copy), InvariantFunction (copy), Array (copy), Observable (copy), Object (copy), IsNetworkRequestInFlightFunction (copy), CacheWriteBehavior (copy)
 	local Query1 = AssignResult.query
 	local Variables = AssignResult.variables
@@ -1023,12 +1023,12 @@ function Module.fetchQueryByPolicy(p1, Query, AssignResult, NetworkStatus1) --[[
 		networkStatus = NetworkStatus1
 	})
 	
-	local function readCache() --[[ Line: 1679 ]]
+	local function readCache()
 		-- upvalues: Query (copy), Variables (copy)
 		return Query:getDiff(Variables)
 	end
 	
-	local function resultsFromCache(Diff, MarkReadyResult) --[[ Line: 1683 ]]
+	local function resultsFromCache(Diff, MarkReadyResult)
 		-- upvalues: Boolean (upval), Query (copy), NetworkStatus (upval), IsNonEmptyArrayFunction (upval), EqualModule (upval), ReturnPartialData (copy), InvariantFunction (upval), Array (upval), Observable (upval), Object (upval), IsNetworkRequestInFlightFunction (upval), p1 (copy), Query1 (copy), Context (copy), Variables (copy)
 		if MarkReadyResult == nil then
 			MarkReadyResult = Boolean.toJSBoolean(Query.networkStatus) and Query.networkStatus or NetworkStatus.loading
@@ -1036,12 +1036,12 @@ function Module.fetchQueryByPolicy(p1, Query, AssignResult, NetworkStatus1) --[[
 		local Result = Diff.result
 		
 		if _G.__DEV__ and Diff.missing ~= nil and IsNonEmptyArrayFunction(Diff.missing) and not EqualModule(Result, {}) and not Boolean.toJSBoolean(ReturnPartialData) then
-			InvariantFunction.debug(("Missing cache result fields: %s"):format(Array.join(Array.map(Diff.missing, function(p2) --[[ Line: 1701 ]]
+			InvariantFunction.debug(("Missing cache result fields: %s"):format(Array.join(Array.map(Diff.missing, function(p2)
 				-- upvalues: Array (upval)
 				return Array.join(p2.path, ".")
 			end), ", ")), Diff.missing)
 		end
-		local function fromData(Data) --[[ Line: 1710 ]]
+		local function fromData(Data)
 			-- upvalues: Observable (upval), Object (upval), IsNetworkRequestInFlightFunction (upval), MarkReadyResult (ref), Boolean (upval), Diff (copy)
 			return Observable.of((Object.assign({}, {
 				data = Data,
@@ -1056,7 +1056,7 @@ function Module.fetchQueryByPolicy(p1, Query, AssignResult, NetworkStatus1) --[[
 			remoteResult = { data = Result },
 			context = Context,
 			variables = Variables
-		}):andThen(function(Result) --[[ Line: 1737 ]]
+		}):andThen(function(Result)
 			-- upvalues: fromData (copy), Boolean (upval)
 			return fromData(Boolean.toJSBoolean(Result.data) and Result.data or nil)
 		end) else fromData(Result)
@@ -1065,7 +1065,7 @@ function Module.fetchQueryByPolicy(p1, Query, AssignResult, NetworkStatus1) --[[
 	local FORBID = nil
 	FORBID = if FetchPolicy == "no-cache" then CacheWriteBehavior.FORBID elseif NetworkStatus1 == NetworkStatus.refetch and RefetchWritePolicy ~= "merge" then CacheWriteBehavior.OVERWRITE else CacheWriteBehavior.MERGE
 	
-	local function resultsFromLink() --[[ Line: 1758 ]]
+	local function resultsFromLink()
 		-- upvalues: p1 (copy), Query (copy), FORBID (ref), Variables (copy), Context (copy), FetchPolicy (copy), ErrorPolicy (copy)
 		return p1:getResultsFromLink(Query, FORBID, {
 			variables = Variables,
@@ -1102,7 +1102,7 @@ function Module.fetchQueryByPolicy(p1, Query, AssignResult, NetworkStatus1) --[[
 	end
 end
 
-function Module:getQuery(LegacyOneTimeQuery) --[[ Line: 1834 ]]
+function Module:getQuery(LegacyOneTimeQuery)
 	-- upvalues: Boolean (copy), QueryInfo (copy)
 	if Boolean.toJSBoolean(LegacyOneTimeQuery) and not self.queries:has(LegacyOneTimeQuery) then
 		self.queries:set(LegacyOneTimeQuery, QueryInfo.new(self.cache))
@@ -1110,7 +1110,7 @@ function Module:getQuery(LegacyOneTimeQuery) --[[ Line: 1834 ]]
 	return self.queries:get(LegacyOneTimeQuery)
 end
 
-function Module:prepareContext(AssignResult) --[[ Line: 1841 ]]
+function Module:prepareContext(AssignResult)
 	-- upvalues: Object (copy)
 	if AssignResult == nil then
 		AssignResult = {}

@@ -10,7 +10,7 @@ local _ = require(Parent.App.Style.Fonts)
 local _ = require(Parent.App.Style.StyleTypes)
 local SetDefaultModule = require(Parent.Utility.setDefault)
 
-return function(p1) --[[ Line: 47 | Named "TileContentPanel" ]]
+return function(p1)
 	-- upvalues: UseStyleModule (copy), UseTextSizeOffsetModule (copy), SetDefaultModule (copy), ReactModule (copy), FoundationFontFaceMigration (copy), NormalizeFontFaceFunction (copy)
 	local UseStyleModuleResult = UseStyleModule()
 	local Settings = UseStyleModuleResult.Settings

@@ -3,7 +3,7 @@ local ConstantsModule = require(Parent.Constants)
 local _ = require(Parent.util.Types)
 local GetEditableMeshFromContextModule = require(Parent.util.getEditableMeshFromContext)
 
-local function getContent(Object, INNERCAGE) --[[ Line: 12 ]]
+local function getContent(Object, INNERCAGE)
 	-- upvalues: ConstantsModule (copy)
 	if INNERCAGE == ConstantsModule.MESH_CONTENT_TYPE.RENDER_MESH then
 		assert(Object:IsA("MeshPart"), "Only MESH_TYPE.RENDER_MESH is only supported for MeshPart")
@@ -24,7 +24,7 @@ local function getContent(Object, INNERCAGE) --[[ Line: 12 ]]
 	end
 end
 
-return function(Object, p1, p2) --[[ Line: 27 | Named "getMeshInfo" ]]
+return function(Object, p1, p2)
 	-- upvalues: getContent (copy), ConstantsModule (copy), GetEditableMeshFromContextModule (copy)
 	local Content = getContent(Object, p1)
 	local FullName = Object:GetFullName()

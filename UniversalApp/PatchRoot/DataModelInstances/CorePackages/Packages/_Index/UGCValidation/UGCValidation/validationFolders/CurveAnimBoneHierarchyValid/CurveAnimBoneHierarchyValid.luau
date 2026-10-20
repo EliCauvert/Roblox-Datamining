@@ -7,7 +7,7 @@ local CurveAnimBoneHierarchyUtilsModule = require(Parent.util.CurveAnimBoneHiera
 local GetFFlagUGCValidateRestrictNumFaceControlsModule = require(Parent.flags.getFFlagUGCValidateRestrictNumFaceControls)
 local GetFIntUGCValidateMaxTotalFaceControlsModule = require(Parent.flags.getFIntUGCValidateMaxTotalFaceControls)
 
-local function buildAcceptableForFolder(Object, p1) --[[ Line: 26 ]]
+local function buildAcceptableForFolder(Object, p1)
 	-- upvalues: CurveAnimBoneHierarchyUtilsModule (copy), CurveAnimationHierarchyUtilsModule (copy)
 	if CurveAnimBoneHierarchyUtilsModule.isBoneFolderName(Object.Name) then
 		local List = {}
@@ -59,7 +59,7 @@ local function buildAcceptableForFolder(Object, p1) --[[ Line: 26 ]]
 	end
 end
 
-local function getFirstUnacceptableChildDetail(Object, List): string? --[[ Line: 85 ]]
+local function getFirstUnacceptableChildDetail(Object, List): string?
 	if not Object then
 		return nil
 	end
@@ -81,7 +81,7 @@ local function getFirstUnacceptableChildDetail(Object, List): string? --[[ Line:
 	return nil
 end
 
-local function validateFolderStructure(Object, p2, p3) --[[ Line: 107 ]]
+local function validateFolderStructure(Object, p2, p3)
 	-- upvalues: buildAcceptableForFolder (copy), getFirstUnacceptableChildDetail (copy), CurveAnimationHierarchyUtilsModule (copy), GetFFlagUGCValidateRestrictNumFaceControlsModule (copy), GetFIntUGCValidateMaxTotalFaceControlsModule (copy)
 	local FirstUnacceptableChildDetail = getFirstUnacceptableChildDetail(Object, (buildAcceptableForFolder(Object, p3)))
 	
@@ -115,7 +115,7 @@ local function validateFolderStructure(Object, p2, p3) --[[ Line: 107 ]]
 	return if CurveAnimationHierarchyUtilsModule.containsGrandChildren(Position) then `'{p4}/Position' contains unexpected grandchildren` elseif CurveAnimationHierarchyUtilsModule.containsGrandChildren(Rotation) then `'{p4}/Rotation' contains unexpected grandchildren` elseif CurveAnimationHierarchyUtilsModule.containsGrandChildren(FaceControlsName) then `'{p4}/FaceControls' contains unexpected grandchildren` else nil
 end
 
-local function validateHierarchyTree(Folder, Name, Name1, p4) --[[ Line: 158 ]]
+local function validateHierarchyTree(Folder, Name, Name1, p4)
 	-- upvalues: validateFolderStructure (copy), ErrorSourceStringsModule (copy), CurveAnimationHierarchyUtilsModule (copy), CurveAnimBoneHierarchyUtilsModule (copy), validateHierarchyTree (copy)
 	local ValidateFolderStructureResult = validateFolderStructure(Folder, Name, Name1)
 	
@@ -145,7 +145,7 @@ return {
 	prereqTests = {
 		ValidationEnumsModule.ValidationModule.CurveAnimDataAvailable
 	},
-	run = function(p5, p6) --[[ Line: 183 ]]
+	run = function(p5, p6)
 		-- upvalues: CurveAnimationHierarchyUtilsModule (copy), validateHierarchyTree (copy)
 		for _, curveAnimation in p6.curveAnimations do
 			local BodyPartFolderRoots = {}

@@ -5,7 +5,7 @@ local ComposeStyleVariantModule = require(Foundation.Utility.composeStyleVariant
 local _ = require(Foundation.Providers.Style.Tokens)
 local VariantsContextModule = require(Foundation.Providers.Style.VariantsContext)
 
-local function variantsFactory(p1) --[[ Line: 27 ]]
+local function variantsFactory(p1)
 	-- upvalues: InputSizeModule (copy)
 	local Ceiled = math.ceil(p1.Stroke.Standard)
 	
@@ -30,7 +30,7 @@ local function variantsFactory(p1) --[[ Line: 27 ]]
 	}
 end
 
-return function(p1, p2, p3) --[[ Line: 52 ]]
+return function(p1, p2, p3)
 	-- upvalues: VariantsContextModule (copy), variantsFactory (copy), ComposeStyleVariantModule (copy)
 	local InternalInput = VariantsContextModule.useVariants("InternalInput", variantsFactory, p1)
 	

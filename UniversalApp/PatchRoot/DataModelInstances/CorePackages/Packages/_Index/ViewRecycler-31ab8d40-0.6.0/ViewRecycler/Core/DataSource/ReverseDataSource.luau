@@ -3,7 +3,7 @@ local DataSourceChangeTypeModule = require(ViewRecycler.Core.Enums.DataSourceCha
 local _ = require(ViewRecycler.Core.Types)
 local TranslatedDataSourceModule = require(script.Parent.TranslatedDataSource)
 
-local function _(List) --[[ Line: 17 | Named "reversedKeys" ]]
+local function _(List)
 	local Buffer = table.create(#List)
 	
 	for i, value in List do
@@ -12,17 +12,17 @@ local function _(List) --[[ Line: 17 | Named "reversedKeys" ]]
 	return Buffer
 end
 
-return function(p1) --[[ Line: 25 | Named "createReverseDataSource" ]]
+return function(p1)
 	-- upvalues: TranslatedDataSourceModule (copy), DataSourceChangeTypeModule (copy)
-	return TranslatedDataSourceModule(p1.getItemCount, function(p2) --[[ Line: 26 ]]
+	return TranslatedDataSourceModule(p1.getItemCount, function(p2)
 		-- upvalues: p1 (copy)
 		return p1.getItem(p1.getItemCount() - p2 + 1)
-	end, function(p2) --[[ Line: 28 ]]
+	end, function(p2)
 		-- upvalues: p1 (copy)
 		return p1.getItemKey(p1.getItemCount() - p2 + 1)
-	end, function(Callback) --[[ Line: 30 ]]
+	end, function(Callback)
 		-- upvalues: p1 (copy), DataSourceChangeTypeModule (upval)
-		return p1.subscribe(function(p2) --[[ Line: 31 ]]
+		return p1.subscribe(function(p2)
 			-- upvalues: DataSourceChangeTypeModule (upval), Callback (copy)
 			local PreviousItemCount = p2.previousItemCount
 			local List = {}

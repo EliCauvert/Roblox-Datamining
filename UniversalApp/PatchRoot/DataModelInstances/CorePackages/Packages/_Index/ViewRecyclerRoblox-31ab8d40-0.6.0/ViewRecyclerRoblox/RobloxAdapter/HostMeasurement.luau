@@ -4,16 +4,16 @@ local MeasurementBatcherModule = require(ViewRecyclerRoblox.RobloxAdapter.Measur
 local MeasurerModule = require(ViewRecyclerRoblox.RobloxAdapter.Measurer)
 local RunService = game:GetService("RunService")
 
-local function noDependencies() --[[ Line: 60 ]]
+local function noDependencies()
 	return {}
 end
 
-local function noSubscription() --[[ Line: 64 ]]
-	return function() --[[ Line: 65 ]] end
+local function noSubscription()
+	return function() end
 end
 
 return {
-	new = function(OnItemMeasurements) --[[ Line: 70 ]]
+	new = function(OnItemMeasurements)
 		-- upvalues: MeasurementBatcherModule (copy), RunService (copy), MeasurerModule (copy), noDependencies (copy), noSubscription (copy)
 		local Axis = OnItemMeasurements.axis
 		local Tbl = {}
@@ -24,7 +24,7 @@ return {
 		local Count1 = 0
 		local NewMeasurementBatcher = MeasurementBatcherModule.new(OnItemMeasurements.onItemMeasurements)
 		
-		local function measureRounds() --[[ Line: 82 ]]
+		local function measureRounds()
 			-- upvalues: Flag (ref), OnItemMeasurements (copy), Flag1 (ref), Tbl (copy), Count1 (ref), NewMeasurementBatcher (copy)
 			local Flag2 = nil
 			for _ = 1, 4 do
@@ -48,7 +48,7 @@ return {
 			end
 		end
 		
-		local function measureBeforePaint() --[[ Line: 112 ]]
+		local function measureBeforePaint()
 			-- upvalues: measureRounds (copy), Flag (ref), Tbl (copy), Flag1 (ref)
 			measureRounds()
 			
@@ -63,7 +63,7 @@ return {
 			end
 		end
 		
-		local function _() --[[ Line: 128 | Named "syncConnection" ]]
+		local function _()
 			-- upvalues: Flag (ref), Count (ref), PreRenderConnection (ref), Flag1 (ref), RunService (upval), measureBeforePaint (copy)
 			local IsCountAbove: boolean = not Flag and Count > 0
 			
@@ -79,7 +79,7 @@ return {
 			end
 		end
 		
-		local _ = function(Key) --[[ Line: 139 | Named "stop" ]]
+		local _ = function(Key)
 			-- upvalues: Tbl (copy), Count (ref), Flag (ref), PreRenderConnection (ref), Flag1 (ref), RunService (upval), measureBeforePaint (copy)
 			local Entry = Tbl[Key]
 			
@@ -103,7 +103,7 @@ return {
 		end
 		
 		return {
-			measure = function(ItemView, Host, State, Dependencies) --[[ Line: 149 ]]
+			measure = function(ItemView, Host, State, Dependencies)
 				-- upvalues: Flag (ref), Tbl (copy), Count (ref), PreRenderConnection (ref), Flag1 (ref), RunService (upval), measureBeforePaint (copy), MeasurerModule (upval), Axis (ref), noDependencies (upval), noSubscription (upval), NewMeasurementBatcher (copy)
 				if Flag then return end
 				local Entry = Tbl[ItemView]
@@ -138,17 +138,17 @@ return {
 						measurer = MeasurerModule.attach({
 							instance = Host,
 							axis = Axis,
-							getState = function() --[[ Line: 185 ]]
+							getState = function()
 								-- upvalues: Tbl (upval), ItemView (copy), v1 (ref)
 								return if Tbl[ItemView] == v1 then v1.state else nil
 							end,
 							getMeasurementDependencies = if Dependencies == nil then noDependencies else Dependencies.get,
 							subscribeMeasurementDependencies = if Dependencies == nil then noSubscription else Dependencies.subscribe,
-							isRendered = function(): boolean --[[ Line: 192 ]]
+							isRendered = function(): boolean
 								-- upvalues: v1 (ref)
 								return v1.state.assignment == v1.renderedAssignment
 							end,
-							onItemMeasured = function(State, Length) --[[ Line: 195 ]]
+							onItemMeasured = function(State, Length)
 								-- upvalues: NewMeasurementBatcher (upval), ItemView (copy)
 								NewMeasurementBatcher.add({ itemView = ItemView, state = State, length = Length })
 							end
@@ -174,7 +174,7 @@ return {
 					Entry.measurer.scheduleSettle()
 				end
 			end,
-			setAxis = function(Value) --[[ Line: 213 ]]
+			setAxis = function(Value)
 				-- upvalues: Axis (ref), Tbl (copy), Count (ref), Flag (ref), PreRenderConnection (ref), Flag1 (ref), RunService (upval), measureBeforePaint (copy)
 				if Value == Axis then return end
 				Axis = Value
@@ -202,19 +202,19 @@ return {
 					end
 				end
 			end,
-			cancelPending = function() --[[ Line: 226 ]]
+			cancelPending = function()
 				-- upvalues: NewMeasurementBatcher (copy)
 				NewMeasurementBatcher.cancelPending()
 			end,
-			isPassConnected = function(): boolean --[[ Line: 229 ]]
+			isPassConnected = function(): boolean
 				-- upvalues: PreRenderConnection (ref)
 				return PreRenderConnection ~= nil
 			end,
-			getPassReadCount = function() --[[ Line: 232 ]]
+			getPassReadCount = function()
 				-- upvalues: Count1 (ref)
 				return Count1
 			end,
-			destroy = function() --[[ Line: 235 ]]
+			destroy = function()
 				-- upvalues: Flag (ref), NewMeasurementBatcher (copy), Tbl (copy), Count (ref), PreRenderConnection (ref), Flag1 (ref), RunService (upval), measureBeforePaint (copy)
 				if Flag then return end
 				Flag = true

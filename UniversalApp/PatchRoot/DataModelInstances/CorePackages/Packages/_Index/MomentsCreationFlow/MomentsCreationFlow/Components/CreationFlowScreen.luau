@@ -60,7 +60,7 @@ local config = {
 	}
 }
 
-return function(p1) --[[ Line: 86 ]]
+return function(p1)
 	-- upvalues: UseDispatchFunction (copy), UseDeviceInsetsFunction (copy), UseTokensFunction (copy), UseFormFactorFunction (copy), UseToggleStateFunction (copy), UseAutoDismissStateModule (copy), ReactModule (copy), CreationFlowContextModule (copy), UseCallbackFunction (copy), UseRefFunction (copy), UseSelectorFunction (copy), ConstantsModule (copy), UseMemoFunction (copy), UseUnifiedPlaybackFunction (copy), GetContentFromCaptureModule (copy), EventNamesModule (copy), CreationFlowStateUpdatedModule (copy), CreationFlowStateModule (copy), DialogTypeModule (copy), MakeMomentMetadataModule (copy), MakeRegistrationInfoModule (copy), ClearEditsModule (copy), TrimEditUpdatedModule (copy), MusicEditUpdatedModule (copy), TextOverlayEditsUpdatedModule (copy), config (copy), SelectedCaptureUpdatedModule (copy), View (copy), FoundationModule (copy), CreationFlowLocalizationModule (copy), ExitConfirmationDialogModule (copy), TextFilteredDialogModule (copy), FormFactor (copy), Icon (copy), MusicChipModule (copy), PlaybackControlsModule (copy), TextOverlayEditorModule (copy), CaptureViewModule (copy), TextOverlayDisplay (copy), EditCTABarModule (copy), GalleryViewModule (copy), PreviewViewModule (copy), TrimmingViewModule (copy), TextOverlayViewModule (copy), DescriptionViewModule (copy), MusicOverlayModule (copy)
 	local UseDispatchResult = UseDispatchFunction()
 	local UseDeviceInsetsResult = UseDeviceInsetsFunction()
@@ -72,44 +72,44 @@ return function(p1) --[[ Line: 86 ]]
 	local UseStateResult, UseStateResult2 = ReactModule.useState(Vector2.new(0, 0))
 	local UseStateResult1, UseStateResult2_1 = ReactModule.useState(Vector2.new(0, 0))
 	local UseStateResult3, UseStateResult2_2 = ReactModule.useState({ modalType = nil, modalProps = nil })
-	local UseCallbackResult = UseCallbackFunction(function(Frame) --[[ Line: 99 ]]
+	local UseCallbackResult = UseCallbackFunction(function(Frame)
 		-- upvalues: UseStateResult2_1 (copy)
 		UseStateResult2_1(Frame.AbsoluteSize)
 	end, {})
 	local Captures = UseContextResult.captures
 	local UseRefResult = UseRefFunction(0)
-	local UseSelectorResult = UseSelectorFunction(function(p2) --[[ Line: 107 ]]
+	local UseSelectorResult = UseSelectorFunction(function(p2)
 		-- upvalues: ConstantsModule (upval)
 		return p2[ConstantsModule.RoduxKey].CreationFlow.currentState
 	end)
-	local UseSelectorResult1 = UseSelectorFunction(function(p2) --[[ Line: 111 ]]
+	local UseSelectorResult1 = UseSelectorFunction(function(p2)
 		-- upvalues: ConstantsModule (upval)
 		return p2[ConstantsModule.RoduxKey].CreationFlow.capture
 	end)
-	local UseSelectorResult2 = UseSelectorFunction(function(p2) --[[ Line: 115 ]]
+	local UseSelectorResult2 = UseSelectorFunction(function(p2)
 		-- upvalues: ConstantsModule (upval)
 		return p2[ConstantsModule.RoduxKey].CreationFlow.textOverlayEdits
 	end)
-	local UseSelectorResult3 = UseSelectorFunction(function(p2) --[[ Line: 119 ]]
+	local UseSelectorResult3 = UseSelectorFunction(function(p2)
 		-- upvalues: ConstantsModule (upval)
 		return p2[ConstantsModule.RoduxKey].CreationFlow.trimEdit
 	end)
-	local UseSelectorResult4 = UseSelectorFunction(function(p2) --[[ Line: 123 ]]
+	local UseSelectorResult4 = UseSelectorFunction(function(p2)
 		-- upvalues: ConstantsModule (upval)
 		return p2[ConstantsModule.RoduxKey].CreationFlow.musicEdit
 	end)
-	local UseSelectorResult5 = UseSelectorFunction(function(p2) --[[ Line: 127 ]]
+	local UseSelectorResult5 = UseSelectorFunction(function(p2)
 		-- upvalues: ConstantsModule (upval)
 		return p2[ConstantsModule.RoduxKey].CreationFlow.description
 	end)
 	local UseStateResult4, UseStateResult2_3 = ReactModule.useState(nil)
 	local UseStateResult5, UseStateResult2_4 = ReactModule.useState(nil)
 	local UseStateResult6, UseStateResult2_5 = ReactModule.useState(nil)
-	local UseMemoResult = UseMemoFunction(function() --[[ Line: 136 ]]
+	local UseMemoResult = UseMemoFunction(function()
 		-- upvalues: UseStateResult6 (copy), UseSelectorResult4 (copy)
 		return UseStateResult6 or UseSelectorResult4
 	end, { UseStateResult6, UseSelectorResult4 })
-	local UseMemoResult1 = UseMemoFunction(function() --[[ Line: 140 ]]
+	local UseMemoResult1 = UseMemoFunction(function()
 		-- upvalues: UseStateResult5 (copy), UseSelectorResult3 (copy)
 		return UseStateResult5 or UseSelectorResult3
 	end, { UseStateResult5, UseSelectorResult3 })
@@ -120,21 +120,21 @@ return function(p1) --[[ Line: 86 ]]
 		content = if UseSelectorResult1 then GetContentFromCaptureModule(UseSelectorResult1) else nil,
 		captureType = if UseSelectorResult1 then UseSelectorResult1.CaptureType else nil
 	})
-	local UseCallbackResult1 = UseCallbackFunction(function() --[[ Line: 155 ]]
+	local UseCallbackResult1 = UseCallbackFunction(function()
 		-- upvalues: UseContextResult (copy), EventNamesModule (upval), UseSelectorResult (copy), UseDispatchResult (copy), CreationFlowStateUpdatedModule (upval), CreationFlowStateModule (upval), UseAutoDismissStateModuleResult2 (copy)
 		UseContextResult.fireEvent(EventNamesModule.EditingFlowNextButtonPressed, { editFlowState = UseSelectorResult })
 		UseDispatchResult(CreationFlowStateUpdatedModule(CreationFlowStateModule.Preview))
 		UseAutoDismissStateModuleResult2()
 		UseContextResult.fireEvent(EventNamesModule.MomentsEditingFlowContinueToEditButtonPressed)
 	end, { UseAutoDismissStateModuleResult2, UseSelectorResult })
-	local UseCallbackResult2 = UseCallbackFunction(function() --[[ Line: 164 ]]
+	local UseCallbackResult2 = UseCallbackFunction(function()
 		-- upvalues: UseContextResult (copy), EventNamesModule (upval), UseSelectorResult (copy), UseDispatchResult (copy), CreationFlowStateUpdatedModule (upval), CreationFlowStateModule (upval), UseToggleStateResult (copy)
 		UseContextResult.fireEvent(EventNamesModule.EditingFlowNextButtonPressed, { editFlowState = UseSelectorResult })
 		UseDispatchResult(CreationFlowStateUpdatedModule(CreationFlowStateModule.Description))
 		UseToggleStateResult.disable()
 		UseContextResult.fireEvent(EventNamesModule.MomentsEditingFlowContinueToDescriptionButtonPressed)
 	end, { UseSelectorResult })
-	local UseCallbackResult3 = UseCallbackFunction(function(p2) --[[ Line: 174 ]]
+	local UseCallbackResult3 = UseCallbackFunction(function(p2)
 		-- upvalues: UseContextResult (copy), UseStateResult2_2 (copy), DialogTypeModule (upval)
 		local IsTextFiltered = UseContextResult.isTextFiltered(p2)
 		
@@ -142,7 +142,7 @@ return function(p1) --[[ Line: 86 ]]
 			UseStateResult2_2({
 				modalType = DialogTypeModule.TextFiltered,
 				modalProps = {
-					onConfirm = function() --[[ Line: 180 ]]
+					onConfirm = function()
 						-- upvalues: UseStateResult2_2 (upval)
 						UseStateResult2_2(nil)
 					end
@@ -151,7 +151,7 @@ return function(p1) --[[ Line: 86 ]]
 		end
 		return IsTextFiltered
 	end, {})
-	local UseCallbackResult4 = UseCallbackFunction(function() --[[ Line: 189 ]]
+	local UseCallbackResult4 = UseCallbackFunction(function()
 		-- upvalues: UseCallbackResult3 (copy), UseSelectorResult5 (copy), UseRefResult (copy), UseSelectorResult3 (copy), UseSelectorResult4 (copy), UseSelectorResult2 (copy), MakeMomentMetadataModule (upval), UseSelectorResult1 (copy), MakeRegistrationInfoModule (upval), UseContextResult (copy), p1 (copy), UseDispatchResult (copy), ClearEditsModule (upval), CreationFlowStateModule (upval), EventNamesModule (upval)
 		if UseCallbackResult3(UseSelectorResult5) then return end
 		local ClockTime = os.clock()
@@ -176,22 +176,22 @@ return function(p1) --[[ Line: 86 ]]
 		UseSelectorResult1, UseSelectorResult5, UseSelectorResult4, UseContextResult,
 		UseSelectorResult2, UseSelectorResult3, p1.excludeGallery
 	})
-	local UseCallbackResult5 = UseCallbackFunction(function() --[[ Line: 227 ]]
+	local UseCallbackResult5 = UseCallbackFunction(function()
 		-- upvalues: UseContextResult (copy), EventNamesModule (upval), UseSelectorResult (copy), UseDispatchResult (copy), CreationFlowStateUpdatedModule (upval), CreationFlowStateModule (upval)
 		UseContextResult.fireEvent(EventNamesModule.EditingFlowReturnButtonPressed, { editFlowState = UseSelectorResult })
 		UseDispatchResult(CreationFlowStateUpdatedModule(CreationFlowStateModule.Preview))
 	end, { UseSelectorResult })
-	local UseCallbackResult6 = UseCallbackFunction(function() --[[ Line: 235 ]]
+	local UseCallbackResult6 = UseCallbackFunction(function()
 		-- upvalues: UseContextResult (copy), EventNamesModule (upval), UseSelectorResult (copy), UseStateResult2_2 (copy), UseDispatchResult (copy), ClearEditsModule (upval), CreationFlowStateModule (upval), UseToggleStateResult (copy), DialogTypeModule (upval)
 		UseContextResult.fireEvent(EventNamesModule.EditingFlowReturnButtonPressed, { editFlowState = UseSelectorResult })
 		UseStateResult2_2({
 			modalType = DialogTypeModule.ExitCreationConfirmation,
 			modalProps = {
-				onCancel = function() --[[ Line: 249 ]]
+				onCancel = function()
 					-- upvalues: UseStateResult2_2 (upval)
 					UseStateResult2_2(nil)
 				end,
-				onConfirm = function() --[[ Line: 240 ]]
+				onConfirm = function()
 					-- upvalues: UseStateResult2_2 (upval), UseDispatchResult (upval), ClearEditsModule (upval), CreationFlowStateModule (upval), UseToggleStateResult (upval)
 					UseStateResult2_2(nil)
 					UseDispatchResult(ClearEditsModule(CreationFlowStateModule.Gallery))
@@ -200,47 +200,47 @@ return function(p1) --[[ Line: 86 ]]
 			}
 		})
 	end, { UseSelectorResult })
-	local UseCallbackResult7 = UseCallbackFunction(function() --[[ Line: 257 ]]
+	local UseCallbackResult7 = UseCallbackFunction(function()
 		-- upvalues: UseStateResult2_4 (copy), UseDispatchResult (copy), CreationFlowStateUpdatedModule (upval), CreationFlowStateModule (upval), UseContextResult (copy), EventNamesModule (upval)
 		UseStateResult2_4(nil)
 		UseDispatchResult(CreationFlowStateUpdatedModule(CreationFlowStateModule.Preview))
 		UseContextResult.fireEvent(EventNamesModule.EditingFlowTrimBackButtonPressed)
 	end, { UseContextResult })
-	local UseCallbackResult8 = UseCallbackFunction(function() --[[ Line: 263 ]]
+	local UseCallbackResult8 = UseCallbackFunction(function()
 		-- upvalues: UseDispatchResult (copy), TrimEditUpdatedModule (upval), UseStateResult5 (copy), UseStateResult2_4 (copy), CreationFlowStateUpdatedModule (upval), CreationFlowStateModule (upval), UseContextResult (copy), EventNamesModule (upval)
 		UseDispatchResult(TrimEditUpdatedModule(UseStateResult5))
 		UseStateResult2_4(nil)
 		UseDispatchResult(CreationFlowStateUpdatedModule(CreationFlowStateModule.Preview))
 		UseContextResult.fireEvent(EventNamesModule.EditingFlowTrimDoneButtonPressed)
 	end, { UseStateResult5, UseContextResult })
-	local UseCallbackResult9 = UseCallbackFunction(function(p2) --[[ Line: 270 ]]
+	local UseCallbackResult9 = UseCallbackFunction(function(p2)
 		-- upvalues: UseStateResult2_4 (copy)
 		UseStateResult2_4(p2)
 	end, {})
-	local UseCallbackResult10 = UseCallbackFunction(function() --[[ Line: 274 ]]
+	local UseCallbackResult10 = UseCallbackFunction(function()
 		-- upvalues: UseStateResult2_5 (copy), UseDispatchResult (copy), CreationFlowStateUpdatedModule (upval), CreationFlowStateModule (upval), UseContextResult (copy), EventNamesModule (upval)
 		UseStateResult2_5(nil)
 		UseDispatchResult(CreationFlowStateUpdatedModule(CreationFlowStateModule.Preview))
 		UseContextResult.fireEvent(EventNamesModule.EditingFlowMusicBackButtonPressed)
 	end, {})
-	local UseCallbackResult11 = UseCallbackFunction(function() --[[ Line: 280 ]]
+	local UseCallbackResult11 = UseCallbackFunction(function()
 		-- upvalues: UseDispatchResult (copy), MusicEditUpdatedModule (upval), UseStateResult6 (copy), UseStateResult2_5 (copy), CreationFlowStateUpdatedModule (upval), CreationFlowStateModule (upval), UseContextResult (copy), EventNamesModule (upval)
 		UseDispatchResult(MusicEditUpdatedModule(UseStateResult6))
 		UseStateResult2_5(nil)
 		UseDispatchResult(CreationFlowStateUpdatedModule(CreationFlowStateModule.Preview))
 		UseContextResult.fireEvent(EventNamesModule.EditingFlowMusicDoneButtonPressed)
 	end, { UseStateResult6 })
-	local UseCallbackResult12 = UseCallbackFunction(function(p2) --[[ Line: 287 ]]
+	local UseCallbackResult12 = UseCallbackFunction(function(p2)
 		-- upvalues: UseStateResult2_5 (copy)
 		UseStateResult2_5(p2)
 	end, {})
-	local UseCallbackResult13 = UseCallbackFunction(function() --[[ Line: 291 ]]
+	local UseCallbackResult13 = UseCallbackFunction(function()
 		-- upvalues: UseStateResult2_3 (copy), UseDispatchResult (copy), CreationFlowStateUpdatedModule (upval), CreationFlowStateModule (upval), UseContextResult (copy), EventNamesModule (upval)
 		UseStateResult2_3(nil)
 		UseDispatchResult(CreationFlowStateUpdatedModule(CreationFlowStateModule.Preview))
 		UseContextResult.fireEvent(EventNamesModule.EditingFlowTextOverlayBackButtonPressed)
 	end, { UseStateResult4, UseContextResult })
-	local UseCallbackResult14 = UseCallbackFunction(function() --[[ Line: 297 ]]
+	local UseCallbackResult14 = UseCallbackFunction(function()
 		-- upvalues: UseStateResult4 (copy), UseDispatchResult (copy), TextOverlayEditsUpdatedModule (upval), UseCallbackResult3 (copy), CreationFlowStateUpdatedModule (upval), CreationFlowStateModule (upval), UseContextResult (copy), EventNamesModule (upval), UseStateResult2_3 (copy)
 		local Text = UseStateResult4 and (UseStateResult4[1] and UseStateResult4[1].text)
 		
@@ -254,37 +254,37 @@ return function(p1) --[[ Line: 86 ]]
 		UseContextResult.fireEvent(EventNamesModule.EditingFlowTextOverlayDoneButtonPressed)
 		UseStateResult2_3(nil)
 	end, { UseStateResult4, UseContextResult, UseCallbackResult3 })
-	local UseCallbackResult15 = UseCallbackFunction(function(p2) --[[ Line: 312 ]]
+	local UseCallbackResult15 = UseCallbackFunction(function(p2)
 		-- upvalues: UseStateResult2_3 (copy)
 		UseStateResult2_3(p2)
 	end, {})
-	local UseCallbackResult16 = UseCallbackFunction(function(p2) --[[ Line: 316 ]]
+	local UseCallbackResult16 = UseCallbackFunction(function(p2)
 		-- upvalues: UseDispatchResult (copy), TextOverlayEditsUpdatedModule (upval)
 		UseDispatchResult(TextOverlayEditsUpdatedModule(p2))
 	end, {})
-	local UseCallbackResult17 = UseCallbackFunction(function() --[[ Line: 320 ]]
+	local UseCallbackResult17 = UseCallbackFunction(function()
 		-- upvalues: UseStateResult2_3 (copy), UseSelectorResult2 (copy), UseDispatchResult (copy), CreationFlowStateUpdatedModule (upval), CreationFlowStateModule (upval)
 		UseStateResult2_3(UseSelectorResult2)
 		UseDispatchResult(CreationFlowStateUpdatedModule(CreationFlowStateModule.TextOverlay))
 	end, { UseSelectorResult2 })
-	ReactModule.useEffect(function() --[[ Line: 325 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UseSelectorResult (copy), CreationFlowStateModule (upval), UseStateResult2_3 (copy), UseSelectorResult2 (copy), config (upval)
 		if UseSelectorResult == CreationFlowStateModule.TextOverlay then
 			UseStateResult2_3(UseSelectorResult2 or { config })
 		end
 	end, { UseSelectorResult2, UseSelectorResult })
-	local UseCallbackResult18 = UseCallbackFunction(function() --[[ Line: 331 ]]
+	local UseCallbackResult18 = UseCallbackFunction(function()
 		-- upvalues: UseDispatchResult (copy), CreationFlowStateUpdatedModule (upval), CreationFlowStateModule (upval), UseContextResult (copy), EventNamesModule (upval)
 		UseDispatchResult(CreationFlowStateUpdatedModule(CreationFlowStateModule.Music))
 		UseContextResult.fireEvent(EventNamesModule.EditingFlowMusicButtonPressed)
 	end, {})
-	local UseCallbackResult19 = UseCallbackFunction(function(p2) --[[ Line: 336 ]]
+	local UseCallbackResult19 = UseCallbackFunction(function(p2)
 		-- upvalues: UseDispatchResult (copy), SelectedCaptureUpdatedModule (upval), UseAutoDismissStateModuleResult2 (copy), UseContextResult (copy), EventNamesModule (upval)
 		UseDispatchResult(SelectedCaptureUpdatedModule(p2))
 		UseAutoDismissStateModuleResult2()
 		UseContextResult.fireEvent(EventNamesModule.EditingFlowGalleryItemSelected)
 	end, { UseAutoDismissStateModuleResult2, UseContextResult })
-	local UseResult = ReactModule.useCallback(function() --[[ Line: 342 ]]
+	local UseResult = ReactModule.useCallback(function()
 		-- upvalues: ReactModule (upval), View (upval), FoundationModule (upval), UseContextResult (copy), CreationFlowLocalizationModule (upval), UseTokensResult (copy)
 		return (ReactModule.createElement(View, {
 			Size = UDim2.fromScale(1, 1),
@@ -302,9 +302,9 @@ return function(p1) --[[ Line: 86 ]]
 			})
 		}))
 	end, {})
-	local UseCallbackResult20 = UseCallbackFunction(function() --[[ Line: 358 ]]
+	local UseCallbackResult20 = UseCallbackFunction(function()
 		-- upvalues: UseContextResult (copy), EventNamesModule (upval), UseStateResult2_2 (copy), p1 (copy), UseDispatchResult (copy), ClearEditsModule (upval), CreationFlowStateModule (upval), UseSelectorResult1 (copy), DialogTypeModule (upval)
-		local function onExitCreation() --[[ Line: 359 ]]
+		local function onExitCreation()
 			-- upvalues: UseContextResult (upval), EventNamesModule (upval), UseStateResult2_2 (upval), p1 (upval), UseDispatchResult (upval), ClearEditsModule (upval), CreationFlowStateModule (upval)
 			UseContextResult.fireEvent(EventNamesModule.MomentsEditingFlowExited)
 			UseStateResult2_2(nil)
@@ -321,7 +321,7 @@ return function(p1) --[[ Line: 86 ]]
 			UseStateResult2_2({
 				modalType = DialogTypeModule.ExitCreationConfirmation,
 				modalProps = {
-					onCancel = function() --[[ Line: 374 ]]
+					onCancel = function()
 						-- upvalues: UseStateResult2_2 (upval)
 						UseStateResult2_2(nil)
 					end,
@@ -334,16 +334,16 @@ return function(p1) --[[ Line: 86 ]]
 			onExitCreation()
 		end
 	end, { UseSelectorResult1, UseContextResult, p1.excludeGallery })
-	ReactModule.useEffect(function() --[[ Line: 385 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UseContextResult (copy)
 		UseContextResult.setScreenOrientation(Enum.ScreenOrientation.Portrait)
 		
-		return function() --[[ Line: 388 ]]
+		return function()
 			-- upvalues: UseContextResult (upval)
 			UseContextResult.setScreenOrientation(Enum.ScreenOrientation.Sensor)
 		end
 	end, {})
-	ReactModule.useEffect(function() --[[ Line: 393 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UseSelectorResult (copy), CreationFlowStateModule (upval), UseToggleStateResult (copy)
 		if UseSelectorResult == CreationFlowStateModule.Gallery or UseSelectorResult == CreationFlowStateModule.Music or UseSelectorResult == CreationFlowStateModule.Description then
 			UseToggleStateResult.disable()
@@ -502,7 +502,7 @@ return function(p1) --[[ Line: 86 ]]
 				}) else nil
 			})
 		}),
-		Modal = ReactModule.useCallback(function() --[[ Line: 403 ]]
+		Modal = ReactModule.useCallback(function()
 			-- upvalues: UseStateResult3 (copy), DialogTypeModule (upval), ReactModule (upval), ExitConfirmationDialogModule (upval), TextFilteredDialogModule (upval)
 			return if UseStateResult3 then if UseStateResult3.modalType == DialogTypeModule.ExitCreationConfirmation then ReactModule.createElement(ExitConfirmationDialogModule, UseStateResult3.modalProps) elseif UseStateResult3.modalType == DialogTypeModule.TextFiltered then ReactModule.createElement(TextFilteredDialogModule, UseStateResult3.modalProps) else nil else nil
 		end, { UseStateResult3 })()

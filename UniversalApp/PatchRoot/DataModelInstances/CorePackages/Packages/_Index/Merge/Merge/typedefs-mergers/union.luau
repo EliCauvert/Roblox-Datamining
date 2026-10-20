@@ -8,7 +8,7 @@ local MergeNamedTypeArrayFunction = require(script.Parent["merge-named-type-arra
 local _ = require(script.Parent["merge-typedefs_types"])
 
 return {
-	mergeUnion = function(p1, p2, p3) --[[ Line: 26 ]]
+	mergeUnion = function(p1, p2, p3)
 		-- upvalues: Boolean (copy), MergeDirectivesFunction (copy), Kind (copy), MergeNamedTypeArrayFunction (copy), Object (copy)
 		return if p2 then {
 			name = p1.name,

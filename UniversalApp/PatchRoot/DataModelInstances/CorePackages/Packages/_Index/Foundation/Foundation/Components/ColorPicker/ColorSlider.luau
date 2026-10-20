@@ -22,7 +22,7 @@ local ColorSequence1 = ColorSequence.new({
 	ColorSequenceKeypoint.new(1, Color3.new(1, 0, 0))
 })
 
-local function createAlphaGradient(p1): ColorSequence --[[ Line: 44 ]]
+local function createAlphaGradient(p1): ColorSequence
 	return ColorSequence.new({
 		ColorSequenceKeypoint.new(0, p1),
 		ColorSequenceKeypoint.new(1, p1)
@@ -34,7 +34,7 @@ local config = {
 	baseColor = ReactModule.createBinding(Color3.new(1, 1, 1))
 }
 
-return function(p1) --[[ Line: 56 | Named "ColorSlider" ]]
+return function(p1)
 	-- upvalues: WithDefaultsModule (copy), config (copy), UseTokensModule (copy), ColorSliderTypeModule (copy), ColorSequence1 (copy), createAlphaGradient (copy), ReactModule (copy), SliderModule (copy), InputSizeModule (copy), SliderVariantModule (copy), VisibilityModule (copy), KnobModule (copy), ViewModule (copy), WithCommonPropsModule (copy), ImageModule (copy)
 	local WithDefaultsModuleResult = WithDefaultsModule(p1, config)
 	local UseTokensModuleResult = UseTokensModule()
@@ -46,7 +46,7 @@ return function(p1) --[[ Line: 56 | Named "ColorSlider" ]]
 	local NumberSequence1: NumberSequence? = nil
 	
 	if SliderType == ColorSliderTypeModule.Hue then
-		MapResult = Value:map(function(Hue) --[[ Line: 71 ]]
+		MapResult = Value:map(function(Hue)
 			return { Transparency = 0, Color3 = Color3.fromHSV(Hue, 1, 1) }
 		end)
 	elseif SliderType == ColorSliderTypeModule.Alpha then
@@ -57,7 +57,7 @@ return function(p1) --[[ Line: 56 | Named "ColorSlider" ]]
 		MapResult = ReactModule.joinBindings({
 			baseColor = WithDefaultsModuleResult.baseColor,
 			value = Value
-		}):map(function(p2) --[[ Line: 82 ]]
+		}):map(function(p2)
 			return { Color3 = p2.baseColor, Transparency = 1 - p2.value }
 		end)
 	end

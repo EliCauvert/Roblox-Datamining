@@ -1,12 +1,12 @@
 ﻿local ViewRecyclerModule = require(script:FindFirstAncestor("ViewRecyclerRoblox").Parent.ViewRecycler)
 
 return {
-	create = function(p1) --[[ Line: 19 ]]
+	create = function(p1)
 		-- upvalues: ViewRecyclerModule (copy)
 		local ItemViewAdapter = p1.itemViewAdapter
 		local MaxPoolSize = p1.maxPoolSize
 		
-		local function _(p2) --[[ Line: 23 | Named "getInstance" ]]
+		local function _(p2)
 			-- upvalues: p1 (copy)
 			local _Instance = if p1.getInstance == nil then p2 else p1.getInstance(p2)
 			assert(typeof(_Instance) == "Instance" and _Instance:IsA("GuiObject"), "createRecyclingScope: ItemView host must be a GuiObject")
@@ -15,7 +15,7 @@ return {
 		end
 		
 		local RecyclingScope = ViewRecyclerModule.Adapter.createRecyclingScope({
-			onPoolChanged = if p1.diagnostics == nil then nil else function(p2) --[[ Line: 38 ]]
+			onPoolChanged = if p1.diagnostics == nil then nil else function(p2)
 				-- upvalues: p1 (copy), ViewRecyclerModule (upval)
 				p1.diagnostics({
 					kind = ViewRecyclerModule.Diagnostics.EventKind.PoolChanged,
@@ -27,7 +27,7 @@ return {
 				})
 			end,
 			adapter = {
-				create = function(p2) --[[ Line: 49 ]]
+				create = function(p2)
 					-- upvalues: ItemViewAdapter (copy), p1 (copy)
 					local NewItemViewAdapter = ItemViewAdapter.create(p2)
 					local NewItemViewAdapter1 = if p1.getInstance == nil then NewItemViewAdapter else p1.getInstance(NewItemViewAdapter)
@@ -35,7 +35,7 @@ return {
 					
 					return NewItemViewAdapter
 				end,
-				destroy = function(p2) --[[ Line: 54 ]]
+				destroy = function(p2)
 					-- upvalues: p1 (copy)
 					if p1.destroyItemView == nil then
 						local _Instance = if p1.getInstance == nil then p2 else p1.getInstance(p2)
@@ -49,14 +49,14 @@ return {
 				end,
 				onCreated = ItemViewAdapter.onCreated,
 				onEvicted = ItemViewAdapter.onEvicted,
-				batch = ItemViewAdapter.batch or function(Callback: () -> ()) --[[ Line: 32 ]]
+				batch = ItemViewAdapter.batch or function(Callback: () -> ())
 					Callback()
 				end
 			}
 		})
 		
 		return {
-			bind = function(Tbl) --[[ Line: 68 ]]
+			bind = function(Tbl)
 				-- upvalues: MaxPoolSize (copy), RecyclingScope (copy)
 				local Copy = table.clone(Tbl)
 				

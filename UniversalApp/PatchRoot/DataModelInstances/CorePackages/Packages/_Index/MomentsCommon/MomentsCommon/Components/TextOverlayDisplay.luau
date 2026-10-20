@@ -11,12 +11,12 @@ local GetFitSizeModule = require(MomentsCommon.Utils.getFitSize)
 local GetScaleModule = require(MomentsCommon.Utils.getScale)
 local _ = require(MomentsCommon.Types)
 
-return function(p1) --[[ Line: 33 | Named "TextOverlayDisplay" ]]
+return function(p1)
 	-- upvalues: ReactModule (copy), UseMemoFunction (copy), GetFitSizeModule (copy), GetCropSizeModule (copy), GetScaleModule (copy), UseCallbackFunction (copy), DashModule (copy), TextOverlayModule (copy), View (copy)
 	local UseRefResult = ReactModule.useRef(nil)
 	local UseRefResult1 = ReactModule.useRef(nil)
 	local TextOverlayEdit = p1.textOverlayEdits and p1.textOverlayEdits[1] or nil
-	local UseMemoResult, UseMemoResult2 = UseMemoFunction(function() --[[ Line: 39 ]]
+	local UseMemoResult, UseMemoResult2 = UseMemoFunction(function()
 		-- upvalues: p1 (copy), GetFitSizeModule (upval), GetCropSizeModule (upval), GetScaleModule (upval)
 		if not p1.itemResolution then
 			return UDim2.fromScale(1, 1), 1
@@ -31,7 +31,7 @@ return function(p1) --[[ Line: 33 | Named "TextOverlayDisplay" ]]
 			return CropSizeModule, ScaleModule
 		end
 	end, { p1.scaleType, p1.itemResolution, p1.itemSize })
-	local UseCallbackResult = UseCallbackFunction(function() --[[ Line: 55 ]]
+	local UseCallbackResult = UseCallbackFunction(function()
 		-- upvalues: UseRefResult1 (copy), p1 (copy), DashModule (upval), TextOverlayEdit (copy)
 		if UseRefResult1.current and p1.onTextOverlayDragEnd then
 			p1.onTextOverlayDragEnd({
@@ -41,7 +41,7 @@ return function(p1) --[[ Line: 33 | Named "TextOverlayDisplay" ]]
 			return
 		end
 	end, { p1.onTextOverlayDragEnd, TextOverlayEdit })
-	local UseCallbackResult1 = UseCallbackFunction(function(TextOverlayEdit) --[[ Line: 65 ]]
+	local UseCallbackResult1 = UseCallbackFunction(function(TextOverlayEdit)
 		-- upvalues: ReactModule (upval), TextOverlayModule (upval), UseMemoResult2 (copy), UseRefResult (copy), UseRefResult1 (copy), p1 (copy), UseCallbackResult (copy)
 		return ReactModule.createElement(TextOverlayModule, {
 			additionalScale = UseMemoResult2,

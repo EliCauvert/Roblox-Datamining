@@ -1,6 +1,6 @@
 ﻿local DeepEqualModule = require(script.Parent.Parent.luaUtils.deepEqual)
 
-return function(p1, p2) --[[ Line: 17 | Named "toEqual" ]]
+return function(p1, p2)
 	-- upvalues: DeepEqualModule (copy)
 	local DeepEqualModuleResult, DeepEqualModuleResult2 = DeepEqualModule(p1, p2)
 	

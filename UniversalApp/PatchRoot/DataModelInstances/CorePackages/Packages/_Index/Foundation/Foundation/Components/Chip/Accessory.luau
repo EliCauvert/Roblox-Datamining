@@ -18,7 +18,7 @@ local FlagsModule = require(Foundation.Utility.Flags)
 local UseAccessoryVariantsModule = require(script.Parent.useAccessoryVariants)
 local _ = require(Foundation.Enums.ChipSize)
 
-local function AvatarGroupWrapper(p1) --[[ Line: 68 ]]
+local function AvatarGroupWrapper(p1)
 	-- upvalues: UseBackgroundStyleFunction (copy), UseCumulativeBackgroundModule (copy), ReactModule (copy), AvatarGroupModule (copy)
 	local UseBackgroundStyleResult = UseBackgroundStyleFunction()
 	local Copy = table.clone(p1.config.props)
@@ -28,9 +28,9 @@ local function AvatarGroupWrapper(p1) --[[ Line: 68 ]]
 	return ReactModule.createElement(AvatarGroupModule, Copy)
 end
 
-return ReactModule.memo(function(p1) --[[ Line: 76 | Named "Accessory" ]]
+return ReactModule.memo(function(p1)
 	-- upvalues: UseTokensModule (copy), ReactModule (copy), UseAccessoryVariantsModule (copy), FlagsModule (copy), AvatarGroupWrapper (copy), IsBuilderOrMigratedIconFunction (copy), IconModule (copy), IsMigratedFunction (copy), Uiblox (copy), ImageModule (copy), ViewModule (copy)
-	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 78 ]]
+	local UseMemoResult = ReactModule.useMemo(function()
 		-- upvalues: p1 (copy)
 		return if type(p1.config) == "string" then { isCircular = false, iconName = p1.config } else p1.config
 	end, { p1.config })

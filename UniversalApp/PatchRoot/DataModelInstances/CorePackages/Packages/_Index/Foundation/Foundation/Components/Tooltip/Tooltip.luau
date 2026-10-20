@@ -21,11 +21,11 @@ local config = {
 	hasArrow = if FlagsModule.FoundationTooltipBeta then true else nil
 }
 
-local function AnchorWrapper(p1) --[[ Line: 52 ]]
+local function AnchorWrapper(p1)
 	-- upvalues: ReactModule (copy), PopoverContextModule (copy), LoggerModule (copy), PopoverModule (copy), WithCommonPropsModule (copy)
 	local UseContextResult = ReactModule.useContext(PopoverContextModule)
 	local UseRefResult = ReactModule.useRef(nil)
-	ReactModule.useEffect(function() --[[ Line: 56 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UseContextResult (copy), LoggerModule (upval), UseRefResult (copy), p1 (copy)
 		if UseContextResult.anchor ~= nil then
 			if typeof(UseContextResult.anchor) ~= "Instance" then
@@ -33,12 +33,12 @@ local function AnchorWrapper(p1) --[[ Line: 52 ]]
 				
 				return
 			end
-			UseRefResult.current = UseContextResult.anchor:GetPropertyChangedSignal("GuiState"):Connect(function() --[[ Line: 62 ]]
+			UseRefResult.current = UseContextResult.anchor:GetPropertyChangedSignal("GuiState"):Connect(function()
 				-- upvalues: p1 (upval), UseContextResult (upval)
 				p1.onHover(UseContextResult.anchor.GuiState == Enum.GuiState.Hover)
 			end)
 		end
-		return function() --[[ Line: 67 ]]
+		return function()
 			-- upvalues: UseRefResult (upval)
 			if UseRefResult.current ~= nil then
 				UseRefResult.current:Disconnect()
@@ -49,13 +49,13 @@ local function AnchorWrapper(p1) --[[ Line: 52 ]]
 	return ReactModule.createElement(PopoverModule.Anchor, WithCommonPropsModule(p1, {}), p1.children)
 end
 
-return ReactModule.memo(function(p1) --[[ Line: 77 | Named "Tooltip" ]]
+return ReactModule.memo(function(p1)
 	-- upvalues: WithDefaultsModule (copy), config (copy), ReactModule (copy), UseTokensModule (copy), UseScaledValueModule (copy), FlagsModule (copy), ConstantsModule (copy), UserInputService (copy), PopoverModule (copy), AnchorWrapper (copy), WithCommonPropsModule (copy), RadiusModule (copy), ViewModule (copy), TextModule (copy)
 	local WithDefaultsModuleResult = WithDefaultsModule(p1, config)
 	local UseStateResult, UseStateResult2 = ReactModule.useState(false)
 	local UseTokensModuleResult = UseTokensModule()
 	local IsNotTextMatch: boolean = WithDefaultsModuleResult.text ~= nil and WithDefaultsModuleResult.text ~= ""
-	local UseMemoResult = ReactModule.useMemo(function(): string? --[[ Line: 100 ]]
+	local UseMemoResult = ReactModule.useMemo(function(): string?
 		-- upvalues: WithDefaultsModuleResult (copy), UserInputService (upval)
 		if WithDefaultsModuleResult.shortcut == nil then
 			return nil
@@ -91,7 +91,7 @@ return ReactModule.memo(function(p1) --[[ Line: 77 | Named "Tooltip" ]]
 			},
 			radius = RadiusModule.Small,
 			backgroundStyle = UseTokensModuleResult.Inverse.Surface.Surface_0,
-			onPressedOutside = if FlagsModule.FoundationTooltipPressedOutside then function() --[[ Line: 143 ]]
+			onPressedOutside = if FlagsModule.FoundationTooltipPressedOutside then function()
 				-- upvalues: UseStateResult2 (copy)
 				UseStateResult2(false)
 			end else nil

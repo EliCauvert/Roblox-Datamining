@@ -2,12 +2,12 @@
 local t = {}
 local config = {
 	__index = t,
-	__tostring = function(p1): string --[[ Line: 14 ]]
+	__tostring = function(p1): string
 		return (tostring(p1._innerRegEx))
 	end
 }
 
-function t.exec(p1, Input) --[[ Line: 19 ]]
+function t.exec(p1, Input)
 	local MatchResult = p1._innerRegEx:match(Input)
 	
 	if not MatchResult then
@@ -27,12 +27,12 @@ function t.exec(p1, Input) --[[ Line: 19 ]]
 	return list
 end
 
-function t.test(p2, Input): boolean --[[ Line: 38 ]]
+function t.test(p2, Input): boolean
 	return p2:exec(Input) ~= nil
 end
 
 return (setmetatable(t, {
-	__call = function(_, Source, p2) --[[ Line: 42 ]]
+	__call = function(_, Source, p2)
 		-- upvalues: RegExModule (copy), config (copy)
 		local P7 = p2 or ""
 		

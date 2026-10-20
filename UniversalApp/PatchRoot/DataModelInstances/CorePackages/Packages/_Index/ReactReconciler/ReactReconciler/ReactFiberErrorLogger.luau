@@ -13,9 +13,9 @@ local ClassComponent = require(script.Parent.ReactWorkTags).ClassComponent
 local GetComponentNameFunction = require(Parent.Shared).getComponentName
 
 return {
-	logCapturedError = function(p1, p2) --[[ Line: 34 ]]
+	logCapturedError = function(p1, p2)
 		-- upvalues: ShowErrorDialogFunction (copy), ReactGlobalsModule (copy), ClassComponent (copy), Console (copy), GetComponentNameFunction (copy), InspectFunction (copy), SetTimeoutFunction (copy), ErrorToStringFunction (copy)
-		local Success, Result = pcall(function() --[[ Line: 35 ]]
+		local Success, Result = pcall(function()
 			-- upvalues: ShowErrorDialogFunction (upval), p1 (copy), p2 (copy), ReactGlobalsModule (upval), ClassComponent (upval), Console (upval), GetComponentNameFunction (upval), InspectFunction (upval)
 			if ShowErrorDialogFunction(p1, p2) == false then
 				return nil
@@ -41,7 +41,7 @@ return {
 		
 		if not Success then
 			warn("failed to error with error: " .. InspectFunction(Result))
-			SetTimeoutFunction(function() --[[ Line: 126 ]]
+			SetTimeoutFunction(function()
 				-- upvalues: ErrorToStringFunction (upval), Result (copy)
 				error(ErrorToStringFunction(Result))
 			end)

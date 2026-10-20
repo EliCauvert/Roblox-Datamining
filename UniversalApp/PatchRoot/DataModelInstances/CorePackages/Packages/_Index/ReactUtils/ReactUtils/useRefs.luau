@@ -1,6 +1,6 @@
 ﻿local ReactModule = require(script:FindFirstAncestor("ReactUtils").Parent.React)
 
-return function(Current: number, Current1) --[[ Line: 14 | Named "useRefs" ]]
+return function(Current: number, Current1)
 	-- upvalues: ReactModule (copy)
 	local UseRefResult = ReactModule.useRef({})
 	local UseRefResult1 = ReactModule.useRef(Current)
@@ -18,7 +18,7 @@ return function(Current: number, Current1) --[[ Line: 14 | Named "useRefs" ]]
 	end
 	UseRefResult1.current = Current
 	
-	return (ReactModule.useMemo(function() --[[ Line: 33 ]]
+	return (ReactModule.useMemo(function()
 		-- upvalues: UseRefResult (copy), Current (copy)
 		return table.move(UseRefResult.current, 1, Current, 1, {})
 	end, { Current }))

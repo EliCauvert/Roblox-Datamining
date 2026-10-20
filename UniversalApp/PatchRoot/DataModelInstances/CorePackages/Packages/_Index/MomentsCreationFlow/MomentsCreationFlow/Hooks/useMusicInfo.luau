@@ -8,17 +8,17 @@ local UseDispatchFunction = MomentsCommonModule.Hooks.useDispatch
 local UseSelectorFunction = MomentsCommonModule.Hooks.useSelector
 local ConstantsModule = require(MomentsCreationFlow.Constants)
 
-return function(p1) --[[ Line: 18 ]]
+return function(p1)
 	-- upvalues: UseDispatchFunction (copy), UseSelectorFunction (copy), ConstantsModule (copy), ReactModule (copy), AssetService (copy), CreationFlowMusicInfoRetrievedModule (copy)
 	local UseDispatchResult = UseDispatchFunction()
-	local UseSelectorResult = UseSelectorFunction(function(p2) --[[ Line: 21 ]]
+	local UseSelectorResult = UseSelectorFunction(function(p2)
 		-- upvalues: ConstantsModule (upval), p1 (copy)
 		return p2[ConstantsModule.RoduxKey].Music[p1]
 	end)
-	ReactModule.useEffect(function() --[[ Line: 25 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UseSelectorResult (copy), p1 (copy), AssetService (upval), UseDispatchResult (copy), CreationFlowMusicInfoRetrievedModule (upval)
 		if not UseSelectorResult and p1 then
-			task.spawn(function() --[[ Line: 27 ]]
+			task.spawn(function()
 				-- upvalues: AssetService (upval), p1 (upval), UseDispatchResult (upval), CreationFlowMusicInfoRetrievedModule (upval)
 				UseDispatchResult(CreationFlowMusicInfoRetrievedModule({ [p1] = AssetService:GetAudioMetadataAsync({ p1 })[1] }))
 			end)

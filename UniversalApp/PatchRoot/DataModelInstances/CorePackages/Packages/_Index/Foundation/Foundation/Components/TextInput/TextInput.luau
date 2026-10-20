@@ -19,7 +19,7 @@ local config = {
 	size = require(Foundation.Enums.InputSize).Large
 }
 
-return ReactModule.memo(ReactModule.forwardRef(function(p1, Ref) --[[ Line: 51 | Named "TextInput" ]]
+return ReactModule.memo(ReactModule.forwardRef(function(p1, Ref)
 	-- upvalues: WithDefaultsModule (copy), config (copy), UseTokensModule (copy), UseTextInputVariantsModule (copy), ReactModule (copy), InputFieldModule (copy), WithCommonPropsModule (copy), GetInputTextSizeModule (copy), InternalTextInputModule (copy), ViewModule (copy), IconModule (copy), IconButtonModule (copy)
 	local WithDefaultsModuleResult = WithDefaultsModule(p1, config)
 	local UseTextInputVariantsModuleResult = UseTextInputVariantsModule(UseTokensModule(), WithDefaultsModuleResult.size, WithDefaultsModuleResult.variant)
@@ -34,7 +34,7 @@ return ReactModule.memo(ReactModule.forwardRef(function(p1, Ref) --[[ Line: 51 |
 		hasError = WithDefaultsModuleResult.hasError,
 		hint = WithDefaultsModuleResult.hint,
 		textBoxRef = WithDefaultsModuleResult.textBoxRef,
-		input = function(Ref) --[[ Line: 68 ]]
+		input = function(Ref)
 			-- upvalues: ReactModule (upval), InternalTextInputModule (upval), WithDefaultsModuleResult (copy), UseTextInputVariantsModuleResult (copy), ViewModule (upval), IconModule (upval), IconButtonModule (upval)
 			return ReactModule.createElement(InternalTextInputModule, {
 				ref = Ref,

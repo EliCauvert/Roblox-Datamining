@@ -1,11 +1,11 @@
 ﻿local DEV = _G.__DEV__
-local _, Result = xpcall(function() --[[ Line: 9 ]]
+local _, Result = xpcall(function()
 	return game:DefineFastFlag("RoduxRemoveConnectTraceback", false)
-end, function(): boolean --[[ Line: 11 ]]
+end, function(): boolean
 	return true
 end)
 
-local function immutableAppend(Listeners, ...) --[[ Line: 15 ]]
+local function immutableAppend(Listeners, ...)
 	local t = {}
 	local CountListeners = #Listeners
 	
@@ -18,7 +18,7 @@ local function immutableAppend(Listeners, ...) --[[ Line: 15 ]]
 	return t
 end
 
-local function immutableRemoveValue(Listeners, p1) --[[ Line: 30 ]]
+local function immutableRemoveValue(Listeners, p1)
 	local List = {}
 	
 	for i = 1, #Listeners do
@@ -32,7 +32,7 @@ end
 local SignalModule = {}
 SignalModule.__index = SignalModule
 
-function SignalModule.new(_store) --[[ Line: 46 ]]
+function SignalModule.new(_store)
 	-- upvalues: SignalModule (copy)
 	local config = { _listeners = {}, _store = _store }
 	setmetatable(config, SignalModule)
@@ -40,7 +40,7 @@ function SignalModule.new(_store) --[[ Line: 46 ]]
 	return config
 end
 
-function SignalModule:connect(Callback) --[[ Line: 57 ]]
+function SignalModule:connect(Callback)
 	-- upvalues: Result (copy), DEV (copy), immutableAppend (copy), immutableRemoveValue (copy)
 	if typeof(Callback) ~= "function" then
 		error("Expected the listener to be a function.")
@@ -61,7 +61,7 @@ function SignalModule:connect(Callback) --[[ Line: 57 ]]
 	self._listeners = immutableAppend(self._listeners, config)
 	
 	return {
-		disconnect = function() --[[ Line: 83 ]]
+		disconnect = function()
 			-- upvalues: config (copy), self (copy), Result (upval), DEV (upval), immutableRemoveValue (upval)
 			if config.disconnected then
 				error(("Listener connected at: \n%s\nwas already disconnected at: \n%s\n"):format(tostring(config.connectTraceback), (tostring(config.disconnectTraceback))))
@@ -78,7 +78,7 @@ function SignalModule:connect(Callback) --[[ Line: 57 ]]
 	}
 end
 
-function SignalModule.fire(p2, ...) --[[ Line: 109 ]]
+function SignalModule.fire(p2, ...)
 	for _, listener in ipairs(p2._listeners) do
 		if not listener.disconnected then
 			listener.callback(...)

@@ -7,7 +7,7 @@ local RigBuilderModule = require(Parent.util.RigBuilder)
 local BuildEmoteKeyframeSequenceFromCurveAnimModule = require(Parent.util.buildEmoteKeyframeSequenceFromCurveAnim)
 local GetEngineFeatureEngineUGCValidateEmoteAnimationExportModule = require(Parent.flags.getEngineFeatureEngineUGCValidateEmoteAnimationExport)
 
-local function createCagePart(p1, RenderMeshes, InnerCages, p2) --[[ Line: 19 ]]
+local function createCagePart(p1, RenderMeshes, InnerCages, p2)
 	-- upvalues: AssetService (copy)
 	local MeshPartAsync = AssetService:CreateMeshPartAsync(Content.fromObject(InnerCages.editable))
 	MeshPartAsync.Name = `{p1}_{p2}`
@@ -17,7 +17,7 @@ local function createCagePart(p1, RenderMeshes, InnerCages, p2) --[[ Line: 19 ]]
 	return MeshPartAsync
 end
 
-local function copyMeshPart(Object, RenderMeshes, MeshTexture) --[[ Line: 33 ]]
+local function copyMeshPart(Object, RenderMeshes, MeshTexture)
 	-- upvalues: AssetService (copy), R15plusUtilsModule (copy)
 	local MeshPartAsync = AssetService:CreateMeshPartAsync(Content.fromObject(RenderMeshes.editable))
 	
@@ -66,7 +66,7 @@ local function copyMeshPart(Object, RenderMeshes, MeshTexture) --[[ Line: 33 ]]
 	return MeshPartAsync
 end
 
-local function addBonesFromPoses(Pose, Parent, DefaultCharacter) --[[ Line: 113 ]]
+local function addBonesFromPoses(Pose, Parent, DefaultCharacter)
 	-- upvalues: addBonesFromPoses (copy)
 	for _, Pose1 in Pose:GetChildren() do
 		if Pose1:IsA("Pose") then
@@ -85,7 +85,7 @@ local function addBonesFromPoses(Pose, Parent, DefaultCharacter) --[[ Line: 113 
 	end
 end
 
-local function createEmoteExportScene(p1) --[[ Line: 130 ]]
+local function createEmoteExportScene(p1)
 	-- upvalues: RigBuilderModule (copy), BuildEmoteKeyframeSequenceFromCurveAnimModule (copy), addBonesFromPoses (copy)
 	local DefaultCharacter = RigBuilderModule.createDefaultCharacter(false)
 	local EmoteKeyframeSequenceFromCurveAnimModule = if p1.curveAnimations and #p1.curveAnimations > 0 then BuildEmoteKeyframeSequenceFromCurveAnimModule(p1.curveAnimations[1]) else nil
@@ -106,7 +106,7 @@ local function createEmoteExportScene(p1) --[[ Line: 130 ]]
 end
 
 return {
-	createModelForGltfExport = function(p1) --[[ Line: 160 ]]
+	createModelForGltfExport = function(p1)
 		-- upvalues: GetEngineFeatureEngineUGCValidateEmoteAnimationExportModule (copy), ValidationEnumsModule (copy), createEmoteExportScene (copy), copyMeshPart (copy), createCagePart (copy)
 		if GetEngineFeatureEngineUGCValidateEmoteAnimationExportModule() and p1.uploadCategory == ValidationEnumsModule.UploadCategory.EMOTE_ANIMATION then
 			return (createEmoteExportScene(p1))

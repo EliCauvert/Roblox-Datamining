@@ -23,7 +23,7 @@ FullPageModal.validateProps = TModule.strictInterface({
 })
 FullPageModal.defaultProps = { marginSize = 24, distanceFromTop = 0 }
 
-function FullPageModal.init(p1) --[[ Line: 55 ]]
+function FullPageModal.init(p1)
 	-- upvalues: ModalTitleModule (copy), UIBloxConfigModule (copy), RoactModule (copy)
 	p1.state = {
 		buttonFrameSize = Vector2.new(0, 0),
@@ -32,7 +32,7 @@ function FullPageModal.init(p1) --[[ Line: 55 ]]
 	}
 	p1.buttonFrameRef = if UIBloxConfigModule.didMountUpdateFullPageModal then RoactModule.createRef() else nil
 	
-	function p1.changeButtonFrameSize(Frame: Frame) --[[ Line: 63 ]]
+	function p1.changeButtonFrameSize(Frame: Frame)
 		-- upvalues: p1 (copy)
 		if p1.state.buttonFrameSize ~= Frame.AbsoluteSize then
 			p1:setState({ buttonFrameSize = Frame.AbsoluteSize })
@@ -41,14 +41,14 @@ function FullPageModal.init(p1) --[[ Line: 55 ]]
 	
 	p1.footerContentRef = if UIBloxConfigModule.didMountUpdateFullPageModal then RoactModule.createRef() else nil
 	
-	function p1.changeFooterContentSize(Frame: Frame) --[[ Line: 72 ]]
+	function p1.changeFooterContentSize(Frame: Frame)
 		-- upvalues: p1 (copy)
 		if p1.state.footerContentSize ~= Frame.AbsoluteSize then
 			p1:setState({ footerContentSize = Frame.AbsoluteSize })
 		end
 	end
 	
-	function p1.changeTitleContainerSize(Frame: Frame) --[[ Line: 80 ]]
+	function p1.changeTitleContainerSize(Frame: Frame)
 		-- upvalues: p1 (copy)
 		if p1.state.titleContainerSize ~= Frame.AbsoluteSize then
 			p1:setState({ titleContainerSize = Frame.AbsoluteSize })
@@ -57,7 +57,7 @@ function FullPageModal.init(p1) --[[ Line: 55 ]]
 end
 
 if UIBloxConfigModule.didMountUpdateFullPageModal then
-	function FullPageModal.didMount(p1) --[[ Line: 90 ]]
+	function FullPageModal.didMount(p1)
 		if p1.buttonFrameRef.current then
 			p1:setState({ buttonFrameSize = p1.buttonFrameRef.current.AbsoluteSize })
 		end
@@ -68,7 +68,7 @@ if UIBloxConfigModule.didMountUpdateFullPageModal then
 		end
 	end
 end
-function FullPageModal.render(p1) --[[ Line: 104 ]]
+function FullPageModal.render(p1)
 	-- upvalues: RoactModule (copy), ModalWindowModule (copy), ModalTitleModule (copy), FitFrameVertical (copy), UIBloxConfigModule (copy), ButtonStackModule (copy)
 	return RoactModule.createElement(ModalWindowModule, {
 		isFullHeight = true,

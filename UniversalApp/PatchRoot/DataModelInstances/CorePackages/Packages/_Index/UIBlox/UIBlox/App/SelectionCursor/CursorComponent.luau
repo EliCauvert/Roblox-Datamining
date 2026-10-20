@@ -5,7 +5,7 @@ local ReactModule = require(Parent1.React)
 local EventConnection = require(Parent1.ReactUtils).EventConnection
 local UseStyleModule = require(Parent.Core.Style.useStyle)
 
-return ReactModule.memo((ReactModule.forwardRef(function(p1, Ref) --[[ Line: 22 ]]
+return ReactModule.memo((ReactModule.forwardRef(function(p1, Ref)
 	-- upvalues: UseStyleModule (copy), ReactModule (copy), EventConnection (copy), RunService (copy)
 	local UseStyleModuleResult = UseStyleModule()
 	local Selection = UseStyleModuleResult.Tokens.Color.Selection
@@ -42,7 +42,7 @@ return ReactModule.memo((ReactModule.forwardRef(function(p1, Ref) --[[ Line: 22 
 		}),
 		HeartbeatConnection = p1.isVisible and ReactModule.createElement(EventConnection, {
 			event = RunService.Heartbeat,
-			callback = function(_) --[[ Line: 60 ]]
+			callback = function(_)
 				-- upvalues: UseBindingResult (copy), ColorSequence1 (copy), NumberSequence1 (copy), ReducedMotion (copy), UseBindingResult2 (copy), UseBindingResult2_1 (copy), UseBindingResult2_2 (copy)
 				local NewValue = UseBindingResult:getValue() + 2
 				local ColorSequence2: ColorSequence = ColorSequence1

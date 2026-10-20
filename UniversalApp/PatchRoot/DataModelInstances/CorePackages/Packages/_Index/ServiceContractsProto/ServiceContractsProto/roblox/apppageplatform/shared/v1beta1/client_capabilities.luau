@@ -7,7 +7,7 @@ local UiComponentTypeModule = require(script.Parent.ui_component_type)
 local Module = {}
 Module.__index = Module
 
-function Module.new(p1) --[[ Line: 89 ]]
+function Module.new(p1)
 	-- upvalues: t (copy), Module (copy)
 	return (setmetatable({
 		enabled_capabilities = if p1 == nil or p1.enabled_capabilities == nil then {} else p1.enabled_capabilities,
@@ -19,7 +19,7 @@ function Module.new(p1) --[[ Line: 89 ]]
 	}, Module))
 end
 
-function Module:encode() --[[ Line: 110 ]]
+function Module:encode()
 	-- upvalues: ProtoModule (copy), CapabilityModule (copy), t (copy), UiComponentTypeModule (copy), ActionsModule (copy)
 	local Buf = buffer.create(0)
 	local Count = 0
@@ -66,7 +66,7 @@ function Module:encode() --[[ Line: 110 ]]
 	return Buf1
 end
 
-function Module.decode(Buf) --[[ Line: 178 ]]
+function Module.decode(Buf)
 	-- upvalues: Module (copy), ProtoModule (copy), CapabilityModule (copy), t (copy), UiComponentTypeModule (copy), ActionsModule (copy)
 	local NewModule = Module.new()
 	local v1 = 0
@@ -122,7 +122,7 @@ function Module.decode(Buf) --[[ Line: 178 ]]
 	return NewModule
 end
 
-function Module:jsonEncode() --[[ Line: 266 ]]
+function Module:jsonEncode()
 	-- upvalues: CapabilityModule (copy), t (copy), UiComponentTypeModule (copy), ActionsModule (copy)
 	local t1 = {}
 	
@@ -167,7 +167,7 @@ function Module:jsonEncode() --[[ Line: 266 ]]
 	return t1
 end
 
-function Module:jsonDecode() --[[ Line: 334 ]]
+function Module:jsonDecode()
 	-- upvalues: Module (copy), CapabilityModule (copy), t (copy), UiComponentTypeModule (copy), ActionsModule (copy)
 	local NewModule = Module.new()
 	
@@ -256,7 +256,7 @@ TypeRegistryModule.default:register(t.ClientCapabilities)
 local Module1 = {}
 Module1.__index = Module1
 
-function Module1.new(p1) --[[ Line: 480 ]]
+function Module1.new(p1)
 	-- upvalues: Module1 (copy)
 	return (setmetatable({
 		key = if p1 == nil or p1.key == nil then "" else p1.key,
@@ -264,7 +264,7 @@ function Module1.new(p1) --[[ Line: 480 ]]
 	}, Module1))
 end
 
-function Module1:encode() --[[ Line: 489 ]]
+function Module1:encode()
 	-- upvalues: ProtoModule (copy)
 	local Buf = buffer.create(0)
 	local Count = 0
@@ -283,7 +283,7 @@ function Module1:encode() --[[ Line: 489 ]]
 	return Buf1
 end
 
-function Module1.decode(Buf) --[[ Line: 510 ]]
+function Module1.decode(Buf)
 	-- upvalues: Module1 (copy), ProtoModule (copy)
 	local NewModule = Module1.new()
 	local v2 = 0
@@ -322,7 +322,7 @@ function Module1.decode(Buf) --[[ Line: 510 ]]
 	return NewModule
 end
 
-function Module1:jsonEncode() --[[ Line: 560 ]]
+function Module1:jsonEncode()
 	local t = {}
 	
 	if self.key ~= nil and self.key ~= "" then
@@ -334,7 +334,7 @@ function Module1:jsonEncode() --[[ Line: 560 ]]
 	return t
 end
 
-function Module1:jsonDecode() --[[ Line: 576 ]]
+function Module1:jsonDecode()
 	-- upvalues: Module1 (copy)
 	local NewModule = Module1.new()
 	
@@ -354,13 +354,13 @@ Module1.descriptor = {
 t.ClientCapabilities_RuntimeFlagValuesEntry = Module1
 TypeRegistryModule.default:register(t.ClientCapabilities_RuntimeFlagValuesEntry)
 t.Platform = {
-	fromNumber = function(p1) --[[ Line: 603 ]]
+	fromNumber = function(p1)
 		return if p1 == 0 then "PLATFORM_INVALID" elseif p1 == 1 then "PLATFORM_WEB" elseif p1 == 2 then "PLATFORM_APP" else nil
 	end,
-	toNumber = function(p1) --[[ Line: 615 ]]
+	toNumber = function(p1)
 		return if p1 == "PLATFORM_INVALID" then 0 elseif p1 == "PLATFORM_WEB" then 1 elseif p1 == "PLATFORM_APP" then 2 else p1
 	end,
-	fromName = function(p1) --[[ Line: 627 ]]
+	fromName = function(p1)
 		return if p1 == "PLATFORM_INVALID" then "PLATFORM_INVALID" elseif p1 == "PLATFORM_WEB" then "PLATFORM_WEB" elseif p1 == "PLATFORM_APP" then "PLATFORM_APP" else nil
 	end
 }

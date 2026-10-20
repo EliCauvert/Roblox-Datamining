@@ -9,7 +9,7 @@ local UseTokensModule = require(Foundation.Providers.Style.useTokens)
 local StateLayerAffordanceModule = require(Foundation.Enums.StateLayerAffordance)
 local ViewModule = require(Foundation.Components.View)
 
-return ReactModule.memo(ReactModule.forwardRef(function(p1, Ref) --[[ Line: 19 | Named "SheetActions" ]]
+return ReactModule.memo(ReactModule.forwardRef(function(p1, Ref)
 	-- upvalues: UseTokensModule (copy), ReactModule (copy), SheetContextModule (copy), SheetTypeModule (copy), ViewModule (copy), StateLayerAffordanceModule (copy), ReactRobloxModule (copy)
 	local UseTokensModuleResult = UseTokensModule()
 	local UseContextResult = ReactModule.useContext(SheetContextModule)
@@ -40,12 +40,12 @@ return ReactModule.memo(ReactModule.forwardRef(function(p1, Ref) --[[ Line: 19 |
 		stroke = {
 			Color = UseTokensModuleResult.Color.Stroke.Default.Color3,
 			Transparency = UseTokensModuleResult.Color.Stroke.Default.Transparency,
-			Thickness = HasActionsDivider:map(function(p2) --[[ Line: 60 ]]
+			Thickness = HasActionsDivider:map(function(p2)
 				-- upvalues: UseTokensModuleResult (copy)
 				return if p2 then UseTokensModuleResult.Stroke.Standard else 0
 			end)
 		},
-		onAbsoluteSizeChanged = if IsSheetTypeMatch then function(Frame) --[[ Line: 69 ]]
+		onAbsoluteSizeChanged = if IsSheetTypeMatch then function(Frame)
 			-- upvalues: SetActionsHeightFunction (copy), BottomPadding (copy)
 			SetActionsHeightFunction(Frame.AbsoluteSize.Y - BottomPadding)
 		end else nil,
@@ -53,11 +53,11 @@ return ReactModule.memo(ReactModule.forwardRef(function(p1, Ref) --[[ Line: 19 |
 		Position = if IsSheetTypeMatch then ReactModule.joinBindings({
 			sheetHeightAvailable = SheetHeightAvailable,
 			actionsHeight = ActionsHeight
-		}):map(function(p2): UDim2 --[[ Line: 79 ]]
+		}):map(function(p2): UDim2
 			return UDim2.new(0, 0, 1, -math.min(p2.sheetHeightAvailable, p2.actionsHeight))
 		end) else nil,
 		ref = Ref,
-		onActivated = function() --[[ Line: 89 ]] end,
+		onActivated = function() end,
 		selection = { Selectable = false },
 		stateLayer = { affordance = StateLayerAffordanceModule.None }
 	}, p1.children)

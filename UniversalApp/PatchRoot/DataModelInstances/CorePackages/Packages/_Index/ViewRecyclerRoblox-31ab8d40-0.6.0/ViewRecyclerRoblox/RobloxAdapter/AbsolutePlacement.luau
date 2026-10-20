@@ -5,11 +5,11 @@ local EndLimitFrameModule = require(ViewRecyclerRoblox.RobloxAdapter.EndLimitFra
 local HostPresentationPhaseModule = require(ViewRecyclerRoblox.RobloxAdapter.HostPresentationPhase)
 
 return {
-	new = function(Configuration, Configuration1, Callback) --[[ Line: 43 ]]
+	new = function(Configuration, Configuration1, Callback)
 		-- upvalues: CanvasItemPlacerModule (copy), HostPresentationPhaseModule (copy), EndLimitFrameModule (copy)
 		local Tbl = {}
 		
-		local function _(p1) --[[ Line: 46 | Named "releaseEndLimitFrame" ]]
+		local function _(p1)
 			local EndLimitFrame = p1.endLimitFrame
 			
 			if EndLimitFrame ~= nil then
@@ -18,7 +18,7 @@ return {
 			end
 		end
 		
-		local _ = function(p1, p2, p3) --[[ Line: 54 | Named "getGeometry" ]]
+		local _ = function(p1, p2, p3)
 			-- upvalues: CanvasItemPlacerModule (upval), Configuration (ref), Configuration1 (ref)
 			local State = p1.state
 			
@@ -26,7 +26,7 @@ return {
 		end
 		
 		return {
-			place = function(Key, PlacerState, Geometry, State, IsNotHiddenMatch, Hidden): boolean --[[ Line: 67 ]]
+			place = function(Key, PlacerState, Geometry, State, IsNotHiddenMatch, Hidden): boolean
 				-- upvalues: Tbl (copy), HostPresentationPhaseModule (upval), CanvasItemPlacerModule (upval), Configuration (ref), Configuration1 (ref), EndLimitFrameModule (upval), Callback (copy)
 				local CanvasPlacement = if IsNotHiddenMatch then State.canvasPlacement else State.viewportPlacement
 				local Entry = Tbl[Key]
@@ -74,7 +74,7 @@ return {
 				
 				return IsNotHiddenMatch1
 			end,
-			remove = function(Key) --[[ Line: 105 ]]
+			remove = function(Key)
 				-- upvalues: Tbl (copy)
 				local Entry = Tbl[Key]
 				
@@ -88,12 +88,12 @@ return {
 					end
 				end
 			end,
-			setConfiguration = function(Value, Value1) --[[ Line: 112 ]]
+			setConfiguration = function(Value, Value1)
 				-- upvalues: Configuration (ref), Configuration1 (ref)
 				Configuration = Value
 				Configuration1 = Value1
 			end,
-			setOriginOffset = function(OriginOffset) --[[ Line: 115 ]]
+			setOriginOffset = function(OriginOffset)
 				-- upvalues: Tbl (copy), CanvasItemPlacerModule (upval), Configuration (ref), Configuration1 (ref)
 				for i, value in Tbl do
 					if value.originOffset ~= nil and value.originOffset ~= OriginOffset then
@@ -103,7 +103,7 @@ return {
 					end
 				end
 			end,
-			destroy = function() --[[ Line: 126 ]]
+			destroy = function()
 				-- upvalues: Tbl (copy)
 				for _, value in Tbl do
 					local EndLimitFrame = value.endLimitFrame

@@ -10,11 +10,11 @@ local CursorContextModule = require(script.Parent.CursorContext)
 local CursorComponentModule = require(script.Parent.CursorComponent)
 local CursorTypeModule = require(script.Parent.CursorType)
 
-local function _(p1, p2, p3): string --[[ Line: 20 ]]
+local function _(p1, p2, p3): string
 	return string.format("%f %f %f %f", p1.Scale, p1.Offset, p2, p3)
 end
 
-local function v12(Text: string) --[[ Line: 24 ]]
+local function v12(Text: string)
 	local Scale = 1e999
 	local v1 = 1e999
 	local v2 = 1e999
@@ -40,7 +40,7 @@ local function v12(Text: string) --[[ Line: 24 ]]
 	return UDim.new(Scale, (math.max(0, v1 + v2))), v2, v3
 end
 
-return function(p1) --[[ Line: 53 ]]
+return function(p1)
 	-- upvalues: ReactModule (copy), RoactGamepadModule (copy), UseStyleModule (copy), CryoModule (copy), CursorTypeModule (copy), v12 (copy), CursorComponentModule (copy), CoreGui (copy), GuiService (copy), CursorContextModule (copy)
 	local UseStateResult, UseStateResult2 = ReactModule.useState({})
 	local UseStateResult1, UseStateResult2_1 = ReactModule.useState({})
@@ -49,7 +49,7 @@ return function(p1) --[[ Line: 53 ]]
 	local UseRefCacheResult = RoactGamepadModule.useRefCache()
 	local Tokens = UseStyleModule().Tokens
 	
-	local function GetCursor(p2, p3: number, Thick: number) --[[ Line: 61 ]]
+	local function GetCursor(p2, p3: number, Thick: number)
 		-- upvalues: Tokens (copy), UseStateResult (copy), UseStateResult2 (copy), CryoModule (upval), UseRefCacheResult (copy)
 		warn("UIBlox's SelectionCursor is deprecated and should not be used anymore.")
 		local _UDim = if p2 ~= nil then p2 else UDim.new(0, 0)
@@ -69,7 +69,7 @@ return function(p1) --[[ Line: 53 ]]
 		return UseRefCacheResult[Formatted]
 	end
 	
-	local function GetCursorByType(p2) --[[ Line: 96 ]]
+	local function GetCursorByType(p2)
 		-- upvalues: CursorTypeModule (upval), UseStateResult1 (copy), UseStateResult2_1 (copy), CryoModule (upval), UseRefCacheResult (copy)
 		assert(CursorTypeModule.isEnumValue(p2), ("Error! expected a CursorType enum, got %s"):format((tostring(p2))))
 		warn("UIBlox's SelectionCursor is deprecated and should not be used anymore.")
@@ -80,7 +80,7 @@ return function(p1) --[[ Line: 53 ]]
 		return UseRefCacheResult[p2]
 	end
 	
-	local function v28() --[[ Line: 112 ]]
+	local function v28()
 		-- upvalues: UseStateResult (copy), UseRefCacheResult (copy), UseStateResult3 (copy), v12 (upval), ReactModule (upval), CursorComponentModule (upval), UseStateResult1 (copy)
 		local Elements = {}
 		
@@ -104,14 +104,14 @@ return function(p1) --[[ Line: 53 ]]
 		return Elements
 	end
 	
-	ReactModule.useEffect(function() --[[ Line: 145 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: Ref (copy), CoreGui (upval), GuiService (upval), UseStateResult2_2 (copy)
 		if Ref.current == nil or not Ref.current:IsDescendantOf(game) then return end
 		local IsDescendantOf = Ref.current:IsDescendantOf(CoreGui)
 		
-		local function setUpSelectionImageObjectConnection() --[[ Line: 152 ]]
+		local function setUpSelectionImageObjectConnection()
 			-- upvalues: IsDescendantOf (copy), GuiService (upval), UseStateResult2_2 (upval)
-			return if IsDescendantOf then GuiService:GetPropertyChangedSignal("SelectedCoreObject"):Connect(function() --[[ Line: 157 ]]
+			return if IsDescendantOf then GuiService:GetPropertyChangedSignal("SelectedCoreObject"):Connect(function()
 				-- upvalues: GuiService (upval), UseStateResult2_2 (upval)
 				if GuiService.SelectedCoreObject == nil then
 					UseStateResult2_2(nil)
@@ -120,7 +120,7 @@ return function(p1) --[[ Line: 53 ]]
 				else
 					UseStateResult2_2(GuiService.SelectedCoreObject.SelectionImageObject)
 				end
-			end) else GuiService:GetPropertyChangedSignal("SelectedObject"):Connect(function() --[[ Line: 165 ]]
+			end) else GuiService:GetPropertyChangedSignal("SelectedObject"):Connect(function()
 				-- upvalues: GuiService (upval), UseStateResult2_2 (upval)
 				if GuiService.SelectedObject == nil then
 					UseStateResult2_2(nil)
@@ -133,13 +133,13 @@ return function(p1) --[[ Line: 53 ]]
 		end
 		
 		local SetUpSelectionImageObjectConnectionResult = setUpSelectionImageObjectConnection()
-		local AncestryChangedConnection = Ref.current.AncestryChanged:Connect(function() --[[ Line: 176 ]]
+		local AncestryChangedConnection = Ref.current.AncestryChanged:Connect(function()
 			-- upvalues: SetUpSelectionImageObjectConnectionResult (ref), setUpSelectionImageObjectConnection (copy)
 			SetUpSelectionImageObjectConnectionResult:Disconnect()
 			SetUpSelectionImageObjectConnectionResult = setUpSelectionImageObjectConnection()
 		end)
 		
-		return function() --[[ Line: 186 ]]
+		return function()
 			-- upvalues: SetUpSelectionImageObjectConnectionResult (ref), AncestryChangedConnection (copy)
 			SetUpSelectionImageObjectConnectionResult:Disconnect()
 			AncestryChangedConnection:Disconnect()

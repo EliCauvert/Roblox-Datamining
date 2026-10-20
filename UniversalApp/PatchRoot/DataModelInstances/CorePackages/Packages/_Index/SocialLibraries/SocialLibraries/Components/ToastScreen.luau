@@ -30,11 +30,11 @@ local StrictInterfaceResult1 = T.strictInterface({
 	show = T.optional(T.boolean)
 })
 
-function ToastScreen.init(p1) --[[ Line: 41 ]]
+function ToastScreen.init(p1)
 	-- upvalues: StrictInterfaceResult1 (copy), StrictInterfaceResult (copy), Images (copy), IconSize (copy)
 	p1.hasToastChanged = false
 	
-	function p1.getToastProps(ToastProps) --[[ Line: 44 ]]
+	function p1.getToastProps(ToastProps)
 		-- upvalues: StrictInterfaceResult1 (upval), StrictInterfaceResult (upval), Images (upval), IconSize (upval), p1 (copy)
 		local ToastContent = ToastProps.toastContent or {}
 		assert(StrictInterfaceResult1(ToastProps))
@@ -48,7 +48,7 @@ function ToastScreen.init(p1) --[[ Line: 41 ]]
 				iconImage = if ToastContent.hideIcon then nil else ToastContent.iconImage or Images["icons/status/alert"],
 				iconSize = if ToastContent.hideIcon then nil else ToastContent.iconSize or Vector2.new(IconSize.Regular, IconSize.Regular),
 				swipeUpDismiss = ToastContent.swipeUpDismiss,
-				onAppeared = function() --[[ Line: 62 ]]
+				onAppeared = function()
 					-- upvalues: ToastContent (copy), p1 (upval)
 					if ToastContent.onAppeared then
 						ToastContent.onAppeared()
@@ -56,7 +56,7 @@ function ToastScreen.init(p1) --[[ Line: 41 ]]
 					p1.hasToastChanged = false
 				end,
 				onActivated = ToastContent.onActivated,
-				onDismissed = function() --[[ Line: 69 ]]
+				onDismissed = function()
 					-- upvalues: ToastContent (copy), p1 (upval)
 					if ToastContent.onDismissed then
 						ToastContent.onDismissed()
@@ -76,14 +76,14 @@ function ToastScreen.init(p1) --[[ Line: 41 ]]
 	end
 end
 
-function ToastScreen.render(p1) --[[ Line: 90 ]]
+function ToastScreen.render(p1)
 	-- upvalues: Roact (copy), Toast (copy)
 	assert(type(p1.props.navigation) ~= "nil", "ToastScreen should be wrapped with Roact Navigation")
 	
 	return Roact.createElement(Toast, (p1.getToastProps(p1.props.navigation.getParam("toastProps", {}))))
 end
 
-function ToastScreen.didUpdate(p1, _, _) --[[ Line: 98 ]]
+function ToastScreen.didUpdate(p1, _, _)
 	p1.hasToastChanged = true
 end
 

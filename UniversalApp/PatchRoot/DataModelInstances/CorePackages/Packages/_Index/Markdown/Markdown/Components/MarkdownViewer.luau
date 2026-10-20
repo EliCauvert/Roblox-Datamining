@@ -11,7 +11,7 @@ local _ = require(Parent.Types)
 local MarkdownRendererModule = require(script.MarkdownRenderer)
 local Flags = require(Parent1.MarkdownCore).Flags
 
-return function(p1) --[[ Line: 47 | Named "MarkdownViewer" ]]
+return function(p1)
 	-- upvalues: UseTokensFunction (copy), Flags (copy), ReactModule (copy), DashModule (copy), MarkdownRendererModule (copy), CommonMarkComplianceParserModule (copy), View (copy), Text (copy)
 	local UseTokensResult = UseTokensFunction()
 	
@@ -20,11 +20,11 @@ return function(p1) --[[ Line: 47 | Named "MarkdownViewer" ]]
 		
 		return nil
 	end
-	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 56 ]]
+	local UseMemoResult = ReactModule.useMemo(function()
 		-- upvalues: DashModule (upval), MarkdownRendererModule (upval), p1 (copy)
 		return DashModule.join(MarkdownRendererModule.defaultRenderers, p1.Renderers or {}, p1.AdditionalFeatureRenderers or {})
 	end, if Flags.FFlagMarkdownAssistantParity then { p1.Renderers, p1.AdditionalFeatureRenderers } else { p1.Renderers })
-	local UseMemoResult1, UseMemoResult2 = ReactModule.useMemo(function() --[[ Line: 68 ]]
+	local UseMemoResult1, UseMemoResult2 = ReactModule.useMemo(function()
 		-- upvalues: p1 (copy), CommonMarkComplianceParserModule (upval)
 		if p1.Ast then
 			return true, p1.Ast
@@ -44,7 +44,7 @@ return function(p1) --[[ Line: 47 | Named "MarkdownViewer" ]]
 		end
 		return SafeParseResult, SafeParseResult2
 	end, { p1.Markdown, p1.Ast })
-	local UseMemoResult3 = ReactModule.useMemo(function() --[[ Line: 89 ]]
+	local UseMemoResult3 = ReactModule.useMemo(function()
 		-- upvalues: UseMemoResult1 (copy), MarkdownRendererModule (upval), UseMemoResult2 (copy), UseMemoResult (copy), p1 (copy), UseTokensResult (copy)
 		return if UseMemoResult1 then MarkdownRendererModule.render(UseMemoResult2, {
 			userRenderers = UseMemoResult,

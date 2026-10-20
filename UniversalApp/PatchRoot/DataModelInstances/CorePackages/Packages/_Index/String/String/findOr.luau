@@ -1,6 +1,6 @@
 ﻿local Text = "([" .. ("$%^()-[].?"):gsub("(.)", "%%%1") .. "])"
 
-return function(Text1: string, List, p1) --[[ Line: 24 | Named "findOr" ]]
+return function(Text1: string, List, p1)
 	-- upvalues: Text (copy)
 	local OffsetResult = utf8.offset(Text1, p1 or 1)
 	local List1 = {}

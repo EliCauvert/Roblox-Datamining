@@ -7,13 +7,13 @@ local Array = LuauPolyfillModule.Array
 local InvariantModule = require(Parent.utils.invariant)
 local NavigationFocusEventsModule = require(Parent.views.NavigationFocusEvents)
 
-return function(p1, Router, NavigationConfig) --[[ Line: 12 ]]
+return function(p1, Router, NavigationConfig)
 	-- upvalues: ReactModule (copy), InvariantModule (copy), Array (copy), Object (copy), NavigationFocusEventsModule (copy)
 	local Navigator = ReactModule.Component:extend("Navigator")
 	Navigator.router = Router
 	Navigator.navigationOptions = NavigationConfig.navigationOptions
 	
-	function Navigator.init(p2) --[[ Line: 20 ]]
+	function Navigator.init(p2)
 		p2.state = {
 			descriptors = {},
 			transitioningDescriptors = {},
@@ -21,7 +21,7 @@ return function(p1, Router, NavigationConfig) --[[ Line: 12 ]]
 		}
 	end
 	
-	function Navigator.getDerivedStateFromProps(p2, State) --[[ Line: 32 ]]
+	function Navigator.getDerivedStateFromProps(p2, State)
 		-- upvalues: InvariantModule (upval), Array (upval), Router (copy), Object (upval)
 		local Descriptors = State.descriptors
 		local TransitioningDescriptors = State.transitioningDescriptors
@@ -32,7 +32,7 @@ return function(p1, Router, NavigationConfig) --[[ Line: 12 ]]
 		InvariantModule(type(Routes) == "table", "No \"routes\" found in navigation state. Did you try to pass the navigation prop of a React component to a Navigator child? See https://reactnavigation.org/docs/en/custom-navigators.html#navigator-navigation-prop")
 		
 		return {
-			descriptors = Array.reduce(Routes, function(p3, State1) --[[ Line: 55 ]]
+			descriptors = Array.reduce(Routes, function(p3, State1)
 				-- upvalues: Descriptors (copy), ScreenProps (copy), State (copy), Router (upval), Navigation (copy)
 				if Descriptors and Descriptors[State1.key] and State1 == Descriptors[State1.key].state and ScreenProps == State.screenProps then
 					p3[State1.key] = Descriptors[State1.key]
@@ -42,7 +42,7 @@ return function(p1, Router, NavigationConfig) --[[ Line: 12 ]]
 					local ChildNavigation = Navigation.getChildNavigation(State1.key)
 					p3[State1.key] = {
 						key = State1.key,
-						getComponent = function() --[[ Line: 65 ]]
+						getComponent = function()
 							-- upvalues: Router (upval), State1 (copy)
 							return Router.getComponentForRouteName(State1.routeName)
 						end,
@@ -54,7 +54,7 @@ return function(p1, Router, NavigationConfig) --[[ Line: 12 ]]
 					return p3
 				end
 			end, {}),
-			transitioningDescriptors = if Navigation.state.isTransitioning then Object.assign({}, TransitioningDescriptors, Descriptors, Array.reduce(Routes, function(Nones, p3) --[[ Line: 92 ]]
+			transitioningDescriptors = if Navigation.state.isTransitioning then Object.assign({}, TransitioningDescriptors, Descriptors, Array.reduce(Routes, function(Nones, p3)
 				-- upvalues: Object (upval)
 				Nones[p3.key] = Object.None
 				
@@ -64,7 +64,7 @@ return function(p1, Router, NavigationConfig) --[[ Line: 12 ]]
 		}
 	end
 	
-	function Navigator.render(p2) --[[ Line: 111 ]]
+	function Navigator.render(p2)
 		-- upvalues: ReactModule (upval), NavigationFocusEventsModule (upval), p1 (copy), Object (upval), NavigationConfig (copy)
 		local Navigation = p2.props.navigation
 		local Descriptors = p2.state.descriptors
@@ -73,7 +73,7 @@ return function(p1, Router, NavigationConfig) --[[ Line: 12 ]]
 		return ReactModule.createElement(ReactModule.Fragment, {}, {
 			Events = ReactModule.createElement(NavigationFocusEventsModule, {
 				navigation = Navigation,
-				onEvent = function(p3, p4, p5) --[[ Line: 121 ]]
+				onEvent = function(p3, p4, p5)
 					-- upvalues: Descriptors (copy), TransitioningDescriptors (copy)
 					if Descriptors[p3] then
 						Descriptors[p3].navigation.emit(p4, p5)

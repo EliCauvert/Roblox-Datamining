@@ -2,7 +2,7 @@
 local Family = Font.fromEnum(Enum.Font.Cartoon).Family
 local ComicNeueFontFamily = require(script.Parent.Parent.Parent.App.Style.Constants).ComicNeueFontFamily
 
-local function _(p1): string --[[ Line: 8 | Named "getFaceKey" ]]
+local function _(p1): string
 	return `{p1.Family}|{p1.Weight.Value}|{p1.Style.Value}`
 end
 
@@ -15,16 +15,16 @@ for _, enumItem in Enum.Font:GetEnumItems() do
 		end
 	end
 end
-local function getBuilderSansFallback(Weight) --[[ Line: 21 ]]
+local function getBuilderSansFallback(Weight)
 	return if Enum.FontWeight.ExtraBold.Value <= Weight.Value then Enum.Font.BuilderSansExtraBold elseif Enum.FontWeight.SemiBold.Value <= Weight.Value then Enum.Font.BuilderSansBold elseif Enum.FontWeight.Medium.Value <= Weight.Value then Enum.Font.BuilderSansMedium else Enum.Font.BuilderSans
 end
 
-local _ = function(p1) --[[ Line: 32 | Named "getComicNeueFallback" ]]
+local _ = function(p1)
 	-- upvalues: ComicNeueFontFamily (copy), Family (copy)
 	return if p1.Family == ComicNeueFontFamily or p1.Family == Family then Enum.Font.Cartoon else nil
 end
 
-return function(Unknown) --[[ Line: 42 | Named "getLegacyFont" ]]
+return function(Unknown)
 	-- upvalues: Unknowns (copy), ComicNeueFontFamily (copy), Family (copy), getBuilderSansFallback (copy)
 	if typeof(Unknown) ~= "EnumItem" then
 		local Unknown1 = Unknowns[`{Unknown.Family}|{Unknown.Weight.Value}|{Unknown.Style.Value}`]

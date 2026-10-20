@@ -4,7 +4,7 @@ local GetFoundationTokensFunction = DependenciesModule.GetFoundationTokens
 local UIBloxConfigModule = require(script.Parent.Parent.Parent.UIBloxConfig)
 local ConstantsModule = require(script.Parent.Constants)
 
-local function _(Console, Value: number): number --[[ Line: 16 | Named "getPlatformScale" ]]
+local function _(Console, Value: number): number
 	-- upvalues: UIBloxConfigModule (copy), ConstantsModule (copy)
 	if UIBloxConfigModule.disableTokenScaling then
 		return 1
@@ -16,7 +16,7 @@ local function _(Console, Value: number): number --[[ Line: 16 | Named "getPlatf
 end
 
 return {
-	getTokens = function(Console, p1, p2) --[[ Line: 36 ]]
+	getTokens = function(Console, p1, p2)
 		-- upvalues: GetTokenGeneratorsFunction (copy), ConstantsModule (copy), UIBloxConfigModule (copy)
 		local TokenGenerators = GetTokenGeneratorsFunction(p1) or GetTokenGeneratorsFunction(ConstantsModule.DefaultThemeName)
 		local Value: number = p2
@@ -37,7 +37,7 @@ return {
 		}
 	end,
 	Types = require(script.Types),
-	getFoundationTokens = function(Console, p1, p2) --[[ Line: 47 ]]
+	getFoundationTokens = function(Console, p1, p2)
 		-- upvalues: GetFoundationTokensFunction (copy), ConstantsModule (copy), UIBloxConfigModule (copy)
 		local FoundationTokens = GetFoundationTokensFunction(p1) or GetFoundationTokensFunction(ConstantsModule.DefaultThemeName)
 		local Value: number = p2
@@ -53,7 +53,7 @@ return {
 		end
 		return FoundationTokens(ScaledClampedValue)
 	end,
-	getFoundationTokensDefaultScale = function(p1) --[[ Line: 57 ]]
+	getFoundationTokensDefaultScale = function(p1)
 		-- upvalues: GetFoundationTokensFunction (copy), ConstantsModule (copy)
 		return (GetFoundationTokensFunction(p1) or GetFoundationTokensFunction(ConstantsModule.DefaultThemeName))(1)
 	end,

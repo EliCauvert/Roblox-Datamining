@@ -1,7 +1,7 @@
 ﻿local UGCValidationService = game:GetService("UGCValidationService")
 local _ = require(script.Parent.Parent.util.Types)
 
-return function(AssetTypeEnum, List) --[[ Line: 7 ]]
+return function(AssetTypeEnum, List)
 	-- upvalues: UGCValidationService (copy)
 	local config = {
 		isServer = true,

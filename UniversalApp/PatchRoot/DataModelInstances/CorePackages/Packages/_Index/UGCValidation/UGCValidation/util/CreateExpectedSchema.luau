@@ -14,7 +14,7 @@ local GetUploadCategoryModule = require(Parent.util.getUploadCategory)
 local GetFFlagUGCValidationEyebrowEyelashCategoryModule = require(Parent.flags.getFFlagUGCValidationEyebrowEyelashCategory)
 local CreateExpectedSchemaModule = {}
 
-local function _(Entry) --[[ Line: 19 | Named "getRootInstance" ]]
+local function _(Entry)
 	-- upvalues: ConstantsModule (copy)
 	for _, value in Entry do
 		if value.Name == ConstantsModule.FOLDER_NAMES.R15ArtistIntent then
@@ -24,7 +24,7 @@ local function _(Entry) --[[ Line: 19 | Named "getRootInstance" ]]
 	return Entry[1]
 end
 
-function CreateExpectedSchemaModule.generateBundleSchema(List) --[[ Line: 30 ]]
+function CreateExpectedSchemaModule.generateBundleSchema(List)
 	-- upvalues: ConstantsModule (copy), GetUploadCategoryModule (copy), CreateExpectedSchemaModule (copy)
 	local config = { ClassName = "Folder", _children = {} }
 	
@@ -53,7 +53,7 @@ function CreateExpectedSchemaModule.generateBundleSchema(List) --[[ Line: 30 ]]
 	return config
 end
 
-local function createBodyPartSchema(p1) --[[ Line: 56 ]]
+local function createBodyPartSchema(p1)
 	-- upvalues: ConstantsModule (copy), CreateIndividualBodyPartSchemaModule (copy)
 	local config = { ClassName = "Folder", _children = {} }
 	
@@ -64,48 +64,48 @@ local function createBodyPartSchema(p1) --[[ Line: 56 ]]
 end
 
 local config = {
-	EMOTE_ANIMATION = function(_, _) --[[ Line: 72 ]]
+	EMOTE_ANIMATION = function(_, _)
 		-- upvalues: CreateEmoteSchemaModule (copy)
 		return CreateEmoteSchemaModule()
 	end,
-	DYNAMIC_HEAD = function(_, _) --[[ Line: 75 ]]
+	DYNAMIC_HEAD = function(_, _)
 		-- upvalues: CreateDynamicHeadMeshPartSchemaModule (copy)
 		return CreateDynamicHeadMeshPartSchemaModule()
 	end,
-	TORSO_AND_LIMBS = function(p2, _) --[[ Line: 78 ]]
+	TORSO_AND_LIMBS = function(p2, _)
 		-- upvalues: createBodyPartSchema (copy)
 		return (createBodyPartSchema(p2))
 	end,
-	LAYERED_CLOTHING = function(AssetType, _) --[[ Line: 81 ]]
+	LAYERED_CLOTHING = function(AssetType, _)
 		-- upvalues: GetFFlagUGCValidationEyebrowEyelashCategoryModule (copy), CreateEyebrowEyelashSchemaModule (copy), ConstantsModule (copy), CreateLayeredClothingSchemaModule (copy)
 		return if GetFFlagUGCValidationEyebrowEyelashCategoryModule() or AssetType ~= Enum.AssetType.EyebrowAccessory and AssetType ~= Enum.AssetType.EyelashAccessory then CreateLayeredClothingSchemaModule(ConstantsModule.ASSET_TYPE_INFO[AssetType].attachmentNames) else CreateEyebrowEyelashSchemaModule(ConstantsModule.ASSET_TYPE_INFO[AssetType].attachmentNames)
 	end,
-	EYEBROW_EYELASH = function(p2, _) --[[ Line: 91 ]]
+	EYEBROW_EYELASH = function(p2, _)
 		-- upvalues: CreateEyebrowEyelashSchemaModule (copy), ConstantsModule (copy)
 		return CreateEyebrowEyelashSchemaModule(ConstantsModule.ASSET_TYPE_INFO[p2].attachmentNames)
 	end,
-	RIGID_ACCESSORY = function(p2, Object) --[[ Line: 94 ]]
+	RIGID_ACCESSORY = function(p2, Object)
 		-- upvalues: ConstantsModule (copy), CreateMeshPartAccessorySchemaModule (copy), CreateAccessorySchemaModule (copy)
 		local ASSETTYPE = ConstantsModule.ASSET_TYPE_INFO[p2]
 		
 		return if Object:FindFirstChildOfClass("MeshPart") then CreateMeshPartAccessorySchemaModule(ASSETTYPE.attachmentNames) else CreateAccessorySchemaModule(ASSETTYPE.attachmentNames)
 	end,
-	MAKEUP = function(_, _) --[[ Line: 103 ]]
+	MAKEUP = function(_, _)
 		-- upvalues: CreateMakeupSchemaModule (copy)
 		return CreateMakeupSchemaModule()
 	end,
-	ANIMATION = function(p2, _) --[[ Line: 108 ]]
+	ANIMATION = function(p2, _)
 		-- upvalues: CreateAnimationSchemaModule (copy)
 		return CreateAnimationSchemaModule(p2)
 	end
 }
 
-function CreateExpectedSchemaModule.generateAssetSchema(p2, AssetTypeEnum, p3) --[[ Line: 112 ]]
+function CreateExpectedSchemaModule.generateAssetSchema(p2, AssetTypeEnum, p3)
 	-- upvalues: config (copy)
 	return config[p2](AssetTypeEnum, p3)
 end
 
-function CreateExpectedSchemaModule.generateAnimationPackBundleSchema() --[[ Line: 120 ]]
+function CreateExpectedSchemaModule.generateAnimationPackBundleSchema()
 	-- upvalues: ConstantsModule (copy)
 	local config = { ClassName = "Model", _children = {} }
 	

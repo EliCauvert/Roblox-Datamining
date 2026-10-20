@@ -21,12 +21,12 @@ local config = {
 	}
 }
 
-local function _(Small) --[[ Line: 43 | Named "getInputSize" ]]
+local function _(Small)
 	-- upvalues: PaginationSizeModule (copy), InputSizeModule (copy)
 	return if Small == PaginationSizeModule.Small then InputSizeModule.XSmall else InputSizeModule.Small
 end
 
-return ReactModule.memo(ReactModule.forwardRef(function(Frame, Ref) --[[ Line: 60 | Named "NavButton" ]]
+return ReactModule.memo(ReactModule.forwardRef(function(Frame, Ref)
 	-- upvalues: config (copy), ReactModule (copy), IconButtonModule (copy), PaginationSizeModule (copy), InputSizeModule (copy), ButtonVariantModule (copy)
 	local Entry = config[Frame.direction]
 	
@@ -39,7 +39,7 @@ return ReactModule.memo(ReactModule.forwardRef(function(Frame, Ref) --[[ Line: 6
 		size = if Frame.slotSize == PaginationSizeModule.Small then InputSizeModule.XSmall else InputSizeModule.Small,
 		variant = ButtonVariantModule.Utility,
 		isDisabled = Frame.isDisabled,
-		onActivated = ReactModule.useCallback(function() --[[ Line: 64 ]]
+		onActivated = ReactModule.useCallback(function()
 			-- upvalues: Frame (copy)
 			Frame.onDirectionActivated(Frame.direction)
 		end, { Frame.onDirectionActivated, Frame.direction }),

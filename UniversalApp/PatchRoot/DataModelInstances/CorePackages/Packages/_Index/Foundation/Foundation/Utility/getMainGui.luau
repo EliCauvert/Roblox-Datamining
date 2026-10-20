@@ -6,12 +6,12 @@ local Players = WrappersModule.Services.Players
 local IsPluginSecurityModule = require(Foundation.Utility.isPluginSecurity)
 local PlayerGui = nil
 
-local function _() --[[ Line: 12 | Named "getPlayerGui" ]]
+local function _()
 	-- upvalues: RunService (copy), Players (copy)
 	return if RunService:IsClient() and Players.LocalPlayer and RunService:IsRunning() then Players.LocalPlayer:WaitForChild("PlayerGui", 3) else nil
 end
 
-return function() --[[ Line: 20 | Named "getMainGui" ]]
+return function()
 	-- upvalues: IsPluginSecurityModule (copy), CoreGui (copy), PlayerGui (ref), RunService (copy), Players (copy)
 	if IsPluginSecurityModule() then
 		return CoreGui

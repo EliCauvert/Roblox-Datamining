@@ -1,10 +1,10 @@
 ﻿local TextSplitByModule = require(script:FindFirstAncestor("Utils").Parent.Enums.TextSplitBy)
 
-local function _(p1): boolean --[[ Line: 9 | Named "isWhitespace" ]]
+local function _(p1): boolean
 	return p1:match("%s") ~= nil
 end
 
-local _ = function(p1, p2: number): number --[[ Line: 14 | Named "codepointEnd" ]]
+local _ = function(p1, p2: number): number
 	local OffsetResult = utf8.offset(p1, p2 + 1)
 	
 	return if OffsetResult == nil then #p1 else OffsetResult - 1
@@ -13,7 +13,7 @@ end
 local Module = {}
 Module.__index = Module
 
-function Module.new(_text, p1, p2, p3) --[[ Line: 32 ]]
+function Module.new(_text, p1, p2, p3)
 	-- upvalues: Module (copy)
 	local self = setmetatable({}, Module)
 	self._text = _text
@@ -24,11 +24,11 @@ function Module.new(_text, p1, p2, p3) --[[ Line: 32 ]]
 	return self
 end
 
-function Module:_guessInitialBreak(_, p1, p2): number --[[ Line: 44 ]]
+function Module:_guessInitialBreak(_, p1, p2): number
 	return (math.max(math.floor(#self._text * p2 / p1), 1))
 end
 
-function Module:findPossibleBreak() --[[ Line: 48 ]]
+function Module:findPossibleBreak()
 	local Index = self._index
 	while self.direction == 1 and Index <= #self._text or self.direction == -1 and Index > 0 do
 		if self._text:sub(Index, Index):match("%s") ~= nil then
@@ -41,7 +41,7 @@ function Module:findPossibleBreak() --[[ Line: 48 ]]
 	return Index
 end
 
-function Module:setDirection(Direction) --[[ Line: 63 ]]
+function Module:setDirection(Direction)
 	self.direction = Direction
 	
 	if Direction ~= 1 then
@@ -53,7 +53,7 @@ end
 local Module1 = {}
 Module1.__index = Module1
 
-function Module1.new(_text, p1, p2, p3) --[[ Line: 75 ]]
+function Module1.new(_text, p1, p2, p3)
 	-- upvalues: Module1 (copy)
 	local self = setmetatable({}, Module1)
 	self._text = _text
@@ -64,11 +64,11 @@ function Module1.new(_text, p1, p2, p3) --[[ Line: 75 ]]
 	return self
 end
 
-function Module1:_guessInitialBreak(p1, p2, p3): number --[[ Line: 84 ]]
+function Module1:_guessInitialBreak(p1, p2, p3): number
 	return (math.max(math.floor(p1 * p3 / p2), 1))
 end
 
-function Module1:findPossibleBreak(): number --[[ Line: 88 ]]
+function Module1:findPossibleBreak(): number
 	self._codepointIndex += self._step
 	local Text = self._text
 	local OffsetResult = utf8.offset(Text, self._codepointIndex + 1)
@@ -76,12 +76,12 @@ function Module1:findPossibleBreak(): number --[[ Line: 88 ]]
 	return if OffsetResult == nil then #Text else OffsetResult - 1
 end
 
-function Module1:setDirection(Direction) --[[ Line: 93 ]]
+function Module1:setDirection(Direction)
 	self.direction = Direction
 	self._step = if Direction == 1 then 1 else -1
 end
 
-local function splitWith(p1, Callback, Text: string, Length, p2, p3) --[[ Line: 98 ]]
+local function splitWith(p1, Callback, Text: string, Length, p2, p3)
 	local NewResult = p1.new(Text, Length, p2, p3)
 	local PossibleBreak = NewResult:findPossibleBreak()
 	local Segment = Text:sub(1, PossibleBreak)
@@ -111,7 +111,7 @@ local function splitWith(p1, Callback, Text: string, Length, p2, p3) --[[ Line: 
 	return Segment, PossibleBreak
 end
 
-return function(Word, Callback, Text: string, p4) --[[ Line: 174 | Named "split" ]]
+return function(Word, Callback, Text: string, p4)
 	-- upvalues: TextSplitByModule (copy), Module (copy), Module1 (copy), splitWith (copy)
 	local Length = utf8.len(Text)
 	

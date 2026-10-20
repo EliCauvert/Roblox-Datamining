@@ -5,7 +5,7 @@ local _ = require(Foundation.Enums.InputSize)
 local _ = require(Foundation.Components.Types)
 local AccordionContextModule = require(script.Parent.AccordionContext)
 
-return function() --[[ Line: 26 ]]
+return function()
 	-- upvalues: ReactModule (copy), AccordionContextModule (copy)
 	return ReactModule.useContext(AccordionContextModule)
 end

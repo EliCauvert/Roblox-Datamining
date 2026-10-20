@@ -2,12 +2,12 @@
 local Module = {}
 Module.__index = Module
 
-function Module.__tostring(p1) --[[ Line: 29 ]]
+function Module.__tostring(p1)
 	-- upvalues: Module (copy)
 	return getmetatable(Module).__tostring(p1)
 end
 
-local function _(p1) --[[ Line: 35 | Named "__createError" ]]
+local function _(p1)
 	-- upvalues: Module (copy)
 	local self = setmetatable({ name = "Error", message = p1 or "" }, Module)
 	Module.__captureStackTrace(self, 4)
@@ -15,7 +15,7 @@ local function _(p1) --[[ Line: 35 | Named "__createError" ]]
 	return self
 end
 
-function Module.new(p1) --[[ Line: 44 ]]
+function Module.new(p1)
 	-- upvalues: Module (copy)
 	local self = setmetatable({ name = "Error", message = p1 or "" }, Module)
 	Module.__captureStackTrace(self, 4)
@@ -23,12 +23,12 @@ function Module.new(p1) --[[ Line: 44 ]]
 	return self
 end
 
-function Module.captureStackTrace(p1, p2) --[[ Line: 48 ]]
+function Module.captureStackTrace(p1, p2)
 	-- upvalues: Module (copy)
 	Module.__captureStackTrace(p1, 3, p2)
 end
 
-function Module:__captureStackTrace(p1, p2) --[[ Line: 52 ]]
+function Module:__captureStackTrace(p1, p2)
 	-- upvalues: Module (copy)
 	if typeof(p2) == "function" then
 		local Traceback = debug.traceback(nil, p1)
@@ -49,20 +49,20 @@ function Module:__captureStackTrace(p1, p2) --[[ Line: 52 ]]
 	Module.__recalculateStacktrace(self)
 end
 
-function Module:__recalculateStacktrace() --[[ Line: 76 ]]
+function Module:__recalculateStacktrace()
 	local Message = self.message
 	self.stack = ((self.name or "Error") .. (if Message == nil or Message == "" then "" else ": " .. Message)) .. "\n" .. (if self.__stack then self.__stack else "")
 end
 
 return (setmetatable(Module, {
-	__call = function(_, ...) --[[ Line: 88 ]]
+	__call = function(_, ...)
 		-- upvalues: Module (copy)
 		local self = setmetatable({ name = "Error", message = (...) or "" }, Module)
 		Module.__captureStackTrace(self, 4)
 		
 		return self
 	end,
-	__tostring = function(p1): string --[[ Line: 91 ]]
+	__tostring = function(p1): string
 		return if p1.name == nil then tostring("Error") elseif p1.message and p1.message ~= "" then string.format("%s: %s", tostring(p1.name), (tostring(p1.message))) else tostring(p1.name)
 	end
 }))

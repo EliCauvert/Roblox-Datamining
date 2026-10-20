@@ -2,7 +2,7 @@
 local PageModule = require(script.Parent.Parent.page.page)
 AppLoggerModule:addSink(require(script.Parent.PrintSink).new(AppLoggerModule.Levels.Error))
 
-return function() --[[ Line: 8 ]]
+return function()
 	-- upvalues: AppLoggerModule (copy), PageModule (copy)
 	AppLoggerModule:info("calling {root}")
 	PageModule.init(AppLoggerModule)

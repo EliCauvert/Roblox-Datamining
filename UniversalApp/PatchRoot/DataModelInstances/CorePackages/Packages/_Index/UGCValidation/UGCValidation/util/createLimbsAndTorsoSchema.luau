@@ -3,7 +3,7 @@ local ConstantsModule = require(Parent.Constants)
 local _ = require(Parent.util.Types)
 local CreateIndividualBodyPartSchemaModule = require(Parent.util.createIndividualBodyPartSchema)
 
-return function(p1, p2, p3) --[[ Line: 8 | Named "createLimbsAndTorsoSchema" ]]
+return function(p1, p2, p3)
 	-- upvalues: ConstantsModule (copy), CreateIndividualBodyPartSchemaModule (copy)
 	local config = { ClassName = "Folder", Name = { p2 }, _children = {} }
 	

@@ -8,7 +8,7 @@ local View = FoundationModule.View
 local LoadableVideo = require(Parent.MomentsCommon).LoadableVideo
 local UseTokensFunction = FoundationModule.Hooks.useTokens
 
-return function(p1) --[[ Line: 34 ]]
+return function(p1)
 	-- upvalues: UseTokensFunction (copy), ReactModule (copy), View (copy), Icon (copy), Image (copy), LoadableVideo (copy), DashModule (copy)
 	local UseTokensResult = UseTokensFunction()
 	

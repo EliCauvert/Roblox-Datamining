@@ -18,7 +18,7 @@ local config = {
 	initialMode = ColorInputModeModule.RGB
 }
 
-local function _(p1) --[[ Line: 40 | Named "resolveInitialHSV" ]]
+local function _(p1)
 	if type(p1) == "table" then
 		return p1.H / 360, (p1.S or 100) / 100, (p1.V or 100) / 100
 	else
@@ -26,7 +26,7 @@ local function _(p1) --[[ Line: 40 | Named "resolveInitialHSV" ]]
 	end
 end
 
-return function(p1) --[[ Line: 48 | Named "ColorPicker" ]]
+return function(p1)
 	-- upvalues: ColorInputModeModule (copy), WithDefaultsModule (copy), config (copy), UseTokensModule (copy), ReactModule (copy), ColorUtilsModule (copy), ViewModule (copy), WithCommonPropsModule (copy), ColorInputsModule (copy), BrickColorPickerModule (copy), SVPickerModule (copy), ColorSliderModule (copy), ColorSliderTypeModule (copy)
 	local AvailableModes = p1.availableModes or {
 		ColorInputModeModule.RGB,
@@ -55,12 +55,12 @@ return function(p1) --[[ Line: 48 | Named "ColorPicker" ]]
 	local UseBindingResult5, UseBindingResult2_4 = ReactModule.useBinding(WithDefaultsModuleResult.initialAlpha or 1)
 	local UseStateResult, UseStateResult2 = ReactModule.useState(WithDefaultsModuleResult.initialMode or ColorInputModeModule.RGB)
 	local MapResult = UseBindingResult:map(ColorUtilsModule.toColor3)
-	local MapResult1 = UseBindingResult:map(function(p2): boolean --[[ Line: 70 ]]
+	local MapResult1 = UseBindingResult:map(function(p2): boolean
 		-- upvalues: ColorUtilsModule (upval)
 		return not ColorUtilsModule.isPartialHSV(p2)
 	end)
 	local UseRefResult = ReactModule.useRef(false)
-	ReactModule.useEffect(function() --[[ Line: 76 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: WithDefaultsModuleResult (copy), AvailableModes (copy), UseStateResult2 (copy)
 		local InitialMode = WithDefaultsModuleResult.initialMode
 		
@@ -79,12 +79,12 @@ return function(p1) --[[ Line: 48 | Named "ColorPicker" ]]
 			end
 		end
 	end, { WithDefaultsModuleResult.initialMode })
-	local UseResult = ReactModule.useCallback(function(p2, p3) --[[ Line: 95 ]]
+	local UseResult = ReactModule.useCallback(function(p2, p3)
 		-- upvalues: UseBindingResult2 (copy), WithDefaultsModuleResult (copy)
 		UseBindingResult2(p2)
 		WithDefaultsModuleResult.onColorChanged(p2, p3)
 	end, { WithDefaultsModuleResult.onColorChanged })
-	local UseResult1 = ReactModule.useCallback(function(p2) --[[ Line: 100 ]]
+	local UseResult1 = ReactModule.useCallback(function(p2)
 		-- upvalues: UseBindingResult2_4 (copy), WithDefaultsModuleResult (copy)
 		UseBindingResult2_4(p2)
 		
@@ -92,12 +92,12 @@ return function(p1) --[[ Line: 48 | Named "ColorPicker" ]]
 			WithDefaultsModuleResult.onAlphaChanged(p2)
 		end
 	end, { WithDefaultsModuleResult.onAlphaChanged })
-	local UseResult2 = ReactModule.useCallback(function(p2) --[[ Line: 107 ]]
+	local UseResult2 = ReactModule.useCallback(function(p2)
 		-- upvalues: UseResult (copy)
 		UseResult(p2.Color, p2)
 	end, { UseResult })
 	local HasOnAlphaChanged = WithDefaultsModuleResult.onAlphaChanged ~= nil
-	local UseResult3 = ReactModule.useCallback(function(p2) --[[ Line: 113 ]]
+	local UseResult3 = ReactModule.useCallback(function(p2)
 		-- upvalues: UseResult (copy)
 		UseResult(p2, nil)
 	end, { UseResult })
@@ -115,7 +115,7 @@ return function(p1) --[[ Line: 48 | Named "ColorPicker" ]]
 		UseBindingResult2_2,
 		UseBindingResult2_3
 	})
-	ReactModule.useEffect(function() --[[ Line: 139 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: MapResult (copy), UseBindingResult2_1 (copy), UseBindingResult2_2 (copy), UseBindingResult2_3 (copy)
 		local HSV, HSV2, HSV3 = MapResult:getValue():ToHSV()
 		UseBindingResult2_1(HSV)
@@ -146,7 +146,7 @@ return function(p1) --[[ Line: 48 | Named "ColorPicker" ]]
 				hue = UseBindingResult1,
 				saturation = UseBindingResult3,
 				value = UseBindingResult4,
-				onChanged = function(p2, p3) --[[ Line: 182 ]]
+				onChanged = function(p2, p3)
 					-- upvalues: UseResult4 (copy), UseBindingResult1 (copy)
 					UseResult4(UseBindingResult1:getValue(), p2, p3)
 				end,
@@ -160,7 +160,7 @@ return function(p1) --[[ Line: 48 | Named "ColorPicker" ]]
 			LayoutOrder = 3,
 			sliderType = ColorSliderTypeModule.Hue,
 			value = UseBindingResult1,
-			onValueChanged = function(p2) --[[ Line: 197 ]]
+			onValueChanged = function(p2)
 				-- upvalues: UseResult4 (copy), UseBindingResult3 (copy), UseBindingResult4 (copy)
 				UseResult4(p2, UseBindingResult3:getValue(), UseBindingResult4:getValue())
 			end,

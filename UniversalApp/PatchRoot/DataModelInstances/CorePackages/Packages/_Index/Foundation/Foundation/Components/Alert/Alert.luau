@@ -34,11 +34,11 @@ local config1 = {
 }
 local Width = require(Foundation.Utility.Responsive.BreakpointConfig).widths[require(Foundation.Enums.Breakpoint).XSmall]
 
-local function _(p1, p2) --[[ Line: 102 | Named "getTrailingLabels" ]]
+local function _(p1, p2)
 	return if p1 then p1.text elseif p2 then `{p2.primary.text}|{if p2.secondary then p2.secondary.text else ""}` else ""
 end
 
-local function WrappingRichText(Frame) --[[ Line: 114 ]]
+local function WrappingRichText(Frame)
 	-- upvalues: ReactModule (copy), TextModule (copy), ViewModule (copy)
 	local UseStateResult, UseStateResult2 = ReactModule.useState(0)
 	local AlertWidth = Frame.alertWidth
@@ -46,7 +46,7 @@ local function WrappingRichText(Frame) --[[ Line: 114 ]]
 	return ReactModule.createElement(ViewModule, {
 		tag = Frame.slot.tag,
 		LayoutOrder = Frame.LayoutOrder,
-		onAbsoluteSizeChanged = ReactModule.useCallback(function(Frame) --[[ Line: 125 ]]
+		onAbsoluteSizeChanged = ReactModule.useCallback(function(Frame)
 			-- upvalues: AlertWidth (copy), UseStateResult2 (copy)
 			local X = Frame.AbsoluteSize.X
 			
@@ -68,13 +68,13 @@ local function WrappingRichText(Frame) --[[ Line: 114 ]]
 	})
 end
 
-return ReactModule.memo(ReactModule.forwardRef(function(p3, Ref) --[[ Line: 162 | Named "Alert" ]]
+return ReactModule.memo(ReactModule.forwardRef(function(p3, Ref)
 	-- upvalues: WithDefaultsModule (copy), config (copy), UseTokensModule (copy), config1 (copy), ReactModule (copy), Width (copy), FlagsModule (copy), UseAlertVariantsModule (copy), ButtonVariantModule (copy), AlertConstantsModule (copy), IconVariant (copy), AlertSeverityModule (copy), IsBuilderIconModule (copy), IconModule (copy), IconSizeModule (copy), ViewModule (copy), WrappingRichText (copy), TextModule (copy), EscapeRichTextModule (copy), StateLayerAffordanceModule (copy), ButtonGroupModule (copy), InputSizeModule (copy), CloseAffordanceModule (copy), CloseAffordanceVariantModule (copy), WithCommonPropsModule (copy), AlertVariantModule (copy)
 	local WithDefaultsModuleResult = WithDefaultsModule(p3, config)
 	local UseTokensModuleResult = UseTokensModule()
 	local Entry = config1[WithDefaultsModuleResult.variant] or WithDefaultsModuleResult.variant
 	local UseStateResult, UseStateResult2 = ReactModule.useState(Vector2.zero)
-	local UseResult = ReactModule.useCallback(function(Frame) --[[ Line: 169 ]]
+	local UseResult = ReactModule.useCallback(function(Frame)
 		-- upvalues: UseStateResult2 (copy), WithDefaultsModuleResult (copy)
 		UseStateResult2(Frame.AbsoluteSize)
 		
@@ -83,7 +83,7 @@ return ReactModule.memo(ReactModule.forwardRef(function(p3, Ref) --[[ Line: 162 
 		end
 	end, { WithDefaultsModuleResult.onAbsoluteSizeChanged })
 	local UseStateResult1, UseStateResult2_1 = ReactModule.useState(0)
-	local UseResult1 = ReactModule.useCallback(function(Frame) --[[ Line: 177 ]]
+	local UseResult1 = ReactModule.useCallback(function(Frame)
 		-- upvalues: UseStateResult2_1 (copy)
 		UseStateResult2_1(Frame.AbsoluteSize.X)
 	end, {})
@@ -91,7 +91,7 @@ return ReactModule.memo(ReactModule.forwardRef(function(p3, Ref) --[[ Line: 162 
 	local Actions = WithDefaultsModuleResult.actions
 	local Text = if Link then Link.text elseif Actions then `{Actions.primary.text}|{if Actions.secondary then Actions.secondary.text else ""}` else ""
 	local UseRefResult = ReactModule.useRef(false)
-	ReactModule.useEffect(function() --[[ Line: 184 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UseRefResult (copy), UseStateResult2_1 (copy)
 		if UseRefResult.current then
 			UseStateResult2_1(0)
@@ -102,7 +102,7 @@ return ReactModule.memo(ReactModule.forwardRef(function(p3, Ref) --[[ Line: 162 
 	local ScaledX = UseStateResult.X * (if FlagsModule.FoundationAlertStackTrailingOnOverflow then 0.3 else 0.4)
 	local IsXBelow1: boolean = if FlagsModule.FoundationAlertStackTrailingOnOverflow then IsXBelow or ScaledX > 0 and ScaledX < UseStateResult1 else IsXBelow or WithDefaultsModuleResult.actions ~= nil and (ScaledX > 0 and ScaledX < UseStateResult1)
 	local UseAlertVariantsModuleResult = UseAlertVariantsModule(UseTokensModuleResult, WithDefaultsModuleResult.severity, Entry, IsXBelow1)
-	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 203 ]]
+	local UseMemoResult = ReactModule.useMemo(function()
 		-- upvalues: WithDefaultsModuleResult (copy), ButtonVariantModule (upval)
 		if not WithDefaultsModuleResult.actions then
 			return nil

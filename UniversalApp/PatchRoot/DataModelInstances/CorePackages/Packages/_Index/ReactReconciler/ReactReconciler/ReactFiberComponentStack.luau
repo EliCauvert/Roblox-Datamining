@@ -17,7 +17,7 @@ local DescribeBuiltInComponentFrameFunction = ReactComponentStackFrame.describeB
 local DescribeFunctionComponentFrameFunction = ReactComponentStackFrame.describeFunctionComponentFrame
 local DescribeClassComponentFrameFunction = ReactComponentStackFrame.describeClassComponentFrame
 
-local function describeFiber(Return) --[[ Line: 39 ]]
+local function describeFiber(Return)
 	-- upvalues: ReactGlobalsModule (copy), HostComponent (copy), DescribeBuiltInComponentFrameFunction (copy), LazyComponent (copy), SuspenseComponent (copy), SuspenseListComponent (copy), FunctionComponent (copy), IndeterminateComponent (copy), SimpleMemoComponent (copy), DescribeFunctionComponentFrameFunction (copy), ForwardRef (copy), ClassComponent (copy), DescribeClassComponentFrameFunction (copy)
 	local Type = nil
 	
@@ -34,9 +34,9 @@ local function describeFiber(Return) --[[ Line: 39 ]]
 end
 
 return {
-	getStackByFiberInDevAndProd = function(Return) --[[ Line: 77 ]]
+	getStackByFiberInDevAndProd = function(Return)
 		-- upvalues: describeFiber (copy)
-		local Success, Result = pcall(function(): string --[[ Line: 78 ]]
+		local Success, Result = pcall(function(): string
 			-- upvalues: Return (copy), describeFiber (upval)
 			local Text = ""
 			local Return1 = Return

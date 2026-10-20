@@ -2,7 +2,7 @@
 local InputSizeModule = require(Foundation.Enums.InputSize)
 local _ = require(Foundation.Providers.Style.Tokens)
 
-return function(p1, p2): UDim2 --[[ Line: 9 | Named "getKnobSize" ]]
+return function(p1, p2): UDim2
 	-- upvalues: InputSizeModule (copy)
 	local Entry = ({
 		[InputSizeModule.XSmall] = p1.Size.Size_300,

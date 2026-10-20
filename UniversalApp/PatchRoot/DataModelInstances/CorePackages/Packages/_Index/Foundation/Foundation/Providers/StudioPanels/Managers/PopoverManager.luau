@@ -4,13 +4,13 @@ local FlagsModule = require(Foundation.Utility.Flags)
 local StudioUriModule = require(Foundation.Utility.Plugin.StudioUri)
 local _ = require(script.Parent.Parent.Types)
 
-local function _(PluginGui, Function) --[[ Line: 19 | Named "bindToClose" ]]
+local function _(PluginGui, Function)
 	if PluginGui:IsA("PluginGui") then
 		PluginGui:BindToClose(Function)
 	end
 end
 
-local _ = function(p1, p2, p3): boolean --[[ Line: 38 | Named "isStrictDescendantOf" ]]
+local _ = function(p1, p2, p3): boolean
 	local ParentPopoverId = p3.parentPopoverId
 	while ParentPopoverId do
 		if ParentPopoverId == p2.id then
@@ -27,7 +27,7 @@ end
 local PopoverManager = {}
 PopoverManager.__index = PopoverManager
 
-function PopoverManager.new(_plugin, _uriScope) --[[ Line: 71 ]]
+function PopoverManager.new(_plugin, _uriScope)
 	-- upvalues: PopoverManager (copy), StudioUriModule (copy)
 	local self = setmetatable({}, PopoverManager)
 	self._uriScope = _uriScope
@@ -41,7 +41,7 @@ function PopoverManager.new(_plugin, _uriScope) --[[ Line: 71 ]]
 	return self
 end
 
-function PopoverManager:openAtAsync(p4, p5, p6, p7, Enabled) --[[ Line: 102 ]]
+function PopoverManager:openAtAsync(p4, p5, p6, p7, Enabled)
 	-- upvalues: FlagsModule (copy)
 	local AcquirePanelAsyncResult = self:_acquirePanelAsync(p5, if p6 == nil then 0 else p6, p7, if FlagsModule.FoundationPopoverPluginFocusable then Enabled == true else false)
 	AcquirePanelAsyncResult.panel.Enabled = false
@@ -61,7 +61,7 @@ function PopoverManager:openAtAsync(p4, p5, p6, p7, Enabled) --[[ Line: 102 ]]
 		return {
 			container = AcquirePanelAsyncResult.panel,
 			popoverId = AcquirePanelAsyncResult.id,
-			setSizeAsync = function(Vector) --[[ Line: 134 ]]
+			setSizeAsync = function(Vector)
 				-- upvalues: AcquirePanelAsyncResult (copy), Generation (copy), self (copy)
 				if AcquirePanelAsyncResult.generation == Generation and AcquirePanelAsyncResult.open then
 					self._panels:SetSizeAsync(AcquirePanelAsyncResult.uri, Vector2.new(math.ceil((math.min(3000, Vector.X))), (math.ceil((math.min(3000, Vector.Y))))))
@@ -69,7 +69,7 @@ function PopoverManager:openAtAsync(p4, p5, p6, p7, Enabled) --[[ Line: 102 ]]
 					return
 				end
 			end,
-			updateAsync = function(p8) --[[ Line: 142 ]]
+			updateAsync = function(p8)
 				-- upvalues: AcquirePanelAsyncResult (copy), Generation (copy), self (copy)
 				if AcquirePanelAsyncResult.generation == Generation and AcquirePanelAsyncResult.open and AcquirePanelAsyncResult.uri then
 					self._panels:SetAttachmentAsync(AcquirePanelAsyncResult.uri, {
@@ -82,7 +82,7 @@ function PopoverManager:openAtAsync(p4, p5, p6, p7, Enabled) --[[ Line: 102 ]]
 					return
 				end
 			end,
-			close = function() --[[ Line: 154 ]]
+			close = function()
 				-- upvalues: self (copy), AcquirePanelAsyncResult (copy), Generation (copy)
 				self:_closePopover(AcquirePanelAsyncResult, true, Generation)
 			end
@@ -91,11 +91,11 @@ function PopoverManager:openAtAsync(p4, p5, p6, p7, Enabled) --[[ Line: 102 ]]
 		return {
 			container = AcquirePanelAsyncResult.panel,
 			popoverId = AcquirePanelAsyncResult.id,
-			setSizeAsync = function(Vector) --[[ Line: 162 ]]
+			setSizeAsync = function(Vector)
 				-- upvalues: self (copy), AcquirePanelAsyncResult (copy)
 				self._panels:SetSizeAsync(AcquirePanelAsyncResult.uri, Vector2.new(math.ceil((math.min(3000, Vector.X))), (math.ceil((math.min(3000, Vector.Y))))))
 			end,
-			updateAsync = function(p8) --[[ Line: 167 ]]
+			updateAsync = function(p8)
 				-- upvalues: AcquirePanelAsyncResult (copy), self (copy)
 				if AcquirePanelAsyncResult.uri then
 					self._panels:SetAttachmentAsync(AcquirePanelAsyncResult.uri, {
@@ -108,7 +108,7 @@ function PopoverManager:openAtAsync(p4, p5, p6, p7, Enabled) --[[ Line: 102 ]]
 					return
 				end
 			end,
-			close = function() --[[ Line: 179 ]]
+			close = function()
 				-- upvalues: self (copy), AcquirePanelAsyncResult (copy)
 				self:_closePopover(AcquirePanelAsyncResult, true)
 			end
@@ -116,7 +116,7 @@ function PopoverManager:openAtAsync(p4, p5, p6, p7, Enabled) --[[ Line: 102 ]]
 	end
 end
 
-function PopoverManager:_createPanelAsync(Id, Depth: number, IsFocusable) --[[ Line: 193 ]]
+function PopoverManager:_createPanelAsync(Id, Depth: number, IsFocusable)
 	-- upvalues: FlagsModule (copy), StudioUriModule (copy)
 	local QWidgetPluginGui = self._plugin:CreateQWidgetPluginGui(Id, {
 		InitialEnabled = true,
@@ -133,12 +133,12 @@ function PopoverManager:_createPanelAsync(Id, Depth: number, IsFocusable) --[[ L
 	return QWidgetPluginGui, StudioUriModule.join(self._pluginUri, { Category = "Panels", ItemId = Id })
 end
 
-function PopoverManager._makePopoverId(p4): string --[[ Line: 217 ]]
+function PopoverManager._makePopoverId(p4): string
 	-- upvalues: HttpService (copy)
 	return `Popovers{if p4._uriScope then `/{p4._uriScope}` else ""}/{HttpService:GenerateGUID(false)}`
 end
 
-function PopoverManager:_createPopoverAsync(Id, Depth, IsFocusable) --[[ Line: 222 ]]
+function PopoverManager:_createPopoverAsync(Id, Depth, IsFocusable)
 	-- upvalues: FlagsModule (copy)
 	local PanelAsync, PanelAsync2 = self:_createPanelAsync(Id, Depth, IsFocusable)
 	local config = {
@@ -153,7 +153,7 @@ function PopoverManager:_createPopoverAsync(Id, Depth, IsFocusable) --[[ Line: 2
 		isFocusable = IsFocusable
 	}
 	
-	local function Function() --[[ Line: 241 ]]
+	local function Function()
 		-- upvalues: FlagsModule (upval), self (copy), config (copy)
 		if FlagsModule.FoundationPopoverPluginOverlayMeasurement then
 			self:_closePopover(config, false, config.generation)
@@ -168,7 +168,7 @@ function PopoverManager:_createPopoverAsync(Id, Depth, IsFocusable) --[[ Line: 2
 		PanelAsync:BindToClose(Function)
 	end
 	if PanelAsync:IsA("PluginGui") then
-		PanelAsync.InputBegan:Connect(function(Input) --[[ Line: 256 ]]
+		PanelAsync.InputBegan:Connect(function(Input)
 			-- upvalues: config (copy), self (copy)
 			if Input.UserInputType == Enum.UserInputType.MouseButton1 and config.open then
 				self:_closeChildPopovers(config)
@@ -178,7 +178,7 @@ function PopoverManager:_createPopoverAsync(Id, Depth, IsFocusable) --[[ Line: 2
 	return config
 end
 
-function PopoverManager:_activatePopover(PopoverAsync, OnClose, ParentPopoverId) --[[ Line: 266 ]]
+function PopoverManager:_activatePopover(PopoverAsync, OnClose, ParentPopoverId)
 	-- upvalues: FlagsModule (copy)
 	if FlagsModule.FoundationPopoverPluginOverlayMeasurement then
 		PopoverAsync.generation += 1
@@ -189,7 +189,7 @@ function PopoverManager:_activatePopover(PopoverAsync, OnClose, ParentPopoverId)
 	self._active[PopoverAsync.id] = PopoverAsync
 end
 
-function PopoverManager:_tryAcquireFromPool(OnClose, p5, ParentPopoverId, IsFocusable) --[[ Line: 285 ]]
+function PopoverManager:_tryAcquireFromPool(OnClose, p5, ParentPopoverId, IsFocusable)
 	-- upvalues: FlagsModule (copy)
 	local PoolEntry = self._pool[p5]
 	local Removed = nil
@@ -216,7 +216,7 @@ function PopoverManager:_tryAcquireFromPool(OnClose, p5, ParentPopoverId, IsFocu
 	end
 end
 
-function PopoverManager:_acquirePanelAsync(OnClose, Depth, ParentPopoverId, IsFocusable) --[[ Line: 319 ]]
+function PopoverManager:_acquirePanelAsync(OnClose, Depth, ParentPopoverId, IsFocusable)
 	local TryAcquireFromPoolResult = self:_tryAcquireFromPool(OnClose, Depth, ParentPopoverId, IsFocusable)
 	
 	if TryAcquireFromPoolResult then
@@ -229,7 +229,7 @@ function PopoverManager:_acquirePanelAsync(OnClose, Depth, ParentPopoverId, IsFo
 	end
 end
 
-function PopoverManager:prewarmPoolAsync(p6: number) --[[ Line: 341 ]]
+function PopoverManager:prewarmPoolAsync(p6: number)
 	if self._didPrewarm then return end
 	for i = 0, math.max(0, p6) do
 		if self._pool[i] == nil then
@@ -246,7 +246,7 @@ function PopoverManager:prewarmPoolAsync(p6: number) --[[ Line: 341 ]]
 	self._didPrewarm = true
 end
 
-function PopoverManager:_closeChildPopovers(p7) --[[ Line: 368 ]]
+function PopoverManager:_closeChildPopovers(p7)
 	local List = {}
 	
 	for _, value in self._active do
@@ -275,7 +275,7 @@ function PopoverManager:_closeChildPopovers(p7) --[[ Line: 368 ]]
 	end
 end
 
-function PopoverManager:_closePopover(AcquirePanelAsyncResult, p8, Generation) --[[ Line: 394 ]]
+function PopoverManager:_closePopover(AcquirePanelAsyncResult, p8, Generation)
 	-- upvalues: FlagsModule (copy)
 	if FlagsModule.FoundationPopoverPluginOverlayMeasurement and Generation ~= nil and AcquirePanelAsyncResult.generation ~= Generation then return end
 	if not AcquirePanelAsyncResult.open then return end
@@ -294,7 +294,7 @@ function PopoverManager:_closePopover(AcquirePanelAsyncResult, p8, Generation) -
 	table.insert(self._pool[Depth], AcquirePanelAsyncResult)
 end
 
-function PopoverManager:closeAll() --[[ Line: 428 ]]
+function PopoverManager:closeAll()
 	local List = {}
 	
 	for _, value in self._active do
@@ -305,7 +305,7 @@ function PopoverManager:closeAll() --[[ Line: 428 ]]
 	end
 end
 
-function PopoverManager:destroy() --[[ Line: 442 ]]
+function PopoverManager:destroy()
 	self:closeAll()
 	
 	for _, value in self._pool do

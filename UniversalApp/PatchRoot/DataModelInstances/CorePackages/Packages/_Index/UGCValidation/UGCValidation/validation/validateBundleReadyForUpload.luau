@@ -18,9 +18,9 @@ local List = {
 	Enum.AssetType.EyelashAccessory
 }
 
-return function(Model: Model, p1, p2, p3, AllowEditableInstances, BypassFlags) --[[ Line: 56 | Named "validateBundleReadyForUpload" ]]
+return function(Model: Model, p1, p2, p3, AllowEditableInstances, BypassFlags)
 	-- upvalues: PromiseModule (copy), FixUpPreValidationModule (copy), CreateUGCBodyPartFoldersModule (copy), List (copy), HttpService (copy), CreateEditableInstancesForContextModule (copy), ValidateInternalModule (copy), LegacyValidationAdapterModule (copy), DestroyEditableInstancesModule (copy), ConstantsInterfaceModule (copy), ValidateFullBodyModule (copy)
-	local Callback: (any) -> () = p3 or function() --[[ Line: 64 ]] end
+	local Callback: (any) -> () = p3 or function() end
 	assert(Callback ~= nil, "Luau")
 	
 	if not Model:IsA("Model") then
@@ -67,7 +67,7 @@ return function(Model: Model, p1, p2, p3, AllowEditableInstances, BypassFlags) -
 			end
 		end
 	end
-	table.sort(List1, function(A, B): boolean --[[ Line: 141 ]]
+	table.sort(List1, function(A, B): boolean
 		-- upvalues: List (upval)
 		return (table.find(List, A.assetType) or 1e999) < (table.find(List, B.assetType) or 1e999)
 	end)
@@ -75,7 +75,7 @@ return function(Model: Model, p1, p2, p3, AllowEditableInstances, BypassFlags) -
 	Callback(Tbl)
 	local Guid = HttpService:GenerateGUID()
 	
-	return PromiseModule.each(List1, function(p4, p5) --[[ Line: 157 ]]
+	return PromiseModule.each(List1, function(p4, p5)
 		-- upvalues: AllowEditableInstances (copy), BypassFlags (copy), CreateEditableInstancesForContextModule (upval), ValidateInternalModule (upval), LegacyValidationAdapterModule (upval), Guid (copy), DestroyEditableInstancesModule (upval), Tbl (ref), Callback (ref)
 		if p4.status == "finished" then return end
 		assert(p4.instance ~= nil, "Unfinished piece doesn't have an instnace")
@@ -121,10 +121,10 @@ return function(Model: Model, p1, p2, p3, AllowEditableInstances, BypassFlags) -
 		Tbl.pieces = table.clone(Tbl.pieces)
 		Tbl.pieces[p5].status = "finished"
 		Callback(Tbl)
-	end):andThen(function() --[[ Line: 222 ]]
+	end):andThen(function()
 		-- upvalues: p2 (copy), ConstantsInterfaceModule (upval), Tbl (ref), AllowEditableInstances (copy), BypassFlags (copy), CreateEditableInstancesForContextModule (upval), ValidateFullBodyModule (upval), LegacyValidationAdapterModule (upval), Guid (copy), DestroyEditableInstancesModule (upval), Callback (ref)
 		if p2 == "Body" then
-			local FullBodyData = (function(List) --[[ Line: 224 | Named "createFullBodyData" ]]
+			local FullBodyData = (function(List)
 				-- upvalues: ConstantsInterfaceModule (upval)
 				local List1 = {}
 				
@@ -181,7 +181,7 @@ return function(Model: Model, p1, p2, p3, AllowEditableInstances, BypassFlags) -
 			end
 			Callback(Tbl)
 		end
-	end):andThen(function() --[[ Line: 303 ]]
+	end):andThen(function()
 		-- upvalues: Tbl (ref)
 		return Tbl
 	end)

@@ -9,10 +9,10 @@ local config = {
 	}
 }
 
-return function(p1) --[[ Line: 26 | Named "ResponsiveProvider" ]]
+return function(p1)
 	-- upvalues: ReactModule (copy), WithDefaultsModule (copy), config (copy), ResponsiveContextModule (copy)
 	return ReactModule.createElement(ResponsiveContextModule.Provider, {
-		value = ReactModule.useMemo(function() --[[ Line: 27 ]]
+		value = ReactModule.useMemo(function()
 			-- upvalues: WithDefaultsModule (upval), p1 (copy), config (upval)
 			return {
 				config = WithDefaultsModule(p1.config or {}, config.config)

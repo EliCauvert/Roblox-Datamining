@@ -2,9 +2,9 @@
 local Observable = require(script.Parent.Observable).Observable
 
 return {
-	fixObservableSubclass = function(Observables) --[[ Line: 30 ]]
+	fixObservableSubclass = function(Observables)
 		-- upvalues: Observable (copy)
-		local function _(Key) --[[ Line: 32 | Named "set" ]]
+		local function _(Key)
 			-- upvalues: Observables (copy), Observable (upval)
 			Observables[Key] = Observable
 		end

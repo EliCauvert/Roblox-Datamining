@@ -17,11 +17,11 @@ local FadeInPlace = {
 }
 
 return {
-	getDefaultTransitionConfig = function(_, _, Modal) --[[ Line: 31 ]]
+	getDefaultTransitionConfig = function(_, _, Modal)
 		-- upvalues: StackPresentationStyleModule (copy), ModalSlideFromBottom (copy), FadeInPlace (copy), SlideFromRight (copy)
 		return if Modal == StackPresentationStyleModule.Modal then ModalSlideFromBottom elseif Modal == StackPresentationStyleModule.Overlay then FadeInPlace else SlideFromRight
 	end,
-	getTransitionConfig = function(Callback, p1, p2, Modal) --[[ Line: 41 ]]
+	getTransitionConfig = function(Callback, p1, p2, Modal)
 		-- upvalues: StackPresentationStyleModule (copy), ModalSlideFromBottom (copy), FadeInPlace (copy), SlideFromRight (copy), Object (copy)
 		local ModalSlideFromBottom1 = if Modal == StackPresentationStyleModule.Modal then ModalSlideFromBottom elseif Modal == StackPresentationStyleModule.Overlay then FadeInPlace else SlideFromRight
 		

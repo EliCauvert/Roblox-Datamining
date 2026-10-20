@@ -75,7 +75,7 @@ Tile.validateProps = TModule.intersection(TModule.strictInterface({
 	openTypeFeatures = TModule.optional(TModule.string),
 	onThumbnailLoaded = TModule.optional(TModule.callback),
 	isRoactGamepadEnabled = TModule.optional(TModule.boolean)
-}), function(p1) --[[ Line: 178 | Named "tileBannerUseValidator" ]]
+}), function(p1)
 	if p1.bannerText and p1.footer then
 		return false, "A custom footer and bannerText can't be used together"
 	else
@@ -100,10 +100,10 @@ Tile.defaultProps = {
 	thumbnailFrameSize = UDim2.new(1, 0, 1, 0)
 }
 
-function Tile.init(p1) --[[ Line: 206 ]]
+function Tile.init(p1)
 	p1.state = { tileWidth = 0, tileHeight = 0 }
 	
-	function p1.onAbsoluteSizeChange(Frame: Frame) --[[ Line: 212 ]]
+	function p1.onAbsoluteSizeChange(Frame: Frame)
 		-- upvalues: p1 (copy)
 		p1:setState({
 			tileWidth = Frame.AbsoluteSize.X,
@@ -112,7 +112,7 @@ function Tile.init(p1) --[[ Line: 206 ]]
 	end
 end
 
-function Tile.render(p1) --[[ Line: 222 ]]
+function Tile.render(p1)
 	-- upvalues: WithTextSizeOffsetModule (copy), WithStyleModule (copy), WithSelectionCursorProviderModule (copy), FoundationFontFaceMigration (copy), GetFontFromFontStyleModule (copy), ImagesModule (copy), GetWrappedTextWithIconModule (copy), GetTextSizeModule (copy), ReactModule (copy), RoactGamepadModule (copy), InteractableModule (copy), CursorKindModule (copy), TileThumbnailModule (copy), _UDim (copy), TileNameModule (copy), StyledTextLabelModule (copy), TileBannerModule (copy)
 	local Footer = p1.props.footer
 	local Name = p1.props.name
@@ -141,11 +141,11 @@ function Tile.render(p1) --[[ Line: 222 ]]
 	local AddSubtitleSpace = p1.props.addSubtitleSpace
 	local HorizontalAlignment = p1.props.horizontalAlignment
 	
-	return WithTextSizeOffsetModule(function(p2) --[[ Line: 250 ]]
+	return WithTextSizeOffsetModule(function(p2)
 		-- upvalues: WithStyleModule (upval), WithSelectionCursorProviderModule (upval), p1 (copy), TitleTextLineCount (copy), InnerPadding (copy), TitleTopPadding (copy), AddSubtitleSpace (copy), UseMaxTitleHeight (copy), Name (copy), FoundationFontFaceMigration (upval), GetFontFromFontStyleModule (upval), TitleIcon (copy), ImagesModule (upval), GetWrappedTextWithIconModule (upval), GetTextSizeModule (upval), Subtitle (copy), Footer (copy), BannerText (copy), ReactModule (upval), IsDisabled (copy), OnActivated (copy), RoactGamepadModule (upval), InteractableModule (upval), CursorKindModule (upval), HorizontalAlignment (copy), ThumbnailFrameSize (copy), TileThumbnailModule (upval), Thumbnail (copy), HasRoundedCorners (copy), _UDim (upval), IsSelected (copy), MultiSelect (copy), ThumbnailOverlayComponents (copy), ThumbnailSize (copy), ThumbnailColor (copy), ThumbnailTransparency (copy), BackgroundImage (copy), SubtitleTopPadding (copy), TileNameModule (upval), HasVerifiedBadge (copy), StyledTextLabelModule (upval), FooterTopPadding (copy), TileBannerModule (upval)
-		return WithStyleModule(function(p3) --[[ Line: 251 ]]
+		return WithStyleModule(function(p3)
 			-- upvalues: WithSelectionCursorProviderModule (upval), p1 (upval), TitleTextLineCount (upval), p2 (copy), InnerPadding (upval), TitleTopPadding (upval), AddSubtitleSpace (upval), UseMaxTitleHeight (upval), Name (upval), FoundationFontFaceMigration (upval), GetFontFromFontStyleModule (upval), TitleIcon (upval), ImagesModule (upval), GetWrappedTextWithIconModule (upval), GetTextSizeModule (upval), Subtitle (upval), Footer (upval), BannerText (upval), ReactModule (upval), IsDisabled (upval), OnActivated (upval), RoactGamepadModule (upval), InteractableModule (upval), CursorKindModule (upval), HorizontalAlignment (upval), ThumbnailFrameSize (upval), TileThumbnailModule (upval), Thumbnail (upval), HasRoundedCorners (upval), _UDim (upval), IsSelected (upval), MultiSelect (upval), ThumbnailOverlayComponents (upval), ThumbnailSize (upval), ThumbnailColor (upval), ThumbnailTransparency (upval), BackgroundImage (upval), SubtitleTopPadding (upval), TileNameModule (upval), HasVerifiedBadge (upval), StyledTextLabelModule (upval), FooterTopPadding (upval), TileBannerModule (upval)
-			return WithSelectionCursorProviderModule(function(Callback) --[[ Line: 252 ]]
+			return WithSelectionCursorProviderModule(function(Callback)
 				-- upvalues: p3 (copy), p1 (upval), TitleTextLineCount (upval), p2 (upval), InnerPadding (upval), TitleTopPadding (upval), AddSubtitleSpace (upval), UseMaxTitleHeight (upval), Name (upval), FoundationFontFaceMigration (upval), GetFontFromFontStyleModule (upval), TitleIcon (upval), ImagesModule (upval), GetWrappedTextWithIconModule (upval), GetTextSizeModule (upval), Subtitle (upval), Footer (upval), BannerText (upval), ReactModule (upval), IsDisabled (upval), OnActivated (upval), RoactGamepadModule (upval), InteractableModule (upval), CursorKindModule (upval), HorizontalAlignment (upval), ThumbnailFrameSize (upval), TileThumbnailModule (upval), Thumbnail (upval), HasRoundedCorners (upval), _UDim (upval), IsSelected (upval), MultiSelect (upval), ThumbnailOverlayComponents (upval), ThumbnailSize (upval), ThumbnailColor (upval), ThumbnailTransparency (upval), BackgroundImage (upval), SubtitleTopPadding (upval), TileNameModule (upval), HasVerifiedBadge (upval), StyledTextLabelModule (upval), FooterTopPadding (upval), TileBannerModule (upval)
 				local _Font = p3.Font
 				local Theme = p3.Theme
@@ -303,12 +303,12 @@ function Tile.render(p1) --[[ Line: 222 ]]
 	end)
 end
 
-local function v27(p1) --[[ Line: 468 ]]
+local function v27(p1)
 	-- upvalues: UseCursorModule (copy), _UDim (copy), CryoModule (copy), ReactModule (copy), Tile (copy)
 	return ReactModule.createElement(Tile, (CryoModule.Dictionary.join({ cursor = UseCursorModule(_UDim) }, p1)))
 end
 
-return ReactModule.forwardRef(function(p1, ThumbnailRef) --[[ Line: 476 ]]
+return ReactModule.forwardRef(function(p1, ThumbnailRef)
 	-- upvalues: ReactModule (copy), v27 (copy), CryoModule (copy)
 	return ReactModule.createElement(v27, CryoModule.Dictionary.join(p1, { thumbnailRef = ThumbnailRef }))
 end)

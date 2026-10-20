@@ -5,22 +5,22 @@ local config = {
 	_DESCRIPTION = "human-readable representations of tables",
 	_LICENSE = "\t  MIT LICENSE\n\n\t  Copyright (c) 2013 Enrique García Cota\n\n\t  Permission is hereby granted, free of charge, to any person obtaining a\n\t  copy of this software and associated documentation files (the\n\t  \"Software\"), to deal in the Software without restriction, including\n\t  without limitation the rights to use, copy, modify, merge, publish,\n\t  distribute, sublicense, and/or sell copies of the Software, and to\n\t  permit persons to whom the Software is furnished to do so, subject to\n\t  the following conditions:\n\n\t  The above copyright notice and this permission notice shall be included\n\t  in all copies or substantial portions of the Software.\n\n\t  THE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS\n\t  OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF\n\t  MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.\n\t  IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY\n\t  CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,\n\t  TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE\n\t  SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.\n\t",
 	KEY = setmetatable({}, {
-		__tostring = function(): string --[[ Line: 34 ]]
+		__tostring = function(): string
 			return "inspect.KEY"
 		end
 	}),
 	METATABLE = setmetatable({}, {
-		__tostring = function(): string --[[ Line: 39 ]]
+		__tostring = function(): string
 			return "inspect.METATABLE"
 		end
 	})
 }
 
-local function _(p1) --[[ Line: 44 | Named "rawpairs" ]]
+local function _(p1)
 	return next, p1, nil
 end
 
-local _ = function(Text: string): string --[[ Line: 50 | Named "smartQuote" ]]
+local _ = function(Text: string): string
 	return if Text:match("\"") and not Text:match("'") then "'" .. Text .. "'" else "\"" .. Text:gsub("\"", "\\\"") .. "\""
 end
 
@@ -43,16 +43,16 @@ for i = 0, 31 do
 		t[Character] = string.format("\\%03d", i)
 	end
 end
-local _ = function(Text: string) --[[ Line: 76 | Named "escape" ]]
+local _ = function(Text: string)
 	-- upvalues: t (copy), config1 (copy)
 	return (Text:gsub("\\", "\\\\"):gsub("(%c)%f[0-9]", t):gsub("%c", config1))
 end
 
-local _ = function(p1) --[[ Line: 80 | Named "isIdentifier" ]]
+local _ = function(p1)
 	return type(p1) == "string" and p1:match("^[_%a][_%a%d]*$")
 end
 
-local _ = function(Value: number, p1): boolean --[[ Line: 84 | Named "isSequenceKey" ]]
+local _ = function(Value: number, p1): boolean
 	return type(Value) == "number" and (Value >= 1 and Value <= p1) and math.floor(Value) == Value
 end
 
@@ -66,7 +66,7 @@ local config2 = {
 	thread = 7
 }
 
-local function sortKeys(A, B): boolean --[[ Line: 98 ]]
+local function sortKeys(A, B): boolean
 	-- upvalues: config2 (copy)
 	local ValueType = type(A)
 	local ValueType1 = type(B)
@@ -81,7 +81,7 @@ local function sortKeys(A, B): boolean --[[ Line: 98 ]]
 	end
 end
 
-local _ = function(p1): number --[[ Line: 122 | Named "getSequenceLength" ]]
+local _ = function(p1): number
 	local Count = 1
 	local RawValue = rawget(p1, Count)
 	while RawValue ~= nil do
@@ -91,7 +91,7 @@ local _ = function(p1): number --[[ Line: 122 | Named "getSequenceLength" ]]
 	return Count - 1
 end
 
-local function getNonSequentialKeys(KEY) --[[ Line: 132 ]]
+local function getNonSequentialKeys(KEY)
 	-- upvalues: sortKeys (copy)
 	local List = {}
 	local Count = 0
@@ -114,7 +114,7 @@ local function getNonSequentialKeys(KEY) --[[ Line: 132 ]]
 	return List, Count, CountDelta
 end
 
-local function countTableAppearances(Key, p2) --[[ Line: 145 ]]
+local function countTableAppearances(Key, p2)
 	-- upvalues: countTableAppearances (copy)
 	local P10 = p2 or {}
 	
@@ -136,7 +136,7 @@ local function countTableAppearances(Key, p2) --[[ Line: 145 ]]
 	return P10
 end
 
-local _ = function(p3) --[[ Line: 164 ]]
+local _ = function(p3)
 	local t = {}
 	local CountP11 = #p3
 	
@@ -146,7 +146,7 @@ local _ = function(p3) --[[ Line: 164 ]]
 	return t, CountP11
 end
 
-local function makePath(p4, ...) --[[ Line: 172 ]]
+local function makePath(p4, ...)
 	local list = { ... }
 	local t = {}
 	local CountP12 = #p4
@@ -160,7 +160,7 @@ local function makePath(p4, ...) --[[ Line: 172 ]]
 	return t
 end
 
-local function processRecursive(Callback, Key, p5, p6) --[[ Line: 181 ]]
+local function processRecursive(Callback, Key, p5, p6)
 	-- upvalues: processRecursive (copy), makePath (copy), config (copy)
 	if Key == nil then
 		return nil
@@ -195,7 +195,7 @@ end
 local t1 = {}
 local config3 = { __index = t1 }
 
-function t1.puts(p7, ...) --[[ Line: 217 ]]
+function t1.puts(p7, ...)
 	local list = { ... }
 	local Buffer = p7.buffer
 	local CountBuffer = #Buffer
@@ -206,21 +206,21 @@ function t1.puts(p7, ...) --[[ Line: 217 ]]
 	end
 end
 
-function t1.down(p8, Callback: () -> ()) --[[ Line: 227 ]]
+function t1.down(p8, Callback: () -> ())
 	p8.level += 1
 	Callback()
 	p8.level -= 1
 end
 
-function t1.tabify(p8) --[[ Line: 233 ]]
+function t1.tabify(p8)
 	p8:puts(p8.newline, string.rep(p8.indent, p8.level))
 end
 
-function t1.alreadyVisited(p8, KEY): boolean --[[ Line: 237 ]]
+function t1.alreadyVisited(p8, KEY): boolean
 	return p8.ids[KEY] ~= nil
 end
 
-function t1.getId(p8, KEY) --[[ Line: 241 ]]
+function t1.getId(p8, KEY)
 	-- upvalues: Callback (copy)
 	local Id = p8.ids[KEY]
 	
@@ -233,7 +233,7 @@ function t1.getId(p8, KEY) --[[ Line: 241 ]]
 	return (Callback(Id))
 end
 
-function t1.putKey(p8, p9) --[[ Line: 252 ]]
+function t1.putKey(p8, p9)
 	if type(p9) == "string" and p9:match("^[_%a][_%a%d]*$") then
 		return p8:puts(p9)
 	else
@@ -243,7 +243,7 @@ function t1.putKey(p8, p9) --[[ Line: 252 ]]
 	end
 end
 
-function t1.putTable(p8, KEY) --[[ Line: 261 ]]
+function t1.putTable(p8, KEY)
 	-- upvalues: config (copy), Callback (copy), getNonSequentialKeys (copy)
 	if KEY == config.KEY or KEY == config.METATABLE then
 		p8:puts((Callback(KEY)))
@@ -266,7 +266,7 @@ function t1.putTable(p8, KEY) --[[ Line: 261 ]]
 	local NonSequentialKeys, NonSequentialKeys2, NonSequentialKeys3 = getNonSequentialKeys(KEY)
 	local Meta = getmetatable(KEY)
 	p8:puts("{")
-	p8:down(function() --[[ Line: 277 ]]
+	p8:down(function()
 		-- upvalues: NonSequentialKeys3 (copy), p8 (copy), KEY (copy), NonSequentialKeys2 (copy), NonSequentialKeys (copy), Meta (copy)
 		local Count = 0
 		
@@ -308,7 +308,7 @@ function t1.putTable(p8, KEY) --[[ Line: 261 ]]
 	p8:puts("}")
 end
 
-function t1.putValue(p9, Text: string) --[[ Line: 320 ]]
+function t1.putValue(p9, Text: string)
 	-- upvalues: t (copy), config1 (copy), Callback (copy)
 	local ValueType = type(Text)
 	
@@ -332,7 +332,7 @@ function t1.putValue(p9, Text: string) --[[ Line: 320 ]]
 	end
 end
 
-function config.inspect(Key, p9): string --[[ Line: 336 ]]
+function config.inspect(Key, p9): string
 	-- upvalues: processRecursive (copy), countTableAppearances (copy), config3 (copy)
 	local P30 = p9 or {}
 	local Depth = P30.depth or 1e999
@@ -359,7 +359,7 @@ function config.inspect(Key, p9): string --[[ Line: 336 ]]
 end
 
 setmetatable(config, {
-	__call = function(_, ...) --[[ Line: 365 ]]
+	__call = function(_, ...)
 		-- upvalues: config (copy)
 		return config.inspect(...)
 	end

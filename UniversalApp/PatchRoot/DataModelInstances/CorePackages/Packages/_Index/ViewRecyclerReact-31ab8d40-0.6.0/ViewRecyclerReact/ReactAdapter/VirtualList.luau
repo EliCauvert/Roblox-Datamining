@@ -16,16 +16,16 @@ local UseVirtualListModule = require(ViewRecyclerReact.ReactAdapter.Private.useV
 local CreateElementFunction = ReactModule.createElement
 
 return {
-	create = function(p1) --[[ Line: 121 ]]
+	create = function(p1)
 		-- upvalues: RecyclingScopeModule (copy), CreateElementFunction (copy), VirtualListShellModule (copy), UseVirtualListModule (copy), UseReconciledDataSourceModule (copy), ReactModule (copy), RecyclingScopeContextModule (copy), RecyclableViewRegistryModule (copy)
 		local NewRecyclingScope = RecyclingScopeModule.create(p1)
 		
-		local function VirtualListRenderer(p2) --[[ Line: 124 ]]
+		local function VirtualListRenderer(p2)
 			-- upvalues: CreateElementFunction (upval), VirtualListShellModule (upval), UseVirtualListModule (upval)
 			return CreateElementFunction(VirtualListShellModule, UseVirtualListModule(p2))
 		end
 		
-		local function DeclarativeVirtualList(Tbl) --[[ Line: 128 ]]
+		local function DeclarativeVirtualList(Tbl)
 			-- upvalues: UseReconciledDataSourceModule (upval), CreateElementFunction (upval), VirtualListRenderer (copy)
 			local Copy = table.clone(Tbl)
 			Copy.data = nil
@@ -34,7 +34,7 @@ return {
 			return CreateElementFunction(VirtualListRenderer, Copy)
 		end
 		
-		local function DataSourceVirtualList(Tbl) --[[ Line: 136 ]]
+		local function DataSourceVirtualList(Tbl)
 			-- upvalues: CreateElementFunction (upval), VirtualListRenderer (copy)
 			local Copy = table.clone(Tbl)
 			Copy.dataSource = Tbl.data
@@ -43,7 +43,7 @@ return {
 			return CreateElementFunction(VirtualListRenderer, Copy)
 		end
 		
-		return function(p2) --[[ Line: 143 | Named "VirtualList" ]]
+		return function(p2)
 			-- upvalues: ReactModule (upval), RecyclingScopeContextModule (upval), RecyclableViewRegistryModule (upval), CreateElementFunction (upval), DataSourceVirtualList (copy), DeclarativeVirtualList (copy), NewRecyclingScope (copy)
 			local UseContextResult = ReactModule.useContext(RecyclingScopeContextModule)
 			local Data = p2.data

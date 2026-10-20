@@ -2,26 +2,26 @@
 local UserInputService = game:GetService("UserInputService")
 local MockableWarnFunction = require(script.Parent.Parent.FocusNavigationUtils).mockableWarn
 local _ = require(script.Parent.types)
-local Success, Result = pcall(function() --[[ Line: 13 ]]
+local Success, Result = pcall(function()
 	-- upvalues: GuiService (copy)
 	return GuiService:GetPropertyChangedSignal("SelectedCoreObject")
 end)
-local Success1, Result1 = pcall(function() --[[ Line: 17 ]]
+local Success1, Result1 = pcall(function()
 	return game:GetService("CoreGui")
 end)
 local config = {
-	Connect = function() --[[ Line: 23 ]]
+	Connect = function()
 		error("Could not access SelectedCoreObject signal; you may not have the correct permissions")
 	end
 }
 
 return {
 	CoreGui = {
-		getSelection = function() --[[ Line: 30 ]]
+		getSelection = function()
 			-- upvalues: GuiService (copy)
 			return GuiService.SelectedCoreObject
 		end,
-		setSelection = function(Object) --[[ Line: 33 ]]
+		setSelection = function(Object)
 			-- upvalues: Success1 (copy), Result1 (copy), MockableWarnFunction (copy), GuiService (copy)
 			if _G.__DEV__ and Success1 and Object ~= nil and not Object:IsDescendantOf(Result1) then
 				MockableWarnFunction(string.format("Attempting to focus non-CoreGui descendant '%s' from a CoreGui FocusNavigationService instance. Consider creating this FocusNavigationService with `FocusNavigation.EnginInterface.PlayerGui` instead", Object:GetFullName()))
@@ -41,11 +41,11 @@ return {
 		LastInputTypeChanged = UserInputService.LastInputTypeChanged
 	},
 	PlayerGui = {
-		getSelection = function() --[[ Line: 60 ]]
+		getSelection = function()
 			-- upvalues: GuiService (copy)
 			return GuiService.SelectedObject
 		end,
-		setSelection = function(Object) --[[ Line: 63 ]]
+		setSelection = function(Object)
 			-- upvalues: Success1 (copy), Result1 (copy), MockableWarnFunction (copy), GuiService (copy)
 			if _G.__DEV__ and Success1 and Object ~= nil and Object:IsDescendantOf(Result1) then
 				MockableWarnFunction(string.format("Attempting to focus CoreGui descendant '%s' from a non-CoreGui FocusNavigationService instance.Consider creating this FocusNavigationService with `FocusNavigation.EnginInterface.CoreGui` instead", Object:GetFullName()))

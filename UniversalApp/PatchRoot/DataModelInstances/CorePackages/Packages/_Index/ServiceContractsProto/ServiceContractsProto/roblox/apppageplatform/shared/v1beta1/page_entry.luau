@@ -4,7 +4,7 @@ local SurfacingModule = require(script.Parent.surfacing)
 local Module = {}
 Module.__index = Module
 
-function Module.new(p1) --[[ Line: 49 ]]
+function Module.new(p1)
 	-- upvalues: Module (copy)
 	return (setmetatable({
 		roblox_component = if p1 == nil or p1.roblox_component == nil then "" else p1.roblox_component,
@@ -15,7 +15,7 @@ function Module.new(p1) --[[ Line: 49 ]]
 	}, Module))
 end
 
-function Module:encode() --[[ Line: 59 ]]
+function Module:encode()
 	-- upvalues: ProtoModule (copy)
 	local Buf = buffer.create(0)
 	local Count = 0
@@ -47,7 +47,7 @@ function Module:encode() --[[ Line: 59 ]]
 	return Buf1
 end
 
-function Module.decode(Buf) --[[ Line: 94 ]]
+function Module.decode(Buf)
 	-- upvalues: Module (copy), ProtoModule (copy), SurfacingModule (copy)
 	local NewModule = Module.new()
 	local v1 = 0
@@ -96,7 +96,7 @@ function Module.decode(Buf) --[[ Line: 94 ]]
 	return NewModule
 end
 
-function Module:jsonEncode() --[[ Line: 157 ]]
+function Module:jsonEncode()
 	local t = {}
 	
 	if self.roblox_component ~= nil and self.roblox_component ~= "" then
@@ -117,7 +117,7 @@ function Module:jsonEncode() --[[ Line: 157 ]]
 	return t
 end
 
-function Module:jsonDecode() --[[ Line: 183 ]]
+function Module:jsonDecode()
 	-- upvalues: Module (copy), SurfacingModule (copy)
 	local NewModule = Module.new()
 	

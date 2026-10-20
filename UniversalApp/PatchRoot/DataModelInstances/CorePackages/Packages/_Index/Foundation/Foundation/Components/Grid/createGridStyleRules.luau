@@ -5,7 +5,7 @@ local ReactModule = require(Foundation.Parent.React)
 local _ = require(Foundation.Providers.Responsive.ResponsiveContext)
 local StyleRuleModule = require(Foundation.StyleSheet.StyleRule)
 
-local function createGridStyleRule(p1, ShortName) --[[ Line: 13 ]]
+local function createGridStyleRule(p1, ShortName)
 	-- upvalues: ReactModule (copy), StyleRuleModule (copy)
 	return ReactModule.createElement(StyleRuleModule, {
 		Selector = `{if ShortName then `.{ShortName}-col-{p1}` else `.col-{p1}`} ::UISizeConstraint`,
@@ -13,7 +13,7 @@ local function createGridStyleRule(p1, ShortName) --[[ Line: 13 ]]
 	})
 end
 
-return function(p2) --[[ Line: 24 | Named "createGridStyleRules" ]]
+return function(p2)
 	-- upvalues: createGridStyleRule (copy), ReactModule (copy), StyleRuleModule (copy)
 	local Breakpoint = p2.breakpoint
 	local Grid = p2.grid

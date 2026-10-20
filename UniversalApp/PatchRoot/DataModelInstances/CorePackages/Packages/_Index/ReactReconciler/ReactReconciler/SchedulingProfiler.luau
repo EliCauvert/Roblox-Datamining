@@ -9,13 +9,13 @@ local ReactVersion = require(Parent.Shared).ReactVersion
 local GetComponentNameFunction = require(Parent.Shared).getComponentName
 local HasPerformance = _G.performance ~= nil
 local Performance = _G.performance or {
-	mark = function(p1) --[[ Line: 41 ]]
+	mark = function(p1)
 		debug.profilebegin(p1)
 		debug.profileend()
 	end
 }
 
-function formatLanes(p1): string --[[ Line: 47 ]]
+function formatLanes(p1): string
 	return (tostring(p1))
 end
 
@@ -35,7 +35,7 @@ local ProfilerEventTypes = {
 if EnableSchedulingProfiler and HasPerformance then
 	Performance.mark("--react-init-" .. tostring(ReactVersion))
 end
-function t.markCommitStarted(p1) --[[ Line: 75 ]]
+function t.markCommitStarted(p1)
 	-- upvalues: EnableSchedulingProfiler (copy), HasPerformance (copy), Performance (copy), Callback (ref), ProfilerEventTypes (copy)
 	if EnableSchedulingProfiler then
 		if HasPerformance then
@@ -47,7 +47,7 @@ function t.markCommitStarted(p1) --[[ Line: 75 ]]
 	end
 end
 
-function t.markCommitStopped(p1) --[[ Line: 87 ]]
+function t.markCommitStopped(p1)
 	-- upvalues: EnableSchedulingProfiler (copy), HasPerformance (copy), Performance (copy), Callback (ref), ProfilerEventTypes (copy)
 	if EnableSchedulingProfiler then
 		if HasPerformance then
@@ -62,7 +62,7 @@ end
 local NewWeakMap = WeakMap.new()
 local Count = 0
 
-function getWakeableID(p1) --[[ Line: 105 ]]
+function getWakeableID(p1)
 	-- upvalues: NewWeakMap (copy), Count (ref)
 	if not NewWeakMap:has(p1) then
 		NewWeakMap:set(p1, Count)
@@ -71,23 +71,23 @@ function getWakeableID(p1) --[[ Line: 105 ]]
 	return NewWeakMap:get(p1)
 end
 
-function t.markComponentSuspended(p1, Promise) --[[ Line: 113 ]]
+function t.markComponentSuspended(p1, Promise)
 	-- upvalues: EnableSchedulingProfiler (copy), HasPerformance (copy), GetComponentNameFunction (copy), Performance (copy)
 	if EnableSchedulingProfiler and HasPerformance then
 		local WakeableID = getWakeableID(Promise)
 		local ComponentName = GetComponentNameFunction(p1.type) or "Unknown"
 		Performance.mark("--suspense-suspend-" .. tostring(WakeableID) .. "-" .. ComponentName)
-		Promise:andThen(function() --[[ Line: 122 ]]
+		Promise:andThen(function()
 			-- upvalues: Performance (upval), WakeableID (copy), ComponentName (copy)
 			Performance.mark("--suspense-resolved-" .. tostring(WakeableID) .. "-" .. ComponentName)
-		end, function() --[[ Line: 126 ]]
+		end, function()
 			-- upvalues: Performance (upval), WakeableID (copy), ComponentName (copy)
 			Performance.mark("--suspense-rejected-" .. tostring(WakeableID) .. "-" .. ComponentName)
 		end)
 	end
 end
 
-function t.markLayoutEffectsStarted(p1) --[[ Line: 135 ]]
+function t.markLayoutEffectsStarted(p1)
 	-- upvalues: EnableSchedulingProfiler (copy), HasPerformance (copy), Performance (copy), Callback (ref), ProfilerEventTypes (copy)
 	if EnableSchedulingProfiler then
 		if HasPerformance then
@@ -99,7 +99,7 @@ function t.markLayoutEffectsStarted(p1) --[[ Line: 135 ]]
 	end
 end
 
-function t.markLayoutEffectsStopped() --[[ Line: 147 ]]
+function t.markLayoutEffectsStopped()
 	-- upvalues: EnableSchedulingProfiler (copy), HasPerformance (copy), Performance (copy), Callback (ref), ProfilerEventTypes (copy)
 	if EnableSchedulingProfiler then
 		if HasPerformance then
@@ -111,7 +111,7 @@ function t.markLayoutEffectsStopped() --[[ Line: 147 ]]
 	end
 end
 
-function t.markPassiveEffectsStarted(p1) --[[ Line: 159 ]]
+function t.markPassiveEffectsStarted(p1)
 	-- upvalues: EnableSchedulingProfiler (copy), HasPerformance (copy), Performance (copy), Callback (ref), ProfilerEventTypes (copy)
 	if EnableSchedulingProfiler then
 		if HasPerformance then
@@ -123,7 +123,7 @@ function t.markPassiveEffectsStarted(p1) --[[ Line: 159 ]]
 	end
 end
 
-function t.markPassiveEffectsStopped(p1) --[[ Line: 171 ]]
+function t.markPassiveEffectsStopped(p1)
 	-- upvalues: EnableSchedulingProfiler (copy), HasPerformance (copy), Performance (copy), Callback (ref), ProfilerEventTypes (copy)
 	if EnableSchedulingProfiler then
 		if HasPerformance then
@@ -135,7 +135,7 @@ function t.markPassiveEffectsStopped(p1) --[[ Line: 171 ]]
 	end
 end
 
-function t.markRenderStarted(p1) --[[ Line: 183 ]]
+function t.markRenderStarted(p1)
 	-- upvalues: EnableSchedulingProfiler (copy), HasPerformance (copy), Performance (copy), Callback (ref), ProfilerEventTypes (copy)
 	if EnableSchedulingProfiler then
 		if HasPerformance then
@@ -147,7 +147,7 @@ function t.markRenderStarted(p1) --[[ Line: 183 ]]
 	end
 end
 
-function t.markRenderYielded() --[[ Line: 195 ]]
+function t.markRenderYielded()
 	-- upvalues: EnableSchedulingProfiler (copy), HasPerformance (copy), Performance (copy), Callback (ref), ProfilerEventTypes (copy)
 	if EnableSchedulingProfiler then
 		if HasPerformance then
@@ -159,7 +159,7 @@ function t.markRenderYielded() --[[ Line: 195 ]]
 	end
 end
 
-function t.markRenderStopped() --[[ Line: 207 ]]
+function t.markRenderStopped()
 	-- upvalues: EnableSchedulingProfiler (copy), HasPerformance (copy), Performance (copy), Callback (ref), ProfilerEventTypes (copy)
 	if EnableSchedulingProfiler then
 		if HasPerformance then
@@ -171,21 +171,21 @@ function t.markRenderStopped() --[[ Line: 207 ]]
 	end
 end
 
-function t.markRenderScheduled(p1) --[[ Line: 219 ]]
+function t.markRenderScheduled(p1)
 	-- upvalues: EnableSchedulingProfiler (copy), HasPerformance (copy), Performance (copy)
 	if EnableSchedulingProfiler and HasPerformance then
 		Performance.mark("--schedule-render-" .. formatLanes(p1))
 	end
 end
 
-function t.markForceUpdateScheduled(p1, p2) --[[ Line: 227 ]]
+function t.markForceUpdateScheduled(p1, p2)
 	-- upvalues: EnableSchedulingProfiler (copy), HasPerformance (copy), GetComponentNameFunction (copy), Performance (copy)
 	if EnableSchedulingProfiler and HasPerformance then
 		Performance.mark("--schedule-forced-update-" .. formatLanes(p2) .. "-" .. (GetComponentNameFunction(p1.type) or "Unknown"))
 	end
 end
 
-function t.markStateUpdateScheduled(p1, p2) --[[ Line: 239 ]]
+function t.markStateUpdateScheduled(p1, p2)
 	-- upvalues: EnableSchedulingProfiler (copy), HasPerformance (copy), GetComponentNameFunction (copy), Performance (copy)
 	if EnableSchedulingProfiler and HasPerformance then
 		Performance.mark("--schedule-state-update-" .. formatLanes(p2) .. "-" .. (GetComponentNameFunction(p1.type) or "Unknown"))
@@ -194,7 +194,7 @@ end
 
 t.profilerEventTypes = ProfilerEventTypes
 
-function t.registerProfilerEventCallback(p1) --[[ Line: 254 ]]
+function t.registerProfilerEventCallback(p1)
 	-- upvalues: Callback (ref)
 	if Callback then
 		warn("SchedulingProfiler: Another event callback was already registered.")

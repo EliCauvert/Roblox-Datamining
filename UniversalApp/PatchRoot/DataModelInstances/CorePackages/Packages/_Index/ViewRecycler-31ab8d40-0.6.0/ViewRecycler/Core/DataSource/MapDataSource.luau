@@ -4,14 +4,14 @@ local _ = require(ViewRecycler.Core.Types)
 local CreateEventModule = require(ViewRecycler.Internal.createEvent)
 local ReadDenseRangeModule = require(script.Parent.readDenseRange)
 
-return function(p1, Callback) --[[ Line: 17 | Named "createMapDataSource" ]]
+return function(p1, Callback)
 	-- upvalues: CreateEventModule (copy), DataSourceChangeTypeModule (copy), ReadDenseRangeModule (copy)
 	local T = {}
 	local EventModule = CreateEventModule()
 	local Count = 0
 	local SubscribeResult = nil
 	
-	local function getItem(Index) --[[ Line: 29 ]]
+	local function getItem(Index)
 		-- upvalues: p1 (copy), Count (ref), Callback (copy), T (ref)
 		local Item = p1.getItem(Index)
 		
@@ -31,9 +31,9 @@ return function(p1, Callback) --[[ Line: 17 | Named "createMapDataSource" ]]
 		end
 	end
 	
-	local function _() --[[ Line: 48 | Named "connectChild" ]]
+	local function _()
 		-- upvalues: SubscribeResult (ref), p1 (copy), DataSourceChangeTypeModule (upval), T (ref), EventModule (copy)
-		SubscribeResult = p1.subscribe(function(p2) --[[ Line: 49 ]]
+		SubscribeResult = p1.subscribe(function(p2)
 			-- upvalues: DataSourceChangeTypeModule (upval), T (upval), EventModule (upval)
 			for _, change in p2.changes do
 				if change.type == DataSourceChangeTypeModule.Reset then
@@ -60,15 +60,15 @@ return function(p1, Callback) --[[ Line: 17 | Named "createMapDataSource" ]]
 		getItemCount = p1.getItemCount,
 		getItem = getItem,
 		getItemKey = p1.getItemKey,
-		getItems = function(p3, p4) --[[ Line: 98 ]]
+		getItems = function(p3, p4)
 			-- upvalues: ReadDenseRangeModule (upval), p1 (copy), getItem (copy)
 			return ReadDenseRangeModule(p1.getItemCount(), getItem, p3, p4)
 		end,
-		subscribe = function(p3) --[[ Line: 71 ]]
+		subscribe = function(p3)
 			-- upvalues: Count (ref), T (ref), SubscribeResult (ref), p1 (copy), DataSourceChangeTypeModule (upval), EventModule (copy)
 			if Count == 0 then
 				T = {}
-				SubscribeResult = p1.subscribe(function(p4) --[[ Line: 49 ]]
+				SubscribeResult = p1.subscribe(function(p4)
 					-- upvalues: DataSourceChangeTypeModule (upval), T (upval), EventModule (upval)
 					for _, change in p4.changes do
 						if change.type == DataSourceChangeTypeModule.Reset then
@@ -94,7 +94,7 @@ return function(p1, Callback) --[[ Line: 17 | Named "createMapDataSource" ]]
 			local ConnectResult = EventModule.connect(p3)
 			local Flag = true
 			
-			return function() --[[ Line: 79 ]]
+			return function()
 				-- upvalues: Flag (ref), ConnectResult (copy), Count (upval), SubscribeResult (upval), T (upval)
 				if not Flag then return end
 				Flag = false

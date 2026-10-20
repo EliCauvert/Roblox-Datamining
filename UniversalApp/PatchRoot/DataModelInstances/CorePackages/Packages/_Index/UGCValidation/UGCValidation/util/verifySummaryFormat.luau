@@ -1,4 +1,4 @@
-﻿return function(List, List1): boolean --[[ Line: 1 | Named "verifySummaryFormat" ]]
+﻿return function(List, List1): boolean
 	if List == nil or typeof(List) ~= "table" then
 		return false
 	end

@@ -1,8 +1,8 @@
-﻿local function _(p1) --[[ Line: 1 | Named "newSymbol" ]]
+﻿local function _(p1)
 	local Proxy = newproxy(true)
 	local MocksName: string = ("Mocks.%s"):format(p1)
 	
-	getmetatable(Proxy).__tostring = function() --[[ Line: 4 ]]
+	getmetatable(Proxy).__tostring = function()
 		-- upvalues: MocksName (ref)
 		return MocksName
 	end
@@ -13,7 +13,7 @@ end
 local Proxy = newproxy(true)
 local MocksName: string = ("Mocks.%s"):format("Calls")
 
-getmetatable(Proxy).__tostring = function() --[[ Line: 4 ]]
+getmetatable(Proxy).__tostring = function()
 	-- upvalues: MocksName (ref)
 	return MocksName
 end
@@ -21,7 +21,7 @@ end
 local Proxy1 = newproxy(true)
 local MocksName1: string = ("Mocks.%s"):format("Children")
 
-getmetatable(Proxy1).__tostring = function() --[[ Line: 4 ]]
+getmetatable(Proxy1).__tostring = function()
 	-- upvalues: MocksName1 (ref)
 	return MocksName1
 end
@@ -29,7 +29,7 @@ end
 local Proxy2 = newproxy(true)
 local MocksName2: string = ("Mocks.%s"):format("Lock")
 
-getmetatable(Proxy2).__tostring = function() --[[ Line: 4 ]]
+getmetatable(Proxy2).__tostring = function()
 	-- upvalues: MocksName2 (ref)
 	return MocksName2
 end
@@ -37,7 +37,7 @@ end
 local Proxy3 = newproxy(true)
 local MocksName3: string = ("Mocks.%s"):format("None")
 
-getmetatable(Proxy3).__tostring = function() --[[ Line: 4 ]]
+getmetatable(Proxy3).__tostring = function()
 	-- upvalues: MocksName3 (ref)
 	return MocksName3
 end
@@ -45,7 +45,7 @@ end
 local Proxy4 = newproxy(true)
 local MocksName4: string = ("Mocks.%s"):format("ReturnValue")
 
-getmetatable(Proxy4).__tostring = function() --[[ Line: 4 ]]
+getmetatable(Proxy4).__tostring = function()
 	-- upvalues: MocksName4 (ref)
 	return MocksName4
 end

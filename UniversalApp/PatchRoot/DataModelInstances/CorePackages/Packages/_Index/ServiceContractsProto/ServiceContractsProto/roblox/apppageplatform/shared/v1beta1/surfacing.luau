@@ -4,14 +4,14 @@ local t = {}
 local Module = {}
 Module.__index = Module
 
-function Module.new(p1) --[[ Line: 83 ]]
+function Module.new(p1)
 	-- upvalues: Module (copy)
 	return (setmetatable({
 		kind = if p1 == nil or p1.kind == nil then nil else p1.kind
 	}, Module))
 end
 
-function Module:encode() --[[ Line: 89 ]]
+function Module:encode()
 	-- upvalues: ProtoModule (copy)
 	local Buf = buffer.create(0)
 	local Count = 0
@@ -33,7 +33,7 @@ function Module:encode() --[[ Line: 89 ]]
 	return Buf1
 end
 
-function Module.decode(Buf) --[[ Line: 110 ]]
+function Module.decode(Buf)
 	-- upvalues: Module (copy), ProtoModule (copy), t (copy)
 	local NewModule = Module.new()
 	local v1 = 0
@@ -70,7 +70,7 @@ function Module.decode(Buf) --[[ Line: 110 ]]
 	return NewModule
 end
 
-function Module:jsonEncode() --[[ Line: 158 ]]
+function Module:jsonEncode()
 	local t = {}
 	
 	if self.kind ~= nil then
@@ -86,7 +86,7 @@ function Module:jsonEncode() --[[ Line: 158 ]]
 	return t
 end
 
-function Module:jsonDecode() --[[ Line: 172 ]]
+function Module:jsonDecode()
 	-- upvalues: Module (copy), t (copy)
 	local NewModule = Module.new()
 	
@@ -126,14 +126,14 @@ TypeRegistryModule.default:register(t.Surfacing)
 local Module1 = {}
 Module1.__index = Module1
 
-function Module1.new(p1) --[[ Line: 208 ]]
+function Module1.new(p1)
 	-- upvalues: Module1 (copy)
 	return (setmetatable({
 		height_offset = if p1 == nil or p1.height_offset == nil then nil else p1.height_offset
 	}, Module1))
 end
 
-function Module1:encode() --[[ Line: 214 ]]
+function Module1:encode()
 	-- upvalues: ProtoModule (copy)
 	local Buf = buffer.create(0)
 	local Count = 0
@@ -148,7 +148,7 @@ function Module1:encode() --[[ Line: 214 ]]
 	return Buf1
 end
 
-function Module1.decode(Buf) --[[ Line: 228 ]]
+function Module1.decode(Buf)
 	-- upvalues: Module1 (copy), ProtoModule (copy)
 	local NewModule = Module1.new()
 	local v2 = 0
@@ -179,7 +179,7 @@ function Module1.decode(Buf) --[[ Line: 228 ]]
 	return NewModule
 end
 
-function Module1:jsonEncode() --[[ Line: 271 ]]
+function Module1:jsonEncode()
 	local t = {}
 	
 	if self.height_offset ~= nil then
@@ -188,7 +188,7 @@ function Module1:jsonEncode() --[[ Line: 271 ]]
 	return t
 end
 
-function Module1:jsonDecode() --[[ Line: 281 ]]
+function Module1:jsonDecode()
 	-- upvalues: Module1 (copy)
 	local NewModule = Module1.new()
 	
@@ -210,14 +210,14 @@ TypeRegistryModule.default:register(t.PeekView)
 local Module2 = {}
 Module2.__index = Module2
 
-function Module2.new(p1) --[[ Line: 309 ]]
+function Module2.new(p1)
 	-- upvalues: Module2 (copy)
 	return (setmetatable({
 		content_top_padding = if p1 == nil or p1.content_top_padding == nil then nil else p1.content_top_padding
 	}, Module2))
 end
 
-function Module2:encode() --[[ Line: 317 ]]
+function Module2:encode()
 	-- upvalues: ProtoModule (copy)
 	local Buf = buffer.create(0)
 	local Count = 0
@@ -232,7 +232,7 @@ function Module2:encode() --[[ Line: 317 ]]
 	return Buf1
 end
 
-function Module2.decode(Buf) --[[ Line: 331 ]]
+function Module2.decode(Buf)
 	-- upvalues: Module2 (copy), ProtoModule (copy)
 	local NewModule = Module2.new()
 	local v3 = 0
@@ -263,7 +263,7 @@ function Module2.decode(Buf) --[[ Line: 331 ]]
 	return NewModule
 end
 
-function Module2:jsonEncode() --[[ Line: 374 ]]
+function Module2:jsonEncode()
 	local t = {}
 	
 	if self.content_top_padding ~= nil then
@@ -272,7 +272,7 @@ function Module2:jsonEncode() --[[ Line: 374 ]]
 	return t
 end
 
-function Module2:jsonDecode() --[[ Line: 384 ]]
+function Module2:jsonDecode()
 	-- upvalues: Module2 (copy)
 	local NewModule = Module2.new()
 	

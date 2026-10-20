@@ -9,12 +9,12 @@ local MergeFieldsFunction = require(script.Parent.fields).mergeFields
 local MergeDirectivesFunction = require(script.Parent.directives).mergeDirectives
 
 return {
-	mergeInputType = function(p1, p2, p3) --[[ Line: 29 ]]
+	mergeInputType = function(p1, p2, p3)
 		-- upvalues: Boolean (copy), MergeFieldsFunction (copy), MergeDirectivesFunction (copy), Error1 (copy), Object (copy), Kind (copy)
 		if not Boolean.toJSBoolean(p2) then
 			return if p3 and Boolean.toJSBoolean(p3.convertExtensions) then Object.assign({}, p1, { kind = Kind.INPUT_OBJECT_TYPE_DEFINITION }) else p1
 		end
-		local Success, Result = pcall(function() --[[ Line: 37 ]]
+		local Success, Result = pcall(function()
 			-- upvalues: p1 (copy), Boolean (upval), p2 (copy), p3 (copy), MergeFieldsFunction (upval), MergeDirectivesFunction (upval)
 			local ToJSBooleanFunction = Boolean.toJSBoolean
 			local ConvertExtensions = p3 and p3.convertExtensions

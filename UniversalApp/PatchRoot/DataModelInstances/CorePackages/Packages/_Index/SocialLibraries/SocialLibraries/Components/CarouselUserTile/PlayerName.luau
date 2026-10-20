@@ -9,11 +9,11 @@ local _ = require(script.Parent.StyleTypes)
 local FoundationFontFaceMigration = DependenciesModule.Foundation.Utility.Flags.FoundationFontFaceMigration
 local config = { width = require(script.Parent.Constants).TILE_SIZE }
 
-return function(p1) --[[ Line: 27 ]]
+return function(p1)
 	-- upvalues: Llama (copy), config (copy), Style (copy), FoundationFontFaceMigration (copy), GetTextHeightModule (copy), Roact (copy), StyledTextLabel (copy)
 	local JoinResult = Llama.Dictionary.join(config, p1)
 	
-	return Style.withStyle(function(p2) --[[ Line: 30 ]]
+	return Style.withStyle(function(p2)
 		-- upvalues: FoundationFontFaceMigration (upval), GetTextHeightModule (upval), JoinResult (copy), Roact (upval), StyledTextLabel (upval)
 		local _Font = p2.Font
 		local ScaledBaseSize = _Font.BaseSize * _Font.CaptionHeader.RelativeSize

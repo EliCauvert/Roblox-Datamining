@@ -2,14 +2,14 @@
 local NewResults = {}
 
 return {
-	getOrInit = function(Key) --[[ Line: 20 ]]
+	getOrInit = function(Key)
 		-- upvalues: NewResults (ref), SymbolModule (copy)
 		if NewResults[Key] == nil then
 			NewResults[Key] = SymbolModule.new(Key)
 		end
 		return NewResults[Key]
 	end,
-	__clear = function() --[[ Line: 28 ]]
+	__clear = function()
 		-- upvalues: NewResults (ref)
 		NewResults = {}
 	end

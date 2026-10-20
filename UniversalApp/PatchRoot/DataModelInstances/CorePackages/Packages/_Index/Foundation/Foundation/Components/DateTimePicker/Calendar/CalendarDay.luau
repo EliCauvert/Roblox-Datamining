@@ -4,7 +4,7 @@ local StateLayerModeModule = require(Foundation.Enums.StateLayerMode)
 local TextModule = require(Foundation.Components.Text)
 local UseTokensModule = require(Foundation.Providers.Style.useTokens)
 
-return function(Frame) --[[ Line: 21 | Named "CalendarDay" ]]
+return function(Frame)
 	-- upvalues: UseTokensModule (copy), ReactModule (copy), TextModule (copy), StateLayerModeModule (copy)
 	local UseTokensModuleResult = UseTokensModule()
 	

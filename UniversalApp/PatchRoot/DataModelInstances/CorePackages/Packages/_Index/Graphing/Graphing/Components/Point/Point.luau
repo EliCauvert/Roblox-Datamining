@@ -4,7 +4,7 @@ local _ = require(Graphing.Types)
 local PositionerModule = require(Graphing.Components.Positioner)
 local StyleUtilModule = require(Graphing.Util.StyleUtil)
 
-function Point(p1) --[[ Line: 36 ]]
+function Point(p1)
 	-- upvalues: StyleUtilModule (copy), ReactModule (copy), PositionerModule (copy)
 	local Size = p1.Size or StyleUtilModule.POINT_HANDLE_SIZE
 	local OutlineThickness = p1.OutlineThickness or StyleUtilModule.POINT_HANDLE_OUTLINE_THICKNESS

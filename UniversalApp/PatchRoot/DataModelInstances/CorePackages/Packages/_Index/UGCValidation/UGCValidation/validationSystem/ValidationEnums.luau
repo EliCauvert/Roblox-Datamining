@@ -1,19 +1,19 @@
 ﻿local ValidationEnumsModule = {}
 
-local function createEnumMetatable(p1) --[[ Line: 8 ]]
+local function createEnumMetatable(p1)
 	return {
 		__metatable = "This metatable is protected",
-		__index = function(_, p2) --[[ Line: 10 ]]
+		__index = function(_, p2)
 			-- upvalues: p1 (copy)
 			error("Invalid ValidationEnums." .. p1 .. " enum value: " .. tostring(p2))
 		end,
-		__newindex = function(_, _, _) --[[ Line: 13 ]]
+		__newindex = function(_, _, _)
 			error("Cannot add new keys to ValidationEnums")
 		end
 	}
 end
 
-local function finalizeEnumTable(Text) --[[ Line: 20 ]]
+local function finalizeEnumTable(Text)
 	-- upvalues: ValidationEnumsModule (copy), createEnumMetatable (copy)
 	if ValidationEnumsModule[Text] == nil then
 		error(Text .. " enum table is not found")

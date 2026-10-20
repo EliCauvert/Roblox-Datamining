@@ -12,7 +12,7 @@ return {
 	},
 	requiredData = {},
 	expectedFailures = {},
-	run = function(p1, p2) --[[ Line: 20 ]]
+	run = function(p1, p2)
 		-- upvalues: GetEngineFeatureEngineUGCValidationLCOOBModule (copy), ErrorSourceStringsModule (copy), UGCValidationService (copy)
 		if p2.consumerConfig.consumerEnv == "IEC" then return end
 		local RootInstance = p2.rootInstance

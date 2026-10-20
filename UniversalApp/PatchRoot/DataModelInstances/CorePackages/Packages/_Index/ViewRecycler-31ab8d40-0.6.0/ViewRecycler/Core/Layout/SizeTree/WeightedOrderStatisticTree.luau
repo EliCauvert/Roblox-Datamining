@@ -1,16 +1,16 @@
-﻿local function _(p1) --[[ Line: 25 | Named "nodeHeight" ]]
+﻿local function _(p1)
 	return if p1 == nil then 0 else p1.height
 end
 
-local _ = function(p1) --[[ Line: 37 | Named "nodeMeasuredSum" ]]
+local _ = function(p1)
 	return if p1 == nil then 0 else p1.subtreeMeasuredSum
 end
 
-local _ = function(Left, p1) --[[ Line: 52 | Named "ownEffectiveSum" ]]
+local _ = function(Left, p1)
 	return if Left.measuredSize == nil then Left.itemCount * p1 else Left.measuredSize
 end
 
-local function refresh(Left) --[[ Line: 56 ]]
+local function refresh(Left)
 	assert(Left.itemCount >= 1, "WeightedOrderStatisticTree: node itemCount must be positive")
 	assert(Left.measuredSize == nil or Left.itemCount == 1, "WeightedOrderStatisticTree: measured nodes must represent exactly one item")
 	local Left1 = Left.left
@@ -34,7 +34,7 @@ local function refresh(Left) --[[ Line: 56 ]]
 	Left.height = math.max(if Left5 == nil then 0 else Left5.height, if Right4 == nil then 0 else Right4.height) + 1
 end
 
-local _ = function(Right) --[[ Line: 87 | Named "rotateRight" ]]
+local _ = function(Right)
 	-- upvalues: refresh (copy)
 	local Left = Right.left
 	Right.left = Left.right
@@ -45,7 +45,7 @@ local _ = function(Right) --[[ Line: 87 | Named "rotateRight" ]]
 	return Left
 end
 
-local _ = function(Left) --[[ Line: 96 | Named "rotateLeft" ]]
+local _ = function(Left)
 	-- upvalues: refresh (copy)
 	local Right = Left.right
 	Left.right = Right.left
@@ -56,7 +56,7 @@ local _ = function(Left) --[[ Line: 96 | Named "rotateLeft" ]]
 	return Right
 end
 
-local function balance(Left) --[[ Line: 105 ]]
+local function balance(Left)
 	-- upvalues: refresh (copy)
 	refresh(Left)
 	local Left1 = Left.left
@@ -109,7 +109,7 @@ local function balance(Left) --[[ Line: 105 ]]
 	end
 end
 
-local function join(Left, Left1, Right) --[[ Line: 124 ]]
+local function join(Left, Left1, Right)
 	-- upvalues: join (copy), balance (copy)
 	if (if Right == nil then 0 else Right.height) + 1 < (if Left == nil then 0 else Left.height) then
 		Left.right = join(Left.right, Left1, Right)
@@ -127,7 +127,7 @@ local function join(Left, Left1, Right) --[[ Line: 124 ]]
 	end
 end
 
-local function popMinimum(Left) --[[ Line: 139 ]]
+local function popMinimum(Left)
 	-- upvalues: refresh (copy), popMinimum (copy), balance (copy)
 	if Left.left == nil then
 		local Right = Left.right
@@ -144,7 +144,7 @@ local function popMinimum(Left) --[[ Line: 139 ]]
 	end
 end
 
-local function popMaximum(Left) --[[ Line: 152 ]]
+local function popMaximum(Left)
 	-- upvalues: refresh (copy), popMaximum (copy), balance (copy)
 	if Left.right == nil then
 		local Left1 = Left.left
@@ -161,7 +161,7 @@ local function popMaximum(Left) --[[ Line: 152 ]]
 	end
 end
 
-local function splitByItems(Left, NewItemCount) --[[ Line: 177 ]]
+local function splitByItems(Left, NewItemCount)
 	-- upvalues: splitByItems (copy), balance (copy), refresh (copy), popMinimum (copy), join (copy)
 	if Left == nil then
 		return nil, nil
@@ -322,7 +322,7 @@ local function splitByItems(Left, NewItemCount) --[[ Line: 177 ]]
 	end
 end
 
-local function insertUnitAt(Left, p1: number, MeasuredSize) --[[ Line: 214 ]]
+local function insertUnitAt(Left, p1: number, MeasuredSize)
 	-- upvalues: refresh (copy), insertUnitAt (copy), balance (copy)
 	if Left == nil then
 		local config = {
@@ -351,12 +351,12 @@ local function insertUnitAt(Left, p1: number, MeasuredSize) --[[ Line: 214 ]]
 	return (balance(Left))
 end
 
-local function findMin(Left) --[[ Line: 228 ]]
+local function findMin(Left)
 	-- upvalues: findMin (copy)
 	return if Left.left == nil then Left else findMin(Left.left)
 end
 
-local function removeUnitAt(Left, p1: number) --[[ Line: 232 ]]
+local function removeUnitAt(Left, p1: number)
 	-- upvalues: removeUnitAt (copy), findMin (copy), balance (copy)
 	if Left == nil then
 		return nil
@@ -384,7 +384,7 @@ local function removeUnitAt(Left, p1: number) --[[ Line: 232 ]]
 	return (balance(Left))
 end
 
-local function updateUnitAt(Left, p1: number, MeasuredSize) --[[ Line: 255 ]]
+local function updateUnitAt(Left, p1: number, MeasuredSize)
 	-- upvalues: updateUnitAt (copy), refresh (copy)
 	if Left == nil then return end
 	local Left1 = Left.left
@@ -400,7 +400,7 @@ local function updateUnitAt(Left, p1: number, MeasuredSize) --[[ Line: 255 ]]
 	refresh(Left)
 end
 
-local function updateAt(Left, p1, MeasuredSize) --[[ Line: 271 ]]
+local function updateAt(Left, p1, MeasuredSize)
 	-- upvalues: updateAt (copy), refresh (copy)
 	if Left == nil then
 		return nil
@@ -421,7 +421,7 @@ local function updateAt(Left, p1, MeasuredSize) --[[ Line: 271 ]]
 	return Left
 end
 
-local function measuredAt(Left, p1) --[[ Line: 288 ]]
+local function measuredAt(Left, p1)
 	-- upvalues: measuredAt (copy)
 	if Left == nil then
 		return nil
@@ -433,7 +433,7 @@ local function measuredAt(Left, p1) --[[ Line: 288 ]]
 	end
 end
 
-local function prefixSumUpTo(Left, p1: number, p2) --[[ Line: 301 ]]
+local function prefixSumUpTo(Left, p1: number, p2)
 	-- upvalues: prefixSumUpTo (copy)
 	if Left == nil or p1 <= 0 then
 		return 0
@@ -452,7 +452,7 @@ local function prefixSumUpTo(Left, p1: number, p2) --[[ Line: 301 ]]
 	end
 end
 
-local function entryAtPrefixSum(Left, p1, p2) --[[ Line: 319 ]]
+local function entryAtPrefixSum(Left, p1, p2)
 	-- upvalues: entryAtPrefixSum (copy)
 	if Left == nil then
 		return 0, 0, 0
@@ -484,7 +484,7 @@ local function entryAtPrefixSum(Left, p1, p2) --[[ Line: 319 ]]
 	end
 end
 
-local function fillRangeFromNode(Left, ItemCountDelta, p1, p2: number, p3: number, p4, p5) --[[ Line: 346 ]]
+local function fillRangeFromNode(Left, ItemCountDelta, p1, p2: number, p3: number, p4, p5)
 	-- upvalues: fillRangeFromNode (copy)
 	if Left == nil then return end
 	local Left1 = Left.left
@@ -519,7 +519,7 @@ local function fillRangeFromNode(Left, ItemCountDelta, p1, p2: number, p3: numbe
 	end
 end
 
-local function buildBalanced(p6, p7, p8) --[[ Line: 396 ]]
+local function buildBalanced(p6, p7, p8)
 	-- upvalues: refresh (copy), buildBalanced (copy)
 	if p8 < p7 then
 		return nil
@@ -548,7 +548,7 @@ local function buildBalanced(p6, p7, p8) --[[ Line: 396 ]]
 	end
 end
 
-local function appendToArray(Left, List, p6) --[[ Line: 409 ]]
+local function appendToArray(Left, List, p6)
 	-- upvalues: appendToArray (copy)
 	if Left == nil then return end
 	appendToArray(Left.left, List, p6)
@@ -561,7 +561,7 @@ local function appendToArray(Left, List, p6) --[[ Line: 409 ]]
 end
 
 return {
-	newNode = function(ItemCount, MeasuredSize) --[[ Line: 71 ]]
+	newNode = function(ItemCount, MeasuredSize)
 		-- upvalues: refresh (copy)
 		local config = {
 			subtreeNodeCount = 1,
@@ -583,7 +583,7 @@ return {
 	join = join,
 	popMinimum = popMinimum,
 	popMaximum = popMaximum,
-	concatenate = function(Left, Left1) --[[ Line: 165 ]]
+	concatenate = function(Left, Left1)
 		-- upvalues: refresh (copy), popMinimum (copy), balance (copy), join (copy)
 		if Left == nil then
 			return Left1
@@ -619,16 +619,16 @@ return {
 	fillRangeFromNode = fillRangeFromNode,
 	buildBalanced = buildBalanced,
 	appendToArray = appendToArray,
-	nodeItemCount = function(p7) --[[ Line: 29 ]]
+	nodeItemCount = function(p7)
 		return if p7 == nil then 0 else p7.subtreeItemCount
 	end,
-	nodeMeasuredCount = function(p7) --[[ Line: 33 ]]
+	nodeMeasuredCount = function(p7)
 		return if p7 == nil then 0 else p7.subtreeMeasuredCount
 	end,
-	nodeCount = function(p7) --[[ Line: 41 ]]
+	nodeCount = function(p7)
 		return if p7 == nil then 0 else p7.subtreeNodeCount
 	end,
-	nodeEffectiveSum = function(Left, p7) --[[ Line: 45 ]]
+	nodeEffectiveSum = function(Left, p7)
 		return if Left == nil then 0 else Left.subtreeMeasuredSum + (Left.subtreeItemCount - Left.subtreeMeasuredCount) * p7
 	end
 }

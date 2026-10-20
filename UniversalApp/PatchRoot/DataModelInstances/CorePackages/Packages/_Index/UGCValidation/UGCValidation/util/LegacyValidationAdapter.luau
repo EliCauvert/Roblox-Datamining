@@ -3,7 +3,7 @@ local _ = require(Parent.util.Types)
 local ValidationManagerModule = require(Parent.validationSystem.ValidationManager)
 local ErrorSourceStringsModule = require(Parent.validationSystem.ErrorSourceStrings)
 
-local function fallbackLocalizationFunction(p1, p2) --[[ Line: 12 ]]
+local function fallbackLocalizationFunction(p1, p2)
 	-- upvalues: ErrorSourceStringsModule (copy)
 	local Text = if p2 then p2[p1.key] else nil
 	
@@ -42,13 +42,13 @@ end
 
 local LegacyValidationAdapterModule = {
 	LegacyValidator = "LegacyValidator",
-	getPrecomputedEditables = function(EditableMeshes, EditableImages) --[[ Line: 56 ]]
+	getPrecomputedEditables = function(EditableMeshes, EditableImages)
 		local list = { {}, {} }
 		
 		for i, value in { EditableMeshes, EditableImages } do
 			for i1, value1 in value do
 				for i2, value2 in value1 do
-					pcall(function() --[[ Line: 65 ]]
+					pcall(function()
 						-- upvalues: i1 (copy), i2 (copy), list (copy), i (copy), value2 (copy)
 						local Entry = i1[i2]
 						
@@ -63,7 +63,7 @@ local LegacyValidationAdapterModule = {
 	end
 }
 
-local function fetchString(Callback, p3, RelevantSourceStrings) --[[ Line: 78 ]]
+local function fetchString(Callback, p3, RelevantSourceStrings)
 	-- upvalues: LegacyValidationAdapterModule (copy), fallbackLocalizationFunction (copy)
 	if p3.key == LegacyValidationAdapterModule.LegacyValidator then
 		return p3.params.Message or ""
@@ -72,7 +72,7 @@ local function fetchString(Callback, p3, RelevantSourceStrings) --[[ Line: 78 ]]
 	local Key = nil
 	
 	if Callback then
-		v2, Key = pcall(function() --[[ Line: 89 ]]
+		v2, Key = pcall(function()
 			-- upvalues: Callback (copy), p3 (copy)
 			return Callback(p3)
 		end)
@@ -80,7 +80,7 @@ local function fetchString(Callback, p3, RelevantSourceStrings) --[[ Line: 78 ]]
 	return if v2 and Key ~= p3.key then Key else fallbackLocalizationFunction(p3, RelevantSourceStrings)
 end
 
-function LegacyValidationAdapterModule.combineResultsIntoLegacy(p3, p4, ValidateAssetResult, LocalizationCallback) --[[ Line: 102 ]]
+function LegacyValidationAdapterModule.combineResultsIntoLegacy(p3, p4, ValidateAssetResult, LocalizationCallback)
 	-- upvalues: fetchString (copy), ErrorSourceStringsModule (copy)
 	local List = p4
 	local Pass = p3 and ValidateAssetResult.pass
@@ -110,7 +110,7 @@ function LegacyValidationAdapterModule.combineResultsIntoLegacy(p3, p4, Validate
 	return Pass, List
 end
 
-function LegacyValidationAdapterModule.mergeLegacyIntoModern(p5, List, p6) --[[ Line: 146 ]]
+function LegacyValidationAdapterModule.mergeLegacyIntoModern(p5, List, p6)
 	-- upvalues: LegacyValidationAdapterModule (copy)
 	p6.pass = p6.pass and p5
 	
@@ -133,7 +133,7 @@ function LegacyValidationAdapterModule.mergeLegacyIntoModern(p5, List, p6) --[[ 
 	end
 end
 
-function LegacyValidationAdapterModule.studioRFUAssetValidation(p7, TelemetryBundleId, p8, p9) --[[ Line: 173 ]]
+function LegacyValidationAdapterModule.studioRFUAssetValidation(p7, TelemetryBundleId, p8, p9)
 	-- upvalues: LegacyValidationAdapterModule (copy), ValidationManagerModule (copy)
 	local StudioPluginName = "Toolbox"
 	local EnforceShadowValidations = p7.bypassFlags and p7.bypassFlags.enforceShadowValidations or false
@@ -155,7 +155,7 @@ function LegacyValidationAdapterModule.studioRFUAssetValidation(p7, TelemetryBun
 	}), if p7.bypassFlags == nil then nil else p7.bypassFlags.localizationCallback)
 end
 
-function LegacyValidationAdapterModule.studioRFUBundleValidation(p7, p8, p9, TelemetryBundleId, p10, p11) --[[ Line: 222 ]]
+function LegacyValidationAdapterModule.studioRFUBundleValidation(p7, p8, p9, TelemetryBundleId, p10, p11)
 	-- upvalues: LegacyValidationAdapterModule (copy), ValidationManagerModule (copy)
 	local StudioPluginName = if p9.bypassFlags and p9.bypassFlags.studioPluginName then p9.bypassFlags.studioPluginName else "Toolbox"
 	local EnforceShadowValidations = p9.bypassFlags and p9.bypassFlags.enforceShadowValidations or false

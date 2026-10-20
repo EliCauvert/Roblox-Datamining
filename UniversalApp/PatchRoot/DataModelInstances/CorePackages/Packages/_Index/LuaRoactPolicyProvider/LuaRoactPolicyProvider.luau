@@ -3,7 +3,7 @@ local ProviderModule = require(script.Provider)
 local GetPolicyImplementations = script.getPolicyImplementations
 
 return {
-	withGetPolicyImplementation = function(p1) --[[ Line: 12 ]]
+	withGetPolicyImplementation = function(p1)
 		-- upvalues: ConnectModule (copy), ProviderModule (copy)
 		assert(p1.read, "expected getPolicyImpl to have `read` function")
 		assert(p1.onPolicyChanged, "expected getPolicyImpl to have `onPolicyChanged` function")

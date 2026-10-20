@@ -1,9 +1,9 @@
 ﻿local _ = require(script.Parent.Types)
 
-return function(Callback1, Callback) --[[ Line: 26 | Named "memoize" ]]
+return function(Callback1, Callback)
 	local t = {}
 	
-	return function(...) --[[ Line: 29 ]]
+	return function(...)
 		-- upvalues: Callback (copy), t (copy), Callback1 (copy)
 		local List = { ... }
 		local CallbackResult = if Callback then Callback(...) else table.concat(List, "|")

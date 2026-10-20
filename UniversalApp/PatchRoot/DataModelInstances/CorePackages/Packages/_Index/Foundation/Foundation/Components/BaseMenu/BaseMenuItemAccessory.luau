@@ -15,7 +15,7 @@ local config = {
 	colorNamespace = require(Foundation.Enums.ColorNamespace).Color
 }
 
-return function(Frame: Frame) --[[ Line: 48 | Named "Accessory" ]]
+return function(Frame: Frame)
 	-- upvalues: AccessoryTypeModule (copy), ReactModule (copy), ViewModule (copy), PresentationContextModule (copy), config (copy), AvatarModule (copy), TextModule (copy), BadgeModule (copy), IconModule (copy)
 	local Accessory = Frame.accessory
 	

@@ -9,11 +9,11 @@ local Group = nil
 local GroupCollapsed = nil
 local GroupEnd = nil
 
-local function DisabledLog() --[[ Line: 34 ]] end
+local function DisabledLog() end
 
 return {
 	disabledLog = DisabledLog,
-	disableLogs = function() --[[ Line: 43 ]]
+	disableLogs = function()
 		-- upvalues: ReactGlobalsModule (copy), Count (ref), Log (ref), ConsoleModule (copy), Info (ref), Warn (ref), Error (ref), Group (ref), GroupCollapsed (ref), GroupEnd (ref), DisabledLog (copy)
 		if ReactGlobalsModule.__DEV__ then
 			if Count == 0 then
@@ -35,7 +35,7 @@ return {
 			Count += 1
 		end
 	end,
-	reenableLogs = function() --[[ Line: 67 ]]
+	reenableLogs = function()
 		-- upvalues: ReactGlobalsModule (copy), Count (ref), ConsoleModule (copy), Log (ref), Info (ref), Warn (ref), Error (ref), Group (ref), GroupCollapsed (ref), GroupEnd (ref)
 		if ReactGlobalsModule.__DEV__ then
 			Count -= 1

@@ -31,12 +31,12 @@ local GetNamedTypeFunction = DefinitionModule.getNamedType
 local Module = nil
 local Callback = nil
 
-local function isSchema(p1) --[[ Line: 74 ]]
+local function isSchema(p1)
 	-- upvalues: InstanceOfModule (copy), Module (ref)
 	return InstanceOfModule(p1, Module)
 end
 
-local function assertSchema(p1) --[[ Line: 78 ]]
+local function assertSchema(p1)
 	-- upvalues: InstanceOfModule (copy), Module (ref), Error1 (copy), InspectFunction (copy)
 	if not InstanceOfModule(p1, Module) then
 		error(Error1.new(("Expected %s to be a GraphQL schema."):format(InspectFunction(p1))))
@@ -47,7 +47,7 @@ end
 Module = {}
 Module.__index = Module
 
-function Module.new(Message) --[[ Line: 200 ]]
+function Module.new(Message)
 	-- upvalues: Module (ref), DevAssertFunction (copy), IsObjectLikeFunction (copy), Array (copy), InspectFunction (copy), ToObjMapFunction (copy), SpecifiedDirectives (copy), Set (copy), Callback (ref), IsNotNillishFunction (copy), IsDirectiveFunction (copy), Schema (copy), Map (copy), IsNillishFunction (copy), Error1 (copy), IsInterfaceTypeFunction (copy), IsObjectTypeFunction (copy)
 	local self = setmetatable({}, Module)
 	self.__validationErrors = nil
@@ -139,36 +139,36 @@ function Module.new(Message) --[[ Line: 200 ]]
 	return self
 end
 
-function Module:getQueryType() --[[ Line: 349 ]]
+function Module:getQueryType()
 	return self._queryType
 end
 
-function Module:getMutationType() --[[ Line: 353 ]]
+function Module:getMutationType()
 	return self._mutationType
 end
 
-function Module:getSubscriptionType() --[[ Line: 357 ]]
+function Module:getSubscriptionType()
 	return self._subscriptionType
 end
 
-function Module:getTypeMap() --[[ Line: 361 ]]
+function Module:getTypeMap()
 	return self._typeMap
 end
 
-function Module:getType(p1) --[[ Line: 365 ]]
+function Module:getType(p1)
 	return self:getTypeMap()[p1]
 end
 
-function Module.getPossibleTypes(p1, p2) --[[ Line: 369 ]]
+function Module.getPossibleTypes(p1, p2)
 	-- upvalues: IsUnionTypeFunction (copy)
 	return if IsUnionTypeFunction(p2) then p2:getTypes() else p1:getImplementations(p2).objects
 end
 
-function Module:getImplementations(p1) --[[ Line: 378 ]]
+function Module:getImplementations(p1)
 	return self._implementationsMap:get(p1.name) or { objects = {}, interfaces = {} }
 end
 
-function Module:isSubType(p1, p2): boolean --[[ Line: 388 ]]
+function Module:isSubType(p1, p2): boolean
 	-- upvalues: IsUnionTypeFunction (copy)
 	local SubType = self._subTypeMap[p1.name]
 	
@@ -194,19 +194,19 @@ function Module:isSubType(p1, p2): boolean --[[ Line: 388 ]]
 	return SubType[p2.name] ~= nil
 end
 
-function Module:getDirectives() --[[ Line: 417 ]]
+function Module:getDirectives()
 	return self._directives
 end
 
-function Module:getDirective(Name) --[[ Line: 421 ]]
+function Module:getDirective(Name)
 	-- upvalues: Array (copy)
-	return Array.find(self:getDirectives(), function(p3): boolean --[[ Line: 422 ]]
+	return Array.find(self:getDirectives(), function(p3): boolean
 		-- upvalues: Name (copy)
 		return p3.name == Name
 	end)
 end
 
-function Module:toConfig() --[[ Line: 427 ]]
+function Module:toConfig()
 	-- upvalues: Array (copy)
 	return {
 		description = self.description,
@@ -222,11 +222,11 @@ function Module:toConfig() --[[ Line: 427 ]]
 	}
 end
 
-function Module:__tostring(): string --[[ Line: 443 ]]
+function Module:__tostring(): string
 	return "GraphQLSchema"
 end
 
-Callback = function(Type, NewResult) --[[ Line: 485 | Named "collectReferencedTypes" ]]
+Callback = function(Type, NewResult)
 	-- upvalues: GetNamedTypeFunction (copy), IsUnionTypeFunction (copy), Callback (ref), IsObjectTypeFunction (copy), IsInterfaceTypeFunction (copy), IsInputObjectTypeFunction (copy)
 	local NamedType = GetNamedTypeFunction(Type)
 	

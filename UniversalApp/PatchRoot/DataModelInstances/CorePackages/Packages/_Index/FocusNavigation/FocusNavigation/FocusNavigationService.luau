@@ -11,7 +11,7 @@ local _ = require(script.Parent.types)
 local FocusNavigationService = {}
 FocusNavigationService.__index = FocusNavigationService
 
-function FocusNavigationService.new(_engineInterface, p1) --[[ Line: 116 ]]
+function FocusNavigationService.new(_engineInterface, p1)
 	-- upvalues: CreateSignalFunction (copy), EventPropagationModule (copy), FocusNavigationService (copy)
 	local Signal, Signal2 = CreateSignalFunction({})
 	local Signal1, Signal2_1 = CreateSignalFunction(_engineInterface.getSelection())
@@ -37,7 +37,7 @@ function FocusNavigationService.new(_engineInterface, p1) --[[ Line: 116 ]]
 	return self
 end
 
-function FocusNavigationService:_fireInputEvent(Target, Input, WasProcessed) --[[ Line: 148 ]]
+function FocusNavigationService:_fireInputEvent(Target, Input, WasProcessed)
 	local Entry = self.activeEventMap:getValue()[Input.KeyCode]
 	
 	if Entry then
@@ -59,8 +59,8 @@ function FocusNavigationService:_fireInputEvent(Target, Input, WasProcessed) --[
 	end
 end
 
-function FocusNavigationService:_connectToInputEvents() --[[ Line: 173 ]]
-	local function forwardInputEvent(Input, GameProcessed) --[[ Line: 175 ]]
+function FocusNavigationService:_connectToInputEvents()
+	local function forwardInputEvent(Input, GameProcessed)
 		-- upvalues: self (copy)
 		local Selection = self._engineInterface.getSelection()
 		
@@ -72,7 +72,7 @@ function FocusNavigationService:_connectToInputEvents() --[[ Line: 173 ]]
 	table.insert(self._engineEventConnections, self._engineInterface.InputBegan:Connect(forwardInputEvent))
 	table.insert(self._engineEventConnections, self._engineInterface.InputChanged:Connect(forwardInputEvent))
 	table.insert(self._engineEventConnections, self._engineInterface.InputEnded:Connect(forwardInputEvent))
-	table.insert(self._engineEventConnections, self._engineInterface.SelectionChanged:Connect(function() --[[ Line: 186 | Named "onFocusChanged" ]]
+	table.insert(self._engineEventConnections, self._engineInterface.SelectionChanged:Connect(function()
 		-- upvalues: self (copy)
 		local Value = self.focusedGuiObject:getValue()
 		local Selection = self._engineInterface.getSelection()
@@ -97,7 +97,7 @@ function FocusNavigationService:_connectToInputEvents() --[[ Line: 173 ]]
 	end))
 end
 
-function FocusNavigationService:_cancelHandler(p1, p2) --[[ Line: 213 ]]
+function FocusNavigationService:_cancelHandler(p1, p2)
 	if p2 ~= "blur" and p2 ~= "focus" then
 		self._eventPropagationService:propagateEvent(p1, p2, {
 			KeyCode = Enum.KeyCode.None,
@@ -107,7 +107,7 @@ function FocusNavigationService:_cancelHandler(p1, p2) --[[ Line: 213 ]]
 	end
 end
 
-function FocusNavigationService:_updateActiveEventMap(SilentBlurTarget) --[[ Line: 226 ]]
+function FocusNavigationService:_updateActiveEventMap(SilentBlurTarget)
 	-- upvalues: GetAncestorsFunction (copy), ShallowEqualFunction (copy)
 	local t = {}
 	local Selection = self._engineInterface.getSelection()
@@ -151,7 +151,7 @@ function FocusNavigationService:_updateActiveEventMap(SilentBlurTarget) --[[ Lin
 	end
 end
 
-function FocusNavigationService:registerEventMap(p1, List) --[[ Line: 270 ]]
+function FocusNavigationService:registerEventMap(p1, List)
 	-- upvalues: MockableWarnFunction (copy)
 	local EventMapByInstanceEntry = self._eventMapByInstance[p1] or {}
 	for i, value in List do
@@ -164,7 +164,7 @@ function FocusNavigationService:registerEventMap(p1, List) --[[ Line: 270 ]]
 	self:_updateActiveEventMap()
 end
 
-function FocusNavigationService:deregisterEventMap(p2, List) --[[ Line: 292 ]]
+function FocusNavigationService:deregisterEventMap(p2, List)
 	-- upvalues: MockableWarnFunction (copy)
 	local EventMapByInstanceEntry = self._eventMapByInstance[p2] or {}
 	for i, value in List do
@@ -178,23 +178,23 @@ function FocusNavigationService:deregisterEventMap(p2, List) --[[ Line: 292 ]]
 	self:_updateActiveEventMap(self.focusedGuiObject:getValue())
 end
 
-function FocusNavigationService:registerEventHandler(p3, p4, p5, p6) --[[ Line: 315 ]]
+function FocusNavigationService:registerEventHandler(p3, p4, p5, p6)
 	self._eventPropagationService:registerEventHandler(p3, p4, p5, p6)
 	self:_updateActiveEventMap()
 end
 
-function FocusNavigationService:deregisterEventHandler(p3, p4, p5, p6) --[[ Line: 325 ]]
+function FocusNavigationService:deregisterEventHandler(p3, p4, p5, p6)
 	self:_cancelHandler(p3, p4)
 	self._eventPropagationService:deregisterEventHandler(p3, p4, p5, p6)
 	self:_updateActiveEventMap(self.focusedGuiObject:getValue())
 end
 
-function FocusNavigationService:registerEventHandlers(p3, p4) --[[ Line: 338 ]]
+function FocusNavigationService:registerEventHandlers(p3, p4)
 	self._eventPropagationService:registerEventHandlers(p3, p4)
 	self:_updateActiveEventMap()
 end
 
-function FocusNavigationService:deregisterEventHandlers(p3, List) --[[ Line: 343 ]]
+function FocusNavigationService:deregisterEventHandlers(p3, List)
 	for i, _ in List do
 		self:_cancelHandler(p3, i)
 	end
@@ -202,7 +202,7 @@ function FocusNavigationService:deregisterEventHandlers(p3, List) --[[ Line: 343
 	self:_updateActiveEventMap(self.focusedGuiObject:getValue())
 end
 
-function FocusNavigationService:registerFocusBehavior(Ancestor, Behavior) --[[ Line: 354 ]]
+function FocusNavigationService:registerFocusBehavior(Ancestor, Behavior)
 	-- upvalues: MockableWarnFunction (copy), FocusNavigationRefocusSuppression (copy), IsValidFocusTargetModule (copy)
 	if _G.__DEV__ then
 		local FocusBehaviorByInstanceEntry = self._focusBehaviorByInstance[Ancestor]
@@ -213,7 +213,7 @@ function FocusNavigationService:registerFocusBehavior(Ancestor, Behavior) --[[ L
 	end
 	self._focusBehaviorByInstance[Ancestor] = {
 		behavior = Behavior,
-		connection = Ancestor.SelectionChanged:Connect(function(p4, Object, Object1) --[[ Line: 370 ]]
+		connection = Ancestor.SelectionChanged:Connect(function(p4, Object, Object1)
 			-- upvalues: Ancestor (copy), FocusNavigationRefocusSuppression (upval), self (copy), Behavior (copy), IsValidFocusTargetModule (upval)
 			if Object1 and (p4 or Object1:IsDescendantOf(Ancestor)) then
 				if not Object or not Object:IsDescendantOf(Ancestor) then
@@ -241,7 +241,7 @@ function FocusNavigationService:registerFocusBehavior(Ancestor, Behavior) --[[ L
 	}
 end
 
-function FocusNavigationService:deregisterFocusBehavior(p4, Behavior) --[[ Line: 415 ]]
+function FocusNavigationService:deregisterFocusBehavior(p4, Behavior)
 	-- upvalues: MockableWarnFunction (copy)
 	local FocusBehaviorByInstanceEntry = self._focusBehaviorByInstance[p4]
 	
@@ -259,7 +259,7 @@ function FocusNavigationService:deregisterFocusBehavior(p4, Behavior) --[[ Line:
 	end
 end
 
-function FocusNavigationService:focusGuiObject(_silentFocusTarget, p4) --[[ Line: 444 ]]
+function FocusNavigationService:focusGuiObject(_silentFocusTarget, p4)
 	if p4 then
 		self._silentBlurTarget = self._engineInterface.getSelection()
 		self._silentFocusTarget = _silentFocusTarget
@@ -270,7 +270,7 @@ function FocusNavigationService:focusGuiObject(_silentFocusTarget, p4) --[[ Line
 	self._engineInterface.setSelection(_silentFocusTarget)
 end
 
-function FocusNavigationService.teardown(p4) --[[ Line: 459 ]]
+function FocusNavigationService.teardown(p4)
 	for _, engineEventConnection in p4._engineEventConnections do
 		engineEventConnection:Disconnect()
 	end
@@ -279,7 +279,7 @@ function FocusNavigationService.teardown(p4) --[[ Line: 459 ]]
 	end
 end
 
-function FocusNavigationService:canDispatchEvent(EventName, Target): boolean --[[ Line: 468 ]]
+function FocusNavigationService:canDispatchEvent(EventName, Target): boolean
 	-- upvalues: GetAncestorsFunction (copy)
 	if not Target then
 		return false
@@ -302,7 +302,7 @@ function FocusNavigationService:canDispatchEvent(EventName, Target): boolean --[
 	return false
 end
 
-function FocusNavigationService:dispatchSyntheticEvent(EventName, Target, EventData): boolean --[[ Line: 493 ]]
+function FocusNavigationService:dispatchSyntheticEvent(EventName, Target, EventData): boolean
 	-- upvalues: MockableWarnFunction (copy)
 	if Target then
 		if self:canDispatchEvent(EventName, Target) then

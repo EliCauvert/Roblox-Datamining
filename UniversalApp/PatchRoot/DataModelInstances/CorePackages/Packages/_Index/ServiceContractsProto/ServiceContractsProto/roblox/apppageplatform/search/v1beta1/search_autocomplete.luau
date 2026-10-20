@@ -5,14 +5,14 @@ local PageEntryContentModule = require(script.Parent.Parent.Parent.shared.v1beta
 local Module = {}
 Module.__index = Module
 
-function Module.new(p1) --[[ Line: 80 ]]
+function Module.new(p1)
 	-- upvalues: Module (copy)
 	return (setmetatable({
 		prefix = if p1 == nil or p1.prefix == nil then "" else p1.prefix
 	}, Module))
 end
 
-function Module:encode() --[[ Line: 88 ]]
+function Module:encode()
 	-- upvalues: ProtoModule (copy)
 	local Buf = buffer.create(0)
 	local Count = 0
@@ -27,7 +27,7 @@ function Module:encode() --[[ Line: 88 ]]
 	return Buf1
 end
 
-function Module.decode(Buf) --[[ Line: 102 ]]
+function Module.decode(Buf)
 	-- upvalues: Module (copy), ProtoModule (copy)
 	local NewModule = Module.new()
 	local v1 = 0
@@ -60,7 +60,7 @@ function Module.decode(Buf) --[[ Line: 102 ]]
 	return NewModule
 end
 
-function Module:jsonEncode() --[[ Line: 145 ]]
+function Module:jsonEncode()
 	local t = {}
 	
 	if self.prefix ~= nil and self.prefix ~= "" then
@@ -69,7 +69,7 @@ function Module:jsonEncode() --[[ Line: 145 ]]
 	return t
 end
 
-function Module:jsonDecode() --[[ Line: 155 ]]
+function Module:jsonDecode()
 	-- upvalues: Module (copy)
 	local NewModule = Module.new()
 	
@@ -88,7 +88,7 @@ TypeRegistryModule.default:register(config.GetSearchAutocompleteRequest)
 local Module1 = {}
 Module1.__index = Module1
 
-function Module1.new(p1) --[[ Line: 179 ]]
+function Module1.new(p1)
 	-- upvalues: Module1 (copy)
 	return (setmetatable({
 		page_entries = if p1 == nil or p1.page_entries == nil then {} else p1.page_entries,
@@ -96,7 +96,7 @@ function Module1.new(p1) --[[ Line: 179 ]]
 	}, Module1))
 end
 
-function Module1:encode() --[[ Line: 188 ]]
+function Module1:encode()
 	-- upvalues: ProtoModule (copy)
 	local Buf = buffer.create(0)
 	local Count = 0
@@ -119,7 +119,7 @@ function Module1:encode() --[[ Line: 188 ]]
 	return Buf1
 end
 
-function Module1.decode(Buf) --[[ Line: 211 ]]
+function Module1.decode(Buf)
 	-- upvalues: Module1 (copy), ProtoModule (copy), PageEntryContentModule (copy), HydrationContentModule (copy)
 	local NewModule = Module1.new()
 	local v2 = 0
@@ -156,7 +156,7 @@ function Module1.decode(Buf) --[[ Line: 211 ]]
 	return NewModule
 end
 
-function Module1:jsonEncode() --[[ Line: 263 ]]
+function Module1:jsonEncode()
 	local t = {}
 	
 	if self.page_entries ~= nil and #self.page_entries > 0 then
@@ -173,7 +173,7 @@ function Module1:jsonEncode() --[[ Line: 263 ]]
 	return t
 end
 
-function Module1:jsonDecode() --[[ Line: 281 ]]
+function Module1:jsonDecode()
 	-- upvalues: Module1 (copy), PageEntryContentModule (copy), HydrationContentModule (copy)
 	local NewModule = Module1.new()
 	

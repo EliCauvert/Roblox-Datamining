@@ -24,7 +24,7 @@ local config = {
 	}
 }
 
-return ReactModule.memo(ReactModule.forwardRef(function(p1, Ref) --[[ Line: 49 | Named "Empty" ]]
+return ReactModule.memo(ReactModule.forwardRef(function(p1, Ref)
 	-- upvalues: WithDefaultsModule (copy), config (copy), UseTokensModule (copy), ReactModule (copy), ViewModule (copy), WithCommonPropsModule (copy), IconModule (copy), TextModule (copy), ButtonModule (copy)
 	local WithDefaultsModuleResult = WithDefaultsModule(p1, config)
 	

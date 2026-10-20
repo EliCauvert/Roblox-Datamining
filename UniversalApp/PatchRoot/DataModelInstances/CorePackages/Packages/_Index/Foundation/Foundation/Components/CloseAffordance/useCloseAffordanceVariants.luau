@@ -11,7 +11,7 @@ local _ = require(Foundation.Providers.Style.Tokens)
 local ConstantsModule = require(Foundation.Constants)
 local GetSharedVariantsModule = require(Foundation.Components.Button.getSharedVariants)
 
-local function v12(p1) --[[ Line: 45 ]]
+local function v12(p1)
 	-- upvalues: GetSharedVariantsModule (copy), InputSizeModule (copy), IconSizeModule (copy), CloseAffordanceVariantModule (copy), DashModule (copy), ColorNamespaceModule (copy), ConstantsModule (copy)
 	local SharedVariantsModule = GetSharedVariantsModule(p1)
 	
@@ -20,14 +20,14 @@ local function v12(p1) --[[ Line: 45 ]]
 			container = { tag = "row align-x-center align-y-center auto-xy clip" }
 		},
 		types = {
-			[CloseAffordanceVariantModule.OverMedia] = DashModule.map(ColorNamespaceModule, function() --[[ Line: 101 ]]
+			[CloseAffordanceVariantModule.OverMedia] = DashModule.map(ColorNamespaceModule, function()
 				-- upvalues: p1 (copy)
 				return {
 					container = { tag = "bg-over-media-100" },
 					content = { style = p1.Color.Content.Emphasis }
 				}
 			end),
-			[CloseAffordanceVariantModule.Utility] = DashModule.map(ColorNamespaceModule, function(p2) --[[ Line: 107 ]]
+			[CloseAffordanceVariantModule.Utility] = DashModule.map(ColorNamespaceModule, function(p2)
 				-- upvalues: ConstantsModule (upval), p1 (copy)
 				return {
 					container = {
@@ -80,7 +80,7 @@ local function v12(p1) --[[ Line: 45 ]]
 	}
 end
 
-return function(p1, p2, OverMedia, p3, p4, p5) --[[ Line: 138 ]]
+return function(p1, p2, OverMedia, p3, p4, p5)
 	-- upvalues: VariantsContextModule (copy), v12 (copy), CloseAffordanceVariantModule (copy), ComposeStyleVariantModule (copy), ColorNamespaceModule (copy)
 	local CloseAffordance = VariantsContextModule.useVariants("CloseAffordance", v12, p1)
 	

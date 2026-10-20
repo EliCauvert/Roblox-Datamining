@@ -3,7 +3,7 @@ local NoLanes = ReactFiberLaneModule.NoLanes
 local MergeLanesFunction = ReactFiberLaneModule.mergeLanes
 
 return {
-	workInProgressRootSkippedLanes = function(p1) --[[ Line: 24 ]]
+	workInProgressRootSkippedLanes = function(p1)
 		-- upvalues: NoLanes (ref)
 		if p1 == nil then
 			return NoLanes
@@ -13,7 +13,7 @@ return {
 			return NoLanes
 		end
 	end,
-	markSkippedUpdateLanes = function(p1) --[[ Line: 34 ]]
+	markSkippedUpdateLanes = function(p1)
 		-- upvalues: NoLanes (ref), MergeLanesFunction (copy)
 		NoLanes = MergeLanesFunction(p1, NoLanes)
 	end

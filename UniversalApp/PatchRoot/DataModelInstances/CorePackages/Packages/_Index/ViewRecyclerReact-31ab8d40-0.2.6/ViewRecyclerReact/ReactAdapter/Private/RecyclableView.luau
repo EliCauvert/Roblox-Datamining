@@ -8,7 +8,7 @@ local RecyclableViewRegistryModule = require(script.Parent.RecyclableViewRegistr
 local SignalsModule = require(ViewRecyclerReact.Parent.Signals)
 local SignalsExperimentalModule = require(ViewRecyclerReact.Parent.SignalsExperimental)
 
-return function(Id, ItemViewType, CommitGated, p1, p2) --[[ Line: 61 | Named "RecyclableView" ]]
+return function(Id, ItemViewType, CommitGated, p1, p2)
 	-- upvalues: RecyclableViewRegistryModule (copy), SignalsModule (copy), ReactModule (copy), ViewRecyclerModule (copy), PlacementKindModule (copy), HostPresentationPhaseModule (copy), RecyclableViewReadinessModule (copy), SignalsExperimentalModule (copy)
 	local Metadata = RecyclableViewRegistryModule.getMetadata(ItemViewType)
 	assert(Metadata ~= nil, "RecyclableView: unknown Recyclable view type")
@@ -38,7 +38,7 @@ return function(Id, ItemViewType, CommitGated, p1, p2) --[[ Line: 61 | Named "Re
 	local Flag1 = true
 	local Flag2 = false
 	
-	local function _(p3) --[[ Line: 128 | Named "writeHostState" ]]
+	local function _(p3)
 		-- upvalues: CommitGated1 (ref), HostPresentationPhaseModule (upval), P3 (copy), RecyclableViewReadinessModule (upval), Flag1 (ref), HideWhilePending (copy), Flag2 (ref), Frame (copy)
 		local Assignment = CommitGated1
 		local Hidden = HostPresentationPhaseModule.Hidden
@@ -58,7 +58,7 @@ return function(Id, ItemViewType, CommitGated, p1, p2) --[[ Line: 61 | Named "Re
 		return p3
 	end
 	
-	local _ = function(p3) --[[ Line: 160 | Named "preparePlacement" ]]
+	local _ = function(p3)
 		-- upvalues: Flag2 (ref), CommitGated1 (ref), v1 (ref), v2 (ref), Flag (ref)
 		assert(not Flag2, "RecyclableView: cannot publish after destroy")
 		local CommitGated = CommitGated1
@@ -75,7 +75,7 @@ return function(Id, ItemViewType, CommitGated, p1, p2) --[[ Line: 61 | Named "Re
 		return CommitGated
 	end
 	
-	local _ = function() --[[ Line: 173 | Named "publishHostState" ]]
+	local _ = function()
 		-- upvalues: v2 (ref), t (copy), CommitGated1 (ref), HostPresentationPhaseModule (upval), P3 (copy), RecyclableViewReadinessModule (upval), Flag1 (ref), HideWhilePending (copy), Flag2 (ref), Frame (copy)
 		local v4 = v2
 		
@@ -97,7 +97,7 @@ return function(Id, ItemViewType, CommitGated, p1, p2) --[[ Line: 61 | Named "Re
 		v4.apply(t)
 	end
 	
-	local function setImmediate(Value) --[[ Line: 182 ]]
+	local function setImmediate(Value)
 		-- upvalues: Flag2 (ref), CommitGated1 (ref), v1 (ref), v2 (ref), Flag (ref), Signal2 (copy), Flag1 (ref), Composition (ref), v3 (ref), Signal2_1 (copy), t (copy), HostPresentationPhaseModule (upval), P3 (copy), RecyclableViewReadinessModule (upval), HideWhilePending (copy), Frame (copy)
 		assert(not Flag2, "RecyclableView: cannot publish after destroy")
 		local CommitGated = CommitGated1
@@ -142,7 +142,7 @@ return function(Id, ItemViewType, CommitGated, p1, p2) --[[ Line: 61 | Named "Re
 		v5.apply(t)
 	end
 	
-	local function setCommitGated(Value) --[[ Line: 197 ]]
+	local function setCommitGated(Value)
 		-- upvalues: Flag2 (ref), CommitGated1 (ref), v1 (ref), v2 (ref), Flag (ref), Flag1 (ref), Count (ref), SignalsExperimentalModule (upval), Composition (ref), v3 (ref), Signal2_1 (copy), Signal2_2 (copy), Signal2 (copy), Binding2 (copy), t (copy), HostPresentationPhaseModule (upval), P3 (copy), RecyclableViewReadinessModule (upval), HideWhilePending (copy), Frame (copy)
 		assert(not Flag2, "RecyclableView: cannot publish after destroy")
 		local CommitGated = CommitGated1
@@ -165,7 +165,7 @@ return function(Id, ItemViewType, CommitGated, p1, p2) --[[ Line: 61 | Named "Re
 		if Value == nil or NoCommitGated then
 			Flag1 = false
 		end
-		SignalsExperimentalModule.batch(function() --[[ Line: 208 ]]
+		SignalsExperimentalModule.batch(function()
 			-- upvalues: Value (copy), Composition (upval), v3 (upval), Signal2_1 (upval), NoCommitGated (copy), Signal2_2 (upval), Count (upval), Signal2 (upval), Binding2 (upval)
 			if Value ~= nil then
 				Composition = v3
@@ -208,14 +208,14 @@ return function(Id, ItemViewType, CommitGated, p1, p2) --[[ Line: 61 | Named "Re
 		viewType = ItemViewType,
 		itemViewType = ItemViewType,
 		signal = Signal,
-		itemSignal = function(p3) --[[ Line: 114 ]]
+		itemSignal = function(p3)
 			-- upvalues: Signal1 (copy), Composition (ref), PlacementKindModule (upval)
 			local SignalResult = Signal1(p3)
 			assert(SignalResult ~= nil, "RecyclableView: item read before first Assignment")
 			
 			return if Composition == PlacementKindModule.Composition then SignalResult.value.props else SignalResult.value
 		end,
-		itemKeySignal = function(p3) --[[ Line: 122 ]]
+		itemKeySignal = function(p3)
 			-- upvalues: Signal1 (copy)
 			local SignalResult = Signal1(p3)
 			assert(SignalResult ~= nil, "RecyclableView: item key read before first Assignment")
@@ -225,7 +225,7 @@ return function(Id, ItemViewType, CommitGated, p1, p2) --[[ Line: 61 | Named "Re
 		set = if P3 == RecyclableViewReadinessModule.ReadyOnAssignment then setImmediate else setCommitGated,
 		pending = Binding,
 		contentRevision = Signal3,
-		commitContent = function(Generation, Count1): boolean --[[ Line: 227 ]]
+		commitContent = function(Generation, Count1): boolean
 			-- upvalues: CommitGated1 (ref), Flag2 (ref), P3 (copy), RecyclableViewReadinessModule (upval), Count (ref), Flag1 (ref), Binding2 (copy), v2 (ref), t (copy), HostPresentationPhaseModule (upval), HideWhilePending (copy), Frame (copy)
 			local CommitGated = CommitGated1
 			
@@ -255,7 +255,7 @@ return function(Id, ItemViewType, CommitGated, p1, p2) --[[ Line: 61 | Named "Re
 			end
 			return true
 		end,
-		bindPlacement = function(p3, p4) --[[ Line: 145 ]]
+		bindPlacement = function(p3, p4)
 			-- upvalues: Flag2 (ref), v2 (ref), v3 (ref), Flag (ref), CommitGated1 (ref)
 			assert(not Flag2, "RecyclableView: cannot bind placement after destroy")
 			assert(p3 == nil == (p4 == nil), "RecyclableView: placement kind and port must be bound together")
@@ -276,7 +276,7 @@ return function(Id, ItemViewType, CommitGated, p1, p2) --[[ Line: 61 | Named "Re
 		hideWhilePending = HideWhilePending,
 		structuralPlacement = Signal4,
 		compositionPlacement = Signal5,
-		setStructuralPlacement = function(Axis, SelfSizing) --[[ Line: 260 ]]
+		setStructuralPlacement = function(Axis, SelfSizing)
 			-- upvalues: SignalResult (ref), Signal2_3 (copy)
 			if SignalResult.axis ~= Axis or SignalResult.selfSizing ~= SelfSizing then
 				SignalResult = { axis = Axis, selfSizing = SelfSizing }
@@ -286,18 +286,18 @@ return function(Id, ItemViewType, CommitGated, p1, p2) --[[ Line: 61 | Named "Re
 			end
 		end,
 		setCompositionPlacement = Signal2_4,
-		portalFrame = function(_) --[[ Line: 271 ]]
+		portalFrame = function(_)
 			-- upvalues: Flag2 (ref), Frame (copy)
 			return if Flag2 then nil else Frame
 		end,
-		bindHost = function(p3) --[[ Line: 101 ]]
+		bindHost = function(p3)
 			-- upvalues: Flag2 (ref), v1 (ref)
 			assert(not Flag2, "RecyclableView: cannot bind a destroyed host")
 			assert(v1 == nil, "RecyclableView: host is already bound")
 			v1 = p3
 			local Flag = true
 			
-			return function() --[[ Line: 106 ]]
+			return function()
 				-- upvalues: Flag (ref), v1 (upval), p3 (copy)
 				if Flag and v1 == p3 then
 					Flag = false
@@ -305,7 +305,7 @@ return function(Id, ItemViewType, CommitGated, p1, p2) --[[ Line: 61 | Named "Re
 				end
 			end
 		end,
-		clearSelection = function() --[[ Line: 275 ]]
+		clearSelection = function()
 			-- upvalues: v1 (ref)
 			local v4 = v1
 			
@@ -313,7 +313,7 @@ return function(Id, ItemViewType, CommitGated, p1, p2) --[[ Line: 61 | Named "Re
 				v4.clearSelection()
 			end
 		end,
-		detachFromPlaceholder = function(p3) --[[ Line: 281 ]]
+		detachFromPlaceholder = function(p3)
 			-- upvalues: v1 (ref)
 			local v4 = v1
 			
@@ -321,7 +321,7 @@ return function(Id, ItemViewType, CommitGated, p1, p2) --[[ Line: 61 | Named "Re
 				v4.detachFromPlaceholder(p3)
 			end
 		end,
-		destroy = function() --[[ Line: 287 ]]
+		destroy = function()
 			-- upvalues: Flag2 (ref), v2 (ref), v3 (ref), v1 (ref), Binding2 (copy), Frame (copy)
 			if Flag2 then return end
 			if v2 ~= nil then

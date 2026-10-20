@@ -12,7 +12,7 @@ local config = {
 	DisplayOrder = require(Foundation.Constants).MAX_LAYOUT_ORDER - 1
 }
 
-return function(p1) --[[ Line: 26 | Named "OverlayProvider" ]]
+return function(p1)
 	-- upvalues: WithDefaultsModule (copy), config (copy), ReactModule (copy), UseKeyboardAwareSizeModule (copy), UseStyleSheetFunction (copy), GetMainGuiModule (copy), OverlayContextModule (copy), ReactRobloxModule (copy)
 	local WithDefaultsModuleResult = WithDefaultsModule(p1, config)
 	local UseStateResult, UseStateResult2 = ReactModule.useState(WithDefaultsModuleResult.gui)
@@ -20,7 +20,7 @@ return function(p1) --[[ Line: 26 | Named "OverlayProvider" ]]
 	local Parent = if WithDefaultsModuleResult.gui then nil else UseStateResult and UseStateResult.Parent
 	local UseKeyboardAwareSizeModuleResult = UseKeyboardAwareSizeModule(Parent)
 	local UseStyleSheetResult = UseStyleSheetFunction()
-	local UseResult = ReactModule.useCallback(function() --[[ Line: 34 ]]
+	local UseResult = ReactModule.useCallback(function()
 		-- upvalues: WithDefaultsModuleResult (copy), UseStateResult2_1 (copy)
 		if WithDefaultsModuleResult.gui == nil then
 			UseStateResult2_1(true)
@@ -32,7 +32,7 @@ return function(p1) --[[ Line: 26 | Named "OverlayProvider" ]]
 	local Parent1 = if WithDefaultsModuleResult.gui == nil then Parent else WithDefaultsModuleResult.gui
 	
 	return ReactModule.createElement(OverlayContextModule.Provider, {
-		value = ReactModule.useMemo(function() --[[ Line: 46 ]]
+		value = ReactModule.useMemo(function()
 			-- upvalues: UseResult (copy), UseStateResult3 (copy), Parent1 (copy)
 			return {
 				requestOverlay = UseResult,

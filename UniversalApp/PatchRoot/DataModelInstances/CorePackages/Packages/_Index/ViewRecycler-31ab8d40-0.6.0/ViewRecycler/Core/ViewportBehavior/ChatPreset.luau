@@ -4,7 +4,7 @@ local ReachedThresholdModule = require(ViewRecycler.Core.ViewportBehavior.Reache
 local ScrollAlignmentModule = require(ViewRecycler.Core.Enums.ScrollAlignment)
 
 return table.freeze({
-	create = function(p1) --[[ Line: 25 ]]
+	create = function(p1)
 		-- upvalues: ReachedThresholdModule (copy), ScrollAlignmentModule (copy), AutoScrollPolicyModule (copy)
 		local StartReachedThreshold = if p1 == nil then 0 else p1.startReachedThreshold or 0
 		local EndReachedThreshold = if p1 == nil then 1 else p1.endReachedThreshold or 1

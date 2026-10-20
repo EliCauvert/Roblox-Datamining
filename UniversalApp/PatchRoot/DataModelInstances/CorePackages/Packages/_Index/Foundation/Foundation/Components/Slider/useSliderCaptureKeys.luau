@@ -3,19 +3,19 @@ local ReactModule = require(Foundation.Parent.React)
 local UserInputService = require(Foundation.Utility.Wrappers.Services).UserInputService
 local ConstantsModule = require(script.Parent.constants)
 
-local function _(Value): boolean --[[ Line: 10 | Named "isCaptureKey" ]]
+local function _(Value): boolean
 	-- upvalues: ConstantsModule (copy)
 	return table.find(ConstantsModule.enter, Value) ~= nil or table.find(ConstantsModule.thumbSwitch, Value) ~= nil
 end
 
-return function(p1, Current) --[[ Line: 14 | Named "useSliderCaptureKeys" ]]
+return function(p1, Current)
 	-- upvalues: ReactModule (copy), UserInputService (copy), ConstantsModule (copy)
 	local UseRefResult = ReactModule.useRef(Current)
 	UseRefResult.current = Current
-	ReactModule.useEffect(function() --[[ Line: 18 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: p1 (copy), UserInputService (upval), ConstantsModule (upval), UseRefResult (copy)
 		if not p1 then return end
-		local InputBeganConnection = UserInputService.InputBegan:Connect(function(Input) --[[ Line: 23 ]]
+		local InputBeganConnection = UserInputService.InputBegan:Connect(function(Input)
 			-- upvalues: ConstantsModule (upval), UseRefResult (upval)
 			local KeyCode = Input.KeyCode
 			
@@ -24,7 +24,7 @@ return function(p1, Current) --[[ Line: 14 | Named "useSliderCaptureKeys" ]]
 			end
 		end)
 		
-		return function() --[[ Line: 28 ]]
+		return function()
 			-- upvalues: InputBeganConnection (copy)
 			InputBeganConnection:Disconnect()
 		end

@@ -5,9 +5,9 @@ local _ = require(Foundation.Enums.Device)
 local _ = require(Foundation.Enums.ThemeName)
 local GetGeneratedRulesModule = require(Foundation.Utility.getGeneratedRules)
 
-return function(p1, p2, p3) --[[ Line: 14 | Named "useGeneratedRules" ]]
+return function(p1, p2, p3)
 	-- upvalues: ReactModule (copy), GetGeneratedRulesModule (copy)
-	return ReactModule.useMemo(function() --[[ Line: 15 ]]
+	return ReactModule.useMemo(function()
 		-- upvalues: GetGeneratedRulesModule (upval), p1 (copy), p2 (copy), p3 (copy)
 		return GetGeneratedRulesModule(p1, p2, p3)
 	end, { p1, p2, p3 })

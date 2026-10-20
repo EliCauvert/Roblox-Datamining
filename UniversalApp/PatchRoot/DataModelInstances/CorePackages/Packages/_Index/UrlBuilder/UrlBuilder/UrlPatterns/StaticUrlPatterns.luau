@@ -1,7 +1,7 @@
 ﻿game:DefineFastFlag("EnableShopGiftCardsURL", false)
 
-return function(p1) --[[ Line: 3 ]]
-	local function _(): number --[[ Line: 4 | Named "isQQ" ]]
+return function(p1)
+	local function _(): number
 		-- upvalues: p1 (copy)
 		return string.find(p1.fromString("corp:")(), "qq.com")
 	end
@@ -19,11 +19,11 @@ return function(p1) --[[ Line: 3 ]]
 		develop = p1.fromString("www:develop"),
 		creatorHub = p1.fromString("create:"),
 		blog = p1.fromString("blog:"),
-		giftCards = function(p2) --[[ Line: 21 ]]
+		giftCards = function(p2)
 			-- upvalues: p1 (copy)
 			return p1.fromString(if game:GetFastFlag("EnableShopGiftCardsURL") then "www:shopgiftcards?ref={source}" else "www:giftcards?ref={source}")({ source = p2 or "" })
 		end,
-		giftCardsWithRedeem = function(Source, Text) --[[ Line: 29 ]]
+		giftCardsWithRedeem = function(Source, Text)
 			-- upvalues: p1 (copy)
 			return if Text and Text ~= "" then p1.fromString("www:giftcards-" .. Text .. "?ref={source}")({ source = Source }) else p1.fromString("www:shopgiftcards?ref={source}")({ source = Source })
 		end,
@@ -32,12 +32,12 @@ return function(p1) --[[ Line: 3 ]]
 		help = p1.fromString(if string.find(p1.fromString("corp:")(), "qq.com") then "corp:faq" else "www:help"),
 		safetyDashboard = {
 			main = p1.fromString("www:safety-dashboard?t_source={source|app}"),
-			reportInbox = function(p2): string --[[ Line: 42 ]]
+			reportInbox = function(p2): string
 				-- upvalues: p1 (copy)
 				return p1.fromString("www:safety-dashboard?t_source={source|app}")(p2) .. "#/report-inbox"
 			end,
 			violation = p1.fromString("www:safety-dashboard?vid={id}&t_source={source|app}"),
-			violations = function(p2): string --[[ Line: 46 ]]
+			violations = function(p2): string
 				-- upvalues: p1 (copy)
 				return p1.fromString("www:safety-dashboard?t_source={source|app}")(p2) .. "#/violations"
 			end
@@ -55,23 +55,23 @@ return function(p1) --[[ Line: 3 ]]
 			sendVerificationEmail = p1.fromString("accountSettings:v1/email/verify")
 		},
 		about = {
-			us = function(p2) --[[ Line: 67 ]]
+			us = function(p2)
 				-- upvalues: p1 (copy)
 				return p1.fromString("www:info/about-us?locale={localeCode}")({ localeCode = p2 or "" })
 			end,
-			careers = function(p2) --[[ Line: 71 ]]
+			careers = function(p2)
 				-- upvalues: p1 (copy)
 				return if string.find(p1.fromString("corp:")(), "qq.com") then p1.fromString("corp:careers.html") else p1.fromString("www:info/jobs?locale={localeCode}")({ localeCode = p2 or "" })
 			end,
-			parents = function(p2) --[[ Line: 79 ]]
+			parents = function(p2)
 				-- upvalues: p1 (copy)
 				return p1.fromString("www:info/parents?locale={localeCode}")({ localeCode = p2 or "" })
 			end,
-			terms = function(p2) --[[ Line: 83 ]]
+			terms = function(p2)
 				-- upvalues: p1 (copy)
 				return if string.find(p1.fromString("corp:")(), "qq.com") and p2.useGameQQUrls then p1.fromString("https://game.qq.com/contract.shtml")() else p1.fromString("www:info/terms")()
 			end,
-			privacy = function(p2) --[[ Line: 90 ]]
+			privacy = function(p2)
 				-- upvalues: p1 (copy)
 				return if string.find(p1.fromString("corp:")(), "qq.com") and p2.useGameQQUrls then p1.fromString("https://game.qq.com/privacy_guide.shtml")() else p1.fromString("www:info/privacy")()
 			end,

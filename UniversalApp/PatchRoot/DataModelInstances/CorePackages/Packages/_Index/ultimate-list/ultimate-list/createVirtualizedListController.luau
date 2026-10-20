@@ -7,7 +7,7 @@ local BinarySearchIndexRangeInViewModule = require(script.binarySearchIndexRange
 local ExhaustiveMatchModule = require(UltimateList.Util.exhaustiveMatch)
 local CreateVirtualizedListController = require(UltimateList.Util.createDebugLogger)("createVirtualizedListController")
 
-return function(DataSource, LastDimensions, p1) --[[ Line: 43 | Named "createVirtualizedListController" ]]
+return function(DataSource, LastDimensions, p1)
 	-- upvalues: DimensionsMethodsModule (copy), ExhaustiveMatchModule (copy), CreateVirtualizedListController (copy), BinarySearchIndexRangeInViewModule (copy), DataSourceMethodsModule (copy)
 	local config = {
 		scrollSizeAxis = 0,
@@ -23,18 +23,18 @@ return function(DataSource, LastDimensions, p1) --[[ Line: 43 | Named "createVir
 	local _Vector2 = Vector2.new()
 	local Overscan = 0
 	
-	local function _() --[[ Line: 64 | Named "getRangeAxes" ]]
+	local function _()
 		-- upvalues: ScrollAxis (ref), Overscan (ref), DominantAxis (ref)
 		local Largest = math.max(0, ScrollAxis - Overscan)
 		
 		return Largest, ScrollAxis + DominantAxis + Overscan - Largest
 	end
 	
-	local _ = function(p2: number, p3: number, p4: number): Vector3 --[[ Line: 70 | Named "getIndexRangeInViewForSize" ]]
+	local _ = function(p2: number, p3: number, p4: number): Vector3
 		return (Vector3.new(p3 // p2 + 1, (p3 + p4) // p2 + 1))
 	end
 	
-	local function getIndexRangeInViewForUDim2(Udim, Largest: number, p2: number): Vector3 --[[ Line: 81 ]]
+	local function getIndexRangeInViewForUDim2(Udim, Largest: number, p2: number): Vector3
 		-- upvalues: DimensionsMethodsModule (upval), _Vector2 (ref), p1 (copy), ExhaustiveMatchModule (upval), CreateVirtualizedListController (upval)
 		local AmountPerNonDominantInGrid = DimensionsMethodsModule.getAmountPerNonDominantInGrid(Udim, _Vector2, p1)
 		local Offset = if p1 == "x" then Udim.X.Offset elseif p1 == "y" then Udim.Y.Offset else ExhaustiveMatchModule(p1)
@@ -45,7 +45,7 @@ return function(DataSource, LastDimensions, p1) --[[ Line: 43 | Named "createVir
 		return (Vector3.new(X, Y))
 	end
 	
-	local function getIndexRangeInView() --[[ Line: 113 ]]
+	local function getIndexRangeInView()
 		-- upvalues: ScrollAxis (ref), Overscan (ref), DominantAxis (ref), LastDimensions (ref), getIndexRangeInViewForUDim2 (copy), BinarySearchIndexRangeInViewModule (upval), DataSource (ref), p1 (copy), ExhaustiveMatchModule (upval)
 		local Largest = math.max(0, ScrollAxis - Overscan)
 		local ScrollAxisDelta = ScrollAxis + DominantAxis + Overscan - Largest
@@ -77,14 +77,14 @@ return function(DataSource, LastDimensions, p1) --[[ Line: 43 | Named "createVir
 	
 	local t = {}
 	
-	local _ = function() --[[ Line: 157 | Named "callUpdateCallbacks" ]]
+	local _ = function()
 		-- upvalues: t (copy)
 		for i in t do
 			i()
 		end
 	end
 	
-	local function update() --[[ Line: 163 ]]
+	local function update()
 		-- upvalues: ScrollAxis (ref), Overscan (ref), DominantAxis (ref), config (ref), _Vector2 (ref), DataSource (ref), LastDimensions (ref), getIndexRangeInView (copy), DataSourceMethodsModule (upval), CreateVirtualizedListController (upval), DimensionsMethodsModule (upval), p1 (copy), t (copy), ExhaustiveMatchModule (upval)
 		local X = math.max(0, ScrollAxis - Overscan)
 		local ScrollAxisDelta = ScrollAxis + DominantAxis + Overscan - X
@@ -132,12 +132,12 @@ return function(DataSource, LastDimensions, p1) --[[ Line: 43 | Named "createVir
 	local BindToChangedResult = if DataSource.type == "mutableSource" then DataSource.methods.bindToChanged(update) else nil
 	
 	return {
-		setScrollAxis = function(Value) --[[ Line: 240 ]]
+		setScrollAxis = function(Value)
 			-- upvalues: ScrollAxis (ref), update (copy)
 			ScrollAxis = Value
 			update()
 		end,
-		setDataSource = function(Value) --[[ Line: 245 ]]
+		setDataSource = function(Value)
 			-- upvalues: DataSource (ref), DataSourceMethodsModule (upval), update (copy)
 			assert(DataSource.type == Value.type, "Data source type changed, you must keep it the same")
 			
@@ -148,7 +148,7 @@ return function(DataSource, LastDimensions, p1) --[[ Line: 43 | Named "createVir
 				return
 			end
 		end,
-		setDimensions = function(Value) --[[ Line: 256 ]]
+		setDimensions = function(Value)
 			-- upvalues: DimensionsMethodsModule (upval), LastDimensions (ref), update (copy)
 			if not DimensionsMethodsModule.equals(LastDimensions, Value) then
 				LastDimensions = Value
@@ -157,7 +157,7 @@ return function(DataSource, LastDimensions, p1) --[[ Line: 43 | Named "createVir
 				return
 			end
 		end,
-		setWindowSize = function(Value) --[[ Line: 265 ]]
+		setWindowSize = function(Value)
 			-- upvalues: _Vector2 (ref), DominantAxis (ref), DimensionsMethodsModule (upval), p1 (copy), update (copy)
 			if _Vector2 ~= Value then
 				_Vector2 = Value
@@ -167,11 +167,11 @@ return function(DataSource, LastDimensions, p1) --[[ Line: 43 | Named "createVir
 				return
 			end
 		end,
-		getWindowSize = function() --[[ Line: 276 ]]
+		getWindowSize = function()
 			-- upvalues: _Vector2 (ref)
 			return _Vector2
 		end,
-		setOverscan = function(Value: number) --[[ Line: 280 ]]
+		setOverscan = function(Value: number)
 			-- upvalues: Overscan (ref), update (copy)
 			assert(Value >= 0, "overscan must not be negative")
 			
@@ -182,28 +182,28 @@ return function(DataSource, LastDimensions, p1) --[[ Line: 43 | Named "createVir
 				return
 			end
 		end,
-		get = function() --[[ Line: 291 ]]
+		get = function()
 			-- upvalues: config (ref)
 			return config.cachedLastResult
 		end,
-		getCanvasSize = function() --[[ Line: 295 ]]
+		getCanvasSize = function()
 			-- upvalues: config (ref)
 			return config.canvasSize
 		end,
-		getRange = function() --[[ Line: 299 ]]
+		getRange = function()
 			-- upvalues: config (ref)
 			return config.range
 		end,
-		bindToUpdate = function(Key) --[[ Line: 303 ]]
+		bindToUpdate = function(Key)
 			-- upvalues: t (copy)
 			t[Key] = true
 			
-			return function() --[[ Line: 305 ]]
+			return function()
 				-- upvalues: t (upval), Key (copy)
 				t[Key] = nil
 			end
 		end,
-		destroy = function() --[[ Line: 314 ]]
+		destroy = function()
 			-- upvalues: BindToChangedResult (copy)
 			if BindToChangedResult ~= nil then
 				BindToChangedResult()

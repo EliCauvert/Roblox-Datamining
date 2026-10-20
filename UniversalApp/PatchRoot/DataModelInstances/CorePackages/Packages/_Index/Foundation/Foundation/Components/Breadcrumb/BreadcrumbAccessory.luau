@@ -13,7 +13,7 @@ local AccessoryTypeModule = require(Foundation.Enums.AccessoryType)
 local _ = require(Foundation.Enums.AvatarIconSize)
 local _ = require(Foundation.Enums.IconSize)
 
-return ReactModule.memo(function(Frame: Frame) --[[ Line: 46 | Named "BreadcrumbAccessory" ]]
+return ReactModule.memo(function(Frame: Frame)
 	-- upvalues: AccessoryTypeModule (copy), ReactModule (copy), AvatarIconModule (copy), IsBuilderOrMigratedIconFunction (copy), IconModule (copy), IsMigratedFunction (copy), Uiblox (copy), ImageModule (copy)
 	local Variant = Frame.variant
 	local Config = if type(Frame.config) == "string" then { iconName = Frame.config } else Frame.config

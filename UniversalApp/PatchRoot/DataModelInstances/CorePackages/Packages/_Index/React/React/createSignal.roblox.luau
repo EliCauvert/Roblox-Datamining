@@ -1,9 +1,9 @@
-﻿local function createSignal() --[[ Line: 36 ]]
+﻿local function createSignal()
 	local t = {}
 	local Tbl = {}
 	local Flag = false
 	
-	return function(Callback) --[[ Line: 41 | Named "subscribe" ]]
+	return function(Callback)
 		-- upvalues: Flag (ref), t (copy), Tbl (copy)
 		assert(typeof(Callback) == "function", "Can only subscribe to signals with a function.")
 		local config = { disconnected = false, callback = Callback }
@@ -13,14 +13,14 @@
 		end
 		t[Callback] = config
 		
-		return function() --[[ Line: 60 | Named "disconnect" ]]
+		return function()
 			-- upvalues: config (copy), t (upval), Callback (copy), Tbl (upval)
 			assert(not config.disconnected, "Listeners can only be disconnected once.")
 			config.disconnected = true
 			t[Callback] = nil
 			Tbl[Callback] = nil
 		end
-	end, function(...) --[[ Line: 74 | Named "fire" ]]
+	end, function(...)
 		-- upvalues: Flag (ref), t (copy), Tbl (copy)
 		Flag = true
 		
@@ -34,7 +34,7 @@
 	end
 end
 
-local function fireConnections(List, ...) --[[ Line: 91 ]]
+local function fireConnections(List, ...)
 	for i, value in List do
 		if not value.disconnected then
 			i(...)
@@ -43,13 +43,13 @@ local function fireConnections(List, ...) --[[ Line: 91 ]]
 	return nil
 end
 
-local function createReentrantSafeSignal() --[[ Line: 104 ]]
+local function createReentrantSafeSignal()
 	-- upvalues: fireConnections (copy)
 	local t = {}
 	local Tbl = {}
 	local Count = 0
 	
-	return function(Callback) --[[ Line: 109 | Named "subscribe" ]]
+	return function(Callback)
 		-- upvalues: Count (ref), t (copy), Tbl (copy)
 		assert(typeof(Callback) == "function", "Can only subscribe to signals with a function.")
 		local config = { disconnected = false, callback = Callback }
@@ -59,7 +59,7 @@ local function createReentrantSafeSignal() --[[ Line: 104 ]]
 		else
 			t[Callback] = config
 		end
-		return function() --[[ Line: 127 | Named "disconnect" ]]
+		return function()
 			-- upvalues: config (copy), t (upval), Callback (copy), Tbl (upval)
 			assert(not config.disconnected, "Listeners can only be disconnected once.")
 			config.disconnected = true
@@ -71,7 +71,7 @@ local function createReentrantSafeSignal() --[[ Line: 104 ]]
 				Tbl[Callback] = nil
 			end
 		end
-	end, function(...) --[[ Line: 145 | Named "fire" ]]
+	end, function(...)
 		-- upvalues: Count (ref), fireConnections (upval), t (copy), Tbl (copy)
 		Count += 1
 		local Success, Result = pcall(fireConnections, t, ...)

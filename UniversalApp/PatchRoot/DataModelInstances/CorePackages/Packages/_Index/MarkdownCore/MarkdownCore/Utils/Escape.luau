@@ -1,5 +1,5 @@
 ﻿return {
-	escapeRichFormatting = function(Text: string) --[[ Line: 2 ]]
+	escapeRichFormatting = function(Text: string)
 		return (Text:gsub("[&<>\"']", {
 			["&"] = "&amp;",
 			["<"] = "&lt;",
@@ -14,7 +14,7 @@
 			["&amp;amp;"] = "&amp;"
 		}))
 	end,
-	unescapeRichFormatting = function(Text: string): string --[[ Line: 22 ]]
+	unescapeRichFormatting = function(Text: string): string
 		return Text:gsub("&%l+;", {
 			["&lt;"] = "<",
 			["&gt;"] = ">",

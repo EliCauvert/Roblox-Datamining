@@ -1,4 +1,4 @@
-﻿return function(Scale: number) --[[ Line: 1 ]]
+﻿return function(Scale: number)
 	return {
 		Color = {
 			ActionAlert = {

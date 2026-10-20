@@ -1,4 +1,4 @@
-﻿return function(AssetType) --[[ Line: 5 | Named "getPartNamesInHierarchyOrder" ]]
+﻿return function(AssetType)
 	if Enum.AssetType.LeftArm == AssetType then
 		return { "LeftUpperArm", "LeftLowerArm", "LeftHand" }
 	elseif Enum.AssetType.RightArm == AssetType then

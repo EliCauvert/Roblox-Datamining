@@ -1,4 +1,4 @@
-﻿return function(List, p1): boolean --[[ Line: 10 | Named "includes" ]]
+﻿return function(List, p1): boolean
 	if p1 == nil then
 		return false
 	end

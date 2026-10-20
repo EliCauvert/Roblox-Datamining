@@ -8,7 +8,7 @@ game:DefineFastFlag("UGCValidateEmoteAttributes", false)
 local EmoteIsUGCAttributeName = ConstantsModule.EmoteIsUGCAttributeName
 local EmoteMaxPartTranslationAttributeName = ConstantsModule.EmoteMaxPartTranslationAttributeName
 
-local function _(p1: number) --[[ Line: 18 | Named "toFiniteNumber" ]]
+local function _(p1: number)
 	return if typeof(p1) == "number" and p1 > -1e999 and p1 < 1e999 then p1 else nil
 end
 
@@ -16,12 +16,12 @@ return {
 	categories = { ValidationEnumsModule.UploadCategory.EMOTE_ANIMATION },
 	requiredData = {},
 	conditionalData = { ValidationEnumsModule.SharedDataMember.curveAnimations },
-	fflag = function() --[[ Line: 30 ]]
+	fflag = function()
 		return game:GetFastFlag("UGCValidateEmoteAttributes") and game:GetEngineFeature("EngineTagEmoteMaxPartTranslation")
 	end,
 	expectedFailures = {},
 	prereqTests = {},
-	run = function(p1, p2) --[[ Line: 36 ]]
+	run = function(p1, p2)
 		-- upvalues: EmoteIsUGCAttributeName (copy), ErrorSourceStringsModule (copy), EmoteMaxPartTranslationAttributeName (copy), PublishService (copy)
 		local Attribute2 = nil
 		local Attribute1 = nil

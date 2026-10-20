@@ -6,7 +6,7 @@ local WithCommonPropsModule = require(Foundation.Utility.withCommonProps)
 local WithDefaultsModule = require(Foundation.Utility.withDefaults)
 local config = { testId = "--foundation-checkbox-group" }
 
-return ReactModule.memo(ReactModule.forwardRef(function(p1, Ref) --[[ Line: 21 | Named "CheckboxGroup" ]]
+return ReactModule.memo(ReactModule.forwardRef(function(p1, Ref)
 	-- upvalues: WithDefaultsModule (copy), config (copy), ReactModule (copy), InternalInputGroupModule (copy), WithCommonPropsModule (copy)
 	local WithDefaultsModuleResult = WithDefaultsModule(p1, config)
 	

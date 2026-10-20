@@ -12,25 +12,25 @@ local Parent = script.Parent.Parent.Parent
 local Console = require(Parent.Shared).console
 local DisabledLog = require(Parent.Shared).ConsolePatchingDev.disabledLog
 local SchedulerHostConfig = {
-	requestHostCallback = function(p1) --[[ Line: 28 ]]
+	requestHostCallback = function(p1)
 		-- upvalues: Callback (ref)
 		Callback = p1
 	end,
-	cancelHostCallback = function() --[[ Line: 32 ]]
+	cancelHostCallback = function()
 		-- upvalues: Callback (ref)
 		Callback = nil
 	end,
-	requestHostTimeout = function(p1, p2) --[[ Line: 36 ]]
+	requestHostTimeout = function(p1, p2)
 		-- upvalues: Callback1 (ref), v1 (ref), Total (ref)
 		Callback1 = p1
 		v1 = Total + p2
 	end,
-	cancelHostTimeout = function() --[[ Line: 41 ]]
+	cancelHostTimeout = function()
 		-- upvalues: Callback1 (ref), v1 (ref)
 		Callback1 = nil
 		v1 = -1
 	end,
-	shouldYieldToHost = function(): boolean --[[ Line: 46 ]]
+	shouldYieldToHost = function(): boolean
 		-- upvalues: List (ref), v2 (ref), Flag3 (ref), Flag2 (ref), Flag (ref)
 		local List1 = List
 		
@@ -42,12 +42,12 @@ local SchedulerHostConfig = {
 			return true
 		end
 	end,
-	getCurrentTime = function() --[[ Line: 65 ]]
+	getCurrentTime = function()
 		-- upvalues: Total (ref)
 		return Total
 	end,
-	forceFrameRate = function() --[[ Line: 69 ]] end,
-	reset = function() --[[ Line: 73 ]]
+	forceFrameRate = function() end,
+	reset = function()
 		-- upvalues: Flag1 (ref), Total (ref), Callback (ref), Callback1 (ref), v1 (ref), List (ref), v2 (ref), Flag (ref), Flag2 (ref)
 		if Flag1 then
 			error("Cannot reset while already flushing work.")
@@ -62,7 +62,7 @@ local SchedulerHostConfig = {
 		Flag1 = false
 		Flag2 = false
 	end,
-	unstable_flushNumberOfYields = function(p1) --[[ Line: 90 ]]
+	unstable_flushNumberOfYields = function(p1)
 		-- upvalues: Flag1 (ref), Callback (ref), v2 (ref), Total (ref), Flag (ref)
 		if Flag1 then
 			error("Already flushing work.")
@@ -71,7 +71,7 @@ local SchedulerHostConfig = {
 			local Callback1 = Callback
 			v2 = p1
 			Flag1 = true
-			local Success, Result = pcall(function() --[[ Line: 100 ]]
+			local Success, Result = pcall(function()
 				-- upvalues: Callback1 (copy), Total (upval), Flag (upval), Callback (upval)
 				local CallbackResult = nil
 				repeat
@@ -90,7 +90,7 @@ local SchedulerHostConfig = {
 			end
 		end
 	end,
-	unstable_flushUntilNextPaint = function() --[[ Line: 121 ]]
+	unstable_flushUntilNextPaint = function()
 		-- upvalues: Flag1 (ref), Callback (ref), Flag3 (ref), Flag2 (ref), Total (ref), Flag (ref)
 		if Flag1 then
 			error("Already flushing work.")
@@ -100,7 +100,7 @@ local SchedulerHostConfig = {
 			Flag3 = true
 			Flag2 = false
 			Flag1 = true
-			local Success, Result = pcall(function() --[[ Line: 132 ]]
+			local Success, Result = pcall(function()
 				-- upvalues: Callback1 (copy), Total (upval), Flag (upval), Callback (upval)
 				local CallbackResult = nil
 				repeat
@@ -119,14 +119,14 @@ local SchedulerHostConfig = {
 			end
 		end
 	end,
-	unstable_flushExpired = function() --[[ Line: 154 ]]
+	unstable_flushExpired = function()
 		-- upvalues: Flag1 (ref), Callback (ref), Total (ref)
 		if Flag1 then
 			error("Already flushing work.")
 		end
 		if Callback ~= nil then
 			Flag1 = true
-			local Success, Result = pcall(function() --[[ Line: 160 ]]
+			local Success, Result = pcall(function()
 				-- upvalues: Callback (upval), Total (upval)
 				if not Callback(false, Total) then
 					Callback = nil
@@ -139,7 +139,7 @@ local SchedulerHostConfig = {
 			end
 		end
 	end,
-	unstable_flushAllWithoutAsserting = function(): boolean --[[ Line: 178 ]]
+	unstable_flushAllWithoutAsserting = function(): boolean
 		-- upvalues: Flag1 (ref), Callback (ref), Total (ref)
 		if Flag1 then
 			error("Already flushing work.")
@@ -149,7 +149,7 @@ local SchedulerHostConfig = {
 		end
 		local Callback1 = Callback
 		Flag1 = true
-		local Success, Result = pcall(function() --[[ Line: 186 ]]
+		local Success, Result = pcall(function()
 			-- upvalues: Callback1 (copy), Total (upval), Callback (upval)
 			local CallbackResult = nil
 			repeat
@@ -166,7 +166,7 @@ local SchedulerHostConfig = {
 		end
 		return true
 	end,
-	unstable_clearYields = function() --[[ Line: 209 ]]
+	unstable_clearYields = function()
 		-- upvalues: List (ref)
 		if List == nil then
 			return {}
@@ -179,7 +179,7 @@ local SchedulerHostConfig = {
 	end
 }
 
-function SchedulerHostConfig.unstable_flushAll() --[[ Line: 218 ]]
+function SchedulerHostConfig.unstable_flushAll()
 	-- upvalues: List (ref), SchedulerHostConfig (copy)
 	if List ~= nil then
 		error("Log is not empty. Assert on the log of yielded values before flushing additional work.")
@@ -191,7 +191,7 @@ function SchedulerHostConfig.unstable_flushAll() --[[ Line: 218 ]]
 	end
 end
 
-function SchedulerHostConfig.unstable_yieldValue(p1) --[[ Line: 235 ]]
+function SchedulerHostConfig.unstable_yieldValue(p1)
 	-- upvalues: Console (copy), DisabledLog (copy), List (ref)
 	if Console.log == DisabledLog then return end
 	if List == nil then
@@ -203,7 +203,7 @@ function SchedulerHostConfig.unstable_yieldValue(p1) --[[ Line: 235 ]]
 	end
 end
 
-function SchedulerHostConfig.unstable_advanceTime(Amount) --[[ Line: 252 ]]
+function SchedulerHostConfig.unstable_advanceTime(Amount)
 	-- upvalues: Console (copy), DisabledLog (copy), Total (ref), Callback1 (ref), v1 (ref)
 	if Console.log == DisabledLog then return end
 	Total += Amount
@@ -215,7 +215,7 @@ function SchedulerHostConfig.unstable_advanceTime(Amount) --[[ Line: 252 ]]
 	end
 end
 
-function SchedulerHostConfig.requestPaint() --[[ Line: 271 ]]
+function SchedulerHostConfig.requestPaint()
 	-- upvalues: Flag2 (ref)
 	Flag2 = true
 end

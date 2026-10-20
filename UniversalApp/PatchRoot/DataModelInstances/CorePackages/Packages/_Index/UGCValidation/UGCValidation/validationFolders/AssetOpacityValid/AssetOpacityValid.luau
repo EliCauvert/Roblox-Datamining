@@ -8,7 +8,7 @@ local TransparencyUtilModule = require(Parent.util.TransparencyUtil)
 local TryYieldModule = require(Parent.util.tryYield)
 local ConstantsTransparencyValidationModule = require(Parent.ConstantsTransparencyValidation)
 
-local function getViews() --[[ Line: 27 ]]
+local function getViews()
 	-- upvalues: ConstantsTransparencyValidationModule (copy)
 	return {
 		{
@@ -50,12 +50,12 @@ local function getViews() --[[ Line: 27 ]]
 	}
 end
 
-local function _(Vector, Back) --[[ Line: 68 | Named "getAspectRatio" ]]
+local function _(Vector, Back)
 	-- upvalues: ConstantsTransparencyValidationModule (copy)
 	return if Back == ConstantsTransparencyValidationModule.CAMERA_ANGLES.Front or Back == ConstantsTransparencyValidationModule.CAMERA_ANGLES.Back then Vector.X / Vector.Y elseif Back == ConstantsTransparencyValidationModule.CAMERA_ANGLES.Left or Back == ConstantsTransparencyValidationModule.CAMERA_ANGLES.Right then Vector.Z / Vector.Y else Vector.X / Vector.Z
 end
 
-local function getScaleFactor(Vector, ViewId): Vector2 --[[ Line: 84 ]]
+local function getScaleFactor(Vector, ViewId): Vector2
 	-- upvalues: ConstantsTransparencyValidationModule (copy)
 	local XRatio = if ViewId == ConstantsTransparencyValidationModule.CAMERA_ANGLES.Front or ViewId == ConstantsTransparencyValidationModule.CAMERA_ANGLES.Back then Vector.X / Vector.Y elseif ViewId == ConstantsTransparencyValidationModule.CAMERA_ANGLES.Left or ViewId == ConstantsTransparencyValidationModule.CAMERA_ANGLES.Right then Vector.Z / Vector.Y else Vector.X / Vector.Z
 	local ASSETTRANSPARENCYRASTERSIZERatio = nil
@@ -77,7 +77,7 @@ local function getScaleFactor(Vector, ViewId): Vector2 --[[ Line: 84 ]]
 	return if Largest > 1 then _Vector2 / Largest else _Vector2
 end
 
-local function addTransformedTriangle(Editable, List, FaceId, p1, SizeRatio) --[[ Line: 111 ]]
+local function addTransformedTriangle(Editable, List, FaceId, p1, SizeRatio)
 	-- upvalues: TransparencyUtilModule (copy)
 	local config = { orderedVerts = {} }
 	local FaceVertices = Editable:GetFaceVertices(FaceId)
@@ -91,7 +91,7 @@ local function addTransformedTriangle(Editable, List, FaceId, p1, SizeRatio) --[
 	return config
 end
 
-local function updateMinMaxBounds(p1, p2) --[[ Line: 134 ]]
+local function updateMinMaxBounds(p1, p2)
 	local OrderedVert = p2.orderedVerts[1]
 	local OrderedVert1 = p2.orderedVerts[2]
 	local OrderedVert2 = p2.orderedVerts[3]
@@ -102,7 +102,7 @@ local function updateMinMaxBounds(p1, p2) --[[ Line: 134 ]]
 	p1.max = Vector3.new(X, Y, Z)
 end
 
-local function getOpacity(RasterMeshResult) --[[ Line: 157 ]]
+local function getOpacity(RasterMeshResult)
 	local PixelsBuffer = RasterMeshResult:ReadPixelsBuffer(Vector2.new(0, 0), RasterMeshResult.Size)
 	local Count = 0
 	local Count1 = 0
@@ -137,7 +137,7 @@ return {
 	},
 	requiredData = { ValidationEnumsModule.SharedDataMember.renderMeshesData },
 	expectedFailures = {},
-	run = function(p1, p2) --[[ Line: 187 ]]
+	run = function(p1, p2)
 		-- upvalues: ValidationEnumsModule (copy), ErrorSourceStringsModule (copy), AssetCalculatorModule (copy), config (copy), addTransformedTriangle (copy), updateMinMaxBounds (copy), TryYieldModule (copy), getViews (copy), ConstantsTransparencyValidationModule (copy), getScaleFactor (copy), RasterUtilModule (copy), getOpacity (copy)
 		local RootInstance = p2.rootInstance
 		local AssetType = p2.uploadEnum.assetType
@@ -173,7 +173,7 @@ return {
 			local AllTransformsForAsset = AssetCalculatorModule.calculateAllTransformsForAsset(AssetType, RootInstance)
 			
 			if config[AssetType] then
-				for i, value1 in AssetCalculatorModule.calculateStraightenedLimb(AssetType, AllTransformsForAsset, function(ChildName) --[[ Line: 232 | Named "findMeshHandle" ]]
+				for i, value1 in AssetCalculatorModule.calculateStraightenedLimb(AssetType, AllTransformsForAsset, function(ChildName)
 					-- upvalues: RootInstance (copy)
 					return (RootInstance:FindFirstChild(ChildName))
 				end) do

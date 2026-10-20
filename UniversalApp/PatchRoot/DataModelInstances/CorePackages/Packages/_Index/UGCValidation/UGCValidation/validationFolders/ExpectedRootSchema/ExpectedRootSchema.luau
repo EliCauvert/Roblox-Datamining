@@ -16,7 +16,7 @@ return {
 		ValidationEnumsModule.SharedDataMember.uploadEnum,
 		ValidationEnumsModule.SharedDataMember.consumerConfig
 	},
-	run = function(p1, p2) --[[ Line: 23 ]]
+	run = function(p1, p2)
 		-- upvalues: ErrorSourceStringsModule (copy), CreateExpectedSchemaModule (copy), ValidateInstanceTreeAgainstSchemaModule (copy), GetEngineFeatureEngineUGCValidateInstanceTreesEquivalentModule (copy), ShouldValidateR15LegacyDuplicateModule (copy)
 		local RootInstance = p2.rootInstance
 		local UploadCategory = p2.uploadCategory

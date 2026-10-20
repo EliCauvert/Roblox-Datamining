@@ -23,7 +23,7 @@ local IsNillishFunction = IsNillishModule.isNillish
 local IsNotNillishFunction = IsNillishModule.isNotNillish
 local _01909 = nil
 
-local function astFromValue(List, OfType) --[[ Line: 70 ]]
+local function astFromValue(List, OfType)
 	-- upvalues: IsNonNullTypeFunction (copy), astFromValue (copy), NullModule (copy), Kind (copy), IsListTypeFunction (copy), IsIteratableObjectFunction (copy), IsNotNillishFunction (copy), IsInputObjectTypeFunction (copy), IsObjectLikeFunction (copy), IsLeafTypeFunction (copy), IsNillishFunction (copy), Number (copy), _01909 (ref), IsEnumTypeFunction (copy), GraphQLID (copy), Error1 (copy), InspectFunction (copy), InvariantFunction (copy)
 	if IsNonNullTypeFunction(OfType) then
 		local AstFromValueResult = astFromValue(List, OfType.ofType)

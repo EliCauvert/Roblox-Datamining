@@ -9,7 +9,7 @@ local config = {
 	variant = PaginationVariantModule.MultiPage
 }
 
-return ReactModule.memo(ReactModule.forwardRef(function(p1, Ref) --[[ Line: 22 | Named "Pagination" ]]
+return ReactModule.memo(ReactModule.forwardRef(function(p1, Ref)
 	-- upvalues: WithDefaultsModule (copy), config (copy), PaginationVariantModule (copy), ReactModule (copy), MultiPagePaginationModule (copy), DirectionalPaginationModule (copy)
 	local WithDefaultsModuleResult = WithDefaultsModule(p1, config)
 	WithDefaultsModuleResult.ref = Ref

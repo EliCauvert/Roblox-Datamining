@@ -3,7 +3,7 @@ local ReactModule = require(Foundation.Parent.React)
 local ImageModule = require(Foundation.Components.Image)
 local _ = require(Foundation.Components.Types)
 
-return function(p1) --[[ Line: 22 | Named "CardMedia" ]]
+return function(p1)
 	-- upvalues: ReactModule (copy), ImageModule (copy)
 	local SizeConstraint = nil
 	local FlexItem = nil

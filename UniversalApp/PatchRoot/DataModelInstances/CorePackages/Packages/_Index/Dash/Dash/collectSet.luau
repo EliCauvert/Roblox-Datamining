@@ -1,6 +1,6 @@
 ﻿local _ = require(script.Parent.Types)
 
-return function(List, Callback) --[[ Line: 16 | Named "collectSet" ]]
+return function(List, Callback)
 	local t = {}
 	
 	for i, value in List do

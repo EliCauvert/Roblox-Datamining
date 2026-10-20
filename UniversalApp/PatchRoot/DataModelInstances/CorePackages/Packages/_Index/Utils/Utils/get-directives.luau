@@ -6,29 +6,29 @@ local Object = LuauPolyfillModule.Object
 local _ = require(Parent.GraphQL)
 local GetArgumentValuesFunction = require(script.Parent.getArgumentValues).getArgumentValues
 
-local function getDirectivesInExtensions(p1, p2) --[[ Line: 95 ]]
+local function getDirectivesInExtensions(p1, p2)
 	-- upvalues: Array (copy), Object (copy)
-	return (Array.reduce(if p2 == nil then { "directives" } else p2, function(None, p3) --[[ Line: 104 ]]
+	return (Array.reduce(if p2 == nil then { "directives" } else p2, function(None, p3)
 		-- upvalues: Object (upval)
 		return if None == Object.None or None == nil then nil else None[p3]
 	end, if typeof(p1) == "table" and p1.extensions then p1.extensions else Object.None))
 end
 
-local function _getDirectiveInExtensions(ReduceResult, Name) --[[ Line: 121 ]]
+local function _getDirectiveInExtensions(ReduceResult, Name)
 	-- upvalues: Array (copy)
-	local FilterResult = Array.filter(ReduceResult, function(p1): boolean --[[ Line: 125 ]]
+	local FilterResult = Array.filter(ReduceResult, function(p1): boolean
 		-- upvalues: Name (copy)
 		return p1.name == Name
 	end)
 	
-	return if #FilterResult == 0 then nil else Array.map(FilterResult, function(p1) --[[ Line: 134 ]]
+	return if #FilterResult == 0 then nil else Array.map(FilterResult, function(p1)
 		return if p1.args == nil then {} else p1.args
 	end)
 end
 
-local function getDirectiveInExtensions(p1, p2, p3) --[[ Line: 141 ]]
+local function getDirectiveInExtensions(p1, p2, p3)
 	-- upvalues: Array (copy), Object (copy), Boolean (copy), _getDirectiveInExtensions (copy)
-	local ReduceResult = Array.reduce(if p3 == nil then { "directives" } else p3, function(None, p4) --[[ Line: 151 ]]
+	local ReduceResult = Array.reduce(if p3 == nil then { "directives" } else p3, function(None, p4)
 		-- upvalues: Object (upval)
 		return if None == Object.None or None == nil then nil else None[p4]
 	end, if typeof(p1) == "table" and p1.extensions then p1.extensions else Object.None)
@@ -58,7 +58,7 @@ end
 return {
 	getDirectivesInExtensions = getDirectivesInExtensions,
 	getDirectiveInExtensions = getDirectiveInExtensions,
-	getDirectives = function(p4, p5, p6) --[[ Line: 214 ]]
+	getDirectives = function(p4, p5, p6)
 		-- upvalues: getDirectivesInExtensions (copy), Boolean (copy), Array (copy), Object (copy), GetArgumentValuesFunction (copy)
 		local DirectivesInExtensions = getDirectivesInExtensions(p5, if p6 == nil then { "directives" } else p6)
 		
@@ -67,7 +67,7 @@ return {
 		end
 		local ToJSBooleanFunction = Boolean.toJSBoolean
 		local GetDirectives = if Boolean.toJSBoolean(p4) then p4.getDirectives else p4
-		local ReduceResult = Array.reduce(if ToJSBooleanFunction(GetDirectives) then p4:getDirectives() else {}, function(p7, p8) --[[ Line: 237 ]]
+		local ReduceResult = Array.reduce(if ToJSBooleanFunction(GetDirectives) then p4:getDirectives() else {}, function(p7, p8)
 			p7[tostring(p8.name)] = p8
 			
 			return p7
@@ -98,7 +98,7 @@ return {
 		end
 		return List
 	end,
-	getDirective = function(p7, p8, p9, p10) --[[ Line: 278 ]]
+	getDirective = function(p7, p8, p9, p10)
 		-- upvalues: getDirectiveInExtensions (copy), Boolean (copy), Array (copy), Object (copy), GetArgumentValuesFunction (copy)
 		local DirectiveInExtensions = getDirectiveInExtensions(p8, p9, if p10 == nil then { "directives" } else p10)
 		

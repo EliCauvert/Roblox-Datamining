@@ -1,4 +1,4 @@
-﻿return function(p1, List, p2) --[[ Line: 22 | Named "get" ]]
+﻿return function(p1, List, p2)
 	if p1 == nil then
 		return p2
 	end

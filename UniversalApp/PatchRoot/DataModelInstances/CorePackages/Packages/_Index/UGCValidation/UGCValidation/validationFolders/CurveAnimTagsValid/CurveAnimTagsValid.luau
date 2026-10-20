@@ -4,7 +4,7 @@ local _ = require(Parent.util.Types)
 local ValidationEnumsModule = require(Parent.validationSystem.ValidationEnums)
 local ErrorSourceStringsModule = require(Parent.validationSystem.ErrorSourceStrings)
 
-local function _(Text: string): boolean --[[ Line: 20 | Named "isTimeStamp" ]]
+local function _(Text: string): boolean
 	return #Text <= 30 and string.match(Text, "^[0-9]+$") ~= nil
 end
 
@@ -18,7 +18,7 @@ return {
 	prereqTests = {
 		ValidationEnumsModule.ValidationModule.CurveAnimDataAvailable
 	},
-	run = function(p1, p2) --[[ Line: 28 ]]
+	run = function(p1, p2)
 		-- upvalues: CollectionService (copy), ErrorSourceStringsModule (copy)
 		for _, curveAnimation in p2.curveAnimations do
 			local List = nil

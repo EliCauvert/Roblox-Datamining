@@ -1,11 +1,11 @@
-﻿return function(p1) --[[ Line: 29 | Named "createSignal" ]]
+﻿return function(p1)
 	local t = {}
 	local Tbl = {}
 	local v1 = p1
 	local Flag = false
 	
 	return {
-		subscribe = function(_, Callback) --[[ Line: 36 ]]
+		subscribe = function(_, Callback)
 			-- upvalues: Flag (ref), t (copy), Tbl (copy)
 			local config = { unsubscribed = false, callback = Callback }
 			
@@ -15,7 +15,7 @@
 				t[Callback] = config
 			end
 			return {
-				unsubscribe = function(_) --[[ Line: 50 ]]
+				unsubscribe = function(_)
 					-- upvalues: config (copy), t (upval), Callback (copy), Tbl (upval)
 					config.unsubscribed = true
 					t[Callback] = nil
@@ -23,11 +23,11 @@
 				end
 			}
 		end,
-		getValue = function(_) --[[ Line: 61 ]]
+		getValue = function(_)
 			-- upvalues: v1 (ref)
 			return v1
 		end
-	}, function(p2) --[[ Line: 65 | Named "fire" ]]
+	}, function(p2)
 		-- upvalues: v1 (ref), Flag (ref), t (copy), Tbl (copy)
 		v1 = p2
 		Flag = true

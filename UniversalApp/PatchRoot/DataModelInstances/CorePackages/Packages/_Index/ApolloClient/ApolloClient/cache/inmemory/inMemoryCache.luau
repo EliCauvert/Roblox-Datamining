@@ -40,7 +40,7 @@ local config = {
 local self = setmetatable({}, { __index = ApolloCache })
 self.__index = self
 
-function self.new(Cache) --[[ Line: 199 ]]
+function self.new(Cache)
 	-- upvalues: ApolloCache (copy), self (copy), Set (copy), Map (copy), MakeVar (copy), Object (copy), config (copy), Policies (copy)
 	local self1 = setmetatable(ApolloCache.new(), self)
 	
@@ -64,7 +64,7 @@ function self.new(Cache) --[[ Line: 199 ]]
 	return self1
 end
 
-function self:init() --[[ Line: 227 ]]
+function self:init()
 	-- upvalues: EntityStoreRoot (copy)
 	self.data = EntityStoreRoot.new({
 		policies = self.policies,
@@ -74,7 +74,7 @@ function self:init() --[[ Line: 227 ]]
 	self:resetResultCache()
 end
 
-function self:resetResultCache(ResetResultIdentities) --[[ Line: 247 ]]
+function self:resetResultCache(ResetResultIdentities)
 	-- upvalues: StoreReader (copy), StoreWriter (copy), WrapFunction (copy), SupportsResultCachingFunction (copy), CanonicalStringifyFunction (copy), Set (copy)
 	local StoreReader1 = self.storeReader
 	self.storeReader = StoreReader.new({
@@ -84,12 +84,12 @@ function self:resetResultCache(ResetResultIdentities) --[[ Line: 247 ]]
 		canon = if ResetResultIdentities then nil elseif StoreReader1 then StoreReader1.canon else nil
 	})
 	self.storeWriter = StoreWriter.new(self, self.storeReader)
-	self.maybeBroadcastWatch = WrapFunction(function(_, p1, p2) --[[ Line: 264 ]]
+	self.maybeBroadcastWatch = WrapFunction(function(_, p1, p2)
 		-- upvalues: self (ref)
 		return self:broadcastWatch(p1, p2)
 	end, {
 		max = self.config.resultCacheMaxSize,
-		makeCacheKey = function(_, Query) --[[ Line: 268 ]]
+		makeCacheKey = function(_, Query)
 			-- upvalues: self (ref), SupportsResultCachingFunction (upval), CanonicalStringifyFunction (upval)
 			local OptimisticData = if Query.optimistic then self.optimisticData else self.data
 			
@@ -101,12 +101,12 @@ function self:resetResultCache(ResetResultIdentities) --[[ Line: 247 ]]
 			}))
 		end
 	}, self)
-	Set.new({ self.data.group, self.optimisticData.group }):forEach(function(p1) --[[ Line: 304 ]]
+	Set.new({ self.data.group, self.optimisticData.group }):forEach(function(p1)
 		return p1:resetCaching()
 	end)
 end
 
-function self:restore(p1) --[[ Line: 309 ]]
+function self:restore(p1)
 	self:init()
 	
 	if p1 then
@@ -115,18 +115,18 @@ function self:restore(p1) --[[ Line: 309 ]]
 	return self
 end
 
-function self.extract(p1, p2: boolean) --[[ Line: 322 ]]
+function self.extract(p1, p2: boolean)
 	if p2 == nil then
 		p2 = false
 	end
 	return if p2 then p1.optimisticData:extract() else p1.data:extract()
 end
 
-function self.read(p1, p2) --[[ Line: 334 ]]
+function self.read(p1, p2)
 	-- upvalues: Object (copy), NULL (copy), InstanceofFunction (copy), MissingFieldError (copy)
 	local ReturnPartialData = nil
 	ReturnPartialData = p2.returnPartialData ~= nil and p2.returnPartialData
-	local Success, Result = pcall(function() --[[ Line: 349 ]]
+	local Success, Result = pcall(function()
 		-- upvalues: p1 (copy), Object (upval), p2 (copy), ReturnPartialData (ref), NULL (upval)
 		return p1.storeReader:diffQueryAgainstStore(Object.assign({}, p2, {
 			store = p2.optimistic and p1.optimisticData or p1.data,
@@ -144,8 +144,8 @@ function self.read(p1, p2) --[[ Line: 334 ]]
 	return Result
 end
 
-function self:write(p1) --[[ Line: 374 ]]
-	local Success, Result = pcall(function() --[[ Line: 376 ]]
+function self:write(p1)
+	local Success, Result = pcall(function()
 		-- upvalues: self (ref), p1 (copy)
 		local v1 = self
 		v1.txCount += 1
@@ -163,14 +163,14 @@ function self:write(p1) --[[ Line: 374 ]]
 	return Result
 end
 
-function self:modify(Id) --[[ Line: 394 ]]
+function self:modify(Id)
 	-- upvalues: HasOwnFunction (copy)
 	if HasOwnFunction(Id, "id") and not Id.id then
 		return false
 	end
 	local OptimisticData = nil
 	OptimisticData = if Id.optimistic then self.optimisticData else self.data
-	local Success, Result = pcall(function() --[[ Line: 419 ]]
+	local Success, Result = pcall(function()
 		-- upvalues: self (ref), OptimisticData (ref), Id (copy)
 		local v1 = self
 		v1.txCount += 1
@@ -188,7 +188,7 @@ function self:modify(Id) --[[ Line: 394 ]]
 	return Result
 end
 
-function self:diff(p1) --[[ Line: 439 ]]
+function self:diff(p1)
 	-- upvalues: Object (copy)
 	return self.storeReader:diffQueryAgainstStore(Object.assign({}, p1, {
 		store = p1.optimistic and self.optimisticData or self.data,
@@ -197,7 +197,7 @@ function self:diff(p1) --[[ Line: 439 ]]
 	}))
 end
 
-function self:watch(p1) --[[ Line: 449 ]]
+function self:watch(p1)
 	-- upvalues: RecallCacheFunction (copy), ForgetCacheFunction (copy)
 	if self.watches.size == 0 then
 		RecallCacheFunction(self)
@@ -207,7 +207,7 @@ function self:watch(p1) --[[ Line: 449 ]]
 	if p1.immediate then
 		self:maybeBroadcastWatch(p1)
 	end
-	return function() --[[ Line: 470 ]]
+	return function()
 		-- upvalues: self (ref), p1 (copy), ForgetCacheFunction (upval)
 		if self.watches:delete(p1) and self.watches.size == 0 then
 			ForgetCacheFunction(self)
@@ -216,7 +216,7 @@ function self:watch(p1) --[[ Line: 449 ]]
 	end
 end
 
-function self:gc(p1) --[[ Line: 486 ]]
+function self:gc(p1)
 	-- upvalues: CanonicalStringifyFunction (copy)
 	CanonicalStringifyFunction:reset()
 	local v1 = self.optimisticData:gc()
@@ -234,20 +234,20 @@ function self:gc(p1) --[[ Line: 486 ]]
 	return v1
 end
 
-function self.retain(p1, p2, p3) --[[ Line: 518 ]]
+function self.retain(p1, p2, p3)
 	return if p3 then p1.optimisticData:retain(p2) else p1.data:retain(p2)
 end
 
-function self.release(p1, p2, p3) --[[ Line: 533 ]]
+function self.release(p1, p2, p3)
 	return if p3 then p1.optimisticData:release(p2) else p1.data:release(p2)
 end
 
-function self.identify(p1, p2) --[[ Line: 549 ]]
+function self.identify(p1, p2)
 	-- upvalues: IsReferenceFunction (copy)
 	return if IsReferenceFunction(p2) then p2.__ref else p1.policies:identify(p2)[1]
 end
 
-function self:evict(Tbl) --[[ Line: 557 ]]
+function self:evict(Tbl)
 	-- upvalues: HasOwnFunction (copy), Object (copy)
 	if not Tbl.id then
 		if HasOwnFunction(Tbl, "id") then
@@ -255,7 +255,7 @@ function self:evict(Tbl) --[[ Line: 557 ]]
 		end
 		Tbl = Object.assign(table.clone(Tbl), { id = "ROOT_QUERY" })
 	end
-	local Success, Result = pcall(function() --[[ Line: 572 ]]
+	local Success, Result = pcall(function()
 		-- upvalues: self (ref), Tbl (ref)
 		local v1 = self
 		v1.txCount += 1
@@ -273,7 +273,7 @@ function self:evict(Tbl) --[[ Line: 557 ]]
 	return Result
 end
 
-function self:reset() --[[ Line: 594 ]]
+function self:reset()
 	-- upvalues: CanonicalStringifyFunction (copy), PromiseModule (copy)
 	self:init()
 	self:broadcastWatches()
@@ -282,7 +282,7 @@ function self:reset() --[[ Line: 594 ]]
 	return PromiseModule.delay(0)
 end
 
-function self:removeOptimistic(p1) --[[ Line: 601 ]]
+function self:removeOptimistic(p1)
 	local RemoveLayerResult = self.optimisticData:removeLayer(p1)
 	
 	if RemoveLayerResult ~= self.optimisticData then
@@ -291,13 +291,13 @@ function self:removeOptimistic(p1) --[[ Line: 601 ]]
 	end
 end
 
-function self:batch(Tbl) --[[ Line: 609 ]]
+function self:batch(Tbl)
 	-- upvalues: Set (copy), Object (copy)
 	local NoOptimistic = Tbl.optimistic == nil or Tbl.optimistic
 	local RemoveOptimistic = Tbl.removeOptimistic
 	local OnWatchUpdatedFunction = Tbl.onWatchUpdated
 	
-	local function perform(OptimisticData) --[[ Line: 614 ]]
+	local function perform(OptimisticData)
 		-- upvalues: self (ref), Tbl (copy)
 		local Data = self.data
 		local OptimisticData1 = self.optimisticData
@@ -323,7 +323,7 @@ function self:batch(Tbl) --[[ Line: 609 ]]
 	
 	if OnWatchUpdatedFunction and self.txCount == 0 then
 		self:broadcastWatches(Object.assign(table.clone(Tbl), {
-			onWatchUpdated = function(_, p1): boolean --[[ Line: 651 ]]
+			onWatchUpdated = function(_, p1): boolean
 				-- upvalues: NewSet (copy)
 				NewSet:add(p1)
 				
@@ -343,7 +343,7 @@ function self:batch(Tbl) --[[ Line: 609 ]]
 	end
 	if OnWatchUpdatedFunction and NewSet.size > 0 then
 		self:broadcastWatches(Object.assign(table.clone(Tbl), {
-			onWatchUpdated = function(p1, p2, p3) --[[ Line: 687 ]]
+			onWatchUpdated = function(p1, p2, p3)
 				-- upvalues: OnWatchUpdatedFunction (copy), NewSet (copy)
 				local OnWatchUpdatedResult = OnWatchUpdatedFunction(p1, p2, p3)
 				
@@ -355,7 +355,7 @@ function self:batch(Tbl) --[[ Line: 609 ]]
 		}))
 		
 		if NewSet.size > 0 then
-			NewSet:forEach(function(p1) --[[ Line: 703 ]]
+			NewSet:forEach(function(p1)
 				-- upvalues: self (ref)
 				return self.maybeBroadcastWatch:dirty(p1)
 			end)
@@ -365,10 +365,10 @@ function self:batch(Tbl) --[[ Line: 609 ]]
 	end
 end
 
-function self:performTransaction(Callback, NULL1) --[[ Line: 724 ]]
+function self:performTransaction(Callback, NULL1)
 	-- upvalues: NULL (copy)
 	return self:batch({
-		update = function(_, ...) --[[ Line: 727 ]]
+		update = function(_, ...)
 			-- upvalues: Callback (copy)
 			return Callback(...)
 		end,
@@ -376,7 +376,7 @@ function self:performTransaction(Callback, NULL1) --[[ Line: 724 ]]
 	})
 end
 
-function self:transformDocument(p1) --[[ Line: 736 ]]
+function self:transformDocument(p1)
 	-- upvalues: AddTypenameToDocumentFunction (copy)
 	if not self.addTypename then
 		return p1
@@ -391,16 +391,16 @@ function self:transformDocument(p1) --[[ Line: 736 ]]
 	return GetResult
 end
 
-function self:broadcastWatches(AssignResult) --[[ Line: 752 ]]
+function self:broadcastWatches(AssignResult)
 	if self.txCount == 0 then
-		self.watches:forEach(function(p1) --[[ Line: 755 ]]
+		self.watches:forEach(function(p1)
 			-- upvalues: self (copy), AssignResult (copy)
 			return self:maybeBroadcastWatch(p1, AssignResult)
 		end)
 	end
 end
 
-function self:broadcastWatch(p1, p2) --[[ Line: 767 ]]
+function self:broadcastWatch(p1, p2)
 	-- upvalues: EqualModule (copy)
 	local LastDiff = p1.lastDiff
 	local DiffResult = self:diff({

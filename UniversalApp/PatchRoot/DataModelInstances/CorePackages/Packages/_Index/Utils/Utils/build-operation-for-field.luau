@@ -25,23 +25,23 @@ local SelectionSet = {}
 local List = {}
 local NewMap = Map.new()
 
-local function _(p1) --[[ Line: 89 | Named "addOperationVariable" ]]
+local function _(p1)
 	-- upvalues: List (ref)
 	table.insert(List, p1)
 end
 
-local _ = function() --[[ Line: 92 | Named "resetOperationVariables" ]]
+local _ = function()
 	-- upvalues: List (ref)
 	List = {}
 end
 
-local _ = function() --[[ Line: 95 | Named "resetFieldMap" ]]
+local _ = function()
 	-- upvalues: NewMap (ref), Map (copy)
 	NewMap = Map.new()
 end
 
 local Module = {
-	buildOperationNodeForField = function(p1) --[[ Line: 102 ]]
+	buildOperationNodeForField = function(p1)
 		-- upvalues: List (ref), NewMap (ref), Map (copy), GetRootTypeNamesFunction (copy), Callback (ref), Boolean (copy), Array (copy)
 		local Schema = p1.schema
 		local Models = p1.models
@@ -69,7 +69,7 @@ local Module = {
 	end
 }
 
-Callback = function(p1) --[[ Line: 174 | Named "buildOperationAndCollectVariables" ]]
+Callback = function(p1)
 	-- upvalues: GetDefinedRootTypeFunction (copy), Array (copy), Callback2 (ref), List (ref), Kind (copy), Callback1 (ref)
 	local Schema = p1.schema
 	local FieldName = p1.fieldName
@@ -123,7 +123,7 @@ Callback = function(p1) --[[ Line: 174 | Named "buildOperationAndCollectVariable
 	}
 end
 
-local function resolveSelectionSet(p2) --[[ Line: 259 ]]
+local function resolveSelectionSet(p2)
 	-- upvalues: Boolean (copy), IsUnionTypeFunction (copy), Kind (copy), Array (copy), Callback3 (ref), resolveSelectionSet (copy), SelectionSet (copy), IsInterfaceTypeFunction (copy), IsObjectTypeFunction (copy), GetNamedTypeFunction (copy), Callback1 (ref), Object (copy)
 	local Parent = p2.parent
 	local Type = p2.type
@@ -144,10 +144,10 @@ local function resolveSelectionSet(p2) --[[ Line: 259 ]]
 	if Boolean.toJSBoolean(IsUnionTypeFunction(Type)) then
 		return {
 			kind = Kind.SELECTION_SET,
-			selections = Array.filter(Array.map(Array.filter(Type:getTypes(), function(p3): boolean --[[ Line: 305 ]]
+			selections = Array.filter(Array.map(Array.filter(Type:getTypes(), function(p3): boolean
 				-- upvalues: Callback3 (upval), Array (upval), Ancestors (copy), CircularReferenceDepth (copy)
 				return not Callback3(Array.concat({}, Ancestors, { p3 }), { depth = CircularReferenceDepth })
-			end), function(p3) --[[ Line: 319 ]]
+			end), function(p3)
 				-- upvalues: Kind (upval), resolveSelectionSet (upval), Type (copy), Models (copy), Path (copy), Ancestors (copy), Ignore (copy), DepthLimit (copy), CircularReferenceDepth (copy), Schema (copy), Depth (copy), ArgNames (copy), SelectedFields (copy), RootTypeNames (copy)
 				return {
 					kind = Kind.INLINE_FRAGMENT,
@@ -171,7 +171,7 @@ local function resolveSelectionSet(p2) --[[ Line: 259 ]]
 						rootTypeNames = RootTypeNames
 					})
 				}
-			end), function(p3): boolean --[[ Line: 344 ]]
+			end), function(p3): boolean
 				-- upvalues: SelectionSet (upval)
 				return typeof(p3) == "table" and (p3.selectionSet ~= SelectionSet and (typeof(p3.selectionSet) == "table" and typeof(p3.selectionSet.selections) == "table" and #p3.selectionSet.selections > 0))
 			end)
@@ -179,15 +179,15 @@ local function resolveSelectionSet(p2) --[[ Line: 259 ]]
 	elseif Boolean.toJSBoolean(IsInterfaceTypeFunction(Type)) then
 		return {
 			kind = Kind.SELECTION_SET,
-			selections = Array.filter(Array.map(Array.filter(Array.filter(Schema:getTypeMap():values(), function(p3) --[[ Line: 376 ]]
+			selections = Array.filter(Array.map(Array.filter(Array.filter(Schema:getTypeMap():values(), function(p3)
 				-- upvalues: IsObjectTypeFunction (upval), Boolean (upval), Array (upval), Type (copy)
 				local IsObjectType = IsObjectTypeFunction(p3)
 				
 				return if Boolean.toJSBoolean(IsObjectType) then Array.includes(p3:getInterfaces(), Type) else IsObjectType
-			end), function(p3): boolean --[[ Line: 387 ]]
+			end), function(p3): boolean
 				-- upvalues: Callback3 (upval), Array (upval), Ancestors (copy), CircularReferenceDepth (copy)
 				return not Callback3(Array.concat({}, Ancestors, { p3 }), { depth = CircularReferenceDepth })
-			end), function(p3) --[[ Line: 401 ]]
+			end), function(p3)
 				-- upvalues: Kind (upval), resolveSelectionSet (upval), Type (copy), Models (copy), Path (copy), Ancestors (copy), Ignore (copy), DepthLimit (copy), CircularReferenceDepth (copy), Schema (copy), Depth (copy), ArgNames (copy), SelectedFields (copy), RootTypeNames (copy)
 				return {
 					kind = Kind.INLINE_FRAGMENT,
@@ -211,7 +211,7 @@ local function resolveSelectionSet(p2) --[[ Line: 259 ]]
 						rootTypeNames = RootTypeNames
 					})
 				}
-			end), function(p3): boolean --[[ Line: 426 ]]
+			end), function(p3): boolean
 				-- upvalues: SelectionSet (upval)
 				return typeof(p3) == "table" and p3.selectionSet ~= SelectionSet and typeof(p3.selectionSet) == "table" and typeof(p3.selectionSet.selections) == "table" and #p3.selectionSet.selections > 0
 			end)
@@ -243,10 +243,10 @@ local function resolveSelectionSet(p2) --[[ Line: 259 ]]
 			
 			return {
 				kind = Kind.SELECTION_SET,
-				selections = Array.filter(Array.map(Array.filter(Fields:keys(), function(p3): boolean --[[ Line: 504 ]]
+				selections = Array.filter(Array.map(Array.filter(Fields:keys(), function(p3): boolean
 					-- upvalues: Callback3 (upval), Array (upval), Ancestors (copy), GetNamedTypeFunction (upval), Fields (copy), CircularReferenceDepth (copy)
 					return not Callback3(Array.concat({}, Ancestors, { GetNamedTypeFunction(Fields:get(p3).type) }), { depth = CircularReferenceDepth })
-				end), function(p3) --[[ Line: 517 ]]
+				end), function(p3)
 					-- upvalues: SelectedFields (copy), Boolean (upval), Callback1 (upval), Type (copy), Fields (copy), Models (copy), Array (upval), Path (copy), Ancestors (copy), Ignore (copy), DepthLimit (copy), CircularReferenceDepth (copy), Schema (copy), Depth (copy), ArgNames (copy), RootTypeNames (copy), SelectionSet (upval)
 					local IsNotTable = typeof(SelectedFields) ~= "table" or SelectedFields[tostring(p3)]
 					
@@ -265,7 +265,7 @@ local function resolveSelectionSet(p2) --[[ Line: 259 ]]
 						selectedFields = IsNotTable,
 						rootTypeNames = RootTypeNames
 					}) else SelectionSet
-				end), function(SelectionSet1) --[[ Line: 552 ]]
+				end), function(SelectionSet1)
 					-- upvalues: SelectionSet (upval), Array (upval), Object (upval), Boolean (upval)
 					return SelectionSet1 ~= nil and SelectionSet1 ~= SelectionSet and (Array.indexOf(Object.keys(SelectionSet1), "selectionSet") == -1 or Boolean.toJSBoolean(if typeof(SelectionSet1.selectionSet) == "table" and typeof(SelectionSet1.selectionSet.selections) == "table" then #SelectionSet1.selectionSet.selections else nil))
 				end)
@@ -274,9 +274,9 @@ local function resolveSelectionSet(p2) --[[ Line: 259 ]]
 	end
 end
 
-Callback2 = function(p2, Name) --[[ Line: 592 | Named "resolveVariable" ]]
+Callback2 = function(p2, Name)
 	-- upvalues: Boolean (copy), IsListTypeFunction (copy), Kind (copy), IsNonNullTypeFunction (copy)
-	local function resolveVariableType(OfType) --[[ Line: 599 ]]
+	local function resolveVariableType(OfType)
 		-- upvalues: Boolean (upval), IsListTypeFunction (upval), Kind (upval), resolveVariableType (copy), IsNonNullTypeFunction (upval)
 		return if Boolean.toJSBoolean(IsListTypeFunction(OfType)) then {
 			kind = Kind.LIST_TYPE,
@@ -303,12 +303,12 @@ Callback2 = function(p2, Name) --[[ Line: 592 | Named "resolveVariable" ]]
 	}
 end
 
-local function getArgumentName(Name, Path) --[[ Line: 622 ]]
+local function getArgumentName(Name, Path)
 	-- upvalues: Array (copy)
 	return Array.join(Array.concat({}, Path, { Name }), "_")
 end
 
-Callback1 = function(p2) --[[ Line: 646 | Named "resolveField" ]]
+Callback1 = function(p2)
 	-- upvalues: GetNamedTypeFunction (copy), Boolean (copy), Array (copy), getArgumentName (copy), IsNonNullTypeFunction (copy), Callback2 (ref), List (ref), Kind (copy), NewMap (ref), IsScalarTypeFunction (copy), IsEnumTypeFunction (copy), resolveSelectionSet (copy), Object (copy), SelectionSet (copy)
 	local Type = p2.type
 	local Field = p2.field
@@ -329,7 +329,7 @@ Callback1 = function(p2) --[[ Line: 646 | Named "resolveField" ]]
 	local Flag = false
 	
 	if Boolean.toJSBoolean(Field.args) and #Field.args ~= 0 then
-		Arguments = Array.filter(Array.map(Field.args, function(p3) --[[ Line: 686 ]]
+		Arguments = Array.filter(Array.map(Field.args, function(p3)
 			-- upvalues: getArgumentName (upval), Path (copy), ArgNames (copy), Array (upval), Boolean (upval), IsNonNullTypeFunction (upval), Flag (ref), FirstCall (copy), Callback2 (upval), List (upval), Kind (upval)
 			local ArgumentName = getArgumentName(p3.name, Path)
 			
@@ -403,12 +403,12 @@ Callback1 = function(p2) --[[ Line: 646 | Named "resolveField" ]]
 	end
 end
 
-Callback3 = function(ConcatResult, p2): boolean --[[ Line: 782 | Named "hasCircularRef" ]]
+Callback3 = function(ConcatResult, p2): boolean
 	-- upvalues: Boolean (copy), IsScalarTypeFunction (copy), Array (copy)
 	local Config = if p2 == nil then { depth = 1 } else p2
 	local ConcatResultEntry = ConcatResult[#ConcatResult]
 	
-	return not Boolean.toJSBoolean(IsScalarTypeFunction(ConcatResultEntry)) and Config.depth < #Array.filter(ConcatResult, function(p3): boolean --[[ Line: 798 ]]
+	return not Boolean.toJSBoolean(IsScalarTypeFunction(ConcatResultEntry)) and Config.depth < #Array.filter(ConcatResult, function(p3): boolean
 		-- upvalues: ConcatResultEntry (copy)
 		return p3.name == ConcatResultEntry.name
 	end)

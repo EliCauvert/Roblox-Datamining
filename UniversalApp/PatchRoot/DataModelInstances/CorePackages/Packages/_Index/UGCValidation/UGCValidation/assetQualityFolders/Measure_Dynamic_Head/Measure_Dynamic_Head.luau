@@ -21,7 +21,7 @@ return {
 		NO_FACS = ErrorSourceStringsModule.Keys.DynamicHeadNOFACS,
 		MISSING_CAGE_INFO = ErrorSourceStringsModule.Keys.DynamicHeadMISSINGCAGE
 	},
-	run = function(p1, p2) --[[ Line: 29 ]]
+	run = function(p1, p2)
 		-- upvalues: config (copy), GetFIntUGCValidationDynamicHeadMinimumQualityPercentModule (copy), GetFFlagUGCValidateAQScoreWarningsModule (copy), ErrorSourceStringsModule (copy)
 		local Head = p2.aqsSummaryData.Measure_Dynamic_Head.Head or p2.aqsSummaryData.Measure_Dynamic_Head.Head_Geo
 		

@@ -21,22 +21,22 @@ local config = {
 	edits = { music = nil, trim = nil }
 }
 
-return function(p1, p2) --[[ Line: 40 | Named "useUnifiedPlayback" ]]
+return function(p1, p2)
 	-- upvalues: CryoModule (copy), config (copy), UseToggleStateModule (copy), UseRefFunction (copy), SignalModule (copy), UseMemoFunction (copy), ConstantsModule (copy), UseAudioPlaybackModule (copy), UseVideoPlaybackModule (copy), UseImageDisplayModule (copy), UseCallbackFunction (copy), UseEffectFunction (copy)
 	local UnionResult = CryoModule.Dictionary.union(config, p2)
 	local UseToggleStateModuleResult = UseToggleStateModule(false)
 	local UseToggleStateModuleResult1 = UseToggleStateModule(false)
 	local UseRefResult = UseRefFunction(SignalModule.new())
-	local UseMemoResult = UseMemoFunction(function() --[[ Line: 49 ]]
+	local UseMemoResult = UseMemoFunction(function()
 		-- upvalues: UnionResult (copy)
 		return if UnionResult.edits.music then UnionResult.edits.music.assetId else nil
 	end, { UnionResult.edits })
-	local UseMemoResult1 = UseMemoFunction(function(): NumberRange --[[ Line: 57 ]]
+	local UseMemoResult1 = UseMemoFunction(function(): NumberRange
 		-- upvalues: UnionResult (copy), ConstantsModule (upval)
 		return if UnionResult.captureType == Enum.CaptureType.Screenshot then NumberRange.new(0, ConstantsModule.ScreenshotMusicDuration) elseif UnionResult.edits.trim then NumberRange.new(UnionResult.edits.trim.startTime, UnionResult.edits.trim.endTime) else NumberRange.new(0, 1e999)
 	end, { UnionResult.edits, UnionResult.captureType })
 	local UseAudioPlaybackModuleResult = UseAudioPlaybackModule(p1, UseMemoResult, {
-		playbackRegion = UseMemoFunction(function(): NumberRange --[[ Line: 69 ]]
+		playbackRegion = UseMemoFunction(function(): NumberRange
 			-- upvalues: UnionResult (copy), UseMemoResult1 (copy)
 			return if UnionResult.edits.music then NumberRange.new(UnionResult.edits.music.startTime, UnionResult.edits.music.startTime + (UseMemoResult1.Max - UseMemoResult1.Min)) else NumberRange.new(0, 1e999)
 		end, { UnionResult.edits, UseMemoResult1 }),
@@ -44,7 +44,7 @@ return function(p1, p2) --[[ Line: 40 | Named "useUnifiedPlayback" ]]
 	})
 	local UseVideoPlaybackModuleResult = UseVideoPlaybackModule(p1, if UnionResult.captureType == Enum.CaptureType.Screenshot then nil else UnionResult.content, { playbackRegion = UseMemoResult1, looping = p2.looping })
 	local UseImageDisplayModuleResult = UseImageDisplayModule(p1, if UnionResult.captureType == Enum.CaptureType.Screenshot then UnionResult.content else nil)
-	local UseCallbackResult = UseCallbackFunction(function(p3) --[[ Line: 94 ]]
+	local UseCallbackResult = UseCallbackFunction(function(p3)
 		-- upvalues: UseVideoPlaybackModuleResult (copy), UseAudioPlaybackModuleResult (copy)
 		if UseVideoPlaybackModuleResult.ref.current and UseVideoPlaybackModuleResult.ref.current.IsLoaded then
 			UseVideoPlaybackModuleResult.timeline.seek(p3)
@@ -56,7 +56,7 @@ return function(p1, p2) --[[ Line: 40 | Named "useUnifiedPlayback" ]]
 		UseVideoPlaybackModuleResult.timeline.seek,
 		UseAudioPlaybackModuleResult.timeline.seek
 	})
-	UseEffectFunction(function() --[[ Line: 103 ]]
+	UseEffectFunction(function()
 		-- upvalues: UseVideoPlaybackModuleResult (copy), UseImageDisplayModuleResult (copy), p1 (copy), UseToggleStateModuleResult (copy)
 		if (not UseVideoPlaybackModuleResult.ref.current or not UseVideoPlaybackModuleResult.ref.current.IsLoaded) and (not UseImageDisplayModuleResult.ref.current or not UseImageDisplayModuleResult.isLoadedRef.current) then return end
 		if p1 then
@@ -67,7 +67,7 @@ return function(p1, p2) --[[ Line: 40 | Named "useUnifiedPlayback" ]]
 			UseToggleStateModuleResult.disable()
 		end
 	end, { p1 })
-	UseEffectFunction(function() --[[ Line: 118 ]]
+	UseEffectFunction(function()
 		-- upvalues: UseVideoPlaybackModuleResult (copy), UseImageDisplayModuleResult (copy), UseToggleStateModuleResult (copy), UseAudioPlaybackModuleResult (copy)
 		if (not UseVideoPlaybackModuleResult.ref.current or not UseVideoPlaybackModuleResult.ref.current.IsLoaded) and (not UseImageDisplayModuleResult.ref.current or not UseImageDisplayModuleResult.isLoadedRef.current) then return end
 		if UseToggleStateModuleResult.enabled then
@@ -80,7 +80,7 @@ return function(p1, p2) --[[ Line: 40 | Named "useUnifiedPlayback" ]]
 			UseAudioPlaybackModuleResult.playback.pause()
 		end
 	end, { UseToggleStateModuleResult.enabled })
-	UseEffectFunction(function() --[[ Line: 135 ]]
+	UseEffectFunction(function()
 		-- upvalues: UseToggleStateModuleResult1 (copy), UseAudioPlaybackModuleResult (copy), UseMemoResult (copy), UseVideoPlaybackModuleResult (copy)
 		if UseToggleStateModuleResult1.enabled then
 			UseAudioPlaybackModuleResult.volume.mute()
@@ -95,26 +95,26 @@ return function(p1, p2) --[[ Line: 40 | Named "useUnifiedPlayback" ]]
 			UseVideoPlaybackModuleResult.volume.unmute()
 		end
 	end, { UseToggleStateModuleResult1.enabled, UseMemoResult })
-	local UseCallbackResult1 = UseCallbackFunction(function(p3) --[[ Line: 149 ]]
+	local UseCallbackResult1 = UseCallbackFunction(function(p3)
 		-- upvalues: p1 (copy), UnionResult (copy), UseToggleStateModuleResult (copy), UseRefResult (copy)
 		if p1 and UnionResult.autoplay then
 			UseToggleStateModuleResult.enable()
 		end
 		UseRefResult.current:fire(p3)
 	end, { p1, UnionResult.autoplay })
-	local UseCallbackResult2 = UseCallbackFunction(function() --[[ Line: 156 ]]
+	local UseCallbackResult2 = UseCallbackFunction(function()
 		-- upvalues: UseCallbackResult1 (copy)
 		UseCallbackResult1(Enum.AssetType.Image)
 	end, { UseCallbackResult1 })
-	local UseCallbackResult3 = UseCallbackFunction(function() --[[ Line: 160 ]]
+	local UseCallbackResult3 = UseCallbackFunction(function()
 		-- upvalues: UseCallbackResult1 (copy)
 		UseCallbackResult1(Enum.AssetType.Video)
 	end, { UseCallbackResult1 })
-	local UseCallbackResult4 = UseCallbackFunction(function() --[[ Line: 164 ]]
+	local UseCallbackResult4 = UseCallbackFunction(function()
 		-- upvalues: UseAudioPlaybackModuleResult (copy)
 		UseAudioPlaybackModuleResult.timeline.seek(0)
 	end, { UseAudioPlaybackModuleResult.timeline.seek })
-	UseEffectFunction(function() --[[ Line: 168 ]]
+	UseEffectFunction(function()
 		-- upvalues: UseVideoPlaybackModuleResult (copy), UseCallbackResult4 (copy), UseCallbackResult3 (copy), UseImageDisplayModuleResult (copy), UseCallbackResult2 (copy)
 		local CurrentConnections = {}
 		
@@ -127,7 +127,7 @@ return function(p1, p2) --[[ Line: 40 | Named "useUnifiedPlayback" ]]
 		if UseImageDisplayModuleResult.onImageLoadedSignalRef.current then
 			table.insert(CurrentConnections, UseImageDisplayModuleResult.onImageLoadedSignalRef.current:connect(UseCallbackResult2))
 		end
-		return function() --[[ Line: 183 ]]
+		return function()
 			-- upvalues: CurrentConnections (copy)
 			for _, currentConnection in CurrentConnections do
 				currentConnection.disconnect()

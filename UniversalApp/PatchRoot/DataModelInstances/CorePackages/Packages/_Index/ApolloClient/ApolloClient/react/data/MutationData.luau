@@ -12,11 +12,11 @@ local _ = require(Parent.link.core)
 local self = setmetatable({}, { __index = OperationData })
 self.__index = self
 
-function self.new(Options) --[[ Line: 83 ]]
+function self.new(Options)
 	-- upvalues: OperationData (copy), Boolean (copy), DocumentType (copy), self (copy)
 	local NewOperationData = OperationData.new(Options.options, Options.context)
 	
-	function NewOperationData.runMutation(p1) --[[ Line: 92 ]]
+	function NewOperationData.runMutation(p1)
 		-- upvalues: NewOperationData (copy), Boolean (upval)
 		if p1 == nil then
 			p1 = {}
@@ -24,12 +24,12 @@ function self.new(Options) --[[ Line: 83 ]]
 		NewOperationData:onMutationStart()
 		local NewMutationId = NewOperationData:generateNewMutationId()
 		
-		return NewOperationData:mutate(p1):andThen(function(Result) --[[ Line: 100 ]]
+		return NewOperationData:mutate(p1):andThen(function(Result)
 			-- upvalues: NewOperationData (upval), NewMutationId (copy)
 			NewOperationData:onMutationCompleted(Result, NewMutationId)
 			
 			return Result
-		end):catch(function(Err) --[[ Line: 104 ]]
+		end):catch(function(Err)
 			-- upvalues: NewOperationData (upval), NewMutationId (copy), Boolean (upval)
 			local Options = NewOperationData:getOptions()
 			local OnErrorFunction: (any, any) -> () = Options.onError
@@ -54,7 +54,7 @@ function self.new(Options) --[[ Line: 83 ]]
 	return (setmetatable(NewOperationData, self))
 end
 
-function self:execute(p1) --[[ Line: 127 ]]
+function self:execute(p1)
 	-- upvalues: DocumentType (copy), Object (copy)
 	self.isMounted = true
 	self:verifyDocumentType(self:getOptions().mutation, DocumentType.Mutation)
@@ -65,29 +65,29 @@ function self:execute(p1) --[[ Line: 127 ]]
 	}
 end
 
-function self:afterExecute() --[[ Line: 133 ]]
+function self:afterExecute()
 	self.isMounted = true
 	
-	return function(...) --[[ Line: 135 ]]
+	return function(...)
 		-- upvalues: self (copy)
 		return self:unmount(...)
 	end
 end
 
-function self:cleanup() --[[ Line: 140 ]] end
+function self:cleanup() end
 
-function self:mutate(p1) --[[ Line: 144 ]]
+function self:mutate(p1)
 	-- upvalues: MergeOptionsFunction (copy)
 	return self:refreshClient().client:mutate(MergeOptionsFunction(self:getOptions(), p1))
 end
 
-function self:onMutationStart() --[[ Line: 148 ]]
+function self:onMutationStart()
 	if not self.result.loading and not self:getOptions().ignoreResults then
 		self:updateResult({ loading = true, error = nil, data = nil, called = true })
 	end
 end
 
-function self:onMutationCompleted(p1, NewMutationId) --[[ Line: 160 ]]
+function self:onMutationCompleted(p1, NewMutationId)
 	-- upvalues: ApolloError (copy), Boolean (copy)
 	local Options = self:getOptions()
 	local OnCompletedFunction = Options.onCompleted
@@ -96,7 +96,7 @@ function self:onMutationCompleted(p1, NewMutationId) --[[ Line: 160 ]]
 	local Errors = p1.errors
 	local NewApolloError = if Errors and #Errors > 0 then ApolloError.new({ graphQLErrors = Errors }) else nil
 	
-	local function _() --[[ Line: 172 | Named "callOncomplete" ]]
+	local function _()
 		-- upvalues: Boolean (upval), OnCompletedFunction (copy), Data (copy)
 		return if Boolean.toJSBoolean(OnCompletedFunction) then OnCompletedFunction(Data) else nil
 	end
@@ -116,7 +116,7 @@ function self:onMutationCompleted(p1, NewMutationId) --[[ Line: 160 ]]
 	end
 end
 
-function self:onMutationError(Errors, NewMutationId) --[[ Line: 191 ]]
+function self:onMutationError(Errors, NewMutationId)
 	if self:isMostRecentMutation(NewMutationId) then
 		self:updateResult({
 			loading = false,
@@ -127,17 +127,17 @@ function self:onMutationError(Errors, NewMutationId) --[[ Line: 191 ]]
 	end
 end
 
-function self:generateNewMutationId() --[[ Line: 202 ]]
+function self:generateNewMutationId()
 	self.mostRecentMutationId += 1
 	
 	return self.mostRecentMutationId
 end
 
-function self:isMostRecentMutation(MostRecentMutationId): boolean --[[ Line: 207 ]]
+function self:isMostRecentMutation(MostRecentMutationId): boolean
 	return self.mostRecentMutationId == MostRecentMutationId
 end
 
-function self:updateResult(PreviousResult) --[[ Line: 211 ]]
+function self:updateResult(PreviousResult)
 	-- upvalues: EqualModule (copy)
 	if self.isMounted and (not self.previousResult or not EqualModule(self.previousResult, PreviousResult)) then
 		self:setResult(PreviousResult)

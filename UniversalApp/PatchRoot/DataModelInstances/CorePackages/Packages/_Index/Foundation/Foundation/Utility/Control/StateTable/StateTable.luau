@@ -5,7 +5,7 @@ local LoggerModule = require(Foundation.Utility.Logger)
 local StateTableModule = {}
 StateTableModule.__index = StateTableModule
 
-function StateTableModule.new(Name, CurrentState, List) --[[ Line: 53 ]]
+function StateTableModule.new(Name, CurrentState, List)
 	-- upvalues: StateTableModule (copy)
 	assert(#Name > 0, "name must not be an empty string")
 	assert(List[CurrentState] ~= nil, "initialState must be present in transitionTable")
@@ -28,7 +28,7 @@ function StateTableModule.new(Name, CurrentState, List) --[[ Line: 53 ]]
 			t1[i1] = value1
 			
 			if t.events[i1] == nil then
-				t.events[i1] = function() --[[ Line: 79 ]]
+				t.events[i1] = function()
 					-- upvalues: t (copy), i1 (copy)
 					return t:handleEvent(i1)
 				end
@@ -37,7 +37,7 @@ function StateTableModule.new(Name, CurrentState, List) --[[ Line: 53 ]]
 		t.transitionTable[i] = t1
 	end
 	setmetatable(t.events, {
-		__index = function(_, p1) --[[ Line: 90 ]]
+		__index = function(_, p1)
 			-- upvalues: t (copy)
 			error(string.format("'%s' is not a valid event in StateTable '%s'", tostring(p1), t.name), 2)
 		end
@@ -46,7 +46,7 @@ function StateTableModule.new(Name, CurrentState, List) --[[ Line: 53 ]]
 	return t
 end
 
-function StateTableModule:handleEvent(Text) --[[ Line: 109 ]]
+function StateTableModule:handleEvent(Text)
 	-- upvalues: LoggerModule (copy)
 	local CurrentState = self.currentState
 	local TransitionEntry = self.transitionTable[CurrentState][Text]
@@ -64,7 +64,7 @@ function StateTableModule:handleEvent(Text) --[[ Line: 109 ]]
 	end
 end
 
-function StateTableModule:onStateChange(StateChangeHandler) --[[ Line: 137 ]]
+function StateTableModule:onStateChange(StateChangeHandler)
 	self.stateChangeHandler = StateChangeHandler
 end
 

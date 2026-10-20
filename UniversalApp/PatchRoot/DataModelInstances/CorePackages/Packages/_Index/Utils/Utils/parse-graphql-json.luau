@@ -8,7 +8,7 @@ local _ = require(script.Parent.types)
 local String = LuauPolyfillModule.String
 local JsonModule = require(script.Parent.json)
 
-local function _(p1) --[[ Line: 26 | Named "stripBOM" ]]
+local function _(p1)
 	-- upvalues: String (copy)
 	local Text = tostring(p1)
 	
@@ -18,7 +18,7 @@ local function _(p1) --[[ Line: 26 | Named "stripBOM" ]]
 	return Text
 end
 
-local _ = function(p1) --[[ Line: 41 | Named "parseBOM" ]]
+local _ = function(p1)
 	-- upvalues: JsonModule (copy), String (copy)
 	local ParseFunction = JsonModule.parse
 	local Text = tostring(p1)
@@ -30,7 +30,7 @@ local _ = function(p1) --[[ Line: 41 | Named "parseBOM" ]]
 end
 
 return {
-	parseGraphQLJSON = function(Location, p1, p2) --[[ Line: 44 ]]
+	parseGraphQLJSON = function(Location, p1, p2)
 		-- upvalues: JsonModule (copy), String (copy), Boolean (copy), BuildClientSchemaFunction (copy), Error1 (copy)
 		local ParseFunction = JsonModule.parse
 		local Text = tostring(p1)

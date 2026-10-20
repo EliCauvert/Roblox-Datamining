@@ -4,36 +4,36 @@ local Array = require(Parent1.LuauPolyfill).Array
 local EventsModule = require(Parent.Events)
 local NavigationEventManager = require(Parent1.React).Component:extend("NavigationEventManager")
 
-function NavigationEventManager.didMount(p1) --[[ Line: 13 ]]
+function NavigationEventManager.didMount(p1)
 	-- upvalues: EventsModule (copy)
 	local Navigation = p1.props.navigation
-	p1._actionSubscription = Navigation.addListener(EventsModule.Action, function(...) --[[ Line: 16 ]]
+	p1._actionSubscription = Navigation.addListener(EventsModule.Action, function(...)
 		-- upvalues: p1 (copy)
 		return p1:_handleAction(...)
 	end)
-	p1._willFocusSubscription = Navigation.addListener(EventsModule.WillFocus, function(...) --[[ Line: 20 ]]
+	p1._willFocusSubscription = Navigation.addListener(EventsModule.WillFocus, function(...)
 		-- upvalues: p1 (copy)
 		return p1:_handleWillFocus(...)
 	end)
-	p1._willBlurSubscription = Navigation.addListener(EventsModule.WillBlur, function(...) --[[ Line: 24 ]]
+	p1._willBlurSubscription = Navigation.addListener(EventsModule.WillBlur, function(...)
 		-- upvalues: p1 (copy)
 		return p1:_handleWillBlur(...)
 	end)
-	p1._didFocusSubscription = Navigation.addListener(EventsModule.DidFocus, function(...) --[[ Line: 28 ]]
+	p1._didFocusSubscription = Navigation.addListener(EventsModule.DidFocus, function(...)
 		-- upvalues: p1 (copy)
 		return p1:_handleDidFocus(...)
 	end)
-	p1._didBlurSubscription = Navigation.addListener(EventsModule.DidBlur, function(...) --[[ Line: 32 ]]
+	p1._didBlurSubscription = Navigation.addListener(EventsModule.DidBlur, function(...)
 		-- upvalues: p1 (copy)
 		return p1:_handleDidBlur(...)
 	end)
-	p1._refocusSubscription = Navigation.addListener(EventsModule.Refocus, function(...) --[[ Line: 36 ]]
+	p1._refocusSubscription = Navigation.addListener(EventsModule.Refocus, function(...)
 		-- upvalues: p1 (copy)
 		return p1:_handleRefocus(...)
 	end)
 end
 
-function NavigationEventManager.willUnmount(p1) --[[ Line: 41 ]]
+function NavigationEventManager.willUnmount(p1)
 	if p1._actionSubscription then
 		p1._actionSubscription.remove()
 	end
@@ -54,7 +54,7 @@ function NavigationEventManager.willUnmount(p1) --[[ Line: 41 ]]
 	end
 end
 
-function NavigationEventManager._handleAction(p1, p2) --[[ Line: 62 ]]
+function NavigationEventManager._handleAction(p1, p2)
 	-- upvalues: EventsModule (copy)
 	local State = p2.state
 	local LastState = p2.lastState
@@ -92,7 +92,7 @@ function NavigationEventManager._handleAction(p1, p2) --[[ Line: 62 ]]
 	OnEventFunction(Route1.key, EventsModule.Action, config)
 end
 
-function NavigationEventManager._handleWillFocus(p1, p2) --[[ Line: 113 ]]
+function NavigationEventManager._handleWillFocus(p1, p2)
 	-- upvalues: Array (copy)
 	local LastState = p2.lastState
 	local Action = p2.action
@@ -103,7 +103,7 @@ function NavigationEventManager._handleWillFocus(p1, p2) --[[ Line: 113 ]]
 	local Route1 = nil
 	
 	if LastState and LastState.routes then
-		local Index = if LastState then Array.findIndex(LastState.routes, function(p3): boolean --[[ Line: 125 ]]
+		local Index = if LastState then Array.findIndex(LastState.routes, function(p3): boolean
 			-- upvalues: Route (copy)
 			return p3.key == Route.key
 		end) else -1
@@ -121,7 +121,7 @@ function NavigationEventManager._handleWillFocus(p1, p2) --[[ Line: 113 ]]
 	})
 end
 
-function NavigationEventManager._handleWillBlur(p1, p2) --[[ Line: 143 ]]
+function NavigationEventManager._handleWillBlur(p1, p2)
 	-- upvalues: Array (copy)
 	local LastState = p2.lastState
 	local Action = p2.action
@@ -132,7 +132,7 @@ function NavigationEventManager._handleWillBlur(p1, p2) --[[ Line: 143 ]]
 	local Route1 = nil
 	
 	if LastState and LastState.routes then
-		local Index = if LastState then Array.findIndex(LastState.routes, function(p3): boolean --[[ Line: 155 ]]
+		local Index = if LastState then Array.findIndex(LastState.routes, function(p3): boolean
 			-- upvalues: Route (copy)
 			return p3.key == Route.key
 		end) else -1
@@ -150,7 +150,7 @@ function NavigationEventManager._handleWillBlur(p1, p2) --[[ Line: 143 ]]
 	})
 end
 
-function NavigationEventManager._handleDidFocus(p1, p2) --[[ Line: 173 ]]
+function NavigationEventManager._handleDidFocus(p1, p2)
 	-- upvalues: Array (copy)
 	local LastState = p2.lastState
 	local Action = p2.action
@@ -159,7 +159,7 @@ function NavigationEventManager._handleDidFocus(p1, p2) --[[ Line: 173 ]]
 	local Navigation = p1.props.navigation
 	
 	if p1._lastWillFocusKey then
-		local Index: number = Array.findIndex(Navigation.state.routes, function(p3): boolean --[[ Line: 182 ]]
+		local Index: number = Array.findIndex(Navigation.state.routes, function(p3): boolean
 			-- upvalues: p1 (copy)
 			return p3.key == p1._lastWillFocusKey
 		end)
@@ -169,7 +169,7 @@ function NavigationEventManager._handleDidFocus(p1, p2) --[[ Line: 173 ]]
 			local Route1 = nil
 			
 			if LastState and LastState.routes then
-				local Index1 = if LastState then Array.findIndex(LastState.routes, function(p3): boolean --[[ Line: 192 ]]
+				local Index1 = if LastState then Array.findIndex(LastState.routes, function(p3): boolean
 					-- upvalues: Route (copy)
 					return p3.key == Route.key
 				end) else -1
@@ -189,7 +189,7 @@ function NavigationEventManager._handleDidFocus(p1, p2) --[[ Line: 173 ]]
 	end
 end
 
-function NavigationEventManager._handleDidBlur(p1, p2) --[[ Line: 212 ]]
+function NavigationEventManager._handleDidBlur(p1, p2)
 	-- upvalues: Array (copy)
 	local LastState = p2.lastState
 	local Action = p2.action
@@ -198,7 +198,7 @@ function NavigationEventManager._handleDidBlur(p1, p2) --[[ Line: 212 ]]
 	local Navigation = p1.props.navigation
 	
 	if p1._lastWillBlurKey then
-		local Index: number = Array.findIndex(Navigation.state.routes, function(p3): boolean --[[ Line: 221 ]]
+		local Index: number = Array.findIndex(Navigation.state.routes, function(p3): boolean
 			-- upvalues: p1 (copy)
 			return p3.key == p1._lastWillBlurKey
 		end)
@@ -208,7 +208,7 @@ function NavigationEventManager._handleDidBlur(p1, p2) --[[ Line: 212 ]]
 			local Route1 = nil
 			
 			if LastState and LastState.routes then
-				local Index1 = if LastState then Array.findIndex(LastState.routes, function(p3): boolean --[[ Line: 231 ]]
+				local Index1 = if LastState then Array.findIndex(LastState.routes, function(p3): boolean
 					-- upvalues: Route (copy)
 					return p3.key == Route.key
 				end) else -1
@@ -228,13 +228,13 @@ function NavigationEventManager._handleDidBlur(p1, p2) --[[ Line: 212 ]]
 	end
 end
 
-function NavigationEventManager._handleRefocus(p1) --[[ Line: 251 ]]
+function NavigationEventManager._handleRefocus(p1)
 	-- upvalues: EventsModule (copy)
 	local Navigation = p1.props.navigation
 	p1.props.onEvent(Navigation.state.routes[Navigation.state.index].key, EventsModule.Refocus)
 end
 
-function NavigationEventManager._emitWillFocus(p1, Key, p2) --[[ Line: 259 ]]
+function NavigationEventManager._emitWillFocus(p1, Key, p2)
 	-- upvalues: EventsModule (copy)
 	if p1._lastWillBlurKey == Key then
 		p1._lastWillBlurKey = nil
@@ -250,7 +250,7 @@ function NavigationEventManager._emitWillFocus(p1, Key, p2) --[[ Line: 259 ]]
 	end
 end
 
-function NavigationEventManager._emitWillBlur(p1, Key, p2) --[[ Line: 284 ]]
+function NavigationEventManager._emitWillBlur(p1, Key, p2)
 	-- upvalues: EventsModule (copy)
 	if p1._lastWillFocusKey == Key then
 		p1._lastWillFocusKey = nil
@@ -266,7 +266,7 @@ function NavigationEventManager._emitWillBlur(p1, Key, p2) --[[ Line: 284 ]]
 	end
 end
 
-function NavigationEventManager._emitDidFocus(p1, LastWillFocusKey, p2) --[[ Line: 309 ]]
+function NavigationEventManager._emitDidFocus(p1, LastWillFocusKey, p2)
 	-- upvalues: EventsModule (copy)
 	if p1._lastWillFocusKey == LastWillFocusKey and p1._lastDidFocusKey ~= LastWillFocusKey then
 		p1._lastDidFocusKey = LastWillFocusKey
@@ -276,7 +276,7 @@ function NavigationEventManager._emitDidFocus(p1, LastWillFocusKey, p2) --[[ Lin
 	end
 end
 
-function NavigationEventManager._emitDidBlur(p1, LastWillBlurKey, p2) --[[ Line: 321 ]]
+function NavigationEventManager._emitDidBlur(p1, LastWillBlurKey, p2)
 	-- upvalues: EventsModule (copy)
 	if p1._lastWillBlurKey == LastWillBlurKey and p1._lastDidBlurKey ~= LastWillBlurKey then
 		p1._lastDidBlurKey = LastWillBlurKey
@@ -286,7 +286,7 @@ function NavigationEventManager._emitDidBlur(p1, LastWillBlurKey, p2) --[[ Line:
 	end
 end
 
-function NavigationEventManager:render() --[[ Line: 333 ]]
+function NavigationEventManager:render()
 	return nil
 end
 

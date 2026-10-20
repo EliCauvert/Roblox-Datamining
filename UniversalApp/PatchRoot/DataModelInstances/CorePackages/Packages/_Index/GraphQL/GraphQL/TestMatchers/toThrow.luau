@@ -1,4 +1,4 @@
-﻿return function(p1, p2, p3) --[[ Line: 16 | Named "toThrow" ]]
+﻿return function(p1, p2, p3)
 	local Success, Result = pcall(p1)
 	
 	if Success then

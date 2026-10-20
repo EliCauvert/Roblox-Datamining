@@ -1,7 +1,7 @@
 ﻿local EventPropagationEventModule = {}
 EventPropagationEventModule.__index = EventPropagationEventModule
 
-function EventPropagationEventModule.new(TargetInstance, CurrentInstance, EventName, Phase, p1, Tbl) --[[ Line: 18 ]]
+function EventPropagationEventModule.new(TargetInstance, CurrentInstance, EventName, Phase, p1, Tbl)
 	-- upvalues: EventPropagationEventModule (copy)
 	local config = {
 		cancelled = false,
@@ -17,7 +17,7 @@ function EventPropagationEventModule.new(TargetInstance, CurrentInstance, EventN
 	return config
 end
 
-function EventPropagationEventModule:cancel() --[[ Line: 41 ]]
+function EventPropagationEventModule:cancel()
 	self.cancelled = true
 end
 

@@ -12,7 +12,7 @@ return {
 	requiredData = { ValidationEnumsModule.SharedDataMember.outerCagesData },
 	conditionalData = {},
 	expectedFailures = {},
-	run = function(p1, p2) --[[ Line: 32 ]]
+	run = function(p1, p2)
 		-- upvalues: UGCValidationService (copy), ErrorSourceStringsModule (copy)
 		for PartName, value in p2.outerCagesData do
 			if not UGCValidationService:ValidateEditableMeshCageUVTriangleArea(value.editable) then

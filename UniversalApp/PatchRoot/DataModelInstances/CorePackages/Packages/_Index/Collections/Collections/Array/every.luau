@@ -1,7 +1,7 @@
 ﻿local DEV = _G.__DEV__
 local _ = require(script.Parent.Parent.Parent.ES7Types)
 
-return function(p1, Callback, p2): boolean --[[ Line: 27 ]]
+return function(p1, Callback, p2): boolean
 	-- upvalues: DEV (copy)
 	if DEV then
 		if typeof(p1) ~= "table" then

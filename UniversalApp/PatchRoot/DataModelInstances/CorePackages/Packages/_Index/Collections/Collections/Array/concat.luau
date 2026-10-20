@@ -3,7 +3,7 @@ local Parent = script.Parent
 local IsArrayModule = require(Parent.isArray)
 local _ = require(Parent.Parent.Parent.ES7Types)
 
-return function(Tbl, ...) --[[ Line: 29 | Named "concat" ]]
+return function(Tbl, ...)
 	-- upvalues: IsArrayModule (copy), DEV (copy)
 	local v1 = 0
 	local Copy = nil

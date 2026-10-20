@@ -5,7 +5,7 @@ local GetOutputWiresModule = require(SceneUnderstanding.wiring.getOutputWires)
 local _ = require(SceneUnderstanding.wiring.types)
 local ToWirableInstanceModule = require(SceneUnderstanding.wiring.toWirableInstance)
 
-local function _(Sound) --[[ Line: 13 | Named "calculateSoundPotentialAudibility" ]]
+local function _(Sound)
 	-- upvalues: SafelyAccessPropertyModule (copy)
 	if not Sound.IsPlaying then
 		return 0
@@ -19,7 +19,7 @@ local function _(Sound) --[[ Line: 13 | Named "calculateSoundPotentialAudibility
 	return Volume * Sound.Volume * RollOffGain
 end
 
-local function getOutputsOf(AudioEmitter) --[[ Line: 41 ]]
+local function getOutputsOf(AudioEmitter)
 	-- upvalues: GetOutputWiresModule (copy), ToWirableInstanceModule (copy)
 	if typeof(AudioEmitter) == "Instance" and AudioEmitter:IsA("AudioEmitter") then
 		return (AudioEmitter:GetInteractingListeners())
@@ -36,7 +36,7 @@ local function getOutputsOf(AudioEmitter) --[[ Line: 41 ]]
 	return List
 end
 
-local _ = function(AudioEmitter): number --[[ Line: 60 | Named "getAudibilityMultiplierFor" ]]
+local _ = function(AudioEmitter): number
 	local NewAudibilityFor = 0
 	
 	for _, interactingListener in AudioEmitter:GetInteractingListeners() do
@@ -45,7 +45,7 @@ local _ = function(AudioEmitter): number --[[ Line: 60 | Named "getAudibilityMul
 	return NewAudibilityFor
 end
 
-local function getAudibilityOf(Object, p1): number --[[ Line: 68 ]]
+local function getAudibilityOf(Object, p1): number
 	-- upvalues: getOutputsOf (copy), getAudibilityOf (copy)
 	local T = if p1 then p1 else {}
 	
@@ -77,7 +77,7 @@ local function getAudibilityOf(Object, p1): number --[[ Line: 68 ]]
 	return Total
 end
 
-return function(Sound: Sound) --[[ Line: 105 | Named "calculatePotentialAudibility" ]]
+return function(Sound: Sound)
 	-- upvalues: SafelyAccessPropertyModule (copy), UserGameSettings (copy), getAudibilityOf (copy)
 	local MasterVolume = SafelyAccessPropertyModule(UserGameSettings, "MasterVolume", 0)
 	local AudibilityOf = nil

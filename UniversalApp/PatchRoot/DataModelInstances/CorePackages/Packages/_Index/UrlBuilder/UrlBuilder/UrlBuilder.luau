@@ -16,17 +16,17 @@ local AccountInformationPatternsModule = require(script.Parent.UrlPatterns.Accou
 local VirtualEventsUrlPatternsModule = require(script.Parent.UrlPatterns.VirtualEventsUrlPatterns)
 local PlatformAuthPatternsModule = require(script.Parent.UrlPatterns.PlatformAuthPatterns)
 
-local function splitAndTrim(Hash, p1, p2) --[[ Line: 28 ]]
+local function splitAndTrim(Hash, p1, p2)
 	-- upvalues: StringSplitFunction (copy), CryoModule (copy), StringTrimFunction (copy)
-	return (CryoModule.List.filter(CryoModule.List.map(StringSplitFunction(Hash, p1, p2), function(p3) --[[ Line: 30 ]]
+	return (CryoModule.List.filter(CryoModule.List.map(StringSplitFunction(Hash, p1, p2), function(p3)
 		-- upvalues: StringTrimFunction (upval)
 		return StringTrimFunction(p3)
-	end), function(p3): boolean --[[ Line: 33 ]]
+	end), function(p3): boolean
 		return #p3 > 0
 	end))
 end
 
-local function validateValueType(Default): boolean --[[ Line: 44 ]]
+local function validateValueType(Default): boolean
 	local ValueType = type(Default)
 	
 	if ValueType == "string" then
@@ -48,13 +48,13 @@ local function validateValueType(Default): boolean --[[ Line: 44 ]]
 	return true
 end
 
-local function _(Text: string) --[[ Line: 64 | Named "assertPlaceholder" ]]
+local function _(Text: string)
 	if string.sub(Text, 1, 1) == "{" then
 		assert(string.sub(Text, -1, -1) == "}", "invalid pattern: placeholder items should end with `}`")
 	end
 end
 
-local function assertElementIsValid(p1, p2) --[[ Line: 71 ]]
+local function assertElementIsValid(p1, p2)
 	-- upvalues: validateValueType (copy)
 	assert(type(p1) == "table", "invalid pattern: elements should all be tables")
 	
@@ -82,7 +82,7 @@ local function assertElementIsValid(p1, p2) --[[ Line: 71 ]]
 	end
 end
 
-local function assertPatternIsValid(p1) --[[ Line: 102 ]]
+local function assertPatternIsValid(p1)
 	-- upvalues: assertElementIsValid (copy)
 	assert(type(p1.base) == "string", "invalid pattern: base should be a string")
 	assert(#p1.base > 0, "invalid pattern: base should not be empty")
@@ -104,9 +104,9 @@ local function assertPatternIsValid(p1) --[[ Line: 102 ]]
 	end
 end
 
-local _ = function(p2, p3) --[[ Line: 127 | Named "buildElementsFromString" ]]
+local _ = function(p2, p3)
 	-- upvalues: splitAndTrim (copy), CryoModule (copy), StringTrimFunction (copy), StringSplitFunction (copy)
-	return (CryoModule.List.map(splitAndTrim(p2, if p3 then "&" else "/"), function(p4) --[[ Line: 130 ]]
+	return (CryoModule.List.map(splitAndTrim(p2, if p3 then "&" else "/"), function(p4)
 		-- upvalues: StringTrimFunction (upval), p3 (copy), StringSplitFunction (upval)
 		local Text = nil
 		local Text1 = StringTrimFunction(p4)
@@ -152,7 +152,7 @@ local _ = function(p2, p3) --[[ Line: 127 | Named "buildElementsFromString" ]]
 	end))
 end
 
-local function buildQueryStringFromTable(Query): string --[[ Line: 173 ]]
+local function buildQueryStringFromTable(Query): string
 	local List = {}
 	
 	for i, value in pairs(Query) do
@@ -161,7 +161,7 @@ local function buildQueryStringFromTable(Query): string --[[ Line: 173 ]]
 	return table.concat(List, "&")
 end
 
-local function simplifyPattern(p2) --[[ Line: 182 ]]
+local function simplifyPattern(p2)
 	-- upvalues: UrlBaseModule (copy), splitAndTrim (copy), CryoModule (copy), StringTrimFunction (copy), StringSplitFunction (copy), buildQueryStringFromTable (copy)
 	local Base = p2.base
 	local Path = p2.path
@@ -173,7 +173,7 @@ local function simplifyPattern(p2) --[[ Line: 182 ]]
 	end
 	if type(Path) == "string" then
 		local v1 = false
-		Path = CryoModule.List.map(splitAndTrim(Path, "/"), function(p3) --[[ Line: 130 ]]
+		Path = CryoModule.List.map(splitAndTrim(Path, "/"), function(p3)
 			-- upvalues: StringTrimFunction (upval), v1 (copy), StringSplitFunction (upval)
 			local Text = nil
 			local Text1 = StringTrimFunction(p3)
@@ -223,7 +223,7 @@ local function simplifyPattern(p2) --[[ Line: 182 ]]
 	end
 	if type(Query) == "string" then
 		local v2 = true
-		Query = CryoModule.List.map(splitAndTrim(Query, "&"), function(p3) --[[ Line: 130 ]]
+		Query = CryoModule.List.map(splitAndTrim(Query, "&"), function(p3)
 			-- upvalues: StringTrimFunction (upval), v2 (copy), StringSplitFunction (upval)
 			local Text = nil
 			local Text1 = StringTrimFunction(p3)
@@ -270,7 +270,7 @@ local function simplifyPattern(p2) --[[ Line: 182 ]]
 	end
 	if type(Hash) == "string" then
 		local v3 = false
-		Hash = CryoModule.List.map(splitAndTrim(Hash, "/"), function(p3) --[[ Line: 130 ]]
+		Hash = CryoModule.List.map(splitAndTrim(Hash, "/"), function(p3)
 			-- upvalues: StringTrimFunction (upval), v3 (copy), StringSplitFunction (upval)
 			local Text = nil
 			local Text1 = StringTrimFunction(p3)
@@ -318,15 +318,15 @@ local function simplifyPattern(p2) --[[ Line: 182 ]]
 	return { base = Base, path = Path, query = Query, hash = Hash }
 end
 
-local function concatValues(MapResult, p2): string --[[ Line: 214 ]]
+local function concatValues(MapResult, p2): string
 	-- upvalues: CryoModule (copy), splitAndTrim (copy)
-	return table.concat(CryoModule.List.filter(MapResult, function(p3): boolean --[[ Line: 216 ]]
+	return table.concat(CryoModule.List.filter(MapResult, function(p3): boolean
 		-- upvalues: p2 (copy), splitAndTrim (upval)
 		return if p2 then #splitAndTrim(p3, "=") > 1 else #p3 > 0
 	end), if p2 then "&" else "/")
 end
 
-local function resolveElement(p2, p3, p4) --[[ Line: 227 ]]
+local function resolveElement(p2, p3, p4)
 	-- upvalues: validateValueType (copy), CryoModule (copy), EncodeURIComponentModule (copy), concatValues (copy)
 	if p3 == nil then
 		p3 = {}
@@ -351,7 +351,7 @@ local function resolveElement(p2, p3, p4) --[[ Line: 227 ]]
 	if type(Value) ~= "table" then
 		Value = { Value }
 	end
-	local MapResult = CryoModule.List.map(Value, function(p5) --[[ Line: 257 ]]
+	local MapResult = CryoModule.List.map(Value, function(p5)
 		-- upvalues: EncodeURIComponentModule (upval)
 		return EncodeURIComponentModule((tostring(p5)))
 	end)
@@ -360,7 +360,7 @@ local function resolveElement(p2, p3, p4) --[[ Line: 227 ]]
 		if p2.collect == "csv" then
 			MapResult = { table.concat(MapResult, "%2C") }
 		end
-		MapResult = CryoModule.List.map(MapResult, function(Text): string --[[ Line: 265 ]]
+		MapResult = CryoModule.List.map(MapResult, function(Text): string
 			-- upvalues: EncodeURIComponentModule (upval), p2 (copy)
 			return EncodeURIComponentModule(p2.name) .. "=" .. Text
 		end)
@@ -368,21 +368,21 @@ local function resolveElement(p2, p3, p4) --[[ Line: 227 ]]
 	return concatValues(MapResult, p4)
 end
 
-local function resolveElementList(Hash, p2, p3) --[[ Line: 272 ]]
+local function resolveElementList(Hash, p2, p3)
 	-- upvalues: CryoModule (copy), resolveElement (copy), concatValues (copy)
-	return concatValues(CryoModule.List.map(Hash or {}, function(p4) --[[ Line: 273 ]]
+	return concatValues(CryoModule.List.map(Hash or {}, function(p4)
 		-- upvalues: resolveElement (upval), p2 (copy), p3 (copy)
 		return resolveElement(p4, p2, p3)
 	end), p3)
 end
 
 local UrlBuilderModule = {
-	new = function(p2) --[[ Line: 308 ]]
+	new = function(p2)
 		-- upvalues: simplifyPattern (copy), assertPatternIsValid (copy), StringTrimFunction (copy), resolveElementList (copy)
 		local SimplifyPatternResult = simplifyPattern(p2)
 		assertPatternIsValid(SimplifyPatternResult)
 		
-		return function(p3, Text) --[[ Line: 311 ]]
+		return function(p3, Text)
 			-- upvalues: StringTrimFunction (upval), SimplifyPatternResult (ref), resolveElementList (upval)
 			local StringTrimResult = StringTrimFunction(SimplifyPatternResult.base, "/", { right = true })
 			local ResolveElementListResult = resolveElementList(SimplifyPatternResult.path, p3, false)
@@ -416,7 +416,7 @@ local UrlBuilderModule = {
 	end
 }
 
-function UrlBuilderModule.fromString(p2) --[[ Line: 347 ]]
+function UrlBuilderModule.fromString(p2)
 	-- upvalues: StringSplitFunction (copy), UrlBuilderModule (copy), StringTrimFunction (copy)
 	local v1 = StringSplitFunction(p2, ":", 2)
 	
@@ -443,7 +443,7 @@ function UrlBuilderModule.fromString(p2) --[[ Line: 347 ]]
 	})
 end
 
-function UrlBuilderModule.addQueryString(p2, p3) --[[ Line: 376 ]]
+function UrlBuilderModule.addQueryString(p2, p3)
 	-- upvalues: StringTrimFunction (copy), CryoModule (copy), UrlBuilderModule (copy)
 	local StringTrimResult = StringTrimFunction(p2)
 	local FoundAt: number? = string.find(StringTrimResult, "%?")
@@ -453,7 +453,7 @@ function UrlBuilderModule.addQueryString(p2, p3) --[[ Line: 376 ]]
 	elseif FoundAt < #StringTrimResult then
 		StringTrimResult ..= "&"
 	end
-	return UrlBuilderModule.fromString(StringTrimResult .. table.concat(CryoModule.List.map(CryoModule.Dictionary.keys(p3), function(Text): string --[[ Line: 385 ]]
+	return UrlBuilderModule.fromString(StringTrimResult .. table.concat(CryoModule.List.map(CryoModule.Dictionary.keys(p3), function(Text): string
 		return "{" .. Text .. "}"
 	end), "&"))(p3)
 end

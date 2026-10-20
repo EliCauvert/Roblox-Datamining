@@ -5,7 +5,7 @@ local _ = require(script.Parent)
 local ExhaustiveMatchModule = require(UltimateList.Util.exhaustiveMatch)
 local DimensionsMethodsModule = {}
 
-function DimensionsMethodsModule.getCanvasSize(p1, p2, p3, p4) --[[ Line: 11 ]]
+function DimensionsMethodsModule.getCanvasSize(p1, p2, p3, p4)
 	-- upvalues: DataSourceMethodsModule (copy), DimensionsMethodsModule (copy), ExhaustiveMatchModule (copy)
 	local BackResult = DataSourceMethodsModule.back(p2)
 	
@@ -18,34 +18,34 @@ function DimensionsMethodsModule.getCanvasSize(p1, p2, p3, p4) --[[ Line: 11 ]]
 	end
 end
 
-local function _(XOffset, p1) --[[ Line: 30 | Named "getUDimSizeForConsistentSize" ]]
+local function _(XOffset, p1)
 	-- upvalues: ExhaustiveMatchModule (copy)
 	return if p1 == "x" then UDim2.new(0, XOffset, 1, 0) elseif p1 == "y" then UDim2.new(1, 0, 0, XOffset) else ExhaustiveMatchModule(p1)
 end
 
-local _ = function(p1, p2: number, p3) --[[ Line: 40 | Named "getPositionForConsistentSize" ]]
+local _ = function(p1, p2: number, p3)
 	-- upvalues: ExhaustiveMatchModule (copy)
 	return if p3 == "x" then UDim2.fromOffset(p1 * (p2 - 1), 0) elseif p3 == "y" then UDim2.fromOffset(0, p1 * (p2 - 1)) else ExhaustiveMatchModule(p3)
 end
 
-local function getPositionForConsistentUDim2(Vector, p1: number, Vector1, p2) --[[ Line: 50 ]]
+local function getPositionForConsistentUDim2(Vector, p1: number, Vector1, p2)
 	-- upvalues: DimensionsMethodsModule (copy), ExhaustiveMatchModule (copy)
 	local AmountPerNonDominantInGrid: number = DimensionsMethodsModule.getAmountPerNonDominantInGrid(Vector, Vector1, p2)
 	
 	return if p2 == "x" then UDim2.new(0, (math.ceil(p1 / AmountPerNonDominantInGrid) - 1) * Vector.X.Offset, Vector.Y.Scale * ((p1 - 1) % AmountPerNonDominantInGrid), Vector.Y.Offset * ((p1 - 1) % AmountPerNonDominantInGrid)) elseif p2 == "y" then UDim2.new(Vector.X.Scale * ((p1 - 1) % AmountPerNonDominantInGrid), Vector.X.Offset * ((p1 - 1) % AmountPerNonDominantInGrid), 0, (math.ceil(p1 / AmountPerNonDominantInGrid) - 1) * Vector.Y.Offset) else ExhaustiveMatchModule(p2)
 end
 
-function DimensionsMethodsModule.getAmountPerNonDominantInGrid(Vector, Vector1, p1) --[[ Line: 79 ]]
+function DimensionsMethodsModule.getAmountPerNonDominantInGrid(Vector, Vector1, p1)
 	-- upvalues: ExhaustiveMatchModule (copy)
 	return if p1 == "x" then Vector1.Y // (Vector.Y.Offset + Vector.Y.Scale * Vector1.Y) elseif p1 == "y" then Vector1.X // (Vector.X.Offset + Vector.X.Scale * Vector1.X) else ExhaustiveMatchModule(p1)
 end
 
-function DimensionsMethodsModule.getDominantAxis(Vector, p1) --[[ Line: 93 ]]
+function DimensionsMethodsModule.getDominantAxis(Vector, p1)
 	-- upvalues: ExhaustiveMatchModule (copy)
 	return if p1 == "x" then Vector.X elseif p1 == "y" then Vector.Y else ExhaustiveMatchModule(p1)
 end
 
-function DimensionsMethodsModule.getUDimRect(p1, BackResult, LengthResult: number, p2, p3) --[[ Line: 103 ]]
+function DimensionsMethodsModule.getUDimRect(p1, BackResult, LengthResult: number, p2, p3)
 	-- upvalues: ExhaustiveMatchModule (copy), getPositionForConsistentUDim2 (copy)
 	if p1.type == "consistentSize" then
 		local Size = p1.size
@@ -88,14 +88,14 @@ function DimensionsMethodsModule.getUDimRect(p1, BackResult, LengthResult: numbe
 	end
 end
 
-local function getElementsDisplayedForUDim2(Vector, Vector1, p1) --[[ Line: 152 ]]
+local function getElementsDisplayedForUDim2(Vector, Vector1, p1)
 	-- upvalues: DimensionsMethodsModule (copy), ExhaustiveMatchModule (copy)
 	local AmountPerNonDominantInGrid = DimensionsMethodsModule.getAmountPerNonDominantInGrid(Vector, Vector1, p1)
 	
 	return if p1 == "x" then AmountPerNonDominantInGrid * (Vector1.X // Vector.Y.Offset + 2) elseif p1 == "y" then AmountPerNonDominantInGrid * (Vector1.Y // Vector.X.Offset + 2) else ExhaustiveMatchModule(p1)
 end
 
-function DimensionsMethodsModule.elementsDisplayedHint(p1, Vector, p2) --[[ Line: 165 ]]
+function DimensionsMethodsModule.elementsDisplayedHint(p1, Vector, p2)
 	-- upvalues: DimensionsMethodsModule (copy), getElementsDisplayedForUDim2 (copy), ExhaustiveMatchModule (copy)
 	if p1.type == "consistentSize" then
 		return DimensionsMethodsModule.getDominantAxis(Vector, p2) // p1.size + 2
@@ -118,7 +118,7 @@ function DimensionsMethodsModule.elementsDisplayedHint(p1, Vector, p2) --[[ Line
 	end
 end
 
-function DimensionsMethodsModule.equals(p1, p2) --[[ Line: 203 ]]
+function DimensionsMethodsModule.equals(p1, p2)
 	-- upvalues: ExhaustiveMatchModule (copy)
 	if p1.type ~= p2.type then
 		return false

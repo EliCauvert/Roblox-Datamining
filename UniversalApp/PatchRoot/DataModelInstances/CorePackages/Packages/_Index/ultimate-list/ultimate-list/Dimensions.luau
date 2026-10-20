@@ -1,16 +1,16 @@
 ﻿local DimensionsModule = {
-	getter = function(Callback) --[[ Line: 27 ]]
+	getter = function(Callback)
 		return { type = "getter", callback = Callback }
 	end,
-	consistentSize = function(Size) --[[ Line: 34 ]]
+	consistentSize = function(Size)
 		return { type = "consistentSize", size = Size }
 	end,
-	consistentUDim2 = function(Udim2) --[[ Line: 41 ]]
+	consistentUDim2 = function(Udim2)
 		return { type = "consistentUDim2", udim2 = Udim2 }
 	end
 }
 
-function DimensionsModule.withSpacing(Inner, Spacing) --[[ Line: 48 ]]
+function DimensionsModule.withSpacing(Inner, Spacing)
 	-- upvalues: DimensionsModule (copy)
 	assert(Inner.type ~= "getter", "withSpacing does not support getter. Instead, include your padding as part of your returned position.")
 	

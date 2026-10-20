@@ -3,7 +3,7 @@ local _ = require(ReactSceneUnderstanding.Parent.SceneUnderstanding)
 local SceneAnalysisContextModule = require(ReactSceneUnderstanding.SceneAnalysisContext)
 local UseSourceAssetsModule = require(ReactSceneUnderstanding.useSourceAssets)
 
-return function(p1) --[[ Line: 32 | Named "useAssetsInRange" ]]
+return function(p1)
 	-- upvalues: SceneAnalysisContextModule (copy), UseSourceAssetsModule (copy)
 	local UseResult = SceneAnalysisContextModule.use()
 	

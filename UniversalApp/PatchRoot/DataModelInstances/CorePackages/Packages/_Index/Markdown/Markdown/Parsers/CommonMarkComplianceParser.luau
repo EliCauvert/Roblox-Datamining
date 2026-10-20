@@ -9,19 +9,19 @@ local IndexTreeModule = require(script.Parent.IndexTree)
 local DefaultParserOptionsModule = require(script.Parent.DefaultParserOptions)
 local CommonMarkComplianceParserModule = {}
 
-function CommonMarkComplianceParserModule.safeParse(p1, p2) --[[ Line: 18 ]]
+function CommonMarkComplianceParserModule.safeParse(p1, p2)
 	-- upvalues: CommonMarkComplianceParserModule (copy)
-	local Success, Result = xpcall(function() --[[ Line: 19 ]]
+	local Success, Result = xpcall(function()
 		-- upvalues: CommonMarkComplianceParserModule (upval), p1 (copy), p2 (copy)
 		return CommonMarkComplianceParserModule.parse(p1, p2)
-	end, function(Err): string --[[ Line: 21 ]]
+	end, function(Err): string
 		return `{Err}\n{debug.traceback()}`
 	end)
 	
 	return Success, Result
 end
 
-function CommonMarkComplianceParserModule.parse(p1, p2) --[[ Line: 27 ]]
+function CommonMarkComplianceParserModule.parse(p1, p2)
 	-- upvalues: DashModule (copy), DefaultParserOptionsModule (copy), UnindentTagsModule (copy), TokenizeModule (copy), BuildTreeModule (copy), PostProcessTreeModule (copy), IndexTreeModule (copy)
 	local JoinDeepResult = DashModule.joinDeep(DefaultParserOptionsModule, p2 or {})
 	local TreeModule = BuildTreeModule(TokenizeModule(UnindentTagsModule(p1), JoinDeepResult), JoinDeepResult)

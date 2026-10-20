@@ -6,7 +6,7 @@ local ViewModule = require(Foundation.Components.View)
 local ConstantsModule = require(Foundation.Components.HeaderBar.constants)
 local UseHeaderBarContextModule = require(Foundation.Components.HeaderBar.useHeaderBarContext)
 
-return function(p1) --[[ Line: 16 | Named "HeaderBarLeading" ]]
+return function(p1)
 	-- upvalues: UseHeaderBarContextModule (copy), ReactModule (copy), HeaderBarContextModule (copy), HeaderBarSlotModule (copy), ViewModule (copy), ConstantsModule (copy)
 	local UseHeaderBarContextModuleResult = UseHeaderBarContextModule()
 	

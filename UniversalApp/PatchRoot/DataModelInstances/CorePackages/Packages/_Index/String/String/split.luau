@@ -5,7 +5,7 @@ local Parent1 = Parent.Parent
 local _ = require(Parent1.ES7Types)
 local MAXSAFEINTEGER = require(Parent1.Number).MAX_SAFE_INTEGER
 
-return function(Text: string, p1, p2: number) --[[ Line: 27 | Named "split" ]]
+return function(Text: string, p1, p2: number)
 	-- upvalues: MAXSAFEINTEGER (copy), FindOrModule (copy), SliceModule (copy)
 	if p1 == nil then
 		return { Text }

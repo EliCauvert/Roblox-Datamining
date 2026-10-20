@@ -1,6 +1,6 @@
 ﻿local CoreScriptSyncService = game:GetService("CoreScriptSyncService")
 
-return function(Text: string, Pattern, p1) --[[ Line: 4 | Named "getFileInfo" ]]
+return function(Text: string, Pattern, p1)
 	-- upvalues: CoreScriptSyncService (copy)
 	local ModuleScript = game
 	

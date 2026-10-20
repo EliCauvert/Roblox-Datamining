@@ -22,7 +22,7 @@ local config = {
 	RightUpperArm = { "Spine", "Chest", "RightClavicle" }
 }
 
-local function buildPositionCurveSchema() --[[ Line: 83 ]]
+local function buildPositionCurveSchema()
 	return {
 		ClassName = "Vector3Curve",
 		Name = "Position",
@@ -35,7 +35,7 @@ local function buildPositionCurveSchema() --[[ Line: 83 ]]
 	}
 end
 
-local function buildRotationCurveSchema() --[[ Line: 96 ]]
+local function buildRotationCurveSchema()
 	return {
 		ClassName = "EulerRotationCurve",
 		Name = "Rotation",
@@ -48,7 +48,7 @@ local function buildRotationCurveSchema() --[[ Line: 96 ]]
 	}
 end
 
-local function buildFaceControlsSchema() --[[ Line: 109 ]]
+local function buildFaceControlsSchema()
 	-- upvalues: Names (copy)
 	local _children = {}
 	
@@ -63,7 +63,7 @@ local function buildFaceControlsSchema() --[[ Line: 109 ]]
 	}
 end
 
-local function convertBoneSchemaToChildren(AvatarBoneSchema, p1) --[[ Line: 129 ]]
+local function convertBoneSchemaToChildren(AvatarBoneSchema, p1)
 	-- upvalues: buildPositionCurveSchema (copy), buildRotationCurveSchema (copy), convertBoneSchemaToChildren (copy)
 	local List = {}
 	
@@ -96,7 +96,7 @@ end
 
 local _ = nil
 
-local function v10(Name, List) --[[ Line: 176 ]]
+local function v10(Name, List)
 	-- upvalues: buildPositionCurveSchema (copy), buildRotationCurveSchema (copy), AssetCalculatorModule (copy), v10 (ref), R15plusUtilsModule (copy), config (copy), convertBoneSchemaToChildren (copy), buildFaceControlsSchema (copy)
 	local List1 = {}
 	table.insert(List1, (buildPositionCurveSchema()))
@@ -149,7 +149,7 @@ local function v10(Name, List) --[[ Line: 176 ]]
 	}
 end
 
-return ((function() --[[ Line: 242 | Named "buildSchema" ]]
+return ((function()
 	-- upvalues: AssetCalculatorModule (copy), v10 (ref)
 	local List = {}
 	

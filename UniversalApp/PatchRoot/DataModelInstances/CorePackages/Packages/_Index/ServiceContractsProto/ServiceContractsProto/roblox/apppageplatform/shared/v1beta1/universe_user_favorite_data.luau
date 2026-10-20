@@ -3,14 +3,14 @@ local TypeRegistryModule = require(script.Parent.Parent.Parent.Parent.Parent.pro
 local Module = {}
 Module.__index = Module
 
-function Module.new(p1) --[[ Line: 42 ]]
+function Module.new(p1)
 	-- upvalues: Module (copy)
 	return (setmetatable({
 		is_favorited = p1 ~= nil and p1.is_favorited ~= nil and p1.is_favorited
 	}, Module))
 end
 
-function Module:encode() --[[ Line: 48 ]]
+function Module:encode()
 	-- upvalues: ProtoModule (copy)
 	local Buf = buffer.create(0)
 	local Count = 0
@@ -25,7 +25,7 @@ function Module:encode() --[[ Line: 48 ]]
 	return Buf1
 end
 
-function Module.decode(Buf) --[[ Line: 62 ]]
+function Module.decode(Buf)
 	-- upvalues: Module (copy), ProtoModule (copy)
 	local NewModule = Module.new()
 	local v1 = 0
@@ -58,7 +58,7 @@ function Module.decode(Buf) --[[ Line: 62 ]]
 	return NewModule
 end
 
-function Module:jsonEncode() --[[ Line: 105 ]]
+function Module:jsonEncode()
 	local t = {}
 	
 	if self.is_favorited then
@@ -67,7 +67,7 @@ function Module:jsonEncode() --[[ Line: 105 ]]
 	return t
 end
 
-function Module:jsonDecode() --[[ Line: 115 ]]
+function Module:jsonDecode()
 	-- upvalues: Module (copy)
 	local NewModule = Module.new()
 	

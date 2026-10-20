@@ -33,14 +33,14 @@ local config = {
 }
 local config1 = { textSizeOffset = 0 }
 
-function StyleProvider.init(p1) --[[ Line: 54 ]]
+function StyleProvider.init(p1)
 	p1:setState({
 		style = p1.props.style,
 		derivedValues = p1.props.derivedValues
 	})
 end
 
-function StyleProvider.updateTextSizeOffset(p1, BodyFont) --[[ Line: 63 ]]
+function StyleProvider.updateTextSizeOffset(p1, BodyFont)
 	-- upvalues: GetTextSizeOffsetModule (copy)
 	local TextSizeOffsetModule, TextSizeOffsetModule2 = GetTextSizeOffsetModule(BodyFont)
 	
@@ -51,13 +51,13 @@ function StyleProvider.updateTextSizeOffset(p1, BodyFont) --[[ Line: 63 ]]
 	end
 end
 
-function StyleProvider.didUpdate(p1, _, p2) --[[ Line: 74 ]]
+function StyleProvider.didUpdate(p1, _, p2)
 	if p2.style and p2.style.Settings.PreferredTextSize ~= p1.state.style.Settings.PreferredTextSize then
 		p1:updateTextSizeOffset(p1.state.style.Font.Body.Font)
 	end
 end
 
-function StyleProvider.render(p1) --[[ Line: 83 ]]
+function StyleProvider.render(p1)
 	-- upvalues: Object (copy), config (copy), config1 (copy), ThemesModule (copy), ConstantsModule (copy), GetTokensFunction (copy), GetFoundationTokensFunction (copy), Mappers (copy), GetFontFromNameModule (copy), RoactModule (copy), StyleContextModule (copy)
 	local AssignResult = Object.assign({}, config, p1.state.style)
 	local AssignResult1 = Object.assign({}, config1, p1.state.derivedValues)
@@ -78,7 +78,7 @@ function StyleProvider.render(p1) --[[ Line: 83 ]]
 	return RoactModule.createElement(StyleContextModule.Provider, {
 		value = {
 			style = AssignResult,
-			update = function(_, Style) --[[ Line: 108 ]]
+			update = function(_, Style)
 				-- upvalues: p1 (copy)
 				if p1.mounted then
 					p1:setState({ style = Style })
@@ -89,11 +89,11 @@ function StyleProvider.render(p1) --[[ Line: 83 ]]
 	}, RoactModule.oneChild(p1.props[RoactModule.Children]))
 end
 
-function StyleProvider.didMount(p1) --[[ Line: 121 ]]
+function StyleProvider.didMount(p1)
 	p1.mounted = true
 end
 
-function StyleProvider.willUnmount(p1) --[[ Line: 125 ]]
+function StyleProvider.willUnmount(p1)
 	p1.mounted = false
 end
 

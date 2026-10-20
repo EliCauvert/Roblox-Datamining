@@ -2,7 +2,7 @@
 local SetTimeoutFunction = LuauPolyfillModule.setTimeout
 local ClearTimeoutFunction = LuauPolyfillModule.clearTimeout
 local config = {
-	runAfterInteractions = function(_, Callback: () -> ()) --[[ Line: 20 ]]
+	runAfterInteractions = function(_, Callback: () -> ())
 		Callback()
 		
 		return nil
@@ -11,7 +11,7 @@ local config = {
 local BatchinatorModule = {}
 BatchinatorModule.__index = BatchinatorModule
 
-function BatchinatorModule.new(_callback, _delay) --[[ Line: 64 ]]
+function BatchinatorModule.new(_callback, _delay)
 	-- upvalues: BatchinatorModule (copy)
 	local self = setmetatable({}, BatchinatorModule)
 	self._delay = _delay
@@ -20,7 +20,7 @@ function BatchinatorModule.new(_callback, _delay) --[[ Line: 64 ]]
 	return self
 end
 
-function BatchinatorModule:dispose(p1) --[[ Line: 71 ]]
+function BatchinatorModule:dispose(p1)
 	local Config = if p1 then p1 else { abort = false }
 	
 	if self._taskHandle then
@@ -33,19 +33,19 @@ function BatchinatorModule:dispose(p1) --[[ Line: 71 ]]
 	end
 end
 
-function BatchinatorModule:schedule() --[[ Line: 85 ]]
+function BatchinatorModule:schedule()
 	-- upvalues: SetTimeoutFunction (copy), config (copy), ClearTimeoutFunction (copy)
 	if not self._taskHandle then
-		local SetTimeoutResult = SetTimeoutFunction(function() --[[ Line: 90 ]]
+		local SetTimeoutResult = SetTimeoutFunction(function()
 			-- upvalues: self (copy), config (upval)
-			self._taskHandle = config:runAfterInteractions(function() --[[ Line: 91 ]]
+			self._taskHandle = config:runAfterInteractions(function()
 				-- upvalues: self (upval)
 				self._taskHandle = nil
 				self._callback()
 			end)
 		end, self._delay)
 		self._taskHandle = {
-			cancel = function() --[[ Line: 100 ]]
+			cancel = function()
 				-- upvalues: ClearTimeoutFunction (upval), SetTimeoutResult (copy)
 				return ClearTimeoutFunction(SetTimeoutResult)
 			end

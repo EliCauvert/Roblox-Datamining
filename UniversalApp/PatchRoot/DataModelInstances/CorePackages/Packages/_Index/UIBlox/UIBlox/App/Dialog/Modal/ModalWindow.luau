@@ -21,18 +21,18 @@ ModalWindow.validateProps = TModule.strictInterface({
 })
 ModalWindow.defaultProps = { distanceFromTop = 0 }
 
-function ModalWindow.init(p1) --[[ Line: 48 ]]
+function ModalWindow.init(p1)
 	-- upvalues: RoactModule (copy)
 	p1.contentSize, p1.changeContentSize = RoactModule.createBinding(Vector2.new(0, 0))
 end
 
-function ModalWindow:isFullWidth(X: number): boolean --[[ Line: 53 ]]
+function ModalWindow:isFullWidth(X: number): boolean
 	return X < 540
 end
 
-function ModalWindow.render(p1) --[[ Line: 57 ]]
+function ModalWindow.render(p1)
 	-- upvalues: WithStyleModule (copy), GetModalWindowWidthModule (copy), RoactModule (copy), ImageSetComponentModule (copy), ImagesModule (copy), _Rect (copy), FitFrameVertical (copy)
-	return WithStyleModule(function(p2) --[[ Line: 58 ]]
+	return WithStyleModule(function(p2)
 		-- upvalues: p1 (copy), GetModalWindowWidthModule (upval), RoactModule (upval), ImageSetComponentModule (upval), ImagesModule (upval), _Rect (upval), FitFrameVertical (upval)
 		local Theme = p2.Theme
 		local ScreenSize = p1.props.screenSize
@@ -81,7 +81,7 @@ function ModalWindow.render(p1) --[[ Line: 57 ]]
 			ClipsDescendants = true,
 			Selectable = false,
 			Position = Position,
-			Size = p1.contentSize:map(function(Vector): UDim2 --[[ Line: 112 ]]
+			Size = p1.contentSize:map(function(Vector): UDim2
 				return UDim2.new(0, Vector.X, 0, Vector.Y)
 			end),
 			AnchorPoint = AnchorPoint,
@@ -97,7 +97,7 @@ function ModalWindow.render(p1) --[[ Line: 57 ]]
 				BackgroundTransparency = 1,
 				BorderSizePixel = 0,
 				width = _UDim,
-				[RoactModule.Change.AbsoluteSize] = function(Frame) --[[ Line: 133 ]]
+				[RoactModule.Change.AbsoluteSize] = function(Frame)
 					-- upvalues: p1 (upval)
 					p1.changeContentSize(Frame.AbsoluteSize)
 				end

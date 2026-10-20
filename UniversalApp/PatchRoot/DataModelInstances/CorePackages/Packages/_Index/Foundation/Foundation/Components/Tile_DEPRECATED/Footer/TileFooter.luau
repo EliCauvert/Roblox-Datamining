@@ -3,7 +3,7 @@ local ReactModule = require(Foundation.Parent.React)
 local ViewModule = require(Foundation.Components.View)
 local UseTileModule = require(Foundation.Components.Tile_DEPRECATED.useTile)
 
-return function(p1) --[[ Line: 14 | Named "TileFooter" ]]
+return function(p1)
 	-- upvalues: UseTileModule (copy), ReactModule (copy), ViewModule (copy)
 	return ReactModule.createElement(ViewModule, {
 		LayoutOrder = 2,

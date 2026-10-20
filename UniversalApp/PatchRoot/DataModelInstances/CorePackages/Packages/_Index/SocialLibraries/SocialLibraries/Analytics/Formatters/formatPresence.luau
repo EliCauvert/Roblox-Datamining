@@ -8,7 +8,7 @@ local config = {
 	[PresenceType.Online] = PresenceTypes.Online.rawValue()
 }
 
-return function(p1) --[[ Line: 15 ]]
+return function(p1)
 	-- upvalues: config (copy)
 	return config[p1]
 end

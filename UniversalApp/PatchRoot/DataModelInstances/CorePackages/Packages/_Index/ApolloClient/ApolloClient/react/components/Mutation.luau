@@ -5,7 +5,7 @@ local _ = require(script.Parent.types)
 local UseMutationFunction = require(script.Parent.Parent.hooks).useMutation
 
 return {
-	Mutation = function(p1) --[[ Line: 31 ]]
+	Mutation = function(p1)
 		-- upvalues: UseMutationFunction (copy), Boolean (copy)
 		local Unpacked, Unpacked2 = table.unpack(UseMutationFunction(p1.mutation, p1), 1, 2)
 		

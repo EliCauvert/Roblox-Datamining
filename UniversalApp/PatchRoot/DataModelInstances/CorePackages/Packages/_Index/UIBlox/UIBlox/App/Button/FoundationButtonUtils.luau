@@ -53,7 +53,7 @@ return {
 		[ButtonTypeModule.Secondary] = ButtonVariant.Subtle
 	},
 	sizeMapping = SizeMapping,
-	findIcon = function(p1) --[[ Line: 61 ]]
+	findIcon = function(p1)
 		-- upvalues: Uiblox (copy), ImagesInverseModule (copy)
 		if not p1 then
 			return nil
@@ -66,11 +66,11 @@ return {
 		end
 		return Image
 	end,
-	getSizeMapping = function(p1, Vector, p2) --[[ Line: 75 ]]
+	getSizeMapping = function(p1, Vector, p2)
 		-- upvalues: SizeMapping (copy), InputSize (copy)
 		return if p1 then SizeMapping[p1] elseif Vector then if p2.Size.Size_1200 <= Vector.Y.Offset then InputSize.Large elseif Vector.Y.Scale > 0 then InputSize.Medium elseif p2.Size.Size_1000 <= Vector.Y.Offset then InputSize.Medium elseif p2.Size.Size_800 <= Vector.Y.Offset then InputSize.Small else InputSize.XSmall else nil
 	end,
-	getWidth = function(p1, p2, p3) --[[ Line: 94 ]]
+	getWidth = function(p1, p2, p3)
 		-- upvalues: config (copy)
 		if not p1 then
 			return if p2 then p2.X elseif p3 then nil else UDim.new(1, 0)
@@ -82,10 +82,10 @@ return {
 		end
 		return if p3 then nil else UDim.new(1, 0)
 	end,
-	getMaxWidth = function(p1, p2) --[[ Line: 115 ]]
+	getMaxWidth = function(p1, p2)
 		return if p1 == nil then nil elseif p2 == nil then 640 else p2
 	end,
-	getFitContentSize = function(p1, p2, p3): Vector2? --[[ Line: 124 ]]
+	getFitContentSize = function(p1, p2, p3): Vector2?
 		-- upvalues: SizeMapping (copy), config1 (copy), GetTextSizeModule (copy), _Vector2 (copy)
 		local SizeMappingEntry = if p2 then SizeMapping[p2] else nil
 		local Entry = if SizeMappingEntry then config1[SizeMappingEntry] else nil
@@ -98,7 +98,7 @@ return {
 			return nil
 		end
 	end,
-	getTestId = function(p1) --[[ Line: 139 ]]
+	getTestId = function(p1)
 		return if p1 and #p1 ~= 0 then p1:match("data%-testid=([^%s]+)") else nil
 	end
 }

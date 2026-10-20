@@ -8,7 +8,7 @@ local ComposeStyleVariantModule = require(Foundation.Utility.composeStyleVariant
 local _ = require(Foundation.Providers.Style.Tokens)
 local VariantsContextModule = require(Foundation.Providers.Style.VariantsContext)
 
-local function variantsFactory(p1) --[[ Line: 38 ]]
+local function variantsFactory(p1)
 	-- upvalues: CardDensityModule (copy), CardHeaderSizeModule (copy), IconSizeModule (copy), CardVariantModule (copy), CardHeightModule (copy)
 	local ScaledFontSize = p1.Typography.BodySmall.FontSize * p1.Typography.BodySmall.LineHeight
 	local ScaledFontSize1 = p1.Typography.BodyMedium.FontSize * p1.Typography.BodyMedium.LineHeight
@@ -127,7 +127,7 @@ local function variantsFactory(p1) --[[ Line: 38 ]]
 	}
 end
 
-return function(p1, p2, p3, p4, p5, p6, p7, p8) --[[ Line: 174 | Named "useCardVariants" ]]
+return function(p1, p2, p3, p4, p5, p6, p7, p8)
 	-- upvalues: VariantsContextModule (copy), variantsFactory (copy), ComposeStyleVariantModule (copy)
 	local Card = VariantsContextModule.useVariants("Card", variantsFactory, p1)
 	local Density = Card.densities[p3]

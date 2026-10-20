@@ -1,6 +1,6 @@
 ﻿local JoinModule = require(script.Parent.join)
 
-local function flatten(List) --[[ Line: 4 ]]
+local function flatten(List)
 	-- upvalues: JoinModule (copy), flatten (copy)
 	local ValueType = type(List)
 	assert(ValueType == "table", "expected a table for first argument, got " .. ValueType)

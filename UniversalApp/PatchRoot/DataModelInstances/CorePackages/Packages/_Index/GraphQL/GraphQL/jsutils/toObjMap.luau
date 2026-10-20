@@ -1,7 +1,7 @@
 ﻿local _ = require(script.Parent.ObjMap)
 
 return {
-	toObjMap = function(List) --[[ Line: 12 ]]
+	toObjMap = function(List)
 		local t = {}
 		
 		for i, value in pairs(List) do

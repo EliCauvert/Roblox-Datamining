@@ -5,7 +5,7 @@ local ConstantsInterfaceModule = require(Parent.ConstantsInterface)
 local GetFFlagUGCValidationEyebrowEyelashCategoryModule = require(Parent.flags.getFFlagUGCValidationEyebrowEyelashCategory)
 local Parts = string.split(require(Parent.flags.getFStringUGCLCAllowedAssetTypeIds)(), ",")
 
-return function(p1, AssetType, BundleType) --[[ Line: 9 | Named "getUploadCategory" ]]
+return function(p1, AssetType, BundleType)
 	-- upvalues: ValidationEnumsModule (copy), ConstantsModule (copy), Parts (copy), GetFFlagUGCValidationEyebrowEyelashCategoryModule (copy), ConstantsInterfaceModule (copy)
 	if BundleType ~= nil then
 		return if BundleType == Enum.BundleType.BodyParts then ValidationEnumsModule.UploadCategory.FULL_BODY elseif BundleType == Enum.BundleType.Animations then ValidationEnumsModule.UploadCategory.ANIMATION_PACK else ValidationEnumsModule.UploadCategory.BOTH_SHOES

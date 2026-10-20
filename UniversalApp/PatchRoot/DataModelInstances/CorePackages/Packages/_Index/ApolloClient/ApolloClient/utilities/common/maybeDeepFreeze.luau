@@ -6,7 +6,7 @@ local Array = LuauPolyfillModule.Array
 require(script.Parent.Parent.globals)
 local IsNonNullObjectFunction = require(script.Parent.objects).isNonNullObject
 
-local function deepFreeze(p1) --[[ Line: 22 ]]
+local function deepFreeze(p1)
 	-- upvalues: Set (copy), IsNonNullObjectFunction (copy), Object (copy), Array (copy)
 	local NewSet = Set.new({ p1 })
 	
@@ -15,7 +15,7 @@ local function deepFreeze(p1) --[[ Line: 22 ]]
 			if not table.isfrozen(value) then
 				Object.freeze(value)
 			end
-			Array.forEach(Object.keys(value), function(p2) --[[ Line: 30 ]]
+			Array.forEach(Object.keys(value), function(p2)
 				-- upvalues: IsNonNullObjectFunction (upval), value (copy), NewSet (copy)
 				if IsNonNullObjectFunction(value[p2]) then
 					NewSet:add(value[p2])
@@ -26,7 +26,7 @@ local function deepFreeze(p1) --[[ Line: 22 ]]
 	return p1
 end
 
-function MaybeDeepFreezeModule.maybeDeepFreeze(p2) --[[ Line: 41 ]]
+function MaybeDeepFreezeModule.maybeDeepFreeze(p2)
 	-- upvalues: deepFreeze (copy)
 	if _G.__DEV__ then
 		deepFreeze(p2)

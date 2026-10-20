@@ -1,6 +1,6 @@
 ﻿local SpyModule = require(script.Parent.Parent.Spy)
 
-return function(p1) --[[ Line: 4 ]]
+return function(p1)
 	-- upvalues: SpyModule (copy)
 	local IsResult = SpyModule.is(p1)
 	

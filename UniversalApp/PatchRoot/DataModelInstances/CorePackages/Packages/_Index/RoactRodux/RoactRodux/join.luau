@@ -1,4 +1,4 @@
-﻿return function(...) --[[ Line: 1 | Named "join" ]]
+﻿return function(...)
 	local t = {}
 	
 	for i = 1, select("#", ...) do

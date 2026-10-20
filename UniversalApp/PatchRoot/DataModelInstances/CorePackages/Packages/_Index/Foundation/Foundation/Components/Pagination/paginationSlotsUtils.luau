@@ -8,10 +8,10 @@ local config = {
 
 return {
 	NAV_SLOT_IDS = config,
-	getPageSlotId = function(p1): string --[[ Line: 71 ]]
+	getPageSlotId = function(p1): string
 		return `page-{p1}`
 	end,
-	getPaginationSelectableSlotOrder = function(p1) --[[ Line: 76 ]]
+	getPaginationSelectableSlotOrder = function(p1)
 		-- upvalues: config (copy), PaginationDirectionModule (copy)
 		local List = {}
 		
@@ -36,7 +36,7 @@ return {
 		end
 		return List
 	end,
-	getVisiblePageSlots = function(p2: number, p3: number) --[[ Line: 30 ]]
+	getVisiblePageSlots = function(p2: number, p3: number)
 		if p3 <= 7 then
 			local List = {}
 			

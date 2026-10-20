@@ -26,7 +26,7 @@ local JsxDEVFunction = ReactElementModule.jsxDEV
 local SetExtraStackFrameFunction = require(Parent.Shared).ReactSharedInternals.ReactDebugCurrentFrame.setExtraStackFrame
 local DescribeUnknownElementTypeFrameInDEVFunction = require(Parent.Shared).ReactComponentStackFrame.describeUnknownElementTypeFrameInDEV
 
-local function _(p1) --[[ Line: 64 | Named "setCurrentlyValidatingElement" ]]
+local function _(p1)
 	-- upvalues: ReactGlobalsModule (copy), DescribeUnknownElementTypeFrameInDEVFunction (copy), SetExtraStackFrameFunction (copy)
 	if ReactGlobalsModule.__DEV__ then
 		if p1 then
@@ -42,11 +42,11 @@ end
 
 local Flag = not ReactGlobalsModule.__DEV__ and nil
 
-local _ = function(p1, p2): boolean --[[ Line: 92 | Named "hasOwnProperty" ]]
+local _ = function(p1, p2): boolean
 	return p1[p2] ~= nil
 end
 
-local _ = function(): string --[[ Line: 96 | Named "getDeclarationErrorAddendum" ]]
+local _ = function(): string
 	-- upvalues: ReactCurrentOwner (copy), GetComponentNameFunction (copy)
 	if ReactCurrentOwner.current then
 		local ComponentName = GetComponentNameFunction(ReactCurrentOwner.current.type)
@@ -58,11 +58,11 @@ local _ = function(): string --[[ Line: 96 | Named "getDeclarationErrorAddendum"
 	return ""
 end
 
-local _ = function(p1): string --[[ Line: 107 | Named "getSourceInfoErrorAddendum" ]]
+local _ = function(p1): string
 	return if p1 == nil then "" else "\n\nCheck your code at " .. string.gsub(p1.fileName, "^.*[\\/]", "") .. ":" .. p1.lineNumber .. "."
 end
 
-local _ = function(p1): string --[[ Line: 117 | Named "getSourceInfoErrorAddendumForProps" ]]
+local _ = function(p1): string
 	if p1 == nil then
 		return ""
 	else
@@ -74,7 +74,7 @@ end
 
 local t = {}
 
-local function getCurrentComponentErrorInfo(p1): string --[[ Line: 134 ]]
+local function getCurrentComponentErrorInfo(p1): string
 	-- upvalues: ReactCurrentOwner (copy), GetComponentNameFunction (copy), Boolean (copy)
 	local Formatted = nil
 	repeat
@@ -102,7 +102,7 @@ local function getCurrentComponentErrorInfo(p1): string --[[ Line: 134 ]]
 	return Formatted
 end
 
-local function validateExplicitKey(p1, p2, Key) --[[ Line: 176 ]]
+local function validateExplicitKey(p1, p2, Key)
 	-- upvalues: getCurrentComponentErrorInfo (copy), t (copy), ReactCurrentOwner (copy), GetComponentNameFunction (copy), ReactGlobalsModule (copy), DescribeUnknownElementTypeFrameInDEVFunction (copy), SetExtraStackFrameFunction (copy), Console (copy)
 	if p1._store == nil or p1._store.validated then return end
 	p1._store.validated = true
@@ -134,7 +134,7 @@ local function validateExplicitKey(p1, p2, Key) --[[ Line: 176 ]]
 	end
 end
 
-local function validateChildKeys(Children, REACTFRAGMENTTYPE) --[[ Line: 251 ]]
+local function validateChildKeys(Children, REACTFRAGMENTTYPE)
 	-- upvalues: Array (copy), IsValidElementFunction (copy), validateExplicitKey (copy), GetIteratorFnFunction (copy)
 	if typeof(Children) ~= "table" then return end
 	if Array.isArray(Children) then
@@ -170,7 +170,7 @@ local function validateChildKeys(Children, REACTFRAGMENTTYPE) --[[ Line: 251 ]]
 	end
 end
 
-local function validatePropTypes(p1) --[[ Line: 294 ]]
+local function validatePropTypes(p1)
 	-- upvalues: ReactGlobalsModule (copy), GetComponentNameFunction (copy), CheckPropTypesFunction (copy), Flag (ref), Console (copy)
 	if ReactGlobalsModule.__DEV__ or ReactGlobalsModule.__DISABLE_ALL_WARNINGS_EXCEPT_PROP_VALIDATION__ then
 		local Type = p1.type
@@ -195,7 +195,7 @@ local function validatePropTypes(p1) --[[ Line: 294 ]]
 	end
 end
 
-local function validateFragmentProps(p1) --[[ Line: 347 ]]
+local function validateFragmentProps(p1)
 	-- upvalues: ReactGlobalsModule (copy), Object (copy), DescribeUnknownElementTypeFrameInDEVFunction (copy), SetExtraStackFrameFunction (copy), Console (copy)
 	if ReactGlobalsModule.__DEV__ then
 		local KeysResult = Object.keys(p1.props)
@@ -238,7 +238,7 @@ local function validateFragmentProps(p1) --[[ Line: 347 ]]
 	end
 end
 
-local function jsxWithValidation(REACTFRAGMENTTYPE1, p2, p3, p4, p5, p6) --[[ Line: 373 ]]
+local function jsxWithValidation(REACTFRAGMENTTYPE1, p2, p3, p4, p5, p6)
 	-- upvalues: IsValidElementTypeFunction (copy), Object (copy), ReactCurrentOwner (copy), GetComponentNameFunction (copy), Array (copy), REACTELEMENTTYPE (copy), InspectFunction (copy), ReactGlobalsModule (copy), Console (copy), JsxDEVFunction (copy), validateChildKeys (copy), WarnAboutSpreadingKeyToJSX (copy), REACTFRAGMENTTYPE (copy), validateFragmentProps (copy), validatePropTypes (copy)
 	local IsValidElementType = IsValidElementTypeFunction(REACTFRAGMENTTYPE1)
 	
@@ -325,15 +325,15 @@ end
 
 return {
 	jsxWithValidation = jsxWithValidation,
-	jsxWithValidationStatic = function(p7, p8, p9) --[[ Line: 495 ]]
+	jsxWithValidationStatic = function(p7, p8, p9)
 		-- upvalues: jsxWithValidation (copy)
 		return (jsxWithValidation(p7, p8, p9, true))
 	end,
-	jsxWithValidationDynamic = function(p7, p8, p9) --[[ Line: 499 ]]
+	jsxWithValidationDynamic = function(p7, p8, p9)
 		-- upvalues: jsxWithValidation (copy)
 		return (jsxWithValidation(p7, p8, p9, false))
 	end,
-	createElementWithValidation = function(REACTFRAGMENTTYPE1, p7, ...) --[[ Line: 504 ]]
+	createElementWithValidation = function(REACTFRAGMENTTYPE1, p7, ...)
 		-- upvalues: IsValidElementTypeFunction (copy), Object (copy), ReactCurrentOwner (copy), GetComponentNameFunction (copy), Array (copy), REACTELEMENTTYPE (copy), InspectFunction (copy), ReactGlobalsModule (copy), Console (copy), CreateElementFunction (copy), validateChildKeys (copy), REACTFRAGMENTTYPE (copy), validateFragmentProps (copy), validatePropTypes (copy)
 		local IsValidElementType = IsValidElementTypeFunction(REACTFRAGMENTTYPE1)
 		
@@ -410,7 +410,7 @@ return {
 			return Element
 		end
 	end,
-	cloneElementWithValidation = function(p8, p9, ...) --[[ Line: 637 ]]
+	cloneElementWithValidation = function(p8, p9, ...)
 		-- upvalues: CloneElementFunction (copy), validateChildKeys (copy), validatePropTypes (copy)
 		local list = { p8, p9, ... }
 		local CloneElementResult = CloneElementFunction(p8, p9, ...)

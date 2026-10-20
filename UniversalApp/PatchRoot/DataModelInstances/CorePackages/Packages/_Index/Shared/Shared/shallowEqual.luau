@@ -1,6 +1,6 @@
 ﻿local ObjectIsModule = require(script.Parent.objectIs)
 
-return function(List, List1): boolean --[[ Line: 18 | Named "shallowEqual" ]]
+return function(List, List1): boolean
 	-- upvalues: ObjectIsModule (copy)
 	if ObjectIsModule(List, List1) then
 		return true

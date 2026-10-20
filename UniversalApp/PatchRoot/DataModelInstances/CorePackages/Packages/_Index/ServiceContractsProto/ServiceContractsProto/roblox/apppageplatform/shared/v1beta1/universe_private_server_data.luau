@@ -3,14 +3,14 @@ local TypeRegistryModule = require(script.Parent.Parent.Parent.Parent.Parent.pro
 local Module = {}
 Module.__index = Module
 
-function Module.new(p1) --[[ Line: 45 ]]
+function Module.new(p1)
 	-- upvalues: Module (copy)
 	return (setmetatable({
 		private_servers_enabled = p1 ~= nil and p1.private_servers_enabled ~= nil and p1.private_servers_enabled
 	}, Module))
 end
 
-function Module:encode() --[[ Line: 55 ]]
+function Module:encode()
 	-- upvalues: ProtoModule (copy)
 	local Buf = buffer.create(0)
 	local Count = 0
@@ -25,7 +25,7 @@ function Module:encode() --[[ Line: 55 ]]
 	return Buf1
 end
 
-function Module.decode(Buf) --[[ Line: 69 ]]
+function Module.decode(Buf)
 	-- upvalues: Module (copy), ProtoModule (copy)
 	local NewModule = Module.new()
 	local v1 = 0
@@ -58,7 +58,7 @@ function Module.decode(Buf) --[[ Line: 69 ]]
 	return NewModule
 end
 
-function Module:jsonEncode() --[[ Line: 112 ]]
+function Module:jsonEncode()
 	local t = {}
 	
 	if self.private_servers_enabled then
@@ -67,7 +67,7 @@ function Module:jsonEncode() --[[ Line: 112 ]]
 	return t
 end
 
-function Module:jsonDecode() --[[ Line: 122 ]]
+function Module:jsonDecode()
 	-- upvalues: Module (copy)
 	local NewModule = Module.new()
 	

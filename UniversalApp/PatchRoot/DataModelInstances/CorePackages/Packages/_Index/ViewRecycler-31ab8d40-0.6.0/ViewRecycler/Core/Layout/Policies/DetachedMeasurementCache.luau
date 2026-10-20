@@ -1,4 +1,4 @@
-﻿local function _(p1: number): number? --[[ Line: 19 | Named "resolveCapacity" ]]
+﻿local function _(p1: number): number?
 	if p1 == nil then
 		return 256
 	elseif p1 == 1e999 then
@@ -11,7 +11,7 @@
 end
 
 return {
-	new = function(p1: number) --[[ Line: 33 ]]
+	new = function(p1: number)
 		local v1 = nil
 		if p1 == nil then
 			v1 = 256
@@ -26,7 +26,7 @@ return {
 		local Previous = nil
 		local Count = 0
 		
-		local function _(p2) --[[ Line: 40 | Named "unlink" ]]
+		local function _(p2)
 			-- upvalues: Next (ref), Previous (ref)
 			if p2.previous == nil then
 				Next = p2.next
@@ -42,7 +42,7 @@ return {
 			p2.next = nil
 		end
 		
-		local _ = function(p2) --[[ Line: 55 | Named "append" ]]
+		local _ = function(p2)
 			-- upvalues: Previous (ref), Next (ref)
 			p2.previous = Previous
 			
@@ -55,7 +55,7 @@ return {
 		end
 		
 		return {
-			put = function(Key, Value) --[[ Line: 76 ]]
+			put = function(Key, Value)
 				-- upvalues: v1 (copy), t (copy), Next (ref), Previous (ref), Count (ref)
 				if v1 == 0 then return end
 				local Entry = t[Key]
@@ -117,7 +117,7 @@ return {
 					Previous = Entry
 				end
 			end,
-			take = function(Key) --[[ Line: 65 ]]
+			take = function(Key)
 				-- upvalues: t (copy), Next (ref), Previous (ref), Count (ref)
 				local Entry = t[Key]
 				

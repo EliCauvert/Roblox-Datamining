@@ -1,61 +1,61 @@
 ﻿local ReactModule = require(script:FindFirstAncestor("ReactUtils").Parent.React)
 local BindingsModule = {
-	map = function(BindingResult, p1) --[[ Line: 27 ]]
+	map = function(BindingResult, p1)
 		return BindingResult:map(p1)
 	end,
-	binding = function(JoinBindingsResult) --[[ Line: 32 ]]
+	binding = function(JoinBindingsResult)
 		return JoinBindingsResult
 	end
 }
 
-function BindingsModule.useBinding(p1) --[[ Line: 36 ]]
+function BindingsModule.useBinding(p1)
 	-- upvalues: ReactModule (copy), BindingsModule (copy)
 	local UseBindingResult, UseBindingResult2 = ReactModule.useBinding(p1)
 	
 	return BindingsModule.binding(UseBindingResult), UseBindingResult2
 end
 
-function BindingsModule.createBinding(p1) --[[ Line: 41 ]]
+function BindingsModule.createBinding(p1)
 	-- upvalues: ReactModule (copy), BindingsModule (copy)
 	local Binding, Binding2 = ReactModule.createBinding(p1)
 	
 	return BindingsModule.binding(Binding), Binding2
 end
 
-function BindingsModule.joinBindings2(First, Second) --[[ Line: 46 ]]
+function BindingsModule.joinBindings2(First, Second)
 	-- upvalues: BindingsModule (copy), ReactModule (copy)
 	return BindingsModule.binding(ReactModule.joinBindings({ first = First, second = Second }))
 end
 
-function BindingsModule.mapBindings2(First, Second, Callback) --[[ Line: 53 ]]
+function BindingsModule.mapBindings2(First, Second, Callback)
 	-- upvalues: BindingsModule (copy), ReactModule (copy)
-	return BindingsModule.map(BindingsModule.binding(ReactModule.joinBindings({ first = First, second = Second })), function(p1) --[[ Line: 59 ]]
+	return BindingsModule.map(BindingsModule.binding(ReactModule.joinBindings({ first = First, second = Second })), function(p1)
 		-- upvalues: Callback (copy)
 		return Callback(p1.first, p1.second)
 	end)
 end
 
-function BindingsModule.joinBindings3(First, Second, Third) --[[ Line: 65 ]]
+function BindingsModule.joinBindings3(First, Second, Third)
 	-- upvalues: BindingsModule (copy), ReactModule (copy)
 	return BindingsModule.binding(ReactModule.joinBindings({ first = First, second = Second, third = Third }))
 end
 
-function BindingsModule.mapBindings3(First, Second, Third, Callback) --[[ Line: 77 ]]
+function BindingsModule.mapBindings3(First, Second, Third, Callback)
 	-- upvalues: BindingsModule (copy), ReactModule (copy)
-	return BindingsModule.map(BindingsModule.binding(ReactModule.joinBindings({ first = First, second = Second, third = Third })), function(p1) --[[ Line: 89 ]]
+	return BindingsModule.map(BindingsModule.binding(ReactModule.joinBindings({ first = First, second = Second, third = Third })), function(p1)
 		-- upvalues: Callback (copy)
 		return Callback(p1.first, p1.second, p1.third)
 	end)
 end
 
-function BindingsModule.mapBindings4(First, Second, Third, Fourth, Callback) --[[ Line: 95 ]]
+function BindingsModule.mapBindings4(First, Second, Third, Fourth, Callback)
 	-- upvalues: BindingsModule (copy), ReactModule (copy)
 	return BindingsModule.map(BindingsModule.binding(ReactModule.joinBindings({
 		first = First,
 		second = Second,
 		third = Third,
 		fourth = Fourth
-	})), function(p1) --[[ Line: 109 ]]
+	})), function(p1)
 		-- upvalues: Callback (copy)
 		return Callback(p1.first, p1.second, p1.third, p1.fourth)
 	end)

@@ -1,6 +1,6 @@
 ﻿local _ = require(script.Parent.Parent.Parent.ES7Types)
 
-return function(p1, p2, p3) --[[ Line: 23 ]]
+return function(p1, p2, p3)
 	if typeof(p1) ~= "table" then
 		error(string.format("Array.slice called on %s", (typeof(p1))))
 	end

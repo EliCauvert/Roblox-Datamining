@@ -1,6 +1,6 @@
 ﻿local LoggerModule = require(game.LoadedCode.Packages.Lumberyak.Logger)
 
-local function timeit(Callback, Callback1: (any) -> ()): number --[[ Line: 5 ]]
+local function timeit(Callback, Callback1: (any) -> ()): number
 	local CallbackResult = Callback()
 	local CurrentTime = tick()
 	
@@ -10,20 +10,20 @@ local function timeit(Callback, Callback1: (any) -> ()): number --[[ Line: 5 ]]
 	return (tick() - CurrentTime) / 2000000
 end
 
-local function callSimple(p1) --[[ Line: 15 ]]
+local function callSimple(p1)
 	p1:info("foo")
 end
 
-local function callInterp(p1) --[[ Line: 19 ]]
+local function callInterp(p1)
 	p1:info("foo {}", 2)
 end
 
-local function simple() --[[ Line: 23 ]]
+local function simple()
 	-- upvalues: LoggerModule (copy)
 	local NewNumber = 0
 	local config = {
 		maxLevel = LoggerModule.Levels.Info,
-		log = function(_, _, p1) --[[ Line: 27 ]]
+		log = function(_, _, p1)
 			-- upvalues: NewNumber (ref)
 			NewNumber += p1.number
 		end
@@ -35,16 +35,16 @@ local function simple() --[[ Line: 23 ]]
 	return NewLogger
 end
 
-local function empty() --[[ Line: 38 ]]
-	return { info = function() --[[ Line: 40 ]] end }
+local function empty()
+	return { info = function() end }
 end
 
-local function off() --[[ Line: 44 ]]
+local function off()
 	-- upvalues: LoggerModule (copy)
 	local NewNumber = 0
 	local config = {
 		maxLevel = LoggerModule.Levels.Error,
-		log = function(_, _, p1) --[[ Line: 48 ]]
+		log = function(_, _, p1)
 			-- upvalues: NewNumber (ref)
 			NewNumber += p1.number
 		end
@@ -56,12 +56,12 @@ local function off() --[[ Line: 44 ]]
 	return NewLogger
 end
 
-local function short() --[[ Line: 59 ]]
+local function short()
 	-- upvalues: LoggerModule (copy)
 	local NewNumber = 0
 	local config = {
 		maxLevel = LoggerModule.Levels.Info,
-		log = function(_, _, p1) --[[ Line: 63 ]]
+		log = function(_, _, p1)
 			-- upvalues: NewNumber (ref)
 			NewNumber += p1.number
 		end
@@ -74,12 +74,12 @@ local function short() --[[ Line: 59 ]]
 	return NewResult
 end
 
-local function long() --[[ Line: 75 ]]
+local function long()
 	-- upvalues: LoggerModule (copy)
 	local NewNumber = 0
 	local config = {
 		maxLevel = LoggerModule.Levels.Info,
-		log = function(_, _, p1) --[[ Line: 79 ]]
+		log = function(_, _, p1)
 			-- upvalues: NewNumber (ref)
 			NewNumber += p1.number
 		end
@@ -91,40 +91,40 @@ local function long() --[[ Line: 75 ]]
 	return (NewLogger:new():new():new():new())
 end
 
-local function many() --[[ Line: 94 ]]
+local function many()
 	-- upvalues: LoggerModule (copy)
 	local NewNumber = 0
 	local config = {
 		maxLevel = LoggerModule.Levels.Error,
-		log = function(_, _, p1) --[[ Line: 98 ]]
+		log = function(_, _, p1)
 			-- upvalues: NewNumber (ref)
 			NewNumber += p1.number
 		end
 	}
 	local config1 = {
 		maxLevel = LoggerModule.Levels.Warning,
-		log = function(_, _, p1) --[[ Line: 104 ]]
+		log = function(_, _, p1)
 			-- upvalues: NewNumber (ref)
 			NewNumber += p1.number
 		end
 	}
 	local config2 = {
 		maxLevel = LoggerModule.Levels.Info,
-		log = function(_, _, p1) --[[ Line: 110 ]]
+		log = function(_, _, p1)
 			-- upvalues: NewNumber (ref)
 			NewNumber += p1.number
 		end
 	}
 	local config3 = {
 		maxLevel = LoggerModule.Levels.Debug,
-		log = function(_, _, p1) --[[ Line: 116 ]]
+		log = function(_, _, p1)
 			-- upvalues: NewNumber (ref)
 			NewNumber += p1.number
 		end
 	}
 	local config4 = {
 		maxLevel = LoggerModule.Levels.Trace,
-		log = function(_, _, p1) --[[ Line: 122 ]]
+		log = function(_, _, p1)
 			-- upvalues: NewNumber (ref)
 			NewNumber += p1.number
 		end
@@ -150,7 +150,7 @@ local config = {
 	["Many sinks"] = many
 }
 
-local function _(Text, Text1, p1) --[[ Line: 148 | Named "fmt" ]]
+local function _(Text, Text1, p1)
 	-- upvalues: TimeitResult (copy)
 	print(string.format("%-40s %0.3e [%0.4fx]", Text .. " - " .. Text1, p1, p1 / TimeitResult))
 end

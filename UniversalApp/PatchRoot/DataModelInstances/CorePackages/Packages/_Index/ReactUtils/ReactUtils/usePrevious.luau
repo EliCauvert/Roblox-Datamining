@@ -1,9 +1,9 @@
 ﻿local ReactModule = require(script:FindFirstAncestor("ReactUtils").Parent.React)
 
-return function(Current) --[[ Line: 10 | Named "usePrevious" ]]
+return function(Current)
 	-- upvalues: ReactModule (copy)
 	local UseRefResult = ReactModule.useRef(nil)
-	ReactModule.useEffect(function() --[[ Line: 12 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UseRefResult (copy), Current (copy)
 		UseRefResult.current = Current
 	end)

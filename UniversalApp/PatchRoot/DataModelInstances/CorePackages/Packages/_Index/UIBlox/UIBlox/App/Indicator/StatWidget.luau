@@ -16,7 +16,7 @@ local config = {
 	iconSize = require(App.ImageSet.getIconSize)(require(App.ImageSet.Enum.IconSize).Large)
 }
 
-return function(p1) --[[ Line: 65 | Named "StatWidget" ]]
+return function(p1)
 	-- upvalues: UseStyleModule (copy), CryoModule (copy), config (copy), ReactModule (copy), Label (copy), GenericTextLabelModule (copy)
 	local UseStyleModuleResult = UseStyleModule()
 	local JoinResult = CryoModule.Dictionary.join(config, p1.styleProps or {})

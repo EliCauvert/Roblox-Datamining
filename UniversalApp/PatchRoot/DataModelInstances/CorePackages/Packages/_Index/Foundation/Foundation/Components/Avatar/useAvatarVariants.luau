@@ -11,7 +11,7 @@ local StatusIndicatorShapeModule = require(Foundation.Enums.StatusIndicatorShape
 local _ = require(Foundation.Components.Types)
 local IndexBindableModule = require(Foundation.Utility.indexBindable)
 
-local function variantsFactory(p1) --[[ Line: 61 ]]
+local function variantsFactory(p1)
 	-- upvalues: FlagsModule (copy), AvatarSizeModule (copy), StatusIndicatorSizeModule (copy), UserPresenceModule (copy), StatusIndicatorShapeModule (copy), StatusIndicatorVariantModule (copy)
 	return {
 		common = {
@@ -87,7 +87,7 @@ local function variantsFactory(p1) --[[ Line: 61 ]]
 	}
 end
 
-return function(p1, p2, Active, BackgroundStyle, p3) --[[ Line: 137 ]]
+return function(p1, p2, Active, BackgroundStyle, p3)
 	-- upvalues: VariantsContextModule (copy), variantsFactory (copy), UserPresenceModule (copy), ComposeStyleVariantModule (copy), IndexBindableModule (copy)
 	local Avatar = VariantsContextModule.useVariants("Avatar", variantsFactory, p1)
 	local BackgroundStyle1 = if p3 or Active ~= UserPresenceModule.InExperience then BackgroundStyle else p1.Color.System.Emphasis

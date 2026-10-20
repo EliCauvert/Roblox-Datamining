@@ -22,7 +22,7 @@ local v1 = nil
 local Callback = nil
 local Callback1 = nil
 local PossibleTypeExtensionsRuleModule = {
-	PossibleTypeExtensionsRule = function(p1) --[[ Line: 45 ]]
+	PossibleTypeExtensionsRule = function(p1)
 		-- upvalues: IsTypeDefinitionNodeFunction (copy), v1 (ref), Callback (ref), Callback1 (ref), GraphQLError (copy), Object (copy), Array (copy), SuggestionListFunction (copy), DidYouMeanFunction (copy)
 		local Schema = p1:getSchema()
 		local t = {}
@@ -32,7 +32,7 @@ local PossibleTypeExtensionsRuleModule = {
 				t[definition.name.value] = definition
 			end
 		end
-		local function checkExtension(p2) --[[ Line: 55 ]]
+		local function checkExtension(p2)
 			-- upvalues: t (copy), Schema (copy), v1 (upval), Callback (upval), Callback1 (upval), p1 (copy), GraphQLError (upval), Object (upval), Array (upval), SuggestionListFunction (upval), DidYouMeanFunction (upval)
 			local Value = p2.name.value
 			local Entry = t[Value]
@@ -58,7 +58,7 @@ local PossibleTypeExtensionsRuleModule = {
 			end
 		end
 		
-		local function EnumTypeExtension(_, ...) --[[ Line: 100 ]]
+		local function EnumTypeExtension(_, ...)
 			-- upvalues: checkExtension (copy)
 			return checkExtension(...)
 		end
@@ -82,7 +82,7 @@ v1 = {
 	[Kind.INPUT_OBJECT_TYPE_DEFINITION] = Kind.INPUT_OBJECT_TYPE_EXTENSION
 }
 
-Callback = function(Type) --[[ Line: 122 | Named "typeToExtKind" ]]
+Callback = function(Type)
 	-- upvalues: IsScalarTypeFunction (copy), Kind (copy), IsObjectTypeFunction (copy), IsInterfaceTypeFunction (copy), IsUnionTypeFunction (copy), IsEnumTypeFunction (copy), IsInputObjectTypeFunction (copy), InvariantFunction (copy), InspectFunction (copy)
 	if IsScalarTypeFunction(Type) then
 		return Kind.SCALAR_TYPE_EXTENSION
@@ -103,7 +103,7 @@ Callback = function(Type) --[[ Line: 122 | Named "typeToExtKind" ]]
 	end
 end
 
-Callback1 = function(Kind1): string --[[ Line: 150 | Named "extensionKindToTypeName" ]]
+Callback1 = function(Kind1): string
 	-- upvalues: Kind (copy), InvariantFunction (copy), InspectFunction (copy)
 	if Kind1 == Kind.SCALAR_TYPE_EXTENSION then
 		return "scalar"

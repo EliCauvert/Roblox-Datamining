@@ -6,7 +6,7 @@ local GraphQLModule = require(Parent.GraphQL)
 local Source = GraphQLModule.Source
 local Kind = GraphQLModule.Kind
 
-local function printTypeNode(Type) --[[ Line: 74 ]]
+local function printTypeNode(Type)
 	-- upvalues: Boolean (copy), Kind (copy), printTypeNode (copy)
 	return if Boolean.toJSBoolean(Type.kind == Kind.LIST_TYPE) then ("[%s]"):format(printTypeNode(Type.type)) elseif Boolean.toJSBoolean(Type.kind == Kind.NON_NULL_TYPE) then ("%s!"):format(printTypeNode(Type.type)) else Type.name.value
 end
@@ -18,14 +18,14 @@ local CompareVal = {
 }
 
 return {
-	isStringTypes = function(p1): boolean --[[ Line: 20 ]]
+	isStringTypes = function(p1): boolean
 		return typeof(p1) == "string"
 	end,
-	isSourceTypes = function(p1) --[[ Line: 26 ]]
+	isSourceTypes = function(p1)
 		-- upvalues: InstanceofFunction (copy), Source (copy)
 		return InstanceofFunction(p1, Source)
 	end,
-	extractType = function(Type) --[[ Line: 34 ]]
+	extractType = function(Type)
 		-- upvalues: Kind (copy)
 		local Type1 = Type
 		while Type1.kind == Kind.LIST_TYPE or Type1.kind == "NonNullType" do
@@ -33,21 +33,21 @@ return {
 		end
 		return Type1
 	end,
-	isWrappingTypeNode = function(p1): boolean --[[ Line: 47 ]]
+	isWrappingTypeNode = function(p1): boolean
 		-- upvalues: Kind (copy)
 		return p1.kind ~= Kind.NAMED_TYPE
 	end,
-	isListTypeNode = function(p1): boolean --[[ Line: 56 ]]
+	isListTypeNode = function(p1): boolean
 		-- upvalues: Kind (copy)
 		return p1.kind == Kind.LIST_TYPE
 	end,
-	isNonNullTypeNode = function(p1): boolean --[[ Line: 65 ]]
+	isNonNullTypeNode = function(p1): boolean
 		-- upvalues: Kind (copy)
 		return p1.kind == Kind.NON_NULL_TYPE
 	end,
 	printTypeNode = printTypeNode,
 	CompareVal = CompareVal,
-	defaultStringComparator = function(p1, p2) --[[ Line: 100 ]]
+	defaultStringComparator = function(p1, p2)
 		-- upvalues: CompareVal (copy)
 		return if p1 == nil and p2 == nil then CompareVal.A_EQUALS_B elseif p1 == nil then CompareVal.A_SMALLER_THAN_B elseif p2 == nil then CompareVal.A_GREATER_THAN_B elseif p1 < p2 then CompareVal.A_SMALLER_THAN_B elseif p2 < p1 then CompareVal.A_GREATER_THAN_B else CompareVal.A_EQUALS_B
 	end

@@ -57,7 +57,7 @@ end
 for i1, _ in pairs(MannequinUtilityModule.CharacterPartNames.R15) do
 	MannequinUtilityModule.CharacterPartNames.All[i1] = true
 end
-local function _(AssetPath, p1: boolean) --[[ Line: 95 | Named "loadMannequin" ]]
+local function _(AssetPath, p1: boolean)
 	-- upvalues: InsertService (copy)
 	if p1 == nil then
 		p1 = true
@@ -73,7 +73,7 @@ local function _(AssetPath, p1: boolean) --[[ Line: 95 | Named "loadMannequin" ]
 	return LocalAsset
 end
 
-function MannequinUtilityModule.LoadR15Mannequin(p1) --[[ Line: 112 ]]
+function MannequinUtilityModule.LoadR15Mannequin(p1)
 	-- upvalues: InsertService (copy)
 	local Flag: boolean = p1
 	
@@ -91,7 +91,7 @@ function MannequinUtilityModule.LoadR15Mannequin(p1) --[[ Line: 112 ]]
 	return R15Rbxm
 end
 
-function MannequinUtilityModule.LoadR6Mannequin(p1) --[[ Line: 116 ]]
+function MannequinUtilityModule.LoadR6Mannequin(p1)
 	-- upvalues: InsertService (copy)
 	local Flag: boolean = p1
 	
@@ -109,7 +109,7 @@ function MannequinUtilityModule.LoadR6Mannequin(p1) --[[ Line: 116 ]]
 	return R6Rbxm
 end
 
-function MannequinUtilityModule.LoadRthroMannequin(p1) --[[ Line: 120 ]]
+function MannequinUtilityModule.LoadRthroMannequin(p1)
 	-- upvalues: InsertService (copy)
 	local Flag: boolean = p1
 	
@@ -127,7 +127,7 @@ function MannequinUtilityModule.LoadRthroMannequin(p1) --[[ Line: 120 ]]
 	return RthroRbxm
 end
 
-function MannequinUtilityModule.LoadR15PlusMannequin(p1) --[[ Line: 124 ]]
+function MannequinUtilityModule.LoadR15PlusMannequin(p1)
 	-- upvalues: InsertService (copy)
 	if game:GetEngineFeature("R15PlusMannequinContent") then
 		local Flag: boolean = p1
@@ -162,12 +162,12 @@ function MannequinUtilityModule.LoadR15PlusMannequin(p1) --[[ Line: 124 ]]
 	end
 end
 
-function MannequinUtilityModule.LoadMannequinForScaleType(p1, p2) --[[ Line: 131 ]]
+function MannequinUtilityModule.LoadMannequinForScaleType(p1, p2)
 	-- upvalues: MannequinUtilityModule (copy)
 	return if p1 == "Classic" then MannequinUtilityModule.LoadR15Mannequin(p2) else MannequinUtilityModule.LoadRthroMannequin(p2)
 end
 
-function MannequinUtilityModule.AssertObjectsFormat(Folders) --[[ Line: 144 ]]
+function MannequinUtilityModule.AssertObjectsFormat(Folders)
 	-- upvalues: config (copy), MannequinUtilityModule (copy)
 	local Flag = false
 	
@@ -185,7 +185,7 @@ function MannequinUtilityModule.AssertObjectsFormat(Folders) --[[ Line: 144 ]]
 	assert(Flag, "objects does not have at least one of R15ArtistIntent, R15, and R6 folders")
 end
 
-function MannequinUtilityModule.CreateBodyPartMannequin(List, p1) --[[ Line: 175 ]]
+function MannequinUtilityModule.CreateBodyPartMannequin(List, p1)
 	-- upvalues: MannequinUtilityModule (copy)
 	local Flag = false
 	local Flag1 = false
@@ -237,7 +237,7 @@ function MannequinUtilityModule.CreateBodyPartMannequin(List, p1) --[[ Line: 175
 	return Flag, Flag1, MannequinForScaleType
 end
 
-function MannequinUtilityModule.SetupBodyPartMannequin(p2, p3, Parent, List, Url) --[[ Line: 257 ]]
+function MannequinUtilityModule.SetupBodyPartMannequin(p2, p3, Parent, List, Url)
 	-- upvalues: MannequinUtilityModule (copy)
 	MannequinUtilityModule.AssertObjectsFormat(List)
 	local Flag = false
@@ -245,7 +245,7 @@ function MannequinUtilityModule.SetupBodyPartMannequin(p2, p3, Parent, List, Url
 	if Url then
 		game:GetObjects(Url)[1].Parent = Parent
 	end
-	local function addFolderChildren(Object, List, List1) --[[ Line: 272 ]]
+	local function addFolderChildren(Object, List, List1)
 		-- upvalues: Flag (ref), Parent (copy), MannequinUtilityModule (upval)
 		for _, Part in pairs(Object:GetChildren()) do
 			assert(Part:IsA("BasePart"), "Only BaseParts should be in Folders")
@@ -280,7 +280,7 @@ function MannequinUtilityModule.SetupBodyPartMannequin(p2, p3, Parent, List, Url
 	return Flag, t1
 end
 
-function MannequinUtilityModule.CreateHeadModel(p4) --[[ Line: 322 ]]
+function MannequinUtilityModule.CreateHeadModel(p4)
 	local Model = Instance.new("Model")
 	p4.Name = "Head"
 	p4.Parent = Model

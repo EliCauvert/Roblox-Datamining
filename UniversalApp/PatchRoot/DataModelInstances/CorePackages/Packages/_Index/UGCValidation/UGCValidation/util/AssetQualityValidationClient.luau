@@ -4,10 +4,10 @@ local CreateUGCBodyPartFoldersModule = require(Parent.util.createUGCBodyPartFold
 local FixUpPreValidationModule = require(Parent.util.fixUpPreValidation)
 local HttpService = game:GetService("HttpService")
 local AssetQualityValidationClientModule = {
-	getAssetQualityService = function() --[[ Line: 13 ]]
+	getAssetQualityService = function()
 		return game:GetService("AssetQualityService")
 	end,
-	buildSettings = function(p1) --[[ Line: 17 ]]
+	buildSettings = function(p1)
 		-- upvalues: HttpService (copy)
 		local Options = { ConsumerName = p1.source }
 		
@@ -32,7 +32,7 @@ local AssetQualityValidationClientModule = {
 		end
 		return config
 	end,
-	createSingleAssetInput = function(p1, AssetType) --[[ Line: 46 ]]
+	createSingleAssetInput = function(p1, AssetType)
 		-- upvalues: FixUpPreValidationModule (copy)
 		local Success, Result = pcall(FixUpPreValidationModule, p1)
 		
@@ -45,11 +45,11 @@ local AssetQualityValidationClientModule = {
 		
 		return { model = Model, assetType = AssetType }
 	end,
-	createBodyInputs = function(p1, p2, p3) --[[ Line: 62 ]]
+	createBodyInputs = function(p1, p2, p3)
 		-- upvalues: FixUpPreValidationModule (copy), CreateUGCBodyPartFoldersModule (copy)
 		local FixUpPreValidationModuleResult = FixUpPreValidationModule(p1)
 		local List = {}
-		local Success, Result = pcall(function() --[[ Line: 69 ]]
+		local Success, Result = pcall(function()
 			-- upvalues: CreateUGCBodyPartFoldersModule (upval), FixUpPreValidationModuleResult (copy), p2 (copy), p3 (copy), List (copy)
 			for AssetType, value in CreateUGCBodyPartFoldersModule(FixUpPreValidationModuleResult, p2, p3, true) do
 				local Model = Instance.new("Model")
@@ -72,7 +72,7 @@ local AssetQualityValidationClientModule = {
 	end
 }
 
-function AssetQualityValidationClientModule.fetch(List, p4) --[[ Line: 89 ]]
+function AssetQualityValidationClientModule.fetch(List, p4)
 	-- upvalues: AssetQualityValidationClientModule (copy), HttpService (copy)
 	local AssetQualityService = AssetQualityValidationClientModule.getAssetQualityService()
 	local List1 = {}
@@ -82,7 +82,7 @@ function AssetQualityValidationClientModule.fetch(List, p4) --[[ Line: 89 ]]
 		table.insert(List1, SingleAssetInput.model)
 		table.insert(List2, SingleAssetInput.assetType.Value)
 	end
-	local Success, Result = pcall(function() --[[ Line: 100 ]]
+	local Success, Result = pcall(function()
 		-- upvalues: AssetQualityService (copy), List1 (copy), List2 (copy), AssetQualityValidationClientModule (upval), p4 (copy), HttpService (upval)
 		local AssetQualityValidationRawFromModelsAsync = AssetQualityService:FetchAssetQualityValidationRawFromModelsAsync(List1, List2, AssetQualityValidationClientModule.buildSettings(p4))
 		

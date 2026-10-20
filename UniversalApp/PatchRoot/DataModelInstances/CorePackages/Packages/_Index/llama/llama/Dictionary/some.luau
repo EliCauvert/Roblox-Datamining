@@ -1,4 +1,4 @@
-﻿return function(List, Callback): boolean --[[ Line: 2 | Named "some" ]]
+﻿return function(List, Callback): boolean
 	local ValueType = type(Callback)
 	assert(ValueType == "function", "expected a function for second argument, got " .. ValueType)
 	

@@ -9,11 +9,11 @@ local InvariantFunction = require(Parent.jsutils.invariant).invariant
 local Error1 = LuauPolyfillModule.Error
 
 return {
-	getFragmentQueryDocument = function(p1, p2) --[[ Line: 49 ]]
+	getFragmentQueryDocument = function(p1, p2)
 		-- upvalues: Array (copy), Error1 (copy), Boolean (copy), InvariantFunction (copy), Object (copy)
 		local Value = p2
 		local List = {}
-		Array.forEach(p1.definitions, function(p3) --[[ Line: 55 ]]
+		Array.forEach(p1.definitions, function(p3)
 			-- upvalues: Error1 (upval), Boolean (upval), List (copy)
 			if p3.kind == "OperationDefinition" then
 				error(Error1.new(("Found a %s operation%s. "):format(tostring(p3.operation), if Boolean.toJSBoolean(p3.name) then (" named '%s'"):format((tostring(p3.name.value))) else "") .. "No operations are allowed when using a fragment as a query. Only fragments are allowed."))
@@ -45,17 +45,17 @@ return {
 			}, p1.definitions)
 		}))
 	end,
-	createFragmentMap = function(p1) --[[ Line: 121 ]]
+	createFragmentMap = function(p1)
 		-- upvalues: Array (copy)
 		local t = {}
-		Array.forEach(if p1 == nil then {} else p1, function(p2) --[[ Line: 124 ]]
+		Array.forEach(if p1 == nil then {} else p1, function(p2)
 			-- upvalues: t (copy)
 			t[p2.name.value] = p2
 		end)
 		
 		return t
 	end,
-	getFragmentFromSelection = function(p1, p2) --[[ Line: 131 ]]
+	getFragmentFromSelection = function(p1, p2)
 		-- upvalues: InvariantFunction (copy)
 		local Kind = p1.kind
 		

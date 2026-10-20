@@ -6,7 +6,7 @@ local IsCompositeTypeFunction = GraphQLModule.isCompositeType
 local _ = require(script.Parent.types)
 
 return {
-	implementsAbstractType = function(p1, p2, p3) --[[ Line: 20 ]]
+	implementsAbstractType = function(p1, p2, p3)
 		-- upvalues: Boolean (copy), IsCompositeTypeFunction (copy), DoTypesOverlapFunction (copy)
 		if p3 == nil or p2 == nil then
 			return false

@@ -9,7 +9,7 @@ AnimatedComponent.validateProps = TModule.strictInterface({
 	options = TModule.optional(TModule.table)
 })
 
-function AnimatedComponent.update(p1, Values) --[[ Line: 37 ]]
+function AnimatedComponent.update(p1, Values)
 	-- upvalues: RoactModule (copy)
 	local Nones = {}
 	
@@ -30,17 +30,17 @@ function AnimatedComponent.update(p1, Values) --[[ Line: 37 ]]
 	end
 end
 
-function AnimatedComponent.init(p2) --[[ Line: 56 ]]
+function AnimatedComponent.init(p2)
 	-- upvalues: OtterModule (copy)
 	p2:update(p2.props.values)
 	p2.motor = OtterModule.createGroupMotor(p2.props.values)
-	p2.motor:onStep(function(p3) --[[ Line: 59 ]]
+	p2.motor:onStep(function(p3)
 		-- upvalues: p2 (copy)
 		p2:update(p3)
 	end)
 end
 
-function AnimatedComponent.didUpdate(p2, p3) --[[ Line: 64 ]]
+function AnimatedComponent.didUpdate(p2, p3)
 	-- upvalues: OtterModule (copy)
 	local Values = p2.props.values
 	local Options = p2.props.options
@@ -56,18 +56,18 @@ function AnimatedComponent.didUpdate(p2, p3) --[[ Line: 64 ]]
 	end
 end
 
-function AnimatedComponent.render(p4) --[[ Line: 80 ]]
+function AnimatedComponent.render(p4)
 	return p4.props.render(p4.state)
 end
 
-function AnimatedComponent.willUnmount(p4) --[[ Line: 85 ]]
+function AnimatedComponent.willUnmount(p4)
 	if p4.motor then
 		p4.motor:destroy()
 		p4.motor = nil
 	end
 end
 
-return function(Values, Render, Options) --[[ Line: 92 ]]
+return function(Values, Render, Options)
 	-- upvalues: RoactModule (copy), AnimatedComponent (copy)
 	return RoactModule.createElement(AnimatedComponent, { values = Values, options = Options, render = Render })
 end

@@ -8,7 +8,7 @@ local Kind = GraphQLModule.Kind
 local IsListTypeFunction = GraphQLModule.isListType
 local InspectFunction = require(script.Parent.inspect).inspect
 
-local function astFromType(OfType) --[[ Line: 25 ]]
+local function astFromType(OfType)
 	-- upvalues: Boolean (copy), IsNonNullTypeFunction (copy), astFromType (copy), Kind (copy), Error1 (copy), InspectFunction (copy), IsListTypeFunction (copy)
 	if not Boolean.toJSBoolean(IsNonNullTypeFunction(OfType)) then
 		return if Boolean.toJSBoolean(IsListTypeFunction(OfType)) then { kind = Kind.LIST_TYPE, type = astFromType(OfType.ofType) } else {

@@ -1,4 +1,4 @@
-﻿return function(p1, Callback) --[[ Line: 13 | Named "last" ]]
+﻿return function(p1, Callback)
 	local v1 = nil
 	for i = #p1, 1, -1 do
 		v1 = p1[i]

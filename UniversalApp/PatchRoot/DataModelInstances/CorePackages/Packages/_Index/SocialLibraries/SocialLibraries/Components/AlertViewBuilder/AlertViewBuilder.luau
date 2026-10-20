@@ -22,15 +22,15 @@ AlertViewBuilder.defaultProps = {
 	inputLengthExceeded = nil,
 	buttons = {},
 	textboxes = {},
-	onActivated = function() --[[ Line: 96 ]] end,
-	onModalClose = function() --[[ Line: 97 ]] end,
-	onModalStayOpen = function() --[[ Line: 98 ]] end,
-	onModalOpen = function() --[[ Line: 99 ]] end,
+	onActivated = function() end,
+	onModalClose = function() end,
+	onModalStayOpen = function() end,
+	onModalOpen = function() end,
 	screenSize = Vector2.new(0, 0),
 	soakAreaColor3 = Color3.fromRGB(255, 0, 255)
 }
 
-function AlertViewBuilder.init(p1) --[[ Line: 111 ]]
+function AlertViewBuilder.init(p1)
 	-- upvalues: Roact (copy), FoundationFontFaceMigration (copy), GetTextBoundsAsyncFunction (copy), Text (copy)
 	local NumTextboxes = 0
 	p1.refs = {}
@@ -45,7 +45,7 @@ function AlertViewBuilder.init(p1) --[[ Line: 111 ]]
 		p1.isMounted = false
 		p1.textMeasurements = {}
 		
-		function p1.flushTextMeasurements() --[[ Line: 126 ]]
+		function p1.flushTextMeasurements()
 			-- upvalues: p1 (copy), GetTextBoundsAsyncFunction (upval)
 			for i, textMeasurement in p1.textMeasurements do
 				if not p1.props.textboxes[i] then
@@ -55,7 +55,7 @@ function AlertViewBuilder.init(p1) --[[ Line: 111 ]]
 				for i1, value in textMeasurement do
 					if value.height == nil and not value.inFlight then
 						value.inFlight = true
-						task.spawn(function() --[[ Line: 139 ]]
+						task.spawn(function()
 							-- upvalues: GetTextBoundsAsyncFunction (upval), value (copy), p1 (upval), i (copy), i1 (copy)
 							local TextBoundsAsync = GetTextBoundsAsyncFunction(value.text, value.font, value.fontSize, value.width)
 							value.inFlight = false
@@ -63,7 +63,7 @@ function AlertViewBuilder.init(p1) --[[ Line: 111 ]]
 							
 							if TextBoundsAsync and p1.isMounted and TextMeasurement and TextMeasurement[i1] == value then
 								value.height = TextBoundsAsync.Y
-								p1:setState(function(p2) --[[ Line: 151 ]]
+								p1:setState(function(p2)
 									return {
 										textMeasurementVersion = (p2.textMeasurementVersion or 0) + 1
 									}
@@ -75,11 +75,11 @@ function AlertViewBuilder.init(p1) --[[ Line: 111 ]]
 			end
 		end
 		
-		function p1.scheduleTextMeasurementFlush() --[[ Line: 162 ]]
+		function p1.scheduleTextMeasurementFlush()
 			-- upvalues: p1 (copy)
 			if not p1.textMeasurementFlushScheduled then
 				p1.textMeasurementFlushScheduled = true
-				task.defer(function() --[[ Line: 168 ]]
+				task.defer(function()
 					-- upvalues: p1 (upval)
 					p1.textMeasurementFlushScheduled = false
 					
@@ -92,7 +92,7 @@ function AlertViewBuilder.init(p1) --[[ Line: 111 ]]
 			end
 		end
 	end
-	p1.calcTextboxTextHeight = if FoundationFontFaceMigration then function(p2, Text, p3, Key) --[[ Line: 178 ]]
+	p1.calcTextboxTextHeight = if FoundationFontFaceMigration then function(p2, Text, p3, Key)
 		-- upvalues: p1 (copy)
 		if Text and Text ~= "" then
 			local ScaledRelativeSize = p2.Font.Body.RelativeSize * p2.Font.BaseSize
@@ -128,7 +128,7 @@ function AlertViewBuilder.init(p1) --[[ Line: 111 ]]
 			end
 			return 0
 		end
-	end else function(p2, p3) --[[ Line: 222 ]]
+	end else function(p2, p3)
 		-- upvalues: Text (upval), p1 (copy)
 		local ScaledRelativeSize = p2.Font.Body.RelativeSize * p2.Font.BaseSize
 		local BodyFont = p2.Font.Body.Font
@@ -137,7 +137,7 @@ function AlertViewBuilder.init(p1) --[[ Line: 111 ]]
 	end
 end
 
-function AlertViewBuilder.didMount(p2) --[[ Line: 234 ]]
+function AlertViewBuilder.didMount(p2)
 	-- upvalues: FoundationFontFaceMigration (copy)
 	if FoundationFontFaceMigration then
 		p2.isMounted = true
@@ -148,21 +148,21 @@ function AlertViewBuilder.didMount(p2) --[[ Line: 234 ]]
 	end
 end
 
-function AlertViewBuilder.didUpdate(p2) --[[ Line: 245 ]]
+function AlertViewBuilder.didUpdate(p2)
 	-- upvalues: FoundationFontFaceMigration (copy)
 	if FoundationFontFaceMigration then
 		p2.flushTextMeasurements()
 	end
 end
 
-function AlertViewBuilder.willUnmount(p2) --[[ Line: 251 ]]
+function AlertViewBuilder.willUnmount(p2)
 	-- upvalues: FoundationFontFaceMigration (copy)
 	if FoundationFontFaceMigration then
 		p2.isMounted = false
 	end
 end
 
-function AlertViewBuilder.reset(p2) --[[ Line: 257 ]]
+function AlertViewBuilder.reset(p2)
 	for _, ref in pairs(p2.refs) do
 		if ref.current then
 			ref.current.Text = ""
@@ -170,7 +170,7 @@ function AlertViewBuilder.reset(p2) --[[ Line: 257 ]]
 	end
 end
 
-function AlertViewBuilder.makeButtonTable(p3) --[[ Line: 265 ]]
+function AlertViewBuilder.makeButtonTable(p3)
 	-- upvalues: Cryo (copy)
 	local config = { buttons = {} }
 	
@@ -179,7 +179,7 @@ function AlertViewBuilder.makeButtonTable(p3) --[[ Line: 265 ]]
 		config.buttons[LayoutOrder] = Cryo.Dictionary.join(button, {
 			props = Cryo.Dictionary.join(button.props, {
 				layoutOrder = LayoutOrder,
-				onActivated = function() --[[ Line: 274 ]]
+				onActivated = function()
 					-- upvalues: p3 (copy), button (copy)
 					p3.props.onActivated()
 					local t = {}
@@ -203,7 +203,7 @@ function AlertViewBuilder.makeButtonTable(p3) --[[ Line: 265 ]]
 	return config
 end
 
-function AlertViewBuilder.makeTextboxList(p4, p5) --[[ Line: 299 ]]
+function AlertViewBuilder.makeTextboxList(p4, p5)
 	-- upvalues: Roact (copy), FitFrameVerticalModule (copy), AlertViewTextboxModule (copy), AlertViewLabelModule (copy)
 	local Elements = {}
 	local Color = if p4.props.inputLengthExceeded then p5.Theme.Alert.Color else p5.Theme.TextDefault.Color
@@ -244,11 +244,11 @@ function AlertViewBuilder.makeTextboxList(p4, p5) --[[ Line: 299 ]]
 	return Elements
 end
 
-function AlertViewBuilder.makeMiddleContent(p6, p7) --[[ Line: 352 ]]
+function AlertViewBuilder.makeMiddleContent(p6, p7)
 	-- upvalues: Roact (copy), FitFrameVerticalModule (copy)
 	local TextboxList = p6:makeTextboxList(p7)
 	
-	return if p6.state.numTextboxes == 0 then nil else function() --[[ Line: 361 ]]
+	return if p6.state.numTextboxes == 0 then nil else function()
 		-- upvalues: Roact (upval), FitFrameVerticalModule (upval), TextboxList (copy)
 		return Roact.createElement(FitFrameVerticalModule, {
 			BorderSizePixel = 0,
@@ -265,11 +265,11 @@ function AlertViewBuilder.makeMiddleContent(p6, p7) --[[ Line: 352 ]]
 	end
 end
 
-function AlertViewBuilder.render(p6) --[[ Line: 377 ]]
+function AlertViewBuilder.render(p6)
 	-- upvalues: UIBlox (copy), Roact (copy), AlertViewSoakAreaModule (copy), InteractiveAlert (copy)
 	assert(p6.props.displayTextbox or not p6.props.mandatoryInput)
 	
-	return UIBlox.Style.withStyle(function(p7) --[[ Line: 380 ]]
+	return UIBlox.Style.withStyle(function(p7)
 		-- upvalues: p6 (copy), Roact (upval), AlertViewSoakAreaModule (upval), InteractiveAlert (upval)
 		return Roact.createElement(AlertViewSoakAreaModule, {
 			BackgroundColor3 = p6.props.soakAreaColor3,

@@ -11,7 +11,7 @@ local GetInputVariantsFactoryModule = require(Foundation.Components.InputField.g
 local _ = require(Foundation.Providers.Style.Tokens)
 local VariantsContextModule = require(Foundation.Providers.Style.VariantsContext)
 
-local function computeProps(p1) --[[ Line: 63 ]]
+local function computeProps(p1)
 	return {
 		container = {
 			minHeight = p1.minContainerHeight,
@@ -28,7 +28,7 @@ local function computeProps(p1) --[[ Line: 63 ]]
 	}
 end
 
-local function variantsFactory(p1) --[[ Line: 93 ]]
+local function variantsFactory(p1)
 	-- upvalues: FlagsModule (copy), InputSizeModule (copy), computeProps (copy), IconSizeModule (copy), BuilderIconsModule (copy)
 	return {
 		common = {
@@ -89,7 +89,7 @@ local function variantsFactory(p1) --[[ Line: 93 ]]
 	}
 end
 
-return function(p1, p2, Utility, p3, p4, p5) --[[ Line: 161 ]]
+return function(p1, p2, Utility, p3, p4, p5)
 	-- upvalues: VariantsContextModule (copy), variantsFactory (copy), GetInputVariantsFactoryModule (copy), InputVariantModule (copy), ComposeStyleVariantModule (copy)
 	local TextInput = VariantsContextModule.useVariants("TextInput", variantsFactory, p1)
 	local InputField = VariantsContextModule.useVariants("InputField", GetInputVariantsFactoryModule, p1)

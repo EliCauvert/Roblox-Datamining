@@ -11,7 +11,7 @@ local _ = require(Parent1.Style.Fonts)
 local FooterFrameModule = require(Parent.FooterFrame)
 local FoundationFontFaceMigration = FoundationModule.Utility.Flags.FoundationFontFaceMigration
 
-local function getStyleProps(StyleProps, p1) --[[ Line: 38 ]]
+local function getStyleProps(StyleProps, p1)
 	local StyleProps1 = StyleProps or {}
 	
 	return {
@@ -23,7 +23,7 @@ local function getStyleProps(StyleProps, p1) --[[ Line: 38 ]]
 	}
 end
 
-return function(p1) --[[ Line: 49 | Named "TextFooter" ]]
+return function(p1)
 	-- upvalues: UseStyleModule (copy), getStyleProps (copy), ReactModule (copy), FooterFrameModule (copy), FoundationFontFaceMigration (copy), NormalizeFontFaceFunction (copy)
 	local UseStyleModuleResult = UseStyleModule()
 	local UseStyleModuleResultFont = UseStyleModuleResult.Font

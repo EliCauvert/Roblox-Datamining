@@ -5,13 +5,13 @@ local HostPresentationPhaseModule = require(ViewRecyclerRoblox.RobloxAdapter.Hos
 local TransparentFrameModule = require(ViewRecyclerRoblox.RobloxAdapter.transparentFrame)
 local Axis = ViewRecyclerModule.Axis
 local StackPlacementModule = {
-	isPlacedFromLayoutOffsets = function(State): boolean --[[ Line: 62 ]]
+	isPlacedFromLayoutOffsets = function(State): boolean
 		return State.index ~= nil and State.canvasPlacement.mainAxisOffset == nil
 	end
 }
 local _UDim2 = UDim2.new()
 
-local function createStackFrame(p1, IsYMatch, Offset, ViewRecyclerStack) --[[ Line: 68 ]]
+local function createStackFrame(p1, IsYMatch, Offset, ViewRecyclerStack)
 	-- upvalues: TransparentFrameModule (copy)
 	local TransparentFrameModuleResult = TransparentFrameModule(p1)
 	TransparentFrameModuleResult.Size = if IsYMatch then UDim2.fromScale(1, 0) else UDim2.fromScale(0, 1)
@@ -28,7 +28,7 @@ local function createStackFrame(p1, IsYMatch, Offset, ViewRecyclerStack) --[[ Li
 	return TransparentFrameModuleResult
 end
 
-function StackPlacementModule.new(Parent, Y, p1, p2) --[[ Line: 85 ]]
+function StackPlacementModule.new(Parent, Y, p1, p2)
 	-- upvalues: Axis (copy), TransparentFrameModule (copy), createStackFrame (copy), StackPlacementModule (copy), ViewRecyclerModule (copy), HostPresentationPhaseModule (copy), CanvasItemPlacerModule (copy), _UDim2 (copy)
 	local IsYMatch = Y == Axis.Y
 	local ViewRecyclerStack = TransparentFrameModule("ViewRecyclerStack")
@@ -54,17 +54,17 @@ function StackPlacementModule.new(Parent, Y, p1, p2) --[[ Line: 85 ]]
 	local Flag1 = true
 	local NewAbsoluteContentSize = nil
 	
-	local function _(p3) --[[ Line: 112 | Named "frameFor" ]]
+	local function _(p3)
 		-- upvalues: ClampedValue (ref), Leading (copy), Trailing (copy)
 		return if p3 < ClampedValue then Leading else Trailing
 	end
 	
-	local _ = function(p3): boolean --[[ Line: 116 | Named "contains" ]]
+	local _ = function(p3): boolean
 		-- upvalues: v1 (ref), v2 (ref)
 		return v1 <= p3 and p3 <= v2
 	end
 	
-	local _ = function(Key) --[[ Line: 120 | Named "releasePlaceholder" ]]
+	local _ = function(Key)
 		-- upvalues: Placeholders (copy), List (copy)
 		local Placeholder = Placeholders[Key]
 		
@@ -75,7 +75,7 @@ function StackPlacementModule.new(Parent, Y, p1, p2) --[[ Line: 85 ]]
 		end
 	end
 	
-	local function refresh(LayoutOrder) --[[ Line: 129 ]]
+	local function refresh(LayoutOrder)
 		-- upvalues: v1 (ref), v2 (ref), Tbl1 (copy), Placeholders (copy), List (copy), TransparentFrameModule (upval), NewStartOffsets (copy), t (ref), IsYMatch (copy), ClampedValue (ref), Leading (copy), Trailing (copy)
 		if v1 <= LayoutOrder and LayoutOrder <= v2 and (Tbl1[LayoutOrder] or 0) <= 0 then
 			local Placeholder1 = Placeholders[LayoutOrder]
@@ -115,7 +115,7 @@ function StackPlacementModule.new(Parent, Y, p1, p2) --[[ Line: 85 ]]
 		end
 	end
 	
-	local _ = function(p3, p4) --[[ Line: 159 | Named "setOffset" ]]
+	local _ = function(p3, p4)
 		-- upvalues: OriginOffset (ref), IsYMatch (copy)
 		local Rounded = math.round(p4 + OriginOffset)
 		local _UDim2: UDim2 = if IsYMatch then UDim2.fromOffset(0, Rounded) else UDim2.fromOffset(Rounded, 0)
@@ -125,7 +125,7 @@ function StackPlacementModule.new(Parent, Y, p1, p2) --[[ Line: 85 ]]
 		end
 	end
 	
-	local _ = function() --[[ Line: 167 | Named "positionFrames" ]]
+	local _ = function()
 		-- upvalues: NewStartOffsets (copy), ClampedValue (ref), Leading (copy), p1 (copy), OriginOffset (ref), IsYMatch (copy), Trailing (copy)
 		local NewStartOffset = NewStartOffsets[ClampedValue] or 0
 		local Rounded = math.round(NewStartOffset - p1 + OriginOffset)
@@ -142,7 +142,7 @@ function StackPlacementModule.new(Parent, Y, p1, p2) --[[ Line: 85 ]]
 		end
 	end
 	
-	local _ = function(Key, Key1) --[[ Line: 173 | Named "setOccupying" ]]
+	local _ = function(Key, Key1)
 		-- upvalues: Tbl1 (copy), Tbl2 (copy)
 		if Key1 == Key then return end
 		if Key1 ~= nil then
@@ -160,11 +160,11 @@ function StackPlacementModule.new(Parent, Y, p1, p2) --[[ Line: 85 ]]
 	end
 	
 	return {
-		matches = function(Parent, Y1, p3, p4): boolean --[[ Line: 191 ]]
+		matches = function(Parent, Y1, p3, p4): boolean
 			-- upvalues: ViewRecyclerStack (copy), Y (copy), p1 (copy), p2 (copy)
 			return ViewRecyclerStack.Parent == Parent and (Y1 == Y and p3 == p1) and p4 == p2
 		end,
-		setWindow = function(p3, Value) --[[ Line: 197 ]]
+		setWindow = function(p3, Value)
 			-- upvalues: StackPlacementModule (upval), ViewRecyclerModule (upval), v1 (ref), v2 (ref), t (ref), ClampedValue (ref), NewStartOffsets (copy), p1 (copy), OriginOffset (ref), Flag (ref), Flag1 (ref), Leading (copy), IsYMatch (copy), Trailing (copy)
 			local MinValue = 1e999
 			local Largest = -1e999
@@ -220,7 +220,7 @@ function StackPlacementModule.new(Parent, Y, p1, p2) --[[ Line: 85 ]]
 				Trailing.Position = _UDim21
 			end
 		end,
-		setOriginOffset = function(Value) --[[ Line: 243 ]]
+		setOriginOffset = function(Value)
 			-- upvalues: OriginOffset (ref), NewStartOffsets (copy), ClampedValue (ref), Leading (copy), p1 (copy), IsYMatch (copy), Trailing (copy)
 			if Value ~= OriginOffset then
 				OriginOffset = Value
@@ -239,7 +239,7 @@ function StackPlacementModule.new(Parent, Y, p1, p2) --[[ Line: 85 ]]
 				end
 			end
 		end,
-		place = function(Frame: Frame, p4, Geometry, Presented): boolean --[[ Line: 249 ]]
+		place = function(Frame: Frame, p4, Geometry, Presented): boolean
 			-- upvalues: Tbl (copy), HostPresentationPhaseModule (upval), v1 (ref), v2 (ref), CanvasItemPlacerModule (upval), Y (copy), p2 (copy), _UDim2 (upval), ClampedValue (ref), Leading (copy), Trailing (copy), Tbl1 (copy), Tbl2 (copy), Flag1 (ref)
 			local Index = Geometry.index
 			local Entry = Tbl[Frame]
@@ -286,7 +286,7 @@ function StackPlacementModule.new(Parent, Y, p1, p2) --[[ Line: 85 ]]
 			
 			return IsIndexBelow
 		end,
-		remove = function(Key) --[[ Line: 285 ]]
+		remove = function(Key)
 			-- upvalues: Tbl (copy), Tbl1 (copy), Tbl2 (copy), Flag1 (ref)
 			local Entry = Tbl[Key]
 			
@@ -305,11 +305,11 @@ function StackPlacementModule.new(Parent, Y, p1, p2) --[[ Line: 85 ]]
 			Key.LayoutOrder = Entry.restoreLayoutOrder
 			Flag1 = true
 		end,
-		isStacked = function(p4): boolean --[[ Line: 295 ]]
+		isStacked = function(p4): boolean
 			-- upvalues: Tbl (copy)
 			return Tbl[p4] ~= nil
 		end,
-		getStaleHosts = function() --[[ Line: 298 ]]
+		getStaleHosts = function()
 			-- upvalues: Tbl (copy), v1 (ref), v2 (ref), ClampedValue (ref), Leading (copy), Trailing (copy)
 			local List = {}
 			
@@ -322,7 +322,7 @@ function StackPlacementModule.new(Parent, Y, p1, p2) --[[ Line: 85 ]]
 			end
 			return List
 		end,
-		takeChanged = function() --[[ Line: 307 ]]
+		takeChanged = function()
 			-- upvalues: UIListLayout (copy), UIListLayout1 (copy), Flag1 (ref), NewAbsoluteContentSize (ref)
 			local NewAbsoluteContentSize1 = UIListLayout.AbsoluteContentSize + UIListLayout1.AbsoluteContentSize
 			local Flag1_1 = Flag1 or NewAbsoluteContentSize1 ~= NewAbsoluteContentSize
@@ -331,7 +331,7 @@ function StackPlacementModule.new(Parent, Y, p1, p2) --[[ Line: 85 ]]
 			
 			return Flag1_1
 		end,
-		commit = function() --[[ Line: 314 ]]
+		commit = function()
 			-- upvalues: Flag (ref), Placeholders (copy), v1 (ref), v2 (ref), List (copy), refresh (copy), Tbl2 (copy)
 			if Flag then
 				Flag = false
@@ -363,7 +363,7 @@ function StackPlacementModule.new(Parent, Y, p1, p2) --[[ Line: 85 ]]
 				table.clear(Tbl2)
 			end
 		end,
-		destroy = function() --[[ Line: 333 ]]
+		destroy = function()
 			-- upvalues: Tbl (copy), Tbl1 (copy), Placeholders (copy), List (copy), Tbl2 (copy), ViewRecyclerStack (copy)
 			for i, value in Tbl do
 				i.LayoutOrder = value.restoreLayoutOrder

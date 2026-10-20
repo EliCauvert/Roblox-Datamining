@@ -5,7 +5,7 @@ local SharedDataMember = require(Parent.validationSystem.ValidationEnums).Shared
 local _ = require(Parent.util.Types)
 local GetFFlagUGCValidateEmissiveAreaChecksFixedAlgoModule = require(Parent.flags.getFFlagUGCValidateEmissiveAreaChecksFixedAlgo)
 local FetchEditablesModule = {
-	cleanup = function(List) --[[ Line: 20 ]]
+	cleanup = function(List)
 		for i, value in List do
 			if value.createdInValidation then
 				value.editable:Destroy()
@@ -22,7 +22,7 @@ local FetchEditablesModule = {
 	end
 }
 
-local function getMeshData(Object, p1, p2) --[[ Line: 43 ]]
+local function getMeshData(Object, p1, p2)
 	-- upvalues: CreateEditableInstancesForContextModule (copy), GetMeshSizeModule (copy)
 	local EditableMeshEditableInstanceInfo, EditableMeshEditableInstanceInfo2 = CreateEditableInstancesForContextModule.getEditableInstanceInfo(Object:IsA("MeshPart") and Object.MeshContent or Content.fromUri(Object.MeshId), p2, "EditableMesh", p1)
 	
@@ -56,7 +56,7 @@ local function getMeshData(Object, p1, p2) --[[ Line: 43 ]]
 	}
 end
 
-local function getTextureData(Part: Part, p1, p2) --[[ Line: 83 ]]
+local function getTextureData(Part: Part, p1, p2)
 	-- upvalues: GetFFlagUGCValidateEmissiveAreaChecksFixedAlgoModule (copy), CreateEditableInstancesForContextModule (copy), FetchEditablesModule (copy)
 	local SurfaceAppearance = Part:FindFirstChildWhichIsA("SurfaceAppearance")
 	local Config = if SurfaceAppearance == nil then {
@@ -99,7 +99,7 @@ local function getTextureData(Part: Part, p1, p2) --[[ Line: 83 ]]
 	return true, config
 end
 
-local function getCageData(WrapLayer, IsOuterCagesDataMatch, p3, p4) --[[ Line: 154 ]]
+local function getCageData(WrapLayer, IsOuterCagesDataMatch, p3, p4)
 	-- upvalues: CreateEditableInstancesForContextModule (copy), GetMeshSizeModule (copy)
 	local CageMeshContent = nil
 	local CageOrigin = nil
@@ -126,7 +126,7 @@ local function getCageData(WrapLayer, IsOuterCagesDataMatch, p3, p4) --[[ Line: 
 	end
 end
 
-local function getDataInstance(Object, OuterCagesData) --[[ Line: 188 ]]
+local function getDataInstance(Object, OuterCagesData)
 	-- upvalues: SharedDataMember (copy)
 	local Object1 = Object:IsA("MeshPart") and Object or Object:FindFirstChildOfClass("SpecialMesh")
 	
@@ -149,7 +149,7 @@ local function getDataInstance(Object, OuterCagesData) --[[ Line: 188 ]]
 	return false
 end
 
-function FetchEditablesModule.getDatas(Object, OuterCagesData, p3, p4, p5) --[[ Line: 218 ]]
+function FetchEditablesModule.getDatas(Object, OuterCagesData, p3, p4, p5)
 	-- upvalues: getDataInstance (copy), SharedDataMember (copy), getMeshData (copy), getCageData (copy), getTextureData (copy), FetchEditablesModule (copy)
 	local t = {}
 	local Descendants = Object:GetDescendants()

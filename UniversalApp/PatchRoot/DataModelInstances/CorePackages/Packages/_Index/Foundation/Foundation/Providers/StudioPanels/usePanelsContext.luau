@@ -2,7 +2,7 @@
 local PanelsContextModule = require(script.Parent.PanelsContext)
 local _ = require(script.Parent.Types)
 
-return function() --[[ Line: 11 | Named "usePanelsContext" ]]
+return function()
 	-- upvalues: ReactModule (copy), PanelsContextModule (copy)
 	local UseContextResult = ReactModule.useContext(PanelsContextModule)
 	

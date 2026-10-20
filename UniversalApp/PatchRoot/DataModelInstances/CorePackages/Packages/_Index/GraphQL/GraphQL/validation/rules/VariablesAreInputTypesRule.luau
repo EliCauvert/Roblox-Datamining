@@ -5,10 +5,10 @@ local IsInputTypeFunction = require(Parent.type.definition).isInputType
 local TypeFromASTFunction = require(Parent.utilities.typeFromAST).typeFromAST
 
 return {
-	VariablesAreInputTypesRule = function(p1) --[[ Line: 24 ]]
+	VariablesAreInputTypesRule = function(p1)
 		-- upvalues: TypeFromASTFunction (copy), IsInputTypeFunction (copy), PrintFunction (copy), GraphQLError (copy)
 		return {
-			VariableDefinition = function(_, p2) --[[ Line: 26 ]]
+			VariableDefinition = function(_, p2)
 				-- upvalues: TypeFromASTFunction (upval), p1 (copy), IsInputTypeFunction (upval), PrintFunction (upval), GraphQLError (upval)
 				local TypeFromASTResult = TypeFromASTFunction(p1:getSchema(), p2.type)
 				

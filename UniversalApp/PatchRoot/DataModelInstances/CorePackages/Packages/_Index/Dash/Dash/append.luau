@@ -4,12 +4,12 @@ local ForEachArgsModule = require(Parent.forEachArgs)
 local ForEachModule = require(Parent.forEach)
 local InsertFunction = table.insert
 
-return function(p1, ...) --[[ Line: 16 | Named "append" ]]
+return function(p1, ...)
 	-- upvalues: ForEachArgsModule (copy), NoneModule (copy), ForEachModule (copy), InsertFunction (copy)
-	ForEachArgsModule(function(NoneModule1) --[[ Line: 17 ]]
+	ForEachArgsModule(function(NoneModule1)
 		-- upvalues: NoneModule (upval), ForEachModule (upval), p1 (copy), InsertFunction (upval)
 		if NoneModule1 ~= NoneModule and NoneModule1 ~= nil then
-			ForEachModule(NoneModule1, function(p2) --[[ Line: 21 ]]
+			ForEachModule(NoneModule1, function(p2)
 				-- upvalues: p1 (upval), InsertFunction (upval)
 				InsertFunction(p1, p2)
 			end)

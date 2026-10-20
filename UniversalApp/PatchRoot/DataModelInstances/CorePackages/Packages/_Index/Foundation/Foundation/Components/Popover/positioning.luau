@@ -4,13 +4,13 @@ local PopoverAlignModule = require(Foundation.Enums.PopoverAlign)
 local PopoverSideModule = require(Foundation.Enums.PopoverSide)
 
 return {
-	adjustForOnScreenKeyboard = function(p1, p2, p3): Rect --[[ Line: 94 ]]
+	adjustForOnScreenKeyboard = function(p1, p2, p3): Rect
 		return Rect.new(p1.Min, Vector2.new(p1.Max.X, (math.min(p1.Max.Y, (p2 - p3).Y))))
 	end,
-	isOnScreen = function(p1, p2): boolean --[[ Line: 26 ]]
+	isOnScreen = function(p1, p2): boolean
 		return p2.Max.X >= p1.Min.X and p1.Max.X >= p2.Min.X and p2.Max.Y >= p1.Min.Y and p1.Max.Y >= p2.Min.Y
 	end,
-	calculateSide = function(Bottom, p1, p2, Vector) --[[ Line: 39 ]]
+	calculateSide = function(Bottom, p1, p2, Vector)
 		-- upvalues: PopoverSideModule (copy)
 		if Bottom == PopoverSideModule.Top then
 			if p1.Min.Y - Vector.Y < p2.Min.Y and p1.Max.Y + Vector.Y < p2.Max.Y then
@@ -29,7 +29,7 @@ return {
 		end
 		return Bottom
 	end,
-	calculatePositions = function(Top, p1: number, Center, p2: number, p3, p4, p5: number, Vector) --[[ Line: 103 ]]
+	calculatePositions = function(Top, p1: number, Center, p2: number, p3, p4, p5: number, Vector)
 		-- upvalues: PopoverSideModule (copy), PopoverAlignModule (copy), FlagsModule (copy)
 		local Vector1 = { X = 0, Y = 0 }
 		local config = { X = 0, Y = 0 }
@@ -102,7 +102,7 @@ return {
 		
 		return Vector2.new(Vector1.X, Vector1.Y), Vector2.new(config.X, config.Y), Vector2.new(config1.X, config1.Y)
 	end,
-	calculatePopoverBounds = function(Bottom, p1, X, p2, NewVector) --[[ Line: 10 ]]
+	calculatePopoverBounds = function(Bottom, p1, X, p2, NewVector)
 		-- upvalues: PopoverSideModule (copy)
 		local NewVector1 = NewVector
 		
@@ -114,7 +114,7 @@ return {
 			return NewVector1 + Vector2.new(p1 + p2, X)
 		end
 	end,
-	calculateAlign = function(Bottom, End, p1, p2, Vector) --[[ Line: 60 ]]
+	calculateAlign = function(Bottom, End, p1, p2, Vector)
 		-- upvalues: PopoverSideModule (copy), PopoverAlignModule (copy)
 		if Bottom == PopoverSideModule.Top or Bottom == PopoverSideModule.Bottom then
 			if End == PopoverAlignModule.Start then

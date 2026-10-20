@@ -25,7 +25,7 @@ return {
 	},
 	requiredData = {},
 	expectedFailures = {},
-	run = function(p1, p2) --[[ Line: 47 ]]
+	run = function(p1, p2)
 		-- upvalues: GetFFlagUGCValidateTexturePackModule (copy), config1 (copy), GetFFlagUGCValidationAllowFullVaasModule (copy), ValidationEnumsModule (copy), config (copy), GetFFlagUGCValidateTexturePackOnRCCOnlyModule (copy), TexturePackUtilsModule (copy), ErrorSourceStringsModule (copy), UGCValidationService (copy)
 		if not GetFFlagUGCValidateTexturePackModule() then return end
 		local RootInstance = p2.rootInstance
@@ -49,7 +49,7 @@ return {
 			end
 		end
 		for _, Object in TexturePackUtilsModule.findSurfaceAppearancesWithTexturePacks(RootInstance) do
-			local Success, Result = pcall(function() --[[ Line: 94 ]]
+			local Success, Result = pcall(function()
 				-- upvalues: UGCValidationService (upval), Object (copy)
 				return UGCValidationService:DoesSurfaceAppearanceMatchTexturePackAsync(Object)
 			end)

@@ -6,10 +6,10 @@ local HttpService = game:GetService("HttpService")
 local InvariantError = require(Parent.jsutils.invariant).InvariantError
 
 return {
-	serializeFetchParameter = function(Input, p1, p2) --[[ Line: 27 ]]
+	serializeFetchParameter = function(Input, p1, p2)
 		-- upvalues: Array (copy), HttpService (copy), InvariantError (copy), Error1 (copy)
 		local Json = nil
-		local Success, Result = pcall(function() --[[ Line: 29 ]]
+		local Success, Result = pcall(function()
 			-- upvalues: Array (upval), Input (copy), p2 (copy), Json (ref), HttpService (upval)
 			if Array.isArray(Input) and #Input == 0 and p2 then
 				Json = "{}"

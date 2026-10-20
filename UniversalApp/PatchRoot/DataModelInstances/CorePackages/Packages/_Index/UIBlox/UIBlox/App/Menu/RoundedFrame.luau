@@ -5,7 +5,7 @@ local Object = require(Parent1.LuauPolyfill).Object
 local _ = require(Parent.Style.StyleTypes)
 local config = { zIndex = 1 }
 
-return function(p1) --[[ Line: 27 ]]
+return function(p1)
 	-- upvalues: Object (copy), config (copy), ReactModule (copy)
 	local AssignResult = Object.assign({}, config, p1)
 	

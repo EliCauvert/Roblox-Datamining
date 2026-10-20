@@ -5,7 +5,7 @@ local PropTypesEngineModule = require(script.Parent.prop_types_engine)
 local Module = {}
 Module.__index = Module
 
-function Module.new(p1) --[[ Line: 162 ]]
+function Module.new(p1)
 	-- upvalues: Module (copy)
 	return (setmetatable({
 		prop_builder = if p1 == nil or p1.prop_builder == nil then nil else p1.prop_builder,
@@ -13,7 +13,7 @@ function Module.new(p1) --[[ Line: 162 ]]
 	}, Module))
 end
 
-function Module:encode() --[[ Line: 169 ]]
+function Module:encode()
 	-- upvalues: ProtoModule (copy)
 	local Buf = buffer.create(0)
 	local Count = 0
@@ -179,7 +179,7 @@ function Module:encode() --[[ Line: 169 ]]
 	return Buf1
 end
 
-function Module.decode(Buf) --[[ Line: 335 ]]
+function Module.decode(Buf)
 	-- upvalues: Module (copy), ProtoModule (copy), PropTypesModule (copy), PropTypesEngineModule (copy)
 	local NewModule = Module.new()
 	local v1 = 0
@@ -471,7 +471,7 @@ function Module.decode(Buf) --[[ Line: 335 ]]
 	return NewModule
 end
 
-function Module:jsonEncode() --[[ Line: 688 ]]
+function Module:jsonEncode()
 	local t = {}
 	
 	if self.prop_builder ~= nil then
@@ -665,7 +665,7 @@ function Module:jsonEncode() --[[ Line: 688 ]]
 	return t
 end
 
-function Module:jsonDecode() --[[ Line: 776 ]]
+function Module:jsonDecode()
 	-- upvalues: Module (copy), PropTypesModule (copy), PropTypesEngineModule (copy)
 	local NewModule = Module.new()
 	

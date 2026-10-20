@@ -1,5 +1,5 @@
-﻿return function(p1, p2) --[[ Line: 1 | Named "getConnectedWires" ]]
-	local Success, Result = pcall(function() --[[ Line: 2 ]]
+﻿return function(p1, p2)
+	local Success, Result = pcall(function()
 		-- upvalues: p1 (copy), p2 (copy)
 		return p1:GetConnectedWires(p2)
 	end)

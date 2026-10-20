@@ -84,7 +84,7 @@ local config2 = {
 }
 
 return {
-	getKeyCodeNote = function(p1) --[[ Line: 97 ]]
+	getKeyCodeNote = function(p1)
 		-- upvalues: KeyCodeCategoriesModule (copy), config1 (copy), config (copy), config2 (copy)
 		local KeyCodeName = KeyCodeCategoriesModule.getKeyCodeName(p1)
 		

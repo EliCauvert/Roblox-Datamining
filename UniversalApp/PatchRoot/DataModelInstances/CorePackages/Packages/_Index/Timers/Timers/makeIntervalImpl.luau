@@ -1,9 +1,9 @@
 ﻿local Proxy = newproxy(false)
 
-return function(Callback) --[[ Line: 23 ]]
+return function(Callback)
 	-- upvalues: Proxy (copy)
 	return {
-		setInterval = function(Callback1, p1: number, ...) --[[ Line: 24 ]]
+		setInterval = function(Callback1, p1: number, ...)
 			-- upvalues: Proxy (upval), Callback (copy)
 			local list = { ... }
 			local config = { [Proxy] = 1 }
@@ -14,9 +14,9 @@ return function(Callback) --[[ Line: 23 ]]
 			local v1 = p1 / 1000
 			local _ = nil
 			
-			local function v5() --[[ Line: 38 ]]
+			local function v5()
 				-- upvalues: Callback (upval), v1 (copy), config (copy), Proxy (upval), Callback1 (copy), list (copy), v5 (ref)
-				Callback(v1, function() --[[ Line: 39 ]]
+				Callback(v1, function()
 					-- upvalues: config (upval), Proxy (upval), Callback1 (upval), list (upval), v5 (upval)
 					if config[Proxy] == 1 then
 						Callback1(unpack(list))
@@ -29,7 +29,7 @@ return function(Callback) --[[ Line: 23 ]]
 			
 			return config
 		end,
-		clearInterval = function(p1) --[[ Line: 52 ]]
+		clearInterval = function(p1)
 			-- upvalues: Proxy (upval)
 			if p1 == nil then return end
 			if p1[Proxy] == 1 then

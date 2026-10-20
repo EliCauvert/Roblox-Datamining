@@ -13,22 +13,22 @@ local StackActionsModule = require(Parent.routers.StackActions)
 local SwitchActionsModule = require(script.Parent.SwitchActions)
 local CreatePathParserFunction = require(script.Parent.pathUtils).createPathParser
 
-local function defaultActionCreators() --[[ Line: 20 ]]
+local function defaultActionCreators()
 	return {}
 end
 
-local function mapToRouteName(p1) --[[ Line: 24 ]]
+local function mapToRouteName(p1)
 	return (next(p1))
 end
 
-local function foldToRoutes(p1, p2) --[[ Line: 29 ]]
+local function foldToRoutes(p1, p2)
 	local Key, Value = next(p2)
 	p1[Key] = Value
 	
 	return p1
 end
 
-return function(p1, p2) --[[ Line: 35 ]]
+return function(p1, p2)
 	-- upvalues: ValidateRouteConfigArrayModule (copy), ValidateRouteConfigMapModule (copy), Array (copy), foldToRoutes (copy), mapToRouteName (copy), defaultActionCreators (copy), BackBehaviorModule (copy), GetScreenForRouteNameModule (copy), Object (copy), CreatePathParserFunction (copy), NavigationActionsModule (copy), CreateConfigGetterModule (copy), SwitchActionsModule (copy), StackActionsModule (copy), InvariantModule (copy)
 	ValidateRouteConfigArrayModule(p1)
 	local P4 = p2 or {}
@@ -42,7 +42,7 @@ return function(p1, p2) --[[ Line: 35 ]]
 	local IndexOfResult: number = Array.indexOf(Order, InitialRouteName)
 	
 	if IndexOfResult < 1 then
-		error(("Invalid initialRouteName '%s'. Should be one of %s"):format(InitialRouteName, (table.concat(Array.map(Order, function(p3): string --[[ Line: 61 ]]
+		error(("Invalid initialRouteName '%s'. Should be one of %s"):format(InitialRouteName, (table.concat(Array.map(Order, function(p3): string
 			return ("\"%s\""):format(p3)
 		end), ", "))), 2)
 	end
@@ -57,7 +57,7 @@ return function(p1, p2) --[[ Line: 35 ]]
 			ChildRouters[value] = false
 		end
 	end
-	local function _(p3, p4) --[[ Line: 80 | Named "getParamsForRoute" ]]
+	local function _(p3, p4)
 		-- upvalues: ValidateRouteConfigMapModuleResult (copy), Object (upval)
 		local ValidateRouteConfigMapModuleResultEntry = ValidateRouteConfigMapModuleResult[p3]
 		
@@ -68,7 +68,7 @@ return function(p1, p2) --[[ Line: 35 ]]
 	local GetPathAndParamsForRouteFunction = PathParser.getPathAndParamsForRoute
 	local GetActionForPathAndParamsFunction = PathParser.getActionForPathAndParams
 	
-	local function resetChildRoute(RouteName) --[[ Line: 95 ]]
+	local function resetChildRoute(RouteName)
 		-- upvalues: InitialRouteName (copy), InitialRouteParams (copy), ValidateRouteConfigMapModuleResult (copy), Object (upval), ChildRouters (copy), NavigationActionsModule (upval)
 		local InitialRouteParams1 = if RouteName == InitialRouteName then InitialRouteParams else nil
 		local ValidateRouteConfigMapModuleResultEntry = ValidateRouteConfigMapModuleResult[RouteName]
@@ -86,7 +86,7 @@ return function(p1, p2) --[[ Line: 35 ]]
 		}
 	end
 	
-	local function getNextState(p3, p4, Tbl) --[[ Line: 118 ]]
+	local function getNextState(p3, p4, Tbl)
 		-- upvalues: NoResetOnBlur (ref), resetChildRoute (copy), Object (upval), BackBehavior (copy), BackBehaviorModule (upval), NavigationActionsModule (upval), Array (upval)
 		local Tbl1 = Tbl
 		
@@ -102,7 +102,7 @@ return function(p1, p2) --[[ Line: 35 ]]
 		
 		if p3.type == NavigationActionsModule.Navigate then
 			local Key = Tbl1.routes[Tbl1.index].key
-			RouteKeyHistory = Array.filter(RouteKeyHistory, function(Key1): boolean --[[ Line: 136 ]]
+			RouteKeyHistory = Array.filter(RouteKeyHistory, function(Key1): boolean
 				-- upvalues: Key (copy)
 				return Key1 ~= Key
 			end)
@@ -114,7 +114,7 @@ return function(p1, p2) --[[ Line: 35 ]]
 		return Object.assign(table.clone(Tbl1), { routeKeyHistory = RouteKeyHistory })
 	end
 	
-	local function getInitialState() --[[ Line: 148 ]]
+	local function getInitialState()
 		-- upvalues: Array (upval), Order (copy), resetChildRoute (copy), IndexOfResult (copy), BackBehavior (copy), BackBehaviorModule (upval)
 		local MapResult = Array.map(Order, resetChildRoute)
 		local config = { routes = MapResult, index = IndexOfResult }
@@ -127,12 +127,12 @@ return function(p1, p2) --[[ Line: 35 ]]
 	
 	return {
 		childRouters = ChildRouters,
-		getActionCreators = function(p3, p4) --[[ Line: 165 ]]
+		getActionCreators = function(p3, p4)
 			-- upvalues: GetCustomActionCreators (copy)
 			return GetCustomActionCreators(p3, p4)
 		end,
 		getScreenOptions = CreateConfigGetterModule(ValidateRouteConfigMapModuleResult, P4.defaultNavigationOptions),
-		getStateForAction = function(Action, Tbl) --[[ Line: 171 ]]
+		getStateForAction = function(Action, Tbl)
 			-- upvalues: getInitialState (copy), NavigationActionsModule (upval), Array (upval), InitialRouteName (copy), InitialRouteParams (copy), Object (upval), SwitchActionsModule (upval), getNextState (copy), ChildRouters (copy), Order (copy), BackBehavior (copy), BackBehaviorModule (upval), IndexOfResult (copy), StackActionsModule (upval)
 			local Copy = if Tbl then table.clone(Tbl) else nil
 			local Tbl2 = Tbl or getInitialState()
@@ -142,7 +142,7 @@ return function(p1, p2) --[[ Line: 35 ]]
 				local Params = Action.params
 				
 				if Params then
-					Tbl2.routes = Array.map(Tbl2.routes, function(Tbl) --[[ Line: 181 ]]
+					Tbl2.routes = Array.map(Tbl2.routes, function(Tbl)
 						-- upvalues: InitialRouteName (upval), InitialRouteParams (upval), Object (upval), Params (copy)
 						local InitialRouteParams1 = Tbl.routeName == InitialRouteName and InitialRouteParams or {}
 						
@@ -154,19 +154,19 @@ return function(p1, p2) --[[ Line: 35 ]]
 			end
 			if Action.type == SwitchActionsModule.JumpTo and (Action.key == nil or Action.key == Tbl2.key) then
 				local Params1 = Action.params
-				local Index1: number = Array.findIndex(Tbl2.routes, function(p3): boolean --[[ Line: 194 ]]
+				local Index1: number = Array.findIndex(Tbl2.routes, function(p3): boolean
 					-- upvalues: Action (copy)
 					return p3.routeName == Action.routeName
 				end)
 				
 				if Index1 < 1 then
-					error(("There is no route named '%s' in the navigator with the key '%s'.\n"):format(Action.routeName, Action.key) .. "Must be one of: " .. table.concat(Array.map(Tbl2.routes, function(p3) --[[ Line: 206 ]]
+					error(("There is no route named '%s' in the navigator with the key '%s'.\n"):format(Action.routeName, Action.key) .. "Must be one of: " .. table.concat(Array.map(Tbl2.routes, function(p3)
 						return p3.routeName
 					end), ","))
 				end
 				local Routes = Tbl2.routes
 				
-				return if Params1 then Tbl2.routes.map(function(Tbl, Index) --[[ Line: 216 ]]
+				return if Params1 then Tbl2.routes.map(function(Tbl, Index)
 					-- upvalues: Index1 (copy), Object (upval), Params1 (copy)
 					return if Index == Index1 then Object.assign(table.clone(Tbl), { params = Object.assign(table.clone(Tbl.params), Params1) }) else Tbl
 				end) else getNextState(Action, Copy, Object.assign(table.clone(Tbl2), { routes = Routes, index = Index1 }))
@@ -201,7 +201,7 @@ return function(p1, p2) --[[ Line: 35 ]]
 				local HasFindResult = false
 				
 				if Action.type == NavigationActionsModule.Navigate then
-					HasFindResult = Array.find(Order, function(RouteName, p3): boolean --[[ Line: 274 ]]
+					HasFindResult = Array.find(Order, function(RouteName, p3): boolean
 						-- upvalues: Action (copy), Index (ref)
 						if RouteName == Action.routeName then
 							Index = p3
@@ -242,7 +242,7 @@ return function(p1, p2) --[[ Line: 35 ]]
 				end
 				if Action.type == NavigationActionsModule.SetParams then
 					local Key = Action.key
-					local Index2: number = Array.findIndex(Tbl2.routes, function(p3): boolean --[[ Line: 320 ]]
+					local Index2: number = Array.findIndex(Tbl2.routes, function(p3): boolean
 						-- upvalues: Key (copy)
 						return p3.key == Key
 					end)
@@ -269,7 +269,7 @@ return function(p1, p2) --[[ Line: 35 ]]
 				if not (Action.type == NavigationActionsModule.Back or (Action.type == StackActionsModule.Pop or Action.type == StackActionsModule.PopToTop)) or Action.type == NavigationActionsModule.Back and Action.key ~= nil then
 					local Index3 = Tbl2.index
 					local Routes = Tbl2.routes
-					Array.find(Order, function(p3, Index): boolean --[[ Line: 363 ]]
+					Array.find(Order, function(p3, Index): boolean
 						-- upvalues: ChildRouters (upval), Index3 (ref), Routes (ref), Action (copy)
 						local ChildRouter = ChildRouters[p3]
 						
@@ -306,7 +306,7 @@ return function(p1, p2) --[[ Line: 35 ]]
 				return Tbl2
 			end
 		end,
-		getComponentForState = function(Route) --[[ Line: 410 ]]
+		getComponentForState = function(Route)
 			-- upvalues: InvariantModule (upval), ChildRouters (copy), GetScreenForRouteNameModule (upval), ValidateRouteConfigMapModuleResult (copy)
 			local RouteName = (Route.routes[Route.index] or {}).routeName
 			InvariantModule(RouteName, "There is no route defined for index '%d'. Check that you passed in a navigation state with a valid tab/screen index.", Route.index)
@@ -314,15 +314,15 @@ return function(p1, p2) --[[ Line: 35 ]]
 			
 			return if ChildRouter then ChildRouter.getComponentForState(Route.routes[Route.index]) else GetScreenForRouteNameModule(ValidateRouteConfigMapModuleResult, RouteName)
 		end,
-		getComponentForRouteName = function(p3) --[[ Line: 430 ]]
+		getComponentForRouteName = function(p3)
 			-- upvalues: GetScreenForRouteNameModule (upval), ValidateRouteConfigMapModuleResult (copy)
 			return GetScreenForRouteNameModule(ValidateRouteConfigMapModuleResult, p3)
 		end,
-		getPathAndParamsForState = function(p3) --[[ Line: 434 ]]
+		getPathAndParamsForState = function(p3)
 			-- upvalues: GetPathAndParamsForRouteFunction (copy)
 			return GetPathAndParamsForRouteFunction(p3.routes[p3.index])
 		end,
-		getActionForPathAndParams = function(p3, p4) --[[ Line: 439 ]]
+		getActionForPathAndParams = function(p3, p4)
 			-- upvalues: GetActionForPathAndParamsFunction (copy)
 			return GetActionForPathAndParamsFunction(p3, p4)
 		end

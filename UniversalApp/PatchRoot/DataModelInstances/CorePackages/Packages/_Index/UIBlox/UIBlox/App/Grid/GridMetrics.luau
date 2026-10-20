@@ -1,7 +1,7 @@
 ﻿local TModule = require(script.Parent.Parent.Parent.Parent.t)
 local config = { minimumItemsPerRow = 2, minimumItemWidth = 160 }
 
-local function _(p1, p2, p3) --[[ Line: 24 | Named "getItemMetrics" ]]
+local function _(p1, p2, p3)
 	local Largest = math.max(p3.minimumItemsPerRow, (math.floor((p1 + p2) / (p3.minimumItemWidth + p2))))
 	
 	return {
@@ -16,11 +16,11 @@ local StrictInterfaceResult = TModule.strictInterface({
 })
 local TupleResult = TModule.tuple(TModule.numberMin(0), TModule.number)
 local GridMetricsModule = {
-	makeCustomMetricsGetter = function(p1) --[[ Line: 48 ]]
+	makeCustomMetricsGetter = function(p1)
 		-- upvalues: StrictInterfaceResult (copy), TupleResult (copy)
 		assert(StrictInterfaceResult(p1))
 		
-		return function(p2, p3) --[[ Line: 51 ]]
+		return function(p2, p3)
 			-- upvalues: TupleResult (upval), p1 (copy)
 			assert(TupleResult(p2, p3))
 			local Largest = math.max(p1.minimumItemsPerRow, (math.floor((p2 + p3) / (p1.minimumItemWidth + p3))))
@@ -35,7 +35,7 @@ local GridMetricsModule = {
 GridMetricsModule.getLargeMetrics = GridMetricsModule.makeCustomMetricsGetter({ minimumItemsPerRow = 1, minimumItemWidth = 332 })
 GridMetricsModule.getMediumMetrics = GridMetricsModule.makeCustomMetricsGetter(config)
 
-function GridMetricsModule.getSmallMetrics(p1, p2) --[[ Line: 60 ]]
+function GridMetricsModule.getSmallMetrics(p1, p2)
 	-- upvalues: GridMetricsModule (copy)
 	local NewItemsPerRow = GridMetricsModule.getMediumMetrics(p1, p2).itemsPerRow + 1
 	
@@ -45,7 +45,7 @@ function GridMetricsModule.getSmallMetrics(p1, p2) --[[ Line: 60 ]]
 	}
 end
 
-function GridMetricsModule.getMetricsForFixedColumns(p1, p2, ItemsPerRow: number) --[[ Line: 73 ]]
+function GridMetricsModule.getMetricsForFixedColumns(p1, p2, ItemsPerRow: number)
 	return {
 		itemsPerRow = ItemsPerRow,
 		itemWidth = math.floor((p1 - (ItemsPerRow - 1) * p2) / ItemsPerRow)

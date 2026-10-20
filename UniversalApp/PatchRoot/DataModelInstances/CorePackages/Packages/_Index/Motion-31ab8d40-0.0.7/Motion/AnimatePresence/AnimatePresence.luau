@@ -3,18 +3,18 @@ local ReactModule = require(Parent.Parent.React)
 local PresenceChildModule = require(script.Parent.PresenceChild)
 local PresenceStateModule = require(Parent.Enums.PresenceState)
 
-local function _(p1, p2) --[[ Line: 55 | Named "getCompositeKey" ]]
+local function _(p1, p2)
 	return if typeof(p2) == "table" and p2.props and p2.props.presenceId then string.format("%s:%s", p1, (tostring(p2.props.presenceId))) else p1
 end
 
-return function(p1) --[[ Line: 63 | Named "AnimatePresence" ]]
+return function(p1)
 	-- upvalues: ReactModule (copy), PresenceStateModule (copy), PresenceChildModule (copy)
 	local Children = p1.children
 	local ChildData = if p1.childData == nil then nil else p1.childData
 	local OnExitComplete = if p1.onExitComplete == nil then nil else p1.onExitComplete
 	local UseStateResult, UseStateResult2 = ReactModule.useState({})
 	local UseRefResult = ReactModule.useRef({})
-	ReactModule.useEffect(function() --[[ Line: 73 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: Children (copy), PresenceStateModule (upval), UseStateResult (copy), UseStateResult2 (copy), UseRefResult (copy)
 		local t = {}
 		
@@ -50,7 +50,7 @@ return function(p1) --[[ Line: 63 | Named "AnimatePresence" ]]
 			end
 		end
 		if next(t) ~= nil then
-			UseStateResult2(function(Tbl) --[[ Line: 120 ]]
+			UseStateResult2(function(Tbl)
 				-- upvalues: t (copy), PresenceStateModule (upval), UseRefResult (upval)
 				local Copy = table.clone(Tbl)
 				
@@ -76,11 +76,11 @@ return function(p1) --[[ Line: 63 | Named "AnimatePresence" ]]
 			end)
 		end
 	end, { Children })
-	local UseResult = ReactModule.useCallback(function(p2) --[[ Line: 150 ]]
+	local UseResult = ReactModule.useCallback(function(p2)
 		-- upvalues: UseRefResult (copy), UseStateResult2 (copy)
 		if UseRefResult.current[p2] then
 			UseRefResult.current[p2] = nil
-			UseStateResult2(function(Tbl) --[[ Line: 154 ]]
+			UseStateResult2(function(Tbl)
 				-- upvalues: p2 (copy)
 				local Copy = table.clone(Tbl)
 				
@@ -96,7 +96,7 @@ return function(p1) --[[ Line: 63 | Named "AnimatePresence" ]]
 			end)
 		end
 	end, {})
-	ReactModule.useEffect(function() --[[ Line: 170 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UseStateResult (copy), UseStateResult2 (copy), OnExitComplete (copy)
 		local t = {}
 		local Flag = false
@@ -108,7 +108,7 @@ return function(p1) --[[ Line: 63 | Named "AnimatePresence" ]]
 			end
 		end
 		if Flag then
-			UseStateResult2(function(List) --[[ Line: 182 ]]
+			UseStateResult2(function(List)
 				-- upvalues: t (copy), OnExitComplete (upval)
 				local t1 = {}
 				
@@ -131,7 +131,7 @@ return function(p1) --[[ Line: 63 | Named "AnimatePresence" ]]
 				key = Key,
 				presenceId = Key,
 				isPresent = value.isPresent,
-				onExitComplete = function() --[[ Line: 208 ]]
+				onExitComplete = function()
 					-- upvalues: UseResult (copy), Key (copy)
 					UseResult(Key)
 				end,

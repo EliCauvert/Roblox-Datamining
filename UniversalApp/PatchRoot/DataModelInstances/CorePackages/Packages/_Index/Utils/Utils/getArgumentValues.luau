@@ -12,17 +12,17 @@ local CreateGraphQLErrorFunction = require(script.Parent.errors).createGraphQLEr
 local InspectFunction = require(script.Parent.inspect).inspect
 
 return {
-	getArgumentValues = function(p1, p2, p3) --[[ Line: 48 ]]
+	getArgumentValues = function(p1, p2, p3)
 		-- upvalues: Array (copy), Object (copy), Boolean (copy), IsNonNullTypeFunction (copy), CreateGraphQLErrorFunction (copy), InspectFunction (copy), Kind (copy), ValueFromASTFunction (copy), PrintFunction (copy)
 		local T = if p3 == nil then {} else p3
-		local ReduceResult = Array.reduce(Object.entries(T), function(p4, p5) --[[ Line: 58 ]]
+		local ReduceResult = Array.reduce(Object.entries(T), function(p4, p5)
 			-- upvalues: Object (upval)
 			local Unpacked, Unpacked2 = table.unpack(p5, 1, 2)
 			
 			return Object.assign({}, p4, { [tostring(Unpacked)] = Unpacked2 })
 		end, {})
 		local DefaultValues = {}
-		local ReduceResult1 = Array.reduce(if p2.arguments == nil then {} else p2.arguments, function(p4, p5) --[[ Line: 71 ]]
+		local ReduceResult1 = Array.reduce(if p2.arguments == nil then {} else p2.arguments, function(p4, p5)
 			-- upvalues: Object (upval)
 			return Object.assign({}, p4, { [tostring(p5.name.value)] = p5 })
 		end, {})

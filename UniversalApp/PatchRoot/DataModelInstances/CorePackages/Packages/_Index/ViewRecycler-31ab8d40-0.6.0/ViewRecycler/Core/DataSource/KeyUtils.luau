@@ -1,6 +1,6 @@
 ﻿local ItemKeyRegistryModule = require(script.Parent.ItemKeyRegistry)
 
-local function validateUnique(DKeys, p1) --[[ Line: 5 ]]
+local function validateUnique(DKeys, p1)
 	local t = {}
 	local Message: string = `{p1}: keys must be strings`
 	
@@ -17,7 +17,7 @@ end
 
 return {
 	validateUnique = validateUnique,
-	keysFor = function(List, Callback) --[[ Line: 18 ]]
+	keysFor = function(List, Callback)
 		-- upvalues: ItemKeyRegistryModule (copy), validateUnique (copy)
 		local Buffer = table.create(#List)
 		

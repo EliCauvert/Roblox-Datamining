@@ -3,7 +3,7 @@ local LayerCollectorContextModule = require(script.Parent.LayerCollectorContext)
 local GuiService = game:GetService("GuiService")
 local LayerCollectorProvider = RoactModule.PureComponent:extend("LayerCollectorProvider")
 
-function LayerCollectorProvider.init(p1) --[[ Line: 11 ]]
+function LayerCollectorProvider.init(p1)
 	-- upvalues: RoactModule (copy)
 	p1.rootRef = RoactModule.createRef()
 	p1.state = {
@@ -12,14 +12,14 @@ function LayerCollectorProvider.init(p1) --[[ Line: 11 ]]
 	}
 end
 
-function LayerCollectorProvider.watchLayerCollector(p1, ScreenGui) --[[ Line: 24 ]]
+function LayerCollectorProvider.watchLayerCollector(p1, ScreenGui)
 	-- upvalues: GuiService (copy)
 	local AbsoluteSize = ScreenGui.AbsoluteSize
 	local _Vector2 = Vector2.new(0, 0)
 	local _Vector2_1 = Vector2.new(0, 0)
 	
 	if ScreenGui:IsA("ScreenGui") then
-		local Success, Result = pcall(function() --[[ Line: 30 ]]
+		local Success, Result = pcall(function()
 			-- upvalues: ScreenGui (copy)
 			return ScreenGui.IgnoreGuiInset
 		end)
@@ -37,7 +37,7 @@ function LayerCollectorProvider.watchLayerCollector(p1, ScreenGui) --[[ Line: 24
 			right = _Vector2_1.X
 		}
 	})
-	p1.absoluteSizeConnection = ScreenGui:GetPropertyChangedSignal("AbsoluteSize"):Connect(function() --[[ Line: 48 ]]
+	p1.absoluteSizeConnection = ScreenGui:GetPropertyChangedSignal("AbsoluteSize"):Connect(function()
 		-- upvalues: AbsoluteSize (ref), ScreenGui (copy), p1 (copy), _Vector2 (ref), _Vector2_1 (ref)
 		AbsoluteSize = ScreenGui.AbsoluteSize
 		p1:setState({
@@ -52,12 +52,12 @@ function LayerCollectorProvider.watchLayerCollector(p1, ScreenGui) --[[ Line: 24
 	end)
 end
 
-function LayerCollectorProvider.didMount(p1) --[[ Line: 64 ]]
+function LayerCollectorProvider.didMount(p1)
 	local Current = p1.rootRef.current
 	local LayerCollector = Current:FindFirstAncestorWhichIsA("LayerCollector")
 	
 	if LayerCollector == nil then
-		p1.ancestryConnection = Current.AncestryChanged:Connect(function() --[[ Line: 69 ]]
+		p1.ancestryConnection = Current.AncestryChanged:Connect(function()
 			-- upvalues: LayerCollector (ref), Current (copy), p1 (copy)
 			LayerCollector = Current:FindFirstAncestorWhichIsA("LayerCollector")
 			
@@ -72,7 +72,7 @@ function LayerCollectorProvider.didMount(p1) --[[ Line: 64 ]]
 	end
 end
 
-function LayerCollectorProvider.render(p1) --[[ Line: 82 ]]
+function LayerCollectorProvider.render(p1)
 	-- upvalues: RoactModule (copy), LayerCollectorContextModule (copy)
 	return RoactModule.createElement(LayerCollectorContextModule.Provider, {
 		value = {

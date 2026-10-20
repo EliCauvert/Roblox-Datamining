@@ -4,7 +4,7 @@ local ReactModule = require(script.Parent.Parent.Parent.Parent.Parent.React)
 local _ = require(script.Parent.Types)
 local ProgressIconModule = require(script.Parent.ProgressIcon)
 
-local function useRenderStepped(p1, p2, p3) --[[ Line: 33 ]]
+local function useRenderStepped(p1, p2, p3)
 	-- upvalues: ReactModule (copy), RunService (copy)
 	local UseRefResult = ReactModule.useRef(0)
 	local UseRefResult1 = ReactModule.useRef(0)
@@ -18,7 +18,7 @@ local function useRenderStepped(p1, p2, p3) --[[ Line: 33 ]]
 	local AnimationTriggerTime = p3.animationTriggerTime
 	local AnimationKeyHoldingTime = p3.animationKeyHoldingTime
 	local AnimationCoolDownTime = p3.animationCoolDownTime
-	local UseResult = ReactModule.useCallback(function(p4) --[[ Line: 54 ]]
+	local UseResult = ReactModule.useCallback(function(p4)
 		-- upvalues: UseRefResult1 (copy), AnimationTriggerTime (copy), OnKeyHoldingFunction (copy)
 		UseRefResult1.current += p4
 		
@@ -26,7 +26,7 @@ local function useRenderStepped(p1, p2, p3) --[[ Line: 33 ]]
 			OnKeyHoldingFunction()
 		end
 	end, { OnKeyHoldingFunction, AnimationTriggerTime })
-	local UseResult1 = ReactModule.useCallback(function(p4) --[[ Line: 61 ]]
+	local UseResult1 = ReactModule.useCallback(function(p4)
 		-- upvalues: UseRefResult (copy), AnimationKeyHoldingTime (copy), OnAnimationRunningFunction (copy), OnCompleteFunction (copy)
 		UseRefResult.current = math.clamp(UseRefResult.current + p4 / AnimationKeyHoldingTime, 0, 1)
 		OnAnimationRunningFunction(UseRefResult.current)
@@ -39,7 +39,7 @@ local function useRenderStepped(p1, p2, p3) --[[ Line: 33 ]]
 		AnimationKeyHoldingTime,
 		OnCompleteFunction
 	})
-	local UseResult2 = ReactModule.useCallback(function(p4) --[[ Line: 69 ]]
+	local UseResult2 = ReactModule.useCallback(function(p4)
 		-- upvalues: UseRefResult (copy), AnimationCoolDownTime (copy), OnAnimationRunningFunction (copy), OnResetFunction (copy)
 		UseRefResult.current = math.clamp(UseRefResult.current - p4 / AnimationCoolDownTime, 0, 1)
 		OnAnimationRunningFunction(UseRefResult.current)
@@ -52,7 +52,7 @@ local function useRenderStepped(p1, p2, p3) --[[ Line: 33 ]]
 		AnimationCoolDownTime,
 		OnResetFunction
 	})
-	ReactModule.useEffect(function() --[[ Line: 77 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: IsKeyHolding (copy), UseRefResult (copy), UseResult1 (copy), IsKeyPressed (copy), UseResult (copy), IsAnimationRunning (copy), UseResult2 (copy), RunService (upval), UseRefResult1 (copy)
 		local Connection = nil
 		local Callback = nil
@@ -68,20 +68,20 @@ local function useRenderStepped(p1, p2, p3) --[[ Line: 33 ]]
 		if Callback then
 			Connection = RunService.RenderStepped:Connect(Callback)
 		end
-		return if Connection then function() --[[ Line: 94 ]]
+		return if Connection then function()
 			-- upvalues: IsKeyPressed (upval), UseRefResult1 (upval), Connection (ref)
 			if IsKeyPressed then
 				UseRefResult1.current = 0
 			end
 			Connection:Disconnect()
-		end else function() --[[ Line: 102 ]] end
+		end else function() end
 	end, {
 		IsKeyPressed, IsKeyHolding, IsAnimationRunning, UseResult, UseResult1,
 		UseResult2
 	})
 end
 
-return function(p1) --[[ Line: 113 | Named "ProgressIconAnimated" ]]
+return function(p1)
 	-- upvalues: ReactModule (copy), useRenderStepped (copy), UserInputService (copy), ProgressIconModule (copy)
 	local UseStateResult, UseStateResult2 = ReactModule.useState(false)
 	local UseStateResult1, UseStateResult2_1 = ReactModule.useState(false)
@@ -93,16 +93,16 @@ return function(p1) --[[ Line: 113 | Named "ProgressIconAnimated" ]]
 		isKeyHolding = UseStateResult1,
 		isAnimationRunning = UseStateResult3
 	}, {
-		onKeyHolding = ReactModule.useCallback(function() --[[ Line: 121 ]]
+		onKeyHolding = ReactModule.useCallback(function()
 			-- upvalues: UseStateResult2_1 (copy), UseStateResult2_2 (copy)
 			UseStateResult2_1(true)
 			UseStateResult2_2(true)
 		end, {}),
-		onAnimationRunning = ReactModule.useCallback(function(p2) --[[ Line: 126 ]]
+		onAnimationRunning = ReactModule.useCallback(function(p2)
 			-- upvalues: UseBindingResult2 (copy)
 			UseBindingResult2(p2)
 		end, {}),
-		onComplete = ReactModule.useCallback(function() --[[ Line: 130 ]]
+		onComplete = ReactModule.useCallback(function()
 			-- upvalues: UseStateResult2 (copy), UseStateResult2_1 (copy), UseStateResult2_2 (copy), UseStateResult2_3 (copy), p1 (copy)
 			UseStateResult2(false)
 			UseStateResult2_1(false)
@@ -113,7 +113,7 @@ return function(p1) --[[ Line: 113 | Named "ProgressIconAnimated" ]]
 				p1.onHoldComplete()
 			end
 		end, { p1.onHoldComplete }),
-		onReset = ReactModule.useCallback(function() --[[ Line: 140 ]]
+		onReset = ReactModule.useCallback(function()
 			-- upvalues: UseStateResult2_2 (copy), UseBindingResult2 (copy)
 			UseStateResult2_2(false)
 			UseBindingResult2(nil)
@@ -123,7 +123,7 @@ return function(p1) --[[ Line: 113 | Named "ProgressIconAnimated" ]]
 		animationKeyHoldingTime = p1.animationKeyHoldingTime,
 		animationCoolDownTime = p1.animationCoolDownTime
 	})
-	local UseResult = ReactModule.useCallback(function(Input) --[[ Line: 160 ]]
+	local UseResult = ReactModule.useCallback(function(Input)
 		-- upvalues: p1 (copy), UseStateResult2 (copy), UseStateResult2_3 (copy), UseStateResult3 (copy), UseStateResult2_1 (copy), UseBindingResult2 (copy)
 		if Input.UserInputType ~= Enum.UserInputType.Keyboard and Input.UserInputType ~= Enum.UserInputType.Gamepad1 then return end
 		if Input.KeyCode == p1.keyCode then
@@ -146,15 +146,15 @@ return function(p1) --[[ Line: 113 | Named "ProgressIconAnimated" ]]
 			end
 		end
 	end, { p1.keyCode, UseStateResult3 })
-	ReactModule.useEffect(function() --[[ Line: 184 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: p1 (copy), UserInputService (upval), UseResult (copy)
 		if p1.progress then
-			return function() --[[ Line: 186 ]] end
+			return function() end
 		else
 			local InputBeganConnection = UserInputService.InputBegan:Connect(UseResult)
 			local InputEndedConnection = UserInputService.InputEnded:Connect(UseResult)
 			
-			return function() --[[ Line: 191 ]]
+			return function()
 				-- upvalues: InputBeganConnection (copy), InputEndedConnection (copy)
 				InputBeganConnection:Disconnect()
 				InputEndedConnection:Disconnect()

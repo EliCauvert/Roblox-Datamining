@@ -21,7 +21,7 @@ local config = {
 	variant = BuilderIconsModule.IconVariant.Regular
 }
 
-return ReactModule.memo(ReactModule.forwardRef(function(p1, Ref) --[[ Line: 46 | Named "Icon" ]]
+return ReactModule.memo(ReactModule.forwardRef(function(p1, Ref)
 	-- upvalues: WithDefaultsModule (copy), config (copy), UseTokensModule (copy), UseTextSizeOffsetModule (copy), MigrateIconNameModule (copy), UseIconSizeModule (copy), IsBuilderIconModule (copy), MigrateFontSizeModule (copy), LoggerModule (copy), ReactModule (copy), ImageModule (copy), WithCommonPropsModule (copy), TextModule (copy), BuilderIconsModuleFont (copy)
 	local WithDefaultsModuleResult = WithDefaultsModule(p1, config)
 	local UseTokensModuleResult = UseTokensModule()

@@ -1,3 +1,3 @@
-﻿return function(Object) --[[ Line: 1 | Named "isLayeredClothing" ]]
+﻿return function(Object)
 	return Object:FindFirstChildWhichIsA("WrapLayer", true)
 end

@@ -1,11 +1,11 @@
 ﻿local Map = require(script.Parent.Parent.Parent.LuauPolyfill).Map
 
-local function defaultDispose() --[[ Line: 21 ]] end
+local function defaultDispose() end
 
 local Module = {}
 Module.__index = Module
 
-function Module.new(Max, Dispose) --[[ Line: 51 ]]
+function Module.new(Max, Dispose)
 	-- upvalues: defaultDispose (copy), Module (copy), Map (copy)
 	local Max1: number = Max
 	local Dispose1 = Dispose
@@ -26,17 +26,17 @@ function Module.new(Max, Dispose) --[[ Line: 51 ]]
 	return self
 end
 
-function Module:has(p1) --[[ Line: 73 ]]
+function Module:has(p1)
 	return self.map:has(p1)
 end
 
-function Module:get(p1) --[[ Line: 77 ]]
+function Module:get(p1)
 	local Node = self:getNode(p1)
 	
 	return if Node then Node.value else Node
 end
 
-function Module:getNode(Key) --[[ Line: 87 ]]
+function Module:getNode(Key)
 	local GetResult = self.map:get(Key)
 	
 	if GetResult and GetResult ~= self.newest then
@@ -61,7 +61,7 @@ function Module:getNode(Key) --[[ Line: 87 ]]
 	return GetResult
 end
 
-function Module:set(Key, Value) --[[ Line: 121 ]]
+function Module:set(Key, Value)
 	local Node = self:getNode(Key)
 	
 	if Node then
@@ -86,13 +86,13 @@ function Module:set(Key, Value) --[[ Line: 121 ]]
 	return Newer.value
 end
 
-function Module:clean() --[[ Line: 152 ]]
+function Module:clean()
 	while self.oldest and self.max < self.map.size do
 		self:delete(self.oldest.key)
 	end
 end
 
-function Module:delete(Key): boolean --[[ Line: 160 ]]
+function Module:delete(Key): boolean
 	local GetResult = self.map:get(Key)
 	
 	if not GetResult then

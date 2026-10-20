@@ -23,7 +23,7 @@ local LegacyRoot = ReactRootTagsModule.LegacyRoot
 local BlockingRoot = ReactRootTagsModule.BlockingRoot
 local ConcurrentRoot = ReactRootTagsModule.ConcurrentRoot
 
-local function FiberRootNode(ContainerInfo, Tag, Hydrate) --[[ Line: 49 ]]
+local function FiberRootNode(ContainerInfo, Tag, Hydrate)
 	-- upvalues: NoTimeout (copy), NoLanePriority (copy), CreateLaneMapFunction (copy), NoLanes (copy), NoTimestamp (copy), SupportsHydration (copy), EnableSchedulerTracing (copy), UnstableGetThreadIDFunction (copy), Set (copy), Map (copy), EnableSuspenseCallback (copy), ReactGlobalsModule (copy), BlockingRoot (copy), ConcurrentRoot (copy), LegacyRoot (copy)
 	local config = {
 		pendingChildren = nil,
@@ -80,7 +80,7 @@ local function FiberRootNode(ContainerInfo, Tag, Hydrate) --[[ Line: 49 ]]
 end
 
 return {
-	createFiberRoot = function(ContainerInfo, Tag, Hydrate, HydrationCallbacks) --[[ Line: 105 ]]
+	createFiberRoot = function(ContainerInfo, Tag, Hydrate, HydrationCallbacks)
 		-- upvalues: FiberRootNode (copy), EnableSuspenseCallback (copy), CreateHostRootFiberFunction (copy), InitializeUpdateQueueFunction (copy)
 		local FiberRootNodeResult = FiberRootNode(ContainerInfo, Tag, Hydrate)
 		

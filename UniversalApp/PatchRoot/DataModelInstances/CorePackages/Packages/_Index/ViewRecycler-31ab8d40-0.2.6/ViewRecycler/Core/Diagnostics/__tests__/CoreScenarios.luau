@@ -1,4 +1,4 @@
-﻿local function createCounters() --[[ Line: 19 ]]
+﻿local function createCounters()
 	local config = {
 		visibleRangeChanges = 0,
 		renderedRangeChanges = 0,
@@ -18,7 +18,7 @@
 	}
 	local NewTotalDelta = 0
 	
-	return config, function(p1) --[[ Line: 39 | Named "diagnostics" ]]
+	return config, function(p1)
 		-- upvalues: config (copy), NewTotalDelta (ref)
 		if p1.kind ~= "rangeChanged" then
 			if p1.kind == "poolChanged" then
@@ -65,7 +65,7 @@
 	end
 end
 
-local function values(p1) --[[ Line: 75 ]]
+local function values(p1)
 	local Buffer = table.create(p1)
 	
 	for i = 1, p1 do
@@ -77,10 +77,10 @@ local function values(p1) --[[ Line: 75 ]]
 	return Buffer
 end
 
-local function runScenario(p2, p3) --[[ Line: 86 ]]
+local function runScenario(p2, p3)
 	-- upvalues: createCounters (copy), values (copy)
 	local Counters, Counters2 = createCounters()
-	local SequenceResult = p2.DataSource.sequence(values(100), function(p4) --[[ Line: 88 ]]
+	local SequenceResult = p2.DataSource.sequence(values(100), function(p4)
 		return p4.id
 	end)
 	local MeasuredResult = if p3 then p2.Layout.measured({ estimatedItemLength = 40 }) else p2.Layout.uniform({ itemLength = 40 })
@@ -88,15 +88,15 @@ local function runScenario(p2, p3) --[[ Line: 86 ]]
 	local RecyclingScope = p2.Adapter.createRecyclingScope({
 		maxPoolSize = 2,
 		adapter = {
-			create = function(): number --[[ Line: 97 ]]
+			create = function(): number
 				-- upvalues: Count (ref)
 				Count += 1
 				
 				return Count
 			end,
-			destroy = function() --[[ Line: 101 ]] end
+			destroy = function() end
 		},
-		onPoolChanged = function(p4) --[[ Line: 104 ]]
+		onPoolChanged = function(p4)
 			-- upvalues: Counters2 (copy)
 			Counters2({
 				kind = "poolChanged",
@@ -113,7 +113,7 @@ local function runScenario(p2, p3) --[[ Line: 86 ]]
 		dataSource = SequenceResult,
 		layout = MeasuredResult,
 		recyclingScope = RecyclingScope,
-		getItemViewType = function(p4) --[[ Line: 119 ]]
+		getItemViewType = function(p4)
 			return p4.kind
 		end,
 		diagnostics = Counters2
@@ -183,7 +183,7 @@ local function runScenario(p2, p3) --[[ Line: 86 ]]
 end
 
 return {
-	run = function(p4) --[[ Line: 177 ]]
+	run = function(p4)
 		-- upvalues: runScenario (copy)
 		return {
 			fixed = runScenario(p4, false),

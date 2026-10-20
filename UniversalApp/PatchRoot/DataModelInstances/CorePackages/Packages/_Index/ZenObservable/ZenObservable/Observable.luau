@@ -12,7 +12,7 @@ local v1 = nil
 local Callback = nil
 local isObservableClass = nil
 
-local function _(p1): boolean --[[ Line: 29 | Named "isCallable" ]]
+local function _(p1): boolean
 	if typeof(p1) == "function" then
 		return true
 	end
@@ -28,17 +28,17 @@ local function _(p1): boolean --[[ Line: 29 | Named "isCallable" ]]
 	return false
 end
 
-local _ = function(): boolean --[[ Line: 45 | Named "hasSymbols" ]]
+local _ = function(): boolean
 	-- upvalues: SymbolFunction (copy)
 	return typeof(SymbolFunction) == "table" and typeof(getmetatable(SymbolFunction).__call) == "function"
 end
 
-local _ = function(p1) --[[ Line: 50 | Named "hasSymbol" ]]
+local _ = function(p1)
 	-- upvalues: SymbolFunction (copy), Boolean (copy)
 	return typeof(SymbolFunction) == "table" and typeof(getmetatable(SymbolFunction).__call) == "function" and Boolean.toJSBoolean(SymbolFunction[p1])
 end
 
-local _ = function(Text) --[[ Line: 54 | Named "getSymbol" ]]
+local _ = function(Text)
 	-- upvalues: SymbolFunction (copy), Boolean (copy)
 	local JSBoolean = typeof(SymbolFunction) == "table" and (typeof(getmetatable(SymbolFunction).__call) == "function" and Boolean.toJSBoolean(SymbolFunction[Text]))
 	
@@ -56,7 +56,7 @@ local Observable = if JSBoolean then SymbolFunction.observable else "@@observabl
 local JSBoolean1 = typeof(SymbolFunction) == "table" and (typeof(getmetatable(SymbolFunction).__call) == "function" and Boolean.toJSBoolean(SymbolFunction.species))
 local Species = if JSBoolean1 then SymbolFunction.species else "@@species"
 
-local function getMethod(p1, p2) --[[ Line: 72 ]]
+local function getMethod(p1, p2)
 	-- upvalues: Error1 (copy)
 	local v2 = p1[p2]
 	local Flag = nil
@@ -89,28 +89,28 @@ local function getMethod(p1, p2) --[[ Line: 72 ]]
 	return v2
 end
 
-local _ = function(p1) --[[ Line: 86 | Named "getSpecies" ]]
+local _ = function(p1)
 	-- upvalues: Species (copy), Module (ref)
 	local v2 = p1[Species]
 	
 	return if v2 == nil then Module else v2
 end
 
-local _ = function(p1) --[[ Line: 97 | Named "isObservable" ]]
+local _ = function(p1)
 	-- upvalues: InstanceofFunction (copy), Module (ref)
 	return InstanceofFunction(p1, Module)
 end
 
 local HostReportError = nil
 HostReportError = setmetatable({}, {
-	__call = function(_, p1) --[[ Line: 104 ]]
+	__call = function(_, p1)
 		-- upvalues: HostReportError (ref), SetTimeoutFunction (copy)
 		if HostReportError.log then
 			HostReportError:log(p1)
 			
 			return
 		else
-			SetTimeoutFunction(function() --[[ Line: 108 ]]
+			SetTimeoutFunction(function()
 				-- upvalues: p1 (copy)
 				error(p1)
 			end, 0)
@@ -118,18 +118,18 @@ HostReportError = setmetatable({}, {
 	end
 })
 
-local _ = function(p1) --[[ Line: 116 | Named "enqueue" ]]
+local _ = function(p1)
 	-- upvalues: PromiseModule (copy), HostReportError (ref)
-	PromiseModule.delay(0):doneCall(function() --[[ Line: 117 ]]
+	PromiseModule.delay(0):doneCall(function()
 		-- upvalues: p1 (copy), HostReportError (upval)
-		xpcall(p1, function(Err) --[[ Line: 118 ]]
+		xpcall(p1, function(Err)
 			-- upvalues: HostReportError (upval)
 			HostReportError(Err)
 		end)
 	end)
 end
 
-local function cleanupSubscription(p1) --[[ Line: 124 ]]
+local function cleanupSubscription(p1)
 	-- upvalues: Error1 (copy), HostReportError (ref)
 	local Cleanup = p1._cleanup
 	
@@ -202,13 +202,13 @@ local function cleanupSubscription(p1) --[[ Line: 124 ]]
 	end
 end
 
-local _ = function(p1) --[[ Line: 153 | Named "closeSubscription" ]]
+local _ = function(p1)
 	p1._observer = nil
 	p1._queue = nil
 	p1._state = "closed"
 end
 
-local function flushSubscription(p1) --[[ Line: 159 ]]
+local function flushSubscription(p1)
 	-- upvalues: Boolean (copy), Callback (ref)
 	local Queue = p1._queue
 	
@@ -223,7 +223,7 @@ local function flushSubscription(p1) --[[ Line: 159 ]]
 	end
 end
 
-Callback = function(p2, Type, p3) --[[ Line: 177 | Named "notifySubscription" ]]
+Callback = function(p2, Type, p3)
 	-- upvalues: getMethod (copy), HostReportError (ref), cleanupSubscription (copy)
 	p2._state = "running"
 	local Observer = p2._observer
@@ -271,7 +271,7 @@ Callback = function(p2, Type, p3) --[[ Line: 177 | Named "notifySubscription" ]]
 	end
 end
 
-local function onNotify(Subscription, p2, Value) --[[ Line: 216 ]]
+local function onNotify(Subscription, p2, Value)
 	-- upvalues: flushSubscription (copy), PromiseModule (copy), HostReportError (ref), Callback (ref)
 	if Subscription._state == "closed" then return end
 	if Subscription._state == "buffering" then
@@ -288,14 +288,14 @@ local function onNotify(Subscription, p2, Value) --[[ Line: 216 ]]
 		Subscription._state = "buffering"
 		Subscription._queue = { { type = p2, value = Value } }
 		
-		local function v49() --[[ Line: 230 ]]
+		local function v49()
 			-- upvalues: flushSubscription (upval), Subscription (copy)
 			return flushSubscription(Subscription)
 		end
 		
-		PromiseModule.delay(0):doneCall(function() --[[ Line: 117 ]]
+		PromiseModule.delay(0):doneCall(function()
 			-- upvalues: v49 (copy), HostReportError (upval)
-			xpcall(v49, function(Err) --[[ Line: 118 ]]
+			xpcall(v49, function(Err)
 				-- upvalues: HostReportError (upval)
 				HostReportError(Err)
 			end)
@@ -305,19 +305,19 @@ end
 
 local t = {}
 
-function t.__index(p2, p3) --[[ Line: 259 ]]
+function t.__index(p2, p3)
 	-- upvalues: t (copy)
 	return if p3 == "closed" then p2._state == "closed" elseif rawget(p2, p3) then rawget(p2, p3) elseif rawget(t, p3) then rawget(t, p3) else nil
 end
 
-function t.__newindex(p2, p3, p4) --[[ Line: 271 ]]
+function t.__newindex(p2, p3, p4)
 	if p3 == "closed" then
 		error("setting getter-only property 'closed'")
 	end
 	rawset(p2, p3, p4)
 end
 
-function t.new(_observer, Subscriber) --[[ Line: 278 ]]
+function t.new(_observer, Subscriber)
 	-- upvalues: t (copy), v1 (ref)
 	local self = setmetatable({}, t)
 	self._cleanup = nil
@@ -338,7 +338,7 @@ function t.new(_observer, Subscriber) --[[ Line: 278 ]]
 	return self
 end
 
-function t:unsubscribe() --[[ Line: 304 ]]
+function t:unsubscribe()
 	-- upvalues: cleanupSubscription (copy)
 	if self._state ~= "closed" then
 		self._observer = nil
@@ -350,34 +350,34 @@ end
 
 v1 = {}
 
-function v1.__index(p2, p3) --[[ Line: 320 ]]
+function v1.__index(p2, p3)
 	-- upvalues: v1 (ref)
 	return if p3 == "closed" then p2._subscription._state == "closed" elseif rawget(v1, p3) then rawget(v1, p3) else rawget(p2, p3)
 end
 
-function v1.__newindex(p2, p3, p4) --[[ Line: 329 ]]
+function v1.__newindex(p2, p3, p4)
 	if p3 == "closed" then
 		error("setting getter-only property 'closed'")
 	end
 	rawset(p2, p3, p4)
 end
 
-function v1.new(_subscription) --[[ Line: 336 ]]
+function v1.new(_subscription)
 	-- upvalues: v1 (ref)
 	return (setmetatable({ _subscription = _subscription }, v1))
 end
 
-function v1:next(p2) --[[ Line: 345 ]]
+function v1:next(p2)
 	-- upvalues: onNotify (copy)
 	onNotify(self._subscription, "next", p2)
 end
 
-function v1:error(p2) --[[ Line: 349 ]]
+function v1:error(p2)
 	-- upvalues: onNotify (copy)
 	onNotify(self._subscription, "error", p2)
 end
 
-function v1:complete() --[[ Line: 353 ]]
+function v1:complete()
 	-- upvalues: onNotify (copy)
 	onNotify(self._subscription, "complete")
 end
@@ -385,12 +385,12 @@ end
 Module = {}
 Module.__index = Module
 
-isObservableClass = function(p2): boolean --[[ Line: 413 | Named "isObservableClass" ]]
+isObservableClass = function(p2): boolean
 	-- upvalues: Observable (copy), Module (ref)
 	return typeof(p2) == "table" and p2[Observable] == Module[Observable] and typeof((rawget(p2, "new"))) == "function"
 end
 
-function Module.new(_subscriber) --[[ Line: 419 ]]
+function Module.new(_subscriber)
 	-- upvalues: Module (ref)
 	local Flag = nil
 	repeat
@@ -418,7 +418,7 @@ function Module.new(_subscriber) --[[ Line: 419 ]]
 	return (setmetatable({ _subscriber = _subscriber }, Module))
 end
 
-function Module:subscribe(Observer, p2, Complete) --[[ Line: 437 ]]
+function Module:subscribe(Observer, p2, Complete)
 	-- upvalues: t (copy)
 	if typeof(Observer) ~= "table" or Observer == nil then
 		Observer = {
@@ -431,9 +431,9 @@ function Module:subscribe(Observer, p2, Complete) --[[ Line: 437 ]]
 	return (t.new(Observer, self._subscriber))
 end
 
-function Module.forEach(p2, p3) --[[ Line: 455 ]]
+function Module.forEach(p2, p3)
 	-- upvalues: PromiseModule (copy), Error1 (copy)
-	return PromiseModule.new(function(Callback1, Callback: (any) -> ()) --[[ Line: 456 ]]
+	return PromiseModule.new(function(Callback1, Callback: (any) -> ())
 		-- upvalues: p3 (copy), Error1 (upval), p2 (copy)
 		local Flag = nil
 		repeat
@@ -458,14 +458,14 @@ function Module.forEach(p2, p3) --[[ Line: 455 ]]
 		if Flag then
 			local SubscribeResult = nil
 			
-			local function done() --[[ Line: 466 ]]
+			local function done()
 				-- upvalues: SubscribeResult (ref), Callback1 (copy)
 				SubscribeResult:unsubscribe()
 				Callback1()
 			end
 			
 			SubscribeResult = p2:subscribe({
-				next = function(_, p4) --[[ Line: 472 ]]
+				next = function(_, p4)
 					-- upvalues: p3 (upval), done (copy), Callback (copy), SubscribeResult (ref)
 					local Success, Result = pcall(p3, p4, done)
 					
@@ -474,11 +474,11 @@ function Module.forEach(p2, p3) --[[ Line: 455 ]]
 						SubscribeResult:unsubscribe()
 					end
 				end,
-				error = function(_, p4) --[[ Line: 481 ]]
+				error = function(_, p4)
 					-- upvalues: Callback (copy)
 					Callback(p4)
 				end,
-				complete = function(_) --[[ Line: 484 ]]
+				complete = function(_)
 					-- upvalues: Callback1 (copy)
 					Callback1()
 				end
@@ -491,7 +491,7 @@ function Module.forEach(p2, p3) --[[ Line: 455 ]]
 	end)
 end
 
-function Module:map(p2) --[[ Line: 492 ]]
+function Module:map(p2)
 	-- upvalues: Error1 (copy), Species (copy), Module (ref)
 	local Flag = nil
 	repeat
@@ -518,10 +518,10 @@ function Module:map(p2) --[[ Line: 492 ]]
 	end
 	local v2 = self[Species]
 	
-	return (if v2 == nil then Module else v2).new(function(p3) --[[ Line: 501 ]]
+	return (if v2 == nil then Module else v2).new(function(p3)
 		-- upvalues: self (copy), p2 (copy)
 		return self:subscribe({
-			next = function(_, p4) --[[ Line: 503 ]]
+			next = function(_, p4)
 				-- upvalues: p2 (upval), p3 (copy)
 				local Success, Result = pcall(p2, p4)
 				
@@ -533,11 +533,11 @@ function Module:map(p2) --[[ Line: 492 ]]
 					p3:error(Result)
 				end
 			end,
-			error = function(_, p4) --[[ Line: 514 ]]
+			error = function(_, p4)
 				-- upvalues: p3 (copy)
 				p3:error(p4)
 			end,
-			complete = function(_) --[[ Line: 517 ]]
+			complete = function(_)
 				-- upvalues: p3 (copy)
 				p3:complete()
 			end
@@ -545,7 +545,7 @@ function Module:map(p2) --[[ Line: 492 ]]
 	end)
 end
 
-function Module:filter(p2) --[[ Line: 526 ]]
+function Module:filter(p2)
 	-- upvalues: Error1 (copy), Species (copy), Module (ref), Boolean (copy)
 	local Flag = nil
 	repeat
@@ -572,12 +572,12 @@ function Module:filter(p2) --[[ Line: 526 ]]
 	end
 	local v2 = self[Species]
 	
-	return (if v2 == nil then Module else v2).new(function(p3) --[[ Line: 535 ]]
+	return (if v2 == nil then Module else v2).new(function(p3)
 		-- upvalues: self (copy), p2 (copy), Boolean (upval)
 		return self:subscribe({
-			next = function(_, p4) --[[ Line: 537 ]]
+			next = function(_, p4)
 				-- upvalues: p2 (upval), p3 (copy), Boolean (upval)
-				local Success, Result = xpcall(p2, function(Err) --[[ Line: 539 ]]
+				local Success, Result = xpcall(p2, function(Err)
 					-- upvalues: p3 (upval)
 					p3:error(Err)
 				end, p4)
@@ -589,11 +589,11 @@ function Module:filter(p2) --[[ Line: 526 ]]
 					return
 				end
 			end,
-			error = function(_, p4) --[[ Line: 552 ]]
+			error = function(_, p4)
 				-- upvalues: p3 (copy)
 				p3:error(p4)
 			end,
-			complete = function(_) --[[ Line: 555 ]]
+			complete = function(_)
 				-- upvalues: p3 (copy)
 				p3:complete()
 			end
@@ -601,7 +601,7 @@ function Module:filter(p2) --[[ Line: 526 ]]
 	end)
 end
 
-function Module:reduce(p2, ...) --[[ Line: 562 ]]
+function Module:reduce(p2, ...)
 	-- upvalues: Error1 (copy), Species (copy), Module (ref)
 	local list = { p2, ... }
 	local Flag = nil
@@ -633,10 +633,10 @@ function Module:reduce(p2, ...) --[[ Line: 562 ]]
 	local Flag1 = false
 	local Entry = list[2]
 	
-	return Module1.new(function(p3) --[[ Line: 577 ]]
+	return Module1.new(function(p3)
 		-- upvalues: self (copy), Flag1 (ref), v3 (copy), Entry (ref), p2 (copy), Error1 (upval)
 		return self:subscribe({
-			next = function(_, p4) --[[ Line: 579 ]]
+			next = function(_, p4)
 				-- upvalues: Flag1 (upval), v3 (upval), Entry (upval), p2 (upval), p3 (copy)
 				local NoFlag = not Flag1
 				Flag1 = true
@@ -646,18 +646,18 @@ function Module:reduce(p2, ...) --[[ Line: 562 ]]
 					
 					return
 				else
-					local _, Result = xpcall(p2, function(Err) --[[ Line: 585 ]]
+					local _, Result = xpcall(p2, function(Err)
 						-- upvalues: p3 (upval)
 						p3:error(Err)
 					end, Entry, p4)
 					Entry = Result
 				end
 			end,
-			error = function(_, p4) --[[ Line: 593 ]]
+			error = function(_, p4)
 				-- upvalues: p3 (copy)
 				p3:error(p4)
 			end,
-			complete = function(_) --[[ Line: 596 ]]
+			complete = function(_)
 				-- upvalues: Flag1 (upval), v3 (upval), p3 (copy), Error1 (upval), Entry (upval)
 				if not Flag1 and not v3 then
 					p3:error(Error1.new("Cannot reduce an empty sequence"))
@@ -669,29 +669,29 @@ function Module:reduce(p2, ...) --[[ Line: 562 ]]
 	end)
 end
 
-function Module:concat(...) --[[ Line: 609 ]]
+function Module:concat(...)
 	-- upvalues: Species (copy), Module (ref), Boolean (copy)
 	local list = { ... }
 	local v2 = self[Species]
 	local Module1 = if v2 == nil then Module else v2
 	
-	return Module1.new(function(p2) --[[ Line: 614 ]]
+	return Module1.new(function(p2)
 		-- upvalues: list (copy), Module1 (copy), self (copy), Boolean (upval)
 		local SubscribeResult = nil
 		local Count = 1
 		
-		local function startNext(FromResult) --[[ Line: 617 ]]
+		local function startNext(FromResult)
 			-- upvalues: SubscribeResult (ref), p2 (copy), Count (ref), list (upval), startNext (copy), Module1 (upval)
 			SubscribeResult = FromResult:subscribe({
-				next = function(_, p3) --[[ Line: 619 ]]
+				next = function(_, p3)
 					-- upvalues: p2 (upval)
 					p2:next(p3)
 				end,
-				error = function(_, p3) --[[ Line: 622 ]]
+				error = function(_, p3)
 					-- upvalues: p2 (upval)
 					p2:error(p3)
 				end,
-				complete = function(_) --[[ Line: 625 ]]
+				complete = function(_)
 					-- upvalues: Count (upval), list (upval), SubscribeResult (upval), p2 (upval), startNext (upval), Module1 (upval)
 					if Count == #list + 1 then
 						SubscribeResult = nil
@@ -709,7 +709,7 @@ function Module:concat(...) --[[ Line: 609 ]]
 		
 		startNext(self)
 		
-		return function() --[[ Line: 644 ]]
+		return function()
 			-- upvalues: Boolean (upval), SubscribeResult (ref)
 			if Boolean.toJSBoolean(SubscribeResult) then
 				SubscribeResult:unsubscribe()
@@ -719,7 +719,7 @@ function Module:concat(...) --[[ Line: 609 ]]
 	end)
 end
 
-function Module:flatMap(p2) --[[ Line: 654 ]]
+function Module:flatMap(p2)
 	-- upvalues: Error1 (copy), Species (copy), Module (ref), Boolean (copy), Array (copy)
 	local CompleteIfDone = nil
 	local Flag = nil
@@ -748,30 +748,30 @@ function Module:flatMap(p2) --[[ Line: 654 ]]
 	local v2 = self[Species]
 	local Module1 = if v2 == nil then Module else v2
 	
-	return Module1.new(function(p3) --[[ Line: 665 ]]
+	return Module1.new(function(p3)
 		-- upvalues: self (copy), Boolean (upval), p2 (copy), Module1 (copy), Array (upval), CompleteIfDone (ref)
 		local List = {}
 		local SubscribeResult = self:subscribe({
-			next = function(_, p4) --[[ Line: 668 ]]
+			next = function(_, p4)
 				-- upvalues: Boolean (upval), p2 (upval), p3 (copy), Module1 (upval), Array (upval), List (copy), CompleteIfDone (upval)
 				if Boolean.toJSBoolean(p2) then
 					local _
-					_, p90 = xpcall(p2, function(Err) --[[ Line: 672 ]]
+					_, p90 = xpcall(p2, function(Err)
 						-- upvalues: p3 (upval)
 						p3:error(Err)
 					end, p4)
 				end
 				local SubscribeResult = nil
 				SubscribeResult = Module1.from(p4):subscribe({
-					next = function(_, p5) --[[ Line: 680 ]]
+					next = function(_, p5)
 						-- upvalues: p3 (upval)
 						p3:next(p5)
 					end,
-					error = function(_, p5) --[[ Line: 683 ]]
+					error = function(_, p5)
 						-- upvalues: p3 (upval)
 						p3:error(p5)
 					end,
-					complete = function(_) --[[ Line: 686 ]]
+					complete = function(_)
 						-- upvalues: Array (upval), List (upval), SubscribeResult (ref), CompleteIfDone (upval)
 						local IndexOfResult: number = Array.indexOf(List, SubscribeResult)
 						
@@ -785,26 +785,26 @@ function Module:flatMap(p2) --[[ Line: 654 ]]
 				
 				return nil
 			end,
-			error = function(_, p4) --[[ Line: 701 ]]
+			error = function(_, p4)
 				-- upvalues: p3 (copy)
 				p3:error(p4)
 			end,
-			complete = function(_) --[[ Line: 704 ]]
+			complete = function(_)
 				-- upvalues: CompleteIfDone (upval)
 				CompleteIfDone()
 			end
 		})
 		
-		CompleteIfDone = function() --[[ Line: 709 | Named "completeIfDone" ]]
+		CompleteIfDone = function()
 			-- upvalues: SubscribeResult (copy), List (copy), p3 (copy)
 			if SubscribeResult.closed and #List == 0 then
 				p3:complete()
 			end
 		end
 		
-		return function() --[[ Line: 715 ]]
+		return function()
 			-- upvalues: Array (upval), List (copy), SubscribeResult (copy)
-			Array.forEach(List, function(p4) --[[ Line: 716 ]]
+			Array.forEach(List, function(p4)
 				return p4:unsubscribe()
 			end)
 			SubscribeResult:unsubscribe()
@@ -812,11 +812,11 @@ function Module:flatMap(p2) --[[ Line: 654 ]]
 	end)
 end
 
-Module[Observable] = function(p2) --[[ Line: 724 ]]
+Module[Observable] = function(p2)
 	return p2
 end
 
-function Module.from(p2, p3) --[[ Line: 729 ]]
+function Module.from(p2, p3)
 	-- upvalues: isObservableClass (ref), Module (ref), Error1 (copy), Observable (copy), InstanceofFunction (copy), Array (copy), PromiseModule (copy), HostReportError (ref)
 	local v2 = nil
 	local v3 = nil
@@ -865,14 +865,14 @@ function Module.from(p2, p3) --[[ Line: 729 ]]
 	if Callback then
 		local CallbackResult = Callback(v2)
 		
-		return if InstanceofFunction(CallbackResult, Module) and CallbackResult.new == v3.new then CallbackResult else v3.new(function(p4) --[[ Line: 758 ]]
+		return if InstanceofFunction(CallbackResult, Module) and CallbackResult.new == v3.new then CallbackResult else v3.new(function(p4)
 			-- upvalues: CallbackResult (copy)
 			return CallbackResult:subscribe(p4)
 		end)
 	elseif Array.isArray(v2) then
-		return Module.new(function(p4) --[[ Line: 780 ]]
+		return Module.new(function(p4)
 			-- upvalues: v2 (ref), PromiseModule (upval), HostReportError (upval)
-			local function v107() --[[ Line: 781 ]]
+			local function v107()
 				-- upvalues: p4 (copy), v2 (upval)
 				if p4.closed then return end
 				for _, value in pairs(v2) do
@@ -883,9 +883,9 @@ function Module.from(p2, p3) --[[ Line: 729 ]]
 				p4:complete()
 			end
 			
-			PromiseModule.delay(0):doneCall(function() --[[ Line: 117 ]]
+			PromiseModule.delay(0):doneCall(function()
 				-- upvalues: v107 (copy), HostReportError (upval)
-				xpcall(v107, function(Err) --[[ Line: 118 ]]
+				xpcall(v107, function(Err)
 					-- upvalues: HostReportError (upval)
 					HostReportError(Err)
 				end)
@@ -896,7 +896,7 @@ function Module.from(p2, p3) --[[ Line: 729 ]]
 	end
 end
 
-function Module.of(p4, ...) --[[ Line: 803 ]]
+function Module.of(p4, ...)
 	-- upvalues: isObservableClass (ref), Module (ref), PromiseModule (copy), HostReportError (ref)
 	local List = nil
 	local v5 = nil
@@ -908,9 +908,9 @@ function Module.of(p4, ...) --[[ Line: 803 ]]
 		v5 = Module
 		List = { p4, ... }
 	end
-	return v5.new(function(p5) --[[ Line: 813 ]]
+	return v5.new(function(p5)
 		-- upvalues: List (ref), PromiseModule (upval), HostReportError (upval)
-		local function v111() --[[ Line: 814 ]]
+		local function v111()
 			-- upvalues: p5 (copy), List (upval)
 			if p5.closed then return end
 			for _, value in ipairs(List) do
@@ -921,9 +921,9 @@ function Module.of(p4, ...) --[[ Line: 803 ]]
 			p5:complete()
 		end
 		
-		PromiseModule.delay(0):doneCall(function() --[[ Line: 117 ]]
+		PromiseModule.delay(0):doneCall(function()
 			-- upvalues: v111 (copy), HostReportError (upval)
-			xpcall(v111, function(Err) --[[ Line: 118 ]]
+			xpcall(v111, function(Err)
 				-- upvalues: HostReportError (upval)
 				HostReportError(Err)
 			end)

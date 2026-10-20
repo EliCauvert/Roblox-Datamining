@@ -5,7 +5,7 @@ local ValidateLCCagingRelevancyModule = require(Parent.validation.validateLCCagi
 local ValidateRenderMeshInsideOuterCageMeshModule = require(Parent.validation.validateRenderMeshInsideOuterCageMesh)
 local _ = require(Parent.util.Types)
 
-return function(Object, p1, p2) --[[ Line: 11 | Named "validateLCCageQuality" ]]
+return function(Object, p1, p2)
 	-- upvalues: GetCageMeshInfosModule (copy), ValidateLCCagingRelevancyModule (copy), ValidateRenderMeshInsideOuterCageMeshModule (copy), GetFStringLCCageQualityDocumentationLinkModule (copy)
 	local Flag = true
 	local List = {}

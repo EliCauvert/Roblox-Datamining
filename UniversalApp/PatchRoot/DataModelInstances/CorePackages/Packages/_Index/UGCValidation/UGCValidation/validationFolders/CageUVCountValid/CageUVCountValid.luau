@@ -14,7 +14,7 @@ return {
 	requiredData = { ValidationEnumsModule.SharedDataMember.outerCagesData },
 	conditionalData = {},
 	expectedFailures = {},
-	run = function(p1, p2) --[[ Line: 35 ]]
+	run = function(p1, p2)
 		-- upvalues: ConstantsModule (copy), UGCValidationService (copy), GetFIntUniqueUVToleranceModule (copy), ErrorSourceStringsModule (copy)
 		for PartName, value in p2.outerCagesData do
 			local WRAPTARGETCAGEMESHUVCOUNT = ConstantsModule.WRAP_TARGET_CAGE_MESH_UV_COUNTS[PartName]

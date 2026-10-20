@@ -1,14 +1,14 @@
 ﻿local UserInputService = require(script:FindFirstAncestor("Foundation").Utility.Wrappers.Services).UserInputService
 local ConstantsModule = require(script.Parent.constants)
 
-local function _() --[[ Line: 7 | Named "getActiveGamepad" ]]
+local function _()
 	-- upvalues: UserInputService (copy)
 	local LastInputType = UserInputService:GetLastInputType()
 	
 	return if LastInputType.Name:match("^Gamepad") and table.find(UserInputService:GetConnectedGamepads(), LastInputType) ~= nil then LastInputType else nil
 end
 
-local _ = function(KeyCode, GamepadKeyCode) --[[ Line: 18 | Named "isHeld" ]]
+local _ = function(KeyCode, GamepadKeyCode)
 	-- upvalues: UserInputService (copy)
 	if UserInputService:IsKeyDown(KeyCode) then
 		return true
@@ -20,7 +20,7 @@ local _ = function(KeyCode, GamepadKeyCode) --[[ Line: 18 | Named "isHeld" ]]
 	end
 end
 
-local function getThumbstickDirection(p1): number --[[ Line: 27 ]]
+local function getThumbstickDirection(p1): number
 	-- upvalues: UserInputService (copy), ConstantsModule (copy)
 	local LastInputType = UserInputService:GetLastInputType()
 	local LastInputType1 = if LastInputType.Name:match("^Gamepad") and table.find(UserInputService:GetConnectedGamepads(), LastInputType) ~= nil then LastInputType else nil
@@ -41,7 +41,7 @@ local function getThumbstickDirection(p1): number --[[ Line: 27 ]]
 	return 0
 end
 
-return function(p2) --[[ Line: 56 | Named "getSelectionEntryDirection" ]]
+return function(p2)
 	-- upvalues: UserInputService (copy), getThumbstickDirection (copy)
 	local IsGamepadButtonDown = nil
 	if p2 then

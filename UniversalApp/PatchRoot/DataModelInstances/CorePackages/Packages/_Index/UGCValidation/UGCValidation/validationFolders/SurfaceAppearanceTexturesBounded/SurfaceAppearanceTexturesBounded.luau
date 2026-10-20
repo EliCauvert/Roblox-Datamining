@@ -21,7 +21,7 @@ return {
 	requiredData = {},
 	conditionalData = { ValidationEnumsModule.SharedDataMember.meshTextures },
 	expectedFailures = {},
-	run = function(p1, p2) --[[ Line: 44 ]]
+	run = function(p1, p2)
 		-- upvalues: FetchAllDesiredDataModule (copy), ValidationEnumsModule (copy), ConstantsInterfaceModule (copy), config (copy), UGCValidationService (copy), ErrorSourceStringsModule (copy)
 		local RootInstance = p2.rootInstance
 		local AssetType = p2.uploadEnum.assetType
@@ -56,7 +56,7 @@ return {
 							
 							if MeshTextureEntry and MeshTextureEntry.editable then
 								local TextureLimit = if AssetType then ConstantsInterfaceModule.getTextureLimit(AssetType, SurfaceAppearance, FieldName) else config[FieldName]
-								local Success, Result = pcall(function() --[[ Line: 91 ]]
+								local Success, Result = pcall(function()
 									-- upvalues: UGCValidationService (upval), MeshTextureEntry (copy)
 									return UGCValidationService:GetEditableImageSize(MeshTextureEntry.editable)
 								end)

@@ -1,7 +1,7 @@
 ﻿local Number = require(script.Parent.Parent.Parent.LuauPolyfill).Number
 local NullModule = require(script.Parent.null)
 
-local function deepEqual(List, List1) --[[ Line: 13 ]]
+local function deepEqual(List, List1)
 	-- upvalues: Number (copy), NullModule (copy), deepEqual (copy)
 	if typeof(List) ~= typeof(List1) then
 		return false, (("{1}: value of type '%s'\n{2}: value of type '%s'"):format(typeof(List), (typeof(List1))))

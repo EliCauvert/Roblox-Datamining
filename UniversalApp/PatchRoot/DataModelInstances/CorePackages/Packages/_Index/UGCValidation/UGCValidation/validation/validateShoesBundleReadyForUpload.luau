@@ -13,9 +13,9 @@ local ValidateFullShoesBundleStudio = game:DefineFastFlag("ValidateFullShoesBund
 local LegacyValidationAdapterModule = require(Parent.util.LegacyValidationAdapter)
 local HttpService = game:GetService("HttpService")
 
-return function(Model: Model, p1, p2, p3, AllowEditableInstances, BypassFlags) --[[ Line: 25 | Named "validateShoesBundleReadyForUpload" ]]
+return function(Model: Model, p1, p2, p3, AllowEditableInstances, BypassFlags)
 	-- upvalues: PromiseModule (copy), FixUpPreValidationModule (copy), HttpService (copy), CreateEditableInstancesForContextModule (copy), ValidateInternalModule (copy), LegacyValidationAdapterModule (copy), DestroyEditableInstancesModule (copy), ValidateFullShoesBundleStudio (copy), ValidateShoesModule (copy)
-	local Callback: (any) -> () = p3 or function() --[[ Line: 33 ]] end
+	local Callback: (any) -> () = p3 or function() end
 	assert(Callback ~= nil, "Luau")
 	
 	if not Model:IsA("Model") then
@@ -84,7 +84,7 @@ return function(Model: Model, p1, p2, p3, AllowEditableInstances, BypassFlags) -
 	Callback(Tbl)
 	local Guid = HttpService:GenerateGUID()
 	
-	return PromiseModule.each(List, function(p4, p5) --[[ Line: 124 ]]
+	return PromiseModule.each(List, function(p4, p5)
 		-- upvalues: AllowEditableInstances (copy), BypassFlags (copy), CreateEditableInstancesForContextModule (upval), ValidateInternalModule (upval), LegacyValidationAdapterModule (upval), Guid (copy), DestroyEditableInstancesModule (upval), Tbl (ref), Callback (ref)
 		if p4.status == "finished" then return end
 		assert(p4.instance ~= nil, "Unfinished piece doesn't have an instance")
@@ -125,10 +125,10 @@ return function(Model: Model, p1, p2, p3, AllowEditableInstances, BypassFlags) -
 		Tbl.pieces = table.clone(Tbl.pieces)
 		Tbl.pieces[p5].status = "finished"
 		Callback(Tbl)
-	end):andThen(function() --[[ Line: 184 ]]
+	end):andThen(function()
 		-- upvalues: ValidateFullShoesBundleStudio (upval), Tbl (ref), AllowEditableInstances (copy), BypassFlags (copy), CreateEditableInstancesForContextModule (upval), ValidateShoesModule (upval), LegacyValidationAdapterModule (upval), Guid (copy), DestroyEditableInstancesModule (upval), Callback (ref)
 		if ValidateFullShoesBundleStudio then
-			local FullBodyData = (function(List) --[[ Line: 186 | Named "createFullBodyData" ]]
+			local FullBodyData = (function(List)
 				local List1 = {}
 				
 				for _, value in List do
@@ -180,7 +180,7 @@ return function(Model: Model, p1, p2, p3, AllowEditableInstances, BypassFlags) -
 			end
 		end
 		Callback(Tbl)
-	end):andThen(function() --[[ Line: 259 ]]
+	end):andThen(function()
 		-- upvalues: Tbl (ref)
 		return Tbl
 	end)

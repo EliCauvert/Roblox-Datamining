@@ -12,10 +12,10 @@ local config = {
 	colorNamespace = require(Foundation.Enums.ColorNamespace).Inverse
 }
 
-return function(Frame: Frame) --[[ Line: 48 | Named "SliderThumb" ]]
+return function(Frame: Frame)
 	-- upvalues: ReactModule (copy), CalculateSliderFractionModule (copy), GetGuiInputPositionModule (copy), KnobModule (copy), ViewModule (copy), WithCommonPropsModule (copy), PresentationContextModule (copy), config (copy)
 	local UseRefResult = ReactModule.useRef(Frame.fraction:getValue())
-	local UseResult = ReactModule.useCallback(function() --[[ Line: 51 ]]
+	local UseResult = ReactModule.useCallback(function()
 		-- upvalues: UseRefResult (copy), Frame (copy)
 		UseRefResult.current = Frame.fraction:getValue()
 		
@@ -23,7 +23,7 @@ return function(Frame: Frame) --[[ Line: 48 | Named "SliderThumb" ]]
 			Frame.onDragStarted()
 		end
 	end, { Frame.fraction, Frame.onDragStarted })
-	local UseResult1 = ReactModule.useCallback(function(_, p1) --[[ Line: 58 ]]
+	local UseResult1 = ReactModule.useCallback(function(_, p1)
 		-- upvalues: Frame (copy), CalculateSliderFractionModule (upval), GetGuiInputPositionModule (upval), UseRefResult (copy)
 		local Current = Frame.trackRef.current
 		
@@ -42,17 +42,17 @@ return function(Frame: Frame) --[[ Line: 48 | Named "SliderThumb" ]]
 		Frame.getBounds,
 		Frame.onSeek
 	})
-	local UseResult2 = ReactModule.useCallback(function() --[[ Line: 72 ]]
+	local UseResult2 = ReactModule.useCallback(function()
 		-- upvalues: Frame (copy)
 		if Frame.onDragEnded then
 			Frame.onDragEnded()
 		end
 	end, { Frame.onDragEnded })
-	local MapResult = Frame.fraction:map(function(XScale: number): UDim2 --[[ Line: 78 ]]
+	local MapResult = Frame.fraction:map(function(XScale: number): UDim2
 		-- upvalues: Frame (copy)
 		return if Frame.isVertical then UDim2.fromScale(0.5, 1 - XScale) else UDim2.fromScale(XScale, 0.5)
 	end)
-	local MapResult1 = if Frame.isContained then Frame.fraction:map(function(X: number): Vector2 --[[ Line: 82 ]]
+	local MapResult1 = if Frame.isContained then Frame.fraction:map(function(X: number): Vector2
 		-- upvalues: Frame (copy)
 		return if Frame.isVertical then Vector2.new(0.5, 1 - X) else Vector2.new(X, 0.5)
 	end) else Vector2.new(0.5, 0.5)

@@ -1,6 +1,6 @@
 ﻿local _ = require(script.Parent.Types)
 
-return function(List, Callback) --[[ Line: 16 | Named "filter" ]]
+return function(List, Callback)
 	local List1 = {}
 	
 	for i, value in List do

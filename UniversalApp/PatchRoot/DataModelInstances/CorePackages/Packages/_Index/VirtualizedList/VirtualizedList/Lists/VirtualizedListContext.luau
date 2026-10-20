@@ -10,17 +10,17 @@ local VirtualizedListContextModule = { VirtualizedListContext = Context }
 if _G.__DEV__ then
 	Context.displayName = "VirtualizedListContext"
 end
-function VirtualizedListContextModule.VirtualizedListContextResetter(p1) --[[ Line: 96 ]]
+function VirtualizedListContextModule.VirtualizedListContextResetter(p1)
 	-- upvalues: ReactModule (copy), Context (copy)
 	return ReactModule.createElement(Context.Provider, { value = nil }, p1.children)
 end
 
-function VirtualizedListContextModule.VirtualizedListContextProvider(p1) --[[ Line: 109 ]]
+function VirtualizedListContextModule.VirtualizedListContextProvider(p1)
 	-- upvalues: UseMemoFunction (copy), ReactModule (copy), Context (copy)
 	local Value = p1.value
 	
 	return ReactModule.createElement(Context.Provider, {
-		value = UseMemoFunction(function() --[[ Line: 116 ]]
+		value = UseMemoFunction(function()
 			-- upvalues: Value (copy)
 			return {
 				cellKey = nil,
@@ -46,12 +46,12 @@ function VirtualizedListContextModule.VirtualizedListContextProvider(p1) --[[ Li
 	}, p1.children)
 end
 
-function VirtualizedListContextModule.VirtualizedListCellContextProvider(p1) --[[ Line: 156 ]]
+function VirtualizedListContextModule.VirtualizedListCellContextProvider(p1)
 	-- upvalues: UseContextFunction (copy), Context (copy), v1 (copy), UseMemoFunction (copy), Object (copy), ReactModule (copy)
 	local CellKey = p1.cellKey
 	local Children = p1.children
 	local UseContextResult = UseContextFunction(Context)
-	local UseMemoResult = if v1 then UseMemoFunction(function() --[[ Line: 164 ]]
+	local UseMemoResult = if v1 then UseMemoFunction(function()
 		-- upvalues: UseContextResult (copy), Object (upval), CellKey (copy)
 		return if UseContextResult == nil then nil else Object.assign(table.clone(UseContextResult), { cellKey = CellKey })
 	end, { UseContextResult, CellKey }) else nil

@@ -1,12 +1,12 @@
 ﻿local TypeRobloxModule = require(script.Parent.Parent["Type.roblox"])
 local EventModule = {}
 local config = {
-	__tostring = function(p1): string --[[ Line: 35 ]]
+	__tostring = function(p1): string
 		return string.format("RoactHostEvent(%s)", p1.name)
 	end
 }
 setmetatable(EventModule, {
-	__index = function(_, Name) --[[ Line: 41 ]]
+	__index = function(_, Name)
 		-- upvalues: TypeRobloxModule (copy), config (copy), EventModule (copy)
 		local config1 = {
 			[TypeRobloxModule] = TypeRobloxModule.HostEvent,

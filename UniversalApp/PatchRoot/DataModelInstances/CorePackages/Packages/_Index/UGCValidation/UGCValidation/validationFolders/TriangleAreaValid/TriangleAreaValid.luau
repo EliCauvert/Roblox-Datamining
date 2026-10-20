@@ -4,7 +4,7 @@ local _ = require(Parent.util.Types)
 local ValidationEnumsModule = require(Parent.validationSystem.ValidationEnums)
 local ErrorSourceStringsModule = require(Parent.validationSystem.ErrorSourceStrings)
 
-local function _(p1, EditableMesh, MeshName) --[[ Line: 18 | Named "checkTriangleArea" ]]
+local function _(p1, EditableMesh, MeshName)
 	-- upvalues: UGCValidationService (copy), ErrorSourceStringsModule (copy)
 	if not UGCValidationService:ValidateEditableMeshTriangleArea(EditableMesh) then
 		p1:fail(ErrorSourceStringsModule.Keys.MeshGeometry_ZeroAreaTriangle, { meshName = MeshName })
@@ -19,7 +19,7 @@ return {
 	requiredData = { ValidationEnumsModule.SharedDataMember.renderMeshesData },
 	conditionalData = { ValidationEnumsModule.SharedDataMember.outerCagesData },
 	expectedFailures = {},
-	run = function(p1, p2) --[[ Line: 28 ]]
+	run = function(p1, p2)
 		-- upvalues: UGCValidationService (copy), ErrorSourceStringsModule (copy)
 		for MeshName, value in p2.renderMeshesData do
 			if not UGCValidationService:ValidateEditableMeshTriangleArea(value.editable) then

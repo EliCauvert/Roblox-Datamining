@@ -23,7 +23,7 @@ return {
 		ValidationEnumsModule.SharedDataMember.consumerConfig
 	},
 	fflag = require(Parent.flags.getFFlagUGCValidateSerializedAssetSizeBounded),
-	run = function(p1, p2) --[[ Line: 46 ]]
+	run = function(p1, p2)
 		-- upvalues: ValidationEnumsModule (copy), GetEngineFeatureEngineUGCValidateSerializeExcludeCollisionPhysicsModule (copy), UGCValidationService (copy), SerializationService (copy), config (copy), GetFIntUGCValidateMaxSerializedAssetSizeBytesDefaultModule (copy), ErrorSourceStringsModule (copy)
 		if p2.consumerConfig.consumerEnv ~= ValidationEnumsModule.ConsumerEnv.Backend then return end
 		local SerializedSizeExcludingCollisionAsync = if GetEngineFeatureEngineUGCValidateSerializeExcludeCollisionPhysicsModule() then UGCValidationService:GetSerializedSizeExcludingCollisionAsync(p2.entrypointInput) else buffer.len(SerializationService:SerializeInstancesAsync(p2.entrypointInput))

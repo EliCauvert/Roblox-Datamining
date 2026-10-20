@@ -2,11 +2,11 @@
 local BuildActionNameModule = require(script.Parent.buildActionName)
 local PromiseModule = require(script.Parent.Promise)
 
-return function(p1) --[[ Line: 5 ]]
+return function(p1)
 	-- upvalues: BuildActionNameModule (copy), EnumNetworkStatusModule (copy), PromiseModule (copy)
 	local Callback = require(script.Parent.getStatus)(p1)
 	
-	local function _(Ids, Keymapper, Status) --[[ Line: 8 | Named "actionCreator" ]]
+	local function _(Ids, Keymapper, Status)
 		-- upvalues: BuildActionNameModule (upval), p1 (copy)
 		return {
 			ids = Ids,
@@ -16,7 +16,7 @@ return function(p1) --[[ Line: 5 ]]
 		}
 	end
 	
-	local function filter(State, List, Callback1) --[[ Line: 17 ]]
+	local function filter(State, List, Callback1)
 		-- upvalues: Callback (copy), EnumNetworkStatusModule (upval)
 		local List1 = {}
 		
@@ -28,7 +28,7 @@ return function(p1) --[[ Line: 5 ]]
 		return List1
 	end
 	
-	return function(p2, p3, Keymapper, Callback) --[[ Line: 28 ]]
+	return function(p2, p3, Keymapper, Callback)
 		-- upvalues: filter (copy), p1 (copy), PromiseModule (upval), EnumNetworkStatusModule (upval), BuildActionNameModule (upval)
 		local FilterResult = filter(p2:getState(), p3, Keymapper)
 		
@@ -42,7 +42,7 @@ return function(p1) --[[ Line: 5 ]]
 				type = BuildActionNameModule(p1)
 			})
 			
-			return Callback(p2, FilterResult):andThen(function(Result) --[[ Line: 38 ]]
+			return Callback(p2, FilterResult):andThen(function(Result)
 				-- upvalues: p2 (copy), FilterResult (copy), Keymapper (copy), EnumNetworkStatusModule (upval), BuildActionNameModule (upval), p1 (upval)
 				p2:dispatch({
 					ids = FilterResult,
@@ -52,7 +52,7 @@ return function(p1) --[[ Line: 5 ]]
 				})
 				
 				return Result
-			end, function(p4) --[[ Line: 41 ]]
+			end, function(p4)
 				-- upvalues: p2 (copy), FilterResult (copy), Keymapper (copy), EnumNetworkStatusModule (upval), BuildActionNameModule (upval), p1 (upval), PromiseModule (upval)
 				p2:dispatch({
 					ids = FilterResult,

@@ -5,14 +5,14 @@ local PropConditionModule = require(script.Parent.prop_condition)
 local Module = {}
 Module.__index = Module
 
-function Module.new(p1) --[[ Line: 1202 ]]
+function Module.new(p1)
 	-- upvalues: Module (copy)
 	return (setmetatable({
 		kind = if p1 == nil or p1.kind == nil then nil else p1.kind
 	}, Module))
 end
 
-function Module:encode() --[[ Line: 1208 ]]
+function Module:encode()
 	-- upvalues: ProtoModule (copy), Label (copy)
 	local Buf = buffer.create(0)
 	local Count = 0
@@ -36,7 +36,7 @@ function Module:encode() --[[ Line: 1208 ]]
 	return Buf1
 end
 
-function Module.decode(Buf) --[[ Line: 1232 ]]
+function Module.decode(Buf)
 	-- upvalues: Module (copy), ProtoModule (copy), Label (copy)
 	local NewModule = Module.new()
 	local v1 = 0
@@ -85,7 +85,7 @@ function Module.decode(Buf) --[[ Line: 1232 ]]
 	return NewModule
 end
 
-function Module:jsonEncode() --[[ Line: 1289 ]]
+function Module:jsonEncode()
 	-- upvalues: Label (copy)
 	local t = {}
 	
@@ -107,7 +107,7 @@ function Module:jsonEncode() --[[ Line: 1289 ]]
 	return t
 end
 
-function Module:jsonDecode() --[[ Line: 1307 ]]
+function Module:jsonDecode()
 	-- upvalues: Module (copy), Label (copy)
 	local NewModule = Module.new()
 	
@@ -141,7 +141,7 @@ TypeRegistryModule.default:register(Label.AutomaticSizeProp)
 local Module1 = {}
 Module1.__index = Module1
 
-function Module1.new(p1) --[[ Line: 1351 ]]
+function Module1.new(p1)
 	-- upvalues: Module1 (copy)
 	return (setmetatable({
 		condition = if p1 == nil or p1.condition == nil then nil else p1.condition,
@@ -149,7 +149,7 @@ function Module1.new(p1) --[[ Line: 1351 ]]
 	}, Module1))
 end
 
-function Module1:encode() --[[ Line: 1360 ]]
+function Module1:encode()
 	-- upvalues: ProtoModule (copy), Label (copy)
 	local Buf = buffer.create(0)
 	local Count = 0
@@ -174,7 +174,7 @@ function Module1:encode() --[[ Line: 1360 ]]
 	return Buf1
 end
 
-function Module1.decode(Buf) --[[ Line: 1386 ]]
+function Module1.decode(Buf)
 	-- upvalues: Module1 (copy), ProtoModule (copy), Label (copy), PropConditionModule (copy)
 	local NewModule = Module1.new()
 	local v2 = 0
@@ -220,7 +220,7 @@ function Module1.decode(Buf) --[[ Line: 1386 ]]
 	return NewModule
 end
 
-function Module1:jsonEncode() --[[ Line: 1442 ]]
+function Module1:jsonEncode()
 	-- upvalues: Label (copy)
 	local t = {}
 	
@@ -240,7 +240,7 @@ function Module1:jsonEncode() --[[ Line: 1442 ]]
 	return t
 end
 
-function Module1:jsonDecode() --[[ Line: 1462 ]]
+function Module1:jsonDecode()
 	-- upvalues: Module1 (copy), PropConditionModule (copy), Label (copy)
 	local NewModule = Module1.new()
 	
@@ -271,14 +271,14 @@ TypeRegistryModule.default:register(Label.AutomaticSizeProp_ConditionalOption)
 local Module2 = {}
 Module2.__index = Module2
 
-function Module2.new(p1) --[[ Line: 1506 ]]
+function Module2.new(p1)
 	-- upvalues: Module2 (copy)
 	return (setmetatable({
 		options = if p1 == nil or p1.options == nil then {} else p1.options
 	}, Module2))
 end
 
-function Module2:encode() --[[ Line: 1514 ]]
+function Module2:encode()
 	-- upvalues: ProtoModule (copy)
 	local Buf = buffer.create(0)
 	local Count = 0
@@ -296,7 +296,7 @@ function Module2:encode() --[[ Line: 1514 ]]
 	return Buf1
 end
 
-function Module2.decode(Buf) --[[ Line: 1531 ]]
+function Module2.decode(Buf)
 	-- upvalues: Module2 (copy), ProtoModule (copy), Label (copy)
 	local NewModule = Module2.new()
 	local v3 = 0
@@ -329,7 +329,7 @@ function Module2.decode(Buf) --[[ Line: 1531 ]]
 	return NewModule
 end
 
-function Module2:jsonEncode() --[[ Line: 1574 ]]
+function Module2:jsonEncode()
 	local t = {}
 	
 	if self.options ~= nil and #self.options > 0 then
@@ -343,7 +343,7 @@ function Module2:jsonEncode() --[[ Line: 1574 ]]
 	return t
 end
 
-function Module2:jsonDecode() --[[ Line: 1588 ]]
+function Module2:jsonDecode()
 	-- upvalues: Module2 (copy), Label (copy)
 	local NewModule = Module2.new()
 	
@@ -367,14 +367,14 @@ TypeRegistryModule.default:register(Label.AutomaticSizeProp_ConditionalOptions)
 local Module3 = {}
 Module3.__index = Module3
 
-function Module3.new(p1) --[[ Line: 1619 ]]
+function Module3.new(p1)
 	-- upvalues: Module3 (copy)
 	return (setmetatable({
 		kind = if p1 == nil or p1.kind == nil then nil else p1.kind
 	}, Module3))
 end
 
-function Module3:encode() --[[ Line: 1625 ]]
+function Module3:encode()
 	-- upvalues: ProtoModule (copy), Label (copy)
 	local Buf = buffer.create(0)
 	local Count = 0
@@ -398,7 +398,7 @@ function Module3:encode() --[[ Line: 1625 ]]
 	return Buf1
 end
 
-function Module3.decode(Buf) --[[ Line: 1649 ]]
+function Module3.decode(Buf)
 	-- upvalues: Module3 (copy), ProtoModule (copy), Label (copy)
 	local NewModule = Module3.new()
 	local v4 = 0
@@ -447,7 +447,7 @@ function Module3.decode(Buf) --[[ Line: 1649 ]]
 	return NewModule
 end
 
-function Module3:jsonEncode() --[[ Line: 1706 ]]
+function Module3:jsonEncode()
 	-- upvalues: Label (copy)
 	local t = {}
 	
@@ -469,7 +469,7 @@ function Module3:jsonEncode() --[[ Line: 1706 ]]
 	return t
 end
 
-function Module3:jsonDecode() --[[ Line: 1724 ]]
+function Module3:jsonDecode()
 	-- upvalues: Module3 (copy), Label (copy)
 	local NewModule = Module3.new()
 	
@@ -503,7 +503,7 @@ TypeRegistryModule.default:register(Label.TextTruncateProp)
 local Module4 = {}
 Module4.__index = Module4
 
-function Module4.new(p1) --[[ Line: 1768 ]]
+function Module4.new(p1)
 	-- upvalues: Module4 (copy)
 	return (setmetatable({
 		condition = if p1 == nil or p1.condition == nil then nil else p1.condition,
@@ -511,7 +511,7 @@ function Module4.new(p1) --[[ Line: 1768 ]]
 	}, Module4))
 end
 
-function Module4:encode() --[[ Line: 1777 ]]
+function Module4:encode()
 	-- upvalues: ProtoModule (copy), Label (copy)
 	local Buf = buffer.create(0)
 	local Count = 0
@@ -536,7 +536,7 @@ function Module4:encode() --[[ Line: 1777 ]]
 	return Buf1
 end
 
-function Module4.decode(Buf) --[[ Line: 1803 ]]
+function Module4.decode(Buf)
 	-- upvalues: Module4 (copy), ProtoModule (copy), Label (copy), PropConditionModule (copy)
 	local NewModule = Module4.new()
 	local v5 = 0
@@ -582,7 +582,7 @@ function Module4.decode(Buf) --[[ Line: 1803 ]]
 	return NewModule
 end
 
-function Module4:jsonEncode() --[[ Line: 1859 ]]
+function Module4:jsonEncode()
 	-- upvalues: Label (copy)
 	local t = {}
 	
@@ -602,7 +602,7 @@ function Module4:jsonEncode() --[[ Line: 1859 ]]
 	return t
 end
 
-function Module4:jsonDecode() --[[ Line: 1879 ]]
+function Module4:jsonDecode()
 	-- upvalues: Module4 (copy), PropConditionModule (copy), Label (copy)
 	local NewModule = Module4.new()
 	
@@ -633,14 +633,14 @@ TypeRegistryModule.default:register(Label.TextTruncateProp_ConditionalOption)
 local Module5 = {}
 Module5.__index = Module5
 
-function Module5.new(p1) --[[ Line: 1923 ]]
+function Module5.new(p1)
 	-- upvalues: Module5 (copy)
 	return (setmetatable({
 		options = if p1 == nil or p1.options == nil then {} else p1.options
 	}, Module5))
 end
 
-function Module5:encode() --[[ Line: 1931 ]]
+function Module5:encode()
 	-- upvalues: ProtoModule (copy)
 	local Buf = buffer.create(0)
 	local Count = 0
@@ -658,7 +658,7 @@ function Module5:encode() --[[ Line: 1931 ]]
 	return Buf1
 end
 
-function Module5.decode(Buf) --[[ Line: 1948 ]]
+function Module5.decode(Buf)
 	-- upvalues: Module5 (copy), ProtoModule (copy), Label (copy)
 	local NewModule = Module5.new()
 	local v6 = 0
@@ -691,7 +691,7 @@ function Module5.decode(Buf) --[[ Line: 1948 ]]
 	return NewModule
 end
 
-function Module5:jsonEncode() --[[ Line: 1991 ]]
+function Module5:jsonEncode()
 	local t = {}
 	
 	if self.options ~= nil and #self.options > 0 then
@@ -705,7 +705,7 @@ function Module5:jsonEncode() --[[ Line: 1991 ]]
 	return t
 end
 
-function Module5:jsonDecode() --[[ Line: 2005 ]]
+function Module5:jsonDecode()
 	-- upvalues: Module5 (copy), Label (copy)
 	local NewModule = Module5.new()
 	
@@ -729,14 +729,14 @@ TypeRegistryModule.default:register(Label.TextTruncateProp_ConditionalOptions)
 local Module6 = {}
 Module6.__index = Module6
 
-function Module6.new(p1) --[[ Line: 2036 ]]
+function Module6.new(p1)
 	-- upvalues: Module6 (copy)
 	return (setmetatable({
 		kind = if p1 == nil or p1.kind == nil then nil else p1.kind
 	}, Module6))
 end
 
-function Module6:encode() --[[ Line: 2042 ]]
+function Module6:encode()
 	-- upvalues: ProtoModule (copy), Label (copy)
 	local Buf = buffer.create(0)
 	local Count = 0
@@ -760,7 +760,7 @@ function Module6:encode() --[[ Line: 2042 ]]
 	return Buf1
 end
 
-function Module6.decode(Buf) --[[ Line: 2066 ]]
+function Module6.decode(Buf)
 	-- upvalues: Module6 (copy), ProtoModule (copy), Label (copy)
 	local NewModule = Module6.new()
 	local v7 = 0
@@ -809,7 +809,7 @@ function Module6.decode(Buf) --[[ Line: 2066 ]]
 	return NewModule
 end
 
-function Module6:jsonEncode() --[[ Line: 2123 ]]
+function Module6:jsonEncode()
 	-- upvalues: Label (copy)
 	local t = {}
 	
@@ -831,7 +831,7 @@ function Module6:jsonEncode() --[[ Line: 2123 ]]
 	return t
 end
 
-function Module6:jsonDecode() --[[ Line: 2141 ]]
+function Module6:jsonDecode()
 	-- upvalues: Module6 (copy), Label (copy)
 	local NewModule = Module6.new()
 	
@@ -865,7 +865,7 @@ TypeRegistryModule.default:register(Label.TextXAlignmentProp)
 local Module7 = {}
 Module7.__index = Module7
 
-function Module7.new(p1) --[[ Line: 2185 ]]
+function Module7.new(p1)
 	-- upvalues: Module7 (copy)
 	return (setmetatable({
 		condition = if p1 == nil or p1.condition == nil then nil else p1.condition,
@@ -873,7 +873,7 @@ function Module7.new(p1) --[[ Line: 2185 ]]
 	}, Module7))
 end
 
-function Module7:encode() --[[ Line: 2194 ]]
+function Module7:encode()
 	-- upvalues: ProtoModule (copy), Label (copy)
 	local Buf = buffer.create(0)
 	local Count = 0
@@ -898,7 +898,7 @@ function Module7:encode() --[[ Line: 2194 ]]
 	return Buf1
 end
 
-function Module7.decode(Buf) --[[ Line: 2220 ]]
+function Module7.decode(Buf)
 	-- upvalues: Module7 (copy), ProtoModule (copy), Label (copy), PropConditionModule (copy)
 	local NewModule = Module7.new()
 	local v8 = 0
@@ -944,7 +944,7 @@ function Module7.decode(Buf) --[[ Line: 2220 ]]
 	return NewModule
 end
 
-function Module7:jsonEncode() --[[ Line: 2276 ]]
+function Module7:jsonEncode()
 	-- upvalues: Label (copy)
 	local t = {}
 	
@@ -964,7 +964,7 @@ function Module7:jsonEncode() --[[ Line: 2276 ]]
 	return t
 end
 
-function Module7:jsonDecode() --[[ Line: 2296 ]]
+function Module7:jsonDecode()
 	-- upvalues: Module7 (copy), PropConditionModule (copy), Label (copy)
 	local NewModule = Module7.new()
 	
@@ -995,14 +995,14 @@ TypeRegistryModule.default:register(Label.TextXAlignmentProp_ConditionalOption)
 local Module8 = {}
 Module8.__index = Module8
 
-function Module8.new(p1) --[[ Line: 2340 ]]
+function Module8.new(p1)
 	-- upvalues: Module8 (copy)
 	return (setmetatable({
 		options = if p1 == nil or p1.options == nil then {} else p1.options
 	}, Module8))
 end
 
-function Module8:encode() --[[ Line: 2348 ]]
+function Module8:encode()
 	-- upvalues: ProtoModule (copy)
 	local Buf = buffer.create(0)
 	local Count = 0
@@ -1020,7 +1020,7 @@ function Module8:encode() --[[ Line: 2348 ]]
 	return Buf1
 end
 
-function Module8.decode(Buf) --[[ Line: 2365 ]]
+function Module8.decode(Buf)
 	-- upvalues: Module8 (copy), ProtoModule (copy), Label (copy)
 	local NewModule = Module8.new()
 	local v9 = 0
@@ -1053,7 +1053,7 @@ function Module8.decode(Buf) --[[ Line: 2365 ]]
 	return NewModule
 end
 
-function Module8:jsonEncode() --[[ Line: 2408 ]]
+function Module8:jsonEncode()
 	local t = {}
 	
 	if self.options ~= nil and #self.options > 0 then
@@ -1067,7 +1067,7 @@ function Module8:jsonEncode() --[[ Line: 2408 ]]
 	return t
 end
 
-function Module8:jsonDecode() --[[ Line: 2422 ]]
+function Module8:jsonDecode()
 	-- upvalues: Module8 (copy), Label (copy)
 	local NewModule = Module8.new()
 	
@@ -1091,14 +1091,14 @@ TypeRegistryModule.default:register(Label.TextXAlignmentProp_ConditionalOptions)
 local Module9 = {}
 Module9.__index = Module9
 
-function Module9.new(p1) --[[ Line: 2453 ]]
+function Module9.new(p1)
 	-- upvalues: Module9 (copy)
 	return (setmetatable({
 		kind = if p1 == nil or p1.kind == nil then nil else p1.kind
 	}, Module9))
 end
 
-function Module9:encode() --[[ Line: 2459 ]]
+function Module9:encode()
 	-- upvalues: ProtoModule (copy), Label (copy)
 	local Buf = buffer.create(0)
 	local Count = 0
@@ -1122,7 +1122,7 @@ function Module9:encode() --[[ Line: 2459 ]]
 	return Buf1
 end
 
-function Module9.decode(Buf) --[[ Line: 2483 ]]
+function Module9.decode(Buf)
 	-- upvalues: Module9 (copy), ProtoModule (copy), Label (copy)
 	local NewModule = Module9.new()
 	local v10 = 0
@@ -1171,7 +1171,7 @@ function Module9.decode(Buf) --[[ Line: 2483 ]]
 	return NewModule
 end
 
-function Module9:jsonEncode() --[[ Line: 2540 ]]
+function Module9:jsonEncode()
 	-- upvalues: Label (copy)
 	local t = {}
 	
@@ -1193,7 +1193,7 @@ function Module9:jsonEncode() --[[ Line: 2540 ]]
 	return t
 end
 
-function Module9:jsonDecode() --[[ Line: 2558 ]]
+function Module9:jsonDecode()
 	-- upvalues: Module9 (copy), Label (copy)
 	local NewModule = Module9.new()
 	
@@ -1227,7 +1227,7 @@ TypeRegistryModule.default:register(Label.TextYAlignmentProp)
 local Module10 = {}
 Module10.__index = Module10
 
-function Module10.new(p1) --[[ Line: 2602 ]]
+function Module10.new(p1)
 	-- upvalues: Module10 (copy)
 	return (setmetatable({
 		condition = if p1 == nil or p1.condition == nil then nil else p1.condition,
@@ -1235,7 +1235,7 @@ function Module10.new(p1) --[[ Line: 2602 ]]
 	}, Module10))
 end
 
-function Module10:encode() --[[ Line: 2611 ]]
+function Module10:encode()
 	-- upvalues: ProtoModule (copy), Label (copy)
 	local Buf = buffer.create(0)
 	local Count = 0
@@ -1260,7 +1260,7 @@ function Module10:encode() --[[ Line: 2611 ]]
 	return Buf1
 end
 
-function Module10.decode(Buf) --[[ Line: 2637 ]]
+function Module10.decode(Buf)
 	-- upvalues: Module10 (copy), ProtoModule (copy), Label (copy), PropConditionModule (copy)
 	local NewModule = Module10.new()
 	local v11 = 0
@@ -1306,7 +1306,7 @@ function Module10.decode(Buf) --[[ Line: 2637 ]]
 	return NewModule
 end
 
-function Module10:jsonEncode() --[[ Line: 2693 ]]
+function Module10:jsonEncode()
 	-- upvalues: Label (copy)
 	local t = {}
 	
@@ -1326,7 +1326,7 @@ function Module10:jsonEncode() --[[ Line: 2693 ]]
 	return t
 end
 
-function Module10:jsonDecode() --[[ Line: 2713 ]]
+function Module10:jsonDecode()
 	-- upvalues: Module10 (copy), PropConditionModule (copy), Label (copy)
 	local NewModule = Module10.new()
 	
@@ -1357,14 +1357,14 @@ TypeRegistryModule.default:register(Label.TextYAlignmentProp_ConditionalOption)
 local Module11 = {}
 Module11.__index = Module11
 
-function Module11.new(p1) --[[ Line: 2757 ]]
+function Module11.new(p1)
 	-- upvalues: Module11 (copy)
 	return (setmetatable({
 		options = if p1 == nil or p1.options == nil then {} else p1.options
 	}, Module11))
 end
 
-function Module11:encode() --[[ Line: 2765 ]]
+function Module11:encode()
 	-- upvalues: ProtoModule (copy)
 	local Buf = buffer.create(0)
 	local Count = 0
@@ -1382,7 +1382,7 @@ function Module11:encode() --[[ Line: 2765 ]]
 	return Buf1
 end
 
-function Module11.decode(Buf) --[[ Line: 2782 ]]
+function Module11.decode(Buf)
 	-- upvalues: Module11 (copy), ProtoModule (copy), Label (copy)
 	local NewModule = Module11.new()
 	local v12 = 0
@@ -1415,7 +1415,7 @@ function Module11.decode(Buf) --[[ Line: 2782 ]]
 	return NewModule
 end
 
-function Module11:jsonEncode() --[[ Line: 2825 ]]
+function Module11:jsonEncode()
 	local t = {}
 	
 	if self.options ~= nil and #self.options > 0 then
@@ -1429,7 +1429,7 @@ function Module11:jsonEncode() --[[ Line: 2825 ]]
 	return t
 end
 
-function Module11:jsonDecode() --[[ Line: 2839 ]]
+function Module11:jsonDecode()
 	-- upvalues: Module11 (copy), Label (copy)
 	local NewModule = Module11.new()
 	
@@ -1453,14 +1453,14 @@ TypeRegistryModule.default:register(Label.TextYAlignmentProp_ConditionalOptions)
 local Module12 = {}
 Module12.__index = Module12
 
-function Module12.new(p1) --[[ Line: 2870 ]]
+function Module12.new(p1)
 	-- upvalues: Module12 (copy)
 	return (setmetatable({
 		kind = if p1 == nil or p1.kind == nil then nil else p1.kind
 	}, Module12))
 end
 
-function Module12:encode() --[[ Line: 2876 ]]
+function Module12:encode()
 	-- upvalues: ProtoModule (copy), Label (copy)
 	local Buf = buffer.create(0)
 	local Count = 0
@@ -1484,7 +1484,7 @@ function Module12:encode() --[[ Line: 2876 ]]
 	return Buf1
 end
 
-function Module12.decode(Buf) --[[ Line: 2899 ]]
+function Module12.decode(Buf)
 	-- upvalues: Module12 (copy), ProtoModule (copy), Label (copy)
 	local NewModule = Module12.new()
 	local v13 = 0
@@ -1533,7 +1533,7 @@ function Module12.decode(Buf) --[[ Line: 2899 ]]
 	return NewModule
 end
 
-function Module12:jsonEncode() --[[ Line: 2956 ]]
+function Module12:jsonEncode()
 	-- upvalues: Label (copy)
 	local t = {}
 	
@@ -1555,7 +1555,7 @@ function Module12:jsonEncode() --[[ Line: 2956 ]]
 	return t
 end
 
-function Module12:jsonDecode() --[[ Line: 2974 ]]
+function Module12:jsonDecode()
 	-- upvalues: Module12 (copy), Label (copy)
 	local NewModule = Module12.new()
 	
@@ -1589,7 +1589,7 @@ TypeRegistryModule.default:register(Label.UIFlexModeProp)
 local Module13 = {}
 Module13.__index = Module13
 
-function Module13.new(p1) --[[ Line: 3018 ]]
+function Module13.new(p1)
 	-- upvalues: Module13 (copy)
 	return (setmetatable({
 		condition = if p1 == nil or p1.condition == nil then nil else p1.condition,
@@ -1597,7 +1597,7 @@ function Module13.new(p1) --[[ Line: 3018 ]]
 	}, Module13))
 end
 
-function Module13:encode() --[[ Line: 3027 ]]
+function Module13:encode()
 	-- upvalues: ProtoModule (copy), Label (copy)
 	local Buf = buffer.create(0)
 	local Count = 0
@@ -1622,7 +1622,7 @@ function Module13:encode() --[[ Line: 3027 ]]
 	return Buf1
 end
 
-function Module13.decode(Buf) --[[ Line: 3052 ]]
+function Module13.decode(Buf)
 	-- upvalues: Module13 (copy), ProtoModule (copy), Label (copy), PropConditionModule (copy)
 	local NewModule = Module13.new()
 	local v14 = 0
@@ -1668,7 +1668,7 @@ function Module13.decode(Buf) --[[ Line: 3052 ]]
 	return NewModule
 end
 
-function Module13:jsonEncode() --[[ Line: 3108 ]]
+function Module13:jsonEncode()
 	-- upvalues: Label (copy)
 	local t = {}
 	
@@ -1688,7 +1688,7 @@ function Module13:jsonEncode() --[[ Line: 3108 ]]
 	return t
 end
 
-function Module13:jsonDecode() --[[ Line: 3128 ]]
+function Module13:jsonDecode()
 	-- upvalues: Module13 (copy), PropConditionModule (copy), Label (copy)
 	local NewModule = Module13.new()
 	
@@ -1719,14 +1719,14 @@ TypeRegistryModule.default:register(Label.UIFlexModeProp_ConditionalOption)
 local Module14 = {}
 Module14.__index = Module14
 
-function Module14.new(p1) --[[ Line: 3172 ]]
+function Module14.new(p1)
 	-- upvalues: Module14 (copy)
 	return (setmetatable({
 		options = if p1 == nil or p1.options == nil then {} else p1.options
 	}, Module14))
 end
 
-function Module14:encode() --[[ Line: 3180 ]]
+function Module14:encode()
 	-- upvalues: ProtoModule (copy)
 	local Buf = buffer.create(0)
 	local Count = 0
@@ -1744,7 +1744,7 @@ function Module14:encode() --[[ Line: 3180 ]]
 	return Buf1
 end
 
-function Module14.decode(Buf) --[[ Line: 3197 ]]
+function Module14.decode(Buf)
 	-- upvalues: Module14 (copy), ProtoModule (copy), Label (copy)
 	local NewModule = Module14.new()
 	local v15 = 0
@@ -1777,7 +1777,7 @@ function Module14.decode(Buf) --[[ Line: 3197 ]]
 	return NewModule
 end
 
-function Module14:jsonEncode() --[[ Line: 3240 ]]
+function Module14:jsonEncode()
 	local t = {}
 	
 	if self.options ~= nil and #self.options > 0 then
@@ -1791,7 +1791,7 @@ function Module14:jsonEncode() --[[ Line: 3240 ]]
 	return t
 end
 
-function Module14:jsonDecode() --[[ Line: 3254 ]]
+function Module14:jsonDecode()
 	-- upvalues: Module14 (copy), Label (copy)
 	local NewModule = Module14.new()
 	
@@ -1815,14 +1815,14 @@ TypeRegistryModule.default:register(Label.UIFlexModeProp_ConditionalOptions)
 local Module15 = {}
 Module15.__index = Module15
 
-function Module15.new(p1) --[[ Line: 3285 ]]
+function Module15.new(p1)
 	-- upvalues: Module15 (copy)
 	return (setmetatable({
 		kind = if p1 == nil or p1.kind == nil then nil else p1.kind
 	}, Module15))
 end
 
-function Module15:encode() --[[ Line: 3291 ]]
+function Module15:encode()
 	-- upvalues: ProtoModule (copy), Label (copy)
 	local Buf = buffer.create(0)
 	local Count = 0
@@ -1846,7 +1846,7 @@ function Module15:encode() --[[ Line: 3291 ]]
 	return Buf1
 end
 
-function Module15.decode(Buf) --[[ Line: 3314 ]]
+function Module15.decode(Buf)
 	-- upvalues: Module15 (copy), ProtoModule (copy), Label (copy)
 	local NewModule = Module15.new()
 	local v16 = 0
@@ -1895,7 +1895,7 @@ function Module15.decode(Buf) --[[ Line: 3314 ]]
 	return NewModule
 end
 
-function Module15:jsonEncode() --[[ Line: 3371 ]]
+function Module15:jsonEncode()
 	-- upvalues: Label (copy)
 	local t = {}
 	
@@ -1917,7 +1917,7 @@ function Module15:jsonEncode() --[[ Line: 3371 ]]
 	return t
 end
 
-function Module15:jsonDecode() --[[ Line: 3389 ]]
+function Module15:jsonDecode()
 	-- upvalues: Module15 (copy), Label (copy)
 	local NewModule = Module15.new()
 	
@@ -1951,7 +1951,7 @@ TypeRegistryModule.default:register(Label.ScaleTypeProp)
 local Module16 = {}
 Module16.__index = Module16
 
-function Module16.new(p1) --[[ Line: 3433 ]]
+function Module16.new(p1)
 	-- upvalues: Module16 (copy)
 	return (setmetatable({
 		condition = if p1 == nil or p1.condition == nil then nil else p1.condition,
@@ -1959,7 +1959,7 @@ function Module16.new(p1) --[[ Line: 3433 ]]
 	}, Module16))
 end
 
-function Module16:encode() --[[ Line: 3442 ]]
+function Module16:encode()
 	-- upvalues: ProtoModule (copy), Label (copy)
 	local Buf = buffer.create(0)
 	local Count = 0
@@ -1984,7 +1984,7 @@ function Module16:encode() --[[ Line: 3442 ]]
 	return Buf1
 end
 
-function Module16.decode(Buf) --[[ Line: 3467 ]]
+function Module16.decode(Buf)
 	-- upvalues: Module16 (copy), ProtoModule (copy), Label (copy), PropConditionModule (copy)
 	local NewModule = Module16.new()
 	local v17 = 0
@@ -2030,7 +2030,7 @@ function Module16.decode(Buf) --[[ Line: 3467 ]]
 	return NewModule
 end
 
-function Module16:jsonEncode() --[[ Line: 3523 ]]
+function Module16:jsonEncode()
 	-- upvalues: Label (copy)
 	local t = {}
 	
@@ -2050,7 +2050,7 @@ function Module16:jsonEncode() --[[ Line: 3523 ]]
 	return t
 end
 
-function Module16:jsonDecode() --[[ Line: 3543 ]]
+function Module16:jsonDecode()
 	-- upvalues: Module16 (copy), PropConditionModule (copy), Label (copy)
 	local NewModule = Module16.new()
 	
@@ -2081,14 +2081,14 @@ TypeRegistryModule.default:register(Label.ScaleTypeProp_ConditionalOption)
 local Module17 = {}
 Module17.__index = Module17
 
-function Module17.new(p1) --[[ Line: 3585 ]]
+function Module17.new(p1)
 	-- upvalues: Module17 (copy)
 	return (setmetatable({
 		options = if p1 == nil or p1.options == nil then {} else p1.options
 	}, Module17))
 end
 
-function Module17:encode() --[[ Line: 3593 ]]
+function Module17:encode()
 	-- upvalues: ProtoModule (copy)
 	local Buf = buffer.create(0)
 	local Count = 0
@@ -2106,7 +2106,7 @@ function Module17:encode() --[[ Line: 3593 ]]
 	return Buf1
 end
 
-function Module17.decode(Buf) --[[ Line: 3610 ]]
+function Module17.decode(Buf)
 	-- upvalues: Module17 (copy), ProtoModule (copy), Label (copy)
 	local NewModule = Module17.new()
 	local v18 = 0
@@ -2139,7 +2139,7 @@ function Module17.decode(Buf) --[[ Line: 3610 ]]
 	return NewModule
 end
 
-function Module17:jsonEncode() --[[ Line: 3653 ]]
+function Module17:jsonEncode()
 	local t = {}
 	
 	if self.options ~= nil and #self.options > 0 then
@@ -2153,7 +2153,7 @@ function Module17:jsonEncode() --[[ Line: 3653 ]]
 	return t
 end
 
-function Module17:jsonDecode() --[[ Line: 3667 ]]
+function Module17:jsonDecode()
 	-- upvalues: Module17 (copy), Label (copy)
 	local NewModule = Module17.new()
 	
@@ -2177,14 +2177,14 @@ TypeRegistryModule.default:register(Label.ScaleTypeProp_ConditionalOptions)
 local Module18 = {}
 Module18.__index = Module18
 
-function Module18.new(p1) --[[ Line: 3698 ]]
+function Module18.new(p1)
 	-- upvalues: Module18 (copy)
 	return (setmetatable({
 		kind = if p1 == nil or p1.kind == nil then nil else p1.kind
 	}, Module18))
 end
 
-function Module18:encode() --[[ Line: 3704 ]]
+function Module18:encode()
 	-- upvalues: ProtoModule (copy), Label (copy)
 	local Buf = buffer.create(0)
 	local Count = 0
@@ -2208,7 +2208,7 @@ function Module18:encode() --[[ Line: 3704 ]]
 	return Buf1
 end
 
-function Module18.decode(Buf) --[[ Line: 3728 ]]
+function Module18.decode(Buf)
 	-- upvalues: Module18 (copy), ProtoModule (copy), Label (copy)
 	local NewModule = Module18.new()
 	local v19 = 0
@@ -2257,7 +2257,7 @@ function Module18.decode(Buf) --[[ Line: 3728 ]]
 	return NewModule
 end
 
-function Module18:jsonEncode() --[[ Line: 3785 ]]
+function Module18:jsonEncode()
 	-- upvalues: Label (copy)
 	local t = {}
 	
@@ -2279,7 +2279,7 @@ function Module18:jsonEncode() --[[ Line: 3785 ]]
 	return t
 end
 
-function Module18:jsonDecode() --[[ Line: 3803 ]]
+function Module18:jsonDecode()
 	-- upvalues: Module18 (copy), Label (copy)
 	local NewModule = Module18.new()
 	
@@ -2313,7 +2313,7 @@ TypeRegistryModule.default:register(Label.ResamplerModeProp)
 local Module19 = {}
 Module19.__index = Module19
 
-function Module19.new(p1) --[[ Line: 3847 ]]
+function Module19.new(p1)
 	-- upvalues: Module19 (copy)
 	return (setmetatable({
 		condition = if p1 == nil or p1.condition == nil then nil else p1.condition,
@@ -2321,7 +2321,7 @@ function Module19.new(p1) --[[ Line: 3847 ]]
 	}, Module19))
 end
 
-function Module19:encode() --[[ Line: 3856 ]]
+function Module19:encode()
 	-- upvalues: ProtoModule (copy), Label (copy)
 	local Buf = buffer.create(0)
 	local Count = 0
@@ -2346,7 +2346,7 @@ function Module19:encode() --[[ Line: 3856 ]]
 	return Buf1
 end
 
-function Module19.decode(Buf) --[[ Line: 3882 ]]
+function Module19.decode(Buf)
 	-- upvalues: Module19 (copy), ProtoModule (copy), Label (copy), PropConditionModule (copy)
 	local NewModule = Module19.new()
 	local v20 = 0
@@ -2392,7 +2392,7 @@ function Module19.decode(Buf) --[[ Line: 3882 ]]
 	return NewModule
 end
 
-function Module19:jsonEncode() --[[ Line: 3938 ]]
+function Module19:jsonEncode()
 	-- upvalues: Label (copy)
 	local t = {}
 	
@@ -2412,7 +2412,7 @@ function Module19:jsonEncode() --[[ Line: 3938 ]]
 	return t
 end
 
-function Module19:jsonDecode() --[[ Line: 3958 ]]
+function Module19:jsonDecode()
 	-- upvalues: Module19 (copy), PropConditionModule (copy), Label (copy)
 	local NewModule = Module19.new()
 	
@@ -2443,14 +2443,14 @@ TypeRegistryModule.default:register(Label.ResamplerModeProp_ConditionalOption)
 local Module20 = {}
 Module20.__index = Module20
 
-function Module20.new(p1) --[[ Line: 4002 ]]
+function Module20.new(p1)
 	-- upvalues: Module20 (copy)
 	return (setmetatable({
 		options = if p1 == nil or p1.options == nil then {} else p1.options
 	}, Module20))
 end
 
-function Module20:encode() --[[ Line: 4010 ]]
+function Module20:encode()
 	-- upvalues: ProtoModule (copy)
 	local Buf = buffer.create(0)
 	local Count = 0
@@ -2468,7 +2468,7 @@ function Module20:encode() --[[ Line: 4010 ]]
 	return Buf1
 end
 
-function Module20.decode(Buf) --[[ Line: 4027 ]]
+function Module20.decode(Buf)
 	-- upvalues: Module20 (copy), ProtoModule (copy), Label (copy)
 	local NewModule = Module20.new()
 	local v21 = 0
@@ -2501,7 +2501,7 @@ function Module20.decode(Buf) --[[ Line: 4027 ]]
 	return NewModule
 end
 
-function Module20:jsonEncode() --[[ Line: 4070 ]]
+function Module20:jsonEncode()
 	local t = {}
 	
 	if self.options ~= nil and #self.options > 0 then
@@ -2515,7 +2515,7 @@ function Module20:jsonEncode() --[[ Line: 4070 ]]
 	return t
 end
 
-function Module20:jsonDecode() --[[ Line: 4084 ]]
+function Module20:jsonDecode()
 	-- upvalues: Module20 (copy), Label (copy)
 	local NewModule = Module20.new()
 	
@@ -2539,14 +2539,14 @@ TypeRegistryModule.default:register(Label.ResamplerModeProp_ConditionalOptions)
 local Module21 = {}
 Module21.__index = Module21
 
-function Module21.new(p1) --[[ Line: 4115 ]]
+function Module21.new(p1)
 	-- upvalues: Module21 (copy)
 	return (setmetatable({
 		kind = if p1 == nil or p1.kind == nil then nil else p1.kind
 	}, Module21))
 end
 
-function Module21:encode() --[[ Line: 4121 ]]
+function Module21:encode()
 	-- upvalues: ProtoModule (copy), Label (copy)
 	local Buf = buffer.create(0)
 	local Count = 0
@@ -2570,7 +2570,7 @@ function Module21:encode() --[[ Line: 4121 ]]
 	return Buf1
 end
 
-function Module21.decode(Buf) --[[ Line: 4145 ]]
+function Module21.decode(Buf)
 	-- upvalues: Module21 (copy), ProtoModule (copy), Label (copy)
 	local NewModule = Module21.new()
 	local v22 = 0
@@ -2619,7 +2619,7 @@ function Module21.decode(Buf) --[[ Line: 4145 ]]
 	return NewModule
 end
 
-function Module21:jsonEncode() --[[ Line: 4202 ]]
+function Module21:jsonEncode()
 	-- upvalues: Label (copy)
 	local t = {}
 	
@@ -2641,7 +2641,7 @@ function Module21:jsonEncode() --[[ Line: 4202 ]]
 	return t
 end
 
-function Module21:jsonDecode() --[[ Line: 4220 ]]
+function Module21:jsonDecode()
 	-- upvalues: Module21 (copy), Label (copy)
 	local NewModule = Module21.new()
 	
@@ -2675,7 +2675,7 @@ TypeRegistryModule.default:register(Label.SizeConstraintProp)
 local Module22 = {}
 Module22.__index = Module22
 
-function Module22.new(p1) --[[ Line: 4264 ]]
+function Module22.new(p1)
 	-- upvalues: Module22 (copy)
 	return (setmetatable({
 		condition = if p1 == nil or p1.condition == nil then nil else p1.condition,
@@ -2683,7 +2683,7 @@ function Module22.new(p1) --[[ Line: 4264 ]]
 	}, Module22))
 end
 
-function Module22:encode() --[[ Line: 4273 ]]
+function Module22:encode()
 	-- upvalues: ProtoModule (copy), Label (copy)
 	local Buf = buffer.create(0)
 	local Count = 0
@@ -2708,7 +2708,7 @@ function Module22:encode() --[[ Line: 4273 ]]
 	return Buf1
 end
 
-function Module22.decode(Buf) --[[ Line: 4299 ]]
+function Module22.decode(Buf)
 	-- upvalues: Module22 (copy), ProtoModule (copy), Label (copy), PropConditionModule (copy)
 	local NewModule = Module22.new()
 	local v23 = 0
@@ -2754,7 +2754,7 @@ function Module22.decode(Buf) --[[ Line: 4299 ]]
 	return NewModule
 end
 
-function Module22:jsonEncode() --[[ Line: 4355 ]]
+function Module22:jsonEncode()
 	-- upvalues: Label (copy)
 	local t = {}
 	
@@ -2774,7 +2774,7 @@ function Module22:jsonEncode() --[[ Line: 4355 ]]
 	return t
 end
 
-function Module22:jsonDecode() --[[ Line: 4375 ]]
+function Module22:jsonDecode()
 	-- upvalues: Module22 (copy), PropConditionModule (copy), Label (copy)
 	local NewModule = Module22.new()
 	
@@ -2805,14 +2805,14 @@ TypeRegistryModule.default:register(Label.SizeConstraintProp_ConditionalOption)
 local Module23 = {}
 Module23.__index = Module23
 
-function Module23.new(p1) --[[ Line: 4419 ]]
+function Module23.new(p1)
 	-- upvalues: Module23 (copy)
 	return (setmetatable({
 		options = if p1 == nil or p1.options == nil then {} else p1.options
 	}, Module23))
 end
 
-function Module23:encode() --[[ Line: 4427 ]]
+function Module23:encode()
 	-- upvalues: ProtoModule (copy)
 	local Buf = buffer.create(0)
 	local Count = 0
@@ -2830,7 +2830,7 @@ function Module23:encode() --[[ Line: 4427 ]]
 	return Buf1
 end
 
-function Module23.decode(Buf) --[[ Line: 4444 ]]
+function Module23.decode(Buf)
 	-- upvalues: Module23 (copy), ProtoModule (copy), Label (copy)
 	local NewModule = Module23.new()
 	local v24 = 0
@@ -2863,7 +2863,7 @@ function Module23.decode(Buf) --[[ Line: 4444 ]]
 	return NewModule
 end
 
-function Module23:jsonEncode() --[[ Line: 4487 ]]
+function Module23:jsonEncode()
 	local t = {}
 	
 	if self.options ~= nil and #self.options > 0 then
@@ -2877,7 +2877,7 @@ function Module23:jsonEncode() --[[ Line: 4487 ]]
 	return t
 end
 
-function Module23:jsonDecode() --[[ Line: 4501 ]]
+function Module23:jsonDecode()
 	-- upvalues: Module23 (copy), Label (copy)
 	local NewModule = Module23.new()
 	
@@ -2901,14 +2901,14 @@ TypeRegistryModule.default:register(Label.SizeConstraintProp_ConditionalOptions)
 local Module24 = {}
 Module24.__index = Module24
 
-function Module24.new(p1) --[[ Line: 4532 ]]
+function Module24.new(p1)
 	-- upvalues: Module24 (copy)
 	return (setmetatable({
 		kind = if p1 == nil or p1.kind == nil then nil else p1.kind
 	}, Module24))
 end
 
-function Module24:encode() --[[ Line: 4538 ]]
+function Module24:encode()
 	-- upvalues: ProtoModule (copy), Label (copy)
 	local Buf = buffer.create(0)
 	local Count = 0
@@ -2932,7 +2932,7 @@ function Module24:encode() --[[ Line: 4538 ]]
 	return Buf1
 end
 
-function Module24.decode(Buf) --[[ Line: 4562 ]]
+function Module24.decode(Buf)
 	-- upvalues: Module24 (copy), ProtoModule (copy), Label (copy)
 	local NewModule = Module24.new()
 	local v25 = 0
@@ -2981,7 +2981,7 @@ function Module24.decode(Buf) --[[ Line: 4562 ]]
 	return NewModule
 end
 
-function Module24:jsonEncode() --[[ Line: 4621 ]]
+function Module24:jsonEncode()
 	-- upvalues: Label (copy)
 	local t = {}
 	
@@ -3003,7 +3003,7 @@ function Module24:jsonEncode() --[[ Line: 4621 ]]
 	return t
 end
 
-function Module24:jsonDecode() --[[ Line: 4639 ]]
+function Module24:jsonDecode()
 	-- upvalues: Module24 (copy), Label (copy)
 	local NewModule = Module24.new()
 	
@@ -3037,7 +3037,7 @@ TypeRegistryModule.default:register(Label.HorizontalAlignmentProp)
 local Module25 = {}
 Module25.__index = Module25
 
-function Module25.new(p1) --[[ Line: 4683 ]]
+function Module25.new(p1)
 	-- upvalues: Module25 (copy)
 	return (setmetatable({
 		condition = if p1 == nil or p1.condition == nil then nil else p1.condition,
@@ -3045,7 +3045,7 @@ function Module25.new(p1) --[[ Line: 4683 ]]
 	}, Module25))
 end
 
-function Module25:encode() --[[ Line: 4692 ]]
+function Module25:encode()
 	-- upvalues: ProtoModule (copy), Label (copy)
 	local Buf = buffer.create(0)
 	local Count = 0
@@ -3070,7 +3070,7 @@ function Module25:encode() --[[ Line: 4692 ]]
 	return Buf1
 end
 
-function Module25.decode(Buf) --[[ Line: 4720 ]]
+function Module25.decode(Buf)
 	-- upvalues: Module25 (copy), ProtoModule (copy), Label (copy), PropConditionModule (copy)
 	local NewModule = Module25.new()
 	local v26 = 0
@@ -3116,7 +3116,7 @@ function Module25.decode(Buf) --[[ Line: 4720 ]]
 	return NewModule
 end
 
-function Module25:jsonEncode() --[[ Line: 4778 ]]
+function Module25:jsonEncode()
 	-- upvalues: Label (copy)
 	local t = {}
 	
@@ -3136,7 +3136,7 @@ function Module25:jsonEncode() --[[ Line: 4778 ]]
 	return t
 end
 
-function Module25:jsonDecode() --[[ Line: 4800 ]]
+function Module25:jsonDecode()
 	-- upvalues: Module25 (copy), PropConditionModule (copy), Label (copy)
 	local NewModule = Module25.new()
 	
@@ -3167,14 +3167,14 @@ TypeRegistryModule.default:register(Label.HorizontalAlignmentProp_ConditionalOpt
 local Module26 = {}
 Module26.__index = Module26
 
-function Module26.new(p1) --[[ Line: 4844 ]]
+function Module26.new(p1)
 	-- upvalues: Module26 (copy)
 	return (setmetatable({
 		option = if p1 == nil or p1.option == nil then {} else p1.option
 	}, Module26))
 end
 
-function Module26:encode() --[[ Line: 4852 ]]
+function Module26:encode()
 	-- upvalues: ProtoModule (copy)
 	local Buf = buffer.create(0)
 	local Count = 0
@@ -3192,7 +3192,7 @@ function Module26:encode() --[[ Line: 4852 ]]
 	return Buf1
 end
 
-function Module26.decode(Buf) --[[ Line: 4871 ]]
+function Module26.decode(Buf)
 	-- upvalues: Module26 (copy), ProtoModule (copy), Label (copy)
 	local NewModule = Module26.new()
 	local v27 = 0
@@ -3225,7 +3225,7 @@ function Module26.decode(Buf) --[[ Line: 4871 ]]
 	return NewModule
 end
 
-function Module26:jsonEncode() --[[ Line: 4916 ]]
+function Module26:jsonEncode()
 	local t = {}
 	
 	if self.option ~= nil and #self.option > 0 then
@@ -3239,7 +3239,7 @@ function Module26:jsonEncode() --[[ Line: 4916 ]]
 	return t
 end
 
-function Module26:jsonDecode() --[[ Line: 4932 ]]
+function Module26:jsonDecode()
 	-- upvalues: Module26 (copy), Label (copy)
 	local NewModule = Module26.new()
 	
@@ -3263,14 +3263,14 @@ TypeRegistryModule.default:register(Label.HorizontalAlignmentProp_ConditionalOpt
 local Module27 = {}
 Module27.__index = Module27
 
-function Module27.new(p1) --[[ Line: 4963 ]]
+function Module27.new(p1)
 	-- upvalues: Module27 (copy)
 	return (setmetatable({
 		kind = if p1 == nil or p1.kind == nil then nil else p1.kind
 	}, Module27))
 end
 
-function Module27:encode() --[[ Line: 4969 ]]
+function Module27:encode()
 	-- upvalues: ProtoModule (copy), Label (copy)
 	local Buf = buffer.create(0)
 	local Count = 0
@@ -3294,7 +3294,7 @@ function Module27:encode() --[[ Line: 4969 ]]
 	return Buf1
 end
 
-function Module27.decode(Buf) --[[ Line: 4993 ]]
+function Module27.decode(Buf)
 	-- upvalues: Module27 (copy), ProtoModule (copy), Label (copy)
 	local NewModule = Module27.new()
 	local v28 = 0
@@ -3343,7 +3343,7 @@ function Module27.decode(Buf) --[[ Line: 4993 ]]
 	return NewModule
 end
 
-function Module27:jsonEncode() --[[ Line: 5052 ]]
+function Module27:jsonEncode()
 	-- upvalues: Label (copy)
 	local t = {}
 	
@@ -3365,7 +3365,7 @@ function Module27:jsonEncode() --[[ Line: 5052 ]]
 	return t
 end
 
-function Module27:jsonDecode() --[[ Line: 5070 ]]
+function Module27:jsonDecode()
 	-- upvalues: Module27 (copy), Label (copy)
 	local NewModule = Module27.new()
 	
@@ -3399,7 +3399,7 @@ TypeRegistryModule.default:register(Label.SelectionBehaviorProp)
 local Module28 = {}
 Module28.__index = Module28
 
-function Module28.new(p1) --[[ Line: 5114 ]]
+function Module28.new(p1)
 	-- upvalues: Module28 (copy)
 	return (setmetatable({
 		condition = if p1 == nil or p1.condition == nil then nil else p1.condition,
@@ -3407,7 +3407,7 @@ function Module28.new(p1) --[[ Line: 5114 ]]
 	}, Module28))
 end
 
-function Module28:encode() --[[ Line: 5123 ]]
+function Module28:encode()
 	-- upvalues: ProtoModule (copy), Label (copy)
 	local Buf = buffer.create(0)
 	local Count = 0
@@ -3432,7 +3432,7 @@ function Module28:encode() --[[ Line: 5123 ]]
 	return Buf1
 end
 
-function Module28.decode(Buf) --[[ Line: 5149 ]]
+function Module28.decode(Buf)
 	-- upvalues: Module28 (copy), ProtoModule (copy), Label (copy), PropConditionModule (copy)
 	local NewModule = Module28.new()
 	local v29 = 0
@@ -3478,7 +3478,7 @@ function Module28.decode(Buf) --[[ Line: 5149 ]]
 	return NewModule
 end
 
-function Module28:jsonEncode() --[[ Line: 5205 ]]
+function Module28:jsonEncode()
 	-- upvalues: Label (copy)
 	local t = {}
 	
@@ -3498,7 +3498,7 @@ function Module28:jsonEncode() --[[ Line: 5205 ]]
 	return t
 end
 
-function Module28:jsonDecode() --[[ Line: 5225 ]]
+function Module28:jsonDecode()
 	-- upvalues: Module28 (copy), PropConditionModule (copy), Label (copy)
 	local NewModule = Module28.new()
 	
@@ -3529,14 +3529,14 @@ TypeRegistryModule.default:register(Label.SelectionBehaviorProp_ConditionalOptio
 local Module29 = {}
 Module29.__index = Module29
 
-function Module29.new(p1) --[[ Line: 5269 ]]
+function Module29.new(p1)
 	-- upvalues: Module29 (copy)
 	return (setmetatable({
 		options = if p1 == nil or p1.options == nil then {} else p1.options
 	}, Module29))
 end
 
-function Module29:encode() --[[ Line: 5277 ]]
+function Module29:encode()
 	-- upvalues: ProtoModule (copy)
 	local Buf = buffer.create(0)
 	local Count = 0
@@ -3554,7 +3554,7 @@ function Module29:encode() --[[ Line: 5277 ]]
 	return Buf1
 end
 
-function Module29.decode(Buf) --[[ Line: 5296 ]]
+function Module29.decode(Buf)
 	-- upvalues: Module29 (copy), ProtoModule (copy), Label (copy)
 	local NewModule = Module29.new()
 	local v30 = 0
@@ -3587,7 +3587,7 @@ function Module29.decode(Buf) --[[ Line: 5296 ]]
 	return NewModule
 end
 
-function Module29:jsonEncode() --[[ Line: 5341 ]]
+function Module29:jsonEncode()
 	local t = {}
 	
 	if self.options ~= nil and #self.options > 0 then
@@ -3601,7 +3601,7 @@ function Module29:jsonEncode() --[[ Line: 5341 ]]
 	return t
 end
 
-function Module29:jsonDecode() --[[ Line: 5357 ]]
+function Module29:jsonDecode()
 	-- upvalues: Module29 (copy), Label (copy)
 	local NewModule = Module29.new()
 	
@@ -3625,14 +3625,14 @@ TypeRegistryModule.default:register(Label.SelectionBehaviorProp_ConditionalOptio
 local Module30 = {}
 Module30.__index = Module30
 
-function Module30.new(p1) --[[ Line: 5388 ]]
+function Module30.new(p1)
 	-- upvalues: Module30 (copy)
 	return (setmetatable({
 		kind = if p1 == nil or p1.kind == nil then nil else p1.kind
 	}, Module30))
 end
 
-function Module30:encode() --[[ Line: 5394 ]]
+function Module30:encode()
 	-- upvalues: ProtoModule (copy), Label (copy)
 	local Buf = buffer.create(0)
 	local Count = 0
@@ -3656,7 +3656,7 @@ function Module30:encode() --[[ Line: 5394 ]]
 	return Buf1
 end
 
-function Module30.decode(Buf) --[[ Line: 5417 ]]
+function Module30.decode(Buf)
 	-- upvalues: Module30 (copy), ProtoModule (copy), Label (copy)
 	local NewModule = Module30.new()
 	local v31 = 0
@@ -3705,7 +3705,7 @@ function Module30.decode(Buf) --[[ Line: 5417 ]]
 	return NewModule
 end
 
-function Module30:jsonEncode() --[[ Line: 5473 ]]
+function Module30:jsonEncode()
 	-- upvalues: Label (copy)
 	local t = {}
 	
@@ -3727,7 +3727,7 @@ function Module30:jsonEncode() --[[ Line: 5473 ]]
 	return t
 end
 
-function Module30:jsonDecode() --[[ Line: 5491 ]]
+function Module30:jsonDecode()
 	-- upvalues: Module30 (copy), Label (copy)
 	local NewModule = Module30.new()
 	
@@ -3761,7 +3761,7 @@ TypeRegistryModule.default:register(Label.KeyCodeProp)
 local Module31 = {}
 Module31.__index = Module31
 
-function Module31.new(p1) --[[ Line: 5533 ]]
+function Module31.new(p1)
 	-- upvalues: Module31 (copy)
 	return (setmetatable({
 		condition = if p1 == nil or p1.condition == nil then nil else p1.condition,
@@ -3769,7 +3769,7 @@ function Module31.new(p1) --[[ Line: 5533 ]]
 	}, Module31))
 end
 
-function Module31:encode() --[[ Line: 5542 ]]
+function Module31:encode()
 	-- upvalues: ProtoModule (copy), Label (copy)
 	local Buf = buffer.create(0)
 	local Count = 0
@@ -3794,7 +3794,7 @@ function Module31:encode() --[[ Line: 5542 ]]
 	return Buf1
 end
 
-function Module31.decode(Buf) --[[ Line: 5567 ]]
+function Module31.decode(Buf)
 	-- upvalues: Module31 (copy), ProtoModule (copy), Label (copy), PropConditionModule (copy)
 	local NewModule = Module31.new()
 	local v32 = 0
@@ -3840,7 +3840,7 @@ function Module31.decode(Buf) --[[ Line: 5567 ]]
 	return NewModule
 end
 
-function Module31:jsonEncode() --[[ Line: 5623 ]]
+function Module31:jsonEncode()
 	-- upvalues: Label (copy)
 	local t = {}
 	
@@ -3860,7 +3860,7 @@ function Module31:jsonEncode() --[[ Line: 5623 ]]
 	return t
 end
 
-function Module31:jsonDecode() --[[ Line: 5643 ]]
+function Module31:jsonDecode()
 	-- upvalues: Module31 (copy), PropConditionModule (copy), Label (copy)
 	local NewModule = Module31.new()
 	
@@ -3891,14 +3891,14 @@ TypeRegistryModule.default:register(Label.KeyCodeProp_ConditionalOption)
 local Module32 = {}
 Module32.__index = Module32
 
-function Module32.new(p1) --[[ Line: 5685 ]]
+function Module32.new(p1)
 	-- upvalues: Module32 (copy)
 	return (setmetatable({
 		options = if p1 == nil or p1.options == nil then {} else p1.options
 	}, Module32))
 end
 
-function Module32:encode() --[[ Line: 5693 ]]
+function Module32:encode()
 	-- upvalues: ProtoModule (copy)
 	local Buf = buffer.create(0)
 	local Count = 0
@@ -3916,7 +3916,7 @@ function Module32:encode() --[[ Line: 5693 ]]
 	return Buf1
 end
 
-function Module32.decode(Buf) --[[ Line: 5710 ]]
+function Module32.decode(Buf)
 	-- upvalues: Module32 (copy), ProtoModule (copy), Label (copy)
 	local NewModule = Module32.new()
 	local v33 = 0
@@ -3949,7 +3949,7 @@ function Module32.decode(Buf) --[[ Line: 5710 ]]
 	return NewModule
 end
 
-function Module32:jsonEncode() --[[ Line: 5753 ]]
+function Module32:jsonEncode()
 	local t = {}
 	
 	if self.options ~= nil and #self.options > 0 then
@@ -3963,7 +3963,7 @@ function Module32:jsonEncode() --[[ Line: 5753 ]]
 	return t
 end
 
-function Module32:jsonDecode() --[[ Line: 5767 ]]
+function Module32:jsonDecode()
 	-- upvalues: Module32 (copy), Label (copy)
 	local NewModule = Module32.new()
 	
@@ -3987,14 +3987,14 @@ TypeRegistryModule.default:register(Label.KeyCodeProp_ConditionalOptions)
 local Module33 = {}
 Module33.__index = Module33
 
-function Module33.new(p1) --[[ Line: 5796 ]]
+function Module33.new(p1)
 	-- upvalues: Module33 (copy)
 	return (setmetatable({
 		kind = if p1 == nil or p1.kind == nil then nil else p1.kind
 	}, Module33))
 end
 
-function Module33:encode() --[[ Line: 5802 ]]
+function Module33:encode()
 	-- upvalues: ProtoModule (copy), Label (copy)
 	local Buf = buffer.create(0)
 	local Count = 0
@@ -4018,7 +4018,7 @@ function Module33:encode() --[[ Line: 5802 ]]
 	return Buf1
 end
 
-function Module33.decode(Buf) --[[ Line: 5826 ]]
+function Module33.decode(Buf)
 	-- upvalues: Module33 (copy), ProtoModule (copy), Label (copy)
 	local NewModule = Module33.new()
 	local v34 = 0
@@ -4067,7 +4067,7 @@ function Module33.decode(Buf) --[[ Line: 5826 ]]
 	return NewModule
 end
 
-function Module33:jsonEncode() --[[ Line: 5885 ]]
+function Module33:jsonEncode()
 	-- upvalues: Label (copy)
 	local t = {}
 	
@@ -4089,7 +4089,7 @@ function Module33:jsonEncode() --[[ Line: 5885 ]]
 	return t
 end
 
-function Module33:jsonDecode() --[[ Line: 5903 ]]
+function Module33:jsonDecode()
 	-- upvalues: Module33 (copy), Label (copy)
 	local NewModule = Module33.new()
 	
@@ -4123,7 +4123,7 @@ TypeRegistryModule.default:register(Label.VerticalAlignmentProp)
 local Module34 = {}
 Module34.__index = Module34
 
-function Module34.new(p1) --[[ Line: 5947 ]]
+function Module34.new(p1)
 	-- upvalues: Module34 (copy)
 	return (setmetatable({
 		condition = if p1 == nil or p1.condition == nil then nil else p1.condition,
@@ -4131,7 +4131,7 @@ function Module34.new(p1) --[[ Line: 5947 ]]
 	}, Module34))
 end
 
-function Module34:encode() --[[ Line: 5956 ]]
+function Module34:encode()
 	-- upvalues: ProtoModule (copy), Label (copy)
 	local Buf = buffer.create(0)
 	local Count = 0
@@ -4156,7 +4156,7 @@ function Module34:encode() --[[ Line: 5956 ]]
 	return Buf1
 end
 
-function Module34.decode(Buf) --[[ Line: 5982 ]]
+function Module34.decode(Buf)
 	-- upvalues: Module34 (copy), ProtoModule (copy), Label (copy), PropConditionModule (copy)
 	local NewModule = Module34.new()
 	local v35 = 0
@@ -4202,7 +4202,7 @@ function Module34.decode(Buf) --[[ Line: 5982 ]]
 	return NewModule
 end
 
-function Module34:jsonEncode() --[[ Line: 6038 ]]
+function Module34:jsonEncode()
 	-- upvalues: Label (copy)
 	local t = {}
 	
@@ -4222,7 +4222,7 @@ function Module34:jsonEncode() --[[ Line: 6038 ]]
 	return t
 end
 
-function Module34:jsonDecode() --[[ Line: 6058 ]]
+function Module34:jsonDecode()
 	-- upvalues: Module34 (copy), PropConditionModule (copy), Label (copy)
 	local NewModule = Module34.new()
 	
@@ -4253,14 +4253,14 @@ TypeRegistryModule.default:register(Label.VerticalAlignmentProp_ConditionalOptio
 local Module35 = {}
 Module35.__index = Module35
 
-function Module35.new(p1) --[[ Line: 6102 ]]
+function Module35.new(p1)
 	-- upvalues: Module35 (copy)
 	return (setmetatable({
 		option = if p1 == nil or p1.option == nil then {} else p1.option
 	}, Module35))
 end
 
-function Module35:encode() --[[ Line: 6110 ]]
+function Module35:encode()
 	-- upvalues: ProtoModule (copy)
 	local Buf = buffer.create(0)
 	local Count = 0
@@ -4278,7 +4278,7 @@ function Module35:encode() --[[ Line: 6110 ]]
 	return Buf1
 end
 
-function Module35.decode(Buf) --[[ Line: 6129 ]]
+function Module35.decode(Buf)
 	-- upvalues: Module35 (copy), ProtoModule (copy), Label (copy)
 	local NewModule = Module35.new()
 	local v36 = 0
@@ -4311,7 +4311,7 @@ function Module35.decode(Buf) --[[ Line: 6129 ]]
 	return NewModule
 end
 
-function Module35:jsonEncode() --[[ Line: 6174 ]]
+function Module35:jsonEncode()
 	local t = {}
 	
 	if self.option ~= nil and #self.option > 0 then
@@ -4325,7 +4325,7 @@ function Module35:jsonEncode() --[[ Line: 6174 ]]
 	return t
 end
 
-function Module35:jsonDecode() --[[ Line: 6190 ]]
+function Module35:jsonDecode()
 	-- upvalues: Module35 (copy), Label (copy)
 	local NewModule = Module35.new()
 	
@@ -4347,134 +4347,134 @@ Module35.descriptor = {
 Label.VerticalAlignmentProp_ConditionalOptions = Module35
 TypeRegistryModule.default:register(Label.VerticalAlignmentProp_ConditionalOptions)
 Label.AutomaticSize = {
-	fromNumber = function(p1) --[[ Line: 6218 ]]
+	fromNumber = function(p1)
 		return if p1 == 0 then "AUTOMATIC_SIZE_INVALID" elseif p1 == 1 then "AUTOMATIC_SIZE_NONE" elseif p1 == 2 then "AUTOMATIC_SIZE_X" elseif p1 == 3 then "AUTOMATIC_SIZE_Y" elseif p1 == 4 then "AUTOMATIC_SIZE_XY" else nil
 	end,
-	toNumber = function(p1) --[[ Line: 6234 ]]
+	toNumber = function(p1)
 		return if p1 == "AUTOMATIC_SIZE_INVALID" then 0 elseif p1 == "AUTOMATIC_SIZE_NONE" then 1 elseif p1 == "AUTOMATIC_SIZE_X" then 2 elseif p1 == "AUTOMATIC_SIZE_Y" then 3 elseif p1 == "AUTOMATIC_SIZE_XY" then 4 else p1
 	end,
-	fromName = function(p1) --[[ Line: 6250 ]]
+	fromName = function(p1)
 		return if p1 == "AUTOMATIC_SIZE_INVALID" then "AUTOMATIC_SIZE_INVALID" elseif p1 == "AUTOMATIC_SIZE_NONE" then "AUTOMATIC_SIZE_NONE" elseif p1 == "AUTOMATIC_SIZE_X" then "AUTOMATIC_SIZE_X" elseif p1 == "AUTOMATIC_SIZE_Y" then "AUTOMATIC_SIZE_Y" elseif p1 == "AUTOMATIC_SIZE_XY" then "AUTOMATIC_SIZE_XY" else nil
 	end
 }
 Label.TextTruncate = {
-	fromNumber = function(p1) --[[ Line: 6268 ]]
+	fromNumber = function(p1)
 		return if p1 == 0 then "TEXT_TRUNCATE_INVALID" elseif p1 == 1 then "TEXT_TRUNCATE_NONE" elseif p1 == 2 then "TEXT_TRUNCATE_AT_END" elseif p1 == 3 then "TEXT_TRUNCATE_SPLIT_WORD" else nil
 	end,
-	toNumber = function(p1) --[[ Line: 6282 ]]
+	toNumber = function(p1)
 		return if p1 == "TEXT_TRUNCATE_INVALID" then 0 elseif p1 == "TEXT_TRUNCATE_NONE" then 1 elseif p1 == "TEXT_TRUNCATE_AT_END" then 2 elseif p1 == "TEXT_TRUNCATE_SPLIT_WORD" then 3 else p1
 	end,
-	fromName = function(p1) --[[ Line: 6296 ]]
+	fromName = function(p1)
 		return if p1 == "TEXT_TRUNCATE_INVALID" then "TEXT_TRUNCATE_INVALID" elseif p1 == "TEXT_TRUNCATE_NONE" then "TEXT_TRUNCATE_NONE" elseif p1 == "TEXT_TRUNCATE_AT_END" then "TEXT_TRUNCATE_AT_END" elseif p1 == "TEXT_TRUNCATE_SPLIT_WORD" then "TEXT_TRUNCATE_SPLIT_WORD" else nil
 	end
 }
 Label.TextXAlignment = {
-	fromNumber = function(p1) --[[ Line: 6312 ]]
+	fromNumber = function(p1)
 		return if p1 == 0 then "TEXT_X_ALIGNMENT_INVALID" elseif p1 == 1 then "TEXT_X_ALIGNMENT_LEFT" elseif p1 == 2 then "TEXT_X_ALIGNMENT_CENTER" elseif p1 == 3 then "TEXT_X_ALIGNMENT_RIGHT" else nil
 	end,
-	toNumber = function(p1) --[[ Line: 6326 ]]
+	toNumber = function(p1)
 		return if p1 == "TEXT_X_ALIGNMENT_INVALID" then 0 elseif p1 == "TEXT_X_ALIGNMENT_LEFT" then 1 elseif p1 == "TEXT_X_ALIGNMENT_CENTER" then 2 elseif p1 == "TEXT_X_ALIGNMENT_RIGHT" then 3 else p1
 	end,
-	fromName = function(p1) --[[ Line: 6340 ]]
+	fromName = function(p1)
 		return if p1 == "TEXT_X_ALIGNMENT_INVALID" then "TEXT_X_ALIGNMENT_INVALID" elseif p1 == "TEXT_X_ALIGNMENT_LEFT" then "TEXT_X_ALIGNMENT_LEFT" elseif p1 == "TEXT_X_ALIGNMENT_CENTER" then "TEXT_X_ALIGNMENT_CENTER" elseif p1 == "TEXT_X_ALIGNMENT_RIGHT" then "TEXT_X_ALIGNMENT_RIGHT" else nil
 	end
 }
 Label.TextYAlignment = {
-	fromNumber = function(p1) --[[ Line: 6356 ]]
+	fromNumber = function(p1)
 		return if p1 == 0 then "TEXT_Y_ALIGNMENT_INVALID" elseif p1 == 1 then "TEXT_Y_ALIGNMENT_TOP" elseif p1 == 2 then "TEXT_Y_ALIGNMENT_CENTER" elseif p1 == 3 then "TEXT_Y_ALIGNMENT_BOTTOM" else nil
 	end,
-	toNumber = function(p1) --[[ Line: 6370 ]]
+	toNumber = function(p1)
 		return if p1 == "TEXT_Y_ALIGNMENT_INVALID" then 0 elseif p1 == "TEXT_Y_ALIGNMENT_TOP" then 1 elseif p1 == "TEXT_Y_ALIGNMENT_CENTER" then 2 elseif p1 == "TEXT_Y_ALIGNMENT_BOTTOM" then 3 else p1
 	end,
-	fromName = function(p1) --[[ Line: 6384 ]]
+	fromName = function(p1)
 		return if p1 == "TEXT_Y_ALIGNMENT_INVALID" then "TEXT_Y_ALIGNMENT_INVALID" elseif p1 == "TEXT_Y_ALIGNMENT_TOP" then "TEXT_Y_ALIGNMENT_TOP" elseif p1 == "TEXT_Y_ALIGNMENT_CENTER" then "TEXT_Y_ALIGNMENT_CENTER" elseif p1 == "TEXT_Y_ALIGNMENT_BOTTOM" then "TEXT_Y_ALIGNMENT_BOTTOM" else nil
 	end
 }
 Label.UIFlexMode = {
-	fromNumber = function(p1) --[[ Line: 6400 ]]
+	fromNumber = function(p1)
 		return if p1 == 0 then "UI_FLEX_MODE_INVALID" elseif p1 == 1 then "UI_FLEX_MODE_NONE" elseif p1 == 2 then "UI_FLEX_MODE_GROW" elseif p1 == 3 then "UI_FLEX_MODE_SHRINK" elseif p1 == 4 then "UI_FLEX_MODE_FILL" elseif p1 == 5 then "UI_FLEX_MODE_CUSTOM" else nil
 	end,
-	toNumber = function(p1) --[[ Line: 6418 ]]
+	toNumber = function(p1)
 		return if p1 == "UI_FLEX_MODE_INVALID" then 0 elseif p1 == "UI_FLEX_MODE_NONE" then 1 elseif p1 == "UI_FLEX_MODE_GROW" then 2 elseif p1 == "UI_FLEX_MODE_SHRINK" then 3 elseif p1 == "UI_FLEX_MODE_FILL" then 4 elseif p1 == "UI_FLEX_MODE_CUSTOM" then 5 else p1
 	end,
-	fromName = function(p1) --[[ Line: 6436 ]]
+	fromName = function(p1)
 		return if p1 == "UI_FLEX_MODE_INVALID" then "UI_FLEX_MODE_INVALID" elseif p1 == "UI_FLEX_MODE_NONE" then "UI_FLEX_MODE_NONE" elseif p1 == "UI_FLEX_MODE_GROW" then "UI_FLEX_MODE_GROW" elseif p1 == "UI_FLEX_MODE_SHRINK" then "UI_FLEX_MODE_SHRINK" elseif p1 == "UI_FLEX_MODE_FILL" then "UI_FLEX_MODE_FILL" elseif p1 == "UI_FLEX_MODE_CUSTOM" then "UI_FLEX_MODE_CUSTOM" else nil
 	end
 }
 Label.ScaleType = {
-	fromNumber = function(p1) --[[ Line: 6456 ]]
+	fromNumber = function(p1)
 		return if p1 == 0 then "SCALE_TYPE_INVALID" elseif p1 == 1 then "SCALE_TYPE_STRETCH" elseif p1 == 2 then "SCALE_TYPE_SLICE" elseif p1 == 3 then "SCALE_TYPE_TILE" elseif p1 == 4 then "SCALE_TYPE_FIT" elseif p1 == 5 then "SCALE_TYPE_CROP" else nil
 	end,
-	toNumber = function(p1) --[[ Line: 6474 ]]
+	toNumber = function(p1)
 		return if p1 == "SCALE_TYPE_INVALID" then 0 elseif p1 == "SCALE_TYPE_STRETCH" then 1 elseif p1 == "SCALE_TYPE_SLICE" then 2 elseif p1 == "SCALE_TYPE_TILE" then 3 elseif p1 == "SCALE_TYPE_FIT" then 4 elseif p1 == "SCALE_TYPE_CROP" then 5 else p1
 	end,
-	fromName = function(p1) --[[ Line: 6492 ]]
+	fromName = function(p1)
 		return if p1 == "SCALE_TYPE_INVALID" then "SCALE_TYPE_INVALID" elseif p1 == "SCALE_TYPE_STRETCH" then "SCALE_TYPE_STRETCH" elseif p1 == "SCALE_TYPE_SLICE" then "SCALE_TYPE_SLICE" elseif p1 == "SCALE_TYPE_TILE" then "SCALE_TYPE_TILE" elseif p1 == "SCALE_TYPE_FIT" then "SCALE_TYPE_FIT" elseif p1 == "SCALE_TYPE_CROP" then "SCALE_TYPE_CROP" else nil
 	end
 }
 Label.ResamplerMode = {
-	fromNumber = function(p1) --[[ Line: 6512 ]]
+	fromNumber = function(p1)
 		return if p1 == 0 then "RESAMPLER_MODE_INVALID" elseif p1 == 1 then "RESAMPLER_MODE_DEFAULT" elseif p1 == 2 then "RESAMPLER_MODE_PIXELATED" else nil
 	end,
-	toNumber = function(p1) --[[ Line: 6524 ]]
+	toNumber = function(p1)
 		return if p1 == "RESAMPLER_MODE_INVALID" then 0 elseif p1 == "RESAMPLER_MODE_DEFAULT" then 1 elseif p1 == "RESAMPLER_MODE_PIXELATED" then 2 else p1
 	end,
-	fromName = function(p1) --[[ Line: 6536 ]]
+	fromName = function(p1)
 		return if p1 == "RESAMPLER_MODE_INVALID" then "RESAMPLER_MODE_INVALID" elseif p1 == "RESAMPLER_MODE_DEFAULT" then "RESAMPLER_MODE_DEFAULT" elseif p1 == "RESAMPLER_MODE_PIXELATED" then "RESAMPLER_MODE_PIXELATED" else nil
 	end
 }
 Label.SizeConstraint = {
-	fromNumber = function(p1) --[[ Line: 6550 ]]
+	fromNumber = function(p1)
 		return if p1 == 0 then "SIZE_CONSTRAINT_INVALID" elseif p1 == 1 then "SIZE_CONSTRAINT_RELATIVE_XY" elseif p1 == 2 then "SIZE_CONSTRAINT_RELATIVE_XX" elseif p1 == 3 then "SIZE_CONSTRAINT_RELATIVE_YY" else nil
 	end,
-	toNumber = function(p1) --[[ Line: 6564 ]]
+	toNumber = function(p1)
 		return if p1 == "SIZE_CONSTRAINT_INVALID" then 0 elseif p1 == "SIZE_CONSTRAINT_RELATIVE_XY" then 1 elseif p1 == "SIZE_CONSTRAINT_RELATIVE_XX" then 2 elseif p1 == "SIZE_CONSTRAINT_RELATIVE_YY" then 3 else p1
 	end,
-	fromName = function(p1) --[[ Line: 6578 ]]
+	fromName = function(p1)
 		return if p1 == "SIZE_CONSTRAINT_INVALID" then "SIZE_CONSTRAINT_INVALID" elseif p1 == "SIZE_CONSTRAINT_RELATIVE_XY" then "SIZE_CONSTRAINT_RELATIVE_XY" elseif p1 == "SIZE_CONSTRAINT_RELATIVE_XX" then "SIZE_CONSTRAINT_RELATIVE_XX" elseif p1 == "SIZE_CONSTRAINT_RELATIVE_YY" then "SIZE_CONSTRAINT_RELATIVE_YY" else nil
 	end
 }
 Label.HorizontalAlignment = {
-	fromNumber = function(p1) --[[ Line: 6594 ]]
+	fromNumber = function(p1)
 		return if p1 == 0 then "HORIZONTAL_ALIGNMENT_INVALID" elseif p1 == 1 then "HORIZONTAL_ALIGNMENT_LEFT" elseif p1 == 2 then "HORIZONTAL_ALIGNMENT_CENTER" elseif p1 == 3 then "HORIZONTAL_ALIGNMENT_RIGHT" else nil
 	end,
-	toNumber = function(p1) --[[ Line: 6608 ]]
+	toNumber = function(p1)
 		return if p1 == "HORIZONTAL_ALIGNMENT_INVALID" then 0 elseif p1 == "HORIZONTAL_ALIGNMENT_LEFT" then 1 elseif p1 == "HORIZONTAL_ALIGNMENT_CENTER" then 2 elseif p1 == "HORIZONTAL_ALIGNMENT_RIGHT" then 3 else p1
 	end,
-	fromName = function(p1) --[[ Line: 6622 ]]
+	fromName = function(p1)
 		return if p1 == "HORIZONTAL_ALIGNMENT_INVALID" then "HORIZONTAL_ALIGNMENT_INVALID" elseif p1 == "HORIZONTAL_ALIGNMENT_LEFT" then "HORIZONTAL_ALIGNMENT_LEFT" elseif p1 == "HORIZONTAL_ALIGNMENT_CENTER" then "HORIZONTAL_ALIGNMENT_CENTER" elseif p1 == "HORIZONTAL_ALIGNMENT_RIGHT" then "HORIZONTAL_ALIGNMENT_RIGHT" else nil
 	end
 }
 Label.VerticalAlignment = {
-	fromNumber = function(p1) --[[ Line: 6638 ]]
+	fromNumber = function(p1)
 		return if p1 == 0 then "VERTICAL_ALIGNMENT_INVALID" elseif p1 == 1 then "VERTICAL_ALIGNMENT_TOP" elseif p1 == 2 then "VERTICAL_ALIGNMENT_CENTER" elseif p1 == 3 then "VERTICAL_ALIGNMENT_BOTTOM" else nil
 	end,
-	toNumber = function(p1) --[[ Line: 6652 ]]
+	toNumber = function(p1)
 		return if p1 == "VERTICAL_ALIGNMENT_INVALID" then 0 elseif p1 == "VERTICAL_ALIGNMENT_TOP" then 1 elseif p1 == "VERTICAL_ALIGNMENT_CENTER" then 2 elseif p1 == "VERTICAL_ALIGNMENT_BOTTOM" then 3 else p1
 	end,
-	fromName = function(p1) --[[ Line: 6666 ]]
+	fromName = function(p1)
 		return if p1 == "VERTICAL_ALIGNMENT_INVALID" then "VERTICAL_ALIGNMENT_INVALID" elseif p1 == "VERTICAL_ALIGNMENT_TOP" then "VERTICAL_ALIGNMENT_TOP" elseif p1 == "VERTICAL_ALIGNMENT_CENTER" then "VERTICAL_ALIGNMENT_CENTER" elseif p1 == "VERTICAL_ALIGNMENT_BOTTOM" then "VERTICAL_ALIGNMENT_BOTTOM" else nil
 	end
 }
 Label.SelectionBehavior = {
-	fromNumber = function(p1) --[[ Line: 6682 ]]
+	fromNumber = function(p1)
 		return if p1 == 0 then "SELECTION_BEHAVIOR_INVALID" elseif p1 == 1 then "SELECTION_BEHAVIOR_ESCAPE" elseif p1 == 2 then "SELECTION_BEHAVIOR_STOP" else nil
 	end,
-	toNumber = function(p1) --[[ Line: 6694 ]]
+	toNumber = function(p1)
 		return if p1 == "SELECTION_BEHAVIOR_INVALID" then 0 elseif p1 == "SELECTION_BEHAVIOR_ESCAPE" then 1 elseif p1 == "SELECTION_BEHAVIOR_STOP" then 2 else p1
 	end,
-	fromName = function(p1) --[[ Line: 6706 ]]
+	fromName = function(p1)
 		return if p1 == "SELECTION_BEHAVIOR_INVALID" then "SELECTION_BEHAVIOR_INVALID" elseif p1 == "SELECTION_BEHAVIOR_ESCAPE" then "SELECTION_BEHAVIOR_ESCAPE" elseif p1 == "SELECTION_BEHAVIOR_STOP" then "SELECTION_BEHAVIOR_STOP" else nil
 	end
 }
 Label.KeyCode = {
-	fromNumber = function(p1) --[[ Line: 6720 ]]
+	fromNumber = function(p1)
 		return if p1 == 0 then "KEY_CODE_INVALID" elseif p1 == 1 then "KEY_CODE_BUTTON_A" elseif p1 == 2 then "KEY_CODE_BUTTON_B" elseif p1 == 3 then "KEY_CODE_BUTTON_X" elseif p1 == 4 then "KEY_CODE_BUTTON_Y" elseif p1 == 5 then "KEY_CODE_BUTTON_L1" elseif p1 == 6 then "KEY_CODE_BUTTON_R1" elseif p1 == 7 then "KEY_CODE_BUTTON_L2" elseif p1 == 8 then "KEY_CODE_BUTTON_R2" elseif p1 == 9 then "KEY_CODE_BUTTON_L3" elseif p1 == 10 then "KEY_CODE_BUTTON_R3" else nil
 	end,
-	toNumber = function(p1) --[[ Line: 6748 ]]
+	toNumber = function(p1)
 		return if p1 == "KEY_CODE_INVALID" then 0 elseif p1 == "KEY_CODE_BUTTON_A" then 1 elseif p1 == "KEY_CODE_BUTTON_B" then 2 elseif p1 == "KEY_CODE_BUTTON_X" then 3 elseif p1 == "KEY_CODE_BUTTON_Y" then 4 elseif p1 == "KEY_CODE_BUTTON_L1" then 5 elseif p1 == "KEY_CODE_BUTTON_R1" then 6 elseif p1 == "KEY_CODE_BUTTON_L2" then 7 elseif p1 == "KEY_CODE_BUTTON_R2" then 8 elseif p1 == "KEY_CODE_BUTTON_L3" then 9 elseif p1 == "KEY_CODE_BUTTON_R3" then 10 else p1
 	end,
-	fromName = function(p1) --[[ Line: 6776 ]]
+	fromName = function(p1)
 		return if p1 == "KEY_CODE_INVALID" then "KEY_CODE_INVALID" elseif p1 == "KEY_CODE_BUTTON_A" then "KEY_CODE_BUTTON_A" elseif p1 == "KEY_CODE_BUTTON_B" then "KEY_CODE_BUTTON_B" elseif p1 == "KEY_CODE_BUTTON_X" then "KEY_CODE_BUTTON_X" elseif p1 == "KEY_CODE_BUTTON_Y" then "KEY_CODE_BUTTON_Y" elseif p1 == "KEY_CODE_BUTTON_L1" then "KEY_CODE_BUTTON_L1" elseif p1 == "KEY_CODE_BUTTON_R1" then "KEY_CODE_BUTTON_R1" elseif p1 == "KEY_CODE_BUTTON_L2" then "KEY_CODE_BUTTON_L2" elseif p1 == "KEY_CODE_BUTTON_R2" then "KEY_CODE_BUTTON_R2" elseif p1 == "KEY_CODE_BUTTON_L3" then "KEY_CODE_BUTTON_L3" elseif p1 == "KEY_CODE_BUTTON_R3" then "KEY_CODE_BUTTON_R3" else nil
 	end
 }

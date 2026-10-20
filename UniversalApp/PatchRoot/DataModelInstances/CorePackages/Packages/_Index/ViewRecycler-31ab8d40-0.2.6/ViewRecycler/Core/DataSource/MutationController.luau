@@ -2,14 +2,14 @@
 local _ = require(ViewRecycler.Core.Types)
 local CreateEventModule = require(ViewRecycler.Internal.createEvent)
 
-return function(Callback, Callback1, Callback2) --[[ Line: 15 | Named "createMutationController" ]]
+return function(Callback, Callback1, Callback2)
 	-- upvalues: CreateEventModule (copy)
 	local EventModule = CreateEventModule()
 	local Count = 0
 	local List = {}
 	local v1 = nil
 	
-	local function flush() --[[ Line: 25 ]]
+	local function flush()
 		-- upvalues: v1 (ref), List (ref), EventModule (copy), Callback (copy)
 		local PreviousItemCount = v1
 		local Changes = List
@@ -22,7 +22,7 @@ return function(Callback, Callback1, Callback2) --[[ Line: 15 | Named "createMut
 		})
 	end
 	
-	local function _(List1, p1) --[[ Line: 37 | Named "queueChanges" ]]
+	local function _(List1, p1)
 		-- upvalues: List (ref), v1 (ref)
 		if #List == 0 then
 			v1 = p1
@@ -34,7 +34,7 @@ return function(Callback, Callback1, Callback2) --[[ Line: 15 | Named "createMut
 	
 	return {
 		subscribe = EventModule.connect,
-		emit = function(p2, p3) --[[ Line: 53 ]]
+		emit = function(p2, p3)
 			-- upvalues: List (ref), v1 (ref), Count (ref), flush (copy)
 			local list = { p2 }
 			
@@ -48,7 +48,7 @@ return function(Callback, Callback1, Callback2) --[[ Line: 15 | Named "createMut
 				flush()
 			end
 		end,
-		emitMany = function(List1, p4) --[[ Line: 46 ]]
+		emitMany = function(List1, p4)
 			-- upvalues: List (ref), v1 (ref), Count (ref), flush (copy)
 			if #List == 0 then
 				v1 = p4
@@ -60,13 +60,13 @@ return function(Callback, Callback1, Callback2) --[[ Line: 15 | Named "createMut
 				flush()
 			end
 		end,
-		transaction = function(Callback) --[[ Line: 60 ]]
+		transaction = function(Callback)
 			-- upvalues: Callback1 (copy), List (ref), v1 (ref), Count (ref), Callback2 (copy), flush (copy)
 			local CallbackResult = Callback1()
 			local Copy = table.clone(List)
 			local v2 = v1
 			Count += 1
-			local Packed = table.pack(pcall(function(): boolean --[[ Line: 65 ]]
+			local Packed = table.pack(pcall(function(): boolean
 				-- upvalues: Callback (copy)
 				Callback()
 				

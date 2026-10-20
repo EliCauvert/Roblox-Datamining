@@ -1,11 +1,11 @@
 ﻿local Nil = require(script.Parent.Parent.Parent.Parent.Shared).Symbol.named("Nil")
 local t = {}
 
-local function tryPropertyName(p1, p2) --[[ Line: 33 ]]
+local function tryPropertyName(p1, p2)
 	return p1[p2]
 end
 
-return function(Key, Key1) --[[ Line: 37 | Named "getDefaultInstanceProperty" ]]
+return function(Key, Key1)
 	-- upvalues: t (copy), Nil (copy), tryPropertyName (copy)
 	local Entry = t[Key]
 	

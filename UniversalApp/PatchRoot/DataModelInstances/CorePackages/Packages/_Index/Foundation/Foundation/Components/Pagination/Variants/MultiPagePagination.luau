@@ -20,14 +20,14 @@ local config = {
 	size = PaginationSizeModule.Medium
 }
 
-return ReactModule.memo(ReactModule.forwardRef(function(p1, p2) --[[ Line: 44 | Named "MultiPagePagination" ]]
+return ReactModule.memo(ReactModule.forwardRef(function(p1, p2)
 	-- upvalues: WithDefaultsModule (copy), config (copy), UseTokensModule (copy), ReactModule (copy), PaginationSlotsUtilsModule (copy), UsePaginationNavModule (copy), UsePaginationAnimatedHighlightModule (copy), PaginationSizeModule (copy), ChipSizeModule (copy), UseChipVariantsModule (copy), ChipVariantModule (copy), EllipsisModule (copy), PageNumberSlotModule (copy), ViewModule (copy), PaginationUtilsModule (copy)
 	local WithDefaultsModuleResult = WithDefaultsModule(p1, config)
 	local Size = WithDefaultsModuleResult.size
 	local UseTokensModuleResult = UseTokensModule()
 	local IsPageBelow = WithDefaultsModuleResult.page <= 1
 	local IsCountBelow = WithDefaultsModuleResult.count <= WithDefaultsModuleResult.page
-	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 52 ]]
+	local UseMemoResult = ReactModule.useMemo(function()
 		-- upvalues: PaginationSlotsUtilsModule (upval), WithDefaultsModuleResult (copy)
 		return PaginationSlotsUtilsModule.getVisiblePageSlots(WithDefaultsModuleResult.page, WithDefaultsModuleResult.count)
 	end, {
@@ -46,12 +46,12 @@ return ReactModule.memo(ReactModule.forwardRef(function(p1, p2) --[[ Line: 44 | 
 			isLastDisabled = IsCountBelow
 		}
 	}, UseStateResult2)
-	ReactModule.useImperativeHandle(p2, function() --[[ Line: 70 ]]
+	ReactModule.useImperativeHandle(p2, function()
 		-- upvalues: UseStateResult (copy)
 		return UseStateResult
 	end, { UseStateResult })
 	local UseRefResult = ReactModule.useRef(nil)
-	local UseMemoResult1 = ReactModule.useMemo(function() --[[ Line: 76 ]]
+	local UseMemoResult1 = ReactModule.useMemo(function()
 		-- upvalues: UseMemoResult (copy), PaginationSlotsUtilsModule (upval), UsePaginationNavModuleResult (copy)
 		local Refs = {}
 		
@@ -81,10 +81,10 @@ return ReactModule.memo(ReactModule.forwardRef(function(p1, p2) --[[ Line: 44 | 
 			Size = ReactModule.joinBindings({
 				UsePaginationAnimatedHighlightModuleResult.highlightWidth,
 				UsePaginationAnimatedHighlightModuleResult.activeItemHeight
-			}):map(function(Entry): UDim2 --[[ Line: 158 ]]
+			}):map(function(Entry): UDim2
 				return UDim2.fromOffset(Entry[1], Entry[2])
 			end),
-			Position = UsePaginationAnimatedHighlightModuleResult.highlightPosition:map(function(XOffset): UDim2 --[[ Line: 161 ]]
+			Position = UsePaginationAnimatedHighlightModuleResult.highlightPosition:map(function(XOffset): UDim2
 				return UDim2.fromOffset(XOffset, 0)
 			end),
 			Visible = UsePaginationAnimatedHighlightModuleResult.isVisible,
@@ -95,7 +95,7 @@ return ReactModule.memo(ReactModule.forwardRef(function(p1, p2) --[[ Line: 44 | 
 			tag = "row gap-xsmall auto-xy",
 			LayoutOrder = 1,
 			ZIndex = 2,
-			onAbsoluteSizeChanged = ReactModule.useCallback(function() --[[ Line: 138 ]]
+			onAbsoluteSizeChanged = ReactModule.useCallback(function()
 				-- upvalues: UseMemoResult1 (copy), PageSlotId (copy), UseRefResult (copy), UsePaginationAnimatedHighlightModuleResult (copy)
 				local UseMemoResultEntry = UseMemoResult1[PageSlotId]
 				
@@ -107,7 +107,7 @@ return ReactModule.memo(ReactModule.forwardRef(function(p1, p2) --[[ Line: 44 | 
 				UseMemoResult1,
 				UsePaginationAnimatedHighlightModuleResult.updateHighlight
 			})
-		}, (ReactModule.useMemo(function() --[[ Line: 94 ]]
+		}, (ReactModule.useMemo(function()
 			-- upvalues: UseMemoResult (copy), ReactModule (upval), EllipsisModule (upval), Size (copy), WithDefaultsModuleResult (copy), PaginationSlotsUtilsModule (upval), UsePaginationNavModuleResult (copy), PageNumberSlotModule (upval)
 			local Elements = {}
 			

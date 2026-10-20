@@ -5,7 +5,7 @@ local Callback = nil
 local v1 = nil
 local v2 = nil
 
-local function naturalCompare(p1, p2): number --[[ Line: 23 ]]
+local function naturalCompare(p1, p2): number
 	-- upvalues: String (copy), Callback (ref), v1 (ref)
 	local Count = 1
 	local Count1 = 1
@@ -49,7 +49,7 @@ end
 v1 = 48
 v2 = 57
 
-Callback = function(CharCodeAtResult): boolean --[[ Line: 71 ]]
+Callback = function(CharCodeAtResult): boolean
 	-- upvalues: IsNaNFunction (copy), v1 (ref), v2 (ref)
 	return not IsNaNFunction(CharCodeAtResult) and (v1 <= CharCodeAtResult and CharCodeAtResult <= v2)
 end

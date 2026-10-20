@@ -13,7 +13,7 @@ local Kind = GraphQLModule.Kind
 local GraphQLList = GraphQLModule.GraphQLList
 local GraphQLNonNull = GraphQLModule.GraphQLNonNull
 
-local function createNamedStub(Name, p1) --[[ Line: 68 ]]
+local function createNamedStub(Name, p1)
 	-- upvalues: GraphQLObjectType (copy), GraphQLInterfaceType (copy), GraphQLInputObjectType (copy), GraphQLString (copy)
 	return (if p1 == "object" then GraphQLObjectType elseif p1 == "interface" then GraphQLInterfaceType else GraphQLInputObjectType).new({
 		name = Name,
@@ -21,7 +21,7 @@ local function createNamedStub(Name, p1) --[[ Line: 68 ]]
 	})
 end
 
-local function createStub(Type, p1) --[[ Line: 96 ]]
+local function createStub(Type, p1)
 	-- upvalues: Kind (copy), GraphQLList (copy), createStub (copy), GraphQLNonNull (copy), createNamedStub (copy)
 	local Kind1 = Type.kind
 	
@@ -31,7 +31,7 @@ end
 return {
 	createNamedStub = createNamedStub,
 	createStub = createStub,
-	isNamedStub = function(p1): boolean --[[ Line: 125 ]]
+	isNamedStub = function(p1): boolean
 		if p1.getFields ~= nil then
 			local Fields = p1:getFields()
 			
@@ -41,7 +41,7 @@ return {
 		end
 		return false
 	end,
-	getBuiltInForStub = function(p2) --[[ Line: 149 ]]
+	getBuiltInForStub = function(p2)
 		-- upvalues: GraphQLInt (copy), GraphQLFloat (copy), GraphQLString (copy), GraphQLBoolean (copy), GraphQLID (copy)
 		local Name = p2.name
 		

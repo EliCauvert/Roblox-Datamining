@@ -1,6 +1,6 @@
 ﻿local LlamaModule = require(script:FindFirstAncestor("RoduxFriends").Parent.llama)
 
-return function(p1, List) --[[ Line: 5 ]]
+return function(p1, List)
 	-- upvalues: LlamaModule (copy)
 	local Nones = {}
 	

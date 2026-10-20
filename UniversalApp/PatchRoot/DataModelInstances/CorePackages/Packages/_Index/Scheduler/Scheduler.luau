@@ -1,5 +1,5 @@
-﻿local function _(p1) --[[ Line: 17 | Named "onlyInTestError" ]]
-	return function() --[[ Line: 18 ]]
+﻿local function _(p1)
+	return function()
 		-- upvalues: p1 (copy)
 		error(p1 .. " is only available in tests, not in production")
 	end
@@ -14,49 +14,49 @@ if require(script.Parent.ReactGlobals).__ROACT_17_MOCK_SCHEDULER__ then
 end
 local v2 = "unstable_flushAllWithoutAsserting"
 
-local function Unstable_flushAllWithoutAsserting() --[[ Line: 18 ]]
+local function Unstable_flushAllWithoutAsserting()
 	-- upvalues: v2 (copy)
 	error(v2 .. " is only available in tests, not in production")
 end
 
 local v3 = "unstable_flushAll"
 
-local function Unstable_flushAll() --[[ Line: 18 ]]
+local function Unstable_flushAll()
 	-- upvalues: v3 (copy)
 	error(v3 .. " is only available in tests, not in production")
 end
 
 local v4 = "unstable_flushNumberOfYields"
 
-local function Unstable_flushNumberOfYields() --[[ Line: 18 ]]
+local function Unstable_flushNumberOfYields()
 	-- upvalues: v4 (copy)
 	error(v4 .. " is only available in tests, not in production")
 end
 
 local v5 = "unstable_clearYields"
 
-local function Unstable_clearYields() --[[ Line: 18 ]]
+local function Unstable_clearYields()
 	-- upvalues: v5 (copy)
 	error(v5 .. " is only available in tests, not in production")
 end
 
 local v6 = "unstable_clearYields"
 
-local function Unstable_flushUntilNextPaint() --[[ Line: 18 ]]
+local function Unstable_flushUntilNextPaint()
 	-- upvalues: v6 (copy)
 	error(v6 .. " is only available in tests, not in production")
 end
 
 local v7 = "unstable_advanceTime"
 
-local function Unstable_advanceTime() --[[ Line: 18 ]]
+local function Unstable_advanceTime()
 	-- upvalues: v7 (copy)
 	error(v7 .. " is only available in tests, not in production")
 end
 
 local v8 = "unstable_flushExpired"
 
-local function Unstable_flushExpired() --[[ Line: 18 ]]
+local function Unstable_flushExpired()
 	-- upvalues: v8 (copy)
 	error(v8 .. " is only available in tests, not in production")
 end
@@ -91,12 +91,12 @@ local SchedulerModule = {
 	unstable_flushUntilNextPaint = Unstable_flushUntilNextPaint,
 	unstable_advanceTime = Unstable_advanceTime,
 	unstable_flushExpired = Unstable_flushExpired,
-	unstable_yieldValue = function() --[[ Line: 18 ]]
+	unstable_yieldValue = function()
 		-- upvalues: v9 (copy)
 		error(v9 .. " is only available in tests, not in production")
 	end,
 	tracing = {
-		unstable_wrap = function() --[[ Line: 18 ]]
+		unstable_wrap = function()
 			-- upvalues: v10 (copy)
 			error(v10 .. " is only available in tests, not in production")
 		end,

@@ -17,7 +17,7 @@ local config = {
 	size = InputSizeModule.Medium
 }
 
-return ReactModule.memo(ReactModule.forwardRef(function(p1, Ref) --[[ Line: 32 | Named "InputChip" ]]
+return ReactModule.memo(ReactModule.forwardRef(function(p1, Ref)
 	-- upvalues: WithDefaultsModule (copy), config (copy), UseTokensModule (copy), UseInputChipVariantsModule (copy), ReactModule (copy), ViewModule (copy), WithCommonPropsModule (copy), ConstantsModule (copy), TextModule (copy), CloseAffordanceModule (copy), InputSizeModule (copy), CloseAffordanceVariantModule (copy)
 	local WithDefaultsModuleResult = WithDefaultsModule(p1, config)
 	local UseInputChipVariantsModuleResult = UseInputChipVariantsModule(UseTokensModule(), WithDefaultsModuleResult.size)

@@ -6,7 +6,7 @@ local DateTimeUtilitiesModule = require(script.Parent.Parent.DateTimeUtilities)
 local ViewModule = require(Foundation.Components.View)
 local UseTokensModule = require(Foundation.Providers.Style.useTokens)
 
-return function(Frame) --[[ Line: 30 | Named "RangeCalendarDayCell" ]]
+return function(Frame)
 	-- upvalues: UseTokensModule (copy), DateTimeUtilitiesModule (copy), DateTimeCalendarDayAppearanceUtilitiesModule (copy), ReactModule (copy), ViewModule (copy), CalendarGridDayLabelModule (copy)
 	local UseTokensModuleResult = UseTokensModule()
 	local _DateTime = DateTime.fromLocalTime(Frame.year, Frame.month, Frame.day)
@@ -43,13 +43,13 @@ return function(Frame) --[[ Line: 30 | Named "RangeCalendarDayCell" ]]
 			isSelectable = IsDaySelectable,
 			isSelected = IsDaySelected,
 			label = tostring(Frame.day),
-			onActivated = function() --[[ Line: 86 ]]
+			onActivated = function()
 				-- upvalues: Frame (copy), _DateTime (copy)
 				Frame.onDayActivated(_DateTime)
 			end,
-			onHoverEnter = ReactModule.useMemo(function() --[[ Line: 48 ]]
+			onHoverEnter = ReactModule.useMemo(function()
 				-- upvalues: Frame (copy), _DateTime (copy)
-				return if Frame.onHoverEnter == nil then nil else function() --[[ Line: 52 ]]
+				return if Frame.onHoverEnter == nil then nil else function()
 					-- upvalues: Frame (upval), _DateTime (upval)
 					Frame.onHoverEnter(_DateTime)
 				end

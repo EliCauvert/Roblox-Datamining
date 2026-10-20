@@ -13,35 +13,35 @@ return require(Parent.Rodux).createReducer({
 	currentState = require(MomentsCreationFlow.Enums.CreationFlowState).Gallery,
 	musicList = {}
 }, {
-	[require(MomentsCreationFlow.Actions.CreationFlowStateUpdated).name] = function(p1, p2) --[[ Line: 45 ]]
+	[require(MomentsCreationFlow.Actions.CreationFlowStateUpdated).name] = function(p1, p2)
 		-- upvalues: CryoModule (copy)
 		return CryoModule.Dictionary.union(p1, { currentState = p2.currentState })
 	end,
-	[require(MomentsCreationFlow.Actions.MusicSearchRetrieved).name] = function(p1, p2) --[[ Line: 51 ]]
+	[require(MomentsCreationFlow.Actions.MusicSearchRetrieved).name] = function(p1, p2)
 		-- upvalues: CryoModule (copy)
 		return CryoModule.Dictionary.union(p1, { musicList = p2.musics })
 	end,
-	[require(MomentsCreationFlow.Actions.SelectedCaptureUpdated).name] = function(p1, p2) --[[ Line: 57 ]]
+	[require(MomentsCreationFlow.Actions.SelectedCaptureUpdated).name] = function(p1, p2)
 		-- upvalues: CryoModule (copy)
 		return CryoModule.Dictionary.union(p1, { capture = p2.capture })
 	end,
-	[require(MomentsCreationFlow.Actions.TextOverlayEditsUpdated).name] = function(p1, p2) --[[ Line: 63 ]]
+	[require(MomentsCreationFlow.Actions.TextOverlayEditsUpdated).name] = function(p1, p2)
 		-- upvalues: CryoModule (copy)
 		return CryoModule.Dictionary.union(p1, { textOverlayEdits = p2.textOverlayEdits })
 	end,
-	[require(MomentsCreationFlow.Actions.TrimEditUpdated).name] = function(p1, p2) --[[ Line: 69 ]]
+	[require(MomentsCreationFlow.Actions.TrimEditUpdated).name] = function(p1, p2)
 		-- upvalues: CryoModule (copy)
 		return CryoModule.Dictionary.union(p1, { trimEdit = p2.trimEdit })
 	end,
-	[require(MomentsCreationFlow.Actions.MusicEditUpdated).name] = function(p1, p2) --[[ Line: 75 ]]
+	[require(MomentsCreationFlow.Actions.MusicEditUpdated).name] = function(p1, p2)
 		-- upvalues: CryoModule (copy)
 		return CryoModule.Dictionary.union(p1, { musicEdit = p2.musicEdit })
 	end,
-	[require(MomentsCreationFlow.Actions.DescriptionUpdated).name] = function(p1, p2) --[[ Line: 81 ]]
+	[require(MomentsCreationFlow.Actions.DescriptionUpdated).name] = function(p1, p2)
 		-- upvalues: CryoModule (copy)
 		return CryoModule.Dictionary.union(p1, { description = p2.description })
 	end,
-	[require(MomentsCreationFlow.Actions.ClearEdits).name] = function(_, p1) --[[ Line: 87 ]]
+	[require(MomentsCreationFlow.Actions.ClearEdits).name] = function(_, p1)
 		return {
 			active = true,
 			capture = nil,

@@ -1,9 +1,9 @@
 ﻿local WrappersModule = require(script:FindFirstAncestor("Foundation").Utility.Wrappers)
 
-return function() --[[ Line: 4 | Named "isPluginSecurity" ]]
+return function()
 	-- upvalues: WrappersModule (copy)
 	local CoreGui = WrappersModule.Services.CoreGui
-	local Success, _ = pcall(function() --[[ Line: 6 ]]
+	local Success, _ = pcall(function()
 		-- upvalues: CoreGui (copy)
 		local _ = CoreGui:GetChildren()
 	end)

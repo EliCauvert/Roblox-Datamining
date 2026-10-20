@@ -10,7 +10,7 @@ local ModelsModule = require(script.Models)
 local EnumsModule = require(script.Enums)
 
 return {
-	config = function(p1) --[[ Line: 14 ]]
+	config = function(p1)
 		-- upvalues: LlamaModule (copy), FriendsNetworkingModule (copy), RoduxNetworkingModule (copy), NetworkingBlockingModule (copy), FriendsReducerModule (copy), ActionsModule (copy), SelectorsModule (copy), ModelsModule (copy), EnumsModule (copy)
 		local JoinResult = LlamaModule.Dictionary.join(p1, {
 			friendsNetworking = FriendsNetworkingModule.config({ roduxNetworking = RoduxNetworkingModule.mock() }),
@@ -18,7 +18,7 @@ return {
 		})
 		
 		return {
-			installReducer = function() --[[ Line: 25 ]]
+			installReducer = function()
 				-- upvalues: FriendsReducerModule (upval), JoinResult (ref)
 				return FriendsReducerModule(JoinResult)
 			end,

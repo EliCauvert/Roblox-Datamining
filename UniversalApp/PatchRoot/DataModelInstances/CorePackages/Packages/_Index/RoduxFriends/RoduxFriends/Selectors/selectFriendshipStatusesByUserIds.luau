@@ -3,13 +3,13 @@ local GetDeepValueModule = require(Parent.getDeepValue)
 local _ = require(Parent.roduxFriendsTypes)
 local FilterByKeysModule = require(script.Parent.filterByKeys)
 
-return function(p1) --[[ Line: 9 ]]
+return function(p1)
 	-- upvalues: GetDeepValueModule (copy), FilterByKeysModule (copy)
 	local KeyPath = p1.keyPath
 	
-	return function(p2) --[[ Line: 11 ]]
+	return function(p2)
 		-- upvalues: GetDeepValueModule (upval), KeyPath (copy), FilterByKeysModule (upval)
-		return function(p3) --[[ Line: 12 ]]
+		return function(p3)
 			-- upvalues: GetDeepValueModule (upval), p2 (copy), KeyPath (upval), FilterByKeysModule (upval)
 			local DeepValueModule = GetDeepValueModule(p2, string.format("%s.friendshipStatus", KeyPath)) or {}
 			

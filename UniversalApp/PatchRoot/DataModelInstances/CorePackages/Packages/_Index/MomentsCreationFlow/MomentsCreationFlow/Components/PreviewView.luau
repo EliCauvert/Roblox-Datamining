@@ -12,7 +12,7 @@ local CreationFlowContextModule = require(MomentsCreationFlow.Context.CreationFl
 local ConstantsModule = require(MomentsCreationFlow.Constants)
 local CreationFlowLocalizationModule = require(MomentsCreationFlow.Enums.CreationFlowLocalization)
 
-return function(p1) --[[ Line: 29 ]]
+return function(p1)
 	-- upvalues: UseDeviceInsetsFunction (copy), UseTokensFunction (copy), ReactModule (copy), CreationFlowContextModule (copy), View (copy), ConstantsModule (copy), Button (copy), FoundationModule (copy), InputSize (copy), CreationFlowLocalizationModule (copy), ButtonVariant (copy)
 	local UseDeviceInsetsResult = UseDeviceInsetsFunction()
 	local UseTokensResult = UseTokensFunction()

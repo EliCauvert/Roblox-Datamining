@@ -16,7 +16,7 @@ local config = {
 	size = PaginationSizeModule.Medium
 }
 
-return ReactModule.memo(ReactModule.forwardRef(function(p1, p2) --[[ Line: 37 | Named "DirectionalPagination" ]]
+return ReactModule.memo(ReactModule.forwardRef(function(p1, p2)
 	-- upvalues: WithDefaultsModule (copy), config (copy), PaginationVariantModule (copy), ReactModule (copy), UsePaginationNavModule (copy), PaginationUtilsModule (copy), ChipModule (copy), PaginationSizeModule (copy), ChipSizeModule (copy), ChipVariantModule (copy), ViewModule (copy), TextModule (copy)
 	local WithDefaultsModuleResult = WithDefaultsModule(p1, config)
 	local Size = WithDefaultsModuleResult.size
@@ -36,12 +36,12 @@ return ReactModule.memo(ReactModule.forwardRef(function(p1, p2) --[[ Line: 37 | 
 			isLastDisabled = NoHasNextPage
 		}
 	}, UseStateResult2)
-	ReactModule.useImperativeHandle(p2, function() --[[ Line: 64 ]]
+	ReactModule.useImperativeHandle(p2, function()
 		-- upvalues: UseStateResult (copy)
 		return UseStateResult
 	end, { UseStateResult })
 	
-	return UsePaginationNavModuleResult.createLayout((ReactModule.useMemo(function() --[[ Line: 68 ]]
+	return UsePaginationNavModuleResult.createLayout((ReactModule.useMemo(function()
 		-- upvalues: IsVariantMatch (copy), WithDefaultsModuleResult (copy), PaginationUtilsModule (upval), ReactModule (upval), ChipModule (upval), Size (copy), PaginationSizeModule (upval), ChipSizeModule (upval), ChipVariantModule (upval), ViewModule (upval), TextModule (upval)
 		if IsVariantMatch then
 			local Text = tostring(WithDefaultsModuleResult.page)
@@ -50,7 +50,7 @@ return ReactModule.memo(ReactModule.forwardRef(function(p1, p2) --[[ Line: 37 | 
 				LayoutOrder = 2,
 				isChecked = false,
 				isDisabled = true,
-				onActivated = function() --[[ Line: 80 ]] end,
+				onActivated = function() end,
 				size = if Size == PaginationSizeModule.Small then ChipSizeModule.Small else ChipSizeModule.Medium,
 				testId = `{WithDefaultsModuleResult.testId}--page-label`,
 				text = Text,

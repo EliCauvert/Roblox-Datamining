@@ -6,7 +6,7 @@ local Dialog = FoundationModule.Dialog
 local CreationFlowContextModule = require(MomentsCreationFlow.Context.CreationFlowContext)
 local CreationFlowLocalizationModule = require(MomentsCreationFlow.Enums.CreationFlowLocalization)
 
-return function(p1) --[[ Line: 16 ]]
+return function(p1)
 	-- upvalues: ReactModule (copy), CreationFlowContextModule (copy), Dialog (copy), FoundationModule (copy), CreationFlowLocalizationModule (copy)
 	local UseContextResult = ReactModule.useContext(CreationFlowContextModule)
 	

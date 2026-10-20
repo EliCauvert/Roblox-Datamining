@@ -4,7 +4,7 @@ local SignalsExperimentalModule = require(ViewRecyclerRoblox.Parent.SignalsExper
 local AxisMapModule = require(ViewRecyclerRoblox.RobloxAdapter.axisMap)
 local RunService = game:GetService("RunService")
 
-local function _(Tbl) --[[ Line: 35 | Named "disconnectAll" ]]
+local function _(Tbl)
 	for _, Connection in Tbl do
 		Connection:Disconnect()
 	end
@@ -12,7 +12,7 @@ local function _(Tbl) --[[ Line: 35 | Named "disconnectAll" ]]
 end
 
 return {
-	new = function(p1) --[[ Line: 42 ]]
+	new = function(p1)
 		-- upvalues: AxisMapModule (copy), SignalsExperimentalModule (copy), RunService (copy)
 		local Axis = p1.axis
 		local ActivationMargin = p1.activationMargin or 0
@@ -26,7 +26,7 @@ return {
 		local HeartbeatConnection = nil
 		local Flag = false
 		
-		local function updateTargetGeometry(p2) --[[ Line: 56 ]]
+		local function updateTargetGeometry(p2)
 			-- upvalues: v1 (ref), AxisMapModule (upval), Axis (copy)
 			local Frame = v1
 			
@@ -42,10 +42,10 @@ return {
 			end
 		end
 		
-		local function _(p2, p3) --[[ Line: 72 | Named "dispatch" ]]
+		local function _(p2, p3)
 			-- upvalues: SignalsExperimentalModule (upval)
 			if p2 ~= nil or p3 ~= nil then
-				SignalsExperimentalModule.batch(function() --[[ Line: 76 ]]
+				SignalsExperimentalModule.batch(function()
 					-- upvalues: p2 (copy), p3 (copy)
 					if p2 ~= nil then
 						for _, value in p2 do
@@ -63,7 +63,7 @@ return {
 			end
 		end
 		
-		local function deactivateAll() --[[ Line: 90 ]]
+		local function deactivateAll()
 			-- upvalues: t (copy), SignalsExperimentalModule (upval)
 			local List = nil
 			
@@ -78,7 +78,7 @@ return {
 			
 			if List1 ~= nil then
 				local v2 = nil
-				SignalsExperimentalModule.batch(function() --[[ Line: 76 ]]
+				SignalsExperimentalModule.batch(function()
 					-- upvalues: List1 (copy), v2 (copy)
 					if List1 ~= nil then
 						for _, value in List1 do
@@ -96,7 +96,7 @@ return {
 			end
 		end
 		
-		local function evaluate() --[[ Line: 102 ]]
+		local function evaluate()
 			-- upvalues: Flag (ref), v1 (ref), deactivateAll (copy), AxisMapModule (upval), Axis (copy), t (copy), RetentionMargin (copy), ActivationMargin (copy), SignalsExperimentalModule (upval)
 			if Flag then return end
 			local ScrollFrame = v1
@@ -136,7 +136,7 @@ return {
 			local List3 = List
 			
 			if List2 ~= nil or List3 ~= nil then
-				SignalsExperimentalModule.batch(function() --[[ Line: 76 ]]
+				SignalsExperimentalModule.batch(function()
 					-- upvalues: List2 (copy), List3 (copy)
 					if List2 ~= nil then
 						for _, value in List2 do
@@ -154,14 +154,14 @@ return {
 			end
 		end
 		
-		local function scheduleSettledEvaluation(Key) --[[ Line: 142 ]]
+		local function scheduleSettledEvaluation(Key)
 			-- upvalues: Flag (ref), Tbl (copy), HeartbeatConnection (ref), RunService (upval), t (copy), updateTargetGeometry (copy), evaluate (copy)
 			if Flag then return end
 			if Key ~= nil then
 				Tbl[Key] = true
 			end
 			if HeartbeatConnection == nil then
-				HeartbeatConnection = RunService.Heartbeat:Connect(function() --[[ Line: 152 ]]
+				HeartbeatConnection = RunService.Heartbeat:Connect(function()
 					-- upvalues: HeartbeatConnection (upval), Flag (upval), Tbl (upval), t (upval), updateTargetGeometry (upval), evaluate (upval)
 					local Connection = HeartbeatConnection
 					HeartbeatConnection = nil
@@ -186,7 +186,7 @@ return {
 		
 		local _ = nil
 		
-		local function SetViewport(Object) --[[ Line: 172 ]]
+		local function SetViewport(Object)
 			-- upvalues: Flag (ref), v1 (ref), List (copy), deactivateAll (copy), evaluate (copy), scheduleSettledEvaluation (copy), SetViewport (ref), t (copy), updateTargetGeometry (copy)
 			if Flag or Object == v1 then return end
 			for _, Connection in List do
@@ -199,7 +199,7 @@ return {
 			if Object == nil then return end
 			table.insert(List, Object:GetPropertyChangedSignal("CanvasPosition"):Connect(evaluate))
 			table.insert(List, Object:GetPropertyChangedSignal("AbsoluteWindowSize"):Connect(scheduleSettledEvaluation))
-			table.insert(List, Object.Destroying:Connect(function() --[[ Line: 191 ]]
+			table.insert(List, Object.Destroying:Connect(function()
 				-- upvalues: SetViewport (upval)
 				SetViewport(nil)
 			end))
@@ -212,10 +212,10 @@ return {
 		
 		return {
 			setViewport = SetViewport,
-			register = function(Object, SetActive) --[[ Line: 201 ]]
+			register = function(Object, SetActive)
 				-- upvalues: Flag (ref), t (copy), SignalsExperimentalModule (upval), Tbl (copy), HeartbeatConnection (ref), RunService (upval), updateTargetGeometry (copy), evaluate (copy)
 				if Flag then
-					return function() --[[ Line: 203 ]] end
+					return function() end
 				else
 					assert(t[Object] == nil, "target is already registered")
 					local config = {
@@ -229,7 +229,7 @@ return {
 					t[Object] = config
 					local Flag1 = false
 					
-					local function unregister() --[[ Line: 218 ]]
+					local function unregister()
 						-- upvalues: Flag1 (ref), t (upval), Object (copy), config (copy), SignalsExperimentalModule (upval)
 						if Flag1 then return end
 						Flag1 = true
@@ -249,7 +249,7 @@ return {
 							
 							if list == nil then return end
 							local v3 = nil
-							SignalsExperimentalModule.batch(function() --[[ Line: 76 ]]
+							SignalsExperimentalModule.batch(function()
 								-- upvalues: list (copy), v3 (copy)
 								if list ~= nil then
 									for _, value in list do
@@ -265,14 +265,14 @@ return {
 						end
 					end
 					
-					local function updateGeometry() --[[ Line: 234 ]]
+					local function updateGeometry()
 						-- upvalues: config (copy), Flag (upval), Tbl (upval), HeartbeatConnection (upval), RunService (upval), t (upval), updateTargetGeometry (upval), evaluate (upval)
 						if Flag then return end
 						if config ~= nil then
 							Tbl[config] = true
 						end
 						if HeartbeatConnection == nil then
-							HeartbeatConnection = RunService.Heartbeat:Connect(function() --[[ Line: 152 ]]
+							HeartbeatConnection = RunService.Heartbeat:Connect(function()
 								-- upvalues: HeartbeatConnection (upval), Flag (upval), Tbl (upval), t (upval), updateTargetGeometry (upval), evaluate (upval)
 								local Connection = HeartbeatConnection
 								HeartbeatConnection = nil
@@ -304,7 +304,7 @@ return {
 					return unregister
 				end
 			end,
-			destroy = function() --[[ Line: 245 ]]
+			destroy = function()
 				-- upvalues: Flag (ref), HeartbeatConnection (ref), Tbl (copy), List (copy), t (copy), v1 (ref), SignalsExperimentalModule (upval)
 				if Flag then return end
 				Flag = true
@@ -341,7 +341,7 @@ return {
 				
 				if List2 ~= nil then
 					local v4 = nil
-					SignalsExperimentalModule.batch(function() --[[ Line: 76 ]]
+					SignalsExperimentalModule.batch(function()
 						-- upvalues: List2 (copy), v4 (copy)
 						if List2 ~= nil then
 							for _, value in List2 do

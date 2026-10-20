@@ -14,14 +14,14 @@ do
 	local Module = {}
 	Module.__index = Module
 
-	function Module.new(p1) --[[ Line: 13775 ]]
+	function Module.new(p1)
 		-- upvalues: Module (copy)
 		return (setmetatable({
 			kind = if p1 == nil or p1.kind == nil then nil else p1.kind
 		}, Module))
 	end
 
-	function Module:encode() --[[ Line: 13781 ]]
+	function Module:encode()
 		-- upvalues: ProtoModule (copy)
 		local Buf = buffer.create(0)
 		local Count = 0
@@ -50,7 +50,7 @@ do
 		return Buf1
 	end
 
-	function Module.decode(Buf) --[[ Line: 13809 ]]
+	function Module.decode(Buf)
 		-- upvalues: Module (copy), ProtoModule (copy), t (copy), PropTypesModule (copy)
 		local NewModule = Module.new()
 		local v1 = 0
@@ -104,7 +104,7 @@ do
 		return NewModule
 	end
 
-	function Module:jsonEncode() --[[ Line: 13873 ]]
+	function Module:jsonEncode()
 		local t = {}
 		
 		if self.kind ~= nil then
@@ -130,7 +130,7 @@ do
 		return t
 	end
 
-	function Module:jsonDecode() --[[ Line: 13891 ]]
+	function Module:jsonDecode()
 		-- upvalues: Module (copy), t (copy), PropTypesModule (copy)
 		local NewModule = Module.new()
 		
@@ -170,14 +170,14 @@ do
 	local Module1 = {}
 	Module1.__index = Module1
 
-	function Module1.new(p1) --[[ Line: 13937 ]]
+	function Module1.new(p1)
 		-- upvalues: Module1 (copy)
 		return (setmetatable({
 			kind = if p1 == nil or p1.kind == nil then nil else p1.kind
 		}, Module1))
 	end
 
-	function Module1:encode() --[[ Line: 13943 ]]
+	function Module1:encode()
 		-- upvalues: ProtoModule (copy)
 		local Buf = buffer.create(0)
 		local Count = 0
@@ -209,7 +209,7 @@ do
 		return Buf1
 	end
 
-	function Module1.decode(Buf) --[[ Line: 13974 ]]
+	function Module1.decode(Buf)
 		-- upvalues: Module1 (copy), ProtoModule (copy)
 		local NewModule = Module1.new()
 		local v2 = 0
@@ -268,7 +268,7 @@ do
 		return NewModule
 	end
 
-	function Module1:jsonEncode() --[[ Line: 14042 ]]
+	function Module1:jsonEncode()
 		-- upvalues: ProtoModule (copy)
 		local t = {}
 		
@@ -305,7 +305,7 @@ do
 		return t
 	end
 
-	function Module1:jsonDecode() --[[ Line: 14064 ]]
+	function Module1:jsonDecode()
 		-- upvalues: Module1 (copy), ProtoModule (copy)
 		local NewModule = Module1.new()
 		
@@ -369,14 +369,14 @@ do
 	local Module2 = {}
 	Module2.__index = Module2
 
-	function Module2.new(p1) --[[ Line: 14132 ]]
+	function Module2.new(p1)
 		-- upvalues: Module2 (copy)
 		return (setmetatable({
 			kind = if p1 == nil or p1.kind == nil then nil else p1.kind
 		}, Module2))
 	end
 
-	function Module2:encode() --[[ Line: 14138 ]]
+	function Module2:encode()
 		-- upvalues: ProtoModule (copy)
 		local Buf = buffer.create(0)
 		local Count = 0
@@ -398,7 +398,7 @@ do
 		return Buf1
 	end
 
-	function Module2.decode(Buf) --[[ Line: 14159 ]]
+	function Module2.decode(Buf)
 		-- upvalues: Module2 (copy), ProtoModule (copy), t (copy)
 		local NewModule = Module2.new()
 		local v3 = 0
@@ -441,7 +441,7 @@ do
 		return NewModule
 	end
 
-	function Module2:jsonEncode() --[[ Line: 14208 ]]
+	function Module2:jsonEncode()
 		local t = {}
 		
 		if self.kind ~= nil then
@@ -457,7 +457,7 @@ do
 		return t
 	end
 
-	function Module2:jsonDecode() --[[ Line: 14222 ]]
+	function Module2:jsonDecode()
 		-- upvalues: Module2 (copy), t (copy)
 		local NewModule = Module2.new()
 		
@@ -487,7 +487,7 @@ do
 	local Module3 = {}
 	Module3.__index = Module3
 
-	function Module3.new(p1) --[[ Line: 14254 ]]
+	function Module3.new(p1)
 		-- upvalues: Module3 (copy)
 		return (setmetatable({
 			condition = if p1 == nil or p1.condition == nil then nil else p1.condition,
@@ -495,7 +495,7 @@ do
 		}, Module3))
 	end
 
-	function Module3:encode() --[[ Line: 14263 ]]
+	function Module3:encode()
 		-- upvalues: ProtoModule (copy)
 		local Buf = buffer.create(0)
 		local Count = 0
@@ -516,7 +516,7 @@ do
 		return Buf1
 	end
 
-	function Module3.decode(Buf) --[[ Line: 14286 ]]
+	function Module3.decode(Buf)
 		-- upvalues: Module3 (copy), ProtoModule (copy), PropConditionModule (copy), t (copy)
 		local NewModule = Module3.new()
 		local v3 = 0
@@ -556,7 +556,7 @@ do
 		return NewModule
 	end
 
-	function Module3:jsonEncode() --[[ Line: 14334 ]]
+	function Module3:jsonEncode()
 		local t = {}
 		
 		if self.condition ~= nil then
@@ -568,7 +568,7 @@ do
 		return t
 	end
 
-	function Module3:jsonDecode() --[[ Line: 14350 ]]
+	function Module3:jsonDecode()
 		-- upvalues: Module3 (copy), PropConditionModule (copy), t (copy)
 		local NewModule = Module3.new()
 		
@@ -593,14 +593,14 @@ do
 	local Module4 = {}
 	Module4.__index = Module4
 
-	function Module4.new(p1) --[[ Line: 14382 ]]
+	function Module4.new(p1)
 		-- upvalues: Module4 (copy)
 		return (setmetatable({
 			options = if p1 == nil or p1.options == nil then {} else p1.options
 		}, Module4))
 	end
 
-	function Module4:encode() --[[ Line: 14390 ]]
+	function Module4:encode()
 		-- upvalues: ProtoModule (copy)
 		local Buf = buffer.create(0)
 		local Count = 0
@@ -618,7 +618,7 @@ do
 		return Buf1
 	end
 
-	function Module4.decode(Buf) --[[ Line: 14407 ]]
+	function Module4.decode(Buf)
 		-- upvalues: Module4 (copy), ProtoModule (copy), t (copy)
 		local NewModule = Module4.new()
 		local v4 = 0
@@ -651,7 +651,7 @@ do
 		return NewModule
 	end
 
-	function Module4:jsonEncode() --[[ Line: 14450 ]]
+	function Module4:jsonEncode()
 		local t = {}
 		
 		if self.options ~= nil and #self.options > 0 then
@@ -665,7 +665,7 @@ do
 		return t
 	end
 
-	function Module4:jsonDecode() --[[ Line: 14464 ]]
+	function Module4:jsonDecode()
 		-- upvalues: Module4 (copy), t (copy)
 		local NewModule = Module4.new()
 		
@@ -689,7 +689,7 @@ do
 	local Module5 = {}
 	Module5.__index = Module5
 
-	function Module5.new(p1) --[[ Line: 14495 ]]
+	function Module5.new(p1)
 		-- upvalues: Module5 (copy)
 		return (setmetatable({
 			inputs = if p1 == nil or p1.inputs == nil then {} else p1.inputs,
@@ -698,7 +698,7 @@ do
 		}, Module5))
 	end
 
-	function Module5:encode() --[[ Line: 14505 ]]
+	function Module5:encode()
 		-- upvalues: ProtoModule (copy)
 		local Buf = buffer.create(0)
 		local Count = 0
@@ -729,7 +729,7 @@ do
 		return Buf1
 	end
 
-	function Module5.decode(Buf) --[[ Line: 14539 ]]
+	function Module5.decode(Buf)
 		-- upvalues: Module5 (copy), ProtoModule (copy), t (copy)
 		local NewModule = Module5.new()
 		local v5 = 0
@@ -772,7 +772,7 @@ do
 		return NewModule
 	end
 
-	function Module5:jsonEncode() --[[ Line: 14599 ]]
+	function Module5:jsonEncode()
 		local t = {}
 		
 		if self.inputs ~= nil and next(self.inputs) ~= nil then
@@ -792,7 +792,7 @@ do
 		return t
 	end
 
-	function Module5:jsonDecode() --[[ Line: 14621 ]]
+	function Module5:jsonDecode()
 		-- upvalues: Module5 (copy), t (copy)
 		local NewModule = Module5.new()
 		
@@ -830,7 +830,7 @@ do
 	local Module6 = {}
 	Module6.__index = Module6
 
-	function Module6.new(p1) --[[ Line: 14668 ]]
+	function Module6.new(p1)
 		-- upvalues: Module6 (copy)
 		return (setmetatable({
 			key = if p1 == nil or p1.key == nil then "" else p1.key,
@@ -838,7 +838,7 @@ do
 		}, Module6))
 	end
 
-	function Module6:encode() --[[ Line: 14677 ]]
+	function Module6:encode()
 		-- upvalues: ProtoModule (copy)
 		local Buf = buffer.create(0)
 		local Count = 0
@@ -858,7 +858,7 @@ do
 		return Buf1
 	end
 
-	function Module6.decode(Buf) --[[ Line: 14699 ]]
+	function Module6.decode(Buf)
 		-- upvalues: Module6 (copy), ProtoModule (copy), t (copy)
 		local NewModule = Module6.new()
 		local v6 = 0
@@ -895,7 +895,7 @@ do
 		return NewModule
 	end
 
-	function Module6:jsonEncode() --[[ Line: 14749 ]]
+	function Module6:jsonEncode()
 		local t = {}
 		
 		if self.key ~= nil and self.key ~= "" then
@@ -907,7 +907,7 @@ do
 		return t
 	end
 
-	function Module6:jsonDecode() --[[ Line: 14765 ]]
+	function Module6:jsonDecode()
 		-- upvalues: Module6 (copy), t (copy)
 		local NewModule = Module6.new()
 		
@@ -929,14 +929,14 @@ do
 	local Module7 = {}
 	Module7.__index = Module7
 
-	function Module7.new(p1) --[[ Line: 14795 ]]
+	function Module7.new(p1)
 		-- upvalues: Module7 (copy)
 		return (setmetatable({
 			kind = if p1 == nil or p1.kind == nil then nil else p1.kind
 		}, Module7))
 	end
 
-	function Module7:encode() --[[ Line: 14801 ]]
+	function Module7:encode()
 		-- upvalues: ProtoModule (copy)
 		local Buf = buffer.create(0)
 		local Count = 0
@@ -958,7 +958,7 @@ do
 		return Buf1
 	end
 
-	function Module7.decode(Buf) --[[ Line: 14822 ]]
+	function Module7.decode(Buf)
 		-- upvalues: Module7 (copy), ProtoModule (copy), t (copy)
 		local NewModule = Module7.new()
 		local v7 = 0
@@ -1001,7 +1001,7 @@ do
 		return NewModule
 	end
 
-	function Module7:jsonEncode() --[[ Line: 14874 ]]
+	function Module7:jsonEncode()
 		local t = {}
 		
 		if self.kind ~= nil then
@@ -1017,7 +1017,7 @@ do
 		return t
 	end
 
-	function Module7:jsonDecode() --[[ Line: 14888 ]]
+	function Module7:jsonDecode()
 		-- upvalues: Module7 (copy), t (copy)
 		local NewModule = Module7.new()
 		
@@ -1045,7 +1045,7 @@ do
 	local Module8 = {}
 	Module8.__index = Module8
 
-	function Module8.new(p1) --[[ Line: 14920 ]]
+	function Module8.new(p1)
 		-- upvalues: Module8 (copy)
 		return (setmetatable({
 			condition = if p1 == nil or p1.condition == nil then nil else p1.condition,
@@ -1053,7 +1053,7 @@ do
 		}, Module8))
 	end
 
-	function Module8:encode() --[[ Line: 14929 ]]
+	function Module8:encode()
 		-- upvalues: ProtoModule (copy)
 		local Buf = buffer.create(0)
 		local Count = 0
@@ -1074,7 +1074,7 @@ do
 		return Buf1
 	end
 
-	function Module8.decode(Buf) --[[ Line: 14954 ]]
+	function Module8.decode(Buf)
 		-- upvalues: Module8 (copy), ProtoModule (copy), PropConditionModule (copy), t (copy)
 		local NewModule = Module8.new()
 		local v8 = 0
@@ -1114,7 +1114,7 @@ do
 		return NewModule
 	end
 
-	function Module8:jsonEncode() --[[ Line: 15005 ]]
+	function Module8:jsonEncode()
 		local t = {}
 		
 		if self.condition ~= nil then
@@ -1126,7 +1126,7 @@ do
 		return t
 	end
 
-	function Module8:jsonDecode() --[[ Line: 15023 ]]
+	function Module8:jsonDecode()
 		-- upvalues: Module8 (copy), PropConditionModule (copy), t (copy)
 		local NewModule = Module8.new()
 		
@@ -1153,14 +1153,14 @@ do
 	local Module9 = {}
 	Module9.__index = Module9
 
-	function Module9.new(p1) --[[ Line: 15055 ]]
+	function Module9.new(p1)
 		-- upvalues: Module9 (copy)
 		return (setmetatable({
 			options = if p1 == nil or p1.options == nil then {} else p1.options
 		}, Module9))
 	end
 
-	function Module9:encode() --[[ Line: 15063 ]]
+	function Module9:encode()
 		-- upvalues: ProtoModule (copy)
 		local Buf = buffer.create(0)
 		local Count = 0
@@ -1178,7 +1178,7 @@ do
 		return Buf1
 	end
 
-	function Module9.decode(Buf) --[[ Line: 15082 ]]
+	function Module9.decode(Buf)
 		-- upvalues: Module9 (copy), ProtoModule (copy), t (copy)
 		local NewModule = Module9.new()
 		local v8 = 0
@@ -1211,7 +1211,7 @@ do
 		return NewModule
 	end
 
-	function Module9:jsonEncode() --[[ Line: 15127 ]]
+	function Module9:jsonEncode()
 		local t = {}
 		
 		if self.options ~= nil and #self.options > 0 then
@@ -1225,7 +1225,7 @@ do
 		return t
 	end
 
-	function Module9:jsonDecode() --[[ Line: 15143 ]]
+	function Module9:jsonDecode()
 		-- upvalues: Module9 (copy), t (copy)
 		local NewModule = Module9.new()
 		
@@ -1249,7 +1249,7 @@ do
 	local Module10 = {}
 	Module10.__index = Module10
 
-	function Module10.new(p1) --[[ Line: 15174 ]]
+	function Module10.new(p1)
 		-- upvalues: Module10 (copy)
 		return (setmetatable({
 			inputs = if p1 == nil or p1.inputs == nil then {} else p1.inputs,
@@ -1258,7 +1258,7 @@ do
 		}, Module10))
 	end
 
-	function Module10:encode() --[[ Line: 15184 ]]
+	function Module10:encode()
 		-- upvalues: ProtoModule (copy)
 		local Buf = buffer.create(0)
 		local Count = 0
@@ -1289,7 +1289,7 @@ do
 		return Buf1
 	end
 
-	function Module10.decode(Buf) --[[ Line: 15218 ]]
+	function Module10.decode(Buf)
 		-- upvalues: Module10 (copy), ProtoModule (copy), t (copy)
 		local NewModule = Module10.new()
 		local v9 = 0
@@ -1332,7 +1332,7 @@ do
 		return NewModule
 	end
 
-	function Module10:jsonEncode() --[[ Line: 15278 ]]
+	function Module10:jsonEncode()
 		local t = {}
 		
 		if self.inputs ~= nil and next(self.inputs) ~= nil then
@@ -1352,7 +1352,7 @@ do
 		return t
 	end
 
-	function Module10:jsonDecode() --[[ Line: 15300 ]]
+	function Module10:jsonDecode()
 		-- upvalues: Module10 (copy), t (copy)
 		local NewModule = Module10.new()
 		
@@ -1388,7 +1388,7 @@ do
 	local Module11 = {}
 	Module11.__index = Module11
 
-	function Module11.new(p1) --[[ Line: 15348 ]]
+	function Module11.new(p1)
 		-- upvalues: Module11 (copy)
 		return (setmetatable({
 			key = if p1 == nil or p1.key == nil then "" else p1.key,
@@ -1396,7 +1396,7 @@ do
 		}, Module11))
 	end
 
-	function Module11:encode() --[[ Line: 15360 ]]
+	function Module11:encode()
 		-- upvalues: ProtoModule (copy)
 		local Buf = buffer.create(0)
 		local Count = 0
@@ -1416,7 +1416,7 @@ do
 		return Buf1
 	end
 
-	function Module11.decode(Buf) --[[ Line: 15382 ]]
+	function Module11.decode(Buf)
 		-- upvalues: Module11 (copy), ProtoModule (copy), t (copy)
 		local NewModule = Module11.new()
 		local v10 = 0
@@ -1453,7 +1453,7 @@ do
 		return NewModule
 	end
 
-	function Module11:jsonEncode() --[[ Line: 15432 ]]
+	function Module11:jsonEncode()
 		local t = {}
 		
 		if self.key ~= nil and self.key ~= "" then
@@ -1465,7 +1465,7 @@ do
 		return t
 	end
 
-	function Module11:jsonDecode() --[[ Line: 15448 ]]
+	function Module11:jsonDecode()
 		-- upvalues: Module11 (copy), t (copy)
 		local NewModule = Module11.new()
 		
@@ -1489,14 +1489,14 @@ do
 	local Module12 = {}
 	Module12.__index = Module12
 
-	function Module12.new(p1) --[[ Line: 15479 ]]
+	function Module12.new(p1)
 		-- upvalues: Module12 (copy)
 		return (setmetatable({
 			kind = if p1 == nil or p1.kind == nil then nil else p1.kind
 		}, Module12))
 	end
 
-	function Module12:encode() --[[ Line: 15487 ]]
+	function Module12:encode()
 		-- upvalues: ProtoModule (copy)
 		local Buf = buffer.create(0)
 		local Count = 0
@@ -1530,7 +1530,7 @@ do
 		return Buf1
 	end
 
-	function Module12.decode(Buf) --[[ Line: 15520 ]]
+	function Module12.decode(Buf)
 		-- upvalues: Module12 (copy), ProtoModule (copy), t (copy)
 		local NewModule = Module12.new()
 		local v10 = 0
@@ -1594,7 +1594,7 @@ do
 		return NewModule
 	end
 
-	function Module12:jsonEncode() --[[ Line: 15596 ]]
+	function Module12:jsonEncode()
 		local t = {}
 		
 		if self.kind ~= nil then
@@ -1625,7 +1625,7 @@ do
 		return t
 	end
 
-	function Module12:jsonDecode() --[[ Line: 15616 ]]
+	function Module12:jsonDecode()
 		-- upvalues: Module12 (copy), t (copy)
 		local NewModule = Module12.new()
 		
@@ -1695,7 +1695,7 @@ do
 	local Module13 = {}
 	Module13.__index = Module13
 
-	function Module13.new(p1) --[[ Line: 15701 ]]
+	function Module13.new(p1)
 		-- upvalues: Module13 (copy)
 		return (setmetatable({
 			condition = if p1 == nil or p1.condition == nil then nil else p1.condition,
@@ -1703,7 +1703,7 @@ do
 		}, Module13))
 	end
 
-	function Module13:encode() --[[ Line: 15710 ]]
+	function Module13:encode()
 		-- upvalues: ProtoModule (copy)
 		local Buf = buffer.create(0)
 		local Count = 0
@@ -1734,7 +1734,7 @@ do
 		return Buf1
 	end
 
-	function Module13.decode(Buf) --[[ Line: 15743 ]]
+	function Module13.decode(Buf)
 		-- upvalues: Module13 (copy), ProtoModule (copy), PropConditionModule (copy), t (copy)
 		local NewModule = Module13.new()
 		local v11 = 0
@@ -1788,7 +1788,7 @@ do
 		return NewModule
 	end
 
-	function Module13:jsonEncode() --[[ Line: 15810 ]]
+	function Module13:jsonEncode()
 		local t = {}
 		
 		if self.condition ~= nil then
@@ -1812,7 +1812,7 @@ do
 		return t
 	end
 
-	function Module13:jsonDecode() --[[ Line: 15832 ]]
+	function Module13:jsonDecode()
 		-- upvalues: Module13 (copy), PropConditionModule (copy), t (copy)
 		local NewModule = Module13.new()
 		
@@ -1861,14 +1861,14 @@ do
 	local Module14 = {}
 	Module14.__index = Module14
 
-	function Module14.new(p1) --[[ Line: 15894 ]]
+	function Module14.new(p1)
 		-- upvalues: Module14 (copy)
 		return (setmetatable({
 			options = if p1 == nil or p1.options == nil then {} else p1.options
 		}, Module14))
 	end
 
-	function Module14:encode() --[[ Line: 15902 ]]
+	function Module14:encode()
 		-- upvalues: ProtoModule (copy)
 		local Buf = buffer.create(0)
 		local Count = 0
@@ -1886,7 +1886,7 @@ do
 		return Buf1
 	end
 
-	function Module14.decode(Buf) --[[ Line: 15921 ]]
+	function Module14.decode(Buf)
 		-- upvalues: Module14 (copy), ProtoModule (copy), t (copy)
 		local NewModule = Module14.new()
 		local v12 = 0
@@ -1919,7 +1919,7 @@ do
 		return NewModule
 	end
 
-	function Module14:jsonEncode() --[[ Line: 15966 ]]
+	function Module14:jsonEncode()
 		local t = {}
 		
 		if self.options ~= nil and #self.options > 0 then
@@ -1933,7 +1933,7 @@ do
 		return t
 	end
 
-	function Module14:jsonDecode() --[[ Line: 15982 ]]
+	function Module14:jsonDecode()
 		-- upvalues: Module14 (copy), t (copy)
 		local NewModule = Module14.new()
 		
@@ -1959,7 +1959,7 @@ do
 	local Module15 = {}
 	Module15.__index = Module15
 
-	function Module15.new(p1) --[[ Line: 16013 ]]
+	function Module15.new(p1)
 		-- upvalues: Module15 (copy)
 		return (setmetatable({
 			binding_path = if p1 == nil or p1.binding_path == nil then "" else p1.binding_path,
@@ -1969,7 +1969,7 @@ do
 		}, Module15))
 	end
 
-	function Module15:encode() --[[ Line: 16024 ]]
+	function Module15:encode()
 		-- upvalues: ProtoModule (copy)
 		local Buf = buffer.create(0)
 		local Count = 0
@@ -2004,7 +2004,7 @@ do
 		return Buf1
 	end
 
-	function Module15.decode(Buf) --[[ Line: 16065 ]]
+	function Module15.decode(Buf)
 		-- upvalues: Module15 (copy), ProtoModule (copy), t (copy)
 		local NewModule = Module15.new()
 		local v13 = 0
@@ -2051,7 +2051,7 @@ do
 		return NewModule
 	end
 
-	function Module15:jsonEncode() --[[ Line: 16132 ]]
+	function Module15:jsonEncode()
 		local t = {}
 		
 		if self.binding_path ~= nil and self.binding_path ~= "" then
@@ -2074,7 +2074,7 @@ do
 		return t
 	end
 
-	function Module15:jsonDecode() --[[ Line: 16160 ]]
+	function Module15:jsonDecode()
 		-- upvalues: Module15 (copy), t (copy)
 		local NewModule = Module15.new()
 		
@@ -2116,7 +2116,7 @@ do
 	local Module16 = {}
 	Module16.__index = Module16
 
-	function Module16.new(p1) --[[ Line: 16216 ]]
+	function Module16.new(p1)
 		-- upvalues: Module16 (copy)
 		return (setmetatable({
 			key = if p1 == nil or p1.key == nil then "" else p1.key,
@@ -2124,7 +2124,7 @@ do
 		}, Module16))
 	end
 
-	function Module16:encode() --[[ Line: 16228 ]]
+	function Module16:encode()
 		-- upvalues: ProtoModule (copy)
 		local Buf = buffer.create(0)
 		local Count = 0
@@ -2144,7 +2144,7 @@ do
 		return Buf1
 	end
 
-	function Module16.decode(Buf) --[[ Line: 16250 ]]
+	function Module16.decode(Buf)
 		-- upvalues: Module16 (copy), ProtoModule (copy), t (copy)
 		local NewModule = Module16.new()
 		local v14 = 0
@@ -2181,7 +2181,7 @@ do
 		return NewModule
 	end
 
-	function Module16:jsonEncode() --[[ Line: 16300 ]]
+	function Module16:jsonEncode()
 		local t = {}
 		
 		if self.key ~= nil and self.key ~= "" then
@@ -2193,7 +2193,7 @@ do
 		return t
 	end
 
-	function Module16:jsonDecode() --[[ Line: 16316 ]]
+	function Module16:jsonDecode()
 		-- upvalues: Module16 (copy), t (copy)
 		local NewModule = Module16.new()
 		
@@ -2215,14 +2215,14 @@ do
 	local Module17 = {}
 	Module17.__index = Module17
 
-	function Module17.new(p1) --[[ Line: 16347 ]]
+	function Module17.new(p1)
 		-- upvalues: Module17 (copy)
 		return (setmetatable({
 			items = if p1 == nil or p1.items == nil then {} else p1.items
 		}, Module17))
 	end
 
-	function Module17:encode() --[[ Line: 16355 ]]
+	function Module17:encode()
 		-- upvalues: ProtoModule (copy)
 		local Buf = buffer.create(0)
 		local Count = 0
@@ -2240,7 +2240,7 @@ do
 		return Buf1
 	end
 
-	function Module17.decode(Buf) --[[ Line: 16374 ]]
+	function Module17.decode(Buf)
 		-- upvalues: Module17 (copy), ProtoModule (copy), t (copy)
 		local NewModule = Module17.new()
 		local v15 = 0
@@ -2273,7 +2273,7 @@ do
 		return NewModule
 	end
 
-	function Module17:jsonEncode() --[[ Line: 16419 ]]
+	function Module17:jsonEncode()
 		local t = {}
 		
 		if self.items ~= nil and #self.items > 0 then
@@ -2287,7 +2287,7 @@ do
 		return t
 	end
 
-	function Module17:jsonDecode() --[[ Line: 16435 ]]
+	function Module17:jsonDecode()
 		-- upvalues: Module17 (copy), t (copy)
 		local NewModule = Module17.new()
 		
@@ -2313,7 +2313,7 @@ do
 	local Module18 = {}
 	Module18.__index = Module18
 
-	function Module18.new(p1) --[[ Line: 16466 ]]
+	function Module18.new(p1)
 		-- upvalues: Module18 (copy)
 		return (setmetatable({
 			entry_map_path = if p1 == nil or p1.entry_map_path == nil then "" else p1.entry_map_path,
@@ -2322,7 +2322,7 @@ do
 		}, Module18))
 	end
 
-	function Module18:encode() --[[ Line: 16476 ]]
+	function Module18:encode()
 		-- upvalues: ProtoModule (copy)
 		local Buf = buffer.create(0)
 		local Count = 0
@@ -2353,7 +2353,7 @@ do
 		return Buf1
 	end
 
-	function Module18.decode(Buf) --[[ Line: 16512 ]]
+	function Module18.decode(Buf)
 		-- upvalues: Module18 (copy), ProtoModule (copy), t (copy)
 		local NewModule = Module18.new()
 		local v16 = 0
@@ -2396,7 +2396,7 @@ do
 		return NewModule
 	end
 
-	function Module18:jsonEncode() --[[ Line: 16576 ]]
+	function Module18:jsonEncode()
 		local t = {}
 		
 		if self.entry_map_path ~= nil and self.entry_map_path ~= "" then
@@ -2416,7 +2416,7 @@ do
 		return t
 	end
 
-	function Module18:jsonDecode() --[[ Line: 16600 ]]
+	function Module18:jsonDecode()
 		-- upvalues: Module18 (copy), t (copy)
 		local NewModule = Module18.new()
 		
@@ -2460,14 +2460,14 @@ do
 	local Module19 = {}
 	Module19.__index = Module19
 
-	function Module19.new(p1) --[[ Line: 16660 ]]
+	function Module19.new(p1)
 		-- upvalues: Module19 (copy)
 		return (setmetatable({
 			kind = if p1 == nil or p1.kind == nil then nil else p1.kind
 		}, Module19))
 	end
 
-	function Module19:encode() --[[ Line: 16671 ]]
+	function Module19:encode()
 		-- upvalues: ProtoModule (copy)
 		local Buf = buffer.create(0)
 		local Count = 0
@@ -2488,7 +2488,7 @@ do
 		return Buf1
 	end
 
-	function Module19.decode(Buf) --[[ Line: 16693 ]]
+	function Module19.decode(Buf)
 		-- upvalues: Module19 (copy), ProtoModule (copy), t (copy)
 		local NewModule = Module19.new()
 		local v17 = 0
@@ -2528,7 +2528,7 @@ do
 		return NewModule
 	end
 
-	function Module19:jsonEncode() --[[ Line: 16748 ]]
+	function Module19:jsonEncode()
 		local t = {}
 		
 		if self.kind ~= nil then
@@ -2544,7 +2544,7 @@ do
 		return t
 	end
 
-	function Module19:jsonDecode() --[[ Line: 16764 ]]
+	function Module19:jsonDecode()
 		-- upvalues: Module19 (copy), t (copy)
 		local NewModule = Module19.new()
 		
@@ -2572,14 +2572,14 @@ do
 	local Module20 = {}
 	Module20.__index = Module20
 
-	function Module20.new(p1) --[[ Line: 16805 ]]
+	function Module20.new(p1)
 		-- upvalues: Module20 (copy)
 		return (setmetatable({
 			items = if p1 == nil or p1.items == nil then {} else p1.items
 		}, Module20))
 	end
 
-	function Module20:encode() --[[ Line: 16816 ]]
+	function Module20:encode()
 		-- upvalues: ProtoModule (copy)
 		local Buf = buffer.create(0)
 		local Count = 0
@@ -2596,7 +2596,7 @@ do
 		return Buf1
 	end
 
-	function Module20.decode(Buf) --[[ Line: 16834 ]]
+	function Module20.decode(Buf)
 		-- upvalues: Module20 (copy), ProtoModule (copy)
 		local NewModule = Module20.new()
 		local v18 = 0
@@ -2629,7 +2629,7 @@ do
 		return NewModule
 	end
 
-	function Module20:jsonEncode() --[[ Line: 16879 ]]
+	function Module20:jsonEncode()
 		local t = {}
 		
 		if self.items ~= nil and #self.items > 0 then
@@ -2643,7 +2643,7 @@ do
 		return t
 	end
 
-	function Module20:jsonDecode() --[[ Line: 16895 ]]
+	function Module20:jsonDecode()
 		-- upvalues: Module20 (copy)
 		local NewModule = Module20.new()
 		
@@ -2669,7 +2669,7 @@ do
 	local Module21 = {}
 	Module21.__index = Module21
 
-	function Module21.new(p1) --[[ Line: 16930 ]]
+	function Module21.new(p1)
 		-- upvalues: Module21 (copy)
 		return (setmetatable({
 			key = if p1 == nil or p1.key == nil then "" else p1.key,
@@ -2677,7 +2677,7 @@ do
 		}, Module21))
 	end
 
-	function Module21:encode() --[[ Line: 16942 ]]
+	function Module21:encode()
 		-- upvalues: ProtoModule (copy)
 		local Buf = buffer.create(0)
 		local Count = 0
@@ -2697,7 +2697,7 @@ do
 		return Buf1
 	end
 
-	function Module21.decode(Buf) --[[ Line: 16964 ]]
+	function Module21.decode(Buf)
 		-- upvalues: Module21 (copy), ProtoModule (copy), t (copy)
 		local NewModule = Module21.new()
 		local v19 = 0
@@ -2734,7 +2734,7 @@ do
 		return NewModule
 	end
 
-	function Module21:jsonEncode() --[[ Line: 17014 ]]
+	function Module21:jsonEncode()
 		local t = {}
 		
 		if self.key ~= nil and self.key ~= "" then
@@ -2746,7 +2746,7 @@ do
 		return t
 	end
 
-	function Module21:jsonDecode() --[[ Line: 17030 ]]
+	function Module21:jsonDecode()
 		-- upvalues: Module21 (copy), t (copy)
 		local NewModule = Module21.new()
 		
@@ -2768,7 +2768,7 @@ do
 	local Module22 = {}
 	Module22.__index = Module22
 
-	function Module22.new(p1) --[[ Line: 17061 ]]
+	function Module22.new(p1)
 		-- upvalues: Module22 (copy)
 		return (setmetatable({
 			identifier = if p1 == nil or p1.identifier == nil then nil else p1.identifier,
@@ -2779,7 +2779,7 @@ do
 		}, Module22))
 	end
 
-	function Module22:encode() --[[ Line: 17073 ]]
+	function Module22:encode()
 		-- upvalues: ProtoModule (copy)
 		local Buf = buffer.create(0)
 		local Count = 0
@@ -2819,7 +2819,7 @@ do
 		return Buf1
 	end
 
-	function Module22.decode(Buf) --[[ Line: 17118 ]]
+	function Module22.decode(Buf)
 		-- upvalues: Module22 (copy), ProtoModule (copy), t (copy), PropTypesModule (copy)
 		local NewModule = Module22.new()
 		local v20 = 0
@@ -2870,7 +2870,7 @@ do
 		return NewModule
 	end
 
-	function Module22:jsonEncode() --[[ Line: 17188 ]]
+	function Module22:jsonEncode()
 		local t = {}
 		
 		if self.identifier ~= nil then
@@ -2896,7 +2896,7 @@ do
 		return t
 	end
 
-	function Module22:jsonDecode() --[[ Line: 17218 ]]
+	function Module22:jsonDecode()
 		-- upvalues: Module22 (copy), t (copy), PropTypesModule (copy)
 		local NewModule = Module22.new()
 		
@@ -2941,7 +2941,7 @@ do
 	local Module23 = {}
 	Module23.__index = Module23
 
-	function Module23.new(p1) --[[ Line: 17277 ]]
+	function Module23.new(p1)
 		-- upvalues: Module23 (copy)
 		return (setmetatable({
 			key = if p1 == nil or p1.key == nil then "" else p1.key,
@@ -2949,7 +2949,7 @@ do
 		}, Module23))
 	end
 
-	function Module23:encode() --[[ Line: 17286 ]]
+	function Module23:encode()
 		-- upvalues: ProtoModule (copy)
 		local Buf = buffer.create(0)
 		local Count = 0
@@ -2969,7 +2969,7 @@ do
 		return Buf1
 	end
 
-	function Module23.decode(Buf) --[[ Line: 17308 ]]
+	function Module23.decode(Buf)
 		-- upvalues: Module23 (copy), ProtoModule (copy), t (copy)
 		local NewModule = Module23.new()
 		local v21 = 0
@@ -3006,7 +3006,7 @@ do
 		return NewModule
 	end
 
-	function Module23:jsonEncode() --[[ Line: 17358 ]]
+	function Module23:jsonEncode()
 		local t = {}
 		
 		if self.key ~= nil and self.key ~= "" then
@@ -3018,7 +3018,7 @@ do
 		return t
 	end
 
-	function Module23:jsonDecode() --[[ Line: 17374 ]]
+	function Module23:jsonDecode()
 		-- upvalues: Module23 (copy), t (copy)
 		local NewModule = Module23.new()
 		
@@ -3042,14 +3042,14 @@ do
 	local Module24 = {}
 	Module24.__index = Module24
 
-	function Module24.new(p1) --[[ Line: 17404 ]]
+	function Module24.new(p1)
 		-- upvalues: Module24 (copy)
 		return (setmetatable({
 			items = if p1 == nil or p1.items == nil then {} else p1.items
 		}, Module24))
 	end
 
-	function Module24:encode() --[[ Line: 17412 ]]
+	function Module24:encode()
 		-- upvalues: ProtoModule (copy)
 		local Buf = buffer.create(0)
 		local Count = 0
@@ -3067,7 +3067,7 @@ do
 		return Buf1
 	end
 
-	function Module24.decode(Buf) --[[ Line: 17429 ]]
+	function Module24.decode(Buf)
 		-- upvalues: Module24 (copy), ProtoModule (copy), t (copy)
 		local NewModule = Module24.new()
 		local v21 = 0
@@ -3100,7 +3100,7 @@ do
 		return NewModule
 	end
 
-	function Module24:jsonEncode() --[[ Line: 17472 ]]
+	function Module24:jsonEncode()
 		local t = {}
 		
 		if self.items ~= nil and #self.items > 0 then
@@ -3114,7 +3114,7 @@ do
 		return t
 	end
 
-	function Module24:jsonDecode() --[[ Line: 17486 ]]
+	function Module24:jsonDecode()
 		-- upvalues: Module24 (copy), t (copy)
 		local NewModule = Module24.new()
 		
@@ -3138,7 +3138,7 @@ do
 	local Module25 = {}
 	Module25.__index = Module25
 
-	function Module25.new(p1) --[[ Line: 17517 ]]
+	function Module25.new(p1)
 		-- upvalues: Module25 (copy)
 		return (setmetatable({
 			pool_path = if p1 == nil or p1.pool_path == nil then "" else p1.pool_path,
@@ -3146,7 +3146,7 @@ do
 		}, Module25))
 	end
 
-	function Module25:encode() --[[ Line: 17526 ]]
+	function Module25:encode()
 		-- upvalues: ProtoModule (copy)
 		local Buf = buffer.create(0)
 		local Count = 0
@@ -3172,7 +3172,7 @@ do
 		return Buf1
 	end
 
-	function Module25.decode(Buf) --[[ Line: 17554 ]]
+	function Module25.decode(Buf)
 		-- upvalues: Module25 (copy), ProtoModule (copy), t (copy)
 		local NewModule = Module25.new()
 		local v22 = 0
@@ -3211,7 +3211,7 @@ do
 		return NewModule
 	end
 
-	function Module25:jsonEncode() --[[ Line: 17609 ]]
+	function Module25:jsonEncode()
 		local t = {}
 		
 		if self.pool_path ~= nil and self.pool_path ~= "" then
@@ -3228,7 +3228,7 @@ do
 		return t
 	end
 
-	function Module25:jsonDecode() --[[ Line: 17627 ]]
+	function Module25:jsonDecode()
 		-- upvalues: Module25 (copy), t (copy)
 		local NewModule = Module25.new()
 		
@@ -3258,7 +3258,7 @@ do
 	local Module26 = {}
 	Module26.__index = Module26
 
-	function Module26.new(p1) --[[ Line: 17667 ]]
+	function Module26.new(p1)
 		-- upvalues: Module26 (copy)
 		return (setmetatable({
 			key = if p1 == nil or p1.key == nil then "" else p1.key,
@@ -3266,7 +3266,7 @@ do
 		}, Module26))
 	end
 
-	function Module26:encode() --[[ Line: 17679 ]]
+	function Module26:encode()
 		-- upvalues: ProtoModule (copy)
 		local Buf = buffer.create(0)
 		local Count = 0
@@ -3286,7 +3286,7 @@ do
 		return Buf1
 	end
 
-	function Module26.decode(Buf) --[[ Line: 17701 ]]
+	function Module26.decode(Buf)
 		-- upvalues: Module26 (copy), ProtoModule (copy), t (copy)
 		local NewModule = Module26.new()
 		local v23 = 0
@@ -3323,7 +3323,7 @@ do
 		return NewModule
 	end
 
-	function Module26:jsonEncode() --[[ Line: 17751 ]]
+	function Module26:jsonEncode()
 		local t = {}
 		
 		if self.key ~= nil and self.key ~= "" then
@@ -3335,7 +3335,7 @@ do
 		return t
 	end
 
-	function Module26:jsonDecode() --[[ Line: 17767 ]]
+	function Module26:jsonDecode()
 		-- upvalues: Module26 (copy), t (copy)
 		local NewModule = Module26.new()
 		
@@ -3359,14 +3359,14 @@ do
 	local Module27 = {}
 	Module27.__index = Module27
 
-	function Module27.new(p1) --[[ Line: 17798 ]]
+	function Module27.new(p1)
 		-- upvalues: Module27 (copy)
 		return (setmetatable({
 			collection_item_size = if p1 == nil or p1.collection_item_size == nil then "" else p1.collection_item_size
 		}, Module27))
 	end
 
-	function Module27:encode() --[[ Line: 17808 ]]
+	function Module27:encode()
 		-- upvalues: ProtoModule (copy)
 		local Buf = buffer.create(0)
 		local Count = 0
@@ -3381,7 +3381,7 @@ do
 		return Buf1
 	end
 
-	function Module27.decode(Buf) --[[ Line: 17824 ]]
+	function Module27.decode(Buf)
 		-- upvalues: Module27 (copy), ProtoModule (copy)
 		local NewModule = Module27.new()
 		local v23 = 0
@@ -3414,7 +3414,7 @@ do
 		return NewModule
 	end
 
-	function Module27:jsonEncode() --[[ Line: 17869 ]]
+	function Module27:jsonEncode()
 		local t = {}
 		
 		if self.collection_item_size ~= nil and self.collection_item_size ~= "" then
@@ -3423,7 +3423,7 @@ do
 		return t
 	end
 
-	function Module27:jsonDecode() --[[ Line: 17881 ]]
+	function Module27:jsonDecode()
 		-- upvalues: Module27 (copy)
 		local NewModule = Module27.new()
 		
@@ -3445,7 +3445,7 @@ do
 	local Module28 = {}
 	Module28.__index = Module28
 
-	function Module28.new(p1) --[[ Line: 17911 ]]
+	function Module28.new(p1)
 		-- upvalues: Module28 (copy)
 		return (setmetatable({
 			source = if p1 == nil or p1.source == nil then nil else p1.source,
@@ -3457,7 +3457,7 @@ do
 		}, Module28))
 	end
 
-	function Module28:encode() --[[ Line: 17926 ]]
+	function Module28:encode()
 		-- upvalues: ProtoModule (copy)
 		local Buf = buffer.create(0)
 		local Count = 0
@@ -3511,7 +3511,7 @@ do
 		return Buf1
 	end
 
-	function Module28.decode(Buf) --[[ Line: 17988 ]]
+	function Module28.decode(Buf)
 		-- upvalues: Module28 (copy), ProtoModule (copy), t (copy), PropTypesModule (copy)
 		local NewModule = Module28.new()
 		local v24 = 0
@@ -3579,7 +3579,7 @@ do
 		return NewModule
 	end
 
-	function Module28:jsonEncode() --[[ Line: 18077 ]]
+	function Module28:jsonEncode()
 		local t = {}
 		
 		if self.source ~= nil then
@@ -3614,7 +3614,7 @@ do
 		return t
 	end
 
-	function Module28:jsonDecode() --[[ Line: 18119 ]]
+	function Module28:jsonDecode()
 		-- upvalues: Module28 (copy), t (copy), PropTypesModule (copy)
 		local NewModule = Module28.new()
 		
@@ -3685,7 +3685,7 @@ do
 	local Module29 = {}
 	Module29.__index = Module29
 
-	function Module29.new(p1) --[[ Line: 18211 ]]
+	function Module29.new(p1)
 		-- upvalues: Module29 (copy)
 		return (setmetatable({
 			key = if p1 == nil or p1.key == nil then "" else p1.key,
@@ -3693,7 +3693,7 @@ do
 		}, Module29))
 	end
 
-	function Module29:encode() --[[ Line: 18223 ]]
+	function Module29:encode()
 		-- upvalues: ProtoModule (copy)
 		local Buf = buffer.create(0)
 		local Count = 0
@@ -3713,7 +3713,7 @@ do
 		return Buf1
 	end
 
-	function Module29.decode(Buf) --[[ Line: 18245 ]]
+	function Module29.decode(Buf)
 		-- upvalues: Module29 (copy), ProtoModule (copy), t (copy)
 		local NewModule = Module29.new()
 		local v25 = 0
@@ -3750,7 +3750,7 @@ do
 		return NewModule
 	end
 
-	function Module29:jsonEncode() --[[ Line: 18295 ]]
+	function Module29:jsonEncode()
 		local t = {}
 		
 		if self.key ~= nil and self.key ~= "" then
@@ -3762,7 +3762,7 @@ do
 		return t
 	end
 
-	function Module29:jsonDecode() --[[ Line: 18311 ]]
+	function Module29:jsonDecode()
 		-- upvalues: Module29 (copy), t (copy)
 		local NewModule = Module29.new()
 		
@@ -3786,14 +3786,14 @@ do
 	local Module30 = {}
 	Module30.__index = Module30
 
-	function Module30.new(p1) --[[ Line: 18342 ]]
+	function Module30.new(p1)
 		-- upvalues: Module30 (copy)
 		return (setmetatable({
 			kind = if p1 == nil or p1.kind == nil then nil else p1.kind
 		}, Module30))
 	end
 
-	function Module30:encode() --[[ Line: 18348 ]]
+	function Module30:encode()
 		-- upvalues: ProtoModule (copy)
 		local Buf = buffer.create(0)
 		local Count = 0
@@ -3827,7 +3827,7 @@ do
 		return Buf1
 	end
 
-	function Module30.decode(Buf) --[[ Line: 18381 ]]
+	function Module30.decode(Buf)
 		-- upvalues: Module30 (copy), ProtoModule (copy), t (copy)
 		local NewModule = Module30.new()
 		local v25 = 0
@@ -3891,7 +3891,7 @@ do
 		return NewModule
 	end
 
-	function Module30:jsonEncode() --[[ Line: 18457 ]]
+	function Module30:jsonEncode()
 		local t = {}
 		
 		if self.kind ~= nil then
@@ -3922,7 +3922,7 @@ do
 		return t
 	end
 
-	function Module30:jsonDecode() --[[ Line: 18477 ]]
+	function Module30:jsonDecode()
 		-- upvalues: Module30 (copy), t (copy)
 		local NewModule = Module30.new()
 		
@@ -3992,7 +3992,7 @@ do
 	local Module31 = {}
 	Module31.__index = Module31
 
-	function Module31.new(p1) --[[ Line: 18562 ]]
+	function Module31.new(p1)
 		-- upvalues: Module31 (copy)
 		return (setmetatable({
 			props = if p1 == nil or p1.props == nil then nil else p1.props,
@@ -4000,7 +4000,7 @@ do
 		}, Module31))
 	end
 
-	function Module31:encode() --[[ Line: 18569 ]]
+	function Module31:encode()
 		-- upvalues: ProtoModule (copy)
 		local Buf = buffer.create(0)
 		local Count = 0
@@ -4021,7 +4021,7 @@ do
 		return Buf1
 	end
 
-	function Module31.decode(Buf) --[[ Line: 18590 ]]
+	function Module31.decode(Buf)
 		-- upvalues: Module31 (copy), ProtoModule (copy), t (copy), ComponentSharedModule (copy)
 		local NewModule = Module31.new()
 		local v26 = 0
@@ -4058,7 +4058,7 @@ do
 		return NewModule
 	end
 
-	function Module31:jsonEncode() --[[ Line: 18638 ]]
+	function Module31:jsonEncode()
 		local t = {}
 		
 		if self.props ~= nil then
@@ -4070,7 +4070,7 @@ do
 		return t
 	end
 
-	function Module31:jsonDecode() --[[ Line: 18652 ]]
+	function Module31:jsonDecode()
 		-- upvalues: Module31 (copy), t (copy), ComponentSharedModule (copy)
 		local NewModule = Module31.new()
 		
@@ -4092,7 +4092,7 @@ do
 	local Module32 = {}
 	Module32.__index = Module32
 
-	function Module32.new(p1) --[[ Line: 18681 ]]
+	function Module32.new(p1)
 		-- upvalues: Module32 (copy)
 		return (setmetatable({
 			image_aspect_ratio = if p1 == nil or p1.image_aspect_ratio == nil then nil else p1.image_aspect_ratio,
@@ -4126,7 +4126,7 @@ do
 		}, Module32))
 	end
 
-	function Module32:encode() --[[ Line: 18737 ]]
+	function Module32:encode()
 		-- upvalues: ProtoModule (copy)
 		local Buf = buffer.create(0)
 		local Count = 0
@@ -4277,7 +4277,7 @@ do
 		return Buf1
 	end
 
-	function Module32.decode(Buf) --[[ Line: 18914 ]]
+	function Module32.decode(Buf)
 		-- upvalues: Module32 (copy), ProtoModule (copy), PropTypesModule (copy), ActionsModule (copy), t (copy), PropTypesEngineModule (copy)
 		local NewModule = Module32.new()
 		local v27 = 0
@@ -4418,7 +4418,7 @@ do
 		return NewModule
 	end
 
-	function Module32:jsonEncode() --[[ Line: 19096 ]]
+	function Module32:jsonEncode()
 		local t = {}
 		
 		if self.image_aspect_ratio ~= nil then
@@ -4508,7 +4508,7 @@ do
 		return t
 	end
 
-	function Module32:jsonDecode() --[[ Line: 19214 ]]
+	function Module32:jsonDecode()
 		-- upvalues: Module32 (copy), PropTypesModule (copy), ActionsModule (copy), t (copy), PropTypesEngineModule (copy)
 		local NewModule = Module32.new()
 		
@@ -4691,14 +4691,14 @@ do
 	local Module33 = {}
 	Module33.__index = Module33
 
-	function Module33.new(p1) --[[ Line: 19490 ]]
+	function Module33.new(p1)
 		-- upvalues: Module33 (copy)
 		return (setmetatable({
 			kind = if p1 == nil or p1.kind == nil then nil else p1.kind
 		}, Module33))
 	end
 
-	function Module33:encode() --[[ Line: 19496 ]]
+	function Module33:encode()
 		-- upvalues: ProtoModule (copy)
 		local Buf = buffer.create(0)
 		local Count = 0
@@ -4723,7 +4723,7 @@ do
 		return Buf1
 	end
 
-	function Module33.decode(Buf) --[[ Line: 19520 ]]
+	function Module33.decode(Buf)
 		-- upvalues: Module33 (copy), ProtoModule (copy), t (copy)
 		local NewModule = Module33.new()
 		local v27 = 0
@@ -4770,7 +4770,7 @@ do
 		return NewModule
 	end
 
-	function Module33:jsonEncode() --[[ Line: 19575 ]]
+	function Module33:jsonEncode()
 		local t = {}
 		
 		if self.kind ~= nil then
@@ -4791,7 +4791,7 @@ do
 		return t
 	end
 
-	function Module33:jsonDecode() --[[ Line: 19591 ]]
+	function Module33:jsonDecode()
 		-- upvalues: Module33 (copy), t (copy)
 		local NewModule = Module33.new()
 		
@@ -4825,7 +4825,7 @@ do
 	local Module34 = {}
 	Module34.__index = Module34
 
-	function Module34.new(p1) --[[ Line: 19631 ]]
+	function Module34.new(p1)
 		-- upvalues: Module34 (copy)
 		return (setmetatable({
 			condition = if p1 == nil or p1.condition == nil then nil else p1.condition,
@@ -4833,7 +4833,7 @@ do
 		}, Module34))
 	end
 
-	function Module34:encode() --[[ Line: 19640 ]]
+	function Module34:encode()
 		-- upvalues: ProtoModule (copy)
 		local Buf = buffer.create(0)
 		local Count = 0
@@ -4859,7 +4859,7 @@ do
 		return Buf1
 	end
 
-	function Module34.decode(Buf) --[[ Line: 19666 ]]
+	function Module34.decode(Buf)
 		-- upvalues: Module34 (copy), ProtoModule (copy), PropConditionModule (copy), t (copy)
 		local NewModule = Module34.new()
 		local v28 = 0
@@ -4903,7 +4903,7 @@ do
 		return NewModule
 	end
 
-	function Module34:jsonEncode() --[[ Line: 19720 ]]
+	function Module34:jsonEncode()
 		local t = {}
 		
 		if self.condition ~= nil then
@@ -4922,7 +4922,7 @@ do
 		return t
 	end
 
-	function Module34:jsonDecode() --[[ Line: 19738 ]]
+	function Module34:jsonDecode()
 		-- upvalues: Module34 (copy), PropConditionModule (copy), t (copy)
 		local NewModule = Module34.new()
 		
@@ -4953,14 +4953,14 @@ do
 	local Module35 = {}
 	Module35.__index = Module35
 
-	function Module35.new(p1) --[[ Line: 19778 ]]
+	function Module35.new(p1)
 		-- upvalues: Module35 (copy)
 		return (setmetatable({
 			options = if p1 == nil or p1.options == nil then {} else p1.options
 		}, Module35))
 	end
 
-	function Module35:encode() --[[ Line: 19786 ]]
+	function Module35:encode()
 		-- upvalues: ProtoModule (copy)
 		local Buf = buffer.create(0)
 		local Count = 0
@@ -4978,7 +4978,7 @@ do
 		return Buf1
 	end
 
-	function Module35.decode(Buf) --[[ Line: 19803 ]]
+	function Module35.decode(Buf)
 		-- upvalues: Module35 (copy), ProtoModule (copy), t (copy)
 		local NewModule = Module35.new()
 		local v29 = 0
@@ -5011,7 +5011,7 @@ do
 		return NewModule
 	end
 
-	function Module35:jsonEncode() --[[ Line: 19846 ]]
+	function Module35:jsonEncode()
 		local t = {}
 		
 		if self.options ~= nil and #self.options > 0 then
@@ -5025,7 +5025,7 @@ do
 		return t
 	end
 
-	function Module35:jsonDecode() --[[ Line: 19860 ]]
+	function Module35:jsonDecode()
 		-- upvalues: Module35 (copy), t (copy)
 		local NewModule = Module35.new()
 		
@@ -5051,7 +5051,7 @@ do
 	local Module36 = {}
 	Module36.__index = Module36
 
-	function Module36.new(p1) --[[ Line: 19891 ]]
+	function Module36.new(p1)
 		-- upvalues: Module36 (copy)
 		return (setmetatable({
 			on_hold_completed = if p1 == nil or p1.on_hold_completed == nil then nil else p1.on_hold_completed,
@@ -5060,7 +5060,7 @@ do
 		}, Module36))
 	end
 
-	function Module36:encode() --[[ Line: 19903 ]]
+	function Module36:encode()
 		-- upvalues: ProtoModule (copy)
 		local Buf = buffer.create(0)
 		local Count = 0
@@ -5086,7 +5086,7 @@ do
 		return Buf1
 	end
 
-	function Module36.decode(Buf) --[[ Line: 19930 ]]
+	function Module36.decode(Buf)
 		-- upvalues: Module36 (copy), ProtoModule (copy), ActionsModule (copy), PropTypesModule (copy), PropTypesEngineModule (copy)
 		local NewModule = Module36.new()
 		local v30 = 0
@@ -5127,7 +5127,7 @@ do
 		return NewModule
 	end
 
-	function Module36:jsonEncode() --[[ Line: 19984 ]]
+	function Module36:jsonEncode()
 		local t = {}
 		
 		if self.on_hold_completed ~= nil then
@@ -5142,7 +5142,7 @@ do
 		return t
 	end
 
-	function Module36:jsonDecode() --[[ Line: 20002 ]]
+	function Module36:jsonDecode()
 		-- upvalues: Module36 (copy), ActionsModule (copy), PropTypesModule (copy), PropTypesEngineModule (copy)
 		local NewModule = Module36.new()
 		
@@ -5176,7 +5176,7 @@ do
 	local Module37 = {}
 	Module37.__index = Module37
 
-	function Module37.new(p1) --[[ Line: 20055 ]]
+	function Module37.new(p1)
 		-- upvalues: Module37 (copy)
 		return (setmetatable({
 			props = if p1 == nil or p1.props == nil then nil else p1.props,
@@ -5184,7 +5184,7 @@ do
 		}, Module37))
 	end
 
-	function Module37:encode() --[[ Line: 20062 ]]
+	function Module37:encode()
 		-- upvalues: ProtoModule (copy)
 		local Buf = buffer.create(0)
 		local Count = 0
@@ -5205,7 +5205,7 @@ do
 		return Buf1
 	end
 
-	function Module37.decode(Buf) --[[ Line: 20083 ]]
+	function Module37.decode(Buf)
 		-- upvalues: Module37 (copy), ProtoModule (copy), t (copy), ComponentSharedModule (copy)
 		local NewModule = Module37.new()
 		local v31 = 0
@@ -5242,7 +5242,7 @@ do
 		return NewModule
 	end
 
-	function Module37:jsonEncode() --[[ Line: 20131 ]]
+	function Module37:jsonEncode()
 		local t = {}
 		
 		if self.props ~= nil then
@@ -5254,7 +5254,7 @@ do
 		return t
 	end
 
-	function Module37:jsonDecode() --[[ Line: 20145 ]]
+	function Module37:jsonDecode()
 		-- upvalues: Module37 (copy), t (copy), ComponentSharedModule (copy)
 		local NewModule = Module37.new()
 		
@@ -5276,7 +5276,7 @@ do
 	local Module38 = {}
 	Module38.__index = Module38
 
-	function Module38.new(p1) --[[ Line: 20174 ]]
+	function Module38.new(p1)
 		-- upvalues: Module38 (copy)
 		return (setmetatable({
 			image_aspect_ratio = if p1 == nil or p1.image_aspect_ratio == nil then nil else p1.image_aspect_ratio,
@@ -5309,7 +5309,7 @@ do
 		}, Module38))
 	end
 
-	function Module38:encode() --[[ Line: 20227 ]]
+	function Module38:encode()
 		-- upvalues: ProtoModule (copy)
 		local Buf = buffer.create(0)
 		local Count = 0
@@ -5455,7 +5455,7 @@ do
 		return Buf1
 	end
 
-	function Module38.decode(Buf) --[[ Line: 20398 ]]
+	function Module38.decode(Buf)
 		-- upvalues: Module38 (copy), ProtoModule (copy), PropTypesModule (copy), ActionsModule (copy), t (copy), PropTypesEngineModule (copy)
 		local NewModule = Module38.new()
 		local v32 = 0
@@ -5592,7 +5592,7 @@ do
 		return NewModule
 	end
 
-	function Module38:jsonEncode() --[[ Line: 20575 ]]
+	function Module38:jsonEncode()
 		local t = {}
 		
 		if self.image_aspect_ratio ~= nil then
@@ -5679,7 +5679,7 @@ do
 		return t
 	end
 
-	function Module38:jsonDecode() --[[ Line: 20689 ]]
+	function Module38:jsonDecode()
 		-- upvalues: Module38 (copy), PropTypesModule (copy), ActionsModule (copy), t (copy), PropTypesEngineModule (copy)
 		local NewModule = Module38.new()
 		
@@ -5856,7 +5856,7 @@ do
 	local Module39 = {}
 	Module39.__index = Module39
 
-	function Module39.new(p1) --[[ Line: 20955 ]]
+	function Module39.new(p1)
 		-- upvalues: Module39 (copy)
 		return (setmetatable({
 			props = if p1 == nil or p1.props == nil then nil else p1.props,
@@ -5864,7 +5864,7 @@ do
 		}, Module39))
 	end
 
-	function Module39:encode() --[[ Line: 20962 ]]
+	function Module39:encode()
 		-- upvalues: ProtoModule (copy)
 		local Buf = buffer.create(0)
 		local Count = 0
@@ -5885,7 +5885,7 @@ do
 		return Buf1
 	end
 
-	function Module39.decode(Buf) --[[ Line: 20983 ]]
+	function Module39.decode(Buf)
 		-- upvalues: Module39 (copy), ProtoModule (copy), t (copy), ComponentSharedModule (copy)
 		local NewModule = Module39.new()
 		local v32 = 0
@@ -5922,7 +5922,7 @@ do
 		return NewModule
 	end
 
-	function Module39:jsonEncode() --[[ Line: 21031 ]]
+	function Module39:jsonEncode()
 		local t = {}
 		
 		if self.props ~= nil then
@@ -5934,7 +5934,7 @@ do
 		return t
 	end
 
-	function Module39:jsonDecode() --[[ Line: 21045 ]]
+	function Module39:jsonDecode()
 		-- upvalues: Module39 (copy), t (copy), ComponentSharedModule (copy)
 		local NewModule = Module39.new()
 		
@@ -5956,7 +5956,7 @@ do
 	local Module40 = {}
 	Module40.__index = Module40
 
-	function Module40.new(p1) --[[ Line: 21074 ]]
+	function Module40.new(p1)
 		-- upvalues: Module40 (copy)
 		return (setmetatable({
 			user_id = if p1 == nil or p1.user_id == nil then nil else p1.user_id,
@@ -5966,7 +5966,7 @@ do
 		}, Module40))
 	end
 
-	function Module40:encode() --[[ Line: 21085 ]]
+	function Module40:encode()
 		-- upvalues: ProtoModule (copy)
 		local Buf = buffer.create(0)
 		local Count = 0
@@ -5997,7 +5997,7 @@ do
 		return Buf1
 	end
 
-	function Module40.decode(Buf) --[[ Line: 21118 ]]
+	function Module40.decode(Buf)
 		-- upvalues: Module40 (copy), ProtoModule (copy), PropTypesModule (copy)
 		local NewModule = Module40.new()
 		local v33 = 0
@@ -6042,7 +6042,7 @@ do
 		return NewModule
 	end
 
-	function Module40:jsonEncode() --[[ Line: 21177 ]]
+	function Module40:jsonEncode()
 		local t = {}
 		
 		if self.user_id ~= nil then
@@ -6060,7 +6060,7 @@ do
 		return t
 	end
 
-	function Module40:jsonDecode() --[[ Line: 21199 ]]
+	function Module40:jsonDecode()
 		-- upvalues: Module40 (copy), PropTypesModule (copy)
 		local NewModule = Module40.new()
 		
@@ -6097,7 +6097,7 @@ do
 	local Module41 = {}
 	Module41.__index = Module41
 
-	function Module41.new(p1) --[[ Line: 21251 ]]
+	function Module41.new(p1)
 		-- upvalues: Module41 (copy)
 		return (setmetatable({
 			props = if p1 == nil or p1.props == nil then nil else p1.props,
@@ -6106,7 +6106,7 @@ do
 		}, Module41))
 	end
 
-	function Module41:encode() --[[ Line: 21259 ]]
+	function Module41:encode()
 		-- upvalues: ProtoModule (copy)
 		local Buf = buffer.create(0)
 		local Count = 0
@@ -6132,7 +6132,7 @@ do
 		return Buf1
 	end
 
-	function Module41.decode(Buf) --[[ Line: 21286 ]]
+	function Module41.decode(Buf)
 		-- upvalues: Module41 (copy), ProtoModule (copy), t (copy), ComponentSharedModule (copy)
 		local NewModule = Module41.new()
 		local v34 = 0
@@ -6173,7 +6173,7 @@ do
 		return NewModule
 	end
 
-	function Module41:jsonEncode() --[[ Line: 21339 ]]
+	function Module41:jsonEncode()
 		local t = {}
 		
 		if self.props ~= nil then
@@ -6188,7 +6188,7 @@ do
 		return t
 	end
 
-	function Module41:jsonDecode() --[[ Line: 21357 ]]
+	function Module41:jsonDecode()
 		-- upvalues: Module41 (copy), t (copy), ComponentSharedModule (copy)
 		local NewModule = Module41.new()
 		
@@ -6218,7 +6218,7 @@ do
 	local Module42 = {}
 	Module42.__index = Module42
 
-	function Module42.new(p1) --[[ Line: 21394 ]]
+	function Module42.new(p1)
 		-- upvalues: Module42 (copy)
 		return (setmetatable({
 			image_aspect_ratio = if p1 == nil or p1.image_aspect_ratio == nil then nil else p1.image_aspect_ratio,
@@ -6267,7 +6267,7 @@ do
 		}, Module42))
 	end
 
-	function Module42:encode() --[[ Line: 21485 ]]
+	function Module42:encode()
 		-- upvalues: ProtoModule (copy)
 		local Buf = buffer.create(0)
 		local Count = 0
@@ -6493,7 +6493,7 @@ do
 		return Buf1
 	end
 
-	function Module42.decode(Buf) --[[ Line: 21752 ]]
+	function Module42.decode(Buf)
 		-- upvalues: Module42 (copy), ProtoModule (copy), PropTypesModule (copy), ActionsModule (copy), t (copy), PropTypesEngineModule (copy)
 		local NewModule = Module42.new()
 		local v34 = 0
@@ -6694,7 +6694,7 @@ do
 		return NewModule
 	end
 
-	function Module42:jsonEncode() --[[ Line: 22015 ]]
+	function Module42:jsonEncode()
 		local t = {}
 		
 		if self.image_aspect_ratio ~= nil then
@@ -6829,7 +6829,7 @@ do
 		return t
 	end
 
-	function Module42:jsonDecode() --[[ Line: 22193 ]]
+	function Module42:jsonDecode()
 		-- upvalues: Module42 (copy), PropTypesModule (copy), ActionsModule (copy), t (copy), PropTypesEngineModule (copy)
 		local NewModule = Module42.new()
 		
@@ -7100,14 +7100,14 @@ do
 	local Module43 = {}
 	Module43.__index = Module43
 
-	function Module43.new(p1) --[[ Line: 22618 ]]
+	function Module43.new(p1)
 		-- upvalues: Module43 (copy)
 		return (setmetatable({
 			title_heading_level = if p1 == nil or p1.title_heading_level == nil then nil else p1.title_heading_level
 		}, Module43))
 	end
 
-	function Module43:encode() --[[ Line: 22626 ]]
+	function Module43:encode()
 		-- upvalues: ProtoModule (copy)
 		local Buf = buffer.create(0)
 		local Count = 0
@@ -7123,7 +7123,7 @@ do
 		return Buf1
 	end
 
-	function Module43.decode(Buf) --[[ Line: 22641 ]]
+	function Module43.decode(Buf)
 		-- upvalues: Module43 (copy), ProtoModule (copy), PropTypesModule (copy)
 		local NewModule = Module43.new()
 		local v35 = 0
@@ -7156,7 +7156,7 @@ do
 		return NewModule
 	end
 
-	function Module43:jsonEncode() --[[ Line: 22685 ]]
+	function Module43:jsonEncode()
 		local t = {}
 		
 		if self.title_heading_level ~= nil then
@@ -7165,7 +7165,7 @@ do
 		return t
 	end
 
-	function Module43:jsonDecode() --[[ Line: 22695 ]]
+	function Module43:jsonDecode()
 		-- upvalues: Module43 (copy), PropTypesModule (copy)
 		local NewModule = Module43.new()
 		
@@ -7187,7 +7187,7 @@ do
 	local Module44 = {}
 	Module44.__index = Module44
 
-	function Module44.new(p1) --[[ Line: 22725 ]]
+	function Module44.new(p1)
 		-- upvalues: Module44 (copy)
 		return (setmetatable({
 			props = if p1 == nil or p1.props == nil then nil else p1.props,
@@ -7195,7 +7195,7 @@ do
 		}, Module44))
 	end
 
-	function Module44:encode() --[[ Line: 22732 ]]
+	function Module44:encode()
 		-- upvalues: ProtoModule (copy)
 		local Buf = buffer.create(0)
 		local Count = 0
@@ -7216,7 +7216,7 @@ do
 		return Buf1
 	end
 
-	function Module44.decode(Buf) --[[ Line: 22753 ]]
+	function Module44.decode(Buf)
 		-- upvalues: Module44 (copy), ProtoModule (copy), t (copy), ComponentSharedModule (copy)
 		local NewModule = Module44.new()
 		local v36 = 0
@@ -7253,7 +7253,7 @@ do
 		return NewModule
 	end
 
-	function Module44:jsonEncode() --[[ Line: 22801 ]]
+	function Module44:jsonEncode()
 		local t = {}
 		
 		if self.props ~= nil then
@@ -7265,7 +7265,7 @@ do
 		return t
 	end
 
-	function Module44:jsonDecode() --[[ Line: 22815 ]]
+	function Module44:jsonDecode()
 		-- upvalues: Module44 (copy), t (copy), ComponentSharedModule (copy)
 		local NewModule = Module44.new()
 		
@@ -7289,7 +7289,7 @@ do
 	local Module45 = {}
 	Module45.__index = Module45
 
-	function Module45.new(p1) --[[ Line: 22844 ]]
+	function Module45.new(p1)
 		-- upvalues: Module45 (copy)
 		return (setmetatable({
 			anchor_point = if p1 == nil or p1.anchor_point == nil then nil else p1.anchor_point,
@@ -7313,7 +7313,7 @@ do
 		}, Module45))
 	end
 
-	function Module45:encode() --[[ Line: 22867 ]]
+	function Module45:encode()
 		-- upvalues: ProtoModule (copy)
 		local Buf = buffer.create(0)
 		local Count = 0
@@ -7414,7 +7414,7 @@ do
 		return Buf1
 	end
 
-	function Module45.decode(Buf) --[[ Line: 22984 ]]
+	function Module45.decode(Buf)
 		-- upvalues: Module45 (copy), ProtoModule (copy), PropTypesModule (copy), ActionsModule (copy)
 		local NewModule = Module45.new()
 		local v36 = 0
@@ -7515,7 +7515,7 @@ do
 		return NewModule
 	end
 
-	function Module45:jsonEncode() --[[ Line: 23113 ]]
+	function Module45:jsonEncode()
 		local t = {}
 		
 		if self.anchor_point ~= nil then
@@ -7575,7 +7575,7 @@ do
 		return t
 	end
 
-	function Module45:jsonDecode() --[[ Line: 23191 ]]
+	function Module45:jsonDecode()
 		-- upvalues: Module45 (copy), PropTypesModule (copy), ActionsModule (copy)
 		local NewModule = Module45.new()
 		
@@ -7672,7 +7672,7 @@ do
 	local Module46 = {}
 	Module46.__index = Module46
 
-	function Module46.new(p1) --[[ Line: 23326 ]]
+	function Module46.new(p1)
 		-- upvalues: Module46 (copy)
 		return (setmetatable({
 			props = if p1 == nil or p1.props == nil then nil else p1.props,
@@ -7681,7 +7681,7 @@ do
 		}, Module46))
 	end
 
-	function Module46:encode() --[[ Line: 23334 ]]
+	function Module46:encode()
 		-- upvalues: ProtoModule (copy)
 		local Buf = buffer.create(0)
 		local Count = 0
@@ -7707,7 +7707,7 @@ do
 		return Buf1
 	end
 
-	function Module46.decode(Buf) --[[ Line: 23361 ]]
+	function Module46.decode(Buf)
 		-- upvalues: Module46 (copy), ProtoModule (copy), t (copy), ComponentSharedModule (copy)
 		local NewModule = Module46.new()
 		local v37 = 0
@@ -7748,7 +7748,7 @@ do
 		return NewModule
 	end
 
-	function Module46:jsonEncode() --[[ Line: 23414 ]]
+	function Module46:jsonEncode()
 		local t = {}
 		
 		if self.props ~= nil then
@@ -7763,7 +7763,7 @@ do
 		return t
 	end
 
-	function Module46:jsonDecode() --[[ Line: 23432 ]]
+	function Module46:jsonDecode()
 		-- upvalues: Module46 (copy), t (copy), ComponentSharedModule (copy)
 		local NewModule = Module46.new()
 		
@@ -7791,7 +7791,7 @@ do
 	local Module47 = {}
 	Module47.__index = Module47
 
-	function Module47.new(p1) --[[ Line: 23469 ]]
+	function Module47.new(p1)
 		-- upvalues: Module47 (copy)
 		return (setmetatable({
 			on_activated = if p1 == nil or p1.on_activated == nil then nil else p1.on_activated,
@@ -7805,7 +7805,7 @@ do
 		}, Module47))
 	end
 
-	function Module47:encode() --[[ Line: 23486 ]]
+	function Module47:encode()
 		-- upvalues: ProtoModule (copy)
 		local Buf = buffer.create(0)
 		local Count = 0
@@ -7856,7 +7856,7 @@ do
 		return Buf1
 	end
 
-	function Module47.decode(Buf) --[[ Line: 23543 ]]
+	function Module47.decode(Buf)
 		-- upvalues: Module47 (copy), ProtoModule (copy), ActionsModule (copy), PropTypesModule (copy)
 		local NewModule = Module47.new()
 		local v38 = 0
@@ -7917,7 +7917,7 @@ do
 		return NewModule
 	end
 
-	function Module47:jsonEncode() --[[ Line: 23622 ]]
+	function Module47:jsonEncode()
 		local t = {}
 		
 		if self.on_activated ~= nil then
@@ -7947,7 +7947,7 @@ do
 		return t
 	end
 
-	function Module47:jsonDecode() --[[ Line: 23660 ]]
+	function Module47:jsonDecode()
 		-- upvalues: Module47 (copy), ActionsModule (copy), PropTypesModule (copy)
 		local NewModule = Module47.new()
 		
@@ -8004,14 +8004,14 @@ do
 	local Module48 = {}
 	Module48.__index = Module48
 
-	function Module48.new(p1) --[[ Line: 23734 ]]
+	function Module48.new(p1)
 		-- upvalues: Module48 (copy)
 		return (setmetatable({
 			use_foundation_size = if p1 == nil or p1.use_foundation_size == nil then nil else p1.use_foundation_size
 		}, Module48))
 	end
 
-	function Module48:encode() --[[ Line: 23744 ]]
+	function Module48:encode()
 		-- upvalues: ProtoModule (copy)
 		local Buf = buffer.create(0)
 		local Count = 0
@@ -8027,7 +8027,7 @@ do
 		return Buf1
 	end
 
-	function Module48.decode(Buf) --[[ Line: 23759 ]]
+	function Module48.decode(Buf)
 		-- upvalues: Module48 (copy), ProtoModule (copy), PropTypesModule (copy)
 		local NewModule = Module48.new()
 		local v38 = 0
@@ -8060,7 +8060,7 @@ do
 		return NewModule
 	end
 
-	function Module48:jsonEncode() --[[ Line: 23802 ]]
+	function Module48:jsonEncode()
 		local t = {}
 		
 		if self.use_foundation_size ~= nil then
@@ -8069,7 +8069,7 @@ do
 		return t
 	end
 
-	function Module48:jsonDecode() --[[ Line: 23812 ]]
+	function Module48:jsonDecode()
 		-- upvalues: Module48 (copy), PropTypesModule (copy)
 		local NewModule = Module48.new()
 		
@@ -8091,7 +8091,7 @@ do
 	local Module49 = {}
 	Module49.__index = Module49
 
-	function Module49.new(p1) --[[ Line: 23844 ]]
+	function Module49.new(p1)
 		-- upvalues: Module49 (copy)
 		return (setmetatable({
 			props = if p1 == nil or p1.props == nil then nil else p1.props,
@@ -8099,7 +8099,7 @@ do
 		}, Module49))
 	end
 
-	function Module49:encode() --[[ Line: 23851 ]]
+	function Module49:encode()
 		-- upvalues: ProtoModule (copy)
 		local Buf = buffer.create(0)
 		local Count = 0
@@ -8120,7 +8120,7 @@ do
 		return Buf1
 	end
 
-	function Module49.decode(Buf) --[[ Line: 23872 ]]
+	function Module49.decode(Buf)
 		-- upvalues: Module49 (copy), ProtoModule (copy), t (copy), ComponentSharedModule (copy)
 		local NewModule = Module49.new()
 		local v39 = 0
@@ -8157,7 +8157,7 @@ do
 		return NewModule
 	end
 
-	function Module49:jsonEncode() --[[ Line: 23920 ]]
+	function Module49:jsonEncode()
 		local t = {}
 		
 		if self.props ~= nil then
@@ -8169,7 +8169,7 @@ do
 		return t
 	end
 
-	function Module49:jsonDecode() --[[ Line: 23934 ]]
+	function Module49:jsonDecode()
 		-- upvalues: Module49 (copy), t (copy), ComponentSharedModule (copy)
 		local NewModule = Module49.new()
 		
@@ -8191,7 +8191,7 @@ do
 	local Module50 = {}
 	Module50.__index = Module50
 
-	function Module50.new(p1) --[[ Line: 23963 ]]
+	function Module50.new(p1)
 		-- upvalues: Module50 (copy)
 		return (setmetatable({
 			icon = if p1 == nil or p1.icon == nil then nil else p1.icon,
@@ -8210,7 +8210,7 @@ do
 		}, Module50))
 	end
 
-	function Module50:encode() --[[ Line: 23981 ]]
+	function Module50:encode()
 		-- upvalues: ProtoModule (copy)
 		local Buf = buffer.create(0)
 		local Count = 0
@@ -8286,7 +8286,7 @@ do
 		return Buf1
 	end
 
-	function Module50.decode(Buf) --[[ Line: 24068 ]]
+	function Module50.decode(Buf)
 		-- upvalues: Module50 (copy), ProtoModule (copy), PropTypesModule (copy), ActionsModule (copy)
 		local NewModule = Module50.new()
 		local v40 = 0
@@ -8367,7 +8367,7 @@ do
 		return NewModule
 	end
 
-	function Module50:jsonEncode() --[[ Line: 24171 ]]
+	function Module50:jsonEncode()
 		local t = {}
 		
 		if self.icon ~= nil then
@@ -8412,7 +8412,7 @@ do
 		return t
 	end
 
-	function Module50:jsonDecode() --[[ Line: 24229 ]]
+	function Module50:jsonDecode()
 		-- upvalues: Module50 (copy), PropTypesModule (copy), ActionsModule (copy)
 		local NewModule = Module50.new()
 		
@@ -8490,7 +8490,7 @@ do
 	local Module51 = {}
 	Module51.__index = Module51
 
-	function Module51.new(p1) --[[ Line: 24334 ]]
+	function Module51.new(p1)
 		-- upvalues: Module51 (copy)
 		return (setmetatable({
 			props = if p1 == nil or p1.props == nil then nil else p1.props,
@@ -8498,7 +8498,7 @@ do
 		}, Module51))
 	end
 
-	function Module51:encode() --[[ Line: 24341 ]]
+	function Module51:encode()
 		-- upvalues: ProtoModule (copy)
 		local Buf = buffer.create(0)
 		local Count = 0
@@ -8519,7 +8519,7 @@ do
 		return Buf1
 	end
 
-	function Module51.decode(Buf) --[[ Line: 24362 ]]
+	function Module51.decode(Buf)
 		-- upvalues: Module51 (copy), ProtoModule (copy), t (copy), ComponentSharedModule (copy)
 		local NewModule = Module51.new()
 		local v40 = 0
@@ -8556,7 +8556,7 @@ do
 		return NewModule
 	end
 
-	function Module51:jsonEncode() --[[ Line: 24410 ]]
+	function Module51:jsonEncode()
 		local t = {}
 		
 		if self.props ~= nil then
@@ -8568,7 +8568,7 @@ do
 		return t
 	end
 
-	function Module51:jsonDecode() --[[ Line: 24424 ]]
+	function Module51:jsonDecode()
 		-- upvalues: Module51 (copy), t (copy), ComponentSharedModule (copy)
 		local NewModule = Module51.new()
 		
@@ -8590,7 +8590,7 @@ do
 	local Module52 = {}
 	Module52.__index = Module52
 
-	function Module52.new(p1) --[[ Line: 24453 ]]
+	function Module52.new(p1)
 		-- upvalues: Module52 (copy)
 		return (setmetatable({
 			anchor_point = if p1 == nil or p1.anchor_point == nil then nil else p1.anchor_point,
@@ -8616,7 +8616,7 @@ do
 		}, Module52))
 	end
 
-	function Module52:encode() --[[ Line: 24478 ]]
+	function Module52:encode()
 		-- upvalues: ProtoModule (copy)
 		local Buf = buffer.create(0)
 		local Count = 0
@@ -8727,7 +8727,7 @@ do
 		return Buf1
 	end
 
-	function Module52.decode(Buf) --[[ Line: 24607 ]]
+	function Module52.decode(Buf)
 		-- upvalues: Module52 (copy), ProtoModule (copy), PropTypesModule (copy), ActionsModule (copy), PropTypesEngineModule (copy), t (copy)
 		local NewModule = Module52.new()
 		local v41 = 0
@@ -8836,7 +8836,7 @@ do
 		return NewModule
 	end
 
-	function Module52:jsonEncode() --[[ Line: 24749 ]]
+	function Module52:jsonEncode()
 		local t = {}
 		
 		if self.anchor_point ~= nil then
@@ -8902,7 +8902,7 @@ do
 		return t
 	end
 
-	function Module52:jsonDecode() --[[ Line: 24835 ]]
+	function Module52:jsonDecode()
 		-- upvalues: Module52 (copy), PropTypesModule (copy), ActionsModule (copy), PropTypesEngineModule (copy), t (copy)
 		local NewModule = Module52.new()
 		
@@ -9020,7 +9020,7 @@ do
 	local Module53 = {}
 	Module53.__index = Module53
 
-	function Module53.new(p1) --[[ Line: 25018 ]]
+	function Module53.new(p1)
 		-- upvalues: Module53 (copy)
 		return (setmetatable({
 			props = if p1 == nil or p1.props == nil then nil else p1.props,
@@ -9029,7 +9029,7 @@ do
 		}, Module53))
 	end
 
-	function Module53:encode() --[[ Line: 25026 ]]
+	function Module53:encode()
 		-- upvalues: ProtoModule (copy)
 		local Buf = buffer.create(0)
 		local Count = 0
@@ -9055,7 +9055,7 @@ do
 		return Buf1
 	end
 
-	function Module53.decode(Buf) --[[ Line: 25053 ]]
+	function Module53.decode(Buf)
 		-- upvalues: Module53 (copy), ProtoModule (copy), t (copy), ComponentSharedModule (copy)
 		local NewModule = Module53.new()
 		local v42 = 0
@@ -9096,7 +9096,7 @@ do
 		return NewModule
 	end
 
-	function Module53:jsonEncode() --[[ Line: 25106 ]]
+	function Module53:jsonEncode()
 		local t = {}
 		
 		if self.props ~= nil then
@@ -9111,7 +9111,7 @@ do
 		return t
 	end
 
-	function Module53:jsonDecode() --[[ Line: 25124 ]]
+	function Module53:jsonDecode()
 		-- upvalues: Module53 (copy), t (copy), ComponentSharedModule (copy)
 		local NewModule = Module53.new()
 		
@@ -9141,7 +9141,7 @@ do
 	local Module54 = {}
 	Module54.__index = Module54
 
-	function Module54.new(p1) --[[ Line: 25161 ]]
+	function Module54.new(p1)
 		-- upvalues: Module54 (copy)
 		return (setmetatable({
 			anchor_point = if p1 == nil or p1.anchor_point == nil then nil else p1.anchor_point,
@@ -9168,7 +9168,7 @@ do
 		}, Module54))
 	end
 
-	function Module54:encode() --[[ Line: 25187 ]]
+	function Module54:encode()
 		-- upvalues: ProtoModule (copy)
 		local Buf = buffer.create(0)
 		local Count = 0
@@ -9284,7 +9284,7 @@ do
 		return Buf1
 	end
 
-	function Module54.decode(Buf) --[[ Line: 25322 ]]
+	function Module54.decode(Buf)
 		-- upvalues: Module54 (copy), ProtoModule (copy), PropTypesModule (copy), ActionsModule (copy)
 		local NewModule = Module54.new()
 		local v42 = 0
@@ -9397,7 +9397,7 @@ do
 		return NewModule
 	end
 
-	function Module54:jsonEncode() --[[ Line: 25465 ]]
+	function Module54:jsonEncode()
 		local t = {}
 		
 		if self.anchor_point ~= nil then
@@ -9466,7 +9466,7 @@ do
 		return t
 	end
 
-	function Module54:jsonDecode() --[[ Line: 25555 ]]
+	function Module54:jsonDecode()
 		-- upvalues: Module54 (copy), PropTypesModule (copy), ActionsModule (copy)
 		local NewModule = Module54.new()
 		
@@ -9596,7 +9596,7 @@ do
 	local Module55 = {}
 	Module55.__index = Module55
 
-	function Module55.new(p1) --[[ Line: 25750 ]]
+	function Module55.new(p1)
 		-- upvalues: Module55 (copy)
 		return (setmetatable({
 			is_rendered_text = if p1 == nil or p1.is_rendered_text == nil then nil else p1.is_rendered_text,
@@ -9608,7 +9608,7 @@ do
 		}, Module55))
 	end
 
-	function Module55:encode() --[[ Line: 25761 ]]
+	function Module55:encode()
 		-- upvalues: ProtoModule (copy)
 		local Buf = buffer.create(0)
 		local Count = 0
@@ -9649,7 +9649,7 @@ do
 		return Buf1
 	end
 
-	function Module55.decode(Buf) --[[ Line: 25806 ]]
+	function Module55.decode(Buf)
 		-- upvalues: Module55 (copy), ProtoModule (copy), PropTypesModule (copy)
 		local NewModule = Module55.new()
 		local v43 = 0
@@ -9702,7 +9702,7 @@ do
 		return NewModule
 	end
 
-	function Module55:jsonEncode() --[[ Line: 25874 ]]
+	function Module55:jsonEncode()
 		local t = {}
 		
 		if self.is_rendered_text ~= nil then
@@ -9726,7 +9726,7 @@ do
 		return t
 	end
 
-	function Module55:jsonDecode() --[[ Line: 25904 ]]
+	function Module55:jsonDecode()
 		-- upvalues: Module55 (copy), PropTypesModule (copy)
 		local NewModule = Module55.new()
 		
@@ -9778,7 +9778,7 @@ do
 	local Module56 = {}
 	Module56.__index = Module56
 
-	function Module56.new(p1) --[[ Line: 25978 ]]
+	function Module56.new(p1)
 		-- upvalues: Module56 (copy)
 		return (setmetatable({
 			props = if p1 == nil or p1.props == nil then nil else p1.props,
@@ -9786,7 +9786,7 @@ do
 		}, Module56))
 	end
 
-	function Module56:encode() --[[ Line: 25985 ]]
+	function Module56:encode()
 		-- upvalues: ProtoModule (copy)
 		local Buf = buffer.create(0)
 		local Count = 0
@@ -9807,7 +9807,7 @@ do
 		return Buf1
 	end
 
-	function Module56.decode(Buf) --[[ Line: 26006 ]]
+	function Module56.decode(Buf)
 		-- upvalues: Module56 (copy), ProtoModule (copy), t (copy), ComponentSharedModule (copy)
 		local NewModule = Module56.new()
 		local v44 = 0
@@ -9844,7 +9844,7 @@ do
 		return NewModule
 	end
 
-	function Module56:jsonEncode() --[[ Line: 26054 ]]
+	function Module56:jsonEncode()
 		local t = {}
 		
 		if self.props ~= nil then
@@ -9856,7 +9856,7 @@ do
 		return t
 	end
 
-	function Module56:jsonDecode() --[[ Line: 26068 ]]
+	function Module56:jsonDecode()
 		-- upvalues: Module56 (copy), t (copy), ComponentSharedModule (copy)
 		local NewModule = Module56.new()
 		
@@ -9880,7 +9880,7 @@ do
 	local Module57 = {}
 	Module57.__index = Module57
 
-	function Module57.new(p1) --[[ Line: 26097 ]]
+	function Module57.new(p1)
 		-- upvalues: Module57 (copy)
 		return (setmetatable({
 			anchor_point = if p1 == nil or p1.anchor_point == nil then nil else p1.anchor_point,
@@ -9904,7 +9904,7 @@ do
 		}, Module57))
 	end
 
-	function Module57:encode() --[[ Line: 26122 ]]
+	function Module57:encode()
 		-- upvalues: ProtoModule (copy)
 		local Buf = buffer.create(0)
 		local Count = 0
@@ -10005,7 +10005,7 @@ do
 		return Buf1
 	end
 
-	function Module57.decode(Buf) --[[ Line: 26239 ]]
+	function Module57.decode(Buf)
 		-- upvalues: Module57 (copy), ProtoModule (copy), PropTypesModule (copy), ActionsModule (copy), PropTypesEngineModule (copy)
 		local NewModule = Module57.new()
 		local v44 = 0
@@ -10106,7 +10106,7 @@ do
 		return NewModule
 	end
 
-	function Module57:jsonEncode() --[[ Line: 26371 ]]
+	function Module57:jsonEncode()
 		local t = {}
 		
 		if self.anchor_point ~= nil then
@@ -10166,7 +10166,7 @@ do
 		return t
 	end
 
-	function Module57:jsonDecode() --[[ Line: 26449 ]]
+	function Module57:jsonDecode()
 		-- upvalues: Module57 (copy), PropTypesModule (copy), ActionsModule (copy), PropTypesEngineModule (copy)
 		local NewModule = Module57.new()
 		
@@ -10278,7 +10278,7 @@ do
 	local Module58 = {}
 	Module58.__index = Module58
 
-	function Module58.new(p1) --[[ Line: 26628 ]]
+	function Module58.new(p1)
 		-- upvalues: Module58 (copy)
 		return (setmetatable({
 			props = if p1 == nil or p1.props == nil then nil else p1.props,
@@ -10286,7 +10286,7 @@ do
 		}, Module58))
 	end
 
-	function Module58:encode() --[[ Line: 26635 ]]
+	function Module58:encode()
 		-- upvalues: ProtoModule (copy)
 		local Buf = buffer.create(0)
 		local Count = 0
@@ -10307,7 +10307,7 @@ do
 		return Buf1
 	end
 
-	function Module58.decode(Buf) --[[ Line: 26656 ]]
+	function Module58.decode(Buf)
 		-- upvalues: Module58 (copy), ProtoModule (copy), t (copy), ComponentSharedModule (copy)
 		local NewModule = Module58.new()
 		local v45 = 0
@@ -10344,7 +10344,7 @@ do
 		return NewModule
 	end
 
-	function Module58:jsonEncode() --[[ Line: 26704 ]]
+	function Module58:jsonEncode()
 		local t = {}
 		
 		if self.props ~= nil then
@@ -10356,7 +10356,7 @@ do
 		return t
 	end
 
-	function Module58:jsonDecode() --[[ Line: 26718 ]]
+	function Module58:jsonDecode()
 		-- upvalues: Module58 (copy), t (copy), ComponentSharedModule (copy)
 		local NewModule = Module58.new()
 		
@@ -10378,7 +10378,7 @@ do
 	local Module59 = {}
 	Module59.__index = Module59
 
-	function Module59.new(p1) --[[ Line: 26747 ]]
+	function Module59.new(p1)
 		-- upvalues: Module59 (copy)
 		return (setmetatable({
 			anchor_point = if p1 == nil or p1.anchor_point == nil then nil else p1.anchor_point,
@@ -10404,7 +10404,7 @@ do
 		}, Module59))
 	end
 
-	function Module59:encode() --[[ Line: 26772 ]]
+	function Module59:encode()
 		-- upvalues: ProtoModule (copy)
 		local Buf = buffer.create(0)
 		local Count = 0
@@ -10515,7 +10515,7 @@ do
 		return Buf1
 	end
 
-	function Module59.decode(Buf) --[[ Line: 26901 ]]
+	function Module59.decode(Buf)
 		-- upvalues: Module59 (copy), ProtoModule (copy), PropTypesModule (copy), ActionsModule (copy), PropTypesEngineModule (copy)
 		local NewModule = Module59.new()
 		local v46 = 0
@@ -10624,7 +10624,7 @@ do
 		return NewModule
 	end
 
-	function Module59:jsonEncode() --[[ Line: 27043 ]]
+	function Module59:jsonEncode()
 		local t = {}
 		
 		if self.anchor_point ~= nil then
@@ -10690,7 +10690,7 @@ do
 		return t
 	end
 
-	function Module59:jsonDecode() --[[ Line: 27129 ]]
+	function Module59:jsonDecode()
 		-- upvalues: Module59 (copy), PropTypesModule (copy), ActionsModule (copy), PropTypesEngineModule (copy)
 		local NewModule = Module59.new()
 		
@@ -10813,7 +10813,7 @@ do
 	local Module60 = {}
 	Module60.__index = Module60
 
-	function Module60.new(p1) --[[ Line: 27324 ]]
+	function Module60.new(p1)
 		-- upvalues: Module60 (copy)
 		return (setmetatable({
 			props = if p1 == nil or p1.props == nil then nil else p1.props,
@@ -10821,7 +10821,7 @@ do
 		}, Module60))
 	end
 
-	function Module60:encode() --[[ Line: 27331 ]]
+	function Module60:encode()
 		-- upvalues: ProtoModule (copy)
 		local Buf = buffer.create(0)
 		local Count = 0
@@ -10842,7 +10842,7 @@ do
 		return Buf1
 	end
 
-	function Module60.decode(Buf) --[[ Line: 27352 ]]
+	function Module60.decode(Buf)
 		-- upvalues: Module60 (copy), ProtoModule (copy), t (copy), ComponentSharedModule (copy)
 		local NewModule = Module60.new()
 		local v46 = 0
@@ -10879,7 +10879,7 @@ do
 		return NewModule
 	end
 
-	function Module60:jsonEncode() --[[ Line: 27400 ]]
+	function Module60:jsonEncode()
 		local t = {}
 		
 		if self.props ~= nil then
@@ -10891,7 +10891,7 @@ do
 		return t
 	end
 
-	function Module60:jsonDecode() --[[ Line: 27414 ]]
+	function Module60:jsonDecode()
 		-- upvalues: Module60 (copy), t (copy), ComponentSharedModule (copy)
 		local NewModule = Module60.new()
 		
@@ -10913,7 +10913,7 @@ do
 	local Module61 = {}
 	Module61.__index = Module61
 
-	function Module61.new(p1) --[[ Line: 27443 ]]
+	function Module61.new(p1)
 		-- upvalues: Module61 (copy)
 		return (setmetatable({
 			anchor_point = if p1 == nil or p1.anchor_point == nil then nil else p1.anchor_point,
@@ -10940,7 +10940,7 @@ do
 		}, Module61))
 	end
 
-	function Module61:encode() --[[ Line: 27469 ]]
+	function Module61:encode()
 		-- upvalues: ProtoModule (copy)
 		local Buf = buffer.create(0)
 		local Count = 0
@@ -11056,7 +11056,7 @@ do
 		return Buf1
 	end
 
-	function Module61.decode(Buf) --[[ Line: 27604 ]]
+	function Module61.decode(Buf)
 		-- upvalues: Module61 (copy), ProtoModule (copy), PropTypesModule (copy), ActionsModule (copy), PropTypesEngineModule (copy)
 		local NewModule = Module61.new()
 		local v47 = 0
@@ -11169,7 +11169,7 @@ do
 		return NewModule
 	end
 
-	function Module61:jsonEncode() --[[ Line: 27751 ]]
+	function Module61:jsonEncode()
 		local t = {}
 		
 		if self.anchor_point ~= nil then
@@ -11238,7 +11238,7 @@ do
 		return t
 	end
 
-	function Module61:jsonDecode() --[[ Line: 27841 ]]
+	function Module61:jsonDecode()
 		-- upvalues: Module61 (copy), PropTypesModule (copy), ActionsModule (copy), PropTypesEngineModule (copy)
 		local NewModule = Module61.new()
 		
@@ -11368,7 +11368,7 @@ do
 	local Module62 = {}
 	Module62.__index = Module62
 
-	function Module62.new(p1) --[[ Line: 28052 ]]
+	function Module62.new(p1)
 		-- upvalues: Module62 (copy)
 		return (setmetatable({
 			props = if p1 == nil or p1.props == nil then nil else p1.props,
@@ -11377,7 +11377,7 @@ do
 		}, Module62))
 	end
 
-	function Module62:encode() --[[ Line: 28060 ]]
+	function Module62:encode()
 		-- upvalues: ProtoModule (copy)
 		local Buf = buffer.create(0)
 		local Count = 0
@@ -11403,7 +11403,7 @@ do
 		return Buf1
 	end
 
-	function Module62.decode(Buf) --[[ Line: 28087 ]]
+	function Module62.decode(Buf)
 		-- upvalues: Module62 (copy), ProtoModule (copy), t (copy), ComponentSharedModule (copy)
 		local NewModule = Module62.new()
 		local v48 = 0
@@ -11444,7 +11444,7 @@ do
 		return NewModule
 	end
 
-	function Module62:jsonEncode() --[[ Line: 28140 ]]
+	function Module62:jsonEncode()
 		local t = {}
 		
 		if self.props ~= nil then
@@ -11459,7 +11459,7 @@ do
 		return t
 	end
 
-	function Module62:jsonDecode() --[[ Line: 28158 ]]
+	function Module62:jsonDecode()
 		-- upvalues: Module62 (copy), t (copy), ComponentSharedModule (copy)
 		local NewModule = Module62.new()
 		
@@ -11489,7 +11489,7 @@ do
 	local Module63 = {}
 	Module63.__index = Module63
 
-	function Module63.new(p1) --[[ Line: 28195 ]]
+	function Module63.new(p1)
 		-- upvalues: Module63 (copy)
 		return (setmetatable({
 			anchor_point = if p1 == nil or p1.anchor_point == nil then nil else p1.anchor_point,
@@ -11519,7 +11519,7 @@ do
 		}, Module63))
 	end
 
-	function Module63:encode() --[[ Line: 28226 ]]
+	function Module63:encode()
 		-- upvalues: ProtoModule (copy)
 		local Buf = buffer.create(0)
 		local Count = 0
@@ -11650,7 +11650,7 @@ do
 		return Buf1
 	end
 
-	function Module63.decode(Buf) --[[ Line: 28379 ]]
+	function Module63.decode(Buf)
 		-- upvalues: Module63 (copy), ProtoModule (copy), PropTypesModule (copy), ActionsModule (copy), PropTypesEngineModule (copy), t (copy)
 		local NewModule = Module63.new()
 		local v48 = 0
@@ -11775,7 +11775,7 @@ do
 		return NewModule
 	end
 
-	function Module63:jsonEncode() --[[ Line: 28541 ]]
+	function Module63:jsonEncode()
 		local t = {}
 		
 		if self.anchor_point ~= nil then
@@ -11853,7 +11853,7 @@ do
 		return t
 	end
 
-	function Module63:jsonDecode() --[[ Line: 28643 ]]
+	function Module63:jsonDecode()
 		-- upvalues: Module63 (copy), PropTypesModule (copy), ActionsModule (copy), PropTypesEngineModule (copy), t (copy)
 		local NewModule = Module63.new()
 		
@@ -11986,7 +11986,7 @@ do
 	local Module64 = {}
 	Module64.__index = Module64
 
-	function Module64.new(p1) --[[ Line: 28848 ]]
+	function Module64.new(p1)
 		-- upvalues: Module64 (copy)
 		return (setmetatable({
 			class_names = if p1 == nil or p1.class_names == nil then nil else p1.class_names,
@@ -11995,7 +11995,7 @@ do
 		}, Module64))
 	end
 
-	function Module64:encode() --[[ Line: 28856 ]]
+	function Module64:encode()
 		-- upvalues: ProtoModule (copy)
 		local Buf = buffer.create(0)
 		local Count = 0
@@ -12021,7 +12021,7 @@ do
 		return Buf1
 	end
 
-	function Module64.decode(Buf) --[[ Line: 28883 ]]
+	function Module64.decode(Buf)
 		-- upvalues: Module64 (copy), ProtoModule (copy), PropTypesModule (copy)
 		local NewModule = Module64.new()
 		local v49 = 0
@@ -12062,7 +12062,7 @@ do
 		return NewModule
 	end
 
-	function Module64:jsonEncode() --[[ Line: 28936 ]]
+	function Module64:jsonEncode()
 		local t = {}
 		
 		if self.class_names ~= nil then
@@ -12077,7 +12077,7 @@ do
 		return t
 	end
 
-	function Module64:jsonDecode() --[[ Line: 28954 ]]
+	function Module64:jsonDecode()
 		-- upvalues: Module64 (copy), PropTypesModule (copy)
 		local NewModule = Module64.new()
 		
@@ -12111,7 +12111,7 @@ do
 	local Module65 = {}
 	Module65.__index = Module65
 
-	function Module65.new(p1) --[[ Line: 29001 ]]
+	function Module65.new(p1)
 		-- upvalues: Module65 (copy)
 		return (setmetatable({
 			props = if p1 == nil or p1.props == nil then nil else p1.props,
@@ -12119,7 +12119,7 @@ do
 		}, Module65))
 	end
 
-	function Module65:encode() --[[ Line: 29010 ]]
+	function Module65:encode()
 		-- upvalues: ProtoModule (copy)
 		local Buf = buffer.create(0)
 		local Count = 0
@@ -12140,7 +12140,7 @@ do
 		return Buf1
 	end
 
-	function Module65.decode(Buf) --[[ Line: 29031 ]]
+	function Module65.decode(Buf)
 		-- upvalues: Module65 (copy), ProtoModule (copy), t (copy), ComponentSharedModule (copy)
 		local NewModule = Module65.new()
 		local v50 = 0
@@ -12177,7 +12177,7 @@ do
 		return NewModule
 	end
 
-	function Module65:jsonEncode() --[[ Line: 29079 ]]
+	function Module65:jsonEncode()
 		local t = {}
 		
 		if self.props ~= nil then
@@ -12189,7 +12189,7 @@ do
 		return t
 	end
 
-	function Module65:jsonDecode() --[[ Line: 29093 ]]
+	function Module65:jsonDecode()
 		-- upvalues: Module65 (copy), t (copy), ComponentSharedModule (copy)
 		local NewModule = Module65.new()
 		
@@ -12213,7 +12213,7 @@ do
 	local Module66 = {}
 	Module66.__index = Module66
 
-	function Module66.new(p1) --[[ Line: 29124 ]]
+	function Module66.new(p1)
 		-- upvalues: Module66 (copy)
 		return (setmetatable({
 			view = if p1 == nil or p1.view == nil then nil else p1.view,
@@ -12224,7 +12224,7 @@ do
 		}, Module66))
 	end
 
-	function Module66:encode() --[[ Line: 29142 ]]
+	function Module66:encode()
 		-- upvalues: ProtoModule (copy)
 		local Buf = buffer.create(0)
 		local Count = 0
@@ -12260,7 +12260,7 @@ do
 		return Buf1
 	end
 
-	function Module66.decode(Buf) --[[ Line: 29181 ]]
+	function Module66.decode(Buf)
 		-- upvalues: Module66 (copy), ProtoModule (copy), t (copy), PropTypesModule (copy)
 		local NewModule = Module66.new()
 		local v50 = 0
@@ -12309,7 +12309,7 @@ do
 		return NewModule
 	end
 
-	function Module66:jsonEncode() --[[ Line: 29247 ]]
+	function Module66:jsonEncode()
 		local t = {}
 		
 		if self.view ~= nil then
@@ -12330,7 +12330,7 @@ do
 		return t
 	end
 
-	function Module66:jsonDecode() --[[ Line: 29273 ]]
+	function Module66:jsonDecode()
 		-- upvalues: Module66 (copy), t (copy), PropTypesModule (copy)
 		local NewModule = Module66.new()
 		
@@ -12370,7 +12370,7 @@ do
 	local Module67 = {}
 	Module67.__index = Module67
 
-	function Module67.new(p1) --[[ Line: 29333 ]]
+	function Module67.new(p1)
 		-- upvalues: Module67 (copy)
 		return (setmetatable({
 			props = if p1 == nil or p1.props == nil then nil else p1.props,
@@ -12378,7 +12378,7 @@ do
 		}, Module67))
 	end
 
-	function Module67:encode() --[[ Line: 29340 ]]
+	function Module67:encode()
 		-- upvalues: ProtoModule (copy)
 		local Buf = buffer.create(0)
 		local Count = 0
@@ -12399,7 +12399,7 @@ do
 		return Buf1
 	end
 
-	function Module67.decode(Buf) --[[ Line: 29361 ]]
+	function Module67.decode(Buf)
 		-- upvalues: Module67 (copy), ProtoModule (copy), t (copy), ComponentSharedModule (copy)
 		local NewModule = Module67.new()
 		local v51 = 0
@@ -12436,7 +12436,7 @@ do
 		return NewModule
 	end
 
-	function Module67:jsonEncode() --[[ Line: 29409 ]]
+	function Module67:jsonEncode()
 		local t = {}
 		
 		if self.props ~= nil then
@@ -12448,7 +12448,7 @@ do
 		return t
 	end
 
-	function Module67:jsonDecode() --[[ Line: 29423 ]]
+	function Module67:jsonDecode()
 		-- upvalues: Module67 (copy), t (copy), ComponentSharedModule (copy)
 		local NewModule = Module67.new()
 		
@@ -12470,7 +12470,7 @@ do
 	local Module68 = {}
 	Module68.__index = Module68
 
-	function Module68.new(p1) --[[ Line: 29452 ]]
+	function Module68.new(p1)
 		-- upvalues: Module68 (copy)
 		return (setmetatable({
 			anchor_point = if p1 == nil or p1.anchor_point == nil then nil else p1.anchor_point,
@@ -12480,7 +12480,7 @@ do
 		}, Module68))
 	end
 
-	function Module68:encode() --[[ Line: 29461 ]]
+	function Module68:encode()
 		-- upvalues: ProtoModule (copy)
 		local Buf = buffer.create(0)
 		local Count = 0
@@ -12511,7 +12511,7 @@ do
 		return Buf1
 	end
 
-	function Module68.decode(Buf) --[[ Line: 29494 ]]
+	function Module68.decode(Buf)
 		-- upvalues: Module68 (copy), ProtoModule (copy), PropTypesModule (copy)
 		local NewModule = Module68.new()
 		local v52 = 0
@@ -12556,7 +12556,7 @@ do
 		return NewModule
 	end
 
-	function Module68:jsonEncode() --[[ Line: 29552 ]]
+	function Module68:jsonEncode()
 		local t = {}
 		
 		if self.anchor_point ~= nil then
@@ -12574,7 +12574,7 @@ do
 		return t
 	end
 
-	function Module68:jsonDecode() --[[ Line: 29574 ]]
+	function Module68:jsonDecode()
 		-- upvalues: Module68 (copy), PropTypesModule (copy)
 		local NewModule = Module68.new()
 		
@@ -12610,7 +12610,7 @@ do
 	local Module69 = {}
 	Module69.__index = Module69
 
-	function Module69.new(p1) --[[ Line: 29622 ]]
+	function Module69.new(p1)
 		-- upvalues: Module69 (copy)
 		return (setmetatable({
 			props = if p1 == nil or p1.props == nil then nil else p1.props,
@@ -12619,7 +12619,7 @@ do
 		}, Module69))
 	end
 
-	function Module69:encode() --[[ Line: 29630 ]]
+	function Module69:encode()
 		-- upvalues: ProtoModule (copy)
 		local Buf = buffer.create(0)
 		local Count = 0
@@ -12645,7 +12645,7 @@ do
 		return Buf1
 	end
 
-	function Module69.decode(Buf) --[[ Line: 29657 ]]
+	function Module69.decode(Buf)
 		-- upvalues: Module69 (copy), ProtoModule (copy), t (copy), ComponentSharedModule (copy)
 		local NewModule = Module69.new()
 		local v52 = 0
@@ -12686,7 +12686,7 @@ do
 		return NewModule
 	end
 
-	function Module69:jsonEncode() --[[ Line: 29710 ]]
+	function Module69:jsonEncode()
 		local t = {}
 		
 		if self.props ~= nil then
@@ -12701,7 +12701,7 @@ do
 		return t
 	end
 
-	function Module69:jsonDecode() --[[ Line: 29728 ]]
+	function Module69:jsonDecode()
 		-- upvalues: Module69 (copy), t (copy), ComponentSharedModule (copy)
 		local NewModule = Module69.new()
 		
@@ -12729,7 +12729,7 @@ do
 	local Module70 = {}
 	Module70.__index = Module70
 
-	function Module70.new(p1) --[[ Line: 29765 ]]
+	function Module70.new(p1)
 		-- upvalues: Module70 (copy)
 		return (setmetatable({
 			size = if p1 == nil or p1.size == nil then nil else p1.size,
@@ -12761,7 +12761,7 @@ do
 		}, Module70))
 	end
 
-	function Module70:encode() --[[ Line: 29824 ]]
+	function Module70:encode()
 		-- upvalues: ProtoModule (copy)
 		local Buf = buffer.create(0)
 		local Count = 0
@@ -12902,7 +12902,7 @@ do
 		return Buf1
 	end
 
-	function Module70.decode(Buf) --[[ Line: 29989 ]]
+	function Module70.decode(Buf)
 		-- upvalues: Module70 (copy), ProtoModule (copy), PropTypesModule (copy), t (copy), ActionsModule (copy), PropTypesEngineModule (copy)
 		local NewModule = Module70.new()
 		local v53 = 0
@@ -13035,7 +13035,7 @@ do
 		return NewModule
 	end
 
-	function Module70:jsonEncode() --[[ Line: 30169 ]]
+	function Module70:jsonEncode()
 		local t = {}
 		
 		if self.size ~= nil then
@@ -13119,7 +13119,7 @@ do
 		return t
 	end
 
-	function Module70:jsonDecode() --[[ Line: 30279 ]]
+	function Module70:jsonDecode()
 		-- upvalues: Module70 (copy), PropTypesModule (copy), t (copy), ActionsModule (copy), PropTypesEngineModule (copy)
 		local NewModule = Module70.new()
 		
@@ -13285,7 +13285,7 @@ do
 	local Module71 = {}
 	Module71.__index = Module71
 
-	function Module71.new(p1) --[[ Line: 30555 ]]
+	function Module71.new(p1)
 		-- upvalues: Module71 (copy)
 		return (setmetatable({
 			image_alt_text = if p1 == nil or p1.image_alt_text == nil then nil else p1.image_alt_text,
@@ -13293,7 +13293,7 @@ do
 		}, Module71))
 	end
 
-	function Module71:encode() --[[ Line: 30562 ]]
+	function Module71:encode()
 		-- upvalues: ProtoModule (copy)
 		local Buf = buffer.create(0)
 		local Count = 0
@@ -13314,7 +13314,7 @@ do
 		return Buf1
 	end
 
-	function Module71.decode(Buf) --[[ Line: 30583 ]]
+	function Module71.decode(Buf)
 		-- upvalues: Module71 (copy), ProtoModule (copy), PropTypesModule (copy)
 		local NewModule = Module71.new()
 		local v54 = 0
@@ -13351,7 +13351,7 @@ do
 		return NewModule
 	end
 
-	function Module71:jsonEncode() --[[ Line: 30631 ]]
+	function Module71:jsonEncode()
 		local t = {}
 		
 		if self.image_alt_text ~= nil then
@@ -13363,7 +13363,7 @@ do
 		return t
 	end
 
-	function Module71:jsonDecode() --[[ Line: 30645 ]]
+	function Module71:jsonDecode()
 		-- upvalues: Module71 (copy), PropTypesModule (copy)
 		local NewModule = Module71.new()
 		
@@ -13393,7 +13393,7 @@ do
 	local Module72 = {}
 	Module72.__index = Module72
 
-	function Module72.new(p1) --[[ Line: 30684 ]]
+	function Module72.new(p1)
 		-- upvalues: Module72 (copy)
 		return (setmetatable({
 			props = if p1 == nil or p1.props == nil then nil else p1.props,
@@ -13401,7 +13401,7 @@ do
 		}, Module72))
 	end
 
-	function Module72:encode() --[[ Line: 30691 ]]
+	function Module72:encode()
 		-- upvalues: ProtoModule (copy)
 		local Buf = buffer.create(0)
 		local Count = 0
@@ -13422,7 +13422,7 @@ do
 		return Buf1
 	end
 
-	function Module72.decode(Buf) --[[ Line: 30712 ]]
+	function Module72.decode(Buf)
 		-- upvalues: Module72 (copy), ProtoModule (copy), t (copy), ComponentSharedModule (copy)
 		local NewModule = Module72.new()
 		local v54 = 0
@@ -13459,7 +13459,7 @@ do
 		return NewModule
 	end
 
-	function Module72:jsonEncode() --[[ Line: 30760 ]]
+	function Module72:jsonEncode()
 		local t = {}
 		
 		if self.props ~= nil then
@@ -13471,7 +13471,7 @@ do
 		return t
 	end
 
-	function Module72:jsonDecode() --[[ Line: 30774 ]]
+	function Module72:jsonDecode()
 		-- upvalues: Module72 (copy), t (copy), ComponentSharedModule (copy)
 		local NewModule = Module72.new()
 		
@@ -13493,7 +13493,7 @@ do
 	local Module73 = {}
 	Module73.__index = Module73
 
-	function Module73.new(p1) --[[ Line: 30803 ]]
+	function Module73.new(p1)
 		-- upvalues: Module73 (copy)
 		return (setmetatable({
 			automatic_size = if p1 == nil or p1.automatic_size == nil then nil else p1.automatic_size,
@@ -13518,7 +13518,7 @@ do
 		}, Module73))
 	end
 
-	function Module73:encode() --[[ Line: 30827 ]]
+	function Module73:encode()
 		-- upvalues: ProtoModule (copy)
 		local Buf = buffer.create(0)
 		local Count = 0
@@ -13624,7 +13624,7 @@ do
 		return Buf1
 	end
 
-	function Module73.decode(Buf) --[[ Line: 30950 ]]
+	function Module73.decode(Buf)
 		-- upvalues: Module73 (copy), ProtoModule (copy), PropTypesModule (copy), ActionsModule (copy)
 		local NewModule = Module73.new()
 		local v55 = 0
@@ -13729,7 +13729,7 @@ do
 		return NewModule
 	end
 
-	function Module73:jsonEncode() --[[ Line: 31084 ]]
+	function Module73:jsonEncode()
 		local t = {}
 		
 		if self.automatic_size ~= nil then
@@ -13792,7 +13792,7 @@ do
 		return t
 	end
 
-	function Module73:jsonDecode() --[[ Line: 31166 ]]
+	function Module73:jsonDecode()
 		-- upvalues: Module73 (copy), PropTypesModule (copy), ActionsModule (copy)
 		local NewModule = Module73.new()
 		
@@ -13904,7 +13904,7 @@ do
 	local Module74 = {}
 	Module74.__index = Module74
 
-	function Module74.new(p1) --[[ Line: 31328 ]]
+	function Module74.new(p1)
 		-- upvalues: Module74 (copy)
 		return (setmetatable({
 			props = if p1 == nil or p1.props == nil then nil else p1.props,
@@ -13912,7 +13912,7 @@ do
 		}, Module74))
 	end
 
-	function Module74:encode() --[[ Line: 31335 ]]
+	function Module74:encode()
 		-- upvalues: ProtoModule (copy)
 		local Buf = buffer.create(0)
 		local Count = 0
@@ -13933,7 +13933,7 @@ do
 		return Buf1
 	end
 
-	function Module74.decode(Buf) --[[ Line: 31356 ]]
+	function Module74.decode(Buf)
 		-- upvalues: Module74 (copy), ProtoModule (copy), t (copy), ComponentSharedModule (copy)
 		local NewModule = Module74.new()
 		local v56 = 0
@@ -13970,7 +13970,7 @@ do
 		return NewModule
 	end
 
-	function Module74:jsonEncode() --[[ Line: 31404 ]]
+	function Module74:jsonEncode()
 		local t = {}
 		
 		if self.props ~= nil then
@@ -13982,7 +13982,7 @@ do
 		return t
 	end
 
-	function Module74:jsonDecode() --[[ Line: 31418 ]]
+	function Module74:jsonDecode()
 		-- upvalues: Module74 (copy), t (copy), ComponentSharedModule (copy)
 		local NewModule = Module74.new()
 		
@@ -14006,7 +14006,7 @@ do
 	local Module75 = {}
 	Module75.__index = Module75
 
-	function Module75.new(p1) --[[ Line: 31447 ]]
+	function Module75.new(p1)
 		-- upvalues: Module75 (copy)
 		return (setmetatable({
 			anchor_point = if p1 == nil or p1.anchor_point == nil then nil else p1.anchor_point,
@@ -14018,7 +14018,7 @@ do
 		}, Module75))
 	end
 
-	function Module75:encode() --[[ Line: 31458 ]]
+	function Module75:encode()
 		-- upvalues: ProtoModule (copy)
 		local Buf = buffer.create(0)
 		local Count = 0
@@ -14059,7 +14059,7 @@ do
 		return Buf1
 	end
 
-	function Module75.decode(Buf) --[[ Line: 31503 ]]
+	function Module75.decode(Buf)
 		-- upvalues: Module75 (copy), ProtoModule (copy), PropTypesModule (copy)
 		local NewModule = Module75.new()
 		local v56 = 0
@@ -14112,7 +14112,7 @@ do
 		return NewModule
 	end
 
-	function Module75:jsonEncode() --[[ Line: 31571 ]]
+	function Module75:jsonEncode()
 		local t = {}
 		
 		if self.anchor_point ~= nil then
@@ -14136,7 +14136,7 @@ do
 		return t
 	end
 
-	function Module75:jsonDecode() --[[ Line: 31601 ]]
+	function Module75:jsonDecode()
 		-- upvalues: Module75 (copy), PropTypesModule (copy)
 		local NewModule = Module75.new()
 		
@@ -14182,7 +14182,7 @@ do
 	local Module76 = {}
 	Module76.__index = Module76
 
-	function Module76.new(p1) --[[ Line: 31667 ]]
+	function Module76.new(p1)
 		-- upvalues: Module76 (copy)
 		return (setmetatable({
 			props = if p1 == nil or p1.props == nil then nil else p1.props,
@@ -14191,7 +14191,7 @@ do
 		}, Module76))
 	end
 
-	function Module76:encode() --[[ Line: 31675 ]]
+	function Module76:encode()
 		-- upvalues: ProtoModule (copy)
 		local Buf = buffer.create(0)
 		local Count = 0
@@ -14217,7 +14217,7 @@ do
 		return Buf1
 	end
 
-	function Module76.decode(Buf) --[[ Line: 31702 ]]
+	function Module76.decode(Buf)
 		-- upvalues: Module76 (copy), ProtoModule (copy), t (copy), ComponentSharedModule (copy)
 		local NewModule = Module76.new()
 		local v57 = 0
@@ -14258,7 +14258,7 @@ do
 		return NewModule
 	end
 
-	function Module76:jsonEncode() --[[ Line: 31755 ]]
+	function Module76:jsonEncode()
 		local t = {}
 		
 		if self.props ~= nil then
@@ -14273,7 +14273,7 @@ do
 		return t
 	end
 
-	function Module76:jsonDecode() --[[ Line: 31773 ]]
+	function Module76:jsonDecode()
 		-- upvalues: Module76 (copy), t (copy), ComponentSharedModule (copy)
 		local NewModule = Module76.new()
 		
@@ -14301,7 +14301,7 @@ do
 	local Module77 = {}
 	Module77.__index = Module77
 
-	function Module77.new(p1) --[[ Line: 31810 ]]
+	function Module77.new(p1)
 		-- upvalues: Module77 (copy)
 		return (setmetatable({
 			automatic_size = if p1 == nil or p1.automatic_size == nil then nil else p1.automatic_size,
@@ -14335,7 +14335,7 @@ do
 		}, Module77))
 	end
 
-	function Module77:encode() --[[ Line: 31856 ]]
+	function Module77:encode()
 		-- upvalues: ProtoModule (copy)
 		local Buf = buffer.create(0)
 		local Count = 0
@@ -14486,7 +14486,7 @@ do
 		return Buf1
 	end
 
-	function Module77.decode(Buf) --[[ Line: 32033 ]]
+	function Module77.decode(Buf)
 		-- upvalues: Module77 (copy), ProtoModule (copy), PropTypesModule (copy), t (copy), ActionsModule (copy)
 		local NewModule = Module77.new()
 		local v58 = 0
@@ -14627,7 +14627,7 @@ do
 		return NewModule
 	end
 
-	function Module77:jsonEncode() --[[ Line: 32215 ]]
+	function Module77:jsonEncode()
 		local t = {}
 		
 		if self.automatic_size ~= nil then
@@ -14717,7 +14717,7 @@ do
 		return t
 	end
 
-	function Module77:jsonDecode() --[[ Line: 32333 ]]
+	function Module77:jsonDecode()
 		-- upvalues: Module77 (copy), PropTypesModule (copy), t (copy), ActionsModule (copy)
 		local NewModule = Module77.new()
 		
@@ -14894,7 +14894,7 @@ do
 	local Module78 = {}
 	Module78.__index = Module78
 
-	function Module78.new(p1) --[[ Line: 32601 ]]
+	function Module78.new(p1)
 		-- upvalues: Module78 (copy)
 		return (setmetatable({
 			title_heading_level = if p1 == nil or p1.title_heading_level == nil then nil else p1.title_heading_level,
@@ -14902,7 +14902,7 @@ do
 		}, Module78))
 	end
 
-	function Module78:encode() --[[ Line: 32614 ]]
+	function Module78:encode()
 		-- upvalues: ProtoModule (copy)
 		local Buf = buffer.create(0)
 		local Count = 0
@@ -14923,7 +14923,7 @@ do
 		return Buf1
 	end
 
-	function Module78.decode(Buf) --[[ Line: 32635 ]]
+	function Module78.decode(Buf)
 		-- upvalues: Module78 (copy), ProtoModule (copy), PropTypesModule (copy)
 		local NewModule = Module78.new()
 		local v58 = 0
@@ -14960,7 +14960,7 @@ do
 		return NewModule
 	end
 
-	function Module78:jsonEncode() --[[ Line: 32685 ]]
+	function Module78:jsonEncode()
 		local t = {}
 		
 		if self.title_heading_level ~= nil then
@@ -14972,7 +14972,7 @@ do
 		return t
 	end
 
-	function Module78:jsonDecode() --[[ Line: 32699 ]]
+	function Module78:jsonDecode()
 		-- upvalues: Module78 (copy), PropTypesModule (copy)
 		local NewModule = Module78.new()
 		
@@ -15000,7 +15000,7 @@ do
 	local Module79 = {}
 	Module79.__index = Module79
 
-	function Module79.new(p1) --[[ Line: 32739 ]]
+	function Module79.new(p1)
 		-- upvalues: Module79 (copy)
 		return (setmetatable({
 			props = if p1 == nil or p1.props == nil then nil else p1.props,
@@ -15008,7 +15008,7 @@ do
 		}, Module79))
 	end
 
-	function Module79:encode() --[[ Line: 32746 ]]
+	function Module79:encode()
 		-- upvalues: ProtoModule (copy)
 		local Buf = buffer.create(0)
 		local Count = 0
@@ -15029,7 +15029,7 @@ do
 		return Buf1
 	end
 
-	function Module79.decode(Buf) --[[ Line: 32767 ]]
+	function Module79.decode(Buf)
 		-- upvalues: Module79 (copy), ProtoModule (copy), t (copy), ComponentSharedModule (copy)
 		local NewModule = Module79.new()
 		local v59 = 0
@@ -15066,7 +15066,7 @@ do
 		return NewModule
 	end
 
-	function Module79:jsonEncode() --[[ Line: 32815 ]]
+	function Module79:jsonEncode()
 		local t = {}
 		
 		if self.props ~= nil then
@@ -15078,7 +15078,7 @@ do
 		return t
 	end
 
-	function Module79:jsonDecode() --[[ Line: 32829 ]]
+	function Module79:jsonDecode()
 		-- upvalues: Module79 (copy), t (copy), ComponentSharedModule (copy)
 		local NewModule = Module79.new()
 		
@@ -15100,7 +15100,7 @@ do
 	local Module80 = {}
 	Module80.__index = Module80
 
-	function Module80.new(p1) --[[ Line: 32858 ]]
+	function Module80.new(p1)
 		-- upvalues: Module80 (copy)
 		return (setmetatable({
 			top_left_slot = if p1 == nil or p1.top_left_slot == nil then nil else p1.top_left_slot,
@@ -15122,7 +15122,7 @@ do
 		}, Module80))
 	end
 
-	function Module80:encode() --[[ Line: 32879 ]]
+	function Module80:encode()
 		-- upvalues: ProtoModule (copy)
 		local Buf = buffer.create(0)
 		local Count = 0
@@ -15213,7 +15213,7 @@ do
 		return Buf1
 	end
 
-	function Module80.decode(Buf) --[[ Line: 32984 ]]
+	function Module80.decode(Buf)
 		-- upvalues: Module80 (copy), ProtoModule (copy), t (copy), PropTypesModule (copy)
 		local NewModule = Module80.new()
 		local v60 = 0
@@ -15306,7 +15306,7 @@ do
 		return NewModule
 	end
 
-	function Module80:jsonEncode() --[[ Line: 33102 ]]
+	function Module80:jsonEncode()
 		local t = {}
 		
 		if self.top_left_slot ~= nil then
@@ -15360,7 +15360,7 @@ do
 		return t
 	end
 
-	function Module80:jsonDecode() --[[ Line: 33172 ]]
+	function Module80:jsonDecode()
 		-- upvalues: Module80 (copy), t (copy), PropTypesModule (copy)
 		local NewModule = Module80.new()
 		
@@ -15465,7 +15465,7 @@ do
 	local Module81 = {}
 	Module81.__index = Module81
 
-	function Module81.new(p1) --[[ Line: 33314 ]]
+	function Module81.new(p1)
 		-- upvalues: Module81 (copy)
 		return (setmetatable({
 			props = if p1 == nil or p1.props == nil then nil else p1.props,
@@ -15474,7 +15474,7 @@ do
 		}, Module81))
 	end
 
-	function Module81:encode() --[[ Line: 33322 ]]
+	function Module81:encode()
 		-- upvalues: ProtoModule (copy)
 		local Buf = buffer.create(0)
 		local Count = 0
@@ -15500,7 +15500,7 @@ do
 		return Buf1
 	end
 
-	function Module81.decode(Buf) --[[ Line: 33349 ]]
+	function Module81.decode(Buf)
 		-- upvalues: Module81 (copy), ProtoModule (copy), t (copy), ComponentSharedModule (copy)
 		local NewModule = Module81.new()
 		local v60 = 0
@@ -15541,7 +15541,7 @@ do
 		return NewModule
 	end
 
-	function Module81:jsonEncode() --[[ Line: 33402 ]]
+	function Module81:jsonEncode()
 		local t = {}
 		
 		if self.props ~= nil then
@@ -15556,7 +15556,7 @@ do
 		return t
 	end
 
-	function Module81:jsonDecode() --[[ Line: 33420 ]]
+	function Module81:jsonDecode()
 		-- upvalues: Module81 (copy), t (copy), ComponentSharedModule (copy)
 		local NewModule = Module81.new()
 		
@@ -15584,7 +15584,7 @@ do
 	local Module82 = {}
 	Module82.__index = Module82
 
-	function Module82.new(p1) --[[ Line: 33457 ]]
+	function Module82.new(p1)
 		-- upvalues: Module82 (copy)
 		return (setmetatable({
 			anchor_point = if p1 == nil or p1.anchor_point == nil then nil else p1.anchor_point,
@@ -15612,7 +15612,7 @@ do
 		}, Module82))
 	end
 
-	function Module82:encode() --[[ Line: 33492 ]]
+	function Module82:encode()
 		-- upvalues: ProtoModule (copy)
 		local Buf = buffer.create(0)
 		local Count = 0
@@ -15733,7 +15733,7 @@ do
 		return Buf1
 	end
 
-	function Module82.decode(Buf) --[[ Line: 33633 ]]
+	function Module82.decode(Buf)
 		-- upvalues: Module82 (copy), ProtoModule (copy), PropTypesModule (copy), t (copy), ActionsModule (copy)
 		local NewModule = Module82.new()
 		local v61 = 0
@@ -15850,7 +15850,7 @@ do
 		return NewModule
 	end
 
-	function Module82:jsonEncode() --[[ Line: 33783 ]]
+	function Module82:jsonEncode()
 		local t = {}
 		
 		if self.anchor_point ~= nil then
@@ -15922,7 +15922,7 @@ do
 		return t
 	end
 
-	function Module82:jsonDecode() --[[ Line: 33877 ]]
+	function Module82:jsonDecode()
 		-- upvalues: Module82 (copy), PropTypesModule (copy), t (copy), ActionsModule (copy)
 		local NewModule = Module82.new()
 		
@@ -16061,7 +16061,7 @@ do
 	local Module83 = {}
 	Module83.__index = Module83
 
-	function Module83.new(p1) --[[ Line: 34075 ]]
+	function Module83.new(p1)
 		-- upvalues: Module83 (copy)
 		return (setmetatable({
 			left_heading_level = if p1 == nil or p1.left_heading_level == nil then nil else p1.left_heading_level,
@@ -16069,7 +16069,7 @@ do
 		}, Module83))
 	end
 
-	function Module83:encode() --[[ Line: 34086 ]]
+	function Module83:encode()
 		-- upvalues: ProtoModule (copy)
 		local Buf = buffer.create(0)
 		local Count = 0
@@ -16090,7 +16090,7 @@ do
 		return Buf1
 	end
 
-	function Module83.decode(Buf) --[[ Line: 34107 ]]
+	function Module83.decode(Buf)
 		-- upvalues: Module83 (copy), ProtoModule (copy), PropTypesModule (copy)
 		local NewModule = Module83.new()
 		local v62 = 0
@@ -16127,7 +16127,7 @@ do
 		return NewModule
 	end
 
-	function Module83:jsonEncode() --[[ Line: 34156 ]]
+	function Module83:jsonEncode()
 		local t = {}
 		
 		if self.left_heading_level ~= nil then
@@ -16139,7 +16139,7 @@ do
 		return t
 	end
 
-	function Module83:jsonDecode() --[[ Line: 34170 ]]
+	function Module83:jsonDecode()
 		-- upvalues: Module83 (copy), PropTypesModule (copy)
 		local NewModule = Module83.new()
 		
@@ -16169,7 +16169,7 @@ do
 	local Module84 = {}
 	Module84.__index = Module84
 
-	function Module84.new(p1) --[[ Line: 34210 ]]
+	function Module84.new(p1)
 		-- upvalues: Module84 (copy)
 		return (setmetatable({
 			props = if p1 == nil or p1.props == nil then nil else p1.props,
@@ -16178,7 +16178,7 @@ do
 		}, Module84))
 	end
 
-	function Module84:encode() --[[ Line: 34218 ]]
+	function Module84:encode()
 		-- upvalues: ProtoModule (copy)
 		local Buf = buffer.create(0)
 		local Count = 0
@@ -16204,7 +16204,7 @@ do
 		return Buf1
 	end
 
-	function Module84.decode(Buf) --[[ Line: 34245 ]]
+	function Module84.decode(Buf)
 		-- upvalues: Module84 (copy), ProtoModule (copy), t (copy), ComponentSharedModule (copy)
 		local NewModule = Module84.new()
 		local v62 = 0
@@ -16245,7 +16245,7 @@ do
 		return NewModule
 	end
 
-	function Module84:jsonEncode() --[[ Line: 34298 ]]
+	function Module84:jsonEncode()
 		local t = {}
 		
 		if self.props ~= nil then
@@ -16260,7 +16260,7 @@ do
 		return t
 	end
 
-	function Module84:jsonDecode() --[[ Line: 34316 ]]
+	function Module84:jsonDecode()
 		-- upvalues: Module84 (copy), t (copy), ComponentSharedModule (copy)
 		local NewModule = Module84.new()
 		
@@ -16288,7 +16288,7 @@ do
 	local Module85 = {}
 	Module85.__index = Module85
 
-	function Module85.new(p1) --[[ Line: 34353 ]]
+	function Module85.new(p1)
 		-- upvalues: Module85 (copy)
 		return (setmetatable({
 			on_activated = if p1 == nil or p1.on_activated == nil then nil else p1.on_activated,
@@ -16322,7 +16322,7 @@ do
 		}, Module85))
 	end
 
-	function Module85:encode() --[[ Line: 34411 ]]
+	function Module85:encode()
 		-- upvalues: ProtoModule (copy)
 		local Buf = buffer.create(0)
 		local Count = 0
@@ -16473,7 +16473,7 @@ do
 		return Buf1
 	end
 
-	function Module85.decode(Buf) --[[ Line: 34588 ]]
+	function Module85.decode(Buf)
 		-- upvalues: Module85 (copy), ProtoModule (copy), ActionsModule (copy), t (copy), PropTypesModule (copy), PropTypesEngineModule (copy)
 		local NewModule = Module85.new()
 		local v63 = 0
@@ -16614,7 +16614,7 @@ do
 		return NewModule
 	end
 
-	function Module85:jsonEncode() --[[ Line: 34775 ]]
+	function Module85:jsonEncode()
 		local t = {}
 		
 		if self.on_activated ~= nil then
@@ -16704,7 +16704,7 @@ do
 		return t
 	end
 
-	function Module85:jsonDecode() --[[ Line: 34893 ]]
+	function Module85:jsonDecode()
 		-- upvalues: Module85 (copy), ActionsModule (copy), t (copy), PropTypesModule (copy), PropTypesEngineModule (copy)
 		local NewModule = Module85.new()
 		
@@ -16870,7 +16870,7 @@ do
 	local Module86 = {}
 	Module86.__index = Module86
 
-	function Module86.new(p1) --[[ Line: 35167 ]]
+	function Module86.new(p1)
 		-- upvalues: Module86 (copy)
 		return (setmetatable({
 			title_heading_level = if p1 == nil or p1.title_heading_level == nil then nil else p1.title_heading_level,
@@ -16881,7 +16881,7 @@ do
 		}, Module86))
 	end
 
-	function Module86:encode() --[[ Line: 35185 ]]
+	function Module86:encode()
 		-- upvalues: ProtoModule (copy)
 		local Buf = buffer.create(0)
 		local Count = 0
@@ -16917,7 +16917,7 @@ do
 		return Buf1
 	end
 
-	function Module86.decode(Buf) --[[ Line: 35224 ]]
+	function Module86.decode(Buf)
 		-- upvalues: Module86 (copy), ProtoModule (copy), PropTypesModule (copy)
 		local NewModule = Module86.new()
 		local v64 = 0
@@ -16966,7 +16966,7 @@ do
 		return NewModule
 	end
 
-	function Module86:jsonEncode() --[[ Line: 35290 ]]
+	function Module86:jsonEncode()
 		local t = {}
 		
 		if self.title_heading_level ~= nil then
@@ -16987,7 +16987,7 @@ do
 		return t
 	end
 
-	function Module86:jsonDecode() --[[ Line: 35316 ]]
+	function Module86:jsonDecode()
 		-- upvalues: Module86 (copy), PropTypesModule (copy)
 		local NewModule = Module86.new()
 		
@@ -17035,7 +17035,7 @@ do
 	local Module87 = {}
 	Module87.__index = Module87
 
-	function Module87.new(p1) --[[ Line: 35388 ]]
+	function Module87.new(p1)
 		-- upvalues: Module87 (copy)
 		return (setmetatable({
 			props = if p1 == nil or p1.props == nil then nil else p1.props,
@@ -17043,7 +17043,7 @@ do
 		}, Module87))
 	end
 
-	function Module87:encode() --[[ Line: 35397 ]]
+	function Module87:encode()
 		-- upvalues: ProtoModule (copy)
 		local Buf = buffer.create(0)
 		local Count = 0
@@ -17064,7 +17064,7 @@ do
 		return Buf1
 	end
 
-	function Module87.decode(Buf) --[[ Line: 35418 ]]
+	function Module87.decode(Buf)
 		-- upvalues: Module87 (copy), ProtoModule (copy), t (copy), ComponentSharedModule (copy)
 		local NewModule = Module87.new()
 		local v64 = 0
@@ -17101,7 +17101,7 @@ do
 		return NewModule
 	end
 
-	function Module87:jsonEncode() --[[ Line: 35466 ]]
+	function Module87:jsonEncode()
 		local t = {}
 		
 		if self.props ~= nil then
@@ -17113,7 +17113,7 @@ do
 		return t
 	end
 
-	function Module87:jsonDecode() --[[ Line: 35480 ]]
+	function Module87:jsonDecode()
 		-- upvalues: Module87 (copy), t (copy), ComponentSharedModule (copy)
 		local NewModule = Module87.new()
 		
@@ -17135,7 +17135,7 @@ do
 	local Module88 = {}
 	Module88.__index = Module88
 
-	function Module88.new(p1) --[[ Line: 35511 ]]
+	function Module88.new(p1)
 		-- upvalues: Module88 (copy)
 		return (setmetatable({
 			anchor_point = if p1 == nil or p1.anchor_point == nil then nil else p1.anchor_point,
@@ -17152,7 +17152,7 @@ do
 		}, Module88))
 	end
 
-	function Module88:encode() --[[ Line: 35529 ]]
+	function Module88:encode()
 		-- upvalues: ProtoModule (copy)
 		local Buf = buffer.create(0)
 		local Count = 0
@@ -17218,7 +17218,7 @@ do
 		return Buf1
 	end
 
-	function Module88.decode(Buf) --[[ Line: 35604 ]]
+	function Module88.decode(Buf)
 		-- upvalues: Module88 (copy), ProtoModule (copy), PropTypesModule (copy), ActionsModule (copy)
 		local NewModule = Module88.new()
 		local v65 = 0
@@ -17291,7 +17291,7 @@ do
 		return NewModule
 	end
 
-	function Module88:jsonEncode() --[[ Line: 35697 ]]
+	function Module88:jsonEncode()
 		local t = {}
 		
 		if self.anchor_point ~= nil then
@@ -17330,7 +17330,7 @@ do
 		return t
 	end
 
-	function Module88:jsonDecode() --[[ Line: 35747 ]]
+	function Module88:jsonDecode()
 		-- upvalues: Module88 (copy), PropTypesModule (copy), ActionsModule (copy)
 		local NewModule = Module88.new()
 		
@@ -17406,7 +17406,7 @@ do
 	local Module89 = {}
 	Module89.__index = Module89
 
-	function Module89.new(p1) --[[ Line: 35858 ]]
+	function Module89.new(p1)
 		-- upvalues: Module89 (copy)
 		return (setmetatable({
 			props = if p1 == nil or p1.props == nil then nil else p1.props,
@@ -17414,7 +17414,7 @@ do
 		}, Module89))
 	end
 
-	function Module89:encode() --[[ Line: 35865 ]]
+	function Module89:encode()
 		-- upvalues: ProtoModule (copy)
 		local Buf = buffer.create(0)
 		local Count = 0
@@ -17435,7 +17435,7 @@ do
 		return Buf1
 	end
 
-	function Module89.decode(Buf) --[[ Line: 35886 ]]
+	function Module89.decode(Buf)
 		-- upvalues: Module89 (copy), ProtoModule (copy), t (copy), ComponentSharedModule (copy)
 		local NewModule = Module89.new()
 		local v66 = 0
@@ -17472,7 +17472,7 @@ do
 		return NewModule
 	end
 
-	function Module89:jsonEncode() --[[ Line: 35934 ]]
+	function Module89:jsonEncode()
 		local t = {}
 		
 		if self.props ~= nil then
@@ -17484,7 +17484,7 @@ do
 		return t
 	end
 
-	function Module89:jsonDecode() --[[ Line: 35948 ]]
+	function Module89:jsonDecode()
 		-- upvalues: Module89 (copy), t (copy), ComponentSharedModule (copy)
 		local NewModule = Module89.new()
 		
@@ -17508,7 +17508,7 @@ do
 	local Module90 = {}
 	Module90.__index = Module90
 
-	function Module90.new(p1) --[[ Line: 35977 ]]
+	function Module90.new(p1)
 		-- upvalues: Module90 (copy)
 		return (setmetatable({
 			background_component = if p1 == nil or p1.background_component == nil then nil else p1.background_component,
@@ -17543,7 +17543,7 @@ do
 		}, Module90))
 	end
 
-	function Module90:encode() --[[ Line: 36037 ]]
+	function Module90:encode()
 		-- upvalues: ProtoModule (copy)
 		local Buf = buffer.create(0)
 		local Count = 0
@@ -17699,7 +17699,7 @@ do
 		return Buf1
 	end
 
-	function Module90.decode(Buf) --[[ Line: 36220 ]]
+	function Module90.decode(Buf)
 		-- upvalues: Module90 (copy), ProtoModule (copy), t (copy), PropTypesModule (copy), ActionsModule (copy)
 		local NewModule = Module90.new()
 		local v66 = 0
@@ -17844,7 +17844,7 @@ do
 		return NewModule
 	end
 
-	function Module90:jsonEncode() --[[ Line: 36413 ]]
+	function Module90:jsonEncode()
 		local t = {}
 		
 		if self.background_component ~= nil then
@@ -17937,7 +17937,7 @@ do
 		return t
 	end
 
-	function Module90:jsonDecode() --[[ Line: 36535 ]]
+	function Module90:jsonDecode()
 		-- upvalues: Module90 (copy), t (copy), PropTypesModule (copy), ActionsModule (copy)
 		local NewModule = Module90.new()
 		
@@ -18118,7 +18118,7 @@ do
 	local Module91 = {}
 	Module91.__index = Module91
 
-	function Module91.new(p1) --[[ Line: 36815 ]]
+	function Module91.new(p1)
 		-- upvalues: Module91 (copy)
 		return (setmetatable({
 			props = if p1 == nil or p1.props == nil then nil else p1.props,
@@ -18126,7 +18126,7 @@ do
 		}, Module91))
 	end
 
-	function Module91:encode() --[[ Line: 36822 ]]
+	function Module91:encode()
 		-- upvalues: ProtoModule (copy)
 		local Buf = buffer.create(0)
 		local Count = 0
@@ -18147,7 +18147,7 @@ do
 		return Buf1
 	end
 
-	function Module91.decode(Buf) --[[ Line: 36843 ]]
+	function Module91.decode(Buf)
 		-- upvalues: Module91 (copy), ProtoModule (copy), t (copy), ComponentSharedModule (copy)
 		local NewModule = Module91.new()
 		local v67 = 0
@@ -18184,7 +18184,7 @@ do
 		return NewModule
 	end
 
-	function Module91:jsonEncode() --[[ Line: 36891 ]]
+	function Module91:jsonEncode()
 		local t = {}
 		
 		if self.props ~= nil then
@@ -18196,7 +18196,7 @@ do
 		return t
 	end
 
-	function Module91:jsonDecode() --[[ Line: 36905 ]]
+	function Module91:jsonDecode()
 		-- upvalues: Module91 (copy), t (copy), ComponentSharedModule (copy)
 		local NewModule = Module91.new()
 		
@@ -18218,7 +18218,7 @@ do
 	local Module92 = {}
 	Module92.__index = Module92
 
-	function Module92.new(p1) --[[ Line: 36934 ]]
+	function Module92.new(p1)
 		-- upvalues: Module92 (copy)
 		return (setmetatable({
 			cta_button = if p1 == nil or p1.cta_button == nil then nil else p1.cta_button,
@@ -18231,7 +18231,7 @@ do
 		}, Module92))
 	end
 
-	function Module92:encode() --[[ Line: 36950 ]]
+	function Module92:encode()
 		-- upvalues: ProtoModule (copy)
 		local Buf = buffer.create(0)
 		local Count = 0
@@ -18277,7 +18277,7 @@ do
 		return Buf1
 	end
 
-	function Module92.decode(Buf) --[[ Line: 37001 ]]
+	function Module92.decode(Buf)
 		-- upvalues: Module92 (copy), ProtoModule (copy), t (copy), PropTypesModule (copy)
 		local NewModule = Module92.new()
 		local v68 = 0
@@ -18334,7 +18334,7 @@ do
 		return NewModule
 	end
 
-	function Module92:jsonEncode() --[[ Line: 37074 ]]
+	function Module92:jsonEncode()
 		local t = {}
 		
 		if self.cta_button ~= nil then
@@ -18361,7 +18361,7 @@ do
 		return t
 	end
 
-	function Module92:jsonDecode() --[[ Line: 37108 ]]
+	function Module92:jsonDecode()
 		-- upvalues: Module92 (copy), t (copy), PropTypesModule (copy)
 		local NewModule = Module92.new()
 		
@@ -18418,7 +18418,7 @@ do
 	local Module93 = {}
 	Module93.__index = Module93
 
-	function Module93.new(p1) --[[ Line: 37182 ]]
+	function Module93.new(p1)
 		-- upvalues: Module93 (copy)
 		return (setmetatable({
 			props = if p1 == nil or p1.props == nil then nil else p1.props,
@@ -18426,7 +18426,7 @@ do
 		}, Module93))
 	end
 
-	function Module93:encode() --[[ Line: 37189 ]]
+	function Module93:encode()
 		-- upvalues: ProtoModule (copy)
 		local Buf = buffer.create(0)
 		local Count = 0
@@ -18447,7 +18447,7 @@ do
 		return Buf1
 	end
 
-	function Module93.decode(Buf) --[[ Line: 37210 ]]
+	function Module93.decode(Buf)
 		-- upvalues: Module93 (copy), ProtoModule (copy), t (copy), ComponentSharedModule (copy)
 		local NewModule = Module93.new()
 		local v68 = 0
@@ -18484,7 +18484,7 @@ do
 		return NewModule
 	end
 
-	function Module93:jsonEncode() --[[ Line: 37258 ]]
+	function Module93:jsonEncode()
 		local t = {}
 		
 		if self.props ~= nil then
@@ -18496,7 +18496,7 @@ do
 		return t
 	end
 
-	function Module93:jsonDecode() --[[ Line: 37272 ]]
+	function Module93:jsonDecode()
 		-- upvalues: Module93 (copy), t (copy), ComponentSharedModule (copy)
 		local NewModule = Module93.new()
 		
@@ -18518,7 +18518,7 @@ do
 	local Module94 = {}
 	Module94.__index = Module94
 
-	function Module94.new(p1) --[[ Line: 37301 ]]
+	function Module94.new(p1)
 		-- upvalues: Module94 (copy)
 		return (setmetatable({
 			universe_id = if p1 == nil or p1.universe_id == nil then nil else p1.universe_id,
@@ -18526,7 +18526,7 @@ do
 		}, Module94))
 	end
 
-	function Module94:encode() --[[ Line: 37308 ]]
+	function Module94:encode()
 		-- upvalues: ProtoModule (copy)
 		local Buf = buffer.create(0)
 		local Count = 0
@@ -18547,7 +18547,7 @@ do
 		return Buf1
 	end
 
-	function Module94.decode(Buf) --[[ Line: 37329 ]]
+	function Module94.decode(Buf)
 		-- upvalues: Module94 (copy), ProtoModule (copy), PropTypesModule (copy)
 		local NewModule = Module94.new()
 		local v69 = 0
@@ -18584,7 +18584,7 @@ do
 		return NewModule
 	end
 
-	function Module94:jsonEncode() --[[ Line: 37377 ]]
+	function Module94:jsonEncode()
 		local t = {}
 		
 		if self.universe_id ~= nil then
@@ -18596,7 +18596,7 @@ do
 		return t
 	end
 
-	function Module94:jsonDecode() --[[ Line: 37391 ]]
+	function Module94:jsonDecode()
 		-- upvalues: Module94 (copy), PropTypesModule (copy)
 		local NewModule = Module94.new()
 		
@@ -18624,7 +18624,7 @@ do
 	local Module95 = {}
 	Module95.__index = Module95
 
-	function Module95.new(p1) --[[ Line: 37428 ]]
+	function Module95.new(p1)
 		-- upvalues: Module95 (copy)
 		return (setmetatable({
 			props = if p1 == nil or p1.props == nil then nil else p1.props,
@@ -18632,7 +18632,7 @@ do
 		}, Module95))
 	end
 
-	function Module95:encode() --[[ Line: 37435 ]]
+	function Module95:encode()
 		-- upvalues: ProtoModule (copy)
 		local Buf = buffer.create(0)
 		local Count = 0
@@ -18653,7 +18653,7 @@ do
 		return Buf1
 	end
 
-	function Module95.decode(Buf) --[[ Line: 37456 ]]
+	function Module95.decode(Buf)
 		-- upvalues: Module95 (copy), ProtoModule (copy), t (copy), ComponentSharedModule (copy)
 		local NewModule = Module95.new()
 		local v70 = 0
@@ -18690,7 +18690,7 @@ do
 		return NewModule
 	end
 
-	function Module95:jsonEncode() --[[ Line: 37504 ]]
+	function Module95:jsonEncode()
 		local t = {}
 		
 		if self.props ~= nil then
@@ -18702,7 +18702,7 @@ do
 		return t
 	end
 
-	function Module95:jsonDecode() --[[ Line: 37518 ]]
+	function Module95:jsonDecode()
 		-- upvalues: Module95 (copy), t (copy), ComponentSharedModule (copy)
 		local NewModule = Module95.new()
 		
@@ -18726,7 +18726,7 @@ do
 	local Module96 = {}
 	Module96.__index = Module96
 
-	function Module96.new(p1) --[[ Line: 37547 ]]
+	function Module96.new(p1)
 		-- upvalues: Module96 (copy)
 		return (setmetatable({
 			width = if p1 == nil or p1.width == nil then nil else p1.width,
@@ -18755,7 +18755,7 @@ do
 		}, Module96))
 	end
 
-	function Module96:encode() --[[ Line: 37593 ]]
+	function Module96:encode()
 		-- upvalues: ProtoModule (copy)
 		local Buf = buffer.create(0)
 		local Count = 0
@@ -18881,7 +18881,7 @@ do
 		return Buf1
 	end
 
-	function Module96.decode(Buf) --[[ Line: 37740 ]]
+	function Module96.decode(Buf)
 		-- upvalues: Module96 (copy), ProtoModule (copy), PropTypesModule (copy)
 		local NewModule = Module96.new()
 		local v70 = 0
@@ -19002,7 +19002,7 @@ do
 		return NewModule
 	end
 
-	function Module96:jsonEncode() --[[ Line: 37901 ]]
+	function Module96:jsonEncode()
 		local t = {}
 		
 		if self.width ~= nil then
@@ -19077,7 +19077,7 @@ do
 		return t
 	end
 
-	function Module96:jsonDecode() --[[ Line: 37999 ]]
+	function Module96:jsonDecode()
 		-- upvalues: Module96 (copy), PropTypesModule (copy)
 		local NewModule = Module96.new()
 		
@@ -19222,7 +19222,7 @@ do
 	local Module97 = {}
 	Module97.__index = Module97
 
-	function Module97.new(p1) --[[ Line: 38239 ]]
+	function Module97.new(p1)
 		-- upvalues: Module97 (copy)
 		return (setmetatable({
 			props = if p1 == nil or p1.props == nil then nil else p1.props,
@@ -19230,7 +19230,7 @@ do
 		}, Module97))
 	end
 
-	function Module97:encode() --[[ Line: 38248 ]]
+	function Module97:encode()
 		-- upvalues: ProtoModule (copy)
 		local Buf = buffer.create(0)
 		local Count = 0
@@ -19251,7 +19251,7 @@ do
 		return Buf1
 	end
 
-	function Module97.decode(Buf) --[[ Line: 38269 ]]
+	function Module97.decode(Buf)
 		-- upvalues: Module97 (copy), ProtoModule (copy), t (copy), ComponentSharedModule (copy)
 		local NewModule = Module97.new()
 		local v71 = 0
@@ -19288,7 +19288,7 @@ do
 		return NewModule
 	end
 
-	function Module97:jsonEncode() --[[ Line: 38317 ]]
+	function Module97:jsonEncode()
 		local t = {}
 		
 		if self.props ~= nil then
@@ -19300,7 +19300,7 @@ do
 		return t
 	end
 
-	function Module97:jsonDecode() --[[ Line: 38331 ]]
+	function Module97:jsonDecode()
 		-- upvalues: Module97 (copy), t (copy), ComponentSharedModule (copy)
 		local NewModule = Module97.new()
 		
@@ -19322,7 +19322,7 @@ do
 	local Module98 = {}
 	Module98.__index = Module98
 
-	function Module98.new(p1) --[[ Line: 38360 ]]
+	function Module98.new(p1)
 		-- upvalues: Module98 (copy)
 		return (setmetatable({
 			automatic_size = if p1 == nil or p1.automatic_size == nil then nil else p1.automatic_size,
@@ -19350,7 +19350,7 @@ do
 		}, Module98))
 	end
 
-	function Module98:encode() --[[ Line: 38391 ]]
+	function Module98:encode()
 		-- upvalues: ProtoModule (copy)
 		local Buf = buffer.create(0)
 		local Count = 0
@@ -19471,7 +19471,7 @@ do
 		return Buf1
 	end
 
-	function Module98.decode(Buf) --[[ Line: 38532 ]]
+	function Module98.decode(Buf)
 		-- upvalues: Module98 (copy), ProtoModule (copy), PropTypesModule (copy), ActionsModule (copy)
 		local NewModule = Module98.new()
 		local v72 = 0
@@ -19588,7 +19588,7 @@ do
 		return NewModule
 	end
 
-	function Module98:jsonEncode() --[[ Line: 38682 ]]
+	function Module98:jsonEncode()
 		local t = {}
 		
 		if self.automatic_size ~= nil then
@@ -19660,7 +19660,7 @@ do
 		return t
 	end
 
-	function Module98:jsonDecode() --[[ Line: 38776 ]]
+	function Module98:jsonDecode()
 		-- upvalues: Module98 (copy), PropTypesModule (copy), ActionsModule (copy)
 		local NewModule = Module98.new()
 		
@@ -19792,7 +19792,7 @@ do
 	local Module99 = {}
 	Module99.__index = Module99
 
-	function Module99.new(p1) --[[ Line: 38971 ]]
+	function Module99.new(p1)
 		-- upvalues: Module99 (copy)
 		return (setmetatable({
 			props = if p1 == nil or p1.props == nil then nil else p1.props,
@@ -19800,7 +19800,7 @@ do
 		}, Module99))
 	end
 
-	function Module99:encode() --[[ Line: 38978 ]]
+	function Module99:encode()
 		-- upvalues: ProtoModule (copy)
 		local Buf = buffer.create(0)
 		local Count = 0
@@ -19821,7 +19821,7 @@ do
 		return Buf1
 	end
 
-	function Module99.decode(Buf) --[[ Line: 38999 ]]
+	function Module99.decode(Buf)
 		-- upvalues: Module99 (copy), ProtoModule (copy), t (copy), ComponentSharedModule (copy)
 		local NewModule = Module99.new()
 		local v72 = 0
@@ -19858,7 +19858,7 @@ do
 		return NewModule
 	end
 
-	function Module99:jsonEncode() --[[ Line: 39047 ]]
+	function Module99:jsonEncode()
 		local t = {}
 		
 		if self.props ~= nil then
@@ -19870,7 +19870,7 @@ do
 		return t
 	end
 
-	function Module99:jsonDecode() --[[ Line: 39061 ]]
+	function Module99:jsonDecode()
 		-- upvalues: Module99 (copy), t (copy), ComponentSharedModule (copy)
 		local NewModule = Module99.new()
 		
@@ -19892,7 +19892,7 @@ do
 	local Module100 = {}
 	Module100.__index = Module100
 
-	function Module100.new(p1) --[[ Line: 39090 ]]
+	function Module100.new(p1)
 		-- upvalues: Module100 (copy)
 		return (setmetatable({
 			collection_item_size = if p1 == nil or p1.collection_item_size == nil then nil else p1.collection_item_size,
@@ -19924,7 +19924,7 @@ do
 		}, Module100))
 	end
 
-	function Module100:encode() --[[ Line: 39154 ]]
+	function Module100:encode()
 		-- upvalues: ProtoModule (copy)
 		local Buf = buffer.create(0)
 		local Count = 0
@@ -20065,7 +20065,7 @@ do
 		return Buf1
 	end
 
-	function Module100.decode(Buf) --[[ Line: 39319 ]]
+	function Module100.decode(Buf)
 		-- upvalues: Module100 (copy), ProtoModule (copy), PropTypesModule (copy), t (copy), ActionsModule (copy)
 		local NewModule = Module100.new()
 		local v73 = 0
@@ -20198,7 +20198,7 @@ do
 		return NewModule
 	end
 
-	function Module100:jsonEncode() --[[ Line: 39501 ]]
+	function Module100:jsonEncode()
 		local t = {}
 		
 		if self.collection_item_size ~= nil then
@@ -20282,7 +20282,7 @@ do
 		return t
 	end
 
-	function Module100:jsonDecode() --[[ Line: 39611 ]]
+	function Module100:jsonDecode()
 		-- upvalues: Module100 (copy), PropTypesModule (copy), t (copy), ActionsModule (copy)
 		local NewModule = Module100.new()
 		
@@ -20445,7 +20445,7 @@ do
 	local Module101 = {}
 	Module101.__index = Module101
 
-	function Module101.new(p1) --[[ Line: 39876 ]]
+	function Module101.new(p1)
 		-- upvalues: Module101 (copy)
 		return (setmetatable({
 			props = if p1 == nil or p1.props == nil then nil else p1.props,
@@ -20453,7 +20453,7 @@ do
 		}, Module101))
 	end
 
-	function Module101:encode() --[[ Line: 39885 ]]
+	function Module101:encode()
 		-- upvalues: ProtoModule (copy)
 		local Buf = buffer.create(0)
 		local Count = 0
@@ -20474,7 +20474,7 @@ do
 		return Buf1
 	end
 
-	function Module101.decode(Buf) --[[ Line: 39906 ]]
+	function Module101.decode(Buf)
 		-- upvalues: Module101 (copy), ProtoModule (copy), t (copy), ComponentSharedModule (copy)
 		local NewModule = Module101.new()
 		local v74 = 0
@@ -20511,7 +20511,7 @@ do
 		return NewModule
 	end
 
-	function Module101:jsonEncode() --[[ Line: 39954 ]]
+	function Module101:jsonEncode()
 		local t = {}
 		
 		if self.props ~= nil then
@@ -20523,7 +20523,7 @@ do
 		return t
 	end
 
-	function Module101:jsonDecode() --[[ Line: 39968 ]]
+	function Module101:jsonDecode()
 		-- upvalues: Module101 (copy), t (copy), ComponentSharedModule (copy)
 		local NewModule = Module101.new()
 		
@@ -20547,7 +20547,7 @@ do
 	local Module102 = {}
 	Module102.__index = Module102
 
-	function Module102.new(p1) --[[ Line: 39999 ]]
+	function Module102.new(p1)
 		-- upvalues: Module102 (copy)
 		return (setmetatable({
 			collection_item_size = if p1 == nil or p1.collection_item_size == nil then nil else p1.collection_item_size,
@@ -20565,7 +20565,7 @@ do
 		}, Module102))
 	end
 
-	function Module102:encode() --[[ Line: 40026 ]]
+	function Module102:encode()
 		-- upvalues: ProtoModule (copy)
 		local Buf = buffer.create(0)
 		local Count = 0
@@ -20636,7 +20636,7 @@ do
 		return Buf1
 	end
 
-	function Module102.decode(Buf) --[[ Line: 40109 ]]
+	function Module102.decode(Buf)
 		-- upvalues: Module102 (copy), ProtoModule (copy), PropTypesModule (copy), t (copy)
 		local NewModule = Module102.new()
 		local v74 = 0
@@ -20713,7 +20713,7 @@ do
 		return NewModule
 	end
 
-	function Module102:jsonEncode() --[[ Line: 40213 ]]
+	function Module102:jsonEncode()
 		local t = {}
 		
 		if self.collection_item_size ~= nil then
@@ -20755,7 +20755,7 @@ do
 		return t
 	end
 
-	function Module102:jsonDecode() --[[ Line: 40269 ]]
+	function Module102:jsonDecode()
 		-- upvalues: Module102 (copy), PropTypesModule (copy), t (copy)
 		local NewModule = Module102.new()
 		
@@ -20837,7 +20837,7 @@ do
 	local Module103 = {}
 	Module103.__index = Module103
 
-	function Module103.new(p1) --[[ Line: 40395 ]]
+	function Module103.new(p1)
 		-- upvalues: Module103 (copy)
 		return (setmetatable({
 			props = if p1 == nil or p1.props == nil then nil else p1.props,
@@ -20845,7 +20845,7 @@ do
 		}, Module103))
 	end
 
-	function Module103:encode() --[[ Line: 40404 ]]
+	function Module103:encode()
 		-- upvalues: ProtoModule (copy)
 		local Buf = buffer.create(0)
 		local Count = 0
@@ -20866,7 +20866,7 @@ do
 		return Buf1
 	end
 
-	function Module103.decode(Buf) --[[ Line: 40425 ]]
+	function Module103.decode(Buf)
 		-- upvalues: Module103 (copy), ProtoModule (copy), t (copy), ComponentSharedModule (copy)
 		local NewModule = Module103.new()
 		local v75 = 0
@@ -20903,7 +20903,7 @@ do
 		return NewModule
 	end
 
-	function Module103:jsonEncode() --[[ Line: 40473 ]]
+	function Module103:jsonEncode()
 		local t = {}
 		
 		if self.props ~= nil then
@@ -20915,7 +20915,7 @@ do
 		return t
 	end
 
-	function Module103:jsonDecode() --[[ Line: 40487 ]]
+	function Module103:jsonDecode()
 		-- upvalues: Module103 (copy), t (copy), ComponentSharedModule (copy)
 		local NewModule = Module103.new()
 		
@@ -20937,7 +20937,7 @@ do
 	local Module104 = {}
 	Module104.__index = Module104
 
-	function Module104.new(p1) --[[ Line: 40516 ]]
+	function Module104.new(p1)
 		-- upvalues: Module104 (copy)
 		return (setmetatable({
 			title = if p1 == nil or p1.title == nil then nil else p1.title,
@@ -20956,7 +20956,7 @@ do
 		}, Module104))
 	end
 
-	function Module104:encode() --[[ Line: 40547 ]]
+	function Module104:encode()
 		-- upvalues: ProtoModule (copy)
 		local Buf = buffer.create(0)
 		local Count = 0
@@ -21032,7 +21032,7 @@ do
 		return Buf1
 	end
 
-	function Module104.decode(Buf) --[[ Line: 40634 ]]
+	function Module104.decode(Buf)
 		-- upvalues: Module104 (copy), ProtoModule (copy), PropTypesModule (copy), t (copy)
 		local NewModule = Module104.new()
 		local v76 = 0
@@ -21113,7 +21113,7 @@ do
 		return NewModule
 	end
 
-	function Module104:jsonEncode() --[[ Line: 40742 ]]
+	function Module104:jsonEncode()
 		local t = {}
 		
 		if self.title ~= nil then
@@ -21158,7 +21158,7 @@ do
 		return t
 	end
 
-	function Module104:jsonDecode() --[[ Line: 40800 ]]
+	function Module104:jsonDecode()
 		-- upvalues: Module104 (copy), PropTypesModule (copy), t (copy)
 		local NewModule = Module104.new()
 		
@@ -21242,7 +21242,7 @@ do
 	local Module105 = {}
 	Module105.__index = Module105
 
-	function Module105.new(p1) --[[ Line: 40930 ]]
+	function Module105.new(p1)
 		-- upvalues: Module105 (copy)
 		return (setmetatable({
 			props = if p1 == nil or p1.props == nil then nil else p1.props,
@@ -21250,7 +21250,7 @@ do
 		}, Module105))
 	end
 
-	function Module105:encode() --[[ Line: 40939 ]]
+	function Module105:encode()
 		-- upvalues: ProtoModule (copy)
 		local Buf = buffer.create(0)
 		local Count = 0
@@ -21271,7 +21271,7 @@ do
 		return Buf1
 	end
 
-	function Module105.decode(Buf) --[[ Line: 40960 ]]
+	function Module105.decode(Buf)
 		-- upvalues: Module105 (copy), ProtoModule (copy), t (copy), ComponentSharedModule (copy)
 		local NewModule = Module105.new()
 		local v76 = 0
@@ -21308,7 +21308,7 @@ do
 		return NewModule
 	end
 
-	function Module105:jsonEncode() --[[ Line: 41008 ]]
+	function Module105:jsonEncode()
 		local t = {}
 		
 		if self.props ~= nil then
@@ -21320,7 +21320,7 @@ do
 		return t
 	end
 
-	function Module105:jsonDecode() --[[ Line: 41022 ]]
+	function Module105:jsonDecode()
 		-- upvalues: Module105 (copy), t (copy), ComponentSharedModule (copy)
 		local NewModule = Module105.new()
 		
@@ -21342,7 +21342,7 @@ do
 	local Module106 = {}
 	Module106.__index = Module106
 
-	function Module106.new(p1) --[[ Line: 41051 ]]
+	function Module106.new(p1)
 		-- upvalues: Module106 (copy)
 		return (setmetatable({
 			title = if p1 == nil or p1.title == nil then nil else p1.title,
@@ -21364,7 +21364,7 @@ do
 		}, Module106))
 	end
 
-	function Module106:encode() --[[ Line: 41094 ]]
+	function Module106:encode()
 		-- upvalues: ProtoModule (copy)
 		local Buf = buffer.create(0)
 		local Count = 0
@@ -21455,7 +21455,7 @@ do
 		return Buf1
 	end
 
-	function Module106.decode(Buf) --[[ Line: 41199 ]]
+	function Module106.decode(Buf)
 		-- upvalues: Module106 (copy), ProtoModule (copy), PropTypesModule (copy), ActionsModule (copy), t (copy)
 		local NewModule = Module106.new()
 		local v77 = 0
@@ -21548,7 +21548,7 @@ do
 		return NewModule
 	end
 
-	function Module106:jsonEncode() --[[ Line: 41323 ]]
+	function Module106:jsonEncode()
 		local t = {}
 		
 		if self.title ~= nil then
@@ -21602,7 +21602,7 @@ do
 		return t
 	end
 
-	function Module106:jsonDecode() --[[ Line: 41394 ]]
+	function Module106:jsonDecode()
 		-- upvalues: Module106 (copy), PropTypesModule (copy), ActionsModule (copy), t (copy)
 		local NewModule = Module106.new()
 		
@@ -21708,7 +21708,7 @@ do
 	local Module107 = {}
 	Module107.__index = Module107
 
-	function Module107.new(p1) --[[ Line: 41569 ]]
+	function Module107.new(p1)
 		-- upvalues: Module107 (copy)
 		return (setmetatable({
 			props = if p1 == nil or p1.props == nil then nil else p1.props,
@@ -21716,7 +21716,7 @@ do
 		}, Module107))
 	end
 
-	function Module107:encode() --[[ Line: 41576 ]]
+	function Module107:encode()
 		-- upvalues: ProtoModule (copy)
 		local Buf = buffer.create(0)
 		local Count = 0
@@ -21737,7 +21737,7 @@ do
 		return Buf1
 	end
 
-	function Module107.decode(Buf) --[[ Line: 41597 ]]
+	function Module107.decode(Buf)
 		-- upvalues: Module107 (copy), ProtoModule (copy), t (copy), ComponentSharedModule (copy)
 		local NewModule = Module107.new()
 		local v78 = 0
@@ -21774,7 +21774,7 @@ do
 		return NewModule
 	end
 
-	function Module107:jsonEncode() --[[ Line: 41645 ]]
+	function Module107:jsonEncode()
 		local t = {}
 		
 		if self.props ~= nil then
@@ -21786,7 +21786,7 @@ do
 		return t
 	end
 
-	function Module107:jsonDecode() --[[ Line: 41659 ]]
+	function Module107:jsonDecode()
 		-- upvalues: Module107 (copy), t (copy), ComponentSharedModule (copy)
 		local NewModule = Module107.new()
 		
@@ -21810,7 +21810,7 @@ do
 	local Module108 = {}
 	Module108.__index = Module108
 
-	function Module108.new(p1) --[[ Line: 41688 ]]
+	function Module108.new(p1)
 		-- upvalues: Module108 (copy)
 		return (setmetatable({
 			anchor_point = if p1 == nil or p1.anchor_point == nil then nil else p1.anchor_point,
@@ -21839,7 +21839,7 @@ do
 		}, Module108))
 	end
 
-	function Module108:encode() --[[ Line: 41751 ]]
+	function Module108:encode()
 		-- upvalues: ProtoModule (copy)
 		local Buf = buffer.create(0)
 		local Count = 0
@@ -21965,7 +21965,7 @@ do
 		return Buf1
 	end
 
-	function Module108.decode(Buf) --[[ Line: 41898 ]]
+	function Module108.decode(Buf)
 		-- upvalues: Module108 (copy), ProtoModule (copy), PropTypesModule (copy), t (copy), ActionsModule (copy)
 		local NewModule = Module108.new()
 		local v78 = 0
@@ -22086,7 +22086,7 @@ do
 		return NewModule
 	end
 
-	function Module108:jsonEncode() --[[ Line: 42064 ]]
+	function Module108:jsonEncode()
 		local t = {}
 		
 		if self.anchor_point ~= nil then
@@ -22161,7 +22161,7 @@ do
 		return t
 	end
 
-	function Module108:jsonDecode() --[[ Line: 42162 ]]
+	function Module108:jsonDecode()
 		-- upvalues: Module108 (copy), PropTypesModule (copy), t (copy), ActionsModule (copy)
 		local NewModule = Module108.new()
 		
@@ -22306,7 +22306,7 @@ do
 	local Module109 = {}
 	Module109.__index = Module109
 
-	function Module109.new(p1) --[[ Line: 42393 ]]
+	function Module109.new(p1)
 		-- upvalues: Module109 (copy)
 		return (setmetatable({
 			props = if p1 == nil or p1.props == nil then nil else p1.props,
@@ -22314,7 +22314,7 @@ do
 		}, Module109))
 	end
 
-	function Module109:encode() --[[ Line: 42402 ]]
+	function Module109:encode()
 		-- upvalues: ProtoModule (copy)
 		local Buf = buffer.create(0)
 		local Count = 0
@@ -22335,7 +22335,7 @@ do
 		return Buf1
 	end
 
-	function Module109.decode(Buf) --[[ Line: 42423 ]]
+	function Module109.decode(Buf)
 		-- upvalues: Module109 (copy), ProtoModule (copy), t (copy), ComponentSharedModule (copy)
 		local NewModule = Module109.new()
 		local v79 = 0
@@ -22372,7 +22372,7 @@ do
 		return NewModule
 	end
 
-	function Module109:jsonEncode() --[[ Line: 42471 ]]
+	function Module109:jsonEncode()
 		local t = {}
 		
 		if self.props ~= nil then
@@ -22384,7 +22384,7 @@ do
 		return t
 	end
 
-	function Module109:jsonDecode() --[[ Line: 42485 ]]
+	function Module109:jsonDecode()
 		-- upvalues: Module109 (copy), t (copy), ComponentSharedModule (copy)
 		local NewModule = Module109.new()
 		
@@ -22406,14 +22406,14 @@ do
 	local Module110 = {}
 	Module110.__index = Module110
 
-	function Module110.new(p1) --[[ Line: 42516 ]]
+	function Module110.new(p1)
 		-- upvalues: Module110 (copy)
 		return (setmetatable({
 			cta_component = if p1 == nil or p1.cta_component == nil then nil else p1.cta_component
 		}, Module110))
 	end
 
-	function Module110:encode() --[[ Line: 42524 ]]
+	function Module110:encode()
 		-- upvalues: ProtoModule (copy)
 		local Buf = buffer.create(0)
 		local Count = 0
@@ -22429,7 +22429,7 @@ do
 		return Buf1
 	end
 
-	function Module110.decode(Buf) --[[ Line: 42539 ]]
+	function Module110.decode(Buf)
 		-- upvalues: Module110 (copy), ProtoModule (copy), t (copy)
 		local NewModule = Module110.new()
 		local v80 = 0
@@ -22462,7 +22462,7 @@ do
 		return NewModule
 	end
 
-	function Module110:jsonEncode() --[[ Line: 42582 ]]
+	function Module110:jsonEncode()
 		local t = {}
 		
 		if self.cta_component ~= nil then
@@ -22471,7 +22471,7 @@ do
 		return t
 	end
 
-	function Module110:jsonDecode() --[[ Line: 42592 ]]
+	function Module110:jsonDecode()
 		-- upvalues: Module110 (copy), t (copy)
 		local NewModule = Module110.new()
 		
@@ -22495,7 +22495,7 @@ do
 	local Module111 = {}
 	Module111.__index = Module111
 
-	function Module111.new(p1) --[[ Line: 42622 ]]
+	function Module111.new(p1)
 		-- upvalues: Module111 (copy)
 		return (setmetatable({
 			props = if p1 == nil or p1.props == nil then nil else p1.props,
@@ -22503,7 +22503,7 @@ do
 		}, Module111))
 	end
 
-	function Module111:encode() --[[ Line: 42631 ]]
+	function Module111:encode()
 		-- upvalues: ProtoModule (copy)
 		local Buf = buffer.create(0)
 		local Count = 0
@@ -22524,7 +22524,7 @@ do
 		return Buf1
 	end
 
-	function Module111.decode(Buf) --[[ Line: 42652 ]]
+	function Module111.decode(Buf)
 		-- upvalues: Module111 (copy), ProtoModule (copy), t (copy), ComponentSharedModule (copy)
 		local NewModule = Module111.new()
 		local v80 = 0
@@ -22561,7 +22561,7 @@ do
 		return NewModule
 	end
 
-	function Module111:jsonEncode() --[[ Line: 42700 ]]
+	function Module111:jsonEncode()
 		local t = {}
 		
 		if self.props ~= nil then
@@ -22573,7 +22573,7 @@ do
 		return t
 	end
 
-	function Module111:jsonDecode() --[[ Line: 42714 ]]
+	function Module111:jsonDecode()
 		-- upvalues: Module111 (copy), t (copy), ComponentSharedModule (copy)
 		local NewModule = Module111.new()
 		
@@ -22595,7 +22595,7 @@ do
 	local Module112 = {}
 	Module112.__index = Module112
 
-	function Module112.new(p1) --[[ Line: 42743 ]]
+	function Module112.new(p1)
 		-- upvalues: Module112 (copy)
 		return (setmetatable({
 			automatic_size = if p1 == nil or p1.automatic_size == nil then nil else p1.automatic_size,
@@ -22608,7 +22608,7 @@ do
 		}, Module112))
 	end
 
-	function Module112:encode() --[[ Line: 42761 ]]
+	function Module112:encode()
 		-- upvalues: ProtoModule (copy)
 		local Buf = buffer.create(0)
 		local Count = 0
@@ -22654,7 +22654,7 @@ do
 		return Buf1
 	end
 
-	function Module112.decode(Buf) --[[ Line: 42812 ]]
+	function Module112.decode(Buf)
 		-- upvalues: Module112 (copy), ProtoModule (copy), PropTypesModule (copy), t (copy)
 		local NewModule = Module112.new()
 		local v81 = 0
@@ -22711,7 +22711,7 @@ do
 		return NewModule
 	end
 
-	function Module112:jsonEncode() --[[ Line: 42887 ]]
+	function Module112:jsonEncode()
 		local t = {}
 		
 		if self.automatic_size ~= nil then
@@ -22738,7 +22738,7 @@ do
 		return t
 	end
 
-	function Module112:jsonDecode() --[[ Line: 42921 ]]
+	function Module112:jsonDecode()
 		-- upvalues: Module112 (copy), PropTypesModule (copy), t (copy)
 		local NewModule = Module112.new()
 		
@@ -22787,7 +22787,7 @@ do
 	local Module113 = {}
 	Module113.__index = Module113
 
-	function Module113.new(p1) --[[ Line: 42995 ]]
+	function Module113.new(p1)
 		-- upvalues: Module113 (copy)
 		return (setmetatable({
 			props = if p1 == nil or p1.props == nil then nil else p1.props,
@@ -22795,7 +22795,7 @@ do
 		}, Module113))
 	end
 
-	function Module113:encode() --[[ Line: 43002 ]]
+	function Module113:encode()
 		-- upvalues: ProtoModule (copy)
 		local Buf = buffer.create(0)
 		local Count = 0
@@ -22816,7 +22816,7 @@ do
 		return Buf1
 	end
 
-	function Module113.decode(Buf) --[[ Line: 43023 ]]
+	function Module113.decode(Buf)
 		-- upvalues: Module113 (copy), ProtoModule (copy), t (copy), ComponentSharedModule (copy)
 		local NewModule = Module113.new()
 		local v82 = 0
@@ -22853,7 +22853,7 @@ do
 		return NewModule
 	end
 
-	function Module113:jsonEncode() --[[ Line: 43071 ]]
+	function Module113:jsonEncode()
 		local t = {}
 		
 		if self.props ~= nil then
@@ -22865,7 +22865,7 @@ do
 		return t
 	end
 
-	function Module113:jsonDecode() --[[ Line: 43085 ]]
+	function Module113:jsonDecode()
 		-- upvalues: Module113 (copy), t (copy), ComponentSharedModule (copy)
 		local NewModule = Module113.new()
 		
@@ -22889,7 +22889,7 @@ do
 	local Module114 = {}
 	Module114.__index = Module114
 
-	function Module114.new(p1) --[[ Line: 43114 ]]
+	function Module114.new(p1)
 		-- upvalues: Module114 (copy)
 		return (setmetatable({
 			layout_order = if p1 == nil or p1.layout_order == nil then nil else p1.layout_order,
@@ -22900,7 +22900,7 @@ do
 		}, Module114))
 	end
 
-	function Module114:encode() --[[ Line: 43124 ]]
+	function Module114:encode()
 		-- upvalues: ProtoModule (copy)
 		local Buf = buffer.create(0)
 		local Count = 0
@@ -22936,7 +22936,7 @@ do
 		return Buf1
 	end
 
-	function Module114.decode(Buf) --[[ Line: 43163 ]]
+	function Module114.decode(Buf)
 		-- upvalues: Module114 (copy), ProtoModule (copy), PropTypesModule (copy), ActionsModule (copy)
 		local NewModule = Module114.new()
 		local v82 = 0
@@ -22985,7 +22985,7 @@ do
 		return NewModule
 	end
 
-	function Module114:jsonEncode() --[[ Line: 43226 ]]
+	function Module114:jsonEncode()
 		local t = {}
 		
 		if self.layout_order ~= nil then
@@ -23006,7 +23006,7 @@ do
 		return t
 	end
 
-	function Module114:jsonDecode() --[[ Line: 43252 ]]
+	function Module114:jsonDecode()
 		-- upvalues: Module114 (copy), PropTypesModule (copy), ActionsModule (copy)
 		local NewModule = Module114.new()
 		
@@ -23043,7 +23043,7 @@ do
 	local Module115 = {}
 	Module115.__index = Module115
 
-	function Module115.new(p1) --[[ Line: 43302 ]]
+	function Module115.new(p1)
 		-- upvalues: Module115 (copy)
 		return (setmetatable({
 			props = if p1 == nil or p1.props == nil then nil else p1.props,
@@ -23051,7 +23051,7 @@ do
 		}, Module115))
 	end
 
-	function Module115:encode() --[[ Line: 43309 ]]
+	function Module115:encode()
 		-- upvalues: ProtoModule (copy)
 		local Buf = buffer.create(0)
 		local Count = 0
@@ -23072,7 +23072,7 @@ do
 		return Buf1
 	end
 
-	function Module115.decode(Buf) --[[ Line: 43330 ]]
+	function Module115.decode(Buf)
 		-- upvalues: Module115 (copy), ProtoModule (copy), t (copy), ComponentSharedModule (copy)
 		local NewModule = Module115.new()
 		local v83 = 0
@@ -23109,7 +23109,7 @@ do
 		return NewModule
 	end
 
-	function Module115:jsonEncode() --[[ Line: 43378 ]]
+	function Module115:jsonEncode()
 		local t = {}
 		
 		if self.props ~= nil then
@@ -23121,7 +23121,7 @@ do
 		return t
 	end
 
-	function Module115:jsonDecode() --[[ Line: 43392 ]]
+	function Module115:jsonDecode()
 		-- upvalues: Module115 (copy), t (copy), ComponentSharedModule (copy)
 		local NewModule = Module115.new()
 		
@@ -23143,14 +23143,14 @@ do
 	local Module116 = {}
 	Module116.__index = Module116
 
-	function Module116.new(p1) --[[ Line: 43421 ]]
+	function Module116.new(p1)
 		-- upvalues: Module116 (copy)
 		return (setmetatable({
 			focus_nav_actions = if p1 == nil or p1.focus_nav_actions == nil then nil else p1.focus_nav_actions
 		}, Module116))
 	end
 
-	function Module116:encode() --[[ Line: 43429 ]]
+	function Module116:encode()
 		-- upvalues: ProtoModule (copy)
 		local Buf = buffer.create(0)
 		local Count = 0
@@ -23166,7 +23166,7 @@ do
 		return Buf1
 	end
 
-	function Module116.decode(Buf) --[[ Line: 43444 ]]
+	function Module116.decode(Buf)
 		-- upvalues: Module116 (copy), ProtoModule (copy), ActionsModule (copy)
 		local NewModule = Module116.new()
 		local v84 = 0
@@ -23199,7 +23199,7 @@ do
 		return NewModule
 	end
 
-	function Module116:jsonEncode() --[[ Line: 43488 ]]
+	function Module116:jsonEncode()
 		local t = {}
 		
 		if self.focus_nav_actions ~= nil then
@@ -23208,7 +23208,7 @@ do
 		return t
 	end
 
-	function Module116:jsonDecode() --[[ Line: 43498 ]]
+	function Module116:jsonDecode()
 		-- upvalues: Module116 (copy), ActionsModule (copy)
 		local NewModule = Module116.new()
 		
@@ -23232,7 +23232,7 @@ do
 	local Module117 = {}
 	Module117.__index = Module117
 
-	function Module117.new(p1) --[[ Line: 43528 ]]
+	function Module117.new(p1)
 		-- upvalues: Module117 (copy)
 		return (setmetatable({
 			props = if p1 == nil or p1.props == nil then nil else p1.props,
@@ -23240,7 +23240,7 @@ do
 		}, Module117))
 	end
 
-	function Module117:encode() --[[ Line: 43535 ]]
+	function Module117:encode()
 		-- upvalues: ProtoModule (copy)
 		local Buf = buffer.create(0)
 		local Count = 0
@@ -23261,7 +23261,7 @@ do
 		return Buf1
 	end
 
-	function Module117.decode(Buf) --[[ Line: 43556 ]]
+	function Module117.decode(Buf)
 		-- upvalues: Module117 (copy), ProtoModule (copy), t (copy), ComponentSharedModule (copy)
 		local NewModule = Module117.new()
 		local v84 = 0
@@ -23298,7 +23298,7 @@ do
 		return NewModule
 	end
 
-	function Module117:jsonEncode() --[[ Line: 43604 ]]
+	function Module117:jsonEncode()
 		local t = {}
 		
 		if self.props ~= nil then
@@ -23310,7 +23310,7 @@ do
 		return t
 	end
 
-	function Module117:jsonDecode() --[[ Line: 43618 ]]
+	function Module117:jsonDecode()
 		-- upvalues: Module117 (copy), t (copy), ComponentSharedModule (copy)
 		local NewModule = Module117.new()
 		
@@ -23332,19 +23332,19 @@ do
 	local Module118 = {}
 	Module118.__index = Module118
 
-	function Module118:new() --[[ Line: 43647 ]]
+	function Module118:new()
 		-- upvalues: Module118 (copy)
 		return (setmetatable({}, Module118))
 	end
 
-	function Module118:encode() --[[ Line: 43651 ]]
+	function Module118:encode()
 		local Buf = buffer.create(0)
 		buffer.copy(Buf, 0, buffer.create(0), 0, 0)
 		
 		return Buf
 	end
 
-	function Module118.decode(Buf) --[[ Line: 43660 ]]
+	function Module118.decode(Buf)
 		-- upvalues: Module118 (copy), ProtoModule (copy)
 		local NewModule = Module118.new()
 		local v85 = 0
@@ -23371,11 +23371,11 @@ do
 		return NewModule
 	end
 
-	function Module118:jsonEncode() --[[ Line: 43698 ]]
+	function Module118:jsonEncode()
 		return {}
 	end
 
-	function Module118:jsonDecode() --[[ Line: 43704 ]]
+	function Module118:jsonDecode()
 		-- upvalues: Module118 (copy)
 		return (Module118.new())
 	end
@@ -23389,7 +23389,7 @@ do
 	local Module119 = {}
 	Module119.__index = Module119
 
-	function Module119.new(p1) --[[ Line: 43724 ]]
+	function Module119.new(p1)
 		-- upvalues: Module119 (copy)
 		return (setmetatable({
 			props = if p1 == nil or p1.props == nil then nil else p1.props,
@@ -23398,7 +23398,7 @@ do
 		}, Module119))
 	end
 
-	function Module119:encode() --[[ Line: 43732 ]]
+	function Module119:encode()
 		-- upvalues: ProtoModule (copy)
 		local Buf = buffer.create(0)
 		local Count = 0
@@ -23424,7 +23424,7 @@ do
 		return Buf1
 	end
 
-	function Module119.decode(Buf) --[[ Line: 43759 ]]
+	function Module119.decode(Buf)
 		-- upvalues: Module119 (copy), ProtoModule (copy), t (copy), ComponentSharedModule (copy)
 		local NewModule = Module119.new()
 		local v86 = 0
@@ -23465,7 +23465,7 @@ do
 		return NewModule
 	end
 
-	function Module119:jsonEncode() --[[ Line: 43812 ]]
+	function Module119:jsonEncode()
 		local t = {}
 		
 		if self.props ~= nil then
@@ -23480,7 +23480,7 @@ do
 		return t
 	end
 
-	function Module119:jsonDecode() --[[ Line: 43830 ]]
+	function Module119:jsonDecode()
 		-- upvalues: Module119 (copy), t (copy), ComponentSharedModule (copy)
 		local NewModule = Module119.new()
 		
@@ -23510,7 +23510,7 @@ do
 	local Module120 = {}
 	Module120.__index = Module120
 
-	function Module120.new(p1) --[[ Line: 43867 ]]
+	function Module120.new(p1)
 		-- upvalues: Module120 (copy)
 		return (setmetatable({
 			layout_order = if p1 == nil or p1.layout_order == nil then nil else p1.layout_order,
@@ -23541,7 +23541,7 @@ do
 		}, Module120))
 	end
 
-	function Module120:encode() --[[ Line: 43923 ]]
+	function Module120:encode()
 		-- upvalues: ProtoModule (copy)
 		local Buf = buffer.create(0)
 		local Count = 0
@@ -23677,7 +23677,7 @@ do
 		return Buf1
 	end
 
-	function Module120.decode(Buf) --[[ Line: 44082 ]]
+	function Module120.decode(Buf)
 		-- upvalues: Module120 (copy), ProtoModule (copy), PropTypesModule (copy), t (copy), ActionsModule (copy), PropTypesEngineModule (copy)
 		local NewModule = Module120.new()
 		local v86 = 0
@@ -23806,7 +23806,7 @@ do
 		return NewModule
 	end
 
-	function Module120:jsonEncode() --[[ Line: 44258 ]]
+	function Module120:jsonEncode()
 		local t = {}
 		
 		if self.layout_order ~= nil then
@@ -23887,7 +23887,7 @@ do
 		return t
 	end
 
-	function Module120:jsonDecode() --[[ Line: 44364 ]]
+	function Module120:jsonDecode()
 		-- upvalues: Module120 (copy), PropTypesModule (copy), t (copy), ActionsModule (copy), PropTypesEngineModule (copy)
 		local NewModule = Module120.new()
 		
@@ -24053,14 +24053,14 @@ do
 	local Module121 = {}
 	Module121.__index = Module121
 
-	function Module121.new(p1) --[[ Line: 44641 ]]
+	function Module121.new(p1)
 		-- upvalues: Module121 (copy)
 		return (setmetatable({
 			max_width = if p1 == nil or p1.max_width == nil then nil else p1.max_width
 		}, Module121))
 	end
 
-	function Module121:encode() --[[ Line: 44649 ]]
+	function Module121:encode()
 		-- upvalues: ProtoModule (copy)
 		local Buf = buffer.create(0)
 		local Count = 0
@@ -24076,7 +24076,7 @@ do
 		return Buf1
 	end
 
-	function Module121.decode(Buf) --[[ Line: 44664 ]]
+	function Module121.decode(Buf)
 		-- upvalues: Module121 (copy), ProtoModule (copy), PropTypesModule (copy)
 		local NewModule = Module121.new()
 		local v87 = 0
@@ -24109,7 +24109,7 @@ do
 		return NewModule
 	end
 
-	function Module121:jsonEncode() --[[ Line: 44707 ]]
+	function Module121:jsonEncode()
 		local t = {}
 		
 		if self.max_width ~= nil then
@@ -24118,7 +24118,7 @@ do
 		return t
 	end
 
-	function Module121:jsonDecode() --[[ Line: 44717 ]]
+	function Module121:jsonDecode()
 		-- upvalues: Module121 (copy), PropTypesModule (copy)
 		local NewModule = Module121.new()
 		
@@ -24140,7 +24140,7 @@ do
 	local Module122 = {}
 	Module122.__index = Module122
 
-	function Module122.new(p1) --[[ Line: 44745 ]]
+	function Module122.new(p1)
 		-- upvalues: Module122 (copy)
 		return (setmetatable({
 			props = if p1 == nil or p1.props == nil then nil else p1.props,
@@ -24148,7 +24148,7 @@ do
 		}, Module122))
 	end
 
-	function Module122:encode() --[[ Line: 44752 ]]
+	function Module122:encode()
 		-- upvalues: ProtoModule (copy)
 		local Buf = buffer.create(0)
 		local Count = 0
@@ -24169,7 +24169,7 @@ do
 		return Buf1
 	end
 
-	function Module122.decode(Buf) --[[ Line: 44773 ]]
+	function Module122.decode(Buf)
 		-- upvalues: Module122 (copy), ProtoModule (copy), t (copy), ComponentSharedModule (copy)
 		local NewModule = Module122.new()
 		local v88 = 0
@@ -24206,7 +24206,7 @@ do
 		return NewModule
 	end
 
-	function Module122:jsonEncode() --[[ Line: 44821 ]]
+	function Module122:jsonEncode()
 		local t = {}
 		
 		if self.props ~= nil then
@@ -24218,7 +24218,7 @@ do
 		return t
 	end
 
-	function Module122:jsonDecode() --[[ Line: 44835 ]]
+	function Module122:jsonDecode()
 		-- upvalues: Module122 (copy), t (copy), ComponentSharedModule (copy)
 		local NewModule = Module122.new()
 		
@@ -24242,7 +24242,7 @@ do
 	local Module123 = {}
 	Module123.__index = Module123
 
-	function Module123.new(p1) --[[ Line: 44864 ]]
+	function Module123.new(p1)
 		-- upvalues: Module123 (copy)
 		return (setmetatable({
 			items = if p1 == nil or p1.items == nil then nil else p1.items,
@@ -24257,7 +24257,7 @@ do
 		}, Module123))
 	end
 
-	function Module123:encode() --[[ Line: 44878 ]]
+	function Module123:encode()
 		-- upvalues: ProtoModule (copy)
 		local Buf = buffer.create(0)
 		local Count = 0
@@ -24313,7 +24313,7 @@ do
 		return Buf1
 	end
 
-	function Module123.decode(Buf) --[[ Line: 44941 ]]
+	function Module123.decode(Buf)
 		-- upvalues: Module123 (copy), ProtoModule (copy), t (copy), PropTypesModule (copy)
 		local NewModule = Module123.new()
 		local v88 = 0
@@ -24378,7 +24378,7 @@ do
 		return NewModule
 	end
 
-	function Module123:jsonEncode() --[[ Line: 45024 ]]
+	function Module123:jsonEncode()
 		local t = {}
 		
 		if self.items ~= nil then
@@ -24411,7 +24411,7 @@ do
 		return t
 	end
 
-	function Module123:jsonDecode() --[[ Line: 45066 ]]
+	function Module123:jsonDecode()
 		-- upvalues: Module123 (copy), t (copy), PropTypesModule (copy)
 		local NewModule = Module123.new()
 		
@@ -24469,7 +24469,7 @@ do
 	local Module124 = {}
 	Module124.__index = Module124
 
-	function Module124.new(p1) --[[ Line: 45146 ]]
+	function Module124.new(p1)
 		-- upvalues: Module124 (copy)
 		return (setmetatable({
 			props = if p1 == nil or p1.props == nil then nil else p1.props,
@@ -24477,7 +24477,7 @@ do
 		}, Module124))
 	end
 
-	function Module124:encode() --[[ Line: 45153 ]]
+	function Module124:encode()
 		-- upvalues: ProtoModule (copy)
 		local Buf = buffer.create(0)
 		local Count = 0
@@ -24498,7 +24498,7 @@ do
 		return Buf1
 	end
 
-	function Module124.decode(Buf) --[[ Line: 45174 ]]
+	function Module124.decode(Buf)
 		-- upvalues: Module124 (copy), ProtoModule (copy), t (copy), ComponentSharedModule (copy)
 		local NewModule = Module124.new()
 		local v89 = 0
@@ -24535,7 +24535,7 @@ do
 		return NewModule
 	end
 
-	function Module124:jsonEncode() --[[ Line: 45222 ]]
+	function Module124:jsonEncode()
 		local t = {}
 		
 		if self.props ~= nil then
@@ -24547,7 +24547,7 @@ do
 		return t
 	end
 
-	function Module124:jsonDecode() --[[ Line: 45236 ]]
+	function Module124:jsonDecode()
 		-- upvalues: Module124 (copy), t (copy), ComponentSharedModule (copy)
 		local NewModule = Module124.new()
 		
@@ -24569,7 +24569,7 @@ do
 	local Module125 = {}
 	Module125.__index = Module125
 
-	function Module125.new(p1) --[[ Line: 45265 ]]
+	function Module125.new(p1)
 		-- upvalues: Module125 (copy)
 		return (setmetatable({
 			label_component = if p1 == nil or p1.label_component == nil then nil else p1.label_component,
@@ -24580,7 +24580,7 @@ do
 		}, Module125))
 	end
 
-	function Module125:encode() --[[ Line: 45277 ]]
+	function Module125:encode()
 		-- upvalues: ProtoModule (copy)
 		local Buf = buffer.create(0)
 		local Count = 0
@@ -24616,7 +24616,7 @@ do
 		return Buf1
 	end
 
-	function Module125.decode(Buf) --[[ Line: 45316 ]]
+	function Module125.decode(Buf)
 		-- upvalues: Module125 (copy), ProtoModule (copy), t (copy), ActionsModule (copy), PropTypesModule (copy)
 		local NewModule = Module125.new()
 		local v90 = 0
@@ -24665,7 +24665,7 @@ do
 		return NewModule
 	end
 
-	function Module125:jsonEncode() --[[ Line: 45379 ]]
+	function Module125:jsonEncode()
 		local t = {}
 		
 		if self.label_component ~= nil then
@@ -24686,7 +24686,7 @@ do
 		return t
 	end
 
-	function Module125:jsonDecode() --[[ Line: 45405 ]]
+	function Module125:jsonDecode()
 		-- upvalues: Module125 (copy), t (copy), ActionsModule (copy), PropTypesModule (copy)
 		local NewModule = Module125.new()
 		
@@ -24731,7 +24731,7 @@ do
 	local Module126 = {}
 	Module126.__index = Module126
 
-	function Module126.new(p1) --[[ Line: 45463 ]]
+	function Module126.new(p1)
 		-- upvalues: Module126 (copy)
 		return (setmetatable({
 			props = if p1 == nil or p1.props == nil then nil else p1.props,
@@ -24739,7 +24739,7 @@ do
 		}, Module126))
 	end
 
-	function Module126:encode() --[[ Line: 45470 ]]
+	function Module126:encode()
 		-- upvalues: ProtoModule (copy)
 		local Buf = buffer.create(0)
 		local Count = 0
@@ -24760,7 +24760,7 @@ do
 		return Buf1
 	end
 
-	function Module126.decode(Buf) --[[ Line: 45491 ]]
+	function Module126.decode(Buf)
 		-- upvalues: Module126 (copy), ProtoModule (copy), t (copy), ComponentSharedModule (copy)
 		local NewModule = Module126.new()
 		local v90 = 0
@@ -24797,7 +24797,7 @@ do
 		return NewModule
 	end
 
-	function Module126:jsonEncode() --[[ Line: 45539 ]]
+	function Module126:jsonEncode()
 		local t = {}
 		
 		if self.props ~= nil then
@@ -24809,7 +24809,7 @@ do
 		return t
 	end
 
-	function Module126:jsonDecode() --[[ Line: 45553 ]]
+	function Module126:jsonDecode()
 		-- upvalues: Module126 (copy), t (copy), ComponentSharedModule (copy)
 		local NewModule = Module126.new()
 		
@@ -24831,14 +24831,14 @@ do
 	local Module127 = {}
 	Module127.__index = Module127
 
-	function Module127.new(p1) --[[ Line: 45582 ]]
+	function Module127.new(p1)
 		-- upvalues: Module127 (copy)
 		return (setmetatable({
 			text = if p1 == nil or p1.text == nil then nil else p1.text
 		}, Module127))
 	end
 
-	function Module127:encode() --[[ Line: 45588 ]]
+	function Module127:encode()
 		-- upvalues: ProtoModule (copy)
 		local Buf = buffer.create(0)
 		local Count = 0
@@ -24854,7 +24854,7 @@ do
 		return Buf1
 	end
 
-	function Module127.decode(Buf) --[[ Line: 45603 ]]
+	function Module127.decode(Buf)
 		-- upvalues: Module127 (copy), ProtoModule (copy), PropTypesModule (copy)
 		local NewModule = Module127.new()
 		local v91 = 0
@@ -24887,7 +24887,7 @@ do
 		return NewModule
 	end
 
-	function Module127:jsonEncode() --[[ Line: 45646 ]]
+	function Module127:jsonEncode()
 		local t = {}
 		
 		if self.text ~= nil then
@@ -24896,7 +24896,7 @@ do
 		return t
 	end
 
-	function Module127:jsonDecode() --[[ Line: 45656 ]]
+	function Module127:jsonDecode()
 		-- upvalues: Module127 (copy), PropTypesModule (copy)
 		local NewModule = Module127.new()
 		
@@ -24915,7 +24915,7 @@ do
 	local Module128 = {}
 	Module128.__index = Module128
 
-	function Module128.new(p1) --[[ Line: 45680 ]]
+	function Module128.new(p1)
 		-- upvalues: Module128 (copy)
 		return (setmetatable({
 			props = if p1 == nil or p1.props == nil then nil else p1.props,
@@ -24923,7 +24923,7 @@ do
 		}, Module128))
 	end
 
-	function Module128:encode() --[[ Line: 45687 ]]
+	function Module128:encode()
 		-- upvalues: ProtoModule (copy)
 		local Buf = buffer.create(0)
 		local Count = 0
@@ -24944,7 +24944,7 @@ do
 		return Buf1
 	end
 
-	function Module128.decode(Buf) --[[ Line: 45708 ]]
+	function Module128.decode(Buf)
 		-- upvalues: Module128 (copy), ProtoModule (copy), t (copy), ComponentSharedModule (copy)
 		local NewModule = Module128.new()
 		local v92 = 0
@@ -24981,7 +24981,7 @@ do
 		return NewModule
 	end
 
-	function Module128:jsonEncode() --[[ Line: 45756 ]]
+	function Module128:jsonEncode()
 		local t = {}
 		
 		if self.props ~= nil then
@@ -24993,7 +24993,7 @@ do
 		return t
 	end
 
-	function Module128:jsonDecode() --[[ Line: 45770 ]]
+	function Module128:jsonDecode()
 		-- upvalues: Module128 (copy), t (copy), ComponentSharedModule (copy)
 		local NewModule = Module128.new()
 		
@@ -25017,7 +25017,7 @@ do
 	local Module129 = {}
 	Module129.__index = Module129
 
-	function Module129.new(p1) --[[ Line: 45799 ]]
+	function Module129.new(p1)
 		-- upvalues: Module129 (copy)
 		return (setmetatable({
 			text = if p1 == nil or p1.text == nil then nil else p1.text,
@@ -25039,7 +25039,7 @@ do
 		}, Module129))
 	end
 
-	function Module129:encode() --[[ Line: 45828 ]]
+	function Module129:encode()
 		-- upvalues: ProtoModule (copy)
 		local Buf = buffer.create(0)
 		local Count = 0
@@ -25130,7 +25130,7 @@ do
 		return Buf1
 	end
 
-	function Module129.decode(Buf) --[[ Line: 45933 ]]
+	function Module129.decode(Buf)
 		-- upvalues: Module129 (copy), ProtoModule (copy), PropTypesModule (copy), ActionsModule (copy)
 		local NewModule = Module129.new()
 		local v92 = 0
@@ -25223,7 +25223,7 @@ do
 		return NewModule
 	end
 
-	function Module129:jsonEncode() --[[ Line: 46053 ]]
+	function Module129:jsonEncode()
 		local t = {}
 		
 		if self.text ~= nil then
@@ -25277,7 +25277,7 @@ do
 		return t
 	end
 
-	function Module129:jsonDecode() --[[ Line: 46123 ]]
+	function Module129:jsonDecode()
 		-- upvalues: Module129 (copy), PropTypesModule (copy), ActionsModule (copy)
 		local NewModule = Module129.new()
 		
@@ -25377,7 +25377,7 @@ do
 	local Module130 = {}
 	Module130.__index = Module130
 
-	function Module130.new(p1) --[[ Line: 46271 ]]
+	function Module130.new(p1)
 		-- upvalues: Module130 (copy)
 		return (setmetatable({
 			props = if p1 == nil or p1.props == nil then nil else p1.props,
@@ -25385,7 +25385,7 @@ do
 		}, Module130))
 	end
 
-	function Module130:encode() --[[ Line: 46278 ]]
+	function Module130:encode()
 		-- upvalues: ProtoModule (copy)
 		local Buf = buffer.create(0)
 		local Count = 0
@@ -25406,7 +25406,7 @@ do
 		return Buf1
 	end
 
-	function Module130.decode(Buf) --[[ Line: 46299 ]]
+	function Module130.decode(Buf)
 		-- upvalues: Module130 (copy), ProtoModule (copy), t (copy), ComponentSharedModule (copy)
 		local NewModule = Module130.new()
 		local v93 = 0
@@ -25443,7 +25443,7 @@ do
 		return NewModule
 	end
 
-	function Module130:jsonEncode() --[[ Line: 46347 ]]
+	function Module130:jsonEncode()
 		local t = {}
 		
 		if self.props ~= nil then
@@ -25455,7 +25455,7 @@ do
 		return t
 	end
 
-	function Module130:jsonDecode() --[[ Line: 46361 ]]
+	function Module130:jsonDecode()
 		-- upvalues: Module130 (copy), t (copy), ComponentSharedModule (copy)
 		local NewModule = Module130.new()
 		
@@ -25477,7 +25477,7 @@ do
 	local Module131 = {}
 	Module131.__index = Module131
 
-	function Module131.new(p1) --[[ Line: 46390 ]]
+	function Module131.new(p1)
 		-- upvalues: Module131 (copy)
 		return (setmetatable({
 			text = if p1 == nil or p1.text == nil then nil else p1.text,
@@ -25497,7 +25497,7 @@ do
 		}, Module131))
 	end
 
-	function Module131:encode() --[[ Line: 46423 ]]
+	function Module131:encode()
 		-- upvalues: ProtoModule (copy)
 		local Buf = buffer.create(0)
 		local Count = 0
@@ -25578,7 +25578,7 @@ do
 		return Buf1
 	end
 
-	function Module131.decode(Buf) --[[ Line: 46516 ]]
+	function Module131.decode(Buf)
 		-- upvalues: Module131 (copy), ProtoModule (copy), PropTypesModule (copy), ActionsModule (copy)
 		local NewModule = Module131.new()
 		local v94 = 0
@@ -25663,7 +25663,7 @@ do
 		return NewModule
 	end
 
-	function Module131:jsonEncode() --[[ Line: 46626 ]]
+	function Module131:jsonEncode()
 		local t = {}
 		
 		if self.text ~= nil then
@@ -25711,7 +25711,7 @@ do
 		return t
 	end
 
-	function Module131:jsonDecode() --[[ Line: 46688 ]]
+	function Module131:jsonDecode()
 		-- upvalues: Module131 (copy), PropTypesModule (copy), ActionsModule (copy)
 		local NewModule = Module131.new()
 		
@@ -25804,7 +25804,7 @@ do
 	local Module132 = {}
 	Module132.__index = Module132
 
-	function Module132.new(p1) --[[ Line: 46828 ]]
+	function Module132.new(p1)
 		-- upvalues: Module132 (copy)
 		return (setmetatable({
 			props = if p1 == nil or p1.props == nil then nil else p1.props,
@@ -25812,7 +25812,7 @@ do
 		}, Module132))
 	end
 
-	function Module132:encode() --[[ Line: 46835 ]]
+	function Module132:encode()
 		-- upvalues: ProtoModule (copy)
 		local Buf = buffer.create(0)
 		local Count = 0
@@ -25833,7 +25833,7 @@ do
 		return Buf1
 	end
 
-	function Module132.decode(Buf) --[[ Line: 46856 ]]
+	function Module132.decode(Buf)
 		-- upvalues: Module132 (copy), ProtoModule (copy), t (copy), ComponentSharedModule (copy)
 		local NewModule = Module132.new()
 		local v94 = 0
@@ -25870,7 +25870,7 @@ do
 		return NewModule
 	end
 
-	function Module132:jsonEncode() --[[ Line: 46904 ]]
+	function Module132:jsonEncode()
 		local t = {}
 		
 		if self.props ~= nil then
@@ -25882,7 +25882,7 @@ do
 		return t
 	end
 
-	function Module132:jsonDecode() --[[ Line: 46918 ]]
+	function Module132:jsonDecode()
 		-- upvalues: Module132 (copy), t (copy), ComponentSharedModule (copy)
 		local NewModule = Module132.new()
 		
@@ -25904,7 +25904,7 @@ do
 	local Module133 = {}
 	Module133.__index = Module133
 
-	function Module133.new(p1) --[[ Line: 46947 ]]
+	function Module133.new(p1)
 		-- upvalues: Module133 (copy)
 		return (setmetatable({
 			text = if p1 == nil or p1.text == nil then nil else p1.text,
@@ -25922,7 +25922,7 @@ do
 		}, Module133))
 	end
 
-	function Module133:encode() --[[ Line: 46970 ]]
+	function Module133:encode()
 		-- upvalues: ProtoModule (copy)
 		local Buf = buffer.create(0)
 		local Count = 0
@@ -25993,7 +25993,7 @@ do
 		return Buf1
 	end
 
-	function Module133.decode(Buf) --[[ Line: 47051 ]]
+	function Module133.decode(Buf)
 		-- upvalues: Module133 (copy), ProtoModule (copy), PropTypesModule (copy), t (copy)
 		local NewModule = Module133.new()
 		local v95 = 0
@@ -26070,7 +26070,7 @@ do
 		return NewModule
 	end
 
-	function Module133:jsonEncode() --[[ Line: 47152 ]]
+	function Module133:jsonEncode()
 		local t = {}
 		
 		if self.text ~= nil then
@@ -26112,7 +26112,7 @@ do
 		return t
 	end
 
-	function Module133:jsonDecode() --[[ Line: 47206 ]]
+	function Module133:jsonDecode()
 		-- upvalues: Module133 (copy), PropTypesModule (copy), t (copy)
 		local NewModule = Module133.new()
 		
@@ -26191,7 +26191,7 @@ do
 	local Module134 = {}
 	Module134.__index = Module134
 
-	function Module134.new(p1) --[[ Line: 47326 ]]
+	function Module134.new(p1)
 		-- upvalues: Module134 (copy)
 		return (setmetatable({
 			props = if p1 == nil or p1.props == nil then nil else p1.props,
@@ -26199,7 +26199,7 @@ do
 		}, Module134))
 	end
 
-	function Module134:encode() --[[ Line: 47333 ]]
+	function Module134:encode()
 		-- upvalues: ProtoModule (copy)
 		local Buf = buffer.create(0)
 		local Count = 0
@@ -26220,7 +26220,7 @@ do
 		return Buf1
 	end
 
-	function Module134.decode(Buf) --[[ Line: 47354 ]]
+	function Module134.decode(Buf)
 		-- upvalues: Module134 (copy), ProtoModule (copy), t (copy), ComponentSharedModule (copy)
 		local NewModule = Module134.new()
 		local v96 = 0
@@ -26257,7 +26257,7 @@ do
 		return NewModule
 	end
 
-	function Module134:jsonEncode() --[[ Line: 47402 ]]
+	function Module134:jsonEncode()
 		local t = {}
 		
 		if self.props ~= nil then
@@ -26269,7 +26269,7 @@ do
 		return t
 	end
 
-	function Module134:jsonDecode() --[[ Line: 47416 ]]
+	function Module134:jsonDecode()
 		-- upvalues: Module134 (copy), t (copy), ComponentSharedModule (copy)
 		local NewModule = Module134.new()
 		
@@ -26293,7 +26293,7 @@ do
 	local Module135 = {}
 	Module135.__index = Module135
 
-	function Module135.new(p1) --[[ Line: 47445 ]]
+	function Module135.new(p1)
 		-- upvalues: Module135 (copy)
 		return (setmetatable({
 			items = if p1 == nil or p1.items == nil then nil else p1.items,
@@ -26302,7 +26302,7 @@ do
 		}, Module135))
 	end
 
-	function Module135:encode() --[[ Line: 47455 ]]
+	function Module135:encode()
 		-- upvalues: ProtoModule (copy)
 		local Buf = buffer.create(0)
 		local Count = 0
@@ -26328,7 +26328,7 @@ do
 		return Buf1
 	end
 
-	function Module135.decode(Buf) --[[ Line: 47482 ]]
+	function Module135.decode(Buf)
 		-- upvalues: Module135 (copy), ProtoModule (copy), t (copy), PropTypesModule (copy)
 		local NewModule = Module135.new()
 		local v96 = 0
@@ -26369,7 +26369,7 @@ do
 		return NewModule
 	end
 
-	function Module135:jsonEncode() --[[ Line: 47535 ]]
+	function Module135:jsonEncode()
 		local t = {}
 		
 		if self.items ~= nil then
@@ -26384,7 +26384,7 @@ do
 		return t
 	end
 
-	function Module135:jsonDecode() --[[ Line: 47553 ]]
+	function Module135:jsonDecode()
 		-- upvalues: Module135 (copy), t (copy), PropTypesModule (copy)
 		local NewModule = Module135.new()
 		
@@ -26415,14 +26415,14 @@ do
 	local Module136 = {}
 	Module136.__index = Module136
 
-	function Module136.new(p1) --[[ Line: 47595 ]]
+	function Module136.new(p1)
 		-- upvalues: Module136 (copy)
 		return (setmetatable({
 			kind = if p1 == nil or p1.kind == nil then nil else p1.kind
 		}, Module136))
 	end
 
-	function Module136:encode() --[[ Line: 47601 ]]
+	function Module136:encode()
 		-- upvalues: ProtoModule (copy)
 		local Buf = buffer.create(0)
 		local Count = 0
@@ -26447,7 +26447,7 @@ do
 		return Buf1
 	end
 
-	function Module136.decode(Buf) --[[ Line: 47625 ]]
+	function Module136.decode(Buf)
 		-- upvalues: Module136 (copy), ProtoModule (copy), t (copy)
 		local NewModule = Module136.new()
 		local v97 = 0
@@ -26494,7 +26494,7 @@ do
 		return NewModule
 	end
 
-	function Module136:jsonEncode() --[[ Line: 47678 ]]
+	function Module136:jsonEncode()
 		local t = {}
 		
 		if self.kind ~= nil then
@@ -26515,7 +26515,7 @@ do
 		return t
 	end
 
-	function Module136:jsonDecode() --[[ Line: 47694 ]]
+	function Module136:jsonDecode()
 		-- upvalues: Module136 (copy), t (copy)
 		local NewModule = Module136.new()
 		
@@ -26549,7 +26549,7 @@ do
 	local Module137 = {}
 	Module137.__index = Module137
 
-	function Module137.new(p1) --[[ Line: 47731 ]]
+	function Module137.new(p1)
 		-- upvalues: Module137 (copy)
 		return (setmetatable({
 			condition = if p1 == nil or p1.condition == nil then nil else p1.condition,
@@ -26557,7 +26557,7 @@ do
 		}, Module137))
 	end
 
-	function Module137:encode() --[[ Line: 47740 ]]
+	function Module137:encode()
 		-- upvalues: ProtoModule (copy)
 		local Buf = buffer.create(0)
 		local Count = 0
@@ -26583,7 +26583,7 @@ do
 		return Buf1
 	end
 
-	function Module137.decode(Buf) --[[ Line: 47766 ]]
+	function Module137.decode(Buf)
 		-- upvalues: Module137 (copy), ProtoModule (copy), PropConditionModule (copy), t (copy)
 		local NewModule = Module137.new()
 		local v98 = 0
@@ -26627,7 +26627,7 @@ do
 		return NewModule
 	end
 
-	function Module137:jsonEncode() --[[ Line: 47819 ]]
+	function Module137:jsonEncode()
 		local t = {}
 		
 		if self.condition ~= nil then
@@ -26646,7 +26646,7 @@ do
 		return t
 	end
 
-	function Module137:jsonDecode() --[[ Line: 47837 ]]
+	function Module137:jsonDecode()
 		-- upvalues: Module137 (copy), PropConditionModule (copy), t (copy)
 		local NewModule = Module137.new()
 		
@@ -26679,14 +26679,14 @@ do
 	local Module138 = {}
 	Module138.__index = Module138
 
-	function Module138.new(p1) --[[ Line: 47874 ]]
+	function Module138.new(p1)
 		-- upvalues: Module138 (copy)
 		return (setmetatable({
 			options = if p1 == nil or p1.options == nil then {} else p1.options
 		}, Module138))
 	end
 
-	function Module138:encode() --[[ Line: 47882 ]]
+	function Module138:encode()
 		-- upvalues: ProtoModule (copy)
 		local Buf = buffer.create(0)
 		local Count = 0
@@ -26704,7 +26704,7 @@ do
 		return Buf1
 	end
 
-	function Module138.decode(Buf) --[[ Line: 47899 ]]
+	function Module138.decode(Buf)
 		-- upvalues: Module138 (copy), ProtoModule (copy), t (copy)
 		local NewModule = Module138.new()
 		local v98 = 0
@@ -26737,7 +26737,7 @@ do
 		return NewModule
 	end
 
-	function Module138:jsonEncode() --[[ Line: 47942 ]]
+	function Module138:jsonEncode()
 		local t = {}
 		
 		if self.options ~= nil and #self.options > 0 then
@@ -26751,7 +26751,7 @@ do
 		return t
 	end
 
-	function Module138:jsonDecode() --[[ Line: 47956 ]]
+	function Module138:jsonDecode()
 		-- upvalues: Module138 (copy), t (copy)
 		local NewModule = Module138.new()
 		
@@ -26775,7 +26775,7 @@ do
 	local Module139 = {}
 	Module139.__index = Module139
 
-	function Module139.new(p1) --[[ Line: 47985 ]]
+	function Module139.new(p1)
 		-- upvalues: Module139 (copy)
 		return (setmetatable({
 			id = if p1 == nil or p1.id == nil then nil else p1.id,
@@ -26788,7 +26788,7 @@ do
 		}, Module139))
 	end
 
-	function Module139:encode() --[[ Line: 47997 ]]
+	function Module139:encode()
 		-- upvalues: ProtoModule (copy)
 		local Buf = buffer.create(0)
 		local Count = 0
@@ -26834,7 +26834,7 @@ do
 		return Buf1
 	end
 
-	function Module139.decode(Buf) --[[ Line: 48048 ]]
+	function Module139.decode(Buf)
 		-- upvalues: Module139 (copy), ProtoModule (copy), PropTypesModule (copy), ActionsModule (copy)
 		local NewModule = Module139.new()
 		local v99 = 0
@@ -26891,7 +26891,7 @@ do
 		return NewModule
 	end
 
-	function Module139:jsonEncode() --[[ Line: 48121 ]]
+	function Module139:jsonEncode()
 		local t = {}
 		
 		if self.id ~= nil then
@@ -26918,7 +26918,7 @@ do
 		return t
 	end
 
-	function Module139:jsonDecode() --[[ Line: 48155 ]]
+	function Module139:jsonDecode()
 		-- upvalues: Module139 (copy), PropTypesModule (copy), ActionsModule (copy)
 		local NewModule = Module139.new()
 		
@@ -26967,14 +26967,14 @@ do
 	local Module140 = {}
 	Module140.__index = Module140
 
-	function Module140.new(p1) --[[ Line: 48219 ]]
+	function Module140.new(p1)
 		-- upvalues: Module140 (copy)
 		return (setmetatable({
 			kind = if p1 == nil or p1.kind == nil then nil else p1.kind
 		}, Module140))
 	end
 
-	function Module140:encode() --[[ Line: 48225 ]]
+	function Module140:encode()
 		-- upvalues: ProtoModule (copy)
 		local Buf = buffer.create(0)
 		local Count = 0
@@ -26999,7 +26999,7 @@ do
 		return Buf1
 	end
 
-	function Module140.decode(Buf) --[[ Line: 48249 ]]
+	function Module140.decode(Buf)
 		-- upvalues: Module140 (copy), ProtoModule (copy), t (copy)
 		local NewModule = Module140.new()
 		local v100 = 0
@@ -27046,7 +27046,7 @@ do
 		return NewModule
 	end
 
-	function Module140:jsonEncode() --[[ Line: 48304 ]]
+	function Module140:jsonEncode()
 		local t = {}
 		
 		if self.kind ~= nil then
@@ -27067,7 +27067,7 @@ do
 		return t
 	end
 
-	function Module140:jsonDecode() --[[ Line: 48320 ]]
+	function Module140:jsonDecode()
 		-- upvalues: Module140 (copy), t (copy)
 		local NewModule = Module140.new()
 		
@@ -27103,7 +27103,7 @@ do
 	local Module141 = {}
 	Module141.__index = Module141
 
-	function Module141.new(p1) --[[ Line: 48360 ]]
+	function Module141.new(p1)
 		-- upvalues: Module141 (copy)
 		return (setmetatable({
 			condition = if p1 == nil or p1.condition == nil then nil else p1.condition,
@@ -27111,7 +27111,7 @@ do
 		}, Module141))
 	end
 
-	function Module141:encode() --[[ Line: 48369 ]]
+	function Module141:encode()
 		-- upvalues: ProtoModule (copy)
 		local Buf = buffer.create(0)
 		local Count = 0
@@ -27137,7 +27137,7 @@ do
 		return Buf1
 	end
 
-	function Module141.decode(Buf) --[[ Line: 48395 ]]
+	function Module141.decode(Buf)
 		-- upvalues: Module141 (copy), ProtoModule (copy), PropConditionModule (copy), t (copy)
 		local NewModule = Module141.new()
 		local v100 = 0
@@ -27181,7 +27181,7 @@ do
 		return NewModule
 	end
 
-	function Module141:jsonEncode() --[[ Line: 48449 ]]
+	function Module141:jsonEncode()
 		local t = {}
 		
 		if self.condition ~= nil then
@@ -27200,7 +27200,7 @@ do
 		return t
 	end
 
-	function Module141:jsonDecode() --[[ Line: 48467 ]]
+	function Module141:jsonDecode()
 		-- upvalues: Module141 (copy), PropConditionModule (copy), t (copy)
 		local NewModule = Module141.new()
 		
@@ -27231,14 +27231,14 @@ do
 	local Module142 = {}
 	Module142.__index = Module142
 
-	function Module142.new(p1) --[[ Line: 48507 ]]
+	function Module142.new(p1)
 		-- upvalues: Module142 (copy)
 		return (setmetatable({
 			options = if p1 == nil or p1.options == nil then {} else p1.options
 		}, Module142))
 	end
 
-	function Module142:encode() --[[ Line: 48515 ]]
+	function Module142:encode()
 		-- upvalues: ProtoModule (copy)
 		local Buf = buffer.create(0)
 		local Count = 0
@@ -27256,7 +27256,7 @@ do
 		return Buf1
 	end
 
-	function Module142.decode(Buf) --[[ Line: 48532 ]]
+	function Module142.decode(Buf)
 		-- upvalues: Module142 (copy), ProtoModule (copy), t (copy)
 		local NewModule = Module142.new()
 		local v101 = 0
@@ -27289,7 +27289,7 @@ do
 		return NewModule
 	end
 
-	function Module142:jsonEncode() --[[ Line: 48575 ]]
+	function Module142:jsonEncode()
 		local t = {}
 		
 		if self.options ~= nil and #self.options > 0 then
@@ -27303,7 +27303,7 @@ do
 		return t
 	end
 
-	function Module142:jsonDecode() --[[ Line: 48589 ]]
+	function Module142:jsonDecode()
 		-- upvalues: Module142 (copy), t (copy)
 		local NewModule = Module142.new()
 		
@@ -27327,14 +27327,14 @@ do
 	local Module143 = {}
 	Module143.__index = Module143
 
-	function Module143.new(p1) --[[ Line: 48620 ]]
+	function Module143.new(p1)
 		-- upvalues: Module143 (copy)
 		return (setmetatable({
 			array = if p1 == nil or p1.array == nil then {} else p1.array
 		}, Module143))
 	end
 
-	function Module143:encode() --[[ Line: 48628 ]]
+	function Module143:encode()
 		-- upvalues: ProtoModule (copy)
 		local Buf = buffer.create(0)
 		local Count = 0
@@ -27352,7 +27352,7 @@ do
 		return Buf1
 	end
 
-	function Module143.decode(Buf) --[[ Line: 48645 ]]
+	function Module143.decode(Buf)
 		-- upvalues: Module143 (copy), ProtoModule (copy), t (copy)
 		local NewModule = Module143.new()
 		local v102 = 0
@@ -27385,7 +27385,7 @@ do
 		return NewModule
 	end
 
-	function Module143:jsonEncode() --[[ Line: 48688 ]]
+	function Module143:jsonEncode()
 		local t = {}
 		
 		if self.array ~= nil and #self.array > 0 then
@@ -27399,7 +27399,7 @@ do
 		return t
 	end
 
-	function Module143:jsonDecode() --[[ Line: 48702 ]]
+	function Module143:jsonDecode()
 		-- upvalues: Module143 (copy), t (copy)
 		local NewModule = Module143.new()
 		
@@ -27425,7 +27425,7 @@ do
 	local Module144 = {}
 	Module144.__index = Module144
 
-	function Module144.new(p1) --[[ Line: 48733 ]]
+	function Module144.new(p1)
 		-- upvalues: Module144 (copy)
 		return (setmetatable({
 			props = if p1 == nil or p1.props == nil then nil else p1.props,
@@ -27433,7 +27433,7 @@ do
 		}, Module144))
 	end
 
-	function Module144:encode() --[[ Line: 48740 ]]
+	function Module144:encode()
 		-- upvalues: ProtoModule (copy)
 		local Buf = buffer.create(0)
 		local Count = 0
@@ -27454,7 +27454,7 @@ do
 		return Buf1
 	end
 
-	function Module144.decode(Buf) --[[ Line: 48761 ]]
+	function Module144.decode(Buf)
 		-- upvalues: Module144 (copy), ProtoModule (copy), t (copy), ComponentSharedModule (copy)
 		local NewModule = Module144.new()
 		local v103 = 0
@@ -27491,7 +27491,7 @@ do
 		return NewModule
 	end
 
-	function Module144:jsonEncode() --[[ Line: 48809 ]]
+	function Module144:jsonEncode()
 		local t = {}
 		
 		if self.props ~= nil then
@@ -27503,7 +27503,7 @@ do
 		return t
 	end
 
-	function Module144:jsonDecode() --[[ Line: 48823 ]]
+	function Module144:jsonDecode()
 		-- upvalues: Module144 (copy), t (copy), ComponentSharedModule (copy)
 		local NewModule = Module144.new()
 		
@@ -27525,7 +27525,7 @@ do
 	local Module145 = {}
 	Module145.__index = Module145
 
-	function Module145.new(p1) --[[ Line: 48852 ]]
+	function Module145.new(p1)
 		-- upvalues: Module145 (copy)
 		return (setmetatable({
 			items = if p1 == nil or p1.items == nil then nil else p1.items,
@@ -27546,7 +27546,7 @@ do
 		}, Module145))
 	end
 
-	function Module145:encode() --[[ Line: 48876 ]]
+	function Module145:encode()
 		-- upvalues: ProtoModule (copy)
 		local Buf = buffer.create(0)
 		local Count = 0
@@ -27632,7 +27632,7 @@ do
 		return Buf1
 	end
 
-	function Module145.decode(Buf) --[[ Line: 48975 ]]
+	function Module145.decode(Buf)
 		-- upvalues: Module145 (copy), ProtoModule (copy), t (copy), PropTypesModule (copy)
 		local NewModule = Module145.new()
 		local v104 = 0
@@ -27721,7 +27721,7 @@ do
 		return NewModule
 	end
 
-	function Module145:jsonEncode() --[[ Line: 49090 ]]
+	function Module145:jsonEncode()
 		local t = {}
 		
 		if self.items ~= nil then
@@ -27772,7 +27772,7 @@ do
 		return t
 	end
 
-	function Module145:jsonDecode() --[[ Line: 49156 ]]
+	function Module145:jsonDecode()
 		-- upvalues: Module145 (copy), t (copy), PropTypesModule (copy)
 		local NewModule = Module145.new()
 		
@@ -27872,7 +27872,7 @@ do
 	local Module146 = {}
 	Module146.__index = Module146
 
-	function Module146.new(p1) --[[ Line: 49307 ]]
+	function Module146.new(p1)
 		-- upvalues: Module146 (copy)
 		return (setmetatable({
 			props = if p1 == nil or p1.props == nil then nil else p1.props,
@@ -27880,7 +27880,7 @@ do
 		}, Module146))
 	end
 
-	function Module146:encode() --[[ Line: 49316 ]]
+	function Module146:encode()
 		-- upvalues: ProtoModule (copy)
 		local Buf = buffer.create(0)
 		local Count = 0
@@ -27901,7 +27901,7 @@ do
 		return Buf1
 	end
 
-	function Module146.decode(Buf) --[[ Line: 49337 ]]
+	function Module146.decode(Buf)
 		-- upvalues: Module146 (copy), ProtoModule (copy), t (copy), ComponentSharedModule (copy)
 		local NewModule = Module146.new()
 		local v105 = 0
@@ -27938,7 +27938,7 @@ do
 		return NewModule
 	end
 
-	function Module146:jsonEncode() --[[ Line: 49385 ]]
+	function Module146:jsonEncode()
 		local t = {}
 		
 		if self.props ~= nil then
@@ -27950,7 +27950,7 @@ do
 		return t
 	end
 
-	function Module146:jsonDecode() --[[ Line: 49399 ]]
+	function Module146:jsonDecode()
 		-- upvalues: Module146 (copy), t (copy), ComponentSharedModule (copy)
 		local NewModule = Module146.new()
 		
@@ -27974,7 +27974,7 @@ do
 	local Module147 = {}
 	Module147.__index = Module147
 
-	function Module147.new(p1) --[[ Line: 49428 ]]
+	function Module147.new(p1)
 		-- upvalues: Module147 (copy)
 		return (setmetatable({
 			message_component = if p1 == nil or p1.message_component == nil then nil else p1.message_component,
@@ -27984,7 +27984,7 @@ do
 		}, Module147))
 	end
 
-	function Module147:encode() --[[ Line: 49441 ]]
+	function Module147:encode()
 		-- upvalues: ProtoModule (copy)
 		local Buf = buffer.create(0)
 		local Count = 0
@@ -28015,7 +28015,7 @@ do
 		return Buf1
 	end
 
-	function Module147.decode(Buf) --[[ Line: 49474 ]]
+	function Module147.decode(Buf)
 		-- upvalues: Module147 (copy), ProtoModule (copy), t (copy), ActionsModule (copy), PropTypesModule (copy)
 		local NewModule = Module147.new()
 		local v105 = 0
@@ -28060,7 +28060,7 @@ do
 		return NewModule
 	end
 
-	function Module147:jsonEncode() --[[ Line: 49532 ]]
+	function Module147:jsonEncode()
 		local t = {}
 		
 		if self.message_component ~= nil then
@@ -28078,7 +28078,7 @@ do
 		return t
 	end
 
-	function Module147:jsonDecode() --[[ Line: 49554 ]]
+	function Module147:jsonDecode()
 		-- upvalues: Module147 (copy), t (copy), ActionsModule (copy), PropTypesModule (copy)
 		local NewModule = Module147.new()
 		
@@ -28118,7 +28118,7 @@ do
 	local Module148 = {}
 	Module148.__index = Module148
 
-	function Module148.new(p1) --[[ Line: 49610 ]]
+	function Module148.new(p1)
 		-- upvalues: Module148 (copy)
 		return (setmetatable({
 			props = if p1 == nil or p1.props == nil then nil else p1.props,
@@ -28126,7 +28126,7 @@ do
 		}, Module148))
 	end
 
-	function Module148:encode() --[[ Line: 49619 ]]
+	function Module148:encode()
 		-- upvalues: ProtoModule (copy)
 		local Buf = buffer.create(0)
 		local Count = 0
@@ -28147,7 +28147,7 @@ do
 		return Buf1
 	end
 
-	function Module148.decode(Buf) --[[ Line: 49640 ]]
+	function Module148.decode(Buf)
 		-- upvalues: Module148 (copy), ProtoModule (copy), t (copy), ComponentSharedModule (copy)
 		local NewModule = Module148.new()
 		local v106 = 0
@@ -28184,7 +28184,7 @@ do
 		return NewModule
 	end
 
-	function Module148:jsonEncode() --[[ Line: 49688 ]]
+	function Module148:jsonEncode()
 		local t = {}
 		
 		if self.props ~= nil then
@@ -28196,7 +28196,7 @@ do
 		return t
 	end
 
-	function Module148:jsonDecode() --[[ Line: 49702 ]]
+	function Module148:jsonDecode()
 		-- upvalues: Module148 (copy), t (copy), ComponentSharedModule (copy)
 		local NewModule = Module148.new()
 		
@@ -28218,7 +28218,7 @@ do
 	local Module149 = {}
 	Module149.__index = Module149
 
-	function Module149.new(p1) --[[ Line: 49731 ]]
+	function Module149.new(p1)
 		-- upvalues: Module149 (copy)
 		return (setmetatable({
 			image = if p1 == nil or p1.image == nil then nil else p1.image,
@@ -28241,7 +28241,7 @@ do
 		}, Module149))
 	end
 
-	function Module149:encode() --[[ Line: 49757 ]]
+	function Module149:encode()
 		-- upvalues: ProtoModule (copy)
 		local Buf = buffer.create(0)
 		local Count = 0
@@ -28337,7 +28337,7 @@ do
 		return Buf1
 	end
 
-	function Module149.decode(Buf) --[[ Line: 49868 ]]
+	function Module149.decode(Buf)
 		-- upvalues: Module149 (copy), ProtoModule (copy), PropTypesModule (copy), PropTypesEngineModule (copy)
 		local NewModule = Module149.new()
 		local v107 = 0
@@ -28434,7 +28434,7 @@ do
 		return NewModule
 	end
 
-	function Module149:jsonEncode() --[[ Line: 49996 ]]
+	function Module149:jsonEncode()
 		local t = {}
 		
 		if self.image ~= nil then
@@ -28491,7 +28491,7 @@ do
 		return t
 	end
 
-	function Module149:jsonDecode() --[[ Line: 50070 ]]
+	function Module149:jsonDecode()
 		-- upvalues: Module149 (copy), PropTypesModule (copy), PropTypesEngineModule (copy)
 		local NewModule = Module149.new()
 		
@@ -28599,7 +28599,7 @@ do
 	local Module150 = {}
 	Module150.__index = Module150
 
-	function Module150.new(p1) --[[ Line: 50239 ]]
+	function Module150.new(p1)
 		-- upvalues: Module150 (copy)
 		return (setmetatable({
 			props = if p1 == nil or p1.props == nil then nil else p1.props,
@@ -28608,7 +28608,7 @@ do
 		}, Module150))
 	end
 
-	function Module150:encode() --[[ Line: 50247 ]]
+	function Module150:encode()
 		-- upvalues: ProtoModule (copy)
 		local Buf = buffer.create(0)
 		local Count = 0
@@ -28634,7 +28634,7 @@ do
 		return Buf1
 	end
 
-	function Module150.decode(Buf) --[[ Line: 50274 ]]
+	function Module150.decode(Buf)
 		-- upvalues: Module150 (copy), ProtoModule (copy), t (copy), ComponentSharedModule (copy)
 		local NewModule = Module150.new()
 		local v107 = 0
@@ -28675,7 +28675,7 @@ do
 		return NewModule
 	end
 
-	function Module150:jsonEncode() --[[ Line: 50327 ]]
+	function Module150:jsonEncode()
 		local t = {}
 		
 		if self.props ~= nil then
@@ -28690,7 +28690,7 @@ do
 		return t
 	end
 
-	function Module150:jsonDecode() --[[ Line: 50345 ]]
+	function Module150:jsonDecode()
 		-- upvalues: Module150 (copy), t (copy), ComponentSharedModule (copy)
 		local NewModule = Module150.new()
 		
@@ -28718,7 +28718,7 @@ do
 	local Module151 = {}
 	Module151.__index = Module151
 
-	function Module151.new(p1) --[[ Line: 50382 ]]
+	function Module151.new(p1)
 		-- upvalues: Module151 (copy)
 		return (setmetatable({
 			background_component = if p1 == nil or p1.background_component == nil then nil else p1.background_component,
@@ -28727,7 +28727,7 @@ do
 		}, Module151))
 	end
 
-	function Module151:encode() --[[ Line: 50396 ]]
+	function Module151:encode()
 		-- upvalues: ProtoModule (copy)
 		local Buf = buffer.create(0)
 		local Count = 0
@@ -28753,7 +28753,7 @@ do
 		return Buf1
 	end
 
-	function Module151.decode(Buf) --[[ Line: 50423 ]]
+	function Module151.decode(Buf)
 		-- upvalues: Module151 (copy), ProtoModule (copy), t (copy), PropTypesModule (copy)
 		local NewModule = Module151.new()
 		local v108 = 0
@@ -28794,7 +28794,7 @@ do
 		return NewModule
 	end
 
-	function Module151:jsonEncode() --[[ Line: 50476 ]]
+	function Module151:jsonEncode()
 		local t = {}
 		
 		if self.background_component ~= nil then
@@ -28809,7 +28809,7 @@ do
 		return t
 	end
 
-	function Module151:jsonDecode() --[[ Line: 50494 ]]
+	function Module151:jsonDecode()
 		-- upvalues: Module151 (copy), t (copy), PropTypesModule (copy)
 		local NewModule = Module151.new()
 		
@@ -28840,7 +28840,7 @@ do
 	local Module152 = {}
 	Module152.__index = Module152
 
-	function Module152.new(p1) --[[ Line: 50534 ]]
+	function Module152.new(p1)
 		-- upvalues: Module152 (copy)
 		return (setmetatable({
 			class_names = if p1 == nil or p1.class_names == nil then nil else p1.class_names,
@@ -28851,7 +28851,7 @@ do
 		}, Module152))
 	end
 
-	function Module152:encode() --[[ Line: 50554 ]]
+	function Module152:encode()
 		-- upvalues: ProtoModule (copy)
 		local Buf = buffer.create(0)
 		local Count = 0
@@ -28887,7 +28887,7 @@ do
 		return Buf1
 	end
 
-	function Module152.decode(Buf) --[[ Line: 50593 ]]
+	function Module152.decode(Buf)
 		-- upvalues: Module152 (copy), ProtoModule (copy), PropTypesModule (copy)
 		local NewModule = Module152.new()
 		local v109 = 0
@@ -28936,7 +28936,7 @@ do
 		return NewModule
 	end
 
-	function Module152:jsonEncode() --[[ Line: 50660 ]]
+	function Module152:jsonEncode()
 		local t = {}
 		
 		if self.class_names ~= nil then
@@ -28957,7 +28957,7 @@ do
 		return t
 	end
 
-	function Module152:jsonDecode() --[[ Line: 50686 ]]
+	function Module152:jsonDecode()
 		-- upvalues: Module152 (copy), PropTypesModule (copy)
 		local NewModule = Module152.new()
 		
@@ -29005,7 +29005,7 @@ do
 	local Module153 = {}
 	Module153.__index = Module153
 
-	function Module153.new(p1) --[[ Line: 50757 ]]
+	function Module153.new(p1)
 		-- upvalues: Module153 (copy)
 		return (setmetatable({
 			props = if p1 == nil or p1.props == nil then nil else p1.props,
@@ -29014,7 +29014,7 @@ do
 		}, Module153))
 	end
 
-	function Module153:encode() --[[ Line: 50765 ]]
+	function Module153:encode()
 		-- upvalues: ProtoModule (copy)
 		local Buf = buffer.create(0)
 		local Count = 0
@@ -29040,7 +29040,7 @@ do
 		return Buf1
 	end
 
-	function Module153.decode(Buf) --[[ Line: 50792 ]]
+	function Module153.decode(Buf)
 		-- upvalues: Module153 (copy), ProtoModule (copy), t (copy), ComponentSharedModule (copy)
 		local NewModule = Module153.new()
 		local v109 = 0
@@ -29081,7 +29081,7 @@ do
 		return NewModule
 	end
 
-	function Module153:jsonEncode() --[[ Line: 50845 ]]
+	function Module153:jsonEncode()
 		local t = {}
 		
 		if self.props ~= nil then
@@ -29096,7 +29096,7 @@ do
 		return t
 	end
 
-	function Module153:jsonDecode() --[[ Line: 50863 ]]
+	function Module153:jsonDecode()
 		-- upvalues: Module153 (copy), t (copy), ComponentSharedModule (copy)
 		local NewModule = Module153.new()
 		
@@ -29124,7 +29124,7 @@ do
 	local Module154 = {}
 	Module154.__index = Module154
 
-	function Module154.new(p1) --[[ Line: 50900 ]]
+	function Module154.new(p1)
 		-- upvalues: Module154 (copy)
 		return (setmetatable({
 			scrim_gradient = if p1 == nil or p1.scrim_gradient == nil then nil else p1.scrim_gradient,
@@ -29135,7 +29135,7 @@ do
 		}, Module154))
 	end
 
-	function Module154:encode() --[[ Line: 50918 ]]
+	function Module154:encode()
 		-- upvalues: ProtoModule (copy)
 		local Buf = buffer.create(0)
 		local Count = 0
@@ -29171,7 +29171,7 @@ do
 		return Buf1
 	end
 
-	function Module154.decode(Buf) --[[ Line: 50957 ]]
+	function Module154.decode(Buf)
 		-- upvalues: Module154 (copy), ProtoModule (copy), PropTypesModule (copy)
 		local NewModule = Module154.new()
 		local v110 = 0
@@ -29220,7 +29220,7 @@ do
 		return NewModule
 	end
 
-	function Module154:jsonEncode() --[[ Line: 51023 ]]
+	function Module154:jsonEncode()
 		local t = {}
 		
 		if self.scrim_gradient ~= nil then
@@ -29241,7 +29241,7 @@ do
 		return t
 	end
 
-	function Module154:jsonDecode() --[[ Line: 51049 ]]
+	function Module154:jsonDecode()
 		-- upvalues: Module154 (copy), PropTypesModule (copy)
 		local NewModule = Module154.new()
 		
@@ -29284,7 +29284,7 @@ do
 	local Module155 = {}
 	Module155.__index = Module155
 
-	function Module155.new(p1) --[[ Line: 51114 ]]
+	function Module155.new(p1)
 		-- upvalues: Module155 (copy)
 		return (setmetatable({
 			blur_radius = if p1 == nil or p1.blur_radius == nil then nil else p1.blur_radius,
@@ -29292,7 +29292,7 @@ do
 		}, Module155))
 	end
 
-	function Module155:encode() --[[ Line: 51123 ]]
+	function Module155:encode()
 		-- upvalues: ProtoModule (copy)
 		local Buf = buffer.create(0)
 		local Count = 0
@@ -29313,7 +29313,7 @@ do
 		return Buf1
 	end
 
-	function Module155.decode(Buf) --[[ Line: 51144 ]]
+	function Module155.decode(Buf)
 		-- upvalues: Module155 (copy), ProtoModule (copy), PropTypesModule (copy)
 		local NewModule = Module155.new()
 		local v111 = 0
@@ -29350,7 +29350,7 @@ do
 		return NewModule
 	end
 
-	function Module155:jsonEncode() --[[ Line: 51192 ]]
+	function Module155:jsonEncode()
 		local t = {}
 		
 		if self.blur_radius ~= nil then
@@ -29362,7 +29362,7 @@ do
 		return t
 	end
 
-	function Module155:jsonDecode() --[[ Line: 51206 ]]
+	function Module155:jsonDecode()
 		-- upvalues: Module155 (copy), PropTypesModule (copy)
 		local NewModule = Module155.new()
 		
@@ -29389,7 +29389,7 @@ do
 	local Module156 = {}
 	Module156.__index = Module156
 
-	function Module156.new(p1) --[[ Line: 51238 ]]
+	function Module156.new(p1)
 		-- upvalues: Module156 (copy)
 		return (setmetatable({
 			props = if p1 == nil or p1.props == nil then nil else p1.props,
@@ -29397,7 +29397,7 @@ do
 		}, Module156))
 	end
 
-	function Module156:encode() --[[ Line: 51245 ]]
+	function Module156:encode()
 		-- upvalues: ProtoModule (copy)
 		local Buf = buffer.create(0)
 		local Count = 0
@@ -29418,7 +29418,7 @@ do
 		return Buf1
 	end
 
-	function Module156.decode(Buf) --[[ Line: 51266 ]]
+	function Module156.decode(Buf)
 		-- upvalues: Module156 (copy), ProtoModule (copy), t (copy), ComponentSharedModule (copy)
 		local NewModule = Module156.new()
 		local v111 = 0
@@ -29455,7 +29455,7 @@ do
 		return NewModule
 	end
 
-	function Module156:jsonEncode() --[[ Line: 51314 ]]
+	function Module156:jsonEncode()
 		local t = {}
 		
 		if self.props ~= nil then
@@ -29467,7 +29467,7 @@ do
 		return t
 	end
 
-	function Module156:jsonDecode() --[[ Line: 51328 ]]
+	function Module156:jsonDecode()
 		-- upvalues: Module156 (copy), t (copy), ComponentSharedModule (copy)
 		local NewModule = Module156.new()
 		
@@ -29489,7 +29489,7 @@ do
 	local Module157 = {}
 	Module157.__index = Module157
 
-	function Module157.new(p1) --[[ Line: 51357 ]]
+	function Module157.new(p1)
 		-- upvalues: Module157 (copy)
 		return (setmetatable({
 			name = if p1 == nil or p1.name == nil then nil else p1.name,
@@ -29497,7 +29497,7 @@ do
 		}, Module157))
 	end
 
-	function Module157:encode() --[[ Line: 51364 ]]
+	function Module157:encode()
 		-- upvalues: ProtoModule (copy)
 		local Buf = buffer.create(0)
 		local Count = 0
@@ -29518,7 +29518,7 @@ do
 		return Buf1
 	end
 
-	function Module157.decode(Buf) --[[ Line: 51385 ]]
+	function Module157.decode(Buf)
 		-- upvalues: Module157 (copy), ProtoModule (copy), PropTypesModule (copy)
 		local NewModule = Module157.new()
 		local v112 = 0
@@ -29555,7 +29555,7 @@ do
 		return NewModule
 	end
 
-	function Module157:jsonEncode() --[[ Line: 51433 ]]
+	function Module157:jsonEncode()
 		local t = {}
 		
 		if self.name ~= nil then
@@ -29567,7 +29567,7 @@ do
 		return t
 	end
 
-	function Module157:jsonDecode() --[[ Line: 51447 ]]
+	function Module157:jsonDecode()
 		-- upvalues: Module157 (copy), PropTypesModule (copy)
 		local NewModule = Module157.new()
 		
@@ -29589,7 +29589,7 @@ do
 	local Module158 = {}
 	Module158.__index = Module158
 
-	function Module158.new(p1) --[[ Line: 51475 ]]
+	function Module158.new(p1)
 		-- upvalues: Module158 (copy)
 		return (setmetatable({
 			props = if p1 == nil or p1.props == nil then nil else p1.props,
@@ -29597,7 +29597,7 @@ do
 		}, Module158))
 	end
 
-	function Module158:encode() --[[ Line: 51484 ]]
+	function Module158:encode()
 		-- upvalues: ProtoModule (copy)
 		local Buf = buffer.create(0)
 		local Count = 0
@@ -29618,7 +29618,7 @@ do
 		return Buf1
 	end
 
-	function Module158.decode(Buf) --[[ Line: 51505 ]]
+	function Module158.decode(Buf)
 		-- upvalues: Module158 (copy), ProtoModule (copy), t (copy), ComponentSharedModule (copy)
 		local NewModule = Module158.new()
 		local v113 = 0
@@ -29655,7 +29655,7 @@ do
 		return NewModule
 	end
 
-	function Module158:jsonEncode() --[[ Line: 51553 ]]
+	function Module158:jsonEncode()
 		local t = {}
 		
 		if self.props ~= nil then
@@ -29667,7 +29667,7 @@ do
 		return t
 	end
 
-	function Module158:jsonDecode() --[[ Line: 51567 ]]
+	function Module158:jsonDecode()
 		-- upvalues: Module158 (copy), t (copy), ComponentSharedModule (copy)
 		local NewModule = Module158.new()
 		
@@ -29691,7 +29691,7 @@ do
 	local Module159 = {}
 	Module159.__index = Module159
 
-	function Module159.new(p1) --[[ Line: 51596 ]]
+	function Module159.new(p1)
 		-- upvalues: Module159 (copy)
 		return (setmetatable({
 			title = if p1 == nil or p1.title == nil then nil else p1.title,
@@ -29724,7 +29724,7 @@ do
 		}, Module159))
 	end
 
-	function Module159:encode() --[[ Line: 51656 ]]
+	function Module159:encode()
 		-- upvalues: ProtoModule (copy)
 		local Buf = buffer.create(0)
 		local Count = 0
@@ -29870,7 +29870,7 @@ do
 		return Buf1
 	end
 
-	function Module159.decode(Buf) --[[ Line: 51827 ]]
+	function Module159.decode(Buf)
 		-- upvalues: Module159 (copy), ProtoModule (copy), PropTypesModule (copy)
 		local NewModule = Module159.new()
 		local v113 = 0
@@ -30007,7 +30007,7 @@ do
 		return NewModule
 	end
 
-	function Module159:jsonEncode() --[[ Line: 52014 ]]
+	function Module159:jsonEncode()
 		local t = {}
 		
 		if self.title ~= nil then
@@ -30094,7 +30094,7 @@ do
 		return t
 	end
 
-	function Module159:jsonDecode() --[[ Line: 52128 ]]
+	function Module159:jsonDecode()
 		-- upvalues: Module159 (copy), PropTypesModule (copy)
 		local NewModule = Module159.new()
 		
@@ -30266,7 +30266,7 @@ do
 	local Module160 = {}
 	Module160.__index = Module160
 
-	function Module160.new(p1) --[[ Line: 52414 ]]
+	function Module160.new(p1)
 		-- upvalues: Module160 (copy)
 		return (setmetatable({
 			props = if p1 == nil or p1.props == nil then nil else p1.props,
@@ -30274,7 +30274,7 @@ do
 		}, Module160))
 	end
 
-	function Module160:encode() --[[ Line: 52421 ]]
+	function Module160:encode()
 		-- upvalues: ProtoModule (copy)
 		local Buf = buffer.create(0)
 		local Count = 0
@@ -30295,7 +30295,7 @@ do
 		return Buf1
 	end
 
-	function Module160.decode(Buf) --[[ Line: 52442 ]]
+	function Module160.decode(Buf)
 		-- upvalues: Module160 (copy), ProtoModule (copy), t (copy), ComponentSharedModule (copy)
 		local NewModule = Module160.new()
 		local v114 = 0
@@ -30332,7 +30332,7 @@ do
 		return NewModule
 	end
 
-	function Module160:jsonEncode() --[[ Line: 52490 ]]
+	function Module160:jsonEncode()
 		local t = {}
 		
 		if self.props ~= nil then
@@ -30344,7 +30344,7 @@ do
 		return t
 	end
 
-	function Module160:jsonDecode() --[[ Line: 52504 ]]
+	function Module160:jsonDecode()
 		-- upvalues: Module160 (copy), t (copy), ComponentSharedModule (copy)
 		local NewModule = Module160.new()
 		
@@ -30366,7 +30366,7 @@ do
 	local Module161 = {}
 	Module161.__index = Module161
 
-	function Module161.new(p1) --[[ Line: 52533 ]]
+	function Module161.new(p1)
 		-- upvalues: Module161 (copy)
 		return (setmetatable({
 			video_asset_id = if p1 == nil or p1.video_asset_id == nil then nil else p1.video_asset_id,
@@ -30382,7 +30382,7 @@ do
 		}, Module161))
 	end
 
-	function Module161:encode() --[[ Line: 52550 ]]
+	function Module161:encode()
 		-- upvalues: ProtoModule (copy)
 		local Buf = buffer.create(0)
 		local Count = 0
@@ -30443,7 +30443,7 @@ do
 		return Buf1
 	end
 
-	function Module161.decode(Buf) --[[ Line: 52619 ]]
+	function Module161.decode(Buf)
 		-- upvalues: Module161 (copy), ProtoModule (copy), PropTypesModule (copy), PropTypesEngineModule (copy)
 		local NewModule = Module161.new()
 		local v115 = 0
@@ -30512,7 +30512,7 @@ do
 		return NewModule
 	end
 
-	function Module161:jsonEncode() --[[ Line: 52708 ]]
+	function Module161:jsonEncode()
 		local t = {}
 		
 		if self.video_asset_id ~= nil then
@@ -30548,7 +30548,7 @@ do
 		return t
 	end
 
-	function Module161:jsonDecode() --[[ Line: 52754 ]]
+	function Module161:jsonDecode()
 		-- upvalues: Module161 (copy), PropTypesModule (copy), PropTypesEngineModule (copy)
 		local NewModule = Module161.new()
 		
@@ -30620,7 +30620,7 @@ do
 	local Module162 = {}
 	Module162.__index = Module162
 
-	function Module162.new(p1) --[[ Line: 52861 ]]
+	function Module162.new(p1)
 		-- upvalues: Module162 (copy)
 		return (setmetatable({
 			props = if p1 == nil or p1.props == nil then nil else p1.props,
@@ -30629,7 +30629,7 @@ do
 		}, Module162))
 	end
 
-	function Module162:encode() --[[ Line: 52869 ]]
+	function Module162:encode()
 		-- upvalues: ProtoModule (copy)
 		local Buf = buffer.create(0)
 		local Count = 0
@@ -30655,7 +30655,7 @@ do
 		return Buf1
 	end
 
-	function Module162.decode(Buf) --[[ Line: 52896 ]]
+	function Module162.decode(Buf)
 		-- upvalues: Module162 (copy), ProtoModule (copy), t (copy), ComponentSharedModule (copy)
 		local NewModule = Module162.new()
 		local v115 = 0
@@ -30696,7 +30696,7 @@ do
 		return NewModule
 	end
 
-	function Module162:jsonEncode() --[[ Line: 52949 ]]
+	function Module162:jsonEncode()
 		local t = {}
 		
 		if self.props ~= nil then
@@ -30711,7 +30711,7 @@ do
 		return t
 	end
 
-	function Module162:jsonDecode() --[[ Line: 52967 ]]
+	function Module162:jsonDecode()
 		-- upvalues: Module162 (copy), t (copy), ComponentSharedModule (copy)
 		local NewModule = Module162.new()
 		
@@ -30739,7 +30739,7 @@ do
 	local Module163 = {}
 	Module163.__index = Module163
 
-	function Module163.new(p1) --[[ Line: 53004 ]]
+	function Module163.new(p1)
 		-- upvalues: Module163 (copy)
 		return (setmetatable({
 			background_component = if p1 == nil or p1.background_component == nil then nil else p1.background_component,
@@ -30750,7 +30750,7 @@ do
 		}, Module163))
 	end
 
-	function Module163:encode() --[[ Line: 53022 ]]
+	function Module163:encode()
 		-- upvalues: ProtoModule (copy)
 		local Buf = buffer.create(0)
 		local Count = 0
@@ -30786,7 +30786,7 @@ do
 		return Buf1
 	end
 
-	function Module163.decode(Buf) --[[ Line: 53061 ]]
+	function Module163.decode(Buf)
 		-- upvalues: Module163 (copy), ProtoModule (copy), t (copy), PropTypesModule (copy)
 		local NewModule = Module163.new()
 		local v116 = 0
@@ -30835,7 +30835,7 @@ do
 		return NewModule
 	end
 
-	function Module163:jsonEncode() --[[ Line: 53126 ]]
+	function Module163:jsonEncode()
 		local t = {}
 		
 		if self.background_component ~= nil then
@@ -30856,7 +30856,7 @@ do
 		return t
 	end
 
-	function Module163:jsonDecode() --[[ Line: 53152 ]]
+	function Module163:jsonDecode()
 		-- upvalues: Module163 (copy), t (copy), PropTypesModule (copy)
 		local NewModule = Module163.new()
 		
@@ -30899,7 +30899,7 @@ do
 	local Module164 = {}
 	Module164.__index = Module164
 
-	function Module164.new(p1) --[[ Line: 53212 ]]
+	function Module164.new(p1)
 		-- upvalues: Module164 (copy)
 		return (setmetatable({
 			background_max_width = if p1 == nil or p1.background_max_width == nil then nil else p1.background_max_width,
@@ -30911,7 +30911,7 @@ do
 		}, Module164))
 	end
 
-	function Module164:encode() --[[ Line: 53235 ]]
+	function Module164:encode()
 		-- upvalues: ProtoModule (copy)
 		local Buf = buffer.create(0)
 		local Count = 0
@@ -30952,7 +30952,7 @@ do
 		return Buf1
 	end
 
-	function Module164.decode(Buf) --[[ Line: 53280 ]]
+	function Module164.decode(Buf)
 		-- upvalues: Module164 (copy), ProtoModule (copy), PropTypesModule (copy)
 		local NewModule = Module164.new()
 		local v117 = 0
@@ -31005,7 +31005,7 @@ do
 		return NewModule
 	end
 
-	function Module164:jsonEncode() --[[ Line: 53353 ]]
+	function Module164:jsonEncode()
 		local t = {}
 		
 		if self.background_max_width ~= nil then
@@ -31029,7 +31029,7 @@ do
 		return t
 	end
 
-	function Module164:jsonDecode() --[[ Line: 53383 ]]
+	function Module164:jsonDecode()
 		-- upvalues: Module164 (copy), PropTypesModule (copy)
 		local NewModule = Module164.new()
 		
@@ -31083,7 +31083,7 @@ do
 	local Module165 = {}
 	Module165.__index = Module165
 
-	function Module165.new(p1) --[[ Line: 53465 ]]
+	function Module165.new(p1)
 		-- upvalues: Module165 (copy)
 		return (setmetatable({
 			props = if p1 == nil or p1.props == nil then nil else p1.props,
@@ -31091,7 +31091,7 @@ do
 		}, Module165))
 	end
 
-	function Module165:encode() --[[ Line: 53472 ]]
+	function Module165:encode()
 		-- upvalues: ProtoModule (copy)
 		local Buf = buffer.create(0)
 		local Count = 0
@@ -31112,7 +31112,7 @@ do
 		return Buf1
 	end
 
-	function Module165.decode(Buf) --[[ Line: 53493 ]]
+	function Module165.decode(Buf)
 		-- upvalues: Module165 (copy), ProtoModule (copy), t (copy), ComponentSharedModule (copy)
 		local NewModule = Module165.new()
 		local v117 = 0
@@ -31149,7 +31149,7 @@ do
 		return NewModule
 	end
 
-	function Module165:jsonEncode() --[[ Line: 53541 ]]
+	function Module165:jsonEncode()
 		local t = {}
 		
 		if self.props ~= nil then
@@ -31161,7 +31161,7 @@ do
 		return t
 	end
 
-	function Module165:jsonDecode() --[[ Line: 53555 ]]
+	function Module165:jsonDecode()
 		-- upvalues: Module165 (copy), t (copy), ComponentSharedModule (copy)
 		local NewModule = Module165.new()
 		
@@ -31183,7 +31183,7 @@ do
 	local Module166 = {}
 	Module166.__index = Module166
 
-	function Module166.new(p1) --[[ Line: 53584 ]]
+	function Module166.new(p1)
 		-- upvalues: Module166 (copy)
 		return (setmetatable({
 			title_text = if p1 == nil or p1.title_text == nil then nil else p1.title_text,
@@ -31206,7 +31206,7 @@ do
 		}, Module166))
 	end
 
-	function Module166:encode() --[[ Line: 53615 ]]
+	function Module166:encode()
 		-- upvalues: ProtoModule (copy)
 		local Buf = buffer.create(0)
 		local Count = 0
@@ -31302,7 +31302,7 @@ do
 		return Buf1
 	end
 
-	function Module166.decode(Buf) --[[ Line: 53726 ]]
+	function Module166.decode(Buf)
 		-- upvalues: Module166 (copy), ProtoModule (copy), PropTypesModule (copy), ActionsModule (copy), t (copy), PropTypesEngineModule (copy)
 		local NewModule = Module166.new()
 		local v118 = 0
@@ -31399,7 +31399,7 @@ do
 		return NewModule
 	end
 
-	function Module166:jsonEncode() --[[ Line: 53853 ]]
+	function Module166:jsonEncode()
 		local t = {}
 		
 		if self.title_text ~= nil then
@@ -31456,7 +31456,7 @@ do
 		return t
 	end
 
-	function Module166:jsonDecode() --[[ Line: 53927 ]]
+	function Module166:jsonDecode()
 		-- upvalues: Module166 (copy), PropTypesModule (copy), ActionsModule (copy), t (copy), PropTypesEngineModule (copy)
 		local NewModule = Module166.new()
 		
@@ -31571,14 +31571,14 @@ do
 	local Module167 = {}
 	Module167.__index = Module167
 
-	function Module167.new(p1) --[[ Line: 54101 ]]
+	function Module167.new(p1)
 		-- upvalues: Module167 (copy)
 		return (setmetatable({
 			kind = if p1 == nil or p1.kind == nil then nil else p1.kind
 		}, Module167))
 	end
 
-	function Module167:encode() --[[ Line: 54107 ]]
+	function Module167:encode()
 		-- upvalues: ProtoModule (copy)
 		local Buf = buffer.create(0)
 		local Count = 0
@@ -31603,7 +31603,7 @@ do
 		return Buf1
 	end
 
-	function Module167.decode(Buf) --[[ Line: 54131 ]]
+	function Module167.decode(Buf)
 		-- upvalues: Module167 (copy), ProtoModule (copy), t (copy)
 		local NewModule = Module167.new()
 		local v119 = 0
@@ -31650,7 +31650,7 @@ do
 		return NewModule
 	end
 
-	function Module167:jsonEncode() --[[ Line: 54185 ]]
+	function Module167:jsonEncode()
 		local t = {}
 		
 		if self.kind ~= nil then
@@ -31671,7 +31671,7 @@ do
 		return t
 	end
 
-	function Module167:jsonDecode() --[[ Line: 54201 ]]
+	function Module167:jsonDecode()
 		-- upvalues: Module167 (copy), t (copy)
 		local NewModule = Module167.new()
 		
@@ -31707,7 +31707,7 @@ do
 	local Module168 = {}
 	Module168.__index = Module168
 
-	function Module168.new(p1) --[[ Line: 54241 ]]
+	function Module168.new(p1)
 		-- upvalues: Module168 (copy)
 		return (setmetatable({
 			condition = if p1 == nil or p1.condition == nil then nil else p1.condition,
@@ -31715,7 +31715,7 @@ do
 		}, Module168))
 	end
 
-	function Module168:encode() --[[ Line: 54250 ]]
+	function Module168:encode()
 		-- upvalues: ProtoModule (copy)
 		local Buf = buffer.create(0)
 		local Count = 0
@@ -31741,7 +31741,7 @@ do
 		return Buf1
 	end
 
-	function Module168.decode(Buf) --[[ Line: 54276 ]]
+	function Module168.decode(Buf)
 		-- upvalues: Module168 (copy), ProtoModule (copy), PropConditionModule (copy), t (copy)
 		local NewModule = Module168.new()
 		local v119 = 0
@@ -31785,7 +31785,7 @@ do
 		return NewModule
 	end
 
-	function Module168:jsonEncode() --[[ Line: 54329 ]]
+	function Module168:jsonEncode()
 		local t = {}
 		
 		if self.condition ~= nil then
@@ -31804,7 +31804,7 @@ do
 		return t
 	end
 
-	function Module168:jsonDecode() --[[ Line: 54347 ]]
+	function Module168:jsonDecode()
 		-- upvalues: Module168 (copy), PropConditionModule (copy), t (copy)
 		local NewModule = Module168.new()
 		
@@ -31835,14 +31835,14 @@ do
 	local Module169 = {}
 	Module169.__index = Module169
 
-	function Module169.new(p1) --[[ Line: 54387 ]]
+	function Module169.new(p1)
 		-- upvalues: Module169 (copy)
 		return (setmetatable({
 			options = if p1 == nil or p1.options == nil then {} else p1.options
 		}, Module169))
 	end
 
-	function Module169:encode() --[[ Line: 54395 ]]
+	function Module169:encode()
 		-- upvalues: ProtoModule (copy)
 		local Buf = buffer.create(0)
 		local Count = 0
@@ -31860,7 +31860,7 @@ do
 		return Buf1
 	end
 
-	function Module169.decode(Buf) --[[ Line: 54412 ]]
+	function Module169.decode(Buf)
 		-- upvalues: Module169 (copy), ProtoModule (copy), t (copy)
 		local NewModule = Module169.new()
 		local v120 = 0
@@ -31893,7 +31893,7 @@ do
 		return NewModule
 	end
 
-	function Module169:jsonEncode() --[[ Line: 54455 ]]
+	function Module169:jsonEncode()
 		local t = {}
 		
 		if self.options ~= nil and #self.options > 0 then
@@ -31907,7 +31907,7 @@ do
 		return t
 	end
 
-	function Module169:jsonDecode() --[[ Line: 54469 ]]
+	function Module169:jsonDecode()
 		-- upvalues: Module169 (copy), t (copy)
 		local NewModule = Module169.new()
 		
@@ -31931,7 +31931,7 @@ do
 	local Module170 = {}
 	Module170.__index = Module170
 
-	function Module170.new(p1) --[[ Line: 54500 ]]
+	function Module170.new(p1)
 		-- upvalues: Module170 (copy)
 		return (setmetatable({
 			name = if p1 == nil or p1.name == nil then nil else p1.name,
@@ -31939,7 +31939,7 @@ do
 		}, Module170))
 	end
 
-	function Module170:encode() --[[ Line: 54509 ]]
+	function Module170:encode()
 		-- upvalues: ProtoModule (copy)
 		local Buf = buffer.create(0)
 		local Count = 0
@@ -31960,7 +31960,7 @@ do
 		return Buf1
 	end
 
-	function Module170.decode(Buf) --[[ Line: 54530 ]]
+	function Module170.decode(Buf)
 		-- upvalues: Module170 (copy), ProtoModule (copy), PropTypesModule (copy)
 		local NewModule = Module170.new()
 		local v121 = 0
@@ -31997,7 +31997,7 @@ do
 		return NewModule
 	end
 
-	function Module170:jsonEncode() --[[ Line: 54578 ]]
+	function Module170:jsonEncode()
 		local t = {}
 		
 		if self.name ~= nil then
@@ -32009,7 +32009,7 @@ do
 		return t
 	end
 
-	function Module170:jsonDecode() --[[ Line: 54592 ]]
+	function Module170:jsonDecode()
 		-- upvalues: Module170 (copy), PropTypesModule (copy)
 		local NewModule = Module170.new()
 		
@@ -32033,14 +32033,14 @@ do
 	local Module171 = {}
 	Module171.__index = Module171
 
-	function Module171.new(p1) --[[ Line: 54620 ]]
+	function Module171.new(p1)
 		-- upvalues: Module171 (copy)
 		return (setmetatable({
 			oneof_prop = if p1 == nil or p1.oneof_prop == nil then nil else p1.oneof_prop
 		}, Module171))
 	end
 
-	function Module171:encode() --[[ Line: 54628 ]]
+	function Module171:encode()
 		-- upvalues: ProtoModule (copy)
 		local Buf = buffer.create(0)
 		local Count = 0
@@ -32062,7 +32062,7 @@ do
 		return Buf1
 	end
 
-	function Module171.decode(Buf) --[[ Line: 54649 ]]
+	function Module171.decode(Buf)
 		-- upvalues: Module171 (copy), ProtoModule (copy), t (copy), PropTypesModule (copy)
 		local NewModule = Module171.new()
 		local v121 = 0
@@ -32105,7 +32105,7 @@ do
 		return NewModule
 	end
 
-	function Module171:jsonEncode() --[[ Line: 54701 ]]
+	function Module171:jsonEncode()
 		local t = {}
 		
 		if self.oneof_prop ~= nil then
@@ -32121,7 +32121,7 @@ do
 		return t
 	end
 
-	function Module171:jsonDecode() --[[ Line: 54715 ]]
+	function Module171:jsonDecode()
 		-- upvalues: Module171 (copy), t (copy), PropTypesModule (copy)
 		local NewModule = Module171.new()
 		
@@ -32161,14 +32161,14 @@ do
 	local Module172 = {}
 	Module172.__index = Module172
 
-	function Module172.new(p1) --[[ Line: 54761 ]]
+	function Module172.new(p1)
 		-- upvalues: Module172 (copy)
 		return (setmetatable({
 			kind = if p1 == nil or p1.kind == nil then nil else p1.kind
 		}, Module172))
 	end
 
-	function Module172:encode() --[[ Line: 54767 ]]
+	function Module172:encode()
 		-- upvalues: ProtoModule (copy)
 		local Buf = buffer.create(0)
 		local Count = 0
@@ -32193,7 +32193,7 @@ do
 		return Buf1
 	end
 
-	function Module172.decode(Buf) --[[ Line: 54791 ]]
+	function Module172.decode(Buf)
 		-- upvalues: Module172 (copy), ProtoModule (copy), t (copy)
 		local NewModule = Module172.new()
 		local v122 = 0
@@ -32240,7 +32240,7 @@ do
 		return NewModule
 	end
 
-	function Module172:jsonEncode() --[[ Line: 54844 ]]
+	function Module172:jsonEncode()
 		local t = {}
 		
 		if self.kind ~= nil then
@@ -32261,7 +32261,7 @@ do
 		return t
 	end
 
-	function Module172:jsonDecode() --[[ Line: 54860 ]]
+	function Module172:jsonDecode()
 		-- upvalues: Module172 (copy), t (copy)
 		local NewModule = Module172.new()
 		
@@ -32295,7 +32295,7 @@ do
 	local Module173 = {}
 	Module173.__index = Module173
 
-	function Module173.new(p1) --[[ Line: 54897 ]]
+	function Module173.new(p1)
 		-- upvalues: Module173 (copy)
 		return (setmetatable({
 			condition = if p1 == nil or p1.condition == nil then nil else p1.condition,
@@ -32303,7 +32303,7 @@ do
 		}, Module173))
 	end
 
-	function Module173:encode() --[[ Line: 54906 ]]
+	function Module173:encode()
 		-- upvalues: ProtoModule (copy)
 		local Buf = buffer.create(0)
 		local Count = 0
@@ -32329,7 +32329,7 @@ do
 		return Buf1
 	end
 
-	function Module173.decode(Buf) --[[ Line: 54932 ]]
+	function Module173.decode(Buf)
 		-- upvalues: Module173 (copy), ProtoModule (copy), PropConditionModule (copy), t (copy)
 		local NewModule = Module173.new()
 		local v123 = 0
@@ -32373,7 +32373,7 @@ do
 		return NewModule
 	end
 
-	function Module173:jsonEncode() --[[ Line: 54985 ]]
+	function Module173:jsonEncode()
 		local t = {}
 		
 		if self.condition ~= nil then
@@ -32392,7 +32392,7 @@ do
 		return t
 	end
 
-	function Module173:jsonDecode() --[[ Line: 55003 ]]
+	function Module173:jsonDecode()
 		-- upvalues: Module173 (copy), PropConditionModule (copy), t (copy)
 		local NewModule = Module173.new()
 		
@@ -32425,14 +32425,14 @@ do
 	local Module174 = {}
 	Module174.__index = Module174
 
-	function Module174.new(p1) --[[ Line: 55040 ]]
+	function Module174.new(p1)
 		-- upvalues: Module174 (copy)
 		return (setmetatable({
 			options = if p1 == nil or p1.options == nil then {} else p1.options
 		}, Module174))
 	end
 
-	function Module174:encode() --[[ Line: 55048 ]]
+	function Module174:encode()
 		-- upvalues: ProtoModule (copy)
 		local Buf = buffer.create(0)
 		local Count = 0
@@ -32450,7 +32450,7 @@ do
 		return Buf1
 	end
 
-	function Module174.decode(Buf) --[[ Line: 55065 ]]
+	function Module174.decode(Buf)
 		-- upvalues: Module174 (copy), ProtoModule (copy), t (copy)
 		local NewModule = Module174.new()
 		local v123 = 0
@@ -32483,7 +32483,7 @@ do
 		return NewModule
 	end
 
-	function Module174:jsonEncode() --[[ Line: 55108 ]]
+	function Module174:jsonEncode()
 		local t = {}
 		
 		if self.options ~= nil and #self.options > 0 then
@@ -32497,7 +32497,7 @@ do
 		return t
 	end
 
-	function Module174:jsonDecode() --[[ Line: 55122 ]]
+	function Module174:jsonDecode()
 		-- upvalues: Module174 (copy), t (copy)
 		local NewModule = Module174.new()
 		
@@ -32521,7 +32521,7 @@ do
 	local Module175 = {}
 	Module175.__index = Module175
 
-	function Module175.new(p1) --[[ Line: 55151 ]]
+	function Module175.new(p1)
 		-- upvalues: Module175 (copy)
 		return (setmetatable({
 			id = if p1 == nil or p1.id == nil then nil else p1.id,
@@ -32531,7 +32531,7 @@ do
 		}, Module175))
 	end
 
-	function Module175:encode() --[[ Line: 55160 ]]
+	function Module175:encode()
 		-- upvalues: ProtoModule (copy)
 		local Buf = buffer.create(0)
 		local Count = 0
@@ -32562,7 +32562,7 @@ do
 		return Buf1
 	end
 
-	function Module175.decode(Buf) --[[ Line: 55193 ]]
+	function Module175.decode(Buf)
 		-- upvalues: Module175 (copy), ProtoModule (copy), PropTypesModule (copy), t (copy)
 		local NewModule = Module175.new()
 		local v124 = 0
@@ -32607,7 +32607,7 @@ do
 		return NewModule
 	end
 
-	function Module175:jsonEncode() --[[ Line: 55251 ]]
+	function Module175:jsonEncode()
 		local t = {}
 		
 		if self.id ~= nil then
@@ -32625,7 +32625,7 @@ do
 		return t
 	end
 
-	function Module175:jsonDecode() --[[ Line: 55273 ]]
+	function Module175:jsonDecode()
 		-- upvalues: Module175 (copy), PropTypesModule (copy), t (copy)
 		local NewModule = Module175.new()
 		
@@ -32656,14 +32656,14 @@ do
 	local Module176 = {}
 	Module176.__index = Module176
 
-	function Module176.new(p1) --[[ Line: 55313 ]]
+	function Module176.new(p1)
 		-- upvalues: Module176 (copy)
 		return (setmetatable({
 			kind = if p1 == nil or p1.kind == nil then nil else p1.kind
 		}, Module176))
 	end
 
-	function Module176:encode() --[[ Line: 55319 ]]
+	function Module176:encode()
 		-- upvalues: ProtoModule (copy)
 		local Buf = buffer.create(0)
 		local Count = 0
@@ -32688,7 +32688,7 @@ do
 		return Buf1
 	end
 
-	function Module176.decode(Buf) --[[ Line: 55343 ]]
+	function Module176.decode(Buf)
 		-- upvalues: Module176 (copy), ProtoModule (copy), t (copy)
 		local NewModule = Module176.new()
 		local v125 = 0
@@ -32735,7 +32735,7 @@ do
 		return NewModule
 	end
 
-	function Module176:jsonEncode() --[[ Line: 55400 ]]
+	function Module176:jsonEncode()
 		local t = {}
 		
 		if self.kind ~= nil then
@@ -32756,7 +32756,7 @@ do
 		return t
 	end
 
-	function Module176:jsonDecode() --[[ Line: 55416 ]]
+	function Module176:jsonDecode()
 		-- upvalues: Module176 (copy), t (copy)
 		local NewModule = Module176.new()
 		
@@ -32792,7 +32792,7 @@ do
 	local Module177 = {}
 	Module177.__index = Module177
 
-	function Module177.new(p1) --[[ Line: 55458 ]]
+	function Module177.new(p1)
 		-- upvalues: Module177 (copy)
 		return (setmetatable({
 			condition = if p1 == nil or p1.condition == nil then nil else p1.condition,
@@ -32800,7 +32800,7 @@ do
 		}, Module177))
 	end
 
-	function Module177:encode() --[[ Line: 55467 ]]
+	function Module177:encode()
 		-- upvalues: ProtoModule (copy)
 		local Buf = buffer.create(0)
 		local Count = 0
@@ -32826,7 +32826,7 @@ do
 		return Buf1
 	end
 
-	function Module177.decode(Buf) --[[ Line: 55495 ]]
+	function Module177.decode(Buf)
 		-- upvalues: Module177 (copy), ProtoModule (copy), PropConditionModule (copy), t (copy)
 		local NewModule = Module177.new()
 		local v125 = 0
@@ -32870,7 +32870,7 @@ do
 		return NewModule
 	end
 
-	function Module177:jsonEncode() --[[ Line: 55551 ]]
+	function Module177:jsonEncode()
 		local t = {}
 		
 		if self.condition ~= nil then
@@ -32889,7 +32889,7 @@ do
 		return t
 	end
 
-	function Module177:jsonDecode() --[[ Line: 55571 ]]
+	function Module177:jsonDecode()
 		-- upvalues: Module177 (copy), PropConditionModule (copy), t (copy)
 		local NewModule = Module177.new()
 		
@@ -32920,14 +32920,14 @@ do
 	local Module178 = {}
 	Module178.__index = Module178
 
-	function Module178.new(p1) --[[ Line: 55613 ]]
+	function Module178.new(p1)
 		-- upvalues: Module178 (copy)
 		return (setmetatable({
 			options = if p1 == nil or p1.options == nil then {} else p1.options
 		}, Module178))
 	end
 
-	function Module178:encode() --[[ Line: 55621 ]]
+	function Module178:encode()
 		-- upvalues: ProtoModule (copy)
 		local Buf = buffer.create(0)
 		local Count = 0
@@ -32945,7 +32945,7 @@ do
 		return Buf1
 	end
 
-	function Module178.decode(Buf) --[[ Line: 55640 ]]
+	function Module178.decode(Buf)
 		-- upvalues: Module178 (copy), ProtoModule (copy), t (copy)
 		local NewModule = Module178.new()
 		local v126 = 0
@@ -32978,7 +32978,7 @@ do
 		return NewModule
 	end
 
-	function Module178:jsonEncode() --[[ Line: 55685 ]]
+	function Module178:jsonEncode()
 		local t = {}
 		
 		if self.options ~= nil and #self.options > 0 then
@@ -32992,7 +32992,7 @@ do
 		return t
 	end
 
-	function Module178:jsonDecode() --[[ Line: 55701 ]]
+	function Module178:jsonDecode()
 		-- upvalues: Module178 (copy), t (copy)
 		local NewModule = Module178.new()
 		
@@ -33016,14 +33016,14 @@ do
 	local Module179 = {}
 	Module179.__index = Module179
 
-	function Module179.new(p1) --[[ Line: 55732 ]]
+	function Module179.new(p1)
 		-- upvalues: Module179 (copy)
 		return (setmetatable({
 			array = if p1 == nil or p1.array == nil then {} else p1.array
 		}, Module179))
 	end
 
-	function Module179:encode() --[[ Line: 55740 ]]
+	function Module179:encode()
 		-- upvalues: ProtoModule (copy)
 		local Buf = buffer.create(0)
 		local Count = 0
@@ -33041,7 +33041,7 @@ do
 		return Buf1
 	end
 
-	function Module179.decode(Buf) --[[ Line: 55759 ]]
+	function Module179.decode(Buf)
 		-- upvalues: Module179 (copy), ProtoModule (copy), t (copy)
 		local NewModule = Module179.new()
 		local v127 = 0
@@ -33074,7 +33074,7 @@ do
 		return NewModule
 	end
 
-	function Module179:jsonEncode() --[[ Line: 55804 ]]
+	function Module179:jsonEncode()
 		local t = {}
 		
 		if self.array ~= nil and #self.array > 0 then
@@ -33088,7 +33088,7 @@ do
 		return t
 	end
 
-	function Module179:jsonDecode() --[[ Line: 55820 ]]
+	function Module179:jsonDecode()
 		-- upvalues: Module179 (copy), t (copy)
 		local NewModule = Module179.new()
 		
@@ -33114,7 +33114,7 @@ do
 	local Module180 = {}
 	Module180.__index = Module180
 
-	function Module180.new(p1) --[[ Line: 55851 ]]
+	function Module180.new(p1)
 		-- upvalues: Module180 (copy)
 		return (setmetatable({
 			props = if p1 == nil or p1.props == nil then nil else p1.props,
@@ -33122,7 +33122,7 @@ do
 		}, Module180))
 	end
 
-	function Module180:encode() --[[ Line: 55858 ]]
+	function Module180:encode()
 		-- upvalues: ProtoModule (copy)
 		local Buf = buffer.create(0)
 		local Count = 0
@@ -33143,7 +33143,7 @@ do
 		return Buf1
 	end
 
-	function Module180.decode(Buf) --[[ Line: 55879 ]]
+	function Module180.decode(Buf)
 		-- upvalues: Module180 (copy), ProtoModule (copy), t (copy), ComponentSharedModule (copy)
 		local NewModule = Module180.new()
 		local v128 = 0
@@ -33180,7 +33180,7 @@ do
 		return NewModule
 	end
 
-	function Module180:jsonEncode() --[[ Line: 55927 ]]
+	function Module180:jsonEncode()
 		local t = {}
 		
 		if self.props ~= nil then
@@ -33192,7 +33192,7 @@ do
 		return t
 	end
 
-	function Module180:jsonDecode() --[[ Line: 55941 ]]
+	function Module180:jsonDecode()
 		-- upvalues: Module180 (copy), t (copy), ComponentSharedModule (copy)
 		local NewModule = Module180.new()
 		
@@ -33214,7 +33214,7 @@ do
 	local Module181 = {}
 	Module181.__index = Module181
 
-	function Module181.new(p1) --[[ Line: 55970 ]]
+	function Module181.new(p1)
 		-- upvalues: Module181 (copy)
 		return (setmetatable({
 			anchor_point = if p1 == nil or p1.anchor_point == nil then nil else p1.anchor_point,
@@ -33233,7 +33233,7 @@ do
 		}, Module181))
 	end
 
-	function Module181:encode() --[[ Line: 55994 ]]
+	function Module181:encode()
 		-- upvalues: ProtoModule (copy)
 		local Buf = buffer.create(0)
 		local Count = 0
@@ -33309,7 +33309,7 @@ do
 		return Buf1
 	end
 
-	function Module181.decode(Buf) --[[ Line: 56081 ]]
+	function Module181.decode(Buf)
 		-- upvalues: Module181 (copy), ProtoModule (copy), PropTypesModule (copy), t (copy), ActionsModule (copy)
 		local NewModule = Module181.new()
 		local v129 = 0
@@ -33390,7 +33390,7 @@ do
 		return NewModule
 	end
 
-	function Module181:jsonEncode() --[[ Line: 56188 ]]
+	function Module181:jsonEncode()
 		local t = {}
 		
 		if self.anchor_point ~= nil then
@@ -33435,7 +33435,7 @@ do
 		return t
 	end
 
-	function Module181:jsonDecode() --[[ Line: 56246 ]]
+	function Module181:jsonDecode()
 		-- upvalues: Module181 (copy), PropTypesModule (copy), t (copy), ActionsModule (copy)
 		local NewModule = Module181.new()
 		
@@ -33517,7 +33517,7 @@ do
 	local Module182 = {}
 	Module182.__index = Module182
 
-	function Module182.new(p1) --[[ Line: 56368 ]]
+	function Module182.new(p1)
 		-- upvalues: Module182 (copy)
 		return (setmetatable({
 			props = if p1 == nil or p1.props == nil then nil else p1.props,
@@ -33525,7 +33525,7 @@ do
 		}, Module182))
 	end
 
-	function Module182:encode() --[[ Line: 56375 ]]
+	function Module182:encode()
 		-- upvalues: ProtoModule (copy)
 		local Buf = buffer.create(0)
 		local Count = 0
@@ -33546,7 +33546,7 @@ do
 		return Buf1
 	end
 
-	function Module182.decode(Buf) --[[ Line: 56396 ]]
+	function Module182.decode(Buf)
 		-- upvalues: Module182 (copy), ProtoModule (copy), t (copy), ComponentSharedModule (copy)
 		local NewModule = Module182.new()
 		local v130 = 0
@@ -33583,7 +33583,7 @@ do
 		return NewModule
 	end
 
-	function Module182:jsonEncode() --[[ Line: 56444 ]]
+	function Module182:jsonEncode()
 		local t = {}
 		
 		if self.props ~= nil then
@@ -33595,7 +33595,7 @@ do
 		return t
 	end
 
-	function Module182:jsonDecode() --[[ Line: 56458 ]]
+	function Module182:jsonDecode()
 		-- upvalues: Module182 (copy), t (copy), ComponentSharedModule (copy)
 		local NewModule = Module182.new()
 		
@@ -33619,7 +33619,7 @@ do
 	local Module183 = {}
 	Module183.__index = Module183
 
-	function Module183.new(p1) --[[ Line: 56487 ]]
+	function Module183.new(p1)
 		-- upvalues: Module183 (copy)
 		return (setmetatable({
 			items = if p1 == nil or p1.items == nil then nil else p1.items,
@@ -33633,7 +33633,7 @@ do
 		}, Module183))
 	end
 
-	function Module183:encode() --[[ Line: 56500 ]]
+	function Module183:encode()
 		-- upvalues: ProtoModule (copy)
 		local Buf = buffer.create(0)
 		local Count = 0
@@ -33684,7 +33684,7 @@ do
 		return Buf1
 	end
 
-	function Module183.decode(Buf) --[[ Line: 56557 ]]
+	function Module183.decode(Buf)
 		-- upvalues: Module183 (copy), ProtoModule (copy), t (copy), PropTypesModule (copy)
 		local NewModule = Module183.new()
 		local v130 = 0
@@ -33745,7 +33745,7 @@ do
 		return NewModule
 	end
 
-	function Module183:jsonEncode() --[[ Line: 56635 ]]
+	function Module183:jsonEncode()
 		local t = {}
 		
 		if self.items ~= nil then
@@ -33775,7 +33775,7 @@ do
 		return t
 	end
 
-	function Module183:jsonDecode() --[[ Line: 56673 ]]
+	function Module183:jsonDecode()
 		-- upvalues: Module183 (copy), t (copy), PropTypesModule (copy)
 		local NewModule = Module183.new()
 		
@@ -33827,7 +33827,7 @@ do
 	local Module184 = {}
 	Module184.__index = Module184
 
-	function Module184.new(p1) --[[ Line: 56746 ]]
+	function Module184.new(p1)
 		-- upvalues: Module184 (copy)
 		return (setmetatable({
 			props = if p1 == nil or p1.props == nil then nil else p1.props,
@@ -33835,7 +33835,7 @@ do
 		}, Module184))
 	end
 
-	function Module184:encode() --[[ Line: 56755 ]]
+	function Module184:encode()
 		-- upvalues: ProtoModule (copy)
 		local Buf = buffer.create(0)
 		local Count = 0
@@ -33856,7 +33856,7 @@ do
 		return Buf1
 	end
 
-	function Module184.decode(Buf) --[[ Line: 56776 ]]
+	function Module184.decode(Buf)
 		-- upvalues: Module184 (copy), ProtoModule (copy), t (copy), ComponentSharedModule (copy)
 		local NewModule = Module184.new()
 		local v131 = 0
@@ -33893,7 +33893,7 @@ do
 		return NewModule
 	end
 
-	function Module184:jsonEncode() --[[ Line: 56824 ]]
+	function Module184:jsonEncode()
 		local t = {}
 		
 		if self.props ~= nil then
@@ -33905,7 +33905,7 @@ do
 		return t
 	end
 
-	function Module184:jsonDecode() --[[ Line: 56838 ]]
+	function Module184:jsonDecode()
 		-- upvalues: Module184 (copy), t (copy), ComponentSharedModule (copy)
 		local NewModule = Module184.new()
 		
@@ -33927,7 +33927,7 @@ do
 	local Module185 = {}
 	Module185.__index = Module185
 
-	function Module185.new(p1) --[[ Line: 56867 ]]
+	function Module185.new(p1)
 		-- upvalues: Module185 (copy)
 		return (setmetatable({
 			feed_items = if p1 == nil or p1.feed_items == nil then nil else p1.feed_items,
@@ -33941,7 +33941,7 @@ do
 		}, Module185))
 	end
 
-	function Module185:encode() --[[ Line: 56882 ]]
+	function Module185:encode()
 		-- upvalues: ProtoModule (copy)
 		local Buf = buffer.create(0)
 		local Count = 0
@@ -33992,7 +33992,7 @@ do
 		return Buf1
 	end
 
-	function Module185.decode(Buf) --[[ Line: 56939 ]]
+	function Module185.decode(Buf)
 		-- upvalues: Module185 (copy), ProtoModule (copy), t (copy), ActionsModule (copy), PropTypesModule (copy)
 		local NewModule = Module185.new()
 		local v132 = 0
@@ -34053,7 +34053,7 @@ do
 		return NewModule
 	end
 
-	function Module185:jsonEncode() --[[ Line: 57017 ]]
+	function Module185:jsonEncode()
 		local t = {}
 		
 		if self.feed_items ~= nil then
@@ -34083,7 +34083,7 @@ do
 		return t
 	end
 
-	function Module185:jsonDecode() --[[ Line: 57055 ]]
+	function Module185:jsonDecode()
 		-- upvalues: Module185 (copy), t (copy), ActionsModule (copy), PropTypesModule (copy)
 		local NewModule = Module185.new()
 		
@@ -34140,7 +34140,7 @@ do
 	local Module186 = {}
 	Module186.__index = Module186
 
-	function Module186.new(p1) --[[ Line: 57134 ]]
+	function Module186.new(p1)
 		-- upvalues: Module186 (copy)
 		return (setmetatable({
 			props = if p1 == nil or p1.props == nil then nil else p1.props,
@@ -34148,7 +34148,7 @@ do
 		}, Module186))
 	end
 
-	function Module186:encode() --[[ Line: 57141 ]]
+	function Module186:encode()
 		-- upvalues: ProtoModule (copy)
 		local Buf = buffer.create(0)
 		local Count = 0
@@ -34169,7 +34169,7 @@ do
 		return Buf1
 	end
 
-	function Module186.decode(Buf) --[[ Line: 57162 ]]
+	function Module186.decode(Buf)
 		-- upvalues: Module186 (copy), ProtoModule (copy), t (copy), ComponentSharedModule (copy)
 		local NewModule = Module186.new()
 		local v132 = 0
@@ -34206,7 +34206,7 @@ do
 		return NewModule
 	end
 
-	function Module186:jsonEncode() --[[ Line: 57210 ]]
+	function Module186:jsonEncode()
 		local t = {}
 		
 		if self.props ~= nil then
@@ -34218,7 +34218,7 @@ do
 		return t
 	end
 
-	function Module186:jsonDecode() --[[ Line: 57224 ]]
+	function Module186:jsonDecode()
 		-- upvalues: Module186 (copy), t (copy), ComponentSharedModule (copy)
 		local NewModule = Module186.new()
 		
@@ -34240,7 +34240,7 @@ do
 	local Module187 = {}
 	Module187.__index = Module187
 
-	function Module187.new(p1) --[[ Line: 57253 ]]
+	function Module187.new(p1)
 		-- upvalues: Module187 (copy)
 		return (setmetatable({
 			id = if p1 == nil or p1.id == nil then nil else p1.id,
@@ -34264,7 +34264,7 @@ do
 		}, Module187))
 	end
 
-	function Module187:encode() --[[ Line: 57280 ]]
+	function Module187:encode()
 		-- upvalues: ProtoModule (copy)
 		local Buf = buffer.create(0)
 		local Count = 0
@@ -34365,7 +34365,7 @@ do
 		return Buf1
 	end
 
-	function Module187.decode(Buf) --[[ Line: 57397 ]]
+	function Module187.decode(Buf)
 		-- upvalues: Module187 (copy), ProtoModule (copy), PropTypesModule (copy), CatalogSortPropTypesModule (copy), ActionsModule (copy)
 		local NewModule = Module187.new()
 		local v133 = 0
@@ -34466,7 +34466,7 @@ do
 		return NewModule
 	end
 
-	function Module187:jsonEncode() --[[ Line: 57534 ]]
+	function Module187:jsonEncode()
 		local t = {}
 		
 		if self.id ~= nil then
@@ -34526,7 +34526,7 @@ do
 		return t
 	end
 
-	function Module187:jsonDecode() --[[ Line: 57612 ]]
+	function Module187:jsonDecode()
 		-- upvalues: Module187 (copy), PropTypesModule (copy), CatalogSortPropTypesModule (copy), ActionsModule (copy)
 		local NewModule = Module187.new()
 		
@@ -34626,7 +34626,7 @@ do
 	local Module188 = {}
 	Module188.__index = Module188
 
-	function Module188.new(p1) --[[ Line: 57774 ]]
+	function Module188.new(p1)
 		-- upvalues: Module188 (copy)
 		return (setmetatable({
 			props = if p1 == nil or p1.props == nil then nil else p1.props,
@@ -34634,7 +34634,7 @@ do
 		}, Module188))
 	end
 
-	function Module188:encode() --[[ Line: 57781 ]]
+	function Module188:encode()
 		-- upvalues: ProtoModule (copy)
 		local Buf = buffer.create(0)
 		local Count = 0
@@ -34655,7 +34655,7 @@ do
 		return Buf1
 	end
 
-	function Module188.decode(Buf) --[[ Line: 57802 ]]
+	function Module188.decode(Buf)
 		-- upvalues: Module188 (copy), ProtoModule (copy), t (copy), ComponentSharedModule (copy)
 		local NewModule = Module188.new()
 		local v134 = 0
@@ -34692,7 +34692,7 @@ do
 		return NewModule
 	end
 
-	function Module188:jsonEncode() --[[ Line: 57850 ]]
+	function Module188:jsonEncode()
 		local t = {}
 		
 		if self.props ~= nil then
@@ -34704,7 +34704,7 @@ do
 		return t
 	end
 
-	function Module188:jsonDecode() --[[ Line: 57864 ]]
+	function Module188:jsonDecode()
 		-- upvalues: Module188 (copy), t (copy), ComponentSharedModule (copy)
 		local NewModule = Module188.new()
 		
@@ -34728,7 +34728,7 @@ do
 	local Module189 = {}
 	Module189.__index = Module189
 
-	function Module189.new(p1) --[[ Line: 57893 ]]
+	function Module189.new(p1)
 		-- upvalues: Module189 (copy)
 		return (setmetatable({
 			content = if p1 == nil or p1.content == nil then nil else p1.content,
@@ -34739,7 +34739,7 @@ do
 		}, Module189))
 	end
 
-	function Module189:encode() --[[ Line: 57907 ]]
+	function Module189:encode()
 		-- upvalues: ProtoModule (copy)
 		local Buf = buffer.create(0)
 		local Count = 0
@@ -34775,7 +34775,7 @@ do
 		return Buf1
 	end
 
-	function Module189.decode(Buf) --[[ Line: 57946 ]]
+	function Module189.decode(Buf)
 		-- upvalues: Module189 (copy), ProtoModule (copy), CatalogSortPropTypesModule (copy), PropTypesModule (copy), ActionsModule (copy)
 		local NewModule = Module189.new()
 		local v134 = 0
@@ -34824,7 +34824,7 @@ do
 		return NewModule
 	end
 
-	function Module189:jsonEncode() --[[ Line: 58013 ]]
+	function Module189:jsonEncode()
 		local t = {}
 		
 		if self.content ~= nil then
@@ -34845,7 +34845,7 @@ do
 		return t
 	end
 
-	function Module189:jsonDecode() --[[ Line: 58039 ]]
+	function Module189:jsonDecode()
 		-- upvalues: Module189 (copy), CatalogSortPropTypesModule (copy), PropTypesModule (copy), ActionsModule (copy)
 		local NewModule = Module189.new()
 		
@@ -34888,7 +34888,7 @@ do
 	local Module190 = {}
 	Module190.__index = Module190
 
-	function Module190.new(p1) --[[ Line: 58104 ]]
+	function Module190.new(p1)
 		-- upvalues: Module190 (copy)
 		return (setmetatable({
 			props = if p1 == nil or p1.props == nil then nil else p1.props,
@@ -34896,7 +34896,7 @@ do
 		}, Module190))
 	end
 
-	function Module190:encode() --[[ Line: 58113 ]]
+	function Module190:encode()
 		-- upvalues: ProtoModule (copy)
 		local Buf = buffer.create(0)
 		local Count = 0
@@ -34917,7 +34917,7 @@ do
 		return Buf1
 	end
 
-	function Module190.decode(Buf) --[[ Line: 58134 ]]
+	function Module190.decode(Buf)
 		-- upvalues: Module190 (copy), ProtoModule (copy), t (copy), ComponentSharedModule (copy)
 		local NewModule = Module190.new()
 		local v135 = 0
@@ -34954,7 +34954,7 @@ do
 		return NewModule
 	end
 
-	function Module190:jsonEncode() --[[ Line: 58182 ]]
+	function Module190:jsonEncode()
 		local t = {}
 		
 		if self.props ~= nil then
@@ -34966,7 +34966,7 @@ do
 		return t
 	end
 
-	function Module190:jsonDecode() --[[ Line: 58196 ]]
+	function Module190:jsonDecode()
 		-- upvalues: Module190 (copy), t (copy), ComponentSharedModule (copy)
 		local NewModule = Module190.new()
 		
@@ -34988,7 +34988,7 @@ do
 	local Module191 = {}
 	Module191.__index = Module191
 
-	function Module191.new(p1) --[[ Line: 58227 ]]
+	function Module191.new(p1)
 		-- upvalues: Module191 (copy)
 		return (setmetatable({
 			categories = if p1 == nil or p1.categories == nil then nil else p1.categories,
@@ -35005,7 +35005,7 @@ do
 		}, Module191))
 	end
 
-	function Module191:encode() --[[ Line: 58249 ]]
+	function Module191:encode()
 		-- upvalues: ProtoModule (copy)
 		local Buf = buffer.create(0)
 		local Count = 0
@@ -35071,7 +35071,7 @@ do
 		return Buf1
 	end
 
-	function Module191.decode(Buf) --[[ Line: 58326 ]]
+	function Module191.decode(Buf)
 		-- upvalues: Module191 (copy), ProtoModule (copy), t (copy), PropTypesModule (copy), ActionsModule (copy)
 		local NewModule = Module191.new()
 		local v136 = 0
@@ -35144,7 +35144,7 @@ do
 		return NewModule
 	end
 
-	function Module191:jsonEncode() --[[ Line: 58422 ]]
+	function Module191:jsonEncode()
 		local t = {}
 		
 		if self.categories ~= nil then
@@ -35183,7 +35183,7 @@ do
 		return t
 	end
 
-	function Module191:jsonDecode() --[[ Line: 58474 ]]
+	function Module191:jsonDecode()
 		-- upvalues: Module191 (copy), t (copy), PropTypesModule (copy), ActionsModule (copy)
 		local NewModule = Module191.new()
 		
@@ -35255,7 +35255,7 @@ do
 	local Module192 = {}
 	Module192.__index = Module192
 
-	function Module192.new(p1) --[[ Line: 58581 ]]
+	function Module192.new(p1)
 		-- upvalues: Module192 (copy)
 		return (setmetatable({
 			props = if p1 == nil or p1.props == nil then nil else p1.props,
@@ -35263,7 +35263,7 @@ do
 		}, Module192))
 	end
 
-	function Module192:encode() --[[ Line: 58588 ]]
+	function Module192:encode()
 		-- upvalues: ProtoModule (copy)
 		local Buf = buffer.create(0)
 		local Count = 0
@@ -35284,7 +35284,7 @@ do
 		return Buf1
 	end
 
-	function Module192.decode(Buf) --[[ Line: 58609 ]]
+	function Module192.decode(Buf)
 		-- upvalues: Module192 (copy), ProtoModule (copy), t (copy), ComponentSharedModule (copy)
 		local NewModule = Module192.new()
 		local v136 = 0
@@ -35321,7 +35321,7 @@ do
 		return NewModule
 	end
 
-	function Module192:jsonEncode() --[[ Line: 58657 ]]
+	function Module192:jsonEncode()
 		local t = {}
 		
 		if self.props ~= nil then
@@ -35333,7 +35333,7 @@ do
 		return t
 	end
 
-	function Module192:jsonDecode() --[[ Line: 58671 ]]
+	function Module192:jsonDecode()
 		-- upvalues: Module192 (copy), t (copy), ComponentSharedModule (copy)
 		local NewModule = Module192.new()
 		
@@ -35355,7 +35355,7 @@ do
 	local Module193 = {}
 	Module193.__index = Module193
 
-	function Module193.new(p1) --[[ Line: 58700 ]]
+	function Module193.new(p1)
 		-- upvalues: Module193 (copy)
 		return (setmetatable({
 			title = if p1 == nil or p1.title == nil then nil else p1.title,
@@ -35364,7 +35364,7 @@ do
 		}, Module193))
 	end
 
-	function Module193:encode() --[[ Line: 58708 ]]
+	function Module193:encode()
 		-- upvalues: ProtoModule (copy)
 		local Buf = buffer.create(0)
 		local Count = 0
@@ -35390,7 +35390,7 @@ do
 		return Buf1
 	end
 
-	function Module193.decode(Buf) --[[ Line: 58735 ]]
+	function Module193.decode(Buf)
 		-- upvalues: Module193 (copy), ProtoModule (copy), PropTypesModule (copy)
 		local NewModule = Module193.new()
 		local v137 = 0
@@ -35431,7 +35431,7 @@ do
 		return NewModule
 	end
 
-	function Module193:jsonEncode() --[[ Line: 58788 ]]
+	function Module193:jsonEncode()
 		local t = {}
 		
 		if self.title ~= nil then
@@ -35446,7 +35446,7 @@ do
 		return t
 	end
 
-	function Module193:jsonDecode() --[[ Line: 58806 ]]
+	function Module193:jsonDecode()
 		-- upvalues: Module193 (copy), PropTypesModule (copy)
 		local NewModule = Module193.new()
 		
@@ -35477,7 +35477,7 @@ do
 	local Module194 = {}
 	Module194.__index = Module194
 
-	function Module194.new(p1) --[[ Line: 58850 ]]
+	function Module194.new(p1)
 		-- upvalues: Module194 (copy)
 		return (setmetatable({
 			props = if p1 == nil or p1.props == nil then nil else p1.props,
@@ -35485,7 +35485,7 @@ do
 		}, Module194))
 	end
 
-	function Module194:encode() --[[ Line: 58859 ]]
+	function Module194:encode()
 		-- upvalues: ProtoModule (copy)
 		local Buf = buffer.create(0)
 		local Count = 0
@@ -35506,7 +35506,7 @@ do
 		return Buf1
 	end
 
-	function Module194.decode(Buf) --[[ Line: 58880 ]]
+	function Module194.decode(Buf)
 		-- upvalues: Module194 (copy), ProtoModule (copy), t (copy), ComponentSharedModule (copy)
 		local NewModule = Module194.new()
 		local v138 = 0
@@ -35543,7 +35543,7 @@ do
 		return NewModule
 	end
 
-	function Module194:jsonEncode() --[[ Line: 58928 ]]
+	function Module194:jsonEncode()
 		local t = {}
 		
 		if self.props ~= nil then
@@ -35555,7 +35555,7 @@ do
 		return t
 	end
 
-	function Module194:jsonDecode() --[[ Line: 58942 ]]
+	function Module194:jsonDecode()
 		-- upvalues: Module194 (copy), t (copy), ComponentSharedModule (copy)
 		local NewModule = Module194.new()
 		
@@ -35579,7 +35579,7 @@ do
 	local Module195 = {}
 	Module195.__index = Module195
 
-	function Module195.new(p1) --[[ Line: 58971 ]]
+	function Module195.new(p1)
 		-- upvalues: Module195 (copy)
 		return (setmetatable({
 			user_id = if p1 == nil or p1.user_id == nil then nil else p1.user_id,
@@ -35590,7 +35590,7 @@ do
 		}, Module195))
 	end
 
-	function Module195:encode() --[[ Line: 58983 ]]
+	function Module195:encode()
 		-- upvalues: ProtoModule (copy)
 		local Buf = buffer.create(0)
 		local Count = 0
@@ -35626,7 +35626,7 @@ do
 		return Buf1
 	end
 
-	function Module195.decode(Buf) --[[ Line: 59022 ]]
+	function Module195.decode(Buf)
 		-- upvalues: Module195 (copy), ProtoModule (copy), PropTypesModule (copy)
 		local NewModule = Module195.new()
 		local v138 = 0
@@ -35675,7 +35675,7 @@ do
 		return NewModule
 	end
 
-	function Module195:jsonEncode() --[[ Line: 59085 ]]
+	function Module195:jsonEncode()
 		local t = {}
 		
 		if self.user_id ~= nil then
@@ -35696,7 +35696,7 @@ do
 		return t
 	end
 
-	function Module195:jsonDecode() --[[ Line: 59111 ]]
+	function Module195:jsonDecode()
 		-- upvalues: Module195 (copy), PropTypesModule (copy)
 		local NewModule = Module195.new()
 		
@@ -35733,7 +35733,7 @@ do
 	local Module196 = {}
 	Module196.__index = Module196
 
-	function Module196.new(p1) --[[ Line: 59161 ]]
+	function Module196.new(p1)
 		-- upvalues: Module196 (copy)
 		return (setmetatable({
 			props = if p1 == nil or p1.props == nil then nil else p1.props,
@@ -35741,7 +35741,7 @@ do
 		}, Module196))
 	end
 
-	function Module196:encode() --[[ Line: 59168 ]]
+	function Module196:encode()
 		-- upvalues: ProtoModule (copy)
 		local Buf = buffer.create(0)
 		local Count = 0
@@ -35762,7 +35762,7 @@ do
 		return Buf1
 	end
 
-	function Module196.decode(Buf) --[[ Line: 59189 ]]
+	function Module196.decode(Buf)
 		-- upvalues: Module196 (copy), ProtoModule (copy), t (copy), ComponentSharedModule (copy)
 		local NewModule = Module196.new()
 		local v139 = 0
@@ -35799,7 +35799,7 @@ do
 		return NewModule
 	end
 
-	function Module196:jsonEncode() --[[ Line: 59237 ]]
+	function Module196:jsonEncode()
 		local t = {}
 		
 		if self.props ~= nil then
@@ -35811,7 +35811,7 @@ do
 		return t
 	end
 
-	function Module196:jsonDecode() --[[ Line: 59251 ]]
+	function Module196:jsonDecode()
 		-- upvalues: Module196 (copy), t (copy), ComponentSharedModule (copy)
 		local NewModule = Module196.new()
 		
@@ -35833,14 +35833,14 @@ do
 	local Module197 = {}
 	Module197.__index = Module197
 
-	function Module197.new(p1) --[[ Line: 59280 ]]
+	function Module197.new(p1)
 		-- upvalues: Module197 (copy)
 		return (setmetatable({
 			sort_id = if p1 == nil or p1.sort_id == nil then nil else p1.sort_id
 		}, Module197))
 	end
 
-	function Module197:encode() --[[ Line: 59288 ]]
+	function Module197:encode()
 		-- upvalues: ProtoModule (copy)
 		local Buf = buffer.create(0)
 		local Count = 0
@@ -35856,7 +35856,7 @@ do
 		return Buf1
 	end
 
-	function Module197.decode(Buf) --[[ Line: 59303 ]]
+	function Module197.decode(Buf)
 		-- upvalues: Module197 (copy), ProtoModule (copy), PropTypesModule (copy)
 		local NewModule = Module197.new()
 		local v140 = 0
@@ -35889,7 +35889,7 @@ do
 		return NewModule
 	end
 
-	function Module197:jsonEncode() --[[ Line: 59346 ]]
+	function Module197:jsonEncode()
 		local t = {}
 		
 		if self.sort_id ~= nil then
@@ -35898,7 +35898,7 @@ do
 		return t
 	end
 
-	function Module197:jsonDecode() --[[ Line: 59356 ]]
+	function Module197:jsonDecode()
 		-- upvalues: Module197 (copy), PropTypesModule (copy)
 		local NewModule = Module197.new()
 		
@@ -35922,7 +35922,7 @@ do
 	local Module198 = {}
 	Module198.__index = Module198
 
-	function Module198.new(p1) --[[ Line: 59384 ]]
+	function Module198.new(p1)
 		-- upvalues: Module198 (copy)
 		return (setmetatable({
 			props = if p1 == nil or p1.props == nil then nil else p1.props,
@@ -35930,7 +35930,7 @@ do
 		}, Module198))
 	end
 
-	function Module198:encode() --[[ Line: 59391 ]]
+	function Module198:encode()
 		-- upvalues: ProtoModule (copy)
 		local Buf = buffer.create(0)
 		local Count = 0
@@ -35951,7 +35951,7 @@ do
 		return Buf1
 	end
 
-	function Module198.decode(Buf) --[[ Line: 59412 ]]
+	function Module198.decode(Buf)
 		-- upvalues: Module198 (copy), ProtoModule (copy), t (copy), ComponentSharedModule (copy)
 		local NewModule = Module198.new()
 		local v140 = 0
@@ -35988,7 +35988,7 @@ do
 		return NewModule
 	end
 
-	function Module198:jsonEncode() --[[ Line: 59460 ]]
+	function Module198:jsonEncode()
 		local t = {}
 		
 		if self.props ~= nil then
@@ -36000,7 +36000,7 @@ do
 		return t
 	end
 
-	function Module198:jsonDecode() --[[ Line: 59474 ]]
+	function Module198:jsonDecode()
 		-- upvalues: Module198 (copy), t (copy), ComponentSharedModule (copy)
 		local NewModule = Module198.new()
 		
@@ -36022,7 +36022,7 @@ do
 	local Module199 = {}
 	Module199.__index = Module199
 
-	function Module199.new(p1) --[[ Line: 59503 ]]
+	function Module199.new(p1)
 		-- upvalues: Module199 (copy)
 		return (setmetatable({
 			title = if p1 == nil or p1.title == nil then nil else p1.title,
@@ -36032,7 +36032,7 @@ do
 		}, Module199))
 	end
 
-	function Module199:encode() --[[ Line: 59514 ]]
+	function Module199:encode()
 		-- upvalues: ProtoModule (copy)
 		local Buf = buffer.create(0)
 		local Count = 0
@@ -36063,7 +36063,7 @@ do
 		return Buf1
 	end
 
-	function Module199.decode(Buf) --[[ Line: 59547 ]]
+	function Module199.decode(Buf)
 		-- upvalues: Module199 (copy), ProtoModule (copy), PropTypesModule (copy)
 		local NewModule = Module199.new()
 		local v141 = 0
@@ -36108,7 +36108,7 @@ do
 		return NewModule
 	end
 
-	function Module199:jsonEncode() --[[ Line: 59606 ]]
+	function Module199:jsonEncode()
 		local t = {}
 		
 		if self.title ~= nil then
@@ -36126,7 +36126,7 @@ do
 		return t
 	end
 
-	function Module199:jsonDecode() --[[ Line: 59628 ]]
+	function Module199:jsonDecode()
 		-- upvalues: Module199 (copy), PropTypesModule (copy)
 		local NewModule = Module199.new()
 		
@@ -36160,7 +36160,7 @@ do
 	local Module200 = {}
 	Module200.__index = Module200
 
-	function Module200.new(p1) --[[ Line: 59675 ]]
+	function Module200.new(p1)
 		-- upvalues: Module200 (copy)
 		return (setmetatable({
 			props = if p1 == nil or p1.props == nil then nil else p1.props,
@@ -36168,7 +36168,7 @@ do
 		}, Module200))
 	end
 
-	function Module200:encode() --[[ Line: 59682 ]]
+	function Module200:encode()
 		-- upvalues: ProtoModule (copy)
 		local Buf = buffer.create(0)
 		local Count = 0
@@ -36189,7 +36189,7 @@ do
 		return Buf1
 	end
 
-	function Module200.decode(Buf) --[[ Line: 59703 ]]
+	function Module200.decode(Buf)
 		-- upvalues: Module200 (copy), ProtoModule (copy), t (copy), ComponentSharedModule (copy)
 		local NewModule = Module200.new()
 		local v142 = 0
@@ -36226,7 +36226,7 @@ do
 		return NewModule
 	end
 
-	function Module200:jsonEncode() --[[ Line: 59751 ]]
+	function Module200:jsonEncode()
 		local t = {}
 		
 		if self.props ~= nil then
@@ -36238,7 +36238,7 @@ do
 		return t
 	end
 
-	function Module200:jsonDecode() --[[ Line: 59765 ]]
+	function Module200:jsonDecode()
 		-- upvalues: Module200 (copy), t (copy), ComponentSharedModule (copy)
 		local NewModule = Module200.new()
 		
@@ -36262,7 +36262,7 @@ do
 	local Module201 = {}
 	Module201.__index = Module201
 
-	function Module201.new(p1) --[[ Line: 59794 ]]
+	function Module201.new(p1)
 		-- upvalues: Module201 (copy)
 		return (setmetatable({
 			item_id = if p1 == nil or p1.item_id == nil then nil else p1.item_id,
@@ -36271,7 +36271,7 @@ do
 		}, Module201))
 	end
 
-	function Module201:encode() --[[ Line: 59804 ]]
+	function Module201:encode()
 		-- upvalues: ProtoModule (copy)
 		local Buf = buffer.create(0)
 		local Count = 0
@@ -36297,7 +36297,7 @@ do
 		return Buf1
 	end
 
-	function Module201.decode(Buf) --[[ Line: 59831 ]]
+	function Module201.decode(Buf)
 		-- upvalues: Module201 (copy), ProtoModule (copy), PropTypesModule (copy)
 		local NewModule = Module201.new()
 		local v142 = 0
@@ -36338,7 +36338,7 @@ do
 		return NewModule
 	end
 
-	function Module201:jsonEncode() --[[ Line: 59884 ]]
+	function Module201:jsonEncode()
 		local t = {}
 		
 		if self.item_id ~= nil then
@@ -36353,7 +36353,7 @@ do
 		return t
 	end
 
-	function Module201:jsonDecode() --[[ Line: 59902 ]]
+	function Module201:jsonDecode()
 		-- upvalues: Module201 (copy), PropTypesModule (copy)
 		local NewModule = Module201.new()
 		
@@ -36387,7 +36387,7 @@ do
 	local Module202 = {}
 	Module202.__index = Module202
 
-	function Module202.new(p1) --[[ Line: 59948 ]]
+	function Module202.new(p1)
 		-- upvalues: Module202 (copy)
 		return (setmetatable({
 			props = if p1 == nil or p1.props == nil then nil else p1.props,
@@ -36395,7 +36395,7 @@ do
 		}, Module202))
 	end
 
-	function Module202:encode() --[[ Line: 59955 ]]
+	function Module202:encode()
 		-- upvalues: ProtoModule (copy)
 		local Buf = buffer.create(0)
 		local Count = 0
@@ -36416,7 +36416,7 @@ do
 		return Buf1
 	end
 
-	function Module202.decode(Buf) --[[ Line: 59976 ]]
+	function Module202.decode(Buf)
 		-- upvalues: Module202 (copy), ProtoModule (copy), t (copy), ComponentSharedModule (copy)
 		local NewModule = Module202.new()
 		local v143 = 0
@@ -36453,7 +36453,7 @@ do
 		return NewModule
 	end
 
-	function Module202:jsonEncode() --[[ Line: 60024 ]]
+	function Module202:jsonEncode()
 		local t = {}
 		
 		if self.props ~= nil then
@@ -36465,7 +36465,7 @@ do
 		return t
 	end
 
-	function Module202:jsonDecode() --[[ Line: 60038 ]]
+	function Module202:jsonDecode()
 		-- upvalues: Module202 (copy), t (copy), ComponentSharedModule (copy)
 		local NewModule = Module202.new()
 		
@@ -36487,19 +36487,19 @@ do
 	local Module203 = {}
 	Module203.__index = Module203
 
-	function Module203:new() --[[ Line: 60067 ]]
+	function Module203:new()
 		-- upvalues: Module203 (copy)
 		return (setmetatable({}, Module203))
 	end
 
-	function Module203:encode() --[[ Line: 60073 ]]
+	function Module203:encode()
 		local Buf = buffer.create(0)
 		buffer.copy(Buf, 0, buffer.create(0), 0, 0)
 		
 		return Buf
 	end
 
-	function Module203.decode(Buf) --[[ Line: 60082 ]]
+	function Module203.decode(Buf)
 		-- upvalues: Module203 (copy), ProtoModule (copy)
 		local NewModule = Module203.new()
 		local v144 = 0
@@ -36526,11 +36526,11 @@ do
 		return NewModule
 	end
 
-	function Module203:jsonEncode() --[[ Line: 60120 ]]
+	function Module203:jsonEncode()
 		return {}
 	end
 
-	function Module203:jsonDecode() --[[ Line: 60126 ]]
+	function Module203:jsonDecode()
 		-- upvalues: Module203 (copy)
 		return (Module203.new())
 	end
@@ -36546,7 +36546,7 @@ do
 	local Module204 = {}
 	Module204.__index = Module204
 
-	function Module204.new(p1) --[[ Line: 60146 ]]
+	function Module204.new(p1)
 		-- upvalues: Module204 (copy)
 		return (setmetatable({
 			props = if p1 == nil or p1.props == nil then nil else p1.props,
@@ -36554,7 +36554,7 @@ do
 		}, Module204))
 	end
 
-	function Module204:encode() --[[ Line: 60155 ]]
+	function Module204:encode()
 		-- upvalues: ProtoModule (copy)
 		local Buf = buffer.create(0)
 		local Count = 0
@@ -36575,7 +36575,7 @@ do
 		return Buf1
 	end
 
-	function Module204.decode(Buf) --[[ Line: 60176 ]]
+	function Module204.decode(Buf)
 		-- upvalues: Module204 (copy), ProtoModule (copy), t (copy), ComponentSharedModule (copy)
 		local NewModule = Module204.new()
 		local v144 = 0
@@ -36612,7 +36612,7 @@ do
 		return NewModule
 	end
 
-	function Module204:jsonEncode() --[[ Line: 60224 ]]
+	function Module204:jsonEncode()
 		local t = {}
 		
 		if self.props ~= nil then
@@ -36624,7 +36624,7 @@ do
 		return t
 	end
 
-	function Module204:jsonDecode() --[[ Line: 60238 ]]
+	function Module204:jsonDecode()
 		-- upvalues: Module204 (copy), t (copy), ComponentSharedModule (copy)
 		local NewModule = Module204.new()
 		
@@ -36646,7 +36646,7 @@ do
 	local Module205 = {}
 	Module205.__index = Module205
 
-	function Module205.new(p1) --[[ Line: 60267 ]]
+	function Module205.new(p1)
 		-- upvalues: Module205 (copy)
 		return (setmetatable({
 			id = if p1 == nil or p1.id == nil then nil else p1.id,
@@ -36670,7 +36670,7 @@ do
 		}, Module205))
 	end
 
-	function Module205:encode() --[[ Line: 60294 ]]
+	function Module205:encode()
 		-- upvalues: ProtoModule (copy)
 		local Buf = buffer.create(0)
 		local Count = 0
@@ -36771,7 +36771,7 @@ do
 		return Buf1
 	end
 
-	function Module205.decode(Buf) --[[ Line: 60411 ]]
+	function Module205.decode(Buf)
 		-- upvalues: Module205 (copy), ProtoModule (copy), PropTypesModule (copy), CatalogSortPropTypesModule (copy), ActionsModule (copy)
 		local NewModule = Module205.new()
 		local v145 = 0
@@ -36872,7 +36872,7 @@ do
 		return NewModule
 	end
 
-	function Module205:jsonEncode() --[[ Line: 60548 ]]
+	function Module205:jsonEncode()
 		local t = {}
 		
 		if self.id ~= nil then
@@ -36932,7 +36932,7 @@ do
 		return t
 	end
 
-	function Module205:jsonDecode() --[[ Line: 60626 ]]
+	function Module205:jsonDecode()
 		-- upvalues: Module205 (copy), PropTypesModule (copy), CatalogSortPropTypesModule (copy), ActionsModule (copy)
 		local NewModule = Module205.new()
 		
@@ -37032,7 +37032,7 @@ do
 	local Module206 = {}
 	Module206.__index = Module206
 
-	function Module206.new(p1) --[[ Line: 60788 ]]
+	function Module206.new(p1)
 		-- upvalues: Module206 (copy)
 		return (setmetatable({
 			props = if p1 == nil or p1.props == nil then nil else p1.props,
@@ -37040,7 +37040,7 @@ do
 		}, Module206))
 	end
 
-	function Module206:encode() --[[ Line: 60795 ]]
+	function Module206:encode()
 		-- upvalues: ProtoModule (copy)
 		local Buf = buffer.create(0)
 		local Count = 0
@@ -37061,7 +37061,7 @@ do
 		return Buf1
 	end
 
-	function Module206.decode(Buf) --[[ Line: 60816 ]]
+	function Module206.decode(Buf)
 		-- upvalues: Module206 (copy), ProtoModule (copy), t (copy), ComponentSharedModule (copy)
 		local NewModule = Module206.new()
 		local v146 = 0
@@ -37098,7 +37098,7 @@ do
 		return NewModule
 	end
 
-	function Module206:jsonEncode() --[[ Line: 60864 ]]
+	function Module206:jsonEncode()
 		local t = {}
 		
 		if self.props ~= nil then
@@ -37110,7 +37110,7 @@ do
 		return t
 	end
 
-	function Module206:jsonDecode() --[[ Line: 60878 ]]
+	function Module206:jsonDecode()
 		-- upvalues: Module206 (copy), t (copy), ComponentSharedModule (copy)
 		local NewModule = Module206.new()
 		
@@ -37134,7 +37134,7 @@ do
 	local Module207 = {}
 	Module207.__index = Module207
 
-	function Module207.new(p1) --[[ Line: 60907 ]]
+	function Module207.new(p1)
 		-- upvalues: Module207 (copy)
 		return (setmetatable({
 			id = if p1 == nil or p1.id == nil then nil else p1.id,
@@ -37157,7 +37157,7 @@ do
 		}, Module207))
 	end
 
-	function Module207:encode() --[[ Line: 60931 ]]
+	function Module207:encode()
 		-- upvalues: ProtoModule (copy)
 		local Buf = buffer.create(0)
 		local Count = 0
@@ -37253,7 +37253,7 @@ do
 		return Buf1
 	end
 
-	function Module207.decode(Buf) --[[ Line: 61042 ]]
+	function Module207.decode(Buf)
 		-- upvalues: Module207 (copy), ProtoModule (copy), PropTypesModule (copy), CatalogSortPropTypesModule (copy)
 		local NewModule = Module207.new()
 		local v146 = 0
@@ -37350,7 +37350,7 @@ do
 		return NewModule
 	end
 
-	function Module207:jsonEncode() --[[ Line: 61173 ]]
+	function Module207:jsonEncode()
 		local t = {}
 		
 		if self.id ~= nil then
@@ -37407,7 +37407,7 @@ do
 		return t
 	end
 
-	function Module207:jsonDecode() --[[ Line: 61247 ]]
+	function Module207:jsonDecode()
 		-- upvalues: Module207 (copy), PropTypesModule (copy), CatalogSortPropTypesModule (copy)
 		local NewModule = Module207.new()
 		
@@ -37501,7 +37501,7 @@ do
 	local Module208 = {}
 	Module208.__index = Module208
 
-	function Module208.new(p1) --[[ Line: 61401 ]]
+	function Module208.new(p1)
 		-- upvalues: Module208 (copy)
 		return (setmetatable({
 			on_activated = if p1 == nil or p1.on_activated == nil then nil else p1.on_activated,
@@ -37510,7 +37510,7 @@ do
 		}, Module208))
 	end
 
-	function Module208:encode() --[[ Line: 61409 ]]
+	function Module208:encode()
 		-- upvalues: ProtoModule (copy)
 		local Buf = buffer.create(0)
 		local Count = 0
@@ -37536,7 +37536,7 @@ do
 		return Buf1
 	end
 
-	function Module208.decode(Buf) --[[ Line: 61436 ]]
+	function Module208.decode(Buf)
 		-- upvalues: Module208 (copy), ProtoModule (copy), ActionsModule (copy), PropTypesModule (copy)
 		local NewModule = Module208.new()
 		local v147 = 0
@@ -37577,7 +37577,7 @@ do
 		return NewModule
 	end
 
-	function Module208:jsonEncode() --[[ Line: 61489 ]]
+	function Module208:jsonEncode()
 		local t = {}
 		
 		if self.on_activated ~= nil then
@@ -37592,7 +37592,7 @@ do
 		return t
 	end
 
-	function Module208:jsonDecode() --[[ Line: 61507 ]]
+	function Module208:jsonDecode()
 		-- upvalues: Module208 (copy), ActionsModule (copy), PropTypesModule (copy)
 		local NewModule = Module208.new()
 		
@@ -37620,14 +37620,14 @@ do
 	local Module209 = {}
 	Module209.__index = Module209
 
-	function Module209.new(p1) --[[ Line: 61543 ]]
+	function Module209.new(p1)
 		-- upvalues: Module209 (copy)
 		return (setmetatable({
 			kind = if p1 == nil or p1.kind == nil then nil else p1.kind
 		}, Module209))
 	end
 
-	function Module209:encode() --[[ Line: 61551 ]]
+	function Module209:encode()
 		-- upvalues: ProtoModule (copy)
 		local Buf = buffer.create(0)
 		local Count = 0
@@ -37652,7 +37652,7 @@ do
 		return Buf1
 	end
 
-	function Module209.decode(Buf) --[[ Line: 61575 ]]
+	function Module209.decode(Buf)
 		-- upvalues: Module209 (copy), ProtoModule (copy), t (copy)
 		local NewModule = Module209.new()
 		local v148 = 0
@@ -37699,7 +37699,7 @@ do
 		return NewModule
 	end
 
-	function Module209:jsonEncode() --[[ Line: 61631 ]]
+	function Module209:jsonEncode()
 		local t = {}
 		
 		if self.kind ~= nil then
@@ -37720,7 +37720,7 @@ do
 		return t
 	end
 
-	function Module209:jsonDecode() --[[ Line: 61647 ]]
+	function Module209:jsonDecode()
 		-- upvalues: Module209 (copy), t (copy)
 		local NewModule = Module209.new()
 		
@@ -37756,7 +37756,7 @@ do
 	local Module210 = {}
 	Module210.__index = Module210
 
-	function Module210.new(p1) --[[ Line: 61686 ]]
+	function Module210.new(p1)
 		-- upvalues: Module210 (copy)
 		return (setmetatable({
 			condition = if p1 == nil or p1.condition == nil then nil else p1.condition,
@@ -37764,7 +37764,7 @@ do
 		}, Module210))
 	end
 
-	function Module210:encode() --[[ Line: 61695 ]]
+	function Module210:encode()
 		-- upvalues: ProtoModule (copy)
 		local Buf = buffer.create(0)
 		local Count = 0
@@ -37790,7 +37790,7 @@ do
 		return Buf1
 	end
 
-	function Module210.decode(Buf) --[[ Line: 61723 ]]
+	function Module210.decode(Buf)
 		-- upvalues: Module210 (copy), ProtoModule (copy), PropConditionModule (copy), t (copy)
 		local NewModule = Module210.new()
 		local v148 = 0
@@ -37834,7 +37834,7 @@ do
 		return NewModule
 	end
 
-	function Module210:jsonEncode() --[[ Line: 61778 ]]
+	function Module210:jsonEncode()
 		local t = {}
 		
 		if self.condition ~= nil then
@@ -37853,7 +37853,7 @@ do
 		return t
 	end
 
-	function Module210:jsonDecode() --[[ Line: 61798 ]]
+	function Module210:jsonDecode()
 		-- upvalues: Module210 (copy), PropConditionModule (copy), t (copy)
 		local NewModule = Module210.new()
 		
@@ -37884,14 +37884,14 @@ do
 	local Module211 = {}
 	Module211.__index = Module211
 
-	function Module211.new(p1) --[[ Line: 61837 ]]
+	function Module211.new(p1)
 		-- upvalues: Module211 (copy)
 		return (setmetatable({
 			options = if p1 == nil or p1.options == nil then {} else p1.options
 		}, Module211))
 	end
 
-	function Module211:encode() --[[ Line: 61845 ]]
+	function Module211:encode()
 		-- upvalues: ProtoModule (copy)
 		local Buf = buffer.create(0)
 		local Count = 0
@@ -37909,7 +37909,7 @@ do
 		return Buf1
 	end
 
-	function Module211.decode(Buf) --[[ Line: 61864 ]]
+	function Module211.decode(Buf)
 		-- upvalues: Module211 (copy), ProtoModule (copy), t (copy)
 		local NewModule = Module211.new()
 		local v149 = 0
@@ -37942,7 +37942,7 @@ do
 		return NewModule
 	end
 
-	function Module211:jsonEncode() --[[ Line: 61909 ]]
+	function Module211:jsonEncode()
 		local t = {}
 		
 		if self.options ~= nil and #self.options > 0 then
@@ -37956,7 +37956,7 @@ do
 		return t
 	end
 
-	function Module211:jsonDecode() --[[ Line: 61925 ]]
+	function Module211:jsonDecode()
 		-- upvalues: Module211 (copy), t (copy)
 		local NewModule = Module211.new()
 		
@@ -37980,14 +37980,14 @@ do
 	local Module212 = {}
 	Module212.__index = Module212
 
-	function Module212.new(p1) --[[ Line: 61956 ]]
+	function Module212.new(p1)
 		-- upvalues: Module212 (copy)
 		return (setmetatable({
 			kind = if p1 == nil or p1.kind == nil then nil else p1.kind
 		}, Module212))
 	end
 
-	function Module212:encode() --[[ Line: 61964 ]]
+	function Module212:encode()
 		-- upvalues: ProtoModule (copy)
 		local Buf = buffer.create(0)
 		local Count = 0
@@ -38012,7 +38012,7 @@ do
 		return Buf1
 	end
 
-	function Module212.decode(Buf) --[[ Line: 61988 ]]
+	function Module212.decode(Buf)
 		-- upvalues: Module212 (copy), ProtoModule (copy), t (copy)
 		local NewModule = Module212.new()
 		local v150 = 0
@@ -38059,7 +38059,7 @@ do
 		return NewModule
 	end
 
-	function Module212:jsonEncode() --[[ Line: 62047 ]]
+	function Module212:jsonEncode()
 		local t = {}
 		
 		if self.kind ~= nil then
@@ -38080,7 +38080,7 @@ do
 		return t
 	end
 
-	function Module212:jsonDecode() --[[ Line: 62063 ]]
+	function Module212:jsonDecode()
 		-- upvalues: Module212 (copy), t (copy)
 		local NewModule = Module212.new()
 		
@@ -38116,7 +38116,7 @@ do
 	local Module213 = {}
 	Module213.__index = Module213
 
-	function Module213.new(p1) --[[ Line: 62105 ]]
+	function Module213.new(p1)
 		-- upvalues: Module213 (copy)
 		return (setmetatable({
 			condition = if p1 == nil or p1.condition == nil then nil else p1.condition,
@@ -38124,7 +38124,7 @@ do
 		}, Module213))
 	end
 
-	function Module213:encode() --[[ Line: 62114 ]]
+	function Module213:encode()
 		-- upvalues: ProtoModule (copy)
 		local Buf = buffer.create(0)
 		local Count = 0
@@ -38150,7 +38150,7 @@ do
 		return Buf1
 	end
 
-	function Module213.decode(Buf) --[[ Line: 62142 ]]
+	function Module213.decode(Buf)
 		-- upvalues: Module213 (copy), ProtoModule (copy), PropConditionModule (copy), t (copy)
 		local NewModule = Module213.new()
 		local v150 = 0
@@ -38194,7 +38194,7 @@ do
 		return NewModule
 	end
 
-	function Module213:jsonEncode() --[[ Line: 62200 ]]
+	function Module213:jsonEncode()
 		local t = {}
 		
 		if self.condition ~= nil then
@@ -38213,7 +38213,7 @@ do
 		return t
 	end
 
-	function Module213:jsonDecode() --[[ Line: 62220 ]]
+	function Module213:jsonDecode()
 		-- upvalues: Module213 (copy), PropConditionModule (copy), t (copy)
 		local NewModule = Module213.new()
 		
@@ -38244,14 +38244,14 @@ do
 	local Module214 = {}
 	Module214.__index = Module214
 
-	function Module214.new(p1) --[[ Line: 62264 ]]
+	function Module214.new(p1)
 		-- upvalues: Module214 (copy)
 		return (setmetatable({
 			options = if p1 == nil or p1.options == nil then {} else p1.options
 		}, Module214))
 	end
 
-	function Module214:encode() --[[ Line: 62275 ]]
+	function Module214:encode()
 		-- upvalues: ProtoModule (copy)
 		local Buf = buffer.create(0)
 		local Count = 0
@@ -38269,7 +38269,7 @@ do
 		return Buf1
 	end
 
-	function Module214.decode(Buf) --[[ Line: 62294 ]]
+	function Module214.decode(Buf)
 		-- upvalues: Module214 (copy), ProtoModule (copy), t (copy)
 		local NewModule = Module214.new()
 		local v151 = 0
@@ -38302,7 +38302,7 @@ do
 		return NewModule
 	end
 
-	function Module214:jsonEncode() --[[ Line: 62339 ]]
+	function Module214:jsonEncode()
 		local t = {}
 		
 		if self.options ~= nil and #self.options > 0 then
@@ -38316,7 +38316,7 @@ do
 		return t
 	end
 
-	function Module214:jsonDecode() --[[ Line: 62355 ]]
+	function Module214:jsonDecode()
 		-- upvalues: Module214 (copy), t (copy)
 		local NewModule = Module214.new()
 		
@@ -38340,14 +38340,14 @@ do
 	local Module215 = {}
 	Module215.__index = Module215
 
-	function Module215.new(p1) --[[ Line: 62388 ]]
+	function Module215.new(p1)
 		-- upvalues: Module215 (copy)
 		return (setmetatable({
 			array = if p1 == nil or p1.array == nil then {} else p1.array
 		}, Module215))
 	end
 
-	function Module215:encode() --[[ Line: 62399 ]]
+	function Module215:encode()
 		-- upvalues: ProtoModule (copy)
 		local Buf = buffer.create(0)
 		local Count = 0
@@ -38365,7 +38365,7 @@ do
 		return Buf1
 	end
 
-	function Module215.decode(Buf) --[[ Line: 62418 ]]
+	function Module215.decode(Buf)
 		-- upvalues: Module215 (copy), ProtoModule (copy), t (copy)
 		local NewModule = Module215.new()
 		local v152 = 0
@@ -38398,7 +38398,7 @@ do
 		return NewModule
 	end
 
-	function Module215:jsonEncode() --[[ Line: 62463 ]]
+	function Module215:jsonEncode()
 		local t = {}
 		
 		if self.array ~= nil and #self.array > 0 then
@@ -38412,7 +38412,7 @@ do
 		return t
 	end
 
-	function Module215:jsonDecode() --[[ Line: 62479 ]]
+	function Module215:jsonDecode()
 		-- upvalues: Module215 (copy), t (copy)
 		local NewModule = Module215.new()
 		
@@ -38438,7 +38438,7 @@ do
 	local Module216 = {}
 	Module216.__index = Module216
 
-	function Module216.new(p1) --[[ Line: 62511 ]]
+	function Module216.new(p1)
 		-- upvalues: Module216 (copy)
 		return (setmetatable({
 			anchor_id = if p1 == nil or p1.anchor_id == nil then nil else p1.anchor_id,
@@ -38452,7 +38452,7 @@ do
 		}, Module216))
 	end
 
-	function Module216:encode() --[[ Line: 62526 ]]
+	function Module216:encode()
 		-- upvalues: ProtoModule (copy)
 		local Buf = buffer.create(0)
 		local Count = 0
@@ -38503,7 +38503,7 @@ do
 		return Buf1
 	end
 
-	function Module216.decode(Buf) --[[ Line: 62583 ]]
+	function Module216.decode(Buf)
 		-- upvalues: Module216 (copy), ProtoModule (copy), PropTypesModule (copy), ActionsModule (copy), t (copy)
 		local NewModule = Module216.new()
 		local v153 = 0
@@ -38564,7 +38564,7 @@ do
 		return NewModule
 	end
 
-	function Module216:jsonEncode() --[[ Line: 62661 ]]
+	function Module216:jsonEncode()
 		local t = {}
 		
 		if self.anchor_id ~= nil then
@@ -38594,7 +38594,7 @@ do
 		return t
 	end
 
-	function Module216:jsonDecode() --[[ Line: 62699 ]]
+	function Module216:jsonDecode()
 		-- upvalues: Module216 (copy), PropTypesModule (copy), ActionsModule (copy), t (copy)
 		local NewModule = Module216.new()
 		
@@ -38643,14 +38643,14 @@ do
 	local Module217 = {}
 	Module217.__index = Module217
 
-	function Module217.new(p1) --[[ Line: 62763 ]]
+	function Module217.new(p1)
 		-- upvalues: Module217 (copy)
 		return (setmetatable({
 			kind = if p1 == nil or p1.kind == nil then nil else p1.kind
 		}, Module217))
 	end
 
-	function Module217:encode() --[[ Line: 62771 ]]
+	function Module217:encode()
 		-- upvalues: ProtoModule (copy)
 		local Buf = buffer.create(0)
 		local Count = 0
@@ -38675,7 +38675,7 @@ do
 		return Buf1
 	end
 
-	function Module217.decode(Buf) --[[ Line: 62795 ]]
+	function Module217.decode(Buf)
 		-- upvalues: Module217 (copy), ProtoModule (copy), t (copy)
 		local NewModule = Module217.new()
 		local v154 = 0
@@ -38722,7 +38722,7 @@ do
 		return NewModule
 	end
 
-	function Module217:jsonEncode() --[[ Line: 62851 ]]
+	function Module217:jsonEncode()
 		local t = {}
 		
 		if self.kind ~= nil then
@@ -38743,7 +38743,7 @@ do
 		return t
 	end
 
-	function Module217:jsonDecode() --[[ Line: 62867 ]]
+	function Module217:jsonDecode()
 		-- upvalues: Module217 (copy), t (copy)
 		local NewModule = Module217.new()
 		
@@ -38777,7 +38777,7 @@ do
 	local Module218 = {}
 	Module218.__index = Module218
 
-	function Module218.new(p1) --[[ Line: 62909 ]]
+	function Module218.new(p1)
 		-- upvalues: Module218 (copy)
 		return (setmetatable({
 			condition = if p1 == nil or p1.condition == nil then nil else p1.condition,
@@ -38785,7 +38785,7 @@ do
 		}, Module218))
 	end
 
-	function Module218:encode() --[[ Line: 62921 ]]
+	function Module218:encode()
 		-- upvalues: ProtoModule (copy)
 		local Buf = buffer.create(0)
 		local Count = 0
@@ -38811,7 +38811,7 @@ do
 		return Buf1
 	end
 
-	function Module218.decode(Buf) --[[ Line: 62949 ]]
+	function Module218.decode(Buf)
 		-- upvalues: Module218 (copy), ProtoModule (copy), PropConditionModule (copy), t (copy)
 		local NewModule = Module218.new()
 		local v155 = 0
@@ -38855,7 +38855,7 @@ do
 		return NewModule
 	end
 
-	function Module218:jsonEncode() --[[ Line: 63004 ]]
+	function Module218:jsonEncode()
 		local t = {}
 		
 		if self.condition ~= nil then
@@ -38874,7 +38874,7 @@ do
 		return t
 	end
 
-	function Module218:jsonDecode() --[[ Line: 63024 ]]
+	function Module218:jsonDecode()
 		-- upvalues: Module218 (copy), PropConditionModule (copy), t (copy)
 		local NewModule = Module218.new()
 		
@@ -38907,14 +38907,14 @@ do
 	local Module219 = {}
 	Module219.__index = Module219
 
-	function Module219.new(p1) --[[ Line: 63065 ]]
+	function Module219.new(p1)
 		-- upvalues: Module219 (copy)
 		return (setmetatable({
 			options = if p1 == nil or p1.options == nil then {} else p1.options
 		}, Module219))
 	end
 
-	function Module219:encode() --[[ Line: 63076 ]]
+	function Module219:encode()
 		-- upvalues: ProtoModule (copy)
 		local Buf = buffer.create(0)
 		local Count = 0
@@ -38932,7 +38932,7 @@ do
 		return Buf1
 	end
 
-	function Module219.decode(Buf) --[[ Line: 63095 ]]
+	function Module219.decode(Buf)
 		-- upvalues: Module219 (copy), ProtoModule (copy), t (copy)
 		local NewModule = Module219.new()
 		local v155 = 0
@@ -38965,7 +38965,7 @@ do
 		return NewModule
 	end
 
-	function Module219:jsonEncode() --[[ Line: 63143 ]]
+	function Module219:jsonEncode()
 		local t = {}
 		
 		if self.options ~= nil and #self.options > 0 then
@@ -38979,7 +38979,7 @@ do
 		return t
 	end
 
-	function Module219:jsonDecode() --[[ Line: 63159 ]]
+	function Module219:jsonDecode()
 		-- upvalues: Module219 (copy), t (copy)
 		local NewModule = Module219.new()
 		
@@ -39003,7 +39003,7 @@ do
 	local Module220 = {}
 	Module220.__index = Module220
 
-	function Module220.new(p1) --[[ Line: 63191 ]]
+	function Module220.new(p1)
 		-- upvalues: Module220 (copy)
 		return (setmetatable({
 			id = if p1 == nil or p1.id == nil then nil else p1.id,
@@ -39012,7 +39012,7 @@ do
 		}, Module220))
 	end
 
-	function Module220:encode() --[[ Line: 63199 ]]
+	function Module220:encode()
 		-- upvalues: ProtoModule (copy)
 		local Buf = buffer.create(0)
 		local Count = 0
@@ -39038,7 +39038,7 @@ do
 		return Buf1
 	end
 
-	function Module220.decode(Buf) --[[ Line: 63226 ]]
+	function Module220.decode(Buf)
 		-- upvalues: Module220 (copy), ProtoModule (copy), PropTypesModule (copy)
 		local NewModule = Module220.new()
 		local v156 = 0
@@ -39079,7 +39079,7 @@ do
 		return NewModule
 	end
 
-	function Module220:jsonEncode() --[[ Line: 63279 ]]
+	function Module220:jsonEncode()
 		local t = {}
 		
 		if self.id ~= nil then
@@ -39094,7 +39094,7 @@ do
 		return t
 	end
 
-	function Module220:jsonDecode() --[[ Line: 63297 ]]
+	function Module220:jsonDecode()
 		-- upvalues: Module220 (copy), PropTypesModule (copy)
 		local NewModule = Module220.new()
 		
@@ -39122,7 +39122,7 @@ do
 	local Module221 = {}
 	Module221.__index = Module221
 
-	function Module221.new(p1) --[[ Line: 63333 ]]
+	function Module221.new(p1)
 		-- upvalues: Module221 (copy)
 		return (setmetatable({
 			id = if p1 == nil or p1.id == nil then nil else p1.id,
@@ -39132,7 +39132,7 @@ do
 		}, Module221))
 	end
 
-	function Module221:encode() --[[ Line: 63342 ]]
+	function Module221:encode()
 		-- upvalues: ProtoModule (copy)
 		local Buf = buffer.create(0)
 		local Count = 0
@@ -39163,7 +39163,7 @@ do
 		return Buf1
 	end
 
-	function Module221.decode(Buf) --[[ Line: 63375 ]]
+	function Module221.decode(Buf)
 		-- upvalues: Module221 (copy), ProtoModule (copy), PropTypesModule (copy), ActionsModule (copy)
 		local NewModule = Module221.new()
 		local v157 = 0
@@ -39208,7 +39208,7 @@ do
 		return NewModule
 	end
 
-	function Module221:jsonEncode() --[[ Line: 63433 ]]
+	function Module221:jsonEncode()
 		local t = {}
 		
 		if self.id ~= nil then
@@ -39226,7 +39226,7 @@ do
 		return t
 	end
 
-	function Module221:jsonDecode() --[[ Line: 63455 ]]
+	function Module221:jsonDecode()
 		-- upvalues: Module221 (copy), PropTypesModule (copy), ActionsModule (copy)
 		local NewModule = Module221.new()
 		
@@ -39262,14 +39262,14 @@ do
 	local Module222 = {}
 	Module222.__index = Module222
 
-	function Module222.new(p1) --[[ Line: 63499 ]]
+	function Module222.new(p1)
 		-- upvalues: Module222 (copy)
 		return (setmetatable({
 			kind = if p1 == nil or p1.kind == nil then nil else p1.kind
 		}, Module222))
 	end
 
-	function Module222:encode() --[[ Line: 63505 ]]
+	function Module222:encode()
 		-- upvalues: ProtoModule (copy)
 		local Buf = buffer.create(0)
 		local Count = 0
@@ -39294,7 +39294,7 @@ do
 		return Buf1
 	end
 
-	function Module222.decode(Buf) --[[ Line: 63529 ]]
+	function Module222.decode(Buf)
 		-- upvalues: Module222 (copy), ProtoModule (copy), t (copy)
 		local NewModule = Module222.new()
 		local v157 = 0
@@ -39341,7 +39341,7 @@ do
 		return NewModule
 	end
 
-	function Module222:jsonEncode() --[[ Line: 63585 ]]
+	function Module222:jsonEncode()
 		local t = {}
 		
 		if self.kind ~= nil then
@@ -39362,7 +39362,7 @@ do
 		return t
 	end
 
-	function Module222:jsonDecode() --[[ Line: 63601 ]]
+	function Module222:jsonDecode()
 		-- upvalues: Module222 (copy), t (copy)
 		local NewModule = Module222.new()
 		
@@ -39396,7 +39396,7 @@ do
 	local Module223 = {}
 	Module223.__index = Module223
 
-	function Module223.new(p1) --[[ Line: 63640 ]]
+	function Module223.new(p1)
 		-- upvalues: Module223 (copy)
 		return (setmetatable({
 			condition = if p1 == nil or p1.condition == nil then nil else p1.condition,
@@ -39404,7 +39404,7 @@ do
 		}, Module223))
 	end
 
-	function Module223:encode() --[[ Line: 63649 ]]
+	function Module223:encode()
 		-- upvalues: ProtoModule (copy)
 		local Buf = buffer.create(0)
 		local Count = 0
@@ -39430,7 +39430,7 @@ do
 		return Buf1
 	end
 
-	function Module223.decode(Buf) --[[ Line: 63677 ]]
+	function Module223.decode(Buf)
 		-- upvalues: Module223 (copy), ProtoModule (copy), PropConditionModule (copy), t (copy)
 		local NewModule = Module223.new()
 		local v158 = 0
@@ -39474,7 +39474,7 @@ do
 		return NewModule
 	end
 
-	function Module223:jsonEncode() --[[ Line: 63732 ]]
+	function Module223:jsonEncode()
 		local t = {}
 		
 		if self.condition ~= nil then
@@ -39493,7 +39493,7 @@ do
 		return t
 	end
 
-	function Module223:jsonDecode() --[[ Line: 63752 ]]
+	function Module223:jsonDecode()
 		-- upvalues: Module223 (copy), PropConditionModule (copy), t (copy)
 		local NewModule = Module223.new()
 		
@@ -39524,14 +39524,14 @@ do
 	local Module224 = {}
 	Module224.__index = Module224
 
-	function Module224.new(p1) --[[ Line: 63791 ]]
+	function Module224.new(p1)
 		-- upvalues: Module224 (copy)
 		return (setmetatable({
 			options = if p1 == nil or p1.options == nil then {} else p1.options
 		}, Module224))
 	end
 
-	function Module224:encode() --[[ Line: 63799 ]]
+	function Module224:encode()
 		-- upvalues: ProtoModule (copy)
 		local Buf = buffer.create(0)
 		local Count = 0
@@ -39549,7 +39549,7 @@ do
 		return Buf1
 	end
 
-	function Module224.decode(Buf) --[[ Line: 63818 ]]
+	function Module224.decode(Buf)
 		-- upvalues: Module224 (copy), ProtoModule (copy), t (copy)
 		local NewModule = Module224.new()
 		local v159 = 0
@@ -39582,7 +39582,7 @@ do
 		return NewModule
 	end
 
-	function Module224:jsonEncode() --[[ Line: 63863 ]]
+	function Module224:jsonEncode()
 		local t = {}
 		
 		if self.options ~= nil and #self.options > 0 then
@@ -39596,7 +39596,7 @@ do
 		return t
 	end
 
-	function Module224:jsonDecode() --[[ Line: 63879 ]]
+	function Module224:jsonDecode()
 		-- upvalues: Module224 (copy), t (copy)
 		local NewModule = Module224.new()
 		
@@ -39622,14 +39622,14 @@ do
 	local Module225 = {}
 	Module225.__index = Module225
 
-	function Module225.new(p1) --[[ Line: 63910 ]]
+	function Module225.new(p1)
 		-- upvalues: Module225 (copy)
 		return (setmetatable({
 			kind = if p1 == nil or p1.kind == nil then nil else p1.kind
 		}, Module225))
 	end
 
-	function Module225:encode() --[[ Line: 63918 ]]
+	function Module225:encode()
 		-- upvalues: ProtoModule (copy)
 		local Buf = buffer.create(0)
 		local Count = 0
@@ -39658,7 +39658,7 @@ do
 		return Buf1
 	end
 
-	function Module225.decode(Buf) --[[ Line: 63946 ]]
+	function Module225.decode(Buf)
 		-- upvalues: Module225 (copy), ProtoModule (copy), t (copy)
 		local NewModule = Module225.new()
 		local v160 = 0
@@ -39712,7 +39712,7 @@ do
 		return NewModule
 	end
 
-	function Module225:jsonEncode() --[[ Line: 64015 ]]
+	function Module225:jsonEncode()
 		local t = {}
 		
 		if self.kind ~= nil then
@@ -39738,7 +39738,7 @@ do
 		return t
 	end
 
-	function Module225:jsonDecode() --[[ Line: 64033 ]]
+	function Module225:jsonDecode()
 		-- upvalues: Module225 (copy), t (copy)
 		local NewModule = Module225.new()
 		
@@ -39784,7 +39784,7 @@ do
 	local Module226 = {}
 	Module226.__index = Module226
 
-	function Module226.new(p1) --[[ Line: 64094 ]]
+	function Module226.new(p1)
 		-- upvalues: Module226 (copy)
 		return (setmetatable({
 			condition = if p1 == nil or p1.condition == nil then nil else p1.condition,
@@ -39792,7 +39792,7 @@ do
 		}, Module226))
 	end
 
-	function Module226:encode() --[[ Line: 64106 ]]
+	function Module226:encode()
 		-- upvalues: ProtoModule (copy)
 		local Buf = buffer.create(0)
 		local Count = 0
@@ -39818,7 +39818,7 @@ do
 		return Buf1
 	end
 
-	function Module226.decode(Buf) --[[ Line: 64134 ]]
+	function Module226.decode(Buf)
 		-- upvalues: Module226 (copy), ProtoModule (copy), PropConditionModule (copy), t (copy)
 		local NewModule = Module226.new()
 		local v161 = 0
@@ -39862,7 +39862,7 @@ do
 		return NewModule
 	end
 
-	function Module226:jsonEncode() --[[ Line: 64194 ]]
+	function Module226:jsonEncode()
 		local t = {}
 		
 		if self.condition ~= nil then
@@ -39881,7 +39881,7 @@ do
 		return t
 	end
 
-	function Module226:jsonDecode() --[[ Line: 64214 ]]
+	function Module226:jsonDecode()
 		-- upvalues: Module226 (copy), PropConditionModule (copy), t (copy)
 		local NewModule = Module226.new()
 		
@@ -39912,14 +39912,14 @@ do
 	local Module227 = {}
 	Module227.__index = Module227
 
-	function Module227.new(p1) --[[ Line: 64260 ]]
+	function Module227.new(p1)
 		-- upvalues: Module227 (copy)
 		return (setmetatable({
 			options = if p1 == nil or p1.options == nil then {} else p1.options
 		}, Module227))
 	end
 
-	function Module227:encode() --[[ Line: 64271 ]]
+	function Module227:encode()
 		-- upvalues: ProtoModule (copy)
 		local Buf = buffer.create(0)
 		local Count = 0
@@ -39937,7 +39937,7 @@ do
 		return Buf1
 	end
 
-	function Module227.decode(Buf) --[[ Line: 64290 ]]
+	function Module227.decode(Buf)
 		-- upvalues: Module227 (copy), ProtoModule (copy), t (copy)
 		local NewModule = Module227.new()
 		local v162 = 0
@@ -39970,7 +39970,7 @@ do
 		return NewModule
 	end
 
-	function Module227:jsonEncode() --[[ Line: 64338 ]]
+	function Module227:jsonEncode()
 		local t = {}
 		
 		if self.options ~= nil and #self.options > 0 then
@@ -39984,7 +39984,7 @@ do
 		return t
 	end
 
-	function Module227:jsonDecode() --[[ Line: 64354 ]]
+	function Module227:jsonDecode()
 		-- upvalues: Module227 (copy), t (copy)
 		local NewModule = Module227.new()
 		
@@ -40010,14 +40010,14 @@ do
 	local Module228 = {}
 	Module228.__index = Module228
 
-	function Module228.new(p1) --[[ Line: 64387 ]]
+	function Module228.new(p1)
 		-- upvalues: Module228 (copy)
 		return (setmetatable({
 			array = if p1 == nil or p1.array == nil then {} else p1.array
 		}, Module228))
 	end
 
-	function Module228:encode() --[[ Line: 64398 ]]
+	function Module228:encode()
 		-- upvalues: ProtoModule (copy)
 		local Buf = buffer.create(0)
 		local Count = 0
@@ -40035,7 +40035,7 @@ do
 		return Buf1
 	end
 
-	function Module228.decode(Buf) --[[ Line: 64417 ]]
+	function Module228.decode(Buf)
 		-- upvalues: Module228 (copy), ProtoModule (copy), t (copy)
 		local NewModule = Module228.new()
 		local v163 = 0
@@ -40068,7 +40068,7 @@ do
 		return NewModule
 	end
 
-	function Module228:jsonEncode() --[[ Line: 64462 ]]
+	function Module228:jsonEncode()
 		local t = {}
 		
 		if self.array ~= nil and #self.array > 0 then
@@ -40082,7 +40082,7 @@ do
 		return t
 	end
 
-	function Module228:jsonDecode() --[[ Line: 64478 ]]
+	function Module228:jsonDecode()
 		-- upvalues: Module228 (copy), t (copy)
 		local NewModule = Module228.new()
 		
@@ -40106,7 +40106,7 @@ do
 	local Module229 = {}
 	Module229.__index = Module229
 
-	function Module229.new(p1) --[[ Line: 64510 ]]
+	function Module229.new(p1)
 		-- upvalues: Module229 (copy)
 		return (setmetatable({
 			kind = if p1 == nil or p1.kind == nil then nil else p1.kind,
@@ -40115,7 +40115,7 @@ do
 		}, Module229))
 	end
 
-	function Module229:encode() --[[ Line: 64522 ]]
+	function Module229:encode()
 		-- upvalues: ProtoModule (copy)
 		local Buf = buffer.create(0)
 		local Count = 0
@@ -40148,7 +40148,7 @@ do
 		return Buf1
 	end
 
-	function Module229.decode(Buf) --[[ Line: 64558 ]]
+	function Module229.decode(Buf)
 		-- upvalues: Module229 (copy), ProtoModule (copy), t (copy), HydrationDataSpecModule (copy)
 		local NewModule = Module229.new()
 		local v164 = 0
@@ -40196,7 +40196,7 @@ do
 		return NewModule
 	end
 
-	function Module229:jsonEncode() --[[ Line: 64624 ]]
+	function Module229:jsonEncode()
 		local t = {}
 		
 		if self.kind ~= nil then
@@ -40220,7 +40220,7 @@ do
 		return t
 	end
 
-	function Module229:jsonDecode() --[[ Line: 64652 ]]
+	function Module229:jsonDecode()
 		-- upvalues: Module229 (copy), t (copy), HydrationDataSpecModule (copy)
 		local NewModule = Module229.new()
 		
@@ -40270,14 +40270,14 @@ do
 	local Module230 = {}
 	Module230.__index = Module230
 
-	function Module230.new(p1) --[[ Line: 64722 ]]
+	function Module230.new(p1)
 		-- upvalues: Module230 (copy)
 		return (setmetatable({
 			items = if p1 == nil or p1.items == nil then {} else p1.items
 		}, Module230))
 	end
 
-	function Module230:encode() --[[ Line: 64733 ]]
+	function Module230:encode()
 		-- upvalues: ProtoModule (copy)
 		local Buf = buffer.create(0)
 		local Count = 0
@@ -40295,7 +40295,7 @@ do
 		return Buf1
 	end
 
-	function Module230.decode(Buf) --[[ Line: 64752 ]]
+	function Module230.decode(Buf)
 		-- upvalues: Module230 (copy), ProtoModule (copy), PageEntryContentModule (copy)
 		local NewModule = Module230.new()
 		local v165 = 0
@@ -40328,7 +40328,7 @@ do
 		return NewModule
 	end
 
-	function Module230:jsonEncode() --[[ Line: 64802 ]]
+	function Module230:jsonEncode()
 		local t = {}
 		
 		if self.items ~= nil and #self.items > 0 then
@@ -40342,7 +40342,7 @@ do
 		return t
 	end
 
-	function Module230:jsonDecode() --[[ Line: 64818 ]]
+	function Module230:jsonDecode()
 		-- upvalues: Module230 (copy), PageEntryContentModule (copy)
 		local NewModule = Module230.new()
 		
@@ -40368,14 +40368,14 @@ do
 	local Module231 = {}
 	Module231.__index = Module231
 
-	function Module231.new(p1) --[[ Line: 64856 ]]
+	function Module231.new(p1)
 		-- upvalues: Module231 (copy)
 		return (setmetatable({
 			kind = if p1 == nil or p1.kind == nil then nil else p1.kind
 		}, Module231))
 	end
 
-	function Module231:encode() --[[ Line: 64864 ]]
+	function Module231:encode()
 		-- upvalues: ProtoModule (copy)
 		local Buf = buffer.create(0)
 		local Count = 0
@@ -40400,7 +40400,7 @@ do
 		return Buf1
 	end
 
-	function Module231.decode(Buf) --[[ Line: 64890 ]]
+	function Module231.decode(Buf)
 		-- upvalues: Module231 (copy), ProtoModule (copy), t (copy)
 		local NewModule = Module231.new()
 		local v166 = 0
@@ -40447,7 +40447,7 @@ do
 		return NewModule
 	end
 
-	function Module231:jsonEncode() --[[ Line: 64953 ]]
+	function Module231:jsonEncode()
 		local t = {}
 		
 		if self.kind ~= nil then
@@ -40468,7 +40468,7 @@ do
 		return t
 	end
 
-	function Module231:jsonDecode() --[[ Line: 64971 ]]
+	function Module231:jsonDecode()
 		-- upvalues: Module231 (copy), t (copy)
 		local NewModule = Module231.new()
 		
@@ -40502,7 +40502,7 @@ do
 	local Module232 = {}
 	Module232.__index = Module232
 
-	function Module232.new(p1) --[[ Line: 65020 ]]
+	function Module232.new(p1)
 		-- upvalues: Module232 (copy)
 		return (setmetatable({
 			condition = if p1 == nil or p1.condition == nil then nil else p1.condition,
@@ -40510,7 +40510,7 @@ do
 		}, Module232))
 	end
 
-	function Module232:encode() --[[ Line: 65032 ]]
+	function Module232:encode()
 		-- upvalues: ProtoModule (copy)
 		local Buf = buffer.create(0)
 		local Count = 0
@@ -40536,7 +40536,7 @@ do
 		return Buf1
 	end
 
-	function Module232.decode(Buf) --[[ Line: 65060 ]]
+	function Module232.decode(Buf)
 		-- upvalues: Module232 (copy), ProtoModule (copy), PropConditionModule (copy), t (copy)
 		local NewModule = Module232.new()
 		local v167 = 0
@@ -40580,7 +40580,7 @@ do
 		return NewModule
 	end
 
-	function Module232:jsonEncode() --[[ Line: 65120 ]]
+	function Module232:jsonEncode()
 		local t = {}
 		
 		if self.condition ~= nil then
@@ -40599,7 +40599,7 @@ do
 		return t
 	end
 
-	function Module232:jsonDecode() --[[ Line: 65140 ]]
+	function Module232:jsonDecode()
 		-- upvalues: Module232 (copy), PropConditionModule (copy), t (copy)
 		local NewModule = Module232.new()
 		
@@ -40630,14 +40630,14 @@ do
 	local Module233 = {}
 	Module233.__index = Module233
 
-	function Module233.new(p1) --[[ Line: 65186 ]]
+	function Module233.new(p1)
 		-- upvalues: Module233 (copy)
 		return (setmetatable({
 			options = if p1 == nil or p1.options == nil then {} else p1.options
 		}, Module233))
 	end
 
-	function Module233:encode() --[[ Line: 65197 ]]
+	function Module233:encode()
 		-- upvalues: ProtoModule (copy)
 		local Buf = buffer.create(0)
 		local Count = 0
@@ -40655,7 +40655,7 @@ do
 		return Buf1
 	end
 
-	function Module233.decode(Buf) --[[ Line: 65216 ]]
+	function Module233.decode(Buf)
 		-- upvalues: Module233 (copy), ProtoModule (copy), t (copy)
 		local NewModule = Module233.new()
 		local v168 = 0
@@ -40688,7 +40688,7 @@ do
 		return NewModule
 	end
 
-	function Module233:jsonEncode() --[[ Line: 65264 ]]
+	function Module233:jsonEncode()
 		local t = {}
 		
 		if self.options ~= nil and #self.options > 0 then
@@ -40702,7 +40702,7 @@ do
 		return t
 	end
 
-	function Module233:jsonDecode() --[[ Line: 65280 ]]
+	function Module233:jsonDecode()
 		-- upvalues: Module233 (copy), t (copy)
 		local NewModule = Module233.new()
 		
@@ -40728,14 +40728,14 @@ do
 	local Module234 = {}
 	Module234.__index = Module234
 
-	function Module234.new(p1) --[[ Line: 65316 ]]
+	function Module234.new(p1)
 		-- upvalues: Module234 (copy)
 		return (setmetatable({
 			array = if p1 == nil or p1.array == nil then {} else p1.array
 		}, Module234))
 	end
 
-	function Module234:encode() --[[ Line: 65327 ]]
+	function Module234:encode()
 		-- upvalues: ProtoModule (copy)
 		local Buf = buffer.create(0)
 		local Count = 0
@@ -40753,7 +40753,7 @@ do
 		return Buf1
 	end
 
-	function Module234.decode(Buf) --[[ Line: 65346 ]]
+	function Module234.decode(Buf)
 		-- upvalues: Module234 (copy), ProtoModule (copy), t (copy)
 		local NewModule = Module234.new()
 		local v169 = 0
@@ -40786,7 +40786,7 @@ do
 		return NewModule
 	end
 
-	function Module234:jsonEncode() --[[ Line: 65391 ]]
+	function Module234:jsonEncode()
 		local t = {}
 		
 		if self.array ~= nil and #self.array > 0 then
@@ -40800,7 +40800,7 @@ do
 		return t
 	end
 
-	function Module234:jsonDecode() --[[ Line: 65407 ]]
+	function Module234:jsonDecode()
 		-- upvalues: Module234 (copy), t (copy)
 		local NewModule = Module234.new()
 		
@@ -40824,14 +40824,14 @@ do
 	local Module235 = {}
 	Module235.__index = Module235
 
-	function Module235.new(p1) --[[ Line: 65443 ]]
+	function Module235.new(p1)
 		-- upvalues: Module235 (copy)
 		return (setmetatable({
 			kind = if p1 == nil or p1.kind == nil then nil else p1.kind
 		}, Module235))
 	end
 
-	function Module235:encode() --[[ Line: 65451 ]]
+	function Module235:encode()
 		-- upvalues: ProtoModule (copy)
 		local Buf = buffer.create(0)
 		local Count = 0
@@ -40856,7 +40856,7 @@ do
 		return Buf1
 	end
 
-	function Module235.decode(Buf) --[[ Line: 65475 ]]
+	function Module235.decode(Buf)
 		-- upvalues: Module235 (copy), ProtoModule (copy), t (copy)
 		local NewModule = Module235.new()
 		local v170 = 0
@@ -40903,7 +40903,7 @@ do
 		return NewModule
 	end
 
-	function Module235:jsonEncode() --[[ Line: 65534 ]]
+	function Module235:jsonEncode()
 		local t = {}
 		
 		if self.kind ~= nil then
@@ -40924,7 +40924,7 @@ do
 		return t
 	end
 
-	function Module235:jsonDecode() --[[ Line: 65550 ]]
+	function Module235:jsonDecode()
 		-- upvalues: Module235 (copy), t (copy)
 		local NewModule = Module235.new()
 		
@@ -40958,7 +40958,7 @@ do
 	local Module236 = {}
 	Module236.__index = Module236
 
-	function Module236.new(p1) --[[ Line: 65592 ]]
+	function Module236.new(p1)
 		-- upvalues: Module236 (copy)
 		return (setmetatable({
 			condition = if p1 == nil or p1.condition == nil then nil else p1.condition,
@@ -40966,7 +40966,7 @@ do
 		}, Module236))
 	end
 
-	function Module236:encode() --[[ Line: 65601 ]]
+	function Module236:encode()
 		-- upvalues: ProtoModule (copy)
 		local Buf = buffer.create(0)
 		local Count = 0
@@ -40992,7 +40992,7 @@ do
 		return Buf1
 	end
 
-	function Module236.decode(Buf) --[[ Line: 65629 ]]
+	function Module236.decode(Buf)
 		-- upvalues: Module236 (copy), ProtoModule (copy), PropConditionModule (copy), t (copy)
 		local NewModule = Module236.new()
 		local v171 = 0
@@ -41036,7 +41036,7 @@ do
 		return NewModule
 	end
 
-	function Module236:jsonEncode() --[[ Line: 65687 ]]
+	function Module236:jsonEncode()
 		local t = {}
 		
 		if self.condition ~= nil then
@@ -41055,7 +41055,7 @@ do
 		return t
 	end
 
-	function Module236:jsonDecode() --[[ Line: 65707 ]]
+	function Module236:jsonDecode()
 		-- upvalues: Module236 (copy), PropConditionModule (copy), t (copy)
 		local NewModule = Module236.new()
 		
@@ -41088,14 +41088,14 @@ do
 	local Module237 = {}
 	Module237.__index = Module237
 
-	function Module237.new(p1) --[[ Line: 65751 ]]
+	function Module237.new(p1)
 		-- upvalues: Module237 (copy)
 		return (setmetatable({
 			options = if p1 == nil or p1.options == nil then {} else p1.options
 		}, Module237))
 	end
 
-	function Module237:encode() --[[ Line: 65762 ]]
+	function Module237:encode()
 		-- upvalues: ProtoModule (copy)
 		local Buf = buffer.create(0)
 		local Count = 0
@@ -41113,7 +41113,7 @@ do
 		return Buf1
 	end
 
-	function Module237.decode(Buf) --[[ Line: 65781 ]]
+	function Module237.decode(Buf)
 		-- upvalues: Module237 (copy), ProtoModule (copy), t (copy)
 		local NewModule = Module237.new()
 		local v171 = 0
@@ -41146,7 +41146,7 @@ do
 		return NewModule
 	end
 
-	function Module237:jsonEncode() --[[ Line: 65826 ]]
+	function Module237:jsonEncode()
 		local t = {}
 		
 		if self.options ~= nil and #self.options > 0 then
@@ -41160,7 +41160,7 @@ do
 		return t
 	end
 
-	function Module237:jsonDecode() --[[ Line: 65842 ]]
+	function Module237:jsonDecode()
 		-- upvalues: Module237 (copy), t (copy)
 		local NewModule = Module237.new()
 		
@@ -41184,14 +41184,14 @@ do
 	local Module238 = {}
 	Module238.__index = Module238
 
-	function Module238.new(p1) --[[ Line: 65875 ]]
+	function Module238.new(p1)
 		-- upvalues: Module238 (copy)
 		return (setmetatable({
 			array = if p1 == nil or p1.array == nil then {} else p1.array
 		}, Module238))
 	end
 
-	function Module238:encode() --[[ Line: 65886 ]]
+	function Module238:encode()
 		-- upvalues: ProtoModule (copy)
 		local Buf = buffer.create(0)
 		local Count = 0
@@ -41209,7 +41209,7 @@ do
 		return Buf1
 	end
 
-	function Module238.decode(Buf) --[[ Line: 65905 ]]
+	function Module238.decode(Buf)
 		-- upvalues: Module238 (copy), ProtoModule (copy), t (copy)
 		local NewModule = Module238.new()
 		local v172 = 0
@@ -41242,7 +41242,7 @@ do
 		return NewModule
 	end
 
-	function Module238:jsonEncode() --[[ Line: 65950 ]]
+	function Module238:jsonEncode()
 		local t = {}
 		
 		if self.array ~= nil and #self.array > 0 then
@@ -41256,7 +41256,7 @@ do
 		return t
 	end
 
-	function Module238:jsonDecode() --[[ Line: 65966 ]]
+	function Module238:jsonDecode()
 		-- upvalues: Module238 (copy), t (copy)
 		local NewModule = Module238.new()
 		
@@ -41280,7 +41280,7 @@ do
 	local Module239 = {}
 	Module239.__index = Module239
 
-	function Module239.new(p1) --[[ Line: 65998 ]]
+	function Module239.new(p1)
 		-- upvalues: Module239 (copy)
 		return (setmetatable({
 			props = if p1 == nil or p1.props == nil then nil else p1.props,
@@ -41288,7 +41288,7 @@ do
 		}, Module239))
 	end
 
-	function Module239:encode() --[[ Line: 66007 ]]
+	function Module239:encode()
 		-- upvalues: ProtoModule (copy)
 		local Buf = buffer.create(0)
 		local Count = 0
@@ -41309,7 +41309,7 @@ do
 		return Buf1
 	end
 
-	function Module239.decode(Buf) --[[ Line: 66028 ]]
+	function Module239.decode(Buf)
 		-- upvalues: Module239 (copy), ProtoModule (copy), t (copy), ComponentSharedModule (copy)
 		local NewModule = Module239.new()
 		local v173 = 0
@@ -41346,7 +41346,7 @@ do
 		return NewModule
 	end
 
-	function Module239:jsonEncode() --[[ Line: 66076 ]]
+	function Module239:jsonEncode()
 		local t = {}
 		
 		if self.props ~= nil then
@@ -41358,7 +41358,7 @@ do
 		return t
 	end
 
-	function Module239:jsonDecode() --[[ Line: 66090 ]]
+	function Module239:jsonDecode()
 		-- upvalues: Module239 (copy), t (copy), ComponentSharedModule (copy)
 		local NewModule = Module239.new()
 		
@@ -41382,7 +41382,7 @@ do
 	local Module240 = {}
 	Module240.__index = Module240
 
-	function Module240.new(p1) --[[ Line: 66119 ]]
+	function Module240.new(p1)
 		-- upvalues: Module240 (copy)
 		return (setmetatable({
 			categories = if p1 == nil or p1.categories == nil then nil else p1.categories,
@@ -41399,7 +41399,7 @@ do
 		}, Module240))
 	end
 
-	function Module240:encode() --[[ Line: 66141 ]]
+	function Module240:encode()
 		-- upvalues: ProtoModule (copy)
 		local Buf = buffer.create(0)
 		local Count = 0
@@ -41465,7 +41465,7 @@ do
 		return Buf1
 	end
 
-	function Module240.decode(Buf) --[[ Line: 66216 ]]
+	function Module240.decode(Buf)
 		-- upvalues: Module240 (copy), ProtoModule (copy), t (copy), PropTypesModule (copy), ActionsModule (copy)
 		local NewModule = Module240.new()
 		local v173 = 0
@@ -41538,7 +41538,7 @@ do
 		return NewModule
 	end
 
-	function Module240:jsonEncode() --[[ Line: 66310 ]]
+	function Module240:jsonEncode()
 		local t = {}
 		
 		if self.categories ~= nil then
@@ -41577,7 +41577,7 @@ do
 		return t
 	end
 
-	function Module240:jsonDecode() --[[ Line: 66360 ]]
+	function Module240:jsonDecode()
 		-- upvalues: Module240 (copy), t (copy), PropTypesModule (copy), ActionsModule (copy)
 		local NewModule = Module240.new()
 		
@@ -41647,7 +41647,7 @@ do
 	local Module241 = {}
 	Module241.__index = Module241
 
-	function Module241.new(p1) --[[ Line: 66465 ]]
+	function Module241.new(p1)
 		-- upvalues: Module241 (copy)
 		return (setmetatable({
 			id = if p1 == nil or p1.id == nil then nil else p1.id,
@@ -41655,7 +41655,7 @@ do
 		}, Module241))
 	end
 
-	function Module241:encode() --[[ Line: 66474 ]]
+	function Module241:encode()
 		-- upvalues: ProtoModule (copy)
 		local Buf = buffer.create(0)
 		local Count = 0
@@ -41676,7 +41676,7 @@ do
 		return Buf1
 	end
 
-	function Module241.decode(Buf) --[[ Line: 66495 ]]
+	function Module241.decode(Buf)
 		-- upvalues: Module241 (copy), ProtoModule (copy), PropTypesModule (copy)
 		local NewModule = Module241.new()
 		local v174 = 0
@@ -41713,7 +41713,7 @@ do
 		return NewModule
 	end
 
-	function Module241:jsonEncode() --[[ Line: 66543 ]]
+	function Module241:jsonEncode()
 		local t = {}
 		
 		if self.id ~= nil then
@@ -41725,7 +41725,7 @@ do
 		return t
 	end
 
-	function Module241:jsonDecode() --[[ Line: 66557 ]]
+	function Module241:jsonDecode()
 		-- upvalues: Module241 (copy), PropTypesModule (copy)
 		local NewModule = Module241.new()
 		
@@ -41747,14 +41747,14 @@ do
 	local Module242 = {}
 	Module242.__index = Module242
 
-	function Module242.new(p1) --[[ Line: 66585 ]]
+	function Module242.new(p1)
 		-- upvalues: Module242 (copy)
 		return (setmetatable({
 			kind = if p1 == nil or p1.kind == nil then nil else p1.kind
 		}, Module242))
 	end
 
-	function Module242:encode() --[[ Line: 66593 ]]
+	function Module242:encode()
 		-- upvalues: ProtoModule (copy)
 		local Buf = buffer.create(0)
 		local Count = 0
@@ -41783,7 +41783,7 @@ do
 		return Buf1
 	end
 
-	function Module242.decode(Buf) --[[ Line: 66621 ]]
+	function Module242.decode(Buf)
 		-- upvalues: Module242 (copy), ProtoModule (copy), t (copy)
 		local NewModule = Module242.new()
 		local v175 = 0
@@ -41837,7 +41837,7 @@ do
 		return NewModule
 	end
 
-	function Module242:jsonEncode() --[[ Line: 66690 ]]
+	function Module242:jsonEncode()
 		local t = {}
 		
 		if self.kind ~= nil then
@@ -41863,7 +41863,7 @@ do
 		return t
 	end
 
-	function Module242:jsonDecode() --[[ Line: 66708 ]]
+	function Module242:jsonDecode()
 		-- upvalues: Module242 (copy), t (copy)
 		local NewModule = Module242.new()
 		
@@ -41911,7 +41911,7 @@ do
 	local Module243 = {}
 	Module243.__index = Module243
 
-	function Module243.new(p1) --[[ Line: 66769 ]]
+	function Module243.new(p1)
 		-- upvalues: Module243 (copy)
 		return (setmetatable({
 			condition = if p1 == nil or p1.condition == nil then nil else p1.condition,
@@ -41919,7 +41919,7 @@ do
 		}, Module243))
 	end
 
-	function Module243:encode() --[[ Line: 66781 ]]
+	function Module243:encode()
 		-- upvalues: ProtoModule (copy)
 		local Buf = buffer.create(0)
 		local Count = 0
@@ -41945,7 +41945,7 @@ do
 		return Buf1
 	end
 
-	function Module243.decode(Buf) --[[ Line: 66809 ]]
+	function Module243.decode(Buf)
 		-- upvalues: Module243 (copy), ProtoModule (copy), PropConditionModule (copy), t (copy)
 		local NewModule = Module243.new()
 		local v175 = 0
@@ -41989,7 +41989,7 @@ do
 		return NewModule
 	end
 
-	function Module243:jsonEncode() --[[ Line: 66869 ]]
+	function Module243:jsonEncode()
 		local t = {}
 		
 		if self.condition ~= nil then
@@ -42008,7 +42008,7 @@ do
 		return t
 	end
 
-	function Module243:jsonDecode() --[[ Line: 66889 ]]
+	function Module243:jsonDecode()
 		-- upvalues: Module243 (copy), PropConditionModule (copy), t (copy)
 		local NewModule = Module243.new()
 		
@@ -42039,14 +42039,14 @@ do
 	local Module244 = {}
 	Module244.__index = Module244
 
-	function Module244.new(p1) --[[ Line: 66935 ]]
+	function Module244.new(p1)
 		-- upvalues: Module244 (copy)
 		return (setmetatable({
 			options = if p1 == nil or p1.options == nil then {} else p1.options
 		}, Module244))
 	end
 
-	function Module244:encode() --[[ Line: 66946 ]]
+	function Module244:encode()
 		-- upvalues: ProtoModule (copy)
 		local Buf = buffer.create(0)
 		local Count = 0
@@ -42064,7 +42064,7 @@ do
 		return Buf1
 	end
 
-	function Module244.decode(Buf) --[[ Line: 66965 ]]
+	function Module244.decode(Buf)
 		-- upvalues: Module244 (copy), ProtoModule (copy), t (copy)
 		local NewModule = Module244.new()
 		local v176 = 0
@@ -42097,7 +42097,7 @@ do
 		return NewModule
 	end
 
-	function Module244:jsonEncode() --[[ Line: 67013 ]]
+	function Module244:jsonEncode()
 		local t = {}
 		
 		if self.options ~= nil and #self.options > 0 then
@@ -42111,7 +42111,7 @@ do
 		return t
 	end
 
-	function Module244:jsonDecode() --[[ Line: 67029 ]]
+	function Module244:jsonDecode()
 		-- upvalues: Module244 (copy), t (copy)
 		local NewModule = Module244.new()
 		
@@ -42135,14 +42135,14 @@ do
 	local Module245 = {}
 	Module245.__index = Module245
 
-	function Module245.new(p1) --[[ Line: 67065 ]]
+	function Module245.new(p1)
 		-- upvalues: Module245 (copy)
 		return (setmetatable({
 			array = if p1 == nil or p1.array == nil then {} else p1.array
 		}, Module245))
 	end
 
-	function Module245:encode() --[[ Line: 67076 ]]
+	function Module245:encode()
 		-- upvalues: ProtoModule (copy)
 		local Buf = buffer.create(0)
 		local Count = 0
@@ -42160,7 +42160,7 @@ do
 		return Buf1
 	end
 
-	function Module245.decode(Buf) --[[ Line: 67095 ]]
+	function Module245.decode(Buf)
 		-- upvalues: Module245 (copy), ProtoModule (copy), t (copy)
 		local NewModule = Module245.new()
 		local v177 = 0
@@ -42193,7 +42193,7 @@ do
 		return NewModule
 	end
 
-	function Module245:jsonEncode() --[[ Line: 67140 ]]
+	function Module245:jsonEncode()
 		local t = {}
 		
 		if self.array ~= nil and #self.array > 0 then
@@ -42207,7 +42207,7 @@ do
 		return t
 	end
 
-	function Module245:jsonDecode() --[[ Line: 67156 ]]
+	function Module245:jsonDecode()
 		-- upvalues: Module245 (copy), t (copy)
 		local NewModule = Module245.new()
 		
@@ -42233,7 +42233,7 @@ do
 	local Module246 = {}
 	Module246.__index = Module246
 
-	function Module246.new(p1) --[[ Line: 67188 ]]
+	function Module246.new(p1)
 		-- upvalues: Module246 (copy)
 		return (setmetatable({
 			kind = if p1 == nil or p1.kind == nil then nil else p1.kind,
@@ -42242,7 +42242,7 @@ do
 		}, Module246))
 	end
 
-	function Module246:encode() --[[ Line: 67200 ]]
+	function Module246:encode()
 		-- upvalues: ProtoModule (copy)
 		local Buf = buffer.create(0)
 		local Count = 0
@@ -42275,7 +42275,7 @@ do
 		return Buf1
 	end
 
-	function Module246.decode(Buf) --[[ Line: 67236 ]]
+	function Module246.decode(Buf)
 		-- upvalues: Module246 (copy), ProtoModule (copy), t (copy), HydrationDataSpecModule (copy)
 		local NewModule = Module246.new()
 		local v178 = 0
@@ -42323,7 +42323,7 @@ do
 		return NewModule
 	end
 
-	function Module246:jsonEncode() --[[ Line: 67302 ]]
+	function Module246:jsonEncode()
 		local t = {}
 		
 		if self.kind ~= nil then
@@ -42347,7 +42347,7 @@ do
 		return t
 	end
 
-	function Module246:jsonDecode() --[[ Line: 67330 ]]
+	function Module246:jsonDecode()
 		-- upvalues: Module246 (copy), t (copy), HydrationDataSpecModule (copy)
 		local NewModule = Module246.new()
 		
@@ -42397,14 +42397,14 @@ do
 	local Module247 = {}
 	Module247.__index = Module247
 
-	function Module247.new(p1) --[[ Line: 67400 ]]
+	function Module247.new(p1)
 		-- upvalues: Module247 (copy)
 		return (setmetatable({
 			items = if p1 == nil or p1.items == nil then {} else p1.items
 		}, Module247))
 	end
 
-	function Module247:encode() --[[ Line: 67411 ]]
+	function Module247:encode()
 		-- upvalues: ProtoModule (copy)
 		local Buf = buffer.create(0)
 		local Count = 0
@@ -42422,7 +42422,7 @@ do
 		return Buf1
 	end
 
-	function Module247.decode(Buf) --[[ Line: 67430 ]]
+	function Module247.decode(Buf)
 		-- upvalues: Module247 (copy), ProtoModule (copy), PageEntryContentModule (copy)
 		local NewModule = Module247.new()
 		local v179 = 0
@@ -42455,7 +42455,7 @@ do
 		return NewModule
 	end
 
-	function Module247:jsonEncode() --[[ Line: 67480 ]]
+	function Module247:jsonEncode()
 		local t = {}
 		
 		if self.items ~= nil and #self.items > 0 then
@@ -42469,7 +42469,7 @@ do
 		return t
 	end
 
-	function Module247:jsonDecode() --[[ Line: 67496 ]]
+	function Module247:jsonDecode()
 		-- upvalues: Module247 (copy), PageEntryContentModule (copy)
 		local NewModule = Module247.new()
 		
@@ -42493,7 +42493,7 @@ do
 	local Module248 = {}
 	Module248.__index = Module248
 
-	function Module248.new(p1) --[[ Line: 67534 ]]
+	function Module248.new(p1)
 		-- upvalues: Module248 (copy)
 		return (setmetatable({
 			props = if p1 == nil or p1.props == nil then nil else p1.props,
@@ -42501,7 +42501,7 @@ do
 		}, Module248))
 	end
 
-	function Module248:encode() --[[ Line: 67541 ]]
+	function Module248:encode()
 		-- upvalues: ProtoModule (copy)
 		local Buf = buffer.create(0)
 		local Count = 0
@@ -42522,7 +42522,7 @@ do
 		return Buf1
 	end
 
-	function Module248.decode(Buf) --[[ Line: 67562 ]]
+	function Module248.decode(Buf)
 		-- upvalues: Module248 (copy), ProtoModule (copy), t (copy), ComponentSharedModule (copy)
 		local NewModule = Module248.new()
 		local v180 = 0
@@ -42559,7 +42559,7 @@ do
 		return NewModule
 	end
 
-	function Module248:jsonEncode() --[[ Line: 67610 ]]
+	function Module248:jsonEncode()
 		local t = {}
 		
 		if self.props ~= nil then
@@ -42571,7 +42571,7 @@ do
 		return t
 	end
 
-	function Module248:jsonDecode() --[[ Line: 67624 ]]
+	function Module248:jsonDecode()
 		-- upvalues: Module248 (copy), t (copy), ComponentSharedModule (copy)
 		local NewModule = Module248.new()
 		
@@ -42595,7 +42595,7 @@ do
 	local Module249 = {}
 	Module249.__index = Module249
 
-	function Module249.new(p1) --[[ Line: 67653 ]]
+	function Module249.new(p1)
 		-- upvalues: Module249 (copy)
 		return (setmetatable({
 			item_id = if p1 == nil or p1.item_id == nil then nil else p1.item_id,
@@ -42613,7 +42613,7 @@ do
 		}, Module249))
 	end
 
-	function Module249:encode() --[[ Line: 67674 ]]
+	function Module249:encode()
 		-- upvalues: ProtoModule (copy)
 		local Buf = buffer.create(0)
 		local Count = 0
@@ -42684,7 +42684,7 @@ do
 		return Buf1
 	end
 
-	function Module249.decode(Buf) --[[ Line: 67755 ]]
+	function Module249.decode(Buf)
 		-- upvalues: Module249 (copy), ProtoModule (copy), PropTypesModule (copy), t (copy)
 		local NewModule = Module249.new()
 		local v180 = 0
@@ -42761,7 +42761,7 @@ do
 		return NewModule
 	end
 
-	function Module249:jsonEncode() --[[ Line: 67854 ]]
+	function Module249:jsonEncode()
 		local t = {}
 		
 		if self.item_id ~= nil then
@@ -42803,7 +42803,7 @@ do
 		return t
 	end
 
-	function Module249:jsonDecode() --[[ Line: 67908 ]]
+	function Module249:jsonDecode()
 		-- upvalues: Module249 (copy), PropTypesModule (copy), t (copy)
 		local NewModule = Module249.new()
 		
@@ -42882,7 +42882,7 @@ do
 	local Module250 = {}
 	Module250.__index = Module250
 
-	function Module250.new(p1) --[[ Line: 68018 ]]
+	function Module250.new(p1)
 		-- upvalues: Module250 (copy)
 		return (setmetatable({
 			props = if p1 == nil or p1.props == nil then nil else p1.props,
@@ -42890,7 +42890,7 @@ do
 		}, Module250))
 	end
 
-	function Module250:encode() --[[ Line: 68025 ]]
+	function Module250:encode()
 		-- upvalues: ProtoModule (copy)
 		local Buf = buffer.create(0)
 		local Count = 0
@@ -42911,7 +42911,7 @@ do
 		return Buf1
 	end
 
-	function Module250.decode(Buf) --[[ Line: 68046 ]]
+	function Module250.decode(Buf)
 		-- upvalues: Module250 (copy), ProtoModule (copy), t (copy), ComponentSharedModule (copy)
 		local NewModule = Module250.new()
 		local v181 = 0
@@ -42948,7 +42948,7 @@ do
 		return NewModule
 	end
 
-	function Module250:jsonEncode() --[[ Line: 68094 ]]
+	function Module250:jsonEncode()
 		local t = {}
 		
 		if self.props ~= nil then
@@ -42960,7 +42960,7 @@ do
 		return t
 	end
 
-	function Module250:jsonDecode() --[[ Line: 68108 ]]
+	function Module250:jsonDecode()
 		-- upvalues: Module250 (copy), t (copy), ComponentSharedModule (copy)
 		local NewModule = Module250.new()
 		
@@ -42982,7 +42982,7 @@ do
 	local Module251 = {}
 	Module251.__index = Module251
 
-	function Module251.new(p1) --[[ Line: 68137 ]]
+	function Module251.new(p1)
 		-- upvalues: Module251 (copy)
 		return (setmetatable({
 			item_id = if p1 == nil or p1.item_id == nil then nil else p1.item_id,
@@ -43001,7 +43001,7 @@ do
 		}, Module251))
 	end
 
-	function Module251:encode() --[[ Line: 68159 ]]
+	function Module251:encode()
 		-- upvalues: ProtoModule (copy)
 		local Buf = buffer.create(0)
 		local Count = 0
@@ -43077,7 +43077,7 @@ do
 		return Buf1
 	end
 
-	function Module251.decode(Buf) --[[ Line: 68246 ]]
+	function Module251.decode(Buf)
 		-- upvalues: Module251 (copy), ProtoModule (copy), PropTypesModule (copy), ActionsModule (copy), CatalogSortPropTypesModule (copy)
 		local NewModule = Module251.new()
 		local v182 = 0
@@ -43158,7 +43158,7 @@ do
 		return NewModule
 	end
 
-	function Module251:jsonEncode() --[[ Line: 68351 ]]
+	function Module251:jsonEncode()
 		local t = {}
 		
 		if self.item_id ~= nil then
@@ -43203,7 +43203,7 @@ do
 		return t
 	end
 
-	function Module251:jsonDecode() --[[ Line: 68409 ]]
+	function Module251:jsonDecode()
 		-- upvalues: Module251 (copy), PropTypesModule (copy), ActionsModule (copy), CatalogSortPropTypesModule (copy)
 		local NewModule = Module251.new()
 		
@@ -43287,7 +43287,7 @@ do
 	local Module252 = {}
 	Module252.__index = Module252
 
-	function Module252.new(p1) --[[ Line: 68526 ]]
+	function Module252.new(p1)
 		-- upvalues: Module252 (copy)
 		return (setmetatable({
 			props = if p1 == nil or p1.props == nil then nil else p1.props,
@@ -43295,7 +43295,7 @@ do
 		}, Module252))
 	end
 
-	function Module252:encode() --[[ Line: 68533 ]]
+	function Module252:encode()
 		-- upvalues: ProtoModule (copy)
 		local Buf = buffer.create(0)
 		local Count = 0
@@ -43316,7 +43316,7 @@ do
 		return Buf1
 	end
 
-	function Module252.decode(Buf) --[[ Line: 68554 ]]
+	function Module252.decode(Buf)
 		-- upvalues: Module252 (copy), ProtoModule (copy), t (copy), ComponentSharedModule (copy)
 		local NewModule = Module252.new()
 		local v182 = 0
@@ -43353,7 +43353,7 @@ do
 		return NewModule
 	end
 
-	function Module252:jsonEncode() --[[ Line: 68602 ]]
+	function Module252:jsonEncode()
 		local t = {}
 		
 		if self.props ~= nil then
@@ -43365,7 +43365,7 @@ do
 		return t
 	end
 
-	function Module252:jsonDecode() --[[ Line: 68616 ]]
+	function Module252:jsonDecode()
 		-- upvalues: Module252 (copy), t (copy), ComponentSharedModule (copy)
 		local NewModule = Module252.new()
 		
@@ -43387,7 +43387,7 @@ do
 	local Module253 = {}
 	Module253.__index = Module253
 
-	function Module253.new(p1) --[[ Line: 68645 ]]
+	function Module253.new(p1)
 		-- upvalues: Module253 (copy)
 		return (setmetatable({
 			name = if p1 == nil or p1.name == nil then nil else p1.name,
@@ -43405,7 +43405,7 @@ do
 		}, Module253))
 	end
 
-	function Module253:encode() --[[ Line: 68662 ]]
+	function Module253:encode()
 		-- upvalues: ProtoModule (copy)
 		local Buf = buffer.create(0)
 		local Count = 0
@@ -43476,7 +43476,7 @@ do
 		return Buf1
 	end
 
-	function Module253.decode(Buf) --[[ Line: 68743 ]]
+	function Module253.decode(Buf)
 		-- upvalues: Module253 (copy), ProtoModule (copy), PropTypesModule (copy), t (copy)
 		local NewModule = Module253.new()
 		local v183 = 0
@@ -43553,7 +43553,7 @@ do
 		return NewModule
 	end
 
-	function Module253:jsonEncode() --[[ Line: 68841 ]]
+	function Module253:jsonEncode()
 		local t = {}
 		
 		if self.name ~= nil then
@@ -43595,7 +43595,7 @@ do
 		return t
 	end
 
-	function Module253:jsonDecode() --[[ Line: 68895 ]]
+	function Module253:jsonDecode()
 		-- upvalues: Module253 (copy), PropTypesModule (copy), t (copy)
 		local NewModule = Module253.new()
 		
@@ -43656,7 +43656,7 @@ do
 	local Module254 = {}
 	Module254.__index = Module254
 
-	function Module254.new(p1) --[[ Line: 68980 ]]
+	function Module254.new(p1)
 		-- upvalues: Module254 (copy)
 		return (setmetatable({
 			props = if p1 == nil or p1.props == nil then nil else p1.props,
@@ -43664,7 +43664,7 @@ do
 		}, Module254))
 	end
 
-	function Module254:encode() --[[ Line: 68987 ]]
+	function Module254:encode()
 		-- upvalues: ProtoModule (copy)
 		local Buf = buffer.create(0)
 		local Count = 0
@@ -43685,7 +43685,7 @@ do
 		return Buf1
 	end
 
-	function Module254.decode(Buf) --[[ Line: 69008 ]]
+	function Module254.decode(Buf)
 		-- upvalues: Module254 (copy), ProtoModule (copy), t (copy), ComponentSharedModule (copy)
 		local NewModule = Module254.new()
 		local v184 = 0
@@ -43722,7 +43722,7 @@ do
 		return NewModule
 	end
 
-	function Module254:jsonEncode() --[[ Line: 69056 ]]
+	function Module254:jsonEncode()
 		local t = {}
 		
 		if self.props ~= nil then
@@ -43734,7 +43734,7 @@ do
 		return t
 	end
 
-	function Module254:jsonDecode() --[[ Line: 69070 ]]
+	function Module254:jsonDecode()
 		-- upvalues: Module254 (copy), t (copy), ComponentSharedModule (copy)
 		local NewModule = Module254.new()
 		
@@ -43758,7 +43758,7 @@ do
 	local Module255 = {}
 	Module255.__index = Module255
 
-	function Module255.new(p1) --[[ Line: 69099 ]]
+	function Module255.new(p1)
 		-- upvalues: Module255 (copy)
 		return (setmetatable({
 			icon_name = if p1 == nil or p1.icon_name == nil then nil else p1.icon_name,
@@ -43769,7 +43769,7 @@ do
 		}, Module255))
 	end
 
-	function Module255:encode() --[[ Line: 69109 ]]
+	function Module255:encode()
 		-- upvalues: ProtoModule (copy)
 		local Buf = buffer.create(0)
 		local Count = 0
@@ -43805,7 +43805,7 @@ do
 		return Buf1
 	end
 
-	function Module255.decode(Buf) --[[ Line: 69148 ]]
+	function Module255.decode(Buf)
 		-- upvalues: Module255 (copy), ProtoModule (copy), PropTypesModule (copy)
 		local NewModule = Module255.new()
 		local v184 = 0
@@ -43854,7 +43854,7 @@ do
 		return NewModule
 	end
 
-	function Module255:jsonEncode() --[[ Line: 69212 ]]
+	function Module255:jsonEncode()
 		local t = {}
 		
 		if self.icon_name ~= nil then
@@ -43875,7 +43875,7 @@ do
 		return t
 	end
 
-	function Module255:jsonDecode() --[[ Line: 69238 ]]
+	function Module255:jsonDecode()
 		-- upvalues: Module255 (copy), PropTypesModule (copy)
 		local NewModule = Module255.new()
 		
@@ -43918,7 +43918,7 @@ do
 	local Module256 = {}
 	Module256.__index = Module256
 
-	function Module256.new(p1) --[[ Line: 69298 ]]
+	function Module256.new(p1)
 		-- upvalues: Module256 (copy)
 		return (setmetatable({
 			props = if p1 == nil or p1.props == nil then nil else p1.props,
@@ -43926,7 +43926,7 @@ do
 		}, Module256))
 	end
 
-	function Module256:encode() --[[ Line: 69305 ]]
+	function Module256:encode()
 		-- upvalues: ProtoModule (copy)
 		local Buf = buffer.create(0)
 		local Count = 0
@@ -43947,7 +43947,7 @@ do
 		return Buf1
 	end
 
-	function Module256.decode(Buf) --[[ Line: 69326 ]]
+	function Module256.decode(Buf)
 		-- upvalues: Module256 (copy), ProtoModule (copy), t (copy), ComponentSharedModule (copy)
 		local NewModule = Module256.new()
 		local v185 = 0
@@ -43984,7 +43984,7 @@ do
 		return NewModule
 	end
 
-	function Module256:jsonEncode() --[[ Line: 69374 ]]
+	function Module256:jsonEncode()
 		local t = {}
 		
 		if self.props ~= nil then
@@ -43996,7 +43996,7 @@ do
 		return t
 	end
 
-	function Module256:jsonDecode() --[[ Line: 69388 ]]
+	function Module256:jsonDecode()
 		-- upvalues: Module256 (copy), t (copy), ComponentSharedModule (copy)
 		local NewModule = Module256.new()
 		
@@ -44018,7 +44018,7 @@ do
 	local Module257 = {}
 	Module257.__index = Module257
 
-	function Module257.new(p1) --[[ Line: 69417 ]]
+	function Module257.new(p1)
 		-- upvalues: Module257 (copy)
 		return (setmetatable({
 			image = if p1 == nil or p1.image == nil then nil else p1.image,
@@ -44030,7 +44030,7 @@ do
 		}, Module257))
 	end
 
-	function Module257:encode() --[[ Line: 69430 ]]
+	function Module257:encode()
 		-- upvalues: ProtoModule (copy)
 		local Buf = buffer.create(0)
 		local Count = 0
@@ -44071,7 +44071,7 @@ do
 		return Buf1
 	end
 
-	function Module257.decode(Buf) --[[ Line: 69475 ]]
+	function Module257.decode(Buf)
 		-- upvalues: Module257 (copy), ProtoModule (copy), PropTypesModule (copy), ActionsModule (copy)
 		local NewModule = Module257.new()
 		local v186 = 0
@@ -44124,7 +44124,7 @@ do
 		return NewModule
 	end
 
-	function Module257:jsonEncode() --[[ Line: 69543 ]]
+	function Module257:jsonEncode()
 		local t = {}
 		
 		if self.image ~= nil then
@@ -44148,7 +44148,7 @@ do
 		return t
 	end
 
-	function Module257:jsonDecode() --[[ Line: 69573 ]]
+	function Module257:jsonDecode()
 		-- upvalues: Module257 (copy), PropTypesModule (copy), ActionsModule (copy)
 		local NewModule = Module257.new()
 		
@@ -44196,7 +44196,7 @@ do
 	local Module258 = {}
 	Module258.__index = Module258
 
-	function Module258.new(p1) --[[ Line: 69639 ]]
+	function Module258.new(p1)
 		-- upvalues: Module258 (copy)
 		return (setmetatable({
 			props = if p1 == nil or p1.props == nil then nil else p1.props,
@@ -44204,7 +44204,7 @@ do
 		}, Module258))
 	end
 
-	function Module258:encode() --[[ Line: 69646 ]]
+	function Module258:encode()
 		-- upvalues: ProtoModule (copy)
 		local Buf = buffer.create(0)
 		local Count = 0
@@ -44225,7 +44225,7 @@ do
 		return Buf1
 	end
 
-	function Module258.decode(Buf) --[[ Line: 69667 ]]
+	function Module258.decode(Buf)
 		-- upvalues: Module258 (copy), ProtoModule (copy), t (copy), ComponentSharedModule (copy)
 		local NewModule = Module258.new()
 		local v186 = 0
@@ -44262,7 +44262,7 @@ do
 		return NewModule
 	end
 
-	function Module258:jsonEncode() --[[ Line: 69715 ]]
+	function Module258:jsonEncode()
 		local t = {}
 		
 		if self.props ~= nil then
@@ -44274,7 +44274,7 @@ do
 		return t
 	end
 
-	function Module258:jsonDecode() --[[ Line: 69729 ]]
+	function Module258:jsonDecode()
 		-- upvalues: Module258 (copy), t (copy), ComponentSharedModule (copy)
 		local NewModule = Module258.new()
 		
@@ -44296,7 +44296,7 @@ do
 	local Module259 = {}
 	Module259.__index = Module259
 
-	function Module259.new(p1) --[[ Line: 69758 ]]
+	function Module259.new(p1)
 		-- upvalues: Module259 (copy)
 		return (setmetatable({
 			anchor_point = if p1 == nil or p1.anchor_point == nil then nil else p1.anchor_point,
@@ -44323,7 +44323,7 @@ do
 		}, Module259))
 	end
 
-	function Module259:encode() --[[ Line: 69784 ]]
+	function Module259:encode()
 		-- upvalues: ProtoModule (copy)
 		local Buf = buffer.create(0)
 		local Count = 0
@@ -44439,7 +44439,7 @@ do
 		return Buf1
 	end
 
-	function Module259.decode(Buf) --[[ Line: 69919 ]]
+	function Module259.decode(Buf)
 		-- upvalues: Module259 (copy), ProtoModule (copy), PropTypesModule (copy), ActionsModule (copy), PropTypesEngineModule (copy)
 		local NewModule = Module259.new()
 		local v187 = 0
@@ -44552,7 +44552,7 @@ do
 		return NewModule
 	end
 
-	function Module259:jsonEncode() --[[ Line: 70066 ]]
+	function Module259:jsonEncode()
 		local t = {}
 		
 		if self.anchor_point ~= nil then
@@ -44621,7 +44621,7 @@ do
 		return t
 	end
 
-	function Module259:jsonDecode() --[[ Line: 70156 ]]
+	function Module259:jsonDecode()
 		-- upvalues: Module259 (copy), PropTypesModule (copy), ActionsModule (copy), PropTypesEngineModule (copy)
 		local NewModule = Module259.new()
 		
@@ -44751,7 +44751,7 @@ do
 	local Module260 = {}
 	Module260.__index = Module260
 
-	function Module260.new(p1) --[[ Line: 70366 ]]
+	function Module260.new(p1)
 		-- upvalues: Module260 (copy)
 		return (setmetatable({
 			props = if p1 == nil or p1.props == nil then nil else p1.props,
@@ -44759,7 +44759,7 @@ do
 		}, Module260))
 	end
 
-	function Module260:encode() --[[ Line: 70373 ]]
+	function Module260:encode()
 		-- upvalues: ProtoModule (copy)
 		local Buf = buffer.create(0)
 		local Count = 0
@@ -44780,7 +44780,7 @@ do
 		return Buf1
 	end
 
-	function Module260.decode(Buf) --[[ Line: 70394 ]]
+	function Module260.decode(Buf)
 		-- upvalues: Module260 (copy), ProtoModule (copy), t (copy), ComponentSharedModule (copy)
 		local NewModule = Module260.new()
 		local v188 = 0
@@ -44817,7 +44817,7 @@ do
 		return NewModule
 	end
 
-	function Module260:jsonEncode() --[[ Line: 70442 ]]
+	function Module260:jsonEncode()
 		local t = {}
 		
 		if self.props ~= nil then
@@ -44829,7 +44829,7 @@ do
 		return t
 	end
 
-	function Module260:jsonDecode() --[[ Line: 70456 ]]
+	function Module260:jsonDecode()
 		-- upvalues: Module260 (copy), t (copy), ComponentSharedModule (copy)
 		local NewModule = Module260.new()
 		
@@ -44853,7 +44853,7 @@ do
 	local Module261 = {}
 	Module261.__index = Module261
 
-	function Module261.new(p1) --[[ Line: 70485 ]]
+	function Module261.new(p1)
 		-- upvalues: Module261 (copy)
 		return (setmetatable({
 			image_id = if p1 == nil or p1.image_id == nil then nil else p1.image_id,
@@ -44866,7 +44866,7 @@ do
 		}, Module261))
 	end
 
-	function Module261:encode() --[[ Line: 70503 ]]
+	function Module261:encode()
 		-- upvalues: ProtoModule (copy)
 		local Buf = buffer.create(0)
 		local Count = 0
@@ -44912,7 +44912,7 @@ do
 		return Buf1
 	end
 
-	function Module261.decode(Buf) --[[ Line: 70554 ]]
+	function Module261.decode(Buf)
 		-- upvalues: Module261 (copy), ProtoModule (copy), PropTypesModule (copy), t (copy)
 		local NewModule = Module261.new()
 		local v188 = 0
@@ -44969,7 +44969,7 @@ do
 		return NewModule
 	end
 
-	function Module261:jsonEncode() --[[ Line: 70628 ]]
+	function Module261:jsonEncode()
 		local t = {}
 		
 		if self.image_id ~= nil then
@@ -44996,7 +44996,7 @@ do
 		return t
 	end
 
-	function Module261:jsonDecode() --[[ Line: 70662 ]]
+	function Module261:jsonDecode()
 		-- upvalues: Module261 (copy), PropTypesModule (copy), t (copy)
 		local NewModule = Module261.new()
 		
@@ -45054,14 +45054,14 @@ do
 	local Module262 = {}
 	Module262.__index = Module262
 
-	function Module262.new(p1) --[[ Line: 70747 ]]
+	function Module262.new(p1)
 		-- upvalues: Module262 (copy)
 		return (setmetatable({
 			kind = if p1 == nil or p1.kind == nil then nil else p1.kind
 		}, Module262))
 	end
 
-	function Module262:encode() --[[ Line: 70755 ]]
+	function Module262:encode()
 		-- upvalues: ProtoModule (copy)
 		local Buf = buffer.create(0)
 		local Count = 0
@@ -45083,7 +45083,7 @@ do
 		return Buf1
 	end
 
-	function Module262.decode(Buf) --[[ Line: 70776 ]]
+	function Module262.decode(Buf)
 		-- upvalues: Module262 (copy), ProtoModule (copy), t (copy)
 		local NewModule = Module262.new()
 		local v189 = 0
@@ -45126,7 +45126,7 @@ do
 		return NewModule
 	end
 
-	function Module262:jsonEncode() --[[ Line: 70830 ]]
+	function Module262:jsonEncode()
 		local t = {}
 		
 		if self.kind ~= nil then
@@ -45142,7 +45142,7 @@ do
 		return t
 	end
 
-	function Module262:jsonDecode() --[[ Line: 70844 ]]
+	function Module262:jsonDecode()
 		-- upvalues: Module262 (copy), t (copy)
 		local NewModule = Module262.new()
 		
@@ -45176,7 +45176,7 @@ do
 	local Module263 = {}
 	Module263.__index = Module263
 
-	function Module263.new(p1) --[[ Line: 70887 ]]
+	function Module263.new(p1)
 		-- upvalues: Module263 (copy)
 		return (setmetatable({
 			kind = if p1 == nil or p1.kind == nil then nil else p1.kind,
@@ -45185,7 +45185,7 @@ do
 		}, Module263))
 	end
 
-	function Module263:encode() --[[ Line: 70899 ]]
+	function Module263:encode()
 		-- upvalues: ProtoModule (copy)
 		local Buf = buffer.create(0)
 		local Count = 0
@@ -45218,7 +45218,7 @@ do
 		return Buf1
 	end
 
-	function Module263.decode(Buf) --[[ Line: 70935 ]]
+	function Module263.decode(Buf)
 		-- upvalues: Module263 (copy), ProtoModule (copy), t (copy), HydrationDataSpecModule (copy)
 		local NewModule = Module263.new()
 		local v190 = 0
@@ -45266,7 +45266,7 @@ do
 		return NewModule
 	end
 
-	function Module263:jsonEncode() --[[ Line: 71001 ]]
+	function Module263:jsonEncode()
 		local t = {}
 		
 		if self.kind ~= nil then
@@ -45290,7 +45290,7 @@ do
 		return t
 	end
 
-	function Module263:jsonDecode() --[[ Line: 71029 ]]
+	function Module263:jsonDecode()
 		-- upvalues: Module263 (copy), t (copy), HydrationDataSpecModule (copy)
 		local NewModule = Module263.new()
 		
@@ -45342,14 +45342,14 @@ do
 	local Module264 = {}
 	Module264.__index = Module264
 
-	function Module264.new(p1) --[[ Line: 71099 ]]
+	function Module264.new(p1)
 		-- upvalues: Module264 (copy)
 		return (setmetatable({
 			items = if p1 == nil or p1.items == nil then {} else p1.items
 		}, Module264))
 	end
 
-	function Module264:encode() --[[ Line: 71110 ]]
+	function Module264:encode()
 		-- upvalues: ProtoModule (copy)
 		local Buf = buffer.create(0)
 		local Count = 0
@@ -45367,7 +45367,7 @@ do
 		return Buf1
 	end
 
-	function Module264.decode(Buf) --[[ Line: 71129 ]]
+	function Module264.decode(Buf)
 		-- upvalues: Module264 (copy), ProtoModule (copy), PageEntryContentModule (copy)
 		local NewModule = Module264.new()
 		local v191 = 0
@@ -45400,7 +45400,7 @@ do
 		return NewModule
 	end
 
-	function Module264:jsonEncode() --[[ Line: 71179 ]]
+	function Module264:jsonEncode()
 		local t = {}
 		
 		if self.items ~= nil and #self.items > 0 then
@@ -45414,7 +45414,7 @@ do
 		return t
 	end
 
-	function Module264:jsonDecode() --[[ Line: 71195 ]]
+	function Module264:jsonDecode()
 		-- upvalues: Module264 (copy), PageEntryContentModule (copy)
 		local NewModule = Module264.new()
 		
@@ -45438,7 +45438,7 @@ do
 	local Module265 = {}
 	Module265.__index = Module265
 
-	function Module265.new(p1) --[[ Line: 71234 ]]
+	function Module265.new(p1)
 		-- upvalues: Module265 (copy)
 		return (setmetatable({
 			condition = if p1 == nil or p1.condition == nil then nil else p1.condition,
@@ -45446,7 +45446,7 @@ do
 		}, Module265))
 	end
 
-	function Module265:encode() --[[ Line: 71246 ]]
+	function Module265:encode()
 		-- upvalues: ProtoModule (copy)
 		local Buf = buffer.create(0)
 		local Count = 0
@@ -45467,7 +45467,7 @@ do
 		return Buf1
 	end
 
-	function Module265.decode(Buf) --[[ Line: 71269 ]]
+	function Module265.decode(Buf)
 		-- upvalues: Module265 (copy), ProtoModule (copy), PropConditionModule (copy), t (copy)
 		local NewModule = Module265.new()
 		local v192 = 0
@@ -45504,7 +45504,7 @@ do
 		return NewModule
 	end
 
-	function Module265:jsonEncode() --[[ Line: 71319 ]]
+	function Module265:jsonEncode()
 		local t = {}
 		
 		if self.condition ~= nil then
@@ -45516,7 +45516,7 @@ do
 		return t
 	end
 
-	function Module265:jsonDecode() --[[ Line: 71335 ]]
+	function Module265:jsonDecode()
 		-- upvalues: Module265 (copy), PropConditionModule (copy), t (copy)
 		local NewModule = Module265.new()
 		
@@ -45541,14 +45541,14 @@ do
 	local Module266 = {}
 	Module266.__index = Module266
 
-	function Module266.new(p1) --[[ Line: 71372 ]]
+	function Module266.new(p1)
 		-- upvalues: Module266 (copy)
 		return (setmetatable({
 			options = if p1 == nil or p1.options == nil then {} else p1.options
 		}, Module266))
 	end
 
-	function Module266:encode() --[[ Line: 71383 ]]
+	function Module266:encode()
 		-- upvalues: ProtoModule (copy)
 		local Buf = buffer.create(0)
 		local Count = 0
@@ -45566,7 +45566,7 @@ do
 		return Buf1
 	end
 
-	function Module266.decode(Buf) --[[ Line: 71402 ]]
+	function Module266.decode(Buf)
 		-- upvalues: Module266 (copy), ProtoModule (copy), t (copy)
 		local NewModule = Module266.new()
 		local v193 = 0
@@ -45599,7 +45599,7 @@ do
 		return NewModule
 	end
 
-	function Module266:jsonEncode() --[[ Line: 71450 ]]
+	function Module266:jsonEncode()
 		local t = {}
 		
 		if self.options ~= nil and #self.options > 0 then
@@ -45613,7 +45613,7 @@ do
 		return t
 	end
 
-	function Module266:jsonDecode() --[[ Line: 71466 ]]
+	function Module266:jsonDecode()
 		-- upvalues: Module266 (copy), t (copy)
 		local NewModule = Module266.new()
 		
@@ -45639,7 +45639,7 @@ do
 	local Module267 = {}
 	Module267.__index = Module267
 
-	function Module267.new(p1) --[[ Line: 71501 ]]
+	function Module267.new(p1)
 		-- upvalues: Module267 (copy)
 		return (setmetatable({
 			universe_id = if p1 == nil or p1.universe_id == nil then nil else p1.universe_id,
@@ -45668,7 +45668,7 @@ do
 		}, Module267))
 	end
 
-	function Module267:encode() --[[ Line: 71541 ]]
+	function Module267:encode()
 		-- upvalues: ProtoModule (copy)
 		local Buf = buffer.create(0)
 		local Count = 0
@@ -45794,7 +45794,7 @@ do
 		return Buf1
 	end
 
-	function Module267.decode(Buf) --[[ Line: 71688 ]]
+	function Module267.decode(Buf)
 		-- upvalues: Module267 (copy), ProtoModule (copy), PropTypesModule (copy), t (copy), ActionsModule (copy)
 		local NewModule = Module267.new()
 		local v194 = 0
@@ -45915,7 +45915,7 @@ do
 		return NewModule
 	end
 
-	function Module267:jsonEncode() --[[ Line: 71845 ]]
+	function Module267:jsonEncode()
 		local t = {}
 		
 		if self.universe_id ~= nil then
@@ -45990,7 +45990,7 @@ do
 		return t
 	end
 
-	function Module267:jsonDecode() --[[ Line: 71943 ]]
+	function Module267:jsonDecode()
 		-- upvalues: Module267 (copy), PropTypesModule (copy), t (copy), ActionsModule (copy)
 		local NewModule = Module267.new()
 		
@@ -46126,7 +46126,7 @@ do
 	local Module268 = {}
 	Module268.__index = Module268
 
-	function Module268.new(p1) --[[ Line: 72159 ]]
+	function Module268.new(p1)
 		-- upvalues: Module268 (copy)
 		return (setmetatable({
 			props = if p1 == nil or p1.props == nil then nil else p1.props,
@@ -46134,7 +46134,7 @@ do
 		}, Module268))
 	end
 
-	function Module268:encode() --[[ Line: 72168 ]]
+	function Module268:encode()
 		-- upvalues: ProtoModule (copy)
 		local Buf = buffer.create(0)
 		local Count = 0
@@ -46155,7 +46155,7 @@ do
 		return Buf1
 	end
 
-	function Module268.decode(Buf) --[[ Line: 72189 ]]
+	function Module268.decode(Buf)
 		-- upvalues: Module268 (copy), ProtoModule (copy), t (copy), ComponentSharedModule (copy)
 		local NewModule = Module268.new()
 		local v195 = 0
@@ -46192,7 +46192,7 @@ do
 		return NewModule
 	end
 
-	function Module268:jsonEncode() --[[ Line: 72237 ]]
+	function Module268:jsonEncode()
 		local t = {}
 		
 		if self.props ~= nil then
@@ -46204,7 +46204,7 @@ do
 		return t
 	end
 
-	function Module268:jsonDecode() --[[ Line: 72251 ]]
+	function Module268:jsonDecode()
 		-- upvalues: Module268 (copy), t (copy), ComponentSharedModule (copy)
 		local NewModule = Module268.new()
 		
@@ -46226,7 +46226,7 @@ do
 	local Module269 = {}
 	Module269.__index = Module269
 
-	function Module269.new(p1) --[[ Line: 72282 ]]
+	function Module269.new(p1)
 		-- upvalues: Module269 (copy)
 		return (setmetatable({
 			universe_id = if p1 == nil or p1.universe_id == nil then nil else p1.universe_id,
@@ -46235,7 +46235,7 @@ do
 		}, Module269))
 	end
 
-	function Module269:encode() --[[ Line: 72294 ]]
+	function Module269:encode()
 		-- upvalues: ProtoModule (copy)
 		local Buf = buffer.create(0)
 		local Count = 0
@@ -46261,7 +46261,7 @@ do
 		return Buf1
 	end
 
-	function Module269.decode(Buf) --[[ Line: 72321 ]]
+	function Module269.decode(Buf)
 		-- upvalues: Module269 (copy), ProtoModule (copy), PropTypesModule (copy)
 		local NewModule = Module269.new()
 		local v196 = 0
@@ -46302,7 +46302,7 @@ do
 		return NewModule
 	end
 
-	function Module269:jsonEncode() --[[ Line: 72375 ]]
+	function Module269:jsonEncode()
 		local t = {}
 		
 		if self.universe_id ~= nil then
@@ -46317,7 +46317,7 @@ do
 		return t
 	end
 
-	function Module269:jsonDecode() --[[ Line: 72393 ]]
+	function Module269:jsonDecode()
 		-- upvalues: Module269 (copy), PropTypesModule (copy)
 		local NewModule = Module269.new()
 		
@@ -46353,7 +46353,7 @@ do
 	local Module270 = {}
 	Module270.__index = Module270
 
-	function Module270.new(p1) --[[ Line: 72444 ]]
+	function Module270.new(p1)
 		-- upvalues: Module270 (copy)
 		return (setmetatable({
 			props = if p1 == nil or p1.props == nil then nil else p1.props,
@@ -46361,7 +46361,7 @@ do
 		}, Module270))
 	end
 
-	function Module270:encode() --[[ Line: 72453 ]]
+	function Module270:encode()
 		-- upvalues: ProtoModule (copy)
 		local Buf = buffer.create(0)
 		local Count = 0
@@ -46382,7 +46382,7 @@ do
 		return Buf1
 	end
 
-	function Module270.decode(Buf) --[[ Line: 72474 ]]
+	function Module270.decode(Buf)
 		-- upvalues: Module270 (copy), ProtoModule (copy), t (copy), ComponentSharedModule (copy)
 		local NewModule = Module270.new()
 		local v196 = 0
@@ -46419,7 +46419,7 @@ do
 		return NewModule
 	end
 
-	function Module270:jsonEncode() --[[ Line: 72522 ]]
+	function Module270:jsonEncode()
 		local t = {}
 		
 		if self.props ~= nil then
@@ -46431,7 +46431,7 @@ do
 		return t
 	end
 
-	function Module270:jsonDecode() --[[ Line: 72536 ]]
+	function Module270:jsonDecode()
 		-- upvalues: Module270 (copy), t (copy), ComponentSharedModule (copy)
 		local NewModule = Module270.new()
 		
@@ -46453,7 +46453,7 @@ do
 	local Module271 = {}
 	Module271.__index = Module271
 
-	function Module271.new(p1) --[[ Line: 72565 ]]
+	function Module271.new(p1)
 		-- upvalues: Module271 (copy)
 		return (setmetatable({
 			universe_id = if p1 == nil or p1.universe_id == nil then nil else p1.universe_id,
@@ -46461,7 +46461,7 @@ do
 		}, Module271))
 	end
 
-	function Module271:encode() --[[ Line: 72574 ]]
+	function Module271:encode()
 		-- upvalues: ProtoModule (copy)
 		local Buf = buffer.create(0)
 		local Count = 0
@@ -46482,7 +46482,7 @@ do
 		return Buf1
 	end
 
-	function Module271.decode(Buf) --[[ Line: 72595 ]]
+	function Module271.decode(Buf)
 		-- upvalues: Module271 (copy), ProtoModule (copy), PropTypesModule (copy)
 		local NewModule = Module271.new()
 		local v197 = 0
@@ -46519,7 +46519,7 @@ do
 		return NewModule
 	end
 
-	function Module271:jsonEncode() --[[ Line: 72643 ]]
+	function Module271:jsonEncode()
 		local t = {}
 		
 		if self.universe_id ~= nil then
@@ -46531,7 +46531,7 @@ do
 		return t
 	end
 
-	function Module271:jsonDecode() --[[ Line: 72657 ]]
+	function Module271:jsonDecode()
 		-- upvalues: Module271 (copy), PropTypesModule (copy)
 		local NewModule = Module271.new()
 		
@@ -46559,7 +46559,7 @@ do
 	local Module272 = {}
 	Module272.__index = Module272
 
-	function Module272.new(p1) --[[ Line: 72698 ]]
+	function Module272.new(p1)
 		-- upvalues: Module272 (copy)
 		return (setmetatable({
 			props = if p1 == nil or p1.props == nil then nil else p1.props,
@@ -46567,7 +46567,7 @@ do
 		}, Module272))
 	end
 
-	function Module272:encode() --[[ Line: 72705 ]]
+	function Module272:encode()
 		-- upvalues: ProtoModule (copy)
 		local Buf = buffer.create(0)
 		local Count = 0
@@ -46588,7 +46588,7 @@ do
 		return Buf1
 	end
 
-	function Module272.decode(Buf) --[[ Line: 72726 ]]
+	function Module272.decode(Buf)
 		-- upvalues: Module272 (copy), ProtoModule (copy), t (copy), ComponentSharedModule (copy)
 		local NewModule = Module272.new()
 		local v198 = 0
@@ -46625,7 +46625,7 @@ do
 		return NewModule
 	end
 
-	function Module272:jsonEncode() --[[ Line: 72774 ]]
+	function Module272:jsonEncode()
 		local t = {}
 		
 		if self.props ~= nil then
@@ -46637,7 +46637,7 @@ do
 		return t
 	end
 
-	function Module272:jsonDecode() --[[ Line: 72788 ]]
+	function Module272:jsonDecode()
 		-- upvalues: Module272 (copy), t (copy), ComponentSharedModule (copy)
 		local NewModule = Module272.new()
 		
@@ -46661,7 +46661,7 @@ do
 	local Module273 = {}
 	Module273.__index = Module273
 
-	function Module273.new(p1) --[[ Line: 72817 ]]
+	function Module273.new(p1)
 		-- upvalues: Module273 (copy)
 		return (setmetatable({
 			leading = if p1 == nil or p1.leading == nil then nil else p1.leading,
@@ -46681,7 +46681,7 @@ do
 		}, Module273))
 	end
 
-	function Module273:encode() --[[ Line: 72838 ]]
+	function Module273:encode()
 		-- upvalues: ProtoModule (copy)
 		local Buf = buffer.create(0)
 		local Count = 0
@@ -46762,7 +46762,7 @@ do
 		return Buf1
 	end
 
-	function Module273.decode(Buf) --[[ Line: 72931 ]]
+	function Module273.decode(Buf)
 		-- upvalues: Module273 (copy), ProtoModule (copy), t (copy), ActionsModule (copy), PropTypesModule (copy)
 		local NewModule = Module273.new()
 		local v198 = 0
@@ -46847,7 +46847,7 @@ do
 		return NewModule
 	end
 
-	function Module273:jsonEncode() --[[ Line: 73040 ]]
+	function Module273:jsonEncode()
 		local t = {}
 		
 		if self.leading ~= nil then
@@ -46895,7 +46895,7 @@ do
 		return t
 	end
 
-	function Module273:jsonDecode() --[[ Line: 73102 ]]
+	function Module273:jsonDecode()
 		-- upvalues: Module273 (copy), t (copy), ActionsModule (copy), PropTypesModule (copy)
 		local NewModule = Module273.new()
 		
@@ -46977,7 +46977,7 @@ do
 	local Module274 = {}
 	Module274.__index = Module274
 
-	function Module274.new(p1) --[[ Line: 73219 ]]
+	function Module274.new(p1)
 		-- upvalues: Module274 (copy)
 		return (setmetatable({
 			props = if p1 == nil or p1.props == nil then nil else p1.props,
@@ -46985,7 +46985,7 @@ do
 		}, Module274))
 	end
 
-	function Module274:encode() --[[ Line: 73226 ]]
+	function Module274:encode()
 		-- upvalues: ProtoModule (copy)
 		local Buf = buffer.create(0)
 		local Count = 0
@@ -47006,7 +47006,7 @@ do
 		return Buf1
 	end
 
-	function Module274.decode(Buf) --[[ Line: 73247 ]]
+	function Module274.decode(Buf)
 		-- upvalues: Module274 (copy), ProtoModule (copy), t (copy), ComponentSharedModule (copy)
 		local NewModule = Module274.new()
 		local v199 = 0
@@ -47043,7 +47043,7 @@ do
 		return NewModule
 	end
 
-	function Module274:jsonEncode() --[[ Line: 73295 ]]
+	function Module274:jsonEncode()
 		local t = {}
 		
 		if self.props ~= nil then
@@ -47055,7 +47055,7 @@ do
 		return t
 	end
 
-	function Module274:jsonDecode() --[[ Line: 73309 ]]
+	function Module274:jsonDecode()
 		-- upvalues: Module274 (copy), t (copy), ComponentSharedModule (copy)
 		local NewModule = Module274.new()
 		
@@ -47077,7 +47077,7 @@ do
 	local Module275 = {}
 	Module275.__index = Module275
 
-	function Module275.new(p1) --[[ Line: 73338 ]]
+	function Module275.new(p1)
 		-- upvalues: Module275 (copy)
 		return (setmetatable({
 			items = if p1 == nil or p1.items == nil then nil else p1.items,
@@ -47091,7 +47091,7 @@ do
 		}, Module275))
 	end
 
-	function Module275:encode() --[[ Line: 73351 ]]
+	function Module275:encode()
 		-- upvalues: ProtoModule (copy)
 		local Buf = buffer.create(0)
 		local Count = 0
@@ -47142,7 +47142,7 @@ do
 		return Buf1
 	end
 
-	function Module275.decode(Buf) --[[ Line: 73408 ]]
+	function Module275.decode(Buf)
 		-- upvalues: Module275 (copy), ProtoModule (copy), t (copy), PropTypesModule (copy)
 		local NewModule = Module275.new()
 		local v200 = 0
@@ -47203,7 +47203,7 @@ do
 		return NewModule
 	end
 
-	function Module275:jsonEncode() --[[ Line: 73486 ]]
+	function Module275:jsonEncode()
 		local t = {}
 		
 		if self.items ~= nil then
@@ -47233,7 +47233,7 @@ do
 		return t
 	end
 
-	function Module275:jsonDecode() --[[ Line: 73524 ]]
+	function Module275:jsonDecode()
 		-- upvalues: Module275 (copy), t (copy), PropTypesModule (copy)
 		local NewModule = Module275.new()
 		
@@ -47293,7 +47293,7 @@ do
 	local Module276 = {}
 	Module276.__index = Module276
 
-	function Module276.new(p1) --[[ Line: 73603 ]]
+	function Module276.new(p1)
 		-- upvalues: Module276 (copy)
 		return (setmetatable({
 			props = if p1 == nil or p1.props == nil then nil else p1.props,
@@ -47301,7 +47301,7 @@ do
 		}, Module276))
 	end
 
-	function Module276:encode() --[[ Line: 73610 ]]
+	function Module276:encode()
 		-- upvalues: ProtoModule (copy)
 		local Buf = buffer.create(0)
 		local Count = 0
@@ -47322,7 +47322,7 @@ do
 		return Buf1
 	end
 
-	function Module276.decode(Buf) --[[ Line: 73631 ]]
+	function Module276.decode(Buf)
 		-- upvalues: Module276 (copy), ProtoModule (copy), t (copy), ComponentSharedModule (copy)
 		local NewModule = Module276.new()
 		local v200 = 0
@@ -47359,7 +47359,7 @@ do
 		return NewModule
 	end
 
-	function Module276:jsonEncode() --[[ Line: 73679 ]]
+	function Module276:jsonEncode()
 		local t = {}
 		
 		if self.props ~= nil then
@@ -47371,7 +47371,7 @@ do
 		return t
 	end
 
-	function Module276:jsonDecode() --[[ Line: 73693 ]]
+	function Module276:jsonDecode()
 		-- upvalues: Module276 (copy), t (copy), ComponentSharedModule (copy)
 		local NewModule = Module276.new()
 		
@@ -47393,7 +47393,7 @@ do
 	local Module277 = {}
 	Module277.__index = Module277
 
-	function Module277.new(p1) --[[ Line: 73722 ]]
+	function Module277.new(p1)
 		-- upvalues: Module277 (copy)
 		return (setmetatable({
 			state_key = if p1 == nil or p1.state_key == nil then nil else p1.state_key,
@@ -47406,7 +47406,7 @@ do
 		}, Module277))
 	end
 
-	function Module277:encode() --[[ Line: 73736 ]]
+	function Module277:encode()
 		-- upvalues: ProtoModule (copy)
 		local Buf = buffer.create(0)
 		local Count = 0
@@ -47452,7 +47452,7 @@ do
 		return Buf1
 	end
 
-	function Module277.decode(Buf) --[[ Line: 73787 ]]
+	function Module277.decode(Buf)
 		-- upvalues: Module277 (copy), ProtoModule (copy), PropTypesModule (copy), t (copy)
 		local NewModule = Module277.new()
 		local v201 = 0
@@ -47509,7 +47509,7 @@ do
 		return NewModule
 	end
 
-	function Module277:jsonEncode() --[[ Line: 73860 ]]
+	function Module277:jsonEncode()
 		local t = {}
 		
 		if self.state_key ~= nil then
@@ -47536,7 +47536,7 @@ do
 		return t
 	end
 
-	function Module277:jsonDecode() --[[ Line: 73894 ]]
+	function Module277:jsonDecode()
 		-- upvalues: Module277 (copy), PropTypesModule (copy), t (copy)
 		local NewModule = Module277.new()
 		
@@ -47585,7 +47585,7 @@ do
 	local Module278 = {}
 	Module278.__index = Module278
 
-	function Module278.new(p1) --[[ Line: 73962 ]]
+	function Module278.new(p1)
 		-- upvalues: Module278 (copy)
 		return (setmetatable({
 			props = if p1 == nil or p1.props == nil then nil else p1.props,
@@ -47593,7 +47593,7 @@ do
 		}, Module278))
 	end
 
-	function Module278:encode() --[[ Line: 73969 ]]
+	function Module278:encode()
 		-- upvalues: ProtoModule (copy)
 		local Buf = buffer.create(0)
 		local Count = 0
@@ -47614,7 +47614,7 @@ do
 		return Buf1
 	end
 
-	function Module278.decode(Buf) --[[ Line: 73990 ]]
+	function Module278.decode(Buf)
 		-- upvalues: Module278 (copy), ProtoModule (copy), t (copy), ComponentSharedModule (copy)
 		local NewModule = Module278.new()
 		local v202 = 0
@@ -47651,7 +47651,7 @@ do
 		return NewModule
 	end
 
-	function Module278:jsonEncode() --[[ Line: 74038 ]]
+	function Module278:jsonEncode()
 		local t = {}
 		
 		if self.props ~= nil then
@@ -47663,7 +47663,7 @@ do
 		return t
 	end
 
-	function Module278:jsonDecode() --[[ Line: 74052 ]]
+	function Module278:jsonDecode()
 		-- upvalues: Module278 (copy), t (copy), ComponentSharedModule (copy)
 		local NewModule = Module278.new()
 		
@@ -47687,7 +47687,7 @@ do
 	local Module279 = {}
 	Module279.__index = Module279
 
-	function Module279.new(p1) --[[ Line: 74081 ]]
+	function Module279.new(p1)
 		-- upvalues: Module279 (copy)
 		return (setmetatable({
 			leading_icon = if p1 == nil or p1.leading_icon == nil then nil else p1.leading_icon,
@@ -47702,7 +47702,7 @@ do
 		}, Module279))
 	end
 
-	function Module279:encode() --[[ Line: 74095 ]]
+	function Module279:encode()
 		-- upvalues: ProtoModule (copy)
 		local Buf = buffer.create(0)
 		local Count = 0
@@ -47758,7 +47758,7 @@ do
 		return Buf1
 	end
 
-	function Module279.decode(Buf) --[[ Line: 74158 ]]
+	function Module279.decode(Buf)
 		-- upvalues: Module279 (copy), ProtoModule (copy), PropTypesModule (copy), t (copy), ActionsModule (copy)
 		local NewModule = Module279.new()
 		local v202 = 0
@@ -47823,7 +47823,7 @@ do
 		return NewModule
 	end
 
-	function Module279:jsonEncode() --[[ Line: 74241 ]]
+	function Module279:jsonEncode()
 		local t = {}
 		
 		if self.leading_icon ~= nil then
@@ -47856,7 +47856,7 @@ do
 		return t
 	end
 
-	function Module279:jsonDecode() --[[ Line: 74283 ]]
+	function Module279:jsonDecode()
 		-- upvalues: Module279 (copy), PropTypesModule (copy), t (copy), ActionsModule (copy)
 		local NewModule = Module279.new()
 		
@@ -47914,7 +47914,7 @@ do
 	local Module280 = {}
 	Module280.__index = Module280
 
-	function Module280.new(p1) --[[ Line: 74366 ]]
+	function Module280.new(p1)
 		-- upvalues: Module280 (copy)
 		return (setmetatable({
 			props = if p1 == nil or p1.props == nil then nil else p1.props,
@@ -47922,7 +47922,7 @@ do
 		}, Module280))
 	end
 
-	function Module280:encode() --[[ Line: 74375 ]]
+	function Module280:encode()
 		-- upvalues: ProtoModule (copy)
 		local Buf = buffer.create(0)
 		local Count = 0
@@ -47943,7 +47943,7 @@ do
 		return Buf1
 	end
 
-	function Module280.decode(Buf) --[[ Line: 74396 ]]
+	function Module280.decode(Buf)
 		-- upvalues: Module280 (copy), ProtoModule (copy), t (copy), ComponentSharedModule (copy)
 		local NewModule = Module280.new()
 		local v203 = 0
@@ -47980,7 +47980,7 @@ do
 		return NewModule
 	end
 
-	function Module280:jsonEncode() --[[ Line: 74444 ]]
+	function Module280:jsonEncode()
 		local t = {}
 		
 		if self.props ~= nil then
@@ -47992,7 +47992,7 @@ do
 		return t
 	end
 
-	function Module280:jsonDecode() --[[ Line: 74458 ]]
+	function Module280:jsonDecode()
 		-- upvalues: Module280 (copy), t (copy), ComponentSharedModule (copy)
 		local NewModule = Module280.new()
 		
@@ -48014,7 +48014,7 @@ do
 	local Module281 = {}
 	Module281.__index = Module281
 
-	function Module281.new(p1) --[[ Line: 74489 ]]
+	function Module281.new(p1)
 		-- upvalues: Module281 (copy)
 		return (setmetatable({
 			title = if p1 == nil or p1.title == nil then nil else p1.title,
@@ -48025,7 +48025,7 @@ do
 		}, Module281))
 	end
 
-	function Module281:encode() --[[ Line: 74501 ]]
+	function Module281:encode()
 		-- upvalues: ProtoModule (copy)
 		local Buf = buffer.create(0)
 		local Count = 0
@@ -48061,7 +48061,7 @@ do
 		return Buf1
 	end
 
-	function Module281.decode(Buf) --[[ Line: 74542 ]]
+	function Module281.decode(Buf)
 		-- upvalues: Module281 (copy), ProtoModule (copy), PropTypesModule (copy), ActionsModule (copy)
 		local NewModule = Module281.new()
 		local v204 = 0
@@ -48110,7 +48110,7 @@ do
 		return NewModule
 	end
 
-	function Module281:jsonEncode() --[[ Line: 74607 ]]
+	function Module281:jsonEncode()
 		local t = {}
 		
 		if self.title ~= nil then
@@ -48131,7 +48131,7 @@ do
 		return t
 	end
 
-	function Module281:jsonDecode() --[[ Line: 74635 ]]
+	function Module281:jsonDecode()
 		-- upvalues: Module281 (copy), PropTypesModule (copy), ActionsModule (copy)
 		local NewModule = Module281.new()
 		
@@ -48173,14 +48173,14 @@ do
 	local Module282 = {}
 	Module282.__index = Module282
 
-	function Module282.new(p1) --[[ Line: 74691 ]]
+	function Module282.new(p1)
 		-- upvalues: Module282 (copy)
 		return (setmetatable({
 			oneof_prop = if p1 == nil or p1.oneof_prop == nil then nil else p1.oneof_prop
 		}, Module282))
 	end
 
-	function Module282:encode() --[[ Line: 74697 ]]
+	function Module282:encode()
 		-- upvalues: ProtoModule (copy)
 		local Buf = buffer.create(0)
 		local Count = 0
@@ -48202,7 +48202,7 @@ do
 		return Buf1
 	end
 
-	function Module282.decode(Buf) --[[ Line: 74718 ]]
+	function Module282.decode(Buf)
 		-- upvalues: Module282 (copy), ProtoModule (copy), PropTypesModule (copy), t (copy)
 		local NewModule = Module282.new()
 		local v204 = 0
@@ -48245,7 +48245,7 @@ do
 		return NewModule
 	end
 
-	function Module282:jsonEncode() --[[ Line: 74769 ]]
+	function Module282:jsonEncode()
 		local t = {}
 		
 		if self.oneof_prop ~= nil then
@@ -48261,7 +48261,7 @@ do
 		return t
 	end
 
-	function Module282:jsonDecode() --[[ Line: 74783 ]]
+	function Module282:jsonDecode()
 		-- upvalues: Module282 (copy), PropTypesModule (copy), t (copy)
 		local NewModule = Module282.new()
 		
@@ -48289,14 +48289,14 @@ do
 	local Module283 = {}
 	Module283.__index = Module283
 
-	function Module283.new(p1) --[[ Line: 74814 ]]
+	function Module283.new(p1)
 		-- upvalues: Module283 (copy)
 		return (setmetatable({
 			kind = if p1 == nil or p1.kind == nil then nil else p1.kind
 		}, Module283))
 	end
 
-	function Module283:encode() --[[ Line: 74820 ]]
+	function Module283:encode()
 		-- upvalues: ProtoModule (copy)
 		local Buf = buffer.create(0)
 		local Count = 0
@@ -48321,7 +48321,7 @@ do
 		return Buf1
 	end
 
-	function Module283.decode(Buf) --[[ Line: 74844 ]]
+	function Module283.decode(Buf)
 		-- upvalues: Module283 (copy), ProtoModule (copy), t (copy)
 		local NewModule = Module283.new()
 		local v205 = 0
@@ -48368,7 +48368,7 @@ do
 		return NewModule
 	end
 
-	function Module283:jsonEncode() --[[ Line: 74903 ]]
+	function Module283:jsonEncode()
 		local t = {}
 		
 		if self.kind ~= nil then
@@ -48389,7 +48389,7 @@ do
 		return t
 	end
 
-	function Module283:jsonDecode() --[[ Line: 74919 ]]
+	function Module283:jsonDecode()
 		-- upvalues: Module283 (copy), t (copy)
 		local NewModule = Module283.new()
 		
@@ -48423,7 +48423,7 @@ do
 	local Module284 = {}
 	Module284.__index = Module284
 
-	function Module284.new(p1) --[[ Line: 74961 ]]
+	function Module284.new(p1)
 		-- upvalues: Module284 (copy)
 		return (setmetatable({
 			condition = if p1 == nil or p1.condition == nil then nil else p1.condition,
@@ -48431,7 +48431,7 @@ do
 		}, Module284))
 	end
 
-	function Module284:encode() --[[ Line: 74970 ]]
+	function Module284:encode()
 		-- upvalues: ProtoModule (copy)
 		local Buf = buffer.create(0)
 		local Count = 0
@@ -48457,7 +48457,7 @@ do
 		return Buf1
 	end
 
-	function Module284.decode(Buf) --[[ Line: 74998 ]]
+	function Module284.decode(Buf)
 		-- upvalues: Module284 (copy), ProtoModule (copy), PropConditionModule (copy), t (copy)
 		local NewModule = Module284.new()
 		local v206 = 0
@@ -48501,7 +48501,7 @@ do
 		return NewModule
 	end
 
-	function Module284:jsonEncode() --[[ Line: 75056 ]]
+	function Module284:jsonEncode()
 		local t = {}
 		
 		if self.condition ~= nil then
@@ -48520,7 +48520,7 @@ do
 		return t
 	end
 
-	function Module284:jsonDecode() --[[ Line: 75076 ]]
+	function Module284:jsonDecode()
 		-- upvalues: Module284 (copy), PropConditionModule (copy), t (copy)
 		local NewModule = Module284.new()
 		
@@ -48553,14 +48553,14 @@ do
 	local Module285 = {}
 	Module285.__index = Module285
 
-	function Module285.new(p1) --[[ Line: 75118 ]]
+	function Module285.new(p1)
 		-- upvalues: Module285 (copy)
 		return (setmetatable({
 			options = if p1 == nil or p1.options == nil then {} else p1.options
 		}, Module285))
 	end
 
-	function Module285:encode() --[[ Line: 75126 ]]
+	function Module285:encode()
 		-- upvalues: ProtoModule (copy)
 		local Buf = buffer.create(0)
 		local Count = 0
@@ -48578,7 +48578,7 @@ do
 		return Buf1
 	end
 
-	function Module285.decode(Buf) --[[ Line: 75145 ]]
+	function Module285.decode(Buf)
 		-- upvalues: Module285 (copy), ProtoModule (copy), t (copy)
 		local NewModule = Module285.new()
 		local v206 = 0
@@ -48611,7 +48611,7 @@ do
 		return NewModule
 	end
 
-	function Module285:jsonEncode() --[[ Line: 75190 ]]
+	function Module285:jsonEncode()
 		local t = {}
 		
 		if self.options ~= nil and #self.options > 0 then
@@ -48625,7 +48625,7 @@ do
 		return t
 	end
 
-	function Module285:jsonDecode() --[[ Line: 75206 ]]
+	function Module285:jsonDecode()
 		-- upvalues: Module285 (copy), t (copy)
 		local NewModule = Module285.new()
 		
@@ -48649,7 +48649,7 @@ do
 	local Module286 = {}
 	Module286.__index = Module286
 
-	function Module286.new(p1) --[[ Line: 75237 ]]
+	function Module286.new(p1)
 		-- upvalues: Module286 (copy)
 		return (setmetatable({
 			type = if p1 == nil or p1.type == nil then nil else p1.type,
@@ -48658,7 +48658,7 @@ do
 		}, Module286))
 	end
 
-	function Module286:encode() --[[ Line: 75247 ]]
+	function Module286:encode()
 		-- upvalues: ProtoModule (copy)
 		local Buf = buffer.create(0)
 		local Count = 0
@@ -48684,7 +48684,7 @@ do
 		return Buf1
 	end
 
-	function Module286.decode(Buf) --[[ Line: 75276 ]]
+	function Module286.decode(Buf)
 		-- upvalues: Module286 (copy), ProtoModule (copy), PropTypesModule (copy), ActionsModule (copy)
 		local NewModule = Module286.new()
 		local v207 = 0
@@ -48725,7 +48725,7 @@ do
 		return NewModule
 	end
 
-	function Module286:jsonEncode() --[[ Line: 75331 ]]
+	function Module286:jsonEncode()
 		local t = {}
 		
 		if self.type ~= nil then
@@ -48740,7 +48740,7 @@ do
 		return t
 	end
 
-	function Module286:jsonDecode() --[[ Line: 75351 ]]
+	function Module286:jsonDecode()
 		-- upvalues: Module286 (copy), PropTypesModule (copy), ActionsModule (copy)
 		local NewModule = Module286.new()
 		
@@ -48771,7 +48771,7 @@ do
 	local Module287 = {}
 	Module287.__index = Module287
 
-	function Module287.new(p1) --[[ Line: 75393 ]]
+	function Module287.new(p1)
 		-- upvalues: Module287 (copy)
 		return (setmetatable({
 			props = if p1 == nil or p1.props == nil then nil else p1.props,
@@ -48779,7 +48779,7 @@ do
 		}, Module287))
 	end
 
-	function Module287:encode() --[[ Line: 75400 ]]
+	function Module287:encode()
 		-- upvalues: ProtoModule (copy)
 		local Buf = buffer.create(0)
 		local Count = 0
@@ -48800,7 +48800,7 @@ do
 		return Buf1
 	end
 
-	function Module287.decode(Buf) --[[ Line: 75421 ]]
+	function Module287.decode(Buf)
 		-- upvalues: Module287 (copy), ProtoModule (copy), t (copy), ComponentSharedModule (copy)
 		local NewModule = Module287.new()
 		local v208 = 0
@@ -48837,7 +48837,7 @@ do
 		return NewModule
 	end
 
-	function Module287:jsonEncode() --[[ Line: 75469 ]]
+	function Module287:jsonEncode()
 		local t = {}
 		
 		if self.props ~= nil then
@@ -48849,7 +48849,7 @@ do
 		return t
 	end
 
-	function Module287:jsonDecode() --[[ Line: 75483 ]]
+	function Module287:jsonDecode()
 		-- upvalues: Module287 (copy), t (copy), ComponentSharedModule (copy)
 		local NewModule = Module287.new()
 		
@@ -48873,7 +48873,7 @@ do
 	local Module288 = {}
 	Module288.__index = Module288
 
-	function Module288.new(p1) --[[ Line: 75512 ]]
+	function Module288.new(p1)
 		-- upvalues: Module288 (copy)
 		return (setmetatable({
 			items = if p1 == nil or p1.items == nil then nil else p1.items,
@@ -48885,7 +48885,7 @@ do
 		}, Module288))
 	end
 
-	function Module288:encode() --[[ Line: 75523 ]]
+	function Module288:encode()
 		-- upvalues: ProtoModule (copy)
 		local Buf = buffer.create(0)
 		local Count = 0
@@ -48926,7 +48926,7 @@ do
 		return Buf1
 	end
 
-	function Module288.decode(Buf) --[[ Line: 75568 ]]
+	function Module288.decode(Buf)
 		-- upvalues: Module288 (copy), ProtoModule (copy), t (copy), PropTypesModule (copy)
 		local NewModule = Module288.new()
 		local v208 = 0
@@ -48979,7 +48979,7 @@ do
 		return NewModule
 	end
 
-	function Module288:jsonEncode() --[[ Line: 75636 ]]
+	function Module288:jsonEncode()
 		local t = {}
 		
 		if self.items ~= nil then
@@ -49003,7 +49003,7 @@ do
 		return t
 	end
 
-	function Module288:jsonDecode() --[[ Line: 75666 ]]
+	function Module288:jsonDecode()
 		-- upvalues: Module288 (copy), t (copy), PropTypesModule (copy)
 		local NewModule = Module288.new()
 		
@@ -49049,7 +49049,7 @@ do
 	local Module289 = {}
 	Module289.__index = Module289
 
-	function Module289.new(p1) --[[ Line: 75731 ]]
+	function Module289.new(p1)
 		-- upvalues: Module289 (copy)
 		return (setmetatable({
 			props = if p1 == nil or p1.props == nil then nil else p1.props,
@@ -49057,7 +49057,7 @@ do
 		}, Module289))
 	end
 
-	function Module289:encode() --[[ Line: 75738 ]]
+	function Module289:encode()
 		-- upvalues: ProtoModule (copy)
 		local Buf = buffer.create(0)
 		local Count = 0
@@ -49078,7 +49078,7 @@ do
 		return Buf1
 	end
 
-	function Module289.decode(Buf) --[[ Line: 75759 ]]
+	function Module289.decode(Buf)
 		-- upvalues: Module289 (copy), ProtoModule (copy), t (copy), ComponentSharedModule (copy)
 		local NewModule = Module289.new()
 		local v209 = 0
@@ -49115,7 +49115,7 @@ do
 		return NewModule
 	end
 
-	function Module289:jsonEncode() --[[ Line: 75807 ]]
+	function Module289:jsonEncode()
 		local t = {}
 		
 		if self.props ~= nil then
@@ -49127,7 +49127,7 @@ do
 		return t
 	end
 
-	function Module289:jsonDecode() --[[ Line: 75821 ]]
+	function Module289:jsonDecode()
 		-- upvalues: Module289 (copy), t (copy), ComponentSharedModule (copy)
 		local NewModule = Module289.new()
 		
@@ -49149,7 +49149,7 @@ do
 	local Module290 = {}
 	Module290.__index = Module290
 
-	function Module290.new(p1) --[[ Line: 75850 ]]
+	function Module290.new(p1)
 		-- upvalues: Module290 (copy)
 		return (setmetatable({
 			text = if p1 == nil or p1.text == nil then nil else p1.text,
@@ -49163,7 +49163,7 @@ do
 		}, Module290))
 	end
 
-	function Module290:encode() --[[ Line: 75865 ]]
+	function Module290:encode()
 		-- upvalues: ProtoModule (copy)
 		local Buf = buffer.create(0)
 		local Count = 0
@@ -49214,7 +49214,7 @@ do
 		return Buf1
 	end
 
-	function Module290.decode(Buf) --[[ Line: 75922 ]]
+	function Module290.decode(Buf)
 		-- upvalues: Module290 (copy), ProtoModule (copy), PropTypesModule (copy), t (copy)
 		local NewModule = Module290.new()
 		local v210 = 0
@@ -49275,7 +49275,7 @@ do
 		return NewModule
 	end
 
-	function Module290:jsonEncode() --[[ Line: 76000 ]]
+	function Module290:jsonEncode()
 		local t = {}
 		
 		if self.text ~= nil then
@@ -49305,7 +49305,7 @@ do
 		return t
 	end
 
-	function Module290:jsonDecode() --[[ Line: 76038 ]]
+	function Module290:jsonDecode()
 		-- upvalues: Module290 (copy), PropTypesModule (copy), t (copy)
 		local NewModule = Module290.new()
 		
@@ -49359,7 +49359,7 @@ do
 	local Module291 = {}
 	Module291.__index = Module291
 
-	function Module291.new(p1) --[[ Line: 76111 ]]
+	function Module291.new(p1)
 		-- upvalues: Module291 (copy)
 		return (setmetatable({
 			props = if p1 == nil or p1.props == nil then nil else p1.props,
@@ -49367,7 +49367,7 @@ do
 		}, Module291))
 	end
 
-	function Module291:encode() --[[ Line: 76118 ]]
+	function Module291:encode()
 		-- upvalues: ProtoModule (copy)
 		local Buf = buffer.create(0)
 		local Count = 0
@@ -49388,7 +49388,7 @@ do
 		return Buf1
 	end
 
-	function Module291.decode(Buf) --[[ Line: 76139 ]]
+	function Module291.decode(Buf)
 		-- upvalues: Module291 (copy), ProtoModule (copy), t (copy), ComponentSharedModule (copy)
 		local NewModule = Module291.new()
 		local v210 = 0
@@ -49425,7 +49425,7 @@ do
 		return NewModule
 	end
 
-	function Module291:jsonEncode() --[[ Line: 76187 ]]
+	function Module291:jsonEncode()
 		local t = {}
 		
 		if self.props ~= nil then
@@ -49437,7 +49437,7 @@ do
 		return t
 	end
 
-	function Module291:jsonDecode() --[[ Line: 76201 ]]
+	function Module291:jsonDecode()
 		-- upvalues: Module291 (copy), t (copy), ComponentSharedModule (copy)
 		local NewModule = Module291.new()
 		
@@ -49459,7 +49459,7 @@ do
 	local Module292 = {}
 	Module292.__index = Module292
 
-	function Module292.new(p1) --[[ Line: 76230 ]]
+	function Module292.new(p1)
 		-- upvalues: Module292 (copy)
 		return (setmetatable({
 			leading = if p1 == nil or p1.leading == nil then nil else p1.leading,
@@ -49476,7 +49476,7 @@ do
 		}, Module292))
 	end
 
-	function Module292:encode() --[[ Line: 76248 ]]
+	function Module292:encode()
 		-- upvalues: ProtoModule (copy)
 		local Buf = buffer.create(0)
 		local Count = 0
@@ -49542,7 +49542,7 @@ do
 		return Buf1
 	end
 
-	function Module292.decode(Buf) --[[ Line: 76323 ]]
+	function Module292.decode(Buf)
 		-- upvalues: Module292 (copy), ProtoModule (copy), t (copy), ActionsModule (copy), PropTypesModule (copy)
 		local NewModule = Module292.new()
 		local v211 = 0
@@ -49615,7 +49615,7 @@ do
 		return NewModule
 	end
 
-	function Module292:jsonEncode() --[[ Line: 76416 ]]
+	function Module292:jsonEncode()
 		local t = {}
 		
 		if self.leading ~= nil then
@@ -49654,7 +49654,7 @@ do
 		return t
 	end
 
-	function Module292:jsonDecode() --[[ Line: 76466 ]]
+	function Module292:jsonDecode()
 		-- upvalues: Module292 (copy), t (copy), ActionsModule (copy), PropTypesModule (copy)
 		local NewModule = Module292.new()
 		
@@ -49721,7 +49721,7 @@ do
 	local Module293 = {}
 	Module293.__index = Module293
 
-	function Module293.new(p1) --[[ Line: 76561 ]]
+	function Module293.new(p1)
 		-- upvalues: Module293 (copy)
 		return (setmetatable({
 			props = if p1 == nil or p1.props == nil then nil else p1.props,
@@ -49729,7 +49729,7 @@ do
 		}, Module293))
 	end
 
-	function Module293:encode() --[[ Line: 76570 ]]
+	function Module293:encode()
 		-- upvalues: ProtoModule (copy)
 		local Buf = buffer.create(0)
 		local Count = 0
@@ -49750,7 +49750,7 @@ do
 		return Buf1
 	end
 
-	function Module293.decode(Buf) --[[ Line: 76591 ]]
+	function Module293.decode(Buf)
 		-- upvalues: Module293 (copy), ProtoModule (copy), t (copy), ComponentSharedModule (copy)
 		local NewModule = Module293.new()
 		local v212 = 0
@@ -49787,7 +49787,7 @@ do
 		return NewModule
 	end
 
-	function Module293:jsonEncode() --[[ Line: 76639 ]]
+	function Module293:jsonEncode()
 		local t = {}
 		
 		if self.props ~= nil then
@@ -49799,7 +49799,7 @@ do
 		return t
 	end
 
-	function Module293:jsonDecode() --[[ Line: 76653 ]]
+	function Module293:jsonDecode()
 		-- upvalues: Module293 (copy), t (copy), ComponentSharedModule (copy)
 		local NewModule = Module293.new()
 		
@@ -49823,7 +49823,7 @@ do
 	local Module294 = {}
 	Module294.__index = Module294
 
-	function Module294.new(p1) --[[ Line: 76682 ]]
+	function Module294.new(p1)
 		-- upvalues: Module294 (copy)
 		return (setmetatable({
 			filter_groups = if p1 == nil or p1.filter_groups == nil then nil else p1.filter_groups,
@@ -49837,7 +49837,7 @@ do
 		}, Module294))
 	end
 
-	function Module294:encode() --[[ Line: 76701 ]]
+	function Module294:encode()
 		-- upvalues: ProtoModule (copy)
 		local Buf = buffer.create(0)
 		local Count = 0
@@ -49888,7 +49888,7 @@ do
 		return Buf1
 	end
 
-	function Module294.decode(Buf) --[[ Line: 76758 ]]
+	function Module294.decode(Buf)
 		-- upvalues: Module294 (copy), ProtoModule (copy), PropTypesModule (copy), ActionsModule (copy)
 		local NewModule = Module294.new()
 		local v212 = 0
@@ -49949,7 +49949,7 @@ do
 		return NewModule
 	end
 
-	function Module294:jsonEncode() --[[ Line: 76840 ]]
+	function Module294:jsonEncode()
 		local t = {}
 		
 		if self.filter_groups ~= nil then
@@ -49979,7 +49979,7 @@ do
 		return t
 	end
 
-	function Module294:jsonDecode() --[[ Line: 76878 ]]
+	function Module294:jsonDecode()
 		-- upvalues: Module294 (copy), PropTypesModule (copy), ActionsModule (copy)
 		local NewModule = Module294.new()
 		
@@ -50037,7 +50037,7 @@ do
 	local Module295 = {}
 	Module295.__index = Module295
 
-	function Module295.new(p1) --[[ Line: 76966 ]]
+	function Module295.new(p1)
 		-- upvalues: Module295 (copy)
 		return (setmetatable({
 			props = if p1 == nil or p1.props == nil then nil else p1.props,
@@ -50045,7 +50045,7 @@ do
 		}, Module295))
 	end
 
-	function Module295:encode() --[[ Line: 76973 ]]
+	function Module295:encode()
 		-- upvalues: ProtoModule (copy)
 		local Buf = buffer.create(0)
 		local Count = 0
@@ -50066,7 +50066,7 @@ do
 		return Buf1
 	end
 
-	function Module295.decode(Buf) --[[ Line: 76994 ]]
+	function Module295.decode(Buf)
 		-- upvalues: Module295 (copy), ProtoModule (copy), t (copy), ComponentSharedModule (copy)
 		local NewModule = Module295.new()
 		local v213 = 0
@@ -50103,7 +50103,7 @@ do
 		return NewModule
 	end
 
-	function Module295:jsonEncode() --[[ Line: 77042 ]]
+	function Module295:jsonEncode()
 		local t = {}
 		
 		if self.props ~= nil then
@@ -50115,7 +50115,7 @@ do
 		return t
 	end
 
-	function Module295:jsonDecode() --[[ Line: 77056 ]]
+	function Module295:jsonDecode()
 		-- upvalues: Module295 (copy), t (copy), ComponentSharedModule (copy)
 		local NewModule = Module295.new()
 		
@@ -50137,7 +50137,7 @@ do
 	local Module296 = {}
 	Module296.__index = Module296
 
-	function Module296.new(p1) --[[ Line: 77085 ]]
+	function Module296.new(p1)
 		-- upvalues: Module296 (copy)
 		return (setmetatable({
 			options = if p1 == nil or p1.options == nil then nil else p1.options,
@@ -50149,7 +50149,7 @@ do
 		}, Module296))
 	end
 
-	function Module296:encode() --[[ Line: 77100 ]]
+	function Module296:encode()
 		-- upvalues: ProtoModule (copy)
 		local Buf = buffer.create(0)
 		local Count = 0
@@ -50190,7 +50190,7 @@ do
 		return Buf1
 	end
 
-	function Module296.decode(Buf) --[[ Line: 77145 ]]
+	function Module296.decode(Buf)
 		-- upvalues: Module296 (copy), ProtoModule (copy), PropTypesModule (copy), ActionsModule (copy)
 		local NewModule = Module296.new()
 		local v214 = 0
@@ -50243,7 +50243,7 @@ do
 		return NewModule
 	end
 
-	function Module296:jsonEncode() --[[ Line: 77213 ]]
+	function Module296:jsonEncode()
 		local t = {}
 		
 		if self.options ~= nil then
@@ -50267,7 +50267,7 @@ do
 		return t
 	end
 
-	function Module296:jsonDecode() --[[ Line: 77243 ]]
+	function Module296:jsonDecode()
 		-- upvalues: Module296 (copy), PropTypesModule (copy), ActionsModule (copy)
 		local NewModule = Module296.new()
 		
@@ -50315,7 +50315,7 @@ do
 	local Module297 = {}
 	Module297.__index = Module297
 
-	function Module297.new(p1) --[[ Line: 77309 ]]
+	function Module297.new(p1)
 		-- upvalues: Module297 (copy)
 		return (setmetatable({
 			on_activated = if p1 == nil or p1.on_activated == nil then nil else p1.on_activated,
@@ -50324,7 +50324,7 @@ do
 		}, Module297))
 	end
 
-	function Module297:encode() --[[ Line: 77317 ]]
+	function Module297:encode()
 		-- upvalues: ProtoModule (copy)
 		local Buf = buffer.create(0)
 		local Count = 0
@@ -50350,7 +50350,7 @@ do
 		return Buf1
 	end
 
-	function Module297.decode(Buf) --[[ Line: 77344 ]]
+	function Module297.decode(Buf)
 		-- upvalues: Module297 (copy), ProtoModule (copy), ActionsModule (copy), PropTypesModule (copy)
 		local NewModule = Module297.new()
 		local v214 = 0
@@ -50391,7 +50391,7 @@ do
 		return NewModule
 	end
 
-	function Module297:jsonEncode() --[[ Line: 77397 ]]
+	function Module297:jsonEncode()
 		local t = {}
 		
 		if self.on_activated ~= nil then
@@ -50406,7 +50406,7 @@ do
 		return t
 	end
 
-	function Module297:jsonDecode() --[[ Line: 77415 ]]
+	function Module297:jsonDecode()
 		-- upvalues: Module297 (copy), ActionsModule (copy), PropTypesModule (copy)
 		local NewModule = Module297.new()
 		
@@ -50434,14 +50434,14 @@ do
 	local Module298 = {}
 	Module298.__index = Module298
 
-	function Module298.new(p1) --[[ Line: 77451 ]]
+	function Module298.new(p1)
 		-- upvalues: Module298 (copy)
 		return (setmetatable({
 			kind = if p1 == nil or p1.kind == nil then nil else p1.kind
 		}, Module298))
 	end
 
-	function Module298:encode() --[[ Line: 77459 ]]
+	function Module298:encode()
 		-- upvalues: ProtoModule (copy)
 		local Buf = buffer.create(0)
 		local Count = 0
@@ -50466,7 +50466,7 @@ do
 		return Buf1
 	end
 
-	function Module298.decode(Buf) --[[ Line: 77483 ]]
+	function Module298.decode(Buf)
 		-- upvalues: Module298 (copy), ProtoModule (copy), t (copy)
 		local NewModule = Module298.new()
 		local v215 = 0
@@ -50513,7 +50513,7 @@ do
 		return NewModule
 	end
 
-	function Module298:jsonEncode() --[[ Line: 77542 ]]
+	function Module298:jsonEncode()
 		local t = {}
 		
 		if self.kind ~= nil then
@@ -50534,7 +50534,7 @@ do
 		return t
 	end
 
-	function Module298:jsonDecode() --[[ Line: 77558 ]]
+	function Module298:jsonDecode()
 		-- upvalues: Module298 (copy), t (copy)
 		local NewModule = Module298.new()
 		
@@ -50568,7 +50568,7 @@ do
 	local Module299 = {}
 	Module299.__index = Module299
 
-	function Module299.new(p1) --[[ Line: 77600 ]]
+	function Module299.new(p1)
 		-- upvalues: Module299 (copy)
 		return (setmetatable({
 			condition = if p1 == nil or p1.condition == nil then nil else p1.condition,
@@ -50576,7 +50576,7 @@ do
 		}, Module299))
 	end
 
-	function Module299:encode() --[[ Line: 77609 ]]
+	function Module299:encode()
 		-- upvalues: ProtoModule (copy)
 		local Buf = buffer.create(0)
 		local Count = 0
@@ -50602,7 +50602,7 @@ do
 		return Buf1
 	end
 
-	function Module299.decode(Buf) --[[ Line: 77637 ]]
+	function Module299.decode(Buf)
 		-- upvalues: Module299 (copy), ProtoModule (copy), PropConditionModule (copy), t (copy)
 		local NewModule = Module299.new()
 		local v216 = 0
@@ -50646,7 +50646,7 @@ do
 		return NewModule
 	end
 
-	function Module299:jsonEncode() --[[ Line: 77695 ]]
+	function Module299:jsonEncode()
 		local t = {}
 		
 		if self.condition ~= nil then
@@ -50665,7 +50665,7 @@ do
 		return t
 	end
 
-	function Module299:jsonDecode() --[[ Line: 77715 ]]
+	function Module299:jsonDecode()
 		-- upvalues: Module299 (copy), PropConditionModule (copy), t (copy)
 		local NewModule = Module299.new()
 		
@@ -50698,14 +50698,14 @@ do
 	local Module300 = {}
 	Module300.__index = Module300
 
-	function Module300.new(p1) --[[ Line: 77757 ]]
+	function Module300.new(p1)
 		-- upvalues: Module300 (copy)
 		return (setmetatable({
 			options = if p1 == nil or p1.options == nil then {} else p1.options
 		}, Module300))
 	end
 
-	function Module300:encode() --[[ Line: 77765 ]]
+	function Module300:encode()
 		-- upvalues: ProtoModule (copy)
 		local Buf = buffer.create(0)
 		local Count = 0
@@ -50723,7 +50723,7 @@ do
 		return Buf1
 	end
 
-	function Module300.decode(Buf) --[[ Line: 77784 ]]
+	function Module300.decode(Buf)
 		-- upvalues: Module300 (copy), ProtoModule (copy), t (copy)
 		local NewModule = Module300.new()
 		local v216 = 0
@@ -50756,7 +50756,7 @@ do
 		return NewModule
 	end
 
-	function Module300:jsonEncode() --[[ Line: 77829 ]]
+	function Module300:jsonEncode()
 		local t = {}
 		
 		if self.options ~= nil and #self.options > 0 then
@@ -50770,7 +50770,7 @@ do
 		return t
 	end
 
-	function Module300:jsonDecode() --[[ Line: 77845 ]]
+	function Module300:jsonDecode()
 		-- upvalues: Module300 (copy), t (copy)
 		local NewModule = Module300.new()
 		
@@ -50794,14 +50794,14 @@ do
 	local Module301 = {}
 	Module301.__index = Module301
 
-	function Module301.new(p1) --[[ Line: 77877 ]]
+	function Module301.new(p1)
 		-- upvalues: Module301 (copy)
 		return (setmetatable({
 			array = if p1 == nil or p1.array == nil then {} else p1.array
 		}, Module301))
 	end
 
-	function Module301:encode() --[[ Line: 77888 ]]
+	function Module301:encode()
 		-- upvalues: ProtoModule (copy)
 		local Buf = buffer.create(0)
 		local Count = 0
@@ -50819,7 +50819,7 @@ do
 		return Buf1
 	end
 
-	function Module301.decode(Buf) --[[ Line: 77907 ]]
+	function Module301.decode(Buf)
 		-- upvalues: Module301 (copy), ProtoModule (copy), t (copy)
 		local NewModule = Module301.new()
 		local v217 = 0
@@ -50852,7 +50852,7 @@ do
 		return NewModule
 	end
 
-	function Module301:jsonEncode() --[[ Line: 77952 ]]
+	function Module301:jsonEncode()
 		local t = {}
 		
 		if self.array ~= nil and #self.array > 0 then
@@ -50866,7 +50866,7 @@ do
 		return t
 	end
 
-	function Module301:jsonDecode() --[[ Line: 77968 ]]
+	function Module301:jsonDecode()
 		-- upvalues: Module301 (copy), t (copy)
 		local NewModule = Module301.new()
 		
@@ -50890,7 +50890,7 @@ do
 	local Module302 = {}
 	Module302.__index = Module302
 
-	function Module302.new(p1) --[[ Line: 78000 ]]
+	function Module302.new(p1)
 		-- upvalues: Module302 (copy)
 		return (setmetatable({
 			props = if p1 == nil or p1.props == nil then nil else p1.props,
@@ -50899,7 +50899,7 @@ do
 		}, Module302))
 	end
 
-	function Module302:encode() --[[ Line: 78008 ]]
+	function Module302:encode()
 		-- upvalues: ProtoModule (copy)
 		local Buf = buffer.create(0)
 		local Count = 0
@@ -50925,7 +50925,7 @@ do
 		return Buf1
 	end
 
-	function Module302.decode(Buf) --[[ Line: 78035 ]]
+	function Module302.decode(Buf)
 		-- upvalues: Module302 (copy), ProtoModule (copy), t (copy), ComponentSharedModule (copy)
 		local NewModule = Module302.new()
 		local v218 = 0
@@ -50966,7 +50966,7 @@ do
 		return NewModule
 	end
 
-	function Module302:jsonEncode() --[[ Line: 78088 ]]
+	function Module302:jsonEncode()
 		local t = {}
 		
 		if self.props ~= nil then
@@ -50981,7 +50981,7 @@ do
 		return t
 	end
 
-	function Module302:jsonDecode() --[[ Line: 78106 ]]
+	function Module302:jsonDecode()
 		-- upvalues: Module302 (copy), t (copy), ComponentSharedModule (copy)
 		local NewModule = Module302.new()
 		
@@ -51011,7 +51011,7 @@ do
 	local Module303 = {}
 	Module303.__index = Module303
 
-	function Module303.new(p1) --[[ Line: 78143 ]]
+	function Module303.new(p1)
 		-- upvalues: Module303 (copy)
 		return (setmetatable({
 			title = if p1 == nil or p1.title == nil then nil else p1.title,
@@ -51025,7 +51025,7 @@ do
 		}, Module303))
 	end
 
-	function Module303:encode() --[[ Line: 78158 ]]
+	function Module303:encode()
 		-- upvalues: ProtoModule (copy)
 		local Buf = buffer.create(0)
 		local Count = 0
@@ -51076,7 +51076,7 @@ do
 		return Buf1
 	end
 
-	function Module303.decode(Buf) --[[ Line: 78215 ]]
+	function Module303.decode(Buf)
 		-- upvalues: Module303 (copy), ProtoModule (copy), PropTypesModule (copy), ActionsModule (copy), t (copy)
 		local NewModule = Module303.new()
 		local v218 = 0
@@ -51137,7 +51137,7 @@ do
 		return NewModule
 	end
 
-	function Module303:jsonEncode() --[[ Line: 78294 ]]
+	function Module303:jsonEncode()
 		local t = {}
 		
 		if self.title ~= nil then
@@ -51167,7 +51167,7 @@ do
 		return t
 	end
 
-	function Module303:jsonDecode() --[[ Line: 78332 ]]
+	function Module303:jsonDecode()
 		-- upvalues: Module303 (copy), PropTypesModule (copy), ActionsModule (copy), t (copy)
 		local NewModule = Module303.new()
 		
@@ -51213,14 +51213,14 @@ do
 	local Module304 = {}
 	Module304.__index = Module304
 
-	function Module304.new(p1) --[[ Line: 78398 ]]
+	function Module304.new(p1)
 		-- upvalues: Module304 (copy)
 		return (setmetatable({
 			close_button_aria_label = if p1 == nil or p1.close_button_aria_label == nil then nil else p1.close_button_aria_label
 		}, Module304))
 	end
 
-	function Module304:encode() --[[ Line: 78406 ]]
+	function Module304:encode()
 		-- upvalues: ProtoModule (copy)
 		local Buf = buffer.create(0)
 		local Count = 0
@@ -51236,7 +51236,7 @@ do
 		return Buf1
 	end
 
-	function Module304.decode(Buf) --[[ Line: 78421 ]]
+	function Module304.decode(Buf)
 		-- upvalues: Module304 (copy), ProtoModule (copy), PropTypesModule (copy)
 		local NewModule = Module304.new()
 		local v219 = 0
@@ -51269,7 +51269,7 @@ do
 		return NewModule
 	end
 
-	function Module304:jsonEncode() --[[ Line: 78465 ]]
+	function Module304:jsonEncode()
 		local t = {}
 		
 		if self.close_button_aria_label ~= nil then
@@ -51278,7 +51278,7 @@ do
 		return t
 	end
 
-	function Module304:jsonDecode() --[[ Line: 78475 ]]
+	function Module304:jsonDecode()
 		-- upvalues: Module304 (copy), PropTypesModule (copy)
 		local NewModule = Module304.new()
 		
@@ -51300,7 +51300,7 @@ do
 	local Module305 = {}
 	Module305.__index = Module305
 
-	function Module305.new(p1) --[[ Line: 78505 ]]
+	function Module305.new(p1)
 		-- upvalues: Module305 (copy)
 		return (setmetatable({
 			props = if p1 == nil or p1.props == nil then nil else p1.props,
@@ -51308,7 +51308,7 @@ do
 		}, Module305))
 	end
 
-	function Module305:encode() --[[ Line: 78512 ]]
+	function Module305:encode()
 		-- upvalues: ProtoModule (copy)
 		local Buf = buffer.create(0)
 		local Count = 0
@@ -51329,7 +51329,7 @@ do
 		return Buf1
 	end
 
-	function Module305.decode(Buf) --[[ Line: 78533 ]]
+	function Module305.decode(Buf)
 		-- upvalues: Module305 (copy), ProtoModule (copy), t (copy), ComponentSharedModule (copy)
 		local NewModule = Module305.new()
 		local v220 = 0
@@ -51366,7 +51366,7 @@ do
 		return NewModule
 	end
 
-	function Module305:jsonEncode() --[[ Line: 78581 ]]
+	function Module305:jsonEncode()
 		local t = {}
 		
 		if self.props ~= nil then
@@ -51378,7 +51378,7 @@ do
 		return t
 	end
 
-	function Module305:jsonDecode() --[[ Line: 78595 ]]
+	function Module305:jsonDecode()
 		-- upvalues: Module305 (copy), t (copy), ComponentSharedModule (copy)
 		local NewModule = Module305.new()
 		
@@ -51402,7 +51402,7 @@ do
 	local Module306 = {}
 	Module306.__index = Module306
 
-	function Module306.new(p1) --[[ Line: 78624 ]]
+	function Module306.new(p1)
 		-- upvalues: Module306 (copy)
 		return (setmetatable({
 			text = if p1 == nil or p1.text == nil then nil else p1.text,
@@ -51417,7 +51417,7 @@ do
 		}, Module306))
 	end
 
-	function Module306:encode() --[[ Line: 78638 ]]
+	function Module306:encode()
 		-- upvalues: ProtoModule (copy)
 		local Buf = buffer.create(0)
 		local Count = 0
@@ -51473,7 +51473,7 @@ do
 		return Buf1
 	end
 
-	function Module306.decode(Buf) --[[ Line: 78701 ]]
+	function Module306.decode(Buf)
 		-- upvalues: Module306 (copy), ProtoModule (copy), PropTypesModule (copy)
 		local NewModule = Module306.new()
 		local v220 = 0
@@ -51538,7 +51538,7 @@ do
 		return NewModule
 	end
 
-	function Module306:jsonEncode() --[[ Line: 78785 ]]
+	function Module306:jsonEncode()
 		local t = {}
 		
 		if self.text ~= nil then
@@ -51571,7 +51571,7 @@ do
 		return t
 	end
 
-	function Module306:jsonDecode() --[[ Line: 78827 ]]
+	function Module306:jsonDecode()
 		-- upvalues: Module306 (copy), PropTypesModule (copy)
 		local NewModule = Module306.new()
 		
@@ -51626,7 +51626,7 @@ do
 	local Module307 = {}
 	Module307.__index = Module307
 
-	function Module307.new(p1) --[[ Line: 78909 ]]
+	function Module307.new(p1)
 		-- upvalues: Module307 (copy)
 		return (setmetatable({
 			props = if p1 == nil or p1.props == nil then nil else p1.props,
@@ -51634,7 +51634,7 @@ do
 		}, Module307))
 	end
 
-	function Module307:encode() --[[ Line: 78916 ]]
+	function Module307:encode()
 		-- upvalues: ProtoModule (copy)
 		local Buf = buffer.create(0)
 		local Count = 0
@@ -51655,7 +51655,7 @@ do
 		return Buf1
 	end
 
-	function Module307.decode(Buf) --[[ Line: 78937 ]]
+	function Module307.decode(Buf)
 		-- upvalues: Module307 (copy), ProtoModule (copy), t (copy), ComponentSharedModule (copy)
 		local NewModule = Module307.new()
 		local v221 = 0
@@ -51692,7 +51692,7 @@ do
 		return NewModule
 	end
 
-	function Module307:jsonEncode() --[[ Line: 78985 ]]
+	function Module307:jsonEncode()
 		local t = {}
 		
 		if self.props ~= nil then
@@ -51704,7 +51704,7 @@ do
 		return t
 	end
 
-	function Module307:jsonDecode() --[[ Line: 78999 ]]
+	function Module307:jsonDecode()
 		-- upvalues: Module307 (copy), t (copy), ComponentSharedModule (copy)
 		local NewModule = Module307.new()
 		
@@ -51726,7 +51726,7 @@ do
 	local Module308 = {}
 	Module308.__index = Module308
 
-	function Module308.new(p1) --[[ Line: 79028 ]]
+	function Module308.new(p1)
 		-- upvalues: Module308 (copy)
 		return (setmetatable({
 			image_aspect_ratio = if p1 == nil or p1.image_aspect_ratio == nil then nil else p1.image_aspect_ratio,
@@ -51757,7 +51757,7 @@ do
 		}, Module308))
 	end
 
-	function Module308:encode() --[[ Line: 79075 ]]
+	function Module308:encode()
 		-- upvalues: ProtoModule (copy)
 		local Buf = buffer.create(0)
 		local Count = 0
@@ -51893,7 +51893,7 @@ do
 		return Buf1
 	end
 
-	function Module308.decode(Buf) --[[ Line: 79234 ]]
+	function Module308.decode(Buf)
 		-- upvalues: Module308 (copy), ProtoModule (copy), PropTypesModule (copy), ActionsModule (copy), t (copy)
 		local NewModule = Module308.new()
 		local v222 = 0
@@ -52022,7 +52022,7 @@ do
 		return NewModule
 	end
 
-	function Module308:jsonEncode() --[[ Line: 79400 ]]
+	function Module308:jsonEncode()
 		local t = {}
 		
 		if self.image_aspect_ratio ~= nil then
@@ -52103,7 +52103,7 @@ do
 		return t
 	end
 
-	function Module308:jsonDecode() --[[ Line: 79506 ]]
+	function Module308:jsonDecode()
 		-- upvalues: Module308 (copy), PropTypesModule (copy), ActionsModule (copy), t (copy)
 		local NewModule = Module308.new()
 		
@@ -52268,7 +52268,7 @@ do
 	local Module309 = {}
 	Module309.__index = Module309
 
-	function Module309.new(p1) --[[ Line: 79745 ]]
+	function Module309.new(p1)
 		-- upvalues: Module309 (copy)
 		return (setmetatable({
 			props = if p1 == nil or p1.props == nil then nil else p1.props,
@@ -52276,7 +52276,7 @@ do
 		}, Module309))
 	end
 
-	function Module309:encode() --[[ Line: 79752 ]]
+	function Module309:encode()
 		-- upvalues: ProtoModule (copy)
 		local Buf = buffer.create(0)
 		local Count = 0
@@ -52297,7 +52297,7 @@ do
 		return Buf1
 	end
 
-	function Module309.decode(Buf) --[[ Line: 79773 ]]
+	function Module309.decode(Buf)
 		-- upvalues: Module309 (copy), ProtoModule (copy), t (copy), ComponentSharedModule (copy)
 		local NewModule = Module309.new()
 		local v222 = 0
@@ -52334,7 +52334,7 @@ do
 		return NewModule
 	end
 
-	function Module309:jsonEncode() --[[ Line: 79821 ]]
+	function Module309:jsonEncode()
 		local t = {}
 		
 		if self.props ~= nil then
@@ -52346,7 +52346,7 @@ do
 		return t
 	end
 
-	function Module309:jsonDecode() --[[ Line: 79835 ]]
+	function Module309:jsonDecode()
 		-- upvalues: Module309 (copy), t (copy), ComponentSharedModule (copy)
 		local NewModule = Module309.new()
 		
@@ -52368,7 +52368,7 @@ do
 	local Module310 = {}
 	Module310.__index = Module310
 
-	function Module310.new(p1) --[[ Line: 79864 ]]
+	function Module310.new(p1)
 		-- upvalues: Module310 (copy)
 		return (setmetatable({
 			image_aspect_ratio = if p1 == nil or p1.image_aspect_ratio == nil then nil else p1.image_aspect_ratio,
@@ -52406,7 +52406,7 @@ do
 		}, Module310))
 	end
 
-	function Module310:encode() --[[ Line: 79926 ]]
+	function Module310:encode()
 		-- upvalues: ProtoModule (copy)
 		local Buf = buffer.create(0)
 		local Count = 0
@@ -52577,7 +52577,7 @@ do
 		return Buf1
 	end
 
-	function Module310.decode(Buf) --[[ Line: 80127 ]]
+	function Module310.decode(Buf)
 		-- upvalues: Module310 (copy), ProtoModule (copy), PropTypesModule (copy), ActionsModule (copy), t (copy)
 		local NewModule = Module310.new()
 		local v223 = 0
@@ -52734,7 +52734,7 @@ do
 		return NewModule
 	end
 
-	function Module310:jsonEncode() --[[ Line: 80331 ]]
+	function Module310:jsonEncode()
 		local t = {}
 		
 		if self.image_aspect_ratio ~= nil then
@@ -52836,7 +52836,7 @@ do
 		return t
 	end
 
-	function Module310:jsonDecode() --[[ Line: 80465 ]]
+	function Module310:jsonDecode()
 		-- upvalues: Module310 (copy), PropTypesModule (copy), ActionsModule (copy), t (copy)
 		local NewModule = Module310.new()
 		
@@ -53038,7 +53038,7 @@ do
 	local Module311 = {}
 	Module311.__index = Module311
 
-	function Module311.new(p1) --[[ Line: 80764 ]]
+	function Module311.new(p1)
 		-- upvalues: Module311 (copy)
 		return (setmetatable({
 			props = if p1 == nil or p1.props == nil then nil else p1.props,
@@ -53046,7 +53046,7 @@ do
 		}, Module311))
 	end
 
-	function Module311:encode() --[[ Line: 80771 ]]
+	function Module311:encode()
 		-- upvalues: ProtoModule (copy)
 		local Buf = buffer.create(0)
 		local Count = 0
@@ -53067,7 +53067,7 @@ do
 		return Buf1
 	end
 
-	function Module311.decode(Buf) --[[ Line: 80792 ]]
+	function Module311.decode(Buf)
 		-- upvalues: Module311 (copy), ProtoModule (copy), t (copy), ComponentSharedModule (copy)
 		local NewModule = Module311.new()
 		local v224 = 0
@@ -53104,7 +53104,7 @@ do
 		return NewModule
 	end
 
-	function Module311:jsonEncode() --[[ Line: 80840 ]]
+	function Module311:jsonEncode()
 		local t = {}
 		
 		if self.props ~= nil then
@@ -53116,7 +53116,7 @@ do
 		return t
 	end
 
-	function Module311:jsonDecode() --[[ Line: 80854 ]]
+	function Module311:jsonDecode()
 		-- upvalues: Module311 (copy), t (copy), ComponentSharedModule (copy)
 		local NewModule = Module311.new()
 		
@@ -53140,7 +53140,7 @@ do
 	local Module312 = {}
 	Module312.__index = Module312
 
-	function Module312.new(p1) --[[ Line: 80883 ]]
+	function Module312.new(p1)
 		-- upvalues: Module312 (copy)
 		return (setmetatable({
 			media = if p1 == nil or p1.media == nil then nil else p1.media,
@@ -53153,7 +53153,7 @@ do
 		}, Module312))
 	end
 
-	function Module312:encode() --[[ Line: 80897 ]]
+	function Module312:encode()
 		-- upvalues: ProtoModule (copy)
 		local Buf = buffer.create(0)
 		local Count = 0
@@ -53199,7 +53199,7 @@ do
 		return Buf1
 	end
 
-	function Module312.decode(Buf) --[[ Line: 80948 ]]
+	function Module312.decode(Buf)
 		-- upvalues: Module312 (copy), ProtoModule (copy), PropTypesModule (copy), t (copy)
 		local NewModule = Module312.new()
 		local v224 = 0
@@ -53256,7 +53256,7 @@ do
 		return NewModule
 	end
 
-	function Module312:jsonEncode() --[[ Line: 81022 ]]
+	function Module312:jsonEncode()
 		local t = {}
 		
 		if self.media ~= nil then
@@ -53283,7 +53283,7 @@ do
 		return t
 	end
 
-	function Module312:jsonDecode() --[[ Line: 81056 ]]
+	function Module312:jsonDecode()
 		-- upvalues: Module312 (copy), PropTypesModule (copy), t (copy)
 		local NewModule = Module312.new()
 		
@@ -53329,7 +53329,7 @@ do
 	local Module313 = {}
 	Module313.__index = Module313
 
-	function Module313.new(p1) --[[ Line: 81122 ]]
+	function Module313.new(p1)
 		-- upvalues: Module313 (copy)
 		return (setmetatable({
 			props = if p1 == nil or p1.props == nil then nil else p1.props,
@@ -53337,7 +53337,7 @@ do
 		}, Module313))
 	end
 
-	function Module313:encode() --[[ Line: 81129 ]]
+	function Module313:encode()
 		-- upvalues: ProtoModule (copy)
 		local Buf = buffer.create(0)
 		local Count = 0
@@ -53358,7 +53358,7 @@ do
 		return Buf1
 	end
 
-	function Module313.decode(Buf) --[[ Line: 81150 ]]
+	function Module313.decode(Buf)
 		-- upvalues: Module313 (copy), ProtoModule (copy), t (copy), ComponentSharedModule (copy)
 		local NewModule = Module313.new()
 		local v225 = 0
@@ -53395,7 +53395,7 @@ do
 		return NewModule
 	end
 
-	function Module313:jsonEncode() --[[ Line: 81198 ]]
+	function Module313:jsonEncode()
 		local t = {}
 		
 		if self.props ~= nil then
@@ -53407,7 +53407,7 @@ do
 		return t
 	end
 
-	function Module313:jsonDecode() --[[ Line: 81212 ]]
+	function Module313:jsonDecode()
 		-- upvalues: Module313 (copy), t (copy), ComponentSharedModule (copy)
 		local NewModule = Module313.new()
 		
@@ -53429,7 +53429,7 @@ do
 	local Module314 = {}
 	Module314.__index = Module314
 
-	function Module314.new(p1) --[[ Line: 81241 ]]
+	function Module314.new(p1)
 		-- upvalues: Module314 (copy)
 		return (setmetatable({
 			content_row_component = if p1 == nil or p1.content_row_component == nil then nil else p1.content_row_component,
@@ -53442,7 +53442,7 @@ do
 		}, Module314))
 	end
 
-	function Module314:encode() --[[ Line: 81259 ]]
+	function Module314:encode()
 		-- upvalues: ProtoModule (copy)
 		local Buf = buffer.create(0)
 		local Count = 0
@@ -53488,7 +53488,7 @@ do
 		return Buf1
 	end
 
-	function Module314.decode(Buf) --[[ Line: 81310 ]]
+	function Module314.decode(Buf)
 		-- upvalues: Module314 (copy), ProtoModule (copy), t (copy), ActionsModule (copy), PropTypesModule (copy)
 		local NewModule = Module314.new()
 		local v226 = 0
@@ -53545,7 +53545,7 @@ do
 		return NewModule
 	end
 
-	function Module314:jsonEncode() --[[ Line: 81384 ]]
+	function Module314:jsonEncode()
 		local t = {}
 		
 		if self.content_row_component ~= nil then
@@ -53572,7 +53572,7 @@ do
 		return t
 	end
 
-	function Module314:jsonDecode() --[[ Line: 81418 ]]
+	function Module314:jsonDecode()
 		-- upvalues: Module314 (copy), t (copy), ActionsModule (copy), PropTypesModule (copy)
 		local NewModule = Module314.new()
 		
@@ -53629,7 +53629,7 @@ do
 	local Module315 = {}
 	Module315.__index = Module315
 
-	function Module315.new(p1) --[[ Line: 81496 ]]
+	function Module315.new(p1)
 		-- upvalues: Module315 (copy)
 		return (setmetatable({
 			props = if p1 == nil or p1.props == nil then nil else p1.props,
@@ -53637,7 +53637,7 @@ do
 		}, Module315))
 	end
 
-	function Module315:encode() --[[ Line: 81503 ]]
+	function Module315:encode()
 		-- upvalues: ProtoModule (copy)
 		local Buf = buffer.create(0)
 		local Count = 0
@@ -53658,7 +53658,7 @@ do
 		return Buf1
 	end
 
-	function Module315.decode(Buf) --[[ Line: 81524 ]]
+	function Module315.decode(Buf)
 		-- upvalues: Module315 (copy), ProtoModule (copy), t (copy), ComponentSharedModule (copy)
 		local NewModule = Module315.new()
 		local v226 = 0
@@ -53695,7 +53695,7 @@ do
 		return NewModule
 	end
 
-	function Module315:jsonEncode() --[[ Line: 81572 ]]
+	function Module315:jsonEncode()
 		local t = {}
 		
 		if self.props ~= nil then
@@ -53707,7 +53707,7 @@ do
 		return t
 	end
 
-	function Module315:jsonDecode() --[[ Line: 81586 ]]
+	function Module315:jsonDecode()
 		-- upvalues: Module315 (copy), t (copy), ComponentSharedModule (copy)
 		local NewModule = Module315.new()
 		
@@ -53729,7 +53729,7 @@ do
 	local Module316 = {}
 	Module316.__index = Module316
 
-	function Module316.new(p1) --[[ Line: 81615 ]]
+	function Module316.new(p1)
 		-- upvalues: Module316 (copy)
 		return (setmetatable({
 			title = if p1 == nil or p1.title == nil then nil else p1.title,
@@ -53742,7 +53742,7 @@ do
 		}, Module316))
 	end
 
-	function Module316:encode() --[[ Line: 81627 ]]
+	function Module316:encode()
 		-- upvalues: ProtoModule (copy)
 		local Buf = buffer.create(0)
 		local Count = 0
@@ -53790,7 +53790,7 @@ do
 		return Buf1
 	end
 
-	function Module316.decode(Buf) --[[ Line: 81680 ]]
+	function Module316.decode(Buf)
 		-- upvalues: Module316 (copy), ProtoModule (copy), PropTypesModule (copy), t (copy), PropTypesEngineModule (copy)
 		local NewModule = Module316.new()
 		local v227 = 0
@@ -53847,7 +53847,7 @@ do
 		return NewModule
 	end
 
-	function Module316:jsonEncode() --[[ Line: 81756 ]]
+	function Module316:jsonEncode()
 		local t = {}
 		
 		if self.title ~= nil then
@@ -53879,7 +53879,7 @@ do
 		return t
 	end
 
-	function Module316:jsonDecode() --[[ Line: 81794 ]]
+	function Module316:jsonDecode()
 		-- upvalues: Module316 (copy), PropTypesModule (copy), t (copy), PropTypesEngineModule (copy)
 		local NewModule = Module316.new()
 		
@@ -53924,7 +53924,7 @@ do
 	local Module317 = {}
 	Module317.__index = Module317
 
-	function Module317.new(p1) --[[ Line: 81856 ]]
+	function Module317.new(p1)
 		-- upvalues: Module317 (copy)
 		return (setmetatable({
 			on_activated = if p1 == nil or p1.on_activated == nil then nil else p1.on_activated,
@@ -53933,7 +53933,7 @@ do
 		}, Module317))
 	end
 
-	function Module317:encode() --[[ Line: 81864 ]]
+	function Module317:encode()
 		-- upvalues: ProtoModule (copy)
 		local Buf = buffer.create(0)
 		local Count = 0
@@ -53959,7 +53959,7 @@ do
 		return Buf1
 	end
 
-	function Module317.decode(Buf) --[[ Line: 81891 ]]
+	function Module317.decode(Buf)
 		-- upvalues: Module317 (copy), ProtoModule (copy), ActionsModule (copy), PropTypesModule (copy)
 		local NewModule = Module317.new()
 		local v228 = 0
@@ -54000,7 +54000,7 @@ do
 		return NewModule
 	end
 
-	function Module317:jsonEncode() --[[ Line: 81944 ]]
+	function Module317:jsonEncode()
 		local t = {}
 		
 		if self.on_activated ~= nil then
@@ -54015,7 +54015,7 @@ do
 		return t
 	end
 
-	function Module317:jsonDecode() --[[ Line: 81962 ]]
+	function Module317:jsonDecode()
 		-- upvalues: Module317 (copy), ActionsModule (copy), PropTypesModule (copy)
 		local NewModule = Module317.new()
 		
@@ -54045,14 +54045,14 @@ do
 	local Module318 = {}
 	Module318.__index = Module318
 
-	function Module318.new(p1) --[[ Line: 81998 ]]
+	function Module318.new(p1)
 		-- upvalues: Module318 (copy)
 		return (setmetatable({
 			kind = if p1 == nil or p1.kind == nil then nil else p1.kind
 		}, Module318))
 	end
 
-	function Module318:encode() --[[ Line: 82004 ]]
+	function Module318:encode()
 		-- upvalues: ProtoModule (copy)
 		local Buf = buffer.create(0)
 		local Count = 0
@@ -54077,7 +54077,7 @@ do
 		return Buf1
 	end
 
-	function Module318.decode(Buf) --[[ Line: 82028 ]]
+	function Module318.decode(Buf)
 		-- upvalues: Module318 (copy), ProtoModule (copy), t (copy)
 		local NewModule = Module318.new()
 		local v228 = 0
@@ -54124,7 +54124,7 @@ do
 		return NewModule
 	end
 
-	function Module318:jsonEncode() --[[ Line: 82084 ]]
+	function Module318:jsonEncode()
 		local t = {}
 		
 		if self.kind ~= nil then
@@ -54145,7 +54145,7 @@ do
 		return t
 	end
 
-	function Module318:jsonDecode() --[[ Line: 82100 ]]
+	function Module318:jsonDecode()
 		-- upvalues: Module318 (copy), t (copy)
 		local NewModule = Module318.new()
 		
@@ -54179,7 +54179,7 @@ do
 	local Module319 = {}
 	Module319.__index = Module319
 
-	function Module319.new(p1) --[[ Line: 82139 ]]
+	function Module319.new(p1)
 		-- upvalues: Module319 (copy)
 		return (setmetatable({
 			condition = if p1 == nil or p1.condition == nil then nil else p1.condition,
@@ -54187,7 +54187,7 @@ do
 		}, Module319))
 	end
 
-	function Module319:encode() --[[ Line: 82148 ]]
+	function Module319:encode()
 		-- upvalues: ProtoModule (copy)
 		local Buf = buffer.create(0)
 		local Count = 0
@@ -54213,7 +54213,7 @@ do
 		return Buf1
 	end
 
-	function Module319.decode(Buf) --[[ Line: 82176 ]]
+	function Module319.decode(Buf)
 		-- upvalues: Module319 (copy), ProtoModule (copy), PropConditionModule (copy), t (copy)
 		local NewModule = Module319.new()
 		local v229 = 0
@@ -54257,7 +54257,7 @@ do
 		return NewModule
 	end
 
-	function Module319:jsonEncode() --[[ Line: 82231 ]]
+	function Module319:jsonEncode()
 		local t = {}
 		
 		if self.condition ~= nil then
@@ -54276,7 +54276,7 @@ do
 		return t
 	end
 
-	function Module319:jsonDecode() --[[ Line: 82251 ]]
+	function Module319:jsonDecode()
 		-- upvalues: Module319 (copy), PropConditionModule (copy), t (copy)
 		local NewModule = Module319.new()
 		
@@ -54307,14 +54307,14 @@ do
 	local Module320 = {}
 	Module320.__index = Module320
 
-	function Module320.new(p1) --[[ Line: 82290 ]]
+	function Module320.new(p1)
 		-- upvalues: Module320 (copy)
 		return (setmetatable({
 			options = if p1 == nil or p1.options == nil then {} else p1.options
 		}, Module320))
 	end
 
-	function Module320:encode() --[[ Line: 82298 ]]
+	function Module320:encode()
 		-- upvalues: ProtoModule (copy)
 		local Buf = buffer.create(0)
 		local Count = 0
@@ -54332,7 +54332,7 @@ do
 		return Buf1
 	end
 
-	function Module320.decode(Buf) --[[ Line: 82317 ]]
+	function Module320.decode(Buf)
 		-- upvalues: Module320 (copy), ProtoModule (copy), t (copy)
 		local NewModule = Module320.new()
 		local v230 = 0
@@ -54365,7 +54365,7 @@ do
 		return NewModule
 	end
 
-	function Module320:jsonEncode() --[[ Line: 82362 ]]
+	function Module320:jsonEncode()
 		local t = {}
 		
 		if self.options ~= nil and #self.options > 0 then
@@ -54379,7 +54379,7 @@ do
 		return t
 	end
 
-	function Module320:jsonDecode() --[[ Line: 82378 ]]
+	function Module320:jsonDecode()
 		-- upvalues: Module320 (copy), t (copy)
 		local NewModule = Module320.new()
 		
@@ -54405,14 +54405,14 @@ do
 	local Module321 = {}
 	Module321.__index = Module321
 
-	function Module321.new(p1) --[[ Line: 82409 ]]
+	function Module321.new(p1)
 		-- upvalues: Module321 (copy)
 		return (setmetatable({
 			kind = if p1 == nil or p1.kind == nil then nil else p1.kind
 		}, Module321))
 	end
 
-	function Module321:encode() --[[ Line: 82417 ]]
+	function Module321:encode()
 		-- upvalues: ProtoModule (copy)
 		local Buf = buffer.create(0)
 		local Count = 0
@@ -54437,7 +54437,7 @@ do
 		return Buf1
 	end
 
-	function Module321.decode(Buf) --[[ Line: 82441 ]]
+	function Module321.decode(Buf)
 		-- upvalues: Module321 (copy), ProtoModule (copy), t (copy)
 		local NewModule = Module321.new()
 		local v231 = 0
@@ -54484,7 +54484,7 @@ do
 		return NewModule
 	end
 
-	function Module321:jsonEncode() --[[ Line: 82500 ]]
+	function Module321:jsonEncode()
 		local t = {}
 		
 		if self.kind ~= nil then
@@ -54505,7 +54505,7 @@ do
 		return t
 	end
 
-	function Module321:jsonDecode() --[[ Line: 82516 ]]
+	function Module321:jsonDecode()
 		-- upvalues: Module321 (copy), t (copy)
 		local NewModule = Module321.new()
 		
@@ -54539,7 +54539,7 @@ do
 	local Module322 = {}
 	Module322.__index = Module322
 
-	function Module322.new(p1) --[[ Line: 82559 ]]
+	function Module322.new(p1)
 		-- upvalues: Module322 (copy)
 		return (setmetatable({
 			condition = if p1 == nil or p1.condition == nil then nil else p1.condition,
@@ -54547,7 +54547,7 @@ do
 		}, Module322))
 	end
 
-	function Module322:encode() --[[ Line: 82571 ]]
+	function Module322:encode()
 		-- upvalues: ProtoModule (copy)
 		local Buf = buffer.create(0)
 		local Count = 0
@@ -54573,7 +54573,7 @@ do
 		return Buf1
 	end
 
-	function Module322.decode(Buf) --[[ Line: 82599 ]]
+	function Module322.decode(Buf)
 		-- upvalues: Module322 (copy), ProtoModule (copy), PropConditionModule (copy), t (copy)
 		local NewModule = Module322.new()
 		local v232 = 0
@@ -54617,7 +54617,7 @@ do
 		return NewModule
 	end
 
-	function Module322:jsonEncode() --[[ Line: 82657 ]]
+	function Module322:jsonEncode()
 		local t = {}
 		
 		if self.condition ~= nil then
@@ -54636,7 +54636,7 @@ do
 		return t
 	end
 
-	function Module322:jsonDecode() --[[ Line: 82677 ]]
+	function Module322:jsonDecode()
 		-- upvalues: Module322 (copy), PropConditionModule (copy), t (copy)
 		local NewModule = Module322.new()
 		
@@ -54667,14 +54667,14 @@ do
 	local Module323 = {}
 	Module323.__index = Module323
 
-	function Module323.new(p1) --[[ Line: 82721 ]]
+	function Module323.new(p1)
 		-- upvalues: Module323 (copy)
 		return (setmetatable({
 			options = if p1 == nil or p1.options == nil then {} else p1.options
 		}, Module323))
 	end
 
-	function Module323:encode() --[[ Line: 82732 ]]
+	function Module323:encode()
 		-- upvalues: ProtoModule (copy)
 		local Buf = buffer.create(0)
 		local Count = 0
@@ -54692,7 +54692,7 @@ do
 		return Buf1
 	end
 
-	function Module323.decode(Buf) --[[ Line: 82751 ]]
+	function Module323.decode(Buf)
 		-- upvalues: Module323 (copy), ProtoModule (copy), t (copy)
 		local NewModule = Module323.new()
 		local v233 = 0
@@ -54725,7 +54725,7 @@ do
 		return NewModule
 	end
 
-	function Module323:jsonEncode() --[[ Line: 82796 ]]
+	function Module323:jsonEncode()
 		local t = {}
 		
 		if self.options ~= nil and #self.options > 0 then
@@ -54739,7 +54739,7 @@ do
 		return t
 	end
 
-	function Module323:jsonDecode() --[[ Line: 82812 ]]
+	function Module323:jsonDecode()
 		-- upvalues: Module323 (copy), t (copy)
 		local NewModule = Module323.new()
 		
@@ -54765,14 +54765,14 @@ do
 	local Module324 = {}
 	Module324.__index = Module324
 
-	function Module324.new(p1) --[[ Line: 82845 ]]
+	function Module324.new(p1)
 		-- upvalues: Module324 (copy)
 		return (setmetatable({
 			array = if p1 == nil or p1.array == nil then {} else p1.array
 		}, Module324))
 	end
 
-	function Module324:encode() --[[ Line: 82856 ]]
+	function Module324:encode()
 		-- upvalues: ProtoModule (copy)
 		local Buf = buffer.create(0)
 		local Count = 0
@@ -54790,7 +54790,7 @@ do
 		return Buf1
 	end
 
-	function Module324.decode(Buf) --[[ Line: 82875 ]]
+	function Module324.decode(Buf)
 		-- upvalues: Module324 (copy), ProtoModule (copy), t (copy)
 		local NewModule = Module324.new()
 		local v234 = 0
@@ -54823,7 +54823,7 @@ do
 		return NewModule
 	end
 
-	function Module324:jsonEncode() --[[ Line: 82920 ]]
+	function Module324:jsonEncode()
 		local t = {}
 		
 		if self.array ~= nil and #self.array > 0 then
@@ -54837,7 +54837,7 @@ do
 		return t
 	end
 
-	function Module324:jsonDecode() --[[ Line: 82936 ]]
+	function Module324:jsonDecode()
 		-- upvalues: Module324 (copy), t (copy)
 		local NewModule = Module324.new()
 		
@@ -54861,7 +54861,7 @@ do
 	local Module325 = {}
 	Module325.__index = Module325
 
-	function Module325.new(p1) --[[ Line: 82968 ]]
+	function Module325.new(p1)
 		-- upvalues: Module325 (copy)
 		return (setmetatable({
 			props = if p1 == nil or p1.props == nil then nil else p1.props,
@@ -54870,7 +54870,7 @@ do
 		}, Module325))
 	end
 
-	function Module325:encode() --[[ Line: 82976 ]]
+	function Module325:encode()
 		-- upvalues: ProtoModule (copy)
 		local Buf = buffer.create(0)
 		local Count = 0
@@ -54896,7 +54896,7 @@ do
 		return Buf1
 	end
 
-	function Module325.decode(Buf) --[[ Line: 83003 ]]
+	function Module325.decode(Buf)
 		-- upvalues: Module325 (copy), ProtoModule (copy), t (copy), ComponentSharedModule (copy)
 		local NewModule = Module325.new()
 		local v235 = 0
@@ -54937,7 +54937,7 @@ do
 		return NewModule
 	end
 
-	function Module325:jsonEncode() --[[ Line: 83056 ]]
+	function Module325:jsonEncode()
 		local t = {}
 		
 		if self.props ~= nil then
@@ -54952,7 +54952,7 @@ do
 		return t
 	end
 
-	function Module325:jsonDecode() --[[ Line: 83074 ]]
+	function Module325:jsonDecode()
 		-- upvalues: Module325 (copy), t (copy), ComponentSharedModule (copy)
 		local NewModule = Module325.new()
 		
@@ -54980,7 +54980,7 @@ do
 	local Module326 = {}
 	Module326.__index = Module326
 
-	function Module326.new(p1) --[[ Line: 83111 ]]
+	function Module326.new(p1)
 		-- upvalues: Module326 (copy)
 		return (setmetatable({
 			severity = if p1 == nil or p1.severity == nil then nil else p1.severity,
@@ -54998,7 +54998,7 @@ do
 		}, Module326))
 	end
 
-	function Module326:encode() --[[ Line: 83128 ]]
+	function Module326:encode()
 		-- upvalues: ProtoModule (copy)
 		local Buf = buffer.create(0)
 		local Count = 0
@@ -55069,7 +55069,7 @@ do
 		return Buf1
 	end
 
-	function Module326.decode(Buf) --[[ Line: 83209 ]]
+	function Module326.decode(Buf)
 		-- upvalues: Module326 (copy), ProtoModule (copy), PropTypesModule (copy), ActionsModule (copy), t (copy)
 		local NewModule = Module326.new()
 		local v236 = 0
@@ -55146,7 +55146,7 @@ do
 		return NewModule
 	end
 
-	function Module326:jsonEncode() --[[ Line: 83307 ]]
+	function Module326:jsonEncode()
 		local t = {}
 		
 		if self.severity ~= nil then
@@ -55188,7 +55188,7 @@ do
 		return t
 	end
 
-	function Module326:jsonDecode() --[[ Line: 83361 ]]
+	function Module326:jsonDecode()
 		-- upvalues: Module326 (copy), PropTypesModule (copy), ActionsModule (copy), t (copy)
 		local NewModule = Module326.new()
 		
@@ -55257,14 +55257,14 @@ do
 	local Module327 = {}
 	Module327.__index = Module327
 
-	function Module327.new(p1) --[[ Line: 83454 ]]
+	function Module327.new(p1)
 		-- upvalues: Module327 (copy)
 		return (setmetatable({
 			close_button_aria_label = if p1 == nil or p1.close_button_aria_label == nil then nil else p1.close_button_aria_label
 		}, Module327))
 	end
 
-	function Module327:encode() --[[ Line: 83464 ]]
+	function Module327:encode()
 		-- upvalues: ProtoModule (copy)
 		local Buf = buffer.create(0)
 		local Count = 0
@@ -55280,7 +55280,7 @@ do
 		return Buf1
 	end
 
-	function Module327.decode(Buf) --[[ Line: 83479 ]]
+	function Module327.decode(Buf)
 		-- upvalues: Module327 (copy), ProtoModule (copy), PropTypesModule (copy)
 		local NewModule = Module327.new()
 		local v236 = 0
@@ -55313,7 +55313,7 @@ do
 		return NewModule
 	end
 
-	function Module327:jsonEncode() --[[ Line: 83523 ]]
+	function Module327:jsonEncode()
 		local t = {}
 		
 		if self.close_button_aria_label ~= nil then
@@ -55322,7 +55322,7 @@ do
 		return t
 	end
 
-	function Module327:jsonDecode() --[[ Line: 83533 ]]
+	function Module327:jsonDecode()
 		-- upvalues: Module327 (copy), PropTypesModule (copy)
 		local NewModule = Module327.new()
 		
@@ -55344,7 +55344,7 @@ do
 	local Module328 = {}
 	Module328.__index = Module328
 
-	function Module328.new(p1) --[[ Line: 83563 ]]
+	function Module328.new(p1)
 		-- upvalues: Module328 (copy)
 		return (setmetatable({
 			text = if p1 == nil or p1.text == nil then nil else p1.text,
@@ -55352,7 +55352,7 @@ do
 		}, Module328))
 	end
 
-	function Module328:encode() --[[ Line: 83572 ]]
+	function Module328:encode()
 		-- upvalues: ProtoModule (copy)
 		local Buf = buffer.create(0)
 		local Count = 0
@@ -55373,7 +55373,7 @@ do
 		return Buf1
 	end
 
-	function Module328.decode(Buf) --[[ Line: 83593 ]]
+	function Module328.decode(Buf)
 		-- upvalues: Module328 (copy), ProtoModule (copy), PropTypesModule (copy), ActionsModule (copy)
 		local NewModule = Module328.new()
 		local v237 = 0
@@ -55410,7 +55410,7 @@ do
 		return NewModule
 	end
 
-	function Module328:jsonEncode() --[[ Line: 83641 ]]
+	function Module328:jsonEncode()
 		local t = {}
 		
 		if self.text ~= nil then
@@ -55422,7 +55422,7 @@ do
 		return t
 	end
 
-	function Module328:jsonDecode() --[[ Line: 83655 ]]
+	function Module328:jsonDecode()
 		-- upvalues: Module328 (copy), PropTypesModule (copy), ActionsModule (copy)
 		local NewModule = Module328.new()
 		
@@ -55447,14 +55447,14 @@ do
 	local Module329 = {}
 	Module329.__index = Module329
 
-	function Module329.new(p1) --[[ Line: 83687 ]]
+	function Module329.new(p1)
 		-- upvalues: Module329 (copy)
 		return (setmetatable({
 			kind = if p1 == nil or p1.kind == nil then nil else p1.kind
 		}, Module329))
 	end
 
-	function Module329:encode() --[[ Line: 83695 ]]
+	function Module329:encode()
 		-- upvalues: ProtoModule (copy)
 		local Buf = buffer.create(0)
 		local Count = 0
@@ -55479,7 +55479,7 @@ do
 		return Buf1
 	end
 
-	function Module329.decode(Buf) --[[ Line: 83719 ]]
+	function Module329.decode(Buf)
 		-- upvalues: Module329 (copy), ProtoModule (copy), t (copy)
 		local NewModule = Module329.new()
 		local v238 = 0
@@ -55526,7 +55526,7 @@ do
 		return NewModule
 	end
 
-	function Module329:jsonEncode() --[[ Line: 83775 ]]
+	function Module329:jsonEncode()
 		local t = {}
 		
 		if self.kind ~= nil then
@@ -55547,7 +55547,7 @@ do
 		return t
 	end
 
-	function Module329:jsonDecode() --[[ Line: 83791 ]]
+	function Module329:jsonDecode()
 		-- upvalues: Module329 (copy), t (copy)
 		local NewModule = Module329.new()
 		
@@ -55583,7 +55583,7 @@ do
 	local Module330 = {}
 	Module330.__index = Module330
 
-	function Module330.new(p1) --[[ Line: 83833 ]]
+	function Module330.new(p1)
 		-- upvalues: Module330 (copy)
 		return (setmetatable({
 			condition = if p1 == nil or p1.condition == nil then nil else p1.condition,
@@ -55591,7 +55591,7 @@ do
 		}, Module330))
 	end
 
-	function Module330:encode() --[[ Line: 83845 ]]
+	function Module330:encode()
 		-- upvalues: ProtoModule (copy)
 		local Buf = buffer.create(0)
 		local Count = 0
@@ -55617,7 +55617,7 @@ do
 		return Buf1
 	end
 
-	function Module330.decode(Buf) --[[ Line: 83873 ]]
+	function Module330.decode(Buf)
 		-- upvalues: Module330 (copy), ProtoModule (copy), PropConditionModule (copy), t (copy)
 		local NewModule = Module330.new()
 		local v238 = 0
@@ -55661,7 +55661,7 @@ do
 		return NewModule
 	end
 
-	function Module330:jsonEncode() --[[ Line: 83928 ]]
+	function Module330:jsonEncode()
 		local t = {}
 		
 		if self.condition ~= nil then
@@ -55680,7 +55680,7 @@ do
 		return t
 	end
 
-	function Module330:jsonDecode() --[[ Line: 83948 ]]
+	function Module330:jsonDecode()
 		-- upvalues: Module330 (copy), PropConditionModule (copy), t (copy)
 		local NewModule = Module330.new()
 		
@@ -55711,14 +55711,14 @@ do
 	local Module331 = {}
 	Module331.__index = Module331
 
-	function Module331.new(p1) --[[ Line: 83989 ]]
+	function Module331.new(p1)
 		-- upvalues: Module331 (copy)
 		return (setmetatable({
 			options = if p1 == nil or p1.options == nil then {} else p1.options
 		}, Module331))
 	end
 
-	function Module331:encode() --[[ Line: 84000 ]]
+	function Module331:encode()
 		-- upvalues: ProtoModule (copy)
 		local Buf = buffer.create(0)
 		local Count = 0
@@ -55736,7 +55736,7 @@ do
 		return Buf1
 	end
 
-	function Module331.decode(Buf) --[[ Line: 84019 ]]
+	function Module331.decode(Buf)
 		-- upvalues: Module331 (copy), ProtoModule (copy), t (copy)
 		local NewModule = Module331.new()
 		local v239 = 0
@@ -55769,7 +55769,7 @@ do
 		return NewModule
 	end
 
-	function Module331:jsonEncode() --[[ Line: 84067 ]]
+	function Module331:jsonEncode()
 		local t = {}
 		
 		if self.options ~= nil and #self.options > 0 then
@@ -55783,7 +55783,7 @@ do
 		return t
 	end
 
-	function Module331:jsonDecode() --[[ Line: 84083 ]]
+	function Module331:jsonDecode()
 		-- upvalues: Module331 (copy), t (copy)
 		local NewModule = Module331.new()
 		
@@ -55807,7 +55807,7 @@ do
 	local Module332 = {}
 	Module332.__index = Module332
 
-	function Module332.new(p1) --[[ Line: 84115 ]]
+	function Module332.new(p1)
 		-- upvalues: Module332 (copy)
 		return (setmetatable({
 			props = if p1 == nil or p1.props == nil then nil else p1.props,
@@ -55815,7 +55815,7 @@ do
 		}, Module332))
 	end
 
-	function Module332:encode() --[[ Line: 84122 ]]
+	function Module332:encode()
 		-- upvalues: ProtoModule (copy)
 		local Buf = buffer.create(0)
 		local Count = 0
@@ -55836,7 +55836,7 @@ do
 		return Buf1
 	end
 
-	function Module332.decode(Buf) --[[ Line: 84143 ]]
+	function Module332.decode(Buf)
 		-- upvalues: Module332 (copy), ProtoModule (copy), t (copy), ComponentSharedModule (copy)
 		local NewModule = Module332.new()
 		local v240 = 0
@@ -55873,7 +55873,7 @@ do
 		return NewModule
 	end
 
-	function Module332:jsonEncode() --[[ Line: 84191 ]]
+	function Module332:jsonEncode()
 		local t = {}
 		
 		if self.props ~= nil then
@@ -55885,7 +55885,7 @@ do
 		return t
 	end
 
-	function Module332:jsonDecode() --[[ Line: 84205 ]]
+	function Module332:jsonDecode()
 		-- upvalues: Module332 (copy), t (copy), ComponentSharedModule (copy)
 		local NewModule = Module332.new()
 		
@@ -55909,7 +55909,7 @@ do
 	local Module333 = {}
 	Module333.__index = Module333
 
-	function Module333.new(p1) --[[ Line: 84234 ]]
+	function Module333.new(p1)
 		-- upvalues: Module333 (copy)
 		return (setmetatable({
 			text = if p1 == nil or p1.text == nil then nil else p1.text,
@@ -55926,7 +55926,7 @@ do
 		}, Module333))
 	end
 
-	function Module333:encode() --[[ Line: 84252 ]]
+	function Module333:encode()
 		-- upvalues: ProtoModule (copy)
 		local Buf = buffer.create(0)
 		local Count = 0
@@ -55992,7 +55992,7 @@ do
 		return Buf1
 	end
 
-	function Module333.decode(Buf) --[[ Line: 84327 ]]
+	function Module333.decode(Buf)
 		-- upvalues: Module333 (copy), ProtoModule (copy), PropTypesModule (copy), t (copy), ActionsModule (copy)
 		local NewModule = Module333.new()
 		local v240 = 0
@@ -56065,7 +56065,7 @@ do
 		return NewModule
 	end
 
-	function Module333:jsonEncode() --[[ Line: 84420 ]]
+	function Module333:jsonEncode()
 		local t = {}
 		
 		if self.text ~= nil then
@@ -56104,7 +56104,7 @@ do
 		return t
 	end
 
-	function Module333:jsonDecode() --[[ Line: 84470 ]]
+	function Module333:jsonDecode()
 		-- upvalues: Module333 (copy), PropTypesModule (copy), t (copy), ActionsModule (copy)
 		local NewModule = Module333.new()
 		
@@ -56165,7 +56165,7 @@ do
 	local Module334 = {}
 	Module334.__index = Module334
 
-	function Module334.new(p1) --[[ Line: 84556 ]]
+	function Module334.new(p1)
 		-- upvalues: Module334 (copy)
 		return (setmetatable({
 			props = if p1 == nil or p1.props == nil then nil else p1.props,
@@ -56173,7 +56173,7 @@ do
 		}, Module334))
 	end
 
-	function Module334:encode() --[[ Line: 84563 ]]
+	function Module334:encode()
 		-- upvalues: ProtoModule (copy)
 		local Buf = buffer.create(0)
 		local Count = 0
@@ -56194,7 +56194,7 @@ do
 		return Buf1
 	end
 
-	function Module334.decode(Buf) --[[ Line: 84584 ]]
+	function Module334.decode(Buf)
 		-- upvalues: Module334 (copy), ProtoModule (copy), t (copy), ComponentSharedModule (copy)
 		local NewModule = Module334.new()
 		local v241 = 0
@@ -56231,7 +56231,7 @@ do
 		return NewModule
 	end
 
-	function Module334:jsonEncode() --[[ Line: 84632 ]]
+	function Module334:jsonEncode()
 		local t = {}
 		
 		if self.props ~= nil then
@@ -56243,7 +56243,7 @@ do
 		return t
 	end
 
-	function Module334:jsonDecode() --[[ Line: 84646 ]]
+	function Module334:jsonDecode()
 		-- upvalues: Module334 (copy), t (copy), ComponentSharedModule (copy)
 		local NewModule = Module334.new()
 		
@@ -56265,7 +56265,7 @@ do
 	local Module335 = {}
 	Module335.__index = Module335
 
-	function Module335.new(p1) --[[ Line: 84675 ]]
+	function Module335.new(p1)
 		-- upvalues: Module335 (copy)
 		return (setmetatable({
 			content_component = if p1 == nil or p1.content_component == nil then nil else p1.content_component,
@@ -56277,7 +56277,7 @@ do
 		}, Module335))
 	end
 
-	function Module335:encode() --[[ Line: 84690 ]]
+	function Module335:encode()
 		-- upvalues: ProtoModule (copy)
 		local Buf = buffer.create(0)
 		local Count = 0
@@ -56318,7 +56318,7 @@ do
 		return Buf1
 	end
 
-	function Module335.decode(Buf) --[[ Line: 84735 ]]
+	function Module335.decode(Buf)
 		-- upvalues: Module335 (copy), ProtoModule (copy), t (copy), ActionsModule (copy), PropTypesModule (copy)
 		local NewModule = Module335.new()
 		local v242 = 0
@@ -56371,7 +56371,7 @@ do
 		return NewModule
 	end
 
-	function Module335:jsonEncode() --[[ Line: 84804 ]]
+	function Module335:jsonEncode()
 		local t = {}
 		
 		if self.content_component ~= nil then
@@ -56395,7 +56395,7 @@ do
 		return t
 	end
 
-	function Module335:jsonDecode() --[[ Line: 84834 ]]
+	function Module335:jsonDecode()
 		-- upvalues: Module335 (copy), t (copy), ActionsModule (copy), PropTypesModule (copy)
 		local NewModule = Module335.new()
 		
@@ -56443,7 +56443,7 @@ do
 	local Module336 = {}
 	Module336.__index = Module336
 
-	function Module336.new(p1) --[[ Line: 84898 ]]
+	function Module336.new(p1)
 		-- upvalues: Module336 (copy)
 		return (setmetatable({
 			props = if p1 == nil or p1.props == nil then nil else p1.props,
@@ -56451,7 +56451,7 @@ do
 		}, Module336))
 	end
 
-	function Module336:encode() --[[ Line: 84905 ]]
+	function Module336:encode()
 		-- upvalues: ProtoModule (copy)
 		local Buf = buffer.create(0)
 		local Count = 0
@@ -56472,7 +56472,7 @@ do
 		return Buf1
 	end
 
-	function Module336.decode(Buf) --[[ Line: 84926 ]]
+	function Module336.decode(Buf)
 		-- upvalues: Module336 (copy), ProtoModule (copy), t (copy), ComponentSharedModule (copy)
 		local NewModule = Module336.new()
 		local v242 = 0
@@ -56509,7 +56509,7 @@ do
 		return NewModule
 	end
 
-	function Module336:jsonEncode() --[[ Line: 84974 ]]
+	function Module336:jsonEncode()
 		local t = {}
 		
 		if self.props ~= nil then
@@ -56521,7 +56521,7 @@ do
 		return t
 	end
 
-	function Module336:jsonDecode() --[[ Line: 84988 ]]
+	function Module336:jsonDecode()
 		-- upvalues: Module336 (copy), t (copy), ComponentSharedModule (copy)
 		local NewModule = Module336.new()
 		
@@ -56543,7 +56543,7 @@ do
 	local Module337 = {}
 	Module337.__index = Module337
 
-	function Module337.new(p1) --[[ Line: 85017 ]]
+	function Module337.new(p1)
 		-- upvalues: Module337 (copy)
 		return (setmetatable({
 			universe_id = if p1 == nil or p1.universe_id == nil then nil else p1.universe_id,
@@ -56557,7 +56557,7 @@ do
 		}, Module337))
 	end
 
-	function Module337:encode() --[[ Line: 85034 ]]
+	function Module337:encode()
 		-- upvalues: ProtoModule (copy)
 		local Buf = buffer.create(0)
 		local Count = 0
@@ -56608,7 +56608,7 @@ do
 		return Buf1
 	end
 
-	function Module337.decode(Buf) --[[ Line: 85091 ]]
+	function Module337.decode(Buf)
 		-- upvalues: Module337 (copy), ProtoModule (copy), PropTypesModule (copy), t (copy)
 		local NewModule = Module337.new()
 		local v243 = 0
@@ -56669,7 +56669,7 @@ do
 		return NewModule
 	end
 
-	function Module337:jsonEncode() --[[ Line: 85170 ]]
+	function Module337:jsonEncode()
 		local t = {}
 		
 		if self.universe_id ~= nil then
@@ -56699,7 +56699,7 @@ do
 		return t
 	end
 
-	function Module337:jsonDecode() --[[ Line: 85208 ]]
+	function Module337:jsonDecode()
 		-- upvalues: Module337 (copy), PropTypesModule (copy), t (copy)
 		local NewModule = Module337.new()
 		
@@ -56760,7 +56760,7 @@ do
 	local Module338 = {}
 	Module338.__index = Module338
 
-	function Module338.new(p1) --[[ Line: 85295 ]]
+	function Module338.new(p1)
 		-- upvalues: Module338 (copy)
 		return (setmetatable({
 			props = if p1 == nil or p1.props == nil then nil else p1.props,
@@ -56768,7 +56768,7 @@ do
 		}, Module338))
 	end
 
-	function Module338:encode() --[[ Line: 85302 ]]
+	function Module338:encode()
 		-- upvalues: ProtoModule (copy)
 		local Buf = buffer.create(0)
 		local Count = 0
@@ -56789,7 +56789,7 @@ do
 		return Buf1
 	end
 
-	function Module338.decode(Buf) --[[ Line: 85323 ]]
+	function Module338.decode(Buf)
 		-- upvalues: Module338 (copy), ProtoModule (copy), t (copy), ComponentSharedModule (copy)
 		local NewModule = Module338.new()
 		local v244 = 0
@@ -56826,7 +56826,7 @@ do
 		return NewModule
 	end
 
-	function Module338:jsonEncode() --[[ Line: 85371 ]]
+	function Module338:jsonEncode()
 		local t = {}
 		
 		if self.props ~= nil then
@@ -56838,7 +56838,7 @@ do
 		return t
 	end
 
-	function Module338:jsonDecode() --[[ Line: 85385 ]]
+	function Module338:jsonDecode()
 		-- upvalues: Module338 (copy), t (copy), ComponentSharedModule (copy)
 		local NewModule = Module338.new()
 		
@@ -56862,7 +56862,7 @@ do
 	local Module339 = {}
 	Module339.__index = Module339
 
-	function Module339.new(p1) --[[ Line: 85414 ]]
+	function Module339.new(p1)
 		-- upvalues: Module339 (copy)
 		return (setmetatable({
 			avatars = if p1 == nil or p1.avatars == nil then nil else p1.avatars,
@@ -56874,7 +56874,7 @@ do
 		}, Module339))
 	end
 
-	function Module339:encode() --[[ Line: 85425 ]]
+	function Module339:encode()
 		-- upvalues: ProtoModule (copy)
 		local Buf = buffer.create(0)
 		local Count = 0
@@ -56915,7 +56915,7 @@ do
 		return Buf1
 	end
 
-	function Module339.decode(Buf) --[[ Line: 85470 ]]
+	function Module339.decode(Buf)
 		-- upvalues: Module339 (copy), ProtoModule (copy), PropTypesModule (copy)
 		local NewModule = Module339.new()
 		local v244 = 0
@@ -56968,7 +56968,7 @@ do
 		return NewModule
 	end
 
-	function Module339:jsonEncode() --[[ Line: 85539 ]]
+	function Module339:jsonEncode()
 		local t = {}
 		
 		if self.avatars ~= nil then
@@ -56992,7 +56992,7 @@ do
 		return t
 	end
 
-	function Module339:jsonDecode() --[[ Line: 85569 ]]
+	function Module339:jsonDecode()
 		-- upvalues: Module339 (copy), PropTypesModule (copy)
 		local NewModule = Module339.new()
 		
@@ -57032,7 +57032,7 @@ do
 	local Module340 = {}
 	Module340.__index = Module340
 
-	function Module340.new(p1) --[[ Line: 85625 ]]
+	function Module340.new(p1)
 		-- upvalues: Module340 (copy)
 		return (setmetatable({
 			props = if p1 == nil or p1.props == nil then nil else p1.props,
@@ -57040,7 +57040,7 @@ do
 		}, Module340))
 	end
 
-	function Module340:encode() --[[ Line: 85632 ]]
+	function Module340:encode()
 		-- upvalues: ProtoModule (copy)
 		local Buf = buffer.create(0)
 		local Count = 0
@@ -57061,7 +57061,7 @@ do
 		return Buf1
 	end
 
-	function Module340.decode(Buf) --[[ Line: 85653 ]]
+	function Module340.decode(Buf)
 		-- upvalues: Module340 (copy), ProtoModule (copy), t (copy), ComponentSharedModule (copy)
 		local NewModule = Module340.new()
 		local v245 = 0
@@ -57098,7 +57098,7 @@ do
 		return NewModule
 	end
 
-	function Module340:jsonEncode() --[[ Line: 85701 ]]
+	function Module340:jsonEncode()
 		local t = {}
 		
 		if self.props ~= nil then
@@ -57110,7 +57110,7 @@ do
 		return t
 	end
 
-	function Module340:jsonDecode() --[[ Line: 85715 ]]
+	function Module340:jsonDecode()
 		-- upvalues: Module340 (copy), t (copy), ComponentSharedModule (copy)
 		local NewModule = Module340.new()
 		
@@ -57132,7 +57132,7 @@ do
 	local Module341 = {}
 	Module341.__index = Module341
 
-	function Module341.new(p1) --[[ Line: 85744 ]]
+	function Module341.new(p1)
 		-- upvalues: Module341 (copy)
 		return (setmetatable({
 			title_component = if p1 == nil or p1.title_component == nil then nil else p1.title_component,
@@ -57148,7 +57148,7 @@ do
 		}, Module341))
 	end
 
-	function Module341:encode() --[[ Line: 85761 ]]
+	function Module341:encode()
 		-- upvalues: ProtoModule (copy)
 		local Buf = buffer.create(0)
 		local Count = 0
@@ -57209,7 +57209,7 @@ do
 		return Buf1
 	end
 
-	function Module341.decode(Buf) --[[ Line: 85830 ]]
+	function Module341.decode(Buf)
 		-- upvalues: Module341 (copy), ProtoModule (copy), t (copy), PropTypesModule (copy)
 		local NewModule = Module341.new()
 		local v246 = 0
@@ -57278,7 +57278,7 @@ do
 		return NewModule
 	end
 
-	function Module341:jsonEncode() --[[ Line: 85919 ]]
+	function Module341:jsonEncode()
 		local t = {}
 		
 		if self.title_component ~= nil then
@@ -57314,7 +57314,7 @@ do
 		return t
 	end
 
-	function Module341:jsonDecode() --[[ Line: 85965 ]]
+	function Module341:jsonDecode()
 		-- upvalues: Module341 (copy), t (copy), PropTypesModule (copy)
 		local NewModule = Module341.new()
 		
@@ -57386,7 +57386,7 @@ do
 	local Module342 = {}
 	Module342.__index = Module342
 
-	function Module342.new(p1) --[[ Line: 86063 ]]
+	function Module342.new(p1)
 		-- upvalues: Module342 (copy)
 		return (setmetatable({
 			props = if p1 == nil or p1.props == nil then nil else p1.props,
@@ -57394,7 +57394,7 @@ do
 		}, Module342))
 	end
 
-	function Module342:encode() --[[ Line: 86070 ]]
+	function Module342:encode()
 		-- upvalues: ProtoModule (copy)
 		local Buf = buffer.create(0)
 		local Count = 0
@@ -57415,7 +57415,7 @@ do
 		return Buf1
 	end
 
-	function Module342.decode(Buf) --[[ Line: 86091 ]]
+	function Module342.decode(Buf)
 		-- upvalues: Module342 (copy), ProtoModule (copy), t (copy), ComponentSharedModule (copy)
 		local NewModule = Module342.new()
 		local v246 = 0
@@ -57452,7 +57452,7 @@ do
 		return NewModule
 	end
 
-	function Module342:jsonEncode() --[[ Line: 86139 ]]
+	function Module342:jsonEncode()
 		local t = {}
 		
 		if self.props ~= nil then
@@ -57464,7 +57464,7 @@ do
 		return t
 	end
 
-	function Module342:jsonDecode() --[[ Line: 86153 ]]
+	function Module342:jsonDecode()
 		-- upvalues: Module342 (copy), t (copy), ComponentSharedModule (copy)
 		local NewModule = Module342.new()
 		
@@ -57486,7 +57486,7 @@ do
 	local Module343 = {}
 	Module343.__index = Module343
 
-	function Module343.new(p1) --[[ Line: 86182 ]]
+	function Module343.new(p1)
 		-- upvalues: Module343 (copy)
 		return (setmetatable({
 			background_style = if p1 == nil or p1.background_style == nil then nil else p1.background_style,
@@ -57501,7 +57501,7 @@ do
 		}, Module343))
 	end
 
-	function Module343:encode() --[[ Line: 86196 ]]
+	function Module343:encode()
 		-- upvalues: ProtoModule (copy)
 		local Buf = buffer.create(0)
 		local Count = 0
@@ -57557,7 +57557,7 @@ do
 		return Buf1
 	end
 
-	function Module343.decode(Buf) --[[ Line: 86259 ]]
+	function Module343.decode(Buf)
 		-- upvalues: Module343 (copy), ProtoModule (copy), PropTypesModule (copy), PropTypesEngineModule (copy)
 		local NewModule = Module343.new()
 		local v247 = 0
@@ -57622,7 +57622,7 @@ do
 		return NewModule
 	end
 
-	function Module343:jsonEncode() --[[ Line: 86344 ]]
+	function Module343:jsonEncode()
 		local t = {}
 		
 		if self.background_style ~= nil then
@@ -57655,7 +57655,7 @@ do
 		return t
 	end
 
-	function Module343:jsonDecode() --[[ Line: 86386 ]]
+	function Module343:jsonDecode()
 		-- upvalues: Module343 (copy), PropTypesModule (copy), PropTypesEngineModule (copy)
 		local NewModule = Module343.new()
 		
@@ -57719,7 +57719,7 @@ do
 	local Module344 = {}
 	Module344.__index = Module344
 
-	function Module344.new(p1) --[[ Line: 86482 ]]
+	function Module344.new(p1)
 		-- upvalues: Module344 (copy)
 		return (setmetatable({
 			props = if p1 == nil or p1.props == nil then nil else p1.props,
@@ -57727,7 +57727,7 @@ do
 		}, Module344))
 	end
 
-	function Module344:encode() --[[ Line: 86489 ]]
+	function Module344:encode()
 		-- upvalues: ProtoModule (copy)
 		local Buf = buffer.create(0)
 		local Count = 0
@@ -57748,7 +57748,7 @@ do
 		return Buf1
 	end
 
-	function Module344.decode(Buf) --[[ Line: 86510 ]]
+	function Module344.decode(Buf)
 		-- upvalues: Module344 (copy), ProtoModule (copy), t (copy), ComponentSharedModule (copy)
 		local NewModule = Module344.new()
 		local v248 = 0
@@ -57785,7 +57785,7 @@ do
 		return NewModule
 	end
 
-	function Module344:jsonEncode() --[[ Line: 86558 ]]
+	function Module344:jsonEncode()
 		local t = {}
 		
 		if self.props ~= nil then
@@ -57797,7 +57797,7 @@ do
 		return t
 	end
 
-	function Module344:jsonDecode() --[[ Line: 86572 ]]
+	function Module344:jsonDecode()
 		-- upvalues: Module344 (copy), t (copy), ComponentSharedModule (copy)
 		local NewModule = Module344.new()
 		
@@ -57821,7 +57821,7 @@ do
 	local Module345 = {}
 	Module345.__index = Module345
 
-	function Module345.new(p1) --[[ Line: 86601 ]]
+	function Module345.new(p1)
 		-- upvalues: Module345 (copy)
 		return (setmetatable({
 			background_style = if p1 == nil or p1.background_style == nil then nil else p1.background_style,
@@ -57841,7 +57841,7 @@ do
 		}, Module345))
 	end
 
-	function Module345:encode() --[[ Line: 86628 ]]
+	function Module345:encode()
 		-- upvalues: ProtoModule (copy)
 		local Buf = buffer.create(0)
 		local Count = 0
@@ -57922,7 +57922,7 @@ do
 		return Buf1
 	end
 
-	function Module345.decode(Buf) --[[ Line: 86721 ]]
+	function Module345.decode(Buf)
 		-- upvalues: Module345 (copy), ProtoModule (copy), PropTypesModule (copy)
 		local NewModule = Module345.new()
 		local v248 = 0
@@ -58007,7 +58007,7 @@ do
 		return NewModule
 	end
 
-	function Module345:jsonEncode() --[[ Line: 86832 ]]
+	function Module345:jsonEncode()
 		local t = {}
 		
 		if self.background_style ~= nil then
@@ -58055,7 +58055,7 @@ do
 		return t
 	end
 
-	function Module345:jsonDecode() --[[ Line: 86894 ]]
+	function Module345:jsonDecode()
 		-- upvalues: Module345 (copy), PropTypesModule (copy)
 		local NewModule = Module345.new()
 		
@@ -58149,7 +58149,7 @@ do
 	local Module346 = {}
 	Module346.__index = Module346
 
-	function Module346.new(p1) --[[ Line: 87037 ]]
+	function Module346.new(p1)
 		-- upvalues: Module346 (copy)
 		return (setmetatable({
 			props = if p1 == nil or p1.props == nil then nil else p1.props,
@@ -58157,7 +58157,7 @@ do
 		}, Module346))
 	end
 
-	function Module346:encode() --[[ Line: 87044 ]]
+	function Module346:encode()
 		-- upvalues: ProtoModule (copy)
 		local Buf = buffer.create(0)
 		local Count = 0
@@ -58178,7 +58178,7 @@ do
 		return Buf1
 	end
 
-	function Module346.decode(Buf) --[[ Line: 87065 ]]
+	function Module346.decode(Buf)
 		-- upvalues: Module346 (copy), ProtoModule (copy), t (copy), ComponentSharedModule (copy)
 		local NewModule = Module346.new()
 		local v249 = 0
@@ -58215,7 +58215,7 @@ do
 		return NewModule
 	end
 
-	function Module346:jsonEncode() --[[ Line: 87113 ]]
+	function Module346:jsonEncode()
 		local t = {}
 		
 		if self.props ~= nil then
@@ -58227,7 +58227,7 @@ do
 		return t
 	end
 
-	function Module346:jsonDecode() --[[ Line: 87127 ]]
+	function Module346:jsonDecode()
 		-- upvalues: Module346 (copy), t (copy), ComponentSharedModule (copy)
 		local NewModule = Module346.new()
 		
@@ -58249,7 +58249,7 @@ do
 	local Module347 = {}
 	Module347.__index = Module347
 
-	function Module347.new(p1) --[[ Line: 87156 ]]
+	function Module347.new(p1)
 		-- upvalues: Module347 (copy)
 		return (setmetatable({
 			is_placeholder = if p1 == nil or p1.is_placeholder == nil then nil else p1.is_placeholder,
@@ -58262,7 +58262,7 @@ do
 		}, Module347))
 	end
 
-	function Module347:encode() --[[ Line: 87174 ]]
+	function Module347:encode()
 		-- upvalues: ProtoModule (copy)
 		local Buf = buffer.create(0)
 		local Count = 0
@@ -58308,7 +58308,7 @@ do
 		return Buf1
 	end
 
-	function Module347.decode(Buf) --[[ Line: 87225 ]]
+	function Module347.decode(Buf)
 		-- upvalues: Module347 (copy), ProtoModule (copy), PropTypesModule (copy), t (copy)
 		local NewModule = Module347.new()
 		local v250 = 0
@@ -58365,7 +58365,7 @@ do
 		return NewModule
 	end
 
-	function Module347:jsonEncode() --[[ Line: 87300 ]]
+	function Module347:jsonEncode()
 		local t = {}
 		
 		if self.is_placeholder ~= nil then
@@ -58392,7 +58392,7 @@ do
 		return t
 	end
 
-	function Module347:jsonDecode() --[[ Line: 87334 ]]
+	function Module347:jsonDecode()
 		-- upvalues: Module347 (copy), PropTypesModule (copy), t (copy)
 		local NewModule = Module347.new()
 		
@@ -58446,7 +58446,7 @@ do
 	local Module348 = {}
 	Module348.__index = Module348
 
-	function Module348.new(p1) --[[ Line: 87412 ]]
+	function Module348.new(p1)
 		-- upvalues: Module348 (copy)
 		return (setmetatable({
 			props = if p1 == nil or p1.props == nil then nil else p1.props,
@@ -58454,7 +58454,7 @@ do
 		}, Module348))
 	end
 
-	function Module348:encode() --[[ Line: 87419 ]]
+	function Module348:encode()
 		-- upvalues: ProtoModule (copy)
 		local Buf = buffer.create(0)
 		local Count = 0
@@ -58475,7 +58475,7 @@ do
 		return Buf1
 	end
 
-	function Module348.decode(Buf) --[[ Line: 87440 ]]
+	function Module348.decode(Buf)
 		-- upvalues: Module348 (copy), ProtoModule (copy), t (copy), ComponentSharedModule (copy)
 		local NewModule = Module348.new()
 		local v250 = 0
@@ -58512,7 +58512,7 @@ do
 		return NewModule
 	end
 
-	function Module348:jsonEncode() --[[ Line: 87488 ]]
+	function Module348:jsonEncode()
 		local t = {}
 		
 		if self.props ~= nil then
@@ -58524,7 +58524,7 @@ do
 		return t
 	end
 
-	function Module348:jsonDecode() --[[ Line: 87502 ]]
+	function Module348:jsonDecode()
 		-- upvalues: Module348 (copy), t (copy), ComponentSharedModule (copy)
 		local NewModule = Module348.new()
 		
@@ -58546,7 +58546,7 @@ do
 	local Module349 = {}
 	Module349.__index = Module349
 
-	function Module349.new(p1) --[[ Line: 87531 ]]
+	function Module349.new(p1)
 		-- upvalues: Module349 (copy)
 		return (setmetatable({
 			radius = if p1 == nil or p1.radius == nil then nil else p1.radius,
@@ -58560,7 +58560,7 @@ do
 		}, Module349))
 	end
 
-	function Module349:encode() --[[ Line: 87544 ]]
+	function Module349:encode()
 		-- upvalues: ProtoModule (copy)
 		local Buf = buffer.create(0)
 		local Count = 0
@@ -58611,7 +58611,7 @@ do
 		return Buf1
 	end
 
-	function Module349.decode(Buf) --[[ Line: 87601 ]]
+	function Module349.decode(Buf)
 		-- upvalues: Module349 (copy), ProtoModule (copy), PropTypesModule (copy)
 		local NewModule = Module349.new()
 		local v251 = 0
@@ -58672,7 +58672,7 @@ do
 		return NewModule
 	end
 
-	function Module349:jsonEncode() --[[ Line: 87679 ]]
+	function Module349:jsonEncode()
 		local t = {}
 		
 		if self.radius ~= nil then
@@ -58702,7 +58702,7 @@ do
 		return t
 	end
 
-	function Module349:jsonDecode() --[[ Line: 87717 ]]
+	function Module349:jsonDecode()
 		-- upvalues: Module349 (copy), PropTypesModule (copy)
 		local NewModule = Module349.new()
 		
@@ -58754,7 +58754,7 @@ do
 	local Module350 = {}
 	Module350.__index = Module350
 
-	function Module350.new(p1) --[[ Line: 87789 ]]
+	function Module350.new(p1)
 		-- upvalues: Module350 (copy)
 		return (setmetatable({
 			on_activated = if p1 == nil or p1.on_activated == nil then nil else p1.on_activated,
@@ -58763,7 +58763,7 @@ do
 		}, Module350))
 	end
 
-	function Module350:encode() --[[ Line: 87797 ]]
+	function Module350:encode()
 		-- upvalues: ProtoModule (copy)
 		local Buf = buffer.create(0)
 		local Count = 0
@@ -58789,7 +58789,7 @@ do
 		return Buf1
 	end
 
-	function Module350.decode(Buf) --[[ Line: 87824 ]]
+	function Module350.decode(Buf)
 		-- upvalues: Module350 (copy), ProtoModule (copy), ActionsModule (copy), PropTypesModule (copy)
 		local NewModule = Module350.new()
 		local v252 = 0
@@ -58830,7 +58830,7 @@ do
 		return NewModule
 	end
 
-	function Module350:jsonEncode() --[[ Line: 87877 ]]
+	function Module350:jsonEncode()
 		local t = {}
 		
 		if self.on_activated ~= nil then
@@ -58845,7 +58845,7 @@ do
 		return t
 	end
 
-	function Module350:jsonDecode() --[[ Line: 87895 ]]
+	function Module350:jsonDecode()
 		-- upvalues: Module350 (copy), ActionsModule (copy), PropTypesModule (copy)
 		local NewModule = Module350.new()
 		
@@ -58875,14 +58875,14 @@ do
 	local Module351 = {}
 	Module351.__index = Module351
 
-	function Module351.new(p1) --[[ Line: 87931 ]]
+	function Module351.new(p1)
 		-- upvalues: Module351 (copy)
 		return (setmetatable({
 			kind = if p1 == nil or p1.kind == nil then nil else p1.kind
 		}, Module351))
 	end
 
-	function Module351:encode() --[[ Line: 87937 ]]
+	function Module351:encode()
 		-- upvalues: ProtoModule (copy)
 		local Buf = buffer.create(0)
 		local Count = 0
@@ -58907,7 +58907,7 @@ do
 		return Buf1
 	end
 
-	function Module351.decode(Buf) --[[ Line: 87961 ]]
+	function Module351.decode(Buf)
 		-- upvalues: Module351 (copy), ProtoModule (copy), t (copy)
 		local NewModule = Module351.new()
 		local v252 = 0
@@ -58954,7 +58954,7 @@ do
 		return NewModule
 	end
 
-	function Module351:jsonEncode() --[[ Line: 88017 ]]
+	function Module351:jsonEncode()
 		local t = {}
 		
 		if self.kind ~= nil then
@@ -58975,7 +58975,7 @@ do
 		return t
 	end
 
-	function Module351:jsonDecode() --[[ Line: 88033 ]]
+	function Module351:jsonDecode()
 		-- upvalues: Module351 (copy), t (copy)
 		local NewModule = Module351.new()
 		
@@ -59009,7 +59009,7 @@ do
 	local Module352 = {}
 	Module352.__index = Module352
 
-	function Module352.new(p1) --[[ Line: 88072 ]]
+	function Module352.new(p1)
 		-- upvalues: Module352 (copy)
 		return (setmetatable({
 			condition = if p1 == nil or p1.condition == nil then nil else p1.condition,
@@ -59017,7 +59017,7 @@ do
 		}, Module352))
 	end
 
-	function Module352:encode() --[[ Line: 88081 ]]
+	function Module352:encode()
 		-- upvalues: ProtoModule (copy)
 		local Buf = buffer.create(0)
 		local Count = 0
@@ -59043,7 +59043,7 @@ do
 		return Buf1
 	end
 
-	function Module352.decode(Buf) --[[ Line: 88109 ]]
+	function Module352.decode(Buf)
 		-- upvalues: Module352 (copy), ProtoModule (copy), PropConditionModule (copy), t (copy)
 		local NewModule = Module352.new()
 		local v253 = 0
@@ -59087,7 +59087,7 @@ do
 		return NewModule
 	end
 
-	function Module352:jsonEncode() --[[ Line: 88164 ]]
+	function Module352:jsonEncode()
 		local t = {}
 		
 		if self.condition ~= nil then
@@ -59106,7 +59106,7 @@ do
 		return t
 	end
 
-	function Module352:jsonDecode() --[[ Line: 88184 ]]
+	function Module352:jsonDecode()
 		-- upvalues: Module352 (copy), PropConditionModule (copy), t (copy)
 		local NewModule = Module352.new()
 		
@@ -59137,14 +59137,14 @@ do
 	local Module353 = {}
 	Module353.__index = Module353
 
-	function Module353.new(p1) --[[ Line: 88223 ]]
+	function Module353.new(p1)
 		-- upvalues: Module353 (copy)
 		return (setmetatable({
 			options = if p1 == nil or p1.options == nil then {} else p1.options
 		}, Module353))
 	end
 
-	function Module353:encode() --[[ Line: 88231 ]]
+	function Module353:encode()
 		-- upvalues: ProtoModule (copy)
 		local Buf = buffer.create(0)
 		local Count = 0
@@ -59162,7 +59162,7 @@ do
 		return Buf1
 	end
 
-	function Module353.decode(Buf) --[[ Line: 88250 ]]
+	function Module353.decode(Buf)
 		-- upvalues: Module353 (copy), ProtoModule (copy), t (copy)
 		local NewModule = Module353.new()
 		local v254 = 0
@@ -59195,7 +59195,7 @@ do
 		return NewModule
 	end
 
-	function Module353:jsonEncode() --[[ Line: 88295 ]]
+	function Module353:jsonEncode()
 		local t = {}
 		
 		if self.options ~= nil and #self.options > 0 then
@@ -59209,7 +59209,7 @@ do
 		return t
 	end
 
-	function Module353:jsonDecode() --[[ Line: 88311 ]]
+	function Module353:jsonDecode()
 		-- upvalues: Module353 (copy), t (copy)
 		local NewModule = Module353.new()
 		
@@ -59235,14 +59235,14 @@ do
 	local Module354 = {}
 	Module354.__index = Module354
 
-	function Module354.new(p1) --[[ Line: 88342 ]]
+	function Module354.new(p1)
 		-- upvalues: Module354 (copy)
 		return (setmetatable({
 			kind = if p1 == nil or p1.kind == nil then nil else p1.kind
 		}, Module354))
 	end
 
-	function Module354:encode() --[[ Line: 88350 ]]
+	function Module354:encode()
 		-- upvalues: ProtoModule (copy)
 		local Buf = buffer.create(0)
 		local Count = 0
@@ -59267,7 +59267,7 @@ do
 		return Buf1
 	end
 
-	function Module354.decode(Buf) --[[ Line: 88374 ]]
+	function Module354.decode(Buf)
 		-- upvalues: Module354 (copy), ProtoModule (copy), t (copy)
 		local NewModule = Module354.new()
 		local v255 = 0
@@ -59314,7 +59314,7 @@ do
 		return NewModule
 	end
 
-	function Module354:jsonEncode() --[[ Line: 88433 ]]
+	function Module354:jsonEncode()
 		local t = {}
 		
 		if self.kind ~= nil then
@@ -59335,7 +59335,7 @@ do
 		return t
 	end
 
-	function Module354:jsonDecode() --[[ Line: 88449 ]]
+	function Module354:jsonDecode()
 		-- upvalues: Module354 (copy), t (copy)
 		local NewModule = Module354.new()
 		
@@ -59369,7 +59369,7 @@ do
 	local Module355 = {}
 	Module355.__index = Module355
 
-	function Module355.new(p1) --[[ Line: 88496 ]]
+	function Module355.new(p1)
 		-- upvalues: Module355 (copy)
 		return (setmetatable({
 			condition = if p1 == nil or p1.condition == nil then nil else p1.condition,
@@ -59377,7 +59377,7 @@ do
 		}, Module355))
 	end
 
-	function Module355:encode() --[[ Line: 88508 ]]
+	function Module355:encode()
 		-- upvalues: ProtoModule (copy)
 		local Buf = buffer.create(0)
 		local Count = 0
@@ -59403,7 +59403,7 @@ do
 		return Buf1
 	end
 
-	function Module355.decode(Buf) --[[ Line: 88536 ]]
+	function Module355.decode(Buf)
 		-- upvalues: Module355 (copy), ProtoModule (copy), PropConditionModule (copy), t (copy)
 		local NewModule = Module355.new()
 		local v256 = 0
@@ -59447,7 +59447,7 @@ do
 		return NewModule
 	end
 
-	function Module355:jsonEncode() --[[ Line: 88594 ]]
+	function Module355:jsonEncode()
 		local t = {}
 		
 		if self.condition ~= nil then
@@ -59466,7 +59466,7 @@ do
 		return t
 	end
 
-	function Module355:jsonDecode() --[[ Line: 88614 ]]
+	function Module355:jsonDecode()
 		-- upvalues: Module355 (copy), PropConditionModule (copy), t (copy)
 		local NewModule = Module355.new()
 		
@@ -59497,14 +59497,14 @@ do
 	local Module356 = {}
 	Module356.__index = Module356
 
-	function Module356.new(p1) --[[ Line: 88660 ]]
+	function Module356.new(p1)
 		-- upvalues: Module356 (copy)
 		return (setmetatable({
 			options = if p1 == nil or p1.options == nil then {} else p1.options
 		}, Module356))
 	end
 
-	function Module356:encode() --[[ Line: 88671 ]]
+	function Module356:encode()
 		-- upvalues: ProtoModule (copy)
 		local Buf = buffer.create(0)
 		local Count = 0
@@ -59522,7 +59522,7 @@ do
 		return Buf1
 	end
 
-	function Module356.decode(Buf) --[[ Line: 88690 ]]
+	function Module356.decode(Buf)
 		-- upvalues: Module356 (copy), ProtoModule (copy), t (copy)
 		local NewModule = Module356.new()
 		local v257 = 0
@@ -59555,7 +59555,7 @@ do
 		return NewModule
 	end
 
-	function Module356:jsonEncode() --[[ Line: 88738 ]]
+	function Module356:jsonEncode()
 		local t = {}
 		
 		if self.options ~= nil and #self.options > 0 then
@@ -59569,7 +59569,7 @@ do
 		return t
 	end
 
-	function Module356:jsonDecode() --[[ Line: 88754 ]]
+	function Module356:jsonDecode()
 		-- upvalues: Module356 (copy), t (copy)
 		local NewModule = Module356.new()
 		
@@ -59595,14 +59595,14 @@ do
 	local Module357 = {}
 	Module357.__index = Module357
 
-	function Module357.new(p1) --[[ Line: 88787 ]]
+	function Module357.new(p1)
 		-- upvalues: Module357 (copy)
 		return (setmetatable({
 			array = if p1 == nil or p1.array == nil then {} else p1.array
 		}, Module357))
 	end
 
-	function Module357:encode() --[[ Line: 88798 ]]
+	function Module357:encode()
 		-- upvalues: ProtoModule (copy)
 		local Buf = buffer.create(0)
 		local Count = 0
@@ -59620,7 +59620,7 @@ do
 		return Buf1
 	end
 
-	function Module357.decode(Buf) --[[ Line: 88817 ]]
+	function Module357.decode(Buf)
 		-- upvalues: Module357 (copy), ProtoModule (copy), t (copy)
 		local NewModule = Module357.new()
 		local v258 = 0
@@ -59653,7 +59653,7 @@ do
 		return NewModule
 	end
 
-	function Module357:jsonEncode() --[[ Line: 88862 ]]
+	function Module357:jsonEncode()
 		local t = {}
 		
 		if self.array ~= nil and #self.array > 0 then
@@ -59667,7 +59667,7 @@ do
 		return t
 	end
 
-	function Module357:jsonDecode() --[[ Line: 88878 ]]
+	function Module357:jsonDecode()
 		-- upvalues: Module357 (copy), t (copy)
 		local NewModule = Module357.new()
 		
@@ -59691,7 +59691,7 @@ do
 	local Module358 = {}
 	Module358.__index = Module358
 
-	function Module358.new(p1) --[[ Line: 88910 ]]
+	function Module358.new(p1)
 		-- upvalues: Module358 (copy)
 		return (setmetatable({
 			props = if p1 == nil or p1.props == nil then nil else p1.props,
@@ -59700,7 +59700,7 @@ do
 		}, Module358))
 	end
 
-	function Module358:encode() --[[ Line: 88918 ]]
+	function Module358:encode()
 		-- upvalues: ProtoModule (copy)
 		local Buf = buffer.create(0)
 		local Count = 0
@@ -59726,7 +59726,7 @@ do
 		return Buf1
 	end
 
-	function Module358.decode(Buf) --[[ Line: 88945 ]]
+	function Module358.decode(Buf)
 		-- upvalues: Module358 (copy), ProtoModule (copy), t (copy), ComponentSharedModule (copy)
 		local NewModule = Module358.new()
 		local v259 = 0
@@ -59767,7 +59767,7 @@ do
 		return NewModule
 	end
 
-	function Module358:jsonEncode() --[[ Line: 88998 ]]
+	function Module358:jsonEncode()
 		local t = {}
 		
 		if self.props ~= nil then
@@ -59782,7 +59782,7 @@ do
 		return t
 	end
 
-	function Module358:jsonDecode() --[[ Line: 89016 ]]
+	function Module358:jsonDecode()
 		-- upvalues: Module358 (copy), t (copy), ComponentSharedModule (copy)
 		local NewModule = Module358.new()
 		
@@ -59810,7 +59810,7 @@ do
 	local Module359 = {}
 	Module359.__index = Module359
 
-	function Module359.new(p1) --[[ Line: 89053 ]]
+	function Module359.new(p1)
 		-- upvalues: Module359 (copy)
 		return (setmetatable({
 			severity = if p1 == nil or p1.severity == nil then nil else p1.severity,
@@ -59822,7 +59822,7 @@ do
 		}, Module359))
 	end
 
-	function Module359:encode() --[[ Line: 89066 ]]
+	function Module359:encode()
 		-- upvalues: ProtoModule (copy)
 		local Buf = buffer.create(0)
 		local Count = 0
@@ -59863,7 +59863,7 @@ do
 		return Buf1
 	end
 
-	function Module359.decode(Buf) --[[ Line: 89111 ]]
+	function Module359.decode(Buf)
 		-- upvalues: Module359 (copy), ProtoModule (copy), PropTypesModule (copy), t (copy), ActionsModule (copy)
 		local NewModule = Module359.new()
 		local v260 = 0
@@ -59916,7 +59916,7 @@ do
 		return NewModule
 	end
 
-	function Module359:jsonEncode() --[[ Line: 89179 ]]
+	function Module359:jsonEncode()
 		local t = {}
 		
 		if self.severity ~= nil then
@@ -59940,7 +59940,7 @@ do
 		return t
 	end
 
-	function Module359:jsonDecode() --[[ Line: 89209 ]]
+	function Module359:jsonDecode()
 		-- upvalues: Module359 (copy), PropTypesModule (copy), t (copy), ActionsModule (copy)
 		local NewModule = Module359.new()
 		
@@ -59979,14 +59979,14 @@ do
 	local Module360 = {}
 	Module360.__index = Module360
 
-	function Module360.new(p1) --[[ Line: 89259 ]]
+	function Module360.new(p1)
 		-- upvalues: Module360 (copy)
 		return (setmetatable({
 			close_button_aria_label = if p1 == nil or p1.close_button_aria_label == nil then nil else p1.close_button_aria_label
 		}, Module360))
 	end
 
-	function Module360:encode() --[[ Line: 89269 ]]
+	function Module360:encode()
 		-- upvalues: ProtoModule (copy)
 		local Buf = buffer.create(0)
 		local Count = 0
@@ -60002,7 +60002,7 @@ do
 		return Buf1
 	end
 
-	function Module360.decode(Buf) --[[ Line: 89284 ]]
+	function Module360.decode(Buf)
 		-- upvalues: Module360 (copy), ProtoModule (copy), PropTypesModule (copy)
 		local NewModule = Module360.new()
 		local v260 = 0
@@ -60035,7 +60035,7 @@ do
 		return NewModule
 	end
 
-	function Module360:jsonEncode() --[[ Line: 89328 ]]
+	function Module360:jsonEncode()
 		local t = {}
 		
 		if self.close_button_aria_label ~= nil then
@@ -60044,7 +60044,7 @@ do
 		return t
 	end
 
-	function Module360:jsonDecode() --[[ Line: 89338 ]]
+	function Module360:jsonDecode()
 		-- upvalues: Module360 (copy), PropTypesModule (copy)
 		local NewModule = Module360.new()
 		
@@ -60066,7 +60066,7 @@ do
 	local Module361 = {}
 	Module361.__index = Module361
 
-	function Module361.new(p1) --[[ Line: 89368 ]]
+	function Module361.new(p1)
 		-- upvalues: Module361 (copy)
 		return (setmetatable({
 			props = if p1 == nil or p1.props == nil then nil else p1.props,
@@ -60074,7 +60074,7 @@ do
 		}, Module361))
 	end
 
-	function Module361:encode() --[[ Line: 89375 ]]
+	function Module361:encode()
 		-- upvalues: ProtoModule (copy)
 		local Buf = buffer.create(0)
 		local Count = 0
@@ -60095,7 +60095,7 @@ do
 		return Buf1
 	end
 
-	function Module361.decode(Buf) --[[ Line: 89396 ]]
+	function Module361.decode(Buf)
 		-- upvalues: Module361 (copy), ProtoModule (copy), t (copy), ComponentSharedModule (copy)
 		local NewModule = Module361.new()
 		local v261 = 0
@@ -60132,7 +60132,7 @@ do
 		return NewModule
 	end
 
-	function Module361:jsonEncode() --[[ Line: 89444 ]]
+	function Module361:jsonEncode()
 		local t = {}
 		
 		if self.props ~= nil then
@@ -60144,7 +60144,7 @@ do
 		return t
 	end
 
-	function Module361:jsonDecode() --[[ Line: 89458 ]]
+	function Module361:jsonDecode()
 		-- upvalues: Module361 (copy), t (copy), ComponentSharedModule (copy)
 		local NewModule = Module361.new()
 		
@@ -60166,7 +60166,7 @@ do
 	local Module362 = {}
 	Module362.__index = Module362
 
-	function Module362.new(p1) --[[ Line: 89487 ]]
+	function Module362.new(p1)
 		-- upvalues: Module362 (copy)
 		return (setmetatable({
 			is_omni = if p1 == nil or p1.is_omni == nil then nil else p1.is_omni,
@@ -60176,7 +60176,7 @@ do
 		}, Module362))
 	end
 
-	function Module362:encode() --[[ Line: 89498 ]]
+	function Module362:encode()
 		-- upvalues: ProtoModule (copy)
 		local Buf = buffer.create(0)
 		local Count = 0
@@ -60207,7 +60207,7 @@ do
 		return Buf1
 	end
 
-	function Module362.decode(Buf) --[[ Line: 89531 ]]
+	function Module362.decode(Buf)
 		-- upvalues: Module362 (copy), ProtoModule (copy), PropTypesModule (copy)
 		local NewModule = Module362.new()
 		local v262 = 0
@@ -60252,7 +60252,7 @@ do
 		return NewModule
 	end
 
-	function Module362:jsonEncode() --[[ Line: 89589 ]]
+	function Module362:jsonEncode()
 		local t = {}
 		
 		if self.is_omni ~= nil then
@@ -60270,7 +60270,7 @@ do
 		return t
 	end
 
-	function Module362:jsonDecode() --[[ Line: 89611 ]]
+	function Module362:jsonDecode()
 		-- upvalues: Module362 (copy), PropTypesModule (copy)
 		local NewModule = Module362.new()
 		
@@ -60306,7 +60306,7 @@ do
 	local Module363 = {}
 	Module363.__index = Module363
 
-	function Module363.new(p1) --[[ Line: 89657 ]]
+	function Module363.new(p1)
 		-- upvalues: Module363 (copy)
 		return (setmetatable({
 			props = if p1 == nil or p1.props == nil then nil else p1.props,
@@ -60314,7 +60314,7 @@ do
 		}, Module363))
 	end
 
-	function Module363:encode() --[[ Line: 89666 ]]
+	function Module363:encode()
 		-- upvalues: ProtoModule (copy)
 		local Buf = buffer.create(0)
 		local Count = 0
@@ -60335,7 +60335,7 @@ do
 		return Buf1
 	end
 
-	function Module363.decode(Buf) --[[ Line: 89687 ]]
+	function Module363.decode(Buf)
 		-- upvalues: Module363 (copy), ProtoModule (copy), t (copy), ComponentSharedModule (copy)
 		local NewModule = Module363.new()
 		local v262 = 0
@@ -60372,7 +60372,7 @@ do
 		return NewModule
 	end
 
-	function Module363:jsonEncode() --[[ Line: 89735 ]]
+	function Module363:jsonEncode()
 		local t = {}
 		
 		if self.props ~= nil then
@@ -60384,7 +60384,7 @@ do
 		return t
 	end
 
-	function Module363:jsonDecode() --[[ Line: 89749 ]]
+	function Module363:jsonDecode()
 		-- upvalues: Module363 (copy), t (copy), ComponentSharedModule (copy)
 		local NewModule = Module363.new()
 		
@@ -60406,7 +60406,7 @@ do
 	local Module364 = {}
 	Module364.__index = Module364
 
-	function Module364.new(p1) --[[ Line: 89778 ]]
+	function Module364.new(p1)
 		-- upvalues: Module364 (copy)
 		return (setmetatable({
 			universe_id = if p1 == nil or p1.universe_id == nil then nil else p1.universe_id,
@@ -60431,7 +60431,7 @@ do
 		}, Module364))
 	end
 
-	function Module364:encode() --[[ Line: 89812 ]]
+	function Module364:encode()
 		-- upvalues: ProtoModule (copy)
 		local Buf = buffer.create(0)
 		local Count = 0
@@ -60537,7 +60537,7 @@ do
 		return Buf1
 	end
 
-	function Module364.decode(Buf) --[[ Line: 89935 ]]
+	function Module364.decode(Buf)
 		-- upvalues: Module364 (copy), ProtoModule (copy), PropTypesModule (copy), ActionsModule (copy), t (copy)
 		local NewModule = Module364.new()
 		local v263 = 0
@@ -60642,7 +60642,7 @@ do
 		return NewModule
 	end
 
-	function Module364:jsonEncode() --[[ Line: 90069 ]]
+	function Module364:jsonEncode()
 		local t = {}
 		
 		if self.universe_id ~= nil then
@@ -60705,7 +60705,7 @@ do
 		return t
 	end
 
-	function Module364:jsonDecode() --[[ Line: 90151 ]]
+	function Module364:jsonDecode()
 		-- upvalues: Module364 (copy), PropTypesModule (copy), ActionsModule (copy), t (copy)
 		local NewModule = Module364.new()
 		
@@ -60832,7 +60832,7 @@ do
 	local Module365 = {}
 	Module365.__index = Module365
 
-	function Module365.new(p1) --[[ Line: 90346 ]]
+	function Module365.new(p1)
 		-- upvalues: Module365 (copy)
 		return (setmetatable({
 			props = if p1 == nil or p1.props == nil then nil else p1.props,
@@ -60841,7 +60841,7 @@ do
 		}, Module365))
 	end
 
-	function Module365:encode() --[[ Line: 90354 ]]
+	function Module365:encode()
 		-- upvalues: ProtoModule (copy)
 		local Buf = buffer.create(0)
 		local Count = 0
@@ -60867,7 +60867,7 @@ do
 		return Buf1
 	end
 
-	function Module365.decode(Buf) --[[ Line: 90381 ]]
+	function Module365.decode(Buf)
 		-- upvalues: Module365 (copy), ProtoModule (copy), t (copy), ComponentSharedModule (copy)
 		local NewModule = Module365.new()
 		local v264 = 0
@@ -60908,7 +60908,7 @@ do
 		return NewModule
 	end
 
-	function Module365:jsonEncode() --[[ Line: 90434 ]]
+	function Module365:jsonEncode()
 		local t = {}
 		
 		if self.props ~= nil then
@@ -60923,7 +60923,7 @@ do
 		return t
 	end
 
-	function Module365:jsonDecode() --[[ Line: 90452 ]]
+	function Module365:jsonDecode()
 		-- upvalues: Module365 (copy), t (copy), ComponentSharedModule (copy)
 		local NewModule = Module365.new()
 		
@@ -60953,7 +60953,7 @@ do
 	local Module366 = {}
 	Module366.__index = Module366
 
-	function Module366.new(p1) --[[ Line: 90489 ]]
+	function Module366.new(p1)
 		-- upvalues: Module366 (copy)
 		return (setmetatable({
 			label = if p1 == nil or p1.label == nil then nil else p1.label,
@@ -60967,7 +60967,7 @@ do
 		}, Module366))
 	end
 
-	function Module366:encode() --[[ Line: 90502 ]]
+	function Module366:encode()
 		-- upvalues: ProtoModule (copy)
 		local Buf = buffer.create(0)
 		local Count = 0
@@ -61018,7 +61018,7 @@ do
 		return Buf1
 	end
 
-	function Module366.decode(Buf) --[[ Line: 90559 ]]
+	function Module366.decode(Buf)
 		-- upvalues: Module366 (copy), ProtoModule (copy), PropTypesModule (copy), ActionsModule (copy)
 		local NewModule = Module366.new()
 		local v264 = 0
@@ -61079,7 +61079,7 @@ do
 		return NewModule
 	end
 
-	function Module366:jsonEncode() --[[ Line: 90637 ]]
+	function Module366:jsonEncode()
 		local t = {}
 		
 		if self.label ~= nil then
@@ -61109,7 +61109,7 @@ do
 		return t
 	end
 
-	function Module366:jsonDecode() --[[ Line: 90675 ]]
+	function Module366:jsonDecode()
 		-- upvalues: Module366 (copy), PropTypesModule (copy), ActionsModule (copy)
 		local NewModule = Module366.new()
 		
@@ -61164,14 +61164,14 @@ do
 	local Module367 = {}
 	Module367.__index = Module367
 
-	function Module367.new(p1) --[[ Line: 90749 ]]
+	function Module367.new(p1)
 		-- upvalues: Module367 (copy)
 		return (setmetatable({
 			aria_label = if p1 == nil or p1.aria_label == nil then nil else p1.aria_label
 		}, Module367))
 	end
 
-	function Module367:encode() --[[ Line: 90755 ]]
+	function Module367:encode()
 		-- upvalues: ProtoModule (copy)
 		local Buf = buffer.create(0)
 		local Count = 0
@@ -61187,7 +61187,7 @@ do
 		return Buf1
 	end
 
-	function Module367.decode(Buf) --[[ Line: 90770 ]]
+	function Module367.decode(Buf)
 		-- upvalues: Module367 (copy), ProtoModule (copy), PropTypesModule (copy)
 		local NewModule = Module367.new()
 		local v265 = 0
@@ -61220,7 +61220,7 @@ do
 		return NewModule
 	end
 
-	function Module367:jsonEncode() --[[ Line: 90813 ]]
+	function Module367:jsonEncode()
 		local t = {}
 		
 		if self.aria_label ~= nil then
@@ -61229,7 +61229,7 @@ do
 		return t
 	end
 
-	function Module367:jsonDecode() --[[ Line: 90823 ]]
+	function Module367:jsonDecode()
 		-- upvalues: Module367 (copy), PropTypesModule (copy)
 		local NewModule = Module367.new()
 		
@@ -61251,7 +61251,7 @@ do
 	local Module368 = {}
 	Module368.__index = Module368
 
-	function Module368.new(p1) --[[ Line: 90851 ]]
+	function Module368.new(p1)
 		-- upvalues: Module368 (copy)
 		return (setmetatable({
 			props = if p1 == nil or p1.props == nil then nil else p1.props,
@@ -61259,7 +61259,7 @@ do
 		}, Module368))
 	end
 
-	function Module368:encode() --[[ Line: 90860 ]]
+	function Module368:encode()
 		-- upvalues: ProtoModule (copy)
 		local Buf = buffer.create(0)
 		local Count = 0
@@ -61280,7 +61280,7 @@ do
 		return Buf1
 	end
 
-	function Module368.decode(Buf) --[[ Line: 90881 ]]
+	function Module368.decode(Buf)
 		-- upvalues: Module368 (copy), ProtoModule (copy), t (copy), ComponentSharedModule (copy)
 		local NewModule = Module368.new()
 		local v266 = 0
@@ -61317,7 +61317,7 @@ do
 		return NewModule
 	end
 
-	function Module368:jsonEncode() --[[ Line: 90929 ]]
+	function Module368:jsonEncode()
 		local t = {}
 		
 		if self.props ~= nil then
@@ -61329,7 +61329,7 @@ do
 		return t
 	end
 
-	function Module368:jsonDecode() --[[ Line: 90943 ]]
+	function Module368:jsonDecode()
 		-- upvalues: Module368 (copy), t (copy), ComponentSharedModule (copy)
 		local NewModule = Module368.new()
 		
@@ -61353,7 +61353,7 @@ do
 	local Module369 = {}
 	Module369.__index = Module369
 
-	function Module369.new(p1) --[[ Line: 90972 ]]
+	function Module369.new(p1)
 		-- upvalues: Module369 (copy)
 		return (setmetatable({
 			content_type = if p1 == nil or p1.content_type == nil then nil else p1.content_type,
@@ -61381,7 +61381,7 @@ do
 		}, Module369))
 	end
 
-	function Module369:encode() --[[ Line: 91011 ]]
+	function Module369:encode()
 		-- upvalues: ProtoModule (copy)
 		local Buf = buffer.create(0)
 		local Count = 0
@@ -61502,7 +61502,7 @@ do
 		return Buf1
 	end
 
-	function Module369.decode(Buf) --[[ Line: 91152 ]]
+	function Module369.decode(Buf)
 		-- upvalues: Module369 (copy), ProtoModule (copy), PropTypesModule (copy), t (copy), ActionsModule (copy)
 		local NewModule = Module369.new()
 		local v266 = 0
@@ -61619,7 +61619,7 @@ do
 		return NewModule
 	end
 
-	function Module369:jsonEncode() --[[ Line: 91303 ]]
+	function Module369:jsonEncode()
 		local t = {}
 		
 		if self.content_type ~= nil then
@@ -61691,7 +61691,7 @@ do
 		return t
 	end
 
-	function Module369:jsonDecode() --[[ Line: 91397 ]]
+	function Module369:jsonDecode()
 		-- upvalues: Module369 (copy), PropTypesModule (copy), t (copy), ActionsModule (copy)
 		local NewModule = Module369.new()
 		
@@ -61836,14 +61836,14 @@ do
 	local Module370 = {}
 	Module370.__index = Module370
 
-	function Module370.new(p1) --[[ Line: 91626 ]]
+	function Module370.new(p1)
 		-- upvalues: Module370 (copy)
 		return (setmetatable({
 			oneof_prop = if p1 == nil or p1.oneof_prop == nil then nil else p1.oneof_prop
 		}, Module370))
 	end
 
-	function Module370:encode() --[[ Line: 91634 ]]
+	function Module370:encode()
 		-- upvalues: ProtoModule (copy)
 		local Buf = buffer.create(0)
 		local Count = 0
@@ -61881,7 +61881,7 @@ do
 		return Buf1
 	end
 
-	function Module370.decode(Buf) --[[ Line: 91671 ]]
+	function Module370.decode(Buf)
 		-- upvalues: Module370 (copy), ProtoModule (copy), ExperimentalPropTypesModule (copy), ActionsModule (copy), t (copy)
 		local NewModule = Module370.new()
 		local v267 = 0
@@ -61952,7 +61952,7 @@ do
 		return NewModule
 	end
 
-	function Module370:jsonEncode() --[[ Line: 91752 ]]
+	function Module370:jsonEncode()
 		local t = {}
 		
 		if self.oneof_prop ~= nil then
@@ -61988,7 +61988,7 @@ do
 		return t
 	end
 
-	function Module370:jsonDecode() --[[ Line: 91774 ]]
+	function Module370:jsonDecode()
 		-- upvalues: Module370 (copy), ExperimentalPropTypesModule (copy), ActionsModule (copy), t (copy)
 		local NewModule = Module370.new()
 		
@@ -62064,7 +62064,7 @@ do
 	local Module371 = {}
 	Module371.__index = Module371
 
-	function Module371.new(p1) --[[ Line: 91862 ]]
+	function Module371.new(p1)
 		-- upvalues: Module371 (copy)
 		return (setmetatable({
 			experimental_type = if p1 == nil or p1.experimental_type == nil then "" else p1.experimental_type,
@@ -62073,7 +62073,7 @@ do
 		}, Module371))
 	end
 
-	function Module371:encode() --[[ Line: 91872 ]]
+	function Module371:encode()
 		-- upvalues: ProtoModule (copy)
 		local Buf = buffer.create(0)
 		local Count = 0
@@ -62104,7 +62104,7 @@ do
 		return Buf1
 	end
 
-	function Module371.decode(Buf) --[[ Line: 91906 ]]
+	function Module371.decode(Buf)
 		-- upvalues: Module371 (copy), ProtoModule (copy), t (copy), ComponentSharedModule (copy)
 		local NewModule = Module371.new()
 		local v268 = 0
@@ -62147,7 +62147,7 @@ do
 		return NewModule
 	end
 
-	function Module371:jsonEncode() --[[ Line: 91966 ]]
+	function Module371:jsonEncode()
 		local t = {}
 		
 		if self.experimental_type ~= nil and self.experimental_type ~= "" then
@@ -62167,7 +62167,7 @@ do
 		return t
 	end
 
-	function Module371:jsonDecode() --[[ Line: 91988 ]]
+	function Module371:jsonDecode()
 		-- upvalues: Module371 (copy), t (copy), ComponentSharedModule (copy)
 		local NewModule = Module371.new()
 		
@@ -62202,7 +62202,7 @@ do
 	local Module372 = {}
 	Module372.__index = Module372
 
-	function Module372.new(p1) --[[ Line: 92030 ]]
+	function Module372.new(p1)
 		-- upvalues: Module372 (copy)
 		return (setmetatable({
 			key = if p1 == nil or p1.key == nil then "" else p1.key,
@@ -62210,7 +62210,7 @@ do
 		}, Module372))
 	end
 
-	function Module372:encode() --[[ Line: 92039 ]]
+	function Module372:encode()
 		-- upvalues: ProtoModule (copy)
 		local Buf = buffer.create(0)
 		local Count = 0
@@ -62230,7 +62230,7 @@ do
 		return Buf1
 	end
 
-	function Module372.decode(Buf) --[[ Line: 92059 ]]
+	function Module372.decode(Buf)
 		-- upvalues: Module372 (copy), ProtoModule (copy), t (copy)
 		local NewModule = Module372.new()
 		local v269 = 0
@@ -62267,7 +62267,7 @@ do
 		return NewModule
 	end
 
-	function Module372:jsonEncode() --[[ Line: 92107 ]]
+	function Module372:jsonEncode()
 		local t = {}
 		
 		if self.key ~= nil and self.key ~= "" then
@@ -62279,7 +62279,7 @@ do
 		return t
 	end
 
-	function Module372:jsonDecode() --[[ Line: 92121 ]]
+	function Module372:jsonDecode()
 		-- upvalues: Module372 (copy), t (copy)
 		local NewModule = Module372.new()
 		
@@ -62301,7 +62301,7 @@ do
 	local Module373 = {}
 	Module373.__index = Module373
 
-	function Module373.new(p1) --[[ Line: 92151 ]]
+	function Module373.new(p1)
 		-- upvalues: Module373 (copy)
 		return (setmetatable({
 			props = if p1 == nil or p1.props == nil then nil else p1.props,
@@ -62309,7 +62309,7 @@ do
 		}, Module373))
 	end
 
-	function Module373:encode() --[[ Line: 92158 ]]
+	function Module373:encode()
 		-- upvalues: ProtoModule (copy)
 		local Buf = buffer.create(0)
 		local Count = 0
@@ -62330,7 +62330,7 @@ do
 		return Buf1
 	end
 
-	function Module373.decode(Buf) --[[ Line: 92179 ]]
+	function Module373.decode(Buf)
 		-- upvalues: Module373 (copy), ProtoModule (copy), t (copy), ComponentSharedModule (copy)
 		local NewModule = Module373.new()
 		local v270 = 0
@@ -62367,7 +62367,7 @@ do
 		return NewModule
 	end
 
-	function Module373:jsonEncode() --[[ Line: 92227 ]]
+	function Module373:jsonEncode()
 		local t = {}
 		
 		if self.props ~= nil then
@@ -62379,7 +62379,7 @@ do
 		return t
 	end
 
-	function Module373:jsonDecode() --[[ Line: 92241 ]]
+	function Module373:jsonDecode()
 		-- upvalues: Module373 (copy), t (copy), ComponentSharedModule (copy)
 		local NewModule = Module373.new()
 		
@@ -62401,7 +62401,7 @@ do
 	local Module374 = {}
 	Module374.__index = Module374
 
-	function Module374.new(p1) --[[ Line: 92270 ]]
+	function Module374.new(p1)
 		-- upvalues: Module374 (copy)
 		return (setmetatable({
 			layout_order = if p1 == nil or p1.layout_order == nil then nil else p1.layout_order,
@@ -62410,7 +62410,7 @@ do
 		}, Module374))
 	end
 
-	function Module374:encode() --[[ Line: 92278 ]]
+	function Module374:encode()
 		-- upvalues: ProtoModule (copy)
 		local Buf = buffer.create(0)
 		local Count = 0
@@ -62436,7 +62436,7 @@ do
 		return Buf1
 	end
 
-	function Module374.decode(Buf) --[[ Line: 92305 ]]
+	function Module374.decode(Buf)
 		-- upvalues: Module374 (copy), ProtoModule (copy), PropTypesModule (copy)
 		local NewModule = Module374.new()
 		local v271 = 0
@@ -62477,7 +62477,7 @@ do
 		return NewModule
 	end
 
-	function Module374:jsonEncode() --[[ Line: 92358 ]]
+	function Module374:jsonEncode()
 		local t = {}
 		
 		if self.layout_order ~= nil then
@@ -62492,7 +62492,7 @@ do
 		return t
 	end
 
-	function Module374:jsonDecode() --[[ Line: 92376 ]]
+	function Module374:jsonDecode()
 		-- upvalues: Module374 (copy), PropTypesModule (copy)
 		local NewModule = Module374.new()
 		
@@ -62528,7 +62528,7 @@ do
 	local Module375 = {}
 	Module375.__index = Module375
 
-	function Module375.new(p1) --[[ Line: 92422 ]]
+	function Module375.new(p1)
 		-- upvalues: Module375 (copy)
 		return (setmetatable({
 			props = if p1 == nil or p1.props == nil then nil else p1.props,
@@ -62536,7 +62536,7 @@ do
 		}, Module375))
 	end
 
-	function Module375:encode() --[[ Line: 92429 ]]
+	function Module375:encode()
 		-- upvalues: ProtoModule (copy)
 		local Buf = buffer.create(0)
 		local Count = 0
@@ -62557,7 +62557,7 @@ do
 		return Buf1
 	end
 
-	function Module375.decode(Buf) --[[ Line: 92450 ]]
+	function Module375.decode(Buf)
 		-- upvalues: Module375 (copy), ProtoModule (copy), t (copy), ComponentSharedModule (copy)
 		local NewModule = Module375.new()
 		local v271 = 0
@@ -62594,7 +62594,7 @@ do
 		return NewModule
 	end
 
-	function Module375:jsonEncode() --[[ Line: 92498 ]]
+	function Module375:jsonEncode()
 		local t = {}
 		
 		if self.props ~= nil then
@@ -62606,7 +62606,7 @@ do
 		return t
 	end
 
-	function Module375:jsonDecode() --[[ Line: 92512 ]]
+	function Module375:jsonDecode()
 		-- upvalues: Module375 (copy), t (copy), ComponentSharedModule (copy)
 		local NewModule = Module375.new()
 		
@@ -62628,7 +62628,7 @@ do
 	local Module376 = {}
 	Module376.__index = Module376
 
-	function Module376.new(p1) --[[ Line: 92541 ]]
+	function Module376.new(p1)
 		-- upvalues: Module376 (copy)
 		return (setmetatable({
 			shape = if p1 == nil or p1.shape == nil then nil else p1.shape,
@@ -62647,7 +62647,7 @@ do
 		}, Module376))
 	end
 
-	function Module376:encode() --[[ Line: 92559 ]]
+	function Module376:encode()
 		-- upvalues: ProtoModule (copy)
 		local Buf = buffer.create(0)
 		local Count = 0
@@ -62723,7 +62723,7 @@ do
 		return Buf1
 	end
 
-	function Module376.decode(Buf) --[[ Line: 92646 ]]
+	function Module376.decode(Buf)
 		-- upvalues: Module376 (copy), ProtoModule (copy), PropTypesModule (copy)
 		local NewModule = Module376.new()
 		local v272 = 0
@@ -62804,7 +62804,7 @@ do
 		return NewModule
 	end
 
-	function Module376:jsonEncode() --[[ Line: 92749 ]]
+	function Module376:jsonEncode()
 		local t = {}
 		
 		if self.shape ~= nil then
@@ -62849,7 +62849,7 @@ do
 		return t
 	end
 
-	function Module376:jsonDecode() --[[ Line: 92807 ]]
+	function Module376:jsonDecode()
 		-- upvalues: Module376 (copy), PropTypesModule (copy)
 		local NewModule = Module376.new()
 		
@@ -62925,7 +62925,7 @@ do
 	local Module377 = {}
 	Module377.__index = Module377
 
-	function Module377.new(p1) --[[ Line: 92915 ]]
+	function Module377.new(p1)
 		-- upvalues: Module377 (copy)
 		return (setmetatable({
 			props = if p1 == nil or p1.props == nil then nil else p1.props,
@@ -62933,7 +62933,7 @@ do
 		}, Module377))
 	end
 
-	function Module377:encode() --[[ Line: 92922 ]]
+	function Module377:encode()
 		-- upvalues: ProtoModule (copy)
 		local Buf = buffer.create(0)
 		local Count = 0
@@ -62954,7 +62954,7 @@ do
 		return Buf1
 	end
 
-	function Module377.decode(Buf) --[[ Line: 92943 ]]
+	function Module377.decode(Buf)
 		-- upvalues: Module377 (copy), ProtoModule (copy), t (copy), ComponentSharedModule (copy)
 		local NewModule = Module377.new()
 		local v273 = 0
@@ -62991,7 +62991,7 @@ do
 		return NewModule
 	end
 
-	function Module377:jsonEncode() --[[ Line: 92991 ]]
+	function Module377:jsonEncode()
 		local t = {}
 		
 		if self.props ~= nil then
@@ -63003,7 +63003,7 @@ do
 		return t
 	end
 
-	function Module377:jsonDecode() --[[ Line: 93005 ]]
+	function Module377:jsonDecode()
 		-- upvalues: Module377 (copy), t (copy), ComponentSharedModule (copy)
 		local NewModule = Module377.new()
 		
@@ -63027,7 +63027,7 @@ do
 	local Module378 = {}
 	Module378.__index = Module378
 
-	function Module378.new(p1) --[[ Line: 93034 ]]
+	function Module378.new(p1)
 		-- upvalues: Module378 (copy)
 		return (setmetatable({
 			version = if p1 == nil or p1.version == nil then nil else p1.version,
@@ -63038,7 +63038,7 @@ do
 		}, Module378))
 	end
 
-	function Module378:encode() --[[ Line: 93046 ]]
+	function Module378:encode()
 		-- upvalues: ProtoModule (copy)
 		local Buf = buffer.create(0)
 		local Count = 0
@@ -63074,7 +63074,7 @@ do
 		return Buf1
 	end
 
-	function Module378.decode(Buf) --[[ Line: 93085 ]]
+	function Module378.decode(Buf)
 		-- upvalues: Module378 (copy), ProtoModule (copy), PropTypesModule (copy)
 		local NewModule = Module378.new()
 		local v273 = 0
@@ -63123,7 +63123,7 @@ do
 		return NewModule
 	end
 
-	function Module378:jsonEncode() --[[ Line: 93148 ]]
+	function Module378:jsonEncode()
 		local t = {}
 		
 		if self.version ~= nil then
@@ -63144,7 +63144,7 @@ do
 		return t
 	end
 
-	function Module378:jsonDecode() --[[ Line: 93174 ]]
+	function Module378:jsonDecode()
 		-- upvalues: Module378 (copy), PropTypesModule (copy)
 		local NewModule = Module378.new()
 		
@@ -63175,7 +63175,7 @@ do
 	local Module379 = {}
 	Module379.__index = Module379
 
-	function Module379.new(p1) --[[ Line: 93215 ]]
+	function Module379.new(p1)
 		-- upvalues: Module379 (copy)
 		return (setmetatable({
 			props = if p1 == nil or p1.props == nil then nil else p1.props,
@@ -63183,7 +63183,7 @@ do
 		}, Module379))
 	end
 
-	function Module379:encode() --[[ Line: 93222 ]]
+	function Module379:encode()
 		-- upvalues: ProtoModule (copy)
 		local Buf = buffer.create(0)
 		local Count = 0
@@ -63204,7 +63204,7 @@ do
 		return Buf1
 	end
 
-	function Module379.decode(Buf) --[[ Line: 93243 ]]
+	function Module379.decode(Buf)
 		-- upvalues: Module379 (copy), ProtoModule (copy), t (copy), ComponentSharedModule (copy)
 		local NewModule = Module379.new()
 		local v274 = 0
@@ -63241,7 +63241,7 @@ do
 		return NewModule
 	end
 
-	function Module379:jsonEncode() --[[ Line: 93291 ]]
+	function Module379:jsonEncode()
 		local t = {}
 		
 		if self.props ~= nil then
@@ -63253,7 +63253,7 @@ do
 		return t
 	end
 
-	function Module379:jsonDecode() --[[ Line: 93305 ]]
+	function Module379:jsonDecode()
 		-- upvalues: Module379 (copy), t (copy), ComponentSharedModule (copy)
 		local NewModule = Module379.new()
 		
@@ -63275,7 +63275,7 @@ do
 	local Module380 = {}
 	Module380.__index = Module380
 
-	function Module380.new(p1) --[[ Line: 93334 ]]
+	function Module380.new(p1)
 		-- upvalues: Module380 (copy)
 		return (setmetatable({
 			reactions = if p1 == nil or p1.reactions == nil then nil else p1.reactions,
@@ -63283,7 +63283,7 @@ do
 		}, Module380))
 	end
 
-	function Module380:encode() --[[ Line: 93343 ]]
+	function Module380:encode()
 		-- upvalues: ProtoModule (copy)
 		local Buf = buffer.create(0)
 		local Count = 0
@@ -63304,7 +63304,7 @@ do
 		return Buf1
 	end
 
-	function Module380.decode(Buf) --[[ Line: 93364 ]]
+	function Module380.decode(Buf)
 		-- upvalues: Module380 (copy), ProtoModule (copy), PropTypesModule (copy)
 		local NewModule = Module380.new()
 		local v275 = 0
@@ -63341,7 +63341,7 @@ do
 		return NewModule
 	end
 
-	function Module380:jsonEncode() --[[ Line: 93413 ]]
+	function Module380:jsonEncode()
 		local t = {}
 		
 		if self.reactions ~= nil then
@@ -63353,7 +63353,7 @@ do
 		return t
 	end
 
-	function Module380:jsonDecode() --[[ Line: 93427 ]]
+	function Module380:jsonDecode()
 		-- upvalues: Module380 (copy), PropTypesModule (copy)
 		local NewModule = Module380.new()
 		
@@ -63380,7 +63380,7 @@ do
 	local Module381 = {}
 	Module381.__index = Module381
 
-	function Module381.new(p1) --[[ Line: 93462 ]]
+	function Module381.new(p1)
 		-- upvalues: Module381 (copy)
 		return (setmetatable({
 			props = if p1 == nil or p1.props == nil then nil else p1.props,
@@ -63388,7 +63388,7 @@ do
 		}, Module381))
 	end
 
-	function Module381:encode() --[[ Line: 93469 ]]
+	function Module381:encode()
 		-- upvalues: ProtoModule (copy)
 		local Buf = buffer.create(0)
 		local Count = 0
@@ -63409,7 +63409,7 @@ do
 		return Buf1
 	end
 
-	function Module381.decode(Buf) --[[ Line: 93490 ]]
+	function Module381.decode(Buf)
 		-- upvalues: Module381 (copy), ProtoModule (copy), t (copy), ComponentSharedModule (copy)
 		local NewModule = Module381.new()
 		local v275 = 0
@@ -63446,7 +63446,7 @@ do
 		return NewModule
 	end
 
-	function Module381:jsonEncode() --[[ Line: 93538 ]]
+	function Module381:jsonEncode()
 		local t = {}
 		
 		if self.props ~= nil then
@@ -63458,7 +63458,7 @@ do
 		return t
 	end
 
-	function Module381:jsonDecode() --[[ Line: 93552 ]]
+	function Module381:jsonDecode()
 		-- upvalues: Module381 (copy), t (copy), ComponentSharedModule (copy)
 		local NewModule = Module381.new()
 		
@@ -63480,7 +63480,7 @@ do
 	local Module382 = {}
 	Module382.__index = Module382
 
-	function Module382.new(p1) --[[ Line: 93581 ]]
+	function Module382.new(p1)
 		-- upvalues: Module382 (copy)
 		return (setmetatable({
 			form_definition = if p1 == nil or p1.form_definition == nil then nil else p1.form_definition,
@@ -63502,7 +63502,7 @@ do
 		}, Module382))
 	end
 
-	function Module382:encode() --[[ Line: 93608 ]]
+	function Module382:encode()
 		-- upvalues: ProtoModule (copy)
 		local Buf = buffer.create(0)
 		local Count = 0
@@ -63593,7 +63593,7 @@ do
 		return Buf1
 	end
 
-	function Module382.decode(Buf) --[[ Line: 93713 ]]
+	function Module382.decode(Buf)
 		-- upvalues: Module382 (copy), ProtoModule (copy), PropTypesModule (copy), ActionsModule (copy)
 		local NewModule = Module382.new()
 		local v276 = 0
@@ -63686,7 +63686,7 @@ do
 		return NewModule
 	end
 
-	function Module382:jsonEncode() --[[ Line: 93834 ]]
+	function Module382:jsonEncode()
 		local t = {}
 		
 		if self.form_definition ~= nil then
@@ -63740,7 +63740,7 @@ do
 		return t
 	end
 
-	function Module382:jsonDecode() --[[ Line: 93904 ]]
+	function Module382:jsonDecode()
 		-- upvalues: Module382 (copy), PropTypesModule (copy), ActionsModule (copy)
 		local NewModule = Module382.new()
 		
@@ -63849,14 +63849,14 @@ do
 	local Module383 = {}
 	Module383.__index = Module383
 
-	function Module383.new(p1) --[[ Line: 94076 ]]
+	function Module383.new(p1)
 		-- upvalues: Module383 (copy)
 		return (setmetatable({
 			kind = if p1 == nil or p1.kind == nil then nil else p1.kind
 		}, Module383))
 	end
 
-	function Module383:encode() --[[ Line: 94082 ]]
+	function Module383:encode()
 		-- upvalues: ProtoModule (copy)
 		local Buf = buffer.create(0)
 		local Count = 0
@@ -64342,7 +64342,7 @@ do
 		return Buf1
 	end
 
-	function Module383.decode(Buf) --[[ Line: 94567 ]]
+	function Module383.decode(Buf)
 		-- upvalues: Module383 (copy), ProtoModule (copy), t (copy)
 		local NewModule = Module383.new()
 		local v277 = 0
@@ -65161,7 +65161,7 @@ do
 		return NewModule
 	end
 
-	function Module383:jsonEncode() --[[ Line: 95255 ]]
+	function Module383:jsonEncode()
 		local t = {}
 		
 		if self.kind ~= nil then
@@ -65757,7 +65757,7 @@ do
 		return t
 	end
 
-	function Module383:jsonDecode() --[[ Line: 95501 ]]
+	function Module383:jsonDecode()
 		-- upvalues: Module383 (copy), t (copy)
 		local NewModule = Module383.new()
 		

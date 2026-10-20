@@ -20,7 +20,7 @@ local config1 = {
 PlayerContext.validateProps = TModule.strictInterface({
 	text = TModule.optional(TModule.string),
 	icon = TModule.optional(TModule.union(TModule.string, TModule.table)),
-	iconSize = TModule.optional(TModule.intersection(TModule.UDim2, function(Vector) --[[ Line: 33 | Named "doesNotUseScale" ]]
+	iconSize = TModule.optional(TModule.intersection(TModule.UDim2, function(Vector)
 		if Vector.X.Scale == 0 and Vector.Y.Scale == 0 then
 			return true
 		else
@@ -53,11 +53,11 @@ PlayerContext.defaultProps = {
 	textXAlignment = Enum.TextXAlignment.Left
 }
 
-function PlayerContext.init(p1) --[[ Line: 87 ]]
+function PlayerContext.init(p1)
 	p1.state = {}
 end
 
-function PlayerContext.render(p1) --[[ Line: 91 ]]
+function PlayerContext.render(p1)
 	-- upvalues: WithStyleModule (copy), GetContentStyleModule (copy), config1 (copy), config (copy), RoactModule (copy), ImageSetComponentModule (copy), GenericTextLabelModule (copy)
 	local ControlState = p1.state.controlState
 	local Text = p1.props.text
@@ -66,7 +66,7 @@ function PlayerContext.render(p1) --[[ Line: 91 ]]
 	local HorizontalAlignment = p1.props.horizontalAlignment
 	local OnActivated = p1.props.onActivated
 	
-	return WithStyleModule(function(p2) --[[ Line: 101 ]]
+	return WithStyleModule(function(p2)
 		-- upvalues: GetContentStyleModule (upval), config1 (upval), ControlState (copy), config (upval), OnActivated (copy), p1 (copy), IconSize (copy), RoactModule (upval), HorizontalAlignment (copy), Icon (copy), ImageSetComponentModule (upval), Text (copy), GenericTextLabelModule (upval)
 		local ContentStyleModule = GetContentStyleModule(config1, ControlState, p2)
 		local ContentStyleModule1 = GetContentStyleModule(config, ControlState, p2)

@@ -1,8 +1,8 @@
 ﻿local config = {
-	cloneFrozen = function(Tbl) --[[ Line: 3 ]]
+	cloneFrozen = function(Tbl)
 		return (table.freeze(table.clone(Tbl)))
 	end,
-	containsEqual = function(p1, p2, List): boolean --[[ Line: 7 ]]
+	containsEqual = function(p1, p2, List): boolean
 		for _, value in List do
 			if p1[value] ~= p2[value] then
 				return false
@@ -12,12 +12,12 @@
 	end
 }
 
-function config.optionalContainsEqual(p3, p4, p5) --[[ Line: 18 ]]
+function config.optionalContainsEqual(p3, p4, p5)
 	-- upvalues: config (copy)
 	return p3 == p4 or p3 ~= nil and (p4 ~= nil and config.containsEqual(p3, p4, p5))
 end
 
-function config.equal(List, List1): boolean --[[ Line: 22 ]]
+function config.equal(List, List1): boolean
 	if List == List1 then
 		return true
 	end

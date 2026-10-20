@@ -2,12 +2,12 @@
 local Layout = require(ViewRecyclerReact.Parent.ViewRecycler).Layout
 local ReactModule = require(ViewRecyclerReact.Parent.React)
 
-local function useManagedLayout(p1, p2) --[[ Line: 6 ]]
+local function useManagedLayout(p1, p2)
 	-- upvalues: ReactModule (copy)
 	local UseMemoResult = ReactModule.useMemo(p1, p2)
-	ReactModule.useEffect(function() --[[ Line: 8 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UseMemoResult (copy)
-		return function() --[[ Line: 9 ]]
+		return function()
 			-- upvalues: UseMemoResult (upval)
 			UseMemoResult.destroy()
 		end
@@ -17,15 +17,15 @@ local function useManagedLayout(p1, p2) --[[ Line: 6 ]]
 end
 
 return {
-	useMeasuredLayout = function(p1) --[[ Line: 27 ]]
+	useMeasuredLayout = function(p1)
 		-- upvalues: ReactModule (copy), Layout (copy)
-		local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 28 ]]
+		local UseMemoResult = ReactModule.useMemo(function()
 			-- upvalues: Layout (upval), p1 (copy)
 			return Layout.measured(p1)
 		end, {})
-		ReactModule.useEffect(function() --[[ Line: 31 ]]
+		ReactModule.useEffect(function()
 			-- upvalues: UseMemoResult (copy)
-			return function() --[[ Line: 32 ]]
+			return function()
 				-- upvalues: UseMemoResult (upval)
 				UseMemoResult.destroy()
 			end
@@ -33,9 +33,9 @@ return {
 		
 		return UseMemoResult
 	end,
-	useUniformLayout = function(p1) --[[ Line: 16 ]]
+	useUniformLayout = function(p1)
 		-- upvalues: useManagedLayout (copy), Layout (copy)
-		return (useManagedLayout(function() --[[ Line: 17 ]]
+		return (useManagedLayout(function()
 			-- upvalues: Layout (upval), p1 (copy)
 			return Layout.uniform(p1)
 		end, {

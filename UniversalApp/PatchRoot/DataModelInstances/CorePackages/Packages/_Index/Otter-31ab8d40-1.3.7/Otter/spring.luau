@@ -6,12 +6,12 @@ local SinFunction = math.sin
 local CosFunction = math.cos
 local SqrtFunction = math.sqrt
 
-local function _(p1, p2, p3) --[[ Line: 54 | Named "translateParameters" ]]
+local function _(p1, p2, p3)
 	-- upvalues: SqrtFunction (copy)
 	return p1 / (SqrtFunction(p3 * p2) * 2), SqrtFunction(p2 / p3) / 2 / 3.141592653589793
 end
 
-return function(p1, p2) --[[ Line: 60 | Named "spring" ]]
+return function(p1, p2)
 	-- upvalues: AssignFunction (copy), SqrtFunction (copy), ExpFunction (copy), CosFunction (copy), SinFunction (copy), AbsFunction (copy)
 	local config = {
 		dampingRatio = 1,
@@ -43,7 +43,7 @@ return function(p1, p2) --[[ Line: 60 | Named "spring" ]]
 	assert(RestingPositionLimit >= 0, "Expected restingPositionLimit >= 0")
 	
 	return {
-		step = function(p3, p4) --[[ Line: 97 ]]
+		step = function(p3, p4)
 			-- upvalues: p1 (copy), DampingRatio (copy), ScaledFrequency (copy), ExpFunction (upval), SqrtFunction (upval), CosFunction (upval), SinFunction (upval), p1 (copy), AbsFunction (upval), RestingVelocityLimit (copy), RestingPositionLimit (copy)
 			local Velocity = p3.velocity or 0
 			local ValueDelta = p3.value - p1

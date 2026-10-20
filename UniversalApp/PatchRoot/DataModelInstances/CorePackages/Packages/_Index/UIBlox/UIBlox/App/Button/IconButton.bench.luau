@@ -6,9 +6,9 @@ local MountComponentTimesFunction = BenchmarksModule.mountComponentTimes
 local ScrollComponentTimesFunction = BenchmarksModule.scrollComponentTimes
 local Element = require(Parent2.React).createElement(require(Parent.IconButton), {
 	icon = "rbxassetid://7173696656978",
-	onActivated = function() --[[ Line: 17 ]] end
+	onActivated = function() end
 })
-require(Parent2.Dev.JestGlobals).describe("IconButton", function() --[[ Line: 21 ]]
+require(Parent2.Dev.JestGlobals).describe("IconButton", function()
 	-- upvalues: MountComponentTimesFunction (copy), Element (copy), ScrollComponentTimesFunction (copy)
 	MountComponentTimesFunction(Element, 1000, "IconButton")
 	ScrollComponentTimesFunction(Element, 1000, "IconButton")

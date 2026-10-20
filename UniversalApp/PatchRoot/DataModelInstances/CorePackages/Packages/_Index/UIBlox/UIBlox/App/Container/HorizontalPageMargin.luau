@@ -23,16 +23,16 @@ PageMargin.defaultProps = {
 	size = UDim2.fromScale(1, 1)
 }
 
-function PageMargin.init(p1) --[[ Line: 41 ]]
+function PageMargin.init(p1)
 	-- upvalues: RoactModule (copy), GetPageMarginModule (copy)
 	p1.state = {}
 	p1.ref = RoactModule.createRef()
 	
-	function p1.onResize(Frame) --[[ Line: 44 ]]
+	function p1.onResize(Frame)
 		-- upvalues: p1 (copy), GetPageMarginModule (upval)
 		if p1.mounted then
 			local X = Frame.AbsoluteSize.X
-			p1:setState(function(p2) --[[ Line: 47 ]]
+			p1:setState(function(p2)
 				-- upvalues: GetPageMarginModule (upval), X (copy)
 				local PageMarginModule = GetPageMarginModule(X)
 				
@@ -42,7 +42,7 @@ function PageMargin.init(p1) --[[ Line: 41 ]]
 	end
 end
 
-function PageMargin.render(p1) --[[ Line: 61 ]]
+function PageMargin.render(p1)
 	-- upvalues: RoactModule (copy), CryoModule (copy)
 	return RoactModule.createElement("Frame", {
 		AnchorPoint = p1.props.anchorPoint,
@@ -64,7 +64,7 @@ function PageMargin.render(p1) --[[ Line: 61 ]]
 	}))
 end
 
-function PageMargin.didMount(p1) --[[ Line: 86 ]]
+function PageMargin.didMount(p1)
 	p1.mounted = true
 	
 	if p1.ref.current then
@@ -72,7 +72,7 @@ function PageMargin.didMount(p1) --[[ Line: 86 ]]
 	end
 end
 
-function PageMargin.willUnmount(p1) --[[ Line: 93 ]]
+function PageMargin.willUnmount(p1)
 	p1.mounted = false
 end
 

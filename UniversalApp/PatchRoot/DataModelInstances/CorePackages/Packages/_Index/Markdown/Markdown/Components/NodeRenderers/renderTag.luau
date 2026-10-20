@@ -7,7 +7,7 @@ local ImageElement = require(Parent.InlineLayout).Components.InlineLayoutElement
 local JoinTagsModule = require(Markdown.Utils.joinTags)
 local MergeContextsModule = require(Markdown.Utils.mergeContexts)
 
-return function(p1, p2) --[[ Line: 12 | Named "renderTag" ]]
+return function(p1, p2)
 	-- upvalues: ImageElement (copy), ReactModule (copy), JoinTagsModule (copy), FoundationModule (copy), MergeContextsModule (copy)
 	if p1.text == "img" then
 		local Size = p2.imageStyles.size
@@ -51,7 +51,7 @@ return function(p1, p2) --[[ Line: 12 | Named "renderTag" ]]
 			LayoutOrder = p1.index,
 			text = p1.attributes.text,
 			icon = p1.attributes.icon,
-			onActivated = function() --[[ Line: 68 ]]
+			onActivated = function()
 				-- upvalues: p2 (copy), p1 (copy)
 				p2.linkCallback(p1.attributes.url)
 			end

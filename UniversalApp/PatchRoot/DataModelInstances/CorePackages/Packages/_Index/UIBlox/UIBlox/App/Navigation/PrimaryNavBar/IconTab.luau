@@ -22,7 +22,7 @@ local config = {
 	}
 }
 
-return function(p1) --[[ Line: 45 | Named "IconTab" ]]
+return function(p1)
 	-- upvalues: Object (copy), config (copy), ControlStateModule (copy), UseStyleModule (copy), GetIconSizeModule (copy), IconSizeModule (copy), ConstantsModule (copy), HorizontalContainerModule (copy), ReactModule (copy), Label (copy), PlacementModule (copy), GenericTextLabelModule (copy)
 	local AssignResult = Object.assign({}, config, p1)
 	local Item = AssignResult.item

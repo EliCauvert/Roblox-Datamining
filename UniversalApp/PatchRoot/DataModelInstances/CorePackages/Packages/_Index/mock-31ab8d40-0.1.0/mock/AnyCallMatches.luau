@@ -3,7 +3,7 @@ local CmpLiteralArgsModule = require(script.Parent.cmpLiteralArgs)
 local CmpPredicateArgsModule = require(script.Parent.cmpPredicateArgs)
 local FmtArgsModule = require(script.Parent.fmtArgs)
 local AnyCallMatchesModule = {
-	args = function(p1, Callback) --[[ Line: 10 ]]
+	args = function(p1, Callback)
 		-- upvalues: GetCallsModule (copy), FmtArgsModule (copy)
 		local CallsModule = GetCallsModule(p1)
 		local CountCallsModule = #CallsModule
@@ -31,21 +31,21 @@ local AnyCallMatchesModule = {
 	end
 }
 
-function AnyCallMatchesModule.literals(p2, ...) --[[ Line: 36 ]]
+function AnyCallMatchesModule.literals(p2, ...)
 	-- upvalues: AnyCallMatchesModule (copy), CmpLiteralArgsModule (copy)
 	local Packed = table.pack(...)
 	
-	return AnyCallMatchesModule.args(p2, function(p3) --[[ Line: 38 ]]
+	return AnyCallMatchesModule.args(p2, function(p3)
 		-- upvalues: CmpLiteralArgsModule (upval), Packed (copy)
 		return CmpLiteralArgsModule(Packed, p3)
 	end)
 end
 
-function AnyCallMatchesModule.predicates(p2, ...) --[[ Line: 43 ]]
+function AnyCallMatchesModule.predicates(p2, ...)
 	-- upvalues: AnyCallMatchesModule (copy), CmpPredicateArgsModule (copy)
 	local Packed = table.pack(...)
 	
-	return AnyCallMatchesModule.args(p2, function(p3) --[[ Line: 45 ]]
+	return AnyCallMatchesModule.args(p2, function(p3)
 		-- upvalues: CmpPredicateArgsModule (upval), Packed (copy)
 		return CmpPredicateArgsModule(Packed, p3)
 	end)

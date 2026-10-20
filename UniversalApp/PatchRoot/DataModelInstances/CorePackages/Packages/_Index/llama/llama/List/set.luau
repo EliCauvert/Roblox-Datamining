@@ -1,4 +1,4 @@
-﻿return function(p1, p2: number, p3) --[[ Line: 2 | Named "set" ]]
+﻿return function(p1, p2: number, p3)
 	local ValueType = type(p1)
 	assert(ValueType == "table", "expected a table for first argument, got " .. ValueType)
 	local CountP0 = #p1

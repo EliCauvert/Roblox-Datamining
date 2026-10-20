@@ -5,11 +5,11 @@ local _ = require(Foundation.Enums.ThemeName)
 local TokenProcessingUtilitiesModule = require(Foundation.Providers.Style.Tokens.TokenProcessingUtilities)
 local TokensModule = require(Foundation.Providers.Style.Tokens)
 
-local function _(Text: string) --[[ Line: 15 | Named "tokenPathToAttributeBase" ]]
+local function _(Text: string)
 	return Text:gsub("%.", ""):gsub("_", "")
 end
 
-local function emitLeafAttributes(p1, Key, ResolveTokenOverrideResult) --[[ Line: 20 ]]
+local function emitLeafAttributes(p1, Key, ResolveTokenOverrideResult)
 	-- upvalues: emitLeafAttributes (copy)
 	if type(ResolveTokenOverrideResult) ~= "table" then
 		p1[Key] = ResolveTokenOverrideResult
@@ -21,7 +21,7 @@ local function emitLeafAttributes(p1, Key, ResolveTokenOverrideResult) --[[ Line
 	end
 end
 
-return function(p2, p3, p4, List) --[[ Line: 37 | Named "getOverrideAttributes" ]]
+return function(p2, p3, p4, List)
 	-- upvalues: TokensModule (copy), TokenProcessingUtilitiesModule (copy), emitLeafAttributes (copy)
 	local t = {}
 	

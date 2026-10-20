@@ -5,17 +5,17 @@ local ErrorSourceStringsModule = require(Parent.validationSystem.ErrorSourceStri
 local GetFFlagUGCValidateEmissiveMapAllowedModule = require(Parent.flags.getFFlagUGCValidateEmissiveMapAllowed)
 local GetFFlagUGCValidateDecalBlockEmissivesModule = require(Parent.flags.getFFlagUGCValidateDecalBlockEmissives)
 
-local function _(p1): boolean --[[ Line: 32 | Named "hasEmissiveMask" ]]
+local function _(p1): boolean
 	return p1.EmissiveMaskContent.SourceType ~= Enum.ContentSourceType.None
 end
 
-local function isDecalEmissive(Decal): boolean --[[ Line: 37 ]]
+local function isDecalEmissive(Decal): boolean
 	local EmissiveTint = Decal.EmissiveTint
 	
 	return Decal.EmissiveMaskContent.SourceType ~= Enum.ContentSourceType.None or (math.abs(Decal.EmissiveStrength - 1) > 0.00001 or (math.abs(EmissiveTint.R - 1) > 0.00001 or (math.abs(EmissiveTint.G - 1) > 0.00001 or math.abs(EmissiveTint.B - 1) > 0.00001)))
 end
 
-local function reportEmissiveDecals(p1, Descendants) --[[ Line: 47 ]]
+local function reportEmissiveDecals(p1, Descendants)
 	-- upvalues: isDecalEmissive (copy), ErrorSourceStringsModule (copy)
 	for _, Decal in Descendants do
 		if Decal:IsA("Decal") and isDecalEmissive(Decal) then
@@ -24,7 +24,7 @@ local function reportEmissiveDecals(p1, Descendants) --[[ Line: 47 ]]
 	end
 end
 
-local function reportInExperienceEmissive(p2, Descendants, ConsumerConfig) --[[ Line: 58 ]]
+local function reportInExperienceEmissive(p2, Descendants, ConsumerConfig)
 	-- upvalues: ValidationEnumsModule (copy), ErrorSourceStringsModule (copy)
 	if ConsumerConfig.consumerEnv ~= ValidationEnumsModule.ConsumerEnv.IEC and ConsumerConfig.backendConfigs.universeId == nil then return end
 	for _, SurfaceAppearance in Descendants do
@@ -48,12 +48,12 @@ return {
 		ValidationEnumsModule.SharedDataMember.consumerConfig,
 		ValidationEnumsModule.SharedDataMember.rootInstance
 	},
-	fflag = function() --[[ Line: 27 ]]
+	fflag = function()
 		-- upvalues: GetFFlagUGCValidateEmissiveMapAllowedModule (copy), GetFFlagUGCValidateDecalBlockEmissivesModule (copy)
 		return GetFFlagUGCValidateEmissiveMapAllowedModule() or GetFFlagUGCValidateDecalBlockEmissivesModule()
 	end,
 	expectedFailures = {},
-	run = function(p3, p4) --[[ Line: 79 ]]
+	run = function(p3, p4)
 		-- upvalues: GetFFlagUGCValidateDecalBlockEmissivesModule (copy), reportEmissiveDecals (copy), GetFFlagUGCValidateEmissiveMapAllowedModule (copy), reportInExperienceEmissive (copy)
 		local RootInstance = p4.rootInstance
 		local Descendants = RootInstance:GetDescendants()

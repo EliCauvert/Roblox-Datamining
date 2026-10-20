@@ -17,17 +17,17 @@ local ValidationRulesUtil = {
 		LeftLowerLeg = "LeftKneeRigAttachment",
 		LeftUpperLeg = "LeftHipRigAttachment"
 	},
-	getRules = function(p1) --[[ Line: 36 ]]
+	getRules = function(p1)
 		-- upvalues: AvatarCreationService (copy)
 		if not p1.rules then
 			p1.rules = AvatarCreationService:GetValidationRules()
 		end
 		return p1.rules
 	end,
-	getBodyPartMaxTrianglesRule = function(p1, p2) --[[ Line: 44 ]]
+	getBodyPartMaxTrianglesRule = function(p1, p2)
 		return p1:getRules().MeshRules.BodyPartMaxTriangles[p2]
 	end,
-	getMakeupRules = function(p1) --[[ Line: 48 ]]
+	getMakeupRules = function(p1)
 		local MakeupRules = p1:getRules().MakeupRules
 		local t = {}
 		
@@ -64,7 +64,7 @@ local ValidationRulesUtil = {
 		
 		return t
 	end,
-	getAccessoryRules = function(p2, p3) --[[ Line: 89 ]]
+	getAccessoryRules = function(p2, p3)
 		for i, accessoryRule in p2:getRules().AccessoryRules do
 			local config = {
 				rigidAllowed = accessoryRule.RigidAllowed,
@@ -81,7 +81,7 @@ local ValidationRulesUtil = {
 	end
 }
 
-function ValidationRulesUtil.getBodyPartRules(p4, p5) --[[ Line: 107 ]]
+function ValidationRulesUtil.getBodyPartRules(p4, p5)
 	-- upvalues: ValidationRulesUtil (copy)
 	for i, bodyPartRule in p4:getRules().BodyPartRules do
 		local config = { isBodyPart = true, bounds = {}, subParts = {} }
@@ -111,7 +111,7 @@ function ValidationRulesUtil.getBodyPartRules(p4, p5) --[[ Line: 107 ]]
 	end
 end
 
-function ValidationRulesUtil.getFullBodyRulesBounds(p6) --[[ Line: 150 ]]
+function ValidationRulesUtil.getFullBodyRulesBounds(p6)
 	local t = {}
 	
 	for i, bound in p6:getRules().FullBodyRules.Bounds do
@@ -120,7 +120,7 @@ function ValidationRulesUtil.getFullBodyRulesBounds(p6) --[[ Line: 150 ]]
 	return t
 end
 
-function ValidationRulesUtil:getLCSizeLimit(p7, Object) --[[ Line: 161 ]]
+function ValidationRulesUtil:getLCSizeLimit(p7, Object)
 	-- upvalues: ValidationRulesUtil (copy)
 	for _, attachment in ValidationRulesUtil:getRules().AccessoryRules[p7].Attachments do
 		if Object:FindFirstChild(attachment.Name) then

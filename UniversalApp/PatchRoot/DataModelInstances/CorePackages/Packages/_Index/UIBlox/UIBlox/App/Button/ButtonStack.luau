@@ -37,12 +37,12 @@ ButtonStack.defaultProps = {
 	isRoactGamepadEnabled = true
 }
 
-function ButtonStack.init(p1) --[[ Line: 71 ]]
+function ButtonStack.init(p1)
 	-- upvalues: RoactGamepadModule (copy)
 	p1.buttonRefs = RoactGamepadModule.createRefCache()
 	p1.state = { frameWidth = 0 }
 	
-	function p1.updateFrameSize(Frame) --[[ Line: 78 ]]
+	function p1.updateFrameSize(Frame)
 		-- upvalues: p1 (copy)
 		local X = Frame.AbsoluteSize.X
 		
@@ -52,9 +52,9 @@ function ButtonStack.init(p1) --[[ Line: 71 ]]
 	end
 end
 
-function ButtonStack.render(p1) --[[ Line: 88 ]]
+function ButtonStack.render(p1)
 	-- upvalues: WithStyleModule (copy), GetTextSizeModule (copy), ButtonTypeModule (copy), CryoModule (copy), RoactModule (copy), ButtonModule (copy), RoactGamepadModule (copy), FitFrameOnAxis (copy)
-	return WithStyleModule(function(p2) --[[ Line: 89 ]]
+	return WithStyleModule(function(p2)
 		-- upvalues: p1 (copy), GetTextSizeModule (upval), ButtonTypeModule (upval), CryoModule (upval), RoactModule (upval), ButtonModule (upval), RoactGamepadModule (upval), FitFrameOnAxis (upval)
 		local _Font = p2.Font
 		local ScaledRelativeSize = _Font.Body.RelativeSize * _Font.BaseSize
@@ -122,7 +122,7 @@ function ButtonStack.render(p1) --[[ Line: 88 ]]
 	end)
 end
 
-local ForwardRefResult = RoactModule.forwardRef(function(p3, FrameRef) --[[ Line: 190 ]]
+local ForwardRefResult = RoactModule.forwardRef(function(p3, FrameRef)
 	-- upvalues: RoactModule (copy), ButtonStack (copy), CryoModule (copy)
 	return RoactModule.createElement(ButtonStack, CryoModule.Dictionary.join(p3, { frameRef = FrameRef }))
 end)

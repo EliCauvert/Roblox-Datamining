@@ -11,7 +11,7 @@ local UseResponsiveModule = require(Foundation.Providers.Responsive.useResponsiv
 local UseTokensModule = require(Foundation.Providers.Style.useTokens)
 local WithDefaultsModule = require(Foundation.Utility.withDefaults)
 
-local function DebugCol(Frame) --[[ Line: 29 ]]
+local function DebugCol(Frame)
 	-- upvalues: ReactModule (copy), ViewModule (copy)
 	return ReactModule.createElement(ViewModule, {
 		Size = Frame.size or UDim2.new(0, Frame.width or 0, 1, 0),
@@ -23,7 +23,7 @@ end
 
 local config = { debugTransparency = 0.7 }
 
-return function(p1) --[[ Line: 48 | Named "GridDebug" ]]
+return function(p1)
 	-- upvalues: WithDefaultsModule (copy), config (copy), UseTokensModule (copy), ReactModule (copy), UseResponsiveModule (copy), UseBreakpointModule (copy), GetGridMetricsModule (copy), BreakpointModule (copy), DebugCol (copy), ViewModule (copy), GridDebugStyleSheetModule (copy), TextModule (copy), StyleSheetContextModule (copy)
 	local WithDefaultsModuleResult = WithDefaultsModule(p1, config)
 	local UseTokensModuleResult = UseTokensModule()

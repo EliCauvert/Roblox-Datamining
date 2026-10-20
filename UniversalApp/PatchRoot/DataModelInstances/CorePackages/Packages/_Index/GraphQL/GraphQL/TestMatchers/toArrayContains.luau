@@ -2,7 +2,7 @@
 local InspectFunction = require(Parent.Parent.LuauPolyfill).util.inspect
 local ArrayContainsModule = require(Parent.luaUtils.arrayContains)
 
-return function(p1, p2, p3) --[[ Line: 20 | Named "toArrayContains" ]]
+return function(p1, p2, p3)
 	-- upvalues: ArrayContainsModule (copy), InspectFunction (copy)
 	local ArrayContainsModuleResult = ArrayContainsModule(p1, p2, p3)
 	

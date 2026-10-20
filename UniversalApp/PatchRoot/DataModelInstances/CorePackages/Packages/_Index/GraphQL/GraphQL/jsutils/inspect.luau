@@ -10,19 +10,19 @@ local Callback3 = nil
 local Callback2 = nil
 local Callback4 = nil
 
-local function inspect(p1) --[[ Line: 33 ]]
+local function inspect(p1)
 	-- upvalues: Callback (ref)
 	return Callback(p1, {})
 end
 
-Callback = function(JSON, p1) --[[ Line: 37 | Named "formatValue" ]]
+Callback = function(JSON, p1)
 	-- upvalues: HttpService (copy), NullModule (copy), Callback1 (ref)
 	local ValueType = typeof(JSON)
 	
 	return if ValueType == "string" then HttpService:JSONEncode(JSON) elseif ValueType == "number" then if JSON == JSON then if JSON == 1e999 then "Infinity" elseif JSON == -1e999 then "-Infinity" else tostring(JSON) else "NaN" elseif ValueType == "function" then "[function]" elseif ValueType == "table" then if JSON == NullModule then "null" else Callback1(JSON, p1) else tostring(JSON)
 end
 
-Callback1 = function(Value, List) --[[ Line: 65 | Named "formatObjectValue" ]]
+Callback1 = function(Value, List)
 	-- upvalues: Callback (ref), Array (copy), Callback3 (ref), Callback2 (ref)
 	if table.find(List, Value) ~= nil then
 		return "[Circular]"
@@ -42,7 +42,7 @@ Callback1 = function(Value, List) --[[ Line: 65 | Named "formatObjectValue" ]]
 	return Callback2(Value, List1)
 end
 
-Callback2 = function(p1, p2): string --[[ Line: 90 | Named "formatObject" ]]
+Callback2 = function(p1, p2): string
 	-- upvalues: Object (copy), Callback4 (ref), Callback (ref)
 	local KeysResult = Object.keys(p1)
 	
@@ -61,7 +61,7 @@ Callback2 = function(p1, p2): string --[[ Line: 90 | Named "formatObject" ]]
 	return "{ " .. table.concat(List, ", ") .. " }"
 end
 
-Callback3 = function(p3, p4): string --[[ Line: 111 | Named "formatArray" ]]
+Callback3 = function(p3, p4): string
 	-- upvalues: Callback (ref)
 	local CountP5 = #p3
 	
@@ -86,7 +86,7 @@ Callback3 = function(p3, p4): string --[[ Line: 111 | Named "formatArray" ]]
 	return "[" .. table.concat(List, ", ") .. "]"
 end
 
-Callback4 = function(_): string --[[ Line: 137 | Named "getObjectTag" ]]
+Callback4 = function(_): string
 	return "Object"
 end
 

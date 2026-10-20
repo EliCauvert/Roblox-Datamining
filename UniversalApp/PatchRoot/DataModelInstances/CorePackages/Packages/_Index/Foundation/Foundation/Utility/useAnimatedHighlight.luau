@@ -10,10 +10,10 @@ local Connection = WrappersModule.Connection
 local WrappersModuleInstance = WrappersModule.Instance
 local Signal = WrappersModule.Signal
 
-return function(Current, p1, p2, ...) --[[ Line: 20 | Named "useAnimatedHighlight" ]]
+return function(Current, p1, p2, ...)
 	-- upvalues: UseTokensModule (copy), ReactModule (copy), FlagsModule (copy), ReactOtterModule (copy), Signal (copy), WrappersModuleInstance (copy), Connection (copy)
 	local UseTokensModuleResult = UseTokensModule()
-	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 27 ]]
+	local UseMemoResult = ReactModule.useMemo(function()
 		-- upvalues: UseTokensModuleResult (copy)
 		return {
 			easingStyle = UseTokensModuleResult.Ease.StandardOut,
@@ -22,14 +22,14 @@ return function(Current, p1, p2, ...) --[[ Line: 20 | Named "useAnimatedHighligh
 	end, { UseTokensModuleResult })
 	local UseRefResult = ReactModule.useRef(Current)
 	local UseRefResult1 = if FlagsModule.FoundationAnimatedHighlightSettling then ReactModule.useRef(Current) else nil
-	local UseResult = if FlagsModule.FoundationAnimatedHighlightSettling then ReactModule.useCallback(function() --[[ Line: 40 ]]
+	local UseResult = if FlagsModule.FoundationAnimatedHighlightSettling then ReactModule.useCallback(function()
 		-- upvalues: UseRefResult1 (copy), UseRefResult (copy)
 		UseRefResult1.current = UseRefResult.current
 	end, {}) else nil
 	local UseAnimatedBindingResult, UseAnimatedBindingResult2 = ReactOtterModule.useAnimatedBinding(0, if FlagsModule.FoundationAnimatedHighlightSettling then UseResult else nil)
 	local UseAnimatedBindingResult1, UseAnimatedBindingResult2_1 = ReactOtterModule.useAnimatedBinding(0)
 	local UseBindingResult, UseBindingResult2 = ReactModule.useBinding(0)
-	local UseResult1 = ReactModule.useCallback(function(p3, p4) --[[ Line: 50 ]]
+	local UseResult1 = ReactModule.useCallback(function(p3, p4)
 		-- upvalues: p1 (copy), FlagsModule (upval), Current (copy), UseRefResult1 (copy), UseAnimatedBindingResult2_1 (copy), ReactOtterModule (upval), UseAnimatedBindingResult2 (copy), UseMemoResult (copy), UseBindingResult2 (copy)
 		if p3.current and p1.current then
 			local XDelta = p3.current.AbsolutePosition.X - p1.current.AbsolutePosition.X
@@ -45,13 +45,13 @@ return function(Current, p1, p2, ...) --[[ Line: 20 | Named "useAnimatedHighligh
 			UseBindingResult2(p3.current.AbsoluteSize.Y)
 		end
 	end, { UseMemoResult, Current })
-	ReactModule.useEffect(function() --[[ Line: 73 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: Current (copy), p2 (copy), UseRefResult (copy), UseResult1 (copy), p1 (copy), Signal (upval), WrappersModuleInstance (upval), Connection (upval)
 		if Current then
 			local v1 = p2[Current]
 			local IsCurrentMatch = Current == UseRefResult.current
 			
-			local function animateHighlight() --[[ Line: 77 ]]
+			local function animateHighlight()
 				-- upvalues: v1 (copy), UseResult1 (upval), IsCurrentMatch (copy)
 				if v1 then
 					UseResult1(v1, IsCurrentMatch)
@@ -63,7 +63,7 @@ return function(Current, p1, p2, ...) --[[ Line: 20 | Named "useAnimatedHighligh
 				local ConnectResult1 = Signal.Connect(WrappersModuleInstance.GetPropertyChangedSignal(v1.current, "AbsolutePosition"), animateHighlight)
 				local ConnectResult2 = Signal.Connect(WrappersModuleInstance.GetPropertyChangedSignal(p1.current, "AbsoluteSize"), animateHighlight)
 				
-				return function() --[[ Line: 98 ]]
+				return function()
 					-- upvalues: Connection (upval), ConnectResult (copy), ConnectResult1 (copy), ConnectResult2 (copy)
 					Connection.Disconnect(ConnectResult)
 					Connection.Disconnect(ConnectResult1)
@@ -71,9 +71,9 @@ return function(Current, p1, p2, ...) --[[ Line: 20 | Named "useAnimatedHighligh
 				end
 			end
 		end
-		return function() --[[ Line: 106 ]] end
+		return function() end
 	end, { Current })
-	ReactModule.useEffect(function() --[[ Line: 109 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: Current (copy), p2 (copy), p1 (copy), UseResult1 (copy), UseRefResult (copy)
 		if Current then
 			local v1 = p2[Current]

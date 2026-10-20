@@ -2,16 +2,16 @@
 local Callback = nil
 local Callback1 = nil
 local SchedulerMinHeapModule = {
-	push = function(p1, p2) --[[ Line: 22 ]]
+	push = function(p1, p2)
 		-- upvalues: Callback (ref)
 		local v1 = #p1 + 1
 		p1[v1] = p2
 		Callback(p1, p2, v1)
 	end,
-	peek = function(Entry) --[[ Line: 29 ]]
+	peek = function(Entry)
 		return Entry[1]
 	end,
-	pop = function(Entry) --[[ Line: 33 ]]
+	pop = function(Entry)
 		-- upvalues: Callback1 (ref)
 		local Entry1 = Entry[1]
 		
@@ -29,7 +29,7 @@ local SchedulerMinHeapModule = {
 	end
 }
 
-Callback = function(p1, p2, Floored: number) --[[ Line: 49 ]]
+Callback = function(p1, p2, Floored: number)
 	-- upvalues: Callback2 (ref)
 	while true do
 		local Floored1 = math.floor(Floored / 2)
@@ -41,7 +41,7 @@ Callback = function(p1, p2, Floored: number) --[[ Line: 49 ]]
 	end
 end
 
-Callback1 = function(p3, p4, Key: number) --[[ Line: 65 ]]
+Callback1 = function(p3, p4, Key: number)
 	-- upvalues: Callback2 (ref)
 	local CountP5 = #p3
 	while Key < CountP5 do
@@ -67,7 +67,7 @@ Callback1 = function(p3, p4, Key: number) --[[ Line: 65 ]]
 	end
 end
 
-Callback2 = function(p5, p6) --[[ Line: 95 ]]
+Callback2 = function(p5, p6)
 	local SortIndexDelta = p5.sortIndex - p6.sortIndex
 	
 	return if SortIndexDelta == 0 then p5.id - p6.id else SortIndexDelta

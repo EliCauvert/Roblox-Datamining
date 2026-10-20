@@ -1,4 +1,4 @@
-﻿return function(Text: string, p1, p2): string --[[ Line: 16 | Named "slice" ]]
+﻿return function(Text: string, p1, p2): string
 	local Length, Length2 = utf8.len(Text)
 	assert(Length ~= nil, ("string `%s` has an invalid byte at position %s"):format(Text, (tostring(Length2))))
 	local Number: number? = tonumber(p1)

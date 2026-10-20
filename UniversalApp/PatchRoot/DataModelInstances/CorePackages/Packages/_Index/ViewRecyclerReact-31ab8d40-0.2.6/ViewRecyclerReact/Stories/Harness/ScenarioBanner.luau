@@ -2,7 +2,7 @@
 assert(ViewRecyclerReact ~= nil, "ScenarioBanner must be mounted under view-recycler-react")
 local CreateElementFunction = require(ViewRecyclerReact.Parent.React).createElement
 
-return function(p1) --[[ Line: 8 | Named "ScenarioBanner" ]]
+return function(p1)
 	-- upvalues: CreateElementFunction (copy)
 	return CreateElementFunction("Frame", {
 		BorderSizePixel = 0,

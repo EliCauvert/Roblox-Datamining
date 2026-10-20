@@ -5,7 +5,7 @@ local _ = require(script.Parent.custom_options)
 local Module = {}
 Module.__index = Module
 
-function Module.new(p1) --[[ Line: 225 ]]
+function Module.new(p1)
 	-- upvalues: Module (copy)
 	return (setmetatable({
 		capabilities = if p1 == nil or p1.capabilities == nil then nil else p1.capabilities,
@@ -15,7 +15,7 @@ function Module.new(p1) --[[ Line: 225 ]]
 	}, Module))
 end
 
-function Module:encode() --[[ Line: 236 ]]
+function Module:encode()
 	-- upvalues: ProtoModule (copy)
 	local Buf = buffer.create(0)
 	local Count = 0
@@ -48,7 +48,7 @@ function Module:encode() --[[ Line: 236 ]]
 	return Buf1
 end
 
-function Module.decode(Buf) --[[ Line: 271 ]]
+function Module.decode(Buf)
 	-- upvalues: Module (copy), ProtoModule (copy), t (copy)
 	local NewModule = Module.new()
 	local v1 = 0
@@ -93,7 +93,7 @@ function Module.decode(Buf) --[[ Line: 271 ]]
 	return NewModule
 end
 
-function Module:jsonEncode() --[[ Line: 329 ]]
+function Module:jsonEncode()
 	local t = {}
 	
 	if self.capabilities ~= nil then
@@ -116,7 +116,7 @@ function Module:jsonEncode() --[[ Line: 329 ]]
 	return t
 end
 
-function Module:jsonDecode() --[[ Line: 355 ]]
+function Module:jsonDecode()
 	-- upvalues: Module (copy), t (copy)
 	local NewModule = Module.new()
 	
@@ -149,7 +149,7 @@ TypeRegistryModule.default:register(t.UniverseUserVoteFeedbackMetadataData)
 local Module1 = {}
 Module1.__index = Module1
 
-function Module1.new(p1) --[[ Line: 400 ]]
+function Module1.new(p1)
 	-- upvalues: Module1 (copy)
 	return (setmetatable({
 		can_submit_review = p1 ~= nil and p1.can_submit_review ~= nil and p1.can_submit_review,
@@ -158,7 +158,7 @@ function Module1.new(p1) --[[ Line: 400 ]]
 	}, Module1))
 end
 
-function Module1:encode() --[[ Line: 419 ]]
+function Module1:encode()
 	-- upvalues: ProtoModule (copy)
 	local Buf = buffer.create(0)
 	local Count = 0
@@ -181,7 +181,7 @@ function Module1:encode() --[[ Line: 419 ]]
 	return Buf1
 end
 
-function Module1.decode(Buf) --[[ Line: 445 ]]
+function Module1.decode(Buf)
 	-- upvalues: Module1 (copy), ProtoModule (copy)
 	local NewModule = Module1.new()
 	local v2 = 0
@@ -222,7 +222,7 @@ function Module1.decode(Buf) --[[ Line: 445 ]]
 	return NewModule
 end
 
-function Module1:jsonEncode() --[[ Line: 500 ]]
+function Module1:jsonEncode()
 	local t = {}
 	
 	if self.can_submit_review then
@@ -237,7 +237,7 @@ function Module1:jsonEncode() --[[ Line: 500 ]]
 	return t
 end
 
-function Module1:jsonDecode() --[[ Line: 520 ]]
+function Module1:jsonDecode()
 	-- upvalues: Module1 (copy)
 	local NewModule = Module1.new()
 	
@@ -271,7 +271,7 @@ TypeRegistryModule.default:register(t.UniverseUserVoteFeedbackMetadataData_Capab
 local Module2 = {}
 Module2.__index = Module2
 
-function Module2.new(p1) --[[ Line: 567 ]]
+function Module2.new(p1)
 	-- upvalues: Module2 (copy)
 	return (setmetatable({
 		type = if p1 == nil or p1.type == nil then "" else p1.type,
@@ -281,7 +281,7 @@ function Module2.new(p1) --[[ Line: 567 ]]
 	}, Module2))
 end
 
-function Module2:encode() --[[ Line: 580 ]]
+function Module2:encode()
 	-- upvalues: ProtoModule (copy)
 	local Buf = buffer.create(0)
 	local Count = 0
@@ -311,7 +311,7 @@ function Module2:encode() --[[ Line: 580 ]]
 	return Buf1
 end
 
-function Module2.decode(Buf) --[[ Line: 614 ]]
+function Module2.decode(Buf)
 	-- upvalues: Module2 (copy), ProtoModule (copy), t (copy)
 	local NewModule = Module2.new()
 	local v3 = 0
@@ -358,7 +358,7 @@ function Module2.decode(Buf) --[[ Line: 614 ]]
 	return NewModule
 end
 
-function Module2:jsonEncode() --[[ Line: 677 ]]
+function Module2:jsonEncode()
 	local t = {}
 	
 	if self.type ~= nil and self.type ~= "" then
@@ -381,7 +381,7 @@ function Module2:jsonEncode() --[[ Line: 677 ]]
 	return t
 end
 
-function Module2:jsonDecode() --[[ Line: 705 ]]
+function Module2:jsonDecode()
 	-- upvalues: Module2 (copy), t (copy)
 	local NewModule = Module2.new()
 	
@@ -417,7 +417,7 @@ TypeRegistryModule.default:register(t.UniverseUserVoteFeedbackMetadataData_Categ
 local Module3 = {}
 Module3.__index = Module3
 
-function Module3.new(p1) --[[ Line: 753 ]]
+function Module3.new(p1)
 	-- upvalues: Module3 (copy)
 	return (setmetatable({
 		id = if p1 == nil or p1.id == nil then "" else p1.id,
@@ -425,7 +425,7 @@ function Module3.new(p1) --[[ Line: 753 ]]
 	}, Module3))
 end
 
-function Module3:encode() --[[ Line: 765 ]]
+function Module3:encode()
 	-- upvalues: ProtoModule (copy)
 	local Buf = buffer.create(0)
 	local Count = 0
@@ -444,7 +444,7 @@ function Module3:encode() --[[ Line: 765 ]]
 	return Buf1
 end
 
-function Module3.decode(Buf) --[[ Line: 786 ]]
+function Module3.decode(Buf)
 	-- upvalues: Module3 (copy), ProtoModule (copy)
 	local NewModule = Module3.new()
 	local v4 = 0
@@ -481,7 +481,7 @@ function Module3.decode(Buf) --[[ Line: 786 ]]
 	return NewModule
 end
 
-function Module3:jsonEncode() --[[ Line: 836 ]]
+function Module3:jsonEncode()
 	local t = {}
 	
 	if self.id ~= nil and self.id ~= "" then
@@ -493,7 +493,7 @@ function Module3:jsonEncode() --[[ Line: 836 ]]
 	return t
 end
 
-function Module3:jsonDecode() --[[ Line: 852 ]]
+function Module3:jsonDecode()
 	-- upvalues: Module3 (copy)
 	local NewModule = Module3.new()
 	
@@ -515,7 +515,7 @@ TypeRegistryModule.default:register(t.UniverseUserVoteFeedbackMetadataData_Categ
 local Module4 = {}
 Module4.__index = Module4
 
-function Module4.new(p1) --[[ Line: 883 ]]
+function Module4.new(p1)
 	-- upvalues: Module4 (copy)
 	return (setmetatable({
 		label = if p1 == nil or p1.label == nil then "" else p1.label,
@@ -525,7 +525,7 @@ function Module4.new(p1) --[[ Line: 883 ]]
 	}, Module4))
 end
 
-function Module4:encode() --[[ Line: 894 ]]
+function Module4:encode()
 	-- upvalues: ProtoModule (copy)
 	local Buf = buffer.create(0)
 	local Count = 0
@@ -552,7 +552,7 @@ function Module4:encode() --[[ Line: 894 ]]
 	return Buf1
 end
 
-function Module4.decode(Buf) --[[ Line: 925 ]]
+function Module4.decode(Buf)
 	-- upvalues: Module4 (copy), ProtoModule (copy)
 	local NewModule = Module4.new()
 	local v5 = 0
@@ -595,7 +595,7 @@ function Module4.decode(Buf) --[[ Line: 925 ]]
 	return NewModule
 end
 
-function Module4:jsonEncode() --[[ Line: 985 ]]
+function Module4:jsonEncode()
 	local t = {}
 	
 	if self.label ~= nil and self.label ~= "" then
@@ -613,7 +613,7 @@ function Module4:jsonEncode() --[[ Line: 985 ]]
 	return t
 end
 
-function Module4:jsonDecode() --[[ Line: 1009 ]]
+function Module4:jsonDecode()
 	-- upvalues: Module4 (copy)
 	local NewModule = Module4.new()
 	
@@ -650,7 +650,7 @@ TypeRegistryModule.default:register(t.UniverseUserVoteFeedbackMetadataData_Comme
 local Module5 = {}
 Module5.__index = Module5
 
-function Module5.new(p1) --[[ Line: 1059 ]]
+function Module5.new(p1)
 	-- upvalues: Module5 (copy)
 	return (setmetatable({
 		disclaimer_label = if p1 == nil or p1.disclaimer_label == nil then "" else p1.disclaimer_label,
@@ -659,7 +659,7 @@ function Module5.new(p1) --[[ Line: 1059 ]]
 	}, Module5))
 end
 
-function Module5:encode() --[[ Line: 1071 ]]
+function Module5:encode()
 	-- upvalues: ProtoModule (copy)
 	local Buf = buffer.create(0)
 	local Count = 0
@@ -682,7 +682,7 @@ function Module5:encode() --[[ Line: 1071 ]]
 	return Buf1
 end
 
-function Module5.decode(Buf) --[[ Line: 1097 ]]
+function Module5.decode(Buf)
 	-- upvalues: Module5 (copy), ProtoModule (copy)
 	local NewModule = Module5.new()
 	local v6 = 0
@@ -723,7 +723,7 @@ function Module5.decode(Buf) --[[ Line: 1097 ]]
 	return NewModule
 end
 
-function Module5:jsonEncode() --[[ Line: 1152 ]]
+function Module5:jsonEncode()
 	local t = {}
 	
 	if self.disclaimer_label ~= nil and self.disclaimer_label ~= "" then
@@ -738,7 +738,7 @@ function Module5:jsonEncode() --[[ Line: 1152 ]]
 	return t
 end
 
-function Module5:jsonDecode() --[[ Line: 1172 ]]
+function Module5:jsonDecode()
 	-- upvalues: Module5 (copy)
 	local NewModule = Module5.new()
 	

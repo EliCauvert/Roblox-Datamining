@@ -1,10 +1,10 @@
-﻿return function() --[[ Line: 11 | Named "createSignal" ]]
+﻿return function()
 	local t = {}
 	local t1 = {}
 	local Flag = false
 	
 	return {
-		subscribe = function(_, Callback) --[[ Line: 16 ]]
+		subscribe = function(_, Callback)
 			-- upvalues: Flag (ref), t (copy), t1 (copy)
 			assert(typeof(Callback) == "function", "Can only subscribe to signals with a function.")
 			local config = { disconnected = false, callback = Callback }
@@ -14,7 +14,7 @@
 			end
 			t[Callback] = config
 			
-			return function() --[[ Line: 32 | Named "disconnect" ]]
+			return function()
 				-- upvalues: config (copy), t (upval), Callback (copy), t1 (upval)
 				assert(not config.disconnected, "Listeners can only be disconnected once.")
 				config.disconnected = true
@@ -22,7 +22,7 @@
 				t1[Callback] = nil
 			end
 		end,
-		fire = function(_, ...) --[[ Line: 43 ]]
+		fire = function(_, ...)
 			-- upvalues: Flag (ref), t (copy), t1 (copy)
 			Flag = true
 			

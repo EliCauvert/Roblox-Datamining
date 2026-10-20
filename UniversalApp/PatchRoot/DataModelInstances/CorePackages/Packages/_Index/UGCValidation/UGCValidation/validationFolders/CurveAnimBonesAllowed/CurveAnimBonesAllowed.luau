@@ -5,14 +5,14 @@ local ValidationEnumsModule = require(Parent.validationSystem.ValidationEnums)
 local ErrorSourceStringsModule = require(Parent.validationSystem.ErrorSourceStrings)
 local APIUtilModule = require(Parent.util.APIUtil)
 
-local function checkTrustedCreatorPermission() --[[ Line: 20 ]]
+local function checkTrustedCreatorPermission()
 	-- upvalues: APIUtilModule (copy), HttpService (copy)
 	local RequestAndRetryGetResult, RequestAndRetryGetResult2 = APIUtilModule.requestAndRetryGet((string.format("https://itemconfiguration.%s/v1/permissions/action-allowed-for-item-type?trustedCreatorCheck=true&action=1&assetType=61", APIUtilModule.getBaseDomain())))
 	
 	if not RequestAndRetryGetResult then
 		return false, "Failed to check trusted creator permission: " .. tostring(RequestAndRetryGetResult2)
 	end
-	local Success, Result = pcall(function() --[[ Line: 31 ]]
+	local Success, Result = pcall(function()
 		-- upvalues: HttpService (upval), RequestAndRetryGetResult2 (copy)
 		return HttpService:JSONDecode(RequestAndRetryGetResult2)
 	end)
@@ -35,7 +35,7 @@ return {
 	prereqTests = {
 		ValidationEnumsModule.ValidationModule.CurveAnimDataAvailable
 	},
-	run = function(p1, p2) --[[ Line: 41 ]]
+	run = function(p1, p2)
 		-- upvalues: ValidationEnumsModule (copy), ErrorSourceStringsModule (copy), checkTrustedCreatorPermission (copy)
 		local ValidationEnv = p2.consumerConfig.validationEnv
 		

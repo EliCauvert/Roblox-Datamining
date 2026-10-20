@@ -13,7 +13,7 @@ local ParseContentIdsModule = require(Parent.util.ParseContentIds)
 local R15plusUtilsModule = require(Parent.util.R15plusUtils)
 local GetFFlagDebugAllowHRDUploadOnBundleBackendModule = require(Parent.flags.getFFlagDebugAllowHRDUploadOnBundleBackend)
 
-local function _(List, Name) --[[ Line: 24 | Named "getInstance" ]]
+local function _(List, Name)
 	for _, value in List do
 		if value.Name == Name then
 			return value
@@ -22,7 +22,7 @@ local function _(List, Name) --[[ Line: 24 | Named "getInstance" ]]
 	return nil
 end
 
-local function validateAllAssetsWithSchema(List, List1, p1): boolean --[[ Line: 35 ]]
+local function validateAllAssetsWithSchema(List, List1, p1): boolean
 	-- upvalues: ValidateSingleInstanceModule (copy), ValidateWithSchemaModule (copy), CreateDynamicHeadMeshPartSchemaModule (copy), CreateLimbsAndTorsoSchemaModule (copy)
 	local v1 = nil
 	for _, value in List do
@@ -53,7 +53,7 @@ local function validateAllAssetsWithSchema(List, List1, p1): boolean --[[ Line: 
 	return true
 end
 
-local function validateCorrectAssetTypesExist(List): boolean --[[ Line: 74 ]]
+local function validateCorrectAssetTypesExist(List): boolean
 	-- upvalues: ConstantsInterfaceModule (copy)
 	local t = {}
 	local Count = #ConstantsInterfaceModule.getBodyPartAssets()
@@ -72,7 +72,7 @@ local function validateCorrectAssetTypesExist(List): boolean --[[ Line: 74 ]]
 	return Count1 == Count
 end
 
-local function createAllBodyPartsTable(Name, FullBodyData) --[[ Line: 92 ]]
+local function createAllBodyPartsTable(Name, FullBodyData)
 	local AllSelectedInstances = {}
 	local Object = nil
 	
@@ -96,7 +96,7 @@ local function createAllBodyPartsTable(Name, FullBodyData) --[[ Line: 92 ]]
 	return AllSelectedInstances
 end
 
-local function validateMeshIds(List, p2) --[[ Line: 107 ]]
+local function validateMeshIds(List, p2)
 	-- upvalues: ParseContentIdsModule (copy), AnalyticsModule (copy)
 	local config = { MeshPart = { "MeshId" } }
 	local config1 = { MeshPart = { MeshId = true } }
@@ -115,7 +115,7 @@ local function validateMeshIds(List, p2) --[[ Line: 107 ]]
 	return true
 end
 
-local function validateInstanceHierarchy(FullBodyData, p3, p4) --[[ Line: 144 ]]
+local function validateInstanceHierarchy(FullBodyData, p3, p4)
 	-- upvalues: validateCorrectAssetTypesExist (copy), AnalyticsModule (copy), validateAllAssetsWithSchema (copy), validateMeshIds (copy)
 	local IsServer = if p4 then p4.isServer else nil
 	
@@ -145,7 +145,7 @@ local function validateInstanceHierarchy(FullBodyData, p3, p4) --[[ Line: 144 ]]
 	end
 end
 
-local function resetAllPhysicsData(p3) --[[ Line: 178 ]]
+local function resetAllPhysicsData(p3)
 	-- upvalues: ResetPhysicsDataModule (copy)
 	local ResetPhysicsDataModuleResult2 = nil
 	for _, value in p3.fullBodyData do
@@ -159,7 +159,7 @@ local function resetAllPhysicsData(p3) --[[ Line: 178 ]]
 	return true
 end
 
-return function(p4) --[[ Line: 191 | Named "validateFullBody" ]]
+return function(p4)
 	-- upvalues: GetFFlagDebugAllowHRDUploadOnBundleBackendModule (copy), R15plusUtilsModule (copy), ConstantsModule (copy), validateInstanceHierarchy (copy), resetAllPhysicsData (copy), FailureReasonsAccumulatorModule (copy), createAllBodyPartsTable (copy)
 	assert(p4.fullBodyData ~= nil, "fullBodyData required in validationContext for validateFullBody")
 	local FullBodyData = p4.fullBodyData

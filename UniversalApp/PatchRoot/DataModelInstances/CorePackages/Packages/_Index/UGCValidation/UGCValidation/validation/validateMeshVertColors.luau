@@ -4,11 +4,11 @@ local _ = require(Parent.util.Types)
 local PcallDeferredModule = require(Parent.util.pcallDeferred)
 local AnalyticsModule = require(Parent.Analytics)
 
-return function(p1, IncludeAlpha, p2) --[[ Line: 10 | Named "validateMeshVertexColors" ]]
+return function(p1, IncludeAlpha, p2)
 	-- upvalues: PcallDeferredModule (copy), UGCValidationService (copy), AnalyticsModule (copy)
 	local CurrentTime = tick()
 	local IsServer = p2.isServer
-	local PcallDeferredModuleResult, PcallDeferredModuleResult2 = PcallDeferredModule(function() --[[ Line: 19 ]]
+	local PcallDeferredModuleResult, PcallDeferredModuleResult2 = PcallDeferredModule(function()
 		-- upvalues: UGCValidationService (upval), p1 (copy), IncludeAlpha (copy)
 		return UGCValidationService:ValidateEditableMeshVertColors(p1.editableMesh, IncludeAlpha)
 	end, p2)

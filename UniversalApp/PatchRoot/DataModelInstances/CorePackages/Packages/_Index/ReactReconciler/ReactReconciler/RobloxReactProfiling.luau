@@ -1,32 +1,32 @@
 ﻿local GetComponentNameFunction = require(script.Parent.Parent.Shared).getComponentName
 local ReactWorkTagsModule = require(script.Parent.ReactWorkTags)
 local _ = require(script.Parent.ReactInternalTypes)
-local Success, Result = pcall(function() --[[ Line: 29 ]]
+local Success, Result = pcall(function()
 	return game:DefineFastInt("ReactMicroprofilerLevel5", 0)
 end)
 
 if not Success then
 	Result = 0
 end
-function noop(...) --[[ Line: 43 ]] end
+function noop(...) end
 
 local Flag = false
 local Callback = nil
 local Count = 0
 
 if Result >= 5 then
-	game:GetService("RunService").Heartbeat:Connect(function() --[[ Line: 52 ]]
+	game:GetService("RunService").Heartbeat:Connect(function()
 		-- upvalues: Count (ref)
 		Count = 0
 	end)
 end
 local Config = if Result >= 5 then {
-	profilebegin = function(...) --[[ Line: 59 ]]
+	profilebegin = function(...)
 		-- upvalues: Count (ref)
 		debug.profilebegin(...)
 		Count += 1
 	end,
-	profileend = function() --[[ Line: 63 ]]
+	profileend = function()
 		-- upvalues: Count (ref)
 		if Count > 0 then
 			debug.profileend()
@@ -35,7 +35,7 @@ local Config = if Result >= 5 then {
 	end
 } else { profilebegin = noop, profileend = noop }
 
-function startTimerSampling(p1) --[[ Line: 75 ]]
+function startTimerSampling(p1)
 	-- upvalues: Flag (ref), Callback (ref)
 	if Flag then
 		warn("RobloxReactProfiling Timer Sampling already running.")
@@ -44,13 +44,13 @@ function startTimerSampling(p1) --[[ Line: 75 ]]
 	Callback = p1
 end
 
-function endTimerSampling() --[[ Line: 83 ]]
+function endTimerSampling()
 	-- upvalues: Flag (ref), Callback (ref)
 	Flag = false
 	Callback = nil
 end
 
-function getFirstStringKey(List) --[[ Line: 88 ]]
+function getFirstStringKey(List)
 	for i, _ in List do
 		if type(i) == "string" then
 			return i
@@ -59,14 +59,14 @@ function getFirstStringKey(List) --[[ Line: 88 ]]
 	return nil
 end
 
-function startTimer(p1) --[[ Line: 97 ]]
+function startTimer(p1)
 	-- upvalues: Flag (ref)
 	if Flag then
 		p1.startTime = os.clock()
 	end
 end
 
-function endTimer(p1) --[[ Line: 102 ]]
+function endTimer(p1)
 	-- upvalues: Flag (ref), Callback (ref)
 	if Flag then
 		p1.endTime = os.clock()
@@ -77,7 +77,7 @@ function endTimer(p1) --[[ Line: 102 ]]
 	end
 end
 
-function profileRootBeforeUnitOfWork(p1) --[[ Line: 111 ]]
+function profileRootBeforeUnitOfWork(p1)
 	-- upvalues: Config (copy)
 	local Current = p1.current
 	local FirstStringKey = nil
@@ -112,7 +112,7 @@ function profileRootBeforeUnitOfWork(p1) --[[ Line: 111 ]]
 	end
 end
 
-function profileRootAfterYielding(p1) --[[ Line: 165 ]]
+function profileRootAfterYielding(p1)
 	-- upvalues: Config (copy)
 	if p1 then
 		endTimer(p1)
@@ -120,7 +120,7 @@ function profileRootAfterYielding(p1) --[[ Line: 165 ]]
 	end
 end
 
-function profileUnitOfWorkBefore(p1): boolean --[[ Line: 172 ]]
+function profileUnitOfWorkBefore(p1): boolean
 	-- upvalues: GetComponentNameFunction (copy), ReactWorkTagsModule (copy), Config (copy)
 	local ComponentName = GetComponentNameFunction(p1.type)
 	
@@ -148,19 +148,19 @@ function profileUnitOfWorkBefore(p1): boolean --[[ Line: 172 ]]
 	end
 end
 
-function profileUnitOfWorkAfter(p1) --[[ Line: 205 ]]
+function profileUnitOfWorkAfter(p1)
 	-- upvalues: Config (copy)
 	if p1 then
 		Config.profileend()
 	end
 end
 
-function profileCommitBefore() --[[ Line: 211 ]]
+function profileCommitBefore()
 	-- upvalues: Config (copy)
 	Config.profilebegin("Commit")
 end
 
-function profileCommitAfter() --[[ Line: 214 ]]
+function profileCommitAfter()
 	-- upvalues: Config (copy)
 	Config.profileend()
 end

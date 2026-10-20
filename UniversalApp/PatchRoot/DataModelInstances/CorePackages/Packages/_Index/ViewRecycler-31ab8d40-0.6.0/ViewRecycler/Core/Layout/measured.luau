@@ -8,7 +8,7 @@ local TypesModule = require(ViewRecycler.Core.Types)
 local StaticPartsModule = require(ViewRecycler.Core.Layout.staticParts)
 local LayoutMeasured = require(ViewRecycler.Internal.createDebugLogger)("Layout.measured")
 
-return function(p1) --[[ Line: 44 | Named "measured" ]]
+return function(p1)
 	-- upvalues: AveragePropagationModule (copy), DetachedMeasurementCacheModule (copy), CollapsedEstimatedTreeModule (copy), TypesModule (copy), LayoutMeasured (copy), DataSourceChangeTypeModule (copy), StaticPartsModule (copy)
 	local P0 = p1 or {}
 	local EstimatedItemLength = P0.estimatedItemLength or 50
@@ -24,19 +24,19 @@ return function(p1) --[[ Line: 44 | Named "measured" ]]
 	local StartOffset = 0
 	local Length = 0
 	
-	local function _() --[[ Line: 61 | Named "average" ]]
+	local function _()
 		-- upvalues: Count (ref), Total (ref), EstimatedItemLength (copy)
 		return if Count > 0 then Total / Count else EstimatedItemLength
 	end
 	
-	local _ = function(Key, Amount) --[[ Line: 65 | Named "addActiveMeasurement" ]]
+	local _ = function(Key, Amount)
 		-- upvalues: TakeResults (copy), Total (ref), Count (ref)
 		TakeResults[Key] = Amount
 		Total += Amount
 		Count += 1
 	end
 	
-	local _ = function(Key) --[[ Line: 71 | Named "restoreActiveMeasurement" ]]
+	local _ = function(Key)
 		-- upvalues: NewDetachedMeasurementCache (copy), TakeResults (copy), Total (ref), Count (ref)
 		local TakeResult = NewDetachedMeasurementCache.take(Key)
 		
@@ -47,7 +47,7 @@ return function(p1) --[[ Line: 44 | Named "measured" ]]
 		end
 	end
 	
-	local _ = function(Key) --[[ Line: 78 | Named "detachActiveMeasurement" ]]
+	local _ = function(Key)
 		-- upvalues: TakeResults (copy), Total (ref), Count (ref), NewDetachedMeasurementCache (copy)
 		local TakeResult = TakeResults[Key]
 		
@@ -61,16 +61,16 @@ return function(p1) --[[ Line: 44 | Named "measured" ]]
 		end
 	end
 	
-	local _ = function(p2) --[[ Line: 200 | Named "rebuildFromKeys" ]]
+	local _ = function(p2)
 		-- upvalues: List (ref), NewCollapsedEstimatedTree (copy), TakeResults (copy)
 		List = p2
-		NewCollapsedEstimatedTree.buildFromMeasurements(#p2, function(p3) --[[ Line: 202 ]]
+		NewCollapsedEstimatedTree.buildFromMeasurements(#p2, function(p3)
 			-- upvalues: TakeResults (upval), p2 (copy)
 			return TakeResults[p2[p3]]
 		end)
 	end
 	
-	local function applyReset(Keys) --[[ Line: 207 ]]
+	local function applyReset(Keys)
 		-- upvalues: t (ref), NewDetachedMeasurementCache (copy), TakeResults (copy), Total (ref), Count (ref), List (ref), NewCollapsedEstimatedTree (copy)
 		local CountKeys = #Keys
 		local Buffer = table.create(CountKeys)
@@ -110,13 +110,13 @@ return function(p1) --[[ Line: 44 | Named "measured" ]]
 		end
 		t = t1
 		List = Buffer
-		NewCollapsedEstimatedTree.buildFromMeasurements(#Buffer, function(p2) --[[ Line: 202 ]]
+		NewCollapsedEstimatedTree.buildFromMeasurements(#Buffer, function(p2)
 			-- upvalues: TakeResults (upval), Buffer (copy)
 			return TakeResults[Buffer[p2]]
 		end)
 	end
 	
-	local function applyInsert(Index: number, List1) --[[ Line: 236 ]]
+	local function applyInsert(Index: number, List1)
 		-- upvalues: t (ref), NewDetachedMeasurementCache (copy), TakeResults (copy), Total (ref), Count (ref), NewCollapsedEstimatedTree (copy), List (ref)
 		local CountList1 = #List1
 		local t2 = {}
@@ -156,14 +156,14 @@ return function(p1) --[[ Line: 44 | Named "measured" ]]
 			end
 			table.move(List, Index, CountList, Index + CountList1, Buffer)
 			List = Buffer
-			NewCollapsedEstimatedTree.buildFromMeasurements(#Buffer, function(p2) --[[ Line: 202 ]]
+			NewCollapsedEstimatedTree.buildFromMeasurements(#Buffer, function(p2)
 				-- upvalues: TakeResults (upval), Buffer (copy)
 				return TakeResults[Buffer[p2]]
 			end)
 		end
 	end
 	
-	local function applyRemove(Index: number, Keys) --[[ Line: 272 ]]
+	local function applyRemove(Index: number, Keys)
 		-- upvalues: List (ref), t (ref), TakeResults (copy), Total (ref), Count (ref), NewDetachedMeasurementCache (copy), NewCollapsedEstimatedTree (copy)
 		local CountKeys = #Keys
 		
@@ -192,14 +192,14 @@ return function(p1) --[[ Line: 44 | Named "measured" ]]
 			table.move(List, 1, Index - 1, 1, Buffer)
 			table.move(List, Index + CountKeys, CountList, Index, Buffer)
 			List = Buffer
-			NewCollapsedEstimatedTree.buildFromMeasurements(#Buffer, function(p2) --[[ Line: 202 ]]
+			NewCollapsedEstimatedTree.buildFromMeasurements(#Buffer, function(p2)
 				-- upvalues: TakeResults (upval), Buffer (copy)
 				return TakeResults[Buffer[p2]]
 			end)
 		end
 	end
 	
-	local _ = function(Index, p2, p3) --[[ Line: 296 | Named "applyMove" ]]
+	local _ = function(Index, p2, p3)
 		-- upvalues: List (ref), NewCollapsedEstimatedTree (copy), TakeResults (copy)
 		assert(List[Index] == p3, "Layout.measured: move key does not match current order")
 		table.remove(List, Index)
@@ -208,7 +208,7 @@ return function(p1) --[[ Line: 44 | Named "measured" ]]
 		NewCollapsedEstimatedTree.insert(p2, TakeResults[p3])
 	end
 	
-	local function applyReorder(Tbl) --[[ Line: 304 ]]
+	local function applyReorder(Tbl)
 		-- upvalues: List (ref), t (ref), NewCollapsedEstimatedTree (copy), TakeResults (copy)
 		assert(#Tbl == #List, "Layout.measured: reorder must contain every active key")
 		local t3 = {}
@@ -219,22 +219,22 @@ return function(p1) --[[ Line: 44 | Named "measured" ]]
 		end
 		local Copy = table.clone(Tbl)
 		List = Copy
-		NewCollapsedEstimatedTree.buildFromMeasurements(#Copy, function(p2) --[[ Line: 202 ]]
+		NewCollapsedEstimatedTree.buildFromMeasurements(#Copy, function(p2)
 			-- upvalues: TakeResults (upval), Copy (copy)
 			return TakeResults[Copy[p2]]
 		end)
 	end
 	
 	return {
-		getItemCount = function() --[[ Line: 89 ]]
+		getItemCount = function()
 			-- upvalues: NewCollapsedEstimatedTree (copy)
 			return NewCollapsedEstimatedTree.length()
 		end,
-		getContentLength = function() --[[ Line: 93 ]]
+		getContentLength = function()
 			-- upvalues: NewCollapsedEstimatedTree (copy)
 			return NewCollapsedEstimatedTree.totalSum()
 		end,
-		getIntersectingIndexRange = function(p2, p3) --[[ Line: 114 ]]
+		getIntersectingIndexRange = function(p2, p3)
 			-- upvalues: NewCollapsedEstimatedTree (copy), v1 (ref), TypesModule (upval), StartOffset (ref), Length (ref)
 			local LengthResult: number = NewCollapsedEstimatedTree.length()
 			
@@ -260,22 +260,22 @@ return function(p1) --[[ Line: 44 | Named "measured" ]]
 			end
 			return if ClampedValue1 < ClampedValue then TypesModule.EMPTY_INDEX_RANGE else { firstIndex = ClampedValue, lastIndex = ClampedValue1 }
 		end,
-		expandIndexRange = function(p2, p3, p4) --[[ Line: 343 ]]
+		expandIndexRange = function(p2, p3, p4)
 			-- upvalues: StaticPartsModule (upval), NewCollapsedEstimatedTree (copy)
 			return StaticPartsModule.expandItemRange(p2, p3, p4 or p3, NewCollapsedEstimatedTree.length())
 		end,
-		getItemLayout = function(p2) --[[ Line: 97 ]]
+		getItemLayout = function(p2)
 			-- upvalues: v1 (ref), StartOffset (ref), Length (ref), NewCollapsedEstimatedTree (copy)
 			return if v1 == p2 then { startOffset = StartOffset, length = Length } else {
 				startOffset = NewCollapsedEstimatedTree.prefixSum(p2),
 				length = NewCollapsedEstimatedTree.getSize(p2)
 			}
 		end,
-		getItemLayouts = function(p2, p3, p4) --[[ Line: 110 ]]
+		getItemLayouts = function(p2, p3, p4)
 			-- upvalues: NewCollapsedEstimatedTree (copy)
 			NewCollapsedEstimatedTree.fillRange(p2, p3, p4)
 		end,
-		updateItemMeasurement = function(p2) --[[ Line: 141 ]]
+		updateItemMeasurement = function(p2)
 			-- upvalues: List (ref), LayoutMeasured (upval), TakeResults (copy), v1 (ref), Total (ref), Count (ref), NewCollapsedEstimatedTree (copy), EstimationPolicy (copy), EstimatedItemLength (copy)
 			local ItemIndex = p2.itemIndex
 			local ItemKey = p2.itemKey
@@ -311,16 +311,16 @@ return function(p1) --[[ Line: 44 | Named "measured" ]]
 			
 			return { accepted = true, geometryChanged = IsNotSizeMatch }
 		end,
-		requiresItemMeasurement = function(): boolean --[[ Line: 196 ]]
+		requiresItemMeasurement = function(): boolean
 			return true
 		end,
-		isItemMeasured = function(p2): boolean --[[ Line: 350 ]]
+		isItemMeasured = function(p2): boolean
 			-- upvalues: List (ref), TakeResults (copy)
 			local Entry = List[p2]
 			
 			return Entry ~= nil and TakeResults[Entry] ~= nil
 		end,
-		applyDataSourceChange = function(p2): boolean --[[ Line: 317 ]]
+		applyDataSourceChange = function(p2): boolean
 			-- upvalues: v1 (ref), DataSourceChangeTypeModule (upval), applyReset (copy), applyInsert (copy), applyRemove (copy), List (ref), NewCollapsedEstimatedTree (copy), TakeResults (copy), applyReorder (copy)
 			v1 = nil
 			local Flag = true
@@ -364,9 +364,9 @@ return function(p1) --[[ Line: 44 | Named "measured" ]]
 			end
 		end,
 		setViewportCrossAxisLength = StaticPartsModule.geometryUnchanged,
-		stackedSpacing = function(): number --[[ Line: 356 ]]
+		stackedSpacing = function(): number
 			return 0
 		end,
-		destroy = function() --[[ Line: 359 ]] end
+		destroy = function() end
 	}
 end

@@ -5,7 +5,7 @@ local InstanceOfModule = require(Parent.jsutils.instanceOf)
 local Module = {}
 Module.__index = Module
 
-function Module.new(Body, p1, p2) --[[ Line: 39 ]]
+function Module.new(Body, p1, p2)
 	-- upvalues: DevAssertFunction (copy), InspectFunction (copy), Module (copy)
 	local P1 = p1 or "GraphQL request"
 	local P2 = p2 or { line = 1, column = 1 }
@@ -17,11 +17,11 @@ function Module.new(Body, p1, p2) --[[ Line: 39 ]]
 	return (setmetatable(config, Module))
 end
 
-function Module:__tostring(): string --[[ Line: 61 ]]
+function Module:__tostring(): string
 	return "{table Source}"
 end
 
-function isSource(p1) --[[ Line: 71 ]]
+function isSource(p1)
 	-- upvalues: InstanceOfModule (copy), Module (copy)
 	return InstanceOfModule(p1, Module)
 end

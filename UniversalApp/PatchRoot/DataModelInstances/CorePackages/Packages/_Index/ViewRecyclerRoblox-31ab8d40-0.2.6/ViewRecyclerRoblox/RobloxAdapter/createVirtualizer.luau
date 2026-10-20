@@ -6,7 +6,7 @@ local _ = ViewRecyclerModule.Layout
 local ScrollingFrameVirtualizerModule = require(ViewRecyclerRoblox.RobloxAdapter.ScrollingFrameVirtualizer)
 local _ = require(ViewRecyclerRoblox.RobloxAdapter.createRecyclingScope)
 
-return function(p1) --[[ Line: 79 | Named "createVirtualizer" ]]
+return function(p1)
 	-- upvalues: Axis (copy), ViewRecyclerModule (copy), ScrollingFrameVirtualizerModule (copy)
 	assert(p1.axis == Axis.X or p1.axis == Axis.Y, "createVirtualizer: invalid axis")
 	local ScrollingFrame = p1.scrollingFrame
@@ -18,7 +18,7 @@ return function(p1) --[[ Line: 79 | Named "createVirtualizer" ]]
 	local v1 = nil
 	local ForGuiObjects = nil
 	
-	local function scrollToOffset(Offset) --[[ Line: 101 ]]
+	local function scrollToOffset(Offset)
 		-- upvalues: v1 (ref), ViewRecyclerModule (upval)
 		return v1.dispatch({
 			type = ViewRecyclerModule.VirtualizerCommandType.ScrollToOffset,
@@ -26,7 +26,7 @@ return function(p1) --[[ Line: 79 | Named "createVirtualizer" ]]
 		}).result
 	end
 	
-	local function scrollBy(Delta) --[[ Line: 105 ]]
+	local function scrollBy(Delta)
 		-- upvalues: v1 (ref), ViewRecyclerModule (upval)
 		return v1.dispatch({
 			type = ViewRecyclerModule.VirtualizerCommandType.ScrollBy,
@@ -34,7 +34,7 @@ return function(p1) --[[ Line: 79 | Named "createVirtualizer" ]]
 		}).result
 	end
 	
-	local function restoreScrollAnchorSnapshot(Snapshot) --[[ Line: 109 ]]
+	local function restoreScrollAnchorSnapshot(Snapshot)
 		-- upvalues: v1 (ref), ViewRecyclerModule (upval)
 		return v1.dispatch({
 			type = ViewRecyclerModule.VirtualizerCommandType.RestoreScrollAnchorSnapshot,
@@ -56,7 +56,7 @@ return function(p1) --[[ Line: 79 | Named "createVirtualizer" ]]
 		preserveScrollPositionOnChange = p1.preserveScrollPositionOnChange ~= false
 	}
 	
-	local function getListHostConfiguration() --[[ Line: 131 ]]
+	local function getListHostConfiguration()
 		-- upvalues: Axis1 (copy), DataSource (ref), Layout (ref), p1 (copy)
 		return {
 			axis = Axis1,
@@ -76,7 +76,7 @@ return function(p1) --[[ Line: 79 | Named "createVirtualizer" ]]
 		}
 	end
 	
-	local function commitConfiguration() --[[ Line: 150 ]]
+	local function commitConfiguration()
 		-- upvalues: ForGuiObjects (ref), getListHostConfiguration (copy), ScrollingFrame (copy), p1 (copy), Tbl (ref)
 		ForGuiObjects.update({
 			hostConfiguration = getListHostConfiguration(),
@@ -88,7 +88,7 @@ return function(p1) --[[ Line: 79 | Named "createVirtualizer" ]]
 		})
 	end
 	
-	local function _(Callback: (any) -> ()) --[[ Line: 161 | Named "updateCorePolicy" ]]
+	local function _(Callback: (any) -> ())
 		-- upvalues: Tbl (ref), commitConfiguration (copy)
 		local Copy = table.clone(Tbl)
 		Callback(Copy)
@@ -105,7 +105,7 @@ return function(p1) --[[ Line: 79 | Named "createVirtualizer" ]]
 			viewportOverlay = p1.viewportOverlay
 		},
 		initialCorePolicy = Tbl,
-		getGuiObject = function(p2) --[[ Line: 88 ]]
+		getGuiObject = function(p2)
 			-- upvalues: p1 (copy)
 			local _Instance = if p1.getInstance == nil then p2 else p1.getInstance(p2)
 			assert(typeof(_Instance) == "Instance" and _Instance:IsA("GuiObject"), "createVirtualizer: ItemView host must be a GuiObject")
@@ -126,7 +126,7 @@ return function(p1) --[[ Line: 79 | Named "createVirtualizer" ]]
 	ForGuiObjects.connect()
 	
 	return {
-		setScrollOffset = function(Offset) --[[ Line: 214 ]]
+		setScrollOffset = function(Offset)
 			-- upvalues: v1 (ref), ViewRecyclerModule (upval)
 			v1.dispatch({
 				type = ViewRecyclerModule.VirtualizerCommandType.SetScrollOffset,
@@ -135,7 +135,7 @@ return function(p1) --[[ Line: 79 | Named "createVirtualizer" ]]
 		end,
 		scrollToOffset = scrollToOffset,
 		scrollBy = scrollBy,
-		scrollToIndex = function(Index, p2) --[[ Line: 219 ]]
+		scrollToIndex = function(Index, p2)
 			-- upvalues: v1 (ref), ViewRecyclerModule (upval)
 			v1.dispatch({
 				type = ViewRecyclerModule.VirtualizerCommandType.ScrollToIndex,
@@ -143,25 +143,25 @@ return function(p1) --[[ Line: 79 | Named "createVirtualizer" ]]
 				alignment = p2 and p2.alignment
 			})
 		end,
-		setDataSource = function(Value) --[[ Line: 189 ]]
+		setDataSource = function(Value)
 			-- upvalues: DataSource (ref), commitConfiguration (copy)
 			DataSource = Value
 			commitConfiguration()
 		end,
-		setLayout = function(Value) --[[ Line: 194 ]]
+		setLayout = function(Value)
 			-- upvalues: Layout (ref), commitConfiguration (copy)
 			Layout = Value
 			commitConfiguration()
 		end,
-		setDataSourceAndLayout = function(Value, Value1) --[[ Line: 199 ]]
+		setDataSourceAndLayout = function(Value, Value1)
 			-- upvalues: DataSource (ref), Layout (ref), commitConfiguration (copy)
 			DataSource = Value
 			Layout = Value1
 			commitConfiguration()
 		end,
-		setOverscan = function(Overscan) --[[ Line: 229 ]]
+		setOverscan = function(Overscan)
 			-- upvalues: Tbl (ref), commitConfiguration (copy)
-			local function _(p2) --[[ Line: 230 ]]
+			local function _(p2)
 				-- upvalues: Overscan (copy)
 				p2.overscan = Overscan
 				p2.overscanPolicy = nil
@@ -173,9 +173,9 @@ return function(p1) --[[ Line: 79 | Named "createVirtualizer" ]]
 			Tbl = Copy
 			commitConfiguration()
 		end,
-		setOverscanPolicy = function(OverscanPolicy) --[[ Line: 235 ]]
+		setOverscanPolicy = function(OverscanPolicy)
 			-- upvalues: Tbl (ref), commitConfiguration (copy)
-			local function _(p2) --[[ Line: 236 ]]
+			local function _(p2)
 				-- upvalues: OverscanPolicy (copy)
 				p2.overscanPolicy = OverscanPolicy
 			end
@@ -185,9 +185,9 @@ return function(p1) --[[ Line: 79 | Named "createVirtualizer" ]]
 			Tbl = Copy
 			commitConfiguration()
 		end,
-		setDataPrefetch = function(DataPrefetch) --[[ Line: 240 ]]
+		setDataPrefetch = function(DataPrefetch)
 			-- upvalues: Tbl (ref), commitConfiguration (copy)
-			local function _(p2) --[[ Line: 241 ]]
+			local function _(p2)
 				-- upvalues: DataPrefetch (copy)
 				p2.dataPrefetch = DataPrefetch
 			end
@@ -197,9 +197,9 @@ return function(p1) --[[ Line: 79 | Named "createVirtualizer" ]]
 			Tbl = Copy
 			commitConfiguration()
 		end,
-		setContentAlignment = function(ContentAlignment) --[[ Line: 245 ]]
+		setContentAlignment = function(ContentAlignment)
 			-- upvalues: Tbl (ref), commitConfiguration (copy)
-			local function _(p2) --[[ Line: 246 ]]
+			local function _(p2)
 				-- upvalues: ContentAlignment (copy)
 				p2.contentAlignment = ContentAlignment
 			end
@@ -209,9 +209,9 @@ return function(p1) --[[ Line: 79 | Named "createVirtualizer" ]]
 			Tbl = Copy
 			commitConfiguration()
 		end,
-		setPinnedItems = function(Tbl1) --[[ Line: 250 ]]
+		setPinnedItems = function(Tbl1)
 			-- upvalues: Tbl (ref), commitConfiguration (copy)
-			local function _(p2) --[[ Line: 251 ]]
+			local function _(p2)
 				-- upvalues: Tbl1 (copy)
 				p2.pinnedItems = table.clone(Tbl1)
 			end
@@ -221,13 +221,13 @@ return function(p1) --[[ Line: 79 | Named "createVirtualizer" ]]
 			Tbl = Copy
 			commitConfiguration()
 		end,
-		setMaxPoolSize = function(p2) --[[ Line: 255 ]]
+		setMaxPoolSize = function(p2)
 			-- upvalues: RecyclingScope (copy)
 			RecyclingScope.setMaxPoolSize(p2)
 		end,
-		setPreserveScrollPositionOnChange = function(PreserveScrollPositionOnChange) --[[ Line: 258 ]]
+		setPreserveScrollPositionOnChange = function(PreserveScrollPositionOnChange)
 			-- upvalues: Tbl (ref), commitConfiguration (copy)
-			local function _(p2) --[[ Line: 259 ]]
+			local function _(p2)
 				-- upvalues: PreserveScrollPositionOnChange (copy)
 				p2.preserveScrollPositionOnChange = PreserveScrollPositionOnChange
 			end
@@ -237,32 +237,32 @@ return function(p1) --[[ Line: 79 | Named "createVirtualizer" ]]
 			Tbl = Copy
 			commitConfiguration()
 		end,
-		refreshItemViews = function() --[[ Line: 263 ]]
+		refreshItemViews = function()
 			-- upvalues: v1 (ref), ViewRecyclerModule (upval)
 			v1.dispatch({ type = ViewRecyclerModule.VirtualizerCommandType.Refresh })
 		end,
-		getVisibleRange = function() --[[ Line: 266 ]]
+		getVisibleRange = function()
 			-- upvalues: v1 (ref)
 			return v1.getSnapshot().visibleRange
 		end,
-		getMountedRange = function() --[[ Line: 269 ]]
+		getMountedRange = function()
 			-- upvalues: v1 (ref)
 			return v1.getSnapshot().mountedRange
 		end,
-		getScrollState = function() --[[ Line: 272 ]]
+		getScrollState = function()
 			-- upvalues: v1 (ref), ViewRecyclerModule (upval)
 			return v1.query({
 				type = ViewRecyclerModule.VirtualizerQueryType.GetScrollState
 			})
 		end,
-		captureScrollAnchorSnapshot = function() --[[ Line: 275 ]]
+		captureScrollAnchorSnapshot = function()
 			-- upvalues: v1 (ref), ViewRecyclerModule (upval)
 			return v1.query({
 				type = ViewRecyclerModule.VirtualizerQueryType.CaptureScrollAnchorSnapshot
 			})
 		end,
 		restoreScrollAnchorSnapshot = restoreScrollAnchorSnapshot,
-		destroy = function() --[[ Line: 205 ]]
+		destroy = function()
 			-- upvalues: Flag (ref), ForGuiObjects (ref)
 			if not Flag then
 				Flag = true

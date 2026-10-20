@@ -2,11 +2,11 @@
 local JsonModule = require(Parent.src.json)
 local UrlModule = require(Parent.lib.url)
 
-local function _(p1): number --[[ Line: 12 | Named "maybe_number" ]]
+local function _(p1): number
 	return tonumber(p1) or p1
 end
 
-local function trim(p1) --[[ Line: 20 ]]
+local function trim(p1)
 	local P1 = p1 or ""
 	while P1:sub(1, 1) == " " do
 		P1 = P1:sub(2)
@@ -20,7 +20,7 @@ end
 local Module = {}
 Module.__index = Module
 
-function Module.new(Name, Value, p2) --[[ Line: 38 ]]
+function Module.new(Name, Value, p2)
 	-- upvalues: Module (copy)
 	local self = setmetatable({}, Module)
 	local P4 = p2 or {}
@@ -32,7 +32,7 @@ function Module.new(Name, Value, p2) --[[ Line: 38 ]]
 	return self
 end
 
-function Module:fromSet() --[[ Line: 52 ]]
+function Module:fromSet()
 	-- upvalues: trim (copy), Module (copy)
 	local t = {}
 	local v1 = self:split(";")
@@ -47,7 +47,7 @@ function Module:fromSet() --[[ Line: 52 ]]
 	return Module.new(TrimResult, TrimResult1, t)
 end
 
-function Module:matches(p2): boolean --[[ Line: 72 ]]
+function Module:matches(p2): boolean
 	-- upvalues: UrlModule (copy)
 	if not self.domain then
 		return true
@@ -67,7 +67,7 @@ end
 local CookiesModule = {}
 CookiesModule.__index = CookiesModule
 
-function CookiesModule.new() --[[ Line: 104 ]]
+function CookiesModule.new()
 	-- upvalues: CookiesModule (copy)
 	local self = setmetatable({}, CookiesModule)
 	self.__cookiejar = true
@@ -76,24 +76,24 @@ function CookiesModule.new() --[[ Line: 104 ]]
 	return self
 end
 
-function CookiesModule:insert(Name, p2, p3) --[[ Line: 114 ]]
+function CookiesModule:insert(Name, p2, p3)
 	-- upvalues: Module (copy)
 	self.cookies[Name] = Module.new(Name, p2, p3)
 	
 	return self
 end
 
-function CookiesModule:SetCookie(p2) --[[ Line: 122 ]]
+function CookiesModule:SetCookie(p2)
 	-- upvalues: Module (copy)
 	local FromSetResult = Module.fromSet(p2)
 	self.cookies[FromSetResult.name] = FromSetResult
 end
 
-function CookiesModule:delete(p2) --[[ Line: 130 ]]
+function CookiesModule:delete(p2)
 	self.cookies[p2] = nil
 end
 
-function CookiesModule.string(p2, _): string --[[ Line: 134 ]]
+function CookiesModule.string(p2, _): string
 	local Text = ""
 	
 	for _, cooky in pairs(p2.cookies) do
@@ -105,7 +105,7 @@ function CookiesModule.string(p2, _): string --[[ Line: 134 ]]
 	return Text
 end
 
-function CookiesModule:__tostring() --[[ Line: 149 ]]
+function CookiesModule:__tostring()
 	-- upvalues: JsonModule (copy)
 	return JsonModule.enc(self.domains)
 end

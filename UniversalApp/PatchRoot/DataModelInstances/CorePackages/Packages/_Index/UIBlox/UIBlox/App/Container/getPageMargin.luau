@@ -1,6 +1,6 @@
 ﻿local TModule = require(script.Parent.Parent.Parent.Parent.t)
 
-return function(p1: number): number --[[ Line: 8 ]]
+return function(p1: number): number
 	-- upvalues: TModule (copy)
 	assert(TModule.number(p1))
 	

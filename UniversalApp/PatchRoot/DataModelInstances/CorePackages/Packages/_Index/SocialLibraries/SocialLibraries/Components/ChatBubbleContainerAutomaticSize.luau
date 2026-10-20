@@ -9,16 +9,16 @@ local Frame = {
 	padding = 12,
 	LayoutOrder = 0,
 	isPending = false,
-	[React.Change.AbsoluteSize] = function(_) --[[ Line: 21 ]] end,
+	[React.Change.AbsoluteSize] = function(_) end,
 	overrideImageColor = false
 }
 
-return function(Frame1: Frame) --[[ Line: 26 | Named "ChatBubbleContainer" ]]
+return function(Frame1: Frame)
 	-- upvalues: React (copy), Frame (copy), UIBlox (copy), _Rect (copy), Object (copy)
 	local UseStateResult, UseStateResult2 = React.useState(0)
 	local Callback = Frame1[React.Change.AbsoluteSize] or Frame[React.Change.AbsoluteSize]
 	
-	return UIBlox.Style.withStyle(function(p1) --[[ Line: 30 ]]
+	return UIBlox.Style.withStyle(function(p1)
 		-- upvalues: Frame1 (copy), Frame (upval), React (upval), UseStateResult (copy), _Rect (upval), Callback (copy), Object (upval), UseStateResult2 (copy)
 		local Children = Frame1.children or {}
 		local HasTail = Frame1.hasTail or Frame.hasTail
@@ -54,7 +54,7 @@ return function(Frame1: Frame) --[[ Line: 26 | Named "ChatBubbleContainer" ]]
 				SliceCenter = _Rect,
 				ImageTransparency = Transparency,
 				Position = IsIncoming and UDim2.new(0, 6, 0, 0) or UDim2.new(1, -6, 0, 0),
-				[React.Change.AbsoluteSize] = function(p2) --[[ Line: 82 ]]
+				[React.Change.AbsoluteSize] = function(p2)
 					-- upvalues: Callback (upval)
 					Callback(p2)
 				end
@@ -66,7 +66,7 @@ return function(Frame1: Frame) --[[ Line: 26 | Named "ChatBubbleContainer" ]]
 					PaddingLeft = _UDim
 				}),
 				["$layout"] = React.createElement("UIListLayout", {
-					[React.Change.AbsoluteContentSize] = function(p2) --[[ Line: 93 ]]
+					[React.Change.AbsoluteContentSize] = function(p2)
 						-- upvalues: UseStateResult2 (upval), _UDim (copy)
 						UseStateResult2(p2.AbsoluteContentSize.X + _UDim.Offset * 2)
 					end

@@ -16,7 +16,7 @@ local ViewModule = require(Foundation.Components.View)
 local UseScaledValueModule = require(Foundation.Utility.useScaledValue)
 local UseTokensModule = require(Foundation.Providers.Style.useTokens)
 
-return function(Frame: Frame) --[[ Line: 50 | Named "Calendar" ]]
+return function(Frame: Frame)
 	-- upvalues: FlagsModule (copy), ReactModule (copy), SingleMonthCalendarModule (copy), UseTokensModule (copy), UseScaledValueModule (copy), DateTimeUtilitiesModule (copy), TextModule (copy), CalendarDayModule (copy), ViewModule (copy), IconButtonModule (copy), Icon (copy), InputSizeModule (copy), ButtonVariantModule (copy), TimeDropdownModule (copy), TextInputModule (copy)
 	if FlagsModule.FoundationDateTimePickerBetaUpdate then
 		return ReactModule.createElement(SingleMonthCalendarModule, {
@@ -35,7 +35,7 @@ return function(Frame: Frame) --[[ Line: 50 | Named "Calendar" ]]
 	local UseScaledValueModuleResult = UseScaledValueModule(272)
 	local UseRefResult = ReactModule.useRef(false)
 	local DefaultDates = if Frame.defaultDates then Frame.defaultDates else { DateTime.now() }
-	ReactModule.useEffect(function() --[[ Line: 71 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: Frame (copy), DefaultDates (copy)
 		Frame.onSelectedDateChanged(DefaultDates)
 	end, {
@@ -46,7 +46,7 @@ return function(Frame: Frame) --[[ Line: 50 | Named "Calendar" ]]
 	local UseStateResult, UseStateResult2 = ReactModule.useState(DefaultDates)
 	local UseRefResult1 = ReactModule.useRef(nil)
 	local UseStateResult1, UseStateResult2_1 = ReactModule.useState(if Frame.showEndDateTimeCalendarInput then { startDateTimeInput = false, endDateTimeInput = true } else { startDateTimeInput = true, endDateTimeInput = false })
-	ReactModule.useEffect(function() --[[ Line: 84 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: Frame (copy), UseStateResult1 (copy), UseRefResult1 (copy)
 		if Frame.showEndDateTimeCalendarInput and UseStateResult1.endDateTimeInput and UseRefResult1.current then
 			UseRefResult1.current.focus()
@@ -54,7 +54,7 @@ return function(Frame: Frame) --[[ Line: 50 | Named "Calendar" ]]
 	end, { UseStateResult1 })
 	local UseStateResult3, UseStateResult2_2 = ReactModule.useState(DateTimeUtilitiesModule.formatLocalTime(DefaultDates[1]))
 	local UseStateResult4, UseStateResult2_3 = ReactModule.useState(if DefaultDates[2] then DateTimeUtilitiesModule.formatLocalTime(DefaultDates[2]) else "")
-	ReactModule.useEffect(function() --[[ Line: 99 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UseRefResult (copy)
 		UseRefResult.current = true
 	end, {})
@@ -67,7 +67,7 @@ return function(Frame: Frame) --[[ Line: 50 | Named "Calendar" ]]
 	for _, value in UseStateResult do
 		table.insert(List, (value:ToLocalTime()))
 	end
-	local function OnFocusLost() --[[ Line: 117 ]]
+	local function OnFocusLost()
 		-- upvalues: DateTimeUtilitiesModule (upval), UseStateResult3 (copy), UseStateResult (copy), UseStateResult2_2 (copy), DefaultDates (copy)
 		local DateTimeFromText = DateTimeUtilitiesModule.getDateTimeFromText(UseStateResult3)
 		
@@ -76,7 +76,7 @@ return function(Frame: Frame) --[[ Line: 50 | Named "Calendar" ]]
 		end
 	end
 	
-	local function OnFocusLost1() --[[ Line: 136 ]]
+	local function OnFocusLost1()
 		-- upvalues: DateTimeUtilitiesModule (upval), UseStateResult4 (copy), UseStateResult (copy), UseStateResult2_3 (copy), DefaultDates (copy)
 		local DateTimeFromText = DateTimeUtilitiesModule.getDateTimeFromText(UseStateResult4)
 		
@@ -85,7 +85,7 @@ return function(Frame: Frame) --[[ Line: 50 | Named "Calendar" ]]
 		end
 	end
 	
-	local UseResult = ReactModule.useCallback(function(p1, Month, Year) --[[ Line: 162 ]]
+	local UseResult = ReactModule.useCallback(function(p1, Month, Year)
 		-- upvalues: UseStateResult (copy), Frame (copy), UseStateResult1 (copy), UseStateResult2_2 (copy), DateTimeUtilitiesModule (upval), UseStateResult2_1 (copy), UseStateResult2_3 (copy), UseStateResult2_4 (copy), UseStateResult2 (copy)
 		local _DateTime = DateTime.fromLocalTime(Year, Month, p1, UseStateResult[1]:ToLocalTime().Hour, UseStateResult[1]:ToLocalTime().Minute)
 		
@@ -119,7 +119,7 @@ return function(Frame: Frame) --[[ Line: 50 | Named "Calendar" ]]
 		UseStateResult1,
 		UseRefResult1
 	})
-	local UseResult1 = ReactModule.useCallback(function(p1): boolean --[[ Line: 207 ]]
+	local UseResult1 = ReactModule.useCallback(function(p1): boolean
 		-- upvalues: List (copy)
 		local LocalTime = p1:ToLocalTime()
 		
@@ -130,14 +130,14 @@ return function(Frame: Frame) --[[ Line: 50 | Named "Calendar" ]]
 		end
 		return false
 	end, { List })
-	local UseResult2 = ReactModule.useCallback(function(p2) --[[ Line: 221 ]]
+	local UseResult2 = ReactModule.useCallback(function(p2)
 		-- upvalues: Frame (copy), UseStateResult (copy), DateTimeUtilitiesModule (upval)
 		return Frame.showEndDateTimeCalendarInput and (UseStateResult[1] and (UseStateResult[2] and DateTimeUtilitiesModule.isDateWithinRange(p2, {
 			startDate = UseStateResult[1],
 			endDate = UseStateResult[2]
 		})))
 	end, { Frame.showEndDateTimeCalendarInput, UseStateResult })
-	local UseResult3 = ReactModule.useCallback(function(p2): boolean --[[ Line: 232 ]]
+	local UseResult3 = ReactModule.useCallback(function(p2): boolean
 		-- upvalues: Frame (copy), DateTimeUtilitiesModule (upval), UseStateResult1 (copy), UseStateResult (copy)
 		if Frame.selectableDateRange and not DateTimeUtilitiesModule.isDateWithinRange(p2, Frame.selectableDateRange) then
 			return false
@@ -155,7 +155,7 @@ return function(Frame: Frame) --[[ Line: 50 | Named "Calendar" ]]
 		UseStateResult1,
 		Frame.showEndDateTimeCalendarInput
 	})
-	local UseResult4 = ReactModule.useCallback(function(p2) --[[ Line: 266 ]]
+	local UseResult4 = ReactModule.useCallback(function(p2)
 		-- upvalues: UseRefResult (copy), UseStateResult2_2 (copy), DateTimeUtilitiesModule (upval), Frame (copy), UseStateResult (copy), UseStateResult2_4 (copy), UseStateResult2 (copy)
 		if not UseRefResult.current then return end
 		UseStateResult2_2(p2)
@@ -175,7 +175,7 @@ return function(Frame: Frame) --[[ Line: 50 | Named "Calendar" ]]
 		UseStateResult,
 		UseRefResult
 	})
-	local UseResult5 = ReactModule.useCallback(function(p2) --[[ Line: 297 ]]
+	local UseResult5 = ReactModule.useCallback(function(p2)
 		-- upvalues: UseRefResult (copy), UseStateResult2_3 (copy), DateTimeUtilitiesModule (upval), UseStateResult (copy), UseStateResult2_4 (copy), UseStateResult2 (copy), Frame (copy)
 		if not UseRefResult.current then return end
 		UseStateResult2_3(p2)
@@ -193,7 +193,7 @@ return function(Frame: Frame) --[[ Line: 50 | Named "Calendar" ]]
 			end
 			return
 		elseif p2 == "" then
-			UseStateResult2(function(Entry) --[[ Line: 323 ]]
+			UseStateResult2(function(Entry)
 				-- upvalues: Frame (upval)
 				Frame.onSelectedDateChanged({ Entry[1] })
 				
@@ -209,7 +209,7 @@ return function(Frame: Frame) --[[ Line: 50 | Named "Calendar" ]]
 		UseResult3,
 		UseRefResult
 	})
-	local UseResult6 = ReactModule.useCallback(function(p2) --[[ Line: 485 ]]
+	local UseResult6 = ReactModule.useCallback(function(p2)
 		-- upvalues: UseStateResult2 (copy), Frame (copy)
 		local _DateTime = DateTime.fromUnixTimestamp(p2)
 		
@@ -234,7 +234,7 @@ return function(Frame: Frame) --[[ Line: 50 | Named "Calendar" ]]
 				LayoutOrder = 1,
 				isCircular = true,
 				icon = Icon.ChevronSmallLeft,
-				onActivated = ReactModule.useCallback(function() --[[ Line: 156 ]]
+				onActivated = ReactModule.useCallback(function()
 					-- upvalues: DateTimeUtilitiesModule (upval), UseStateResult5 (copy), UseStateResult2_4 (copy)
 					local PrevMonthInfo, PrevMonthInfo2 = DateTimeUtilitiesModule.getPrevMonthInfo(UseStateResult5.month, UseStateResult5.year)
 					UseStateResult2_4({ month = PrevMonthInfo, year = PrevMonthInfo2 })
@@ -259,7 +259,7 @@ return function(Frame: Frame) --[[ Line: 50 | Named "Calendar" ]]
 				LayoutOrder = 4,
 				isCircular = true,
 				icon = Icon.ChevronSmallRight,
-				onActivated = ReactModule.useCallback(function() --[[ Line: 151 ]]
+				onActivated = ReactModule.useCallback(function()
 					-- upvalues: DateTimeUtilitiesModule (upval), UseStateResult5 (copy), UseStateResult2_4 (copy)
 					local NextMonthInfo, NextMonthInfo2 = DateTimeUtilitiesModule.getNextMonthInfo(UseStateResult5.month, UseStateResult5.year)
 					UseStateResult2_4({ month = NextMonthInfo, year = NextMonthInfo2 })
@@ -290,7 +290,7 @@ return function(Frame: Frame) --[[ Line: 50 | Named "Calendar" ]]
 				onFocusLost = OnFocusLost,
 				size = InputSizeModule.Medium,
 				text = UseStateResult3,
-				onFocusGained = function() --[[ Line: 568 ]]
+				onFocusGained = function()
 					-- upvalues: UseStateResult2_1 (copy)
 					UseStateResult2_1({ startDateTimeInput = true, endDateTimeInput = false })
 				end,
@@ -304,7 +304,7 @@ return function(Frame: Frame) --[[ Line: 50 | Named "Calendar" ]]
 				hasError = UseStateResult4 ~= "" and DateTimeUtilitiesModule.getDateTimeFromText(UseStateResult4) == nil,
 				isDisabled = not UseStateResult[1],
 				onChanged = UseResult5,
-				onFocusGained = function() --[[ Line: 588 ]]
+				onFocusGained = function()
 					-- upvalues: UseStateResult2_1 (copy)
 					UseStateResult2_1({ startDateTimeInput = false, endDateTimeInput = true })
 				end,
@@ -319,7 +319,7 @@ return function(Frame: Frame) --[[ Line: 50 | Named "Calendar" ]]
 			LayoutOrder = 4,
 			tag = "size-full-0 auto-y",
 			testId = `{Frame.testId}--weekAndDates`
-		}, (ReactModule.useMemo(function() --[[ Line: 332 ]]
+		}, (ReactModule.useMemo(function()
 			-- upvalues: ReactModule (upval), UseTokensModuleResult (copy), UseScaledValueModuleResult (copy), DateTimeUtilitiesModule (upval), TextModule (upval), UseStateResult5 (copy), CalendarDayModule (upval), UseResult2 (copy), UseResult3 (copy), UseResult1 (copy), UseResult (copy), Frame (copy)
 			local List = {}
 			table.insert(List, ReactModule.createElement("UIGridLayout", {
@@ -356,7 +356,7 @@ return function(Frame: Frame) --[[ Line: 50 | Named "Calendar" ]]
 					isSelected = UseResult1(_DateTime),
 					key = "prev-month-day-" .. NewDaysInMonth,
 					LayoutOrder = LayoutOrder,
-					onActivated = function() --[[ Line: 391 ]]
+					onActivated = function()
 						-- upvalues: UseResult (upval), NewDaysInMonth (copy), PrevMonthInfo (copy), PrevMonthInfo2 (copy)
 						UseResult(NewDaysInMonth, PrevMonthInfo, PrevMonthInfo2)
 					end,
@@ -376,7 +376,7 @@ return function(Frame: Frame) --[[ Line: 50 | Named "Calendar" ]]
 				config.key = "current-month-day-" .. i1
 				config.LayoutOrder = LayoutOrder
 				
-				function config.onActivated() --[[ Line: 422 ]]
+				function config.onActivated()
 					-- upvalues: UseResult (upval), i1 (copy), UseStateResult5 (upval)
 					UseResult(i1, UseStateResult5.month, UseStateResult5.year)
 				end
@@ -404,7 +404,7 @@ return function(Frame: Frame) --[[ Line: 50 | Named "Calendar" ]]
 					isSelected = UseResult1(_DateTime),
 					key = "next-month-day-" .. i2,
 					LayoutOrder = LayoutOrder,
-					onActivated = function() --[[ Line: 460 ]]
+					onActivated = function()
 						-- upvalues: UseResult (upval), i2 (copy), NextMonthInfo (copy), NextMonthInfo2 (copy)
 						UseResult(i2, NextMonthInfo, NextMonthInfo2)
 					end,

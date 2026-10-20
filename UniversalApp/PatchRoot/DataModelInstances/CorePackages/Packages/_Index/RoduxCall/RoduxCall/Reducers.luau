@@ -2,7 +2,7 @@
 local CurrentCallModule = require(script.currentCall)
 local SuggestedCalleesModule = require(script.suggestedCallees)
 
-return function(p1) --[[ Line: 8 ]]
+return function(p1)
 	-- upvalues: RoduxModule (copy), CurrentCallModule (copy), SuggestedCalleesModule (copy)
 	return RoduxModule.combineReducers({
 		currentCall = CurrentCallModule(),

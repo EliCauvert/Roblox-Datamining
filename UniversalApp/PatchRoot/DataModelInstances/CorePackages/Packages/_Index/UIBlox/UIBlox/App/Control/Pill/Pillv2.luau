@@ -55,12 +55,12 @@ local config6 = {
 	[ControlStateModule.Hover] = "BackgroundOnHover"
 }
 
-local function Pillv2(p1) --[[ Line: 115 ]]
+local function Pillv2(p1)
 	-- upvalues: CryoModule (copy), config (copy), UseControlStateModule (copy), ReactModule (copy), UseStyleModule (copy), UseSelectionCursorModule (copy), CursorKindModule (copy), config3 (copy), config2 (copy), config5 (copy), config4 (copy), GetContentStyleModule (copy), config1 (copy), config6 (copy), GetIconSizeModule (copy), IconSizeModule (copy), GetTextSizeModule (copy), FoundationFontFaceMigration (copy), GetFontFromFontStyleModule (copy), Skeleton (copy), Radius (copy), ControlStateModule (copy), InteractableModule (copy), GenericTextLabelModule (copy), ImageSetComponentModule (copy), ImagesModule (copy)
 	local JoinResult = CryoModule.Dictionary.join(config, p1)
 	local Text: string = JoinResult.text
 	local UseControlStateModuleResult, UseControlStateModuleResult2 = UseControlStateModule()
-	local UseResult = ReactModule.useCallback(function(p2, p3) --[[ Line: 120 ]]
+	local UseResult = ReactModule.useCallback(function(p2, p3)
 		-- upvalues: JoinResult (copy), UseControlStateModuleResult2 (copy)
 		if JoinResult.onStateChanged then
 			JoinResult.onStateChanged(p2, p3)
@@ -178,7 +178,7 @@ local function Pillv2(p1) --[[ Line: 115 ]]
 	end
 end
 
-return ReactModule.forwardRef(function(p1, ControlRef) --[[ Line: 263 ]]
+return ReactModule.forwardRef(function(p1, ControlRef)
 	-- upvalues: ReactModule (copy), Pillv2 (copy), CryoModule (copy)
 	return ReactModule.createElement(Pillv2, CryoModule.Dictionary.join(p1, { controlRef = ControlRef }))
 end)

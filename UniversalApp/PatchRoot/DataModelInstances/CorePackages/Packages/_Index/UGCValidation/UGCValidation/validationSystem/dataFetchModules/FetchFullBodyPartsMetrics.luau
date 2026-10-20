@@ -4,7 +4,7 @@ local ValidationEnumsModule = require(Parent.validationSystem.ValidationEnums)
 local BoundsCalculatorModule = require(Parent.util.BoundsCalculator)
 
 return {
-	getData = function(p1) --[[ Line: 8 ]]
+	getData = function(p1)
 		-- upvalues: ValidationEnumsModule (copy), BoundsCalculatorModule (copy)
 		local RootInstance = p1.rootInstance
 		local RenderMeshesData = p1.renderMeshesData

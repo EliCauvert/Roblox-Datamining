@@ -1,7 +1,7 @@
 ﻿local DateTimeUtilitiesModule = require(script.Parent.Parent.DateTimeUtilities)
 
 return {
-	areDatesEqual = function(Entry, Entry1): boolean --[[ Line: 27 ]]
+	areDatesEqual = function(Entry, Entry1): boolean
 		if Entry == nil and Entry1 == nil then
 			return true
 		elseif Entry == nil or Entry1 == nil then
@@ -22,15 +22,15 @@ return {
 			end
 		end
 	end,
-	areDatesSameDayAsRange = function(Entry, p1): boolean --[[ Line: 20 ]]
+	areDatesSameDayAsRange = function(Entry, p1): boolean
 		-- upvalues: DateTimeUtilitiesModule (copy)
 		return if Entry and Entry[1] and Entry[2] then DateTimeUtilitiesModule.roundToStartOfDay(Entry[1]) == DateTimeUtilitiesModule.roundToStartOfDay(p1.startDate) and DateTimeUtilitiesModule.roundToStartOfDay(Entry[2]) == DateTimeUtilitiesModule.roundToStartOfDay(p1.endDate) else false
 	end,
-	isRangeWithinSelectableRange = function(p1, p2) --[[ Line: 10 ]]
+	isRangeWithinSelectableRange = function(p1, p2)
 		-- upvalues: DateTimeUtilitiesModule (copy)
 		return DateTimeUtilitiesModule.isDateWithinRange(p1.startDate, p2) and DateTimeUtilitiesModule.isDateWithinRange(p1.endDate, p2)
 	end,
-	isSameDay = function(p1, p2): boolean --[[ Line: 15 ]]
+	isSameDay = function(p1, p2): boolean
 		-- upvalues: DateTimeUtilitiesModule (copy)
 		return DateTimeUtilitiesModule.roundToStartOfDay(p1) == DateTimeUtilitiesModule.roundToStartOfDay(p2)
 	end

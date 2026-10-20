@@ -2,7 +2,7 @@
 local PageNavigationEventModule = {}
 PageNavigationEventModule.__index = PageNavigationEventModule
 
-function PageNavigationEventModule.new(PageName, Event) --[[ Line: 6 ]]
+function PageNavigationEventModule.new(PageName, Event)
 	-- upvalues: InvariantModule (copy), PageNavigationEventModule (copy)
 	InvariantModule(type(PageName) == "string", "pageName should be string")
 	InvariantModule(typeof(Event) == "userdata", "event should be RoactNavigation.Event")
@@ -12,16 +12,16 @@ function PageNavigationEventModule.new(PageName, Event) --[[ Line: 6 ]]
 	return config
 end
 
-function PageNavigationEventModule.isPageNavigationEvent(p1): boolean --[[ Line: 19 ]]
+function PageNavigationEventModule.isPageNavigationEvent(p1): boolean
 	-- upvalues: PageNavigationEventModule (copy)
 	return getmetatable(p1).__index == PageNavigationEventModule
 end
 
-function PageNavigationEventModule:__tostring(): string --[[ Line: 23 ]]
+function PageNavigationEventModule:__tostring(): string
 	return string.format("%-15s - %s", tostring(self.event), self.pageName)
 end
 
-function PageNavigationEventModule:equalTo(p1): boolean --[[ Line: 27 ]]
+function PageNavigationEventModule:equalTo(p1): boolean
 	-- upvalues: InvariantModule (copy), PageNavigationEventModule (copy)
 	InvariantModule(PageNavigationEventModule.isPageNavigationEvent(p1), "should be PageNavigationEvent")
 	

@@ -14,7 +14,7 @@ return {
 	prereqTests = {
 		ValidationEnumsModule.ValidationModule.CurveAnimDataAvailable
 	},
-	run = function(p1, p2) --[[ Line: 18 ]]
+	run = function(p1, p2)
 		-- upvalues: GetFIntUGCValidateMaxTotalMarkerCurvesModule (copy), ErrorSourceStringsModule (copy)
 		local FIntUGCValidateMaxTotalMarkerCurvesModule = GetFIntUGCValidateMaxTotalMarkerCurvesModule()
 		

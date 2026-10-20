@@ -11,7 +11,7 @@ local WrappersModuleInstance = WrappersModule.Instance
 local Signal = WrappersModule.Signal
 local _ = require(script.Parent.paginationSlotsUtils)
 
-return function(Current, p1, p2, p3, p4) --[[ Line: 32 | Named "usePaginationAnimatedHighlight" ]]
+return function(Current, p1, p2, p3, p4)
 	-- upvalues: UseTokensModule (copy), ReactOtterModule (copy), ReactModule (copy), Signal (copy), WrappersModuleInstance (copy), Connection (copy)
 	local Time100 = UseTokensModule().Time.Time_100
 	local UseAnimatedBindingResult, UseAnimatedBindingResult2 = ReactOtterModule.useAnimatedBinding(0)
@@ -24,7 +24,7 @@ return function(Current, p1, p2, p3, p4) --[[ Line: 32 | Named "usePaginationAni
 	local UseRefResult3 = ReactModule.useRef(nil)
 	local UseRefResult4 = ReactModule.useRef(nil)
 	
-	local function _(p5) --[[ Line: 59 | Named "resetTransitionState" ]]
+	local function _(p5)
 		-- upvalues: UseRefResult3 (copy), UseRefResult1 (copy), UseRefResult2 (copy)
 		if UseRefResult3.current then
 			task.cancel(UseRefResult3.current)
@@ -37,13 +37,13 @@ return function(Current, p1, p2, p3, p4) --[[ Line: 32 | Named "usePaginationAni
 		end
 	end
 	
-	local UseResult = ReactModule.useCallback(function() --[[ Line: 70 ]]
+	local UseResult = ReactModule.useCallback(function()
 		-- upvalues: UseRefResult3 (copy), UseRefResult1 (copy), Time100 (copy), UseRefResult2 (copy), UseRefResult4 (copy)
 		if UseRefResult3.current then
 			task.cancel(UseRefResult3.current)
 		end
 		UseRefResult1.current = true
-		UseRefResult3.current = task.delay(Time100, function() --[[ Line: 76 ]]
+		UseRefResult3.current = task.delay(Time100, function()
 			-- upvalues: UseRefResult3 (upval), UseRefResult1 (upval), UseRefResult2 (upval), UseRefResult4 (upval)
 			UseRefResult3.current = nil
 			UseRefResult1.current = false
@@ -58,7 +58,7 @@ return function(Current, p1, p2, p3, p4) --[[ Line: 32 | Named "usePaginationAni
 			end
 		end)
 	end, { Time100 })
-	local UseResult1 = ReactModule.useCallback(function(p5, p6): boolean --[[ Line: 90 ]]
+	local UseResult1 = ReactModule.useCallback(function(p5, p6): boolean
 		-- upvalues: p1 (copy), UseBindingResult2_1 (copy), UseRefResult1 (copy), UseRefResult2 (copy), UseAnimatedBindingResult2_1 (copy), ReactOtterModule (upval), UseAnimatedBindingResult2 (copy), UseResult (copy), Time100 (copy), UseBindingResult2 (copy)
 		if not p5.current or not p1.current then
 			UseBindingResult2_1(false)
@@ -97,7 +97,7 @@ return function(Current, p1, p2, p3, p4) --[[ Line: 32 | Named "usePaginationAni
 		
 		return true
 	end, { Time100, p1, UseResult })
-	local UseResult2 = ReactModule.useCallback(function() --[[ Line: 138 ]]
+	local UseResult2 = ReactModule.useCallback(function()
 		-- upvalues: Current (copy), p2 (copy), UseResult1 (copy)
 		if Current then
 			local v1 = p2[Current]
@@ -107,7 +107,7 @@ return function(Current, p1, p2, p3, p4) --[[ Line: 32 | Named "usePaginationAni
 			end
 		end
 	end, { Current, p2, UseResult1 })
-	ReactModule.useLayoutEffect(function() --[[ Line: 148 ]]
+	ReactModule.useLayoutEffect(function()
 		-- upvalues: Current (copy), p2 (copy), UseRefResult (copy), UseRefResult3 (copy), UseRefResult1 (copy), UseRefResult2 (copy), p1 (copy), UseResult1 (copy), UseBindingResult2_1 (copy)
 		if not Current then
 			UseBindingResult2_1(false)
@@ -139,7 +139,7 @@ return function(Current, p1, p2, p3, p4) --[[ Line: 32 | Named "usePaginationAni
 		p3,
 		p4
 	})
-	ReactModule.useEffect(function() --[[ Line: 171 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: Current (copy), p2 (copy), p1 (copy), Signal (upval), WrappersModuleInstance (upval), UseResult2 (copy), Connection (upval)
 		if Current then
 			local v1 = p2[Current]
@@ -150,7 +150,7 @@ return function(Current, p1, p2, p3, p4) --[[ Line: 32 | Named "usePaginationAni
 				local ConnectResult2 = Signal.Connect(WrappersModuleInstance.GetPropertyChangedSignal(p1.current, "AbsoluteSize"), UseResult2)
 				local ConnectResult3 = Signal.Connect(WrappersModuleInstance.GetPropertyChangedSignal(p1.current, "AbsolutePosition"), UseResult2)
 				
-				return function() --[[ Line: 193 ]]
+				return function()
 					-- upvalues: Connection (upval), ConnectResult (copy), ConnectResult1 (copy), ConnectResult2 (copy), ConnectResult3 (copy)
 					Connection.Disconnect(ConnectResult)
 					Connection.Disconnect(ConnectResult1)
@@ -159,15 +159,15 @@ return function(Current, p1, p2, p3, p4) --[[ Line: 32 | Named "usePaginationAni
 				end
 			end
 		end
-		return function() --[[ Line: 202 ]] end
+		return function() end
 	end, { Current, p2, UseResult2 })
-	ReactModule.useEffect(function() --[[ Line: 206 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UseRefResult4 (copy), UseResult2 (copy)
 		UseRefResult4.current = UseResult2
 	end, { UseResult2 })
-	ReactModule.useEffect(function() --[[ Line: 210 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UseRefResult3 (copy)
-		return function() --[[ Line: 211 ]]
+		return function()
 			-- upvalues: UseRefResult3 (upval)
 			if UseRefResult3.current then
 				task.cancel(UseRefResult3.current)

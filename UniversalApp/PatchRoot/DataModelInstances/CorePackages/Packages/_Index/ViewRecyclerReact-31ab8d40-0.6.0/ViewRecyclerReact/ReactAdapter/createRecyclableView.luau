@@ -13,9 +13,9 @@ local Signal2 = SignalsModule.createSignal(nil)
 local Signal3 = SignalsModule.createSignal(nil)
 local Signal4 = SignalsModule.createSignal(nil)
 
-local function InlineRecyclableView(p1) --[[ Line: 39 ]]
+local function InlineRecyclableView(p1)
 	-- upvalues: ReactModule (copy), SignalsModule (copy), Signal4 (copy), Signal2 (copy), Signal3 (copy), RecyclableViewRegistryModule (copy), RecyclableViewContextModule (copy)
-	local UseStateResult = ReactModule.useState(function() --[[ Line: 40 ]]
+	local UseStateResult = ReactModule.useState(function()
 		-- upvalues: SignalsModule (upval), p1 (copy), Signal4 (upval), Signal2 (upval), Signal3 (upval)
 		local Signal, Signal2_1 = SignalsModule.createSignal({ get = p1.itemSignal })
 		
@@ -24,7 +24,7 @@ local function InlineRecyclableView(p1) --[[ Line: 39 ]]
 				placement = Signal4,
 				assignmentSignal = Signal2,
 				indexSignal = Signal3,
-				itemSignal = function(p2) --[[ Line: 42 ]]
+				itemSignal = function(p2)
 					-- upvalues: Signal (copy)
 					return Signal(p2).get(p2)
 				end,
@@ -39,7 +39,7 @@ local function InlineRecyclableView(p1) --[[ Line: 39 ]]
 		UseStateResult.source = p1.itemSignal
 		UseStateResult.set({ get = p1.itemSignal })
 	end
-	local UseStateResult1 = ReactModule.useState(function() --[[ Line: 62 ]]
+	local UseStateResult1 = ReactModule.useState(function()
 		-- upvalues: ReactModule (upval)
 		return { binding = ReactModule.createBinding(false) }
 	end)
@@ -54,18 +54,18 @@ local function InlineRecyclableView(p1) --[[ Line: 39 ]]
 	})
 end
 
-local MemoResult = ReactModule.memo(function(p1) --[[ Line: 78 | Named "InlineActiveRecyclableView" ]]
+local MemoResult = ReactModule.memo(function(p1)
 	-- upvalues: SignalsReactModule (copy), ReactModule (copy), InlineRecyclableView (copy)
 	return if SignalsReactModule.useSignalState(p1.active) then ReactModule.createElement(InlineRecyclableView, p1) else nil
 end)
 
-local function RecyclableViewComponent(p1) --[[ Line: 88 ]]
+local function RecyclableViewComponent(p1)
 	-- upvalues: ReactModule (copy), RecyclableViewContextModule (copy), CompositionPlacementSuspendedModule (copy), Signal4 (copy), SignalsModule (copy), MemoResult (copy)
 	local UseContextResult = ReactModule.useContext(RecyclableViewContextModule)
 	local IsNotUseContextResult = UseContextResult == false
 	local UseContextResult1 = if IsNotUseContextResult or UseContextResult == CompositionPlacementSuspendedModule then nil else UseContextResult
 	local Signal = if UseContextResult1 == nil then Signal4 else UseContextResult1.placement
-	local UseStateResult = ReactModule.useState(function() --[[ Line: 93 ]]
+	local UseStateResult = ReactModule.useState(function()
 		return {}
 	end)
 	local UseRefResult = ReactModule.useRef(nil)
@@ -75,10 +75,10 @@ local function RecyclableViewComponent(p1) --[[ Line: 88 ]]
 	local UseRefResult3 = ReactModule.useRef(p1.active)
 	UseRefResult3.current = p1.active
 	local ViewType = p1.viewType
-	ReactModule.useLayoutEffect(function() --[[ Line: 104 ]]
+	ReactModule.useLayoutEffect(function()
 		-- upvalues: SignalsModule (upval), Signal (copy), UseRefResult1 (copy), UseContextResult1 (copy), ViewType (copy), UseStateResult (copy), UseRefResult2 (copy), UseRefResult (copy), UseRefResult3 (copy)
 		local v1 = nil
-		local Effect = SignalsModule.createEffect(function(p2) --[[ Line: 106 ]]
+		local Effect = SignalsModule.createEffect(function(p2)
 			-- upvalues: Signal (upval), v1 (ref), UseRefResult1 (upval), UseContextResult1 (upval), ViewType (upval), UseStateResult (upval), UseRefResult2 (upval), UseRefResult (upval), UseRefResult3 (upval)
 			local SignalResult = Signal(p2)
 			
@@ -95,7 +95,7 @@ local function RecyclableViewComponent(p1) --[[ Line: 88 ]]
 			end
 		end)
 		
-		return function() --[[ Line: 128 ]]
+		return function()
 			-- upvalues: Effect (copy), UseRefResult1 (upval)
 			Effect()
 			local Current = UseRefResult1.current
@@ -107,7 +107,7 @@ local function RecyclableViewComponent(p1) --[[ Line: 88 ]]
 		end
 	end, { UseContextResult1, Signal, UseStateResult, ViewType })
 	local ItemSignal = p1.itemSignal
-	ReactModule.useLayoutEffect(function() --[[ Line: 139 ]]
+	ReactModule.useLayoutEffect(function()
 		-- upvalues: UseRefResult1 (copy), ItemSignal (copy)
 		local Current = UseRefResult1.current
 		
@@ -116,7 +116,7 @@ local function RecyclableViewComponent(p1) --[[ Line: 88 ]]
 		end
 	end, { ItemSignal })
 	local Active = p1.active
-	ReactModule.useLayoutEffect(function() --[[ Line: 147 ]]
+	ReactModule.useLayoutEffect(function()
 		-- upvalues: UseRefResult1 (copy), Active (copy)
 		local Current = UseRefResult1.current
 		
@@ -124,7 +124,7 @@ local function RecyclableViewComponent(p1) --[[ Line: 88 ]]
 			Current.setActive(Active)
 		end
 	end, { Active })
-	local UseResult = ReactModule.useCallback(function(Current) --[[ Line: 154 ]]
+	local UseResult = ReactModule.useCallback(function(Current)
 		-- upvalues: UseRefResult (copy), UseRefResult1 (copy)
 		UseRefResult.current = Current
 		local Current1 = UseRefResult1.current
@@ -148,14 +148,14 @@ local function RecyclableViewComponent(p1) --[[ Line: 88 ]]
 	})
 end
 
-return function(SignalComponent, p1) --[[ Line: 180 | Named "createRecyclableView" ]]
+return function(SignalComponent, p1)
 	-- upvalues: RecyclableViewReadinessModule (copy), Signal1 (copy), Signal (copy), ReactModule (copy), RecyclableViewComponent (copy), RecyclableViewRegistryModule (copy)
 	local P7 = p1 or {}
 	local Readiness = P7.readiness or RecyclableViewReadinessModule.ReadyOnAssignment
 	assert(Readiness == RecyclableViewReadinessModule.ReadyOnAssignment or Readiness == RecyclableViewReadinessModule.ReadyOnCommit, "createRecyclableView: readiness must be ReadyOnAssignment or ReadyOnCommit")
 	local _definitionIdentity = {}
 	
-	local function RecyclableViewFacade(p2) --[[ Line: 197 ]]
+	local function RecyclableViewFacade(p2)
 		-- upvalues: Signal1 (upval), Signal (upval), ReactModule (upval), RecyclableViewComponent (upval), _definitionIdentity (copy), RecyclableViewFacade (copy)
 		local ActiveFunction = p2.active
 		

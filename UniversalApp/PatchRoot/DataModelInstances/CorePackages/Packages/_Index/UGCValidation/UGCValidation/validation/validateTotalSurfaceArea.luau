@@ -5,11 +5,11 @@ local _ = require(Parent.util.Types)
 local PcallDeferredModule = require(Parent.util.pcallDeferred)
 local AnalyticsModule = require(Parent.Analytics)
 
-return function(p1, MeshScale, p2) --[[ Line: 16 | Named "validateTotalSurfaceArea" ]]
+return function(p1, MeshScale, p2)
 	-- upvalues: PcallDeferredModule (copy), UGCValidationService (copy), AnalyticsModule (copy), GetFIntMaxTotalSurfaceAreaModule (copy)
 	local CurrentTime = tick()
 	local IsServer = p2.isServer
-	local PcallDeferredModuleResult, PcallDeferredModuleResult2 = PcallDeferredModule(function() --[[ Line: 25 ]]
+	local PcallDeferredModuleResult, PcallDeferredModuleResult2 = PcallDeferredModule(function()
 		-- upvalues: UGCValidationService (upval), p1 (copy), MeshScale (copy)
 		return UGCValidationService:CalculateEditableMeshTotalSurfaceArea(p1.editableMesh, MeshScale)
 	end, p2)

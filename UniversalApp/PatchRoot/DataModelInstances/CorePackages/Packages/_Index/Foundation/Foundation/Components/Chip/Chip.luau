@@ -26,11 +26,11 @@ local config = {
 	variant = require(Foundation.Enums.ChipVariant).Standard
 }
 
-return ReactModule.memo(ReactModule.forwardRef(function(p1, Ref) --[[ Line: 72 | Named "Chip" ]]
+return ReactModule.memo(ReactModule.forwardRef(function(p1, Ref)
 	-- upvalues: WithDefaultsModule (copy), config (copy), UseTokensModule (copy), ReactModule (copy), IconPositionModule (copy), IconVariant (copy), FlagsModule (copy), UseChipVariantsModule (copy), ColorNamespaceModule (copy), ViewModule (copy), WithCommonPropsModule (copy), StateLayerModeModule (copy), ConstantsModule (copy), PresentationContextModule (copy), AccessoryModule (copy), TextModule (copy)
 	local WithDefaultsModuleResult = WithDefaultsModule(p1, config)
 	local UseTokensModuleResult = UseTokensModule()
-	local UseMemoResult, UseMemoResult2 = ReactModule.useMemo(function() --[[ Line: 76 ]]
+	local UseMemoResult, UseMemoResult2 = ReactModule.useMemo(function()
 		-- upvalues: WithDefaultsModuleResult (copy), IconPositionModule (upval), IconVariant (upval)
 		local Leading = WithDefaultsModuleResult.leading
 		local Trailing = WithDefaultsModuleResult.trailing
@@ -87,7 +87,7 @@ return ReactModule.memo(ReactModule.forwardRef(function(p1, Ref) --[[ Line: 72 |
 		ref = Ref,
 		GroupTransparency = if WithDefaultsModuleResult.isDisabled then ConstantsModule.DISABLED_TRANSPARENCY else 0
 	}), ReactModule.createElement(PresentationContextModule.Provider, {
-		value = ReactModule.useMemo(function() --[[ Line: 116 ]]
+		value = ReactModule.useMemo(function()
 			-- upvalues: WithDefaultsModuleResult (copy), ColorNamespaceModule (upval)
 			return {
 				isIconSize = true,

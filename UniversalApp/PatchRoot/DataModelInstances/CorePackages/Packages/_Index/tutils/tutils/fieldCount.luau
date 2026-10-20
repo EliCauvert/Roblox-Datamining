@@ -1,4 +1,4 @@
-﻿return function(List): number --[[ Line: 4 ]]
+﻿return function(List): number
 	local Count = 0
 	
 	for _ in pairs(List) do

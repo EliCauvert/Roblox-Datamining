@@ -17,12 +17,12 @@ local Callback1 = nil
 local self = setmetatable({}, { __index = Error })
 self.__index = self
 
-function self.__tostring(p1) --[[ Line: 45 ]]
+function self.__tostring(p1)
 	-- upvalues: Callback (ref)
 	return Callback(p1)
 end
 
-function self.new(p1, p2, p3, p4, p5, OriginalError, p6) --[[ Line: 124 ]]
+function self.new(p1, p2, p3, p4, p5, OriginalError, p6)
 	-- upvalues: Error (copy), Callback1 (ref), Array (copy), GetLocationFunction (copy), IsObjectLikeFunction (copy), Object (copy), self (copy)
 	local NewError = Error.new(p1)
 	NewError.name = "GraphQLError"
@@ -41,13 +41,13 @@ function self.new(p1, p2, p3, p4, p5, OriginalError, p6) --[[ Line: 124 ]]
 	end
 	local CallbackResult = Callback1(List)
 	NewError.source = if p3 then p3 elseif CallbackResult == nil then nil else CallbackResult[1].source
-	NewError.positions = if p4 then p4 elseif CallbackResult then Array.map(CallbackResult, function(p7) --[[ Line: 165 ]]
+	NewError.positions = if p4 then p4 elseif CallbackResult then Array.map(CallbackResult, function(p7)
 		return p7.start
 	end) else nil
-	NewError.locations = if p4 and p3 then Array.map(p4, function(p7) --[[ Line: 170 ]]
+	NewError.locations = if p4 and p3 then Array.map(p4, function(p7)
 		-- upvalues: GetLocationFunction (upval), p3 (copy)
 		return GetLocationFunction(p3, p7)
-	end) elseif CallbackResult then Array.map(CallbackResult, function(p7) --[[ Line: 174 ]]
+	end) elseif CallbackResult then Array.map(CallbackResult, function(p7)
 		-- upvalues: GetLocationFunction (upval)
 		return GetLocationFunction(p7.source, p7.start)
 	end) else nil
@@ -65,12 +65,12 @@ function self.new(p1, p2, p3, p4, p5, OriginalError, p6) --[[ Line: 124 ]]
 	return (setmetatable(NewError, self))
 end
 
-function self.toString(p7) --[[ Line: 209 ]]
+function self.toString(p7)
 	-- upvalues: Callback (ref)
 	return Callback(p7)
 end
 
-function self:toJSON(): string --[[ Line: 214 ]]
+function self:toJSON(): string
 	-- upvalues: Array (copy), HttpService (copy)
 	local List = { "message" }
 	
@@ -83,17 +83,17 @@ function self:toJSON(): string --[[ Line: 214 ]]
 	if self.extensions ~= nil then
 		table.insert(List, "extensions")
 	end
-	return "{" .. Array.join(Array.map(List, function(Input): string --[[ Line: 231 ]]
+	return "{" .. Array.join(Array.map(List, function(Input): string
 		-- upvalues: HttpService (upval), self (copy)
 		return HttpService:JSONEncode(Input) .. ":" .. HttpService:JSONEncode(self[Input])
 	end), ",") .. "}"
 end
 
-Callback1 = function(p7) --[[ Line: 239 | Named "undefinedIfEmpty" ]]
+Callback1 = function(p7)
 	return if p7 == nil or #p7 == 0 then nil else p7
 end
 
-Callback = function(p7) --[[ Line: 243 | Named "printError" ]]
+Callback = function(p7)
 	-- upvalues: PrintLocationFunction (copy), PrintSourceLocationFunction (copy)
 	local Message = p7.message
 	

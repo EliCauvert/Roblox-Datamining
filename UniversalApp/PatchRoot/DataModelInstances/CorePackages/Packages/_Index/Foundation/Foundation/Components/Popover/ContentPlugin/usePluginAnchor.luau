@@ -8,7 +8,7 @@ local _ = require(Foundation.Components.Types)
 local ViewModule = require(Foundation.Components.View)
 local UseUniqueWidgetModule = require(Foundation.Providers.StudioWidgets.useUniqueWidget)
 
-return function(Frame: Frame, p1) --[[ Line: 19 | Named "usePluginAnchor" ]]
+return function(Frame: Frame, p1)
 	-- upvalues: ReactModule (copy), OverlayContextModule (copy), UseUniqueWidgetModule (copy), ViewModule (copy), ReactRobloxModule (copy)
 	local UseContextResult = ReactModule.useContext(OverlayContextModule)
 	local IsNotInstance: boolean = Frame ~= nil and typeof(Frame) ~= "Instance"
@@ -20,7 +20,7 @@ return function(Frame: Frame, p1) --[[ Line: 19 | Named "usePluginAnchor" ]]
 	local UseStateResult, UseStateResult2 = ReactModule.useState(nil)
 	local UseRefResult1 = ReactModule.useRef(nil)
 	UseRefResult1.current = UseStateResult
-	local UseResult = ReactModule.useCallback(function(p2) --[[ Line: 38 ]]
+	local UseResult = ReactModule.useCallback(function(p2)
 		-- upvalues: UseStateResult2 (copy)
 		UseStateResult2(p2)
 	end, { UseStateResult2 })
@@ -30,10 +30,10 @@ return function(Frame: Frame, p1) --[[ Line: 19 | Named "usePluginAnchor" ]]
 	local UseStateResult1, UseStateResult2_1 = ReactModule.useState(Vector2.zero)
 	local UseStateResult3, UseStateResult2_2 = ReactModule.useState(Vector2.one)
 	local UseStateResult4, UseStateResult2_3 = ReactModule.useState(Vector2.zero)
-	ReactModule.useLayoutEffect(function() --[[ Line: 50 ]]
+	ReactModule.useLayoutEffect(function()
 		-- upvalues: IsNotInstance (copy), Frame (copy), UseStateResult2_1 (copy), UseStateResult2_2 (copy)
 		if not IsNotInstance or Frame == nil then return end
-		local function updateFromAnchor() --[[ Line: 56 ]]
+		local function updateFromAnchor()
 			-- upvalues: UseStateResult2_1 (upval), Frame (copy), UseStateResult2_2 (upval)
 			UseStateResult2_1(Frame.AbsolutePosition)
 			UseStateResult2_2(Frame.AbsoluteSize)
@@ -44,19 +44,19 @@ return function(Frame: Frame, p1) --[[ Line: 19 | Named "usePluginAnchor" ]]
 		local Connection = Frame:GetPropertyChangedSignal("AbsolutePosition"):Connect(updateFromAnchor)
 		local Connection1 = Frame:GetPropertyChangedSignal("AbsoluteSize"):Connect(updateFromAnchor)
 		
-		return function() --[[ Line: 66 ]]
+		return function()
 			-- upvalues: Connection (copy), Connection1 (copy)
 			Connection:Disconnect()
 			Connection1:Disconnect()
 		end
 	end, { Frame, IsNotInstance })
-	ReactModule.useLayoutEffect(function() --[[ Line: 72 ]]
+	ReactModule.useLayoutEffect(function()
 		-- upvalues: IsNotInstance (copy), UseContextResult (copy)
 		if IsNotInstance then
 			UseContextResult.requestOverlay()
 		end
 	end, { UseContextResult.requestOverlay, IsNotInstance })
-	ReactModule.useLayoutEffect(function() --[[ Line: 78 ]]
+	ReactModule.useLayoutEffect(function()
 		-- upvalues: IsNotInstance (copy), UseContextResult (copy), UseStateResult2_3 (copy)
 		if not IsNotInstance then return end
 		local UseContextResultInstance = UseContextResult.instance
@@ -66,7 +66,7 @@ return function(Frame: Frame, p1) --[[ Line: 19 | Named "usePluginAnchor" ]]
 			
 			return
 		end
-		local function updateOffset() --[[ Line: 89 ]]
+		local function updateOffset()
 			-- upvalues: UseStateResult2_3 (upval), UseContextResultInstance (copy)
 			UseStateResult2_3(UseContextResultInstance.AbsolutePosition)
 		end
@@ -74,7 +74,7 @@ return function(Frame: Frame, p1) --[[ Line: 19 | Named "usePluginAnchor" ]]
 		UseStateResult2_3(UseContextResultInstance.AbsolutePosition)
 		local Connection = UseContextResultInstance:GetPropertyChangedSignal("AbsolutePosition"):Connect(updateOffset)
 		
-		return function() --[[ Line: 95 ]]
+		return function()
 			-- upvalues: Connection (copy)
 			Connection:Disconnect()
 		end

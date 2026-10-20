@@ -47,14 +47,14 @@ local Flag: boolean? = nil
 local t = nil
 local v2 = nil
 
-local function v37(_, _) --[[ Line: 97 ]] end
+local function v37(_, _) end
 
 if DEV then
 	Flag = false
 	t = {}
 	v2 = {}
 	
-	v37 = function(p1, p2) --[[ Line: 119 ]]
+	v37 = function(p1, p2)
 		-- upvalues: InvariantFunction (copy), GetComponentNameFunction (copy), t (ref), Console (copy)
 		if p1 == nil or type(p1) ~= "table" then return end
 		if not p1._store or p1._store.validated or p1.key ~= nil then return end
@@ -72,7 +72,7 @@ if DEV then
 end
 local IsArrayFunction = Array.isArray
 
-function coerceRef(p1, _, p2) --[[ Line: 150 ]]
+function coerceRef(p1, _, p2)
 	-- upvalues: DEV (copy), GetComponentNameFunction (copy), Error1 (copy)
 	local Ref = p2.ref
 	
@@ -87,7 +87,7 @@ function coerceRef(p1, _, p2) --[[ Line: 150 ]]
 	return Ref
 end
 
-local function _(p1) --[[ Line: 323 | Named "warnOnFunctionType" ]]
+local function _(p1)
 	-- upvalues: DEV (copy), GetComponentNameFunction (copy), v2 (ref), Console (copy)
 	if DEV then
 		local ComponentName = GetComponentNameFunction(p1.type) or "Component"
@@ -98,16 +98,16 @@ local function _(p1) --[[ Line: 323 | Named "warnOnFunctionType" ]]
 	end
 end
 
-function resolveLazyType(p1) --[[ Line: 342 ]]
+function resolveLazyType(p1)
 	-- upvalues: DescribeError (copy)
 	local Success, Result = xpcall(p1._init, DescribeError, p1._payload)
 	
 	return if Success then Result else p1
 end
 
-local function ChildReconciler(p1) --[[ Line: 360 ]]
+local function ChildReconciler(p1)
 	-- upvalues: Deletion (copy), CreateWorkInProgressFunction (copy), ReactFeatureFlags (copy), Placement (copy), HostText (copy), CreateFiberFromTextFunction (copy), DEV (copy), IsCompatibleFamilyForHotReloadingFunction (copy), EnableBlocksAPI (copy), Block (copy), REACTLAZYTYPE (copy), REACTBLOCKTYPE (copy), CreateFiberFromElementFunction (copy), HostPortal (copy), CreateFiberFromPortalFunction (copy), Fragment (copy), CreateFiberFromFragmentFunction (copy), REACTELEMENTTYPE (copy), REACTPORTALTYPE (copy), EnableLazyElements (copy), GetComponentNameFunction (copy), v2 (ref), Console (copy), REACTFRAGMENTTYPE (copy), v37 (ref), v1 (copy), Flag (ref), IsArrayFunction (copy), GetIteratorFnFunction (copy)
-	local function _(p2, p3) --[[ Line: 361 | Named "deleteChild" ]]
+	local function _(p2, p3)
 		-- upvalues: p1 (copy), Deletion (upval)
 		if not p1 then return end
 		local Deletions = p2.deletions
@@ -122,7 +122,7 @@ local function ChildReconciler(p1) --[[ Line: 360 ]]
 		end
 	end
 	
-	local _ = function(p2, Sibling) --[[ Line: 375 | Named "deleteRemainingChildren" ]]
+	local _ = function(p2, Sibling)
 		-- upvalues: p1 (copy), Deletion (upval)
 		if not p1 then
 			return nil
@@ -146,7 +146,7 @@ local function ChildReconciler(p1) --[[ Line: 360 ]]
 		return nil
 	end
 	
-	local function mapRemainingChildren(_, Sibling) --[[ Line: 394 ]]
+	local function mapRemainingChildren(_, Sibling)
 		local Siblings = {}
 		local Sibling1 = Sibling
 		while Sibling1 ~= nil do
@@ -160,7 +160,7 @@ local function ChildReconciler(p1) --[[ Line: 360 ]]
 		return Siblings
 	end
 	
-	local _ = function(p3, p4) --[[ Line: 416 | Named "useFiber" ]]
+	local _ = function(p3, p4)
 		-- upvalues: CreateWorkInProgressFunction (upval), ReactFeatureFlags (upval)
 		local WorkInProgress = CreateWorkInProgressFunction(p3, p4)
 		WorkInProgress.index = 1
@@ -175,7 +175,7 @@ local function ChildReconciler(p1) --[[ Line: 360 ]]
 		return WorkInProgress
 	end
 	
-	local _ = function(p3, p4, Index) --[[ Line: 434 | Named "placeChild" ]]
+	local _ = function(p3, p4, Index)
 		-- upvalues: p1 (copy), Placement (upval)
 		p3.index = Index
 		
@@ -200,7 +200,7 @@ local function ChildReconciler(p1) --[[ Line: 360 ]]
 		end
 	end
 	
-	local _ = function(p3) --[[ Line: 462 | Named "placeSingleChild" ]]
+	local _ = function(p3)
 		-- upvalues: p1 (copy), Placement (upval)
 		if p1 and p3.alternate == nil then
 			p3.flags = bit32.bor(p3.flags, Placement)
@@ -208,7 +208,7 @@ local function ChildReconciler(p1) --[[ Line: 360 ]]
 		return p3
 	end
 	
-	local _ = function(Return_, p3, p4, p5) --[[ Line: 471 | Named "updateTextNode" ]]
+	local _ = function(Return_, p3, p4, p5)
 		-- upvalues: HostText (upval), CreateFiberFromTextFunction (upval), CreateWorkInProgressFunction (upval), ReactFeatureFlags (upval)
 		if p3 == nil or p3.tag ~= HostText then
 			local FiberFromText = CreateFiberFromTextFunction(p4, Return_.mode, p5)
@@ -231,7 +231,7 @@ local function ChildReconciler(p1) --[[ Line: 360 ]]
 		return WorkInProgress
 	end
 	
-	local function updateElement(Return_, p3, p4, p5) --[[ Line: 491 ]]
+	local function updateElement(Return_, p3, p4, p5)
 		-- upvalues: DEV (upval), IsCompatibleFamilyForHotReloadingFunction (upval), CreateWorkInProgressFunction (upval), ReactFeatureFlags (upval), EnableBlocksAPI (upval), Block (upval), REACTLAZYTYPE (upval), REACTBLOCKTYPE (upval), CreateFiberFromElementFunction (upval)
 		if p3 ~= nil then
 			if p3.elementType == p4.type or DEV and IsCompatibleFamilyForHotReloadingFunction(p3, p4) then
@@ -296,7 +296,7 @@ local function ChildReconciler(p1) --[[ Line: 360 ]]
 		return FiberFromElement
 	end
 	
-	local function updatePortal(Return_, p3, p4, p5) --[[ Line: 550 ]]
+	local function updatePortal(Return_, p3, p4, p5)
 		-- upvalues: HostPortal (upval), CreateFiberFromPortalFunction (upval), CreateWorkInProgressFunction (upval), ReactFeatureFlags (upval)
 		if p3 == nil or p3.tag ~= HostPortal or p3.stateNode.containerInfo ~= p4.containerInfo or p3.stateNode.implementation ~= p4.implementation then
 			local FiberFromPortal = CreateFiberFromPortalFunction(p4, Return_.mode, p5)
@@ -319,7 +319,7 @@ local function ChildReconciler(p1) --[[ Line: 360 ]]
 		return WorkInProgress
 	end
 	
-	local _ = function(Return_, p3, p4, p5, p6) --[[ Line: 575 | Named "updateFragment" ]]
+	local _ = function(Return_, p3, p4, p5, p6)
 		-- upvalues: Fragment (upval), CreateFiberFromFragmentFunction (upval), CreateWorkInProgressFunction (upval), ReactFeatureFlags (upval)
 		if p3 == nil or p3.tag ~= Fragment then
 			local FiberFromFragment = CreateFiberFromFragmentFunction(p4, Return_.mode, p5, p6)
@@ -342,7 +342,7 @@ local function ChildReconciler(p1) --[[ Line: 360 ]]
 		return WorkInProgress
 	end
 	
-	local _ = function(Key, p3) --[[ Line: 602 | Named "assignStableKey" ]]
+	local _ = function(Key, p3)
 		if p3.key == nil then
 			local ValueType = type(Key)
 			
@@ -357,7 +357,7 @@ local function ChildReconciler(p1) --[[ Line: 360 ]]
 		end
 	end
 	
-	local function createChild(Return_, InitResult, p3, Key) --[[ Line: 621 ]]
+	local function createChild(Return_, InitResult, p3, Key)
 		-- upvalues: REACTELEMENTTYPE (upval), CreateFiberFromElementFunction (upval), REACTPORTALTYPE (upval), CreateFiberFromPortalFunction (upval), REACTLAZYTYPE (upval), EnableLazyElements (upval), createChild (copy), CreateFiberFromFragmentFunction (upval), CreateFiberFromTextFunction (upval), DEV (upval), GetComponentNameFunction (upval), v2 (upval), Console (upval)
 		if InitResult == nil then
 			return nil
@@ -414,7 +414,7 @@ local function ChildReconciler(p1) --[[ Line: 360 ]]
 		end
 	end
 	
-	local function updateSlot(Return_, p3, InitResult, p4, Key) --[[ Line: 692 ]]
+	local function updateSlot(Return_, p3, InitResult, p4, Key)
 		-- upvalues: REACTELEMENTTYPE (upval), REACTFRAGMENTTYPE (upval), Fragment (upval), CreateFiberFromFragmentFunction (upval), CreateWorkInProgressFunction (upval), ReactFeatureFlags (upval), updateElement (copy), REACTPORTALTYPE (upval), updatePortal (copy), REACTLAZYTYPE (upval), EnableLazyElements (upval), updateSlot (copy), HostText (upval), CreateFiberFromTextFunction (upval), DEV (upval), GetComponentNameFunction (upval), v2 (upval), Console (upval)
 		if InitResult == nil then
 			return nil
@@ -530,7 +530,7 @@ local function ChildReconciler(p1) --[[ Line: 360 ]]
 		end
 	end
 	
-	local function updateFromMap(p3, Return_, Count, InitResult, p4, Key) --[[ Line: 780 ]]
+	local function updateFromMap(p3, Return_, Count, InitResult, p4, Key)
 		-- upvalues: REACTELEMENTTYPE (upval), REACTFRAGMENTTYPE (upval), Fragment (upval), CreateFiberFromFragmentFunction (upval), CreateWorkInProgressFunction (upval), ReactFeatureFlags (upval), updateElement (copy), REACTPORTALTYPE (upval), updatePortal (copy), REACTLAZYTYPE (upval), EnableLazyElements (upval), updateFromMap (copy), HostText (upval), CreateFiberFromTextFunction (upval), DEV (upval), GetComponentNameFunction (upval), v2 (upval), Console (upval)
 		if InitResult == nil then
 			return nil
@@ -642,7 +642,7 @@ local function ChildReconciler(p1) --[[ Line: 360 ]]
 		end
 	end
 	
-	local function warnOnInvalidKey(InitResult, p5, p6) --[[ Line: 874 ]]
+	local function warnOnInvalidKey(InitResult, p5, p6)
 		-- upvalues: DEV (upval), REACTELEMENTTYPE (upval), REACTPORTALTYPE (upval), v37 (upval), Console (upval), REACTLAZYTYPE (upval), EnableLazyElements (upval), warnOnInvalidKey (copy)
 		if DEV then
 			if InitResult == nil or type(InitResult) ~= "table" then
@@ -676,7 +676,7 @@ local function ChildReconciler(p1) --[[ Line: 360 ]]
 		return p5
 	end
 	
-	local function reconcileChildrenArray(Return, Sibling, Children, p5) --[[ Line: 916 ]]
+	local function reconcileChildrenArray(Return, Sibling, Children, p5)
 		-- upvalues: DEV (upval), warnOnInvalidKey (copy), updateSlot (copy), p1 (copy), Deletion (upval), Placement (upval), createChild (copy), mapRemainingChildren (copy), v1 (upval), updateFromMap (copy)
 		if DEV then
 			local v6 = nil
@@ -875,7 +875,7 @@ local function ChildReconciler(p1) --[[ Line: 360 ]]
 		end
 	end
 	
-	local function reconcileChildrenIterator(Return, Sibling, Children, p6, Callback) --[[ Line: 1143 ]]
+	local function reconcileChildrenIterator(Return, Sibling, Children, p6, Callback)
 		-- upvalues: DEV (upval), Flag (upval), Console (upval), warnOnInvalidKey (copy), updateSlot (copy), p1 (copy), Deletion (upval), Placement (upval), createChild (copy), mapRemainingChildren (copy), updateFromMap (copy)
 		if DEV then
 			if Children.entries == Callback then
@@ -1094,7 +1094,7 @@ local function ChildReconciler(p1) --[[ Line: 360 ]]
 		end
 	end
 	
-	local function reconcileSingleTextNode(Return_, Sibling, p7, p8) --[[ Line: 1356 ]]
+	local function reconcileSingleTextNode(Return_, Sibling, p7, p8)
 		-- upvalues: HostText (upval), p1 (copy), Deletion (upval), CreateWorkInProgressFunction (upval), ReactFeatureFlags (upval), CreateFiberFromTextFunction (upval)
 		if Sibling == nil or Sibling.tag ~= HostText then
 			if p1 then
@@ -1156,7 +1156,7 @@ local function ChildReconciler(p1) --[[ Line: 360 ]]
 		end
 	end
 	
-	local function reconcileSingleElement(Return_, Sibling, Children, p9) --[[ Line: 1381 ]]
+	local function reconcileSingleElement(Return_, Sibling, Children, p9)
 		-- upvalues: Fragment (upval), REACTFRAGMENTTYPE (upval), p1 (copy), Deletion (upval), CreateWorkInProgressFunction (upval), ReactFeatureFlags (upval), DEV (upval), IsCompatibleFamilyForHotReloadingFunction (upval), CreateFiberFromFragmentFunction (upval), CreateFiberFromElementFunction (upval)
 		local Key = Children.key
 		local Sibling1 = Sibling
@@ -1299,7 +1299,7 @@ local function ChildReconciler(p1) --[[ Line: 360 ]]
 		end
 	end
 	
-	local function reconcileSinglePortal(Return_, Sibling, Children, p10) --[[ Line: 1484 ]]
+	local function reconcileSinglePortal(Return_, Sibling, Children, p10)
 		-- upvalues: HostPortal (upval), p1 (copy), Deletion (upval), CreateWorkInProgressFunction (upval), ReactFeatureFlags (upval), CreateFiberFromPortalFunction (upval)
 		local Key = Children.key
 		local Sibling1 = Sibling
@@ -1382,7 +1382,7 @@ local function ChildReconciler(p1) --[[ Line: 360 ]]
 		return FiberFromPortal
 	end
 	
-	local function reconcileChildFibers(Return, Sibling, InitResult, p11) --[[ Line: 1523 ]]
+	local function reconcileChildFibers(Return, Sibling, InitResult, p11)
 		-- upvalues: REACTFRAGMENTTYPE (upval), IsArrayFunction (upval), REACTELEMENTTYPE (upval), reconcileSingleElement (copy), p1 (copy), Placement (upval), REACTPORTALTYPE (upval), reconcileSinglePortal (copy), REACTLAZYTYPE (upval), EnableLazyElements (upval), reconcileChildFibers (copy), reconcileChildrenArray (copy), reconcileSingleTextNode (copy), GetIteratorFnFunction (upval), reconcileChildrenIterator (copy), DEV (upval), GetComponentNameFunction (upval), v2 (upval), Console (upval), Deletion (upval)
 		local ValueType = type(InitResult)
 		
@@ -1466,7 +1466,7 @@ end
 ReactChildFiberModule.reconcileChildFibers = ChildReconciler(true)
 ReactChildFiberModule.mountChildFibers = ChildReconciler(false)
 
-function ReactChildFiberModule:cloneChildFibers(Return_) --[[ Line: 1671 ]]
+function ReactChildFiberModule:cloneChildFibers(Return_)
 	-- upvalues: CreateWorkInProgressFunction (copy)
 	if Return_.child == nil then return end
 	local Child = Return_.child
@@ -1482,7 +1482,7 @@ function ReactChildFiberModule:cloneChildFibers(Return_) --[[ Line: 1671 ]]
 	WorkInProgress.sibling = nil
 end
 
-function ReactChildFiberModule.resetChildFibers(p11, p12) --[[ Line: 1698 ]]
+function ReactChildFiberModule.resetChildFibers(p11, p12)
 	-- upvalues: ResetWorkInProgressFunction (copy)
 	local Child = p11.child
 	while Child ~= nil do

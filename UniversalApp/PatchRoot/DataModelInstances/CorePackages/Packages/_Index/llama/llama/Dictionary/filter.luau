@@ -1,4 +1,4 @@
-﻿return function(List, Callback) --[[ Line: 2 | Named "filter" ]]
+﻿return function(List, Callback)
 	local ValueType = type(List)
 	assert(ValueType == "table", "expected a table for first argument, got " .. ValueType)
 	local ValueType1 = type(Callback)

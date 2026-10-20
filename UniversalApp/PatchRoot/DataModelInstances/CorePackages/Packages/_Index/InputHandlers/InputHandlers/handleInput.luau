@@ -1,9 +1,9 @@
 ﻿local _ = require(script.Parent.Parent.FocusNavigation)
 local HeartbeatModule = require(script.Parent.Heartbeat)
 
-local function cancellableDelay(Delay, Callback) --[[ Line: 28 ]]
+local function cancellableDelay(Delay, Callback)
 	local Flag = false
-	task.delay(Delay, function() --[[ Line: 30 ]]
+	task.delay(Delay, function()
 		-- upvalues: Flag (ref), Callback (copy)
 		if not Flag then
 			Callback()
@@ -11,21 +11,21 @@ local function cancellableDelay(Delay, Callback) --[[ Line: 28 ]]
 	end)
 	
 	return {
-		cancel = function() --[[ Line: 36 ]]
+		cancel = function()
 			-- upvalues: Flag (ref)
 			Flag = true
 		end
 	}
 end
 
-return function(p1) --[[ Line: 42 | Named "handleInput" ]]
+return function(p1)
 	-- upvalues: cancellableDelay (copy), HeartbeatModule (copy)
 	local Hold = p1.hold
 	local v1 = nil
 	local Connection = nil
 	local Flag = false
 	
-	local function _() --[[ Line: 49 | Named "clearHeldState" ]]
+	local function _()
 		-- upvalues: v1 (ref), Connection (ref), Flag (ref)
 		if v1 then
 			v1.cancel()
@@ -38,7 +38,7 @@ return function(p1) --[[ Line: 42 | Named "handleInput" ]]
 		Flag = false
 	end
 	
-	return function(p2) --[[ Line: 61 ]]
+	return function(p2)
 		-- upvalues: Flag (ref), p1 (copy), v1 (ref), Connection (ref), Hold (copy), cancellableDelay (upval), HeartbeatModule (upval)
 		local EventData = p2.eventData
 		local ImmediateDispatch = EventData and EventData.immediateDispatch or false
@@ -63,7 +63,7 @@ return function(p1) --[[ Line: 42 | Named "handleInput" ]]
 				if ImmediateDispatch then
 					Hold.onComplete()
 				else
-					v1 = cancellableDelay(Hold.durationSeconds, function() --[[ Line: 81 ]]
+					v1 = cancellableDelay(Hold.durationSeconds, function()
 						-- upvalues: Hold (upval), Flag (upval), Connection (upval)
 						if not Hold.allowReleaseAfterHold then
 							Flag = false

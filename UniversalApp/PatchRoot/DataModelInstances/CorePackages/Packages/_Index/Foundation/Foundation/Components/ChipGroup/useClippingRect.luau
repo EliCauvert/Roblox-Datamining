@@ -1,9 +1,9 @@
 ﻿local ReactModule = require(script:FindFirstAncestor("Foundation").Parent.React)
 
-return function(p1) --[[ Line: 7 | Named "useClippingRect" ]]
+return function(p1)
 	-- upvalues: ReactModule (copy)
 	local UseBindingResult, UseBindingResult2 = ReactModule.useBinding(Rect.new(Vector2.zero, Vector2.zero))
-	ReactModule.useEffect(function() --[[ Line: 10 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: p1 (copy), UseBindingResult2 (copy)
 		if not p1.current then return end
 		local Frame = nil
@@ -23,7 +23,7 @@ return function(p1) --[[ Line: 7 | Named "useClippingRect" ]]
 				Frame = LayerCollector
 			end
 		end
-		local function update() --[[ Line: 32 ]]
+		local function update()
 			-- upvalues: Frame (ref), UseBindingResult2 (upval)
 			if Frame then
 				UseBindingResult2(Rect.new(Frame.AbsolutePosition, Frame.AbsolutePosition + Frame.AbsoluteSize))
@@ -39,7 +39,7 @@ return function(p1) --[[ Line: 7 | Named "useClippingRect" ]]
 		if Frame then
 			UseBindingResult2(Rect.new(Frame.AbsolutePosition, Frame.AbsolutePosition + Frame.AbsoluteSize))
 		end
-		return function() --[[ Line: 46 ]]
+		return function()
 			-- upvalues: List (copy)
 			for _, Connection in List do
 				Connection:Disconnect()

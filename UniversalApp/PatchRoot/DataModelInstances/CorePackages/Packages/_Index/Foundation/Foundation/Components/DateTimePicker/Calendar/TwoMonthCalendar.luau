@@ -9,16 +9,16 @@ local TwoMonthCalendarPaneModule = require(script.Parent.TwoMonthCalendarPane)
 local ViewModule = require(Foundation.Components.View)
 local UseScaledValueModule = require(Foundation.Utility.useScaledValue)
 
-return function(Frame) --[[ Line: 26 | Named "TwoMonthCalendar" ]]
+return function(Frame)
 	-- upvalues: UseScaledValueModule (copy), DateTimeLayoutUtilitiesModule (copy), ReactModule (copy), DateTimeCalendarViewUtilitiesModule (copy), DateTimeUtilitiesModule (copy), ViewModule (copy), TwoMonthCalendarHeaderModule (copy), DividerModule (copy), TwoMonthCalendarPaneModule (copy)
 	local UseScaledValueModuleResult: number = UseScaledValueModule(DateTimeLayoutUtilitiesModule.PANE_WIDTH)
 	local UseScaledValueModuleResultRatio = UseScaledValueModuleResult / 7
 	local UseStateResult, UseStateResult2 = ReactModule.useState(DateTimeCalendarViewUtilitiesModule.toViewDate(DateTimeCalendarViewUtilitiesModule.resolveAnchorDate(Frame.selectedDates, Frame.referenceDate)))
-	local UseStateResult1, UseStateResult2_1 = ReactModule.useState(function() --[[ Line: 36 ]]
+	local UseStateResult1, UseStateResult2_1 = ReactModule.useState(function()
 		return nil
 	end)
 	local UseRefResult = ReactModule.useRef(nil)
-	ReactModule.useEffect(function() --[[ Line: 44 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: Frame (copy), UseStateResult2 (copy), DateTimeCalendarViewUtilitiesModule (upval)
 		if Frame.viewAnchorDate then
 			UseStateResult2(DateTimeCalendarViewUtilitiesModule.toViewDate(Frame.viewAnchorDate))
@@ -26,7 +26,7 @@ return function(Frame) --[[ Line: 26 | Named "TwoMonthCalendar" ]]
 			return
 		end
 	end, { Frame.viewAnchorDate })
-	ReactModule.useEffect(function() --[[ Line: 51 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: Frame (copy), UseStateResult2 (copy), DateTimeCalendarViewUtilitiesModule (upval)
 		if Frame.viewAnchorDate or Frame.selectedDates and Frame.selectedDates[1] then return end
 		if Frame.referenceDate then
@@ -37,7 +37,7 @@ return function(Frame) --[[ Line: 26 | Named "TwoMonthCalendar" ]]
 		Frame.referenceDate,
 		Frame.selectedDates
 	})
-	ReactModule.useEffect(function() --[[ Line: 62 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: Frame (copy), UseStateResult2_1 (copy)
 		local SelectedDates = Frame.selectedDates
 		
@@ -45,44 +45,44 @@ return function(Frame) --[[ Line: 26 | Named "TwoMonthCalendar" ]]
 			UseStateResult2_1(nil)
 		end
 	end, { Frame.selectedDates })
-	ReactModule.useEffect(function() --[[ Line: 70 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UseRefResult (copy), UseStateResult2_1 (copy)
 		local Current = UseRefResult.current
 		
 		if Current == nil then return end
-		local MouseLeaveConnection = Current.MouseLeave:Connect(function() --[[ Line: 75 ]]
+		local MouseLeaveConnection = Current.MouseLeave:Connect(function()
 			-- upvalues: UseStateResult2_1 (upval)
 			UseStateResult2_1(nil)
 		end)
 		
-		return function() --[[ Line: 78 ]]
+		return function()
 			-- upvalues: MouseLeaveConnection (copy)
 			MouseLeaveConnection:Disconnect()
 		end
 	end, {})
-	local UseResult = ReactModule.useCallback(function() --[[ Line: 83 ]]
+	local UseResult = ReactModule.useCallback(function()
 		-- upvalues: UseStateResult2 (copy), DateTimeUtilitiesModule (upval)
-		UseStateResult2(function(p1) --[[ Line: 84 ]]
+		UseStateResult2(function(p1)
 			-- upvalues: DateTimeUtilitiesModule (upval)
 			local PrevMonthInfo, PrevMonthInfo2 = DateTimeUtilitiesModule.getPrevMonthInfo(p1.month, p1.year)
 			
 			return { month = PrevMonthInfo, year = PrevMonthInfo2 }
 		end)
 	end, {})
-	local UseResult1 = ReactModule.useCallback(function() --[[ Line: 90 ]]
+	local UseResult1 = ReactModule.useCallback(function()
 		-- upvalues: UseStateResult2 (copy), DateTimeUtilitiesModule (upval)
-		UseStateResult2(function(p1) --[[ Line: 91 ]]
+		UseStateResult2(function(p1)
 			-- upvalues: DateTimeUtilitiesModule (upval)
 			local NextMonthInfo, NextMonthInfo2 = DateTimeUtilitiesModule.getNextMonthInfo(p1.month, p1.year)
 			
 			return { month = NextMonthInfo, year = NextMonthInfo2 }
 		end)
 	end, {})
-	local UseResult2 = ReactModule.useCallback(function(p1) --[[ Line: 97 ]]
+	local UseResult2 = ReactModule.useCallback(function(p1)
 		-- upvalues: UseStateResult2_1 (copy)
 		UseStateResult2_1(p1)
 	end, {})
-	local UseResult3 = ReactModule.useCallback(function(p1) --[[ Line: 101 ]]
+	local UseResult3 = ReactModule.useCallback(function(p1)
 		-- upvalues: UseStateResult2_1 (copy), Frame (copy)
 		UseStateResult2_1(nil)
 		Frame.onDayActivated(p1)

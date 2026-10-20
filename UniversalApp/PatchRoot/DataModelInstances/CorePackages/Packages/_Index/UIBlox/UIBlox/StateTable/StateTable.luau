@@ -2,12 +2,12 @@
 local StateTableModule = {}
 StateTableModule.__index = StateTableModule
 
-local function _(p1, p2) --[[ Line: 9 | Named "validateStateTableItem" ]]
+local function _(p1, p2)
 	local ValueType = typeof(p1)
 	assert(ValueType == "string" or ValueType == "userdata", string.format("%s '%s' must be a string or userdata but is a %s", p2, tostring(p1), ValueType))
 end
 
-function StateTableModule.new(Name, CurrentState, p1, List) --[[ Line: 72 ]]
+function StateTableModule.new(Name, CurrentState, p1, List)
 	-- upvalues: StateTableModule (copy)
 	assert(typeof(Name) == "string", "name must be a string")
 	assert(#Name > 0, "name must not be an empty string")
@@ -46,7 +46,7 @@ function StateTableModule.new(Name, CurrentState, p1, List) --[[ Line: 72 ]]
 			t1[i1] = value1
 			
 			if t.events[i1] == nil then
-				t.events[i1] = function(p2) --[[ Line: 119 ]]
+				t.events[i1] = function(p2)
 					-- upvalues: t (copy), i1 (copy)
 					return t:handleEvent(i1, p2)
 				end
@@ -55,7 +55,7 @@ function StateTableModule.new(Name, CurrentState, p1, List) --[[ Line: 72 ]]
 		t.transitionTable[i] = t1
 	end
 	setmetatable(t.events, {
-		__index = function(_, p2) --[[ Line: 130 ]]
+		__index = function(_, p2)
 			-- upvalues: t (copy)
 			error(string.format("'%s' is not a valid event in StateTable '%s'", tostring(p2), t.name), 2)
 		end
@@ -64,7 +64,7 @@ function StateTableModule.new(Name, CurrentState, p1, List) --[[ Line: 72 ]]
 	return t
 end
 
-function StateTableModule:handleEvent(p2, p3) --[[ Line: 150 ]]
+function StateTableModule:handleEvent(p2, p3)
 	-- upvalues: CryoModule (copy)
 	local ValueType = typeof(p2)
 	assert(ValueType == "string" or ValueType == "userdata", string.format("%s '%s' must be a string or userdata but is a %s", "event", tostring(p2), ValueType))
@@ -91,7 +91,7 @@ function StateTableModule:handleEvent(p2, p3) --[[ Line: 150 ]]
 	end
 end
 
-function StateTableModule:onStateChange(StateChangeHandler) --[[ Line: 191 ]]
+function StateTableModule:onStateChange(StateChangeHandler)
 	assert(StateChangeHandler == nil or typeof(StateChangeHandler) == "function", "stateChangeHandler must be nil or a function")
 	self.stateChangeHandler = StateChangeHandler
 end

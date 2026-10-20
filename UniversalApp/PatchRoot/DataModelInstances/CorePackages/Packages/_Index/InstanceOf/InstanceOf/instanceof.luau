@@ -1,6 +1,6 @@
 ﻿local DEV = _G.__DEV__
 
-return function(Index, Index1): boolean --[[ Line: 20 | Named "instanceof" ]]
+return function(Index, Index1): boolean
 	-- upvalues: DEV (copy)
 	if DEV then
 		assert(typeof(Index1) == "table", "Received a non-table as the second argument for instanceof")
@@ -8,7 +8,7 @@ return function(Index, Index1): boolean --[[ Line: 20 | Named "instanceof" ]]
 	if typeof(Index) ~= "table" then
 		return false
 	end
-	local Success, Result = pcall(function(): boolean --[[ Line: 29 ]]
+	local Success, Result = pcall(function(): boolean
 		-- upvalues: Index1 (copy), Index (ref)
 		return Index1.new ~= nil and Index.new == Index1.new
 	end)

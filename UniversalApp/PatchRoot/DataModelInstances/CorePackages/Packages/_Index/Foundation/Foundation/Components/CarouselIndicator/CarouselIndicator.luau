@@ -12,7 +12,7 @@ local WithDefaultsModule = require(Foundation.Utility.withDefaults)
 local DotModule = require(script.Parent.Dot)
 local GetCarouselIndicatorDotsConfigModule = require(script.Parent.getCarouselIndicatorDotsConfig)
 
-local function getDotCenter(Dots, ActiveVisibleIndex, Size): number --[[ Line: 26 ]]
+local function getDotCenter(Dots, ActiveVisibleIndex, Size): number
 	local ScaledLargest = math.max(#Dots - 1, 0) * Size
 	local NewSize = 0
 	
@@ -34,7 +34,7 @@ local config = {
 	testId = "--foundation-carousel-indicator"
 }
 
-return ReactModule.memo(ReactModule.forwardRef(function(p1, p2) --[[ Line: 51 | Named "CarouselIndicator" ]]
+return ReactModule.memo(ReactModule.forwardRef(function(p1, p2)
 	-- upvalues: WithDefaultsModule (copy), config (copy), UseTokensModule (copy), ReactModule (copy), GetCarouselIndicatorDotsConfigModule (copy), ReactOtterModule (copy), UseRefCacheFunction (copy), getDotCenter (copy), DotModule (copy), ViewModule (copy), WithCommonPropsModule (copy)
 	local WithDefaultsModuleResult = WithDefaultsModule(p1, config)
 	local UseTokensModuleResult = UseTokensModule()
@@ -44,21 +44,21 @@ return ReactModule.memo(ReactModule.forwardRef(function(p1, p2) --[[ Line: 51 | 
 	local Size100_1 = UseTokensModuleResult.Size.Size_100
 	local Smallest = math.min(5, Count)
 	local XOffset = Smallest * Size200 + (Smallest - 1) * Size100
-	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 61 ]]
+	local UseMemoResult = ReactModule.useMemo(function()
 		-- upvalues: GetCarouselIndicatorDotsConfigModule (upval), Size200 (copy), Size100_1 (copy), WithDefaultsModuleResult (copy), Count (copy)
 		return GetCarouselIndicatorDotsConfigModule(Size200, Size100_1, WithDefaultsModuleResult.page, Count)
 	end, { Size200, Size100_1, WithDefaultsModuleResult.page, Count })
 	local UseRefResult = ReactModule.useRef(nil)
 	local UseAnimatedBindingResult, UseAnimatedBindingResult2 = ReactOtterModule.useAnimatedBinding(0)
 	local UseRefCacheResult = UseRefCacheFunction()
-	local UseMemoResult1 = ReactModule.useMemo(function() --[[ Line: 70 ]]
+	local UseMemoResult1 = ReactModule.useMemo(function()
 		-- upvalues: UseTokensModuleResult (copy)
 		return {
 			easingStyle = UseTokensModuleResult.Ease.StandardOut,
 			duration = UseTokensModuleResult.Time.Time_200
 		}
 	end, { UseTokensModuleResult })
-	ReactModule.useEffect(function() --[[ Line: 77 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UseRefResult (copy), UseMemoResult (copy), getDotCenter (upval), Size100 (copy), UseAnimatedBindingResult2 (copy), ReactOtterModule (upval), UseMemoResult1 (copy), UseAnimatedBindingResult (copy)
 		local Current = UseRefResult.current
 		UseRefResult.current = UseMemoResult
@@ -75,21 +75,21 @@ return ReactModule.memo(ReactModule.forwardRef(function(p1, p2) --[[ Line: 51 | 
 			UseAnimatedBindingResult2((ReactOtterModule.instant(0)))
 		end
 	end, { UseMemoResult, Size100, UseMemoResult1 })
-	local UseMemoResult2 = ReactModule.useMemo(function() --[[ Line: 99 ]]
+	local UseMemoResult2 = ReactModule.useMemo(function()
 		-- upvalues: UseTokensModuleResult (copy)
 		return {
 			easingStyle = UseTokensModuleResult.Ease.Linear,
 			duration = UseTokensModuleResult.Time.Time_100
 		}
 	end, { UseTokensModuleResult })
-	local UseMemoResult3 = ReactModule.useMemo(function() --[[ Line: 106 ]]
+	local UseMemoResult3 = ReactModule.useMemo(function()
 		-- upvalues: UseTokensModuleResult (copy)
 		return {
 			easingStyle = UseTokensModuleResult.Ease.StandardOut,
 			duration = UseTokensModuleResult.Time.Time_300
 		}
 	end, { UseTokensModuleResult })
-	ReactModule.useImperativeHandle(p2, function() --[[ Line: 113 ]]
+	ReactModule.useImperativeHandle(p2, function()
 		-- upvalues: WithDefaultsModuleResult (copy), UseMemoResult (copy), UseRefCacheResult (copy)
 		if not WithDefaultsModuleResult.onActivated then
 			return nil
@@ -137,7 +137,7 @@ return ReactModule.memo(ReactModule.forwardRef(function(p1, p2) --[[ Line: 51 | 
 		Dots = ReactModule.createElement(ViewModule, {
 			tag = "auto-y",
 			Size = UDim2.fromOffset(XOffset, 0),
-			layout = ReactModule.useMemo(function() --[[ Line: 162 ]]
+			layout = ReactModule.useMemo(function()
 				-- upvalues: Size100 (copy)
 				return {
 					FillDirection = Enum.FillDirection.Horizontal,
@@ -147,7 +147,7 @@ return ReactModule.memo(ReactModule.forwardRef(function(p1, p2) --[[ Line: 51 | 
 					HorizontalAlignment = Enum.HorizontalAlignment.Center
 				}
 			end, { Size100 }),
-			Position = UseAnimatedBindingResult:map(function(XOffset): UDim2 --[[ Line: 182 ]]
+			Position = UseAnimatedBindingResult:map(function(XOffset): UDim2
 				return UDim2.fromOffset(XOffset, 0)
 			end),
 			testId = `{WithDefaultsModuleResult.testId}--dots`

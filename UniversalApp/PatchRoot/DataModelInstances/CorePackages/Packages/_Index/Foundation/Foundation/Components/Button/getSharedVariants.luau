@@ -9,11 +9,11 @@ local _ = require(Foundation.Utility.composeStyleVariant)
 local _ = require(Foundation.Providers.Style.Tokens)
 local InputSizeModule = require(Foundation.Enums.InputSize)
 
-local function _(p1) --[[ Line: 40 | Named "toStroke" ]]
+local function _(p1)
 	return { Color = p1.Color3, Transparency = p1.Transparency }
 end
 
-local function createButtonVariantStyles(p1, p2, p3) --[[ Line: 48 ]]
+local function createButtonVariantStyles(p1, p2, p3)
 	-- upvalues: ColorNamespaceModule (copy), DashModule (copy), ConstantsModule (copy)
 	local t = {}
 	
@@ -44,7 +44,7 @@ local function createButtonVariantStyles(p1, p2, p3) --[[ Line: 48 ]]
 	return t
 end
 
-local function getButtonTypes(p4) --[[ Line: 89 ]]
+local function getButtonTypes(p4)
 	-- upvalues: ButtonVariantModule (copy), createButtonVariantStyles (copy)
 	return {
 		[ButtonVariantModule.Utility] = createButtonVariantStyles(p4, "ActionUtility"),
@@ -60,7 +60,7 @@ local function getButtonTypes(p4) --[[ Line: 89 ]]
 	}
 end
 
-local function getSizes(p4) --[[ Line: 106 ]]
+local function getSizes(p4)
 	-- upvalues: InputSizeModule (copy)
 	return {
 		[InputSizeModule.XSmall] = {
@@ -78,7 +78,7 @@ local function getSizes(p4) --[[ Line: 106 ]]
 	}
 end
 
-return function(p4) --[[ Line: 123 | Named "getSharedVariants" ]]
+return function(p4)
 	-- upvalues: getSizes (copy), getButtonTypes (copy)
 	return { sizes = getSizes(p4), types = getButtonTypes(p4) }
 end

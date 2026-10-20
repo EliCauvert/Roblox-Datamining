@@ -2,7 +2,7 @@
 local PresenceContextModule = require(script.Parent.PresenceContext)
 local IsPresentFunction = require(script.Parent.PresenceUtils).isPresent
 
-return function() --[[ Line: 37 | Named "usePresence" ]]
+return function()
 	-- upvalues: ReactModule (copy), PresenceContextModule (copy), IsPresentFunction (copy)
 	local UseContextResult = ReactModule.useContext(PresenceContextModule)
 	local Id = UseContextResult.id
@@ -12,7 +12,7 @@ return function() --[[ Line: 37 | Named "usePresence" ]]
 	return {
 		isPresent = IsPresentFunction(UseContextResult),
 		id = Id,
-		onExitComplete = ReactModule.useCallback(function() --[[ Line: 49 ]]
+		onExitComplete = ReactModule.useCallback(function()
 			-- upvalues: OnExitCompleteFunction (copy), Id (copy)
 			if OnExitCompleteFunction then
 				OnExitCompleteFunction(Id)

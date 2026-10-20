@@ -2,7 +2,7 @@
 local _ = require(script.message)
 local _ = require(script.typeRegistry)
 
-local function readVarIntBytes(Buf, Offset: number) --[[ Line: 21 ]]
+local function readVarIntBytes(Buf, Offset: number)
 	local Value = 0
 	local Value1 = 0
 	local Shift = 0
@@ -18,19 +18,19 @@ local function readVarIntBytes(Buf, Offset: number) --[[ Line: 21 ]]
 end
 
 local ProtoModule = {
-	readVarIntU64 = function(p1, p2) --[[ Line: 38 ]]
+	readVarIntU64 = function(p1, p2)
 		-- upvalues: readVarIntBytes (copy)
 		local VarIntBytes, VarIntBytes2, VarIntBytes3 = readVarIntBytes(p1, p2)
 		
 		return VarIntBytes2 * 4294967296 + VarIntBytes, VarIntBytes3
 	end,
-	readVarIntU32 = function(p1, p2) --[[ Line: 45 ]]
+	readVarIntU32 = function(p1, p2)
 		-- upvalues: readVarIntBytes (copy)
 		local VarIntBytes, _, VarIntBytes3 = readVarIntBytes(p1, p2)
 		
 		return VarIntBytes, VarIntBytes3
 	end,
-	readVarIntI64 = function(p1, p2) --[[ Line: 52 ]]
+	readVarIntI64 = function(p1, p2)
 		-- upvalues: readVarIntBytes (copy)
 		local VarIntBytes, VarIntBytes2, VarIntBytes3 = readVarIntBytes(p1, p2)
 		
@@ -46,7 +46,7 @@ local ProtoModule = {
 		end
 		return -(Bits * 4294967296 + NewBits), VarIntBytes3
 	end,
-	readVarIntI32 = function(p1, p2) --[[ Line: 71 ]]
+	readVarIntI32 = function(p1, p2)
 		-- upvalues: readVarIntBytes (copy)
 		local VarIntBytes, _, VarIntBytes3 = readVarIntBytes(p1, p2)
 		
@@ -56,7 +56,7 @@ local ProtoModule = {
 			return VarIntBytes - 4294967296, VarIntBytes3
 		end
 	end,
-	readVarIntS64 = function(p1, p2) --[[ Line: 82 ]]
+	readVarIntS64 = function(p1, p2)
 		-- upvalues: readVarIntBytes (copy)
 		local Value, Value1, VarIntBytes3 = readVarIntBytes(p1, p2)
 		local BtestResult = bit32.btest(Value, 1)
@@ -81,7 +81,7 @@ local ProtoModule = {
 			return Shifted * 4294967296 + Bits, VarIntBytes3
 		end
 	end,
-	readVarIntS32 = function(p1, p2) --[[ Line: 113 ]]
+	readVarIntS32 = function(p1, p2)
 		-- upvalues: readVarIntBytes (copy)
 		local VarIntBytes, _, VarIntBytes3 = readVarIntBytes(p1, p2)
 		
@@ -94,38 +94,38 @@ local ProtoModule = {
 }
 ProtoModule.readVarInt = ProtoModule.readVarIntI64
 
-function ProtoModule.readFloat(Buf, Offset: number) --[[ Line: 126 ]]
+function ProtoModule.readFloat(Buf, Offset: number)
 	return buffer.readf32(Buf, Offset), Offset + 4
 end
 
-function ProtoModule.readDouble(Buf, Offset: number) --[[ Line: 130 ]]
+function ProtoModule.readDouble(Buf, Offset: number)
 	return buffer.readf64(Buf, Offset), Offset + 8
 end
 
-function ProtoModule.readFixed32(Buf, Offset: number) --[[ Line: 134 ]]
+function ProtoModule.readFixed32(Buf, Offset: number)
 	return buffer.readu32(Buf, Offset), Offset + 4
 end
 
-function ProtoModule.readSignedFixed32(Buf, Offset: number) --[[ Line: 138 ]]
+function ProtoModule.readSignedFixed32(Buf, Offset: number)
 	return buffer.readi32(Buf, Offset), Offset + 4
 end
 
-function ProtoModule.readFixed64(Buf, Offset: number) --[[ Line: 143 ]]
+function ProtoModule.readFixed64(Buf, Offset: number)
 	return assert(tonumber(string.format("%08x", (buffer.readu32(Buf, Offset + 4))) .. string.format("%08x", (buffer.readu32(Buf, Offset))), 16), "Couldn't parse created hex"), Offset + 8
 end
 
-function ProtoModule:readSignedFixed64(_) --[[ Line: 151 ]]
+function ProtoModule:readSignedFixed64(_)
 	error("TODO: Read sfixed64")
 end
 
-function ProtoModule.readTag(p1, p2) --[[ Line: 155 ]]
+function ProtoModule.readTag(p1, p2)
 	-- upvalues: ProtoModule (copy)
 	local VarInt, VarInt2 = ProtoModule.readVarInt(p1, p2)
 	
 	return bit32.rshift(VarInt, 3), bit32.band(VarInt, 7), VarInt2
 end
 
-function ProtoModule.readBuffer(Source, p1) --[[ Line: 160 ]]
+function ProtoModule.readBuffer(Source, p1)
 	-- upvalues: ProtoModule (copy)
 	local VarInt, VarInt2 = ProtoModule.readVarInt(Source, p1)
 	local Buf = buffer.create(VarInt)
@@ -134,7 +134,7 @@ function ProtoModule.readBuffer(Source, p1) --[[ Line: 160 ]]
 	return Buf, VarInt2 + VarInt
 end
 
-local function reserveBuffer(Buf, Count, Count1) --[[ Line: 167 ]]
+local function reserveBuffer(Buf, Count, Count1)
 	if buffer.len(Buf) - Count < Count1 then
 		local Buf1 = buffer.create(3 ^ math.ceil((math.log(buffer.len(Buf) + Count1, 3))))
 		buffer.copy(Buf1, 0, Buf, 0, Count)
@@ -154,7 +154,7 @@ ProtoModule.wireTypes = {
 	i32 = 5
 }
 
-function ProtoModule.writeVarInt(Buf, Offset: number, Count: number) --[[ Line: 186 ]]
+function ProtoModule.writeVarInt(Buf, Offset: number, Count: number)
 	-- upvalues: reserveBuffer (copy)
 	if Count >= 0 then
 		while true do
@@ -192,7 +192,7 @@ function ProtoModule.writeVarInt(Buf, Offset: number, Count: number) --[[ Line: 
 	return Buf, Offset
 end
 
-function ProtoModule.writeVarIntZigZag(Buf, Offset: number, Value: number) --[[ Line: 225 ]]
+function ProtoModule.writeVarIntZigZag(Buf, Offset: number, Value: number)
 	-- upvalues: reserveBuffer (copy)
 	local IsValueBelow = Value < 0
 	local Magnitude = math.abs(Value)
@@ -221,7 +221,7 @@ function ProtoModule.writeVarIntZigZag(Buf, Offset: number, Value: number) --[[ 
 	return Buf, Offset
 end
 
-function ProtoModule.writeFloat(Buf, Offset: number, Value) --[[ Line: 259 ]]
+function ProtoModule.writeFloat(Buf, Offset: number, Value)
 	-- upvalues: reserveBuffer (copy)
 	local ReserveBufferResult = reserveBuffer(Buf, Offset, 4)
 	buffer.writef32(ReserveBufferResult, Offset, Value)
@@ -229,7 +229,7 @@ function ProtoModule.writeFloat(Buf, Offset: number, Value) --[[ Line: 259 ]]
 	return ReserveBufferResult, Offset + 4
 end
 
-function ProtoModule.writeDouble(Buf, Offset: number, Value) --[[ Line: 265 ]]
+function ProtoModule.writeDouble(Buf, Offset: number, Value)
 	-- upvalues: reserveBuffer (copy)
 	local ReserveBufferResult = reserveBuffer(Buf, Offset, 8)
 	buffer.writef64(ReserveBufferResult, Offset, Value)
@@ -237,7 +237,7 @@ function ProtoModule.writeDouble(Buf, Offset: number, Value) --[[ Line: 265 ]]
 	return ReserveBufferResult, Offset + 8
 end
 
-function ProtoModule.writeFixed32(Buf, Offset: number, Value) --[[ Line: 271 ]]
+function ProtoModule.writeFixed32(Buf, Offset: number, Value)
 	-- upvalues: reserveBuffer (copy)
 	local ReserveBufferResult = reserveBuffer(Buf, Offset, 4)
 	buffer.writeu32(ReserveBufferResult, Offset, Value)
@@ -245,7 +245,7 @@ function ProtoModule.writeFixed32(Buf, Offset: number, Value) --[[ Line: 271 ]]
 	return ReserveBufferResult, Offset + 4
 end
 
-function ProtoModule.writeSignedFixed32(Buf, Offset: number, Value) --[[ Line: 277 ]]
+function ProtoModule.writeSignedFixed32(Buf, Offset: number, Value)
 	-- upvalues: reserveBuffer (copy)
 	local ReserveBufferResult = reserveBuffer(Buf, Offset, 4)
 	buffer.writei32(ReserveBufferResult, Offset, Value)
@@ -253,7 +253,7 @@ function ProtoModule.writeSignedFixed32(Buf, Offset: number, Value) --[[ Line: 2
 	return ReserveBufferResult, Offset + 4
 end
 
-function ProtoModule.writeFixed64(Buf, Offset: number, p1) --[[ Line: 283 ]]
+function ProtoModule.writeFixed64(Buf, Offset: number, p1)
 	-- upvalues: reserveBuffer (copy)
 	local ReserveBufferResult = reserveBuffer(Buf, Offset, 8)
 	local Formatted = string.format("%016x", p1)
@@ -263,16 +263,16 @@ function ProtoModule.writeFixed64(Buf, Offset: number, p1) --[[ Line: 283 ]]
 	return ReserveBufferResult, Offset + 8
 end
 
-function ProtoModule:writeSignedFixed64(_, _) --[[ Line: 294 ]]
+function ProtoModule:writeSignedFixed64(_, _)
 	error("TODO: Write sfixed64")
 end
 
-function ProtoModule.writeTag(Buf, Offset, Value: number, p1) --[[ Line: 298 ]]
+function ProtoModule.writeTag(Buf, Offset, Value: number, p1)
 	-- upvalues: ProtoModule (copy)
 	return ProtoModule.writeVarInt(Buf, Offset, bit32.lshift(Value, 3) + p1)
 end
 
-function ProtoModule.writeBuffer(Buf, Offset, Source, Count) --[[ Line: 302 ]]
+function ProtoModule.writeBuffer(Buf, Offset, Source, Count)
 	-- upvalues: ProtoModule (copy), reserveBuffer (copy)
 	local WriteVarIntResult, WriteVarIntResult2 = ProtoModule.writeVarInt(Buf, Offset, Count)
 	local ReserveBufferResult = reserveBuffer(WriteVarIntResult, WriteVarIntResult2, Count)
@@ -281,18 +281,18 @@ function ProtoModule.writeBuffer(Buf, Offset, Source, Count) --[[ Line: 302 ]]
 	return ReserveBufferResult, WriteVarIntResult2 + Count
 end
 
-function ProtoModule.writeString(p1, p2, p3) --[[ Line: 311 ]]
+function ProtoModule.writeString(p1, p2, p3)
 	-- upvalues: ProtoModule (copy)
 	return ProtoModule.writeBuffer(p1, p2, buffer.fromstring(p3), #p3)
 end
 
 ProtoModule.json = {}
 
-function ProtoModule.json.serializeNumber(p1) --[[ Line: 317 ]]
+function ProtoModule.json.serializeNumber(p1)
 	return if p1 == 1e999 then "Infinity" elseif p1 == -1e999 then "-Infinity" elseif p1 == p1 then p1 else "NaN"
 end
 
-function ProtoModule.json.deserializeNumber(p1) --[[ Line: 325 ]]
+function ProtoModule.json.deserializeNumber(p1)
 	if p1 == "Infinity" then
 		return 1e999
 	elseif p1 == "-Infinity" then
@@ -309,12 +309,12 @@ function ProtoModule.json.deserializeNumber(p1) --[[ Line: 325 ]]
 	end
 end
 
-function ProtoModule.json.serializeBuffer(Buf) --[[ Line: 341 ]]
+function ProtoModule.json.serializeBuffer(Buf)
 	-- upvalues: Base64Module (copy)
 	return Base64Module.encode(buffer.tostring(Buf))
 end
 
-function ProtoModule.json.deserializeBuffer(p1) --[[ Line: 345 ]]
+function ProtoModule.json.deserializeBuffer(p1)
 	-- upvalues: Base64Module (copy)
 	return buffer.fromstring(Base64Module.decode(p1))
 end

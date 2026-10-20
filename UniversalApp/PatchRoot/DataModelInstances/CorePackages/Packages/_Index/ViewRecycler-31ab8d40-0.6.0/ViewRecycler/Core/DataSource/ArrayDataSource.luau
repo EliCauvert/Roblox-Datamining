@@ -1,31 +1,31 @@
 ﻿local _ = require(script:FindFirstAncestor("ViewRecycler").Core.Types)
 local KeyUtilsModule = require(script.Parent.KeyUtils)
 
-local function v2() --[[ Line: 18 ]] end
+local function v2() end
 
-return function(Tbl, p1) --[[ Line: 20 | Named "createArrayDataSource" ]]
+return function(Tbl, p1)
 	-- upvalues: KeyUtilsModule (copy), v2 (copy)
 	local Copy = table.clone(Tbl)
 	local KeysForResult = KeyUtilsModule.keysFor(Copy, p1)
 	
 	return {
-		getItemCount = function(): number --[[ Line: 24 ]]
+		getItemCount = function(): number
 			-- upvalues: Copy (copy)
 			return #Copy
 		end,
-		getItem = function(p2) --[[ Line: 27 ]]
+		getItem = function(p2)
 			-- upvalues: Copy (copy)
 			return Copy[p2]
 		end,
-		getItemKey = function(p2) --[[ Line: 30 ]]
+		getItemKey = function(p2)
 			-- upvalues: KeysForResult (copy)
 			return KeysForResult[p2]
 		end,
-		getItems = function(p2, p3) --[[ Line: 33 ]]
+		getItems = function(p2, p3)
 			-- upvalues: Copy (copy)
 			return table.move(Copy, p2, p3, 1, {})
 		end,
-		subscribe = function(_) --[[ Line: 36 ]]
+		subscribe = function(_)
 			-- upvalues: v2 (upval)
 			return v2
 		end

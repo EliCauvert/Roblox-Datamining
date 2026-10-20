@@ -23,14 +23,14 @@ ModalBottomSheet.defaultProps = {
 	sheetContentXPosition = UDim.new(0, 0)
 }
 
-function ModalBottomSheet.init(p1) --[[ Line: 49 ]]
+function ModalBottomSheet.init(p1)
 	-- upvalues: OtterModule (copy), RoactModule (copy)
 	p1.motor = OtterModule.createSingleMotor(0)
 	p1.ref = RoactModule.createRef()
 	p1.active = true
 end
 
-function ModalBottomSheet.render(p1) --[[ Line: 55 ]]
+function ModalBottomSheet.render(p1)
 	-- upvalues: CryoModule (copy), RoactModule (copy), ModalBottomSheetButtonModule (copy), WithStyleModule (copy), OtterModule (copy), config (copy)
 	local SheetContentXPosition = p1.props.sheetContentXPosition
 	local SheetContentXSize = p1.props.sheetContentXSize
@@ -49,7 +49,7 @@ function ModalBottomSheet.render(p1) --[[ Line: 55 ]]
 			isFixed = p1.props.screenWidth > 600,
 			showImage = p1.props.showImages,
 			LayoutOrder = LayoutOrder,
-			onActivatedAndDismissed = function(p2) --[[ Line: 72 ]]
+			onActivatedAndDismissed = function(p2)
 				-- upvalues: buttonModel (copy), p1 (copy)
 				if buttonModel.onActivated then
 					buttonModel.onActivated(p2)
@@ -66,7 +66,7 @@ function ModalBottomSheet.render(p1) --[[ Line: 55 ]]
 		SortOrder = Enum.SortOrder.LayoutOrder
 	})
 	
-	return WithStyleModule(function(p2) --[[ Line: 91 ]]
+	return WithStyleModule(function(p2)
 		-- upvalues: RoactModule (upval), p1 (copy), OtterModule (upval), config (upval), SheetContentXSize (copy), SheetContentXPosition (copy), Elements (copy)
 		return RoactModule.createElement("Frame", {
 			BackgroundTransparency = 1,
@@ -82,7 +82,7 @@ function ModalBottomSheet.render(p1) --[[ Line: 55 ]]
 				Selectable = false,
 				Size = UDim2.new(1, 0, 1, 0),
 				Text = "",
-				[RoactModule.Event.Activated] = function() --[[ Line: 106 ]]
+				[RoactModule.Event.Activated] = function()
 					-- upvalues: p1 (upval), OtterModule (upval), config (upval)
 					p1.active = false
 					p1.motor:setGoal(OtterModule.spring(0, config))
@@ -102,17 +102,17 @@ function ModalBottomSheet.render(p1) --[[ Line: 55 ]]
 	end)
 end
 
-function ModalBottomSheet.didMount(p2) --[[ Line: 130 ]]
+function ModalBottomSheet.didMount(p2)
 	-- upvalues: OtterModule (copy), config (copy)
 	local SheetContentXPosition = p2.props.sheetContentXPosition
-	p2.motor:onStep(function(p3) --[[ Line: 132 ]]
+	p2.motor:onStep(function(p3)
 		-- upvalues: p2 (copy), SheetContentXPosition (copy)
 		if p2.ref.current then
 			p2.ref.current.Position = UDim2.new(SheetContentXPosition.Scale, SheetContentXPosition.Offset, 1, -(p2.sheetHeight + p2.props.bottomGap) * p3)
 		end
 	end)
 	p2.motor:setGoal(OtterModule.spring(1, config))
-	p2.motor:onComplete(function() --[[ Line: 143 ]]
+	p2.motor:onComplete(function()
 		-- upvalues: p2 (copy)
 		if not p2.active then
 			p2.props.onDismiss()
@@ -121,7 +121,7 @@ function ModalBottomSheet.didMount(p2) --[[ Line: 130 ]]
 	p2.motor:start()
 end
 
-function ModalBottomSheet.willUnmount(p2) --[[ Line: 151 ]]
+function ModalBottomSheet.willUnmount(p2)
 	p2.motor:destroy()
 end
 

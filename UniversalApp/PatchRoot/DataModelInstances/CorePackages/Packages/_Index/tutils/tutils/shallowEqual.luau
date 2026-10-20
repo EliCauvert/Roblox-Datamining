@@ -1,4 +1,4 @@
-﻿return function(List, List1, p1): boolean --[[ Line: 5 ]]
+﻿return function(List, List1, p1): boolean
 	if not List or not List1 then
 		return false
 	end

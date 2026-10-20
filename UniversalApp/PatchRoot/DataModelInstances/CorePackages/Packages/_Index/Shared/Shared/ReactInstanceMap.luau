@@ -6,22 +6,22 @@ local GetComponentNameModule = require(script.Parent.getComponentName)
 local DEV = require(Parent.ReactGlobals).__DEV__
 local v1 = require(Parent.SafeFlags).createGetFFlag("ReactInstanceMapDisableErrorChecking")()
 
-local function _(p1): boolean --[[ Line: 43 | Named "isValidFiber" ]]
+local function _(p1): boolean
 	return p1.tag ~= nil and (p1.subtreeFlags ~= nil and (p1.lanes ~= nil and p1.childLanes ~= nil))
 end
 
 local ReactInstanceMapModule = {
-	remove = function(p1) --[[ Line: 50 ]]
+	remove = function(p1)
 		p1._reactInternals = nil
 	end
 }
 
 if v1 and not DEV then
-	function ReactInstanceMapModule.get(p1) --[[ Line: 81 ]]
+	function ReactInstanceMapModule.get(p1)
 		return p1._reactInternals
 	end
 else
-	function ReactInstanceMapModule.get(p1) --[[ Line: 55 ]]
+	function ReactInstanceMapModule.get(p1)
 		-- upvalues: Error1 (copy), GetComponentNameModule (copy), InspectFunction (copy)
 		local ReactInternals = p1._reactInternals
 		
@@ -40,18 +40,18 @@ else
 		return ReactInternals
 	end
 end
-function ReactInstanceMapModule.has(p1): boolean --[[ Line: 86 ]]
+function ReactInstanceMapModule.has(p1): boolean
 	return p1._reactInternals ~= nil
 end
 
 if v1 and not DEV then
-	function ReactInstanceMapModule.set(p1, _reactInternals) --[[ Line: 128 ]]
+	function ReactInstanceMapModule.set(p1, _reactInternals)
 		p1._reactInternals = _reactInternals
 	end
 	
 	return ReactInstanceMapModule
 else
-	function ReactInstanceMapModule.set(p1, Return) --[[ Line: 91 ]]
+	function ReactInstanceMapModule.set(p1, Return)
 		-- upvalues: GetComponentNameModule (copy), InspectFunction (copy), Error1 (copy)
 		local Return1 = Return
 		while Return1 ~= nil do

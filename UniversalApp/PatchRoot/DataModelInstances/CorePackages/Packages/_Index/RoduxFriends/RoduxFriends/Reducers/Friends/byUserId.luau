@@ -11,12 +11,12 @@ local SetFriendshipsInStoreModule = require(script.Parent.utils.setFriendshipsIn
 local RemoveTargetUserFriendshipInStoreModule = require(script.Parent.utils.removeTargetUserFriendshipInStore)
 local t = {}
 
-return function(p1) --[[ Line: 17 ]]
+return function(p1)
 	-- upvalues: RoduxModule (copy), t (copy), FriendshipCreatedModule (copy), LlamaModule (copy), AddUserModule (copy), FriendshipDestroyedModule (copy), RemoveUserModule (copy), SetFriendshipsInStoreModule (copy), RemoveTargetUserFriendshipInStoreModule (copy)
 	local FriendsNetworking = p1.friendsNetworking
 	
 	return RoduxModule.createReducer(t, {
-		[FriendshipCreatedModule.name] = function(p2, p3) --[[ Line: 21 ]]
+		[FriendshipCreatedModule.name] = function(p2, p3)
 			-- upvalues: LlamaModule (upval), AddUserModule (upval)
 			assert(type(p3.payload.userId1) == "string", "Expected userId1 to be a string")
 			assert(type(p3.payload.userId2) == "string", "Expected userId2 to be a string")
@@ -26,7 +26,7 @@ return function(p1) --[[ Line: 17 ]]
 				[p3.payload.userId2] = AddUserModule(p2[p3.payload.userId2], p3.payload.userId1)
 			})
 		end,
-		[FriendshipDestroyedModule.name] = function(p2, p3) --[[ Line: 31 ]]
+		[FriendshipDestroyedModule.name] = function(p2, p3)
 			-- upvalues: LlamaModule (upval), RemoveUserModule (upval)
 			assert(type(p3.payload.userId1) == "string", "Expected userId1 to be a string")
 			assert(type(p3.payload.userId2) == "string", "Expected userId2 to be a string")
@@ -36,15 +36,15 @@ return function(p1) --[[ Line: 17 ]]
 				[p3.payload.userId2] = RemoveUserModule(p2[p3.payload.userId2], p3.payload.userId1)
 			})
 		end,
-		[FriendsNetworking.GetFriendsFromUserId.Succeeded.name] = function(p2, p3) --[[ Line: 41 ]]
+		[FriendsNetworking.GetFriendsFromUserId.Succeeded.name] = function(p2, p3)
 			-- upvalues: SetFriendshipsInStoreModule (upval)
 			return SetFriendshipsInStoreModule(p2, p3)
 		end,
-		[FriendsNetworking.UnfriendTargetUserId.Succeeded.name] = function(p2, p3) --[[ Line: 45 ]]
+		[FriendsNetworking.UnfriendTargetUserId.Succeeded.name] = function(p2, p3)
 			-- upvalues: RemoveTargetUserFriendshipInStoreModule (upval)
 			return RemoveTargetUserFriendshipInStoreModule(p2, p3)
 		end,
-		[FriendsNetworking.AcceptFriendRequestFromUserId.Succeeded.name] = function(p2, p3) --[[ Line: 48 ]]
+		[FriendsNetworking.AcceptFriendRequestFromUserId.Succeeded.name] = function(p2, p3)
 			-- upvalues: LlamaModule (upval), AddUserModule (upval)
 			local Text = tostring(p3.ids[1])
 			local Text1 = tostring(p3.additionalData.currentUserId)

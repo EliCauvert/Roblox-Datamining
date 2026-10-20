@@ -6,7 +6,7 @@ local NormalizeFontFaceFunction = FoundationModule.Utility.normalizeFontFace
 local UseStyleModule = require(Parent.Core.Style.useStyle)
 local FoundationFontFaceMigration = FoundationModule.Utility.Flags.FoundationFontFaceMigration
 
-return function(Frame) --[[ Line: 22 | Named "HelperText" ]]
+return function(Frame)
 	-- upvalues: UseStyleModule (copy), ReactModule (copy), FoundationFontFaceMigration (copy), NormalizeFontFaceFunction (copy)
 	local UseStyleModuleResult = UseStyleModule()
 	local CaptionSmall = UseStyleModuleResult.Tokens.Typography.CaptionSmall

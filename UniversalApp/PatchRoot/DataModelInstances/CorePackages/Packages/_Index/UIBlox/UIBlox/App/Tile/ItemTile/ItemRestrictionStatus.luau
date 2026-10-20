@@ -19,7 +19,7 @@ ItemRestrictionStatus.validateProps = TModule.strictInterface({
 	restrictionInfo = TModule.optional(TModule.table)
 })
 
-local function _(p1, p2): string --[[ Line: 37 | Named "getAdditionalText" ]]
+local function _(p1, p2): string
 	-- upvalues: ItemTileEnumsModule (copy)
 	local Text: string = if p1[ItemTileEnumsModule.Restriction.LimitedUnique] then "#" else ""
 	
@@ -32,14 +32,14 @@ local function _(p1, p2): string --[[ Line: 37 | Named "getAdditionalText" ]]
 	return Text
 end
 
-local _ = function(p1) --[[ Line: 55 | Named "getRestrictionIcon" ]]
+local _ = function(p1)
 	-- upvalues: ItemTileEnumsModule (copy), ImagesModule (copy)
 	return if p1[ItemTileEnumsModule.Restriction.Collectible] then ImagesModule["icons/status/item/limited"] elseif p1[ItemTileEnumsModule.Restriction.Limited] or p1[ItemTileEnumsModule.Restriction.LimitedUnique] then ImagesModule["icons/status/item/limited"] else nil
 end
 
-function ItemRestrictionStatus.render(p1) --[[ Line: 70 ]]
+function ItemRestrictionStatus.render(p1)
 	-- upvalues: WithStyleModule (copy), ItemTileEnumsModule (copy), GetTextSizeModule (copy), _Vector2 (copy), ImagesModule (copy), _Vector2_1 (copy), RoactModule (copy), ImageSetComponentModule (copy), FoundationFontFaceMigration (copy), NormalizeFontFaceFunction (copy)
-	return WithStyleModule(function(p2) --[[ Line: 71 ]]
+	return WithStyleModule(function(p2)
 		-- upvalues: p1 (copy), ItemTileEnumsModule (upval), GetTextSizeModule (upval), _Vector2 (upval), ImagesModule (upval), _Vector2_1 (upval), RoactModule (upval), ImageSetComponentModule (upval), FoundationFontFaceMigration (upval), NormalizeFontFaceFunction (upval)
 		local Theme = p2.Theme
 		local _Font = p2.Font

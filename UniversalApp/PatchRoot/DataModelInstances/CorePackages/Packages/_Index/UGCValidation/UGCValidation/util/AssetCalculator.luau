@@ -27,7 +27,7 @@ local config = {
 	children = { LowerTorso = LowerTorso }
 }
 
-local function calculateCFrame(Position, Position1): CFrame? --[[ Line: 60 ]]
+local function calculateCFrame(Position, Position1): CFrame?
 	-- upvalues: CanBeNormalizedModule (copy)
 	local PositionDelta = Position - Position1
 	
@@ -41,7 +41,7 @@ local function calculateCFrame(Position, Position1): CFrame? --[[ Line: 60 ]]
 	return CFrame.fromMatrix(Position, Direction1, Direction, Direction1:Cross(Direction).Unit)
 end
 
-local function calculatePartTransformInHierarchy(Object, p1, p2, Callback, p3) --[[ Line: 79 ]]
+local function calculatePartTransformInHierarchy(Object, p1, p2, Callback, p3)
 	-- upvalues: ConstantsInterfaceModule (copy), R15plusUtilsModule (copy), GetAttachmentCFrameInPartSpaceModule (copy)
 	local _CFrame = if p3 and p3[Object.Name] then p3[Object.Name] else CFrame.new()
 	
@@ -60,11 +60,11 @@ local function calculatePartTransformInHierarchy(Object, p1, p2, Callback, p3) -
 	end
 end
 
-local function calculateHierarchyTransforms(AssetHierarchyEntry, Callback, p1) --[[ Line: 112 ]]
+local function calculateHierarchyTransforms(AssetHierarchyEntry, Callback, p1)
 	-- upvalues: calculatePartTransformInHierarchy (copy)
 	local t = {}
 	
-	local function calculateAllTransformsInternal(Root, p2, p3, p4) --[[ Line: 119 ]]
+	local function calculateAllTransformsInternal(Root, p2, p3, p4)
 		-- upvalues: Callback (copy), calculatePartTransformInHierarchy (upval), p1 (copy), t (copy), calculateAllTransformsInternal (copy)
 		local CallbackResult = Callback(Root)
 		assert(CallbackResult)
@@ -82,22 +82,22 @@ local function calculateHierarchyTransforms(AssetHierarchyEntry, Callback, p1) -
 	return t
 end
 
-local function _(p2, p3): CFrame --[[ Line: 140 | Named "calculateLocalSpaceTransform" ]]
+local function _(p2, p3): CFrame
 	return CFrame.new(p2.Rotation:Inverse() * (p3.Position - p2.Position)) * (p2.Rotation:Inverse() * p3.Rotation)
 end
 
-local function calculateAssetCFrameFromPartsCFrames(AssetType, AllTransformsForAsset) --[[ Line: 147 ]]
+local function calculateAssetCFrameFromPartsCFrames(AssetType, AllTransformsForAsset)
 	-- upvalues: GetPartNamesInHierarchyOrderModule (copy), calculateCFrame (copy)
 	local PartNamesInHierarchyOrderModule = GetPartNamesInHierarchyOrderModule(AssetType)
 	
 	return calculateCFrame(AllTransformsForAsset[PartNamesInHierarchyOrderModule[1]].Position, AllTransformsForAsset[PartNamesInHierarchyOrderModule[3]].Position)
 end
 
-local _ = function(AssetType) --[[ Line: 158 | Named "assertTypesToOrient" ]]
+local _ = function(AssetType)
 	assert(AssetType == Enum.AssetType.LeftArm or (AssetType == Enum.AssetType.RightArm or (AssetType == Enum.AssetType.LeftLeg or AssetType == Enum.AssetType.RightLeg)))
 end
 
-local _ = function(Object, ChildName, p2) --[[ Line: 167 | Named "getAttachmentCFrame" ]]
+local _ = function(Object, ChildName, p2)
 	-- upvalues: R15plusUtilsModule (copy), GetAttachmentCFrameInPartSpaceModule (copy)
 	local ChildName1 = Object:FindFirstChild(ChildName, R15plusUtilsModule.checkFlagEnabledForAllowHrd())
 	assert(ChildName1)
@@ -106,7 +106,7 @@ local _ = function(Object, ChildName, p2) --[[ Line: 167 | Named "getAttachmentC
 end
 
 local AssetCalculatorModule = {
-	calculatePartCFrameFromRigAttachments = function(AssetType, Object, p2) --[[ Line: 174 ]]
+	calculatePartCFrameFromRigAttachments = function(AssetType, Object, p2)
 		-- upvalues: ConstantsInterfaceModule (copy), R15plusUtilsModule (copy), GetAttachmentCFrameInPartSpaceModule (copy), AssetTraversalUtilsModule (copy), calculateCFrame (copy)
 		assert(AssetType == Enum.AssetType.LeftArm or (AssetType == Enum.AssetType.RightArm or (AssetType == Enum.AssetType.LeftLeg or AssetType == Enum.AssetType.RightLeg)))
 		local RigAttachmentToParent = ConstantsInterfaceModule.getRigAttachmentToParent(AssetType, Object.Name)
@@ -125,7 +125,7 @@ local AssetCalculatorModule = {
 	end
 }
 
-function AssetCalculatorModule.calculateStraightenedLimb(AssetType, AllTransformsForAsset, Callback) --[[ Line: 198 ]]
+function AssetCalculatorModule.calculateStraightenedLimb(AssetType, AllTransformsForAsset, Callback)
 	-- upvalues: CryoModule (copy), GetPartNamesInHierarchyOrderModule (copy), AssetTraversalUtilsModule (copy), AssetCalculatorModule (copy), ConstantsInterfaceModule (copy), R15plusUtilsModule (copy), GetAttachmentCFrameInPartSpaceModule (copy)
 	assert(AssetType == Enum.AssetType.LeftArm or (AssetType == Enum.AssetType.RightArm or (AssetType == Enum.AssetType.LeftLeg or AssetType == Enum.AssetType.RightLeg)))
 	local JoinResult = CryoModule.Dictionary.join(AllTransformsForAsset)
@@ -161,30 +161,30 @@ function AssetCalculatorModule.calculateStraightenedLimb(AssetType, AllTransform
 	return JoinResult
 end
 
-function AssetCalculatorModule.calculateAssetCFrame(AssetType, p2) --[[ Line: 251 ]]
+function AssetCalculatorModule.calculateAssetCFrame(AssetType, p2)
 	-- upvalues: AssetCalculatorModule (copy), calculateAssetCFrameFromPartsCFrames (copy)
 	local AllTransformsForAsset = AssetCalculatorModule.calculateAllTransformsForAsset(AssetType, p2)
 	
 	return if Enum.AssetType.DynamicHead == AssetType then AllTransformsForAsset.Head elseif Enum.AssetType.Torso == AssetType then AllTransformsForAsset.LowerTorso else calculateAssetCFrameFromPartsCFrames(AssetType, AllTransformsForAsset)
 end
 
-function AssetCalculatorModule.calculateAllTransformsForAsset(AssetType, Object) --[[ Line: 262 ]]
+function AssetCalculatorModule.calculateAllTransformsForAsset(AssetType, Object)
 	-- upvalues: calculateHierarchyTransforms (copy), AssetTraversalUtilsModule (copy)
-	return if Enum.AssetType.DynamicHead == AssetType then { Head = CFrame.new() } else calculateHierarchyTransforms(AssetTraversalUtilsModule.assetHierarchy[AssetType], function(ChildName) --[[ Line: 267 | Named "findMeshHandle" ]]
+	return if Enum.AssetType.DynamicHead == AssetType then { Head = CFrame.new() } else calculateHierarchyTransforms(AssetTraversalUtilsModule.assetHierarchy[AssetType], function(ChildName)
 		-- upvalues: Object (copy)
 		return (Object:FindFirstChild(ChildName))
 	end)
 end
 
-function AssetCalculatorModule.calculateAllTransformsForFullBody(p2, p3) --[[ Line: 274 ]]
+function AssetCalculatorModule.calculateAllTransformsForFullBody(p2, p3)
 	-- upvalues: config (copy), LowerTorso (copy), calculateHierarchyTransforms (copy)
-	return (calculateHierarchyTransforms(if p3 then config else LowerTorso, function(p4) --[[ Line: 278 | Named "findMeshHandle" ]]
+	return (calculateHierarchyTransforms(if p3 then config else LowerTorso, function(p4)
 		-- upvalues: p2 (copy)
 		return p2[p4]
 	end, p3))
 end
 
-function AssetCalculatorModule.calculatePartsLocalToAsset(AssetType, p2) --[[ Line: 286 ]]
+function AssetCalculatorModule.calculatePartsLocalToAsset(AssetType, p2)
 	-- upvalues: GetPartNamesInHierarchyOrderModule (copy), calculateCFrame (copy)
 	assert(AssetType == Enum.AssetType.LeftArm or (AssetType == Enum.AssetType.RightArm or (AssetType == Enum.AssetType.LeftLeg or AssetType == Enum.AssetType.RightLeg)))
 	local PartNamesInHierarchyOrderModule = GetPartNamesInHierarchyOrderModule(AssetType)
@@ -204,11 +204,11 @@ function AssetCalculatorModule.calculatePartsLocalToAsset(AssetType, p2) --[[ Li
 	return t
 end
 
-function AssetCalculatorModule.getBodyPartsToParents() --[[ Line: 308 ]]
+function AssetCalculatorModule.getBodyPartsToParents()
 	-- upvalues: LowerTorso (copy)
 	local t = {}
 	
-	local function calculateAllTransformsInternal(Key, Key1, p3) --[[ Line: 311 ]]
+	local function calculateAllTransformsInternal(Key, Key1, p3)
 		-- upvalues: t (copy), calculateAllTransformsInternal (copy)
 		t[Key] = Key1 or "HumanoidRootPart"
 		
@@ -230,7 +230,7 @@ function AssetCalculatorModule.getBodyPartsToParents() --[[ Line: 308 ]]
 	return t
 end
 
-function AssetCalculatorModule.getAssetMeshesValidationSpaceTransforms(Object, p4) --[[ Line: 327 ]]
+function AssetCalculatorModule.getAssetMeshesValidationSpaceTransforms(Object, p4)
 	-- upvalues: AssetCalculatorModule (copy), GetMeshScalesModule (copy)
 	local AssetTypeEnum = p4.assetTypeEnum
 	assert(AssetTypeEnum)
@@ -247,7 +247,7 @@ function AssetCalculatorModule.getAssetMeshesValidationSpaceTransforms(Object, p
 	end
 	local AllTransformsForAsset = AssetCalculatorModule.calculateAllTransformsForAsset(AssetTypeEnum, Object)
 	
-	local function findMeshHandle(ChildName) --[[ Line: 348 ]]
+	local function findMeshHandle(ChildName)
 		-- upvalues: AssetTypeEnum (copy), Object (copy)
 		return if AssetTypeEnum == Enum.AssetType.DynamicHead then Object else Object:FindFirstChild(ChildName)
 	end

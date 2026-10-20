@@ -65,29 +65,29 @@ local config7 = {
 }
 local config8 = { [config6.id] = config6, [config7.id] = config7 }
 
-local function getCharacter(p1) --[[ Line: 135 ]]
+local function getCharacter(p1)
 	-- upvalues: PromiseModule (copy), config5 (copy), config8 (copy)
 	return PromiseModule.resolve(config5[p1] or config8[p1])
 end
 
 return {
-	getHuman = function(p1) --[[ Line: 165 ]]
+	getHuman = function(p1)
 		-- upvalues: config5 (copy)
 		return config5[p1]
 	end,
 	getCharacter = getCharacter,
-	getDroid = function(p1) --[[ Line: 172 ]]
+	getDroid = function(p1)
 		-- upvalues: config8 (copy)
 		return config8[p1]
 	end,
-	getFriends = function(p1) --[[ Line: 143 ]]
+	getFriends = function(p1)
 		-- upvalues: Array (copy), getCharacter (copy)
-		return Array.map(p1.friends, function(p2) --[[ Line: 145 ]]
+		return Array.map(p1.friends, function(p2)
 			-- upvalues: getCharacter (upval)
 			return getCharacter(p2)
 		end)
 	end,
-	getHero = function(p1) --[[ Line: 153 ]]
+	getHero = function(p1)
 		-- upvalues: config (copy), config7 (copy)
 		return if p1 == 5 then config else config7
 	end

@@ -1,6 +1,6 @@
 ﻿local EqualObjectsModule = require(script.Parent.Parent.equalObjects)
 
-return function(...): boolean --[[ Line: 4 | Named "equals" ]]
+return function(...): boolean
 	-- upvalues: EqualObjectsModule (copy)
 	if EqualObjectsModule(...) then
 		return true

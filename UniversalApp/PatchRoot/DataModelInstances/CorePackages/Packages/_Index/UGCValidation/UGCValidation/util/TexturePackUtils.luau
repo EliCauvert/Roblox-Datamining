@@ -3,7 +3,7 @@ local Parent = script.Parent.Parent
 local ParseContentIdsModule = require(Parent.util.ParseContentIds)
 local GetFFlagUGCValidateEmptySurfaceAppearanceModule = require(Parent.flags.getFFlagUGCValidateEmptySurfaceAppearance)
 
-local function findSurfaceAppearances(Object, p1) --[[ Line: 17 ]]
+local function findSurfaceAppearances(Object, p1)
 	-- upvalues: UGCValidationService (copy), ParseContentIdsModule (copy), GetFFlagUGCValidateEmptySurfaceAppearanceModule (copy)
 	local List = {}
 	local List1 = {}
@@ -27,13 +27,13 @@ local function findSurfaceAppearances(Object, p1) --[[ Line: 17 ]]
 end
 
 return {
-	findSurfaceAppearancesMissingTexturePacks = function(p2, p3) --[[ Line: 60 ]]
+	findSurfaceAppearancesMissingTexturePacks = function(p2, p3)
 		-- upvalues: findSurfaceAppearances (copy)
 		local _, SurfaceAppearances2 = findSurfaceAppearances(p2, p3)
 		
 		return SurfaceAppearances2
 	end,
-	findSurfaceAppearancesWithTexturePacks = function(p2) --[[ Line: 68 ]]
+	findSurfaceAppearancesWithTexturePacks = function(p2)
 		-- upvalues: findSurfaceAppearances (copy)
 		return (findSurfaceAppearances(p2, false))
 	end

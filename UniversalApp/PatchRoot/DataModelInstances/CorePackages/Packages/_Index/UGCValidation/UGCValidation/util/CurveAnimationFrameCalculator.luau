@@ -6,7 +6,7 @@ local RigBuilderModule = require(Parent.util.RigBuilder)
 local GetFIntUGCValidateMaxAnimationFPSModule = require(Parent.flags.getFIntUGCValidateMaxAnimationFPS)
 local FaceControlsName = CurveAnimationHierarchyUtilsModule.FaceControlsName
 
-local function hasFloatCurveKeys(Object) --[[ Line: 20 ]]
+local function hasFloatCurveKeys(Object)
 	local X = Object:FindFirstChild("X")
 	local Y = Object:FindFirstChild("Y")
 	local Z = Object:FindFirstChild("Z")
@@ -30,22 +30,22 @@ local function hasFloatCurveKeys(Object) --[[ Line: 20 ]]
 	return IsFloatCurve
 end
 
-local function _(Vector3Curve) --[[ Line: 30 | Named "hasPositionKeys" ]]
+local function _(Vector3Curve)
 	-- upvalues: hasFloatCurveKeys (copy)
 	return if Vector3Curve and Vector3Curve:IsA("Vector3Curve") then hasFloatCurveKeys(Vector3Curve) else false
 end
 
-local _ = function(EulerRotationCurve) --[[ Line: 41 | Named "hasRotationKeys" ]]
+local _ = function(EulerRotationCurve)
 	-- upvalues: hasFloatCurveKeys (copy)
 	return if EulerRotationCurve and EulerRotationCurve:IsA("EulerRotationCurve") then hasFloatCurveKeys(EulerRotationCurve) else false
 end
 
 return {
-	calculateAnimFramesAtOrigin = function(p1) --[[ Line: 52 ]]
+	calculateAnimFramesAtOrigin = function(p1)
 		-- upvalues: GetFIntUGCValidateMaxAnimationFPSModule (copy), CurveAnimationHierarchyUtilsModule (copy), hasFloatCurveKeys (copy), ConstantsModule (copy), FaceControlsName (copy), RigBuilderModule (copy), AssetCalculatorModule (copy)
 		local Amount = 1 / GetFIntUGCValidateMaxAnimationFPSModule()
 		
-		local function getCurveTracks() --[[ Line: 59 ]]
+		local function getCurveTracks()
 			-- upvalues: CurveAnimationHierarchyUtilsModule (upval), p1 (copy), hasFloatCurveKeys (upval), ConstantsModule (upval), FaceControlsName (upval)
 			local t = {}
 			local BodyPartFolderRoot = CurveAnimationHierarchyUtilsModule.getBodyPartFolderRoot(p1)
@@ -70,10 +70,10 @@ return {
 			return t
 		end
 		
-		local function calculateCurveAnimLength(List): number --[[ Line: 87 ]]
+		local function calculateCurveAnimLength(List): number
 			local Largest = -1
 			
-			local function getMaxTimeFromFloatCurveChildren(FaceControls) --[[ Line: 90 ]]
+			local function getMaxTimeFromFloatCurveChildren(FaceControls)
 				-- upvalues: Largest (ref)
 				if not FaceControls then return end
 				for _, FloatCurve in FaceControls:GetChildren() do
@@ -93,7 +93,7 @@ return {
 			return Largest
 		end
 		
-		local function calculateTransformsAtTime(Total, List) --[[ Line: 113 ]]
+		local function calculateTransformsAtTime(Total, List)
 			local t = {}
 			
 			for i, value in List do
@@ -102,7 +102,7 @@ return {
 			return t
 		end
 		
-		local function calculatePositionMagnitudeResultsAtTime(Total, List) --[[ Line: 123 ]]
+		local function calculatePositionMagnitudeResultsAtTime(Total, List)
 			local Magnitudes = {}
 			
 			for i, value in List do
@@ -126,7 +126,7 @@ return {
 		local AllTransformsForFullBodies = {}
 		local List = {}
 		
-		local function _(p2) --[[ Line: 149 | Named "addData" ]]
+		local function _(p2)
 			-- upvalues: calculateTransformsAtTime (copy), CurveTracks (copy), AssetCalculatorModule (upval), t (copy), AllTransformsForFullBodies (copy), List (copy), calculatePositionMagnitudeResultsAtTime (copy)
 			table.insert(AllTransformsForFullBodies, (AssetCalculatorModule.calculateAllTransformsForFullBody(t, (calculateTransformsAtTime(p2, CurveTracks)))))
 			table.insert(List, (calculatePositionMagnitudeResultsAtTime(p2, CurveTracks)))

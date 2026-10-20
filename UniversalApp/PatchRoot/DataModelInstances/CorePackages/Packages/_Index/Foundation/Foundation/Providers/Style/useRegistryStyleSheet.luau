@@ -6,10 +6,10 @@ local _ = require(Foundation.Enums.ThemeName)
 local _ = require(Foundation.Providers.Style.Tokens)
 local StyleSheetRegistryModule = require(Foundation.StyleSheet.StyleSheetRegistry)
 
-return function(p1, p2, p3, p4, p5) --[[ Line: 16 | Named "useRegistryStyleSheet" ]]
+return function(p1, p2, p3, p4, p5)
 	-- upvalues: ReactModule (copy), StyleSheetRegistryModule (copy)
 	local UseRefResult = ReactModule.useRef({})
-	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 26 ]]
+	local UseMemoResult = ReactModule.useMemo(function()
 		-- upvalues: StyleSheetRegistryModule (upval), p2 (copy), p3 (copy), p4 (copy), p5 (copy), p1 (copy)
 		return StyleSheetRegistryModule.resolveStyleSheet(p2, p3, p4, p5, p1)
 	end, {
@@ -21,14 +21,14 @@ return function(p1, p2, p3, p4, p5) --[[ Line: 16 | Named "useRegistryStyleSheet
 	})
 	local UseRefResult1 = ReactModule.useRef(UseMemoResult)
 	UseRefResult1.current = UseMemoResult
-	local UseResult = ReactModule.useCallback(function(List) --[[ Line: 32 ]]
+	local UseResult = ReactModule.useCallback(function(List)
 		-- upvalues: UseRefResult (copy), StyleSheetRegistryModule (upval), UseRefResult1 (copy)
 		for _, value in List do
 			UseRefResult.current[value] = true
 		end
 		StyleSheetRegistryModule.addStyleTags(UseRefResult1.current, List)
 	end, {})
-	ReactModule.useLayoutEffect(function() --[[ Line: 39 ]]
+	ReactModule.useLayoutEffect(function()
 		-- upvalues: UseRefResult (copy), StyleSheetRegistryModule (upval), UseMemoResult (copy)
 		local List = {}
 		
@@ -38,7 +38,7 @@ return function(p1, p2, p3, p4, p5) --[[ Line: 16 | Named "useRegistryStyleSheet
 		StyleSheetRegistryModule.addStyleTags(UseMemoResult, List)
 		StyleSheetRegistryModule.acquireStyleSheet(UseMemoResult)
 		
-		return function() --[[ Line: 48 ]]
+		return function()
 			-- upvalues: StyleSheetRegistryModule (upval), UseMemoResult (upval)
 			StyleSheetRegistryModule.releaseStyleSheet(UseMemoResult)
 		end

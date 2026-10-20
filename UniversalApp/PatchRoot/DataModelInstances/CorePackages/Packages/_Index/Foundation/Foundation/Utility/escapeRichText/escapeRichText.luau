@@ -1,4 +1,4 @@
-﻿return function(Text: string): string --[[ Line: 5 | Named "escapeRichText" ]]
+﻿return function(Text: string): string
 	return Text:gsub("[&<>\"']", {
 		["&"] = "&amp;",
 		["<"] = "&lt;",

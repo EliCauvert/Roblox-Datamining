@@ -7,7 +7,7 @@ local _ = require(Foundation.Enums.InputPlatform)
 local KeyDisplayModule = require(script.Parent.keyDisplay)
 local _ = require(script.Parent.useShortcutVariants)
 
-return function(Frame: Frame) --[[ Line: 26 | Named "KeyCap" ]]
+return function(Frame: Frame)
 	-- upvalues: KeyDisplayModule (copy), ReactModule (copy), ViewModule (copy), IconModule (copy), TextModule (copy)
 	local VariantProps = Frame.variantProps
 	local ResolveKeyResult = KeyDisplayModule.resolveKey(Frame.keyCode, Frame.platform)

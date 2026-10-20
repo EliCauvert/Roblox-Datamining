@@ -6,14 +6,14 @@ local _ = require(script.Parent.types)
 local MapperKind = require(script.Parent.Interfaces).MapperKind
 
 return {
-	extractExtensionsFromSchema = function(p1) --[[ Line: 42 ]]
+	extractExtensionsFromSchema = function(p1)
 		-- upvalues: Boolean (copy), MapSchemaFunction (copy), MapperKind (copy)
 		local config = {
 			schemaExtensions = Boolean.toJSBoolean(p1.extensions) and p1.extensions or {},
 			types = {}
 		}
 		MapSchemaFunction(p1, {
-			[tostring(MapperKind.OBJECT_TYPE)] = function(p2) --[[ Line: 48 ]]
+			[tostring(MapperKind.OBJECT_TYPE)] = function(p2)
 				-- upvalues: config (copy), Boolean (upval)
 				config.types[tostring(p2.name)] = {
 					type = "object",
@@ -23,7 +23,7 @@ return {
 				
 				return p2
 			end,
-			[tostring(MapperKind.INTERFACE_TYPE)] = function(p2) --[[ Line: 59 ]]
+			[tostring(MapperKind.INTERFACE_TYPE)] = function(p2)
 				-- upvalues: config (copy), Boolean (upval)
 				config.types[tostring(p2.name)] = {
 					type = "interface",
@@ -33,7 +33,7 @@ return {
 				
 				return p2
 			end,
-			[tostring(MapperKind.FIELD)] = function(p2, p3, p4) --[[ Line: 73 ]]
+			[tostring(MapperKind.FIELD)] = function(p2, p3, p4)
 				-- upvalues: config (copy), Boolean (upval)
 				config.types[p4].fields[p3] = {
 					arguments = {},
@@ -49,7 +49,7 @@ return {
 				end
 				return p2
 			end,
-			[tostring(MapperKind.ENUM_TYPE)] = function(p5) --[[ Line: 110 ]]
+			[tostring(MapperKind.ENUM_TYPE)] = function(p5)
 				-- upvalues: config (copy), Boolean (upval)
 				config.types[tostring(p5.name)] = {
 					type = "enum",
@@ -59,13 +59,13 @@ return {
 				
 				return p5
 			end,
-			[tostring(MapperKind.ENUM_VALUE)] = function(p5, p6, _, p7) --[[ Line: 121 ]]
+			[tostring(MapperKind.ENUM_VALUE)] = function(p5, p6, _, p7)
 				-- upvalues: config (copy), Boolean (upval)
 				config.types[p6].values[p7] = Boolean.toJSBoolean(p5.extensions) and p5.extensions or {}
 				
 				return p5
 			end,
-			[tostring(MapperKind.SCALAR_TYPE)] = function(p5) --[[ Line: 135 ]]
+			[tostring(MapperKind.SCALAR_TYPE)] = function(p5)
 				-- upvalues: config (copy), Boolean (upval)
 				config.types[tostring(p5.name)] = {
 					type = "scalar",
@@ -74,7 +74,7 @@ return {
 				
 				return p5
 			end,
-			[tostring(MapperKind.UNION_TYPE)] = function(p5) --[[ Line: 145 ]]
+			[tostring(MapperKind.UNION_TYPE)] = function(p5)
 				-- upvalues: config (copy), Boolean (upval)
 				config.types[tostring(p5.name)] = {
 					type = "union",
@@ -83,7 +83,7 @@ return {
 				
 				return p5
 			end,
-			[tostring(MapperKind.INPUT_OBJECT_TYPE)] = function(p5) --[[ Line: 155 ]]
+			[tostring(MapperKind.INPUT_OBJECT_TYPE)] = function(p5)
 				-- upvalues: config (copy), Boolean (upval)
 				config.types[tostring(p5.name)] = {
 					type = "input",
@@ -93,7 +93,7 @@ return {
 				
 				return p5
 			end,
-			[tostring(MapperKind.INPUT_OBJECT_FIELD)] = function(p5, p6, p7) --[[ Line: 166 ]]
+			[tostring(MapperKind.INPUT_OBJECT_FIELD)] = function(p5, p6, p7)
 				-- upvalues: config (copy), Boolean (upval)
 				config.types[p7].fields[p6] = {
 					extensions = Boolean.toJSBoolean(p5.extensions) and p5.extensions or {}

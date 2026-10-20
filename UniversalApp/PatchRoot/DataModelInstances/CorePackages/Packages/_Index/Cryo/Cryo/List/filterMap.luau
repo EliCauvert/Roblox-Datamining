@@ -1,4 +1,4 @@
-﻿return function(p1, Callback) --[[ Line: 7 | Named "filterMap" ]]
+﻿return function(p1, Callback)
 	local t = {}
 	local Count = 1
 	

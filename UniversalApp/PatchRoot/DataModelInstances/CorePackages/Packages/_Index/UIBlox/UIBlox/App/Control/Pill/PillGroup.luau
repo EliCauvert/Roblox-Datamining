@@ -17,13 +17,13 @@ local UseIsGamepadModule = require(Parent3.Utility.useIsGamepad)
 local ScrollingListWithArrowsAndGradientModule = require(Parent1.HorizontalNav.ScrollingListWithArrowsAndGradient)
 local Pillv2Module = require(Parent.Pillv2)
 
-local function PillGroup(Gui) --[[ Line: 60 ]]
+local function PillGroup(Gui)
 	-- upvalues: UseIsGamepadModule (copy), ReactModule (copy), UseStyleModule (copy), RoactGamepadModule (copy), CryoModule (copy), IconButtonModule (copy), IconSizeModule (copy), ImagesModule (copy), Focusable (copy), Pillv2Module (copy), FitFrameHorizontal (copy), FitFrameModule (copy), ScrollingListWithArrowsAndGradientModule (copy)
 	local NoIsRoactGamepadEnabled = Gui.isRoactGamepadEnabled == nil or Gui.isRoactGamepadEnabled
 	local NoIsRoactGamepadEnabled1 = UseIsGamepadModule() and NoIsRoactGamepadEnabled
 	local UseRefResult = ReactModule.useRef(nil)
 	
-	local function _() --[[ Line: 66 | Named "scrollToStart" ]]
+	local function _()
 		-- upvalues: UseRefResult (copy)
 		local Current = UseRefResult.current
 		
@@ -36,7 +36,7 @@ local function PillGroup(Gui) --[[ Line: 60 ]]
 	local RightPadding = Gui.rightPadding or 15
 	local SelectedPills = Gui.selectedPills or {}
 	local Theme = UseStyleModule().Theme
-	local UseResult = ReactModule.useCallback(function(Frame) --[[ Line: 81 ]]
+	local UseResult = ReactModule.useCallback(function(Frame)
 		-- upvalues: UseRefResult (copy)
 		if UseRefResult.current then
 			UseRefResult.current.CanvasSize = UDim2.new(0, Frame.AbsoluteSize.X, 1, 0)
@@ -44,13 +44,13 @@ local function PillGroup(Gui) --[[ Line: 60 ]]
 	end)
 	local UseRefResult1 = ReactModule.useRef({})
 	local UseRefCacheResult = NoIsRoactGamepadEnabled and RoactGamepadModule.useRefCache() or UseRefResult1.current
-	local UseResult1 = ReactModule.useCallback(function() --[[ Line: 90 ]]
+	local UseResult1 = ReactModule.useCallback(function()
 		-- upvalues: Gui (copy)
 		if Gui.onSelectionChanged then
 			Gui.onSelectionChanged({})
 		end
 	end)
-	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 96 ]]
+	local UseMemoResult = ReactModule.useMemo(function()
 		-- upvalues: Gui (copy), CryoModule (upval), SelectedPills (copy)
 		local List = {}
 		
@@ -77,7 +77,7 @@ local function PillGroup(Gui) --[[ Line: 60 ]]
 	local IsLoading = Gui.isLoading
 	
 	for i, Text in UseMemoResult do
-		local function onActivated() --[[ Line: 124 ]]
+		local function onActivated()
 			-- upvalues: CryoModule (upval), SelectedPills (copy), Text (copy), UseRefResult (copy), Gui (copy)
 			local HasFindResult = CryoModule.List.find(SelectedPills, Text) ~= nil
 			local RemoveValueResult = if HasFindResult then CryoModule.List.removeValue(SelectedPills, Text) else CryoModule.List.join(SelectedPills, { Text })
@@ -122,7 +122,7 @@ local function PillGroup(Gui) --[[ Line: 60 ]]
 			ref = UseRefCacheResult[1]
 		})
 	end
-	local function getScrollingListChildren() --[[ Line: 176 ]]
+	local function getScrollingListChildren()
 		-- upvalues: ReactModule (upval), FitFrameHorizontal (upval), FitFrameModule (upval), RightPadding (copy), LeftPadding (copy), UseResult (copy), Elements (copy)
 		return {
 			SubNavFrame = ReactModule.createElement(FitFrameHorizontal, {
@@ -165,7 +165,7 @@ local function PillGroup(Gui) --[[ Line: 60 ]]
 	})
 end
 
-return ReactModule.forwardRef(function(p1, ForwardRef) --[[ Line: 221 ]]
+return ReactModule.forwardRef(function(p1, ForwardRef)
 	-- upvalues: ReactModule (copy), PillGroup (copy), CryoModule (copy)
 	return ReactModule.createElement(PillGroup, CryoModule.Dictionary.join(p1, { forwardRef = ForwardRef }))
 end)

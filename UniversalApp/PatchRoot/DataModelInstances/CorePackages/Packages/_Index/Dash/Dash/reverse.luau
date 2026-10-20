@@ -1,6 +1,6 @@
 ﻿local InsertFunction = table.insert
 
-return function(p1) --[[ Line: 9 | Named "reverse" ]]
+return function(p1)
 	-- upvalues: InsertFunction (copy)
 	local t = {}
 	

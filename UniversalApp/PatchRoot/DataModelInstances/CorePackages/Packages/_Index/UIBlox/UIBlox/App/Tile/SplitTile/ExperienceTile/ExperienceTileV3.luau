@@ -23,7 +23,7 @@ local VerticalTileModule = require(Parent1.VerticalTile.VerticalTile)
 local TileContentPanelModule = require(Parent1.TileContentPanel)
 local VerticalTileThumbnailModule = require(Parent1.VerticalTile.VerticalTileThumbnail)
 
-local function renderContentWithPadding(InteractableModule, BottomContentPadding, p1, p2) --[[ Line: 82 ]]
+local function renderContentWithPadding(InteractableModule, BottomContentPadding, p1, p2)
 	-- upvalues: ReactModule (copy), CryoModule (copy), RoactModule (copy)
 	return ReactModule.createElement(InteractableModule, CryoModule.Dictionary.join({ BackgroundTransparency = 1, Size = UDim2.new(1, 0, 1, 0) }, p1), {
 		Padding = ReactModule.createElement("UIPadding", {
@@ -36,12 +36,12 @@ local function renderContentWithPadding(InteractableModule, BottomContentPadding
 	})
 end
 
-local function _(p1, p2) --[[ Line: 106 | Named "getFinalAspectRatioMode" ]]
+local function _(p1, p2)
 	-- upvalues: AspectRatioModeModule (copy)
 	return if p1 == nil then if p2 then AspectRatioModeModule.Wide else AspectRatioModeModule.Square elseif p2 then AspectRatioModeModule.Wide else p1
 end
 
-return function(p1) --[[ Line: 122 | Named "ExperienceTileV3" ]]
+return function(p1)
 	-- upvalues: UseStyleModule (copy), SetDefaultModule (copy), ConstantsModule (copy), CryoModule (copy), ReactModule (copy), AspectRatioModeModule (copy), GetAspectRatioModule (copy), renderContentWithPadding (copy), VerticalTileThumbnailModule (copy), RoactModule (copy), TileContentPanelModule (copy), ExperienceActionRowModule (copy), UseControlStateModule (copy), UseCursorModule (copy), GetControlStateColorModule (copy), InteractableModule (copy), VerticalTileModule (copy)
 	local UseStyleModuleResult = UseStyleModule()
 	local SetDefaultModuleResult = SetDefaultModule(p1.footerHeight, ConstantsModule.DEFAULT_FOOTER_HEIGHT)
@@ -58,7 +58,7 @@ return function(p1) --[[ Line: 122 | Named "ExperienceTileV3" ]]
 	local ContentTitlePadding = JoinResult.contentTitlePadding
 	local ContentTitleFont = JoinResult.contentTitleFont
 	local SetDefaultModuleResult3 = SetDefaultModule(p1.contentTextLineCount, ConstantsModule.DEFAULT_TEXT_LINE_COUNT)
-	local UseResult = ReactModule.useCallback(function(p2) --[[ Line: 140 ]]
+	local UseResult = ReactModule.useCallback(function(p2)
 		-- upvalues: UseStyleModuleResult (copy), p1 (copy), AspectRatioModeModule (upval), GetAspectRatioModule (upval), renderContentWithPadding (upval), TopContentPadding (copy), ReactModule (upval), VerticalTileThumbnailModule (upval), Border (copy), SetDefaultModuleResult2 (copy), RoactModule (upval)
 		local NoReducedMotion: boolean = p2 and not UseStyleModuleResult.Settings.ReducedMotion
 		local ThumbnailAspectRatioOverride = p1.thumbnailAspectRatioOverride
@@ -84,7 +84,7 @@ return function(p1) --[[ Line: 122 | Named "ExperienceTileV3" ]]
 		p1.thumbnailAspectRatioOverride, TopContentPadding, Border,
 		SetDefaultModuleResult2
 	})
-	local UseResult1 = ReactModule.useCallback(function(p2) --[[ Line: 174 ]]
+	local UseResult1 = ReactModule.useCallback(function(p2)
 		-- upvalues: SetDefaultModuleResult3 (copy), ContentTitleFont (copy), UseStyleModuleResult (copy), ContentTitlePadding (copy), SetDefaultModuleResult (copy), BottomContentPadding (copy), p1 (copy), renderContentWithPadding (upval), Border (copy), ReactModule (upval), TileContentPanelModule (upval)
 		local NewFloored = math.floor(SetDefaultModuleResult3 * ContentTitleFont.RelativeSize * UseStyleModuleResult.Font.BaseSize + ContentTitlePadding) + SetDefaultModuleResult + BottomContentPadding.Top + BottomContentPadding.Bottom
 		
@@ -104,7 +104,7 @@ return function(p1) --[[ Line: 122 | Named "ExperienceTileV3" ]]
 		ContentTitlePadding, BottomContentPadding, SetDefaultModuleResult,
 		ContentTitleFont, Border, UseStyleModuleResult
 	})
-	local UseResult2 = ReactModule.useCallback(function(p2) --[[ Line: 213 ]]
+	local UseResult2 = ReactModule.useCallback(function(p2)
 		-- upvalues: p1 (copy), ReactModule (upval), ExperienceActionRowModule (upval), SetDefaultModuleResult (copy), BottomContentPadding (copy), renderContentWithPadding (upval)
 		return if p1.renderBottomContent == nil then if p2 then if p1.renderActionRow == nil then ReactModule.createElement(ExperienceActionRowModule, p1.actionRowProps) else p1.renderActionRow() else renderContentWithPadding("Frame", BottomContentPadding, {
 			Size = UDim2.new(1, 0, 0, SetDefaultModuleResult + BottomContentPadding.Top + BottomContentPadding.Bottom),

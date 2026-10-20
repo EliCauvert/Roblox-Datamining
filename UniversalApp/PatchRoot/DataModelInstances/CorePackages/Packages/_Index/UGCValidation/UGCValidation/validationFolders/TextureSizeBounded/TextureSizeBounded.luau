@@ -6,9 +6,9 @@ local ValidationEnumsModule = require(Parent.validationSystem.ValidationEnums)
 local ErrorSourceStringsModule = require(Parent.validationSystem.ErrorSourceStrings)
 local FetchAllDesiredDataModule = require(Parent.validationSystem.dataFetchModules.FetchAllDesiredData)
 
-local function checkEditableImageSize(Editable, TextureLimit, FullName, FieldName, p1, SurfaceAppearance, ConsumerConfig) --[[ Line: 28 ]]
+local function checkEditableImageSize(Editable, TextureLimit, FullName, FieldName, p1, SurfaceAppearance, ConsumerConfig)
 	-- upvalues: UGCValidationService (copy), ValidationEnumsModule (copy), ErrorSourceStringsModule (copy)
-	local Success, Result = pcall(function() --[[ Line: 37 ]]
+	local Success, Result = pcall(function()
 		-- upvalues: UGCValidationService (upval), Editable (copy)
 		return UGCValidationService:GetEditableImageSize(Editable)
 	end)
@@ -42,7 +42,7 @@ return {
 	requiredData = {},
 	conditionalData = { ValidationEnumsModule.SharedDataMember.meshTextures },
 	expectedFailures = {},
-	run = function(p1, p2) --[[ Line: 67 ]]
+	run = function(p1, p2)
 		-- upvalues: FetchAllDesiredDataModule (copy), ValidationEnumsModule (copy), ConstantsInterfaceModule (copy), checkEditableImageSize (copy)
 		local RootInstance = p2.rootInstance
 		local AssetType = p2.uploadEnum.assetType

@@ -3,13 +3,13 @@ local ReactModule = require(Parent.Parent.React)
 local LerpModule = require(Parent.utils.lerp)
 local StackViewOverlayFrame = ReactModule.Component:extend("StackViewOverlayFrame")
 
-function StackViewOverlayFrame.init(p1) --[[ Line: 10 ]]
+function StackViewOverlayFrame.init(p1)
 	-- upvalues: ReactModule (copy)
 	p1._signalDisconnect = nil
 	p1._ref = ReactModule.createRef()
 end
 
-function StackViewOverlayFrame.render(p1) --[[ Line: 16 ]]
+function StackViewOverlayFrame.render(p1)
 	-- upvalues: LerpModule (copy), ReactModule (copy)
 	local NavigationOptions = p1.props.navigationOptions
 	
@@ -22,29 +22,29 @@ function StackViewOverlayFrame.render(p1) --[[ Line: 16 ]]
 	})
 end
 
-function StackViewOverlayFrame.didUpdate(p1, p2) --[[ Line: 31 ]]
+function StackViewOverlayFrame.didUpdate(p1, p2)
 	local TransitionChangedSignalFunction = p1.props.transitionChangedSignal
 	
 	if TransitionChangedSignalFunction ~= p2.transitionChangedSignal then
 		if p1._signalDisconnect then
 			p1._signalDisconnect()
 		end
-		p1._signalDisconnect = TransitionChangedSignalFunction(function(...) --[[ Line: 39 ]]
+		p1._signalDisconnect = TransitionChangedSignalFunction(function(...)
 			-- upvalues: p1 (copy)
 			p1:_transitionChanged(...)
 		end)
 	end
 end
 
-function StackViewOverlayFrame.didMount(p1) --[[ Line: 45 ]]
+function StackViewOverlayFrame.didMount(p1)
 	p1._isMounted = true
-	p1._signalDisconnect = p1.props.transitionChangedSignal(function(...) --[[ Line: 47 ]]
+	p1._signalDisconnect = p1.props.transitionChangedSignal(function(...)
 		-- upvalues: p1 (copy)
 		p1:_transitionChanged(...)
 	end)
 end
 
-function StackViewOverlayFrame.willUnmount(p1) --[[ Line: 52 ]]
+function StackViewOverlayFrame.willUnmount(p1)
 	p1._isMounted = false
 	
 	if p1._signalDisconnect then
@@ -53,7 +53,7 @@ function StackViewOverlayFrame.willUnmount(p1) --[[ Line: 52 ]]
 	end
 end
 
-function StackViewOverlayFrame._transitionChanged(p1, p2) --[[ Line: 60 ]]
+function StackViewOverlayFrame._transitionChanged(p1, p2)
 	-- upvalues: LerpModule (copy)
 	if not p1._isMounted then return end
 	if p1._ref.current then

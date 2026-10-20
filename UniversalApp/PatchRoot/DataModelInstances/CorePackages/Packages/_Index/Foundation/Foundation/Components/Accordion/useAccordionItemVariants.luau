@@ -8,7 +8,7 @@ local _ = require(Foundation.Components.Types)
 local StateLayerAffordanceModule = require(Foundation.Enums.StateLayerAffordance)
 local IconSizeModule = require(Foundation.Enums.IconSize)
 
-local function v9(p1) --[[ Line: 32 ]]
+local function v9(p1)
 	-- upvalues: StateLayerAffordanceModule (copy), InputSizeModule (copy), IconSizeModule (copy), FlagsModule (copy)
 	return {
 		common = {
@@ -75,7 +75,7 @@ local function v9(p1) --[[ Line: 32 ]]
 	}
 end
 
-return function(p1, p2, p3) --[[ Line: 92 ]]
+return function(p1, p2, p3)
 	-- upvalues: VariantsContextModule (copy), v9 (copy), ComposeStyleVariantModule (copy)
 	local AccordionItem = VariantsContextModule.useVariants("AccordionItem", v9, p1)
 	

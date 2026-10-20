@@ -15,7 +15,7 @@ local config = {
 	playbackRegion = NumberRange.new(0, 1e999)
 }
 
-return function(p1, VideoContent, p2) --[[ Line: 41 | Named "useVideoPlayback" ]]
+return function(p1, VideoContent, p2)
 	-- upvalues: CryoModule (copy), config (copy), UseRefFunction (copy), UseToggleStateModule (copy), UseStateFunction (copy), SignalModule (copy), UseCallbackFunction (copy), UseEffectFunction (copy)
 	local UnionResult = CryoModule.Dictionary.union(config, p2 or {})
 	local UseRefResult = UseRefFunction(nil)
@@ -28,7 +28,7 @@ return function(p1, VideoContent, p2) --[[ Line: 41 | Named "useVideoPlayback" ]
 	local UseStateResult4, UseStateResult2_3 = UseStateFunction(0)
 	local UseRefResult1 = UseRefFunction(SignalModule.new())
 	local UseRefResult2 = UseRefFunction(SignalModule.new())
-	local UseCallbackResult = UseCallbackFunction(function(p3) --[[ Line: 64 ]]
+	local UseCallbackResult = UseCallbackFunction(function(p3)
 		-- upvalues: UseRefResult (copy), UnionResult (copy), UseStateResult (copy)
 		local Current = UseRefResult.current
 		
@@ -36,7 +36,7 @@ return function(p1, VideoContent, p2) --[[ Line: 41 | Named "useVideoPlayback" ]
 			Current.TimePosition = math.clamp(p3 + UnionResult.playbackRegion.Min, 0, UseStateResult)
 		end
 	end, { UseStateResult, UnionResult.playbackRegion })
-	local UseCallbackResult1 = UseCallbackFunction(function() --[[ Line: 72 ]]
+	local UseCallbackResult1 = UseCallbackFunction(function()
 		-- upvalues: UseRefResult (copy), UseRefResult2 (copy), UnionResult (copy), UseToggleStateModuleResult2 (copy), UseStateResult2_2 (copy), UseStateResult2 (copy)
 		local Current = UseRefResult.current
 		
@@ -51,7 +51,7 @@ return function(p1, VideoContent, p2) --[[ Line: 41 | Named "useVideoPlayback" ]
 		UnionResult.playbackRegion,
 		UseToggleStateModuleResult2.enabled
 	})
-	local UseCallbackResult2 = UseCallbackFunction(function() --[[ Line: 83 ]]
+	local UseCallbackResult2 = UseCallbackFunction(function()
 		-- upvalues: p1 (copy), UseRefResult (copy), UseStateResult2_3 (copy), UnionResult (copy), UseStateResult2_1 (copy)
 		if not p1 then return end
 		local Current = UseRefResult.current
@@ -61,7 +61,7 @@ return function(p1, VideoContent, p2) --[[ Line: 41 | Named "useVideoPlayback" ]
 			UseStateResult2_1(Current.TimePosition)
 		end
 	end, { p1, UnionResult.playbackRegion })
-	local UseCallbackResult3 = UseCallbackFunction(function() --[[ Line: 95 ]]
+	local UseCallbackResult3 = UseCallbackFunction(function()
 		-- upvalues: UseRefResult (copy), UnionResult (copy), UseRefResult1 (copy)
 		if UseRefResult.current then
 			UseRefResult.current.TimePosition = UnionResult.playbackRegion.Min
@@ -70,7 +70,7 @@ return function(p1, VideoContent, p2) --[[ Line: 41 | Named "useVideoPlayback" ]
 			return
 		end
 	end, { UnionResult.playbackRegion })
-	UseEffectFunction(function() --[[ Line: 106 ]]
+	UseEffectFunction(function()
 		-- upvalues: UseRefResult (copy), VideoContent (copy)
 		local Current = UseRefResult.current
 		
@@ -79,7 +79,7 @@ return function(p1, VideoContent, p2) --[[ Line: 41 | Named "useVideoPlayback" ]
 			Current.VideoContent = VideoContent
 		end
 	end, { UseToggleStateModuleResult.enabled, VideoContent })
-	UseEffectFunction(function() --[[ Line: 117 ]]
+	UseEffectFunction(function()
 		-- upvalues: UseRefResult (copy), UseCallbackResult1 (copy), UseCallbackResult2 (copy), UseCallbackResult3 (copy)
 		local Current = UseRefResult.current
 		
@@ -88,7 +88,7 @@ return function(p1, VideoContent, p2) --[[ Line: 41 | Named "useVideoPlayback" ]
 		local RenderSteppedConnection = game:GetService("RunService").RenderStepped:Connect(UseCallbackResult2)
 		local DidLoopConnection = Current.DidLoop:Connect(UseCallbackResult3)
 		
-		return function() --[[ Line: 127 ]]
+		return function()
 			-- upvalues: LoadedConnection (copy), RenderSteppedConnection (copy), DidLoopConnection (copy)
 			LoadedConnection:Disconnect()
 			RenderSteppedConnection:Disconnect()
@@ -100,7 +100,7 @@ return function(p1, VideoContent, p2) --[[ Line: 41 | Named "useVideoPlayback" ]
 		UseCallbackResult1,
 		UseCallbackResult3
 	})
-	UseEffectFunction(function() --[[ Line: 134 ]]
+	UseEffectFunction(function()
 		-- upvalues: UseRefResult (copy), UnionResult (copy)
 		local Current = UseRefResult.current
 		
@@ -108,7 +108,7 @@ return function(p1, VideoContent, p2) --[[ Line: 41 | Named "useVideoPlayback" ]
 			Current.Looped = UnionResult.looping
 		end
 	end, { UseToggleStateModuleResult.enabled, UnionResult.looping })
-	UseEffectFunction(function() --[[ Line: 141 ]]
+	UseEffectFunction(function()
 		-- upvalues: UseRefResult (copy), UseToggleStateModuleResult1 (copy)
 		local Current = UseRefResult.current
 		
@@ -119,7 +119,7 @@ return function(p1, VideoContent, p2) --[[ Line: 41 | Named "useVideoPlayback" ]
 		UseToggleStateModuleResult.enabled,
 		UseToggleStateModuleResult1.enabled
 	})
-	UseEffectFunction(function() --[[ Line: 148 ]]
+	UseEffectFunction(function()
 		-- upvalues: UseRefResult (copy), UseToggleStateModuleResult2 (copy)
 		local Current = UseRefResult.current
 		
@@ -130,7 +130,7 @@ return function(p1, VideoContent, p2) --[[ Line: 41 | Named "useVideoPlayback" ]
 		UseToggleStateModuleResult.enabled,
 		UseToggleStateModuleResult2.enabled
 	})
-	UseEffectFunction(function() --[[ Line: 155 ]]
+	UseEffectFunction(function()
 		-- upvalues: UseRefResult (copy), UseStateResult1 (ref), UnionResult (copy), UseToggleStateModuleResult1 (copy), UseRefResult1 (copy)
 		local Current = UseRefResult.current
 		
@@ -156,7 +156,7 @@ return function(p1, VideoContent, p2) --[[ Line: 41 | Named "useVideoPlayback" ]
 		UnionResult.looping,
 		UseToggleStateModuleResult1.disable
 	})
-	UseEffectFunction(function() --[[ Line: 182 ]]
+	UseEffectFunction(function()
 		-- upvalues: UseRefResult (copy), UnionResult (copy), UseStateResult2_2 (copy)
 		local Current = UseRefResult.current
 		
@@ -188,7 +188,7 @@ return function(p1, VideoContent, p2) --[[ Line: 41 | Named "useVideoPlayback" ]
 		onVideoDidLoopSignalRef = UseRefResult1,
 		onVideoLoadedSignalRef = UseRefResult2,
 		ref = UseRefResult,
-		updateRef = UseCallbackFunction(function(Current) --[[ Line: 190 ]]
+		updateRef = UseCallbackFunction(function(Current)
 			-- upvalues: UseToggleStateModuleResult (copy), UseRefResult (copy)
 			UseToggleStateModuleResult.toggle()
 			UseRefResult.current = Current

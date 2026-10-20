@@ -4,7 +4,7 @@ local StructModule = require(script.Parent.Parent.Parent.Parent.Parent.google.pr
 local Module = {}
 Module.__index = Module
 
-function Module.new(p1) --[[ Line: 51 ]]
+function Module.new(p1)
 	-- upvalues: Module (copy)
 	return (setmetatable({
 		saved = if p1 == nil or p1.saved == nil then nil else p1.saved,
@@ -13,7 +13,7 @@ function Module.new(p1) --[[ Line: 51 ]]
 	}, Module))
 end
 
-function Module:encode() --[[ Line: 61 ]]
+function Module:encode()
 	-- upvalues: ProtoModule (copy)
 	local Buf = buffer.create(0)
 	local Count = 0
@@ -39,7 +39,7 @@ function Module:encode() --[[ Line: 61 ]]
 	return Buf1
 end
 
-function Module.decode(Buf) --[[ Line: 88 ]]
+function Module.decode(Buf)
 	-- upvalues: Module (copy), ProtoModule (copy), StructModule (copy)
 	local NewModule = Module.new()
 	local v1 = 0
@@ -80,7 +80,7 @@ function Module.decode(Buf) --[[ Line: 88 ]]
 	return NewModule
 end
 
-function Module:jsonEncode() --[[ Line: 141 ]]
+function Module:jsonEncode()
 	local t = {}
 	
 	if self.saved ~= nil then
@@ -95,7 +95,7 @@ function Module:jsonEncode() --[[ Line: 141 ]]
 	return t
 end
 
-function Module:jsonDecode() --[[ Line: 159 ]]
+function Module:jsonDecode()
 	-- upvalues: Module (copy), StructModule (copy)
 	local NewModule = Module.new()
 	

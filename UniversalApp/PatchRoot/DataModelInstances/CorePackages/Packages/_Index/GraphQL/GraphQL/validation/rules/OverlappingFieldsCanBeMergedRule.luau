@@ -30,27 +30,27 @@ local Callback8 = nil
 local Callback10 = nil
 local v1 = nil
 
-local function reasonMessage(p1) --[[ Line: 49 ]]
+local function reasonMessage(p1)
 	-- upvalues: Array (copy), reasonMessage (copy)
-	return if Array.isArray(p1) then table.concat(Array.map(p1, function(Entry): string --[[ Line: 52 ]]
+	return if Array.isArray(p1) then table.concat(Array.map(p1, function(Entry): string
 		-- upvalues: reasonMessage (upval)
 		return ("subfields \"%s\" conflict because "):format(Entry[1]) .. reasonMessage(Entry[2])
 	end), " and ") else p1
 end
 
 local OverlappingFieldsCanBeMergedRuleModule = {
-	OverlappingFieldsCanBeMergedRule = function(p1) --[[ Line: 70 ]]
+	OverlappingFieldsCanBeMergedRule = function(p1)
 		-- upvalues: v1 (ref), Callback1 (ref), Array (copy), reasonMessage (copy), GraphQLError (copy)
 		local NewResult = v1.new()
 		local t = {}
 		
 		return {
-			SelectionSet = function(_, p2) --[[ Line: 82 ]]
+			SelectionSet = function(_, p2)
 				-- upvalues: Callback1 (upval), p1 (copy), t (copy), NewResult (copy), Array (upval), reasonMessage (upval), GraphQLError (upval)
 				for _, value in ipairs((Callback1(p1, t, NewResult, p1:getParentType(), p2))) do
 					local v2 = value[1]
 					local v3 = v2[2]
-					p1:reportError(GraphQLError.new(("Fields \"%s\" conflict because %s. Use different aliases on the fields to fetch both if this was intentional."):format(v2[1], if Array.isArray(v3) then table.concat(Array.map(v3, function(Entry): string --[[ Line: 52 ]]
+					p1:reportError(GraphQLError.new(("Fields \"%s\" conflict because %s. Use different aliases on the fields to fetch both if this was intentional."):format(v2[1], if Array.isArray(v3) then table.concat(Array.map(v3, function(Entry): string
 						-- upvalues: reasonMessage (upval)
 						return ("subfields \"%s\" conflict because "):format(Entry[1]) .. reasonMessage(Entry[2])
 					end), " and ") else v3), Array.concat(value[2], value[3])))
@@ -60,7 +60,7 @@ local OverlappingFieldsCanBeMergedRuleModule = {
 	end
 }
 
-Callback1 = function(p2, p3, NewResult, ParentType, p4) --[[ Line: 168 | Named "findConflictsWithinSelectionSet" ]]
+Callback1 = function(p2, p3, NewResult, ParentType, p4)
 	-- upvalues: Callback2 (ref), Callback3 (ref), Callback4 (ref), Callback (ref)
 	local t = {}
 	local CallbackResult = Callback2(p2, p3, ParentType, p4)
@@ -80,7 +80,7 @@ Callback1 = function(p2, p3, NewResult, ParentType, p4) --[[ Line: 168 | Named "
 	return t
 end
 
-Callback4 = function(p5, p6, p7, p8, p9, p10, p11) --[[ Line: 230 | Named "collectConflictsBetweenFieldsAndFragment" ]]
+Callback4 = function(p5, p6, p7, p8, p9, p10, p11)
 	-- upvalues: Callback5 (ref), Callback6 (ref), Callback4 (ref)
 	local Fragment = p5:getFragment(p11)
 	
@@ -97,7 +97,7 @@ Callback4 = function(p5, p6, p7, p8, p9, p10, p11) --[[ Line: 230 | Named "colle
 	end
 end
 
-Callback = function(p12, p13, p14, p15, p16, p17, p18) --[[ Line: 285 | Named "collectConflictsBetweenFragments" ]]
+Callback = function(p12, p13, p14, p15, p16, p17, p18)
 	-- upvalues: Callback5 (ref), Callback6 (ref), Callback (ref)
 	if p17 == p18 then return end
 	if p15:has(p17, p18, p16) then return end
@@ -121,7 +121,7 @@ Callback = function(p12, p13, p14, p15, p16, p17, p18) --[[ Line: 285 | Named "c
 	end
 end
 
-local function findConflictsBetweenSubSelectionSets(p19, p20, p21, p22, p23, SelectionSet, p24, SelectionSet1) --[[ Line: 370 ]]
+local function findConflictsBetweenSubSelectionSets(p19, p20, p21, p22, p23, SelectionSet, p24, SelectionSet1)
 	-- upvalues: Callback2 (ref), Callback6 (ref), Callback4 (ref), Callback (ref)
 	local t = {}
 	local CallbackResult = Callback2(p19, p20, p23, SelectionSet)
@@ -150,7 +150,7 @@ local function findConflictsBetweenSubSelectionSets(p19, p20, p21, p22, p23, Sel
 	return t
 end
 
-Callback3 = function(p25, List, p26, p27, List1) --[[ Line: 461 | Named "collectConflictsWithin" ]]
+Callback3 = function(p25, List, p26, p27, List1)
 	-- upvalues: Callback7 (ref)
 	for _, value in List1 do
 		local v2 = value[1]
@@ -170,7 +170,7 @@ Callback3 = function(p25, List, p26, p27, List1) --[[ Line: 461 | Named "collect
 	end
 end
 
-Callback6 = function(p28, List, p29, p30, p31, p32, p33) --[[ Line: 506 | Named "collectConflictsBetween" ]]
+Callback6 = function(p28, List, p29, p30, p31, p32, p33)
 	-- upvalues: Callback7 (ref)
 	for _, value in ipairs(p32:keys()) do
 		local v4 = p33[value]
@@ -191,7 +191,7 @@ Callback6 = function(p28, List, p29, p30, p31, p32, p33) --[[ Line: 506 | Named 
 	end
 end
 
-Callback7 = function(p34, p35, p36, p37, p38, Entry, Entry1) --[[ Line: 547 | Named "findConflict" ]]
+Callback7 = function(p34, p35, p36, p37, p38, Entry, Entry1)
 	-- upvalues: IsObjectTypeFunction (copy), Callback9 (ref), Callback8 (ref), InspectFunction (copy), findConflictsBetweenSubSelectionSets (copy), GetNamedTypeFunction (copy), Callback10 (ref)
 	local Entry2 = Entry[1]
 	local Entry3 = Entry[2]
@@ -245,11 +245,11 @@ end
 local Callback11 = nil
 local Callback12 = nil
 
-Callback9 = function(Arguments, Arguments1) --[[ Line: 645 | Named "sameArguments" ]]
+Callback9 = function(Arguments, Arguments1)
 	-- upvalues: Array (copy), Callback11 (ref)
-	return #Arguments == #Arguments1 and Array.every(Arguments, function(p34) --[[ Line: 649 ]]
+	return #Arguments == #Arguments1 and Array.every(Arguments, function(p34)
 		-- upvalues: Array (upval), Arguments1 (copy), Callback11 (upval)
-		local FindResult = Array.find(Arguments1, function(p35): boolean --[[ Line: 650 ]]
+		local FindResult = Array.find(Arguments1, function(p35): boolean
 			-- upvalues: p34 (copy)
 			return p35.name.value == p34.name.value
 		end)
@@ -258,17 +258,17 @@ Callback9 = function(Arguments, Arguments1) --[[ Line: 645 | Named "sameArgument
 	end)
 end
 
-Callback11 = function(p34, p35): boolean --[[ Line: 660 | Named "sameValue" ]]
+Callback11 = function(p34, p35): boolean
 	-- upvalues: PrintFunction (copy)
 	return PrintFunction(p34) == PrintFunction(p35)
 end
 
-Callback8 = function(OfType, OfType1) --[[ Line: 667 | Named "doTypesConflict" ]]
+Callback8 = function(OfType, OfType1)
 	-- upvalues: IsListTypeFunction (copy), Callback8 (ref), IsNonNullTypeFunction (copy), IsLeafTypeFunction (copy)
 	return if IsListTypeFunction(OfType) then not IsListTypeFunction(OfType1) or Callback8(OfType.ofType, OfType1.ofType) elseif IsListTypeFunction(OfType1) then true elseif IsNonNullTypeFunction(OfType) then not IsNonNullTypeFunction(OfType1) or Callback8(OfType.ofType, OfType1.ofType) elseif IsNonNullTypeFunction(OfType1) then true elseif IsLeafTypeFunction(OfType) or IsLeafTypeFunction(OfType1) then OfType ~= OfType1 else false
 end
 
-Callback2 = function(p34, p35, p36, SelectionSet) --[[ Line: 695 | Named "getFieldsAndFragmentNames" ]]
+Callback2 = function(p34, p35, p36, SelectionSet)
 	-- upvalues: Map (copy), Callback12 (ref), Object (copy)
 	local v6 = p35[SelectionSet]
 	
@@ -282,14 +282,14 @@ Callback2 = function(p34, p35, p36, SelectionSet) --[[ Line: 695 | Named "getFie
 	return v6
 end
 
-Callback5 = function(p34, p35, Fragment) --[[ Line: 717 | Named "getReferencedFieldsAndFragmentNames" ]]
+Callback5 = function(p34, p35, Fragment)
 	-- upvalues: TypeFromASTFunction (copy), Callback2 (ref)
 	local v6 = p35[Fragment.selectionSet]
 	
 	return if v6 then v6 else Callback2(p34, p35, TypeFromASTFunction(p34:getSchema(), Fragment.typeCondition), Fragment.selectionSet)
 end
 
-Callback12 = function(p34, p35, Key, NewResult, p36) --[[ Line: 733 | Named "_collectFieldsAndFragmentNames" ]]
+Callback12 = function(p34, p35, Key, NewResult, p36)
 	-- upvalues: Kind (copy), IsObjectTypeFunction (copy), IsInterfaceTypeFunction (copy), NullModule (copy), TypeFromASTFunction (copy), Callback12 (ref)
 	for _, selection in ipairs(Key.selections) do
 		local Kind1 = selection.kind
@@ -316,20 +316,20 @@ Callback12 = function(p34, p35, Key, NewResult, p36) --[[ Line: 733 | Named "_co
 	end
 end
 
-Callback10 = function(p37, p38, p39, p40) --[[ Line: 780 | Named "subfieldConflicts" ]]
+Callback10 = function(p37, p38, p39, p40)
 	-- upvalues: Array (copy)
 	return if #p37 > 0 then {
 		{
 			p38,
-			Array.map(p37, function(Entry) --[[ Line: 785 ]]
+			Array.map(p37, function(Entry)
 				return Entry[1]
 			end)
 		},
-		Array.reduce(p37, function(p41, Entry) --[[ Line: 789 ]]
+		Array.reduce(p37, function(p41, Entry)
 			-- upvalues: Array (upval)
 			return Array.concat(p41, Entry[2])
 		end, { p39 }),
-		Array.reduce(p37, function(p41, Entry) --[[ Line: 793 ]]
+		Array.reduce(p37, function(p41, Entry)
 			-- upvalues: Array (upval)
 			return Array.concat(p41, Entry[3])
 		end, { p40 })
@@ -339,7 +339,7 @@ end
 v1 = {}
 local config = { __index = v1 }
 
-function v1.new() --[[ Line: 819 ]]
+function v1.new()
 	-- upvalues: config (copy)
 	local self = setmetatable({}, config)
 	self._data = {}
@@ -347,19 +347,19 @@ function v1.new() --[[ Line: 819 ]]
 	return self
 end
 
-function v1.has(p37, p38, p39, Enabled): boolean --[[ Line: 825 ]]
+function v1.has(p37, p38, p39, Enabled): boolean
 	local Entry = p37._data[p38]
 	local Entry1 = Entry and Entry[p39]
 	
 	return Entry1 ~= nil and (Enabled ~= false or Entry1 == false)
 end
 
-function v1.add(p37, p38, p39, p40) --[[ Line: 840 ]]
+function v1.add(p37, p38, p39, p40)
 	p37:_pairSetAdd(p38, p39, p40)
 	p37:_pairSetAdd(p39, p38, p40)
 end
 
-function v1._pairSetAdd(p37, p38, Key, p39) --[[ Line: 845 ]]
+function v1._pairSetAdd(p37, p38, Key, p39)
 	local Entry = p37._data[p38]
 	
 	if not Entry then

@@ -1,7 +1,7 @@
 ﻿local SlotGeometryModule = require(script:FindFirstAncestor("ViewRecyclerRoblox").RobloxAdapter.SlotGeometry)
 local GuiService = game:GetService("GuiService")
 local ReparentableHostModule = {
-	clearSelection = function(Ancestor) --[[ Line: 13 ]]
+	clearSelection = function(Ancestor)
 		-- upvalues: GuiService (copy)
 		local SelectedObject = GuiService.SelectedObject
 		
@@ -9,7 +9,7 @@ local ReparentableHostModule = {
 			GuiService.SelectedObject = nil
 		end
 	end,
-	create = function(Name) --[[ Line: 20 ]]
+	create = function(Name)
 		local Frame = Instance.new("Frame")
 		Frame.Name = Name
 		Frame.BackgroundTransparency = 1
@@ -19,7 +19,7 @@ local ReparentableHostModule = {
 		
 		return Frame
 	end,
-	place = function(p1, p2) --[[ Line: 30 ]]
+	place = function(p1, p2)
 		-- upvalues: SlotGeometryModule (copy)
 		p1.AutomaticSize = p2.automaticSize
 		p1.Size = SlotGeometryModule.getHostSize(p2.automaticSize)
@@ -27,13 +27,13 @@ local ReparentableHostModule = {
 	end
 }
 
-function ReparentableHostModule.detach(p1) --[[ Line: 36 ]]
+function ReparentableHostModule.detach(p1)
 	-- upvalues: ReparentableHostModule (copy)
 	ReparentableHostModule.clearSelection(p1)
 	p1.Parent = nil
 end
 
-function ReparentableHostModule.destroy(Object) --[[ Line: 41 ]]
+function ReparentableHostModule.destroy(Object)
 	-- upvalues: ReparentableHostModule (copy)
 	ReparentableHostModule.detach(Object)
 	Object:Destroy()

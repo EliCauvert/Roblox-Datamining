@@ -2,14 +2,14 @@
 local _ = require(ViewRecycler.Core.DataSource)
 local _ = require(ViewRecycler.Core.Types)
 
-return function(DataSource, Predicate) --[[ Line: 15 | Named "createStickyIndexResolver" ]]
+return function(DataSource, Predicate)
 	local DataSource1 = DataSource
 	local Callback = Predicate
 	local List = {}
 	local Flag = true
 	
 	return {
-		setPredicate = function(Value): boolean --[[ Line: 40 ]]
+		setPredicate = function(Value): boolean
 			-- upvalues: Callback (ref), Flag (ref)
 			if Callback == Value then
 				return false
@@ -20,18 +20,18 @@ return function(DataSource, Predicate) --[[ Line: 15 | Named "createStickyIndexR
 				return true
 			end
 		end,
-		setDataSource = function(Value) --[[ Line: 48 ]]
+		setDataSource = function(Value)
 			-- upvalues: DataSource1 (ref), Flag (ref)
 			if DataSource1 ~= Value then
 				DataSource1 = Value
 				Flag = true
 			end
 		end,
-		applyDataSourceChange = function(_) --[[ Line: 54 ]]
+		applyDataSourceChange = function(_)
 			-- upvalues: Flag (ref)
 			Flag = true
 		end,
-		resolve = function() --[[ Line: 24 ]]
+		resolve = function()
 			-- upvalues: Flag (ref), List (copy), Callback (ref), DataSource1 (ref)
 			if Flag then
 				table.clear(List)

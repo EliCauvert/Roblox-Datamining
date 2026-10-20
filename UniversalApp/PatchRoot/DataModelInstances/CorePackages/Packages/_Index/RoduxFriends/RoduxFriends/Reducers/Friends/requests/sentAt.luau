@@ -10,20 +10,20 @@ local RemoveIdsFromRequestsStoreModule = require(Parent.Reducers.Friends.utils.r
 local LlamaModule = require(Parent1.llama)
 local t = {}
 
-return function(p1) --[[ Line: 20 ]]
+return function(p1)
 	-- upvalues: RoduxModule (copy), t (copy), RemoveIdsFromRequestsStoreModule (copy), LlamaModule (copy), FriendRequestCreatedModule (copy), FriendRequestDeclinedModule (copy), FriendshipCreatedModule (copy)
 	local FriendsNetworking = p1.friendsNetworking
 	
 	return RoduxModule.createReducer(t, {
-		[FriendsNetworking.AcceptFriendRequestFromUserId.Succeeded.name] = function(p2, p3) --[[ Line: 24 ]]
+		[FriendsNetworking.AcceptFriendRequestFromUserId.Succeeded.name] = function(p2, p3)
 			-- upvalues: RemoveIdsFromRequestsStoreModule (upval)
 			return RemoveIdsFromRequestsStoreModule(p2, p3.ids)
 		end,
-		[FriendsNetworking.DeclineFriendRequestFromUserId.Succeeded.name] = function(p2, p3) --[[ Line: 29 ]]
+		[FriendsNetworking.DeclineFriendRequestFromUserId.Succeeded.name] = function(p2, p3)
 			-- upvalues: RemoveIdsFromRequestsStoreModule (upval)
 			return RemoveIdsFromRequestsStoreModule(p2, p3.ids)
 		end,
-		[FriendsNetworking.GetFriendRequests.Succeeded.name] = function(p2, p3) --[[ Line: 34 ]]
+		[FriendsNetworking.GetFriendRequests.Succeeded.name] = function(p2, p3)
 			-- upvalues: LlamaModule (upval)
 			local t = {}
 			
@@ -32,21 +32,21 @@ return function(p1) --[[ Line: 20 ]]
 			end
 			return LlamaModule.Dictionary.join(p2, t)
 		end,
-		[FriendRequestCreatedModule.name] = function(p4, p5) --[[ Line: 45 ]]
+		[FriendRequestCreatedModule.name] = function(p4, p5)
 			-- upvalues: LlamaModule (upval)
 			return LlamaModule.Dictionary.join(p4, {
 				[tostring(p5.requesteeId)] = DateTime.fromIsoDate(p5.sentAt)
 			})
 		end,
-		[FriendRequestDeclinedModule.name] = function(p4, p5) --[[ Line: 53 ]]
+		[FriendRequestDeclinedModule.name] = function(p4, p5)
 			-- upvalues: RemoveIdsFromRequestsStoreModule (upval)
 			return RemoveIdsFromRequestsStoreModule(p4, p5.ids)
 		end,
-		[FriendshipCreatedModule.name] = function(p4, p5) --[[ Line: 58 ]]
+		[FriendshipCreatedModule.name] = function(p4, p5)
 			-- upvalues: RemoveIdsFromRequestsStoreModule (upval)
 			return RemoveIdsFromRequestsStoreModule(p4, { p5.payload.userId1, p5.payload.userId2 })
 		end,
-		[FriendsNetworking.DeclineAllFriendRequests.Succeeded.name] = function() --[[ Line: 61 ]]
+		[FriendsNetworking.DeclineAllFriendRequests.Succeeded.name] = function()
 			-- upvalues: t (upval)
 			return t
 		end

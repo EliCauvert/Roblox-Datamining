@@ -10,7 +10,7 @@ local PageNavigationEventModule = require(script.Parent.PageNavigationEvent)
 local TrackNavigationEventsModule = {}
 TrackNavigationEventsModule.__index = TrackNavigationEventsModule
 
-function TrackNavigationEventsModule.new() --[[ Line: 16 ]]
+function TrackNavigationEventsModule.new()
 	-- upvalues: TrackNavigationEventsModule (copy)
 	local config = { navigationEvents = {} }
 	setmetatable(config, TrackNavigationEventsModule)
@@ -18,11 +18,11 @@ function TrackNavigationEventsModule.new() --[[ Line: 16 ]]
 	return config
 end
 
-function TrackNavigationEventsModule:getNavigationEvents() --[[ Line: 26 ]]
+function TrackNavigationEventsModule:getNavigationEvents()
 	return self.navigationEvents
 end
 
-function TrackNavigationEventsModule:printNavigationEvents() --[[ Line: 30 ]]
+function TrackNavigationEventsModule:printNavigationEvents()
 	print("Total Events: ", #self.navigationEvents)
 	
 	for _, navigationEvent in self.navigationEvents do
@@ -30,18 +30,18 @@ function TrackNavigationEventsModule:printNavigationEvents() --[[ Line: 30 ]]
 	end
 end
 
-function TrackNavigationEventsModule.waitForNumberEventsMaxWaitTime(p1, p2, p3) --[[ Line: 37 ]]
+function TrackNavigationEventsModule.waitForNumberEventsMaxWaitTime(p1, p2, p3)
 	-- upvalues: ReactRobloxModule (copy)
 	local NewElapsed = 0
 	while #p1.navigationEvents < p2 and NewElapsed <= p3 do
-		ReactRobloxModule.act(function() --[[ Line: 40 ]]
+		ReactRobloxModule.act(function()
 			-- upvalues: NewElapsed (ref)
 			NewElapsed += task.wait()
 		end)
 	end
 end
 
-function TrackNavigationEventsModule:resetNavigationEvents() --[[ Line: 46 ]]
+function TrackNavigationEventsModule:resetNavigationEvents()
 	self.navigationEvents = {}
 end
 
@@ -52,12 +52,12 @@ local config = {
 	onDidBlur = EventsModule.DidBlur
 }
 
-function TrackNavigationEventsModule.createNavigationAdapter(p4, p5) --[[ Line: 57 ]]
+function TrackNavigationEventsModule.createNavigationAdapter(p4, p5)
 	-- upvalues: config (copy), PageNavigationEventModule (copy), ReactModule (copy), NavigationEventsModule (copy)
 	local t = {}
 	
 	for i, value in config do
-		t[i] = function() --[[ Line: 60 ]]
+		t[i] = function()
 			-- upvalues: PageNavigationEventModule (upval), p5 (copy), value (copy), p4 (copy)
 			PageNavigationEventModule.new(p5, value)
 			table.insert(p4.navigationEvents, PageNavigationEventModule.new(p5, value))
@@ -66,7 +66,7 @@ function TrackNavigationEventsModule.createNavigationAdapter(p4, p5) --[[ Line: 
 	return ReactModule.createElement(NavigationEventsModule, t)
 end
 
-function TrackNavigationEventsModule:equalTo(p6) --[[ Line: 69 ]]
+function TrackNavigationEventsModule:equalTo(p6)
 	-- upvalues: InvariantModule (copy)
 	InvariantModule(type(p6) == "table", "should be a list")
 	local CountNavigationEvents = #self.navigationEvents
@@ -82,7 +82,7 @@ function TrackNavigationEventsModule:equalTo(p6) --[[ Line: 69 ]]
 	return true
 end
 
-function TrackNavigationEventsModule:expect(p7) --[[ Line: 86 ]]
+function TrackNavigationEventsModule:expect(p7)
 	-- upvalues: Array (copy)
 	local EqualToResult, EqualToResult2 = self:equalTo(p7)
 	

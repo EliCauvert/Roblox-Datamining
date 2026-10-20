@@ -20,7 +20,7 @@ CurveAnimLengthBoundedModule.prereqTests = {
 	ValidationEnumsModule.ValidationModule.CurveAnimDataAvailable
 }
 
-function CurveAnimLengthBoundedModule.run(p1, p2) --[[ Line: 33 ]]
+function CurveAnimLengthBoundedModule.run(p1, p2)
 	-- upvalues: GetFStringUGCValidateCurveAnimationMinLengthModule (copy), GetFStringUGCValidationMaxAnimationLengthModule (copy), ErrorSourceStringsModule (copy)
 	local AnimLength = p2.curveAnimComputedFrames.animLength
 	local AsNumberResult = GetFStringUGCValidateCurveAnimationMinLengthModule.asNumber()

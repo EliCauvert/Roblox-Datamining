@@ -10,12 +10,12 @@ local MergeDirectivesFunction = require(script.Parent.directives).mergeDirective
 local MergeNamedTypeArrayFunction = require(script.Parent["merge-named-type-array"]).mergeNamedTypeArray
 
 return {
-	mergeType = function(p1, p2, p3) --[[ Line: 29 ]]
+	mergeType = function(p1, p2, p3)
 		-- upvalues: Boolean (copy), MergeFieldsFunction (copy), MergeDirectivesFunction (copy), MergeNamedTypeArrayFunction (copy), Error1 (copy), Object (copy), Kind (copy)
 		if not p2 then
 			return if p3 and Boolean.toJSBoolean(p3.convertExtensions) then Object.assign({}, p1, { kind = Kind.OBJECT_TYPE_DEFINITION }) else p1
 		end
-		local Success, Result = pcall(function() --[[ Line: 41 ]]
+		local Success, Result = pcall(function()
 			-- upvalues: p1 (copy), Boolean (upval), p2 (copy), p3 (copy), MergeFieldsFunction (upval), MergeDirectivesFunction (upval), MergeNamedTypeArrayFunction (upval)
 			return {
 				name = p1.name,

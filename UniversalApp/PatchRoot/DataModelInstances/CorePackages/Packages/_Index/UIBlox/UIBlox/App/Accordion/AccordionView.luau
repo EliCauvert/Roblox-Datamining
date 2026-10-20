@@ -21,11 +21,11 @@ AccordionView.validateProps = TModule.strictInterface({
 })
 AccordionView.defaultProps = { maxItemsInCompactView = 3 }
 
-function AccordionView.init(p1) --[[ Line: 48 ]]
+function AccordionView.init(p1)
 	-- upvalues: RoactModule (copy)
 	p1.state = { expanded = false, isExpandButtonPressed = false }
 	
-	function p1.onExpandButtonActivated() --[[ Line: 54 ]]
+	function p1.onExpandButtonActivated()
 		-- upvalues: p1 (copy)
 		if p1.props.onExpand then
 			p1.props.onExpand()
@@ -33,7 +33,7 @@ function AccordionView.init(p1) --[[ Line: 48 ]]
 		p1:setState({ expanded = true, isExpandButtonPressed = false })
 	end
 	
-	function p1.onCollapseButtonActivated() --[[ Line: 64 ]]
+	function p1.onCollapseButtonActivated()
 		-- upvalues: p1 (copy)
 		if p1.props.onCollapse then
 			p1.props.onCollapse()
@@ -41,14 +41,14 @@ function AccordionView.init(p1) --[[ Line: 48 ]]
 		p1:setState({ expanded = false })
 	end
 	
-	function p1:onExpandButtonInputBegan(Input) --[[ Line: 73 ]]
+	function p1:onExpandButtonInputBegan(Input)
 		-- upvalues: p1 (copy)
 		if Input.UserInputState == Enum.UserInputState.Begin and (Input.UserInputType == Enum.UserInputType.Touch or Input.UserInputType == Enum.UserInputType.MouseButton1) then
 			p1:setState({ isExpandButtonPressed = true })
 		end
 	end
 	
-	function p1.onExpandButtonInputEnded() --[[ Line: 87 ]]
+	function p1.onExpandButtonInputEnded()
 		-- upvalues: p1 (copy)
 		if p1.state.isExpandButtonPressed then
 			p1:setState({ isExpandButtonPressed = false })
@@ -57,7 +57,7 @@ function AccordionView.init(p1) --[[ Line: 48 ]]
 	
 	p1.rootFrameRef = RoactModule.createRef()
 	
-	function p1.onListLayoutAbsoluteContentSizeChanged(p2) --[[ Line: 97 ]]
+	function p1.onListLayoutAbsoluteContentSizeChanged(p2)
 		-- upvalues: p1 (copy)
 		if p1.rootFrameRef.current then
 			p1.rootFrameRef.current.Size = UDim2.new(0, p1.props.itemWidth, 0, (math.max(p2.AbsoluteContentSize.Y, (p1:getCompactTotalHeight()))))
@@ -65,7 +65,7 @@ function AccordionView.init(p1) --[[ Line: 48 ]]
 	end
 end
 
-function AccordionView.getCompactTotalHeight(p1): number --[[ Line: 108 ]]
+function AccordionView.getCompactTotalHeight(p1): number
 	local ItemHeight = p1.props.itemHeight
 	local MaxItemsInCompactView: number = p1.props.maxItemsInCompactView
 	local CountItems = #p1.props.items
@@ -73,7 +73,7 @@ function AccordionView.getCompactTotalHeight(p1): number --[[ Line: 108 ]]
 	return if CountItems == 0 then 0 else ItemHeight + (math.min(MaxItemsInCompactView, CountItems) - 1) * 10
 end
 
-function AccordionView.getLayoutInfo(p1) --[[ Line: 121 ]]
+function AccordionView.getLayoutInfo(p1)
 	local ItemWidth = p1.props.itemWidth
 	local ItemHeight = p1.props.itemHeight
 	local PlaceholderBaseTransparency: number = p1.props.placeholderBaseTransparency
@@ -117,7 +117,7 @@ function AccordionView.getLayoutInfo(p1) --[[ Line: 121 ]]
 	return t
 end
 
-function AccordionView.render(p2) --[[ Line: 175 ]]
+function AccordionView.render(p2)
 	-- upvalues: RoactModule (copy), SpringAnimatedItemModule (copy), SpringOptions (copy)
 	local Items = p2.props.items
 	local CountItems = #Items
@@ -144,14 +144,14 @@ function AccordionView.render(p2) --[[ Line: 175 ]]
 		Scaler = RoactModule.createElement(SpringAnimatedItemModule.AnimatedUIScale, {
 			springOptions = SpringOptions,
 			animatedValues = { scale = if IsExpandButtonPressed then 0.9 else 1 },
-			mapValuesToProps = function(p3) --[[ Line: 208 ]]
+			mapValuesToProps = function(p3)
 				return { Scale = p3.scale }
 			end
 		}),
 		CollapseButton = RoactModule.createElement(SpringAnimatedItemModule.AnimatedFrame, {
 			springOptions = SpringOptions,
 			animatedValues = { sizeOffsetY = Expanded and CollapseButtonSize + 1 or 0 },
-			mapValuesToProps = function(p3) --[[ Line: 221 ]]
+			mapValuesToProps = function(p3)
 				-- upvalues: CollapseButtonSize (copy)
 				return {
 					Size = UDim2.new(0, CollapseButtonSize, 0, p3.sizeOffsetY)
@@ -166,7 +166,7 @@ function AccordionView.render(p2) --[[ Line: 175 ]]
 						animatedValues = {
 							positionOffsetY = if Expanded then 0 else CollapseButtonSize / 2
 						},
-						mapValuesToProps = function(p3) --[[ Line: 235 ]]
+						mapValuesToProps = function(p3)
 							return { Position = UDim2.new(0, 0, 0, p3.positionOffsetY) }
 						end,
 						regularProps = {
@@ -187,7 +187,7 @@ function AccordionView.render(p2) --[[ Line: 175 ]]
 		config["Item" .. tostring(i)] = RoactModule.createElement(SpringAnimatedItemModule.AnimatedFrame, {
 			springOptions = SpringOptions,
 			animatedValues = { width = Layout.width, height = Layout.height },
-			mapValuesToProps = function(p3) --[[ Line: 262 ]]
+			mapValuesToProps = function(p3)
 				return { Size = UDim2.new(0, p3.width, 0, p3.height) }
 			end,
 			regularProps = {
@@ -203,7 +203,7 @@ function AccordionView.render(p2) --[[ Line: 175 ]]
 						key = "Placeholder",
 						springOptions = SpringOptions,
 						animatedValues = { transparency = Layout.placeholderTransparency },
-						mapValuesToProps = function(p3) --[[ Line: 282 ]]
+						mapValuesToProps = function(p3)
 							return { BackgroundTransparency = p3.transparency }
 						end,
 						regularProps = {

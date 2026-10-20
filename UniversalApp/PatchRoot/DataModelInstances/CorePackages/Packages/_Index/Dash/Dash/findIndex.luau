@@ -1,4 +1,4 @@
-﻿return function(List, Callback) --[[ Line: 10 | Named "findIndex" ]]
+﻿return function(List, Callback)
 	for i, value in ipairs(List) do
 		if Callback(value, i) then
 			return i

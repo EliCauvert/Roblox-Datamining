@@ -13,10 +13,10 @@ local TileOverlayModule = require(Parent.SplitTile.TileOverlay)
 local _ = require(Parent1.Style.StyleTypes)
 local _UDim = UDim.new(0, 8)
 
-local function useIsHoveredState(HoverDelay, Callback) --[[ Line: 65 ]]
+local function useIsHoveredState(HoverDelay, Callback)
 	-- upvalues: UseDebouncedStateFunction (copy), ReactModule (copy)
 	local UseDebouncedStateResult, UseDebouncedStateResult2 = UseDebouncedStateFunction(false, HoverDelay)
-	ReactModule.useLayoutEffect(function() --[[ Line: 68 ]]
+	ReactModule.useLayoutEffect(function()
 		-- upvalues: Callback (copy), UseDebouncedStateResult (copy)
 		if Callback ~= nil then
 			Callback(UseDebouncedStateResult)
@@ -26,7 +26,7 @@ local function useIsHoveredState(HoverDelay, Callback) --[[ Line: 65 ]]
 	return UseDebouncedStateResult, UseDebouncedStateResult2
 end
 
-return function(p1) --[[ Line: 77 | Named "VerticalTile" ]]
+return function(p1)
 	-- upvalues: UseStyleModule (copy), CryoModule (copy), _UDim (copy), useIsHoveredState (copy), ReactModule (copy), TileOverlayModule (copy), ImageSetComponentModule (copy), ImagesModule (copy)
 	local Theme = UseStyleModule().Theme
 	local JoinResult = CryoModule.Dictionary.join({
@@ -62,9 +62,9 @@ return function(p1) --[[ Line: 77 | Named "VerticalTile" ]]
 	local HasBackground = JoinResult.hasBackground
 	local IsHoverEnabled = JoinResult.isHoverEnabled
 	local UseIsHoveredStateResult, UseIsHoveredStateResult2 = useIsHoveredState(JoinResult.hoverDelay, JoinResult.onHoverChanged)
-	local UseResult = ReactModule.useCallback(function(p2) --[[ Line: 113 ]]
+	local UseResult = ReactModule.useCallback(function(p2)
 		-- upvalues: UseIsHoveredStateResult2 (copy)
-		return function() --[[ Line: 114 ]]
+		return function()
 			-- upvalues: UseIsHoveredStateResult2 (upval), p2 (copy)
 			UseIsHoveredStateResult2(p2)
 		end

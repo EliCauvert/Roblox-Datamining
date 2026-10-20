@@ -9,7 +9,7 @@ local UseTileModule = require(Foundation.Components.Tile_DEPRECATED.useTile)
 local UseTokensModule = require(Foundation.Providers.Style.useTokens)
 local WithDefaultsModule = require(Foundation.Utility.withDefaults)
 
-local function getTypographyComponent(Subtitle, CaptionLarge, Default, TextXAlignment, NumLines, LayoutOrder: number, TestId) --[[ Line: 31 ]]
+local function getTypographyComponent(Subtitle, CaptionLarge, Default, TextXAlignment, NumLines, LayoutOrder: number, TestId)
 	-- upvalues: ReactModule (copy), SkeletonModule (copy), UseTextSizeOffsetModule (copy), TextModule (copy)
 	local Text = nil
 	local FontStyle = nil
@@ -52,7 +52,7 @@ end
 
 local config = { TextXAlignment = Enum.TextXAlignment.Left }
 
-return function(p1) --[[ Line: 98 | Named "TileHeader" ]]
+return function(p1)
 	-- upvalues: WithDefaultsModule (copy), config (copy), UseTokensModule (copy), UseTileModule (copy), getTypographyComponent (copy), ReactModule (copy), ViewModule (copy)
 	local WithDefaultsModuleResult = WithDefaultsModule(p1, config)
 	local UseTokensModuleResult = UseTokensModule()

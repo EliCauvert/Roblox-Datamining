@@ -6,15 +6,15 @@ local ReactModule = require(Parent.React)
 local Change = ReactModule.Change
 local View = ReactModule.Component:extend("View")
 
-function View.init(p1, Props) --[[ Line: 46 ]]
+function View.init(p1, Props)
 	-- upvalues: ReactModule (copy)
 	p1.props = Props
 	p1._nativeRef = p1.props.nativeRef or ReactModule.createRef()
 end
 
-function View.render(p1) --[[ Line: 51 ]]
+function View.render(p1)
 	-- upvalues: Array (copy), Object (copy), Change (copy), ReactModule (copy)
-	local AssignResult = Object.assign(table.clone(p1.props), if Array.isArray(p1.props.style) then Array.reduce(p1.props.style, function(p2, p3) --[[ Line: 53 ]]
+	local AssignResult = Object.assign(table.clone(p1.props), if Array.isArray(p1.props.style) then Array.reduce(p1.props.style, function(p2, p3)
 		-- upvalues: Object (upval)
 		return Object.assign(p2, p3)
 	end, {}) else p1.props.style)

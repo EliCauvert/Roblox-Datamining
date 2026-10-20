@@ -19,7 +19,7 @@ local ListPresentationModule = require(ViewRecycler.Core.Virtualizer.ListPresent
 local _ = require(ViewRecycler.Core.RecyclingScope)
 local VirtualizerEngineModule = require(ViewRecycler.Core.Virtualizer.VirtualizerEngine)
 
-return function(p1) --[[ Line: 75 | Named "createVirtualizer" ]]
+return function(p1)
 	-- upvalues: VirtualizerEngineModule (copy), ListPresentationModule (copy), Internal (copy), External (copy), VirtualizerEffectTypeModule (copy), SignalsModule (copy), VirtualizerQueryTypeModule (copy)
 	local RecyclingScope = p1.recyclingScope
 	local VirtualizerEngineModuleResult = VirtualizerEngineModule({
@@ -61,10 +61,10 @@ return function(p1) --[[ Line: 75 | Named "createVirtualizer" ]]
 	local Callback = nil
 	local Callback1: (() -> ())? = nil
 	
-	local function _() --[[ Line: 120 | Named "subscribe" ]]
+	local function _()
 		-- upvalues: SubscribeResult (ref), Flag (ref), Flag2 (ref), DataSource (ref), Callback (ref), Internal (upval)
 		if SubscribeResult == nil and Flag and not Flag2 then
-			SubscribeResult = DataSource.subscribe(function(ChangeBatch) --[[ Line: 124 ]]
+			SubscribeResult = DataSource.subscribe(function(ChangeBatch)
 				-- upvalues: Callback (upval), Internal (upval)
 				Callback(nil, {
 					type = Internal.ApplyDataSourceChange,
@@ -76,7 +76,7 @@ return function(p1) --[[ Line: 75 | Named "createVirtualizer" ]]
 		end
 	end
 	
-	local _ = function() --[[ Line: 132 | Named "unsubscribe" ]]
+	local _ = function()
 		-- upvalues: SubscribeResult (ref)
 		if SubscribeResult ~= nil then
 			SubscribeResult()
@@ -84,7 +84,7 @@ return function(p1) --[[ Line: 75 | Named "createVirtualizer" ]]
 		end
 	end
 	
-	local function executeDispatch(p2, Snapshot, p3) --[[ Line: 139 ]]
+	local function executeDispatch(p2, Snapshot, p3)
 		-- upvalues: External (upval), DataSource (ref), SubscribeResult (ref), VirtualizerEngineModuleResult (copy), Flag (ref), Flag2 (ref), Callback (ref), Internal (upval), NoActive (ref), ListPresentationModuleResult (copy), Flag1 (ref), VirtualizerEffectTypeModule (upval)
 		if p2 ~= nil and (p2.type == External.SetDataSource or p2.type == External.SetDataSourceAndLayout) then
 			local DataSource1 = p2.dataSource
@@ -123,7 +123,7 @@ return function(p1) --[[ Line: 75 | Named "createVirtualizer" ]]
 			Flag = true
 			
 			if SubscribeResult == nil and Flag and not Flag2 then
-				SubscribeResult = DataSource.subscribe(function(ChangeBatch) --[[ Line: 124 ]]
+				SubscribeResult = DataSource.subscribe(function(ChangeBatch)
 					-- upvalues: Callback (upval), Internal (upval)
 					Callback(nil, {
 						type = Internal.ApplyDataSourceChange,
@@ -158,7 +158,7 @@ return function(p1) --[[ Line: 75 | Named "createVirtualizer" ]]
 			if Flag2 then
 				return Config
 			end
-			SubscribeResult = DataSource.subscribe(function(ChangeBatch) --[[ Line: 124 ]]
+			SubscribeResult = DataSource.subscribe(function(ChangeBatch)
 				-- upvalues: Callback (upval), Internal (upval)
 				Callback(nil, {
 					type = Internal.ApplyDataSourceChange,
@@ -169,7 +169,7 @@ return function(p1) --[[ Line: 75 | Named "createVirtualizer" ]]
 		return Config
 	end
 	
-	Callback = function(p4, p5) --[[ Line: 211 ]]
+	Callback = function(p4, p5)
 		-- upvalues: External (upval), ListPresentationModuleResult (copy), config (copy), Callback1 (ref), Flag3 (ref), Flag2 (ref), VirtualizerEngineModuleResult (copy), executeDispatch (copy), p1 (copy), VirtualizerEffectTypeModule (upval)
 		if p5 == nil and p4 ~= nil then
 			if p4.type == External.SubmitMeasurements then
@@ -210,7 +210,7 @@ return function(p1) --[[ Line: 75 | Named "createVirtualizer" ]]
 	end
 	
 	if p1.active ~= nil then
-		Callback1 = SignalsModule.createEffect(function(p6) --[[ Line: 255 ]]
+		Callback1 = SignalsModule.createEffect(function(p6)
 			-- upvalues: Callback (ref), External (upval), p1 (copy)
 			Callback({ type = External.SetActive, active = p1.active(p6) })
 		end)
@@ -218,7 +218,7 @@ return function(p1) --[[ Line: 75 | Named "createVirtualizer" ]]
 	return {
 		dispatch = Callback,
 		getSnapshot = VirtualizerEngineModuleResult.getSnapshot,
-		query = function(p6) --[[ Line: 263 ]]
+		query = function(p6)
 			-- upvalues: VirtualizerQueryTypeModule (upval), ListPresentationModuleResult (copy), VirtualizerEngineModuleResult (copy)
 			return if p6.type == VirtualizerQueryTypeModule.GetItemViews then ListPresentationModuleResult.getItemViews() elseif p6.type == VirtualizerQueryTypeModule.GetPlacementIntent then ListPresentationModuleResult.resolvePlacementIntent(p6.itemView) else VirtualizerEngineModuleResult.query(p6)
 		end

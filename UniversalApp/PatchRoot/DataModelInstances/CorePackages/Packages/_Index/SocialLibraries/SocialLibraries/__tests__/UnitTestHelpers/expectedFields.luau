@@ -1,4 +1,4 @@
-﻿return function(List, List1) --[[ Line: 1 | Named "expectedFields" ]]
+﻿return function(List, List1)
 	local t = {}
 	
 	for _, value in ipairs(List1) do

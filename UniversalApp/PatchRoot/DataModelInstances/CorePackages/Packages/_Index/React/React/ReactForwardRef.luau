@@ -7,7 +7,7 @@ local REACTFORWARDREFTYPE = ReactSymbols.REACT_FORWARD_REF_TYPE
 local REACTMEMOTYPE = ReactSymbols.REACT_MEMO_TYPE
 
 return {
-	forwardRef = function(Render) --[[ Line: 33 ]]
+	forwardRef = function(Render)
 		-- upvalues: ReactGlobalsModule (copy), REACTMEMOTYPE (copy), Console (copy), REACTFORWARDREFTYPE (copy)
 		if ReactGlobalsModule.__DEV__ then
 			if typeof(Render) == "table" and Render["$$typeof"] == REACTMEMOTYPE then
@@ -27,11 +27,11 @@ return {
 		if ReactGlobalsModule.__DEV__ then
 			local v1 = nil
 			setmetatable(config, {
-				__index = function(p1, p2) --[[ Line: 96 ]]
+				__index = function(p1, p2)
 					-- upvalues: v1 (ref)
 					return if p2 == "displayName" then v1 else rawget(p1, p2)
 				end,
-				__newindex = function(p1, p2, p3) --[[ Line: 102 ]]
+				__newindex = function(p1, p2, p3)
 					-- upvalues: v1 (ref)
 					if p2 == "displayName" then
 						v1 = p3

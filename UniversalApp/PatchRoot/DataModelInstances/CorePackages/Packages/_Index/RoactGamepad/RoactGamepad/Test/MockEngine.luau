@@ -32,7 +32,7 @@ local config1 = {
 	[Enum.KeyCode.Right] = "NextSelectionRight"
 }
 
-local function _(KeyCode) --[[ Line: 53 | Named "defaultInputObject" ]]
+local function _(KeyCode)
 	return {
 		KeyCode = KeyCode,
 		Delta = Vector3.new(),
@@ -42,11 +42,11 @@ local function _(KeyCode) --[[ Line: 53 | Named "defaultInputObject" ]]
 	}
 end
 
-local _ = function(Disconnect) --[[ Line: 64 | Named "wrapDisconnector" ]]
+local _ = function(Disconnect)
 	return { Disconnect = Disconnect }
 end
 
-function MockEngineModule.new() --[[ Line: 70 ]]
+function MockEngineModule.new()
 	-- upvalues: CreateSignalModule (copy), MockEngineModule (copy), CryoModule (copy)
 	local self = setmetatable({
 		__mockSelected = nil,
@@ -60,55 +60,55 @@ function MockEngineModule.new() --[[ Line: 70 ]]
 		__gamepadDisconnected = CreateSignalModule()
 	}, MockEngineModule)
 	local config = {
-		getSelection = function() --[[ Line: 88 ]]
+		getSelection = function()
 			-- upvalues: self (copy)
 			return self.__mockSelected
 		end,
-		setSelection = function(p1) --[[ Line: 91 ]]
+		setSelection = function(p1)
 			-- upvalues: self (copy)
 			self.__mockSelected = p1
 			self.__selectionChangedSignal:fire()
 		end,
-		getGamepadConnected = function(p1) --[[ Line: 97 ]]
+		getGamepadConnected = function(p1)
 			-- upvalues: self (copy)
 			return self.__connectedGamepads[p1] or false
 		end,
-		getGamepadState = function(p1) --[[ Line: 100 ]]
+		getGamepadState = function(p1)
 			-- upvalues: self (copy)
 			if self.__gamepadStates[p1] == nil then
 				self:__initializeGamepadState(p1)
 			end
 			return self.__gamepadStates[p1]
 		end,
-		getNavigationGamepads = function(_) --[[ Line: 109 ]]
+		getNavigationGamepads = function(_)
 			-- upvalues: CryoModule (upval), self (copy)
 			return CryoModule.Dictionary.keys(self.__connectedGamepads)
 		end,
-		subscribeToSelectionChanged = function(p1) --[[ Line: 112 ]]
+		subscribeToSelectionChanged = function(p1)
 			-- upvalues: self (copy)
 			return { Disconnect = self.__selectionChangedSignal:subscribe(p1) }
 		end,
-		subscribeToInputBegan = function(p1) --[[ Line: 117 ]]
+		subscribeToInputBegan = function(p1)
 			-- upvalues: self (copy)
 			return { Disconnect = self.__inputSignal:subscribe(p1) }
 		end,
-		subscribeToInputChanged = function(p1) --[[ Line: 122 ]]
+		subscribeToInputChanged = function(p1)
 			-- upvalues: self (copy)
 			return { Disconnect = self.__inputSignal:subscribe(p1) }
 		end,
-		subscribeToInputEnded = function(p1) --[[ Line: 127 ]]
+		subscribeToInputEnded = function(p1)
 			-- upvalues: self (copy)
 			return { Disconnect = self.__inputSignal:subscribe(p1) }
 		end,
-		subscribeToRenderStepped = function(p1) --[[ Line: 132 ]]
+		subscribeToRenderStepped = function(p1)
 			-- upvalues: self (copy)
 			return { Disconnect = self.__renderStepped:subscribe(p1) }
 		end,
-		subscribeToGamepadConnected = function(p1) --[[ Line: 137 ]]
+		subscribeToGamepadConnected = function(p1)
 			-- upvalues: self (copy)
 			return { Disconnect = self.__gamepadConnected:subscribe(p1) }
 		end,
-		subscribeToGamepadDisconnected = function(p1) --[[ Line: 142 ]]
+		subscribeToGamepadDisconnected = function(p1)
 			-- upvalues: self (copy)
 			return { Disconnect = self.__gamepadDisconnected:subscribe(p1) }
 		end
@@ -118,9 +118,9 @@ function MockEngineModule.new() --[[ Line: 70 ]]
 	return self, config
 end
 
-function MockEngineModule:__initializeGamepadState(p1) --[[ Line: 154 ]]
+function MockEngineModule:__initializeGamepadState(p1)
 	-- upvalues: CryoModule (copy), list (copy)
-	self.__gamepadStates[p1] = CryoModule.List.map(list, function(KeyCode) --[[ Line: 155 ]]
+	self.__gamepadStates[p1] = CryoModule.List.map(list, function(KeyCode)
 		return {
 			KeyCode = KeyCode,
 			Delta = Vector3.new(),
@@ -131,12 +131,12 @@ function MockEngineModule:__initializeGamepadState(p1) --[[ Line: 154 ]]
 	end)
 end
 
-function MockEngineModule:simulateSelectionChanged(p1) --[[ Line: 160 ]]
+function MockEngineModule:simulateSelectionChanged(p1)
 	self.__mockSelected = p1
 	self.__selectionChangedSignal:fire()
 end
 
-function MockEngineModule:simulateInput(p1) --[[ Line: 165 ]]
+function MockEngineModule:simulateInput(p1)
 	-- upvalues: CryoModule (copy), config (copy), config1 (copy)
 	local JoinResult = CryoModule.Dictionary.join({
 		Delta = Vector3.new(),
@@ -158,7 +158,7 @@ function MockEngineModule:simulateInput(p1) --[[ Line: 165 ]]
 			self:connectGamepad(UserInputType)
 		end
 		local GamepadState = self.__gamepadStates[UserInputType]
-		local Where = CryoModule.List.findWhere(GamepadState, function(Input): boolean --[[ Line: 201 ]]
+		local Where = CryoModule.List.findWhere(GamepadState, function(Input): boolean
 			-- upvalues: KeyCode (copy)
 			return Input.KeyCode == KeyCode
 		end)
@@ -173,21 +173,21 @@ function MockEngineModule:simulateInput(p1) --[[ Line: 165 ]]
 	self.__inputSignal:fire(JoinResult)
 end
 
-function MockEngineModule:renderStep(p2: number) --[[ Line: 222 ]]
+function MockEngineModule:renderStep(p2: number)
 	if p2 == nil then
 		p2 = 0.03333333333333333
 	end
 	self.__renderStepped:fire(p2)
 end
 
-function MockEngineModule:connectGamepad(UserInputType) --[[ Line: 230 ]]
+function MockEngineModule:connectGamepad(UserInputType)
 	assert(typeof(UserInputType) == "EnumItem" and UserInputType.EnumType == Enum.UserInputType, "Invalid argument #1: expected a member of Enum.UserInputType")
 	self.__connectedGamepads[UserInputType] = true
 	self:__initializeGamepadState(UserInputType)
 	self.__gamepadConnected:fire(UserInputType)
 end
 
-function MockEngineModule:disconnectGamepad(p2) --[[ Line: 242 ]]
+function MockEngineModule:disconnectGamepad(p2)
 	assert(typeof(p2) == "EnumItem" and p2.EnumType == Enum.UserInputType, "Invalid argument #1: expected a member of Enum.UserInputType")
 	self.__connectedGamepads[p2] = nil
 	self.__gamepadDisconnected:fire(p2)

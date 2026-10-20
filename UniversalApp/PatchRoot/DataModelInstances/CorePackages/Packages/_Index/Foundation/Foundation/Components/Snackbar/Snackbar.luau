@@ -21,7 +21,7 @@ local config1 = {
 	colorNamespace = require(Foundation.Enums.ColorNamespace).Inverse
 }
 
-return ReactModule.memo(ReactModule.forwardRef(function(p1, Ref) --[[ Line: 56 | Named "Snackbar" ]]
+return ReactModule.memo(ReactModule.forwardRef(function(p1, Ref)
 	-- upvalues: WithDefaultsModule (copy), config (copy), UseTokensModule (copy), UseScaledValueModule (copy), IconVariant (copy), ReactModule (copy), ViewModule (copy), WithCommonPropsModule (copy), PresentationContextModule (copy), config1 (copy), IconModule (copy), DashModule (copy), TextModule (copy), StateLayerModeModule (copy), CloseAffordanceModule (copy), InputSizeModule (copy), CloseAffordanceVariantModule (copy)
 	local WithDefaultsModuleResult = WithDefaultsModule(p1, config)
 	local UseTokensModuleResult = UseTokensModule()

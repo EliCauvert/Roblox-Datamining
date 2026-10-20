@@ -1,8 +1,8 @@
-﻿local function _(p1) --[[ Line: 14 | Named "TypeError" ]]
+﻿local function _(p1)
 	return p1
 end
 
-return function(Text: string, Text1: string) --[[ Line: 18 | Named "splitOnFirst" ]]
+return function(Text: string, Text1: string)
 	if type(Text) ~= "string" or type(Text1) ~= "string" then
 		error("Expected the arguments to be of type `string`")
 	end

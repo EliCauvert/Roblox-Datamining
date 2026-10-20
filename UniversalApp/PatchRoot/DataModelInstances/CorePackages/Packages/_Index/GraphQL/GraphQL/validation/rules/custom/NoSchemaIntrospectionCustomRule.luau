@@ -4,10 +4,10 @@ local GetNamedTypeFunction = require(Parent.type.definition).getNamedType
 local IsIntrospectionTypeFunction = require(Parent.type.introspection).isIntrospectionType
 
 return {
-	NoSchemaIntrospectionCustomRule = function(p1) --[[ Line: 27 ]]
+	NoSchemaIntrospectionCustomRule = function(p1)
 		-- upvalues: GetNamedTypeFunction (copy), IsIntrospectionTypeFunction (copy), GraphQLError (copy)
 		return {
-			Field = function(_, p2) --[[ Line: 29 ]]
+			Field = function(_, p2)
 				-- upvalues: GetNamedTypeFunction (upval), p1 (copy), IsIntrospectionTypeFunction (upval), GraphQLError (upval)
 				local NamedType = GetNamedTypeFunction(p1:getType())
 				

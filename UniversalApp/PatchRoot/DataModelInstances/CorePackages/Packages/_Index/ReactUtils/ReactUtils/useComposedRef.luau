@@ -1,6 +1,6 @@
 ﻿local ReactModule = require(script:FindFirstAncestor("ReactUtils").Parent.React)
 
-local function _(Callback: (any) -> (), Current) --[[ Line: 9 | Named "forwardRefValue" ]]
+local function _(Callback: (any) -> (), Current)
 	if type(Callback) == "function" then
 		Callback(Current)
 		
@@ -11,9 +11,9 @@ local function _(Callback: (any) -> (), Current) --[[ Line: 9 | Named "forwardRe
 	end
 end
 
-return function(Callback, Callback1) --[[ Line: 22 | Named "useComposedRef" ]]
+return function(Callback, Callback1)
 	-- upvalues: ReactModule (copy)
-	return (ReactModule.useCallback(function(Current) --[[ Line: 23 ]]
+	return (ReactModule.useCallback(function(Current)
 		-- upvalues: Callback (copy), Callback1 (copy)
 		if type(Callback) == "function" then
 			Callback(Current)

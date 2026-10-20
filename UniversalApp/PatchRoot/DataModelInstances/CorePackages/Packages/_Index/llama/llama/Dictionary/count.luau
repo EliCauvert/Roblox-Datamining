@@ -1,8 +1,8 @@
-﻿local function alwaysTrue(): boolean --[[ Line: 2 ]]
+﻿local function alwaysTrue(): boolean
 	return true
 end
 
-return function(List, p1): number --[[ Line: 6 | Named "count" ]]
+return function(List, p1): number
 	-- upvalues: alwaysTrue (copy)
 	local ValueType = type(List)
 	assert(ValueType == "table", "expected a table for first argument, got " .. ValueType)

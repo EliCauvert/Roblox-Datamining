@@ -1,6 +1,6 @@
-﻿return function(p1) --[[ Line: 7 ]]
+﻿return function(p1)
 	return {
-		appsflyer = function(LinkId, LinkType) --[[ Line: 10 ]]
+		appsflyer = function(LinkId, LinkType)
 			-- upvalues: p1 (copy)
 			local config = { linkId = LinkId, linkType = LinkType }
 			
@@ -9,7 +9,7 @@
 				webUrl = p1.fromString("www:share-links?code={linkId}&type={linkType}")(config)
 			})
 		end,
-		shortUrl = function(p2) --[[ Line: 25 ]]
+		shortUrl = function(p2)
 			-- upvalues: p1 (copy)
 			return p1.fromString("www:share?code={linkId}&type={type}&stamp={stamp|}")(p2)
 		end

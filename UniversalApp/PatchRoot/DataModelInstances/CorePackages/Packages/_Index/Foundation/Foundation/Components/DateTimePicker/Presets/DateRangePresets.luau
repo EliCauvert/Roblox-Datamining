@@ -16,24 +16,24 @@ local list = {
 	DateTimePickerDateRangePresetModule.LastYear
 }
 
-local function buildPresetChip(p1, SelectedDates, ReferenceDate, SelectableDateRange, Callback) --[[ Line: 39 ]]
+local function buildPresetChip(p1, SelectedDates, ReferenceDate, SelectableDateRange, Callback)
 	-- upvalues: DateTimePresetRangesUtilitiesModule (copy), DateTimeEqualityUtilitiesModule (copy), TranslatorModule (copy)
 	local ResolvePresetRangeResult = DateTimePresetRangesUtilitiesModule.resolvePresetRange(p1, ReferenceDate)
 	
 	return if SelectableDateRange and not DateTimeEqualityUtilitiesModule.isRangeWithinSelectableRange(ResolvePresetRangeResult, SelectableDateRange) then nil else {
 		text = TranslatorModule:FormatByKey(`CommonUI.Controls.Label.{p1}`),
 		isChecked = DateTimeEqualityUtilitiesModule.areDatesSameDayAsRange(SelectedDates, ResolvePresetRangeResult),
-		onActivated = function() --[[ Line: 56 ]]
+		onActivated = function()
 			-- upvalues: Callback (copy), ResolvePresetRangeResult (copy)
 			Callback(ResolvePresetRangeResult)
 		end
 	}
 end
 
-return function(Frame) --[[ Line: 62 | Named "DateRangePresets" ]]
+return function(Frame)
 	-- upvalues: ReactModule (copy), list (copy), buildPresetChip (copy), ChipGroupModule (copy), ChipSizeModule (copy)
 	return ReactModule.createElement(ChipGroupModule, {
-		chips = ReactModule.useMemo(function() --[[ Line: 63 ]]
+		chips = ReactModule.useMemo(function()
 			-- upvalues: list (upval), buildPresetChip (upval), Frame (copy)
 			local List = {}
 			

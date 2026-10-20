@@ -94,7 +94,7 @@ local FreezeResult = LuauPolyfillModule.Object.freeze({})
 local NullModule = require(Parent.luaUtils.null)
 local Callback = nil
 
-local function visit(p1, p2, p3) --[[ Line: 249 ]]
+local function visit(p1, p2, p3)
 	-- upvalues: QueryDocumentKeys (copy), Array (copy), NullModule (copy), IsNodeFunction (copy), InspectFunction (copy), Callback (ref), FreezeResult (copy)
 	local P2 = p3 or QueryDocumentKeys
 	local Prev = nil
@@ -223,12 +223,12 @@ local function visit(p1, p2, p3) --[[ Line: 249 ]]
 	return v1
 end
 
-local function visitInParallel(p1) --[[ Line: 412 ]]
+local function visitInParallel(p1)
 	-- upvalues: Callback (ref), FreezeResult (copy)
 	local FreezeResults = {}
 	
 	return {
-		enter = function(_, p2, ...) --[[ Line: 417 ]]
+		enter = function(_, p2, ...)
 			-- upvalues: p1 (copy), FreezeResults (copy), Callback (upval), FreezeResult (upval)
 			local CallbackResultResult = nil
 			for i = 1, #p1 do
@@ -249,7 +249,7 @@ local function visitInParallel(p1) --[[ Line: 412 ]]
 				end
 			end
 		end,
-		leave = function(_, ...) --[[ Line: 439 ]]
+		leave = function(_, ...)
 			-- upvalues: p1 (copy), FreezeResults (copy), Callback (upval), FreezeResult (upval)
 			local v1 = (...)
 			local CallbackResultResult = nil
@@ -275,7 +275,7 @@ local function visitInParallel(p1) --[[ Line: 412 ]]
 	}
 end
 
-Callback = function(p3, Kind, p4) --[[ Line: 465 | Named "getVisitFn" ]]
+Callback = function(p3, Kind, p4)
 	local Callback = p3[Kind]
 	
 	if not Callback then

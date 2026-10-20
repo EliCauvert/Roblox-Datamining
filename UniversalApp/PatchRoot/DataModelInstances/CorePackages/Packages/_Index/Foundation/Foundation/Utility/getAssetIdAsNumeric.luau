@@ -1,4 +1,4 @@
-﻿return function(p1) --[[ Line: 3 | Named "getAssetIdAsNumeric" ]]
+﻿return function(p1)
 	if typeof(p1) == "number" then
 		return p1
 	else

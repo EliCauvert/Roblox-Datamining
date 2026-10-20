@@ -1,11 +1,11 @@
 ﻿local DiagnosticsModule = require(script:FindFirstAncestor("ViewRecycler").Core.Diagnostics)
 local Frozen = table.freeze({})
 
-local function _(p1: number): boolean --[[ Line: 59 | Named "validCapacity" ]]
+local function _(p1: number): boolean
 	return p1 == nil or p1 >= 0 and p1 % 1 == 0
 end
 
-local _ = function(List, p1, p2, p3, p4, p5) --[[ Line: 63 | Named "appendChange" ]]
+local _ = function(List, p1, p2, p3, p4, p5)
 	table.insert(List, {
 		p1,
 		p2,
@@ -15,18 +15,18 @@ local _ = function(List, p1, p2, p3, p4, p5) --[[ Line: 63 | Named "appendChange
 	})
 end
 
-return function(p1) --[[ Line: 67 | Named "createRecyclingScope" ]]
+return function(p1)
 	-- upvalues: DiagnosticsModule (copy), Frozen (copy)
 	local Adapter = p1.adapter
 	local Tbl = {}
 	local Tbl1 = {}
 	local Flag = false
 	local Flag1 = false
-	local Batch = Adapter.batch or function(Callback: () -> ()) --[[ Line: 73 ]]
+	local Batch = Adapter.batch or function(Callback: () -> ())
 		Callback()
 	end
 	
-	local function poolFor(ViewType) --[[ Line: 77 ]]
+	local function poolFor(ViewType)
 		-- upvalues: Tbl (copy)
 		local Entry = Tbl[ViewType]
 		
@@ -37,12 +37,12 @@ return function(p1) --[[ Line: 67 | Named "createRecyclingScope" ]]
 		return Entry
 	end
 	
-	local function _(Key) --[[ Line: 86 | Named "forget" ]]
+	local function _(Key)
 		-- upvalues: Tbl1 (copy)
 		Tbl1[Key] = nil
 	end
 	
-	local function notify(Action, ViewType, OccupiedDelta, VacantDelta, TotalDelta) --[[ Line: 90 ]]
+	local function notify(Action, ViewType, OccupiedDelta, VacantDelta, TotalDelta)
 		-- upvalues: p1 (copy)
 		if p1.onPoolChanged ~= nil then
 			p1.onPoolChanged({
@@ -55,21 +55,21 @@ return function(p1) --[[ Line: 67 | Named "createRecyclingScope" ]]
 		end
 	end
 	
-	local function finalize(p2, CreateResults, p3, Enabled) --[[ Line: 102 ]]
+	local function finalize(p2, CreateResults, p3, Enabled)
 		-- upvalues: Adapter (copy), Batch (copy), notify (copy)
 		if (p2 == nil or #p2 == 0) and (#CreateResults == 0 and (p3 == nil or #p3 == 0 or Adapter.onCreated == nil)) then
 			return true, nil
 		else
 			local v1 = nil
 			
-			local function _(p4, p5) --[[ Line: 116 | Named "captureFailure" ]]
+			local function _(p4, p5)
 				-- upvalues: v1 (ref)
 				if not p4 and v1 == nil then
 					v1 = p5
 				end
 			end
 			
-			local Packed = table.pack(pcall(Batch, function() --[[ Line: 121 ]]
+			local Packed = table.pack(pcall(Batch, function()
 				-- upvalues: p2 (copy), notify (upval), v1 (ref), Enabled (copy), CreateResults (copy), Adapter (upval), p3 (copy)
 				if p2 ~= nil then
 					for _, value in p2 do
@@ -110,7 +110,7 @@ return function(p1) --[[ Line: 67 | Named "createRecyclingScope" ]]
 		end
 	end
 	
-	local function trimPoolExcess(p4, Capacity, List, List1) --[[ Line: 143 ]]
+	local function trimPoolExcess(p4, Capacity, List, List1)
 		-- upvalues: Tbl1 (copy), DiagnosticsModule (upval)
 		while Capacity < p4.last - p4.first + 1 do
 			local Item = p4.items[p4.first]
@@ -131,7 +131,7 @@ return function(p1) --[[ Line: 67 | Named "createRecyclingScope" ]]
 		end
 	end
 	
-	local function uniformDirectReuse(Releases, Entry) --[[ Line: 156 ]]
+	local function uniformDirectReuse(Releases, Entry)
 		-- upvalues: Tbl1 (copy)
 		local CountReleases = #Releases
 		
@@ -171,7 +171,7 @@ return function(p1) --[[ Line: 67 | Named "createRecyclingScope" ]]
 	local Tbl2 = {}
 	local Tbl3 = {}
 	
-	local function exchangeWithoutCreation(List1, List2, List) --[[ Line: 197 ]]
+	local function exchangeWithoutCreation(List1, List2, List)
 		-- upvalues: Tbl1 (copy), Tbl2 (copy), DiagnosticsModule (upval), Frozen (upval), Tbl3 (copy), Tbl (copy)
 		if #List2 == 0 then
 			for _, value in List1 do
@@ -259,7 +259,7 @@ return function(p1) --[[ Line: 67 | Named "createRecyclingScope" ]]
 	end
 	
 	return {
-		bind = function(p5) --[[ Line: 270 ]]
+		bind = function(p5)
 			-- upvalues: Flag (ref), Flag1 (ref), uniformDirectReuse (copy), p1 (copy), Tbl (copy), trimPoolExcess (copy), finalize (copy), exchangeWithoutCreation (copy), Frozen (upval), Tbl1 (copy), Adapter (copy), DiagnosticsModule (upval), poolFor (copy)
 			assert(not Flag, "RecyclingScope: cannot bind after disposal")
 			assert(not Flag1, "RecyclingScope: cannot bind reentrantly")
@@ -304,7 +304,7 @@ return function(p1) --[[ Line: 67 | Named "createRecyclingScope" ]]
 					local t5 = {}
 					local CreateResults = {}
 					local t6 = {}
-					local Success, Result = pcall(function() --[[ Line: 345 ]]
+					local Success, Result = pcall(function()
 						-- upvalues: Requests (copy), t (copy), t3 (copy), t5 (copy), t2 (copy), Tbl (upval), t4 (copy), Adapter (upval), Tbl1 (upval), t6 (copy), CreateResults (copy)
 						for i, request in Requests do
 							local Entry = t[request.viewType]
@@ -469,7 +469,7 @@ return function(p1) --[[ Line: 67 | Named "createRecyclingScope" ]]
 				return UniformDirectReuseResult
 			end
 		end,
-		dispose = function() --[[ Line: 448 ]]
+		dispose = function()
 			-- upvalues: Flag (ref), Flag1 (ref), p1 (copy), Tbl1 (copy), Tbl (copy), DiagnosticsModule (upval), finalize (copy)
 			if Flag then return end
 			assert(not Flag1, "RecyclingScope: cannot dispose during bind")

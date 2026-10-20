@@ -1,4 +1,4 @@
-﻿return function(p1, List, List1, Callback) --[[ Line: 12 | Named "reconcileSnapshot" ]]
+﻿return function(p1, List, List1, Callback)
 	local Buffer = table.create(#List)
 	local Buffer1 = table.create(#List1)
 	local t = {}
@@ -43,7 +43,7 @@
 	while Count1 < math.min(#Buffer, #Buffer1) - Count and Buffer[#Buffer - Count1] == Buffer1[#Buffer1 - Count1] do
 		Count1 += 1
 	end
-	local function updateRetainedValues() --[[ Line: 63 ]]
+	local function updateRetainedValues()
 		-- upvalues: List1 (copy), t (copy), Buffer1 (copy), p1 (copy)
 		for i, value in List1 do
 			if t[Buffer1[i]] ~= value then
@@ -52,7 +52,7 @@
 		end
 	end
 	
-	p1.transaction(function() --[[ Line: 71 ]]
+	p1.transaction(function()
 		-- upvalues: Buffer (copy), Buffer1 (copy), Count (ref), updateRetainedValues (copy), Count1 (ref), p1 (copy), List1 (copy), List (copy), Flag (ref)
 		if #Buffer == #Buffer1 and Count == #Buffer1 then
 			updateRetainedValues()
@@ -92,7 +92,7 @@
 			local FoundIndex: number? = table.find(Buffer, Buffer1[NewCount])
 			local FoundIndex1: number? = NewCount
 			
-			local function matchesMove(Index, FoundIndex): boolean --[[ Line: 99 ]]
+			local function matchesMove(Index, FoundIndex): boolean
 				-- upvalues: Buffer (upval), Buffer1 (upval)
 				if Index == nil or FoundIndex == nil then
 					return false

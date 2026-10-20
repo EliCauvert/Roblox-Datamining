@@ -6,14 +6,14 @@ local v1 = nil
 local Flag1 = false
 local v2 = nil
 local config = {
-	onError = function(p1) --[[ Line: 25 ]]
+	onError = function(p1)
 		-- upvalues: Flag (ref), v1 (ref)
 		Flag = true
 		v1 = p1
 	end
 }
 local ReactErrorUtils = {
-	invokeGuardedCallback = function(...) --[[ Line: 45 ]]
+	invokeGuardedCallback = function(...)
 		-- upvalues: Flag (ref), v1 (ref), InvokeGuardedCallbackImplModule (copy), config (copy)
 		Flag = false
 		v1 = nil
@@ -21,7 +21,7 @@ local ReactErrorUtils = {
 	end
 }
 
-function ReactErrorUtils.invokeGuardedCallbackAndCatchFirstError(...) --[[ Line: 62 ]]
+function ReactErrorUtils.invokeGuardedCallbackAndCatchFirstError(...)
 	-- upvalues: ReactErrorUtils (copy), Flag (ref), Callback (ref), Flag1 (ref), v2 (ref)
 	ReactErrorUtils.invokeGuardedCallback(...)
 	
@@ -35,7 +35,7 @@ function ReactErrorUtils.invokeGuardedCallbackAndCatchFirstError(...) --[[ Line:
 	end
 end
 
-function ReactErrorUtils.rethrowCaughtError() --[[ Line: 80 ]]
+function ReactErrorUtils.rethrowCaughtError()
 	-- upvalues: Flag1 (ref), v2 (ref)
 	if Flag1 then
 		local v3 = v2
@@ -45,12 +45,12 @@ function ReactErrorUtils.rethrowCaughtError() --[[ Line: 80 ]]
 	end
 end
 
-function ReactErrorUtils.hasCaughtError() --[[ Line: 89 ]]
+function ReactErrorUtils.hasCaughtError()
 	-- upvalues: Flag (ref)
 	return Flag
 end
 
-Callback = function() --[[ Line: 93 ]]
+Callback = function()
 	-- upvalues: Flag (ref), v1 (ref), InvariantModule (copy)
 	if Flag then
 		local v3 = v1

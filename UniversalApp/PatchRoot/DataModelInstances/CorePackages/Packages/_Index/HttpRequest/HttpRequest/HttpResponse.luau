@@ -1,7 +1,7 @@
 ﻿local HttpResponseModule = {}
 HttpResponseModule.__index = HttpResponseModule
 
-function HttpResponseModule.__tostring(List): string --[[ Line: 3 ]]
+function HttpResponseModule.__tostring(List): string
 	local List1 = {}
 	
 	for i, value in pairs(List) do
@@ -12,12 +12,12 @@ function HttpResponseModule.__tostring(List): string --[[ Line: 3 ]]
 	return "<HttpResponse: " .. table.concat(List1, ", ") .. ">"
 end
 
-function HttpResponseModule.success(ResponseCode, ResponseBody) --[[ Line: 14 ]]
+function HttpResponseModule.success(ResponseCode, ResponseBody)
 	-- upvalues: HttpResponseModule (copy)
 	return (setmetatable({ responseCode = ResponseCode, responseBody = ResponseBody }, HttpResponseModule))
 end
 
-function HttpResponseModule.error(HttpError) --[[ Line: 21 ]]
+function HttpResponseModule.error(HttpError)
 	-- upvalues: HttpResponseModule (copy)
 	return (setmetatable({ HttpError = HttpError }, HttpResponseModule))
 end

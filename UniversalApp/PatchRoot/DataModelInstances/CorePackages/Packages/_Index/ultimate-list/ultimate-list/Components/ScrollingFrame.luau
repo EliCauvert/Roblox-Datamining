@@ -9,13 +9,13 @@ local ExhaustiveMatchModule = require(UltimateList.Util.exhaustiveMatch)
 local UseVirtualizedListModule = require(script.Parent.useVirtualizedList)
 local CreateElementFunction = ReactModule.createElement
 
-return function(p1) --[[ Line: 14 | Named "ScrollingFrame" ]]
+return function(p1)
 	-- upvalues: UseVirtualizedListModule (copy), ReactModule (copy), ExhaustiveMatchModule (copy), RunService (copy), CreateElementFunction (copy), RendererOverlayModule (copy)
 	local UseVirtualizedListModuleResult = UseVirtualizedListModule(p1)
 	local config = {
 		Size = UDim2.fromScale(1, 1),
 		CanvasSize = UseVirtualizedListModuleResult.canvasSizeBinding,
-		[ReactModule.Change.AbsoluteWindowSize] = ReactModule.useCallback(function(p2) --[[ Line: 36 ]]
+		[ReactModule.Change.AbsoluteWindowSize] = ReactModule.useCallback(function(p2)
 			-- upvalues: UseVirtualizedListModuleResult (copy), p1 (copy)
 			UseVirtualizedListModuleResult.setWindowSize(p2.AbsoluteWindowSize)
 			
@@ -23,10 +23,10 @@ return function(p1) --[[ Line: 14 | Named "ScrollingFrame" ]]
 				p1.onAbsoluteWindowSizeChanged(p2.AbsoluteWindowSize)
 			end
 		end, { p1.direction, p1.onAbsoluteWindowSizeChanged }),
-		[ReactModule.Change.CanvasPosition] = ReactModule.useCallback(function(ScrollFrame) --[[ Line: 44 ]]
+		[ReactModule.Change.CanvasPosition] = ReactModule.useCallback(function(ScrollFrame)
 			-- upvalues: p1 (copy), ExhaustiveMatchModule (upval), RunService (upval), UseVirtualizedListModuleResult (copy)
 			local X = if p1.direction == "x" then ScrollFrame.CanvasPosition.X elseif p1.direction == "y" then ScrollFrame.CanvasPosition.Y else ExhaustiveMatchModule(p1.direction)
-			RunService.Heartbeat:Once(function() --[[ Line: 52 ]]
+			RunService.Heartbeat:Once(function()
 				-- upvalues: UseVirtualizedListModuleResult (upval), X (copy), p1 (upval)
 				UseVirtualizedListModuleResult.setScrollAxis(X)
 				

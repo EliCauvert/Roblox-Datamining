@@ -2,7 +2,7 @@
 Module.__index = Module
 local Proxy = newproxy(true)
 
-function Module.new(_status, _value) --[[ Line: 6 ]]
+function Module.new(_status, _value)
 	-- upvalues: Proxy (copy), Module (copy)
 	assert(typeof(_status) == "boolean")
 	local config = {
@@ -16,22 +16,22 @@ function Module.new(_status, _value) --[[ Line: 6 ]]
 	return config
 end
 
-function Module.success(p1) --[[ Line: 27 ]]
+function Module.success(p1)
 	-- upvalues: Module (copy)
 	return Module.new(true, p1)
 end
 
-function Module.error(p1) --[[ Line: 31 ]]
+function Module.error(p1)
 	-- upvalues: Module (copy)
 	return Module.new(false, p1)
 end
 
-function Module:is() --[[ Line: 38 ]]
+function Module:is()
 	-- upvalues: Proxy (copy)
 	return typeof(self) == "table" and self[Proxy]
 end
 
-function Module:match(Callback, Callback1) --[[ Line: 51 ]]
+function Module:match(Callback, Callback1)
 	-- upvalues: Module (copy)
 	assert(typeof(Callback) == "function" or typeof(Callback) == "nil", string.format("Result:match expects successHandler to be a function or nil, got %s", (typeof(Callback))))
 	assert(typeof(Callback1) == "function" or typeof(Callback1) == "nil", string.format("Result:match expects errorHandler to be a function or nil, got %s", (typeof(Callback1))))
@@ -51,15 +51,15 @@ function Module:match(Callback, Callback1) --[[ Line: 51 ]]
 	return if Module.is(v1) then v1 else Module.success(v1)
 end
 
-function Module:matchSuccess(p1) --[[ Line: 83 ]]
+function Module:matchSuccess(p1)
 	return self:match(p1, nil)
 end
 
-function Module:matchError(p1) --[[ Line: 92 ]]
+function Module:matchError(p1)
 	return self:match(nil, p1)
 end
 
-function Module:unwrap() --[[ Line: 96 ]]
+function Module:unwrap()
 	return self._status, self._value
 end
 

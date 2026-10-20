@@ -8,7 +8,7 @@ end
 if GuiService:IsTenFootInterface() then
 	Result = 3
 end
-return function() --[[ Line: 18 | Named "getResolutionScale" ]]
+return function()
 	-- upvalues: GetImageSetDataModule (copy), Result (ref)
 	local _, ImageSetDataModule2 = GetImageSetDataModule(Result)
 	

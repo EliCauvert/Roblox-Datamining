@@ -4,17 +4,17 @@ local _ = require(ViewRecycler.Core.Layout.LayoutRuntime)
 local TypesModule = require(ViewRecycler.Core.Types)
 local StaticPartsModule = require(ViewRecycler.Core.Layout.staticParts)
 
-return function(p1) --[[ Line: 17 | Named "create" ]]
+return function(p1)
 	-- upvalues: TypesModule (copy), DataSourceChangeTypeModule (copy), StaticPartsModule (copy)
 	local GetItemLayoutFunction = p1.getItemLayout
 	local CountKeys = 0
 	
 	return {
-		getItemCount = function() --[[ Line: 21 ]]
+		getItemCount = function()
 			-- upvalues: CountKeys (ref)
 			return CountKeys
 		end,
-		getContentLength = function() --[[ Line: 25 ]]
+		getContentLength = function()
 			-- upvalues: CountKeys (ref), GetItemLayoutFunction (copy)
 			if CountKeys == 0 then
 				return 0
@@ -24,7 +24,7 @@ return function(p1) --[[ Line: 17 | Named "create" ]]
 				return ItemLayout.startOffset + ItemLayout.length
 			end
 		end,
-		getIntersectingIndexRange = function(p2, p3) --[[ Line: 33 ]]
+		getIntersectingIndexRange = function(p2, p3)
 			-- upvalues: CountKeys (ref), TypesModule (upval), GetItemLayoutFunction (copy)
 			if CountKeys == 0 or p3 <= p2 then
 				return TypesModule.EMPTY_INDEX_RANGE
@@ -60,14 +60,14 @@ return function(p1) --[[ Line: 17 | Named "create" ]]
 			end
 			return if p3 <= GetItemLayoutFunction(LastIndex).startOffset or LastIndex < FirstIndex then TypesModule.EMPTY_INDEX_RANGE else { firstIndex = FirstIndex, lastIndex = LastIndex }
 		end,
-		expandIndexRange = function(p4, p5, p6) --[[ Line: 90 ]]
+		expandIndexRange = function(p4, p5, p6)
 			-- upvalues: StaticPartsModule (upval), CountKeys (ref)
 			return StaticPartsModule.expandItemRange(p4, p5, p6 or p5, CountKeys)
 		end,
 		getItemLayout = GetItemLayoutFunction,
 		updateItemMeasurement = StaticPartsModule.updateItemMeasurementNoop,
 		requiresItemMeasurement = StaticPartsModule.requiresItemMeasurementFalse,
-		applyDataSourceChange = function(p4): boolean --[[ Line: 73 ]]
+		applyDataSourceChange = function(p4): boolean
 			-- upvalues: DataSourceChangeTypeModule (upval), CountKeys (ref)
 			if p4.type == DataSourceChangeTypeModule.Reset then
 				CountKeys = #p4.keys

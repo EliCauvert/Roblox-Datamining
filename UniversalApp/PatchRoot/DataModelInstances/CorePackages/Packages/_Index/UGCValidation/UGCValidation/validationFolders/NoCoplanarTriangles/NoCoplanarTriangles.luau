@@ -17,7 +17,7 @@ return {
 	},
 	requiredData = { ValidationEnumsModule.SharedDataMember.renderMeshesData },
 	expectedFailures = {},
-	run = function(p1, p2) --[[ Line: 35 ]]
+	run = function(p1, p2)
 		-- upvalues: ValidationEnumsModule (copy), GetFFlagUGCValidateCoplanarTriTestBodyModule (copy), FloatEqualsModule (copy), UGCValidationService (copy), GetFIntMaxCoplanarIntersectionsPercentageModule (copy), ErrorSourceStringsModule (copy)
 		local UploadCategory = p2.uploadCategory
 		

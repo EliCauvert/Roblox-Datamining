@@ -50,15 +50,15 @@ MenuTile.validateProps = TModule.strictInterface({
 	}))
 })
 
-local function withProviders(Callback, Cursor) --[[ Line: 104 ]]
+local function withProviders(Callback, Cursor)
 	-- upvalues: WithStyleModule (copy)
-	return WithStyleModule(function(p1) --[[ Line: 105 ]]
+	return WithStyleModule(function(p1)
 		-- upvalues: Callback (copy), Cursor (copy)
 		return Callback(p1, nil, Cursor)
 	end)
 end
 
-local function getStyleProps(StyleProps, p1) --[[ Line: 110 ]]
+local function getStyleProps(StyleProps, p1)
 	-- upvalues: GetIconSizeModule (copy), IconSizeModule (copy)
 	local Theme = p1.Theme
 	local _Font = p1.Font
@@ -71,12 +71,12 @@ local function getStyleProps(StyleProps, p1) --[[ Line: 110 ]]
 	}
 end
 
-function MenuTile.init(p1) --[[ Line: 126 ]]
+function MenuTile.init(p1)
 	-- upvalues: RoactModule (copy), OtterModule (copy)
 	p1.hoverTransparency, p1.updateHoverTransparency = RoactModule.createBinding(1)
 	p1.hoverTransparencyMotor = OtterModule.createSingleMotor(1)
 	p1.hoverTransparencyMotor:onStep(p1.updateHoverTransparency)
-	p1.hoverTransparencyMotor:onComplete(function(p2) --[[ Line: 130 ]]
+	p1.hoverTransparencyMotor:onComplete(function(p2)
 		-- upvalues: p1 (copy)
 		if p2 == 1 then
 			p1:setState({ showHoverMask = false })
@@ -90,7 +90,7 @@ function MenuTile.init(p1) --[[ Line: 126 ]]
 	})
 end
 
-function MenuTile.render(p1) --[[ Line: 146 ]]
+function MenuTile.render(p1)
 	-- upvalues: withProviders (copy), getStyleProps (copy), GetTextSizeModule (copy), ControlStateModule (copy), OtterModule (copy), config (copy), DivideTransparencyModule (copy), RoactModule (copy), InteractableModule (copy), _UDim (copy), _UDim1 (copy), ImageSetComponentModule (copy), FoundationFontFaceMigration (copy), NormalizeFontFaceFunction (copy), StatusIndicator (copy), MigrateBadgeVariantModule (copy)
 	local BackgroundTransparency = p1.state.backgroundTransparency
 	local IconTransparency = p1.state.iconTransparency
@@ -103,7 +103,7 @@ function MenuTile.render(p1) --[[ Line: 146 ]]
 	local Size = p1.props.size
 	local Title = p1.props.title
 	
-	return withProviders(function(p2, _, SelectionImageObject) --[[ Line: 159 ]]
+	return withProviders(function(p2, _, SelectionImageObject)
 		-- upvalues: getStyleProps (upval), p1 (copy), GetTextSizeModule (upval), Title (copy), ControlStateModule (upval), OtterModule (upval), config (upval), DivideTransparencyModule (upval), RoactModule (upval), InteractableModule (upval), Size (copy), Position (copy), LayoutOrder (copy), OnActivated (copy), BackgroundTransparency (copy), _UDim (upval), _UDim1 (upval), Icon (copy), ImageSetComponentModule (upval), IconTransparency (copy), FoundationFontFaceMigration (upval), NormalizeFontFaceFunction (upval), TitleTransparency (copy), BadgeValue (copy), StatusIndicator (upval), MigrateBadgeVariantModule (upval)
 		local Theme = p2.Theme
 		local StyleProps = getStyleProps(p1.props.styleProps, p2)
@@ -122,7 +122,7 @@ function MenuTile.render(p1) --[[ Line: 146 ]]
 			BackgroundTransparency = 1,
 			SelectionImageObject = SelectionImageObject,
 			LayoutOrder = LayoutOrder,
-			onStateChanged = function(_, Default) --[[ Line: 180 ]]
+			onStateChanged = function(_, Default)
 				-- upvalues: ControlStateModule (upval), p1 (upval), BackgroundUIDefault (copy), IconStyle (copy), TitleStyle (copy), OtterModule (upval), BackgroundOnHover (copy), config (upval), DivideTransparencyModule (upval)
 				if Default == ControlStateModule.Hover then
 					p1:setState({
@@ -244,13 +244,13 @@ function MenuTile.render(p1) --[[ Line: 146 ]]
 	end, p1.props.cursor)
 end
 
-function MenuTile.willUnmount(p1) --[[ Line: 316 ]]
+function MenuTile.willUnmount(p1)
 	if p1.hoverTransparencyMotor then
 		p1.hoverTransparencyMotor:destroy()
 	end
 end
 
-function MenuTileFunctionalWrapper(p1) --[[ Line: 321 ]]
+function MenuTileFunctionalWrapper(p1)
 	-- upvalues: UseCursorByTypeModule (copy), CursorTypeModule (copy), RoactModule (copy), MenuTile (copy), CryoModule (copy)
 	return RoactModule.createElement(MenuTile, CryoModule.Dictionary.join(p1, {
 		cursor = UseCursorByTypeModule(CursorTypeModule.RoundedRect)

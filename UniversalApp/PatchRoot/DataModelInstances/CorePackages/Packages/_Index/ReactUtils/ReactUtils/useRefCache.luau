@@ -1,20 +1,20 @@
 ﻿local ReactModule = require(script:FindFirstAncestor("ReactUtils").Parent.React)
 
-return function() --[[ Line: 7 | Named "useRefCache" ]]
+return function()
 	-- upvalues: ReactModule (copy)
 	local UseRefResult = ReactModule.useRef(nil)
 	
 	if UseRefResult.current == nil then
 		local Current = {}
 		setmetatable(Current, {
-			__index = function(_, Key) --[[ Line: 14 ]]
+			__index = function(_, Key)
 				-- upvalues: ReactModule (upval), Current (copy)
 				local Ref = ReactModule.createRef()
 				Current[Key] = Ref
 				
 				return Ref
 			end,
-			__tostring = function(List): string --[[ Line: 19 ]]
+			__tostring = function(List): string
 				local Message = "{"
 				
 				for i, value in pairs(List) do

@@ -38,7 +38,7 @@ local config2 = {
 	[Enum.AssetType.RightLeg] = true
 }
 
-local function validateBasedOnBBoxes(Child, Child1, p1, AttachmentName, p2): boolean --[[ Line: 52 ]]
+local function validateBasedOnBBoxes(Child, Child1, p1, AttachmentName, p2): boolean
 	-- upvalues: ErrorSourceStringsModule (copy)
 	local BoundsData = p1[Child.Name].boundsData
 	local BoundsData1 = p1[Child1.Name].boundsData
@@ -63,7 +63,7 @@ local function validateBasedOnBBoxes(Child, Child1, p1, AttachmentName, p2): boo
 	return Flag
 end
 
-local function validateBasedOnAttachmentYPos(Child, Child1, ChildName, p1) --[[ Line: 84 ]]
+local function validateBasedOnAttachmentYPos(Child, Child1, ChildName, p1)
 	-- upvalues: R15plusUtilsModule (copy), GetAttachmentCFrameInPartSpaceModule (copy), ErrorSourceStringsModule (copy)
 	local ChildName1 = Child1:FindFirstChild(ChildName, R15plusUtilsModule.checkFlagEnabledForAllowHrd())
 	local ChildName2 = Child:FindFirstChild(ChildName, R15plusUtilsModule.checkFlagEnabledForAllowHrd())
@@ -92,7 +92,7 @@ local function validateBasedOnAttachmentYPos(Child, Child1, ChildName, p1) --[[ 
 	end
 end
 
-local function validateHeadAboveTorso(p1, p2) --[[ Line: 124 ]]
+local function validateHeadAboveTorso(p1, p2)
 	-- upvalues: ConstantsModule (copy), ErrorSourceStringsModule (copy)
 	local FullBodyPartsMetrics = p2.fullBodyPartsMetrics
 	
@@ -121,7 +121,7 @@ local function validateHeadAboveTorso(p1, p2) --[[ Line: 124 ]]
 	end
 end
 
-function ExtentsWithinParentModule.run(p1, p2) --[[ Line: 169 ]]
+function ExtentsWithinParentModule.run(p1, p2)
 	-- upvalues: ValidationEnumsModule (copy), GetFFlagUGCValidateHeadAboveTorsoModule (copy), validateHeadAboveTorso (copy), config (copy), ConstantsModule (copy), BoundsCalculatorModule (copy), config1 (copy), validateBasedOnBBoxes (copy), config2 (copy), validateBasedOnAttachmentYPos (copy)
 	if p2.uploadCategory ~= ValidationEnumsModule.UploadCategory.FULL_BODY then
 		local RootInstance = p2.rootInstance

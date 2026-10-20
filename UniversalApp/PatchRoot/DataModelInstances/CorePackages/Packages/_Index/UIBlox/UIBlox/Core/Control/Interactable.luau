@@ -10,7 +10,7 @@ local StateLayer = {
 	affordance = FoundationModule.Enums.StateLayerAffordance.None
 }
 
-return (ReactModule.forwardRef(function(Tbl, Ref) --[[ Line: 49 | Named "Interactable" ]]
+return (ReactModule.forwardRef(function(Tbl, Ref)
 	-- upvalues: ImageSetComponentModule (copy), StateLayer (copy), ReactModule (copy), ControlStateModule (copy), FoundationModule (copy)
 	local Copy = table.clone(Tbl)
 	Copy.isDisabled = Copy.isDisabled or Copy.userInteractionEnabled == false
@@ -21,7 +21,7 @@ return (ReactModule.forwardRef(function(Tbl, Ref) --[[ Line: 49 | Named "Interac
 	local UseRefResult = ReactModule.useRef(ControlStateModule.Initialize)
 	
 	if Tbl.onStateChanged then
-		function Copy.onStateChanged(Current) --[[ Line: 59 ]]
+		function Copy.onStateChanged(Current)
 			-- upvalues: ControlStateModule (upval), Tbl (copy), UseRefResult (copy)
 			local ControlStateModuleEntry = ControlStateModule[Current]
 			Tbl.onStateChanged(UseRefResult.current, ControlStateModuleEntry)

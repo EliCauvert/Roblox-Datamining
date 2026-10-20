@@ -20,7 +20,7 @@ ItemTileStatus.validateProps = TModule.strictInterface({
 	statusStyle = ItemTileEnumsModule.StatusStyle.isEnumValue
 })
 
-local function getStyle(Theme, StatusStyle) --[[ Line: 35 ]]
+local function getStyle(Theme, StatusStyle)
 	-- upvalues: ItemTileEnumsModule (copy)
 	return if StatusStyle == ItemTileEnumsModule.StatusStyle.Info then {
 		Background = Theme.SystemPrimaryDefault,
@@ -31,9 +31,9 @@ local function getStyle(Theme, StatusStyle) --[[ Line: 35 ]]
 	}
 end
 
-function ItemTileStatus.render(p1) --[[ Line: 54 ]]
+function ItemTileStatus.render(p1)
 	-- upvalues: WithStyleModule (copy), FoundationFontFaceMigration (copy), GetFontFromFontStyleModule (copy), GetTextSizeModule (copy), _Vector2 (copy), getStyle (copy), RoactModule (copy), ImageSetComponentModule (copy), ImagesModule (copy), _Vector2_1 (copy), NormalizeFontFaceFunction (copy)
-	return WithStyleModule(function(p2) --[[ Line: 55 ]]
+	return WithStyleModule(function(p2)
 		-- upvalues: p1 (copy), FoundationFontFaceMigration (upval), GetFontFromFontStyleModule (upval), GetTextSizeModule (upval), _Vector2 (upval), getStyle (upval), RoactModule (upval), ImageSetComponentModule (upval), ImagesModule (upval), _Vector2_1 (upval), NormalizeFontFaceFunction (upval)
 		local Theme = p2.Theme
 		local _Font = p2.Font

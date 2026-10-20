@@ -4,23 +4,23 @@ local ReactModule = require(ViewRecyclerReact.Parent.React)
 local Context = ReactModule.createContext(nil)
 
 return {
-	useStats = function() --[[ Line: 22 ]]
+	useStats = function()
 		-- upvalues: ReactModule (copy)
 		local UseStateResult, UseStateResult2 = ReactModule.useState({ mounted = 0, mounts = 0, reassignments = 0 })
 		local UseRefResult = ReactModule.useRef(0)
 		
-		return UseStateResult, (ReactModule.useMemo(function() --[[ Line: 30 ]]
+		return UseStateResult, (ReactModule.useMemo(function()
 			-- upvalues: UseRefResult (copy), UseStateResult2 (copy)
 			return {
-				allocateMountId = function() --[[ Line: 32 ]]
+				allocateMountId = function()
 					-- upvalues: UseRefResult (upval)
 					UseRefResult.current += 1
 					
 					return UseRefResult.current
 				end,
-				onMount = function() --[[ Line: 36 ]]
+				onMount = function()
 					-- upvalues: UseStateResult2 (upval)
-					UseStateResult2(function(p1) --[[ Line: 37 ]]
+					UseStateResult2(function(p1)
 						return {
 							mounted = p1.mounted + 1,
 							mounts = p1.mounts + 1,
@@ -28,9 +28,9 @@ return {
 						}
 					end)
 				end,
-				onUnmount = function() --[[ Line: 45 ]]
+				onUnmount = function()
 					-- upvalues: UseStateResult2 (upval)
-					UseStateResult2(function(p1) --[[ Line: 46 ]]
+					UseStateResult2(function(p1)
 						return {
 							mounted = p1.mounted - 1,
 							mounts = p1.mounts,
@@ -38,9 +38,9 @@ return {
 						}
 					end)
 				end,
-				onReassignment = function() --[[ Line: 54 ]]
+				onReassignment = function()
 					-- upvalues: UseStateResult2 (upval)
-					UseStateResult2(function(p1) --[[ Line: 55 ]]
+					UseStateResult2(function(p1)
 						return {
 							mounted = p1.mounted,
 							mounts = p1.mounts,
@@ -51,19 +51,19 @@ return {
 			}
 		end, {}))
 	end,
-	Provider = function(p1) --[[ Line: 69 ]]
+	Provider = function(p1)
 		-- upvalues: ReactModule (copy), Context (copy)
 		return ReactModule.createElement(Context.Provider, { value = p1.actions }, p1.children)
 	end,
-	useAssignment = function(Current) --[[ Line: 75 ]]
+	useAssignment = function(Current)
 		-- upvalues: ReactModule (copy), Context (copy)
 		local UseContextResult = ReactModule.useContext(Context)
-		local UseStateResult = ReactModule.useState(function() --[[ Line: 77 ]]
+		local UseStateResult = ReactModule.useState(function()
 			-- upvalues: UseContextResult (copy)
 			return if UseContextResult == nil then 0 else UseContextResult.allocateMountId()
 		end)
 		local UseRefResult = ReactModule.useRef(nil)
-		ReactModule.useEffect(function() --[[ Line: 82 ]]
+		ReactModule.useEffect(function()
 			-- upvalues: UseContextResult (copy)
 			if UseContextResult == nil then
 				return nil
@@ -73,7 +73,7 @@ return {
 				return UseContextResult.onUnmount
 			end
 		end, { UseContextResult })
-		ReactModule.useEffect(function() --[[ Line: 90 ]]
+		ReactModule.useEffect(function()
 			-- upvalues: UseContextResult (copy), UseRefResult (copy), Current (copy)
 			if UseContextResult ~= nil and UseRefResult.current ~= nil and UseRefResult.current ~= Current then
 				UseContextResult.onReassignment()
@@ -83,7 +83,7 @@ return {
 		
 		return UseStateResult
 	end,
-	format = function(p1): string --[[ Line: 100 ]]
+	format = function(p1): string
 		return `Mounted: {p1.mounted}   Total mounts: {p1.mounts}   Reassignments: {p1.reassignments}`
 	end
 }

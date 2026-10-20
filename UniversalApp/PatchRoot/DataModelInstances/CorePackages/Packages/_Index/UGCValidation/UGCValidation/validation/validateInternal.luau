@@ -13,7 +13,7 @@ local ValidateDynamicHeadMeshPartFormatModule = require(Parent.validation.valida
 local ValidatePackageModule = require(Parent.validation.validatePackage)
 local ValidateEmoteAnimationModule = require(Parent.validation.ValidateEmoteAnimation)
 
-local function validateBodyPartInternal(p1) --[[ Line: 19 ]]
+local function validateBodyPartInternal(p1)
 	-- upvalues: ConstantsInterfaceModule (copy), ValidateDynamicHeadMeshPartFormatModule (copy), ValidateLimbsAndTorsoModule (copy)
 	local AssetTypeEnum = p1.assetTypeEnum
 	assert(AssetTypeEnum ~= nil, "assetTypeEnum is required in validateBodyPartInternal")
@@ -22,7 +22,7 @@ local function validateBodyPartInternal(p1) --[[ Line: 19 ]]
 	return if Enum.AssetType.DynamicHead == AssetTypeEnum then ValidateDynamicHeadMeshPartFormatModule(p1) else ValidateLimbsAndTorsoModule(p1)
 end
 
-return function(p1) --[[ Line: 30 | Named "validateInternal" ]]
+return function(p1)
 	-- upvalues: ConstantsModule (copy), ValidateEmoteAnimationModule (copy), ConstantsInterfaceModule (copy), ValidateMakeupAssetModule (copy), validateBodyPartInternal (copy), ValidatePackageModule (copy), IsMeshPartAccessoryModule (copy), IsLayeredClothingModule (copy), ValidateLayeredClothingAccessoryModule (copy), ValidateMeshPartAccessoryModule (copy), ValidateLegacyAccessoryModule (copy)
 	assert(p1.instances ~= nil, "instances required in validationContext for validateInternal")
 	assert(p1.assetTypeEnum ~= nil, "assetTypeEnum required in validationContext for validateInternal")

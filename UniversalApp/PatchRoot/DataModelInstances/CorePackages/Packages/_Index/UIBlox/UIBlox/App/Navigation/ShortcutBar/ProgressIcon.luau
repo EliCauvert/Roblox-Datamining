@@ -8,7 +8,7 @@ local ImagesModule = require(Parent2.UIBlox.App.ImageSet.Images)
 local _ = require(Parent.ImageSet.ImagesTypes)
 local _ = require(Parent1.App.Style.StyleTypes)
 
-local function renderHalfCircle(p1, p2) --[[ Line: 38 ]]
+local function renderHalfCircle(p1, p2)
 	-- upvalues: ReactModule (copy), ImageSetComponentModule (copy)
 	local IconDefault = p2.Theme.IconDefault
 	local Divider = p2.Theme.Divider
@@ -45,7 +45,7 @@ local function renderHalfCircle(p1, p2) --[[ Line: 38 ]]
 	})
 end
 
-return function(p1) --[[ Line: 79 | Named "ProgressIcon" ]]
+return function(p1)
 	-- upvalues: ImagesModule (copy), UseStyleModule (copy), ReactModule (copy), renderHalfCircle (copy), ImageSetComponentModule (copy)
 	local Progress = p1.progress
 	local IsHolding = p1.isHolding
@@ -72,9 +72,9 @@ return function(p1) --[[ Line: 79 | Named "ProgressIcon" ]]
 				layoutOrder = 1,
 				isLeft = true,
 				progressImage = IconsControlsKeysHoldButtonAssetsHoldPressedRadialFill,
-				rotation = ReactModule.useMemo(function() --[[ Line: 87 ]]
+				rotation = ReactModule.useMemo(function()
 					-- upvalues: Progress (copy)
-					return Progress:map(function(p2): number --[[ Line: 88 ]]
+					return Progress:map(function(p2): number
 						return (math.clamp((p2 or 0) * 314 + 23, 180, 337))
 					end)
 				end, { Progress })
@@ -82,9 +82,9 @@ return function(p1) --[[ Line: 79 | Named "ProgressIcon" ]]
 			Right = renderHalfCircle({
 				layoutOrder = 2,
 				progressImage = IconsControlsKeysHoldButtonAssetsHoldPressedRadialFill,
-				rotation = ReactModule.useMemo(function() --[[ Line: 94 ]]
+				rotation = ReactModule.useMemo(function()
 					-- upvalues: Progress (copy)
-					return Progress:map(function(p2): number --[[ Line: 95 ]]
+					return Progress:map(function(p2): number
 						return (math.clamp((p2 or 0) * 314 + 23, 23, 180))
 					end)
 				end, { Progress })
@@ -98,9 +98,9 @@ return function(p1) --[[ Line: 79 | Named "ProgressIcon" ]]
 			Position = UDim2.fromScale(0.5, 0.5),
 			Image = if IsHolding then p1.iconHolding else p1.icon,
 			ImageColor3 = UseStyleModuleResult.Theme.IconEmphasis.Color,
-			ImageTransparency = ReactModule.useMemo(function() --[[ Line: 101 ]]
+			ImageTransparency = ReactModule.useMemo(function()
 				-- upvalues: Progress (copy)
-				return Progress:map(function(p2: number): number --[[ Line: 102 ]]
+				return Progress:map(function(p2: number): number
 					return if p2 then math.clamp(0.8 - p2 * 0.8, 0, 0.8) else 0
 				end)
 			end, { Progress })

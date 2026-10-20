@@ -1,7 +1,7 @@
 ﻿local t = {}
 t.mt = { __index = t }
 
-function t:new(List) --[[ Line: 5 ]]
+function t:new(List)
 	-- upvalues: t (copy)
 	local t1 = {}
 	local IsMetaMatch = getmetatable(List) == t.mt or nil
@@ -22,21 +22,21 @@ function t:new(List) --[[ Line: 5 ]]
 	return (setmetatable(t1, t.mt))
 end
 
-function t.add(p1, Key) --[[ Line: 22 ]]
+function t.add(p1, Key)
 	if Key ~= nil then
 		p1[Key] = true
 	end
 	return p1
 end
 
-function t.remove(p1, Key) --[[ Line: 28 ]]
+function t.remove(p1, Key)
 	if Key ~= nil then
 		p1[Key] = nil
 	end
 	return p1
 end
 
-function t.tolist(List) --[[ Line: 34 ]]
+function t.tolist(List)
 	local List1 = {}
 	
 	for i in pairs(List) do
@@ -47,7 +47,7 @@ end
 
 t.to_list = t.tolist
 
-function t.mt.__add(p1, p2) --[[ Line: 42 ]]
+function t.mt.__add(p1, p2)
 	-- upvalues: t (copy)
 	local NewResult = t:new()
 	local NewResult1 = t:new(p2)
@@ -61,7 +61,7 @@ function t.mt.__add(p1, p2) --[[ Line: 42 ]]
 	return NewResult
 end
 
-function t.mt.__sub(p3, p4) --[[ Line: 50 ]]
+function t.mt.__sub(p3, p4)
 	-- upvalues: t (copy)
 	local NewResult = t:new()
 	local NewResult1 = t:new(p4)
@@ -75,7 +75,7 @@ function t.mt.__sub(p3, p4) --[[ Line: 50 ]]
 	return NewResult
 end
 
-function t.mt.__mul(p5, p6) --[[ Line: 58 ]]
+function t.mt.__mul(p5, p6)
 	-- upvalues: t (copy)
 	local NewResult = t:new()
 	local NewResult1 = t:new(p6)
@@ -86,7 +86,7 @@ function t.mt.__mul(p5, p6) --[[ Line: 58 ]]
 	return NewResult
 end
 
-function t.mt.__tostring(List): string --[[ Line: 65 ]]
+function t.mt.__tostring(List): string
 	local Text = "{"
 	local v1 = ""
 	
@@ -100,7 +100,7 @@ end
 local ElementNodeModule = {}
 ElementNodeModule.mt = { __index = ElementNodeModule }
 
-function ElementNodeModule:new(Index, Text: string, Parent, p7, _closestart, _closeend) --[[ Line: 77 ]]
+function ElementNodeModule:new(Index, Text: string, Parent, p7, _closestart, _closeend)
 	-- upvalues: t (copy), ElementNodeModule (copy)
 	local config = {
 		level = 0,
@@ -155,27 +155,27 @@ function ElementNodeModule:new(Index, Text: string, Parent, p7, _closestart, _cl
 	return (setmetatable(config, ElementNodeModule.mt))
 end
 
-function ElementNodeModule.text(p7): string --[[ Line: 128 ]]
+function ElementNodeModule.text(p7): string
 	return (string.sub(p7.root._text, p7._openstart, p7._closeend))
 end
 
 ElementNodeModule.gettext = ElementNodeModule.text
 
-function ElementNodeModule.settext(p7, _text) --[[ Line: 133 ]]
+function ElementNodeModule.settext(p7, _text)
 	p7.root._text = _text
 end
 
-function ElementNodeModule.textonly(p7) --[[ Line: 135 ]]
+function ElementNodeModule.textonly(p7)
 	return (p7:text():gsub("<[^>]*>", ""))
 end
 
-function ElementNodeModule.content(p7): string --[[ Line: 137 ]]
+function ElementNodeModule.content(p7): string
 	return (string.sub(p7.root._text, p7._openend + 1, p7._closestart - 1))
 end
 
 ElementNodeModule.getcontent = ElementNodeModule.content
 
-function ElementNodeModule.addattribute(p7, Text: string, Text1: string) --[[ Line: 142 ]]
+function ElementNodeModule.addattribute(p7, Text: string, Text1: string)
 	p7.attributes[Text] = Text1
 	
 	if string.lower(Text) == "id" then
@@ -190,7 +190,7 @@ function ElementNodeModule.addattribute(p7, Text: string, Text1: string) --[[ Li
 	end
 end
 
-function ElementNodeModule.links(p8) --[[ Line: 154 ]]
+function ElementNodeModule.links(p8)
 	local Hrefs = {}
 	
 	for _, value in ipairs(p8:select("a[href]")) do
@@ -201,7 +201,7 @@ function ElementNodeModule.links(p8) --[[ Line: 154 ]]
 	return Hrefs
 end
 
-function ElementNodeModule.absolutelinks(p9, p10) --[[ Line: 166 ]]
+function ElementNodeModule.absolutelinks(p9, p10)
 	local Text = (p10 or (p9.page_url or "")):split("?")[1]:split("#")[1]
 	local Parts = Text:split("://")
 	local Part = Parts[#Parts]:split("/")[1]
@@ -232,13 +232,13 @@ end
 
 ElementNodeModule.absolute_links = ElementNodeModule.absolutelinks
 
-local function _(p11, Key, p12) --[[ Line: 208 | Named "insert" ]]
+local function _(p11, Key, p12)
 	-- upvalues: t (copy)
 	p11[Key] = p11[Key] or t:new()
 	p11[Key]:add(p12)
 end
 
-function ElementNodeModule.close(Parent, _closestart, _closeend) --[[ Line: 213 ]]
+function ElementNodeModule.close(Parent, _closestart, _closeend)
 	-- upvalues: t (copy)
 	if _closestart and _closeend then
 		Parent._closestart = _closestart
@@ -273,11 +273,11 @@ function ElementNodeModule.close(Parent, _closestart, _closeend) --[[ Line: 213 
 	end
 end
 
-local function escape(Text: string): string --[[ Line: 234 ]]
+local function escape(Text: string): string
 	return string.gsub(Text, "([%^%$%(%)%%%.%[%]%*%+%-%?])", "%%%1")
 end
 
-local function _select(p11, Text: string) --[[ Line: 239 | Named "select" ]]
+local function _select(p11, Text: string)
 	-- upvalues: t (copy), escape (copy)
 	if not Text or type(Text) ~= "string" or Text == "" then
 		return t:new()
@@ -289,7 +289,7 @@ local function _select(p11, Text: string) --[[ Line: 239 | Named "select" ]]
 		["."] = p11.deeperclasses
 	}
 	
-	local function match(p12, Text: string) --[[ Line: 247 ]]
+	local function match(p12, Text: string)
 		-- upvalues: t (upval), config (copy), p11 (copy), escape (upval)
 		local v2 = nil
 		local v3 = nil
@@ -386,14 +386,14 @@ local function _select(p11, Text: string) --[[ Line: 239 | Named "select" ]]
 		end
 	end
 	local List = NewResult2:tolist()
-	table.sort(List, function(A, B): boolean --[[ Line: 365 ]]
+	table.sort(List, function(A, B): boolean
 		return A.index < B.index
 	end)
 	
 	return List
 end
 
-function ElementNodeModule.select(p13, p14) --[[ Line: 371 ]]
+function ElementNodeModule.select(p13, p14)
 	-- upvalues: _select (copy)
 	return _select(p13, p14)
 end

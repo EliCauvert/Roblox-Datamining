@@ -3,7 +3,7 @@ local ReactGlobalsModule = require(Parent.ReactGlobals)
 local Console = require(Parent.Shared).console
 local _ = require(Parent.LuauPolyfill)
 
-local function _(p1): boolean --[[ Line: 29 | Named "isCallable" ]]
+local function _(p1): boolean
 	if typeof(p1) == "function" then
 		return true
 	end
@@ -28,11 +28,11 @@ local v1 = nil
 local Flag = false
 
 return {
-	isDevToolsPresent = function(): boolean --[[ Line: 64 ]]
+	isDevToolsPresent = function(): boolean
 		-- upvalues: ReactGlobalsModule (copy)
 		return ReactGlobalsModule.__REACT_DEVTOOLS_GLOBAL_HOOK__ ~= nil
 	end,
-	injectInternals = function(p1): boolean --[[ Line: 68 ]]
+	injectInternals = function(p1): boolean
 		-- upvalues: ReactGlobalsModule (copy), Console (copy), InjectResult (ref), v1 (ref)
 		if ReactGlobalsModule.__REACT_DEVTOOLS_GLOBAL_HOOK__ == nil then
 			return false
@@ -43,7 +43,7 @@ return {
 			return true
 		end
 		if REACTDEVTOOLSGLOBALHOOK.supportsFiber then
-			local Success, Result = pcall(function() --[[ Line: 91 ]]
+			local Success, Result = pcall(function()
 				-- upvalues: InjectResult (upval), REACTDEVTOOLSGLOBALHOOK (copy), p1 (copy), v1 (upval)
 				InjectResult = REACTDEVTOOLSGLOBALHOOK.inject(p1)
 				v1 = REACTDEVTOOLSGLOBALHOOK
@@ -60,7 +60,7 @@ return {
 			return true
 		end
 	end,
-	onScheduleRoot = function(p1, p2) --[[ Line: 107 ]]
+	onScheduleRoot = function(p1, p2)
 		-- upvalues: ReactGlobalsModule (copy), v1 (ref), InjectResult (ref), Flag (ref), Console (copy)
 		if ReactGlobalsModule.__DEV__ and v1 then
 			local OnScheduleFiberRoot = v1.onScheduleFiberRoot
@@ -94,7 +94,7 @@ return {
 			end
 		end
 	end,
-	onCommitRoot = function(p1, p2) --[[ Line: 127 ]]
+	onCommitRoot = function(p1, p2)
 		-- upvalues: v1 (ref), DidCapture (copy), EnableProfilerTimer (copy), InjectResult (ref), ReactGlobalsModule (copy), Flag (ref), Console (copy)
 		if v1 then
 			local OnCommitFiberRoot = v1.onCommitFiberRoot
@@ -119,7 +119,7 @@ return {
 				Flag1 = false
 			until true
 			if Flag1 then
-				local Success, Result = pcall(function() --[[ Line: 133 ]]
+				local Success, Result = pcall(function()
 					-- upvalues: p1 (copy), DidCapture (upval), EnableProfilerTimer (upval), v1 (upval), InjectResult (upval), p2 (copy)
 					local IsBitsMatch = bit32.band(p1.current.flags, DidCapture) == DidCapture
 					
@@ -139,7 +139,7 @@ return {
 			end
 		end
 	end,
-	onCommitUnmount = function(p1) --[[ Line: 152 ]]
+	onCommitUnmount = function(p1)
 		-- upvalues: v1 (ref), InjectResult (ref), ReactGlobalsModule (copy), Flag (ref), Console (copy)
 		if v1 then
 			local OnCommitFiberUnmount = v1.onCommitFiberUnmount

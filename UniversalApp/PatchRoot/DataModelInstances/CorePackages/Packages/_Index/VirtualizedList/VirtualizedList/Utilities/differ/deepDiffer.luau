@@ -3,7 +3,7 @@ local Array = LuauPolyfillModule.Array
 local Boolean = LuauPolyfillModule.Boolean
 local v1 = nil
 
-local function deepDiffer(List, List1, p1, p2): boolean --[[ Line: 29 ]]
+local function deepDiffer(List, List1, p1, p2): boolean
 	-- upvalues: v1 (ref), Boolean (copy), Array (copy), deepDiffer (copy)
 	local v2 = if p1 == nil then -1 else p1
 	local v3 = if typeof(v2) == "number" then p2 else v2
@@ -62,12 +62,12 @@ local function deepDiffer(List, List1, p1, p2): boolean --[[ Line: 29 ]]
 end
 
 return (setmetatable({
-	unstable_setLogListeners = function(p3) --[[ Line: 22 ]]
+	unstable_setLogListeners = function(p3)
 		-- upvalues: v1 (ref)
 		v1 = p3
 	end
 }, {
-	__call = function(_, p3, p4, p5, p6) --[[ Line: 110 ]]
+	__call = function(_, p3, p4, p5, p6)
 		-- upvalues: deepDiffer (copy)
 		return (deepDiffer(p3, p4, p5, p6))
 	end

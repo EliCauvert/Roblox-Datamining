@@ -1,7 +1,7 @@
 ﻿local _ = require(script:FindFirstAncestor("Markdown").Types)
 local InsertFunction = table.insert
 
-return function(Text: string) --[[ Line: 11 | Named "tokenize" ]]
+return function(Text: string)
 	-- upvalues: InsertFunction (copy)
 	local config = {
 		["\n"] = {

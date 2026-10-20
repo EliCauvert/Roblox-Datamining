@@ -12,10 +12,10 @@ local GetFormatTimeFunction = MomentsCommonModule.Utils.getFormatTime
 local UseCallbackFunction = ReactModule.useCallback
 local UseTokensFunction = FoundationModule.Hooks.useTokens
 
-return function(p1) --[[ Line: 29 ]]
+return function(p1)
 	-- upvalues: UseTokensFunction (copy), UseCallbackFunction (copy), ReactModule (copy), View (copy), FoundationModule (copy), GradientBackdrop (copy), Checkbox (copy), Text (copy), GetFormatTimeFunction (copy), GetContentFromCaptureModule (copy)
 	local UseTokensResult = UseTokensFunction()
-	local UseCallbackResult = UseCallbackFunction(function() --[[ Line: 32 ]]
+	local UseCallbackResult = UseCallbackFunction(function()
 		-- upvalues: p1 (copy)
 		p1.onActivated(p1.capture)
 	end, { p1.capture, p1.onActivated })

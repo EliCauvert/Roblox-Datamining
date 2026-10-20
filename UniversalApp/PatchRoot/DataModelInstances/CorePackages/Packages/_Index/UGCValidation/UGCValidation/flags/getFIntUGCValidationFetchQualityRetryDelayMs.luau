@@ -1,5 +1,5 @@
 ﻿game:DefineFastInt("UGCValidationFetchQualityRetryDelayMs", 200)
 
-return function() --[[ Line: 3 ]]
+return function()
 	return game:GetFastInt("UGCValidationFetchQualityRetryDelayMs")
 end

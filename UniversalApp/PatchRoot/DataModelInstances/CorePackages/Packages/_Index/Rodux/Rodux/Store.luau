@@ -1,22 +1,22 @@
 ﻿local SignalModule = require(script.Parent.Signal)
 local NoYieldModule = require(script.Parent.NoYield)
 local config = {
-	reportReducerError = function(_, _, p1) --[[ Line: 9 ]]
+	reportReducerError = function(_, _, p1)
 		error(string.format("Received error: %s\n\n%s", p1.message, p1.thrownValue))
 	end,
-	reportUpdateError = function(_, _, _, p1) --[[ Line: 12 ]]
+	reportUpdateError = function(_, _, _, p1)
 		error(string.format("Received error: %s\n\n%s", p1.message, p1.thrownValue))
 	end
 }
 
-local function tracebackReporter(Err) --[[ Line: 17 ]]
+local function tracebackReporter(Err)
 	return debug.traceback((tostring(Err)))
 end
 
 local Store = { _flushEvent = game:GetService("RunService").Heartbeat }
 Store.__index = Store
 
-function Store.new(_reducer, _state, p1, p2, _devtools) --[[ Line: 41 ]]
+function Store.new(_reducer, _state, p1, p2, _devtools)
 	-- upvalues: config (copy), SignalModule (copy), tracebackReporter (copy), Store (copy)
 	assert(typeof(_reducer) == "function", "Bad argument #1 to Store.new, expected function.")
 	assert(p1 == nil or typeof(p1) == "table", "Bad argument #3 to Store.new, expected nil or table.")
@@ -36,7 +36,7 @@ function Store.new(_reducer, _state, p1, p2, _devtools) --[[ Line: 41 ]]
 	config1.changed = SignalModule.new(config1)
 	config1._reducer = _reducer
 	
-	function config1._flushHandler(p3) --[[ Line: 66 ]]
+	function config1._flushHandler(p3)
 		-- upvalues: config1 (copy)
 		config1.changed:fire(p3, config1._lastState)
 	end
@@ -47,7 +47,7 @@ function Store.new(_reducer, _state, p1, p2, _devtools) --[[ Line: 41 ]]
 	end
 	local config2 = { type = "@@INIT" }
 	config1._actionLog = { config2 }
-	local Success, Result = xpcall(function() --[[ Line: 82 ]]
+	local Success, Result = xpcall(function()
 		-- upvalues: config1 (copy), _state (copy), config2 (copy)
 		config1._state = config1._reducer(_state, config2)
 	end, tracebackReporter)
@@ -63,7 +63,7 @@ function Store.new(_reducer, _state, p1, p2, _devtools) --[[ Line: 41 ]]
 	config1._mutatedSinceFlush = false
 	config1._connections = {}
 	setmetatable(config1, Store)
-	table.insert(config1._connections, (config1._flushEvent:Connect(function() --[[ Line: 99 ]]
+	table.insert(config1._connections, (config1._flushEvent:Connect(function()
 		-- upvalues: config1 (copy)
 		config1:flush()
 	end)))
@@ -71,7 +71,7 @@ function Store.new(_reducer, _state, p1, p2, _devtools) --[[ Line: 41 ]]
 	if p1 then
 		local DispatchFunction = config1.dispatch
 		
-		local function v8(...) --[[ Line: 106 ]]
+		local function v8(...)
 			-- upvalues: DispatchFunction (copy), config1 (copy)
 			return DispatchFunction(config1, ...)
 		end
@@ -79,7 +79,7 @@ function Store.new(_reducer, _state, p1, p2, _devtools) --[[ Line: 41 ]]
 		for i1 = #p1, 1, -1 do
 			v8 = p1[i1](v8, config1)
 		end
-		function config1:dispatch(...) --[[ Line: 115 ]]
+		function config1:dispatch(...)
 			-- upvalues: v8 (ref)
 			return v8(...)
 		end
@@ -87,14 +87,14 @@ function Store.new(_reducer, _state, p1, p2, _devtools) --[[ Line: 41 ]]
 	return config1
 end
 
-function Store:getState() --[[ Line: 126 ]]
+function Store:getState()
 	if self._isDispatching then
 		error(("You may not call store:getState() while the reducer is executing. The reducer (%s) has already received the state as an argument. Pass it down from the top reducer instead of reading it from the store."):format((tostring(self._reducer))))
 	end
 	return self._state
 end
 
-function Store:dispatch(p3) --[[ Line: 143 ]]
+function Store:dispatch(p3)
 	if typeof(p3) ~= "table" then
 		error(("Actions must be tables. Use custom middleware for %q actions."):format((typeof(p3))), 2)
 	end
@@ -104,7 +104,7 @@ function Store:dispatch(p3) --[[ Line: 143 ]]
 	if self._isDispatching then
 		error("Reducers may not dispatch actions.")
 	end
-	local Success, Result = pcall(function() --[[ Line: 161 ]]
+	local Success, Result = pcall(function()
 		-- upvalues: self (copy), p3 (copy)
 		self._isDispatching = true
 		self._state = self._reducer(self._state, p3)
@@ -124,19 +124,19 @@ function Store:dispatch(p3) --[[ Line: 143 ]]
 	table.insert(self._actionLog, p3)
 end
 
-function Store:destruct() --[[ Line: 189 ]]
+function Store:destruct()
 	for _, connection in ipairs(self._connections) do
 		connection:Disconnect()
 	end
 	self._connections = nil
 end
 
-function Store:flush() --[[ Line: 200 ]]
+function Store:flush()
 	-- upvalues: NoYieldModule (copy), tracebackReporter (copy)
 	if not self._mutatedSinceFlush then return end
 	self._mutatedSinceFlush = false
 	local State = self._state
-	local Success, Result = xpcall(function() --[[ Line: 212 ]]
+	local Success, Result = xpcall(function()
 		-- upvalues: NoYieldModule (upval), self (copy), State (copy)
 		NoYieldModule(self._flushHandler, State)
 	end, tracebackReporter)

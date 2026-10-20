@@ -17,7 +17,7 @@ else
 end
 local Text = ConstantsModule.LOCALIZATION_TABLE_NAME .. game:GetService("HttpService"):GenerateGUID(false)
 
-local function createFoundationLocalizationTable(Object) --[[ Line: 26 ]]
+local function createFoundationLocalizationTable(Object)
 	-- upvalues: FlagsModule (copy), Text (copy), GeneratedTranslationsModule (copy), ConstantsModule (copy)
 	if FlagsModule.FoundationDontParentToFoundationModule then
 		local Text1 = Object:FindFirstChild(Text)
@@ -49,7 +49,7 @@ end
 local FoundationLocalizationTable = createFoundationLocalizationTable(Object)
 local Translators = {}
 
-local function getTranslatorForLocale(RobloxLocaleId) --[[ Line: 58 ]]
+local function getTranslatorForLocale(RobloxLocaleId)
 	-- upvalues: FoundationLocalizationTable (ref), createFoundationLocalizationTable (copy), Object (ref), Translators (ref), FlagsModule (copy), Text (copy), ConstantsModule (copy)
 	if FoundationLocalizationTable == nil or FoundationLocalizationTable.Parent == nil then
 		FoundationLocalizationTable = createFoundationLocalizationTable(Object)
@@ -67,14 +67,14 @@ local function getTranslatorForLocale(RobloxLocaleId) --[[ Line: 58 ]]
 	end
 end
 
-local function _() --[[ Line: 84 | Named "getTranslator" ]]
+local function _()
 	-- upvalues: getTranslatorForLocale (copy), LocalizationService (copy)
 	return (getTranslatorForLocale(LocalizationService.RobloxLocaleId))
 end
 
-local function formatByKeyWithFallback(Key, p1, Translator) --[[ Line: 88 ]]
+local function formatByKeyWithFallback(Key, p1, Translator)
 	-- upvalues: getTranslatorForLocale (copy)
-	local Success, Result = pcall(function() --[[ Line: 89 ]]
+	local Success, Result = pcall(function()
 		-- upvalues: Translator (copy), Key (copy), p1 (copy)
 		return Translator:FormatByKey(Key, p1)
 	end)
@@ -83,11 +83,11 @@ local function formatByKeyWithFallback(Key, p1, Translator) --[[ Line: 88 ]]
 end
 
 return {
-	FormatByKey = function(_, Key, p1) --[[ Line: 104 ]]
+	FormatByKey = function(_, Key, p1)
 		-- upvalues: formatByKeyWithFallback (copy), getTranslatorForLocale (copy), LocalizationService (copy)
 		return formatByKeyWithFallback(Key, p1, (getTranslatorForLocale(LocalizationService.RobloxLocaleId)))
 	end,
-	FormatByKeyForLocale = function(_, p1, p2, p3) --[[ Line: 108 ]]
+	FormatByKeyForLocale = function(_, p1, p2, p3)
 		-- upvalues: formatByKeyWithFallback (copy), getTranslatorForLocale (copy)
 		return formatByKeyWithFallback(p1, p3, (getTranslatorForLocale(p2)))
 	end

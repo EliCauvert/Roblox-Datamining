@@ -26,7 +26,7 @@ local config = {
 	[Enum.RigLabel.RightClavicle] = UGCValidationTposeClavicleDegreeOffsetThreshold
 }
 
-local function checkJointTposeAdjustment(p1, Label, TposeAdjustment, RootInstance, ScaledOriginalSize: number, DegLimit) --[[ Line: 42 ]]
+local function checkJointTposeAdjustment(p1, Label, TposeAdjustment, RootInstance, ScaledOriginalSize: number, DegLimit)
 	-- upvalues: UGCValidationService (copy), GetDiffBetweenOrientationsModule (copy), ErrorSourceStringsModule (copy), CFrameUtilsModule (copy), Vector3UtilsModule (copy), ValueToStringModule (copy)
 	local ExpectedTposeRotation = UGCValidationService:GetExpectedTposeRotation(Label, RootInstance)
 	
@@ -55,7 +55,7 @@ return {
 		ValidationEnumsModule.SharedDataMember.renderMeshesData
 	},
 	fflag = require(Parent.flags.getEngineFeatureEngineUGCValidateTPoseAdjustment),
-	run = function(p1, p2) --[[ Line: 69 ]]
+	run = function(p1, p2)
 		-- upvalues: GetAllInstancesIsAModule (copy), UGCValidationTposePositionOffsetPercentThresholdRatio (copy), checkJointTposeAdjustment (copy), config (copy), UGCValidationTposeGeneralDegreeOffsetThreshold (copy), UGCValidationTposeFingerDegreeOffsetThreshold (copy)
 		local RootInstance = p2.rootInstance
 		

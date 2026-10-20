@@ -7,27 +7,27 @@ local SignalsExperimentalModule = require(ViewRecyclerReact.Parent.SignalsExperi
 local CreateRecyclableViewModule = require(ViewRecyclerReact.ReactAdapter.createRecyclableView)
 local RecyclableViewModule = require(ViewRecyclerReact.ReactAdapter.Private.RecyclableView)
 
-local function _() --[[ Line: 13 | Named "viewType" ]]
+local function _()
 	-- upvalues: CreateRecyclableViewModule (copy)
-	return CreateRecyclableViewModule(function() --[[ Line: 14 ]]
+	return CreateRecyclableViewModule(function()
 		return nil
 	end, { readiness = "ReadyOnAssignment" })
 end
 
 return {
-	recyclingScopeHighWater = function(p1: number, Callback) --[[ Line: 21 ]]
+	recyclingScopeHighWater = function(p1: number, Callback)
 		-- upvalues: RecyclingRootModule (copy), CreateRecyclableViewModule (copy)
 		local HostChanges = 0
-		local NewRecyclingRoot = RecyclingRootModule.new(function() --[[ Line: 23 ]]
+		local NewRecyclingRoot = RecyclingRootModule.new(function()
 			-- upvalues: HostChanges (ref)
 			HostChanges += 1
 		end)
 		local Scope = NewRecyclingRoot.getScope({})
 		local IsScopeMatch = Scope == NewRecyclingRoot.getScope({})
-		local RecyclableViewModule = CreateRecyclableViewModule(function() --[[ Line: 14 ]]
+		local RecyclableViewModule = CreateRecyclableViewModule(function()
 			return nil
 		end, { readiness = "ReadyOnAssignment" })
-		local RecyclableViewModule1 = CreateRecyclableViewModule(function() --[[ Line: 29 ]]
+		local RecyclableViewModule1 = CreateRecyclableViewModule(function()
 			return nil
 		end, { readiness = "ReadyOnAssignment" })
 		local CallbackResult = Callback()
@@ -78,7 +78,7 @@ return {
 		local Count1 = #Scope.getScopeInventory()
 		local PublishedHosts = 0
 		
-		for _ in NewRecyclingRoot.getPortalChildren(function() --[[ Line: 78 ]]
+		for _ in NewRecyclingRoot.getPortalChildren(function()
 			return nil
 		end) do
 			PublishedHosts += 1
@@ -96,19 +96,19 @@ return {
 			completionPhaseCounts = { scopePublication = { synchronousBatch = 1 } }
 		}
 	end,
-	compositionChurn = function(p2) --[[ Line: 102 ]]
+	compositionChurn = function(p2)
 		-- upvalues: ViewRecyclerModule (copy), RecyclableViewModule (copy), SignalsExperimentalModule (copy), CompositionPlacementModule (copy), CreateRecyclableViewModule (copy), SignalsModule (copy)
 		local Count = 1
 		local Count1 = 0
 		local RecyclingScope = ViewRecyclerModule.Adapter.createRecyclingScope({
 			adapter = {
-				create = function(p3) --[[ Line: 107 ]]
+				create = function(p3)
 					-- upvalues: RecyclableViewModule (upval), Count (ref), Count1 (ref)
 					local RecyclableViewModuleResult = RecyclableViewModule(Count, p3, nil)
 					Count += 1
 					local SetFunction = RecyclableViewModuleResult.set
 					
-					function RecyclableViewModuleResult.set(p4) --[[ Line: 111 ]]
+					function RecyclableViewModuleResult.set(p4)
 						-- upvalues: Count1 (upval), SetFunction (copy)
 						Count1 += 1
 						SetFunction(p4)
@@ -116,12 +116,12 @@ return {
 					
 					return RecyclableViewModuleResult
 				end,
-				destroy = function() --[[ Line: 117 ]] end,
+				destroy = function() end,
 				batch = SignalsExperimentalModule.batch
 			}
 		})
-		local NewCompositionPlacement = CompositionPlacementModule.new(RecyclingScope, function() --[[ Line: 121 ]] end)
-		local RecyclableViewModule1 = CreateRecyclableViewModule(function() --[[ Line: 14 ]]
+		local NewCompositionPlacement = CompositionPlacementModule.new(RecyclingScope, function() end)
+		local RecyclableViewModule1 = CreateRecyclableViewModule(function()
 			return nil
 		end, { readiness = "ReadyOnAssignment" })
 		local Buffer = table.create(p2)
@@ -139,7 +139,7 @@ return {
 		local v1 = 1
 		
 		return {
-			run = function() --[[ Line: 142 ]]
+			run = function()
 				-- upvalues: Revision (ref), p2 (copy), Buffer (copy), v1 (ref), NewCompositionPlacement (copy), Count2 (ref)
 				Revision += 1
 				
@@ -150,15 +150,15 @@ return {
 				Count2 += 1
 				v1 = v1 % p2 + 1
 			end,
-			getAssignmentUpdates = function() --[[ Line: 154 ]]
+			getAssignmentUpdates = function()
 				-- upvalues: Count1 (ref)
 				return Count1
 			end,
-			getFlushes = function() --[[ Line: 157 ]]
+			getFlushes = function()
 				-- upvalues: Count2 (ref)
 				return Count2
 			end,
-			destroy = function() --[[ Line: 160 ]]
+			destroy = function()
 				-- upvalues: NewCompositionPlacement (copy), RecyclingScope (copy), Buffer1 (copy)
 				NewCompositionPlacement.destroy()
 				RecyclingScope.destroy()

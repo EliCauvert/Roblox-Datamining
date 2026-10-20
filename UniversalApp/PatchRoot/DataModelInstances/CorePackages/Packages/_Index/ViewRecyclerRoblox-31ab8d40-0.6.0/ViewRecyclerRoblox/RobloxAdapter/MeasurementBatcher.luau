@@ -1,13 +1,13 @@
 ﻿local _ = require(script:FindFirstAncestor("ViewRecyclerRoblox").Parent.ViewRecycler)
 
 return {
-	new = function(Callback1, p1) --[[ Line: 14 ]]
+	new = function(Callback1, p1)
 		local Callback = p1 or task.defer
 		local v1 = nil
 		local Flag = true
 		
 		return {
-			add = function(p2) --[[ Line: 22 ]]
+			add = function(p2)
 				-- upvalues: Flag (ref), v1 (ref), Callback (copy), Callback1 (copy)
 				if not Flag then return end
 				local List = v1
@@ -15,7 +15,7 @@ return {
 				if List == nil then
 					List = {}
 					v1 = List
-					Callback(function() --[[ Line: 30 ]]
+					Callback(function()
 						-- upvalues: Flag (upval), v1 (upval), List (ref), Callback1 (upval)
 						if Flag and v1 == List then
 							v1 = nil
@@ -25,7 +25,7 @@ return {
 				end
 				table.insert(List, p2)
 			end,
-			flush = function() --[[ Line: 46 ]]
+			flush = function()
 				-- upvalues: v1 (ref), Flag (ref), Callback1 (copy)
 				local v2 = v1
 				
@@ -38,11 +38,11 @@ return {
 					return nil
 				end
 			end,
-			cancelPending = function() --[[ Line: 40 ]]
+			cancelPending = function()
 				-- upvalues: v1 (ref)
 				v1 = nil
 			end,
-			destroy = function() --[[ Line: 56 ]]
+			destroy = function()
 				-- upvalues: Flag (ref), v1 (ref)
 				Flag = false
 				v1 = nil

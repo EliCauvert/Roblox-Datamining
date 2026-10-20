@@ -13,14 +13,14 @@ local config = {
 	isContained = { isContained = false, hasMargin = true }
 }
 
-return ReactModule.memo(ReactModule.forwardRef(function(p1, Ref) --[[ Line: 32 | Named "List" ]]
+return ReactModule.memo(ReactModule.forwardRef(function(p1, Ref)
 	-- upvalues: WithDefaultsModule (copy), config (copy), FlagsModule (copy), ReactModule (copy), ViewModule (copy), WithCommonPropsModule (copy), ListContextModule (copy)
 	local WithDefaultsModuleResult = WithDefaultsModule(p1, config)
 	local HasDivider = if FlagsModule.FoundationListStableContextValue then if type(WithDefaultsModuleResult.hasDivider) == "boolean" then WithDefaultsModuleResult.hasDivider else WithDefaultsModuleResult.hasDivider.hasDivider else nil
 	local Largest = 0
 	
 	if not FlagsModule.FoundationListStableContextValue or HasDivider then
-		ReactModule.Children.forEach(WithDefaultsModuleResult.children, function(p2) --[[ Line: 40 ]]
+		ReactModule.Children.forEach(WithDefaultsModuleResult.children, function(p2)
 			-- upvalues: Largest (ref)
 			if p2 and p2.props and p2.props.LayoutOrder then
 				Largest = math.max(Largest, p2.props.LayoutOrder)
@@ -30,7 +30,7 @@ return ReactModule.memo(ReactModule.forwardRef(function(p1, Ref) --[[ Line: 32 |
 	local IsContained = if type(WithDefaultsModuleResult.isContained) == "boolean" then WithDefaultsModuleResult.isContained else WithDefaultsModuleResult.isContained.isContained
 	local IsNotTable = if IsContained then true else type(WithDefaultsModuleResult.isContained) ~= "table" or WithDefaultsModuleResult.isContained.hasMargin
 	local HasDivider1 = if type(WithDefaultsModuleResult.hasDivider) == "boolean" then WithDefaultsModuleResult.hasDivider else WithDefaultsModuleResult.hasDivider.isInset
-	local UseMemoResult = if FlagsModule.FoundationListStableContextValue then ReactModule.useMemo(function() --[[ Line: 57 ]]
+	local UseMemoResult = if FlagsModule.FoundationListStableContextValue then ReactModule.useMemo(function()
 		-- upvalues: WithDefaultsModuleResult (copy), IsContained (copy), HasDivider1 (copy), IsNotTable (copy), Largest (ref)
 		return {
 			hasDivider = WithDefaultsModuleResult.hasDivider,

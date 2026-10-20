@@ -4,7 +4,7 @@ local BackgroundLayerModule = require(script.Parent.background_layer)
 local Module = {}
 Module.__index = Module
 
-function Module.new(p1) --[[ Line: 145 ]]
+function Module.new(p1)
 	-- upvalues: Module (copy)
 	return (setmetatable({
 		id = if p1 == nil or p1.id == nil then "" else p1.id,
@@ -13,7 +13,7 @@ function Module.new(p1) --[[ Line: 145 ]]
 	}, Module))
 end
 
-function Module:encode() --[[ Line: 155 ]]
+function Module:encode()
 	-- upvalues: ProtoModule (copy)
 	local Buf = buffer.create(0)
 	local Count = 0
@@ -36,7 +36,7 @@ function Module:encode() --[[ Line: 155 ]]
 	return Buf1
 end
 
-function Module.decode(Buf) --[[ Line: 179 ]]
+function Module.decode(Buf)
 	-- upvalues: Module (copy), ProtoModule (copy)
 	local NewModule = Module.new()
 	local v1 = 0
@@ -77,7 +77,7 @@ function Module.decode(Buf) --[[ Line: 179 ]]
 	return NewModule
 end
 
-function Module:jsonEncode() --[[ Line: 232 ]]
+function Module:jsonEncode()
 	local t = {}
 	
 	if self.id ~= nil and self.id ~= "" then
@@ -92,7 +92,7 @@ function Module:jsonEncode() --[[ Line: 232 ]]
 	return t
 end
 
-function Module:jsonDecode() --[[ Line: 250 ]]
+function Module:jsonDecode()
 	-- upvalues: Module (copy)
 	local NewModule = Module.new()
 	
@@ -120,14 +120,14 @@ TypeRegistryModule.default:register(config.CatalogSortContentData)
 local Module1 = {}
 Module1.__index = Module1
 
-function Module1.new(p1) --[[ Line: 286 ]]
+function Module1.new(p1)
 	-- upvalues: Module1 (copy)
 	return (setmetatable({
 		content_type = if p1 == nil or p1.content_type == nil then "" else p1.content_type
 	}, Module1))
 end
 
-function Module1:encode() --[[ Line: 294 ]]
+function Module1:encode()
 	-- upvalues: ProtoModule (copy)
 	local Buf = buffer.create(0)
 	local Count = 0
@@ -142,7 +142,7 @@ function Module1:encode() --[[ Line: 294 ]]
 	return Buf1
 end
 
-function Module1.decode(Buf) --[[ Line: 308 ]]
+function Module1.decode(Buf)
 	-- upvalues: Module1 (copy), ProtoModule (copy)
 	local NewModule = Module1.new()
 	local v2 = 0
@@ -175,7 +175,7 @@ function Module1.decode(Buf) --[[ Line: 308 ]]
 	return NewModule
 end
 
-function Module1:jsonEncode() --[[ Line: 351 ]]
+function Module1:jsonEncode()
 	local t = {}
 	
 	if self.content_type ~= nil and self.content_type ~= "" then
@@ -184,7 +184,7 @@ function Module1:jsonEncode() --[[ Line: 351 ]]
 	return t
 end
 
-function Module1:jsonDecode() --[[ Line: 361 ]]
+function Module1:jsonDecode()
 	-- upvalues: Module1 (copy)
 	local NewModule = Module1.new()
 	
@@ -206,7 +206,7 @@ TypeRegistryModule.default:register(config.CatalogSortCardItemFooter)
 local Module2 = {}
 Module2.__index = Module2
 
-function Module2.new(p1) --[[ Line: 389 ]]
+function Module2.new(p1)
 	-- upvalues: Module2 (copy)
 	return (setmetatable({
 		thumbnail_aspect_ratio = if p1 == nil or p1.thumbnail_aspect_ratio == nil then "" else p1.thumbnail_aspect_ratio,
@@ -214,7 +214,7 @@ function Module2.new(p1) --[[ Line: 389 ]]
 	}, Module2))
 end
 
-function Module2:encode() --[[ Line: 398 ]]
+function Module2:encode()
 	-- upvalues: ProtoModule (copy)
 	local Buf = buffer.create(0)
 	local Count = 0
@@ -236,7 +236,7 @@ function Module2:encode() --[[ Line: 398 ]]
 	return Buf1
 end
 
-function Module2.decode(Buf) --[[ Line: 420 ]]
+function Module2.decode(Buf)
 	-- upvalues: Module2 (copy), ProtoModule (copy), BackgroundLayerModule (copy)
 	local NewModule = Module2.new()
 	local v3 = 0
@@ -273,7 +273,7 @@ function Module2.decode(Buf) --[[ Line: 420 ]]
 	return NewModule
 end
 
-function Module2:jsonEncode() --[[ Line: 471 ]]
+function Module2:jsonEncode()
 	local t = {}
 	
 	if self.thumbnail_aspect_ratio ~= nil and self.thumbnail_aspect_ratio ~= "" then
@@ -290,7 +290,7 @@ function Module2:jsonEncode() --[[ Line: 471 ]]
 	return t
 end
 
-function Module2:jsonDecode() --[[ Line: 489 ]]
+function Module2:jsonDecode()
 	-- upvalues: Module2 (copy), BackgroundLayerModule (copy)
 	local NewModule = Module2.new()
 	
@@ -328,7 +328,7 @@ TypeRegistryModule.default:register(config.CatalogSortCardStyle)
 local Module3 = {}
 Module3.__index = Module3
 
-function Module3.new(p1) --[[ Line: 541 ]]
+function Module3.new(p1)
 	-- upvalues: Module3 (copy)
 	return (setmetatable({
 		id = if p1 == nil or p1.id == nil then "" else p1.id,
@@ -345,7 +345,7 @@ function Module3.new(p1) --[[ Line: 541 ]]
 	}, Module3))
 end
 
-function Module3:encode() --[[ Line: 557 ]]
+function Module3:encode()
 	-- upvalues: ProtoModule (copy)
 	local Buf = buffer.create(0)
 	local Count = 0
@@ -407,7 +407,7 @@ function Module3:encode() --[[ Line: 557 ]]
 	return Buf1
 end
 
-function Module3.decode(Buf) --[[ Line: 628 ]]
+function Module3.decode(Buf)
 	-- upvalues: Module3 (copy), ProtoModule (copy), config (copy)
 	local NewModule = Module3.new()
 	local v4 = 0
@@ -476,7 +476,7 @@ function Module3.decode(Buf) --[[ Line: 628 ]]
 	return NewModule
 end
 
-function Module3:jsonEncode() --[[ Line: 721 ]]
+function Module3:jsonEncode()
 	local t = {}
 	
 	if self.id ~= nil and self.id ~= "" then
@@ -525,7 +525,7 @@ function Module3:jsonEncode() --[[ Line: 721 ]]
 	return t
 end
 
-function Module3:jsonDecode() --[[ Line: 779 ]]
+function Module3:jsonDecode()
 	-- upvalues: Module3 (copy), config (copy)
 	local NewModule = Module3.new()
 	

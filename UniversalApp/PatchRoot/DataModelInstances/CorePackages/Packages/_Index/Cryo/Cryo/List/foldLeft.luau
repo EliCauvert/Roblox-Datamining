@@ -1,4 +1,4 @@
-﻿return function(p1, Callback, p2) --[[ Line: 4 | Named "foldLeft" ]]
+﻿return function(p1, Callback, p2)
 	local v1 = p2
 	
 	for i = 1, #p1 do

@@ -7,7 +7,7 @@ local ComposeStyleVariantModule = require(Foundation.Utility.composeStyleVariant
 local _ = require(Foundation.Providers.Style.Tokens)
 local VariantsContextModule = require(Foundation.Providers.Style.VariantsContext)
 
-local function createStandardVariantStyles(p1, Style) --[[ Line: 31 ]]
+local function createStandardVariantStyles(p1, Style)
 	-- upvalues: ColorNamespaceModule (copy)
 	return {
 		container = {
@@ -20,7 +20,7 @@ local function createStandardVariantStyles(p1, Style) --[[ Line: 31 ]]
 	}
 end
 
-local function createEmphasisVariantStyles(p1, Tag, DarkMode) --[[ Line: 43 ]]
+local function createEmphasisVariantStyles(p1, Tag, DarkMode)
 	return {
 		container = { tag = Tag, colorNamespace = DarkMode },
 		title = { style = p1[DarkMode].Content.Emphasis },
@@ -29,7 +29,7 @@ local function createEmphasisVariantStyles(p1, Tag, DarkMode) --[[ Line: 43 ]]
 	}
 end
 
-local function variantsFactory(p1) --[[ Line: 59 ]]
+local function variantsFactory(p1)
 	-- upvalues: AlertVariantModule (copy), AlertSeverityModule (copy), createStandardVariantStyles (copy), createEmphasisVariantStyles (copy), ColorNamespaceModule (copy)
 	return {
 		common = {
@@ -60,7 +60,7 @@ local function variantsFactory(p1) --[[ Line: 59 ]]
 	}
 end
 
-return function(p1, p2, p3) --[[ Line: 98 ]]
+return function(p1, p2, p3)
 	-- upvalues: VariantsContextModule (copy), variantsFactory (copy), ComposeStyleVariantModule (copy)
 	local SystemBanner = VariantsContextModule.useVariants("SystemBanner", variantsFactory, p1)
 	

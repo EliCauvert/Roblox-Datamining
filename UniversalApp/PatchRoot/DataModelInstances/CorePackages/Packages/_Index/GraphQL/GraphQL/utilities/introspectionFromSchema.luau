@@ -7,7 +7,7 @@ local ExecuteSyncFunction = require(Parent.execution.execute).executeSync
 local GetIntrospectionQueryFunction = require(script.Parent.getIntrospectionQuery).getIntrospectionQuery
 
 return {
-	introspectionFromSchema = function(Schema, p1) --[[ Line: 37 ]]
+	introspectionFromSchema = function(Schema, p1)
 		-- upvalues: Object (copy), ParseFunction (copy), GetIntrospectionQueryFunction (copy), ExecuteSyncFunction (copy), InvariantFunction (copy)
 		local ExecuteSyncResult = ExecuteSyncFunction({
 			schema = Schema,

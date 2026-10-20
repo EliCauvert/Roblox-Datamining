@@ -5,7 +5,7 @@ local IsNillishFunction = IsNillishModule.isNillish
 local IsNotNillishFunction = IsNillishModule.isNotNillish
 
 return {
-	LoneSchemaDefinitionRule = function(p1) --[[ Line: 24 ]]
+	LoneSchemaDefinitionRule = function(p1)
 		-- upvalues: IsNillishFunction (copy), IsNotNillishFunction (copy), GraphQLError (copy)
 		local Schema = p1:getSchema()
 		local AstNode = nil
@@ -26,7 +26,7 @@ return {
 		local Count = 0
 		
 		return {
-			SchemaDefinition = function(_, p2) --[[ Line: 42 ]]
+			SchemaDefinition = function(_, p2)
 				-- upvalues: IsNotNillishFunction (upval), AstNode (ref), p1 (copy), GraphQLError (upval), Count (ref)
 				if IsNotNillishFunction(AstNode) then
 					p1:reportError(GraphQLError.new("Cannot define a new schema within a schema extension.", p2))

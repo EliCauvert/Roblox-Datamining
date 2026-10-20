@@ -14,15 +14,15 @@ local t1 = {}
 for i in Module.Utility do
 	t1[i] = true
 end
-local function _(p1) --[[ Line: 40 | Named "isFoundationExport" ]]
+local function _(p1)
 	-- upvalues: Module (copy)
-	return (pcall(function() --[[ Line: 41 ]]
+	return (pcall(function()
 		-- upvalues: Module (upval), p1 (copy)
 		return Module[p1]
 	end))
 end
 
-local _ = function(Parent, Parent1) --[[ Line: 46 | Named "topChild" ]]
+local _ = function(Parent, Parent1)
 	local Parent2 = Parent
 	while Parent2.Parent and Parent2.Parent ~= Parent1 do
 		Parent2 = Parent2.Parent
@@ -30,23 +30,23 @@ local _ = function(Parent, Parent1) --[[ Line: 46 | Named "topChild" ]]
 	return Parent2
 end
 
-local _ = function(p1): boolean --[[ Line: 54 | Named "isDeprecatedStory" ]]
+local _ = function(p1): boolean
 	local Success, Result = pcall(require, p1)
 	
 	return Success and (typeof(Result) == "table" and Result.deprecated == true)
 end
 
-local _ = function(p1): boolean --[[ Line: 59 | Named "isBaseStory" ]]
+local _ = function(p1): boolean
 	local Success, Result = pcall(require, p1)
 	
 	return Success and (typeof(Result) == "table" and Result.base == true)
 end
 
-local _ = function(p1): boolean --[[ Line: 64 | Named "isCompoundSubPartStory" ]]
+local _ = function(p1): boolean
 	return p1.Name:match("^[%w]+%.[%w]+%.story") ~= nil and p1.Name:match("%.Root%.story") == nil
 end
 
-local _ = function(Object) --[[ Line: 68 | Named "getComponentRootStory" ]]
+local _ = function(Object)
 	-- upvalues: Components (copy)
 	if not Object:IsDescendantOf(Components) then
 		return nil
@@ -60,7 +60,7 @@ local _ = function(Object) --[[ Line: 68 | Named "getComponentRootStory" ]]
 	return if Child and Child:IsA("ModuleScript") then Child else nil
 end
 
-local function getStoryScope(Object): string? --[[ Line: 80 ]]
+local function getStoryScope(Object): string?
 	-- upvalues: Planned (copy), Elements (copy), Flags (copy), Components (copy), t (copy), t1 (copy), Module (copy)
 	if Planned and Object:IsDescendantOf(Planned) then
 		return "planned"
@@ -124,12 +124,12 @@ local function getStoryScope(Object): string? --[[ Line: 80 ]]
 		end
 		local Name = Parent.Name
 		
-		if not pcall(function() --[[ Line: 41 ]]
+		if not pcall(function()
 			-- upvalues: Module (upval), Name (copy)
 			return Module[Name]
 		end) and (Object.Name:match("^[%w]+%.[%w]+%.story") ~= nil and Object.Name:match("%.Root%.story") == nil) then
 			return nil
-		elseif pcall(function() --[[ Line: 41 ]]
+		elseif pcall(function()
 			-- upvalues: Module (upval), Name (copy)
 			return Module[Name]
 		end) then
@@ -139,7 +139,7 @@ local function getStoryScope(Object): string? --[[ Line: 80 ]]
 	return "internal"
 end
 
-local _ = function(p1, p2): boolean --[[ Line: 127 | Named "isNested" ]]
+local _ = function(p1, p2): boolean
 	local Parent = p1.Parent
 	while Parent do
 		if p2[Parent] then
@@ -151,7 +151,7 @@ local _ = function(p1, p2): boolean --[[ Line: 127 | Named "isNested" ]]
 end
 
 return {
-	getStorybookRoots = function(p3) --[[ Line: 161 ]]
+	getStorybookRoots = function(p3)
 		-- upvalues: Components (copy), Foundation (copy), getStoryScope (copy)
 		if p3 == "components" or p3 == "base" then
 			return { Components }
@@ -182,7 +182,7 @@ return {
 		end
 		return List
 	end,
-	getComponentFolderExcludeList = function(p4) --[[ Line: 138 ]]
+	getComponentFolderExcludeList = function(p4)
 		-- upvalues: Foundation (copy), Components (copy), getStoryScope (copy)
 		local t = {}
 		

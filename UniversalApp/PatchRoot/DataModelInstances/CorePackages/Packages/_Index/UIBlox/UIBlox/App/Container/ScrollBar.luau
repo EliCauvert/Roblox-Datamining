@@ -6,7 +6,7 @@ local _ = require(Parent.Style.StyleTypes)
 local ImageSetComponentModule = require(Parent1.Core.ImageSet.ImageSetComponent)
 local _ = require(Parent.ImageSet.ImagesTypes)
 
-return function(p1) --[[ Line: 55 | Named "ScrollBar" ]]
+return function(p1)
 	-- upvalues: ReactModule (copy), UserInputService (copy), ImageSetComponentModule (copy)
 	local UserInteractionEnabled = p1.userInteractionEnabled
 	local Width = p1.width
@@ -31,11 +31,11 @@ return function(p1) --[[ Line: 55 | Named "ScrollBar" ]]
 	local UseStateResult1, UseStateResult2_1 = ReactModule.useState(false)
 	local UseRefResult = ReactModule.useRef(0)
 	local UseRefResult1 = ReactModule.useRef(0)
-	local UseResult = ReactModule.useCallback(function(Frame) --[[ Line: 83 ]]
+	local UseResult = ReactModule.useCallback(function(Frame)
 		-- upvalues: UseBindingResult2 (copy)
 		UseBindingResult2(Frame.AbsoluteSize.Y)
 	end, { UseBindingResult2 })
-	local UseResult1 = ReactModule.useCallback(function(Frame) --[[ Line: 87 ]]
+	local UseResult1 = ReactModule.useCallback(function(Frame)
 		-- upvalues: UseStateResult2 (copy)
 		local Parent = Frame.Parent
 		
@@ -47,20 +47,20 @@ return function(p1) --[[ Line: 55 | Named "ScrollBar" ]]
 			UseStateResult2(true)
 		end
 	end, { UseStateResult2 })
-	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 96 ]]
+	local UseMemoResult = ReactModule.useMemo(function()
 		-- upvalues: ReactModule (upval), ViewSize (copy), CanvasSize (copy), HandleWidth (copy)
-		return ReactModule.joinBindings({ viewSize = ViewSize, canvasSize = CanvasSize }):map(function(p2): UDim2 --[[ Line: 100 ]]
+		return ReactModule.joinBindings({ viewSize = ViewSize, canvasSize = CanvasSize }):map(function(p2): UDim2
 			-- upvalues: HandleWidth (upval)
 			return UDim2.new(0, HandleWidth, math.clamp(p2.viewSize.Y / p2.canvasSize.Y, 0, 1), 0)
 		end)
 	end, { HandleWidth, ViewSize, CanvasSize })
-	local UseMemoResult1 = ReactModule.useMemo(function() --[[ Line: 108 ]]
+	local UseMemoResult1 = ReactModule.useMemo(function()
 		-- upvalues: ReactModule (upval), CanvasPosition (copy), CanvasSize (copy)
-		return ReactModule.joinBindings({ canvasPosition = CanvasPosition, canvasSize = CanvasSize }):map(function(p2): UDim2 --[[ Line: 112 ]]
+		return ReactModule.joinBindings({ canvasPosition = CanvasPosition, canvasSize = CanvasSize }):map(function(p2): UDim2
 			return UDim2.fromScale(0.5, p2.canvasPosition.Y / p2.canvasSize.Y)
 		end)
 	end, { CanvasSize, CanvasPosition })
-	local UseResult2 = ReactModule.useCallback(function(_, Input) --[[ Line: 120 ]]
+	local UseResult2 = ReactModule.useCallback(function(_, Input)
 		-- upvalues: UseStateResult (copy), UserInteractionEnabled (copy), UseStateResult1 (copy), UseRefResult (copy), UseRefResult1 (copy), CanvasPosition (copy), UseStateResult2_1 (copy)
 		if not UseStateResult or not UserInteractionEnabled or UseStateResult1 then return end
 		if Input and Input.UserInputType == Enum.UserInputType.MouseButton1 then
@@ -72,7 +72,7 @@ return function(p1) --[[ Line: 55 | Named "ScrollBar" ]]
 		UseStateResult, UserInteractionEnabled, UseStateResult1, UseRefResult,
 		UseRefResult1, CanvasPosition, UseStateResult2_1
 	})
-	local UseResult3 = ReactModule.useCallback(function(Input) --[[ Line: 141 ]]
+	local UseResult3 = ReactModule.useCallback(function(Input)
 		-- upvalues: UserInteractionEnabled (copy), UseStateResult1 (copy), UseRefResult (copy), UseBindingResult (copy), PaddingStartEnd (copy), ViewSize (copy), UseRefResult1 (copy), CanvasSize (copy), OnDraggingFunction (copy)
 		if not UserInteractionEnabled or not UseStateResult1 then return end
 		if Input.UserInputType == Enum.UserInputType.MouseMovement then
@@ -85,7 +85,7 @@ return function(p1) --[[ Line: 55 | Named "ScrollBar" ]]
 		UserInteractionEnabled, UseStateResult1, UseRefResult, UseBindingResult,
 		PaddingStartEnd, ViewSize, UseRefResult1, CanvasSize, OnDraggingFunction
 	})
-	local UseResult4 = ReactModule.useCallback(function(Input) --[[ Line: 172 ]]
+	local UseResult4 = ReactModule.useCallback(function(Input)
 		-- upvalues: UserInteractionEnabled (copy), UseStateResult1 (copy), UseStateResult2_1 (copy)
 		if not UserInteractionEnabled or not UseStateResult1 then return end
 		if not Input or Input.UserInputType == Enum.UserInputType.MouseButton1 then
@@ -98,21 +98,21 @@ return function(p1) --[[ Line: 55 | Named "ScrollBar" ]]
 		UseStateResult1,
 		UseStateResult2_1
 	})
-	ReactModule.useEffect(function() --[[ Line: 184 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UseStateResult (copy), UseStateResult1 (copy), UserInputService (upval), UseResult3 (copy), UseResult4 (copy)
 		if UseStateResult and UseStateResult1 then
 			local InputChangedConnection = UserInputService.InputChanged:Connect(UseResult3)
 			local InputEndedConnection = UserInputService.InputEnded:Connect(UseResult4)
 			local WindowFocusReleasedConnection = UserInputService.WindowFocusReleased:Connect(UseResult4)
 			
-			return function() --[[ Line: 193 ]]
+			return function()
 				-- upvalues: InputChangedConnection (copy), InputEndedConnection (copy), WindowFocusReleasedConnection (copy)
 				InputChangedConnection:Disconnect()
 				InputEndedConnection:Disconnect()
 				WindowFocusReleasedConnection:Disconnect()
 			end
 		else
-			return function() --[[ Line: 186 ]] end
+			return function() end
 		end
 	end, { UseStateResult, UseStateResult1, UseResult3, UseResult4 })
 	

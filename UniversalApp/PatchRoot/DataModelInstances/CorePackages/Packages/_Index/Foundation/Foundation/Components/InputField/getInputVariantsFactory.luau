@@ -9,7 +9,7 @@ local _ = require(Foundation.Utility.composeStyleVariant)
 local _ = require(Foundation.Providers.Style.Tokens)
 local FlagsModule = require(Foundation.Utility.Flags)
 
-return function(p1) --[[ Line: 42 | Named "getInputVariantsFactory" ]]
+return function(p1)
 	-- upvalues: FlagsModule (copy), InputSizeModule (copy), InputVariantModule (copy), DashModule (copy), RadiusModule (copy)
 	return {
 		common = {

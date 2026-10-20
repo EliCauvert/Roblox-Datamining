@@ -25,7 +25,7 @@ ItemTileName.validateProps = TModule.strictInterface({
 	horizontalAlignment = TModule.optional(TModule.enum(Enum.HorizontalAlignment))
 })
 
-function ItemTileName.render(p1) --[[ Line: 63 ]]
+function ItemTileName.render(p1)
 	-- upvalues: WithStyleModule (copy), RoactModule (copy), EmojiTextLabelModule (copy), EmojiModule (copy), ImagesModule (copy), ImageTextLabelModule (copy), Skeleton (copy)
 	local LayoutOrder = p1.props.LayoutOrder
 	local MaxHeight = p1.props.maxHeight
@@ -38,7 +38,7 @@ function ItemTileName.render(p1) --[[ Line: 63 ]]
 	local RichText = p1.props.richText
 	local Center = if p1.props.horizontalAlignment == Enum.HorizontalAlignment.Center then Enum.TextXAlignment.Center else nil
 	
-	return WithStyleModule(function(p2) --[[ Line: 77 ]]
+	return WithStyleModule(function(p2)
 		-- upvalues: p1 (copy), Name (copy), MaxWidth (copy), MaxHeight (copy), HasVerifiedBadge (copy), RoactModule (upval), EmojiTextLabelModule (upval), RichText (copy), FluidSizing (copy), EmojiModule (upval), LayoutOrder (copy), TitleIcon (copy), ImagesModule (upval), ImageTextLabelModule (upval), Center (copy), UseMaxHeight (copy), Skeleton (upval)
 		local Theme = p2.Theme
 		local _Font = p2.Font

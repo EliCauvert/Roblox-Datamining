@@ -4,13 +4,13 @@ local GuiService = WrappersModule.Services.GuiService
 local UserInputService = WrappersModule.Services.UserInputService
 local ReactModule = require(Foundation.Parent.React)
 
-return function(Frame: Frame) --[[ Line: 11 | Named "useKeyboardAwareSize" ]]
+return function(Frame: Frame)
 	-- upvalues: ReactModule (copy), UserInputService (copy), GuiService (copy)
 	local UseBindingResult, UseBindingResult2 = ReactModule.useBinding(UDim2.fromScale(1, 1))
-	ReactModule.useLayoutEffect(function() --[[ Line: 14 ]]
+	ReactModule.useLayoutEffect(function()
 		-- upvalues: Frame (copy), UserInputService (upval), UseBindingResult2 (copy), GuiService (upval), UseBindingResult (copy)
 		if not Frame then return end
-		local function updateSafeAreaSize() --[[ Line: 19 ]]
+		local function updateSafeAreaSize()
 			-- upvalues: UserInputService (upval), UseBindingResult2 (upval), GuiService (upval), Frame (upval), UseBindingResult (upval)
 			if not UserInputService.OnScreenKeyboardVisible then
 				UseBindingResult2(UDim2.fromScale(1, 1))
@@ -29,7 +29,7 @@ return function(Frame: Frame) --[[ Line: 11 | Named "useKeyboardAwareSize" ]]
 		local Connection1 = UserInputService:GetPropertyChangedSignal("OnScreenKeyboardPosition"):Connect(updateSafeAreaSize)
 		local Connection2 = Frame:GetPropertyChangedSignal("AbsoluteSize"):Connect(updateSafeAreaSize)
 		
-		return function() --[[ Line: 48 ]]
+		return function()
 			-- upvalues: Connection (copy), Connection1 (copy), Connection2 (copy)
 			Connection:Disconnect()
 			Connection1:Disconnect()

@@ -23,7 +23,7 @@ local config1 = {
 	}
 }
 
-return function(p1, p2, p3) --[[ Line: 78 | Named "useInternalNoticeVariantsProps" ]]
+return function(p1, p2, p3)
 	-- upvalues: ComposeStyleVariantModule (copy), config (copy), config1 (copy)
 	local Link = { tag = if p3 then "text-truncate-end" else "text-wrap" }
 	local Content = { tag = p1.leading.gap }

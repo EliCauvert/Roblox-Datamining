@@ -3,7 +3,7 @@ local GetEngineFeatureEngineSplitHumanoidRigDescriptionInUploadModule = require(
 local GetFFlagUGCValidationStripAccessoryHandleAttributesModule = require(Parent.flags.getFFlagUGCValidationStripAccessoryHandleAttributes)
 local SplitHumanoidRigDescriptionForUploadModule = require(Parent.util.SplitHumanoidRigDescriptionForUpload)
 
-return function(Object) --[[ Line: 17 | Named "fixUpPreValidation" ]]
+return function(Object)
 	-- upvalues: GetEngineFeatureEngineSplitHumanoidRigDescriptionInUploadModule (copy), SplitHumanoidRigDescriptionForUploadModule (copy), GetFFlagUGCValidationStripAccessoryHandleAttributesModule (copy)
 	local ObjectClone = Object:Clone()
 	

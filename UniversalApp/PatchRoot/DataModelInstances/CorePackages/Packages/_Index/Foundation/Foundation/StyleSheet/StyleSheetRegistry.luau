@@ -30,7 +30,7 @@ local t = {}
 local t1 = {}
 local Flag = false
 
-local function createStyleSheet(ColorMode, Device, Scale, TokenOverrides, ThemeName) --[[ Line: 71 ]]
+local function createStyleSheet(ColorMode, Device, Scale, TokenOverrides, ThemeName)
 	-- upvalues: DeviceModule (copy), ThemeNameModule (copy), FoundationStyleSheets (copy), GetOverrideAttributesModule (copy), GetGeneratedRulesModule (copy)
 	local Device1 = Device or DeviceModule.Desktop
 	local Scale1 = Scale or 1
@@ -55,7 +55,7 @@ local function createStyleSheet(ColorMode, Device, Scale, TokenOverrides, ThemeN
 	}
 end
 
-local function createStyleRule(Rule, Tag) --[[ Line: 102 ]]
+local function createStyleRule(Rule, Tag)
 	-- upvalues: FlagsModule (copy)
 	local Text = "." .. Tag
 	local Text1: string = if Rule.modifier == nil then "" else ":" .. Rule.modifier
@@ -80,7 +80,7 @@ local function createStyleRule(Rule, Tag) --[[ Line: 102 ]]
 	return StyleRule
 end
 
-local function applyAttributes(StyleSheet, Attributes) --[[ Line: 130 ]]
+local function applyAttributes(StyleSheet, Attributes)
 	-- upvalues: FlagsModule (copy), ScaleValueModule (copy)
 	if not Attributes then return end
 	for _, attribute in Attributes do
@@ -93,7 +93,7 @@ local function applyAttributes(StyleSheet, Attributes) --[[ Line: 130 ]]
 	end
 end
 
-local function addRegisteredStyleSheetTags(StyleSheet, List) --[[ Line: 148 ]]
+local function addRegisteredStyleSheetTags(StyleSheet, List)
 	-- upvalues: FlagsModule (copy), createStyleRule (copy), applyAttributes (copy)
 	for _, value in List do
 		if not StyleSheet.tags[value] then
@@ -115,7 +115,7 @@ local function addRegisteredStyleSheetTags(StyleSheet, List) --[[ Line: 148 ]]
 	end
 end
 
-local function resolveStyleSheet(ColorMode, p1, p2, TokenOverrides, p3) --[[ Line: 188 ]]
+local function resolveStyleSheet(ColorMode, p1, p2, TokenOverrides, p3)
 	-- upvalues: DeviceModule (copy), ThemeNameModule (copy), t (copy), t1 (copy), createStyleSheet (copy)
 	local P12 = p1 or DeviceModule.Desktop
 	local P13 = p2 or 1
@@ -133,7 +133,7 @@ local function resolveStyleSheet(ColorMode, p1, p2, TokenOverrides, p3) --[[ Lin
 	return StyleSheet1.instance
 end
 
-local function _(Key) --[[ Line: 233 | Named "destroyStyleSheet" ]]
+local function _(Key)
 	-- upvalues: t (copy)
 	local Entry = t[Key]
 	
@@ -145,7 +145,7 @@ local function _(Key) --[[ Line: 233 | Named "destroyStyleSheet" ]]
 	end
 end
 
-local function flushPendingCleanup() --[[ Line: 242 ]]
+local function flushPendingCleanup()
 	-- upvalues: Flag (ref), t1 (copy), t (copy)
 	Flag = false
 	
@@ -160,7 +160,7 @@ local function flushPendingCleanup() --[[ Line: 242 ]]
 	end
 end
 
-local _ = function(Key) --[[ Line: 250 | Named "scheduleCleanup" ]]
+local _ = function(Key)
 	-- upvalues: t1 (copy), Flag (ref), flushPendingCleanup (copy)
 	t1[Key] = true
 	
@@ -174,7 +174,7 @@ end
 
 return {
 	resolveStyleSheet = resolveStyleSheet,
-	getStyleSheet = function(ColorMode, p4, p5, TokenOverrides, p6) --[[ Line: 294 ]]
+	getStyleSheet = function(ColorMode, p4, p5, TokenOverrides, p6)
 		-- upvalues: resolveStyleSheet (copy), t (copy), t1 (copy)
 		local ResolveStyleSheetResult = resolveStyleSheet(ColorMode, p4, p5, TokenOverrides, p6)
 		local Entry = t[ResolveStyleSheetResult]
@@ -188,7 +188,7 @@ return {
 			return ResolveStyleSheetResult
 		end
 	end,
-	addStyleTags = function(p4, p5) --[[ Line: 215 ]]
+	addStyleTags = function(p4, p5)
 		-- upvalues: t (copy), addRegisteredStyleSheetTags (copy)
 		local Entry = t[p4]
 		
@@ -197,7 +197,7 @@ return {
 		end
 		addRegisteredStyleSheetTags(Entry, p5)
 	end,
-	acquireStyleSheet = function(Key) --[[ Line: 259 ]]
+	acquireStyleSheet = function(Key)
 		-- upvalues: t (copy), t1 (copy)
 		local Entry = t[Key]
 		
@@ -208,7 +208,7 @@ return {
 			return
 		end
 	end,
-	releaseStyleSheet = function(Key) --[[ Line: 269 ]]
+	releaseStyleSheet = function(Key)
 		-- upvalues: t (copy), t1 (copy), Flag (ref), flushPendingCleanup (copy)
 		local Entry = t[Key]
 		

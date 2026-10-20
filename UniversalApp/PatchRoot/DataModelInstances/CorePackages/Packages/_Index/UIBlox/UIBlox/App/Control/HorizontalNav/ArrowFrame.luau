@@ -27,21 +27,21 @@ ArrowFrame.validateProps = TModule.strictInterface({
 })
 ArrowFrame.defaultProps = { ZIndex = 1, isVisibleRight = true, isVisibleLeft = true }
 
-function ArrowFrame.init(p1) --[[ Line: 52 ]]
+function ArrowFrame.init(p1)
 	p1.state = { isHovered = false }
 	
-	function p1.onMouseEnter() --[[ Line: 57 ]]
+	function p1.onMouseEnter()
 		-- upvalues: p1 (copy)
 		p1:setState({ isHovered = true })
 	end
 	
-	function p1.onMouseLeave() --[[ Line: 63 ]]
+	function p1.onMouseLeave()
 		-- upvalues: p1 (copy)
 		p1:setState({ isHovered = false })
 	end
 end
 
-function ArrowFrame.render(p1) --[[ Line: 70 ]]
+function ArrowFrame.render(p1)
 	-- upvalues: RoactModule (copy), ArrowNavModule (copy), IconsActionsCycleLeft (copy), NavigationDirectionModule (copy), IconsActionsCycleRight (copy)
 	local IsVisibleLeft = p1.props.isVisibleLeft
 	local IsVisibleRight = p1.props.isVisibleRight

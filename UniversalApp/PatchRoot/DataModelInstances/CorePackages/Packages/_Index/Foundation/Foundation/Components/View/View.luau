@@ -18,13 +18,13 @@ local config = {
 }
 local Flag = false
 
-return ReactModule.memo(ReactModule.forwardRef(function(p1, Ref) --[[ Line: 45 | Named "View" ]]
+return ReactModule.memo(ReactModule.forwardRef(function(p1, Ref)
 	-- upvalues: WithDefaultsModule (copy), config (copy), UseDefaultTagsModule (copy), UseStyleTagsModule (copy), FlagsModule (copy), ReactModule (copy), Flag (ref), LoggerModule (copy), WithGuiObjectPropsModule (copy), InteractableModule (copy), GuiObjectChildrenModule (copy)
 	local WithDefaultsModuleResult = WithDefaultsModule(p1, config)
 	local UseStyleTagsModuleResult = UseStyleTagsModule((UseDefaultTagsModule(WithDefaultsModuleResult.tag, if WithDefaultsModuleResult.backgroundStyle == nil then "gui-object-defaults" else "gui-object-defaults x-default-transparency")))
 	local HasOnStateChanged: boolean = WithDefaultsModuleResult.onStateChanged ~= nil or WithDefaultsModuleResult.onActivated ~= nil or WithDefaultsModuleResult.onSecondaryActivated ~= nil
 	local IsTable = nil
-	IsTable = if FlagsModule.FoundationViewMemoizationChanges then WithDefaultsModuleResult.GroupTransparency ~= nil and (type(WithDefaultsModuleResult.GroupTransparency) == "table" or WithDefaultsModuleResult.GroupTransparency > 0) else ReactModule.useMemo(function(): boolean --[[ Line: 64 ]]
+	IsTable = if FlagsModule.FoundationViewMemoizationChanges then WithDefaultsModuleResult.GroupTransparency ~= nil and (type(WithDefaultsModuleResult.GroupTransparency) == "table" or WithDefaultsModuleResult.GroupTransparency > 0) else ReactModule.useMemo(function(): boolean
 		-- upvalues: WithDefaultsModuleResult (copy)
 		return WithDefaultsModuleResult.GroupTransparency ~= nil and (type(WithDefaultsModuleResult.GroupTransparency) == "table" or WithDefaultsModuleResult.GroupTransparency > 0)
 	end, { WithDefaultsModuleResult.GroupTransparency })
@@ -38,7 +38,7 @@ return ReactModule.memo(ReactModule.forwardRef(function(p1, Ref) --[[ Line: 45 |
 			LoggerModule:warning("Some state changes are not supported with GroupTransparency")
 		end
 	else
-		CanvasGroup = ReactModule.useMemo(function(): string --[[ Line: 91 ]]
+		CanvasGroup = ReactModule.useMemo(function(): string
 			-- upvalues: IsTable (ref), HasOnStateChanged (copy), WithDefaultsModuleResult (copy), LoggerModule (upval)
 			if not IsTable then
 				return if HasOnStateChanged then "ImageButton" else "Frame"

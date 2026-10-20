@@ -35,12 +35,12 @@ local config1 = {
 	[BadgeVariantModule.Neutral] = if FlagsModule.FoundationBadgeBetaUpdate then BadgeVariantModule.Standard else nil
 }
 
-return ReactModule.memo(ReactModule.forwardRef(function(p1, Ref) --[[ Line: 72 | Named "Badge" ]]
+return ReactModule.memo(ReactModule.forwardRef(function(p1, Ref)
 	-- upvalues: WithDefaultsModule (copy), config (copy), config1 (copy), UseScaledValueModule (copy), UseTokensModule (copy), ReactModule (copy), IconPositionModule (copy), UseBadgeVariantsModule (copy), FlagsModule (copy), IconSizeModule (copy), UseIconSizeModule (copy), IsBuilderOrMigratedIconFunction (copy), IconModule (copy), IsMigratedFunction (copy), Uiblox (copy), IconVariant (copy), GetIconScaleModule (copy), ViewModule (copy), ImageModule (copy), WithCommonPropsModule (copy), TextModule (copy)
 	local WithDefaultsModuleResult = WithDefaultsModule(p1, config)
 	local Entry = config1[WithDefaultsModuleResult.variant] or WithDefaultsModuleResult.variant
 	local UseScaledValueModuleResult = UseScaledValueModule(200)
-	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 79 ]]
+	local UseMemoResult = ReactModule.useMemo(function()
 		-- upvalues: WithDefaultsModuleResult (copy), IconPositionModule (upval)
 		return if typeof(WithDefaultsModuleResult.icon) == "string" then {
 			name = WithDefaultsModuleResult.icon,

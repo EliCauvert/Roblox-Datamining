@@ -25,7 +25,7 @@ return {
 		ValidationEnumsModule.SharedDataMember.consumerConfig
 	},
 	expectedFailures = {},
-	run = function(p1, p2) --[[ Line: 43 ]]
+	run = function(p1, p2)
 		-- upvalues: GetFFlagUGCValidationAllowFullVaasModule (copy), ValidationEnumsModule (copy), config (copy), config1 (copy), CreateEditableInstancesForContextModule (copy), ErrorSourceStringsModule (copy), UGCValidationService (copy), WrapTargetCageUVReferenceValuesModule (copy), ConstantsModule (copy), GetFFlagUGCValidateTransitionMakeupBoundsModule (copy), _Vector2 (copy), _Vector2_1 (copy)
 		local RootInstance = p2.rootInstance
 		local WrapTextureTransfer = RootInstance:FindFirstChildOfClass("WrapTextureTransfer")
@@ -44,7 +44,7 @@ return {
 		
 		if EditableMeshEditableInstanceInfo and EditableMeshEditableInstanceInfo2 and EditableMeshEditableInstanceInfo2.instance then
 			local EditableMeshEditableInstanceInfoInstance = EditableMeshEditableInstanceInfo2.instance
-			local Success, Result = pcall(function() --[[ Line: 98 ]]
+			local Success, Result = pcall(function()
 				-- upvalues: UGCValidationService (upval), WrapTargetCageUVReferenceValuesModule (upval), EditableMeshEditableInstanceInfoInstance (copy)
 				return UGCValidationService:ValidateEditableMeshUVValuesInReference(WrapTargetCageUVReferenceValuesModule.Head, EditableMeshEditableInstanceInfoInstance)
 			end)

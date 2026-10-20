@@ -15,7 +15,7 @@ local GetFontFromFontStyleModule = require(Parent2.Core.Text.GetFontFromFontStyl
 local ImagesModule = require(Parent1.ImageSet.Images)
 local Label = require(Parent2.Core.ImageSet.ImageSetComponent).Label
 
-return function(Frame: Frame) --[[ Line: 44 | Named "KeyLabel" ]]
+return function(Frame: Frame)
 	-- upvalues: UseStyleModule (copy), ConstantsModule (copy), UtilitiesModule (copy), ReactModule (copy), ImagesModule (copy), Label (copy), LuauPolyfillModule (copy), FoundationFontFaceMigration (copy), NormalizeFontFaceFunction (copy), GetFontFromFontStyleModule (copy)
 	local UseStyleModuleResult = UseStyleModule()
 	local ThemeEntry = UseStyleModuleResult.Theme[Frame.iconThemeKey or ConstantsModule.DEFAULT_ICON_THEME]

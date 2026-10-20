@@ -8,7 +8,7 @@ local GetFIntUGCValidateMaxHSRDataLenModule = require(Parent.flags.getFIntUGCVal
 local GetEngineFeatureEngineUGCValidatePropertiesSensibleModule = require(Parent.flags.getEngineFeatureEngineUGCValidatePropertiesSensible)
 local Config = nil
 
-local function _() --[[ Line: 23 | Named "createPropertyLengthRestrictions" ]]
+local function _()
 	-- upvalues: Config (ref), GetFIntUGCValidateMaxHSRDataLenModule (copy)
 	if not Config then
 		Config = {
@@ -19,7 +19,7 @@ local function _() --[[ Line: 23 | Named "createPropertyLengthRestrictions" ]]
 	end
 end
 
-local function validateIndividual(Object) --[[ Line: 37 ]]
+local function validateIndividual(Object)
 	-- upvalues: UGCValidationService (copy), Config (ref)
 	local ValidatePropertiesSensibleResult, ValidatePropertiesSensibleResult2 = UGCValidationService:ValidatePropertiesSensible(Object, Config[Object.ClassName])
 	
@@ -33,11 +33,11 @@ local function validateIndividual(Object) --[[ Line: 37 ]]
 end
 
 return {
-	resetPropertyLengthRestrictions = function() --[[ Line: 33 ]]
+	resetPropertyLengthRestrictions = function()
 		-- upvalues: Config (ref)
 		Config = nil
 	end,
-	validate = function(Object, p1) --[[ Line: 58 ]]
+	validate = function(Object, p1)
 		-- upvalues: GetEngineFeatureEngineUGCValidatePropertiesSensibleModule (copy), Config (ref), GetFIntUGCValidateMaxHSRDataLenModule (copy), FailureReasonsAccumulatorModule (copy), validateIndividual (copy), AnalyticsModule (copy)
 		if not GetEngineFeatureEngineUGCValidatePropertiesSensibleModule() then
 			return true

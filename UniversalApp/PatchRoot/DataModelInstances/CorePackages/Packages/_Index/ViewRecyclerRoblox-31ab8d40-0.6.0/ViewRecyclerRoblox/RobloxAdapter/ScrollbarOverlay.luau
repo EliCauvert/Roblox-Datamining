@@ -1,11 +1,11 @@
 ﻿local ViewRecyclerModule = require(script:FindFirstAncestor("ViewRecyclerRoblox").Parent.ViewRecycler)
 
 return {
-	connect = function(Object, p1, X) --[[ Line: 6 ]]
+	connect = function(Object, p1, X)
 		-- upvalues: ViewRecyclerModule (copy)
 		local Flag = false
 		
-		local function synchronize() --[[ Line: 9 ]]
+		local function synchronize()
 			-- upvalues: Flag (ref), Object (copy), p1 (copy), X (copy), ViewRecyclerModule (upval)
 			if not Flag then
 				local ScrollBarThickness = Object.ScrollBarThickness
@@ -20,7 +20,7 @@ return {
 		local Connection = Object:GetPropertyChangedSignal("ScrollBarThickness"):Connect(synchronize)
 		local Connection1 = Object:GetPropertyChangedSignal("VerticalScrollBarPosition"):Connect(synchronize)
 		
-		return function() --[[ Line: 28 ]]
+		return function()
 			-- upvalues: Flag (ref), Connection (copy), Connection1 (copy)
 			if not Flag then
 				Flag = true

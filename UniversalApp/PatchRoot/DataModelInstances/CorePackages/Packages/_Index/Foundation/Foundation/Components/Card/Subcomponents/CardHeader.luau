@@ -11,7 +11,7 @@ local GetSharedVariantsModule = require(Foundation.Components.Button.getSharedVa
 local _ = require(script.Parent.Parent.useCardVariants)
 local UseTokensModule = require(Foundation.Providers.Style.useTokens)
 
-return function(p1) --[[ Line: 29 | Named "CardHeader" ]]
+return function(p1)
 	-- upvalues: UseTokensModule (copy), ReactModule (copy), ViewModule (copy), TextModule (copy), IconModule (copy), GetSharedVariantsModule (copy), InputSizeModule (copy)
 	local VariantProps = p1.variantProps
 	local Gap = VariantProps.titleRow.gap

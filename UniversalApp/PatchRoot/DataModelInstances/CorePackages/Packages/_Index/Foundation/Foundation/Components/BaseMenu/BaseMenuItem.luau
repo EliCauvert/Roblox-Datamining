@@ -26,11 +26,11 @@ local UseBaseMenuItemVariantsModule = require(script.Parent.useBaseMenuItemVaria
 local UseMenuItemHoverModule = require(script.Parent.useMenuItemHover)
 local config = { isChecked = false }
 
-local function _(IconName) --[[ Line: 68 | Named "resolveAccessory" ]]
+local function _(IconName)
 	return if IconName == nil then nil elseif type(IconName) == "string" then { iconName = IconName } else IconName
 end
 
-local InputSink = (function() --[[ Line: 81 | Named "getInputSinkAll" ]]
+local InputSink = (function()
 	-- upvalues: FlagsModule (copy)
 	if not FlagsModule.FoundationGuiObjectInputSinkProperty then
 		return nil
@@ -38,7 +38,7 @@ local InputSink = (function() --[[ Line: 81 | Named "getInputSinkAll" ]]
 	local Success, Result = pcall(game.GetEngineFeature, game, "GuiObjectInputSink")
 	
 	if Success and Result then
-		local Success1, Result1 = pcall(function() --[[ Line: 91 ]]
+		local Success1, Result1 = pcall(function()
 			return Enum.InputSink.All
 		end)
 		
@@ -48,14 +48,14 @@ local InputSink = (function() --[[ Line: 81 | Named "getInputSinkAll" ]]
 	end
 end)()
 
-local function getContainerPadding(Container, IsIsChecked) --[[ Line: 100 ]]
+local function getContainerPadding(Container, IsIsChecked)
 	return {
 		left = UDim.new(0, (if IsIsChecked then Container.paddingLeftWithCheck else Container.paddingLeftWithoutCheck) or 0),
 		right = UDim.new(0, Container.paddingRight or 0)
 	}
 end
 
-return ReactModule.memo(ReactModule.forwardRef(function(p1, p2) --[[ Line: 109 | Named "BaseMenuItem" ]]
+return ReactModule.memo(ReactModule.forwardRef(function(p1, p2)
 	-- upvalues: WithDefaultsModule (copy), config (copy), ReactModule (copy), BaseMenuContextModule (copy), UseTokensModule (copy), FlagsModule (copy), UseBaseMenuItemVariantsModule (copy), UseMenuItemHoverModule (copy), LoggerModule (copy), UseBindableModule (copy), UseComposedRefFunction (copy), getContainerPadding (copy), ViewModule (copy), IconModule (copy), BuilderIconsModule (copy), BaseMenuItemAccessoryModule (copy), TextModule (copy), WithCommonPropsModule (copy), ConstantsModule (copy), BaseMenuScrollContainerModule (copy), InputSink (copy), PopoverModule (copy), PopoverSideModule (copy), PopoverAlignModule (copy), RadiusModule (copy)
 	local WithDefaultsModuleResult = WithDefaultsModule(p1, config)
 	local UseContextResult = ReactModule.useContext(BaseMenuContextModule)
@@ -75,12 +75,12 @@ return ReactModule.memo(ReactModule.forwardRef(function(p1, p2) --[[ Line: 109 |
 	local UseRefResult = ReactModule.useRef(nil)
 	local NoHasChildren: boolean = WithDefaultsModuleResult.isChecked == true and not HasChildren
 	local UseStateResult, UseStateResult2 = ReactModule.useState(false)
-	local UseResult = ReactModule.useCallback(function() --[[ Line: 131 ]]
+	local UseResult = ReactModule.useCallback(function()
 		-- upvalues: UseStateResult2 (copy)
 		UseStateResult2(true)
 	end, {})
 	local HasConfig = Config ~= nil
-	ReactModule.useEffect(function() --[[ Line: 136 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: HasConfig (copy), UseContextResult (copy)
 		if HasConfig and UseContextResult.setHasLeading then
 			UseContextResult.setHasLeading()
@@ -95,7 +95,7 @@ return ReactModule.memo(ReactModule.forwardRef(function(p1, p2) --[[ Line: 109 |
 		hoverOpenAtDepth = UseContextResult.hoverOpenAtDepth,
 		hoverCloseAtDepth = UseContextResult.hoverCloseAtDepth
 	})
-	local UseResult1 = ReactModule.useCallback(function() --[[ Line: 153 ]]
+	local UseResult1 = ReactModule.useCallback(function()
 		-- upvalues: HasChildren (copy), WithDefaultsModuleResult (copy), UseContextResult (copy), IsHoverOpenPathEntryMatch (copy), Depth (copy), LoggerModule (upval)
 		if not HasChildren then
 			if UseContextResult.hoverReset then
@@ -123,7 +123,7 @@ return ReactModule.memo(ReactModule.forwardRef(function(p1, p2) --[[ Line: 109 |
 		UseContextResult.onActivated, UseContextResult.onNestedLeafActivated,
 		UseContextResult.hoverOpenAtDepth, UseContextResult.hoverReset
 	})
-	local UseResult2 = ReactModule.useCallback(function() --[[ Line: 194 ]]
+	local UseResult2 = ReactModule.useCallback(function()
 		-- upvalues: UseContextResult (copy)
 		if UseContextResult.hoverReset then
 			UseContextResult.hoverReset()
@@ -135,7 +135,7 @@ return ReactModule.memo(ReactModule.forwardRef(function(p1, p2) --[[ Line: 109 |
 		isDisabled = WithDefaultsModuleResult.isDisabled,
 		onActivated = UseResult1,
 		selection = { Selectable = not WithDefaultsModuleResult.isDisabled },
-		cursor = ReactModule.useMemo(function() --[[ Line: 202 ]]
+		cursor = ReactModule.useMemo(function()
 			-- upvalues: UseTokensModuleResult (copy)
 			return {
 				radius = UDim.new(0, UseTokensModuleResult.Radius.Small),
@@ -209,7 +209,7 @@ return ReactModule.memo(ReactModule.forwardRef(function(p1, p2) --[[ Line: 109 |
 			})
 		})
 	})
-	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 320 ]]
+	local UseMemoResult = ReactModule.useMemo(function()
 		-- upvalues: UseContextResult (copy), Size (copy), UseStateResult (copy), UseResult (copy), Depth (copy)
 		return {
 			onActivated = UseContextResult.onActivated,

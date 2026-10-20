@@ -1,7 +1,7 @@
 ﻿local _ = require(script:FindFirstAncestor("Utils").Parent.Types)
 local NodeTypeConfigModule = require(script.Parent.NodeTypeConfig)
 
-return function(p1) --[[ Line: 7 | Named "getNodeTypeConfig" ]]
+return function(p1)
 	-- upvalues: NodeTypeConfigModule (copy)
 	local NodeTypeConfigModuleEntry = NodeTypeConfigModule[p1.type]
 	

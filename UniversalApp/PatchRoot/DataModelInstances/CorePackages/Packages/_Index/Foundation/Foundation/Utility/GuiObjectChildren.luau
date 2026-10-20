@@ -6,7 +6,7 @@ local PaddingModule = require(Foundation.Components.Padding)
 local GetTestIdTagModule = require(Foundation.Utility.getTestIdTag)
 local _ = require(Foundation.Components.Types)
 
-return function(p1) --[[ Line: 16 | Named "GuiObjectChildren" ]]
+return function(p1)
 	-- upvalues: ReactModule (copy), AspectRatioModule (copy), CornerRadiusModule (copy), GetTestIdTagModule (copy), PaddingModule (copy)
 	local TestId = p1.testId
 	

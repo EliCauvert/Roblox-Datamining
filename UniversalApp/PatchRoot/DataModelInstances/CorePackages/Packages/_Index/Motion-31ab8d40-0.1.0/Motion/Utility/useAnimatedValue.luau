@@ -6,14 +6,14 @@ local ReactOtterModule = require(Parent2.ReactOtter)
 local Preset = require(Parent.TimingConfigs).presets[require(Parent1.Enums.TransitionPreset).Default]
 local _ = require(Parent1.Types)
 
-local function _(p1, p2) --[[ Line: 54 | Named "validateNumber" ]]
+local function _(p1, p2)
 	return if type(p1) == "number" then p1 else p2 or 0
 end
 
-return function(Vector) --[[ Line: 63 | Named "useAnimatedValue" ]]
+return function(Vector)
 	-- upvalues: ReactModule (copy), ReactOtterModule (copy), Preset (copy)
 	local UseRefResult = ReactModule.useRef(nil)
-	local UseResult = ReactModule.useCallback(function(...) --[[ Line: 66 ]]
+	local UseResult = ReactModule.useCallback(function(...)
 		-- upvalues: UseRefResult (copy)
 		if UseRefResult.current ~= nil then
 			if type(UseRefResult.current) == "function" then
@@ -42,12 +42,12 @@ return function(Vector) --[[ Line: 63 | Named "useAnimatedValue" ]]
 			Transparency = if type(Transparency) == "number" then Transparency else 0
 		}, UseResult)
 		
-		return UseAnimatedBindingResult:map(function(p1) --[[ Line: 85 ]]
+		return UseAnimatedBindingResult:map(function(p1)
 			return {
 				Color3 = Color3.new(p1.r, p1.g, p1.b),
 				Transparency = p1.Transparency
 			}
-		end), function(p1, p2) --[[ Line: 92 ]]
+		end), function(p1, p2)
 			-- upvalues: UseRefResult (copy), Preset (upval), UseAnimatedBindingResult2 (copy), ReactOtterModule (upval)
 			if typeof(p1) == "table" and p1.Color3 and p1.Transparency ~= nil then
 				UseRefResult.current = p2 and p2.onComplete or nil
@@ -83,9 +83,9 @@ return function(Vector) --[[ Line: 63 | Named "useAnimatedValue" ]]
 			offset = if type(Offset) == "number" then Offset else 0
 		}, UseResult)
 		
-		return UseAnimatedBindingResult1:map(function(p1): UDim --[[ Line: 125 ]]
+		return UseAnimatedBindingResult1:map(function(p1): UDim
 			return UDim.new(p1.scale, p1.offset)
-		end), function(p1, p2) --[[ Line: 129 ]]
+		end), function(p1, p2)
 			-- upvalues: UseRefResult (copy), Preset (upval), UseAnimatedBindingResult2_1 (copy), ReactOtterModule (upval)
 			if not p1 then return end
 			if typeof(p1) == "UDim" then
@@ -122,9 +122,9 @@ return function(Vector) --[[ Line: 63 | Named "useAnimatedValue" ]]
 			yOffset = if type(Offset2) == "number" then Offset2 else 0
 		}, UseResult)
 		
-		return UseAnimatedBindingResult3:map(function(p1): UDim2 --[[ Line: 166 ]]
+		return UseAnimatedBindingResult3:map(function(p1): UDim2
 			return UDim2.new(p1.xScale, p1.xOffset, p1.yScale, p1.yOffset)
-		end), function(Vector, p1) --[[ Line: 170 ]]
+		end), function(Vector, p1)
 			-- upvalues: UseRefResult (copy), Preset (upval), UseAnimatedBindingResult2_2 (copy), ReactOtterModule (upval)
 			if not Vector then return end
 			if typeof(Vector) == "UDim2" then
@@ -158,9 +158,9 @@ return function(Vector) --[[ Line: 63 | Named "useAnimatedValue" ]]
 		local Y = Vector.Y
 		local UseAnimatedBindingResult5, UseAnimatedBindingResult2_4 = ReactOtterModule.useAnimatedBinding({ x = X1, y = if type(Y) == "number" then Y else 0 }, UseResult)
 		
-		return UseAnimatedBindingResult5:map(function(Vector): Vector2 --[[ Line: 205 ]]
+		return UseAnimatedBindingResult5:map(function(Vector): Vector2
 			return Vector2.new(Vector.x, Vector.y)
-		end), function(Vector, p1) --[[ Line: 209 ]]
+		end), function(Vector, p1)
 			-- upvalues: UseRefResult (copy), Preset (upval), UseAnimatedBindingResult2_4 (copy), ReactOtterModule (upval)
 			if not Vector then return end
 			if typeof(Vector) == "Vector2" then
@@ -190,9 +190,9 @@ return function(Vector) --[[ Line: 63 | Named "useAnimatedValue" ]]
 		local B = Vector.B
 		local UseAnimatedBindingResult6, UseAnimatedBindingResult2_5 = ReactOtterModule.useAnimatedBinding({ r = R2, g = G2, b = if type(B) == "number" then B else 0 }, UseResult)
 		
-		return UseAnimatedBindingResult6:map(function(p1): Color3 --[[ Line: 244 ]]
+		return UseAnimatedBindingResult6:map(function(p1): Color3
 			return Color3.new(p1.r, p1.g, p1.b)
-		end), function(p1, p2) --[[ Line: 248 ]]
+		end), function(p1, p2)
 			-- upvalues: UseRefResult (copy), Preset (upval), UseAnimatedBindingResult2_5 (copy), ReactOtterModule (upval)
 			if not p1 then return end
 			if typeof(p1) == "Color3" then
@@ -220,9 +220,9 @@ return function(Vector) --[[ Line: 63 | Named "useAnimatedValue" ]]
 	elseif typeof(Vector) == "number" then
 		local UseAnimatedBindingResult4, UseAnimatedBindingResult2_3 = ReactOtterModule.useAnimatedBinding(if type(Vector) == "number" then Vector else 0, UseResult)
 		
-		return UseAnimatedBindingResult4:map(function(p1) --[[ Line: 280 ]]
+		return UseAnimatedBindingResult4:map(function(p1)
 			return p1
-		end), function(p1, p2) --[[ Line: 284 ]]
+		end), function(p1, p2)
 			-- upvalues: UseRefResult (copy), Preset (upval), UseAnimatedBindingResult2_3 (copy), ReactOtterModule (upval)
 			if typeof(p1) == "number" then
 				UseRefResult.current = p2 and p2.onComplete or nil
@@ -237,6 +237,6 @@ return function(Vector) --[[ Line: 63 | Named "useAnimatedValue" ]]
 	else
 		warn("Unsupported type for animated value:", (typeof(Vector)))
 		
-		return ReactModule.createBinding(Vector), function() --[[ Line: 304 ]] end
+		return ReactModule.createBinding(Vector), function() end
 	end
 end

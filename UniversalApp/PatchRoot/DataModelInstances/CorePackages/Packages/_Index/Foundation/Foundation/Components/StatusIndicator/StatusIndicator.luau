@@ -22,13 +22,13 @@ local config = {
 	size = require(Foundation.Enums.StatusIndicatorSize).Small
 }
 
-return ReactModule.memo(ReactModule.forwardRef(function(p1, Ref) --[[ Line: 67 | Named "StatusIndicator" ]]
+return ReactModule.memo(ReactModule.forwardRef(function(p1, Ref)
 	-- upvalues: WithDefaultsModule (copy), config (copy), StatusIndicatorShapeModule (copy), IsDEV (copy), ValidNumericVariantsModule (copy), DashModule (copy), UseTokensModule (copy), UseStatusIndicatorVariantsModule (copy), ReactModule (copy), ViewModule (copy), WithCommonPropsModule (copy), TextModule (copy), ReactIsModule (copy), FlagsModule (copy)
 	local WithDefaultsModuleResult = WithDefaultsModule(p1, config)
 	local Circle = if WithDefaultsModuleResult.value then StatusIndicatorShapeModule.Circle else WithDefaultsModuleResult.shape
 	
 	if IsDEV and WithDefaultsModuleResult.value ~= nil then
-		assert(ValidNumericVariantsModule[WithDefaultsModuleResult.variant], `{WithDefaultsModuleResult.variant} is not a supported numeric variant. The following are valid numeric variants: {table.concat(DashModule.filter(DashModule.keys(ValidNumericVariantsModule), function(p2, _): boolean --[[ Line: 75 ]]
+		assert(ValidNumericVariantsModule[WithDefaultsModuleResult.variant], `{WithDefaultsModuleResult.variant} is not a supported numeric variant. The following are valid numeric variants: {table.concat(DashModule.filter(DashModule.keys(ValidNumericVariantsModule), function(p2, _): boolean
 			-- upvalues: ValidNumericVariantsModule (upval)
 			return ValidNumericVariantsModule[p2] == true
 		end), ",")}`)
@@ -36,7 +36,7 @@ return ReactModule.memo(ReactModule.forwardRef(function(p1, Ref) --[[ Line: 67 |
 	local UseTokensModuleResult = UseTokensModule()
 	local HasValue = WithDefaultsModuleResult.value ~= nil
 	local UseStatusIndicatorVariantsModuleResult = UseStatusIndicatorVariantsModule(UseTokensModuleResult, WithDefaultsModuleResult.variant, HasValue, Circle, WithDefaultsModuleResult.size, WithDefaultsModuleResult.mask)
-	local UseResult = ReactModule.useCallback(function(p2): string --[[ Line: 88 ]]
+	local UseResult = ReactModule.useCallback(function(p2): string
 		-- upvalues: WithDefaultsModuleResult (copy)
 		return if WithDefaultsModuleResult.max and WithDefaultsModuleResult.max < p2 then `{WithDefaultsModuleResult.max}+` else tostring(p2)
 	end, { WithDefaultsModuleResult.max })

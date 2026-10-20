@@ -1,4 +1,4 @@
-﻿return function(Text: string, p1): string --[[ Line: 49 | Named "unindentTags" ]]
+﻿return function(Text: string, p1): string
 	local P0 = p1 or 2
 	
 	if not string.find(Text, "<.->") then

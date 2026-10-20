@@ -2,15 +2,15 @@
 local BoundsDataUtilsModule = require(Parent.util.BoundsDataUtils)
 local GetAttachmentCFrameInPartSpaceModule = require(Parent.util.getAttachmentCFrameInPartSpace)
 
-local function _(p1, p2: number) --[[ Line: 20 | Named "toWorldSpace" ]]
+local function _(p1, p2: number)
 	return p1 * (p2 / 2)
 end
 
-local _ = function(p1, p2): CFrame --[[ Line: 26 | Named "calculateLocalSpaceTransform" ]]
+local _ = function(p1, p2): CFrame
 	return CFrame.new(p1.Rotation:Inverse() * (p2.Position - p1.Position)) * (p1.Rotation:Inverse() * p2.Rotation)
 end
 
-local _ = function(p1, p2: number, p3) --[[ Line: 34 | Named "calculateAcceptableBoundsWorldSpace" ]]
+local _ = function(p1, p2: number, p3)
 	local ScaledMin = p1.min * (p2 / 2)
 	local ScaledMax = p1.max * (p2 / 2)
 	
@@ -18,7 +18,7 @@ local _ = function(p1, p2: number, p3) --[[ Line: 34 | Named "calculateAcceptabl
 end
 
 return {
-	clampAttachmentToBounds = function(p1, p2, p3, p4): CFrame --[[ Line: 47 ]]
+	clampAttachmentToBounds = function(p1, p2, p3, p4): CFrame
 		-- upvalues: GetAttachmentCFrameInPartSpaceModule (copy), BoundsDataUtilsModule (copy)
 		local P10 = p4 or 0.001
 		local ScaledCframe = p2.cframe * GetAttachmentCFrameInPartSpaceModule(p1)
@@ -49,7 +49,7 @@ return {
 		
 		return CFrame.new(Cframe.Rotation:Inverse() * (NewRotation.Position - Cframe.Position)) * (Cframe.Rotation:Inverse() * NewRotation.Rotation)
 	end,
-	calculateAcceptableBoundsLocalSpace = function(p5, p6, p7: number, p8) --[[ Line: 92 ]]
+	calculateAcceptableBoundsLocalSpace = function(p5, p6, p7: number, p8)
 		local ScaledMin = p5.min * (p7 / 2)
 		local ScaledMax = p5.max * (p7 / 2)
 		local X = (ScaledMin + ScaledMax) * 0.5 + p8

@@ -2,7 +2,7 @@
 local ReactGlobalsModule = require(Parent.ReactGlobals)
 local ReactBindingRobloxModule = require(script.Parent["ReactBinding.roblox"])
 local ReactCreateRefModule = {
-	createRef = function() --[[ Line: 27 ]]
+	createRef = function()
 		-- upvalues: ReactBindingRobloxModule (copy), ReactGlobalsModule (copy)
 		local NewReactBindingRoblox, _ = ReactBindingRobloxModule.create(nil)
 		local t = {}
@@ -11,18 +11,18 @@ local ReactCreateRefModule = {
 			NewReactBindingRoblox._source = debug.traceback("Ref created at:", 1)
 		end
 		setmetatable(t, {
-			__index = function(_, p1) --[[ Line: 45 ]]
+			__index = function(_, p1)
 				-- upvalues: NewReactBindingRoblox (copy)
 				return if p1 == "current" then NewReactBindingRoblox:getValue() else NewReactBindingRoblox[p1]
 			end,
-			__newindex = function(_, Key, p1) --[[ Line: 52 ]]
+			__newindex = function(_, Key, p1)
 				-- upvalues: ReactBindingRobloxModule (upval), NewReactBindingRoblox (copy)
 				if Key == "current" then
 					ReactBindingRobloxModule.update(NewReactBindingRoblox, p1)
 				end
 				NewReactBindingRoblox[Key] = p1
 			end,
-			__tostring = function(_): string --[[ Line: 63 ]]
+			__tostring = function(_): string
 				-- upvalues: NewReactBindingRoblox (copy)
 				return string.format("Ref(%s)", (tostring(NewReactBindingRoblox:getValue())))
 			end
@@ -32,7 +32,7 @@ local ReactCreateRefModule = {
 	end
 }
 
-local function refNewIndex(p1, Key, p2) --[[ Line: 78 ]]
+local function refNewIndex(p1, Key, p2)
 	-- upvalues: ReactBindingRobloxModule (copy)
 	local Index = getmetatable(p1).__index
 	Index[Key] = p2
@@ -42,11 +42,11 @@ local function refNewIndex(p1, Key, p2) --[[ Line: 78 ]]
 	end
 end
 
-local function refToString(p1): string --[[ Line: 90 ]]
+local function refToString(p1): string
 	return string.format("Ref(%s)", (tostring(getmetatable(p1).__index:getValue())))
 end
 
-local function createRefWithoutClosures() --[[ Line: 94 ]]
+local function createRefWithoutClosures()
 	-- upvalues: ReactGlobalsModule (copy), ReactBindingRobloxModule (copy), refNewIndex (copy), refToString (copy)
 	return (setmetatable({}, {
 		__index = ReactBindingRobloxModule.createWithoutUpdater(nil, if ReactGlobalsModule.__DEV__ then debug.traceback("Ref created at:", 1) else nil),

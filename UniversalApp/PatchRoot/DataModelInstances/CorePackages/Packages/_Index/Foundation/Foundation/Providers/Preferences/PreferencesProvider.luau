@@ -9,10 +9,10 @@ local config = {
 	preferredTextSize = Enum.PreferredTextSize.Medium
 }
 
-return function(p1) --[[ Line: 30 | Named "PreferencesProvider" ]]
+return function(p1)
 	-- upvalues: ReactModule (copy), WithDefaultsModule (copy), config (copy), PreferencesContextModule (copy)
 	return ReactModule.createElement(PreferencesContextModule.Provider, {
-		value = ReactModule.useMemo(function() --[[ Line: 32 ]]
+		value = ReactModule.useMemo(function()
 			-- upvalues: WithDefaultsModule (upval), p1 (copy), config (upval)
 			return WithDefaultsModule({
 				preferredTextSize = p1.preferredTextSize,

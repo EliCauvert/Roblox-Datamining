@@ -3,7 +3,7 @@ local SupportsTestSelectors = require(script.Parent.ReactFiberHostConfig).suppor
 local t = {}
 
 return {
-	onCommitRoot = function() --[[ Line: 512 ]]
+	onCommitRoot = function()
 		-- upvalues: SupportsTestSelectors (copy), t (copy)
 		if SupportsTestSelectors then
 			for _, value in t do

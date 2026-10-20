@@ -6,7 +6,7 @@ local FlagsModule = require(Foundation.Utility.Flags)
 local _ = require(Foundation.Utility.Plugin.StudioUri)
 local _ = require(script.Parent.Types)
 
-return function(p1) --[[ Line: 15 | Named "usePanel" ]]
+return function(p1)
 	-- upvalues: ReactModule (copy), ReactUtilsModule (copy), FlagsModule (copy)
 	local UseRefResult = ReactModule.useRef(nil)
 	local UseRefToStateResult = ReactUtilsModule.useRefToState({
@@ -24,12 +24,12 @@ return function(p1) --[[ Line: 15 | Named "usePanel" ]]
 	
 	if FlagsModule.FoundationPopoverPluginOverlayMeasurement then
 		local UseStateResult, UseStateResult2 = ReactModule.useState(false)
-		local UseResult = ReactModule.useCallback(function() --[[ Line: 54 ]]
+		local UseResult = ReactModule.useCallback(function()
 			-- upvalues: UseStateResult2 (copy), UseRefResult1 (copy)
 			UseStateResult2(true)
 			UseRefResult1.current()
 		end, {})
-		local UseAsyncResult = ReactUtilsModule.useAsync(function() --[[ Line: 59 ]]
+		local UseAsyncResult = ReactUtilsModule.useAsync(function()
 			-- upvalues: p1 (copy), UseStateResult (copy), UseRefResult2 (copy), UseRefToStateResult (copy), UseResult (copy), FlagsModule (upval), UseRefResult (copy)
 			if p1.isOpen and not UseStateResult then
 				local CurrentResult, CurrentResult2 = UseRefResult2.current(UseRefToStateResult.current.anchorUri, UseRefToStateResult.current.position, UseResult, UseRefToStateResult.current.depth, UseRefToStateResult.current.parentPopoverId, if FlagsModule.FoundationPopoverPluginFocusable then UseRefToStateResult.current.isFocusable else nil)
@@ -44,14 +44,14 @@ return function(p1) --[[ Line: 15 | Named "usePanel" ]]
 			return nil
 		end, { p1.isOpen, UseRefToStateResult, UseStateResult })
 		Value = if UseStateResult or UseAsyncResult.status ~= "ok" then nil else UseAsyncResult.value
-		ReactModule.useEffect(function() --[[ Line: 85 ]]
+		ReactModule.useEffect(function()
 			-- upvalues: p1 (copy), UseStateResult2 (copy)
 			if not p1.isOpen then
 				UseStateResult2(false)
 			end
 		end, { p1.isOpen })
 	else
-		local UseAsyncResult = ReactUtilsModule.useAsync(function() --[[ Line: 91 ]]
+		local UseAsyncResult = ReactUtilsModule.useAsync(function()
 			-- upvalues: p1 (copy), UseRefResult2 (copy), UseRefToStateResult (copy), UseRefResult1 (copy), FlagsModule (upval), UseRefResult (copy)
 			if p1.isOpen then
 				local CurrentResult, CurrentResult2 = UseRefResult2.current(UseRefToStateResult.current.anchorUri, UseRefToStateResult.current.position, UseRefResult1.current, UseRefToStateResult.current.depth, UseRefToStateResult.current.parentPopoverId, if FlagsModule.FoundationPopoverPluginFocusable then UseRefToStateResult.current.isFocusable else nil)
@@ -67,7 +67,7 @@ return function(p1) --[[ Line: 15 | Named "usePanel" ]]
 		end, { p1.isOpen, UseRefToStateResult })
 		Value = if UseAsyncResult.status == "ok" then UseAsyncResult.value else nil
 	end
-	ReactUtilsModule.useAsync(function() --[[ Line: 116 ]]
+	ReactUtilsModule.useAsync(function()
 		-- upvalues: Value (ref), p1 (copy)
 		if Value then
 			Value.updateAsync({
@@ -82,9 +82,9 @@ return function(p1) --[[ Line: 15 | Named "usePanel" ]]
 			return nil
 		end
 	end, { Value, p1.anchorUri, p1.position })
-	ReactModule.useEffect(function() --[[ Line: 129 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UseRefResult (copy)
-		return function() --[[ Line: 130 ]]
+		return function()
 			-- upvalues: UseRefResult (upval)
 			if UseRefResult.current then
 				UseRefResult.current()

@@ -1,4 +1,4 @@
-﻿return function(p1): string --[[ Line: 1 ]]
+﻿return function(p1): string
 	if p1 then
 		local Title = p1.title or p1.titleForViewer
 		

@@ -14,7 +14,7 @@ return {
 	prereqTests = {
 		ValidationEnumsModule.ValidationModule.CurveAnimDataAvailable
 	},
-	run = function(p1, p2) --[[ Line: 18 ]]
+	run = function(p1, p2)
 		-- upvalues: CurveAnimationHierarchyUtilsModule (copy), ErrorSourceStringsModule (copy)
 		local Flag = nil
 		for _, curveAnimation in p2.curveAnimations do

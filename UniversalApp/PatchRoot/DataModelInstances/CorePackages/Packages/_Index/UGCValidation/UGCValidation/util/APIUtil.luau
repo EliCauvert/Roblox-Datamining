@@ -1,7 +1,7 @@
 ﻿local HttpRbxApiService = game:GetService("HttpRbxApiService")
 local ContentProvider = game:GetService("ContentProvider")
 
-local function requestAndRetry(p1, p2: number) --[[ Line: 21 ]]
+local function requestAndRetry(p1, p2: number)
 	-- upvalues: requestAndRetry (copy)
 	if p2 == nil then
 		p2 = 0
@@ -20,7 +20,7 @@ local function requestAndRetry(p1, p2: number) --[[ Line: 21 ]]
 end
 
 return {
-	getBaseDomain = function(): string --[[ Line: 10 ]]
+	getBaseDomain = function(): string
 		-- upvalues: ContentProvider (copy)
 		local BaseUrl = ContentProvider.BaseUrl
 		
@@ -32,16 +32,16 @@ return {
 		
 		return (string.sub(BaseUrl, EndIndex1 + 1))
 	end,
-	requestAndRetryPost = function(ApiUrl, Data) --[[ Line: 39 ]]
+	requestAndRetryPost = function(ApiUrl, Data)
 		-- upvalues: requestAndRetry (copy), HttpRbxApiService (copy)
-		return requestAndRetry(function() --[[ Line: 40 ]]
+		return requestAndRetry(function()
 			-- upvalues: HttpRbxApiService (upval), ApiUrl (copy), Data (copy)
 			return HttpRbxApiService:PostAsyncFullUrl(ApiUrl, Data)
 		end)
 	end,
-	requestAndRetryGet = function(ApiUrl) --[[ Line: 45 ]]
+	requestAndRetryGet = function(ApiUrl)
 		-- upvalues: requestAndRetry (copy), HttpRbxApiService (copy)
-		return requestAndRetry(function() --[[ Line: 46 ]]
+		return requestAndRetry(function()
 			-- upvalues: HttpRbxApiService (upval), ApiUrl (copy)
 			return HttpRbxApiService:GetAsyncFullUrl(ApiUrl)
 		end)

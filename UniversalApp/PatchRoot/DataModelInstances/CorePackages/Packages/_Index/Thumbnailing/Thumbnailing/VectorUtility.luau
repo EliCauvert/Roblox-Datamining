@@ -1,10 +1,10 @@
 ﻿local VectorUtilityModule = {
-	Vector3FromXYRotPlusDistance = function(Degrees: number, Degrees1: number, Number) --[[ Line: 5 ]]
+	Vector3FromXYRotPlusDistance = function(Degrees: number, Degrees1: number, Number)
 		return CFrame.fromEulerAnglesXYZ(math.rad(Degrees), math.rad(Degrees1), 0).LookVector * Number
 	end
 }
 
-function VectorUtilityModule.Vector3FromJson(Text: string) --[[ Line: 11 ]]
+function VectorUtilityModule.Vector3FromJson(Text: string)
 	-- upvalues: VectorUtilityModule (copy)
 	local Unpacked, Unpacked2, Unpacked3 = unpack(Text:split("/"))
 	local Number: number? = tonumber(Unpacked)

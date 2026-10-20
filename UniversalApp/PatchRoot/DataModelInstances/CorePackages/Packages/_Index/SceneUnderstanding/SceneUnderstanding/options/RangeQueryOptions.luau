@@ -1,7 +1,7 @@
 ﻿local config = { maxDistance = 100, limit = 1e999 }
 
 return {
-	new = function(List) --[[ Line: 30 ]]
+	new = function(List)
 		-- upvalues: config (copy)
 		local Copy = table.clone(config)
 		

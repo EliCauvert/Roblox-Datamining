@@ -59,11 +59,11 @@ BaseKnob.defaultProps = {
 	anchorPoint = Vector2.new(0.5, 0.5)
 }
 
-function BaseKnob.init(p1) --[[ Line: 99 ]]
+function BaseKnob.init(p1)
 	-- upvalues: ControlStateModule (copy)
 	p1:setState({ controlState = ControlStateModule.Initialize })
 	
-	function p1.onStateChanged(p2, ControlState) --[[ Line: 104 ]]
+	function p1.onStateChanged(p2, ControlState)
 		-- upvalues: p1 (copy)
 		p1:setState({ controlState = ControlState })
 		
@@ -73,9 +73,9 @@ function BaseKnob.init(p1) --[[ Line: 99 ]]
 	end
 end
 
-function BaseKnob.render(p1) --[[ Line: 114 ]]
+function BaseKnob.render(p1)
 	-- upvalues: WithStyleModule (copy), ControlStateModule (copy), config1 (copy), config2 (copy), config (copy), RoactModule (copy), ImageSetComponentModule (copy), ImagesModule (copy), RoactGamepadModule (copy), InteractableModule (copy)
-	return WithStyleModule(function(p2) --[[ Line: 115 ]]
+	return WithStyleModule(function(p2)
 		-- upvalues: p1 (copy), ControlStateModule (upval), config1 (upval), config2 (upval), config (upval), RoactModule (upval), ImageSetComponentModule (upval), ImagesModule (upval), RoactGamepadModule (upval), InteractableModule (upval)
 		local Color = p1.props.colorMap[p1.state.controlState] or p1.props.colorMap[ControlStateModule.Default]
 		local IsControlStateMatch: boolean = p1.state.controlState == ControlStateModule.Selected or p1.state.controlState == ControlStateModule.SelectedPressed

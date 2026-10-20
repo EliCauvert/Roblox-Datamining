@@ -1,3 +1,3 @@
-﻿return function(...) --[[ Line: 9 | Named "identity" ]]
+﻿return function(...)
 	return ...
 end

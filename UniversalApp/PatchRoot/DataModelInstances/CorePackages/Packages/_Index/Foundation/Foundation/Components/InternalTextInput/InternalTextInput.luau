@@ -36,7 +36,7 @@ local config = {
 	size = require(Foundation.Enums.InputSize).Large,
 	variant = require(Foundation.Enums.InputVariant).Standard
 }
-local MemoResult = ReactModule.memo(ReactModule.forwardRef(function(p1, Ref) --[[ Line: 133 ]]
+local MemoResult = ReactModule.memo(ReactModule.forwardRef(function(p1, Ref)
 	-- upvalues: ReactModule (copy), FlagsModule (copy), NormalizeFontFaceModule (copy), IsPluginSecurityModule (copy), PaddingModule (copy)
 	local IsBoundsChecker = p1.isBoundsChecker
 	local IsMultiLine = p1.isMultiLine or IsBoundsChecker
@@ -75,7 +75,7 @@ local MemoResult = ReactModule.memo(ReactModule.forwardRef(function(p1, Ref) --[
 	} else nil, p1.children)
 end))
 
-return ReactModule.memo(ReactModule.forwardRef(function(p1, p2) --[[ Line: 181 | Named "InternalTextInput" ]]
+return ReactModule.memo(ReactModule.forwardRef(function(p1, p2)
 	-- upvalues: WithDefaultsModule (copy), config (copy), UseTokensModule (copy), ReactModule (copy), GetBindableValueModule (copy), UseTextInputVariantsModule (copy), UseStyleTagsModule (copy), UsePreferredInputModule (copy), GetDisabledStyleModule (copy), InputFocusBehaviorModule (copy), GetMultiLineTextHeightModule (copy), FlagsModule (copy), TruncateTextToCursorModule (copy), UseBindableModule (copy), ReactUtilsModule (copy), ViewModule (copy), WithCommonPropsModule (copy), BlendTransparenciesModule (copy), ConstantsModule (copy), RadiusModule (copy), StateLayerAffordanceModule (copy), ScrollViewModule (copy), MemoResult (copy), MapBindableModule (copy), IconModule (copy)
 	if p1.Selectable == nil then
 		p1.Selectable = true
@@ -94,7 +94,7 @@ return ReactModule.memo(ReactModule.forwardRef(function(p1, p2) --[[ Line: 181 |
 	local UseRefResult7 = ReactModule.useRef(Vector2.zero)
 	local UseStateResult, UseStateResult2 = ReactModule.useState(false)
 	local UseBindingResult, UseBindingResult2 = ReactModule.useBinding(false)
-	local UseResult = ReactModule.useCallback(function(p3) --[[ Line: 204 ]]
+	local UseResult = ReactModule.useCallback(function(p3)
 		-- upvalues: UseBindingResult2 (copy), UseStateResult2 (copy)
 		UseBindingResult2(p3)
 		UseStateResult2(p3)
@@ -112,7 +112,7 @@ return ReactModule.memo(ReactModule.forwardRef(function(p1, p2) --[[ Line: 181 |
 	local FontStyle = UseTextInputVariantsModuleResult.textBox.fontStyle
 	local FontSize = FontStyle.FontSize
 	local LineHeight = FontStyle.LineHeight
-	local UseResult1 = ReactModule.useCallback(function(SelectionStart) --[[ Line: 228 ]]
+	local UseResult1 = ReactModule.useCallback(function(SelectionStart)
 		-- upvalues: UseRefResult (copy), UseRefResult1 (copy)
 		if UseRefResult.current then
 			UseRefResult.current.SelectionStart = SelectionStart
@@ -121,7 +121,7 @@ return ReactModule.memo(ReactModule.forwardRef(function(p1, p2) --[[ Line: 181 |
 			UseRefResult1.current.SelectionStart = SelectionStart
 		end
 	end, {})
-	local UseResult2 = ReactModule.useCallback(function(CursorPosition) --[[ Line: 237 ]]
+	local UseResult2 = ReactModule.useCallback(function(CursorPosition)
 		-- upvalues: UseRefResult (copy), UseRefResult1 (copy)
 		if UseRefResult.current then
 			UseRefResult.current.CursorPosition = CursorPosition
@@ -130,7 +130,7 @@ return ReactModule.memo(ReactModule.forwardRef(function(p1, p2) --[[ Line: 181 |
 			UseRefResult1.current.CursorPosition = CursorPosition
 		end
 	end, {})
-	local UseResult3 = ReactModule.useCallback(function() --[[ Line: 246 ]]
+	local UseResult3 = ReactModule.useCallback(function()
 		-- upvalues: UseRefResult (copy), UseRefResult1 (copy), UseResult1 (copy), UseResult2 (copy)
 		local Current = UseRefResult.current or UseRefResult1.current
 		
@@ -142,7 +142,7 @@ return ReactModule.memo(ReactModule.forwardRef(function(p1, p2) --[[ Line: 181 |
 			UseResult2(Length + 1)
 		end
 	end, { UseResult1, UseResult2 })
-	local UseResult4 = ReactModule.useCallback(function() --[[ Line: 260 ]]
+	local UseResult4 = ReactModule.useCallback(function()
 		-- upvalues: UseRefResult (copy), WithDefaultsModuleResult (copy), InputFocusBehaviorModule (upval), UseResult3 (copy)
 		if UseRefResult.current == nil then return end
 		UseRefResult.current:CaptureFocus()
@@ -151,31 +151,31 @@ return ReactModule.memo(ReactModule.forwardRef(function(p1, p2) --[[ Line: 181 |
 			task.spawn(UseResult3)
 		end
 	end, { UseResult3, WithDefaultsModuleResult.focusBehavior })
-	local UseResult5 = ReactModule.useCallback(function() --[[ Line: 277 ]]
+	local UseResult5 = ReactModule.useCallback(function()
 		-- upvalues: UseRefResult (copy)
 		if UseRefResult.current then
 			UseRefResult.current:ReleaseFocus()
 		end
 	end, {})
-	local UseResult6 = ReactModule.useCallback(function() --[[ Line: 283 ]]
+	local UseResult6 = ReactModule.useCallback(function()
 		-- upvalues: UseRefResult (copy)
 		return if UseRefResult.current then UseRefResult.current:IsFocused() else nil
 	end, {})
-	local UseResult7 = ReactModule.useCallback(function() --[[ Line: 290 ]]
+	local UseResult7 = ReactModule.useCallback(function()
 		-- upvalues: UseRefResult (copy)
 		return if UseRefResult.current then UseRefResult.current.SelectionStart else nil
 	end, {})
-	local UseResult8 = ReactModule.useCallback(function() --[[ Line: 297 ]]
+	local UseResult8 = ReactModule.useCallback(function()
 		-- upvalues: UseRefResult (copy)
 		return if UseRefResult.current then UseRefResult.current.CursorPosition else nil
 	end, {})
-	local UseResult9 = ReactModule.useCallback(function() --[[ Line: 304 ]]
+	local UseResult9 = ReactModule.useCallback(function()
 		-- upvalues: UseRefResult (copy)
 		if UseRefResult.current then
 			UseRefResult.current.Text = ""
 		end
 	end, {})
-	ReactModule.useImperativeHandle(p2, function() --[[ Line: 312 ]]
+	ReactModule.useImperativeHandle(p2, function()
 		-- upvalues: UseResult6 (copy), UseResult4 (copy), UseResult5 (copy), UseResult7 (copy), UseResult8 (copy), UseResult2 (copy), UseResult1 (copy)
 		return {
 			getIsFocused = UseResult6,
@@ -190,7 +190,7 @@ return ReactModule.memo(ReactModule.forwardRef(function(p1, p2) --[[ Line: 181 |
 		UseResult8, UseResult6, UseResult7, UseResult4, UseResult5, UseResult2,
 		UseResult1
 	})
-	local UseResult10 = ReactModule.useCallback(function(p3) --[[ Line: 334 ]]
+	local UseResult10 = ReactModule.useCallback(function(p3)
 		-- upvalues: UseRefResult4 (copy), UseRefResult5 (copy), IsLargestAbove (copy), UseRefResult2 (copy), WithDefaultsModuleResult (copy)
 		if p3 == nil or p3.Parent == nil or UseRefResult4.current ~= "" then return end
 		local Text = p3.Text
@@ -208,7 +208,7 @@ return ReactModule.memo(ReactModule.forwardRef(function(p1, p2) --[[ Line: 181 |
 		UseStateResult1
 	})
 	local UseRefResult8 = ReactModule.useRef(false)
-	local UseResult11 = ReactModule.useCallback(function() --[[ Line: 356 ]]
+	local UseResult11 = ReactModule.useCallback(function()
 		-- upvalues: WithDefaultsModuleResult (copy), IsLargestAbove (copy), IsUsePreferredInputModuleResultMatch (copy), UseRefResult (copy), UseRefResult4 (copy), UseStateResult2_1 (copy), UseResult (copy), InputFocusBehaviorModule (upval), UseRefResult1 (copy), UseRefResult8 (copy)
 		if WithDefaultsModuleResult.isDisabled then return end
 		if IsLargestAbove and IsUsePreferredInputModuleResultMatch then
@@ -245,13 +245,13 @@ return ReactModule.memo(ReactModule.forwardRef(function(p1, p2) --[[ Line: 181 |
 		IsLargestAbove,
 		WithDefaultsModuleResult.focusBehavior
 	})
-	local UseResult12 = ReactModule.useCallback(function(_, Input) --[[ Line: 397 ]]
+	local UseResult12 = ReactModule.useCallback(function(_, Input)
 		-- upvalues: UseRefResult8 (copy)
 		if Input.UserInputType == Enum.UserInputType.MouseMovement then
 			UseRefResult8.current = false
 		end
 	end, {})
-	local UseResult13 = ReactModule.useCallback(function(_, Input) --[[ Line: 404 ]]
+	local UseResult13 = ReactModule.useCallback(function(_, Input)
 		-- upvalues: UseRefResult8 (copy), UseResult3 (copy)
 		if not UseRefResult8.current then return end
 		UseRefResult8.current = false
@@ -262,7 +262,7 @@ return ReactModule.memo(ReactModule.forwardRef(function(p1, p2) --[[ Line: 181 |
 			return
 		end
 	end, { UseResult1, UseResult2, UseResult3 })
-	local UseResult14 = ReactModule.useCallback(function(_, p3, p4) --[[ Line: 424 ]]
+	local UseResult14 = ReactModule.useCallback(function(_, p3, p4)
 		-- upvalues: UseResult (copy), UseRefResult8 (copy), IsLargestAbove (copy), UseStateResult2_1 (copy), WithDefaultsModuleResult (copy)
 		UseResult(false)
 		UseRefResult8.current = false
@@ -281,7 +281,7 @@ return ReactModule.memo(ReactModule.forwardRef(function(p1, p2) --[[ Line: 181 |
 		IsLargestAbove,
 		WithDefaultsModuleResult.onFocusLost
 	})
-	local UseResult15 = ReactModule.useCallback(function(p3, Current) --[[ Line: 443 ]]
+	local UseResult15 = ReactModule.useCallback(function(p3, Current)
 		-- upvalues: UseRefResult6 (copy), WithDefaultsModuleResult (copy)
 		UseRefResult6.current = Current
 		
@@ -289,13 +289,13 @@ return ReactModule.memo(ReactModule.forwardRef(function(p1, p2) --[[ Line: 181 |
 			WithDefaultsModuleResult.onDragStarted(p3, Current)
 		end
 	end, { WithDefaultsModuleResult.onDragStarted })
-	local UseResult16 = ReactModule.useCallback(function(p3, p4) --[[ Line: 450 ]]
+	local UseResult16 = ReactModule.useCallback(function(p3, p4)
 		-- upvalues: WithDefaultsModuleResult (copy)
 		if WithDefaultsModuleResult.onDrag then
 			WithDefaultsModuleResult.onDrag(p3, p4)
 		end
 	end, { WithDefaultsModuleResult.onDrag })
-	local UseResult17 = ReactModule.useCallback(function(p3, Current) --[[ Line: 456 ]]
+	local UseResult17 = ReactModule.useCallback(function(p3, Current)
 		-- upvalues: UseRefResult6 (copy), UseResult4 (copy), UseResult5 (copy), UseResult (copy), WithDefaultsModuleResult (copy)
 		if UseRefResult6.current == Current then
 			UseResult4()
@@ -309,7 +309,7 @@ return ReactModule.memo(ReactModule.forwardRef(function(p1, p2) --[[ Line: 181 |
 			WithDefaultsModuleResult.onDragEnded(p3, Current)
 		end
 	end, { WithDefaultsModuleResult.onDragEnded })
-	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 469 ]]
+	local UseMemoResult = ReactModule.useMemo(function()
 		-- upvalues: Container (copy), UseTokensModuleResult (copy)
 		return {
 			radius = UDim.new(0, Container.radius),
@@ -317,11 +317,11 @@ return ReactModule.memo(ReactModule.forwardRef(function(p1, p2) --[[ Line: 181 |
 			borderWidth = UseTokensModuleResult.Stroke.Thick
 		}
 	end, { UseTokensModuleResult, Container.radius })
-	local UseMemoResult1 = ReactModule.useMemo(function() --[[ Line: 477 ]]
+	local UseMemoResult1 = ReactModule.useMemo(function()
 		-- upvalues: GetMultiLineTextHeightModule (upval), FontSize (copy), Largest (copy), LineHeight (copy)
 		return GetMultiLineTextHeightModule(FontSize, Largest, LineHeight)
 	end, { FontSize, Largest, LineHeight })
-	local UseMemoResult2, UseMemoResult2_1 = ReactModule.useMemo(function() --[[ Line: 482 ]]
+	local UseMemoResult2, UseMemoResult2_1 = ReactModule.useMemo(function()
 		-- upvalues: Container (copy), ScaledCeiled (copy), GetMultiLineTextHeightModule (upval), FontSize (copy), LineHeight (copy), UseMemoResult1 (copy)
 		local RoundedRatio = math.round((Container.minHeight - ScaledCeiled - GetMultiLineTextHeightModule(FontSize, 1, LineHeight)) * 2) / 2
 		
@@ -335,7 +335,7 @@ return ReactModule.memo(ReactModule.forwardRef(function(p1, p2) --[[ Line: 181 |
 		Container.minHeight, ScaledCeiled, ScaledCeiled1, FontSize, UseMemoResult1,
 		LineHeight
 	})
-	local UseMemoResult3 = if FlagsModule.FoundationNumberInputBeta then ReactModule.useMemo(function() --[[ Line: 512 ]]
+	local UseMemoResult3 = if FlagsModule.FoundationNumberInputBeta then ReactModule.useMemo(function()
 		-- upvalues: WithDefaultsModuleResult (copy)
 		return {
 			left = if WithDefaultsModuleResult.horizontalPadding then WithDefaultsModuleResult.horizontalPadding.innerLeft else nil,
@@ -344,14 +344,14 @@ return ReactModule.memo(ReactModule.forwardRef(function(p1, p2) --[[ Line: 181 |
 	end, { WithDefaultsModuleResult.horizontalPadding }) else nil
 	local NewOffset = UseMemoResult2.bottom.Offset + UseMemoResult2.top.Offset
 	local _UDim2 = UDim2.new(1, 0, 0, UseMemoResult1 + NewOffset)
-	local UseMemoResult4 = ReactModule.useMemo(function() --[[ Line: 523 ]]
+	local UseMemoResult4 = ReactModule.useMemo(function()
 		-- upvalues: IsLargestAbove (copy)
 		return if IsLargestAbove then {
 			FillDirection = Enum.FillDirection.Vertical,
 			ItemLineAlignment = Enum.ItemLineAlignment.Center
 		} else nil
 	end, { IsLargestAbove })
-	local UseMemoResult5 = ReactModule.useMemo(function() --[[ Line: 532 ]]
+	local UseMemoResult5 = ReactModule.useMemo(function()
 		-- upvalues: IsLargestAbove (copy)
 		return if IsLargestAbove then {
 			AutomaticCanvasSize = Enum.AutomaticSize.Y,
@@ -360,7 +360,7 @@ return ReactModule.memo(ReactModule.forwardRef(function(p1, p2) --[[ Line: 181 |
 			VerticalScrollBarInset = Enum.ScrollBarInset.Always
 		} else nil
 	end, { IsLargestAbove })
-	local UseResult18 = ReactModule.useCallback(function(Label) --[[ Line: 543 ]]
+	local UseResult18 = ReactModule.useCallback(function(Label)
 		-- upvalues: UseRefResult3 (copy), UseRefResult2 (copy), TruncateTextToCursorModule (upval), UseMemoResult2 (copy)
 		local Current = UseRefResult3.current
 		local Current1 = UseRefResult2.current
@@ -380,7 +380,7 @@ return ReactModule.memo(ReactModule.forwardRef(function(p1, p2) --[[ Line: 181 |
 			Current.CanvasPosition += Vector2.new(0, Y1 - YDelta)
 		end
 	end, { UseMemoResult2 })
-	local UseResult19 = ReactModule.useCallback(function(Current) --[[ Line: 576 ]]
+	local UseResult19 = ReactModule.useCallback(function(Current)
 		-- upvalues: UseRefResult3 (copy), UseRefResult7 (copy)
 		if Current ~= nil then
 			UseRefResult3.current = Current
@@ -390,12 +390,12 @@ return ReactModule.memo(ReactModule.forwardRef(function(p1, p2) --[[ Line: 181 |
 			return
 		end
 	end, {})
-	local UseResult20 = ReactModule.useCallback(function(TextBox) --[[ Line: 586 ]]
+	local UseResult20 = ReactModule.useCallback(function(TextBox)
 		-- upvalues: UseRefResult4 (copy)
 		if TextBox then
 			TextBox.Text = UseRefResult4.current
 			UseRefResult4.current = ""
-			task.delay(0, function() --[[ Line: 590 ]]
+			task.delay(0, function()
 				-- upvalues: TextBox (copy)
 				if TextBox.Parent ~= nil then
 					TextBox:CaptureFocus()
@@ -403,11 +403,11 @@ return ReactModule.memo(ReactModule.forwardRef(function(p1, p2) --[[ Line: 181 |
 			end)
 		end
 	end, {})
-	local UseResult21 = ReactModule.useCallback(function(ScrollFrame) --[[ Line: 598 ]]
+	local UseResult21 = ReactModule.useCallback(function(ScrollFrame)
 		-- upvalues: UseRefResult7 (copy)
 		UseRefResult7.current = ScrollFrame.CanvasPosition
 	end, {})
-	local UseMemoResult6 = ReactModule.useMemo(function() --[[ Line: 602 ]]
+	local UseMemoResult6 = ReactModule.useMemo(function()
 		-- upvalues: WithDefaultsModuleResult (copy), ReactModule (upval), UseResult15 (copy), UseResult16 (copy), UseResult17 (copy), UseStateResult (copy)
 		return if WithDefaultsModuleResult.onDragStarted or WithDefaultsModuleResult.onDrag or WithDefaultsModuleResult.onDragEnded then ReactModule.createElement("UIDragDetector", {
 			DragStyle = Enum.UIDragDetectorDragStyle.Scriptable,
@@ -425,7 +425,7 @@ return ReactModule.memo(ReactModule.forwardRef(function(p1, p2) --[[ Line: 181 |
 	})
 	local UseBindableModuleResult = UseBindableModule(WithDefaultsModuleResult.horizontalPadding and WithDefaultsModuleResult.horizontalPadding.left or UDim.new(0, 0))
 	local UseBindableModuleResult1 = UseBindableModule(WithDefaultsModuleResult.horizontalPadding and WithDefaultsModuleResult.horizontalPadding.right or UDim.new(0, 0))
-	local UseMemoResult7 = ReactModule.useMemo(function() --[[ Line: 622 ]]
+	local UseMemoResult7 = ReactModule.useMemo(function()
 		-- upvalues: WithDefaultsModuleResult (copy), Container (copy), UseTokensModuleResult (copy)
 		return if WithDefaultsModuleResult.hasClearButton then UDim2.fromOffset(0, (Container.minHeight - UseTokensModuleResult.Stroke.Standard) / 2) else nil
 	end, {
@@ -454,11 +454,11 @@ return ReactModule.memo(ReactModule.forwardRef(function(p1, p2) --[[ Line: 181 |
 		} else nil,
 		cornerRadius = if WithDefaultsModuleResult.radius == RadiusModule.Circle then UDim.new(0, (math.ceil(Container.minHeight / 2))) else nil,
 		padding = {
-			left = UseBindableModuleResult:map(function(p3): UDim --[[ Line: 665 ]]
+			left = UseBindableModuleResult:map(function(p3): UDim
 				-- upvalues: Standard (copy)
 				return UDim.new(0, Standard) + p3
 			end),
-			right = if WithDefaultsModuleResult.trailingElement == nil and WithDefaultsModuleResult.hasClearButton then UDim.new(0, Standard) else UseBindableModuleResult1:map(function(p3): UDim --[[ Line: 671 ]]
+			right = if WithDefaultsModuleResult.trailingElement == nil and WithDefaultsModuleResult.hasClearButton then UDim.new(0, Standard) else UseBindableModuleResult1:map(function(p3): UDim
 				-- upvalues: Standard (copy)
 				return UDim.new(0, Standard) + p3
 			end),
@@ -506,7 +506,7 @@ return ReactModule.memo(ReactModule.forwardRef(function(p1, p2) --[[ Line: 181 |
 				tag = `{UseStyleTagsModuleResult or ""} data-testid={WithDefaultsModuleResult.testId}--textbox`,
 				Interactable = if UseMemoResult6 == nil then nil else UseBindingResult,
 				Size = if IsLargestAbove then _UDim2 else nil,
-				automaticSize = MapBindableModule(WithDefaultsModuleResult.text, function(p3) --[[ Line: 736 ]]
+				automaticSize = MapBindableModule(WithDefaultsModuleResult.text, function(p3)
 					-- upvalues: IsLargestAbove (copy), UseStateResult1 (copy)
 					return if IsLargestAbove and not UseStateResult1 and p3 ~= "" then Enum.AutomaticSize.Y else nil
 				end),
@@ -548,7 +548,7 @@ return ReactModule.memo(ReactModule.forwardRef(function(p1, p2) --[[ Line: 181 |
 			LayoutOrder = 3,
 			isDisabled = WithDefaultsModuleResult.isDisabled,
 			GroupTransparency = if WithDefaultsModuleResult.isDisabled then ConstantsModule.DISABLED_TRANSPARENCY else nil,
-			Visible = MapBindableModule(WithDefaultsModuleResult.text, function(p3): boolean --[[ Line: 791 ]]
+			Visible = MapBindableModule(WithDefaultsModuleResult.text, function(p3): boolean
 				return p3 ~= ""
 			end),
 			tag = UseTextInputVariantsModuleResult.clearButton.tag

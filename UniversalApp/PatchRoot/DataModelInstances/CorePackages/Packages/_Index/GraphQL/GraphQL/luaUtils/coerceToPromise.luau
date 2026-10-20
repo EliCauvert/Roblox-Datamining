@@ -5,7 +5,7 @@ local PromiseModule = require(Parent1.Promise)
 local _ = require(Parent.jsutils.PromiseOrValue)
 
 return {
-	coerceToPromise = function(p1) --[[ Line: 10 ]]
+	coerceToPromise = function(p1)
 		-- upvalues: PromiseModule (copy)
 		return if PromiseModule.is(p1) then p1 else PromiseModule.resolve(p1)
 	end

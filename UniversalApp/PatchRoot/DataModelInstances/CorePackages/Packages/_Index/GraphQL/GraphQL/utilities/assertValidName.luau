@@ -3,7 +3,7 @@ local DevAssertFunction = require(Parent.jsutils.devAssert).devAssert
 local GraphQLError = require(Parent.error.GraphQLError).GraphQLError
 local Callback = nil
 
-local function assertValidName(p1) --[[ Line: 23 ]]
+local function assertValidName(p1)
 	-- upvalues: Callback (ref)
 	local CallbackResult = Callback(p1)
 	
@@ -13,7 +13,7 @@ local function assertValidName(p1) --[[ Line: 23 ]]
 	return p1
 end
 
-Callback = function(Text: string) --[[ Line: 34 | Named "isValidNameError" ]]
+Callback = function(Text: string)
 	-- upvalues: DevAssertFunction (copy), GraphQLError (copy)
 	DevAssertFunction(type(Text) == "string", "Expected name to be a string.")
 	

@@ -26,7 +26,7 @@ local IconStateColorMap = {
 }
 local SegmentedControl = RoactModule.Component:extend("SegmentedControl")
 SegmentedControl.validateProps = TModule.strictInterface({
-	tabs = function(p1) --[[ Line: 52 ]]
+	tabs = function(p1)
 		-- upvalues: TModule (copy)
 		local v2, v3 = TModule.array(TModule.strictInterface({
 			tabName = TModule.string,
@@ -63,24 +63,24 @@ SegmentedControl.validateProps = TModule.strictInterface({
 })
 SegmentedControl.defaultProps = { height = 44 }
 
-function SegmentedControl.init(p1) --[[ Line: 115 ]]
+function SegmentedControl.init(p1)
 	-- upvalues: RoactModule (copy), RoactGamepadModule (copy), OtterModule (copy), config (copy)
 	p1.rootRef = RoactModule.createRef()
 	p1.tabRefs = RoactGamepadModule.createRefCache()
 	p1.selectedBackgroundPositionX, p1.setSelectedBackgroundPositionX = RoactModule.createBinding(0)
 	p1.selectedBackgroundMotor = OtterModule.createSingleMotor(4)
-	p1.selectedBackgroundMotor:onStep(function(p2) --[[ Line: 121 ]]
+	p1.selectedBackgroundMotor:onStep(function(p2)
 		-- upvalues: p1 (copy)
 		p1.setSelectedBackgroundPositionX(p2)
 	end)
 	p1:setState({ tabWidth = 0, computedMinFrameWidth = 0 })
 	
-	function p1.onTabActivated(LayoutOrder) --[[ Line: 130 ]]
+	function p1.onTabActivated(LayoutOrder)
 		-- upvalues: p1 (copy)
 		p1.props.onTabActivated(LayoutOrder)
 	end
 	
-	function p1.setSize(Frame) --[[ Line: 134 ]]
+	function p1.setSize(Frame)
 		-- upvalues: p1 (copy), OtterModule (upval), config (upval)
 		local Floored = math.floor((math.max(Frame.AbsoluteSize.X, p1.state.computedMinFrameWidth) - 8) / #p1.props.tabs)
 		p1.selectedBackgroundMotor:setGoal(OtterModule.spring(4 + Floored * (p1.props.selectedTabIndex - 1), config))
@@ -88,9 +88,9 @@ function SegmentedControl.init(p1) --[[ Line: 115 ]]
 	end
 end
 
-function SegmentedControl.render(p1) --[[ Line: 147 ]]
+function SegmentedControl.render(p1)
 	-- upvalues: WithStyleModule (copy), ControlStateModule (copy), GetContentStyleModule (copy), config1 (copy), config2 (copy), config3 (copy), v1 (copy), GetTextSizeModule (copy), FoundationFontFaceMigration (copy), GetFontFromFontStyleModule (copy), RoactModule (copy), RoactGamepadModule (copy), CryoModule (copy), SegmentedControlTabNameModule (copy), IconStateColorMap (copy), ImageSetComponentModule (copy), ComponentAssetsCircle17 (copy)
-	return WithStyleModule(function(p2) --[[ Line: 148 ]]
+	return WithStyleModule(function(p2)
 		-- upvalues: p1 (copy), ControlStateModule (upval), GetContentStyleModule (upval), config1 (upval), config2 (upval), config3 (upval), v1 (upval), GetTextSizeModule (upval), FoundationFontFaceMigration (upval), GetFontFromFontStyleModule (upval), RoactModule (upval), RoactGamepadModule (upval), CryoModule (upval), SegmentedControlTabNameModule (upval), IconStateColorMap (upval), ImageSetComponentModule (upval), ComponentAssetsCircle17 (upval)
 		local ControlState = p1.state.controlState
 		local CountTabs = #p1.props.tabs
@@ -129,23 +129,23 @@ function SegmentedControl.render(p1) --[[ Line: 147 ]]
 				}))
 			end
 		end
-		return RoactGamepadModule.withFocusController(function(p3) --[[ Line: 214 ]]
+		return RoactGamepadModule.withFocusController(function(p3)
 			-- upvalues: p1 (upval), CountTabs (copy), CryoModule (upval), RoactModule (upval), RoactGamepadModule (upval), TabWidth (copy), Height (copy), SegmentedControlTabNameModule (upval), IconStateColorMap (upval), ImageSetComponentModule (upval), HeightDelta (copy), ComponentAssetsCircle17 (upval), ContentStyleModule (copy), Frames (copy), HeightDelta1 (copy), ContentStyleModule2 (copy)
-			local function _(p4: number) --[[ Line: 215 ]]
+			local function _(p4: number)
 				-- upvalues: p3 (copy), p1 (upval)
 				if p4 > 1 then
 					p3.moveFocusTo(p1.tabRefs[p4 - 1])
 				end
 			end
 			
-			local _ = function(p4: number) --[[ Line: 220 ]]
+			local _ = function(p4: number)
 				-- upvalues: CountTabs (upval), p3 (copy), p1 (upval)
 				if p4 < CountTabs then
 					p3.moveFocusTo(p1.tabRefs[p4 + 1])
 				end
 			end
 			
-			local function v49() --[[ Line: 225 ]]
+			local function v49()
 				-- upvalues: p3 (copy), p1 (upval)
 				p3.moveFocusTo(p1.rootRef)
 			end
@@ -183,7 +183,7 @@ function SegmentedControl.render(p1) --[[ Line: 147 ]]
 					NextSelectionDown = p1.props.NextSelectionDown,
 					[RoactModule.Ref] = p1.rootRef,
 					inputBindings = {
-						Enter = RoactGamepadModule.Input.onBegin(Enum.KeyCode.ButtonA, function() --[[ Line: 311 ]]
+						Enter = RoactGamepadModule.Input.onBegin(Enum.KeyCode.ButtonA, function()
 							-- upvalues: p3 (copy), p1 (upval)
 							p3.moveFocusTo(p1.tabRefs[p1.props.selectedTabIndex])
 						end)
@@ -194,7 +194,7 @@ function SegmentedControl.render(p1) --[[ Line: 147 ]]
 					LayoutOrder = 2,
 					ZIndex = 4,
 					Size = UDim2.fromOffset(TabWidth, HeightDelta1),
-					Position = p1.selectedBackgroundPositionX:map(function(XOffset): UDim2 --[[ Line: 319 ]]
+					Position = p1.selectedBackgroundPositionX:map(function(XOffset): UDim2
 						-- upvalues: Height (upval), HeightDelta1 (upval)
 						return UDim2.fromOffset(XOffset, (Height - HeightDelta1) / 2)
 					end),
@@ -217,7 +217,7 @@ function SegmentedControl.render(p1) --[[ Line: 147 ]]
 						HorizontalAlignment = Enum.HorizontalAlignment.Center,
 						SortOrder = Enum.SortOrder.LayoutOrder
 					}),
-					RoactModule.createFragment((CryoModule.List.map(p1.props.tabs, function(p4, LayoutOrder: number) --[[ Line: 230 ]]
+					RoactModule.createFragment((CryoModule.List.map(p1.props.tabs, function(p4, LayoutOrder: number)
 						-- upvalues: RoactModule (upval), RoactGamepadModule (upval), TabWidth (upval), Height (upval), p1 (upval), CountTabs (upval), v49 (copy), p3 (copy), SegmentedControlTabNameModule (upval), IconStateColorMap (upval)
 						return RoactModule.createElement(RoactGamepadModule.Focusable.Frame, {
 							key = p4.tabName,
@@ -230,37 +230,37 @@ function SegmentedControl.render(p1) --[[ Line: 147 ]]
 							inputBindings = {
 								LeaveA = RoactGamepadModule.Input.onBegin(Enum.KeyCode.ButtonA, v49),
 								LeaveB = RoactGamepadModule.Input.onBegin(Enum.KeyCode.ButtonB, v49),
-								SelectNext1 = RoactGamepadModule.Input.onBegin(Enum.KeyCode.ButtonR1, function() --[[ Line: 242 ]]
+								SelectNext1 = RoactGamepadModule.Input.onBegin(Enum.KeyCode.ButtonR1, function()
 									-- upvalues: LayoutOrder (copy), CountTabs (upval), p3 (upval), p1 (upval)
 									if LayoutOrder < CountTabs then
 										p3.moveFocusTo(p1.tabRefs[LayoutOrder + 1])
 									end
 								end),
-								SelectPre1 = RoactGamepadModule.Input.onBegin(Enum.KeyCode.ButtonL1, function() --[[ Line: 245 ]]
+								SelectPre1 = RoactGamepadModule.Input.onBegin(Enum.KeyCode.ButtonL1, function()
 									-- upvalues: LayoutOrder (copy), p3 (upval), p1 (upval)
 									if LayoutOrder > 1 then
 										p3.moveFocusTo(p1.tabRefs[LayoutOrder - 1])
 									end
 								end),
-								SelectNext2 = RoactGamepadModule.Input.onBegin(Enum.KeyCode.ButtonR2, function() --[[ Line: 248 ]]
+								SelectNext2 = RoactGamepadModule.Input.onBegin(Enum.KeyCode.ButtonR2, function()
 									-- upvalues: LayoutOrder (copy), CountTabs (upval), p3 (upval), p1 (upval)
 									if LayoutOrder < CountTabs then
 										p3.moveFocusTo(p1.tabRefs[LayoutOrder + 1])
 									end
 								end),
-								SelectPre2 = RoactGamepadModule.Input.onBegin(Enum.KeyCode.ButtonL2, function() --[[ Line: 251 ]]
+								SelectPre2 = RoactGamepadModule.Input.onBegin(Enum.KeyCode.ButtonL2, function()
 									-- upvalues: LayoutOrder (copy), p3 (upval), p1 (upval)
 									if LayoutOrder > 1 then
 										p3.moveFocusTo(p1.tabRefs[LayoutOrder - 1])
 									end
 								end),
-								SelectNext3 = RoactGamepadModule.Input.onBegin(Enum.KeyCode.ButtonR3, function() --[[ Line: 254 ]]
+								SelectNext3 = RoactGamepadModule.Input.onBegin(Enum.KeyCode.ButtonR3, function()
 									-- upvalues: LayoutOrder (copy), CountTabs (upval), p3 (upval), p1 (upval)
 									if LayoutOrder < CountTabs then
 										p3.moveFocusTo(p1.tabRefs[LayoutOrder + 1])
 									end
 								end),
-								SelectPre3 = RoactGamepadModule.Input.onBegin(Enum.KeyCode.ButtonL3, function() --[[ Line: 257 ]]
+								SelectPre3 = RoactGamepadModule.Input.onBegin(Enum.KeyCode.ButtonL3, function()
 									-- upvalues: LayoutOrder (copy), p3 (upval), p1 (upval)
 									if LayoutOrder > 1 then
 										p3.moveFocusTo(p1.tabRefs[LayoutOrder - 1])
@@ -270,7 +270,7 @@ function SegmentedControl.render(p1) --[[ Line: 147 ]]
 						}, {
 							Tab = RoactModule.createElement(SegmentedControlTabNameModule, {
 								text = p4.tabName,
-								onActivated = function() --[[ Line: 264 ]]
+								onActivated = function()
 									-- upvalues: p1 (upval), LayoutOrder (copy)
 									p1.onTabActivated(LayoutOrder)
 								end,
@@ -288,7 +288,7 @@ function SegmentedControl.render(p1) --[[ Line: 147 ]]
 	end)
 end
 
-function SegmentedControl.didUpdate(p3, p4) --[[ Line: 352 ]]
+function SegmentedControl.didUpdate(p3, p4)
 	-- upvalues: OtterModule (copy), config (copy)
 	if p4.selectedTabIndex ~= p3.props.selectedTabIndex then
 		p3.selectedBackgroundMotor:setGoal(OtterModule.spring(4 + p3.state.tabWidth * (p3.props.selectedTabIndex - 1), config))

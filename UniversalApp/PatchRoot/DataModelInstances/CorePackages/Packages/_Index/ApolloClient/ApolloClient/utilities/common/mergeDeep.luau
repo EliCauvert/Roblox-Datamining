@@ -2,7 +2,7 @@
 local Set = require(Parent.Parent.LuauPolyfill).Set
 local Proxy = newproxy(true)
 
-getmetatable(Proxy).__tostring = function(): string --[[ Line: 23 ]]
+getmetatable(Proxy).__tostring = function(): string
 	return "Value.None"
 end
 
@@ -12,7 +12,7 @@ local ObjectKeysForEachModule = require(Parent.luaUtils.objectKeysForEach)
 local Callback = nil
 local Module = {}
 
-Callback = function(Entry) --[[ Line: 73 | Named "mergeDeepArray" ]]
+Callback = function(Entry)
 	-- upvalues: Module (copy)
 	local Entry1 = Entry[1] or {}
 	local CountEntry = #Entry
@@ -29,11 +29,11 @@ end
 
 Module.__index = Module
 
-function Module.new(Reconciler) --[[ Line: 107 ]]
+function Module.new(Reconciler)
 	-- upvalues: Module (copy), IsNonNullObjectFunction (copy), Set (copy)
 	local self = setmetatable({}, Module)
 	
-	local function v10(p1, p2, p3, p4) --[[ Line: 110 ]]
+	local function v10(p1, p2, p3, p4)
 		return p1:merge(p2[p4], p3[p4])
 	end
 	
@@ -47,12 +47,12 @@ function Module.new(Reconciler) --[[ Line: 107 ]]
 	return self
 end
 
-function Module.merge(p1, MergeResult, p2, ...) --[[ Line: 124 ]]
+function Module.merge(p1, MergeResult, p2, ...)
 	-- upvalues: IsNonNullObjectFunction (copy), ObjectKeysForEachModule (copy), HasOwnPropertyModule (copy), Proxy (copy)
 	local Packed = table.pack(...)
 	
 	if IsNonNullObjectFunction(p2) and IsNonNullObjectFunction(MergeResult) then
-		ObjectKeysForEachModule(p2, function(Key) --[[ Line: 130 ]]
+		ObjectKeysForEachModule(p2, function(Key)
 			-- upvalues: HasOwnPropertyModule (upval), MergeResult (ref), p2 (copy), p1 (copy), Packed (copy), Proxy (upval)
 			if HasOwnPropertyModule(MergeResult, Key) then
 				local MergeResultEntry = MergeResult[Key]
@@ -80,7 +80,7 @@ function Module.merge(p1, MergeResult, p2, ...) --[[ Line: 124 ]]
 	end
 end
 
-function Module:shallowCopyForMerge(Tbl) --[[ Line: 163 ]]
+function Module:shallowCopyForMerge(Tbl)
 	-- upvalues: IsNonNullObjectFunction (copy)
 	if IsNonNullObjectFunction(Tbl) and not self.pastCopies:has(Tbl) then
 		Tbl = table.clone(Tbl)
@@ -92,7 +92,7 @@ end
 Module.None = Proxy
 
 return {
-	mergeDeep = function(...) --[[ Line: 59 ]]
+	mergeDeep = function(...)
 		-- upvalues: Callback (ref)
 		return Callback({ ... })
 	end,

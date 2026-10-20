@@ -13,18 +13,18 @@ local config = {
 	stderr = {
 		isTTY = false,
 		columns = 0,
-		hasColors = function(...): boolean --[[ Line: 48 ]]
+		hasColors = function(...): boolean
 			return true
 		end
 	}
 }
 
-function ErrorCaptureStackTrace(p1, ...) --[[ Line: 55 ]]
+function ErrorCaptureStackTrace(p1, ...)
 	-- upvalues: ErrorModule (copy)
 	ErrorModule.captureStackTrace(p1, ...)
 end
 
-local function _(p1) --[[ Line: 60 | Named "removeColors" ]]
+local function _(p1)
 	return p1
 end
 
@@ -45,7 +45,7 @@ local config1 = {
 	notDeepEqualUnequal = "Expected values not to be loosely deep-equal:"
 }
 
-local _ = function(p1) --[[ Line: 88 | Named "copyError" ]]
+local _ = function(p1)
 	-- upvalues: Object (copy)
 	local t = {}
 	
@@ -57,7 +57,7 @@ local _ = function(p1) --[[ Line: 88 | Named "copyError" ]]
 	return t
 end
 
-local _ = function(p2) --[[ Line: 99 | Named "inspectValue" ]]
+local _ = function(p2)
 	-- upvalues: InspectFunction (copy)
 	return InspectFunction(p2, {
 		compact = false,
@@ -71,7 +71,7 @@ local _ = function(p2) --[[ Line: 99 | Named "inspectValue" ]]
 	})
 end
 
-local function createErrDiff(Actual, Expected, Operator: string): string --[[ Line: 114 ]]
+local function createErrDiff(Actual, Expected, Operator: string): string
 	-- upvalues: InspectFunction (copy), StringModule (copy), BooleanModule (copy), config1 (copy), config (copy), v1 (ref), v4 (ref), Array (copy), v2 (ref), v3 (ref)
 	local Text = ""
 	local Text1 = ""
@@ -255,11 +255,11 @@ end
 local self = setmetatable({}, { __index = ErrorModule })
 self.__index = self
 
-function self:__tostring() --[[ Line: 394 ]]
+function self:__tostring()
 	return self:toString()
 end
 
-function self.new(p2) --[[ Line: 407 ]]
+function self.new(p2)
 	-- upvalues: ErrorModule (copy), self (copy), config (copy), v1 (ref), v2 (ref), v4 (ref), v3 (ref), Array (copy), Object (copy), InstanceOfModule (copy), createErrDiff (copy), config1 (copy), StringModule (copy), InspectFunction (copy), BooleanModule (copy)
 	local Message = p2.message
 	local Operator = p2.operator
@@ -391,7 +391,7 @@ function self.new(p2) --[[ Line: 407 ]]
 	return self1
 end
 
-function self:toString(): string --[[ Line: 576 ]]
+function self:toString(): string
 	return ("%s [%s]: %s"):format(self.name, self.code, self.message)
 end
 

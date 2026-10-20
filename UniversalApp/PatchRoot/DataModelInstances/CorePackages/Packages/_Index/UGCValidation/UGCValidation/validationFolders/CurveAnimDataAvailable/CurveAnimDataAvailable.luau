@@ -11,7 +11,7 @@ return {
 	},
 	requiredData = {},
 	expectedFailures = {},
-	run = function(p1, p2) --[[ Line: 15 ]]
+	run = function(p1, p2)
 		-- upvalues: FetchAllDesiredDataModule (copy), ErrorSourceStringsModule (copy)
 		local CurveAnimations = p2.curveAnimations
 		

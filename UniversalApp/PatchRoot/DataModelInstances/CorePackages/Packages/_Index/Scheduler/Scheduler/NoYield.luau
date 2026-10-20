@@ -1,4 +1,4 @@
-﻿local function resultHandler(Thread, Resumed, ...) --[[ Line: 28 ]]
+﻿local function resultHandler(Thread, Resumed, ...)
 	if not Resumed then
 		local v1 = (...)
 		
@@ -14,7 +14,7 @@
 	return ...
 end
 
-return function(Callback, ...) --[[ Line: 52 | Named "NoYield" ]]
+return function(Callback, ...)
 	-- upvalues: resultHandler (copy)
 	local Thread = coroutine.create(Callback)
 	

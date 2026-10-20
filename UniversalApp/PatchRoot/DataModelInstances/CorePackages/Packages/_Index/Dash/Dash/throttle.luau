@@ -1,6 +1,6 @@
 ﻿local AssignModule = require(script.Parent.assign)
 
-return function(Callback, p1: number, p2) --[[ Line: 43 | Named "throttle" ]]
+return function(Callback, p1: number, p2)
 	-- upvalues: AssignModule (copy)
 	local AssignModuleResult = AssignModule({ leading = true, trailing = true }, p2)
 	local Largest = math.max(0, p1)
@@ -10,7 +10,7 @@ return function(Callback, p1: number, p2) --[[ Line: 43 | Named "throttle" ]]
 	local DelayedThread = nil
 	local t = {}
 	
-	local function _() --[[ Line: 59 | Named "clearScheduled" ]]
+	local function _()
 		-- upvalues: DelayedThread (ref)
 		if DelayedThread then
 			task.cancel(DelayedThread)
@@ -18,14 +18,14 @@ return function(Callback, p1: number, p2) --[[ Line: 43 | Named "throttle" ]]
 		end
 	end
 	
-	local function invoke() --[[ Line: 66 ]]
+	local function invoke()
 		-- upvalues: ClockTime (ref), DelayedThread (ref), Callback (copy), t (ref)
 		ClockTime = os.clock()
 		DelayedThread = nil
 		Callback(table.unpack(t))
 	end
 	
-	return function(...) --[[ Line: 73 ]]
+	return function(...)
 		-- upvalues: t (ref), ClockTime (ref), Leading (copy), Largest (copy), DelayedThread (ref), Callback (copy), Trailing (copy), invoke (copy)
 		local ClockTime1 = os.clock()
 		t = { ... }

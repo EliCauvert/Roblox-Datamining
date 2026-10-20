@@ -7,15 +7,15 @@ local SetCurrentFiberFunction = ReactCurrentFiberModule.setCurrentFiber
 local GetComponentNameFunction = require(Parent.Shared).getComponentName
 local StrictMode = require(script.Parent.ReactTypeOfMode).StrictMode
 local ReactStrictModeWarningsModule = {
-	recordUnsafeLifecycleWarnings = function(_, _) --[[ Line: 32 ]] end,
-	flushPendingUnsafeLifecycleWarnings = function() --[[ Line: 33 ]] end,
-	recordLegacyContextWarning = function(_, _) --[[ Line: 34 ]] end,
-	flushLegacyContextWarning = function() --[[ Line: 35 ]] end,
-	discardPendingWarnings = function() --[[ Line: 36 ]] end
+	recordUnsafeLifecycleWarnings = function(_, _) end,
+	flushPendingUnsafeLifecycleWarnings = function() end,
+	recordLegacyContextWarning = function(_, _) end,
+	flushLegacyContextWarning = function() end,
+	discardPendingWarnings = function() end
 }
 
 if require(Parent.ReactGlobals).__DEV__ then
-	local function _(Return) --[[ Line: 40 ]]
+	local function _(Return)
 		-- upvalues: StrictMode (copy)
 		local v1 = nil
 		local Return1 = Return
@@ -28,7 +28,7 @@ if require(Parent.ReactGlobals).__DEV__ then
 		return v1
 	end
 	
-	local function v6(List): string --[[ Line: 55 ]]
+	local function v6(List): string
 		local List1 = {}
 		
 		for i, _ in List do
@@ -47,7 +47,7 @@ if require(Parent.ReactGlobals).__DEV__ then
 	local Tbl5 = {}
 	local t = {}
 	
-	function ReactStrictModeWarningsModule.recordUnsafeLifecycleWarnings(p1, p2) --[[ Line: 74 ]]
+	function ReactStrictModeWarningsModule.recordUnsafeLifecycleWarnings(p1, p2)
 		-- upvalues: t (copy), Tbl (copy), StrictMode (copy), Tbl1 (copy), Tbl2 (copy), Tbl3 (copy), Tbl4 (copy), Tbl5 (copy)
 		if t[p1.type] then return end
 		if typeof(p2.componentWillMount) == "function" then
@@ -70,7 +70,7 @@ if require(Parent.ReactGlobals).__DEV__ then
 		end
 	end
 	
-	function ReactStrictModeWarningsModule.flushPendingUnsafeLifecycleWarnings() --[[ Line: 130 ]]
+	function ReactStrictModeWarningsModule.flushPendingUnsafeLifecycleWarnings()
 		-- upvalues: Tbl (copy), GetComponentNameFunction (copy), t (copy), Tbl1 (copy), Tbl2 (copy), Tbl3 (copy), Tbl4 (copy), Tbl5 (copy), v6 (copy), Console (copy)
 		local t1 = {}
 		
@@ -149,7 +149,7 @@ if require(Parent.ReactGlobals).__DEV__ then
 	local Tbl6 = {}
 	local t1 = {}
 	
-	function ReactStrictModeWarningsModule.recordLegacyContextWarning(Return, p1) --[[ Line: 303 ]]
+	function ReactStrictModeWarningsModule.recordLegacyContextWarning(Return, p1)
 		-- upvalues: StrictMode (copy), Console (copy), t1 (copy), Tbl6 (copy)
 		local v2 = nil
 		local Return1 = Return
@@ -178,7 +178,7 @@ if require(Parent.ReactGlobals).__DEV__ then
 		end
 	end
 	
-	function ReactStrictModeWarningsModule.flushLegacyContextWarning() --[[ Line: 342 ]]
+	function ReactStrictModeWarningsModule.flushLegacyContextWarning()
 		-- upvalues: Tbl6 (copy), GetComponentNameFunction (copy), t1 (copy), v6 (copy), SetCurrentFiberFunction (copy), Console (copy), ResetCurrentFiberFunction (copy)
 		for _, value in Tbl6 do
 			if #value == 0 then break end
@@ -190,7 +190,7 @@ if require(Parent.ReactGlobals).__DEV__ then
 				t1[value1.type] = true
 			end
 			local v4 = v6(t)
-			local Success, Result = pcall(function() --[[ Line: 357 ]]
+			local Success, Result = pcall(function()
 				-- upvalues: SetCurrentFiberFunction (upval), Entry (copy), Console (upval), v4 (copy)
 				SetCurrentFiberFunction(Entry)
 				Console.error("Legacy context API has been detected within a strict-mode tree.\n\nThe old API will be supported in all 16.x releases, but applications using it should migrate to the new version.\n\nPlease update the following components: %s\n\nLearn more about this warning here: https://reactjs.org/link/legacy-context", v4)
@@ -203,7 +203,7 @@ if require(Parent.ReactGlobals).__DEV__ then
 		end
 	end
 	
-	function ReactStrictModeWarningsModule.discardPendingWarnings() --[[ Line: 378 ]]
+	function ReactStrictModeWarningsModule.discardPendingWarnings()
 		-- upvalues: Tbl (copy), Tbl1 (copy), Tbl2 (copy), Tbl3 (copy), Tbl4 (copy), Tbl5 (copy), Tbl6 (copy)
 		table.clear(Tbl)
 		table.clear(Tbl1)

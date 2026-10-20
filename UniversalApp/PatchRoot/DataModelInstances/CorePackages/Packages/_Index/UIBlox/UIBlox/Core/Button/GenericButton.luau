@@ -25,7 +25,7 @@ local StandardButtonSizeModule = require(Parent.Enum.StandardButtonSize)
 local ValidateImageModule = require(Parent1.ImageSet.Validator.validateImage)
 local GenericButton = RoactModule.PureComponent:extend("GenericButton")
 
-function GenericButton.init(p1) --[[ Line: 46 ]]
+function GenericButton.init(p1)
 	-- upvalues: ControlStateModule (copy), RunService (copy), RoactModule (copy)
 	p1:setState({
 		targetLoadingProgress = 1,
@@ -34,7 +34,7 @@ function GenericButton.init(p1) --[[ Line: 46 ]]
 		isButtonUnfocused = RunService:GetRobloxGuiFocused()
 	})
 	
-	function p1.onStateChanged(p2, ControlState) --[[ Line: 54 ]]
+	function p1.onStateChanged(p2, ControlState)
 		-- upvalues: p1 (copy)
 		p1:setState({ controlState = ControlState })
 		
@@ -43,7 +43,7 @@ function GenericButton.init(p1) --[[ Line: 46 ]]
 		end
 	end
 	
-	function p1.onAbsoluteSizeChanged(Frame) --[[ Line: 63 ]]
+	function p1.onAbsoluteSizeChanged(Frame)
 		-- upvalues: p1 (copy), RoactModule (upval)
 		p1:setState({ absoluteSize = Frame.AbsoluteSize })
 		
@@ -52,7 +52,7 @@ function GenericButton.init(p1) --[[ Line: 46 ]]
 		end
 	end
 	
-	function p1.onRobloxGuiFocusedChanged(p2) --[[ Line: 72 ]]
+	function p1.onRobloxGuiFocusedChanged(p2)
 		-- upvalues: p1 (copy)
 		if p2 then
 			p1:setState({ targetLoadingProgress = 1, isButtonUnfocused = true })
@@ -111,26 +111,26 @@ GenericButton.defaultProps = {
 	SliceCenter = Rect.new(8, 8, 9, 9)
 }
 
-function GenericButton.didMount(p1) --[[ Line: 198 ]]
+function GenericButton.didMount(p1)
 	p1:setState({
 		targetLoadingProgress = if p1.state.isButtonUnfocused or not p1.props.enableInputDelayed then 1 else 0
 	})
 end
 
-function GenericButton.render(p1) --[[ Line: 206 ]]
+function GenericButton.render(p1)
 	-- upvalues: WithAnimationModule (copy)
 	local DelayInputSeconds: number = p1.props.delayInputSeconds
 	local NoIsButtonUnfocused: boolean = p1.props.isDelayedInput and not p1.state.isButtonUnfocused
 	
-	return if NoIsButtonUnfocused then WithAnimationModule({ loadingProgress = p1.state.targetLoadingProgress }, function(p2) --[[ Line: 219 ]]
+	return if NoIsButtonUnfocused then WithAnimationModule({ loadingProgress = p1.state.targetLoadingProgress }, function(p2)
 		-- upvalues: p1 (copy)
 		return p1:renderButton((math.clamp(p2.loadingProgress, 0, 1)))
 	end, { dampingRatio = 0.8, frequency = 1 / DelayInputSeconds }) elseif p1.state.isButtonUnfocused then p1:renderButton(1) else p1:renderButton()
 end
 
-function GenericButton.renderButton(p1, XScale) --[[ Line: 239 ]]
+function GenericButton.renderButton(p1, XScale)
 	-- upvalues: WithStyleModule (copy), TModule (copy), InterfaceResult (copy), GetContentStyleModule (copy), ControlStateModule (copy), StandardButtonSizeModule (copy), RoactModule (copy), Skeleton (copy), GetClosestRadiusModule (copy), GetIconSizeModule (copy), IconSizeModule (copy), ImageSetComponentModule (copy), GenericTextLabelModule (copy), CryoModule (copy), InteractableModule (copy), HoverButtonBackgroundModule (copy), EventConnection (copy), RunService (copy)
-	return WithStyleModule(function(p2) --[[ Line: 240 ]]
+	return WithStyleModule(function(p2)
 		-- upvalues: TModule (upval), p1 (copy), InterfaceResult (upval), XScale (copy), GetContentStyleModule (upval), ControlStateModule (upval), StandardButtonSizeModule (upval), RoactModule (upval), Skeleton (upval), GetClosestRadiusModule (upval), GetIconSizeModule (upval), IconSizeModule (upval), ImageSetComponentModule (upval), GenericTextLabelModule (upval), CryoModule (upval), InteractableModule (upval), HoverButtonBackgroundModule (upval), EventConnection (upval), RunService (upval)
 		assert(TModule.table(p2), "Style provider is missing.")
 		local ControlState = p1.state.controlState
@@ -356,7 +356,7 @@ function GenericButton.renderButton(p1, XScale) --[[ Line: 239 ]]
 	end)
 end
 
-function GenericButton.didUpdate(p1, p2, p3) --[[ Line: 522 ]]
+function GenericButton.didUpdate(p1, p2, p3)
 	if p1.props.enableInputDelayed ~= p2.enableInputDelayed then
 		p1:setState({
 			targetLoadingProgress = if p1.props.enableInputDelayed then 0 else 1
@@ -367,7 +367,7 @@ function GenericButton.didUpdate(p1, p2, p3) --[[ Line: 522 ]]
 	end
 end
 
-return RoactModule.forwardRef(function(p1, ForwardedRef) --[[ Line: 540 ]]
+return RoactModule.forwardRef(function(p1, ForwardedRef)
 	-- upvalues: RoactModule (copy), GenericButton (copy), CryoModule (copy)
 	return RoactModule.createElement(GenericButton, CryoModule.Dictionary.join(p1, { forwardedRef = ForwardedRef }))
 end)

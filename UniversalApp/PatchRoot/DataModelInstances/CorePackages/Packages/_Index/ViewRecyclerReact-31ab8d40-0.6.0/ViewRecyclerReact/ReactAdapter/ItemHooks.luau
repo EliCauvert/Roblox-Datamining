@@ -3,11 +3,11 @@ local ReactModule = require(ViewRecyclerReact.Parent.React)
 local RecyclableViewContextModule = require(ViewRecyclerReact.ReactAdapter.Private.RecyclableViewContext)
 local SignalsModule = require(ViewRecyclerReact.Parent.Signals)
 
-local function _(Callback) --[[ Line: 33 | Named "initialize" ]]
+local function _(Callback)
 	return if type(Callback) == "function" then Callback() else Callback
 end
 
-local _ = function() --[[ Line: 37 | Named "useRecyclableViewContext" ]]
+local _ = function()
 	-- upvalues: ReactModule (copy), RecyclableViewContextModule (copy)
 	local UseContextResult = ReactModule.useContext(RecyclableViewContextModule)
 	assert(type(UseContextResult) == "table", "Recycling hooks must be called within a Recyclable view")
@@ -15,7 +15,7 @@ local _ = function() --[[ Line: 37 | Named "useRecyclableViewContext" ]]
 	return UseContextResult
 end
 
-local _ = function(p1, List): boolean --[[ Line: 55 | Named "sameValues" ]]
+local _ = function(p1, List): boolean
 	if #p1 ~= #List then
 		return false
 	end
@@ -27,7 +27,7 @@ local _ = function(p1, List): boolean --[[ Line: 55 | Named "sameValues" ]]
 	return true
 end
 
-local function useRecyclingToken(List) --[[ Line: 67 ]]
+local function useRecyclingToken(List)
 	-- upvalues: ReactModule (copy), RecyclableViewContextModule (copy), SignalsModule (copy)
 	local UseContextResult = ReactModule.useContext(RecyclableViewContextModule)
 	assert(type(UseContextResult) == "table", "Recycling hooks must be called within a Recyclable view")
@@ -45,7 +45,7 @@ local function useRecyclingToken(List) --[[ Line: 67 ]]
 	for i, value1 in Buffer do
 		Buffer1[i] = value1(false)
 	end
-	local UseStateResult, UseStateResult2 = ReactModule.useState(function() --[[ Line: 81 ]]
+	local UseStateResult, UseStateResult2 = ReactModule.useState(function()
 		-- upvalues: Buffer1 (copy)
 		return { token = {}, values = Buffer1 }
 	end)
@@ -68,16 +68,16 @@ local function useRecyclingToken(List) --[[ Line: 67 ]]
 		UseStateResult = { token = {}, values = Buffer1 }
 		UseStateResult2(UseStateResult)
 	end
-	ReactModule.useLayoutEffect(function() --[[ Line: 95 ]]
+	ReactModule.useLayoutEffect(function()
 		-- upvalues: SignalsModule (upval), Buffer (copy), UseStateResult2 (copy)
-		return SignalsModule.createEffect(function(p2) --[[ Line: 96 ]]
+		return SignalsModule.createEffect(function(p2)
 			-- upvalues: Buffer (upval), UseStateResult2 (upval)
 			local Buffer1 = table.create(#Buffer)
 			
 			for i, value in Buffer do
 				Buffer1[i] = value(p2)
 			end
-			UseStateResult2(function(p3) --[[ Line: 101 ]]
+			UseStateResult2(function(p3)
 				-- upvalues: Buffer1 (copy)
 				local Values = p3.values
 				local Flag = nil
@@ -103,31 +103,31 @@ local function useRecyclingToken(List) --[[ Line: 67 ]]
 end
 
 return table.freeze({
-	useRecyclingItem = function() --[[ Line: 43 ]]
+	useRecyclingItem = function()
 		-- upvalues: ReactModule (copy), RecyclableViewContextModule (copy)
 		local UseContextResult = ReactModule.useContext(RecyclableViewContextModule)
 		assert(type(UseContextResult) == "table", "Recycling hooks must be called within a Recyclable view")
 		
 		return UseContextResult.itemSignal
 	end,
-	useRecyclingAssignment = function() --[[ Line: 47 ]]
+	useRecyclingAssignment = function()
 		-- upvalues: ReactModule (copy), RecyclableViewContextModule (copy)
 		local UseContextResult = ReactModule.useContext(RecyclableViewContextModule)
 		assert(type(UseContextResult) == "table", "Recycling hooks must be called within a Recyclable view")
 		
 		return UseContextResult.assignmentSignal
 	end,
-	useRecyclingIndex = function() --[[ Line: 51 ]]
+	useRecyclingIndex = function()
 		-- upvalues: ReactModule (copy), RecyclableViewContextModule (copy)
 		local UseContextResult = ReactModule.useContext(RecyclableViewContextModule)
 		assert(type(UseContextResult) == "table", "Recycling hooks must be called within a Recyclable view")
 		
 		return UseContextResult.indexSignal
 	end,
-	useRecyclingState = function(Callback, p2, Current) --[[ Line: 116 ]]
+	useRecyclingState = function(Callback, p2, Current)
 		-- upvalues: useRecyclingToken (copy), ReactModule (copy)
 		local UseRecyclingTokenResult = useRecyclingToken(p2)
-		local UseStateResult, UseStateResult2 = ReactModule.useState(function() --[[ Line: 122 ]]
+		local UseStateResult, UseStateResult2 = ReactModule.useState(function()
 			-- upvalues: UseRecyclingTokenResult (copy), Callback (copy)
 			return {
 				token = UseRecyclingTokenResult,
@@ -144,11 +144,11 @@ return table.freeze({
 		end
 		local UseRefResult = ReactModule.useRef(false)
 		local UseRefResult1 = ReactModule.useRef(Current)
-		ReactModule.useLayoutEffect(function() --[[ Line: 137 ]]
+		ReactModule.useLayoutEffect(function()
 			-- upvalues: UseRefResult1 (copy), Current (copy)
 			UseRefResult1.current = Current
 		end, { Current })
-		ReactModule.useLayoutEffect(function() --[[ Line: 140 ]]
+		ReactModule.useLayoutEffect(function()
 			-- upvalues: UseRefResult (copy), UseRefResult1 (copy)
 			if UseRefResult.current then
 				local CurrentFunction: () -> () = UseRefResult1.current
@@ -163,9 +163,9 @@ return table.freeze({
 			end
 		end, { UseRecyclingTokenResult })
 		
-		return UseStateResult.value, (ReactModule.useCallback(function(Callback) --[[ Line: 152 ]]
+		return UseStateResult.value, (ReactModule.useCallback(function(Callback)
 			-- upvalues: UseStateResult2 (copy), UseRecyclingTokenResult (copy)
-			UseStateResult2(function(p3) --[[ Line: 153 ]]
+			UseStateResult2(function(p3)
 				-- upvalues: UseRecyclingTokenResult (upval), Callback (copy)
 				return if p3.token == UseRecyclingTokenResult then {
 					token = p3.token,
@@ -174,10 +174,10 @@ return table.freeze({
 			end)
 		end, { UseRecyclingTokenResult }))
 	end,
-	useRecyclingSignal = function(Callback1, p2, Callback) --[[ Line: 167 ]]
+	useRecyclingSignal = function(Callback1, p2, Callback)
 		-- upvalues: useRecyclingToken (copy), ReactModule (copy), SignalsModule (copy)
 		local UseRecyclingTokenResult = useRecyclingToken(p2)
-		local UseStateResult = ReactModule.useState(function() --[[ Line: 173 ]]
+		local UseStateResult = ReactModule.useState(function()
 			-- upvalues: SignalsModule (upval), Callback1 (copy), UseRecyclingTokenResult (copy)
 			local Signal, Signal2 = SignalsModule.createSignal(if type(Callback1) == "function" then Callback1() else Callback1)
 			
@@ -188,7 +188,7 @@ return table.freeze({
 			}
 		end)
 		local UseRefResult = ReactModule.useRef(false)
-		ReactModule.useLayoutEffect(function() --[[ Line: 183 ]]
+		ReactModule.useLayoutEffect(function()
 			-- upvalues: UseRefResult (copy), UseStateResult (copy), UseRecyclingTokenResult (copy), Callback1 (copy), Callback (copy)
 			if UseRefResult.current then
 				UseStateResult.committedToken = UseRecyclingTokenResult
@@ -204,7 +204,7 @@ return table.freeze({
 			end
 		end, { UseRecyclingTokenResult })
 		
-		return UseStateResult.getter, (ReactModule.useCallback(function(p3) --[[ Line: 196 ]]
+		return UseStateResult.getter, (ReactModule.useCallback(function(p3)
 			-- upvalues: UseStateResult (copy), UseRecyclingTokenResult (copy)
 			if UseStateResult.committedToken == UseRecyclingTokenResult then
 				UseStateResult.setter(p3)

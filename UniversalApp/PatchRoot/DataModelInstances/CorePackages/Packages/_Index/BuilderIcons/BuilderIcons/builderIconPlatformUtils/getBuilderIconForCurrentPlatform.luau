@@ -9,7 +9,7 @@ local config = {
 	[PlatformModule.Xbox] = Enum.Platform.XBoxOne
 }
 
-local function _() --[[ Line: 13 | Named "getPlatform" ]]
+local function _()
 	-- upvalues: UserInputService (copy), GuiService (copy), GetInputPlatformModule (copy), config (copy)
 	local Success, Result = pcall(UserInputService.GetPlatform, UserInputService)
 	
@@ -23,7 +23,7 @@ local function _() --[[ Line: 13 | Named "getPlatform" ]]
 	end
 end
 
-return function() --[[ Line: 27 | Named "getBuilderIconForCurrentPlatform" ]]
+return function()
 	-- upvalues: UserInputService (copy), GuiService (copy), GetInputPlatformModule (copy), config (copy), PlatformIconMapModule (copy)
 	local Success, Result = pcall(UserInputService.GetPlatform, UserInputService)
 	local Result1 = nil

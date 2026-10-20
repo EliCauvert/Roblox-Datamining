@@ -1,4 +1,4 @@
-﻿return function(p1, p2) --[[ Line: 4 | Named "removeValue" ]]
+﻿return function(p1, p2)
 	local t = {}
 	local Count = 1
 	

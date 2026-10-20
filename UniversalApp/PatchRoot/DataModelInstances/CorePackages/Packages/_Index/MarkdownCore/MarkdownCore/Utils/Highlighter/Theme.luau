@@ -5,7 +5,7 @@ local ThemeModule = {
 	defaultColors = DefaultTokenColorsModule
 }
 
-function ThemeModule.setColors(DefaultTokenColorsModule) --[[ Line: 11 ]]
+function ThemeModule.setColors(DefaultTokenColorsModule)
 	-- upvalues: ThemeModule (copy)
 	assert(type(DefaultTokenColorsModule) == "table", "Theme.updateColors expects a table")
 	
@@ -14,11 +14,11 @@ function ThemeModule.setColors(DefaultTokenColorsModule) --[[ Line: 11 ]]
 	end
 end
 
-function ThemeModule.getColoredRichText(p1, Text): string --[[ Line: 19 ]]
+function ThemeModule.getColoredRichText(p1, Text): string
 	return "<font color=\"#" .. p1:ToHex() .. "\">" .. Text .. "</font>"
 end
 
-function ThemeModule.getColor(p1) --[[ Line: 23 ]]
+function ThemeModule.getColor(p1)
 	-- upvalues: ThemeModule (copy)
 	return ThemeModule.tokenColors[p1]
 end

@@ -1,6 +1,6 @@
 ﻿local EqualObjectsModule = require(script.Parent.Parent.equalObjects)
 
-local function compare(List, List1): boolean --[[ Line: 3 ]]
+local function compare(List, List1): boolean
 	if type(List) ~= "table" or type(List1) ~= "table" then
 		return List == List1
 	end
@@ -17,7 +17,7 @@ local function compare(List, List1): boolean --[[ Line: 3 ]]
 	return true
 end
 
-return function(...): boolean --[[ Line: 23 | Named "equals" ]]
+return function(...): boolean
 	-- upvalues: EqualObjectsModule (copy), compare (copy)
 	if EqualObjectsModule(...) then
 		return true

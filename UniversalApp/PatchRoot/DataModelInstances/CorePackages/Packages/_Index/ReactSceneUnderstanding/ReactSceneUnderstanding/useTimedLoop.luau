@@ -1,11 +1,11 @@
 ﻿local UseEffectFunction = require(script:FindFirstAncestor("ReactSceneUnderstanding").Parent.React).useEffect
 
-return function(Duration, Callback) --[[ Line: 7 | Named "useTimedLoop" ]]
+return function(Duration, Callback)
 	-- upvalues: UseEffectFunction (copy)
-	UseEffectFunction(function() --[[ Line: 8 ]]
+	UseEffectFunction(function()
 		-- upvalues: Duration (copy), Callback (copy)
 		local Flag = true
-		task.spawn(function() --[[ Line: 11 ]]
+		task.spawn(function()
 			-- upvalues: Flag (ref), Duration (upval), Callback (upval)
 			while Flag do
 				task.wait(Duration)
@@ -15,7 +15,7 @@ return function(Duration, Callback) --[[ Line: 7 | Named "useTimedLoop" ]]
 			end
 		end)
 		
-		return function() --[[ Line: 23 ]]
+		return function()
 			-- upvalues: Flag (ref)
 			Flag = false
 		end

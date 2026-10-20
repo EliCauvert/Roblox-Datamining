@@ -19,7 +19,7 @@ local RewriteURIForGETFunction = require(script.Parent.rewriteURIForGET).rewrite
 local FromErrorFunction = require(script.Parent.Parent.utils).fromError
 
 return {
-	createHttpLink = function(p1) --[[ Line: 41 ]]
+	createHttpLink = function(p1)
 		-- upvalues: Object (copy), CheckFetcherFunction (copy), Boolean (copy), ApolloLink (copy), SelectURIFunction (copy), SelectHttpOptionsAndBodyFunction (copy), FallbackHttpConfig (copy), Set (copy), VisitFunction (copy), CreateSignalIfSupportedFunction (copy), Array (copy), RewriteURIForGETFunction (copy), FromErrorFunction (copy), SerializeFetchParameterFunction (copy), Observable (copy), ParseAndCheckHttpResponseFunction (copy)
 		local v1 = p1
 		
@@ -50,7 +50,7 @@ return {
 			headers = AssignResult.headers
 		}
 		
-		return ApolloLink.new(function(_, p2) --[[ Line: 78 ]]
+		return ApolloLink.new(function(_, p2)
 			-- upvalues: SelectURIFunction (upval), Graphql (copy), Boolean (upval), Object (upval), SelectHttpOptionsAndBodyFunction (upval), FallbackHttpConfig (upval), config (copy), IncludeUnusedVariables (copy), Set (upval), VisitFunction (upval), CreateSignalIfSupportedFunction (upval), UseGETForQueries (copy), Array (upval), RewriteURIForGETFunction (upval), FromErrorFunction (upval), SerializeFetchParameterFunction (upval), Observable (upval), FetchFunction (ref), ParseAndCheckHttpResponseFunction (upval)
 			local SelectURIResult = SelectURIFunction(p2, Graphql)
 			local Context = p2:getContext()
@@ -79,7 +79,7 @@ return {
 			if Body.variables ~= nil and not IncludeUnusedVariables then
 				local NewSet = Set.new(Object.keys(Body.variables))
 				VisitFunction(p2.query, {
-					Variable = function(_, p3, _, p4) --[[ Line: 122 ]]
+					Variable = function(_, p3, _, p4)
 						-- upvalues: Boolean (upval), NewSet (copy)
 						if Boolean.toJSBoolean(p4) and p4.kind ~= "VariableDefinition" then
 							NewSet:delete(p3.name.value)
@@ -89,7 +89,7 @@ return {
 				
 				if Boolean.toJSBoolean(NewSet.size) then
 					Body.variables = Object.assign({}, Body.variables)
-					NewSet:forEach(function(p3) --[[ Line: 139 ]]
+					NewSet:forEach(function(p3)
 						-- upvalues: Body (copy)
 						Body.variables[p3] = nil
 					end)
@@ -106,7 +106,7 @@ return {
 					Options.signal = Signal
 				end
 			end
-			local function definitionIsMutation(p3): boolean --[[ Line: 156 ]]
+			local function definitionIsMutation(p3): boolean
 				return p3.kind == "OperationDefinition" and p3.operation == "mutation"
 			end
 			
@@ -123,7 +123,7 @@ return {
 				end
 				SelectURIResult = NewURI
 			else
-				local Success, Result = pcall(function() --[[ Line: 174 ]]
+				local Success, Result = pcall(function()
 					-- upvalues: Options (copy), SerializeFetchParameterFunction (upval), Body (copy)
 					Options.body = SerializeFetchParameterFunction(Body, "Payload")
 				end)
@@ -132,20 +132,20 @@ return {
 					return FromErrorFunction(Result)
 				end
 			end
-			return Observable.new(function(p3) --[[ Line: 181 ]]
+			return Observable.new(function(p3)
 				-- upvalues: FetchFunction (upval), SelectURIResult (ref), Options (copy), p2 (copy), ParseAndCheckHttpResponseFunction (upval), Boolean (upval), Controller (ref)
-				FetchFunction(SelectURIResult, Options):andThen(function(Result) --[[ Line: 183 ]]
+				FetchFunction(SelectURIResult, Options):andThen(function(Result)
 					-- upvalues: p2 (upval)
 					p2:setContext({ response = Result })
 					
 					return Result
-				end):andThen(ParseAndCheckHttpResponseFunction(p2)):andThen(function(Result) --[[ Line: 188 ]]
+				end):andThen(ParseAndCheckHttpResponseFunction(p2)):andThen(function(Result)
 					-- upvalues: p3 (copy)
 					p3:next(Result)
 					p3:complete()
 					
 					return Result
-				end):catch(function(Err) --[[ Line: 194 ]]
+				end):catch(function(Err)
 					-- upvalues: Boolean (upval), p3 (copy)
 					if Err.name == "AbortError" then return end
 					if Boolean.toJSBoolean(Err.result) and Boolean.toJSBoolean(Err.result.errors) and Boolean.toJSBoolean(Err.result.data) then
@@ -154,7 +154,7 @@ return {
 					p3:error(Err)
 				end)
 				
-				return function() --[[ Line: 241 ]]
+				return function()
 					-- upvalues: Boolean (upval), Controller (upval)
 					if Boolean.toJSBoolean(Controller) then
 						Controller:abort()

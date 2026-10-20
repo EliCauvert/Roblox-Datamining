@@ -17,7 +17,7 @@ local UGCValidationDrdJointSizeHundredthsLimitRatio = game:DefineFastInt("UGCVal
 local _Vector3_4 = Vector3.new(game:DefineFastInt("UGCValidationDrdJointRangeMinXHundredths", 0) / 100, game:DefineFastInt("UGCValidationDrdJointRangeMinYHundredths", 0) / 100, game:DefineFastInt("UGCValidationDrdJointRangeMinZHundredths", 0) / 100)
 local _Vector3_5 = Vector3.new(game:DefineFastInt("UGCValidationDrdJointRangeMaxXHundredths", 0) / 100, game:DefineFastInt("UGCValidationDrdJointRangeMaxYHundredths", 0) / 100, game:DefineFastInt("UGCValidationDrdJointRangeMaxZHundredths", 0) / 100)
 
-local function checkVectorRange(p1, Name, PropertyName, IndexRange, p2, p3) --[[ Line: 45 ]]
+local function checkVectorRange(p1, Name, PropertyName, IndexRange, p2, p3)
 	-- upvalues: Vector3UtilsModule (copy), ErrorSourceStringsModule (copy), ValueToStringModule (copy)
 	if not Vector3UtilsModule.isInRange(IndexRange, p2, p3) then
 		p1:fail(ErrorSourceStringsModule.Keys.HrdProperties_PropertyOutOfRange, {
@@ -30,7 +30,7 @@ local function checkVectorRange(p1, Name, PropertyName, IndexRange, p2, p3) --[[
 	end
 end
 
-local function checkSize(p1, JointName, PropertyName, IndexSize: number, UGCValidationDrdJointSizeHundredthsLimitRatio) --[[ Line: 64 ]]
+local function checkSize(p1, JointName, PropertyName, IndexSize: number, UGCValidationDrdJointSizeHundredthsLimitRatio)
 	-- upvalues: ErrorSourceStringsModule (copy), ValueToStringModule (copy)
 	if IndexSize < 0 or UGCValidationDrdJointSizeHundredthsLimitRatio < IndexSize then
 		p1:fail(ErrorSourceStringsModule.Keys.HrdProperties_PropertyOutOfRange, {
@@ -50,7 +50,7 @@ return {
 	},
 	requiredData = { ValidationEnumsModule.SharedDataMember.rootInstance },
 	fflag = R15plusUtilsModule.checkFlagEnabledForAllowHrd,
-	run = function(p1, p2) --[[ Line: 82 ]]
+	run = function(p1, p2)
 		-- upvalues: GetAllInstancesIsAModule (copy), ValidationRulesUtilModule (copy), CFrameUtilsModule (copy), Vector3UtilsModule (copy), _Vector3_2 (copy), _Vector3_3 (copy), ErrorSourceStringsModule (copy), ValueToStringModule (copy), R15plusUtilsModule (copy), checkSize (copy), UGCValidationHrdJointSizeHundredthsLimitRatio (copy), checkVectorRange (copy), _Vector3 (copy), _Vector3_1 (copy), UGCValidationDrdJointSizeHundredthsLimitRatio (copy), _Vector3_4 (copy), _Vector3_5 (copy)
 		for _, Object in GetAllInstancesIsAModule(p2.rootInstance, "MeshPart") do
 			local HumanoidRigDescription = Object:FindFirstChildWhichIsA("HumanoidRigDescription")

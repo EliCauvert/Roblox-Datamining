@@ -1,17 +1,17 @@
 ﻿local GraphQLError = require(script.Parent.Parent.Parent.error.GraphQLError).GraphQLError
 
 return {
-	NoUndefinedVariablesRule = function(p1) --[[ Line: 20 ]]
+	NoUndefinedVariablesRule = function(p1)
 		-- upvalues: GraphQLError (copy)
 		local t = {}
 		
 		return {
 			OperationDefinition = {
-				enter = function() --[[ Line: 25 ]]
+				enter = function()
 					-- upvalues: t (ref)
 					t = {}
 				end,
-				leave = function(_, p2) --[[ Line: 28 ]]
+				leave = function(_, p2)
 					-- upvalues: p1 (copy), t (ref), GraphQLError (upval)
 					for _, recursiveVariableUsage in ipairs((p1:getRecursiveVariableUsages(p2))) do
 						local Node = recursiveVariableUsage.node
@@ -23,7 +23,7 @@ return {
 					end
 				end
 			},
-			VariableDefinition = function(_, p3) --[[ Line: 50 ]]
+			VariableDefinition = function(_, p3)
 				-- upvalues: t (ref)
 				t[p3.variable.name.value] = true
 			end

@@ -19,33 +19,33 @@ local CreationFlowLocalizationModule = require(MomentsCreationFlow.Enums.Creatio
 local SegmentSelectorWidth = require(MomentsCreationFlow.Constants).AudioWaveform.SegmentSelectorWidth
 local _UDim2 = UDim2.new(0, 48, 1, 0)
 
-return function(p1) --[[ Line: 43 | Named "MusicEditor" ]]
+return function(p1)
 	-- upvalues: UseTokensFunction (copy), UseDeviceInsetsFunction (copy), ReactModule (copy), CreationFlowContextModule (copy), UseToggleStateFunction (copy), UseCallbackFunction (copy), UseMusicEditorControllerModule (copy), View (copy), Button (copy), FoundationModule (copy), CreationFlowLocalizationModule (copy), GradientBackdrop (copy), _UDim2 (copy), SegmentSelectorWidth (copy), WaveformModule (copy), Loading (copy), MusicPreviewItemModule (copy)
 	local UseTokensResult = UseTokensFunction()
 	local UseDeviceInsetsResult = UseDeviceInsetsFunction()
 	local UseContextResult = ReactModule.useContext(CreationFlowContextModule)
 	local UseToggleStateResult = UseToggleStateFunction(false)
 	local UseToggleStateResult1 = UseToggleStateFunction(false)
-	local UseCallbackResult = UseCallbackFunction(function() --[[ Line: 51 ]]
+	local UseCallbackResult = UseCallbackFunction(function()
 		-- upvalues: p1 (copy), UseToggleStateResult1 (copy)
 		p1.playbackController.volume.mute()
 		p1.playbackController.timeline.seek(0)
 		p1.playbackController.playback.pause()
 		UseToggleStateResult1.enable()
 	end, { p1.playbackController.timeline.seek })
-	local UseCallbackResult1 = UseCallbackFunction(function() --[[ Line: 58 ]]
+	local UseCallbackResult1 = UseCallbackFunction(function()
 		-- upvalues: p1 (copy), UseToggleStateResult1 (copy)
 		p1.playbackController.volume.unmute()
 		p1.playbackController.playback.play()
 		UseToggleStateResult1.disable()
 	end, {})
-	local UseCallbackResult2 = UseCallbackFunction(function() --[[ Line: 64 ]]
+	local UseCallbackResult2 = UseCallbackFunction(function()
 		-- upvalues: p1 (copy), UseToggleStateResult (copy)
 		p1.playbackController.volume.unmute()
 		p1.playbackController.playback.play()
 		UseToggleStateResult.enable()
 	end, {})
-	ReactModule.useEffect(function() --[[ Line: 70 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UseToggleStateResult (copy)
 		UseToggleStateResult.disable()
 	end, { p1.musicEdit.assetId })
@@ -114,7 +114,7 @@ return function(p1) --[[ Line: 43 | Named "MusicEditor" ]]
 					WaveformDisplay = ReactModule.createElement(WaveformModule, {
 						zIndex = 1,
 						audioAssetId = p1.musicEdit.assetId,
-						position = UseMusicEditorControllerModuleResult.waveformPosition:map(function(XScale): UDim2 --[[ Line: 161 ]]
+						position = UseMusicEditorControllerModuleResult.waveformPosition:map(function(XScale): UDim2
 							return UDim2.fromScale(XScale, 0.5)
 						end),
 						onWaveformReady = UseCallbackResult2,

@@ -8,12 +8,12 @@ local _ = require(ViewRecycler.Core.RecyclingScope)
 local Frozen = table.freeze({ "index", "value" })
 local Frozen1 = table.freeze({ "kind", "revision" })
 
-local function _(p1, p2): boolean --[[ Line: 61 | Named "assignmentChanged" ]]
+local function _(p1, p2): boolean
 	-- upvalues: ShallowTableModule (copy), Frozen (copy), Frozen1 (copy)
 	return not ShallowTableModule.containsEqual(p1, p2, Frozen) or not ShallowTableModule.containsEqual(p1.identity, p2.identity, Frozen1)
 end
 
-return function(p1) --[[ Line: 69 | Named "createListPresentation" ]]
+return function(p1)
 	-- upvalues: ShallowTableModule (copy), Frozen (copy), Frozen1 (copy), DiagnosticsModule (copy)
 	local RecyclingScope = p1.recyclingScope
 	local t = {}
@@ -25,7 +25,7 @@ return function(p1) --[[ Line: 69 | Named "createListPresentation" ]]
 	local Generation = 1
 	local Flag = false
 	
-	local function makeAssignment(Desired) --[[ Line: 82 ]]
+	local function makeAssignment(Desired)
 		-- upvalues: p1 (copy), Generation (ref)
 		local PrepareDesiredAssignmentResult = {
 			key = Desired.key,
@@ -47,7 +47,7 @@ return function(p1) --[[ Line: 69 | Named "createListPresentation" ]]
 		return config
 	end
 	
-	local function resolvePlacementIntent(ItemView) --[[ Line: 101 ]]
+	local function resolvePlacementIntent(ItemView)
 		-- upvalues: Tbl2 (ref), v1 (ref)
 		local Entry = Tbl2[ItemView]
 		local v2 = v1
@@ -74,7 +74,7 @@ return function(p1) --[[ Line: 69 | Named "createListPresentation" ]]
 		end
 	end
 	
-	local function publish(List, List1) --[[ Line: 124 ]]
+	local function publish(List, List1)
 		-- upvalues: p1 (copy), resolvePlacementIntent (copy), self (copy)
 		for _, value in List do
 			if p1.prepareAssignment ~= nil then
@@ -111,14 +111,14 @@ return function(p1) --[[ Line: 69 | Named "createListPresentation" ]]
 		end
 	end
 	
-	local function _(p2): boolean --[[ Line: 164 | Named "insetChanged" ]]
+	local function _(p2): boolean
 		-- upvalues: v1 (ref)
 		local v2 = v1
 		
 		return v2 == nil or v2.contentStartOffset ~= p2.contentStartOffset
 	end
 	
-	local function reconcile(p2, p3) --[[ Line: 169 ]]
+	local function reconcile(p2, p3)
 		-- upvalues: Tbl1 (ref), Tbl (copy), makeAssignment (copy), RecyclingScope (copy), t (copy), ShallowTableModule (upval), Frozen (upval), Frozen1 (upval), Tbl2 (ref), v1 (ref), publish (copy), DiagnosticsModule (upval)
 		local t1 = {}
 		local Buffer = table.create(#p2.entries)
@@ -245,7 +245,7 @@ return function(p1) --[[ Line: 69 | Named "createListPresentation" ]]
 		}
 	end
 	
-	local function applyPlacements(p4, p5) --[[ Line: 298 ]]
+	local function applyPlacements(p4, p5)
 		-- upvalues: Tbl (copy), v1 (ref), publish (copy)
 		local t = {}
 		
@@ -261,7 +261,7 @@ return function(p1) --[[ Line: 69 | Named "createListPresentation" ]]
 		publish({}, t)
 	end
 	
-	local function releaseAll() --[[ Line: 314 ]]
+	local function releaseAll()
 		-- upvalues: Tbl (copy), RecyclingScope (copy), t (copy), Tbl1 (ref), Tbl2 (ref), v1 (ref), publish (copy)
 		local Buffer = table.create(#Tbl)
 		local Buffer1 = table.create(#Tbl)
@@ -281,7 +281,7 @@ return function(p1) --[[ Line: 69 | Named "createListPresentation" ]]
 	end
 	
 	return {
-		apply = function(_, p6, p7) --[[ Line: 332 ]]
+		apply = function(_, p6, p7)
 			-- upvalues: Flag (ref), RecyclingScope (copy), releaseAll (copy), v1 (ref), applyPlacements (copy), reconcile (copy)
 			if Flag then
 				return {}
@@ -296,7 +296,7 @@ return function(p1) --[[ Line: 69 | Named "createListPresentation" ]]
 			
 			if v1 == nil or p7.assignmentsChanged then
 				local v4 = nil
-				RecyclingScope.batch(function() --[[ Line: 352 ]]
+				RecyclingScope.batch(function()
 					-- upvalues: v4 (ref), reconcile (upval), p6 (copy), v3 (copy)
 					v4 = reconcile(p6, v3)
 				end)
@@ -304,7 +304,7 @@ return function(p1) --[[ Line: 69 | Named "createListPresentation" ]]
 				return { v4 }
 			end
 			if p7.placementChanged or v3 then
-				RecyclingScope.batch(function() --[[ Line: 343 ]]
+				RecyclingScope.batch(function()
 					-- upvalues: applyPlacements (upval), p6 (copy), v3 (copy)
 					applyPlacements(p6, v3)
 				end)
@@ -313,7 +313,7 @@ return function(p1) --[[ Line: 69 | Named "createListPresentation" ]]
 			end
 			return {}
 		end,
-		destroy = function() --[[ Line: 357 ]]
+		destroy = function()
 			-- upvalues: Flag (ref), RecyclingScope (copy), releaseAll (copy), self (copy)
 			if not Flag then
 				RecyclingScope.batch(releaseAll)
@@ -321,7 +321,7 @@ return function(p1) --[[ Line: 69 | Named "createListPresentation" ]]
 				table.clear(self)
 			end
 		end,
-		getItemViews = function() --[[ Line: 364 ]]
+		getItemViews = function()
 			-- upvalues: Tbl (copy)
 			local Buffer = table.create(#Tbl)
 			
@@ -330,24 +330,24 @@ return function(p1) --[[ Line: 69 | Named "createListPresentation" ]]
 			end
 			return Buffer
 		end,
-		getSnapshot = function() --[[ Line: 371 ]]
+		getSnapshot = function()
 			-- upvalues: v1 (ref)
 			return v1
 		end,
 		resolvePlacementIntent = resolvePlacementIntent,
-		onPlacementIntentChanged = function(Key, p6) --[[ Line: 375 ]]
+		onPlacementIntentChanged = function(Key, p6)
 			-- upvalues: self (copy)
 			assert(self[Key] == nil, "Virtualizer: ItemView already has a Placement-intent subscriber")
 			self[Key] = p6
 			
-			return function() --[[ Line: 381 ]]
+			return function()
 				-- upvalues: self (upval), Key (copy), p6 (copy)
 				if self[Key] == p6 then
 					self[Key] = nil
 				end
 			end
 		end,
-		validateMeasurements = function(List) --[[ Line: 387 ]]
+		validateMeasurements = function(List)
 			-- upvalues: Tbl1 (ref), RecyclingScope (copy), t (copy)
 			local List1 = {}
 			local Count = 0

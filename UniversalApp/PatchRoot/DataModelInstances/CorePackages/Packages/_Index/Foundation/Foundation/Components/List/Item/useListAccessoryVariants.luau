@@ -5,7 +5,7 @@ local ComposeStyleVariantModule = require(Foundation.Utility.composeStyleVariant
 local _ = require(Foundation.Providers.Style.Tokens)
 local VariantsContextModule = require(Foundation.Providers.Style.VariantsContext)
 
-local function variantsFactory(p1) --[[ Line: 17 ]]
+local function variantsFactory(p1)
 	-- upvalues: AccessoryTypeModule (copy), InputSizeModule (copy)
 	return {
 		accessorySize = {
@@ -43,7 +43,7 @@ local function variantsFactory(p1) --[[ Line: 17 ]]
 	}
 end
 
-return function(p1, p2, p3) --[[ Line: 60 ]]
+return function(p1, p2, p3)
 	-- upvalues: VariantsContextModule (copy), variantsFactory (copy), ComposeStyleVariantModule (copy)
 	local ListAccessory = VariantsContextModule.useVariants("ListAccessory", variantsFactory, p1)
 	

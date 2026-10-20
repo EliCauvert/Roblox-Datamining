@@ -7,7 +7,7 @@ local ValidateLegacyAccessoryMeshPartAssetFormatMatchModule = require(Parent.val
 local ValidatePropertiesSensibleModule = require(Parent.validation.ValidatePropertiesSensible)
 local GetEngineFeatureEngineUGCValidatePropertiesSensibleModule = require(Parent.flags.getEngineFeatureEngineUGCValidatePropertiesSensible)
 
-return function(Object, p1) --[[ Line: 16 | Named "validateLegacyAccessoryMeshPartAssetFormat" ]]
+return function(Object, p1)
 	-- upvalues: ValidateSingleInstanceModule (copy), CreateLegacyAccessoryMeshPartAssetFormatSchemaModule (copy), ValidateInstanceTreeModule (copy), GetEngineFeatureEngineUGCValidatePropertiesSensibleModule (copy), ValidatePropertiesSensibleModule (copy), ValidateLegacyAccessoryMeshPartAssetFormatMatchModule (copy)
 	assert(p1.instances ~= nil, "instances required in validationContext for validateLegacyAccessoryMeshPartAssetFormat")
 	local Instances = p1.instances

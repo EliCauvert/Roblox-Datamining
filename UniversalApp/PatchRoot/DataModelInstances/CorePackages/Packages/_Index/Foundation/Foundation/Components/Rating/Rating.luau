@@ -22,14 +22,14 @@ local config = {
 	value = RatingValueModule.None
 }
 
-return ReactModule.memo(ReactModule.forwardRef(function(p1, Ref) --[[ Line: 41 | Named "Rating" ]]
+return ReactModule.memo(ReactModule.forwardRef(function(p1, Ref)
 	-- upvalues: WithDefaultsModule (copy), config (copy), UseTokensModule (copy), UseRatingVariantsModule (copy), ReactModule (copy), RatingValueModule (copy), ViewModule (copy), WithCommonPropsModule (copy), IconModule (copy), Icon (copy), IconVariant (copy), TextModule (copy), DividerModule (copy), OrientationModule (copy)
 	local WithDefaultsModuleResult = WithDefaultsModule(p1, config)
 	local UseTokensModuleResult = UseTokensModule()
 	local UseRatingVariantsModuleResult = UseRatingVariantsModule(UseTokensModuleResult, WithDefaultsModuleResult.size)
 	local UseRefResult = ReactModule.useRef(nil)
 	local UseRefResult1 = ReactModule.useRef(nil)
-	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 49 ]]
+	local UseMemoResult = ReactModule.useMemo(function()
 		-- upvalues: UseTokensModuleResult (copy)
 		local Floored = math.floor(UseTokensModuleResult.Stroke.Thicker)
 		

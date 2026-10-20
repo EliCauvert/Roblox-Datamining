@@ -10,7 +10,7 @@ local WithDefaultsModule = require(Foundation.Utility.withDefaults)
 local _ = require(Foundation.Components.Types)
 local config = { showSelectionKnob = true }
 
-return function(p1) --[[ Line: 31 | Named "SVPicker" ]]
+return function(p1)
 	-- upvalues: WithDefaultsModule (copy), config (copy), UseTokensModule (copy), ReactModule (copy), ColorUtilsModule (copy), ViewModule (copy), WithCommonPropsModule (copy), KnobModule (copy), InputSizeModule (copy)
 	local WithDefaultsModuleResult = WithDefaultsModule(p1, config)
 	local Hue = WithDefaultsModuleResult.hue
@@ -21,7 +21,7 @@ return function(p1) --[[ Line: 31 | Named "SVPicker" ]]
 	local OnDragEnded = WithDefaultsModuleResult.onDragEnded
 	local UseTokensModuleResult = UseTokensModule()
 	local UseRefResult = ReactModule.useRef(nil)
-	local UseResult = ReactModule.useCallback(function(p2) --[[ Line: 45 ]]
+	local UseResult = ReactModule.useCallback(function(p2)
 		-- upvalues: UseRefResult (copy), ColorUtilsModule (upval), OnChangedFunction (copy)
 		local Current = UseRefResult.current
 		
@@ -40,14 +40,14 @@ return function(p1) --[[ Line: 31 | Named "SVPicker" ]]
 	}), {
 		DragDetector = ReactModule.createElement("UIDragDetector", {
 			DragStyle = Enum.UIDragDetectorDragStyle.Scriptable,
-			[ReactModule.Event.DragStart] = ReactModule.useCallback(function(_, p2) --[[ Line: 57 ]]
+			[ReactModule.Event.DragStart] = ReactModule.useCallback(function(_, p2)
 				-- upvalues: OnDragStartedFunction (copy), UseResult (copy)
 				if OnDragStartedFunction then
 					OnDragStartedFunction()
 				end
 				UseResult(p2)
 			end, { UseResult, OnDragStartedFunction }),
-			[ReactModule.Event.DragContinue] = ReactModule.useCallback(function(_, p2) --[[ Line: 64 ]]
+			[ReactModule.Event.DragContinue] = ReactModule.useCallback(function(_, p2)
 				-- upvalues: UseResult (copy)
 				UseResult(p2)
 			end, { UseResult }),
@@ -63,7 +63,7 @@ return function(p1) --[[ Line: 31 | Named "SVPicker" ]]
 			ZIndex = 2,
 			BorderSizePixel = 0,
 			Size = UDim2.fromScale(1, 1),
-			BackgroundColor3 = Hue:map(function(Hue): Color3 --[[ Line: 40 ]]
+			BackgroundColor3 = Hue:map(function(Hue): Color3
 				return Color3.fromHSV(Hue, 1, 1)
 			end)
 		}, {
@@ -93,10 +93,10 @@ return function(p1) --[[ Line: 31 | Named "SVPicker" ]]
 			ZIndex = 4,
 			size = InputSizeModule.Medium,
 			AnchorPoint = Vector2.new(0.5, 0.5),
-			Position = ReactModule.joinBindings({ Saturation, Value }):map(function(Entry): UDim2 --[[ Line: 119 ]]
+			Position = ReactModule.joinBindings({ Saturation, Value }):map(function(Entry): UDim2
 				return UDim2.fromScale(Entry[1], 1 - Entry[2])
 			end),
-			style = ReactModule.joinBindings({ Hue, Saturation, Value }):map(function(Entry) --[[ Line: 124 ]]
+			style = ReactModule.joinBindings({ Hue, Saturation, Value }):map(function(Entry)
 				return {
 					Transparency = 0,
 					Color3 = Color3.fromHSV(Entry[1], Entry[2], Entry[3])

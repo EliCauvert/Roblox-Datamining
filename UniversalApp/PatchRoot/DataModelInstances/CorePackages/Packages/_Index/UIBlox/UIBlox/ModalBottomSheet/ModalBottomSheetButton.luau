@@ -32,15 +32,15 @@ ModalBottomSheetButton.validateProps = TModule.strictInterface({
 ModalBottomSheetButton.defaultProps = {
 	text = "",
 	icon = {},
-	onActivated = function() --[[ Line: 49 ]] end
+	onActivated = function() end
 }
 
-function ModalBottomSheetButton.init(p1) --[[ Line: 52 ]]
+function ModalBottomSheetButton.init(p1)
 	-- upvalues: RoactModule (copy)
 	p1.pressed, p1.updatePressed = RoactModule.createBinding(false)
 	p1.ref = RoactModule.createRef()
 	
-	function p1.onColorChange(ImageColor3) --[[ Line: 55 ]]
+	function p1.onColorChange(ImageColor3)
 		-- upvalues: p1 (copy)
 		if p1.ref.current then
 			p1.ref.current.ImageColor3 = ImageColor3
@@ -49,16 +49,16 @@ function ModalBottomSheetButton.init(p1) --[[ Line: 52 ]]
 		end
 	end
 	
-	function p1.onInputBegan(Input): boolean --[[ Line: 62 ]]
+	function p1.onInputBegan(Input): boolean
 		return Input.UserInputType == Enum.UserInputType.MouseButton1 or Input.UserInputType == Enum.UserInputType.Touch
 	end
 	
-	function p1.onInputEnd(Input): boolean --[[ Line: 66 ]]
+	function p1.onInputEnd(Input): boolean
 		return Input.UserInputType == Enum.UserInputType.MouseButton1 or Input.UserInputType == Enum.UserInputType.Touch
 	end
 end
 
-function ModalBottomSheetButton.render(p1) --[[ Line: 72 ]]
+function ModalBottomSheetButton.render(p1)
 	-- upvalues: ImageRectSize (copy), ImageRectOffset (copy), _Rect (copy), WithStyleModule (copy), RoactModule (copy), ImagesModule (copy), ImageSetComponentModule (copy), FoundationFontFaceMigration (copy), NormalizeFontFaceFunction (copy), RoundedFrameModule (copy), ScaledImagesResolutionScale2 (copy)
 	local HasRoundTop = p1.props.hasRoundTop
 	local HasRoundBottom = p1.props.hasRoundBottom
@@ -97,7 +97,7 @@ function ModalBottomSheetButton.render(p1) --[[ Line: 72 ]]
 	if p1.props.renderRightElement then
 		Offset1 = Offset1 + XOffset + Offset
 	end
-	return WithStyleModule(function(p2) --[[ Line: 124 ]]
+	return WithStyleModule(function(p2)
 		-- upvalues: p1 (copy), RoactModule (upval), SliceCenter (ref), ImagesModule (upval), ImageRectSize1 (ref), NewVector (ref), Offset (ref), ImageSetComponentModule (upval), XOffset (copy), Offset1 (ref), FoundationFontFaceMigration (upval), NormalizeFontFaceFunction (upval), HasRoundBottom (copy), _UDim2 (ref), RoundedFrameModule (upval), HasRoundTop (copy), ScaledImagesResolutionScale2 (upval)
 		local Theme = p2.Theme
 		local _Font = p2.Font
@@ -123,13 +123,13 @@ function ModalBottomSheetButton.render(p1) --[[ Line: 72 ]]
 				ScaleType = Enum.ScaleType.Slice,
 				SliceCenter = SliceCenter,
 				Image = ImagesModule["component_assets/circle_17"].Image,
-				ImageColor3 = p1.pressed:map(function(p3) --[[ Line: 132 ]]
+				ImageColor3 = p1.pressed:map(function(p3)
 					-- upvalues: Theme (copy)
 					return if p3 then Theme.BackgroundOnPress.Color else Theme.BackgroundUIDefault.Color
 				end),
 				ImageRectSize = ImageRectSize1,
 				ImageRectOffset = NewVector,
-				ImageTransparency = p1.pressed:map(function(p3) --[[ Line: 135 ]]
+				ImageTransparency = p1.pressed:map(function(p3)
 					-- upvalues: Theme (copy)
 					return if p3 then Theme.BackgroundOnPress.Transparency else Theme.BackgroundUIDefault.Transparency
 				end),
@@ -137,13 +137,13 @@ function ModalBottomSheetButton.render(p1) --[[ Line: 72 ]]
 				LayoutOrder = p1.props.LayoutOrder,
 				[RoactModule.Ref] = p1.ref,
 				[RoactModule.Event.Activated] = p1.props.onActivatedAndDismissed,
-				[RoactModule.Event.InputBegan] = function(_, Input) --[[ Line: 156 ]]
+				[RoactModule.Event.InputBegan] = function(_, Input)
 					-- upvalues: p1 (upval)
 					if p1.onInputBegan(Input) then
 						p1.updatePressed(true)
 					end
 				end,
-				[RoactModule.Event.InputEnded] = function(_, Input) --[[ Line: 161 ]]
+				[RoactModule.Event.InputEnded] = function(_, Input)
 					-- upvalues: p1 (upval)
 					if p1.onInputEnd(Input) then
 						p1.updatePressed(false)

@@ -1,7 +1,7 @@
 ﻿local PlatformModule = require(script.Parent.Platform)
 local IconModule = require(script.Parent.Parent.Icon)
 
-local function _(p1, List) --[[ Line: 4 | Named "merge" ]]
+local function _(p1, List)
 	for i, value in List do
 		p1[i] = value
 	end

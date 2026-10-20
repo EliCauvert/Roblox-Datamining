@@ -1,6 +1,6 @@
 ﻿local CheckListConsistencyModule = require(script.Parent.checkListConsistency)
 
-local function recursiveToString(List, p1): string --[[ Line: 6 ]]
+local function recursiveToString(List, p1): string
 	-- upvalues: CheckListConsistencyModule (copy), recursiveToString (copy)
 	local P1 = p1 or ""
 	

@@ -1,4 +1,4 @@
-﻿return function(p1) --[[ Line: 1 ]]
+﻿return function(p1)
 	return {
 		paymentsGateway = {
 			getUpsellProduct = p1.fromString("apis:payments-gateway/v1/products/get-upsell-product"),
@@ -6,7 +6,7 @@
 			checkUserPurchaseSettings = p1.fromString("apis:payments-gateway/v1/check-user-purchase-settings")
 		},
 		purchaseWarning = {
-			getPurchaseWarning = function(p2, p3, p4) --[[ Line: 9 ]]
+			getPurchaseWarning = function(p2, p3, p4)
 				-- upvalues: p1 (copy)
 				local Formatted = ""
 				

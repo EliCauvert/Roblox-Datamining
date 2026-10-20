@@ -1,7 +1,7 @@
 ﻿local TModule = require(script:FindFirstAncestor("RoduxGames").Parent.t)
 local GameMediaModelModule = {}
 
-function GameMediaModelModule.new(p1) --[[ Line: 19 ]]
+function GameMediaModelModule.new(p1)
 	-- upvalues: GameMediaModelModule (copy)
 	assert(GameMediaModelModule.isValid(p1))
 	GameMediaModelModule.__index = GameMediaModelModule
@@ -10,7 +10,7 @@ function GameMediaModelModule.new(p1) --[[ Line: 19 ]]
 	return p1
 end
 
-function GameMediaModelModule.mock(p1) --[[ Line: 31 ]]
+function GameMediaModelModule.mock(p1)
 	-- upvalues: GameMediaModelModule (copy)
 	local P1 = p1 or {}
 	
@@ -22,7 +22,7 @@ function GameMediaModelModule.mock(p1) --[[ Line: 31 ]]
 	}))
 end
 
-function GameMediaModelModule.format(p1) --[[ Line: 44 ]]
+function GameMediaModelModule.format(p1)
 	-- upvalues: GameMediaModelModule (copy)
 	return (GameMediaModelModule.new({
 		assetTypeId = p1.assetTypeId,

@@ -20,13 +20,13 @@ local ConstantsModule = require(MomentsCreationFlow.Constants)
 local CreationFlowLocalizationModule = require(MomentsCreationFlow.Enums.CreationFlowLocalization)
 local EventNamesModule = require(MomentsCreationFlow.Analytics.EventNames)
 
-return function(p1) --[[ Line: 37 ]]
+return function(p1)
 	-- upvalues: UseDispatchFunction (copy), UseDeviceInsetsFunction (copy), UseTokensFunction (copy), ReactModule (copy), CreationFlowContextModule (copy), UseSelectorFunction (copy), ConstantsModule (copy), UseStateFunction (copy), UseCallbackFunction (copy), DescriptionUpdatedModule (copy), EventNamesModule (copy), View (copy), CreationFlowLocalizationModule (copy), Button (copy), FoundationModule (copy), InputSize (copy), ButtonVariant (copy), Text (copy)
 	local UseDispatchResult = UseDispatchFunction()
 	local UseDeviceInsetsResult = UseDeviceInsetsFunction()
 	local UseTokensResult = UseTokensFunction()
 	local UseContextResult = ReactModule.useContext(CreationFlowContextModule)
-	local UseStateResult, UseStateResult2 = UseStateFunction((UseSelectorFunction(function(p2) --[[ Line: 43 ]]
+	local UseStateResult, UseStateResult2 = UseStateFunction((UseSelectorFunction(function(p2)
 		-- upvalues: ConstantsModule (upval)
 		return p2[ConstantsModule.RoduxKey].CreationFlow.description
 	end)))
@@ -65,7 +65,7 @@ return function(p1) --[[ Line: 37 ]]
 					TextWrapped = true,
 					TextXAlignment = Enum.TextXAlignment.Left,
 					TextYAlignment = Enum.TextYAlignment.Top,
-					[ReactModule.Change.Text] = UseCallbackFunction(function(p2) --[[ Line: 54 ]]
+					[ReactModule.Change.Text] = UseCallbackFunction(function(p2)
 						-- upvalues: UseStateResult2 (copy)
 						local Text: string = p2.Text:gsub("[\r\n]+", " ")
 						local Length = utf8.len(Text)
@@ -81,7 +81,7 @@ return function(p1) --[[ Line: 37 ]]
 							p2.Text = Segment
 						end
 					end, {}),
-					[ReactModule.Event.FocusLost] = UseCallbackFunction(function() --[[ Line: 49 ]]
+					[ReactModule.Event.FocusLost] = UseCallbackFunction(function()
 						-- upvalues: UseDispatchResult (copy), DescriptionUpdatedModule (upval), UseStateResult (copy), UseContextResult (copy), EventNamesModule (upval)
 						UseDispatchResult(DescriptionUpdatedModule(UseStateResult))
 						UseContextResult.fireEvent(EventNamesModule.EditingFlowDescriptionEdited)

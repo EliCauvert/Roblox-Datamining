@@ -8,7 +8,7 @@ local FailureReasonsAccumulatorModule = require(Util.FailureReasonsAccumulator)
 local GetFFlagUGCValidateTexturePackModule = require(Parent.flags.getFFlagUGCValidateTexturePack)
 local GetFFlagUGCValidateTexturePackOnRCCOnlyModule = require(Parent.flags.getFFlagUGCValidateTexturePackOnRCCOnly)
 
-local function validateTexturePackURL(p1, p2, p3) --[[ Line: 21 ]]
+local function validateTexturePackURL(p1, p2, p3)
 	-- upvalues: FailureReasonsAccumulatorModule (copy), TexturePackUtilsModule (copy), AnalyticsModule (copy)
 	local NewFailureReasonsAccumulator = FailureReasonsAccumulatorModule.new()
 	local SurfaceAppearancesMissingTexturePacks = TexturePackUtilsModule.findSurfaceAppearancesMissingTexturePacks(p1, p2)
@@ -24,14 +24,14 @@ local function validateTexturePackURL(p1, p2, p3) --[[ Line: 21 ]]
 	return NewFailureReasonsAccumulator:getFinalResults()
 end
 
-local function validateSurfaceAppearanceTexturePackMatch(p4, p5) --[[ Line: 41 ]]
+local function validateSurfaceAppearanceTexturePackMatch(p4, p5)
 	-- upvalues: FailureReasonsAccumulatorModule (copy), TexturePackUtilsModule (copy), UGCValidationService (copy), AnalyticsModule (copy)
 	local NewFailureReasonsAccumulator = FailureReasonsAccumulatorModule.new()
 	local v1 = false
 	local Flag = false
 	
 	for _, Object in TexturePackUtilsModule.findSurfaceAppearancesWithTexturePacks(p4) do
-		local Success, Result = pcall(function() --[[ Line: 49 ]]
+		local Success, Result = pcall(function()
 			-- upvalues: UGCValidationService (upval), Object (copy)
 			return UGCValidationService:DoesSurfaceAppearanceMatchTexturePackAsync(Object)
 		end)
@@ -64,7 +64,7 @@ local function validateSurfaceAppearanceTexturePackMatch(p4, p5) --[[ Line: 41 ]
 end
 
 return {
-	validate = function(p6, p7, p8) --[[ Line: 82 ]]
+	validate = function(p6, p7, p8)
 		-- upvalues: GetFFlagUGCValidateTexturePackModule (copy), GetFFlagUGCValidateTexturePackOnRCCOnlyModule (copy), FailureReasonsAccumulatorModule (copy), validateTexturePackURL (copy), validateSurfaceAppearanceTexturePackMatch (copy), AnalyticsModule (copy)
 		if not GetFFlagUGCValidateTexturePackModule() then
 			return true

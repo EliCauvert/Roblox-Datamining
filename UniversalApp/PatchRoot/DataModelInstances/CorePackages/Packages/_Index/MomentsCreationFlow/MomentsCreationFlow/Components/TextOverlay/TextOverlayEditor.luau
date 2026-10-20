@@ -18,7 +18,7 @@ local Slider = FoundationModule.Slider
 local View = FoundationModule.View
 local TextOverlay = MomentsCommonModule.TextOverlay
 
-return function(p1) --[[ Line: 41 | Named "TextOverlayEditor" ]]
+return function(p1)
 	-- upvalues: UseDeviceInsetsFunction (copy), UseTokensFunction (copy), UseRefFunction (copy), UseBindingFunction (copy), UseStateFunction (copy), UseOnScreenKeyboardHeightModule (copy), UseCallbackFunction (copy), DashModule (copy), UseEffectOnceModule (copy), ReactModule (copy), TextService (copy), View (copy), FoundationModule (copy), Slider (copy), Knob (copy), TextOverlay (copy)
 	local UseDeviceInsetsResult = UseDeviceInsetsFunction()
 	local UseTokensResult = UseTokensFunction()
@@ -27,13 +27,13 @@ return function(p1) --[[ Line: 41 | Named "TextOverlayEditor" ]]
 	local UseStateResult, UseStateResult2 = UseStateFunction(Vector2.new(0, 0))
 	local UseOnScreenKeyboardHeightModuleResult = UseOnScreenKeyboardHeightModule()
 	local TextOverlayEdit = p1.textOverlayEdits and p1.textOverlayEdits[1]
-	local UseCallbackResult = UseCallbackFunction(function() --[[ Line: 51 ]]
+	local UseCallbackResult = UseCallbackFunction(function()
 		-- upvalues: UseRefResult (copy)
 		if UseRefResult.current then
 			UseRefResult.current:CaptureFocus()
 		end
 	end, {})
-	local UseCallbackResult1 = UseCallbackFunction(function(p2) --[[ Line: 57 ]]
+	local UseCallbackResult1 = UseCallbackFunction(function(p2)
 		-- upvalues: p1 (copy), DashModule (upval), TextOverlayEdit (copy)
 		local Length = utf8.len(p2.Text)
 		
@@ -42,7 +42,7 @@ return function(p1) --[[ Line: 41 | Named "TextOverlayEditor" ]]
 		end
 		p1.onTextOverlayUpdated({ DashModule.joinDeep(TextOverlayEdit, { text = p2.Text }) })
 	end, { TextOverlayEdit, p1.onTextOverlayUpdated })
-	local UseCallbackResult2 = UseCallbackFunction(function(FontSize) --[[ Line: 69 ]]
+	local UseCallbackResult2 = UseCallbackFunction(function(FontSize)
 		-- upvalues: p1 (copy), DashModule (upval), TextOverlayEdit (copy)
 		if p1.textOverlayEdits then
 			p1.onTextOverlayUpdated({
@@ -52,15 +52,15 @@ return function(p1) --[[ Line: 41 | Named "TextOverlayEditor" ]]
 			return
 		end
 	end, { p1.onTextOverlayUpdated, TextOverlayEdit })
-	local UseCallbackResult3 = UseCallbackFunction(function(Frame) --[[ Line: 82 ]]
+	local UseCallbackResult3 = UseCallbackFunction(function(Frame)
 		-- upvalues: UseStateResult2 (copy)
 		UseStateResult2(Frame.AbsoluteSize)
 	end, {})
-	UseEffectOnceModule(function() --[[ Line: 86 ]]
+	UseEffectOnceModule(function()
 		-- upvalues: UseCallbackResult (copy)
 		UseCallbackResult()
 	end, UseRefResult.current ~= nil and p1.textOverlayEdits ~= nil)
-	ReactModule.useEffect(function() --[[ Line: 90 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: TextOverlayEdit (copy), UseOnScreenKeyboardHeightModuleResult (copy), UseBindingResult2 (copy), TextService (upval), UseStateResult (copy)
 		if not TextOverlayEdit then return end
 		if UseOnScreenKeyboardHeightModuleResult == 0 then

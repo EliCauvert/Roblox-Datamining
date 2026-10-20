@@ -3,7 +3,7 @@ local TypeRegistryModule = require(script.Parent.Parent.Parent.Parent.Parent.pro
 local Module = {}
 Module.__index = Module
 
-function Module.new(p1) --[[ Line: 141 ]]
+function Module.new(p1)
 	-- upvalues: Module (copy)
 	return (setmetatable({
 		taxonomy_id = if p1 == nil or p1.taxonomy_id == nil then nil else p1.taxonomy_id,
@@ -11,7 +11,7 @@ function Module.new(p1) --[[ Line: 141 ]]
 	}, Module))
 end
 
-function Module:encode() --[[ Line: 150 ]]
+function Module:encode()
 	-- upvalues: ProtoModule (copy)
 	local Buf = buffer.create(0)
 	local Count = 0
@@ -30,7 +30,7 @@ function Module:encode() --[[ Line: 150 ]]
 	return Buf1
 end
 
-function Module.decode(Buf) --[[ Line: 169 ]]
+function Module.decode(Buf)
 	-- upvalues: Module (copy), ProtoModule (copy)
 	local NewModule = Module.new()
 	local v1 = 0
@@ -67,7 +67,7 @@ function Module.decode(Buf) --[[ Line: 169 ]]
 	return NewModule
 end
 
-function Module:jsonEncode() --[[ Line: 217 ]]
+function Module:jsonEncode()
 	local t = {}
 	
 	if self.taxonomy_id ~= nil then
@@ -79,7 +79,7 @@ function Module:jsonEncode() --[[ Line: 217 ]]
 	return t
 end
 
-function Module:jsonDecode() --[[ Line: 231 ]]
+function Module:jsonDecode()
 	-- upvalues: Module (copy)
 	local NewModule = Module.new()
 	
@@ -107,7 +107,7 @@ TypeRegistryModule.default:register(config.MarketplaceCatalogTaxonomyNode)
 local Module1 = {}
 Module1.__index = Module1
 
-function Module1.new(p1) --[[ Line: 267 ]]
+function Module1.new(p1)
 	-- upvalues: Module1 (copy)
 	return (setmetatable({
 		days = if p1 == nil or p1.days == nil then 0 else p1.days,
@@ -116,7 +116,7 @@ function Module1.new(p1) --[[ Line: 267 ]]
 	}, Module1))
 end
 
-function Module1:encode() --[[ Line: 277 ]]
+function Module1:encode()
 	-- upvalues: ProtoModule (copy)
 	local Buf = buffer.create(0)
 	local Count = 0
@@ -139,7 +139,7 @@ function Module1:encode() --[[ Line: 277 ]]
 	return Buf1
 end
 
-function Module1.decode(Buf) --[[ Line: 301 ]]
+function Module1.decode(Buf)
 	-- upvalues: Module1 (copy), ProtoModule (copy)
 	local NewModule = Module1.new()
 	local v2 = 0
@@ -176,7 +176,7 @@ function Module1.decode(Buf) --[[ Line: 301 ]]
 	return NewModule
 end
 
-function Module1:jsonEncode() --[[ Line: 354 ]]
+function Module1:jsonEncode()
 	local t = {}
 	
 	if self.days ~= nil and self.days ~= 0 then
@@ -191,7 +191,7 @@ function Module1:jsonEncode() --[[ Line: 354 ]]
 	return t
 end
 
-function Module1:jsonDecode() --[[ Line: 372 ]]
+function Module1:jsonDecode()
 	-- upvalues: Module1 (copy)
 	local NewModule = Module1.new()
 	
@@ -216,7 +216,7 @@ TypeRegistryModule.default:register(config.MarketplaceCatalogTimedOption)
 local Module2 = {}
 Module2.__index = Module2
 
-function Module2.new(p1) --[[ Line: 404 ]]
+function Module2.new(p1)
 	-- upvalues: Module2 (copy)
 	return (setmetatable({
 		name = if p1 == nil or p1.name == nil then "" else p1.name,
@@ -224,7 +224,7 @@ function Module2.new(p1) --[[ Line: 404 ]]
 	}, Module2))
 end
 
-function Module2:encode() --[[ Line: 413 ]]
+function Module2:encode()
 	-- upvalues: ProtoModule (copy)
 	local Buf = buffer.create(0)
 	local Count = 0
@@ -243,7 +243,7 @@ function Module2:encode() --[[ Line: 413 ]]
 	return Buf1
 end
 
-function Module2.decode(Buf) --[[ Line: 432 ]]
+function Module2.decode(Buf)
 	-- upvalues: Module2 (copy), ProtoModule (copy)
 	local NewModule = Module2.new()
 	local v3 = 0
@@ -280,7 +280,7 @@ function Module2.decode(Buf) --[[ Line: 432 ]]
 	return NewModule
 end
 
-function Module2:jsonEncode() --[[ Line: 480 ]]
+function Module2:jsonEncode()
 	local t = {}
 	
 	if self.name ~= nil and self.name ~= "" then
@@ -292,7 +292,7 @@ function Module2:jsonEncode() --[[ Line: 480 ]]
 	return t
 end
 
-function Module2:jsonDecode() --[[ Line: 494 ]]
+function Module2:jsonDecode()
 	-- upvalues: Module2 (copy)
 	local NewModule = Module2.new()
 	
@@ -314,7 +314,7 @@ TypeRegistryModule.default:register(config.MarketplaceCatalogVariantAttribute)
 local Module3 = {}
 Module3.__index = Module3
 
-function Module3.new(p1) --[[ Line: 524 ]]
+function Module3.new(p1)
 	-- upvalues: Module3 (copy)
 	return (setmetatable({
 		id = if p1 == nil or p1.id == nil then "" else p1.id,
@@ -323,7 +323,7 @@ function Module3.new(p1) --[[ Line: 524 ]]
 	}, Module3))
 end
 
-function Module3:encode() --[[ Line: 534 ]]
+function Module3:encode()
 	-- upvalues: ProtoModule (copy)
 	local Buf = buffer.create(0)
 	local Count = 0
@@ -346,7 +346,7 @@ function Module3:encode() --[[ Line: 534 ]]
 	return Buf1
 end
 
-function Module3.decode(Buf) --[[ Line: 558 ]]
+function Module3.decode(Buf)
 	-- upvalues: Module3 (copy), ProtoModule (copy)
 	local NewModule = Module3.new()
 	local v4 = 0
@@ -387,7 +387,7 @@ function Module3.decode(Buf) --[[ Line: 558 ]]
 	return NewModule
 end
 
-function Module3:jsonEncode() --[[ Line: 611 ]]
+function Module3:jsonEncode()
 	local t = {}
 	
 	if self.id ~= nil and self.id ~= "" then
@@ -402,7 +402,7 @@ function Module3:jsonEncode() --[[ Line: 611 ]]
 	return t
 end
 
-function Module3:jsonDecode() --[[ Line: 629 ]]
+function Module3:jsonDecode()
 	-- upvalues: Module3 (copy)
 	local NewModule = Module3.new()
 	

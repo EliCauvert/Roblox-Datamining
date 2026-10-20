@@ -4,22 +4,22 @@ local _ = require(ViewRecycler.Core.Types)
 local ItemKeyRegistryModule = require(script.Parent.ItemKeyRegistry)
 local MutationControllerModule = require(script.Parent.MutationController)
 
-return function(p1, p2) --[[ Line: 33 | Named "createSequenceDataSource" ]]
+return function(p1, p2)
 	-- upvalues: ItemKeyRegistryModule (copy), MutationControllerModule (copy), DataSourceChangeTypeModule (copy)
 	local Copy = table.clone(p1 or {})
 	local DataSourceSequence = ItemKeyRegistryModule.create(p2, "DataSource.sequence")
 	local RebuildResult = DataSourceSequence.rebuild(Copy)
-	local MutationControllerModuleResult = MutationControllerModule(function(): number --[[ Line: 37 ]]
+	local MutationControllerModuleResult = MutationControllerModule(function(): number
 		-- upvalues: Copy (ref)
 		return #Copy
-	end, function() --[[ Line: 39 ]]
+	end, function()
 		-- upvalues: Copy (ref), RebuildResult (ref), DataSourceSequence (copy)
 		return {
 			values = table.clone(Copy),
 			keys = table.clone(RebuildResult),
 			keyRegistry = DataSourceSequence.snapshot()
 		}
-	end, function(p3) --[[ Line: 41 ]]
+	end, function(p3)
 		-- upvalues: Copy (ref), RebuildResult (ref), DataSourceSequence (copy)
 		Copy = p3.values
 		RebuildResult = p3.keys
@@ -27,19 +27,19 @@ return function(p1, p2) --[[ Line: 33 | Named "createSequenceDataSource" ]]
 	end)
 	local config = nil
 	config = {
-		getItemCount = function(): number --[[ Line: 49 ]]
+		getItemCount = function(): number
 			-- upvalues: Copy (ref)
 			return #Copy
 		end,
-		getItem = function(p3) --[[ Line: 52 ]]
+		getItem = function(p3)
 			-- upvalues: Copy (ref)
 			return Copy[p3]
 		end,
-		getItemKey = function(p3) --[[ Line: 55 ]]
+		getItemKey = function(p3)
 			-- upvalues: RebuildResult (ref)
 			return RebuildResult[p3]
 		end,
-		getItems = function(p3, p4) --[[ Line: 58 ]]
+		getItems = function(p3, p4)
 			-- upvalues: Copy (ref)
 			return table.move(Copy, p3, p4, 1, {})
 		end,
@@ -47,17 +47,17 @@ return function(p1, p2) --[[ Line: 33 | Named "createSequenceDataSource" ]]
 		transaction = MutationControllerModuleResult.transaction
 	}
 	
-	function config.append(p3) --[[ Line: 65 ]]
+	function config.append(p3)
 		-- upvalues: config (ref), Copy (ref)
 		config.insert(#Copy + 1, p3)
 	end
 	
-	function config.prepend(p3) --[[ Line: 69 ]]
+	function config.prepend(p3)
 		-- upvalues: config (ref)
 		config.insert(1, p3)
 	end
 	
-	function config.insert(Index: number, p3) --[[ Line: 73 ]]
+	function config.insert(Index: number, p3)
 		-- upvalues: Copy (ref), DataSourceSequence (copy), RebuildResult (ref), MutationControllerModuleResult (copy), DataSourceChangeTypeModule (upval)
 		local CountCopy = #Copy
 		assert(Index >= 1 and Index <= CountCopy + 1, "DataSource.sequence: insert index out of range")
@@ -71,7 +71,7 @@ return function(p1, p2) --[[ Line: 33 | Named "createSequenceDataSource" ]]
 		}, CountCopy)
 	end
 	
-	function config.remove(Index: number, p3) --[[ Line: 82 ]]
+	function config.remove(Index: number, p3)
 		-- upvalues: Copy (ref), RebuildResult (ref), DataSourceSequence (copy), MutationControllerModuleResult (copy), DataSourceChangeTypeModule (upval)
 		local CountCopy = #Copy
 		local P11 = p3 or 1
@@ -91,7 +91,7 @@ return function(p1, p2) --[[ Line: 33 | Named "createSequenceDataSource" ]]
 		}, CountCopy)
 	end
 	
-	function config.setItem(Key: number, p4) --[[ Line: 99 ]]
+	function config.setItem(Key: number, p4)
 		-- upvalues: Copy (ref), RebuildResult (ref), DataSourceSequence (copy), MutationControllerModuleResult (copy), DataSourceChangeTypeModule (upval)
 		local CountCopy = #Copy
 		assert(Key >= 1 and Key <= CountCopy, "DataSource.sequence: setItem index out of range")
@@ -104,7 +104,7 @@ return function(p1, p2) --[[ Line: 33 | Named "createSequenceDataSource" ]]
 		}, CountCopy)
 	end
 	
-	function config.moveItem(Index: number, ToIndex: number) --[[ Line: 108 ]]
+	function config.moveItem(Index: number, ToIndex: number)
 		-- upvalues: Copy (ref), RebuildResult (ref), MutationControllerModuleResult (copy), DataSourceChangeTypeModule (upval)
 		local CountCopy = #Copy
 		assert(Index >= 1 and Index <= CountCopy, "DataSource.sequence: moveItem source index out of range")
@@ -125,7 +125,7 @@ return function(p1, p2) --[[ Line: 33 | Named "createSequenceDataSource" ]]
 		end
 	end
 	
-	function config.reorder(List) --[[ Line: 133 ]]
+	function config.reorder(List)
 		-- upvalues: Copy (ref), RebuildResult (ref), MutationControllerModuleResult (copy), DataSourceChangeTypeModule (upval)
 		local CountCopy = #Copy
 		assert(#List == CountCopy, "DataSource.sequence: reorder must contain every key")
@@ -152,10 +152,10 @@ return function(p1, p2) --[[ Line: 33 | Named "createSequenceDataSource" ]]
 		}, CountCopy)
 	end
 	
-	function config.replaceItems(Index: number, p4, p5) --[[ Line: 157 ]]
+	function config.replaceItems(Index: number, p4, p5)
 		-- upvalues: Copy (ref), MutationControllerModuleResult (copy), config (ref), DataSourceSequence (copy), RebuildResult (ref), DataSourceChangeTypeModule (upval)
 		assert(Index >= 1 and Index <= p4 and p4 <= #Copy, "DataSource.sequence: replaceItems range out of range")
-		MutationControllerModuleResult.transaction(function() --[[ Line: 162 ]]
+		MutationControllerModuleResult.transaction(function()
 			-- upvalues: config (upval), Index (copy), p4 (copy), p5 (copy), Copy (upval), DataSourceSequence (upval), RebuildResult (upval), MutationControllerModuleResult (upval), DataSourceChangeTypeModule (upval)
 			config.remove(Index, p4 - Index + 1)
 			
@@ -192,7 +192,7 @@ return function(p1, p2) --[[ Line: 33 | Named "createSequenceDataSource" ]]
 		end)
 	end
 	
-	function config.reset(Tbl) --[[ Line: 199 ]]
+	function config.reset(Tbl)
 		-- upvalues: Copy (ref), DataSourceSequence (copy), RebuildResult (ref), MutationControllerModuleResult (copy), DataSourceChangeTypeModule (upval)
 		local CountCopy = #Copy
 		local Copy1 = table.clone(Tbl)

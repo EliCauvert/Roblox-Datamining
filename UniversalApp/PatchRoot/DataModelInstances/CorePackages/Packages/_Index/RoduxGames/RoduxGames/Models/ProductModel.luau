@@ -1,7 +1,7 @@
 ﻿local TModule = require(script:FindFirstAncestor("RoduxGames").Parent.t)
 local ProductModelModule = {}
 
-function ProductModelModule.new(p1) --[[ Line: 13 ]]
+function ProductModelModule.new(p1)
 	-- upvalues: ProductModelModule (copy)
 	assert(ProductModelModule.isValid(p1))
 	ProductModelModule.__index = ProductModelModule
@@ -10,7 +10,7 @@ function ProductModelModule.new(p1) --[[ Line: 13 ]]
 	return p1
 end
 
-function ProductModelModule.mock(p1) --[[ Line: 25 ]]
+function ProductModelModule.mock(p1)
 	-- upvalues: ProductModelModule (copy)
 	local P1 = p1 or {}
 	
@@ -22,7 +22,7 @@ function ProductModelModule.mock(p1) --[[ Line: 25 ]]
 	}))
 end
 
-function ProductModelModule.format(p1) --[[ Line: 38 ]]
+function ProductModelModule.format(p1)
 	-- upvalues: ProductModelModule (copy)
 	return (ProductModelModule.new({
 		productId = tostring(p1.productId),

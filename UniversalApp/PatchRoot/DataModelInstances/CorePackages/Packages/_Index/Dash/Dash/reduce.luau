@@ -1,4 +1,4 @@
-﻿return function(List, Callback, p1) --[[ Line: 14 | Named "reduce" ]]
+﻿return function(List, Callback, p1)
 	local v1 = p1
 	
 	for i, value in List do

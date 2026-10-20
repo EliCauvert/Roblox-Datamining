@@ -10,9 +10,9 @@ local _Rect = Rect.new(7, 8, 7, 8)
 local AlertViewTextbox = Roact.PureComponent:extend("AlertViewTextbox")
 AlertViewTextbox.defaultProps = { LayoutOrder = 0, Text = "", PlaceholderText = nil }
 
-function AlertViewTextbox.render(p1) --[[ Line: 21 ]]
+function AlertViewTextbox.render(p1)
 	-- upvalues: UIBlox (copy), _Rect (copy), Roact (copy), ImagesModule (copy), FoundationFontFaceMigration (copy), NormalizeFontFaceFunction (copy), _Color3 (copy)
-	return UIBlox.Style.withStyle(function(p2) --[[ Line: 22 ]]
+	return UIBlox.Style.withStyle(function(p2)
 		-- upvalues: p1 (copy), _Rect (upval), Roact (upval), ImagesModule (upval), FoundationFontFaceMigration (upval), NormalizeFontFaceFunction (upval), _Color3 (upval)
 		local _Font = p2.Font
 		local Theme = p2.Theme
@@ -43,7 +43,7 @@ function AlertViewTextbox.render(p1) --[[ Line: 21 ]]
 				TextTruncate = Enum.TextTruncate.AtEnd,
 				TextWrapped = true,
 				TextXAlignment = Enum.TextXAlignment.Left,
-				[Roact.Change.Text] = function(p3) --[[ Line: 62 ]]
+				[Roact.Change.Text] = function(p3)
 					-- upvalues: p1 (upval)
 					if p1.props.onTextChanged then
 						p1.props.onTextChanged(p3.Text)
@@ -55,7 +55,7 @@ function AlertViewTextbox.render(p1) --[[ Line: 21 ]]
 	end)
 end
 
-return Roact.forwardRef(function(p1, ForwardRef) --[[ Line: 74 ]]
+return Roact.forwardRef(function(p1, ForwardRef)
 	-- upvalues: Roact (copy), AlertViewTextbox (copy), Cryo (copy)
 	return Roact.createElement(AlertViewTextbox, Cryo.Dictionary.join(p1, { forwardRef = ForwardRef }))
 end)

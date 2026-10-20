@@ -1,6 +1,6 @@
 ﻿local MagicMockModule = require(script.Parent.Parent.MagicMock)
 
-return function(p1) --[[ Line: 4 ]]
+return function(p1)
 	-- upvalues: MagicMockModule (copy)
 	local IsResult = MagicMockModule.is(p1)
 	

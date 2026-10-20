@@ -35,19 +35,19 @@ local ReactFiberLaneModule = {
 }
 local NoLanePriority = ReactFiberLaneModule.NoLanePriority
 
-function ReactFiberLaneModule.getCurrentUpdateLanePriority() --[[ Line: 147 ]]
+function ReactFiberLaneModule.getCurrentUpdateLanePriority()
 	-- upvalues: NoLanePriority (ref)
 	return NoLanePriority
 end
 
-function ReactFiberLaneModule.setCurrentUpdateLanePriority(Value) --[[ Line: 151 ]]
+function ReactFiberLaneModule.setCurrentUpdateLanePriority(Value)
 	-- upvalues: NoLanePriority (ref)
 	NoLanePriority = Value
 end
 
 local DefaultLanePriority = ReactFiberLaneModule.DefaultLanePriority
 
-local function getHighestPriorityLanes(Mask: number): number --[[ Line: 159 ]]
+local function getHighestPriorityLanes(Mask: number): number
 	-- upvalues: DefaultLanePriority (ref), ReactGlobalsModule (copy), Console (copy)
 	if bit32.band(1, Mask) ~= 0 then
 		DefaultLanePriority = 15
@@ -144,12 +144,12 @@ local function getHighestPriorityLanes(Mask: number): number --[[ Line: 159 ]]
 	return Mask
 end
 
-function ReactFiberLaneModule.schedulerPriorityToLanePriority(IdlePriority1): number --[[ Line: 234 ]]
+function ReactFiberLaneModule.schedulerPriorityToLanePriority(IdlePriority1): number
 	-- upvalues: ImmediatePriority (copy), UserBlockingPriority (copy), NormalPriority (copy), LowPriority (copy), IdlePriority (copy)
 	return if IdlePriority1 == ImmediatePriority then 15 elseif IdlePriority1 == UserBlockingPriority then 10 elseif IdlePriority1 == NormalPriority or IdlePriority1 == LowPriority then 8 elseif IdlePriority1 == IdlePriority then 2 else 0
 end
 
-function ReactFiberLaneModule.lanePriorityToSchedulerPriority(p1) --[[ Line: 255 ]]
+function ReactFiberLaneModule.lanePriorityToSchedulerPriority(p1)
 	-- upvalues: ImmediatePriority (copy), UserBlockingPriority (copy), NormalPriority (copy), IdlePriority (copy), NoPriority (copy), InvariantFunction (copy)
 	if p1 == 15 or p1 == 14 then
 		return ImmediatePriority
@@ -170,7 +170,7 @@ end
 local Callback2 = nil
 local Callback1 = nil
 
-function ReactFiberLaneModule.getNextLanes(p1, Value: number): number --[[ Line: 299 ]]
+function ReactFiberLaneModule.getNextLanes(p1, Value: number): number
 	-- upvalues: DefaultLanePriority (ref), getHighestPriorityLanes (copy), Callback1 (ref), Callback2 (ref)
 	local PendingLanes: number = p1.pendingLanes
 	
@@ -247,7 +247,7 @@ function ReactFiberLaneModule.getNextLanes(p1, Value: number): number --[[ Line:
 	return Bits
 end
 
-function ReactFiberLaneModule.getMostRecentEventTime(p2, Value: number): number --[[ Line: 418 ]]
+function ReactFiberLaneModule.getMostRecentEventTime(p2, Value: number): number
 	-- upvalues: Callback2 (ref)
 	local EventTimes = p2.eventTimes
 	local v4 = -1
@@ -264,7 +264,7 @@ function ReactFiberLaneModule.getMostRecentEventTime(p2, Value: number): number 
 	return v4
 end
 
-function ReactFiberLaneModule.computeExpirationTime(Mask, p3: number): number --[[ Line: 438 ]]
+function ReactFiberLaneModule.computeExpirationTime(Mask, p3: number): number
 	-- upvalues: getHighestPriorityLanes (copy), DefaultLanePriority (ref)
 	getHighestPriorityLanes(Mask)
 	local DefaultLanePriority1: number = DefaultLanePriority
@@ -272,7 +272,7 @@ function ReactFiberLaneModule.computeExpirationTime(Mask, p3: number): number --
 	return if DefaultLanePriority1 >= 10 then p3 + 250 elseif DefaultLanePriority1 >= 6 then p3 + 5000 else -1
 end
 
-function ReactFiberLaneModule.markStarvedLanesAsExpired(p3, p4: number) --[[ Line: 468 ]]
+function ReactFiberLaneModule.markStarvedLanesAsExpired(p3, p4: number)
 	-- upvalues: Callback2 (ref), getHighestPriorityLanes (copy), DefaultLanePriority (ref)
 	local SuspendedLanes: number = p3.suspendedLanes
 	local PingedLanes: number = p3.pingedLanes
@@ -296,37 +296,37 @@ function ReactFiberLaneModule.markStarvedLanesAsExpired(p3, p4: number) --[[ Lin
 	end
 end
 
-function ReactFiberLaneModule.getHighestPriorityPendingLanes(p5) --[[ Line: 510 ]]
+function ReactFiberLaneModule.getHighestPriorityPendingLanes(p5)
 	-- upvalues: getHighestPriorityLanes (copy)
 	return (getHighestPriorityLanes(p5.pendingLanes))
 end
 
-function ReactFiberLaneModule.getLanesToRetrySynchronouslyOnError(p5): number --[[ Line: 515 ]]
+function ReactFiberLaneModule.getLanesToRetrySynchronouslyOnError(p5): number
 	local Bits = bit32.band(p5.pendingLanes, 3221225471)
 	
 	return if Bits == 0 then if bit32.band(Bits, 1073741824) == 0 then 0 else 1073741824 else Bits
 end
 
-function ReactFiberLaneModule.returnNextLanesPriority() --[[ Line: 528 ]]
+function ReactFiberLaneModule.returnNextLanesPriority()
 	-- upvalues: DefaultLanePriority (ref)
 	return DefaultLanePriority
 end
 
-function ReactFiberLaneModule.includesNonIdleWork(Value: number): boolean --[[ Line: 533 ]]
+function ReactFiberLaneModule.includesNonIdleWork(Value: number): boolean
 	return bit32.band(Value, 134217727) ~= 0
 end
 
-function ReactFiberLaneModule.includesOnlyRetries(Value: number): boolean --[[ Line: 538 ]]
+function ReactFiberLaneModule.includesOnlyRetries(Value: number): boolean
 	return bit32.band(Value, 62914560) == Value
 end
 
-function ReactFiberLaneModule.includesOnlyTransitions(Value: number): boolean --[[ Line: 543 ]]
+function ReactFiberLaneModule.includesOnlyTransitions(Value: number): boolean
 	return bit32.band(Value, 4186112) == Value
 end
 
 local Callback = nil
 
-local function findUpdateLane(p5, p6: number) --[[ Line: 553 ]]
+local function findUpdateLane(p5, p6: number)
 	-- upvalues: Callback (ref), findUpdateLane (copy), InvariantFunction (copy)
 	if p5 ~= 0 then
 		if p5 == 15 then
@@ -371,7 +371,7 @@ end
 
 ReactFiberLaneModule.findUpdateLane = findUpdateLane
 
-function ReactFiberLaneModule.findTransitionLane(p5: number, p6: number) --[[ Line: 612 ]]
+function ReactFiberLaneModule.findTransitionLane(p5: number, p6: number)
 	-- upvalues: Callback (ref)
 	local CallbackResult = Callback((bit32.band(4186112, (bit32.bnot(p6)))))
 	
@@ -385,7 +385,7 @@ function ReactFiberLaneModule.findTransitionLane(p5: number, p6: number) --[[ Li
 	return CallbackResult
 end
 
-function ReactFiberLaneModule.findRetryLane(p5: number) --[[ Line: 632 ]]
+function ReactFiberLaneModule.findRetryLane(p5: number)
 	-- upvalues: Callback (ref)
 	local CallbackResult = Callback((bit32.band(62914560, (bit32.bnot(p5)))))
 	
@@ -395,62 +395,62 @@ function ReactFiberLaneModule.findRetryLane(p5: number) --[[ Line: 632 ]]
 	return CallbackResult
 end
 
-local function _(Value: number): number --[[ Line: 644 | Named "getHighestPriorityLane" ]]
+local function _(Value: number): number
 	return (bit32.band(Value, -Value))
 end
 
-Callback1 = function(p5: number): number --[[ Line: 648 | Named "getLowestPriorityLane" ]]
+Callback1 = function(p5: number): number
 	local Shift = 31 - bit32.countlz(p5)
 	
 	return if Shift < 0 then 0 else bit32.lshift(1, Shift)
 end
 
-local _ = function(p5): number --[[ Line: 658 | Named "getEqualOrHigherPriorityLanes" ]]
+local _ = function(p5): number
 	-- upvalues: Callback1 (ref)
 	return bit32.lshift(Callback1(p5), 1) - 1
 end
 
-Callback = function(Value: number): number --[[ Line: 662 | Named "pickArbitraryLane" ]]
+Callback = function(Value: number): number
 	return (bit32.band(Value, -Value))
 end
 
 ReactFiberLaneModule.pickArbitraryLane = Callback
 
-Callback2 = function(Bits: number): number --[[ Line: 671 | Named "pickArbitraryLaneIndex" ]]
+Callback2 = function(Bits: number): number
 	return 31 - bit32.countlz(Bits)
 end
 
-function ReactFiberLaneModule.includesSomeLane(Value: number, Mask: number): boolean --[[ Line: 680 ]]
+function ReactFiberLaneModule.includesSomeLane(Value: number, Mask: number): boolean
 	return bit32.band(Value, Mask) ~= 0
 end
 
-function ReactFiberLaneModule.isSubsetOfLanes(Value: number, Mask: number): boolean --[[ Line: 685 ]]
+function ReactFiberLaneModule.isSubsetOfLanes(Value: number, Mask: number): boolean
 	return bit32.band(Value, Mask) == Mask
 end
 
-local function mergeLanes(Value: number, Mask: number): number --[[ Line: 690 ]]
+local function mergeLanes(Value: number, Mask: number): number
 	return (bit32.bor(Value, Mask))
 end
 
 ReactFiberLaneModule.mergeLanes = if v1 then bit32.bor else mergeLanes
 
-function ReactFiberLaneModule.removeLanes(Value: number, p5: number): number --[[ Line: 698 ]]
+function ReactFiberLaneModule.removeLanes(Value: number, p5: number): number
 	return (bit32.band(Value, (bit32.bnot(p5))))
 end
 
-function ReactFiberLaneModule.laneToLanes(p5) --[[ Line: 705 ]]
+function ReactFiberLaneModule.laneToLanes(p5)
 	return p5
 end
 
-function ReactFiberLaneModule.higherPriorityLane(p5, p6) --[[ Line: 710 ]]
+function ReactFiberLaneModule.higherPriorityLane(p5, p6)
 	return if p5 == 0 or p6 == 0 then if p5 == 0 then p6 else p5 elseif p5 < p6 then p5 else p6
 end
 
-function ReactFiberLaneModule.higherLanePriority(p5, p6) --[[ Line: 726 ]]
+function ReactFiberLaneModule.higherLanePriority(p5, p6)
 	return if p5 == 0 or p6 >= p5 then p6 else p5
 end
 
-function ReactFiberLaneModule.createLaneMap(p5) --[[ Line: 737 ]]
+function ReactFiberLaneModule.createLaneMap(p5)
 	return {
 		[0] = p5,
 		[1] = p5,
@@ -487,7 +487,7 @@ function ReactFiberLaneModule.createLaneMap(p5) --[[ Line: 737 ]]
 	}
 end
 
-function ReactFiberLaneModule.markRootUpdated(p5, Mask: number, p6) --[[ Line: 781 ]]
+function ReactFiberLaneModule.markRootUpdated(p5, Mask: number, p6)
 	p5.pendingLanes = bit32.bor(p5.pendingLanes, Mask)
 	local MaskDelta = Mask - 1
 	p5.suspendedLanes = bit32.band(p5.suspendedLanes, MaskDelta)
@@ -495,7 +495,7 @@ function ReactFiberLaneModule.markRootUpdated(p5, Mask: number, p6) --[[ Line: 7
 	p5.eventTimes[31 - bit32.countlz(Mask)] = p6
 end
 
-function ReactFiberLaneModule.markRootSuspended(p5, Mask: number) --[[ Line: 810 ]]
+function ReactFiberLaneModule.markRootSuspended(p5, Mask: number)
 	-- upvalues: Callback2 (ref)
 	p5.suspendedLanes = bit32.bor(p5.suspendedLanes, Mask)
 	p5.pingedLanes = bit32.band(p5.pingedLanes, (bit32.bnot(Mask)))
@@ -508,27 +508,27 @@ function ReactFiberLaneModule.markRootSuspended(p5, Mask: number) --[[ Line: 810
 	end
 end
 
-function ReactFiberLaneModule.markRootPinged(p6, Mask: number, _) --[[ Line: 828 ]]
+function ReactFiberLaneModule.markRootPinged(p6, Mask: number, _)
 	p6.pingedLanes = bit32.bor(p6.pingedLanes, (bit32.band(p6.suspendedLanes, Mask)))
 end
 
-function ReactFiberLaneModule.markRootExpired(p6, Value: number) --[[ Line: 834 ]]
+function ReactFiberLaneModule.markRootExpired(p6, Value: number)
 	p6.expiredLanes = bit32.bor(p6.expiredLanes, (bit32.band(Value, p6.pendingLanes)))
 end
 
-function ReactFiberLaneModule.markDiscreteUpdatesExpired(p6) --[[ Line: 840 ]]
+function ReactFiberLaneModule.markDiscreteUpdatesExpired(p6)
 	p6.expiredLanes = bit32.bor(p6.expiredLanes, (bit32.band(24, p6.pendingLanes)))
 end
 
-function ReactFiberLaneModule.hasDiscreteLanes(Value: number): boolean --[[ Line: 846 ]]
+function ReactFiberLaneModule.hasDiscreteLanes(Value: number): boolean
 	return bit32.band(Value, 24) ~= 0
 end
 
-function ReactFiberLaneModule.markRootMutableRead(p6, Value: number) --[[ Line: 851 ]]
+function ReactFiberLaneModule.markRootMutableRead(p6, Value: number)
 	p6.mutableReadLanes = bit32.bor(p6.mutableReadLanes, (bit32.band(Value, p6.pendingLanes)))
 end
 
-function ReactFiberLaneModule.markRootFinished(p6, Mask: number) --[[ Line: 857 ]]
+function ReactFiberLaneModule.markRootFinished(p6, Mask: number)
 	-- upvalues: Callback2 (ref)
 	local Bits = bit32.band(p6.pendingLanes, (bit32.bnot(Mask)))
 	p6.pendingLanes = Mask
@@ -550,7 +550,7 @@ function ReactFiberLaneModule.markRootFinished(p6, Mask: number) --[[ Line: 857 
 	end
 end
 
-function ReactFiberLaneModule.markRootEntangled(p7, Mask: number) --[[ Line: 890 ]]
+function ReactFiberLaneModule.markRootEntangled(p7, Mask: number)
 	-- upvalues: Callback2 (ref)
 	p7.entangledLanes = bit32.bor(p7.entangledLanes, Mask)
 	local Entanglements = p7.entanglements
@@ -563,7 +563,7 @@ function ReactFiberLaneModule.markRootEntangled(p7, Mask: number) --[[ Line: 890
 	end
 end
 
-function ReactFiberLaneModule.getBumpedLaneForHydration(p8, Mask: number): number --[[ Line: 906 ]]
+function ReactFiberLaneModule.getBumpedLaneForHydration(p8, Mask: number): number
 	-- upvalues: getHighestPriorityLanes (copy), DefaultLanePriority (ref), InvariantFunction (copy)
 	getHighestPriorityLanes(Mask)
 	local DefaultLanePriority1 = DefaultLanePriority

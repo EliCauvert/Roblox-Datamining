@@ -1,7 +1,7 @@
 ﻿local ReactModule = require(script.Parent.Parent.Parent.Parent.React)
 local _ = require(script.Parent.Parent.FlatList)
 
-return function(p1) --[[ Line: 40 | Named "useFocusNavigationScrolling" ]]
+return function(p1)
 	-- upvalues: ReactModule (copy)
 	local CellRendererKey = if p1.cellRendererKey then p1.cellRendererKey else "CellRendererView"
 	local ListRef = p1.listRef
@@ -11,7 +11,7 @@ return function(p1) --[[ Line: 40 | Named "useFocusNavigationScrolling" ]]
 	local UseRefResult = ReactModule.useRef(if p1.initialIndex then p1.initialIndex else 1)
 	local Data = p1.data
 	
-	return ReactModule.useCallback(function(Ancestor, _, _, Object) --[[ Line: 64 ]]
+	return ReactModule.useCallback(function(Ancestor, _, _, Object)
 		-- upvalues: CellRendererKey (copy), UseRefResult (copy), Data (copy), OnSelectedIndexChangedFunction (copy), ListRef (copy), NoAnimated (copy), ViewOffset (copy)
 		if Object and Object:IsDescendantOf(Ancestor) then
 			local CellRendererKey1 = Object:FindFirstAncestor(CellRendererKey)
@@ -40,7 +40,7 @@ return function(p1) --[[ Line: 40 | Named "useFocusNavigationScrolling" ]]
 	end, {
 		ListRef, UseRefResult, CellRendererKey, OnSelectedIndexChangedFunction,
 		NoAnimated, ViewOffset, Data
-	}), (ReactModule.useCallback(function(p2) --[[ Line: 50 ]]
+	}), (ReactModule.useCallback(function(p2)
 		-- upvalues: ListRef (copy)
 		local ScaledIndex = p2.index * p2.averageItemLength
 		

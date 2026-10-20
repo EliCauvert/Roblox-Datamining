@@ -9,14 +9,14 @@ local Set = LuauPolyfillModule.Set
 local Console = LuauPolyfillModule.console
 local v1 = require(Parent1.SafeFlags).createGetFFlag("VirtualizedListStableCells")()
 
-local function _(p1): boolean --[[ Line: 36 | Named "isIndexTruthy" ]]
+local function _(p1): boolean
 	return p1 ~= nil and p1 ~= 1
 end
 
 local BatchinatorModule = require(Parent.Interaction.Batchinator)
 local FillRateHelperModule = require(script.Parent.FillRateHelper)
 local config = {
-	findNodeHandle = function(_) --[[ Line: 47 ]]
+	findNodeHandle = function(_)
 		warn("ReactNative.findNodeHandle is not implemented")
 	end
 }
@@ -26,7 +26,7 @@ local StyleSheetModule = require(Parent.StyleSheet.StyleSheet)
 local ViewModule = require(Parent.Components.View.View)
 local ViewabilityHelperModule = require(script.Parent.ViewabilityHelper)
 
-local function v19(...) --[[ Line: 65 ]]
+local function v19(...)
 	return {}
 end
 
@@ -44,7 +44,7 @@ local Callback = nil
 local CreateResult = nil
 local CellRenderer = nil
 
-RefreshControl = function(p1) --[[ Line: 105 | Named "RefreshControl" ]]
+RefreshControl = function(p1)
 	-- upvalues: ReactModule (copy)
 	return ReactModule.createElement("Frame", { Name = "RCTRefreshControl" }, p1.children)
 end
@@ -52,32 +52,32 @@ end
 local Flag = false
 local DisplayName = ""
 
-local _ = function(p1) --[[ Line: 411 | Named "horizontalOrDefault" ]]
+local _ = function(p1)
 	return p1 ~= nil and p1
 end
 
-local _ = function(p1) --[[ Line: 416 | Named "initialNumToRenderOrDefault" ]]
+local _ = function(p1)
 	return if p1 == nil then 10 else p1
 end
 
-local _ = function(p1) --[[ Line: 421 | Named "maxToRenderPerBatchOrDefault" ]]
+local _ = function(p1)
 	return if p1 == nil then 10 else p1
 end
 
-local _ = function(p1) --[[ Line: 426 | Named "onEndReachedThresholdOrDefault" ]]
+local _ = function(p1)
 	return if p1 == nil then 2 else p1
 end
 
-local _ = function(p1) --[[ Line: 431 | Named "scrollEventThrottleOrDefault" ]]
+local _ = function(p1)
 	return if p1 == nil then 50 else p1
 end
 
-local _ = function(p1) --[[ Line: 436 | Named "windowSizeOrDefault" ]]
+local _ = function(p1)
 	return if p1 == nil then 21 else p1
 end
 
-local _ = function(p1) --[[ Line: 447 | Named "compareItemDataOrDefault" ]]
-	return if p1 == nil then function(p2, p3): boolean --[[ Line: 449 ]]
+local _ = function(p1)
+	return if p1 == nil then function(p2, p3): boolean
 		return p2 == p3
 	end else p1
 end
@@ -85,7 +85,7 @@ end
 local VirtualizedList = ReactModule.PureComponent:extend("VirtualizedList")
 VirtualizedList.contextType = VirtualizedListContextModule.VirtualizedListContext
 
-function VirtualizedList.init(p1, Props) --[[ Line: 676 ]]
+function VirtualizedList.init(p1, Props)
 	-- upvalues: Map (copy), InvariantModule (copy), FillRateHelperModule (copy), Boolean (copy), ComputeWindowedRenderLimitsFunction (copy), BatchinatorModule (copy), Array (copy), ViewabilityHelperModule (copy), Object (copy), Set (copy), Console (copy), Callback (ref), ReactModule (copy), ViewModule (copy), ScrollViewModule (copy), RefreshControl (ref), v1 (copy), InfoLogModule (copy)
 	p1.props = Props
 	p1._viewabilityTuples = {}
@@ -124,7 +124,7 @@ function VirtualizedList.init(p1, Props) --[[ Line: 676 ]]
 	p1._canvasSize = UDim2.new(0, 0, 0, 0)
 	p1._invertedCanvasLength = if p1.props.getItemLayout then 0 else p1.props.invertedCanvasLength or 1000
 	
-	function p1._getFrameMetrics(Index) --[[ Line: 720 ]]
+	function p1._getFrameMetrics(Index)
 		-- upvalues: p1 (copy), InvariantModule (upval)
 		local Data = p1.props.data
 		local GetItemFunction = p1.props.getItem
@@ -143,7 +143,7 @@ function VirtualizedList.init(p1, Props) --[[ Line: 676 ]]
 	InvariantModule((if WindowSize == nil then 21 else WindowSize) > 0, "VirtualizedList: The windowSize prop must be present and set to a value greater than 0.")
 	p1._fillRateHelper = FillRateHelperModule.new(p1._getFrameMetrics)
 	
-	function p1._updateCellsToRender() --[[ Line: 758 ]]
+	function p1._updateCellsToRender()
 		-- upvalues: p1 (copy), Boolean (upval), ComputeWindowedRenderLimitsFunction (upval)
 		local Data = p1.props.data
 		local GetItemCountFunction = p1.props.getItemCount
@@ -153,7 +153,7 @@ function VirtualizedList.init(p1, Props) --[[ Line: 676 ]]
 		p1:_updateViewableItems(Data)
 		
 		if Boolean.toJSBoolean(Data) then
-			p1:setState(function(DerivedStateFromProps) --[[ Line: 767 ]]
+			p1:setState(function(DerivedStateFromProps)
 				-- upvalues: p1 (upval), IsVirtualizationDisabled (copy), Boolean (upval), ComputeWindowedRenderLimitsFunction (upval), OnEndReachedThreshold1 (copy), GetItemCountFunction (copy), Data (copy)
 				local DerivedStateFromProps1 = nil
 				local ContentLength: number = p1._scrollMetrics.contentLength
@@ -220,7 +220,7 @@ function VirtualizedList.init(p1, Props) --[[ Line: 676 ]]
 	p1._updateCellsToRenderBatcher = BatchinatorModule.new(p1._updateCellsToRender, if p1.props.updateCellsBatchingPeriod == nil then 50 else p1.props.updateCellsBatchingPeriod)
 	
 	if p1.props.viewabilityConfigCallbackPairs then
-		p1._viewabilityTuples = Array.map(p1.props.viewabilityConfigCallbackPairs, function(p2) --[[ Line: 850 ]]
+		p1._viewabilityTuples = Array.map(p1.props.viewabilityConfigCallbackPairs, function(p2)
 			-- upvalues: ViewabilityHelperModule (upval)
 			return {
 				viewabilityHelper = ViewabilityHelperModule.new(p2.viewabilityConfig),
@@ -261,24 +261,24 @@ function VirtualizedList.init(p1, Props) --[[ Line: 676 ]]
 	end
 	p1.state = State
 	
-	function p1._getScrollMetrics() --[[ Line: 891 ]]
+	function p1._getScrollMetrics()
 		-- upvalues: p1 (copy)
 		return p1._scrollMetrics
 	end
 	
-	function p1._getOutermostParentListRef() --[[ Line: 895 ]]
+	function p1._getOutermostParentListRef()
 		-- upvalues: p1 (copy)
 		return if p1:_isNestedWithSameOrientation() then p1.context.getOutermostParentListRef() else p1
 	end
 	
-	function p1._getNestedChildState(p2) --[[ Line: 903 ]]
+	function p1._getNestedChildState(p2)
 		-- upvalues: p1 (copy)
 		local GetResult = p1._nestedChildLists:get(p2)
 		
 		return if GetResult then GetResult.state else GetResult
 	end
 	
-	function p1._registerAsNestedChild(p2) --[[ Line: 908 ]]
+	function p1._registerAsNestedChild(p2)
 		-- upvalues: p1 (copy), Set (upval), Console (upval), Callback (upval), Object (upval), Boolean (upval)
 		local GetResult = p1._cellKeysToChildListKeys:get(p2.cellKey) or Set.new()
 		GetResult:add(p2.key)
@@ -298,14 +298,14 @@ function VirtualizedList.init(p1, Props) --[[ Line: 676 ]]
 		return nil
 	end
 	
-	function p1._unregisterAsNestedChild(p2) --[[ Line: 940 ]]
+	function p1._unregisterAsNestedChild(p2)
 		-- upvalues: p1 (copy)
 		p1._nestedChildLists:set(p2.key, { ref = nil, state = p2.state })
 	end
 	
-	function p1._onUpdateSeparators(p2, p3) --[[ Line: 947 ]]
+	function p1._onUpdateSeparators(p2, p3)
 		-- upvalues: Array (upval), p1 (copy), Boolean (upval)
-		Array.forEach(p2, function(p4) --[[ Line: 948 ]]
+		Array.forEach(p2, function(p4)
 			-- upvalues: p1 (upval), Boolean (upval), p3 (copy)
 			local CellRef = p4 ~= nil and p1._cellRefs[tostring(p4)]
 			
@@ -314,16 +314,16 @@ function VirtualizedList.init(p1, Props) --[[ Line: 676 ]]
 		end)
 	end
 	
-	function p1._getSpacerKey(p2): string --[[ Line: 956 ]]
+	function p1._getSpacerKey(p2): string
 		return if p2 then "height" else "width"
 	end
 	
-	function p1._captureScrollRef(_scrollRef) --[[ Line: 960 ]]
+	function p1._captureScrollRef(_scrollRef)
 		-- upvalues: p1 (copy)
 		p1._scrollRef = _scrollRef
 	end
 	
-	function p1._defaultRenderScrollComponent(Tbl) --[[ Line: 964 ]]
+	function p1._defaultRenderScrollComponent(Tbl)
 		-- upvalues: p1 (copy), ReactModule (upval), ViewModule (upval), InvariantModule (upval), ScrollViewModule (upval), Object (upval), RefreshControl (upval)
 		local OnRefresh = Tbl.onRefresh
 		
@@ -344,7 +344,7 @@ function VirtualizedList.init(p1, Props) --[[ Line: 676 ]]
 		end
 	end
 	
-	function p1._onCellUnmount(p2) --[[ Line: 994 ]]
+	function p1._onCellUnmount(p2)
 		-- upvalues: p1 (copy), Object (upval), v1 (upval)
 		local Frame = p1._frames[p2]
 		
@@ -357,7 +357,7 @@ function VirtualizedList.init(p1, Props) --[[ Line: 676 ]]
 		end
 	end
 	
-	function p1._onLayout(Frame: Frame) --[[ Line: 1005 ]]
+	function p1._onLayout(Frame: Frame)
 		-- upvalues: p1 (copy)
 		if p1:_isNestedWithSameOrientation() then
 			p1:measureLayoutRelativeToContainingList()
@@ -374,14 +374,14 @@ function VirtualizedList.init(p1, Props) --[[ Line: 676 ]]
 		p1:_maybeCallOnEndReached()
 	end
 	
-	function p1._onLayoutEmpty(p2) --[[ Line: 1023 ]]
+	function p1._onLayoutEmpty(p2)
 		-- upvalues: p1 (copy)
 		if p1.props.onLayout then
 			p1.props.onLayout(p2)
 		end
 	end
 	
-	function p1._onLayoutFooter(Frame: Frame) --[[ Line: 1029 ]]
+	function p1._onLayoutFooter(Frame: Frame)
 		-- upvalues: p1 (copy)
 		p1:_triggerRemeasureForChildListsInCell(p1:_getFooterCellKey())
 		p1._footerLength = p1:_selectLength({
@@ -390,7 +390,7 @@ function VirtualizedList.init(p1, Props) --[[ Line: 676 ]]
 		})
 	end
 	
-	function p1._onLayoutHeader(Frame: Frame) --[[ Line: 1037 ]]
+	function p1._onLayoutHeader(Frame: Frame)
 		-- upvalues: p1 (copy)
 		p1._headerLength = p1:_selectLength({
 			height = Frame.AbsoluteSize.Y,
@@ -398,7 +398,7 @@ function VirtualizedList.init(p1, Props) --[[ Line: 676 ]]
 		})
 	end
 	
-	function p1._onContentSizeChange(Width: number, Height: number) --[[ Line: 1044 ]]
+	function p1._onContentSizeChange(Width: number, Height: number)
 		-- upvalues: p1 (copy)
 		if Width > 0 and Height > 0 and p1.props.initialScrollIndex ~= nil and p1.props.initialScrollIndex > 1 and not p1._hasDoneInitialScroll then
 			if p1.props.contentOffset == nil then
@@ -407,7 +407,7 @@ function VirtualizedList.init(p1, Props) --[[ Line: 676 ]]
 			p1._hasDoneInitialScroll = true
 		elseif p1.props.inverted and Width > 0 and Height > 0 and not p1._hasDoneInitialScroll then
 			p1._hasDoneInitialScroll = true
-			task.defer(function() --[[ Line: 1059 ]]
+			task.defer(function()
 				-- upvalues: p1 (upval)
 				while p1:getScrollRef() == nil do
 					task.wait()
@@ -432,7 +432,7 @@ function VirtualizedList.init(p1, Props) --[[ Line: 676 ]]
 		p1:_maybeCallOnEndReached()
 	end
 	
-	function p1._convertParentScrollMetrics(_scrollMetrics) --[[ Line: 1087 ]]
+	function p1._convertParentScrollMetrics(_scrollMetrics)
 		-- upvalues: p1 (copy)
 		local OffsetDelta = _scrollMetrics.offset - p1._offsetFromParentVirtualizedList
 		
@@ -444,9 +444,9 @@ function VirtualizedList.init(p1, Props) --[[ Line: 676 ]]
 		}
 	end
 	
-	function p1._onScroll(ScrollFrame) --[[ Line: 1106 ]]
+	function p1._onScroll(ScrollFrame)
 		-- upvalues: p1 (copy), Boolean (upval), InfoLogModule (upval)
-		p1._nestedChildLists:forEach(function(p2) --[[ Line: 1107 ]]
+		p1._nestedChildLists:forEach(function(p2)
 			-- upvalues: ScrollFrame (copy)
 			if p2.ref then
 				p2.ref._onScroll(ScrollFrame)
@@ -506,7 +506,7 @@ function VirtualizedList.init(p1, Props) --[[ Line: 676 ]]
 		local ScrollPositionDelta: number = p1.state.scrollPositionDelta
 		
 		if ScrollPositionDelta > 0 then
-			p1:setState(function(DerivedStateFromProps) --[[ Line: 1175 ]]
+			p1:setState(function(DerivedStateFromProps)
 				-- upvalues: ScrollPositionDelta (copy)
 				return {
 					scrollPositionDelta = 0,
@@ -527,15 +527,15 @@ function VirtualizedList.init(p1, Props) --[[ Line: 676 ]]
 		p1:_scheduleCellsToRenderUpdate()
 	end
 	
-	function p1._onScrollBeginDrag(p2) --[[ Line: 1195 ]]
+	function p1._onScrollBeginDrag(p2)
 		-- upvalues: p1 (copy), Array (upval)
-		p1._nestedChildLists:forEach(function(p3) --[[ Line: 1196 ]]
+		p1._nestedChildLists:forEach(function(p3)
 			-- upvalues: p2 (copy)
 			if p3.ref then
 				p3.ref._onScrollBeginDrag(p2)
 			end
 		end)
-		Array.forEach(p1._viewabilityTuples, function(p3) --[[ Line: 1201 ]]
+		Array.forEach(p1._viewabilityTuples, function(p3)
 			p3.viewabilityHelper:recordInteraction()
 		end)
 		p1._hasInteracted = true
@@ -545,9 +545,9 @@ function VirtualizedList.init(p1, Props) --[[ Line: 676 ]]
 		end
 	end
 	
-	function p1._onScrollEndDrag(p2) --[[ Line: 1210 ]]
+	function p1._onScrollEndDrag(p2)
 		-- upvalues: p1 (copy), Boolean (upval)
-		p1._nestedChildLists:forEach(function(p3) --[[ Line: 1211 ]]
+		p1._nestedChildLists:forEach(function(p3)
 			-- upvalues: p2 (copy)
 			if p3.ref then
 				p3.ref._onScrollEndDrag(p2)
@@ -564,9 +564,9 @@ function VirtualizedList.init(p1, Props) --[[ Line: 676 ]]
 		end
 	end
 	
-	function p1._onMomentumScrollBegin(p2) --[[ Line: 1229 ]]
+	function p1._onMomentumScrollBegin(p2)
 		-- upvalues: p1 (copy)
-		p1._nestedChildLists:forEach(function(p3) --[[ Line: 1230 ]]
+		p1._nestedChildLists:forEach(function(p3)
 			-- upvalues: p2 (copy)
 			if p3.ref then
 				p3.ref._onMomentumScrollBegin(p2)
@@ -578,9 +578,9 @@ function VirtualizedList.init(p1, Props) --[[ Line: 676 ]]
 		end
 	end
 	
-	function p1._onMomentumScrollEnd(p2) --[[ Line: 1240 ]]
+	function p1._onMomentumScrollEnd(p2)
 		-- upvalues: p1 (copy)
-		p1._nestedChildLists:forEach(function(p3) --[[ Line: 1241 ]]
+		p1._nestedChildLists:forEach(function(p3)
 			-- upvalues: p2 (copy)
 			if p3.ref then
 				p3.ref._onMomentumScrollEnd(p2)
@@ -594,7 +594,7 @@ function VirtualizedList.init(p1, Props) --[[ Line: 676 ]]
 		end
 	end
 	
-	function p1._createViewToken(Index, IsViewable) --[[ Line: 1253 ]]
+	function p1._createViewToken(Index, IsViewable)
 		-- upvalues: p1 (copy)
 		local Item = p1.props.getItem(p1.props.data, Index)
 		
@@ -606,7 +606,7 @@ function VirtualizedList.init(p1, Props) --[[ Line: 676 ]]
 		}
 	end
 	
-	function p1._getFrameMetricsApprox(First: number) --[[ Line: 1268 ]]
+	function p1._getFrameMetricsApprox(First: number)
 		-- upvalues: p1 (copy), InvariantModule (upval)
 		local FrameMetrics = p1._getFrameMetrics(First)
 		
@@ -623,7 +623,7 @@ function VirtualizedList.init(p1, Props) --[[ Line: 676 ]]
 	end
 end
 
-function VirtualizedList.scrollToEnd(p2, p3) --[[ Line: 1289 ]]
+function VirtualizedList.scrollToEnd(p2, p3)
 	-- upvalues: Console (copy)
 	local Animated = p3 == nil or p3.animated
 	local FrameMetricsApprox = p2._getFrameMetricsApprox((p2.props.getItemCount(p2.props.data)))
@@ -641,7 +641,7 @@ function VirtualizedList.scrollToEnd(p2, p3) --[[ Line: 1289 ]]
 	end
 end
 
-function VirtualizedList.scrollToIndex(p2, AssignResult) --[[ Line: 1319 ]]
+function VirtualizedList.scrollToIndex(p2, AssignResult)
 	-- upvalues: InvariantModule (copy), Boolean (copy), Console (copy)
 	local Data = p2.props.data
 	local Horizontal = p2.props.horizontal
@@ -684,7 +684,7 @@ function VirtualizedList.scrollToIndex(p2, AssignResult) --[[ Line: 1319 ]]
 	end
 end
 
-function VirtualizedList.scrollToItem(p2, p3) --[[ Line: 1402 ]]
+function VirtualizedList.scrollToItem(p2, p3)
 	-- upvalues: Object (copy)
 	local Item = p3.item
 	local Data = p2.props.data
@@ -700,7 +700,7 @@ function VirtualizedList.scrollToItem(p2, p3) --[[ Line: 1402 ]]
 	end
 end
 
-function VirtualizedList.scrollToOffset(p4, p5) --[[ Line: 1431 ]]
+function VirtualizedList.scrollToOffset(p4, p5)
 	-- upvalues: Console (copy)
 	local Current = if p4:getScrollRef() then p4:getScrollRef()._nativeRef.current else nil
 	
@@ -725,20 +725,20 @@ function VirtualizedList.scrollToOffset(p4, p5) --[[ Line: 1431 ]]
 	end
 end
 
-function VirtualizedList.recordInteraction(p4) --[[ Line: 1477 ]]
+function VirtualizedList.recordInteraction(p4)
 	-- upvalues: Array (copy)
-	p4._nestedChildLists:forEach(function(p5) --[[ Line: 1478 ]]
+	p4._nestedChildLists:forEach(function(p5)
 		if p5.ref then
 			p5.ref:recordInteraction()
 		end
 	end)
-	Array.forEach(p4._viewabilityTuples, function(p5) --[[ Line: 1483 ]]
+	Array.forEach(p4._viewabilityTuples, function(p5)
 		p5.viewabilityHelper:recordInteraction()
 	end)
 	p4:_updateViewableItems(p4.props.data)
 end
 
-function VirtualizedList.flashScrollIndicators(p4) --[[ Line: 1489 ]]
+function VirtualizedList.flashScrollIndicators(p4)
 	if p4._scrollRef ~= nil then
 		p4._scrollRef:flashScrollIndicators()
 		
@@ -746,35 +746,35 @@ function VirtualizedList.flashScrollIndicators(p4) --[[ Line: 1489 ]]
 	end
 end
 
-function VirtualizedList.getScrollResponder(p4) --[[ Line: 1502 ]]
+function VirtualizedList.getScrollResponder(p4)
 	return if p4._scrollRef and p4._scrollRef.getScrollResponder then p4._scrollRef:getScrollResponder() else nil
 end
 
-function VirtualizedList.getScrollableNode(p4) --[[ Line: 1510 ]]
+function VirtualizedList.getScrollableNode(p4)
 	-- upvalues: config (copy)
 	return if p4._scrollRef and p4._scrollRef.getScrollableNode then p4._scrollRef:getScrollableNode() else config.findNodeHandle(p4._scrollRef)
 end
 
-function VirtualizedList.getScrollRef(p4) --[[ Line: 1518 ]]
+function VirtualizedList.getScrollRef(p4)
 	return if p4._scrollRef and p4._scrollRef.getScrollRef then p4._scrollRef:getScrollRef() else p4._scrollRef
 end
 
-function VirtualizedList.setNativeProps(p4, p5) --[[ Line: 1526 ]]
+function VirtualizedList.setNativeProps(p4, p5)
 	if p4._scrollRef then
 		p4._scrollRef:setNativeProps(p5)
 	end
 end
 
-function VirtualizedList._getCellKey(p4) --[[ Line: 1532 ]]
+function VirtualizedList._getCellKey(p4)
 	return if p4.context and p4.context.cellKey then p4.context.cellKey else "rootList"
 end
 
-function VirtualizedList._getListKey(p4) --[[ Line: 1536 ]]
+function VirtualizedList._getListKey(p4)
 	-- upvalues: Boolean (copy)
 	return if Boolean.toJSBoolean(p4.props.listKey) then p4.props.listKey else p4:_getCellKey()
 end
 
-function VirtualizedList._getDebugInfo(p4) --[[ Line: 1540 ]]
+function VirtualizedList._getDebugInfo(p4)
 	local Horizontal = p4.props.horizontal
 	
 	return {
@@ -785,11 +785,11 @@ function VirtualizedList._getDebugInfo(p4) --[[ Line: 1540 ]]
 	}
 end
 
-function VirtualizedList.hasMore(p4) --[[ Line: 1549 ]]
+function VirtualizedList.hasMore(p4)
 	return p4._hasMore
 end
 
-function VirtualizedList.componentDidMount(Ref) --[[ Line: 1553 ]]
+function VirtualizedList.componentDidMount(Ref)
 	if Ref:_isNestedWithSameOrientation() then
 		Ref.context.registerAsNestedChild({
 			cellKey = Ref:_getCellKey(),
@@ -800,7 +800,7 @@ function VirtualizedList.componentDidMount(Ref) --[[ Line: 1553 ]]
 	end
 end
 
-function VirtualizedList.componentWillUnmount(p4) --[[ Line: 1568 ]]
+function VirtualizedList.componentWillUnmount(p4)
 	-- upvalues: Array (copy)
 	if p4:_isNestedWithSameOrientation() then
 		p4.context.unregisterAsNestedChild({
@@ -814,25 +814,25 @@ function VirtualizedList.componentWillUnmount(p4) --[[ Line: 1568 ]]
 	end
 	p4:_updateViewableItems(nil)
 	p4._updateCellsToRenderBatcher:dispose({ abort = true })
-	Array.forEach(p4._viewabilityTuples, function(p5) --[[ Line: 1577 ]]
+	Array.forEach(p4._viewabilityTuples, function(p5)
 		p5.viewabilityHelper:dispose()
 	end)
 	p4._fillRateHelper:deactivateAndFlush()
 end
 
-function VirtualizedList.getDerivedStateFromProps(p4, DerivedStateFromProps) --[[ Line: 1583 ]]
+function VirtualizedList.getDerivedStateFromProps(p4, DerivedStateFromProps)
 	-- upvalues: Console (copy), Object (copy)
 	local Data = p4.data
 	local GetItemCountFunction = p4.getItemCount
 	local FirstItemTracked = DerivedStateFromProps.firstItemTracked
 	local ScrollPositionDelta = DerivedStateFromProps.scrollPositionDelta
 	local CompareItemData = p4.compareItemData
-	local Callback = if CompareItemData == nil then function(p5, p6): boolean --[[ Line: 449 ]]
+	local Callback = if CompareItemData == nil then function(p5, p6): boolean
 		return p5 == p6
 	end else CompareItemData
 	local Item = if Data and GetItemCountFunction(Data) > 0 then p4.getItem(Data, 1) else nil
 	
-	local function findItem(p5, FirstItemTracked): number --[[ Line: 1590 ]]
+	local function findItem(p5, FirstItemTracked): number
 		-- upvalues: Callback (copy)
 		local v2: number? = nil
 		
@@ -870,7 +870,7 @@ function VirtualizedList.getDerivedStateFromProps(p4, DerivedStateFromProps) --[
 	}
 end
 
-function VirtualizedList._pushCells(p6, List1, List, NewResult, Count, Count1: number, HorizontallyInverted) --[[ Line: 1646 ]]
+function VirtualizedList._pushCells(p6, List1, List, NewResult, Count, Count1: number, HorizontallyInverted)
 	-- upvalues: ReactModule (copy), CellRenderer (ref), v1 (copy)
 	local CellRendererComponent = p6.props.CellRendererComponent
 	local ItemSeparatorComponent = p6.props.ItemSeparatorComponent
@@ -905,13 +905,13 @@ function VirtualizedList._pushCells(p6, List1, List, NewResult, Count, Count1: n
 		config.key = KeyExtractorResult
 		config.prevCellKey = PrevCellKey
 		config.onUpdateSeparators = p6._onUpdateSeparators
-		config.onLayout = if v1 then p6:_getCellLayoutHandler(KeyExtractorResult, Index) else function(Frame) --[[ Line: 1696 ]]
+		config.onLayout = if v1 then p6:_getCellLayoutHandler(KeyExtractorResult, Index) else function(Frame)
 			-- upvalues: p6 (copy), KeyExtractorResult (copy), Index (copy)
 			return p6:_onCellLayout(Frame, KeyExtractorResult, Index)
 		end
 		config.onUnmount = p6._onCellUnmount
 		config.parentProps = p6.props
-		config.ref = if v1 then p6:_getCellRefHandler(KeyExtractorResult) else function(p7) --[[ Line: 1703 ]]
+		config.ref = if v1 then p6:_getCellRefHandler(KeyExtractorResult) else function(p7)
 			-- upvalues: p6 (copy), KeyExtractorResult (copy)
 			p6._cellRefs[tostring(KeyExtractorResult)] = p7
 		end
@@ -922,11 +922,11 @@ function VirtualizedList._pushCells(p6, List1, List, NewResult, Count, Count1: n
 	end
 end
 
-function VirtualizedList._isVirtualizationDisabled(p7) --[[ Line: 1714 ]]
+function VirtualizedList._isVirtualizationDisabled(p7)
 	return p7.props.disableVirtualization ~= nil and p7.props.disableVirtualization
 end
 
-function VirtualizedList._isNestedWithSameOrientation(p7): boolean --[[ Line: 1718 ]]
+function VirtualizedList._isNestedWithSameOrientation(p7): boolean
 	-- upvalues: Boolean (copy)
 	local Context = p7.context
 	local IsJSBooleanMatch = false
@@ -938,7 +938,7 @@ function VirtualizedList._isNestedWithSameOrientation(p7): boolean --[[ Line: 17
 	return IsJSBooleanMatch
 end
 
-function VirtualizedList._keyExtractor(p7, Item, Index) --[[ Line: 1724 ]]
+function VirtualizedList._keyExtractor(p7, Item, Index)
 	-- upvalues: KeyExtractorFunction (copy), Flag (ref), Boolean (copy), DisplayName (ref)
 	if p7.props.keyExtractor ~= nil then
 		return p7.props.keyExtractor(Item, Index)
@@ -955,7 +955,7 @@ function VirtualizedList._keyExtractor(p7, Item, Index) --[[ Line: 1724 ]]
 	return KeyExtractorResult
 end
 
-function VirtualizedList.render(p7) --[[ Line: 1739 ]]
+function VirtualizedList.render(p7)
 	-- upvalues: v19 (copy), Console (copy), CreateResult (ref), Set (copy), ReactModule (copy), VirtualizedListCellContextProvider (copy), ViewModule (copy), StyleSheetModule (copy), Flag (ref), DisplayName (ref), Object (copy), VirtualizedListContextProvider (copy), ScrollViewModule (copy)
 	if _G.__DEV__ then
 		local v4 = v19(p7.props.contentContainerStyle)
@@ -1100,7 +1100,7 @@ function VirtualizedList.render(p7) --[[ Line: 1739 ]]
 		table.insert(List, ReactModule.cloneElement(ListEmptyComponent1, {
 			key = "$empty",
 			Name = "$empty",
-			onLayout = function(p8) --[[ Line: 1928 ]]
+			onLayout = function(p8)
 				-- upvalues: p7 (copy), ListEmptyComponent1 (copy)
 				p7._onLayoutEmpty(p8)
 				
@@ -1204,7 +1204,7 @@ function VirtualizedList.render(p7) --[[ Line: 1739 ]]
 			debugInfo = p7:_getDebugInfo()
 		}
 	}, ReactModule.cloneElement((if p7.props.renderScrollComponent then p7.props.renderScrollComponent else p7._defaultRenderScrollComponent)(AssignResult), { ref = p7._captureScrollRef }, List))
-	local Element1 = if _G.__DEV__ then ReactModule.createElement(ScrollViewModule.Context.Consumer, nil, function(p8) --[[ Line: 2108 ]]
+	local Element1 = if _G.__DEV__ then ReactModule.createElement(ScrollViewModule.Context.Consumer, nil, function(p8)
 		-- upvalues: p7 (copy), Console (upval), Element (copy)
 		if p8 ~= nil then
 			local Horizontal = p7.props.horizontal
@@ -1220,12 +1220,12 @@ function VirtualizedList.render(p7) --[[ Line: 1739 ]]
 	return if p7.props.debug then ReactModule.createElement(ViewModule, { Name = "debug", style = CreateResult.debug }, Element1, p7:_renderDebugOverlay()) else Element1
 end
 
-function VirtualizedList.componentDidUpdate(p8, p9) --[[ Line: 2134 ]]
+function VirtualizedList.componentDidUpdate(p8, p9)
 	-- upvalues: Array (copy)
 	local ExtraData = p8.props.extraData
 	
 	if p8.props.data ~= p9.data or ExtraData ~= p9.extraData then
-		Array.forEach(p8._viewabilityTuples, function(p10) --[[ Line: 2139 ]]
+		Array.forEach(p8._viewabilityTuples, function(p10)
 			p10.viewabilityHelper:resetViewableIndices()
 		end)
 	end
@@ -1237,15 +1237,15 @@ function VirtualizedList.componentDidUpdate(p8, p9) --[[ Line: 2134 ]]
 	end
 end
 
-function VirtualizedList._computeBlankness(p8) --[[ Line: 2158 ]]
+function VirtualizedList._computeBlankness(p8)
 	p8._fillRateHelper:computeBlankness(p8.props, p8.state, p8._scrollMetrics)
 end
 
-function VirtualizedList._getCellLayoutHandler(p8, KeyExtractorResult, Index) --[[ Line: 2164 ]]
+function VirtualizedList._getCellLayoutHandler(p8, KeyExtractorResult, Index)
 	local CellLayoutHandler = p8._cellLayoutHandlers[KeyExtractorResult]
 	
 	if CellLayoutHandler == nil or CellLayoutHandler.index ~= Index then
-		local function Handler(Frame) --[[ Line: 2170 ]]
+		local function Handler(Frame)
 			-- upvalues: p8 (copy), KeyExtractorResult (copy), Index (copy)
 			return p8:_onCellLayout(Frame, KeyExtractorResult, Index)
 		end
@@ -1258,11 +1258,11 @@ function VirtualizedList._getCellLayoutHandler(p8, KeyExtractorResult, Index) --
 	end
 end
 
-function VirtualizedList._getCellRefHandler(p8, KeyExtractorResult) --[[ Line: 2177 ]]
+function VirtualizedList._getCellRefHandler(p8, KeyExtractorResult)
 	local CellRefHandler: (any) -> () = p8._cellRefHandlers[KeyExtractorResult]
 	
 	if CellRefHandler == nil then
-		CellRefHandler = function(p9) --[[ Line: 2180 ]]
+		CellRefHandler = function(p9)
 			-- upvalues: p8 (copy), KeyExtractorResult (copy)
 			p8._cellRefs[tostring(KeyExtractorResult)] = p9
 		end
@@ -1272,7 +1272,7 @@ function VirtualizedList._getCellRefHandler(p8, KeyExtractorResult) --[[ Line: 2
 	return CellRefHandler
 end
 
-function VirtualizedList._onCellLayout(p8, Frame: Frame, KeyExtractorResult, Index: number) --[[ Line: 2188 ]]
+function VirtualizedList._onCellLayout(p8, Frame: Frame, KeyExtractorResult, Index: number)
 	-- upvalues: Console (copy), Array (copy), Object (copy), Boolean (copy)
 	local Current = if p8:getScrollRef() and p8:getScrollRef()._nativeRef.current then p8:getScrollRef()._nativeRef.current else Frame:FindFirstAncestorOfClass("ScrollingFrame")
 	
@@ -1308,7 +1308,7 @@ function VirtualizedList._onCellLayout(p8, Frame: Frame, KeyExtractorResult, Ind
 				if p8.props.UNSTABLE_forceSiblingLayoutUpdate then
 					local Frame2 = Frame:FindFirstAncestorOfClass("Frame")
 					local ItemCount = p8.props.getItemCount(p8.props.data)
-					Array.forEach(if Frame2 then Frame2:GetChildren() else {}, function(Frame: Frame) --[[ Line: 2255 ]]
+					Array.forEach(if Frame2 then Frame2:GetChildren() else {}, function(Frame: Frame)
 						-- upvalues: Index (copy), ItemCount (copy), p8 (copy)
 						if not Frame:IsA("GuiObject") then return end
 						local Magnitude = math.abs(Frame.LayoutOrder)
@@ -1323,7 +1323,7 @@ function VirtualizedList._onCellLayout(p8, Frame: Frame, KeyExtractorResult, Ind
 						end
 					end)
 				else
-					Array.forEach(Object.keys(p8._frames), function(p9) --[[ Line: 2275 ]]
+					Array.forEach(Object.keys(p8._frames), function(p9)
 						-- upvalues: p8 (copy), Index (copy)
 						if p8._frames[p9].index <= Index then return end
 						local Ref = if p8._cellRefs[p9] then p8._cellRefs[p9]:getRef() else nil
@@ -1355,11 +1355,11 @@ function VirtualizedList._onCellLayout(p8, Frame: Frame, KeyExtractorResult, Ind
 	end
 end
 
-function VirtualizedList._triggerRemeasureForChildListsInCell(p8, FooterCellKey) --[[ Line: 2321 ]]
+function VirtualizedList._triggerRemeasureForChildListsInCell(p8, FooterCellKey)
 	local GetResult = p8._cellKeysToChildListKeys:get(FooterCellKey)
 	
 	if GetResult then
-		GetResult:forEach(function(p9) --[[ Line: 2324 ]]
+		GetResult:forEach(function(p9)
 			-- upvalues: p8 (copy)
 			local GetResult = p8._nestedChildLists:get(p9)
 			
@@ -1370,9 +1370,9 @@ function VirtualizedList._triggerRemeasureForChildListsInCell(p8, FooterCellKey)
 	end
 end
 
-function VirtualizedList.recalculateFrames(p8, SelectLengthResult, p9, Index) --[[ Line: 2335 ]]
+function VirtualizedList.recalculateFrames(p8, SelectLengthResult, p9, Index)
 	-- upvalues: Array (copy), Object (copy)
-	Array.forEach(Object.keys(p8._frames), function(p10) --[[ Line: 2336 ]]
+	Array.forEach(Object.keys(p8._frames), function(p10)
 		-- upvalues: p9 (copy), p8 (copy), Index (copy), SelectLengthResult (copy)
 		if p10 ~= p9 or Index > p8._frames[p10].index then
 			local Frame = p8._frames[p10]
@@ -1386,12 +1386,12 @@ function VirtualizedList.recalculateFrames(p8, SelectLengthResult, p9, Index) --
 	p8._highestMeasuredFrameIndex += 1
 end
 
-function VirtualizedList.measureLayoutRelativeToContainingList(p8) --[[ Line: 2347 ]]
+function VirtualizedList.measureLayoutRelativeToContainingList(p8)
 	-- upvalues: Boolean (copy), Console (copy)
-	local Success, Result = pcall(function() --[[ Line: 2351 ]]
+	local Success, Result = pcall(function()
 		-- upvalues: Boolean (upval), p8 (copy), Console (upval)
 		if Boolean.toJSBoolean(p8._scrollRef) then
-			p8._scrollRef:measureLayout(p8.context.getOutermostParentListRef():getScrollRef(), function(p9, p10, Width, Height) --[[ Line: 2359 ]]
+			p8._scrollRef:measureLayout(p8.context.getOutermostParentListRef():getScrollRef(), function(p9, p10, Width, Height)
 				-- upvalues: p8 (upval)
 				p8._offsetFromParentVirtualizedList = p8:_selectOffset({ x = p9, y = p10 })
 				p8._scrollMetrics.contentLength = p8:_selectLength({ width = Width, height = Height })
@@ -1400,10 +1400,10 @@ function VirtualizedList.measureLayoutRelativeToContainingList(p8) --[[ Line: 23
 				if p8._scrollMetrics.visibleLength ~= ConvertParentScrollMetricsResult.visibleLength or p8._scrollMetrics.offset ~= ConvertParentScrollMetricsResult.offset then
 					p8._scrollMetrics.visibleLength = ConvertParentScrollMetricsResult.visibleLength
 					p8._scrollMetrics.offset = ConvertParentScrollMetricsResult.offset
-					p8._cellKeysToChildListKeys:forEach(function(p11) --[[ Line: 2373 ]]
+					p8._cellKeysToChildListKeys:forEach(function(p11)
 						-- upvalues: p8 (upval)
 						if p11 then
-							p11:forEach(function(p12) --[[ Line: 2375 ]]
+							p11:forEach(function(p12)
 								-- upvalues: p8 (upval)
 								local GetResult = p8._nestedChildLists:get(p12)
 								
@@ -1414,7 +1414,7 @@ function VirtualizedList.measureLayoutRelativeToContainingList(p8) --[[ Line: 23
 						end
 					end)
 				end
-			end, function(_) --[[ Line: 2385 ]]
+			end, function(_)
 				-- upvalues: Console (upval)
 				Console.warn("VirtualizedList: Encountered an error while measuring a list's offset from its containing VirtualizedList.")
 			end)
@@ -1430,11 +1430,11 @@ function VirtualizedList.measureLayoutRelativeToContainingList(p8) --[[ Line: 23
 	end
 end
 
-function VirtualizedList._getFooterCellKey(p8): string --[[ Line: 2399 ]]
+function VirtualizedList._getFooterCellKey(p8): string
 	return p8:_getCellKey() .. "-footer"
 end
 
-function VirtualizedList._renderDebugOverlay(p8) --[[ Line: 2403 ]]
+function VirtualizedList._renderDebugOverlay(p8)
 	-- upvalues: Boolean (copy), ReactModule (copy), ViewModule (copy), CreateResult (ref), Array (copy)
 	local VisibleLengthRatio = p8._scrollMetrics.visibleLength / (if Boolean.toJSBoolean(p8._scrollMetrics.contentLength) then p8._scrollMetrics.contentLength else 1)
 	local FrameMetricsApproxes = {}
@@ -1453,7 +1453,7 @@ function VirtualizedList._renderDebugOverlay(p8) --[[ Line: 2403 ]]
 	
 	return ReactModule.createElement(ViewModule, {
 		style = { CreateResult.debugOverlayBase, CreateResult.debugOverlay }
-	}, Array.map(FrameMetricsApproxes, function(FrameMetricsApprox, p9) --[[ Line: 2428 ]]
+	}, Array.map(FrameMetricsApproxes, function(FrameMetricsApprox, p9)
 		-- upvalues: ReactModule (upval), ViewModule (upval), CreateResult (upval), VisibleLengthRatio (copy)
 		return ReactModule.createElement(ViewModule, {
 			key = "f" .. tostring(p9),
@@ -1490,19 +1490,19 @@ function VirtualizedList._renderDebugOverlay(p8) --[[ Line: 2403 ]]
 	}))
 end
 
-function VirtualizedList._selectLength(p9, p10) --[[ Line: 2458 ]]
+function VirtualizedList._selectLength(p9, p10)
 	local Horizontal = p9.props.horizontal
 	
 	return if Horizontal ~= nil and Horizontal then p10.width else p10.height
 end
 
-function VirtualizedList._selectOffset(p9, Vector) --[[ Line: 2465 ]]
+function VirtualizedList._selectOffset(p9, Vector)
 	local Horizontal = p9.props.horizontal
 	
 	return if Horizontal ~= nil and Horizontal then Vector.x else Vector.y
 end
 
-function VirtualizedList._maybeCallOnEndReached(p9) --[[ Line: 2472 ]]
+function VirtualizedList._maybeCallOnEndReached(p9)
 	local Data = p9.props.data
 	local GetItemCountFunction = p9.props.getItemCount
 	local OnEndReachedFunction: (any) -> () = p9.props.onEndReached
@@ -1522,7 +1522,7 @@ function VirtualizedList._maybeCallOnEndReached(p9) --[[ Line: 2472 ]]
 	end
 end
 
-function VirtualizedList._scheduleCellsToRenderUpdate(p9) --[[ Line: 2497 ]]
+function VirtualizedList._scheduleCellsToRenderUpdate(p9)
 	-- upvalues: Boolean (copy)
 	local First: number = p9.state.first
 	local Last = p9.state.last
@@ -1555,10 +1555,10 @@ function VirtualizedList._scheduleCellsToRenderUpdate(p9) --[[ Line: 2497 ]]
 	end
 end
 
-function VirtualizedList._updateViewableItems(p9, p10) --[[ Line: 2544 ]]
+function VirtualizedList._updateViewableItems(p9, p10)
 	-- upvalues: Array (copy)
 	local GetItemCountFunction = p9.props.getItemCount
-	Array.forEach(p9._viewabilityTuples, function(p11) --[[ Line: 2546 ]]
+	Array.forEach(p9._viewabilityTuples, function(p11)
 		-- upvalues: GetItemCountFunction (copy), p10 (copy), p9 (copy)
 		p11.viewabilityHelper:onUpdate(GetItemCountFunction(p10), p9._scrollMetrics.offset, p9._scrollMetrics.visibleLength, p9._getFrameMetrics, p9._createViewToken, p11.onViewableItemsChanged, p9.state)
 	end)
@@ -1566,22 +1566,22 @@ end
 
 CellRenderer = ReactModule.Component:extend("CellRenderer")
 
-function CellRenderer.init(p9, Props) --[[ Line: 2607 ]]
+function CellRenderer.init(p9, Props)
 	-- upvalues: ReactModule (copy)
 	p9.props = Props
 	p9.state = {
 		separatorProps = { highlighted = false, leadingItem = p9.props.item }
 	}
 	p9._separators = {
-		highlight = function() --[[ Line: 2619 ]]
+		highlight = function()
 			-- upvalues: p9 (copy)
 			p9.props.onUpdateSeparators({ p9.props.cellKey, p9.props.prevCellKey }, { highlighted = true })
 		end,
-		unhighlight = function() --[[ Line: 2623 ]]
+		unhighlight = function()
 			-- upvalues: p9 (copy)
 			p9.props.onUpdateSeparators({ p9.props.cellKey, p9.props.prevCellKey }, { highlighted = false })
 		end,
-		updateProps = function(p10, p11) --[[ Line: 2627 ]]
+		updateProps = function(p10, p11)
 			-- upvalues: p9 (copy)
 			local CellKey = p9.props.cellKey
 			local PrevCellKey = p9.props.prevCellKey
@@ -1591,16 +1591,16 @@ function CellRenderer.init(p9, Props) --[[ Line: 2607 ]]
 	p9._nativeRef = ReactModule.createRef()
 end
 
-function CellRenderer.getDerivedStateFromProps(p10, p11) --[[ Line: 2639 ]]
+function CellRenderer.getDerivedStateFromProps(p10, p11)
 	-- upvalues: Object (copy)
 	return {
 		separatorProps = Object.assign({}, p11.separatorProps, { leadingItem = p10.item })
 	}
 end
 
-function CellRenderer.updateSeparatorProps(p10, p11) --[[ Line: 2643 ]]
+function CellRenderer.updateSeparatorProps(p10, p11)
 	-- upvalues: Object (copy)
-	p10:setState(function(p12) --[[ Line: 2644 ]]
+	p10:setState(function(p12)
 		-- upvalues: Object (upval), p11 (copy)
 		return {
 			separatorProps = Object.assign({}, p12.separatorProps, p11)
@@ -1608,7 +1608,7 @@ function CellRenderer.updateSeparatorProps(p10, p11) --[[ Line: 2643 ]]
 	end)
 end
 
-local _ = function(List, List1): boolean --[[ Line: 2649 | Named "shallowEqual" ]]
+local _ = function(List, List1): boolean
 	for i, value in List do
 		if List1[i] ~= value then
 			return false
@@ -1622,7 +1622,7 @@ local _ = function(List, List1): boolean --[[ Line: 2649 | Named "shallowEqual" 
 	return true
 end
 
-function CellRenderer.shouldComponentUpdate(p10, List, p11): boolean --[[ Line: 2663 ]]
+function CellRenderer.shouldComponentUpdate(p10, List, p11): boolean
 	-- upvalues: v1 (copy)
 	if not v1 then
 		return true
@@ -1670,11 +1670,11 @@ function CellRenderer.shouldComponentUpdate(p10, List, p11): boolean --[[ Line: 
 	end
 end
 
-function CellRenderer.componentWillUnmount(p12) --[[ Line: 2673 ]]
+function CellRenderer.componentWillUnmount(p12)
 	p12.props.onUnmount(p12.props.cellKey)
 end
 
-function CellRenderer._renderElement(p12, Callback, ListItemComponent, Item, Index) --[[ Line: 2677 ]]
+function CellRenderer._renderElement(p12, Callback, ListItemComponent, Item, Index)
 	-- upvalues: Boolean (copy), Console (copy), ReactModule (copy), InvariantModule (copy)
 	if Boolean.toJSBoolean(Callback) and Boolean.toJSBoolean(ListItemComponent) then
 		Console.warn("VirtualizedList: Both ListItemComponent and renderItem props are present. ListItemComponent will take precedence over renderItem.")
@@ -1698,11 +1698,11 @@ function CellRenderer._renderElement(p12, Callback, ListItemComponent, Item, Ind
 	end
 end
 
-function CellRenderer.getRef(p12) --[[ Line: 2708 ]]
+function CellRenderer.getRef(p12)
 	return p12._nativeRef
 end
 
-function CellRenderer.render(p12) --[[ Line: 2713 ]]
+function CellRenderer.render(p12)
 	-- upvalues: ReactModule (copy), Object (copy), Boolean (copy), CreateResult (ref), ViewModule (copy), VirtualizedListCellContextProvider (copy)
 	local CellRendererComponent = p12.props.CellRendererComponent
 	local ItemSeparatorComponent = p12.props.ItemSeparatorComponent
@@ -1741,7 +1741,7 @@ function CellRenderer.render(p12) --[[ Line: 2713 ]]
 	}) else nil, RenderElementResult, Element))
 end
 
-Callback = function(DebugInfo): string --[[ Line: 2798 | Named "describeNestedLists" ]]
+Callback = function(DebugInfo): string
 	-- upvalues: Boolean (copy)
 	local Text = "VirtualizedList trace:\n" .. ("  Child (%s):\n"):format(if Boolean.toJSBoolean(DebugInfo.horizontal) then "horizontal" else "vertical") .. ("    listKey: %s\n"):format(DebugInfo.key) .. ("    cellKey: %s"):format(DebugInfo.cellKey)
 	local ParentDebugInfo = DebugInfo.parentDebugInfo

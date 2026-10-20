@@ -73,11 +73,11 @@ IconButton.defaultProps = {
 	iconSize = IconSizeModule.Medium
 }
 
-function IconButton.init(p1) --[[ Line: 133 ]]
+function IconButton.init(p1)
 	-- upvalues: ControlStateModule (copy), IconSizeModule (copy)
 	p1:setState({ controlState = ControlStateModule.Initialize })
 	
-	function p1.onStateChanged(p2, ControlState) --[[ Line: 138 ]]
+	function p1.onStateChanged(p2, ControlState)
 		-- upvalues: p1 (copy)
 		p1:setState({ controlState = ControlState })
 		
@@ -94,7 +94,7 @@ function IconButton.init(p1) --[[ Line: 133 ]]
 		[IconSizeModule.XXLarge] = 5
 	}
 	
-	function p1.getSize(X) --[[ Line: 154 ]]
+	function p1.getSize(X)
 		-- upvalues: p1 (copy), config (copy)
 		if p1.props.size then
 			return p1.props.size
@@ -106,15 +106,15 @@ function IconButton.init(p1) --[[ Line: 133 ]]
 	end
 end
 
-function IconButton.render(p1) --[[ Line: 165 ]]
+function IconButton.render(p1)
 	-- upvalues: WithStyleModule (copy)
-	return WithStyleModule(function(p2) --[[ Line: 166 ]]
+	return WithStyleModule(function(p2)
 		-- upvalues: p1 (copy)
 		return p1:renderWithProviders(p2, nil, nil)
 	end)
 end
 
-function IconButton.renderWithProviders(p1, p2, _, _) --[[ Line: 171 ]]
+function IconButton.renderWithProviders(p1, p2, _, _)
 	-- upvalues: GetIconSizeModule (copy), ControlStateModule (copy), GetContentStyleModule (copy), RoactModule (copy), Focusable (copy), InteractableModule (copy), ImageSetComponentModule (copy), HoverButtonBackgroundModule (copy), _UDim (copy)
 	local IconSizeModule = GetIconSizeModule(p1.props.iconSize, p2)
 	local Size = p1.getSize(IconSizeModule)
@@ -169,7 +169,7 @@ function IconButton.renderWithProviders(p1, p2, _, _) --[[ Line: 171 ]]
 	})
 end
 
-local function IconButtonFunctionalWrapper(p1) --[[ Line: 239 ]]
+local function IconButtonFunctionalWrapper(p1)
 	-- upvalues: UseCursorModule (copy), _UDim (copy), RoactModule (copy), IconButton (copy), CryoModule (copy)
 	return RoactModule.createElement(IconButton, CryoModule.Dictionary.join(p1, { cursor = UseCursorModule(_UDim) }))
 end
@@ -177,7 +177,7 @@ end
 local IconButtonOuterWrapper = RoactModule.PureComponent:extend("IconButtonOuterWrapper")
 IconButtonOuterWrapper.validateProps = IconButton.validateProps
 
-function IconButtonOuterWrapper.render(p1) --[[ Line: 253 ]]
+function IconButtonOuterWrapper.render(p1)
 	-- upvalues: RoactModule (copy), IconButtonFunctionalWrapper (copy)
 	return RoactModule.createElement(IconButtonFunctionalWrapper, p1.props)
 end

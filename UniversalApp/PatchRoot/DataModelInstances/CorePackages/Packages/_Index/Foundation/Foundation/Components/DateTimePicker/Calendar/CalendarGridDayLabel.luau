@@ -7,7 +7,7 @@ local TextModule = require(Foundation.Components.Text)
 local ViewModule = require(Foundation.Components.View)
 local UseTokensModule = require(Foundation.Providers.Style.useTokens)
 
-local function _(p1, Key) --[[ Line: 14 | Named "buildDayTags" ]]
+local function _(p1, Key)
 	local config = {
 		["size-full text-title-small text-align-x-center text-align-y-center"] = true,
 		["radius-circle"] = not p1
@@ -19,7 +19,7 @@ local function _(p1, Key) --[[ Line: 14 | Named "buildDayTags" ]]
 	return config
 end
 
-return function(Frame) --[[ Line: 42 | Named "CalendarGridDayLabel" ]]
+return function(Frame)
 	-- upvalues: UseTokensModule (copy), ConstantsModule (copy), ReactModule (copy), ControlStateModule (copy), TextModule (copy), StateLayerModeModule (copy), ViewModule (copy)
 	local UseTokensModuleResult = UseTokensModule()
 	local EmphasisColor3 = if Frame.isSelected then UseTokensModuleResult.Inverse.Content.Emphasis.Color3 elseif Frame.isSelectable and Frame.emphasizeText then UseTokensModuleResult.Color.Content.Emphasis.Color3 else UseTokensModuleResult.Color.Content.Muted.Color3
@@ -34,9 +34,9 @@ return function(Frame) --[[ Line: 42 | Named "CalendarGridDayLabel" ]]
 	if NoIsSelected and BandRadiusTag and BandRadiusTag ~= "" then
 		Tag[BandRadiusTag] = true
 	end
-	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 57 ]]
+	local UseMemoResult = ReactModule.useMemo(function()
 		-- upvalues: Frame (copy), ControlStateModule (upval)
-		return if Frame.onHoverEnter == nil then nil else function(Hover) --[[ Line: 61 ]]
+		return if Frame.onHoverEnter == nil then nil else function(Hover)
 			-- upvalues: ControlStateModule (upval), Frame (upval)
 			if Hover == ControlStateModule.Hover then
 				Frame.onHoverEnter()

@@ -1,4 +1,4 @@
-﻿return function(_) --[[ Line: 1 ]]
+﻿return function(_)
 	return {
 		FriendshipCreated = require(script.FriendshipCreated),
 		FriendshipDestroyed = require(script.FriendshipDestroyed),

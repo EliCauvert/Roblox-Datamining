@@ -1,6 +1,6 @@
 ﻿local _ = require(script.Parent.Parent.Parent.Parent.ES7Types)
 
-return function(List, Callback, p1) --[[ Line: 25 ]]
+return function(List, Callback, p1)
 	if Callback then
 		local t = {}
 		

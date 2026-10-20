@@ -1,14 +1,14 @@
 ﻿local ViewRecyclerModule = require(script:FindFirstAncestor("ViewRecyclerRoblox").Parent.ViewRecycler)
 
 return {
-	create = function(p1) --[[ Line: 24 ]]
+	create = function(p1)
 		-- upvalues: ViewRecyclerModule (copy)
 		local ItemViewAdapter = p1.itemViewAdapter
 		local Count = 0
 		local CreateResults = {}
 		local Tbl = {}
 		
-		local function _(p2) --[[ Line: 32 | Named "getInstance" ]]
+		local function _(p2)
 			-- upvalues: p1 (copy)
 			local _Instance = if p1.getInstance == nil then p2 else p1.getInstance(p2)
 			assert(typeof(_Instance) == "Instance" and _Instance:IsA("GuiObject"), "createRecyclingScope: ItemView host must be a GuiObject")
@@ -16,7 +16,7 @@ return {
 			return _Instance
 		end
 		
-		local function flushLifecycle() --[[ Line: 41 ]]
+		local function flushLifecycle()
 			-- upvalues: Tbl (copy), ItemViewAdapter (copy), p1 (copy), CreateResults (copy)
 			local t = {}
 			
@@ -51,12 +51,12 @@ return {
 			table.clear(Tbl)
 		end
 		
-		local Batch = ItemViewAdapter.batch or function(Callback: () -> ()) --[[ Line: 71 ]]
+		local Batch = ItemViewAdapter.batch or function(Callback: () -> ())
 			Callback()
 		end
 		local RecyclingScope = ViewRecyclerModule.Adapter.createRecyclingScope({
 			maxPoolSize = p1.maxPoolSize,
-			onPoolChanged = if p1.diagnostics == nil then nil else function(p2) --[[ Line: 90 ]]
+			onPoolChanged = if p1.diagnostics == nil then nil else function(p2)
 				-- upvalues: p1 (copy), ViewRecyclerModule (upval)
 				p1.diagnostics({
 					kind = ViewRecyclerModule.Diagnostics.EventKind.PoolChanged,
@@ -68,7 +68,7 @@ return {
 				})
 			end,
 			adapter = {
-				create = function(p2) --[[ Line: 101 ]]
+				create = function(p2)
 					-- upvalues: ItemViewAdapter (copy), p1 (copy), CreateResults (copy)
 					local NewItemViewAdapter = ItemViewAdapter.create(p2)
 					local NewItemViewAdapter1 = if p1.getInstance == nil then NewItemViewAdapter else p1.getInstance(NewItemViewAdapter)
@@ -77,11 +77,11 @@ return {
 					
 					return NewItemViewAdapter
 				end,
-				destroy = function(p2) --[[ Line: 107 ]]
+				destroy = function(p2)
 					-- upvalues: Tbl (copy)
 					table.insert(Tbl, p2)
 				end,
-				batch = function(p2) --[[ Line: 74 ]]
+				batch = function(p2)
 					-- upvalues: Count (ref), Batch (copy), flushLifecycle (copy)
 					Count += 1
 					local Success, Result = pcall(Batch, p2)
@@ -98,7 +98,7 @@ return {
 		})
 		
 		return {
-			exchange = function(p2, p3, p4) --[[ Line: 115 ]]
+			exchange = function(p2, p3, p4)
 				-- upvalues: RecyclingScope (copy), Count (ref), flushLifecycle (copy)
 				local ExchangeResult = RecyclingScope.exchange(p2, p3, p4)
 				
@@ -114,7 +114,7 @@ return {
 			getVacantViews = RecyclingScope.getVacantViews,
 			getItemViews = RecyclingScope.getScopeInventory,
 			updateItemView = ItemViewAdapter.update,
-			destroy = function() --[[ Line: 129 ]]
+			destroy = function()
 				-- upvalues: RecyclingScope (copy)
 				RecyclingScope.destroy()
 			end

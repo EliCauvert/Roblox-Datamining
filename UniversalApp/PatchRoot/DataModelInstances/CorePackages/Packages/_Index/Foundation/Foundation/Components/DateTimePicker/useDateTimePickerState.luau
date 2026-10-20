@@ -10,7 +10,7 @@ local DateTimePickerVariantModule = require(Foundation.Enums.DateTimePickerVaria
 local _ = require(Foundation.Components.Types)
 local GuiService = require(Foundation.Utility.Wrappers.Services).GuiService
 
-return function(p1) --[[ Line: 65 | Named "useDateTimePickerState" ]]
+return function(p1)
 	-- upvalues: DateTimePickerVariantModule (copy), ReactModule (copy), DateTimeRangeSelectionUtilitiesModule (copy), DateTimeParsingUtilitiesModule (copy), GuiService (copy), DateTimeCalendarViewUtilitiesModule (copy), DateTimeUtilitiesModule (copy), DateTimeEqualityUtilitiesModule (copy)
 	local Variant = p1.variant or DateTimePickerVariantModule.Single
 	local IsVariantMatch: boolean = Variant == DateTimePickerVariantModule.Dual or Variant == DateTimePickerVariantModule.DualWithPresets
@@ -18,7 +18,7 @@ return function(p1) --[[ Line: 65 | Named "useDateTimePickerState" ]]
 	local IsVariantMatch2 = Variant == DateTimePickerVariantModule.SingleWithTime
 	local UseStateResult, UseStateResult2 = ReactModule.useState(false)
 	local UseRefResult = ReactModule.useRef(nil)
-	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 76 ]]
+	local UseMemoResult = ReactModule.useMemo(function()
 		-- upvalues: p1 (copy), DateTimeRangeSelectionUtilitiesModule (upval), IsVariantMatch (copy)
 		local DefaultDates = p1.defaultDates
 		
@@ -27,32 +27,32 @@ return function(p1) --[[ Line: 65 | Named "useDateTimePickerState" ]]
 	local UseStateResult1, UseStateResult2_1 = ReactModule.useState(if UseMemoResult then DateTimeParsingUtilitiesModule.formatInputText({ dates = UseMemoResult, variant = Variant }) else "")
 	local UseRefResult1 = ReactModule.useRef(UseStateResult1)
 	UseRefResult1.current = UseStateResult1
-	local UseStateResult3, UseStateResult2_2 = ReactModule.useState(function() --[[ Line: 97 ]]
+	local UseStateResult3, UseStateResult2_2 = ReactModule.useState(function()
 		-- upvalues: UseMemoResult (copy)
 		return UseMemoResult
 	end)
 	local UseRefResult2 = ReactModule.useRef(UseStateResult3)
 	UseRefResult2.current = UseStateResult3
 	local UseStateResult4, UseStateResult2_3 = ReactModule.useState(nil)
-	local UseStateResult5, UseStateResult2_4 = ReactModule.useState(function() --[[ Line: 106 ]]
+	local UseStateResult5, UseStateResult2_4 = ReactModule.useState(function()
 		-- upvalues: UseMemoResult (copy)
 		return UseMemoResult
 	end)
-	local UseResult = ReactModule.useCallback(function() --[[ Line: 110 ]]
+	local UseResult = ReactModule.useCallback(function()
 		-- upvalues: UseStateResult2 (copy)
 		UseStateResult2(false)
 	end, {})
-	local UseResult1 = ReactModule.useCallback(function() --[[ Line: 114 ]]
+	local UseResult1 = ReactModule.useCallback(function()
 		-- upvalues: UseStateResult2 (copy)
 		UseStateResult2(true)
 	end, {})
-	local UseResult2 = ReactModule.useCallback(function() --[[ Line: 118 ]]
+	local UseResult2 = ReactModule.useCallback(function()
 		-- upvalues: GuiService (upval), UseResult1 (copy)
 		if GuiService.ViewportDisplaySize ~= Enum.DisplaySize.Small then
 			UseResult1()
 		end
 	end, { UseResult1, GuiService.ViewportDisplaySize })
-	local UseResult3 = ReactModule.useCallback(function(Current, p2) --[[ Line: 125 ]]
+	local UseResult3 = ReactModule.useCallback(function(Current, p2)
 		-- upvalues: UseStateResult2_2 (copy), UseRefResult2 (copy), UseStateResult2_4 (copy), UseStateResult2_3 (copy)
 		UseStateResult2_2(Current)
 		UseRefResult2.current = Current
@@ -65,13 +65,13 @@ return function(p1) --[[ Line: 65 | Named "useDateTimePickerState" ]]
 		end
 	end, {})
 	
-	local function _(p2) --[[ Line: 137 | Named "resolvedViewAnchor" ]]
+	local function _(p2)
 		-- upvalues: DateTimeCalendarViewUtilitiesModule (upval), p1 (copy)
 		return DateTime.fromUnixTimestamp(DateTimeCalendarViewUtilitiesModule.resolveAnchorDate(p2, p1.referenceDate).UnixTimestamp)
 	end
 	
 	local UseRefResult3 = ReactModule.useRef(nil)
-	local UseResult4 = ReactModule.useCallback(function(Current) --[[ Line: 145 ]]
+	local UseResult4 = ReactModule.useCallback(function(Current)
 		-- upvalues: UseStateResult2_1 (copy), UseRefResult3 (copy), UseResult3 (copy), DateTimeCalendarViewUtilitiesModule (upval), p1 (copy), IsVariantMatch (copy), DateTimeParsingUtilitiesModule (upval), DateTimeUtilitiesModule (upval)
 		UseStateResult2_1(Current)
 		
@@ -80,7 +80,7 @@ return function(p1) --[[ Line: 65 | Named "useDateTimePickerState" ]]
 			
 			if Current == UseRefResult3.current then return end
 		end
-		local function clearDraftToReference() --[[ Line: 157 ]]
+		local function clearDraftToReference()
 			-- upvalues: UseResult3 (upval), DateTimeCalendarViewUtilitiesModule (upval), p1 (upval)
 			UseResult3({}, {
 				asApplied = true,
@@ -128,7 +128,7 @@ return function(p1) --[[ Line: 65 | Named "useDateTimePickerState" ]]
 		p1.onChanged, IsVariantMatch, IsVariantMatch2, p1.referenceDate,
 		p1.selectableDateRange, UseResult3
 	})
-	local UseResult5 = ReactModule.useCallback(function(_) --[[ Line: 206 ]]
+	local UseResult5 = ReactModule.useCallback(function(_)
 		-- upvalues: IsVariantMatch (copy), UseRefResult1 (copy), DateTimeParsingUtilitiesModule (upval), p1 (copy), Variant (copy), UseRefResult2 (copy), DateTimeEqualityUtilitiesModule (upval), UseRefResult3 (copy), UseStateResult2_1 (copy)
 		if not IsVariantMatch then return end
 		local Current = UseRefResult1.current
@@ -153,11 +153,11 @@ return function(p1) --[[ Line: 65 | Named "useDateTimePickerState" ]]
 		p1.selectableDateRange,
 		Variant
 	})
-	local UseResult6 = ReactModule.useCallback(function(p2) --[[ Line: 245 ]]
+	local UseResult6 = ReactModule.useCallback(function(p2)
 		-- upvalues: DateTimeRangeSelectionUtilitiesModule (upval), UseRefResult2 (copy), UseResult3 (copy)
 		UseResult3((DateTimeRangeSelectionUtilitiesModule.selectRangeEndpoint(UseRefResult2.current, p2)))
 	end, { UseResult3 })
-	local UseResult7 = ReactModule.useCallback(function(p2) --[[ Line: 250 ]]
+	local UseResult7 = ReactModule.useCallback(function(p2)
 		-- upvalues: p1 (copy), DateTimeEqualityUtilitiesModule (upval), UseResult3 (copy)
 		if not p1.selectableDateRange or DateTimeEqualityUtilitiesModule.isRangeWithinSelectableRange(p2, p1.selectableDateRange) then
 			UseResult3({ p2.startDate, p2.endDate }, { anchor = p2.startDate })
@@ -165,7 +165,7 @@ return function(p1) --[[ Line: 65 | Named "useDateTimePickerState" ]]
 			return
 		end
 	end, { p1.selectableDateRange, UseResult3 })
-	local UseResult8 = ReactModule.useCallback(function(Entry) --[[ Line: 261 ]]
+	local UseResult8 = ReactModule.useCallback(function(Entry)
 		-- upvalues: UseRefResult2 (copy), UseResult3 (copy)
 		local Current = UseRefResult2.current
 		local CurrentEntry = if Current then Current[1] else nil
@@ -179,22 +179,22 @@ return function(p1) --[[ Line: 65 | Named "useDateTimePickerState" ]]
 			return
 		end
 	end, { UseResult3 })
-	local UseResult9 = ReactModule.useCallback(function() --[[ Line: 284 ]]
+	local UseResult9 = ReactModule.useCallback(function()
 		-- upvalues: UseResult3 (copy), UseStateResult5 (copy), DateTimeCalendarViewUtilitiesModule (upval), p1 (copy)
 		UseResult3(UseStateResult5, {
 			anchor = DateTime.fromUnixTimestamp(DateTimeCalendarViewUtilitiesModule.resolveAnchorDate(UseStateResult5, p1.referenceDate).UnixTimestamp)
 		})
 	end, { UseStateResult5, p1.referenceDate, UseResult3 })
-	local UseResult10 = ReactModule.useCallback(function() --[[ Line: 290 ]]
+	local UseResult10 = ReactModule.useCallback(function()
 		-- upvalues: UseResult9 (copy), UseResult (copy)
 		UseResult9()
 		UseResult()
 	end, { UseResult9, UseResult })
-	local UseResult11 = ReactModule.useCallback(function() --[[ Line: 295 ]]
+	local UseResult11 = ReactModule.useCallback(function()
 		-- upvalues: UseResult9 (copy)
 		UseResult9()
 	end, { UseResult9 })
-	local UseResult12 = ReactModule.useCallback(function(Entry) --[[ Line: 299 ]]
+	local UseResult12 = ReactModule.useCallback(function(Entry)
 		-- upvalues: UseResult3 (copy), IsVariantMatch (copy), DateTimeUtilitiesModule (upval), UseRefResult3 (copy), UseStateResult2_1 (copy), p1 (copy), IsVariantMatch2 (copy)
 		local Entry1 = Entry[1]
 		
@@ -221,7 +221,7 @@ return function(p1) --[[ Line: 65 | Named "useDateTimePickerState" ]]
 		IsVariantMatch2,
 		UseResult3
 	})
-	local UseResult13 = ReactModule.useCallback(function() --[[ Line: 323 ]]
+	local UseResult13 = ReactModule.useCallback(function()
 		-- upvalues: UseRefResult2 (copy), IsVariantMatch1 (copy), UseResult (copy), UseStateResult2_4 (copy), UseResult12 (copy)
 		local Current = UseRefResult2.current
 		

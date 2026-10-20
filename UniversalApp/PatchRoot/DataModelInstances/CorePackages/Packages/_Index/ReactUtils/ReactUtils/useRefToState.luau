@@ -1,6 +1,6 @@
 ﻿local ReactModule = require(script:FindFirstAncestor("ReactUtils").Parent.React)
 
-return function(Current) --[[ Line: 31 | Named "useRefToState" ]]
+return function(Current)
 	-- upvalues: ReactModule (copy)
 	local UseRefResult = ReactModule.useRef(Current)
 	UseRefResult.current = Current

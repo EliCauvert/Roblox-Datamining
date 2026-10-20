@@ -1,4 +1,4 @@
-﻿return function(List, p1): string --[[ Line: 4 | Named "describeProblematicProperties" ]]
+﻿return function(List, p1): string
 	local List1 = {}
 	
 	for _, value in List do

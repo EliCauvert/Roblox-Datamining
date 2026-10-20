@@ -1,4 +1,4 @@
-﻿return function(Amounts): boolean --[[ Line: 16 ]]
+﻿return function(Amounts): boolean
 	if typeof(Amounts) ~= "table" then
 		return false
 	end

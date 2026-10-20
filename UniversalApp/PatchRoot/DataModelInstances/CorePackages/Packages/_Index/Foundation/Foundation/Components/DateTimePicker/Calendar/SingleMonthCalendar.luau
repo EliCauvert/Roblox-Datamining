@@ -14,7 +14,7 @@ local UseTokensModule = require(Foundation.Providers.Style.useTokens)
 local WithDefaultsModule = require(Foundation.Utility.withDefaults)
 local config = { testId = "--foundation-calendar" }
 
-local function CalendarPane(Frame) --[[ Line: 56 ]]
+local function CalendarPane(Frame)
 	-- upvalues: ReactModule (copy), ViewModule (copy), CalendarHeaderModule (copy), CalendarGrid (copy)
 	local State = Frame.state
 	
@@ -53,7 +53,7 @@ local function CalendarPane(Frame) --[[ Line: 56 ]]
 	})
 end
 
-return function(p1) --[[ Line: 94 | Named "SingleMonthCalendar" ]]
+return function(p1)
 	-- upvalues: WithDefaultsModule (copy), config (copy), UseTokensModule (copy), UseScaledValueModule (copy), DateTimeLayoutUtilitiesModule (copy), UseSingleMonthCalendarStateModule (copy), DateTimeCalendarConstantsModule (copy), ReactModule (copy), ViewModule (copy), CalendarPane (copy), TimeListModule (copy), DateTimeCalendarViewUtilitiesModule (copy)
 	local WithDefaultsModuleResult = WithDefaultsModule(p1, config)
 	local UseTokensModuleResult = UseTokensModule()

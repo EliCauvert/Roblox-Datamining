@@ -8,7 +8,7 @@ local ErrorSourceStringsModule = require(Parent.validationSystem.ErrorSourceStri
 local ParseContentIdsModule = require(Parent.util.ParseContentIds)
 local PcallDeferredModule = require(Parent.util.pcallDeferred)
 
-local function validateHSRStructure(Entry, Object, p1) --[[ Line: 29 ]]
+local function validateHSRStructure(Entry, Object, p1)
 	-- upvalues: ErrorSourceStringsModule (copy)
 	if #Entry ~= 1 then
 		p1:fail(ErrorSourceStringsModule.Keys.HSRAssetInvalidRoot, { InstancePath = Object:GetFullName() })
@@ -43,7 +43,7 @@ return {
 		ValidationEnumsModule.SharedDataMember.hsrAssets
 	},
 	expectedFailures = {},
-	run = function(p1, p2) --[[ Line: 59 ]]
+	run = function(p1, p2)
 		-- upvalues: ValidationEnumsModule (copy), ErrorSourceStringsModule (copy), GetFFlagUGCValidateVersionedContentIdsModule (copy), ParseContentIdsModule (copy), validateHSRStructure (copy), GetEngineFeatureUGCValidateHSRMeshIdsModule (copy), PcallDeferredModule (copy), UGCValidationService (copy)
 		if p2.consumerConfig.consumerEnv == ValidationEnumsModule.ConsumerEnv.IEC then return end
 		local IsConsumerEnvMatch = p2.consumerConfig.consumerEnv == ValidationEnumsModule.ConsumerEnv.Backend
@@ -75,7 +75,7 @@ return {
 						local ValidateHSRStructureResult = validateHSRStructure(HsrAsset, WrapLayer, p1)
 						
 						if ValidateHSRStructureResult and GetEngineFeatureUGCValidateHSRMeshIdsModule() then
-							local PcallDeferredModuleResult, PcallDeferredModuleResult2 = PcallDeferredModule(function() --[[ Line: 115 ]]
+							local PcallDeferredModuleResult, PcallDeferredModuleResult2 = PcallDeferredModule(function()
 								-- upvalues: UGCValidationService (upval), WrapLayer (copy), ValidateHSRStructureResult (copy)
 								return UGCValidationService:ValidateHSRMeshIds(WrapLayer, ValidateHSRStructureResult)
 							end, {})

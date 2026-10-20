@@ -2,11 +2,11 @@
 local ComponentModule = require(script.Parent.component)
 
 return {
-	init = function(p1) --[[ Line: 6 ]]
+	init = function(p1)
 		-- upvalues: PageLoggerModule (copy)
 		PageLoggerModule:setParent(p1)
 	end,
-	doSomething = function() --[[ Line: 9 ]]
+	doSomething = function()
 		-- upvalues: PageLoggerModule (copy), ComponentModule (copy)
 		PageLoggerModule:info("calling {root} {foo}")
 		

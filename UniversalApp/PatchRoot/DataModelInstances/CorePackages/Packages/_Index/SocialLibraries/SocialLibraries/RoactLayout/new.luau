@@ -1,6 +1,6 @@
 ﻿local Roact = require(script:FindFirstAncestor("SocialLibraries").dependencies).Roact
 
-return function(BlockLayout, p1) --[[ Line: 5 | Named "new" ]]
+return function(BlockLayout, p1)
 	-- upvalues: Roact (copy)
 	local config = { blockLayout = BlockLayout }
 	

@@ -3,14 +3,14 @@ local ReactModule = require(Parent.Parent.React)
 local InvariantModule = require(Parent.utils.invariant)
 local StackViewCard = ReactModule.Component:extend("StackViewCard")
 
-function StackViewCard.init(p1) --[[ Line: 29 ]]
+function StackViewCard.init(p1)
 	-- upvalues: ReactModule (copy)
 	p1._isMounted = false
 	p1._positionLastValue = p1.props.navigation.state.index
 	p1._ref = ReactModule.createRef()
 end
 
-function StackViewCard.render(p1) --[[ Line: 38 ]]
+function StackViewCard.render(p1)
 	-- upvalues: InvariantModule (copy), ReactModule (copy)
 	local ForceHidden = p1.props.forceHidden
 	local CardColor3 = p1.props.cardColor3
@@ -31,15 +31,15 @@ function StackViewCard.render(p1) --[[ Line: 38 ]]
 	}, { Content = RenderSceneFunction(Scene) })
 end
 
-function StackViewCard.didMount(p1) --[[ Line: 61 ]]
+function StackViewCard.didMount(p1)
 	p1._isMounted = true
-	p1._positionDisconnector = p1.props.position:onStep(function(...) --[[ Line: 65 ]]
+	p1._positionDisconnector = p1.props.position:onStep(function(...)
 		-- upvalues: p1 (copy)
 		p1:_onPositionStep(...)
 	end)
 end
 
-function StackViewCard.willUnmount(p1) --[[ Line: 70 ]]
+function StackViewCard.willUnmount(p1)
 	p1._isMounted = false
 	
 	if p1._positionDisconnector then
@@ -48,13 +48,13 @@ function StackViewCard.willUnmount(p1) --[[ Line: 70 ]]
 	end
 end
 
-function StackViewCard.didUpdate(p1, p2) --[[ Line: 79 ]]
+function StackViewCard.didUpdate(p1, p2)
 	local Position = p1.props.position
 	local PositionStep = p1.props.positionStep
 	
 	if Position ~= p2.position then
 		p1._positionDisconnector()
-		p1._positionDisconnector = Position:onStep(function(...) --[[ Line: 85 ]]
+		p1._positionDisconnector = Position:onStep(function(...)
 			-- upvalues: p1 (copy)
 			p1:_onPositionStep(...)
 		end)
@@ -64,7 +64,7 @@ function StackViewCard.didUpdate(p1, p2) --[[ Line: 79 ]]
 	end
 end
 
-function StackViewCard._onPositionStep(p1, _positionLastValue) --[[ Line: 97 ]]
+function StackViewCard._onPositionStep(p1, _positionLastValue)
 	if not p1._isMounted then return end
 	local PositionStepFunction: (any, any) -> () = p1.props.positionStep
 	

@@ -29,7 +29,7 @@ local config = {
 	}
 }
 
-local function onProgressChange(p1: number): NumberSequence --[[ Line: 52 ]]
+local function onProgressChange(p1: number): NumberSequence
 	-- upvalues: ConstantsModule (copy)
 	return NumberSequence.new({
 		NumberSequenceKeypoint.new(0, 0),
@@ -39,8 +39,8 @@ local function onProgressChange(p1: number): NumberSequence --[[ Line: 52 ]]
 	})
 end
 
-local function _(p1, p2) --[[ Line: 61 | Named "getTransparency" ]]
-	return p2:map(function(p3) --[[ Line: 65 ]]
+local function _(p1, p2)
+	return p2:map(function(p3)
 		-- upvalues: p1 (copy)
 		return if p1 == nil then p3 else p1 + (1 - p1) * p3
 	end)
@@ -56,24 +56,24 @@ local config1 = {
 	width = UDim.new(0, 0)
 }
 
-return ReactModule.memo(ReactModule.forwardRef(function(p1, Ref) --[[ Line: 100 | Named "Button" ]]
+return ReactModule.memo(ReactModule.forwardRef(function(p1, Ref)
 	-- upvalues: WithDefaultsModule (copy), config1 (copy), ReactModule (copy), ControlStateModule (copy), ReactOtterModule (copy), EndAlignedIconsModule (copy), UseTokensModule (copy), UsePresentationContextFunction (copy), UseButtonVariantsModule (copy), UseButtonMotionStatesModule (copy), ConstantsModule (copy), UseMotionFunction (copy), config (copy), ViewModule (copy), WithCommonPropsModule (copy), FillBehaviorModule (copy), AnimatePresence (copy), SpinnerModule (copy), FlagsModule (copy), ButtonIconModule (copy), TextModule (copy), onProgressChange (copy)
 	local WithDefaultsModuleResult = WithDefaultsModule(p1, config1)
 	local InputDelay: number = WithDefaultsModuleResult.inputDelay
 	local UseBindingResult, UseBindingResult2 = ReactModule.useBinding(ControlStateModule.Initialize)
 	local UseStateResult, UseStateResult2 = ReactModule.useState(InputDelay > 0)
-	local UseAnimatedBindingResult, UseAnimatedBindingResult2 = ReactOtterModule.useAnimatedBinding(0, function() --[[ Line: 106 ]]
+	local UseAnimatedBindingResult, UseAnimatedBindingResult2 = ReactOtterModule.useAnimatedBinding(0, function()
 		-- upvalues: UseStateResult2 (copy)
 		UseStateResult2(false)
 	end)
 	local EndAlignedIconsModuleEntry = WithDefaultsModuleResult.icon and EndAlignedIconsModule[WithDefaultsModuleResult.icon]
-	ReactModule.useEffect(function() --[[ Line: 112 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UseStateResult (copy), UseAnimatedBindingResult2 (copy), ReactOtterModule (upval)
 		if UseStateResult == false then
 			UseAnimatedBindingResult2(ReactOtterModule.instant(0))
 		end
 	end, { UseStateResult })
-	ReactModule.useEffect(function() --[[ Line: 118 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UseStateResult (copy), UseStateResult2 (copy), InputDelay (copy), UseAnimatedBindingResult2 (copy), ReactOtterModule (upval)
 		if UseStateResult then
 			UseStateResult2(false)
@@ -92,7 +92,7 @@ return ReactModule.memo(ReactModule.forwardRef(function(p1, Ref) --[[ Line: 100 
 	local UseButtonMotionStatesModuleResult = UseButtonMotionStatesModule(UseButtonVariantsModuleResult.content.style.Transparency, ConstantsModule.DISABLED_TRANSPARENCY)
 	local UseMotionResult, UseMotionResult2 = UseMotionFunction(UseButtonMotionStatesModuleResult.Default)
 	local UseMotionResult1, UseMotionResult2_1 = UseMotionFunction(UseButtonMotionStatesModuleResult.Default)
-	ReactModule.useEffect(function() --[[ Line: 147 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: WithDefaultsModuleResult (copy), UseMotionResult2_1 (copy), UseButtonMotionStatesModuleResult (copy)
 		if WithDefaultsModuleResult.isLoading then
 			UseMotionResult2_1(UseButtonMotionStatesModuleResult.Loading)
@@ -102,7 +102,7 @@ return ReactModule.memo(ReactModule.forwardRef(function(p1, Ref) --[[ Line: 100 
 			UseMotionResult2_1(UseButtonMotionStatesModuleResult.Default)
 		end
 	end, { WithDefaultsModuleResult.isLoading })
-	ReactModule.useEffect(function() --[[ Line: 155 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: WithDefaultsModuleResult (copy), UseMotionResult2 (copy), UseButtonMotionStatesModuleResult (copy)
 		if WithDefaultsModuleResult.isDisabled then
 			UseMotionResult2(UseButtonMotionStatesModuleResult.Disabled)
@@ -112,7 +112,7 @@ return ReactModule.memo(ReactModule.forwardRef(function(p1, Ref) --[[ Line: 100 
 			UseMotionResult2(UseButtonMotionStatesModuleResult.Default)
 		end
 	end, { WithDefaultsModuleResult.isDisabled })
-	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 163 ]]
+	local UseMemoResult = ReactModule.useMemo(function()
 		-- upvalues: UseButtonVariantsModuleResult (copy), UseTokensModuleResult (copy)
 		return {
 			radius = UDim.new(0, UseButtonVariantsModuleResult.container.radius),
@@ -124,7 +124,7 @@ return ReactModule.memo(ReactModule.forwardRef(function(p1, Ref) --[[ Line: 100 
 		UseButtonVariantsModuleResult.container.radius
 	})
 	local IsNotTextMatch: boolean = WithDefaultsModuleResult.text and WithDefaultsModuleResult.text ~= ""
-	local UseResult = ReactModule.useCallback(function(Value) --[[ Line: 173 ]]
+	local UseResult = ReactModule.useCallback(function(Value)
 		-- upvalues: config (upval), WithDefaultsModuleResult (copy), IsNotTextMatch (copy)
 		local Entry = config[WithDefaultsModuleResult.variant]
 		
@@ -143,10 +143,10 @@ return ReactModule.memo(ReactModule.forwardRef(function(p1, Ref) --[[ Line: 100 
 	
 	if UseButtonVariantsModuleResult.container.style then
 		local Transparency = UseButtonVariantsModuleResult.container.style.Transparency
-		MapResult = UseMotionResult.transparency:map(function(p2) --[[ Line: 65 ]]
+		MapResult = UseMotionResult.transparency:map(function(p2)
 			-- upvalues: Transparency (copy)
 			return if Transparency == nil then p2 else Transparency + (1 - Transparency) * p2
-		end):map(function(Transparency) --[[ Line: 188 ]]
+		end):map(function(Transparency)
 			-- upvalues: UseButtonVariantsModuleResult (copy)
 			return {
 				Color3 = UseButtonVariantsModuleResult.container.style.Color3,
@@ -166,7 +166,7 @@ return ReactModule.memo(ReactModule.forwardRef(function(p1, Ref) --[[ Line: 100 
 		local Transparency1 = UseButtonVariantsModuleResult.container.stroke.Transparency
 		Stroke = {
 			Color = UseButtonVariantsModuleResult.container.stroke.Color,
-			Transparency = UseMotionResult.transparency:map(function(p2) --[[ Line: 65 ]]
+			Transparency = UseMotionResult.transparency:map(function(p2)
 				-- upvalues: Transparency1 (copy)
 				return if Transparency1 == nil then p2 else Transparency1 + (1 - Transparency1) * p2
 			end)
@@ -196,7 +196,7 @@ return ReactModule.memo(ReactModule.forwardRef(function(p1, Ref) --[[ Line: 100 
 			PresenceWrapper = ReactModule.createElement(AnimatePresence, {}, {
 				Spinner = ReactModule.createElement(SpinnerModule, {
 					Size = UseButtonVariantsModuleResult.icon.size - (if FlagsModule.FoundationUsePath2DSpinner then UDim2.fromOffset(UseTokensModuleResult.Padding.XSmall, UseTokensModuleResult.Padding.XSmall) else UDim2.fromOffset(0, 0)),
-					style = UseMotionResult.transparency:map(function(Transparency) --[[ Line: 242 ]]
+					style = UseMotionResult.transparency:map(function(Transparency)
 						-- upvalues: UseButtonVariantsModuleResult (copy)
 						return {
 							Color3 = UseButtonVariantsModuleResult.content.style.Color3,
@@ -230,7 +230,7 @@ return ReactModule.memo(ReactModule.forwardRef(function(p1, Ref) --[[ Line: 100 
 			textStyle = ReactModule.joinBindings({
 				UseMotionResult.transparency,
 				UseMotionResult1.textTransparency
-			}):map(function(Entry) --[[ Line: 280 ]]
+			}):map(function(Entry)
 				-- upvalues: UseButtonVariantsModuleResult (copy)
 				return {
 					Color3 = UseButtonVariantsModuleResult.content.style.Color3,

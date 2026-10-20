@@ -1,5 +1,5 @@
 ﻿return {
-	Disconnect = function(Connection) --[[ Line: 2 ]]
+	Disconnect = function(Connection)
 		return Connection:Disconnect()
 	end
 }

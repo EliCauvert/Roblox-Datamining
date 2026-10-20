@@ -2,7 +2,7 @@
 local ReactGlobalsModule = require(Parent.ReactGlobals)
 local Console = require(Parent.Shared).console
 
-local function _(Text) --[[ Line: 18 | Named "unimplemented" ]]
+local function _(Text)
 	print("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
 	print("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
 	print("UNIMPLEMENTED ERROR: " .. Text)
@@ -41,14 +41,14 @@ local v1 = nil
 local SkipPastDehydratedSuspenseInstanceResult = nil
 local Flag = false
 
-function warnIfHydrating() --[[ Line: 92 ]]
+function warnIfHydrating()
 	-- upvalues: ReactGlobalsModule (copy), Flag (ref), Console (copy)
 	if ReactGlobalsModule.__DEV__ and Flag then
 		Console.error("We should not be hydrating here. This is a bug in React. Please file a bug.")
 	end
 end
 
-function enterHydrationState(p1): boolean --[[ Line: 102 ]]
+function enterHydrationState(p1): boolean
 	-- upvalues: SupportsHydration (copy), SkipPastDehydratedSuspenseInstanceResult (ref), GetFirstHydratableChildFunction (copy), v1 (ref), Flag (ref)
 	if SupportsHydration then
 		SkipPastDehydratedSuspenseInstanceResult = GetFirstHydratableChildFunction(p1.stateNode.containerInfo)
@@ -61,7 +61,7 @@ function enterHydrationState(p1): boolean --[[ Line: 102 ]]
 	end
 end
 
-function reenterHydrationStateFromDehydratedSuspenseInstance(p1, p2): boolean --[[ Line: 114 ]]
+function reenterHydrationStateFromDehydratedSuspenseInstance(p1, p2): boolean
 	-- upvalues: SupportsHydration (copy), SkipPastDehydratedSuspenseInstanceResult (ref), GetNextHydratableSiblingFunction (copy), Flag (ref)
 	if SupportsHydration then
 		SkipPastDehydratedSuspenseInstanceResult = GetNextHydratableSiblingFunction(p2)
@@ -74,14 +74,14 @@ function reenterHydrationStateFromDehydratedSuspenseInstance(p1, p2): boolean --
 	end
 end
 
-function deleteHydratableInstance(_, _) --[[ Line: 128 ]]
+function deleteHydratableInstance(_, _)
 	print("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
 	print("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
 	print("UNIMPLEMENTED ERROR: deleteHydratableInstance")
 	error("FIXME (roblox): deleteHydratableInstance is unimplemented", 2)
 end
 
-function insertNonHydratedInstance(_, p1) --[[ Line: 163 ]]
+function insertNonHydratedInstance(_, p1)
 	-- upvalues: Hydrating (copy), Placement (copy), ReactGlobalsModule (copy)
 	print("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
 	print("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
@@ -91,7 +91,7 @@ function insertNonHydratedInstance(_, p1) --[[ Line: 163 ]]
 	local _ = ReactGlobalsModule.__DEV__
 end
 
-function tryHydrate(Return_, p1): boolean --[[ Line: 227 ]]
+function tryHydrate(Return_, p1): boolean
 	-- upvalues: HostComponent (copy), CanHydrateInstanceFunction (copy), HostText (copy), CanHydrateTextInstanceFunction (copy), SuspenseComponent (copy), EnableSuspenseServerRenderer (copy), CanHydrateSuspenseInstanceFunction (copy), OffscreenLane (copy), CreateFiberFromDehydratedFragmentFunction (copy)
 	if Return_.tag == HostComponent then
 		local CanHydrateInstance = CanHydrateInstanceFunction(p1, Return_.type, Return_.pendingProps)
@@ -136,7 +136,7 @@ function tryHydrate(Return_, p1): boolean --[[ Line: 227 ]]
 	end
 end
 
-function tryToClaimNextHydratableInstance(p1) --[[ Line: 272 ]]
+function tryToClaimNextHydratableInstance(p1)
 	-- upvalues: Flag (ref), SkipPastDehydratedSuspenseInstanceResult (ref), v1 (ref), GetNextHydratableSiblingFunction (copy), GetFirstHydratableChildFunction (copy)
 	if not Flag then return end
 	local SkipPastDehydratedSuspenseInstanceResult1 = SkipPastDehydratedSuspenseInstanceResult
@@ -166,7 +166,7 @@ function tryToClaimNextHydratableInstance(p1) --[[ Line: 272 ]]
 	SkipPastDehydratedSuspenseInstanceResult = GetFirstHydratableChildFunction(SkipPastDehydratedSuspenseInstanceResult1)
 end
 
-function prepareToHydrateHostInstance(p1, p2, p3): boolean --[[ Line: 308 ]]
+function prepareToHydrateHostInstance(p1, p2, p3): boolean
 	-- upvalues: SupportsHydration (copy), InvariantFunction (copy), HydrateInstanceFunction (copy)
 	if not SupportsHydration then
 		InvariantFunction(false, "Expected prepareToHydrateHostInstance() to never be called. This error is likely caused by a bug in React. Please file an issue.")
@@ -177,7 +177,7 @@ function prepareToHydrateHostInstance(p1, p2, p3): boolean --[[ Line: 308 ]]
 	return HydrateInstanceResult ~= nil
 end
 
-function prepareToHydrateHostTextInstance(p1) --[[ Line: 340 ]]
+function prepareToHydrateHostTextInstance(p1)
 	-- upvalues: SupportsHydration (copy), InvariantFunction (copy), HydrateTextInstanceFunction (copy), ReactGlobalsModule (copy), v1 (ref), HostRoot (copy), DidNotMatchHydratedContainerTextInstanceFunction (copy), HostComponent (copy), DidNotMatchHydratedTextInstanceFunction (copy)
 	if not SupportsHydration then
 		InvariantFunction(false, "Expected prepareToHydrateHostTextInstance() to never be called. This error is likely caused by a bug in React. Please file an issue.")
@@ -203,7 +203,7 @@ function prepareToHydrateHostTextInstance(p1) --[[ Line: 340 ]]
 	return HydrateTextInstanceResult
 end
 
-function prepareToHydrateHostSuspenseInstance(p1) --[[ Line: 383 ]]
+function prepareToHydrateHostSuspenseInstance(p1)
 	-- upvalues: SupportsHydration (copy), InvariantFunction (copy), HydrateSuspenseInstanceFunction (copy)
 	if not SupportsHydration then
 		InvariantFunction(false, "Expected prepareToHydrateHostSuspenseInstance() to never be called. This error is likely caused by a bug in React. Please file an issue.")
@@ -214,7 +214,7 @@ function prepareToHydrateHostSuspenseInstance(p1) --[[ Line: 383 ]]
 	HydrateSuspenseInstanceFunction(Dehydrated, p1)
 end
 
-function skipPastDehydratedSuspenseInstance(p1) --[[ Line: 408 ]]
+function skipPastDehydratedSuspenseInstance(p1)
 	-- upvalues: SupportsHydration (copy), InvariantFunction (copy), GetNextHydratableInstanceAfterSuspenseInstanceFunction (copy)
 	if not SupportsHydration then
 		InvariantFunction(false, "Expected skipPastDehydratedSuspenseInstance() to never be called. This error is likely caused by a bug in React. Please file an issue.")
@@ -226,7 +226,7 @@ function skipPastDehydratedSuspenseInstance(p1) --[[ Line: 408 ]]
 	return GetNextHydratableInstanceAfterSuspenseInstanceFunction(Dehydrated)
 end
 
-function popToNextHostParent(p1) --[[ Line: 431 ]]
+function popToNextHostParent(p1)
 	-- upvalues: HostComponent (copy), HostRoot (copy), SuspenseComponent (copy), v1 (ref)
 	local Return = p1.return_
 	while Return ~= nil and (Return.tag ~= HostComponent and Return.tag ~= HostRoot and Return.tag ~= SuspenseComponent) do
@@ -235,7 +235,7 @@ function popToNextHostParent(p1) --[[ Line: 431 ]]
 	v1 = Return
 end
 
-function popHydrationState(p2): boolean --[[ Line: 444 ]]
+function popHydrationState(p2): boolean
 	-- upvalues: SupportsHydration (copy), v1 (ref), Flag (ref), HostComponent (copy), ShouldSetTextContentFunction (copy), SkipPastDehydratedSuspenseInstanceResult (ref), GetNextHydratableSiblingFunction (copy), SuspenseComponent (copy)
 	if not SupportsHydration then
 		return false
@@ -264,7 +264,7 @@ function popHydrationState(p2): boolean --[[ Line: 444 ]]
 	return true
 end
 
-function resetHydrationState() --[[ Line: 497 ]]
+function resetHydrationState()
 	-- upvalues: SupportsHydration (copy), v1 (ref), SkipPastDehydratedSuspenseInstanceResult (ref), Flag (ref)
 	if SupportsHydration then
 		v1 = nil
@@ -275,7 +275,7 @@ function resetHydrationState() --[[ Line: 497 ]]
 	end
 end
 
-function getIsHydrating() --[[ Line: 507 ]]
+function getIsHydrating()
 	-- upvalues: Flag (ref)
 	return Flag
 end

@@ -1,5 +1,5 @@
 ﻿game:DefineFastFlag("UGCValidationEyebrowEyelashCategory", false)
 
-return function() --[[ Line: 3 ]]
+return function()
 	return game:GetFastFlag("UGCValidationEyebrowEyelashCategory")
 end

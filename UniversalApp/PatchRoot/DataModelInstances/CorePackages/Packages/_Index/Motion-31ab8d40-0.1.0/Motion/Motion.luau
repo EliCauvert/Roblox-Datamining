@@ -2,13 +2,13 @@
 local Presets = require(script.Parent.Utility.TimingConfigs).presets
 local Preset = Presets[require(script.Parent.Enums.TransitionPreset).Default]
 
-local function _(p1) --[[ Line: 12 | Named "getTransition" ]]
+local function _(p1)
 	-- upvalues: Preset (copy)
 	return p1.transition or { default = Preset }
 end
 
 return {
-	createState = function(List, p1) --[[ Line: 18 ]]
+	createState = function(List, p1)
 		-- upvalues: Preset (copy)
 		local config = { transition = { default = p1 and p1.default or Preset } }
 		
@@ -21,7 +21,7 @@ return {
 		end
 		return config
 	end,
-	transition = function(p2, p3) --[[ Line: 40 ]]
+	transition = function(p2, p3)
 		-- upvalues: Presets (copy), Preset (copy)
 		local Preset1 = if type(p2) == "string" then Presets[p2] or Preset else p2
 		local config = {
@@ -43,7 +43,7 @@ return {
 		end
 		return config
 	end,
-	animate = function(p2, List) --[[ Line: 69 ]]
+	animate = function(p2, List)
 		-- upvalues: Preset (copy)
 		if not p2 then return end
 		local Transition = p2.transition or { default = Preset }
@@ -53,7 +53,7 @@ return {
 			
 			if Default.delay and Default.delay > 0 then
 				local Copy = table.clone(Default)
-				task.delay(Default.delay, function() --[[ Line: 88 ]]
+				task.delay(Default.delay, function()
 					-- upvalues: value (copy), p2 (copy), i (copy), Copy (copy)
 					value(p2[i], Copy)
 				end)

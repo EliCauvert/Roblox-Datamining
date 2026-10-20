@@ -27,12 +27,12 @@ local IsNonNullTypeFunction = DefinitionModule.isNonNullType
 local Callback = nil
 local DefaultOnError = nil
 
-local function coerceInputValue(p1, p2, p3) --[[ Line: 55 ]]
+local function coerceInputValue(p1, p2, p3)
 	-- upvalues: DefaultOnError (ref), Callback (ref)
 	return Callback(p1, p2, if p3 then p3 else DefaultOnError)
 end
 
-DefaultOnError = function(p1, p2, p3) --[[ Line: 60 | Named "defaultOnError" ]]
+DefaultOnError = function(p1, p2, p3)
 	-- upvalues: InspectFunction (copy), PrintPathArrayFunction (copy)
 	local Text = "Invalid value " .. InspectFunction(p2)
 	
@@ -43,7 +43,7 @@ DefaultOnError = function(p1, p2, p3) --[[ Line: 60 | Named "defaultOnError" ]]
 	error(p3)
 end
 
-Callback = function(p1, OfType, Callback1: (any, any, any) -> (), p2) --[[ Line: 69 | Named "coerceInputValueImpl" ]]
+Callback = function(p1, OfType, Callback1: (any, any, any) -> (), p2)
 	-- upvalues: IsNonNullTypeFunction (copy), IsNotNillishFunction (copy), Callback (ref), PathToArrayFunction (copy), GraphQLError (copy), InspectFunction (copy), IsNillishFunction (copy), NullModule (copy), IsListTypeFunction (copy), IsIteratableObjectFunction (copy), Array (copy), AddPathFunction (copy), IsInputObjectTypeFunction (copy), IsObjectLikeFunction (copy), Object (copy), SuggestionListFunction (copy), DidYouMeanFunction (copy), IsLeafTypeFunction (copy), InstanceOfModule (copy), InvariantFunction (copy)
 	if not IsNonNullTypeFunction(OfType) then
 		if IsNillishFunction(p1) then
@@ -52,7 +52,7 @@ Callback = function(p1, OfType, Callback1: (any, any, any) -> (), p2) --[[ Line:
 		if IsListTypeFunction(OfType) then
 			local OfType1 = OfType.ofType
 			
-			return if IsIteratableObjectFunction(p1) then Array.from(p1, function(p3, p4) --[[ Line: 97 ]]
+			return if IsIteratableObjectFunction(p1) then Array.from(p1, function(p3, p4)
 				-- upvalues: AddPathFunction (upval), p2 (copy), Callback (upval), OfType1 (copy), Callback1 (copy)
 				return Callback(p3, OfType1, Callback1, (AddPathFunction(p2, p4, nil)))
 			end) else { Callback(p1, OfType1, Callback1, p2) }

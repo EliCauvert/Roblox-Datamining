@@ -21,15 +21,15 @@ local Label = {
 	SubItemStyle = { ItemIndentation = 20, ItemOffset = 12 }
 }
 
-local function _(p1, p2) --[[ Line: 61 | Named "calculateItemOffset" ]]
+local function _(p1, p2)
 	return p2 + p1
 end
 
-local _ = function(p1: string): boolean --[[ Line: 102 | Named "isOrdered" ]]
+local _ = function(p1: string): boolean
 	return p1 and (not p1:find("^*") and not p1:find("^-"))
 end
 
-return function(Frame) --[[ Line: 106 | Named "BulletList" ]]
+return function(Frame)
 	-- upvalues: FoundationModule (copy), Label (copy), FlagsModule (copy), MapFunction (copy), ReactModule (copy), Text (copy), Flags (copy), View (copy), Image (copy), DashModule (copy)
 	local UseTokensResult = FoundationModule.Hooks.useTokens()
 	local TextWrapped = Frame.TextWrapped
@@ -65,7 +65,7 @@ return function(Frame) --[[ Line: 106 | Named "BulletList" ]]
 		LayoutOrder = Frame.LayoutOrder or 1,
 		Position = Frame.Position,
 		Size = Size
-	}, DashModule.assign(MapFunction(Items, function(ContentElement, LayoutOrder) --[[ Line: 134 ]]
+	}, DashModule.assign(MapFunction(Items, function(ContentElement, LayoutOrder)
 		-- upvalues: ItemIndentation (copy), ListStyle (copy), Label (upval), ReactModule (upval), Text (upval), Flags (upval), _Font (ref), TextSize (ref), _UDim2 (copy), TextColor (ref), TextTruncate (copy), TextWrapped (copy), View (upval), LineHeight (ref), Image (upval)
 		local MarkerImage = ListStyle.MarkerImage or Label.MarkerImage
 		local UIPadding = nil

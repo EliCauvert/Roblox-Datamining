@@ -8,7 +8,7 @@ local ConstantsModule = require(Parent.Constants)
 local AspectRatioModeModule = require(Parent.Enum.AspectRatioMode)
 local GetAspectRatioModule = require(Parent.getAspectRatio)
 
-return function(p1, p2, p3, p4, p5): UDim --[[ Line: 33 ]]
+return function(p1, p2, p3, p4, p5): UDim
 	-- upvalues: CryoModule (copy), ConstantsModule (copy), SetDefaultModule (copy), AspectRatioModeModule (copy), GetAspectRatioModule (copy)
 	local JoinResult = CryoModule.Dictionary.join(ConstantsModule.getDefaultStyleProps(p1), p5 or {})
 	local TopContentPadding = JoinResult.topContentPadding

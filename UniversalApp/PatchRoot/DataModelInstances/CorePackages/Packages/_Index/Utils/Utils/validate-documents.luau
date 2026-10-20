@@ -14,11 +14,11 @@ local _ = require(script.Parent.loaders)
 local AggregateError = require(script.Parent.AggregateError).AggregateError
 local Callback = nil
 
-local function validateGraphQlDocuments(p1, p2, p3) --[[ Line: 66 ]]
+local function validateGraphQlDocuments(p1, p2, p3)
 	-- upvalues: Callback (ref), PromiseModule (copy), Map (copy), Kind (copy), Array (copy), ConcatASTFunction (copy), ValidateFunction (copy)
 	local CallbackResult = if p3 == nil then Callback() else p3
 	
-	return PromiseModule.resolve():andThen(function() --[[ Line: 74 ]]
+	return PromiseModule.resolve():andThen(function()
 		-- upvalues: Map (upval), p2 (copy), Kind (upval), Array (upval), PromiseModule (upval), ConcatASTFunction (upval), ValidateFunction (upval), p1 (copy), CallbackResult (copy)
 		local NewMap = Map.new()
 		local List = {}
@@ -45,9 +45,9 @@ local function validateGraphQlDocuments(p1, p2, p3) --[[ Line: 66 ]]
 			kind = Kind.DOCUMENT,
 			definitions = Array.concat({}, NewMap:values())
 		}
-		PromiseModule.all(Array.map(List, function(p4) --[[ Line: 104 ]]
+		PromiseModule.all(Array.map(List, function(p4)
 			-- upvalues: PromiseModule (upval), ConcatASTFunction (upval), config (copy), ValidateFunction (upval), p1 (upval), CallbackResult (upval), List1 (copy)
-			return PromiseModule.resolve():andThen(function() --[[ Line: 105 ]]
+			return PromiseModule.resolve():andThen(function()
 				-- upvalues: ConcatASTFunction (upval), config (upval), p4 (copy), ValidateFunction (upval), p1 (upval), CallbackResult (upval), List1 (upval)
 				local ValidateResult = ValidateFunction(p1, ConcatASTFunction({ config, p4.document }), CallbackResult)
 				
@@ -61,7 +61,7 @@ local function validateGraphQlDocuments(p1, p2, p3) --[[ Line: 66 ]]
 	end)
 end
 
-Callback = function() --[[ Line: 185 | Named "createDefaultRules" ]]
+Callback = function()
 	-- upvalues: VersionInfo (copy), Array (copy), SpecifiedRules (copy)
 	local MapResult = {
 		"NoUnusedFragmentsRule",
@@ -70,11 +70,11 @@ Callback = function() --[[ Line: 185 | Named "createDefaultRules" ]]
 	}
 	
 	if VersionInfo.major < 15 then
-		MapResult = Array.map(MapResult, function(Text: string): string --[[ Line: 192 ]]
+		MapResult = Array.map(MapResult, function(Text: string): string
 			return (Text:gsub("Rule$", "", 1))
 		end)
 	end
-	return Array.filter(SpecifiedRules, function(p4): boolean --[[ Line: 200 ]]
+	return Array.filter(SpecifiedRules, function(p4): boolean
 		-- upvalues: Array (upval), MapResult (ref)
 		return not Array.includes(MapResult, (debug.info(p4, "n")))
 	end)
@@ -82,7 +82,7 @@ end
 
 return {
 	validateGraphQlDocuments = validateGraphQlDocuments,
-	checkValidationErrors = function(List) --[[ Line: 123 ]]
+	checkValidationErrors = function(List)
 		-- upvalues: Error1 (copy), AggregateError (copy), Array (copy)
 		if #List > 0 then
 			local List1 = {}
@@ -102,7 +102,7 @@ return {
 					table.insert(List1, NewError)
 				end
 			end
-			error(AggregateError.new(List1, ("GraphQL Document Validation failed with %s errors;\n  %s"):format(tostring(#List1), (tostring(Array.join(Array.map(List1, function(p4, p5): string --[[ Line: 170 ]]
+			error(AggregateError.new(List1, ("GraphQL Document Validation failed with %s errors;\n  %s"):format(tostring(#List1), (tostring(Array.join(Array.map(List1, function(p4, p5): string
 				return ("Error %s: %s"):format(tostring(p5), (tostring(p4.stack)))
 			end), "\n\n"))))))
 		end

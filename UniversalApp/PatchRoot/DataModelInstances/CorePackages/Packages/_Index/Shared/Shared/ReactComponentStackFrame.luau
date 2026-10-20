@@ -15,11 +15,11 @@ local ReactCurrentDispatcher = require(script.Parent.ReactSharedInternals).React
 local Callback = nil
 local describeFunctionComponentFrame = nil
 
-local function _(Callback) --[[ Line: 60 | Named "describeOwner" ]]
+local function _(Callback)
 	return if type(Callback) == "function" then debug.info(Callback, "n") elseif type(Callback) == "table" then tostring(Callback) else nil
 end
 
-local function describeBuiltInComponentFrame(REACTSUSPENSELISTTYPE, p1, Callback1) --[[ Line: 69 ]]
+local function describeBuiltInComponentFrame(REACTSUSPENSELISTTYPE, p1, Callback1)
 	-- upvalues: ReactGlobalsModule (copy), Callback (ref)
 	return Callback(REACTSUSPENSELISTTYPE, p1, if ReactGlobalsModule.__DEV__ and Callback1 then if type(Callback1) == "function" then debug.info(Callback1, "n") elseif type(Callback1) == "table" then tostring(Callback1) else nil else nil)
 end
@@ -27,7 +27,7 @@ end
 local Flag = false
 local self = if ReactGlobalsModule.__DEV__ then setmetatable({}, { __mode = "k" }) else nil
 
-local function describeNativeComponentFrame(Callback1, p1) --[[ Line: 116 ]]
+local function describeNativeComponentFrame(Callback1, p1)
 	-- upvalues: Flag (ref), ReactGlobalsModule (copy), self (ref), ReactCurrentDispatcher (copy), DisableLogsFunction (copy), ReenableLogsFunction (copy), Callback (ref)
 	if not Callback1 or Flag then
 		return ""
@@ -49,10 +49,10 @@ local function describeNativeComponentFrame(Callback1, p1) --[[ Line: 116 ]]
 		DisableLogsFunction()
 	end
 	local Stack = nil
-	local _, Result = xpcall(function() --[[ Line: 156 ]]
+	local _, Result = xpcall(function()
 		-- upvalues: p1 (copy), Stack (ref), v1 (ref), Callback1 (copy)
 		if not p1 then
-			local _, Result = pcall(function() --[[ Line: 162 ]]
+			local _, Result = pcall(function()
 				-- upvalues: Stack (upval)
 				Stack = debug.traceback()
 				error({ stack = Stack })
@@ -62,7 +62,7 @@ local function describeNativeComponentFrame(Callback1, p1) --[[ Line: 116 ]]
 			
 			return
 		end
-	end, function(Err) --[[ Line: 172 ]]
+	end, function(Err)
 		-- upvalues: Stack (ref)
 		return { message = Err, stack = Stack }
 	end)
@@ -119,7 +119,7 @@ local function describeNativeComponentFrame(Callback1, p1) --[[ Line: 116 ]]
 	return v3
 end
 
-Callback = function(DebugInfo, p2, DebugInfo1): string --[[ Line: 286 | Named "describeComponentFrame" ]]
+Callback = function(DebugInfo, p2, DebugInfo1): string
 	-- upvalues: ReactGlobalsModule (copy)
 	local Text = ""
 	
@@ -141,17 +141,17 @@ Callback = function(DebugInfo, p2, DebugInfo1): string --[[ Line: 286 | Named "d
 	return "\n    in " .. (DebugInfo or "Unknown") .. Text
 end
 
-local function describeClassComponentFrame(REACTSUSPENSELISTTYPE, p2, Callback1) --[[ Line: 319 ]]
+local function describeClassComponentFrame(REACTSUSPENSELISTTYPE, p2, Callback1)
 	-- upvalues: ReactGlobalsModule (copy), Callback (ref)
 	return Callback(tostring(REACTSUSPENSELISTTYPE), p2, if ReactGlobalsModule.__DEV__ and Callback1 then if type(Callback1) == "function" then debug.info(Callback1, "n") elseif type(Callback1) == "table" then tostring(Callback1) else nil else nil)
 end
 
-describeFunctionComponentFrame = function(Callback1, p2, Callback2) --[[ Line: 343 | Named "describeFunctionComponentFrame" ]]
+describeFunctionComponentFrame = function(Callback1, p2, Callback2)
 	-- upvalues: ReactGlobalsModule (copy), Callback (ref)
 	return if Callback1 then Callback(if type(Callback1) == "function" then debug.info(Callback1, "n") else tostring(Callback1), p2, if ReactGlobalsModule.__DEV__ and Callback2 then if type(Callback2) == "function" then debug.info(Callback2, "n") elseif type(Callback2) == "table" then tostring(Callback2) else nil else nil) else ""
 end
 
-local function describeUnknownElementTypeFrameInDEV(Callback, p2, p3) --[[ Line: 390 ]]
+local function describeUnknownElementTypeFrameInDEV(Callback, p2, p3)
 	-- upvalues: ReactGlobalsModule (copy), describeClassComponentFrame (copy), describeFunctionComponentFrame (ref), describeBuiltInComponentFrame (copy), REACTSUSPENSETYPE (copy), REACTSUSPENSELISTTYPE (copy), REACTFORWARDREFTYPE (copy), REACTMEMOTYPE (copy), describeUnknownElementTypeFrameInDEV (copy), REACTBLOCKTYPE (copy), REACTLAZYTYPE (copy)
 	if not ReactGlobalsModule.__DEV__ then
 		return ""
@@ -189,7 +189,7 @@ local function describeUnknownElementTypeFrameInDEV(Callback, p2, p3) --[[ Line:
 		if Typeof == REACTLAZYTYPE then
 			local Payload = Callback._payload
 			local InitFunction = Callback._init
-			local Success, Result = pcall(function() --[[ Line: 449 ]]
+			local Success, Result = pcall(function()
 				-- upvalues: describeUnknownElementTypeFrameInDEV (upval), InitFunction (copy), Payload (copy), p2 (copy), p3 (copy)
 				describeUnknownElementTypeFrameInDEV(InitFunction(Payload), p2, p3)
 			end)

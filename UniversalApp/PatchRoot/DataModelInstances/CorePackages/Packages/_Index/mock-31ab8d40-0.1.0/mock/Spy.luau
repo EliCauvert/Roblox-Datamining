@@ -4,12 +4,12 @@ SpyModule.__index = SpyModule
 local t = {}
 setmetatable(t, { __mode = "kv" })
 
-function SpyModule.new(Callback) --[[ Line: 12 ]]
+function SpyModule.new(Callback)
 	-- upvalues: SymbolsModule (copy), SpyModule (copy), t (copy)
 	local config = { [SymbolsModule.Calls] = {} }
 	setmetatable(config, SpyModule)
 	
-	local function Inner(...) --[[ Line: 18 ]]
+	local function Inner(...)
 		-- upvalues: Callback (copy), config (copy), SymbolsModule (upval)
 		local config1 = {
 			args = table.pack(...),
@@ -26,7 +26,7 @@ function SpyModule.new(Callback) --[[ Line: 12 ]]
 	return config, Inner
 end
 
-function SpyModule.lookup(p1) --[[ Line: 33 ]]
+function SpyModule.lookup(p1)
 	-- upvalues: t (copy)
 	return t[p1]
 end

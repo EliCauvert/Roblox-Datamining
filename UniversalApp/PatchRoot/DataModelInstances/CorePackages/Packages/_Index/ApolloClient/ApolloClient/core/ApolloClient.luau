@@ -25,7 +25,7 @@ local _ = require(script.Parent.watchQueryOptions)
 local LocalState = require(script.Parent.LocalState).LocalState
 local _ = require(script.Parent.ApolloClient_types)
 
-local function mergeOptions(Mutate, AssignResult) --[[ Line: 133 ]]
+local function mergeOptions(Mutate, AssignResult)
 	-- upvalues: CompactFunction (copy), Boolean (copy), Object (copy)
 	return CompactFunction(Mutate, AssignResult, Boolean.toJSBoolean(AssignResult.variables) and {
 		variables = Object.assign({}, Mutate.variables, AssignResult.variables)
@@ -35,7 +35,7 @@ end
 local Module = {}
 Module.__index = Module
 
-function Module.new(p1) --[[ Line: 189 ]]
+function Module.new(p1)
 	-- upvalues: Module (copy), Boolean (copy), HttpLink (copy), ApolloLink (copy), InvariantError (copy), SetTimeoutFunction (copy), Version (copy), LocalState (copy), QueryManager (copy)
 	local self = setmetatable({}, Module)
 	self.defaultOptions = {}
@@ -72,7 +72,7 @@ function Module.new(p1) --[[ Line: 189 ]]
 	self.typeDefs = TypeDefs
 	
 	if Boolean.toJSBoolean(SsrForceFetchDelay) then
-		SetTimeoutFunction(function() --[[ Line: 271 ]]
+		SetTimeoutFunction(function()
 			-- upvalues: self (copy)
 			self.disableNetworkFetches = false
 			
@@ -94,17 +94,17 @@ function Module.new(p1) --[[ Line: 189 ]]
 		clientAwareness = { name = Name, version = Version1 },
 		localState = self.localState,
 		assumeImmutableResults = AssumeImmutableResults,
-		onBroadcast = if DEV then function() --[[ Line: 425 ]] end else nil
+		onBroadcast = if DEV then function() end else nil
 	})
 	
 	return self
 end
 
-function Module:stop() --[[ Line: 438 ]]
+function Module:stop()
 	self.queryManager:stop()
 end
 
-function Module:watchQuery(AssignResult) --[[ Line: 461 ]]
+function Module:watchQuery(AssignResult)
 	-- upvalues: Boolean (copy), mergeOptions (copy), Object (copy)
 	if Boolean.toJSBoolean(self.defaultOptions.watchQuery) then
 		AssignResult = mergeOptions(self.defaultOptions.watchQuery, AssignResult)
@@ -115,7 +115,7 @@ function Module:watchQuery(AssignResult) --[[ Line: 461 ]]
 	return self.queryManager:watchQuery(AssignResult)
 end
 
-function Module:query(AssignResult) --[[ Line: 486 ]]
+function Module:query(AssignResult)
 	-- upvalues: Boolean (copy), mergeOptions (copy), InvariantFunction (copy), Object (copy)
 	if Boolean.toJSBoolean(self.defaultOptions.query) then
 		AssignResult = mergeOptions(self.defaultOptions.query, AssignResult)
@@ -128,7 +128,7 @@ function Module:query(AssignResult) --[[ Line: 486 ]]
 	return self.queryManager:query(AssignResult)
 end
 
-function Module:mutate(p1) --[[ Line: 513 ]]
+function Module:mutate(p1)
 	-- upvalues: Boolean (copy), mergeOptions (copy)
 	if Boolean.toJSBoolean(self.defaultOptions.mutate) then
 		p1 = mergeOptions(self.defaultOptions.mutate, p1)
@@ -136,107 +136,107 @@ function Module:mutate(p1) --[[ Line: 513 ]]
 	return self.queryManager:mutate(p1)
 end
 
-function Module:subscribe(p1) --[[ Line: 526 ]]
+function Module:subscribe(p1)
 	return self.queryManager:startGraphQLSubscription(p1)
 end
 
-function Module:readQuery(p1, p2: boolean) --[[ Line: 539 ]]
+function Module:readQuery(p1, p2: boolean)
 	if p2 == nil then
 		p2 = false
 	end
 	return self.cache:readQuery(p1, p2)
 end
 
-function Module:readFragment(p1, p2: boolean) --[[ Line: 560 ]]
+function Module:readFragment(p1, p2: boolean)
 	if p2 == nil then
 		p2 = false
 	end
 	return self.cache:readFragment(p1, p2)
 end
 
-function Module:writeQuery(p1) --[[ Line: 572 ]]
+function Module:writeQuery(p1)
 	self.cache:writeQuery(p1)
 	self.queryManager:broadcastQueries()
 end
 
-function Module:writeFragment(p1) --[[ Line: 588 ]]
+function Module:writeFragment(p1)
 	self.cache:writeFragment(p1)
 	self.queryManager:broadcastQueries()
 end
 
-function Module:__actionHookForDevTools(DevToolsHookCb) --[[ Line: 593 ]]
+function Module:__actionHookForDevTools(DevToolsHookCb)
 	self.devToolsHookCb = DevToolsHookCb
 end
 
-function Module:__requestRaw(p1) --[[ Line: 597 ]]
+function Module:__requestRaw(p1)
 	-- upvalues: ExecuteFunction (copy)
 	return ExecuteFunction(self.link, p1)
 end
 
-function Module.resetStore(p1) --[[ Line: 617 ]]
+function Module.resetStore(p1)
 	-- upvalues: PromiseModule (copy), Array (copy)
-	return PromiseModule.delay(0):andThen(function() --[[ Line: 619 ]]
+	return PromiseModule.delay(0):andThen(function()
 		-- upvalues: p1 (copy)
 		return p1.queryManager:clearStore()
-	end):andThen(function() --[[ Line: 622 ]]
+	end):andThen(function()
 		-- upvalues: PromiseModule (upval), Array (upval), p1 (copy)
-		return PromiseModule.all(Array.map(p1.resetStoreCallbacks, function(Callback) --[[ Line: 623 ]]
+		return PromiseModule.all(Array.map(p1.resetStoreCallbacks, function(Callback)
 			return Callback()
 		end))
-	end):andThen(function() --[[ Line: 627 ]]
+	end):andThen(function()
 		-- upvalues: p1 (copy)
 		return p1:reFetchObservableQueries()
 	end)
 end
 
-function Module.clearStore(p1) --[[ Line: 636 ]]
+function Module.clearStore(p1)
 	-- upvalues: PromiseModule (copy), Array (copy)
-	return PromiseModule.delay(0):andThen(function() --[[ Line: 638 ]]
+	return PromiseModule.delay(0):andThen(function()
 		-- upvalues: p1 (copy)
 		return p1.queryManager:clearStore()
-	end):andThen(function() --[[ Line: 641 ]]
+	end):andThen(function()
 		-- upvalues: PromiseModule (upval), Array (upval), p1 (copy)
-		return PromiseModule.all(Array.map(p1.clearStoreCallbacks, function(Callback) --[[ Line: 642 ]]
+		return PromiseModule.all(Array.map(p1.clearStoreCallbacks, function(Callback)
 			return Callback()
 		end))
 	end)
 end
 
-function Module:onResetStore(p1) --[[ Line: 653 ]]
+function Module:onResetStore(p1)
 	-- upvalues: Array (copy)
 	table.insert(self.resetStoreCallbacks, p1)
 	
-	return function() --[[ Line: 655 ]]
+	return function()
 		-- upvalues: self (copy), Array (upval), p1 (copy)
-		self.resetStoreCallbacks = Array.filter(self.resetStoreCallbacks, function(p2): boolean --[[ Line: 656 ]]
+		self.resetStoreCallbacks = Array.filter(self.resetStoreCallbacks, function(p2): boolean
 			-- upvalues: p1 (upval)
 			return p2 ~= p1
 		end)
 	end
 end
 
-function Module:onClearStore(p1) --[[ Line: 667 ]]
+function Module:onClearStore(p1)
 	-- upvalues: Array (copy)
 	table.insert(self.clearStoreCallbacks, p1)
 	
-	return function() --[[ Line: 669 ]]
+	return function()
 		-- upvalues: self (copy), Array (upval), p1 (copy)
-		self.clearStoreCallbacks = Array.filter(self.clearStoreCallbacks, function(p2): boolean --[[ Line: 670 ]]
+		self.clearStoreCallbacks = Array.filter(self.clearStoreCallbacks, function(p2): boolean
 			-- upvalues: p1 (upval)
 			return p2 ~= p1
 		end)
 	end
 end
 
-function Module:reFetchObservableQueries(p1) --[[ Line: 688 ]]
+function Module:reFetchObservableQueries(p1)
 	return self.queryManager:reFetchObservableQueries(p1)
 end
 
-function Module:refetchQueries(p1) --[[ Line: 703 ]]
+function Module:refetchQueries(p1)
 	-- upvalues: PromiseModule (copy), InvariantFunction (copy)
 	local Queries = {}
 	local Results = {}
-	self.queryManager:refetchQueries(p1):forEach(function(p2, p3) --[[ Line: 708 ]]
+	self.queryManager:refetchQueries(p1):forEach(function(p2, p3)
 		-- upvalues: Queries (copy), Results (copy)
 		table.insert(Queries, p3)
 		table.insert(Results, p2)
@@ -244,7 +244,7 @@ function Module:refetchQueries(p1) --[[ Line: 703 ]]
 	local AllResult = PromiseModule.all(Results)
 	AllResult.queries = Queries
 	AllResult.results = Results
-	AllResult:catch(function(Err) --[[ Line: 723 ]]
+	AllResult:catch(function(Err)
 		-- upvalues: InvariantFunction (upval)
 		InvariantFunction.debug(("In client.refetchQueries, Promise.all promise rejected with error %s"):format(Err.message))
 	end)
@@ -252,38 +252,38 @@ function Module:refetchQueries(p1) --[[ Line: 703 ]]
 	return AllResult
 end
 
-function Module:getObservableQueries(p1: string) --[[ Line: 738 ]]
+function Module:getObservableQueries(p1: string)
 	if p1 == nil then
 		p1 = "active"
 	end
 	return self.queryManager:getObservableQueries(p1)
 end
 
-function Module:extract(p1) --[[ Line: 748 ]]
+function Module:extract(p1)
 	return self.cache:extract(p1)
 end
 
-function Module:restore(p1) --[[ Line: 759 ]]
+function Module:restore(p1)
 	return self.cache:restore(p1)
 end
 
-function Module:addResolvers(p1) --[[ Line: 766 ]]
+function Module:addResolvers(p1)
 	self.localState:addResolvers(p1)
 end
 
-function Module:setResolvers(p1) --[[ Line: 773 ]]
+function Module:setResolvers(p1)
 	self.localState:setResolvers(p1)
 end
 
-function Module:getResolvers() --[[ Line: 780 ]]
+function Module:getResolvers()
 	return self.localState:getResolvers()
 end
 
-function Module:setLocalStateFragmentMatcher(p1) --[[ Line: 787 ]]
+function Module:setLocalStateFragmentMatcher(p1)
 	self.localState:setFragmentMatcher(p1)
 end
 
-function Module:setLink(Link) --[[ Line: 794 ]]
+function Module:setLink(Link)
 	self.queryManager.link = Link
 	self.link = self.queryManager.link
 end

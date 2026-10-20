@@ -28,7 +28,7 @@ local config1 = {
 	shape = SearchInputShapeModule.Pill
 }
 
-return ReactModule.memo(ReactModule.forwardRef(function(p1, Ref) --[[ Line: 75 | Named "SearchInput" ]]
+return ReactModule.memo(ReactModule.forwardRef(function(p1, Ref)
 	-- upvalues: WithDefaultsModule (copy), config1 (copy), UseTokensModule (copy), UseTextInputVariantsModule (copy), UseScaledValueModule (copy), ConstantsModule (copy), ReactModule (copy), ViewModule (copy), WithCommonPropsModule (copy), InternalTextInputModule (copy), config (copy), TranslatorModule (copy), IconModule (copy), BuilderIconsModule (copy)
 	local WithDefaultsModuleResult = WithDefaultsModule(p1, config1)
 	local UseTokensModuleResult = UseTokensModule()
@@ -58,7 +58,7 @@ return ReactModule.memo(ReactModule.forwardRef(function(p1, Ref) --[[ Line: 75 |
 			placeholder = if WithDefaultsModuleResult.placeholder then WithDefaultsModuleResult.placeholder else TranslatorModule:FormatByKey("CommonUI.Controls.Action.Search"),
 			leadingElement = ReactModule.createElement(ViewModule, {
 				tag = "anchor-center-left auto-xy",
-				Position = ReactModule.useMemo(function(): UDim2 --[[ Line: 83 ]]
+				Position = ReactModule.useMemo(function(): UDim2
 					-- upvalues: UseTextInputVariantsModuleResult (copy), UseTokensModuleResult (copy)
 					return UDim2.fromOffset(0, (UseTextInputVariantsModuleResult.container.minHeight - UseTokensModuleResult.Stroke.Standard) / 2)
 				end, {

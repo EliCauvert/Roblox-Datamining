@@ -7,10 +7,10 @@ local InlineSpanElementModule = require(InlineLayoutElements.InlineSpanElement)
 local HoverContextModule = require(InlineLayoutElements.HoverContext)
 local _ = require(InlineLayoutElements.RenderableInlineElement)
 
-function HoverContextWrapper(Frame) --[[ Line: 25 ]]
+function HoverContextWrapper(Frame)
 	-- upvalues: HoverContextModule (copy), ReactModule (copy), FoundationModule (copy), UseTokensFunction (copy)
 	local UseHoverContextResult, UseHoverContextResult2 = HoverContextModule.useHoverContext(Frame.id)
-	local UseResult = ReactModule.useCallback(function(Hover) --[[ Line: 27 ]]
+	local UseResult = ReactModule.useCallback(function(Hover)
 		-- upvalues: UseHoverContextResult2 (copy), FoundationModule (upval)
 		UseHoverContextResult2(Hover == FoundationModule.Enums.ControlState.Hover)
 	end, { UseHoverContextResult2 })
@@ -29,7 +29,7 @@ function HoverContextWrapper(Frame) --[[ Line: 25 ]]
 end
 
 return {
-	new = function(p1, p2) --[[ Line: 45 ]]
+	new = function(p1, p2)
 		-- upvalues: InlineSpanElementModule (copy)
 		return InlineSpanElementModule.new(HoverContextWrapper, p2, p1)
 	end

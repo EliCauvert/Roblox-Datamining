@@ -6,10 +6,10 @@ local _ = require(Parent.type.schema)
 local _ = require(Parent.type.definition)
 
 return {
-	subscribe = function(_) --[[ Line: 35 ]]
+	subscribe = function(_)
 		error("graphql-lua does not currently implement subscriptions")
 	end,
-	createSourceEventStream = function(_, _, _, _, _, _, _) --[[ Line: 39 ]]
+	createSourceEventStream = function(_, _, _, _, _, _, _)
 		error("graphql-lua does not currently implement subscriptions")
 	end
 }

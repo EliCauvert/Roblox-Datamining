@@ -2,12 +2,12 @@
 local DashModule = require(Parent.Dash)
 local ReactIsModule = require(Parent.ReactIs)
 
-local function _(p1): boolean --[[ Line: 7 | Named "isTableNotBinding" ]]
+local function _(p1): boolean
 	-- upvalues: ReactIsModule (copy)
 	return type(p1) == "table" and not ReactIsModule.isBinding(p1)
 end
 
-local function deepJoin(Tbl, List) --[[ Line: 11 ]]
+local function deepJoin(Tbl, List)
 	-- upvalues: ReactIsModule (copy), deepJoin (copy)
 	local Copy = table.clone(Tbl)
 	
@@ -25,7 +25,7 @@ local function deepJoin(Tbl, List) --[[ Line: 11 ]]
 	return Copy
 end
 
-return function(p1, List) --[[ Line: 23 | Named "withDefaults" ]]
+return function(p1, List)
 	-- upvalues: deepJoin (copy), DashModule (copy)
 	local t = {}
 	

@@ -6,9 +6,9 @@ local UseViewportBindingModule = require(Graphing.Util.useViewportBinding)
 local UseViewportBindingFunction = UseViewportBindingModule.useViewportBinding
 local UseViewportVisibilityFunction = UseViewportBindingModule.useViewportVisibility
 
-function Panel(Frame: Frame) --[[ Line: 38 ]]
+function Panel(Frame: Frame)
 	-- upvalues: UseViewportBindingFunction (copy), UseViewportVisibilityFunction (copy), ReactModule (copy), StyleUtilModule (copy)
-	local UseViewportBindingResult = UseViewportBindingFunction(function(p1) --[[ Line: 39 ]]
+	local UseViewportBindingResult = UseViewportBindingFunction(function(p1)
 		-- upvalues: Frame (copy)
 		local PlotToViewResult = p1.plotToView(Frame.Rect.Min)
 		local PlotToViewResult1 = p1.plotToView(Frame.Rect.Max)
@@ -19,14 +19,14 @@ function Panel(Frame: Frame) --[[ Line: 38 ]]
 		}
 	end, { Frame.Rect })
 	
-	return if UseViewportVisibilityFunction(function(p1) --[[ Line: 48 ]]
+	return if UseViewportVisibilityFunction(function(p1)
 		-- upvalues: Frame (copy)
 		return p1.isRectInViewport(Frame.Rect)
 	end, { Frame.Rect }) then if Frame.Image then ReactModule.createElement("ImageLabel", {
-		Position = UseViewportBindingResult:map(function(p1) --[[ Line: 58 ]]
+		Position = UseViewportBindingResult:map(function(p1)
 			return p1.position
 		end),
-		Size = UseViewportBindingResult:map(function(p1) --[[ Line: 61 ]]
+		Size = UseViewportBindingResult:map(function(p1)
 			return p1.size
 		end),
 		Image = Frame.Image,
@@ -37,10 +37,10 @@ function Panel(Frame: Frame) --[[ Line: 38 ]]
 		ZIndex = Frame.ZIndex,
 		[ReactModule.Tag] = Frame.Tag
 	}, Frame.children) else ReactModule.createElement("Frame", {
-		Position = UseViewportBindingResult:map(function(p1) --[[ Line: 76 ]]
+		Position = UseViewportBindingResult:map(function(p1)
 			return p1.position
 		end),
-		Size = UseViewportBindingResult:map(function(p1) --[[ Line: 79 ]]
+		Size = UseViewportBindingResult:map(function(p1)
 			return p1.size
 		end),
 		BackgroundColor3 = Frame.BackgroundColor3 or StyleUtilModule.GRID_BOX_BACKGROUND_COLOR3,

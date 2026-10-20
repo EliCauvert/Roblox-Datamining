@@ -6,7 +6,7 @@ local ValidationEnumsModule = require(Parent.validationSystem.ValidationEnums)
 local ErrorSourceStringsModule = require(Parent.validationSystem.ErrorSourceStrings)
 local GetFIntUGCValidateTriangleLimitToleranceModule = require(Parent.flags.getFIntUGCValidateTriangleLimitTolerance)
 
-local function runAccessoryCheck(p1, p2) --[[ Line: 22 ]]
+local function runAccessoryCheck(p1, p2)
 	-- upvalues: ConstantsModule (copy), UGCValidationService (copy), ErrorSourceStringsModule (copy)
 	local MAXHATTRIANGLES = ConstantsModule.MAX_HAT_TRIANGLES
 	
@@ -23,7 +23,7 @@ local function runAccessoryCheck(p1, p2) --[[ Line: 22 ]]
 	end
 end
 
-local function runBodyPartCheck(p3, p4) --[[ Line: 38 ]]
+local function runBodyPartCheck(p3, p4)
 	-- upvalues: ConstantsModule (copy), UGCValidationService (copy), GetFIntUGCValidateTriangleLimitToleranceModule (copy), ErrorSourceStringsModule (copy)
 	local Name = p4.uploadEnum.assetType.Name
 	local ASSETRENDERMESHMAXTRIANGLE = ConstantsModule.ASSET_RENDER_MESH_MAX_TRIANGLES[Name]
@@ -53,7 +53,7 @@ return {
 	},
 	requiredData = { ValidationEnumsModule.SharedDataMember.renderMeshesData },
 	expectedFailures = {},
-	run = function(p5, p6) --[[ Line: 64 ]]
+	run = function(p5, p6)
 		-- upvalues: ValidationEnumsModule (copy), runBodyPartCheck (copy), runAccessoryCheck (copy)
 		if p6.uploadCategory == ValidationEnumsModule.UploadCategory.TORSO_AND_LIMBS or p6.uploadCategory == ValidationEnumsModule.UploadCategory.DYNAMIC_HEAD then
 			runBodyPartCheck(p5, p6)

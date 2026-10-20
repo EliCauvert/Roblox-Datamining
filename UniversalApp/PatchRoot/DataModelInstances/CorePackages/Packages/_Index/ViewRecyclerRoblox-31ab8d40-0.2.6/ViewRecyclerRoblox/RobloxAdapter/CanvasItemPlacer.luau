@@ -2,7 +2,7 @@
 local _ = require(ViewRecyclerRoblox.Parent.ViewRecycler)
 local SlotGeometryModule = require(ViewRecyclerRoblox.RobloxAdapter.SlotGeometry)
 
-local function _(State) --[[ Line: 39 | Named "resetAppliedState" ]]
+local function _(State)
 	State.anchorPointInitialized = false
 	State.position = nil
 	State.size = nil
@@ -12,7 +12,7 @@ local function _(State) --[[ Line: 39 | Named "resetAppliedState" ]]
 end
 
 local CanvasItemPlacerModule = {
-	createState = function() --[[ Line: 26 ]]
+	createState = function()
 		return {
 			unpinnedZIndex = nil,
 			parent = nil,
@@ -24,7 +24,7 @@ local CanvasItemPlacerModule = {
 			zIndex = nil
 		}
 	end,
-	getGeometry = function(p1, p2, p3, p4, p5: number, p6) --[[ Line: 48 ]]
+	getGeometry = function(p1, p2, p3, p4, p5: number, p6)
 		-- upvalues: SlotGeometryModule (copy)
 		if p2.mainAxisOffset ~= nil then
 			p1 = {
@@ -42,7 +42,7 @@ local CanvasItemPlacerModule = {
 		
 		return P6
 	end,
-	place = function(p1, Parent, State, State1, Visible): number --[[ Line: 72 ]]
+	place = function(p1, Parent, State, State1, Visible): number
 		local Count = 0
 		
 		if p1.Parent ~= Parent or State1.parent ~= Parent then
@@ -110,13 +110,13 @@ local CanvasItemPlacerModule = {
 			return Count
 		end
 	end,
-	hide = function(p1, p2) --[[ Line: 135 ]]
+	hide = function(p1, p2)
 		if p2.visible ~= false then
 			p1.Visible = false
 			p2.visible = false
 		end
 	end,
-	detach = function(Frame, State): number --[[ Line: 142 ]]
+	detach = function(Frame, State): number
 		local Count = 0
 		
 		if State.unpinnedZIndex ~= nil then
@@ -146,7 +146,7 @@ local CanvasItemPlacerModule = {
 	end
 }
 
-function CanvasItemPlacerModule.detachForTransfer(Frame, p1) --[[ Line: 164 ]]
+function CanvasItemPlacerModule.detachForTransfer(Frame, p1)
 	-- upvalues: CanvasItemPlacerModule (copy)
 	local DetachResult = CanvasItemPlacerModule.detach(Frame, p1)
 	

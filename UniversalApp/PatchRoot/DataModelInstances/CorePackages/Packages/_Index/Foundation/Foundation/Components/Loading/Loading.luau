@@ -12,7 +12,7 @@ local config = {
 	size = require(Foundation.Enums.IconSize).Large
 }
 
-return ReactModule.memo(ReactModule.forwardRef(function(p1, Ref) --[[ Line: 27 | Named "Loading" ]]
+return ReactModule.memo(ReactModule.forwardRef(function(p1, Ref)
 	-- upvalues: WithDefaultsModule (copy), config (copy), UseRotationModule (copy), UseTokensModule (copy), ReactModule (copy), ViewModule (copy), WithCommonPropsModule (copy), IconModule (copy)
 	local WithDefaultsModuleResult = WithDefaultsModule(p1, config)
 	

@@ -10,7 +10,7 @@ return {
 		require(Parent.validationSystem.ValidationEnums).UploadCategory.DYNAMIC_HEAD
 	},
 	fflag = require(Parent.flags.getFFlagUGCValidateCageMeshDistanceHead),
-	run = function(p1, p2) --[[ Line: 16 ]]
+	run = function(p1, p2)
 		-- upvalues: UGCValidationCageMeshDistanceHeadMaxCageMeshDistance (copy), ErrorSourceStringsModule (copy), UGCValidationCageMeshDistanceHeadMaxNegativeSDFThreshold (copy), GetFFlagUGCValidateAQScoreWarningsModule (copy)
 		local HeadOuterCage = p2.aqsSummaryData.Measure_Cage_Distance_Head.Head_OuterCage
 		

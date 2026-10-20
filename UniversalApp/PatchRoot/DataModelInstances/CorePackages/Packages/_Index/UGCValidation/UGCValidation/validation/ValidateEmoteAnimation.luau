@@ -11,7 +11,7 @@ local ValidateDependenciesModule = require(Validation.validateDependencies)
 local ValidatePropertiesSensibleModule = require(Validation.ValidatePropertiesSensible)
 local GetEngineFeatureEngineUGCValidatePropertiesSensibleModule = require(Parent.flags.getEngineFeatureEngineUGCValidatePropertiesSensible)
 local ValidateEmoteAnimationModule = {
-	validateStructure = function(p1) --[[ Line: 24 ]]
+	validateStructure = function(p1)
 		-- upvalues: ValidateSingleInstanceModule (copy), ValidateInstanceTreeModule (copy), CreateEmoteSchemaModule (copy)
 		local ValidateSingleInstanceModuleResult, ValidateSingleInstanceModuleResult2 = ValidateSingleInstanceModule(p1.instances or {}, p1)
 		
@@ -29,7 +29,7 @@ local ValidateEmoteAnimationModule = {
 	end
 }
 
-function ValidateEmoteAnimationModule.validate(p1) --[[ Line: 45 ]]
+function ValidateEmoteAnimationModule.validate(p1)
 	-- upvalues: ValidateEmoteAnimationModule (copy), GetEngineFeatureEngineUGCValidatePropertiesSensibleModule (copy), ValidatePropertiesSensibleModule (copy), ValidateDependenciesModule (copy), FailureReasonsAccumulatorModule (copy), ValidateTagsModule (copy)
 	local ValidateStructureResult, ValidateStructureResult2, ValidateStructureResult3 = ValidateEmoteAnimationModule.validateStructure(p1)
 	

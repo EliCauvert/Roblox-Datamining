@@ -17,7 +17,7 @@ return {
 		ValidationEnumsModule.SharedDataMember.uploadEnum
 	},
 	expectedFailures = {},
-	run = function(p1, p2) --[[ Line: 26 ]]
+	run = function(p1, p2)
 		-- upvalues: ErrorSourceStringsModule (copy), UGCValidationAddThumbnailFrustumCheckingv2 (copy), UGCValidationService (copy)
 		local RootInstance = p2.rootInstance
 		local AssetType = p2.uploadEnum and p2.uploadEnum.assetType

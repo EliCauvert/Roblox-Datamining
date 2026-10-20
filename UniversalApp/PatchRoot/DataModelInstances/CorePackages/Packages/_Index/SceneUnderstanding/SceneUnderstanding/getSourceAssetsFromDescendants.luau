@@ -2,7 +2,7 @@
 local IsSourceAssetModule = require(SceneUnderstanding.isSourceAsset)
 local FindSourceAssetsFromDescendantModule = require(SceneUnderstanding.findSourceAssetsFromDescendant)
 
-return function(List) --[[ Line: 17 | Named "getSourceAssetsFromDescendants" ]]
+return function(List)
 	-- upvalues: IsSourceAssetModule (copy), FindSourceAssetsFromDescendantModule (copy)
 	local List1 = {}
 	

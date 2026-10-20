@@ -1,5 +1,5 @@
 ﻿return {
-	createSignalIfSupported = function() --[[ Line: 11 ]]
+	createSignalIfSupported = function()
 		local AbortController = _G.AbortController
 		
 		if typeof(AbortController) == "nil" then

@@ -5,14 +5,14 @@ local GraphQLError = GraphQLModule.GraphQLError
 local VersionInfo = GraphQLModule.versionInfo
 local _ = require(script.Parent.types)
 
-local function createGraphQLError(Message, p1) --[[ Line: 37 ]]
+local function createGraphQLError(Message, p1)
 	-- upvalues: VersionInfo (copy), GraphQLError (copy)
 	return if VersionInfo.major >= 17 then GraphQLError.new(Message, p1) else GraphQLError.new(Message, if typeof(p1) == "table" then p1.nodes else nil, if typeof(p1) == "table" then p1.source else nil, if typeof(p1) == "table" then p1.positions else nil, if typeof(p1) == "table" then p1.path else nil, if typeof(p1) == "table" then p1.originalError else nil, if typeof(p1) == "table" then p1.extensions else nil)
 end
 
 return {
 	createGraphQLError = createGraphQLError,
-	relocatedError = function(OriginalError, p1) --[[ Line: 55 ]]
+	relocatedError = function(OriginalError, p1)
 		-- upvalues: createGraphQLError (copy)
 		return createGraphQLError(OriginalError.message, {
 			nodes = OriginalError.nodes,

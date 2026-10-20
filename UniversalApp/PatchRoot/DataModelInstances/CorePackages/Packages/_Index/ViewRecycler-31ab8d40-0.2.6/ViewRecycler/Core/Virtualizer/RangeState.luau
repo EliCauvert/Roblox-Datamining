@@ -4,7 +4,7 @@ local TypesModule = require(ViewRecycler.Core.Types)
 local CreateEventModule = require(ViewRecycler.Internal.createEvent)
 local INDEXRANGEKEYS = TypesModule.INDEX_RANGE_KEYS
 
-return function() --[[ Line: 18 | Named "createRangeState" ]]
+return function()
 	-- upvalues: TypesModule (copy), CreateEventModule (copy), ShallowTableModule (copy), INDEXRANGEKEYS (copy)
 	local EMPTYINDEXRANGE = TypesModule.EMPTY_INDEX_RANGE
 	local Flag = false
@@ -13,7 +13,7 @@ return function() --[[ Line: 18 | Named "createRangeState" ]]
 	local EventModule = CreateEventModule()
 	
 	return {
-		report = function(p1) --[[ Line: 44 ]]
+		report = function(p1)
 			-- upvalues: Flag (ref), ShallowTableModule (upval), EMPTYINDEXRANGE (ref), INDEXRANGEKEYS (upval), Flag1 (ref), Count (ref), EventModule (copy)
 			if Flag and ShallowTableModule.containsEqual(EMPTYINDEXRANGE, p1, INDEXRANGEKEYS) then return end
 			Flag = true
@@ -24,7 +24,7 @@ return function() --[[ Line: 18 | Named "createRangeState" ]]
 				EventModule.fire(p1)
 			end
 		end,
-		set = function(p1) --[[ Line: 25 ]]
+		set = function(p1)
 			-- upvalues: Flag (ref), ShallowTableModule (upval), EMPTYINDEXRANGE (ref), INDEXRANGEKEYS (upval), Flag1 (ref)
 			if not Flag or not ShallowTableModule.containsEqual(EMPTYINDEXRANGE, p1, INDEXRANGEKEYS) then
 				Flag = true
@@ -34,7 +34,7 @@ return function() --[[ Line: 18 | Named "createRangeState" ]]
 				return
 			end
 		end,
-		publish = function() --[[ Line: 34 ]]
+		publish = function()
 			-- upvalues: Flag1 (ref), Count (ref), EventModule (copy), EMPTYINDEXRANGE (ref)
 			if not Flag1 then return end
 			Flag1 = false
@@ -43,17 +43,17 @@ return function() --[[ Line: 18 | Named "createRangeState" ]]
 				EventModule.fire(EMPTYINDEXRANGE)
 			end
 		end,
-		get = function() --[[ Line: 74 ]]
+		get = function()
 			-- upvalues: EMPTYINDEXRANGE (ref)
 			return EMPTYINDEXRANGE
 		end,
-		connect = function(p1) --[[ Line: 56 ]]
+		connect = function(p1)
 			-- upvalues: Count (ref), EventModule (copy)
 			Count += 1
 			local ConnectResult = EventModule.connect(p1)
 			local Flag = true
 			
-			return function() --[[ Line: 60 ]]
+			return function()
 				-- upvalues: Flag (ref), Count (upval), ConnectResult (copy)
 				if Flag then
 					Flag = false
@@ -64,7 +64,7 @@ return function() --[[ Line: 18 | Named "createRangeState" ]]
 				end
 			end
 		end,
-		isObserved = function(): boolean --[[ Line: 78 ]]
+		isObserved = function(): boolean
 			-- upvalues: Count (ref)
 			return Count > 0
 		end

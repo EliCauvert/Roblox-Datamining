@@ -1,4 +1,4 @@
-﻿return function(p1, p2) --[[ Line: 2 | Named "pop" ]]
+﻿return function(p1, p2)
 	local ValueType = type(p1)
 	assert(ValueType == "table", "expected a table for first argument, got " .. ValueType)
 	local P1 = p2 or 1

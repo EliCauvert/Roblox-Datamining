@@ -1,4 +1,4 @@
-﻿return function(List) --[[ Line: 2 | Named "keys" ]]
+﻿return function(List)
 	local ValueType = type(List)
 	assert(ValueType == "table", "expected a table for first argument, got " .. ValueType)
 	local t = {}

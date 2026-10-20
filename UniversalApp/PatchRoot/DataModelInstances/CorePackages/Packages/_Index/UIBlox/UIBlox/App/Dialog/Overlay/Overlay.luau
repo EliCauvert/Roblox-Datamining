@@ -15,11 +15,11 @@ local config1 = {
 	topLeft = 225
 }
 
-return function(p1) --[[ Line: 48 | Named "Overlay" ]]
+return function(p1)
 	-- upvalues: UseStyleModule (copy), ReactOtterModule (copy), ReactModule (copy), config (copy), config1 (copy)
 	local Theme = UseStyleModule().Theme
 	local UseAnimatedBindingResult, UseAnimatedBindingResult2 = ReactOtterModule.useAnimatedBinding(if p1.showGradient then 0 else 1)
-	ReactModule.useEffect(function() --[[ Line: 55 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: p1 (copy), UseAnimatedBindingResult2 (copy), ReactOtterModule (upval), config (upval)
 		if p1.showGradient == false then
 			UseAnimatedBindingResult2(ReactOtterModule.spring(1, config))

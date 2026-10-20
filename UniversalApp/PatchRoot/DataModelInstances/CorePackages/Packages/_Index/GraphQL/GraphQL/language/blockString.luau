@@ -3,7 +3,7 @@ local Array = LuauPolyfillModule.Array
 local String1 = LuauPolyfillModule.String
 local Callback = nil
 
-local function dedentBlockStringValue(p1) --[[ Line: 22 ]]
+local function dedentBlockStringValue(p1)
 	-- upvalues: String1 (copy), Callback (ref), Array (copy)
 	local SplitResult = String1.split(p1, { "\r\n", "\n", "\r" })
 	local CallbackResult: number = Callback(p1)
@@ -24,7 +24,7 @@ local function dedentBlockStringValue(p1) --[[ Line: 22 ]]
 	return Array.join(Array.slice(SplitResult, Count + 1, CountSplitResult + 1), "\n")
 end
 
-function isBlank(Text: string): boolean --[[ Line: 51 ]]
+function isBlank(Text: string): boolean
 	for i = 1, #Text do
 		local Segment = string.sub(Text, i, i)
 		
@@ -35,7 +35,7 @@ function isBlank(Text: string): boolean --[[ Line: 51 ]]
 	return true
 end
 
-Callback = function(Text: string): number --[[ Line: 62 | Named "getBlockStringIndentation" ]]
+Callback = function(Text: string): number
 	-- upvalues: String1 (copy)
 	local Enabled = true
 	local Flag = true
@@ -69,7 +69,7 @@ end
 return {
 	getBlockStringIndentation = Callback,
 	dedentBlockStringValue = dedentBlockStringValue,
-	printBlockString = function(Text: string, p2, p3): string --[[ Line: 102 ]]
+	printBlockString = function(Text: string, p2, p3): string
 		local P1 = p2 or ""
 		local NoFoundAt = string.find(Text, "\n") == nil
 		local IsSegmentMatch: boolean = string.sub(Text, 1, 1) == " " or string.sub(Text, 1, 1) == "\t"

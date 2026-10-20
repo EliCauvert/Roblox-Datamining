@@ -24,11 +24,11 @@ local ITEMPLACEMENTKEYS = PlacementTypesModule.ITEM_PLACEMENT_KEYS
 local Frozen4 = table.freeze({ "key" })
 local Frozen5 = table.freeze({ "revision" })
 
-local function _(p1, p2): boolean --[[ Line: 74 | Named "sameRange" ]]
+local function _(p1, p2): boolean
 	return p1.firstIndex == p2.firstIndex and p1.lastIndex == p2.lastIndex
 end
 
-return function(p1) --[[ Line: 78 | Named "createVirtualizerSnapshotStore" ]]
+return function(p1)
 	-- upvalues: Frozen (copy), CloneFrozenFunction (copy), Frozen1 (copy), ContainsEqualFunction (copy), ITEMPLACEMENTKEYS (copy), OptionalContainsEqualFunction (copy), ITEMLAYOUTKEYS (copy), PlacementTypesModule (copy), Frozen2 (copy), TypesModule (copy), Frozen4 (copy), Frozen5 (copy), Frozen3 (copy)
 	local Planner = p1.planner
 	local ItemRevisions = p1.itemRevisions
@@ -54,7 +54,7 @@ return function(p1) --[[ Line: 78 | Named "createVirtualizerSnapshotStore" ]]
 		requiresItemMeasurement = p1.initialRequiresItemMeasurement
 	})
 	
-	local function _(p2) --[[ Line: 108 | Named "recordEntryMaterialization" ]]
+	local function _(p2)
 		-- upvalues: config (copy)
 		config.entryIdentity = p2.identity
 		config.entryLayoutGeometry = p2.layoutGeometry
@@ -63,7 +63,7 @@ return function(p1) --[[ Line: 78 | Named "createVirtualizerSnapshotStore" ]]
 		config.entryScroll = p2.scroll
 	end
 	
-	local function resolvePlacement(ItemKey, p2, ScrollOffset) --[[ Line: 116 ]]
+	local function resolvePlacement(ItemKey, p2, ScrollOffset)
 		-- upvalues: Frozen1 (upval)
 		local Placement = p2.placements[ItemKey]
 		
@@ -89,7 +89,7 @@ return function(p1) --[[ Line: 78 | Named "createVirtualizerSnapshotStore" ]]
 		end
 	end
 	
-	local function makeEntry(p2, Key, Index, Item, RecyclableViewType, Revision, Position, UpdateResult, p3, p4) --[[ Line: 145 ]]
+	local function makeEntry(p2, Key, Index, Item, RecyclableViewType, Revision, Position, UpdateResult, p3, p4)
 		-- upvalues: Frozen1 (upval), resolvePlacement (copy), ContainsEqualFunction (upval), ITEMPLACEMENTKEYS (upval), OptionalContainsEqualFunction (upval), ITEMLAYOUTKEYS (upval), PlacementTypesModule (upval), CloneFrozenFunction (upval)
 		local Config = if Index == nil then {
 			startOffset = 0,
@@ -142,7 +142,7 @@ return function(p1) --[[ Line: 78 | Named "createVirtualizerSnapshotStore" ]]
 		end
 	end
 	
-	local function materializeEntries(p2) --[[ Line: 232 ]]
+	local function materializeEntries(p2)
 		-- upvalues: config (copy), Frozen6 (ref), Planner (copy), Frozen2 (upval), TypesModule (upval), makeEntry (copy), GetRecyclableViewTypeFunction (copy), ItemRevisions (copy), ContainsEqualFunction (upval), Frozen4 (upval), Frozen5 (upval)
 		local Revisions = p2.revisions
 		local MountedRange = p2.mountedRange
@@ -321,7 +321,7 @@ return function(p1) --[[ Line: 78 | Named "createVirtualizerSnapshotStore" ]]
 	end
 	
 	return {
-		commit = function(p3) --[[ Line: 497 ]]
+		commit = function(p3)
 			-- upvalues: materializeEntries (copy), config (copy), Frozen6 (ref), CloneFrozenFunction (upval), Frozen3 (upval)
 			local Revisions = p3.revisions
 			local MaterializeEntriesResult, MaterializeEntriesResult2 = materializeEntries(p3)
@@ -366,7 +366,7 @@ return function(p1) --[[ Line: 78 | Named "createVirtualizerSnapshotStore" ]]
 				}) else Frozen3
 			}
 		end,
-		getSnapshot = function() --[[ Line: 546 ]]
+		getSnapshot = function()
 			-- upvalues: Frozen6 (ref)
 			return Frozen6
 		end

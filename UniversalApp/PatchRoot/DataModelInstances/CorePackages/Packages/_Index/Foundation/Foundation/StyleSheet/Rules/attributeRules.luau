@@ -6,19 +6,19 @@ local CornerRulesModule = require(script.Parent.cornerRules)
 local ShadowRulesModule = require(script.Parent.shadowRules)
 local TokenAttributePascalNameModule = require(script.Parent.Parent.tokenAttributePascalName)
 
-local function kebabToPascal(Name: string) --[[ Line: 27 ]]
-	return (Name:gsub("^%-?(.)", function(Text: string): string --[[ Line: 29 ]]
+local function kebabToPascal(Name: string)
+	return (Name:gsub("^%-?(.)", function(Text: string): string
 		return Text:upper()
-	end):gsub("%-(.)", function(Text: string): string --[[ Line: 34 ]]
+	end):gsub("%-(.)", function(Text: string): string
 		return Text:upper()
 	end))
 end
 
-local function _(Label, p1): UDim --[[ Line: 41 | Named "getTextPadding" ]]
+local function _(Label, p1): UDim
 	return (UDim.new(0, (Label.TextSize / p1 * (Label.LineHeight * p1) - Label.TextSize) / 2))
 end
 
-local function DefaultSizeRules(Label, NominalScale) --[[ Line: 50 ]]
+local function DefaultSizeRules(Label, NominalScale)
 	return {
 		{
 			tag = "text-size-defaults",
@@ -49,7 +49,7 @@ local function DefaultSizeRules(Label, NominalScale) --[[ Line: 50 ]]
 	}
 end
 
-local function ListLayoutSpacingRules(Gaps, Gutters) --[[ Line: 88 ]]
+local function ListLayoutSpacingRules(Gaps, Gutters)
 	-- upvalues: kebabToPascal (copy), DashModule (copy)
 	local List = {}
 	
@@ -81,9 +81,9 @@ local function ListLayoutSpacingRules(Gaps, Gutters) --[[ Line: 88 ]]
 	return DashModule.joinArrays(List, List1)
 end
 
-local _ = function(p1) --[[ Line: 130 | Named "CornerRules" ]]
+local _ = function(p1)
 	-- upvalues: CornerRulesModule (copy), kebabToPascal (copy)
-	return CornerRulesModule(p1, function(p2) --[[ Line: 131 ]]
+	return CornerRulesModule(p1, function(p2)
 		-- upvalues: kebabToPascal (upval)
 		local v1 = kebabToPascal(p2.name)
 		
@@ -94,12 +94,12 @@ local _ = function(p1) --[[ Line: 130 | Named "CornerRules" ]]
 	end)
 end
 
-local _ = function(p1) --[[ Line: 145 | Named "ShadowRules" ]]
+local _ = function(p1)
 	-- upvalues: ShadowRulesModule (copy)
 	return ShadowRulesModule(p1)
 end
 
-local function SizeRules(List) --[[ Line: 149 ]]
+local function SizeRules(List)
 	-- upvalues: kebabToPascal (copy)
 	local List1 = {}
 	
@@ -135,7 +135,7 @@ local function SizeRules(List) --[[ Line: 149 ]]
 	return List1
 end
 
-local function TypographyRules(Typography, NominalScale, p1) --[[ Line: 188 ]]
+local function TypographyRules(Typography, NominalScale, p1)
 	-- upvalues: kebabToPascal (copy)
 	local List = {}
 	
@@ -178,7 +178,7 @@ local function TypographyRules(Typography, NominalScale, p1) --[[ Line: 188 ]]
 	return List
 end
 
-local function PaddingRules(List, List1) --[[ Line: 236 ]]
+local function PaddingRules(List, List1)
 	-- upvalues: kebabToPascal (copy)
 	local List2 = {}
 	local config = {
@@ -285,7 +285,7 @@ local config = {
 	None = {}
 }
 
-local function GuiObjectDefaultRules() --[[ Line: 349 ]]
+local function GuiObjectDefaultRules()
 	return {
 		{
 			tag = "gui-object-defaults",
@@ -295,7 +295,7 @@ local function GuiObjectDefaultRules() --[[ Line: 349 ]]
 	}
 end
 
-local function DefaultFontRules(p2, p3) --[[ Line: 362 ]]
+local function DefaultFontRules(p2, p3)
 	return {
 		{
 			tag = "text-defaults",
@@ -314,7 +314,7 @@ local function DefaultFontRules(p2, p3) --[[ Line: 362 ]]
 	}
 end
 
-local function DefaultColorRules(p2) --[[ Line: 382 ]]
+local function DefaultColorRules(p2)
 	return {
 		{
 			tag = "text-color-defaults",
@@ -337,7 +337,7 @@ local function DefaultColorRules(p2) --[[ Line: 382 ]]
 	}
 end
 
-local function BackgroundRules(Colors, Variants) --[[ Line: 407 ]]
+local function BackgroundRules(Colors, Variants)
 	-- upvalues: config (copy), TokenAttributePascalNameModule (copy), kebabToPascal (copy)
 	local List = {}
 	
@@ -388,7 +388,7 @@ local function BackgroundRules(Colors, Variants) --[[ Line: 407 ]]
 	return List
 end
 
-local function StrokeSizeRules(Strokes) --[[ Line: 459 ]]
+local function StrokeSizeRules(Strokes)
 	-- upvalues: kebabToPascal (copy)
 	local List = {}
 	
@@ -411,7 +411,7 @@ local function StrokeSizeRules(Strokes) --[[ Line: 459 ]]
 	return List
 end
 
-local function StrokeRules(Colors, Variants) --[[ Line: 486 ]]
+local function StrokeRules(Colors, Variants)
 	-- upvalues: config (copy), TokenAttributePascalNameModule (copy), kebabToPascal (copy)
 	local List = {}
 	
@@ -475,7 +475,7 @@ local function StrokeRules(Colors, Variants) --[[ Line: 486 ]]
 	return List
 end
 
-local function ContentRules(Colors, Variants) --[[ Line: 556 ]]
+local function ContentRules(Colors, Variants)
 	-- upvalues: config (copy), TokenAttributePascalNameModule (copy), kebabToPascal (copy)
 	local List = {}
 	
@@ -530,7 +530,7 @@ local function ContentRules(Colors, Variants) --[[ Line: 556 ]]
 	return List
 end
 
-local function DeprecatedColorRules(Colors) --[[ Line: 612 ]]
+local function DeprecatedColorRules(Colors)
 	-- upvalues: TokenAttributePascalNameModule (copy)
 	local List = {}
 	
@@ -592,7 +592,7 @@ local function DeprecatedColorRules(Colors) --[[ Line: 612 ]]
 	return List
 end
 
-local function EngineDefaultBypassRules() --[[ Line: 691 ]]
+local function EngineDefaultBypassRules()
 	return {
 		{
 			tag = "x-default-transparency",
@@ -605,7 +605,7 @@ local function EngineDefaultBypassRules() --[[ Line: 691 ]]
 	}
 end
 
-local function ListLayoutRules() --[[ Line: 708 ]]
+local function ListLayoutRules()
 	-- upvalues: DashModule (copy)
 	local list = {
 		{
@@ -715,7 +715,7 @@ local function ListLayoutRules() --[[ Line: 708 ]]
 	return DashModule.joinArrays(list, list1, list2, List, List1)
 end
 
-local function FlexItemRules() --[[ Line: 850 ]]
+local function FlexItemRules()
 	-- upvalues: DashModule (copy)
 	local list = {
 		{
@@ -781,7 +781,7 @@ local function FlexItemRules() --[[ Line: 850 ]]
 	return DashModule.joinArrays(list, List, List1, List2)
 end
 
-local function TextRules() --[[ Line: 929 ]]
+local function TextRules()
 	local List = {}
 	
 	for i, TextXAlignment in {
@@ -823,7 +823,7 @@ local function TextRules() --[[ Line: 929 ]]
 	return List
 end
 
-local function AutomaticSizeRules() --[[ Line: 994 ]]
+local function AutomaticSizeRules()
 	local List = {}
 	
 	for i, AutomaticSize in {
@@ -840,7 +840,7 @@ local function AutomaticSizeRules() --[[ Line: 994 ]]
 	return List
 end
 
-local function PositionRules() --[[ Line: 1016 ]]
+local function PositionRules()
 	local List = {}
 	local config = { top = 0, center = 0.5, bottom = 1 }
 	
@@ -855,7 +855,7 @@ local function PositionRules() --[[ Line: 1016 ]]
 	return List
 end
 
-local function AnchorPointRules() --[[ Line: 1034 ]]
+local function AnchorPointRules()
 	local List = {}
 	local config = { top = 0, center = 0.5, bottom = 1 }
 	
@@ -870,7 +870,7 @@ local function AnchorPointRules() --[[ Line: 1034 ]]
 	return List
 end
 
-local function ClipsDescendantRules() --[[ Line: 1052 ]]
+local function ClipsDescendantRules()
 	return {
 		{ tag = "clip", properties = { ClipsDescendants = true } },
 		{
@@ -880,13 +880,13 @@ local function ClipsDescendantRules() --[[ Line: 1052 ]]
 	}
 end
 
-local _ = function(p2, p3: number): number --[[ Line: 1069 | Named "roundDecimals" ]]
+local _ = function(p2, p3: number): number
 	local v1 = 10 ^ p3
 	
 	return math.round(p2 * v1) / v1
 end
 
-local function AspectRatioRules() --[[ Line: 1074 ]]
+local function AspectRatioRules()
 	local List = {}
 	
 	for _, value in {
@@ -919,13 +919,13 @@ local function AspectRatioRules() --[[ Line: 1074 ]]
 end
 
 return {
-	rulesGenerator = function(p2, p3, p4) --[[ Line: 1103 ]]
+	rulesGenerator = function(p2, p3, p4)
 		-- upvalues: DashModule (copy), GuiObjectDefaultRules (copy), EngineDefaultBypassRules (copy), FlexItemRules (copy), TextRules (copy), AutomaticSizeRules (copy), PositionRules (copy), AnchorPointRules (copy), ClipsDescendantRules (copy), AspectRatioRules (copy), ListLayoutRules (copy), ListLayoutSpacingRules (copy), CornerRulesModule (copy), kebabToPascal (copy), ShadowRulesModule (copy), SizeRules (copy), StrokeSizeRules (copy), PaddingRules (copy), DefaultColorRules (copy), DeprecatedColorRules (copy), BackgroundRules (copy), StrokeRules (copy), ContentRules (copy), DefaultFontRules (copy), DefaultSizeRules (copy), TypographyRules (copy)
 		local Colors = p3.colors
 		local Variants = p3.variants
 		local Typography = p3.typography
 		
-		return DashModule.joinArrays(GuiObjectDefaultRules(), EngineDefaultBypassRules(), FlexItemRules(), TextRules(), AutomaticSizeRules(), PositionRules(), AnchorPointRules(), ClipsDescendantRules(), (AspectRatioRules())), DashModule.joinArrays(ListLayoutRules(), ListLayoutSpacingRules(p3.gaps, p3.gutters), CornerRulesModule(p3.radii, function(p5) --[[ Line: 131 ]]
+		return DashModule.joinArrays(GuiObjectDefaultRules(), EngineDefaultBypassRules(), FlexItemRules(), TextRules(), AutomaticSizeRules(), PositionRules(), AnchorPointRules(), ClipsDescendantRules(), (AspectRatioRules())), DashModule.joinArrays(ListLayoutRules(), ListLayoutSpacingRules(p3.gaps, p3.gutters), CornerRulesModule(p3.radii, function(p5)
 			-- upvalues: kebabToPascal (upval)
 			local v1 = kebabToPascal(p5.name)
 			

@@ -11,7 +11,7 @@ return {
 			[NodeTypeModule.Block] = true,
 			[NodeTypeModule.TextBlock] = true
 		},
-		validateRenderResult = function(p1) --[[ Line: 20 ]]
+		validateRenderResult = function(p1)
 			-- upvalues: ReactIsModule (copy)
 			return p1 ~= nil and ReactIsModule.isElement(p1)
 		end
@@ -21,7 +21,7 @@ return {
 			[NodeTypeModule.Block] = true,
 			[NodeTypeModule.TextBlock] = true
 		},
-		validateRenderResult = function(p1) --[[ Line: 29 ]]
+		validateRenderResult = function(p1)
 			-- upvalues: ReactIsModule (copy), DashModule (copy)
 			return p1 == nil or (ReactIsModule.isElement(p1) or DashModule.all(p1, ReactIsModule.isElement))
 		end
@@ -31,7 +31,7 @@ return {
 			[NodeTypeModule.InlineSpan] = true,
 			[NodeTypeModule.InlineLeaf] = true
 		},
-		validateRenderResult = function(p1) --[[ Line: 38 ]]
+		validateRenderResult = function(p1)
 			-- upvalues: ReactIsModule (copy), DashModule (copy)
 			return p1 == nil or (ReactIsModule.isElement(p1) or DashModule.all(p1, ReactIsModule.isElement))
 		end
@@ -41,14 +41,14 @@ return {
 			[NodeTypeModule.InlineSpan] = true,
 			[NodeTypeModule.InlineLeaf] = true
 		},
-		validateRenderResult = function(p1) --[[ Line: 47 ]]
+		validateRenderResult = function(p1)
 			-- upvalues: IsInlineElementFunction (copy), DashModule (copy)
 			return p1 == nil or (IsInlineElementFunction(p1) or DashModule.all(p1, IsInlineElementFunction))
 		end
 	},
 	[NodeTypeModule.InlineLeaf] = {
 		children = {},
-		validateRenderResult = function(p1) --[[ Line: 53 ]]
+		validateRenderResult = function(p1)
 			-- upvalues: IsInlineElementFunction (copy)
 			return p1 == nil or IsInlineElementFunction(p1)
 		end

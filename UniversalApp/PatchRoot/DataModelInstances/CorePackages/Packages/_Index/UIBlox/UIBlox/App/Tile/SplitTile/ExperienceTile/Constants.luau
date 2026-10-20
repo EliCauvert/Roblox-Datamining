@@ -5,7 +5,7 @@ local _ = require(Parent.Style.Fonts)
 return {
 	DEFAULT_FOOTER_HEIGHT = 22,
 	DEFAULT_TEXT_LINE_COUNT = 2,
-	getDefaultStyleProps = function(p1) --[[ Line: 33 ]]
+	getDefaultStyleProps = function(p1)
 		assert(p1.Tokens ~= nil, "Design token support is not enabled!")
 		
 		return {

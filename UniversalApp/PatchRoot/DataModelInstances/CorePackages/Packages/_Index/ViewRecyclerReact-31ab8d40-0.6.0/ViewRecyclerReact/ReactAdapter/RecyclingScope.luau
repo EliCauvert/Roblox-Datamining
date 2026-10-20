@@ -6,30 +6,30 @@ local RecyclingScopeContextModule = require(ViewRecyclerReact.ReactAdapter.Priva
 local CreateElementFunction = ReactModule.createElement
 
 return {
-	create = function(p1) --[[ Line: 20 ]]
+	create = function(p1)
 		-- upvalues: ReactModule (copy), RecyclingRootModule (copy), CreateElementFunction (copy), RecyclingScopeContextModule (copy)
 		local CreatePortal = if p1 == nil then nil else p1.createPortal
 		
-		return function(p2) --[[ Line: 23 | Named "RecyclingScope" ]]
+		return function(p2)
 			-- upvalues: CreatePortal (copy), ReactModule (upval), RecyclingRootModule (upval), CreateElementFunction (upval), RecyclingScopeContextModule (upval)
 			assert(CreatePortal ~= nil, "RecyclingScope requires a configured portal renderer")
 			local _, UseStateResult2 = ReactModule.useState(0)
 			local UseRefResult = ReactModule.useRef(0)
 			local UseRefResult1 = ReactModule.useRef(false)
 			local UseRefResult2 = ReactModule.useRef(false)
-			local UseStateResult = ReactModule.useState(function() --[[ Line: 29 ]]
+			local UseStateResult = ReactModule.useState(function()
 				-- upvalues: RecyclingRootModule (upval), UseRefResult1 (copy), UseStateResult2 (copy)
-				return RecyclingRootModule.new(function() --[[ Line: 30 ]]
+				return RecyclingRootModule.new(function()
 					-- upvalues: UseRefResult1 (upval), UseStateResult2 (upval)
 					if not UseRefResult1.current then
-						UseStateResult2(function(p3: number): number --[[ Line: 32 ]]
+						UseStateResult2(function(p3: number): number
 							return p3 + 1
 						end)
 					end
 				end)
 			end)
 			
-			local function destroyRootIfReady() --[[ Line: 39 ]]
+			local function destroyRootIfReady()
 				-- upvalues: UseRefResult1 (copy), UseRefResult (copy), UseRefResult2 (copy), UseStateResult (copy)
 				if UseRefResult1.current and UseRefResult.current == 0 and not UseRefResult2.current then
 					UseRefResult2.current = true
@@ -37,9 +37,9 @@ return {
 				end
 			end
 			
-			local UseStateResult1 = ReactModule.useState(function() --[[ Line: 46 ]]
+			local UseStateResult1 = ReactModule.useState(function()
 				-- upvalues: UseRefResult2 (copy), UseRefResult1 (copy), UseRefResult (copy), destroyRootIfReady (copy)
-				return function() --[[ Line: 47 ]]
+				return function()
 					-- upvalues: UseRefResult2 (upval), UseRefResult1 (upval), UseRefResult (upval), destroyRootIfReady (upval)
 					assert(not UseRefResult2.current, "RecyclingScope: cannot register after destruction")
 					UseRefResult1.current = false
@@ -47,7 +47,7 @@ return {
 					UseRefResult3.current += 1
 					local Flag = true
 					
-					return function() --[[ Line: 52 ]]
+					return function()
 						-- upvalues: Flag (ref), UseRefResult (upval), destroyRootIfReady (upval)
 						if Flag then
 							Flag = false
@@ -59,7 +59,7 @@ return {
 					end
 				end
 			end)
-			local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 62 ]]
+			local UseMemoResult = ReactModule.useMemo(function()
 				-- upvalues: UseStateResult (copy), p2 (copy), UseStateResult1 (copy)
 				return {
 					root = UseStateResult,
@@ -75,11 +75,11 @@ return {
 				UseStateResult1,
 				UseStateResult
 			})
-			ReactModule.useEffect(function() --[[ Line: 73 ]]
+			ReactModule.useEffect(function()
 				-- upvalues: UseRefResult1 (copy), destroyRootIfReady (copy)
 				UseRefResult1.current = false
 				
-				return function() --[[ Line: 75 ]]
+				return function()
 					-- upvalues: UseRefResult1 (upval), destroyRootIfReady (upval)
 					UseRefResult1.current = true
 					task.defer(destroyRootIfReady)

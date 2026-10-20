@@ -11,7 +11,7 @@ local CreateRecyclableComponentModule = require(ViewRecyclerReact.ReactAdapter.c
 local CreateRecyclableViewModule = require(ViewRecyclerReact.ReactAdapter.createRecyclableView)
 local CreateVirtualListModule = require(ViewRecyclerReact.ReactAdapter.createVirtualList)
 
-return function(p1) --[[ Line: 15 | Named "createReactAdapter" ]]
+return function(p1)
 	-- upvalues: VirtualListModule (copy), RecyclingScopeModule (copy), RecyclingViewportModule (copy), CreateVirtualListModule (copy), CreatePinnedItemModule (copy), CreateRecyclableComponentModule (copy), CreateRecyclableViewModule (copy), ItemHooksModule (copy), LayoutHooksModule (copy), RecyclableViewReadinessModule (copy), ViewRecyclerModule (copy), ViewRecyclerReact (copy)
 	local NewVirtualList = VirtualListModule.create(p1)
 	

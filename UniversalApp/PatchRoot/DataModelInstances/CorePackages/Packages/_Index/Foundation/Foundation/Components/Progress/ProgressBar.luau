@@ -18,7 +18,7 @@ local WithDefaultsModule = require(Foundation.Utility.withDefaults)
 local _ = require(Foundation.Enums.ProgressShape)
 local ProgressSizeModule = require(Foundation.Enums.ProgressSize)
 
-local function getBarSequenceFromProgress(p1): NumberSequence --[[ Line: 32 ]]
+local function getBarSequenceFromProgress(p1): NumberSequence
 	local P0 = p1 or 0
 	
 	if P0 == 0 then
@@ -39,11 +39,11 @@ local function getBarSequenceFromProgress(p1): NumberSequence --[[ Line: 32 ]]
 	return NumberSequence.new(List)
 end
 
-local function getFillSizeFromProgress(p1): UDim2 --[[ Line: 52 ]]
+local function getFillSizeFromProgress(p1): UDim2
 	return UDim2.fromScale(p1 or 0, 1)
 end
 
-local function getIndeterminateShimmerTransparency(p1, ReducedMotion, EmphasisTransparency): NumberSequence --[[ Line: 56 ]]
+local function getIndeterminateShimmerTransparency(p1, ReducedMotion, EmphasisTransparency): NumberSequence
 	return if ReducedMotion then NumberSequence.new(p1) else NumberSequence.new({
 		NumberSequenceKeypoint.new(0, 1),
 		NumberSequenceKeypoint.new(0.2, 1),
@@ -53,20 +53,20 @@ local function getIndeterminateShimmerTransparency(p1, ReducedMotion, EmphasisTr
 	})
 end
 
-local function getIndeterminateShimmerOffset(p1, ReducedMotion): Vector2 --[[ Line: 74 ]]
+local function getIndeterminateShimmerOffset(p1, ReducedMotion): Vector2
 	-- upvalues: ConstantsModule (copy)
 	return if ReducedMotion then Vector2.new(0, 0) else Vector2.new(p1 * ConstantsModule.INDETERMINATE_SHIMMER_SPEED % 360 / 360 * 2 - 1, 0)
 end
 
-local function ProgressBarIndeterminateGradient(p1) --[[ Line: 89 ]]
+local function ProgressBarIndeterminateGradient(p1)
 	-- upvalues: UseRotationModule (copy), UsePulseBindingModule (copy), ConstantsModule (copy), ReactModule (copy), getIndeterminateShimmerTransparency (copy), getIndeterminateShimmerOffset (copy), GetTestIdTagModule (copy)
 	return ReactModule.createElement("UIGradient", {
 		Color = ColorSequence.new(p1.emphasisColor3),
-		Transparency = UsePulseBindingModule(1 / ConstantsModule.INDETERMINATE_SHIMMER_SPEED):map(function(p2) --[[ Line: 95 ]]
+		Transparency = UsePulseBindingModule(1 / ConstantsModule.INDETERMINATE_SHIMMER_SPEED):map(function(p2)
 			-- upvalues: getIndeterminateShimmerTransparency (upval), p1 (copy)
 			return getIndeterminateShimmerTransparency(p2, p1.reducedMotion, p1.emphasisTransparency)
 		end),
-		Offset = UseRotationModule(1):map(function(p2) --[[ Line: 98 ]]
+		Offset = UseRotationModule(1):map(function(p2)
 			-- upvalues: getIndeterminateShimmerOffset (upval), p1 (copy)
 			return getIndeterminateShimmerOffset(p2, p1.reducedMotion)
 		end),
@@ -82,7 +82,7 @@ local config = {
 	width = UDim.new(1, 0)
 }
 
-return function(p1) --[[ Line: 130 | Named "ProgressBar" ]]
+return function(p1)
 	-- upvalues: WithDefaultsModule (copy), config (copy), UseTokensModule (copy), UsePreferencesModule (copy), UseProgressVariantsModule (copy), FlagsModule (copy), ProgressSizeModule (copy), UseProgressBindingModule (copy), UseRotationModule (copy), UsePulseBindingModule (copy), ConstantsModule (copy), MapBindableModule (copy), getBarSequenceFromProgress (copy), ReactModule (copy), ViewModule (copy), WithCommonPropsModule (copy), getFillSizeFromProgress (copy), ProgressBarIndeterminateGradient (copy), TextModule (copy)
 	local WithDefaultsModuleResult = WithDefaultsModule(p1, config)
 	local UseTokensModuleResult = UseTokensModule()
@@ -147,7 +147,7 @@ return function(p1) --[[ Line: 130 | Named "ProgressBar" ]]
 		}, {
 			Gradient = ReactModule.createElement("UIGradient", {
 				Color = ColorSequence.new(UseTokensModuleResult.Color.Content.Emphasis.Color3),
-				Transparency = if UseProgressBindingModuleResult2 then UsePulseBindingModuleResult:map(function(p2): NumberSequence --[[ Line: 221 ]]
+				Transparency = if UseProgressBindingModuleResult2 then UsePulseBindingModuleResult:map(function(p2): NumberSequence
 					-- upvalues: UsePreferencesModuleResult (copy), UseTokensModuleResult (copy)
 					return if UsePreferencesModuleResult.reducedMotion then NumberSequence.new(p2) else NumberSequence.new({
 						NumberSequenceKeypoint.new(0, 1),
@@ -157,7 +157,7 @@ return function(p1) --[[ Line: 130 | Named "ProgressBar" ]]
 						NumberSequenceKeypoint.new(1, 1)
 					})
 				end) else MapBindableModuleResult,
-				Offset = if UseProgressBindingModuleResult2 then UseRotationModuleResult:map(function(p2): Vector2 --[[ Line: 236 ]]
+				Offset = if UseProgressBindingModuleResult2 then UseRotationModuleResult:map(function(p2): Vector2
 					-- upvalues: UsePreferencesModuleResult (copy), ConstantsModule (upval)
 					return if UsePreferencesModuleResult.reducedMotion then Vector2.new(0, 0) else Vector2.new(p2 * ConstantsModule.INDETERMINATE_SHIMMER_SPEED % 360 / 360 * 2 - 1, 0)
 				end) else nil

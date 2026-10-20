@@ -8,7 +8,7 @@ local InlineLayout = InlineLayoutModule.Components.InlineLayout
 local MergeContextsModule = require(Markdown.Utils.mergeContexts)
 local IsInlineElement = InlineLayoutModule.Utils.isInlineElement
 
-return function(p1, p2) --[[ Line: 13 | Named "renderInline" ]]
+return function(p1, p2)
 	-- upvalues: ReactModule (copy), InlineLayout (copy), DashModule (copy), MergeContextsModule (copy), IsInlineElement (copy)
 	return ReactModule.createElement(InlineLayout, {
 		VerticalPadding = UDim.new(0, 0),

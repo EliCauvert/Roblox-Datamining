@@ -9,13 +9,13 @@ local UseTokensModule = require(Foundation.Providers.Style.useTokens)
 local SHADOWIMAGE = ConstantsModule.SHADOW_IMAGE
 local PLUGINSHADOWSIZE = if FlagsModule.FoundationPopoverPluginOverlayMeasurement and FlagsModule.FoundationPluginShadowSize then ConstantsModule.PLUGIN_SHADOW_SIZE else ConstantsModule.SHADOW_SIZE
 
-return function(Frame) --[[ Line: 27 | Named "PopoverShadow" ]]
+return function(Frame)
 	-- upvalues: UseTokensModule (copy), FlagsModule (copy), ReactModule (copy), ViewModule (copy), PLUGINSHADOWSIZE (copy), ImageModule (copy), SHADOWIMAGE (copy)
 	local UseTokensModuleResult = UseTokensModule()
 	
 	return if FlagsModule.FoundationPopoverPluginOverlayMeasurement and FlagsModule.FoundationPluginShadowSize then ReactModule.createElement(ViewModule, {
 		Transparency = 1,
-		Size = Frame.contentSize:map(function(p1): UDim2 --[[ Line: 34 ]]
+		Size = Frame.contentSize:map(function(p1): UDim2
 			-- upvalues: PLUGINSHADOWSIZE (upval)
 			return p1 + UDim2.fromOffset(PLUGINSHADOWSIZE, PLUGINSHADOWSIZE)
 		end),
@@ -33,7 +33,7 @@ return function(Frame) --[[ Line: 27 | Named "PopoverShadow" ]]
 	})) else ReactModule.createElement(ImageModule, {
 		AnchorPoint = Frame.AnchorPoint,
 		Image = SHADOWIMAGE,
-		Size = Frame.contentSize:map(function(p1): UDim2 --[[ Line: 59 ]]
+		Size = Frame.contentSize:map(function(p1): UDim2
 			-- upvalues: PLUGINSHADOWSIZE (upval)
 			return p1 + UDim2.fromOffset(PLUGINSHADOWSIZE, PLUGINSHADOWSIZE)
 		end),

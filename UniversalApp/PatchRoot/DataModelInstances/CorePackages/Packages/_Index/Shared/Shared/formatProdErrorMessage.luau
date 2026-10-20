@@ -1,6 +1,6 @@
 ﻿local HttpService = game:GetService("HttpService")
 
-return function(p1, ...): string --[[ Line: 17 | Named "formatProdErrorMessage" ]]
+return function(p1, ...): string
 	-- upvalues: HttpService (copy)
 	local Text = "https://reactjs.org/docs/error-decoder.html?invariant=" .. tostring(p1)
 	

@@ -16,9 +16,9 @@ ControllerBarHint.validateProps = TModule.strictInterface({
 	hintTextSize = TModule.optional(TModule.number)
 })
 
-function ControllerBarHint.render(p1) --[[ Line: 34 ]]
+function ControllerBarHint.render(p1)
 	-- upvalues: WithStyleModule (copy), RoactModule (copy), ControllerBarHintInternalPadding (copy), KeyLabelModule (copy), GenericTextLabelModule (copy)
-	return WithStyleModule(function(p2) --[[ Line: 35 ]]
+	return WithStyleModule(function(p2)
 		-- upvalues: RoactModule (upval), p1 (copy), ControllerBarHintInternalPadding (upval), KeyLabelModule (upval), GenericTextLabelModule (upval)
 		local Theme = p2.Theme
 		

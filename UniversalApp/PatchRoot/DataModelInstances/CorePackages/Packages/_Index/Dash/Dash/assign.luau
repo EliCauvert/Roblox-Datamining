@@ -4,12 +4,12 @@ local _ = require(Parent.Types)
 local ForEachModule = require(Parent.forEach)
 local ForEachArgsModule = require(Parent.forEachArgs)
 
-return function(NoneModules, ...) --[[ Line: 54 | Named "assign" ]]
+return function(NoneModules, ...)
 	-- upvalues: ForEachArgsModule (copy), NoneModule (copy), ForEachModule (copy)
-	ForEachArgsModule(function(NoneModule1) --[[ Line: 56 ]]
+	ForEachArgsModule(function(NoneModule1)
 		-- upvalues: NoneModule (upval), ForEachModule (upval), NoneModules (copy)
 		if NoneModule1 ~= nil and NoneModule1 ~= NoneModule then
-			ForEachModule(NoneModule1, function(NoneModule1, Key) --[[ Line: 62 ]]
+			ForEachModule(NoneModule1, function(NoneModule1, Key)
 				-- upvalues: NoneModule (upval), NoneModules (upval)
 				if NoneModule1 == NoneModule then
 					NoneModules[Key] = nil

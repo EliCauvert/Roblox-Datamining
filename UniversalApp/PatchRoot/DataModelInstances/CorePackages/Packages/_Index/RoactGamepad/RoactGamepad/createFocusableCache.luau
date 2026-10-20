@@ -1,10 +1,10 @@
 ﻿local AsFocusableModule = require(script.Parent.asFocusable)
 
-local function checkHostProperties(p1) --[[ Line: 3 ]]
+local function checkHostProperties(p1)
 	assert(Instance.new(p1):IsA("GuiObject"))
 end
 
-local function _(p1) --[[ Line: 9 | Named "isValidFocusable" ]]
+local function _(p1)
 	-- upvalues: checkHostProperties (copy)
 	local ValueType = typeof(p1)
 	
@@ -17,11 +17,11 @@ local function _(p1) --[[ Line: 9 | Named "isValidFocusable" ]]
 	end
 end
 
-return function() --[[ Line: 25 | Named "createFocusableCache" ]]
+return function()
 	-- upvalues: checkHostProperties (copy), AsFocusableModule (copy)
 	local t = {}
 	setmetatable(t, {
-		__index = function(_, Key) --[[ Line: 29 ]]
+		__index = function(_, Key)
 			-- upvalues: checkHostProperties (upval), AsFocusableModule (upval), t (copy)
 			local ValueType = typeof(Key)
 			local Success = nil
@@ -40,7 +40,7 @@ return function() --[[ Line: 25 | Named "createFocusableCache" ]]
 			
 			return AsFocusableModuleResult
 		end,
-		__tostring = function(List): string --[[ Line: 39 ]]
+		__tostring = function(List): string
 			local Message = "{"
 			
 			for i, value in pairs(List) do

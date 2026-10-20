@@ -1,7 +1,7 @@
-﻿return function(p1) --[[ Line: 3 | Named "getEventManager" ]]
+﻿return function(p1)
 	local t = {}
 	
-	local function _(p2, Value) --[[ Line: 6 | Named "removeListener" ]]
+	local function _(p2, Value)
 		-- upvalues: t (copy), p1 (copy)
 		local Entry = t[p2]
 		local List = if Entry then Entry[p1] else nil
@@ -14,14 +14,14 @@
 	end
 	
 	return {
-		addListener = function(Key, Value) --[[ Line: 18 ]]
+		addListener = function(Key, Value)
 			-- upvalues: t (copy), p1 (copy)
 			t[Key] = t[Key] or {}
 			t[Key][p1] = t[Key][p1] or {}
 			table.insert(t[Key][p1], Value)
 			
 			return {
-				remove = function() --[[ Line: 25 ]]
+				remove = function()
 					-- upvalues: Key (copy), Value (copy), t (upval), p1 (upval)
 					local Entry = t[Key]
 					local List = if Entry then Entry[p1] else nil
@@ -34,7 +34,7 @@
 				end
 			}
 		end,
-		emit = function(p2, p3) --[[ Line: 33 ]]
+		emit = function(p2, p3)
 			-- upvalues: t (copy), p1 (copy)
 			local Entry = t[p2] or {}
 			local Copy = if Entry[p1] then table.clone(Entry[p1]) else nil

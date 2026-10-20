@@ -13,7 +13,7 @@ local list = {
 	"Thumb"
 }
 
-local function buildDrdSchema(p1) --[[ Line: 14 ]]
+local function buildDrdSchema(p1)
 	-- upvalues: list (copy)
 	local t = {}
 	
@@ -82,22 +82,22 @@ local JointLabels = nil
 local JointLabels1 = nil
 local R15plusUtils = {
 	JointRotationName = "JointRotation",
-	setIsBackendBundleUpload = function(Value) --[[ Line: 126 ]]
+	setIsBackendBundleUpload = function(Value)
 		-- upvalues: IsBackendBundleUpload (ref)
 		IsBackendBundleUpload = Value
 	end,
-	checkFlagEnabledForAllowHrd = function(): boolean --[[ Line: 130 ]]
+	checkFlagEnabledForAllowHrd = function(): boolean
 		-- upvalues: GetFFlagUGCValidationAllowHRDUploadModule (copy), GetFFlagDebugAllowHRDUploadOnBundleBackendModule (copy), IsBackendBundleUpload (ref)
 		return if GetFFlagUGCValidationAllowHRDUploadModule() then true elseif GetFFlagDebugAllowHRDUploadOnBundleBackendModule() and IsBackendBundleUpload then true else false
 	end,
-	getHrdJointLabels = function() --[[ Line: 148 ]]
+	getHrdJointLabels = function()
 		-- upvalues: JointLabels (ref)
 		if JointLabels == nil then
 			JointLabels = Instance.new("HumanoidRigDescription"):GetJointLabels()
 		end
 		return JointLabels
 	end,
-	getDrdJointLabels = function() --[[ Line: 155 ]]
+	getDrdJointLabels = function()
 		-- upvalues: JointLabels1 (ref)
 		if JointLabels1 == nil then
 			JointLabels1 = Instance.new("DigitsRigDescription"):GetJointLabels()
@@ -106,7 +106,7 @@ local R15plusUtils = {
 	end
 }
 
-function R15plusUtils.getJointNameWhitelist() --[[ Line: 162 ]]
+function R15plusUtils.getJointNameWhitelist()
 	-- upvalues: T (ref), ConstantsModule (copy), R15plusUtils (copy)
 	if T ~= nil then
 		return T
@@ -126,7 +126,7 @@ function R15plusUtils.getJointNameWhitelist() --[[ Line: 162 ]]
 	return T
 end
 
-function R15plusUtils.getNameWhitelistOfClassInSchema(Children, ClassName) --[[ Line: 184 ]]
+function R15plusUtils.getNameWhitelistOfClassInSchema(Children, ClassName)
 	-- upvalues: R15plusUtils (copy)
 	local t = {}
 	
@@ -143,7 +143,7 @@ function R15plusUtils.getNameWhitelistOfClassInSchema(Children, ClassName) --[[ 
 	return t
 end
 
-function R15plusUtils.getSchemaFlatHierarchyList(Children, Tbl) --[[ Line: 204 ]]
+function R15plusUtils.getSchemaFlatHierarchyList(Children, Tbl)
 	-- upvalues: R15plusUtils (copy)
 	local t = {}
 	
@@ -161,12 +161,12 @@ function R15plusUtils.getSchemaFlatHierarchyList(Children, Tbl) --[[ Line: 204 ]
 	return t
 end
 
-function R15plusUtils.getFingerFlatSuffixes() --[[ Line: 228 ]]
+function R15plusUtils.getFingerFlatSuffixes()
 	-- upvalues: list (copy)
 	return list
 end
 
-function R15plusUtils.getDrdSchema(Text) --[[ Line: 232 ]]
+function R15plusUtils.getDrdSchema(Text)
 	-- upvalues: Left (copy), Right (copy)
 	if Text == "Left" then
 		return Left
@@ -177,7 +177,7 @@ function R15plusUtils.getDrdSchema(Text) --[[ Line: 232 ]]
 	end
 end
 
-function R15plusUtils.getAvatarBoneSchema(p2) --[[ Line: 242 ]]
+function R15plusUtils.getAvatarBoneSchema(p2)
 	-- upvalues: config (copy), config1 (copy), config2 (copy), config3 (copy), Left (copy), Right (copy)
 	return if p2 == "Head" then config elseif p2 == "UpperTorso" then config1 elseif p2 == "LeftFoot" then config2 elseif p2 == "RightFoot" then config3 elseif p2 == "LeftHand" then Left elseif p2 == "RightHand" then Right else {}
 end

@@ -8,14 +8,14 @@ local T = if ReactGlobalsModule.__DEV__ then {} else nil
 local Count = 0
 
 return {
-	createCursor = function(Current) --[[ Line: 36 ]]
+	createCursor = function(Current)
 		return { current = Current }
 	end,
-	isEmpty = function(): boolean --[[ Line: 42 ]]
+	isEmpty = function(): boolean
 		-- upvalues: Count (ref)
 		return Count == 0
 	end,
-	pop = function(p1, p2) --[[ Line: 46 ]]
+	pop = function(p1, p2)
 		-- upvalues: Count (ref), ReactGlobalsModule (copy), Console (copy), T (ref), Currents (copy), Current (copy)
 		if Count >= 1 then
 			if ReactGlobalsModule.__DEV__ and p2 ~= T[Count] then
@@ -40,7 +40,7 @@ return {
 			Console.error("Unexpected pop.")
 		end
 	end,
-	push = function(p1, Current1, p2) --[[ Line: 78 ]]
+	push = function(p1, Current1, p2)
 		-- upvalues: Count (ref), Currents (copy), Current (copy), ReactGlobalsModule (copy), T (ref)
 		Count += 1
 		local Current2 = p1.current
@@ -55,13 +55,13 @@ return {
 		end
 		p1.current = Current1
 	end,
-	checkThatStackIsEmpty = function() --[[ Line: 95 ]]
+	checkThatStackIsEmpty = function()
 		-- upvalues: ReactGlobalsModule (copy), Count (ref), Console (copy)
 		if ReactGlobalsModule.__DEV__ and Count ~= 0 then
 			Console.error("Expected an empty stack. Something was not reset properly.")
 		end
 	end,
-	resetStackAfterFatalErrorInDev = function() --[[ Line: 103 ]]
+	resetStackAfterFatalErrorInDev = function()
 		-- upvalues: ReactGlobalsModule (copy), Count (ref), Currents (copy), T (ref)
 		if ReactGlobalsModule.__DEV__ then
 			Count = 0

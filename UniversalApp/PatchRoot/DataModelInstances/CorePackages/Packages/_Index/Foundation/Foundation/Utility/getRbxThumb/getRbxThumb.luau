@@ -50,7 +50,7 @@ local config = {
 	}
 }
 
-return function(AvatarHeadShot, p1, p2, p3): string --[[ Line: 197 ]]
+return function(AvatarHeadShot, p1, p2, p3): string
 	-- upvalues: config (copy), ThumbnailSizeModule (copy), GetAssetIdAsNumericModule (copy), ThumbnailTypeModule (copy)
 	local Entry = config[AvatarHeadShot][p2 or ThumbnailSizeModule.Medium]
 	local AssetIdAsNumericModule = GetAssetIdAsNumericModule(p1)

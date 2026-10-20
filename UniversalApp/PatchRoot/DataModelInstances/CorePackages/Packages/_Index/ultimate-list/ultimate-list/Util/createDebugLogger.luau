@@ -1,8 +1,8 @@
 ﻿local DebugFlagsModule = require(script:FindFirstAncestor("ultimate-list").DebugFlags)
 
-return function(p1) --[[ Line: 7 | Named "createDebugLogger" ]]
+return function(p1)
 	-- upvalues: DebugFlagsModule (copy)
-	return function(Callback: string, ...) --[[ Line: 8 ]]
+	return function(Callback: string, ...)
 		-- upvalues: DebugFlagsModule (upval), p1 (copy)
 		if not DebugFlagsModule.shouldLog then return end
 		if typeof(Callback) == "string" then

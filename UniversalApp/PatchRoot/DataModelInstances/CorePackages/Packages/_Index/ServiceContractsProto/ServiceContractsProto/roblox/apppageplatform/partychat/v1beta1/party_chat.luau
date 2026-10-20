@@ -7,7 +7,7 @@ local PageEntryContentModule = require(script.Parent.Parent.Parent.shared.v1beta
 local Module = {}
 Module.__index = Module
 
-function Module.new(p1) --[[ Line: 112 ]]
+function Module.new(p1)
 	-- upvalues: Module (copy)
 	return (setmetatable({
 		page_entries = if p1 == nil or p1.page_entries == nil then {} else p1.page_entries,
@@ -17,7 +17,7 @@ function Module.new(p1) --[[ Line: 112 ]]
 	}, Module))
 end
 
-function Module:encode() --[[ Line: 121 ]]
+function Module:encode()
 	-- upvalues: ProtoModule (copy)
 	local Buf = buffer.create(0)
 	local Count = 0
@@ -61,7 +61,7 @@ function Module:encode() --[[ Line: 121 ]]
 	return Buf1
 end
 
-function Module.decode(Buf) --[[ Line: 171 ]]
+function Module.decode(Buf)
 	-- upvalues: Module (copy), ProtoModule (copy), PageEntryContentModule (copy), HydrationContentModule (copy), t (copy), TemplateEntryModule (copy)
 	local NewModule = Module.new()
 	local v1 = 0
@@ -109,7 +109,7 @@ function Module.decode(Buf) --[[ Line: 171 ]]
 	return NewModule
 end
 
-function Module:jsonEncode() --[[ Line: 247 ]]
+function Module:jsonEncode()
 	local t = {}
 	
 	if self.page_entries ~= nil and #self.page_entries > 0 then
@@ -142,7 +142,7 @@ function Module:jsonEncode() --[[ Line: 247 ]]
 	return t
 end
 
-function Module:jsonDecode() --[[ Line: 281 ]]
+function Module:jsonDecode()
 	-- upvalues: Module (copy), PageEntryContentModule (copy), HydrationContentModule (copy), TemplateEntryModule (copy)
 	local NewModule = Module.new()
 	
@@ -204,7 +204,7 @@ TypeRegistryModule.default:register(t.PartyChatResponse)
 local Module1 = {}
 Module1.__index = Module1
 
-function Module1.new(p1) --[[ Line: 364 ]]
+function Module1.new(p1)
 	-- upvalues: Module1 (copy)
 	return (setmetatable({
 		key = if p1 == nil or p1.key == nil then "" else p1.key,
@@ -212,7 +212,7 @@ function Module1.new(p1) --[[ Line: 364 ]]
 	}, Module1))
 end
 
-function Module1:encode() --[[ Line: 373 ]]
+function Module1:encode()
 	-- upvalues: ProtoModule (copy)
 	local Buf = buffer.create(0)
 	local Count = 0
@@ -232,7 +232,7 @@ function Module1:encode() --[[ Line: 373 ]]
 	return Buf1
 end
 
-function Module1.decode(Buf) --[[ Line: 393 ]]
+function Module1.decode(Buf)
 	-- upvalues: Module1 (copy), ProtoModule (copy), TemplateEntryModule (copy)
 	local NewModule = Module1.new()
 	local v2 = 0
@@ -269,7 +269,7 @@ function Module1.decode(Buf) --[[ Line: 393 ]]
 	return NewModule
 end
 
-function Module1:jsonEncode() --[[ Line: 441 ]]
+function Module1:jsonEncode()
 	local t = {}
 	
 	if self.key ~= nil and self.key ~= "" then
@@ -281,7 +281,7 @@ function Module1:jsonEncode() --[[ Line: 441 ]]
 	return t
 end
 
-function Module1:jsonDecode() --[[ Line: 455 ]]
+function Module1:jsonDecode()
 	-- upvalues: Module1 (copy), TemplateEntryModule (copy)
 	local NewModule = Module1.new()
 	
@@ -303,7 +303,7 @@ TypeRegistryModule.default:register(t.PartyChatResponse_TemplatesEntry)
 local Module2 = {}
 Module2.__index = Module2
 
-function Module2.new(p1) --[[ Line: 485 ]]
+function Module2.new(p1)
 	-- upvalues: Module2 (copy)
 	return (setmetatable({
 		key = if p1 == nil or p1.key == nil then "" else p1.key,
@@ -311,7 +311,7 @@ function Module2.new(p1) --[[ Line: 485 ]]
 	}, Module2))
 end
 
-function Module2:encode() --[[ Line: 494 ]]
+function Module2:encode()
 	-- upvalues: ProtoModule (copy)
 	local Buf = buffer.create(0)
 	local Count = 0
@@ -330,7 +330,7 @@ function Module2:encode() --[[ Line: 494 ]]
 	return Buf1
 end
 
-function Module2.decode(Buf) --[[ Line: 515 ]]
+function Module2.decode(Buf)
 	-- upvalues: Module2 (copy), ProtoModule (copy)
 	local NewModule = Module2.new()
 	local v3 = 0
@@ -367,7 +367,7 @@ function Module2.decode(Buf) --[[ Line: 515 ]]
 	return NewModule
 end
 
-function Module2:jsonEncode() --[[ Line: 565 ]]
+function Module2:jsonEncode()
 	local t = {}
 	
 	if self.key ~= nil and self.key ~= "" then
@@ -379,7 +379,7 @@ function Module2:jsonEncode() --[[ Line: 565 ]]
 	return t
 end
 
-function Module2:jsonDecode() --[[ Line: 581 ]]
+function Module2:jsonDecode()
 	-- upvalues: Module2 (copy)
 	local NewModule = Module2.new()
 	

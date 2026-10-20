@@ -23,17 +23,17 @@ local config = {
 	[Enum.UserInputType.Touch] = InputTypeModule.Touch
 }
 
-return function(p1) --[[ Line: 47 | Named "useInputType" ]]
+return function(p1)
 	-- upvalues: UserInputService (copy), config (copy), ReactModule (copy), UseEventConnectionFunction (copy)
 	local P0 = p1 or UserInputService
 	
-	local function _() --[[ Line: 50 | Named "getLastInputType" ]]
+	local function _()
 		-- upvalues: P0 (copy), config (upval)
 		return config[P0:GetLastInputType()]
 	end
 	
 	local UseStateResult, UseStateResult2 = ReactModule.useState(config[P0:GetLastInputType()])
-	UseEventConnectionFunction(P0.LastInputTypeChanged, (ReactModule.useCallback(function(p2) --[[ Line: 58 ]]
+	UseEventConnectionFunction(P0.LastInputTypeChanged, (ReactModule.useCallback(function(p2)
 		-- upvalues: config (upval), UseStateResult2 (copy)
 		local Entry = config[p2]
 		
@@ -41,7 +41,7 @@ return function(p1) --[[ Line: 47 | Named "useInputType" ]]
 			UseStateResult2(Entry)
 		end
 	end)))
-	ReactModule.useEffect(function() --[[ Line: 69 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UseStateResult2 (copy), P0 (copy), config (upval)
 		UseStateResult2(config[P0:GetLastInputType()])
 	end, {})

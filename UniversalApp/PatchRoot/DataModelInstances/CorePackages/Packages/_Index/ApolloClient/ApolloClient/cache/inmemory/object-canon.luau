@@ -15,18 +15,18 @@ local Callback = nil
 local NewResult = nil
 local NewResult1 = nil
 
-local function _(Tbl) --[[ Line: 47 | Named "shallowCopy" ]]
+local function _(Tbl)
 	return (table.clone(Tbl))
 end
 
-local _ = function(p1): boolean --[[ Line: 53 | Named "isArrayLike" ]]
+local _ = function(p1): boolean
 	return #p1 == 0 and not next(p1) or #p1 > 1
 end
 
 local Module1 = {}
 Module1.__index = Module1
 
-function Module1.new() --[[ Line: 147 ]]
+function Module1.new()
 	-- upvalues: Module1 (copy), Set (copy), Trie (copy), CanUseWeakMap (copy), WeakMap (copy), Map (copy)
 	local self = setmetatable({}, Module1)
 	self.known = Set.new()
@@ -38,12 +38,12 @@ function Module1.new() --[[ Line: 147 ]]
 	return self
 end
 
-function Module1:isKnown(p1) --[[ Line: 162 ]]
+function Module1:isKnown(p1)
 	-- upvalues: IsNonNullObjectFunction (copy)
 	return IsNonNullObjectFunction(p1) and self.known:has(p1)
 end
 
-function Module1:pass(Tbl) --[[ Line: 166 ]]
+function Module1:pass(Tbl)
 	-- upvalues: IsNonNullObjectFunction (copy)
 	if IsNonNullObjectFunction(Tbl) then
 		local Copy = table.clone(Tbl)
@@ -55,7 +55,7 @@ function Module1:pass(Tbl) --[[ Line: 166 ]]
 	end
 end
 
-function Module1:admit(Input) --[[ Line: 177 ]]
+function Module1:admit(Input)
 	-- upvalues: IsNonNullObjectFunction (copy), ObjectModule (copy), Array (copy)
 	if IsNonNullObjectFunction(Input) then
 		local GetResult = self.passes:get(Input)
@@ -89,7 +89,7 @@ function Module1:admit(Input) --[[ Line: 177 ]]
 				local SortedKeysResult = self:sortedKeys(Input)
 				table.insert(List, SortedKeysResult.json)
 				local CountList = #List
-				Array.forEach(SortedKeysResult.sorted, function(p1) --[[ Line: 226 ]]
+				Array.forEach(SortedKeysResult.sorted, function(p1)
 					-- upvalues: List (copy), self (copy), Input (copy)
 					table.insert(List, self:admit(Input[p1]))
 				end)
@@ -99,7 +99,7 @@ function Module1:admit(Input) --[[ Line: 177 ]]
 					LookupArrayResult.object = ObjectModule.create(PrototypeOf)
 					local Object = LookupArrayResult.object
 					self.known:add(Object)
-					Array.forEach(SortedKeysResult.sorted, function(Key, p1) --[[ Line: 244 ]]
+					Array.forEach(SortedKeysResult.sorted, function(Key, p1)
 						-- upvalues: Object (copy), List (copy), CountList (copy)
 						Object[Key] = List[CountList + p1]
 					end)
@@ -115,7 +115,7 @@ function Module1:admit(Input) --[[ Line: 177 ]]
 	return Input
 end
 
-function Module1:sortedKeys(p1) --[[ Line: 267 ]]
+function Module1:sortedKeys(p1)
 	-- upvalues: ObjectModule (copy), Array (copy), HttpService (copy)
 	local KeysResult = ObjectModule.keys(p1)
 	local LookupArrayResult = self.pool:lookupArray(KeysResult)
@@ -136,7 +136,7 @@ end
 local Module = {
 	ObjectCanon = Module1,
 	canonicalStringify = ObjectModule.assign(setmetatable({}, {
-		__call = function(_, Input) --[[ Line: 301 ]]
+		__call = function(_, Input)
 			-- upvalues: IsNonNullObjectFunction (copy), NewResult (ref), Callback (ref), NewResult1 (ref), SortedEncodeFunction (copy), HttpService (copy)
 			if not IsNonNullObjectFunction(Input) then
 				return HttpService:JSONEncode(Input)
@@ -155,14 +155,14 @@ local Module = {
 			return GetResult
 		end
 	}), {
-		reset = function(_) --[[ Line: 323 ]]
+		reset = function(_)
 			-- upvalues: Callback (ref)
 			return Callback()
 		end
 	})
 }
 
-Callback = function() --[[ Line: 330 | Named "resetCanonicalStringify" ]]
+Callback = function()
 	-- upvalues: NewResult (ref), Module1 (copy), NewResult1 (ref), WeakMap (copy)
 	NewResult = Module1.new()
 	NewResult1 = WeakMap.new()

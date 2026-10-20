@@ -24,7 +24,7 @@ local Tbl = {
 	ButtonRight = "PsDpadRight"
 }
 
-local function _(Tbl, List) --[[ Line: 47 | Named "merge" ]]
+local function _(Tbl, List)
 	local Copy = table.clone(Tbl)
 	
 	for i, value in List do
@@ -117,7 +117,7 @@ IconKeysByPlatform[InputPlatformModule.Default] = {
 	MouseWheel = "MouseScrollwheel"
 }
 
-local _ = function(p1) --[[ Line: 132 | Named "resolveIconAsset" ]]
+local _ = function(p1)
 	-- upvalues: BuilderIconsModule (copy)
 	local IconEntry = BuilderIconsModule.Icon[p1]
 	
@@ -139,13 +139,13 @@ for i2, value2 in IconKeysByPlatform do
 	end
 	t[i2] = t1
 end
-local _ = function(Default) --[[ Line: 153 | Named "getFallbackPlatform" ]]
+local _ = function(Default)
 	-- upvalues: InputPlatformModule (copy)
 	return if Default == InputPlatformModule.Default then InputPlatformModule.Xbox else InputPlatformModule.Default
 end
 
 return {
-	getIconForKeyName = function(p1, Default) --[[ Line: 157 ]]
+	getIconForKeyName = function(p1, Default)
 		-- upvalues: t (copy), InputPlatformModule (copy)
 		local Entry = t[Default][p1]
 		

@@ -10,7 +10,7 @@ local GetMeshMinMaxModule = require(Parent.util.getMeshMinMax)
 local GetEditableMeshFromContextModule = require(Parent.util.getEditableMeshFromContext)
 local GetEngineFeatureEngineUGCValidationConsolidateAccessorySkinningModule = require(Parent.flags.getEngineFeatureEngineUGCValidationConsolidateAccessorySkinning)
 
-local function validateIsSkinned(Object, IsServer, AllowEditableInstances, p1) --[[ Line: 22 ]]
+local function validateIsSkinned(Object, IsServer, AllowEditableInstances, p1)
 	-- upvalues: ConstantsModule (copy), AnalyticsModule (copy), GetEditableMeshFromContextModule (copy), UGCValidationService (copy)
 	local Attribute = Object:GetAttribute(ConstantsModule.AlternateMeshIdAttributeName)
 	
@@ -21,7 +21,7 @@ local function validateIsSkinned(Object, IsServer, AllowEditableInstances, p1) -
 			`Missing skinning data for {Object.Name}.MeshId. You need to skin your model.`
 		}
 	end
-	local Success, Result = pcall(function() --[[ Line: 40 ]]
+	local Success, Result = pcall(function()
 		-- upvalues: GetEditableMeshFromContextModule (upval), Object (copy), p1 (copy), UGCValidationService (upval)
 		local MeshId, MeshId2 = GetEditableMeshFromContextModule(Object, "MeshId", p1)
 		
@@ -53,7 +53,7 @@ local function validateIsSkinned(Object, IsServer, AllowEditableInstances, p1) -
 	end
 end
 
-local function validateMeshIsAtOrigin(p2, p3, p4, p5) --[[ Line: 84 ]]
+local function validateMeshIsAtOrigin(p2, p3, p4, p5)
 	-- upvalues: AnalyticsModule (copy)
 	if (p3 + (p4 - p3) / 2).Magnitude > 0.001 then
 		AnalyticsModule.reportFailure(AnalyticsModule.ErrorType.validateDescendantMeshMetrics_TooFarFromOrigin, nil, p5)
@@ -66,7 +66,7 @@ local function validateMeshIsAtOrigin(p2, p3, p4, p5) --[[ Line: 84 ]]
 	end
 end
 
-return function(p2, p3) --[[ Line: 115 | Named "validateDescendantMeshMetrics" ]]
+return function(p2, p3)
 	-- upvalues: FailureReasonsAccumulatorModule (copy), ParseContentIdsModule (copy), ConstantsModule (copy), GetEditableMeshFromContextModule (copy), GetMeshMinMaxModule (copy), validateMeshIsAtOrigin (copy), AnalyticsModule (copy), validateIsSkinned (copy), GetEngineFeatureEngineUGCValidationConsolidateAccessorySkinningModule (copy), ValidateSkinningTransferModule (copy)
 	local IsServer = p3.isServer
 	assert(p3.assetTypeEnum ~= nil, "assetTypeEnum required in validationContext for validateDescendantMeshMetrics")

@@ -34,7 +34,7 @@ local Episode = DefinitionModule.GraphQLEnumType.new({
 Character = DefinitionModule.GraphQLInterfaceType.new({
 	name = "Character",
 	description = "A character in the Star Wars Trilogy",
-	fields = function() --[[ Line: 127 ]]
+	fields = function()
 		-- upvalues: Map (copy), GraphQLNonNull (copy), GraphQLString (copy), GraphQLList (copy), Character (ref), Episode (copy)
 		return Map.new({
 			{
@@ -74,7 +74,7 @@ Character = DefinitionModule.GraphQLInterfaceType.new({
 			}
 		})
 	end,
-	resolveType = function(p1) --[[ Line: 166 ]]
+	resolveType = function(p1)
 		-- upvalues: Human (ref), Droid (ref)
 		if p1.type == "Human" then
 			return Human.name
@@ -88,7 +88,7 @@ Character = DefinitionModule.GraphQLInterfaceType.new({
 Human = GraphQLObjectType.new({
 	name = "Human",
 	description = "A humanoid creature in the Star Wars universe.",
-	fields = function() --[[ Line: 195 ]]
+	fields = function()
 		-- upvalues: Map (copy), GraphQLNonNull (copy), GraphQLString (copy), GraphQLList (copy), Character (ref), GetFriendsFunction (copy), Episode (copy), ErrorFunction (copy)
 		return Map.new({
 			{
@@ -110,7 +110,7 @@ Human = GraphQLObjectType.new({
 				{
 					description = "The friends of the human, or an empty list if they have none.",
 					type = GraphQLList.new(Character),
-					resolve = function(p1) --[[ Line: 216 ]]
+					resolve = function(p1)
 						-- upvalues: GetFriendsFunction (upval)
 						return GetFriendsFunction(p1)
 					end
@@ -135,7 +135,7 @@ Human = GraphQLObjectType.new({
 				{
 					description = "Where are they from and how they came to be who they are.",
 					type = GraphQLString,
-					resolve = function() --[[ Line: 240 ]]
+					resolve = function()
 						-- upvalues: ErrorFunction (upval)
 						error(ErrorFunction("secretBackstory is secret."))
 					end
@@ -148,7 +148,7 @@ Human = GraphQLObjectType.new({
 Droid = GraphQLObjectType.new({
 	name = "Droid",
 	description = "A mechanical creature in the Star Wars universe.",
-	fields = function() --[[ Line: 266 ]]
+	fields = function()
 		-- upvalues: Map (copy), GraphQLNonNull (copy), GraphQLString (copy), GraphQLList (copy), Character (ref), GetFriendsFunction (copy), Episode (copy), ErrorFunction (copy)
 		return Map.new({
 			{
@@ -170,7 +170,7 @@ Droid = GraphQLObjectType.new({
 				{
 					description = "The friends of the droid, or an empty list if they have none.",
 					type = GraphQLList.new(Character),
-					resolve = function(p1) --[[ Line: 287 ]]
+					resolve = function(p1)
 						-- upvalues: GetFriendsFunction (upval)
 						return GetFriendsFunction(p1)
 					end
@@ -188,7 +188,7 @@ Droid = GraphQLObjectType.new({
 				{
 					description = "Construction date and the name of the designer.",
 					type = GraphQLString,
-					resolve = function() --[[ Line: 304 ]]
+					resolve = function()
 						-- upvalues: ErrorFunction (upval)
 						error(ErrorFunction("secretBackstory is secret."))
 					end
@@ -210,7 +210,7 @@ return {
 	StarWarsSchema = require(Parent.type.schema).GraphQLSchema.new({
 		query = GraphQLObjectType.new({
 			name = "Query",
-			fields = function() --[[ Line: 337 ]]
+			fields = function()
 				-- upvalues: Map (copy), Character (ref), Episode (copy), GetHeroFunction (copy), Human (ref), GraphQLNonNull (copy), GraphQLString (copy), GetHumanFunction (copy), Droid (ref), GetDroidFunction (copy)
 				return Map.new({
 					{
@@ -223,7 +223,7 @@ return {
 									type = Episode
 								}
 							},
-							resolve = function(_, p1) --[[ Line: 349 ]]
+							resolve = function(_, p1)
 								-- upvalues: GetHeroFunction (upval)
 								return GetHeroFunction(p1.episode)
 							end
@@ -239,7 +239,7 @@ return {
 									type = GraphQLNonNull.new(GraphQLString)
 								}
 							},
-							resolve = function(_, p1) --[[ Line: 364 ]]
+							resolve = function(_, p1)
 								-- upvalues: GetHumanFunction (upval)
 								return GetHumanFunction(p1.id)
 							end
@@ -255,7 +255,7 @@ return {
 									type = GraphQLNonNull.new(GraphQLString)
 								}
 							},
-							resolve = function(_, p1) --[[ Line: 379 ]]
+							resolve = function(_, p1)
 								-- upvalues: GetDroidFunction (upval)
 								return GetDroidFunction(p1.id)
 							end

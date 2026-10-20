@@ -62,15 +62,15 @@ PlayerTile.defaultProps = {
 	buttons = {},
 	relevancyInfo = {},
 	tileSize = UDim2.new(0, 150, 0, 150),
-	onActivated = function() --[[ Line: 88 ]] end
+	onActivated = function() end
 }
 local SpringOptions = { dampingRatio = 1, frequency = 4 }
 local config = { [ControlStateModule.Default] = "SystemPrimaryContent" }
 local ComponentAssetsVignette246 = ImagesModule["component_assets/vignette_246"]
 
-local function _(p1) --[[ Line: 107 | Named "footer" ]]
+local function _(p1)
 	-- upvalues: WithStyleModule (copy), Object (copy), RoactModule (copy), PlayerContextModule (copy)
-	return WithStyleModule(function(p2) --[[ Line: 108 ]]
+	return WithStyleModule(function(p2)
 		-- upvalues: Object (upval), p1 (copy), RoactModule (upval), PlayerContextModule (upval)
 		local Tokens = p2.Tokens
 		
@@ -92,9 +92,9 @@ local function _(p1) --[[ Line: 107 | Named "footer" ]]
 	end)
 end
 
-local _ = function(DefaultProps) --[[ Line: 137 | Named "thumbnailOverlayComponents" ]]
+local _ = function(DefaultProps)
 	-- upvalues: WithStyleModule (copy), GetContentStyleModule (copy), config (copy), RoactModule (copy), CryoModule (copy), SpringAnimatedItemModule (copy), SpringOptions (copy), ComponentAssetsVignette246 (copy), List (copy), PlayerTileButtonModule (copy)
-	return WithStyleModule(function(p1) --[[ Line: 138 ]]
+	return WithStyleModule(function(p1)
 		-- upvalues: GetContentStyleModule (upval), config (upval), DefaultProps (copy), RoactModule (upval), CryoModule (upval), SpringAnimatedItemModule (upval), SpringOptions (upval), ComponentAssetsVignette246 (upval), List (upval), PlayerTileButtonModule (upval)
 		local Tokens = p1.Tokens
 		local Size200: number = Tokens.Size.Size_200
@@ -125,7 +125,7 @@ local _ = function(DefaultProps) --[[ Line: 137 | Named "thumbnailOverlayCompone
 				animatedValues = {
 					imageTransparency = if DefaultProps.mouseEntered then 0.6 else 1
 				},
-				mapValuesToProps = function(p2) --[[ Line: 177 ]]
+				mapValuesToProps = function(p2)
 					return { ImageTransparency = p2.imageTransparency }
 				end,
 				regularProps = {
@@ -157,7 +157,7 @@ local _ = function(DefaultProps) --[[ Line: 137 | Named "thumbnailOverlayCompone
 					Position = UDim2.new(1, 0, 1, 0),
 					Size = UDim2.new(0, DefaultProps.tileSize.X.Offset - Size200 * 2, 0, Size900),
 					AnchorPoint = Vector2.new(1, 1)
-				}, List.join(List.map(DefaultProps.buttons, function(p2) --[[ Line: 215 ]]
+				}, List.join(List.map(DefaultProps.buttons, function(p2)
 					-- upvalues: RoactModule (upval), PlayerTileButtonModule (upval), Size900 (copy), Size200 (copy), DefaultProps (upval)
 					return RoactModule.createElement(PlayerTileButtonModule, {
 						buttonHeight = Size900,
@@ -187,7 +187,7 @@ local _ = function(DefaultProps) --[[ Line: 137 | Named "thumbnailOverlayCompone
 	end)
 end
 
-function PlayerTile.init(p1) --[[ Line: 247 ]]
+function PlayerTile.init(p1)
 	-- upvalues: RoactModule (copy), ControlStateModule (copy)
 	p1.firstButtonIcon = RoactModule.createRef()
 	p1.secondButtonIcon = RoactModule.createRef()
@@ -197,7 +197,7 @@ function PlayerTile.init(p1) --[[ Line: 247 ]]
 		controlState = ControlStateModule.Initialize
 	}
 	
-	function p1.onStateChanged(p2, ControlState) --[[ Line: 256 ]]
+	function p1.onStateChanged(p2, ControlState)
 		-- upvalues: p1 (copy)
 		p1:setState({ controlState = ControlState })
 		
@@ -206,25 +206,25 @@ function PlayerTile.init(p1) --[[ Line: 247 ]]
 		end
 	end
 	
-	function p1.hoverMouseEnter() --[[ Line: 265 ]]
+	function p1.hoverMouseEnter()
 		-- upvalues: p1 (copy)
 		p1:setState({ mouseEntered = true })
 	end
 	
-	function p1.hoverMouseLeave() --[[ Line: 271 ]]
+	function p1.hoverMouseLeave()
 		-- upvalues: p1 (copy)
 		p1:setState({ mouseEntered = false })
 	end
 end
 
-function PlayerTile.render(p1) --[[ Line: 278 ]]
+function PlayerTile.render(p1)
 	-- upvalues: WithStyleModule (copy), RoactModule (copy), TileModule (copy), Dictionary (copy), Object (copy), PlayerContextModule (copy), ImagesModule (copy), GetContentStyleModule (copy), config (copy), CryoModule (copy), SpringAnimatedItemModule (copy), SpringOptions (copy), ComponentAssetsVignette246 (copy), List (copy), PlayerTileButtonModule (copy)
 	local TileSize = p1.props.tileSize
 	local Title = p1.props.title
 	local OnActivated = p1.props.onActivated
 	local Thumbnail = p1.props.thumbnail
 	
-	return WithStyleModule(function(p2) --[[ Line: 284 ]]
+	return WithStyleModule(function(p2)
 		-- upvalues: p1 (copy), RoactModule (upval), TileSize (copy), TileModule (upval), Dictionary (upval), WithStyleModule (upval), Object (upval), PlayerContextModule (upval), Title (copy), OnActivated (copy), Thumbnail (copy), ImagesModule (upval), GetContentStyleModule (upval), config (upval), CryoModule (upval), SpringAnimatedItemModule (upval), SpringOptions (upval), ComponentAssetsVignette246 (upval), List (upval), PlayerTileButtonModule (upval)
 		local Tokens = p2.Tokens
 		local config1 = {
@@ -249,7 +249,7 @@ function PlayerTile.render(p1) --[[ Line: 278 ]]
 				titleRichText = true,
 				titleTextLineCount = 1,
 				textButtonRef = p1.props.buttonRef,
-				footer = WithStyleModule(function(p3) --[[ Line: 108 ]]
+				footer = WithStyleModule(function(p3)
 					-- upvalues: Object (upval), config1 (copy), RoactModule (upval), PlayerContextModule (upval)
 					local Tokens = p3.Tokens
 					
@@ -282,7 +282,7 @@ function PlayerTile.render(p1) --[[ Line: 278 ]]
 				onActivated = OnActivated,
 				thumbnail = Thumbnail,
 				backgroundImage = ImagesModule[p2.Theme.PlayerBackgroundDefault.Image],
-				thumbnailOverlayComponents = WithStyleModule(function(p3) --[[ Line: 138 ]]
+				thumbnailOverlayComponents = WithStyleModule(function(p3)
 					-- upvalues: GetContentStyleModule (upval), config (upval), JoinResult (copy), RoactModule (upval), CryoModule (upval), SpringAnimatedItemModule (upval), SpringOptions (upval), ComponentAssetsVignette246 (upval), List (upval), PlayerTileButtonModule (upval)
 					local Tokens = p3.Tokens
 					local Size200: number = Tokens.Size.Size_200
@@ -313,7 +313,7 @@ function PlayerTile.render(p1) --[[ Line: 278 ]]
 							animatedValues = {
 								imageTransparency = if JoinResult.mouseEntered then 0.6 else 1
 							},
-							mapValuesToProps = function(p4) --[[ Line: 177 ]]
+							mapValuesToProps = function(p4)
 								return { ImageTransparency = p4.imageTransparency }
 							end,
 							regularProps = {
@@ -345,7 +345,7 @@ function PlayerTile.render(p1) --[[ Line: 278 ]]
 								Position = UDim2.new(1, 0, 1, 0),
 								Size = UDim2.new(0, JoinResult.tileSize.X.Offset - Size200 * 2, 0, Size900),
 								AnchorPoint = Vector2.new(1, 1)
-							}, List.join(List.map(JoinResult.buttons, function(p4) --[[ Line: 215 ]]
+							}, List.join(List.map(JoinResult.buttons, function(p4)
 								-- upvalues: RoactModule (upval), PlayerTileButtonModule (upval), Size900 (copy), Size200 (copy), JoinResult (upval)
 								return RoactModule.createElement(PlayerTileButtonModule, {
 									buttonHeight = Size900,
@@ -383,7 +383,7 @@ function PlayerTile.render(p1) --[[ Line: 278 ]]
 	end)
 end
 
-return RoactModule.forwardRef(function(p1, ForwardedRef) --[[ Line: 337 ]]
+return RoactModule.forwardRef(function(p1, ForwardedRef)
 	-- upvalues: RoactModule (copy), PlayerTile (copy), Dictionary (copy)
 	return RoactModule.createElement(PlayerTile, Dictionary.join(p1, { forwardedRef = ForwardedRef }))
 end)

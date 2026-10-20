@@ -1,10 +1,10 @@
 ﻿local ParticleUtilityModule = {
-	InstanceIsAParticleEffect = function(Object) --[[ Line: 10 ]]
+	InstanceIsAParticleEffect = function(Object)
 		return Object:IsA("ParticleEmitter") or (Object:IsA("Fire") or (Object:IsA("Smoke") or Object:IsA("Sparkles")))
 	end
 }
 
-local function recurFastForwardParticles(Object) --[[ Line: 14 ]]
+local function recurFastForwardParticles(Object)
 	-- upvalues: ParticleUtilityModule (copy), recurFastForwardParticles (copy)
 	if ParticleUtilityModule.InstanceIsAParticleEffect(Object) then
 		Object:FastForward(240)
@@ -14,12 +14,12 @@ local function recurFastForwardParticles(Object) --[[ Line: 14 ]]
 	end
 end
 
-function ParticleUtilityModule.FastForwardParticles(p1) --[[ Line: 25 ]]
+function ParticleUtilityModule.FastForwardParticles(p1)
 	-- upvalues: recurFastForwardParticles (copy)
 	recurFastForwardParticles(p1)
 end
 
-local function findNearestBasePart(p1) --[[ Line: 30 ]]
+local function findNearestBasePart(p1)
 	local Parent = p1.Parent
 	local PrimaryPart = nil
 	local Handle = nil
@@ -46,7 +46,7 @@ local function findNearestBasePart(p1) --[[ Line: 30 ]]
 	return nil
 end
 
-local function recurReparentOrphanedEffects(Object) --[[ Line: 60 ]]
+local function recurReparentOrphanedEffects(Object)
 	-- upvalues: ParticleUtilityModule (copy), findNearestBasePart (copy), recurReparentOrphanedEffects (copy)
 	if ParticleUtilityModule.InstanceIsAParticleEffect(Object) then
 		local Parent = Object.Parent
@@ -66,7 +66,7 @@ local function recurReparentOrphanedEffects(Object) --[[ Line: 60 ]]
 	end
 end
 
-function ParticleUtilityModule.ReparentOrphanedParticleEffects(p2) --[[ Line: 77 ]]
+function ParticleUtilityModule.ReparentOrphanedParticleEffects(p2)
 	-- upvalues: recurReparentOrphanedEffects (copy)
 	recurReparentOrphanedEffects(p2)
 end

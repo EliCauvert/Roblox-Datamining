@@ -13,7 +13,7 @@ local DedentBlockStringValueFunction = BlockStringModule.dedentBlockStringValue
 local GetBlockStringIndentationFunction = BlockStringModule.getBlockStringIndentation
 local Callback = nil
 
-local function stripIgnoredCharacters(p1): string --[[ Line: 81 ]]
+local function stripIgnoredCharacters(p1): string
 	-- upvalues: IsSourceFunction (copy), Source (copy), Lexer (copy), TokenKind (copy), IsPunctuatorTokenKindFunction (copy), String (copy), Callback (ref)
 	local NewSource = if IsSourceFunction(p1) then p1 else Source.new(p1)
 	local Body = NewSource.body
@@ -40,7 +40,7 @@ local function stripIgnoredCharacters(p1): string --[[ Line: 81 ]]
 	return Text
 end
 
-Callback = function(SliceResult): string --[[ Line: 118 | Named "dedentBlockString" ]]
+Callback = function(SliceResult): string
 	-- upvalues: String (copy), DedentBlockStringValueFunction (copy), GetBlockStringIndentationFunction (copy)
 	local DedentBlockStringValueResult = DedentBlockStringValueFunction((String.slice(SliceResult, 4, -3)))
 	

@@ -9,7 +9,7 @@ local list = {
 }
 local v1 = nil
 
-local function getParentMap() --[[ Line: 24 ]]
+local function getParentMap()
 	-- upvalues: v1 (ref), list (copy), R15plusUtilsModule (copy)
 	if v1 then
 		return v1
@@ -47,7 +47,7 @@ return {
 	prereqTests = {
 		ValidationEnumsModule.ValidationModule.CurveAnimDataAvailable
 	},
-	run = function(p1, p2) --[[ Line: 52 ]]
+	run = function(p1, p2)
 		-- upvalues: getParentMap (copy), CurveAnimBoneHierarchyUtilsModule (copy), ErrorSourceStringsModule (copy)
 		local ParentMap = getParentMap()
 		

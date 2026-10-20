@@ -11,7 +11,7 @@ local VariantsContextModule = require(Foundation.Providers.Style.VariantsContext
 local IsDEV = _G.__DEV__ == true
 local _Font = Font.new(require(Foundation.Constants).BUILDER_SANS_FONT_ASSET, Enum.FontWeight.SemiBold, Enum.FontStyle.Normal)
 
-function variantsFactory(p1) --[[ Line: 38 ]]
+function variantsFactory(p1)
 	-- upvalues: _Font (copy), FlagsModule (copy), StatusIndicatorVariantModule (copy), StatusIndicatorShapeModule (copy), StatusIndicatorSizeModule (copy)
 	local config = {
 		container = {
@@ -144,7 +144,7 @@ function variantsFactory(p1) --[[ Line: 38 ]]
 	}
 end
 
-return function(p1, Alert, p2, p3, p4, p5) --[[ Line: 198 ]]
+return function(p1, Alert, p2, p3, p4, p5)
 	-- upvalues: IsDEV (copy), StatusIndicatorVariantModule (copy), IndexBindableModule (copy), VariantsContextModule (copy), ComposeStyleVariantModule (copy), FlagsModule (copy)
 	if IsDEV then
 		if Alert == StatusIndicatorVariantModule.Contrast_Experiment then

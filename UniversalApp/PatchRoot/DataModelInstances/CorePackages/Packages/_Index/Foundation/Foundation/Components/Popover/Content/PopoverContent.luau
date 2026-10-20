@@ -36,7 +36,7 @@ local config1 = {
 local SHADOWIMAGE = ConstantsModule.SHADOW_IMAGE
 local SHADOWSIZE = ConstantsModule.SHADOW_SIZE
 
-return ReactModule.forwardRef(function(p1, p2) --[[ Line: 79 | Named "PopoverContent" ]]
+return ReactModule.forwardRef(function(p1, p2)
 	-- upvalues: WithDefaultsModule (copy), config (copy), ReactModule (copy), PopoverContextModule (copy), UseOverlayModule (copy), UseTokensModule (copy), UseElevationModule (copy), ElevationLayerModule (copy), UsePointerPositionModule (copy), UseFloatingModule (copy), IsPointInGuiObjectBoundsModule (copy), FlagsModule (copy), ViewModule (copy), StateLayerAffordanceModule (copy), ImageModule (copy), SHADOWIMAGE (copy), SHADOWSIZE (copy), DashModule (copy), config1 (copy), ElevationOwnerScope (copy), ReactRobloxModule (copy)
 	local WithDefaultsModuleResult = WithDefaultsModule(p1, config)
 	local UseContextResult = ReactModule.useContext(PopoverContextModule)
@@ -51,13 +51,13 @@ return ReactModule.forwardRef(function(p1, p2) --[[ Line: 79 | Named "PopoverCon
 	local UseStateResult, UseStateResult2 = ReactModule.useState(nil)
 	local UseStateResult1, UseStateResult2_1 = ReactModule.useState(nil)
 	local UsePointerPositionModuleResult = UsePointerPositionModule(UseStateResult1)
-	ReactModule.useImperativeHandle(p2, function() --[[ Line: 98 ]]
+	ReactModule.useImperativeHandle(p2, function()
 		-- upvalues: UseStateResult (copy)
 		return UseStateResult
 	end, { UseStateResult })
 	local UseFloatingModuleResult, UseFloatingModuleResult2, UseFloatingModuleResult3, UseFloatingModuleResult4, UseFloatingModuleResult5, UseFloatingModuleResult6 = UseFloatingModule(UseContextResult.isOpen, UseContextResult.anchor, UseStateResult, UseOverlayModuleResult, WithDefaultsModuleResult.side, WithDefaultsModuleResult.align, if HasArrow then SizeRatio else 0)
 	local UseRefResult = ReactModule.useRef(nil)
-	local UseResult = ReactModule.useCallback(function(Object) --[[ Line: 114 ]]
+	local UseResult = ReactModule.useCallback(function(Object)
 		-- upvalues: UseRefResult (copy), UseStateResult2_1 (copy), WithDefaultsModuleResult (copy), UseContextResult (copy), IsInstance (copy), UsePointerPositionModuleResult (copy), IsPointInGuiObjectBoundsModule (upval)
 		if UseRefResult.current then
 			UseRefResult.current:Disconnect()
@@ -65,7 +65,7 @@ return ReactModule.forwardRef(function(p1, p2) --[[ Line: 79 | Named "PopoverCon
 		UseStateResult2_1(Object)
 		
 		if Object ~= nil and WithDefaultsModuleResult.onPressedOutside then
-			UseRefResult.current = Object:GetPropertyChangedSignal("GuiState"):Connect(function() --[[ Line: 121 ]]
+			UseRefResult.current = Object:GetPropertyChangedSignal("GuiState"):Connect(function()
 				-- upvalues: Object (copy), UseContextResult (upval), IsInstance (upval), UsePointerPositionModuleResult (upval), IsPointInGuiObjectBoundsModule (upval), WithDefaultsModuleResult (upval)
 				if Object.GuiState == Enum.GuiState.Press then
 					if UseContextResult.anchor and IsInstance then
@@ -82,9 +82,9 @@ return ReactModule.forwardRef(function(p1, p2) --[[ Line: 79 | Named "PopoverCon
 		WithDefaultsModuleResult.onPressedOutside,
 		UseContextResult.anchor
 	})
-	ReactModule.useEffect(function() --[[ Line: 144 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UseRefResult (copy)
-		return function() --[[ Line: 145 ]]
+		return function()
 			-- upvalues: UseRefResult (upval)
 			if UseRefResult.current then
 				UseRefResult.current:Disconnect()
@@ -95,7 +95,7 @@ return ReactModule.forwardRef(function(p1, p2) --[[ Line: 79 | Named "PopoverCon
 		UseFloatingModuleResult,
 		UseFloatingModuleResult6,
 		UseFloatingModuleResult3
-	}):map(function(Entry): UDim2 --[[ Line: 158 ]]
+	}):map(function(Entry): UDim2
 		local Entry1 = Entry[1]
 		local Entry2 = Entry[2]
 		local Entry3 = Entry[3]
@@ -120,11 +120,11 @@ return ReactModule.forwardRef(function(p1, p2) --[[ Line: 79 | Named "PopoverCon
 			ZIndex = 2,
 			AnchorPoint = UseFloatingModuleResult6,
 			Image = SHADOWIMAGE,
-			Size = UseFloatingModuleResult3:map(function(p3): UDim2 --[[ Line: 192 ]]
+			Size = UseFloatingModuleResult3:map(function(p3): UDim2
 				-- upvalues: SHADOWSIZE (upval)
 				return p3 + UDim2.fromOffset(SHADOWSIZE, SHADOWSIZE)
 			end),
-			Position = ReactModule.joinBindings({ UseFloatingModuleResult, UseFloatingModuleResult6 }):map(function(Entry): UDim2 --[[ Line: 195 ]]
+			Position = ReactModule.joinBindings({ UseFloatingModuleResult, UseFloatingModuleResult6 }):map(function(Entry): UDim2
 				-- upvalues: SHADOWSIZE (upval)
 				return UDim2.fromOffset(Entry[1].X + SHADOWSIZE / 2 * (if Entry[2].X == 0 then -1 else 1), Entry[1].Y + SHADOWSIZE / 2 * (if Entry[2].Y == 0 then -1 else 1) + 2)
 			end),
@@ -139,7 +139,7 @@ return ReactModule.forwardRef(function(p1, p2) --[[ Line: 79 | Named "PopoverCon
 			ZIndex = 3,
 			tag = "anchor-center-center",
 			Size = UDim2.fromOffset(Size200, Size200),
-			Position = UseFloatingModuleResult4:map(function(Vector): UDim2 --[[ Line: 213 ]]
+			Position = UseFloatingModuleResult4:map(function(Vector): UDim2
 				return UDim2.fromOffset(Vector.X, Vector.Y)
 			end),
 			backgroundStyle = BackgroundStyle,
@@ -148,7 +148,7 @@ return ReactModule.forwardRef(function(p1, p2) --[[ Line: 79 | Named "PopoverCon
 		Content = ReactModule.createElement(ViewModule, {
 			ZIndex = 4,
 			AnchorPoint = if FlagsModule.FoundationPopoverContentAnchorFix then Vector2.zero else UseFloatingModuleResult6,
-			Position = if FlagsModule.FoundationPopoverContentAnchorFix then MapResult else UseFloatingModuleResult:map(function(Vector): UDim2 --[[ Line: 227 ]]
+			Position = if FlagsModule.FoundationPopoverContentAnchorFix then MapResult else UseFloatingModuleResult:map(function(Vector): UDim2
 				return UDim2.fromOffset(Vector.X, Vector.Y)
 			end),
 			selection = WithDefaultsModuleResult.selection,

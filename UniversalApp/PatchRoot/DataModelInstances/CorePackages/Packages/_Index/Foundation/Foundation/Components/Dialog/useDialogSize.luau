@@ -1,14 +1,14 @@
 ﻿local ReactModule = require(script:FindFirstAncestor("Foundation").Parent.React)
 
-return function(p1) --[[ Line: 5 | Named "useDialogSize" ]]
+return function(p1)
 	-- upvalues: ReactModule (copy)
 	local UseBindingResult, UseBindingResult2 = ReactModule.useBinding(Vector2.new(0, 0))
-	ReactModule.useEffect(function() --[[ Line: 8 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: p1 (copy), UseBindingResult2 (copy)
 		local Current = p1.current
 		
 		if not Current then return end
-		local function updateDialogSize() --[[ Line: 14 ]]
+		local function updateDialogSize()
 			-- upvalues: Current (copy), UseBindingResult2 (upval)
 			local AbsoluteSize = Current.AbsoluteSize
 			
@@ -26,7 +26,7 @@ return function(p1) --[[ Line: 5 | Named "useDialogSize" ]]
 		end
 		local Connection = Current:GetPropertyChangedSignal("AbsoluteSize"):Connect(updateDialogSize)
 		
-		return function() --[[ Line: 26 ]]
+		return function()
 			-- upvalues: Connection (copy)
 			Connection:Disconnect()
 		end

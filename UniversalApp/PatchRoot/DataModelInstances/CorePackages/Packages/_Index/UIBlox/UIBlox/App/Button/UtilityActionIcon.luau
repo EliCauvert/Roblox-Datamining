@@ -18,7 +18,7 @@ local config = {
 	tooltipTarget = game:GetService("CoreGui")
 }
 
-return ReactModule.forwardRef(function(p1, Ref) --[[ Line: 60 | Named "UtilityActionIcon" ]]
+return ReactModule.forwardRef(function(p1, Ref)
 	-- upvalues: CryoModule (copy), config (copy), UseStyleModule (copy), ReactModule (copy), WithHoverTooltipFunction (copy), TooltipOrientationModule (copy), StateLayerModule (copy), Label (copy), StatusIndicator (copy), MigrateBadgeVariantModule (copy)
 	local JoinResult = CryoModule.Dictionary.join(config, p1)
 	local AnchorPoint = JoinResult.anchorPoint
@@ -40,7 +40,7 @@ return ReactModule.forwardRef(function(p1, Ref) --[[ Line: 60 | Named "UtilityAc
 	local Darken: string = if OnMedia then "Darken" else "Standard"
 	local _Vector2 = Vector2.new(0, 1)
 	local _UDim2 = UDim2.new(0.5, Tokens.Size.Size_50, 0.5, -Tokens.Size.Size_50)
-	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 86 ]]
+	local UseMemoResult = ReactModule.useMemo(function()
 		-- upvalues: DisableOutset (copy), Tokens (copy)
 		return if DisableOutset then nil else {
 			top = UDim.new(0, Tokens.Size.Size_100),
@@ -49,7 +49,7 @@ return ReactModule.forwardRef(function(p1, Ref) --[[ Line: 60 | Named "UtilityAc
 			left = UDim.new(0, Tokens.Size.Size_100)
 		}
 	end, { DisableOutset, Tokens })
-	local UseMemoResult1 = ReactModule.useMemo(function(): UDim2 --[[ Line: 97 ]]
+	local UseMemoResult1 = ReactModule.useMemo(function(): UDim2
 		-- upvalues: Size1000 (copy), UseMemoResult (copy)
 		local _UDim = UDim.new(0, Size1000)
 		
@@ -62,7 +62,7 @@ return ReactModule.forwardRef(function(p1, Ref) --[[ Line: 60 | Named "UtilityAc
 		preferredOrientation = TooltipOrientationModule.Bottom,
 		guiTarget = TooltipTarget,
 		DEBUG_useTargetDirectly = JoinResult._DEBUG_is_plugin
-	}, function(p2, OnStateChanged) --[[ Line: 112 ]]
+	}, function(p2, OnStateChanged)
 		-- upvalues: ReactModule (upval), UseMemoResult1 (copy), AnchorPoint (copy), Position (copy), LayoutOrder (copy), Ref (copy), OnMedia (copy), Size1000 (copy), Tokens (copy), StateLayerModule (upval), Darken (copy), UseMemoResult (copy), OnActivated (copy), Label (upval), Size900 (copy), Icon (copy), IconColor (copy), BadgeValue (copy), StatusIndicator (upval), _UDim2 (copy), _Vector2 (copy), MigrateBadgeVariantModule (upval), BadgeVariant (copy), JoinResult (copy)
 		return ReactModule.createElement("Frame", {
 			Selectable = false,

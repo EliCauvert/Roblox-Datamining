@@ -1,7 +1,7 @@
 ﻿local Module = {}
 Module.__index = Module
 
-function Module:ReadPixel(p1: number, p2: number): Color3 --[[ Line: 21 ]]
+function Module:ReadPixel(p1: number, p2: number): Color3
 	if self.size.X <= p1 or self.size.Y <= p2 or p1 < 0 or p2 < 0 then
 		return Color3.fromRGB(0, 0, 0)
 	else
@@ -11,7 +11,7 @@ function Module:ReadPixel(p1: number, p2: number): Color3 --[[ Line: 21 ]]
 	end
 end
 
-function Module.new(EditableImage) --[[ Line: 35 ]]
+function Module.new(EditableImage)
 	-- upvalues: Module (copy)
 	local self = setmetatable({}, Module)
 	self.buffer = EditableImage:ReadPixelsBuffer(Vector2.new(0, 0), EditableImage.Size)
@@ -23,7 +23,7 @@ end
 local SummedAreaTableModule = {}
 SummedAreaTableModule.__index = SummedAreaTableModule
 
-function SummedAreaTableModule.new(Size, CalculateWeightFromColor3) --[[ Line: 51 ]]
+function SummedAreaTableModule.new(Size, CalculateWeightFromColor3)
 	-- upvalues: SummedAreaTableModule (copy)
 	local self = setmetatable({}, SummedAreaTableModule)
 	self.size = Size
@@ -33,16 +33,16 @@ function SummedAreaTableModule.new(Size, CalculateWeightFromColor3) --[[ Line: 5
 	return self
 end
 
-function SummedAreaTableModule.ReadValue(p1, X: number, Y: number): number --[[ Line: 60 ]]
+function SummedAreaTableModule.ReadValue(p1, X: number, Y: number): number
 	return if X < 0 or Y < 0 then 0 else buffer.readu32(p1.buffer, (math.min(X, p1.size.X - 1) + math.min(Y, p1.size.Y - 1) * p1.size.X) * 4)
 end
 
-function SummedAreaTableModule:WriteValue(p1: number, p2: number, Value) --[[ Line: 71 ]]
+function SummedAreaTableModule:WriteValue(p1: number, p2: number, Value)
 	assert(p1 < self.size.X and (p2 < self.size.Y and p1 >= 0) and p2 >= 0)
 	buffer.writeu32(self.buffer, (p1 + p2 * self.size.X) * 4, Value)
 end
 
-function SummedAreaTableModule:BuildSummedAreaTable(p1) --[[ Line: 78 ]]
+function SummedAreaTableModule:BuildSummedAreaTable(p1)
 	-- upvalues: Module (copy)
 	local NewModule = Module.new(p1)
 	assert(NewModule.size == self.size)
@@ -54,7 +54,7 @@ function SummedAreaTableModule:BuildSummedAreaTable(p1) --[[ Line: 78 ]]
 	end
 end
 
-function SummedAreaTableModule:GetAreaDensity(NewVector, Vector) --[[ Line: 96 ]]
+function SummedAreaTableModule:GetAreaDensity(NewVector, Vector)
 	local NewVectorDelta = NewVector - Vector2.one
 	local NewVectorDelta1 = NewVector + Vector - Vector2.one
 	local _Vector2 = Vector2.new(NewVectorDelta1.X, NewVectorDelta.Y)
@@ -63,7 +63,7 @@ function SummedAreaTableModule:GetAreaDensity(NewVector, Vector) --[[ Line: 96 ]
 	return self:ReadValue(NewVectorDelta1.X, NewVectorDelta1.Y) - self:ReadValue(_Vector2.X, _Vector2.Y) - self:ReadValue(_Vector2_1.X, _Vector2_1.Y) + self:ReadValue(NewVectorDelta.X, NewVectorDelta.Y)
 end
 
-function SummedAreaTableModule:GetAreaDensityContinuous(Vector, p2): number --[[ Line: 115 ]]
+function SummedAreaTableModule:GetAreaDensityContinuous(Vector, p2): number
 	local NewAreaDensity = 0
 	local NewVector = Vector + p2
 	local CeilResult = Vector:Ceil()

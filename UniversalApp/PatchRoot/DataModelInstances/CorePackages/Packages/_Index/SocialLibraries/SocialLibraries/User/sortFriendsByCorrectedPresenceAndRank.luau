@@ -15,7 +15,7 @@ local config1 = {
 	[UserModel.PresenceType.OFFLINE] = 0
 }
 
-local function _(p1) --[[ Line: 42 ]]
+local function _(p1)
 	-- upvalues: PresenceType (copy)
 	local UserPresenceType = p1.userPresenceType
 	local LastLocation = p1.lastLocation or ""
@@ -23,7 +23,7 @@ local function _(p1) --[[ Line: 42 ]]
 	return if (UserPresenceType == PresenceType.InGame or UserPresenceType == PresenceType.InStudio) and #LastLocation == 0 then PresenceType.Online.rawValue() else UserPresenceType.rawValue()
 end
 
-local _ = function(p1) --[[ Line: 51 ]]
+local _ = function(p1)
 	-- upvalues: UserModel (copy)
 	local Presence = p1.presence
 	local LastLocation = p1.lastLocation or ""
@@ -31,7 +31,7 @@ local _ = function(p1) --[[ Line: 51 ]]
 	return if (Presence == UserModel.PresenceType.IN_GAME or Presence == UserModel.PresenceType.IN_STUDIO) and #LastLocation == 0 then UserModel.PresenceType.ONLINE else Presence
 end
 
-local _ = function(p1) --[[ Line: 63 ]]
+local _ = function(p1)
 	-- upvalues: PresenceType (copy), T (copy), config (copy)
 	local UserPresenceType = p1.userPresenceType
 	local LastLocation = p1.lastLocation or ""
@@ -40,7 +40,7 @@ local _ = function(p1) --[[ Line: 63 ]]
 	return T.number(RawValueResult) and config[RawValueResult] or config[PresenceType.Offline]
 end
 
-local _ = function(p1) --[[ Line: 69 ]]
+local _ = function(p1)
 	-- upvalues: UserModel (copy), T (copy), config1 (copy)
 	local Presence = p1.presence
 	local LastLocation = p1.lastLocation or ""
@@ -49,7 +49,7 @@ local _ = function(p1) --[[ Line: 69 ]]
 	return T.string(ONLINE) and config1[ONLINE] or config1[UserModel.PresenceType.OFFLINE]
 end
 
-local _ = function(p1, p2) --[[ Line: 75 ]]
+local _ = function(p1, p2)
 	-- upvalues: PresenceType (copy), T (copy), config (copy), UserModel (copy), config1 (copy)
 	local v1 = 0
 	local v2 = 0
@@ -90,11 +90,11 @@ local _ = function(p1, p2) --[[ Line: 75 ]]
 	return v1, v2
 end
 
-local _ = function(p1, p2) --[[ Line: 90 ]]
+local _ = function(p1, p2)
 	return p1.username or (p1.name or ""), p2.username or (p2.name or "")
 end
 
-return function(p1, p2): boolean --[[ Line: 94 ]]
+return function(p1, p2): boolean
 	-- upvalues: PresenceType (copy), T (copy), config (copy), UserModel (copy), config1 (copy)
 	local v1 = 0
 	local v2 = 0

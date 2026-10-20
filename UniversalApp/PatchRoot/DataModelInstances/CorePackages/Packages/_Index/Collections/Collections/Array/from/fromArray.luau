@@ -1,6 +1,6 @@
 ﻿local _ = require(script.Parent.Parent.Parent.Parent.ES7Types)
 
-return function(Tbl, Callback, p1) --[[ Line: 25 ]]
+return function(Tbl, Callback, p1)
 	local Buffer = nil
 	if not Callback then
 		Buffer = table.clone(Tbl)

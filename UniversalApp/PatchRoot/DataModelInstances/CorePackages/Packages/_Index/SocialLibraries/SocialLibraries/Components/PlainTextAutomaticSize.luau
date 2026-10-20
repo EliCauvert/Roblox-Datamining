@@ -17,10 +17,10 @@ local Frame = {
 	hasTail = false,
 	LayoutOrder = 0,
 	isPending = false,
-	[Roact.Change.AbsoluteSize] = function() --[[ Line: 23 ]] end
+	[Roact.Change.AbsoluteSize] = function() end
 }
 
-local function TextContent(p1) --[[ Line: 35 ]]
+local function TextContent(p1)
 	-- upvalues: UseTextBoundsModule (copy), Roact (copy), NormalizeFontFaceFunction (copy), FixPlainTextAutomaticSizeClippingTextFastFlag (copy)
 	local UseTextBoundsModuleResult = UseTextBoundsModule(p1.text, p1.font, p1.textSize, p1.contentMaxWidth) or Vector2.new(0, p1.textSize)
 	
@@ -41,9 +41,9 @@ local function TextContent(p1) --[[ Line: 35 ]]
 	})
 end
 
-return function(Frame1: Frame) --[[ Line: 60 | Named "PlainText" ]]
+return function(Frame1: Frame)
 	-- upvalues: WithStyleFunction (copy), Frame (copy), FoundationFontFaceMigration (copy), TextService (copy), Roact (copy), ChatBubbleContainerAutomaticSizeModule (copy), TextContent (copy), FixPlainTextAutomaticSizeClippingTextFastFlag (copy)
-	return WithStyleFunction(function(p1) --[[ Line: 61 ]]
+	return WithStyleFunction(function(p1)
 		-- upvalues: Frame1 (copy), Frame (upval), FoundationFontFaceMigration (upval), TextService (upval), Roact (upval), ChatBubbleContainerAutomaticSizeModule (upval), TextContent (upval), FixPlainTextAutomaticSizeClippingTextFastFlag (upval)
 		local MaxWidth = Frame1.maxWidth or Frame.maxWidth
 		local InnerPadding = Frame1.innerPadding or Frame.innerPadding

@@ -9,11 +9,11 @@ local Entry = require(script.entry).Entry
 local ParentEntrySlot = require(script.context).parentEntrySlot
 local ContextModule = require(script.context)
 
-local function _() --[[ Line: 61 | Named "makeDefaultMakeCacheKeyFunction" ]]
+local function _()
 	-- upvalues: Trie (copy)
 	local NewTrie = Trie.new(true)
 	
-	return function(_, ...) --[[ Line: 64 ]]
+	return function(_, ...)
 		-- upvalues: NewTrie (copy)
 		return NewTrie:lookupArray({ ... })
 	end
@@ -21,7 +21,7 @@ end
 
 local NewTrie = Trie.new(true)
 
-local function DefaultMakeCacheKey(_, ...) --[[ Line: 64 ]]
+local function DefaultMakeCacheKey(_, ...)
 	-- upvalues: NewTrie (copy)
 	return NewTrie:lookupArray({ ... })
 end
@@ -36,14 +36,14 @@ return {
 	dep = require(script.dep).dep,
 	defaultMakeCacheKey = DefaultMakeCacheKey,
 	KeyTrie = Trie,
-	wrap = function(Callback1, p1, p2) --[[ Line: 104 ]]
+	wrap = function(Callback1, p1, p2)
 		-- upvalues: Cache (copy), Boolean (copy), Trie (copy), Entry (copy), Array (copy), NewResult (copy), ParentEntrySlot (copy), Object (copy)
 		local v1 = p1
 		
 		if v1 == nil then
 			v1 = {}
 		end
-		local NewCache = Cache.new(Boolean.toJSBoolean(v1.max) and v1.max or 65536, function(p3) --[[ Line: 115 ]]
+		local NewCache = Cache.new(Boolean.toJSBoolean(v1.max) and v1.max or 65536, function(p3)
 			return p3:dispose()
 		end)
 		local KeyArgsFunction = v1.keyArgs
@@ -56,7 +56,7 @@ return {
 				end
 				local NewTrie = Trie.new(true)
 				
-				local function MakeCacheKeyFunction(_, ...) --[[ Line: 64 ]]
+				local function MakeCacheKeyFunction(_, ...)
 					-- upvalues: NewTrie (copy)
 					return NewTrie:lookupArray({ ... })
 				end
@@ -64,17 +64,17 @@ return {
 			if p2 == nil then break end
 			local Callback = Callback1
 			
-			Callback1 = function(...) --[[ Line: 126 ]]
+			Callback1 = function(...)
 				-- upvalues: Callback (copy), p2 (copy)
 				return Callback(p2, ...)
 			end
 		until true
 		local self = setmetatable({}, {
-			__call = function(_, p3, ...) --[[ Line: 134 ]]
+			__call = function(_, p3, ...)
 				-- upvalues: p2 (copy), MakeCacheKeyFunction (copy), KeyArgsFunction (copy), Callback1 (ref), NewCache (copy), Entry (upval), v1 (ref), Array (upval), NewResult (upval), ParentEntrySlot (upval)
 				local List = nil
 				List = if p2 == nil then { p3, ... } else { ... }
-				local CacheKey = MakeCacheKeyFunction(nil, table.unpack((function() --[[ Line: 147 ]]
+				local CacheKey = MakeCacheKeyFunction(nil, table.unpack((function()
 					-- upvalues: KeyArgsFunction (upval), List (ref)
 					return if KeyArgsFunction then KeyArgsFunction(nil, table.unpack(List)) else List
 				end)()))
@@ -89,7 +89,7 @@ return {
 					NewCache:set(CacheKey, GetResult)
 					GetResult.subscribe = v1.subscribe
 					
-					function GetResult.forget() --[[ Line: 167 ]]
+					function GetResult.forget()
 						-- upvalues: NewCache (upval), CacheKey (copy)
 						return NewCache:delete(CacheKey)
 					end
@@ -99,18 +99,18 @@ return {
 				NewResult:add(NewCache)
 				
 				if not ParentEntrySlot:hasValue() then
-					NewResult:forEach(function(p4) --[[ Line: 184 ]]
+					NewResult:forEach(function(p4)
 						return p4:clean()
 					end)
 					NewResult:clear()
 				end
 				return RecomputeResult
 			end,
-			__index = function(p3, p4) --[[ Line: 193 ]]
+			__index = function(p3, p4)
 				-- upvalues: NewCache (copy)
 				return if p4 == "size" then NewCache.map.size else rawget(p3, p4)
 			end,
-			__newindex = function(p3, p4, p5) --[[ Line: 199 ]]
+			__newindex = function(p3, p4, p5)
 				if p4 == "size" then
 					error("attempt to update a read-only table", 2)
 				end
@@ -118,14 +118,14 @@ return {
 			end
 		})
 		
-		local function _(Callback) --[[ Line: 213 | Named "asMethod" ]]
-			return function(_, ...) --[[ Line: 214 ]]
+		local function _(Callback)
+			return function(_, ...)
 				-- upvalues: Callback (copy)
 				return Callback(...)
 			end
 		end
 		
-		local function dirtyKey(p3) --[[ Line: 219 ]]
+		local function dirtyKey(p3)
 			-- upvalues: NewCache (copy), Boolean (upval)
 			local GetResult = NewCache:get(p3)
 			
@@ -134,12 +134,12 @@ return {
 			end
 		end
 		
-		function self:dirtyKey(...) --[[ Line: 214 ]]
+		function self:dirtyKey(...)
 			-- upvalues: dirtyKey (copy)
 			return dirtyKey(...)
 		end
 		
-		local function v22(...) --[[ Line: 228 ]]
+		local function v22(...)
 			-- upvalues: MakeCacheKeyFunction (copy), NewCache (copy), Boolean (upval)
 			local GetResult = NewCache:get((MakeCacheKeyFunction(nil, ...)))
 			
@@ -148,12 +148,12 @@ return {
 			end
 		end
 		
-		function self:dirty(...) --[[ Line: 214 ]]
+		function self:dirty(...)
 			-- upvalues: v22 (copy)
 			return v22(...)
 		end
 		
-		local function peekKey(p3) --[[ Line: 232 ]]
+		local function peekKey(p3)
 			-- upvalues: NewCache (copy), Boolean (upval)
 			local GetResult = NewCache:get(p3)
 			
@@ -161,37 +161,37 @@ return {
 			return GetResult:peek()
 		end
 		
-		function self:peekKey(...) --[[ Line: 214 ]]
+		function self:peekKey(...)
 			-- upvalues: peekKey (copy)
 			return peekKey(...)
 		end
 		
-		local function v24(...) --[[ Line: 242 ]]
+		local function v24(...)
 			-- upvalues: peekKey (copy), MakeCacheKeyFunction (copy)
 			return peekKey(MakeCacheKeyFunction(nil, ...))
 		end
 		
-		function self:peek(...) --[[ Line: 214 ]]
+		function self:peek(...)
 			-- upvalues: v24 (copy)
 			return v24(...)
 		end
 		
-		local function forgetKey(p3) --[[ Line: 246 ]]
+		local function forgetKey(p3)
 			-- upvalues: NewCache (copy)
 			return NewCache:delete(p3)
 		end
 		
-		function self:forgetKey(...) --[[ Line: 214 ]]
+		function self:forgetKey(...)
 			-- upvalues: forgetKey (copy)
 			return forgetKey(...)
 		end
 		
-		local function v26(...) --[[ Line: 252 ]]
+		local function v26(...)
 			-- upvalues: forgetKey (copy), MakeCacheKeyFunction (copy)
 			return forgetKey(MakeCacheKeyFunction(nil, ...))
 		end
 		
-		function self:forget(...) --[[ Line: 214 ]]
+		function self:forget(...)
 			-- upvalues: v26 (copy)
 			return v26(...)
 		end
@@ -199,12 +199,12 @@ return {
 		self.makeCacheKey = MakeCacheKeyFunction
 		
 		if Boolean.toJSBoolean(KeyArgsFunction) then
-			local function v27(...) --[[ Line: 260 ]]
+			local function v27(...)
 				-- upvalues: MakeCacheKeyFunction (copy), KeyArgsFunction (copy)
 				return MakeCacheKeyFunction(nil, table.unpack(KeyArgsFunction(...)))
 			end
 			
-			function self:getKey(...) --[[ Line: 214 ]]
+			function self:getKey(...)
 				-- upvalues: v27 (copy)
 				return v27(...)
 			end

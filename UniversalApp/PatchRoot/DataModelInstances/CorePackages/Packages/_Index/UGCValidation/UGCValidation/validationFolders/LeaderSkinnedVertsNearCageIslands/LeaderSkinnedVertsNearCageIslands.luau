@@ -16,7 +16,7 @@ return {
 		ValidationEnumsModule.SharedDataMember.renderMeshesData,
 		ValidationEnumsModule.SharedDataMember.innerCagesData
 	},
-	run = function(p1, p2) --[[ Line: 24 ]]
+	run = function(p1, p2)
 		-- upvalues: UGCValidationService (copy), EyelashCageUVReferenceValuesModule (copy), DistanceThreshold (copy), ErrorSourceStringsModule (copy)
 		if p2.uploadEnum.assetType ~= Enum.AssetType.EyelashAccessory then return end
 		local Handle = p2.renderMeshesData.Handle

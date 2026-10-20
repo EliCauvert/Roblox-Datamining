@@ -1,4 +1,4 @@
-﻿return function(p1) --[[ Line: 1 ]]
+﻿return function(p1)
 	return {
 		getStatus = require(script.getStatus)(p1),
 		setStatus = require(script.setStatus)(p1),

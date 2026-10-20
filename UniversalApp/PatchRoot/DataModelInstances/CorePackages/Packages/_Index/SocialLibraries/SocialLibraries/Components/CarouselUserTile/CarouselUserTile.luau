@@ -10,7 +10,7 @@ local PlayerNameModule = require(script.Parent.PlayerName)
 local _ = require(script.Parent.StyleTypes)
 local ConstantsModule = require(script.Parent.Constants)
 
-local function OnStateChanged() --[[ Line: 16 ]] end
+local function OnStateChanged() end
 
 local config = {
 	tileSize = ConstantsModule.TILE_SIZE,
@@ -18,17 +18,17 @@ local config = {
 	contextualTopPadding = ConstantsModule.CONTEXTUAL_TOP_PADDING
 }
 
-return function(p1) --[[ Line: 49 ]]
+return function(p1)
 	-- upvalues: Llama (copy), config (copy), Roact (copy), PlayerTile (copy), GetUserAvatarImageModule (copy), PlayerNameModule (copy), Interactable (copy), OnStateChanged (copy)
 	local JoinResult = Llama.Dictionary.join(config, p1)
 	local TileSize = JoinResult.tileSize
 	
-	local function _() --[[ Line: 53 ]]
+	local function _()
 		-- upvalues: JoinResult (copy)
 		return if JoinResult.renderButtons then JoinResult.renderButtons() else nil
 	end
 	
-	local _ = function() --[[ Line: 70 ]]
+	local _ = function()
 		-- upvalues: JoinResult (copy)
 		return if JoinResult.renderContextualInfo then JoinResult.renderContextualInfo() else nil
 	end
@@ -47,7 +47,7 @@ return function(p1) --[[ Line: 49 ]]
 			BackgroundTransparency = 1,
 			Size = UDim2.fromOffset(TileSize, TileSize)
 		}, {
-			PlayerTile = (function() --[[ Line: 59 ]]
+			PlayerTile = (function()
 				-- upvalues: JoinResult (copy), Roact (upval), PlayerTile (upval), GetUserAvatarImageModule (upval)
 				return if JoinResult.renderPlayerTile then JoinResult.renderPlayerTile() else Roact.createElement(PlayerTile, {
 					tileSize = UDim2.fromOffset(JoinResult.tileSize, JoinResult.tileSize),
@@ -78,7 +78,7 @@ return function(p1) --[[ Line: 49 ]]
 				BackgroundTransparency = 1,
 				AutomaticSize = Enum.AutomaticSize.XY
 			}, {
-				PlayerName = (function() --[[ Line: 76 ]]
+				PlayerName = (function()
 					-- upvalues: JoinResult (copy), Roact (upval), PlayerNameModule (upval)
 					return if JoinResult.renderPlayerName then JoinResult.renderPlayerName() else JoinResult.userName and Roact.createElement(PlayerNameModule, { name = JoinResult.userName, width = JoinResult.tileSize }) or nil
 				end)()

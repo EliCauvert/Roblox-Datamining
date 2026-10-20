@@ -5,12 +5,12 @@ local UserInputService = game:GetService("UserInputService")
 local ScrollHostLifecyclePhaseModule = require(ViewRecyclerRoblox.RobloxAdapter.ScrollHostLifecyclePhase)
 local AxisMapModule = require(ViewRecyclerRoblox.RobloxAdapter.axisMap)
 
-local function _(Value: number, p1, p2): number --[[ Line: 56 | Named "normalizeScrollOffset" ]]
+local function _(Value: number, p1, p2): number
 	return (math.clamp(Value, 0, (math.max(0, p2 - p1))))
 end
 
 return {
-	new = function(p1) --[[ Line: 60 ]]
+	new = function(p1)
 		-- upvalues: ScrollHostLifecyclePhaseModule (copy), AxisMapModule (copy), ViewRecyclerModule (copy), RunService (copy), UserInputService (copy)
 		local GetCurrentFunction = p1.getCurrent
 		local Configuration = p1.getConfiguration()
@@ -32,19 +32,19 @@ return {
 		local Axis1 = nil
 		local v2 = nil
 		
-		local function _() --[[ Line: 81 | Named "sampleConfiguration" ]]
+		local function _()
 			-- upvalues: Configuration (ref), p1 (copy)
 			Configuration = p1.getConfiguration()
 			
 			return Configuration
 		end
 		
-		local _ = function(p2) --[[ Line: 86 | Named "resolveInstance" ]]
+		local _ = function(p2)
 			-- upvalues: p1 (copy)
 			return p2 or p1.getInstance()
 		end
 		
-		local function getViewportState(ScrollFrame) --[[ Line: 90 ]]
+		local function getViewportState(ScrollFrame)
 			-- upvalues: p1 (copy), Configuration (ref), AxisMapModule (upval)
 			local ScrollFrame1 = ScrollFrame or p1.getInstance()
 			
@@ -61,7 +61,7 @@ return {
 			end
 		end
 		
-		local function setHostScrollOffset(X): boolean --[[ Line: 103 ]]
+		local function setHostScrollOffset(X): boolean
 			-- upvalues: p1 (copy), Configuration (ref), ViewRecyclerModule (upval)
 			local _Instance = p1.getInstance()
 			
@@ -75,17 +75,17 @@ return {
 			end
 		end
 		
-		local _ = function(Kind, Offset) --[[ Line: 115 | Named "observeHostOffset" ]]
+		local _ = function(Kind, Offset)
 			-- upvalues: p1 (copy)
 			p1.observeScrollOffset({ kind = Kind, offset = Offset })
 		end
 		
-		local _ = function(ViewportState): number --[[ Line: 122 | Named "getLogicalScrollOffset" ]]
+		local _ = function(ViewportState): number
 			-- upvalues: CanvasOriginOffset (ref), GetCurrentFunction (copy)
 			return (math.clamp(ViewportState.scrollOffset - CanvasOriginOffset, 0, (math.max(0, GetCurrentFunction().contentLength - ViewportState.viewportLength))))
 		end
 		
-		local _ = function(p2) --[[ Line: 130 | Named "notifyLogicalScrollOffset" ]]
+		local _ = function(p2)
 			-- upvalues: Configuration (ref), ClampedValue1 (ref)
 			local OnScrollOffsetChangedFunction: (any) -> () = Configuration.onScrollOffsetChanged
 			
@@ -95,7 +95,7 @@ return {
 			end
 		end
 		
-		local _ = function(Value, Enabled) --[[ Line: 138 | Named "setCanvasOriginOffset" ]]
+		local _ = function(Value, Enabled)
 			-- upvalues: CanvasOriginOffset (ref), p1 (copy)
 			if CanvasOriginOffset == Value then return end
 			CanvasOriginOffset = Value
@@ -106,7 +106,7 @@ return {
 			end
 		end
 		
-		local _ = function(ViewportState) --[[ Line: 149 | Named "reportHostWrite" ]]
+		local _ = function(ViewportState)
 			-- upvalues: CanvasOriginOffset (ref), GetCurrentFunction (copy), ViewRecyclerModule (upval), p1 (copy), ScrollOffset (ref), ClampedValue (ref)
 			local ClampedValue1 = math.clamp(ViewportState.scrollOffset - CanvasOriginOffset, 0, (math.max(0, GetCurrentFunction().contentLength - ViewportState.viewportLength)))
 			p1.observeScrollOffset({
@@ -117,7 +117,7 @@ return {
 			ClampedValue = ClampedValue1
 		end
 		
-		local function publishCanvas(): number --[[ Line: 159 ]]
+		local function publishCanvas(): number
 			-- upvalues: GetCurrentFunction (copy), CanvasOriginOffset (ref), p1 (copy), ScrollFrame (ref), Axis1 (ref), Configuration (ref), v2 (ref), Disconnected (ref), ScrollHostLifecyclePhaseModule (upval), AxisMapModule (upval), Count1 (ref), getViewportState (copy), setHostScrollOffset (copy), ViewRecyclerModule (upval), ScrollOffset (ref), ClampedValue (ref)
 			local Largest = math.max(0, GetCurrentFunction().contentLength + CanvasOriginOffset)
 			local _Instance = p1.getInstance()
@@ -170,7 +170,7 @@ return {
 			return Largest
 		end
 		
-		local function applyProgrammaticScrollOffset(ScrollOffset1) --[[ Line: 203 ]]
+		local function applyProgrammaticScrollOffset(ScrollOffset1)
 			-- upvalues: Disconnected (ref), ScrollHostLifecyclePhaseModule (upval), Count1 (ref), setHostScrollOffset (copy), p1 (copy), getViewportState (copy), CanvasOriginOffset (ref), GetCurrentFunction (copy), ViewRecyclerModule (upval), ScrollOffset (ref), ClampedValue (ref)
 			if Disconnected ~= ScrollHostLifecyclePhaseModule.Synchronized then return end
 			assert(ScrollOffset1 == ScrollOffset1 and (ScrollOffset1 ~= 1e999 and ScrollOffset1 ~= -1e999), "ScrollHost: invalid offset")
@@ -190,7 +190,7 @@ return {
 			Count1 -= 1
 		end
 		
-		local _ = function() --[[ Line: 220 | Named "stopIdleObservation" ]]
+		local _ = function()
 			-- upvalues: HeartbeatConnection (ref), Count2 (ref)
 			if HeartbeatConnection ~= nil then
 				HeartbeatConnection:Disconnect()
@@ -199,12 +199,12 @@ return {
 			Count2 = 0
 		end
 		
-		local _ = function(ScrollingFrame) --[[ Line: 228 | Named "getScrollVelocity" ]]
+		local _ = function(ScrollingFrame)
 			-- upvalues: AxisMapModule (upval), Configuration (ref)
 			return AxisMapModule.mainOf(ScrollingFrame:GetScrollVelocity(), Configuration.axis)
 		end
 		
-		local _ = function() --[[ Line: 232 | Named "isHostScrolling" ]]
+		local _ = function()
 			-- upvalues: Tbl (copy), p1 (copy), AxisMapModule (upval), Configuration (ref), Flag (ref)
 			if next(Tbl) == nil then
 				local _Instance = p1.getInstance()
@@ -215,14 +215,14 @@ return {
 			end
 		end
 		
-		local _ = function(): boolean --[[ Line: 246 | Named "isAtLeadingScrollBoundary" ]]
+		local _ = function(): boolean
 			-- upvalues: p1 (copy), AxisMapModule (upval), Configuration (ref)
 			local _Instance = p1.getInstance()
 			
 			return _Instance ~= nil and AxisMapModule.mainOf(_Instance.CanvasPosition, Configuration.axis) <= 0.5
 		end
 		
-		local function settleCanvasOriginOffset(ScrollOffset) --[[ Line: 251 ]]
+		local function settleCanvasOriginOffset(ScrollOffset)
 			-- upvalues: CanvasOriginOffset (ref), HeartbeatConnection (ref), Count2 (ref), getViewportState (copy), GetCurrentFunction (copy), p1 (copy), publishCanvas (copy), applyProgrammaticScrollOffset (copy), Configuration (ref), ClampedValue1 (ref)
 			if CanvasOriginOffset == 0 then
 				if HeartbeatConnection ~= nil then
@@ -262,10 +262,10 @@ return {
 			end
 		end
 		
-		local _ = function() --[[ Line: 268 | Named "observeUntilIdle" ]]
+		local _ = function()
 			-- upvalues: HeartbeatConnection (ref), CanvasOriginOffset (ref), RunService (upval), Flag (ref), Count2 (ref), Tbl (copy), p1 (copy), AxisMapModule (upval), Configuration (ref), settleCanvasOriginOffset (copy)
 			if HeartbeatConnection == nil and CanvasOriginOffset ~= 0 then
-				HeartbeatConnection = RunService.Heartbeat:Connect(function() --[[ Line: 272 ]]
+				HeartbeatConnection = RunService.Heartbeat:Connect(function()
 					-- upvalues: Flag (upval), Count2 (upval), Tbl (upval), p1 (upval), AxisMapModule (upval), Configuration (upval), settleCanvasOriginOffset (upval)
 					local v3: boolean = Flag
 					Flag = false
@@ -298,7 +298,7 @@ return {
 			end
 		end
 		
-		local function disconnectHost() --[[ Line: 290 ]]
+		local function disconnectHost()
 			-- upvalues: HeartbeatConnection (ref), Count2 (ref), List (copy), Tbl (copy), v1 (ref), ScrollFrame (ref), Axis1 (ref), v2 (ref), ScrollOffset (ref), ClampedValue (ref), ClampedValue1 (ref), Flag (ref), CanvasOriginOffset (ref), p1 (copy)
 			if HeartbeatConnection ~= nil then
 				HeartbeatConnection:Disconnect()
@@ -329,7 +329,7 @@ return {
 			end
 		end
 		
-		local function synchronizeViewport(p2) --[[ Line: 308 ]]
+		local function synchronizeViewport(p2)
 			-- upvalues: Disconnected (ref), ScrollHostLifecyclePhaseModule (upval), getViewportState (copy), p1 (copy), CanvasOriginOffset (ref), GetCurrentFunction (copy), ViewRecyclerModule (upval), ScrollOffset (ref), ClampedValue (ref), Configuration (ref)
 			if Disconnected ~= ScrollHostLifecyclePhaseModule.Synchronized then return end
 			local ViewportState = getViewportState(p2)
@@ -355,7 +355,7 @@ return {
 			end
 		end
 		
-		local function synchronizeScrollOffset(p2, Enabled) --[[ Line: 328 ]]
+		local function synchronizeScrollOffset(p2, Enabled)
 			-- upvalues: Disconnected (ref), ScrollHostLifecyclePhaseModule (upval), getViewportState (copy), CanvasOriginOffset (ref), GetCurrentFunction (copy), Count1 (ref), ScrollOffset (ref), ClampedValue (ref), ViewRecyclerModule (upval), p1 (copy), Flag (ref), Count2 (ref), settleCanvasOriginOffset (copy), Configuration (ref), ClampedValue1 (ref)
 			if Disconnected ~= ScrollHostLifecyclePhaseModule.Synchronized then return end
 			local ViewportState = getViewportState(p2)
@@ -396,39 +396,39 @@ return {
 			end
 		end
 		
-		local _ = function(Input): boolean --[[ Line: 365 | Named "isPointerInput" ]]
+		local _ = function(Input): boolean
 			return Input.UserInputType == Enum.UserInputType.Touch or Input.UserInputType == Enum.UserInputType.MouseButton1
 		end
 		
-		local function connectHost(Object) --[[ Line: 369 ]]
+		local function connectHost(Object)
 			-- upvalues: v1 (ref), disconnectHost (copy), List (copy), Configuration (ref), p1 (copy), publishCanvas (copy), synchronizeViewport (copy), synchronizeScrollOffset (copy), Tbl (copy), UserInputService (upval)
 			if v1 == Object then return end
 			disconnectHost()
 			v1 = Object
 			
 			if Object ~= nil and typeof(Object) == "Instance" then
-				table.insert(List, Object:GetPropertyChangedSignal("AbsoluteWindowSize"):Connect(function() --[[ Line: 380 ]]
+				table.insert(List, Object:GetPropertyChangedSignal("AbsoluteWindowSize"):Connect(function()
 					-- upvalues: Configuration (upval), p1 (upval), publishCanvas (upval), synchronizeViewport (upval), Object (copy)
 					Configuration = p1.getConfiguration()
 					publishCanvas()
 					synchronizeViewport(Object)
 				end))
-				table.insert(List, Object:GetPropertyChangedSignal("CanvasPosition"):Connect(function() --[[ Line: 388 ]]
+				table.insert(List, Object:GetPropertyChangedSignal("CanvasPosition"):Connect(function()
 					-- upvalues: Configuration (upval), p1 (upval), synchronizeScrollOffset (upval), Object (copy)
 					Configuration = p1.getConfiguration()
 					synchronizeScrollOffset(Object, true)
 				end))
-				table.insert(List, Object.InputBegan:Connect(function(Input) --[[ Line: 395 ]]
+				table.insert(List, Object.InputBegan:Connect(function(Input)
 					-- upvalues: Tbl (upval)
 					if Input.UserInputType == Enum.UserInputType.Touch or Input.UserInputType == Enum.UserInputType.MouseButton1 then
 						Tbl[Input] = true
 					end
 				end))
-				table.insert(List, Object.InputEnded:Connect(function(Input) --[[ Line: 403 ]]
+				table.insert(List, Object.InputEnded:Connect(function(Input)
 					-- upvalues: Tbl (upval)
 					Tbl[Input] = nil
 				end))
-				table.insert(List, UserInputService.InputEnded:Connect(function(Input) --[[ Line: 409 ]]
+				table.insert(List, UserInputService.InputEnded:Connect(function(Input)
 					-- upvalues: Tbl (upval)
 					Tbl[Input] = nil
 				end))
@@ -438,7 +438,7 @@ return {
 		end
 		
 		return {
-			connect = function() --[[ Line: 443 ]]
+			connect = function()
 				-- upvalues: Disconnected (ref), ScrollHostLifecyclePhaseModule (upval), Count (ref), Configuration (ref), p1 (copy), Axis (ref), connectHost (copy), publishCanvas (copy), synchronizeViewport (copy), synchronizeScrollOffset (copy), disconnectHost (copy)
 				assert(Disconnected == ScrollHostLifecyclePhaseModule.Disconnected, "ScrollHost: already connected")
 				Count += 1
@@ -447,7 +447,7 @@ return {
 				Axis = Configuration.axis
 				Disconnected = ScrollHostLifecyclePhaseModule.Priming
 				connectHost(p1.getInstance())
-				local Success, Result = pcall(function() --[[ Line: 451 ]]
+				local Success, Result = pcall(function()
 					-- upvalues: Disconnected (upval), ScrollHostLifecyclePhaseModule (upval), publishCanvas (upval), p1 (upval), synchronizeViewport (upval), synchronizeScrollOffset (upval)
 					Disconnected = ScrollHostLifecyclePhaseModule.Synchronized
 					publishCanvas()
@@ -466,7 +466,7 @@ return {
 				end
 				local Flag = false
 				
-				return function() --[[ Line: 466 ]]
+				return function()
 					-- upvalues: Flag (ref), Disconnected (upval), ScrollHostLifecyclePhaseModule (upval), Count (upval), Count1 (copy), disconnectHost (upval)
 					if Flag then return end
 					Flag = true
@@ -477,7 +477,7 @@ return {
 					end
 				end
 			end,
-			scrollingFrameChanged = function() --[[ Line: 415 ]]
+			scrollingFrameChanged = function()
 				-- upvalues: Disconnected (ref), ScrollHostLifecyclePhaseModule (upval), Configuration (ref), p1 (copy), connectHost (copy), publishCanvas (copy), synchronizeViewport (copy), synchronizeScrollOffset (copy)
 				if Disconnected == ScrollHostLifecyclePhaseModule.Disconnected then return end
 				Configuration = p1.getConfiguration()
@@ -490,7 +490,7 @@ return {
 					synchronizeScrollOffset(_Instance)
 				end
 			end,
-			configurationChanged = function() --[[ Line: 429 ]]
+			configurationChanged = function()
 				-- upvalues: Configuration (ref), p1 (copy), Axis (ref), Disconnected (ref), ScrollHostLifecyclePhaseModule (upval), publishCanvas (copy), synchronizeViewport (copy), synchronizeScrollOffset (copy)
 				Configuration = p1.getConfiguration()
 				local Configuration1 = Configuration
@@ -507,7 +507,7 @@ return {
 					end
 				end
 			end,
-			applyRecord = function(p2, Callback: () -> ()) --[[ Line: 478 ]]
+			applyRecord = function(p2, Callback: () -> ())
 				-- upvalues: Disconnected (ref), ScrollHostLifecyclePhaseModule (upval), Configuration (ref), p1 (copy), CanvasOriginOffset (ref), Tbl (copy), AxisMapModule (upval), Flag (ref), publishCanvas (copy), Count2 (ref), HeartbeatConnection (ref), RunService (upval), settleCanvasOriginOffset (copy), ClampedValue (ref), ClampedValue1 (ref), applyProgrammaticScrollOffset (copy)
 				if Disconnected == ScrollHostLifecyclePhaseModule.Disconnected then
 					Callback()
@@ -553,7 +553,7 @@ return {
 					Count2 = 0
 					
 					if HeartbeatConnection == nil and CanvasOriginOffset ~= 0 then
-						HeartbeatConnection = RunService.Heartbeat:Connect(function() --[[ Line: 272 ]]
+						HeartbeatConnection = RunService.Heartbeat:Connect(function()
 							-- upvalues: Flag (upval), Count2 (upval), Tbl (upval), p1 (upval), AxisMapModule (upval), Configuration (upval), settleCanvasOriginOffset (upval)
 							local v3: boolean = Flag
 							Flag = false
@@ -619,11 +619,11 @@ return {
 					Configuration.onEndReached()
 				end
 			end,
-			getCanvasOriginOffset = function() --[[ Line: 541 ]]
+			getCanvasOriginOffset = function()
 				-- upvalues: CanvasOriginOffset (ref)
 				return CanvasOriginOffset
 			end,
-			isReady = function(): boolean --[[ Line: 544 ]]
+			isReady = function(): boolean
 				-- upvalues: Configuration (ref), p1 (copy), getViewportState (copy)
 				Configuration = p1.getConfiguration()
 				

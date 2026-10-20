@@ -21,19 +21,19 @@ local FlagsModule = require(Foundation.Utility.Flags)
 local UseAccordionItemVariantsModule = require(script.Parent.Parent.useAccordionItemVariants)
 local config = { hasDivider = true, isExpanded = false }
 
-local function _(p1) --[[ Line: 66 | Named "getCommonEaseConfig" ]]
+local function _(p1)
 	return {
 		easingStyle = p1.Ease.StandardOut,
 		duration = p1.Time.Time_300
 	}
 end
 
-return ReactModule.memo(ReactModule.forwardRef(function(p1, Ref) --[[ Line: 73 | Named "AccordionItem" ]]
+return ReactModule.memo(ReactModule.forwardRef(function(p1, Ref)
 	-- upvalues: WithDefaultsModule (copy), config (copy), UseTokensModule (copy), UsePreferencesModule (copy), ReactModule (copy), ReactOtterModule (copy), UseAccordionModule (copy), UseAccordionItemVariantsModule (copy), InputPlacementModule (copy), TextModule (copy), ViewModule (copy), WithCommonPropsModule (copy), FlagsModule (copy), IconModule (copy), Icon (copy), DividerModule (copy)
 	local WithDefaultsModuleResult = WithDefaultsModule(p1, config)
 	local UseTokensModuleResult = UseTokensModule()
 	local ReducedMotion = UsePreferencesModule().reducedMotion
-	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 78 ]]
+	local UseMemoResult = ReactModule.useMemo(function()
 		-- upvalues: UseTokensModuleResult (copy)
 		return {
 			easingStyle = UseTokensModuleResult.Ease.StandardOut,
@@ -43,7 +43,7 @@ return ReactModule.memo(ReactModule.forwardRef(function(p1, Ref) --[[ Line: 73 |
 	local UseStateResult, UseStateResult2 = ReactModule.useState(WithDefaultsModuleResult.isExpanded)
 	local UseRefResult = ReactModule.useRef(false)
 	local UseAnimatedBindingResult, UseAnimatedBindingResult2 = ReactOtterModule.useAnimatedBinding(0)
-	local UseAnimatedBindingResult1, UseAnimatedBindingResult2_1 = ReactOtterModule.useAnimatedBinding(0, function() --[[ Line: 86 ]]
+	local UseAnimatedBindingResult1, UseAnimatedBindingResult2_1 = ReactOtterModule.useAnimatedBinding(0, function()
 		-- upvalues: UseRefResult (copy), UseStateResult2 (copy)
 		if UseRefResult.current then
 			UseStateResult2(false)
@@ -51,7 +51,7 @@ return ReactModule.memo(ReactModule.forwardRef(function(p1, Ref) --[[ Line: 73 |
 		end
 	end)
 	local UseRefResult1 = ReactModule.useRef(nil)
-	local UseResult = ReactModule.useCallback(function() --[[ Line: 93 ]]
+	local UseResult = ReactModule.useCallback(function()
 		-- upvalues: ReducedMotion (copy), UseAnimatedBindingResult2_1 (copy), ReactOtterModule (upval), UseAnimatedBindingResult2 (copy), UseStateResult2 (copy), UseRefResult (copy), UseMemoResult (copy)
 		if ReducedMotion then
 			UseAnimatedBindingResult2_1((ReactOtterModule.instant(0)))
@@ -66,7 +66,7 @@ return ReactModule.memo(ReactModule.forwardRef(function(p1, Ref) --[[ Line: 73 |
 			UseAnimatedBindingResult2(ReactOtterModule.ease(0, UseMemoResult))
 		end
 	end, { ReducedMotion, UseMemoResult })
-	local UseResult1 = ReactModule.useCallback(function() --[[ Line: 107 ]]
+	local UseResult1 = ReactModule.useCallback(function()
 		-- upvalues: UseRefResult1 (copy), UseStateResult (copy), ReducedMotion (copy), UseAnimatedBindingResult2_1 (copy), ReactOtterModule (upval), UseMemoResult (copy)
 		if UseRefResult1 and UseRefResult1.current and UseStateResult then
 			if ReducedMotion then
@@ -82,7 +82,7 @@ return ReactModule.memo(ReactModule.forwardRef(function(p1, Ref) --[[ Line: 73 |
 		ReducedMotion,
 		UseMemoResult
 	})
-	ReactModule.useEffect(function() --[[ Line: 117 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UseStateResult (copy), WithDefaultsModuleResult (copy), UseResult (copy), UseStateResult2 (copy)
 		if UseStateResult and not WithDefaultsModuleResult.isExpanded then
 			UseResult()
@@ -92,7 +92,7 @@ return ReactModule.memo(ReactModule.forwardRef(function(p1, Ref) --[[ Line: 73 |
 			UseStateResult2(WithDefaultsModuleResult.isExpanded)
 		end
 	end, { WithDefaultsModuleResult.isExpanded })
-	ReactModule.useEffect(function() --[[ Line: 125 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UseStateResult (copy), ReducedMotion (copy), UseAnimatedBindingResult2 (copy), ReactOtterModule (upval), UseMemoResult (copy)
 		if UseStateResult then
 			if ReducedMotion then
@@ -110,7 +110,7 @@ return ReactModule.memo(ReactModule.forwardRef(function(p1, Ref) --[[ Line: 73 |
 	local IsChevronPositionMatch = ChevronPosition == InputPlacementModule.Start
 	local LayoutOrder: number = if IsChevronPositionMatch then 3 else 1
 	local LayoutOrder1: number = if IsChevronPositionMatch then 1 else 3
-	local UseResult2 = ReactModule.useCallback(function() --[[ Line: 145 ]]
+	local UseResult2 = ReactModule.useCallback(function()
 		-- upvalues: UseStateResult (copy), UseResult (copy), UseStateResult2 (copy)
 		if UseStateResult then
 			UseResult()
@@ -199,7 +199,7 @@ return ReactModule.memo(ReactModule.forwardRef(function(p1, Ref) --[[ Line: 73 |
 			LayoutOrder = 2,
 			ClipsDescendants = true,
 			testId = `{WithDefaultsModuleResult.testId}--content`,
-			Size = if UseAnimatedBindingResult1 then UseAnimatedBindingResult1:map(function(YOffset): UDim2 --[[ Line: 253 ]]
+			Size = if UseAnimatedBindingResult1 then UseAnimatedBindingResult1:map(function(YOffset): UDim2
 				return UDim2.new(1, 0, 0, YOffset)
 			end) else nil
 		}, {

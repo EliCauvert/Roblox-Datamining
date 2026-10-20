@@ -1,9 +1,9 @@
 ﻿local Proxy = newproxy(false)
 
-return function(Callback) --[[ Line: 24 ]]
+return function(Callback)
 	-- upvalues: Proxy (copy)
 	return {
-		setTimeout = function(Callback1, p1: number, ...) --[[ Line: 25 ]]
+		setTimeout = function(Callback1, p1: number, ...)
 			-- upvalues: Proxy (upval), Callback (copy)
 			local list = { ... }
 			local config = { [Proxy] = 1 }
@@ -11,7 +11,7 @@ return function(Callback) --[[ Line: 24 ]]
 			if p1 == nil then
 				p1 = 0
 			end
-			Callback(p1 / 1000, function() --[[ Line: 38 ]]
+			Callback(p1 / 1000, function()
 				-- upvalues: config (copy), Proxy (upval), Callback1 (copy), list (copy)
 				if config[Proxy] == 1 then
 					Callback1(unpack(list))
@@ -21,7 +21,7 @@ return function(Callback) --[[ Line: 24 ]]
 			
 			return config
 		end,
-		clearTimeout = function(p1) --[[ Line: 48 ]]
+		clearTimeout = function(p1)
 			-- upvalues: Proxy (upval)
 			if p1 == nil then return end
 			if p1[Proxy] == 1 then

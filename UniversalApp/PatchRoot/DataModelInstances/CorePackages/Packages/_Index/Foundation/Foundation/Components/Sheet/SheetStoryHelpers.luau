@@ -18,7 +18,7 @@ local MatrixLabelFunction = MatrixGridModule.matrixLabel
 local list = { "Side", "Center" }
 local _UDim = UDim.new(0, 80)
 
-local function SlotPlaceholder(Frame) --[[ Line: 147 ]]
+local function SlotPlaceholder(Frame)
 	-- upvalues: ReactModule (copy), ViewModule (copy), TextModule (copy)
 	local Height = Frame.height
 	
@@ -35,7 +35,7 @@ local function SlotPlaceholder(Frame) --[[ Line: 147 ]]
 	})
 end
 
-local function ContentList(Frame) --[[ Line: 171 ]]
+local function ContentList(Frame)
 	-- upvalues: ReactModule (copy), TextModule (copy), ViewModule (copy)
 	local Elements = {}
 	
@@ -53,7 +53,7 @@ local function ContentList(Frame) --[[ Line: 171 ]]
 	}, Elements)
 end
 
-local function makeActionButtons(ActionCount: number) --[[ Line: 191 ]]
+local function makeActionButtons(ActionCount: number)
 	-- upvalues: ButtonVariantModule (copy)
 	local list = { "Primary", "Secondary", "Tertiary" }
 	local list1 = {
@@ -67,18 +67,18 @@ local function makeActionButtons(ActionCount: number) --[[ Line: 191 ]]
 		t[i] = {
 			text = list[i],
 			variant = list1[i],
-			onActivated = function() --[[ Line: 204 ]] end
+			onActivated = function() end
 		}
 	end
 	return t
 end
 
-local function _(p1) --[[ Line: 210 | Named "resolveFullBleedHeight" ]]
+local function _(p1)
 	-- upvalues: _UDim (copy)
 	return if p1.fullBleedHeight or p1.fullBleedAspectRatio or p1.fullBleedUnboundedHeight then p1.fullBleedHeight else _UDim
 end
 
-local function makeSheetChildren(ChildrenOptions) --[[ Line: 217 ]]
+local function makeSheetChildren(ChildrenOptions)
 	-- upvalues: ReactModule (copy), ContentList (copy), TextModule (copy), SlotPlaceholder (copy), SheetModule (copy), _UDim (copy), ButtonGroupModule (copy), makeActionButtons (copy), FillBehaviorModule (copy), InputSizeModule (copy)
 	local ChildrenOptions1 = ChildrenOptions or {}
 	local NoShowHeader = ChildrenOptions1.showHeader == nil or ChildrenOptions1.showHeader
@@ -159,7 +159,7 @@ local function makeSheetChildren(ChildrenOptions) --[[ Line: 217 ]]
 	}
 end
 
-local function LabeledSheetTrigger(Frame) --[[ Line: 340 ]]
+local function LabeledSheetTrigger(Frame)
 	-- upvalues: ReactModule (copy), ViewModule (copy), TextModule (copy), ButtonModule (copy), ButtonVariantModule (copy), SheetModule (copy), makeSheetChildren (copy)
 	local UseStateResult, UseStateResult2 = ReactModule.useState(false)
 	
@@ -175,7 +175,7 @@ local function LabeledSheetTrigger(Frame) --[[ Line: 340 ]]
 		OpenButton = ReactModule.createElement(ButtonModule, {
 			LayoutOrder = 2,
 			text = if UseStateResult then "Close" else "Open",
-			onActivated = function() --[[ Line: 356 ]]
+			onActivated = function()
 				-- upvalues: UseStateResult2 (copy), UseStateResult (copy)
 				UseStateResult2(not UseStateResult)
 			end,
@@ -188,7 +188,7 @@ local function LabeledSheetTrigger(Frame) --[[ Line: 340 ]]
 			centerSheetHeight = Frame.centerSheetHeight,
 			snapPoints = Frame.snapPoints,
 			defaultSnapPointIndex = Frame.defaultSnapPointIndex,
-			onClose = function() --[[ Line: 370 ]]
+			onClose = function()
 				-- upvalues: UseStateResult2 (copy)
 				UseStateResult2(false)
 			end
@@ -215,22 +215,22 @@ return {
 	SIDE_SIZE_ORDER = { DialogSizeModule.Medium, DialogSizeModule.Large },
 	DEFAULT_SIZE = DialogSizeModule.Medium,
 	VARIANT_ORDER = list,
-	VARIANT_HEADERS = DashModule.map(list, function(p1) --[[ Line: 82 ]]
+	VARIANT_HEADERS = DashModule.map(list, function(p1)
 		return p1
 	end),
-	prefersCenter = function(p1): boolean --[[ Line: 94 ]]
+	prefersCenter = function(p1): boolean
 		return p1 == "Center"
 	end,
-	centerHeightFor = function(p1, p2) --[[ Line: 98 ]]
+	centerHeightFor = function(p1, p2)
 		return if p1 == "Center" then p2 else nil
 	end,
-	columnLabels = function(p1) --[[ Line: 102 ]]
+	columnLabels = function(p1)
 		-- upvalues: DashModule (copy)
-		return DashModule.map(p1, function(p2) --[[ Line: 103 ]]
+		return DashModule.map(p1, function(p2)
 			return p2.label
 		end)
 	end,
-	SheetMatrix = function(p1) --[[ Line: 108 ]]
+	SheetMatrix = function(p1)
 		-- upvalues: ReactModule (copy), MatrixGrid (copy), DashModule (copy)
 		return ReactModule.createElement(MatrixGrid, DashModule.join({
 			cellAlign = "left",
@@ -238,14 +238,14 @@ return {
 			cellColumnWidth = 120
 		}, p1))
 	end,
-	variantRows = function(Callback) --[[ Line: 119 ]]
+	variantRows = function(Callback)
 		-- upvalues: DashModule (copy), list (copy), MatrixLabelFunction (copy)
-		return DashModule.map(list, function(p1) --[[ Line: 120 ]]
+		return DashModule.map(list, function(p1)
 			-- upvalues: MatrixLabelFunction (upval), Callback (copy)
 			return { label = MatrixLabelFunction(p1), cells = Callback(p1) }
 		end)
 	end,
-	variantTrigger = function(p1, p2) --[[ Line: 378 ]]
+	variantTrigger = function(p1, p2)
 		-- upvalues: DashModule (copy), ReactModule (copy), LabeledSheetTrigger (copy)
 		local JoinResult = DashModule.join(p2 or {})
 		JoinResult.preferCenterSheet = p1 == "Center"
@@ -255,7 +255,7 @@ return {
 		
 		return ReactModule.createElement(LabeledSheetTrigger, JoinResult)
 	end,
-	Section = function(Frame) --[[ Line: 301 ]]
+	Section = function(Frame)
 		-- upvalues: ReactModule (copy), ViewModule (copy), TextModule (copy)
 		return ReactModule.createElement(ViewModule, {
 			tag = "col gap-medium size-full-0 auto-y",
@@ -286,7 +286,7 @@ return {
 	LabeledSheetTrigger = LabeledSheetTrigger,
 	makeSheetChildren = makeSheetChildren,
 	makeActionButtons = makeActionButtons,
-	placeholderText = function(Text, LayoutOrder) --[[ Line: 132 ]]
+	placeholderText = function(Text, LayoutOrder)
 		-- upvalues: ReactModule (copy), TextModule (copy)
 		return ReactModule.createElement(TextModule, {
 			tag = "auto-xy text-body-medium text-wrap text-align-x-left content-default",

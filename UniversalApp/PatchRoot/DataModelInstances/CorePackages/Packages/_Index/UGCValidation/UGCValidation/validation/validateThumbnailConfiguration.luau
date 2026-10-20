@@ -4,7 +4,7 @@ local Parent = script.Parent.Parent
 local _ = require(Parent.util.Types)
 local AnalyticsModule = require(Parent.Analytics)
 
-return function(Object, Object1, p1, MeshScale, p2) --[[ Line: 14 | Named "validateThumbnailConfiguration" ]]
+return function(Object, Object1, p1, MeshScale, p2)
 	-- upvalues: AnalyticsModule (copy), UGCValidationAddThumbnailFrustumCheckingv2 (copy), UGCValidationService (copy)
 	local ThumbnailConfiguration = Object:FindFirstChild("ThumbnailConfiguration")
 	

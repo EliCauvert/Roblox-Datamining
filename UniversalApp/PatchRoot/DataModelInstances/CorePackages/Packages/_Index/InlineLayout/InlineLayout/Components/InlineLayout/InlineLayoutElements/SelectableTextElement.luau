@@ -6,12 +6,12 @@ local BaseTextElementModule = require(script:FindFirstAncestor("InlineLayoutElem
 local GetFontFaceModule = require(Parent.Utils.getFontFace)
 local View = require(Parent1.Foundation).View
 
-function mapProps(p1) --[[ Line: 23 ]]
+function mapProps(p1)
 	-- upvalues: DashModule (copy)
 	return DashModule.omit(p1, { "id", "EngineTags" })
 end
 
-local function TextElementWrapper(Frame) --[[ Line: 27 ]]
+local function TextElementWrapper(Frame)
 	-- upvalues: GetFontFaceModule (copy), ReactModule (copy), View (copy), DashModule (copy)
 	local TextStyle = if typeof(Frame.textStyle) == "table" then Frame.textStyle else {}
 	
@@ -40,7 +40,7 @@ local function TextElementWrapper(Frame) --[[ Line: 27 ]]
 end
 
 return {
-	new = function(TextElementWrapper1) --[[ Line: 60 ]]
+	new = function(TextElementWrapper1)
 		-- upvalues: BaseTextElementModule (copy), TextElementWrapper (copy), DashModule (copy)
 		return BaseTextElementModule.new(TextElementWrapper, DashModule.omit(TextElementWrapper1, { "EngineTags" }), mapProps)
 	end

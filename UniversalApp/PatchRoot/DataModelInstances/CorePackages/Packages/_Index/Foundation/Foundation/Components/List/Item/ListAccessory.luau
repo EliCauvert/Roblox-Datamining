@@ -16,10 +16,10 @@ local AvatarModule = require(Foundation.Components.Avatar)
 local UseListAccessoryVariantsModule = require(script.Parent.useListAccessoryVariants)
 local _ = require(Foundation.Enums.InputSize)
 
-return ReactModule.memo(function(Frame) --[[ Line: 45 | Named "ListAccessory" ]]
+return ReactModule.memo(function(Frame)
 	-- upvalues: UseTokensModule (copy), ReactModule (copy), AccessoryTypeModule (copy), IsBuilderOrMigratedIconFunction (copy), UseListAccessoryVariantsModule (copy), AvatarModule (copy), IconModule (copy), IsMigratedFunction (copy), Uiblox (copy), ImageModule (copy), ViewModule (copy), StateLayerAffordanceModule (copy)
 	local UseTokensModuleResult = UseTokensModule()
-	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 47 ]]
+	local UseMemoResult = ReactModule.useMemo(function()
 		-- upvalues: Frame (copy)
 		return if type(Frame.config) == "string" then { iconName = Frame.config } else Frame.config
 	end, { Frame.config })

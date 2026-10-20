@@ -1,7 +1,7 @@
 ﻿local LoggerModule = require(script.Parent.Parent.Parent.Logger)
 local PrintSinkModule = {}
 
-function PrintSinkModule.new(MaxLevel) --[[ Line: 5 ]]
+function PrintSinkModule.new(MaxLevel)
 	-- upvalues: PrintSinkModule (copy)
 	local config = { maxLevel = MaxLevel }
 	setmetatable(config, PrintSinkModule)
@@ -9,7 +9,7 @@ function PrintSinkModule.new(MaxLevel) --[[ Line: 5 ]]
 	return config
 end
 
-function PrintSinkModule:log(p1, p2) --[[ Line: 14 ]]
+function PrintSinkModule:log(p1, p2)
 	-- upvalues: LoggerModule (copy)
 	if p2.level == LoggerModule.Levels.Error then
 		error(p1, 5)

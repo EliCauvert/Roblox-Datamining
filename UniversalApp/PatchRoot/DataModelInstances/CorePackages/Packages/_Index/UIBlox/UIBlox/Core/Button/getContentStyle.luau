@@ -1,6 +1,6 @@
 ﻿local ControlStateModule = require(script.Parent.Parent.Control.Enum.ControlState)
 
-return function(p1, Disabled, p2) --[[ Line: 6 ]]
+return function(p1, Disabled, p2)
 	-- upvalues: ControlStateModule (copy)
 	local v1 = p1[Disabled] or p1[ControlStateModule.Default]
 	local config = {

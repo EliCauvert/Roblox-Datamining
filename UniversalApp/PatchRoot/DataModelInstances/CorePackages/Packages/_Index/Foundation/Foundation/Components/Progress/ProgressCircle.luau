@@ -18,26 +18,26 @@ local WithDefaultsModule = require(Foundation.Utility.withDefaults)
 local _ = require(Foundation.Enums.ProgressShape)
 local config = { size = require(Foundation.Enums.ProgressSize).Medium }
 
-local function _(p1: number, HorizontalAlignment): number --[[ Line: 60 | Named "getRotationFromProgress" ]]
+local function _(p1: number, HorizontalAlignment): number
 	local MinValue: number = if HorizontalAlignment == Enum.HorizontalAlignment.Left then 180 else 0
 	local MaxValue: number = if HorizontalAlignment == Enum.HorizontalAlignment.Left then 360 else 180
 	
 	return if p1 == nil then 0 else math.clamp(p1 * 360, MinValue, MaxValue)
 end
 
-local function getLabelFromProgress(p1: number): string --[[ Line: 66 ]]
+local function getLabelFromProgress(p1: number): string
 	return if p1 == nil then "0%" else `{math.floor(p1 * 100)}%`
 end
 
-local function getCapAngleFromProgress(p1): number --[[ Line: 70 ]]
+local function getCapAngleFromProgress(p1): number
 	return math.clamp(p1 or 0, 0, 1) * 360
 end
 
-local function hasVisibleArc(p1): boolean --[[ Line: 74 ]]
+local function hasVisibleArc(p1): boolean
 	return (p1 or 0) > 0
 end
 
-local function ArcCap(p1) --[[ Line: 84 ]]
+local function ArcCap(p1)
 	-- upvalues: UseTokensModule (copy), ReactModule (copy), ViewModule (copy)
 	return ReactModule.createElement(ViewModule, {
 		ZIndex = 2,
@@ -56,7 +56,7 @@ local function ArcCap(p1) --[[ Line: 84 ]]
 	})
 end
 
-local function ArcCaps(p1) --[[ Line: 108 ]]
+local function ArcCaps(p1)
 	-- upvalues: MapBindableModule (copy), hasVisibleArc (copy), ReactModule (copy), ArcCap (copy), getCapAngleFromProgress (copy)
 	local MapBindableModuleResult = MapBindableModule(p1.progress, hasVisibleArc)
 	
@@ -74,7 +74,7 @@ local function ArcCaps(p1) --[[ Line: 108 ]]
 	})
 end
 
-local function ProgressGradient(p1) --[[ Line: 128 ]]
+local function ProgressGradient(p1)
 	-- upvalues: UseTokensModule (copy), UsePreferencesModule (copy), ReactModule (copy), MapBindableModule (copy)
 	local Side = p1.side
 	local IsIndeterminate = p1.isIndeterminate
@@ -82,7 +82,7 @@ local function ProgressGradient(p1) --[[ Line: 128 ]]
 	local Pulse = p1.pulse
 	local UseTokensModuleResult = UseTokensModule()
 	local UsePreferencesModuleResult = UsePreferencesModule()
-	local UseMemoResult = ReactModule.useMemo(function(): NumberSequence --[[ Line: 142 ]]
+	local UseMemoResult = ReactModule.useMemo(function(): NumberSequence
 		-- upvalues: UseTokensModuleResult (copy), IsIndeterminate (copy)
 		local Transparency = UseTokensModuleResult.Color.Content.Emphasis.Transparency
 		local Transparency1 = if IsIndeterminate then 1 else UseTokensModuleResult.Color.Shift.Shift_200.Transparency
@@ -94,7 +94,7 @@ local function ProgressGradient(p1) --[[ Line: 128 ]]
 			NumberSequenceKeypoint.new(1, Transparency1)
 		})
 	end, { UseTokensModuleResult, IsIndeterminate })
-	local UseMemoResult1 = ReactModule.useMemo(function(): ColorSequence --[[ Line: 154 ]]
+	local UseMemoResult1 = ReactModule.useMemo(function(): ColorSequence
 		-- upvalues: UseTokensModuleResult (copy)
 		return ColorSequence.new({
 			ColorSequenceKeypoint.new(0, UseTokensModuleResult.Color.Content.Emphasis.Color3),
@@ -105,11 +105,11 @@ local function ProgressGradient(p1) --[[ Line: 128 ]]
 	end, { UseTokensModuleResult })
 	
 	return if IsIndeterminate and UsePreferencesModuleResult.reducedMotion and Pulse then ReactModule.createElement("UIGradient", {
-		Transparency = Pulse:map(function(Alpha: number): NumberSequence --[[ Line: 165 ]]
+		Transparency = Pulse:map(function(Alpha: number): NumberSequence
 			-- upvalues: UseTokensModuleResult (copy)
 			return NumberSequence.new((math.lerp(UseTokensModuleResult.Color.Content.Emphasis.Transparency, UseTokensModuleResult.Color.Shift.Shift_200.Transparency, Alpha)))
 		end),
-		Color = Pulse:map(function(Alpha): ColorSequence --[[ Line: 174 ]]
+		Color = Pulse:map(function(Alpha): ColorSequence
 			-- upvalues: UseTokensModuleResult (copy)
 			return ColorSequence.new(UseTokensModuleResult.Color.Content.Emphasis.Color3:Lerp(UseTokensModuleResult.Color.Shift.Shift_200.Color3, Alpha))
 		end),
@@ -117,7 +117,7 @@ local function ProgressGradient(p1) --[[ Line: 128 ]]
 	}) else ReactModule.createElement("UIGradient", {
 		Transparency = UseMemoResult,
 		Color = UseMemoResult1,
-		Rotation = MapBindableModule(Progress, function(p2: number): number --[[ Line: 185 ]]
+		Rotation = MapBindableModule(Progress, function(p2: number): number
 			-- upvalues: Side (copy)
 			local MinValue: number = if Side == Enum.HorizontalAlignment.Left then 180 else 0
 			local MaxValue: number = if Side == Enum.HorizontalAlignment.Left then 360 else 180
@@ -127,7 +127,7 @@ local function ProgressGradient(p1) --[[ Line: 128 ]]
 	})
 end
 
-local function ProgressRing(p1) --[[ Line: 193 ]]
+local function ProgressRing(p1)
 	-- upvalues: ReactModule (copy), ViewModule (copy), ImageModule (copy), ProgressGradient (copy), ArcCaps (copy)
 	return ReactModule.createElement(ReactModule.Fragment, {}, {
 		LeftGradient = ReactModule.createElement(ViewModule, {
@@ -171,7 +171,7 @@ local function ProgressRing(p1) --[[ Line: 193 ]]
 	})
 end
 
-local function SpinningRing(p1) --[[ Line: 248 ]]
+local function SpinningRing(p1)
 	-- upvalues: ReactModule (copy), ViewModule (copy), ProgressRing (copy)
 	return ReactModule.createElement(ViewModule, {
 		Size = p1.size,
@@ -187,7 +187,7 @@ local function SpinningRing(p1) --[[ Line: 248 ]]
 	})
 end
 
-return function(p1) --[[ Line: 268 | Named "ProgressCircle" ]]
+return function(p1)
 	-- upvalues: WithDefaultsModule (copy), config (copy), UseTokensModule (copy), UsePreferencesModule (copy), UseProgressVariantsModule (copy), UseProgressBindingModule (copy), UseRotationModule (copy), UsePulseBindingModule (copy), ConstantsModule (copy), ReactModule (copy), ViewModule (copy), WithCommonPropsModule (copy), SpinningRing (copy), FlagsModule (copy), ProgressRing (copy), TextModule (copy), MapBindableModule (copy), getLabelFromProgress (copy)
 	local WithDefaultsModuleResult = WithDefaultsModule(p1, config)
 	local UseTokensModuleResult = UseTokensModule()

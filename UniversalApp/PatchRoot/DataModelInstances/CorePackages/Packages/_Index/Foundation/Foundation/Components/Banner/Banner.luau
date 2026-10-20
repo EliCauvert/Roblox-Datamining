@@ -19,7 +19,7 @@ local config = {
 	density = CardDensityModule.Default
 }
 
-return ReactModule.memo(ReactModule.forwardRef(function(p1, Ref) --[[ Line: 73 | Named "Banner" ]]
+return ReactModule.memo(ReactModule.forwardRef(function(p1, Ref)
 	-- upvalues: WithDefaultsModule (copy), config (copy), CardVariantModule (copy), CardDensityModule (copy), CardHeaderSizeModule (copy), BannerSizeModule (copy), ReactModule (copy), UpsellContentModule (copy), ButtonModule (copy), ButtonVariantModule (copy), InputSizeModule (copy), CardModule (copy), WithCommonPropsModule (copy)
 	local WithDefaultsModuleResult = WithDefaultsModule(p1, config)
 	local Primary = if p1.actions then p1.actions.primary else nil

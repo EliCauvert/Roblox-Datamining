@@ -28,7 +28,7 @@ local config2 = {
 	colorNamespace = require(Foundation.Enums.ColorNamespace).Color
 }
 
-return ReactModule.memo(ReactModule.forwardRef(function(p1, Ref) --[[ Line: 68 | Named "Toggle" ]]
+return ReactModule.memo(ReactModule.forwardRef(function(p1, Ref)
 	-- upvalues: UseInputGroupDefaultsModule (copy), config1 (copy), UseTokensModule (copy), UseToggleVariantsModule (copy), UseUncontrolledStateModule (copy), InputSizeModule (copy), ReactModule (copy), OtterModule (copy), config (copy), InternalInputModule (copy), WithCommonPropsModule (copy), ConstantsModule (copy), PresentationContextModule (copy), config2 (copy), KnobModule (copy), BuilderIconsModule (copy)
 	local UseInputGroupDefaultsModuleResult = UseInputGroupDefaultsModule(p1, config1)
 	local UseToggleVariantsModuleResult = UseToggleVariantsModule(UseTokensModule(), UseInputGroupDefaultsModuleResult.size)
@@ -37,26 +37,26 @@ return ReactModule.memo(ReactModule.forwardRef(function(p1, Ref) --[[ Line: 68 |
 	local v1: number = if UseUncontrolledStateModuleResult then 1 else 0
 	local UseBindingResult, UseBindingResult2 = ReactModule.useBinding(v1)
 	local UseRefResult = ReactModule.useRef(nil)
-	local MapResult = UseBindingResult:map(function(Alpha) --[[ Line: 81 ]]
+	local MapResult = UseBindingResult:map(function(Alpha)
 		-- upvalues: UseToggleVariantsModuleResult (copy)
 		return UseToggleVariantsModuleResult.knob.offPosition:Lerp(UseToggleVariantsModuleResult.knob.onPosition, Alpha)
 	end)
-	ReactModule.useEffect(function() --[[ Line: 85 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: OtterModule (upval), v1 (copy), UseRefResult (copy), UseBindingResult2 (copy)
 		local SingleMotor = OtterModule.createSingleMotor(v1)
 		UseRefResult.current = SingleMotor
 		SingleMotor:start()
-		SingleMotor:onStep(function(p2) --[[ Line: 90 ]]
+		SingleMotor:onStep(function(p2)
 			-- upvalues: UseBindingResult2 (upval)
 			UseBindingResult2(p2)
 		end)
 		
-		return function() --[[ Line: 94 ]]
+		return function()
 			-- upvalues: SingleMotor (copy)
 			SingleMotor:destroy()
 		end
 	end, {})
-	ReactModule.useEffect(function() --[[ Line: 99 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UseUncontrolledStateModuleResult (copy), UseRefResult (copy), OtterModule (upval), config (upval)
 		local v2: number = if UseUncontrolledStateModuleResult then 1 else 0
 		

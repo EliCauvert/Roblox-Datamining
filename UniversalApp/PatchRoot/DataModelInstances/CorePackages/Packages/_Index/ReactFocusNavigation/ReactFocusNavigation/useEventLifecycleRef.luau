@@ -1,10 +1,10 @@
 ﻿local ReactModule = require(script.Parent.Parent.React)
 
-return function(Callback1, Callback) --[[ Line: 8 | Named "useEventLifecycleRef" ]]
+return function(Callback1, Callback)
 	-- upvalues: ReactModule (copy)
 	local UseRefResult = ReactModule.useRef(nil)
 	
-	return (ReactModule.useCallback(function(Current) --[[ Line: 10 ]]
+	return (ReactModule.useCallback(function(Current)
 		-- upvalues: UseRefResult (copy), Callback (copy), Callback1 (copy)
 		if UseRefResult.current and Callback then
 			Callback(UseRefResult.current)

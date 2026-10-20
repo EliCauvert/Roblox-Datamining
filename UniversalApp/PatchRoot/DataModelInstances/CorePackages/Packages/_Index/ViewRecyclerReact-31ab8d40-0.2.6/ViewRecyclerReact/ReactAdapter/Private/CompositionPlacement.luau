@@ -8,12 +8,12 @@ local ReparentableHost = require(ViewRecyclerReact.Parent.ViewRecyclerRoblox).Re
 local ShallowTable = require(ViewRecyclerReact.Parent.ViewRecycler).Adapter._Private.ShallowTable
 local Frozen = table.freeze({ "key", "generation" })
 
-local function _(p1, p2): string --[[ Line: 130 | Named "compositeKey" ]]
+local function _(p1, p2): string
 	return `{#p1}:{p1}:{p2}`
 end
 
 return {
-	new = function(p1, Callback) --[[ Line: 134 ]]
+	new = function(p1, Callback)
 		-- upvalues: ReparentableHost (copy), ShallowTable (copy), Frozen (copy), PlacementKindModule (copy)
 		local Tbl = {}
 		local self = setmetatable({}, { __mode = "k" })
@@ -25,7 +25,7 @@ return {
 		local v1 = nil
 		local self1 = setmetatable({}, { __mode = "k" })
 		
-		local function getPortState(View) --[[ Line: 145 ]]
+		local function getPortState(View)
 			-- upvalues: self1 (copy), Tbl (copy), ReparentableHost (upval), ShallowTable (upval), Frozen (upval)
 			local SelfEntry = self1[View]
 			
@@ -40,7 +40,7 @@ return {
 					view = View
 				}
 				config.port = {
-					apply = function(p2) --[[ Line: 160 ]]
+					apply = function(p2)
 						-- upvalues: config (ref), Tbl (upval), View (copy), ReparentableHost (upval), ShallowTable (upval), Frozen (upval)
 						if p2 == nil then
 							config.pendingAssignment = nil
@@ -109,7 +109,7 @@ return {
 			end
 		end
 		
-		local function _(View, PendingAssignment) --[[ Line: 228 | Named "preparePlacement" ]]
+		local function _(View, PendingAssignment)
 			-- upvalues: getPortState (copy), PlacementKindModule (upval)
 			if PendingAssignment == nil then
 				View.bindPlacement(nil, nil)
@@ -123,7 +123,7 @@ return {
 			end
 		end
 		
-		local _ = function(Key) --[[ Line: 239 | Named "markDirty" ]]
+		local _ = function(Key)
 			-- upvalues: Tbl2 (copy), Flag (ref), Flag1 (ref), Callback (copy)
 			Tbl2[Key] = true
 			
@@ -135,7 +135,7 @@ return {
 			end
 		end
 		
-		local function ensureReconciler() --[[ Line: 248 ]]
+		local function ensureReconciler()
 			-- upvalues: v1 (ref), p1 (copy), getPortState (copy), PlacementKindModule (upval)
 			local v2 = v1
 			
@@ -144,7 +144,7 @@ return {
 				local t1 = {}
 				local Count = 1
 				
-				local function assignmentFor(Desired, Generation) --[[ Line: 257 ]]
+				local function assignmentFor(Desired, Generation)
 					-- upvalues: Count (ref)
 					local Generation1: number = Generation
 					
@@ -162,7 +162,7 @@ return {
 				end
 				
 				local config = {
-					update = function(List) --[[ Line: 272 ]]
+					update = function(List)
 						-- upvalues: t (ref), assignmentFor (copy), p1 (upval), t1 (copy), getPortState (upval), PlacementKindModule (upval)
 						local t2 = {}
 						
@@ -241,7 +241,7 @@ return {
 							value5.view.set(value5.assignment)
 						end
 					end,
-					getViews = function() --[[ Line: 340 ]]
+					getViews = function()
 						-- upvalues: t (ref)
 						local List = {}
 						
@@ -260,7 +260,7 @@ return {
 		end
 		
 		return {
-			register = function(ViewType, Key, ParentSignal, Props, Placeholder) --[[ Line: 392 ]]
+			register = function(ViewType, Key, ParentSignal, Props, Placeholder)
 				-- upvalues: Flag1 (ref), self (copy), Count (ref), Tbl (copy), Tbl2 (copy), Flag (ref), Callback (copy), getPortState (copy), Tbl1 (copy)
 				assert(not Flag1, "CompositionPlacement: cannot register after destroy")
 				local SelfEntry = self[Key]
@@ -287,7 +287,7 @@ return {
 				local Flag2 = true
 				
 				return {
-					setPlaceholder = function(Placeholder) --[[ Line: 413 ]]
+					setPlaceholder = function(Placeholder)
 						-- upvalues: Flag2 (ref), Flag1 (upval), Tbl (upval), SelfEntry (ref), getPortState (upval), Tbl2 (upval), Flag (upval), Callback (upval)
 						if not Flag2 or Flag1 then return end
 						local Entry = Tbl[SelfEntry]
@@ -308,7 +308,7 @@ return {
 							Callback()
 						end
 					end,
-					setProps = function(Props) --[[ Line: 431 ]]
+					setProps = function(Props)
 						-- upvalues: Flag2 (ref), Flag1 (upval), Tbl (upval), SelfEntry (ref), Tbl2 (upval), Flag (upval), Callback (upval)
 						if not Flag2 or Flag1 then return end
 						local Entry = Tbl[SelfEntry]
@@ -323,7 +323,7 @@ return {
 							Callback()
 						end
 					end,
-					unregister = function() --[[ Line: 442 ]]
+					unregister = function()
 						-- upvalues: Flag2 (ref), Flag1 (upval), Tbl (upval), SelfEntry (ref), getPortState (upval), Tbl1 (upval), Tbl2 (upval), Flag (upval), Callback (upval)
 						if not Flag2 then return end
 						Flag2 = false
@@ -347,7 +347,7 @@ return {
 					end
 				}
 			end,
-			flush = function() --[[ Line: 352 ]]
+			flush = function()
 				-- upvalues: Flag (ref), Flag1 (ref), Tbl (copy), Tbl1 (copy), Tbl2 (copy), v1 (ref), ensureReconciler (copy)
 				if not Flag or Flag1 then return end
 				Flag = false
@@ -387,7 +387,7 @@ return {
 					ensureReconciler().update(List)
 				end
 			end,
-			destroy = function() --[[ Line: 464 ]]
+			destroy = function()
 				-- upvalues: Flag1 (ref), Flag (ref), v1 (ref), Tbl (copy), Tbl1 (copy), Tbl2 (copy), self1 (copy)
 				if Flag1 then return end
 				Flag1 = true

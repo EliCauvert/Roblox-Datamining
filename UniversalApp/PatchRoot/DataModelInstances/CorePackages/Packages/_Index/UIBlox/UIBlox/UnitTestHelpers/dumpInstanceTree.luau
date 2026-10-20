@@ -1,4 +1,4 @@
-﻿local function dumpInstanceTree(Object, p1) --[[ Line: 1 ]]
+﻿local function dumpInstanceTree(Object, p1)
 	-- upvalues: dumpInstanceTree (copy)
 	local P1 = p1 or ""
 	assert(P1 ~= nil, "indent must be a string")

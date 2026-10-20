@@ -2,7 +2,7 @@
 local SpyModule = require(script.Parent.Spy)
 local MagicMockModule = {}
 local config = {
-	__index = function(p1, p2) --[[ Line: 7 ]]
+	__index = function(p1, p2)
 		-- upvalues: SymbolsModule (copy), MagicMockModule (copy)
 		local Meta = getmetatable(p1)
 		local Entry = Meta[SymbolsModule.Children][p2]
@@ -16,7 +16,7 @@ local config = {
 			return if Entry == SymbolsModule.None then nil else Entry
 		end
 	end,
-	__newindex = function(p1, ReturnValue, NoneFunction) --[[ Line: 22 ]]
+	__newindex = function(p1, ReturnValue, NoneFunction)
 		-- upvalues: SpyModule (copy), SymbolsModule (copy)
 		local Meta = getmetatable(p1)
 		
@@ -34,7 +34,7 @@ local config = {
 			Meta[SymbolsModule.Children][ReturnValue] = NoneFunction
 		end
 	end,
-	__call = function(p1, ...) --[[ Line: 39 ]]
+	__call = function(p1, ...)
 		-- upvalues: SymbolsModule (copy), MagicMockModule (copy)
 		local Meta = getmetatable(p1)
 		local config = {
@@ -54,7 +54,7 @@ local config = {
 	end
 }
 
-function MagicMockModule.new(None) --[[ Line: 60 ]]
+function MagicMockModule.new(None)
 	-- upvalues: SymbolsModule (copy), config (copy)
 	local config1 = {
 		[SymbolsModule.Calls] = {},

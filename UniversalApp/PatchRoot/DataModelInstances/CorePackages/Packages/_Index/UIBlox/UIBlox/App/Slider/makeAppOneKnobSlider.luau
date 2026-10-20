@@ -10,18 +10,18 @@ local SliderTextInputModule = require(Parent.SliderTextInput)
 local WithStyleModule = require(Parent2.Core.Style.withStyle)
 local ValidateStyleModule = require(Parent1.Style.Validator.validateStyle)
 
-local function wrapStyleAndRef(ExtendResult) --[[ Line: 15 ]]
+local function wrapStyleAndRef(ExtendResult)
 	-- upvalues: RoactModule (copy), WithStyleModule (copy), CryoModule (copy)
-	return RoactModule.forwardRef(function(p1, ForwardedRef) --[[ Line: 16 ]]
+	return RoactModule.forwardRef(function(p1, ForwardedRef)
 		-- upvalues: WithStyleModule (upval), CryoModule (upval), RoactModule (upval), ExtendResult (copy)
-		return WithStyleModule(function(Style) --[[ Line: 17 ]]
+		return WithStyleModule(function(Style)
 			-- upvalues: CryoModule (upval), p1 (copy), ForwardedRef (copy), RoactModule (upval), ExtendResult (upval)
 			return RoactModule.createElement(ExtendResult, (CryoModule.Dictionary.join(p1, { style = Style, forwardedRef = ForwardedRef })))
 		end)
 	end)
 end
 
-return function(Text) --[[ Line: 28 | Named "makeAppOneKnobSlider" ]]
+return function(Text)
 	-- upvalues: RoactModule (copy), MakeAppSliderModule (copy), TModule (copy), ValidateStyleModule (copy), SliderTextInputModule (copy), wrapStyleAndRef (copy)
 	local ExtendResult = RoactModule.PureComponent:extend("OneKnobAppSliderFor" .. Text)
 	local AppSliderModule = MakeAppSliderModule(Text, false)
@@ -57,7 +57,7 @@ return function(Text) --[[ Line: 28 | Named "makeAppOneKnobSlider" ]]
 		width = UDim.new(1, 0)
 	}
 	
-	function ExtendResult.render(p1) --[[ Line: 86 ]]
+	function ExtendResult.render(p1)
 		-- upvalues: RoactModule (upval), AppSliderModule (copy), SliderTextInputModule (upval)
 		local Props = p1.props
 		local config = {

@@ -14,7 +14,7 @@ return {
 		ValidationEnumsModule.SharedDataMember.outerCagesData
 	},
 	expectedFailures = {},
-	run = function(p1, p2) --[[ Line: 22 ]]
+	run = function(p1, p2)
 		-- upvalues: GetFFlagUGCValidationEyebrowEyelashSupportModule (copy), UGCValidationService (copy), GetFIntUGCValidateCageMeshDistanceThresholdModule (copy), ErrorSourceStringsModule (copy)
 		if GetFFlagUGCValidationEyebrowEyelashSupportModule() then
 			local AssetType = p2.uploadEnum.assetType

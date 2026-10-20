@@ -4,7 +4,7 @@ local _ = require(script.Parent.tokenKind)
 local Module = {}
 Module.__index = Module
 
-function Module.new(StartToken, EndToken, Source) --[[ Line: 50 ]]
+function Module.new(StartToken, EndToken, Source)
 	-- upvalues: Module (copy)
 	return (setmetatable({
 		start = StartToken.start,
@@ -15,14 +15,14 @@ function Module.new(StartToken, EndToken, Source) --[[ Line: 50 ]]
 	}, Module))
 end
 
-function Module:toJSON() --[[ Line: 62 ]]
+function Module:toJSON()
 	return { start = self.start, _end = self._end }
 end
 
 local Module1 = {}
 Module1.__index = Module1
 
-function Module1.new(Kind, Start, _end, Line, Column, Prev, Value) --[[ Line: 138 ]]
+function Module1.new(Kind, Start, _end, Line, Column, Prev, Value)
 	-- upvalues: Module1 (copy)
 	return (setmetatable({
 		kind = Kind,
@@ -36,7 +36,7 @@ function Module1.new(Kind, Start, _end, Line, Column, Prev, Value) --[[ Line: 13
 	}, Module1))
 end
 
-function Module1:toJSON() --[[ Line: 161 ]]
+function Module1:toJSON()
 	return {
 		kind = self.kind,
 		value = self.value,
@@ -48,7 +48,7 @@ end
 return {
 	Location = Module,
 	Token = Module1,
-	isNode = function(p1): boolean --[[ Line: 181 ]]
+	isNode = function(p1): boolean
 		return typeof(p1) == "table" and typeof(p1.kind) == "string"
 	end
 }

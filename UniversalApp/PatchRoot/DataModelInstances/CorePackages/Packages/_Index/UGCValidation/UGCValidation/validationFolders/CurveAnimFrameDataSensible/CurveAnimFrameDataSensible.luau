@@ -3,12 +3,12 @@ local _ = require(Parent.util.Types)
 local ValidationEnumsModule = require(Parent.validationSystem.ValidationEnums)
 local ErrorSourceStringsModule = require(Parent.validationSystem.ErrorSourceStrings)
 
-local function areNumbersGood(...): boolean --[[ Line: 18 ]]
-	local function _(p1): boolean --[[ Line: 19 | Named "isNaN" ]]
+local function areNumbersGood(...): boolean
+	local function _(p1): boolean
 		return p1 ~= p1
 	end
 	
-	local _ = function(p1): boolean --[[ Line: 23 | Named "isInfinite" ]]
+	local _ = function(p1): boolean
 		return p1 == 1e999 or p1 == -1e999
 	end
 	
@@ -35,7 +35,7 @@ return {
 	prereqTests = {
 		ValidationEnumsModule.ValidationModule.CurveAnimDataAvailable
 	},
-	run = function(p1, p2) --[[ Line: 38 ]]
+	run = function(p1, p2)
 		-- upvalues: areNumbersGood (copy), ErrorSourceStringsModule (copy)
 		local CurveAnimComputedFrames = p2.curveAnimComputedFrames
 		

@@ -18,7 +18,7 @@ local config = {
 	duration = TokensModule.defaultTokens.Time.Time_200
 }
 
-local function lerpNumberSequence(Gradient, HoverGradient, p1): NumberSequence --[[ Line: 29 ]]
+local function lerpNumberSequence(Gradient, HoverGradient, p1): NumberSequence
 	local Keypoints = HoverGradient.Keypoints
 	local NumberSequenceKeypoints = {}
 	
@@ -29,7 +29,7 @@ local function lerpNumberSequence(Gradient, HoverGradient, p1): NumberSequence -
 	return NumberSequence.new(NumberSequenceKeypoints)
 end
 
-return function(p2) --[[ Line: 54 | Named "Scrim" ]]
+return function(p2)
 	-- upvalues: UseTokensModule (copy), UseBackgroundStyleFunction (copy), UseScrimVariantsModule (copy), ReactOtterModule (copy), ReactModule (copy), config (copy), lerpNumberSequence (copy), ViewModule (copy), WithCommonPropsModule (copy), StateLayerAffordanceModule (copy), IconModule (copy)
 	local UseTokensModuleResult = UseTokensModule()
 	local UseBackgroundStyleResult = UseBackgroundStyleFunction()
@@ -37,24 +37,24 @@ return function(p2) --[[ Line: 54 | Named "Scrim" ]]
 	local IsAlignmentMatch = p2.alignment == Enum.HorizontalAlignment.Right
 	local IsPreferredInputMatch: boolean = p2.preferredInput == Enum.PreferredInput.Touch or p2.preferredInput == Enum.PreferredInput.Gamepad
 	local UseAnimatedBindingResult, UseAnimatedBindingResult2 = ReactOtterModule.useAnimatedBinding(if p2.isHovered then 1 else 0)
-	ReactModule.useEffect(function() --[[ Line: 64 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UseAnimatedBindingResult2 (copy), ReactOtterModule (upval), p2 (copy), config (upval)
 		UseAnimatedBindingResult2(ReactOtterModule.ease(if p2.isHovered then 1 else 0, config))
 	end, { p2.isHovered })
-	local MapResult = UseAnimatedBindingResult:map(function(p3: number): UDim2 --[[ Line: 68 ]]
+	local MapResult = UseAnimatedBindingResult:map(function(p3: number): UDim2
 		-- upvalues: IsPreferredInputMatch (copy), IsAlignmentMatch (copy)
 		return if IsPreferredInputMatch then UDim2.fromScale(0.5, 0.5) else UDim2.fromScale(0.5 + (if IsAlignmentMatch then 1 else -1) * (1 - p3), 0.5)
 	end)
-	local MapResult1 = p2.rowHeight:map(function(p3): UDim2 --[[ Line: 76 ]]
+	local MapResult1 = p2.rowHeight:map(function(p3): UDim2
 		-- upvalues: UseScrimVariantsModuleResult (copy)
 		return UDim2.new(0, p3 + UseScrimVariantsModuleResult.fade, 1, 0)
 	end)
-	local MapResult2 = UseAnimatedBindingResult:map(function(p3) --[[ Line: 80 ]]
+	local MapResult2 = UseAnimatedBindingResult:map(function(p3)
 		-- upvalues: IsPreferredInputMatch (copy), UseScrimVariantsModuleResult (copy), lerpNumberSequence (upval)
 		return if IsPreferredInputMatch then UseScrimVariantsModuleResult.hoverGradient else lerpNumberSequence(UseScrimVariantsModuleResult.gradient, UseScrimVariantsModuleResult.hoverGradient, p3)
 	end)
 	local UseAnimatedBindingResult1, UseAnimatedBindingResult2_1 = ReactOtterModule.useAnimatedBinding(if p2.isVisible then 0 else 1)
-	ReactModule.useEffect(function() --[[ Line: 88 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UseAnimatedBindingResult2_1 (copy), ReactOtterModule (upval), p2 (copy), config (upval)
 		UseAnimatedBindingResult2_1(ReactOtterModule.ease(if p2.isVisible then 0 else 1, config))
 	end, { p2.isVisible })

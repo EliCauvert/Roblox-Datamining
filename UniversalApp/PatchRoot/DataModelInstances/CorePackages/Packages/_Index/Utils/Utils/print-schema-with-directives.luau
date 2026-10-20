@@ -44,7 +44,7 @@ local Callback12 = nil
 local Callback13 = nil
 local NULL = GraphQLModule.NULL
 
-local function getDocumentNodeFromSchema(p1, p2) --[[ Line: 160 ]]
+local function getDocumentNodeFromSchema(p1, p2)
 	-- upvalues: Callback (ref), Boolean (copy), IsSpecifiedDirectiveFunction (copy), Callback2 (ref), IsSpecifiedScalarTypeFunction (copy), IsIntrospectionTypeFunction (copy), IsObjectTypeFunction (copy), Callback4 (ref), IsInterfaceTypeFunction (copy), Callback5 (ref), IsUnionTypeFunction (copy), Callback6 (ref), IsInputObjectTypeFunction (copy), Callback8 (ref), IsEnumTypeFunction (copy), Callback7 (ref), IsScalarTypeFunction (copy), Callback9 (ref), Error1 (copy), Kind (copy)
 	local PathToDirectivesInExtensions = (if p2 == nil then {} else p2).pathToDirectivesInExtensions
 	local TypeMap = p1:getTypeMap()
@@ -83,12 +83,12 @@ end
 
 Module.getDocumentNodeFromSchema = getDocumentNodeFromSchema
 
-function Module.printSchemaWithDirectives(p3, p4) --[[ Line: 244 ]]
+function Module.printSchemaWithDirectives(p3, p4)
 	-- upvalues: getDocumentNodeFromSchema (copy), PrintFunction (copy)
 	return PrintFunction((getDocumentNodeFromSchema(p3, if p4 == nil then {} else p4)))
 end
 
-Callback = function(p3, PathToDirectivesInExtensions) --[[ Line: 252 | Named "astFromSchema" ]]
+Callback = function(p3, PathToDirectivesInExtensions)
 	-- upvalues: Map (copy), Object (copy), Boolean (copy), GetRootTypeMapFunction (copy), AstFromTypeFunction (copy), Kind (copy), Array (copy), IsSome (copy), Callback3 (ref)
 	local NewMap = Map.new({
 		{ "query", Object.None },
@@ -153,10 +153,10 @@ end
 
 Module.astFromSchema = Callback
 
-Callback2 = function(p4, p5, PathToDirectivesInExtensions) --[[ Line: 355 | Named "astFromDirective" ]]
+Callback2 = function(p4, p5, PathToDirectivesInExtensions)
 	-- upvalues: Kind (copy), Boolean (copy), Array (copy), Callback1 (ref)
 	local Description = if typeof(p4.astNode) == "table" then p4.astNode.description else nil
-	local MapResult = if typeof(p4.locations) == "table" then Array.map(p4.locations, function(Value) --[[ Line: 390 ]]
+	local MapResult = if typeof(p4.locations) == "table" then Array.map(p4.locations, function(Value)
 		-- upvalues: Kind (upval)
 		return { kind = Kind.NAME, value = Value }
 	end) else nil
@@ -165,7 +165,7 @@ Callback2 = function(p4, p5, PathToDirectivesInExtensions) --[[ Line: 355 | Name
 		kind = Kind.DIRECTIVE_DEFINITION,
 		description = if Description == nil then if Boolean.toJSBoolean(p4.description) then { kind = Kind.STRING, value = p4.description } else nil else Description,
 		name = { kind = Kind.NAME, value = p4.name },
-		arguments = if typeof(p4.args) == "table" then Array.map(p4.args, function(p6) --[[ Line: 379 ]]
+		arguments = if typeof(p4.args) == "table" then Array.map(p4.args, function(p6)
 			-- upvalues: Callback1 (upval), p5 (copy), PathToDirectivesInExtensions (copy)
 			return Callback1(p6, p5, PathToDirectivesInExtensions)
 		end) else nil,
@@ -176,7 +176,7 @@ end
 
 Module.astFromDirective = Callback2
 
-Callback3 = function(p4, p5, p6) --[[ Line: 418 | Named "getDirectiveNodes" ]]
+Callback3 = function(p4, p5, p6)
 	-- upvalues: GetDirectivesInExtensionsFunction (copy), Array (copy), Object (copy), Callback10 (ref), Boolean (copy)
 	local DirectivesInExtensions = GetDirectivesInExtensionsFunction(p4, p6)
 	local ConcatResult = {}
@@ -202,7 +202,7 @@ end
 
 Module.getDirectiveNodes = Callback3
 
-local function getDeprecatableDirectiveNodes(p7, p8, p9) --[[ Line: 471 ]]
+local function getDeprecatableDirectiveNodes(p7, p8, p9)
 	-- upvalues: GetDirectivesInExtensionsFunction (copy), Callback10 (ref), Array (copy), Callback11 (ref)
 	local FilterResult = {}
 	local FilterResultEntry = nil
@@ -210,14 +210,14 @@ local function getDeprecatableDirectiveNodes(p7, p8, p9) --[[ Line: 471 ]]
 	local Directives = if DirectivesInExtensions == nil then if typeof(p7.astNode) == "table" then p7.astNode.directives else nil else Callback10(p8, DirectivesInExtensions)
 	
 	if Directives ~= nil then
-		FilterResult = Array.filter(Directives, function(p10): boolean --[[ Line: 493 ]]
+		FilterResult = Array.filter(Directives, function(p10): boolean
 			return p10.name.value ~= "deprecated"
 		end)
 		
 		if p7.deprecationReason ~= nil then
-			FilterResultEntry = if typeof(Array.filter(Directives, function(p10): boolean --[[ Line: 500 ]]
+			FilterResultEntry = if typeof(Array.filter(Directives, function(p10): boolean
 				return p10.name.value == "deprecated"
-			end)) == "table" then Array.filter(Directives, function(p10): boolean --[[ Line: 504 ]]
+			end)) == "table" then Array.filter(Directives, function(p10): boolean
 				return p10.name.value == "deprecated"
 			end)[1] else nil
 		end
@@ -230,7 +230,7 @@ end
 
 Module.getDeprecatableDirectiveNodes = getDeprecatableDirectiveNodes
 
-Callback1 = function(p7, p8, p9) --[[ Line: 528 | Named "astFromArg" ]]
+Callback1 = function(p7, p8, p9)
 	-- upvalues: Kind (copy), Boolean (copy), AstFromTypeFunction (copy), AstFromValueFunction (copy), getDeprecatableDirectiveNodes (copy)
 	local Description = if typeof(p7.astNode) == "table" then p7.astNode.description else nil
 	
@@ -250,7 +250,7 @@ end
 
 Module.astFromArg = Callback1
 
-Callback4 = function(GetResult, p7, PathToDirectivesInExtensions) --[[ Line: 566 | Named "astFromObjectType" ]]
+Callback4 = function(GetResult, p7, PathToDirectivesInExtensions)
 	-- upvalues: Kind (copy), Boolean (copy), Array (copy), Callback12 (ref), Object (copy), AstFromTypeFunction (copy), Callback3 (ref)
 	local Description = if typeof(GetResult.astNode) == "table" then GetResult.astNode.description else nil
 	
@@ -262,11 +262,11 @@ Callback4 = function(GetResult, p7, PathToDirectivesInExtensions) --[[ Line: 566
 			value = GetResult.description
 		} else nil else Description,
 		name = { kind = Kind.NAME, value = GetResult.name },
-		fields = Array.map(GetResult:getFields():values(), function(p8) --[[ Line: 592 ]]
+		fields = Array.map(GetResult:getFields():values(), function(p8)
 			-- upvalues: Callback12 (upval), p7 (copy), PathToDirectivesInExtensions (copy)
 			return Callback12(p8, p7, PathToDirectivesInExtensions)
 		end),
-		interfaces = Array.map(Object.values(GetResult:getInterfaces()), function(p8) --[[ Line: 596 ]]
+		interfaces = Array.map(Object.values(GetResult:getInterfaces()), function(p8)
 			-- upvalues: AstFromTypeFunction (upval)
 			return (AstFromTypeFunction(p8))
 		end),
@@ -276,7 +276,7 @@ end
 
 Module.astFromObjectType = Callback4
 
-Callback5 = function(GetResult, p7, PathToDirectivesInExtensions) --[[ Line: 605 | Named "astFromInterfaceType" ]]
+Callback5 = function(GetResult, p7, PathToDirectivesInExtensions)
 	-- upvalues: Kind (copy), Boolean (copy), Array (copy), Callback12 (ref), Callback3 (ref), Object (copy), AstFromTypeFunction (copy)
 	local Description = if typeof(GetResult.astNode) == "table" then GetResult.astNode.description else nil
 	local config = {
@@ -287,7 +287,7 @@ Callback5 = function(GetResult, p7, PathToDirectivesInExtensions) --[[ Line: 605
 			value = GetResult.description
 		} else nil else Description,
 		name = { kind = Kind.NAME, value = GetResult.name },
-		fields = Array.map(GetResult:getFields():values(), function(p8) --[[ Line: 631 ]]
+		fields = Array.map(GetResult:getFields():values(), function(p8)
 			-- upvalues: Callback12 (upval), p7 (copy), PathToDirectivesInExtensions (copy)
 			return Callback12(p8, p7, PathToDirectivesInExtensions)
 		end),
@@ -295,7 +295,7 @@ Callback5 = function(GetResult, p7, PathToDirectivesInExtensions) --[[ Line: 605
 	}
 	
 	if GetResult.getInterfaces ~= nil then
-		config.interfaces = Array.map(Object.values(GetResult:getInterfaces()), function(p8) --[[ Line: 643 ]]
+		config.interfaces = Array.map(Object.values(GetResult:getInterfaces()), function(p8)
 			-- upvalues: AstFromTypeFunction (upval)
 			return (AstFromTypeFunction(p8))
 		end)
@@ -305,7 +305,7 @@ end
 
 Module.astFromInterfaceType = Callback5
 
-Callback6 = function(GetResult, p7, PathToDirectivesInExtensions) --[[ Line: 653 | Named "astFromUnionType" ]]
+Callback6 = function(GetResult, p7, PathToDirectivesInExtensions)
 	-- upvalues: Kind (copy), Boolean (copy), Callback3 (ref), Array (copy), AstFromTypeFunction (copy)
 	local Description = if typeof(GetResult.astNode) == "table" then GetResult.astNode.description else nil
 	
@@ -318,7 +318,7 @@ Callback6 = function(GetResult, p7, PathToDirectivesInExtensions) --[[ Line: 653
 		} else nil else Description,
 		name = { kind = Kind.NAME, value = GetResult.name },
 		directives = Callback3(GetResult, p7, PathToDirectivesInExtensions),
-		types = Array.map(GetResult:getTypes(), function(p8) --[[ Line: 680 ]]
+		types = Array.map(GetResult:getTypes(), function(p8)
 			-- upvalues: AstFromTypeFunction (upval)
 			return (AstFromTypeFunction(p8))
 		end)
@@ -327,7 +327,7 @@ end
 
 Module.astFromUnionType = Callback6
 
-Callback8 = function(GetResult, p7, PathToDirectivesInExtensions) --[[ Line: 688 | Named "astFromInputObjectType" ]]
+Callback8 = function(GetResult, p7, PathToDirectivesInExtensions)
 	-- upvalues: Kind (copy), Boolean (copy), Array (copy), Callback13 (ref), Callback3 (ref)
 	local Description = if typeof(GetResult.astNode) == "table" then GetResult.astNode.description else nil
 	
@@ -339,7 +339,7 @@ Callback8 = function(GetResult, p7, PathToDirectivesInExtensions) --[[ Line: 688
 			value = GetResult.description
 		} else nil else Description,
 		name = { kind = Kind.NAME, value = GetResult.name },
-		fields = Array.map(GetResult:getFields():values(), function(p8) --[[ Line: 714 ]]
+		fields = Array.map(GetResult:getFields():values(), function(p8)
 			-- upvalues: Callback13 (upval), p7 (copy), PathToDirectivesInExtensions (copy)
 			return Callback13(p8, p7, PathToDirectivesInExtensions)
 		end),
@@ -349,7 +349,7 @@ end
 
 Module.astFromInputObjectType = Callback8
 
-Callback7 = function(GetResult, p7, PathToDirectivesInExtensions) --[[ Line: 725 | Named "astFromEnumType" ]]
+Callback7 = function(GetResult, p7, PathToDirectivesInExtensions)
 	-- upvalues: Kind (copy), Boolean (copy), Array (copy), Object (copy), Callback14 (ref), Callback3 (ref)
 	local Description = if typeof(GetResult.astNode) == "table" then GetResult.astNode.description else nil
 	
@@ -361,7 +361,7 @@ Callback7 = function(GetResult, p7, PathToDirectivesInExtensions) --[[ Line: 725
 			value = GetResult.description
 		} else nil else Description,
 		name = { kind = Kind.NAME, value = GetResult.name },
-		values = Array.map(Object.values(GetResult:getValues()), function(p8) --[[ Line: 749 ]]
+		values = Array.map(Object.values(GetResult:getValues()), function(p8)
 			-- upvalues: Callback14 (upval), p7 (copy), PathToDirectivesInExtensions (copy)
 			return Callback14(p8, p7, PathToDirectivesInExtensions)
 		end),
@@ -371,13 +371,13 @@ end
 
 Module.astFromEnumType = Callback7
 
-Callback9 = function(GetResult, p7, PathToDirectivesInExtensions) --[[ Line: 759 | Named "astFromScalarType" ]]
+Callback9 = function(GetResult, p7, PathToDirectivesInExtensions)
 	-- upvalues: GetDirectivesInExtensionsFunction (copy), Boolean (copy), Callback10 (ref), Array (copy), Callback15 (ref), Kind (copy)
 	local DirectivesInExtensions = GetDirectivesInExtensionsFunction(GetResult, PathToDirectivesInExtensions)
 	local CallbackResult = if Boolean.toJSBoolean(DirectivesInExtensions) then Callback10(p7, DirectivesInExtensions) else (if typeof(GetResult.astNode) == "table" then GetResult.astNode.directives else nil) or {}
 	local SpecifiedByUrl = Boolean.toJSBoolean(GetResult.specifiedByUrl) and GetResult.specifiedByUrl or GetResult.specifiedByURL
 	
-	if Boolean.toJSBoolean(if Boolean.toJSBoolean(SpecifiedByUrl) then not Boolean.toJSBoolean(Array.some(CallbackResult, function(p8): boolean --[[ Line: 787 ]]
+	if Boolean.toJSBoolean(if Boolean.toJSBoolean(SpecifiedByUrl) then not Boolean.toJSBoolean(Array.some(CallbackResult, function(p8): boolean
 		return p8.name.value == "specifiedBy"
 	end)) else SpecifiedByUrl) then
 		table.insert(CallbackResult, Callback15("specifiedBy", { url = SpecifiedByUrl }))
@@ -398,7 +398,7 @@ end
 
 Module.astFromScalarType = Callback9
 
-Callback12 = function(p7, p8, p9) --[[ Line: 817 | Named "astFromField" ]]
+Callback12 = function(p7, p8, p9)
 	-- upvalues: Kind (copy), Boolean (copy), Array (copy), Callback1 (ref), AstFromTypeFunction (copy), getDeprecatableDirectiveNodes (copy)
 	local Description = if typeof(p7.astNode) == "table" then p7.astNode.description else nil
 	
@@ -410,7 +410,7 @@ Callback12 = function(p7, p8, p9) --[[ Line: 817 | Named "astFromField" ]]
 			value = p7.description
 		} else nil else Description,
 		name = { kind = Kind.NAME, value = p7.name },
-		arguments = Array.map(p7.args, function(p10) --[[ Line: 838 ]]
+		arguments = Array.map(p7.args, function(p10)
 			-- upvalues: Callback1 (upval), p8 (copy), p9 (copy)
 			return Callback1(p10, p8, p9)
 		end),
@@ -421,7 +421,7 @@ end
 
 Module.astFromField = Callback12
 
-Callback13 = function(p7, p8, p9) --[[ Line: 849 | Named "astFromInputField" ]]
+Callback13 = function(p7, p8, p9)
 	-- upvalues: Kind (copy), Boolean (copy), AstFromTypeFunction (copy), getDeprecatableDirectiveNodes (copy), AstFromValueFunction (copy), NULL (copy)
 	local INPUTVALUEDEFINITION = Kind.INPUT_VALUE_DEFINITION
 	local Description = if typeof(p7.astNode) == "table" then p7.astNode.description else nil
@@ -446,7 +446,7 @@ end
 
 Module.astFromInputField = Callback13
 
-Callback14 = function(p7, p8, p9) --[[ Line: 888 | Named "astFromEnumValue" ]]
+Callback14 = function(p7, p8, p9)
 	-- upvalues: Kind (copy), Boolean (copy), getDeprecatableDirectiveNodes (copy)
 	local Description = if typeof(p7.astNode) == "table" then p7.astNode.description else nil
 	
@@ -464,14 +464,14 @@ end
 
 Module.astFromEnumValue = Callback14
 
-Callback11 = function(Reason) --[[ Line: 916 | Named "makeDeprecatedDirective" ]]
+Callback11 = function(Reason)
 	-- upvalues: Callback15 (ref), GraphQLDeprecatedDirective (copy)
 	return Callback15("deprecated", { reason = Reason }, GraphQLDeprecatedDirective)
 end
 
 Module.makeDeprecatedDirective = Callback11
 
-Callback15 = function(Value, List, Directive) --[[ Line: 923 | Named "makeDirectiveNode" ]]
+Callback15 = function(Value, List, Directive)
 	-- upvalues: AstFromValueFunction (copy), Boolean (copy), Kind (copy), AstFromValueUntypedFunction (copy)
 	local List1 = {}
 	
@@ -514,7 +514,7 @@ end
 
 Module.makeDirectiveNode = Callback15
 
-Callback10 = function(p7, List) --[[ Line: 975 | Named "makeDirectiveNodes" ]]
+Callback10 = function(p7, List)
 	-- upvalues: Array (copy), Callback15 (ref)
 	local List1 = {}
 	

@@ -16,7 +16,7 @@ local config1 = {
 	[MusicThumbnailIconSizeModule.Large] = 4
 }
 
-return function(p1) --[[ Line: 31 ]]
+return function(p1)
 	-- upvalues: GetRbxThumbFunction (copy), FoundationModule (copy), UseImageLoadingStateModule (copy), config (copy), ReactModule (copy), Image (copy), config1 (copy), Skeleton (copy)
 	local RbxThumb = GetRbxThumbFunction(FoundationModule.Enums.ThumbnailType.Asset, p1.assetId)
 	local Entry = config[p1.size]

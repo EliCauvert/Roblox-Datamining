@@ -13,7 +13,7 @@ return {
 		ValidationEnumsModule.SharedDataMember.outerCagesData
 	},
 	expectedFailures = {},
-	run = function(p1, p2) --[[ Line: 21 ]]
+	run = function(p1, p2)
 		-- upvalues: AssetCalculatorModule (copy), UGCValidationService (copy), GetFStringUGCValidationMaxCageDistanceModule (copy), ErrorSourceStringsModule (copy)
 		local t = {}
 		

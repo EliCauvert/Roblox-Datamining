@@ -23,7 +23,7 @@ local config = {
 	variant = require(Foundation.Enums.CloseAffordanceVariant).OverMedia
 }
 
-return ReactModule.memo(ReactModule.forwardRef(function(p1, Ref) --[[ Line: 53 | Named "CloseAffordance" ]]
+return ReactModule.memo(ReactModule.forwardRef(function(p1, Ref)
 	-- upvalues: WithDefaultsModule (copy), config (copy), UseTokensModule (copy), UsePresentationContextFunction (copy), UseCloseAffordanceVariantsModule (copy), ReactModule (copy), ViewModule (copy), WithCommonPropsModule (copy), ConstantsModule (copy), IconModule (copy), BuilderIconsModule (copy), IconVariant (copy)
 	local WithDefaultsModuleResult = WithDefaultsModule(p1, config)
 	local UseTokensModuleResult = UseTokensModule()
@@ -44,7 +44,7 @@ return ReactModule.memo(ReactModule.forwardRef(function(p1, Ref) --[[ Line: 53 |
 		padding = UseCloseAffordanceVariantsModuleResult.container.padding,
 		cornerRadius = _UDim,
 		stateLayer = UseCloseAffordanceVariantsModuleResult.container.stateLayer,
-		cursor = ReactModule.useMemo(function() --[[ Line: 68 ]]
+		cursor = ReactModule.useMemo(function()
 			-- upvalues: _UDim (copy), UseTokensModuleResult (copy)
 			return {
 				radius = _UDim,

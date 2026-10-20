@@ -18,11 +18,11 @@ local config1 = {
 	})
 }
 
-local function _(Vector): boolean --[[ Line: 28 ]]
+local function _(Vector): boolean
 	return not Vector or (if Vector.X.Offset == 0 then Vector.Y.Offset ~= 0 and Vector.X.Scale ~= 0 else Vector.Y.Scale ~= 0 or Vector.Y.Offset ~= 0 and Vector.X.Scale ~= 0)
 end
 
-local function v9(Vector: UDim2): UDim2 --[[ Line: 35 ]]
+local function v9(Vector: UDim2): UDim2
 	if not Vector or (if Vector.X.Offset == 0 then Vector.Y.Offset ~= 0 and Vector.X.Scale ~= 0 else Vector.Y.Scale ~= 0 or Vector.Y.Offset ~= 0 and Vector.X.Scale ~= 0) or Vector.X.Offset == Vector.Y.Offset and Vector.X.Scale == Vector.Y.Scale or Vector.X.Offset == 0 then
 		return Vector
 	else
@@ -33,7 +33,7 @@ local function v9(Vector: UDim2): UDim2 --[[ Line: 35 ]]
 	end
 end
 
-local function v10(Vector): boolean --[[ Line: 48 ]]
+local function v10(Vector): boolean
 	local NoVector: boolean = not Vector or (if Vector.X.Offset == 0 then Vector.Y.Offset ~= 0 and Vector.X.Scale ~= 0 else Vector.Y.Scale ~= 0 or Vector.Y.Offset ~= 0 and Vector.X.Scale ~= 0)
 	
 	if not NoVector and Vector.X.Offset == 0 then
@@ -42,7 +42,7 @@ local function v10(Vector): boolean --[[ Line: 48 ]]
 	return NoVector
 end
 
-local _ = function(p1, p2, p3, p4, p5: number) --[[ Line: 58 ]]
+local _ = function(p1, p2, p3, p4, p5: number)
 	-- upvalues: MigrationSizeExceptionsModule (copy)
 	local Offset = p1.Y.Offset
 	
@@ -60,7 +60,7 @@ local _ = function(p1, p2, p3, p4, p5: number) --[[ Line: 58 ]]
 	return Offset
 end
 
-return function(Tbl, Text, p1, p2, p3, p4: number, p5) --[[ Line: 74 | Named "getBuilderIconElement" ]]
+return function(Tbl, Text, p1, p2, p3, p4: number, p5)
 	-- upvalues: v9 (copy), v10 (copy), MigrationSizeExceptionsModule (copy), BuilderIconsModule (copy), config (copy), RoactModule (copy), config1 (copy)
 	assert(Tbl.ImageRectOffset == nil and Tbl.ImageRectSize == nil, "ImageRect props not supported for migration icons")
 	assert(Tbl.SliceCenter == nil and Tbl.SliceScale == nil, "Image slices not supported for migration icons")
@@ -70,7 +70,7 @@ return function(Tbl, Text, p1, p2, p3, p4: number, p5) --[[ Line: 74 | Named "ge
 		local Size = Copy.Size
 		Copy.Size = Size:map(v9)
 		Copy.TextScaled = Size:map(v10)
-		Copy.TextSize = Size:map(function(Vector) --[[ Line: 97 ]]
+		Copy.TextSize = Size:map(function(Vector)
 			-- upvalues: p3 (copy), p1 (copy), p5 (copy), MigrationSizeExceptionsModule (upval)
 			local NoVector: boolean = not Vector or (if Vector.X.Offset == 0 then Vector.Y.Offset ~= 0 and Vector.X.Scale ~= 0 else Vector.Y.Scale ~= 0 or Vector.Y.Offset ~= 0 and Vector.X.Scale ~= 0)
 			

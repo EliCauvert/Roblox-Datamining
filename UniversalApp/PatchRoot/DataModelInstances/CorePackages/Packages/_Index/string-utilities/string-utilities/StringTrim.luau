@@ -1,4 +1,4 @@
-﻿return function(p1, Text1: string, p2) --[[ Line: 3 | Named "StringTrim" ]]
+﻿return function(p1, Text1: string, p2)
 	if not Text1 then
 		Text1 = "%s"
 	end

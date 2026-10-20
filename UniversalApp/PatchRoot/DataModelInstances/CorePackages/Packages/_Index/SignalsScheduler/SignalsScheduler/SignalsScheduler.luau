@@ -1,7 +1,7 @@
 ﻿local Flag = false
 local List = {}
 
-local function batch(Callback: () -> ()) --[[ Line: 7 ]]
+local function batch(Callback: () -> ())
 	-- upvalues: Flag (ref), List (copy)
 	if Flag then
 		Callback()
@@ -20,11 +20,11 @@ end
 
 return {
 	batch = batch,
-	flush = function() --[[ Line: 21 ]]
+	flush = function()
 		-- upvalues: batch (copy)
-		batch(function() --[[ Line: 22 ]] end)
+		batch(function() end)
 	end,
-	schedule = function(p1) --[[ Line: 25 ]]
+	schedule = function(p1)
 		-- upvalues: List (copy)
 		table.insert(List, p1)
 	end

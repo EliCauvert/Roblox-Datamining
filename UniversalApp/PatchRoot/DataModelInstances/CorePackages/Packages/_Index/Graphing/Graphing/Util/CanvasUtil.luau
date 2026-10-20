@@ -15,7 +15,7 @@ local CanvasUtil = {
 	}
 }
 
-function CanvasUtil.createFunctions(p1, p2, p3, p4, p5, p6) --[[ Line: 44 ]]
+function CanvasUtil.createFunctions(p1, p2, p3, p4, p5, p6)
 	-- upvalues: CanvasUtil (copy), TypesModule (copy), MathUtilModule (copy), Signal (copy)
 	local P3 = p4 or CanvasUtil.DEFAULT_XSCALING
 	local P4 = p5 or CanvasUtil.DEFAULT_YSCALING
@@ -24,7 +24,7 @@ function CanvasUtil.createFunctions(p1, p2, p3, p4, p5, p6) --[[ Line: 44 ]]
 	local P5 = p6 or 0.0001
 	assert(P5, "defaultEpsilon was nil")
 	
-	local function scaled(X, p7) --[[ Line: 60 ]]
+	local function scaled(X, p7)
 		-- upvalues: TypesModule (upval), MathUtilModule (upval)
 		if p7.Type == TypesModule.SCALING_LINEAR then
 			return X
@@ -39,7 +39,7 @@ function CanvasUtil.createFunctions(p1, p2, p3, p4, p5, p6) --[[ Line: 44 ]]
 		end
 	end
 	
-	local function unscaled(LerpResult: number, p7) --[[ Line: 75 ]]
+	local function unscaled(LerpResult: number, p7)
 		-- upvalues: TypesModule (upval), MathUtilModule (upval)
 		if p7.Type == TypesModule.SCALING_LINEAR then
 			return LerpResult
@@ -57,7 +57,7 @@ function CanvasUtil.createFunctions(p1, p2, p3, p4, p5, p6) --[[ Line: 44 ]]
 	local _Rect = Rect.new(scaled(p1.Min.X, P3), scaled(p1.Min.Y, P4), scaled(p1.Max.X, P3), scaled(p1.Max.Y, P4))
 	local _Rect1 = Rect.new(scaled(p2.Min.X, P3), scaled(p2.Min.Y, P4), scaled(p2.Max.X, P3), scaled(p2.Max.Y, P4))
 	
-	local function graphToPlotY(Y: number) --[[ Line: 182 ]]
+	local function graphToPlotY(Y: number)
 		-- upvalues: P4 (ref), TypesModule (upval), unscaled (copy), MathUtilModule (upval), _Rect (copy)
 		if P4.Direction ~= TypesModule.DIRECTION_FORWARD then
 			Y = 1 - Y
@@ -65,7 +65,7 @@ function CanvasUtil.createFunctions(p1, p2, p3, p4, p5, p6) --[[ Line: 44 ]]
 		return unscaled(MathUtilModule.lerp(_Rect.Min.Y, _Rect.Max.Y, Y), P4)
 	end
 	
-	local function plotToView(Vector) --[[ Line: 225 ]]
+	local function plotToView(Vector)
 		-- upvalues: MathUtilModule (upval), _Rect1 (copy), scaled (copy), P3 (ref), TypesModule (upval), P4 (ref)
 		local NewFunction = Vector2.new
 		local InverseLerpResult = MathUtilModule.inverseLerp(_Rect1.Min.X, _Rect1.Max.X, scaled(Vector.X, P3))
@@ -82,7 +82,7 @@ function CanvasUtil.createFunctions(p1, p2, p3, p4, p5, p6) --[[ Line: 44 ]]
 		return NewFunction(InverseLerpResult1, InverseLerpResult2)
 	end
 	
-	local function viewToPlotY(Y: number) --[[ Line: 242 ]]
+	local function viewToPlotY(Y: number)
 		-- upvalues: P4 (ref), TypesModule (upval), unscaled (copy), MathUtilModule (upval), _Rect1 (copy)
 		if P4.Direction ~= TypesModule.DIRECTION_FORWARD then
 			Y = 1 - Y
@@ -90,7 +90,7 @@ function CanvasUtil.createFunctions(p1, p2, p3, p4, p5, p6) --[[ Line: 44 ]]
 		return unscaled(MathUtilModule.lerp(_Rect1.Min.Y, _Rect1.Max.Y, Y), P4)
 	end
 	
-	local function viewToPlot(Vector) --[[ Line: 252 ]]
+	local function viewToPlot(Vector)
 		-- upvalues: P3 (ref), TypesModule (upval), MathUtilModule (upval), _Rect1 (copy), viewToPlotY (copy)
 		local NewFunction = Vector2.new
 		local X = Vector.X
@@ -115,7 +115,7 @@ function CanvasUtil.createFunctions(p1, p2, p3, p4, p5, p6) --[[ Line: 44 ]]
 		return NewFunction(Powered, viewToPlotY(Vector.Y))
 	end
 	
-	local function absToView(Vector) --[[ Line: 259 ]]
+	local function absToView(Vector)
 		-- upvalues: p3 (copy), p2 (copy), MathUtilModule (upval)
 		local Current = p3.current
 		
@@ -129,7 +129,7 @@ function CanvasUtil.createFunctions(p1, p2, p3, p4, p5, p6) --[[ Line: 44 ]]
 		end
 	end
 	
-	local function viewToAbs(Vector) --[[ Line: 276 ]]
+	local function viewToAbs(Vector)
 		-- upvalues: p3 (copy), p2 (copy), MathUtilModule (upval)
 		local Current = p3.current
 		
@@ -143,33 +143,33 @@ function CanvasUtil.createFunctions(p1, p2, p3, p4, p5, p6) --[[ Line: 44 ]]
 		end
 	end
 	
-	local function mouseToView(Vector) --[[ Line: 307 ]]
+	local function mouseToView(Vector)
 		-- upvalues: absToView (copy)
 		return absToView(Vector2.new(Vector.X, Vector.Y))
 	end
 	
 	return {
-		getViewport = function() --[[ Line: 106 ]]
+		getViewport = function()
 			-- upvalues: p3 (copy)
 			return p3.current
 		end,
-		getGraphRect = function() --[[ Line: 113 ]]
+		getGraphRect = function()
 			-- upvalues: p1 (copy)
 			return p1
 		end,
-		getViewportRect = function() --[[ Line: 120 ]]
+		getViewportRect = function()
 			-- upvalues: p2 (copy)
 			return p2
 		end,
-		getXAxisScaling = function() --[[ Line: 127 ]]
+		getXAxisScaling = function()
 			-- upvalues: P3 (ref)
 			return P3
 		end,
-		getYAxisScaling = function() --[[ Line: 134 ]]
+		getYAxisScaling = function()
 			-- upvalues: P4 (ref)
 			return P4
 		end,
-		plotToGraph = function(Vector) --[[ Line: 165 ]]
+		plotToGraph = function(Vector)
 			-- upvalues: MathUtilModule (upval), _Rect (copy), scaled (copy), P3 (ref), TypesModule (upval), P4 (ref)
 			local NewFunction = Vector2.new
 			local InverseLerpResult = MathUtilModule.inverseLerp(_Rect.Min.X, _Rect.Max.X, scaled(Vector.X, P3))
@@ -185,7 +185,7 @@ function CanvasUtil.createFunctions(p1, p2, p3, p4, p5, p6) --[[ Line: 44 ]]
 			end
 			return NewFunction(InverseLerpResult1, InverseLerpResult2)
 		end,
-		plotToGraphX = function(p7) --[[ Line: 141 ]]
+		plotToGraphX = function(p7)
 			-- upvalues: MathUtilModule (upval), _Rect (copy), scaled (copy), P3 (ref), TypesModule (upval)
 			local InverseLerpResult = MathUtilModule.inverseLerp(_Rect.Min.X, _Rect.Max.X, scaled(p7, P3))
 			
@@ -194,7 +194,7 @@ function CanvasUtil.createFunctions(p1, p2, p3, p4, p5, p6) --[[ Line: 44 ]]
 			end
 			return InverseLerpResult
 		end,
-		plotToGraphY = function(p7) --[[ Line: 153 ]]
+		plotToGraphY = function(p7)
 			-- upvalues: MathUtilModule (upval), _Rect (copy), scaled (copy), P4 (ref), TypesModule (upval)
 			local InverseLerpResult = MathUtilModule.inverseLerp(_Rect.Min.Y, _Rect.Max.Y, scaled(p7, P4))
 			
@@ -203,7 +203,7 @@ function CanvasUtil.createFunctions(p1, p2, p3, p4, p5, p6) --[[ Line: 44 ]]
 			end
 			return InverseLerpResult
 		end,
-		graphToPlot = function(Vector) --[[ Line: 192 ]]
+		graphToPlot = function(Vector)
 			-- upvalues: P3 (ref), TypesModule (upval), MathUtilModule (upval), _Rect (copy), graphToPlotY (copy)
 			local NewFunction = Vector2.new
 			local X = Vector.X
@@ -227,7 +227,7 @@ function CanvasUtil.createFunctions(p1, p2, p3, p4, p5, p6) --[[ Line: 44 ]]
 			end
 			return NewFunction(Powered, graphToPlotY(Vector.Y))
 		end,
-		graphToPlotX = function(p7: number) --[[ Line: 172 ]]
+		graphToPlotX = function(p7: number)
 			-- upvalues: P3 (ref), TypesModule (upval), unscaled (copy), MathUtilModule (upval), _Rect (copy)
 			if P3.Direction == TypesModule.DIRECTION_REVERSED then
 				p7 = 1 - p7
@@ -236,7 +236,7 @@ function CanvasUtil.createFunctions(p1, p2, p3, p4, p5, p6) --[[ Line: 44 ]]
 		end,
 		graphToPlotY = graphToPlotY,
 		plotToView = plotToView,
-		plotToViewX = function(p7) --[[ Line: 199 ]]
+		plotToViewX = function(p7)
 			-- upvalues: MathUtilModule (upval), _Rect1 (copy), scaled (copy), P3 (ref), TypesModule (upval)
 			local InverseLerpResult = MathUtilModule.inverseLerp(_Rect1.Min.X, _Rect1.Max.X, scaled(p7, P3))
 			
@@ -245,7 +245,7 @@ function CanvasUtil.createFunctions(p1, p2, p3, p4, p5, p6) --[[ Line: 44 ]]
 			end
 			return InverseLerpResult
 		end,
-		plotToViewY = function(p7) --[[ Line: 212 ]]
+		plotToViewY = function(p7)
 			-- upvalues: MathUtilModule (upval), _Rect1 (copy), scaled (copy), P4 (ref), TypesModule (upval)
 			local InverseLerpResult = MathUtilModule.inverseLerp(_Rect1.Min.Y, _Rect1.Max.Y, scaled(p7, P4))
 			
@@ -255,7 +255,7 @@ function CanvasUtil.createFunctions(p1, p2, p3, p4, p5, p6) --[[ Line: 44 ]]
 			return InverseLerpResult
 		end,
 		viewToPlot = viewToPlot,
-		viewToPlotX = function(p7: number) --[[ Line: 232 ]]
+		viewToPlotX = function(p7: number)
 			-- upvalues: P3 (ref), TypesModule (upval), unscaled (copy), MathUtilModule (upval), _Rect1 (copy)
 			if P3.Direction == TypesModule.DIRECTION_REVERSED then
 				p7 = 1 - p7
@@ -265,20 +265,20 @@ function CanvasUtil.createFunctions(p1, p2, p3, p4, p5, p6) --[[ Line: 44 ]]
 		viewToPlotY = viewToPlotY,
 		absToView = absToView,
 		viewToAbs = viewToAbs,
-		absToPlot = function(p7) --[[ Line: 293 ]]
+		absToPlot = function(p7)
 			-- upvalues: viewToPlot (copy), absToView (copy)
 			return viewToPlot(absToView(p7))
 		end,
-		plotToAbs = function(p7) --[[ Line: 300 ]]
+		plotToAbs = function(p7)
 			-- upvalues: viewToAbs (copy), plotToView (copy)
 			return viewToAbs(plotToView(p7))
 		end,
 		mouseToView = mouseToView,
-		mouseToPlot = function(p7) --[[ Line: 314 ]]
+		mouseToPlot = function(p7)
 			-- upvalues: viewToPlot (copy), mouseToView (copy)
 			return viewToPlot(mouseToView(p7))
 		end,
-		isPointInViewport = function(Vector, p7): boolean --[[ Line: 337 ]]
+		isPointInViewport = function(Vector, p7): boolean
 			-- upvalues: P5 (ref), p2 (copy)
 			local X = Vector.X
 			local P33 = p7 or P5
@@ -291,19 +291,19 @@ function CanvasUtil.createFunctions(p1, p2, p3, p4, p5, p6) --[[ Line: 44 ]]
 			end
 			return IsXBelow
 		end,
-		isPointInViewportX = function(p7, p8): boolean --[[ Line: 321 ]]
+		isPointInViewportX = function(p7, p8): boolean
 			-- upvalues: P5 (ref), p2 (copy)
 			local P29 = p8 or P5
 			
 			return p2.Min.X - P29 <= p7 and p7 <= p2.Max.X + P29
 		end,
-		isPointInViewportY = function(p7, p8): boolean --[[ Line: 329 ]]
+		isPointInViewportY = function(p7, p8): boolean
 			-- upvalues: P5 (ref), p2 (copy)
 			local P31 = p8 or P5
 			
 			return p2.Min.Y - P31 <= p7 and p7 <= p2.Max.Y + P31
 		end,
-		isRectInViewport = function(p7, p8): boolean --[[ Line: 344 ]]
+		isRectInViewport = function(p7, p8): boolean
 			-- upvalues: P5 (ref), p2 (copy)
 			local P35 = p8 or P5
 			
@@ -313,7 +313,7 @@ function CanvasUtil.createFunctions(p1, p2, p3, p4, p5, p6) --[[ Line: 44 ]]
 	}
 end
 
-function CanvasUtil.createStableContext(p1, p2, p3, p4, p5, p6) --[[ Line: 393 ]]
+function CanvasUtil.createStableContext(p1, p2, p3, p4, p5, p6)
 	-- upvalues: SignalsModule (copy), CanvasUtil (copy)
 	local P37 = p2 or Rect.new(0, 0, 1, 1)
 	local P38 = p3 or P37
@@ -321,7 +321,7 @@ function CanvasUtil.createStableContext(p1, p2, p3, p4, p5, p6) --[[ Line: 393 ]
 	local Functions = CanvasUtil.createFunctions(P37, P38, p1, p4, p5, p6)
 	Functions.viewportRectGetter = Signal
 	
-	return Functions, function(p7, p8, p9, p10, p11) --[[ Line: 421 | Named "update" ]]
+	return Functions, function(p7, p8, p9, p10, p11)
 		-- upvalues: CanvasUtil (upval), p1 (copy), Functions (copy), Signal2 (copy)
 		for i, value in CanvasUtil.createFunctions(p7, p8, p1, p9, p10, p11) do
 			if i ~= "viewportRectGetter" then
@@ -332,7 +332,7 @@ function CanvasUtil.createStableContext(p1, p2, p3, p4, p5, p6) --[[ Line: 393 ]
 	end
 end
 
-function CanvasUtil.createDefaultFunctions() --[[ Line: 447 ]]
+function CanvasUtil.createDefaultFunctions()
 	-- upvalues: CanvasUtil (copy), config (copy)
 	return CanvasUtil.createFunctions(Rect.new(0, 0, 1, 1), Rect.new(0, 0, 1, 1), config)
 end

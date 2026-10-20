@@ -6,7 +6,7 @@ local _ = require(Parent.utilities.graphql.types)
 local self = setmetatable({}, { __index = Error })
 self.__index = self
 
-function self.new(Message, Path, Query, Variables) --[[ Line: 62 ]]
+function self.new(Message, Path, Query, Variables)
 	-- upvalues: Error (copy), self (copy)
 	local NewError = Error.new(Message)
 	NewError.message = Message

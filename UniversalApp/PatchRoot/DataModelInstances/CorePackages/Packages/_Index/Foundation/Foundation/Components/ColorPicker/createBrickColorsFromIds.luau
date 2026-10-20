@@ -1,4 +1,4 @@
-﻿return function(List) --[[ Line: 8 | Named "createBrickColorsFromIds" ]]
+﻿return function(List)
 	local List1 = {}
 	
 	for _, value in List do

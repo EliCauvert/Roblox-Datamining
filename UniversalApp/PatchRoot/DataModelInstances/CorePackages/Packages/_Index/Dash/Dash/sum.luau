@@ -1,8 +1,8 @@
 ﻿local ReduceModule = require(script.Parent.reduce)
 
-return function(p1) --[[ Line: 16 | Named "sum" ]]
+return function(p1)
 	-- upvalues: ReduceModule (copy)
-	return ReduceModule(p1, function(p2, p3) --[[ Line: 17 ]]
+	return ReduceModule(p1, function(p2, p3)
 		return p2 + p3
 	end, 0)
 end

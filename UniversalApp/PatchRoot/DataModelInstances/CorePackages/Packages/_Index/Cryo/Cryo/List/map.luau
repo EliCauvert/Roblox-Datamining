@@ -1,4 +1,4 @@
-﻿return function(p1, Callback) --[[ Line: 4 | Named "map" ]]
+﻿return function(p1, Callback)
 	local t = {}
 	
 	for i = 1, #p1 do

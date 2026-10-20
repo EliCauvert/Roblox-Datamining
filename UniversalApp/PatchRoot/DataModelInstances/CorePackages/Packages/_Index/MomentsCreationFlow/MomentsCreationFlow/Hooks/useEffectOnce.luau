@@ -1,9 +1,9 @@
 ﻿local ReactModule = require(script:FindFirstAncestor("MomentsCreationFlow").Parent.React)
 
-return function(Callback, p1) --[[ Line: 6 ]]
+return function(Callback, p1)
 	-- upvalues: ReactModule (copy)
 	local UseRefResult = ReactModule.useRef(false)
-	ReactModule.useEffect(function() --[[ Line: 9 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: p1 (copy), UseRefResult (copy), Callback (copy)
 		if p1 and not UseRefResult.current then
 			Callback()

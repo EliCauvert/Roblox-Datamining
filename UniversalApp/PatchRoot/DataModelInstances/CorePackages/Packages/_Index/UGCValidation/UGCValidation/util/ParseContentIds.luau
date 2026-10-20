@@ -3,11 +3,11 @@ local ConstantsModule = require(Parent.Constants)
 local FailureReasonsAccumulatorModule = require(Parent.util.FailureReasonsAccumulator)
 local GetFFlagUGCValidateVersionedContentIdsModule = require(Parent.flags.getFFlagUGCValidateVersionedContentIds)
 
-local function _(Text: string): string --[[ Line: 19 | Named "getRbxAssetId" ]]
+local function _(Text: string): string
 	return (string.match(Text, "^rbxassetid://(%d+)$"))
 end
 
-local function getAssetUrlId(Text: string) --[[ Line: 25 ]]
+local function getAssetUrlId(Text: string)
 	local Match: string = string.match(Text, "^https?://www%.(.+)") or string.match(Text, "^https?://(.+)")
 	
 	if Match then
@@ -19,7 +19,7 @@ local function getAssetUrlId(Text: string) --[[ Line: 25 ]]
 	end
 end
 
-local function getAssetDeliveryAssetUrlId(Text: string) --[[ Line: 40 ]]
+local function getAssetDeliveryAssetUrlId(Text: string)
 	local Match: string? = string.match(Text, "^https?://assetdelivery%.(.+)")
 	
 	if Match then
@@ -31,7 +31,7 @@ local function getAssetDeliveryAssetUrlId(Text: string) --[[ Line: 40 ]]
 	end
 end
 
-local _ = function(Text: string) --[[ Line: 57 | Named "splitVersionPin" ]]
+local _ = function(Text: string)
 	local Match, Match2, Match3 = string.match(Text, "^(.*)&(%a+)=(%d+)$")
 	
 	if Match == nil or string.lower(Match2) ~= "version" or #Match3 > 10 then
@@ -46,7 +46,7 @@ local _ = function(Text: string) --[[ Line: 57 | Named "splitVersionPin" ]]
 	end
 end
 
-local function tryParseVersionedContentId(Text1: string) --[[ Line: 72 ]]
+local function tryParseVersionedContentId(Text1: string)
 	-- upvalues: getAssetUrlId (copy), getAssetDeliveryAssetUrlId (copy)
 	local Match, Match2, Match3 = string.match(Text1, "^(.*)&(%a+)=(%d+)$")
 	local v1 = nil
@@ -80,7 +80,7 @@ local function tryParseVersionedContentId(Text1: string) --[[ Line: 72 ]]
 	end
 end
 
-local function tryGetAssetIdFromContentIdInternal(Text: string) --[[ Line: 88 ]]
+local function tryGetAssetIdFromContentIdInternal(Text: string)
 	-- upvalues: GetFFlagUGCValidateVersionedContentIdsModule (copy), tryParseVersionedContentId (copy), getAssetUrlId (copy), getAssetDeliveryAssetUrlId (copy)
 	if GetFFlagUGCValidateVersionedContentIdsModule() then
 		return (tryParseVersionedContentId(Text))
@@ -106,7 +106,7 @@ local function tryGetAssetIdFromContentIdInternal(Text: string) --[[ Line: 88 ]]
 	end
 end
 
-local _ = function(p1, p2, p3): boolean --[[ Line: 116 | Named "hasInExpCreatedEditableInstance" ]]
+local _ = function(p1, p2, p3): boolean
 	if not p3 then
 		return false
 	elseif not p3.allowEditableInstances then
@@ -124,7 +124,7 @@ local _ = function(p1, p2, p3): boolean --[[ Line: 116 | Named "hasInExpCreatedE
 	end
 end
 
-local function parseContentId(List1, p1, List, Object, FieldName, p2, p3) --[[ Line: 146 ]]
+local function parseContentId(List1, p1, List, Object, FieldName, p2, p3)
 	-- upvalues: tryGetAssetIdFromContentIdInternal (copy)
 	local Entry = Object[FieldName]
 	
@@ -179,7 +179,7 @@ local function parseContentId(List1, p1, List, Object, FieldName, p2, p3) --[[ L
 	end
 end
 
-local function parseWithErrorCheckInternal(p1, p2, p3, Object, p4, p5, p6) --[[ Line: 191 ]]
+local function parseWithErrorCheckInternal(p1, p2, p3, Object, p4, p5, p6)
 	-- upvalues: ConstantsModule (copy), FailureReasonsAccumulatorModule (copy), parseContentId (copy)
 	local P12 = p4 or ConstantsModule.CONTENT_ID_FIELDS
 	local NewFailureReasonsAccumulator = FailureReasonsAccumulatorModule.new()
@@ -200,11 +200,11 @@ local function parseWithErrorCheckInternal(p1, p2, p3, Object, p4, p5, p6) --[[ 
 end
 
 local ParseContentIdsModule = {
-	tryGetAssetIdFromContentId = function(p7) --[[ Line: 230 ]]
+	tryGetAssetIdFromContentId = function(p7)
 		-- upvalues: tryGetAssetIdFromContentIdInternal (copy)
 		return (tryGetAssetIdFromContentIdInternal(p7))
 	end,
-	tryParseContentId = function(p7) --[[ Line: 236 ]]
+	tryParseContentId = function(p7)
 		-- upvalues: GetFFlagUGCValidateVersionedContentIdsModule (copy), tryParseVersionedContentId (copy), tryGetAssetIdFromContentIdInternal (copy)
 		if GetFFlagUGCValidateVersionedContentIdsModule() then
 			return tryParseVersionedContentId(p7)
@@ -212,17 +212,17 @@ local ParseContentIdsModule = {
 			return tryGetAssetIdFromContentIdInternal(p7), nil
 		end
 	end,
-	getReferenceKey = function(AssetId, Version) --[[ Line: 244 ]]
+	getReferenceKey = function(AssetId, Version)
 		return if Version == nil then AssetId else string.format("%s&version=%d", AssetId, Version)
 	end
 }
 
-function ParseContentIdsModule.toAssetUri(AssetId, Version): string --[[ Line: 252 ]]
+function ParseContentIdsModule.toAssetUri(AssetId, Version): string
 	-- upvalues: ParseContentIdsModule (copy)
 	return "rbxassetid://" .. ParseContentIdsModule.getReferenceKey(AssetId, Version)
 end
 
-function ParseContentIdsModule.getDistinctReferences(List) --[[ Line: 257 ]]
+function ParseContentIdsModule.getDistinctReferences(List)
 	-- upvalues: ParseContentIdsModule (copy)
 	local List1 = {}
 	local t = {}
@@ -245,12 +245,12 @@ function ParseContentIdsModule.getDistinctReferences(List) --[[ Line: 257 ]]
 	return List1
 end
 
-function ParseContentIdsModule.parseWithErrorCheck(p7, p8, p9, p10, p11, p12) --[[ Line: 280 ]]
+function ParseContentIdsModule.parseWithErrorCheck(p7, p8, p9, p10, p11, p12)
 	-- upvalues: parseWithErrorCheckInternal (copy)
 	return parseWithErrorCheckInternal(p7, p8, nil, p9, p10, p11, p12)
 end
 
-function ParseContentIdsModule.parse(p7, p8, p9) --[[ Line: 299 ]]
+function ParseContentIdsModule.parse(p7, p8, p9)
 	-- upvalues: parseWithErrorCheckInternal (copy)
 	local t = {}
 	assert((parseWithErrorCheckInternal({}, {}, t, p7, p8, nil, p9)))

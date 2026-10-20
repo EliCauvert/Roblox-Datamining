@@ -8,10 +8,10 @@ local PcallDeferredModule = require(Parent.util.pcallDeferred)
 local GetEditableMeshFromContextModule = require(Parent.util.getEditableMeshFromContext)
 local GetFFlagUGCValidationEyebrowEyelashSupportModule = require(Parent.flags.getFFlagUGCValidationEyebrowEyelashSupport)
 
-return function(Object, p1) --[[ Line: 17 | Named "validateSkinningTransfer" ]]
+return function(Object, p1)
 	-- upvalues: PcallDeferredModule (copy), GetEditableMeshFromContextModule (copy), UGCValidationService (copy), AnalyticsModule (copy), ConstantsInterfaceModule (copy), GetFFlagUGCValidationEyebrowEyelashSupportModule (copy), ConstantsModule (copy)
 	local AssetTypeEnum = p1.assetTypeEnum
-	local PcallDeferredModuleResult, PcallDeferredModuleResult2 = PcallDeferredModule(function() --[[ Line: 23 ]]
+	local PcallDeferredModuleResult, PcallDeferredModuleResult2 = PcallDeferredModule(function()
 		-- upvalues: GetEditableMeshFromContextModule (upval), Object (copy), p1 (copy), UGCValidationService (upval)
 		local MeshId, MeshId2 = GetEditableMeshFromContextModule(Object, "MeshId", p1)
 		

@@ -5,14 +5,14 @@ local ValidationEnumsModule = require(Parent.validationSystem.ValidationEnums)
 local ErrorSourceStringsModule = require(Parent.validationSystem.ErrorSourceStrings)
 local BoundsCalculatorModule = require(Parent.util.BoundsCalculator)
 
-local function _(Object) --[[ Line: 25 | Named "getScaleTypeFromInstance" ]]
+local function _(Object)
 	-- upvalues: ConstantsModule (copy)
 	local AvatarPartScaleType = Object:FindFirstChild("AvatarPartScaleType")
 	
 	return if AvatarPartScaleType and ConstantsModule.AvatarPartScaleTypes[AvatarPartScaleType.Value] then AvatarPartScaleType.Value else nil
 end
 
-local function getConsistentScaleType(Object, AssetType, p1) --[[ Line: 33 ]]
+local function getConsistentScaleType(Object, AssetType, p1)
 	-- upvalues: ConstantsModule (copy), ErrorSourceStringsModule (copy)
 	local ASSETTYPE = ConstantsModule.ASSET_TYPE_INFO[AssetType]
 	local v1 = nil
@@ -43,7 +43,7 @@ local function getConsistentScaleType(Object, AssetType, p1) --[[ Line: 33 ]]
 	return v1
 end
 
-local function validateMinBounds(MinSize, AssetName, p2, p3, RootInstance) --[[ Line: 64 ]]
+local function validateMinBounds(MinSize, AssetName, p2, p3, RootInstance)
 	-- upvalues: ErrorSourceStringsModule (copy)
 	local MaxMeshCornerDelta = p2.maxMeshCorner - p2.minMeshCorner
 	
@@ -62,7 +62,7 @@ local function validateMinBounds(MinSize, AssetName, p2, p3, RootInstance) --[[ 
 	end
 end
 
-local function validateMaxBounds(MaxSize, AssetName, p4, p5, RootInstance) --[[ Line: 86 ]]
+local function validateMaxBounds(MaxSize, AssetName, p4, p5, RootInstance)
 	-- upvalues: ErrorSourceStringsModule (copy)
 	local MaxOverallDelta = p4.maxOverall - p4.minOverall
 	
@@ -81,7 +81,7 @@ local function validateMaxBounds(MaxSize, AssetName, p4, p5, RootInstance) --[[ 
 	end
 end
 
-local function createAllBodyPartsFromRootInstance(RootInstance) --[[ Line: 108 ]]
+local function createAllBodyPartsFromRootInstance(RootInstance)
 	local Parts = {}
 	
 	for _, Part in RootInstance:GetChildren() do
@@ -92,7 +92,7 @@ local function createAllBodyPartsFromRootInstance(RootInstance) --[[ Line: 108 ]
 	return Parts
 end
 
-local function getFullBodyConsistentScaleType(List, p6, RootInstance) --[[ Line: 118 ]]
+local function getFullBodyConsistentScaleType(List, p6, RootInstance)
 	-- upvalues: ConstantsModule (copy), ErrorSourceStringsModule (copy)
 	local v2 = nil
 	
@@ -131,7 +131,7 @@ return {
 	},
 	conditionalData = { ValidationEnumsModule.SharedDataMember.renderMeshesData },
 	expectedFailures = {},
-	run = function(p7, p8) --[[ Line: 146 ]]
+	run = function(p7, p8)
 		-- upvalues: ValidationEnumsModule (copy), createAllBodyPartsFromRootInstance (copy), getFullBodyConsistentScaleType (copy), ConstantsModule (copy), BoundsCalculatorModule (copy), validateMinBounds (copy), validateMaxBounds (copy), getConsistentScaleType (copy)
 		local RootInstance = p8.rootInstance
 		local RenderMeshesData = p8.renderMeshesData

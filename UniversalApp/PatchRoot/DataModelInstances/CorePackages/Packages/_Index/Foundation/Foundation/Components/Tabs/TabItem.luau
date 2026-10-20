@@ -21,12 +21,12 @@ local IsBuilderOrMigratedIconFunction = IconMigrationUtilsModule.isBuilderOrMigr
 local ConstantsModule = require(Foundation.Constants)
 local UseTabItemVariantsModule = require(script.Parent.useTabItemVariants)
 
-return ReactModule.memo(ReactModule.forwardRef(function(p1, Ref) --[[ Line: 66 | Named "TabItem" ]]
+return ReactModule.memo(ReactModule.forwardRef(function(p1, Ref)
 	-- upvalues: UseTokensModule (copy), FillBehaviorModule (copy), UseTabItemVariantsModule (copy), ReactModule (copy), BuilderIconsModule (copy), IsBuilderOrMigratedIconFunction (copy), IconModule (copy), IsMigratedFunction (copy), Uiblox (copy), GetIconScaleModule (copy), ImageModule (copy), ViewModule (copy), ConstantsModule (copy), TextModule (copy), StatusIndicatorModule (copy)
 	local UseTokensModuleResult = UseTokensModule()
 	local Default = if p1.isActive then UseTokensModuleResult.Color.Content.Default else UseTokensModuleResult.Color.Content.Emphasis
 	local UseTabItemVariantsModuleResult = UseTabItemVariantsModule(UseTokensModuleResult, p1.size, p1.fillBehavior == FillBehaviorModule.Fill)
-	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 75 ]]
+	local UseMemoResult = ReactModule.useMemo(function()
 		-- upvalues: UseTokensModuleResult (copy)
 		return {
 			offset = 0,
@@ -34,7 +34,7 @@ return ReactModule.memo(ReactModule.forwardRef(function(p1, Ref) --[[ Line: 66 |
 			borderWidth = UseTokensModuleResult.Stroke.Thicker
 		}
 	end, { UseTokensModuleResult })
-	local UseMemoResult1 = ReactModule.useMemo(function() --[[ Line: 83 ]]
+	local UseMemoResult1 = ReactModule.useMemo(function()
 		-- upvalues: p1 (copy), BuilderIconsModule (upval)
 		return if p1.icon == nil then nil elseif typeof(p1.icon) == "string" then {
 			name = p1.icon,
@@ -72,7 +72,7 @@ return ReactModule.memo(ReactModule.forwardRef(function(p1, Ref) --[[ Line: 66 |
 		Interactive = ReactModule.createElement(ViewModule, {
 			LayoutOrder = 1,
 			Size = UDim2.fromScale(1, 1),
-			onActivated = function() --[[ Line: 126 ]]
+			onActivated = function()
 				-- upvalues: p1 (copy)
 				p1.onActivated(p1.id)
 			end,

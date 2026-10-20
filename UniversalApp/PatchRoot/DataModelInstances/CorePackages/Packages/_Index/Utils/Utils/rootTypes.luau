@@ -10,7 +10,7 @@ local Memoize1Function = require(script.Parent.memoize).memoize1
 local Callback = nil
 local Callback1 = nil
 
-local function getDefinedRootType(p1, p2) --[[ Line: 32 ]]
+local function getDefinedRootType(p1, p2)
 	-- upvalues: Callback (ref), Error1 (copy)
 	local GetResult = Callback(p1):get(p2)
 	
@@ -20,9 +20,9 @@ local function getDefinedRootType(p1, p2) --[[ Line: 32 ]]
 	return GetResult
 end
 
-local function _(p1) --[[ Line: 47 | Named "setToArray" ]]
+local function _(p1)
 	local List = {}
-	p1:forEach(function(p2) --[[ Line: 49 ]]
+	p1:forEach(function(p2)
 		-- upvalues: List (copy)
 		table.insert(List, p2)
 	end)
@@ -30,27 +30,27 @@ local function _(p1) --[[ Line: 47 | Named "setToArray" ]]
 	return List
 end
 
-local Memoize1Result = Memoize1Function(function(p1) --[[ Line: 55 ]]
+local Memoize1Result = Memoize1Function(function(p1)
 	-- upvalues: Callback1 (ref), Set (copy), Array (copy)
 	local NewFunction = Set.new
 	local MapFunction = Array.map
 	local ConcatFunction = Array.concat
 	local t = {}
 	local List = {}
-	Callback1(p1):forEach(function(p2) --[[ Line: 49 ]]
+	Callback1(p1):forEach(function(p2)
 		-- upvalues: List (copy)
 		table.insert(List, p2)
 	end)
 	
-	return NewFunction(MapFunction(ConcatFunction(t, List), function(p2) --[[ Line: 59 ]]
+	return NewFunction(MapFunction(ConcatFunction(t, List), function(p2)
 		return p2.name
 	end))
 end)
-Callback1 = Memoize1Function(function(p1) --[[ Line: 67 ]]
+Callback1 = Memoize1Function(function(p1)
 	-- upvalues: Callback (ref), Set (copy)
 	return Set.new(Callback(p1):values())
 end)
-Callback = Memoize1Function(function(p1) --[[ Line: 75 ]]
+Callback = Memoize1Function(function(p1)
 	-- upvalues: Map (copy), Boolean (copy)
 	local NewMap = Map.new()
 	local QueryType = p1:getQueryType()

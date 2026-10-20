@@ -3,7 +3,7 @@ local TypeRegistryModule = require(script.Parent.Parent.Parent.Parent.Parent.pro
 local Module = {}
 Module.__index = Module
 
-function Module.new(p1) --[[ Line: 138 ]]
+function Module.new(p1)
 	-- upvalues: Module (copy)
 	return (setmetatable({
 		id = if p1 == nil or p1.id == nil then nil else p1.id,
@@ -14,7 +14,7 @@ function Module.new(p1) --[[ Line: 138 ]]
 	}, Module))
 end
 
-function Module:encode() --[[ Line: 148 ]]
+function Module:encode()
 	-- upvalues: ProtoModule (copy)
 	local Buf = buffer.create(0)
 	local Count = 0
@@ -45,7 +45,7 @@ function Module:encode() --[[ Line: 148 ]]
 	return Buf1
 end
 
-function Module.decode(Buf) --[[ Line: 182 ]]
+function Module.decode(Buf)
 	-- upvalues: Module (copy), ProtoModule (copy)
 	local NewModule = Module.new()
 	local v1 = 0
@@ -96,7 +96,7 @@ function Module.decode(Buf) --[[ Line: 182 ]]
 	return NewModule
 end
 
-function Module:jsonEncode() --[[ Line: 245 ]]
+function Module:jsonEncode()
 	local t = {}
 	
 	if self.id ~= nil then
@@ -117,7 +117,7 @@ function Module:jsonEncode() --[[ Line: 245 ]]
 	return t
 end
 
-function Module:jsonDecode() --[[ Line: 271 ]]
+function Module:jsonDecode()
 	-- upvalues: Module (copy)
 	local NewModule = Module.new()
 	
@@ -154,7 +154,7 @@ TypeRegistryModule.default:register(config.CollectibleItemCreator)
 local Module1 = {}
 Module1.__index = Module1
 
-function Module1.new(p1) --[[ Line: 319 ]]
+function Module1.new(p1)
 	-- upvalues: Module1 (copy)
 	return (setmetatable({
 		id = if p1 == nil or p1.id == nil then "" else p1.id,
@@ -163,7 +163,7 @@ function Module1.new(p1) --[[ Line: 319 ]]
 	}, Module1))
 end
 
-function Module1:encode() --[[ Line: 329 ]]
+function Module1:encode()
 	-- upvalues: ProtoModule (copy)
 	local Buf = buffer.create(0)
 	local Count = 0
@@ -186,7 +186,7 @@ function Module1:encode() --[[ Line: 329 ]]
 	return Buf1
 end
 
-function Module1.decode(Buf) --[[ Line: 353 ]]
+function Module1.decode(Buf)
 	-- upvalues: Module1 (copy), ProtoModule (copy)
 	local NewModule = Module1.new()
 	local v2 = 0
@@ -227,7 +227,7 @@ function Module1.decode(Buf) --[[ Line: 353 ]]
 	return NewModule
 end
 
-function Module1:jsonEncode() --[[ Line: 406 ]]
+function Module1:jsonEncode()
 	local t = {}
 	
 	if self.id ~= nil and self.id ~= "" then
@@ -242,7 +242,7 @@ function Module1:jsonEncode() --[[ Line: 406 ]]
 	return t
 end
 
-function Module1:jsonDecode() --[[ Line: 424 ]]
+function Module1:jsonDecode()
 	-- upvalues: Module1 (copy)
 	local NewModule = Module1.new()
 	
@@ -270,7 +270,7 @@ TypeRegistryModule.default:register(config.CollectibleItemExperience)
 local Module2 = {}
 Module2.__index = Module2
 
-function Module2.new(p1) --[[ Line: 460 ]]
+function Module2.new(p1)
 	-- upvalues: Module2 (copy)
 	return (setmetatable({
 		id = if p1 == nil or p1.id == nil then "" else p1.id,
@@ -294,7 +294,7 @@ function Module2.new(p1) --[[ Line: 460 ]]
 	}, Module2))
 end
 
-function Module2:encode() --[[ Line: 495 ]]
+function Module2:encode()
 	-- upvalues: ProtoModule (copy)
 	local Buf = buffer.create(0)
 	local Count = 0
@@ -383,7 +383,7 @@ function Module2:encode() --[[ Line: 495 ]]
 	return Buf1
 end
 
-function Module2.decode(Buf) --[[ Line: 600 ]]
+function Module2.decode(Buf)
 	-- upvalues: Module2 (copy), ProtoModule (copy), config (copy)
 	local NewModule = Module2.new()
 	local v3 = 0
@@ -474,7 +474,7 @@ function Module2.decode(Buf) --[[ Line: 600 ]]
 	return NewModule
 end
 
-function Module2:jsonEncode() --[[ Line: 728 ]]
+function Module2:jsonEncode()
 	local t = {}
 	
 	if self.id ~= nil and self.id ~= "" then
@@ -544,7 +544,7 @@ function Module2:jsonEncode() --[[ Line: 728 ]]
 	return t
 end
 
-function Module2:jsonDecode() --[[ Line: 814 ]]
+function Module2:jsonDecode()
 	-- upvalues: Module2 (copy), config (copy)
 	local NewModule = Module2.new()
 	

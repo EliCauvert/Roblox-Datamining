@@ -11,7 +11,7 @@ local config = {
 	Large = "padding-small"
 }
 
-return function(Frame) --[[ Line: 27 | Named "BaseMenuGroup" ]]
+return function(Frame)
 	-- upvalues: ReactModule (copy), BaseMenuContextModule (copy), BaseMenuDividerModule (copy), ViewModule (copy), config (copy), BaseMenuTitleItemModule (copy)
 	local UseContextResult = ReactModule.useContext(BaseMenuContextModule)
 	local LayoutOrder: number = Frame.LayoutOrder

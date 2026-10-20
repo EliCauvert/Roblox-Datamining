@@ -21,7 +21,7 @@ if not HumanoidParentNil then
 		end
 	end
 end
-return function(p1, p2) --[[ Line: 43 ]]
+return function(p1, p2)
 	-- upvalues: HumanoidParentNil (copy), HumanoidModelFromDescriptionAsync (ref), Players (copy), Humanoid (ref), BodyPartRs (copy)
 	if HumanoidParentNil and HumanoidModelFromDescriptionAsync == nil then
 		HumanoidModelFromDescriptionAsync = if game:GetEngineFeature("AsyncRenamesUsedInLuaApps") then Players:CreateHumanoidModelFromDescriptionAsync(Instance.new("HumanoidDescription"), Enum.HumanoidRigType.R15) else Players:CreateHumanoidModelFromDescription(Instance.new("HumanoidDescription"), Enum.HumanoidRigType.R15)

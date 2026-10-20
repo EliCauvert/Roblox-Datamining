@@ -32,7 +32,7 @@ local config1 = {
 	}
 }
 
-return function(p1, p2) --[[ Line: 55 | Named "useIcon" ]]
+return function(p1, p2)
 	-- upvalues: IsBuilderIconModule (copy), Images (copy), ResolutionScale (copy), IconSizeModule (copy), DashModule (copy), config (copy), config1 (copy)
 	if not p1 or IsBuilderIconModule(p1) then
 		return nil, 1

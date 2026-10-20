@@ -35,7 +35,7 @@ local config = {
 local SHADOWIMAGE = ConstantsModule.SHADOW_IMAGE
 local SHADOWSIZE = ConstantsModule.SHADOW_SIZE
 
-local function Dialog(p1) --[[ Line: 70 ]]
+local function Dialog(p1)
 	-- upvalues: DashModule (copy), UseDialogVariantsFunction (copy), UseScaledValueModule (copy), ReactModule (copy), UseOverlayModule (copy), UseElevationModule (copy), ElevationLayerModule (copy), UseDialogModule (copy), UseDialogResponsiveSizeModule (copy), UseTokensModule (copy), UsePreferencesModule (copy), UseAnimatedBindingFunction (copy), OtterModule (copy), ViewModule (copy), ImageModule (copy), SHADOWIMAGE (copy), SHADOWSIZE (copy), WithCommonPropsModule (copy), StateLayerAffordanceModule (copy), TypesModule (copy), CloseAffordanceModule (copy), ElevationOwnerScope (copy), OnCloseCallbackReasonModule (copy), ReactRobloxModule (copy)
 	local AssignResult = DashModule.assign({}, p1, { LayoutOrder = 1 })
 	local UseDialogVariantsResult = UseDialogVariantsFunction()
@@ -52,7 +52,7 @@ local function Dialog(p1) --[[ Line: 70 ]]
 	local UseRefResult = ReactModule.useRef(false)
 	local UseRefResult1 = ReactModule.useRef(nil)
 	local UseAnimatedBindingResult, UseAnimatedBindingResult2 = UseAnimatedBindingFunction(1)
-	local UseAnimatedBindingResult1, UseAnimatedBindingResult2_1 = UseAnimatedBindingFunction(Size800, function() --[[ Line: 95 ]]
+	local UseAnimatedBindingResult1, UseAnimatedBindingResult2_1 = UseAnimatedBindingFunction(Size800, function()
 		-- upvalues: UseRefResult (copy), AssignResult (copy), UseRefResult1 (copy), UseStateResult2 (copy)
 		if not UseRefResult.current then
 			UseStateResult2(false)
@@ -62,7 +62,7 @@ local function Dialog(p1) --[[ Line: 70 ]]
 			return
 		end
 	end)
-	ReactModule.useEffect(function() --[[ Line: 107 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: ReducedMotion (copy), UseAnimatedBindingResult2_1 (copy), OtterModule (upval), UseAnimatedBindingResult2 (copy), UseTokensModuleResult (copy)
 		if ReducedMotion then
 			UseAnimatedBindingResult2_1((OtterModule.instant(0)))
@@ -77,7 +77,7 @@ local function Dialog(p1) --[[ Line: 70 ]]
 			UseAnimatedBindingResult2(OtterModule.ease(0, { duration = UseTokensModuleResult.Time.Time_100 }))
 		end
 	end, {})
-	local UseResult = ReactModule.useCallback(function(Current) --[[ Line: 122 ]]
+	local UseResult = ReactModule.useCallback(function(Current)
 		-- upvalues: UseRefResult (copy), UseRefResult1 (copy), ReducedMotion (copy), UseAnimatedBindingResult2_1 (copy), OtterModule (upval), Size800 (copy), UseAnimatedBindingResult2 (copy), UseTokensModuleResult (copy), UseStateResult2 (copy)
 		if UseRefResult.current then return end
 		UseRefResult1.current = Current
@@ -98,18 +98,18 @@ local function Dialog(p1) --[[ Line: 70 ]]
 			UseRefResult.current = true
 		end
 	end, { Size800, ReducedMotion })
-	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 144 ]]
+	local UseMemoResult = ReactModule.useMemo(function()
 		return Instance.new("Folder")
 	end, {})
-	ReactModule.useEffect(function() --[[ Line: 148 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UseMemoResult (copy)
-		return function() --[[ Line: 149 ]]
+		return function()
 			-- upvalues: UseMemoResult (upval)
 			UseMemoResult:Destroy()
 		end
 	end, { UseMemoResult })
 	local UseStateResult1, UseStateResult2_1 = ReactModule.useState(false)
-	local UseResult1 = ReactModule.useCallback(function(Parent) --[[ Line: 157 ]]
+	local UseResult1 = ReactModule.useCallback(function(Parent)
 		-- upvalues: UseMemoResult (copy), UseStateResult2_1 (copy)
 		if Parent then
 			UseMemoResult.Parent = Parent
@@ -124,7 +124,7 @@ local function Dialog(p1) --[[ Line: 70 ]]
 	local Element = ReactModule.createElement(ViewModule, { ZIndex = 2, tag = UseDialogVariantsResult.container.tag }, {
 		Shadow = ReactModule.createElement(ImageModule, {
 			Image = SHADOWIMAGE,
-			Size = UseBindingResult:map(function(Vector): UDim2 --[[ Line: 173 ]]
+			Size = UseBindingResult:map(function(Vector): UDim2
 				-- upvalues: SHADOWSIZE (upval)
 				return UDim2.fromOffset(Vector.X + SHADOWSIZE * 2, Vector.Y + SHADOWSIZE * 2)
 			end),
@@ -157,7 +157,7 @@ local function Dialog(p1) --[[ Line: 70 ]]
 			}) else nil,
 			DialogBody = ReactModule.createElement(ViewModule, {
 				tag = UseDialogVariantsResult.body.tag,
-				onAbsoluteSizeChanged = function(Frame) --[[ Line: 219 ]]
+				onAbsoluteSizeChanged = function(Frame)
 					-- upvalues: UseBindingResult2 (copy)
 					local AbsoluteSize = Frame.AbsoluteSize
 					
@@ -179,7 +179,7 @@ local function Dialog(p1) --[[ Line: 70 ]]
 			ZIndex = 2,
 			Size = UDim2.fromScale(2, 2),
 			stateLayer = { affordance = StateLayerAffordanceModule.None },
-			onActivated = function() --[[ Line: 243 ]]
+			onActivated = function()
 				-- upvalues: AssignResult (copy), UseResult (copy), ReducedMotion (copy), OnCloseCallbackReasonModule (upval)
 				if AssignResult.onClose then
 					if UseResult and not ReducedMotion then
@@ -190,7 +190,7 @@ local function Dialog(p1) --[[ Line: 70 ]]
 					AssignResult.onClose(OnCloseCallbackReasonModule.BackdropClick)
 				end
 			end,
-			backgroundStyle = if ReducedMotion or not UseAnimatedBindingResult then UseDialogVariantsResult.backdrop.backgroundStyle else UseAnimatedBindingResult:map(function(Alpha: number) --[[ Line: 253 ]]
+			backgroundStyle = if ReducedMotion or not UseAnimatedBindingResult then UseDialogVariantsResult.backdrop.backgroundStyle else UseAnimatedBindingResult:map(function(Alpha: number)
 				-- upvalues: UseDialogVariantsResult (copy)
 				return {
 					Color3 = UseDialogVariantsResult.backdrop.backgroundStyle.Color3,
@@ -202,7 +202,7 @@ local function Dialog(p1) --[[ Line: 70 ]]
 		DialogContentWrapper = ReactModule.createElement(ViewModule, {
 			ZIndex = 2,
 			ref = if ReducedMotion then nil else UseResult1,
-			Position = if ReducedMotion or not UseAnimatedBindingResult1 then nil else UseAnimatedBindingResult1:map(function(YOffset): UDim2 --[[ Line: 273 ]]
+			Position = if ReducedMotion or not UseAnimatedBindingResult1 then nil else UseAnimatedBindingResult1:map(function(YOffset): UDim2
 				return UDim2.new(0.5, 0, 0.5, YOffset)
 			end),
 			sizeConstraint = if ReducedMotion then nil else {
@@ -212,7 +212,7 @@ local function Dialog(p1) --[[ Line: 70 ]]
 				["anchor-center-center size-full"] = not ReducedMotion,
 				["size-full"] = ReducedMotion
 			},
-			GroupTransparency = if ReducedMotion or not UseStateResult or not UseAnimatedBindingResult1 then nil else UseAnimatedBindingResult1:map(function(p2) --[[ Line: 288 ]]
+			GroupTransparency = if ReducedMotion or not UseStateResult or not UseAnimatedBindingResult1 then nil else UseAnimatedBindingResult1:map(function(p2)
 				-- upvalues: Size800 (copy)
 				return p2 / Size800
 			end)
@@ -225,7 +225,7 @@ local function Dialog(p1) --[[ Line: 70 ]]
 	})
 end
 
-return ReactModule.memo(ReactModule.forwardRef(function(p1, ForwardRef) --[[ Line: 328 | Named "DialogContainer" ]]
+return ReactModule.memo(ReactModule.forwardRef(function(p1, ForwardRef)
 	-- upvalues: WithDefaultsModule (copy), config (copy), ReactModule (copy), DialogProviderModule (copy), Dialog (copy), DashModule (copy)
 	local WithDefaultsModuleResult = WithDefaultsModule(p1, config)
 	

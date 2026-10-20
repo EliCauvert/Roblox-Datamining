@@ -1,4 +1,4 @@
-﻿local function flatten(p1) --[[ Line: 2 ]]
+﻿local function flatten(p1)
 	-- upvalues: flatten (copy)
 	local ValueType = type(p1)
 	assert(ValueType == "table", "expected a table for first argument, got " .. ValueType)

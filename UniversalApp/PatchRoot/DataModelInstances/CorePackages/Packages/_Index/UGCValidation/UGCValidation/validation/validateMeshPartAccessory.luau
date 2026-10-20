@@ -18,7 +18,7 @@ local PcallDeferredModule = require(Parent.util.pcallDeferred)
 local RigidOrLayeredAllowedModule = require(Parent.util.RigidOrLayeredAllowed)
 local GetEngineFeatureEngineUGCValidatePropertiesSensibleModule = require(Parent.flags.getEngineFeatureEngineUGCValidatePropertiesSensible)
 
-return function(p1) --[[ Line: 26 | Named "validateMeshPartAccessory" ]]
+return function(p1)
 	-- upvalues: RigidOrLayeredAllowedModule (copy), AnalyticsModule (copy), ConstantsModule (copy), ValidateSingleInstanceModule (copy), CreateMeshPartAccessorySchemaModule (copy), ValidateInstanceTreeModule (copy), GetEngineFeatureEngineUGCValidatePropertiesSensibleModule (copy), ValidatePropertiesSensibleModule (copy), ValidateDependenciesModule (copy), FailureReasonsAccumulatorModule (copy), GetEditableMeshFromContextModule (copy), GetEditableImageFromContextModule (copy), PcallDeferredModule (copy), GetMeshSizeModule (copy), GetAttachmentModule (copy), ValidateTagsModule (copy), ValidateMeshSizePropertyModule (copy)
 	assert(p1.assetTypeEnum ~= nil, "assetTypeEnum required in validationContext for validateMeshPartAccessory")
 	local Instances = p1.instances
@@ -89,7 +89,7 @@ return function(p1) --[[ Line: 26 | Named "validateMeshPartAccessory" ]]
 	local _ = Handle.TextureID
 	local _ = Handle:GetFullName()
 	local _, _ = GetEditableImageFromContextModule(Handle, "TextureID", p1)
-	local PcallDeferredModuleResult, _ = PcallDeferredModule(function() --[[ Line: 142 ]]
+	local PcallDeferredModuleResult, _ = PcallDeferredModule(function()
 		-- upvalues: GetMeshSizeModule (upval), config (copy)
 		return GetMeshSizeModule(config)
 	end, p1)

@@ -2,11 +2,11 @@
 local TokenOverrides = nil
 local List = {}
 local config = {
-	getTokenOverrides = function() --[[ Line: 35 ]]
+	getTokenOverrides = function()
 		-- upvalues: TokenOverrides (ref)
 		return TokenOverrides
 	end,
-	setTokenOverrides = function(Value) --[[ Line: 38 ]]
+	setTokenOverrides = function(Value)
 		-- upvalues: TokenOverrides (ref), List (copy)
 		TokenOverrides = Value
 		
@@ -14,11 +14,11 @@ local config = {
 			value(Value)
 		end
 	end,
-	subscribe = function(Value) --[[ Line: 44 ]]
+	subscribe = function(Value)
 		-- upvalues: List (copy)
 		table.insert(List, Value)
 		
-		return function() --[[ Line: 46 ]]
+		return function()
 			-- upvalues: List (upval), Value (copy)
 			local FoundIndex: number? = table.find(List, Value)
 			
@@ -29,7 +29,7 @@ local config = {
 	end
 }
 
-return function() --[[ Line: 55 | Named "getTokenOverridesStore" ]]
+return function()
 	-- upvalues: config (copy)
 	return config
 end

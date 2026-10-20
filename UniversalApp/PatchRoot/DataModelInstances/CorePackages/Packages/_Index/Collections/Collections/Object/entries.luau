@@ -1,6 +1,6 @@
 ﻿local _ = require(script.Parent.Parent.Parent.ES7Types)
 
-return function(Text: string) --[[ Line: 24 ]]
+return function(Text: string)
 	assert(Text ~= nil, "cannot get entries from a nil value")
 	local ValueType = typeof(Text)
 	local List = {}

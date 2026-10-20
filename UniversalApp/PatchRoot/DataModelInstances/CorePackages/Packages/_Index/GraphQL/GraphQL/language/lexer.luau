@@ -15,7 +15,7 @@ local Callback2 = nil
 local uniCharCode = nil
 local Callback = nil
 
-uniCharCode = function(CharCodeAtResult, CharCodeAtResult1, CharCodeAtResult2, CharCodeAtResult3): number --[[ Line: 88 | Named "uniCharCode" ]]
+uniCharCode = function(CharCodeAtResult, CharCodeAtResult1, CharCodeAtResult2, CharCodeAtResult3): number
 	-- upvalues: Callback (ref)
 	local CallbackResult: number = Callback(CharCodeAtResult)
 	local CallbackResult1: number = Callback(CharCodeAtResult1)
@@ -25,50 +25,50 @@ uniCharCode = function(CharCodeAtResult, CharCodeAtResult1, CharCodeAtResult2, C
 	return if CallbackResult < 0 or CallbackResult1 < 0 or CallbackResult2 < 0 or CallbackResult3 < 0 then -1 else bit32.bor(bit32.lshift(CallbackResult, 12), bit32.lshift(CallbackResult1, 8), bit32.lshift(CallbackResult2, 4), CallbackResult3)
 end
 
-Callback = function(p1: number): number --[[ Line: 108 | Named "char2hex" ]]
+Callback = function(p1: number): number
 	return if p1 >= 48 and p1 <= 57 then p1 - 48 elseif p1 >= 65 and p1 <= 70 then p1 - 55 elseif p1 >= 97 and p1 <= 102 then p1 - 87 else -1
 end
 
-local function readName(Source, End: number, Line, p1, p2) --[[ Line: 126 ]]
+local function readName(Source, End: number, Line, p1, p2)
 	-- upvalues: String1 (copy), IsNaNFunction (copy), Token (copy), TokenKind (copy)
 	local Body: string = Source.body
 	local Length = string.len(Body)
 	local NewEnd = End + 1
 	local CharCodeAtResult = 0
 	
-	local function _(): boolean --[[ Line: 132 ]]
+	local function _(): boolean
 		-- upvalues: NewEnd (ref), Length (copy)
 		return NewEnd ~= Length + 1
 	end
 	
-	local _ = function(): boolean --[[ Line: 135 ]]
+	local _ = function(): boolean
 		-- upvalues: CharCodeAtResult (ref), String1 (upval), Body (copy), NewEnd (ref), IsNaNFunction (upval)
 		CharCodeAtResult = String1.charCodeAt(Body, NewEnd)
 		
 		return not IsNaNFunction(CharCodeAtResult)
 	end
 	
-	local _ = function(): boolean --[[ Line: 139 ]]
+	local _ = function(): boolean
 		-- upvalues: CharCodeAtResult (ref)
 		return CharCodeAtResult == 95
 	end
 	
-	local _ = function(): boolean --[[ Line: 142 ]]
+	local _ = function(): boolean
 		-- upvalues: CharCodeAtResult (ref)
 		return CharCodeAtResult >= 48 and CharCodeAtResult <= 57
 	end
 	
-	local _ = function(): boolean --[[ Line: 145 ]]
+	local _ = function(): boolean
 		-- upvalues: CharCodeAtResult (ref)
 		return CharCodeAtResult >= 65 and CharCodeAtResult <= 90
 	end
 	
-	local _ = function(): boolean --[[ Line: 148 ]]
+	local _ = function(): boolean
 		-- upvalues: CharCodeAtResult (ref)
 		return CharCodeAtResult >= 97 and CharCodeAtResult <= 122
 	end
 	
-	local _ = function(): boolean --[[ Line: 151 ]]
+	local _ = function(): boolean
 		-- upvalues: CharCodeAtResult (ref)
 		return CharCodeAtResult == 95 or (CharCodeAtResult >= 48 and CharCodeAtResult <= 57 or (CharCodeAtResult >= 65 and CharCodeAtResult <= 90 or CharCodeAtResult >= 97 and CharCodeAtResult <= 122))
 	end
@@ -81,7 +81,7 @@ local function readName(Source, End: number, Line, p1, p2) --[[ Line: 126 ]]
 	return Token.new(TokenKind.NAME, End, NewEnd, Line, p1, p2, String1.slice(Body, End, NewEnd))
 end
 
-local function readComment(Source, End: number, Line, p3, p4) --[[ Line: 179 ]]
+local function readComment(Source, End: number, Line, p3, p4)
 	-- upvalues: String1 (copy), IsNaNFunction (copy), Token (copy), TokenKind (copy)
 	local Body = Source.body
 	local Count: number = End
@@ -92,12 +92,12 @@ local function readComment(Source, End: number, Line, p3, p4) --[[ Line: 179 ]]
 	return Token.new(TokenKind.COMMENT, End, Count, Line, p3, p4, String1.slice(Body, End + 1, Count))
 end
 
-function printCharCode(p3: number) --[[ Line: 201 ]]
+function printCharCode(p3: number)
 	-- upvalues: IsNaNFunction (copy), TokenKind (copy), HttpService (copy), ToUnicodeStringModule (copy)
 	return if IsNaNFunction(p3) then TokenKind.EOF elseif p3 < 127 then HttpService:JSONEncode((string.char(p3))) else ToUnicodeStringModule(p3)
 end
 
-function readDigits(p3, Count, CharCodeAtResult): number? --[[ Line: 220 ]]
+function readDigits(p3, Count, CharCodeAtResult): number?
 	-- upvalues: String1 (copy), SyntaxErrorFunction (copy)
 	local Body = p3.body
 	local Count1: number = Count
@@ -115,15 +115,15 @@ function readDigits(p3, Count, CharCodeAtResult): number? --[[ Line: 220 ]]
 	return Count1
 end
 
-function unexpectedCharacterMessage(p3: number): string --[[ Line: 245 ]]
+function unexpectedCharacterMessage(p3: number): string
 	return if p3 < 32 and p3 ~= 9 and p3 ~= 10 and p3 ~= 13 then "Cannot contain the invalid character " .. printCharCode(p3) .. "." elseif p3 == 39 then "Unexpected single quote character ('), did you mean to use a double quote (\")?" else "Cannot parse the unexpected character " .. printCharCode(p3) .. "."
 end
 
-function isNameStart(p3: number): boolean --[[ Line: 259 ]]
+function isNameStart(p3: number): boolean
 	return p3 == 95 or (p3 >= 65 and p3 <= 90 or p3 >= 97 and p3 <= 122)
 end
 
-function readNumber(p3, Count, CharCodeAtResult, p4, p5, p6) --[[ Line: 274 ]]
+function readNumber(p3, Count, CharCodeAtResult, p4, p5, p6)
 	-- upvalues: String1 (copy), SyntaxErrorFunction (copy), Token (copy), TokenKind (copy)
 	local Body = p3.body
 	local CharCodeAtResult1 = CharCodeAtResult
@@ -171,7 +171,7 @@ function readNumber(p3, Count, CharCodeAtResult, p4, p5, p6) --[[ Line: 274 ]]
 	return Token.new(Flag and TokenKind.FLOAT or TokenKind.INT, Count, NewCount, p4, p5, p6, String1.slice(Body, Count, NewCount))
 end
 
-local function readToken(p3, Token1) --[[ Line: 359 ]]
+local function readToken(p3, Token1)
 	-- upvalues: String1 (copy), Token (copy), TokenKind (copy), readComment (copy), Callback1 (ref), Callback2 (ref), readName (copy), SyntaxErrorFunction (copy)
 	local Source = p3.source
 	local Body = Source.body
@@ -267,7 +267,7 @@ end
 local Module = {}
 Module.__index = Module
 
-function Module.new(Source) --[[ Line: 558 ]]
+function Module.new(Source)
 	-- upvalues: Token (copy), TokenKind (copy), Module (copy)
 	local NewToken = Token.new(TokenKind.SOF, 1, 1, 0, 0, nil)
 	
@@ -280,14 +280,14 @@ function Module.new(Source) --[[ Line: 558 ]]
 	}, Module))
 end
 
-function Module:advance() --[[ Line: 571 ]]
+function Module:advance()
 	self.lastToken = self.token
 	self.token = self:lookahead()
 	
 	return self.token
 end
 
-function Module:lookahead() --[[ Line: 577 ]]
+function Module:lookahead()
 	-- upvalues: TokenKind (copy), readToken (copy)
 	local Token = self.token
 	
@@ -306,7 +306,7 @@ function Module:lookahead() --[[ Line: 577 ]]
 	return Token
 end
 
-Callback1 = function(Source, End: number, Line, p4, p5, p6) --[[ Line: 623 | Named "readBlockString" ]]
+Callback1 = function(Source, End: number, Line, p4, p5, p6)
 	-- upvalues: IsNaNFunction (copy), String1 (copy), Token (copy), TokenKind (copy), DedentBlockStringValueFunction (copy), SyntaxErrorFunction (copy)
 	local Body = Source.body
 	local NewEnd = End + 3
@@ -346,7 +346,7 @@ Callback1 = function(Source, End: number, Line, p4, p5, p6) --[[ Line: 623 | Nam
 	error(SyntaxErrorFunction(Source, NewEnd, "Unterminated string."))
 end
 
-Callback2 = function(Source, End: number, Line, p7, p8) --[[ Line: 697 | Named "readString" ]]
+Callback2 = function(Source, End: number, Line, p7, p8)
 	-- upvalues: String1 (copy), IsNaNFunction (copy), Token (copy), TokenKind (copy), SyntaxErrorFunction (copy), uniCharCode (ref)
 	local Body = Source.body
 	local Length = utf8.len(Body)
@@ -408,7 +408,7 @@ end
 
 return {
 	Lexer = Module,
-	isPunctuatorTokenKind = function(AMP): boolean --[[ Line: 600 ]]
+	isPunctuatorTokenKind = function(AMP): boolean
 		-- upvalues: TokenKind (copy)
 		return AMP == TokenKind.BANG or (AMP == TokenKind.DOLLAR or (AMP == TokenKind.AMP or (AMP == TokenKind.PAREN_L or (AMP == TokenKind.PAREN_R or (AMP == TokenKind.SPREAD or (AMP == TokenKind.COLON or (AMP == TokenKind.EQUALS or (AMP == TokenKind.AT or (AMP == TokenKind.BRACKET_L or (AMP == TokenKind.BRACKET_R or (AMP == TokenKind.BRACE_L or (AMP == TokenKind.PIPE or AMP == TokenKind.BRACE_R))))))))))))
 	end

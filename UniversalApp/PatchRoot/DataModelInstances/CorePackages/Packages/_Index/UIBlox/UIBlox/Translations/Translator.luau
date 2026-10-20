@@ -4,7 +4,7 @@ local Parent = script.Parent
 local ConstantsModule = require(Parent.Constants)
 local GeneratedTranslationsModule = require(Parent.GeneratedTranslations)
 
-local function _(Parent) --[[ Line: 9 | Named "createUIBloxLocalizationTable" ]]
+local function _(Parent)
 	-- upvalues: GuiService (copy), ConstantsModule (copy), GeneratedTranslationsModule (copy)
 	if not GuiService:FindFirstChild(ConstantsModule.LOCALIZATION_TABLE_NAME) then
 		local LocalizationTable = Instance.new("LocalizationTable")
@@ -29,7 +29,7 @@ end
 local EnUsTranslator = GuiService.UIBloxLocalization:GetTranslator("en-us")
 local Translators = {}
 
-local _ = function(Key) --[[ Line: 28 | Named "getTranslatorForLocale" ]]
+local _ = function(Key)
 	-- upvalues: Translators (copy), GuiService (copy)
 	local Translator = Translators[Key]
 	
@@ -43,7 +43,7 @@ local _ = function(Key) --[[ Line: 28 | Named "getTranslatorForLocale" ]]
 	end
 end
 
-local _ = function() --[[ Line: 40 | Named "getTranslator" ]]
+local _ = function()
 	-- upvalues: LocalizationService (copy), Translators (copy), GuiService (copy)
 	local RobloxLocaleId = LocalizationService.RobloxLocaleId
 	local Translator = Translators[RobloxLocaleId]
@@ -58,9 +58,9 @@ local _ = function() --[[ Line: 40 | Named "getTranslator" ]]
 	end
 end
 
-local function formatByKeyWithFallback(p1, p2, Translator) --[[ Line: 44 ]]
+local function formatByKeyWithFallback(p1, p2, Translator)
 	-- upvalues: EnUsTranslator (copy)
-	local Success, Result = pcall(function() --[[ Line: 45 ]]
+	local Success, Result = pcall(function()
 		-- upvalues: Translator (copy), p1 (copy), p2 (copy)
 		return Translator:FormatByKey(p1, p2)
 	end)
@@ -69,7 +69,7 @@ local function formatByKeyWithFallback(p1, p2, Translator) --[[ Line: 44 ]]
 end
 
 return {
-	FormatByKey = function(_, p1, p2) --[[ Line: 60 ]]
+	FormatByKey = function(_, p1, p2)
 		-- upvalues: formatByKeyWithFallback (copy), LocalizationService (copy), Translators (copy), GuiService (copy)
 		local RobloxLocaleId = LocalizationService.RobloxLocaleId
 		local Translator = Translators[RobloxLocaleId]
@@ -84,7 +84,7 @@ return {
 		end
 		return formatByKeyWithFallback(p1, p2, Translator1)
 	end,
-	FormatByKeyForLocale = function(_, p1, Key, p2) --[[ Line: 64 ]]
+	FormatByKeyForLocale = function(_, p1, Key, p2)
 		-- upvalues: formatByKeyWithFallback (copy), Translators (copy), GuiService (copy)
 		local Translator = Translators[Key]
 		local Translator1 = nil

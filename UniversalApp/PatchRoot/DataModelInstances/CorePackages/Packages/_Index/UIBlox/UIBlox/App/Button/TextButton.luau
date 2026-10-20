@@ -61,11 +61,11 @@ TextButton.defaultProps = {
 	debugGetTextSize = GetTextSizeModule
 }
 
-function TextButton.init(p1) --[[ Line: 107 ]]
+function TextButton.init(p1)
 	-- upvalues: ControlStateModule (copy)
 	p1:setState({ controlState = ControlStateModule.Initialize })
 	
-	function p1.onStateChanged(p2, ControlState) --[[ Line: 112 ]]
+	function p1.onStateChanged(p2, ControlState)
 		-- upvalues: p1 (copy)
 		p1:setState({ controlState = ControlState })
 		
@@ -75,15 +75,15 @@ function TextButton.init(p1) --[[ Line: 107 ]]
 	end
 end
 
-function TextButton.render(p1) --[[ Line: 122 ]]
+function TextButton.render(p1)
 	-- upvalues: WithStyleModule (copy)
-	return WithStyleModule(function(p2) --[[ Line: 123 ]]
+	return WithStyleModule(function(p2)
 		-- upvalues: p1 (copy)
 		return p1:renderWithProviders(p2, nil, nil)
 	end)
 end
 
-function TextButton.renderWithProviders(p1, p2, Callback1, Callback) --[[ Line: 128 ]]
+function TextButton.renderWithProviders(p1, p2, Callback1, Callback)
 	-- upvalues: ControlStateModule (copy), GetContentStyleModule (copy), CleanRichTextTagsModule (copy), RoactModule (copy), InteractableModule (copy), ReactModule (copy), _UDim (copy), CursorKindModule (copy), GenericTextLabelModule (copy)
 	local DebugControlState = p1.props.debugControlState or p1.state.controlState
 	local ContentStyleModule = GetContentStyleModule({
@@ -139,7 +139,7 @@ function TextButton.renderWithProviders(p1, p2, Callback1, Callback) --[[ Line: 
 	})
 end
 
-local function TextButtonFunctionalWrapper(p1) --[[ Line: 203 ]]
+local function TextButtonFunctionalWrapper(p1)
 	-- upvalues: UseCursorModule (copy), _UDim (copy), RoactModule (copy), TextButton (copy), CryoModule (copy)
 	return RoactModule.createElement(TextButton, CryoModule.Dictionary.join(p1, { cursor = UseCursorModule(_UDim) }))
 end
@@ -147,7 +147,7 @@ end
 local TextButtonOuterWrapper = RoactModule.PureComponent:extend("TextButtonOuterWrapper")
 TextButtonOuterWrapper.validateProps = TextButton.validateProps
 
-function TextButtonOuterWrapper.render(p1) --[[ Line: 217 ]]
+function TextButtonOuterWrapper.render(p1)
 	-- upvalues: RoactModule (copy), TextButtonFunctionalWrapper (copy)
 	return RoactModule.createElement(TextButtonFunctionalWrapper, p1.props)
 end

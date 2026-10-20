@@ -1,8 +1,8 @@
-﻿local function _(p1: number): number --[[ Line: 16 | Named "getOverflowWindowStart" ]]
+﻿local function _(p1: number): number
 	return (math.max(p1 - 2, 1))
 end
 
-local function getDefaultDots(ClampedValue, Smallest, Size) --[[ Line: 20 ]]
+local function getDefaultDots(ClampedValue, Smallest, Size)
 	local List = {}
 	
 	for i = 1, Smallest do
@@ -14,7 +14,7 @@ local function getDefaultDots(ClampedValue, Smallest, Size) --[[ Line: 20 ]]
 	return List
 end
 
-local function getOverflowDots(ClampedValue: number, Largest: number, Largest1, p1, p2) --[[ Line: 34 ]]
+local function getOverflowDots(ClampedValue: number, Largest: number, Largest1, p1, p2)
 	local List = {}
 	
 	for i = Largest1, math.min(ClampedValue + 2, Largest) do
@@ -26,7 +26,7 @@ local function getOverflowDots(ClampedValue: number, Largest: number, Largest1, 
 	return List
 end
 
-return function(Size, p3, Value1: number, Value: number) --[[ Line: 55 | Named "getCarouselIndicatorDotsConfig" ]]
+return function(Size, p3, Value1: number, Value: number)
 	-- upvalues: getOverflowDots (copy), getDefaultDots (copy)
 	local Largest = math.max(math.floor(Value), 1)
 	local ClampedValue = math.clamp(math.floor(Value1), 1, Largest)

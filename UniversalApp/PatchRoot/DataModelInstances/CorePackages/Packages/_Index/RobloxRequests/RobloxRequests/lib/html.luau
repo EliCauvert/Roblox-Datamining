@@ -1,43 +1,43 @@
-﻿local function _(p1) --[[ Line: 3 | Named "rine" ]]
+﻿local function _(p1)
 	return p1 and (#p1 > 0 and p1)
 end
 
-local _ = function(p1) --[[ Line: 6 | Named "rit" ]]
+local _ = function(p1)
 	return type(p1) == "table" and p1
 end
 
-local _ = function(): boolean --[[ Line: 10 | Named "dont_crash" ]]
+local _ = function(): boolean
 	if math.random() <= 0.004 then
 		wait()
 	end
 	return true
 end
 
-local function v3() --[[ Line: 18 ]] end
+local function v3() end
 
-local _ = function(Text: string): string --[[ Line: 19 ]]
+local _ = function(Text: string): string
 	return string.gsub(Text, "([%^%$%(%)%%%.%[%]%*%+%-%?])", "%%%1")
 end
 
 local Callback1 = tostring
 local CharFunction = string.char
 local t = {}
-local Callback = t.silent and v3 or function(Text: string, p1: string, ...) --[[ Line: 26 ]]
+local Callback = t.silent and v3 or function(Text: string, p1: string, ...)
 	-- upvalues: t (copy)
 	print("[HTMLParser]" .. (" [%s] "):format(Text:upper()) .. p1:format(...) .. (t.nonl or "\n"))
 end
-local Callback3 = t.noerr and v3 or function(p1, ...) --[[ Line: 32 ]]
+local Callback3 = t.noerr and v3 or function(p1, ...)
 	-- upvalues: Callback (copy)
 	Callback("e", p1, ...)
 end
 
 if not t.noout or not v3 then
-	local _ = function(p1, ...) --[[ Line: 36 ]]
+	local _ = function(p1, ...)
 		-- upvalues: Callback (copy)
 		Callback("i", p1, ...)
 	end
 end
-local Callback2 = t.debug and function(Text: string, ...) --[[ Line: 41 ]]
+local Callback2 = t.debug and function(Text: string, ...)
 	-- upvalues: Callback (copy), v3 (copy), Callback1 (copy)
 	Callback("d", Text:gsub("#LINE#", (Callback1(v3(3)))), ...)
 end or v3
@@ -45,7 +45,7 @@ local ElementNodeModule = require(script.ElementNode)
 local VoidelementsModule = require(script.voidelements)
 
 return {
-	parse = function(p1, p2, Page_url) --[[ Line: 53 ]]
+	parse = function(p1, p2, Page_url)
 		-- upvalues: t (copy), Callback1 (copy), CharFunction (copy), Callback2 (copy), Callback3 (copy), ElementNodeModule (copy), VoidelementsModule (copy)
 		local T = (if t then #t > 0 and t else t) or ({} or {})
 		T.looplimit = T.looplimit or 100000000
@@ -96,7 +96,7 @@ return {
 				Callback3("Impossible to find at least two unused byte codes in this HTML-code. We need it to escape bracket-contained placeholders inside tags.")
 				Callback3("Consider enabling 'keep_danger_placeholders' option (to silence this error, if parser wasn't failed with current HTML-code) or manually replace few random bytes, to free up the codes.")
 			end
-			local function g(Key, ...): string --[[ Line: 124 ]]
+			local function g(Key, ...): string
 				-- upvalues: t1 (copy), Flag (ref), Callback2 (upval), Callback1 (upval)
 				local List = { ... }
 				local Entry = List[Key]
@@ -113,16 +113,16 @@ return {
 				return table.concat(List)
 			end
 			
-			CallbackResult = CallbackResult:gsub("(=[%s]-)(%b'')", function(...) --[[ Line: 144 ]]
+			CallbackResult = CallbackResult:gsub("(=[%s]-)(%b'')", function(...)
 				-- upvalues: g (copy)
 				return g(2, ...)
-			end):gsub("(=[%s]-)(%b\"\")", function(...) --[[ Line: 146 ]]
+			end):gsub("(=[%s]-)(%b\"\")", function(...)
 				-- upvalues: g (copy)
 				return g(2, ...)
-			end):gsub("(<" .. (T.tpl_skip_pattern or "[^!]") .. ")([^>]+)" .. "(>)", function(...) --[[ Line: 150 ]]
+			end):gsub("(<" .. (T.tpl_skip_pattern or "[^!]") .. ")([^>]+)" .. "(>)", function(...)
 				-- upvalues: g (copy)
 				return g(2, ...)
-			end):gsub("(" .. (t1["<"] or "__FAILED__") .. ")(" .. (T.tpl_marker_pattern or "[^%w%s]") .. ")([%g%s]-)" .. "(%2)(>)" .. "([^>]*>)", function(...) --[[ Line: 156 ]]
+			end):gsub("(" .. (t1["<"] or "__FAILED__") .. ")(" .. (T.tpl_marker_pattern or "[^%w%s]") .. ")([%g%s]-)" .. "(%2)(>)" .. "([^>]*>)", function(...)
 				-- upvalues: g (copy)
 				return g(5, ...)
 			end)

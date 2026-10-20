@@ -1,8 +1,8 @@
-﻿local function _(p1, p2): number --[[ Line: 8 | Named "parseInt" ]]
+﻿local function _(p1, p2): number
 	return (tonumber(p1, p2))
 end
 
-local _ = function(p1): boolean --[[ Line: 11 | Named "NumberisFinite" ]]
+local _ = function(p1): boolean
 	return typeof(p1) == "number" and (p1 ~= 1e999 and p1 == p1)
 end
 
@@ -19,7 +19,7 @@ local GraphQLError = require(script.Parent.Parent.error.GraphQLError).GraphQLErr
 local GraphQLScalarType = require(script.Parent.definition).GraphQLScalarType
 local Callback = nil
 
-function serializeInt(p1) --[[ Line: 55 ]]
+function serializeInt(p1)
 	-- upvalues: Callback (ref), Number (copy), GraphQLError (copy), InspectFunction (copy)
 	local CallbackResult = Callback(p1)
 	
@@ -37,7 +37,7 @@ function serializeInt(p1) --[[ Line: 55 ]]
 	return Number1
 end
 
-function coerceInt(p1: number): number --[[ Line: 84 ]]
+function coerceInt(p1: number): number
 	-- upvalues: Number (copy), GraphQLError (copy), InspectFunction (copy)
 	if typeof(p1) ~= "number" or not Number.isInteger(p1) then
 		error(GraphQLError.new(("Int cannot represent non-integer value: %s"):format(InspectFunction(p1))))
@@ -53,7 +53,7 @@ local Int = GraphQLScalarType.new({
 	description = "The `Int` scalar type represents non-fractional signed whole numeric values. Int can represent values between -(2^31) and 2^31 - 1.",
 	serialize = serializeInt,
 	parseValue = coerceInt,
-	parseLiteral = function(p1): number --[[ Line: 110 ]]
+	parseLiteral = function(p1): number
 		-- upvalues: Kind (copy), GraphQLError (copy), PrintFunction (copy)
 		if p1.kind ~= Kind.INT then
 			error(GraphQLError.new(("Int cannot represent non-integer value: %s"):format(PrintFunction(p1)), p1))
@@ -67,7 +67,7 @@ local Int = GraphQLScalarType.new({
 	end
 })
 
-local function serializeFloat(p1) --[[ Line: 139 ]]
+local function serializeFloat(p1)
 	-- upvalues: Callback (ref), GraphQLError (copy), InspectFunction (copy)
 	local CallbackResult = Callback(p1)
 	
@@ -82,7 +82,7 @@ local function serializeFloat(p1) --[[ Line: 139 ]]
 	return Number
 end
 
-function coerceFloat(p1: number) --[[ Line: 161 ]]
+function coerceFloat(p1: number)
 	-- upvalues: GraphQLError (copy), InspectFunction (copy)
 	if typeof(p1) ~= "number" or (typeof(p1) ~= "number" or (p1 == 1e999 or p1 ~= p1)) then
 		error(GraphQLError.new(("Float cannot represent non numeric value: %s"):format(InspectFunction(p1))))
@@ -95,7 +95,7 @@ local Float = GraphQLScalarType.new({
 	description = "The `Float` scalar type represents signed double-precision fractional values as specified by [IEEE 754](https://en.wikipedia.org/wiki/IEEE_floating_point).",
 	serialize = serializeFloat,
 	parseValue = coerceFloat,
-	parseLiteral = function(p1): number --[[ Line: 178 ]]
+	parseLiteral = function(p1): number
 		-- upvalues: Kind (copy), GraphQLError (copy), PrintFunction (copy)
 		if p1.kind ~= Kind.FLOAT and p1.kind ~= Kind.INT then
 			error(GraphQLError.new(("Float cannot represent non numeric value: %s"):format(PrintFunction(p1)), p1))
@@ -104,7 +104,7 @@ local Float = GraphQLScalarType.new({
 	end
 })
 
-Callback = function(p1) --[[ Line: 197 | Named "serializeObject" ]]
+Callback = function(p1)
 	-- upvalues: IsObjectLikeFunction (copy)
 	if IsObjectLikeFunction(p1) then
 		if typeof(p1.valueOf) == "function" then
@@ -121,7 +121,7 @@ Callback = function(p1) --[[ Line: 197 | Named "serializeObject" ]]
 	return p1
 end
 
-local function serializeString(p1) --[[ Line: 214 ]]
+local function serializeString(p1)
 	-- upvalues: Callback (ref), GraphQLError (copy), InspectFunction (copy)
 	local CallbackResult = Callback(p1)
 	
@@ -136,7 +136,7 @@ local function serializeString(p1) --[[ Line: 214 ]]
 	end
 end
 
-function coerceString(p1: string) --[[ Line: 231 ]]
+function coerceString(p1: string)
 	-- upvalues: GraphQLError (copy), InspectFunction (copy)
 	if typeof(p1) ~= "string" then
 		error(GraphQLError.new(("String cannot represent a non string value: %s"):format(InspectFunction(p1))))
@@ -149,7 +149,7 @@ local String = GraphQLScalarType.new({
 	description = "The `String` scalar type represents textual data, represented as UTF-8 character sequences. The String type is most often used by GraphQL to represent free-form human-readable text.",
 	serialize = serializeString,
 	parseValue = coerceString,
-	parseLiteral = function(p1) --[[ Line: 248 ]]
+	parseLiteral = function(p1)
 		-- upvalues: Kind (copy), GraphQLError (copy), PrintFunction (copy)
 		if p1.kind ~= Kind.STRING then
 			error(GraphQLError.new(("String cannot represent a non string value: %s"):format(PrintFunction(p1)), p1))
@@ -158,7 +158,7 @@ local String = GraphQLScalarType.new({
 	end
 })
 
-local function serializeBoolean(p1) --[[ Line: 263 ]]
+local function serializeBoolean(p1)
 	-- upvalues: Callback (ref), GraphQLError (copy), InspectFunction (copy)
 	local CallbackResult = Callback(p1)
 	
@@ -171,7 +171,7 @@ local function serializeBoolean(p1) --[[ Line: 263 ]]
 	end
 end
 
-function coerceBoolean(p1: boolean) --[[ Line: 281 ]]
+function coerceBoolean(p1: boolean)
 	-- upvalues: GraphQLError (copy), InspectFunction (copy)
 	if typeof(p1) ~= "boolean" then
 		error(GraphQLError.new(("Boolean cannot represent a non boolean value: %s"):format(InspectFunction(p1))))
@@ -184,7 +184,7 @@ local Boolean = GraphQLScalarType.new({
 	description = "The `Boolean` scalar type represents `true` or `false`.",
 	serialize = serializeBoolean,
 	parseValue = coerceBoolean,
-	parseLiteral = function(p1) --[[ Line: 298 ]]
+	parseLiteral = function(p1)
 		-- upvalues: Kind (copy), GraphQLError (copy), PrintFunction (copy)
 		if p1.kind ~= Kind.BOOLEAN then
 			error(GraphQLError.new(("Boolean cannot represent a non boolean value: %s"):format(PrintFunction(p1)), p1))
@@ -193,7 +193,7 @@ local Boolean = GraphQLScalarType.new({
 	end
 })
 
-local function serializeID(p1) --[[ Line: 313 ]]
+local function serializeID(p1)
 	-- upvalues: Callback (ref), Number (copy), GraphQLError (copy), InspectFunction (copy)
 	local CallbackResult = Callback(p1)
 	
@@ -206,7 +206,7 @@ local function serializeID(p1) --[[ Line: 313 ]]
 	end
 end
 
-function coerceID(p1) --[[ Line: 326 ]]
+function coerceID(p1)
 	-- upvalues: Number (copy), GraphQLError (copy), InspectFunction (copy)
 	if typeof(p1) == "string" then
 		return p1
@@ -222,7 +222,7 @@ local ID = GraphQLScalarType.new({
 	description = "The `ID` scalar type represents a unique identifier, often used to refetch an object or as key for a cache. The ID type appears in a JSON response as a String; however, it is not intended to be human-readable. When expected as an input type, any string (such as `\"4\"`) or integer (such as `4`) input value will be accepted as an ID.",
 	serialize = serializeID,
 	parseValue = coerceID,
-	parseLiteral = function(p1) --[[ Line: 342 ]]
+	parseLiteral = function(p1)
 		-- upvalues: Kind (copy), GraphQLError (copy), PrintFunction (copy)
 		if p1.kind ~= Kind.STRING and p1.kind ~= Kind.INT then
 			error(GraphQLError.new("ID cannot represent a non-string and non-integer value: " .. PrintFunction(p1), p1))
@@ -245,9 +245,9 @@ return {
 	GraphQLBoolean = Boolean,
 	GraphQLID = ID,
 	specifiedScalarTypes = FreezeResult,
-	isSpecifiedScalarType = function(p1) --[[ Line: 364 ]]
+	isSpecifiedScalarType = function(p1)
 		-- upvalues: Array (copy), FreezeResult (copy)
-		return Array.some(FreezeResult, function(p2): boolean --[[ Line: 365 ]]
+		return Array.some(FreezeResult, function(p2): boolean
 			-- upvalues: p1 (copy)
 			return p1.name == p2.name
 		end)

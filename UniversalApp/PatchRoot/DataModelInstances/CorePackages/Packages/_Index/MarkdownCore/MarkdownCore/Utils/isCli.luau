@@ -1,8 +1,8 @@
-﻿local Success, _ = pcall(function() --[[ Line: 2 ]]
+﻿local Success, _ = pcall(function()
 	return game:GetService("ProcessService")
 end)
 
-return function() --[[ Line: 7 ]]
+return function()
 	-- upvalues: Success (copy)
 	return Success
 end

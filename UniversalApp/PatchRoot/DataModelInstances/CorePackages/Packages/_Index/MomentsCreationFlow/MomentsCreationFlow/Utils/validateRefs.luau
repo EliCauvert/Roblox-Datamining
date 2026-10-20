@@ -1,4 +1,4 @@
-﻿return function(List): boolean --[[ Line: 1 | Named "validateRefs" ]]
+﻿return function(List): boolean
 	for _, value in List do
 		if value.current == nil then
 			return false

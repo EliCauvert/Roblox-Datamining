@@ -7,7 +7,7 @@ local View = FoundationModule.View
 local UseTokensFunction = FoundationModule.Hooks.useTokens
 local ConstantsModule = require(MomentsCreationFlow.Constants)
 
-return function(p1) --[[ Line: 18 | Named "RadialProgressBar" ]]
+return function(p1)
 	-- upvalues: UseTokensFunction (copy), ReactModule (copy), View (copy), Image (copy), ConstantsModule (copy)
 	local UseTokensResult = UseTokensFunction()
 	local Background = UseTokensResult.Color.ActionSubtle.Background
@@ -37,7 +37,7 @@ return function(p1) --[[ Line: 18 | Named "RadialProgressBar" ]]
 				Gradient = ReactModule.createElement("UIGradient", {
 					Transparency = NumberSequence1,
 					Color = ColorSequence1,
-					Rotation = p1.progress:map(function(p2: number): number --[[ Line: 52 ]]
+					Rotation = p1.progress:map(function(p2: number): number
 						return (math.clamp(p2 * 360, 180, 360))
 					end)
 				})
@@ -55,7 +55,7 @@ return function(p1) --[[ Line: 18 | Named "RadialProgressBar" ]]
 				Gradient = ReactModule.createElement("UIGradient", {
 					Transparency = NumberSequence1,
 					Color = ColorSequence1,
-					Rotation = p1.progress:map(function(p2: number): number --[[ Line: 71 ]]
+					Rotation = p1.progress:map(function(p2: number): number
 						return (math.clamp(p2 * 360, 0, 180))
 					end)
 				})

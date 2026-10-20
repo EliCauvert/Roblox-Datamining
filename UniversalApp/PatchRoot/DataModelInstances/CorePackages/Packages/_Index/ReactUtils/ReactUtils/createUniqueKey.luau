@@ -1,7 +1,7 @@
-﻿return function() --[[ Line: 4 | Named "createUniqueKey" ]]
+﻿return function()
 	local t = {}
 	
-	return function(Key) --[[ Line: 7 ]]
+	return function(Key)
 		-- upvalues: t (copy)
 		local Text = nil
 		if t[Key] == nil then

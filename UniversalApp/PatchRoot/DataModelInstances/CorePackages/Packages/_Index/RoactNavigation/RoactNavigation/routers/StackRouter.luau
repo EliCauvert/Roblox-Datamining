@@ -14,32 +14,32 @@ local InvariantModule = require(Parent.utils.invariant)
 local CreatePathParserFunction = require(script.Parent.pathUtils).createPathParser
 local ChildIsScreenRouterSymbolRobloxModule = require(script.Parent["ChildIsScreenRouterSymbol.roblox"])
 
-local function v14() --[[ Line: 28 ]]
+local function v14()
 	return {}
 end
 
-local function _(p1): boolean --[[ Line: 32 | Named "behavesLikePushAction" ]]
+local function _(p1): boolean
 	-- upvalues: NavigationActionsModule (copy), StackActionsModule (copy)
 	return p1.type == NavigationActionsModule.Navigate or p1.type == StackActionsModule.Push
 end
 
-local _ = function(p1): boolean --[[ Line: 36 | Named "isResetToRootStack" ]]
+local _ = function(p1): boolean
 	-- upvalues: StackActionsModule (copy)
 	return p1.type == StackActionsModule.Reset and p1.key == nil
 end
 
-local function mapToRouteName(p1) --[[ Line: 40 ]]
+local function mapToRouteName(p1)
 	return (next(p1))
 end
 
-local function foldToRoutes(p1, p2, _) --[[ Line: 45 ]]
+local function foldToRoutes(p1, p2, _)
 	local Key, Value = next(p2)
 	p1[Key] = Value
 	
 	return p1
 end
 
-return function(p1, p2) --[[ Line: 51 ]]
+return function(p1, p2)
 	-- upvalues: ValidateRouteConfigArrayModule (copy), ValidateRouteConfigMapModule (copy), Array (copy), foldToRoutes (copy), mapToRouteName (copy), ChildIsScreenRouterSymbolRobloxModule (copy), v14 (copy), NavigationActionsModule (copy), StackActionsModule (copy), Object (copy), KeyGeneratorModule (copy), CreatePathParserFunction (copy), InvariantModule (copy), GetScreenForRouteNameModule (copy), StateUtilsModule (copy), CreateConfigGetterModule (copy)
 	ValidateRouteConfigArrayModule(p1)
 	local P7 = p2 or {}
@@ -70,7 +70,7 @@ return function(p1, p2) --[[ Line: 51 ]]
 		end
 		error(string.format("Invalid initialRouteName '%s'. Must be one of [%s]", InitialRouteName, Text), 2)
 	end
-	local function getInitialState(p3) --[[ Line: 97 ]]
+	local function getInitialState(p3)
 		-- upvalues: ChildIsScreenRouterSymbolRobloxModules (copy), NavigationActionsModule (upval), StackActionsModule (upval), ChildIsScreenRouterSymbolRobloxModule (upval), Object (upval), KeyGeneratorModule (upval), ChildIsScreenRouterSymbolRobloxModule1 (copy), InitialRouteName (copy), InitialRouteParams (copy), ValidateRouteConfigMapModuleResult (copy), P7 (ref)
 		local StateForAction = {}
 		local ChildIsScreenRouterSymbolRobloxModule2 = ChildIsScreenRouterSymbolRobloxModules[p3.routeName]
@@ -112,7 +112,7 @@ return function(p1, p2) --[[ Line: 51 ]]
 		}
 	end
 	
-	local function getParamsForRouteAndAction(RouteName, p3) --[[ Line: 162 ]]
+	local function getParamsForRouteAndAction(RouteName, p3)
 		-- upvalues: Object (upval), ValidateRouteConfigMapModuleResult (copy)
 		if p3.params == Object.None then
 			return nil
@@ -136,7 +136,7 @@ return function(p1, p2) --[[ Line: 51 ]]
 	return {
 		childRouters = ChildRouters,
 		_CHILD_IS_SCREEN = ChildIsScreenRouterSymbolRobloxModule,
-		getComponentForState = function(InitialState) --[[ Line: 199 ]]
+		getComponentForState = function(InitialState)
 			-- upvalues: InvariantModule (upval), ChildIsScreenRouterSymbolRobloxModules (copy), ChildIsScreenRouterSymbolRobloxModule (upval), GetScreenForRouteNameModule (upval), ValidateRouteConfigMapModuleResult (copy)
 			local Route = InitialState.routes[InitialState.index] or {}
 			local RouteName = Route.routeName
@@ -145,26 +145,26 @@ return function(p1, p2) --[[ Line: 51 ]]
 			
 			return if ChildIsScreenRouterSymbolRobloxModule1 == nil or ChildIsScreenRouterSymbolRobloxModule1 == ChildIsScreenRouterSymbolRobloxModule then GetScreenForRouteNameModule(ValidateRouteConfigMapModuleResult, RouteName) else ChildIsScreenRouterSymbolRobloxModules[RouteName].getComponentForState(Route)
 		end,
-		getComponentForRouteName = function(p3) --[[ Line: 220 ]]
+		getComponentForRouteName = function(p3)
 			-- upvalues: GetScreenForRouteNameModule (upval), ValidateRouteConfigMapModuleResult (copy)
 			return GetScreenForRouteNameModule(ValidateRouteConfigMapModuleResult, p3)
 		end,
-		getActionCreators = function(p3, Key) --[[ Line: 224 ]]
+		getActionCreators = function(p3, Key)
 			-- upvalues: Object (upval), GetCustomActionCreators (copy), StackActionsModule (upval), InvariantModule (upval), NavigationActionsModule (upval)
 			return Object.assign(table.clone(GetCustomActionCreators(p3, Key)), {
-				pop = function(AssignResult, p4) --[[ Line: 226 ]]
+				pop = function(AssignResult, p4)
 					-- upvalues: StackActionsModule (upval), Object (upval)
 					return StackActionsModule.pop(Object.assign({ n = AssignResult }, p4 or {}))
 				end,
-				popToTop = function(p4) --[[ Line: 229 ]]
+				popToTop = function(p4)
 					-- upvalues: StackActionsModule (upval)
 					return StackActionsModule.popToTop(p4)
 				end,
-				push = function(RouteName, Params, Action) --[[ Line: 232 ]]
+				push = function(RouteName, Params, Action)
 					-- upvalues: StackActionsModule (upval)
 					return StackActionsModule.push({ routeName = RouteName, params = Params, action = Action })
 				end,
-				replace = function(RouteName, Params, Action, NewKey) --[[ Line: 239 ]]
+				replace = function(RouteName, Params, Action, NewKey)
 					-- upvalues: StackActionsModule (upval), p3 (copy), InvariantModule (upval)
 					if type(RouteName) == "string" then
 						return StackActionsModule.replace({
@@ -183,7 +183,7 @@ return function(p1, p2) --[[ Line: 51 ]]
 						return StackActionsModule.replace(RouteName)
 					end
 				end,
-				reset = function(Actions, p4) --[[ Line: 257 ]]
+				reset = function(Actions, p4)
 					-- upvalues: StackActionsModule (upval), Key (copy)
 					return StackActionsModule.reset({
 						actions = Actions,
@@ -191,13 +191,13 @@ return function(p1, p2) --[[ Line: 51 ]]
 						key = Key
 					})
 				end,
-				dismiss = function() --[[ Line: 269 ]]
+				dismiss = function()
 					-- upvalues: NavigationActionsModule (upval), Key (copy)
 					return NavigationActionsModule.back({ key = Key })
 				end
 			})
 		end,
-		getStateForAction = function(Action, Tbl) --[[ Line: 277 ]]
+		getStateForAction = function(Action, Tbl)
 			-- upvalues: getInitialState (copy), StackActionsModule (upval), NavigationActionsModule (upval), ChildIsScreenRouterSymbolRobloxModules (copy), ChildIsScreenRouterSymbolRobloxModule (upval), StateUtilsModule (upval), Object (upval), InvariantModule (upval), Array (upval), getParamsForRouteAndAction (copy), KeyGeneratorModule (upval)
 			if not Tbl then
 				return (getInitialState(Action))
@@ -240,10 +240,10 @@ return function(p1, p2) --[[ Line: 51 ]]
 			if (Action.type == NavigationActionsModule.Navigate or Action.type == StackActionsModule.Push) and ChildIsScreenRouterSymbolRobloxModules[Action.routeName] ~= nil then
 				local ChildIsScreenRouterSymbolRobloxModule3 = ChildIsScreenRouterSymbolRobloxModules[Action.routeName]
 				InvariantModule(Action.type ~= StackActionsModule.Push or Action.key == nil, "StackRouter does not support key on the push action")
-				local Index2: number = Array.findIndex(Tbl.routes, if Action.key then function(p3): boolean --[[ Line: 353 ]]
+				local Index2: number = Array.findIndex(Tbl.routes, if Action.key then function(p3): boolean
 					-- upvalues: Action (copy)
 					return p3.key == Action.key
-				end else function(p3): boolean --[[ Line: 349 ]]
+				end else function(p3): boolean
 					-- upvalues: Action (copy)
 					return p3.routeName == Action.routeName
 				end)
@@ -314,7 +314,7 @@ return function(p1, p2) --[[ Line: 51 ]]
 					}) else Tbl
 				end
 				if Action.type == StackActionsModule.Replace then
-					local CountRoutes = if Action.key == nil and #Tbl.routes > 0 then #Tbl.routes else Array.findIndex(Tbl.routes, function(p3): boolean --[[ Line: 496 ]]
+					local CountRoutes = if Action.key == nil and #Tbl.routes > 0 then #Tbl.routes else Array.findIndex(Tbl.routes, function(p3): boolean
 						-- upvalues: Action (copy)
 						return p3.key == Action.key
 					end)
@@ -339,7 +339,7 @@ return function(p1, p2) --[[ Line: 51 ]]
 				end
 				if Action.type == NavigationActionsModule.SetParams then
 					local Key = Action.key
-					local Index3: number = Array.findIndex(Tbl.routes, function(p3): boolean --[[ Line: 545 ]]
+					local Index3: number = Array.findIndex(Tbl.routes, function(p3): boolean
 						-- upvalues: Key (copy)
 						return p3.key == Key
 					end)
@@ -356,7 +356,7 @@ return function(p1, p2) --[[ Line: 51 ]]
 				end
 				if Action.type == StackActionsModule.Reset then
 					return if Action.key == nil or Action.key == Tbl.key then Object.assign(table.clone(Tbl), {
-						routes = if Action.actions then Array.map(Action.actions, function(p3) --[[ Line: 576 ]]
+						routes = if Action.actions then Array.map(Action.actions, function(p3)
 							-- upvalues: ChildIsScreenRouterSymbolRobloxModules (upval), ChildIsScreenRouterSymbolRobloxModule (upval), NavigationActionsModule (upval), getParamsForRouteAndAction (upval), Object (upval), KeyGeneratorModule (upval)
 							local ChildIsScreenRouterSymbolRobloxModule1 = ChildIsScreenRouterSymbolRobloxModules[p3.routeName]
 							
@@ -375,7 +375,7 @@ return function(p1, p2) --[[ Line: 51 ]]
 					local Prune = Action.prune
 					
 					if Action.type == StackActionsModule.Pop and Prune == false and Key1 then
-						local Index: number = Array.findIndex(Tbl.routes, function(p3): boolean --[[ Line: 617 ]]
+						local Index: number = Array.findIndex(Tbl.routes, function(p3): boolean
 							-- upvalues: Key1 (copy)
 							return p3.key == Key1
 						end)
@@ -397,7 +397,7 @@ return function(p1, p2) --[[ Line: 51 ]]
 						if Action.type == StackActionsModule.Pop and N ~= nil then
 							Index1 = math.max(2, Tbl.index - N + 1)
 						elseif Key1 then
-							Index1 = Array.findIndex(Tbl.routes, function(p3): boolean --[[ Line: 642 ]]
+							Index1 = Array.findIndex(Tbl.routes, function(p3): boolean
 								-- upvalues: Key1 (copy)
 								return p3.key == Key1
 							end)
@@ -437,11 +437,11 @@ return function(p1, p2) --[[ Line: 51 ]]
 				return Tbl
 			end
 		end,
-		getPathAndParamsForState = function(InitialState) --[[ Line: 696 ]]
+		getPathAndParamsForState = function(InitialState)
 			-- upvalues: GetPathAndParamsForRouteFunction (copy)
 			return GetPathAndParamsForRouteFunction(InitialState.routes[InitialState.index])
 		end,
-		getActionForPathAndParams = function(p3, p4) --[[ Line: 701 ]]
+		getActionForPathAndParams = function(p3, p4)
 			-- upvalues: GetActionForPathAndParamsFunction (copy)
 			return GetActionForPathAndParamsFunction(p3, p4)
 		end,

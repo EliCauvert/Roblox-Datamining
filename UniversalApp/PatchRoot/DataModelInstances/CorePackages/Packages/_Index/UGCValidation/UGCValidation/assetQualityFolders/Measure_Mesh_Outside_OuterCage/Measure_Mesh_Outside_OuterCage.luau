@@ -11,7 +11,7 @@ return {
 		ValidationEnumsModule.UploadCategory.EYEBROW_EYELASH
 	},
 	fflag = require(Parent.flags.getFFlagUGCValidateAQCageQualityLC),
-	run = function(p1, p2) --[[ Line: 19 ]]
+	run = function(p1, p2)
 		-- upvalues: UGCValidateRenderMeshOutsideOuterCageMeshThreshold (copy), ErrorSourceStringsModule (copy), GetFFlagUGCValidateAQScoreWarningsModule (copy)
 		local Handle = p2.aqsSummaryData.Measure_Mesh_Outside_OuterCage.Handle
 		local Number = Handle and tonumber(Handle.mesh_outside_outer_cage_percent)

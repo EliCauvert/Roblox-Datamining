@@ -10,7 +10,7 @@ local UseResponsiveModule = require(Foundation.Providers.Responsive.useResponsiv
 local WithDefaultsModule = require(Foundation.Utility.withDefaults)
 local config = { containerWidth = 0 }
 
-return ReactModule.memo(function(p1) --[[ Line: 25 | Named "GridStyleSheet" ]]
+return ReactModule.memo(function(p1)
 	-- upvalues: WithDefaultsModule (copy), config (copy), ReactModule (copy), UseResponsiveModule (copy), UseStyleSheetFunction (copy), CreateGridStyleRulesModule (copy), DashModule (copy), GetGridMetricsModule (copy)
 	local WithDefaultsModuleResult = WithDefaultsModule(p1, config)
 	local UseRefResult = ReactModule.useRef(nil)
@@ -22,15 +22,15 @@ return ReactModule.memo(function(p1) --[[ Line: 25 | Named "GridStyleSheet" ]]
 	local Column = Grid.columns[OrderEntry]
 	local Breakpoint1 = WithDefaultsModuleResult.breakpoint or OrderEntry
 	local Largest = math.max(1, WithDefaultsModuleResult.containerWidth)
-	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 39 ]]
+	local UseMemoResult = ReactModule.useMemo(function()
 		-- upvalues: CreateGridStyleRulesModule (upval), UseResponsiveModuleResult (copy)
 		return CreateGridStyleRulesModule(UseResponsiveModuleResult.config)
 	end, { UseResponsiveModuleResult.config })
-	local UseMemoResult1 = ReactModule.useMemo(function() --[[ Line: 43 ]]
+	local UseMemoResult1 = ReactModule.useMemo(function()
 		-- upvalues: DashModule (upval), UseMemoResult (copy), Breakpoint1 (copy)
 		return DashModule.join(UseMemoResult.baseRules, UseMemoResult.rulesByBreakpoint[Breakpoint1])
 	end, { UseMemoResult, Breakpoint1 })
-	ReactModule.useLayoutEffect(function() --[[ Line: 47 ]]
+	ReactModule.useLayoutEffect(function()
 		-- upvalues: UseRefResult (copy), Grid (copy), Breakpoint1 (copy), Column (copy), GetGridMetricsModule (upval), UseResponsiveModuleResult (copy), Largest (copy)
 		if UseRefResult.current then
 			local Column1: number = Grid.columns[Breakpoint1]
@@ -45,7 +45,7 @@ return ReactModule.memo(function(p1) --[[ Line: 25 | Named "GridStyleSheet" ]]
 			end
 		end
 	end, { UseResponsiveModuleResult.config, Largest, Breakpoint1 })
-	ReactModule.useLayoutEffect(function() --[[ Line: 70 ]]
+	ReactModule.useLayoutEffect(function()
 		-- upvalues: UseRefResult (copy), UseStyleSheetResult (copy)
 		if UseRefResult.current then
 			UseRefResult.current:SetDerives({ UseStyleSheetResult })

@@ -2,7 +2,7 @@
 local LoggerModule = require(Foundation.Utility.Logger)
 local UseTokensModule = require(Foundation.Providers.Style.useTokens)
 
-return function(p1) --[[ Line: 6 | Named "useScaledValue" ]]
+return function(p1)
 	-- upvalues: UseTokensModule (copy), LoggerModule (copy)
 	local UseTokensModuleResult = UseTokensModule()
 	local ScaledScale = p1 * UseTokensModuleResult.Config.UI.Scale

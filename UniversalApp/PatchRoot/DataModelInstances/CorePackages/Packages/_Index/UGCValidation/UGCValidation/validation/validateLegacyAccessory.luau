@@ -16,7 +16,7 @@ local GetEditableMeshFromContextModule = require(Parent.util.getEditableMeshFrom
 local GetEditableImageFromContextModule = require(Parent.util.getEditableImageFromContext)
 local GetEngineFeatureEngineUGCValidatePropertiesSensibleModule = require(Parent.flags.getEngineFeatureEngineUGCValidatePropertiesSensible)
 
-return function(p1) --[[ Line: 24 | Named "validateLegacyAccessory" ]]
+return function(p1)
 	-- upvalues: RigidOrLayeredAllowedModule (copy), AnalyticsModule (copy), ConstantsModule (copy), ValidateSingleInstanceModule (copy), CreateAccessorySchemaModule (copy), ValidateInstanceTreeModule (copy), GetEngineFeatureEngineUGCValidatePropertiesSensibleModule (copy), ValidatePropertiesSensibleModule (copy), ValidateDependenciesModule (copy), GetAttachmentModule (copy), GetEditableMeshFromContextModule (copy), GetEditableImageFromContextModule (copy), ValidateTagsModule (copy), ValidateScaleTypeModule (copy), ValidateThumbnailConfigurationModule (copy)
 	local Instances = p1.instances
 	local AssetTypeEnum = p1.assetTypeEnum

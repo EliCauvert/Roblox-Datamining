@@ -6,59 +6,59 @@ return {
 	ColorMode = EnumsModule.ColorMode,
 	Theme = EnumsModule.Theme,
 	themes = {
-		CircuitRush = function() --[[ Line: 16 ]]
+		CircuitRush = function()
 			return require(script.CircuitRush)
 		end,
-		Classic = function() --[[ Line: 19 ]]
+		Classic = function()
 			return require(script.Classic)
 		end,
-		CosmicDust = function() --[[ Line: 22 ]]
+		CosmicDust = function()
 			return require(script.CosmicDust)
 		end,
-		Default = function() --[[ Line: 25 ]]
+		Default = function()
 			-- upvalues: DefaultModule (copy)
 			return DefaultModule
 		end,
-		ElectricLime = function() --[[ Line: 28 ]]
+		ElectricLime = function()
 			return require(script.ElectricLime)
 		end,
-		Halloween2026 = function() --[[ Line: 31 ]]
+		Halloween2026 = function()
 			return require(script.Halloween2026)
 		end,
-		HyperPlum = function() --[[ Line: 34 ]]
+		HyperPlum = function()
 			return require(script.HyperPlum)
 		end,
-		InfernoBlast = function() --[[ Line: 37 ]]
+		InfernoBlast = function()
 			return require(script.InfernoBlast)
 		end,
-		Kids = function() --[[ Line: 40 ]]
+		Kids = function()
 			return require(script.Kids)
 		end,
-		KineticEnergy = function() --[[ Line: 43 ]]
+		KineticEnergy = function()
 			return require(script.KineticEnergy)
 		end,
-		LavaGlow = function() --[[ Line: 46 ]]
+		LavaGlow = function()
 			return require(script.LavaGlow)
 		end,
-		NebulaDrift = function() --[[ Line: 49 ]]
+		NebulaDrift = function()
 			return require(script.NebulaDrift)
 		end,
-		NitroFrost = function() --[[ Line: 52 ]]
+		NitroFrost = function()
 			return require(script.NitroFrost)
 		end,
-		PixelPop = function() --[[ Line: 55 ]]
+		PixelPop = function()
 			return require(script.PixelPop)
 		end,
-		PolarFreeze = function() --[[ Line: 58 ]]
+		PolarFreeze = function()
 			return require(script.PolarFreeze)
 		end,
-		QuantumPulse = function() --[[ Line: 61 ]]
+		QuantumPulse = function()
 			return require(script.QuantumPulse)
 		end,
-		StarBurst = function() --[[ Line: 64 ]]
+		StarBurst = function()
 			return require(script.StarBurst)
 		end,
-		SuperCharge = function() --[[ Line: 67 ]]
+		SuperCharge = function()
 			return require(script.SuperCharge)
 		end
 	}

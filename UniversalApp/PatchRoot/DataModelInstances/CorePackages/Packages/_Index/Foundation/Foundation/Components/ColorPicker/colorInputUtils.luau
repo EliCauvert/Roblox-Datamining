@@ -5,9 +5,9 @@ local _ = require(Parent.React)
 local ColorInputModeModule = require(Foundation.Enums.ColorInputMode)
 
 return {
-	createInputConfigs = function(p1, p2, Value, Value1, Handler, Handler1, Handler2, Handler3, _) --[[ Line: 24 ]]
+	createInputConfigs = function(p1, p2, Value, Value1, Handler, Handler1, Handler2, Handler3, _)
 		-- upvalues: DashModule (copy), ColorInputModeModule (copy)
-		local MapResult = DashModule.map({ "R", "G", "B" }, function(Text: string) --[[ Line: 35 ]]
+		local MapResult = DashModule.map({ "R", "G", "B" }, function(Text: string)
 			-- upvalues: p1 (copy), Handler (copy)
 			return {
 				minimum = 0,
@@ -15,7 +15,7 @@ return {
 				step = 1,
 				key = Text,
 				component = Text:lower(),
-				value = p1:map(function(p3) --[[ Line: 39 ]]
+				value = p1:map(function(p3)
 					-- upvalues: Text (copy)
 					return p3[Text:lower()]
 				end),
@@ -36,13 +36,13 @@ return {
 		return {
 			[ColorInputModeModule.RGB] = MapResult,
 			[ColorInputModeModule.RGBA] = Copy,
-			[ColorInputModeModule.HSV] = DashModule.map({ "H", "S", "V" }, function(Text: string) --[[ Line: 60 ]]
+			[ColorInputModeModule.HSV] = DashModule.map({ "H", "S", "V" }, function(Text: string)
 				-- upvalues: p2 (copy), Handler1 (copy)
 				return {
 					minimum = 0,
 					key = Text,
 					component = Text:lower(),
-					value = p2:map(function(p3) --[[ Line: 64 ]]
+					value = p2:map(function(p3)
 						-- upvalues: Text (copy)
 						return p3[Text:lower()]
 					end),

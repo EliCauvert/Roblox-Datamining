@@ -12,12 +12,12 @@ local config = { setDirty = true, dispose = true, forget = true }
 local _ = require(script.Parent.depTypes)
 
 return {
-	dep = function(p1) --[[ Line: 66 ]]
+	dep = function(p1)
 		-- upvalues: ParentEntrySlot (copy), Set (copy), MaybeUnsubscribeFunction (copy), HasOwnPropertyFunction (copy), config (copy), Array (copy), ToArrayFunction (copy)
 		local NewResults = {}
 		local Subscribe = if p1 == nil then p1 else p1.subscribe
 		local self = setmetatable({}, {
-			__call = function(_, Key) --[[ Line: 74 ]]
+			__call = function(_, Key)
 				-- upvalues: ParentEntrySlot (upval), NewResults (copy), Set (upval), Subscribe (copy), MaybeUnsubscribeFunction (upval)
 				local Value = ParentEntrySlot:getValue()
 				
@@ -38,13 +38,13 @@ return {
 			end
 		})
 		
-		function self:dirty(Key, p2) --[[ Line: 101 ]]
+		function self:dirty(Key, p2)
 			-- upvalues: NewResults (copy), HasOwnPropertyFunction (upval), config (upval), Array (upval), ToArrayFunction (upval), MaybeUnsubscribeFunction (upval)
 			local NewResult = NewResults[Key]
 			
 			if NewResult then
 				local SetDirty = if p2 and HasOwnPropertyFunction(config, p2) then p2 else "setDirty"
-				Array.forEach(ToArrayFunction(NewResult), function(p3) --[[ Line: 112 ]]
+				Array.forEach(ToArrayFunction(NewResult), function(p3)
 					-- upvalues: SetDirty (copy)
 					p3[SetDirty](p3)
 				end)

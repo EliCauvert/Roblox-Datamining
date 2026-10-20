@@ -9,14 +9,14 @@ local SelectorsModule = require(v1.Selectors)
 local _ = require(v1.RoduxAliasesTypes)
 
 return {
-	config = function(p1) --[[ Line: 16 ]]
+	config = function(p1)
 		-- upvalues: LlamaModule (copy), AliasNetworkingModule (copy), RoduxNetworkingModule (copy), AliasesReducerModule (copy), ActionsModule (copy), SelectorsModule (copy)
 		local JoinResult = LlamaModule.Dictionary.join(p1, {
 			aliasNetworking = AliasNetworkingModule.config({ roduxNetworking = RoduxNetworkingModule.mock() })
 		})
 		
 		return {
-			installReducer = function() --[[ Line: 24 ]]
+			installReducer = function()
 				-- upvalues: AliasesReducerModule (upval), JoinResult (ref)
 				return AliasesReducerModule(JoinResult)
 			end,

@@ -1,6 +1,6 @@
 ﻿local _ = require(script:FindFirstAncestor("Foundation").Components.Types)
 
-return function(List): string --[[ Line: 6 | Named "getGridSizeTag" ]]
+return function(List): string
 	if typeof(List) == "number" then
 		return `col-{List}`
 	end

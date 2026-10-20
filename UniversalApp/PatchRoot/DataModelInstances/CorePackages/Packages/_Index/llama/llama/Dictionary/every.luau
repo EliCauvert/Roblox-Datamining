@@ -1,4 +1,4 @@
-﻿return function(List, Callback): boolean --[[ Line: 2 | Named "every" ]]
+﻿return function(List, Callback): boolean
 	local ValueType = type(List)
 	assert(ValueType == "table", "expected a table for first argument, got " .. ValueType)
 	local ValueType1 = type(Callback)

@@ -1,7 +1,7 @@
 ﻿local ToRectModule = require(script.Parent.toRect)
 local ReturnValueModule = require(script.Parent.returnValue)
 
-return function(p1, p2, MinValue: NumberRange) --[[ Line: 33 | Named "below" ]]
+return function(p1, p2, MinValue: NumberRange)
 	-- upvalues: ToRectModule (copy), ReturnValueModule (copy)
 	local MinDelta = ToRectModule(p1).Min - ToRectModule(p2).Max
 	

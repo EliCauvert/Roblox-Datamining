@@ -10,7 +10,7 @@ local config = { frequency = 5 }
 local DivideTransparencyModule = require(Parent1.Utility.divideTransparency)
 local LerpModule = require(Parent1.Utility.lerp)
 
-return function(Text, p1) --[[ Line: 21 | Named "makeAppSlider" ]]
+return function(Text, p1)
 	-- upvalues: RoactModule (copy), DivideTransparencyModule (copy), ColorsModule (copy), LerpModule (copy), OtterModule (copy), config (copy), ImagesModule (copy), GenericSliderModule (copy)
 	local ExtendResult = RoactModule.PureComponent:extend("AppSliderFor" .. Text)
 	ExtendResult.defaultProps = {
@@ -20,7 +20,7 @@ return function(Text, p1) --[[ Line: 21 | Named "makeAppSlider" ]]
 		width = UDim.new(1, 0)
 	}
 	
-	function ExtendResult.init(p2) --[[ Line: 32 ]]
+	function ExtendResult.init(p2)
 		-- upvalues: RoactModule (upval), DivideTransparencyModule (upval), Text (copy), ColorsModule (upval), LerpModule (upval), OtterModule (upval), config (upval)
 		local Binding2
 		p2.pressedProgressLower, Binding2 = RoactModule.createBinding(0)
@@ -35,38 +35,38 @@ return function(Text, p1) --[[ Line: 21 | Named "makeAppSlider" ]]
 			pressedProgressUpper = p2.pressedProgressUpper,
 			style = p2.style
 		})
-		p2.trackColor = JoinBindingsResult:map(function(p3) --[[ Line: 48 ]]
+		p2.trackColor = JoinBindingsResult:map(function(p3)
 			return p3.style.Theme.UIMuted.Color
 		end)
-		p2.trackTransparency = JoinBindingsResult:map(function(p3) --[[ Line: 52 ]]
+		p2.trackTransparency = JoinBindingsResult:map(function(p3)
 			-- upvalues: DivideTransparencyModule (upval)
 			return DivideTransparencyModule(p3.style.Theme.UIMuted.Transparency, if p3.disabled then 2 else 1)
 		end)
-		p2.trackFillColor = JoinBindingsResult:map(function(p3) --[[ Line: 56 ]]
+		p2.trackFillColor = JoinBindingsResult:map(function(p3)
 			-- upvalues: Text (upval)
 			return p3.style.Theme[Text].Color
 		end)
-		p2.trackFillTransparency = JoinBindingsResult:map(function(p3) --[[ Line: 60 ]]
+		p2.trackFillTransparency = JoinBindingsResult:map(function(p3)
 			-- upvalues: DivideTransparencyModule (upval), Text (upval)
 			return DivideTransparencyModule(p3.style.Theme[Text].Transparency, if p3.disabled then 2 else 1)
 		end)
-		p2.knobColorLower = JoinBindingsResult:map(function(p3) --[[ Line: 64 ]]
+		p2.knobColorLower = JoinBindingsResult:map(function(p3)
 			-- upvalues: ColorsModule (upval), Text (upval)
 			return if p3.disabled then ColorsModule.Pumice else Color3.new(1, 1, 1):lerp(if Text == "SystemPrimaryDefault" then ColorsModule.Pumice else p3.style.Theme[Text].Color, p3.pressedProgressLower)
 		end)
-		p2.knobColorUpper = JoinBindingsResult:map(function(p3) --[[ Line: 79 ]]
+		p2.knobColorUpper = JoinBindingsResult:map(function(p3)
 			-- upvalues: ColorsModule (upval), Text (upval)
 			return if p3.disabled then ColorsModule.Pumice else Color3.new(1, 1, 1):lerp(if Text == "SystemPrimaryDefault" then ColorsModule.Pumice else p3.style.Theme[Text].Color, p3.pressedProgressUpper)
 		end)
-		p2.knobTransparency = JoinBindingsResult:map(function(p3) --[[ Line: 94 ]]
+		p2.knobTransparency = JoinBindingsResult:map(function(p3)
 			-- upvalues: DivideTransparencyModule (upval), Text (upval)
 			return DivideTransparencyModule(p3.style.Theme[Text].Transparency, if p3.disabled then 2 else 1)
 		end)
-		p2.knobShadowTransparencyLower = JoinBindingsResult:map(function(p3) --[[ Line: 98 ]]
+		p2.knobShadowTransparencyLower = JoinBindingsResult:map(function(p3)
 			-- upvalues: p2 (copy), LerpModule (upval)
 			return if p3.disabled then 1 else LerpModule(p3.style.Theme.DropShadow.Transparency, p2.props.customPressedKnobShadowTransparencyLower, p3.pressedProgressLower)
 		end)
-		p2.knobShadowTransparencyUpper = JoinBindingsResult:map(function(p3) --[[ Line: 107 ]]
+		p2.knobShadowTransparencyUpper = JoinBindingsResult:map(function(p3)
 			-- upvalues: LerpModule (upval)
 			return if p3.disabled then 1 else LerpModule(p3.style.Theme.DropShadow.Transparency, 1, p3.pressedProgressUpper)
 		end)
@@ -75,7 +75,7 @@ return function(Text, p1) --[[ Line: 21 | Named "makeAppSlider" ]]
 		p2.pressedMotorUpper = OtterModule.createSingleMotor(0)
 		p2.pressedMotorUpper:onStep(Binding2_1)
 		
-		function p2.onDragStartLower() --[[ Line: 121 ]]
+		function p2.onDragStartLower()
 			-- upvalues: p2 (copy), OtterModule (upval), config (upval)
 			if p2.props.onDragStartLower then
 				p2.props.onDragStartLower()
@@ -85,7 +85,7 @@ return function(Text, p1) --[[ Line: 21 | Named "makeAppSlider" ]]
 			end
 		end
 		
-		function p2.onDragStartUpper() --[[ Line: 131 ]]
+		function p2.onDragStartUpper()
 			-- upvalues: p2 (copy), OtterModule (upval), config (upval)
 			if p2.props.onDragStartUpper then
 				p2.props.onDragStartUpper()
@@ -95,7 +95,7 @@ return function(Text, p1) --[[ Line: 21 | Named "makeAppSlider" ]]
 			end
 		end
 		
-		function p2.onDragEnd() --[[ Line: 141 ]]
+		function p2.onDragEnd()
 			-- upvalues: p2 (copy), OtterModule (upval), config (upval)
 			if p2.props.onDragEnd then
 				p2.props.onDragEnd()
@@ -107,7 +107,7 @@ return function(Text, p1) --[[ Line: 21 | Named "makeAppSlider" ]]
 		end
 	end
 	
-	function ExtendResult.render(p2) --[[ Line: 153 ]]
+	function ExtendResult.render(p2)
 		-- upvalues: ImagesModule (upval), RoactModule (upval), p1 (copy), GenericSliderModule (upval)
 		local Props = p2.props
 		local config = {
@@ -159,12 +159,12 @@ return function(Text, p1) --[[ Line: 21 | Named "makeAppSlider" ]]
 		return RoactModule.createElement(GenericSliderModule, config)
 	end
 	
-	function ExtendResult.didMount(p2) --[[ Line: 217 ]]
+	function ExtendResult.didMount(p2)
 		p2.pressedMotorLower:start()
 		p2.pressedMotorUpper:start()
 	end
 	
-	function ExtendResult.didUpdate(p2, p3) --[[ Line: 222 ]]
+	function ExtendResult.didUpdate(p2, p3)
 		-- upvalues: OtterModule (upval), config (upval)
 		if p3.style ~= p2.props.style then
 			p2.setStyle(p2.props.style)
@@ -179,7 +179,7 @@ return function(Text, p1) --[[ Line: 21 | Named "makeAppSlider" ]]
 		end
 	end
 	
-	function ExtendResult.willUnmount(p2) --[[ Line: 237 ]]
+	function ExtendResult.willUnmount(p2)
 		p2.wasUnmounted = true
 		p2.pressedMotorLower:destroy()
 		p2.pressedMotorUpper:destroy()

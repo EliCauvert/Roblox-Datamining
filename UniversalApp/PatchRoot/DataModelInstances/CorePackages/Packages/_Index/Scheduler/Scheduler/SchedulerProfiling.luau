@@ -9,7 +9,7 @@ local T = nil
 local List = nil
 local Total = 1
 
-local function logEvent(p1) --[[ Line: 46 ]]
+local function logEvent(p1)
 	-- upvalues: List (ref), Total (ref), v1 (ref), Console (copy), SchedulerProfilingModule (copy), T (ref)
 	if List ~= nil then
 		Total += #p1
@@ -32,7 +32,7 @@ local function logEvent(p1) --[[ Line: 46 ]]
 	end
 end
 
-function SchedulerProfilingModule.startLoggingProfilingEvents() --[[ Line: 70 ]]
+function SchedulerProfilingModule.startLoggingProfilingEvents()
 	-- upvalues: v1 (ref), T (ref), List (ref), Total (ref)
 	v1 = 131072
 	T = {}
@@ -40,7 +40,7 @@ function SchedulerProfilingModule.startLoggingProfilingEvents() --[[ Line: 70 ]]
 	Total = 1
 end
 
-function SchedulerProfilingModule.stopLoggingProfilingEvents() --[[ Line: 77 ]]
+function SchedulerProfilingModule.stopLoggingProfilingEvents()
 	-- upvalues: T (ref), v1 (ref), List (ref), Total (ref)
 	local T1 = T
 	v1 = 0
@@ -51,35 +51,35 @@ function SchedulerProfilingModule.stopLoggingProfilingEvents() --[[ Line: 77 ]]
 	return T1
 end
 
-function SchedulerProfilingModule.markTaskStart(p1, p2: number) --[[ Line: 87 ]]
+function SchedulerProfilingModule.markTaskStart(p1, p2: number)
 	-- upvalues: EnableProfiling (copy), List (ref), logEvent (copy)
 	if EnableProfiling and List ~= nil then
 		logEvent({ 1, p2 * 1000, p1.id, p1.priorityLevel })
 	end
 end
 
-function SchedulerProfilingModule.markTaskCompleted(p1, p2: number) --[[ Line: 98 ]]
+function SchedulerProfilingModule.markTaskCompleted(p1, p2: number)
 	-- upvalues: EnableProfiling (copy), List (ref), logEvent (copy)
 	if EnableProfiling and List ~= nil then
 		logEvent({ 2, p2 * 1000, p1.id })
 	end
 end
 
-function SchedulerProfilingModule.markTaskCanceled(p1, p2: number) --[[ Line: 109 ]]
+function SchedulerProfilingModule.markTaskCanceled(p1, p2: number)
 	-- upvalues: EnableProfiling (copy), List (ref), logEvent (copy)
 	if EnableProfiling and List ~= nil then
 		logEvent({ 4, p2 * 1000, p1.id })
 	end
 end
 
-function SchedulerProfilingModule.markTaskErrored(p1, p2: number) --[[ Line: 117 ]]
+function SchedulerProfilingModule.markTaskErrored(p1, p2: number)
 	-- upvalues: EnableProfiling (copy), List (ref), logEvent (copy)
 	if EnableProfiling and List ~= nil then
 		logEvent({ 3, p2 * 1000, p1.id })
 	end
 end
 
-function SchedulerProfilingModule.markTaskRun(p1, p2: number) --[[ Line: 125 ]]
+function SchedulerProfilingModule.markTaskRun(p1, p2: number)
 	-- upvalues: EnableProfiling (copy), Count (ref), List (ref), logEvent (copy)
 	if EnableProfiling then
 		Count += 1
@@ -90,14 +90,14 @@ function SchedulerProfilingModule.markTaskRun(p1, p2: number) --[[ Line: 125 ]]
 	end
 end
 
-function SchedulerProfilingModule.markTaskYield(p1, p2: number) --[[ Line: 135 ]]
+function SchedulerProfilingModule.markTaskYield(p1, p2: number)
 	-- upvalues: EnableProfiling (copy), List (ref), logEvent (copy), Count (ref)
 	if EnableProfiling and List ~= nil then
 		logEvent({ 6, p2 * 1000, p1.id, Count })
 	end
 end
 
-function SchedulerProfilingModule.markSchedulerSuspended(p1: number) --[[ Line: 143 ]]
+function SchedulerProfilingModule.markSchedulerSuspended(p1: number)
 	-- upvalues: EnableProfiling (copy), Count1 (ref), List (ref), logEvent (copy)
 	if EnableProfiling then
 		Count1 += 1
@@ -108,7 +108,7 @@ function SchedulerProfilingModule.markSchedulerSuspended(p1: number) --[[ Line: 
 	end
 end
 
-function SchedulerProfilingModule.markSchedulerUnsuspended(p1: number) --[[ Line: 153 ]]
+function SchedulerProfilingModule.markSchedulerUnsuspended(p1: number)
 	-- upvalues: EnableProfiling (copy), List (ref), logEvent (copy), Count1 (ref)
 	if EnableProfiling and List ~= nil then
 		logEvent({ 8, p1 * 1000, Count1 })

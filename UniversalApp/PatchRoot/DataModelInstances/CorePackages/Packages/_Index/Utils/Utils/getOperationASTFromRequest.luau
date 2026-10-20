@@ -5,7 +5,7 @@ local Error1 = LuauPolyfillModule.Error
 local GetOperationASTFunction = require(Parent.GraphQL).getOperationAST
 local _ = require(script.Parent.Interfaces)
 
-local function getOperationASTFromDocument(Document, OperationName) --[[ Line: 26 ]]
+local function getOperationASTFromDocument(Document, OperationName)
 	-- upvalues: GetOperationASTFunction (copy), Boolean (copy), Error1 (copy)
 	local OperationAST = GetOperationASTFunction(Document, OperationName)
 	
@@ -17,7 +17,7 @@ end
 
 return {
 	getOperationASTFromDocument = getOperationASTFromDocument,
-	getOperationASTFromRequest = require(script.Parent.memoize).memoize1(function(p1) --[[ Line: 43 ]]
+	getOperationASTFromRequest = require(script.Parent.memoize).memoize1(function(p1)
 		-- upvalues: getOperationASTFromDocument (copy)
 		return (getOperationASTFromDocument(p1.document, p1.operationName))
 	end)

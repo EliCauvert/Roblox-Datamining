@@ -5,7 +5,7 @@ local Object = LuauPolyfillModule.Object
 local TableUtilitiesModule = require(Parent.utils.TableUtilities)
 local InvariantModule = require(Parent.utils.invariant)
 
-local function compareScenes(A, B): boolean --[[ Line: 12 ]]
+local function compareScenes(A, B): boolean
 	if A.index == B.index then
 		local v1 = #A.key - #B.key
 		
@@ -15,12 +15,12 @@ local function compareScenes(A, B): boolean --[[ Line: 12 ]]
 	end
 end
 
-local function _(p1, p2) --[[ Line: 27 | Named "routesAreShallowEqual" ]]
+local function _(p1, p2)
 	-- upvalues: TableUtilitiesModule (copy)
 	return if p1 and p2 then p1.key == p2.key and TableUtilitiesModule.ShallowEqual(p1, p2) else p1 == p2
 end
 
-local _ = function(p1, p2) --[[ Line: 39 | Named "scenesAreShallowEqual" ]]
+local _ = function(p1, p2)
 	-- upvalues: TableUtilitiesModule (copy)
 	local Flag = false
 	
@@ -48,7 +48,7 @@ local _ = function(p1, p2) --[[ Line: 39 | Named "scenesAreShallowEqual" ]]
 	return Flag
 end
 
-return function(List, p1, p2, p3) --[[ Line: 48 ]]
+return function(List, p1, p2, p3)
 	-- upvalues: Array (copy), InvariantModule (copy), TableUtilitiesModule (copy), compareScenes (copy), Object (copy)
 	for _, value in List do
 		local Route = value.route
@@ -134,7 +134,7 @@ return function(List, p1, p2, p3) --[[ Line: 48 ]]
 	end
 	local List1 = {}
 	
-	local function _(p4) --[[ Line: 155 | Named "mergeScene" ]]
+	local function _(p4)
 		-- upvalues: t (copy), TableUtilitiesModule (upval), List1 (copy)
 		local Entry = t[p4.key] or nil
 		

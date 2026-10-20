@@ -18,17 +18,17 @@ local config = {
 }
 local config1 = { start = "left-nav", ["end"] = "right-nav" }
 
-local function _(First, p1) --[[ Line: 56 | Named "shouldShowNavButton" ]]
+local function _(First, p1)
 	-- upvalues: PaginationDirectionModule (copy)
 	return First ~= PaginationDirectionModule.First and First ~= PaginationDirectionModule.Last or p1.hasFirstLastButtons
 end
 
-local _ = function(Backward, p1) --[[ Line: 64 | Named "getIsDisabled" ]]
+local _ = function(Backward, p1)
 	-- upvalues: PaginationDirectionModule (copy)
 	return if Backward == PaginationDirectionModule.First then p1.isFirstDisabled elseif Backward == PaginationDirectionModule.Backward then p1.isBackDisabled elseif Backward == PaginationDirectionModule.Forward then p1.isForwardDisabled else p1.isLastDisabled
 end
 
-return ReactModule.memo(function(Frame) --[[ Line: 76 | Named "NavControls" ]]
+return ReactModule.memo(function(Frame)
 	-- upvalues: config (copy), PaginationDirectionModule (copy), PaginationSlotsUtilsModule (copy), ReactModule (copy), NavButtonModule (copy), ViewModule (copy), config1 (copy)
 	local Entry = config[Frame.side]
 	local Elements = {}

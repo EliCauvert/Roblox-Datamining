@@ -7,14 +7,14 @@ local v1 = nil
 local v2 = nil
 local v3 = nil
 
-local function ensureCaches() --[[ Line: 14 ]]
+local function ensureCaches()
 	-- upvalues: v3 (ref), list (copy), R15plusUtilsModule (copy), v1 (ref), v2 (ref)
 	if v3 then return end
 	local t = {}
 	local t1 = {}
 	local t2 = {}
 	
-	local function traverse(AvatarBoneSchema, Key, Key1) --[[ Line: 23 ]]
+	local function traverse(AvatarBoneSchema, Key, Key1)
 		-- upvalues: t (copy), t1 (copy), t2 (copy), traverse (copy)
 		for i, Bone in AvatarBoneSchema do
 			if Bone.ClassName == "Bone" then
@@ -46,7 +46,7 @@ local function ensureCaches() --[[ Line: 14 ]]
 	v3 = t
 end
 
-function CurveAnimBoneHierarchyUtils.hasBoneFolders(Object): boolean --[[ Line: 59 ]]
+function CurveAnimBoneHierarchyUtils.hasBoneFolders(Object): boolean
 	-- upvalues: CurveAnimBoneHierarchyUtils (copy)
 	for _, Folder in Object:GetDescendants() do
 		if Folder:IsA("Folder") and CurveAnimBoneHierarchyUtils.isBoneFolderName(Folder.Name) then
@@ -56,21 +56,21 @@ function CurveAnimBoneHierarchyUtils.hasBoneFolders(Object): boolean --[[ Line: 
 	return false
 end
 
-function CurveAnimBoneHierarchyUtils.isBoneFolderName(Name): boolean --[[ Line: 68 ]]
+function CurveAnimBoneHierarchyUtils.isBoneFolderName(Name): boolean
 	-- upvalues: ensureCaches (copy), v3 (ref)
 	ensureCaches()
 	
 	return v3[Name] == true
 end
 
-function CurveAnimBoneHierarchyUtils.getRootBoneNamesForBodyPart(p1) --[[ Line: 73 ]]
+function CurveAnimBoneHierarchyUtils.getRootBoneNamesForBodyPart(p1)
 	-- upvalues: ensureCaches (copy), v1 (ref)
 	ensureCaches()
 	
 	return v1[p1] or {}
 end
 
-function CurveAnimBoneHierarchyUtils.getChildBoneNames(p1) --[[ Line: 78 ]]
+function CurveAnimBoneHierarchyUtils.getChildBoneNames(p1)
 	-- upvalues: ensureCaches (copy), v2 (ref)
 	ensureCaches()
 	

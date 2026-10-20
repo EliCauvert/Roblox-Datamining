@@ -5,7 +5,7 @@ local ViewModule = require(Foundation.Components.View)
 local _ = require(Foundation.Enums.PaginationSize)
 local PaginationUtilsModule = require(script.Parent.Parent.paginationUtils)
 
-return ReactModule.memo(function(Frame) --[[ Line: 21 | Named "Ellipsis" ]]
+return ReactModule.memo(function(Frame)
 	-- upvalues: ReactModule (copy), ViewModule (copy), PaginationUtilsModule (copy), TextModule (copy)
 	return ReactModule.createElement(ViewModule, {
 		LayoutOrder = Frame.LayoutOrder,

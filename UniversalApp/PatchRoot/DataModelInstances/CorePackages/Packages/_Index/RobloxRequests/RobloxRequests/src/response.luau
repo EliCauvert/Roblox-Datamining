@@ -9,7 +9,7 @@ local List = { "text/html", "application/xhtml+xml" }
 local ResponseModule = {}
 ResponseModule.__index = ResponseModule
 
-function ResponseModule.new(Request, p1, Response_time) --[[ Line: 20 ]]
+function ResponseModule.new(Request, p1, Response_time)
 	-- upvalues: ResponseModule (copy), NocasetableModule (copy), CookiesModule (copy)
 	local self = setmetatable({}, ResponseModule)
 	self.request = Request
@@ -39,15 +39,15 @@ function ResponseModule.new(Request, p1, Response_time) --[[ Line: 20 ]]
 	return self
 end
 
-function ResponseModule:expand() --[[ Line: 68 ]] end
+function ResponseModule:expand() end
 
-function ResponseModule:__tostring() --[[ Line: 70 ]]
+function ResponseModule:__tostring()
 	return self.text
 end
 
-function ResponseModule:json() --[[ Line: 74 ]]
+function ResponseModule:json()
 	-- upvalues: JsonModule (copy)
-	local Success, Result = pcall(function() --[[ Line: 77 ]]
+	local Success, Result = pcall(function()
 		-- upvalues: JsonModule (upval), self (copy)
 		return JsonModule.dec(self.text)
 	end)
@@ -58,7 +58,7 @@ function ResponseModule:json() --[[ Line: 74 ]]
 	return Result
 end
 
-function ResponseModule:html(p1) --[[ Line: 88 ]]
+function ResponseModule:html(p1)
 	-- upvalues: List (copy), HtmlModule (copy)
 	if p1 or table.find(List, self.content_type) then
 		return HtmlModule.parse(self.text, 100000, (tostring(self.url)))
@@ -67,7 +67,7 @@ function ResponseModule:html(p1) --[[ Line: 88 ]]
 	end
 end
 
-function ResponseModule:xml(p1) --[[ Line: 96 ]]
+function ResponseModule:xml(p1)
 	-- upvalues: HtmlModule (copy)
 	if p1 or self.content_type:find("+xml") or self.content_type:find("/xml") then
 		return HtmlModule.parse(self.text, 100000)

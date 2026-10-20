@@ -26,7 +26,7 @@ local config = {
 	variant = DateTimePickerVariantModule.Single
 }
 
-return ReactModule.memo(function(p1) --[[ Line: 37 | Named "DateTimePicker" ]]
+return ReactModule.memo(function(p1)
 	-- upvalues: FlagsModule (copy), ReactModule (copy), DateTimePickerBetaModule (copy), WithDefaultsModule (copy), config (copy), UseTokensModule (copy), DateTimePickerVariantModule (copy), DateTimeUtilitiesModule (copy), GuiService (copy), DateTimeParsingUtilitiesModule (copy), PopoverModule (copy), TextInputModule (copy), WithCommonPropsModule (copy), Icon (copy), TranslatorModule (copy), InputSizeModule (copy), PopoverSideModule (copy), ViewModule (copy), CalendarModule (copy), ButtonModule (copy), ButtonVariantModule (copy)
 	if FlagsModule.FoundationDateTimePickerBetaUpdate then
 		return ReactModule.createElement(DateTimePickerBetaModule, p1)
@@ -35,7 +35,7 @@ return ReactModule.memo(function(p1) --[[ Line: 37 | Named "DateTimePicker" ]]
 		local UseTokensModuleResult = UseTokensModule()
 		local UseStateResult, UseStateResult2 = ReactModule.useState(false)
 		local UseRefResult = ReactModule.useRef(nil)
-		local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 48 ]]
+		local UseMemoResult = ReactModule.useMemo(function()
 			-- upvalues: WithDefaultsModuleResult (copy)
 			local DefaultDates = WithDefaultsModuleResult.defaultDates
 			
@@ -43,15 +43,15 @@ return ReactModule.memo(function(p1) --[[ Line: 37 | Named "DateTimePicker" ]]
 		end, { WithDefaultsModuleResult.defaultDates })
 		local UseStateResult1, UseStateResult2_1 = ReactModule.useState(if UseMemoResult then if WithDefaultsModuleResult.variant == DateTimePickerVariantModule.Dual then `{DateTimeUtilitiesModule.formatLocalTime(UseMemoResult[1])} - {if UseMemoResult[2] then DateTimeUtilitiesModule.formatLocalTime(UseMemoResult[2]) else ""}` else DateTimeUtilitiesModule.formatLocalTime(UseMemoResult[1], WithDefaultsModuleResult.variant == DateTimePickerVariantModule.SingleWithTime) else "")
 		local UseStateResult3, UseStateResult2_2 = ReactModule.useState(UseMemoResult)
-		local UseResult = ReactModule.useCallback(function() --[[ Line: 77 ]]
+		local UseResult = ReactModule.useCallback(function()
 			-- upvalues: UseStateResult2 (copy)
 			UseStateResult2(false)
 		end, {})
-		local UseResult1 = ReactModule.useCallback(function() --[[ Line: 81 ]]
+		local UseResult1 = ReactModule.useCallback(function()
 			-- upvalues: UseStateResult2 (copy)
 			UseStateResult2(true)
 		end, {})
-		local UseResult2 = ReactModule.useCallback(function() --[[ Line: 114 ]]
+		local UseResult2 = ReactModule.useCallback(function()
 			-- upvalues: WithDefaultsModuleResult (copy), DateTimePickerVariantModule (upval), DateTimeUtilitiesModule (upval), UseStateResult3 (copy), UseStateResult2_1 (copy), UseResult (copy)
 			if WithDefaultsModuleResult.variant == DateTimePickerVariantModule.Dual then
 				UseStateResult2_1(DateTimeUtilitiesModule.formatLocalTime(UseStateResult3[1]) .. " - " .. (if UseStateResult3[2] then DateTimeUtilitiesModule.formatLocalTime(UseStateResult3[2]) else ""))
@@ -65,7 +65,7 @@ return ReactModule.memo(function(p1) --[[ Line: 37 | Named "DateTimePicker" ]]
 			WithDefaultsModuleResult.variant
 		})
 		
-		local function _(): boolean --[[ Line: 139 ]]
+		local function _(): boolean
 			-- upvalues: UseStateResult3 (copy), WithDefaultsModuleResult (copy), DateTimePickerVariantModule (upval)
 			return if UseStateResult3 then if WithDefaultsModuleResult.variant == DateTimePickerVariantModule.Single or WithDefaultsModuleResult.variant == DateTimePickerVariantModule.SingleWithTime then UseStateResult3[1] == nil else WithDefaultsModuleResult.variant == DateTimePickerVariantModule.Dual and (UseStateResult3[1] == nil or (UseStateResult3[2] == nil or UseStateResult3[2].UnixTimestamp < UseStateResult3[1].UnixTimestamp)) else false
 		end
@@ -82,7 +82,7 @@ return ReactModule.memo(function(p1) --[[ Line: 37 | Named "DateTimePicker" ]]
 				isDisabled = WithDefaultsModuleResult.isDisabled,
 				isRequired = WithDefaultsModuleResult.isRequired,
 				label = WithDefaultsModuleResult.label,
-				onChanged = ReactModule.useCallback(function(Text: string) --[[ Line: 92 ]]
+				onChanged = ReactModule.useCallback(function(Text: string)
 					-- upvalues: UseStateResult2_1 (copy), WithDefaultsModuleResult (copy), DateTimePickerVariantModule (upval), DateTimeUtilitiesModule (upval), DateTimeParsingUtilitiesModule (upval)
 					UseStateResult2_1(Text)
 					
@@ -99,7 +99,7 @@ return ReactModule.memo(function(p1) --[[ Line: 37 | Named "DateTimePicker" ]]
 					WithDefaultsModuleResult.onChanged,
 					WithDefaultsModuleResult.variant
 				}),
-				onFocusGained = ReactModule.useCallback(function() --[[ Line: 85 ]]
+				onFocusGained = ReactModule.useCallback(function()
 					-- upvalues: GuiService (upval), UseResult1 (copy)
 					if GuiService.ViewportDisplaySize ~= Enum.DisplaySize.Small then
 						UseResult1()

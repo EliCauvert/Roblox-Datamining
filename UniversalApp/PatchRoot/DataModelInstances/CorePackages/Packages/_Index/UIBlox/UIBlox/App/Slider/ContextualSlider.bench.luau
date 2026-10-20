@@ -10,20 +10,20 @@ local Element = ReactModule.createElement(require(Parent.ContextualSlider), {
 	min = 0,
 	max = 100,
 	value = 0,
-	onValueChanged = function() --[[ Line: 21 ]] end
+	onValueChanged = function() end
 })
 local Element1 = ReactModule.createElement(require(Parent.SystemSlider), {
 	min = 0,
 	max = 100,
 	value = 0,
-	onValueChanged = function() --[[ Line: 27 ]] end
+	onValueChanged = function() end
 })
-DescribeFunction("ContextualSlider", function() --[[ Line: 30 ]]
+DescribeFunction("ContextualSlider", function()
 	-- upvalues: MountComponentTimesFunction (copy), Element (copy), ScrollComponentTimesFunction (copy)
 	MountComponentTimesFunction(Element, 100, "ContextualSlider")
 	ScrollComponentTimesFunction(Element, 100, "ContextualSlider")
 end)
-DescribeFunction("SystemSlider", function() --[[ Line: 34 ]]
+DescribeFunction("SystemSlider", function()
 	-- upvalues: MountComponentTimesFunction (copy), Element1 (copy), ScrollComponentTimesFunction (copy)
 	MountComponentTimesFunction(Element1, 100, "SystemSlider")
 	ScrollComponentTimesFunction(Element1, 100, "SystemSlider")

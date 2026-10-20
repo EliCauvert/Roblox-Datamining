@@ -8,29 +8,29 @@ local AnalyticsModule = require(Parent.Analytics)
 local UGCValidationScaleMinimumThousandths = game:DefineFastInt("UGCValidationScaleMinimumThousandths", 10)
 local FIntUGCValidationScaleMaximumThousandths = game:DefineFastInt("FIntUGCValidationScaleMaximumThousandths", 10000)
 
-local function pointInBounds(p1, CF, Vector): boolean --[[ Line: 17 ]]
+local function pointInBounds(p1, CF, Vector): boolean
 	local Vector1 = CF:PointToObjectSpace(p1)
 	
 	return -Vector.X / 2 <= Vector1.X and (Vector1.X <= Vector.X / 2 and (-Vector.Y / 2 <= Vector1.Y and (Vector1.Y <= Vector.Y / 2 and -Vector.Z / 2 <= Vector1.Z))) and Vector1.Z <= Vector.Z / 2
 end
 
-local function _(p1, Vector, p2): boolean --[[ Line: 27 | Named "isSizeWithinBounds" ]]
+local function _(p1, Vector, p2): boolean
 	local AbsResult = (p2 * p1.Size):Abs()
 	
 	return AbsResult.X <= Vector.X and AbsResult.Y <= Vector.Y and AbsResult.Z <= Vector.Z
 end
 
-local _ = function(p1: number): number --[[ Line: 34 | Named "truncate" ]]
+local _ = function(p1: number): number
 	return math.floor(p1 * 100) / 100
 end
 
-local function getErrors(Context, p1, Size) --[[ Line: 38 ]]
+local function getErrors(Context, p1, Size)
 	return {
 		string.format("%s has size larger than max allowed bounding size. The max size for type %s is [%.2f, %.2f, %.2f]", Context, p1, math.floor(Size.X * 100) / 100, math.floor(Size.Y * 100) / 100, math.floor(Size.Z * 100) / 100)
 	}
 end
 
-return function(Object, p1, Tbl, Vector, p2, p3, p4) --[[ Line: 51 | Named "validateMeshBounds" ]]
+return function(Object, p1, Tbl, Vector, p2, p3, p4)
 	-- upvalues: UGCValidationScaleMinimumThousandths (copy), GetFFlagUGCValidateMeshMaxScaleModule (copy), FIntUGCValidationScaleMaximumThousandths (copy), UGCValidationService (copy), AnalyticsModule (copy), pointInBounds (copy), getErrors (copy), GetMeshMinMaxModule (copy), GetFIntUGCValidateMeshCenteringHundredsThresholdModule (copy)
 	local IsServer = p4.isServer
 	local Size = p2.size
@@ -48,7 +48,7 @@ return function(Object, p1, Tbl, Vector, p2, p3, p4) --[[ Line: 51 | Named "vali
 	if GetFFlagUGCValidateMeshMaxScaleModule() and (FIntUGCValidationScaleMaximumThousandths / 1000 < Vector.X or FIntUGCValidationScaleMaximumThousandths / 1000 < Vector.Y or FIntUGCValidationScaleMaximumThousandths / 1000 < Vector.Z) then
 		return false, { `{Object.Name} mesh scale is too large` }
 	end
-	local Success, Result = pcall(function() --[[ Line: 104 ]]
+	local Success, Result = pcall(function()
 		-- upvalues: UGCValidationService (upval), Tbl (copy)
 		return UGCValidationService:GetEditableMeshVerts(Tbl.editableMesh)
 	end)

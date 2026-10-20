@@ -16,9 +16,9 @@ ListTable.validateProps = TModule.strictInterface({
 })
 ListTable.defaultProps = { showDividers = true, dividerStartOffset = 24 }
 
-function ListTable.render(p1) --[[ Line: 49 ]]
+function ListTable.render(p1)
 	-- upvalues: WithStyleModule (copy), RoactModule (copy)
-	return WithStyleModule(function(p2) --[[ Line: 50 ]]
+	return WithStyleModule(function(p2)
 		-- upvalues: p1 (copy), RoactModule (upval)
 		local Size = p1.props.size
 		local AutomaticSize = p1.props.automaticSize

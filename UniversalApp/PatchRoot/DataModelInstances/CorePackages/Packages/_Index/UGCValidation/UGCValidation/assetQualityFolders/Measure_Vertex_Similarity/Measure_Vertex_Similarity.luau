@@ -18,7 +18,7 @@ return {
 		ValidationEnumsModule.UploadCategory.DYNAMIC_HEAD
 	},
 	fflag = require(Parent.flags.getFFlagUGCValidateAQMeshQuality),
-	run = function(p1, p2) --[[ Line: 25 ]]
+	run = function(p1, p2)
 		-- upvalues: GetFFlagUGCValidateAQMeshQualityBlockUploadModule (copy), config (copy), ErrorSourceStringsModule (copy), UGCValidationVertexSimilarityMaxPercent (copy)
 		local MeasureVertexSimilarity = p2.aqsSummaryData.Measure_Vertex_Similarity
 		local Entry = GetFFlagUGCValidateAQMeshQualityBlockUploadModule() and config[p2.uploadCategory]

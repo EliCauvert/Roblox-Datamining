@@ -4,7 +4,7 @@ local UiComponentSchemaModule = require(script.Parent.ui_component_schema)
 local Module = {}
 Module.__index = Module
 
-function Module.new(p1) --[[ Line: 43 ]]
+function Module.new(p1)
 	-- upvalues: Module (copy)
 	return (setmetatable({
 		template = if p1 == nil or p1.template == nil then nil else p1.template,
@@ -12,7 +12,7 @@ function Module.new(p1) --[[ Line: 43 ]]
 	}, Module))
 end
 
-function Module:encode() --[[ Line: 50 ]]
+function Module:encode()
 	-- upvalues: ProtoModule (copy)
 	local Buf = buffer.create(0)
 	local Count = 0
@@ -32,7 +32,7 @@ function Module:encode() --[[ Line: 50 ]]
 	return Buf1
 end
 
-function Module.decode(Buf) --[[ Line: 70 ]]
+function Module.decode(Buf)
 	-- upvalues: Module (copy), ProtoModule (copy), UiComponentSchemaModule (copy)
 	local NewModule = Module.new()
 	local v1 = 0
@@ -69,7 +69,7 @@ function Module.decode(Buf) --[[ Line: 70 ]]
 	return NewModule
 end
 
-function Module:jsonEncode() --[[ Line: 119 ]]
+function Module:jsonEncode()
 	local t = {}
 	
 	if self.template ~= nil then
@@ -81,7 +81,7 @@ function Module:jsonEncode() --[[ Line: 119 ]]
 	return t
 end
 
-function Module:jsonDecode() --[[ Line: 133 ]]
+function Module:jsonDecode()
 	-- upvalues: Module (copy), UiComponentSchemaModule (copy)
 	local NewModule = Module.new()
 	

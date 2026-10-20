@@ -2,7 +2,7 @@
 local IconSizeModule = require(Parent.Enum.IconSize)
 local GetIconSizeModule = require(Parent.getIconSize)
 
-return function(p1): UDim2 --[[ Line: 6 ]]
+return function(p1): UDim2
 	-- upvalues: IconSizeModule (copy), GetIconSizeModule (copy)
 	assert(IconSizeModule.isEnumValue(p1))
 	local IconSizeModule1 = GetIconSizeModule(p1)

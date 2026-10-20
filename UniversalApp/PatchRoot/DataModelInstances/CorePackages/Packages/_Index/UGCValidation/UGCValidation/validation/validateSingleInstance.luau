@@ -2,7 +2,7 @@
 local AnalyticsModule = require(Parent.Analytics)
 local _ = require(Parent.util.Types)
 
-return function(p1, p2) --[[ Line: 7 | Named "validateSingleInstance" ]]
+return function(p1, p2)
 	-- upvalues: AnalyticsModule (copy)
 	local AssetTypeEnum = p2.assetTypeEnum
 	

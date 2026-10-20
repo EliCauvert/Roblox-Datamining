@@ -19,24 +19,24 @@ local config = {
 	size = require(Foundation.Enums.InputSize).Medium
 }
 
-local function _(p1, p2, p3) --[[ Line: 46 | Named "getStepState" ]]
+local function _(p1, p2, p3)
 	-- upvalues: StepperStepStateModule (copy)
 	return if p3 then StepperStepStateModule.Current elseif p1 < p2 then StepperStepStateModule.Complete else StepperStepStateModule.Incomplete
 end
 
-return ReactModule.memo(ReactModule.forwardRef(function(p1, p2) --[[ Line: 56 | Named "Stepper" ]]
+return ReactModule.memo(ReactModule.forwardRef(function(p1, p2)
 	-- upvalues: WithDefaultsModule (copy), config (copy), UseTokensModule (copy), DashModule (copy), FillBehaviorModule (copy), ReactModule (copy), UseAnimatedHighlightModule (copy), StepperStepStateModule (copy), StepItemModule (copy), ViewModule (copy), WithCommonPropsModule (copy), OverflowScrollContainerModule (copy)
 	local WithDefaultsModuleResult = WithDefaultsModule(p1, config)
 	local UseTokensModuleResult = UseTokensModule()
 	local ActiveStepId = WithDefaultsModuleResult.activeStepId or DashModule.get(WithDefaultsModuleResult, { "steps", 1, "id" })
-	local Index = DashModule.findIndex(WithDefaultsModuleResult.steps, function(p3): boolean --[[ Line: 61 ]]
+	local Index = DashModule.findIndex(WithDefaultsModuleResult.steps, function(p3): boolean
 		-- upvalues: ActiveStepId (copy)
 		return p3.id == ActiveStepId
 	end) or 1
 	local IsFillBehaviorMatch = WithDefaultsModuleResult.fillBehavior == FillBehaviorModule.Fill
 	local UseRefResult = ReactModule.useRef(nil)
 	local UseRefResult1 = ReactModule.useRef({})
-	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 70 ]]
+	local UseMemoResult = ReactModule.useMemo(function()
 		-- upvalues: UseRefResult1 (copy), WithDefaultsModuleResult (copy), ReactModule (upval)
 		local Current = UseRefResult1.current
 		
@@ -49,7 +49,7 @@ return ReactModule.memo(ReactModule.forwardRef(function(p1, p2) --[[ Line: 56 | 
 	end, { WithDefaultsModuleResult.steps })
 	local UseAnimatedHighlightModuleResult = UseAnimatedHighlightModule(ActiveStepId, p2 or UseRefResult, UseMemoResult, WithDefaultsModuleResult.size, WithDefaultsModuleResult.fillBehavior)
 	local UseBindingResult, UseBindingResult2 = ReactModule.useBinding(0)
-	local UseResult = ReactModule.useCallback(function(Frame) --[[ Line: 85 ]]
+	local UseResult = ReactModule.useCallback(function(Frame)
 		-- upvalues: UseBindingResult2 (copy)
 		UseBindingResult2(Frame.AbsoluteSize.X)
 	end, {})
@@ -72,7 +72,7 @@ return ReactModule.memo(ReactModule.forwardRef(function(p1, p2) --[[ Line: 56 | 
 	return ReactModule.createElement(ViewModule, WithCommonPropsModule(WithDefaultsModuleResult, {
 		tag = "size-full-0 auto-y no-clip",
 		sizeConstraint = if IsFillBehaviorMatch then nil else {
-			MaxSize = UseBindingResult:map(function(X): Vector2 --[[ Line: 114 ]]
+			MaxSize = UseBindingResult:map(function(X): Vector2
 				return Vector2.new(X, 1e999)
 			end)
 		}
@@ -110,14 +110,14 @@ return ReactModule.memo(ReactModule.forwardRef(function(p1, p2) --[[ Line: 56 | 
 			LayoutOrder = 0,
 			tag = "anchor-bottom-left bg-system-contrast",
 			ZIndex = WithDefaultsModuleResult.ZIndex + 1,
-			Size = UseAnimatedHighlightModuleResult.highlightWidth:map(function(XOffset): UDim2 --[[ Line: 154 ]]
+			Size = UseAnimatedHighlightModuleResult.highlightWidth:map(function(XOffset): UDim2
 				-- upvalues: Standard (copy)
 				return UDim2.fromOffset(XOffset, Standard)
 			end),
 			Position = ReactModule.joinBindings({
 				UseAnimatedHighlightModuleResult.highlightPosition,
 				UseAnimatedHighlightModuleResult.activeItemHeight
-			}):map(function(Entry): UDim2 --[[ Line: 158 ]]
+			}):map(function(Entry): UDim2
 				return UDim2.fromOffset(Entry[1], Entry[2])
 			end),
 			testId = `{WithDefaultsModuleResult.testId}--animated-border`

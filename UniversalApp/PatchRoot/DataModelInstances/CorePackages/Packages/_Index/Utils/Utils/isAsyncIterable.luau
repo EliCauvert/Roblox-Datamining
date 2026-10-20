@@ -1,7 +1,7 @@
 ﻿local Symbol = require(script.Parent.Parent.LuauPolyfill).Symbol
 
 return {
-	isAsyncIterable = function(p1): boolean --[[ Line: 12 ]]
+	isAsyncIterable = function(p1): boolean
 		-- upvalues: Symbol (copy)
 		local AsyncIterator = Symbol.asyncIterator
 		

@@ -3,17 +3,17 @@ local AutoScrollPolicyModule = require(ViewRecycler.Core.Enums.AutoScrollPolicy)
 local AutoScrollTargetModule = require(ViewRecycler.Core.Enums.AutoScrollTarget)
 local _ = require(ViewRecycler.Core.Types)
 local AutoScrollModule = {
-	followedEdge = function(WhenAtEnd) --[[ Line: 28 ]]
+	followedEdge = function(WhenAtEnd)
 		-- upvalues: AutoScrollPolicyModule (copy), AutoScrollTargetModule (copy)
 		return if WhenAtEnd == AutoScrollPolicyModule.WhenAtStart then AutoScrollTargetModule.Start elseif WhenAtEnd == AutoScrollPolicyModule.WhenAtEnd then AutoScrollTargetModule.End else nil
 	end,
-	distanceFromEdge = function(FollowedEdgeResult, p1) --[[ Line: 37 ]]
+	distanceFromEdge = function(FollowedEdgeResult, p1)
 		-- upvalues: AutoScrollTargetModule (copy)
 		return if FollowedEdgeResult == AutoScrollTargetModule.Start then p1.scrollOffset else p1.distanceFromEnd
 	end
 }
 
-function AutoScrollModule.resolveTarget(Callback, p1, p2, p3) --[[ Line: 41 ]]
+function AutoScrollModule.resolveTarget(Callback, p1, p2, p3)
 	-- upvalues: AutoScrollModule (copy)
 	if type(Callback) == "function" then
 		return Callback(p1, p2)
@@ -24,18 +24,18 @@ function AutoScrollModule.resolveTarget(Callback, p1, p2, p3) --[[ Line: 41 ]]
 	end
 end
 
-function AutoScrollModule.getTargetOffset(Start, p1, p2): number --[[ Line: 57 ]]
+function AutoScrollModule.getTargetOffset(Start, p1, p2): number
 	-- upvalues: AutoScrollTargetModule (copy)
 	return if Start == AutoScrollTargetModule.Start then 0 else math.max(0, p1 - p2)
 end
 
-function AutoScrollModule.create() --[[ Line: 65 ]]
+function AutoScrollModule.create()
 	-- upvalues: AutoScrollModule (copy)
 	local v1 = nil
 	local Flag = false
 	
 	return {
-		onDataSourceChanged = function(Enabled) --[[ Line: 75 ]]
+		onDataSourceChanged = function(Enabled)
 			-- upvalues: Flag (ref), v1 (ref)
 			if Enabled ~= false then
 				Flag = Flag and Enabled == v1
@@ -51,23 +51,23 @@ function AutoScrollModule.create() --[[ Line: 65 ]]
 				return false
 			end
 		end,
-		settleAt = function(p1) --[[ Line: 69 ]]
+		settleAt = function(p1)
 			-- upvalues: Flag (ref), v1 (ref)
 			Flag = Flag and p1 == v1
 			v1 = p1
 		end,
-		pin = function(p1) --[[ Line: 89 ]]
+		pin = function(p1)
 			-- upvalues: v1 (ref), Flag (ref)
 			v1 = p1
 			Flag = true
 		end,
-		getSettleOffset = function(p1, p2) --[[ Line: 94 ]]
+		getSettleOffset = function(p1, p2)
 			-- upvalues: v1 (ref), AutoScrollModule (upval)
 			local v2 = v1
 			
 			return if v2 == nil then nil else AutoScrollModule.getTargetOffset(v2, p1, p2)
 		end,
-		onScrollOffsetChanged = function(p1, p2, p3) --[[ Line: 102 ]]
+		onScrollOffsetChanged = function(p1, p2, p3)
 			-- upvalues: v1 (ref), AutoScrollModule (upval), Flag (ref)
 			local v2 = v1
 			

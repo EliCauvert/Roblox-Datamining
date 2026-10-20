@@ -9,33 +9,33 @@ local ExhaustiveMatchModule = require(UltimateList.Util.exhaustiveMatch)
 local UseVirtualizedListModule = require(script.Parent.useVirtualizedList)
 local CreateElementFunction = ReactModule.createElement
 
-local function _(Vector, p1) --[[ Line: 14 | Named "getScrollAxis" ]]
+local function _(Vector, p1)
 	-- upvalues: ExhaustiveMatchModule (copy)
 	return if p1 == "x" then Vector.X elseif p1 == "y" then Vector.Y else ExhaustiveMatchModule(p1)
 end
 
-local _ = function(XOffset, p1) --[[ Line: 21 | Named "getPosition" ]]
+local _ = function(XOffset, p1)
 	-- upvalues: ExhaustiveMatchModule (copy)
 	return if p1 == "x" then UDim2.fromOffset(XOffset, 0) elseif p1 == "y" then UDim2.fromOffset(0, XOffset) else ExhaustiveMatchModule(p1)
 end
 
-local function getContentSize(Vector, Direction) --[[ Line: 28 ]]
+local function getContentSize(Vector, Direction)
 	-- upvalues: ExhaustiveMatchModule (copy)
 	return if Direction == "x" then UDim2.new(0, Vector.X.Offset, 1, 0) elseif Direction == "y" then UDim2.new(1, 0, 0, Vector.Y.Offset) else ExhaustiveMatchModule(Direction)
 end
 
-return function(p1) --[[ Line: 35 | Named "VirtualizedContent" ]]
+return function(p1)
 	-- upvalues: UseVirtualizedListModule (copy), ReactModule (copy), ExhaustiveMatchModule (copy), RunService (copy), CreateElementFunction (copy), getContentSize (copy), RendererOverlayModule (copy)
 	local UseVirtualizedListModuleResult = UseVirtualizedListModule(p1)
 	local UseBindingResult, UseBindingResult2 = ReactModule.useBinding(UDim2.new())
-	ReactModule.useEffect(function() --[[ Line: 53 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: p1 (copy), UseVirtualizedListModuleResult (copy), ExhaustiveMatchModule (upval), UseBindingResult2 (copy), RunService (upval)
 		local Current = p1.scrollingFrameRef.current
 		assert(Current ~= nil, "VirtualizedContent requires scrollingFrameRef.current to point to its ancestor ScrollingFrame")
 		local AbsoluteWindowSize = nil
 		local X = nil
 		
-		local function syncMetrics() --[[ Line: 63 ]]
+		local function syncMetrics()
 			-- upvalues: Current (copy), AbsoluteWindowSize (ref), UseVirtualizedListModuleResult (upval), p1 (upval), ExhaustiveMatchModule (upval), UseBindingResult2 (upval), X (ref)
 			local AbsoluteWindowSize1 = Current.AbsoluteWindowSize
 			
@@ -70,7 +70,7 @@ return function(p1) --[[ Line: 35 | Named "VirtualizedContent" ]]
 		}
 		syncMetrics()
 		
-		return function() --[[ Line: 99 ]]
+		return function()
 			-- upvalues: Connections (copy)
 			for _, connection in Connections do
 				connection:Disconnect()
@@ -84,7 +84,7 @@ return function(p1) --[[ Line: 35 | Named "VirtualizedContent" ]]
 	
 	return CreateElementFunction("Frame", {
 		BackgroundTransparency = 1,
-		Size = UseVirtualizedListModuleResult.canvasSizeBinding:map(function(p2) --[[ Line: 115 ]]
+		Size = UseVirtualizedListModuleResult.canvasSizeBinding:map(function(p2)
 			-- upvalues: getContentSize (upval), p1 (copy)
 			return (getContentSize(p2, p1.direction))
 		end)

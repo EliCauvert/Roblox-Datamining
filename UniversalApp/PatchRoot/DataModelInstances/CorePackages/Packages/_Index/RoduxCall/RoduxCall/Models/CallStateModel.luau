@@ -3,7 +3,7 @@ local Status = require(RoduxCall.Enums).Status
 local TModule = require(RoduxCall.Parent.t)
 local CallStateModelModule = {}
 
-function CallStateModelModule.new(p1) --[[ Line: 10 ]]
+function CallStateModelModule.new(p1)
 	-- upvalues: CallStateModelModule (copy)
 	assert(CallStateModelModule.isValid(p1))
 	CallStateModelModule.__index = CallStateModelModule
@@ -12,7 +12,7 @@ function CallStateModelModule.new(p1) --[[ Line: 10 ]]
 	return p1
 end
 
-function CallStateModelModule.mock(p1) --[[ Line: 22 ]]
+function CallStateModelModule.mock(p1)
 	-- upvalues: CallStateModelModule (copy), Status (copy)
 	local P1 = p1 or {}
 	
@@ -31,7 +31,7 @@ function CallStateModelModule.mock(p1) --[[ Line: 22 ]]
 	}))
 end
 
-function CallStateModelModule.format(p1) --[[ Line: 42 ]]
+function CallStateModelModule.format(p1)
 	-- upvalues: CallStateModelModule (copy)
 	return (CallStateModelModule.new({
 		status = p1.status,

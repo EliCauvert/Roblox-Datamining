@@ -2,8 +2,8 @@
 local _ = require(script:FindFirstAncestor("Foundation").Providers.Style.Tokens)
 local _ = require(script.Parent.Rules.Types)
 
-local function pascalToKebab(Text: string): string --[[ Line: 10 ]]
-	local Replaced = string.gsub(Text:gsub("_", "-"), "(%u)", function(Match: string): string --[[ Line: 15 ]]
+local function pascalToKebab(Text: string): string
+	local Replaced = string.gsub(Text:gsub("_", "-"), "(%u)", function(Match: string): string
 		return "-" .. Match:lower()
 	end)
 	
@@ -13,7 +13,7 @@ local function pascalToKebab(Text: string): string --[[ Line: 10 ]]
 	return Replaced
 end
 
-return function(p1) --[[ Line: 28 | Named "formatTokens" ]]
+return function(p1)
 	-- upvalues: pascalToKebab (copy), ColorScopeKeepPrefixModule (copy)
 	local Colors = {}
 	local Variants = {}
@@ -63,21 +63,21 @@ return function(p1) --[[ Line: 28 | Named "formatTokens" ]]
 		table.insert(List, { name = pascalToKebab(i4), size = Size })
 	end
 	table.insert(List, { name = "none", size = 0 })
-	table.sort(List, function(A, B): boolean --[[ Line: 86 ]]
+	table.sort(List, function(A, B): boolean
 		return A.size < B.size
 	end)
 	
 	for i6, value5 in pairs(p1.Gap) do
 		table.insert(List1, { name = string.lower(i6), size = UDim.new(0, value5) })
 	end
-	table.sort(List1, function(A, B): boolean --[[ Line: 94 ]]
+	table.sort(List1, function(A, B): boolean
 		return A.size.Offset < B.size.Offset
 	end)
 	
 	for i7, value6 in pairs(p1.Radius) do
 		table.insert(List2, { name = string.lower(i7), size = UDim.new(0, value6) })
 	end
-	table.sort(List2, function(A, B): boolean --[[ Line: 102 ]]
+	table.sort(List2, function(A, B): boolean
 		return A.size.Offset < B.size.Offset
 	end)
 	
@@ -88,7 +88,7 @@ return function(p1) --[[ Line: 28 | Named "formatTokens" ]]
 		})
 	end
 	table.insert(List3, { name = "full", size = UDim.new(1, 0) })
-	table.sort(List3, function(A, B): boolean --[[ Line: 114 ]]
+	table.sort(List3, function(A, B): boolean
 		return A.size.Offset < B.size.Offset
 	end)
 	
@@ -102,21 +102,21 @@ return function(p1) --[[ Line: 28 | Named "formatTokens" ]]
 	for i10, value9 in pairs(p1.Padding) do
 		table.insert(List4, { name = string.lower(i10), size = UDim.new(0, value9) })
 	end
-	table.sort(List4, function(A, B): boolean --[[ Line: 130 ]]
+	table.sort(List4, function(A, B): boolean
 		return A.size.Offset < B.size.Offset
 	end)
 	
 	for i8, value7 in pairs(p1.Margin) do
 		table.insert(List5, { name = string.lower(i8), size = UDim.new(0, value7) })
 	end
-	table.sort(List5, function(A, B): boolean --[[ Line: 138 ]]
+	table.sort(List5, function(A, B): boolean
 		return A.size.Offset < B.size.Offset
 	end)
 	
 	for i11, value10 in pairs(p1.Gutter) do
 		table.insert(List6, { name = string.lower(i11), size = UDim.new(0, value10) })
 	end
-	table.sort(List6, function(A, B): boolean --[[ Line: 146 ]]
+	table.sort(List6, function(A, B): boolean
 		return A.size.Offset < B.size.Offset
 	end)
 	

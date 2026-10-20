@@ -1,6 +1,6 @@
 ﻿return {
-	genFuzzStrings = function(p1) --[[ Line: 13 ]]
-		return coroutine.wrap(function() --[[ Line: 14 | Named "getFuzzStrings" ]]
+	genFuzzStrings = function(p1)
+		return coroutine.wrap(function()
 			-- upvalues: p1 (copy)
 			local AllowedChars = p1.allowedChars
 			local CountAllowedChars = #AllowedChars

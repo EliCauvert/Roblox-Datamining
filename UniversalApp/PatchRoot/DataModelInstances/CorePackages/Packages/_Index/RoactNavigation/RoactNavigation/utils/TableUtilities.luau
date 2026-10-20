@@ -1,22 +1,22 @@
 ﻿local t = {}
 
-local function _(p1): string --[[ Line: 8 | Named "makeKeyString" ]]
+local function _(p1): string
 	return if type(p1) == "string" then string.format("%s", p1) else string.format("[%s]", (tostring(p1)))
 end
 
-local function makeValueString(Key): string --[[ Line: 16 ]]
+local function makeValueString(Key): string
 	local ValueType = type(Key)
 	
 	return if ValueType == "string" then string.format("%q", Key) elseif ValueType == "function" or ValueType == "table" then string.format("<%s>", (tostring(Key))) else string.format("%s", (tostring(Key)))
 end
 
-local function printKeypair(p1, p2, Repeated, p3) --[[ Line: 27 ]]
+local function printKeypair(p1, p2, Repeated, p3)
 	-- upvalues: makeValueString (copy)
 	print(string.format("%s%s = %s,%s", Repeated, if type(p1) == "string" then string.format("%s", p1) else string.format("[%s]", (tostring(p1))), makeValueString(p2), if p3 then string.format(" -- %s", p3) else ""))
 end
 
 local TableUtilitiesModule = {
-	ShallowEqual = function(List, List1, p1): boolean --[[ Line: 39 ]]
+	ShallowEqual = function(List, List1, p1): boolean
 		-- upvalues: t (copy)
 		if not List or not List1 then
 			return false
@@ -41,11 +41,11 @@ local TableUtilitiesModule = {
 	end
 }
 
-local function formatDeepEqualMessage(Text: string, p2) --[[ Line: 64 ]]
+local function formatDeepEqualMessage(Text: string, p2)
 	return if p2 == 0 then Text:gsub("{1}", "first"):gsub("{2}", "second") else Text
 end
 
-function TableUtilitiesModule.DeepEqual(List, List1, p2) --[[ Line: 75 ]]
+function TableUtilitiesModule.DeepEqual(List, List1, p2)
 	-- upvalues: formatDeepEqualMessage (copy), TableUtilitiesModule (copy)
 	local P13 = p2 or 0
 	
@@ -86,11 +86,11 @@ function TableUtilitiesModule.DeepEqual(List, List1, p2) --[[ Line: 75 ]]
 	return true
 end
 
-function TableUtilitiesModule.EqualKey(p3, p4, p5): boolean --[[ Line: 127 ]]
+function TableUtilitiesModule.EqualKey(p3, p4, p5): boolean
 	return p3 and p4 and p5 and p5 ~= "" and p3[p5] and p4[p5] and p3[p5] == p4[p5] or false
 end
 
-function TableUtilitiesModule.TableDifference(List, p3) --[[ Line: 138 ]]
+function TableUtilitiesModule.TableDifference(List, p3)
 	local t = {}
 	
 	for i, value in List do
@@ -101,7 +101,7 @@ function TableUtilitiesModule.TableDifference(List, p3) --[[ Line: 138 ]]
 	return t
 end
 
-local _ = function(p4) --[[ Line: 155 | Named "membershipTable" ]]
+local _ = function(p4)
 	local t = {}
 	
 	for i = 1, #p4 do
@@ -110,7 +110,7 @@ local _ = function(p4) --[[ Line: 155 | Named "membershipTable" ]]
 	return t
 end
 
-local _ = function(List) --[[ Line: 166 | Named "listOfKeys" ]]
+local _ = function(List)
 	local List1 = {}
 	
 	for i, _ in List do
@@ -119,7 +119,7 @@ local _ = function(List) --[[ Line: 166 | Named "listOfKeys" ]]
 	return List1
 end
 
-function TableUtilitiesModule.ListDifference(p5, p6) --[[ Line: 178 ]]
+function TableUtilitiesModule.ListDifference(p5, p6)
 	-- upvalues: TableUtilitiesModule (copy)
 	local TableDifferenceFunction = TableUtilitiesModule.TableDifference
 	local t = {}
@@ -140,7 +140,7 @@ function TableUtilitiesModule.ListDifference(p5, p6) --[[ Line: 178 ]]
 	return List
 end
 
-function TableUtilitiesModule.CheckListConsistency(List): boolean --[[ Line: 188 ]]
+function TableUtilitiesModule.CheckListConsistency(List): boolean
 	local Flag = false
 	local Flag1 = false
 	local Flag2 = true
@@ -166,7 +166,7 @@ function TableUtilitiesModule.CheckListConsistency(List): boolean --[[ Line: 188
 	return not Flag or Flag2
 end
 
-function TableUtilitiesModule.RecursiveToString(List, p7): string --[[ Line: 223 ]]
+function TableUtilitiesModule.RecursiveToString(List, p7): string
 	-- upvalues: TableUtilitiesModule (copy)
 	local P25 = p7 or ""
 	
@@ -191,7 +191,7 @@ function TableUtilitiesModule.RecursiveToString(List, p7): string --[[ Line: 223
 	return Text1 .. P25 .. "}"
 end
 
-function TableUtilitiesModule.Print(p8, p9) --[[ Line: 257 ]]
+function TableUtilitiesModule.Print(p8, p9)
 	-- upvalues: makeValueString (copy), printKeypair (copy)
 	local Text = p9 or "  "
 	
@@ -200,7 +200,7 @@ function TableUtilitiesModule.Print(p8, p9) --[[ Line: 257 ]]
 	end
 	local t = {}
 	
-	local function recurse(Key, p10, Count: number) --[[ Line: 267 ]]
+	local function recurse(Key, p10, Count: number)
 		-- upvalues: t (copy), Text (ref), makeValueString (upval), printKeypair (upval), recurse (copy)
 		t[Key] = true
 		local Repeated = string.rep(Text, Count)
@@ -228,7 +228,7 @@ function TableUtilitiesModule.Print(p8, p9) --[[ Line: 257 ]]
 	recurse(p8, nil, 0)
 end
 
-function TableUtilitiesModule.FieldCount(List): number --[[ Line: 301 ]]
+function TableUtilitiesModule.FieldCount(List): number
 	local Count = 0
 	
 	for _ in List do

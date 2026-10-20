@@ -2,7 +2,7 @@
 local AxisMapModule = require(script:FindFirstAncestor("ViewRecyclerRoblox").RobloxAdapter.axisMap)
 
 return {
-	attach = function(p1) --[[ Line: 48 ]]
+	attach = function(p1)
 		-- upvalues: AxisMapModule (copy), RunService (copy)
 		local _Instance = p1.instance
 		local Axis = p1.axis
@@ -18,7 +18,7 @@ return {
 		local HeartbeatConnections = {}
 		local Callback1 = nil
 		
-		local function refreshMeasurementDependencies() --[[ Line: 77 ]]
+		local function refreshMeasurementDependencies()
 			-- upvalues: GetMeasurementDependenciesFunction (copy), Connections (copy), Callback1 (ref)
 			local T = if GetMeasurementDependenciesFunction == nil then {} else GetMeasurementDependenciesFunction()
 			local t = {}
@@ -41,7 +41,7 @@ return {
 			return T
 		end
 		
-		local function publish(p2): boolean --[[ Line: 99 ]]
+		local function publish(p2): boolean
 			-- upvalues: IsRenderedFunction (copy), _Instance (copy), AxisMapModule (upval), Axis (copy), refreshMeasurementDependencies (copy), v1 (ref), v2 (ref), OnItemMeasuredFunction (copy)
 			if IsRenderedFunction ~= nil and not IsRenderedFunction() then
 				return false
@@ -64,13 +64,13 @@ return {
 			return true
 		end
 		
-		Callback1 = function() --[[ Line: 127 ]]
+		Callback1 = function()
 			-- upvalues: GetStateFunction (copy), HeartbeatConnections (copy), RunService (upval), Tbl (copy), publish (copy), Callback1 (ref)
 			local State = GetStateFunction()
 			
 			if State ~= nil and HeartbeatConnections[State] == nil then
 				local HeartbeatConnection = nil
-				HeartbeatConnection = RunService.Heartbeat:Once(function() --[[ Line: 134 ]]
+				HeartbeatConnection = RunService.Heartbeat:Once(function()
 					-- upvalues: Tbl (upval), HeartbeatConnection (ref), HeartbeatConnections (upval), State (copy), GetStateFunction (upval), publish (upval), Callback1 (upval)
 					Tbl[HeartbeatConnection] = nil
 					
@@ -95,7 +95,7 @@ return {
 		refreshMeasurementDependencies()
 		
 		if p1.subscribeMeasurementDependencies ~= nil then
-			Callback = p1.subscribeMeasurementDependencies(function() --[[ Line: 159 ]]
+			Callback = p1.subscribeMeasurementDependencies(function()
 				-- upvalues: refreshMeasurementDependencies (copy), Callback1 (ref)
 				refreshMeasurementDependencies()
 				Callback1()
@@ -103,7 +103,7 @@ return {
 		end
 		return {
 			scheduleSettle = Callback1,
-			measureNow = function() --[[ Line: 184 ]]
+			measureNow = function()
 				-- upvalues: GetStateFunction (copy), publish (copy)
 				local State = GetStateFunction()
 				
@@ -111,7 +111,7 @@ return {
 					publish(State)
 				end
 			end,
-			getPendingCount = function(): number --[[ Line: 190 ]]
+			getPendingCount = function(): number
 				-- upvalues: Tbl (copy)
 				local Count = 0
 				
@@ -120,7 +120,7 @@ return {
 				end
 				return Count
 			end,
-			disconnect = function() --[[ Line: 165 ]]
+			disconnect = function()
 				-- upvalues: Connection (copy), Callback (ref), Connections (copy), Tbl (copy), HeartbeatConnections (copy)
 				Connection:Disconnect()
 				

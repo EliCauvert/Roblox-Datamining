@@ -3,7 +3,7 @@ local _ = require(script.Parent.Parent.core.types)
 local GetOperationNameFunction = require(script.Parent.Parent.Parent.utilities).getOperationName
 
 return {
-	transformOperation = function(p1) --[[ Line: 20 ]]
+	transformOperation = function(p1)
 		-- upvalues: Boolean (copy), GetOperationNameFunction (copy)
 		local config = {
 			variables = Boolean.toJSBoolean(p1.variables) and p1.variables or {},

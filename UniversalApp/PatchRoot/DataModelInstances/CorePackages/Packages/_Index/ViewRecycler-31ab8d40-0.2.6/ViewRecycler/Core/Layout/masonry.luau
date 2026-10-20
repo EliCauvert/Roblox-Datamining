@@ -4,13 +4,13 @@ local _ = require(ViewRecycler.Core.Layout.LayoutRuntime)
 local TypesModule = require(ViewRecycler.Core.Types)
 local StaticPartsModule = require(ViewRecycler.Core.Layout.staticParts)
 
-local function _(p1, p2: number) --[[ Line: 27 | Named "validateNonNegative" ]]
+local function _(p1, p2: number)
 	if p2 < 0 or p2 >= 1e999 then
 		assert(false, `Layout.masonry: {p1} must be finite and non-negative`)
 	end
 end
 
-return function(p1) --[[ Line: 33 | Named "masonry" ]]
+return function(p1)
 	-- upvalues: TypesModule (copy), DataSourceChangeTypeModule (copy), StaticPartsModule (copy)
 	assert(type(p1.getItemLength) == "function", "Layout.masonry: getItemLength must be a function")
 	assert(p1.crossAxisCount ~= nil ~= (p1.crossAxisItemLength ~= nil), "Layout.masonry: provide exactly one of crossAxisCount or crossAxisItemLength")
@@ -46,12 +46,12 @@ return function(p1) --[[ Line: 33 | Named "masonry" ]]
 	local v1 = 0
 	local Flag = true
 	
-	local function _() --[[ Line: 69 | Named "markGeometryDirty" ]]
+	local function _()
 		-- upvalues: Flag (ref)
 		Flag = true
 	end
 	
-	local function rebuildGeometry() --[[ Line: 73 ]]
+	local function rebuildGeometry()
 		-- upvalues: Flag (ref), Tbl (copy), Tbl1 (copy), CrossAxisCount (ref), PaddingBefore (copy), List (ref), GetItemLengthFunction (copy), CrossAxisSpacing (copy), Spacing (copy), v1 (ref), PaddingAfter (copy)
 		if not Flag then return end
 		table.clear(Tbl)
@@ -104,7 +104,7 @@ return function(p1) --[[ Line: 33 | Named "masonry" ]]
 		Flag = false
 	end
 	
-	local function firstIntersectingInColumn(p2, p3, p4) --[[ Line: 144 ]]
+	local function firstIntersectingInColumn(p2, p3, p4)
 		-- upvalues: Tbl (copy)
 		if #p2 == 0 then
 			return nil, nil
@@ -142,17 +142,17 @@ return function(p1) --[[ Line: 33 | Named "masonry" ]]
 	end
 	
 	return {
-		getItemCount = function(): number --[[ Line: 126 ]]
+		getItemCount = function(): number
 			-- upvalues: List (ref)
 			return #List
 		end,
-		getContentLength = function() --[[ Line: 130 ]]
+		getContentLength = function()
 			-- upvalues: rebuildGeometry (copy), v1 (ref)
 			rebuildGeometry()
 			
 			return v1
 		end,
-		getIntersectingIndexRange = function(p5, p6) --[[ Line: 186 ]]
+		getIntersectingIndexRange = function(p5, p6)
 			-- upvalues: rebuildGeometry (copy), List (ref), TypesModule (upval), CrossAxisCount (ref), firstIntersectingInColumn (copy), Tbl1 (copy)
 			rebuildGeometry()
 			
@@ -180,11 +180,11 @@ return function(p1) --[[ Line: 33 | Named "masonry" ]]
 			end
 			return if Smallest == nil then TypesModule.EMPTY_INDEX_RANGE else { firstIndex = Smallest, lastIndex = Largest }
 		end,
-		expandIndexRange = function(p7, p8, p9) --[[ Line: 261 ]]
+		expandIndexRange = function(p7, p8, p9)
 			-- upvalues: StaticPartsModule (upval), List (ref)
 			return StaticPartsModule.expandItemRange(p7, p8, p9 or p8, #List)
 		end,
-		getItemLayout = function(p7) --[[ Line: 135 ]]
+		getItemLayout = function(p7)
 			-- upvalues: rebuildGeometry (copy), Tbl (copy)
 			rebuildGeometry()
 			local Entry = Tbl[p7]
@@ -196,7 +196,7 @@ return function(p1) --[[ Line: 33 | Named "masonry" ]]
 		end,
 		updateItemMeasurement = StaticPartsModule.updateItemMeasurementNoop,
 		requiresItemMeasurement = StaticPartsModule.requiresItemMeasurementFalse,
-		applyDataSourceChange = function(p7): boolean --[[ Line: 211 ]]
+		applyDataSourceChange = function(p7): boolean
 			-- upvalues: DataSourceChangeTypeModule (upval), List (ref), Flag (ref)
 			if p7.type == DataSourceChangeTypeModule.Reset then
 				List = table.clone(p7.keys)
@@ -220,7 +220,7 @@ return function(p1) --[[ Line: 33 | Named "masonry" ]]
 			
 			return true
 		end,
-		setViewportCrossAxisLength = function(p8): boolean --[[ Line: 243 ]]
+		setViewportCrossAxisLength = function(p8): boolean
 			-- upvalues: p1 (copy), CrossAxisSpacing (copy), CrossAxisCount (ref), Flag (ref)
 			if p1.crossAxisItemLength == nil then
 				return false

@@ -13,7 +13,7 @@ local IsNonNullTypeFunction = DefinitionModule.isNonNullType
 local NullModule = require(Parent.luaUtils.null)
 local Callback = nil
 
-local function valueFromAST(p1, OfType, p2) --[[ Line: 37 ]]
+local function valueFromAST(p1, OfType, p2)
 	-- upvalues: Kind (copy), NullModule (copy), IsNonNullTypeFunction (copy), valueFromAST (copy), IsListTypeFunction (copy), Callback (ref), IsInputObjectTypeFunction (copy), KeyMapFunction (copy), IsLeafTypeFunction (copy), Invariant (copy), InspectFunction (copy)
 	if not p1 then return end
 	if p1.kind == Kind.VARIABLE then
@@ -57,7 +57,7 @@ local function valueFromAST(p1, OfType, p2) --[[ Line: 37 ]]
 		elseif IsInputObjectTypeFunction(OfType) then
 			if p1.kind ~= Kind.OBJECT then return end
 			local DefaultValues = {}
-			local KeyMapResult = KeyMapFunction(p1.fields, function(p3) --[[ Line: 118 ]]
+			local KeyMapResult = KeyMapFunction(p1.fields, function(p3)
 				return p3.name.value
 			end)
 			
@@ -82,7 +82,7 @@ local function valueFromAST(p1, OfType, p2) --[[ Line: 37 ]]
 		else
 			local ParseLiteralResult = nil
 			
-			if not pcall(function() --[[ Line: 148 ]]
+			if not pcall(function()
 				-- upvalues: ParseLiteralResult (ref), OfType (copy), p1 (copy), p2 (copy)
 				ParseLiteralResult = OfType:parseLiteral(p1, p2)
 			end) then return end
@@ -93,7 +93,7 @@ local function valueFromAST(p1, OfType, p2) --[[ Line: 37 ]]
 	return valueFromAST(p1, OfType.ofType, p2)
 end
 
-Callback = function(p3, p4): boolean --[[ Line: 170 | Named "isMissingVariable" ]]
+Callback = function(p3, p4): boolean
 	-- upvalues: Kind (copy)
 	return p3.kind == Kind.VARIABLE and (p4 == nil or p4[p3.name.value] == nil)
 end

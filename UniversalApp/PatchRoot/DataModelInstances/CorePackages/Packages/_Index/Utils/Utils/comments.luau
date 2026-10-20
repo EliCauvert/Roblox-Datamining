@@ -19,7 +19,7 @@ local Callback6 = nil
 local String = LuauPolyfillModule.String
 local t = {}
 
-local function collectComment(p1) --[[ Line: 66 ]]
+local function collectComment(p1)
 	-- upvalues: Callback (ref), Boolean (copy), Callback1 (ref)
 	local Value = if typeof(p1.name) == "table" then p1.name.value else nil
 	
@@ -49,7 +49,7 @@ local function collectComment(p1) --[[ Line: 66 ]]
 	end
 end
 
-Callback = function(p2, p3, p4, p5) --[[ Line: 123 | Named "pushComment" ]]
+Callback = function(p2, p3, p4, p5)
 	-- upvalues: Callback2 (ref), Boolean (copy), Array (copy), t (ref)
 	local CallbackResult = Callback2(p2)
 	
@@ -71,21 +71,21 @@ Callback = function(p2, p3, p4, p5) --[[ Line: 123 | Named "pushComment" ]]
 	table.insert(t[v1], CallbackResult)
 end
 
-local function printComment(Text: string): string --[[ Line: 155 ]]
+local function printComment(Text: string): string
 	return "\n# " .. Text:gsub("\n", "\n# ")
 end
 
-local function join(Directives, p2) --[[ Line: 183 ]]
+local function join(Directives, p2)
 	-- upvalues: Boolean (copy), Array (copy)
-	return if Boolean.toJSBoolean(Directives) then Array.join(Array.filter(Directives, function(p3) --[[ Line: 195 ]]
+	return if Boolean.toJSBoolean(Directives) then Array.join(Array.filter(Directives, function(p3)
 		-- upvalues: Boolean (upval)
 		return Boolean.toJSBoolean(p3)
 	end), Boolean.toJSBoolean(p2) and p2 or "") else ""
 end
 
-local function _(p2) --[[ Line: 205 | Named "hasMultilineItems" ]]
+local function _(p2)
 	-- upvalues: Array (copy), String (copy)
-	local SomeResult = if typeof(p2) == "table" then Array.some(p2, function(p3) --[[ Line: 212 ]]
+	local SomeResult = if typeof(p2) == "table" then Array.some(p2, function(p3)
 		-- upvalues: String (upval)
 		return String.includes(p3, "\n")
 	end) else nil
@@ -93,12 +93,12 @@ local function _(p2) --[[ Line: 205 | Named "hasMultilineItems" ]]
 	return SomeResult ~= nil and SomeResult
 end
 
-local _ = function(p2) --[[ Line: 229 | Named "addDescription" ]]
+local _ = function(p2)
 	-- upvalues: Array (copy), Object (copy), Boolean (copy), String (copy), t (ref), join (copy), printComment (copy)
-	return function(p3, p4, p5, p6, p7, Entry) --[[ Line: 230 ]]
+	return function(p3, p4, p5, p6, p7, Entry)
 		-- upvalues: Array (upval), Object (upval), Boolean (upval), String (upval), t (upval), join (upval), printComment (upval), p2 (copy)
 		local List = {}
-		local ReduceResult = Array.reduce(p7, function(None, None1) --[[ Line: 258 ]]
+		local ReduceResult = Array.reduce(p7, function(None, None1)
 			-- upvalues: Object (upval), Array (upval), Boolean (upval), List (copy)
 			if None1 ~= Object.None and Array.includes({ "fields", "arguments", "values" }, None1) and Boolean.toJSBoolean(None.name) then
 				table.insert(List, None.name.value)
@@ -120,22 +120,22 @@ local _ = function(p2) --[[ Line: 229 | Named "addDescription" ]]
 	end
 end
 
-local function indent(Text: string): string --[[ Line: 320 ]]
+local function indent(Text: string): string
 	-- upvalues: Boolean (copy)
 	return if Boolean.toJSBoolean(Text) then ("  %s"):format((Text:gsub("\n", "\n  "))) else Text
 end
 
-local _ = function(p3): string --[[ Line: 344 | Named "block" ]]
+local _ = function(p3): string
 	-- upvalues: indent (copy), join (copy)
 	return if p3 and #p3 ~= 0 then ("{\n%s\n}"):format(indent((join(p3, "\n")))) else ""
 end
 
-local _ = function(Text, p3, p4): string --[[ Line: 363 | Named "wrap" ]]
+local _ = function(Text, p3, p4): string
 	-- upvalues: Boolean (copy)
 	return if Boolean.toJSBoolean(p3) then Text .. tostring(p3) .. (Boolean.toJSBoolean(p4) and p4 or "") else ""
 end
 
-local function printBlockString(Text: string, p3): string --[[ Line: 377 ]]
+local function printBlockString(Text: string, p3): string
 	-- upvalues: String (copy), Boolean (copy)
 	local P25 = p3 ~= nil and p3
 	local Text1: string = Text:gsub("\"", "\\\"\"\"")
@@ -149,23 +149,23 @@ end
 
 local config = {
 	Name = {
-		leave = function(_, p3) --[[ Line: 417 ]]
+		leave = function(_, p3)
 			return p3.value
 		end
 	},
 	Variable = {
-		leave = function(_, p3): string --[[ Line: 425 ]]
+		leave = function(_, p3): string
 			return "$" .. tostring(p3.name)
 		end
 	},
 	Document = {
-		leave = function(_, p3) --[[ Line: 434 ]]
+		leave = function(_, p3)
 			-- upvalues: join (copy)
 			return (join(p3.definitions, "\n\n"))
 		end
 	},
 	OperationDefinition = {
-		leave = function(_, p3): string --[[ Line: 442 ]]
+		leave = function(_, p3): string
 			-- upvalues: join (copy), Boolean (copy)
 			local v1 = join(p3.variableDefinitions, ", ")
 			
@@ -180,7 +180,7 @@ local config = {
 		end
 	},
 	VariableDefinition = {
-		leave = function(_, p3): string --[[ Line: 452 ]]
+		leave = function(_, p3): string
 			-- upvalues: Boolean (copy), join (copy)
 			local DefaultValue = p3.defaultValue
 			local Directives = p3.directives
@@ -209,7 +209,7 @@ local config = {
 		end
 	},
 	SelectionSet = {
-		leave = function(_, p3): string --[[ Line: 466 ]]
+		leave = function(_, p3): string
 			-- upvalues: indent (copy), join (copy)
 			local Selections = p3.selections
 			
@@ -217,7 +217,7 @@ local config = {
 		end
 	},
 	Field = {
-		leave = function(_, p3) --[[ Line: 473 ]]
+		leave = function(_, p3)
 			-- upvalues: Boolean (copy), join (copy)
 			local Alias = p3.alias
 			local Arguments = p3.arguments
@@ -236,12 +236,12 @@ local config = {
 		end
 	},
 	Argument = {
-		leave = function(_, p3): string --[[ Line: 497 ]]
+		leave = function(_, p3): string
 			return tostring(p3.name) .. ": " .. tostring(p3.value)
 		end
 	},
 	FragmentSpread = {
-		leave = function(_, p3): string --[[ Line: 507 ]]
+		leave = function(_, p3): string
 			-- upvalues: join (copy), Boolean (copy)
 			local v1 = "..."
 			local Text = tostring(p3.name)
@@ -258,7 +258,7 @@ local config = {
 		end
 	},
 	InlineFragment = {
-		leave = function(_, p3) --[[ Line: 516 ]]
+		leave = function(_, p3)
 			-- upvalues: join (copy), Boolean (copy)
 			local TypeCondition = p3.typeCondition
 			local Directives = p3.directives
@@ -282,7 +282,7 @@ local config = {
 		end
 	},
 	FragmentDefinition = {
-		leave = function(_, p3): string --[[ Line: 525 ]]
+		leave = function(_, p3): string
 			-- upvalues: join (copy), Boolean (copy)
 			local TypeCondition = p3.typeCondition
 			local Directives = p3.directives
@@ -297,17 +297,17 @@ local config = {
 		end
 	},
 	IntValue = {
-		leave = function(_, p3) --[[ Line: 545 ]]
+		leave = function(_, p3)
 			return p3.value
 		end
 	},
 	FloatValue = {
-		leave = function(_, p3) --[[ Line: 554 ]]
+		leave = function(_, p3)
 			return p3.value
 		end
 	},
 	StringValue = {
-		leave = function(_, p3) --[[ Line: 563 ]]
+		leave = function(_, p3)
 			-- upvalues: Boolean (copy), printBlockString (copy)
 			local Value: string = p3.value
 			
@@ -315,40 +315,40 @@ local config = {
 		end
 	},
 	BooleanValue = {
-		leave = function(_, p3): string --[[ Line: 579 ]]
+		leave = function(_, p3): string
 			-- upvalues: Boolean (copy)
 			return if Boolean.toJSBoolean(p3.value) then "true" else "false"
 		end
 	},
 	NullValue = {
-		leave = function(): string --[[ Line: 586 ]]
+		leave = function(): string
 			return "null"
 		end
 	},
 	EnumValue = {
-		leave = function(_, p3) --[[ Line: 593 ]]
+		leave = function(_, p3)
 			return p3.value
 		end
 	},
 	ListValue = {
-		leave = function(_, p3): string --[[ Line: 602 ]]
+		leave = function(_, p3): string
 			-- upvalues: join (copy)
 			return "[" .. tostring((join(p3.values, ", "))) .. "]"
 		end
 	},
 	ObjectValue = {
-		leave = function(_, p3): string --[[ Line: 611 ]]
+		leave = function(_, p3): string
 			-- upvalues: join (copy)
 			return "{" .. tostring((join(p3.fields, ", "))) .. "}"
 		end
 	},
 	ObjectField = {
-		leave = function(_, p3): string --[[ Line: 620 ]]
+		leave = function(_, p3): string
 			return tostring(p3.name) .. ": " .. tostring(p3.value)
 		end
 	},
 	Directive = {
-		leave = function(_, p3): string --[[ Line: 630 ]]
+		leave = function(_, p3): string
 			-- upvalues: join (copy), Boolean (copy)
 			local Text = tostring(p3.name)
 			local v1 = join(p3.arguments, ", ")
@@ -357,22 +357,22 @@ local config = {
 		end
 	},
 	NamedType = {
-		leave = function(_, p3) --[[ Line: 640 ]]
+		leave = function(_, p3)
 			return p3.name
 		end
 	},
 	ListType = {
-		leave = function(_, p3): string --[[ Line: 649 ]]
+		leave = function(_, p3): string
 			return "[" .. tostring(p3.type) .. "]"
 		end
 	},
 	NonNullType = {
-		leave = function(_, p3): string --[[ Line: 658 ]]
+		leave = function(_, p3): string
 			return tostring(p3.type) .. "!"
 		end
 	},
 	SchemaDefinition = {
-		leave = function(_, p3) --[[ Line: 668 ]]
+		leave = function(_, p3)
 			-- upvalues: join (copy), indent (copy)
 			local OperationTypes = p3.operationTypes
 			
@@ -384,18 +384,18 @@ local config = {
 		end
 	},
 	OperationTypeDefinition = {
-		leave = function(_, p3): string --[[ Line: 677 ]]
+		leave = function(_, p3): string
 			return tostring(p3.operation) .. ": " .. tostring(p3.type)
 		end
 	},
 	ScalarTypeDefinition = {
-		leave = function(_, p3) --[[ Line: 686 ]]
+		leave = function(_, p3)
 			-- upvalues: join (copy)
 			return (join({ "scalar", p3.name, (join(p3.directives, " ")) }, " "))
 		end
 	},
 	ObjectTypeDefinition = {
-		leave = function(_, p3) --[[ Line: 695 ]]
+		leave = function(_, p3)
 			-- upvalues: join (copy), Boolean (copy), indent (copy)
 			local Directives = p3.directives
 			local Fields = p3.fields
@@ -421,13 +421,13 @@ local config = {
 		end
 	},
 	FieldDefinition = {
-		leave = function(_, p3): string --[[ Line: 710 ]]
+		leave = function(_, p3): string
 			-- upvalues: Array (copy), String (copy), join (copy), Boolean (copy)
 			local Arguments = p3.arguments
 			local Type = p3.type
 			local Directives = p3.directives
 			local Text = tostring(p3.name)
-			local SomeResult = if typeof(Arguments) == "table" then Array.some(Arguments, function(p4) --[[ Line: 212 ]]
+			local SomeResult = if typeof(Arguments) == "table" then Array.some(Arguments, function(p4)
 				-- upvalues: String (upval)
 				return String.includes(p4, "\n")
 			end) else nil
@@ -456,7 +456,7 @@ local config = {
 		end
 	},
 	InputValueDefinition = {
-		leave = function(_, p3) --[[ Line: 735 ]]
+		leave = function(_, p3)
 			-- upvalues: join (copy), Boolean (copy)
 			local DefaultValue = p3.defaultValue
 			local Directives = p3.directives
@@ -478,7 +478,7 @@ local config = {
 		end
 	},
 	InterfaceTypeDefinition = {
-		leave = function(_, p3) --[[ Line: 748 ]]
+		leave = function(_, p3)
 			-- upvalues: join (copy), Boolean (copy), indent (copy)
 			local Directives = p3.directives
 			local Fields = p3.fields
@@ -504,7 +504,7 @@ local config = {
 		end
 	},
 	UnionTypeDefinition = {
-		leave = function(_, p3) --[[ Line: 763 ]]
+		leave = function(_, p3)
 			-- upvalues: join (copy), Boolean (copy)
 			local Types = p3.types
 			local Names = {}
@@ -529,7 +529,7 @@ local config = {
 		end
 	},
 	EnumTypeDefinition = {
-		leave = function(_, p3) --[[ Line: 772 ]]
+		leave = function(_, p3)
 			-- upvalues: join (copy), indent (copy)
 			local Values = p3.values
 			
@@ -542,13 +542,13 @@ local config = {
 		end
 	},
 	EnumValueDefinition = {
-		leave = function(_, p3) --[[ Line: 781 ]]
+		leave = function(_, p3)
 			-- upvalues: join (copy)
 			return (join({ p3.name, (join(p3.directives, " ")) }, " "))
 		end
 	},
 	InputObjectTypeDefinition = {
-		leave = function(_, p3) --[[ Line: 790 ]]
+		leave = function(_, p3)
 			-- upvalues: join (copy), indent (copy)
 			local Fields = p3.fields
 			
@@ -561,14 +561,14 @@ local config = {
 		end
 	},
 	DirectiveDefinition = {
-		leave = function(_, p3): string --[[ Line: 799 ]]
+		leave = function(_, p3): string
 			-- upvalues: Boolean (copy), Array (copy), String (copy), join (copy)
 			local Arguments = p3.arguments
 			local Repeatable = p3.repeatable
 			local Locations = p3.locations
 			local v1 = "directive @"
 			local Text = tostring(p3.name)
-			local SomeResult = if typeof(Arguments) == "table" then Array.some(Arguments, function(p4) --[[ Line: 212 ]]
+			local SomeResult = if typeof(Arguments) == "table" then Array.some(Arguments, function(p4)
 				-- upvalues: String (upval)
 				return String.includes(p4, "\n")
 			end) else nil
@@ -586,7 +586,7 @@ local config = {
 		end
 	},
 	SchemaExtension = {
-		leave = function(_, p3) --[[ Line: 817 ]]
+		leave = function(_, p3)
 			-- upvalues: join (copy), indent (copy)
 			local OperationTypes = p3.operationTypes
 			
@@ -598,13 +598,13 @@ local config = {
 		end
 	},
 	ScalarTypeExtension = {
-		leave = function(_, p3) --[[ Line: 826 ]]
+		leave = function(_, p3)
 			-- upvalues: join (copy)
 			return (join({ "extend scalar", p3.name, (join(p3.directives, " ")) }, " "))
 		end
 	},
 	ObjectTypeExtension = {
-		leave = function(_, p3) --[[ Line: 835 ]]
+		leave = function(_, p3)
 			-- upvalues: join (copy), Boolean (copy), indent (copy)
 			local Directives = p3.directives
 			local Fields = p3.fields
@@ -630,7 +630,7 @@ local config = {
 		end
 	},
 	InterfaceTypeExtension = {
-		leave = function(_, p3) --[[ Line: 850 ]]
+		leave = function(_, p3)
 			-- upvalues: join (copy), Boolean (copy), indent (copy)
 			local Directives = p3.directives
 			local Fields = p3.fields
@@ -656,7 +656,7 @@ local config = {
 		end
 	},
 	UnionTypeExtension = {
-		leave = function(_, p3) --[[ Line: 865 ]]
+		leave = function(_, p3)
 			-- upvalues: join (copy), Boolean (copy)
 			local Types = p3.types
 			local Names = {}
@@ -681,7 +681,7 @@ local config = {
 		end
 	},
 	EnumTypeExtension = {
-		leave = function(_, p3) --[[ Line: 874 ]]
+		leave = function(_, p3)
 			-- upvalues: join (copy), indent (copy)
 			local Values = p3.values
 			
@@ -694,7 +694,7 @@ local config = {
 		end
 	},
 	InputObjectTypeExtension = {
-		leave = function(_, p3) --[[ Line: 883 ]]
+		leave = function(_, p3)
 			-- upvalues: join (copy), indent (copy)
 			local Fields = p3.fields
 			
@@ -707,16 +707,16 @@ local config = {
 		end
 	}
 }
-local ReduceResult = Array.reduce(Object.keys(config), function(p3, p4) --[[ Line: 900 ]]
+local ReduceResult = Array.reduce(Object.keys(config), function(p3, p4)
 	-- upvalues: Object (copy), config (copy), Array (copy), Boolean (copy), String (copy), t (ref), join (copy), printComment (copy)
 	local LeaveFunction = config[p4].leave
 	
 	return (Object.assign({}, p3, {
 		[p4] = {
-			leave = function(p5, p6, p7, p8, p9, Entry) --[[ Line: 230 ]]
+			leave = function(p5, p6, p7, p8, p9, Entry)
 				-- upvalues: Array (upval), Object (upval), Boolean (upval), String (upval), t (upval), join (upval), printComment (upval), LeaveFunction (copy)
 				local List = {}
-				local ReduceResult = Array.reduce(p9, function(None, None1) --[[ Line: 258 ]]
+				local ReduceResult = Array.reduce(p9, function(None, None1)
 					-- upvalues: Object (upval), Array (upval), Boolean (upval), List (copy)
 					if None1 ~= Object.None and Array.includes({ "fields", "arguments", "values" }, None1) and Boolean.toJSBoolean(None.name) then
 						table.insert(List, None.name.value)
@@ -740,18 +740,18 @@ local ReduceResult = Array.reduce(Object.keys(config), function(p3, p4) --[[ Lin
 	}))
 end, {})
 
-Callback1 = function(p5): boolean --[[ Line: 920 | Named "isFieldDefinitionNode" ]]
+Callback1 = function(p5): boolean
 	return p5.kind == "FieldDefinition"
 end
 
-Callback2 = function(p5) --[[ Line: 945 | Named "getComment" ]]
+Callback2 = function(p5)
 	-- upvalues: Callback3 (ref), Callback4 (ref)
 	local CallbackResult = Callback3(p5)
 	
 	return if CallbackResult == nil then nil else Callback4(("\n%s"):format((tostring(CallbackResult))))
 end
 
-Callback3 = function(p5) --[[ Line: 958 | Named "getLeadingCommentBlock" ]]
+Callback3 = function(p5)
 	-- upvalues: Boolean (copy), TokenKind (copy), Array (copy)
 	local Loc = p5.loc
 	
@@ -765,7 +765,7 @@ Callback3 = function(p5) --[[ Line: 958 | Named "getLeadingCommentBlock" ]]
 	return if #List > 0 then Array.join(Array.reverse(List), "\n") else nil
 end
 
-Callback4 = function(p6) --[[ Line: 995 | Named "dedentBlockStringValue" ]]
+Callback4 = function(p6)
 	-- upvalues: String (copy), Callback5 (ref), IsBlank (ref), Array (copy)
 	local SplitResult = String.split(p6, { "\r\n", "\n", "\r" })
 	local CallbackResult: number = Callback5(SplitResult)
@@ -786,7 +786,7 @@ Callback4 = function(p6) --[[ Line: 995 | Named "dedentBlockStringValue" ]]
 	return Array.join(SplitResult, "\n")
 end
 
-Callback5 = function(SplitResult) --[[ Line: 1060 | Named "getBlockStringIndentation" ]]
+Callback5 = function(SplitResult)
 	-- upvalues: Callback6 (ref)
 	local v1 = nil
 	local Count = 2
@@ -808,7 +808,7 @@ Callback5 = function(SplitResult) --[[ Line: 1060 | Named "getBlockStringIndenta
 	return if v1 == nil then 0 else v1
 end
 
-Callback6 = function(Text): number --[[ Line: 1107 | Named "leadingWhitespace" ]]
+Callback6 = function(Text): number
 	local Count = 0
 	while Count < #Text and (Text:sub(Count + 1, Count + 1) == " " or Text:sub(Count + 1, Count + 1) == "\t") do
 		Count += 1
@@ -816,24 +816,24 @@ Callback6 = function(Text): number --[[ Line: 1107 | Named "leadingWhitespace" ]
 	return Count
 end
 
-IsBlank = function(p7): boolean --[[ Line: 1123 | Named "isBlank" ]]
+IsBlank = function(p7): boolean
 	-- upvalues: Callback6 (ref)
 	return Callback6(p7) == #p7
 end
 
 return {
-	resetComments = function() --[[ Line: 62 ]]
+	resetComments = function()
 		-- upvalues: t (ref)
 		t = {}
 	end,
 	collectComment = collectComment,
 	pushComment = Callback,
 	printComment = printComment,
-	printWithComments = function(p7) --[[ Line: 914 ]]
+	printWithComments = function(p7)
 		-- upvalues: VisitFunction (copy), ReduceResult (copy)
 		return (VisitFunction(p7, ReduceResult))
 	end,
-	getDescription = function(p7, p8) --[[ Line: 926 ]]
+	getDescription = function(p7, p8)
 		-- upvalues: Boolean (copy), Callback2 (ref)
 		return if p7.description == nil then if Boolean.toJSBoolean(if typeof(p8) == "table" then p8.commentDescriptions else nil) then Callback2(p7) else nil else p7.description.value
 	end,

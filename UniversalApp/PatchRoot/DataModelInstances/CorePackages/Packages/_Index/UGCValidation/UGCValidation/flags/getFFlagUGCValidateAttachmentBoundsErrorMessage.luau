@@ -1,5 +1,5 @@
 ﻿game:DefineFastFlag("UGCValidateAttachmentBoundsErrorMessage", false)
 
-return function() --[[ Line: 3 ]]
+return function()
 	return game:GetFastFlag("UGCValidateAttachmentBoundsErrorMessage")
 end

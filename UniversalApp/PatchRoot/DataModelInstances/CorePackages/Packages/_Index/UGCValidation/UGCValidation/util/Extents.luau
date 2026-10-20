@@ -1,7 +1,7 @@
 ﻿local ExtentsModule = {}
 ExtentsModule.__index = ExtentsModule
 
-function ExtentsModule.new() --[[ Line: 14 ]]
+function ExtentsModule.new()
 	-- upvalues: ExtentsModule (copy)
 	local self = setmetatable({}, ExtentsModule)
 	self.min = vector.create(1e999, 1e999, 1e999)
@@ -10,7 +10,7 @@ function ExtentsModule.new() --[[ Line: 14 ]]
 	return self
 end
 
-function ExtentsModule:fromMinMax(Vector1) --[[ Line: 22 ]]
+function ExtentsModule:fromMinMax(Vector1)
 	-- upvalues: ExtentsModule (copy)
 	local NewExtents = ExtentsModule.new()
 	local config = { X = self.X, Y = self.Y, Z = self.Z }
@@ -29,7 +29,7 @@ function ExtentsModule:fromMinMax(Vector1) --[[ Line: 22 ]]
 	return NewExtents
 end
 
-function ExtentsModule:unionExtents(p1) --[[ Line: 42 ]]
+function ExtentsModule:unionExtents(p1)
 	-- upvalues: ExtentsModule (copy)
 	local NewExtents = ExtentsModule.new()
 	NewExtents.min = self.min:Min(p1.min)
@@ -38,7 +38,7 @@ function ExtentsModule:unionExtents(p1) --[[ Line: 42 ]]
 	return NewExtents
 end
 
-function ExtentsModule:intersectExtents(p1) --[[ Line: 49 ]]
+function ExtentsModule:intersectExtents(p1)
 	-- upvalues: ExtentsModule (copy)
 	local config = { X = 1e999, Y = 1e999, Z = 1e999 }
 	local config1 = { X = -1e999, Y = -1e999, Z = -1e999 }
@@ -61,7 +61,7 @@ function ExtentsModule:intersectExtents(p1) --[[ Line: 49 ]]
 	return NewExtents
 end
 
-function ExtentsModule:expandToInclude(p2) --[[ Line: 72 ]]
+function ExtentsModule:expandToInclude(p2)
 	-- upvalues: ExtentsModule (copy)
 	local NewExtents = ExtentsModule.new()
 	NewExtents.min = self.min:Min(p2)
@@ -70,7 +70,7 @@ function ExtentsModule:expandToInclude(p2) --[[ Line: 72 ]]
 	return NewExtents
 end
 
-function ExtentsModule:isValid(): boolean --[[ Line: 79 ]]
+function ExtentsModule:isValid(): boolean
 	for _, value in { "X", "Y", "Z" } do
 		if self.max[value] < self.min[value] then
 			return false
@@ -79,11 +79,11 @@ function ExtentsModule:isValid(): boolean --[[ Line: 79 ]]
 	return true
 end
 
-function ExtentsModule.size(p2) --[[ Line: 88 ]]
+function ExtentsModule.size(p2)
 	return if p2:isValid() then p2.max - p2.min else nil
 end
 
-function ExtentsModule.center(p2) --[[ Line: 95 ]]
+function ExtentsModule.center(p2)
 	return if p2:isValid() then (p2.max + p2.min) / 2 else nil
 end
 

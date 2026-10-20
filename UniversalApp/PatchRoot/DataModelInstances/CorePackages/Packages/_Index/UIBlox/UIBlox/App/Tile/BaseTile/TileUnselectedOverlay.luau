@@ -8,11 +8,11 @@ local TileUnselectedOverlay = RoactModule.PureComponent:extend("TileUnselectedOv
 local SquirclesHollow = require(Parent.App.ImageSet.Images)["squircles/hollow"]
 TileUnselectedOverlay.validateProps = TModule.strictInterface({ ZIndex = TModule.optional(TModule.integer) })
 
-function TileUnselectedOverlay.render(p1) --[[ Line: 28 ]]
+function TileUnselectedOverlay.render(p1)
 	-- upvalues: WithStyleModule (copy), RoactModule (copy), ImageSetComponentModule (copy), SquirclesHollow (copy)
 	local ZIndex = p1.props.ZIndex
 	
-	return WithStyleModule(function(p2) --[[ Line: 31 ]]
+	return WithStyleModule(function(p2)
 		-- upvalues: RoactModule (upval), ZIndex (copy), ImageSetComponentModule (upval), SquirclesHollow (upval)
 		local Tokens = p2.Tokens
 		

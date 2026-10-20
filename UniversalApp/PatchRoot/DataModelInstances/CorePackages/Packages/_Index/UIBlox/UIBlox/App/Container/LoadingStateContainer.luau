@@ -15,29 +15,29 @@ LoadingStateContainer.validateProps = TModule.strictInterface({
 	renderOnEmpty = TModule.optional(TModule.callback)
 })
 
-function LoadingStateContainer.init(p1) --[[ Line: 30 ]]
+function LoadingStateContainer.init(p1)
 	-- upvalues: RetrievalStatusModule (copy), RoactModule (copy), LoadingStatePageModule (copy), FailedStatePageModule (copy)
 	p1.statePages = {
-		[RetrievalStatusModule.NotStarted] = function() --[[ Line: 32 ]]
+		[RetrievalStatusModule.NotStarted] = function()
 			-- upvalues: p1 (copy), RoactModule (upval), LoadingStatePageModule (upval)
 			return if p1.props.renderOnEmpty then p1.props.renderOnEmpty() elseif p1.props.renderOnLoading then p1.props.renderOnLoading() else RoactModule.createElement(LoadingStatePageModule)
 		end,
-		[RetrievalStatusModule.Fetching] = function() --[[ Line: 43 ]]
+		[RetrievalStatusModule.Fetching] = function()
 			-- upvalues: p1 (copy), RoactModule (upval), LoadingStatePageModule (upval)
 			return if p1.props.renderOnLoading then p1.props.renderOnLoading() else RoactModule.createElement(LoadingStatePageModule)
 		end,
-		[RetrievalStatusModule.Failed] = function() --[[ Line: 50 ]]
+		[RetrievalStatusModule.Failed] = function()
 			-- upvalues: p1 (copy), RoactModule (upval), FailedStatePageModule (upval)
 			return if p1.props.renderOnFailed then p1.props.renderOnFailed() else RoactModule.createElement(FailedStatePageModule, { onRetry = p1.props.onRetry })
 		end,
-		[RetrievalStatusModule.Done] = function() --[[ Line: 59 ]]
+		[RetrievalStatusModule.Done] = function()
 			-- upvalues: p1 (copy)
 			return p1.props.renderOnLoaded()
 		end
 	}
 end
 
-function LoadingStateContainer.render(p1) --[[ Line: 65 ]]
+function LoadingStateContainer.render(p1)
 	return p1.statePages[p1.props.dataStatus]()
 end
 

@@ -2,7 +2,7 @@
 local PlatformModule = require(script.Parent.Platform)
 local GetInputPlatformModule = require(script.Parent.getInputPlatform)
 
-return function(p1) --[[ Line: 5 | Named "getBuilderIconForKeycode" ]]
+return function(p1)
 	-- upvalues: GetInputPlatformModule (copy), KeycodeMappingsModule (copy), PlatformModule (copy)
 	local Name = p1.Name
 	local KeycodeMappingsModuleEntry = KeycodeMappingsModule[GetInputPlatformModule()][Name]

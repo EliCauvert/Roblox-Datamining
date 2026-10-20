@@ -1,10 +1,10 @@
 ﻿local AppsFlyerUtil = {
-	replaceNewlines = function(Text: string, p1) --[[ Line: 18 ]]
+	replaceNewlines = function(Text: string, p1)
 		local P1 = p1 or " "
 		
 		return Text:gsub("\r\n", P1):gsub("\r", P1):gsub("\n", P1)
 	end,
-	truncateLength = function(Text: string, p1) --[[ Line: 33 ]]
+	truncateLength = function(Text: string, p1)
 		local P3 = p1 or 140
 		
 		if Text:len() <= P3 then
@@ -25,7 +25,7 @@
 	end
 }
 
-function AppsFlyerUtil.sanitizeDescription(p2) --[[ Line: 73 ]]
+function AppsFlyerUtil.sanitizeDescription(p2)
 	-- upvalues: AppsFlyerUtil (copy)
 	return (AppsFlyerUtil.truncateLength((AppsFlyerUtil.replaceNewlines(p2))))
 end

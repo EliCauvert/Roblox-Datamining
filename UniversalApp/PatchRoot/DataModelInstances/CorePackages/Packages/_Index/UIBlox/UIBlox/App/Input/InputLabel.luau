@@ -7,12 +7,12 @@ local NormalizeFontFaceFunction = FoundationModule.Utility.normalizeFontFace
 local UseStyleModule = require(Parent.Core.Style.useStyle)
 local FoundationFontFaceMigration = FoundationModule.Utility.Flags.FoundationFontFaceMigration
 
-local function _(InputLabel, None) --[[ Line: 25 | Named "labelText" ]]
+local function _(InputLabel, None)
 	-- upvalues: ReactModule (copy), TranslatorModule (copy)
 	return if None == nil or None == ReactModule.None then InputLabel elseif None then InputLabel .. "*" else TranslatorModule:FormatByKey("CommonUI.Controls.Input.Optional", { inputLabel = InputLabel })
 end
 
-return function(Frame) --[[ Line: 35 | Named "InputLabel" ]]
+return function(Frame)
 	-- upvalues: UseStyleModule (copy), ReactModule (copy), TranslatorModule (copy), FoundationFontFaceMigration (copy), NormalizeFontFaceFunction (copy)
 	local UseStyleModuleResult = UseStyleModule()
 	local BodySmall = UseStyleModuleResult.Tokens.Typography.BodySmall

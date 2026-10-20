@@ -4,7 +4,7 @@ local _ = require(ViewRecycler.Core.Types)
 local ItemKeyRegistryModule = require(script.Parent.ItemKeyRegistry)
 local MutationControllerModule = require(script.Parent.MutationController)
 
-local function getItems(Count: number, Callback, p1: number, p2: number) --[[ Line: 28 ]]
+local function getItems(Count: number, Callback, p1: number, p2: number)
 	local Buffer = table.create((math.max(0, p2 - p1 + 1)))
 	
 	for i = p1, math.min(p2, Count) do
@@ -13,7 +13,7 @@ local function getItems(Count: number, Callback, p1: number, p2: number) --[[ Li
 	return Buffer
 end
 
-return function(p3, p4) --[[ Line: 36 | Named "createDequeDataSource" ]]
+return function(p3, p4)
 	-- upvalues: ItemKeyRegistryModule (copy), MutationControllerModule (copy), getItems (copy), DataSourceChangeTypeModule (copy)
 	local P3 = p3 or {}
 	local Values = {}
@@ -28,10 +28,10 @@ return function(p3, p4) --[[ Line: 36 | Named "createDequeDataSource" ]]
 		Values[i] = value
 		ClaimResults[i] = RebuildResult[i]
 	end
-	local MutationControllerModuleResult = MutationControllerModule(function() --[[ Line: 50 ]]
+	local MutationControllerModuleResult = MutationControllerModule(function()
 		-- upvalues: CountP3 (ref)
 		return CountP3
-	end, function() --[[ Line: 52 ]]
+	end, function()
 		-- upvalues: Values (ref), ClaimResults (ref), Largest (ref), Head (ref), CountP3 (ref), DataSourceDeque (copy)
 		return {
 			values = table.clone(Values),
@@ -41,7 +41,7 @@ return function(p3, p4) --[[ Line: 36 | Named "createDequeDataSource" ]]
 			count = CountP3,
 			keyRegistry = DataSourceDeque.snapshot()
 		}
-	end, function(p5) --[[ Line: 61 ]]
+	end, function(p5)
 		-- upvalues: Values (ref), ClaimResults (ref), Largest (ref), Head (ref), CountP3 (ref), DataSourceDeque (copy)
 		Values = p5.values
 		ClaimResults = p5.keys
@@ -51,12 +51,12 @@ return function(p3, p4) --[[ Line: 36 | Named "createDequeDataSource" ]]
 		DataSourceDeque.restore(p5.keyRegistry)
 	end)
 	
-	local function _(p5): number --[[ Line: 70 | Named "physical" ]]
+	local function _(p5): number
 		-- upvalues: Head (ref), Largest (ref)
 		return (Head + p5 - 2) % Largest + 1
 	end
 	
-	local function ensureCapacity() --[[ Line: 74 ]]
+	local function ensureCapacity()
 		-- upvalues: CountP3 (ref), Largest (ref), Values (ref), Head (ref), ClaimResults (ref)
 		if CountP3 < Largest then return end
 		local ScaledLargest = Largest * 2
@@ -75,25 +75,25 @@ return function(p3, p4) --[[ Line: 36 | Named "createDequeDataSource" ]]
 	
 	local v1 = nil
 	v1 = {
-		getItemCount = function() --[[ Line: 93 ]]
+		getItemCount = function()
 			-- upvalues: CountP3 (ref)
 			return CountP3
 		end,
-		getItem = function(p5) --[[ Line: 96 ]]
+		getItem = function(p5)
 			-- upvalues: Values (ref), Head (ref), Largest (ref)
 			return Values[(Head + p5 - 2) % Largest + 1]
 		end,
-		getItemKey = function(p5) --[[ Line: 99 ]]
+		getItemKey = function(p5)
 			-- upvalues: ClaimResults (ref), Head (ref), Largest (ref)
 			return ClaimResults[(Head + p5 - 2) % Largest + 1]
 		end,
-		getItems = function(p5, p6) --[[ Line: 102 ]]
+		getItems = function(p5, p6)
 			-- upvalues: getItems (upval), CountP3 (ref), v1 (ref)
 			return (getItems(CountP3, v1.getItem, p5, p6))
 		end,
 		subscribe = MutationControllerModuleResult.subscribe,
 		transaction = MutationControllerModuleResult.transaction,
-		pushFront = function(p5) --[[ Line: 109 ]]
+		pushFront = function(p5)
 			-- upvalues: CountP3 (ref), DataSourceDeque (copy), ensureCapacity (copy), Head (ref), Largest (ref), Values (ref), ClaimResults (ref), MutationControllerModuleResult (copy), DataSourceChangeTypeModule (upval)
 			local Count: number = CountP3
 			local ClaimResult = DataSourceDeque.claim(p5, 1)
@@ -108,7 +108,7 @@ return function(p3, p4) --[[ Line: 36 | Named "createDequeDataSource" ]]
 				keys = { ClaimResult }
 			}, Count)
 		end,
-		pushBack = function(p5) --[[ Line: 120 ]]
+		pushBack = function(p5)
 			-- upvalues: CountP3 (ref), DataSourceDeque (copy), ensureCapacity (copy), Head (ref), Largest (ref), Values (ref), ClaimResults (ref), MutationControllerModuleResult (copy), DataSourceChangeTypeModule (upval)
 			local Count: number = CountP3
 			local ClaimResult = DataSourceDeque.claim(p5, CountP3 + 1)
@@ -123,7 +123,7 @@ return function(p3, p4) --[[ Line: 36 | Named "createDequeDataSource" ]]
 				keys = { ClaimResult }
 			}, Count)
 		end,
-		popFront = function() --[[ Line: 131 ]]
+		popFront = function()
 			-- upvalues: CountP3 (ref), Values (ref), Head (ref), ClaimResults (ref), DataSourceDeque (copy), Largest (ref), MutationControllerModuleResult (copy), DataSourceChangeTypeModule (upval)
 			if CountP3 == 0 then
 				return nil
@@ -145,7 +145,7 @@ return function(p3, p4) --[[ Line: 36 | Named "createDequeDataSource" ]]
 				return Value
 			end
 		end,
-		popBack = function() --[[ Line: 147 ]]
+		popBack = function()
 			-- upvalues: CountP3 (ref), Head (ref), Largest (ref), Values (ref), ClaimResults (ref), DataSourceDeque (copy), MutationControllerModuleResult (copy), DataSourceChangeTypeModule (upval)
 			if CountP3 == 0 then
 				return nil

@@ -16,7 +16,7 @@ local OperationData = require(script.Parent.OperationData).OperationData
 local self = setmetatable({}, { __index = OperationData })
 self.__index = self
 
-function self.new(Options) --[[ Line: 114 ]]
+function self.new(Options)
 	-- upvalues: OperationData (copy), Boolean (copy), self (copy)
 	local OnNewData = Options.onNewData
 	local NewOperationData = OperationData.new(Options.options, Options.context)
@@ -24,7 +24,7 @@ function self.new(Options) --[[ Line: 114 ]]
 	NewOperationData.previous = {}
 	NewOperationData.onNewData = OnNewData
 	
-	function NewOperationData.runLazyQuery(LazyOptions) --[[ Line: 133 ]]
+	function NewOperationData.runLazyQuery(LazyOptions)
 		-- upvalues: NewOperationData (copy)
 		NewOperationData:cleanup()
 		NewOperationData.runLazy = true
@@ -32,32 +32,32 @@ function self.new(Options) --[[ Line: 114 ]]
 		NewOperationData:onNewData()
 	end
 	
-	function NewOperationData:obsRefetch(p1) --[[ Line: 140 ]]
+	function NewOperationData:obsRefetch(p1)
 		-- upvalues: Boolean (upval), NewOperationData (copy)
 		return if Boolean.toJSBoolean(NewOperationData.currentObservable) then NewOperationData.currentObservable:refetch(p1) else nil
 	end
 	
-	function NewOperationData:obsFetchMore(p1) --[[ Line: 147 ]]
+	function NewOperationData:obsFetchMore(p1)
 		-- upvalues: NewOperationData (copy)
 		return if NewOperationData.currentObservable then NewOperationData.currentObservable:fetchMore(p1) else nil
 	end
 	
-	function NewOperationData:obsUpdateQuery(p1) --[[ Line: 161 ]]
+	function NewOperationData:obsUpdateQuery(p1)
 		-- upvalues: NewOperationData (copy)
 		return if NewOperationData.currentObservable then NewOperationData.currentObservable:updateQuery(p1) else nil
 	end
 	
-	function NewOperationData:obsStartPolling(p1) --[[ Line: 168 ]]
+	function NewOperationData:obsStartPolling(p1)
 		-- upvalues: NewOperationData (copy)
 		return if NewOperationData.currentObservable then NewOperationData.currentObservable:startPolling(p1) else nil
 	end
 	
-	function NewOperationData:obsStopPolling() --[[ Line: 172 ]]
+	function NewOperationData:obsStopPolling()
 		-- upvalues: NewOperationData (copy)
 		return if NewOperationData.currentObservable then NewOperationData.currentObservable:stopPolling() else nil
 	end
 	
-	function NewOperationData.obsSubscribeToMore(p1) --[[ Line: 187 ]]
+	function NewOperationData.obsSubscribeToMore(p1)
 		-- upvalues: NewOperationData (copy)
 		return if NewOperationData.currentObservable then NewOperationData.currentObservable:subscribeToMore(p1) else nil
 	end
@@ -65,7 +65,7 @@ function self.new(Options) --[[ Line: 114 ]]
 	return (setmetatable(NewOperationData, self))
 end
 
-function self:execute() --[[ Line: 200 ]]
+function self:execute()
 	-- upvalues: Boolean (copy)
 	self:refreshClient()
 	local Options = self:getOptions()
@@ -82,7 +82,7 @@ function self:execute() --[[ Line: 200 ]]
 	return self:getExecuteSsrResult() or self:getExecuteResult()
 end
 
-function self.executeLazy(p1) --[[ Line: 214 ]]
+function self.executeLazy(p1)
 	-- upvalues: Boolean (copy), NetworkStatus (copy)
 	return if Boolean.toJSBoolean(p1.runLazy) then table.pack(p1.runLazyQuery, p1:execute()) else table.pack(p1.runLazyQuery, {
 		loading = false,
@@ -92,17 +92,17 @@ function self.executeLazy(p1) --[[ Line: 214 ]]
 	})
 end
 
-function self:fetchData() --[[ Line: 226 ]]
+function self:fetchData()
 	-- upvalues: Boolean (copy), PromiseModule (copy)
 	local Options = self:getOptions()
 	
-	return not Boolean.toJSBoolean(Boolean.toJSBoolean(Options.skip) and Options.skip or Options.ssr == false) and PromiseModule.new(function(p1) --[[ Line: 231 ]]
+	return not Boolean.toJSBoolean(Boolean.toJSBoolean(Options.skip) and Options.skip or Options.ssr == false) and PromiseModule.new(function(p1)
 		-- upvalues: self (copy)
 		return self:startQuerySubscription(p1)
 	end)
 end
 
-function self:afterExecute(p1) --[[ Line: 236 ]]
+function self:afterExecute(p1)
 	-- upvalues: Boolean (copy)
 	local T = if p1 then p1 else {}
 	local Lazy = if T.lazy then T.lazy else false
@@ -118,19 +118,19 @@ function self:afterExecute(p1) --[[ Line: 236 ]]
 	end
 	self.previousOptions = Options
 	
-	return function(...) --[[ Line: 254 ]]
+	return function(...)
 		-- upvalues: self (copy)
 		return self:unmount(...)
 	end
 end
 
-function self:cleanup() --[[ Line: 259 ]]
+function self:cleanup()
 	self:removeQuerySubscription()
 	self:removeObservable(true)
 	self.previous.result = nil
 end
 
-function self:getOptions() --[[ Line: 265 ]]
+function self:getOptions()
 	-- upvalues: Boolean (copy), Object (copy)
 	local Options = getmetatable((getmetatable(self))).__index.getOptions(self)
 	
@@ -144,12 +144,12 @@ function self:getOptions() --[[ Line: 265 ]]
 	return Options
 end
 
-function self.ssrInitiated(p1) --[[ Line: 281 ]]
+function self.ssrInitiated(p1)
 	-- upvalues: Boolean (copy)
 	return if Boolean.toJSBoolean(p1.context) then p1.context.renderPromises else p1.context
 end
 
-function self:getExecuteSsrResult() --[[ Line: 289 ]]
+function self:getExecuteSsrResult()
 	-- upvalues: Object (copy), NetworkStatus (copy), Boolean (copy)
 	local Options = self:getOptions()
 	local Skip = Options.skip
@@ -174,14 +174,14 @@ function self:getExecuteSsrResult() --[[ Line: 289 ]]
 	local ExecuteResult = Boolean.toJSBoolean(self:getExecuteResult()) and self:getExecuteResult() or AssignResult
 	
 	if Boolean.toJSBoolean(ExecuteResult.loading) and not Boolean.toJSBoolean(Skip) then
-		self.context.renderPromises:addQueryPromise(self, function() --[[ Line: 315 ]]
+		self.context.renderPromises:addQueryPromise(self, function()
 			return nil
 		end)
 	end
 	return ExecuteResult
 end
 
-function self:prepareObservableQueryOptions() --[[ Line: 325 ]]
+function self:prepareObservableQueryOptions()
 	-- upvalues: DocumentType (copy), Boolean (copy), Object (copy)
 	local Options = self:getOptions()
 	self:verifyDocumentType(Options.query, DocumentType.Query)
@@ -193,7 +193,7 @@ function self:prepareObservableQueryOptions() --[[ Line: 325 ]]
 	return Object.assign({}, Options, { displayName = DisplayName, context = Options.context })
 end
 
-function self:initializeObservableQuery() --[[ Line: 341 ]]
+function self:initializeObservableQuery()
 	-- upvalues: Boolean (copy), Object (copy)
 	if Boolean.toJSBoolean(self:ssrInitiated()) then
 		self.currentObservable = self.context.renderPromises:getSSRObservable(self:getOptions())
@@ -209,7 +209,7 @@ function self:initializeObservableQuery() --[[ Line: 341 ]]
 	end
 end
 
-function self:updateObservableQuery() --[[ Line: 358 ]]
+function self:updateObservableQuery()
 	-- upvalues: Boolean (copy), Object (copy), EqualModule (copy)
 	if not Boolean.toJSBoolean(self.currentObservable) then
 		self:initializeObservableQuery()
@@ -225,18 +225,18 @@ function self:updateObservableQuery() --[[ Line: 358 ]]
 	end
 	if not EqualModule(AssignResult, self.previous.observableQueryOptions) then
 		self.previous.observableQueryOptions = AssignResult
-		self.currentObservable:setOptions(AssignResult):catch(function() --[[ Line: 378 ]] end)
+		self.currentObservable:setOptions(AssignResult):catch(function() end)
 	end
 end
 
-function self:startQuerySubscription(OnNewDataFunction) --[[ Line: 388 ]]
+function self:startQuerySubscription(OnNewDataFunction)
 	-- upvalues: Boolean (copy), EqualModule (copy), HasOwnPropertyModule (copy)
 	if OnNewDataFunction == nil then
 		OnNewDataFunction = self.onNewData
 	end
 	if not Boolean.toJSBoolean(self.currentSubscription) and not Boolean.toJSBoolean(self:getOptions().skip) then
 		self.currentSubscription = self.currentObservable:subscribe({
-			next = function(_, p1) --[[ Line: 396 ]]
+			next = function(_, p1)
 				-- upvalues: self (copy), Boolean (upval), EqualModule (upval), OnNewDataFunction (ref)
 				local Loading = p1.loading
 				local NetworkStatus = p1.networkStatus
@@ -249,7 +249,7 @@ function self:startQuerySubscription(OnNewDataFunction) --[[ Line: 388 ]]
 					return
 				end
 			end,
-			error = function(_, p1) --[[ Line: 412 ]]
+			error = function(_, p1)
 				-- upvalues: self (copy), HasOwnPropertyModule (upval), Boolean (upval), EqualModule (upval), OnNewDataFunction (ref)
 				self:resubscribeToQuery()
 				
@@ -269,7 +269,7 @@ function self:startQuerySubscription(OnNewDataFunction) --[[ Line: 388 ]]
 	end
 end
 
-function self:resubscribeToQuery() --[[ Line: 429 ]]
+function self:resubscribeToQuery()
 	-- upvalues: Boolean (copy), Object (copy)
 	self:removeQuerySubscription()
 	local CurrentObservable = self.currentObservable
@@ -283,7 +283,7 @@ function self:resubscribeToQuery() --[[ Line: 429 ]]
 	end
 end
 
-function self:getExecuteResult() --[[ Line: 449 ]]
+function self:getExecuteResult()
 	-- upvalues: Boolean (copy), Object (copy), NetworkStatus (copy), ApolloError (copy)
 	local ObservableQueryFieldsResult = self:observableQueryFields()
 	local Options = self:getOptions()
@@ -350,7 +350,7 @@ function self:getExecuteResult() --[[ Line: 449 ]]
 	return ObservableQueryFieldsResult
 end
 
-function self:handleErrorOrCompleted() --[[ Line: 554 ]]
+function self:handleErrorOrCompleted()
 	-- upvalues: Boolean (copy), EqualModule (copy)
 	if not self.currentObservable or not self.previous.result then return end
 	local Result = self.previous.result
@@ -377,7 +377,7 @@ function self:handleErrorOrCompleted() --[[ Line: 554 ]]
 	end
 end
 
-function self:removeQuerySubscription() --[[ Line: 583 ]]
+function self:removeQuerySubscription()
 	-- upvalues: Boolean (copy)
 	if Boolean.toJSBoolean(self.currentSubscription) then
 		self.currentSubscription:unsubscribe()
@@ -385,7 +385,7 @@ function self:removeQuerySubscription() --[[ Line: 583 ]]
 	end
 end
 
-function self:removeObservable(p1) --[[ Line: 590 ]]
+function self:removeObservable(p1)
 	-- upvalues: Boolean (copy)
 	if Boolean.toJSBoolean(self.currentObservable) then
 		self.currentObservable.tearDownQuery(self.currentObservable)
@@ -396,7 +396,7 @@ function self:removeObservable(p1) --[[ Line: 590 ]]
 	end
 end
 
-function self:observableQueryFields() --[[ Line: 599 ]]
+function self:observableQueryFields()
 	-- upvalues: Boolean (copy)
 	return {
 		variables = if Boolean.toJSBoolean(self.currentObservable) then self.currentObservable.variables else nil,

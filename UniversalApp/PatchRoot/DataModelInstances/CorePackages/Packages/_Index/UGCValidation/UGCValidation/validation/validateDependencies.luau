@@ -10,7 +10,7 @@ local _ = require(Parent.util.Types)
 local ValidateCanLoadModule = require(Parent.validation.validateCanLoad)
 local ValidateAssetCreatorModule = require(Parent.validation.validateAssetCreator)
 
-local function validateExistance(List, p1) --[[ Line: 23 ]]
+local function validateExistance(List, p1)
 	-- upvalues: ValidateCanLoadModule (copy)
 	for _, value in pairs(List) do
 		if not ValidateCanLoadModule(value.instance[value.fieldName], p1) then
@@ -24,7 +24,7 @@ local config = {
 	MODERATION_STATE_APPROVED = { MODERATION_STATE_APPROVED = true, Approved = true }
 }
 
-local function validateCreatorId(p2, UserId, Object, FieldName, p3, p4) --[[ Line: 44 ]]
+local function validateCreatorId(p2, UserId, Object, FieldName, p3, p4)
 	-- upvalues: AnalyticsModule (copy)
 	if p2[tonumber(UserId)] then
 		return true
@@ -37,7 +37,7 @@ local function validateCreatorId(p2, UserId, Object, FieldName, p3, p4) --[[ Lin
 	end
 end
 
-local function validateModerationState(ModerationState, Object, FieldName, p2, p3) --[[ Line: 62 ]]
+local function validateModerationState(ModerationState, Object, FieldName, p2, p3)
 	-- upvalues: config (copy), AnalyticsModule (copy)
 	if config.MODERATION_STATE_REVIEWING[ModerationState] then
 		AnalyticsModule.reportFailure(AnalyticsModule.ErrorType.validateDependencies_IsReviewing, nil, p3)
@@ -54,7 +54,7 @@ local function validateModerationState(ModerationState, Object, FieldName, p2, p
 	end
 end
 
-local function validateModerationRCC(RestrictedUserIds, List, p2) --[[ Line: 91 ]]
+local function validateModerationRCC(RestrictedUserIds, List, p2)
 	-- upvalues: FailureReasonsAccumulatorModule (copy), GetAssetCreationDetailsRCCModule (copy), validateCreatorId (copy), validateModerationState (copy)
 	if not RestrictedUserIds or #RestrictedUserIds == 0 then
 		return true
@@ -79,14 +79,14 @@ local function validateModerationRCC(RestrictedUserIds, List, p2) --[[ Line: 91 
 	return NewFailureReasonsAccumulator:getFinalResults()
 end
 
-local function validateAssetCreatorsRCC(p3, p4) --[[ Line: 136 ]]
+local function validateAssetCreatorsRCC(p3, p4)
 	-- upvalues: ValidateAssetCreatorModule (copy)
 	assert(p4.isServer, "isServer must be true for validateAssetCreatorsRCC")
 	
 	return ValidateAssetCreatorModule(p3, p4)
 end
 
-return function(p3, p4, p5) --[[ Line: 149 | Named "validateDependencies" ]]
+return function(p3, p4, p5)
 	-- upvalues: ParseContentIdsModule (copy), ConstantsModule (copy), AnalyticsModule (copy), validateExistance (copy), FailureReasonsAccumulatorModule (copy), NoStudioOwnershipCheck (copy), RunService (copy), validateAssetCreatorsRCC (copy), validateModerationRCC (copy)
 	local CurrentTime = tick()
 	local IsServer = if p4 then p4.isServer else nil

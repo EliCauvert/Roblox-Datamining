@@ -1,6 +1,6 @@
 ﻿local FloatVectorModule = {}
 
-function FloatVectorModule.new(...) --[[ Line: 12 ]]
+function FloatVectorModule.new(...)
 	-- upvalues: FloatVectorModule (copy)
 	local self = setmetatable({}, FloatVectorModule)
 	self.data = {}
@@ -23,11 +23,11 @@ function FloatVectorModule.new(...) --[[ Line: 12 ]]
 	return self
 end
 
-function FloatVectorModule:getSize(): number --[[ Line: 37 ]]
+function FloatVectorModule:getSize(): number
 	return #self.data
 end
 
-function FloatVectorModule:checkCompatible(p1): boolean --[[ Line: 41 ]]
+function FloatVectorModule:checkCompatible(p1): boolean
 	-- upvalues: FloatVectorModule (copy)
 	if typeof(self) ~= typeof(FloatVectorModule) or typeof(p1) ~= typeof(FloatVectorModule) then
 		error("vector operation on non-vector type")
@@ -42,12 +42,12 @@ function FloatVectorModule:checkCompatible(p1): boolean --[[ Line: 41 ]]
 	end
 end
 
-function FloatVectorModule.__index(p1, p2) --[[ Line: 54 ]]
+function FloatVectorModule.__index(p1, p2)
 	-- upvalues: FloatVectorModule (copy)
 	return if typeof(p2) == "number" then p1.data[p2] else FloatVectorModule[p2]
 end
 
-function FloatVectorModule:__newindex(p1, p2) --[[ Line: 62 ]]
+function FloatVectorModule:__newindex(p1, p2)
 	if typeof(p1) == "number" then
 		self.data[p1] = p2
 		
@@ -57,7 +57,7 @@ function FloatVectorModule:__newindex(p1, p2) --[[ Line: 62 ]]
 	end
 end
 
-function FloatVectorModule:__add(p1) --[[ Line: 71 ]]
+function FloatVectorModule:__add(p1)
 	-- upvalues: FloatVectorModule (copy)
 	FloatVectorModule.checkCompatible(self, p1)
 	local List = {}
@@ -68,7 +68,7 @@ function FloatVectorModule:__add(p1) --[[ Line: 71 ]]
 	return FloatVectorModule.new(List)
 end
 
-function FloatVectorModule:__sub(p2) --[[ Line: 80 ]]
+function FloatVectorModule:__sub(p2)
 	-- upvalues: FloatVectorModule (copy)
 	FloatVectorModule.checkCompatible(self, p2)
 	local List = {}
@@ -79,7 +79,7 @@ function FloatVectorModule:__sub(p2) --[[ Line: 80 ]]
 	return FloatVectorModule.new(List)
 end
 
-function FloatVectorModule:__mul(p3) --[[ Line: 89 ]]
+function FloatVectorModule:__mul(p3)
 	-- upvalues: FloatVectorModule (copy)
 	if typeof(self) == typeof(FloatVectorModule) and typeof(p3) == "number" then
 		local List1 = {}
@@ -99,7 +99,7 @@ function FloatVectorModule:__mul(p3) --[[ Line: 89 ]]
 	end
 end
 
-function FloatVectorModule:__div(p4) --[[ Line: 106 ]]
+function FloatVectorModule:__div(p4)
 	-- upvalues: FloatVectorModule (copy)
 	if typeof(self) == typeof(FloatVectorModule) and typeof(p4) == "number" then
 		local List1 = {}
@@ -119,7 +119,7 @@ function FloatVectorModule:__div(p4) --[[ Line: 106 ]]
 	end
 end
 
-function FloatVectorModule:dot(p5): number --[[ Line: 123 ]]
+function FloatVectorModule:dot(p5): number
 	-- upvalues: FloatVectorModule (copy)
 	FloatVectorModule.checkCompatible(self, p5)
 	local NewEntry = 0
@@ -130,7 +130,7 @@ function FloatVectorModule:dot(p5): number --[[ Line: 123 ]]
 	return NewEntry
 end
 
-function FloatVectorModule:cross(p6) --[[ Line: 133 ]]
+function FloatVectorModule:cross(p6)
 	-- upvalues: FloatVectorModule (copy)
 	FloatVectorModule.checkCompatible(self, p6)
 	
@@ -143,7 +143,7 @@ function FloatVectorModule:cross(p6) --[[ Line: 133 ]]
 	end
 end
 
-function FloatVectorModule.magnitude(p6): number --[[ Line: 146 ]]
+function FloatVectorModule.magnitude(p6): number
 	local Value = 0
 	
 	for _, entry in p6.data do
@@ -152,7 +152,7 @@ function FloatVectorModule.magnitude(p6): number --[[ Line: 146 ]]
 	return (math.sqrt(Value))
 end
 
-function FloatVectorModule:fuzzyEq(p7, p8): boolean --[[ Line: 154 ]]
+function FloatVectorModule:fuzzyEq(p7, p8): boolean
 	-- upvalues: FloatVectorModule (copy)
 	if not FloatVectorModule.checkCompatible(self, p7) then
 		return false

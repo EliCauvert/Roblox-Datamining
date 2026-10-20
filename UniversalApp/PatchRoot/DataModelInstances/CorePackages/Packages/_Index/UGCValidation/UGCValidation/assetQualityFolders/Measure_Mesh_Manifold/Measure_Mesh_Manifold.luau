@@ -12,7 +12,7 @@ return {
 		ValidationEnumsModule.UploadCategory.DYNAMIC_HEAD
 	},
 	fflag = require(Parent.flags.getFFlagUGCValidateAQMeshQuality),
-	run = function(p1, p2) --[[ Line: 17 ]]
+	run = function(p1, p2)
 		-- upvalues: ErrorSourceStringsModule (copy)
 		local MeasureMeshManifold = p2.aqsSummaryData.Measure_Mesh_Manifold
 		

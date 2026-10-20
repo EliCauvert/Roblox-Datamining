@@ -7,7 +7,7 @@ local VariantsContextModule = require(Foundation.Providers.Style.VariantsContext
 local ComposeStyleVariantModule = require(Foundation.Utility.composeStyleVariant)
 local _ = require(Foundation.Components.Types)
 
-local function variantsFactory(p1) --[[ Line: 33 ]]
+local function variantsFactory(p1)
 	-- upvalues: InputSizeModule (copy), IconSizeModule (copy), StepperStepStateModule (copy)
 	return {
 		common = {
@@ -93,7 +93,7 @@ local function variantsFactory(p1) --[[ Line: 33 ]]
 	}
 end
 
-return function(p1, p2, p3, p4) --[[ Line: 129 ]]
+return function(p1, p2, p3, p4)
 	-- upvalues: VariantsContextModule (copy), variantsFactory (copy), ComposeStyleVariantModule (copy)
 	local Stepper = VariantsContextModule.useVariants("Stepper", variantsFactory, p1)
 	

@@ -2,7 +2,7 @@
 local _ = require(script.Parent.ObjMap)
 
 return {
-	keyMap = function(List, Callback) --[[ Line: 38 ]]
+	keyMap = function(List, Callback)
 		local t = {}
 		
 		for _, value in ipairs(List) do

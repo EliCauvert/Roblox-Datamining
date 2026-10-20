@@ -4,7 +4,7 @@ local _ = require(script.Parent.Parent.type.definition)
 local _ = require(script.Parent.Parent.type.schema)
 
 return {
-	getOperationRootType = function(p1, p2) --[[ Line: 22 ]]
+	getOperationRootType = function(p1, p2)
 		-- upvalues: GraphQLError (copy)
 		if p2.operation == "query" then
 			local QueryType = p1:getQueryType()

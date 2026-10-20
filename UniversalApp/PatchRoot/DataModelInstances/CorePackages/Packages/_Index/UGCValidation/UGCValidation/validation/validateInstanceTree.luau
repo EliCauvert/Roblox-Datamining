@@ -4,7 +4,7 @@ local ConstantsModule = require(Parent.Constants)
 local ValidateWithSchemaModule = require(Parent.util.validateWithSchema)
 local _ = require(Parent.util.Types)
 
-return function(p1, Object, p2) --[[ Line: 9 | Named "validateInstanceTree" ]]
+return function(p1, Object, p2)
 	-- upvalues: ValidateWithSchemaModule (copy), AnalyticsModule (copy), ConstantsModule (copy)
 	local ValidateWithSchemaModuleResult = ValidateWithSchemaModule(p1, Object, p2)
 	

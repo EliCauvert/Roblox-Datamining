@@ -1,9 +1,9 @@
-﻿return function(p1) --[[ Line: 3 ]]
+﻿return function(p1)
 	local t = {}
 	t.info = {
 		webbundle = p1.fromString("www:bundles/{assetId}"),
 		webasset = p1.fromString("www:catalog/{assetId}"),
-		webpage = function(p2) --[[ Line: 10 ]]
+		webpage = function(p2)
 			-- upvalues: t (copy)
 			if p2.assetType == "Bundle" then
 				return t.info.webbundle(p2)
@@ -15,7 +15,7 @@
 				return nil
 			end
 		end,
-		appsflyer = function(p2) --[[ Line: 20 ]]
+		appsflyer = function(p2)
 			-- upvalues: p1 (copy), t (copy)
 			return p1.fromString("appsflyer:Ebh5?pid=share&is_retargeting=true&af_dp={mobileUrl}&af_web_dp={webUrl}")({
 				mobileUrl = p1.fromString("mobilenav:item_details?itemId={assetId}&itemType={assetType}")(p2),

@@ -12,12 +12,12 @@ PlainText.defaultProps = {
 	hasTail = false,
 	LayoutOrder = 0,
 	isPending = false,
-	[Roact.Change.AbsoluteSize] = function() --[[ Line: 17 ]] end
+	[Roact.Change.AbsoluteSize] = function() end
 }
 
-function PlainText.render(p1) --[[ Line: 20 ]]
+function PlainText.render(p1)
 	-- upvalues: WithStyleFunction (copy), Roact (copy), ChatBubbleContainerModule (copy), FitTextLabel (copy)
-	return WithStyleFunction(function(p2) --[[ Line: 21 ]]
+	return WithStyleFunction(function(p2)
 		-- upvalues: p1 (copy), Roact (upval), ChatBubbleContainerModule (upval), FitTextLabel (upval)
 		local InnerPadding = p1.props.innerPadding
 		local Body = p2.Font.Body

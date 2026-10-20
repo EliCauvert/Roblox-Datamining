@@ -1,12 +1,12 @@
 ﻿local AssignModule = require(script.Parent.assign)
 
-return function(Callback, Delay, p1) --[[ Line: 30 | Named "debounce" ]]
+return function(Callback, Delay, p1)
 	-- upvalues: AssignModule (copy)
 	local AssignModuleResult = AssignModule({ leading = false, trailing = true }, p1)
 	local Count = 0
 	local DelayedThread = nil
 	local Flag = false
-	local v1 = if AssignModuleResult.trailing then function(Count1, p2, ...) --[[ Line: 44 ]]
+	local v1 = if AssignModuleResult.trailing then function(Count1, p2, ...)
 		-- upvalues: Count (ref), Flag (ref), Callback (copy)
 		if Count == Count1 then
 			Flag = false
@@ -15,14 +15,14 @@ return function(Callback, Delay, p1) --[[ Line: 30 | Named "debounce" ]]
 				Callback(...)
 			end
 		end
-	end elseif AssignModuleResult.leading then function(Count1) --[[ Line: 56 ]]
+	end elseif AssignModuleResult.leading then function(Count1)
 		-- upvalues: Count (ref), Flag (ref)
 		if Count == Count1 then
 			Flag = false
 		end
-	end else function() --[[ Line: 41 ]] end
+	end else function() end
 	
-	return function(...) --[[ Line: 63 ]]
+	return function(...)
 		-- upvalues: Count (ref), AssignModuleResult (copy), Flag (ref), DelayedThread (ref), Callback (copy), Delay (copy), v1 (ref)
 		Count += 1
 		local Count1: number = Count

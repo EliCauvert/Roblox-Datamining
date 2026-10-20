@@ -28,7 +28,7 @@ CurveAnimPartsRotateOnlyIfBonesModule.prereqTests = {
 	ValidationEnumsModule.ValidationModule.CurveAnimDataAvailable
 }
 
-function CurveAnimPartsRotateOnlyIfBonesModule.run(p1, p2) --[[ Line: 34 ]]
+function CurveAnimPartsRotateOnlyIfBonesModule.run(p1, p2)
 	-- upvalues: GetFFlagUGCValidateAnimPartsRotationOnlyModule (copy), ValidationEnumsModule (copy), UGCValidateBodyPartTranslationMaxDistanceHundredths (copy), UGCValidateLowerTorsoTranslationMaxDistanceHundredths (copy), CurveAnimBoneHierarchyUtilsModule (copy), CurveAnimationHierarchyUtilsModule (copy), GetFFlagUGCValidateAnimTranslationThresholdModule (copy), CurveAnimTranslationUtilsModule (copy), ErrorSourceStringsModule (copy)
 	local IsUploadCategoryMatch: boolean = GetFFlagUGCValidateAnimPartsRotationOnlyModule() and p2.uploadCategory == ValidationEnumsModule.UploadCategory.ANIMATION
 	local UGCValidateBodyPartTranslationMaxDistanceHundredthsRatio = UGCValidateBodyPartTranslationMaxDistanceHundredths / 100

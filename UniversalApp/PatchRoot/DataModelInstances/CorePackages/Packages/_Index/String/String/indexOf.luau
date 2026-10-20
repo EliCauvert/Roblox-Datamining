@@ -1,6 +1,6 @@
 ﻿local Text = "([" .. ("$%^()-[].?"):gsub("(.)", "%%%1") .. "])"
 
-return function(Text1: string, Text2: string, p1: number) --[[ Line: 23 ]]
+return function(Text1: string, Text2: string, p1: number)
 	-- upvalues: Text (copy)
 	local CountText1 = #Text1
 	local v1 = if p1 == nil then 1 elseif p1 < 1 then 1 else p1

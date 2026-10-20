@@ -9,7 +9,7 @@ local GetNodeTypeModule = require(script.Parent.Parent.getNodeType)
 local IsNodeBlockModule = require(script.Parent.Parent.isNodeBlock)
 local t = {}
 
-function t.postProcessTree(p1, p2) --[[ Line: 23 ]]
+function t.postProcessTree(p1, p2)
 	-- upvalues: CONTAINERS (copy), INLINETEXT (copy), t (copy), InsertFunction (copy), PLAINTEXT (copy), IsNodeBlockModule (copy)
 	local t1 = {}
 	local Total = 1
@@ -69,7 +69,7 @@ function t.postProcessTree(p1, p2) --[[ Line: 23 ]]
 	return t1
 end
 
-function t.buildParagraph(Children, Total, p3) --[[ Line: 87 ]]
+function t.buildParagraph(Children, Total, p3)
 	-- upvalues: INLINETEXT (copy), PLAINTEXT (copy), t (copy), InsertFunction (copy), GetNodeTypeModule (copy)
 	local Children1 = {}
 	local Count = 0
@@ -103,7 +103,7 @@ function t.buildParagraph(Children, Total, p3) --[[ Line: 87 ]]
 	}
 end
 
-function t.outputRichText(p4, p5) --[[ Line: 123 ]]
+function t.outputRichText(p4, p5)
 	-- upvalues: STYLEDTEXT (copy), t (copy)
 	local STYLEDTEXTEntry = if p4.attributes then STYLEDTEXT[p4.attributes.style] else nil
 	
@@ -119,7 +119,7 @@ function t.outputRichText(p4, p5) --[[ Line: 123 ]]
 	end
 end
 
-function t.buildList(Children, Count, p6) --[[ Line: 137 ]]
+function t.buildList(Children, Count, p6)
 	-- upvalues: t (copy), InsertFunction (copy), GetNodeTypeModule (copy)
 	local Count1 = 0
 	local Depth = Children[Count].attributes.depth
@@ -152,7 +152,7 @@ function t.buildList(Children, Count, p6) --[[ Line: 137 ]]
 	}
 end
 
-function t.buildTable(Children, Total, p7) --[[ Line: 177 ]]
+function t.buildTable(Children, Total, p7)
 	-- upvalues: t (copy), InsertFunction (copy), GetNodeTypeModule (copy)
 	local Count = 0
 	local Children1 = {}
@@ -179,7 +179,7 @@ function t.buildTable(Children, Total, p7) --[[ Line: 177 ]]
 	}
 end
 
-function t.buildTableCells(p8, p9) --[[ Line: 207 ]]
+function t.buildTableCells(p8, p9)
 	-- upvalues: GetNodeTypeModule (copy), t (copy), InsertFunction (copy)
 	local t2 = {}
 	local Children = {}
@@ -208,7 +208,7 @@ function t.buildTableCells(p8, p9) --[[ Line: 207 ]]
 	return if v1 then nil else t2
 end
 
-function t.mergeTextNodes(Children, Count, p10) --[[ Line: 240 ]]
+function t.mergeTextNodes(Children, Count, p10)
 	-- upvalues: PLAINTEXT (copy), GetNodeTypeModule (copy)
 	local Text = ""
 	local Count1 = 0

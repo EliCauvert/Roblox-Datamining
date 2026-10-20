@@ -1,6 +1,6 @@
 ﻿local Config = {}
 
-function Config.new(DefaultConfig) --[[ Line: 19 ]]
+function Config.new(DefaultConfig)
 	-- upvalues: Config (copy)
 	local config = { defaultConfig = DefaultConfig, defaultConfigKeys = {} }
 	
@@ -8,23 +8,23 @@ function Config.new(DefaultConfig) --[[ Line: 19 ]]
 		table.insert(config.defaultConfigKeys, i)
 	end
 	config._currentConfig = setmetatable({}, {
-		__index = function(_, p1) --[[ Line: 29 ]]
+		__index = function(_, p1)
 			-- upvalues: config (copy)
 			error(("Invalid global configuration key %q. Valid configuration keys are: %s"):format(tostring(p1), table.concat(config.defaultConfigKeys, ", ")), 3)
 		end
 	})
 	
-	function config.set(...) --[[ Line: 42 ]]
+	function config.set(...)
 		-- upvalues: Config (upval), config (copy)
 		return Config.set(config, ...)
 	end
 	
-	function config.get(...) --[[ Line: 46 ]]
+	function config.get(...)
 		-- upvalues: Config (upval), config (copy)
 		return Config.get(config, ...)
 	end
 	
-	function config.scoped(...) --[[ Line: 50 ]]
+	function config.scoped(...)
 		-- upvalues: Config (upval), config (copy)
 		return Config.scoped(config, ...)
 	end
@@ -34,7 +34,7 @@ function Config.new(DefaultConfig) --[[ Line: 19 ]]
 	return config
 end
 
-function Config.set(p1, List) --[[ Line: 59 ]]
+function Config.set(p1, List)
 	local List1 = {}
 	local List2 = {}
 	
@@ -55,7 +55,7 @@ function Config.set(p1, List) --[[ Line: 59 ]]
 	end
 end
 
-function Config.get(p2) --[[ Line: 98 ]]
+function Config.get(p2)
 	return p2._currentConfig
 end
 

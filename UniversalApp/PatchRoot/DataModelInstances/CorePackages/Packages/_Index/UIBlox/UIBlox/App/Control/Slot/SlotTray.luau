@@ -35,7 +35,7 @@ local StrictInterfaceResult = TModule.strictInterface({
 	isRoactGamepadEnabled = TModule.optional(TModule.boolean)
 })
 
-local function useScrollingFrameMotor(ScrollingFrameRef, p1) --[[ Line: 117 ]]
+local function useScrollingFrameMotor(ScrollingFrameRef, p1)
 	-- upvalues: ReactModule (copy), OtterModule (copy)
 	local UseRefResult = ReactModule.useRef(nil)
 	
@@ -43,16 +43,16 @@ local function useScrollingFrameMotor(ScrollingFrameRef, p1) --[[ Line: 117 ]]
 		UseRefResult.current = OtterModule.createSingleMotor(p1 or 0)
 	end
 	local Current = UseRefResult.current
-	ReactModule.useEffect(function() --[[ Line: 123 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: Current (copy), ScrollingFrameRef (copy)
-		Current:onStep(function(X) --[[ Line: 124 ]]
+		Current:onStep(function(X)
 			-- upvalues: ScrollingFrameRef (upval)
 			if ScrollingFrameRef.current ~= nil then
 				ScrollingFrameRef.current.CanvasPosition = Vector2.new(X, 0)
 			end
 		end)
 		
-		return function() --[[ Line: 130 ]]
+		return function()
 			-- upvalues: Current (upval)
 			Current:destroy()
 		end
@@ -61,7 +61,7 @@ local function useScrollingFrameMotor(ScrollingFrameRef, p1) --[[ Line: 117 ]]
 	return Current
 end
 
-return function(Gui) --[[ Line: 138 | Named "SlotTray" ]]
+return function(Gui)
 	-- upvalues: ReactModule (copy), RoactGamepadModule (copy), useScrollingFrameMotor (copy), OtterModule (copy), config (copy), UseStyleModule (copy), UseSelectionCursorModule (copy), CursorKindModule (copy), StrictInterfaceResult (copy), CryoModule (copy), Focusable (copy), TileSlotModule (copy)
 	local NoIsRoactGamepadEnabled = Gui.isRoactGamepadEnabled == nil or Gui.isRoactGamepadEnabled
 	local UseRefResult = ReactModule.useRef({})
@@ -70,7 +70,7 @@ return function(Gui) --[[ Line: 138 | Named "SlotTray" ]]
 	local Width = Gui.width or 360
 	local UseScrollingFrameMotorResult = useScrollingFrameMotor(ScrollingFrameRef, 0)
 	local UseStateResult, UseStateResult2 = ReactModule.useState(Gui.defaultSelectedSlotIndex or 1)
-	ReactModule.useEffect(function() --[[ Line: 155 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: ScrollingFrameRef (ref), UseStateResult (copy), UseRefCacheResult (copy), Width (copy), UseScrollingFrameMotorResult (copy), OtterModule (upval), config (upval)
 		local Current = ScrollingFrameRef.current
 		
@@ -99,7 +99,7 @@ return function(Gui) --[[ Line: 138 | Named "SlotTray" ]]
 		ScrollingFrameRef,
 		UseScrollingFrameMotorResult
 	})
-	local UseResult = ReactModule.useCallback(function(p1) --[[ Line: 187 ]]
+	local UseResult = ReactModule.useCallback(function(p1)
 		-- upvalues: UseStateResult2 (copy), Gui (copy)
 		UseStateResult2(p1)
 		Gui.onChange(p1)
@@ -109,7 +109,7 @@ return function(Gui) --[[ Line: 138 | Named "SlotTray" ]]
 	local UseSelectionCursorModuleResult = UseSelectionCursorModule(CursorKindModule.RoundedSlot)
 	assert(StrictInterfaceResult(Gui))
 	local Theme = UseStyleModuleResult.Theme
-	local MapResult = CryoModule.List.map(Gui.slots, function(p1, Index: number) --[[ Line: 200 ]]
+	local MapResult = CryoModule.List.map(Gui.slots, function(p1, Index: number)
 		-- upvalues: NoIsRoactGamepadEnabled (copy), UseRefCacheResult (copy), ReactModule (upval), Focusable (upval), Gui (copy), UseResult (copy), UseSelectionCursorModuleResult (copy), TileSlotModule (upval), UseStateResult (copy)
 		if not NoIsRoactGamepadEnabled then
 			UseRefCacheResult[Index] = UseRefCacheResult[Index] or ReactModule.createRef()
@@ -123,7 +123,7 @@ return function(Gui) --[[ Line: 138 | Named "SlotTray" ]]
 			ref = UseRefCacheResult[Index],
 			NextSelectionRight = Index < #Gui.slots and UseRefCacheResult[Index + 1] or nil,
 			NextSelectionLeft = Index > 1 and UseRefCacheResult[Index - 1] or nil,
-			onFocusGained = if NoIsRoactGamepadEnabled then function() --[[ Line: 215 ]]
+			onFocusGained = if NoIsRoactGamepadEnabled then function()
 				-- upvalues: UseResult (upval), Index (copy)
 				UseResult(Index)
 			end else nil,

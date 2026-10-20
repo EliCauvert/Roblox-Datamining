@@ -9,9 +9,9 @@ local config = {
 	userSettingsMetadata = {}
 }
 
-return function(p1) --[[ Line: 15 ]]
+return function(p1)
 	-- upvalues: config (copy), IsPhoneVerifiedModule (copy), UserSettingsModule (copy), UserSettingsMetadataModule (copy)
-	return function(p2, p3) --[[ Line: 16 ]]
+	return function(p2, p3)
 		-- upvalues: config (upval), IsPhoneVerifiedModule (upval), p1 (copy), UserSettingsModule (upval), UserSettingsMetadataModule (upval)
 		local P1 = p2 or config
 		

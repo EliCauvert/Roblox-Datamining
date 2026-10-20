@@ -5,18 +5,18 @@ local UseViewportBindingModule = require(Graphing.Util.useViewportBinding)
 local UseViewportBindingFunction = UseViewportBindingModule.useViewportBinding
 local UseViewportVisibilityFunction = UseViewportBindingModule.useViewportVisibility
 
-function Positioner(p1, Ref) --[[ Line: 34 ]]
+function Positioner(p1, Ref)
 	-- upvalues: UseViewportBindingFunction (copy), UseViewportVisibilityFunction (copy), ReactModule (copy)
 	if typeof(p1.Position) == "Vector2" then
 		local Position = p1.Position
-		local UseViewportBindingResult = UseViewportBindingFunction(function(p2): UDim2 --[[ Line: 38 ]]
+		local UseViewportBindingResult = UseViewportBindingFunction(function(p2): UDim2
 			-- upvalues: Position (copy)
 			local PlotToViewResult = p2.plotToView(Position)
 			
 			return UDim2.fromScale(PlotToViewResult.X, PlotToViewResult.Y)
 		end, { Position })
 		
-		return if UseViewportVisibilityFunction(function(p2) --[[ Line: 43 ]]
+		return if UseViewportVisibilityFunction(function(p2)
 			-- upvalues: Position (copy)
 			return p2.isPointInViewport(Position)
 		end, { Position }) then ReactModule.createElement("Frame", {

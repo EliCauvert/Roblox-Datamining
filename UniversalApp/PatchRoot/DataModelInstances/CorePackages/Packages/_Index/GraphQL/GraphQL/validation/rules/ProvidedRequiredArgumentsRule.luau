@@ -15,18 +15,18 @@ local IsRequiredArgumentFunction = DefinitionModule.isRequiredArgument
 local SpecifiedDirectives = require(Parent.type.directives).specifiedDirectives
 local ProvidedRequiredArgumentsRuleModule = {}
 
-function ProvidedRequiredArgumentsRuleModule.ProvidedRequiredArgumentsRule(p1) --[[ Line: 36 ]]
+function ProvidedRequiredArgumentsRuleModule.ProvidedRequiredArgumentsRule(p1)
 	-- upvalues: Object (copy), ProvidedRequiredArgumentsRuleModule (copy), KeyMapFunction (copy), IsRequiredArgumentFunction (copy), InspectFunction (copy), GraphQLError (copy)
 	return Object.assign({}, ProvidedRequiredArgumentsRuleModule.ProvidedRequiredArgumentsOnDirectivesRule(p1), {
 		Field = {
-			leave = function(_, p2): boolean? --[[ Line: 40 ]]
+			leave = function(_, p2): boolean?
 				-- upvalues: p1 (copy), KeyMapFunction (upval), IsRequiredArgumentFunction (upval), InspectFunction (upval), GraphQLError (upval)
 				local FieldDef = p1:getFieldDef()
 				
 				if not FieldDef then
 					return false
 				end
-				local KeyMapResult = KeyMapFunction(p2.arguments or {}, function(p3) --[[ Line: 48 ]]
+				local KeyMapResult = KeyMapFunction(p2.arguments or {}, function(p3)
 					return p3.name.value
 				end)
 				
@@ -40,32 +40,32 @@ function ProvidedRequiredArgumentsRuleModule.ProvidedRequiredArgumentsRule(p1) -
 	})
 end
 
-function ProvidedRequiredArgumentsRuleModule.ProvidedRequiredArgumentsOnDirectivesRule(p2) --[[ Line: 74 ]]
+function ProvidedRequiredArgumentsRuleModule.ProvidedRequiredArgumentsOnDirectivesRule(p2)
 	-- upvalues: SpecifiedDirectives (copy), KeyMapFunction (copy), Array (copy), IsRequiredArgumentFunction (copy), Kind (copy), Object (copy), IsTypeFunction (copy), InspectFunction (copy), PrintFunction (copy), GraphQLError (copy)
 	local t = {}
 	local Schema = p2:getSchema()
 	local Directives = if Schema then Schema:getDirectives() else SpecifiedDirectives
 	for _, directive in ipairs(Directives) do
-		t[directive.name] = KeyMapFunction(Array.filter(directive.args, IsRequiredArgumentFunction), function(p3) --[[ Line: 85 ]]
+		t[directive.name] = KeyMapFunction(Array.filter(directive.args, IsRequiredArgumentFunction), function(p3)
 			return p3.name
 		end)
 	end
 	for _, definition in ipairs(p2:getDocument().definitions) do
 		if definition.kind == Kind.DIRECTIVE_DEFINITION then
-			t[definition.name.value] = KeyMapFunction(Array.filter(definition.arguments or {}, isRequiredArgumentNode), function(p3) --[[ Line: 99 ]]
+			t[definition.name.value] = KeyMapFunction(Array.filter(definition.arguments or {}, isRequiredArgumentNode), function(p3)
 				return p3.name.value
 			end)
 		end
 	end
 	return {
 		Directive = {
-			leave = function(_, p3) --[[ Line: 109 ]]
+			leave = function(_, p3)
 				-- upvalues: t (copy), KeyMapFunction (upval), Object (upval), IsTypeFunction (upval), InspectFunction (upval), PrintFunction (upval), p2 (copy), GraphQLError (upval)
 				local Value = p3.name.value
 				local Entry = t[Value]
 				
 				if Entry then
-					local KeyMapResult = KeyMapFunction(p3.arguments or {}, function(p4) --[[ Line: 116 ]]
+					local KeyMapResult = KeyMapFunction(p3.arguments or {}, function(p4)
 						return p4.name.value
 					end)
 					
@@ -81,7 +81,7 @@ function ProvidedRequiredArgumentsRuleModule.ProvidedRequiredArgumentsOnDirectiv
 	}
 end
 
-function isRequiredArgumentNode(p3): boolean --[[ Line: 141 ]]
+function isRequiredArgumentNode(p3): boolean
 	-- upvalues: Kind (copy)
 	return p3.type.kind == Kind.NON_NULL_TYPE and p3.defaultValue == nil
 end

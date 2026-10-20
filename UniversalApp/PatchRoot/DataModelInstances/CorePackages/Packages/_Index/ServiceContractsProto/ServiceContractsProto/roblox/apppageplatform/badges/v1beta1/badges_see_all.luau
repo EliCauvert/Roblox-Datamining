@@ -8,7 +8,7 @@ local PageEntryContentModule = require(script.Parent.Parent.Parent.shared.v1beta
 local Module = {}
 Module.__index = Module
 
-function Module.new(p1) --[[ Line: 294 ]]
+function Module.new(p1)
 	-- upvalues: PageEntryContentModule (copy), Module (copy)
 	return (setmetatable({
 		universe_id = if p1 == nil or p1.universe_id == nil then 0 else p1.universe_id,
@@ -20,7 +20,7 @@ function Module.new(p1) --[[ Line: 294 ]]
 	}, Module))
 end
 
-function Module:encode() --[[ Line: 312 ]]
+function Module:encode()
 	-- upvalues: ProtoModule (copy), PageEntryContentModule (copy)
 	local Buf = buffer.create(0)
 	local Count = 0
@@ -56,7 +56,7 @@ function Module:encode() --[[ Line: 312 ]]
 	return Buf1
 end
 
-function Module.decode(Buf) --[[ Line: 365 ]]
+function Module.decode(Buf)
 	-- upvalues: Module (copy), ProtoModule (copy), PageEntryContentModule (copy), ClientCapabilitiesModule (copy)
 	local NewModule = Module.new()
 	local v1 = 0
@@ -105,7 +105,7 @@ function Module.decode(Buf) --[[ Line: 365 ]]
 	return NewModule
 end
 
-function Module:jsonEncode() --[[ Line: 437 ]]
+function Module:jsonEncode()
 	-- upvalues: PageEntryContentModule (copy)
 	local t = {}
 	
@@ -130,7 +130,7 @@ function Module:jsonEncode() --[[ Line: 437 ]]
 	return t
 end
 
-function Module:jsonDecode() --[[ Line: 478 ]]
+function Module:jsonDecode()
 	-- upvalues: Module (copy), PageEntryContentModule (copy), ClientCapabilitiesModule (copy)
 	local NewModule = Module.new()
 	
@@ -179,7 +179,7 @@ TypeRegistryModule.default:register(config.BadgesSeeAllRequest)
 local Module1 = {}
 Module1.__index = Module1
 
-function Module1.new(p1) --[[ Line: 560 ]]
+function Module1.new(p1)
 	-- upvalues: Module1 (copy)
 	return (setmetatable({
 		page_size = if p1 == nil or p1.page_size == nil then 0 else p1.page_size,
@@ -189,7 +189,7 @@ function Module1.new(p1) --[[ Line: 560 ]]
 	}, Module1))
 end
 
-function Module1:encode() --[[ Line: 569 ]]
+function Module1:encode()
 	-- upvalues: ProtoModule (copy)
 	local Buf = buffer.create(0)
 	local Count = 0
@@ -216,7 +216,7 @@ function Module1:encode() --[[ Line: 569 ]]
 	return Buf1
 end
 
-function Module1.decode(Buf) --[[ Line: 598 ]]
+function Module1.decode(Buf)
 	-- upvalues: Module1 (copy), ProtoModule (copy)
 	local NewModule = Module1.new()
 	local v2 = 0
@@ -259,7 +259,7 @@ function Module1.decode(Buf) --[[ Line: 598 ]]
 	return NewModule
 end
 
-function Module1:jsonEncode() --[[ Line: 656 ]]
+function Module1:jsonEncode()
 	local t = {}
 	
 	if self.page_size ~= nil and self.page_size ~= 0 then
@@ -277,7 +277,7 @@ function Module1:jsonEncode() --[[ Line: 656 ]]
 	return t
 end
 
-function Module1:jsonDecode() --[[ Line: 678 ]]
+function Module1:jsonDecode()
 	-- upvalues: Module1 (copy)
 	local NewModule = Module1.new()
 	
@@ -314,7 +314,7 @@ TypeRegistryModule.default:register(config.Pagination)
 local Module2 = {}
 Module2.__index = Module2
 
-function Module2.new(p1) --[[ Line: 726 ]]
+function Module2.new(p1)
 	-- upvalues: Module2 (copy)
 	return (setmetatable({
 		section_title = if p1 == nil or p1.section_title == nil then "" else p1.section_title,
@@ -325,7 +325,7 @@ function Module2.new(p1) --[[ Line: 726 ]]
 	}, Module2))
 end
 
-function Module2:encode() --[[ Line: 738 ]]
+function Module2:encode()
 	-- upvalues: ProtoModule (copy)
 	local Buf = buffer.create(0)
 	local Count = 0
@@ -359,7 +359,7 @@ function Module2:encode() --[[ Line: 738 ]]
 	return Buf1
 end
 
-function Module2.decode(Buf) --[[ Line: 775 ]]
+function Module2.decode(Buf)
 	-- upvalues: Module2 (copy), ProtoModule (copy), config (copy)
 	local NewModule = Module2.new()
 	local v3 = 0
@@ -408,7 +408,7 @@ function Module2.decode(Buf) --[[ Line: 775 ]]
 	return NewModule
 end
 
-function Module2:jsonEncode() --[[ Line: 838 ]]
+function Module2:jsonEncode()
 	local t = {}
 	
 	if self.section_title ~= nil and self.section_title ~= "" then
@@ -434,7 +434,7 @@ function Module2:jsonEncode() --[[ Line: 838 ]]
 	return t
 end
 
-function Module2:jsonDecode() --[[ Line: 868 ]]
+function Module2:jsonDecode()
 	-- upvalues: Module2 (copy), config (copy)
 	local NewModule = Module2.new()
 	
@@ -482,14 +482,14 @@ TypeRegistryModule.default:register(config.BadgesGridPageEntry)
 local Module3 = {}
 Module3.__index = Module3
 
-function Module3.new(p1) --[[ Line: 929 ]]
+function Module3.new(p1)
 	-- upvalues: Module3 (copy)
 	return (setmetatable({
 		badge_id = if p1 == nil or p1.badge_id == nil then "" else p1.badge_id
 	}, Module3))
 end
 
-function Module3:encode() --[[ Line: 937 ]]
+function Module3:encode()
 	-- upvalues: ProtoModule (copy)
 	local Buf = buffer.create(0)
 	local Count = 0
@@ -504,7 +504,7 @@ function Module3:encode() --[[ Line: 937 ]]
 	return Buf1
 end
 
-function Module3.decode(Buf) --[[ Line: 951 ]]
+function Module3.decode(Buf)
 	-- upvalues: Module3 (copy), ProtoModule (copy)
 	local NewModule = Module3.new()
 	local v4 = 0
@@ -537,7 +537,7 @@ function Module3.decode(Buf) --[[ Line: 951 ]]
 	return NewModule
 end
 
-function Module3:jsonEncode() --[[ Line: 994 ]]
+function Module3:jsonEncode()
 	local t = {}
 	
 	if self.badge_id ~= nil and self.badge_id ~= "" then
@@ -546,7 +546,7 @@ function Module3:jsonEncode() --[[ Line: 994 ]]
 	return t
 end
 
-function Module3:jsonDecode() --[[ Line: 1004 ]]
+function Module3:jsonDecode()
 	-- upvalues: Module3 (copy)
 	local NewModule = Module3.new()
 	
@@ -568,7 +568,7 @@ TypeRegistryModule.default:register(config.BadgesGridPageEntry_BadgeInputData)
 local Module4 = {}
 Module4.__index = Module4
 
-function Module4.new(p1) --[[ Line: 1034 ]]
+function Module4.new(p1)
 	-- upvalues: Module4 (copy)
 	return (setmetatable({
 		page_entry = if p1 == nil or p1.page_entry == nil then nil else p1.page_entry,
@@ -576,7 +576,7 @@ function Module4.new(p1) --[[ Line: 1034 ]]
 	}, Module4))
 end
 
-function Module4:encode() --[[ Line: 1041 ]]
+function Module4:encode()
 	-- upvalues: ProtoModule (copy)
 	local Buf = buffer.create(0)
 	local Count = 0
@@ -597,7 +597,7 @@ function Module4:encode() --[[ Line: 1041 ]]
 	return Buf1
 end
 
-function Module4.decode(Buf) --[[ Line: 1064 ]]
+function Module4.decode(Buf)
 	-- upvalues: Module4 (copy), ProtoModule (copy), PageEntryModule (copy), config (copy)
 	local NewModule = Module4.new()
 	local v5 = 0
@@ -637,7 +637,7 @@ function Module4.decode(Buf) --[[ Line: 1064 ]]
 	return NewModule
 end
 
-function Module4:jsonEncode() --[[ Line: 1112 ]]
+function Module4:jsonEncode()
 	local t = {}
 	
 	if self.page_entry ~= nil then
@@ -649,7 +649,7 @@ function Module4:jsonEncode() --[[ Line: 1112 ]]
 	return t
 end
 
-function Module4:jsonDecode() --[[ Line: 1128 ]]
+function Module4:jsonDecode()
 	-- upvalues: Module4 (copy), PageEntryModule (copy), config (copy)
 	local NewModule = Module4.new()
 	
@@ -683,7 +683,7 @@ TypeRegistryModule.default:register(config.BadgesSeeAllPageEntry)
 local Module5 = {}
 Module5.__index = Module5
 
-function Module5.new(p1) --[[ Line: 1164 ]]
+function Module5.new(p1)
 	-- upvalues: Module5 (copy)
 	return (setmetatable({
 		page_entries = if p1 == nil or p1.page_entries == nil then {} else p1.page_entries,
@@ -693,7 +693,7 @@ function Module5.new(p1) --[[ Line: 1164 ]]
 	}, Module5))
 end
 
-function Module5:encode() --[[ Line: 1173 ]]
+function Module5:encode()
 	-- upvalues: ProtoModule (copy)
 	local Buf = buffer.create(0)
 	local Count = 0
@@ -732,7 +732,7 @@ function Module5:encode() --[[ Line: 1173 ]]
 	return Buf1
 end
 
-function Module5.decode(Buf) --[[ Line: 1216 ]]
+function Module5.decode(Buf)
 	-- upvalues: Module5 (copy), ProtoModule (copy), config (copy), HydrationContentModule (copy), TemplateEntryModule (copy)
 	local NewModule = Module5.new()
 	local v6 = 0
@@ -779,7 +779,7 @@ function Module5.decode(Buf) --[[ Line: 1216 ]]
 	return NewModule
 end
 
-function Module5:jsonEncode() --[[ Line: 1282 ]]
+function Module5:jsonEncode()
 	local t = {}
 	
 	if self.page_entries ~= nil and #self.page_entries > 0 then
@@ -807,7 +807,7 @@ function Module5:jsonEncode() --[[ Line: 1282 ]]
 	return t
 end
 
-function Module5:jsonDecode() --[[ Line: 1312 ]]
+function Module5:jsonDecode()
 	-- upvalues: Module5 (copy), config (copy), HydrationContentModule (copy), TemplateEntryModule (copy)
 	local NewModule = Module5.new()
 	
@@ -856,7 +856,7 @@ TypeRegistryModule.default:register(config.BadgesSeeAllResponse)
 local Module6 = {}
 Module6.__index = Module6
 
-function Module6.new(p1) --[[ Line: 1375 ]]
+function Module6.new(p1)
 	-- upvalues: Module6 (copy)
 	return (setmetatable({
 		key = if p1 == nil or p1.key == nil then "" else p1.key,
@@ -864,7 +864,7 @@ function Module6.new(p1) --[[ Line: 1375 ]]
 	}, Module6))
 end
 
-function Module6:encode() --[[ Line: 1384 ]]
+function Module6:encode()
 	-- upvalues: ProtoModule (copy)
 	local Buf = buffer.create(0)
 	local Count = 0
@@ -884,7 +884,7 @@ function Module6:encode() --[[ Line: 1384 ]]
 	return Buf1
 end
 
-function Module6.decode(Buf) --[[ Line: 1404 ]]
+function Module6.decode(Buf)
 	-- upvalues: Module6 (copy), ProtoModule (copy), TemplateEntryModule (copy)
 	local NewModule = Module6.new()
 	local v7 = 0
@@ -921,7 +921,7 @@ function Module6.decode(Buf) --[[ Line: 1404 ]]
 	return NewModule
 end
 
-function Module6:jsonEncode() --[[ Line: 1452 ]]
+function Module6:jsonEncode()
 	local t = {}
 	
 	if self.key ~= nil and self.key ~= "" then
@@ -933,7 +933,7 @@ function Module6:jsonEncode() --[[ Line: 1452 ]]
 	return t
 end
 
-function Module6:jsonDecode() --[[ Line: 1466 ]]
+function Module6:jsonDecode()
 	-- upvalues: Module6 (copy), TemplateEntryModule (copy)
 	local NewModule = Module6.new()
 	
@@ -955,7 +955,7 @@ TypeRegistryModule.default:register(config.BadgesSeeAllResponse_TemplatesEntry)
 local Module7 = {}
 Module7.__index = Module7
 
-function Module7.new(p1) --[[ Line: 1496 ]]
+function Module7.new(p1)
 	-- upvalues: Module7 (copy)
 	return (setmetatable({
 		page_entries = if p1 == nil or p1.page_entries == nil then {} else p1.page_entries,
@@ -965,7 +965,7 @@ function Module7.new(p1) --[[ Line: 1496 ]]
 	}, Module7))
 end
 
-function Module7:encode() --[[ Line: 1505 ]]
+function Module7:encode()
 	-- upvalues: ProtoModule (copy)
 	local Buf = buffer.create(0)
 	local Count = 0
@@ -1004,7 +1004,7 @@ function Module7:encode() --[[ Line: 1505 ]]
 	return Buf1
 end
 
-function Module7.decode(Buf) --[[ Line: 1548 ]]
+function Module7.decode(Buf)
 	-- upvalues: Module7 (copy), ProtoModule (copy), PageEntryContentModule (copy), HydrationContentModule (copy), config (copy), TemplateEntryModule (copy)
 	local NewModule = Module7.new()
 	local v8 = 0
@@ -1051,7 +1051,7 @@ function Module7.decode(Buf) --[[ Line: 1548 ]]
 	return NewModule
 end
 
-function Module7:jsonEncode() --[[ Line: 1617 ]]
+function Module7:jsonEncode()
 	local t = {}
 	
 	if self.page_entries ~= nil and #self.page_entries > 0 then
@@ -1079,7 +1079,7 @@ function Module7:jsonEncode() --[[ Line: 1617 ]]
 	return t
 end
 
-function Module7:jsonDecode() --[[ Line: 1647 ]]
+function Module7:jsonDecode()
 	-- upvalues: Module7 (copy), PageEntryContentModule (copy), HydrationContentModule (copy), TemplateEntryModule (copy), config (copy)
 	local NewModule = Module7.new()
 	
@@ -1128,7 +1128,7 @@ TypeRegistryModule.default:register(config.BadgesSeeAllV2Response)
 local Module8 = {}
 Module8.__index = Module8
 
-function Module8.new(p1) --[[ Line: 1716 ]]
+function Module8.new(p1)
 	-- upvalues: Module8 (copy)
 	return (setmetatable({
 		key = if p1 == nil or p1.key == nil then "" else p1.key,
@@ -1136,7 +1136,7 @@ function Module8.new(p1) --[[ Line: 1716 ]]
 	}, Module8))
 end
 
-function Module8:encode() --[[ Line: 1725 ]]
+function Module8:encode()
 	-- upvalues: ProtoModule (copy)
 	local Buf = buffer.create(0)
 	local Count = 0
@@ -1156,7 +1156,7 @@ function Module8:encode() --[[ Line: 1725 ]]
 	return Buf1
 end
 
-function Module8.decode(Buf) --[[ Line: 1745 ]]
+function Module8.decode(Buf)
 	-- upvalues: Module8 (copy), ProtoModule (copy), TemplateEntryModule (copy)
 	local NewModule = Module8.new()
 	local v9 = 0
@@ -1193,7 +1193,7 @@ function Module8.decode(Buf) --[[ Line: 1745 ]]
 	return NewModule
 end
 
-function Module8:jsonEncode() --[[ Line: 1793 ]]
+function Module8:jsonEncode()
 	local t = {}
 	
 	if self.key ~= nil and self.key ~= "" then
@@ -1205,7 +1205,7 @@ function Module8:jsonEncode() --[[ Line: 1793 ]]
 	return t
 end
 
-function Module8:jsonDecode() --[[ Line: 1807 ]]
+function Module8:jsonDecode()
 	-- upvalues: Module8 (copy), TemplateEntryModule (copy)
 	local NewModule = Module8.new()
 	

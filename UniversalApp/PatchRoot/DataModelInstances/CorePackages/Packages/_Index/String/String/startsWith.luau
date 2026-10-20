@@ -1,4 +1,4 @@
-﻿return function(Text1: string, Text: string, p1: number): boolean --[[ Line: 16 | Named "startsWith" ]]
+﻿return function(Text1: string, Text: string, p1: number): boolean
 	if string.len(Text) == 0 then
 		return true
 	else

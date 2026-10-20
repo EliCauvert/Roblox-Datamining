@@ -19,7 +19,7 @@ return {
 	},
 	fflag = require(Parent.flags.getFFlagUGCValidateDescendantIdsPublished),
 	shadowFlag = require(Parent.flags.getFFlagUGCValidateDescendantIdsPublishedShadow),
-	run = function(p1, p2) --[[ Line: 35 ]]
+	run = function(p1, p2)
 		-- upvalues: ValidationEnumsModule (copy), ParseContentIdsModule (copy), config (copy), UnpublishedDependenciesModule (copy), config1 (copy), ErrorSourceStringsModule (copy)
 		if p2.consumerConfig.validationEnv ~= ValidationEnumsModule.ValidationEnv.Backend then return end
 		for _, value in ParseContentIdsModule.getDistinctReferences(p2.contentIds) do

@@ -10,29 +10,29 @@ _ = "apps/UniversalApp/build/app/bootstrap.luau"
 local v1 = nil
 v1 = {
 	cache = {},
-	load = function(p1) --[[ Line: 11 ]]
+	load = function(p1)
 		-- upvalues: v1 (ref)
 		if not v1.cache[p1] then
 			v1.cache[p1] = { c = v1[p1]() }
 		end
 		return v1.cache[p1].c
 	end,
-	b = function() --[[ Line: 18 ]]
+	b = function()
 		return {}
 	end,
-	c = function() --[[ Line: 44 ]]
+	c = function()
 		return {
-			chunkMounted = function(OnChunkMounted, ChunkName, LoadingMs) --[[ Line: 55 ]]
+			chunkMounted = function(OnChunkMounted, ChunkName, LoadingMs)
 				if OnChunkMounted ~= nil then
 					pcall(OnChunkMounted, table.freeze({ chunkName = ChunkName, loadingMs = LoadingMs }))
 				end
 			end,
-			chunkError = function(OnChunkError, ChunkName, p1, LoadingMs) --[[ Line: 67 ]]
+			chunkError = function(OnChunkError, ChunkName, p1, LoadingMs)
 				if OnChunkError ~= nil then
 					pcall(OnChunkError, table.freeze({ chunkName = ChunkName, loadingMs = LoadingMs, error = p1 }))
 				end
 			end,
-			moduleLoaded = function(OnModuleLoaded, ChunkName, ModuleId, LoadingMs) --[[ Line: 80 ]]
+			moduleLoaded = function(OnModuleLoaded, ChunkName, ModuleId, LoadingMs)
 				if OnModuleLoaded ~= nil then
 					pcall(OnModuleLoaded, table.freeze({
 						chunkName = ChunkName,
@@ -41,7 +41,7 @@ v1 = {
 					}))
 				end
 			end,
-			moduleError = function(OnModuleError, ChunkName, ModuleId, p1, LoadingMs) --[[ Line: 93 ]]
+			moduleError = function(OnModuleError, ChunkName, ModuleId, p1, LoadingMs)
 				if OnModuleError ~= nil then
 					pcall(OnModuleError, table.freeze({
 						chunkName = ChunkName,
@@ -55,12 +55,12 @@ v1 = {
 	end
 }
 
-function v1.a() --[[ Line: 121 ]]
+function v1.a()
 	-- upvalues: v1 (ref)
 	local _ = v1.load("b")
 	local C = v1.load("c")
 	
-	local function newSlot() --[[ Line: 156 ]]
+	local function newSlot()
 		return {
 			state = "loading",
 			value = nil,
@@ -72,7 +72,7 @@ function v1.a() --[[ Line: 121 ]]
 	
 	local Frozen = table.freeze({})
 	
-	local function wakeWaiters(Tbl) --[[ Line: 168 ]]
+	local function wakeWaiters(Tbl)
 		-- upvalues: Frozen (copy)
 		local Frozen1 = table.freeze(Tbl.waiters)
 		Tbl.waiters = Frozen
@@ -83,7 +83,7 @@ function v1.a() --[[ Line: 121 ]]
 		end
 	end
 	
-	local function waitForSlot(Slot, ChunkName) --[[ Line: 182 ]]
+	local function waitForSlot(Slot, ChunkName)
 		if Slot.state == "ready" then
 			return Slot.value
 		end
@@ -106,7 +106,7 @@ function v1.a() --[[ Line: 121 ]]
 		error(`unexpected slot state: {Slot.state}`)
 	end
 	
-	local function fillSlot(Slot, p1) --[[ Line: 209 ]]
+	local function fillSlot(Slot, p1)
 		-- upvalues: wakeWaiters (copy)
 		local ClockTime = os.clock()
 		local Success, Result = pcall(p1)
@@ -126,15 +126,15 @@ function v1.a() --[[ Line: 121 ]]
 	end
 	
 	return {
-		createContainer = function(p1) --[[ Line: 225 ]]
+		createContainer = function(p1)
 			-- upvalues: waitForSlot (copy), newSlot (copy), fillSlot (copy), C (copy)
 			local t = {}
 			
-			local function _(p2) --[[ Line: 229 | Named "makeChunkLoadModule" ]]
+			local function _(p2)
 				-- upvalues: waitForSlot (upval), newSlot (upval), fillSlot (upval), C (upval), p1 (copy)
 				local t = {}
 				
-				return function(ModuleId, p3) --[[ Line: 231 ]]
+				return function(ModuleId, p3)
 					-- upvalues: t (copy), waitForSlot (upval), p2 (copy), newSlot (upval), fillSlot (upval), C (upval), p1 (upval)
 					local v2 = t[ModuleId]
 					
@@ -156,7 +156,7 @@ function v1.a() --[[ Line: 121 ]]
 				end
 			end
 			
-			local function resolveChunk(ChunkName) --[[ Line: 249 ]]
+			local function resolveChunk(ChunkName)
 				-- upvalues: t (copy), waitForSlot (upval), newSlot (upval), fillSlot (upval), p1 (copy), resolveChunk (copy), C (upval)
 				local Entry = t[ChunkName]
 				
@@ -165,13 +165,13 @@ function v1.a() --[[ Line: 121 ]]
 				end
 				local Slot = newSlot()
 				t[ChunkName] = Slot
-				local FillSlotResult, FillSlotResult2, FillSlotResult3 = fillSlot(Slot, function() --[[ Line: 256 ]]
+				local FillSlotResult, FillSlotResult2, FillSlotResult3 = fillSlot(Slot, function()
 					-- upvalues: p1 (upval), ChunkName (copy), resolveChunk (upval), waitForSlot (upval), newSlot (upval), fillSlot (upval), C (upval)
 					local t = {}
 					
 					return p1.loadChunk(ChunkName).mount(table.freeze({
 						resolveChunk = resolveChunk,
-						loadModule = function(ModuleId, p2) --[[ Line: 231 ]]
+						loadModule = function(ModuleId, p2)
 							-- upvalues: t (copy), waitForSlot (upval), ChunkName (copy), newSlot (upval), fillSlot (upval), C (upval), p1 (upval)
 							local v2 = t[ModuleId]
 							
@@ -206,9 +206,9 @@ function v1.a() --[[ Line: 121 ]]
 			
 			return table.freeze({
 				resolveChunk = resolveChunk,
-				preloadChunk = function(ChunkName, p2) --[[ Line: 272 ]]
+				preloadChunk = function(ChunkName, p2)
 					-- upvalues: resolveChunk (copy)
-					coroutine.resume((coroutine.create(function() --[[ Line: 273 ]]
+					coroutine.resume((coroutine.create(function()
 						-- upvalues: resolveChunk (upval), ChunkName (copy), p2 (copy)
 						local ResolveChunkResult = resolveChunk(ChunkName)
 						
@@ -242,7 +242,7 @@ if game:DefineFastFlag("LuaAppLoadChunksFromManifest", false) then
 		lastUpdated = { 2026, 8, 24 }
 	})
 	
-	local function onChunkError(p1) --[[ Line: 321 ]]
+	local function onChunkError(p1)
 		-- upvalues: TelemetryService (copy), Frozen (copy)
 		TelemetryService:LogEvent(Frozen, {
 			customFields = {
@@ -253,15 +253,15 @@ if game:DefineFastFlag("LuaAppLoadChunksFromManifest", false) then
 		})
 	end
 	
-	local function _() --[[ Line: 342 | Named "getContentManifest" ]]
+	local function _()
 		return require("@game/CorePackages/LuauForgeContentManifest")
 	end
 	
-	local function resolveEmbeddedChunk(ChunkName) --[[ Line: 346 ]]
+	local function resolveEmbeddedChunk(ChunkName)
 		return require(`@game/CorePackages/LuauForgeChunks/{ChunkName}`)
 	end
 	
-	local function unpackChunk(AssetWithBytecodeAsync) --[[ Line: 350 ]]
+	local function unpackChunk(AssetWithBytecodeAsync)
 		local Bundle = AssetWithBytecodeAsync:FindFirstChild("bundle")
 		
 		if Bundle == nil or not Bundle:IsA("ModuleScript") then
@@ -273,13 +273,13 @@ if game:DefineFastFlag("LuaAppLoadChunksFromManifest", false) then
 		end
 	end
 	
-	local function resolveContentChunk(LuauForgeContentManifestModuleEntry) --[[ Line: 359 ]]
+	local function resolveContentChunk(LuauForgeContentManifestModuleEntry)
 		-- upvalues: InsertService (copy), unpackChunk (copy)
 		return unpackChunk((InsertService:LoadAssetWithBytecodeAsync(LuauForgeContentManifestModuleEntry)))
 	end
 	
 	v1.load("a").createContainer(table.freeze({
-		loadChunk = function(ChunkName) --[[ Line: 364 ]]
+		loadChunk = function(ChunkName)
 			-- upvalues: LuaAppLoadChunksFallbackToEmbedded (copy), resolveContentChunk (copy), onChunkError (copy), resolveEmbeddedChunk (copy)
 			print(`Loading chunk {ChunkName}`)
 			local LuauForgeContentManifestModuleEntry = require("@game/CorePackages/LuauForgeContentManifest")[ChunkName]
@@ -307,7 +307,7 @@ if game:DefineFastFlag("LuaAppLoadChunksFromManifest", false) then
 			return resolveEmbeddedChunk(ChunkName)
 		end,
 		onChunkError = onChunkError,
-		onModuleError = function(p1) --[[ Line: 331 ]]
+		onModuleError = function(p1)
 			-- upvalues: TelemetryService (copy), Frozen1 (copy)
 			TelemetryService:LogEvent(Frozen1, {
 				customFields = {
@@ -320,10 +320,10 @@ if game:DefineFastFlag("LuaAppLoadChunksFromManifest", false) then
 		end
 	})).resolveChunk("bundled").loadModule("LUAUFORGE_MAIN")
 else
-	local _ = function(_) --[[ Line: 396 | Named "createModuleLoader" ]]
+	local _ = function(_)
 		local t = {}
 		
-		return function(Key, Callback) --[[ Line: 398 | Named "loadModule" ]]
+		return function(Key, Callback)
 			-- upvalues: t (copy)
 			local v2 = t[Key]
 			
@@ -338,10 +338,10 @@ else
 		end
 	end
 	
-	local _ = function(Callback) --[[ Line: 410 | Named "createChunkLoader" ]]
+	local _ = function(Callback)
 		local MountResults = {}
 		
-		local function resolveChunk(Key) --[[ Line: 412 ]]
+		local function resolveChunk(Key)
 			-- upvalues: MountResults (copy), Callback (copy), resolveChunk (copy)
 			local MountResult = MountResults[Key]
 			
@@ -351,7 +351,7 @@ else
 				local t = {}
 				local MountResult1 = Callback(Key).mount(table.freeze({
 					resolveChunk = resolveChunk,
-					loadModule = function(Key, Callback) --[[ Line: 398 ]]
+					loadModule = function(Key, Callback)
 						-- upvalues: t (copy)
 						local v2 = t[Key]
 						
@@ -374,13 +374,13 @@ else
 		return resolveChunk
 	end
 	
-	local function requireChunk(p1) --[[ Line: 428 ]]
+	local function requireChunk(p1)
 		return require(`@game/CorePackages/LuauForgeChunks/{p1}`)
 	end
 	
 	local MountResults = {}
 	
-	local function resolveChunk(Key) --[[ Line: 412 ]]
+	local function resolveChunk(Key)
 		-- upvalues: MountResults (copy), requireChunk (copy), resolveChunk (copy)
 		local MountResult = MountResults[Key]
 		
@@ -390,7 +390,7 @@ else
 			local t = {}
 			local MountResult1 = requireChunk(Key).mount(table.freeze({
 				resolveChunk = resolveChunk,
-				loadModule = function(Key, Callback) --[[ Line: 398 ]]
+				loadModule = function(Key, Callback)
 					-- upvalues: t (copy)
 					local v2 = t[Key]
 					

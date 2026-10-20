@@ -4,11 +4,11 @@ local _ = require(Parent.PromiseOrValue)
 local IsPromiseFunction = require(Parent.isPromise).isPromise
 
 return {
-	promiseReduce = function(p1, Callback, p2) --[[ Line: 26 ]]
+	promiseReduce = function(p1, Callback, p2)
 		-- upvalues: Array (copy), IsPromiseFunction (copy)
-		return Array.reduce(p1, function(Promise, p3) --[[ Line: 31 ]]
+		return Array.reduce(p1, function(Promise, p3)
 			-- upvalues: IsPromiseFunction (upval), Callback (copy)
-			return if IsPromiseFunction(Promise) then Promise:andThen(function(Result) --[[ Line: 33 ]]
+			return if IsPromiseFunction(Promise) then Promise:andThen(function(Result)
 				-- upvalues: Callback (upval), p3 (copy)
 				return Callback(Result, p3)
 			end) else Callback(Promise, p3)

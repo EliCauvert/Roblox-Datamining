@@ -16,17 +16,17 @@ local REACTBLOCKTYPE = ReactSymbolsModule.REACT_BLOCK_TYPE
 local _ = require(script.Parent.ReactTypes)
 local DescribeError = require(script.Parent["ErrorHandling.roblox"]).describeError
 
-local function _(p1, p2, p3) --[[ Line: 44 | Named "getWrappedName" ]]
+local function _(p1, p2, p3)
 	local DisplayName = if typeof(p2) == "table" then p2.displayName or (p2.name or "") else "<function>"
 	
 	return p1.displayName or (if DisplayName == "" then p3 else string.format("%s(%s)", p3, DisplayName) or p3)
 end
 
-local _ = function(p1) --[[ Line: 57 | Named "getContextName" ]]
+local _ = function(p1)
 	return p1.displayName or "Context"
 end
 
-local function getComponentName(Render) --[[ Line: 61 ]]
+local function getComponentName(Render)
 	-- upvalues: ReactGlobalsModule (copy), ConsoleModule (copy), REACTFRAGMENTTYPE (copy), REACTPORTALTYPE (copy), REACTPROFILERTYPE (copy), REACTSTRICTMODETYPE (copy), REACTSUSPENSETYPE (copy), REACTSUSPENSELISTTYPE (copy), REACTCONTEXTTYPE (copy), REACTPROVIDERTYPE (copy), REACTFORWARDREFTYPE (copy), REACTMEMOTYPE (copy), getComponentName (copy), REACTBLOCKTYPE (copy), REACTLAZYTYPE (copy), DescribeError (copy)
 	if Render == nil then
 		return nil

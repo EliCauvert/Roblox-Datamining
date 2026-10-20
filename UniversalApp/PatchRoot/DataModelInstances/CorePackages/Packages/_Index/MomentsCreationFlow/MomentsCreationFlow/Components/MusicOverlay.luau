@@ -27,7 +27,7 @@ local ConstantsModule = require(MomentsCreationFlow.Constants)
 local CreationFlowLocalizationModule = require(MomentsCreationFlow.Enums.CreationFlowLocalization)
 local EventNamesModule = require(MomentsCreationFlow.Analytics.EventNames)
 
-return function(p1) --[[ Line: 53 ]]
+return function(p1)
 	-- upvalues: UseDeviceInsetsFunction (copy), UseDispatchFunction (copy), UseTokensFunction (copy), ReactModule (copy), CreationFlowContextModule (copy), UseSelectorFunction (copy), ConstantsModule (copy), UseMemoFunction (copy), UseAudioPlaybackFunction (copy), UseEffectFunction (copy), SearchMusicModule (copy), UseCallbackFunction (copy), EventNamesModule (copy), MusicEditorModule (copy), View (copy), FoundationModule (copy), Text (copy), CreationFlowLocalizationModule (copy), Icon (copy), TextInput (copy), MagnifyingGlass (copy), ScrollView (copy), ScrollBarVisibility (copy), DashModule (copy), MusicPreviewItemModule (copy)
 	local UseDeviceInsetsResult = UseDeviceInsetsFunction()
 	local UseDispatchResult = UseDispatchFunction()
@@ -36,26 +36,26 @@ return function(p1) --[[ Line: 53 ]]
 	local UseStateResult1, UseStateResult2_1 = ReactModule.useState(false)
 	local UseStateResult3, UseStateResult2_2 = ReactModule.useState(nil)
 	local UseContextResult = ReactModule.useContext(CreationFlowContextModule)
-	local UseSelectorResult = UseSelectorFunction(function(p2) --[[ Line: 62 ]]
+	local UseSelectorResult = UseSelectorFunction(function(p2)
 		-- upvalues: ConstantsModule (upval)
 		return p2[ConstantsModule.RoduxKey].CreationFlow.musicList
 	end)
-	local UseAudioPlaybackResult = UseAudioPlaybackFunction(UseStateResult3 ~= nil, UseMemoFunction(function() --[[ Line: 66 ]]
+	local UseAudioPlaybackResult = UseAudioPlaybackFunction(UseStateResult3 ~= nil, UseMemoFunction(function()
 		-- upvalues: UseStateResult3 (copy)
 		return if UseStateResult3 then tostring(UseStateResult3) else nil
 	end, { UseStateResult3 }), { autoplay = true, looping = false })
-	UseEffectFunction(function() --[[ Line: 79 ]]
+	UseEffectFunction(function()
 		-- upvalues: p1 (copy), UseDispatchResult (copy), SearchMusicModule (upval)
 		p1.playbackController.playback.pause()
 		UseDispatchResult(SearchMusicModule("", p1.playbackController.timeline.timeLength))
 	end, { p1.playbackController.timeline.timeLength })
-	UseEffectFunction(function() --[[ Line: 84 ]]
+	UseEffectFunction(function()
 		-- upvalues: UseAudioPlaybackResult (copy), UseStateResult2_2 (copy)
 		if not UseAudioPlaybackResult.playback.isPlaying then
 			UseStateResult2_2(nil)
 		end
 	end, { UseAudioPlaybackResult.playback.isPlaying })
-	local UseCallbackResult = UseCallbackFunction(function(AssetId) --[[ Line: 90 ]]
+	local UseCallbackResult = UseCallbackFunction(function(AssetId)
 		-- upvalues: p1 (copy), UseStateResult2_2 (copy), UseStateResult2_1 (copy), UseContextResult (copy), EventNamesModule (upval)
 		p1.onMusicUpdate({ startTime = 0, assetId = AssetId })
 		p1.playbackController.timeline.seek(0)
@@ -63,26 +63,26 @@ return function(p1) --[[ Line: 53 ]]
 		UseStateResult2_1(true)
 		UseContextResult.fireEvent(EventNamesModule.EditingFlowMusicSelected, { musicAssetId = tostring(AssetId) })
 	end, { p1.onMusicUpdate })
-	local UseCallbackResult1 = UseCallbackFunction(function() --[[ Line: 101 ]]
+	local UseCallbackResult1 = UseCallbackFunction(function()
 		-- upvalues: p1 (copy)
 		p1.onMusicDiscard()
 		p1.playbackController.playback.play()
 		p1.playbackController.volume.unmute()
 	end, { p1.onMusicDiscard })
-	local UseCallbackResult2 = UseCallbackFunction(function() --[[ Line: 107 ]]
+	local UseCallbackResult2 = UseCallbackFunction(function()
 		-- upvalues: p1 (copy), UseStateResult2_1 (copy)
 		p1.onMusicUpdate(nil)
 		UseStateResult2_1(false)
 		p1.playbackController.playback.pause()
 	end, { p1.onMusicUpdate })
-	local UseCallbackResult3 = UseCallbackFunction(function() --[[ Line: 113 ]]
+	local UseCallbackResult3 = UseCallbackFunction(function()
 		-- upvalues: p1 (copy), UseStateResult2_1 (copy)
 		p1.onMusicSave()
 		UseStateResult2_1(false)
 		p1.playbackController.playback.play()
 		p1.playbackController.volume.unmute()
 	end, { p1.onMusicSave })
-	local UseCallbackResult4 = UseCallbackFunction(function(p2) --[[ Line: 120 ]]
+	local UseCallbackResult4 = UseCallbackFunction(function(p2)
 		-- upvalues: UseStateResult3 (copy), UseStateResult2_2 (copy), UseAudioPlaybackResult (copy)
 		if UseStateResult3 and UseStateResult3 == p2 then
 			UseStateResult2_2(nil)
@@ -93,7 +93,7 @@ return function(p1) --[[ Line: 53 ]]
 			UseAudioPlaybackResult.playback.play()
 		end
 	end, { UseStateResult3 })
-	local UseCallbackResult5 = UseCallbackFunction(function() --[[ Line: 129 ]]
+	local UseCallbackResult5 = UseCallbackFunction(function()
 		-- upvalues: UseStateResult3 (copy), UseStateResult2_2 (copy), UseDispatchResult (copy), SearchMusicModule (upval), UseStateResult (copy), p1 (copy)
 		if UseStateResult3 then
 			UseStateResult2_2(nil)
@@ -104,7 +104,7 @@ return function(p1) --[[ Line: 53 ]]
 		UseStateResult,
 		p1.playbackController.timeline.timeLength
 	})
-	local UseCallbackResult6 = UseCallbackFunction(function(StartTime) --[[ Line: 136 ]]
+	local UseCallbackResult6 = UseCallbackFunction(function(StartTime)
 		-- upvalues: p1 (copy)
 		if p1.musicEdit then
 			p1.onMusicUpdate({ assetId = p1.musicEdit.assetId, startTime = StartTime })
@@ -122,7 +122,7 @@ return function(p1) --[[ Line: 53 ]]
 	}) else ReactModule.createElement(View, {
 		tag = "align-x-center align-y-top anchor-bottom-center bg-surface-100 col gap-small position-bottom-center radius-medium size-full-0",
 		ZIndex = 5,
-		onActivated = function() --[[ Line: 155 ]] end,
+		onActivated = function() end,
 		Size = UDim2.fromScale(1, 0.6666666666666666),
 		stateLayer = {
 			affordance = FoundationModule.Enums.StateLayerAffordance.None
@@ -189,7 +189,7 @@ return function(p1) --[[ Line: 53 ]]
 				scrollBarVisibility = ScrollBarVisibility.None,
 				ScrollingDirection = Enum.ScrollingDirection.Y
 			}
-		}, if UseSelectorResult and #UseSelectorResult > 0 then DashModule.map(UseSelectorResult, function(Key, LayoutOrder) --[[ Line: 232 ]]
+		}, if UseSelectorResult and #UseSelectorResult > 0 then DashModule.map(UseSelectorResult, function(Key, LayoutOrder)
 			-- upvalues: ReactModule (upval), MusicPreviewItemModule (upval), UseCallbackResult (copy), UseCallbackResult4 (copy), UseStateResult3 (copy), UseAudioPlaybackResult (copy)
 			return ReactModule.createElement(MusicPreviewItemModule, {
 				key = Key,

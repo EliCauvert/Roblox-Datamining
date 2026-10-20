@@ -1,10 +1,10 @@
 ﻿local ReactModule = require(script:FindFirstAncestor("Foundation").Parent.React)
 
-return function() --[[ Line: 5 | Named "useTagsState" ]]
+return function()
 	-- upvalues: ReactModule (copy)
 	local UseStateResult, UseStateResult2 = ReactModule.useState({})
 	
-	return UseStateResult, (ReactModule.useCallback(function(...) --[[ Line: 8 ]]
+	return UseStateResult, (ReactModule.useCallback(function(...)
 		-- upvalues: UseStateResult2 (copy)
 		local List = {}
 		
@@ -13,7 +13,7 @@ return function() --[[ Line: 5 | Named "useTagsState" ]]
 				table.insert(List, value1)
 			end
 		end
-		UseStateResult2(function(Tbl) --[[ Line: 20 ]]
+		UseStateResult2(function(Tbl)
 			-- upvalues: List (copy)
 			local Flag = false
 			

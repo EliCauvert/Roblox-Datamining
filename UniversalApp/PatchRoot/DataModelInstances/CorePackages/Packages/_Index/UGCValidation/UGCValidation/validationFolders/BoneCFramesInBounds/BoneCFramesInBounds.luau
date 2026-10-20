@@ -18,7 +18,7 @@ return {
 		ValidationEnumsModule.SharedDataMember.renderMeshesData
 	},
 	fflag = require(Parent.util.R15plusUtils).checkFlagEnabledForAllowHrd,
-	run = function(p1, p2) --[[ Line: 22 ]]
+	run = function(p1, p2)
 		-- upvalues: UGCValidationBoneCFrameBoundsMultiplierHundredths (copy), GetAllInstancesIsAModule (copy), Vector3UtilsModule (copy), ErrorSourceStringsModule (copy), CFrameUtilsModule (copy), UGCValidationMinimumJointDistanceHundredthsRatio (copy)
 		local UGCValidationBoneCFrameBoundsMultiplierHundredthsRatio = UGCValidationBoneCFrameBoundsMultiplierHundredths / 100
 		

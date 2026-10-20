@@ -2,10 +2,10 @@
 local ReactModule = require(Foundation.Parent.React)
 local _ = require(Foundation.Components.Dropdown)
 
-return function(p1, Id) --[[ Line: 13 | Named "useScrollToSelectedRef" ]]
+return function(p1, Id)
 	-- upvalues: ReactModule (copy)
 	local UseRefResult = ReactModule.useRef(nil)
-	local UseResult = ReactModule.useCallback(function() --[[ Line: 15 ]]
+	local UseResult = ReactModule.useCallback(function()
 		-- upvalues: UseRefResult (copy)
 		if UseRefResult.current then
 			for _, Connection in UseRefResult.current do
@@ -14,12 +14,12 @@ return function(p1, Id) --[[ Line: 13 | Named "useScrollToSelectedRef" ]]
 			UseRefResult.current = nil
 		end
 	end, {})
-	local UseResult1 = ReactModule.useCallback(function(ScrollFrame) --[[ Line: 24 ]]
+	local UseResult1 = ReactModule.useCallback(function(ScrollFrame)
 		-- upvalues: UseResult (copy), p1 (copy), Id (copy), UseRefResult (copy)
 		UseResult()
 		
 		if not ScrollFrame then return end
-		local function scrollToSelected(): boolean --[[ Line: 31 ]]
+		local function scrollToSelected(): boolean
 			-- upvalues: p1 (upval), ScrollFrame (copy), Id (upval)
 			local CountP0 = #p1
 			local Y: number = ScrollFrame.AbsoluteCanvasSize.Y
@@ -43,7 +43,7 @@ return function(p1, Id) --[[ Line: 13 | Named "useScrollToSelectedRef" ]]
 		end
 		
 		if not scrollToSelected() then
-			local function onSizeChanged() --[[ Line: 52 ]]
+			local function onSizeChanged()
 				-- upvalues: scrollToSelected (copy), UseResult (upval)
 				if scrollToSelected() then
 					UseResult()
@@ -56,7 +56,7 @@ return function(p1, Id) --[[ Line: 13 | Named "useScrollToSelectedRef" ]]
 			}
 		end
 	end, { p1, Id, UseResult })
-	ReactModule.useEffect(function() --[[ Line: 64 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UseResult (copy)
 		return UseResult
 	end, { UseResult })

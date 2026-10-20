@@ -29,7 +29,7 @@ PlayerTileButton.defaultProps = {
 	tileSize = UDim2.new(0, 150, 0, 150)
 }
 
-function PlayerTileButton.render(p1) --[[ Line: 42 ]]
+function PlayerTileButton.render(p1)
 	-- upvalues: ButtonTypeModule (copy), RoactModule (copy), ButtonModule (copy), ControlStateModule (copy)
 	return RoactModule.createElement(ButtonModule, {
 		buttonType = p1.props.isSecondary and ButtonTypeModule.Secondary or ButtonTypeModule.PrimarySystem,
@@ -37,11 +37,11 @@ function PlayerTileButton.render(p1) --[[ Line: 42 ]]
 		position = UDim2.new(1, 0, 1, 0),
 		size = UDim2.new(0, p1.props.tileSize.X.Offset / 2 - p1.props.outerButtonPadding * 1.5, 0, p1.props.buttonHeight),
 		anchorPoint = Vector2.new(1, 1),
-		onActivated = p1.props.onActivated or function() --[[ Line: 62 ]] end,
+		onActivated = p1.props.onActivated or function() end,
 		isDisabled = p1.props.isDisabled,
 		icon = p1.props.icon,
 		isRoactGamepadEnabled = p1.props.isRoactGamepadEnabled,
-		onStateChanged = function(Hover, Hover1) --[[ Line: 66 ]]
+		onStateChanged = function(Hover, Hover1)
 			-- upvalues: ControlStateModule (upval), p1 (copy)
 			if Hover == ControlStateModule.Hover then
 				p1.props.mouseEnter()

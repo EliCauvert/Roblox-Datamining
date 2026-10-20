@@ -14,7 +14,7 @@ local Callback = nil
 local ViewabilityHelper = {}
 ViewabilityHelper.__index = ViewabilityHelper
 
-function ViewabilityHelper.new(_config) --[[ Line: 146 ]]
+function ViewabilityHelper.new(_config)
 	-- upvalues: ViewabilityHelper (copy), Set (copy), Map (copy)
 	local self = setmetatable({}, ViewabilityHelper)
 	
@@ -30,15 +30,15 @@ function ViewabilityHelper.new(_config) --[[ Line: 146 ]]
 	return self
 end
 
-function ViewabilityHelper:dispose() --[[ Line: 159 ]]
+function ViewabilityHelper:dispose()
 	-- upvalues: ClearTimeoutFunction (copy)
-	self._timers:forEach(function(p1) --[[ Line: 163 ]]
+	self._timers:forEach(function(p1)
 		-- upvalues: ClearTimeoutFunction (upval)
 		ClearTimeoutFunction(p1)
 	end)
 end
 
-function ViewabilityHelper:computeViewableItems(Last, p1, p2, Callback1, p3) --[[ Line: 168 ]]
+function ViewabilityHelper:computeViewableItems(Last, p1, p2, Callback1, p3)
 	-- upvalues: InvariantModule (copy), Console (copy), Callback (ref)
 	local ItemVisiblePercentThreshold = self._config.itemVisiblePercentThreshold
 	local ViewAreaCoveragePercentThreshold = self._config.viewAreaCoveragePercentThreshold
@@ -84,12 +84,12 @@ function ViewabilityHelper:computeViewableItems(Last, p1, p2, Callback1, p3) --[
 	return List
 end
 
-function ViewabilityHelper:onUpdate(Last, p4, p5, Callback, p6, p7, p8) --[[ Line: 245 ]]
+function ViewabilityHelper:onUpdate(Last, p4, p5, Callback, p6, p7, p8)
 	-- upvalues: Array (copy), SetTimeoutFunction (copy)
 	if self._config.waitForInteraction and not self._hasInteracted or (Last == 0 or not Callback(1)) then return end
 	local ViewableItems = if Last then self:computeViewableItems(Last, p4, p5, Callback, p8) else {}
 	
-	if #self._viewableIndices == #ViewableItems and Array.every(self._viewableIndices, function(p9, p10): boolean --[[ Line: 273 ]]
+	if #self._viewableIndices == #ViewableItems and Array.every(self._viewableIndices, function(p9, p10): boolean
 		-- upvalues: ViewableItems (ref)
 		return p9 == ViewableItems[p10]
 	end) then return end
@@ -97,7 +97,7 @@ function ViewabilityHelper:onUpdate(Last, p4, p5, Callback, p6, p7, p8) --[[ Lin
 	
 	if self._config.minimumViewTime then
 		local v2 = nil
-		v2 = SetTimeoutFunction(function() --[[ Line: 284 ]]
+		v2 = SetTimeoutFunction(function()
 			-- upvalues: self (copy), v2 (ref), ViewableItems (ref), p7 (copy), p6 (copy)
 			self._timers:delete(v2)
 			self:_onUpdateSync(ViewableItems, p7, p6)
@@ -108,21 +108,21 @@ function ViewabilityHelper:onUpdate(Last, p4, p5, Callback, p6, p7, p8) --[[ Lin
 	end
 end
 
-function ViewabilityHelper:resetViewableIndices() --[[ Line: 300 ]]
+function ViewabilityHelper:resetViewableIndices()
 	self._viewableIndices = {}
 end
 
-function ViewabilityHelper:recordInteraction() --[[ Line: 304 ]]
+function ViewabilityHelper:recordInteraction()
 	self._hasInteracted = true
 end
 
-function ViewabilityHelper:_onUpdateSync(ViewableItems, Callback: (any) -> (), Callback1) --[[ Line: 308 ]]
+function ViewabilityHelper:_onUpdateSync(ViewableItems, Callback: (any) -> (), Callback1)
 	-- upvalues: Array (copy), Map (copy), Object (copy)
 	local ViewableItems1 = self._viewableItems
-	local NewMap = Map.new(Array.map(Array.filter(ViewableItems, function(p4) --[[ Line: 310 ]]
+	local NewMap = Map.new(Array.map(Array.filter(ViewableItems, function(p4)
 		-- upvalues: Array (upval), self (copy)
 		return Array.includes(self._viewableIndices, p4)
-	end), function(p4) --[[ Line: 314 ]]
+	end), function(p4)
 		-- upvalues: Callback1 (copy)
 		local CallbackResult = Callback1(p4, true)
 		
@@ -150,7 +150,7 @@ function ViewabilityHelper:_onUpdateSync(ViewableItems, Callback: (any) -> (), C
 	end
 end
 
-Callback = function(p4, p5, OffsetDelta, NewLength, p6, Length): boolean --[[ Line: 340 | Named "_isViewable" ]]
+Callback = function(p4, p5, OffsetDelta, NewLength, p6, Length): boolean
 	-- upvalues: Callback1 (ref), Callback2 (ref)
 	if Callback1(OffsetDelta, NewLength, p6) then
 		return true
@@ -161,11 +161,11 @@ Callback = function(p4, p5, OffsetDelta, NewLength, p6, Length): boolean --[[ Li
 	end
 end
 
-Callback2 = function(p4: number, p5: number, p6: number): number --[[ Line: 357 | Named "_getPixelsVisible" ]]
+Callback2 = function(p4: number, p5: number, p6: number): number
 	return (math.max(0, math.min(p5, p6) - math.max(p4, 0)))
 end
 
-Callback1 = function(p4: number, p5, p6): boolean --[[ Line: 362 | Named "_isEntirelyVisible" ]]
+Callback1 = function(p4: number, p5, p6): boolean
 	return p4 >= 0 and p5 <= p6 and p4 < p5
 end
 

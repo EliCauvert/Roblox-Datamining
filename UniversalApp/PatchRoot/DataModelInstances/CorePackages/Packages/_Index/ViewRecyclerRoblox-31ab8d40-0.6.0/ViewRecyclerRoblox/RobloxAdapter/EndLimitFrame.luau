@@ -3,7 +3,7 @@ local TransparentFrameModule = require(ViewRecyclerRoblox.RobloxAdapter.transpar
 local Axis = require(ViewRecyclerRoblox.Parent.ViewRecycler).Axis
 
 return {
-	new = function() --[[ Line: 20 ]]
+	new = function()
 		-- upvalues: TransparentFrameModule (copy), Axis (copy)
 		local ViewRecyclerEndLimit = TransparentFrameModule("ViewRecyclerEndLimit")
 		local Spacer = TransparentFrameModule("Spacer")
@@ -11,7 +11,7 @@ return {
 		
 		return {
 			instance = ViewRecyclerEndLimit,
-			place = function(Parent, X, p1, XOffset, ZIndex) --[[ Line: 27 ]]
+			place = function(Parent, X, p1, XOffset, ZIndex)
 				-- upvalues: Axis (upval), ViewRecyclerEndLimit (copy), Spacer (copy)
 				local Largest = math.max(0, XOffset - p1)
 				
@@ -31,7 +31,7 @@ return {
 				ViewRecyclerEndLimit.ZIndex = ZIndex
 				ViewRecyclerEndLimit.Parent = Parent
 			end,
-			destroy = function() --[[ Line: 45 ]]
+			destroy = function()
 				-- upvalues: ViewRecyclerEndLimit (copy)
 				ViewRecyclerEndLimit:Destroy()
 			end

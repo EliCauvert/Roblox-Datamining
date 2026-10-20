@@ -4,7 +4,7 @@ local _ = require(script.Parent["ReactRobloxHostTypes.roblox"])
 
 return {
 	setInitialProperties = RobloxComponentPropsModule.setInitialProperties,
-	diffProperties = function(_, _, List1, List2, _) --[[ Line: 32 ]]
+	diffProperties = function(_, _, List1, List2, _)
 		-- upvalues: Object (copy)
 		local List = nil
 		

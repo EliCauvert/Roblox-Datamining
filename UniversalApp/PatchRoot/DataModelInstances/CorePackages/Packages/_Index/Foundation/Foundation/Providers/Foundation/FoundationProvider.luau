@@ -18,7 +18,7 @@ local ElevationProvider = require(Parent.Elevation.ElevationProvider).ElevationP
 local IsPluginElevatedModule = require(Parent.Plugin.isPluginElevated)
 local Frozen = table.freeze({})
 
-return function(p1) --[[ Line: 37 | Named "FoundationProvider" ]]
+return function(p1)
 	-- upvalues: FlagsModule (copy), Frozen (copy), ReactModule (copy), PluginProviderModule (copy), ElevationProvider (copy), PreferencesProviderModule (copy), StyleProviderModule (copy), ResponsiveProviderModule (copy), OverlayModule (copy), CursorModule (copy), IsPluginElevatedModule (copy), WidgetsProviderModule (copy), PanelsProviderModule (copy), ContextStack (copy)
 	local Preferences = if p1.preferences then p1.preferences elseif FlagsModule.FoundationProviderStableEmptyTable then Frozen else {}
 	local Elements = {

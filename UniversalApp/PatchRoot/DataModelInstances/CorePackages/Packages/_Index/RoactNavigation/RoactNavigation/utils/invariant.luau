@@ -1,10 +1,10 @@
-﻿local Callback = if _G.__DEV__ then function(p1) --[[ Line: 15 ]]
+﻿local Callback = if _G.__DEV__ then function(p1)
 	if p1 == nil then
 		error("invariant requires an error message argument")
 	end
-end else function(_) --[[ Line: 12 ]] end
+end else function(_) end
 
-return function(p1, Template: string, ...) --[[ Line: 22 | Named "invariant" ]]
+return function(p1, Template: string, ...)
 	-- upvalues: Callback (ref)
 	Callback(Template)
 	

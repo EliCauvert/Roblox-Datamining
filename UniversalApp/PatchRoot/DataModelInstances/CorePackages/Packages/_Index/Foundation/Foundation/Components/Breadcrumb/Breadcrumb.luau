@@ -21,7 +21,7 @@ local config = {
 	size = require(Foundation.Enums.InputSize).Medium
 }
 
-local function BreadcrumbItem(Frame) --[[ Line: 90 ]]
+local function BreadcrumbItem(Frame)
 	-- upvalues: ReactModule (copy), TextModule (copy), LinkModule (copy), LinkVariantModule (copy), ViewModule (copy), BreadcrumbAccessoryModule (copy), IconModule (copy), Icon (copy)
 	local Item = Frame.item
 	local VariantProps = Frame.variantProps
@@ -66,7 +66,7 @@ local function BreadcrumbItem(Frame) --[[ Line: 90 ]]
 	})
 end
 
-return ReactModule.memo(ReactModule.forwardRef(function(p1, Ref) --[[ Line: 148 | Named "Breadcrumb" ]]
+return ReactModule.memo(ReactModule.forwardRef(function(p1, Ref)
 	-- upvalues: WithDefaultsModule (copy), config (copy), UseTokensModule (copy), UseBreadcrumbVariantsModule (copy), ReactModule (copy), IconButtonModule (copy), Icon (copy), ButtonVariantModule (copy), BreadcrumbItem (copy), ViewModule (copy), TextModule (copy), MenuModule (copy), WithCommonPropsModule (copy)
 	local WithDefaultsModuleResult = WithDefaultsModule(p1, config)
 	local UseBreadcrumbVariantsModuleResult = UseBreadcrumbVariantsModule(UseTokensModule(), WithDefaultsModuleResult.size)
@@ -74,23 +74,23 @@ return ReactModule.memo(ReactModule.forwardRef(function(p1, Ref) --[[ Line: 148 
 	local IsCountItemsAbove = CountItems > 4
 	local UseRefResult = ReactModule.useRef(nil)
 	local UseStateResult, UseStateResult2 = ReactModule.useState(false)
-	ReactModule.useEffect(function() --[[ Line: 158 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: IsCountItemsAbove (copy), UseStateResult2 (copy)
 		if not IsCountItemsAbove then
 			UseStateResult2(false)
 		end
 	end, { IsCountItemsAbove })
-	local UseResult = ReactModule.useCallback(function() --[[ Line: 164 ]]
+	local UseResult = ReactModule.useCallback(function()
 		-- upvalues: UseStateResult2 (copy)
-		UseStateResult2(function(p2): boolean --[[ Line: 165 ]]
+		UseStateResult2(function(p2): boolean
 			return not p2
 		end)
 	end, {})
-	local UseResult1 = ReactModule.useCallback(function() --[[ Line: 169 ]]
+	local UseResult1 = ReactModule.useCallback(function()
 		-- upvalues: UseStateResult2 (copy)
 		UseStateResult2(false)
 	end, {})
-	local UseResult2 = ReactModule.useCallback(function(p2) --[[ Line: 173 ]]
+	local UseResult2 = ReactModule.useCallback(function(p2)
 		-- upvalues: UseStateResult2 (copy), WithDefaultsModuleResult (copy)
 		UseStateResult2(false)
 		local Item = WithDefaultsModuleResult.items[p2]
@@ -99,7 +99,7 @@ return ReactModule.memo(ReactModule.forwardRef(function(p1, Ref) --[[ Line: 148 
 			Item.onActivated()
 		end
 	end, { WithDefaultsModuleResult.items })
-	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 181 ]]
+	local UseMemoResult = ReactModule.useMemo(function()
 		-- upvalues: IsCountItemsAbove (copy), WithDefaultsModuleResult (copy), CountItems (copy)
 		if IsCountItemsAbove then
 			return {
@@ -122,7 +122,7 @@ return ReactModule.memo(ReactModule.forwardRef(function(p1, Ref) --[[ Line: 148 
 		CountItems,
 		IsCountItemsAbove
 	})
-	local UseMemoResult1 = ReactModule.useMemo(function() --[[ Line: 196 ]]
+	local UseMemoResult1 = ReactModule.useMemo(function()
 		-- upvalues: IsCountItemsAbove (copy), CountItems (copy), WithDefaultsModuleResult (copy)
 		local List = {}
 		

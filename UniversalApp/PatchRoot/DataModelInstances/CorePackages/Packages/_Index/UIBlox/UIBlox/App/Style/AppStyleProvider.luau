@@ -31,7 +31,7 @@ local config1 = {
 	settings = ConstantsModule.DefaultSettings
 }
 
-return function(p1) --[[ Line: 75 | Named "AppStyleProvider" ]]
+return function(p1)
 	-- upvalues: Object (copy), config1 (copy), ReactModule (copy), GetTokensFunction (copy), GetThemeFromNameModule (copy), UseTokensFunction (copy), GetFoundationTokensFunction (copy), CryoModule (copy), Mappers (copy), GetFontFromNameModule (copy), ConstantsModule (copy), GetTextSizeOffsetModule (copy), StyleContextModule (copy), FoundationSurfaceTokensDifferModule (copy), RoactModule (copy), Parent1 (copy), LoggerModule (copy), FoundationProvider (copy), config (copy)
 	local AssignResult = Object.assign({}, config1, p1.style)
 	local UseStateResult, UseStateResult2 = ReactModule.useState(AssignResult.themeName)
@@ -54,17 +54,17 @@ return function(p1) --[[ Line: 75 | Named "AppStyleProvider" ]]
 		} else ConstantsModule.DefaultSettings
 	}
 	local UseRefResult = ReactModule.useRef(false)
-	ReactModule.useEffect(function() --[[ Line: 118 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UseRefResult (copy), UseStateResult2 (copy), AssignResult (copy)
 		UseRefResult.current = true
 		UseStateResult2(AssignResult.themeName)
 		
-		return function() --[[ Line: 121 ]]
+		return function()
 			-- upvalues: UseRefResult (upval)
 			UseRefResult.current = false
 		end
 	end, { UseRefResult, AssignResult.themeName, UseStateResult2 })
-	ReactModule.useEffect(function() --[[ Line: 126 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: GetTextSizeOffsetModule (upval), AddFoundationFlatKeysResult (copy), UseStateResult2_1 (copy)
 		local TextSizeOffsetModule, TextSizeOffsetModule2 = GetTextSizeOffsetModule(AddFoundationFlatKeysResult.Typography.BodyLarge.Font)
 		
@@ -75,7 +75,7 @@ return function(p1) --[[ Line: 75 | Named "AppStyleProvider" ]]
 	local Element = ReactModule.createElement(StyleContextModule.Provider, {
 		value = {
 			style = Style,
-			updateTheme = ReactModule.useCallback(function(_, p2) --[[ Line: 133 ]]
+			updateTheme = ReactModule.useCallback(function(_, p2)
 				-- upvalues: UseRefResult (copy), UseStateResult2 (copy)
 				if UseRefResult.current then
 					UseStateResult2(p2)
@@ -83,7 +83,7 @@ return function(p1) --[[ Line: 75 | Named "AppStyleProvider" ]]
 			end, { UseRefResult, UseStateResult2 }),
 			derivedValues = { textSizeOffset = UseStateResult1 },
 			styleMetadata = {
-				ThemeName = ReactModule.useMemo(function() --[[ Line: 139 ]]
+				ThemeName = ReactModule.useMemo(function()
 					-- upvalues: UseStateResult (copy), ConstantsModule (upval)
 					return if UseStateResult:lower() == ConstantsModule.ThemeName.Dark:lower() then ConstantsModule.ThemeName.Dark elseif UseStateResult:lower() == ConstantsModule.ThemeName.Light:lower() then ConstantsModule.ThemeName.Light else ConstantsModule.DefaultThemeName
 				end, { UseStateResult }),

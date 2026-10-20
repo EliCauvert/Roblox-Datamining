@@ -8,7 +8,7 @@ local _ = require(script.Parent.createStyleSheetRules)
 local GetOverrideAttributesModule = require(script.Parent.getOverrideAttributes)
 local ScaleValueModule = require(Foundation.Utility.scaleValue)
 
-return function(Object, p1, p2, p3, p4, p5, p6) --[[ Line: 17 | Named "updateTokenOverrides" ]]
+return function(Object, p1, p2, p3, p4, p5, p6)
 	-- upvalues: GetOverrideAttributesModule (copy), FlagsModule (copy), ScaleValueModule (copy)
 	for AttributeName, value in GetOverrideAttributesModule(p1, p2, p3, p5) do
 		local ScaleValueModuleResult = if FlagsModule.FoundationDisableTokenScaling then value else ScaleValueModule(value, p4)

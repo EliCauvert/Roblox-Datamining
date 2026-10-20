@@ -10,7 +10,7 @@ local InputSizeModule = require(Foundation.Enums.InputSize)
 local TextModule = require(Foundation.Components.Text)
 local ViewModule = require(Foundation.Components.View)
 
-return function(p1) --[[ Line: 28 | Named "TwoMonthCalendarHeader" ]]
+return function(p1)
 	-- upvalues: ReactModule (copy), ViewModule (copy), IconButtonModule (copy), Icon (copy), InputSizeModule (copy), ButtonVariantModule (copy), TextModule (copy), DateTimeUtilitiesModule (copy)
 	return ReactModule.createElement(ViewModule, {
 		LayoutOrder = 1,

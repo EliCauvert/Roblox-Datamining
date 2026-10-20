@@ -12,7 +12,7 @@ local GetFFlagUGCValidateBackendInExperienceViaCanPublishModule = require(Parent
 local config = { MODERATION_STATE_REVIEWING = true, Reviewing = true }
 local config1 = { MODERATION_STATE_APPROVED = true, Approved = true }
 
-local function _(List) --[[ Line: 22 | Named "collectContentIdsArray" ]]
+local function _(List)
 	local List1 = {}
 	
 	for i, _ in List do
@@ -21,7 +21,7 @@ local function _(List) --[[ Line: 22 | Named "collectContentIdsArray" ]]
 	return List1
 end
 
-local function runStudio(p1, RootInstance, ContentIds) --[[ Line: 30 ]]
+local function runStudio(p1, RootInstance, ContentIds)
 	-- upvalues: GetAssetCreationDetailsModule (copy), ErrorSourceStringsModule (copy), ConstantsModule (copy)
 	local List = {}
 	
@@ -47,7 +47,7 @@ local function runStudio(p1, RootInstance, ContentIds) --[[ Line: 30 ]]
 	end
 end
 
-local _ = function(List) --[[ Line: 68 | Named "buildOwnerLookup" ]]
+local _ = function(List)
 	local t = {}
 	
 	for _, value in List do
@@ -56,7 +56,7 @@ local _ = function(List) --[[ Line: 68 | Named "buildOwnerLookup" ]]
 	return t
 end
 
-local function runBackend(p2, ContentIds, BackendConfigs) --[[ Line: 76 ]]
+local function runBackend(p2, ContentIds, BackendConfigs)
 	-- upvalues: GetAssetCreationDetailsRCCModule (copy), ErrorSourceStringsModule (copy), config (copy), config1 (copy)
 	local RestrictedUserIds = BackendConfigs.restrictedUserIds
 	
@@ -95,7 +95,7 @@ local function runBackend(p2, ContentIds, BackendConfigs) --[[ Line: 76 ]]
 	end
 end
 
-local function runCanPublishOwnershipCheck(p3, RootInstance, ContentIds, IecConfigs) --[[ Line: 134 ]]
+local function runCanPublishOwnershipCheck(p3, RootInstance, ContentIds, IecConfigs)
 	-- upvalues: GetFFlagUGCValidateBackendInExperienceViaCanPublishModule (copy), GetFFlagUGCValidateForwardIECRestrictedUserIdsModule (copy), RunService (copy), CanPublishAssetsModule (copy), ErrorSourceStringsModule (copy)
 	local HasUniverseId: boolean = GetFFlagUGCValidateBackendInExperienceViaCanPublishModule() and (IecConfigs.token == nil and IecConfigs.universeId ~= nil)
 	
@@ -134,7 +134,7 @@ return {
 		ValidationEnumsModule.SharedDataMember.contentIds
 	},
 	expectedFailures = {},
-	run = function(p4, p5) --[[ Line: 203 ]]
+	run = function(p4, p5)
 		-- upvalues: ValidationEnumsModule (copy), runStudio (copy), GetFFlagUGCValidateBackendInExperienceViaCanPublishModule (copy), runCanPublishOwnershipCheck (copy), runBackend (copy)
 		local ConsumerConfig = p5.consumerConfig
 		

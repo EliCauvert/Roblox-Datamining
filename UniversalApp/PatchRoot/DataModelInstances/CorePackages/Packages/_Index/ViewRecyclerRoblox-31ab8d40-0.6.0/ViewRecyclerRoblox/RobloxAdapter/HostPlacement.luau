@@ -7,12 +7,12 @@ local HostPresentationPhaseModule = require(ViewRecyclerRoblox.RobloxAdapter.Hos
 local ReparentableHostModule = require(ViewRecyclerRoblox.RobloxAdapter.ReparentableHost)
 local StackPlacementModule = require(ViewRecyclerRoblox.RobloxAdapter.StackPlacement)
 
-local function zero(): number --[[ Line: 68 ]]
+local function zero(): number
 	return 0
 end
 
 return {
-	new = function(Configuration) --[[ Line: 72 ]]
+	new = function(Configuration)
 		-- upvalues: zero (copy), AbsolutePlacementModule (copy), HostMeasurementModule (copy), ReparentableHostModule (copy), CanvasItemPlacerModule (copy), StackPlacementModule (copy), HostPresentationPhaseModule (copy)
 		local Configuration1 = {
 			container = Configuration.container,
@@ -30,7 +30,7 @@ return {
 		local GetCanvasOriginOffset = Configuration.getCanvasOriginOffset or zero
 		local NewAbsolutePlacement = AbsolutePlacementModule.new(Configuration1.axis, Configuration1.selfSizing, GetCanvasOriginOffset)
 		
-		local function _() --[[ Line: 89 | Named "commitStack" ]]
+		local function _()
 			-- upvalues: v1 (ref), Flag (ref)
 			if v1 ~= nil and not Flag then
 				v1.commit()
@@ -39,7 +39,7 @@ return {
 		
 		local NewHostMeasurement = HostMeasurementModule.new({
 			axis = Configuration1.axis,
-			isUnchanged = function(): boolean --[[ Line: 97 ]]
+			isUnchanged = function(): boolean
 				-- upvalues: v1 (ref), Tbl (copy)
 				local v2 = v1
 				local Flag: boolean = v2 == nil or not v2.takeChanged()
@@ -60,7 +60,7 @@ return {
 			onItemMeasurements = Configuration.onItemMeasurements
 		})
 		
-		local _ = function(p1, p2) --[[ Line: 119 | Named "stopMeasuring" ]]
+		local _ = function(p1, p2)
 			-- upvalues: NewHostMeasurement (copy)
 			p2.checkedSize = nil
 			
@@ -70,7 +70,7 @@ return {
 			end
 		end
 		
-		local function detachHost(p1, p2) --[[ Line: 127 ]]
+		local function detachHost(p1, p2)
 			-- upvalues: v1 (ref), ReparentableHostModule (upval), CanvasItemPlacerModule (upval), NewAbsolutePlacement (copy), NewHostMeasurement (copy)
 			local Host = p2.host
 			
@@ -91,7 +91,7 @@ return {
 			end
 		end
 		
-		local _ = function(Key) --[[ Line: 141 | Named "getEntry" ]]
+		local _ = function(Key)
 			-- upvalues: Tbl (copy), CanvasItemPlacerModule (upval), Count (ref)
 			local Entry = Tbl[Key]
 			
@@ -111,7 +111,7 @@ return {
 			return Entry
 		end
 		
-		local _ = function(p1, p2, PresentedAssignment) --[[ Line: 159 | Named "reportPresentation" ]]
+		local _ = function(p1, p2, PresentedAssignment)
 			-- upvalues: Configuration (copy)
 			if p2.presentedAssignment == PresentedAssignment then return end
 			p2.presentedAssignment = PresentedAssignment
@@ -122,7 +122,7 @@ return {
 			end
 		end
 		
-		local function applyPhysical(Key, p1) --[[ Line: 170 ]]
+		local function applyPhysical(Key, p1)
 			-- upvalues: detachHost (copy), Configuration (copy), Configuration1 (ref), v1 (ref), StackPlacementModule (upval), NewAbsolutePlacement (copy), ReparentableHostModule (upval), HostPresentationPhaseModule (upval), NewHostMeasurement (copy)
 			local PhysicalState = p1.physicalState
 			
@@ -192,7 +192,7 @@ return {
 			end
 		end
 		
-		local function syncStack() --[[ Line: 214 ]]
+		local function syncStack()
 			-- upvalues: Configuration1 (ref), v1 (ref), Tbl (copy), detachHost (copy), StackPlacementModule (upval), MountedWindow (ref), GetCanvasOriginOffset (copy)
 			local Container = Configuration1.container
 			local StackedSpacing = Configuration1.stackedSpacing
@@ -219,7 +219,7 @@ return {
 			end
 		end
 		
-		local _ = function(Key, p1) --[[ Line: 249 | Named "releaseEntryIfVacant" ]]
+		local _ = function(Key, p1)
 			-- upvalues: Tbl (copy), Count (ref)
 			if p1.physicalState == nil and p1.measurementDependencies == nil and Tbl[Key] == p1 then
 				Tbl[Key] = nil
@@ -230,7 +230,7 @@ return {
 		syncStack()
 		
 		return {
-			apply = function(Key, PhysicalState) --[[ Line: 259 ]]
+			apply = function(Key, PhysicalState)
 				-- upvalues: Flag1 (ref), Tbl (copy), CanvasItemPlacerModule (upval), Count (ref), applyPhysical (copy), v1 (ref), Flag (ref)
 				assert(not Flag1, "HostPlacement: cannot apply physical state after destroy")
 				local Entry = Tbl[Key]
@@ -259,7 +259,7 @@ return {
 					v1.commit()
 				end
 			end,
-			setMeasurementDependencies = function(Key, MeasurementDependencies) --[[ Line: 267 ]]
+			setMeasurementDependencies = function(Key, MeasurementDependencies)
 				-- upvalues: Flag1 (ref), Tbl (copy), CanvasItemPlacerModule (upval), Count (ref), applyPhysical (copy), v1 (ref), Flag (ref)
 				assert(not Flag1, "HostPlacement: cannot register Measurement dependencies after destroy")
 				local Entry = Tbl[Key]
@@ -300,7 +300,7 @@ return {
 					Count -= 1
 				end
 			end,
-			setConfiguration = function(Value) --[[ Line: 283 ]]
+			setConfiguration = function(Value)
 				-- upvalues: Flag1 (ref), Configuration1 (ref), NewHostMeasurement (copy), NewAbsolutePlacement (copy), syncStack (copy), Tbl (copy), applyPhysical (copy), v1 (ref), Flag (ref)
 				if not Flag1 then
 					Configuration1 = Value
@@ -316,7 +316,7 @@ return {
 					end
 				end
 			end,
-			reposition = function() --[[ Line: 295 ]]
+			reposition = function()
 				-- upvalues: Flag1 (ref), GetCanvasOriginOffset (copy), NewAbsolutePlacement (copy), v1 (ref)
 				if Flag1 then return end
 				local CanvasOriginOffset = GetCanvasOriginOffset()
@@ -326,7 +326,7 @@ return {
 					v1.setOriginOffset(CanvasOriginOffset)
 				end
 			end,
-			setMountedWindow = function(Value, Callback: () -> ()) --[[ Line: 305 ]]
+			setMountedWindow = function(Value, Callback: () -> ())
 				-- upvalues: Flag1 (ref), MountedWindow (ref), v1 (ref), GetCanvasOriginOffset (copy), Flag (ref), Tbl (copy), applyPhysical (copy)
 				if Flag1 then
 					Callback()
@@ -363,23 +363,23 @@ return {
 					error(Result, 0)
 				end
 			end,
-			cancelPendingMeasurements = function() --[[ Line: 336 ]]
+			cancelPendingMeasurements = function()
 				-- upvalues: NewHostMeasurement (copy)
 				NewHostMeasurement.cancelPending()
 			end,
-			getTrackedItemViewCount = function() --[[ Line: 339 ]]
+			getTrackedItemViewCount = function()
 				-- upvalues: Count (ref)
 				return Count
 			end,
-			isPrePaintPassConnected = function() --[[ Line: 342 ]]
+			isPrePaintPassConnected = function()
 				-- upvalues: NewHostMeasurement (copy)
 				return NewHostMeasurement.isPassConnected()
 			end,
-			getPrePaintReadCount = function() --[[ Line: 345 ]]
+			getPrePaintReadCount = function()
 				-- upvalues: NewHostMeasurement (copy)
 				return NewHostMeasurement.getPassReadCount()
 			end,
-			destroy = function() --[[ Line: 348 ]]
+			destroy = function()
 				-- upvalues: Flag1 (ref), NewHostMeasurement (copy), Tbl (copy), detachHost (copy), NewAbsolutePlacement (copy), v1 (ref), Count (ref)
 				if Flag1 then return end
 				Flag1 = true

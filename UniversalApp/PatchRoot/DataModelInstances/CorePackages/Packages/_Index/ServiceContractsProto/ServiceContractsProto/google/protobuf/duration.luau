@@ -3,7 +3,7 @@ local TypeRegistryModule = require(script.Parent.Parent.Parent.proto.typeRegistr
 local Module = {}
 Module.__index = Module
 
-function Module.new(p1) --[[ Line: 41 ]]
+function Module.new(p1)
 	-- upvalues: Module (copy)
 	return (setmetatable({
 		seconds = if p1 == nil or p1.seconds == nil then 0 else p1.seconds,
@@ -11,7 +11,7 @@ function Module.new(p1) --[[ Line: 41 ]]
 	}, Module))
 end
 
-function Module:encode() --[[ Line: 48 ]]
+function Module:encode()
 	-- upvalues: ProtoModule (copy)
 	local Buf = buffer.create(0)
 	local Count = 0
@@ -30,7 +30,7 @@ function Module:encode() --[[ Line: 48 ]]
 	return Buf1
 end
 
-function Module.decode(Buf) --[[ Line: 67 ]]
+function Module.decode(Buf)
 	-- upvalues: Module (copy), ProtoModule (copy)
 	local NewModule = Module.new()
 	local v1 = 0
@@ -63,7 +63,7 @@ function Module.decode(Buf) --[[ Line: 67 ]]
 	return NewModule
 end
 
-local function serializeFractionalNanos(Nanos: number): string --[[ Line: 122 ]]
+local function serializeFractionalNanos(Nanos: number): string
 	local Text = tostring(Nanos * math.sign(Nanos))
 	local Repeated = string.rep("0", 9 - #Text)
 	while Text:sub(-1) == "0" do
@@ -72,7 +72,7 @@ local function serializeFractionalNanos(Nanos: number): string --[[ Line: 122 ]]
 	return `.{Repeated}{Text}s`
 end
 
-local function _(p1) --[[ Line: 139 | Named "deserializeFractionalNanos" ]]
+local function _(p1)
 	local InvalidNanosStringReceivedCouldnTTurnIntoANumber = assert(tonumber(p1), "Invalid nanos string received, couldn't turn into a number")
 	
 	for _ = #p1 + 1, 9 do
@@ -81,7 +81,7 @@ local function _(p1) --[[ Line: 139 | Named "deserializeFractionalNanos" ]]
 	return InvalidNanosStringReceivedCouldnTTurnIntoANumber
 end
 
-function Module:jsonEncode(): string --[[ Line: 148 ]]
+function Module:jsonEncode(): string
 	-- upvalues: serializeFractionalNanos (copy)
 	assert(self.seconds == nil or self.seconds >= -315576000000 and self.seconds <= 315576000000, "Seconds out of range")
 	assert(self.nanos == nil or self.nanos >= -999999999 and self.nanos <= 999999999, "Nanoseconds out of range")
@@ -89,7 +89,7 @@ function Module:jsonEncode(): string --[[ Line: 148 ]]
 	return if self.nanos == nil or self.nanos == 0 or self.nanos % 1000000000 == 0 then `{self.seconds}s` else string.format("%s%d%s", if self.seconds == 0 and math.sign(self.nanos) == -1 then "-" else "", self.seconds or 0, (serializeFractionalNanos(self.nanos)))
 end
 
-function Module.jsonDecode(Text: string) --[[ Line: 167 ]]
+function Module.jsonDecode(Text: string)
 	-- upvalues: Module (copy)
 	local Match: string? = string.match(Text, "^([%-0-9]+)s$")
 	local Nanos = 0

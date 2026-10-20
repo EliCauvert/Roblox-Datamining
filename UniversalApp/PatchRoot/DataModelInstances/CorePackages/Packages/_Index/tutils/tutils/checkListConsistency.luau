@@ -1,4 +1,4 @@
-﻿return function(List): boolean --[[ Line: 7 ]]
+﻿return function(List): boolean
 	local Flag = false
 	local Flag1 = false
 	local Flag2 = true

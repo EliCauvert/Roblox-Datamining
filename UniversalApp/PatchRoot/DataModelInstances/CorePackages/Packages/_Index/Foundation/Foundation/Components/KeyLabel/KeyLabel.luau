@@ -17,7 +17,7 @@ local config = { holdTime = 1, resetTime = 0.5 }
 local config1 = { testId = "--foundation-key-label" }
 local _Rect = Rect.new(Vector2.new(10, 9), Vector2.new(25, 25))
 
-return ReactModule.memo(ReactModule.forwardRef(function(p1, Ref) --[[ Line: 55 | Named "KeyLabel" ]]
+return ReactModule.memo(ReactModule.forwardRef(function(p1, Ref)
 	-- upvalues: WithDefaultsModule (copy), config1 (copy), config (copy), UseTokensModule (copy), ReactModule (copy), ReactOtterModule (copy), GetVisualForKeyModule (copy), ViewModule (copy), WithCommonPropsModule (copy), ImageModule (copy), _Rect (copy), TextModule (copy), CircularProgressBarModule (copy), EventConnection (copy), UserInputService (copy)
 	local WithDefaultsModuleResult = WithDefaultsModule(p1, config1)
 	local WithDefaultsModuleResult1 = if WithDefaultsModuleResult.holdBehavior then WithDefaultsModule(WithDefaultsModuleResult.holdBehavior, config) else nil
@@ -26,7 +26,7 @@ return ReactModule.memo(ReactModule.forwardRef(function(p1, Ref) --[[ Line: 55 |
 	local UseAnimatedBindingResult = nil
 	local Callback = nil
 	local Callback
-	UseAnimatedBindingResult, Callback = ReactOtterModule.useAnimatedBinding(0, function(p2) --[[ Line: 63 ]]
+	UseAnimatedBindingResult, Callback = ReactOtterModule.useAnimatedBinding(0, function(p2)
 		-- upvalues: WithDefaultsModuleResult1 (copy), UseStateResult (copy), Callback (ref), ReactOtterModule (upval), UseStateResult2 (copy)
 		if WithDefaultsModuleResult1 and p2 == 1 and UseStateResult then
 			Callback(ReactOtterModule.ease(0, {
@@ -63,7 +63,7 @@ return ReactModule.memo(ReactModule.forwardRef(function(p1, Ref) --[[ Line: 55 |
 		}, {}) else nil,
 		InputBeganConnection = if WithDefaultsModuleResult1 then ReactModule.createElement(EventConnection, {
 			event = UserInputService.InputBegan,
-			callback = function(Input) --[[ Line: 123 ]]
+			callback = function(Input)
 				-- upvalues: UseStateResult (copy), WithDefaultsModuleResult (copy), WithDefaultsModuleResult1 (copy), UseStateResult2 (copy), Callback (ref), ReactOtterModule (upval), UseAnimatedBindingResult (ref)
 				if UseStateResult then return end
 				if Input.KeyCode == WithDefaultsModuleResult.keyCode then
@@ -85,7 +85,7 @@ return ReactModule.memo(ReactModule.forwardRef(function(p1, Ref) --[[ Line: 55 |
 		}) else nil,
 		InputEndedConnection = if WithDefaultsModuleResult1 then ReactModule.createElement(EventConnection, {
 			event = UserInputService.InputEnded,
-			callback = function(p2) --[[ Line: 149 ]]
+			callback = function(p2)
 				-- upvalues: UseStateResult (copy), WithDefaultsModuleResult1 (copy), UseStateResult2 (copy), Callback (ref), ReactOtterModule (upval), UseAnimatedBindingResult (ref)
 				if p2 == UseStateResult then
 					if WithDefaultsModuleResult1.onEndHold then

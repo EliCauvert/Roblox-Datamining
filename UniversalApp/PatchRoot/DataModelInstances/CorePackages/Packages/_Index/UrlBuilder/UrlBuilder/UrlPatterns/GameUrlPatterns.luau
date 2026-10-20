@@ -1,6 +1,6 @@
 ﻿local AppsFlyerUtilModule = require(script.Parent.utils.AppsFlyerUtil)
 
-return function(p1) --[[ Line: 4 ]]
+return function(p1)
 	-- upvalues: AppsFlyerUtilModule (copy)
 	local t = {}
 	t.info = {
@@ -12,7 +12,7 @@ return function(p1) --[[ Line: 4 ]]
 		group = p1.fromString("www:communities/{creatorId}"),
 		user = p1.fromString("www:users/{creatorId}/profile"),
 		pass = p1.fromString("www:game-pass/{passId}"),
-		creator = function(p2) --[[ Line: 19 ]]
+		creator = function(p2)
 			-- upvalues: t (copy)
 			if p2.creatorType == "Group" then
 				return t.info.group(p2)
@@ -24,7 +24,7 @@ return function(p1) --[[ Line: 4 ]]
 				return nil
 			end
 		end,
-		appsflyer = function(p2) --[[ Line: 28 ]]
+		appsflyer = function(p2)
 			-- upvalues: p1 (copy), AppsFlyerUtilModule (upval), t (copy)
 			local Description = p2.description
 			local Image = p2.image

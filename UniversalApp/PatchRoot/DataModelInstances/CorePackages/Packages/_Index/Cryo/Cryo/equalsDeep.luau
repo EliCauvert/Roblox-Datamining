@@ -1,6 +1,6 @@
 ﻿local EqualObjectsModule = require(script.Parent.equalObjects)
 
-local function compareDeep(List, List1): boolean --[[ Line: 4 ]]
+local function compareDeep(List, List1): boolean
 	-- upvalues: compareDeep (copy)
 	if type(List) ~= "table" or type(List1) ~= "table" then
 		return List == List1
@@ -18,7 +18,7 @@ local function compareDeep(List, List1): boolean --[[ Line: 4 ]]
 	return true
 end
 
-return function(...): boolean --[[ Line: 24 | Named "equalsDeep" ]]
+return function(...): boolean
 	-- upvalues: EqualObjectsModule (copy), compareDeep (copy)
 	if EqualObjectsModule(...) then
 		return true

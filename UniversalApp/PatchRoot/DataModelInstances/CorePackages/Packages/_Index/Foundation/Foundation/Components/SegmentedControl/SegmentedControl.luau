@@ -21,7 +21,7 @@ local config = {
 	fillBehavior = FillBehaviorModule.Fit
 }
 
-return ReactModule.memo(ReactModule.forwardRef(function(p1, p2) --[[ Line: 54 | Named "SegmentedControl" ]]
+return ReactModule.memo(ReactModule.forwardRef(function(p1, p2)
 	-- upvalues: WithDefaultsModule (copy), config (copy), FlagsModule (copy), UseTokensModule (copy), UseSegmentedControlVariantsModule (copy), FillBehaviorModule (copy), ReactModule (copy), UseAnimatedHighlightModule (copy), ViewModule (copy), WithCommonPropsModule (copy), DashModule (copy), SegmentModule (copy)
 	local WithDefaultsModuleResult = WithDefaultsModule(p1, config)
 	local Variant = if FlagsModule.FoundationSegmentedControlBeta then WithDefaultsModuleResult.variant else nil
@@ -36,7 +36,7 @@ return ReactModule.memo(ReactModule.forwardRef(function(p1, p2) --[[ Line: 54 | 
 	UseRefResult = ReactModule.useRef(nil)
 	local UseMemoResult = nil
 	local UseRefResult1 = ReactModule.useRef({})
-	UseMemoResult = ReactModule.useMemo(function() --[[ Line: 83 ]]
+	UseMemoResult = ReactModule.useMemo(function()
 		-- upvalues: UseRefResult1 (copy), WithDefaultsModuleResult (copy), ReactModule (upval)
 		local Current = UseRefResult1.current
 		
@@ -55,11 +55,11 @@ return ReactModule.memo(ReactModule.forwardRef(function(p1, p2) --[[ Line: 54 | 
 	local HighlightWidth = UseAnimatedHighlightModuleResult.highlightWidth
 	local UseBindingResult
 	UseBindingResult, UseBindingResult2 = ReactModule.useBinding(Vector2.new(0, 0))
-	UseResult = ReactModule.useCallback(function(Frame) --[[ Line: 106 ]]
+	UseResult = ReactModule.useCallback(function(Frame)
 		-- upvalues: UseBindingResult2 (ref)
 		UseBindingResult2(Frame.AbsoluteSize)
 	end, { UseSegmentedControlVariantsModuleResult.container.tag })
-	UseResult1 = ReactModule.useCallback(function(p3): number --[[ Line: 117 ]]
+	UseResult1 = ReactModule.useCallback(function(p3): number
 		-- upvalues: UseMemoResult (ref), WithDefaultsModuleResult (copy)
 		local YDelta = 0
 		
@@ -75,9 +75,9 @@ return ReactModule.memo(ReactModule.forwardRef(function(p1, p2) --[[ Line: 54 | 
 	
 	return ReactModule.createElement(ViewModule, WithCommonPropsModule(WithDefaultsModuleResult, {
 		tag = if FlagsModule.FoundationSegmentedControlBeta and IsFillBehaviorMatch then "size-full-0 auto-y" else nil,
-		Size = if FlagsModule.FoundationSegmentedControlBeta then if IsFillBehaviorMatch then nil else UseBindingResult:map(function(Vector): UDim2 --[[ Line: 136 ]]
+		Size = if FlagsModule.FoundationSegmentedControlBeta then if IsFillBehaviorMatch then nil else UseBindingResult:map(function(Vector): UDim2
 			return UDim2.fromOffset(Vector.X, Vector.Y)
-		end) else UseBindingResult:map(function(Vector): UDim2 --[[ Line: 140 ]]
+		end) else UseBindingResult:map(function(Vector): UDim2
 			return UDim2.fromOffset(Vector.X, Vector.Y)
 		end)
 	}), {
@@ -87,7 +87,7 @@ return ReactModule.memo(ReactModule.forwardRef(function(p1, p2) --[[ Line: 54 | 
 			ref = p2 or UseRefResult,
 			testId = `{WithDefaultsModuleResult.testId}--segments-container`
 		}, {
-			onAbsoluteSizeChanged = ReactModule.useCallback(function(p3) --[[ Line: 110 ]]
+			onAbsoluteSizeChanged = ReactModule.useCallback(function(p3)
 				-- upvalues: WithDefaultsModuleResult (copy), UseResult (ref)
 				if WithDefaultsModuleResult.onAbsoluteSizeChanged then
 					WithDefaultsModuleResult.onAbsoluteSizeChanged(p3)
@@ -97,7 +97,7 @@ return ReactModule.memo(ReactModule.forwardRef(function(p1, p2) --[[ Line: 54 | 
 				WithDefaultsModuleResult.onAbsoluteSizeChanged,
 				UseResult
 			})
-		}), DashModule.map(WithDefaultsModuleResult.segments, function(p3, p4: number) --[[ Line: 155 ]]
+		}), DashModule.map(WithDefaultsModuleResult.segments, function(p3, p4: number)
 			-- upvalues: ReactModule (upval), SegmentModule (upval), WithDefaultsModuleResult (copy), FlagsModule (upval), Variant (copy), FillBehavior (copy), UseMemoResult (ref)
 			return ReactModule.createElement(ReactModule.Fragment, { key = tostring(p3.id) }, {
 				Segment = ReactModule.createElement(SegmentModule, {
@@ -119,10 +119,10 @@ return ReactModule.memo(ReactModule.forwardRef(function(p1, p2) --[[ Line: 54 | 
 		Overlay = ReactModule.createElement(ViewModule, {
 			tag = UseSegmentedControlVariantsModuleResult.segment.tag,
 			backgroundStyle = if FlagsModule.FoundationSegmentedControlBeta then UseTokensModuleResult.Color.Shift.Shift_300 else UseTokensModuleResult.Color.Shift.Shift_400,
-			Size = ReactModule.joinBindings({ HighlightWidth, ActiveItemHeight }):map(function(Entry): UDim2 --[[ Line: 182 ]]
+			Size = ReactModule.joinBindings({ HighlightWidth, ActiveItemHeight }):map(function(Entry): UDim2
 				return UDim2.fromOffset(Entry[1], Entry[2])
 			end),
-			Position = HighlightPosition:map(function(XOffset): UDim2 --[[ Line: 185 ]]
+			Position = HighlightPosition:map(function(XOffset): UDim2
 				-- upvalues: UseResult1 (ref), p2 (copy), UseRefResult (ref)
 				return UDim2.fromOffset(XOffset, (UseResult1(p2 or UseRefResult)))
 			end),

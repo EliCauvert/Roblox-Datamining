@@ -17,9 +17,9 @@ local MergeArgumentsFunction = require(script.Parent.arguments).mergeArguments
 local Callback = nil
 local Callback1 = nil
 
-local function fieldAlreadyExists(ConcatResult, p1, p2): boolean --[[ Line: 48 ]]
+local function fieldAlreadyExists(ConcatResult, p1, p2): boolean
 	-- upvalues: Array (copy), Boolean (copy), ExtractTypeFunction (copy), Error1 (copy)
-	local FindResult = Array.find(ConcatResult, function(p3): boolean --[[ Line: 51 ]]
+	local FindResult = Array.find(ConcatResult, function(p3): boolean
 		-- upvalues: p1 (copy)
 		return p3.name.value == p1.name.value
 	end)
@@ -36,7 +36,7 @@ local function fieldAlreadyExists(ConcatResult, p1, p2): boolean --[[ Line: 48 ]
 end
 
 local FieldsModule = {
-	mergeFields = function(p1, List, p2, p3) --[[ Line: 83 ]]
+	mergeFields = function(p1, List, p2, p3)
 		-- upvalues: Array (copy), Boolean (copy), fieldAlreadyExists (copy), Callback (ref), IsNonNullTypeNodeFunction (copy), MergeArgumentsFunction (copy), MergeDirectivesFunction (copy), CompareNodes (copy)
 		local ConcatResult = {}
 		
@@ -49,7 +49,7 @@ local FieldsModule = {
 					table.insert(ConcatResult, value)
 					continue
 				end
-				local FindResult = Array.find(ConcatResult, function(p4): boolean --[[ Line: 115 ]]
+				local FindResult = Array.find(ConcatResult, function(p4): boolean
 					-- upvalues: value (copy)
 					return p4.name.value == value.name.value
 				end)
@@ -78,7 +78,7 @@ local FieldsModule = {
 		if p3 and p3.exclusions then
 			local Exclusions = p3.exclusions
 			
-			return Array.filter(ConcatResult, function(p4): boolean --[[ Line: 183 ]]
+			return Array.filter(ConcatResult, function(p4): boolean
 				-- upvalues: Boolean (upval), Array (upval), Exclusions (copy), p1 (copy)
 				return not Boolean.toJSBoolean(Array.includes(Exclusions, ("%s.%s"):format(tostring(p1.name.value), (tostring(p4.name.value)))))
 			end)
@@ -88,7 +88,7 @@ local FieldsModule = {
 	end
 }
 
-Callback = function(p4, FindResult, p5, p6) --[[ Line: 194 | Named "preventConflicts" ]]
+Callback = function(p4, FindResult, p5, p6)
 	-- upvalues: PrintTypeNodeFunction (copy), Boolean (copy), Callback1 (ref), Error1 (copy)
 	local P13 = p6 ~= nil and p6
 	local PrintTypeNodeResult = PrintTypeNodeFunction(FindResult.type)
@@ -99,7 +99,7 @@ Callback = function(p4, FindResult, p5, p6) --[[ Line: 194 | Named "preventConfl
 	end
 end
 
-Callback1 = function(Type, Type1, p4) --[[ Line: 223 | Named "safeChangeForFieldType" ]]
+Callback1 = function(Type, Type1, p4)
 	-- upvalues: Boolean (copy), IsWrappingTypeNodeFunction (copy), IsNonNullTypeNodeFunction (copy), Callback1 (ref), IsListTypeNodeFunction (copy)
 	local P16 = p4 ~= nil and p4
 	

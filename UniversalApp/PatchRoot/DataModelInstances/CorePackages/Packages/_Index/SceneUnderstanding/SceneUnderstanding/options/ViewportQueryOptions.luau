@@ -5,7 +5,7 @@
 }
 
 return {
-	new = function(List) --[[ Line: 44 ]]
+	new = function(List)
 		-- upvalues: config (copy)
 		local Copy = table.clone(config)
 		

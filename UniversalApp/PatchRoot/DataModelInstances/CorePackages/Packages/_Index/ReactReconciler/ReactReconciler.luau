@@ -3,7 +3,7 @@ local _ = require(script.ReactRootTags)
 local _ = require(script.ReactFiberHostConfig)
 local _ = require(script["ReactFiberHotReloading.new"])
 
-return function(List) --[[ Line: 39 | Named "initialize" ]]
+return function(List)
 	local ReactFiberHostConfigModule = require(script.ReactFiberHostConfig)
 	
 	for i, value in List do

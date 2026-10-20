@@ -1,5 +1,5 @@
 ﻿game:DefineFastInt("UGCValidationPartMaxMass", 10)
 
-return function() --[[ Line: 3 ]]
+return function()
 	return game:GetFastInt("UGCValidationPartMaxMass")
 end

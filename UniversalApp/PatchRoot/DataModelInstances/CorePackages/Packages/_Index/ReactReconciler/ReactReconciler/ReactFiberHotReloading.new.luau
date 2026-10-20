@@ -30,7 +30,7 @@ local Callback3 = nil
 local Callback2 = nil
 local Callback1 = nil
 
-local function scheduleRefresh(p1, p2) --[[ Line: 267 ]]
+local function scheduleRefresh(p1, p2)
 	-- upvalues: DEV (copy), Callback (ref), Callback1 (ref)
 	if DEV then
 		if Callback == nil then return end
@@ -39,14 +39,14 @@ local function scheduleRefresh(p1, p2) --[[ Line: 267 ]]
 		local ReactFiberWorkLoopNewModule = require(script.Parent["ReactFiberWorkLoop.new"])
 		local FlushSyncFunction: (any) -> () = ReactFiberWorkLoopNewModule.flushSync
 		ReactFiberWorkLoopNewModule.flushPassiveEffects()
-		FlushSyncFunction(function() --[[ Line: 279 ]]
+		FlushSyncFunction(function()
 			-- upvalues: Callback1 (upval), p1 (copy), UpdatedFamilies (copy), StaleFamilies (copy)
 			Callback1(p1.current, UpdatedFamilies, StaleFamilies)
 		end)
 	end
 end
 
-Callback1 = function(Child, UpdatedFamilies, StaleFamilies) --[[ Line: 316 | Named "scheduleFibersWithFamiliesRecursively" ]]
+Callback1 = function(Child, UpdatedFamilies, StaleFamilies)
 	-- upvalues: DEV (copy), FunctionComponent (copy), SimpleMemoComponent (copy), ClassComponent (copy), ForwardRef (copy), Callback (ref), Error1 (copy), NewResult (ref), SyncLane (copy), NoTimestamp (copy), Callback1 (ref)
 	if DEV then
 		local Alternate = Child.alternate
@@ -101,13 +101,13 @@ Callback1 = function(Child, UpdatedFamilies, StaleFamilies) --[[ Line: 316 | Nam
 end
 
 local ReactFiberHotReloadingModule = {
-	setRefreshHandler = function(Value) --[[ Line: 92 ]]
+	setRefreshHandler = function(Value)
 		-- upvalues: DEV (copy), Callback (ref)
 		if DEV then
 			Callback = Value
 		end
 	end,
-	resolveFunctionForHotReloading = function(p1) --[[ Line: 99 ]]
+	resolveFunctionForHotReloading = function(p1)
 		-- upvalues: DEV (copy), Callback (ref)
 		if not DEV then
 			return p1
@@ -119,7 +119,7 @@ local ReactFiberHotReloadingModule = {
 			return if CallbackResult == nil then p1 else CallbackResult.current
 		end
 	end,
-	resolveClassForHotReloading = function(p1) --[[ Line: 117 ]]
+	resolveClassForHotReloading = function(p1)
 		-- upvalues: DEV (copy), Callback (ref)
 		if not DEV then
 			return p1
@@ -131,7 +131,7 @@ local ReactFiberHotReloadingModule = {
 			return if CallbackResult == nil then p1 else CallbackResult.current
 		end
 	end,
-	resolveForwardRefForHotReloading = function(p1) --[[ Line: 123 ]]
+	resolveForwardRefForHotReloading = function(p1)
 		-- upvalues: DEV (copy), Callback (ref), REACTFORWARDREFTYPE (copy)
 		if not DEV then
 			return p1
@@ -173,7 +173,7 @@ local ReactFiberHotReloadingModule = {
 		end
 		return p1
 	end,
-	isCompatibleFamilyForHotReloading = function(p1, p2): boolean --[[ Line: 160 ]]
+	isCompatibleFamilyForHotReloading = function(p1, p2): boolean
 		-- upvalues: DEV (copy), Callback (ref), ClassComponent (copy), FunctionComponent (copy), REACTLAZYTYPE (copy), ForwardRef (copy), REACTFORWARDREFTYPE (copy), MemoComponent (copy), SimpleMemoComponent (copy), REACTMEMOTYPE (copy)
 		if not DEV then
 			return false
@@ -222,7 +222,7 @@ local ReactFiberHotReloadingModule = {
 		end
 		return false
 	end,
-	markFailedErrorBoundaryForHotReloading = function(p1) --[[ Line: 247 ]]
+	markFailedErrorBoundaryForHotReloading = function(p1)
 		-- upvalues: DEV (copy), Callback (ref), NewResult (ref), Set (copy)
 		if DEV then
 			if Callback == nil then return end
@@ -233,20 +233,20 @@ local ReactFiberHotReloadingModule = {
 		end
 	end,
 	scheduleRefresh = scheduleRefresh,
-	scheduleRoot = function(p1, p2) --[[ Line: 291 ]]
+	scheduleRoot = function(p1, p2)
 		-- upvalues: DEV (copy)
 		if DEV then
 			if p1.context ~= require(script.Parent["ReactFiberContext.new"]).emptyContextObject then return end
 			local ReactFiberWorkLoopNewModule = require(script.Parent["ReactFiberWorkLoop.new"])
 			local FlushSyncFunction: (any) -> () = ReactFiberWorkLoopNewModule.flushSync
 			ReactFiberWorkLoopNewModule.flushPassiveEffects()
-			FlushSyncFunction(function() --[[ Line: 306 ]]
+			FlushSyncFunction(function()
 				-- upvalues: p2 (copy), p1 (copy)
 				require(script.Parent["ReactFiberReconciler.new"]).updateContainer(p2, p1, nil, nil)
 			end)
 		end
 	end,
-	findHostInstancesForRefresh = function(p1, p2) --[[ Line: 383 ]]
+	findHostInstancesForRefresh = function(p1, p2)
 		-- upvalues: DEV (copy), Set (copy), Array (copy), Callback2 (ref), Error1 (copy)
 		if not DEV then
 			error(Error1.new("Did not expect findHostInstancesForRefresh to be called in production."))
@@ -254,7 +254,7 @@ local ReactFiberHotReloadingModule = {
 			return
 		end
 		local NewSet = Set.new()
-		Callback2(p1.current, Set.new(Array.map(p2, function(p3) --[[ Line: 389 ]]
+		Callback2(p1.current, Set.new(Array.map(p2, function(p3)
 			return p3.current
 		end)), NewSet)
 		
@@ -262,7 +262,7 @@ local ReactFiberHotReloadingModule = {
 	end
 }
 
-Callback2 = function(Child, NewResult, NewResult1) --[[ Line: 404 | Named "findHostInstancesForMatchingFibersRecursively" ]]
+Callback2 = function(Child, NewResult, NewResult1)
 	-- upvalues: DEV (copy), FunctionComponent (copy), SimpleMemoComponent (copy), ClassComponent (copy), ForwardRef (copy), Callback3 (ref), Callback2 (ref)
 	if DEV then
 		local Child1 = Child.child
@@ -282,7 +282,7 @@ Callback2 = function(Child, NewResult, NewResult1) --[[ Line: 404 | Named "findH
 	end
 end
 
-Callback3 = function(Child, p1) --[[ Line: 448 | Named "findHostInstancesForFiberShallowly" ]]
+Callback3 = function(Child, p1)
 	-- upvalues: DEV (copy), Callback4 (ref), HostComponent (copy), HostPortal (copy), HostRoot (copy), Error1 (copy)
 	if DEV then
 		if Callback4(Child, p1) then return end
@@ -306,7 +306,7 @@ Callback3 = function(Child, p1) --[[ Line: 448 | Named "findHostInstancesForFibe
 	end
 end
 
-Callback4 = function(Child, p2): boolean --[[ Line: 480 | Named "findChildHostInstancesForFiberShallowly" ]]
+Callback4 = function(Child, p2): boolean
 	-- upvalues: DEV (copy), HostComponent (copy)
 	repeat
 		if not DEV then break end

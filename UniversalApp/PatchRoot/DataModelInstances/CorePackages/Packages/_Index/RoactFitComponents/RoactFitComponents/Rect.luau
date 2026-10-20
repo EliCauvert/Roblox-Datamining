@@ -1,8 +1,8 @@
 ﻿return {
-	rectangle = function(Left, Bottom) --[[ Line: 2 ]]
+	rectangle = function(Left, Bottom)
 		return { top = Bottom, bottom = Bottom, left = Left, right = Left }
 	end,
-	square = function(Bottom) --[[ Line: 10 ]]
+	square = function(Bottom)
 		return {
 			top = Bottom,
 			bottom = Bottom,
@@ -10,7 +10,7 @@
 			right = Bottom
 		}
 	end,
-	quad = function(Top, Right, Bottom, Left) --[[ Line: 18 ]]
+	quad = function(Top, Right, Bottom, Left)
 		return { top = Top, bottom = Bottom, left = Left, right = Right }
 	end
 }

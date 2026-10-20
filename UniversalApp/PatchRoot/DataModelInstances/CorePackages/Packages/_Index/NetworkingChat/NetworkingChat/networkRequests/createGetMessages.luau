@@ -2,9 +2,9 @@
 local _ = require(Parent.networkingChatTypes)
 local CHATURLModule = require(Parent.CHAT_URL)
 
-return function(p1) --[[ Line: 6 ]]
+return function(p1)
 	-- upvalues: CHATURLModule (copy)
-	return p1.roduxNetworking.GET({ Name = "GetMessages" }, function(Callback, ConversationId, PageSize, ExclusiveStartMessageId) --[[ Line: 9 ]]
+	return p1.roduxNetworking.GET({ Name = "GetMessages" }, function(Callback, ConversationId, PageSize, ExclusiveStartMessageId)
 		-- upvalues: CHATURLModule (upval)
 		return Callback(CHATURLModule):path("v2"):path("get-messages"):queryArgs({
 			conversationId = ConversationId,

@@ -34,7 +34,7 @@ local ConstantsModule = require(Foundation.Constants)
 local CalculateNumberInputValueFromPositionsModule = require(script.Parent.calculateNumberInputValueFromPositions)
 local _ = require(Foundation.Enums.InputFocusBehavior)
 
-local function _(p1, p2): number --[[ Line: 61 | Named "round" ]]
+local function _(p1, p2): number
 	local v1 = 10 ^ (p2 or 0)
 	
 	return math.floor(p1 * v1 + 0.5) / v1
@@ -56,13 +56,13 @@ local config1 = {
 	variant = require(Foundation.Enums.InputVariant).Standard,
 	controlsVariant = if FlagsModule.FoundationNumberInputBeta then nil else NumberInputControlsVariantModule.Stacked,
 	size = InputSizeModule.Large,
-	formatAsString = function(p1): string --[[ Line: 140 ]]
+	formatAsString = function(p1): string
 		return (tostring(p1))
 	end,
 	scrubBehavior = ScrubBehaviorModule.Off
 }
 
-return ReactModule.memo(ReactModule.forwardRef(function(p1, Ref) --[[ Line: 161 | Named "NumberInput" ]]
+return ReactModule.memo(ReactModule.forwardRef(function(p1, Ref)
 	-- upvalues: WithDefaultsModule (copy), config1 (copy), UseTokensModule (copy), UseTextInputVariantsModule (copy), UseNumberInputVariantsModule (copy), FlagsModule (copy), ReactModule (copy), ReactUtilsModule (copy), ScrubBehaviorModule (copy), config (copy), MapBindableModule (copy), GetBindableValueModule (copy), InputSizeModule (copy), UseTextSizeModule (copy), UseIconSizeModule (copy), IsBuilderIconModule (copy), GetMultiLineTextHeightModule (copy), ConstantsModule (copy), OnChangeCallbackReasonModule (copy), NumberInputControlsVariantModule (copy), NumberInputControlsModule (copy), CalculateNumberInputValueFromPositionsModule (copy), ReactIsModule (copy), InputFieldModule (copy), WithCommonPropsModule (copy), GetInputTextSizeModule (copy), InternalTextInputModule (copy), JoinBindablesModule (copy), ViewModule (copy), IconModule (copy), TextModule (copy)
 	local WithDefaultsModuleResult = WithDefaultsModule(p1, config1)
 	local UseTokensModuleResult = UseTokensModule()
@@ -73,7 +73,7 @@ return ReactModule.memo(ReactModule.forwardRef(function(p1, Ref) --[[ Line: 161 
 	local UseComposedRefResult = ReactUtilsModule.useComposedRef(UseRefResult, WithDefaultsModuleResult.textBoxRef)
 	local UseRefResult1 = ReactModule.useRef(nil)
 	local UseRefResult2 = ReactModule.useRef(false)
-	local UseResult = ReactModule.useCallback(function() --[[ Line: 219 ]]
+	local UseResult = ReactModule.useCallback(function()
 		-- upvalues: UseRefResult (copy)
 		return if UseRefResult.current then UseRefResult.current.getIsFocused() else false
 	end, {})
@@ -83,20 +83,20 @@ return ReactModule.memo(ReactModule.forwardRef(function(p1, Ref) --[[ Line: 161 
 	local On = if WithDefaultsModuleResult.isScrubbable then ScrubBehaviorModule.On else WithDefaultsModuleResult.scrubBehavior
 	local IsNotOnMatch: boolean = On and On ~= ScrubBehaviorModule.Off
 	local Entry = if FlagsModule.FoundationNumberInputBeta then config[On] else nil
-	local UseResult1 = ReactModule.useCallback(function(Value: number): number --[[ Line: 231 ]]
+	local UseResult1 = ReactModule.useCallback(function(Value: number): number
 		-- upvalues: WithDefaultsModuleResult (copy)
 		return (math.clamp(Value, WithDefaultsModuleResult.minimum, WithDefaultsModuleResult.maximum))
 	end, {
 		WithDefaultsModuleResult.minimum,
 		WithDefaultsModuleResult.maximum
 	})
-	local UseResult2 = ReactModule.useCallback(function(p2, Callback) --[[ Line: 235 ]]
+	local UseResult2 = ReactModule.useCallback(function(p2, Callback)
 		-- upvalues: WithDefaultsModuleResult (copy)
 		return Callback(p2 / WithDefaultsModuleResult.step) * WithDefaultsModuleResult.step
 	end, { WithDefaultsModuleResult.step })
-	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 239 ]]
+	local UseMemoResult = ReactModule.useMemo(function()
 		-- upvalues: MapBindableModule (upval), WithDefaultsModuleResult (copy), UseResult2 (copy), UseResult1 (copy)
-		return MapBindableModule(WithDefaultsModuleResult.value, function(p2) --[[ Line: 240 ]]
+		return MapBindableModule(WithDefaultsModuleResult.value, function(p2)
 			-- upvalues: WithDefaultsModuleResult (upval), UseResult2 (upval), UseResult1 (upval)
 			local v1 = 10 ^ (WithDefaultsModuleResult.precision or 0)
 			local FlooredRatio = math.floor(p2 * v1 + 0.5) / v1
@@ -117,9 +117,9 @@ return ReactModule.memo(ReactModule.forwardRef(function(p1, Ref) --[[ Line: 161 
 		UseResult1,
 		UseResult2
 	})
-	local UseMemoResult1 = ReactModule.useMemo(function() --[[ Line: 251 ]]
+	local UseMemoResult1 = ReactModule.useMemo(function()
 		-- upvalues: MapBindableModule (upval), WithDefaultsModuleResult (copy), UseResult2 (copy), UseResult1 (copy)
-		return MapBindableModule(WithDefaultsModuleResult.value, function(p2) --[[ Line: 252 ]]
+		return MapBindableModule(WithDefaultsModuleResult.value, function(p2)
 			-- upvalues: WithDefaultsModuleResult (upval), UseResult2 (upval), UseResult1 (upval)
 			local v1 = 10 ^ (WithDefaultsModuleResult.precision or 0)
 			local FlooredRatio = math.floor(p2 * v1 + 0.5) / v1
@@ -140,9 +140,9 @@ return ReactModule.memo(ReactModule.forwardRef(function(p1, Ref) --[[ Line: 161 
 		UseResult1,
 		UseResult2
 	})
-	local UseMemoResult2 = ReactModule.useMemo(function() --[[ Line: 263 ]]
+	local UseMemoResult2 = ReactModule.useMemo(function()
 		-- upvalues: MapBindableModule (upval), WithDefaultsModuleResult (copy)
-		return MapBindableModule(WithDefaultsModuleResult.value, function(Maximum) --[[ Line: 264 ]]
+		return MapBindableModule(WithDefaultsModuleResult.value, function(Maximum)
 			-- upvalues: WithDefaultsModuleResult (upval)
 			return WithDefaultsModuleResult.isDisabled or Maximum == WithDefaultsModuleResult.maximum
 		end)
@@ -151,9 +151,9 @@ return ReactModule.memo(ReactModule.forwardRef(function(p1, Ref) --[[ Line: 161 
 		WithDefaultsModuleResult.value,
 		WithDefaultsModuleResult.maximum
 	})
-	local UseMemoResult3 = ReactModule.useMemo(function() --[[ Line: 269 ]]
+	local UseMemoResult3 = ReactModule.useMemo(function()
 		-- upvalues: MapBindableModule (upval), WithDefaultsModuleResult (copy)
-		return MapBindableModule(WithDefaultsModuleResult.value, function(Minimum) --[[ Line: 270 ]]
+		return MapBindableModule(WithDefaultsModuleResult.value, function(Minimum)
 			-- upvalues: WithDefaultsModuleResult (upval)
 			return WithDefaultsModuleResult.isDisabled or Minimum == WithDefaultsModuleResult.minimum
 		end)
@@ -162,7 +162,7 @@ return ReactModule.memo(ReactModule.forwardRef(function(p1, Ref) --[[ Line: 161 
 		WithDefaultsModuleResult.value,
 		WithDefaultsModuleResult.minimum
 	})
-	local UseResult3 = ReactModule.useCallback(function(Value: number): number --[[ Line: 275 ]]
+	local UseResult3 = ReactModule.useCallback(function(Value: number): number
 		-- upvalues: WithDefaultsModuleResult (copy)
 		local v1 = 10 ^ (WithDefaultsModuleResult.precision or 0)
 		
@@ -183,7 +183,7 @@ return ReactModule.memo(ReactModule.forwardRef(function(p1, Ref) --[[ Line: 161 
 		local FontStyle = UseTextInputVariantsModuleResult.textBox.fontStyle
 		local FontSize = FontStyle.FontSize
 		IsNotPrefixMatch = WithDefaultsModuleResult.prefix and WithDefaultsModuleResult.prefix ~= "" or WithDefaultsModuleResult.suffix and WithDefaultsModuleResult.suffix ~= ""
-		Vector = UseTextSizeModule(if WithDefaultsModuleResult.prefix then WithDefaultsModuleResult.prefix .. " " else nil, (ReactModule.useMemo(function() --[[ Line: 301 ]]
+		Vector = UseTextSizeModule(if WithDefaultsModuleResult.prefix then WithDefaultsModuleResult.prefix .. " " else nil, (ReactModule.useMemo(function()
 			-- upvalues: FontStyle (copy), FontSize (copy)
 			return {
 				Font = FontStyle.Font,
@@ -198,7 +198,7 @@ return ReactModule.memo(ReactModule.forwardRef(function(p1, Ref) --[[ Line: 161 
 		local Small = if WithDefaultsModuleResult.size == InputSizeModule.XSmall then UseTokensModuleResult.Gap.Small elseif WithDefaultsModuleResult.size == InputSizeModule.Small then UseTokensModuleResult.Gap.Medium else UseTokensModuleResult.Gap.Large
 		local Small1 = if WithDefaultsModuleResult.leadingIcon then Small else 0
 		local Small2 = if FlagsModule.FoundationNumberInputBeta and WithDefaultsModuleResult.trailingIcon then Small else 0
-		UseMemoResult5 = ReactModule.useMemo(function() --[[ Line: 324 ]]
+		UseMemoResult5 = ReactModule.useMemo(function()
 			-- upvalues: UseTextInputVariantsModuleResult (copy), Offset (copy), Small1 (copy), Offset1 (copy), Small2 (copy)
 			return {
 				left = UDim.new(0, UseTextInputVariantsModuleResult.container.horizontalPadding.Offset + Offset + Small1),
@@ -211,7 +211,7 @@ return ReactModule.memo(ReactModule.forwardRef(function(p1, Ref) --[[ Line: 161 
 			Offset,
 			Offset1
 		})
-		UseMemoResult4 = ReactModule.useMemo(function() --[[ Line: 348 ]]
+		UseMemoResult4 = ReactModule.useMemo(function()
 			-- upvalues: GetMultiLineTextHeightModule (upval), FontSize (copy), FontStyle (copy), UseTextInputVariantsModuleResult (copy)
 			local RoundedRatio = math.round((UseTextInputVariantsModuleResult.container.minHeight - 2 - GetMultiLineTextHeightModule(FontSize, 1, FontStyle.LineHeight)) * 2) / 2
 			
@@ -228,7 +228,7 @@ return ReactModule.memo(ReactModule.forwardRef(function(p1, Ref) --[[ Line: 161 
 		})
 	end
 	local Width = if WithDefaultsModuleResult.width then WithDefaultsModuleResult.width elseif FlagsModule.FoundationNumberInputBeta then UDim.new(0, ConstantsModule.DEFAULT_NUMBER_INPUT_WIDTH) else UDim.new(0, UseNumberInputVariantsModuleResult.container.width)
-	local UseResult4 = ReactModule.useCallback(function() --[[ Line: 375 ]]
+	local UseResult4 = ReactModule.useCallback(function()
 		-- upvalues: UseBindingResult2 (copy), GetBindableValueModule (upval), WithDefaultsModuleResult (copy)
 		UseBindingResult2((tostring(GetBindableValueModule(WithDefaultsModuleResult.value))))
 		
@@ -239,7 +239,7 @@ return ReactModule.memo(ReactModule.forwardRef(function(p1, Ref) --[[ Line: 161 
 		WithDefaultsModuleResult.onFocusGained,
 		WithDefaultsModuleResult.value
 	})
-	local UseResult5 = ReactModule.useCallback(function(p2, p3) --[[ Line: 383 ]]
+	local UseResult5 = ReactModule.useCallback(function(p2, p3)
 		-- upvalues: UseResult3 (copy), UseBindingResult2 (copy), UseResult (copy), WithDefaultsModuleResult (copy)
 		local UseResultResult = UseResult3(p2)
 		UseBindingResult2(if UseResult() then tostring(UseResultResult) else WithDefaultsModuleResult.formatAsString(UseResultResult))
@@ -250,7 +250,7 @@ return ReactModule.memo(ReactModule.forwardRef(function(p1, Ref) --[[ Line: 161 
 		UseResult3,
 		UseResult
 	})
-	local UseResult6 = ReactModule.useCallback(function(p2) --[[ Line: 389 ]]
+	local UseResult6 = ReactModule.useCallback(function(p2)
 		-- upvalues: UseStateResult2 (copy), UseResult5 (copy), GetBindableValueModule (upval), WithDefaultsModuleResult (copy), OnChangeCallbackReasonModule (upval)
 		UseStateResult2(false)
 		UseResult5(GetBindableValueModule(WithDefaultsModuleResult.value), OnChangeCallbackReasonModule.FocusLost)
@@ -264,7 +264,7 @@ return ReactModule.memo(ReactModule.forwardRef(function(p1, Ref) --[[ Line: 161 
 		WithDefaultsModuleResult.value,
 		UseResult3
 	})
-	local UseResult7 = ReactModule.useCallback(function(p2) --[[ Line: 398 ]]
+	local UseResult7 = ReactModule.useCallback(function(p2)
 		-- upvalues: UseBindingResult2 (copy), UseResult (copy), WithDefaultsModuleResult (copy), UseStateResult2 (copy), OnChangeCallbackReasonModule (upval)
 		UseBindingResult2(p2)
 		
@@ -287,7 +287,7 @@ return ReactModule.memo(ReactModule.forwardRef(function(p1, Ref) --[[ Line: 161 
 		WithDefaultsModuleResult.onChanged,
 		WithDefaultsModuleResult.onTextChanged
 	})
-	local UseResult8 = ReactModule.useCallback(function() --[[ Line: 418 ]]
+	local UseResult8 = ReactModule.useCallback(function()
 		-- upvalues: GetBindableValueModule (upval), UseMemoResult2 (copy), UseResult5 (copy), UseMemoResult (copy), OnChangeCallbackReasonModule (upval)
 		if not GetBindableValueModule(UseMemoResult2) then
 			UseResult5(GetBindableValueModule(UseMemoResult), OnChangeCallbackReasonModule.Activate)
@@ -295,7 +295,7 @@ return ReactModule.memo(ReactModule.forwardRef(function(p1, Ref) --[[ Line: 161 
 			return
 		end
 	end, { UseMemoResult2, UseMemoResult, UseResult5 })
-	local UseResult9 = ReactModule.useCallback(function() --[[ Line: 425 ]]
+	local UseResult9 = ReactModule.useCallback(function()
 		-- upvalues: GetBindableValueModule (upval), UseMemoResult3 (copy), UseResult5 (copy), UseMemoResult1 (copy), OnChangeCallbackReasonModule (upval)
 		if not GetBindableValueModule(UseMemoResult3) then
 			UseResult5(GetBindableValueModule(UseMemoResult1), OnChangeCallbackReasonModule.Activate)
@@ -319,7 +319,7 @@ return ReactModule.memo(ReactModule.forwardRef(function(p1, Ref) --[[ Line: 161 
 		decrement = { isDisabled = UseMemoResult3, onClick = UseResult9 },
 		testId = WithDefaultsModuleResult.testId
 	})
-	local UseMemoResult8 = ReactModule.useMemo(function(): UDim --[[ Line: 458 ]]
+	local UseMemoResult8 = ReactModule.useMemo(function(): UDim
 		-- upvalues: FlagsModule (upval), IsNotControlsVariantMatch (copy), Controls (copy), SmallDelta (copy), ControlsVariant (copy), NumberInputControlsVariantModule (upval), UseNumberInputVariantsModuleResult (copy), UseTokensModuleResult (copy)
 		if FlagsModule.FoundationNumberInputBeta then
 			if IsNotControlsVariantMatch then
@@ -337,7 +337,7 @@ return ReactModule.memo(ReactModule.forwardRef(function(p1, Ref) --[[ Line: 161 
 		if FlagsModule.FoundationNumberInputBeta then SmallDelta else nil,
 		if FlagsModule.FoundationNumberInputBeta then IsNotControlsVariantMatch else nil
 	})
-	local UseResult10 = ReactModule.useCallback(function(_, p2) --[[ Line: 480 ]]
+	local UseResult10 = ReactModule.useCallback(function(_, p2)
 		-- upvalues: WithDefaultsModuleResult (copy), UseRefResult2 (copy), UseRefResult1 (copy), GetBindableValueModule (upval)
 		local Value = WithDefaultsModuleResult.value
 		UseRefResult2.current = false
@@ -346,7 +346,7 @@ return ReactModule.memo(ReactModule.forwardRef(function(p1, Ref) --[[ Line: 161 
 			UseRefResult1.current = { position = p2.X, value = GetBindableValueModule(Value) }
 		end
 	end, { WithDefaultsModuleResult.value })
-	local UseResult11 = ReactModule.useCallback(function(_, p2) --[[ Line: 492 ]]
+	local UseResult11 = ReactModule.useCallback(function(_, p2)
 		-- upvalues: UseRefResult1 (copy), FlagsModule (upval), WithDefaultsModuleResult (copy), UseRefResult2 (copy), CalculateNumberInputValueFromPositionsModule (upval), Entry (copy), UseResult5 (copy), OnChangeCallbackReasonModule (upval)
 		if UseRefResult1.current then
 			if FlagsModule.FoundationNumberInputScrubCallbackProps and WithDefaultsModuleResult.onScrubStarted and not UseRefResult2.current then
@@ -362,7 +362,7 @@ return ReactModule.memo(ReactModule.forwardRef(function(p1, Ref) --[[ Line: 161 
 		if FlagsModule.FoundationNumberInputScrubCallbackProps then WithDefaultsModuleResult.onScrubStarted else nil,
 		if FlagsModule.FoundationNumberInputBeta then Entry else nil
 	})
-	local UseResult12 = ReactModule.useCallback(function() --[[ Line: 522 ]]
+	local UseResult12 = ReactModule.useCallback(function()
 		-- upvalues: UseRefResult1 (copy), FlagsModule (upval), WithDefaultsModuleResult (copy), UseRefResult2 (copy)
 		if UseRefResult1.current then
 			UseRefResult1.current = nil
@@ -394,7 +394,7 @@ return ReactModule.memo(ReactModule.forwardRef(function(p1, Ref) --[[ Line: 161 
 	local UseMemoResult7 = nil
 	
 	if FlagsModule.FoundationNumberInputScrubbingUsesOffset then
-		UseMemoResult6 = ReactModule.useMemo(function(): NumberSequence --[[ Line: 556 ]]
+		UseMemoResult6 = ReactModule.useMemo(function(): NumberSequence
 			-- upvalues: Transparency (ref), Transparency1 (ref)
 			return NumberSequence.new({
 				NumberSequenceKeypoint.new(0, Transparency),
@@ -403,9 +403,9 @@ return ReactModule.memo(ReactModule.forwardRef(function(p1, Ref) --[[ Line: 161 
 				NumberSequenceKeypoint.new(1, Transparency1)
 			})
 		end, { Transparency, Transparency1 })
-		UseMemoResult7 = ReactModule.useMemo(function() --[[ Line: 566 ]]
+		UseMemoResult7 = ReactModule.useMemo(function()
 			-- upvalues: MapBindableModule (upval), WithDefaultsModuleResult (copy), IsMagnitudeBelow (copy), UseResult1 (copy)
-			return MapBindableModule(WithDefaultsModuleResult.value, function(p2): Vector2 --[[ Line: 567 ]]
+			return MapBindableModule(WithDefaultsModuleResult.value, function(p2): Vector2
 				-- upvalues: IsMagnitudeBelow (upval), UseResult1 (upval), WithDefaultsModuleResult (upval)
 				local MinimumRatio = 0
 				
@@ -423,9 +423,9 @@ return ReactModule.memo(ReactModule.forwardRef(function(p1, Ref) --[[ Line: 161 
 			IsMagnitudeBelow
 		})
 	else
-		UseMemoResult6 = ReactModule.useMemo(function() --[[ Line: 599 ]]
+		UseMemoResult6 = ReactModule.useMemo(function()
 			-- upvalues: MapBindableModule (upval), WithDefaultsModuleResult (copy), UseResult1 (copy), Transparency1 (ref), Transparency (ref)
-			return MapBindableModule(WithDefaultsModuleResult.value, function(p2): NumberSequence --[[ Line: 600 ]]
+			return MapBindableModule(WithDefaultsModuleResult.value, function(p2): NumberSequence
 				-- upvalues: WithDefaultsModuleResult (upval), UseResult1 (upval), Transparency1 (upval), Transparency (upval)
 				local MinimumRatio = 0
 				
@@ -458,7 +458,7 @@ return ReactModule.memo(ReactModule.forwardRef(function(p1, Ref) --[[ Line: 161 
 			WithDefaultsModuleResult.maximum, WithDefaultsModuleResult.minimum
 		})
 	end
-	ReactModule.useEffect(function() --[[ Line: 647 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: UseResult (copy), ReactIsModule (upval), WithDefaultsModuleResult (copy), UseBindingResult2 (copy), UseResult3 (copy)
 		if not UseResult() and not ReactIsModule.isBinding(WithDefaultsModuleResult.value) then
 			UseBindingResult2(WithDefaultsModuleResult.formatAsString(UseResult3(WithDefaultsModuleResult.value)))
@@ -480,7 +480,7 @@ return ReactModule.memo(ReactModule.forwardRef(function(p1, Ref) --[[ Line: 161 
 		isDisabled = WithDefaultsModuleResult.isDisabled,
 		hint = WithDefaultsModuleResult.hint,
 		textBoxRef = UseComposedRefResult,
-		input = function(Ref) --[[ Line: 666 ]]
+		input = function(Ref)
 			-- upvalues: FlagsModule (upval), IsNotControlsVariantMatch (copy), Element (copy), ControlsVariant (copy), NumberInputControlsVariantModule (upval), ReactModule (upval), InternalTextInputModule (upval), WithDefaultsModuleResult (copy), JoinBindablesModule (upval), UseBindingResult (copy), UseResult (copy), UseResult3 (copy), HasError (copy), UseTextInputVariantsModuleResult (copy), Vector (ref), p1 (copy), UseResult7 (copy), UseResult6 (copy), UseResult4 (copy), IsNotOnMatch (copy), UseResult10 (copy), UseResult11 (copy), UseResult12 (copy), IsMagnitudeBelow (copy), v1 (ref), UseMemoResult6 (ref), UseMemoResult7 (ref), UseTokensModuleResult (copy), ViewModule (upval), IconModule (upval), IsNotPrefixMatch (ref), TextModule (upval), UseMemoResult5 (ref), UseMemoResult4 (ref), Width (copy), UseMemoResult8 (copy), SmallDelta (copy)
 			local Element1 = if FlagsModule.FoundationNumberInputBeta then IsNotControlsVariantMatch and Element else ControlsVariant == NumberInputControlsVariantModule.Split
 			local Element2 = ReactModule.createElement(InternalTextInputModule, {
@@ -488,7 +488,7 @@ return ReactModule.memo(ReactModule.forwardRef(function(p1, Ref) --[[ Line: 161 
 				text = JoinBindablesModule({
 					text = UseBindingResult,
 					value = WithDefaultsModuleResult.value
-				}, function(p2) --[[ Line: 676 ]]
+				}, function(p2)
 					-- upvalues: UseResult (upval), WithDefaultsModuleResult (upval), UseResult3 (upval)
 					return if UseResult() then p2.text else WithDefaultsModuleResult.formatAsString(UseResult3(p2.value))
 				end),
@@ -544,7 +544,7 @@ return ReactModule.memo(ReactModule.forwardRef(function(p1, Ref) --[[ Line: 161 
 				fontStyle = UseTextInputVariantsModuleResult.textBox.fontStyle,
 				Size = UDim2.new(1, -(UseMemoResult5.left.Offset + UseMemoResult5.right.Offset), 1, 0),
 				Position = UDim2.fromOffset(UseMemoResult5.left.Offset, 0),
-				Text = UseBindingResult:map(function(p2): string --[[ Line: 762 ]]
+				Text = UseBindingResult:map(function(p2): string
 					-- upvalues: WithDefaultsModuleResult (upval)
 					return `{if WithDefaultsModuleResult.prefix then WithDefaultsModuleResult.prefix .. " " else ""}<font transparency="1">{p2}</font>{if WithDefaultsModuleResult.suffix then " " .. WithDefaultsModuleResult.suffix else ""}`
 				end),

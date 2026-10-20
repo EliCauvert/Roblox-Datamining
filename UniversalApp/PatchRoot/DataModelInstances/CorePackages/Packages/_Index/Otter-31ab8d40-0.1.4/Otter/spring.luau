@@ -5,7 +5,7 @@ local SinFunction = math.sin
 local CosFunction = math.cos
 local SqrtFunction = math.sqrt
 
-local function step(p1, p2, p3) --[[ Line: 20 ]]
+local function step(p1, p2, p3)
 	-- upvalues: ExpFunction (copy), SqrtFunction (copy), CosFunction (copy), SinFunction (copy), AbsFunction (copy)
 	local DampingRatio: number = p1.__dampingRatio
 	local ScaledFrequency = p1.__frequency * 2 * 3.141592653589793
@@ -66,7 +66,7 @@ local function step(p1, p2, p3) --[[ Line: 20 ]]
 	}
 end
 
-return function(p1, p2) --[[ Line: 117 | Named "spring" ]]
+return function(p1, p2)
 	-- upvalues: AssignModule (copy), step (copy)
 	assert(typeof(p1) == "number")
 	local config = {

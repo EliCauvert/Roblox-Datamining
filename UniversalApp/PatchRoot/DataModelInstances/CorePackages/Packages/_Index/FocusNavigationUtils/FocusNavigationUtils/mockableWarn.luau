@@ -1,16 +1,16 @@
 ﻿local Callback = warn
 
 return (setmetatable({
-	mock = function(p1) --[[ Line: 4 ]]
+	mock = function(p1)
 		-- upvalues: Callback (ref)
 		Callback = p1
 	end,
-	unmock = function() --[[ Line: 7 ]]
+	unmock = function()
 		-- upvalues: Callback (ref)
 		Callback = warn
 	end
 }, {
-	__call = function(_, ...) --[[ Line: 11 ]]
+	__call = function(_, ...)
 		-- upvalues: Callback (ref)
 		Callback(...)
 	end

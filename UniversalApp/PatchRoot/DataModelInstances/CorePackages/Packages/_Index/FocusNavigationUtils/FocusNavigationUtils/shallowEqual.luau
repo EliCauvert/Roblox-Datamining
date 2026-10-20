@@ -1,4 +1,4 @@
-﻿return function(List, List1): boolean --[[ Line: 4 | Named "shallowEqual" ]]
+﻿return function(List, List1): boolean
 	for i, value in List do
 		if List1[i] ~= value then
 			return false

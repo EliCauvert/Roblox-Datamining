@@ -5,11 +5,11 @@ local _ = require(Foundation.Components.Types)
 
 return (require(Foundation.Parent.React).createContext({
 	refCache = {},
-	setMountedCursors = function(_) --[[ Line: 12 ]]
+	setMountedCursors = function(_)
 		-- upvalues: LoggerModule (copy)
 		LoggerModule:warning("No Cursor Provider found")
 	end,
-	getCursor = function(_) --[[ Line: 15 ]]
+	getCursor = function(_)
 		-- upvalues: LoggerModule (copy)
 		LoggerModule:warning("No Cursor Provider found")
 	end

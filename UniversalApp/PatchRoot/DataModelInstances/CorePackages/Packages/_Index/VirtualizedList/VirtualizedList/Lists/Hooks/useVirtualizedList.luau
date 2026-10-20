@@ -1,6 +1,6 @@
 ﻿local ReactModule = require(script.Parent.Parent.Parent.Parent.React)
 
-local function calculateBounds(VirtualizedItems, p1: number, Current: number): Vector3 --[[ Line: 17 ]]
+local function calculateBounds(VirtualizedItems, p1: number, Current: number): Vector3
 	local Largest = math.max(Current, 0)
 	local NewHeight = 0
 	local X = 0
@@ -20,15 +20,15 @@ local function calculateBounds(VirtualizedItems, p1: number, Current: number): V
 	return (Vector3.new(X, Y))
 end
 
-return function(p2) --[[ Line: 56 | Named "useVirtualizedList" ]]
+return function(p2)
 	-- upvalues: ReactModule (copy), calculateBounds (copy)
 	local UseStateResult, UseStateResult2 = ReactModule.useState(0)
-	local UseStateResult1, UseStateResult2_1 = ReactModule.useState(function() --[[ Line: 58 ]]
+	local UseStateResult1, UseStateResult2_1 = ReactModule.useState(function()
 		-- upvalues: calculateBounds (upval), p2 (copy), UseStateResult (copy)
 		return (calculateBounds(p2.virtualizedItems, UseStateResult, 0))
 	end)
 	local UseRefResult = ReactModule.useRef(0)
-	local UseResult = ReactModule.useCallback(function(Current) --[[ Line: 63 ]]
+	local UseResult = ReactModule.useCallback(function(Current)
 		-- upvalues: UseRefResult (copy), UseStateResult2_1 (copy), calculateBounds (upval), p2 (copy), UseStateResult (copy)
 		if UseRefResult.current ~= Current then
 			UseRefResult.current = Current
@@ -37,29 +37,29 @@ return function(p2) --[[ Line: 56 | Named "useVirtualizedList" ]]
 			return
 		end
 	end, { UseStateResult, p2.virtualizedItems })
-	ReactModule.useEffect(function() --[[ Line: 72 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: p2 (copy), UseStateResult2 (copy), UseResult (copy)
 		local Current = p2.scrollingFrameRef.current
 		
 		if Current == nil then return end
 		UseStateResult2(Current.AbsoluteWindowSize.Y)
 		UseResult(Current.CanvasPosition.Y)
-		local Connection = Current:GetPropertyChangedSignal("AbsoluteWindowSize"):Connect(function() --[[ Line: 85 ]]
+		local Connection = Current:GetPropertyChangedSignal("AbsoluteWindowSize"):Connect(function()
 			-- upvalues: UseStateResult2 (upval), Current (copy)
 			UseStateResult2(Current.AbsoluteWindowSize.Y)
 		end)
-		local Connection1 = Current:GetPropertyChangedSignal("CanvasPosition"):Connect(function() --[[ Line: 91 ]]
+		local Connection1 = Current:GetPropertyChangedSignal("CanvasPosition"):Connect(function()
 			-- upvalues: UseResult (upval), Current (copy)
 			UseResult(Current.CanvasPosition.Y)
 		end)
 		
-		return function() --[[ Line: 95 ]]
+		return function()
 			-- upvalues: Connection (copy), Connection1 (copy)
 			Connection:Disconnect()
 			Connection1:Disconnect()
 		end
 	end, { UseResult })
-	local UseMemoResult = ReactModule.useMemo(function(): number --[[ Line: 102 ]]
+	local UseMemoResult = ReactModule.useMemo(function(): number
 		-- upvalues: p2 (copy)
 		local NewHeight = 0
 		
@@ -68,7 +68,7 @@ return function(p2) --[[ Line: 56 | Named "useVirtualizedList" ]]
 		end
 		return NewHeight
 	end, { p2.virtualizedItems })
-	ReactModule.useEffect(function() --[[ Line: 113 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: p2 (copy), UseMemoResult (copy)
 		local Current = p2.scrollingFrameRef.current
 		
@@ -76,11 +76,11 @@ return function(p2) --[[ Line: 56 | Named "useVirtualizedList" ]]
 			Current.CanvasSize = UDim2.new(1, 0, 0, UseMemoResult)
 		end
 	end, { UseMemoResult })
-	ReactModule.useLayoutEffect(function() --[[ Line: 120 ]]
+	ReactModule.useLayoutEffect(function()
 		-- upvalues: UseStateResult2_1 (copy), calculateBounds (upval), p2 (copy), UseStateResult (copy), UseRefResult (copy)
 		UseStateResult2_1((calculateBounds(p2.virtualizedItems, UseStateResult, UseRefResult.current)))
 	end, { UseStateResult, p2.virtualizedItems })
-	local UseResult1 = ReactModule.useCallback(function(Key) --[[ Line: 124 ]]
+	local UseResult1 = ReactModule.useCallback(function(Key)
 		-- upvalues: p2 (copy)
 		local Current = p2.scrollingFrameRef.current
 		assert(Current ~= nil, "VirtualizedList has not been mounted yet")

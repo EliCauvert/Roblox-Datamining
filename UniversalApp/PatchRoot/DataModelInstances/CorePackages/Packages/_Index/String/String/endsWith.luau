@@ -1,4 +1,4 @@
-﻿return function(Text: string, Text1, p1): boolean --[[ Line: 16 | Named "endsWith" ]]
+﻿return function(Text: string, Text1, p1): boolean
 	local Length: number = Text1:len()
 	
 	if Length == 0 then

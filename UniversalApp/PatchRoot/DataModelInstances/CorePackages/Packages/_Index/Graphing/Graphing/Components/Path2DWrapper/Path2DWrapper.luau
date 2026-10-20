@@ -3,7 +3,7 @@ local ReactModule = require(Parent.React)
 local SignalsModule = require(Parent.Signals)
 local MaxControlPoints = nil
 
-local function _() --[[ Line: 42 | Named "getMaxPointsPerPath" ]]
+local function _()
 	-- upvalues: MaxControlPoints (ref)
 	if not MaxControlPoints then
 		local Path2D = Instance.new("Path2D")
@@ -15,7 +15,7 @@ local function _() --[[ Line: 42 | Named "getMaxPointsPerPath" ]]
 	return MaxControlPoints
 end
 
-function Path2DWrapper(p1) --[[ Line: 53 ]]
+function Path2DWrapper(p1)
 	-- upvalues: ReactModule (copy), MaxControlPoints (ref), SignalsModule (copy)
 	local UseRefResult = ReactModule.useRef(nil)
 	
@@ -28,7 +28,7 @@ function Path2DWrapper(p1) --[[ Line: 53 ]]
 	local MaxControlPoints1: number = MaxControlPoints
 	local PointCount = p1.PointCount or (p1.ControlPoints and #p1.ControlPoints or 0)
 	
-	local function applyControlPoints(ControlPoints) --[[ Line: 59 ]]
+	local function applyControlPoints(ControlPoints)
 		-- upvalues: UseRefResult (copy), MaxControlPoints1 (copy)
 		local Current = UseRefResult.current
 		
@@ -48,12 +48,12 @@ function Path2DWrapper(p1) --[[ Line: 53 ]]
 		end
 	end
 	
-	ReactModule.useLayoutEffect(function() --[[ Line: 84 ]]
+	ReactModule.useLayoutEffect(function()
 		-- upvalues: p1 (copy), SignalsModule (upval), applyControlPoints (copy)
 		if p1.ObserveControlPoints then
 			local ObserveControlPointsFunction = p1.ObserveControlPoints
 			
-			return SignalsModule.createEffect(function(p2) --[[ Line: 87 ]]
+			return SignalsModule.createEffect(function(p2)
 				-- upvalues: applyControlPoints (upval), ObserveControlPointsFunction (copy)
 				applyControlPoints(ObserveControlPointsFunction(p2))
 			end)
@@ -61,7 +61,7 @@ function Path2DWrapper(p1) --[[ Line: 53 ]]
 		if p1.ControlPoints then
 			applyControlPoints(p1.ControlPoints)
 		end
-		return function() --[[ Line: 93 ]] end
+		return function() end
 	end, { p1.ObserveControlPoints, p1.ControlPoints })
 	local Tag = p1.Tag or ""
 	local NoClipContents = p1.ClipContents == nil or p1.ClipContents

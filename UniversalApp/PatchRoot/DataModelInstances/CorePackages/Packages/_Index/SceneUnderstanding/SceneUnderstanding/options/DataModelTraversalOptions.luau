@@ -1,7 +1,7 @@
 ﻿local config = { instanceProcessingLimit = 1000 }
 
 return {
-	new = function(List) --[[ Line: 24 ]]
+	new = function(List)
 		-- upvalues: config (copy)
 		local Copy = table.clone(config)
 		

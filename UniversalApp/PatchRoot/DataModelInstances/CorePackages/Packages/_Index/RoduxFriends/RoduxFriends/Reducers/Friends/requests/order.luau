@@ -1,10 +1,10 @@
 ﻿local RoduxModule = require(script:FindFirstAncestor("RoduxFriends").Parent.Rodux)
 local t = {}
 
-return function(p1) --[[ Line: 9 ]]
+return function(p1)
 	-- upvalues: RoduxModule (copy), t (copy)
 	return RoduxModule.createReducer(t, {
-		[p1.friendsNetworking.GetFriendRequests.Succeeded.name] = function(p2, p3) --[[ Line: 13 ]]
+		[p1.friendsNetworking.GetFriendRequests.Succeeded.name] = function(p2, p3)
 			local P1 = p2 or {}
 			local Count = P1.count or 0
 			local RequestsById = P1.requestsById or {}

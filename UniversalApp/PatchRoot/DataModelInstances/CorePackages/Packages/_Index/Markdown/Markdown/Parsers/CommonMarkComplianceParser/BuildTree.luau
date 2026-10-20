@@ -10,7 +10,7 @@ local IsNodeBlockModule = require(script.Parent.Parent.isNodeBlock)
 local InsertFunction = table.insert
 local t = {}
 
-local function createTextNode(TextNode, p1) --[[ Line: 23 ]]
+local function createTextNode(TextNode, p1)
 	-- upvalues: GetNodeTypeModule (copy)
 	return {
 		name = "TEXT",
@@ -21,7 +21,7 @@ local function createTextNode(TextNode, p1) --[[ Line: 23 ]]
 	}
 end
 
-function t.buildTree(p1, p2) --[[ Line: 34 ]]
+function t.buildTree(p1, p2)
 	-- upvalues: NodeTypeModule (copy), GetNodeTypeModule (copy), InsertFunction (copy), t (copy), STYLEDTEXT (copy), createTextNode (copy), LISTS (copy), IsNodeBlockModule (copy), DIVIDERS (copy)
 	local config = {
 		name = "ROOT",
@@ -53,13 +53,13 @@ function t.buildTree(p1, p2) --[[ Line: 34 ]]
 				type = GetNodeTypeModule("STYLED_TEXT", p2)
 			})
 		elseif TextNode.name == "EMPHASIS_END" then
-			t.closeNode(list, function(p3): boolean --[[ Line: 76 ]]
+			t.closeNode(list, function(p3): boolean
 				return p3.name == "STYLED_TEXT"
 			end)
 		elseif STYLEDTEXT[TextNode.name] then
 			InsertFunction(Entry.children, (createTextNode(TextNode, p2)))
 		elseif LISTS[TextNode.name] and TextNode.capture then
-			t.closeNode(list, function(p3) --[[ Line: 85 ]]
+			t.closeNode(list, function(p3)
 				-- upvalues: IsNodeBlockModule (upval)
 				return IsNodeBlockModule(p3)
 			end)
@@ -74,13 +74,13 @@ function t.buildTree(p1, p2) --[[ Line: 34 ]]
 				type = GetNodeTypeModule("LIST_ITEM", p2)
 			})
 		elseif TextNode.name == "HEADING" and not TextNode.isBlock then
-			if not t.closeNode(list, function(p3): boolean --[[ Line: 101 ]]
+			if not t.closeNode(list, function(p3): boolean
 				return p3.name == "HEADING"
 			end) then
 				InsertFunction(Entry.children, (createTextNode(TextNode, p2)))
 			end
 		elseif TextNode.isBlock then
-			t.closeNode(list, function(p3) --[[ Line: 110 ]]
+			t.closeNode(list, function(p3)
 				-- upvalues: IsNodeBlockModule (upval)
 				return IsNodeBlockModule(p3)
 			end)
@@ -116,7 +116,7 @@ function t.buildTree(p1, p2) --[[ Line: 34 ]]
 				type = GetNodeTypeModule("LINK", p2)
 			})
 		elseif TextNode.name == "LINK_END" then
-			t.closeNode(list, function(p3): boolean --[[ Line: 153 ]]
+			t.closeNode(list, function(p3): boolean
 				return p3.name == "LINK"
 			end)
 		elseif TextNode.name == "IMAGE" and TextNode.capture then
@@ -172,7 +172,7 @@ function t.buildTree(p1, p2) --[[ Line: 34 ]]
 			end
 		elseif TextNode.name == "CLOSE" and TextNode.capture then
 			local CaptureEntry = TextNode.capture[1]
-			assert(t.closeNode(list, function(TextNode1): boolean --[[ Line: 213 ]]
+			assert(t.closeNode(list, function(TextNode1): boolean
 				-- upvalues: CaptureEntry (copy), TextNode (copy)
 				if TextNode1.name == "TAG" then
 					assert(TextNode1.text == CaptureEntry, `Found <{TextNode1.text}> at {TextNode1.offset} when trying to close </{CaptureEntry}> at {TextNode.offset}`)
@@ -217,7 +217,7 @@ function t.buildTree(p1, p2) --[[ Line: 34 ]]
 						offset = TextNode.offset,
 						type = GetNodeTypeModule(TextNode.name, p2)
 					})
-					t.closeNode(list, function(p3): boolean --[[ Line: 264 ]]
+					t.closeNode(list, function(p3): boolean
 						return p3.name == "HEADING"
 					end)
 					InsertFunction(list, {
@@ -247,18 +247,18 @@ function t.buildTree(p1, p2) --[[ Line: 34 ]]
 		end
 		Count += 1
 	end
-	t.closeNode(list, function(p3) --[[ Line: 294 ]]
+	t.closeNode(list, function(p3)
 		-- upvalues: IsNodeBlockModule (upval)
 		return IsNodeBlockModule(p3)
 	end)
-	t.closeNode(list, function(p3): boolean --[[ Line: 298 ]]
+	t.closeNode(list, function(p3): boolean
 		return p3.name == "ROOT"
 	end)
 	
 	return config
 end
 
-function t.closeNode(List, p3) --[[ Line: 305 ]]
+function t.closeNode(List, p3)
 	-- upvalues: t (copy), InsertFunction (copy)
 	local LastNodeIndex: number = t.findLastNodeIndex(List, p3)
 	
@@ -282,7 +282,7 @@ function t.closeNode(List, p3) --[[ Line: 305 ]]
 	return Entry
 end
 
-function t.findLastNodeIndex(p4, Callback): number? --[[ Line: 332 ]]
+function t.findLastNodeIndex(p4, Callback): number?
 	for i = #p4, 1, -1 do
 		local v1 = p4[i]
 		
@@ -293,7 +293,7 @@ function t.findLastNodeIndex(p4, Callback): number? --[[ Line: 332 ]]
 	return nil
 end
 
-function t.parseXmlAttributes(CaptureEntry: string) --[[ Line: 344 ]]
+function t.parseXmlAttributes(CaptureEntry: string)
 	local t = {}
 	
 	for i, value in CaptureEntry:gmatch("%s*([A-Za-z0-9_-]+)=\"([^\"]+)\"%s*") do

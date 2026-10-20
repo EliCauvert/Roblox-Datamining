@@ -1,6 +1,6 @@
 ﻿local _ = require(script.Parent.Parent.Parent.ES7Types)
 
-return function(List, Value: number, p1, ...) --[[ Line: 24 ]]
+return function(List, Value: number, p1, ...)
 	if #List < Value then
 		for i = 1, select("#", ...) do
 			table.insert(List, (select(i, ...)))

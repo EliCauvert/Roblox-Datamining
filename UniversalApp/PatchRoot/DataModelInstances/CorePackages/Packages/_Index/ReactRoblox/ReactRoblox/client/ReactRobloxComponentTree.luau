@@ -17,28 +17,28 @@ local Text = "__reactFiber$" .. Segment
 local Text1 = "__reactContainer$" .. Segment
 
 return {
-	precacheFiberNode = function(p1, Key) --[[ Line: 66 ]]
+	precacheFiberNode = function(p1, Key)
 		-- upvalues: t1 (copy)
 		t1[Key] = p1
 	end,
-	uncacheFiberNode = function(Key) --[[ Line: 73 ]]
+	uncacheFiberNode = function(Key)
 		-- upvalues: t1 (copy), t2 (copy)
 		t1[Key] = nil
 		t2[Key] = nil
 	end,
-	markContainerAsRoot = function(p1, Key) --[[ Line: 80 ]]
+	markContainerAsRoot = function(p1, Key)
 		-- upvalues: t (copy)
 		t[Key] = p1
 	end,
-	unmarkContainerAsRoot = function(Key) --[[ Line: 86 ]]
+	unmarkContainerAsRoot = function(Key)
 		-- upvalues: t (copy)
 		t[Key] = nil
 	end,
-	isContainerMarkedAsRoot = function(p1): boolean --[[ Line: 92 ]]
+	isContainerMarkedAsRoot = function(p1): boolean
 		-- upvalues: t (copy)
 		return not not t[p1]
 	end,
-	getClosestInstanceFromNode = function(Parent) --[[ Line: 106 ]]
+	getClosestInstanceFromNode = function(Parent)
 		-- upvalues: t1 (copy), GetParentSuspenseInstance (ref)
 		local Entry = t1[Parent]
 		
@@ -76,7 +76,7 @@ return {
 		end
 		return nil
 	end,
-	getInstanceFromNode = function(p1) --[[ Line: 190 ]]
+	getInstanceFromNode = function(p1)
 		-- upvalues: ReactWorkTags (ref), HostComponent (ref), SharedModule (copy), HostComponent1 (ref), HostComponent2 (ref), HostComponent3 (ref), t1 (copy), t (copy), Text (copy), Text1 (copy)
 		if ReactWorkTags == nil then
 			ReactWorkTags = require(script.Parent.Parent["ReactReconciler.roblox"]).ReactWorkTags
@@ -96,7 +96,7 @@ return {
 		
 		return if Entry and (Entry.tag == HostComponent or Entry.tag == HostComponent1 or Entry.tag == HostComponent3 or Entry.tag == HostComponent2) then Entry else nil
 	end,
-	getNodeFromInstance = function(p1) --[[ Line: 237 ]]
+	getNodeFromInstance = function(p1)
 		-- upvalues: HostComponent (ref), HostComponent1 (ref), InvariantFunction (copy)
 		if p1.tag == HostComponent or p1.tag == HostComponent1 then
 			return p1.stateNode
@@ -105,11 +105,11 @@ return {
 			error("getNodeFromInstance: Invalid argument.")
 		end
 	end,
-	getFiberCurrentPropsFromNode = function(p1) --[[ Line: 251 ]]
+	getFiberCurrentPropsFromNode = function(p1)
 		-- upvalues: t2 (copy)
 		return t2[p1]
 	end,
-	updateFiberProps = function(Key, p1) --[[ Line: 257 ]]
+	updateFiberProps = function(Key, p1)
 		-- upvalues: t2 (copy)
 		t2[Key] = p1
 	end

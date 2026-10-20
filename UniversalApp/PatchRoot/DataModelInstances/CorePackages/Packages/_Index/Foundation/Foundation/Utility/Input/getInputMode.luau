@@ -19,7 +19,7 @@ local config = {
 	[Enum.UserInputType.Touch] = InputModeModule.Touch
 }
 
-return function(p1) --[[ Line: 28 | Named "getInputMode" ]]
+return function(p1)
 	-- upvalues: config (copy)
 	return config[p1]
 end

@@ -16,13 +16,13 @@ local config = {
 	lineWidth = ConstantsModule.TILE_SIZE
 }
 
-return function(p1) --[[ Line: 48 ]]
+return function(p1)
 	-- upvalues: Llama (copy), config (copy), Style (copy), Roact (copy), IconSize (copy), ImageSetLabel (copy), Images (copy), StyledTextLabel (copy), FoundationFontFaceMigration (copy), GetTextHeightModule (copy)
 	local JoinResult = Llama.Dictionary.join(config, p1)
 	local Icon = JoinResult.icon
 	local Label = JoinResult.label
 	
-	return Style.withStyle(function(p2) --[[ Line: 53 ]]
+	return Style.withStyle(function(p2)
 		-- upvalues: Label (copy), Roact (upval), JoinResult (copy), Icon (copy), IconSize (upval), ImageSetLabel (upval), Images (upval), StyledTextLabel (upval), FoundationFontFaceMigration (upval), GetTextHeightModule (upval)
 		local Theme = p2.Theme
 		local _Font = p2.Font

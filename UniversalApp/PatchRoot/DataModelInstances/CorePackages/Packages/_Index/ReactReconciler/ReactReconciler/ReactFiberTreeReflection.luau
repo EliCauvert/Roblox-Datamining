@@ -22,7 +22,7 @@ local Hydrating = ReactFiberFlagsModule.Hydrating
 local EnableFundamentalAPI = require(Parent.Shared).ReactFeatureFlags.enableFundamentalAPI
 local ReactCurrentOwner = require(Parent.Shared).ReactSharedInternals.ReactCurrentOwner
 
-local function getNearestMountedFiber(Return) --[[ Line: 50 ]]
+local function getNearestMountedFiber(Return)
 	-- upvalues: Placement (copy), Hydrating (copy), NoFlags (copy), HostRoot (copy)
 	local Return1 = Return
 	local Return2 = Return
@@ -44,12 +44,12 @@ local function getNearestMountedFiber(Return) --[[ Line: 50 ]]
 	return if Return1.tag == HostRoot then Return2 else nil
 end
 
-local function _(Return) --[[ Line: 140 | Named "assertIsMounted" ]]
+local function _(Return)
 	-- upvalues: InvariantFunction (copy), getNearestMountedFiber (copy)
 	InvariantFunction(getNearestMountedFiber(Return) == Return, "Unable to find node on an unmounted component.")
 end
 
-local function findCurrentFiberUsingSlowPath(Return) --[[ Line: 147 ]]
+local function findCurrentFiberUsingSlowPath(Return)
 	-- upvalues: getNearestMountedFiber (copy), InvariantFunction (copy), HostRoot (copy)
 	local Alternate = Return.alternate
 	
@@ -146,7 +146,7 @@ end
 
 return {
 	getNearestMountedFiber = getNearestMountedFiber,
-	getSuspenseInstanceFromFiber = function(p1) --[[ Line: 84 ]]
+	getSuspenseInstanceFromFiber = function(p1)
 		-- upvalues: SuspenseComponent (copy)
 		if p1.tag == SuspenseComponent then
 			local MemoizedState = p1.memoizedState
@@ -164,15 +164,15 @@ return {
 		end
 		return nil
 	end,
-	getContainerFromFiber = function(p1) --[[ Line: 100 ]]
+	getContainerFromFiber = function(p1)
 		-- upvalues: HostRoot (copy)
 		return if p1.tag == HostRoot then p1.stateNode.containerInfo else nil
 	end,
-	isFiberMounted = function(Return): boolean --[[ Line: 104 ]]
+	isFiberMounted = function(Return): boolean
 		-- upvalues: getNearestMountedFiber (copy)
 		return getNearestMountedFiber(Return) == Return
 	end,
-	isMounted = function(p1): boolean --[[ Line: 110 ]]
+	isMounted = function(p1): boolean
 		-- upvalues: ReactGlobalsModule (copy), ReactCurrentOwner (copy), ClassComponent (copy), Console (copy), GetComponentNameFunction (copy), GetFunction (copy), getNearestMountedFiber (copy)
 		if ReactGlobalsModule.__DEV__ then
 			local Current = ReactCurrentOwner.current
@@ -191,7 +191,7 @@ return {
 		return if GetResult then getNearestMountedFiber(GetResult) == GetResult else false
 	end,
 	findCurrentFiberUsingSlowPath = findCurrentFiberUsingSlowPath,
-	findCurrentHostFiber = function(p1) --[[ Line: 282 ]]
+	findCurrentHostFiber = function(p1)
 		-- upvalues: findCurrentFiberUsingSlowPath (copy), HostComponent (copy), HostText (copy)
 		local CurrentFiberUsingSlowPath = findCurrentFiberUsingSlowPath(p1)
 		
@@ -222,7 +222,7 @@ return {
 			end
 		end
 	end,
-	findCurrentHostFiberWithNoPortals = function(p2) --[[ Line: 321 ]]
+	findCurrentHostFiberWithNoPortals = function(p2)
 		-- upvalues: findCurrentFiberUsingSlowPath (copy), HostComponent (copy), HostText (copy), EnableFundamentalAPI (copy), FundamentalComponent (copy), HostPortal (copy)
 		local CurrentFiberUsingSlowPath = findCurrentFiberUsingSlowPath(p2)
 		
@@ -253,13 +253,13 @@ return {
 			end
 		end
 	end,
-	isFiberSuspenseAndTimedOut = function(p3): boolean --[[ Line: 363 ]]
+	isFiberSuspenseAndTimedOut = function(p3): boolean
 		-- upvalues: SuspenseComponent (copy)
 		local MemoizedState = p3.memoizedState
 		
 		return p3.tag == SuspenseComponent and (MemoizedState ~= nil and MemoizedState.dehydrated == nil)
 	end,
-	doesFiberContain = function(Return, Return1): boolean --[[ Line: 370 ]]
+	doesFiberContain = function(Return, Return1): boolean
 		local Return2 = Return1
 		local Alternate = Return.alternate
 		while Return2 ~= nil do

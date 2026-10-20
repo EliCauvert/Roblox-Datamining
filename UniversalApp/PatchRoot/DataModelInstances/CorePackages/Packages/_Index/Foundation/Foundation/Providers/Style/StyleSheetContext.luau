@@ -5,7 +5,7 @@ local Context = ReactModule.createContext(None)
 
 return {
 	Provider = Context.Provider,
-	useStyleSheet = function() --[[ Line: 11 ]]
+	useStyleSheet = function()
 		-- upvalues: ReactModule (copy), Context (copy), None (copy)
 		local UseContextResult = ReactModule.useContext(Context)
 		

@@ -12,10 +12,10 @@ local IsAbstractTypeFunction = DefinitionModule.isAbstractType
 local Callback1 = nil
 local Callback = nil
 local FieldsOnCorrectTypeRuleModule = {
-	FieldsOnCorrectTypeRule = function(p1) --[[ Line: 36 ]]
+	FieldsOnCorrectTypeRule = function(p1)
 		-- upvalues: DidYouMeanFunction (copy), Callback (ref), Callback1 (ref), GraphQLError (copy)
 		return {
-			Field = function(_, p2) --[[ Line: 38 ]]
+			Field = function(_, p2)
 				-- upvalues: p1 (copy), DidYouMeanFunction (upval), Callback (upval), Callback1 (upval), GraphQLError (upval)
 				local ParentType = p1:getParentType()
 				
@@ -33,7 +33,7 @@ local FieldsOnCorrectTypeRuleModule = {
 	end
 }
 
-Callback = function(Schema, ParentType, p1) --[[ Line: 77 | Named "getSuggestedTypeNames" ]]
+Callback = function(Schema, ParentType, p1)
 	-- upvalues: IsAbstractTypeFunction (copy), Array (copy), IsInterfaceTypeFunction (copy), NaturalCompareFunction (copy)
 	if not IsAbstractTypeFunction(ParentType) then
 		return {}
@@ -59,19 +59,19 @@ Callback = function(Schema, ParentType, p1) --[[ Line: 77 | Named "getSuggestedT
 	for i, _ in pairs(t) do
 		table.insert(List, i)
 	end
-	Array.sort(List, function(p2, p3) --[[ Line: 114 ]]
+	Array.sort(List, function(p2, p3)
 		-- upvalues: t1 (copy), IsInterfaceTypeFunction (upval), Schema (copy), NaturalCompareFunction (upval)
 		local EntryDelta = t1[p3.name] - t1[p2.name]
 		
 		return if EntryDelta == 0 then if IsInterfaceTypeFunction(p2) and Schema:isSubType(p2, p3) then -1 elseif IsInterfaceTypeFunction(p3) and Schema:isSubType(p3, p2) then 1 else NaturalCompareFunction(p2.name, p3.name) else EntryDelta
 	end)
 	
-	return Array.map(List, function(p2) --[[ Line: 131 ]]
+	return Array.map(List, function(p2)
 		return p2.name
 	end)
 end
 
-Callback1 = function(ParentType, p2) --[[ Line: 140 | Named "getSuggestedFieldNames" ]]
+Callback1 = function(ParentType, p2)
 	-- upvalues: IsObjectTypeFunction (copy), IsInterfaceTypeFunction (copy), SuggestionListFunction (copy)
 	return if IsObjectTypeFunction(ParentType) or IsInterfaceTypeFunction(ParentType) then SuggestionListFunction(p2, (ParentType:getFields():keys())) else {}
 end

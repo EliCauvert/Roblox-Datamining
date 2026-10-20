@@ -8,7 +8,7 @@ local StyleUtilModule = require(Graphing.Util.StyleUtil)
 local _ = require(Graphing.Types)
 local _Rect = Rect.new(0, 0, 1, 1)
 
-function Canvas(Frame, p1) --[[ Line: 56 ]]
+function Canvas(Frame, p1)
 	-- upvalues: ReactModule (copy), _Rect (copy), CanvasUtilModule (copy), CanvasContextModule (copy), StyleUtilModule (copy), DashModule (copy)
 	local UseRefResult = ReactModule.useRef(nil)
 	local Position = if Frame.Position then Frame.Position else UDim2.fromOffset(0, 0)
@@ -32,22 +32,22 @@ function Canvas(Frame, p1) --[[ Line: 56 ]]
 		yAxisScaling = Frame.YAxisScaling,
 		cullingEpsilon = Frame.CullingEpsilon
 	})
-	ReactModule.useImperativeHandle(p1, function() --[[ Line: 95 ]]
+	ReactModule.useImperativeHandle(p1, function()
 		-- upvalues: UseRefResult2 (copy), UpdateFunction (copy)
 		return {
-			setViewportRect = function(ViewportRect) --[[ Line: 97 ]]
+			setViewportRect = function(ViewportRect)
 				-- upvalues: UseRefResult2 (upval), UpdateFunction (upval)
 				local Current = UseRefResult2.current
 				Current.viewportRect = ViewportRect
 				UpdateFunction(Current.graphRect, ViewportRect, Current.xAxisScaling, Current.yAxisScaling, Current.cullingEpsilon)
 			end,
-			setGraphRect = function(GraphRect) --[[ Line: 102 ]]
+			setGraphRect = function(GraphRect)
 				-- upvalues: UseRefResult2 (upval), UpdateFunction (upval)
 				local Current = UseRefResult2.current
 				Current.graphRect = GraphRect
 				UpdateFunction(GraphRect, Current.viewportRect, Current.xAxisScaling, Current.yAxisScaling, Current.cullingEpsilon)
 			end,
-			update = function(GraphRect, ViewportRect, XAxisScaling, YAxisScaling, CullingEpsilon) --[[ Line: 107 ]]
+			update = function(GraphRect, ViewportRect, XAxisScaling, YAxisScaling, CullingEpsilon)
 				-- upvalues: UseRefResult2 (upval), UpdateFunction (upval)
 				local Current = UseRefResult2.current
 				Current.graphRect = GraphRect
@@ -59,7 +59,7 @@ function Canvas(Frame, p1) --[[ Line: 56 ]]
 			end
 		}
 	end, {})
-	ReactModule.useLayoutEffect(function() --[[ Line: 126 ]]
+	ReactModule.useLayoutEffect(function()
 		-- upvalues: Frame (copy), UseRefResult2 (copy), UpdateFunction (copy)
 		if Frame.GraphRect then
 			local GraphRect = Frame.GraphRect

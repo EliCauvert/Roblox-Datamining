@@ -15,11 +15,11 @@ local Tag = require(Parent.React).Tag
 local _instanceToEventManager = {}
 local _instanceToBindings = {}
 
-local function identity(...) --[[ Line: 72 ]]
+local function identity(...)
 	return ...
 end
 
-local function setRobloxInstanceProperty(p1, Key, p2) --[[ Line: 76 ]]
+local function setRobloxInstanceProperty(p1, Key, p2)
 	-- upvalues: GetDefaultInstancePropertyModule (copy)
 	if p2 == nil then
 		local Success, _ = pcall(p1.ResetPropertyToDefault, p1, Key)
@@ -31,7 +31,7 @@ local function setRobloxInstanceProperty(p1, Key, p2) --[[ Line: 76 ]]
 	p1[Key] = p2
 end
 
-local function _(p1, Key) --[[ Line: 92 | Named "removeBinding" ]]
+local function _(p1, Key)
 	-- upvalues: _instanceToBindings (copy)
 	local InstanceToBinding = _instanceToBindings[p1]
 	
@@ -41,9 +41,9 @@ local function _(p1, Key) --[[ Line: 92 | Named "removeBinding" ]]
 	end
 end
 
-local function attachBinding(Key, Key1, p1) --[[ Line: 101 ]]
+local function attachBinding(Key, Key1, p1)
 	-- upvalues: setRobloxInstanceProperty (copy), identity (copy), Console (copy), _instanceToBindings (copy), ReactModule (copy)
-	local function updateBoundProperty(p2) --[[ Line: 102 ]]
+	local function updateBoundProperty(p2)
 		-- upvalues: setRobloxInstanceProperty (upval), identity (upval), Key (copy), Key1 (copy), p1 (copy), Console (upval)
 		local Success, Result = xpcall(setRobloxInstanceProperty, identity, Key, Key1, p2)
 		
@@ -61,7 +61,7 @@ local function attachBinding(Key, Key1, p1) --[[ Line: 101 ]]
 	updateBoundProperty(p1:getValue())
 end
 
-local function applyTags(Key, p1, p2) --[[ Line: 134 ]]
+local function applyTags(Key, p1, p2)
 	-- upvalues: DEV (copy), Console (copy), InspectFunction (copy), CollectionService (copy)
 	if DEV and p2 ~= nil and typeof(p2) ~= "string" then
 		Console.error("Type provided for ReactRoblox.Tag is invalid - tags should be specified as a single string, with individual tags delimited by spaces. Instead received:\n%s", InspectFunction(p2))
@@ -90,14 +90,14 @@ local function applyTags(Key, p1, p2) --[[ Line: 134 ]]
 	end
 end
 
-local _ = function(p3) --[[ Line: 168 | Named "removeAllTags" ]]
+local _ = function(p3)
 	-- upvalues: CollectionService (copy)
 	for _, tag in CollectionService:GetTags(p3) do
 		CollectionService:RemoveTag(p3, tag)
 	end
 end
 
-local function applyProp(Key, Key1, None, p4) --[[ Line: 174 ]]
+local function applyProp(Key, Key1, None, p4)
 	-- upvalues: Type (copy), _instanceToEventManager (copy), SingleEventManagerModule (copy), ReactSymbols (copy), _instanceToBindings (copy), attachBinding (copy), Tag (copy), applyTags (copy), GetDefaultInstancePropertyModule (copy)
 	local OfResult = Type.of(Key1)
 	
@@ -153,7 +153,7 @@ local function applyProp(Key, Key1, None, p4) --[[ Line: 174 ]]
 	end
 end
 
-local function applyProps(p4, List) --[[ Line: 219 ]]
+local function applyProps(p4, List)
 	-- upvalues: applyProp (copy)
 	for i, value in List do
 		if i ~= "ref" and i ~= "children" then
@@ -162,7 +162,7 @@ local function applyProps(p4, List) --[[ Line: 219 ]]
 	end
 end
 
-local function setInitialProperties(p5, _, p6, _) --[[ Line: 230 ]]
+local function setInitialProperties(p5, _, p6, _)
 	-- upvalues: applyProps (copy), identity (copy), Console (copy), _instanceToEventManager (copy)
 	local Success, Result = xpcall(applyProps, identity, p5, p6)
 	
@@ -176,7 +176,7 @@ local function setInitialProperties(p5, _, p6, _) --[[ Line: 230 ]]
 	end
 end
 
-local function safelyApplyProperties(p5, p6, p7) --[[ Line: 259 ]]
+local function safelyApplyProperties(p5, p6, p7)
 	-- upvalues: Object (copy), applyProp (copy)
 	for i = 1, #p6, 2 do
 		local Key = p6[i]
@@ -191,7 +191,7 @@ local function safelyApplyProperties(p5, p6, p7) --[[ Line: 259 ]]
 	end
 end
 
-local function updateProperties(p8, p9, p10) --[[ Line: 278 ]]
+local function updateProperties(p8, p9, p10)
 	-- upvalues: _instanceToEventManager (copy), safelyApplyProperties (copy), identity (copy), Console (copy)
 	if _instanceToEventManager[p8] ~= nil then
 		_instanceToEventManager[p8]:suspend()
@@ -208,13 +208,13 @@ local function updateProperties(p8, p9, p10) --[[ Line: 278 ]]
 	end
 end
 
-local _, Result = xpcall(function() --[[ Line: 312 ]]
+local _, Result = xpcall(function()
 	return game:DefineFastFlag("ReactFixBindingMemoryLeak", false)
-end, function(): boolean --[[ Line: 314 ]]
+end, function(): boolean
 	return true
 end)
 
-local _ = function(Key) --[[ Line: 318 | Named "cleanupBindings" ]]
+local _ = function(Key)
 	-- upvalues: _instanceToBindings (copy)
 	local InstanceToBinding = _instanceToBindings[Key]
 	
@@ -229,7 +229,7 @@ end
 return {
 	setInitialProperties = setInitialProperties,
 	updateProperties = updateProperties,
-	cleanupHostComponent = function(Key) --[[ Line: 331 ]]
+	cleanupHostComponent = function(Key)
 		-- upvalues: _instanceToEventManager (copy), Result (copy), _instanceToBindings (copy), CollectionService (copy)
 		if _instanceToEventManager[Key] ~= nil then
 			_instanceToEventManager[Key] = nil

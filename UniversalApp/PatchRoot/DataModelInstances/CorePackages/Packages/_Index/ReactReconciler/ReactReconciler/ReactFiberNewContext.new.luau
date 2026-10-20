@@ -33,7 +33,7 @@ local v2 = nil
 local Context = nil
 local Flag = false
 local ReactFiberNewContextModule = {
-	resetContextDependencies = function() --[[ Line: 76 ]]
+	resetContextDependencies = function()
 		-- upvalues: v1 (ref), v2 (ref), Context (ref), ReactGlobalsModule (copy), Flag (ref)
 		v1 = nil
 		v2 = nil
@@ -43,19 +43,19 @@ local ReactFiberNewContextModule = {
 			Flag = false
 		end
 	end,
-	enterDisallowedContextReadInDEV = function() --[[ Line: 87 ]]
+	enterDisallowedContextReadInDEV = function()
 		-- upvalues: ReactGlobalsModule (copy), Flag (ref)
 		if ReactGlobalsModule.__DEV__ then
 			Flag = true
 		end
 	end,
-	exitDisallowedContextReadInDEV = function() --[[ Line: 93 ]]
+	exitDisallowedContextReadInDEV = function()
 		-- upvalues: ReactGlobalsModule (copy), Flag (ref)
 		if ReactGlobalsModule.__DEV__ then
 			Flag = false
 		end
 	end,
-	pushProvider = function(p1, _currentValue) --[[ Line: 99 ]]
+	pushProvider = function(p1, _currentValue)
 		-- upvalues: IsPrimaryRenderer (copy), PushFunction (copy), Cursor (copy), ReactGlobalsModule (copy), T (ref), Console (copy)
 		local Context = p1.type._context
 		
@@ -83,7 +83,7 @@ local ReactFiberNewContextModule = {
 			end
 		end
 	end,
-	popProvider = function(p1) --[[ Line: 137 ]]
+	popProvider = function(p1)
 		-- upvalues: Cursor (copy), PopFunction (copy), IsPrimaryRenderer (copy)
 		local Current = Cursor.current
 		PopFunction(Cursor, p1)
@@ -97,11 +97,11 @@ local ReactFiberNewContextModule = {
 			Context._currentValue2 = Current
 		end
 	end,
-	calculateChangedBits = function(p1, p2, p3): number --[[ Line: 150 ]]
+	calculateChangedBits = function(p1, p2, p3): number
 		-- upvalues: ObjectIsFunction (copy), MAXSIGNED31BITINT (copy)
 		return if ObjectIsFunction(p3, p2) then 0 else math.floor(if typeof(p1._calculateChangedBits) == "function" then p1._calculateChangedBits(p3, p2) else MAXSIGNED31BITINT)
 	end,
-	scheduleWorkOnParentPath = function(Return, Mask) --[[ Line: 181 ]]
+	scheduleWorkOnParentPath = function(Return, Mask)
 		-- upvalues: IsSubsetOfLanesFunction (copy), MergeLanesFunction (copy)
 		local Return1 = Return
 		while Return1 ~= nil do
@@ -122,7 +122,7 @@ local ReactFiberNewContextModule = {
 	end
 }
 
-function ReactFiberNewContextModule.propagateContextChange(Return_, Context, Mask: number, Mask1: number) --[[ Line: 204 ]]
+function ReactFiberNewContextModule.propagateContextChange(Return_, Context, Mask: number, Mask1: number)
 	-- upvalues: ClassComponent (copy), CreateUpdateFunction (copy), NoTimestamp (copy), PickArbitraryLaneFunction (copy), ForceUpdate (copy), ReactFiberNewContextModule (copy), ContextProvider (copy)
 	local Child = Return_.child
 	local Dependencies = nil
@@ -197,7 +197,7 @@ function ReactFiberNewContextModule.propagateContextChange(Return_, Context, Mas
 	end
 end
 
-function ReactFiberNewContextModule.prepareToReadContext(p1, p2, Callback: () -> ()) --[[ Line: 343 ]]
+function ReactFiberNewContextModule.prepareToReadContext(p1, p2, Callback: () -> ())
 	-- upvalues: v1 (ref), v2 (ref), Context (ref), IncludesSomeLaneFunction (copy)
 	v1 = p1
 	v2 = nil
@@ -212,7 +212,7 @@ function ReactFiberNewContextModule.prepareToReadContext(p1, p2, Callback: () ->
 	end
 end
 
-function ReactFiberNewContextModule.readContext(Context1, Enabled) --[[ Line: 366 ]]
+function ReactFiberNewContextModule.readContext(Context1, Enabled)
 	-- upvalues: ReactGlobalsModule (copy), Flag (ref), Console (copy), Context (ref), Number (copy), EnableAllocationTrims (copy), v2 (ref), v1 (ref), Error1 (copy), NoLanes (copy), IsPrimaryRenderer (copy)
 	if ReactGlobalsModule.__DEV__ and Flag then
 		Console.error("Context can only be read while React is rendering. In classes, you can read it in the render method or getDerivedStateFromProps. In function components, you can read it directly in the function body, but not inside Hooks like useReducer() or useMemo().")

@@ -6,7 +6,7 @@ local BuildStaticCurveAnimationSchemaModule = require(Parent.util.buildStaticCur
 local ValidateInstanceTreeAgainstSchemaModule = require(Parent.util.validateInstanceTreeAgainstSchema)
 local CurveAnimationHierarchyUtilsModule = require(Parent.util.CurveAnimationHierarchyUtils)
 
-local function validateNoBodyPartDuplicates(Object, p1) --[[ Line: 27 ]]
+local function validateNoBodyPartDuplicates(Object, p1)
 	-- upvalues: CurveAnimationHierarchyUtilsModule (copy), ErrorSourceStringsModule (copy)
 	local t = {}
 	
@@ -34,7 +34,7 @@ return {
 	prereqTests = {
 		ValidationEnumsModule.ValidationModule.CurveAnimDataAvailable
 	},
-	run = function(p2, p3) --[[ Line: 42 ]]
+	run = function(p2, p3)
 		-- upvalues: BuildStaticCurveAnimationSchemaModule (copy), ValidateInstanceTreeAgainstSchemaModule (copy), ErrorSourceStringsModule (copy), validateNoBodyPartDuplicates (copy)
 		for _, curveAnimation in p3.curveAnimations do
 			ValidateInstanceTreeAgainstSchemaModule(curveAnimation, BuildStaticCurveAnimationSchemaModule, p2, {

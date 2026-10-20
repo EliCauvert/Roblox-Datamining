@@ -9,12 +9,12 @@ AlertViewCheckbox.defaultProps = {
 	Text = "",
 	LayoutOrder = 0,
 	checked = false,
-	onActivated = function() --[[ Line: 14 ]] end
+	onActivated = function() end
 }
 
-function AlertViewCheckbox.render(p1) --[[ Line: 18 ]]
+function AlertViewCheckbox.render(p1)
 	-- upvalues: UIBlox (copy), Roact (copy), CheckIconModule (copy), FoundationFontFaceMigration (copy), NormalizeFontFaceFunction (copy)
-	return UIBlox.Style.withStyle(function(p2) --[[ Line: 19 ]]
+	return UIBlox.Style.withStyle(function(p2)
 		-- upvalues: Roact (upval), p1 (copy), CheckIconModule (upval), FoundationFontFaceMigration (upval), NormalizeFontFaceFunction (upval)
 		return Roact.createElement("Frame", {
 			BackgroundTransparency = 1,

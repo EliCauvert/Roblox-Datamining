@@ -4,10 +4,10 @@ local _ = require(Parent.React)
 local ReactIsModule = require(Parent.ReactIs)
 local _ = require(Foundation.Components.Types)
 
-return function(p1: number) --[[ Line: 10 | Named "useProgressBinding" ]]
+return function(p1: number)
 	-- upvalues: ReactIsModule (copy)
 	if ReactIsModule.isBinding(p1) then
-		return p1:map(function(p2: number): number --[[ Line: 15 ]]
+		return p1:map(function(p2: number): number
 			return (math.clamp(p2 / 100, 0, 1))
 		end), p1 == nil
 	else

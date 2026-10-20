@@ -2,9 +2,9 @@
 local _ = require(Parent.Types)
 local ReduceModule = require(Parent.reduce)
 
-return function(p1, Callback) --[[ Line: 31 | Named "frequencies" ]]
+return function(p1, Callback)
 	-- upvalues: ReduceModule (copy)
-	return ReduceModule(p1, function(p2, p3, p4) --[[ Line: 32 ]]
+	return ReduceModule(p1, function(p2, p3, p4)
 		-- upvalues: Callback (copy)
 		local CallbackResult = if Callback then Callback(p3, p4) else p3
 		

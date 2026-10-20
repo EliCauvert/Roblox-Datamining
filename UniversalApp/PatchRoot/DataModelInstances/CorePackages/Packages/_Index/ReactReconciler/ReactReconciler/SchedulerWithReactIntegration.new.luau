@@ -32,18 +32,18 @@ local IdlePriority = ReactFiberSchedulerPrioritiesRobloxModule.IdlePriority
 local NoPriority = ReactFiberSchedulerPrioritiesRobloxModule.NoPriority
 local Callback = nil
 local t = {}
-local UnstableRequestPaint1 = if UnstableRequestPaint == nil then function() --[[ Line: 94 ]] end else UnstableRequestPaint
+local UnstableRequestPaint1 = if UnstableRequestPaint == nil then function() end else UnstableRequestPaint
 local List = nil
 local v1 = nil
 local Flag = false
 local UnstableNowResult = UnstableNowFunction()
 
-local function now() --[[ Line: 118 ]]
+local function now()
 	-- upvalues: UnstableNowFunction (copy), UnstableNowResult (copy)
 	return UnstableNowFunction() - UnstableNowResult
 end
 
-local function getCurrentPriorityLevel() --[[ Line: 122 ]]
+local function getCurrentPriorityLevel()
 	-- upvalues: UnstableGetCurrentPriorityLevelFunction (copy), UnstableImmediatePriority (copy), ImmediatePriority (copy), UnstableUserBlockingPriority (copy), UserBlockingPriority (copy), UnstableNormalPriority (copy), NormalPriority (copy), UnstableLowPriority (copy), LowPriority (copy), UnstableIdlePriority (copy), IdlePriority (copy), InvariantFunction (copy), NoPriority (copy)
 	local UnstableGetCurrentPriorityLevelResult = UnstableGetCurrentPriorityLevelFunction()
 	
@@ -64,7 +64,7 @@ local function getCurrentPriorityLevel() --[[ Line: 122 ]]
 	end
 end
 
-function reactPriorityToSchedulerPriority(IdlePriority1) --[[ Line: 141 ]]
+function reactPriorityToSchedulerPriority(IdlePriority1)
 	-- upvalues: ImmediatePriority (copy), UnstableImmediatePriority (copy), UserBlockingPriority (copy), UnstableUserBlockingPriority (copy), NormalPriority (copy), UnstableNormalPriority (copy), LowPriority (copy), UnstableLowPriority (copy), IdlePriority (copy), UnstableIdlePriority (copy), InvariantFunction (copy)
 	if IdlePriority1 == ImmediatePriority then
 		return UnstableImmediatePriority
@@ -83,12 +83,12 @@ function reactPriorityToSchedulerPriority(IdlePriority1) --[[ Line: 141 ]]
 	end
 end
 
-local function runWithPriority(p1, p2) --[[ Line: 160 ]]
+local function runWithPriority(p1, p2)
 	-- upvalues: UnstableRunWithPriorityFunction (copy)
 	return UnstableRunWithPriorityFunction(reactPriorityToSchedulerPriority(p1), p2)
 end
 
-local function scheduleSyncCallback(p1) --[[ Line: 177 ]]
+local function scheduleSyncCallback(p1)
 	-- upvalues: List (ref), v1 (ref), UnstableScheduleCallbackFunction (copy), UnstableImmediatePriority (copy), Callback (ref), t (copy)
 	if List == nil then
 		List = { p1 }
@@ -99,7 +99,7 @@ local function scheduleSyncCallback(p1) --[[ Line: 177 ]]
 	return t
 end
 
-local function flushSyncCallbackQueue() --[[ Line: 202 ]]
+local function flushSyncCallbackQueue()
 	-- upvalues: v1 (ref), UnstableCancelCallbackFunction (copy), Callback (ref)
 	if v1 ~= nil then
 		local v2 = v1
@@ -109,7 +109,7 @@ local function flushSyncCallbackQueue() --[[ Line: 202 ]]
 	return Callback()
 end
 
-Callback = function(): boolean --[[ Line: 211 ]]
+Callback = function(): boolean
 	-- upvalues: Flag (ref), List (ref), DecoupleUpdatePriorityFromScheduler (copy), GetCurrentUpdateLanePriorityFunction (copy), ReactGlobalsModule (copy), SetCurrentUpdateLanePriorityFunction (copy), SyncLanePriority (copy), runWithPriority (copy), DescribeError (copy), ImmediatePriority (copy), ReactFeatureFlags (copy), UnstableRunWithPriorityFunction (copy), Array (copy), UnstableScheduleCallbackFunction (copy), UnstableImmediatePriority (copy), flushSyncCallbackQueue (copy)
 	if Flag or List == nil then
 		local Count = false
@@ -128,7 +128,7 @@ Callback = function(): boolean --[[ Line: 211 ]]
 			Success = true
 			local SliceResult1 = List
 			SetCurrentUpdateLanePriorityFunction(SyncLanePriority)
-			local _ = UnstableRunWithPriorityFunction(reactPriorityToSchedulerPriority(ImmediatePriority), function() --[[ Line: 258 ]]
+			local _ = UnstableRunWithPriorityFunction(reactPriorityToSchedulerPriority(ImmediatePriority), function()
 				-- upvalues: SliceResult1 (copy), Count (ref)
 				for i, Callback in SliceResult1 do
 					Count = i
@@ -142,7 +142,7 @@ Callback = function(): boolean --[[ Line: 211 ]]
 		else
 			local SliceResult = List
 			SetCurrentUpdateLanePriorityFunction(SyncLanePriority)
-			Success, v40 = xpcall(runWithPriority, DescribeError, ImmediatePriority, function() --[[ Line: 232 ]]
+			Success, v40 = xpcall(runWithPriority, DescribeError, ImmediatePriority, function()
 				-- upvalues: SliceResult (copy), Count (ref)
 				for i, Callback in SliceResult do
 					Count = i
@@ -177,7 +177,7 @@ Callback = function(): boolean --[[ Line: 211 ]]
 		if ReactGlobalsModule.__YOLO__ then
 			Success1 = true
 			local SliceResult3 = List
-			local _ = UnstableRunWithPriorityFunction(reactPriorityToSchedulerPriority(ImmediatePriority), function() --[[ Line: 324 ]]
+			local _ = UnstableRunWithPriorityFunction(reactPriorityToSchedulerPriority(ImmediatePriority), function()
 				-- upvalues: SliceResult3 (copy), Count (ref)
 				for i, Callback in SliceResult3 do
 					Count = i
@@ -189,7 +189,7 @@ Callback = function(): boolean --[[ Line: 211 ]]
 			List = nil
 		else
 			local SliceResult2 = List
-			Success1, v41 = xpcall(runWithPriority, DescribeError, ImmediatePriority, function() --[[ Line: 300 ]]
+			Success1, v41 = xpcall(runWithPriority, DescribeError, ImmediatePriority, function()
 				-- upvalues: SliceResult2 (copy), Count (ref)
 				for i, Callback in SliceResult2 do
 					Count = i
@@ -230,12 +230,12 @@ return {
 	getCurrentPriorityLevel = getCurrentPriorityLevel,
 	flushSyncCallbackQueue = flushSyncCallbackQueue,
 	runWithPriority = runWithPriority,
-	scheduleCallback = function(p1, p2, p3) --[[ Line: 168 ]]
+	scheduleCallback = function(p1, p2, p3)
 		-- upvalues: UnstableScheduleCallbackFunction (copy)
 		return UnstableScheduleCallbackFunction(reactPriorityToSchedulerPriority(p1), p2, p3)
 	end,
 	scheduleSyncCallback = scheduleSyncCallback,
-	cancelCallback = function(p1) --[[ Line: 196 ]]
+	cancelCallback = function(p1)
 		-- upvalues: t (copy), UnstableCancelCallbackFunction (copy)
 		if p1 ~= t then
 			UnstableCancelCallbackFunction(p1)

@@ -6,14 +6,14 @@ local PageEntryContentModule = require(script.Parent.Parent.Parent.shared.v1beta
 local Module = {}
 Module.__index = Module
 
-function Module.new(p1) --[[ Line: 151 ]]
+function Module.new(p1)
 	-- upvalues: Module (copy)
 	return (setmetatable({
 		offer_id = if p1 == nil or p1.offer_id == nil then "" else p1.offer_id
 	}, Module))
 end
 
-function Module:encode() --[[ Line: 159 ]]
+function Module:encode()
 	-- upvalues: ProtoModule (copy)
 	local Buf = buffer.create(0)
 	local Count = 0
@@ -28,7 +28,7 @@ function Module:encode() --[[ Line: 159 ]]
 	return Buf1
 end
 
-function Module.decode(Buf) --[[ Line: 173 ]]
+function Module.decode(Buf)
 	-- upvalues: Module (copy), ProtoModule (copy)
 	local NewModule = Module.new()
 	local v1 = 0
@@ -61,7 +61,7 @@ function Module.decode(Buf) --[[ Line: 173 ]]
 	return NewModule
 end
 
-function Module:jsonEncode() --[[ Line: 216 ]]
+function Module:jsonEncode()
 	local t = {}
 	
 	if self.offer_id ~= nil and self.offer_id ~= "" then
@@ -70,7 +70,7 @@ function Module:jsonEncode() --[[ Line: 216 ]]
 	return t
 end
 
-function Module:jsonDecode() --[[ Line: 226 ]]
+function Module:jsonDecode()
 	-- upvalues: Module (copy)
 	local NewModule = Module.new()
 	
@@ -92,7 +92,7 @@ TypeRegistryModule.default:register(config.MarketplaceOfferModalPageRequest)
 local Module1 = {}
 Module1.__index = Module1
 
-function Module1.new(p1) --[[ Line: 256 ]]
+function Module1.new(p1)
 	-- upvalues: Module1 (copy)
 	return (setmetatable({
 		page_entries = if p1 == nil or p1.page_entries == nil then {} else p1.page_entries,
@@ -102,7 +102,7 @@ function Module1.new(p1) --[[ Line: 256 ]]
 	}, Module1))
 end
 
-function Module1:encode() --[[ Line: 267 ]]
+function Module1:encode()
 	-- upvalues: ProtoModule (copy)
 	local Buf = buffer.create(0)
 	local Count = 0
@@ -146,7 +146,7 @@ function Module1:encode() --[[ Line: 267 ]]
 	return Buf1
 end
 
-function Module1.decode(Buf) --[[ Line: 317 ]]
+function Module1.decode(Buf)
 	-- upvalues: Module1 (copy), ProtoModule (copy), PageEntryContentModule (copy), HydrationContentModule (copy), config (copy), TemplateEntryModule (copy)
 	local NewModule = Module1.new()
 	local v2 = 0
@@ -194,7 +194,7 @@ function Module1.decode(Buf) --[[ Line: 317 ]]
 	return NewModule
 end
 
-function Module1:jsonEncode() --[[ Line: 393 ]]
+function Module1:jsonEncode()
 	local t = {}
 	
 	if self.page_entries ~= nil and #self.page_entries > 0 then
@@ -227,7 +227,7 @@ function Module1:jsonEncode() --[[ Line: 393 ]]
 	return t
 end
 
-function Module1:jsonDecode() --[[ Line: 427 ]]
+function Module1:jsonDecode()
 	-- upvalues: Module1 (copy), PageEntryContentModule (copy), HydrationContentModule (copy), TemplateEntryModule (copy)
 	local NewModule = Module1.new()
 	
@@ -289,7 +289,7 @@ TypeRegistryModule.default:register(config.MarketplaceOfferModalPageResponse)
 local Module2 = {}
 Module2.__index = Module2
 
-function Module2.new(p1) --[[ Line: 513 ]]
+function Module2.new(p1)
 	-- upvalues: Module2 (copy)
 	return (setmetatable({
 		key = if p1 == nil or p1.key == nil then "" else p1.key,
@@ -297,7 +297,7 @@ function Module2.new(p1) --[[ Line: 513 ]]
 	}, Module2))
 end
 
-function Module2:encode() --[[ Line: 525 ]]
+function Module2:encode()
 	-- upvalues: ProtoModule (copy)
 	local Buf = buffer.create(0)
 	local Count = 0
@@ -317,7 +317,7 @@ function Module2:encode() --[[ Line: 525 ]]
 	return Buf1
 end
 
-function Module2.decode(Buf) --[[ Line: 547 ]]
+function Module2.decode(Buf)
 	-- upvalues: Module2 (copy), ProtoModule (copy), TemplateEntryModule (copy)
 	local NewModule = Module2.new()
 	local v3 = 0
@@ -354,7 +354,7 @@ function Module2.decode(Buf) --[[ Line: 547 ]]
 	return NewModule
 end
 
-function Module2:jsonEncode() --[[ Line: 597 ]]
+function Module2:jsonEncode()
 	local t = {}
 	
 	if self.key ~= nil and self.key ~= "" then
@@ -366,7 +366,7 @@ function Module2:jsonEncode() --[[ Line: 597 ]]
 	return t
 end
 
-function Module2:jsonDecode() --[[ Line: 613 ]]
+function Module2:jsonDecode()
 	-- upvalues: Module2 (copy), TemplateEntryModule (copy)
 	local NewModule = Module2.new()
 	
@@ -388,7 +388,7 @@ TypeRegistryModule.default:register(config.MarketplaceOfferModalPageResponse_Tem
 local Module3 = {}
 Module3.__index = Module3
 
-function Module3.new(p1) --[[ Line: 645 ]]
+function Module3.new(p1)
 	-- upvalues: Module3 (copy)
 	return (setmetatable({
 		key = if p1 == nil or p1.key == nil then "" else p1.key,
@@ -396,7 +396,7 @@ function Module3.new(p1) --[[ Line: 645 ]]
 	}, Module3))
 end
 
-function Module3:encode() --[[ Line: 657 ]]
+function Module3:encode()
 	-- upvalues: ProtoModule (copy)
 	local Buf = buffer.create(0)
 	local Count = 0
@@ -415,7 +415,7 @@ function Module3:encode() --[[ Line: 657 ]]
 	return Buf1
 end
 
-function Module3.decode(Buf) --[[ Line: 678 ]]
+function Module3.decode(Buf)
 	-- upvalues: Module3 (copy), ProtoModule (copy)
 	local NewModule = Module3.new()
 	local v4 = 0
@@ -452,7 +452,7 @@ function Module3.decode(Buf) --[[ Line: 678 ]]
 	return NewModule
 end
 
-function Module3:jsonEncode() --[[ Line: 728 ]]
+function Module3:jsonEncode()
 	local t = {}
 	
 	if self.key ~= nil and self.key ~= "" then
@@ -464,7 +464,7 @@ function Module3:jsonEncode() --[[ Line: 728 ]]
 	return t
 end
 
-function Module3:jsonDecode() --[[ Line: 744 ]]
+function Module3:jsonDecode()
 	-- upvalues: Module3 (copy)
 	local NewModule = Module3.new()
 	

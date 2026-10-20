@@ -44,7 +44,7 @@ local MarkLegacyErrorBoundaryAsFailed = nil
 local IsAlreadyFailedLegacyErrorBoundary = nil
 local PingSuspendedRoot = nil
 
-local function v37(...) --[[ Line: 89 ]]
+local function v37(...)
 	-- upvalues: MarkLegacyErrorBoundaryAsFailed (ref), ReactFiberWorkLoopNewModule (ref)
 	if not MarkLegacyErrorBoundaryAsFailed then
 		ReactFiberWorkLoopNewModule = require(script.Parent["ReactFiberWorkLoop.new"])
@@ -53,7 +53,7 @@ local function v37(...) --[[ Line: 89 ]]
 	return MarkLegacyErrorBoundaryAsFailed(...)
 end
 
-local function v38(...) --[[ Line: 104 ]]
+local function v38(...)
 	-- upvalues: ReactFiberWorkLoopNewModule (ref), PingSuspendedRoot (ref)
 	if ReactFiberWorkLoopNewModule == nil then
 		ReactFiberWorkLoopNewModule = require(script.Parent["ReactFiberWorkLoop.new"])
@@ -63,7 +63,7 @@ local function v38(...) --[[ Line: 104 ]]
 	return PingSuspendedRoot(...)
 end
 
-local function v39(...) --[[ Line: 111 ]]
+local function v39(...)
 	-- upvalues: ReactFiberWorkLoopNewModule (ref), IsAlreadyFailedLegacyErrorBoundary (ref)
 	if ReactFiberWorkLoopNewModule == nil then
 		ReactFiberWorkLoopNewModule = require(script.Parent["ReactFiberWorkLoop.new"])
@@ -82,14 +82,14 @@ local IncludesSomeLaneFunction = ReactFiberLaneModule.includesSomeLane
 local MergeLanesFunction = ReactFiberLaneModule.mergeLanes
 local PickArbitraryLaneFunction = ReactFiberLaneModule.pickArbitraryLane
 
-function createRootErrorUpdate(p1, p2, p3, Callback) --[[ Line: 133 ]]
+function createRootErrorUpdate(p1, p2, p3, Callback)
 	-- upvalues: CreateUpdateFunction (copy), NoTimestamp (copy), CaptureUpdate (copy), Object (copy), LogCapturedErrorFunction (copy)
 	local Update = CreateUpdateFunction(NoTimestamp, p3)
 	Update.tag = CaptureUpdate
 	Update.payload = { element = Object.None }
 	local Value = p2.value
 	
-	function Update.callback() --[[ Line: 147 ]]
+	function Update.callback()
 		-- upvalues: Callback (copy), Value (copy), LogCapturedErrorFunction (upval), p1 (copy), p2 (copy)
 		if Callback ~= nil then
 			Callback(Value)
@@ -100,7 +100,7 @@ function createRootErrorUpdate(p1, p2, p3, Callback) --[[ Line: 133 ]]
 	return Update
 end
 
-function createClassErrorUpdate(p1, p2, p3) --[[ Line: 156 ]]
+function createClassErrorUpdate(p1, p2, p3)
 	-- upvalues: CreateUpdateFunction (copy), NoTimestamp (copy), CaptureUpdate (copy), LogCapturedErrorFunction (copy), ReactGlobalsModule (copy), MarkFailedErrorBoundaryForHotReloadingFunction (copy), v37 (copy), IncludesSomeLaneFunction (copy), SyncLane (copy), Console (copy), GetComponentNameFunction (copy)
 	local Update = CreateUpdateFunction(NoTimestamp, p3)
 	Update.tag = CaptureUpdate
@@ -109,7 +109,7 @@ function createClassErrorUpdate(p1, p2, p3) --[[ Line: 156 ]]
 	if typeof(GetDerivedStateFromErrorFunction) == "function" then
 		local Value = p2.value
 		
-		function Update.payload() --[[ Line: 166 ]]
+		function Update.payload()
 			-- upvalues: LogCapturedErrorFunction (upval), p1 (copy), p2 (copy), GetDerivedStateFromErrorFunction (copy), Value (copy)
 			LogCapturedErrorFunction(p1, p2)
 			
@@ -119,7 +119,7 @@ function createClassErrorUpdate(p1, p2, p3) --[[ Line: 156 ]]
 	local StateNode = p1.stateNode
 	
 	if StateNode ~= nil and typeof(StateNode.componentDidCatch) == "function" then
-		function Update.callback() --[[ Line: 174 ]]
+		function Update.callback()
 			-- upvalues: ReactGlobalsModule (upval), MarkFailedErrorBoundaryForHotReloadingFunction (upval), p1 (copy), GetDerivedStateFromErrorFunction (copy), v37 (upval), StateNode (copy), LogCapturedErrorFunction (upval), p2 (copy), IncludesSomeLaneFunction (upval), SyncLane (upval), Console (upval), GetComponentNameFunction (upval)
 			if ReactGlobalsModule.__DEV__ then
 				MarkFailedErrorBoundaryForHotReloadingFunction(p1)
@@ -138,7 +138,7 @@ function createClassErrorUpdate(p1, p2, p3) --[[ Line: 156 ]]
 		return Update
 	end
 	if ReactGlobalsModule.__DEV__ then
-		function Update.callback() --[[ Line: 212 ]]
+		function Update.callback()
 			-- upvalues: MarkFailedErrorBoundaryForHotReloadingFunction (upval), p1 (copy)
 			MarkFailedErrorBoundaryForHotReloadingFunction(p1)
 		end
@@ -146,7 +146,7 @@ function createClassErrorUpdate(p1, p2, p3) --[[ Line: 156 ]]
 	return Update
 end
 
-local function attachPingListener(p1, Promise, Lanes) --[[ Line: 219 ]]
+local function attachPingListener(p1, Promise, Lanes)
 	-- upvalues: v38 (copy)
 	local PingCache = p1.pingCache
 	local t = nil
@@ -166,7 +166,7 @@ local function attachPingListener(p1, Promise, Lanes) --[[ Line: 219 ]]
 	if not t[Lanes] then
 		t[Lanes] = true
 		
-		local function v51() --[[ Line: 247 ]]
+		local function v51()
 			-- upvalues: v38 (upval), p1 (copy), Promise (copy), Lanes (copy)
 			return v38(p1, Promise, Lanes)
 		end
@@ -175,7 +175,7 @@ local function attachPingListener(p1, Promise, Lanes) --[[ Line: 219 ]]
 	end
 end
 
-function throwException(p1, Return, p2, p3: string, Lanes, p4, Callback: () -> ()) --[[ Line: 254 ]]
+function throwException(p1, Return, p2, p3: string, Lanes, p4, Callback: () -> ())
 	-- upvalues: Incomplete (copy), ReactGlobalsModule (copy), EnableDebugTracing (copy), DebugTracingMode (copy), GetComponentNameFunction (copy), LogComponentSuspendedFunction (copy), EnableSchedulingProfiler (copy), MarkComponentSuspendedFunction (copy), BlockingMode (copy), NoMode (copy), HasSuspenseContextFunction (copy), SuspenseStackCursor (copy), InvisibleParentSuspenseContext (copy), SuspenseComponent (copy), ShouldCaptureSuspenseFunction (copy), DidCapture (copy), ForceUpdateForLegacySuspense (copy), LifecycleEffectMask (copy), ClassComponent (copy), IncompleteClassComponent (copy), CreateUpdateFunction (copy), NoTimestamp (copy), SyncLane (copy), ForceUpdate (copy), EnqueueUpdateFunction (copy), MergeLanesFunction (copy), attachPingListener (copy), ShouldCapture (copy), CreateCapturedValueFunction (copy), HostRoot (copy), PickArbitraryLaneFunction (copy), EnqueueCapturedUpdateFunction (copy), NoFlags (copy), v39 (copy)
 	p2.flags = bit32.bor(p2.flags, Incomplete)
 	

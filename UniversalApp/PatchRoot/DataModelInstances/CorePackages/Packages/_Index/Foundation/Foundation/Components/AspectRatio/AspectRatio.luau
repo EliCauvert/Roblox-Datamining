@@ -5,7 +5,7 @@ local ReactIsModule = require(Parent.ReactIs)
 local GetTestIdTagModule = require(Foundation.Utility.getTestIdTag)
 local _ = require(Foundation.Components.Types)
 
-local function getAspectRatio(AspectRatio) --[[ Line: 14 ]]
+local function getAspectRatio(AspectRatio)
 	-- upvalues: ReactIsModule (copy)
 	return if ReactIsModule.isBinding(AspectRatio) or typeof(AspectRatio) == "number" then {
 		AspectType = nil,
@@ -18,7 +18,7 @@ local function getAspectRatio(AspectRatio) --[[ Line: 14 ]]
 	}
 end
 
-return ReactModule.memo(function(p1) --[[ Line: 41 | Named "AspectRatio" ]]
+return ReactModule.memo(function(p1)
 	-- upvalues: getAspectRatio (copy), ReactModule (copy), GetTestIdTagModule (copy)
 	local AspectRatio = getAspectRatio(p1.value)
 	

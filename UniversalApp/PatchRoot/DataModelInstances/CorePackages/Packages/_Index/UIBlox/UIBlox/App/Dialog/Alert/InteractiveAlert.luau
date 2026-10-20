@@ -40,9 +40,9 @@ InteractiveAlert.validateProps = TModule.strictInterface({
 })
 InteractiveAlert.defaultProps = { bottomMargin = 24 }
 
-function InteractiveAlert.render(p1) --[[ Line: 87 ]]
+function InteractiveAlert.render(p1)
 	-- upvalues: WithStyleModule (copy), MinValue (ref), MaxValue (ref), FoundationFontFaceMigration (copy), GetFontFromFontStyleModule (copy), RoactModule (copy), FitFrameOnAxis (copy), ImageSetComponentModule (copy), GetTextHeightModule (copy), GenericTextLabelModule (copy), AlertModule (copy), AlertTypeModule (copy)
-	return WithStyleModule(function(p2) --[[ Line: 88 ]]
+	return WithStyleModule(function(p2)
 		-- upvalues: MinValue (upval), MaxValue (upval), FoundationFontFaceMigration (upval), GetFontFromFontStyleModule (upval), p1 (copy), RoactModule (upval), FitFrameOnAxis (upval), ImageSetComponentModule (upval), GetTextHeightModule (upval), GenericTextLabelModule (upval), AlertModule (upval), AlertTypeModule (upval)
 		MinValue = p2.Tokens.Size.Size_400 * 17
 		MaxValue = p2.Tokens.Size.Size_1000 * 10
@@ -50,7 +50,7 @@ function InteractiveAlert.render(p1) --[[ Line: 87 ]]
 		local _Font = p2.Font
 		local FontFromFontStyleModule = if FoundationFontFaceMigration then GetFontFromFontStyleModule(_Font.Body) else _Font.Body.Font
 		local ScaledBaseSize = _Font.BaseSize * _Font.Body.RelativeSize
-		local TitleContent = if p1.props.titleIcon then function() --[[ Line: 99 ]]
+		local TitleContent = if p1.props.titleIcon then function()
 			-- upvalues: RoactModule (upval), FitFrameOnAxis (upval), ImageSetComponentModule (upval), p1 (upval), Theme (copy)
 			return RoactModule.createElement(FitFrameOnAxis, {
 				BackgroundTransparency = 1,
@@ -74,7 +74,7 @@ function InteractiveAlert.render(p1) --[[ Line: 87 ]]
 			local ScaledBaseSize1 = if FoundationFontFaceMigration then _Font.BaseSize * _Font.Footer.RelativeSize else nil
 			local TextHeightModule = p1.props.footerText and GetTextHeightModule(p1.props.footerText, if FoundationFontFaceMigration then GetFontFromFontStyleModule(_Font.Footer) else _Font.Footer.Font, _Font.BaseSize * _Font.Footer.RelativeSize, ClampedValueDelta, 100) or 0
 			
-			FooterContent = function() --[[ Line: 140 ]]
+			FooterContent = function()
 				-- upvalues: RoactModule (upval), GenericTextLabelModule (upval), Theme (copy), _Font (copy), p1 (upval), FoundationFontFaceMigration (upval), ScaledBaseSize1 (copy), ScaledBaseSize (copy), TextHeightModule (copy)
 				return RoactModule.createElement(GenericTextLabelModule, {
 					BackgroundTransparency = 1,
@@ -102,7 +102,7 @@ function InteractiveAlert.render(p1) --[[ Line: 87 ]]
 			maxWidth = MaxValue,
 			minWidth = MinValue,
 			buttonStackInfo = p1.props.buttonStackInfo,
-			middleContent = if p1.props.bodyText then function() --[[ Line: 160 ]]
+			middleContent = if p1.props.bodyText then function()
 				-- upvalues: RoactModule (upval), FitFrameOnAxis (upval), GenericTextLabelModule (upval), Theme (copy), _Font (copy), p1 (upval), ScaledBaseSize (copy), TextHeightModule1 (copy)
 				return RoactModule.createElement(FitFrameOnAxis, {
 					BackgroundTransparency = 1,

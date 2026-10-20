@@ -1,6 +1,6 @@
 ﻿local SIGNALSVALIDATIONENABLED = _G.__SIGNALS_VALIDATION_ENABLED__ or _G.__DEV__
 
-local function handleNoYieldValidation(Thread, Resumed, ...) --[[ Line: 3 ]]
+local function handleNoYieldValidation(Thread, Resumed, ...)
 	if not Resumed then
 		local v1 = (...)
 		
@@ -16,14 +16,14 @@ local function handleNoYieldValidation(Thread, Resumed, ...) --[[ Line: 3 ]]
 	return ...
 end
 
-local function callWithValidation(Callback, ...) --[[ Line: 20 ]]
+local function callWithValidation(Callback, ...)
 	-- upvalues: handleNoYieldValidation (copy)
 	local Thread = coroutine.create(Callback)
 	
 	return handleNoYieldValidation(Thread, coroutine.resume(Thread, ...))
 end
 
-local function callWithoutValidation(Callback, ...) --[[ Line: 25 ]]
+local function callWithoutValidation(Callback, ...)
 	return Callback(...)
 end
 

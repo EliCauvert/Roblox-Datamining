@@ -1,3 +1,3 @@
-﻿return function() --[[ Line: 3 ]]
+﻿return function()
 	return game:GetEngineFeature("EngineUGCValidateFACSJointTransformsWithinBounds")
 end

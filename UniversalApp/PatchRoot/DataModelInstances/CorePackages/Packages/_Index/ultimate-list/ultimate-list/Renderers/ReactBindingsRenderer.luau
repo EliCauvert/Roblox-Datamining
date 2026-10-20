@@ -8,13 +8,13 @@ local JoinAndMapBindingsModule = require(UltimateList.Util.joinAndMapBindings)
 local CreateElementFunction = ReactModule.createElement
 local ReactBindingsRenderer = require(UltimateList.Util.createDebugLogger)("ReactBindingsRenderer")
 
-local function getKeyDefault(_, p1): string --[[ Line: 15 ]]
+local function getKeyDefault(_, p1): string
 	return (tostring(p1))
 end
 
-return (ReactModule.memo(function(p1) --[[ Line: 35 | Named "ReactBindingsRenderer" ]]
+return (ReactModule.memo(function(p1)
 	-- upvalues: ReactModule (copy), DimensionsMethodsModule (copy), getKeyDefault (copy), ReactBindingsRenderer (copy), CreateElementFunction (copy), JoinAndMapBindingsModule (copy), AdjustPositionToScrollAxisModule (copy)
-	local UseStateResult, UseStateResult2 = ReactModule.useState(function() --[[ Line: 48 ]]
+	local UseStateResult, UseStateResult2 = ReactModule.useState(function()
 		-- upvalues: DimensionsMethodsModule (upval), p1 (copy), ReactModule (upval)
 		local List = {}
 		local ElementsDisplayedHintResult = DimensionsMethodsModule.elementsDisplayedHint(p1.dimensions, p1.virtualizedListController.getWindowSize(), p1.direction)
@@ -29,9 +29,9 @@ return (ReactModule.memo(function(p1) --[[ Line: 35 | Named "ReactBindingsRender
 		return List
 	end)
 	local GetKey = p1.getKey or getKeyDefault
-	ReactModule.useEffect(function() --[[ Line: 79 ]]
+	ReactModule.useEffect(function()
 		-- upvalues: p1 (copy), GetKey (copy), UseStateResult (copy), ReactBindingsRenderer (upval), ReactModule (upval), UseStateResult2 (copy)
-		return p1.virtualizedListController.bindToUpdate(function() --[[ Line: 80 ]]
+		return p1.virtualizedListController.bindToUpdate(function()
 			-- upvalues: p1 (upval), GetKey (upval), UseStateResult (upval), ReactBindingsRenderer (upval), ReactModule (upval), UseStateResult2 (upval)
 			local GetResult = p1.virtualizedListController.get()
 			local Range = p1.virtualizedListController.getRange()
@@ -105,7 +105,7 @@ return (ReactModule.memo(function(p1) --[[ Line: 35 | Named "ReactBindingsRender
 			end
 			if #List2 > 0 then
 				ReactBindingsRenderer("Needed to create %d more bindings to fit, there will be %d setters", #List2, #List2 + #UseStateResult)
-				UseStateResult2(function(Tbl) --[[ Line: 177 ]]
+				UseStateResult2(function(Tbl)
 					-- upvalues: List2 (copy)
 					local Copy = table.clone(Tbl)
 					table.move(List2, 1, #List2, #Copy + 1, Copy)
@@ -122,24 +122,24 @@ return (ReactModule.memo(function(p1) --[[ Line: 35 | Named "ReactBindingsRender
 	
 	for i, value in UseStateResult do
 		local Binding = value.binding
-		local MapResult = Binding:map(function(p2) --[[ Line: 199 ]]
+		local MapResult = Binding:map(function(p2)
 			-- upvalues: DimensionsMethodsModule (upval), p1 (copy)
 			return if p2.contents.type == "vacant" then { size = UDim2.new(), position = UDim2.new() } else DimensionsMethodsModule.getUDimRect(p1.dimensions, p2.contents.value, p2.contents.index, p1.virtualizedListController.getWindowSize(), p1.direction)
 		end)
 		Frames[`Item{i}`] = CreateElementFunction("Frame", {
 			BackgroundTransparency = 1,
-			Position = JoinAndMapBindingsModule(function(p2, p3) --[[ Line: 219 ]]
+			Position = JoinAndMapBindingsModule(function(p2, p3)
 				-- upvalues: AdjustPositionToScrollAxisModule (upval), p1 (copy)
 				return AdjustPositionToScrollAxisModule(p2.position, p3, p1.direction)
 			end, MapResult, p1.scrollAxisBinding),
-			Size = MapResult:map(function(p2) --[[ Line: 223 ]]
+			Size = MapResult:map(function(p2)
 				return p2.size
 			end),
-			Visible = Binding:map(function(p2): boolean --[[ Line: 227 ]]
+			Visible = Binding:map(function(p2): boolean
 				return p2.contents.type == "full"
 			end)
 		}, {
-			Content = p1.callback(Binding:map(function(p2) --[[ Line: 231 ]]
+			Content = p1.callback(Binding:map(function(p2)
 				return if p2.contents.type == "full" then p2.contents.value else nil
 			end))
 		})

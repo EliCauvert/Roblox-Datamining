@@ -7,7 +7,7 @@ local PageEntryContentModule = require(script.Parent.Parent.Parent.shared.v1beta
 local Module = {}
 Module.__index = Module
 
-function Module.new(p1) --[[ Line: 214 ]]
+function Module.new(p1)
 	-- upvalues: Module (copy)
 	return (setmetatable({
 		request_id = if p1 == nil or p1.request_id == nil then "" else p1.request_id,
@@ -17,7 +17,7 @@ function Module.new(p1) --[[ Line: 214 ]]
 	}, Module))
 end
 
-function Module:encode() --[[ Line: 225 ]]
+function Module:encode()
 	-- upvalues: ProtoModule (copy)
 	local Buf = buffer.create(0)
 	local Count = 0
@@ -45,7 +45,7 @@ function Module:encode() --[[ Line: 225 ]]
 	return Buf1
 end
 
-function Module.decode(Buf) --[[ Line: 255 ]]
+function Module.decode(Buf)
 	-- upvalues: Module (copy), ProtoModule (copy), t (copy)
 	local NewModule = Module.new()
 	local v1 = 0
@@ -90,7 +90,7 @@ function Module.decode(Buf) --[[ Line: 255 ]]
 	return NewModule
 end
 
-function Module:jsonEncode() --[[ Line: 313 ]]
+function Module:jsonEncode()
 	local t = {}
 	
 	if self.request_id ~= nil and self.request_id ~= "" then
@@ -108,7 +108,7 @@ function Module:jsonEncode() --[[ Line: 313 ]]
 	return t
 end
 
-function Module:jsonDecode() --[[ Line: 335 ]]
+function Module:jsonDecode()
 	-- upvalues: Module (copy), t (copy)
 	local NewModule = Module.new()
 	
@@ -142,7 +142,7 @@ TypeRegistryModule.default:register(t.MarketplaceCatalogPageRequest)
 local Module1 = {}
 Module1.__index = Module1
 
-function Module1.new(p1) --[[ Line: 379 ]]
+function Module1.new(p1)
 	-- upvalues: Module1 (copy)
 	return (setmetatable({
 		cursor = if p1 == nil or p1.cursor == nil then nil else p1.cursor,
@@ -151,7 +151,7 @@ function Module1.new(p1) --[[ Line: 379 ]]
 	}, Module1))
 end
 
-function Module1:encode() --[[ Line: 387 ]]
+function Module1:encode()
 	-- upvalues: ProtoModule (copy), t (copy)
 	local Buf = buffer.create(0)
 	local Count = 0
@@ -174,7 +174,7 @@ function Module1:encode() --[[ Line: 387 ]]
 	return Buf1
 end
 
-function Module1.decode(Buf) --[[ Line: 412 ]]
+function Module1.decode(Buf)
 	-- upvalues: Module1 (copy), ProtoModule (copy), t (copy)
 	local NewModule = Module1.new()
 	local v2 = 0
@@ -215,7 +215,7 @@ function Module1.decode(Buf) --[[ Line: 412 ]]
 	return NewModule
 end
 
-function Module1:jsonEncode() --[[ Line: 465 ]]
+function Module1:jsonEncode()
 	-- upvalues: t (copy)
 	local t1 = {}
 	
@@ -231,7 +231,7 @@ function Module1:jsonEncode() --[[ Line: 465 ]]
 	return t1
 end
 
-function Module1:jsonDecode() --[[ Line: 485 ]]
+function Module1:jsonDecode()
 	-- upvalues: Module1 (copy), t (copy)
 	local NewModule = Module1.new()
 	
@@ -259,7 +259,7 @@ TypeRegistryModule.default:register(t.RequestPagination)
 local Module2 = {}
 Module2.__index = Module2
 
-function Module2.new(p1) --[[ Line: 523 ]]
+function Module2.new(p1)
 	-- upvalues: Module2 (copy)
 	return (setmetatable({
 		page_entries = if p1 == nil or p1.page_entries == nil then {} else p1.page_entries,
@@ -270,7 +270,7 @@ function Module2.new(p1) --[[ Line: 523 ]]
 	}, Module2))
 end
 
-function Module2:encode() --[[ Line: 535 ]]
+function Module2:encode()
 	-- upvalues: ProtoModule (copy)
 	local Buf = buffer.create(0)
 	local Count = 0
@@ -319,7 +319,7 @@ function Module2:encode() --[[ Line: 535 ]]
 	return Buf1
 end
 
-function Module2.decode(Buf) --[[ Line: 591 ]]
+function Module2.decode(Buf)
 	-- upvalues: Module2 (copy), ProtoModule (copy), PageEntryContentModule (copy), HydrationContentModule (copy), t (copy), TemplateEntryModule (copy)
 	local NewModule = Module2.new()
 	local v3 = 0
@@ -371,7 +371,7 @@ function Module2.decode(Buf) --[[ Line: 591 ]]
 	return NewModule
 end
 
-function Module2:jsonEncode() --[[ Line: 672 ]]
+function Module2:jsonEncode()
 	local t = {}
 	
 	if self.page_entries ~= nil and #self.page_entries > 0 then
@@ -407,7 +407,7 @@ function Module2:jsonEncode() --[[ Line: 672 ]]
 	return t
 end
 
-function Module2:jsonDecode() --[[ Line: 710 ]]
+function Module2:jsonDecode()
 	-- upvalues: Module2 (copy), PageEntryContentModule (copy), HydrationContentModule (copy), TemplateEntryModule (copy), t (copy)
 	local NewModule = Module2.new()
 	
@@ -472,7 +472,7 @@ TypeRegistryModule.default:register(t.MarketplaceCatalogPageResponse)
 local Module3 = {}
 Module3.__index = Module3
 
-function Module3.new(p1) --[[ Line: 797 ]]
+function Module3.new(p1)
 	-- upvalues: Module3 (copy)
 	return (setmetatable({
 		key = if p1 == nil or p1.key == nil then "" else p1.key,
@@ -480,7 +480,7 @@ function Module3.new(p1) --[[ Line: 797 ]]
 	}, Module3))
 end
 
-function Module3:encode() --[[ Line: 806 ]]
+function Module3:encode()
 	-- upvalues: ProtoModule (copy)
 	local Buf = buffer.create(0)
 	local Count = 0
@@ -500,7 +500,7 @@ function Module3:encode() --[[ Line: 806 ]]
 	return Buf1
 end
 
-function Module3.decode(Buf) --[[ Line: 828 ]]
+function Module3.decode(Buf)
 	-- upvalues: Module3 (copy), ProtoModule (copy), TemplateEntryModule (copy)
 	local NewModule = Module3.new()
 	local v4 = 0
@@ -537,7 +537,7 @@ function Module3.decode(Buf) --[[ Line: 828 ]]
 	return NewModule
 end
 
-function Module3:jsonEncode() --[[ Line: 878 ]]
+function Module3:jsonEncode()
 	local t = {}
 	
 	if self.key ~= nil and self.key ~= "" then
@@ -549,7 +549,7 @@ function Module3:jsonEncode() --[[ Line: 878 ]]
 	return t
 end
 
-function Module3:jsonDecode() --[[ Line: 894 ]]
+function Module3:jsonDecode()
 	-- upvalues: Module3 (copy), TemplateEntryModule (copy)
 	local NewModule = Module3.new()
 	
@@ -571,7 +571,7 @@ TypeRegistryModule.default:register(t.MarketplaceCatalogPageResponse_TemplatesEn
 local Module4 = {}
 Module4.__index = Module4
 
-function Module4.new(p1) --[[ Line: 925 ]]
+function Module4.new(p1)
 	-- upvalues: Module4 (copy)
 	return (setmetatable({
 		key = if p1 == nil or p1.key == nil then "" else p1.key,
@@ -579,7 +579,7 @@ function Module4.new(p1) --[[ Line: 925 ]]
 	}, Module4))
 end
 
-function Module4:encode() --[[ Line: 937 ]]
+function Module4:encode()
 	-- upvalues: ProtoModule (copy)
 	local Buf = buffer.create(0)
 	local Count = 0
@@ -598,7 +598,7 @@ function Module4:encode() --[[ Line: 937 ]]
 	return Buf1
 end
 
-function Module4.decode(Buf) --[[ Line: 958 ]]
+function Module4.decode(Buf)
 	-- upvalues: Module4 (copy), ProtoModule (copy)
 	local NewModule = Module4.new()
 	local v5 = 0
@@ -635,7 +635,7 @@ function Module4.decode(Buf) --[[ Line: 958 ]]
 	return NewModule
 end
 
-function Module4:jsonEncode() --[[ Line: 1008 ]]
+function Module4:jsonEncode()
 	local t = {}
 	
 	if self.key ~= nil and self.key ~= "" then
@@ -647,7 +647,7 @@ function Module4:jsonEncode() --[[ Line: 1008 ]]
 	return t
 end
 
-function Module4:jsonDecode() --[[ Line: 1024 ]]
+function Module4:jsonDecode()
 	-- upvalues: Module4 (copy)
 	local NewModule = Module4.new()
 	
@@ -669,14 +669,14 @@ TypeRegistryModule.default:register(t.MarketplaceCatalogPageResponse_LocalizedLi
 local Module5 = {}
 Module5.__index = Module5
 
-function Module5.new(p1) --[[ Line: 1055 ]]
+function Module5.new(p1)
 	-- upvalues: Module5 (copy)
 	return (setmetatable({
 		next_cursor = if p1 == nil or p1.next_cursor == nil then nil else p1.next_cursor
 	}, Module5))
 end
 
-function Module5:encode() --[[ Line: 1061 ]]
+function Module5:encode()
 	-- upvalues: ProtoModule (copy)
 	local Buf = buffer.create(0)
 	local Count = 0
@@ -691,7 +691,7 @@ function Module5:encode() --[[ Line: 1061 ]]
 	return Buf1
 end
 
-function Module5.decode(Buf) --[[ Line: 1075 ]]
+function Module5.decode(Buf)
 	-- upvalues: Module5 (copy), ProtoModule (copy)
 	local NewModule = Module5.new()
 	local v6 = 0
@@ -724,7 +724,7 @@ function Module5.decode(Buf) --[[ Line: 1075 ]]
 	return NewModule
 end
 
-function Module5:jsonEncode() --[[ Line: 1118 ]]
+function Module5:jsonEncode()
 	local t = {}
 	
 	if self.next_cursor ~= nil then
@@ -733,7 +733,7 @@ function Module5:jsonEncode() --[[ Line: 1118 ]]
 	return t
 end
 
-function Module5:jsonDecode() --[[ Line: 1128 ]]
+function Module5:jsonDecode()
 	-- upvalues: Module5 (copy)
 	local NewModule = Module5.new()
 	
@@ -753,13 +753,13 @@ Module5.descriptor = {
 t.Pagination = Module5
 TypeRegistryModule.default:register(t.Pagination)
 t.PaginationDirection = {
-	fromNumber = function(p1) --[[ Line: 1153 ]]
+	fromNumber = function(p1)
 		return if p1 == 0 then "PAGINATION_DIRECTION_INVALID" elseif p1 == 1 then "PAGINATION_DIRECTION_FORWARD" elseif p1 == 2 then "PAGINATION_DIRECTION_BACKWARD" else nil
 	end,
-	toNumber = function(p1) --[[ Line: 1165 ]]
+	toNumber = function(p1)
 		return if p1 == "PAGINATION_DIRECTION_INVALID" then 0 elseif p1 == "PAGINATION_DIRECTION_FORWARD" then 1 elseif p1 == "PAGINATION_DIRECTION_BACKWARD" then 2 else p1
 	end,
-	fromName = function(p1) --[[ Line: 1177 ]]
+	fromName = function(p1)
 		return if p1 == "PAGINATION_DIRECTION_INVALID" then "PAGINATION_DIRECTION_INVALID" elseif p1 == "PAGINATION_DIRECTION_FORWARD" then "PAGINATION_DIRECTION_FORWARD" elseif p1 == "PAGINATION_DIRECTION_BACKWARD" then "PAGINATION_DIRECTION_BACKWARD" else nil
 	end
 }

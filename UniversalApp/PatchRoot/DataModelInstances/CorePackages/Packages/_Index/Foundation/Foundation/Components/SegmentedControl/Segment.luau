@@ -16,7 +16,7 @@ local UseTokensModule = require(Foundation.Providers.Style.useTokens)
 local WithCommonPropsModule = require(Foundation.Utility.withCommonProps)
 local UseSegmentedControlVariantsModule = require(script.Parent.useSegmentedControlVariants)
 
-return ReactModule.memo(ReactModule.forwardRef(function(p1, Ref) --[[ Line: 51 | Named "Segment" ]]
+return ReactModule.memo(ReactModule.forwardRef(function(p1, Ref)
 	-- upvalues: FlagsModule (copy), UseTokensModule (copy), UseSegmentedControlVariantsModule (copy), DevAssertModule (copy), ReactModule (copy), ViewModule (copy), WithCommonPropsModule (copy), IconModule (copy), TextModule (copy)
 	local Variant = if FlagsModule.FoundationSegmentedControlBeta then p1.variant else nil
 	local FillBehavior = if FlagsModule.FoundationSegmentedControlBeta then p1.fillBehavior else nil
@@ -39,7 +39,7 @@ return ReactModule.memo(ReactModule.forwardRef(function(p1, Ref) --[[ Line: 51 |
 	end
 	return ReactModule.createElement(ViewModule, WithCommonPropsModule(p1, {
 		tag = UseSegmentedControlVariantsModuleResult.segment.tag,
-		onActivated = function() --[[ Line: 94 ]]
+		onActivated = function()
 			-- upvalues: p1 (copy)
 			p1.onActivated(p1.id)
 		end,

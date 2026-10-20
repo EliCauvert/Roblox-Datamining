@@ -9,7 +9,7 @@ return {
 	requiredData = { ValidationEnumsModule.SharedDataMember.renderMeshesData },
 	fflag = require(Parent.flags.getFFlagUGCValidateFacsJointCountBounded),
 	expectedFailures = { "Asset_EF_DynamicHeadExcessiveFacs" },
-	run = function(p1, p2) --[[ Line: 23 ]]
+	run = function(p1, p2)
 		-- upvalues: GetFIntUGCValidateFacsJointCountMaximumModule (copy), ErrorSourceStringsModule (copy)
 		local Count = #p2.renderMeshesData.Head.editable:GetBones()
 		local FIntUGCValidateFacsJointCountMaximumModule = GetFIntUGCValidateFacsJointCountMaximumModule()

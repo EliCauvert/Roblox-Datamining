@@ -1,6 +1,6 @@
 ﻿local Count = 0
 
-return function(): string --[[ Line: 14 ]]
+return function(): string
 	-- upvalues: Count (ref)
 	Count += 1
 	

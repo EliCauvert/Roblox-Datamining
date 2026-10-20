@@ -1,5 +1,5 @@
 ﻿return {
-	positionHasKeyframes = function(Object): boolean --[[ Line: 3 ]]
+	positionHasKeyframes = function(Object): boolean
 		local Position = Object:FindFirstChild("Position")
 		
 		if not Position or not Position:IsA("Vector3Curve") then
@@ -14,7 +14,7 @@
 		end
 		return false
 	end,
-	translationExceedsThreshold = function(Object, p1) --[[ Line: 17 ]]
+	translationExceedsThreshold = function(Object, p1)
 		local Position = Object:FindFirstChild("Position")
 		
 		if not Position or not Position:IsA("Vector3Curve") then

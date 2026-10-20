@@ -11,7 +11,7 @@ local UGCValidateRigAttachmentRotationUsesDiff = game:DefineFastFlag("UGCValidat
 local ThresholdGetters = require(Parent.util.AttachmentRotationFInts).thresholdGetters
 local v1 = CFrame.new(vector.create(0, 0, 0), vector.create(0, 0, -1)) * CFrame.fromEulerAnglesXYZ(-1.5707963267948966, 0, 0)
 
-local function expectedGripAttCFrameRotation(Object, AssetType) --[[ Line: 36 ]]
+local function expectedGripAttCFrameRotation(Object, AssetType)
 	-- upvalues: R15plusUtilsModule (copy), GetAttachmentCFrameInPartSpaceModule (copy), v1 (copy)
 	local Right: string = if AssetType == Enum.AssetType.RightArm then "Right" else "Left"
 	local Child = Object:FindFirstChild(Right .. "LowerArm")
@@ -45,7 +45,7 @@ return {
 		ValidationEnumsModule.SharedDataMember.uploadEnum
 	},
 	expectedFailures = {},
-	run = function(p1, p2) --[[ Line: 76 ]]
+	run = function(p1, p2)
 		-- upvalues: UGCValidateRigAttachmentRotationUsesDiff (copy), GetDiffBetweenOrientationsModule (copy), GetAttachmentCFrameInPartSpaceModule (copy), ThresholdGetters (copy), FloatEqualsModule (copy), ErrorSourceStringsModule (copy), expectedGripAttCFrameRotation (copy), ValueToStringModule (copy)
 		local RootInstance = p2.rootInstance
 		local AssetType = p2.uploadEnum.assetType

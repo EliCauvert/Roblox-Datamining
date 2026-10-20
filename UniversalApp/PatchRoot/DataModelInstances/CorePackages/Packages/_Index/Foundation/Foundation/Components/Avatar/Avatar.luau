@@ -23,7 +23,7 @@ local config = {
 	userPresence = require(Foundation.Enums.UserPresence).None
 }
 
-return ReactModule.memo(ReactModule.forwardRef(function(p1, Ref) --[[ Line: 51 | Named "Avatar" ]]
+return ReactModule.memo(ReactModule.forwardRef(function(p1, Ref)
 	-- upvalues: WithDefaultsModule (copy), config (copy), UseTokensModule (copy), UsePresentationContextFunction (copy), UseAvatarVariantsModule (copy), GetAvatarSizeModule (copy), ReactModule (copy), ViewModule (copy), WithCommonPropsModule (copy), ImageModule (copy), MapBindableModule (copy), GetRbxThumbModule (copy), ThumbnailTypeModule (copy), ThumbnailSizeModule (copy), FlagsModule (copy), StatusIndicatorModule (copy), DashModule (copy)
 	local WithDefaultsModuleResult = WithDefaultsModule(p1, config)
 	local UseTokensModuleResult = UseTokensModule()
@@ -39,7 +39,7 @@ return ReactModule.memo(ReactModule.forwardRef(function(p1, Ref) --[[ Line: 51 |
 		Size = UDim2.fromOffset(AvatarSizeModule, AvatarSizeModule)
 	}), {
 		Image = ReactModule.createElement(ImageModule, {
-			Image = MapBindableModule(WithDefaultsModuleResult.userId, function(p2) --[[ Line: 71 ]]
+			Image = MapBindableModule(WithDefaultsModuleResult.userId, function(p2)
 				-- upvalues: GetRbxThumbModule (upval), ThumbnailTypeModule (upval), ThumbnailSizeModule (upval), WithDefaultsModuleResult (copy)
 				return GetRbxThumbModule(ThumbnailTypeModule.AvatarHeadShot, p2, ThumbnailSizeModule.Medium, {
 					includeProfileFrame = WithDefaultsModuleResult.includeProfileFrame

@@ -21,12 +21,12 @@ local config = {
 	size = InputSizeModule.Medium
 }
 
-return ReactModule.memo(ReactModule.forwardRef(function(p1, p2) --[[ Line: 45 | Named "Tabs" ]]
+return ReactModule.memo(ReactModule.forwardRef(function(p1, p2)
 	-- upvalues: UseTokensModule (copy), WithDefaultsModule (copy), config (copy), ReactModule (copy), DashModule (copy), FillBehaviorModule (copy), FlagsModule (copy), UseAnimatedHighlightModule (copy), ViewModule (copy), WithCommonPropsModule (copy), OverflowScrollContainerModule (copy), OverflowScrollContainerModule1 (copy), InputSizeModule (copy), TabItemModule (copy)
 	local UseTokensModuleResult = UseTokensModule()
 	local WithDefaultsModuleResult = WithDefaultsModule(p1, config)
 	local UseStateResult, UseStateResult2 = ReactModule.useState(WithDefaultsModuleResult.defaultActiveTabId or DashModule.get(WithDefaultsModuleResult, { 1, "id" }))
-	local UseResult = ReactModule.useCallback(function(p3) --[[ Line: 51 ]]
+	local UseResult = ReactModule.useCallback(function(p3)
 		-- upvalues: WithDefaultsModuleResult (copy), UseStateResult2 (copy)
 		if WithDefaultsModuleResult.onActivated then
 			WithDefaultsModuleResult.onActivated(p3)
@@ -35,7 +35,7 @@ return ReactModule.memo(ReactModule.forwardRef(function(p1, p2) --[[ Line: 45 | 
 	end)
 	local IsFillBehaviorMatch = WithDefaultsModuleResult.fillBehavior == FillBehaviorModule.Fill
 	local ActiveTabId = WithDefaultsModuleResult.activeTabId or UseStateResult
-	local FindResult = DashModule.find(WithDefaultsModuleResult.tabs, function(p3): boolean --[[ Line: 60 ]]
+	local FindResult = DashModule.find(WithDefaultsModuleResult.tabs, function(p3): boolean
 		-- upvalues: ActiveTabId (copy)
 		return p3.id == ActiveTabId
 	end)
@@ -46,14 +46,14 @@ return ReactModule.memo(ReactModule.forwardRef(function(p1, p2) --[[ Line: 45 | 
 	
 	if FlagsModule.FoundationUnifiedScrimScrolling then
 		v1, UseBindingResult2 = ReactModule.useBinding(0)
-		UseResult1 = ReactModule.useCallback(function(Frame) --[[ Line: 70 ]]
+		UseResult1 = ReactModule.useCallback(function(Frame)
 			-- upvalues: UseBindingResult2 (ref)
 			UseBindingResult2(Frame.AbsoluteSize.X)
 		end, {})
 	end
 	local UseMemoResult = nil
 	local UseRefResult1 = ReactModule.useRef({})
-	UseMemoResult = ReactModule.useMemo(function() --[[ Line: 78 ]]
+	UseMemoResult = ReactModule.useMemo(function()
 		-- upvalues: UseRefResult1 (copy), WithDefaultsModuleResult (copy), ReactModule (upval)
 		local Current = UseRefResult1.current
 		
@@ -73,7 +73,7 @@ return ReactModule.memo(ReactModule.forwardRef(function(p1, p2) --[[ Line: 45 | 
 		tag = if FlagsModule.FoundationUnifiedScrimScrolling then "auto-y no-clip" else "auto-y clip",
 		Size = UDim2.fromScale(1, 0),
 		sizeConstraint = if FlagsModule.FoundationUnifiedScrimScrolling and not IsFillBehaviorMatch then {
-			MaxSize = v1:map(function(X): Vector2 --[[ Line: 109 ]]
+			MaxSize = v1:map(function(X): Vector2
 				return Vector2.new(X, 1e999)
 			end)
 		} else nil
@@ -107,7 +107,7 @@ return ReactModule.memo(ReactModule.forwardRef(function(p1, p2) --[[ Line: 45 | 
 						},
 						Size = if IsFillBehaviorMatch then UDim2.fromScale(1, 0) else nil,
 						testId = `{WithDefaultsModuleResult.testId}--list`
-					}, DashModule.map(WithDefaultsModuleResult.tabs, function(p3, LayoutOrder) --[[ Line: 158 ]]
+					}, DashModule.map(WithDefaultsModuleResult.tabs, function(p3, LayoutOrder)
 						-- upvalues: ReactModule (upval), TabItemModule (upval), ActiveTabId (copy), UseResult (copy), WithDefaultsModuleResult (copy), UseMemoResult (ref)
 						return ReactModule.createElement(TabItemModule, {
 							id = p3.id,
@@ -145,7 +145,7 @@ return ReactModule.memo(ReactModule.forwardRef(function(p1, p2) --[[ Line: 45 | 
 		AnimatedBorder = ReactModule.createElement(ViewModule, {
 			LayoutOrder = 0,
 			ZIndex = WithDefaultsModuleResult.ZIndex + 1,
-			Size = UseAnimatedHighlightModuleResult.highlightWidth:map(function(XOffset): UDim2 --[[ Line: 199 ]]
+			Size = UseAnimatedHighlightModuleResult.highlightWidth:map(function(XOffset): UDim2
 				-- upvalues: UseTokensModuleResult (copy)
 				return UDim2.fromOffset(XOffset, UseTokensModuleResult.Stroke.Thick)
 			end),
@@ -153,7 +153,7 @@ return ReactModule.memo(ReactModule.forwardRef(function(p1, p2) --[[ Line: 45 | 
 			Position = ReactModule.joinBindings({
 				UseAnimatedHighlightModuleResult.highlightPosition,
 				UseAnimatedHighlightModuleResult.activeItemHeight
-			}):map(function(Entry): UDim2 --[[ Line: 203 ]]
+			}):map(function(Entry): UDim2
 				return UDim2.fromOffset(Entry[1], Entry[2])
 			end),
 			backgroundStyle = UseTokensModuleResult.Color.System.Contrast,

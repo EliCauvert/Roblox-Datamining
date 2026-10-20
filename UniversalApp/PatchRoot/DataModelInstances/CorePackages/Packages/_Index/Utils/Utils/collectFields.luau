@@ -15,7 +15,7 @@ local Callback = nil
 local Callback1 = nil
 local Callback2 = nil
 
-local function collectFields(p1, p2, p3, p4, SelectionSet, NewResult, NewResult1) --[[ Line: 52 ]]
+local function collectFields(p1, p2, p3, p4, SelectionSet, NewResult, NewResult1)
 	-- upvalues: Kind (copy), Boolean (copy), Callback (ref), Callback1 (ref), Callback2 (ref), collectFields (copy)
 	for _, selection in SelectionSet.selections do
 		local Kind1 = selection.kind
@@ -51,7 +51,7 @@ local function collectFields(p1, p2, p3, p4, SelectionSet, NewResult, NewResult1
 	return NewResult
 end
 
-Callback = function(p5, p6): boolean --[[ Line: 164 | Named "shouldIncludeNode" ]]
+Callback = function(p5, p6): boolean
 	-- upvalues: GetDirectiveValuesFunction (copy), GraphQLSkipDirective (copy), GraphQLIncludeDirective (copy)
 	local DirectiveValues = GetDirectiveValuesFunction(GraphQLSkipDirective, p6, p5)
 	
@@ -64,7 +64,7 @@ Callback = function(p5, p6): boolean --[[ Line: 164 | Named "shouldIncludeNode" 
 	end
 end
 
-Callback2 = function(p5, p6, p7) --[[ Line: 184 | Named "doesFragmentConditionMatch" ]]
+Callback2 = function(p5, p6, p7)
 	-- upvalues: Boolean (copy), TypeFromASTFunction (copy), IsAbstractTypeFunction (copy), Array (copy)
 	local TypeCondition = p6.typeCondition
 	
@@ -77,13 +77,13 @@ Callback2 = function(p5, p6, p7) --[[ Line: 184 | Named "doesFragmentConditionMa
 	end
 end
 
-Callback1 = function(p5) --[[ Line: 218 | Named "getFieldEntryKey" ]]
+Callback1 = function(p5)
 	return if p5.alias then p5.alias.value else p5.name.value
 end
 
 return {
 	collectFields = collectFields,
-	collectSubFields = require(script.Parent.memoize).memoize5(function(p5, p6, p7, p8, List) --[[ Line: 226 ]]
+	collectSubFields = require(script.Parent.memoize).memoize5(function(p5, p6, p7, p8, List)
 		-- upvalues: Map (copy), Set (copy), collectFields (copy)
 		local NewMap = Map.new()
 		local NewSet = Set.new()

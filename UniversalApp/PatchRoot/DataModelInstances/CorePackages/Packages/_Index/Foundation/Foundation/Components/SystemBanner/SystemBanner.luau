@@ -32,7 +32,7 @@ local config1 = {
 	[AlertVariantModule.Feedback] = AlertVariantModule.Standard
 }
 
-return ReactModule.memo(ReactModule.forwardRef(function(p1, p2) --[[ Line: 62 | Named "SystemBanner" ]]
+return ReactModule.memo(ReactModule.forwardRef(function(p1, p2)
 	-- upvalues: WithDefaultsModule (copy), config (copy), UseTokensModule (copy), config1 (copy), UseSystemBannerVariantsModule (copy), ReactModule (copy), ReactUtilsModule (copy), UseBreakpointModule (copy), BreakpointModule (copy), AlertActionsModule (copy), ViewModule (copy), WithCommonPropsModule (copy), PresentationContextModule (copy), IconModule (copy), SEVERITYTOICON (copy), IconSizeModule (copy), IconVariant (copy), TextModule (copy), CloseAffordanceModule (copy), InputSizeModule (copy), CloseAffordanceVariantModule (copy)
 	local WithDefaultsModuleResult = WithDefaultsModule(p1, config)
 	local UseTokensModuleResult = UseTokensModule()
@@ -40,7 +40,7 @@ return ReactModule.memo(ReactModule.forwardRef(function(p1, p2) --[[ Line: 62 | 
 	local UseStateResult, UseStateResult2 = ReactModule.useState(nil)
 	local UseComposedRefResult = ReactUtilsModule.useComposedRef(p2, UseStateResult2)
 	local IsUseBreakpointModuleResultMatch = UseBreakpointModule(UseStateResult) == BreakpointModule.XSmall
-	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 75 ]]
+	local UseMemoResult = ReactModule.useMemo(function()
 		-- upvalues: ReactModule (upval), AlertActionsModule (upval), WithDefaultsModuleResult (copy), IsUseBreakpointModuleResultMatch (copy), UseTokensModuleResult (copy)
 		return (ReactModule.createElement(AlertActionsModule, {
 			LayoutOrder = 3,
@@ -68,7 +68,7 @@ return ReactModule.memo(ReactModule.forwardRef(function(p1, p2) --[[ Line: 62 | 
 		},
 		ref = UseComposedRefResult
 	}), ReactModule.createElement(PresentationContextModule.Provider, {
-		value = ReactModule.useMemo(function() --[[ Line: 89 ]]
+		value = ReactModule.useMemo(function()
 			-- upvalues: UseSystemBannerVariantsModuleResult (copy)
 			return {
 				colorNamespace = UseSystemBannerVariantsModuleResult.container.colorNamespace

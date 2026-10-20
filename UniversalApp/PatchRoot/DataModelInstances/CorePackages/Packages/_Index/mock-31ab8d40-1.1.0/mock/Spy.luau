@@ -3,19 +3,19 @@ local IsAMagicMockModule = require(script.Parent.isAMagicMock)
 local SpyModule = {}
 SpyModule.__index = SpyModule
 
-function SpyModule:__call(...) --[[ Line: 9 ]]
+function SpyModule:__call(...)
 	return self.inner(...)
 end
 
 local t = {}
 setmetatable(t, { __mode = "kv" })
 
-function SpyModule.new(Callback) --[[ Line: 16 ]]
+function SpyModule.new(Callback)
 	-- upvalues: SymbolsModule (copy), SpyModule (copy), t (copy)
 	local config = { [SymbolsModule.isSpy] = true, [SymbolsModule.Calls] = {} }
 	setmetatable(config, SpyModule)
 	
-	local function Inner(...) --[[ Line: 23 ]]
+	local function Inner(...)
 		-- upvalues: Callback (copy), config (copy), SymbolsModule (upval)
 		local config1 = {
 			args = table.pack(...),
@@ -32,12 +32,12 @@ function SpyModule.new(Callback) --[[ Line: 16 ]]
 	return config, Inner
 end
 
-function SpyModule.lookup(p1) --[[ Line: 38 ]]
+function SpyModule.lookup(p1)
 	-- upvalues: t (copy)
 	return t[p1]
 end
 
-function SpyModule:is(): boolean --[[ Line: 42 ]]
+function SpyModule:is(): boolean
 	-- upvalues: IsAMagicMockModule (copy), SymbolsModule (copy)
 	return not IsAMagicMockModule(self) and (type(self) == "table" and self[SymbolsModule.isSpy] ~= nil)
 end

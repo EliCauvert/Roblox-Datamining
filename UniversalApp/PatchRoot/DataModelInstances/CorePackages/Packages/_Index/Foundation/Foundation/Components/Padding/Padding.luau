@@ -5,7 +5,7 @@ local ReactIsModule = require(Parent.ReactIs)
 local GetTestIdTagModule = require(Foundation.Utility.getTestIdTag)
 local _ = require(Foundation.Components.Types)
 
-local function getPadding(Offset) --[[ Line: 14 ]]
+local function getPadding(Offset)
 	-- upvalues: ReactIsModule (copy)
 	return if ReactIsModule.isBinding(Offset) then {
 		PaddingTop = Offset,
@@ -40,7 +40,7 @@ local function getPadding(Offset) --[[ Line: 14 ]]
 	} else {}
 end
 
-return ReactModule.memo(function(p1) --[[ Line: 73 | Named "Padding" ]]
+return ReactModule.memo(function(p1)
 	-- upvalues: getPadding (copy), ReactModule (copy), GetTestIdTagModule (copy)
 	local Padding = getPadding(p1.value)
 	

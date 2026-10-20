@@ -2,7 +2,7 @@
 local EmphasisParserModule = require(script.Parent.EmphasisParser)
 
 return ({
-	postProcessTokens = function(p1) --[[ Line: 11 ]]
+	postProcessTokens = function(p1)
 		-- upvalues: EmphasisParserModule (copy)
 		local List = {}
 		local v1 = 1

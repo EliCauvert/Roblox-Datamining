@@ -4,7 +4,7 @@ local CreateHttpLinkFunction = require(script.Parent.createHttpLink).createHttpL
 local self = setmetatable({}, { __index = ApolloLink })
 self.__index = self
 
-function self.new(Options) --[[ Line: 23 ]]
+function self.new(Options)
 	-- upvalues: ApolloLink (copy), CreateHttpLinkFunction (copy), self (copy)
 	if Options == nil then
 		Options = {}

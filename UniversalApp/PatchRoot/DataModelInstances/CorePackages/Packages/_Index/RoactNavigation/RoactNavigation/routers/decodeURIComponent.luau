@@ -2,7 +2,7 @@
 local Array = require(Parent.LuauPolyfill).Array
 local RegExpModule = require(Parent.RegExp)
 
-local function stringMatch(Joined, AFAF) --[[ Line: 11 ]]
+local function stringMatch(Joined, AFAF)
 	local ExecResult = AFAF:exec(Joined)
 	local List = {}
 	while ExecResult do
@@ -13,13 +13,13 @@ local function stringMatch(Joined, AFAF) --[[ Line: 11 ]]
 	return List
 end
 
-local function _(p1) --[[ Line: 25 | Named "TypeError" ]]
+local function _(p1)
 	return p1
 end
 
 local AFAF092 = RegExpModule("(%[a-fA-F0-9]{2})+", "i")
 
-local function decodeURIComponent(Character): string --[[ Line: 33 ]]
+local function decodeURIComponent(Character): string
 	-- upvalues: AFAF092 (copy)
 	local ExecResult = AFAF092:exec(Character)
 	local Character1: string = Character
@@ -43,7 +43,7 @@ end
 local AFAF092_1 = RegExpModule("%[a-fA-F0-9]{2}", "i")
 local AFAF092_2 = RegExpModule("(%[a-fA-F0-9]{2})+", "i")
 
-local function decodeComponents(List, Count) --[[ Line: 61 ]]
+local function decodeComponents(List, Count)
 	-- upvalues: decodeURIComponent (copy), Array (copy), decodeComponents (copy)
 	local Success, Result = pcall(decodeURIComponent, table.concat(List, ""))
 	
@@ -58,7 +58,7 @@ local function decodeComponents(List, Count) --[[ Line: 61 ]]
 	end
 end
 
-local function decode(p1: string) --[[ Line: 83 ]]
+local function decode(p1: string)
 	-- upvalues: decodeURIComponent (copy), stringMatch (copy), AFAF092_1 (copy), decodeComponents (copy)
 	local Success, Result = pcall(decodeURIComponent, p1)
 	
@@ -75,11 +75,11 @@ local function decode(p1: string) --[[ Line: 83 ]]
 	return p1
 end
 
-local _ = function(Text: string): string --[[ Line: 107 | Named "escapePercent" ]]
+local _ = function(Text: string): string
 	return (Text:gsub("%%", "%%%%"))
 end
 
-local function customDecodeURIComponent(Text: string): string --[[ Line: 112 ]]
+local function customDecodeURIComponent(Text: string): string
 	-- upvalues: AFAF092_2 (copy), decodeURIComponent (copy), decode (copy)
 	local Character = utf8.char(65533)
 	local config = {
@@ -90,7 +90,7 @@ local function customDecodeURIComponent(Text: string): string --[[ Line: 112 ]]
 	local ExecResult = AFAF092_2:exec(Text)
 	while ExecResult do
 		local ExecResultEntry = ExecResult[1]
-		local Success, Result = xpcall(decodeURIComponent, function(_) --[[ Line: 130 ]]
+		local Success, Result = xpcall(decodeURIComponent, function(_)
 			-- upvalues: decode (upval), ExecResultEntry (copy), config (copy), List (copy)
 			local DecodeResult = decode(ExecResultEntry)
 			
@@ -119,7 +119,7 @@ local function customDecodeURIComponent(Text: string): string --[[ Line: 112 ]]
 	return Text
 end
 
-return function(Text: string) --[[ Line: 172 | Named "decodeComponent" ]]
+return function(Text: string)
 	-- upvalues: customDecodeURIComponent (copy)
 	if type(Text) ~= "string" then
 		error("Expected `encodedURI` to be of type `string`, got `" .. typeof(Text) .. "`")

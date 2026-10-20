@@ -13,7 +13,7 @@ local UseDialogVariantsFunction = require(script.Parent.Parent.useDialogVariants
 local UseDialogModule = require(script.Parent.Parent.useDialog)
 local config = { orientation = OrientationModule.Horizontal }
 
-return function(p1) --[[ Line: 45 | Named "DialogActions" ]]
+return function(p1)
 	-- upvalues: WithDefaultsModule (copy), config (copy), UseDialogVariantsFunction (copy), UseDialogModule (copy), DialogSizeModule (copy), OrientationModule (copy), ReactModule (copy), ViewModule (copy), ButtonGroupModule (copy), FillBehaviorModule (copy), TextModule (copy)
 	local WithDefaultsModuleResult = WithDefaultsModule(p1, config)
 	local UseDialogVariantsResult = UseDialogVariantsFunction()

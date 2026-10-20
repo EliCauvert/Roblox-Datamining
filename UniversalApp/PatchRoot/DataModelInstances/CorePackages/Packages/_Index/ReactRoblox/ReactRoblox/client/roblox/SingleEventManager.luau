@@ -2,7 +2,7 @@
 local SingleEventManager = {}
 SingleEventManager.__index = SingleEventManager
 
-function SingleEventManager.new(_instance) --[[ Line: 49 ]]
+function SingleEventManager.new(_instance)
 	-- upvalues: SingleEventManager (copy)
 	return (setmetatable({
 		_status = "Disabled",
@@ -14,11 +14,11 @@ function SingleEventManager.new(_instance) --[[ Line: 49 ]]
 	}, SingleEventManager))
 end
 
-function SingleEventManager:connectEvent(p1, p2) --[[ Line: 77 ]]
+function SingleEventManager:connectEvent(p1, p2)
 	self:_connect(p1, self._instance[p1], p2)
 end
 
-function SingleEventManager:connectPropertyChange(Text, p1) --[[ Line: 81 ]]
+function SingleEventManager:connectPropertyChange(Text, p1)
 	local Success, Result = pcall(self._instance.GetPropertyChangedSignal, self._instance, Text)
 	
 	if not Success then
@@ -27,7 +27,7 @@ function SingleEventManager:connectPropertyChange(Text, p1) --[[ Line: 81 ]]
 	self:_connect("Change." .. Text, Result, p1)
 end
 
-function SingleEventManager:_connect(p1, Signal, p2) --[[ Line: 99 ]]
+function SingleEventManager:_connect(p1, Signal, p2)
 	if p2 == nil then
 		if self._connections[p1] ~= nil then
 			self._connections[p1]:Disconnect()
@@ -38,7 +38,7 @@ function SingleEventManager:_connect(p1, Signal, p2) --[[ Line: 99 ]]
 		return
 	else
 		if self._connections[p1] == nil then
-			self._connections[p1] = Signal:Connect(function(...) --[[ Line: 110 ]]
+			self._connections[p1] = Signal:Connect(function(...)
 				-- upvalues: self (copy), p1 (copy)
 				if self._status == "Enabled" then
 					self._listeners[p1](self._instance, ...)
@@ -54,11 +54,11 @@ function SingleEventManager:_connect(p1, Signal, p2) --[[ Line: 99 ]]
 	end
 end
 
-function SingleEventManager:suspend() --[[ Line: 130 ]]
+function SingleEventManager:suspend()
 	self._status = "Suspended"
 end
 
-function SingleEventManager:resume() --[[ Line: 134 ]]
+function SingleEventManager:resume()
 	-- upvalues: Console (copy)
 	if self._isResuming then return end
 	self._isResuming = true

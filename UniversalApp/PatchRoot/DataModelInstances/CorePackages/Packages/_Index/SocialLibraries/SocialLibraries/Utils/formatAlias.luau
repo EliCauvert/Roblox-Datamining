@@ -1,3 +1,3 @@
-﻿return function(p1): string --[[ Line: 1 ]]
+﻿return function(p1): string
 	return string.format("(%s)", p1)
 end

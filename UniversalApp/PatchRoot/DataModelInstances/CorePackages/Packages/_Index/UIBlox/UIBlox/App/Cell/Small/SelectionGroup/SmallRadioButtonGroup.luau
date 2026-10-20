@@ -29,12 +29,12 @@ SmallRadioButtonGroup.validateProps = TModule.strictInterface({
 })
 SmallRadioButtonGroup.defaultProps = { selectedValue = nil, isRoactGamepadEnabled = true }
 
-function SmallRadioButtonGroup.init(p1) --[[ Line: 65 ]]
+function SmallRadioButtonGroup.init(p1)
 	-- upvalues: RoactGamepadModule (copy)
 	p1.gamepadRefs = p1.props.isRoactGamepadEnabled and RoactGamepadModule.createRefCache() or {}
 end
 
-function SmallRadioButtonGroup.renderButtonCell(p1, p2, LayoutOrder: number, IsRoactGamepadEnabled) --[[ Line: 69 ]]
+function SmallRadioButtonGroup.renderButtonCell(p1, p2, LayoutOrder: number, IsRoactGamepadEnabled)
 	-- upvalues: RoactModule (copy), RoactGamepadModule (copy), SmallRadioButtonCellModule (copy)
 	return RoactModule.createElement(if IsRoactGamepadEnabled then RoactGamepadModule.Focusable[SmallRadioButtonCellModule] else SmallRadioButtonCellModule, {
 		id = p2.id,
@@ -51,7 +51,7 @@ function SmallRadioButtonGroup.renderButtonCell(p1, p2, LayoutOrder: number, IsR
 	})
 end
 
-function SmallRadioButtonGroup.render(p1) --[[ Line: 89 ]]
+function SmallRadioButtonGroup.render(p1)
 	-- upvalues: RoactModule (copy), RoactGamepadModule (copy)
 	assert(p1.validateProps(p1.props))
 	local config = {
@@ -83,7 +83,7 @@ function SmallRadioButtonGroup.render(p1) --[[ Line: 89 ]]
 	}, config)
 end
 
-return RoactModule.forwardRef(function(p2, FrameRef) --[[ Line: 121 ]]
+return RoactModule.forwardRef(function(p2, FrameRef)
 	-- upvalues: UseCursorByTypeModule (copy), CursorTypeModule (copy), RoactModule (copy), SmallRadioButtonGroup (copy), CryoModule (copy)
 	return RoactModule.createElement(SmallRadioButtonGroup, CryoModule.Dictionary.join(p2, {
 		frameRef = FrameRef,

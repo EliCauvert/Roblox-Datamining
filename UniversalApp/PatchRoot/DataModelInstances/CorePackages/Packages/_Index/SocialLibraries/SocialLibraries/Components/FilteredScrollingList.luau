@@ -35,15 +35,15 @@ FilteredScrollingList.defaultProps = {
 	renderEntry = nil,
 	entryHeight = 54,
 	scrollTouchedBottomCallback = nil,
-	filterPredicate = function(_, _): boolean --[[ Line: 52 ]]
+	filterPredicate = function(_, _): boolean
 		return true
 	end,
-	sortComparator = function(_, _): boolean --[[ Line: 56 ]]
+	sortComparator = function(_, _): boolean
 		return true
 	end
 }
 
-function FilteredScrollingList.shouldUpdate(p1, Props, State): boolean --[[ Line: 61 ]]
+function FilteredScrollingList.shouldUpdate(p1, Props, State): boolean
 	if State ~= p1.state then
 		return true
 	end
@@ -76,11 +76,11 @@ function FilteredScrollingList.shouldUpdate(p1, Props, State): boolean --[[ Line
 	return false
 end
 
-function FilteredScrollingList.init(p2) --[[ Line: 105 ]]
+function FilteredScrollingList.init(p2)
 	p2:setState({})
 end
 
-function FilteredScrollingList.render(p2) --[[ Line: 109 ]]
+function FilteredScrollingList.render(p2)
 	-- upvalues: Roact (copy), SortedListModule (copy), CallbackInputBoxWithIconModule (copy)
 	local FilterPredicateFunction = p2.props.filterPredicate
 	local FilterText = p2.state.filterText
@@ -139,7 +139,7 @@ function FilteredScrollingList.render(p2) --[[ Line: 109 ]]
 				placeholderText = p2.props.searchPlaceholderText,
 				clearIconColor3 = p2.props.searchClearIconColor3,
 				clearIcon = p2.props.searchClearIcon,
-				textChangedCallback = function(FilterText) --[[ Line: 195 ]]
+				textChangedCallback = function(FilterText)
 					-- upvalues: p2 (copy)
 					p2:setState({ filterText = FilterText })
 				end
@@ -165,7 +165,7 @@ function FilteredScrollingList.render(p2) --[[ Line: 109 ]]
 			MidImage = "rbxasset://textures/ui/LuaChat/9-slice/scroll-bar.png",
 			TopImage = "rbxasset://textures/ui/LuaChat/9-slice/scroll-bar.png",
 			LayoutOrder = 4,
-			[Roact.Change.CanvasPosition] = function(ScrollFrame) --[[ Line: 234 ]]
+			[Roact.Change.CanvasPosition] = function(ScrollFrame)
 				-- upvalues: p2 (copy)
 				local Offset = ScrollFrame.CanvasSize.Y.Offset
 				

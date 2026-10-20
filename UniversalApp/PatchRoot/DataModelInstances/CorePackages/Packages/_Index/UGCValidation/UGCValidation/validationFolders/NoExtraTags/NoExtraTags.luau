@@ -5,7 +5,7 @@ local CollectionService = game:GetService("CollectionService")
 local ErrorSourceStringsModule = require(Parent.validationSystem.ErrorSourceStrings)
 local GetFFlagUGCValidateNoExtraTagsRequireHsrAssetsModule = require(Parent.flags.getFFlagUGCValidateNoExtraTagsRequireHsrAssets)
 
-local function collectTaggedPaths(RootInstance, List) --[[ Line: 22 ]]
+local function collectTaggedPaths(RootInstance, List)
 	-- upvalues: CollectionService (copy)
 	local Descendants = RootInstance:GetDescendants()
 	table.insert(Descendants, RootInstance)
@@ -27,7 +27,7 @@ return {
 		"Asset_EF_TaggedJacket",
 		"Bundle_EF_BodyWithLLLTagged.LeftLeg"
 	},
-	run = function(p1, p2) --[[ Line: 32 ]]
+	run = function(p1, p2)
 		-- upvalues: collectTaggedPaths (copy), GetFFlagUGCValidateNoExtraTagsRequireHsrAssetsModule (copy), ErrorSourceStringsModule (copy)
 		local List = {}
 		collectTaggedPaths(p2.rootInstance, List)

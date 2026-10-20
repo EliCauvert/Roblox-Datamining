@@ -6,7 +6,7 @@ local ValidateDependenciesModule = require(Parent.validation.validateDependencie
 local FailureReasonsAccumulatorModule = require(Parent.util.FailureReasonsAccumulator)
 local GetFFlagUGCValidateMakeupCategoryParityModule = require(Parent.flags.getFFlagUGCValidateMakeupCategoryParity)
 
-return function(p1) --[[ Line: 12 | Named "validateMakeupAsset" ]]
+return function(p1)
 	-- upvalues: GetFFlagUGCValidateMakeupCategoryParityModule (copy), ValidateSingleInstanceModule (copy), ValidateDependenciesModule (copy), FailureReasonsAccumulatorModule (copy), ValidateTagsModule (copy)
 	local Instances = p1.instances
 	

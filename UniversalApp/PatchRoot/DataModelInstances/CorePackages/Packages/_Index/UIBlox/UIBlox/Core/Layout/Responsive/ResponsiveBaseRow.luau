@@ -7,7 +7,7 @@ local ResponsiveLayoutContextModule = require(Parent.ResponsiveLayoutContext)
 local ResponsiveLayoutConfigReaderModule = require(Parent.ResponsiveLayoutConfigReader)
 local ResponsiveBaseRow = RoactModule.PureComponent:extend("ResponsiveBaseRow")
 
-local function multilineScrollingValidator(DefaultProps) --[[ Line: 16 ]]
+local function multilineScrollingValidator(DefaultProps)
 	if DefaultProps.multiLine and DefaultProps.scrollable then
 		return false, "multiLine can't be scrollable"
 	else
@@ -39,7 +39,7 @@ ResponsiveBaseRow.defaultProps = {
 	multiLine = false
 }
 
-function ResponsiveBaseRow.renderChildrenWithPadding(p1, Offset, YOffset) --[[ Line: 64 ]]
+function ResponsiveBaseRow.renderChildrenWithPadding(p1, Offset, YOffset)
 	-- upvalues: Object (copy), RoactModule (copy)
 	local Lines = p1.props.lines or 1
 	local PaddingTopLines = p1.props.paddingTopLines or 0
@@ -53,7 +53,7 @@ function ResponsiveBaseRow.renderChildrenWithPadding(p1, Offset, YOffset) --[[ L
 	}, p1.props[RoactModule.Children])
 end
 
-function ResponsiveBaseRow.renderChildrenMultiline(p1, FillDirectionMaxCells: number, MarginValue, XOffset, YOffset) --[[ Line: 80 ]]
+function ResponsiveBaseRow.renderChildrenMultiline(p1, FillDirectionMaxCells: number, MarginValue, XOffset, YOffset)
 	-- upvalues: Object (copy), RoactModule (copy)
 	local Lines = p1.props.lines or 1
 	
@@ -73,7 +73,7 @@ function ResponsiveBaseRow.renderChildrenMultiline(p1, FillDirectionMaxCells: nu
 	}, p1:renderChildrenWithPadding(MarginValue, YOffset))
 end
 
-function ResponsiveBaseRow.renderChildren(p1, Scrollable, MarginValue: number, Offset, VerticalGutterValue) --[[ Line: 102 ]]
+function ResponsiveBaseRow.renderChildren(p1, Scrollable, MarginValue: number, Offset, VerticalGutterValue)
 	-- upvalues: Object (copy), RoactModule (copy)
 	local AssignResult = Object.assign({
 		_uiblox_grid_layout_ = RoactModule.createElement("UIListLayout", {
@@ -104,11 +104,11 @@ function ResponsiveBaseRow.renderChildren(p1, Scrollable, MarginValue: number, O
 	end
 end
 
-local function _(p1, p2) --[[ Line: 136 | Named "applyUDim" ]]
+local function _(p1, p2)
 	return p1.Scale * p2 + p1.Offset
 end
 
-function ResponsiveBaseRow.getSize(p1, RelativeHeight, GutterValue, VerticalGutterValue, MarginValue: number, ColumnsValue): UDim2 --[[ Line: 141 ]]
+function ResponsiveBaseRow.getSize(p1, RelativeHeight, GutterValue, VerticalGutterValue, MarginValue: number, ColumnsValue): UDim2
 	if RelativeHeight == nil then
 		return UDim2.fromScale(1, 0)
 	end
@@ -125,7 +125,7 @@ function ResponsiveBaseRow.getSize(p1, RelativeHeight, GutterValue, VerticalGutt
 	return UDim2.new(1, 0, ScaleRatio, NewScale)
 end
 
-function ResponsiveBaseRow.render(p1) --[[ Line: 165 ]]
+function ResponsiveBaseRow.render(p1)
 	-- upvalues: multilineScrollingValidator (copy), RoactModule (copy), ResponsiveLayoutContextModule (copy), Object (copy), ResponsiveLayoutConfigReaderModule (copy)
 	assert(multilineScrollingValidator(p1.props))
 	local RelativeHeight = p1.props.relativeHeight
@@ -134,7 +134,7 @@ function ResponsiveBaseRow.render(p1) --[[ Line: 165 ]]
 	local Formatted: string = if p1.props.layoutOrder then string.format("ResponsiveRow%02d", p1.props.layoutOrder) else "ResponsiveRow"
 	
 	return RoactModule.createElement(ResponsiveLayoutContextModule.Consumer, {
-		render = function(p2) --[[ Line: 174 ]]
+		render = function(p2)
 			-- upvalues: Object (upval), p1 (copy), Scrollable (copy), MultiLine (copy), RelativeHeight (ref), ResponsiveLayoutConfigReaderModule (upval), RoactModule (upval), ResponsiveLayoutContextModule (upval), Formatted (copy)
 			local AssignResult = Object.assign({}, p2, {
 				subPixelOffset = 0,
@@ -201,7 +201,7 @@ function ResponsiveBaseRow.render(p1) --[[ Line: 165 ]]
 	})
 end
 
-return RoactModule.forwardRef(function(p1, GridBasicRowRef) --[[ Line: 230 ]]
+return RoactModule.forwardRef(function(p1, GridBasicRowRef)
 	-- upvalues: RoactModule (copy), ResponsiveBaseRow (copy), Object (copy)
 	return RoactModule.createElement(ResponsiveBaseRow, Object.assign({}, p1, { gridBasicRowRef = GridBasicRowRef }))
 end)

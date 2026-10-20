@@ -15,13 +15,13 @@ local MeshpartAccessoryCheckAvatarPartScaleType = game:DefineFastFlag("MeshpartA
 local UGCValidationScaleMinimumThousandths = game:DefineFastInt("UGCValidationScaleMinimumThousandths", 10)
 local FIntUGCValidationScaleMaximumThousandths = game:DefineFastInt("FIntUGCValidationScaleMaximumThousandths", 10000)
 
-local function pointInBounds(p1, CF, Vector): boolean --[[ Line: 37 ]]
+local function pointInBounds(p1, CF, Vector): boolean
 	local Vector1 = CF:PointToObjectSpace(p1)
 	
 	return -Vector.X / 2 <= Vector1.X and (Vector1.X <= Vector.X / 2 and (-Vector.Y / 2 <= Vector1.Y and (Vector1.Y <= Vector.Y / 2 and -Vector.Z / 2 <= Vector1.Z))) and Vector1.Z <= Vector.Z / 2
 end
 
-local function _(p1: number): number --[[ Line: 47 | Named "truncate" ]]
+local function _(p1: number): number
 	return math.floor(p1 * 100) / 100
 end
 
@@ -33,7 +33,7 @@ return {
 	},
 	requiredData = { ValidationEnumsModule.SharedDataMember.renderMeshesData },
 	expectedFailures = {},
-	run = function(p1, p2) --[[ Line: 51 ]]
+	run = function(p1, p2)
 		-- upvalues: ValidationEnumsModule (copy), ConstantsModule (copy), GetAttachmentModule (copy), IsMeshPartAccessoryModule (copy), MeshpartAccessoryCheckAvatarPartScaleType (copy), LegacyAccessoryCheckAvatarPartScaleType (copy), GetAccessoryScaleModule (copy), ErrorSourceStringsModule (copy), UGCValidationScaleMinimumThousandths (copy), GetFFlagUGCValidateMeshMaxScaleModule (copy), FIntUGCValidationScaleMaximumThousandths (copy), UGCValidationService (copy), pointInBounds (copy), GetMeshMinMaxModule (copy), GetFIntUGCValidateMeshCenteringHundredsThresholdModule (copy)
 		local RootInstance = p2.rootInstance
 		local AssetType = p2.uploadEnum.assetType
