@@ -3,7 +3,7 @@
     try {
         var e = "undefined" != typeof globalThis ? globalThis : "undefined" != typeof global ? global : "undefined" != typeof window ? window : "undefined" != typeof self ? self : {},
             n = (new e.Error).stack;
-        n && ((e._debugIds || (e._debugIds = {}))[n] = "3f986705-3ddb-5f93-befe-760b8d863b06")
+        n && ((e._debugIds || (e._debugIds = {}))[n] = "1601757f-68dc-ead8-25d5-3754402ae643")
     } catch (e) {}
 }();
 (globalThis.TURBOPACK || (globalThis.TURBOPACK = [])).push(["object" == typeof document ? document.currentScript : void 0, 889311, e => {
@@ -68,8 +68,8 @@
         u = /experiences\/.+\/permissions\/*$/,
         p = /store\/.+\/permissions\/*$/,
         h = /events\/.+\/configure\/*$/,
-        m = /experiences\/.+\/feedback\/*$/,
-        v = /explore\/licenses\/.+\/*$/,
+        v = /experiences\/.+\/feedback\/*$/,
+        m = /explore\/licenses\/.+\/*$/,
         y = /explore\/licenses\/.+\/.+\/request$/,
         C = /license-manager\/agreements\/.+\/*$/,
         b = /license-manager\/license-listings\/.+\/*$/,
@@ -180,7 +180,7 @@
                 });
             i && i.tags.forEach(t => e.addTag(t));
             let n = k.find(e => a.match(e.regex));
-            n && n.tags.forEach(t => e.addTag(t)), a.endsWith("settings/webhooks") ? e.addTag("settings/webhooks") : a.endsWith("settings/preferences") ? e.addTag("settings/preferences") : a.endsWith("roadmap") ? e.addTag("roadmap") : a.endsWith("landing") ? e.addTag("landing") : "/" === a ? e.addTag("homepage") : a.endsWith("creator") ? e.addTag("developerLanding") : d.test(a) ? e.addTag("experiences/access") : (null == t ? void 0 : t.match(g)) ? e.addTag("gamepass") : a.endsWith("activity-history") && !n ? e.addTag("activity-feed") : u.test(a) ? e.addTag("experiences/permissions") : p.test(a) ? e.addTag("asset/permissions") : a.endsWith("events/create") ? e.addTag("events/create") : h.test(a) ? e.addTag("events/configure") : m.test(a) ? e.addTag("player-feedback") : T.test(a) ? e.addTag("experiences/chat") : a.endsWith("rights-manager") || a.endsWith("rights-manager/register") ? e.addTag("rights-manager/register") : a.endsWith("rights-manager/removal-requests") ? e.addTag("rights-manager/removal-requests") : a.endsWith("rights-manager/matches") ? e.addTag("rights-manager/matches") : a.endsWith("license-manager/licenses") ? e.addTag("license-manager/licenses") : a.endsWith("license-manager/matches") ? e.addTag("license-manager/matches") : a.endsWith("license-manager/ip-library") ? e.addTag("license-manager/ip-library") : a.endsWith("license-manager/creator-agreements") ? e.addTag("license-manager/creator-agreements") : b.test(a) ? e.addTag("license-manager/license-listings/view-listing") : C.test(a) ? e.addTag("license-manager/agreements/view-agreement") : f.test(a) ? e.addTag("license-manager/creator-agreements/view-agreement") : a.endsWith("license-manager/ip-library/create") ? e.addTag("license-manager/ip-library/create") : S.test(a) ? e.addTag("license-manager/ip-library/view-family") : a.endsWith("explore/licenses") ? e.addTag("explore/licenses") : v.test(a) ? e.addTag("explore/licenses/view-listing") : y.test(a) && e.addTag("explore/licenses/request")
+            n && n.tags.forEach(t => e.addTag(t)), a.endsWith("settings/webhooks") ? e.addTag("settings/webhooks") : a.endsWith("settings/preferences") ? e.addTag("settings/preferences") : a.endsWith("roadmap") ? e.addTag("roadmap") : a.endsWith("landing") ? e.addTag("landing") : "/" === a ? e.addTag("homepage") : a.endsWith("creator") ? e.addTag("developerLanding") : d.test(a) ? e.addTag("experiences/access") : (null == t ? void 0 : t.match(g)) ? e.addTag("gamepass") : a.endsWith("activity-history") && !n ? e.addTag("activity-feed") : u.test(a) ? e.addTag("experiences/permissions") : p.test(a) ? e.addTag("asset/permissions") : a.endsWith("events/create") ? e.addTag("events/create") : h.test(a) ? e.addTag("events/configure") : v.test(a) ? e.addTag("player-feedback") : T.test(a) ? e.addTag("experiences/chat") : a.endsWith("rights-manager") || a.endsWith("rights-manager/register") ? e.addTag("rights-manager/register") : a.endsWith("rights-manager/removal-requests") ? e.addTag("rights-manager/removal-requests") : a.endsWith("rights-manager/matches") ? e.addTag("rights-manager/matches") : a.endsWith("license-manager/licenses") ? e.addTag("license-manager/licenses") : a.endsWith("license-manager/matches") ? e.addTag("license-manager/matches") : a.endsWith("license-manager/ip-library") ? e.addTag("license-manager/ip-library") : a.endsWith("license-manager/creator-agreements") ? e.addTag("license-manager/creator-agreements") : b.test(a) ? e.addTag("license-manager/license-listings/view-listing") : C.test(a) ? e.addTag("license-manager/agreements/view-agreement") : f.test(a) ? e.addTag("license-manager/creator-agreements/view-agreement") : a.endsWith("license-manager/ip-library/create") ? e.addTag("license-manager/ip-library/create") : S.test(a) ? e.addTag("license-manager/ip-library/view-family") : a.endsWith("explore/licenses") ? e.addTag("explore/licenses") : m.test(a) ? e.addTag("explore/licenses/view-listing") : y.test(a) && e.addTag("explore/licenses/request")
         };
     E.events.on("pageload", e => {
         x(e)
@@ -223,8 +223,8 @@
         p = "u" > typeof navigator && /^((?!chrome|android).)*(safari|mobile)/i.test(navigator.userAgent) && /(os |version\/)15(.|_)4/i.test(navigator.userAgent),
         h = i.forwardRef(function(e, h) {
             let {
-                addEndListener: m,
-                appear: v = !0,
+                addEndListener: v,
+                appear: m = !0,
                 children: y,
                 easing: C,
                 in: b,
@@ -237,7 +237,7 @@
                 style: k,
                 timeout: x = "auto",
                 TransitionComponent: P = r.T
-            } = e, N = (0, a._)(e, d), L = (0, o.u)(), A = i.useRef(), U = (0, n.u)(), V = i.useRef(null), R = (0, c.u)(V, (0, l.g)(y), h), _ = e => t => {
+            } = e, N = (0, a._)(e, d), L = (0, o.u)(), U = i.useRef(), A = (0, n.u)(), V = i.useRef(null), R = (0, c.u)(V, (0, l.g)(y), h), _ = e => t => {
                 if (e) {
                     let a = V.current;
                     void 0 === t ? e(a) : e(a, t)
@@ -256,10 +256,10 @@
                 }, {
                     mode: "enter"
                 });
-                "auto" === x ? A.current = a = U.transitions.getAutoHeightDuration(e.clientHeight) : a = i, e.style.transition = [U.transitions.create("opacity", {
+                "auto" === x ? U.current = a = A.transitions.getAutoHeightDuration(e.clientHeight) : a = i, e.style.transition = [A.transitions.create("opacity", {
                     duration: a,
                     delay: n
-                }), U.transitions.create("transform", {
+                }), A.transitions.create("transform", {
                     duration: p ? a : .666 * a,
                     delay: n,
                     easing: s
@@ -276,17 +276,17 @@
                 }, {
                     mode: "exit"
                 });
-                "auto" === x ? A.current = t = U.transitions.getAutoHeightDuration(e.clientHeight) : t = a, e.style.transition = [U.transitions.create("opacity", {
+                "auto" === x ? U.current = t = A.transitions.getAutoHeightDuration(e.clientHeight) : t = a, e.style.transition = [A.transitions.create("opacity", {
                     duration: t,
                     delay: i
-                }), U.transitions.create("transform", {
+                }), A.transitions.create("transform", {
                     duration: p ? t : .666 * t,
                     delay: p ? i : i || .333 * t,
                     easing: n
                 })].join(","), e.style.opacity = 0, e.style.transform = g(.75), E && E(e)
             }), G = _(I);
             return (0, s.jsx)(P, (0, t._)({
-                appear: v,
+                appear: m,
                 in: b,
                 nodeRef: V,
                 onEnter: O,
@@ -296,7 +296,7 @@
                 onExited: G,
                 onExiting: F,
                 addEndListener: e => {
-                    "auto" === x && L.start(A.current || 0, e), m && m(V.current, e)
+                    "auto" === x && L.start(U.current || 0, e), v && v(V.current, e)
                 },
                 timeout: "auto" === x ? null : x
             }, N, {
@@ -406,16 +406,16 @@
                     children: d,
                     className: p,
                     color: h = "default",
-                    disabled: m = !1,
-                    disableFocusRipple: v = !1,
+                    disabled: v = !1,
+                    disableFocusRipple: m = !1,
                     size: y = "medium"
                 } = r,
                 C = (0, t._)(r, g),
                 b = (0, a._)({}, r, {
                     edge: o,
                     color: h,
-                    disabled: m,
-                    disableFocusRipple: v,
+                    disabled: v,
+                    disableFocusRipple: m,
                     size: y
                 }),
                 f = (e => {
@@ -433,8 +433,8 @@
             return (0, s.jsx)(u, (0, a._)({
                 className: (0, n.c)(f.root, p),
                 centerRipple: !0,
-                focusRipple: !v,
-                disabled: m,
+                focusRipple: !m,
+                disabled: v,
                 ref: i
             }, C, {
                 ownerState: b,
@@ -472,26 +472,38 @@
             })
         }
         sendEventViaImg(e, t) {
-            let {
-                localTime: a,
-                target: i,
-                eventType: n,
-                context: r,
-                additionalProperties: s,
-                currentUrl: o,
-                guestId: c,
-                sessionId: l
-            } = e, d = a.toISOString(), g = new URL("".concat(this.baseUrl, "/e.png"));
-            g.searchParams.append("t", i), g.searchParams.append("evt", n), g.searchParams.append("ctx", r), g.searchParams.append("lt", d), g.searchParams.append("url", o || window.location.href), void 0 !== c && g.searchParams.append("gid", c), void 0 !== l && g.searchParams.append("sid", l), void 0 !== s && Object.keys(s).forEach(e => {
-                var t;
-                g.searchParams.append(e, (null != (t = s[e]) ? t : "").toString())
-            });
-            let u = new Image;
-            return u.src = g.href, u.onload = () => {
+            let a = this.buildEventUrl(e),
+                i = new Image;
+            return i.src = a.href, i.onload = () => {
                 void 0 !== t && t(!0)
-            }, u.onerror = () => {
+            }, i.onerror = () => {
                 void 0 !== t && t(!1)
-            }, u
+            }, i
+        }
+        async sendEventViaFetch(e, t) {
+            let a = this.buildEventUrl(e),
+                i = await fetch(a.href, {
+                    mode: "cors",
+                    credentials: "include",
+                    keepalive: !0
+                }).then(e => e.ok, () => !1);
+            null == t || t(i)
+        }
+        buildEventUrl(e) {
+            let {
+                localTime: t,
+                target: a,
+                eventType: i,
+                context: n,
+                additionalProperties: r,
+                currentUrl: s,
+                guestId: o,
+                sessionId: c
+            } = e, l = t.toISOString(), d = new URL("".concat(this.baseUrl, "/e.png"));
+            return d.searchParams.append("t", a), d.searchParams.append("evt", i), d.searchParams.append("ctx", n), d.searchParams.append("lt", l), d.searchParams.append("url", s || window.location.href), void 0 !== o && d.searchParams.append("gid", o), void 0 !== c && d.searchParams.append("sid", c), void 0 !== r && Object.keys(r).forEach(e => {
+                var t;
+                d.searchParams.append(e, (null != (t = r[e]) ? t : "").toString())
+            }), d
         }
         constructor(e = new a) {
             (0, t._)(this, "configuration", void 0), (0, t._)(this, "baseUrl", void 0), this.configuration = e, this.baseUrl = e.baseUrl
@@ -652,7 +664,7 @@
             (0, t._)(this, "configuration", void 0), (0, t._)(this, "baseUrl", void 0), this.configuration = e, this.baseUrl = e.baseUrl
         }
     }
-    class m {
+    class v {
         sendEvent(e) {
             let {
                 localTime: t,
@@ -672,32 +684,44 @@
             })
         }
         sendEventViaImg(e, t) {
-            let {
-                localTime: a,
-                target: i,
-                eventType: n,
-                context: r,
-                additionalProperties: s,
-                currentUrl: o,
-                guestId: c,
-                sessionId: l
-            } = e, d = a.toISOString(), g = new URL("".concat(this.baseUrl, "/e.png"));
-            g.searchParams.append("t", i), g.searchParams.append("evt", n), g.searchParams.append("ctx", r), g.searchParams.append("lt", d), g.searchParams.append("url", o || window.location.href), void 0 !== c && g.searchParams.append("gid", c), void 0 !== l && g.searchParams.append("sid", l), void 0 !== s && Object.keys(s).forEach(e => {
-                var t;
-                g.searchParams.append(e, (null != (t = s[e]) ? t : "").toString())
-            });
-            let u = new Image;
-            return u.src = g.href, u.onload = () => {
+            let a = this.buildEventUrl(e),
+                i = new Image;
+            return i.src = a.href, i.onload = () => {
                 void 0 !== t && t(!0)
-            }, u.onerror = () => {
+            }, i.onerror = () => {
                 void 0 !== t && t(!1)
-            }, u
+            }, i
+        }
+        async sendEventViaFetch(e, t) {
+            let a = this.buildEventUrl(e),
+                i = await fetch(a.href, {
+                    mode: "cors",
+                    credentials: "include",
+                    keepalive: !0
+                }).then(e => e.ok, () => !1);
+            null == t || t(i)
+        }
+        buildEventUrl(e) {
+            let {
+                localTime: t,
+                target: a,
+                eventType: i,
+                context: n,
+                additionalProperties: r,
+                currentUrl: s,
+                guestId: o,
+                sessionId: c
+            } = e, l = t.toISOString(), d = new URL("".concat(this.baseUrl, "/e.png"));
+            return d.searchParams.append("t", a), d.searchParams.append("evt", i), d.searchParams.append("ctx", n), d.searchParams.append("lt", l), d.searchParams.append("url", s || window.location.href), void 0 !== o && d.searchParams.append("gid", o), void 0 !== c && d.searchParams.append("sid", c), void 0 !== r && Object.keys(r).forEach(e => {
+                var t;
+                d.searchParams.append(e, (null != (t = r[e]) ? t : "").toString())
+            }), d
         }
         constructor(e = new h) {
             (0, t._)(this, "configuration", void 0), (0, t._)(this, "baseUrl", void 0), this.configuration = e, this.baseUrl = e.baseUrl
         }
     }
-    let v = "CreatorWeb";
+    let m = "CreatorWeb";
     class y {
         logEvent(e) {
             let {
@@ -714,8 +738,8 @@
                 let t = a[e];
                 null != t && (r[e] = t.toString())
             }), this.eventStreamTracker.sendEventViaImg({
-                target: v,
-                eventType: v,
+                target: m,
+                eventType: m,
                 localTime: new Date,
                 context: String(e.eventType),
                 currentUrl: String(t),
@@ -730,8 +754,8 @@
         constructor({
             eventBaseUrl: e
         }) {
-            (0, t._)(this, "eventStreamTracker", void 0), this.eventStreamTracker = new m(new h({
-                baseUrl: "".concat(e, "/").concat(v)
+            (0, t._)(this, "eventStreamTracker", void 0), this.eventStreamTracker = new v(new h({
+                baseUrl: "".concat(e, "/").concat(m)
             }))
         }
     }
@@ -767,7 +791,7 @@
         constructor({
             eventBaseUrl: e
         }) {
-            (0, t._)(this, "eventStreamTracker", void 0), this.eventStreamTracker = new m(new h({
+            (0, t._)(this, "eventStreamTracker", void 0), this.eventStreamTracker = new v(new h({
                 baseUrl: "".concat(e, "/").concat(C)
             }))
         }
@@ -1211,5 +1235,5 @@
     }])
 }]);
 
-//# debugId=3f986705-3ddb-5f93-befe-760b8d863b06
-//# sourceMappingURL=1mgkfoz0uef3g.js.map
+//# debugId=1601757f-68dc-ead8-25d5-3754402ae643
+//# sourceMappingURL=1vxdf1wk2vywx.js.map

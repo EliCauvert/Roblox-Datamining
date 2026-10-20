@@ -3,7 +3,7 @@
     try {
         var e = "undefined" != typeof globalThis ? globalThis : "undefined" != typeof global ? global : "undefined" != typeof window ? window : "undefined" != typeof self ? self : {},
             n = (new e.Error).stack;
-        n && ((e._debugIds || (e._debugIds = {}))[n] = "c4139edf-1cd0-3928-bb96-84c33a314d21")
+        n && ((e._debugIds || (e._debugIds = {}))[n] = "940c050c-0670-4281-6f11-d7b0583460ca")
     } catch (e) {}
 }();
 (globalThis.TURBOPACK || (globalThis.TURBOPACK = [])).push(["object" == typeof document ? document.currentScript : void 0, 239328, e => {
@@ -688,7 +688,7 @@
         y = e.i(917852),
         g = e.i(576069),
         f = e.i(663563);
-    let A = "".concat("https://assets.create.roblox.com/0d20ac295b260f61613cc053517abeede07b8a5a/assets", "/home/publish_eligibility_banner.webp"),
+    let A = "".concat("https://assets.create.roblox.com/754784cade2a5311993953beacdf6b4aa2509994/assets", "/home/publish_eligibility_banner.webp"),
         b = (0, l.withTranslation)(e => {
             var b;
             let {
@@ -3030,5 +3030,5 @@
     e.s(["ArrowUpwardIcon", () => t.ArrowUpward])
 }]);
 
-//# debugId=c4139edf-1cd0-3928-bb96-84c33a314d21
-//# sourceMappingURL=2uls5el7ctrwj.js.map
+//# debugId=940c050c-0670-4281-6f11-d7b0583460ca
+//# sourceMappingURL=1tk7gc78bso8m.js.map
