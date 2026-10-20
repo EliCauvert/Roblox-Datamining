@@ -3343,10 +3343,6 @@ Feature.DevSubs.Label.RenewalDate,تاريخ التجديد: {date}
 Feature.DevSubs.Message.ConfirmCancellation,هل أنت متأكد من أنك تريد إلغاء اشتراكك؟
 Feature.DevSubs.UserManagement.MonthlyPrice,{robuxAmount} / الشهر
 Feature.DeveloperProducts.Heading.Products,منتجات
-Feature.DeveloperProducts.Heading.Success,
-Feature.DeveloperProducts.Message.BackToStore,الرجوع إلى المتجر
-Feature.DeveloperProducts.Message.OK,
-Feature.DeveloperProducts.Message.PurchaseSucceed,"لقد اشتريت ""{productName}"". سيتم تحصيل العنصر الذي اشتريته بعد انضمامك إلى التجربة."
 Feature.DisplayName.ErrorMessage.AgedUpNameContainPII,لعل الاسم يحتوي على معلومات خاصة
 Feature.DisplayName.ErrorMessage.AgedUpNameHasChanged,لقد غيرتَ اسمك بالفعل في الأيام السبعة الماضية
 Feature.DisplayName.ErrorMessage.AgedUpNameInappropriate,الاسم غير ملائم على Roblox

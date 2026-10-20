@@ -3413,10 +3413,6 @@ Feature.DevSubs.Label.RenewalDate,续订日期：{date}
 Feature.DevSubs.Message.ConfirmCancellation,确定要取消订阅？
 Feature.DevSubs.UserManagement.MonthlyPrice,{robuxAmount} / 月
 Feature.DeveloperProducts.Heading.Products,
-Feature.DeveloperProducts.Heading.Success,
-Feature.DeveloperProducts.Message.BackToStore,返回商城
-Feature.DeveloperProducts.Message.OK,
-Feature.DeveloperProducts.Message.PurchaseSucceed,你已购买“{productName}”。你的购买将在加入体验后兑换。
 Feature.DisplayName.ErrorMessage.AgedUpNameContainPII,名称可能包含私人信息
 Feature.DisplayName.ErrorMessage.AgedUpNameHasChanged,过去 7 天内你已更改过你的名称
 Feature.DisplayName.ErrorMessage.AgedUpNameInappropriate,名称含有不当内容，无法在 Roblox 使用
@@ -4271,6 +4267,8 @@ Feature.Moments.Title.LeaveMomentCreation,要离开“精彩瞬间”创建页�
 Feature.Moments.Title.MomentRemoved,精彩瞬间已移除
 Feature.Moments.Title.PostInsights,页面标题
 Feature.Moments.Title.ReportPost,举报帖子
+Feature.Moments.Tooltip.PostInsightsBody,
+Feature.Moments.Tooltip.PostInsightsTitle,
 Feature.Moments.Tooltip.ShareFirstMomentBody,从截图创建精彩瞬间
 Feature.Moments.Tooltip.ShareFirstMomentTitle,分享你的第一个精彩瞬间
 Feature.NotApproved.Action.Continue,

@@ -3414,10 +3414,6 @@ Feature.DevSubs.Label.RenewalDate,Tanggal perpanjangan: {date}
 Feature.DevSubs.Message.ConfirmCancellation,Kamu yakin ingin membatalkan subscription kamu?
 Feature.DevSubs.UserManagement.MonthlyPrice,{robuxAmount} / bulan
 Feature.DeveloperProducts.Heading.Products,
-Feature.DeveloperProducts.Heading.Success,
-Feature.DeveloperProducts.Message.BackToStore,Kembali ke Toko
-Feature.DeveloperProducts.Message.OK,
-Feature.DeveloperProducts.Message.PurchaseSucceed,"Kamu membeli ""{productName}"". Pembelianmu akan di-redeem sesudah kamu bergabung dengan pengalaman virtual ini."
 Feature.DisplayName.ErrorMessage.AgedUpNameContainPII,Nama mungkin mengandung informasi pribadi
 Feature.DisplayName.ErrorMessage.AgedUpNameHasChanged,Nama kamu sudah diubah dalam 7 hari terakhir
 Feature.DisplayName.ErrorMessage.AgedUpNameInappropriate,Nama tidak pantas untuk Roblox
@@ -5685,7 +5681,7 @@ IAPExperience.PurchasePrompt.Title.BuyRobuxAndItems,
 IAPExperience.PurchasePrompt.Title.BuyRobuxOnly,
 IAPExperience.PurchasePrompt.Title.PurchaseCompleted,Pembelian selesai
 IAPExperience.PurchaseSuccess.Action.BackToGame,Kembali ke Game
-IAPExperience.PurchaseSuccess.Action.BackToShop,
+IAPExperience.PurchaseSuccess.Action.BackToShop,Kembali ke Toko
 IAPExperience.PurchaseSuccess.Action.Equip,Perlengkapi Avatar Saya
 IAPExperience.PurchaseSuccess.Text.BalanceNow,Sekarang saldo kamu {robux}.
 IAPExperience.PurchaseSuccess.Text.YouOwn,Sekarang kamu memiliki {name}

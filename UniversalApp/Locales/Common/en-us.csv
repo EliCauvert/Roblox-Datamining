@@ -3423,10 +3423,6 @@ Feature.DevSubs.Label.RenewalDate,Renewal date: {date}
 Feature.DevSubs.Message.ConfirmCancellation,Are you sure you want to cancel your subscription?
 Feature.DevSubs.UserManagement.MonthlyPrice,{robuxAmount} / month
 Feature.DeveloperProducts.Heading.Products,Products
-Feature.DeveloperProducts.Heading.Success,
-Feature.DeveloperProducts.Message.BackToStore,Back to Store
-Feature.DeveloperProducts.Message.OK,
-Feature.DeveloperProducts.Message.PurchaseSucceed,"You bought ""{productName}"". Your purchase will be redeemed after you join the experience."
 Feature.DisplayName.ErrorMessage.AgedUpNameContainPII,Name might contain private information
 Feature.DisplayName.ErrorMessage.AgedUpNameHasChanged,Your Name has already been changed in the past 7 days
 Feature.DisplayName.ErrorMessage.AgedUpNameInappropriate,Name is not appropriate for Roblox
@@ -4282,6 +4278,8 @@ Feature.Moments.Title.LeaveMomentCreation,Leave Moment creation?
 Feature.Moments.Title.MomentRemoved,Moment removed
 Feature.Moments.Title.PostInsights,Page header title
 Feature.Moments.Title.ReportPost,Report post
+Feature.Moments.Tooltip.PostInsightsBody,"Check views, watch time, and how the Moment landed with your audience."
+Feature.Moments.Tooltip.PostInsightsTitle,Your Moment insights are here
 Feature.Moments.Tooltip.ShareFirstMomentBody,Create a Moment from your captures
 Feature.Moments.Tooltip.ShareFirstMomentTitle,Share your first Moment
 Feature.NotApproved.Action.Continue,

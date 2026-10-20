@@ -3398,10 +3398,6 @@ Feature.DevSubs.Label.RenewalDate,Verlengingsdatum: {date}
 Feature.DevSubs.Message.ConfirmCancellation,Weet je zeker dat je je abonnement wilt annuleren?
 Feature.DevSubs.UserManagement.MonthlyPrice,{robuxAmount} /maand
 Feature.DeveloperProducts.Heading.Products,Producten
-Feature.DeveloperProducts.Heading.Success,Gelukt
-Feature.DeveloperProducts.Message.BackToStore,Terug naar Winkel
-Feature.DeveloperProducts.Message.OK,
-Feature.DeveloperProducts.Message.PurchaseSucceed,Je hebt '{productName}' gekocht. Je aankoop wordt verzilverd nadat je deelneemt aan de ervaring.
 Feature.DisplayName.ErrorMessage.AgedUpNameContainPII,Naam kan persoonlijke gegevens bevatten
 Feature.DisplayName.ErrorMessage.AgedUpNameHasChanged,Je naam is in de afgelopen zeven dagen al gewijzigd
 Feature.DisplayName.ErrorMessage.AgedUpNameInappropriate,Naam niet geschikt voor Roblox

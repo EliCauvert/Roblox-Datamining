@@ -3396,10 +3396,6 @@ Feature.DevSubs.Label.RenewalDate,रिन्यूअल की तारी�
 Feature.DevSubs.Message.ConfirmCancellation,वाकई अपना सब्सक्रिप्शन कैंसिल करना है?
 Feature.DevSubs.UserManagement.MonthlyPrice,{robuxAmount} / महीना
 Feature.DeveloperProducts.Heading.Products,प्रॉडक्ट्स
-Feature.DeveloperProducts.Heading.Success,पूरा हो गया
-Feature.DeveloperProducts.Message.BackToStore,स्टोर पर वापस जाएँ
-Feature.DeveloperProducts.Message.OK,
-Feature.DeveloperProducts.Message.PurchaseSucceed,"आपने ""{productName}"" खरीदा है. एक्सपीरिएंस को जॉइन करने के बाद आपकी खरीदारी रिडीम कर दी जाएगी."
 Feature.DisplayName.ErrorMessage.AgedUpNameContainPII,नाम में निजी जानकारी हो सकती है
 Feature.DisplayName.ErrorMessage.AgedUpNameHasChanged,पिछले 7 दिनों में आपका नाम पहले ही बदला जा चुका है
 Feature.DisplayName.ErrorMessage.AgedUpNameInappropriate,यह नाम Roblox के लिए सही नहीं है

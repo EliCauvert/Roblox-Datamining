@@ -3407,10 +3407,6 @@ Feature.DevSubs.Label.RenewalDate,Data de renovação: {date}
 Feature.DevSubs.Message.ConfirmCancellation,Tem certeza de que deseja cancelar sua assinatura?
 Feature.DevSubs.UserManagement.MonthlyPrice,{robuxAmount} / mês
 Feature.DeveloperProducts.Heading.Products,Produtos
-Feature.DeveloperProducts.Heading.Success,
-Feature.DeveloperProducts.Message.BackToStore,Voltar à Loja
-Feature.DeveloperProducts.Message.OK,
-Feature.DeveloperProducts.Message.PurchaseSucceed,Você comprou {productName}. Sua compra será resgatada após você entrar na experiência.
 Feature.DisplayName.ErrorMessage.AgedUpNameContainPII,O nome de usuário pode conter informações privadas
 Feature.DisplayName.ErrorMessage.AgedUpNameHasChanged,Seu nome já foi trocado nos últimos 7 dias
 Feature.DisplayName.ErrorMessage.AgedUpNameInappropriate,O nome não é apropriado para a Roblox

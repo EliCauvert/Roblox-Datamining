@@ -3416,10 +3416,6 @@ Feature.DevSubs.Label.RenewalDate,Ngày tái tục: {date}
 Feature.DevSubs.Message.ConfirmCancellation,Bạn có chắc muốn hủy đăng ký không?
 Feature.DevSubs.UserManagement.MonthlyPrice,{robuxAmount} / tháng
 Feature.DeveloperProducts.Heading.Products,
-Feature.DeveloperProducts.Heading.Success,
-Feature.DeveloperProducts.Message.BackToStore,Trở lại Cửa Hàng
-Feature.DeveloperProducts.Message.OK,
-Feature.DeveloperProducts.Message.PurchaseSucceed,"Bạn đã mua ""{productName}"". Giao dịch mua hàng của bạn sẽ được quy đổi sau khi bạn tham gia trải nghiệm."
 Feature.DisplayName.ErrorMessage.AgedUpNameContainPII,Tên có thể chứa thông tin cá nhân
 Feature.DisplayName.ErrorMessage.AgedUpNameHasChanged,Tên của bạn đã được thay đổi trong 7 ngày qua
 Feature.DisplayName.ErrorMessage.AgedUpNameInappropriate,Tên không phù hợp với Roblox

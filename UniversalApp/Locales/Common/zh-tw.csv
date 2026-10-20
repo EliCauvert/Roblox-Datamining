@@ -3415,10 +3415,6 @@ Feature.DevSubs.Label.RenewalDate,續約日期：{date}
 Feature.DevSubs.Message.ConfirmCancellation,確定取消訂閱？
 Feature.DevSubs.UserManagement.MonthlyPrice,{robuxAmount} / 月
 Feature.DeveloperProducts.Heading.Products,產品
-Feature.DeveloperProducts.Heading.Success,
-Feature.DeveloperProducts.Message.BackToStore,返回商店
-Feature.DeveloperProducts.Message.OK,
-Feature.DeveloperProducts.Message.PurchaseSucceed,您已購買「{productName}」。您的購買將在您加入體驗後兌換。
 Feature.DisplayName.ErrorMessage.AgedUpNameContainPII,名稱可能含有私人資訊
 Feature.DisplayName.ErrorMessage.AgedUpNameHasChanged,您的名稱已在過去 7 天之內變更
 Feature.DisplayName.ErrorMessage.AgedUpNameInappropriate,Roblox 視此名稱為不當內容
@@ -5686,7 +5682,7 @@ IAPExperience.PurchasePrompt.Title.BuyRobuxAndItems,
 IAPExperience.PurchasePrompt.Title.BuyRobuxOnly,
 IAPExperience.PurchasePrompt.Title.PurchaseCompleted,
 IAPExperience.PurchaseSuccess.Action.BackToGame,返回遊戲
-IAPExperience.PurchaseSuccess.Action.BackToShop,
+IAPExperience.PurchaseSuccess.Action.BackToShop,返回商店
 IAPExperience.PurchaseSuccess.Action.Equip,裝備在虛擬人偶上
 IAPExperience.PurchaseSuccess.Text.BalanceNow,您目前的餘額為 {robux}。
 IAPExperience.PurchaseSuccess.Text.YouOwn,你獲得了 {name}！

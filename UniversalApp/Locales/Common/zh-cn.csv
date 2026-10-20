@@ -3395,10 +3395,6 @@ Feature.DevSubs.Label.RenewalDate,续订日期：{date}
 Feature.DevSubs.Message.ConfirmCancellation,确定要取消订阅？
 Feature.DevSubs.UserManagement.MonthlyPrice,{robuxAmount} / 月
 Feature.DeveloperProducts.Heading.Products,
-Feature.DeveloperProducts.Heading.Success,
-Feature.DeveloperProducts.Message.BackToStore,返回商城
-Feature.DeveloperProducts.Message.OK,
-Feature.DeveloperProducts.Message.PurchaseSucceed,你已购买“{productName}”。你的购买将在加入体验后兑换。
 Feature.DisplayName.ErrorMessage.AgedUpNameContainPII,名称可能包含私人信息
 Feature.DisplayName.ErrorMessage.AgedUpNameHasChanged,过去 7 天内你已更改过你的名称
 Feature.DisplayName.ErrorMessage.AgedUpNameInappropriate,名称含有不当内容，无法在 Roblox 使用

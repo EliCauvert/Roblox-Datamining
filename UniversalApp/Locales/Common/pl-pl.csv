@@ -3416,10 +3416,6 @@ Feature.DevSubs.Label.RenewalDate,Data odnowienia: {date}
 Feature.DevSubs.Message.ConfirmCancellation,Czy na pewno chcesz anulować subskrypcję?
 Feature.DevSubs.UserManagement.MonthlyPrice,{robuxAmount}/miesiąc
 Feature.DeveloperProducts.Heading.Products,Produkty
-Feature.DeveloperProducts.Heading.Success,
-Feature.DeveloperProducts.Message.BackToStore,Wróć do sklepu
-Feature.DeveloperProducts.Message.OK,
-Feature.DeveloperProducts.Message.PurchaseSucceed,"Zakupiono produkt „{productName}”. Twój zakup zostanie zrealizowany, kiedy dołączysz do projektu."
 Feature.DisplayName.ErrorMessage.AgedUpNameContainPII,"Możliwe, że nazwa zawiera dane osobowe"
 Feature.DisplayName.ErrorMessage.AgedUpNameHasChanged,Twoja nazwa została już zmieniona w ciągu ostatnich 7 dni
 Feature.DisplayName.ErrorMessage.AgedUpNameInappropriate,Nazwa jest nieodpowiednia dla platformy Roblox

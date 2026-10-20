@@ -3372,10 +3372,6 @@ Feature.DevSubs.Label.RenewalDate,Yenilenme tarihi: {date}
 Feature.DevSubs.Message.ConfirmCancellation,Aboneliğini iptal etmek istediğine emin misin?
 Feature.DevSubs.UserManagement.MonthlyPrice,Ayda {robuxAmount}
 Feature.DeveloperProducts.Heading.Products,Ürünler
-Feature.DeveloperProducts.Heading.Success,
-Feature.DeveloperProducts.Message.BackToStore,Mağazaya dön
-Feature.DeveloperProducts.Message.OK,
-Feature.DeveloperProducts.Message.PurchaseSucceed,"""{productName}"" satın alındı. Satın alımın, deneyime katıldığında tamamlanacak."
 Feature.DisplayName.ErrorMessage.AgedUpNameContainPII,"Ad, özel bilgiler içerebilir"
 Feature.DisplayName.ErrorMessage.AgedUpNameHasChanged,Adın son 7 gün içinde zaten değiştirildi
 Feature.DisplayName.ErrorMessage.AgedUpNameInappropriate,"Ad, Roblox için uygun değil"
@@ -4231,6 +4227,7 @@ Feature.Moments.Title.LeaveMomentCreation,An yaratmadan çıkılsın mı?
 Feature.Moments.Title.MomentRemoved,An kaldırıldı
 Feature.Moments.Title.PostInsights,Sayfa başlığı
 Feature.Moments.Title.ReportPost,Paylaşımı raporla
+Feature.Moments.Tooltip.PostInsightsTitle,An analizlerin burada
 Feature.Moments.Tooltip.ShareFirstMomentBody,Yakaladığın görüntülerden bir An oluştur
 Feature.Moments.Tooltip.ShareFirstMomentTitle,İlk Anını paylaş
 Feature.NotApproved.Action.Continue,

@@ -3418,10 +3418,6 @@ Feature.DevSubs.Label.RenewalDate,갱신일: {date}
 Feature.DevSubs.Message.ConfirmCancellation,정말로 가입을 취소할까요?
 Feature.DevSubs.UserManagement.MonthlyPrice,{robuxAmount}/월
 Feature.DeveloperProducts.Heading.Products,
-Feature.DeveloperProducts.Heading.Success,
-Feature.DeveloperProducts.Message.BackToStore,상점으로 돌아가기
-Feature.DeveloperProducts.Message.OK,
-Feature.DeveloperProducts.Message.PurchaseSucceed,'{productName}' 항목을 구매했습니다. 체험에 참가하면 구매한 항목을 받을 수 있습니다.
 Feature.DisplayName.ErrorMessage.AgedUpNameContainPII,이름에 개인정보가 포함되어 있을 수 있습니다
 Feature.DisplayName.ErrorMessage.AgedUpNameHasChanged,지난 7일 동안 이름을 변경한 적이 있습니다
 Feature.DisplayName.ErrorMessage.AgedUpNameInappropriate,Roblox에서 사용하기에 적합하지 않은 이름입니다
@@ -4278,6 +4274,7 @@ Feature.Moments.Title.LeaveMomentCreation,모멘트 만들기를 종료할까요
 Feature.Moments.Title.MomentRemoved,
 Feature.Moments.Title.PostInsights,페이지 헤더 제목
 Feature.Moments.Title.ReportPost,게시물 신고
+Feature.Moments.Tooltip.PostInsightsTitle,모멘트 인사이트를 확인하세요
 Feature.Moments.Tooltip.ShareFirstMomentBody,캡처에서 모멘트를 만드세요
 Feature.Moments.Tooltip.ShareFirstMomentTitle,첫 모멘트를 공유하세요
 Feature.NotApproved.Action.Continue,
@@ -5690,7 +5687,7 @@ IAPExperience.PurchasePrompt.Title.BuyRobuxAndItems,
 IAPExperience.PurchasePrompt.Title.BuyRobuxOnly,
 IAPExperience.PurchasePrompt.Title.PurchaseCompleted,
 IAPExperience.PurchaseSuccess.Action.BackToGame,게임으로 돌아가기
-IAPExperience.PurchaseSuccess.Action.BackToShop,
+IAPExperience.PurchaseSuccess.Action.BackToShop,상점으로 돌아가기
 IAPExperience.PurchaseSuccess.Action.Equip,아바타에 장착하기
 IAPExperience.PurchaseSuccess.Text.BalanceNow,현재 잔액은 {robux}입니다.
 IAPExperience.PurchaseSuccess.Text.YouOwn,{name}(을)를 획득했어요!

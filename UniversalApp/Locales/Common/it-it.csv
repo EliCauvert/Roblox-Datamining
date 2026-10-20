@@ -3398,10 +3398,6 @@ Feature.DevSubs.Label.RenewalDate,Data rinnovo: {date}
 Feature.DevSubs.Message.ConfirmCancellation,Vuoi davvero annullare il tuo abbonamento?
 Feature.DevSubs.UserManagement.MonthlyPrice,{robuxAmount}/mese
 Feature.DeveloperProducts.Heading.Products,Prodotti
-Feature.DeveloperProducts.Heading.Success,
-Feature.DeveloperProducts.Message.BackToStore,Torna al Negozio
-Feature.DeveloperProducts.Message.OK,
-Feature.DeveloperProducts.Message.PurchaseSucceed,"Hai acquistato ""{productName}"". Partecipa all'esperienza per riscattare il tuo acquisto."
 Feature.DisplayName.ErrorMessage.AgedUpNameContainPII,Il nome potrebbe contenere informazioni private
 Feature.DisplayName.ErrorMessage.AgedUpNameHasChanged,Il tuo nome è già stato cambiato negli ultimi 7 giorni
 Feature.DisplayName.ErrorMessage.AgedUpNameInappropriate,

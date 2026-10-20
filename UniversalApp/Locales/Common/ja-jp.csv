@@ -3416,10 +3416,6 @@ Feature.DevSubs.Label.RenewalDate,更新日: {date}
 Feature.DevSubs.Message.ConfirmCancellation,定期購入をキャンセルしますか？
 Feature.DevSubs.UserManagement.MonthlyPrice,{robuxAmount} / 1ヶ月
 Feature.DeveloperProducts.Heading.Products,
-Feature.DeveloperProducts.Heading.Success,
-Feature.DeveloperProducts.Message.BackToStore,ストアに戻る
-Feature.DeveloperProducts.Message.OK,
-Feature.DeveloperProducts.Message.PurchaseSucceed,「{productName}」を購入しました。購入品は、バーチャル空間参加後に引き換えられます。
 Feature.DisplayName.ErrorMessage.AgedUpNameContainPII,名前に個人情報が含まれている可能性があります。
 Feature.DisplayName.ErrorMessage.AgedUpNameHasChanged,過去7日間で名前がすでに変更されています
 Feature.DisplayName.ErrorMessage.AgedUpNameInappropriate,名前がRobloxでは適切ではありません
@@ -4275,6 +4271,7 @@ Feature.Moments.Title.LeaveMomentCreation,モーメント作成を退出しま�
 Feature.Moments.Title.MomentRemoved,
 Feature.Moments.Title.PostInsights,ページヘッダーのタイトル
 Feature.Moments.Title.ReportPost,投稿の規約違反を報告
+Feature.Moments.Tooltip.PostInsightsTitle,モーメントのインサイトはこちら
 Feature.Moments.Tooltip.ShareFirstMomentBody,切り抜きからモーメントを作成します
 Feature.Moments.Tooltip.ShareFirstMomentTitle,最初のモーメントをシェア
 Feature.NotApproved.Action.Continue,

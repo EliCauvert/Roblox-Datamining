@@ -3409,10 +3409,6 @@ Feature.DevSubs.Label.RenewalDate,Verlängerungsdatum: {date}
 Feature.DevSubs.Message.ConfirmCancellation,Möchtest du dein Abo wirklich kündigen?
 Feature.DevSubs.UserManagement.MonthlyPrice,{robuxAmount} / Monat
 Feature.DeveloperProducts.Heading.Products,Produkte
-Feature.DeveloperProducts.Heading.Success,
-Feature.DeveloperProducts.Message.BackToStore,Zurück zum Store
-Feature.DeveloperProducts.Message.OK,
-Feature.DeveloperProducts.Message.PurchaseSucceed,"Du hast ""{productName}"" gekauft. Dein Kauf wird eingelöst, nachdem du an der Experience teilgenommen hast."
 Feature.DisplayName.ErrorMessage.AgedUpNameContainPII,Name könnte private Informationen enthalten
 Feature.DisplayName.ErrorMessage.AgedUpNameHasChanged,Dein Name wurde innerhalb der letzten 7 Tage bereits geändert
 Feature.DisplayName.ErrorMessage.AgedUpNameInappropriate,Name ist für Roblox nicht geeignet

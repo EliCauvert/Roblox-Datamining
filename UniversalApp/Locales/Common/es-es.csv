@@ -3386,10 +3386,6 @@ Feature.DevSubs.Label.RenewalDate,Fecha de renovación: {date}
 Feature.DevSubs.Message.ConfirmCancellation,¿Quieres cancelar la suscripción?
 Feature.DevSubs.UserManagement.MonthlyPrice,{robuxAmount} al mes
 Feature.DeveloperProducts.Heading.Products,Productos
-Feature.DeveloperProducts.Heading.Success,
-Feature.DeveloperProducts.Message.BackToStore,Volver a Tienda
-Feature.DeveloperProducts.Message.OK,
-Feature.DeveloperProducts.Message.PurchaseSucceed,"Compraste ""{productName}"". Tu compra se canjeará después de unirte a la experiencia."
 Feature.DisplayName.ErrorMessage.AgedUpNameContainPII,El nombre puede contener información privada
 Feature.DisplayName.ErrorMessage.AgedUpNameHasChanged,Tu nombre ya cambió en los últimos 7 días
 Feature.DisplayName.ErrorMessage.AgedUpNameInappropriate,El nombre es inadecuado para Roblox
@@ -5647,7 +5643,7 @@ IAPExperience.PurchasePrompt.Title.BuyRobuxAndItems,Comprar Robux y objetos
 IAPExperience.PurchasePrompt.Title.BuyRobuxOnly,
 IAPExperience.PurchasePrompt.Title.PurchaseCompleted,Compra completada
 IAPExperience.PurchaseSuccess.Action.BackToGame,Volver al juego
-IAPExperience.PurchaseSuccess.Action.BackToShop,
+IAPExperience.PurchaseSuccess.Action.BackToShop,Volver a Tienda
 IAPExperience.PurchaseSuccess.Action.Equip,Equipar mi avatar
 IAPExperience.PurchaseSuccess.Text.BalanceNow,Tu saldo actual es de {robux}.
 IAPExperience.PurchaseSuccess.Text.YouOwn,¡Ahora tienes {name}!

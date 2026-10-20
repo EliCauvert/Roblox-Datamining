@@ -3399,10 +3399,6 @@ Feature.DevSubs.Label.RenewalDate,วันที่ต่ออายุ: {date
 Feature.DevSubs.Message.ConfirmCancellation,คุณแน่ใจหรือไม่ว่าคุณต้องการยกเลิกการเป็นสมาชิกของคุณ?
 Feature.DevSubs.UserManagement.MonthlyPrice,{robuxAmount}/เดือน
 Feature.DeveloperProducts.Heading.Products,
-Feature.DeveloperProducts.Heading.Success,สำเร็จเรียบร้อย
-Feature.DeveloperProducts.Message.BackToStore,กลับไปที่ร้านค้า
-Feature.DeveloperProducts.Message.OK,
-Feature.DeveloperProducts.Message.PurchaseSucceed,"คุณซื้อ ""{productName}"" แล้ว แลกใช้การซื้อของคุณได้หลังจากเข้าร่วมประสบการณ์"
 Feature.DisplayName.ErrorMessage.AgedUpNameContainPII,ชื่อสามารถมีข้อมูลส่วนตัวได้
 Feature.DisplayName.ErrorMessage.AgedUpNameHasChanged,ชื่อของคุณได้รับการเปลี่ยนแปลงใน 7 วันที่ผ่านมา
 Feature.DisplayName.ErrorMessage.AgedUpNameInappropriate,ชื่อไม่เหมาะสมสำหรับ Roblox

@@ -1775,10 +1775,6 @@ Feature.DevSubs.Label.RenewalDate,Дата продления: {date}
 Feature.DevSubs.Message.ConfirmCancellation,Ты действительно хочешь отменить подписку?
 Feature.DevSubs.UserManagement.MonthlyPrice,{robuxAmount} в месяц
 Feature.DeveloperProducts.Heading.Products,Товары
-Feature.DeveloperProducts.Heading.Success,
-Feature.DeveloperProducts.Message.BackToStore,Вернуться в магазин
-Feature.DeveloperProducts.Message.OK,
-Feature.DeveloperProducts.Message.PurchaseSucceed,"Покупка совершена: «{productName}». Покупка будет активирована после того, как ты присоединишься к плейсу."
 Feature.DisplayName.ErrorMessage.AgedUpNameContainPII,Имя может содержать личную информацию.
 Feature.DisplayName.ErrorMessage.AgedUpNameHasChanged,Твоё имя уже было изменено за последние 7 дней
 Feature.DisplayName.ErrorMessage.AgedUpNameInappropriate,Имя не подходит для Roblox
@@ -3045,7 +3041,7 @@ IAPExperience.PurchasePrompt.Title.BuyItem,
 IAPExperience.PurchasePrompt.Title.BuyItemV2,
 IAPExperience.PurchasePrompt.Title.BuyRobuxAndItem,Купить Robux и предмет
 IAPExperience.PurchaseSuccess.Action.BackToGame,Вернуться к игре
-IAPExperience.PurchaseSuccess.Action.BackToShop,
+IAPExperience.PurchaseSuccess.Action.BackToShop,Вернуться в магазин
 IAPExperience.PurchaseSuccess.Action.Equip,Изменить мой аватар
 IAPExperience.PurchaseSuccess.Text.BalanceNow,Текущий баланс: {robux}.
 IAPExperience.PurchaseSuccess.Text.YouOwn,Теперь у тебя есть {name}!
