@@ -1,4 +1,5 @@
-﻿local Parent = script:FindFirstAncestor("AppShortcutBar").Parent
+﻿local AppShortcutBar = script:FindFirstAncestor("AppShortcutBar")
+local Parent = AppShortcutBar.Parent
 local TextService = game:GetService("TextService")
 local ReactModule = require(Parent.React)
 local FoundationModule = require(Parent.Foundation)
@@ -9,11 +10,13 @@ local FoundationFontFaceMigration = FoundationModule.Utility.Flags.FoundationFon
 local UseStyleFunction = UIBloxModule.Core.Style.useStyle
 local UseTokensFunction = FoundationModule.Hooks.useTokens
 local Icon = FoundationModule.Icon
+local Image = FoundationModule.Image
 local KeyLabel = UIBloxModule.App.Menu.KeyLabel
 local KeyLabelUtilities = UIBloxModule.App.Menu.KeyLabelUtilities
 local StateLayer = UIBloxModule.Core.Control.StateLayer
 local Shortcut = UIBloxModule.App.Navigation.Shortcut
 local IconWithHoldAnimationModule = require(script.Parent.IconWithHoldAnimation)
+local FFlagShortcutBarPlatformGamepadIcons = require(AppShortcutBar.Flags).FFlagShortcutBarPlatformGamepadIcons
 local ShortcutUseDispatchSyntheticEvent = game:DefineFastFlag("ShortcutUseDispatchSyntheticEvent", false)
 
 local function _(List, p1): number
@@ -89,7 +92,7 @@ local function useOnShortcutActivated(Item)
 end
 
 function AppShortcut(p2)
-	-- upvalues: UseStyleFunction (copy), UseTokensFunction (copy), KeyLabelUtilities (copy), ReactModule (copy), FoundationFontFaceMigration (copy), GetTextSizeFunction (copy), TextService (copy), KeyLabel (copy), IconWithHoldAnimationModule (copy), Icon (copy), useOnShortcutActivated (copy), Shortcut (copy), StateLayer (copy)
+	-- upvalues: UseStyleFunction (copy), UseTokensFunction (copy), KeyLabelUtilities (copy), ReactModule (copy), FoundationFontFaceMigration (copy), GetTextSizeFunction (copy), TextService (copy), KeyLabel (copy), IconWithHoldAnimationModule (copy), FFlagShortcutBarPlatformGamepadIcons (copy), Image (copy), Icon (copy), useOnShortcutActivated (copy), Shortcut (copy), StateLayer (copy)
 	local LayoutOrder = p2.layoutOrder
 	local Item = p2.item
 	local UseStyleResult = UseStyleFunction()
@@ -163,7 +166,7 @@ function AppShortcut(p2)
 				labelColorStyle = UseTokensResult.Color.Label,
 				labelFontStyle = UseTokensResult.Typography.LabelMedium,
 				renderIcon = ReactModule.useCallback(function(p3)
-					-- upvalues: Item (copy), ReactModule (upval), IconWithHoldAnimationModule (upval), SizeRatio (ref), SizeRatio1 (ref), UseTokensResult (copy), IsTable (copy), UseMemoResult1 (copy), Icon (upval)
+					-- upvalues: Item (copy), ReactModule (upval), IconWithHoldAnimationModule (upval), SizeRatio (ref), SizeRatio1 (ref), UseTokensResult (copy), IsTable (copy), UseMemoResult1 (copy), FFlagShortcutBarPlatformGamepadIcons (upval), Image (upval), Icon (upval)
 					return if Item.hasProgress then ReactModule.createElement(IconWithHoldAnimationModule, {
 						layoutOrder = p3.layoutOrder,
 						size = UDim2.fromOffset(SizeRatio, SizeRatio1),
@@ -174,7 +177,13 @@ function AppShortcut(p2)
 						BackgroundTransparency = 1,
 						LayoutOrder = p3.layoutOrder,
 						Size = UDim2.fromOffset(SizeRatio, SizeRatio1)
-					}, if IsTable then UseMemoResult1 else {
+					}, if IsTable then UseMemoResult1 elseif FFlagShortcutBarPlatformGamepadIcons and Item.isPlatformIcon then {
+						Icon = ReactModule.createElement(Image, {
+							tag = "size-full",
+							Image = Item.icon,
+							imageStyle = UseTokensResult.Color.Content.Default
+						})
+					} else {
 						Icon = ReactModule.createElement(Icon, {
 							name = Item.icon,
 							AnchorPoint = Vector2.new(0.5, 0.5),
@@ -182,8 +191,10 @@ function AppShortcut(p2)
 						})
 					})
 				end, {
-					Item.hasProgress, Item.progress, Item.icon, SizeRatio, SizeRatio1, IsTable,
-					UseMemoResult1,
+					Item.hasProgress, Item.progress, Item.icon,
+					if FFlagShortcutBarPlatformGamepadIcons then Item.isPlatformIcon else nil,
+					if FFlagShortcutBarPlatformGamepadIcons then UseTokensResult else nil,
+					SizeRatio, SizeRatio1, IsTable, UseMemoResult1,
 					if FoundationFontFaceMigration then UseTokensResult.Size.Size_900 else nil
 				})
 			})

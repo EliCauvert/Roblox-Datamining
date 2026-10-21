@@ -12,7 +12,6 @@ local CursorKind = UIBloxModule.App.SelectionImage.CursorKind
 local UseVoiceStateModule = require(RobloxGui.Modules.VoiceChat.Hooks.useVoiceState)
 local ConstantsModule = require(RobloxGui.Modules.VoiceChat.Constants)
 local Default = require(RobloxGui.Modules.VoiceChat.VoiceChatServiceManager).default
-local VoiceIndicatorPerformanceOptimizationsV2 = game:DefineFastFlag("VoiceIndicatorPerformanceOptimizationsV2", false)
 local MicTalkingUpdateFrequency = game:DefineFastInt("MicTalkingUpdateFrequency", 3)
 local _UDim2 = UDim2.fromOffset(28, 28)
 
@@ -51,7 +50,7 @@ local function createTweenShimmeringEffect(UseRefResult)
 end
 
 return function(p1)
-	-- upvalues: UseVoiceStateModule (copy), ReactModule (copy), RoactModule (copy), GenerateGUID (copy), ConstantsModule (copy), createTweenShimmeringEffect (copy), VoiceIndicatorPerformanceOptimizationsV2 (copy), RunService (copy), MicTalkingUpdateFrequency (copy), config (copy), ReactIsModule (copy), Default (copy), UseSelectionCursorFunction (copy), CursorKind (copy), _UDim2 (copy)
+	-- upvalues: UseVoiceStateModule (copy), ReactModule (copy), RoactModule (copy), GenerateGUID (copy), ConstantsModule (copy), createTweenShimmeringEffect (copy), RunService (copy), MicTalkingUpdateFrequency (copy), config (copy), ReactIsModule (copy), Default (copy), UseSelectionCursorFunction (copy), CursorKind (copy), _UDim2 (copy)
 	local UseVoiceStateModuleResult = UseVoiceStateModule(p1.userId, p1.disable or false)
 	local UseBindingResult, UseBindingResult2 = ReactModule.useBinding(0)
 	local NoSelectable = p1.selectable == nil or p1.selectable
@@ -62,13 +61,12 @@ return function(p1)
 	end, { UseBindingResult1, UseBindingResult })
 	local Current = ReactModule.useRef(GenerateGUID()).current or ""
 	UseBindingResult2_1(UseVoiceStateModuleResult)
-	local IsUseVoiceStateModuleResultMatch = UseVoiceStateModuleResult == ConstantsModule.VOICE_STATE.TALKING
-	local IsUseVoiceStateModuleResultMatch1 = UseVoiceStateModuleResult == ConstantsModule.VOICE_STATE.CONNECTING
+	local IsUseVoiceStateModuleResultMatch = UseVoiceStateModuleResult == ConstantsModule.VOICE_STATE.CONNECTING
 	local IsShowConnectingShimmer = p1.showConnectingShimmer == true
 	local UseRefResult = ReactModule.useRef(nil)
 	ReactModule.useEffect(function()
-		-- upvalues: IsShowConnectingShimmer (copy), IsUseVoiceStateModuleResultMatch1 (copy), UseRefResult (copy), createTweenShimmeringEffect (upval)
-		if IsShowConnectingShimmer and IsUseVoiceStateModuleResultMatch1 and UseRefResult.current then
+		-- upvalues: IsShowConnectingShimmer (copy), IsUseVoiceStateModuleResultMatch (copy), UseRefResult (copy), createTweenShimmeringEffect (upval)
+		if IsShowConnectingShimmer and IsUseVoiceStateModuleResultMatch and UseRefResult.current then
 			local TweenShimmeringEffect = createTweenShimmeringEffect(UseRefResult)
 			TweenShimmeringEffect:Play()
 			
@@ -80,49 +78,30 @@ return function(p1)
 			return function() end
 		end
 	end, {
-		IsUseVoiceStateModuleResultMatch1,
+		IsUseVoiceStateModuleResultMatch,
 		IsShowConnectingShimmer
 	})
-	
-	if VoiceIndicatorPerformanceOptimizationsV2 then
-		local UseRefResult1 = ReactModule.useRef(false)
-		UseRefResult1.current = UseVoiceStateModuleResult == ConstantsModule.VOICE_STATE.TALKING
-		ReactModule.useEffect(function()
-			-- upvalues: RunService (upval), Current (copy), UseRefResult1 (copy), MicTalkingUpdateFrequency (upval), UseBindingResult2 (copy)
-			local Count = 0
-			RunService:BindToRenderStep(Current, 1, function()
-				-- upvalues: UseRefResult1 (upval), Count (ref), MicTalkingUpdateFrequency (upval), UseBindingResult2 (upval)
-				if not UseRefResult1.current then return end
-				Count += 1
-				
-				if MicTalkingUpdateFrequency <= Count then
-					Count = 0
-					UseBindingResult2(math.random())
-				end
-			end)
+	local UseRefResult1 = ReactModule.useRef(false)
+	UseRefResult1.current = UseVoiceStateModuleResult == ConstantsModule.VOICE_STATE.TALKING
+	ReactModule.useEffect(function()
+		-- upvalues: RunService (upval), Current (copy), UseRefResult1 (copy), MicTalkingUpdateFrequency (upval), UseBindingResult2 (copy)
+		local Count = 0
+		RunService:BindToRenderStep(Current, 1, function()
+			-- upvalues: UseRefResult1 (upval), Count (ref), MicTalkingUpdateFrequency (upval), UseBindingResult2 (upval)
+			if not UseRefResult1.current then return end
+			Count += 1
 			
-			return function()
-				-- upvalues: RunService (upval), Current (upval)
-				RunService:UnbindFromRenderStep(Current)
+			if MicTalkingUpdateFrequency <= Count then
+				Count = 0
+				UseBindingResult2(math.random())
 			end
-		end, { Current })
-	else
-		ReactModule.useEffect(function()
-			-- upvalues: IsUseVoiceStateModuleResultMatch (copy), RunService (upval), Current (copy), UseBindingResult2 (copy)
-			if IsUseVoiceStateModuleResultMatch then
-				RunService:BindToRenderStep(Current, 1, function()
-					-- upvalues: UseBindingResult2 (upval)
-					UseBindingResult2(math.random())
-				end)
-			end
-			return function()
-				-- upvalues: IsUseVoiceStateModuleResultMatch (upval), RunService (upval), Current (upval)
-				if IsUseVoiceStateModuleResultMatch then
-					RunService:UnbindFromRenderStep(Current)
-				end
-			end
-		end, { IsUseVoiceStateModuleResultMatch, Current })
-	end
+		end)
+		
+		return function()
+			-- upvalues: RunService (upval), Current (upval)
+			RunService:UnbindFromRenderStep(Current)
+		end
+	end, { Current })
 	local Inverted = not (p1.hideOnError and (not UseVoiceStateModuleResult or config[UseVoiceStateModuleResult]))
 	local MapResult = if UseVoiceStateModuleResult == ConstantsModule.VOICE_STATE.LOCAL_MUTED then 0.5 else 0
 	
@@ -160,7 +139,7 @@ return function(p1)
 				ColorSequenceKeypoint.new(0.5, Color3.new(0.8, 0.8, 0.8)),
 				ColorSequenceKeypoint.new(1, Color3.new(0.6, 0.6, 0.6))
 			}),
-			Enabled = IsUseVoiceStateModuleResultMatch1,
+			Enabled = IsUseVoiceStateModuleResultMatch,
 			Rotation = -45,
 			Offset = Vector2.new(-1, 0),
 			[RoactModule.Ref] = UseRefResult

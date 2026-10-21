@@ -93,6 +93,7 @@ return {
 			CommunityUserMembership = p1 and p1.CommunityUserMembership or nil,
 			NotificationBadge = p1 and p1.NotificationBadge or nil,
 			LeaderboardStats = p1 and p1.LeaderboardStats or nil,
+			BuyRobux = p1 and p1.BuyRobux or nil,
 			DataHydrationTypes = DataHydrationTypes
 		}
 		

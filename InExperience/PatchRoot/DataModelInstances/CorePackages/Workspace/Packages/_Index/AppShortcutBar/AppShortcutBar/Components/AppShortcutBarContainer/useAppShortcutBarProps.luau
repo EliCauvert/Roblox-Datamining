@@ -18,7 +18,7 @@ local UseIsTvRemoteDeviceFunction = require(Parent.RoactUtils).Hooks.useIsTvRemo
 local UseExternalEventFunction = require(Parent.RoactUtils).Hooks.useExternalEvent
 local DisplayModule = require(Parent.Display)
 local NoShortcutBarWithTvRemote = game:DefineFastFlag("NoShortcutBarWithTvRemote", false)
-local ShortcutBarPlatformGamepadIcons = game:DefineFastFlag("ShortcutBarPlatformGamepadIcons", false)
+local FFlagShortcutBarPlatformGamepadIcons = require(AppShortcutBar.Flags).FFlagShortcutBarPlatformGamepadIcons
 local SharedFlagsModule = require(Parent.SharedFlags)
 local FFlagAXMigrateEquipSlotsInputBindingsToRoactGamepad = SharedFlagsModule.FFlagAXMigrateEquipSlotsInputBindingsToRoactGamepad
 local FFlagAXMigrateEmoteMenuFromRoactGamepad = SharedFlagsModule.FFlagAXMigrateEmoteMenuFromRoactGamepad
@@ -300,8 +300,17 @@ local config10 = {
 	[FocusNavigationEventNameEnum.HoldToJoinFriend] = true
 }
 
+local function _(p1, p2, p3)
+	local Icon = p3[p2]
+	
+	if Icon then
+		p1.icon = Icon
+		p1.isPlatformIcon = true
+	end
+end
+
 local function getLegacyInputBindings(p1, p2, p3, p4)
-	-- upvalues: config (copy), config3 (copy), ShortcutBarPlatformGamepadIcons (copy)
+	-- upvalues: config (copy), config3 (copy), FFlagShortcutBarPlatformGamepadIcons (copy)
 	if p2.axes then
 		local Vertical = p2.axes.vertical
 		local Horizontal = p2.axes.horizontal
@@ -322,12 +331,17 @@ local function getLegacyInputBindings(p1, p2, p3, p4)
 		if not p2.key then
 			return {}
 		end
-		local Entry = config3[p1]
+		local config1 = { icon = config3[p1], text = p3:Format(p2.key) }
 		
-		if ShortcutBarPlatformGamepadIcons and p4 then
-			Entry = p4[p1] or Entry
+		if FFlagShortcutBarPlatformGamepadIcons and p4 then
+			local Icon = p4[p1]
+			
+			if Icon then
+				config1.icon = Icon
+				config1.isPlatformIcon = true
+			end
 		end
-		return { { icon = Entry, text = p3:Format(p2.key) } }
+		return { config1 }
 	end
 end
 
@@ -368,7 +382,7 @@ local function usePlatformGamepadImages()
 end
 
 local function getGamepadItems(UseActiveEventMapResult, p1, UseContextResult, p2, p3, p4)
-	-- upvalues: list (copy), config1 (copy), config2 (copy), getLegacyInputBindings (copy), config5 (copy), config6 (copy), ShortcutBarPlatformGamepadIcons (copy), config8 (copy), config7 (copy), config9 (copy), config10 (copy), FocusNavigationEventNameEnum (copy), config3 (copy)
+	-- upvalues: list (copy), config1 (copy), config2 (copy), getLegacyInputBindings (copy), config5 (copy), config6 (copy), config8 (copy), config7 (copy), config9 (copy), config10 (copy), FFlagShortcutBarPlatformGamepadIcons (copy), FocusNavigationEventNameEnum (copy), config3 (copy)
 	local List = {}
 	
 	for _, value in list do
@@ -394,10 +408,6 @@ local function getGamepadItems(UseActiveEventMapResult, p1, UseContextResult, p2
 				local Entry2 = if p3 and Entry then Entry[UseActiveEventMapResultEntry] else nil
 				local Entry3 = if p3 and Entry1 then Entry1[UseActiveEventMapResultEntry] else nil
 				local Entry3_1 = if p3 then Entry3 or Entry2 elseif Entry then Entry[UseActiveEventMapResultEntry] else nil
-				
-				if ShortcutBarPlatformGamepadIcons and p4 and Entry3_1 then
-					Entry3_1 = p4[value] or Entry3_1
-				end
 				local Entry4 = if p3 then config8[UseActiveEventMapResultEntry] else nil
 				local Entry41 = config7[UseActiveEventMapResultEntry]
 				local Entry5 = if p3 then Entry4 or Entry41 else config7[UseActiveEventMapResultEntry]
@@ -408,7 +418,7 @@ local function getGamepadItems(UseActiveEventMapResult, p1, UseContextResult, p2
 				local Entry7 = config10[UseActiveEventMapResultEntry]
 				
 				if Entry3_1 and FormatResult then
-					table.insert(List, {
+					local config = {
 						icon = Entry3_1,
 						text = FormatResult,
 						actionText = if p3 then nil else FormatResult1,
@@ -416,7 +426,17 @@ local function getGamepadItems(UseActiveEventMapResult, p1, UseContextResult, p2
 						hasProgress = Entry7,
 						inputKeyCode = if p3 then value else nil,
 						eventName = if p3 then UseActiveEventMapResultEntry else nil
-					})
+					}
+					
+					if FFlagShortcutBarPlatformGamepadIcons and p4 then
+						local Icon = p4[value]
+						
+						if Icon then
+							config.icon = Icon
+							config.isPlatformIcon = true
+						end
+					end
+					table.insert(List, config)
 				end
 			end
 		end
@@ -425,17 +445,22 @@ local function getGamepadItems(UseActiveEventMapResult, p1, UseContextResult, p2
 		local UseActiveEventMapResultEntry = UseActiveEventMapResult[Enum.KeyCode.ButtonB]
 		
 		if UseActiveEventMapResultEntry == FocusNavigationEventNameEnum.NavigateBack then
-			local Entry = config3[Enum.KeyCode.ButtonB]
-			
-			if ShortcutBarPlatformGamepadIcons and p4 then
-				Entry = p4[Enum.KeyCode.ButtonB] or Entry
-			end
-			table.insert(List, {
-				icon = Entry,
+			local config = {
+				icon = config3[Enum.KeyCode.ButtonB],
 				text = UseContextResult:Format(config7[UseActiveEventMapResultEntry]),
 				inputKeyCode = Enum.KeyCode.ButtonB,
 				eventName = UseActiveEventMapResultEntry
-			})
+			}
+			
+			if FFlagShortcutBarPlatformGamepadIcons and p4 then
+				local Icon = p4[Enum.KeyCode.ButtonB]
+				
+				if Icon then
+					config.icon = Icon
+					config.isPlatformIcon = true
+				end
+			end
+			table.insert(List, config)
 		end
 	end
 	return List
@@ -494,18 +519,22 @@ local function useShortcutBarFrameProps()
 end
 
 local function useShortcutBarItems()
-	-- upvalues: ReactFocusNavigationModule (copy), ReactModule (copy), LocalizationRoactContext (copy), UseHeldProgressByEventFunction (copy), UseLastInputMethodFunction (copy), FFlagLuaAppResponsiveEnginePreferredInput (copy), ResponsiveModule (copy), NoShortcutBarWithTvRemote (copy), UseIsTvRemoteDeviceFunction (copy), ShortcutBarPlatformGamepadIcons (copy), usePlatformGamepadImages (copy), UseSelectorFunction (copy), selectRoactGamepadBindings (copy), UseAppPolicyFunction (copy), FFlagEnableStickyShortcutBarOnAllPlatforms (copy), getGamepadItems (copy), getKeyboardItems (copy)
+	-- upvalues: ReactFocusNavigationModule (copy), ReactModule (copy), LocalizationRoactContext (copy), UseHeldProgressByEventFunction (copy), UseLastInputMethodFunction (copy), FFlagLuaAppResponsiveEnginePreferredInput (copy), ResponsiveModule (copy), NoShortcutBarWithTvRemote (copy), UseIsTvRemoteDeviceFunction (copy), FFlagShortcutBarPlatformGamepadIcons (copy), usePlatformGamepadImages (copy), UseSelectorFunction (copy), selectRoactGamepadBindings (copy), UseAppPolicyFunction (copy), FFlagEnableStickyShortcutBarOnAllPlatforms (copy), getGamepadItems (copy), getKeyboardItems (copy)
 	local UseActiveEventMapResult = ReactFocusNavigationModule.useActiveEventMap()
 	local UseContextResult = ReactModule.useContext(LocalizationRoactContext)
 	local UseHeldProgressByEventResult = UseHeldProgressByEventFunction()
 	local UseLastInputMethodResult = UseLastInputMethodFunction()
 	local UsePreferredInputResult = if FFlagLuaAppResponsiveEnginePreferredInput then ResponsiveModule.usePreferredInput() else nil
 	local UseIsTvRemoteDeviceResult = if NoShortcutBarWithTvRemote then UseIsTvRemoteDeviceFunction() else nil
-	local UsePlatformGamepadImagesResult = if ShortcutBarPlatformGamepadIcons then usePlatformGamepadImages() else nil
+	local UsePlatformGamepadImagesResult = if FFlagShortcutBarPlatformGamepadIcons then usePlatformGamepadImages() else nil
 	local UseSelectorResult = UseSelectorFunction(selectRoactGamepadBindings)
 	local UseAppPolicyResult = UseAppPolicyFunction(function(p7)
 		return p7.getStickyShortcutBarEnabled()
 	end) or FFlagEnableStickyShortcutBarOnAllPlatforms
+	
+	if FFlagShortcutBarPlatformGamepadIcons and not UseAppPolicyResult then
+		UsePlatformGamepadImagesResult = nil
+	end
 	local IsUsePreferredInputResultMatch: boolean = if FFlagLuaAppResponsiveEnginePreferredInput then UsePreferredInputResult == ResponsiveModule.Input.Directional else UseLastInputMethodResult == "Gamepad"
 	
 	return if IsUsePreferredInputResultMatch then if UseIsTvRemoteDeviceResult then {} else getGamepadItems(UseActiveEventMapResult, UseHeldProgressByEventResult, UseContextResult, UseSelectorResult, UseAppPolicyResult, UsePlatformGamepadImagesResult) else getKeyboardItems(UseActiveEventMapResult, UseHeldProgressByEventResult, UseContextResult, UseAppPolicyResult)

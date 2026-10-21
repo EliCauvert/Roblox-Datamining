@@ -13,6 +13,7 @@ local UseIsTvRemoteDeviceFunction = RoactUtilsModule.Hooks.useIsTvRemoteDevice
 local SharedFlagsModule = require(Parent.SharedFlags)
 local FFlagUseSignalsForAuthenticationStatus = SharedFlagsModule.FFlagUseSignalsForAuthenticationStatus
 local FFlagLuaSupportMicroGamepadPreferredInput = SharedFlagsModule.FFlagLuaSupportMicroGamepadPreferredInput
+local FFlagUnifyShortcutBarQA = SharedFlagsModule.FFlagUnifyShortcutBarQA
 local GetAuthenticationStatusStore = if FFlagUseSignalsForAuthenticationStatus then require(Parent.AuthenticationStatus).GetAuthenticationStatusStore else nil
 
 local function selectUserLoggedIn(p1): boolean
@@ -21,10 +22,15 @@ local function selectUserLoggedIn(p1): boolean
 end
 
 return function(AdjustScreen): boolean
-	-- upvalues: ReactFocusNavigationModule (copy), ResponsiveModule (copy), FFlagLuaSupportMicroGamepadPreferredInput (copy), UsePropertyFunction (copy), UserInputService (copy), UseIsTvRemoteDeviceFunction (copy), FFlagUseSignalsForAuthenticationStatus (copy), UseSignalStateFunction (copy), GetAuthenticationStatusStore (copy), LoginStatus (copy), UseSelectorFunction (copy), selectUserLoggedIn (copy), AppPage (copy)
+	-- upvalues: ReactFocusNavigationModule (copy), ResponsiveModule (copy), FFlagUnifyShortcutBarQA (copy), UsePropertyFunction (copy), UserInputService (copy), FFlagLuaSupportMicroGamepadPreferredInput (copy), UseIsTvRemoteDeviceFunction (copy), FFlagUseSignalsForAuthenticationStatus (copy), UseSignalStateFunction (copy), GetAuthenticationStatusStore (copy), LoginStatus (copy), UseSelectorFunction (copy), selectUserLoggedIn (copy), AppPage (copy)
 	local HasUseFocusedGuiObjectResult = ReactFocusNavigationModule.useFocusedGuiObject() ~= nil
 	local IsUsePreferredInputResultMatch = ResponsiveModule.usePreferredInput() == ResponsiveModule.Input.Directional
 	local IsUseOrientationResultMatch = ResponsiveModule.useOrientation() == ResponsiveModule.Keys.Portrait
+	
+	if FFlagUnifyShortcutBarQA then
+		local TouchEnabled = UsePropertyFunction(UserInputService, "TouchEnabled")
+		IsUseOrientationResultMatch = IsUseOrientationResultMatch and TouchEnabled
+	end
 	local IsPreferredInputMatch = if FFlagLuaSupportMicroGamepadPreferredInput then UsePropertyFunction(UserInputService, "PreferredInput") == Enum.PreferredInput.MicroGamepad else UseIsTvRemoteDeviceFunction()
 	local IsUseSignalStateResultMatch = if FFlagUseSignalsForAuthenticationStatus then UseSignalStateFunction(GetAuthenticationStatusStore(false).getStatus) == LoginStatus.LOGGED_IN else UseSelectorFunction(selectUserLoggedIn)
 	

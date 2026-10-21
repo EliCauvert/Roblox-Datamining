@@ -31,6 +31,7 @@ local FFlagSduiCapabilityBindings = SharedFlagsModule.FFlagSduiCapabilityBinding
 local FFlagMigrateGameInfoToStore = SharedFlagsModule.FFlagMigrateGameInfoToStore
 local FFlagSduiSupportRatingNoPercent = SharedFlagsModule.FFlagSduiSupportRatingNoPercent
 local FFlagSduiNotificationBadgeHydration = SharedFlagsModule.FFlagSduiNotificationBadgeHydration
+local FFlagSduiBuyRobuxHydration = SharedFlagsModule.FFlagSduiBuyRobuxHydration
 local DataStatus = DataHydrationModule.DataHydrationTypes.DataStatus
 local ProtobufTimestampToLocalTimeStringFunction = require(SduiCoreSystem.ClientBinding.SduiDataBinderTransformUtils).protobufTimestampToLocalTimeString
 
@@ -133,6 +134,24 @@ end
 local _ = function(p1)
 	-- upvalues: DataHydrationModule (copy)
 	DataHydrationModule.NotificationBadge.getNotificationBadgeStore(false).updateNotificationBadges(p1)
+end
+
+local function updateBuyRobuxStores(p1)
+	-- upvalues: DataHydrationModule (copy)
+	local BuyRobux = DataHydrationModule.BuyRobux
+	
+	if p1.buyRobuxOneTimeProduct then
+		BuyRobux.getOneTimeProductStore(false).updateInfos(p1.buyRobuxOneTimeProduct)
+	end
+	if p1.buyRobuxSubscriptionProduct then
+		BuyRobux.getSubscriptionProductStore(false).updateInfos(p1.buyRobuxSubscriptionProduct)
+	end
+	if p1.buyRobuxPendingTransfer then
+		BuyRobux.getPendingTransferStore(false).updateInfos(p1.buyRobuxPendingTransfer)
+	end
+	if p1.buyRobuxBonusItem then
+		BuyRobux.getBonusItemStore(false).updateInfos(p1.buyRobuxBonusItem)
+	end
 end
 
 local _ = function(p1)
@@ -252,7 +271,7 @@ local function calculateAgeRecommendationDerivedField(p1, p2, _)
 end
 
 local function getDataObjectSignal(Community, _, p3, p4)
-	-- upvalues: DataHydrationModule (copy), SduiDataBindingContentTypeModule (copy), FFlagSduiCommunitySectionSupport (copy), FFlagSduiMarketplaceCatalogCategorySupport (copy), FFlagSduiMarketplaceCatalogSortSupport (copy), FFlagSduiAddMarketplaceEntityDataHydration (copy), FFlagSduiAddCollectibleItemDataHydration (copy), FFlagSduiLeaderboardComponent (copy), FFlagSduiDevStoreSeeAllSupport (copy), FFlagSduiNotificationBadgeHydration (copy)
+	-- upvalues: DataHydrationModule (copy), SduiDataBindingContentTypeModule (copy), FFlagSduiCommunitySectionSupport (copy), FFlagSduiMarketplaceCatalogCategorySupport (copy), FFlagSduiMarketplaceCatalogSortSupport (copy), FFlagSduiAddMarketplaceEntityDataHydration (copy), FFlagSduiAddCollectibleItemDataHydration (copy), FFlagSduiLeaderboardComponent (copy), FFlagSduiDevStoreSeeAllSupport (copy), FFlagSduiNotificationBadgeHydration (copy), FFlagSduiBuyRobuxHydration (copy)
 	if Community == "badge" then
 		return DataHydrationModule.Badges.getBadgeInfoStore(false).getBadgeInfo((tostring(p3)))
 	elseif Community == "creator" then
@@ -312,7 +331,20 @@ local function getDataObjectSignal(Community, _, p3, p4)
 			return DataHydrationModule.Game.getGameSubscriptionStore(false).getGameSubscriptionInfo((tostring(p3)))
 		end
 	end
-	return if FFlagSduiNotificationBadgeHydration and Community == "notificationBadge" then DataHydrationModule.NotificationBadge.getNotificationBadgeStore(false).getNotificationBadge((tostring(p3))) else nil
+	if FFlagSduiNotificationBadgeHydration and Community == "notificationBadge" then
+		return DataHydrationModule.NotificationBadge.getNotificationBadgeStore(false).getNotificationBadge((tostring(p3)))
+	elseif FFlagSduiBuyRobuxHydration then
+		if Community == "buyRobuxOneTimeProduct" then
+			return DataHydrationModule.BuyRobux.getOneTimeProductStore(false).getInfo((tostring(p3)))
+		elseif Community == "buyRobuxSubscriptionProduct" then
+			return DataHydrationModule.BuyRobux.getSubscriptionProductStore(false).getInfo((tostring(p3)))
+		elseif Community == "buyRobuxPendingTransfer" then
+			return DataHydrationModule.BuyRobux.getPendingTransferStore(false).getInfo((tostring(p3)))
+		elseif Community == "buyRobuxBonusItem" then
+			return DataHydrationModule.BuyRobux.getBonusItemStore(false).getInfo((tostring(p3)))
+		end
+	end
+	return nil
 end
 
 local config = {
@@ -489,12 +521,16 @@ local config1 = {
 	userProfile = DataHydrationModule.UserProfile and DataHydrationModule.UserProfile.resolveField,
 	community = if FFlagSduiCommunitySectionSupport then getDataHydrationField else nil,
 	communityUserMembership = if FFlagSduiCommunitySectionSupport then getDataHydrationField else nil,
-	notificationBadge = if FFlagSduiNotificationBadgeHydration then getDataHydrationField else nil
+	notificationBadge = if FFlagSduiNotificationBadgeHydration then getDataHydrationField else nil,
+	buyRobuxOneTimeProduct = if FFlagSduiBuyRobuxHydration then getDataHydrationField else nil,
+	buyRobuxSubscriptionProduct = if FFlagSduiBuyRobuxHydration then getDataHydrationField else nil,
+	buyRobuxPendingTransfer = if FFlagSduiBuyRobuxHydration then getDataHydrationField else nil,
+	buyRobuxBonusItem = if FFlagSduiBuyRobuxHydration then getDataHydrationField else nil
 }
 
 return {
 	updateDataStores = function(p7)
-		-- upvalues: DataHydrationModule (copy), FFlagMigrateGameInfoToStore (copy), updateVoteCountsFromUniverses (copy), FFlagSduiCommunitySectionSupport (copy), FFlagSduiMarketplaceCatalogCategorySupport (copy), FFlagSduiMarketplaceCatalogSortSupport (copy), FFlagSduiAddMarketplaceEntityDataHydration (copy), FFlagSduiAddCollectibleItemDataHydration (copy), FFlagSduiLeaderboardComponent (copy), FFlagSduiDevStoreSeeAllSupport (copy), FFlagSduiNotificationBadgeHydration (copy)
+		-- upvalues: DataHydrationModule (copy), FFlagMigrateGameInfoToStore (copy), updateVoteCountsFromUniverses (copy), FFlagSduiCommunitySectionSupport (copy), FFlagSduiMarketplaceCatalogCategorySupport (copy), FFlagSduiMarketplaceCatalogSortSupport (copy), FFlagSduiAddMarketplaceEntityDataHydration (copy), FFlagSduiAddCollectibleItemDataHydration (copy), FFlagSduiLeaderboardComponent (copy), FFlagSduiDevStoreSeeAllSupport (copy), FFlagSduiNotificationBadgeHydration (copy), FFlagSduiBuyRobuxHydration (copy), updateBuyRobuxStores (copy)
 		if p7.badge then
 			DataHydrationModule.Badges.getBadgeInfoStore(false).updateBadges(p7.badge)
 		end
@@ -584,6 +620,9 @@ return {
 		end
 		if FFlagSduiNotificationBadgeHydration and p7.notificationBadge then
 			DataHydrationModule.NotificationBadge.getNotificationBadgeStore(false).updateNotificationBadges(p7.notificationBadge)
+		end
+		if FFlagSduiBuyRobuxHydration then
+			updateBuyRobuxStores(p7)
 		end
 	end,
 	getDataObjectSignal = getDataObjectSignal,

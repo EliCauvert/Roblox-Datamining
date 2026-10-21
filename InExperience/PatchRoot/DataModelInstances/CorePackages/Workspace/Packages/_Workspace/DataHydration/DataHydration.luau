@@ -1,8 +1,10 @@
 ﻿local DataHydrationTypesModule = require(script.DataHydrationTypes)
 local SharedFlagsModule = require(script.Parent.SharedFlags)
 local FFlagSduiLeaderboardComponent = SharedFlagsModule.FFlagSduiLeaderboardComponent
+local FFlagSduiBuyRobuxHydration = SharedFlagsModule.FFlagSduiBuyRobuxHydration
 local NotificationBadgeModule = require(script.NotificationBadge)
 local LeaderboardStatsModule = require(script.LeaderboardStats)
+local BuyRobuxModule = require(script.BuyRobux)
 
 return {
 	["jest.config"] = script["jest.config"],
@@ -35,5 +37,6 @@ return {
 	Community = require(script.Community),
 	CommunityUserMembership = require(script.CommunityUserMembership),
 	NotificationBadge = if SharedFlagsModule.FFlagSduiNotificationBadgeHydration then NotificationBadgeModule else nil,
-	LeaderboardStats = if FFlagSduiLeaderboardComponent then LeaderboardStatsModule else nil
+	LeaderboardStats = if FFlagSduiLeaderboardComponent then LeaderboardStatsModule else nil,
+	BuyRobux = if FFlagSduiBuyRobuxHydration then BuyRobuxModule else nil
 }

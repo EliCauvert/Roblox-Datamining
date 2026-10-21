@@ -34,8 +34,10 @@ return function(PlaceId, Source, p1): string
 	-- upvalues: Debug (copy), TeamCreateUtilsModule (copy), Players (copy), TeleportService (copy), BuildModeLaunchModule (copy), TeleportToPlaceModule (copy), FFlagBuildExperienceLibrary (copy), PlaytestRejoinModule (copy), LeaveExperienceModule (copy), LaunchExperienceModule (copy)
 	local CurrentPlaceId = if p1 and p1.currentPlaceId ~= nil then p1.currentPlaceId else game.PlaceId
 	local IsTeamTest = if p1 then p1.isTeamTest else nil
+	local IsEarlyTesting = if p1 then p1.isEarlyTesting else nil
 	Debug.log("info", "playtestExperience", {
 		isTeamTest = IsTeamTest,
+		isEarlyTesting = IsEarlyTesting,
 		placeId = PlaceId,
 		currentPlaceId = CurrentPlaceId,
 		source = Source
@@ -43,13 +45,13 @@ return function(PlaceId, Source, p1): string
 	local IsViewer = TeamCreateUtilsModule.isViewer()
 	local Callback3: boolean = CurrentPlaceId ~= 0 and CurrentPlaceId == PlaceId
 	
-	if Callback3 and not IsViewer then
+	if Callback3 and not IsViewer and not IsEarlyTesting then
 		Callback3 = nil
 		
 		if p1 and p1.onTeleportFailed then
 			local OnTeleportFailedFunction = p1.onTeleportFailed
 			
-			local function v18()
+			local function v19()
 				-- upvalues: Callback3 (ref), OnTeleportFailedFunction (copy)
 				if Callback3 then
 					Callback3()
@@ -60,9 +62,9 @@ return function(PlaceId, Source, p1): string
 			
 			local LocalPlayer = Players.LocalPlayer
 			local TeleportInitFailedConnection = TeleportService.TeleportInitFailed:Connect(function(Player)
-				-- upvalues: LocalPlayer (copy), v18 (copy)
+				-- upvalues: LocalPlayer (copy), v19 (copy)
 				if Player == LocalPlayer then
-					v18()
+					v19()
 				end
 			end)
 			
@@ -83,7 +85,7 @@ return function(PlaceId, Source, p1): string
 				if Callback3 then
 					Callback3 = PlaytestRejoinModule
 					Callback3 = Callback3.request
-					Callback3(PlaceId, Source, IsTeamTest)
+					Callback3(PlaceId, Source, IsTeamTest, IsEarlyTesting)
 					Callback3 = LeaveExperienceModule
 					Callback3()
 					break
@@ -92,13 +94,13 @@ return function(PlaceId, Source, p1): string
 			if IsViewer then
 				Callback3 = LeaveExperienceModule
 				Callback3(function()
-					-- upvalues: LaunchExperienceModule (upval), PlaceId (copy), Source (copy), IsTeamTest (copy)
-					LaunchExperienceModule(PlaceId, Source, IsTeamTest)
+					-- upvalues: LaunchExperienceModule (upval), PlaceId (copy), Source (copy), IsTeamTest (copy), IsEarlyTesting (copy)
+					LaunchExperienceModule(PlaceId, Source, IsTeamTest, nil, IsEarlyTesting)
 				end)
 				break
 			end
 			Callback3 = LaunchExperienceModule
-			Callback3(PlaceId, Source, IsTeamTest)
+			Callback3(PlaceId, Source, IsTeamTest, nil, IsEarlyTesting)
 		until true
 		Callback3 = "experience_launch"
 		

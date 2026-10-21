@@ -25,9 +25,10 @@ local UseOnPresetActivatedModule = require(script.Parent.useOnPresetActivated)
 local FFlagExpChatPresetChatGamepadEnabledModule = require(ExpChat.Flags.FFlagExpChatPresetChatGamepadEnabled)
 local FFlagExpChatPresetChatTabMemoryModule = require(ExpChat.Flags.FFlagExpChatPresetChatTabMemory)
 local FFlagExpChatPresetTrayDismissAnalyticsModule = require(ExpChat.Flags.FFlagExpChatPresetTrayDismissAnalytics)
+local FFlagExpChatPresetTrayPresetOnlyDisclaimerModule = require(ExpChat.Flags.FFlagExpChatPresetTrayPresetOnlyDisclaimer)
 
 return ReactModule.memo(function(p1)
-	-- upvalues: FoundationModule (copy), GetPresetChatStoreModule (copy), UseDispatchFunction (copy), SignalsReactModule (copy), GetMessagesStoreModule (copy), LocalizationModule (copy), ReactModule (copy), SetIsPresetTrayOpenModule (copy), PresetTrayKeyboardSelectedModule (copy), ExpChatSharedModule (copy), ConstantsModule (copy), FFlagExpChatPresetChatTabMemoryModule (copy), FFlagExpChatPresetChatGamepadEnabledModule (copy), FFlagExpChatPresetTrayDismissAnalyticsModule (copy), InputTypeModule (copy), UserInputService (copy), GuiService (copy), GetTransparencyStoreModule (copy), UseOnPresetActivatedModule (copy), UseOnEmojiActivatedModule (copy), EngineFeaturePresetChatUseExpressionTrayOptionsEndpoint (copy), PresetBorderlessGridButtonModule (copy), PresetMessageButtonModule (copy), Text (copy), PresetCooldownProviderModule (copy)
+	-- upvalues: FoundationModule (copy), GetPresetChatStoreModule (copy), UseDispatchFunction (copy), SignalsReactModule (copy), GetMessagesStoreModule (copy), LocalizationModule (copy), ReactModule (copy), SetIsPresetTrayOpenModule (copy), PresetTrayKeyboardSelectedModule (copy), ExpChatSharedModule (copy), ConstantsModule (copy), FFlagExpChatPresetChatTabMemoryModule (copy), FFlagExpChatPresetChatGamepadEnabledModule (copy), FFlagExpChatPresetTrayDismissAnalyticsModule (copy), InputTypeModule (copy), UserInputService (copy), GuiService (copy), GetTransparencyStoreModule (copy), UseOnPresetActivatedModule (copy), UseOnEmojiActivatedModule (copy), FFlagExpChatPresetTrayPresetOnlyDisclaimerModule (copy), EngineFeaturePresetChatUseExpressionTrayOptionsEndpoint (copy), PresetBorderlessGridButtonModule (copy), PresetMessageButtonModule (copy), Text (copy), PresetCooldownProviderModule (copy)
 	local UseTokensResult = FoundationModule.Hooks.useTokens()
 	local PresetChatStoreModule = GetPresetChatStoreModule(false)
 	local UseDispatchResult = UseDispatchFunction()
@@ -206,12 +207,16 @@ return ReactModule.memo(function(p1)
 	}
 	local Elements = {}
 	local Flag = true
+	local NoFFlagExpChatPresetTrayPresetOnlyDisclaimerModule = not FFlagExpChatPresetTrayPresetOnlyDisclaimerModule
 	
 	if v1 then
 		for LayoutOrder, category in v1.categories do
 			local Elements1 = {}
 			local Contents = if EngineFeaturePresetChatUseExpressionTrayOptionsEndpoint then category.contents else category.messages
 			for LayoutOrder1, content in Contents do
+				if not EngineFeaturePresetChatUseExpressionTrayOptionsEndpoint or content.kind == "Preset" then
+					NoFFlagExpChatPresetTrayPresetOnlyDisclaimerModule = true
+				end
 				if EngineFeaturePresetChatUseExpressionTrayOptionsEndpoint and content.kind == "Emoji" then
 					Elements1["Emoji_" .. content.emoteId] = ReactModule.createElement(PresetBorderlessGridButtonModule, {
 						unicode = content.unicode,
@@ -252,12 +257,14 @@ return ReactModule.memo(function(p1)
 				}, Elements1)
 			})
 		end
-		Elements.Footer = ReactModule.createElement(Text, {
-			TextWrapped = true,
-			tag = "size-full-0 auto-y text-body-small text-align-x-left content-muted",
-			LayoutOrder = #v1.categories + 1,
-			Text = UseLocalizationResult.footerDescription
-		})
+		if NoFFlagExpChatPresetTrayPresetOnlyDisclaimerModule then
+			Elements.Footer = ReactModule.createElement(Text, {
+				TextWrapped = true,
+				tag = "size-full-0 auto-y text-body-small text-align-x-left content-muted",
+				LayoutOrder = #v1.categories + 1,
+				Text = UseLocalizationResult.footerDescription
+			})
+		end
 	end
 	local config = {
 		Layout = ReactModule.createElement("UIListLayout", {

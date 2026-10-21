@@ -3,6 +3,7 @@ local Players = game:GetService("Players")
 local SoundService = game:GetService("SoundService")
 local VoiceChatService = game:GetService("VoiceChatService")
 local CoreGui = game:GetService("CoreGui")
+local FFlagUseAudioDeviceInputAddedSignal = require(Parent.SharedFlags).FFlagUseAudioDeviceInputAddedSignal
 local ConstantsModule = require(script.Parent.Constants)
 local Flags = script.Parent.Flags
 local PromiseModule = require(Parent.Promise)
@@ -153,7 +154,7 @@ function MicInputManager:SyncLocalAudioDeviceActive()
 end
 
 function MicInputManager:SetupEarlyAudioDeviceGuard()
-	-- upvalues: VoiceChatService (copy), FFlagExpChatDictation (copy), CoreGui (copy), Players (copy), SoundService (copy)
+	-- upvalues: VoiceChatService (copy), FFlagExpChatDictation (copy), CoreGui (copy), Players (copy), FFlagUseAudioDeviceInputAddedSignal (copy), SoundService (copy)
 	local function _(Object): boolean
 		-- upvalues: VoiceChatService (upval), FFlagExpChatDictation (upval), CoreGui (upval), Players (upval), self (copy)
 		return VoiceChatService.UseNewAudioApi and (not (FFlagExpChatDictation and Object:IsDescendantOf(CoreGui)) and (Object.Player == Players.LocalPlayer and (Object.Active and self.localMuted == nil)))
@@ -178,12 +179,15 @@ function MicInputManager:SetupEarlyAudioDeviceGuard()
 		end)))
 	end
 	
-	table.insert(self._connections, (SoundService.AudioInstanceAdded:Connect(function(AudioDeviceInput)
+	table.insert(self._connections, if FFlagUseAudioDeviceInputAddedSignal then SoundService.AudioDeviceInputAdded:Connect(function(p2)
+		-- upvalues: guardDevice (copy)
+		guardDevice(p2)
+	end) else SoundService.AudioInstanceAdded:Connect(function(AudioDeviceInput)
 		-- upvalues: guardDevice (copy)
 		if AudioDeviceInput:IsA("AudioDeviceInput") then
 			guardDevice(AudioDeviceInput)
 		end
-	end)))
+	end))
 	
 	for _, AudioDeviceInput in game:GetDescendants() do
 		if AudioDeviceInput:IsA("AudioDeviceInput") then
@@ -542,49 +546,52 @@ function MicInputManager:_unregisterDeveloperDevice(Device)
 end
 
 function MicInputManager:SetupDeveloperDeviceTracking()
-	-- upvalues: GetFFlagMicConsumerRegistryModule (copy), CoreGui (copy), SoundService (copy)
+	-- upvalues: GetFFlagMicConsumerRegistryModule (copy), CoreGui (copy), FFlagUseAudioDeviceInputAddedSignal (copy), SoundService (copy)
 	if not GetFFlagMicConsumerRegistryModule() then return end
-	local function onDeviceAdded(AudioDeviceInput)
+	local function onDeviceAdded(Device)
 		-- upvalues: self (copy), CoreGui (upval)
-		if self._developerDeviceConnections[AudioDeviceInput] then return end
-		if AudioDeviceInput:IsDescendantOf(CoreGui) then return end
-		if self:_isDeveloperDevice(AudioDeviceInput) then
-			self:_registerDeveloperDevice(AudioDeviceInput)
+		if self._developerDeviceConnections[Device] then return end
+		if Device:IsDescendantOf(CoreGui) then return end
+		if self:_isDeveloperDevice(Device) then
+			self:_registerDeveloperDevice(Device)
 		end
 		local List = {}
-		table.insert(List, (AudioDeviceInput:GetPropertyChangedSignal("Player"):Connect(function()
-			-- upvalues: self (upval), AudioDeviceInput (copy)
-			if self:_isDeveloperDevice(AudioDeviceInput) then
-				self:_registerDeveloperDevice(AudioDeviceInput)
+		table.insert(List, (Device:GetPropertyChangedSignal("Player"):Connect(function()
+			-- upvalues: self (upval), Device (copy)
+			if self:_isDeveloperDevice(Device) then
+				self:_registerDeveloperDevice(Device)
 				
 				return
 			else
-				self:_unregisterDeveloperDevice(AudioDeviceInput)
+				self:_unregisterDeveloperDevice(Device)
 			end
 		end)))
-		table.insert(List, (AudioDeviceInput.AncestryChanged:Connect(function(_, NewParent)
-			-- upvalues: self (upval), AudioDeviceInput (copy)
+		table.insert(List, (Device.AncestryChanged:Connect(function(_, NewParent)
+			-- upvalues: self (upval), Device (copy)
 			if NewParent == nil then
-				self:_unregisterDeveloperDevice(AudioDeviceInput)
-				local DeveloperDeviceConnection = self._developerDeviceConnections[AudioDeviceInput]
+				self:_unregisterDeveloperDevice(Device)
+				local DeveloperDeviceConnection = self._developerDeviceConnections[Device]
 				
 				if DeveloperDeviceConnection then
 					for _, Connection in DeveloperDeviceConnection do
 						Connection:Disconnect()
 					end
-					self._developerDeviceConnections[AudioDeviceInput] = nil
+					self._developerDeviceConnections[Device] = nil
 				end
 			end
 		end)))
-		self._developerDeviceConnections[AudioDeviceInput] = List
+		self._developerDeviceConnections[Device] = List
 	end
 	
-	table.insert(self._connections, (SoundService.AudioInstanceAdded:Connect(function(AudioDeviceInput)
+	table.insert(self._connections, if FFlagUseAudioDeviceInputAddedSignal then SoundService.AudioDeviceInputAdded:Connect(function(Device)
+		-- upvalues: onDeviceAdded (copy)
+		onDeviceAdded(Device)
+	end) else SoundService.AudioInstanceAdded:Connect(function(AudioDeviceInput)
 		-- upvalues: onDeviceAdded (copy)
 		if AudioDeviceInput:IsA("AudioDeviceInput") then
 			onDeviceAdded(AudioDeviceInput)
 		end
-	end)))
+	end))
 	
 	for _, AudioDeviceInput in game:GetDescendants() do
 		if AudioDeviceInput:IsA("AudioDeviceInput") then

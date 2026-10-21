@@ -7,6 +7,7 @@ local CorePackages = game:GetService("CorePackages")
 local AvatarChatService = game:GetService("AvatarChatService")
 local GetFFlagAvatarChatServiceEnabledFunction = require(CorePackages.Workspace.Packages.SharedFlags).GetFFlagAvatarChatServiceEnabled
 local DebugLogVoiceDefault = game:DefineFastFlag("DebugLogVoiceDefault", false)
+local FFlagUseAudioDeviceInputAddedSignal = require(CorePackages.Workspace.Packages.SharedFlags).FFlagUseAudioDeviceInputAddedSignal
 local AudioInstanceAddedApiEnabledEngineFeature = game:GetEngineFeature("AudioInstanceAddedApiEnabled")
 local FFlagExpChatDictation = require(CorePackages.Workspace.Packages.SharedFlags).FFlagExpChatDictation
 
@@ -103,64 +104,64 @@ local _ = function(Object)
 	return Object:IsDescendantOf(CoreGui)
 end
 
-local function trackDevice(AudioDeviceInput)
+local function trackDevice(Key)
 	-- upvalues: FFlagExpChatDictation (copy), CoreGui (copy), t (copy), t1 (copy), log (copy), trackDevice (copy)
-	if FFlagExpChatDictation and AudioDeviceInput:IsDescendantOf(CoreGui) then return end
-	local Player = AudioDeviceInput.Player
+	if FFlagExpChatDictation and Key:IsDescendantOf(CoreGui) then return end
+	local Player = Key.Player
 	
 	if Player then
 		local Entry = t[Player]
 		local config = nil
 		
 		if Entry == nil then
-			config = { [AudioDeviceInput] = true }
+			config = { [Key] = true }
 		else
-			Entry[AudioDeviceInput] = true
+			Entry[Key] = true
 			config = Entry
 		end
 		t[Player] = config
 	end
 	local Player1 = Player
-	t1[AudioDeviceInput] = {
-		onPlayerChanged = AudioDeviceInput:GetPropertyChangedSignal("Player"):Connect(function()
-			-- upvalues: AudioDeviceInput (copy), Player1 (ref), t (upval), t1 (upval), log (upval), trackDevice (upval)
+	t1[Key] = {
+		onPlayerChanged = Key:GetPropertyChangedSignal("Player"):Connect(function()
+			-- upvalues: Key (copy), Player1 (ref), t (upval), t1 (upval), log (upval), trackDevice (upval)
 			local Player = Player1
 			
 			if Player then
 				local Entry = t[Player]
 				
 				if Entry then
-					Entry[AudioDeviceInput] = nil
+					Entry[Key] = nil
 				end
 			end
-			local Entry1 = t1[AudioDeviceInput]
+			local Entry1 = t1[Key]
 			
 			if Entry1 then
 				Entry1.onPlayerChanged:Disconnect()
-				t1[AudioDeviceInput] = nil
+				t1[Key] = nil
 			else
 				log("Attempting to remove connections from untracked AudioDeviceInput")
 			end
-			Player1 = AudioDeviceInput.Player
-			trackDevice(AudioDeviceInput)
+			Player1 = Key.Player
+			trackDevice(Key)
 		end)
 	}
-	AudioDeviceInput.Destroying:Connect(function()
-		-- upvalues: AudioDeviceInput (copy), t (upval), t1 (upval), log (upval)
-		local Player = AudioDeviceInput.Player
+	Key.Destroying:Connect(function()
+		-- upvalues: Key (copy), t (upval), t1 (upval), log (upval)
+		local Player = Key.Player
 		
 		if Player then
 			local Entry = t[Player]
 			
 			if Entry then
-				Entry[AudioDeviceInput] = nil
+				Entry[Key] = nil
 			end
 		end
-		local Entry1 = t1[AudioDeviceInput]
+		local Entry1 = t1[Key]
 		
 		if Entry1 then
 			Entry1.onPlayerChanged:Disconnect()
-			t1[AudioDeviceInput] = nil
+			t1[Key] = nil
 			
 			return
 		else
@@ -235,7 +236,19 @@ if VoiceChatService.UseNewAudioApi then
 	SetUserActive.Name = "SetUserActive"
 	SetUserActive.Parent = RobloxReplicatedStorage
 	
-	if AudioInstanceAddedApiEnabledEngineFeature then
+	local function onAudioDeviceInputAdded(Key)
+		-- upvalues: FFlagExpChatDictation (copy), CoreGui (copy), trackDevice (copy)
+		if not FFlagExpChatDictation or not Key:IsDescendantOf(CoreGui) then
+			Key.Active = false
+			trackDevice(Key)
+			
+			return
+		end
+	end
+	
+	if FFlagUseAudioDeviceInputAddedSignal then
+		SoundService.AudioDeviceInputAdded:Connect(onAudioDeviceInputAdded)
+	elseif AudioInstanceAddedApiEnabledEngineFeature then
 		SoundService.AudioInstanceAdded:Connect(function(AudioDeviceInput)
 			-- upvalues: FFlagExpChatDictation (copy), CoreGui (copy), trackDevice (copy)
 			if AudioDeviceInput:IsA("AudioDeviceInput") then

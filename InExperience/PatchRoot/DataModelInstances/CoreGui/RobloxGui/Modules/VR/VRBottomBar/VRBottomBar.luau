@@ -28,7 +28,6 @@ local Default = require(RobloxGui.Modules.VoiceChat.VoiceChatServiceManager).def
 local ConstantsModule = require(RobloxGui.Modules.VoiceChat.Constants)
 local ExternalEventConnection = require(CorePackages.Workspace.Packages.RoactUtils).ExternalEventConnection
 local GetFFlagEnableVrVoiceParityFunction = require(CorePackages.Workspace.Packages.SharedFlags).GetFFlagEnableVrVoiceParity
-local GetFFlagEnableVrVoiceConnectDisconnectFunction = require(CorePackages.Workspace.Packages.SharedFlags).GetFFlagEnableVrVoiceConnectDisconnect
 local EnableJoinVoiceVrTelemetry = game:DefineFastFlag("EnableJoinVoiceVrTelemetry", false)
 local PanelType = nil
 local RegisterRoactPanelFunction = nil
@@ -673,7 +672,7 @@ function TopBarApp.didMount(p1)
 end
 
 function TopBarApp.updateItems(p1)
-	-- upvalues: StarterGui (copy), IsSpatialRobloxGuiEnabledModule (copy), config2 (copy), config13 (copy), FFlagVRBottomBarDebugPositionConfigModule (copy), config3 (copy), StarterPlayer (copy), config7 (copy), GetFFlagEnableVrVoiceConnectDisconnectFunction (copy), Default (copy), config17 (copy), GetFFlagEnableVrVoiceParityFunction (copy), VRHub (copy), config8 (copy), config9 (copy), config11 (copy), config10 (copy), config14 (copy), config15 (copy), config16 (copy), config12 (copy)
+	-- upvalues: StarterGui (copy), IsSpatialRobloxGuiEnabledModule (copy), config2 (copy), config13 (copy), FFlagVRBottomBarDebugPositionConfigModule (copy), config3 (copy), StarterPlayer (copy), config7 (copy), Default (copy), config17 (copy), GetFFlagEnableVrVoiceParityFunction (copy), VRHub (copy), config8 (copy), config9 (copy), config11 (copy), config10 (copy), config14 (copy), config15 (copy), config16 (copy), config12 (copy)
 	local CoreGuiEnabled = StarterGui:GetCoreGuiEnabled(Enum.CoreGuiType.PlayerList)
 	local List = if IsSpatialRobloxGuiEnabledModule then if FFlagVRBottomBarDebugPositionConfigModule then {
 		p1.getDebugYOffsetUp(), p1.getDebugYOffsetDown(), p1.getDebugZOffsetUp(),
@@ -689,7 +688,7 @@ function TopBarApp.updateItems(p1)
 	if StarterGui:GetCoreGuiEnabled(Enum.CoreGuiType.Chat) then
 		table.insert(List, config7)
 	end
-	if GetFFlagEnableVrVoiceConnectDisconnectFunction() and Default:ShouldShowJoinVoiceOnDisconnect() then
+	if Default:ShouldShowJoinVoiceOnDisconnect() then
 		table.insert(List, config17)
 	elseif GetFFlagEnableVrVoiceParityFunction() and Default:ShouldShowJoinVoice() then
 		table.insert(List, config17)

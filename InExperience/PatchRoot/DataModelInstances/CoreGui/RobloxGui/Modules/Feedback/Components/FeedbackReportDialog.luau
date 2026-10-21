@@ -17,6 +17,7 @@ local SetFeedbackReasonModule = require(Parent.Actions.SetFeedbackReason)
 local TextEntryFieldModule = require(Parent.Components.TextEntryField)
 local ModalDialogModule = require(Parent.Components.ModalDialog)
 local ThemedTextLabelModule = require(Parent.Components.PortedComponents.ThemedTextLabel)
+local BuildImageFeedbackFieldsModule = require(Parent.Components.buildImageFeedbackFields)
 local WithLocalizationFunction = require(CorePackages.Workspace.Packages.Localization).withLocalization
 local RadioButtonList = UIBloxModule.App.InputButton.RadioButtonList
 local ButtonStack = UIBloxModule.App.Button.ButtonStack
@@ -42,7 +43,7 @@ FeedbackReportDialog.validateProps = TModule.strictInterface({
 })
 
 function FeedbackReportDialog.init(p1)
-	-- upvalues: EnableFeedbackSelectionUpdate (copy), ExperienceStateCaptureService (copy), GetFFlagEnableSendImageFeedbackToBackendModule (copy), ConstantsModule (copy), FFlagTopBarSignalizeScreenSize (copy), DisplayModule (copy), SignalsModule (copy)
+	-- upvalues: EnableFeedbackSelectionUpdate (copy), ExperienceStateCaptureService (copy), GetFFlagEnableSendImageFeedbackToBackendModule (copy), ConstantsModule (copy), BuildImageFeedbackFieldsModule (copy), FFlagTopBarSignalizeScreenSize (copy), DisplayModule (copy), SignalsModule (copy)
 	if EnableFeedbackSelectionUpdate then
 		p1.state = {
 			feedbackText = "",
@@ -209,7 +210,7 @@ function FeedbackReportDialog.init(p1)
 	end
 	
 	function p1.onSubmitFeedback()
-		-- upvalues: p1 (copy), ConstantsModule (upval), GetFFlagEnableSendImageFeedbackToBackendModule (upval)
+		-- upvalues: p1 (copy), ConstantsModule (upval), GetFFlagEnableSendImageFeedbackToBackendModule (upval), BuildImageFeedbackFieldsModule (upval)
 		p1:setState({
 			numFeedbackSubmissionAttempts = p1.state.numFeedbackSubmissionAttempts + 1
 		})
@@ -219,18 +220,18 @@ function FeedbackReportDialog.init(p1)
 		local FeedbackIdentifier = p1.state.feedbackIdentifier
 		
 		if GetFFlagEnableSendImageFeedbackToBackendModule() and p1.state.shouldDisplayFeedbackImage then
-			local Match: string? = string.match(p1.state.feedbackImageUri, "rbxassetid://(%d+)")
+			local ImageFeedbackFieldsModule = BuildImageFeedbackFieldsModule(game.GameId, p1.state.feedbackImageUri, p1.state.feedbackTranslatedImageUri)
 			
-			if not Match then
+			if not ImageFeedbackFieldsModule then
 				p1.props.setFeedbackFlowState(ConstantsModule.State.Default)
 				p1.resetLocalState()
 				
 				return
 			end
-			FeedbackOriginalText = Match
+			FeedbackOriginalText = ImageFeedbackFieldsModule.source
 			Text = ConstantsModule.ContentType.Image
-			FeedbackIdentifier = game.GameId .. ":" .. Match
-			FeedbackText = string.match(p1.state.feedbackTranslatedImageUri or "", "rbxassetid://(%d+)") or ""
+			FeedbackIdentifier = ImageFeedbackFieldsModule.identifier
+			FeedbackText = ImageFeedbackFieldsModule.translation
 		end
 		p1.props.sendFeedback(Text, FeedbackOriginalText, FeedbackText, FeedbackIdentifier, p1.state.correctTranslationText, p1.state.additionalCommentsText, p1.props.feedbackReason, p1.state.numFeedbackSubmissionAttempts)
 		p1.props.setFeedbackFlowState(ConstantsModule.State.Default)

@@ -29,5 +29,9 @@
 	clientPageScope = "clientPageScope",
 	capability = "capability",
 	notificationBadge = "notificationBadge",
-	leaderboardStats = "leaderboardStats"
+	leaderboardStats = "leaderboardStats",
+	buyRobuxOneTimeProduct = "buyRobuxOneTimeProduct",
+	buyRobuxSubscriptionProduct = "buyRobuxSubscriptionProduct",
+	buyRobuxPendingTransfer = "buyRobuxPendingTransfer",
+	buyRobuxBonusItem = "buyRobuxBonusItem"
 }

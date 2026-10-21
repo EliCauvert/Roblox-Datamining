@@ -508,6 +508,7 @@ return {
 	MY_CREATIONS_FILTER_MY_GAMES = "Feature.Build.Label.MyGames",
 	MY_CREATIONS_FILTER_RESET = "CommonUI.Messages.Action.Reset",
 	MY_CREATIONS_FILTER_SEARCH_GROUPS = "Feature.Build.Label.Search",
+	MY_CREATIONS_FILTER_SHARED_GAMES = "Feature.Build.Label.SharedWithMe",
 	MY_CREATIONS_FILTER_TITLE = "Feature.Build.Label.Filters",
 	PLAYTEST_DISABLED_TOOLTIP = "Feature.Build.Description.PlaytestLocked",
 	PLAYTEST_TITLE = "Feature.Build.Action.Playtest",

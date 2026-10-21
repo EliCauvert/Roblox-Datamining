@@ -1,4 +1,5 @@
 ﻿return {
 	FFlagEnableStickyShortcutBarOnAllPlatformsIxpEnabled = game:DefineFastFlag("EnableStickyShortcutBarOnAllPlatformsIxpEnabled", false),
-	FStringEnableStickyShortcutBarOnAllPlatformsIxpLayer = game:DefineFastString("EnableStickyShortcutBarOnAllPlatformsIxpLayer", require(script:FindFirstAncestor("AppShortcutBar").Parent.ExperimentLayers).AppUserLayers.UnifyShortcutBarExposureLayer)
+	FStringEnableStickyShortcutBarOnAllPlatformsIxpLayer = game:DefineFastString("EnableStickyShortcutBarOnAllPlatformsIxpLayer", require(script:FindFirstAncestor("AppShortcutBar").Parent.ExperimentLayers).AppUserLayers.UnifyShortcutBarExposureLayer),
+	FFlagShortcutBarPlatformGamepadIcons = game:DefineFastFlag("ShortcutBarPlatformGamepadIcons", false)
 }

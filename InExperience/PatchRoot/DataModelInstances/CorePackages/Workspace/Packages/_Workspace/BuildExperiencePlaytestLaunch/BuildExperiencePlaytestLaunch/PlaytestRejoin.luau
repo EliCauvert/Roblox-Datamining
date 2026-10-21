@@ -36,12 +36,13 @@ local function takeIntent()
 end
 
 local PlaytestRejoinModule = {
-	request = function(PlaceId, Source, IsTeamTest)
+	request = function(PlaceId, Source, IsTeamTest, IsEarlyTesting)
 		-- upvalues: MemStorageService (copy), HttpService (copy)
 		MemStorageService:SetItem("BuildExperiencePlaytestRejoin", HttpService:JSONEncode({
 			placeId = PlaceId,
 			source = Source,
 			isTeamTest = IsTeamTest,
+			isEarlyTesting = IsEarlyTesting,
 			createdAt = DateTime.now().UnixTimestampMillis
 		}))
 	end,
@@ -52,15 +53,15 @@ local PlaytestRejoinModule = {
 		if TakeIntentResult == nil then
 			return false
 		end
-		local P3 = p1 or BuildExperiencePlaytestRejoinDelayMs
+		local P4 = p1 or BuildExperiencePlaytestRejoinDelayMs
 		
-		if P3 > 0 then
-			task.delay(P3 / 1000, function()
+		if P4 > 0 then
+			task.delay(P4 / 1000, function()
 				-- upvalues: LaunchExperienceModule (upval), TakeIntentResult (copy)
-				LaunchExperienceModule(TakeIntentResult.placeId, TakeIntentResult.source, TakeIntentResult.isTeamTest)
+				LaunchExperienceModule(TakeIntentResult.placeId, TakeIntentResult.source, TakeIntentResult.isTeamTest, nil, TakeIntentResult.isEarlyTesting)
 			end)
 		else
-			LaunchExperienceModule(TakeIntentResult.placeId, TakeIntentResult.source, TakeIntentResult.isTeamTest)
+			LaunchExperienceModule(TakeIntentResult.placeId, TakeIntentResult.source, TakeIntentResult.isTeamTest, nil, TakeIntentResult.isEarlyTesting)
 		end
 		return true
 	end

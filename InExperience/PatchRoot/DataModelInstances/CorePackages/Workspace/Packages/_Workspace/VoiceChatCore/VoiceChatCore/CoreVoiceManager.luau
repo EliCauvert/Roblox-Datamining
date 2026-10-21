@@ -6,6 +6,7 @@ local CollectionService = game:GetService("CollectionService")
 local SoundService = game:GetService("SoundService")
 local VoiceChatService = game:GetService("VoiceChatService")
 local HttpService = game:GetService("HttpService")
+local FFlagUseAudioDeviceInputAddedSignal = require(Parent1.SharedFlags).FFlagUseAudioDeviceInputAddedSignal
 local HttpRbxApiService = game:GetService("HttpRbxApiService")
 local AppStorageService = game:GetService("AppStorageService")
 local NotificationService = game:GetService("NotificationService")
@@ -58,11 +59,10 @@ local VoicePerformanceThrottlingIXPLayerName = game:DefineFastString("VoicePerfo
 local ThrottleParticipantsUpdateIXPLayerValue = game:DefineFastString("ThrottleParticipantsUpdateIXPLayerValue", "ThrottleParticipantsUpdate")
 local v1 = require(Flags.GetFFlagUseAudioAnalyzerForLocalMetering2)()
 local StopModerationConnectionOnLeave = game:DefineFastFlag("StopModerationConnectionOnLeave", false)
-local v2 = require(Flags.GetFFlagDeactivateAudioDeviceOnVoiceLeave)()
 local DisableRejoinGroupIdDoubleRead = game:DefineFastFlag("DisableRejoinGroupIdDoubleRead", false)
 local VoiceVolumeControlsApplyGameSettingsVoiceVolumeEngineFeature = game:GetEngineFeature("VoiceVolumeControlsApplyGameSettingsVoiceVolume")
 local VoiceVolumeControlsEnableVoiceVolumeEligibilityTelemetry = game:DefineFastFlag("VoiceVolumeControlsEnableVoiceVolumeEligibilityTelemetry", false)
-local v3 = require(Flags.GetFFlagVoiceVolumeControlsEnableVoiceVolumeImpressionsTelemetry)()
+local v2 = require(Flags.GetFFlagVoiceVolumeControlsEnableVoiceVolumeImpressionsTelemetry)()
 local VoiceVolumeControlsEligibilityModule = require(Parent.VoiceVolumeControlsEligibility)
 local EnableMutedByLocalUserEngineFeature = game:GetEngineFeature("EnableMutedByLocalUser")
 local VoiceChatMuteAllSyncMutedPlayers = game:DefineFastFlag("VoiceChatMuteAllSyncMutedPlayers", false)
@@ -591,15 +591,15 @@ function config1:GetMutedAnyone()
 end
 
 function config1:RecordGameSettingsOpened()
-	-- upvalues: v3 (copy), VoiceVolumeControlsApplyGameSettingsVoiceVolumeEngineFeature (copy)
-	if v3 and VoiceVolumeControlsApplyGameSettingsVoiceVolumeEngineFeature and self._voiceJoinTimestampMs and not self._gameSettingsOpenedTimestampMs then
+	-- upvalues: v2 (copy), VoiceVolumeControlsApplyGameSettingsVoiceVolumeEngineFeature (copy)
+	if v2 and VoiceVolumeControlsApplyGameSettingsVoiceVolumeEngineFeature and self._voiceJoinTimestampMs and not self._gameSettingsOpenedTimestampMs then
 		self._gameSettingsOpenedTimestampMs = DateTime.now().UnixTimestampMillis
 	end
 end
 
 function config1:ResetVoiceVolumeImpressionsSession()
-	-- upvalues: v3 (copy), VoiceVolumeControlsApplyGameSettingsVoiceVolumeEngineFeature (copy)
-	if v3 and VoiceVolumeControlsApplyGameSettingsVoiceVolumeEngineFeature then
+	-- upvalues: v2 (copy), VoiceVolumeControlsApplyGameSettingsVoiceVolumeEngineFeature (copy)
+	if v2 and VoiceVolumeControlsApplyGameSettingsVoiceVolumeEngineFeature then
 		self._voiceJoinTimestampMs = nil
 		self._voiceVolumeSliderEligibleAtJoin = false
 		self._gameSettingsOpenedTimestampMs = nil
@@ -607,8 +607,8 @@ function config1:ResetVoiceVolumeImpressionsSession()
 end
 
 function config1:ReportVoiceVolumeImpressionsIfNeeded()
-	-- upvalues: v3 (copy), VoiceVolumeControlsApplyGameSettingsVoiceVolumeEngineFeature (copy)
-	if v3 and VoiceVolumeControlsApplyGameSettingsVoiceVolumeEngineFeature and self._voiceJoinTimestampMs and self._voiceVolumeSliderEligibleAtJoin then
+	-- upvalues: v2 (copy), VoiceVolumeControlsApplyGameSettingsVoiceVolumeEngineFeature (copy)
+	if v2 and VoiceVolumeControlsApplyGameSettingsVoiceVolumeEngineFeature and self._voiceJoinTimestampMs and self._voiceVolumeSliderEligibleAtJoin then
 		local VoiceAnalyticsData = self:GetVoiceAnalyticsData()
 		self.Analytics:reportVoiceVolumeImpressions({
 			playSessionId = VoiceAnalyticsData.playSessionId,
@@ -1341,7 +1341,7 @@ function config1:_updateRecentUsersInteractionData()
 end
 
 function config1:SetupParticipantListeners()
-	-- upvalues: NewResult (copy), GetFFlagClearUserFromRecentVoiceDataOnLeaveModule (copy), StringKeyFixForParticipantsTable (copy), GetFFlagFixGetPlayerByUserIdStringCastModule (copy), Players (copy), VoiceChatService (copy), FFlagEnablePartyVoiceChangersInLua (copy), GetFFlagBatchVoiceParticipantsUpdatesModule (copy), FFlagEnableVoiceChatMuteForVideoCaptures (copy), GetFFlagMicConsumerRegistryModule (copy), GetFFlagCoreMicManagerRefactorModule (copy), GetFFlagVoiceChatClientRewriteMasterLuaFunction (copy), StopModerationConnectionOnLeave (copy), v2 (copy), DisableRejoinGroupIdDoubleRead (copy), VoiceVolumeControlsEnableVoiceVolumeEligibilityTelemetry (copy), GetFFlagDisconnectToastClientRewriteFunction (copy), v3 (copy), VoiceVolumeControlsApplyGameSettingsVoiceVolumeEngineFeature (copy), GetFFlagEnableVoiceSignalFunction (copy), VOICEJOINPROGRESS (copy), VoiceVolumeControlsEligibilityModule (copy), v1 (copy), MINVOICECHATAPIVERSIONLOCALMICACTIVITY (copy), GetFFlagLocalMutedNilFixFunction (copy), GetFFlagLuaConsumePlayerModeratedModule (copy), GetFFlagEnableVoiceReverseNudgeModule (copy), UtilsModule (copy), config (copy)
+	-- upvalues: NewResult (copy), GetFFlagClearUserFromRecentVoiceDataOnLeaveModule (copy), StringKeyFixForParticipantsTable (copy), GetFFlagFixGetPlayerByUserIdStringCastModule (copy), Players (copy), VoiceChatService (copy), FFlagEnablePartyVoiceChangersInLua (copy), GetFFlagBatchVoiceParticipantsUpdatesModule (copy), FFlagEnableVoiceChatMuteForVideoCaptures (copy), GetFFlagMicConsumerRegistryModule (copy), GetFFlagCoreMicManagerRefactorModule (copy), GetFFlagVoiceChatClientRewriteMasterLuaFunction (copy), StopModerationConnectionOnLeave (copy), DisableRejoinGroupIdDoubleRead (copy), VoiceVolumeControlsEnableVoiceVolumeEligibilityTelemetry (copy), GetFFlagDisconnectToastClientRewriteFunction (copy), v2 (copy), VoiceVolumeControlsApplyGameSettingsVoiceVolumeEngineFeature (copy), GetFFlagEnableVoiceSignalFunction (copy), VOICEJOINPROGRESS (copy), VoiceVolumeControlsEligibilityModule (copy), v1 (copy), MINVOICECHATAPIVERSIONLOCALMICACTIVITY (copy), GetFFlagLocalMutedNilFixFunction (copy), GetFFlagLuaConsumePlayerModeratedModule (copy), GetFFlagEnableVoiceReverseNudgeModule (copy), UtilsModule (copy), config (copy)
 	self:ensureInitialized("setup participant listeners")
 	
 	if not self.participants then
@@ -1431,7 +1431,7 @@ function config1:SetupParticipantListeners()
 		local FFlagCoreMicManagerRefactorModule = GetFFlagMicConsumerRegistryModule() and GetFFlagCoreMicManagerRefactorModule()
 		
 		local function onStateChanged(OldState, NewState)
-			-- upvalues: self (copy), GetFFlagVoiceChatClientRewriteMasterLuaFunction (upval), NewResult (upval), StopModerationConnectionOnLeave (upval), v2 (upval), DisableRejoinGroupIdDoubleRead (upval), FFlagCoreMicManagerRefactorModule (copy), VoiceVolumeControlsEnableVoiceVolumeEligibilityTelemetry (upval), GetFFlagDisconnectToastClientRewriteFunction (upval), v3 (upval), VoiceVolumeControlsApplyGameSettingsVoiceVolumeEngineFeature (upval), GetFFlagEnableVoiceSignalFunction (upval), VOICEJOINPROGRESS (upval), VoiceVolumeControlsEligibilityModule (upval), VoiceChatService (upval)
+			-- upvalues: self (copy), GetFFlagVoiceChatClientRewriteMasterLuaFunction (upval), NewResult (upval), StopModerationConnectionOnLeave (upval), DisableRejoinGroupIdDoubleRead (upval), FFlagCoreMicManagerRefactorModule (copy), VoiceVolumeControlsEnableVoiceVolumeEligibilityTelemetry (upval), GetFFlagDisconnectToastClientRewriteFunction (upval), v2 (upval), VoiceVolumeControlsApplyGameSettingsVoiceVolumeEngineFeature (upval), GetFFlagEnableVoiceSignalFunction (upval), VOICEJOINPROGRESS (upval), VoiceVolumeControlsEligibilityModule (upval), VoiceChatService (upval)
 			self:emit("OnStateChanged", OldState, NewState)
 			local IsNewStateMatch = NewState == Enum.VoiceChatState.Failed
 			local IsNewStateMatch1 = NewState == Enum.VoiceChatState.Joining
@@ -1454,7 +1454,7 @@ function config1:SetupParticipantListeners()
 			if StopModerationConnectionOnLeave and NewState == Enum.VoiceChatState.Joined then
 				self:StartModerationSignal()
 			end
-			if v2 and NewState == Enum.VoiceChatState.Joined then
+			if NewState == Enum.VoiceChatState.Joined then
 				self:_syncLocalAudioDeviceActive()
 			end
 			if NewState == Enum.VoiceChatState.Leaving then
@@ -1478,9 +1478,8 @@ function config1:SetupParticipantListeners()
 				if StopModerationConnectionOnLeave then
 					self:StopModerationSignal()
 				end
-				if v2 then
-					self:_syncLocalAudioDeviceActive()
-				end
+				self:_syncLocalAudioDeviceActive()
+				
 				if IsNewStateMatch then
 					NewResult:debug("State Changed to Failed. Reason: {}", self.service:GetAndClearCallFailureMessage())
 				end
@@ -1492,7 +1491,7 @@ function config1:SetupParticipantListeners()
 						self:emit("OnRetryRequested")
 					end
 				end
-				if v3 and VoiceVolumeControlsApplyGameSettingsVoiceVolumeEngineFeature then
+				if v2 and VoiceVolumeControlsApplyGameSettingsVoiceVolumeEngineFeature then
 					self:ReportVoiceVolumeImpressionsIfNeeded()
 				end
 			end
@@ -1500,11 +1499,11 @@ function config1:SetupParticipantListeners()
 				self:ChangeVoiceJoinProgress(VOICEJOINPROGRESS.Joined)
 				self:emit("OnVoiceJoin")
 			end
-			if v3 and VoiceVolumeControlsApplyGameSettingsVoiceVolumeEngineFeature and NewState == Enum.VoiceChatState.Joined then
+			if v2 and VoiceVolumeControlsApplyGameSettingsVoiceVolumeEngineFeature and NewState == Enum.VoiceChatState.Joined then
 				self._voiceJoinTimestampMs = DateTime.now().UnixTimestampMillis
 				self._voiceVolumeSliderEligibleAtJoin = VoiceVolumeControlsEligibilityModule.isVoiceChatVolumeSliderVisible(true, VoiceChatService.UseNewAudioApi)
 			end
-			if VoiceVolumeControlsEnableVoiceVolumeEligibilityTelemetry and (VoiceVolumeControlsApplyGameSettingsVoiceVolumeEngineFeature and NewState == Enum.VoiceChatState.Joined and not self._voiceVolumeEligibilityReported) then
+			if VoiceVolumeControlsEnableVoiceVolumeEligibilityTelemetry and (VoiceVolumeControlsApplyGameSettingsVoiceVolumeEngineFeature and (NewState == Enum.VoiceChatState.Joined and not self._voiceVolumeEligibilityReported)) then
 				local Success, Result = pcall(function()
 					return UserSettings():GetService("UserGameSettings").VoiceChatVolume
 				end)
@@ -1692,14 +1691,21 @@ local function _(Object)
 	return Object:IsDescendantOf(CoreGui)
 end
 
-function config1:onInstanceAdded(AudioDeviceInput)
+function config1:_onAudioDeviceInputAdded(AudioDeviceInput)
 	-- upvalues: FFlagExpChatDictation (copy), CoreGui (copy), NewResult (copy)
-	if AudioDeviceInput:IsA("AudioDeviceInput") then
-		if FFlagExpChatDictation and AudioDeviceInput:IsDescendantOf(CoreGui) then return end
+	if not FFlagExpChatDictation or not AudioDeviceInput:IsDescendantOf(CoreGui) then
 		NewResult:debug("Found new audio device instance for {}", AudioDeviceInput.Player and AudioDeviceInput.Player.Name)
 		self.audioDevices[AudioDeviceInput] = self:CreateAudioDeviceData(AudioDeviceInput)
 		self:emit("OnAudioDeviceInputAdded")
 		self:StartAnalysis(AudioDeviceInput)
+		
+		return
+	end
+end
+
+function config1:onInstanceAdded(AudioDeviceInput)
+	if AudioDeviceInput:IsA("AudioDeviceInput") then
+		self:_onAudioDeviceInputAdded(AudioDeviceInput)
 	end
 end
 
@@ -1924,7 +1930,7 @@ function config1:SetAndSyncActive(p4, Active)
 end
 
 function config1:CreateAudioDeviceData(Object)
-	-- upvalues: Players (copy), EnableMutedByLocalUserEngineFeature (copy), NewResult (copy), FFlagDebugShowAudioDeviceInputDebugger (copy), v2 (copy), VoiceChatService (copy)
+	-- upvalues: Players (copy), EnableMutedByLocalUserEngineFeature (copy), NewResult (copy), FFlagDebugShowAudioDeviceInputDebugger (copy), VoiceChatService (copy)
 	local t = {}
 	local IsPlayerMatch = Object.Player == Players.LocalPlayer
 	
@@ -2018,7 +2024,7 @@ function config1:CreateAudioDeviceData(Object)
 			end
 		end)
 	end
-	if v2 and VoiceChatService.UseNewAudioApi then
+	if VoiceChatService.UseNewAudioApi then
 		t.onActiveChangedDisconnectGuard = Object:GetPropertyChangedSignal("Active"):Connect(function()
 			-- upvalues: Object (copy), Players (upval), self (copy)
 			if Object.Active and Object.Player == Players.LocalPlayer and self.localMuted == nil then
@@ -2067,13 +2073,21 @@ function config1:onInstanceRemove(AudioDeviceInput)
 end
 
 function config1:hookupAudioDeviceInputListener()
-	-- upvalues: NewResult (copy), Players (copy), SoundService (copy), VoiceChatService (copy), CollectionService (copy), UtilsModule (copy)
+	-- upvalues: NewResult (copy), Players (copy), FFlagUseAudioDeviceInputAddedSignal (copy), SoundService (copy), VoiceChatService (copy), CollectionService (copy), UtilsModule (copy)
 	NewResult:debug("Hooking up audio device listeners")
 	local LocalPlayer = Players.LocalPlayer
-	SoundService.AudioInstanceAdded:Connect(function(AudioDeviceInput)
-		-- upvalues: self (copy)
-		self:onInstanceAdded(AudioDeviceInput)
-	end)
+	
+	if FFlagUseAudioDeviceInputAddedSignal then
+		SoundService.AudioDeviceInputAdded:Connect(function(p4)
+			-- upvalues: self (copy)
+			self:_onAudioDeviceInputAdded(p4)
+		end)
+	else
+		SoundService.AudioInstanceAdded:Connect(function(AudioDeviceInput)
+			-- upvalues: self (copy)
+			self:onInstanceAdded(AudioDeviceInput)
+		end)
+	end
 	local AudioDeviceInput = LocalPlayer:FindFirstChildOfClass("AudioDeviceInput")
 	NewResult:debug("Found local user audio device {}", AudioDeviceInput)
 	
@@ -2415,7 +2429,7 @@ function config1:_syncLocalAudioDeviceActive()
 end
 
 function config1:_setupEarlyAudioDeviceGuard()
-	-- upvalues: GetFFlagCoreMicManagerRefactorModule (copy), VoiceChatService (copy), FFlagExpChatDictation (copy), CoreGui (copy), Players (copy), SoundService (copy)
+	-- upvalues: GetFFlagCoreMicManagerRefactorModule (copy), VoiceChatService (copy), FFlagExpChatDictation (copy), CoreGui (copy), Players (copy), FFlagUseAudioDeviceInputAddedSignal (copy), SoundService (copy)
 	if GetFFlagCoreMicManagerRefactorModule() then
 		return self.micManager:SetupEarlyAudioDeviceGuard()
 	end
@@ -2443,13 +2457,19 @@ function config1:_setupEarlyAudioDeviceGuard()
 		end)
 	end
 	
-	SoundService.AudioInstanceAdded:Connect(function(AudioDeviceInput)
-		-- upvalues: guardDevice (copy)
-		if AudioDeviceInput:IsA("AudioDeviceInput") then
-			guardDevice(AudioDeviceInput)
-		end
-	end)
-	
+	if FFlagUseAudioDeviceInputAddedSignal then
+		SoundService.AudioDeviceInputAdded:Connect(function(p4)
+			-- upvalues: guardDevice (copy)
+			guardDevice(p4)
+		end)
+	else
+		SoundService.AudioInstanceAdded:Connect(function(AudioDeviceInput)
+			-- upvalues: guardDevice (copy)
+			if AudioDeviceInput:IsA("AudioDeviceInput") then
+				guardDevice(AudioDeviceInput)
+			end
+		end)
+	end
 	for _, AudioDeviceInput in game:GetDescendants() do
 		if AudioDeviceInput:IsA("AudioDeviceInput") then
 			guardDevice(AudioDeviceInput)
@@ -2458,12 +2478,10 @@ function config1:_setupEarlyAudioDeviceGuard()
 end
 
 function config1:_asyncInit()
-	-- upvalues: v2 (copy), NewResult (copy), MINVOICECHATAPIVERSIONISCONTEXTENABLED (copy), GetFFlagVoiceChatClientRewriteMasterLuaFunction (copy), VoiceChatService (copy), AnalyticsModule (copy), PromiseModule (copy)
+	-- upvalues: NewResult (copy), MINVOICECHATAPIVERSIONISCONTEXTENABLED (copy), GetFFlagVoiceChatClientRewriteMasterLuaFunction (copy), VoiceChatService (copy), AnalyticsModule (copy), PromiseModule (copy)
 	self:CheckCallState()
+	self:_setupEarlyAudioDeviceGuard()
 	
-	if v2 then
-		self:_setupEarlyAudioDeviceGuard()
-	end
 	return self:canUseServiceAsync():andThen(function(_)
 		-- upvalues: NewResult (upval), MINVOICECHATAPIVERSIONISCONTEXTENABLED (upval), self (copy), GetFFlagVoiceChatClientRewriteMasterLuaFunction (upval), VoiceChatService (upval), AnalyticsModule (upval), PromiseModule (upval)
 		local ServiceName = "VoiceChatService"
@@ -2678,7 +2696,7 @@ end
 
 config1.default = config1.new(BlockingUtilityModule:GetAfterBlockedStatusChangedEvent(), PermissionsProtocol.default, HttpRbxApiService, nil, nil, nil, nil, nil, ThirdPartyUserService, nil, AdService)
 
-if v3 and VoiceVolumeControlsApplyGameSettingsVoiceVolumeEngineFeature then
+if v2 and VoiceVolumeControlsApplyGameSettingsVoiceVolumeEngineFeature then
 	local LocalPlayer = Players.LocalPlayer
 	
 	if LocalPlayer then

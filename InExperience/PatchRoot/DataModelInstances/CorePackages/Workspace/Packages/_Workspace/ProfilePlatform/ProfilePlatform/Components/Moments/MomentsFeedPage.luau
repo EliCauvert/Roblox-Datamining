@@ -13,6 +13,7 @@ local FFlagEnableMomentsCommentReporting = SharedFlagsModule.FFlagEnableMomentsC
 local FFlagEnableMomentsCommentBlocking = SharedFlagsModule.FFlagEnableMomentsCommentBlocking
 local FFlagAbuseReportSubmissionTargetV4 = SharedFlagsModule.FFlagAbuseReportSubmissionTargetV4
 local FFlagMomentsServeEDPVideos = SharedFlagsModule.FFlagMomentsServeEDPVideos
+local FFlagAbuseReportAttributes = SharedFlagsModule.FFlagAbuseReportAttributes
 local View = FoundationModule.View
 local IconButton = FoundationModule.IconButton
 local ButtonSize = FoundationModule.Enums.ButtonSize
@@ -29,13 +30,14 @@ local FireAnalyticsEventFunction = MomentsCommonModule.Analytics.fireAnalyticsEv
 local EventNames = MomentsCommonModule.Analytics.EventNames
 local UseNavigationFunction = require(Parent.Navigation).useNavigation
 local Feed = MomentsModule.Feed
+local ReportEdpVideo = MomentsModule.reportEdpVideo
 local MomentsImmersivePresentation = MomentsModule.MomentsImmersivePresentation
 local ImmersiveFeedKind = MomentsModule.Constants.ImmersiveFeedKind
 local CreateUserMomentsFeedSourceModule = require(Parent.Moments.CreateUserMomentsFeedSource)
 local ReportMomentFunction = MomentsModule.reportMoment
 
 local function MomentsFeedPageImmersive()
-	-- upvalues: UseNavigationFunction (copy), FFlagMomentsOptimisticProfilePending (copy), ReactModule (copy), FireAnalyticsEventFunction (copy), EventNames (copy), UseDispatchFunction (copy), FFlagMomentsServeEDPVideos (copy), OpenDynamicAbuseReportFunction (copy), AbuseVector (copy), CloseCentralOverlayFunction (copy), ReportMomentFunction (copy), FFlagAbuseReportSubmissionTargetV4 (copy), FFlagEnableMomentsCommentReporting (copy), FFlagEnableMomentsCommentBlocking (copy), UseOpenBlockingModalModule (copy), UseScreenSizeFunction (copy), View (copy), MomentsImmersivePresentation (copy), ImmersiveFeedKind (copy)
+	-- upvalues: UseNavigationFunction (copy), FFlagMomentsOptimisticProfilePending (copy), ReactModule (copy), FireAnalyticsEventFunction (copy), EventNames (copy), UseDispatchFunction (copy), FFlagMomentsServeEDPVideos (copy), OpenDynamicAbuseReportFunction (copy), AbuseVector (copy), FFlagAbuseReportAttributes (copy), CloseCentralOverlayFunction (copy), ReportEdpVideo (copy), ReportMomentFunction (copy), FFlagAbuseReportSubmissionTargetV4 (copy), FFlagEnableMomentsCommentReporting (copy), FFlagEnableMomentsCommentBlocking (copy), UseOpenBlockingModalModule (copy), UseScreenSizeFunction (copy), View (copy), MomentsImmersivePresentation (copy), ImmersiveFeedKind (copy)
 	local UseNavigationResult = UseNavigationFunction()
 	local ExtraPropsParam = UseNavigationResult.getParam("extraProps")
 	local TargetUserId = if ExtraPropsParam and ExtraPropsParam.targetUserId then ExtraPropsParam.targetUserId else 0
@@ -46,18 +48,20 @@ local function MomentsFeedPageImmersive()
 	end, { UseNavigationResult.goBack, TargetUserId })
 	local UseDispatchResult = UseDispatchFunction()
 	local UseResult1 = ReactModule.useCallback(function(p1)
-		-- upvalues: FFlagMomentsServeEDPVideos (upval), UseDispatchResult (copy), OpenDynamicAbuseReportFunction (upval), AbuseVector (upval), CloseCentralOverlayFunction (upval), ReportMomentFunction (upval), FFlagAbuseReportSubmissionTargetV4 (upval)
-		if FFlagMomentsServeEDPVideos and p1.onCustomSubmit then
+		-- upvalues: FFlagMomentsServeEDPVideos (upval), UseDispatchResult (copy), OpenDynamicAbuseReportFunction (upval), AbuseVector (upval), FFlagAbuseReportAttributes (upval), CloseCentralOverlayFunction (upval), ReportEdpVideo (upval), ReportMomentFunction (upval), FFlagAbuseReportSubmissionTargetV4 (upval)
+		if FFlagMomentsServeEDPVideos and p1.isEdpVideo then
 			UseDispatchResult(OpenDynamicAbuseReportFunction({
 				abuseVector = AbuseVector.MomentsFeed,
-				targetId = p1.feedItemId,
+				targetId = if FFlagAbuseReportAttributes then nil else p1.feedItemId,
+				attributes = if FFlagAbuseReportAttributes then { isEdpVideo = true, targetId = p1.feedItemId } else nil,
+				analyticsTargetId = if FFlagAbuseReportAttributes then p1.feedItemId else nil,
 				onSubmit = p1.onSubmit,
 				onClose = function()
 					-- upvalues: p1 (copy), UseDispatchResult (upval), CloseCentralOverlayFunction (upval)
 					p1.onClose()
 					UseDispatchResult(CloseCentralOverlayFunction())
 				end,
-				onCustomSubmit = p1.onCustomSubmit
+				clientActionHandlers = { ["moments-edp-video"] = ReportEdpVideo }
 			}))
 			
 			return

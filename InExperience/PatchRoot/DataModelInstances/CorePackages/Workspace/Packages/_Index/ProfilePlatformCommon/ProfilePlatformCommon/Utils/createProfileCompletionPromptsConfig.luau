@@ -4,14 +4,16 @@ local SduiLoadTimer = require(Parent.SduiSharedUtilities).SduiLoadTimer
 local AppPage = require(Parent.RobloxAppEnums).AppPage
 local FFlagSduiAllowNoConfigsBuilt = require(Parent.SharedFlags).FFlagSduiAllowNoConfigsBuilt
 local ProfileCompletionUsePlatformSurfaceKey = game:DefineFastFlag("ProfileCompletionUsePlatformSurfaceKey", false)
+local ProfileCompletionReplaceOnFetch = game:DefineFastFlag("ProfileCompletionReplaceOnFetch", false)
 
 return function()
-	-- upvalues: SduiLoadTimer (copy), PromptsEntryPoint (copy), ProfileCompletionUsePlatformSurfaceKey (copy), AppPage (copy), FFlagSduiAllowNoConfigsBuilt (copy)
+	-- upvalues: SduiLoadTimer (copy), PromptsEntryPoint (copy), ProfileCompletionUsePlatformSurfaceKey (copy), AppPage (copy), ProfileCompletionReplaceOnFetch (copy), FFlagSduiAllowNoConfigsBuilt (copy)
 	return {
 		configKey = "ProfileCompletion",
 		clearOnEmptyResponse = true,
 		entryPoint = PromptsEntryPoint.SelfUserProfileOpen,
 		surfaceKey = if ProfileCompletionUsePlatformSurfaceKey then AppPage.ProfilePlatform else "ProfileCompletion",
+		replaceOnFetch = if ProfileCompletionReplaceOnFetch then true else nil,
 		allowNoConfigsBuilt = if FFlagSduiAllowNoConfigsBuilt then true else nil,
 		loadTimer = SduiLoadTimer.createLoadTimer("ProfileCompletion")
 	}

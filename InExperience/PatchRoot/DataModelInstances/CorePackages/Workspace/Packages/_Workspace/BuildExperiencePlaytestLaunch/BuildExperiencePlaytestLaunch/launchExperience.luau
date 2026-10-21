@@ -10,13 +10,13 @@ local GameParams = ExperienceServiceModule.GameParams
 local BuildModeLaunchModule = require(script.Parent.BuildModeLaunch)
 local Debug = require(Parent.DataHydration.CreatorAgentChat).debug
 
-return function(JoiningPlaceId, Source, p1, p2)
+return function(JoiningPlaceId, Source, p1, p2, p3)
 	-- upvalues: BuildModeLaunchModule (copy), FFlagConnectionRelaunchBuildPlaytest (copy), GameParams (copy), FFlagBuildExperienceLibrary (copy), Parent (copy), FFlagDeferInExperienceRbxmDownload (copy), FFlagEnableDeferredAssetManagerService (copy), Debug (copy), ExperienceService (copy)
 	BuildModeLaunchModule:set(if p2 == nil then nil else p2.sessionId, JoiningPlaceId, if FFlagConnectionRelaunchBuildPlaytest then p1 else nil)
-	local FromPlaceIdResult = GameParams.fromPlaceId(JoiningPlaceId, p1)
+	local FromParamsResult = if p3 then GameParams.fromParams({ isEarlyTesting = true, placeId = JoiningPlaceId }) else GameParams.fromPlaceId(JoiningPlaceId, p1)
 	
 	if FFlagBuildExperienceLibrary then
-		FromPlaceIdResult.isTeamCreateViewer = p2 ~= nil or nil
+		FromParamsResult.isTeamCreateViewer = p2 ~= nil or nil
 		
 		if p2 == nil then
 			require(Parent.ProgressLoading).PregameOverride.setPregameOverride(nil)
@@ -27,6 +27,6 @@ return function(JoiningPlaceId, Source, p1, p2)
 			DeferredAssetManagerService.JoiningUniverseId = 0
 		end
 	end
-	Debug.log("info", "LaunchExperience gameParams", { gameParams = FromPlaceIdResult, source = Source })
-	ExperienceService:LaunchExperience(FromPlaceIdResult, Source)
+	Debug.log("info", "LaunchExperience gameParams", { gameParams = FromParamsResult, source = Source })
+	ExperienceService:LaunchExperience(FromParamsResult, Source)
 end

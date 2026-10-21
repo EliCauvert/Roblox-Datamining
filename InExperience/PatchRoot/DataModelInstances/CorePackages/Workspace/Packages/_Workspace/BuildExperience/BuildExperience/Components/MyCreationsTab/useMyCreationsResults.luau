@@ -727,6 +727,14 @@ local function useBuildCreators(CreatorGroupsStore, CreatorTargetId, Filter)
 		if Games == "MyGames" then
 			return { status = "Ready", creators = { config } }
 		end
+		if Games == "SharedGames" then
+			return {
+				status = "Ready",
+				creators = {
+					{ creatorType = "Team", creatorTargetId = CreatorTargetId }
+				}
+			}
+		end
 		if UseSignalStateResult == nil then
 			return {
 				creators = nil,

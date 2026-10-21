@@ -1,15 +1,19 @@
 ﻿local RbxAnalyticsService = game:GetService("RbxAnalyticsService")
-local ItemType = nil
-local ItemSubType = nil
+local IECFunnelContextIds = game:DefineFastFlag("IECFunnelContextIds", false)
+local ItemDetails = nil
+local ItemDetails1 = nil
 
-local function _(Section, Action, Element)
-	-- upvalues: RbxAnalyticsService (copy), ItemType (ref), ItemSubType (ref)
+local function sendEvent(Section, Action, Element)
+	-- upvalues: RbxAnalyticsService (copy), ItemDetails (ref), ItemDetails1 (ref), IECFunnelContextIds (copy)
 	RbxAnalyticsService:SendEventDeferred("client", "publish_avatar_prompt", "iec_funnel_user_creation", {
 		section = Section,
 		action = Action,
 		element = Element,
-		itemType = ItemType,
-		itemSubType = ItemSubType
+		itemType = ItemDetails,
+		itemSubType = ItemDetails1,
+		universeid = if IECFunnelContextIds then tostring(game.GameId) else nil,
+		placeid = if IECFunnelContextIds then tostring(game.PlaceId) else nil,
+		sessionid = if IECFunnelContextIds then RbxAnalyticsService:GetSessionId() else nil
 	})
 end
 
@@ -34,43 +38,25 @@ local PublishAssetAnalyticsModule = {
 		Cancel = "cancel"
 	},
 	setItemDetails = function(Value, Value1)
-		-- upvalues: ItemType (ref), ItemSubType (ref)
-		ItemType = Value
-		ItemSubType = Value1
+		-- upvalues: ItemDetails (ref), ItemDetails1 (ref)
+		ItemDetails = Value
+		ItemDetails1 = Value1
 	end
 }
 
 function PublishAssetAnalyticsModule.sendPageLoad(Section)
-	-- upvalues: PublishAssetAnalyticsModule (copy), RbxAnalyticsService (copy), ItemType (ref), ItemSubType (ref)
-	RbxAnalyticsService:SendEventDeferred("client", "publish_avatar_prompt", "iec_funnel_user_creation", {
-		element = nil,
-		section = Section,
-		action = PublishAssetAnalyticsModule.Action.PageLoad,
-		itemType = ItemType,
-		itemSubType = ItemSubType
-	})
+	-- upvalues: sendEvent (copy), PublishAssetAnalyticsModule (copy)
+	sendEvent(Section, PublishAssetAnalyticsModule.Action.PageLoad)
 end
 
 function PublishAssetAnalyticsModule.sendFieldTouched(Section, Element)
-	-- upvalues: PublishAssetAnalyticsModule (copy), RbxAnalyticsService (copy), ItemType (ref), ItemSubType (ref)
-	RbxAnalyticsService:SendEventDeferred("client", "publish_avatar_prompt", "iec_funnel_user_creation", {
-		section = Section,
-		action = PublishAssetAnalyticsModule.Action.FieldTouched,
-		element = Element,
-		itemType = ItemType,
-		itemSubType = ItemSubType
-	})
+	-- upvalues: sendEvent (copy), PublishAssetAnalyticsModule (copy)
+	sendEvent(Section, PublishAssetAnalyticsModule.Action.FieldTouched, Element)
 end
 
 function PublishAssetAnalyticsModule.sendButtonClicked(Section, Element)
-	-- upvalues: PublishAssetAnalyticsModule (copy), RbxAnalyticsService (copy), ItemType (ref), ItemSubType (ref)
-	RbxAnalyticsService:SendEventDeferred("client", "publish_avatar_prompt", "iec_funnel_user_creation", {
-		section = Section,
-		action = PublishAssetAnalyticsModule.Action.ButtonClicked,
-		element = Element,
-		itemType = ItemType,
-		itemSubType = ItemSubType
-	})
+	-- upvalues: sendEvent (copy), PublishAssetAnalyticsModule (copy)
+	sendEvent(Section, PublishAssetAnalyticsModule.Action.ButtonClicked, Element)
 end
 
 return PublishAssetAnalyticsModule

@@ -11,7 +11,7 @@ local UseClosableFocusRootModule = require(BuildExperience.utils.useClosableFocu
 local _ = require(script.Parent.MyCreationsFilterView)
 local FocusNavigableSurfaceIdentifierEnum = require(Parent.FocusNavigationUtils).FocusNavigableSurfaceIdentifierEnum
 local config = { games = "MyGames" }
-local List = { "All", "MyGames", "GroupGames" }
+local List = { "All", "MyGames", "GroupGames", "SharedGames" }
 
 local function _(p1): string
 	return string.format("rbxthumb://type=GroupIcon&id=%d&w=150&h=150", p1)
@@ -36,12 +36,14 @@ return function(Frame)
 		myGames = LocalizationStringsModule.MY_CREATIONS_FILTER_MY_GAMES,
 		reset = LocalizationStringsModule.MY_CREATIONS_FILTER_RESET,
 		searchGroups = LocalizationStringsModule.MY_CREATIONS_FILTER_SEARCH_GROUPS,
+		sharedGames = LocalizationStringsModule.MY_CREATIONS_FILTER_SHARED_GAMES,
 		title = LocalizationStringsModule.MY_CREATIONS_FILTER_TITLE
 	})
 	local All = UseLocalizationResult.all
 	local AllGames = UseLocalizationResult.allGames
 	local GroupGames = UseLocalizationResult.groupGames
 	local MyGames = UseLocalizationResult.myGames
+	local SharedGames = UseLocalizationResult.sharedGames
 	local UseStateResult, UseStateResult2 = ReactModule.useState(UseFilterResult)
 	local UseStateResult1, UseStateResult2_1 = ReactModule.useState("")
 	local UseStateResult3, UseStateResult2_2 = ReactModule.useState(false)
@@ -93,13 +95,14 @@ return function(Frame)
 		UseStateResult2_1("")
 	end, {})
 	local UseMemoResult = ReactModule.useMemo(function()
-		-- upvalues: All (copy), MyGames (copy), GroupGames (copy)
+		-- upvalues: All (copy), MyGames (copy), GroupGames (copy), SharedGames (copy)
 		return {
 			{ value = "All", label = All },
 			{ value = "MyGames", label = MyGames },
-			{ value = "GroupGames", label = GroupGames }
+			{ value = "GroupGames", label = GroupGames },
+			{ value = "SharedGames", label = SharedGames }
 		}
-	end, { All, GroupGames, MyGames })
+	end, { All, GroupGames, MyGames, SharedGames })
 	local GroupId = UseStateResult.groupId
 	local UseMemoResult1 = ReactModule.useMemo(function()
 		-- upvalues: UseSignalStateResult (copy), MatchesSearchQueryModule (upval), UseStateResult1 (copy), GroupId (copy), UseResult3 (copy)
@@ -141,7 +144,7 @@ return function(Frame)
 	end
 	return {
 		LayoutOrder = Frame.LayoutOrder,
-		label = if Name == nil then if UseFilterResult.games == "MyGames" then MyGames elseif UseFilterResult.games == "GroupGames" then GroupGames else AllGames else Name,
+		label = if Name == nil then if UseFilterResult.games == "MyGames" then MyGames elseif UseFilterResult.games == "GroupGames" then GroupGames elseif UseFilterResult.games == "SharedGames" then SharedGames else AllGames else Name,
 		onOpenSheet = UseResult,
 		isSheetOpen = UseStateResult3,
 		onSheetClosed = UseResult1,

@@ -7,11 +7,10 @@ local UseSignalStateFunction = require(Parent.SignalsReact).useSignalState
 local TextOverlayDisplayModule = require(MomentsCommon.Components.TextOverlayDisplay)
 local _ = require(MomentsCommon.Media.MediaTypes)
 local _ = require(MomentsCommon.Media.mediaNodeRegistry)
-local FFlagMomentsOverlayContainerScaleFallbackModule = require(MomentsCommon.Flags.FFlagMomentsOverlayContainerScaleFallback)
 local Signal = SignalsModule.createSignal(Enum.ScaleType.Crop)
 
 local function TextOverlayLayer(p1)
-	-- upvalues: ReactModule (copy), SignalsModule (copy), UseSignalStateFunction (copy), Signal (copy), FFlagMomentsOverlayContainerScaleFallbackModule (copy), TextOverlayDisplayModule (copy)
+	-- upvalues: ReactModule (copy), SignalsModule (copy), UseSignalStateFunction (copy), Signal (copy), TextOverlayDisplayModule (copy)
 	local GetResolutionFunction = p1.getResolution
 	local UseMemoResult = ReactModule.useMemo(function()
 		-- upvalues: SignalsModule (upval), GetResolutionFunction (copy)
@@ -26,7 +25,7 @@ local function TextOverlayLayer(p1)
 	return ReactModule.createElement(TextOverlayDisplayModule, {
 		draggable = false,
 		editable = false,
-		itemResolution = if FFlagMomentsOverlayContainerScaleFallbackModule and UseSignalStateResult1 == nil then UseSignalStateResult else UseSignalStateResult1,
+		itemResolution = if UseSignalStateResult1 == nil then UseSignalStateResult else UseSignalStateResult1,
 		itemSize = UseSignalStateResult,
 		scaleType = UseSignalStateFunction(p1.getScaleType or Signal),
 		textOverlayEdits = { p1.overlay }

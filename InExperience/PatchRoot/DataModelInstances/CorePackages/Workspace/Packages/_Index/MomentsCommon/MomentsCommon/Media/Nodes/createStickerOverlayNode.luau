@@ -10,11 +10,10 @@ local _ = require(MomentsCommon.Media.MediaTypes)
 local _ = require(MomentsCommon.Media.mediaNodeRegistry)
 local OverlayScaleModule = require(MomentsCommon.Media.overlayScale)
 local GetFFlagMomentsStickerOverlayMediaRectModule = require(MomentsCommon.Flags.GetFFlagMomentsStickerOverlayMediaRect)
-local FFlagMomentsOverlayContainerScaleFallbackModule = require(MomentsCommon.Flags.FFlagMomentsOverlayContainerScaleFallback)
 local Signal = SignalsModule.createSignal(Enum.ScaleType.Crop)
 
 local function StickerOverlayLayer(p1)
-	-- upvalues: ReactModule (copy), SignalsModule (copy), UseSignalStateFunction (copy), Signal (copy), FFlagMomentsOverlayContainerScaleFallbackModule (copy), OverlayDisplayModule (copy), StickerOverlayModule (copy)
+	-- upvalues: ReactModule (copy), SignalsModule (copy), UseSignalStateFunction (copy), Signal (copy), OverlayDisplayModule (copy), StickerOverlayModule (copy)
 	local GetResolutionFunction = p1.getResolution
 	local UseMemoResult = ReactModule.useMemo(function()
 		-- upvalues: SignalsModule (upval), GetResolutionFunction (copy)
@@ -30,7 +29,7 @@ local function StickerOverlayLayer(p1)
 		draggable = false,
 		editable = false,
 		overlayComponent = StickerOverlayModule,
-		itemResolution = if FFlagMomentsOverlayContainerScaleFallbackModule and UseSignalStateResult1 == nil then UseSignalStateResult else UseSignalStateResult1,
+		itemResolution = if UseSignalStateResult1 == nil then UseSignalStateResult else UseSignalStateResult1,
 		itemSize = UseSignalStateResult,
 		scaleType = UseSignalStateFunction(p1.getScaleType or Signal),
 		overlayEdits = { p1.overlay }
