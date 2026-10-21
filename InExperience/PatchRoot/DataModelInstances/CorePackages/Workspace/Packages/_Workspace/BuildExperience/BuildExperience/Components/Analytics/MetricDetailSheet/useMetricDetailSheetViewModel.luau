@@ -9,6 +9,7 @@ local OpenWebViewSessionFunction = WebViewUtilsModule.openWebViewSession
 local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
 local FFlagBuildAnalyticsCreatorHubWindowFixModule = require(BuildExperience.Flags.FFlagBuildAnalyticsCreatorHubWindowFix)
 local FFlagBuildAnalyticsGoalsModule = require(BuildExperience.Flags.FFlagBuildAnalyticsGoals)
+local FFlagBuildCheckGamePermissionsModule = require(BuildExperience.Flags.FFlagBuildCheckGamePermissions)
 local LocalizationStringsModule = require(BuildExperience.LocalizationStrings)
 local AnalyticsKeysModule = require(BuildExperience.Analytics.AnalyticsKeys)
 local AnalyticsMetricModule = require(BuildExperience.Analytics.AnalyticsMetric)
@@ -19,7 +20,7 @@ local _ = require(script.Parent.MetricDetailSheetView)
 local UseClosableFocusRootModule = require(BuildExperience.utils.useClosableFocusRoot)
 
 return function(p1)
-	-- upvalues: FFlagBuildAnalyticsGoalsModule (copy), UseClosableFocusRootModule (copy), FocusNavigationUtilsModule (copy), ResponsiveModule (copy), AnalyticsMetricModule (copy), ReactModule (copy), UseOpenWebViewFunction (copy), AnalyticsKeysModule (copy), UseLocalizationFunction (copy), LocalizationStringsModule (copy), FFlagBuildAnalyticsCreatorHubWindowFixModule (copy), GameConfigurationActionsModule (copy), OpenWebViewSessionFunction (copy)
+	-- upvalues: FFlagBuildAnalyticsGoalsModule (copy), UseClosableFocusRootModule (copy), FocusNavigationUtilsModule (copy), ResponsiveModule (copy), AnalyticsMetricModule (copy), ReactModule (copy), UseOpenWebViewFunction (copy), AnalyticsKeysModule (copy), UseLocalizationFunction (copy), LocalizationStringsModule (copy), FFlagBuildAnalyticsCreatorHubWindowFixModule (copy), GameConfigurationActionsModule (copy), OpenWebViewSessionFunction (copy), FFlagBuildCheckGamePermissionsModule (copy)
 	local FocusRootRef = nil
 	local IsNotUsePreferredInputResultMatch = true
 	
@@ -132,6 +133,7 @@ return function(p1)
 		analyzeText = if config.analyze == nil then "" else UseLocalizationResult.analyze,
 		viewInOverviewText = if config.viewInOverview == nil then "" else UseLocalizationResult.viewInOverview,
 		onAnalyze = UseResult,
+		isAnalyzeDisabled = FFlagBuildCheckGamePermissionsModule and OnOpenChatFunction == nil,
 		onViewInOverview = ReactModule.useCallback(function()
 			-- upvalues: OverviewPath (copy), GameConfigurationActionsModule (upval), UniverseId (copy), CreatorHubRangeType (copy), FFlagBuildAnalyticsGoalsModule (upval), OpenWebViewSessionFunction (upval), CreatorHub (copy), UseOpenWebViewResult (copy), OnCloseFunction (copy)
 			if OverviewPath ~= nil then

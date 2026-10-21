@@ -1576,6 +1576,7 @@ return {
 	FFlagHideHeaderForBuyRobuxInExperienceShop = game:DefineFastFlag("HideHeaderForBuyRobuxInExperienceShop", false),
 	FFlagEnableBuyRobuxNextJS = game:DefineFastFlag("EnableBuyRobuxNextJS", false),
 	FFlagBuyRobuxLatencyIxpEnabled = game:DefineFastFlag("BuyRobuxLatencyIxpEnabled", false),
+	FFlagEnableBuyRobuxSdui = game:DefineFastFlag("EnableBuyRobuxSdui", false),
 	FStringPaymentsBuyRobuxLayer = game:DefineFastString("PaymentsBuyRobuxLayer", ""),
 	UpsellSuggestionsAPIMaxPackages = game:DefineFastInt("UpsellSuggestionsAPIMaxPackagesV3", 1),
 	FFlagEnableUpsellSuggestionsAnalyticsId = game:DefineFastFlag("EnableUpsellSuggestionsAnalyticsId", false),

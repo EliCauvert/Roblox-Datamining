@@ -7,7 +7,9 @@ local SignalsReactModule = require(Parent.SignalsReact)
 local UseLocalizationFunction = LocalizationModule.Hooks.useLocalization
 local LocalizationRoactContext = LocalizationModule.LocalizationRoactContext
 local LocalizationStringsModule = require(BuildExperience.LocalizationStrings)
+local ChatPermissionsContextModule = require(BuildExperience.Chat.ChatPermissionsContext)
 local ChatScrollAnchorContextModule = require(BuildExperience.Chat.ChatScrollAnchorContext)
+local FFlagBuildCheckGamePermissionsModule = require(BuildExperience.Flags.FFlagBuildCheckGamePermissions)
 local ChatCardEmphasisPositionProviderModule = require(script.Parent.ChatCardEmphasis.ChatCardEmphasisPositionProvider)
 local FFlagBuildExperienceChatCardEmphasisModule = require(BuildExperience.Flags.FFlagBuildExperienceChatCardEmphasis)
 local _ = require(BuildExperience.Chat.chatTypes)
@@ -71,21 +73,41 @@ local function useReactiveValue(Callback)
 	end, { Callback }))))
 end
 
-local function _(p1): boolean
+local function _(): boolean
+	-- upvalues: FFlagBuildCheckGamePermissionsModule (copy), ReactModule (copy), ChatPermissionsContextModule (copy)
+	if FFlagBuildCheckGamePermissionsModule then
+		local UseContextResult = ReactModule.useContext(ChatPermissionsContextModule)
+		
+		return UseContextResult ~= nil and not UseContextResult.canEditOnBuild
+	else
+		return false
+	end
+end
+
+local _ = function(p1): boolean
 	return typeof(p1) == "string" or typeof(p1) == "table" and #p1 > 0
 end
 
 local function AnswerStackSection(Frame)
-	-- upvalues: UseLocalizationFunction (copy), LocalizationStringsModule (copy), ReactModule (copy), View (copy), Text (copy), OptionSelectorModule (copy), AnswerStackModule (copy)
+	-- upvalues: UseLocalizationFunction (copy), LocalizationStringsModule (copy), FFlagBuildCheckGamePermissionsModule (copy), ReactModule (copy), ChatPermissionsContextModule (copy), View (copy), Text (copy), OptionSelectorModule (copy), AnswerStackModule (copy)
 	local UseLocalizationResult = UseLocalizationFunction({
 		customAnswer = LocalizationStringsModule.ANSWER_STACK_CUSTOM_ANSWER,
 		next = LocalizationStringsModule.ANSWER_STACK_NEXT,
 		submit = LocalizationStringsModule.ANSWER_STACK_SUBMIT
 	})
+	local NoCanEditOnBuild = nil
+	
+	if FFlagBuildCheckGamePermissionsModule then
+		local UseContextResult = ReactModule.useContext(ChatPermissionsContextModule)
+		NoCanEditOnBuild = UseContextResult ~= nil and not UseContextResult.canEditOnBuild
+	else
+		NoCanEditOnBuild = false
+	end
 	local Prompt = Frame.prompt
 	local Question = Prompt.question
 	local CustomResponseText = Prompt.customResponseText
-	local IsIsActive = Frame.isActive == true
+	local NoNoCanEditOnBuild: boolean = Frame.isActive == true and not NoCanEditOnBuild
+	local OnAnswerSelected = if NoCanEditOnBuild then nil else Frame.onAnswerSelected
 	local IsMultiSelect = Question.responseType == "multi_select"
 	local Next = if Prompt.isLastQuestion == false then UseLocalizationResult.next else UseLocalizationResult.submit
 	local CreateElementFunction = ReactModule.createElement
@@ -113,18 +135,18 @@ local function AnswerStackSection(Frame)
 				selectionMode = if IsMultiSelect then "multi" else "single",
 				confirmLabel = Next,
 				isConfirmDisabled = not (typeof(SelectedOptionId) == "string" or typeof(SelectedOptionId) == "table" and #SelectedOptionId > 0),
-				onConfirm = if IsMultiSelect and IsIsActive then Frame.onAnswerConfirmed else nil,
+				onConfirm = if IsMultiSelect and NoNoCanEditOnBuild then Frame.onAnswerConfirmed else nil,
 				testId = `AnswerStack.{Question.id}`,
 				onOptionSelected = function(p1)
-					-- upvalues: Frame (copy), IsMultiSelect (copy), IsIsActive (copy), Question (copy), Prompt (copy)
-					if Frame.onAnswerSelected == nil then return end
+					-- upvalues: OnAnswerSelected (copy), IsMultiSelect (copy), NoNoCanEditOnBuild (copy), Question (copy), Prompt (copy)
+					if OnAnswerSelected == nil then return end
 					if IsMultiSelect then
-						if IsIsActive then
-							Frame.onAnswerSelected(Question, p1)
+						if NoNoCanEditOnBuild then
+							OnAnswerSelected(Question, p1)
 						end
 						return
 					elseif Prompt.selectedOptionId == nil then
-						Frame.onAnswerSelected(Question, p1)
+						OnAnswerSelected(Question, p1)
 					end
 				end
 			})
@@ -147,7 +169,14 @@ local function AnswerStackSection(Frame)
 end
 
 local function PlanProposalSection(Frame: Frame)
-	-- upvalues: ReactModule (copy), AgentPlanCardModule (copy), View (copy), ChatUserMessageModule (copy)
+	-- upvalues: FFlagBuildCheckGamePermissionsModule (copy), ReactModule (copy), ChatPermissionsContextModule (copy), AgentPlanCardModule (copy), View (copy), ChatUserMessageModule (copy)
+	local NoCanEditOnBuild = nil
+	if FFlagBuildCheckGamePermissionsModule then
+		local UseContextResult = ReactModule.useContext(ChatPermissionsContextModule)
+		NoCanEditOnBuild = UseContextResult ~= nil and not UseContextResult.canEditOnBuild
+	else
+		NoCanEditOnBuild = false
+	end
 	local PlanProposal = Frame.planProposal
 	local Element = ReactModule.createElement(AgentPlanCardModule, {
 		layoutOrder = 1,
@@ -156,7 +185,7 @@ local function PlanProposalSection(Frame: Frame)
 		textContent = PlanProposal.textContent,
 		summary = PlanProposal.summary,
 		onBuild = Frame.onPlanAccepted or function() end,
-		isBuildDisabled = not (PlanProposal.isAccepted ~= true and PlanProposal.feedbackText == nil)
+		isBuildDisabled = not (PlanProposal.isAccepted ~= true and PlanProposal.feedbackText == nil) or NoCanEditOnBuild
 	})
 	
 	return if PlanProposal.feedbackText == nil then ReactModule.createElement(View, {
@@ -230,13 +259,21 @@ local function PlaytestCardSection(Frame)
 		LayoutOrder = Frame.LayoutOrder,
 		onPlaytest = Frame.onPlaytest,
 		onPublish = Frame.onPublish,
-		isPublishDisabled = UseIsPlaceVersionLiveModule(if Frame.onPublish == nil then nil else Frame.placeId, Frame.publishedVersionNumber),
+		isPublishDisabled = UseIsPlaceVersionLiveModule(if Frame.onPublish == nil then nil else Frame.placeId, Frame.publishedVersionNumber) or Frame.isPublishDisabled == true,
+		isPlaytestDisabled = Frame.isPlaytestDisabled,
 		isLoading = Frame.isLoading
 	})
 end
 
 local function DevProductProposalSection(Frame)
-	-- upvalues: ReactModule (copy), View (copy), AgentDevProductCardModule (copy)
+	-- upvalues: FFlagBuildCheckGamePermissionsModule (copy), ReactModule (copy), ChatPermissionsContextModule (copy), View (copy), AgentDevProductCardModule (copy)
+	local NoCanEditOnBuild = nil
+	if FFlagBuildCheckGamePermissionsModule then
+		local UseContextResult = ReactModule.useContext(ChatPermissionsContextModule)
+		NoCanEditOnBuild = UseContextResult ~= nil and not UseContextResult.canEditOnBuild
+	else
+		NoCanEditOnBuild = false
+	end
 	local DevProductProposal = Frame.devProductProposal
 	
 	return ReactModule.createElement(View, {
@@ -259,6 +296,7 @@ local function DevProductProposalSection(Frame)
 			onApprove = Frame.onApprove or function() end,
 			onReject = Frame.onReject or function() end,
 			isActionDisabled = not (DevProductProposal.isApproved ~= true and DevProductProposal.isRejected ~= true),
+			isReadOnly = NoCanEditOnBuild,
 			isPending = DevProductProposal.isPending,
 			hasError = DevProductProposal.hasError,
 			canRetry = DevProductProposal.canRetry
@@ -398,7 +436,7 @@ local function TurnWorkSegment(Frame)
 end
 
 return ReactModule.memo(function(Frame: Frame)
-	-- upvalues: ReactModule (copy), TurnProjectionModule (copy), ReportTurnActivityGapModule (copy), useReactiveValue (copy), t (copy), FFlagBuildAgentAdCampaignCardModule (copy), UseAgentAdCampaignTurnCardsModule (copy), config (copy), FoundationModule (copy), FFlagBuildExperienceCopyChatMessagesModule (copy), SendBuildExperienceEventModule (copy), FFlagBuildEventsUpdate1Module (copy), renderWorkSegment (copy), TurnWorkSegment (copy), FFlagBuildExperiencePlaytestCardPublishCtaModule (copy), PlaytestCardSection (copy), PlaytestCompletedCardModule (copy), FFlagBuildAgentAdCampaignRefreshEligibilityModule (copy), AdCampaignIsActiveCardModule (copy), AdUpsellCardModule (copy), FFlagBuildExperienceChatCardEmphasisModule (copy), ChatCardEmphasisPositionProviderModule (copy), View (copy), AgentTurnFeedbackModule (copy)
+	-- upvalues: ReactModule (copy), TurnProjectionModule (copy), ReportTurnActivityGapModule (copy), useReactiveValue (copy), t (copy), FFlagBuildAgentAdCampaignCardModule (copy), UseAgentAdCampaignTurnCardsModule (copy), config (copy), FoundationModule (copy), FFlagBuildExperienceCopyChatMessagesModule (copy), FFlagBuildCheckGamePermissionsModule (copy), ChatPermissionsContextModule (copy), SendBuildExperienceEventModule (copy), FFlagBuildEventsUpdate1Module (copy), renderWorkSegment (copy), TurnWorkSegment (copy), FFlagBuildExperiencePlaytestCardPublishCtaModule (copy), PlaytestCardSection (copy), PlaytestCompletedCardModule (copy), FFlagBuildAgentAdCampaignRefreshEligibilityModule (copy), AdCampaignIsActiveCardModule (copy), AdUpsellCardModule (copy), FFlagBuildExperienceChatCardEmphasisModule (copy), ChatCardEmphasisPositionProviderModule (copy), View (copy), AgentTurnFeedbackModule (copy)
 	local Turn = Frame.turn
 	local TurnState = Turn.turnState
 	local TurnKey = Turn.turnKey
@@ -452,6 +490,9 @@ return ReactModule.memo(function(Frame: Frame)
 	local LocalToolActions = Frame.localToolActions or config
 	local Emphasis = FoundationModule.Hooks.useTokens().Color.Content.Emphasis
 	local FinalAssistantMessageText = if FFlagBuildExperienceCopyChatMessagesModule and TurnState ~= nil then TurnProjectionModule.getFinalAssistantMessageText(TurnState) else nil
+	local UseContextResult = if FFlagBuildCheckGamePermissionsModule then ReactModule.useContext(ChatPermissionsContextModule) else nil
+	local NoCanPreview: boolean = UseContextResult ~= nil and not UseContextResult.canPreview
+	local NoCanPublish: boolean = UseContextResult ~= nil and not UseContextResult.canPublish
 	local OnPlaytestFunction = Frame.onPlaytest
 	local UseResult = ReactModule.useCallback(function()
 		-- upvalues: SendBuildExperienceEventModule (upval), UseReactiveValueResult (copy), FFlagBuildEventsUpdate1Module (upval), OnPlaytestFunction (copy)
@@ -517,12 +558,15 @@ return ReactModule.memo(function(Frame: Frame)
 				onPlaytest = UseResult,
 				onPublish = Frame.onPublish,
 				isLoading = Frame.isPlaytestLoading,
+				isPlaytestDisabled = NoCanPreview,
+				isPublishDisabled = NoCanPublish,
 				placeId = UseReactiveValueResult.placeId,
 				publishedVersionNumber = UseReactiveValueResult.publishedVersionNumber
 			}) else ReactModule.createElement(PlaytestCompletedCardModule, {
 				LayoutOrder = LayoutOrder,
 				onPlaytest = UseResult,
-				isLoading = Frame.isPlaytestLoading
+				isLoading = Frame.isPlaytestLoading,
+				isPlaytestDisabled = NoCanPreview
 			})
 		elseif Segment.kind == "agent_ad_campaign_card" and FFlagBuildAgentAdCampaignCardModule then
 			local UseAgentAdCampaignTurnCardsModuleResultEntry = UseAgentAdCampaignTurnCardsModuleResult[Segment.toolCallId]

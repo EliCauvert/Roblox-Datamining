@@ -11,7 +11,9 @@ local _ = require(BuildExperience.Stores.GetBuildOverflowMenuStore.createBuildOv
 local UseArchiveGameFlowModule = require(BuildExperience.utils.useArchiveGameFlow)
 local UseClosableFocusRootModule = require(BuildExperience.utils.useClosableFocusRoot)
 local UseExperienceShareFlowModule = require(BuildExperience.utils.useExperienceShareFlow)
+local UseGamePermissionsModule = require(BuildExperience.useGamePermissions)
 local FFlagBuildExperiencePrivateInvitesModule = require(BuildExperience.Flags.FFlagBuildExperiencePrivateInvites)
+local FFlagBuildCheckGamePermissionsModule = require(BuildExperience.Flags.FFlagBuildCheckGamePermissions)
 local FocusNavigableSurfaceIdentifierEnum = require(Parent.FocusNavigationUtils).FocusNavigableSurfaceIdentifierEnum
 local Menu = FoundationModule.Menu
 local UseScaledValueFunction = FoundationModule.Hooks.useScaledValue
@@ -21,7 +23,7 @@ local PopoverSide = FoundationModule.Enums.PopoverSide
 local PrivacyType = require(Parent.DataHydration.UniverseConfiguration).PrivacyType
 
 return function(p1)
-	-- upvalues: UseLocalizationFunction (copy), LocalizationStringsModule (copy), UseScaledValueFunction (copy), UseExperienceShareFlowModule (copy), UseArchiveGameFlowModule (copy), PrivacyType (copy), FFlagBuildExperiencePrivateInvitesModule (copy), ReactModule (copy), UseClosableFocusRootModule (copy), FocusNavigableSurfaceIdentifierEnum (copy), Menu (copy), PopoverSide (copy), PopoverAlign (copy), InputSize (copy), ExperienceShareOverlaysModule (copy), ArchiveGameDialogModule (copy)
+	-- upvalues: UseLocalizationFunction (copy), LocalizationStringsModule (copy), UseScaledValueFunction (copy), UseExperienceShareFlowModule (copy), UseArchiveGameFlowModule (copy), FFlagBuildCheckGamePermissionsModule (copy), UseGamePermissionsModule (copy), PrivacyType (copy), FFlagBuildExperiencePrivateInvitesModule (copy), ReactModule (copy), UseClosableFocusRootModule (copy), FocusNavigableSurfaceIdentifierEnum (copy), Menu (copy), PopoverSide (copy), PopoverAlign (copy), InputSize (copy), ExperienceShareOverlaysModule (copy), ArchiveGameDialogModule (copy)
 	local UseLocalizationResult = UseLocalizationFunction({
 		archiveGame = LocalizationStringsModule.GAME_CONFIGURATION_ARCHIVE_GAME,
 		publish = LocalizationStringsModule.BUILD_MENU_PUBLISH,
@@ -36,6 +38,16 @@ return function(p1)
 	local Target = p1.target
 	local UseExperienceShareFlowModuleResult = UseExperienceShareFlowModule(if Target == nil then nil else Target.universeId, if Target == nil then nil else Target.placeId)
 	local UseArchiveGameFlowModuleResult = UseArchiveGameFlowModule()
+	local CanPublish = true
+	local CanEdit = true
+	
+	if FFlagBuildCheckGamePermissionsModule then
+		local UseGamePermissionsModuleResult = UseGamePermissionsModule({
+			universeId = if Target == nil then nil else Target.universeId
+		})
+		CanPublish = UseGamePermissionsModuleResult.canPublish
+		CanEdit = UseGamePermissionsModuleResult.canEdit
+	end
 	local NoAudience: boolean = UseExperienceShareFlowModuleResult.audience == nil or UseExperienceShareFlowModuleResult.audience == PrivacyType.Private and not FFlagBuildExperiencePrivateInvitesModule
 	local OnCloseFunction = p1.onClose
 	local OnOpenConfigurationPageFunction = p1.onOpenConfigurationPage
@@ -53,19 +65,27 @@ return function(p1)
 			}),
 			isOpen = HasAnchor,
 			items = ReactModule.useMemo(function()
-				-- upvalues: Publish (copy), Share (copy), NoAudience (copy), Settings (copy), ArchiveGame (copy)
+				-- upvalues: Publish (copy), CanPublish (ref), Share (copy), NoAudience (copy), Settings (copy), CanEdit (ref), ArchiveGame (copy)
 				return {
-					{ id = "publish", text = Publish },
+					{
+						id = "publish",
+						text = Publish,
+						isDisabled = not CanPublish
+					},
 					{ id = "share", text = Share, isDisabled = NoAudience },
-					{ id = "settings", text = Settings },
-					{ id = "archive-game", text = ArchiveGame }
+					{
+						id = "settings",
+						text = Settings,
+						isDisabled = not CanEdit
+					},
+					{
+						id = "archive-game",
+						text = ArchiveGame,
+						isDisabled = not CanEdit
+					}
 				}
 			end, {
-				ArchiveGame,
-				NoAudience,
-				Publish,
-				Settings,
-				Share
+				ArchiveGame, CanEdit, CanPublish, NoAudience, Publish, Settings, Share
 			}),
 			anchorRef = ReactModule.useMemo(function()
 				-- upvalues: p1 (copy)

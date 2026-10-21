@@ -36,6 +36,7 @@ return function(Frame)
 	assert(Frame.actions ~= nil and (Frame.onSubmitText ~= nil and Frame.onStop ~= nil), "Active answer form requires actions")
 	local Actions = Frame.actions
 	local OnSubmitTextFunction = Frame.onSubmitText
+	local IsIsReadOnly = Frame.isReadOnly == true
 	local Question = State.question
 	local IsMultiSelect = Question.responseType == "multi_select"
 	local IsCustom: boolean = #Question.options == 0 or UseSignalStateResult ~= nil
@@ -50,8 +51,8 @@ return function(Frame)
 			description = option.description,
 			isSelected = not IsCustom and (if typeof(SelectedOptionId) == "table" then table.find(SelectedOptionId, option.id) ~= nil else SelectedOptionId == option.id),
 			onActivated = function()
-				-- upvalues: State (copy), Actions (copy), IsCustom (copy), Question (copy), option (copy)
-				if State.isSubmitting then return end
+				-- upvalues: State (copy), IsIsReadOnly (copy), Actions (copy), IsCustom (copy), Question (copy), option (copy)
+				if State.isSubmitting or IsIsReadOnly then return end
 				State.draft.setText(nil)
 				local OnAnswerSelectedByToolCallIdEntry: (any, any, any) -> () = Actions.onAnswerSelectedByToolCallId[State.toolCallId]
 				
@@ -68,7 +69,7 @@ return function(Frame)
 	end
 	local Match: string = string.match(Text, "^%s*(.-)%s*$") or ""
 	local v1: boolean = typeof(SelectedOptionId) == "table" and #SelectedOptionId > 0
-	local IsSubmitting = State.isSubmitting or (if IsCustom then Match == "" else not v1)
+	local IsSubmitting = State.isSubmitting or (IsIsReadOnly or (if IsCustom then Match == "" else not v1))
 	
 	return {
 		LayoutOrder = Frame.LayoutOrder,
@@ -76,6 +77,7 @@ return function(Frame)
 		options = Options,
 		isMultiSelect = IsMultiSelect,
 		isSubmitting = State.isSubmitting,
+		isReadOnly = IsIsReadOnly,
 		isCustom = IsCustom,
 		customText = Text,
 		customLabel = UseLocalizationResult.customOption,
@@ -85,8 +87,8 @@ return function(Frame)
 		isForwardDisabled = IsSubmitting,
 		footerInset = UseTokensResult.Padding.Small,
 		onCustomActivated = function()
-			-- upvalues: State (copy)
-			if not State.isSubmitting then
+			-- upvalues: State (copy), IsIsReadOnly (copy)
+			if not State.isSubmitting and not IsIsReadOnly then
 				State.draft.setText("")
 			end
 		end,

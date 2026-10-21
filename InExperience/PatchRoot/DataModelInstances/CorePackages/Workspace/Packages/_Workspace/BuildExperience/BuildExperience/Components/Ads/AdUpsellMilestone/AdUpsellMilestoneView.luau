@@ -30,7 +30,7 @@ return function(p1)
 			containerRef = p1.cardRef,
 			isCreatePending = p1.isCreatePending,
 			freePromotionsRemaining = if FFlagBuildAgentAdCampaignCardModule then p1.freePromotionsRemaining else nil,
-			isCreateDisabled = not FFlagBuildAgentAdCampaignCardModule and nil,
+			isCreateDisabled = p1.isCreateDisabled == true,
 			onCreate = p1.onCreate,
 			onDismiss = p1.onDismiss,
 			emphasisOrder = if FFlagBuildExperienceChatCardEmphasisModule then p1.order else nil

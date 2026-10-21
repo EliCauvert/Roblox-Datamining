@@ -6,8 +6,10 @@ local SignalsReactModule = require(Parent.SignalsReact)
 local UseLocalizationFunction = LocalizationModule.Hooks.useLocalization
 local Default = require(Parent.ExternalContentSharingProtocol).ExternalContentSharingProtocol.default
 local LocalizationStringsModule = require(BuildExperience.LocalizationStrings)
+local ChatPermissionsContextModule = require(BuildExperience.Chat.ChatPermissionsContext)
 local _ = require(BuildExperience.Chat.chatTypes)
 local FFlagBuildExperienceCopyChatMessagesModule = require(BuildExperience.Flags.FFlagBuildExperienceCopyChatMessages)
+local FFlagBuildCheckGamePermissionsModule = require(BuildExperience.Flags.FFlagBuildCheckGamePermissions)
 local FeedbackActionModule = require(BuildExperience.Components.MessageUtilities.FeedbackAction)
 local UserFeedbackModule = require(BuildExperience.Components.MessageUtilities.UserFeedback)
 local FeedbackIconsModule = require(BuildExperience.Components.MessageUtilities.feedbackIcons)
@@ -54,7 +56,13 @@ local function useAgentMessageCopy(Text)
 end
 
 return function(Frame)
-	-- upvalues: FeedbackIconsModule (copy), ReactModule (copy), LocalizationModule (copy), UseLocalizationFunction (copy), LocalizationStringsModule (copy), FFlagEnableTeamTestLua (copy), FFlagBuildExperienceCopyChatMessagesModule (copy), useAgentMessageCopy (copy), GetPlaytestLoadingStoreModule (copy), SignalsReactModule (copy), GetAgentRollbackRequestStoreModule (copy), Signal (copy), FeedbackActionModule (copy), SendAgentTurnFeedbackModule (copy), UserFeedbackModule (copy), AgentRollbackSnackbarModule (copy), RestoreVersionDialogModule (copy)
+	-- upvalues: FFlagBuildCheckGamePermissionsModule (copy), ReactModule (copy), ChatPermissionsContextModule (copy), FeedbackIconsModule (copy), LocalizationModule (copy), UseLocalizationFunction (copy), LocalizationStringsModule (copy), FFlagEnableTeamTestLua (copy), FFlagBuildExperienceCopyChatMessagesModule (copy), useAgentMessageCopy (copy), GetPlaytestLoadingStoreModule (copy), SignalsReactModule (copy), GetAgentRollbackRequestStoreModule (copy), Signal (copy), FeedbackActionModule (copy), SendAgentTurnFeedbackModule (copy), UserFeedbackModule (copy), AgentRollbackSnackbarModule (copy), RestoreVersionDialogModule (copy)
+	local NoCanEditOnBuild = false
+	
+	if FFlagBuildCheckGamePermissionsModule then
+		local UseContextResult = ReactModule.useContext(ChatPermissionsContextModule)
+		NoCanEditOnBuild = UseContextResult ~= nil and not UseContextResult.canEditOnBuild
+	end
 	local TurnFeedbackIds = Frame.turnFeedbackIds
 	local PlaceId = if TurnFeedbackIds == nil then nil else TurnFeedbackIds.placeId
 	local RollbackTargetVersionNumber = if TurnFeedbackIds == nil then nil else FeedbackIconsModule.getRollbackTargetVersionNumber(TurnFeedbackIds)
@@ -131,7 +139,8 @@ return function(Frame)
 				copyIconName = if FFlagBuildExperienceCopyChatMessagesModule then v1 else nil,
 				copyTestId = if FFlagBuildExperienceCopyChatMessagesModule then `{Frame.testId}-copy` else nil,
 				includeRevert = FeedbackIconsModule.canRevert(TurnFeedbackIds),
-				isRevertDisabled = UseSignalStateResult or UseSignalStateResult1
+				isRevertDisabled = UseSignalStateResult or (UseSignalStateResult1 or NoCanEditOnBuild),
+				isRatingDisabled = NoCanEditOnBuild
 			}),
 			onActivated = UseResult2,
 			selectedAction = UseStateResult3,

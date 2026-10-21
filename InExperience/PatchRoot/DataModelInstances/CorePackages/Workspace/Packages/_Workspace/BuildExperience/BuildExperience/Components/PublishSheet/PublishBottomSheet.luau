@@ -10,6 +10,7 @@ local PublishLatestPreviewCardModule = require(BuildExperience.Components.GameCo
 local PublishPreviewCardModule = require(BuildExperience.Components.GameConfigurations.PublishPreviewCard.PublishPreviewCard)
 local PublishStatusModule = require(BuildExperience.Chat.PublishStatus)
 local UseScrollPerformanceTrackerModule = require(BuildExperience.Telemetry.useScrollPerformanceTracker)
+local FFlagBuildCheckGamePermissionsModule = require(BuildExperience.Flags.FFlagBuildCheckGamePermissions)
 local Sheet = FoundationModule.Sheet
 local Text = FoundationModule.Text
 local View = FoundationModule.View
@@ -40,7 +41,7 @@ local function PublishSheetContent(p1)
 end
 
 return function(p1)
-	-- upvalues: UseLocalizationFunction (copy), LocalizationStringsModule (copy), ReactModule (copy), Sheet (copy), Text (copy), PublishSheetContent (copy), View (copy), PublishPreview (copy), PublishConfigurationContentContainerModule (copy), PublishFooterModule (copy)
+	-- upvalues: UseLocalizationFunction (copy), LocalizationStringsModule (copy), ReactModule (copy), Sheet (copy), Text (copy), PublishSheetContent (copy), View (copy), PublishPreview (copy), PublishConfigurationContentContainerModule (copy), FFlagBuildCheckGamePermissionsModule (copy), PublishFooterModule (copy)
 	local TestId = p1.testId or "publish-bottom-sheet"
 	
 	return ReactModule.createElement(Sheet.Root, {
@@ -66,7 +67,8 @@ return function(p1)
 					onOpenTitleDescriptionPage = p1.onOpenTitleDescriptionPage,
 					onOpenMediaSelectionPage = p1.onOpenMediaSelectionPage,
 					onOpenVersionTitleDescriptionPage = p1.onOpenVersionTitleDescriptionPage,
-					onOpenVersionHistory = p1.onOpenVersionHistory
+					onOpenVersionHistory = p1.onOpenVersionHistory,
+					isNewGame = if FFlagBuildCheckGamePermissionsModule then p1.target.isNewGameTarget else nil
 				})
 			})
 		}),
@@ -75,7 +77,8 @@ return function(p1)
 				target = {
 					universeId = p1.target.universeId,
 					placeId = p1.target.placeId,
-					sessionId = p1.target.sessionId
+					sessionId = p1.target.sessionId,
+					isNewGameTarget = if FFlagBuildCheckGamePermissionsModule then p1.target.isNewGameTarget else nil
 				},
 				testId = TestId,
 				showPreviewButton = p1.showPreviewButton,

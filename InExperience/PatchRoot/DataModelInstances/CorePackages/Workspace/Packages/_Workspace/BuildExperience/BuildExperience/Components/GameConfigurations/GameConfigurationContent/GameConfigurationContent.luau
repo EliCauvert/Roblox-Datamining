@@ -21,10 +21,12 @@ local GameConfigurationActionsModule = require(BuildExperience.utils.GameConfigu
 local RefreshPublishEligibilityModule = require(BuildExperience.utils.refreshPublishEligibility)
 local UseArchiveGameFlowModule = require(BuildExperience.utils.useArchiveGameFlow)
 local UseExperienceShareFlowModule = require(BuildExperience.utils.useExperienceShareFlow)
+local UseGamePermissionsModule = require(BuildExperience.useGamePermissions)
 local GameConfigurationListModule = require(script.Parent.Parent.GameConfigurationList.GameConfigurationList)
 local GetPrivatePlaytestersStoreFunction = require(Parent.DataHydration.PrivatePlaytesters).getPrivatePlaytestersStore
 local FFlagBuildExperiencePrivateInvitesModule = require(BuildExperience.Flags.FFlagBuildExperiencePrivateInvites)
 local FFlagBuildExperienceMonetizationNativeUIModule = require(BuildExperience.Flags.FFlagBuildExperienceMonetizationNativeUI)
+local FFlagBuildCheckGamePermissionsModule = require(BuildExperience.Flags.FFlagBuildCheckGamePermissions)
 local Text = FoundationModule.Text
 local View = FoundationModule.View
 local IconName = FoundationModule.Enums.IconName
@@ -32,7 +34,7 @@ local CaptureServiceStartUploadCoreScriptBypassEngineFeature = require(Parent.Sh
 local PrivacyType = UniverseConfigurationModule.PrivacyType
 
 return function(p1)
-	-- upvalues: UseLocalizationFunction (copy), LocalizationStringsModule (copy), ReactModule (copy), LocalizationModule (copy), UseOpenWebViewFunction (copy), UseArchiveGameFlowModule (copy), FFlagBuildExperiencePrivateInvitesModule (copy), UseExperienceShareFlowModule (copy), UniverseConfigurationModule (copy), ExperienceGuidelinesModule (copy), SignalsReactModule (copy), GameConfigurationLabelsModule (copy), PrivacyType (copy), UniverseActivationModule (copy), ContentMaturityUtilsModule (copy), GameConfigurationActionsModule (copy), RefreshPublishEligibilityModule (copy), CaptureServiceStartUploadCoreScriptBypassEngineFeature (copy), IconName (copy), GetPrivatePlaytestersStoreFunction (copy), SignalsModule (copy), FFlagBuildExperienceMonetizationNativeUIModule (copy), View (copy), GameConfigurationListModule (copy), BuildMaturityBannerModule (copy), Text (copy), ArchiveGameDialogModule (copy), ExperienceShareOverlaysModule (copy)
+	-- upvalues: UseLocalizationFunction (copy), LocalizationStringsModule (copy), ReactModule (copy), LocalizationModule (copy), FFlagBuildCheckGamePermissionsModule (copy), UseGamePermissionsModule (copy), UseOpenWebViewFunction (copy), UseArchiveGameFlowModule (copy), FFlagBuildExperiencePrivateInvitesModule (copy), UseExperienceShareFlowModule (copy), UniverseConfigurationModule (copy), ExperienceGuidelinesModule (copy), SignalsReactModule (copy), GameConfigurationLabelsModule (copy), PrivacyType (copy), UniverseActivationModule (copy), ContentMaturityUtilsModule (copy), GameConfigurationActionsModule (copy), RefreshPublishEligibilityModule (copy), CaptureServiceStartUploadCoreScriptBypassEngineFeature (copy), IconName (copy), GetPrivatePlaytestersStoreFunction (copy), SignalsModule (copy), FFlagBuildExperienceMonetizationNativeUIModule (copy), View (copy), GameConfigurationListModule (copy), BuildMaturityBannerModule (copy), Text (copy), ArchiveGameDialogModule (copy), ExperienceShareOverlaysModule (copy)
 	local TestId = p1.testId or "game-configuration-content"
 	local UseLocalizationResult = UseLocalizationFunction({
 		access = LocalizationStringsModule.GAME_CONFIGURATION_ACCESS,
@@ -86,6 +88,10 @@ return function(p1)
 	local QuestionnaireRequiredBanner = UseLocalizationResult.questionnaireRequiredBanner
 	local TitleAndDescription = UseLocalizationResult.titleAndDescription
 	local UnknownAudience = UseLocalizationResult.unknownAudience
+	local UseGamePermissionsModuleResult = if FFlagBuildCheckGamePermissionsModule then UseGamePermissionsModule({ universeId = p1.universeId, isNewGame = p1.isNewGame }) else nil
+	local NoFFlagBuildCheckGamePermissionsModule = not FFlagBuildCheckGamePermissionsModule or UseGamePermissionsModuleResult.canPublish
+	local NoFFlagBuildCheckGamePermissionsModule1 = not FFlagBuildCheckGamePermissionsModule or UseGamePermissionsModuleResult.canMonetize
+	local NoFFlagBuildCheckGamePermissionsModule2 = not FFlagBuildCheckGamePermissionsModule or UseGamePermissionsModuleResult.canViewOnCreatorHub
 	local UseOpenWebViewResult = UseOpenWebViewFunction()
 	local UseArchiveGameFlowModuleResult = UseArchiveGameFlowModule()
 	local UseExperienceShareFlowModuleResult = if FFlagBuildExperiencePrivateInvitesModule then UseExperienceShareFlowModule(p1.universeId, p1.placeId) else nil
@@ -133,13 +139,14 @@ return function(p1)
 		end)
 	end, { CreatorHub, UseOpenWebViewResult, p1.universeId })
 	local UseMemoResult2 = ReactModule.useMemo(function()
-		-- upvalues: IconAndThumbnails (copy), CaptureServiceStartUploadCoreScriptBypassEngineFeature (upval), IconName (upval), p1 (copy), UseResult (copy), TitleAndDescription (copy)
+		-- upvalues: IconAndThumbnails (copy), CaptureServiceStartUploadCoreScriptBypassEngineFeature (upval), IconName (upval), p1 (copy), UseResult (copy), NoFFlagBuildCheckGamePermissionsModule2 (copy), TitleAndDescription (copy)
 		return {
 			{
 				id = "icon-thumbnails",
 				title = IconAndThumbnails,
 				trailingIcon = if CaptureServiceStartUploadCoreScriptBypassEngineFeature then nil else IconName.ArrowUpRightFromSquare,
-				onActivated = if CaptureServiceStartUploadCoreScriptBypassEngineFeature then p1.onOpenMediaSelectionPage else UseResult
+				onActivated = if CaptureServiceStartUploadCoreScriptBypassEngineFeature then p1.onOpenMediaSelectionPage else UseResult,
+				isDisabled = not CaptureServiceStartUploadCoreScriptBypassEngineFeature and not NoFFlagBuildCheckGamePermissionsModule2
 			},
 			{
 				id = "title-description",
@@ -150,8 +157,9 @@ return function(p1)
 			}
 		}
 	end, {
-		UseResult, p1.experienceName, p1.onOpenMediaSelectionPage,
-		p1.onOpenTitleDescriptionPage, IconAndThumbnails, TitleAndDescription
+		NoFFlagBuildCheckGamePermissionsModule2, UseResult, p1.experienceName,
+		p1.onOpenMediaSelectionPage, p1.onOpenTitleDescriptionPage, IconAndThumbnails,
+		TitleAndDescription
 	})
 	local OnOpenPlaytestPicker = p1.onOpenPlaytestPicker
 	local OnOpenPlaytestManagement = p1.onOpenPlaytestManagement
@@ -207,14 +215,15 @@ return function(p1)
 		end
 	end
 	local UseMemoResult3 = ReactModule.useMemo(function()
-		-- upvalues: Audience (copy), Loading1 (ref), p1 (copy), Config (ref), PrivateInvitesShareLink (copy), OnShare (copy), ContentRating (copy), ContentMaturityText (copy), IconName (upval), UseResult1 (copy)
+		-- upvalues: Audience (copy), Loading1 (ref), p1 (copy), NoFFlagBuildCheckGamePermissionsModule (copy), Config (ref), PrivateInvitesShareLink (copy), OnShare (copy), ContentRating (copy), ContentMaturityText (copy), IconName (upval), UseResult1 (copy)
 		local List = {
 			{
 				id = "audience",
 				trailingIcon = nil,
 				title = Audience,
 				description = Loading1,
-				onActivated = p1.onOpenAudiencePage
+				onActivated = p1.onOpenAudiencePage,
+				isDisabled = not NoFFlagBuildCheckGamePermissionsModule
 			}
 		}
 		
@@ -237,28 +246,36 @@ return function(p1)
 		
 		return List
 	end, {
-		Loading1, ContentMaturityText, UseResult1, Config, OnShare,
-		p1.onOpenAudiencePage, Audience, ContentRating, PrivateInvitesShareLink
+		Loading1, NoFFlagBuildCheckGamePermissionsModule, ContentMaturityText,
+		UseResult1, Config, OnShare, p1.onOpenAudiencePage, Audience, ContentRating,
+		PrivateInvitesShareLink
 	})
 	local UseMemoResult4 = ReactModule.useMemo(function()
-		-- upvalues: CreatorHub (copy), CreatorHubDescription (copy), IconName (upval), UseResult (copy)
+		-- upvalues: CreatorHub (copy), CreatorHubDescription (copy), IconName (upval), UseResult (copy), NoFFlagBuildCheckGamePermissionsModule2 (copy)
 		return {
 			{
 				id = "creator-hub",
 				title = CreatorHub,
 				description = CreatorHubDescription,
 				trailingIcon = IconName.ArrowUpRightFromSquare,
-				onActivated = UseResult
+				onActivated = UseResult,
+				isDisabled = not NoFFlagBuildCheckGamePermissionsModule2
 			}
 		}
-	end, { CreatorHub, CreatorHubDescription, UseResult })
+	end, {
+		NoFFlagBuildCheckGamePermissionsModule2,
+		CreatorHub,
+		CreatorHubDescription,
+		UseResult
+	})
 	local Rows = {}
 	
 	if FFlagBuildExperienceMonetizationNativeUIModule then
 		table.insert(Rows, {
 			id = "sales-options",
 			title = UseLocalizationResult.salesOptions,
-			onActivated = p1.onOpenMonetizationPage
+			onActivated = p1.onOpenMonetizationPage,
+			isDisabled = not NoFFlagBuildCheckGamePermissionsModule1
 		})
 	end
 	return ReactModule.createElement(View, {

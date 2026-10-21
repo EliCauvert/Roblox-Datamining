@@ -59,7 +59,7 @@ return function(Frame)
 		icon = if IsNotCanSendWhileResponding then IconName.StopSmall else IconName.ArrowWideShortUp,
 		size = InputSize.Small,
 		variant = if IsNotCanSendWhileResponding then ButtonVariant.Standard elseif UseSignalStateResult and Frame.hasAttachments ~= true then ButtonVariant.Standard else ButtonVariant.Emphasis,
-		isDisabled = IsNotHasAttachments,
+		isDisabled = IsNotHasAttachments or IsNotCanSendWhileResponding and Frame.isStopDisabled == true,
 		onActivated = function()
 			-- upvalues: IsNotCanSendWhileResponding (copy), FFlagBuildExperienceConfirmStopModule (upval), Callback (ref), Frame (copy)
 			if not IsNotCanSendWhileResponding then

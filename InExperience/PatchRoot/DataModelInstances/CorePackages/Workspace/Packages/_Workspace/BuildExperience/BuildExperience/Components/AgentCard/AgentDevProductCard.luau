@@ -213,10 +213,12 @@ return function(p1)
 	local TestId = p1.testId or "agent-dev-product-card"
 	local IsIsPending: boolean = FFlagBuildExperienceDevProductRecoveryModule and p1.isPending == true
 	local IsCanRetry: boolean = FFlagBuildExperienceDevProductRecoveryModule and p1.canRetry == true
+	local IsIsReadOnly = p1.isReadOnly == true
 	local IsIsActionDisabled: boolean = p1.isActionDisabled == true or IsIsPending
+	local IsIsActionDisabled1: boolean = IsIsActionDisabled or IsIsReadOnly
 	local UseRefResult = if FFlagBuildExperienceDevProductRecoveryModule then ReactModule.useRef(false) else nil
 	local IsCreate: boolean = FFlagBuildExperienceMonetizationNativeUIModule and p1.action == "create"
-	local UseChatCardEmphasisModuleResult = if FFlagBuildExperienceChatCardEmphasisModule then UseChatCardEmphasisModule(if IsIsActionDisabled then nil else ChatCardPriorityModule.AgentProposal) else nil
+	local UseChatCardEmphasisModuleResult = if FFlagBuildExperienceChatCardEmphasisModule then UseChatCardEmphasisModule(if IsIsActionDisabled1 then nil else ChatCardPriorityModule.AgentProposal) else nil
 	local IsOpen = false
 	local Callback = nil
 	local UseResult = nil
@@ -238,8 +240,8 @@ return function(p1)
 		Element = ReactModule.createElement(Sheet.Root, {
 			isOpen = IsOpen,
 			onClose = function()
-				-- upvalues: FFlagBuildExperienceDevProductRecoveryModule (upval), IsOpen (ref), IsIsActionDisabled (copy), p1 (copy), Callback (ref)
-				if not FFlagBuildExperienceDevProductRecoveryModule and not IsOpen and not IsIsActionDisabled then
+				-- upvalues: FFlagBuildExperienceDevProductRecoveryModule (upval), IsOpen (ref), IsIsActionDisabled1 (copy), p1 (copy), Callback (ref)
+				if not FFlagBuildExperienceDevProductRecoveryModule and not IsOpen and not IsIsActionDisabled1 then
 					p1.onApprove()
 				end
 				Callback(false)
@@ -281,7 +283,7 @@ return function(p1)
 					})
 				})
 			}),
-			Actions = if IsIsActionDisabled then nil else ReactModule.createElement(Sheet.Actions, nil, {
+			Actions = if IsIsActionDisabled1 then nil else ReactModule.createElement(Sheet.Actions, nil, {
 				Create = ReactModule.createElement(Button, {
 					text = if IsCanRetry then UseLocalizationResult.retry else UseLocalizationResult.create,
 					size = InputSize.Large,
@@ -289,8 +291,8 @@ return function(p1)
 					fillBehavior = FillBehavior.Fill,
 					isDisabled = not IsOpen,
 					onActivated = function()
-						-- upvalues: IsIsActionDisabled (copy), IsOpen (ref), UseRefResult (copy), p1 (copy), Callback (ref)
-						if IsIsActionDisabled or not IsOpen then return end
+						-- upvalues: IsIsActionDisabled1 (copy), IsOpen (ref), UseRefResult (copy), p1 (copy), Callback (ref)
+						if IsIsActionDisabled1 or not IsOpen then return end
 						if UseRefResult ~= nil then
 							if UseRefResult.current then return end
 							UseRefResult.current = true
@@ -306,21 +308,21 @@ return function(p1)
 		Element = nil
 	end
 	local UseResult1 = ReactModule.useCallback(function()
-		-- upvalues: IsIsActionDisabled (copy), p1 (copy)
-		if not IsIsActionDisabled then
+		-- upvalues: IsIsActionDisabled1 (copy), p1 (copy)
+		if not IsIsActionDisabled1 then
 			p1.onApprove()
 			
 			return
 		end
-	end, { IsIsActionDisabled, p1.onApprove })
+	end, { IsIsActionDisabled1, p1.onApprove })
 	local UseResult2 = ReactModule.useCallback(function()
-		-- upvalues: IsIsActionDisabled (copy), p1 (copy)
-		if not IsIsActionDisabled then
+		-- upvalues: IsIsActionDisabled1 (copy), p1 (copy)
+		if not IsIsActionDisabled1 then
 			p1.onReject()
 			
 			return
 		end
-	end, { IsIsActionDisabled, p1.onReject })
+	end, { IsIsActionDisabled1, p1.onReject })
 	local Element1 = ReactModule.createElement(AgentCardActionsModule, {
 		layoutOrder = if FFlagBuildExperienceDevProductRecoveryModule then 5 elseif IsCreate or p1.imageAssetId == nil then 3 else 4
 	}, {
@@ -330,7 +332,7 @@ return function(p1)
 			size = InputSize.Small,
 			variant = if UseChatCardEmphasisModuleResult == false then ButtonVariant.SoftEmphasis else ButtonVariant.Emphasis,
 			fillBehavior = FillBehavior.Fill,
-			isDisabled = if IsCreate then IsIsPending else IsIsActionDisabled,
+			isDisabled = if IsCreate then IsIsPending or IsIsReadOnly else IsIsActionDisabled1,
 			onActivated = if IsCreate and not IsCanRetry then UseResult else UseResult1,
 			testId = if IsCreate then `{TestId}-preview-button` else `{TestId}-approve-button`
 		}),
@@ -340,7 +342,7 @@ return function(p1)
 			size = InputSize.Small,
 			variant = ButtonVariant.Standard,
 			fillBehavior = FillBehavior.Fill,
-			isDisabled = IsIsActionDisabled,
+			isDisabled = IsIsActionDisabled1,
 			onActivated = UseResult2,
 			testId = `{TestId}-reject-button`
 		})
@@ -364,7 +366,7 @@ return function(p1)
 			ScaleType = Enum.ScaleType.Fit,
 			testId = `{TestId}-image-preview`
 		}),
-		Error = if FFlagBuildExperienceDevProductRecoveryModule and p1.hasError and not IsIsPending then ReactModule.createElement(Text, {
+		Error = if FFlagBuildExperienceDevProductRecoveryModule and (p1.hasError and not IsIsPending) then ReactModule.createElement(Text, {
 			LayoutOrder = 4,
 			tag = "size-full-0 auto-y text-body-medium text-wrap text-align-x-left content-alert",
 			Text = UseLocalizationResult.error,

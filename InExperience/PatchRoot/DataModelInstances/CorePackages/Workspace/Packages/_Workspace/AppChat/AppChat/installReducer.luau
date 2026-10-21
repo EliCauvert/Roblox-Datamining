@@ -2,12 +2,13 @@
 local Parent = AppChat.Parent
 local RoduxModule = require(Parent.Rodux)
 local FFlagAppChatPresenceStoreMigrationModule = require(AppChat.Flags.FFlagAppChatPresenceStoreMigration)
+local FFlagAppChatRemovePlaceInfosAsyncModule = require(AppChat.Flags.FFlagAppChatRemovePlaceInfosAsync)
 
 return function()
-	-- upvalues: RoduxModule (copy), Parent (copy), AppChat (copy), FFlagAppChatPresenceStoreMigrationModule (copy)
+	-- upvalues: RoduxModule (copy), Parent (copy), FFlagAppChatRemovePlaceInfosAsyncModule (copy), AppChat (copy), FFlagAppChatPresenceStoreMigrationModule (copy)
 	return RoduxModule.combineReducers({
 		PlaceInfos = require(Parent.PlaceInfoRodux).Reducers.PlaceInfosReducer,
-		PlaceInfosAsync = require(Parent.PlaceInfoRodux).Reducers.PlaceInfosAsyncReducer,
+		PlaceInfosAsync = if FFlagAppChatRemovePlaceInfosAsyncModule then nil else require(Parent.PlaceInfoRodux).Reducers.PlaceInfosAsyncReducer,
 		Aliases = require(script.Aliases),
 		AppLoaded = require(AppChat.installReducer.AppLoaded),
 		ChatSettings = require(AppChat.installReducer.ChatSettings),

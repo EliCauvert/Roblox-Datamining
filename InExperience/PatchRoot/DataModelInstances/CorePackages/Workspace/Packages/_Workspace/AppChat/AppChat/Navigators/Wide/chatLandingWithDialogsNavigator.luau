@@ -11,7 +11,6 @@ local LeaveGroupDialogScreenModule = require(ChatDetails.LeaveGroupDialog.LeaveG
 local ParticipantDialogScreenDeprecatedModule = require(ChatDetails.ParticipantDialog.ParticipantDialogScreenDeprecated)
 local RemoveUserDialogScreenModule = require(ChatDetails.RemoveUserDialog.RemoveUserDialogScreen)
 local AbuseReportScreenModule = require(AppChat.Components.ChatAbuseReport.AbuseReportScreen)
-local FFlagAppChatEnableTrustedFriendEntryPointModule = require(AppChat.Flags.FFlagAppChatEnableTrustedFriendEntryPoint)
 local FFlagAppChatDisableAbsorbInputSelectableModule = require(AppChat.Flags.FFlagAppChatDisableAbsorbInputSelectable)
 local TrustedContactsModalScreenModule = require(AppChat.Components.TrustedContactsModal.TrustedContactsModalScreen)
 local MessageContextMenuScreenModule = require(AppChat.Components.ChatConversation.MessageInteraction.MessageContextMenuScreen)
@@ -97,15 +96,12 @@ table.insert(List, {
 		navigationOptions = { backButtonEnabled = true, overlayEnabled = true }
 	}
 })
-
-if FFlagAppChatEnableTrustedFriendEntryPointModule then
-	table.insert(List, {
-		[EnumScreensModule.AppChatTrustedContactsModal] = {
-			screen = IsolatedAutoFocusNavigationModule(TrustedContactsModalScreenModule, FocusNavigableSurfaceIdentifierEnum.PopUp),
-			navigationOptions = { backButtonEnabled = true, overlayEnabled = true }
-		}
-	})
-end
+table.insert(List, {
+	[EnumScreensModule.AppChatTrustedContactsModal] = {
+		screen = IsolatedAutoFocusNavigationModule(TrustedContactsModalScreenModule, FocusNavigableSurfaceIdentifierEnum.PopUp),
+		navigationOptions = { backButtonEnabled = true, overlayEnabled = true }
+	}
+})
 table.insert(List, {
 	[EnumScreensModule.BlockingModal] = {
 		screen = IsolatedAutoFocusNavigationModule(BlockingModal, FocusNavigableSurfaceIdentifierEnum.PopUp),

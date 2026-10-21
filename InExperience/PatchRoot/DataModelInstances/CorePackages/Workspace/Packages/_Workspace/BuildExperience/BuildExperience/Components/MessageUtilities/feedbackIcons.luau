@@ -91,13 +91,16 @@ return {
 				testId = p2.copyTestId
 			})
 		end
+		local IsRatingDisabled = if p2 == nil then nil else p2.isRatingDisabled
 		table.insert(List, {
 			iconName = IconName.ThumbUp,
-			action = FeedbackActionModule.THUMBS_UP
+			action = FeedbackActionModule.THUMBS_UP,
+			isDisabled = IsRatingDisabled
 		})
 		table.insert(List, {
 			iconName = IconName.ThumbDown,
-			action = FeedbackActionModule.THUMBS_DOWN
+			action = FeedbackActionModule.THUMBS_DOWN,
+			isDisabled = IsRatingDisabled
 		})
 		
 		if p2 ~= nil and p2.includeRevert then

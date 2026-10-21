@@ -170,7 +170,8 @@ return function(p1)
 			actions = Copy.localToolActions,
 			onSubmitText = Copy.onSubmitAnswerText,
 			onStop = Copy.onStop,
-			errorText = Copy.composerErrorText
+			errorText = Copy.composerErrorText,
+			isReadOnly = Copy.isReadOnly
 		})) else nil,
 		Composer = if Copy == nil or (p1.isActive == false or HasAnswerForm) then nil else ReactModule.createElement(View, {
 			LayoutOrder = 3,

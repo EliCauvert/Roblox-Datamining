@@ -9,6 +9,8 @@ local IconButton = FoundationModule.IconButton
 
 return function(Frame)
 	-- upvalues: ReactModule (copy), FoundationModule (copy), View (copy), List (copy), Text (copy), IconButton (copy), Divider (copy)
+	local IsIsReadOnly = Frame.isReadOnly == true
+	local IsSubmitting = Frame.isSubmitting or IsIsReadOnly
 	local Elements = {}
 	
 	for LayoutOrder, option in Frame.options do
@@ -16,8 +18,8 @@ return function(Frame)
 			tag = "size-full-0 auto-y radius-medium",
 			LayoutOrder = LayoutOrder,
 			onActivated = option.onActivated,
-			isDisabled = Frame.isSubmitting,
-			selection = { Selectable = not Frame.isSubmitting }
+			isDisabled = IsSubmitting,
+			selection = { Selectable = not IsSubmitting }
 		}, {
 			Item = ReactModule.createElement(List.Item, {
 				title = option.title,
@@ -28,7 +30,7 @@ return function(Frame)
 					label = "",
 					Selectable = false,
 					isChecked = option.isSelected,
-					isDisabled = Frame.isSubmitting,
+					isDisabled = IsSubmitting,
 					onActivated = option.onActivated
 				}) else nil
 			})
@@ -41,7 +43,7 @@ return function(Frame)
 		LayoutOrder = #Frame.options + 1,
 		text = Frame.customText,
 		onChanged = Frame.onCustomChanged,
-		isDisabled = Frame.isSubmitting,
+		isDisabled = IsSubmitting,
 		width = UDim.new(1, 0),
 		size = FoundationModule.Enums.InputSize.Large,
 		variant = FoundationModule.Enums.InputVariant.Utility
@@ -50,7 +52,7 @@ return function(Frame)
 		testId = "AnswerForm.Custom",
 		LayoutOrder = #Frame.options + 1,
 		onActivated = Frame.onCustomActivated,
-		isDisabled = Frame.isSubmitting
+		isDisabled = IsSubmitting
 	}, {
 		Label = ReactModule.createElement(Text, {
 			tag = "size-full-0 auto-y text-title-small text-wrap text-align-x-left content-emphasis",
@@ -79,6 +81,7 @@ return function(Frame)
 				icon = FoundationModule.Enums.IconName.X,
 				size = FoundationModule.Enums.InputSize.Small,
 				variant = FoundationModule.Enums.ButtonVariant.Utility,
+				isDisabled = IsIsReadOnly,
 				onActivated = Frame.onStop
 			})
 		}),

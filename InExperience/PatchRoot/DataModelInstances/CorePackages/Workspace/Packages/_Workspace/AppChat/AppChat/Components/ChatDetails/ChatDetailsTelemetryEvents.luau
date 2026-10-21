@@ -5,7 +5,6 @@ local _ = require(AppChat.Telemetry.Layers.ChatDialogTelemetryLayer)
 local _ = require(AppChat.Parent.SocialLuaAnalytics)
 local DefaultTelemetryEventsModule = require(AppChat.Telemetry.DefaultTelemetryEvents)
 local NamedCounterConfigurationNoEmittedInfoFunction = DefaultTelemetryEventsModule.namedCounterConfigurationNoEmittedInfo
-local NamedCounterConfigurationAndFormatFunction = DefaultTelemetryEventsModule.namedCounterConfigurationAndFormat
 local EVENTINGESTNOEMITTEDINFO = DefaultTelemetryEventsModule.EVENT_INGEST_NO_EMITTED_INFO
 local NamedCounterConfigurationNoEmittedInfoFunction1 = DefaultTelemetryEventsModule.namedCounterConfigurationNoEmittedInfo
 local EVENTINGESTNOEMITTEDINFO1 = DefaultTelemetryEventsModule.EVENT_INGEST_NO_EMITTED_INFO
@@ -19,7 +18,7 @@ return {
 			DefaultTelemetryEventsModule.eventIngestWithFormatFunction(function(p1)
 				return { isGroupConversation = p1.isGroupConversation }
 			end),
-			NamedCounterConfigurationAndFormatFunction("AppChat.ChatDetails.Rendered", function(p1)
+			DefaultTelemetryEventsModule.namedCounterConfigurationAndFormat("AppChat.ChatDetails.Rendered", function(p1)
 				return { isGroupConversation = p1.isGroupConversation }
 			end)
 		}
@@ -102,37 +101,6 @@ return {
 		lastUpdated = { 2026, 4, 2 },
 		backendsList = {
 			NamedCounterConfigurationNoEmittedInfoFunction1("AppChat.Dialog.ParticipantDetails.Button.Chat"),
-			EVENTINGESTNOEMITTEDINFO1
-		}
-	}),
-	ParticipantDialogAddTrustedConnectionClicked = TelemetryModule.new({
-		name = "chatDetailsParticipantDialogAddTrustedConnectionClicked",
-		description = "",
-		lastUpdated = { 2026, 4, 30 },
-		backendsList = {
-			DefaultTelemetryEventsModule.eventIngestWithFormatFunction(function(p1)
-				return { modalVariantOverride = p1.modalVariantOverride }
-			end),
-			NamedCounterConfigurationAndFormatFunction("AppChat.Dialog.ParticipantDetails.Button.AddTrustedConnection", function(p1)
-				return { modalVariantOverride = p1.modalVariantOverride }
-			end)
-		}
-	}),
-	ParticipantDialogAddIncomingTrustedConnectionClicked = TelemetryModule.new({
-		name = "chatDetailsParticipantDialogAddIncomingTrustedConnectionClicked",
-		description = "",
-		lastUpdated = { 2026, 4, 30 },
-		backendsList = {
-			NamedCounterConfigurationNoEmittedInfoFunction1("AppChat.Dialog.ParticipantDetails.Button.AddIncomingTrustedConnection"),
-			EVENTINGESTNOEMITTEDINFO1
-		}
-	}),
-	ParticipantDialogRemoveTrustedConnectionClicked = TelemetryModule.new({
-		name = "chatDetailsParticipantDialogRemoveTrustedConnectionClicked",
-		description = "",
-		lastUpdated = { 2026, 4, 30 },
-		backendsList = {
-			NamedCounterConfigurationNoEmittedInfoFunction1("AppChat.Dialog.ParticipantDetails.Button.RemoveTrustedConnection"),
 			EVENTINGESTNOEMITTEDINFO1
 		}
 	})

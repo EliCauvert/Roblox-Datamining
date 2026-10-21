@@ -4,6 +4,7 @@ local ReactModule = require(Parent.React)
 local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
 local LocalizationStringsModule = require(BuildExperience.LocalizationStrings)
 local FFlagBuildExperienceMonetizationNativeUIModule = require(BuildExperience.Flags.FFlagBuildExperienceMonetizationNativeUI)
+local FFlagBuildCheckGamePermissionsModule = require(BuildExperience.Flags.FFlagBuildCheckGamePermissions)
 local GameConfigurationContentModule = require(BuildExperience.Components.GameConfigurations.GameConfigurationContent.GameConfigurationContent)
 local PublishConfigurationContentContainerModule = require(BuildExperience.Components.PublishConfigurationContent.PublishConfigurationContentContainer)
 local OverflowMenuPageShellModule = require(script.Parent.OverflowMenuPageShell)
@@ -41,7 +42,7 @@ local function PublishPreview(p1)
 end
 
 return function(p1)
-	-- upvalues: UseLocalizationFunction (copy), LocalizationStringsModule (copy), ReactModule (copy), PublishPreview (copy), PublishConfigurationContentContainerModule (copy), GameConfigurationContentModule (copy), FFlagBuildExperienceMonetizationNativeUIModule (copy), View (copy), OverflowMenuPageShellModule (copy), config (copy), PublishFooterModule (copy)
+	-- upvalues: UseLocalizationFunction (copy), LocalizationStringsModule (copy), ReactModule (copy), PublishPreview (copy), PublishConfigurationContentContainerModule (copy), FFlagBuildCheckGamePermissionsModule (copy), GameConfigurationContentModule (copy), FFlagBuildExperienceMonetizationNativeUIModule (copy), View (copy), OverflowMenuPageShellModule (copy), config (copy), PublishFooterModule (copy)
 	local UseLocalizationResult = UseLocalizationFunction({
 		loading = LocalizationStringsModule.BUILD_MENU_LOADING,
 		publish = LocalizationStringsModule.BUILD_MENU_PUBLISH,
@@ -56,7 +57,8 @@ return function(p1)
 		onOpenTitleDescriptionPage = p1.onOpenTitleDescriptionPage,
 		onOpenMediaSelectionPage = p1.onOpenMediaSelectionPage,
 		onOpenVersionTitleDescriptionPage = p1.onOpenVersionTitleDescriptionPage,
-		onOpenVersionHistory = p1.onOpenVersionHistory
+		onOpenVersionHistory = p1.onOpenVersionHistory,
+		isNewGame = if FFlagBuildCheckGamePermissionsModule then p1.target.isNewGameTarget else nil
 	}) else ReactModule.createElement(GameConfigurationContentModule, {
 		universeId = p1.target.universeId,
 		placeId = p1.target.placeId,
@@ -66,7 +68,8 @@ return function(p1)
 		onOpenMediaSelectionPage = p1.onOpenMediaSelectionPage,
 		onOpenMonetizationPage = if FFlagBuildExperienceMonetizationNativeUIModule then p1.onOpenMonetizationPage else nil,
 		onOpenPlaytestPicker = p1.onOpenPlaytestPicker,
-		onOpenPlaytestManagement = p1.onOpenPlaytestManagement
+		onOpenPlaytestManagement = p1.onOpenPlaytestManagement,
+		isNewGame = if FFlagBuildCheckGamePermissionsModule then p1.target.isNewGameTarget else nil
 	})
 	
 	return ReactModule.createElement(OverflowMenuPageShellModule, {
@@ -82,7 +85,8 @@ return function(p1)
 			target = {
 				universeId = p1.target.universeId,
 				placeId = p1.target.placeId,
-				sessionId = p1.target.sessionId
+				sessionId = p1.target.sessionId,
+				isNewGameTarget = if FFlagBuildCheckGamePermissionsModule then p1.target.isNewGameTarget else nil
 			},
 			testId = TestId,
 			showPreviewButton = p1.showPreviewButton

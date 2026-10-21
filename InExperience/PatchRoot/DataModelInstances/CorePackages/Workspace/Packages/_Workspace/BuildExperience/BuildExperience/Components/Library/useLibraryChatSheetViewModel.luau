@@ -14,17 +14,29 @@ local GetCurrentExperienceProjectModule = require(BuildExperience.utils.getCurre
 local UseLibraryChatComposerModule = require(script.Parent.useLibraryChatComposer)
 local ChatTypesModule = require(BuildExperience.Chat.chatTypes)
 local FFlagBuildExperienceAnswerFormModule = require(BuildExperience.Flags.FFlagBuildExperienceAnswerForm)
+local FFlagBuildCheckGamePermissionsModule = require(BuildExperience.Flags.FFlagBuildCheckGamePermissions)
+local UseGamePermissionsModule = require(BuildExperience.useGamePermissions)
 
 local function noop() end
 
 return function(p1)
-	-- upvalues: noop (copy), SignalsReactModule (copy), GetAssistantBuildStoreModule (copy), GetCreatorAgentResumeStoreModule (copy), GetCurrentExperienceProjectModule (copy), UseChatSessionCoreModule (copy), GetLibraryStoreModule (copy), UseChatPlaytestFooterModule (copy), UseLibraryChatComposerModule (copy), ReactModule (copy), ChatTypesModule (copy), FoundationModule (copy), FFlagBuildExperienceAnswerFormModule (copy)
+	-- upvalues: noop (copy), SignalsReactModule (copy), GetAssistantBuildStoreModule (copy), GetCreatorAgentResumeStoreModule (copy), GetCurrentExperienceProjectModule (copy), FFlagBuildCheckGamePermissionsModule (copy), UseGamePermissionsModule (copy), UseChatSessionCoreModule (copy), GetLibraryStoreModule (copy), UseChatPlaytestFooterModule (copy), UseLibraryChatComposerModule (copy), ReactModule (copy), ChatTypesModule (copy), FoundationModule (copy), FFlagBuildExperienceAnswerFormModule (copy)
 	local OnClose = p1.onClose or noop
 	local NoIsOpen = p1.isOpen == nil or p1.isOpen
 	local UseSignalStateResult = SignalsReactModule.useSignalState(GetAssistantBuildStoreModule().getIsDisabled)
 	local CreatorAgentResumeStoreModule = GetCreatorAgentResumeStoreModule()
 	local CurrentExperienceProjectModule = GetCurrentExperienceProjectModule()
 	local UniverseId = p1.universeId or CurrentExperienceProjectModule.universeId
+	local ChatPermissions = nil
+	local NoCanEditOnBuild = false
+	local v1 = false
+	
+	if FFlagBuildCheckGamePermissionsModule then
+		local UseGamePermissionsModuleResult, UseGamePermissionsModuleResult2 = UseGamePermissionsModule({ universeId = UniverseId })
+		ChatPermissions = UseGamePermissionsModuleResult
+		NoCanEditOnBuild = not UseGamePermissionsModuleResult.canEditOnBuild
+		v1 = UseGamePermissionsModuleResult2
+	end
 	local UseChatSessionCoreModuleResult = UseChatSessionCoreModule({
 		autoFocusComposer = false,
 		isLibraryChat = true,
@@ -32,10 +44,11 @@ return function(p1)
 		placeId = p1.placeId or CurrentExperienceProjectModule.placeId,
 		sessionId = p1.sessionId,
 		hydrateHistoryWhen = NoIsOpen,
+		sendMessageWhen = not NoCanEditOnBuild,
 		onPromptFailure = GetLibraryStoreModule().reportPromptFailure
 	})
 	local ChatSheetPlaytestCta = UseChatPlaytestFooterModule(UseChatSessionCoreModuleResult, "ChatSheetPlaytestCta")
-	local UseLibraryChatComposerModuleResult = UseLibraryChatComposerModule(UseChatSessionCoreModuleResult, NoIsOpen)
+	local UseLibraryChatComposerModuleResult = UseLibraryChatComposerModule(UseChatSessionCoreModuleResult, NoIsOpen, NoCanEditOnBuild)
 	ReactModule.useEffect(function()
 		-- upvalues: NoIsOpen (copy), UseSignalStateResult (copy), OnClose (copy)
 		if NoIsOpen and UseSignalStateResult then
@@ -78,7 +91,7 @@ return function(p1)
 		clockBinding = UseChatSessionCoreModuleResult.clockBinding,
 		onPlaytest = ChatSheetPlaytestCta.onPlaytest,
 		isPlaytestLoading = ChatSheetPlaytestCta.isPlaytestLoading,
-		isHistoryLoading = UseChatSessionCoreModuleResult.isHistoryLoading,
+		isHistoryLoading = UseChatSessionCoreModuleResult.isHistoryLoading or v1,
 		scrollingFrameRef = UseChatSessionCoreModuleResult.setScrollingFrame,
 		anchorScrollToInstance = UseChatSessionCoreModuleResult.anchorScrollToInstance,
 		composerText = UseChatSessionCoreModuleResult.composerText,
@@ -119,6 +132,8 @@ return function(p1)
 		canStopAssistantResponse = UseChatSessionCoreModuleResult.canStopAssistantResponse,
 		canSendWhileResponding = UseChatSessionCoreModuleResult.canSendWhileResponding,
 		allowsComposerTypingWhileResponding = true,
+		isChatReadOnly = NoCanEditOnBuild,
+		chatPermissions = ChatPermissions,
 		reservesHandleSpace = true,
 		onSend = ReactModule.useCallback(function(p2)
 			-- upvalues: ComposerResourceAttachments (copy), ChatTypesModule (upval), SendMessageFunction (copy), GetLibraryStoreModule (upval)

@@ -37,7 +37,6 @@ local ChatDetailsTelemetryLayerModule = require(AppChat.Telemetry.Layers.ChatDet
 local ChatDetailsTelemetryEventsModule = require(AppChat.Components.ChatDetails.ChatDetailsTelemetryEvents)
 local ChatConversationTelemetryStateModule = require(AppChat.Contexts.TelemetryState.ChatConversationTelemetryState)
 local ChatDetailsTelemetryStateModule = require(AppChat.Contexts.TelemetryState.ChatDetailsTelemetryState)
-local GetFFlagAppChatParticipantDialogFoundationMenuModule = require(AppChat.Flags.getFFlagAppChatParticipantDialogFoundationMenu)
 local GetFFlagAppChatEnableRootedNavigationModule = require(AppChat.Flags.getFFlagAppChatEnableRootedNavigation)
 local GetFFlagIsSquadEnabledFunction = require(Parent.SharedFlags).GetFFlagIsSquadEnabled
 local config = {
@@ -57,9 +56,8 @@ local config = {
 }
 
 return function(p1)
-	-- upvalues: CryoModule (copy), config (copy), GetFFlagAppChatParticipantDialogFoundationMenuModule (copy), UseStyleFunction (copy), UseLocalizationFunction (copy), GetFFlagIsSquadEnabledFunction (copy), ReactModule (copy), LuaAppNavigationContextModule (copy), UseDispatchFunction (copy), UseStateFunction (copy), UseNavigationFunction (copy), UseIsGroupChatEnabledModule (copy), UseIsChatEnabledModule (copy), UseEffectFunction (copy), UseSelectorFunction (copy), GetDeepValueModule (copy), ConversationModule (copy), AppChatNetworkingModule (copy), UseUserProfilesFetchFunction (copy), UserProfilesCombinedNameAndUsernameByUserIds (copy), UseTelemetryModule (copy), ChatDetailsTelemetryLayerModule (copy), SelectChatUserEntryModelListModule (copy), GetConversationTitleModule (copy), UseIsUserPendingModule (copy), ConversationChannelsModule (copy), PromiseModule (copy), GenericDialogTypeModule (copy), GetFFlagAppChatEnableRootedNavigationModule (copy), ChatDetailsTelemetryEventsModule (copy), UseCallbackFunction (copy), UseAppPolicyFunction (copy), UseChatPlacementContextFunction (copy), IsPlacementInExperienceFunction (copy), ChatConversationTelemetryStateModule (copy), ChatDetailsTelemetryStateModule (copy), UseEffectOnMountFunction (copy), ChatDetailsPageModule (copy), ParticipantDialogContainerModule (copy)
+	-- upvalues: CryoModule (copy), config (copy), UseStyleFunction (copy), UseLocalizationFunction (copy), GetFFlagIsSquadEnabledFunction (copy), ReactModule (copy), LuaAppNavigationContextModule (copy), UseDispatchFunction (copy), UseStateFunction (copy), UseNavigationFunction (copy), UseIsGroupChatEnabledModule (copy), UseIsChatEnabledModule (copy), UseEffectFunction (copy), UseSelectorFunction (copy), GetDeepValueModule (copy), ConversationModule (copy), AppChatNetworkingModule (copy), UseUserProfilesFetchFunction (copy), UserProfilesCombinedNameAndUsernameByUserIds (copy), UseTelemetryModule (copy), ChatDetailsTelemetryLayerModule (copy), SelectChatUserEntryModelListModule (copy), GetConversationTitleModule (copy), UseIsUserPendingModule (copy), ConversationChannelsModule (copy), PromiseModule (copy), GenericDialogTypeModule (copy), GetFFlagAppChatEnableRootedNavigationModule (copy), ChatDetailsTelemetryEventsModule (copy), UseCallbackFunction (copy), UseAppPolicyFunction (copy), UseChatPlacementContextFunction (copy), IsPlacementInExperienceFunction (copy), ChatConversationTelemetryStateModule (copy), ChatDetailsTelemetryStateModule (copy), UseEffectOnMountFunction (copy), ChatDetailsPageModule (copy), ParticipantDialogContainerModule (copy)
 	local JoinResult = CryoModule.Dictionary.join(config, p1 or {})
-	local FFlagAppChatParticipantDialogFoundationMenuModule = GetFFlagAppChatParticipantDialogFoundationMenuModule()
 	local UseStyleResult = UseStyleFunction()
 	local UseLocalizationResult = UseLocalizationFunction({
 		generalText = "Feature.Chat.Label.General",
@@ -86,15 +84,8 @@ return function(p1)
 	local UseContextResult = ReactModule.useContext(LuaAppNavigationContextModule)
 	local UseDispatchResult = UseDispatchFunction()
 	local UseStateResult, UseStateResult2 = UseStateFunction(false)
-	local ParticipantId = nil
-	local Callback = nil
-	local AnchorRef = nil
-	local Callback1 = nil
-	
-	if FFlagAppChatParticipantDialogFoundationMenuModule then
-		ParticipantId, Callback = UseStateFunction(nil)
-		AnchorRef, Callback1 = UseStateFunction(nil)
-	end
+	local UseStateResult1, UseStateResult2_1 = UseStateFunction(nil)
+	local UseStateResult3, UseStateResult2_2 = UseStateFunction(nil)
 	local UseNavigationResult = UseNavigationFunction()
 	local UseIsGroupChatEnabledModuleResult = UseIsGroupChatEnabledModule()
 	local UseIsChatEnabledModuleResult = UseIsChatEnabledModule()
@@ -250,34 +241,23 @@ return function(p1)
 	})
 	
 	local function OnDismiss()
-		-- upvalues: Callback (ref), Callback1 (ref)
-		if Callback and Callback1 then
-			Callback(nil)
-			Callback1(nil)
-		end
+		-- upvalues: UseStateResult2_1 (copy), UseStateResult2_2 (copy)
+		UseStateResult2_1(nil)
+		UseStateResult2_2(nil)
 	end
 	
 	local function OnParticipantCellActivated(p2, p3)
-		-- upvalues: FFlagAppChatParticipantDialogFoundationMenuModule (copy), Callback (ref), Callback1 (ref), ParticipantId (ref), JoinResult (copy), GenericDialogTypeModule (upval), v1 (ref), IsGroupConversation (ref), IsGroupOwner (ref)
+		-- upvalues: UseStateResult1 (copy), UseStateResult2_1 (copy), UseStateResult2_2 (copy)
 		local Text = tostring(p2)
 		
-		if not FFlagAppChatParticipantDialogFoundationMenuModule or not Callback or not Callback1 then
-			JoinResult.navigateToDialog(GenericDialogTypeModule.ParticipantDialog, {
-				conversationId = JoinResult.conversationId,
-				participantId = Text,
-				showRemoveUserButton = not v1 and (IsGroupConversation and IsGroupOwner)
-			})
+		if UseStateResult1 == Text then
+			UseStateResult2_1(nil)
+			UseStateResult2_2(nil)
 			
 			return
-		end
-		if ParticipantId ~= Text then
-			Callback(Text)
-			Callback1(p3)
-		elseif Callback and Callback1 then
-			Callback(nil)
-			Callback1(nil)
-			
-			return
+		else
+			UseStateResult2_1(Text)
+			UseStateResult2_2(p3)
 		end
 	end
 	
@@ -368,10 +348,8 @@ return function(p1)
 		topBarHeight = JoinResult.topBarHeight,
 		style = UseStyleResult
 	}, UseLocalizationResult)
+	JoinResult1.activeParticipantId = UseStateResult1
 	
-	if FFlagAppChatParticipantDialogFoundationMenuModule then
-		JoinResult1.activeParticipantId = ParticipantId
-	end
 	return ReactModule.createElement("ImageButton", {
 		BackgroundTransparency = 1,
 		Active = true,
@@ -383,14 +361,14 @@ return function(p1)
 			UIListLayout = ReactModule.createElement("UIListLayout", { SortOrder = Enum.SortOrder.LayoutOrder }),
 			Content = ReactModule.createElement(ChatDetailsPageModule, JoinResult1)
 		}),
-		ParticipantDialog = if FFlagAppChatParticipantDialogFoundationMenuModule and ParticipantId ~= nil then ReactModule.createElement(ParticipantDialogContainerModule, {
-			anchorRef = AnchorRef,
+		ParticipantDialog = if UseStateResult1 == nil then nil else ReactModule.createElement(ParticipantDialogContainerModule, {
+			anchorRef = UseStateResult3,
 			conversationId = JoinResult.conversationId,
 			isWideMode = JoinResult.wideMode,
 			navigateToDialog = JoinResult.navigateToDialog,
 			onDismiss = OnDismiss,
-			participantId = ParticipantId,
+			participantId = UseStateResult1,
 			showRemoveUserButton = not v1 and (IsGroupConversation and IsGroupOwner)
-		}) else nil
+		})
 	})
 end

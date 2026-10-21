@@ -7,6 +7,7 @@ local LocalizationStringsModule = require(BuildExperience.LocalizationStrings)
 local FFlagBuildAgentAdCampaignCardModule = require(BuildExperience.Flags.FFlagBuildAgentAdCampaignCard)
 local FFlagBuildAgentAdCampaignRefreshEligibilityModule = require(BuildExperience.Flags.FFlagBuildAgentAdCampaignRefreshEligibility)
 local FFlagBuildExperienceChatCardEmphasisModule = require(BuildExperience.Flags.FFlagBuildExperienceChatCardEmphasis)
+local FFlagBuildCheckGamePermissionsModule = require(BuildExperience.Flags.FFlagBuildCheckGamePermissions)
 local ChatCardPriorityModule = require(BuildExperience.Components.Chat.ChatCardEmphasis.ChatCardPriority)
 local UseChatCardEmphasisModule = require(BuildExperience.Components.Chat.ChatCardEmphasis.useChatCardEmphasis)
 local Button = FoundationModule.Button
@@ -19,7 +20,7 @@ local IconName = FoundationModule.Enums.IconName
 local InputSize = FoundationModule.Enums.InputSize
 
 return function(Frame)
-	-- upvalues: FoundationModule (copy), UseLocalizationFunction (copy), LocalizationStringsModule (copy), FFlagBuildAgentAdCampaignCardModule (copy), FFlagBuildAgentAdCampaignRefreshEligibilityModule (copy), FFlagBuildExperienceChatCardEmphasisModule (copy), UseChatCardEmphasisModule (copy), ChatCardPriorityModule (copy), ReactModule (copy), View (copy), Icon (copy), IconName (copy), Text (copy), Button (copy), InputSize (copy), ButtonVariant (copy), FillBehavior (copy)
+	-- upvalues: FoundationModule (copy), UseLocalizationFunction (copy), LocalizationStringsModule (copy), FFlagBuildAgentAdCampaignCardModule (copy), FFlagBuildAgentAdCampaignRefreshEligibilityModule (copy), FFlagBuildExperienceChatCardEmphasisModule (copy), UseChatCardEmphasisModule (copy), ChatCardPriorityModule (copy), ReactModule (copy), View (copy), Icon (copy), IconName (copy), Text (copy), Button (copy), InputSize (copy), ButtonVariant (copy), FillBehavior (copy), FFlagBuildCheckGamePermissionsModule (copy)
 	local UseTokensResult = FoundationModule.Hooks.useTokens()
 	local UseLocalizationResult = UseLocalizationFunction({
 		title = LocalizationStringsModule.AD_UPSELL_CARD_TITLE,
@@ -108,7 +109,7 @@ return function(Frame)
 				fillBehavior = FillBehavior.Fill,
 				width = UDim.new(1, 0),
 				isLoading = Frame.isCreatePending == true,
-				isDisabled = FFlagBuildAgentAdCampaignCardModule and Frame.isCreateDisabled == true,
+				isDisabled = if FFlagBuildAgentAdCampaignCardModule then Frame.isCreateDisabled == true else FFlagBuildCheckGamePermissionsModule and Frame.isCreateDisabled == true,
 				onActivated = Frame.onCreate
 			}),
 			DontShowAgain = if FFlagBuildAgentAdCampaignCardModule and Frame.onDismiss == nil then nil else ReactModule.createElement(Button, {

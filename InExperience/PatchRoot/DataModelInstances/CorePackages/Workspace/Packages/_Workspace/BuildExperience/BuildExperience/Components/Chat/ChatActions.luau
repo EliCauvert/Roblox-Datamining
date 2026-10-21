@@ -133,6 +133,7 @@ return function(Frame)
 			allowsTypingWhileResponding = Frame.allowsTypingWhileResponding,
 			images = if FFlagBuildExperienceChatImageAttachmentsModule then Images else nil,
 			isSendBlocked = Frame.isSendBlocked,
+			isReadOnly = Frame.isReadOnly,
 			tracksExternalText = Frame.tracksExternalText,
 			isAttachmentSupported = IsImageAttachmentSupportedModule1,
 			onOpenCaptureGallery = if IsImageAttachmentSupportedModule1 then openCaptureGallery else nil,

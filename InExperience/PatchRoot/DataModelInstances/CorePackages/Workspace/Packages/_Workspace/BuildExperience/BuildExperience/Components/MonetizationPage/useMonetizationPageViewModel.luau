@@ -14,6 +14,7 @@ local FormatErrorModule = require(BuildExperience.utils.formatError)
 local FFlagBuildExperienceMonetizationNativeUIModule = require(BuildExperience.Flags.FFlagBuildExperienceMonetizationNativeUI)
 local FFlagBuildExperienceMonetizationMultiKindModule = require(BuildExperience.Flags.FFlagBuildExperienceMonetizationMultiKind)
 local FFlagBuildExperienceDeveloperProductContextModule = require(BuildExperience.Flags.FFlagBuildExperienceDeveloperProductContext)
+local FFlagBuildCheckGamePermissionsModule = require(BuildExperience.Flags.FFlagBuildCheckGamePermissions)
 local FFlagBuildExperienceMonetizationProductEditingModule = require(BuildExperience.Flags.FFlagBuildExperienceMonetizationProductEditing)
 local FFlagBuildExperienceRemoveDevProductPriceCap = require(Parent.SharedFlags).FFlagBuildExperienceRemoveDevProductPriceCap
 local _ = require(script.Parent.MonetizationPageView)
@@ -586,7 +587,7 @@ local function useOptionsState(p2, Products, UseMemoResult, UseRefResult, Curren
 end
 
 return function(p3)
-	-- upvalues: UseLocalizationFunction (copy), FFlagBuildExperienceDeveloperProductContextModule (copy), LocalizationStringsModule (copy), t (copy), FFlagBuildExperienceMonetizationNativeUIModule (copy), ReactModule (copy), config1 (copy), useOptionsState (copy), FFlagBuildExperienceMonetizationMultiKindModule (copy), FFlagBuildExperienceMonetizationProductEditingModule (copy), noop (copy), applyProductOverrides (copy), config (copy), useManageProductState (copy), SendBuildExperienceEventModule (copy), withoutToggleOverrides (copy), FormatErrorModule (copy), FFlagBuildExperienceRemoveDevProductPriceCap (copy), FFlagBuildExperienceDevProductModerationReadbackModule (copy), WasDeveloperProductTextModeratedModule (copy), UseOnScreenKeyboardHeightModule (copy), GetBuildPromptDraftStoreModule (copy), Creator (copy)
+	-- upvalues: UseLocalizationFunction (copy), FFlagBuildExperienceDeveloperProductContextModule (copy), LocalizationStringsModule (copy), t (copy), FFlagBuildExperienceMonetizationNativeUIModule (copy), ReactModule (copy), config1 (copy), useOptionsState (copy), FFlagBuildExperienceMonetizationMultiKindModule (copy), FFlagBuildExperienceMonetizationProductEditingModule (copy), noop (copy), applyProductOverrides (copy), config (copy), useManageProductState (copy), SendBuildExperienceEventModule (copy), withoutToggleOverrides (copy), FormatErrorModule (copy), FFlagBuildExperienceRemoveDevProductPriceCap (copy), FFlagBuildExperienceDevProductModerationReadbackModule (copy), WasDeveloperProductTextModeratedModule (copy), FFlagBuildCheckGamePermissionsModule (copy), UseOnScreenKeyboardHeightModule (copy), GetBuildPromptDraftStoreModule (copy), Creator (copy)
 	local UseLocalizationResult = UseLocalizationFunction({
 		composerPlaceholder = if FFlagBuildExperienceDeveloperProductContextModule then LocalizationStringsModule.CHAT_COMPOSER_PLACEHOLDER else nil,
 		title = LocalizationStringsModule.MONETIZATION_TITLE,
@@ -1306,6 +1307,8 @@ return function(p3)
 		UseMemoResult1
 	})
 	local OnComposerActivated = p3.onComposerActivated or p3.onClose
+	local IsCanEditOnBuild = p3.canEditOnBuild ~= false
+	local IsPermissionCanMonetize: boolean = if FFlagBuildCheckGamePermissionsModule and p3.permissionLoadStatus ~= nil then p3.permissionLoadStatus == "Ready" and p3.permissionCanMonetize == true else NoFFlagBuildExperienceMonetizationMultiKindModule
 	local ChatActions = nil
 	local v8 = nil
 	
@@ -1368,7 +1371,8 @@ return function(p3)
 			placeholder = UseLocalizationResult.composerPlaceholder,
 			textBoxRef = UseRefResult2,
 			onSend = UseResult11,
-			onStop = function() end
+			onStop = function() end,
+			isReadOnly = not IsCanEditOnBuild
 		} else nil
 	end
 	return {
@@ -1380,7 +1384,7 @@ return function(p3)
 		showOptions = FFlagBuildExperienceMonetizationNativeUIModule and p3.showOptions == true,
 		optionsLoadStatus = UseOptionsStateResult.loadStatus,
 		canMonetize = UseOptionsStateResult.canMonetize,
-		canCreateProduct = NoFFlagBuildExperienceMonetizationMultiKindModule,
+		canCreateProduct = IsPermissionCanMonetize,
 		canChangeManagedPricing = UseOptionsStateResult.canChangeManagedPricing,
 		managedPricingState = UseOptionsStateResult.managedPricingState,
 		managedPricingSupportingText = UseOptionsStateResult.managedPricingSupportingText,
@@ -1409,8 +1413,8 @@ return function(p3)
 		emptyDescription = UseLocalizationResult.emptyDescription,
 		onClose = UseResult,
 		onOpenCreate = ReactModule.useCallback(function()
-			-- upvalues: NoFFlagBuildExperienceMonetizationMultiKindModule (copy), UseMemoResult (copy), SendBuildExperienceEventModule (upval), p3 (copy), GetBuildPromptDraftStoreModule (upval), UseLocalizationResult (copy), OnComposerActivated (copy)
-			if not NoFFlagBuildExperienceMonetizationMultiKindModule then return end
+			-- upvalues: IsPermissionCanMonetize (ref), UseMemoResult (copy), SendBuildExperienceEventModule (upval), p3 (copy), GetBuildPromptDraftStoreModule (upval), UseLocalizationResult (copy), OnComposerActivated (copy)
+			if not IsPermissionCanMonetize then return end
 			SendBuildExperienceEventModule("MONETIZATION_CREATE_CLICK", UseMemoResult)
 			
 			if p3.onCreateProduct == nil then
@@ -1427,8 +1431,8 @@ return function(p3)
 			end
 		end, {
 			OnComposerActivated, UseLocalizationResult.createProductPrompt,
-			NoFFlagBuildExperienceMonetizationMultiKindModule, p3.onCreateProduct,
-			p3.sessionId, p3.universeId, UseMemoResult
+			IsPermissionCanMonetize, p3.onCreateProduct, p3.sessionId, p3.universeId,
+			UseMemoResult
 		}),
 		onOpenOptions = UseResult2,
 		onManagedPricingChanged = UseOptionsStateResult.onManagedPricingChanged,

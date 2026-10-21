@@ -110,6 +110,7 @@ return function(p1)
 				variant = ButtonVariant.Emphasis,
 				fillBehavior = FillBehavior.Fill,
 				width = UDim.new(1, 0),
+				isDisabled = p1.isAnalyzeDisabled,
 				onActivated = p1.onAnalyze,
 				testId = `{TestId}.Analyze`
 			}),

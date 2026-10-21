@@ -15,11 +15,10 @@ local UseTelemetryModule = require(AppChat.Telemetry.useTelemetry)
 local AppTelemetryLayerModule = require(AppChat.Telemetry.Layers.AppTelemetryLayer)
 local TrustedFriendsModalEntry = require(Parent.TrustedContacts).TrustedFriendsModalEntry
 local FFlagAppChatEnableDoubleOptIn = require(Parent.SharedFlags).FFlagAppChatEnableDoubleOptIn
-local FFlagAppChatEnableTrustedFriendEntryPointModule = require(AppChat.Flags.FFlagAppChatEnableTrustedFriendEntryPoint)
 local FIntUnfilteredThreadsPvDelayMsModule = require(AppChat.Flags.FIntUnfilteredThreadsPvDelayMs)
 
 return function(p1)
-	-- upvalues: UseIsAppChatVerticallyConstrainedModule (copy), UseDispatchFunction (copy), FFlagAppChatEnableDoubleOptIn (copy), UseIsInExperienceModule (copy), UseTelemetryModule (copy), AppTelemetryLayerModule (copy), ReactModule (copy), ConversationOverlayTelemetryModule (copy), FFlagAppChatEnableTrustedFriendEntryPointModule (copy), SetTabBarVisibleFromChatFunction (copy), PromiseModule (copy), FIntUnfilteredThreadsPvDelayMsModule (copy), RefreshConversationUnfilteredThreadsDetailsModule (copy), ModalTelemetryModule (copy), TrustedFriendsModalEntry (copy)
+	-- upvalues: UseIsAppChatVerticallyConstrainedModule (copy), UseDispatchFunction (copy), FFlagAppChatEnableDoubleOptIn (copy), UseIsInExperienceModule (copy), UseTelemetryModule (copy), AppTelemetryLayerModule (copy), ReactModule (copy), ConversationOverlayTelemetryModule (copy), SetTabBarVisibleFromChatFunction (copy), PromiseModule (copy), FIntUnfilteredThreadsPvDelayMsModule (copy), RefreshConversationUnfilteredThreadsDetailsModule (copy), ModalTelemetryModule (copy), TrustedFriendsModalEntry (copy)
 	local UseIsAppChatVerticallyConstrainedModuleResult = UseIsAppChatVerticallyConstrainedModule()
 	local UseDispatchResult = UseDispatchFunction()
 	local UseIsInExperienceModuleResult = if FFlagAppChatEnableDoubleOptIn then UseIsInExperienceModule() else nil
@@ -35,8 +34,7 @@ return function(p1)
 		end
 	end, { AnalyticsModalVariant })
 	ReactModule.useEffect(function()
-		-- upvalues: FFlagAppChatEnableTrustedFriendEntryPointModule (upval), UseDispatchResult (copy), SetTabBarVisibleFromChatFunction (upval)
-		if not FFlagAppChatEnableTrustedFriendEntryPointModule then return end
+		-- upvalues: UseDispatchResult (copy), SetTabBarVisibleFromChatFunction (upval)
 		UseDispatchResult(SetTabBarVisibleFromChatFunction(false))
 		
 		return function()

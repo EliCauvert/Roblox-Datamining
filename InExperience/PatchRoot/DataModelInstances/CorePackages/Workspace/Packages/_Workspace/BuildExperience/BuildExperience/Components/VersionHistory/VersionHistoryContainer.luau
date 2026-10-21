@@ -14,6 +14,8 @@ local UseNextHistoryPageModule = require(script.Parent.useNextHistoryPage)
 local VersionHistoryBottomSheetModule = require(script.Parent.VersionHistoryBottomSheet)
 local VersionHistoryUtilsModule = require(script.Parent.VersionHistoryUtils)
 local UseScrollToTopAfterRestoreModule = require(script.Parent.useScrollToTopAfterRestore)
+local UseGamePermissionsModule = require(BuildExperience.useGamePermissions)
+local FFlagBuildCheckGamePermissionsModule = require(BuildExperience.Flags.FFlagBuildCheckGamePermissions)
 local DataStatus = require(Parent.DataHydration).DataStatus
 local DateHelper = require(Parent.Time).DateHelper
 local UseLocalizationFunction = LocalizationModule.Hooks.useLocalization
@@ -145,7 +147,7 @@ local function useAgentRollbackRestore(p4, RestoreFailed, UseSignalStateResult)
 end
 
 return function(p4)
-	-- upvalues: UseLocalizationFunction (copy), DateHelper (copy), LocalizationStringsModule (copy), ReactModule (copy), LocalizationModule (copy), PlaceVersionHistoryModule (copy), SignalsReactModule (copy), UseNextHistoryPageModule (copy), UseScrollToTopAfterRestoreModule (copy), GetPlaytestLoadingStoreModule (copy), UseLiveVersionCardViewModelModule (copy), useAgentRollbackRestore (copy), mapLocalizedHistoryToEntries (copy), UseLatestVersionCardViewModelModule (copy), DataStatus (copy), VersionHistoryBottomSheetModule (copy), AgentRollbackSnackbarModule (copy)
+	-- upvalues: UseLocalizationFunction (copy), DateHelper (copy), LocalizationStringsModule (copy), ReactModule (copy), LocalizationModule (copy), PlaceVersionHistoryModule (copy), SignalsReactModule (copy), UseNextHistoryPageModule (copy), UseScrollToTopAfterRestoreModule (copy), GetPlaytestLoadingStoreModule (copy), UseLiveVersionCardViewModelModule (copy), useAgentRollbackRestore (copy), mapLocalizedHistoryToEntries (copy), FFlagBuildCheckGamePermissionsModule (copy), UseGamePermissionsModule (copy), UseLatestVersionCardViewModelModule (copy), DataStatus (copy), VersionHistoryBottomSheetModule (copy), AgentRollbackSnackbarModule (copy)
 	local UseLocalizationResult = UseLocalizationFunction(DateHelper.MonthsLocalizationKeys)
 	local UseLocalizationResult1 = UseLocalizationFunction({
 		empty = LocalizationStringsModule.VERSION_HISTORY_EMPTY,
@@ -189,6 +191,8 @@ return function(p4)
 		UseContextResult,
 		UseLocalizationResult1[LocalizationModule.RobloxLocaleIdKey]
 	})
+	local UseGamePermissionsModuleResult = if FFlagBuildCheckGamePermissionsModule then UseGamePermissionsModule({ universeId = p4.universeId }) else nil
+	local NoFFlagBuildCheckGamePermissionsModule = not FFlagBuildCheckGamePermissionsModule or UseGamePermissionsModuleResult.canEditOnBuild
 	local VERSIONHISTORYLOADING = if UseSignalStateResult1 == DataStatus.NotReady then LocalizationStringsModule.VERSION_HISTORY_LOADING elseif UseSignalStateResult1 == DataStatus.Failed then LocalizationStringsModule.VERSION_HISTORY_LOAD_FAILED elseif #UseMemoResult2 == 0 then LocalizationStringsModule.VERSION_HISTORY_EMPTY else nil
 	local Loading = UseLocalizationResult1.loading
 	local LoadFailed = UseLocalizationResult1.loadFailed
@@ -199,7 +203,7 @@ return function(p4)
 			isOpen = p4.isOpen,
 			entries = UseMemoResult2,
 			statusText = if VERSIONHISTORYLOADING == LocalizationStringsModule.VERSION_HISTORY_LOADING then Loading elseif VERSIONHISTORYLOADING == LocalizationStringsModule.VERSION_HISTORY_LOAD_FAILED then LoadFailed elseif VERSIONHISTORYLOADING == LocalizationStringsModule.VERSION_HISTORY_EMPTY then Empty else VERSIONHISTORYLOADING,
-			isRestoreDisabled = UseAgentRollbackRestoreResult.isPending or UseSignalStateResult2,
+			isRestoreDisabled = UseAgentRollbackRestoreResult.isPending or (UseSignalStateResult2 or not NoFFlagBuildCheckGamePermissionsModule),
 			onClose = p4.onClose,
 			onRestore = UseAgentRollbackRestoreResult.onRestore,
 			onRestoreStarted = p4.onAgentRollbackStarted,
@@ -213,6 +217,7 @@ return function(p4)
 				placeId = p4.placeId,
 				universeId = p4.universeId,
 				onClose = p4.onClose,
+				permissions = UseGamePermissionsModuleResult,
 				testId = if p4.testId then `{p4.testId}-latest-version-card` else nil
 			})
 		}),

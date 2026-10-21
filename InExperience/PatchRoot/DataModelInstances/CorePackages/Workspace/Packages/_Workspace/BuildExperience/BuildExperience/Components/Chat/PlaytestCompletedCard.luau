@@ -25,7 +25,8 @@ return function(Frame)
 		title = LocalizationStringsModule.CHAT_COMPLETED_GAME_CREATION_TITLE
 	})
 	local IsIsLoading = Frame.isLoading == true
-	local UseChatCardEmphasisModuleResult = if FFlagBuildExperienceChatCardEmphasisModule then UseChatCardEmphasisModule(ChatCardPriorityModule.PlaytestCompleted) else nil
+	local IsIsPlaytestDisabled = Frame.isPlaytestDisabled == true
+	local UseChatCardEmphasisModuleResult = if FFlagBuildExperienceChatCardEmphasisModule then UseChatCardEmphasisModule(if IsIsPlaytestDisabled then nil else ChatCardPriorityModule.PlaytestCompleted) else nil
 	local OnPublish = Frame.onPublish
 	
 	return ReactModule.createElement(View, {
@@ -57,6 +58,7 @@ return function(Frame)
 				variant = if UseChatCardEmphasisModuleResult == false then ButtonVariant.SoftEmphasis else ButtonVariant.Emphasis,
 				fillBehavior = FillBehavior.Fill,
 				isLoading = IsIsLoading,
+				isDisabled = IsIsPlaytestDisabled,
 				onActivated = Frame.onPlaytest
 			}),
 			Publish = ReactModule.createElement(Button, {
@@ -78,6 +80,7 @@ return function(Frame)
 			variant = if UseChatCardEmphasisModuleResult == false then ButtonVariant.SoftEmphasis else ButtonVariant.Emphasis,
 			width = UDim.new(1, 0),
 			isLoading = IsIsLoading,
+			isDisabled = IsIsPlaytestDisabled,
 			onActivated = Frame.onPlaytest
 		})
 	})

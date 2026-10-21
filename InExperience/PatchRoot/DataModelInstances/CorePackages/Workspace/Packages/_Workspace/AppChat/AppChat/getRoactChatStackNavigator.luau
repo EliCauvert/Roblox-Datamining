@@ -9,7 +9,6 @@ local RoactModule = require(Parent.Roact)
 local ReactFocusNavigationModule = require(Parent.ReactFocusNavigation)
 local RoactNavigationModule = require(Parent.RoactNavigation)
 local FocusNavigationEventNameEnum = require(Parent.FocusNavigationUtils).FocusNavigationEventNameEnum
-local FFlagAppChatParticipantDialogGamepadFocusModule = require(AppChat.Flags.FFlagAppChatParticipantDialogGamepadFocus)
 local FFlagAppChatFixRootChatBackNavigation = require(Parent.SharedFlags).FFlagAppChatFixRootChatBackNavigation
 local AppChatFixRootChatBackNavigationIxpEnabled = game:DefineFastFlag("AppChatFixRootChatBackNavigationIxpEnabled", false)
 local AppChatFixRootChatBackNavigationIxpLayer = game:DefineFastString("AppChatFixRootChatBackNavigationIxpLayer", "Party.LandingPage")
@@ -73,7 +72,7 @@ local function RoactChatStackNavigatorWithBackHandler(p1)
 end
 
 return function(Navigator, Callback, p1, p2)
-	-- upvalues: RoactModule (copy), FFlagAppChatParticipantDialogGamepadFocusModule (copy), getActiveChildNavigationOptions (copy), RoactNavigationModule (copy), AppChatFixRootChatBackNavigationIxpEnabled (copy), IXPService (copy), AppChatFixRootChatBackNavigationIxpLayer (copy), EnumScreensModule (copy), FFlagAppChatFixRootChatBackNavigation (copy), getActiveChildParams (copy), GetTopBarStoreModule (copy), RoactChatStackNavigatorWithBackHandler (copy)
+	-- upvalues: RoactModule (copy), getActiveChildNavigationOptions (copy), RoactNavigationModule (copy), AppChatFixRootChatBackNavigationIxpEnabled (copy), IXPService (copy), AppChatFixRootChatBackNavigationIxpLayer (copy), EnumScreensModule (copy), FFlagAppChatFixRootChatBackNavigation (copy), getActiveChildParams (copy), GetTopBarStoreModule (copy), RoactChatStackNavigatorWithBackHandler (copy)
 	local RoactChatStackNavigator = RoactModule.PureComponent:extend("RoactChatStackNavigator")
 	RoactChatStackNavigator.defaultProps = {
 		navigation = nil,
@@ -85,7 +84,7 @@ return function(Navigator, Callback, p1, p2)
 	}
 	
 	function RoactChatStackNavigator.init(p3)
-		-- upvalues: FFlagAppChatParticipantDialogGamepadFocusModule (upval), getActiveChildNavigationOptions (upval), RoactNavigationModule (upval), Callback (copy), AppChatFixRootChatBackNavigationIxpEnabled (upval), IXPService (upval), AppChatFixRootChatBackNavigationIxpLayer (upval), EnumScreensModule (upval), FFlagAppChatFixRootChatBackNavigation (upval), p2 (copy)
+		-- upvalues: getActiveChildNavigationOptions (upval), RoactNavigationModule (upval), Callback (copy), AppChatFixRootChatBackNavigationIxpEnabled (upval), IXPService (upval), AppChatFixRootChatBackNavigationIxpLayer (upval), EnumScreensModule (upval), FFlagAppChatFixRootChatBackNavigation (upval), p2 (copy)
 		p3.backButtonConnection = nil
 		p3.backHandler = nil
 		p3.suppressNextButtonBRelease = false
@@ -103,8 +102,8 @@ return function(Navigator, Callback, p1, p2)
 		end
 		
 		function p3.shouldSuppressNavigateBack(p4): boolean
-			-- upvalues: FFlagAppChatParticipantDialogGamepadFocusModule (upval), p3 (copy)
-			if FFlagAppChatParticipantDialogGamepadFocusModule and p3.suppressNextButtonBRelease then
+			-- upvalues: p3 (copy)
+			if p3.suppressNextButtonBRelease then
 				p3.suppressNextButtonBRelease = false
 				
 				return p4.eventData ~= nil and p4.eventData.KeyCode == Enum.KeyCode.ButtonB
@@ -114,8 +113,8 @@ return function(Navigator, Callback, p1, p2)
 		end
 		
 		function p3.onBackButtonPressed(): boolean
-			-- upvalues: FFlagAppChatParticipantDialogGamepadFocusModule (upval), p3 (copy), getActiveChildNavigationOptions (upval), RoactNavigationModule (upval), Callback (upval), AppChatFixRootChatBackNavigationIxpEnabled (upval), IXPService (upval), AppChatFixRootChatBackNavigationIxpLayer (upval), EnumScreensModule (upval), FFlagAppChatFixRootChatBackNavigation (upval), p2 (upval)
-			if FFlagAppChatParticipantDialogGamepadFocusModule and p3.backHandler then
+			-- upvalues: p3 (copy), getActiveChildNavigationOptions (upval), RoactNavigationModule (upval), Callback (upval), AppChatFixRootChatBackNavigationIxpEnabled (upval), IXPService (upval), AppChatFixRootChatBackNavigationIxpLayer (upval), EnumScreensModule (upval), FFlagAppChatFixRootChatBackNavigation (upval), p2 (upval)
+			if p3.backHandler then
 				p3.backHandler()
 				
 				return true
@@ -144,10 +143,9 @@ return function(Navigator, Callback, p1, p2)
 		end
 		
 		function p3.onDirectBackButtonPressed()
-			-- upvalues: FFlagAppChatParticipantDialogGamepadFocusModule (upval), p3 (copy)
-			if FFlagAppChatParticipantDialogGamepadFocusModule then
-				p3.suppressNextButtonBRelease = p3.backHandler ~= nil
-			end
+			-- upvalues: p3 (copy)
+			p3.suppressNextButtonBRelease = p3.backHandler ~= nil
+			
 			return p3.onBackButtonPressed()
 		end
 	end

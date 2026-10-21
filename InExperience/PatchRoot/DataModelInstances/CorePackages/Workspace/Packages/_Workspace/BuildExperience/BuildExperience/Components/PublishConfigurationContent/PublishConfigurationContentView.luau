@@ -4,13 +4,14 @@ local FoundationModule = require(Parent.Foundation)
 local ReactModule = require(Parent.React)
 local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
 local LocalizationStringsModule = require(BuildExperience.LocalizationStrings)
+local FFlagBuildCheckGamePermissionsModule = require(BuildExperience.Flags.FFlagBuildCheckGamePermissions)
 local BuildMaturityBannerModule = require(BuildExperience.Components.GameConfigurations.BuildMaturityBanner.BuildMaturityBanner)
 local GameConfigurationListModule = require(BuildExperience.Components.GameConfigurations.GameConfigurationList.GameConfigurationList)
 local View = FoundationModule.View
 local IconName = FoundationModule.Enums.IconName
 
 return function(p1)
-	-- upvalues: UseLocalizationFunction (copy), LocalizationStringsModule (copy), IconName (copy), ReactModule (copy), View (copy), GameConfigurationListModule (copy), BuildMaturityBannerModule (copy)
+	-- upvalues: UseLocalizationFunction (copy), LocalizationStringsModule (copy), FFlagBuildCheckGamePermissionsModule (copy), IconName (copy), ReactModule (copy), View (copy), GameConfigurationListModule (copy), BuildMaturityBannerModule (copy)
 	local TestId = p1.testId or "game-configuration-content"
 	local UseLocalizationResult = UseLocalizationFunction({
 		contentBody = LocalizationStringsModule.PUBLISH_CONTENT_BODY,
@@ -32,16 +33,20 @@ return function(p1)
 	local VersionInformationBody = UseLocalizationResult.versionInformationBody
 	local VersionInformationTitle = UseLocalizationResult.versionInformationTitle
 	local VersionHistory = UseLocalizationResult.versionHistory
+	local IsEditDisabled = FFlagBuildCheckGamePermissionsModule and p1.isEditDisabled
+	local IsIconAndThumbnailsDisabled = FFlagBuildCheckGamePermissionsModule and p1.isIconAndThumbnailsDisabled
 	local Rows = {
 		{
 			id = "icon-thumbnails",
 			title = UseLocalizationResult.iconAndThumbnails,
-			onActivated = p1.onOpenIconAndThumbnails
+			onActivated = p1.onOpenIconAndThumbnails,
+			isDisabled = IsEditDisabled or IsIconAndThumbnailsDisabled
 		},
 		{
 			id = "title-description",
 			title = UseLocalizationResult.titleAndDescription,
-			onActivated = p1.onOpenTitleDescriptionPage
+			onActivated = p1.onOpenTitleDescriptionPage,
+			isDisabled = IsEditDisabled
 		}
 	}
 	local Rows1 = {
@@ -50,7 +55,8 @@ return function(p1)
 			title = UseLocalizationResult.contentMaturity,
 			description = p1.contentMaturityText,
 			trailingIcon = IconName.ArrowUpRightFromSquare,
-			onActivated = p1.onOpenContentMaturity
+			onActivated = p1.onOpenContentMaturity,
+			isDisabled = IsEditDisabled
 		}
 	}
 	local List = {}
@@ -62,7 +68,8 @@ return function(p1)
 	table.insert(List, {
 		id = "version-history",
 		title = VersionHistory,
-		onActivated = p1.onOpenVersionHistory
+		onActivated = p1.onOpenVersionHistory,
+		isDisabled = IsEditDisabled
 	})
 	
 	return ReactModule.createElement(View, {

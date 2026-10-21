@@ -10,6 +10,7 @@ local FFlagBuildAdUpsellPinnedModule = require(BuildExperience.Flags.FFlagBuildA
 local FFlagBuildAdsManagerUniverseUrlModule = require(BuildExperience.Flags.FFlagBuildAdsManagerUniverseUrl)
 local FFlagBuildAgentAdCampaignCardModule = require(BuildExperience.Flags.FFlagBuildAgentAdCampaignCard)
 local ChatConstantsModule = require(BuildExperience.Chat.chatConstants)
+local ChatPermissionsContextModule = require(BuildExperience.Chat.ChatPermissionsContext)
 local ChatScrollAnchorContextModule = require(BuildExperience.Chat.ChatScrollAnchorContext)
 local _ = require(BuildExperience.Chat.chatTypes)
 local ChatCardEmphasisPositionProviderModule = require(BuildExperience.Components.Chat.ChatCardEmphasis.ChatCardEmphasisPositionProvider)
@@ -39,6 +40,8 @@ local FFlagEnableBuildOverflowMenuForNewGamesModule = require(BuildExperience.Fl
 local FFlagEnableBuildAdPromotionModule = require(BuildExperience.Flags.FFlagEnableBuildAdPromotion)
 local FFlagBuildExperienceChatAccordionScrollAnchorModule = require(BuildExperience.Flags.FFlagBuildExperienceChatAccordionScrollAnchor)
 local FFlagBuildExperienceChatImageAttachmentsModule = require(BuildExperience.Flags.FFlagBuildExperienceChatImageAttachments)
+local FFlagBuildCheckGamePermissionsModule = require(BuildExperience.Flags.FFlagBuildCheckGamePermissions)
+local _ = require(BuildExperience.useGamePermissions)
 local FFlagBuildExperienceChatResourceAttachments = require(Parent.SharedFlags).FFlagBuildExperienceChatResourceAttachments
 local UseScrollPerformanceTrackerModule = require(BuildExperience.Telemetry.useScrollPerformanceTracker)
 local Divider = FoundationModule.Divider
@@ -126,6 +129,7 @@ local function renderAdUpsells(p3, Tbl, ScrollingFrameRef, CongratsText)
 					congratsText = CongratsText,
 					freePromotionsRemaining = if FFlagBuildAgentAdCampaignCardModule then p3.adUpsellFreePromotionsRemaining else nil,
 					isCreatePending = p3.isAdUpsellCreatePending,
+					isCreateDisabled = p3.isAdUpsellCreateDisabled,
 					isPageVisible = p3.isAdUpsellVisible,
 					onCreate = p3.onAdUpsellCreate,
 					onDismiss = p3.onAdUpsellDismiss,
@@ -157,6 +161,7 @@ local function renderAdUpsells(p3, Tbl, ScrollingFrameRef, CongratsText)
 				isImpressed = adUpsellCard.isImpressed,
 				freePromotionsRemaining = if FFlagBuildAgentAdCampaignCardModule then p3.adUpsellFreePromotionsRemaining else nil,
 				isCreatePending = p3.isAdUpsellCreatePending,
+				isCreateDisabled = p3.isAdUpsellCreateDisabled,
 				isPageVisible = p3.isAdUpsellVisible,
 				onCreate = p3.onAdUpsellCreate,
 				onDismiss = p3.onAdUpsellDismiss,
@@ -168,7 +173,7 @@ local function renderAdUpsells(p3, Tbl, ScrollingFrameRef, CongratsText)
 end
 
 return function(p4)
-	-- upvalues: FFlagBuildExperienceAnswerFormModule (copy), IsEnabled (copy), ReactModule (copy), UseLocalizationFunction (copy), LocalizationStringsModule (copy), FFlagBuildAdUpsellModule (copy), UseTokensFunction (copy), UseScrollPerformanceTrackerModule (copy), FFlagBuildExperienceRemoveAgentTaskUiModule (copy), ChatMessageListModule (copy), BuildEmptyStateModule (copy), FFlagBuildAgentAdCampaignCardModule (copy), ChatConstantsModule (copy), PushNotificationsUpsellCardModule (copy), renderAdUpsells (copy), AnswerFormContainerModule (copy), FFlagBuildExperienceChatAccordionScrollAnchorModule (copy), ChatScrollAnchorContextModule (copy), SubagentTaskStatus (copy), SubagentStatusModule (copy), View (copy), FFlagBuildAdUpsellPinnedModule (copy), BuyMoreRobuxCardModule (copy), ChatActionsModule (copy), FFlagBuildExperienceChatImageAttachmentsModule (copy), FFlagBuildExperienceChatResourceAttachments (copy), FFlagBuildExperienceLibrary (copy), IconButton (copy), IconName (copy), InputSize (copy), ButtonVariant (copy), Text (copy), PlayButtonModule (copy), AgentDetailMenuModule (copy), IconVariant (copy), BuildOverflowMenuButtonModule (copy), FFlagEnableBuildOverflowMenuForNewGamesModule (copy), FFlagEnableBuildAdPromotionModule (copy), ScrollView (copy), FoundationModule (copy), Divider (copy), AgentSpecDebugSheetModule (copy), toTodoItems (copy), CreateAdCampaignSheetContainerModule (copy), FFlagBuildAdsManagerUniverseUrlModule (copy), AdCampaignCreatedToastModule (copy)
+	-- upvalues: FFlagBuildExperienceAnswerFormModule (copy), IsEnabled (copy), ReactModule (copy), UseLocalizationFunction (copy), LocalizationStringsModule (copy), FFlagBuildAdUpsellModule (copy), UseTokensFunction (copy), UseScrollPerformanceTrackerModule (copy), FFlagBuildExperienceRemoveAgentTaskUiModule (copy), ChatMessageListModule (copy), BuildEmptyStateModule (copy), FFlagBuildAgentAdCampaignCardModule (copy), ChatConstantsModule (copy), PushNotificationsUpsellCardModule (copy), renderAdUpsells (copy), AnswerFormContainerModule (copy), FFlagBuildExperienceChatAccordionScrollAnchorModule (copy), ChatScrollAnchorContextModule (copy), FFlagBuildCheckGamePermissionsModule (copy), ChatPermissionsContextModule (copy), SubagentTaskStatus (copy), SubagentStatusModule (copy), View (copy), FFlagBuildAdUpsellPinnedModule (copy), BuyMoreRobuxCardModule (copy), ChatActionsModule (copy), FFlagBuildExperienceChatImageAttachmentsModule (copy), FFlagBuildExperienceChatResourceAttachments (copy), FFlagBuildExperienceLibrary (copy), IconButton (copy), IconName (copy), InputSize (copy), ButtonVariant (copy), Text (copy), PlayButtonModule (copy), AgentDetailMenuModule (copy), IconVariant (copy), BuildOverflowMenuButtonModule (copy), FFlagEnableBuildOverflowMenuForNewGamesModule (copy), FFlagEnableBuildAdPromotionModule (copy), ScrollView (copy), FoundationModule (copy), Divider (copy), AgentSpecDebugSheetModule (copy), toTodoItems (copy), CreateAdCampaignSheetContainerModule (copy), FFlagBuildAdsManagerUniverseUrlModule (copy), AdCampaignCreatedToastModule (copy)
 	local HasAnswerForm: boolean = FFlagBuildExperienceAnswerFormModule and p4.answerForm ~= nil
 	local v1 = false
 	local Callback = nil
@@ -255,12 +260,18 @@ return function(p4)
 			actions = p4.localToolActions,
 			onSubmitText = p4.onSubmitAnswerText,
 			onStop = p4.onStop,
-			errorText = p4.composerErrorText
+			errorText = p4.composerErrorText,
+			isReadOnly = p4.isChatReadOnly
 		})
 	end
 	if FFlagBuildExperienceChatAccordionScrollAnchorModule then
 		RenderAdUpsellsResult = {
 			ScrollAnchor = ReactModule.createElement(ChatScrollAnchorContextModule.Provider, { value = p4.anchorScrollToInstance }, RenderAdUpsellsResult)
+		}
+	end
+	if FFlagBuildCheckGamePermissionsModule then
+		RenderAdUpsellsResult = {
+			Permissions = ReactModule.createElement(ChatPermissionsContextModule.Provider, { value = p4.chatPermissions }, RenderAdUpsellsResult)
 		}
 	end
 	local Elements = {}
@@ -329,6 +340,7 @@ return function(p4)
 					activeIcon = IconName.PlaySmall,
 					inActiveIcon = IconName.PlaySmall,
 					isDisabled = p4.isNewGameTarget and not p4.hasPublishedTurn,
+					isUnavailable = p4.isPlaytestDisabled,
 					onActivated = p4.onPlayActivated,
 					variant = ButtonVariant.Utility
 				}),
@@ -470,6 +482,7 @@ return function(p4)
 					isAssistantResponding = p4.isAssistantResponding,
 					canStopAssistantResponse = p4.canStopAssistantResponse,
 					canSendWhileResponding = p4.canSendWhileResponding,
+					isReadOnly = p4.isChatReadOnly,
 					onSend = p4.onSend,
 					onStop = p4.onStop
 				})

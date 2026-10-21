@@ -117,6 +117,7 @@ end
 
 local config = {
 	id = "get-users",
+	requiredPermission = "canAdvertise",
 	text = LocalizationStringsModule.BUILD_MENU_GET_USERS,
 	isDisabled = function(p1): boolean
 		return p1.getUsersUniverseEligible ~= true
@@ -134,6 +135,7 @@ return function()
 	-- upvalues: LocalizationStringsModule (copy), FFlagBuildExperiencePrivateInvitesModule (copy), isShareUnavailable (copy), onShareActivated (copy), isVersionHistoryDisabled (copy), onVersionHistoryActivated (copy), isInviteToPlaytestDisabled (copy), SendBuildExperienceEventModule (copy), GetPrivatePlaytestersStoreFunction (copy), FFlagBuildExperienceDisableNonPublicStatsModule (copy), isStatsDisabled (copy), PrivacyType (copy), FFlagBuildExperienceMenuImprovementsModule (copy), isAssistantDisabled (copy), onAssistantActivated (copy), isPlaytestDisabled (copy), onPlaytestActivated (copy), getPublishText (copy), FFlagBuildExperienceAnalytics (copy), FFlagBuildExperienceManageDevProductModule (copy), SignalsModule (copy), ReactModule (copy), SignalsReactModule (copy), UniverseConfigurationModule (copy), GameConfigurationLabelsModule (copy), FFlagEnableBuildAdPromotionModule (copy), config (copy)
 	local config1 = {
 		id = "settings",
+		requiredPermission = "canEdit",
 		text = LocalizationStringsModule.BUILD_MENU_SETTINGS,
 		onActivated = function()
 			return { type = "openPage", page = "settings" }
@@ -150,12 +152,14 @@ return function()
 	}
 	local config3 = {
 		id = "version-history",
+		requiredPermission = "canEdit",
 		text = LocalizationStringsModule.BUILD_MENU_VERSIONS,
 		isDisabled = isVersionHistoryDisabled,
 		onActivated = onVersionHistoryActivated
 	}
 	local config4 = {
 		id = "invite-to-playtest",
+		requiredPermission = "canEdit",
 		text = LocalizationStringsModule.BUILD_MENU_INVITE_TO_PLAYTEST,
 		isDisabled = isInviteToPlaytestDisabled,
 		onActivated = function(p1)
@@ -173,6 +177,7 @@ return function()
 	}
 	local config5 = {
 		id = "stats",
+		requiredPermission = "canViewAnalytics",
 		text = LocalizationStringsModule.BUILD_MENU_STATS,
 		isDisabled = if FFlagBuildExperienceDisableNonPublicStatsModule then isStatsDisabled else nil,
 		onActivated = function(p1)
@@ -186,6 +191,7 @@ return function()
 	}
 	local config6 = {
 		id = "monetization",
+		requiredPermission = "canMonetize",
 		text = LocalizationStringsModule.BUILD_MENU_MONETIZATION,
 		onActivated = function()
 			return { type = "openPage", page = "monetization" }
@@ -200,6 +206,7 @@ return function()
 				items = {
 					{
 						id = "publish",
+						requiredPermission = "canPublish",
 						text = LocalizationStringsModule.BUILD_MENU_PUBLISH,
 						onActivated = function()
 							return { type = "openPage", page = "publish" }
@@ -227,6 +234,7 @@ return function()
 					},
 					{
 						id = "playtest",
+						requiredPermission = "canPreview",
 						text = LocalizationStringsModule.BUILD_MENU_PLAYTEST,
 						isDisabled = isPlaytestDisabled,
 						onActivated = onPlaytestActivated
@@ -238,6 +246,7 @@ return function()
 					config1,
 					{
 						id = "publish",
+						requiredPermission = "canPublish",
 						text = LocalizationStringsModule.BUILD_MENU_PUBLISH,
 						getText = getPublishText,
 						onActivated = function()

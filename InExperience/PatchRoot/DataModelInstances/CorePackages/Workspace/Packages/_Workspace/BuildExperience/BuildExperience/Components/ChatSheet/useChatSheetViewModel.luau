@@ -20,24 +20,38 @@ local FFlagBuildExperienceAnalytics = SharedFlagsModule.FFlagBuildExperienceAnal
 local FFlagBuildExperienceChatResourceAttachments = SharedFlagsModule.FFlagBuildExperienceInstanceSelection and SharedFlagsModule.FFlagBuildExperienceChatResourceAttachments
 local FFlagBuildExperienceChatImageAttachmentsModule = require(BuildExperience.Flags.FFlagBuildExperienceChatImageAttachments)
 local FFlagBuildExperienceChatImageAttachmentsModule1 = SharedFlagsModule.FFlagBuildExperienceInGameCaptureToChat and FFlagBuildExperienceChatImageAttachmentsModule
+local FFlagBuildCheckGamePermissionsModule = require(BuildExperience.Flags.FFlagBuildCheckGamePermissions)
+local UseGamePermissionsModule = require(BuildExperience.useGamePermissions)
 
 local function noop() end
 
 return function(p1)
-	-- upvalues: noop (copy), GetAssistantBuildStoreModule (copy), SignalsReactModule (copy), GetCreatorAgentResumeStoreModule (copy), GetCurrentExperienceProjectModule (copy), UseChatSessionCoreModule (copy), FFlagBuildExperienceMonetizationNativeUIModule (copy), UseBuildPromptDraftModule (copy), FFlagBuildExperienceDeveloperProductContextModule (copy), UseChatPlaytestFooterModule (copy), FFlagBuildExperienceChatResourceAttachments (copy), GetPlayButtonStoreModule (copy), ReactModule (copy), ChatTypesModule (copy), FFlagBuildExperienceChatImageAttachmentsModule1 (copy), FFlagBuildExperienceAnalytics (copy), FFlagBuildExperienceAnswerFormModule (copy)
+	-- upvalues: noop (copy), GetAssistantBuildStoreModule (copy), SignalsReactModule (copy), GetCreatorAgentResumeStoreModule (copy), GetCurrentExperienceProjectModule (copy), FFlagBuildCheckGamePermissionsModule (copy), UseGamePermissionsModule (copy), UseChatSessionCoreModule (copy), FFlagBuildExperienceMonetizationNativeUIModule (copy), UseBuildPromptDraftModule (copy), FFlagBuildExperienceDeveloperProductContextModule (copy), UseChatPlaytestFooterModule (copy), FFlagBuildExperienceChatResourceAttachments (copy), GetPlayButtonStoreModule (copy), ReactModule (copy), ChatTypesModule (copy), FFlagBuildExperienceChatImageAttachmentsModule1 (copy), FFlagBuildExperienceAnalytics (copy), FFlagBuildExperienceAnswerFormModule (copy)
 	local OnClose = p1.onClose or noop
 	local NoIsOpen = p1.isOpen == nil or p1.isOpen
 	local UseSignalStateResult = SignalsReactModule.useSignalState(GetAssistantBuildStoreModule().getIsDisabled)
 	local CreatorAgentResumeStoreModule = GetCreatorAgentResumeStoreModule()
 	local CurrentExperienceProjectModule = GetCurrentExperienceProjectModule()
 	local UniverseId = p1.universeId or CurrentExperienceProjectModule.universeId
+	local PlaceId = p1.placeId or CurrentExperienceProjectModule.placeId
+	local ChatPermissions = nil
+	local NoCanEditOnBuild = false
+	local v1 = false
+	
+	if FFlagBuildCheckGamePermissionsModule then
+		local UseGamePermissionsModuleResult, UseGamePermissionsModuleResult2 = UseGamePermissionsModule({ universeId = UniverseId })
+		ChatPermissions = UseGamePermissionsModuleResult
+		NoCanEditOnBuild = not UseGamePermissionsModuleResult.canEditOnBuild
+		v1 = UseGamePermissionsModuleResult2
+	end
 	local UseChatSessionCoreModuleResult = UseChatSessionCoreModule({
 		universeId = UniverseId,
-		placeId = p1.placeId or CurrentExperienceProjectModule.placeId,
+		placeId = PlaceId,
 		sessionId = p1.sessionId,
 		autoFocusComposer = p1.autoFocusComposer == true,
 		focusComposerWhen = NoIsOpen,
-		hydrateHistoryWhen = NoIsOpen
+		hydrateHistoryWhen = NoIsOpen,
+		sendMessageWhen = not NoCanEditOnBuild
 	})
 	
 	if FFlagBuildExperienceMonetizationNativeUIModule then
@@ -146,7 +160,7 @@ return function(p1)
 		clockBinding = UseChatSessionCoreModuleResult.clockBinding,
 		onPlaytest = ChatSheetPlaytestCta.onPlaytest,
 		isPlaytestLoading = ChatSheetPlaytestCta.isPlaytestLoading,
-		isHistoryLoading = UseChatSessionCoreModuleResult.isHistoryLoading,
+		isHistoryLoading = UseChatSessionCoreModuleResult.isHistoryLoading or v1,
 		scrollingFrameRef = UseChatSessionCoreModuleResult.setScrollingFrame,
 		anchorScrollToInstance = UseChatSessionCoreModuleResult.anchorScrollToInstance,
 		composerText = UseChatSessionCoreModuleResult.composerText,
@@ -162,6 +176,8 @@ return function(p1)
 		isAssistantResponding = UseChatSessionCoreModuleResult.isAssistantResponding,
 		canStopAssistantResponse = UseChatSessionCoreModuleResult.canStopAssistantResponse,
 		canSendWhileResponding = UseChatSessionCoreModuleResult.canSendWhileResponding,
+		isChatReadOnly = NoCanEditOnBuild,
+		chatPermissions = ChatPermissions,
 		onSend = UseChatSessionCoreModuleResult.sendMessage,
 		onStop = UseChatSessionCoreModuleResult.stopAssistantResponse,
 		onOpenChat = UseResult,

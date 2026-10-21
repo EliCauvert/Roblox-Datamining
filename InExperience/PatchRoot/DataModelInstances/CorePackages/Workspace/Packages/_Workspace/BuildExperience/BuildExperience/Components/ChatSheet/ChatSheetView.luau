@@ -14,6 +14,7 @@ local BuildPillMenuPortalModule = require(BuildExperience.Components.BuildPillMe
 local ChatActionsModule = require(BuildExperience.Components.Chat.ChatActions)
 local ChatCardEmphasisProviderModule = require(BuildExperience.Components.Chat.ChatCardEmphasis.ChatCardEmphasisProvider)
 local ChatMessageListModule = require(BuildExperience.Components.Chat.ChatMessageList)
+local ChatPermissionsContextModule = require(BuildExperience.Chat.ChatPermissionsContext)
 local ChatScrollAnchorContextModule = require(BuildExperience.Chat.ChatScrollAnchorContext)
 local _ = require(BuildExperience.Chat.chatTypes)
 local ChatConstantsModule = require(BuildExperience.Chat.chatConstants)
@@ -26,6 +27,8 @@ local FFlagBuildExperienceInGameShell = require(Parent.SharedFlags).FFlagBuildEx
 local FFlagBuildExperienceChatAccordionScrollAnchorModule = require(BuildExperience.Flags.FFlagBuildExperienceChatAccordionScrollAnchor)
 local FFlagBuildExperienceChatSheetReversedContentModule = require(BuildExperience.Flags.FFlagBuildExperienceChatSheetReversedContent)
 local FFlagBuildExperienceChatImageAttachmentsModule = require(BuildExperience.Flags.FFlagBuildExperienceChatImageAttachments)
+local FFlagBuildCheckGamePermissionsModule = require(BuildExperience.Flags.FFlagBuildCheckGamePermissions)
+local _ = require(BuildExperience.useGamePermissions)
 local FFlagBuildExperienceChatResourceAttachments = require(Parent.SharedFlags).FFlagBuildExperienceChatResourceAttachments
 local Sheet = if require(BuildExperience.Flags.FFlagBuildExperienceUseFoundationSheet) then FoundationModule.Sheet else require(BuildExperience.FoundationFork.Sheet)
 local UseScrollPerformanceTrackerModule = require(BuildExperience.Telemetry.useScrollPerformanceTracker)
@@ -75,7 +78,7 @@ local function ChatSheetContent(p1)
 end
 
 return function(p1)
-	-- upvalues: FFlagBuildExperienceAnswerFormModule (copy), Sheet (copy), UseLocalizationFunction (copy), LocalizationStringsModule (copy), UseTokensFunction (copy), ReactModule (copy), FFlagBuildExperienceMonetizationNativeUIModule (copy), FocusNavigationEventNameEnum (copy), InputHandlersModule (copy), UseFocusRootFunction (copy), FocusNavigableSurfaceIdentifierEnum (copy), EventMap (copy), ReactUtilsModule (copy), ChatMessageListModule (copy), BuildEmptyStateModule (copy), AnswerFormContainerModule (copy), ChatConstantsModule (copy), FFlagBuildExperienceChatAccordionScrollAnchorModule (copy), ChatScrollAnchorContextModule (copy), View (copy), FFlagBuildExperienceLibrary (copy), DialogSize (copy), ChatSheetContent (copy), ChatActionsModule (copy), FFlagBuildExperienceChatImageAttachmentsModule (copy), FFlagBuildExperienceChatResourceAttachments (copy), FFlagBuildExperienceInGameShell (copy), BuildPillMenuPortalModule (copy), FFlagBuildExperienceChatCardEmphasisModule (copy), ChatCardEmphasisProviderModule (copy)
+	-- upvalues: FFlagBuildExperienceAnswerFormModule (copy), Sheet (copy), UseLocalizationFunction (copy), LocalizationStringsModule (copy), UseTokensFunction (copy), ReactModule (copy), FFlagBuildExperienceMonetizationNativeUIModule (copy), FocusNavigationEventNameEnum (copy), InputHandlersModule (copy), UseFocusRootFunction (copy), FocusNavigableSurfaceIdentifierEnum (copy), EventMap (copy), ReactUtilsModule (copy), ChatMessageListModule (copy), BuildEmptyStateModule (copy), AnswerFormContainerModule (copy), ChatConstantsModule (copy), FFlagBuildExperienceChatAccordionScrollAnchorModule (copy), ChatScrollAnchorContextModule (copy), FFlagBuildCheckGamePermissionsModule (copy), ChatPermissionsContextModule (copy), View (copy), FFlagBuildExperienceLibrary (copy), DialogSize (copy), ChatSheetContent (copy), ChatActionsModule (copy), FFlagBuildExperienceChatImageAttachmentsModule (copy), FFlagBuildExperienceChatResourceAttachments (copy), FFlagBuildExperienceInGameShell (copy), BuildPillMenuPortalModule (copy), FFlagBuildExperienceChatCardEmphasisModule (copy), ChatCardEmphasisProviderModule (copy)
 	local HasAnswerForm: boolean = FFlagBuildExperienceAnswerFormModule and p1.answerForm ~= nil
 	local SheetComponent = p1.sheetComponent or Sheet
 	local UseLocalizationResult = UseLocalizationFunction({
@@ -123,12 +126,18 @@ return function(p1)
 			actions = p1.localToolActions,
 			onSubmitText = p1.onSubmitAnswerText,
 			onStop = p1.onStop,
-			errorText = p1.composerErrorText
+			errorText = p1.composerErrorText,
+			isReadOnly = p1.isChatReadOnly
 		})
 	end
 	if FFlagBuildExperienceChatAccordionScrollAnchorModule then
 		ChatMessageListModuleResult = {
 			ScrollAnchor = ReactModule.createElement(ChatScrollAnchorContextModule.Provider, { value = p1.anchorScrollToInstance }, ChatMessageListModuleResult)
+		}
+	end
+	if FFlagBuildCheckGamePermissionsModule then
+		ChatMessageListModuleResult = {
+			Permissions = ReactModule.createElement(ChatPermissionsContextModule.Provider, { value = p1.chatPermissions }, ChatMessageListModuleResult)
 		}
 	end
 	local Element = ReactModule.createElement(SheetComponent.Root, {
@@ -178,6 +187,7 @@ return function(p1)
 				canStopAssistantResponse = p1.canStopAssistantResponse,
 				canSendWhileResponding = p1.canSendWhileResponding,
 				allowsTypingWhileResponding = p1.allowsComposerTypingWhileResponding,
+				isReadOnly = p1.isChatReadOnly,
 				onSend = p1.onSend,
 				onStop = p1.onStop
 			})

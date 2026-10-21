@@ -18,6 +18,8 @@ local UseCreatorCreditMenuItemFunction = require(script.Parent.useCreatorCreditM
 local FFlagBuildExperiencePrivateInvitesModule = require(BuildExperience.Flags.FFlagBuildExperiencePrivateInvites)
 local FFlagEnableBuildAdPromotionModule = require(BuildExperience.Flags.FFlagEnableBuildAdPromotion)
 local FFlagEnableBuildOverflowMenuForNewGamesModule = require(BuildExperience.Flags.FFlagEnableBuildOverflowMenuForNewGames)
+local FFlagBuildCheckGamePermissionsModule = require(BuildExperience.Flags.FFlagBuildCheckGamePermissions)
+local UseGamePermissionsModule = require(BuildExperience.useGamePermissions)
 local FFlagBuildExperienceReleaseFocusOnOverflowOpenModule = require(BuildExperience.Flags.FFlagBuildExperienceReleaseFocusOnOverflowOpen)
 local UseGetAdCampaignEligibilityModule = require(BuildExperience.Components.Ads.useGetAdCampaignEligibility)
 local AdCampaignEligibilityUtilsModule = require(BuildExperience.Components.Ads.adCampaignEligibilityUtils)
@@ -34,15 +36,23 @@ local ReleaseAnyFocusModule = require(Parent.BuildExperiencePlaytestLaunch.relea
 local BuildOverflowMenuWidth = game:DefineFastInt("BuildOverflowMenuWidth", 172)
 
 local function _(p1, p2)
+	return p2 == nil or p1.requiredPermission == nil or p2[p1.requiredPermission]
+end
+
+local _ = function(p1, p2)
 	return if p1.getText == nil then p1.text else p1.getText(p2)
 end
 
 return function(p1)
-	-- upvalues: UseScaledValueFunction (copy), BuildOverflowMenuWidth (copy), UseOpenWebViewFunction (copy), ReactModule (copy), UseExperienceShareFlowModule (copy), UseSharePublishedExperienceFunction (copy), FFlagEnableBuildAdPromotionModule (copy), UseGetAdCampaignEligibilityModule (copy), AdCampaignEligibilityUtilsModule (copy), FFlagEnableBuildOverflowMenuForNewGamesModule (copy), UseLocalizationFunction (copy), UseCreatorCreditMenuItemFunction (copy), BadgeVariant (copy), FFlagBuildExperienceReleaseFocusOnOverflowOpenModule (copy), UserInputService (copy), FFlagBuildExperienceMonetizationNativeUIModule (copy), DeveloperProducts (copy), LocalizationStringsModule (copy), ReleaseAnyFocusModule (copy), FFlagBuildExperiencePrivateInvitesModule (copy), LeaveExperienceModule (copy), VersionHistoryContainerModule (copy), Menu (copy), PopoverSide (copy), InputSize (copy), PopoverAlign (copy), IconButton (copy), ButtonVariant (copy), ExperienceShareOverlaysModule (copy), FriendsOnlyShareDialogModule (copy)
+	-- upvalues: UseScaledValueFunction (copy), BuildOverflowMenuWidth (copy), UseOpenWebViewFunction (copy), ReactModule (copy), FFlagBuildCheckGamePermissionsModule (copy), UseGamePermissionsModule (copy), UseExperienceShareFlowModule (copy), UseSharePublishedExperienceFunction (copy), FFlagEnableBuildAdPromotionModule (copy), UseGetAdCampaignEligibilityModule (copy), AdCampaignEligibilityUtilsModule (copy), FFlagEnableBuildOverflowMenuForNewGamesModule (copy), UseLocalizationFunction (copy), UseCreatorCreditMenuItemFunction (copy), BadgeVariant (copy), FFlagBuildExperienceReleaseFocusOnOverflowOpenModule (copy), UserInputService (copy), FFlagBuildExperienceMonetizationNativeUIModule (copy), DeveloperProducts (copy), LocalizationStringsModule (copy), ReleaseAnyFocusModule (copy), FFlagBuildExperiencePrivateInvitesModule (copy), LeaveExperienceModule (copy), VersionHistoryContainerModule (copy), Menu (copy), PopoverSide (copy), InputSize (copy), PopoverAlign (copy), IconButton (copy), ButtonVariant (copy), ExperienceShareOverlaysModule (copy), FriendsOnlyShareDialogModule (copy)
 	local UseScaledValueResult = UseScaledValueFunction(BuildOverflowMenuWidth)
 	local UseOpenWebViewResult = UseOpenWebViewFunction()
 	local UseStateResult, UseStateResult2 = ReactModule.useState(false)
 	local UseStateResult1, UseStateResult2_1 = ReactModule.useState(false)
+	local UseGamePermissionsModuleResult = if FFlagBuildCheckGamePermissionsModule then UseGamePermissionsModule({
+		universeId = p1.target.universeId,
+		isNewGame = p1.target.isNewGameTarget
+	}) else nil
 	local UseExperienceShareFlowModuleResult = UseExperienceShareFlowModule(p1.target.universeId, p1.target.placeId)
 	local OnShareFunction = UseExperienceShareFlowModuleResult.onShare
 	local UseSharePublishedExperienceResult = UseSharePublishedExperienceFunction(p1.target.universeId)
@@ -130,7 +140,7 @@ return function(p1)
 		Menu = ReactModule.createElement(Menu, {
 			isOpen = UseStateResult and not IsIsDisabled,
 			items = (function()
-				-- upvalues: IsIsDisabled (copy), UseMemoResult (copy), UseItemsResult (copy), UseLocalizationResult (copy), BadgeVariant (upval), HasOnOpenCreatorCreditPage (copy), UseCreatorCreditMenuItemResult (copy)
+				-- upvalues: IsIsDisabled (copy), UseMemoResult (copy), UseItemsResult (copy), UseGamePermissionsModuleResult (ref), UseLocalizationResult (copy), BadgeVariant (upval), HasOnOpenCreatorCreditPage (copy), UseCreatorCreditMenuItemResult (copy)
 				local List = {}
 				
 				if not IsIsDisabled then
@@ -139,11 +149,12 @@ return function(p1)
 							local config = { items = {} }
 							
 							for _, item in value.items do
+								local UseGamePermissionsModuleResult1 = UseGamePermissionsModuleResult
 								table.insert(config.items, {
 									id = item.id,
 									text = UseLocalizationResult[item.id],
 									icon = item.icon,
-									isDisabled = if item.isDisabled == nil then nil else item.isDisabled(UseMemoResult),
+									isDisabled = not (UseGamePermissionsModuleResult1 == nil or item.requiredPermission == nil or UseGamePermissionsModuleResult1[item.requiredPermission]) or (if item.isDisabled == nil then nil else item.isDisabled(UseMemoResult)),
 									trailing = if item.getTrailingText == nil then nil elseif item.getTrailingText(UseMemoResult) == nil then nil else {
 										type = "Badge",
 										text = UseLocalizationResult[item.id .. ":trailing"],

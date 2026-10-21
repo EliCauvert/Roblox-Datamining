@@ -9,6 +9,7 @@ local OverflowMenuPageShellModule = require(BuildExperience.Components.BuildPill
 local ChatActionsModule = require(BuildExperience.Components.Chat.ChatActions)
 local FFlagBuildExperienceMonetizationNativeUIModule = require(BuildExperience.Flags.FFlagBuildExperienceMonetizationNativeUI)
 local FFlagBuildExperienceMonetizationMultiKindModule = require(BuildExperience.Flags.FFlagBuildExperienceMonetizationMultiKind)
+local FFlagBuildCheckGamePermissionsModule = require(BuildExperience.Flags.FFlagBuildCheckGamePermissions)
 local FFlagBuildExperienceDeveloperProductContextModule = require(BuildExperience.Flags.FFlagBuildExperienceDeveloperProductContext)
 local Badge = FoundationModule.Badge
 local Button = FoundationModule.Button
@@ -813,7 +814,7 @@ local function EditContent(p4)
 end
 
 return function(p4)
-	-- upvalues: FFlagBuildExperienceMonetizationNativeUIModule (copy), ReactModule (copy), ProductActionsMenu (copy), Button (copy), InputSize (copy), ButtonVariant (copy), IconButton (copy), IconName (copy), DetailContent (copy), CatalogSourcesStatus (copy), CatalogStatusContent (copy), EditContent (copy), OptionsContent (copy), EmptyContent (copy), CatalogContent (copy), View (copy), CatalogRefreshWarning (copy), FillBehavior (copy), FFlagBuildExperienceMonetizationMultiKindModule (copy), FFlagBuildExperienceDeveloperProductContextModule (copy), ChatActionsModule (copy), OverflowMenuPageShellModule (copy)
+	-- upvalues: FFlagBuildExperienceMonetizationNativeUIModule (copy), ReactModule (copy), ProductActionsMenu (copy), Button (copy), InputSize (copy), ButtonVariant (copy), IconButton (copy), IconName (copy), DetailContent (copy), CatalogSourcesStatus (copy), CatalogStatusContent (copy), EditContent (copy), OptionsContent (copy), EmptyContent (copy), CatalogContent (copy), View (copy), CatalogRefreshWarning (copy), FillBehavior (copy), FFlagBuildExperienceMonetizationMultiKindModule (copy), FFlagBuildCheckGamePermissionsModule (copy), FFlagBuildExperienceDeveloperProductContextModule (copy), ChatActionsModule (copy), OverflowMenuPageShellModule (copy)
 	local IsDetail = p4.mode == "detail"
 	local IsEdit = p4.mode == "edit"
 	local IsOptions = p4.mode == "options"
@@ -829,9 +830,9 @@ return function(p4)
 			end
 		end
 	end
-	local NoV82: boolean = not IsDetail and (not IsEdit and (not IsOptions and (if HasCatalogSources then not Flag and not v1 else p4.catalogStatus ~= "Ready" and not (p4.catalogStatus == "Failed" and v1))))
-	local NoNoV82: boolean = p4.mode == "empty" and not NoV82
-	local V82: boolean = not HasCatalogSources and (not IsDetail and (not IsEdit and (not IsOptions and (p4.catalogStatus == "Failed" and v1))))
+	local NoV83: boolean = not IsDetail and (not IsEdit and (not IsOptions and (if HasCatalogSources then not Flag and not v1 else p4.catalogStatus ~= "Ready" and not (p4.catalogStatus == "Failed" and v1))))
+	local NoNoV83: boolean = p4.mode == "empty" and not NoV83
+	local V83: boolean = not HasCatalogSources and (not IsDetail and (not IsEdit and (not IsOptions and (p4.catalogStatus == "Failed" and v1))))
 	local Element = if IsDetail and p4.canManageProduct then if FFlagBuildExperienceMonetizationNativeUIModule then ReactModule.createElement(ProductActionsMenu, {
 		isDisabled = p4.isProductDisabled or (p4.isProductSaleStatusPending or p4.isProductManagedPricingPending),
 		editLabel = p4.labels.edit,
@@ -843,7 +844,7 @@ return function(p4)
 		size = InputSize.Medium,
 		text = p4.labels.edit,
 		variant = ButtonVariant.Standard
-	}) elseif IsDetail or IsEdit or IsOptions or NoV82 or not p4.showOptions then nil else ReactModule.createElement(IconButton, {
+	}) elseif IsDetail or IsEdit or IsOptions or NoV83 or not p4.showOptions then nil else ReactModule.createElement(IconButton, {
 		isCircular = true,
 		testId = "monetization-open-options",
 		icon = if FFlagBuildExperienceMonetizationNativeUIModule then IconName.TwoSwitchesHorizontal else IconName.ThreeSlidersHorizontal,
@@ -858,7 +859,7 @@ return function(p4)
 		GroupTransparency = 0.55,
 		Size = UDim2.new(1, 0, 0, 0)
 	}, { Content = ReactModule.createElement(DetailContent, p4) }) else ReactModule.createElement(DetailContent, p4)
-	local Element1 = if NoV82 then if HasCatalogSources then ReactModule.createElement(CatalogSourcesStatus, p4) else ReactModule.createElement(CatalogStatusContent, p4) elseif IsDetail then CanvasGroup elseif IsEdit then ReactModule.createElement(EditContent, p4) elseif IsOptions then ReactModule.createElement(OptionsContent, p4) elseif p4.mode == "empty" then ReactModule.createElement(EmptyContent, p4) else ReactModule.createElement(CatalogContent, p4)
+	local Element1 = if NoV83 then if HasCatalogSources then ReactModule.createElement(CatalogSourcesStatus, p4) else ReactModule.createElement(CatalogStatusContent, p4) elseif IsDetail then CanvasGroup elseif IsEdit then ReactModule.createElement(EditContent, p4) elseif IsOptions then ReactModule.createElement(OptionsContent, p4) elseif p4.mode == "empty" then ReactModule.createElement(EmptyContent, p4) else ReactModule.createElement(CatalogContent, p4)
 	
 	if HasCatalogSources and not Flag and v1 and not IsDetail and not IsEdit and not IsOptions then
 		Element1 = ReactModule.createElement(View, { tag = "col gap-large size-full-0 auto-y" }, {
@@ -866,7 +867,7 @@ return function(p4)
 			Content = Element1
 		})
 	end
-	if V82 then
+	if V83 then
 		Element1 = ReactModule.createElement(View, { tag = "col gap-medium size-full-0 auto-y" }, {
 			Warning = ReactModule.createElement(CatalogRefreshWarning, p4),
 			Content = Element1
@@ -915,7 +916,7 @@ return function(p4)
 			testId = "monetization-detail-composer"
 		}, {
 			Composer = ReactModule.createElement(ChatActionsModule, p4.chatActions)
-		}) elseif NoV82 or p4.mode ~= "empty" and p4.mode ~= "catalog" then nil else ReactModule.createElement(View, {
+		}) elseif NoV83 or p4.mode ~= "empty" and p4.mode ~= "catalog" then nil else ReactModule.createElement(View, {
 			tag = {
 				["row align-x-center size-full-0 auto-y"] = true,
 				["padding-y-medium"] = FFlagBuildExperienceMonetizationNativeUIModule
@@ -923,7 +924,7 @@ return function(p4)
 		}, {
 			Create = ReactModule.createElement(Button, {
 				testId = "monetization-create",
-				isDisabled = if FFlagBuildExperienceMonetizationMultiKindModule then not p4.canCreateProduct else nil,
+				isDisabled = if FFlagBuildExperienceMonetizationMultiKindModule or FFlagBuildCheckGamePermissionsModule then not p4.canCreateProduct else nil,
 				onActivated = p4.onOpenCreate,
 				size = if FFlagBuildExperienceMonetizationNativeUIModule then InputSize.Large else InputSize.Medium,
 				text = p4.labels.emptyCreateProduct,
@@ -931,7 +932,7 @@ return function(p4)
 				width = if FFlagBuildExperienceMonetizationNativeUIModule then UDim.new(1, 0) else UDim.new(0, 240)
 			})
 		}),
-		disableScrolling = FFlagBuildExperienceMonetizationNativeUIModule and NoNoV82,
+		disableScrolling = FFlagBuildExperienceMonetizationNativeUIModule and NoNoV83,
 		headerTrailing = Element,
 		onClose = p4.onClose,
 		title = if IsDetail then if p4.selectedProduct == nil then p4.labels.title else p4.selectedProduct.name elseif IsEdit then p4.labels.editProduct elseif IsOptions then p4.labels.options else p4.labels.title

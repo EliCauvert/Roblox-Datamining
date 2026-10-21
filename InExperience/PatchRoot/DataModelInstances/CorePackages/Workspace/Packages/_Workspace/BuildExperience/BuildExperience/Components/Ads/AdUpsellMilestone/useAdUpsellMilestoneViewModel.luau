@@ -84,6 +84,7 @@ return function(p1)
 		freePromotionsRemaining = if FFlagBuildAgentAdCampaignCardModule then p1.freePromotionsRemaining else nil,
 		cardRef = UseRefResult,
 		isCreatePending = p1.isCreatePending,
+		isCreateDisabled = p1.isCreateDisabled,
 		onCreate = p1.onCreate,
 		onDismiss = p1.onDismiss
 	}

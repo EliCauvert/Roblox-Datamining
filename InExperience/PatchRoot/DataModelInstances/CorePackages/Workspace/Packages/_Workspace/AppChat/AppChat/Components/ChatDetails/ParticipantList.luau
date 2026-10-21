@@ -13,11 +13,9 @@ local LoggerModule = require(script.Parent.Logger)
 local SortedList = SocialLibrariesModule.Components.SortedList
 local ParticipantEntryRightFrameModule = require(script.Parent.ParticipantEntryRightFrame)
 local ParticipantEntryModule = require(script.Parent.ParticipantEntry)
-local FFlagAppChatParticipantDialogGamepadFocusModule = require(AppChat.Flags.FFlagAppChatParticipantDialogGamepadFocus)
 local FFlagAppChatPresenceStoreMigrationModule = require(AppChat.Flags.FFlagAppChatPresenceStoreMigration)
 local FFlagDebugAppChatEnableDomLocatorsModule = require(AppChat.Flags.FFlagDebugAppChatEnableDomLocators)
 local DomLocatorsModule = require(AppChat.Utils.DomLocators)
-local GetFFlagAppChatParticipantDialogFoundationMenuModule = require(AppChat.Flags.getFFlagAppChatParticipantDialogFoundationMenu)
 local PresenceType = if FFlagAppChatPresenceStoreMigrationModule then DataHydrationModule.Presence.PresenceEnums.PresenceType else nil
 local GetResult = if FFlagAppChatPresenceStoreMigrationModule then DataHydrationModule.Presence.PresenceStore.get() else nil
 local Config = if FFlagAppChatPresenceStoreMigrationModule then {
@@ -40,11 +38,10 @@ local config = {
 }
 
 function ParticipantList(p1)
-	-- upvalues: CryoModule (copy), config (copy), GetFFlagAppChatParticipantDialogFoundationMenuModule (copy), ReactModule (copy), UseLocalizationFunction (copy), FFlagAppChatPresenceStoreMigrationModule (copy), SignalsModule (copy), GetResult (copy), Config (copy), SignalsReactModule (copy), FFlagAppChatParticipantDialogGamepadFocusModule (copy), ParticipantEntryModule (copy), FFlagDebugAppChatEnableDomLocatorsModule (copy), DomLocatorsModule (copy), ParticipantEntryRightFrameModule (copy), SortedList (copy)
+	-- upvalues: CryoModule (copy), config (copy), ReactModule (copy), UseLocalizationFunction (copy), FFlagAppChatPresenceStoreMigrationModule (copy), SignalsModule (copy), GetResult (copy), Config (copy), SignalsReactModule (copy), ParticipantEntryModule (copy), FFlagDebugAppChatEnableDomLocatorsModule (copy), DomLocatorsModule (copy), ParticipantEntryRightFrameModule (copy), SortedList (copy)
 	local JoinResult = CryoModule.Dictionary.join(config, p1)
 	local OnEntryActivated = JoinResult.onEntryActivated or config.onEntryActivated
-	local FFlagAppChatParticipantDialogFoundationMenuModule = GetFFlagAppChatParticipantDialogFoundationMenuModule()
-	local UseRefResult = if FFlagAppChatParticipantDialogFoundationMenuModule then ReactModule.useRef({}) else nil
+	local UseRefResult = ReactModule.useRef({})
 	local UseLocalizationResult = UseLocalizationFunction({
 		pendingLabelText = JoinResult.pendingKey,
 		invitedLabelText = JoinResult.invitedKey
@@ -68,10 +65,7 @@ function ParticipantList(p1)
 	end, { JoinResult.entries }))) else nil
 	
 	local function _(p2)
-		-- upvalues: UseRefResult (ref), ReactModule (upval)
-		if UseRefResult == nil then
-			return nil
-		end
+		-- upvalues: UseRefResult (copy), ReactModule (upval)
 		if UseRefResult.current[p2] == nil then
 			UseRefResult.current[p2] = ReactModule.createRef()
 		end
@@ -79,7 +73,7 @@ function ParticipantList(p1)
 	end
 	
 	local function RenderEntry(p2, _)
-		-- upvalues: UseLocalizationResult (copy), FFlagAppChatParticipantDialogFoundationMenuModule (copy), UseRefResult (ref), ReactModule (upval), JoinResult (copy), FFlagAppChatParticipantDialogGamepadFocusModule (upval), OnEntryActivated (copy), ParticipantEntryModule (upval)
+		-- upvalues: UseLocalizationResult (copy), UseRefResult (copy), ReactModule (upval), JoinResult (copy), OnEntryActivated (copy), ParticipantEntryModule (upval)
 		local IsInvited = p2.metadata and p2.metadata.isInvited
 		local Text = tostring(p2.id)
 		local config = {
@@ -87,32 +81,19 @@ function ParticipantList(p1)
 			statusText = if IsInvited then UseLocalizationResult.invitedLabelText else nil
 		}
 		
-		if FFlagAppChatParticipantDialogFoundationMenuModule then
-			local CurrentEntry = nil
-			if UseRefResult == nil then
-				CurrentEntry = nil
-			else
-				if UseRefResult.current[Text] == nil then
-					UseRefResult.current[Text] = ReactModule.createRef()
-				end
-				CurrentEntry = UseRefResult.current[Text]
-			end
-			local IsActiveParticipantIdMatch = JoinResult.activeParticipantId == Text
-			config.onActivated = if FFlagAppChatParticipantDialogGamepadFocusModule then function()
-				-- upvalues: IsActiveParticipantIdMatch (copy), OnEntryActivated (upval), p2 (copy), CurrentEntry (copy)
-				if not IsActiveParticipantIdMatch then
-					OnEntryActivated(p2, CurrentEntry)
-				end
-			end elseif IsActiveParticipantIdMatch then nil else function()
-				-- upvalues: OnEntryActivated (upval), p2 (copy), CurrentEntry (copy)
+		if UseRefResult.current[Text] == nil then
+			UseRefResult.current[Text] = ReactModule.createRef()
+		end
+		local CurrentEntry = UseRefResult.current[Text]
+		local IsActiveParticipantIdMatch = JoinResult.activeParticipantId == Text
+		
+		function config.onActivated()
+			-- upvalues: IsActiveParticipantIdMatch (copy), OnEntryActivated (upval), p2 (copy), CurrentEntry (copy)
+			if not IsActiveParticipantIdMatch then
 				OnEntryActivated(p2, CurrentEntry)
 			end
-		else
-			function config.onActivated()
-				-- upvalues: OnEntryActivated (upval), p2 (copy)
-				OnEntryActivated(p2, nil)
-			end
 		end
+		
 		return ReactModule.createElement(ParticipantEntryModule, config, p2.children)
 	end
 	
@@ -134,18 +115,13 @@ function ParticipantList(p1)
 				testId = if FFlagDebugAppChatEnableDomLocatorsModule and NoIsLocalUser then DomLocatorsModule.chatDetailsParticipantMoreButton(entry.displayName) else nil
 			}
 			
-			if FFlagAppChatParticipantDialogFoundationMenuModule and NoIsLocalUser then
+			if NoIsLocalUser then
 				local Text = tostring(entry.id)
-				local CurrentEntry = nil
 				
-				if UseRefResult == nil then
-					CurrentEntry = nil
-				else
-					if UseRefResult.current[Text] == nil then
-						UseRefResult.current[Text] = ReactModule.createRef()
-					end
-					CurrentEntry = UseRefResult.current[Text]
+				if UseRefResult.current[Text] == nil then
+					UseRefResult.current[Text] = ReactModule.createRef()
 				end
+				local CurrentEntry = UseRefResult.current[Text]
 				config1.dotsRef = CurrentEntry
 				
 				function config1.onDotsActivated()

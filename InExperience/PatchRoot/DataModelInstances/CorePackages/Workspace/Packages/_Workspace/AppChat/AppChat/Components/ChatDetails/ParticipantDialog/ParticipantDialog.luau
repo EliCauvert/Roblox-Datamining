@@ -19,7 +19,6 @@ local InputSize = FoundationModule.Enums.InputSize
 local FocusNavigableSurfaceIdentifierEnum = FocusNavigationUtilsModule.FocusNavigableSurfaceIdentifierEnum
 local FocusNavigationEventNameEnum = FocusNavigationUtilsModule.FocusNavigationEventNameEnum
 local UseAppFocusRootFunction = FocusNavigationUtilsModule.useAppFocusRoot
-local FFlagAppChatParticipantDialogGamepadFocusModule = require(AppChat.Flags.FFlagAppChatParticipantDialogGamepadFocus)
 local _UDim = UDim.new(0, 400)
 local config = {
 	conversationId = nil,
@@ -64,7 +63,7 @@ local config = {
 }
 
 function ParticipantDialog(p1)
-	-- upvalues: CryoModule (copy), config (copy), UseTelemetryModule (copy), ChatDialogTelemetryLayerModule (copy), ReactModule (copy), UseLayerCollectorFunction (copy), FFlagAppChatParticipantDialogGamepadFocusModule (copy), FocusNavigationEventNameEnum (copy), InputHandlersModule (copy), UseAppFocusRootFunction (copy), FocusNavigableSurfaceIdentifierEnum (copy), LoggerModule (copy), ChatDetailsTelemetryEventsModule (copy), PopoverSide (copy), Menu (copy), PopoverAlign (copy), InputSize (copy), _UDim (copy), FoundationModule (copy)
+	-- upvalues: CryoModule (copy), config (copy), UseTelemetryModule (copy), ChatDialogTelemetryLayerModule (copy), ReactModule (copy), UseLayerCollectorFunction (copy), FocusNavigationEventNameEnum (copy), InputHandlersModule (copy), UseAppFocusRootFunction (copy), FocusNavigableSurfaceIdentifierEnum (copy), LoggerModule (copy), ChatDetailsTelemetryEventsModule (copy), PopoverSide (copy), Menu (copy), PopoverAlign (copy), InputSize (copy), _UDim (copy), FoundationModule (copy)
 	local JoinResult = CryoModule.Dictionary.join(config, p1)
 	local UseTelemetryModuleResult = UseTelemetryModule(ChatDialogTelemetryLayerModule.Context)
 	local UseRefResult = ReactModule.useRef(nil)
@@ -83,7 +82,7 @@ function ParticipantDialog(p1)
 		OnDismiss()
 	end
 	
-	local UseAppFocusRootResult = if FFlagAppChatParticipantDialogGamepadFocusModule then UseAppFocusRootFunction({
+	local UseAppFocusRootResult = UseAppFocusRootFunction({
 		surfaceIdentifier = FocusNavigableSurfaceIdentifierEnum.ContextualMenu,
 		isFocusable = UseStateResult,
 		customEventHandlers = {
@@ -96,7 +95,7 @@ function ParticipantDialog(p1)
 				end)
 			}
 		}
-	}) else nil
+	})
 	local UseRefResult1 = ReactModule.useRef(false)
 	local List = {}
 	
@@ -121,7 +120,7 @@ function ParticipantDialog(p1)
 	end
 	
 	if JoinResult.showViewProfileButton then
-		local function v39()
+		local function v38()
 			-- upvalues: LoggerModule (upval), ParticipantId (copy), JoinResult (copy)
 			LoggerModule:info("User activated viewProfile | userId: {}", ParticipantId)
 			JoinResult.openViewProfile(ParticipantId)
@@ -131,6 +130,29 @@ function ParticipantDialog(p1)
 			isDisabled = nil,
 			text = JoinResult.viewProfileText,
 			onActivated = function()
+				-- upvalues: UseRefResult1 (copy), UseStateResult2 (copy), v38 (copy)
+				if UseRefResult1.current then return end
+				UseRefResult1.current = true
+				UseStateResult2(false)
+				
+				if v38 then
+					v38()
+				end
+			end
+		})
+	end
+	if JoinResult.showTrustedFriendButton then
+		local function v39()
+			-- upvalues: LoggerModule (upval), ParticipantId (copy), JoinResult (copy)
+			LoggerModule:info("User activated openTrustedFriend | userId: {}", ParticipantId)
+			JoinResult.openTrustedFriend(ParticipantId)
+		end
+		
+		local IsTrustedFriendButtonDisabled = JoinResult.isTrustedFriendButtonDisabled
+		table.insert(List, {
+			text = JoinResult.trustedFriendText,
+			isDisabled = IsTrustedFriendButtonDisabled,
+			onActivated = if IsTrustedFriendButtonDisabled then onDisabledActivated else function()
 				-- upvalues: UseRefResult1 (copy), UseStateResult2 (copy), v39 (copy)
 				if UseRefResult1.current then return end
 				UseRefResult1.current = true
@@ -142,31 +164,8 @@ function ParticipantDialog(p1)
 			end
 		})
 	end
-	if JoinResult.showTrustedFriendButton then
-		local function v40()
-			-- upvalues: LoggerModule (upval), ParticipantId (copy), JoinResult (copy)
-			LoggerModule:info("User activated openTrustedFriend | userId: {}", ParticipantId)
-			JoinResult.openTrustedFriend(ParticipantId)
-		end
-		
-		local IsTrustedFriendButtonDisabled = JoinResult.isTrustedFriendButtonDisabled
-		table.insert(List, {
-			text = JoinResult.trustedFriendText,
-			isDisabled = IsTrustedFriendButtonDisabled,
-			onActivated = if IsTrustedFriendButtonDisabled then onDisabledActivated else function()
-				-- upvalues: UseRefResult1 (copy), UseStateResult2 (copy), v40 (copy)
-				if UseRefResult1.current then return end
-				UseRefResult1.current = true
-				UseStateResult2(false)
-				
-				if v40 then
-					v40()
-				end
-			end
-		})
-	end
 	if JoinResult.showChatButton then
-		local function v42()
+		local function v41()
 			-- upvalues: LoggerModule (upval), ParticipantId (copy), UseTelemetryModuleResult (copy), ChatDetailsTelemetryEventsModule (upval), JoinResult (copy)
 			LoggerModule:info("User activated openChat | userId: {}", ParticipantId)
 			UseTelemetryModuleResult.emit(ChatDetailsTelemetryEventsModule.ParticipantDialogChatClicked, {})
@@ -177,18 +176,18 @@ function ParticipantDialog(p1)
 			isDisabled = nil,
 			text = JoinResult.chatText,
 			onActivated = function()
-				-- upvalues: UseRefResult1 (copy), UseStateResult2 (copy), v42 (copy)
+				-- upvalues: UseRefResult1 (copy), UseStateResult2 (copy), v41 (copy)
 				if UseRefResult1.current then return end
 				UseRefResult1.current = true
 				UseStateResult2(false)
 				
-				if v42 then
-					v42()
+				if v41 then
+					v41()
 				end
 			end
 		})
 	end
-	local function v43()
+	local function v42()
 		-- upvalues: LoggerModule (upval), ParticipantId (copy), ConversationId (copy), UseTelemetryModuleResult (copy), ChatDetailsTelemetryEventsModule (upval), JoinResult (copy)
 		LoggerModule:info("User activated reportUser | userId: {}, conversationId: {}", ParticipantId, ConversationId)
 		UseTelemetryModuleResult.emit(ChatDetailsTelemetryEventsModule.ParticipantDialogReportUserClicked, {})
@@ -199,19 +198,19 @@ function ParticipantDialog(p1)
 		isDisabled = nil,
 		text = JoinResult.reportUserText,
 		onActivated = function()
-			-- upvalues: UseRefResult1 (copy), UseStateResult2 (copy), v43 (copy)
+			-- upvalues: UseRefResult1 (copy), UseStateResult2 (copy), v42 (copy)
 			if UseRefResult1.current then return end
 			UseRefResult1.current = true
 			UseStateResult2(false)
 			
-			if v43 then
-				v43()
+			if v42 then
+				v42()
 			end
 		end
 	})
 	
 	if ShowRemoveUserButton then
-		local function v44()
+		local function v43()
 			-- upvalues: JoinResult (copy), ParticipantId (copy), ConversationId (copy)
 			JoinResult.openRemoveUserDialog(ParticipantId, ConversationId)
 		end
@@ -220,13 +219,13 @@ function ParticipantDialog(p1)
 			isDisabled = nil,
 			text = JoinResult.removeFromGroupText,
 			onActivated = function()
-				-- upvalues: UseRefResult1 (copy), UseStateResult2 (copy), v44 (copy)
+				-- upvalues: UseRefResult1 (copy), UseStateResult2 (copy), v43 (copy)
 				if UseRefResult1.current then return end
 				UseRefResult1.current = true
 				UseStateResult2(false)
 				
-				if v44 then
-					v44()
+				if v43 then
+					v43()
 				end
 			end
 		})
@@ -237,7 +236,7 @@ function ParticipantDialog(p1)
 		isOpen = UseStateResult,
 		items = List,
 		onPressedOutside = OnPressedOutside,
-		ref = if FFlagAppChatParticipantDialogGamepadFocusModule then UseAppFocusRootResult else nil,
+		ref = UseAppFocusRootResult,
 		side = if UnitTestScreenSize.Y / 2 < AnchorRef.current.AbsolutePosition.Y + AnchorRef.current.AbsoluteSize.Y / 2 then PopoverSide.Top else PopoverSide.Bottom,
 		size = InputSize.Medium,
 		width = if JoinResult.isWideMode then _UDim else nil
@@ -256,7 +255,7 @@ function ParticipantDialog(p1)
 			isOpen = UseStateResult,
 			items = List,
 			onPressedOutside = OnPressedOutside,
-			ref = if FFlagAppChatParticipantDialogGamepadFocusModule then UseAppFocusRootResult else nil,
+			ref = UseAppFocusRootResult,
 			side = PopoverSide.Top,
 			size = InputSize.Medium,
 			width = if JoinResult.isWideMode then _UDim else nil

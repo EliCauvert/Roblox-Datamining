@@ -12,12 +12,15 @@ local PlaceVersionHistoryModule = require(Parent.DataHydration.PlaceVersionHisto
 local UniverseConfigurationModule = require(Parent.DataHydration.UniverseConfiguration)
 local UniverseActivationModule = require(Parent.DataHydration.UniverseActivation)
 local LocalizationStringsModule = require(BuildExperience.LocalizationStrings)
+local FFlagBuildPostPublishShareDismissibleModule = require(BuildExperience.Flags.FFlagBuildPostPublishShareDismissible)
 local FriendsOnlyShareDialogModule = require(BuildExperience.Components.ShareAudience.FriendsOnlyShareDialog)
 local ContentMaturityUtilsModule = require(BuildExperience.utils.ContentMaturityUtils)
 local GameConfigurationActionsModule = require(BuildExperience.utils.GameConfigurationActions)
 local GameConfigurationLabelsModule = require(BuildExperience.utils.GameConfigurationLabels)
 local RefreshPublishEligibilityModule = require(BuildExperience.utils.refreshPublishEligibility)
 local GetVersionInformationStoreModule = require(BuildExperience.Stores.GetVersionInformationStore)
+local UseGamePermissionsModule = require(BuildExperience.useGamePermissions)
+local FFlagBuildCheckGamePermissionsModule = require(BuildExperience.Flags.FFlagBuildCheckGamePermissions)
 local Button = FoundationModule.Button
 local Snackbar = FoundationModule.Snackbar
 local View = FoundationModule.View
@@ -126,7 +129,7 @@ local function PreviewButton(p1)
 end
 
 return function(p1)
-	-- upvalues: UseLocalizationFunction (copy), LocalizationStringsModule (copy), UseSharePublishedExperienceFunction (copy), SignalsReactModule (copy), PlaceVersionHistoryModule (copy), UniverseConfigurationModule (copy), ReactModule (copy), GameConfigurationLabelsModule (copy), UniverseActivationModule (copy), ContentMaturityUtilsModule (copy), UseOpenWebViewFunction (copy), PrivacyType (copy), FFlagEnableShareSheet (copy), FFlagShareSheetFriendsSort (copy), UniversalShareSheet (copy), SharePublishedExperienceFunction (copy), GameConfigurationActionsModule (copy), RefreshPublishEligibilityModule (copy), GetVersionInformationStoreModule (copy), SendBuildExperienceEventModule (copy), GetAdUpsellEventStoreModule (copy), FFlagBuildAdUpsellModule (copy), buildPublicAudiences (copy), ExperienceGuidelinesModule (copy), t (copy), Debug (copy), FFlagBuildExperiencePlaytestCardPublishCtaModule (copy), Snackbar (copy), View (copy), FFlagBuildPublishNavigationSheetModule (copy), Button (copy), InputSize (copy), ButtonVariant (copy), FillBehavior (copy), PreviewButton (copy), FriendsOnlyShareDialogModule (copy)
+	-- upvalues: UseLocalizationFunction (copy), LocalizationStringsModule (copy), UseSharePublishedExperienceFunction (copy), SignalsReactModule (copy), PlaceVersionHistoryModule (copy), UniverseConfigurationModule (copy), ReactModule (copy), GameConfigurationLabelsModule (copy), UniverseActivationModule (copy), ContentMaturityUtilsModule (copy), UseOpenWebViewFunction (copy), PrivacyType (copy), FFlagEnableShareSheet (copy), FFlagShareSheetFriendsSort (copy), UniversalShareSheet (copy), SharePublishedExperienceFunction (copy), GameConfigurationActionsModule (copy), RefreshPublishEligibilityModule (copy), GetVersionInformationStoreModule (copy), SendBuildExperienceEventModule (copy), GetAdUpsellEventStoreModule (copy), FFlagBuildAdUpsellModule (copy), buildPublicAudiences (copy), ExperienceGuidelinesModule (copy), t (copy), Debug (copy), FFlagBuildExperiencePlaytestCardPublishCtaModule (copy), FFlagBuildCheckGamePermissionsModule (copy), UseGamePermissionsModule (copy), Snackbar (copy), FFlagBuildPostPublishShareDismissibleModule (copy), View (copy), FFlagBuildPublishNavigationSheetModule (copy), Button (copy), InputSize (copy), ButtonVariant (copy), FillBehavior (copy), PreviewButton (copy), FriendsOnlyShareDialogModule (copy)
 	local UseLocalizationResult = UseLocalizationFunction({
 		accountTooNewError = LocalizationStringsModule.GAME_CONFIGURATION_PUBLISH_ACCOUNT_TOO_NEW_ERROR,
 		creatorHub = LocalizationStringsModule.GAME_CONFIGURATION_CREATOR_HUB,
@@ -428,11 +431,16 @@ return function(p1)
 		PublishSuccess
 	})
 	local ActionsName: string = `{p1.testId}.actions`
+	local UseGamePermissionsModuleResult = if FFlagBuildCheckGamePermissionsModule then UseGamePermissionsModule({
+		universeId = p1.target.universeId,
+		isNewGame = p1.target.isNewGameTarget
+	}) else nil
+	local NoFFlagBuildCheckGamePermissionsModule = not FFlagBuildCheckGamePermissionsModule or UseGamePermissionsModuleResult.canPublish
 	local Element = ReactModule.createElement(Snackbar, {
 		LayoutOrder = 1,
 		title = UseStateResult1,
 		action = if IsNotAudienceMatch then { text = Share, onActivated = UseResult2 } else nil,
-		onClose = if IsNotAudienceMatch then nil else UseResult,
+		onClose = if FFlagBuildPostPublishShareDismissibleModule then UseResult elseif IsNotAudienceMatch then nil else UseResult,
 		testId = `{p1.testId}.publish-snackbar`
 	})
 	
@@ -458,7 +466,7 @@ return function(p1)
 				size = InputSize.Medium,
 				variant = ButtonVariant.Emphasis,
 				fillBehavior = FillBehavior.Fill,
-				isDisabled = p1.target.placeId == nil,
+				isDisabled = p1.target.placeId == nil or not NoFFlagBuildCheckGamePermissionsModule,
 				isLoading = UseStateResult,
 				onActivated = if UseMemoResult then UseResult4 else UseResult5,
 				width = UDim.new(1, 0),

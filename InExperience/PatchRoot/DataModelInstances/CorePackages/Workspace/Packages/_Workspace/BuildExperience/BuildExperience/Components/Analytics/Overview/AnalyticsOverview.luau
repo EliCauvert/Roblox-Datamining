@@ -2,11 +2,13 @@
 local ReactModule = require(BuildExperience.Parent.React)
 local _ = require(BuildExperience.Analytics.AnalyticsMetric)
 local AnalyticsWindowModule = require(BuildExperience.Analytics.AnalyticsWindow)
+local FFlagBuildCheckGamePermissionsModule = require(BuildExperience.Flags.FFlagBuildCheckGamePermissions)
 local AnalyticsOverviewViewModule = require(script.Parent.AnalyticsOverviewView)
 local UseAnalyticsOverviewViewModelModule = require(script.Parent.useAnalyticsOverviewViewModel)
+local UseGamePermissionsModule = require(BuildExperience.useGamePermissions)
 
 return function(p1)
-	-- upvalues: ReactModule (copy), AnalyticsWindowModule (copy), UseAnalyticsOverviewViewModelModule (copy), AnalyticsOverviewViewModule (copy)
+	-- upvalues: ReactModule (copy), AnalyticsWindowModule (copy), UseAnalyticsOverviewViewModelModule (copy), FFlagBuildCheckGamePermissionsModule (copy), UseGamePermissionsModule (copy), AnalyticsOverviewViewModule (copy)
 	local UseStateResult, UseStateResult2 = ReactModule.useState(p1.initialWindowId or AnalyticsWindowModule.DEFAULT_WINDOW_ID)
 	local UseStateResult1, UseStateResult2_1 = ReactModule.useState(nil)
 	local WindowByIdEntry = AnalyticsWindowModule.WindowById[UseStateResult] or AnalyticsWindowModule.LastWeek
@@ -27,7 +29,7 @@ return function(p1)
 			-- upvalues: UseStateResult2_1 (copy)
 			UseStateResult2_1(nil)
 		end, {}),
-		onOpenChat = p1.onOpenChat,
+		onOpenChat = if FFlagBuildCheckGamePermissionsModule and not UseGamePermissionsModule({ universeId = p1.universeId }).canEditOnBuild then nil else p1.onOpenChat,
 		layoutOrder = p1.layoutOrder,
 		testId = p1.testId
 	})

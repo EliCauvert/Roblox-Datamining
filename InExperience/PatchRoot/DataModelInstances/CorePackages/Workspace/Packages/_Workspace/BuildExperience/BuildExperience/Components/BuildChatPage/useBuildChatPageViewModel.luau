@@ -30,6 +30,8 @@ local GetAdUpsellEventStoreModule = if FFlagBuildAdUpsellModule then require(Bui
 local GameConfigurationLabelsModule = if FFlagBuildAdUpsellModule or FFlagEnableBuildAdPromotionModule then require(BuildExperience.utils.GameConfigurationLabels) else nil
 local UseAdUpsellChatViewModelModule = if FFlagBuildAdUpsellModule then require(script.Parent.useAdUpsellChatViewModel) else nil
 local FFlagBuildExperienceFocusNewGameComposerModule = require(BuildExperience.Flags.FFlagBuildExperienceFocusNewGameComposer)
+local FFlagBuildCheckGamePermissionsModule = require(BuildExperience.Flags.FFlagBuildCheckGamePermissions)
+local UseGamePermissionsModule = require(BuildExperience.useGamePermissions)
 local FFlagBuildEventsUpdate1Module = require(BuildExperience.Flags.FFlagBuildEventsUpdate1)
 local FFlagBuildExperiencePlaytestCardPublishCtaModule = require(BuildExperience.Flags.FFlagBuildExperiencePlaytestCardPublishCta)
 local FFlagBuildExperienceDontAskAgainPushUpsellModule = require(BuildExperience.Flags.FFlagBuildExperienceDontAskAgainPushUpsell)
@@ -129,7 +131,7 @@ local _ = function(p1, p2)
 end
 
 return function(p1)
-	-- upvalues: UseTokensFunction (copy), useUniverseSummary (copy), GetBuildOverflowMenuStoreModule (copy), GetCreatorAgentResumeStoreModule (copy), ReactModule (copy), FFlagBuildExperienceDontAskAgainPushUpsellModule (copy), BuildAppStorageKeyEngineFeature (copy), BuildAppStorageModule (copy), UserInputService (copy), GuiService (copy), PermissionsProtocol (copy), MessageBusService (copy), RealtimeMessageId (copy), Default (copy), CreatorAgentChatModule (copy), FFlagBuildAdUpsellModule (copy), GetAdUpsellEventStoreModule (copy), UseChatSessionCoreModule (copy), FFlagBuildExperienceFocusNewGameComposerModule (copy), FFlagBuildExperienceAnalytics (copy), FFlagBuildExperienceMonetizationNativeUIModule (copy), UseBuildPromptDraftModule (copy), FFlagBuildExperienceDeveloperProductContextModule (copy), FFlagBuildExperienceManageDevProductModule (copy), UseChatPlaytestFooterModule (copy), UniverseConfigurationModule (copy), FFlagEnableBuildAdPromotionModule (copy), UseCreatorCreditChatUpsellViewModelModule (copy), GameConfigurationLabelsModule (copy), FFlagBuildExperienceLibrary (copy), getResolvedSessionId (copy), UseAdUpsellChatViewModelModule (copy), config1 (copy), FFlagBuildAgentAdCampaignCardModule (copy), UseAgentAdCampaignChatViewModelModule (copy), config2 (copy), FFlagBuildExperiencePlaytestCardPublishCtaModule (copy), SendBuildExperienceEventModule (copy), FFlagBuildEventsUpdate1Module (copy), config (copy), FFlagBuildExperienceAnswerFormModule (copy)
+	-- upvalues: UseTokensFunction (copy), useUniverseSummary (copy), GetBuildOverflowMenuStoreModule (copy), GetCreatorAgentResumeStoreModule (copy), ReactModule (copy), FFlagBuildExperienceDontAskAgainPushUpsellModule (copy), BuildAppStorageKeyEngineFeature (copy), BuildAppStorageModule (copy), UserInputService (copy), GuiService (copy), PermissionsProtocol (copy), MessageBusService (copy), RealtimeMessageId (copy), Default (copy), FFlagBuildCheckGamePermissionsModule (copy), UseGamePermissionsModule (copy), CreatorAgentChatModule (copy), FFlagBuildAdUpsellModule (copy), GetAdUpsellEventStoreModule (copy), UseChatSessionCoreModule (copy), FFlagBuildExperienceFocusNewGameComposerModule (copy), FFlagBuildExperienceAnalytics (copy), FFlagBuildExperienceMonetizationNativeUIModule (copy), UseBuildPromptDraftModule (copy), FFlagBuildExperienceDeveloperProductContextModule (copy), FFlagBuildExperienceManageDevProductModule (copy), UseChatPlaytestFooterModule (copy), UniverseConfigurationModule (copy), FFlagEnableBuildAdPromotionModule (copy), UseCreatorCreditChatUpsellViewModelModule (copy), GameConfigurationLabelsModule (copy), FFlagBuildExperienceLibrary (copy), getResolvedSessionId (copy), UseAdUpsellChatViewModelModule (copy), config1 (copy), FFlagBuildAgentAdCampaignCardModule (copy), UseAgentAdCampaignChatViewModelModule (copy), config2 (copy), FFlagBuildExperiencePlaytestCardPublishCtaModule (copy), SendBuildExperienceEventModule (copy), FFlagBuildEventsUpdate1Module (copy), config (copy), FFlagBuildExperienceAnswerFormModule (copy)
 	local UseTokensResult = UseTokensFunction()
 	local UseUniverseSummaryResult = useUniverseSummary(p1.target.universeId)
 	local BuildOverflowMenuStoreModule = GetBuildOverflowMenuStoreModule()
@@ -239,6 +241,25 @@ return function(p1)
 	end, {})
 	local Largest: number = if UseStateResult9 <= 0 or UseStateResult10 <= 0 then 0 else math.max(0, UseStateResult10 - UseStateResult9)
 	local IsIsNewGameTarget = p1.target.isNewGameTarget == true
+	local ChatPermissions = nil
+	local NoCanEditOnBuild = false
+	local v1 = false
+	local NoCanEdit = false
+	local NoCanPreview = false
+	local NoCanAdvertise = false
+	
+	if FFlagBuildCheckGamePermissionsModule then
+		local UseGamePermissionsModuleResult, UseGamePermissionsModuleResult2 = UseGamePermissionsModule({
+			universeId = p1.target.universeId,
+			isNewGame = IsIsNewGameTarget
+		})
+		ChatPermissions = UseGamePermissionsModuleResult
+		NoCanEditOnBuild = not UseGamePermissionsModuleResult.canEditOnBuild
+		v1 = UseGamePermissionsModuleResult2
+		NoCanEdit = not UseGamePermissionsModuleResult.canEdit
+		NoCanPreview = not UseGamePermissionsModuleResult.canPreview
+		NoCanAdvertise = not UseGamePermissionsModuleResult.canAdvertise
+	end
 	local UseMemoResult = ReactModule.useMemo(function()
 		-- upvalues: p1 (copy), UseUniverseSummaryResult (copy)
 		local ExperienceName = p1.target.experienceName
@@ -302,7 +323,8 @@ return function(p1)
 			if AdUpsellEventStoreModule ~= nil then
 				AdUpsellEventStoreModule.reportAssistantTurnCompleted(p2)
 			end
-		end, { AdUpsellEventStoreModule }) else nil
+		end, { AdUpsellEventStoreModule }) else nil,
+		sendMessageWhen = not NoCanEditOnBuild
 	})
 	
 	if FFlagBuildExperienceAnalytics then
@@ -528,7 +550,7 @@ return function(p1)
 				p1.onOpenLibrary(ResolvedSessionId)
 			end
 		end, { UseResult8, p1.onOpenLibrary, ResolvedSessionId }),
-		isLibraryDisabled = FFlagBuildExperienceLibrary and p1.target.universeId == nil,
+		isLibraryDisabled = FFlagBuildExperienceLibrary and (p1.target.universeId == nil or NoCanEdit),
 		onOverflowMenuAction = UseResult13,
 		onPlayActivated = ReactModule.useCallback(function()
 			-- upvalues: SendBuildExperienceEventModule (upval), FFlagBuildEventsUpdate1Module (upval), p1 (copy), UseChatSessionCoreModuleResult (copy)
@@ -562,6 +584,7 @@ return function(p1)
 		onPlaytest = BuildChatPlaytestCta.onPlaytest,
 		onPublish = if p1.onOpenConfigurationPage == nil then nil else UseResult14,
 		isPlaytestLoading = BuildChatPlaytestCta.isPlaytestLoading,
+		isPlaytestDisabled = NoCanPreview,
 		showPushNotificationsUpsell = if BuildAppStorageKeyEngineFeature then UseStateResult8 and NoUseStateResult7 else NoUseStateResult7,
 		isPushNotificationsRequestPending = UseStateResult5,
 		shouldOpenPushNotificationsSettings = UseStateResult6,
@@ -579,6 +602,7 @@ return function(p1)
 		adUpsellCongratsAnchorIndex = UseAdUpsellChatViewModelModuleResult.adUpsellCongratsAnchorIndex,
 		adUpsellFreePromotionsRemaining = UseAdUpsellChatViewModelModuleResult.adUpsellFreePromotionsRemaining,
 		isAdUpsellCreatePending = UseAdUpsellChatViewModelModuleResult.isAdUpsellCreatePending,
+		isAdUpsellCreateDisabled = NoCanAdvertise,
 		isAdCampaignSheetOpen = UseAdUpsellChatViewModelModuleResult.isAdCampaignSheetOpen,
 		hasAdCampaignCreateError = UseAdUpsellChatViewModelModuleResult.hasAdCampaignCreateError,
 		adCampaignCreateErrorKind = UseAdUpsellChatViewModelModuleResult.adCampaignCreateErrorKind,
@@ -602,14 +626,14 @@ return function(p1)
 		agentAdCampaignRunStartTimeMs = UseAgentAdCampaignChatViewModelModuleResult.runStartTimeMs,
 		onAgentAdCampaignOfferSelected = UseAgentAdCampaignChatViewModelModuleResult.onOfferSelected,
 		getAgentAdCampaignCardState = UseAgentAdCampaignChatViewModelModuleResult.getCardState,
-		isAgentAdCampaignCreateDisabled = UseAgentAdCampaignChatViewModelModuleResult.isCreateDisabled,
+		isAgentAdCampaignCreateDisabled = if NoCanAdvertise then config2.isCreateDisabled else UseAgentAdCampaignChatViewModelModuleResult.isCreateDisabled,
 		agentAdCampaignAttemptedOption = UseAgentAdCampaignChatViewModelModuleResult.attemptedOption,
-		onAgentAdCampaignActive = UseResult12,
+		onAgentAdCampaignActive = if NoCanAdvertise then nil else UseResult12,
 		onAgentAdCampaignSheetClose = UseAgentAdCampaignChatViewModelModuleResult.onSheetClose,
 		onAgentAdCampaignSheetCreate = UseAgentAdCampaignChatViewModelModuleResult.onSheetCreate,
 		isAdUpsellVisible = p1.isFocused ~= false,
 		isChatEmpty = IsChatEmpty,
-		isHistoryLoading = UseChatSessionCoreModuleResult.isHistoryLoading,
+		isHistoryLoading = UseChatSessionCoreModuleResult.isHistoryLoading or v1,
 		isNewGameTarget = IsIsNewGameTarget,
 		hasPublishedTurn = UseChatSessionCoreModuleResult.hasPublishedTurn,
 		hasPublishedVersion = UseUniverseSummaryResult ~= nil and UseUniverseSummaryResult.isActive,
@@ -632,6 +656,8 @@ return function(p1)
 		isAssistantResponding = UseChatSessionCoreModuleResult.isAssistantResponding,
 		canStopAssistantResponse = UseChatSessionCoreModuleResult.canStopAssistantResponse,
 		canSendWhileResponding = UseChatSessionCoreModuleResult.canSendWhileResponding,
+		isChatReadOnly = NoCanEditOnBuild,
+		chatPermissions = ChatPermissions,
 		onSend = UseChatSessionCoreModuleResult.sendMessage,
 		onStop = UseChatSessionCoreModuleResult.stopAssistantResponse,
 		statusChipGap = UseTokensResult.Gap.Small,

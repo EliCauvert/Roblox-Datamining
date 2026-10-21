@@ -8,6 +8,8 @@ local LuaAppCoachmarkImpression = game:DefineFastFlag("LuaAppCoachmarkImpression
 local LuaAppHideSduiCoachmarkWhenFlyoutOpen = game:DefineFastFlag("LuaAppHideSduiCoachmarkWhenFlyoutOpen", false)
 local LuaAppHideSduiCoachmarkWhenCentralOverlayOpen = game:DefineFastFlag("LuaAppHideSduiCoachmarkWhenCentralOverlayOpen", false)
 local LuaAppHideSduiCoachmarkWhenNotificationStreamOpen = game:DefineFastFlag("LuaAppHideSduiCoachmarkWhenNotificationStreamOpen", false)
+local FFlagEnableOnScreenAPIIntegration = require(Parent.SharedFlags).FFlagEnableOnScreenAPIIntegration
+local UseIsRouteOnScreenFunction = require(Parent.RobloxAppNavigation).useIsRouteOnScreen
 local Coachmark = require(Parent.Foundation).Coachmark
 local UseNavigationFocusFunction = require(Parent.Navigation).useNavigationFocus
 local UseDrawerVisibleFunction = require(Parent.Drawer).Hooks.useDrawerVisible
@@ -17,11 +19,11 @@ local StreamNotificationStore = require(Parent.StreamNotifications).StreamNotifi
 local CollectionService = game:GetService("CollectionService")
 
 return ReactModule.memo(function(p1)
-	-- upvalues: ReactModule (copy), LuaAppUseNavFocusInSduiCoachmark (copy), UseNavigationFocusFunction (copy), LuaAppHideSduiCoachmarkWhenFlyoutOpen (copy), UseDrawerVisibleFunction (copy), LuaAppHideSduiCoachmarkWhenCentralOverlayOpen (copy), UseSelectorFunction (copy), LuaAppHideSduiCoachmarkWhenNotificationStreamOpen (copy), UseSignalStateFunction (copy), StreamNotificationStore (copy), CollectionService (copy), LuaAppCoachmarkImpression (copy), FFlagPromptsCoachmarkImpressionOnShow (copy), SendCoachmarkImpressionModule (copy), Coachmark (copy)
+	-- upvalues: ReactModule (copy), LuaAppUseNavFocusInSduiCoachmark (copy), FFlagEnableOnScreenAPIIntegration (copy), UseIsRouteOnScreenFunction (copy), UseNavigationFocusFunction (copy), LuaAppHideSduiCoachmarkWhenFlyoutOpen (copy), UseDrawerVisibleFunction (copy), LuaAppHideSduiCoachmarkWhenCentralOverlayOpen (copy), UseSelectorFunction (copy), LuaAppHideSduiCoachmarkWhenNotificationStreamOpen (copy), UseSignalStateFunction (copy), StreamNotificationStore (copy), CollectionService (copy), LuaAppCoachmarkImpression (copy), FFlagPromptsCoachmarkImpressionOnShow (copy), SendCoachmarkImpressionModule (copy), Coachmark (copy)
 	local UseRefResult = ReactModule.useRef(nil)
 	local UseStateResult, UseStateResult2 = ReactModule.useState(false)
 	local UseStateResult1, UseStateResult2_1 = ReactModule.useState(false)
-	local UseNavigationFocusResult = if LuaAppUseNavFocusInSduiCoachmark then UseNavigationFocusFunction() else nil
+	local UseIsRouteOnScreenResult = if LuaAppUseNavFocusInSduiCoachmark and FFlagEnableOnScreenAPIIntegration then UseIsRouteOnScreenFunction() elseif LuaAppUseNavFocusInSduiCoachmark then UseNavigationFocusFunction() else nil
 	local UseDrawerVisibleResult = if LuaAppHideSduiCoachmarkWhenFlyoutOpen then UseDrawerVisibleFunction() else false
 	local UseSelectorResult = if LuaAppHideSduiCoachmarkWhenCentralOverlayOpen then UseSelectorFunction(function(p2): boolean
 		return p2.CentralOverlay.OverlayType ~= nil
@@ -75,7 +77,7 @@ return ReactModule.memo(function(p1)
 	
 	if LuaAppCoachmarkImpression or FFlagPromptsCoachmarkImpressionOnShow then
 		local UseRefResult1 = ReactModule.useRef(false)
-		local Inverted: boolean = UseStateResult1 and (not UseStateResult and (not (LuaAppUseNavFocusInSduiCoachmark and not UseNavigationFocusResult) and (not (LuaAppHideSduiCoachmarkWhenFlyoutOpen and UseDrawerVisibleResult) and (not (LuaAppHideSduiCoachmarkWhenCentralOverlayOpen and UseSelectorResult) and not (LuaAppHideSduiCoachmarkWhenNotificationStreamOpen and UseSignalStateResult)))))
+		local Inverted: boolean = UseStateResult1 and (not UseStateResult and (not (LuaAppUseNavFocusInSduiCoachmark and not UseIsRouteOnScreenResult) and (not (LuaAppHideSduiCoachmarkWhenFlyoutOpen and UseDrawerVisibleResult) and (not (LuaAppHideSduiCoachmarkWhenCentralOverlayOpen and UseSelectorResult) and not (LuaAppHideSduiCoachmarkWhenNotificationStreamOpen and UseSignalStateResult)))))
 		ReactModule.useEffect(function()
 			-- upvalues: Inverted (copy), UseRefResult1 (copy), FFlagPromptsCoachmarkImpressionOnShow (upval), p1 (copy), LuaAppCoachmarkImpression (upval), SendCoachmarkImpressionModule (upval)
 			if not Inverted or UseRefResult1.current then return end
@@ -97,7 +99,7 @@ return ReactModule.memo(function(p1)
 		if not Inverted then
 			return nil
 		end
-	elseif not UseStateResult1 or UseStateResult or LuaAppUseNavFocusInSduiCoachmark and not UseNavigationFocusResult or LuaAppHideSduiCoachmarkWhenFlyoutOpen and UseDrawerVisibleResult or LuaAppHideSduiCoachmarkWhenCentralOverlayOpen and UseSelectorResult or LuaAppHideSduiCoachmarkWhenNotificationStreamOpen and UseSignalStateResult then
+	elseif not UseStateResult1 or UseStateResult or LuaAppUseNavFocusInSduiCoachmark and not UseIsRouteOnScreenResult or LuaAppHideSduiCoachmarkWhenFlyoutOpen and UseDrawerVisibleResult or LuaAppHideSduiCoachmarkWhenCentralOverlayOpen and UseSelectorResult or LuaAppHideSduiCoachmarkWhenNotificationStreamOpen and UseSignalStateResult then
 		return nil
 	end
 	return ReactModule.createElement(Coachmark, {

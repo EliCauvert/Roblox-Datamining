@@ -1,9 +1,11 @@
-﻿local Parent = script:FindFirstAncestor("FriendsCalling").Parent
+﻿local FriendsCalling = script:FindFirstAncestor("FriendsCalling")
+local Parent = FriendsCalling.Parent
 local FloatingWindowModule = require(Parent.FloatingWindow)
 local FoundationModule = require(Parent.Foundation)
 local ReactModule = require(Parent.React)
-local PlaceholderCollapsedModule = require(script.Parent.PlaceholderCollapsed)
-local PlaceholderExpandedModule = require(script.Parent.PlaceholderExpanded)
+local _ = require(FriendsCalling.Components.CallParticipant.CallParticipantCard)
+local CollapsedCallOverlayModule = require(script.Parent.CollapsedCallOverlay)
+local ExpandedCallOverlayModule = require(script.Parent.ExpandedCallOverlay)
 local ResolveGeometryModule = require(script.Parent.resolveGeometry)
 local ColorMode = FoundationModule.Enums.ColorMode
 local DeviceOrientationMode = require(Parent.RobloxAppEnums).DeviceOrientationMode
@@ -13,10 +15,13 @@ local UseDeviceInsetsFunction = require(Parent.Responsive).useDeviceInsets
 local UseDeviceOrientationFunction = require(Parent.RobloxAppHooks).useDeviceOrientation
 local UseTokensFunction = FoundationModule.Hooks.useTokens
 local _UDim2 = UDim2.fromOffset(120, 160)
+
+local function noop() end
+
 local Frozen = table.freeze({ Compact = "Compact", Expanded = "Expanded" })
 
 local function CallPipWindow(p1)
-	-- upvalues: UseTokensFunction (copy), UseDeviceInsetsFunction (copy), UseDeviceOrientationFunction (copy), DeviceOrientationMode (copy), ReactModule (copy), Frozen (copy), ResolveGeometryModule (copy), PlaceholderExpandedModule (copy), PlaceholderCollapsedModule (copy), FloatingWindowModule (copy), _UDim2 (copy)
+	-- upvalues: UseTokensFunction (copy), UseDeviceInsetsFunction (copy), UseDeviceOrientationFunction (copy), DeviceOrientationMode (copy), ReactModule (copy), Frozen (copy), ResolveGeometryModule (copy), ExpandedCallOverlayModule (copy), noop (copy), CollapsedCallOverlayModule (copy), FloatingWindowModule (copy), _UDim2 (copy)
 	local Host = p1.host
 	local UseTokensResult = UseTokensFunction()
 	local UseDeviceInsetsResult = UseDeviceInsetsFunction()
@@ -47,12 +52,24 @@ local function CallPipWindow(p1)
 		testId = "friends-calling-pip",
 		behavior = FloatingWindowModule.Behaviors.Contained,
 		boundsInsets = if IsUseStateResultMatch then ResolveGeometryModuleResult.expanded.boundsInsets else ResolveGeometryModuleResult.collapsed.boundsInsets,
-		children = if IsUseStateResultMatch then ReactModule.createElement(PlaceholderExpandedModule, {
+		children = if IsUseStateResultMatch then ReactModule.createElement(ExpandedCallOverlayModule, {
+			participant = p1.participant,
 			hasRoundedCorners = ResolveGeometryModuleResult.expanded.hasRoundedCorners,
+			isMicrophoneMuted = p1.isMicrophoneMuted,
 			onCollapse = UseResult2,
 			onDragInputTarget = UseResult,
+			onEndCall = noop,
+			onOpenChat = noop,
+			onToggleConversationAudio = noop,
+			onToggleMicrophone = noop,
 			topPadding = ResolveGeometryModuleResult.expanded.topPadding
-		}) else ReactModule.createElement(PlaceholderCollapsedModule, { onDragInputTarget = UseResult }),
+		}) else ReactModule.createElement(CollapsedCallOverlayModule, {
+			participant = p1.participant,
+			isMicrophoneMuted = p1.isMicrophoneMuted,
+			onDragInputTarget = UseResult,
+			onToggleConversationAudio = noop,
+			onToggleMicrophone = noop
+		}),
 		displayOrder = Host.displayOrder,
 		dragInputTarget = UseStateResult1,
 		draggable = not (IsUseStateResultMatch and IsNotUseDeviceOrientationResultMatch),

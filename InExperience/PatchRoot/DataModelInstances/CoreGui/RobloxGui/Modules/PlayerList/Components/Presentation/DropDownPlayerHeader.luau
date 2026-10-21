@@ -7,7 +7,9 @@ local CryoModule = require(CorePackages.Packages.Cryo)
 local FoundationModule = require(CorePackages.Packages.Foundation)
 local NormalizeFontFaceFunction = FoundationModule.Utility.normalizeFontFace
 local WithFoundationOrUIBloxStyleFunction = require(CorePackages.Workspace.Packages.CoreGuiCommon).withFoundationOrUIBloxStyle
-local WithLayoutValuesFunction = require(script.Parent.Parent.Connection.LayoutValues).WithLayoutValues
+local Parent = script.Parent.Parent
+local WithLayoutValuesFunction = require(Parent.Connection.LayoutValues).WithLayoutValues
+local FFlagPlayerListFixDropDownVerifiedBadgeSizeModule = require(Parent.Parent.Flags.FFlagPlayerListFixDropDownVerifiedBadgeSize)
 local UseVerifiedBadgeFunction = require(CorePackages.Workspace.Packages.UserProfiles).Hooks.useVerifiedBadge
 local SharedFlagsModule = require(CorePackages.Workspace.Packages.SharedFlags)
 local FFlagEnableVerifiedBadgeStore = SharedFlagsModule.FFlagEnableVerifiedBadgeStore
@@ -22,9 +24,9 @@ DropDownPlayerHeader.validateProps = TModule.strictInterface({
 })
 
 function DropDownPlayerHeader.render(p1)
-	-- upvalues: WithLayoutValuesFunction (copy), WithFoundationOrUIBloxStyleFunction (copy), FoundationFontFaceMigration (copy), FFlagEnableVerifiedBadgeStore (copy), UserLibModule (copy), CryoModule (copy), FFlagCoreUiMigrateUIBloxToFoundation (copy), RoactModule (copy), EmojiTextLabel (copy), Emoji (copy), NormalizeFontFaceFunction (copy)
+	-- upvalues: WithLayoutValuesFunction (copy), WithFoundationOrUIBloxStyleFunction (copy), FoundationFontFaceMigration (copy), FFlagEnableVerifiedBadgeStore (copy), UserLibModule (copy), CryoModule (copy), FFlagPlayerListFixDropDownVerifiedBadgeSizeModule (copy), FFlagCoreUiMigrateUIBloxToFoundation (copy), RoactModule (copy), EmojiTextLabel (copy), Emoji (copy), NormalizeFontFaceFunction (copy)
 	return WithLayoutValuesFunction(function(p2)
-		-- upvalues: WithFoundationOrUIBloxStyleFunction (upval), FoundationFontFaceMigration (upval), p1 (copy), FFlagEnableVerifiedBadgeStore (upval), UserLibModule (upval), CryoModule (upval), FFlagCoreUiMigrateUIBloxToFoundation (upval), RoactModule (upval), EmojiTextLabel (upval), Emoji (upval), NormalizeFontFaceFunction (upval)
+		-- upvalues: WithFoundationOrUIBloxStyleFunction (upval), FoundationFontFaceMigration (upval), p1 (copy), FFlagEnableVerifiedBadgeStore (upval), UserLibModule (upval), CryoModule (upval), FFlagPlayerListFixDropDownVerifiedBadgeSizeModule (upval), FFlagCoreUiMigrateUIBloxToFoundation (upval), RoactModule (upval), EmojiTextLabel (upval), Emoji (upval), NormalizeFontFaceFunction (upval)
 		return WithFoundationOrUIBloxStyleFunction(function(p3)
 			-- upvalues: FoundationFontFaceMigration (upval)
 			return {
@@ -63,9 +65,12 @@ function DropDownPlayerHeader.render(p1)
 				}
 			}
 		end, function(p3)
-			-- upvalues: p1 (upval), FFlagEnableVerifiedBadgeStore (upval), UserLibModule (upval), FoundationFontFaceMigration (upval), CryoModule (upval), FFlagCoreUiMigrateUIBloxToFoundation (upval), RoactModule (upval), p2 (copy), EmojiTextLabel (upval), Emoji (upval), NormalizeFontFaceFunction (upval)
+			-- upvalues: p1 (upval), FFlagEnableVerifiedBadgeStore (upval), UserLibModule (upval), FoundationFontFaceMigration (upval), CryoModule (upval), FFlagPlayerListFixDropDownVerifiedBadgeSizeModule (upval), FFlagCoreUiMigrateUIBloxToFoundation (upval), RoactModule (upval), p2 (copy), EmojiTextLabel (upval), Emoji (upval), NormalizeFontFaceFunction (upval)
 			local Player = p1.props.player
-			local JoinResult = if FoundationFontFaceMigration then CryoModule.Dictionary.join(p3.Font.Header2, { Font = p3.Tokens.Typography.TitleLarge.Font }) elseif FFlagCoreUiMigrateUIBloxToFoundation and p3.Font.Header2.FontSize then {
+			local JoinResult = if FoundationFontFaceMigration then CryoModule.Dictionary.join(p3.Font.Header2, {
+				Font = p3.Tokens.Typography.TitleLarge.Font,
+				RelativeSize = if FFlagPlayerListFixDropDownVerifiedBadgeSizeModule and FFlagCoreUiMigrateUIBloxToFoundation then CryoModule.None else nil
+			}) elseif FFlagCoreUiMigrateUIBloxToFoundation and p3.Font.Header2.FontSize then {
 				Font = p3.Font.Header2.Font,
 				FontSize = p3.Font.Header2.FontSize,
 				LineHeight = p3.Font.Header2.LineHeight,
@@ -172,9 +177,9 @@ function DropDownPlayerHeader.render(p1)
 	end)
 end
 
-local function v14(p1)
+local function v16(p1)
 	-- upvalues: UseVerifiedBadgeFunction (copy), RoactModule (copy), DropDownPlayerHeader (copy), CryoModule (copy)
 	return RoactModule.createElement(DropDownPlayerHeader, CryoModule.Dictionary.join(p1, { showVerifiedBadge = UseVerifiedBadgeFunction(p1.player) }))
 end
 
-return if FFlagEnableVerifiedBadgeStore then v14 else DropDownPlayerHeader
+return if FFlagEnableVerifiedBadgeStore then v16 else DropDownPlayerHeader

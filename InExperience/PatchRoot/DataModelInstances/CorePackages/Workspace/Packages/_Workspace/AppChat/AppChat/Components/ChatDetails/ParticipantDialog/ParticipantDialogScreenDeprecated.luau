@@ -13,7 +13,6 @@ local ParseCreateConversationErrorsModule = require(AppChat.Conversations.Thunks
 local ChatEntryPointNames = require(Parent.SocialCommon).Enums.ChatEntryPointNames
 local EnteredChatFromEntryPointFunction = require(AppChat.Actions).EnteredChatFromEntryPoint
 local FFlagDisableBlockAndReport = require(Parent.SharedFlags).FFlagDisableBlockAndReport
-local FFlagEnableChatDetailsOpenChatModule = require(AppChat.Flags.FFlagEnableChatDetailsOpenChat)
 local ParticipantDialogScreenDeprecated = ReactModule.PureComponent:extend("ParticipantDialogScreenDeprecated")
 ParticipantDialogScreenDeprecated.defaultProps = { navigation = nil }
 
@@ -97,7 +96,7 @@ function ParticipantDialogScreenDeprecated.init(p1)
 end
 
 function ParticipantDialogScreenDeprecated.render(p1)
-	-- upvalues: LoggerModule (copy), ReactModule (copy), ParticipantDialogContainerDeprecatedModule (copy), FFlagEnableChatDetailsOpenChatModule (copy)
+	-- upvalues: LoggerModule (copy), ReactModule (copy), ParticipantDialogContainerDeprecatedModule (copy)
 	local Navigation = p1.props.navigation
 	assert(type(Navigation) ~= "nil", "ParticipantDialogScreenDeprecated should be wrapped with navigation")
 	local ConversationIdParam = Navigation.getParam("conversationId", nil)
@@ -119,7 +118,7 @@ function ParticipantDialogScreenDeprecated.render(p1)
 			openRemoveUserDialog = p1.openRemoveUserDialog,
 			openReportUser = p1.openReportUser,
 			openViewProfile = p1.openViewProfile,
-			openChat = if FFlagEnableChatDetailsOpenChatModule then p1.openChat else nil,
+			openChat = p1.openChat,
 			openBlockingModal = p1.openBlockingModal
 		})
 	end

@@ -1537,8 +1537,11 @@ Feature.Avatar.Heading.SharePublicAvatar,Share your Avatar
 Feature.Avatar.Heading.SortBy,Sort by
 Feature.Avatar.Heading.UsedName,Used Name
 Feature.Avatar.Heading.WearConfirmation,Wear Item
+Feature.Avatar.HeroWidget.BundleHeadlessTitle,Last chance for Headless Horseman
 Feature.Avatar.HeroWidget.BundleTitle,Korblox Pactbreaker
 Feature.Avatar.HeroWidget.CapsuleDescription,Three new takes on Roblox originals
+Feature.Avatar.HeroWidget.CapsuleHalloweenDescription,New items just for the spooky season
+Feature.Avatar.HeroWidget.CapsuleHalloweenTitle,Made for Halloween
 Feature.Avatar.HeroWidget.CapsulePoolDescription,Three new items to make a splash
 Feature.Avatar.HeroWidget.CapsulePoolTitle,Pool Party
 Feature.Avatar.HeroWidget.CapsuleTitle,"Classics, Reimagined"

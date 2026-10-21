@@ -1528,8 +1528,11 @@ Feature.Avatar.Heading.SharePublicAvatar,分享你的虚拟形象
 Feature.Avatar.Heading.SortBy,排序依据
 Feature.Avatar.Heading.UsedName,名称已使用
 Feature.Avatar.Heading.WearConfirmation,穿戴物品
+Feature.Avatar.HeroWidget.BundleHeadlessTitle,
 Feature.Avatar.HeroWidget.BundleTitle,Korblox Pactbreaker
 Feature.Avatar.HeroWidget.CapsuleDescription,Roblox 原创的三款新品
+Feature.Avatar.HeroWidget.CapsuleHalloweenDescription,
+Feature.Avatar.HeroWidget.CapsuleHalloweenTitle,
 Feature.Avatar.HeroWidget.CapsulePoolDescription,三款全新道具，引爆全场
 Feature.Avatar.HeroWidget.CapsulePoolTitle,泳池派对
 Feature.Avatar.HeroWidget.CapsuleTitle,重构经典
@@ -3833,7 +3836,7 @@ Feature.Moments.Title.PostInsights,页面标题
 Feature.Moments.Title.ReportPost,举报帖子
 Feature.Moments.Tooltip.Creation,体验中的每个人都可以查看你的“精彩瞬间”。
 Feature.Moments.Tooltip.PostInsightsBody,
-Feature.Moments.Tooltip.PostInsightsTitle,
+Feature.Moments.Tooltip.PostInsightsTitle,请查看你的精彩瞬间洞察报告
 Feature.Moments.Tooltip.ShareFirstMomentBody,从截图创建精彩瞬间
 Feature.Moments.Tooltip.ShareFirstMomentTitle,分享你的第一个精彩瞬间
 Feature.NativeAds.Label.Ad,

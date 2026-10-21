@@ -9,7 +9,7 @@ local LibraryTypesModule = require(script.Parent.LibraryTypes)
 local _ = require(BuildExperience.Chat.chatTypes)
 local FFlagBuildExperienceAnswerFormModule = require(BuildExperience.Flags.FFlagBuildExperienceAnswerForm)
 
-return function(Current, p1)
+return function(Current, p1, IsReadOnly)
 	-- upvalues: GetLibraryStoreModule (copy), SignalsReactModule (copy), ReactModule (copy), LibraryTypesModule (copy), FFlagBuildExperienceAnswerFormModule (copy)
 	local LibraryStoreModule = GetLibraryStoreModule()
 	local UseSignalStateResult = SignalsReactModule.useSignalState(LibraryStoreModule.getChatResourceRequest)
@@ -72,7 +72,7 @@ return function(Current, p1)
 		UseResult1, Current.textBoxRef
 	})
 	ReactModule.useLayoutEffect(function()
-		-- upvalues: AnswerForm (copy), LocalToolActions (copy), SubmitAnswerText (copy), Current (copy), UseResult (copy), UseResult1 (copy), IsComposerSendBlocked (copy), UseRefResult1 (copy), LibraryStoreModule (copy)
+		-- upvalues: AnswerForm (copy), LocalToolActions (copy), SubmitAnswerText (copy), Current (copy), UseResult (copy), UseResult1 (copy), IsComposerSendBlocked (copy), IsReadOnly (copy), UseRefResult1 (copy), LibraryStoreModule (copy)
 		local Current1 = {
 			tracksExternalText = true,
 			answerForm = AnswerForm,
@@ -89,6 +89,7 @@ return function(Current, p1)
 			onRemoveResourceAttachment = Current.removeComposerResourceAttachmentAtIndex,
 			onRemoveResourceByPath = UseResult1,
 			isSendBlocked = IsComposerSendBlocked,
+			isReadOnly = IsReadOnly,
 			textBoxRef = Current.textBoxRef,
 			isAssistantResponding = Current.isAssistantResponding,
 			canStopAssistantResponse = Current.canStopAssistantResponse,
@@ -104,9 +105,10 @@ return function(Current, p1)
 		Current.composerImages, Current.setComposerImages, Current.retryComposerImage,
 		Current.composerResourceAttachments, UseResult,
 		Current.removeComposerResourceAttachmentAtIndex, UseResult1,
-		IsComposerSendBlocked, Current.textBoxRef, Current.isAssistantResponding,
-		Current.canStopAssistantResponse, Current.canSendWhileResponding,
-		Current.sendMessage, Current.stopAssistantResponse
+		IsComposerSendBlocked, IsReadOnly, Current.textBoxRef,
+		Current.isAssistantResponding, Current.canStopAssistantResponse,
+		Current.canSendWhileResponding, Current.sendMessage,
+		Current.stopAssistantResponse
 	})
 	ReactModule.useEffect(function()
 		-- upvalues: LibraryStoreModule (copy), UseRefResult1 (copy)

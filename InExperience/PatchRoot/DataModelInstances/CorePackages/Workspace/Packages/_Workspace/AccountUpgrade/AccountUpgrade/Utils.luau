@@ -3,5 +3,6 @@
 	getAccountUpgradeErrorCode = require(script.getAccountUpgradeErrorCode),
 	getAccountUpgradeErrorTextKey = require(script.getAccountUpgradeErrorTextKey),
 	isAccountUpgradeErrorUnrecoverable = require(script.isAccountUpgradeErrorUnrecoverable),
-	resolveFieldStates = require(script.resolveFieldStates)
+	resolveFieldStates = require(script.resolveFieldStates),
+	sendMarketingConsent = require(script.sendMarketingConsent)
 }

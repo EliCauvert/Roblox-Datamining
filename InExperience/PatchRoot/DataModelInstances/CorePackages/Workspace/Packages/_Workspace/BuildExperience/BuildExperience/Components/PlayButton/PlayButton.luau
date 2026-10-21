@@ -33,7 +33,7 @@ return function(Frame: Frame)
 		icon = ActiveIcon,
 		variant = Frame.variant or ButtonVariant.OverMedia,
 		size = InputSize.Medium,
-		isDisabled = IsIsDisabled,
+		isDisabled = IsIsDisabled or Frame.isUnavailable == true,
 		onActivated = UseResult,
 		LayoutOrder = if IsIsDisabled then nil else Frame.LayoutOrder,
 		testId = if IsIsDisabled then nil else "build-header-play-button"

@@ -12,10 +12,12 @@ local ContentMaturityUtilsModule = require(BuildExperience.utils.ContentMaturity
 local GameConfigurationActionsModule = require(BuildExperience.utils.GameConfigurationActions)
 local GameConfigurationLabelsModule = require(BuildExperience.utils.GameConfigurationLabels)
 local RefreshPublishEligibilityModule = require(BuildExperience.utils.refreshPublishEligibility)
+local UseGamePermissionsModule = require(BuildExperience.useGamePermissions)
+local FFlagBuildCheckGamePermissionsModule = require(BuildExperience.Flags.FFlagBuildCheckGamePermissions)
 local FFlagMyStatsMediaSelector = require(Parent.SharedFlags).FFlagMyStatsMediaSelector
 
 return function(p1)
-	-- upvalues: UseLocalizationFunction (copy), LocalizationStringsModule (copy), UseOpenWebViewFunction (copy), ExperienceGuidelinesModule (copy), ReactModule (copy), SignalsReactModule (copy), UniverseActivationModule (copy), ContentMaturityUtilsModule (copy), GameConfigurationLabelsModule (copy), GameConfigurationActionsModule (copy), RefreshPublishEligibilityModule (copy), FFlagMyStatsMediaSelector (copy)
+	-- upvalues: UseLocalizationFunction (copy), LocalizationStringsModule (copy), UseOpenWebViewFunction (copy), FFlagBuildCheckGamePermissionsModule (copy), UseGamePermissionsModule (copy), ExperienceGuidelinesModule (copy), ReactModule (copy), SignalsReactModule (copy), UniverseActivationModule (copy), ContentMaturityUtilsModule (copy), GameConfigurationLabelsModule (copy), GameConfigurationActionsModule (copy), RefreshPublishEligibilityModule (copy), FFlagMyStatsMediaSelector (copy)
 	local UseLocalizationResult = UseLocalizationFunction({
 		creatorHub = LocalizationStringsModule.GAME_CONFIGURATION_CREATOR_HUB,
 		loading = LocalizationStringsModule.GAME_CONFIGURATION_LOADING,
@@ -25,6 +27,7 @@ return function(p1)
 	local Loading = UseLocalizationResult.loading
 	local QuestionnaireRequiredBanner = UseLocalizationResult.questionnaireRequiredBanner
 	local UseOpenWebViewResult = UseOpenWebViewFunction()
+	local UseGamePermissionsModuleResult = if FFlagBuildCheckGamePermissionsModule then UseGamePermissionsModule({ universeId = p1.universeId, isNewGame = p1.isNewGame }) else nil
 	local ExperienceGuidelinesStore = ExperienceGuidelinesModule.getExperienceGuidelinesStore()
 	local UseSignalStateResult = SignalsReactModule.useSignalState(ReactModule.useMemo(function()
 		-- upvalues: ExperienceGuidelinesStore (copy), p1 (copy)
@@ -63,6 +66,8 @@ return function(p1)
 		end, { CreatorHub, UseOpenWebViewResult, p1.universeId }),
 		onOpenVersionTitleDescriptionPage = p1.onOpenVersionTitleDescriptionPage,
 		onOpenVersionHistory = p1.onOpenVersionHistory,
+		isEditDisabled = FFlagBuildCheckGamePermissionsModule and not UseGamePermissionsModuleResult.canEdit,
+		isIconAndThumbnailsDisabled = FFlagBuildCheckGamePermissionsModule and (not FFlagMyStatsMediaSelector and not UseGamePermissionsModuleResult.canViewOnCreatorHub),
 		layoutOrder = p1.layoutOrder,
 		testId = p1.testId
 	}

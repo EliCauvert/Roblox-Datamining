@@ -10,6 +10,8 @@ local BuildPillMenuPageHostModule = require(BuildExperience.Components.BuildPill
 local PublishSheetControllerModule = require(BuildExperience.Components.PublishSheet.PublishSheetController)
 local GetCurrentExperienceProjectModule = require(BuildExperience.utils.getCurrentExperienceProject)
 local UseHardwareInsetsModule = require(script.Parent.useHardwareInsets)
+local FFlagBuildCheckGamePermissionsModule = require(BuildExperience.Flags.FFlagBuildCheckGamePermissions)
+local UseGamePermissionsModule = require(BuildExperience.useGamePermissions)
 local Image = FoundationModule.Image
 local IconButton = FoundationModule.IconButton
 local View = FoundationModule.View
@@ -23,8 +25,10 @@ local UseTokensFunction = FoundationModule.Hooks.useTokens
 
 local function noop() end
 
-local function createToolbarButtons(p1, UseResult, p2)
-	-- upvalues: ReactModule (copy), IconButton (copy), IconName (copy), noop (copy), InputSize (copy), ButtonVariant (copy)
+local function createToolbarButtons(p1, UseResult, p2, p3)
+	-- upvalues: FFlagBuildCheckGamePermissionsModule (copy), ReactModule (copy), IconButton (copy), IconName (copy), noop (copy), InputSize (copy), ButtonVariant (copy)
+	local NoCanEditOnBuild: boolean = FFlagBuildCheckGamePermissionsModule and not p3.canEditOnBuild
+	
 	if p1.isSelecting then
 		return {
 			Cancel = ReactModule.createElement(IconButton, {
@@ -38,6 +42,7 @@ local function createToolbarButtons(p1, UseResult, p2)
 			Confirm = if p1.onSelectionConfirmed == nil then nil else ReactModule.createElement(IconButton, {
 				LayoutOrder = 2,
 				icon = IconName.CheckLarge,
+				isDisabled = NoCanEditOnBuild,
 				onActivated = p1.onSelectionConfirmed,
 				size = InputSize.Medium,
 				testId = `{p2}-confirm-selection`,
@@ -57,6 +62,7 @@ local function createToolbarButtons(p1, UseResult, p2)
 		Select = ReactModule.createElement(IconButton, {
 			LayoutOrder = 2,
 			icon = IconName.CursorStars,
+			isDisabled = NoCanEditOnBuild,
 			onActivated = p1.onSelectionActivated or noop,
 			size = InputSize.Medium,
 			testId = `{p2}-select`,
@@ -65,6 +71,7 @@ local function createToolbarButtons(p1, UseResult, p2)
 		Capture = ReactModule.createElement(IconButton, {
 			LayoutOrder = 3,
 			icon = IconName.FrameCameraCenter,
+			isDisabled = NoCanEditOnBuild,
 			onActivated = p1.onCaptureActivated or noop,
 			size = InputSize.Medium,
 			testId = `{p2}-capture`,
@@ -73,6 +80,7 @@ local function createToolbarButtons(p1, UseResult, p2)
 		Publish = ReactModule.createElement(IconButton, {
 			LayoutOrder = 4,
 			icon = IconName.ArrowUpRightFromSquare,
+			isDisabled = FFlagBuildCheckGamePermissionsModule and not p3.canPublish,
 			onActivated = UseResult,
 			size = InputSize.Medium,
 			testId = `{p2}-publish`,
@@ -88,10 +96,13 @@ local function createToolbarButtons(p1, UseResult, p2)
 end
 
 return function(p1)
-	-- upvalues: ReactModule (copy), GetCurrentExperienceProjectModule (copy), UseTokensFunction (copy), UsePreferencesFunction (copy), UseOverlayFunction (copy), UseHardwareInsetsModule (copy), DisplayModule (copy), CoreGuiCommonModule (copy), SignalsReactModule (copy), MotionModule (copy), View (copy), noop (copy), StateLayerAffordance (copy), createToolbarButtons (copy), Image (copy), FoundationModule (copy), PublishSheetControllerModule (copy), BuildPillMenuPageHostModule (copy)
+	-- upvalues: ReactModule (copy), FFlagBuildCheckGamePermissionsModule (copy), UseGamePermissionsModule (copy), GetCurrentExperienceProjectModule (copy), UseTokensFunction (copy), UsePreferencesFunction (copy), UseOverlayFunction (copy), UseHardwareInsetsModule (copy), DisplayModule (copy), CoreGuiCommonModule (copy), SignalsReactModule (copy), MotionModule (copy), View (copy), noop (copy), StateLayerAffordance (copy), createToolbarButtons (copy), Image (copy), FoundationModule (copy), PublishSheetControllerModule (copy), BuildPillMenuPageHostModule (copy)
 	local UseStateResult, UseStateResult2 = ReactModule.useState(false)
 	local UseStateResult1, UseStateResult2_1 = ReactModule.useState(nil)
 	local UseStateResult3, UseStateResult2_2 = ReactModule.useState(nil)
+	local UseGamePermissionsModuleResult = if FFlagBuildCheckGamePermissionsModule then UseGamePermissionsModule({
+		universeId = GetCurrentExperienceProjectModule().universeId
+	}) else nil
 	local UseResult = ReactModule.useCallback(function()
 		-- upvalues: GetCurrentExperienceProjectModule (upval), UseStateResult2_2 (copy), UseStateResult2 (copy)
 		local CurrentExperienceProjectModule = GetCurrentExperienceProjectModule()
@@ -295,7 +306,7 @@ return function(p1)
 						ReferenceUIInstance = UseStateResult5,
 						ResponseStyle = Enum.UIDragDetectorResponseStyle.Scale
 					}),
-					Buttons = ReactModule.createElement(ReactModule.Fragment, nil, (createToolbarButtons(p1, UseResult, "in-game-build-shell-floating"))),
+					Buttons = ReactModule.createElement(ReactModule.Fragment, nil, (createToolbarButtons(p1, UseResult, "in-game-build-shell-floating", UseGamePermissionsModuleResult))),
 					DragAffordance = ReactModule.createElement(View, {
 						LayoutOrder = 6,
 						tag = "position-center-center anchor-center-center auto-xy padding-xxsmall"
@@ -326,7 +337,7 @@ return function(p1)
 				},
 				onAbsolutePositionChanged = UseResult6,
 				onAbsoluteSizeChanged = UseResult6
-			}, (createToolbarButtons(p1, UseResult, "in-game-build-shell-landscape"))) else nil,
+			}, (createToolbarButtons(p1, UseResult, "in-game-build-shell-landscape", UseGamePermissionsModuleResult))) else nil,
 			TopRightInnerCorner = if IsYBelow and not IsNotUseSignalStateResultMatch then ReactModule.createElement(View, {
 				ZIndex = 1000,
 				tag = "anchor-top-right clip",
@@ -390,7 +401,7 @@ return function(p1)
 					right = UDim.new(0, UseTokensResult.Padding.Large),
 					bottom = UDim.new(0, UseTokensResult.Margin.Small + UseHardwareInsetsModuleResult.bottom)
 				}
-			}, (createToolbarButtons(p1, UseResult, "in-game-build-shell")))
+			}, (createToolbarButtons(p1, UseResult, "in-game-build-shell", UseGamePermissionsModuleResult)))
 		}),
 		PublishOverlay = if UseStateResult3 == nil or p1.isLibraryMode then nil else ReactModule.createElement(View, {
 			ZIndex = 2,

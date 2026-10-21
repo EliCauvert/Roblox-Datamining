@@ -18,7 +18,6 @@ local FocusNavigableSurfaceIdentifierEnum = FocusNavigationUtilsModule.FocusNavi
 local FocusNavigableSurfaceWrapper = FocusNavigationUtilsModule.FocusNavigableSurfaceWrapper
 local AppFocusRoot = FocusNavigationUtilsModule.AppFocusRoot
 local FocusNavigationEventNameEnum = FocusNavigationUtilsModule.FocusNavigationEventNameEnum
-local FFlagEnableChatDetailsOpenChatModule = require(AppChat.Flags.FFlagEnableChatDetailsOpenChat)
 local FFlagAppChatMigrateFriendshipStatusesModule = require(AppChat.Flags.FFlagAppChatMigrateFriendshipStatuses)
 local UseGetFriendshipStatusFunction = require(Parent.FriendsHydrationReact).useGetFriendshipStatus
 local MemoFunction = ReactModule.memo
@@ -43,52 +42,45 @@ local config = {
 local config1 = { skipFetch = true }
 
 function ParticipantDialogContainerDeprecated(p1)
-	-- upvalues: CryoModule (copy), config (copy), UseAppPolicyModule (copy), FFlagEnableChatDetailsOpenChatModule (copy), UseSelectorFunction (copy), ConversationModule (copy), UseDispatchFunction (copy), FFlagAppChatMigrateFriendshipStatusesModule (copy), UseGetFriendshipStatusFunction (copy), config1 (copy), ReactModule (copy), NetworkingFriendsModule (copy), UseLocalizationFunction (copy), UseIsExternalNavigationAvailableModule (copy), EnumScreensModule (copy), FocusNavigationEventNameEnum (copy), InputHandlersModule (copy), AppFocusRoot (copy), FocusNavigableSurfaceIdentifierEnum (copy), PlayerContextualMenuWrapperModule (copy), FocusNavigableSurfaceWrapper (copy), ParticipantDialogDeprecatedModule (copy)
+	-- upvalues: CryoModule (copy), config (copy), UseAppPolicyModule (copy), UseSelectorFunction (copy), ConversationModule (copy), UseDispatchFunction (copy), FFlagAppChatMigrateFriendshipStatusesModule (copy), UseGetFriendshipStatusFunction (copy), config1 (copy), ReactModule (copy), NetworkingFriendsModule (copy), UseLocalizationFunction (copy), UseIsExternalNavigationAvailableModule (copy), EnumScreensModule (copy), FocusNavigationEventNameEnum (copy), InputHandlersModule (copy), AppFocusRoot (copy), FocusNavigableSurfaceIdentifierEnum (copy), PlayerContextualMenuWrapperModule (copy), FocusNavigableSurfaceWrapper (copy), ParticipantDialogDeprecatedModule (copy)
 	local JoinResult = CryoModule.Dictionary.join(config, p1)
 	local UseAppPolicyModuleResult = UseAppPolicyModule(function(p2)
 		return p2.getChatViewProfileOption()
 	end)
-	local UseSelectorResult = nil
-	local UseDispatchResult = nil
-	local ShowChatButton = false
-	
-	if FFlagEnableChatDetailsOpenChatModule then
-		UseSelectorResult = UseSelectorFunction(function(p2): boolean
-			-- upvalues: JoinResult (copy), ConversationModule (upval)
-			local Conversations = p2.ChatAppReducer and p2.ChatAppReducer.Conversations
-			local Conversation = Conversations and Conversations[JoinResult.conversationId]
-			
-			return Conversation and Conversation.conversationType == ConversationModule.Type.MULTI_USER_CONVERSATION
-		end)
-		UseDispatchResult = UseDispatchFunction()
-		local IsUseGetFriendshipStatusResultMatch = nil
+	local UseSelectorResult = UseSelectorFunction(function(p2): boolean
+		-- upvalues: JoinResult (copy), ConversationModule (upval)
+		local Conversations = p2.ChatAppReducer and p2.ChatAppReducer.Conversations
+		local Conversation = Conversations and Conversations[JoinResult.conversationId]
 		
-		if FFlagAppChatMigrateFriendshipStatusesModule then
-			IsUseGetFriendshipStatusResultMatch = UseGetFriendshipStatusFunction(JoinResult.participantId, if UseSelectorResult then nil else config1) == Enum.FriendStatus.Friend
-		else
-			IsUseGetFriendshipStatusResultMatch = UseSelectorFunction(function(p2): boolean
-				-- upvalues: JoinResult (copy)
-				local Friends = p2.ChatAppReducer and p2.ChatAppReducer.Friends
-				local FriendshipStatus = Friends and Friends.friendshipStatus
-				
-				return FriendshipStatus and FriendshipStatus[JoinResult.participantId] == Enum.FriendStatus.Friend
-			end)
-			ReactModule.useEffect(function()
-				-- upvalues: UseSelectorResult (ref), UseDispatchResult (ref), NetworkingFriendsModule (upval), JoinResult (copy)
-				if UseSelectorResult then
-					UseDispatchResult(NetworkingFriendsModule.GetExtendedFriendshipStatus.API({ targetUserId = JoinResult.participantId }))
-				end
-			end, {
-				JoinResult.participantId,
-				UseDispatchResult,
-				UseSelectorResult
-			})
-		end
-		ShowChatButton = if UseSelectorResult and IsUseGetFriendshipStatusResultMatch then true else false
+		return Conversation and Conversation.conversationType == ConversationModule.Type.MULTI_USER_CONVERSATION
+	end)
+	local UseDispatchResult = UseDispatchFunction()
+	local IsUseGetFriendshipStatusResultMatch = nil
+	
+	if FFlagAppChatMigrateFriendshipStatusesModule then
+		IsUseGetFriendshipStatusResultMatch = UseGetFriendshipStatusFunction(JoinResult.participantId, if UseSelectorResult then nil else config1) == Enum.FriendStatus.Friend
+	else
+		IsUseGetFriendshipStatusResultMatch = UseSelectorFunction(function(p2): boolean
+			-- upvalues: JoinResult (copy)
+			local Friends = p2.ChatAppReducer and p2.ChatAppReducer.Friends
+			local FriendshipStatus = Friends and Friends.friendshipStatus
+			
+			return FriendshipStatus and FriendshipStatus[JoinResult.participantId] == Enum.FriendStatus.Friend
+		end)
+		ReactModule.useEffect(function()
+			-- upvalues: UseSelectorResult (copy), UseDispatchResult (copy), NetworkingFriendsModule (upval), JoinResult (copy)
+			if UseSelectorResult then
+				UseDispatchResult(NetworkingFriendsModule.GetExtendedFriendshipStatus.API({ targetUserId = JoinResult.participantId }))
+			end
+		end, {
+			JoinResult.participantId,
+			UseDispatchResult,
+			UseSelectorResult
+		})
 	end
 	local UseLocalizationResult = UseLocalizationFunction({
 		viewProfileText = JoinResult.viewProfileText,
-		chatText = if FFlagEnableChatDetailsOpenChatModule then JoinResult.chatText else nil,
+		chatText = JoinResult.chatText,
 		reportUserText = JoinResult.reportUserText,
 		removeFromGroupText = JoinResult.removeFromGroupText,
 		cancelText = JoinResult.cancelText
@@ -107,7 +99,7 @@ function ParticipantDialogContainerDeprecated(p1)
 	end, { JoinResult.onDismiss })
 	local JoinResult1 = CryoModule.Dictionary.join(JoinResult, UseLocalizationResult, {
 		showViewProfileButton = UseAppPolicyModuleResult,
-		showChatButton = ShowChatButton,
+		showChatButton = if UseSelectorResult and IsUseGetFriendshipStatusResultMatch then true else false,
 		isWideMode = JoinResult.isWideMode
 	})
 	

@@ -41,6 +41,11 @@ return function(Frame)
 		v1 = IsNotCanSendWhileResponding
 		IsNotCanSendWhileResponding = false
 	end
+	local IsIsReadOnly = Frame.isReadOnly == true
+	
+	if IsIsReadOnly then
+		IsNotCanSendWhileResponding = true
+	end
 	local HasComposerErrorText = Frame.composerErrorText ~= nil
 	local HasAttachments: boolean = Frame.images ~= nil and #Frame.images > 0
 	local HasOnOpenCaptureGallery: boolean = Frame.isAttachmentSupported and Frame.onOpenCaptureGallery ~= nil
@@ -113,7 +118,7 @@ return function(Frame)
 				isCircular = true,
 				testId = "ChatComposer.AttachImage",
 				icon = IconName.PlusSmall,
-				isDisabled = Frame.isAssistantResponding,
+				isDisabled = Frame.isAssistantResponding or IsIsReadOnly,
 				onActivated = UseResult2,
 				size = InputSize.Small,
 				variant = ButtonVariant.Standard
@@ -137,7 +142,8 @@ return function(Frame)
 				canSendWhileResponding = Frame.canSendWhileResponding,
 				getIsComposerEmpty = UseMemoResult.getIsComposerEmpty,
 				hasAttachments = HasAttachments,
-				isSendDisabled = HasComposerErrorText or Frame.isSendBlocked == true,
+				isSendDisabled = HasComposerErrorText or (Frame.isSendBlocked == true or IsIsReadOnly),
+				isStopDisabled = IsIsReadOnly,
 				onSend = UseResult1,
 				onStop = Frame.onStop
 			})

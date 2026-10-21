@@ -16,7 +16,6 @@ local UseTelemetryModule = require(AppChat.Telemetry.useTelemetry)
 local AppTelemetryLayerModule = require(AppChat.Telemetry.Layers.AppTelemetryLayer)
 local TrustedFriendsModalEntry = require(Parent.TrustedContacts).TrustedFriendsModalEntry
 local FFlagAppChatEnableDoubleOptIn = require(Parent.SharedFlags).FFlagAppChatEnableDoubleOptIn
-local FFlagAppChatEnableTrustedFriendEntryPointModule = require(AppChat.Flags.FFlagAppChatEnableTrustedFriendEntryPoint)
 local FIntUnfilteredThreadsPvDelayMsModule = require(AppChat.Flags.FIntUnfilteredThreadsPvDelayMs)
 local config = {
 	[ConversationOverlay.TrustedConnectionCreated] = TrustedFriendsModalEntry
@@ -55,7 +54,7 @@ local config1 = {
 }
 
 return function(p1)
-	-- upvalues: UseGetOneToOneFriendIdFromConversationIdModule (copy), UseIsAppChatVerticallyConstrainedModule (copy), UseDispatchFunction (copy), FFlagAppChatEnableDoubleOptIn (copy), UseIsInExperienceModule (copy), UseTelemetryModule (copy), AppTelemetryLayerModule (copy), ReactModule (copy), ConversationOverlayTelemetryModule (copy), config1 (copy), config (copy), FFlagAppChatEnableTrustedFriendEntryPointModule (copy), SetTabBarVisibleFromChatFunction (copy), PromiseModule (copy), FIntUnfilteredThreadsPvDelayMsModule (copy), RefreshConversationUnfilteredThreadsDetailsModule (copy), ModalTelemetryModule (copy)
+	-- upvalues: UseGetOneToOneFriendIdFromConversationIdModule (copy), UseIsAppChatVerticallyConstrainedModule (copy), UseDispatchFunction (copy), FFlagAppChatEnableDoubleOptIn (copy), UseIsInExperienceModule (copy), UseTelemetryModule (copy), AppTelemetryLayerModule (copy), ReactModule (copy), ConversationOverlayTelemetryModule (copy), config1 (copy), config (copy), SetTabBarVisibleFromChatFunction (copy), PromiseModule (copy), FIntUnfilteredThreadsPvDelayMsModule (copy), RefreshConversationUnfilteredThreadsDetailsModule (copy), ModalTelemetryModule (copy)
 	local UseGetOneToOneFriendIdFromConversationIdModuleResult = UseGetOneToOneFriendIdFromConversationIdModule(p1.conversationId) or ""
 	local UseIsAppChatVerticallyConstrainedModuleResult = UseIsAppChatVerticallyConstrainedModule()
 	local UseDispatchResult = UseDispatchFunction()
@@ -68,8 +67,8 @@ return function(p1)
 	end, { ModalVariant })
 	local HasEntry: boolean = if FFlagAppChatEnableDoubleOptIn then config1[ModalVariant] ~= nil else config[ModalVariant] ~= nil
 	ReactModule.useEffect(function()
-		-- upvalues: FFlagAppChatEnableTrustedFriendEntryPointModule (upval), HasEntry (copy), UseDispatchResult (copy), SetTabBarVisibleFromChatFunction (upval)
-		if not FFlagAppChatEnableTrustedFriendEntryPointModule or not HasEntry then return end
+		-- upvalues: HasEntry (copy), UseDispatchResult (copy), SetTabBarVisibleFromChatFunction (upval)
+		if not HasEntry then return end
 		UseDispatchResult(SetTabBarVisibleFromChatFunction(false))
 		
 		return function()
