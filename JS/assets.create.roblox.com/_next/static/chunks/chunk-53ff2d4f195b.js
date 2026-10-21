@@ -3,7 +3,7 @@
     try {
         var e = "undefined" != typeof globalThis ? globalThis : "undefined" != typeof global ? global : "undefined" != typeof window ? window : "undefined" != typeof self ? self : {},
             n = (new e.Error).stack;
-        n && ((e._debugIds || (e._debugIds = {}))[n] = "2a994d19-2ab9-eaef-7424-71f50d8dbf10")
+        n && ((e._debugIds || (e._debugIds = {}))[n] = "324cdd83-ab1a-5402-4dd2-2cd00550f6b5")
     } catch (e) {}
 }();
 (globalThis.TURBOPACK || (globalThis.TURBOPACK = [])).push(["object" == typeof document ? document.currentScript : void 0, 696564, e => {
@@ -484,7 +484,7 @@
     }, "getItemTypeChipIconSrc", 0, function(e, s) {
         let t = e.toLowerCase(),
             n = y.has(t) ? "".concat(t, "accessory") : t;
-        return "".concat("".concat("https://assets.create.roblox.com/47ad9fb44d9578067afbf0e940ac108c3484a802/assets", "/unifiedFeeSystem"), "/").concat(s ? "".concat(n, ".svg") : "".concat(n, "_black.svg"))
+        return "".concat("".concat("https://assets.create.roblox.com/7a01d5b7304b65e1cdba638349a99c777afb001d/assets", "/unifiedFeeSystem"), "/").concat(s ? "".concat(n, ".svg") : "".concat(n, "_black.svg"))
     }, "getPublishPageUrl", 0, function(e, s) {
         return "/dashboard/creations/".concat(a.itemTypeToPath[e], "/").concat(s, "/publish")
     }, "getTaxonomyDisplayName", 0, function(e, s) {
@@ -811,10 +811,10 @@
     e.i(407110);
     var M = e.i(887833);
 
-    function I(e) {
+    function b(e) {
         return (0, t.g)("MuiRadioGroup", e)
     }(0, o.g)("MuiRadioGroup", ["root", "row", "error"]);
-    let b = ["actions", "children", "className", "defaultValue", "name", "onChange", "value"],
+    let I = ["actions", "children", "className", "defaultValue", "name", "onChange", "value"],
         h = n.forwardRef(function(e, o) {
             let {
                 actions: A,
@@ -824,7 +824,7 @@
                 name: d,
                 onChange: T,
                 value: B
-            } = e, g = (0, t._)(e, b), R = n.useRef(null), f = (e => {
+            } = e, g = (0, t._)(e, I), R = n.useRef(null), f = (e => {
                 let {
                     classes: s,
                     row: t,
@@ -832,7 +832,7 @@
                 } = e;
                 return (0, a.a)({
                     root: ["root", t && "row", n && "error"]
-                }, I, s)
+                }, b, s)
             })(e), [M, h] = (0, l.u)({
                 controlled: B,
                 default: m,
@@ -1017,15 +1017,15 @@
             onChange: R,
             onClick: f,
             onFocus: M,
-            readOnly: I,
-            ownerState: b,
+            readOnly: b,
+            ownerState: I,
             ratingValue: h,
             ratingValueRounded: S
         } = e, C = A ? T === h : T <= h, v = T <= y, _ = T <= l, N = T === S, x = (0, c.u)(), U = (0, i.jsx)(w, {
             as: m,
             value: T,
             className: (0, a.c)(t.icon, C ? t.iconFilled : t.iconEmpty, v && t.iconHover, _ && t.iconFocus, d && t.iconActive),
-            ownerState: (0, s._)({}, b, {
+            ownerState: (0, s._)({}, I, {
                 iconEmpty: !C,
                 iconFilled: C,
                 iconHover: v,
@@ -1034,11 +1034,11 @@
             }),
             children: r && !C ? r : p
         });
-        return I ? (0, i.jsx)("span", (0, s._)({}, E, {
+        return b ? (0, i.jsx)("span", (0, s._)({}, E, {
             children: U
         })) : (0, i.jsxs)(n.Fragment, {
             children: [(0, i.jsxs)(V, (0, s._)({
-                ownerState: (0, s._)({}, b, {
+                ownerState: (0, s._)({}, I, {
                     emptyValueFocused: void 0
                 }),
                 htmlFor: x
@@ -1086,8 +1086,8 @@
                 getLabelText: E = H,
                 highlightSelectedOnly: g = !1,
                 icon: R = G,
-                IconContainerComponent: I = k,
-                max: b = 5,
+                IconContainerComponent: b = k,
+                max: I = 5,
                 name: h,
                 onChange: S,
                 onChangeActive: C,
@@ -1148,8 +1148,8 @@
             focusVisible: eo,
             getLabelText: E,
             icon: R,
-            IconContainerComponent: I,
-            max: b,
+            IconContainerComponent: b,
+            max: I,
             precision: w,
             readOnly: O,
             size: K
@@ -1184,8 +1184,8 @@
                     right: s,
                     left: t,
                     width: n
-                } = ei.current.getBoundingClientRect(), a = U(b * (Q ? (s - e.clientX) / n : (e.clientX - t) / n) + w / 2, w);
-                a = (0, M.c)(a, w, b), $(e => e.hover === a && e.focus === a ? e : {
+                } = ei.current.getBoundingClientRect(), a = U(I * (Q ? (s - e.clientX) / n : (e.clientX - t) / n) + w / 2, w);
+                a = (0, M.c)(a, w, I), $(e => e.hover === a && e.focus === a ? e : {
                     hover: a,
                     focus: a
                 }), er(!1), C && X !== a && C(e, a)
@@ -1201,7 +1201,7 @@
             role: O ? "img" : null,
             "aria-label": O ? E(ee) : null
         }, z, {
-            children: [Array.from(Array(b)).map((e, t) => {
+            children: [Array.from(Array(I)).map((e, t) => {
                 let n = t + 1,
                     o = {
                         classes: eT,
@@ -1212,7 +1212,7 @@
                         highlightSelectedOnly: g,
                         hover: X,
                         icon: R,
-                        IconContainerComponent: I,
+                        IconContainerComponent: b,
                         name: W,
                         onBlur: ey,
                         onChange: eu,
@@ -1326,5 +1326,5 @@
     e.s(["DialogContentText", () => s.D])
 }]);
 
-//# debugId=2a994d19-2ab9-eaef-7424-71f50d8dbf10
-//# sourceMappingURL=1kl8loj0e2d68.js.map
+//# debugId=324cdd83-ab1a-5402-4dd2-2cd00550f6b5
+//# sourceMappingURL=1r0i7uvp55im0.js.map

@@ -226,13 +226,19 @@
     justify-content: flex-end;
     -ms-flex-align: center;
     align-items: center;
-    row-gap: 4px;
+    gap: 4px 8px;
     min-width: 0;
     max-width: 65%;
     margin-top: 6px;
     margin-left: auto;
     display: -ms-flexbox;
     display: flex
+}
+
+.game-card-link .game-card-name-info .stacked-play-buttons-container .stacked-play-button-primary {
+    -ms-flex: none;
+    flex: none;
+    min-width: 0
 }
 
 .game-card-link .game-card-name-info .stacked-play-buttons-container .purchase-button-link {
@@ -280,15 +286,6 @@
 .game-card-link .game-card-name-info .stacked-play-buttons-container .play-button.btn-common-play-game-action-needed-lg {
     padding-left: 8px;
     padding-right: 8px
-}
-
-.game-card-link .game-card-name-info .stacked-play-buttons-container .btn-full-width.btn-common-play-game-lg.demo-play-button,
-.game-card-link .game-card-name-info .stacked-play-buttons-container .btn-full-width.btn-economy-robux-white-lg.demo-play-button,
-.game-card-link .game-card-name-info .stacked-play-buttons-container .btn-full-width.btn-common-play-game-action-needed-lg.demo-play-button,
-.game-card-link .game-card-name-info .stacked-play-buttons-container .btn-full-width.btn-common-play-game-unplayable-lg.demo-play-button,
-.game-card-link .game-card-name-info .stacked-play-buttons-container .btn-full-width.btn-control-lg.demo-play-button,
-.game-card-link .game-card-name-info .stacked-play-buttons-container .play-button.demo-play-button {
-    margin-left: 8px
 }
 
 .game-card-link .game-card-name-info .stacked-play-buttons-container .btn-full-width.btn-common-play-game-lg .btn-text,
@@ -682,307 +679,6 @@
     display: flex
 }
 
-.profile-experiences .container-header {
-    z-index: 2;
-    margin-bottom: 8px;
-    position: relative
-}
-
-.profile-experiences .container-header:after {
-    content: "";
-    clear: both;
-    display: block
-}
-
-.profile-experiences .container-header h3 {
-    float: left;
-    margin: 3px 0
-}
-
-.profile-experiences .container-buttons {
-    float: right;
-    gap: 4px;
-    display: -ms-flexbox;
-    display: flex
-}
-
-.profile-experiences .container-buttons .profile-view-selector {
-    padding: 1px 20px
-}
-
-.profile-experiences .game-cards {
-    -ms-flex-wrap: wrap;
-    flex-wrap: wrap;
-    -ms-flex-pack: start;
-    justify-content: flex-start;
-    gap: 24px 12px;
-    margin: 0;
-    padding: 0;
-    list-style: none;
-    display: -ms-flexbox;
-    display: flex
-}
-
-.profile-experiences .game-cards:before,
-.profile-experiences .game-cards:after {
-    content: none
-}
-
-.profile-experiences .game-cards .game-card-link,
-.profile-experiences .game-cards .game-card-name {
-    color: inherit
-}
-
-.profile-experiences .game-cards .game-card-info {
-    height: 24px
-}
-
-.profile-experiences .game-cards .game-container {
-    text-align: center;
-    -ms-flex: 0 0 150px;
-    flex: 0 0 150px;
-    width: 150px
-}
-
-@media (max-width:543px) {
-    .profile-experiences .game-cards .game-container {
-        -ms-flex-preferred-size: 90px;
-        flex-basis: 90px;
-        width: 90px
-    }
-}
-
-.profile-experiences .game-cards .game-card-container,
-.profile-experiences .game-cards .game-card-link {
-    width: 100%
-}
-
-.profile-experiences .game-cards .experiences-sentinel {
-    -ms-flex: 0 0 100%;
-    flex: 0 0 100%;
-    width: auto;
-    height: 1px;
-    min-height: 1px;
-    display: block
-}
-
-@media (max-width:991px) {
-    .profile-experiences .game-cards {
-        -ms-flex-wrap: nowrap;
-        flex-wrap: nowrap;
-        overflow-x: auto
-    }
-}
-
-.profile-experiences .switcher {
-    position: relative
-}
-
-.profile-experiences .switcher .switcher-items {
-    height: 300px;
-    margin: 0;
-    padding: 0;
-    list-style: none;
-    position: relative;
-    overflow: hidden
-}
-
-@media (max-width:991px) {
-    .profile-experiences .switcher .switcher-items {
-        height: 240px
-    }
-}
-
-@media (max-width:543px) {
-    .profile-experiences .switcher .switcher-items {
-        height: 500px
-    }
-}
-
-.profile-experiences .switcher .switcher-item {
-    opacity: 0;
-    z-index: 0;
-    width: 100%;
-    margin: 0 auto;
-    position: absolute;
-    top: 0
-}
-
-.profile-experiences .switcher .switcher-item:after {
-    content: "";
-    clear: both;
-    display: block
-}
-
-.profile-experiences .switcher .switcher-item.active {
-    opacity: 1;
-    z-index: 1;
-    transition: opacity 1s ease-in-out
-}
-
-.profile-experiences .switcher:hover .carousel-control {
-    display: block
-}
-
-.profile-experiences .slide-item-container-left {
-    float: left;
-    box-sizing: border-box;
-    width: 50%;
-    height: 300px
-}
-
-@media (max-width:991px) {
-    .profile-experiences .slide-item-container-left {
-        height: 240px
-    }
-}
-
-@media (max-width:543px) {
-    .profile-experiences .slide-item-container-left {
-        width: 100%;
-        height: 250px;
-        display: block
-    }
-}
-
-.profile-experiences .slide-item-container-left .slide-item-emblem-container {
-    text-align: center;
-    width: 240px;
-    height: 240px;
-    margin: 30px auto
-}
-
-@media (max-width:991px) {
-    .profile-experiences .slide-item-container-left .slide-item-emblem-container {
-        width: 180px;
-        height: 180px
-    }
-}
-
-@media (max-width:543px) {
-    .profile-experiences .slide-item-container-left .slide-item-emblem-container {
-        width: 150px;
-        height: 150px;
-        padding: 3% 0
-    }
-}
-
-.profile-experiences .slide-item-container-left .slide-item-image {
-    border-radius: 8px;
-    width: 100%;
-    height: 100%;
-    display: block;
-    overflow: hidden
-}
-
-.profile-experiences .slide-item-container-right {
-    float: right;
-    box-sizing: border-box;
-    width: 50%;
-    height: 300px;
-    padding: 20px 30px;
-    position: relative
-}
-
-@media (max-width:991px) {
-    .profile-experiences .slide-item-container-right {
-        height: 240px
-    }
-}
-
-@media (max-width:543px) {
-    .profile-experiences .slide-item-container-right {
-        width: 100%;
-        height: 250px
-    }
-}
-
-.profile-experiences .slide-item-container-right .slide-item-info {
-    overflow: hidden
-}
-
-.profile-experiences .slide-item-container-right .slide-item-name {
-    white-space: nowrap;
-    text-overflow: ellipsis;
-    padding-bottom: 6px;
-    font-size: 22px;
-    display: block;
-    overflow: hidden
-}
-
-.profile-experiences .slide-item-container-right .slide-item-description {
-    white-space: pre-wrap;
-    border-top: 1px solid #b8b8b8;
-    height: 100px;
-    margin: 0;
-    padding: 5px 0 0;
-    overflow-y: hidden
-}
-
-.profile-experiences .slide-item-container-right .slide-item-stats {
-    width: calc(100% - 60px);
-    position: absolute;
-    bottom: 36px
-}
-
-@media (max-width:991px) {
-    .profile-experiences .slide-item-container-right .slide-item-stats {
-        bottom: 12px
-    }
-}
-
-.profile-experiences .slide-item-container-right .slide-item-stats ul {
-    margin: 0;
-    padding: 0;
-    list-style: none
-}
-
-.profile-experiences .slide-item-container-right .slide-item-stats .list-item {
-    float: left;
-    text-align: left;
-    width: 50%
-}
-
-.profile-experiences .slide-item-container-right .slide-item-stats .text-label {
-    opacity: .6
-}
-
-.profile-experiences .slide-item-container-right .slide-item-stats .text-lead {
-    font-size: 20px
-}
-
-.profile-experiences .carousel-control {
-    text-align: center;
-    cursor: pointer;
-    z-index: 1000;
-    background-color: rgba(25, 25, 25, .3);
-    border: 2px solid #fff;
-    border-radius: 50%;
-    width: 48px;
-    height: 48px;
-    display: none;
-    position: absolute;
-    top: calc(50% - 24px)
-}
-
-.profile-experiences .carousel-control:hover,
-.profile-experiences .carousel-control:focus {
-    background-color: rgba(25, 25, 25, .75)
-}
-
-.profile-experiences .carousel-control.left {
-    left: 18px
-}
-
-.profile-experiences .carousel-control.right {
-    right: 18px
-}
-
-.profile-experiences .carousel-control .icon-carousel-left,
-.profile-experiences .carousel-control .icon-carousel-right {
-    margin: 8px auto
-}
-
 .trusted-friend-social-avatar-circle {
     border-radius: 50%;
     -ms-flex-negative: 0;
@@ -1075,31 +771,6 @@
     bottom: 0;
     left: 0;
     right: 0
-}
-
-.profile-platform-container .profile-tab {
-    --color-tab: var(--color-content-muted);
-    --color-tab-border: var(--color-stroke-default);
-    --size-tab-border: -1px;
-    --cursor: pointer
-}
-
-.profile-platform-container .profile-tab.active {
-    --color-tab: var(--color-content-emphasis);
-    --color-tab-border: var(--color-content-emphasis);
-    --size-tab-border: -2px;
-    --cursor: default
-}
-
-.profile-platform-container .profile-tab:hover {
-    color: var(--color-content-emphasis);
-    box-shadow: inset 0 var(--size-tab-border)var(--color-content-emphasis)
-}
-
-.profile-platform-container .profile-tab {
-    color: var(--color-tab);
-    box-shadow: inset 0 var(--size-tab-border)var(--color-tab-border);
-    cursor: var(--cursor)
 }
 
 .profile-platform-container .profile-carousel {

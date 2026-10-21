@@ -45,7 +45,7 @@ Roblox.LangDynamic["Feature.Parents"] = {
     "Title.SomethingWentWrong": "Something Went Wrong",
     "Description.RestartSession": "To restart the process and complete your child’s request, re-enter your email on your child’s device. ",
     "Title.AllSet": "You’re all set",
-    "Description.AllSet": "You’ve already responded to this request",
+    "Description.AllSet": "This request has already been answered",
     "Title.ExitMessage": "Continue or Exit",
     "Message.ExitMessage": "Continue to complete your child's request",
     "Action.ExitSetup": "Exit Setup",

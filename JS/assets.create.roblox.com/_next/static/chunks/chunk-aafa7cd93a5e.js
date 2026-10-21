@@ -3,7 +3,7 @@
     try {
         var e = "undefined" != typeof globalThis ? globalThis : "undefined" != typeof global ? global : "undefined" != typeof window ? window : "undefined" != typeof self ? self : {},
             n = (new e.Error).stack;
-        n && ((e._debugIds || (e._debugIds = {}))[n] = "fa76985a-3d70-c065-68c6-73b1d932c4d4")
+        n && ((e._debugIds || (e._debugIds = {}))[n] = "5480a2b5-cb7a-ac9f-47d9-9e1fee8c9c4e")
     } catch (e) {}
 }();
 (globalThis.TURBOPACK || (globalThis.TURBOPACK = [])).push(["object" == typeof document ? document.currentScript : void 0, 739167, e => {
@@ -23,1535 +23,1535 @@
     var c, m, d = l;
     (y = m || (m = {})).AbuseCategory = "AbuseCategory", y.AbuseChannel = "AbuseChannel", y.AcquisitionSource = "AcquisitionSource", y.ActionType = "ActionType", y.AdAccountId = "AdAccountId", y.AdFormat = "AdFormat", y.AdId = "AdId", y.AdInstanceName = "AdInstanceName", y.AdPlacementId = "AdPlacementId", y.AdRewardId = "AdRewardId", y.AdSetId = "AdSetId", y.AdsPublisherReportingDataVersion = "AdsPublisherReportingDataVersion", y.AffiliateLinkDailyCampaignName = "AffiliateLinkDailyCampaignName", y.AffiliateLinkDailyIsEstimate = "AffiliateLinkDailyIsEstimate", y.AffiliateLinkDailyLinkId = "AffiliateLinkDailyLinkId", y.AffiliateLinkDailyTimeBucket = "AffiliateLinkDailyTimeBucket", y.AgeGroup = "AgeGroup", y.AgeGroupV2 = "AgeGroupV2", y.AgreementId = "AgreementId", y.AlertId = "AlertId", y.AnnouncementEventType = "AnnouncementEventType", y.AnnouncementId = "AnnouncementId", y.AnnouncementPublishDate = "AnnouncementPublishDate", y.AttributionDateHour = "AttributionDateHour", y.AvatarAssetBundleType = "AvatarAssetBundleType", y.AvatarItemId = "AvatarItemId", y.AvatarItemLimitedStatus = "AvatarItemLimitedStatus", y.AvatarItemTargetType = "AvatarItemTargetType", y.AvatarItemTimedOptions = "AvatarItemTimedOptions", y.BalanceType = "BalanceType", y.BandwidthCategory = "BandwidthCategory", y.CampaignId = "CampaignId", y.CampaignName = "CampaignName", y.ClientCpuTimeCategory = "ClientCpuTimeCategory", y.ClientCpuTimeSubCategory = "ClientCpuTimeSubCategory", y.CohortDay = "CohortDay", y.CohortWeek = "CohortWeek", y.CollectibleItemTargetType = "CollectibleItemTargetType", y.CollectibleItemTargetTypeId = "CollectibleItemTargetTypeId", y.CollectibleItemType = "CollectibleItemType", y.CommerceProductId = "CommerceProductId", y.ConfigName = "ConfigName", y.Country = "Country", y.CpuTimeCategory = "CpuTimeCategory", y.CpuTimeSubCategory = "CpuTimeSubCategory", y.CrashType = "CrashType", y.CreatorRewardsAcquisitionSource = "CreatorRewardsAcquisitionSource", y.CreatorRewardsAudienceExpansionFunnelIsEstimate = "CreatorRewardsAudienceExpansionFunnelIsEstimate", y.CreatorRewardsAudienceExpansionFunnelIsReactivation = "CreatorRewardsAudienceExpansionFunnelIsReactivation", y.CreatorRewardsAudienceExpansionFunnelIsSignup = "CreatorRewardsAudienceExpansionFunnelIsSignup", y.CreatorRewardsDailyIsEstimate = "CreatorRewardsDailyIsEstimate", y.CreatorRewardsDailySource = "CreatorRewardsDailySource", y.CsmResult = "CsmResult", y.CsmTopic = "CsmTopic", y.CurrencyType = "CurrencyType", y.CustomEventName = "CustomEventName", y.CustomField1 = "CustomField1", y.CustomField2 = "CustomField2", y.CustomField3 = "CustomField3", y.DataModelRecvInstanceType = "DataModelRecvInstanceType", y.DataModelSendInstanceType = "DataModelSendInstanceType", y.DataQuality = "DataQuality", y.DataStoreOperation = "DataStoreOperation", y.DataStoreRequestSource = "DataStoreRequestSource", y.DataStoreStatus = "DataStoreStatus", y.DataStoreTypeV2 = "DataStoreTypeV2", y.DeviceTrustLevel = "DeviceTrustLevel", y.EarningsType = "EarningsType", y.EndTimeUTC = "EndTimeUTC", y.EventCategory = "EventCategory", y.Experiment = "Experiment", y.ExperimentMetric = "ExperimentMetric", y.ExperimentMetricKey = "ExperimentMetricKey", y.ExperimentVariant = "ExperimentVariant", y.FirstPlayAcquisitionSource = "FirstPlayAcquisitionSource", y.FirstSeenPlaceVersion = "FirstSeenPlaceVersion", y.FlowType = "FlowType", y.ForumContentEventType = "ForumContentEventType", y.FromNode = "FromNode", y.FromStage = "FromStage", y.FunnelName = "FunnelName", y.FunnelStep = "FunnelStep", y.GamePassId = "GamePassId", y.Gender = "Gender", y.HttpServiceDomains = "HttpServiceDomains", y.HttpServiceDomainsExtended = "HttpServiceDomainsExtended", y.HttpServiceMethod = "HttpServiceMethod", y.HttpServiceStatus = "HttpServiceStatus", y.ImmersiveEventType = "ImmersiveEventType", y.IpFamilyName = "IpFamilyName", y.IsFree = "IsFree", y.IsNewUser = "IsNewUser", y.ItemSku = "ItemSku", y.JourneyName = "JourneyName", y.JourneyVersion = "JourneyVersion", y.Keyword = "Keyword", y.LicenseName = "LicenseName", y.Locale = "Locale", y.LocationId = "LocationId", y.LogSeverity = "LogSeverity", y.LogSource = "LogSource", y.MarketplaceAffiliateLinkId = "MarketplaceAffiliateLinkId", y.MarketplaceAffiliateLinkItemId = "MarketplaceAffiliateLinkItemId", y.MatchmakingAttribute = "MatchmakingAttribute", y.MatchmakingCategoricalCustomSignal = "MatchmakingCategoricalCustomSignal", y.MatchmakingNumericCustomSignal = "MatchmakingNumericCustomSignal", y.MatchmakingPlayerAttributesLoadingStatus = "MatchmakingPlayerAttributesLoadingStatus", y.MatchmakingRule = "MatchmakingRule", y.MatchmakingRulesEffectStatus = "MatchmakingRulesEffectStatus", y.MembershipEventType = "MembershipEventType", y.MemoryGroup = "MemoryGroup", y.MemoryStoreErrorRateAlertSeverity = "MemoryStoreErrorRateAlertSeverity", y.MemoryStoreMemoryUsageAlertSeverity = "MemoryStoreMemoryUsageAlertSeverity", y.MemoryStoreOperation = "MemoryStoreOperation", y.MemoryStoreStatus = "MemoryStoreStatus", y.MemoryStoreThrottlingAlertSeverity = "MemoryStoreThrottlingAlertSeverity", y.MemoryUsageCategory = "MemoryUsageCategory", y.MemoryUsageSubCategory = "MemoryUsageSubCategory", y.MessageHash = "MessageHash", y.MetricResultType = "MetricResultType", y.NotificationChannel = "NotificationChannel", y.OccurrenceId = "OccurrenceId", y.OperatingSystem = "OperatingSystem", y.Outcome = "Outcome", y.PageViewContext = "PageViewContext", y.PayerStatus = "PayerStatus", y.Place = "Place", y.PlacementType = "PlacementType", y.PlaceVersion = "PlaceVersion", y.Platform = "Platform", y.PlaybackSegment = "PlaybackSegment", y.PlaybackType = "PlaybackType", y.ProductKey = "ProductKey", y.ProductType = "ProductType", y.PurchaseStatus = "PurchaseStatus", y.RevenueSource = "RevenueSource", y.RewardedVideoEventType = "RewardedVideoEventType", y.RobloxPlusDevBountyIsEstimate = "RobloxPlusDevBountyIsEstimate", y.RobloxPlusDevBountySource = "RobloxPlusDevBountySource", y.RobloxPlusDevBountySubscriptionTenureMonth = "RobloxPlusDevBountySubscriptionTenureMonth", y.SaleLocation = "SaleLocation", y.SalesLocation = "SalesLocation", y.SaleType = "SaleType", y.ServerAgeBucket = "ServerAgeBucket", y.SessionAcquisitionSource = "SessionAcquisitionSource", y.SessionTimeBucket = "SessionTimeBucket", y.Severity = "Severity", y.ShareLinkId = "ShareLinkId", y.SimplifiedUrl = "SimplifiedUrl", y.SourceId = "SourceId", y.SpeechToTextTranscriptionStatus = "SpeechToTextTranscriptionStatus", y.StartTimeUTC = "StartTimeUTC", y.StoreItemId = "StoreItemId", y.StoreItemType = "StoreItemType", y.TeleportType = "TeleportType", y.TextToSpeechRawAudioStatus = "TextToSpeechRawAudioStatus", y.ThumbnailAsset = "ThumbnailAsset", y.ThumbnailList = "ThumbnailList", y.ToNode = "ToNode", y.ToStage = "ToStage", y.TransactionType = "TransactionType", y.Universe = "Universe", y.UserO18Eligibility = "UserO18Eligibility", y.UserSegmentationAccountAge = "UserSegmentationAccountAge", y.UserSegmentationAcquisitionSource = "UserSegmentationAcquisitionSource", y.UserSegmentationActivationStatus = "UserSegmentationActivationStatus", y.UserSegmentationEngagementLevel = "UserSegmentationEngagementLevel", y.UserSegmentationPayerStatus = "UserSegmentationPayerStatus", y.UserSegmentationPlatformActivationStatus = "UserSegmentationPlatformActivationStatus", y.UserSegmentationPlatformSpenderStatus = "UserSegmentationPlatformSpenderStatus", y.UserSegmentationReturnStatus = "UserSegmentationReturnStatus", y.VideoType = "VideoType", y.ViolationCategory = "ViolationCategory", y.VirtualEventId = "VirtualEventId", y.VoteType = "VoteType", y.WorkflowType = "WorkflowType";
     var y, p, A = m;
-    (D = p || (p = {})).ActionRatePerDau = "ActionRatePerDau", D.ActionRatePerDauByActionType = "ActionRatePerDauByActionType", D.ActionRatePerImpression = "ActionRatePerImpression", D.AdsPublisherReportingAdsPerEDAU = "AdsPublisherReportingAdsPerEDAU", D.AdsPublisherReportingArpu = "AdsPublisherReportingArpu", D.AdsPublisherReportingDisplayAdImpressions = "AdsPublisherReportingDisplayAdImpressions", D.AdsPublisherReportingImmersiveDisplayRevenue = "AdsPublisherReportingImmersiveDisplayRevenue", D.AdsPublisherReportingImmersiveDisplayRobuxEpm = "AdsPublisherReportingImmersiveDisplayRobuxEpm", D.AdsPublisherReportingImmersiveEvents = "AdsPublisherReportingImmersiveEvents", D.AdsPublisherReportingImmersiveVideoViews = "AdsPublisherReportingImmersiveVideoViews", D.AdsPublisherReportingPortalRevenueRobux = "AdsPublisherReportingPortalRevenueRobux", D.AdsPublisherReportingRobuxEpm = "AdsPublisherReportingRobuxEpm", D.AdsPublisherReportingRobuxEpt = "AdsPublisherReportingRobuxEpt", D.AdsPublisherReportingTotalImpressions = "AdsPublisherReportingTotalImpressions", D.AdsPublisherReportingTotalRevenueRobux = "AdsPublisherReportingTotalRevenueRobux", D.AdsPublisherReportingTotalTeleports = "AdsPublisherReportingTotalTeleports", D.AdsPublisherReportingVideo2DAdsPerDUV = "AdsPublisherReportingVideo2DAdsPerDUV", D.AdsPublisherReportingVideo2DAverageEarningPerDailyUniqueViewer = "AdsPublisherReportingVideo2DAverageEarningPerDailyUniqueViewer", D.AdsPublisherReportingVideo2DConversionRate = "AdsPublisherReportingVideo2DConversionRate", D.AdsPublisherReportingVideo2DDailyUniqueViewer = "AdsPublisherReportingVideo2DDailyUniqueViewer", D.AdsPublisherReportingVideo2DEligibleDau = "AdsPublisherReportingVideo2DEligibleDau", D.AdsPublisherReportingVideo2DEpmNoUnvalidatedPc = "AdsPublisherReportingVideo2DEpmNoUnvalidatedPc", D.AdsPublisherReportingVideo2DEvents = "AdsPublisherReportingVideo2DEvents", D.AdsPublisherReportingVideo2DFillPercent = "AdsPublisherReportingVideo2DFillPercent", D.AdsPublisherReportingVideo2DFills = "AdsPublisherReportingVideo2DFills", D.AdsPublisherReportingVideo2DImpressions = "AdsPublisherReportingVideo2DImpressions", D.AdsPublisherReportingVideo2DReachRatio = "AdsPublisherReportingVideo2DReachRatio", D.AdsPublisherReportingVideo2DRequests = "AdsPublisherReportingVideo2DRequests", D.AdsPublisherReportingVideo2DRevenueRobux = "AdsPublisherReportingVideo2DRevenueRobux", D.AdsPublisherReportingVideo2DRewardPercent = "AdsPublisherReportingVideo2DRewardPercent", D.AdsPublisherReportingVideo2DRewards = "AdsPublisherReportingVideo2DRewards", D.AdsPublisherReportingVideo2DRobuxEpm = "AdsPublisherReportingVideo2DRobuxEpm", D.AdsRoasEstimate = "AdsRoasEstimate", D.AdsRoasEstimateByUniverse = "AdsRoasEstimateByUniverse", D.AdsUAEarningsUsdDefaultView = "AdsUAEarningsUsdDefaultView", D.AdsUAEarningsUsdDefaultViewByUniverse = "AdsUAEarningsUsdDefaultViewByUniverse", D.AdsUAExpNumPlaysDefaultView = "AdsUAExpNumPlaysDefaultView", D.AdsUAExpNumPlaysDefaultViewByUniverse = "AdsUAExpNumPlaysDefaultViewByUniverse", D.AdsUAExpNumPlaysNewUserView = "AdsUAExpNumPlaysNewUserView", D.AdsUAExpNumPlaysNewUserViewByUniverse = "AdsUAExpNumPlaysNewUserViewByUniverse", D.AdsUAExpNumPlaysResurrected30dUserView = "AdsUAExpNumPlaysResurrected30dUserView", D.AdsUAExpNumPlaysResurrected30dUserViewByUniverse = "AdsUAExpNumPlaysResurrected30dUserViewByUniverse", D.AdsUAExpNumPlaysResurrected7dUserView = "AdsUAExpNumPlaysResurrected7dUserView", D.AdsUAExpNumPlaysResurrected7dUserViewByUniverse = "AdsUAExpNumPlaysResurrected7dUserViewByUniverse", D.AdsUAExpNumPlaysReturningUserView = "AdsUAExpNumPlaysReturningUserView", D.AdsUAExpNumPlaysReturningUserViewByUniverse = "AdsUAExpNumPlaysReturningUserViewByUniverse", D.AdsUAExpPlaytimeDefaultView = "AdsUAExpPlaytimeDefaultView", D.AdsUAExpPlaytimeDefaultViewByUniverse = "AdsUAExpPlaytimeDefaultViewByUniverse", D.AdsUAExpPlaytimeNewUserView = "AdsUAExpPlaytimeNewUserView", D.AdsUAExpPlaytimeNewUserViewByUniverse = "AdsUAExpPlaytimeNewUserViewByUniverse", D.AdsUAExpPlaytimeResurrected30dUserView = "AdsUAExpPlaytimeResurrected30dUserView", D.AdsUAExpPlaytimeResurrected30dUserViewByUniverse = "AdsUAExpPlaytimeResurrected30dUserViewByUniverse", D.AdsUAExpPlaytimeResurrected7dUserView = "AdsUAExpPlaytimeResurrected7dUserView", D.AdsUAExpPlaytimeResurrected7dUserViewByUniverse = "AdsUAExpPlaytimeResurrected7dUserViewByUniverse", D.AdsUAExpPlaytimeReturningUserView = "AdsUAExpPlaytimeReturningUserView", D.AdsUAExpPlaytimeReturningUserViewByUniverse = "AdsUAExpPlaytimeReturningUserViewByUniverse", D.AdsUAExpRobuxRevenueDefaultView = "AdsUAExpRobuxRevenueDefaultView", D.AdsUAExpRobuxRevenueDefaultViewByUniverse = "AdsUAExpRobuxRevenueDefaultViewByUniverse", D.AdsUAExpRobuxRevenueNewUserView = "AdsUAExpRobuxRevenueNewUserView", D.AdsUAExpRobuxRevenueNewUserViewByUniverse = "AdsUAExpRobuxRevenueNewUserViewByUniverse", D.AdsUAExpRobuxRevenueResurrected30dUserView = "AdsUAExpRobuxRevenueResurrected30dUserView", D.AdsUAExpRobuxRevenueResurrected30dUserViewByUniverse = "AdsUAExpRobuxRevenueResurrected30dUserViewByUniverse", D.AdsUAExpRobuxRevenueResurrected7dUserView = "AdsUAExpRobuxRevenueResurrected7dUserView", D.AdsUAExpRobuxRevenueResurrected7dUserViewByUniverse = "AdsUAExpRobuxRevenueResurrected7dUserViewByUniverse", D.AdsUAExpRobuxRevenueReturningUserView = "AdsUAExpRobuxRevenueReturningUserView", D.AdsUAExpRobuxRevenueReturningUserViewByUniverse = "AdsUAExpRobuxRevenueReturningUserViewByUniverse", D.AdsUANumClicksDefaultView = "AdsUANumClicksDefaultView", D.AdsUANumClicksDefaultViewByUniverse = "AdsUANumClicksDefaultViewByUniverse", D.AdsUANumClicksNewUsers = "AdsUANumClicksNewUsers", D.AdsUANumClicksNewUsersByUniverse = "AdsUANumClicksNewUsersByUniverse", D.AdsUANumClicksResurrected30dUsers = "AdsUANumClicksResurrected30dUsers", D.AdsUANumClicksResurrected30dUsersByUniverse = "AdsUANumClicksResurrected30dUsersByUniverse", D.AdsUANumClicksResurrected7dUsers = "AdsUANumClicksResurrected7dUsers", D.AdsUANumClicksResurrected7dUsersByUniverse = "AdsUANumClicksResurrected7dUsersByUniverse", D.AdsUANumClicksReturningUsers = "AdsUANumClicksReturningUsers", D.AdsUANumClicksReturningUsersByUniverse = "AdsUANumClicksReturningUsersByUniverse", D.AdsUANumImpressionsDefaultView = "AdsUANumImpressionsDefaultView", D.AdsUANumImpressionsDefaultViewByUniverse = "AdsUANumImpressionsDefaultViewByUniverse", D.AdsUANumImpressionsNewUsers = "AdsUANumImpressionsNewUsers", D.AdsUANumImpressionsNewUsersByUniverse = "AdsUANumImpressionsNewUsersByUniverse", D.AdsUANumImpressionsResurrected30dUsers = "AdsUANumImpressionsResurrected30dUsers", D.AdsUANumImpressionsResurrected30dUsersByUniverse = "AdsUANumImpressionsResurrected30dUsersByUniverse", D.AdsUANumImpressionsResurrected7dUsers = "AdsUANumImpressionsResurrected7dUsers", D.AdsUANumImpressionsResurrected7dUsersByUniverse = "AdsUANumImpressionsResurrected7dUsersByUniverse", D.AdsUANumImpressionsReturningUsers = "AdsUANumImpressionsReturningUsers", D.AdsUANumImpressionsReturningUsersByUniverse = "AdsUANumImpressionsReturningUsersByUniverse", D.AdsUANumPlaysDefaultView = "AdsUANumPlaysDefaultView", D.AdsUANumPlaysDefaultViewByUniverse = "AdsUANumPlaysDefaultViewByUniverse", D.AdsUANumPlaysNewUserView = "AdsUANumPlaysNewUserView", D.AdsUANumPlaysNewUserViewByUniverse = "AdsUANumPlaysNewUserViewByUniverse", D.AdsUANumPlaysResurrected30dUserView = "AdsUANumPlaysResurrected30dUserView", D.AdsUANumPlaysResurrected30dUserViewByUniverse = "AdsUANumPlaysResurrected30dUserViewByUniverse", D.AdsUANumPlaysResurrected7dUserView = "AdsUANumPlaysResurrected7dUserView", D.AdsUANumPlaysResurrected7dUserViewByUniverse = "AdsUANumPlaysResurrected7dUserViewByUniverse", D.AdsUANumPlaysReturningUserView = "AdsUANumPlaysReturningUserView", D.AdsUANumPlaysReturningUserViewByUniverse = "AdsUANumPlaysReturningUserViewByUniverse", D.AdsUAPlaytimeDefaultView = "AdsUAPlaytimeDefaultView", D.AdsUAPlaytimeDefaultViewByUniverse = "AdsUAPlaytimeDefaultViewByUniverse", D.AdsUAPlaytimeNewUserView = "AdsUAPlaytimeNewUserView", D.AdsUAPlaytimeNewUserViewByUniverse = "AdsUAPlaytimeNewUserViewByUniverse", D.AdsUAPlaytimeResurrected30dUserView = "AdsUAPlaytimeResurrected30dUserView", D.AdsUAPlaytimeResurrected30dUserViewByUniverse = "AdsUAPlaytimeResurrected30dUserViewByUniverse", D.AdsUAPlaytimeResurrected7dUserView = "AdsUAPlaytimeResurrected7dUserView", D.AdsUAPlaytimeResurrected7dUserViewByUniverse = "AdsUAPlaytimeResurrected7dUserViewByUniverse", D.AdsUAPlaytimeReturningUserView = "AdsUAPlaytimeReturningUserView", D.AdsUAPlaytimeReturningUserViewByUniverse = "AdsUAPlaytimeReturningUserViewByUniverse", D.AdsUARoas = "AdsUARoas", D.AdsUARoasByUniverse = "AdsUARoasByUniverse", D.AdsUARobuxRevenueDefaultView = "AdsUARobuxRevenueDefaultView", D.AdsUARobuxRevenueDefaultViewByUniverse = "AdsUARobuxRevenueDefaultViewByUniverse", D.AdsUARobuxRevenueNewUserView = "AdsUARobuxRevenueNewUserView", D.AdsUARobuxRevenueNewUserViewByUniverse = "AdsUARobuxRevenueNewUserViewByUniverse", D.AdsUARobuxRevenueResurrected30dUserView = "AdsUARobuxRevenueResurrected30dUserView", D.AdsUARobuxRevenueResurrected30dUserViewByUniverse = "AdsUARobuxRevenueResurrected30dUserViewByUniverse", D.AdsUARobuxRevenueResurrected7dUserView = "AdsUARobuxRevenueResurrected7dUserView", D.AdsUARobuxRevenueResurrected7dUserViewByUniverse = "AdsUARobuxRevenueResurrected7dUserViewByUniverse", D.AdsUARobuxRevenueReturningUserView = "AdsUARobuxRevenueReturningUserView", D.AdsUARobuxRevenueReturningUserViewByUniverse = "AdsUARobuxRevenueReturningUserViewByUniverse", D.AdsUATotalSpendMicroUsdDefaultView = "AdsUATotalSpendMicroUsdDefaultView", D.AdsUATotalSpendMicroUsdDefaultViewByUniverse = "AdsUATotalSpendMicroUsdDefaultViewByUniverse", D.AdsUATotalSpendMicroUsdNewUsers = "AdsUATotalSpendMicroUsdNewUsers", D.AdsUATotalSpendMicroUsdNewUsersByUniverse = "AdsUATotalSpendMicroUsdNewUsersByUniverse", D.AdsUATotalSpendMicroUsdResurrected30dUsers = "AdsUATotalSpendMicroUsdResurrected30dUsers", D.AdsUATotalSpendMicroUsdResurrected30dUsersByUniverse = "AdsUATotalSpendMicroUsdResurrected30dUsersByUniverse", D.AdsUATotalSpendMicroUsdResurrected7dUsers = "AdsUATotalSpendMicroUsdResurrected7dUsers", D.AdsUATotalSpendMicroUsdResurrected7dUsersByUniverse = "AdsUATotalSpendMicroUsdResurrected7dUsersByUniverse", D.AdsUATotalSpendMicroUsdReturningUsers = "AdsUATotalSpendMicroUsdReturningUsers", D.AdsUATotalSpendMicroUsdReturningUsersByUniverse = "AdsUATotalSpendMicroUsdReturningUsersByUniverse", D.AdsVideo2DAdsPerEDAUBreakdown = "AdsVideo2DAdsPerEDAUBreakdown", D.AdsVideo2DEligibleDauBreakdown = "AdsVideo2DEligibleDauBreakdown", D.AdsVideo2DReachRatioBreakdown = "AdsVideo2DReachRatioBreakdown", D.AffiliateLinkDailyAffiliateActiveSpenderReactivationsPayoutRobux = "AffiliateLinkDailyAffiliateActiveSpenderReactivationsPayoutRobux", D.AffiliateLinkDailyAffiliateReactivationsPayoutRobux = "AffiliateLinkDailyAffiliateReactivationsPayoutRobux", D.AffiliateLinkDailyAffiliateSignupsPayoutRobux = "AffiliateLinkDailyAffiliateSignupsPayoutRobux", D.AffiliateLinkDailyAverageRobuxBookingsPerReactivationSpender = "AffiliateLinkDailyAverageRobuxBookingsPerReactivationSpender", D.AffiliateLinkDailyAverageRobuxBookingsPerSignupSpender = "AffiliateLinkDailyAverageRobuxBookingsPerSignupSpender", D.AffiliateLinkDailyBookingsPerSpenderCombined = "AffiliateLinkDailyBookingsPerSpenderCombined", D.AffiliateLinkDailyQualifiedActiveSpenderReactivations = "AffiliateLinkDailyQualifiedActiveSpenderReactivations", D.AffiliateLinkDailyQualifiedReactivations = "AffiliateLinkDailyQualifiedReactivations", D.AffiliateLinkDailyQualifiedReactivationsBookingsRobux = "AffiliateLinkDailyQualifiedReactivationsBookingsRobux", D.AffiliateLinkDailyQualifiedReactivationsSpenders = "AffiliateLinkDailyQualifiedReactivationsSpenders", D.AffiliateLinkDailyQualifiedSignups = "AffiliateLinkDailyQualifiedSignups", D.AffiliateLinkDailyQualifiedSignupsBookingsRobux = "AffiliateLinkDailyQualifiedSignupsBookingsRobux", D.AffiliateLinkDailyQualifiedSignupSpenders = "AffiliateLinkDailyQualifiedSignupSpenders", D.AffiliateLinkDailyTotalPayoutRobux = "AffiliateLinkDailyTotalPayoutRobux", D.AffiliateLinkDailyUniqueClick = "AffiliateLinkDailyUniqueClick", D.AffiliateLinkDailyVisits = "AffiliateLinkDailyVisits", D.AlertIncidentCount = "AlertIncidentCount", D.Attribution1DPayerConversionRatio = "Attribution1DPayerConversionRatio", D.Attribution1DPayerConversionRatioMigration = "Attribution1DPayerConversionRatioMigration", D.Attribution1DPlaytimePerUserInMinutes = "Attribution1DPlaytimePerUserInMinutes", D.Attribution1DPlaytimePerUserInMinutesMigration = "Attribution1DPlaytimePerUserInMinutesMigration", D.Attribution1DRobuxPerUser = "Attribution1DRobuxPerUser", D.Attribution1DRobuxPerUserMigration = "Attribution1DRobuxPerUserMigration", D.Attribution30DPayerConversionRatio = "Attribution30DPayerConversionRatio", D.Attribution30DPayerConversionRatioMigration = "Attribution30DPayerConversionRatioMigration", D.Attribution30DPlaytimePerUserInMinutes = "Attribution30DPlaytimePerUserInMinutes", D.Attribution30DPlaytimePerUserInMinutesMigration = "Attribution30DPlaytimePerUserInMinutesMigration", D.Attribution30DRobuxPerUser = "Attribution30DRobuxPerUser", D.Attribution30DRobuxPerUserMigration = "Attribution30DRobuxPerUserMigration", D.Attribution7DPayerConversionRatio = "Attribution7DPayerConversionRatio", D.Attribution7DPayerConversionRatioMigration = "Attribution7DPayerConversionRatioMigration", D.Attribution7DPlaytimePerUserInMinutes = "Attribution7DPlaytimePerUserInMinutes", D.Attribution7DPlaytimePerUserInMinutesMigration = "Attribution7DPlaytimePerUserInMinutesMigration", D.Attribution7DRobuxPerUser = "Attribution7DRobuxPerUser", D.Attribution7DRobuxPerUserMigration = "Attribution7DRobuxPerUserMigration", D.AttributionD1RetentionRatio = "AttributionD1RetentionRatio", D.AttributionD1RetentionRatioMigration = "AttributionD1RetentionRatioMigration", D.AttributionD30RetentionRatio = "AttributionD30RetentionRatio", D.AttributionD30RetentionRatioMigration = "AttributionD30RetentionRatioMigration", D.AttributionD7RetentionRatio = "AttributionD7RetentionRatio", D.AttributionD7RetentionRatioMigration = "AttributionD7RetentionRatioMigration", D.AverageImpressionsPerUser = "AverageImpressionsPerUser", D.AveragePlayTimeMinutesPerDAU = "AveragePlayTimeMinutesPerDAU", D.AverageRevenuePerPayingUser = "AverageRevenuePerPayingUser", D.AverageRevenuePerUser = "AverageRevenuePerUser", D.AverageSessionLengthMinutes = "AverageSessionLengthMinutes", D.AvgViewTimePerView = "AvgViewTimePerView", D.AvgViewTimePerViewer = "AvgViewTimePerViewer", D.BandwidthTotalRecvBpsForOrdering = "BandwidthTotalRecvBpsForOrdering", D.BandwidthTotalRecvMaxBytes = "BandwidthTotalRecvMaxBytes", D.BandwidthTotalRecvUpdatesPerSecond = "BandwidthTotalRecvUpdatesPerSecond", D.BandwidthTotalSendBpsForOrdering = "BandwidthTotalSendBpsForOrdering", D.BandwidthTotalSendMaxBytes = "BandwidthTotalSendMaxBytes", D.BandwidthTotalSendUpdatesPerSecond = "BandwidthTotalSendUpdatesPerSecond", D.BonusPromotionsAwardedCount = "BonusPromotionsAwardedCount", D.BonusPromotionsGameJoinCount = "BonusPromotionsGameJoinCount", D.BonusPromotionsImpressionCount = "BonusPromotionsImpressionCount", D.ClickCVR = "ClickCVR", D.ClickCVRMigration = "ClickCVRMigration", D.ClientCpuTimeAvg = "ClientCpuTimeAvg", D.ClientCrashCount = "ClientCrashCount", D.ClientCrashCountMigration = "ClientCrashCountMigration", D.ClientCrashRate15m = "ClientCrashRate15m", D.ClientCrashRate15mMigration = "ClientCrashRate15mMigration", D.ClientCrashRateNotStableAlert = "ClientCrashRateNotStableAlert", D.ClientCrashRateNotStableAlertMigration = "ClientCrashRateNotStableAlertMigration", D.CommentRatePerImpression = "CommentRatePerImpression", D.CommerceCheckouts = "CommerceCheckouts", D.CommerceClicks = "CommerceClicks", D.CommerceGMV = "CommerceGMV", D.CommerceImpressions = "CommerceImpressions", D.CommerceOrders = "CommerceOrders", D.CommerceQuantitySold = "CommerceQuantitySold", D.CommerceUniqueCheckouts = "CommerceUniqueCheckouts", D.CommerceUniqueClicks = "CommerceUniqueClicks", D.CommerceUniqueImpressions = "CommerceUniqueImpressions", D.CommerceUniqueOrders = "CommerceUniqueOrders", D.CommunityAnnouncementDeliveries = "CommunityAnnouncementDeliveries", D.CommunityAnnouncementEngagement = "CommunityAnnouncementEngagement", D.CommunityAnnouncementEventCount = "CommunityAnnouncementEventCount", D.CommunityAnnouncementNetReactions = "CommunityAnnouncementNetReactions", D.CommunityAnnouncementNotificationCTR = "CommunityAnnouncementNotificationCTR", D.CommunityAnnouncementUniqueClicks = "CommunityAnnouncementUniqueClicks", D.CommunityAnnouncementUniqueUsers = "CommunityAnnouncementUniqueUsers", D.CommunityForumContentEventCount = "CommunityForumContentEventCount", D.CommunityForumContentUniqueUsers = "CommunityForumContentUniqueUsers", D.CommunityGroupPageUniqueVisitors = "CommunityGroupPageUniqueVisitors", D.CommunityGroupPageViews = "CommunityGroupPageViews", D.CommunityMembershipChangeEvents = "CommunityMembershipChangeEvents", D.CommunityMembershipCount = "CommunityMembershipCount", D.ComputeEfficiency = "ComputeEfficiency", D.ConcurrentPlayers = "ConcurrentPlayers", D.CpuCoreUtilization = "CpuCoreUtilization", D.CreatorRewardsAudienceExpansionFunnelEstimatedPayout = "CreatorRewardsAudienceExpansionFunnelEstimatedPayout", D.CreatorRewardsAudienceExpansionFunnelPayerConversion60D = "CreatorRewardsAudienceExpansionFunnelPayerConversion60D", D.CreatorRewardsAudienceExpansionFunnelPayerConversion7D = "CreatorRewardsAudienceExpansionFunnelPayerConversion7D", D.CreatorRewardsAudienceExpansionFunnelPercentOfNewUsers = "CreatorRewardsAudienceExpansionFunnelPercentOfNewUsers", D.CreatorRewardsAudienceExpansionFunnelReactivations = "CreatorRewardsAudienceExpansionFunnelReactivations", D.CreatorRewardsAudienceExpansionFunnelRetentionD1 = "CreatorRewardsAudienceExpansionFunnelRetentionD1", D.CreatorRewardsAudienceExpansionFunnelRetentionD7 = "CreatorRewardsAudienceExpansionFunnelRetentionD7", D.CreatorRewardsAudienceExpansionFunnelRevenue1D = "CreatorRewardsAudienceExpansionFunnelRevenue1D", D.CreatorRewardsAudienceExpansionFunnelRevenue60D = "CreatorRewardsAudienceExpansionFunnelRevenue60D", D.CreatorRewardsAudienceExpansionFunnelRevenue7D = "CreatorRewardsAudienceExpansionFunnelRevenue7D", D.CreatorRewardsAudienceExpansionFunnelRevenuePerPayer60D = "CreatorRewardsAudienceExpansionFunnelRevenuePerPayer60D", D.CreatorRewardsAudienceExpansionFunnelRevenuePerPayer7D = "CreatorRewardsAudienceExpansionFunnelRevenuePerPayer7D", D.CreatorRewardsAudienceExpansionFunnelRevenuePerUser60D = "CreatorRewardsAudienceExpansionFunnelRevenuePerUser60D", D.CreatorRewardsAudienceExpansionFunnelRevenuePerUser7D = "CreatorRewardsAudienceExpansionFunnelRevenuePerUser7D", D.CreatorRewardsAudienceExpansionFunnelSignups = "CreatorRewardsAudienceExpansionFunnelSignups", D.CreatorRewardsAudienceExpansionFunnelUserCount = "CreatorRewardsAudienceExpansionFunnelUserCount", D.CreatorRewardsAverageRobuxBookingsPerSpender = "CreatorRewardsAverageRobuxBookingsPerSpender", D.CreatorRewardsLifetimeEstimatedAffiliatePayoutRobux = "CreatorRewardsLifetimeEstimatedAffiliatePayoutRobux", D.CreatorRewardsLifetimeQualifiedReactivations = "CreatorRewardsLifetimeQualifiedReactivations", D.CreatorRewardsLifetimeQualifiedSignups = "CreatorRewardsLifetimeQualifiedSignups", D.CreatorRewardsLifetimeQualifiedSpenders = "CreatorRewardsLifetimeQualifiedSpenders", D.CreatorWalletClosingBalanceUsd = "CreatorWalletClosingBalanceUsd", D.CreatorWalletIncomingUsd = "CreatorWalletIncomingUsd", D.CreatorWalletOutgoingUsd = "CreatorWalletOutgoingUsd", D.CsmFanoutRatio = "CsmFanoutRatio", D.CsmFanoutRatioExtended = "CsmFanoutRatioExtended", D.CsmGameServersConnectedCount = "CsmGameServersConnectedCount", D.CsmMessageSizeBytes = "CsmMessageSizeBytes", D.CsmMessageSizeQuota = "CsmMessageSizeQuota", D.CsmPublishedMessagesCount = "CsmPublishedMessagesCount", D.CsmPublishedMessagesExtendedCount = "CsmPublishedMessagesExtendedCount", D.CsmReceivedMessagesCount = "CsmReceivedMessagesCount", D.CsmReceivedMessagesExtendedCount = "CsmReceivedMessagesExtendedCount", D.CsmReceivedMessagesQuota = "CsmReceivedMessagesQuota", D.CubeDailyRequests = "CubeDailyRequests", D.CubeLatencyAvg = "CubeLatencyAvg", D.CubeLatencyP99 = "CubeLatencyP99", D.CubeOutcomes = "CubeOutcomes", D.CubeTotalRequests = "CubeTotalRequests", D.D1Retention = "D1Retention", D.D30Retention = "D30Retention", D.D7Retention = "D7Retention", D.DailyActiveUsers = "DailyActiveUsers", D.DailyCohortRetention = "DailyCohortRetention", D.DailyRetentionCohortNoDim = "DailyRetentionCohortNoDim", D.DailyRevenue = "DailyRevenue", D.DataStoreConsumedListRequests = "DataStoreConsumedListRequests", D.DataStoreConsumedReadRequests = "DataStoreConsumedReadRequests", D.DataStoreConsumedRemoveRequests = "DataStoreConsumedRemoveRequests", D.DataStoreConsumedWriteRequests = "DataStoreConsumedWriteRequests", D.DataStoreListRequests = "DataStoreListRequests", D.DataStoreListRequestsByEndpoint = "DataStoreListRequestsByEndpoint", D.DataStoreListRequestsQuota = "DataStoreListRequestsQuota", D.DataStoreListRequestsQuotaOrdered = "DataStoreListRequestsQuotaOrdered", D.DataStoreListRequestsQuotaStandard = "DataStoreListRequestsQuotaStandard", D.DataStoreReadRequests = "DataStoreReadRequests", D.DataStoreReadRequestsByEndpoint = "DataStoreReadRequestsByEndpoint", D.DataStoreReadRequestsQuotaOrdered = "DataStoreReadRequestsQuotaOrdered", D.DataStoreReadRequestsQuotaStandard = "DataStoreReadRequestsQuotaStandard", D.DataStoreRemoveRequests = "DataStoreRemoveRequests", D.DataStoreRemoveRequestsByEndpoint = "DataStoreRemoveRequestsByEndpoint", D.DataStoreRemoveRequestsQuotaOrdered = "DataStoreRemoveRequestsQuotaOrdered", D.DataStoreRemoveRequestsQuotaStandard = "DataStoreRemoveRequestsQuotaStandard", D.DataStoreRequests = "DataStoreRequests", D.DataStoreRequestsByEndpoint = "DataStoreRequestsByEndpoint", D.DataStoreRequestsByStatus = "DataStoreRequestsByStatus", D.DataStoreStorageQuotaBytes = "DataStoreStorageQuotaBytes", D.DataStoreStorageUsageBytes = "DataStoreStorageUsageBytes", D.DataStoreWriteRequests = "DataStoreWriteRequests", D.DataStoreWriteRequestsByEndpoint = "DataStoreWriteRequestsByEndpoint", D.DataStoreWriteRequestsQuotaOrdered = "DataStoreWriteRequestsQuotaOrdered", D.DataStoreWriteRequestsQuotaStandard = "DataStoreWriteRequestsQuotaStandard", D.DauMauStickiness = "DauMauStickiness", D.DeviceTrustDailyActiveUsers = "DeviceTrustDailyActiveUsers", D.DeviceTrustRobuxSpentLast28Days = "DeviceTrustRobuxSpentLast28Days", D.EarningsTotalUsd = "EarningsTotalUsd", D.EconomyAverageWalletBalance = "EconomyAverageWalletBalance", D.EconomyTransactionAmount = "EconomyTransactionAmount", D.EconomyTransactionAmountSinks = "EconomyTransactionAmountSinks", D.EconomyTransactionCount = "EconomyTransactionCount", D.EndToEndCVR = "EndToEndCVR", D.EndToEndCVRMigration = "EndToEndCVRMigration", D.ErrorCount = "ErrorCount", D.EventAvgDailyActiveUsers = "EventAvgDailyActiveUsers", D.EventAvgDailyRevenue = "EventAvgDailyRevenue", D.EventAvgDailyUserPlaytimeMinutes = "EventAvgDailyUserPlaytimeMinutes", D.EventAvgRevenuePerDailyActiveUser = "EventAvgRevenuePerDailyActiveUser", D.ExperimentMetricAdsArpu = "ExperimentMetricAdsArpu", D.ExperimentMetricAdsArpuV2 = "ExperimentMetricAdsArpuV2", D.ExperimentMetricAdsEarnings = "ExperimentMetricAdsEarnings", D.ExperimentMetricAdsEarningsV2 = "ExperimentMetricAdsEarningsV2", D.ExperimentMetricAdsFrequency = "ExperimentMetricAdsFrequency", D.ExperimentMetricAdsFrequencyV2 = "ExperimentMetricAdsFrequencyV2", D.ExperimentMetricAdsImpressions = "ExperimentMetricAdsImpressions", D.ExperimentMetricAdsImpressionsV2 = "ExperimentMetricAdsImpressionsV2", D.ExperimentMetricAdsOptInRate = "ExperimentMetricAdsOptInRate", D.ExperimentMetricAdsOptInRateV2 = "ExperimentMetricAdsOptInRateV2", D.ExperimentMetricAverageCurrencySinkDelta = "ExperimentMetricAverageCurrencySinkDelta", D.ExperimentMetricAverageCurrencySourceDelta = "ExperimentMetricAverageCurrencySourceDelta", D.ExperimentMetricAverageCustomValue = "ExperimentMetricAverageCustomValue", D.ExperimentMetricAverageCustomValueAllUsers = "ExperimentMetricAverageCustomValueAllUsers", D.ExperimentMetricAverageNetCurrencyDelta = "ExperimentMetricAverageNetCurrencyDelta", D.ExperimentMetricAverageRevenuePerPayingUser = "ExperimentMetricAverageRevenuePerPayingUser", D.ExperimentMetricAverageRevenuePerPayingUserV2 = "ExperimentMetricAverageRevenuePerPayingUserV2", D.ExperimentMetricAverageRevenuePerUser = "ExperimentMetricAverageRevenuePerUser", D.ExperimentMetricAverageRevenuePerUserV2 = "ExperimentMetricAverageRevenuePerUserV2", D.ExperimentMetricAverageSessionTime = "ExperimentMetricAverageSessionTime", D.ExperimentMetricAverageSessionTimeV2 = "ExperimentMetricAverageSessionTimeV2", D.ExperimentMetricCustomPenetration = "ExperimentMetricCustomPenetration", D.ExperimentMetricDay1Retention = "ExperimentMetricDay1Retention", D.ExperimentMetricDay1RetentionV2 = "ExperimentMetricDay1RetentionV2", D.ExperimentMetricDay7Retention = "ExperimentMetricDay7Retention", D.ExperimentMetricDay7RetentionV2 = "ExperimentMetricDay7RetentionV2", D.ExperimentMetricMean = "ExperimentMetricMean", D.ExperimentMetricPayerConversionRate = "ExperimentMetricPayerConversionRate", D.ExperimentMetricPayerConversionRateV2 = "ExperimentMetricPayerConversionRateV2", D.ExperimentMetricPerSessionFunnelConversion = "ExperimentMetricPerSessionFunnelConversion", D.ExperimentMetricPerUserFunnelConversion = "ExperimentMetricPerUserFunnelConversion", D.ExperimentMetricPlaytimePerUser = "ExperimentMetricPlaytimePerUser", D.ExperimentMetricPlaytimePerUserV2 = "ExperimentMetricPlaytimePerUserV2", D.ExperimentMetricQualifiedPlayThroughRate = "ExperimentMetricQualifiedPlayThroughRate", D.ExperimentMetricQualifiedPlayThroughRateV2 = "ExperimentMetricQualifiedPlayThroughRateV2", D.ForwardD1Retention = "ForwardD1Retention", D.ForwardD30Retention = "ForwardD30Retention", D.ForwardD7Retention = "ForwardD7Retention", D.FriendReferralAverageRobuxBookingsPerSpender = "FriendReferralAverageRobuxBookingsPerSpender", D.FriendReferralLifetimeEstimatedAffiliatePayoutRobux = "FriendReferralLifetimeEstimatedAffiliatePayoutRobux", D.FriendReferralLifetimeQualifiedSignups = "FriendReferralLifetimeQualifiedSignups", D.FriendReferralLifetimeQualifiedSpenders = "FriendReferralLifetimeQualifiedSpenders", D.FriendReferralLifetimeVisits = "FriendReferralLifetimeVisits", D.FunnelCohortCompletionRate = "FunnelCohortCompletionRate", D.FunnelCohortSessionCompletionRate = "FunnelCohortSessionCompletionRate", D.FunnelStepChurnRate = "FunnelStepChurnRate", D.FunnelStepCompletionRate = "FunnelStepCompletionRate", D.FunnelStepOverallCompletionRate = "FunnelStepOverallCompletionRate", D.FunnelStepTotalCount = "FunnelStepTotalCount", D.FunnelUserChurnRate = "FunnelUserChurnRate", D.FunnelUserOverallCompletionRate = "FunnelUserOverallCompletionRate", D.FunnelUserStepCompletionRate = "FunnelUserStepCompletionRate", D.FunnelUserTotalCount = "FunnelUserTotalCount", D.HttpServiceRequestsCount = "HttpServiceRequestsCount", D.HttpServiceRequestsExtendedCount = "HttpServiceRequestsExtendedCount", D.HttpServiceRequestsV2 = "HttpServiceRequestsV2", D.ImpressionCVR = "ImpressionCVR", D.ImpressionCVRMigration = "ImpressionCVRMigration", D.IphEarningsRobux = "IphEarningsRobux", D.IphEarningsRobuxPartial = "IphEarningsRobuxPartial", D.IphTransactionCount = "IphTransactionCount", D.IphTransactionCountPartial = "IphTransactionCountPartial", D.ItemAvatar3dLimitedAvailableQuantity = "ItemAvatar3dLimitedAvailableQuantity", D.ItemAvatar3dLimitedTotalQuantity = "ItemAvatar3dLimitedTotalQuantity", D.ItemAverageTransactionPrice = "ItemAverageTransactionPrice", D.ItemLifetimeCreatorEarning = "ItemLifetimeCreatorEarning", D.ItemLifetimeRebateAmount = "ItemLifetimeRebateAmount", D.ItemLifetimeRobuxSpent = "ItemLifetimeRobuxSpent", D.ItemLifetimeTransactionCount = "ItemLifetimeTransactionCount", D.ItemLimitedSoldPercentage = "ItemLimitedSoldPercentage", D.ItemMonetizationRevenue = "ItemMonetizationRevenue", D.ItemMonetizationSales = "ItemMonetizationSales", D.ItemPublishAdvance = "ItemPublishAdvance", D.ItemPublishAdvanceRecoupedPercentage = "ItemPublishAdvanceRecoupedPercentage", D.ItemTotalCreatorEarning = "ItemTotalCreatorEarning", D.ItemTotalRobuxSpent = "ItemTotalRobuxSpent", D.ItemTotalTransactionCount = "ItemTotalTransactionCount", D.JoinRatePerImpression = "JoinRatePerImpression", D.JourneyCompletionUsers = "JourneyCompletionUsers", D.JourneyEntryTransitions = "JourneyEntryTransitions", D.JourneyLastStageTransitions = "JourneyLastStageTransitions", D.JourneyNodeTransitionChurnCount = "JourneyNodeTransitionChurnCount", D.JourneyNodeTransitionChurnRate = "JourneyNodeTransitionChurnRate", D.JourneyNodeTransitionCount = "JourneyNodeTransitionCount", D.JourneyNodeUserChurnCount = "JourneyNodeUserChurnCount", D.JourneyNodeUserChurnRate = "JourneyNodeUserChurnRate", D.JourneyNodeUserCount = "JourneyNodeUserCount", D.JourneyStageChurnRate = "JourneyStageChurnRate", D.JourneyStageSkipRate = "JourneyStageSkipRate", D.JourneyStageSkipTransitionCount = "JourneyStageSkipTransitionCount", D.JourneyStageSkipTransitionRate = "JourneyStageSkipTransitionRate", D.JourneyStageSkipUserCount = "JourneyStageSkipUserCount", D.JourneyStageTransitionChurnRate = "JourneyStageTransitionChurnRate", D.JourneyStageTransitionCount = "JourneyStageTransitionCount", D.JourneyStageUserCount = "JourneyStageUserCount", D.JourneyTotalUsers = "JourneyTotalUsers", D.JourneyTransitionCount = "JourneyTransitionCount", D.JourneyTransitionCountUser = "JourneyTransitionCountUser", D.JourneyTransitionPctOfSource = "JourneyTransitionPctOfSource", D.JourneyTransitionPctOfStart = "JourneyTransitionPctOfStart", D.JourneyUserPctOfSource = "JourneyUserPctOfSource", D.JourneyUserPctOfStart = "JourneyUserPctOfStart", D.MaintenanceThreshold = "MaintenanceThreshold", D.MarketplaceAffiliateLinkAttributedPurchases = "MarketplaceAffiliateLinkAttributedPurchases", D.MarketplaceAffiliateLinkAttributedSpendRobux = "MarketplaceAffiliateLinkAttributedSpendRobux", D.MarketplaceAffiliateLinkClicks = "MarketplaceAffiliateLinkClicks", D.MarketplaceAffiliateLinkConversionRate = "MarketplaceAffiliateLinkConversionRate", D.MarketplaceAffiliateLinkEstimatedPayoutRobux = "MarketplaceAffiliateLinkEstimatedPayoutRobux", D.MarketplaceAffiliateLinkUniqueClicks = "MarketplaceAffiliateLinkUniqueClicks", D.MatchmakingPlayerAttributesLoadingStatusAvg = "MatchmakingPlayerAttributesLoadingStatusAvg", D.MatchmakingSignalsPreferredPlayerMatchRatioAvg = "MatchmakingSignalsPreferredPlayerMatchRatioAvg", D.MemoryStoreErrorRateAlert = "MemoryStoreErrorRateAlert", D.MemoryStoreMemoryQuotaBytes = "MemoryStoreMemoryQuotaBytes", D.MemoryStoreMemoryUsageAlert = "MemoryStoreMemoryUsageAlert", D.MemoryStoreMemoryUsageBytes = "MemoryStoreMemoryUsageBytes", D.MemoryStoreRequests = "MemoryStoreRequests", D.MemoryStoreRequestsByEndpoint = "MemoryStoreRequestsByEndpoint", D.MemoryStoreRequestsByStatus = "MemoryStoreRequestsByStatus", D.MemoryStoreRequestUnits = "MemoryStoreRequestUnits", D.MemoryStoreRequestUnitsByEndpoint = "MemoryStoreRequestUnitsByEndpoint", D.MemoryStoreRequestUnitsQuota = "MemoryStoreRequestUnitsQuota", D.MemoryStoreThrottlingAlert = "MemoryStoreThrottlingAlert", D.MonthlyActiveUsers = "MonthlyActiveUsers", D.OomUnexpectedExits = "OomUnexpectedExits", D.OomUnexpectedExitsMigration = "OomUnexpectedExitsMigration", D.PayingUsers = "PayingUsers", D.PayingUsersCVR = "PayingUsersCVR", D.PayoutRobux = "PayoutRobux", D.PayoutRobuxV2 = "PayoutRobuxV2", D.PeakConcurrentPlayers = "PeakConcurrentPlayers", D.PersonalizedShopsConversionRate = "PersonalizedShopsConversionRate", D.PersonalizedShopsImpressions = "PersonalizedShopsImpressions", D.PersonalizedShopsPurchases = "PersonalizedShopsPurchases", D.PersonalizedShopsRevenue = "PersonalizedShopsRevenue", D.PlayerFeedbackVotesCount = "PlayerFeedbackVotesCount", D.PotentialEarningsTotalUsd = "PotentialEarningsTotalUsd", D.PotentialExtraEarningsTotalUsd = "PotentialExtraEarningsTotalUsd", D.PurchaseRatePerImpression = "PurchaseRatePerImpression", D.QualifiedEndToEndCVR = "QualifiedEndToEndCVR", D.QualifiedEndToEndCVRMigration = "QualifiedEndToEndCVRMigration", D.QualifiedUniqueUsersWithPlaySessions = "QualifiedUniqueUsersWithPlaySessions", D.QualifiedUniqueUsersWithPlaySessionsMigration = "QualifiedUniqueUsersWithPlaySessionsMigration", D.ReactionRatePerImpression = "ReactionRatePerImpression", D.RecommendationDau = "RecommendationDau", D.RecommendationViewsTotal = "RecommendationViewsTotal", D.RelativeThresholdCapture = "RelativeThresholdCapture", D.RFYD1CoplayDays = "RFYD1CoplayDays", D.RFYD1Playtime = "RFYD1Playtime", D.RFYD1QualifiedPlaySessions = "RFYD1QualifiedPlaySessions", D.RFYD1RobuxSpend = "RFYD1RobuxSpend", D.RFYD1SpendDay = "RFYD1SpendDay", D.RFYD2To7CoplayDays = "RFYD2To7CoplayDays", D.RFYD2To7PlayDays = "RFYD2To7PlayDays", D.RFYD2To7Playtime = "RFYD2To7Playtime", D.RFYD2To7QualifiedPlaySessions = "RFYD2To7QualifiedPlaySessions", D.RFYD2To7RobuxSpend = "RFYD2To7RobuxSpend", D.RFYD2To7SpendDays = "RFYD2To7SpendDays", D.RFYD8To28CoplayDays = "RFYD8To28CoplayDays", D.RFYD8To28PlayDays = "RFYD8To28PlayDays", D.RFYD8To28Playtime = "RFYD8To28Playtime", D.RFYD8To28QualifiedPlaySessions = "RFYD8To28QualifiedPlaySessions", D.RFYD8To28RobuxSpend = "RFYD8To28RobuxSpend", D.RFYD8To28SpendDays = "RFYD8To28SpendDays", D.RFYDeepEngagementRate = "RFYDeepEngagementRate", D.RFYDuration0To60 = "RFYDuration0To60", D.RFYDuration181To600 = "RFYDuration181To600", D.RFYDuration61To180 = "RFYDuration61To180", D.RFYDurationGreaterThan600 = "RFYDurationGreaterThan600", D.RFYL7IntentionalCoplayDays = "RFYL7IntentionalCoplayDays", D.RFYL7PlayDays = "RFYL7PlayDays", D.RFYL7PlaySessionsPerUser = "RFYL7PlaySessionsPerUser", D.RFYL7PlayTime = "RFYL7PlayTime", D.RFYL7RobuxSpent = "RFYL7RobuxSpent", D.RFYL7RobuxSpentDays = "RFYL7RobuxSpentDays", D.RFYPlayThroughRate = "RFYPlayThroughRate", D.RFYQualifiedPTR = "RFYQualifiedPTR", D.RFYUniqueNotInterestedUsersPerMillionImpressions = "RFYUniqueNotInterestedUsersPerMillionImpressions", D.RobloxPlusDevBountyAvgPlaytimePerSubscriberMins = "RobloxPlusDevBountyAvgPlaytimePerSubscriberMins", D.RobloxPlusDevBountyAvgRobuxSpentPerSubscriber = "RobloxPlusDevBountyAvgRobuxSpentPerSubscriber", D.RobloxPlusDevBountyDailySubscribers = "RobloxPlusDevBountyDailySubscribers", D.RobloxPlusDevBountyPayoutRobux = "RobloxPlusDevBountyPayoutRobux", D.RobloxPlusDevBountySubscriberCount = "RobloxPlusDevBountySubscriberCount", D.RobloxPlusDevBountySubscriberSpend = "RobloxPlusDevBountySubscriberSpend", D.RotraceTotalCalls = "RotraceTotalCalls", D.RSVPCount = "RSVPCount", D.ServerCrashCount = "ServerCrashCount", D.ShareLinkAttribution1DPayerConversionRatio = "ShareLinkAttribution1DPayerConversionRatio", D.ShareLinkAttribution1DPlaytimePerUserInMinutes = "ShareLinkAttribution1DPlaytimePerUserInMinutes", D.ShareLinkAttribution1DRobuxPerUser = "ShareLinkAttribution1DRobuxPerUser", D.ShareLinkAttribution30DPayerConversionRatio = "ShareLinkAttribution30DPayerConversionRatio", D.ShareLinkAttribution30DPlaytimePerUserInMinutes = "ShareLinkAttribution30DPlaytimePerUserInMinutes", D.ShareLinkAttribution30DRobuxPerUser = "ShareLinkAttribution30DRobuxPerUser", D.ShareLinkAttribution7DPayerConversionRatio = "ShareLinkAttribution7DPayerConversionRatio", D.ShareLinkAttribution7DPlaytimePerUserInMinutes = "ShareLinkAttribution7DPlaytimePerUserInMinutes", D.ShareLinkAttribution7DRobuxPerUser = "ShareLinkAttribution7DRobuxPerUser", D.ShareLinkAttributionD1RetentionRatio = "ShareLinkAttributionD1RetentionRatio", D.ShareLinkAttributionD30RetentionRatio = "ShareLinkAttributionD30RetentionRatio", D.ShareLinkAttributionD7RetentionRatio = "ShareLinkAttributionD7RetentionRatio", D.ShareLinkClickCVR = "ShareLinkClickCVR", D.ShareLinkQualifiedClickCVR = "ShareLinkQualifiedClickCVR", D.ShareLinkQualifiedUniqueUsersWithPlaySessions = "ShareLinkQualifiedUniqueUsersWithPlaySessions", D.ShareLinkUniqueUsersWithClicks = "ShareLinkUniqueUsersWithClicks", D.ShareLinkUniqueUsersWithPlaySessions = "ShareLinkUniqueUsersWithPlaySessions", D.ShareRatePerImpression = "ShareRatePerImpression", D.SourceCount = "SourceCount", D.SourceCountRatioKpi = "SourceCountRatioKpi", D.SpeechToTextTranscriptionQuota = "SpeechToTextTranscriptionQuota", D.SpeechToTextTranscriptionStatuses = "SpeechToTextTranscriptionStatuses", D.SpeechToTextTranscriptionUsage = "SpeechToTextTranscriptionUsage", D.SponsoredAdPlays = "SponsoredAdPlays", D.StoreRevenue = "StoreRevenue", D.StoreTransactions = "StoreTransactions", D.TargetThreshold = "TargetThreshold", D.TextToSpeechAssetSuccesses = "TextToSpeechAssetSuccesses", D.TextToSpeechRawAudioErrors = "TextToSpeechRawAudioErrors", D.TextToSpeechRawAudioQuota = "TextToSpeechRawAudioQuota", D.TextToSpeechRawAudioSuccesses = "TextToSpeechRawAudioSuccesses", D.ThumbnailAverageSessionLengthMinutes = "ThumbnailAverageSessionLengthMinutes", D.ThumbnailImpressions = "ThumbnailImpressions", D.ThumbnailL7QualifiedPTR = "ThumbnailL7QualifiedPTR", D.ThumbnailQualifiedPlays = "ThumbnailQualifiedPlays", D.ThumbnailQualifiedPTR = "ThumbnailQualifiedPTR", D.ThumbnailWinningSegments = "ThumbnailWinningSegments", D.TotalAbuseReports = "TotalAbuseReports", D.TotalActions = "TotalActions", D.TotalActionsByActionType = "TotalActionsByActionType", D.TotalComments = "TotalComments", D.TotalJoins = "TotalJoins", D.TotalPlayTimeHours = "TotalPlayTimeHours", D.TotalPurchases = "TotalPurchases", D.TotalReactionsAdded = "TotalReactionsAdded", D.TotalSessionsEndedInBucket = "TotalSessionsEndedInBucket", D.TotalShares = "TotalShares", D.TotalViewHours = "TotalViewHours", D.UniqueAbuseReportSubmittersPer1000PlaytimeHours = "UniqueAbuseReportSubmittersPer1000PlaytimeHours", D.UniqueItemsPerUser = "UniqueItemsPerUser", D.UniqueServerShutdowns = "UniqueServerShutdowns", D.UniqueUsersWithClicks = "UniqueUsersWithClicks", D.UniqueUsersWithClicksMigration = "UniqueUsersWithClicksMigration", D.UniqueUsersWithImpressions = "UniqueUsersWithImpressions", D.UniqueUsersWithImpressionsMigration = "UniqueUsersWithImpressionsMigration", D.UniqueUsersWithPlaySessions = "UniqueUsersWithPlaySessions", D.UniqueUsersWithPlaySessionsMigration = "UniqueUsersWithPlaySessionsMigration", D.UsersInExperiment = "UsersInExperiment", D.UsersInExperimentV2 = "UsersInExperimentV2", D.UsersJoinedFromNotifications = "UsersJoinedFromNotifications", D.VideoServiceExclusivePlaybackSeconds = "VideoServiceExclusivePlaybackSeconds", D.VideoServicePlaybackSeconds = "VideoServicePlaybackSeconds", D.Visits = "Visits", D.WeeklyCohortRetention = "WeeklyCohortRetention";
+    (D = p || (p = {})).ActionRatePerDau = "ActionRatePerDau", D.ActionRatePerDauByActionType = "ActionRatePerDauByActionType", D.ActionRatePerImpression = "ActionRatePerImpression", D.AdsPublisherReportingAdsPerEDAU = "AdsPublisherReportingAdsPerEDAU", D.AdsPublisherReportingArpu = "AdsPublisherReportingArpu", D.AdsPublisherReportingDisplayAdImpressions = "AdsPublisherReportingDisplayAdImpressions", D.AdsPublisherReportingImmersiveDisplayRevenue = "AdsPublisherReportingImmersiveDisplayRevenue", D.AdsPublisherReportingImmersiveDisplayRobuxEpm = "AdsPublisherReportingImmersiveDisplayRobuxEpm", D.AdsPublisherReportingImmersiveEvents = "AdsPublisherReportingImmersiveEvents", D.AdsPublisherReportingImmersiveVideoViews = "AdsPublisherReportingImmersiveVideoViews", D.AdsPublisherReportingPortalRevenueRobux = "AdsPublisherReportingPortalRevenueRobux", D.AdsPublisherReportingRobuxEpm = "AdsPublisherReportingRobuxEpm", D.AdsPublisherReportingRobuxEpt = "AdsPublisherReportingRobuxEpt", D.AdsPublisherReportingTotalImpressions = "AdsPublisherReportingTotalImpressions", D.AdsPublisherReportingTotalRevenueRobux = "AdsPublisherReportingTotalRevenueRobux", D.AdsPublisherReportingTotalTeleports = "AdsPublisherReportingTotalTeleports", D.AdsPublisherReportingVideo2DAdsPerDUV = "AdsPublisherReportingVideo2DAdsPerDUV", D.AdsPublisherReportingVideo2DAverageEarningPerDailyUniqueViewer = "AdsPublisherReportingVideo2DAverageEarningPerDailyUniqueViewer", D.AdsPublisherReportingVideo2DConversionRate = "AdsPublisherReportingVideo2DConversionRate", D.AdsPublisherReportingVideo2DDailyUniqueViewer = "AdsPublisherReportingVideo2DDailyUniqueViewer", D.AdsPublisherReportingVideo2DEligibleDau = "AdsPublisherReportingVideo2DEligibleDau", D.AdsPublisherReportingVideo2DEpmNoUnvalidatedPc = "AdsPublisherReportingVideo2DEpmNoUnvalidatedPc", D.AdsPublisherReportingVideo2DEvents = "AdsPublisherReportingVideo2DEvents", D.AdsPublisherReportingVideo2DFillPercent = "AdsPublisherReportingVideo2DFillPercent", D.AdsPublisherReportingVideo2DFills = "AdsPublisherReportingVideo2DFills", D.AdsPublisherReportingVideo2DImpressions = "AdsPublisherReportingVideo2DImpressions", D.AdsPublisherReportingVideo2DReachRatio = "AdsPublisherReportingVideo2DReachRatio", D.AdsPublisherReportingVideo2DRequests = "AdsPublisherReportingVideo2DRequests", D.AdsPublisherReportingVideo2DRevenueRobux = "AdsPublisherReportingVideo2DRevenueRobux", D.AdsPublisherReportingVideo2DRewardPercent = "AdsPublisherReportingVideo2DRewardPercent", D.AdsPublisherReportingVideo2DRewards = "AdsPublisherReportingVideo2DRewards", D.AdsPublisherReportingVideo2DRobuxEpm = "AdsPublisherReportingVideo2DRobuxEpm", D.AdsRoasEstimate = "AdsRoasEstimate", D.AdsRoasEstimateByUniverse = "AdsRoasEstimateByUniverse", D.AdsUAEarningsUsdDefaultView = "AdsUAEarningsUsdDefaultView", D.AdsUAEarningsUsdDefaultViewByUniverse = "AdsUAEarningsUsdDefaultViewByUniverse", D.AdsUAEarningsUsdNewUserView = "AdsUAEarningsUsdNewUserView", D.AdsUAEarningsUsdNewUserViewByUniverse = "AdsUAEarningsUsdNewUserViewByUniverse", D.AdsUAEarningsUsdResurrected30dUserView = "AdsUAEarningsUsdResurrected30dUserView", D.AdsUAEarningsUsdResurrected30dUserViewByUniverse = "AdsUAEarningsUsdResurrected30dUserViewByUniverse", D.AdsUAEarningsUsdResurrected7dUserView = "AdsUAEarningsUsdResurrected7dUserView", D.AdsUAEarningsUsdResurrected7dUserViewByUniverse = "AdsUAEarningsUsdResurrected7dUserViewByUniverse", D.AdsUAEarningsUsdReturningUserView = "AdsUAEarningsUsdReturningUserView", D.AdsUAEarningsUsdReturningUserViewByUniverse = "AdsUAEarningsUsdReturningUserViewByUniverse", D.AdsUAExpNumPlaysDefaultView = "AdsUAExpNumPlaysDefaultView", D.AdsUAExpNumPlaysDefaultViewByUniverse = "AdsUAExpNumPlaysDefaultViewByUniverse", D.AdsUAExpNumPlaysNewUserView = "AdsUAExpNumPlaysNewUserView", D.AdsUAExpNumPlaysNewUserViewByUniverse = "AdsUAExpNumPlaysNewUserViewByUniverse", D.AdsUAExpNumPlaysResurrected30dUserView = "AdsUAExpNumPlaysResurrected30dUserView", D.AdsUAExpNumPlaysResurrected30dUserViewByUniverse = "AdsUAExpNumPlaysResurrected30dUserViewByUniverse", D.AdsUAExpNumPlaysResurrected7dUserView = "AdsUAExpNumPlaysResurrected7dUserView", D.AdsUAExpNumPlaysResurrected7dUserViewByUniverse = "AdsUAExpNumPlaysResurrected7dUserViewByUniverse", D.AdsUAExpNumPlaysReturningUserView = "AdsUAExpNumPlaysReturningUserView", D.AdsUAExpNumPlaysReturningUserViewByUniverse = "AdsUAExpNumPlaysReturningUserViewByUniverse", D.AdsUAExpPlaytimeDefaultView = "AdsUAExpPlaytimeDefaultView", D.AdsUAExpPlaytimeDefaultViewByUniverse = "AdsUAExpPlaytimeDefaultViewByUniverse", D.AdsUAExpPlaytimeNewUserView = "AdsUAExpPlaytimeNewUserView", D.AdsUAExpPlaytimeNewUserViewByUniverse = "AdsUAExpPlaytimeNewUserViewByUniverse", D.AdsUAExpPlaytimeResurrected30dUserView = "AdsUAExpPlaytimeResurrected30dUserView", D.AdsUAExpPlaytimeResurrected30dUserViewByUniverse = "AdsUAExpPlaytimeResurrected30dUserViewByUniverse", D.AdsUAExpPlaytimeResurrected7dUserView = "AdsUAExpPlaytimeResurrected7dUserView", D.AdsUAExpPlaytimeResurrected7dUserViewByUniverse = "AdsUAExpPlaytimeResurrected7dUserViewByUniverse", D.AdsUAExpPlaytimeReturningUserView = "AdsUAExpPlaytimeReturningUserView", D.AdsUAExpPlaytimeReturningUserViewByUniverse = "AdsUAExpPlaytimeReturningUserViewByUniverse", D.AdsUAExpRobuxRevenueDefaultView = "AdsUAExpRobuxRevenueDefaultView", D.AdsUAExpRobuxRevenueDefaultViewByUniverse = "AdsUAExpRobuxRevenueDefaultViewByUniverse", D.AdsUAExpRobuxRevenueNewUserView = "AdsUAExpRobuxRevenueNewUserView", D.AdsUAExpRobuxRevenueNewUserViewByUniverse = "AdsUAExpRobuxRevenueNewUserViewByUniverse", D.AdsUAExpRobuxRevenueResurrected30dUserView = "AdsUAExpRobuxRevenueResurrected30dUserView", D.AdsUAExpRobuxRevenueResurrected30dUserViewByUniverse = "AdsUAExpRobuxRevenueResurrected30dUserViewByUniverse", D.AdsUAExpRobuxRevenueResurrected7dUserView = "AdsUAExpRobuxRevenueResurrected7dUserView", D.AdsUAExpRobuxRevenueResurrected7dUserViewByUniverse = "AdsUAExpRobuxRevenueResurrected7dUserViewByUniverse", D.AdsUAExpRobuxRevenueReturningUserView = "AdsUAExpRobuxRevenueReturningUserView", D.AdsUAExpRobuxRevenueReturningUserViewByUniverse = "AdsUAExpRobuxRevenueReturningUserViewByUniverse", D.AdsUANumClicksDefaultView = "AdsUANumClicksDefaultView", D.AdsUANumClicksDefaultViewByUniverse = "AdsUANumClicksDefaultViewByUniverse", D.AdsUANumClicksNewUsers = "AdsUANumClicksNewUsers", D.AdsUANumClicksNewUsersByUniverse = "AdsUANumClicksNewUsersByUniverse", D.AdsUANumClicksResurrected30dUsers = "AdsUANumClicksResurrected30dUsers", D.AdsUANumClicksResurrected30dUsersByUniverse = "AdsUANumClicksResurrected30dUsersByUniverse", D.AdsUANumClicksResurrected7dUsers = "AdsUANumClicksResurrected7dUsers", D.AdsUANumClicksResurrected7dUsersByUniverse = "AdsUANumClicksResurrected7dUsersByUniverse", D.AdsUANumClicksReturningUsers = "AdsUANumClicksReturningUsers", D.AdsUANumClicksReturningUsersByUniverse = "AdsUANumClicksReturningUsersByUniverse", D.AdsUANumImpressionsDefaultView = "AdsUANumImpressionsDefaultView", D.AdsUANumImpressionsDefaultViewByUniverse = "AdsUANumImpressionsDefaultViewByUniverse", D.AdsUANumImpressionsNewUsers = "AdsUANumImpressionsNewUsers", D.AdsUANumImpressionsNewUsersByUniverse = "AdsUANumImpressionsNewUsersByUniverse", D.AdsUANumImpressionsResurrected30dUsers = "AdsUANumImpressionsResurrected30dUsers", D.AdsUANumImpressionsResurrected30dUsersByUniverse = "AdsUANumImpressionsResurrected30dUsersByUniverse", D.AdsUANumImpressionsResurrected7dUsers = "AdsUANumImpressionsResurrected7dUsers", D.AdsUANumImpressionsResurrected7dUsersByUniverse = "AdsUANumImpressionsResurrected7dUsersByUniverse", D.AdsUANumImpressionsReturningUsers = "AdsUANumImpressionsReturningUsers", D.AdsUANumImpressionsReturningUsersByUniverse = "AdsUANumImpressionsReturningUsersByUniverse", D.AdsUANumPlaysDefaultView = "AdsUANumPlaysDefaultView", D.AdsUANumPlaysDefaultViewByUniverse = "AdsUANumPlaysDefaultViewByUniverse", D.AdsUANumPlaysNewUserView = "AdsUANumPlaysNewUserView", D.AdsUANumPlaysNewUserViewByUniverse = "AdsUANumPlaysNewUserViewByUniverse", D.AdsUANumPlaysResurrected30dUserView = "AdsUANumPlaysResurrected30dUserView", D.AdsUANumPlaysResurrected30dUserViewByUniverse = "AdsUANumPlaysResurrected30dUserViewByUniverse", D.AdsUANumPlaysResurrected7dUserView = "AdsUANumPlaysResurrected7dUserView", D.AdsUANumPlaysResurrected7dUserViewByUniverse = "AdsUANumPlaysResurrected7dUserViewByUniverse", D.AdsUANumPlaysReturningUserView = "AdsUANumPlaysReturningUserView", D.AdsUANumPlaysReturningUserViewByUniverse = "AdsUANumPlaysReturningUserViewByUniverse", D.AdsUAPlaytimeDefaultView = "AdsUAPlaytimeDefaultView", D.AdsUAPlaytimeDefaultViewByUniverse = "AdsUAPlaytimeDefaultViewByUniverse", D.AdsUAPlaytimeNewUserView = "AdsUAPlaytimeNewUserView", D.AdsUAPlaytimeNewUserViewByUniverse = "AdsUAPlaytimeNewUserViewByUniverse", D.AdsUAPlaytimeResurrected30dUserView = "AdsUAPlaytimeResurrected30dUserView", D.AdsUAPlaytimeResurrected30dUserViewByUniverse = "AdsUAPlaytimeResurrected30dUserViewByUniverse", D.AdsUAPlaytimeResurrected7dUserView = "AdsUAPlaytimeResurrected7dUserView", D.AdsUAPlaytimeResurrected7dUserViewByUniverse = "AdsUAPlaytimeResurrected7dUserViewByUniverse", D.AdsUAPlaytimeReturningUserView = "AdsUAPlaytimeReturningUserView", D.AdsUAPlaytimeReturningUserViewByUniverse = "AdsUAPlaytimeReturningUserViewByUniverse", D.AdsUARoas = "AdsUARoas", D.AdsUARoasByUniverse = "AdsUARoasByUniverse", D.AdsUARobuxRevenueDefaultView = "AdsUARobuxRevenueDefaultView", D.AdsUARobuxRevenueDefaultViewByUniverse = "AdsUARobuxRevenueDefaultViewByUniverse", D.AdsUARobuxRevenueNewUserView = "AdsUARobuxRevenueNewUserView", D.AdsUARobuxRevenueNewUserViewByUniverse = "AdsUARobuxRevenueNewUserViewByUniverse", D.AdsUARobuxRevenueResurrected30dUserView = "AdsUARobuxRevenueResurrected30dUserView", D.AdsUARobuxRevenueResurrected30dUserViewByUniverse = "AdsUARobuxRevenueResurrected30dUserViewByUniverse", D.AdsUARobuxRevenueResurrected7dUserView = "AdsUARobuxRevenueResurrected7dUserView", D.AdsUARobuxRevenueResurrected7dUserViewByUniverse = "AdsUARobuxRevenueResurrected7dUserViewByUniverse", D.AdsUARobuxRevenueReturningUserView = "AdsUARobuxRevenueReturningUserView", D.AdsUARobuxRevenueReturningUserViewByUniverse = "AdsUARobuxRevenueReturningUserViewByUniverse", D.AdsUATotalSpendMicroUsdDefaultView = "AdsUATotalSpendMicroUsdDefaultView", D.AdsUATotalSpendMicroUsdDefaultViewByUniverse = "AdsUATotalSpendMicroUsdDefaultViewByUniverse", D.AdsUATotalSpendMicroUsdNewUsers = "AdsUATotalSpendMicroUsdNewUsers", D.AdsUATotalSpendMicroUsdNewUsersByUniverse = "AdsUATotalSpendMicroUsdNewUsersByUniverse", D.AdsUATotalSpendMicroUsdResurrected30dUsers = "AdsUATotalSpendMicroUsdResurrected30dUsers", D.AdsUATotalSpendMicroUsdResurrected30dUsersByUniverse = "AdsUATotalSpendMicroUsdResurrected30dUsersByUniverse", D.AdsUATotalSpendMicroUsdResurrected7dUsers = "AdsUATotalSpendMicroUsdResurrected7dUsers", D.AdsUATotalSpendMicroUsdResurrected7dUsersByUniverse = "AdsUATotalSpendMicroUsdResurrected7dUsersByUniverse", D.AdsUATotalSpendMicroUsdReturningUsers = "AdsUATotalSpendMicroUsdReturningUsers", D.AdsUATotalSpendMicroUsdReturningUsersByUniverse = "AdsUATotalSpendMicroUsdReturningUsersByUniverse", D.AdsVideo2DAdsPerEDAUBreakdown = "AdsVideo2DAdsPerEDAUBreakdown", D.AdsVideo2DEligibleDauBreakdown = "AdsVideo2DEligibleDauBreakdown", D.AdsVideo2DReachRatioBreakdown = "AdsVideo2DReachRatioBreakdown", D.AffiliateLinkDailyAffiliateActiveSpenderReactivationsPayoutRobux = "AffiliateLinkDailyAffiliateActiveSpenderReactivationsPayoutRobux", D.AffiliateLinkDailyAffiliateReactivationsPayoutRobux = "AffiliateLinkDailyAffiliateReactivationsPayoutRobux", D.AffiliateLinkDailyAffiliateSignupsPayoutRobux = "AffiliateLinkDailyAffiliateSignupsPayoutRobux", D.AffiliateLinkDailyAverageRobuxBookingsPerReactivationSpender = "AffiliateLinkDailyAverageRobuxBookingsPerReactivationSpender", D.AffiliateLinkDailyAverageRobuxBookingsPerSignupSpender = "AffiliateLinkDailyAverageRobuxBookingsPerSignupSpender", D.AffiliateLinkDailyBookingsPerSpenderCombined = "AffiliateLinkDailyBookingsPerSpenderCombined", D.AffiliateLinkDailyQualifiedActiveSpenderReactivations = "AffiliateLinkDailyQualifiedActiveSpenderReactivations", D.AffiliateLinkDailyQualifiedReactivations = "AffiliateLinkDailyQualifiedReactivations", D.AffiliateLinkDailyQualifiedReactivationsBookingsRobux = "AffiliateLinkDailyQualifiedReactivationsBookingsRobux", D.AffiliateLinkDailyQualifiedReactivationsSpenders = "AffiliateLinkDailyQualifiedReactivationsSpenders", D.AffiliateLinkDailyQualifiedSignups = "AffiliateLinkDailyQualifiedSignups", D.AffiliateLinkDailyQualifiedSignupsBookingsRobux = "AffiliateLinkDailyQualifiedSignupsBookingsRobux", D.AffiliateLinkDailyQualifiedSignupSpenders = "AffiliateLinkDailyQualifiedSignupSpenders", D.AffiliateLinkDailyTotalPayoutRobux = "AffiliateLinkDailyTotalPayoutRobux", D.AffiliateLinkDailyUniqueClick = "AffiliateLinkDailyUniqueClick", D.AffiliateLinkDailyVisits = "AffiliateLinkDailyVisits", D.AlertIncidentCount = "AlertIncidentCount", D.Attribution1DPayerConversionRatio = "Attribution1DPayerConversionRatio", D.Attribution1DPayerConversionRatioMigration = "Attribution1DPayerConversionRatioMigration", D.Attribution1DPlaytimePerUserInMinutes = "Attribution1DPlaytimePerUserInMinutes", D.Attribution1DPlaytimePerUserInMinutesMigration = "Attribution1DPlaytimePerUserInMinutesMigration", D.Attribution1DRobuxPerUser = "Attribution1DRobuxPerUser", D.Attribution1DRobuxPerUserMigration = "Attribution1DRobuxPerUserMigration", D.Attribution30DPayerConversionRatio = "Attribution30DPayerConversionRatio", D.Attribution30DPayerConversionRatioMigration = "Attribution30DPayerConversionRatioMigration", D.Attribution30DPlaytimePerUserInMinutes = "Attribution30DPlaytimePerUserInMinutes", D.Attribution30DPlaytimePerUserInMinutesMigration = "Attribution30DPlaytimePerUserInMinutesMigration", D.Attribution30DRobuxPerUser = "Attribution30DRobuxPerUser", D.Attribution30DRobuxPerUserMigration = "Attribution30DRobuxPerUserMigration", D.Attribution7DPayerConversionRatio = "Attribution7DPayerConversionRatio", D.Attribution7DPayerConversionRatioMigration = "Attribution7DPayerConversionRatioMigration", D.Attribution7DPlaytimePerUserInMinutes = "Attribution7DPlaytimePerUserInMinutes", D.Attribution7DPlaytimePerUserInMinutesMigration = "Attribution7DPlaytimePerUserInMinutesMigration", D.Attribution7DRobuxPerUser = "Attribution7DRobuxPerUser", D.Attribution7DRobuxPerUserMigration = "Attribution7DRobuxPerUserMigration", D.AttributionD1RetentionRatio = "AttributionD1RetentionRatio", D.AttributionD1RetentionRatioMigration = "AttributionD1RetentionRatioMigration", D.AttributionD30RetentionRatio = "AttributionD30RetentionRatio", D.AttributionD30RetentionRatioMigration = "AttributionD30RetentionRatioMigration", D.AttributionD7RetentionRatio = "AttributionD7RetentionRatio", D.AttributionD7RetentionRatioMigration = "AttributionD7RetentionRatioMigration", D.AverageImpressionsPerUser = "AverageImpressionsPerUser", D.AveragePlayTimeMinutesPerDAU = "AveragePlayTimeMinutesPerDAU", D.AverageRevenuePerPayingUser = "AverageRevenuePerPayingUser", D.AverageRevenuePerUser = "AverageRevenuePerUser", D.AverageSessionLengthMinutes = "AverageSessionLengthMinutes", D.AvgViewTimePerView = "AvgViewTimePerView", D.AvgViewTimePerViewer = "AvgViewTimePerViewer", D.BandwidthTotalRecvBpsForOrdering = "BandwidthTotalRecvBpsForOrdering", D.BandwidthTotalRecvMaxBytes = "BandwidthTotalRecvMaxBytes", D.BandwidthTotalRecvUpdatesPerSecond = "BandwidthTotalRecvUpdatesPerSecond", D.BandwidthTotalSendBpsForOrdering = "BandwidthTotalSendBpsForOrdering", D.BandwidthTotalSendMaxBytes = "BandwidthTotalSendMaxBytes", D.BandwidthTotalSendUpdatesPerSecond = "BandwidthTotalSendUpdatesPerSecond", D.BonusPromotionsAwardedCount = "BonusPromotionsAwardedCount", D.BonusPromotionsGameJoinCount = "BonusPromotionsGameJoinCount", D.BonusPromotionsImpressionCount = "BonusPromotionsImpressionCount", D.ClickCVR = "ClickCVR", D.ClickCVRMigration = "ClickCVRMigration", D.ClientCpuTimeAvg = "ClientCpuTimeAvg", D.ClientCrashCount = "ClientCrashCount", D.ClientCrashCountMigration = "ClientCrashCountMigration", D.ClientCrashRate15m = "ClientCrashRate15m", D.ClientCrashRate15mMigration = "ClientCrashRate15mMigration", D.ClientCrashRateNotStableAlert = "ClientCrashRateNotStableAlert", D.ClientCrashRateNotStableAlertMigration = "ClientCrashRateNotStableAlertMigration", D.CommentRatePerImpression = "CommentRatePerImpression", D.CommerceCheckouts = "CommerceCheckouts", D.CommerceClicks = "CommerceClicks", D.CommerceGMV = "CommerceGMV", D.CommerceImpressions = "CommerceImpressions", D.CommerceOrders = "CommerceOrders", D.CommerceQuantitySold = "CommerceQuantitySold", D.CommerceUniqueCheckouts = "CommerceUniqueCheckouts", D.CommerceUniqueClicks = "CommerceUniqueClicks", D.CommerceUniqueImpressions = "CommerceUniqueImpressions", D.CommerceUniqueOrders = "CommerceUniqueOrders", D.CommunityAnnouncementDeliveries = "CommunityAnnouncementDeliveries", D.CommunityAnnouncementEngagement = "CommunityAnnouncementEngagement", D.CommunityAnnouncementEventCount = "CommunityAnnouncementEventCount", D.CommunityAnnouncementNetReactions = "CommunityAnnouncementNetReactions", D.CommunityAnnouncementNotificationCTR = "CommunityAnnouncementNotificationCTR", D.CommunityAnnouncementUniqueClicks = "CommunityAnnouncementUniqueClicks", D.CommunityAnnouncementUniqueUsers = "CommunityAnnouncementUniqueUsers", D.CommunityForumContentEventCount = "CommunityForumContentEventCount", D.CommunityForumContentUniqueUsers = "CommunityForumContentUniqueUsers", D.CommunityGroupPageUniqueVisitors = "CommunityGroupPageUniqueVisitors", D.CommunityGroupPageViews = "CommunityGroupPageViews", D.CommunityMembershipChangeEvents = "CommunityMembershipChangeEvents", D.CommunityMembershipCount = "CommunityMembershipCount", D.ComputeEfficiency = "ComputeEfficiency", D.ConcurrentPlayers = "ConcurrentPlayers", D.CpuCoreUtilization = "CpuCoreUtilization", D.CreatorRewardsAudienceExpansionFunnelEstimatedPayout = "CreatorRewardsAudienceExpansionFunnelEstimatedPayout", D.CreatorRewardsAudienceExpansionFunnelPayerConversion60D = "CreatorRewardsAudienceExpansionFunnelPayerConversion60D", D.CreatorRewardsAudienceExpansionFunnelPayerConversion7D = "CreatorRewardsAudienceExpansionFunnelPayerConversion7D", D.CreatorRewardsAudienceExpansionFunnelPercentOfNewUsers = "CreatorRewardsAudienceExpansionFunnelPercentOfNewUsers", D.CreatorRewardsAudienceExpansionFunnelReactivations = "CreatorRewardsAudienceExpansionFunnelReactivations", D.CreatorRewardsAudienceExpansionFunnelRetentionD1 = "CreatorRewardsAudienceExpansionFunnelRetentionD1", D.CreatorRewardsAudienceExpansionFunnelRetentionD7 = "CreatorRewardsAudienceExpansionFunnelRetentionD7", D.CreatorRewardsAudienceExpansionFunnelRevenue1D = "CreatorRewardsAudienceExpansionFunnelRevenue1D", D.CreatorRewardsAudienceExpansionFunnelRevenue60D = "CreatorRewardsAudienceExpansionFunnelRevenue60D", D.CreatorRewardsAudienceExpansionFunnelRevenue7D = "CreatorRewardsAudienceExpansionFunnelRevenue7D", D.CreatorRewardsAudienceExpansionFunnelRevenuePerPayer60D = "CreatorRewardsAudienceExpansionFunnelRevenuePerPayer60D", D.CreatorRewardsAudienceExpansionFunnelRevenuePerPayer7D = "CreatorRewardsAudienceExpansionFunnelRevenuePerPayer7D", D.CreatorRewardsAudienceExpansionFunnelRevenuePerUser60D = "CreatorRewardsAudienceExpansionFunnelRevenuePerUser60D", D.CreatorRewardsAudienceExpansionFunnelRevenuePerUser7D = "CreatorRewardsAudienceExpansionFunnelRevenuePerUser7D", D.CreatorRewardsAudienceExpansionFunnelSignups = "CreatorRewardsAudienceExpansionFunnelSignups", D.CreatorRewardsAudienceExpansionFunnelUserCount = "CreatorRewardsAudienceExpansionFunnelUserCount", D.CreatorRewardsAverageRobuxBookingsPerSpender = "CreatorRewardsAverageRobuxBookingsPerSpender", D.CreatorRewardsLifetimeEstimatedAffiliatePayoutRobux = "CreatorRewardsLifetimeEstimatedAffiliatePayoutRobux", D.CreatorRewardsLifetimeQualifiedReactivations = "CreatorRewardsLifetimeQualifiedReactivations", D.CreatorRewardsLifetimeQualifiedSignups = "CreatorRewardsLifetimeQualifiedSignups", D.CreatorRewardsLifetimeQualifiedSpenders = "CreatorRewardsLifetimeQualifiedSpenders", D.CreatorWalletClosingBalanceUsd = "CreatorWalletClosingBalanceUsd", D.CreatorWalletIncomingUsd = "CreatorWalletIncomingUsd", D.CreatorWalletOutgoingUsd = "CreatorWalletOutgoingUsd", D.CsmFanoutRatio = "CsmFanoutRatio", D.CsmFanoutRatioExtended = "CsmFanoutRatioExtended", D.CsmGameServersConnectedCount = "CsmGameServersConnectedCount", D.CsmMessageSizeBytes = "CsmMessageSizeBytes", D.CsmMessageSizeQuota = "CsmMessageSizeQuota", D.CsmPublishedMessagesCount = "CsmPublishedMessagesCount", D.CsmPublishedMessagesExtendedCount = "CsmPublishedMessagesExtendedCount", D.CsmReceivedMessagesCount = "CsmReceivedMessagesCount", D.CsmReceivedMessagesExtendedCount = "CsmReceivedMessagesExtendedCount", D.CsmReceivedMessagesQuota = "CsmReceivedMessagesQuota", D.CubeDailyRequests = "CubeDailyRequests", D.CubeLatencyAvg = "CubeLatencyAvg", D.CubeLatencyP99 = "CubeLatencyP99", D.CubeOutcomes = "CubeOutcomes", D.CubeTotalRequests = "CubeTotalRequests", D.D1Retention = "D1Retention", D.D30Retention = "D30Retention", D.D7Retention = "D7Retention", D.DailyActiveUsers = "DailyActiveUsers", D.DailyCohortRetention = "DailyCohortRetention", D.DailyRetentionCohortNoDim = "DailyRetentionCohortNoDim", D.DailyRevenue = "DailyRevenue", D.DataStoreConsumedListRequests = "DataStoreConsumedListRequests", D.DataStoreConsumedReadRequests = "DataStoreConsumedReadRequests", D.DataStoreConsumedRemoveRequests = "DataStoreConsumedRemoveRequests", D.DataStoreConsumedWriteRequests = "DataStoreConsumedWriteRequests", D.DataStoreListRequests = "DataStoreListRequests", D.DataStoreListRequestsByEndpoint = "DataStoreListRequestsByEndpoint", D.DataStoreListRequestsQuota = "DataStoreListRequestsQuota", D.DataStoreListRequestsQuotaOrdered = "DataStoreListRequestsQuotaOrdered", D.DataStoreListRequestsQuotaStandard = "DataStoreListRequestsQuotaStandard", D.DataStoreReadRequests = "DataStoreReadRequests", D.DataStoreReadRequestsByEndpoint = "DataStoreReadRequestsByEndpoint", D.DataStoreReadRequestsQuotaOrdered = "DataStoreReadRequestsQuotaOrdered", D.DataStoreReadRequestsQuotaStandard = "DataStoreReadRequestsQuotaStandard", D.DataStoreRemoveRequests = "DataStoreRemoveRequests", D.DataStoreRemoveRequestsByEndpoint = "DataStoreRemoveRequestsByEndpoint", D.DataStoreRemoveRequestsQuotaOrdered = "DataStoreRemoveRequestsQuotaOrdered", D.DataStoreRemoveRequestsQuotaStandard = "DataStoreRemoveRequestsQuotaStandard", D.DataStoreRequests = "DataStoreRequests", D.DataStoreRequestsByEndpoint = "DataStoreRequestsByEndpoint", D.DataStoreRequestsByStatus = "DataStoreRequestsByStatus", D.DataStoreStorageQuotaBytes = "DataStoreStorageQuotaBytes", D.DataStoreStorageUsageBytes = "DataStoreStorageUsageBytes", D.DataStoreWriteRequests = "DataStoreWriteRequests", D.DataStoreWriteRequestsByEndpoint = "DataStoreWriteRequestsByEndpoint", D.DataStoreWriteRequestsQuotaOrdered = "DataStoreWriteRequestsQuotaOrdered", D.DataStoreWriteRequestsQuotaStandard = "DataStoreWriteRequestsQuotaStandard", D.DauMauStickiness = "DauMauStickiness", D.DeviceTrustDailyActiveUsers = "DeviceTrustDailyActiveUsers", D.DeviceTrustRobuxSpentLast28Days = "DeviceTrustRobuxSpentLast28Days", D.EarningsTotalUsd = "EarningsTotalUsd", D.EconomyAverageWalletBalance = "EconomyAverageWalletBalance", D.EconomyTransactionAmount = "EconomyTransactionAmount", D.EconomyTransactionAmountSinks = "EconomyTransactionAmountSinks", D.EconomyTransactionCount = "EconomyTransactionCount", D.EndToEndCVR = "EndToEndCVR", D.EndToEndCVRMigration = "EndToEndCVRMigration", D.ErrorCount = "ErrorCount", D.EventAvgDailyActiveUsers = "EventAvgDailyActiveUsers", D.EventAvgDailyRevenue = "EventAvgDailyRevenue", D.EventAvgDailyUserPlaytimeMinutes = "EventAvgDailyUserPlaytimeMinutes", D.EventAvgRevenuePerDailyActiveUser = "EventAvgRevenuePerDailyActiveUser", D.ExperimentMetricAdsArpu = "ExperimentMetricAdsArpu", D.ExperimentMetricAdsArpuV2 = "ExperimentMetricAdsArpuV2", D.ExperimentMetricAdsEarnings = "ExperimentMetricAdsEarnings", D.ExperimentMetricAdsEarningsV2 = "ExperimentMetricAdsEarningsV2", D.ExperimentMetricAdsFrequency = "ExperimentMetricAdsFrequency", D.ExperimentMetricAdsFrequencyV2 = "ExperimentMetricAdsFrequencyV2", D.ExperimentMetricAdsImpressions = "ExperimentMetricAdsImpressions", D.ExperimentMetricAdsImpressionsV2 = "ExperimentMetricAdsImpressionsV2", D.ExperimentMetricAdsOptInRate = "ExperimentMetricAdsOptInRate", D.ExperimentMetricAdsOptInRateV2 = "ExperimentMetricAdsOptInRateV2", D.ExperimentMetricAverageCurrencySinkDelta = "ExperimentMetricAverageCurrencySinkDelta", D.ExperimentMetricAverageCurrencySourceDelta = "ExperimentMetricAverageCurrencySourceDelta", D.ExperimentMetricAverageCustomValue = "ExperimentMetricAverageCustomValue", D.ExperimentMetricAverageCustomValueAllUsers = "ExperimentMetricAverageCustomValueAllUsers", D.ExperimentMetricAverageNetCurrencyDelta = "ExperimentMetricAverageNetCurrencyDelta", D.ExperimentMetricAverageRevenuePerPayingUser = "ExperimentMetricAverageRevenuePerPayingUser", D.ExperimentMetricAverageRevenuePerPayingUserV2 = "ExperimentMetricAverageRevenuePerPayingUserV2", D.ExperimentMetricAverageRevenuePerUser = "ExperimentMetricAverageRevenuePerUser", D.ExperimentMetricAverageRevenuePerUserV2 = "ExperimentMetricAverageRevenuePerUserV2", D.ExperimentMetricAverageSessionTime = "ExperimentMetricAverageSessionTime", D.ExperimentMetricAverageSessionTimeV2 = "ExperimentMetricAverageSessionTimeV2", D.ExperimentMetricCustomPenetration = "ExperimentMetricCustomPenetration", D.ExperimentMetricDay1Retention = "ExperimentMetricDay1Retention", D.ExperimentMetricDay1RetentionV2 = "ExperimentMetricDay1RetentionV2", D.ExperimentMetricDay7Retention = "ExperimentMetricDay7Retention", D.ExperimentMetricDay7RetentionV2 = "ExperimentMetricDay7RetentionV2", D.ExperimentMetricMean = "ExperimentMetricMean", D.ExperimentMetricPayerConversionRate = "ExperimentMetricPayerConversionRate", D.ExperimentMetricPayerConversionRateV2 = "ExperimentMetricPayerConversionRateV2", D.ExperimentMetricPerSessionFunnelConversion = "ExperimentMetricPerSessionFunnelConversion", D.ExperimentMetricPerUserFunnelConversion = "ExperimentMetricPerUserFunnelConversion", D.ExperimentMetricPlaytimePerUser = "ExperimentMetricPlaytimePerUser", D.ExperimentMetricPlaytimePerUserV2 = "ExperimentMetricPlaytimePerUserV2", D.ExperimentMetricQualifiedPlayThroughRate = "ExperimentMetricQualifiedPlayThroughRate", D.ExperimentMetricQualifiedPlayThroughRateV2 = "ExperimentMetricQualifiedPlayThroughRateV2", D.ForwardD1Retention = "ForwardD1Retention", D.ForwardD30Retention = "ForwardD30Retention", D.ForwardD7Retention = "ForwardD7Retention", D.FriendReferralAverageRobuxBookingsPerSpender = "FriendReferralAverageRobuxBookingsPerSpender", D.FriendReferralLifetimeEstimatedAffiliatePayoutRobux = "FriendReferralLifetimeEstimatedAffiliatePayoutRobux", D.FriendReferralLifetimeQualifiedSignups = "FriendReferralLifetimeQualifiedSignups", D.FriendReferralLifetimeQualifiedSpenders = "FriendReferralLifetimeQualifiedSpenders", D.FriendReferralLifetimeVisits = "FriendReferralLifetimeVisits", D.FunnelCohortCompletionRate = "FunnelCohortCompletionRate", D.FunnelCohortSessionCompletionRate = "FunnelCohortSessionCompletionRate", D.FunnelStepChurnRate = "FunnelStepChurnRate", D.FunnelStepCompletionRate = "FunnelStepCompletionRate", D.FunnelStepOverallCompletionRate = "FunnelStepOverallCompletionRate", D.FunnelStepTotalCount = "FunnelStepTotalCount", D.FunnelUserChurnRate = "FunnelUserChurnRate", D.FunnelUserOverallCompletionRate = "FunnelUserOverallCompletionRate", D.FunnelUserStepCompletionRate = "FunnelUserStepCompletionRate", D.FunnelUserTotalCount = "FunnelUserTotalCount", D.HttpServiceRequestsCount = "HttpServiceRequestsCount", D.HttpServiceRequestsExtendedCount = "HttpServiceRequestsExtendedCount", D.HttpServiceRequestsV2 = "HttpServiceRequestsV2", D.ImpressionCVR = "ImpressionCVR", D.ImpressionCVRMigration = "ImpressionCVRMigration", D.IphEarningsRobux = "IphEarningsRobux", D.IphEarningsRobuxPartial = "IphEarningsRobuxPartial", D.IphTransactionCount = "IphTransactionCount", D.IphTransactionCountPartial = "IphTransactionCountPartial", D.ItemAvatar3dLimitedAvailableQuantity = "ItemAvatar3dLimitedAvailableQuantity", D.ItemAvatar3dLimitedTotalQuantity = "ItemAvatar3dLimitedTotalQuantity", D.ItemAverageTransactionPrice = "ItemAverageTransactionPrice", D.ItemLifetimeCreatorEarning = "ItemLifetimeCreatorEarning", D.ItemLifetimeRebateAmount = "ItemLifetimeRebateAmount", D.ItemLifetimeRobuxSpent = "ItemLifetimeRobuxSpent", D.ItemLifetimeTransactionCount = "ItemLifetimeTransactionCount", D.ItemLimitedSoldPercentage = "ItemLimitedSoldPercentage", D.ItemMonetizationRevenue = "ItemMonetizationRevenue", D.ItemMonetizationSales = "ItemMonetizationSales", D.ItemPublishAdvance = "ItemPublishAdvance", D.ItemPublishAdvanceRecoupedPercentage = "ItemPublishAdvanceRecoupedPercentage", D.ItemTotalCreatorEarning = "ItemTotalCreatorEarning", D.ItemTotalRobuxSpent = "ItemTotalRobuxSpent", D.ItemTotalTransactionCount = "ItemTotalTransactionCount", D.JoinRatePerImpression = "JoinRatePerImpression", D.JourneyCompletionUsers = "JourneyCompletionUsers", D.JourneyEntryTransitions = "JourneyEntryTransitions", D.JourneyLastStageTransitions = "JourneyLastStageTransitions", D.JourneyNodeTransitionChurnCount = "JourneyNodeTransitionChurnCount", D.JourneyNodeTransitionChurnRate = "JourneyNodeTransitionChurnRate", D.JourneyNodeTransitionCount = "JourneyNodeTransitionCount", D.JourneyNodeUserChurnCount = "JourneyNodeUserChurnCount", D.JourneyNodeUserChurnRate = "JourneyNodeUserChurnRate", D.JourneyNodeUserCount = "JourneyNodeUserCount", D.JourneyStageChurnRate = "JourneyStageChurnRate", D.JourneyStageSkipRate = "JourneyStageSkipRate", D.JourneyStageSkipTransitionCount = "JourneyStageSkipTransitionCount", D.JourneyStageSkipTransitionRate = "JourneyStageSkipTransitionRate", D.JourneyStageSkipUserCount = "JourneyStageSkipUserCount", D.JourneyStageTransitionChurnRate = "JourneyStageTransitionChurnRate", D.JourneyStageTransitionCount = "JourneyStageTransitionCount", D.JourneyStageUserCount = "JourneyStageUserCount", D.JourneyTotalUsers = "JourneyTotalUsers", D.JourneyTransitionCount = "JourneyTransitionCount", D.JourneyTransitionCountUser = "JourneyTransitionCountUser", D.JourneyTransitionPctOfSource = "JourneyTransitionPctOfSource", D.JourneyTransitionPctOfStart = "JourneyTransitionPctOfStart", D.JourneyUserPctOfSource = "JourneyUserPctOfSource", D.JourneyUserPctOfStart = "JourneyUserPctOfStart", D.MaintenanceThreshold = "MaintenanceThreshold", D.MarketplaceAffiliateLinkAttributedPurchases = "MarketplaceAffiliateLinkAttributedPurchases", D.MarketplaceAffiliateLinkAttributedSpendRobux = "MarketplaceAffiliateLinkAttributedSpendRobux", D.MarketplaceAffiliateLinkClicks = "MarketplaceAffiliateLinkClicks", D.MarketplaceAffiliateLinkConversionRate = "MarketplaceAffiliateLinkConversionRate", D.MarketplaceAffiliateLinkEstimatedPayoutRobux = "MarketplaceAffiliateLinkEstimatedPayoutRobux", D.MarketplaceAffiliateLinkUniqueClicks = "MarketplaceAffiliateLinkUniqueClicks", D.MatchmakingPlayerAttributesLoadingStatusAvg = "MatchmakingPlayerAttributesLoadingStatusAvg", D.MatchmakingSignalsPreferredPlayerMatchRatioAvg = "MatchmakingSignalsPreferredPlayerMatchRatioAvg", D.MemoryStoreErrorRateAlert = "MemoryStoreErrorRateAlert", D.MemoryStoreMemoryQuotaBytes = "MemoryStoreMemoryQuotaBytes", D.MemoryStoreMemoryUsageAlert = "MemoryStoreMemoryUsageAlert", D.MemoryStoreMemoryUsageBytes = "MemoryStoreMemoryUsageBytes", D.MemoryStoreRequests = "MemoryStoreRequests", D.MemoryStoreRequestsByEndpoint = "MemoryStoreRequestsByEndpoint", D.MemoryStoreRequestsByStatus = "MemoryStoreRequestsByStatus", D.MemoryStoreRequestUnits = "MemoryStoreRequestUnits", D.MemoryStoreRequestUnitsByEndpoint = "MemoryStoreRequestUnitsByEndpoint", D.MemoryStoreRequestUnitsQuota = "MemoryStoreRequestUnitsQuota", D.MemoryStoreThrottlingAlert = "MemoryStoreThrottlingAlert", D.MonthlyActiveUsers = "MonthlyActiveUsers", D.OomUnexpectedExits = "OomUnexpectedExits", D.OomUnexpectedExitsMigration = "OomUnexpectedExitsMigration", D.PayingUsers = "PayingUsers", D.PayingUsersCVR = "PayingUsersCVR", D.PayoutRobux = "PayoutRobux", D.PayoutRobuxV2 = "PayoutRobuxV2", D.PeakConcurrentPlayers = "PeakConcurrentPlayers", D.PersonalizedShopsConversionRate = "PersonalizedShopsConversionRate", D.PersonalizedShopsImpressions = "PersonalizedShopsImpressions", D.PersonalizedShopsPurchases = "PersonalizedShopsPurchases", D.PersonalizedShopsRevenue = "PersonalizedShopsRevenue", D.PlayerFeedbackVotesCount = "PlayerFeedbackVotesCount", D.PotentialEarningsTotalUsd = "PotentialEarningsTotalUsd", D.PotentialExtraEarningsTotalUsd = "PotentialExtraEarningsTotalUsd", D.PurchaseRatePerImpression = "PurchaseRatePerImpression", D.QualifiedEndToEndCVR = "QualifiedEndToEndCVR", D.QualifiedEndToEndCVRMigration = "QualifiedEndToEndCVRMigration", D.QualifiedUniqueUsersWithPlaySessions = "QualifiedUniqueUsersWithPlaySessions", D.QualifiedUniqueUsersWithPlaySessionsMigration = "QualifiedUniqueUsersWithPlaySessionsMigration", D.ReactionRatePerImpression = "ReactionRatePerImpression", D.RecommendationDau = "RecommendationDau", D.RecommendationViewsTotal = "RecommendationViewsTotal", D.RelativeThresholdCapture = "RelativeThresholdCapture", D.RFYD1CoplayDays = "RFYD1CoplayDays", D.RFYD1Playtime = "RFYD1Playtime", D.RFYD1QualifiedPlaySessions = "RFYD1QualifiedPlaySessions", D.RFYD1RobuxSpend = "RFYD1RobuxSpend", D.RFYD1SpendDay = "RFYD1SpendDay", D.RFYD2To7CoplayDays = "RFYD2To7CoplayDays", D.RFYD2To7PlayDays = "RFYD2To7PlayDays", D.RFYD2To7Playtime = "RFYD2To7Playtime", D.RFYD2To7QualifiedPlaySessions = "RFYD2To7QualifiedPlaySessions", D.RFYD2To7RobuxSpend = "RFYD2To7RobuxSpend", D.RFYD2To7SpendDays = "RFYD2To7SpendDays", D.RFYD8To28CoplayDays = "RFYD8To28CoplayDays", D.RFYD8To28PlayDays = "RFYD8To28PlayDays", D.RFYD8To28Playtime = "RFYD8To28Playtime", D.RFYD8To28QualifiedPlaySessions = "RFYD8To28QualifiedPlaySessions", D.RFYD8To28RobuxSpend = "RFYD8To28RobuxSpend", D.RFYD8To28SpendDays = "RFYD8To28SpendDays", D.RFYDeepEngagementRate = "RFYDeepEngagementRate", D.RFYDuration0To60 = "RFYDuration0To60", D.RFYDuration181To600 = "RFYDuration181To600", D.RFYDuration61To180 = "RFYDuration61To180", D.RFYDurationGreaterThan600 = "RFYDurationGreaterThan600", D.RFYL7IntentionalCoplayDays = "RFYL7IntentionalCoplayDays", D.RFYL7PlayDays = "RFYL7PlayDays", D.RFYL7PlaySessionsPerUser = "RFYL7PlaySessionsPerUser", D.RFYL7PlayTime = "RFYL7PlayTime", D.RFYL7RobuxSpent = "RFYL7RobuxSpent", D.RFYL7RobuxSpentDays = "RFYL7RobuxSpentDays", D.RFYPlayThroughRate = "RFYPlayThroughRate", D.RFYQualifiedPTR = "RFYQualifiedPTR", D.RFYUniqueNotInterestedUsersPerMillionImpressions = "RFYUniqueNotInterestedUsersPerMillionImpressions", D.RobloxPlusDevBountyAvgPlaytimePerSubscriberMins = "RobloxPlusDevBountyAvgPlaytimePerSubscriberMins", D.RobloxPlusDevBountyAvgRobuxSpentPerSubscriber = "RobloxPlusDevBountyAvgRobuxSpentPerSubscriber", D.RobloxPlusDevBountyDailySubscribers = "RobloxPlusDevBountyDailySubscribers", D.RobloxPlusDevBountyPayoutRobux = "RobloxPlusDevBountyPayoutRobux", D.RobloxPlusDevBountySubscriberCount = "RobloxPlusDevBountySubscriberCount", D.RobloxPlusDevBountySubscriberSpend = "RobloxPlusDevBountySubscriberSpend", D.RotraceTotalCalls = "RotraceTotalCalls", D.RSVPCount = "RSVPCount", D.ServerCrashCount = "ServerCrashCount", D.ShareLinkAttribution1DPayerConversionRatio = "ShareLinkAttribution1DPayerConversionRatio", D.ShareLinkAttribution1DPlaytimePerUserInMinutes = "ShareLinkAttribution1DPlaytimePerUserInMinutes", D.ShareLinkAttribution1DRobuxPerUser = "ShareLinkAttribution1DRobuxPerUser", D.ShareLinkAttribution30DPayerConversionRatio = "ShareLinkAttribution30DPayerConversionRatio", D.ShareLinkAttribution30DPlaytimePerUserInMinutes = "ShareLinkAttribution30DPlaytimePerUserInMinutes", D.ShareLinkAttribution30DRobuxPerUser = "ShareLinkAttribution30DRobuxPerUser", D.ShareLinkAttribution7DPayerConversionRatio = "ShareLinkAttribution7DPayerConversionRatio", D.ShareLinkAttribution7DPlaytimePerUserInMinutes = "ShareLinkAttribution7DPlaytimePerUserInMinutes", D.ShareLinkAttribution7DRobuxPerUser = "ShareLinkAttribution7DRobuxPerUser", D.ShareLinkAttributionD1RetentionRatio = "ShareLinkAttributionD1RetentionRatio", D.ShareLinkAttributionD30RetentionRatio = "ShareLinkAttributionD30RetentionRatio", D.ShareLinkAttributionD7RetentionRatio = "ShareLinkAttributionD7RetentionRatio", D.ShareLinkClickCVR = "ShareLinkClickCVR", D.ShareLinkQualifiedClickCVR = "ShareLinkQualifiedClickCVR", D.ShareLinkQualifiedUniqueUsersWithPlaySessions = "ShareLinkQualifiedUniqueUsersWithPlaySessions", D.ShareLinkUniqueUsersWithClicks = "ShareLinkUniqueUsersWithClicks", D.ShareLinkUniqueUsersWithPlaySessions = "ShareLinkUniqueUsersWithPlaySessions", D.ShareRatePerImpression = "ShareRatePerImpression", D.SourceCount = "SourceCount", D.SourceCountRatioKpi = "SourceCountRatioKpi", D.SpeechToTextTranscriptionQuota = "SpeechToTextTranscriptionQuota", D.SpeechToTextTranscriptionStatuses = "SpeechToTextTranscriptionStatuses", D.SpeechToTextTranscriptionUsage = "SpeechToTextTranscriptionUsage", D.SponsoredAdPlays = "SponsoredAdPlays", D.StoreRevenue = "StoreRevenue", D.StoreTransactions = "StoreTransactions", D.TargetThreshold = "TargetThreshold", D.TextToSpeechAssetSuccesses = "TextToSpeechAssetSuccesses", D.TextToSpeechRawAudioErrors = "TextToSpeechRawAudioErrors", D.TextToSpeechRawAudioQuota = "TextToSpeechRawAudioQuota", D.TextToSpeechRawAudioSuccesses = "TextToSpeechRawAudioSuccesses", D.ThumbnailAverageSessionLengthMinutes = "ThumbnailAverageSessionLengthMinutes", D.ThumbnailImpressions = "ThumbnailImpressions", D.ThumbnailL7QualifiedPTR = "ThumbnailL7QualifiedPTR", D.ThumbnailQualifiedPlays = "ThumbnailQualifiedPlays", D.ThumbnailQualifiedPTR = "ThumbnailQualifiedPTR", D.ThumbnailWinningSegments = "ThumbnailWinningSegments", D.TotalAbuseReports = "TotalAbuseReports", D.TotalActions = "TotalActions", D.TotalActionsByActionType = "TotalActionsByActionType", D.TotalComments = "TotalComments", D.TotalJoins = "TotalJoins", D.TotalPlayTimeHours = "TotalPlayTimeHours", D.TotalPurchases = "TotalPurchases", D.TotalReactionsAdded = "TotalReactionsAdded", D.TotalSessionsEndedInBucket = "TotalSessionsEndedInBucket", D.TotalShares = "TotalShares", D.TotalViewHours = "TotalViewHours", D.UniqueAbuseReportSubmittersPer1000PlaytimeHours = "UniqueAbuseReportSubmittersPer1000PlaytimeHours", D.UniqueItemsPerUser = "UniqueItemsPerUser", D.UniqueServerShutdowns = "UniqueServerShutdowns", D.UniqueUsersWithClicks = "UniqueUsersWithClicks", D.UniqueUsersWithClicksMigration = "UniqueUsersWithClicksMigration", D.UniqueUsersWithImpressions = "UniqueUsersWithImpressions", D.UniqueUsersWithImpressionsMigration = "UniqueUsersWithImpressionsMigration", D.UniqueUsersWithPlaySessions = "UniqueUsersWithPlaySessions", D.UniqueUsersWithPlaySessionsMigration = "UniqueUsersWithPlaySessionsMigration", D.UsersInExperiment = "UsersInExperiment", D.UsersInExperimentV2 = "UsersInExperimentV2", D.UsersJoinedFromNotifications = "UsersJoinedFromNotifications", D.VideoServiceExclusivePlaybackSeconds = "VideoServiceExclusivePlaybackSeconds", D.VideoServicePlaybackSeconds = "VideoServicePlaybackSeconds", D.Visits = "Visits", D.WeeklyCohortRetention = "WeeklyCohortRetention";
     var D, g, R = p;
-    (v = g || (g = {})).AdsPublisherReportingDimensions = "adsPublisherReporting.dimensions", v.AdsUnifiedAttributionDimensions = "adsUnifiedAttribution.dimensions", v.AffiliateLinkDailyDimensions = "affiliateLinkDaily.dimensions", v.AlertingDimensions = "alerting.dimensions", v.AvatarItemsDimensions = "avatarItems.dimensions", v.BonusPromotionsDimensions = "bonusPromotions.dimensions", v.CommerceDimensions = "commerce.dimensions", v.CommunitiesDimensions = "communities.dimensions", v.CreatorAnalyticsDimensions = "creatorAnalytics.dimensions", v.CreatorAnalyticsPerformanceDimensions = "creatorAnalytics.performance.dimensions", v.CreatorAnalyticsPerformanceEngineTelemetryDimensions = "creatorAnalytics.performance.engineTelemetry.dimensions", v.CreatorExperimentsDimensions = "creatorExperiments.dimensions", v.CreatorRewardsAcquisitionDimensions = "creatorRewardsAcquisition.dimensions", v.CreatorRewardsAudienceExpansionFunnelDimensions = "creatorRewardsAudienceExpansionFunnel.dimensions", v.CreatorRewardsDailyDimensions = "creatorRewardsDaily.dimensions", v.CreatorStoreDimensions = "creatorStore.dimensions", v.EngineAnalyticsDimensions = "engineAnalytics.dimensions", v.EngineAnalyticsNetworkingDimensions = "engineAnalytics.networking.dimensions", v.ErrorReportingDimensions = "errorReporting.dimensions", v.ExperienceEventsSummaryDimensions = "experienceEventsSummary.dimensions", v.GenerativeAiDimensions = "generativeAi.dimensions", v.IpLicensingEarningsDimensions = "ipLicensingEarnings.dimensions", v.IpLicensingPartialEarningsDimensions = "ipLicensingPartialEarnings.dimensions", v.MarketplaceAffiliateLinksDailyDimensions = "marketplaceAffiliateLinksDaily.dimensions", v.MatchmakingDimensions = "matchmaking.dimensions", v.PlayerFeedbackDimensions = "playerFeedback.dimensions", v.ProductXEventsDimensions = "productX.events.dimensions", v.ProductXItemsDimensions = "productX.items.dimensions", v.RccServerEfficiencyDimensions = "rccServerEfficiency.dimensions", v.RecommendationServiceDimensions = "recommendationService.dimensions", v.RecommendedEventsCustomDimensions = "recommendedEvents.custom.dimensions", v.RecommendedEventsDimensions = "recommendedEvents.dimensions", v.RecommendedEventsEconomyDimensions = "recommendedEvents.economy.dimensions", v.RecommendedEventsFunnelDimensions = "recommendedEvents.funnel.dimensions", v.RecommendedEventsJourneysDimensions = "recommendedEvents.journeys.dimensions", v.RobloxPlusDevBountyDimensions = "robloxPlusDevBounty.dimensions", v.RotraceDimensions = "rotrace.dimensions", v.SafetyAntiCheatDimensions = "safety.antiCheat.dimensions", v.SafetyDimensions = "safety.dimensions", v.ServiceDataDimensions = "serviceData.dimensions", v.ServiceEfficiencyCrossServerMessagingDimensions = "serviceEfficiency.crossServerMessaging.dimensions", v.ServiceEfficiencyDataStoreDimensions = "serviceEfficiency.dataStore.dimensions", v.ServiceEfficiencyHttpServiceInsightsDimensions = "serviceEfficiency.httpServiceInsights.dimensions", v.ServiceEfficiencyMemoryStoreDimensions = "serviceEfficiency.memoryStore.dimensions", v.ServiceEfficiencySpeechToTextDimensions = "serviceEfficiency.speechToText.dimensions", v.ServiceEfficiencyTextToSpeechDimensions = "serviceEfficiency.textToSpeech.dimensions", v.ServiceEfficiencyVideoServiceDimensions = "serviceEfficiency.videoService.dimensions", v.SharedDimensions = "shared.dimensions", v.ShareLinkUniverseDimensions = "shareLinkUniverse.dimensions", v.ShopsDimensions = "shops.dimensions";
-    var P = g;
-    let S = {
+    (S = g || (g = {})).AdsPublisherReportingDimensions = "adsPublisherReporting.dimensions", S.AdsUnifiedAttributionDimensions = "adsUnifiedAttribution.dimensions", S.AffiliateLinkDailyDimensions = "affiliateLinkDaily.dimensions", S.AlertingDimensions = "alerting.dimensions", S.AvatarItemsDimensions = "avatarItems.dimensions", S.BonusPromotionsDimensions = "bonusPromotions.dimensions", S.CommerceDimensions = "commerce.dimensions", S.CommunitiesDimensions = "communities.dimensions", S.CreatorAnalyticsDimensions = "creatorAnalytics.dimensions", S.CreatorAnalyticsPerformanceDimensions = "creatorAnalytics.performance.dimensions", S.CreatorAnalyticsPerformanceEngineTelemetryDimensions = "creatorAnalytics.performance.engineTelemetry.dimensions", S.CreatorExperimentsDimensions = "creatorExperiments.dimensions", S.CreatorRewardsAcquisitionDimensions = "creatorRewardsAcquisition.dimensions", S.CreatorRewardsAudienceExpansionFunnelDimensions = "creatorRewardsAudienceExpansionFunnel.dimensions", S.CreatorRewardsDailyDimensions = "creatorRewardsDaily.dimensions", S.CreatorStoreDimensions = "creatorStore.dimensions", S.EngineAnalyticsDimensions = "engineAnalytics.dimensions", S.EngineAnalyticsNetworkingDimensions = "engineAnalytics.networking.dimensions", S.ErrorReportingDimensions = "errorReporting.dimensions", S.ExperienceEventsSummaryDimensions = "experienceEventsSummary.dimensions", S.GenerativeAiDimensions = "generativeAi.dimensions", S.IpLicensingEarningsDimensions = "ipLicensingEarnings.dimensions", S.IpLicensingPartialEarningsDimensions = "ipLicensingPartialEarnings.dimensions", S.MarketplaceAffiliateLinksDailyDimensions = "marketplaceAffiliateLinksDaily.dimensions", S.MatchmakingDimensions = "matchmaking.dimensions", S.PlayerFeedbackDimensions = "playerFeedback.dimensions", S.ProductXEventsDimensions = "productX.events.dimensions", S.ProductXItemsDimensions = "productX.items.dimensions", S.RccServerEfficiencyDimensions = "rccServerEfficiency.dimensions", S.RecommendationServiceDimensions = "recommendationService.dimensions", S.RecommendedEventsCustomDimensions = "recommendedEvents.custom.dimensions", S.RecommendedEventsDimensions = "recommendedEvents.dimensions", S.RecommendedEventsEconomyDimensions = "recommendedEvents.economy.dimensions", S.RecommendedEventsFunnelDimensions = "recommendedEvents.funnel.dimensions", S.RecommendedEventsJourneysDimensions = "recommendedEvents.journeys.dimensions", S.RobloxPlusDevBountyDimensions = "robloxPlusDevBounty.dimensions", S.RotraceDimensions = "rotrace.dimensions", S.SafetyAntiCheatDimensions = "safety.antiCheat.dimensions", S.SafetyDimensions = "safety.dimensions", S.ServiceDataDimensions = "serviceData.dimensions", S.ServiceEfficiencyCrossServerMessagingDimensions = "serviceEfficiency.crossServerMessaging.dimensions", S.ServiceEfficiencyDataStoreDimensions = "serviceEfficiency.dataStore.dimensions", S.ServiceEfficiencyHttpServiceInsightsDimensions = "serviceEfficiency.httpServiceInsights.dimensions", S.ServiceEfficiencyMemoryStoreDimensions = "serviceEfficiency.memoryStore.dimensions", S.ServiceEfficiencySpeechToTextDimensions = "serviceEfficiency.speechToText.dimensions", S.ServiceEfficiencyTextToSpeechDimensions = "serviceEfficiency.textToSpeech.dimensions", S.ServiceEfficiencyVideoServiceDimensions = "serviceEfficiency.videoService.dimensions", S.SharedDimensions = "shared.dimensions", S.ShareLinkUniverseDimensions = "shareLinkUniverse.dimensions", S.ShopsDimensions = "shops.dimensions";
+    var v = g;
+    let P = {
         [A.AbuseCategory]: {
-            defaultNamespace: P.SafetyDimensions
+            defaultNamespace: v.SafetyDimensions
         },
         [A.AbuseChannel]: {
-            defaultNamespace: P.SafetyDimensions
+            defaultNamespace: v.SafetyDimensions
         },
         [A.AcquisitionSource]: {
-            defaultNamespace: P.CreatorAnalyticsDimensions,
+            defaultNamespace: v.CreatorAnalyticsDimensions,
             overrides: {
-                [R.ExperimentMetricAdsArpuV2]: P.CreatorExperimentsDimensions,
-                [R.ExperimentMetricAdsEarningsV2]: P.CreatorExperimentsDimensions,
-                [R.ExperimentMetricAdsFrequencyV2]: P.CreatorExperimentsDimensions,
-                [R.ExperimentMetricAdsImpressionsV2]: P.CreatorExperimentsDimensions,
-                [R.ExperimentMetricAdsOptInRateV2]: P.CreatorExperimentsDimensions,
-                [R.ExperimentMetricAverageCurrencySinkDelta]: P.CreatorExperimentsDimensions,
-                [R.ExperimentMetricAverageCurrencySourceDelta]: P.CreatorExperimentsDimensions,
-                [R.ExperimentMetricAverageCustomValue]: P.CreatorExperimentsDimensions,
-                [R.ExperimentMetricAverageCustomValueAllUsers]: P.CreatorExperimentsDimensions,
-                [R.ExperimentMetricAverageNetCurrencyDelta]: P.CreatorExperimentsDimensions,
-                [R.ExperimentMetricAverageRevenuePerPayingUserV2]: P.CreatorExperimentsDimensions,
-                [R.ExperimentMetricAverageRevenuePerUserV2]: P.CreatorExperimentsDimensions,
-                [R.ExperimentMetricAverageSessionTimeV2]: P.CreatorExperimentsDimensions,
-                [R.ExperimentMetricCustomPenetration]: P.CreatorExperimentsDimensions,
-                [R.ExperimentMetricDay1RetentionV2]: P.CreatorExperimentsDimensions,
-                [R.ExperimentMetricDay7RetentionV2]: P.CreatorExperimentsDimensions,
-                [R.ExperimentMetricMean]: P.CreatorExperimentsDimensions,
-                [R.ExperimentMetricPayerConversionRateV2]: P.CreatorExperimentsDimensions,
-                [R.ExperimentMetricPerSessionFunnelConversion]: P.CreatorExperimentsDimensions,
-                [R.ExperimentMetricPerUserFunnelConversion]: P.CreatorExperimentsDimensions,
-                [R.ExperimentMetricPlaytimePerUserV2]: P.CreatorExperimentsDimensions,
-                [R.ExperimentMetricQualifiedPlayThroughRateV2]: P.CreatorExperimentsDimensions
+                [R.ExperimentMetricAdsArpuV2]: v.CreatorExperimentsDimensions,
+                [R.ExperimentMetricAdsEarningsV2]: v.CreatorExperimentsDimensions,
+                [R.ExperimentMetricAdsFrequencyV2]: v.CreatorExperimentsDimensions,
+                [R.ExperimentMetricAdsImpressionsV2]: v.CreatorExperimentsDimensions,
+                [R.ExperimentMetricAdsOptInRateV2]: v.CreatorExperimentsDimensions,
+                [R.ExperimentMetricAverageCurrencySinkDelta]: v.CreatorExperimentsDimensions,
+                [R.ExperimentMetricAverageCurrencySourceDelta]: v.CreatorExperimentsDimensions,
+                [R.ExperimentMetricAverageCustomValue]: v.CreatorExperimentsDimensions,
+                [R.ExperimentMetricAverageCustomValueAllUsers]: v.CreatorExperimentsDimensions,
+                [R.ExperimentMetricAverageNetCurrencyDelta]: v.CreatorExperimentsDimensions,
+                [R.ExperimentMetricAverageRevenuePerPayingUserV2]: v.CreatorExperimentsDimensions,
+                [R.ExperimentMetricAverageRevenuePerUserV2]: v.CreatorExperimentsDimensions,
+                [R.ExperimentMetricAverageSessionTimeV2]: v.CreatorExperimentsDimensions,
+                [R.ExperimentMetricCustomPenetration]: v.CreatorExperimentsDimensions,
+                [R.ExperimentMetricDay1RetentionV2]: v.CreatorExperimentsDimensions,
+                [R.ExperimentMetricDay7RetentionV2]: v.CreatorExperimentsDimensions,
+                [R.ExperimentMetricMean]: v.CreatorExperimentsDimensions,
+                [R.ExperimentMetricPayerConversionRateV2]: v.CreatorExperimentsDimensions,
+                [R.ExperimentMetricPerSessionFunnelConversion]: v.CreatorExperimentsDimensions,
+                [R.ExperimentMetricPerUserFunnelConversion]: v.CreatorExperimentsDimensions,
+                [R.ExperimentMetricPlaytimePerUserV2]: v.CreatorExperimentsDimensions,
+                [R.ExperimentMetricQualifiedPlayThroughRateV2]: v.CreatorExperimentsDimensions
             }
         },
         [A.ActionType]: {
-            defaultNamespace: P.RecommendationServiceDimensions
+            defaultNamespace: v.RecommendationServiceDimensions
         },
         [A.AdAccountId]: {
-            defaultNamespace: P.AdsUnifiedAttributionDimensions
+            defaultNamespace: v.AdsUnifiedAttributionDimensions
         },
         [A.AdFormat]: {
-            defaultNamespace: P.AdsPublisherReportingDimensions
+            defaultNamespace: v.AdsPublisherReportingDimensions
         },
         [A.AdId]: {
-            defaultNamespace: P.AdsUnifiedAttributionDimensions
+            defaultNamespace: v.AdsUnifiedAttributionDimensions
         },
         [A.AdInstanceName]: {
-            defaultNamespace: P.AdsPublisherReportingDimensions
+            defaultNamespace: v.AdsPublisherReportingDimensions
         },
         [A.AdPlacementId]: {
-            defaultNamespace: P.AdsPublisherReportingDimensions
+            defaultNamespace: v.AdsPublisherReportingDimensions
         },
         [A.AdRewardId]: {
-            defaultNamespace: P.AdsPublisherReportingDimensions
+            defaultNamespace: v.AdsPublisherReportingDimensions
         },
         [A.AdSetId]: {
-            defaultNamespace: P.AdsUnifiedAttributionDimensions
+            defaultNamespace: v.AdsUnifiedAttributionDimensions
         },
         [A.AdsPublisherReportingDataVersion]: {
-            defaultNamespace: P.AdsPublisherReportingDimensions
+            defaultNamespace: v.AdsPublisherReportingDimensions
         },
         [A.AffiliateLinkDailyCampaignName]: {
-            defaultNamespace: P.AffiliateLinkDailyDimensions
+            defaultNamespace: v.AffiliateLinkDailyDimensions
         },
         [A.AffiliateLinkDailyIsEstimate]: {
-            defaultNamespace: P.AffiliateLinkDailyDimensions
+            defaultNamespace: v.AffiliateLinkDailyDimensions
         },
         [A.AffiliateLinkDailyLinkId]: {
-            defaultNamespace: P.AffiliateLinkDailyDimensions
+            defaultNamespace: v.AffiliateLinkDailyDimensions
         },
         [A.AffiliateLinkDailyTimeBucket]: {
-            defaultNamespace: P.AffiliateLinkDailyDimensions
+            defaultNamespace: v.AffiliateLinkDailyDimensions
         },
         [A.AgeGroup]: {
-            defaultNamespace: P.SharedDimensions,
+            defaultNamespace: v.SharedDimensions,
             overrides: {
-                [R.ItemAverageTransactionPrice]: P.AvatarItemsDimensions,
-                [R.ItemTotalCreatorEarning]: P.AvatarItemsDimensions,
-                [R.ItemTotalRobuxSpent]: P.AvatarItemsDimensions,
-                [R.ItemTotalTransactionCount]: P.AvatarItemsDimensions,
-                [R.ActionRatePerDau]: P.RecommendationServiceDimensions,
-                [R.ActionRatePerDauByActionType]: P.RecommendationServiceDimensions,
-                [R.ActionRatePerImpression]: P.RecommendationServiceDimensions,
-                [R.AverageImpressionsPerUser]: P.RecommendationServiceDimensions,
-                [R.AvgViewTimePerView]: P.RecommendationServiceDimensions,
-                [R.AvgViewTimePerViewer]: P.RecommendationServiceDimensions,
-                [R.CommentRatePerImpression]: P.RecommendationServiceDimensions,
-                [R.JoinRatePerImpression]: P.RecommendationServiceDimensions,
-                [R.PurchaseRatePerImpression]: P.RecommendationServiceDimensions,
-                [R.ReactionRatePerImpression]: P.RecommendationServiceDimensions,
-                [R.RecommendationDau]: P.RecommendationServiceDimensions,
-                [R.RecommendationViewsTotal]: P.RecommendationServiceDimensions,
-                [R.ShareRatePerImpression]: P.RecommendationServiceDimensions,
-                [R.TotalActions]: P.RecommendationServiceDimensions,
-                [R.TotalActionsByActionType]: P.RecommendationServiceDimensions,
-                [R.TotalComments]: P.RecommendationServiceDimensions,
-                [R.TotalJoins]: P.RecommendationServiceDimensions,
-                [R.TotalPurchases]: P.RecommendationServiceDimensions,
-                [R.TotalReactionsAdded]: P.RecommendationServiceDimensions,
-                [R.TotalShares]: P.RecommendationServiceDimensions,
-                [R.TotalViewHours]: P.RecommendationServiceDimensions,
-                [R.UniqueItemsPerUser]: P.RecommendationServiceDimensions,
-                [d.CustomEventAvgPerUserValue]: P.RecommendedEventsDimensions,
-                [d.CustomEventAvgValue]: P.RecommendedEventsDimensions,
-                [d.CustomEventCount]: P.RecommendedEventsDimensions,
-                [d.CustomEventCountUser]: P.RecommendedEventsDimensions,
-                [d.CustomEventMaxValue]: P.RecommendedEventsDimensions,
-                [d.CustomEventMinValue]: P.RecommendedEventsDimensions,
-                [d.CustomEventSumValue]: P.RecommendedEventsDimensions,
-                [R.EconomyAverageWalletBalance]: P.RecommendedEventsDimensions,
-                [R.EconomyTransactionAmount]: P.RecommendedEventsDimensions,
-                [R.EconomyTransactionAmountSinks]: P.RecommendedEventsDimensions,
-                [R.EconomyTransactionCount]: P.RecommendedEventsDimensions,
-                [R.FunnelCohortCompletionRate]: P.RecommendedEventsDimensions,
-                [R.FunnelCohortSessionCompletionRate]: P.RecommendedEventsDimensions,
-                [R.FunnelStepChurnRate]: P.RecommendedEventsDimensions,
-                [R.FunnelStepCompletionRate]: P.RecommendedEventsDimensions,
-                [R.FunnelStepOverallCompletionRate]: P.RecommendedEventsDimensions,
-                [R.FunnelStepTotalCount]: P.RecommendedEventsDimensions,
-                [R.FunnelUserChurnRate]: P.RecommendedEventsDimensions,
-                [R.FunnelUserOverallCompletionRate]: P.RecommendedEventsDimensions,
-                [R.FunnelUserStepCompletionRate]: P.RecommendedEventsDimensions,
-                [R.FunnelUserTotalCount]: P.RecommendedEventsDimensions,
-                [R.JourneyCompletionUsers]: P.RecommendedEventsDimensions,
-                [R.JourneyEntryTransitions]: P.RecommendedEventsDimensions,
-                [R.JourneyLastStageTransitions]: P.RecommendedEventsDimensions,
-                [R.JourneyNodeTransitionChurnCount]: P.RecommendedEventsDimensions,
-                [R.JourneyNodeTransitionChurnRate]: P.RecommendedEventsDimensions,
-                [R.JourneyNodeTransitionCount]: P.RecommendedEventsDimensions,
-                [R.JourneyNodeUserChurnCount]: P.RecommendedEventsDimensions,
-                [R.JourneyNodeUserChurnRate]: P.RecommendedEventsDimensions,
-                [R.JourneyNodeUserCount]: P.RecommendedEventsDimensions,
-                [R.JourneyStageChurnRate]: P.RecommendedEventsDimensions,
-                [R.JourneyStageSkipRate]: P.RecommendedEventsDimensions,
-                [R.JourneyStageSkipTransitionCount]: P.RecommendedEventsDimensions,
-                [R.JourneyStageSkipTransitionRate]: P.RecommendedEventsDimensions,
-                [R.JourneyStageSkipUserCount]: P.RecommendedEventsDimensions,
-                [R.JourneyStageTransitionChurnRate]: P.RecommendedEventsDimensions,
-                [R.JourneyStageTransitionCount]: P.RecommendedEventsDimensions,
-                [R.JourneyStageUserCount]: P.RecommendedEventsDimensions,
-                [R.JourneyTotalUsers]: P.RecommendedEventsDimensions,
-                [R.JourneyTransitionCount]: P.RecommendedEventsDimensions,
-                [R.JourneyTransitionCountUser]: P.RecommendedEventsDimensions,
-                [R.JourneyTransitionPctOfSource]: P.RecommendedEventsDimensions,
-                [R.JourneyTransitionPctOfStart]: P.RecommendedEventsDimensions,
-                [R.JourneyUserPctOfSource]: P.RecommendedEventsDimensions,
-                [R.JourneyUserPctOfStart]: P.RecommendedEventsDimensions
+                [R.ItemAverageTransactionPrice]: v.AvatarItemsDimensions,
+                [R.ItemTotalCreatorEarning]: v.AvatarItemsDimensions,
+                [R.ItemTotalRobuxSpent]: v.AvatarItemsDimensions,
+                [R.ItemTotalTransactionCount]: v.AvatarItemsDimensions,
+                [R.ActionRatePerDau]: v.RecommendationServiceDimensions,
+                [R.ActionRatePerDauByActionType]: v.RecommendationServiceDimensions,
+                [R.ActionRatePerImpression]: v.RecommendationServiceDimensions,
+                [R.AverageImpressionsPerUser]: v.RecommendationServiceDimensions,
+                [R.AvgViewTimePerView]: v.RecommendationServiceDimensions,
+                [R.AvgViewTimePerViewer]: v.RecommendationServiceDimensions,
+                [R.CommentRatePerImpression]: v.RecommendationServiceDimensions,
+                [R.JoinRatePerImpression]: v.RecommendationServiceDimensions,
+                [R.PurchaseRatePerImpression]: v.RecommendationServiceDimensions,
+                [R.ReactionRatePerImpression]: v.RecommendationServiceDimensions,
+                [R.RecommendationDau]: v.RecommendationServiceDimensions,
+                [R.RecommendationViewsTotal]: v.RecommendationServiceDimensions,
+                [R.ShareRatePerImpression]: v.RecommendationServiceDimensions,
+                [R.TotalActions]: v.RecommendationServiceDimensions,
+                [R.TotalActionsByActionType]: v.RecommendationServiceDimensions,
+                [R.TotalComments]: v.RecommendationServiceDimensions,
+                [R.TotalJoins]: v.RecommendationServiceDimensions,
+                [R.TotalPurchases]: v.RecommendationServiceDimensions,
+                [R.TotalReactionsAdded]: v.RecommendationServiceDimensions,
+                [R.TotalShares]: v.RecommendationServiceDimensions,
+                [R.TotalViewHours]: v.RecommendationServiceDimensions,
+                [R.UniqueItemsPerUser]: v.RecommendationServiceDimensions,
+                [d.CustomEventAvgPerUserValue]: v.RecommendedEventsDimensions,
+                [d.CustomEventAvgValue]: v.RecommendedEventsDimensions,
+                [d.CustomEventCount]: v.RecommendedEventsDimensions,
+                [d.CustomEventCountUser]: v.RecommendedEventsDimensions,
+                [d.CustomEventMaxValue]: v.RecommendedEventsDimensions,
+                [d.CustomEventMinValue]: v.RecommendedEventsDimensions,
+                [d.CustomEventSumValue]: v.RecommendedEventsDimensions,
+                [R.EconomyAverageWalletBalance]: v.RecommendedEventsDimensions,
+                [R.EconomyTransactionAmount]: v.RecommendedEventsDimensions,
+                [R.EconomyTransactionAmountSinks]: v.RecommendedEventsDimensions,
+                [R.EconomyTransactionCount]: v.RecommendedEventsDimensions,
+                [R.FunnelCohortCompletionRate]: v.RecommendedEventsDimensions,
+                [R.FunnelCohortSessionCompletionRate]: v.RecommendedEventsDimensions,
+                [R.FunnelStepChurnRate]: v.RecommendedEventsDimensions,
+                [R.FunnelStepCompletionRate]: v.RecommendedEventsDimensions,
+                [R.FunnelStepOverallCompletionRate]: v.RecommendedEventsDimensions,
+                [R.FunnelStepTotalCount]: v.RecommendedEventsDimensions,
+                [R.FunnelUserChurnRate]: v.RecommendedEventsDimensions,
+                [R.FunnelUserOverallCompletionRate]: v.RecommendedEventsDimensions,
+                [R.FunnelUserStepCompletionRate]: v.RecommendedEventsDimensions,
+                [R.FunnelUserTotalCount]: v.RecommendedEventsDimensions,
+                [R.JourneyCompletionUsers]: v.RecommendedEventsDimensions,
+                [R.JourneyEntryTransitions]: v.RecommendedEventsDimensions,
+                [R.JourneyLastStageTransitions]: v.RecommendedEventsDimensions,
+                [R.JourneyNodeTransitionChurnCount]: v.RecommendedEventsDimensions,
+                [R.JourneyNodeTransitionChurnRate]: v.RecommendedEventsDimensions,
+                [R.JourneyNodeTransitionCount]: v.RecommendedEventsDimensions,
+                [R.JourneyNodeUserChurnCount]: v.RecommendedEventsDimensions,
+                [R.JourneyNodeUserChurnRate]: v.RecommendedEventsDimensions,
+                [R.JourneyNodeUserCount]: v.RecommendedEventsDimensions,
+                [R.JourneyStageChurnRate]: v.RecommendedEventsDimensions,
+                [R.JourneyStageSkipRate]: v.RecommendedEventsDimensions,
+                [R.JourneyStageSkipTransitionCount]: v.RecommendedEventsDimensions,
+                [R.JourneyStageSkipTransitionRate]: v.RecommendedEventsDimensions,
+                [R.JourneyStageSkipUserCount]: v.RecommendedEventsDimensions,
+                [R.JourneyStageTransitionChurnRate]: v.RecommendedEventsDimensions,
+                [R.JourneyStageTransitionCount]: v.RecommendedEventsDimensions,
+                [R.JourneyStageUserCount]: v.RecommendedEventsDimensions,
+                [R.JourneyTotalUsers]: v.RecommendedEventsDimensions,
+                [R.JourneyTransitionCount]: v.RecommendedEventsDimensions,
+                [R.JourneyTransitionCountUser]: v.RecommendedEventsDimensions,
+                [R.JourneyTransitionPctOfSource]: v.RecommendedEventsDimensions,
+                [R.JourneyTransitionPctOfStart]: v.RecommendedEventsDimensions,
+                [R.JourneyUserPctOfSource]: v.RecommendedEventsDimensions,
+                [R.JourneyUserPctOfStart]: v.RecommendedEventsDimensions
             }
         },
         [A.AgeGroupV2]: {
-            defaultNamespace: P.SharedDimensions,
+            defaultNamespace: v.SharedDimensions,
             overrides: {
-                [R.ExperimentMetricAdsArpuV2]: P.CreatorExperimentsDimensions,
-                [R.ExperimentMetricAdsEarningsV2]: P.CreatorExperimentsDimensions,
-                [R.ExperimentMetricAdsFrequencyV2]: P.CreatorExperimentsDimensions,
-                [R.ExperimentMetricAdsImpressionsV2]: P.CreatorExperimentsDimensions,
-                [R.ExperimentMetricAdsOptInRateV2]: P.CreatorExperimentsDimensions,
-                [R.ExperimentMetricAverageCurrencySinkDelta]: P.CreatorExperimentsDimensions,
-                [R.ExperimentMetricAverageCurrencySourceDelta]: P.CreatorExperimentsDimensions,
-                [R.ExperimentMetricAverageCustomValue]: P.CreatorExperimentsDimensions,
-                [R.ExperimentMetricAverageCustomValueAllUsers]: P.CreatorExperimentsDimensions,
-                [R.ExperimentMetricAverageNetCurrencyDelta]: P.CreatorExperimentsDimensions,
-                [R.ExperimentMetricAverageRevenuePerPayingUserV2]: P.CreatorExperimentsDimensions,
-                [R.ExperimentMetricAverageRevenuePerUserV2]: P.CreatorExperimentsDimensions,
-                [R.ExperimentMetricAverageSessionTimeV2]: P.CreatorExperimentsDimensions,
-                [R.ExperimentMetricCustomPenetration]: P.CreatorExperimentsDimensions,
-                [R.ExperimentMetricDay1RetentionV2]: P.CreatorExperimentsDimensions,
-                [R.ExperimentMetricDay7RetentionV2]: P.CreatorExperimentsDimensions,
-                [R.ExperimentMetricMean]: P.CreatorExperimentsDimensions,
-                [R.ExperimentMetricPayerConversionRateV2]: P.CreatorExperimentsDimensions,
-                [R.ExperimentMetricPerSessionFunnelConversion]: P.CreatorExperimentsDimensions,
-                [R.ExperimentMetricPerUserFunnelConversion]: P.CreatorExperimentsDimensions,
-                [R.ExperimentMetricPlaytimePerUserV2]: P.CreatorExperimentsDimensions,
-                [R.ExperimentMetricQualifiedPlayThroughRateV2]: P.CreatorExperimentsDimensions
+                [R.ExperimentMetricAdsArpuV2]: v.CreatorExperimentsDimensions,
+                [R.ExperimentMetricAdsEarningsV2]: v.CreatorExperimentsDimensions,
+                [R.ExperimentMetricAdsFrequencyV2]: v.CreatorExperimentsDimensions,
+                [R.ExperimentMetricAdsImpressionsV2]: v.CreatorExperimentsDimensions,
+                [R.ExperimentMetricAdsOptInRateV2]: v.CreatorExperimentsDimensions,
+                [R.ExperimentMetricAverageCurrencySinkDelta]: v.CreatorExperimentsDimensions,
+                [R.ExperimentMetricAverageCurrencySourceDelta]: v.CreatorExperimentsDimensions,
+                [R.ExperimentMetricAverageCustomValue]: v.CreatorExperimentsDimensions,
+                [R.ExperimentMetricAverageCustomValueAllUsers]: v.CreatorExperimentsDimensions,
+                [R.ExperimentMetricAverageNetCurrencyDelta]: v.CreatorExperimentsDimensions,
+                [R.ExperimentMetricAverageRevenuePerPayingUserV2]: v.CreatorExperimentsDimensions,
+                [R.ExperimentMetricAverageRevenuePerUserV2]: v.CreatorExperimentsDimensions,
+                [R.ExperimentMetricAverageSessionTimeV2]: v.CreatorExperimentsDimensions,
+                [R.ExperimentMetricCustomPenetration]: v.CreatorExperimentsDimensions,
+                [R.ExperimentMetricDay1RetentionV2]: v.CreatorExperimentsDimensions,
+                [R.ExperimentMetricDay7RetentionV2]: v.CreatorExperimentsDimensions,
+                [R.ExperimentMetricMean]: v.CreatorExperimentsDimensions,
+                [R.ExperimentMetricPayerConversionRateV2]: v.CreatorExperimentsDimensions,
+                [R.ExperimentMetricPerSessionFunnelConversion]: v.CreatorExperimentsDimensions,
+                [R.ExperimentMetricPerUserFunnelConversion]: v.CreatorExperimentsDimensions,
+                [R.ExperimentMetricPlaytimePerUserV2]: v.CreatorExperimentsDimensions,
+                [R.ExperimentMetricQualifiedPlayThroughRateV2]: v.CreatorExperimentsDimensions
             }
         },
         [A.AgreementId]: {
-            defaultNamespace: P.IpLicensingEarningsDimensions
+            defaultNamespace: v.IpLicensingEarningsDimensions
         },
         [A.AlertId]: {
-            defaultNamespace: P.AlertingDimensions
+            defaultNamespace: v.AlertingDimensions
         },
         [A.AnnouncementEventType]: {
-            defaultNamespace: P.CommunitiesDimensions
+            defaultNamespace: v.CommunitiesDimensions
         },
         [A.AnnouncementId]: {
-            defaultNamespace: P.CommunitiesDimensions
+            defaultNamespace: v.CommunitiesDimensions
         },
         [A.AnnouncementPublishDate]: {
-            defaultNamespace: P.CommunitiesDimensions
+            defaultNamespace: v.CommunitiesDimensions
         },
         [A.AttributionDateHour]: {
-            defaultNamespace: P.AdsUnifiedAttributionDimensions
+            defaultNamespace: v.AdsUnifiedAttributionDimensions
         },
         [A.AvatarAssetBundleType]: {
-            defaultNamespace: P.AvatarItemsDimensions
+            defaultNamespace: v.AvatarItemsDimensions
         },
         [A.AvatarItemId]: {
-            defaultNamespace: P.AvatarItemsDimensions
+            defaultNamespace: v.AvatarItemsDimensions
         },
         [A.AvatarItemLimitedStatus]: {
-            defaultNamespace: P.AvatarItemsDimensions
+            defaultNamespace: v.AvatarItemsDimensions
         },
         [A.AvatarItemTargetType]: {
-            defaultNamespace: P.AvatarItemsDimensions
+            defaultNamespace: v.AvatarItemsDimensions
         },
         [A.AvatarItemTimedOptions]: {
-            defaultNamespace: P.AvatarItemsDimensions
+            defaultNamespace: v.AvatarItemsDimensions
         },
         [A.BalanceType]: {
-            defaultNamespace: P.CreatorAnalyticsDimensions
+            defaultNamespace: v.CreatorAnalyticsDimensions
         },
         [A.BandwidthCategory]: {
-            defaultNamespace: P.EngineAnalyticsNetworkingDimensions
+            defaultNamespace: v.EngineAnalyticsNetworkingDimensions
         },
         [A.CampaignId]: {
-            defaultNamespace: P.AdsUnifiedAttributionDimensions
+            defaultNamespace: v.AdsUnifiedAttributionDimensions
         },
         [A.CampaignName]: {
-            defaultNamespace: P.ShareLinkUniverseDimensions
+            defaultNamespace: v.ShareLinkUniverseDimensions
         },
         [A.ClientCpuTimeCategory]: {
-            defaultNamespace: P.EngineAnalyticsDimensions
+            defaultNamespace: v.EngineAnalyticsDimensions
         },
         [A.ClientCpuTimeSubCategory]: {
-            defaultNamespace: P.EngineAnalyticsDimensions
+            defaultNamespace: v.EngineAnalyticsDimensions
         },
         [A.CohortDay]: {
-            defaultNamespace: P.CreatorAnalyticsDimensions
+            defaultNamespace: v.CreatorAnalyticsDimensions
         },
         [A.CohortWeek]: {
-            defaultNamespace: P.CreatorAnalyticsDimensions
+            defaultNamespace: v.CreatorAnalyticsDimensions
         },
         [A.CollectibleItemTargetType]: {
-            defaultNamespace: P.CreatorAnalyticsDimensions
+            defaultNamespace: v.CreatorAnalyticsDimensions
         },
         [A.CollectibleItemTargetTypeId]: {
-            defaultNamespace: P.CreatorAnalyticsDimensions
+            defaultNamespace: v.CreatorAnalyticsDimensions
         },
         [A.CollectibleItemType]: {
-            defaultNamespace: P.CreatorAnalyticsDimensions
+            defaultNamespace: v.CreatorAnalyticsDimensions
         },
         [A.CommerceProductId]: {
-            defaultNamespace: P.CommerceDimensions
+            defaultNamespace: v.CommerceDimensions
         },
         [A.ConfigName]: {
-            defaultNamespace: P.RecommendationServiceDimensions
+            defaultNamespace: v.RecommendationServiceDimensions
         },
         [A.Country]: {
-            defaultNamespace: P.SharedDimensions,
+            defaultNamespace: v.SharedDimensions,
             overrides: {
-                [R.ItemAverageTransactionPrice]: P.AvatarItemsDimensions,
-                [R.ItemTotalCreatorEarning]: P.AvatarItemsDimensions,
-                [R.ItemTotalRobuxSpent]: P.AvatarItemsDimensions,
-                [R.ItemTotalTransactionCount]: P.AvatarItemsDimensions,
-                [R.ExperimentMetricAdsArpuV2]: P.CreatorExperimentsDimensions,
-                [R.ExperimentMetricAdsEarningsV2]: P.CreatorExperimentsDimensions,
-                [R.ExperimentMetricAdsFrequencyV2]: P.CreatorExperimentsDimensions,
-                [R.ExperimentMetricAdsImpressionsV2]: P.CreatorExperimentsDimensions,
-                [R.ExperimentMetricAdsOptInRateV2]: P.CreatorExperimentsDimensions,
-                [R.ExperimentMetricAverageCurrencySinkDelta]: P.CreatorExperimentsDimensions,
-                [R.ExperimentMetricAverageCurrencySourceDelta]: P.CreatorExperimentsDimensions,
-                [R.ExperimentMetricAverageCustomValue]: P.CreatorExperimentsDimensions,
-                [R.ExperimentMetricAverageCustomValueAllUsers]: P.CreatorExperimentsDimensions,
-                [R.ExperimentMetricAverageNetCurrencyDelta]: P.CreatorExperimentsDimensions,
-                [R.ExperimentMetricAverageRevenuePerPayingUserV2]: P.CreatorExperimentsDimensions,
-                [R.ExperimentMetricAverageRevenuePerUserV2]: P.CreatorExperimentsDimensions,
-                [R.ExperimentMetricAverageSessionTimeV2]: P.CreatorExperimentsDimensions,
-                [R.ExperimentMetricCustomPenetration]: P.CreatorExperimentsDimensions,
-                [R.ExperimentMetricDay1RetentionV2]: P.CreatorExperimentsDimensions,
-                [R.ExperimentMetricDay7RetentionV2]: P.CreatorExperimentsDimensions,
-                [R.ExperimentMetricMean]: P.CreatorExperimentsDimensions,
-                [R.ExperimentMetricPayerConversionRateV2]: P.CreatorExperimentsDimensions,
-                [R.ExperimentMetricPerSessionFunnelConversion]: P.CreatorExperimentsDimensions,
-                [R.ExperimentMetricPerUserFunnelConversion]: P.CreatorExperimentsDimensions,
-                [R.ExperimentMetricPlaytimePerUserV2]: P.CreatorExperimentsDimensions,
-                [R.ExperimentMetricQualifiedPlayThroughRateV2]: P.CreatorExperimentsDimensions,
-                [R.IphEarningsRobux]: P.IpLicensingEarningsDimensions,
-                [R.IphTransactionCount]: P.IpLicensingEarningsDimensions,
-                [R.IphEarningsRobuxPartial]: P.IpLicensingPartialEarningsDimensions,
-                [R.IphTransactionCountPartial]: P.IpLicensingPartialEarningsDimensions,
-                [d.MatchmakingSignalsAgeDifferenceAvg]: P.MatchmakingDimensions,
-                [d.MatchmakingSignalsAgeDifferenceP10]: P.MatchmakingDimensions,
-                [d.MatchmakingSignalsAgeDifferenceP50]: P.MatchmakingDimensions,
-                [d.MatchmakingSignalsAgeDifferenceP90]: P.MatchmakingDimensions,
-                [d.MatchmakingSignalsCommonChatGroupRatioAvg]: P.MatchmakingDimensions,
-                [d.MatchmakingSignalsCommonChatGroupRatioP10]: P.MatchmakingDimensions,
-                [d.MatchmakingSignalsCommonChatGroupRatioP50]: P.MatchmakingDimensions,
-                [d.MatchmakingSignalsCommonChatGroupRatioP90]: P.MatchmakingDimensions,
-                [d.MatchmakingSignalsCommonDeviceTypeRatioAvg]: P.MatchmakingDimensions,
-                [d.MatchmakingSignalsCommonDeviceTypeRatioP10]: P.MatchmakingDimensions,
-                [d.MatchmakingSignalsCommonDeviceTypeRatioP50]: P.MatchmakingDimensions,
-                [d.MatchmakingSignalsCommonDeviceTypeRatioP90]: P.MatchmakingDimensions,
-                [d.MatchmakingSignalsCommonLanguageRatioAvg]: P.MatchmakingDimensions,
-                [d.MatchmakingSignalsCommonLanguageRatioP10]: P.MatchmakingDimensions,
-                [d.MatchmakingSignalsCommonLanguageRatioP50]: P.MatchmakingDimensions,
-                [d.MatchmakingSignalsCommonLanguageRatioP90]: P.MatchmakingDimensions,
-                [d.MatchmakingSignalsDeltaPingAvg]: P.MatchmakingDimensions,
-                [d.MatchmakingSignalsDeltaPingP10]: P.MatchmakingDimensions,
-                [d.MatchmakingSignalsDeltaPingP50]: P.MatchmakingDimensions,
-                [d.MatchmakingSignalsDeltaPingP90]: P.MatchmakingDimensions,
-                [d.MatchmakingSignalsEstimatePingAvg]: P.MatchmakingDimensions,
-                [d.MatchmakingSignalsEstimatePingP10]: P.MatchmakingDimensions,
-                [d.MatchmakingSignalsEstimatePingP50]: P.MatchmakingDimensions,
-                [d.MatchmakingSignalsEstimatePingP90]: P.MatchmakingDimensions,
-                [d.MatchmakingSignalsOccupancyRatioAvg]: P.MatchmakingDimensions,
-                [d.MatchmakingSignalsOccupancyRatioP10]: P.MatchmakingDimensions,
-                [d.MatchmakingSignalsOccupancyRatioP50]: P.MatchmakingDimensions,
-                [d.MatchmakingSignalsOccupancyRatioP90]: P.MatchmakingDimensions,
-                [d.MatchmakingSignalsPlayHistoryDifferenceAvg]: P.MatchmakingDimensions,
-                [d.MatchmakingSignalsPlayHistoryDifferenceP10]: P.MatchmakingDimensions,
-                [d.MatchmakingSignalsPlayHistoryDifferenceP50]: P.MatchmakingDimensions,
-                [d.MatchmakingSignalsPlayHistoryDifferenceP90]: P.MatchmakingDimensions,
-                [R.MatchmakingSignalsPreferredPlayerMatchRatioAvg]: P.MatchmakingDimensions,
-                [d.MatchmakingSignalsVoiceChatRatioAvg]: P.MatchmakingDimensions,
-                [d.MatchmakingSignalsVoiceChatRatioP10]: P.MatchmakingDimensions,
-                [d.MatchmakingSignalsVoiceChatRatioP50]: P.MatchmakingDimensions,
-                [d.MatchmakingSignalsVoiceChatRatioP90]: P.MatchmakingDimensions
+                [R.ItemAverageTransactionPrice]: v.AvatarItemsDimensions,
+                [R.ItemTotalCreatorEarning]: v.AvatarItemsDimensions,
+                [R.ItemTotalRobuxSpent]: v.AvatarItemsDimensions,
+                [R.ItemTotalTransactionCount]: v.AvatarItemsDimensions,
+                [R.ExperimentMetricAdsArpuV2]: v.CreatorExperimentsDimensions,
+                [R.ExperimentMetricAdsEarningsV2]: v.CreatorExperimentsDimensions,
+                [R.ExperimentMetricAdsFrequencyV2]: v.CreatorExperimentsDimensions,
+                [R.ExperimentMetricAdsImpressionsV2]: v.CreatorExperimentsDimensions,
+                [R.ExperimentMetricAdsOptInRateV2]: v.CreatorExperimentsDimensions,
+                [R.ExperimentMetricAverageCurrencySinkDelta]: v.CreatorExperimentsDimensions,
+                [R.ExperimentMetricAverageCurrencySourceDelta]: v.CreatorExperimentsDimensions,
+                [R.ExperimentMetricAverageCustomValue]: v.CreatorExperimentsDimensions,
+                [R.ExperimentMetricAverageCustomValueAllUsers]: v.CreatorExperimentsDimensions,
+                [R.ExperimentMetricAverageNetCurrencyDelta]: v.CreatorExperimentsDimensions,
+                [R.ExperimentMetricAverageRevenuePerPayingUserV2]: v.CreatorExperimentsDimensions,
+                [R.ExperimentMetricAverageRevenuePerUserV2]: v.CreatorExperimentsDimensions,
+                [R.ExperimentMetricAverageSessionTimeV2]: v.CreatorExperimentsDimensions,
+                [R.ExperimentMetricCustomPenetration]: v.CreatorExperimentsDimensions,
+                [R.ExperimentMetricDay1RetentionV2]: v.CreatorExperimentsDimensions,
+                [R.ExperimentMetricDay7RetentionV2]: v.CreatorExperimentsDimensions,
+                [R.ExperimentMetricMean]: v.CreatorExperimentsDimensions,
+                [R.ExperimentMetricPayerConversionRateV2]: v.CreatorExperimentsDimensions,
+                [R.ExperimentMetricPerSessionFunnelConversion]: v.CreatorExperimentsDimensions,
+                [R.ExperimentMetricPerUserFunnelConversion]: v.CreatorExperimentsDimensions,
+                [R.ExperimentMetricPlaytimePerUserV2]: v.CreatorExperimentsDimensions,
+                [R.ExperimentMetricQualifiedPlayThroughRateV2]: v.CreatorExperimentsDimensions,
+                [R.IphEarningsRobux]: v.IpLicensingEarningsDimensions,
+                [R.IphTransactionCount]: v.IpLicensingEarningsDimensions,
+                [R.IphEarningsRobuxPartial]: v.IpLicensingPartialEarningsDimensions,
+                [R.IphTransactionCountPartial]: v.IpLicensingPartialEarningsDimensions,
+                [d.MatchmakingSignalsAgeDifferenceAvg]: v.MatchmakingDimensions,
+                [d.MatchmakingSignalsAgeDifferenceP10]: v.MatchmakingDimensions,
+                [d.MatchmakingSignalsAgeDifferenceP50]: v.MatchmakingDimensions,
+                [d.MatchmakingSignalsAgeDifferenceP90]: v.MatchmakingDimensions,
+                [d.MatchmakingSignalsCommonChatGroupRatioAvg]: v.MatchmakingDimensions,
+                [d.MatchmakingSignalsCommonChatGroupRatioP10]: v.MatchmakingDimensions,
+                [d.MatchmakingSignalsCommonChatGroupRatioP50]: v.MatchmakingDimensions,
+                [d.MatchmakingSignalsCommonChatGroupRatioP90]: v.MatchmakingDimensions,
+                [d.MatchmakingSignalsCommonDeviceTypeRatioAvg]: v.MatchmakingDimensions,
+                [d.MatchmakingSignalsCommonDeviceTypeRatioP10]: v.MatchmakingDimensions,
+                [d.MatchmakingSignalsCommonDeviceTypeRatioP50]: v.MatchmakingDimensions,
+                [d.MatchmakingSignalsCommonDeviceTypeRatioP90]: v.MatchmakingDimensions,
+                [d.MatchmakingSignalsCommonLanguageRatioAvg]: v.MatchmakingDimensions,
+                [d.MatchmakingSignalsCommonLanguageRatioP10]: v.MatchmakingDimensions,
+                [d.MatchmakingSignalsCommonLanguageRatioP50]: v.MatchmakingDimensions,
+                [d.MatchmakingSignalsCommonLanguageRatioP90]: v.MatchmakingDimensions,
+                [d.MatchmakingSignalsDeltaPingAvg]: v.MatchmakingDimensions,
+                [d.MatchmakingSignalsDeltaPingP10]: v.MatchmakingDimensions,
+                [d.MatchmakingSignalsDeltaPingP50]: v.MatchmakingDimensions,
+                [d.MatchmakingSignalsDeltaPingP90]: v.MatchmakingDimensions,
+                [d.MatchmakingSignalsEstimatePingAvg]: v.MatchmakingDimensions,
+                [d.MatchmakingSignalsEstimatePingP10]: v.MatchmakingDimensions,
+                [d.MatchmakingSignalsEstimatePingP50]: v.MatchmakingDimensions,
+                [d.MatchmakingSignalsEstimatePingP90]: v.MatchmakingDimensions,
+                [d.MatchmakingSignalsOccupancyRatioAvg]: v.MatchmakingDimensions,
+                [d.MatchmakingSignalsOccupancyRatioP10]: v.MatchmakingDimensions,
+                [d.MatchmakingSignalsOccupancyRatioP50]: v.MatchmakingDimensions,
+                [d.MatchmakingSignalsOccupancyRatioP90]: v.MatchmakingDimensions,
+                [d.MatchmakingSignalsPlayHistoryDifferenceAvg]: v.MatchmakingDimensions,
+                [d.MatchmakingSignalsPlayHistoryDifferenceP10]: v.MatchmakingDimensions,
+                [d.MatchmakingSignalsPlayHistoryDifferenceP50]: v.MatchmakingDimensions,
+                [d.MatchmakingSignalsPlayHistoryDifferenceP90]: v.MatchmakingDimensions,
+                [R.MatchmakingSignalsPreferredPlayerMatchRatioAvg]: v.MatchmakingDimensions,
+                [d.MatchmakingSignalsVoiceChatRatioAvg]: v.MatchmakingDimensions,
+                [d.MatchmakingSignalsVoiceChatRatioP10]: v.MatchmakingDimensions,
+                [d.MatchmakingSignalsVoiceChatRatioP50]: v.MatchmakingDimensions,
+                [d.MatchmakingSignalsVoiceChatRatioP90]: v.MatchmakingDimensions
             }
         },
         [A.CpuTimeCategory]: {
-            defaultNamespace: P.RccServerEfficiencyDimensions
+            defaultNamespace: v.RccServerEfficiencyDimensions
         },
         [A.CpuTimeSubCategory]: {
-            defaultNamespace: P.RccServerEfficiencyDimensions
+            defaultNamespace: v.RccServerEfficiencyDimensions
         },
         [A.CrashType]: {
-            defaultNamespace: P.ServiceDataDimensions
+            defaultNamespace: v.ServiceDataDimensions
         },
         [A.CreatorRewardsAcquisitionSource]: {
-            defaultNamespace: P.CreatorRewardsAcquisitionDimensions
+            defaultNamespace: v.CreatorRewardsAcquisitionDimensions
         },
         [A.CreatorRewardsAudienceExpansionFunnelIsEstimate]: {
-            defaultNamespace: P.CreatorRewardsAudienceExpansionFunnelDimensions
+            defaultNamespace: v.CreatorRewardsAudienceExpansionFunnelDimensions
         },
         [A.CreatorRewardsAudienceExpansionFunnelIsReactivation]: {
-            defaultNamespace: P.CreatorRewardsAudienceExpansionFunnelDimensions
+            defaultNamespace: v.CreatorRewardsAudienceExpansionFunnelDimensions
         },
         [A.CreatorRewardsAudienceExpansionFunnelIsSignup]: {
-            defaultNamespace: P.CreatorRewardsAudienceExpansionFunnelDimensions
+            defaultNamespace: v.CreatorRewardsAudienceExpansionFunnelDimensions
         },
         [A.CreatorRewardsDailyIsEstimate]: {
-            defaultNamespace: P.CreatorRewardsDailyDimensions
+            defaultNamespace: v.CreatorRewardsDailyDimensions
         },
         [A.CreatorRewardsDailySource]: {
-            defaultNamespace: P.CreatorRewardsDailyDimensions
+            defaultNamespace: v.CreatorRewardsDailyDimensions
         },
         [A.CsmResult]: {
-            defaultNamespace: P.ServiceEfficiencyCrossServerMessagingDimensions
+            defaultNamespace: v.ServiceEfficiencyCrossServerMessagingDimensions
         },
         [A.CsmTopic]: {
-            defaultNamespace: P.ServiceEfficiencyCrossServerMessagingDimensions
+            defaultNamespace: v.ServiceEfficiencyCrossServerMessagingDimensions
         },
         [A.CurrencyType]: {
-            defaultNamespace: P.RecommendedEventsEconomyDimensions
+            defaultNamespace: v.RecommendedEventsEconomyDimensions
         },
         [A.CustomEventName]: {
-            defaultNamespace: P.RecommendedEventsCustomDimensions
+            defaultNamespace: v.RecommendedEventsCustomDimensions
         },
         [A.CustomField1]: {
-            defaultNamespace: P.RecommendedEventsJourneysDimensions,
+            defaultNamespace: v.RecommendedEventsJourneysDimensions,
             overrides: {
-                [d.CustomEventAvgPerUserValue]: P.RecommendedEventsCustomDimensions,
-                [d.CustomEventAvgValue]: P.RecommendedEventsCustomDimensions,
-                [d.CustomEventCount]: P.RecommendedEventsCustomDimensions,
-                [d.CustomEventCountUser]: P.RecommendedEventsCustomDimensions,
-                [d.CustomEventMaxValue]: P.RecommendedEventsCustomDimensions,
-                [d.CustomEventMinValue]: P.RecommendedEventsCustomDimensions,
-                [d.CustomEventSumValue]: P.RecommendedEventsCustomDimensions,
-                [R.EconomyAverageWalletBalance]: P.RecommendedEventsEconomyDimensions,
-                [R.EconomyTransactionAmount]: P.RecommendedEventsEconomyDimensions,
-                [R.EconomyTransactionAmountSinks]: P.RecommendedEventsEconomyDimensions,
-                [R.EconomyTransactionCount]: P.RecommendedEventsEconomyDimensions,
-                [R.FunnelCohortCompletionRate]: P.RecommendedEventsFunnelDimensions,
-                [R.FunnelCohortSessionCompletionRate]: P.RecommendedEventsFunnelDimensions,
-                [R.FunnelStepChurnRate]: P.RecommendedEventsFunnelDimensions,
-                [R.FunnelStepCompletionRate]: P.RecommendedEventsFunnelDimensions,
-                [R.FunnelStepOverallCompletionRate]: P.RecommendedEventsFunnelDimensions,
-                [R.FunnelStepTotalCount]: P.RecommendedEventsFunnelDimensions,
-                [R.FunnelUserChurnRate]: P.RecommendedEventsFunnelDimensions,
-                [R.FunnelUserOverallCompletionRate]: P.RecommendedEventsFunnelDimensions,
-                [R.FunnelUserStepCompletionRate]: P.RecommendedEventsFunnelDimensions,
-                [R.FunnelUserTotalCount]: P.RecommendedEventsFunnelDimensions
+                [d.CustomEventAvgPerUserValue]: v.RecommendedEventsCustomDimensions,
+                [d.CustomEventAvgValue]: v.RecommendedEventsCustomDimensions,
+                [d.CustomEventCount]: v.RecommendedEventsCustomDimensions,
+                [d.CustomEventCountUser]: v.RecommendedEventsCustomDimensions,
+                [d.CustomEventMaxValue]: v.RecommendedEventsCustomDimensions,
+                [d.CustomEventMinValue]: v.RecommendedEventsCustomDimensions,
+                [d.CustomEventSumValue]: v.RecommendedEventsCustomDimensions,
+                [R.EconomyAverageWalletBalance]: v.RecommendedEventsEconomyDimensions,
+                [R.EconomyTransactionAmount]: v.RecommendedEventsEconomyDimensions,
+                [R.EconomyTransactionAmountSinks]: v.RecommendedEventsEconomyDimensions,
+                [R.EconomyTransactionCount]: v.RecommendedEventsEconomyDimensions,
+                [R.FunnelCohortCompletionRate]: v.RecommendedEventsFunnelDimensions,
+                [R.FunnelCohortSessionCompletionRate]: v.RecommendedEventsFunnelDimensions,
+                [R.FunnelStepChurnRate]: v.RecommendedEventsFunnelDimensions,
+                [R.FunnelStepCompletionRate]: v.RecommendedEventsFunnelDimensions,
+                [R.FunnelStepOverallCompletionRate]: v.RecommendedEventsFunnelDimensions,
+                [R.FunnelStepTotalCount]: v.RecommendedEventsFunnelDimensions,
+                [R.FunnelUserChurnRate]: v.RecommendedEventsFunnelDimensions,
+                [R.FunnelUserOverallCompletionRate]: v.RecommendedEventsFunnelDimensions,
+                [R.FunnelUserStepCompletionRate]: v.RecommendedEventsFunnelDimensions,
+                [R.FunnelUserTotalCount]: v.RecommendedEventsFunnelDimensions
             }
         },
         [A.CustomField2]: {
-            defaultNamespace: P.RecommendedEventsJourneysDimensions,
+            defaultNamespace: v.RecommendedEventsJourneysDimensions,
             overrides: {
-                [d.CustomEventAvgPerUserValue]: P.RecommendedEventsCustomDimensions,
-                [d.CustomEventAvgValue]: P.RecommendedEventsCustomDimensions,
-                [d.CustomEventCount]: P.RecommendedEventsCustomDimensions,
-                [d.CustomEventCountUser]: P.RecommendedEventsCustomDimensions,
-                [d.CustomEventMaxValue]: P.RecommendedEventsCustomDimensions,
-                [d.CustomEventMinValue]: P.RecommendedEventsCustomDimensions,
-                [d.CustomEventSumValue]: P.RecommendedEventsCustomDimensions,
-                [R.EconomyAverageWalletBalance]: P.RecommendedEventsEconomyDimensions,
-                [R.EconomyTransactionAmount]: P.RecommendedEventsEconomyDimensions,
-                [R.EconomyTransactionAmountSinks]: P.RecommendedEventsEconomyDimensions,
-                [R.EconomyTransactionCount]: P.RecommendedEventsEconomyDimensions,
-                [R.FunnelCohortCompletionRate]: P.RecommendedEventsFunnelDimensions,
-                [R.FunnelCohortSessionCompletionRate]: P.RecommendedEventsFunnelDimensions,
-                [R.FunnelStepChurnRate]: P.RecommendedEventsFunnelDimensions,
-                [R.FunnelStepCompletionRate]: P.RecommendedEventsFunnelDimensions,
-                [R.FunnelStepOverallCompletionRate]: P.RecommendedEventsFunnelDimensions,
-                [R.FunnelStepTotalCount]: P.RecommendedEventsFunnelDimensions,
-                [R.FunnelUserChurnRate]: P.RecommendedEventsFunnelDimensions,
-                [R.FunnelUserOverallCompletionRate]: P.RecommendedEventsFunnelDimensions,
-                [R.FunnelUserStepCompletionRate]: P.RecommendedEventsFunnelDimensions,
-                [R.FunnelUserTotalCount]: P.RecommendedEventsFunnelDimensions
+                [d.CustomEventAvgPerUserValue]: v.RecommendedEventsCustomDimensions,
+                [d.CustomEventAvgValue]: v.RecommendedEventsCustomDimensions,
+                [d.CustomEventCount]: v.RecommendedEventsCustomDimensions,
+                [d.CustomEventCountUser]: v.RecommendedEventsCustomDimensions,
+                [d.CustomEventMaxValue]: v.RecommendedEventsCustomDimensions,
+                [d.CustomEventMinValue]: v.RecommendedEventsCustomDimensions,
+                [d.CustomEventSumValue]: v.RecommendedEventsCustomDimensions,
+                [R.EconomyAverageWalletBalance]: v.RecommendedEventsEconomyDimensions,
+                [R.EconomyTransactionAmount]: v.RecommendedEventsEconomyDimensions,
+                [R.EconomyTransactionAmountSinks]: v.RecommendedEventsEconomyDimensions,
+                [R.EconomyTransactionCount]: v.RecommendedEventsEconomyDimensions,
+                [R.FunnelCohortCompletionRate]: v.RecommendedEventsFunnelDimensions,
+                [R.FunnelCohortSessionCompletionRate]: v.RecommendedEventsFunnelDimensions,
+                [R.FunnelStepChurnRate]: v.RecommendedEventsFunnelDimensions,
+                [R.FunnelStepCompletionRate]: v.RecommendedEventsFunnelDimensions,
+                [R.FunnelStepOverallCompletionRate]: v.RecommendedEventsFunnelDimensions,
+                [R.FunnelStepTotalCount]: v.RecommendedEventsFunnelDimensions,
+                [R.FunnelUserChurnRate]: v.RecommendedEventsFunnelDimensions,
+                [R.FunnelUserOverallCompletionRate]: v.RecommendedEventsFunnelDimensions,
+                [R.FunnelUserStepCompletionRate]: v.RecommendedEventsFunnelDimensions,
+                [R.FunnelUserTotalCount]: v.RecommendedEventsFunnelDimensions
             }
         },
         [A.CustomField3]: {
-            defaultNamespace: P.RecommendedEventsJourneysDimensions,
+            defaultNamespace: v.RecommendedEventsJourneysDimensions,
             overrides: {
-                [d.CustomEventAvgPerUserValue]: P.RecommendedEventsCustomDimensions,
-                [d.CustomEventAvgValue]: P.RecommendedEventsCustomDimensions,
-                [d.CustomEventCount]: P.RecommendedEventsCustomDimensions,
-                [d.CustomEventCountUser]: P.RecommendedEventsCustomDimensions,
-                [d.CustomEventMaxValue]: P.RecommendedEventsCustomDimensions,
-                [d.CustomEventMinValue]: P.RecommendedEventsCustomDimensions,
-                [d.CustomEventSumValue]: P.RecommendedEventsCustomDimensions,
-                [R.EconomyAverageWalletBalance]: P.RecommendedEventsEconomyDimensions,
-                [R.EconomyTransactionAmount]: P.RecommendedEventsEconomyDimensions,
-                [R.EconomyTransactionAmountSinks]: P.RecommendedEventsEconomyDimensions,
-                [R.EconomyTransactionCount]: P.RecommendedEventsEconomyDimensions,
-                [R.FunnelCohortCompletionRate]: P.RecommendedEventsFunnelDimensions,
-                [R.FunnelCohortSessionCompletionRate]: P.RecommendedEventsFunnelDimensions,
-                [R.FunnelStepChurnRate]: P.RecommendedEventsFunnelDimensions,
-                [R.FunnelStepCompletionRate]: P.RecommendedEventsFunnelDimensions,
-                [R.FunnelStepOverallCompletionRate]: P.RecommendedEventsFunnelDimensions,
-                [R.FunnelStepTotalCount]: P.RecommendedEventsFunnelDimensions,
-                [R.FunnelUserChurnRate]: P.RecommendedEventsFunnelDimensions,
-                [R.FunnelUserOverallCompletionRate]: P.RecommendedEventsFunnelDimensions,
-                [R.FunnelUserStepCompletionRate]: P.RecommendedEventsFunnelDimensions,
-                [R.FunnelUserTotalCount]: P.RecommendedEventsFunnelDimensions
+                [d.CustomEventAvgPerUserValue]: v.RecommendedEventsCustomDimensions,
+                [d.CustomEventAvgValue]: v.RecommendedEventsCustomDimensions,
+                [d.CustomEventCount]: v.RecommendedEventsCustomDimensions,
+                [d.CustomEventCountUser]: v.RecommendedEventsCustomDimensions,
+                [d.CustomEventMaxValue]: v.RecommendedEventsCustomDimensions,
+                [d.CustomEventMinValue]: v.RecommendedEventsCustomDimensions,
+                [d.CustomEventSumValue]: v.RecommendedEventsCustomDimensions,
+                [R.EconomyAverageWalletBalance]: v.RecommendedEventsEconomyDimensions,
+                [R.EconomyTransactionAmount]: v.RecommendedEventsEconomyDimensions,
+                [R.EconomyTransactionAmountSinks]: v.RecommendedEventsEconomyDimensions,
+                [R.EconomyTransactionCount]: v.RecommendedEventsEconomyDimensions,
+                [R.FunnelCohortCompletionRate]: v.RecommendedEventsFunnelDimensions,
+                [R.FunnelCohortSessionCompletionRate]: v.RecommendedEventsFunnelDimensions,
+                [R.FunnelStepChurnRate]: v.RecommendedEventsFunnelDimensions,
+                [R.FunnelStepCompletionRate]: v.RecommendedEventsFunnelDimensions,
+                [R.FunnelStepOverallCompletionRate]: v.RecommendedEventsFunnelDimensions,
+                [R.FunnelStepTotalCount]: v.RecommendedEventsFunnelDimensions,
+                [R.FunnelUserChurnRate]: v.RecommendedEventsFunnelDimensions,
+                [R.FunnelUserOverallCompletionRate]: v.RecommendedEventsFunnelDimensions,
+                [R.FunnelUserStepCompletionRate]: v.RecommendedEventsFunnelDimensions,
+                [R.FunnelUserTotalCount]: v.RecommendedEventsFunnelDimensions
             }
         },
         [A.DataModelRecvInstanceType]: {
-            defaultNamespace: P.EngineAnalyticsNetworkingDimensions
+            defaultNamespace: v.EngineAnalyticsNetworkingDimensions
         },
         [A.DataModelSendInstanceType]: {
-            defaultNamespace: P.EngineAnalyticsNetworkingDimensions
+            defaultNamespace: v.EngineAnalyticsNetworkingDimensions
         },
         [A.DataQuality]: {
-            defaultNamespace: P.AdsUnifiedAttributionDimensions
+            defaultNamespace: v.AdsUnifiedAttributionDimensions
         },
         [A.DataStoreOperation]: {
-            defaultNamespace: P.ServiceEfficiencyDataStoreDimensions
+            defaultNamespace: v.ServiceEfficiencyDataStoreDimensions
         },
         [A.DataStoreRequestSource]: {
-            defaultNamespace: P.ServiceEfficiencyDataStoreDimensions
+            defaultNamespace: v.ServiceEfficiencyDataStoreDimensions
         },
         [A.DataStoreStatus]: {
-            defaultNamespace: P.ServiceEfficiencyDataStoreDimensions
+            defaultNamespace: v.ServiceEfficiencyDataStoreDimensions
         },
         [A.DataStoreTypeV2]: {
-            defaultNamespace: P.ServiceEfficiencyDataStoreDimensions
+            defaultNamespace: v.ServiceEfficiencyDataStoreDimensions
         },
         [A.DeviceTrustLevel]: {
-            defaultNamespace: P.SafetyAntiCheatDimensions
+            defaultNamespace: v.SafetyAntiCheatDimensions
         },
         [A.EarningsType]: {
-            defaultNamespace: P.IpLicensingEarningsDimensions
+            defaultNamespace: v.IpLicensingEarningsDimensions
         },
         [A.EndTimeUTC]: {
-            defaultNamespace: P.ExperienceEventsSummaryDimensions
+            defaultNamespace: v.ExperienceEventsSummaryDimensions
         },
         [A.EventCategory]: {
-            defaultNamespace: P.ExperienceEventsSummaryDimensions
+            defaultNamespace: v.ExperienceEventsSummaryDimensions
         },
         [A.Experiment]: {
-            defaultNamespace: P.CreatorExperimentsDimensions
+            defaultNamespace: v.CreatorExperimentsDimensions
         },
         [A.ExperimentMetric]: {
-            defaultNamespace: P.CreatorExperimentsDimensions
+            defaultNamespace: v.CreatorExperimentsDimensions
         },
         [A.ExperimentMetricKey]: {
-            defaultNamespace: P.CreatorExperimentsDimensions
+            defaultNamespace: v.CreatorExperimentsDimensions
         },
         [A.ExperimentVariant]: {
-            defaultNamespace: P.CreatorExperimentsDimensions
+            defaultNamespace: v.CreatorExperimentsDimensions
         },
         [A.FirstPlayAcquisitionSource]: {
-            defaultNamespace: P.CreatorAnalyticsDimensions
+            defaultNamespace: v.CreatorAnalyticsDimensions
         },
         [A.FirstSeenPlaceVersion]: {
-            defaultNamespace: P.ErrorReportingDimensions
+            defaultNamespace: v.ErrorReportingDimensions
         },
         [A.FlowType]: {
-            defaultNamespace: P.RecommendedEventsEconomyDimensions
+            defaultNamespace: v.RecommendedEventsEconomyDimensions
         },
         [A.ForumContentEventType]: {
-            defaultNamespace: P.CommunitiesDimensions
+            defaultNamespace: v.CommunitiesDimensions
         },
         [A.FromNode]: {
-            defaultNamespace: P.RecommendedEventsJourneysDimensions
+            defaultNamespace: v.RecommendedEventsJourneysDimensions
         },
         [A.FromStage]: {
-            defaultNamespace: P.RecommendedEventsJourneysDimensions
+            defaultNamespace: v.RecommendedEventsJourneysDimensions
         },
         [A.FunnelName]: {
-            defaultNamespace: P.RecommendedEventsFunnelDimensions
+            defaultNamespace: v.RecommendedEventsFunnelDimensions
         },
         [A.FunnelStep]: {
-            defaultNamespace: P.RecommendedEventsFunnelDimensions
+            defaultNamespace: v.RecommendedEventsFunnelDimensions
         },
         [A.GamePassId]: {
-            defaultNamespace: P.BonusPromotionsDimensions
+            defaultNamespace: v.BonusPromotionsDimensions
         },
         [A.Gender]: {
-            defaultNamespace: P.SharedDimensions,
+            defaultNamespace: v.SharedDimensions,
             overrides: {
-                [R.ItemAverageTransactionPrice]: P.AvatarItemsDimensions,
-                [R.ItemTotalCreatorEarning]: P.AvatarItemsDimensions,
-                [R.ItemTotalRobuxSpent]: P.AvatarItemsDimensions,
-                [R.ItemTotalTransactionCount]: P.AvatarItemsDimensions,
-                [R.CommerceCheckouts]: P.CommerceDimensions,
-                [R.CommerceClicks]: P.CommerceDimensions,
-                [R.CommerceGMV]: P.CommerceDimensions,
-                [R.CommerceImpressions]: P.CommerceDimensions,
-                [R.CommerceOrders]: P.CommerceDimensions,
-                [R.CommerceQuantitySold]: P.CommerceDimensions,
-                [R.CommerceUniqueCheckouts]: P.CommerceDimensions,
-                [R.CommerceUniqueClicks]: P.CommerceDimensions,
-                [R.CommerceUniqueImpressions]: P.CommerceDimensions,
-                [R.CommerceUniqueOrders]: P.CommerceDimensions,
-                [R.ExperimentMetricAdsArpuV2]: P.CreatorExperimentsDimensions,
-                [R.ExperimentMetricAdsEarningsV2]: P.CreatorExperimentsDimensions,
-                [R.ExperimentMetricAdsFrequencyV2]: P.CreatorExperimentsDimensions,
-                [R.ExperimentMetricAdsImpressionsV2]: P.CreatorExperimentsDimensions,
-                [R.ExperimentMetricAdsOptInRateV2]: P.CreatorExperimentsDimensions,
-                [R.ExperimentMetricAverageCurrencySinkDelta]: P.CreatorExperimentsDimensions,
-                [R.ExperimentMetricAverageCurrencySourceDelta]: P.CreatorExperimentsDimensions,
-                [R.ExperimentMetricAverageCustomValue]: P.CreatorExperimentsDimensions,
-                [R.ExperimentMetricAverageCustomValueAllUsers]: P.CreatorExperimentsDimensions,
-                [R.ExperimentMetricAverageNetCurrencyDelta]: P.CreatorExperimentsDimensions,
-                [R.ExperimentMetricAverageRevenuePerPayingUserV2]: P.CreatorExperimentsDimensions,
-                [R.ExperimentMetricAverageRevenuePerUserV2]: P.CreatorExperimentsDimensions,
-                [R.ExperimentMetricAverageSessionTimeV2]: P.CreatorExperimentsDimensions,
-                [R.ExperimentMetricCustomPenetration]: P.CreatorExperimentsDimensions,
-                [R.ExperimentMetricDay1RetentionV2]: P.CreatorExperimentsDimensions,
-                [R.ExperimentMetricDay7RetentionV2]: P.CreatorExperimentsDimensions,
-                [R.ExperimentMetricMean]: P.CreatorExperimentsDimensions,
-                [R.ExperimentMetricPayerConversionRateV2]: P.CreatorExperimentsDimensions,
-                [R.ExperimentMetricPerSessionFunnelConversion]: P.CreatorExperimentsDimensions,
-                [R.ExperimentMetricPerUserFunnelConversion]: P.CreatorExperimentsDimensions,
-                [R.ExperimentMetricPlaytimePerUserV2]: P.CreatorExperimentsDimensions,
-                [R.ExperimentMetricQualifiedPlayThroughRateV2]: P.CreatorExperimentsDimensions,
-                [R.ActionRatePerDau]: P.RecommendationServiceDimensions,
-                [R.ActionRatePerDauByActionType]: P.RecommendationServiceDimensions,
-                [R.ActionRatePerImpression]: P.RecommendationServiceDimensions,
-                [R.AverageImpressionsPerUser]: P.RecommendationServiceDimensions,
-                [R.AvgViewTimePerView]: P.RecommendationServiceDimensions,
-                [R.AvgViewTimePerViewer]: P.RecommendationServiceDimensions,
-                [R.CommentRatePerImpression]: P.RecommendationServiceDimensions,
-                [R.JoinRatePerImpression]: P.RecommendationServiceDimensions,
-                [R.PurchaseRatePerImpression]: P.RecommendationServiceDimensions,
-                [R.ReactionRatePerImpression]: P.RecommendationServiceDimensions,
-                [R.RecommendationDau]: P.RecommendationServiceDimensions,
-                [R.RecommendationViewsTotal]: P.RecommendationServiceDimensions,
-                [R.ShareRatePerImpression]: P.RecommendationServiceDimensions,
-                [R.TotalActions]: P.RecommendationServiceDimensions,
-                [R.TotalActionsByActionType]: P.RecommendationServiceDimensions,
-                [R.TotalComments]: P.RecommendationServiceDimensions,
-                [R.TotalJoins]: P.RecommendationServiceDimensions,
-                [R.TotalPurchases]: P.RecommendationServiceDimensions,
-                [R.TotalReactionsAdded]: P.RecommendationServiceDimensions,
-                [R.TotalShares]: P.RecommendationServiceDimensions,
-                [R.TotalViewHours]: P.RecommendationServiceDimensions,
-                [R.UniqueItemsPerUser]: P.RecommendationServiceDimensions,
-                [d.CustomEventAvgPerUserValue]: P.RecommendedEventsDimensions,
-                [d.CustomEventAvgValue]: P.RecommendedEventsDimensions,
-                [d.CustomEventCount]: P.RecommendedEventsDimensions,
-                [d.CustomEventCountUser]: P.RecommendedEventsDimensions,
-                [d.CustomEventMaxValue]: P.RecommendedEventsDimensions,
-                [d.CustomEventMinValue]: P.RecommendedEventsDimensions,
-                [d.CustomEventSumValue]: P.RecommendedEventsDimensions,
-                [R.EconomyAverageWalletBalance]: P.RecommendedEventsDimensions,
-                [R.EconomyTransactionAmount]: P.RecommendedEventsDimensions,
-                [R.EconomyTransactionAmountSinks]: P.RecommendedEventsDimensions,
-                [R.EconomyTransactionCount]: P.RecommendedEventsDimensions,
-                [R.FunnelCohortCompletionRate]: P.RecommendedEventsDimensions,
-                [R.FunnelCohortSessionCompletionRate]: P.RecommendedEventsDimensions,
-                [R.FunnelStepChurnRate]: P.RecommendedEventsDimensions,
-                [R.FunnelStepCompletionRate]: P.RecommendedEventsDimensions,
-                [R.FunnelStepOverallCompletionRate]: P.RecommendedEventsDimensions,
-                [R.FunnelStepTotalCount]: P.RecommendedEventsDimensions,
-                [R.FunnelUserChurnRate]: P.RecommendedEventsDimensions,
-                [R.FunnelUserOverallCompletionRate]: P.RecommendedEventsDimensions,
-                [R.FunnelUserStepCompletionRate]: P.RecommendedEventsDimensions,
-                [R.FunnelUserTotalCount]: P.RecommendedEventsDimensions,
-                [R.JourneyCompletionUsers]: P.RecommendedEventsDimensions,
-                [R.JourneyEntryTransitions]: P.RecommendedEventsDimensions,
-                [R.JourneyLastStageTransitions]: P.RecommendedEventsDimensions,
-                [R.JourneyNodeTransitionChurnCount]: P.RecommendedEventsDimensions,
-                [R.JourneyNodeTransitionChurnRate]: P.RecommendedEventsDimensions,
-                [R.JourneyNodeTransitionCount]: P.RecommendedEventsDimensions,
-                [R.JourneyNodeUserChurnCount]: P.RecommendedEventsDimensions,
-                [R.JourneyNodeUserChurnRate]: P.RecommendedEventsDimensions,
-                [R.JourneyNodeUserCount]: P.RecommendedEventsDimensions,
-                [R.JourneyStageChurnRate]: P.RecommendedEventsDimensions,
-                [R.JourneyStageSkipRate]: P.RecommendedEventsDimensions,
-                [R.JourneyStageSkipTransitionCount]: P.RecommendedEventsDimensions,
-                [R.JourneyStageSkipTransitionRate]: P.RecommendedEventsDimensions,
-                [R.JourneyStageSkipUserCount]: P.RecommendedEventsDimensions,
-                [R.JourneyStageTransitionChurnRate]: P.RecommendedEventsDimensions,
-                [R.JourneyStageTransitionCount]: P.RecommendedEventsDimensions,
-                [R.JourneyStageUserCount]: P.RecommendedEventsDimensions,
-                [R.JourneyTotalUsers]: P.RecommendedEventsDimensions,
-                [R.JourneyTransitionCount]: P.RecommendedEventsDimensions,
-                [R.JourneyTransitionCountUser]: P.RecommendedEventsDimensions,
-                [R.JourneyTransitionPctOfSource]: P.RecommendedEventsDimensions,
-                [R.JourneyTransitionPctOfStart]: P.RecommendedEventsDimensions,
-                [R.JourneyUserPctOfSource]: P.RecommendedEventsDimensions,
-                [R.JourneyUserPctOfStart]: P.RecommendedEventsDimensions
+                [R.ItemAverageTransactionPrice]: v.AvatarItemsDimensions,
+                [R.ItemTotalCreatorEarning]: v.AvatarItemsDimensions,
+                [R.ItemTotalRobuxSpent]: v.AvatarItemsDimensions,
+                [R.ItemTotalTransactionCount]: v.AvatarItemsDimensions,
+                [R.CommerceCheckouts]: v.CommerceDimensions,
+                [R.CommerceClicks]: v.CommerceDimensions,
+                [R.CommerceGMV]: v.CommerceDimensions,
+                [R.CommerceImpressions]: v.CommerceDimensions,
+                [R.CommerceOrders]: v.CommerceDimensions,
+                [R.CommerceQuantitySold]: v.CommerceDimensions,
+                [R.CommerceUniqueCheckouts]: v.CommerceDimensions,
+                [R.CommerceUniqueClicks]: v.CommerceDimensions,
+                [R.CommerceUniqueImpressions]: v.CommerceDimensions,
+                [R.CommerceUniqueOrders]: v.CommerceDimensions,
+                [R.ExperimentMetricAdsArpuV2]: v.CreatorExperimentsDimensions,
+                [R.ExperimentMetricAdsEarningsV2]: v.CreatorExperimentsDimensions,
+                [R.ExperimentMetricAdsFrequencyV2]: v.CreatorExperimentsDimensions,
+                [R.ExperimentMetricAdsImpressionsV2]: v.CreatorExperimentsDimensions,
+                [R.ExperimentMetricAdsOptInRateV2]: v.CreatorExperimentsDimensions,
+                [R.ExperimentMetricAverageCurrencySinkDelta]: v.CreatorExperimentsDimensions,
+                [R.ExperimentMetricAverageCurrencySourceDelta]: v.CreatorExperimentsDimensions,
+                [R.ExperimentMetricAverageCustomValue]: v.CreatorExperimentsDimensions,
+                [R.ExperimentMetricAverageCustomValueAllUsers]: v.CreatorExperimentsDimensions,
+                [R.ExperimentMetricAverageNetCurrencyDelta]: v.CreatorExperimentsDimensions,
+                [R.ExperimentMetricAverageRevenuePerPayingUserV2]: v.CreatorExperimentsDimensions,
+                [R.ExperimentMetricAverageRevenuePerUserV2]: v.CreatorExperimentsDimensions,
+                [R.ExperimentMetricAverageSessionTimeV2]: v.CreatorExperimentsDimensions,
+                [R.ExperimentMetricCustomPenetration]: v.CreatorExperimentsDimensions,
+                [R.ExperimentMetricDay1RetentionV2]: v.CreatorExperimentsDimensions,
+                [R.ExperimentMetricDay7RetentionV2]: v.CreatorExperimentsDimensions,
+                [R.ExperimentMetricMean]: v.CreatorExperimentsDimensions,
+                [R.ExperimentMetricPayerConversionRateV2]: v.CreatorExperimentsDimensions,
+                [R.ExperimentMetricPerSessionFunnelConversion]: v.CreatorExperimentsDimensions,
+                [R.ExperimentMetricPerUserFunnelConversion]: v.CreatorExperimentsDimensions,
+                [R.ExperimentMetricPlaytimePerUserV2]: v.CreatorExperimentsDimensions,
+                [R.ExperimentMetricQualifiedPlayThroughRateV2]: v.CreatorExperimentsDimensions,
+                [R.ActionRatePerDau]: v.RecommendationServiceDimensions,
+                [R.ActionRatePerDauByActionType]: v.RecommendationServiceDimensions,
+                [R.ActionRatePerImpression]: v.RecommendationServiceDimensions,
+                [R.AverageImpressionsPerUser]: v.RecommendationServiceDimensions,
+                [R.AvgViewTimePerView]: v.RecommendationServiceDimensions,
+                [R.AvgViewTimePerViewer]: v.RecommendationServiceDimensions,
+                [R.CommentRatePerImpression]: v.RecommendationServiceDimensions,
+                [R.JoinRatePerImpression]: v.RecommendationServiceDimensions,
+                [R.PurchaseRatePerImpression]: v.RecommendationServiceDimensions,
+                [R.ReactionRatePerImpression]: v.RecommendationServiceDimensions,
+                [R.RecommendationDau]: v.RecommendationServiceDimensions,
+                [R.RecommendationViewsTotal]: v.RecommendationServiceDimensions,
+                [R.ShareRatePerImpression]: v.RecommendationServiceDimensions,
+                [R.TotalActions]: v.RecommendationServiceDimensions,
+                [R.TotalActionsByActionType]: v.RecommendationServiceDimensions,
+                [R.TotalComments]: v.RecommendationServiceDimensions,
+                [R.TotalJoins]: v.RecommendationServiceDimensions,
+                [R.TotalPurchases]: v.RecommendationServiceDimensions,
+                [R.TotalReactionsAdded]: v.RecommendationServiceDimensions,
+                [R.TotalShares]: v.RecommendationServiceDimensions,
+                [R.TotalViewHours]: v.RecommendationServiceDimensions,
+                [R.UniqueItemsPerUser]: v.RecommendationServiceDimensions,
+                [d.CustomEventAvgPerUserValue]: v.RecommendedEventsDimensions,
+                [d.CustomEventAvgValue]: v.RecommendedEventsDimensions,
+                [d.CustomEventCount]: v.RecommendedEventsDimensions,
+                [d.CustomEventCountUser]: v.RecommendedEventsDimensions,
+                [d.CustomEventMaxValue]: v.RecommendedEventsDimensions,
+                [d.CustomEventMinValue]: v.RecommendedEventsDimensions,
+                [d.CustomEventSumValue]: v.RecommendedEventsDimensions,
+                [R.EconomyAverageWalletBalance]: v.RecommendedEventsDimensions,
+                [R.EconomyTransactionAmount]: v.RecommendedEventsDimensions,
+                [R.EconomyTransactionAmountSinks]: v.RecommendedEventsDimensions,
+                [R.EconomyTransactionCount]: v.RecommendedEventsDimensions,
+                [R.FunnelCohortCompletionRate]: v.RecommendedEventsDimensions,
+                [R.FunnelCohortSessionCompletionRate]: v.RecommendedEventsDimensions,
+                [R.FunnelStepChurnRate]: v.RecommendedEventsDimensions,
+                [R.FunnelStepCompletionRate]: v.RecommendedEventsDimensions,
+                [R.FunnelStepOverallCompletionRate]: v.RecommendedEventsDimensions,
+                [R.FunnelStepTotalCount]: v.RecommendedEventsDimensions,
+                [R.FunnelUserChurnRate]: v.RecommendedEventsDimensions,
+                [R.FunnelUserOverallCompletionRate]: v.RecommendedEventsDimensions,
+                [R.FunnelUserStepCompletionRate]: v.RecommendedEventsDimensions,
+                [R.FunnelUserTotalCount]: v.RecommendedEventsDimensions,
+                [R.JourneyCompletionUsers]: v.RecommendedEventsDimensions,
+                [R.JourneyEntryTransitions]: v.RecommendedEventsDimensions,
+                [R.JourneyLastStageTransitions]: v.RecommendedEventsDimensions,
+                [R.JourneyNodeTransitionChurnCount]: v.RecommendedEventsDimensions,
+                [R.JourneyNodeTransitionChurnRate]: v.RecommendedEventsDimensions,
+                [R.JourneyNodeTransitionCount]: v.RecommendedEventsDimensions,
+                [R.JourneyNodeUserChurnCount]: v.RecommendedEventsDimensions,
+                [R.JourneyNodeUserChurnRate]: v.RecommendedEventsDimensions,
+                [R.JourneyNodeUserCount]: v.RecommendedEventsDimensions,
+                [R.JourneyStageChurnRate]: v.RecommendedEventsDimensions,
+                [R.JourneyStageSkipRate]: v.RecommendedEventsDimensions,
+                [R.JourneyStageSkipTransitionCount]: v.RecommendedEventsDimensions,
+                [R.JourneyStageSkipTransitionRate]: v.RecommendedEventsDimensions,
+                [R.JourneyStageSkipUserCount]: v.RecommendedEventsDimensions,
+                [R.JourneyStageTransitionChurnRate]: v.RecommendedEventsDimensions,
+                [R.JourneyStageTransitionCount]: v.RecommendedEventsDimensions,
+                [R.JourneyStageUserCount]: v.RecommendedEventsDimensions,
+                [R.JourneyTotalUsers]: v.RecommendedEventsDimensions,
+                [R.JourneyTransitionCount]: v.RecommendedEventsDimensions,
+                [R.JourneyTransitionCountUser]: v.RecommendedEventsDimensions,
+                [R.JourneyTransitionPctOfSource]: v.RecommendedEventsDimensions,
+                [R.JourneyTransitionPctOfStart]: v.RecommendedEventsDimensions,
+                [R.JourneyUserPctOfSource]: v.RecommendedEventsDimensions,
+                [R.JourneyUserPctOfStart]: v.RecommendedEventsDimensions
             }
         },
         [A.HttpServiceDomains]: {
-            defaultNamespace: P.ServiceEfficiencyHttpServiceInsightsDimensions
+            defaultNamespace: v.ServiceEfficiencyHttpServiceInsightsDimensions
         },
         [A.HttpServiceDomainsExtended]: {
-            defaultNamespace: P.ServiceEfficiencyHttpServiceInsightsDimensions
+            defaultNamespace: v.ServiceEfficiencyHttpServiceInsightsDimensions
         },
         [A.HttpServiceMethod]: {
-            defaultNamespace: P.ServiceEfficiencyHttpServiceInsightsDimensions
+            defaultNamespace: v.ServiceEfficiencyHttpServiceInsightsDimensions
         },
         [A.HttpServiceStatus]: {
-            defaultNamespace: P.ServiceEfficiencyHttpServiceInsightsDimensions
+            defaultNamespace: v.ServiceEfficiencyHttpServiceInsightsDimensions
         },
         [A.ImmersiveEventType]: {
-            defaultNamespace: P.AdsPublisherReportingDimensions
+            defaultNamespace: v.AdsPublisherReportingDimensions
         },
         [A.IpFamilyName]: {
-            defaultNamespace: P.IpLicensingEarningsDimensions,
+            defaultNamespace: v.IpLicensingEarningsDimensions,
             overrides: {
-                [R.IphEarningsRobuxPartial]: P.IpLicensingPartialEarningsDimensions,
-                [R.IphTransactionCountPartial]: P.IpLicensingPartialEarningsDimensions
+                [R.IphEarningsRobuxPartial]: v.IpLicensingPartialEarningsDimensions,
+                [R.IphTransactionCountPartial]: v.IpLicensingPartialEarningsDimensions
             }
         },
         [A.IsFree]: {
-            defaultNamespace: P.CreatorStoreDimensions
+            defaultNamespace: v.CreatorStoreDimensions
         },
         [A.IsNewUser]: {
-            defaultNamespace: P.RecommendedEventsDimensions,
+            defaultNamespace: v.RecommendedEventsDimensions,
             overrides: {
-                [R.ExperimentMetricAdsArpuV2]: P.CreatorExperimentsDimensions,
-                [R.ExperimentMetricAdsEarningsV2]: P.CreatorExperimentsDimensions,
-                [R.ExperimentMetricAdsFrequencyV2]: P.CreatorExperimentsDimensions,
-                [R.ExperimentMetricAdsImpressionsV2]: P.CreatorExperimentsDimensions,
-                [R.ExperimentMetricAdsOptInRateV2]: P.CreatorExperimentsDimensions,
-                [R.ExperimentMetricAverageCurrencySinkDelta]: P.CreatorExperimentsDimensions,
-                [R.ExperimentMetricAverageCurrencySourceDelta]: P.CreatorExperimentsDimensions,
-                [R.ExperimentMetricAverageCustomValue]: P.CreatorExperimentsDimensions,
-                [R.ExperimentMetricAverageCustomValueAllUsers]: P.CreatorExperimentsDimensions,
-                [R.ExperimentMetricAverageNetCurrencyDelta]: P.CreatorExperimentsDimensions,
-                [R.ExperimentMetricAverageRevenuePerPayingUserV2]: P.CreatorExperimentsDimensions,
-                [R.ExperimentMetricAverageRevenuePerUserV2]: P.CreatorExperimentsDimensions,
-                [R.ExperimentMetricAverageSessionTimeV2]: P.CreatorExperimentsDimensions,
-                [R.ExperimentMetricCustomPenetration]: P.CreatorExperimentsDimensions,
-                [R.ExperimentMetricDay1RetentionV2]: P.CreatorExperimentsDimensions,
-                [R.ExperimentMetricDay7RetentionV2]: P.CreatorExperimentsDimensions,
-                [R.ExperimentMetricMean]: P.CreatorExperimentsDimensions,
-                [R.ExperimentMetricPayerConversionRateV2]: P.CreatorExperimentsDimensions,
-                [R.ExperimentMetricPerSessionFunnelConversion]: P.CreatorExperimentsDimensions,
-                [R.ExperimentMetricPerUserFunnelConversion]: P.CreatorExperimentsDimensions,
-                [R.ExperimentMetricPlaytimePerUserV2]: P.CreatorExperimentsDimensions,
-                [R.ExperimentMetricQualifiedPlayThroughRateV2]: P.CreatorExperimentsDimensions,
-                [R.AveragePlayTimeMinutesPerDAU]: P.SharedDimensions,
-                [R.AverageSessionLengthMinutes]: P.SharedDimensions,
-                [R.ClickCVR]: P.SharedDimensions,
-                [R.ClickCVRMigration]: P.SharedDimensions,
-                [R.DailyActiveUsers]: P.SharedDimensions,
-                [R.EndToEndCVR]: P.SharedDimensions,
-                [R.EndToEndCVRMigration]: P.SharedDimensions,
-                [R.ImpressionCVR]: P.SharedDimensions,
-                [R.ImpressionCVRMigration]: P.SharedDimensions,
-                [R.MonthlyActiveUsers]: P.SharedDimensions,
-                [R.QualifiedEndToEndCVR]: P.SharedDimensions,
-                [R.QualifiedEndToEndCVRMigration]: P.SharedDimensions,
-                [R.QualifiedUniqueUsersWithPlaySessions]: P.SharedDimensions,
-                [R.QualifiedUniqueUsersWithPlaySessionsMigration]: P.SharedDimensions,
-                [R.ShareLinkClickCVR]: P.SharedDimensions,
-                [R.ShareLinkQualifiedClickCVR]: P.SharedDimensions,
-                [R.ShareLinkQualifiedUniqueUsersWithPlaySessions]: P.SharedDimensions,
-                [R.ShareLinkUniqueUsersWithClicks]: P.SharedDimensions,
-                [R.ShareLinkUniqueUsersWithPlaySessions]: P.SharedDimensions,
-                [R.TotalPlayTimeHours]: P.SharedDimensions,
-                [R.UniqueUsersWithClicks]: P.SharedDimensions,
-                [R.UniqueUsersWithClicksMigration]: P.SharedDimensions,
-                [R.UniqueUsersWithImpressions]: P.SharedDimensions,
-                [R.UniqueUsersWithImpressionsMigration]: P.SharedDimensions,
-                [R.UniqueUsersWithPlaySessions]: P.SharedDimensions,
-                [R.UniqueUsersWithPlaySessionsMigration]: P.SharedDimensions,
-                [R.Visits]: P.SharedDimensions
+                [R.ExperimentMetricAdsArpuV2]: v.CreatorExperimentsDimensions,
+                [R.ExperimentMetricAdsEarningsV2]: v.CreatorExperimentsDimensions,
+                [R.ExperimentMetricAdsFrequencyV2]: v.CreatorExperimentsDimensions,
+                [R.ExperimentMetricAdsImpressionsV2]: v.CreatorExperimentsDimensions,
+                [R.ExperimentMetricAdsOptInRateV2]: v.CreatorExperimentsDimensions,
+                [R.ExperimentMetricAverageCurrencySinkDelta]: v.CreatorExperimentsDimensions,
+                [R.ExperimentMetricAverageCurrencySourceDelta]: v.CreatorExperimentsDimensions,
+                [R.ExperimentMetricAverageCustomValue]: v.CreatorExperimentsDimensions,
+                [R.ExperimentMetricAverageCustomValueAllUsers]: v.CreatorExperimentsDimensions,
+                [R.ExperimentMetricAverageNetCurrencyDelta]: v.CreatorExperimentsDimensions,
+                [R.ExperimentMetricAverageRevenuePerPayingUserV2]: v.CreatorExperimentsDimensions,
+                [R.ExperimentMetricAverageRevenuePerUserV2]: v.CreatorExperimentsDimensions,
+                [R.ExperimentMetricAverageSessionTimeV2]: v.CreatorExperimentsDimensions,
+                [R.ExperimentMetricCustomPenetration]: v.CreatorExperimentsDimensions,
+                [R.ExperimentMetricDay1RetentionV2]: v.CreatorExperimentsDimensions,
+                [R.ExperimentMetricDay7RetentionV2]: v.CreatorExperimentsDimensions,
+                [R.ExperimentMetricMean]: v.CreatorExperimentsDimensions,
+                [R.ExperimentMetricPayerConversionRateV2]: v.CreatorExperimentsDimensions,
+                [R.ExperimentMetricPerSessionFunnelConversion]: v.CreatorExperimentsDimensions,
+                [R.ExperimentMetricPerUserFunnelConversion]: v.CreatorExperimentsDimensions,
+                [R.ExperimentMetricPlaytimePerUserV2]: v.CreatorExperimentsDimensions,
+                [R.ExperimentMetricQualifiedPlayThroughRateV2]: v.CreatorExperimentsDimensions,
+                [R.AveragePlayTimeMinutesPerDAU]: v.SharedDimensions,
+                [R.AverageSessionLengthMinutes]: v.SharedDimensions,
+                [R.ClickCVR]: v.SharedDimensions,
+                [R.ClickCVRMigration]: v.SharedDimensions,
+                [R.DailyActiveUsers]: v.SharedDimensions,
+                [R.EndToEndCVR]: v.SharedDimensions,
+                [R.EndToEndCVRMigration]: v.SharedDimensions,
+                [R.ImpressionCVR]: v.SharedDimensions,
+                [R.ImpressionCVRMigration]: v.SharedDimensions,
+                [R.MonthlyActiveUsers]: v.SharedDimensions,
+                [R.QualifiedEndToEndCVR]: v.SharedDimensions,
+                [R.QualifiedEndToEndCVRMigration]: v.SharedDimensions,
+                [R.QualifiedUniqueUsersWithPlaySessions]: v.SharedDimensions,
+                [R.QualifiedUniqueUsersWithPlaySessionsMigration]: v.SharedDimensions,
+                [R.ShareLinkClickCVR]: v.SharedDimensions,
+                [R.ShareLinkQualifiedClickCVR]: v.SharedDimensions,
+                [R.ShareLinkQualifiedUniqueUsersWithPlaySessions]: v.SharedDimensions,
+                [R.ShareLinkUniqueUsersWithClicks]: v.SharedDimensions,
+                [R.ShareLinkUniqueUsersWithPlaySessions]: v.SharedDimensions,
+                [R.TotalPlayTimeHours]: v.SharedDimensions,
+                [R.UniqueUsersWithClicks]: v.SharedDimensions,
+                [R.UniqueUsersWithClicksMigration]: v.SharedDimensions,
+                [R.UniqueUsersWithImpressions]: v.SharedDimensions,
+                [R.UniqueUsersWithImpressionsMigration]: v.SharedDimensions,
+                [R.UniqueUsersWithPlaySessions]: v.SharedDimensions,
+                [R.UniqueUsersWithPlaySessionsMigration]: v.SharedDimensions,
+                [R.Visits]: v.SharedDimensions
             }
         },
         [A.ItemSku]: {
-            defaultNamespace: P.RecommendedEventsEconomyDimensions
+            defaultNamespace: v.RecommendedEventsEconomyDimensions
         },
         [A.JourneyName]: {
-            defaultNamespace: P.RecommendedEventsJourneysDimensions
+            defaultNamespace: v.RecommendedEventsJourneysDimensions
         },
         [A.JourneyVersion]: {
-            defaultNamespace: P.RecommendedEventsJourneysDimensions
+            defaultNamespace: v.RecommendedEventsJourneysDimensions
         },
         [A.Keyword]: {
-            defaultNamespace: P.ErrorReportingDimensions
+            defaultNamespace: v.ErrorReportingDimensions
         },
         [A.LicenseName]: {
-            defaultNamespace: P.IpLicensingEarningsDimensions,
+            defaultNamespace: v.IpLicensingEarningsDimensions,
             overrides: {
-                [R.IphEarningsRobuxPartial]: P.IpLicensingPartialEarningsDimensions,
-                [R.IphTransactionCountPartial]: P.IpLicensingPartialEarningsDimensions
+                [R.IphEarningsRobuxPartial]: v.IpLicensingPartialEarningsDimensions,
+                [R.IphTransactionCountPartial]: v.IpLicensingPartialEarningsDimensions
             }
         },
         [A.Locale]: {
-            defaultNamespace: P.SharedDimensions,
+            defaultNamespace: v.SharedDimensions,
             overrides: {
-                [R.ExperimentMetricAdsArpuV2]: P.CreatorExperimentsDimensions,
-                [R.ExperimentMetricAdsEarningsV2]: P.CreatorExperimentsDimensions,
-                [R.ExperimentMetricAdsFrequencyV2]: P.CreatorExperimentsDimensions,
-                [R.ExperimentMetricAdsImpressionsV2]: P.CreatorExperimentsDimensions,
-                [R.ExperimentMetricAdsOptInRateV2]: P.CreatorExperimentsDimensions,
-                [R.ExperimentMetricAverageCurrencySinkDelta]: P.CreatorExperimentsDimensions,
-                [R.ExperimentMetricAverageCurrencySourceDelta]: P.CreatorExperimentsDimensions,
-                [R.ExperimentMetricAverageCustomValue]: P.CreatorExperimentsDimensions,
-                [R.ExperimentMetricAverageCustomValueAllUsers]: P.CreatorExperimentsDimensions,
-                [R.ExperimentMetricAverageNetCurrencyDelta]: P.CreatorExperimentsDimensions,
-                [R.ExperimentMetricAverageRevenuePerPayingUserV2]: P.CreatorExperimentsDimensions,
-                [R.ExperimentMetricAverageRevenuePerUserV2]: P.CreatorExperimentsDimensions,
-                [R.ExperimentMetricAverageSessionTimeV2]: P.CreatorExperimentsDimensions,
-                [R.ExperimentMetricCustomPenetration]: P.CreatorExperimentsDimensions,
-                [R.ExperimentMetricDay1RetentionV2]: P.CreatorExperimentsDimensions,
-                [R.ExperimentMetricDay7RetentionV2]: P.CreatorExperimentsDimensions,
-                [R.ExperimentMetricMean]: P.CreatorExperimentsDimensions,
-                [R.ExperimentMetricPayerConversionRateV2]: P.CreatorExperimentsDimensions,
-                [R.ExperimentMetricPerSessionFunnelConversion]: P.CreatorExperimentsDimensions,
-                [R.ExperimentMetricPerUserFunnelConversion]: P.CreatorExperimentsDimensions,
-                [R.ExperimentMetricPlaytimePerUserV2]: P.CreatorExperimentsDimensions,
-                [R.ExperimentMetricQualifiedPlayThroughRateV2]: P.CreatorExperimentsDimensions
+                [R.ExperimentMetricAdsArpuV2]: v.CreatorExperimentsDimensions,
+                [R.ExperimentMetricAdsEarningsV2]: v.CreatorExperimentsDimensions,
+                [R.ExperimentMetricAdsFrequencyV2]: v.CreatorExperimentsDimensions,
+                [R.ExperimentMetricAdsImpressionsV2]: v.CreatorExperimentsDimensions,
+                [R.ExperimentMetricAdsOptInRateV2]: v.CreatorExperimentsDimensions,
+                [R.ExperimentMetricAverageCurrencySinkDelta]: v.CreatorExperimentsDimensions,
+                [R.ExperimentMetricAverageCurrencySourceDelta]: v.CreatorExperimentsDimensions,
+                [R.ExperimentMetricAverageCustomValue]: v.CreatorExperimentsDimensions,
+                [R.ExperimentMetricAverageCustomValueAllUsers]: v.CreatorExperimentsDimensions,
+                [R.ExperimentMetricAverageNetCurrencyDelta]: v.CreatorExperimentsDimensions,
+                [R.ExperimentMetricAverageRevenuePerPayingUserV2]: v.CreatorExperimentsDimensions,
+                [R.ExperimentMetricAverageRevenuePerUserV2]: v.CreatorExperimentsDimensions,
+                [R.ExperimentMetricAverageSessionTimeV2]: v.CreatorExperimentsDimensions,
+                [R.ExperimentMetricCustomPenetration]: v.CreatorExperimentsDimensions,
+                [R.ExperimentMetricDay1RetentionV2]: v.CreatorExperimentsDimensions,
+                [R.ExperimentMetricDay7RetentionV2]: v.CreatorExperimentsDimensions,
+                [R.ExperimentMetricMean]: v.CreatorExperimentsDimensions,
+                [R.ExperimentMetricPayerConversionRateV2]: v.CreatorExperimentsDimensions,
+                [R.ExperimentMetricPerSessionFunnelConversion]: v.CreatorExperimentsDimensions,
+                [R.ExperimentMetricPerUserFunnelConversion]: v.CreatorExperimentsDimensions,
+                [R.ExperimentMetricPlaytimePerUserV2]: v.CreatorExperimentsDimensions,
+                [R.ExperimentMetricQualifiedPlayThroughRateV2]: v.CreatorExperimentsDimensions
             }
         },
         [A.LocationId]: {
-            defaultNamespace: P.RecommendationServiceDimensions
+            defaultNamespace: v.RecommendationServiceDimensions
         },
         [A.LogSeverity]: {
-            defaultNamespace: P.ErrorReportingDimensions
+            defaultNamespace: v.ErrorReportingDimensions
         },
         [A.LogSource]: {
-            defaultNamespace: P.ErrorReportingDimensions
+            defaultNamespace: v.ErrorReportingDimensions
         },
         [A.MarketplaceAffiliateLinkId]: {
-            defaultNamespace: P.MarketplaceAffiliateLinksDailyDimensions
+            defaultNamespace: v.MarketplaceAffiliateLinksDailyDimensions
         },
         [A.MarketplaceAffiliateLinkItemId]: {
-            defaultNamespace: P.MarketplaceAffiliateLinksDailyDimensions
+            defaultNamespace: v.MarketplaceAffiliateLinksDailyDimensions
         },
         [A.MatchmakingAttribute]: {
-            defaultNamespace: P.MatchmakingDimensions
+            defaultNamespace: v.MatchmakingDimensions
         },
         [A.MatchmakingCategoricalCustomSignal]: {
-            defaultNamespace: P.MatchmakingDimensions
+            defaultNamespace: v.MatchmakingDimensions
         },
         [A.MatchmakingNumericCustomSignal]: {
-            defaultNamespace: P.MatchmakingDimensions
+            defaultNamespace: v.MatchmakingDimensions
         },
         [A.MatchmakingPlayerAttributesLoadingStatus]: {
-            defaultNamespace: P.MatchmakingDimensions
+            defaultNamespace: v.MatchmakingDimensions
         },
         [A.MatchmakingRule]: {
-            defaultNamespace: P.MatchmakingDimensions
+            defaultNamespace: v.MatchmakingDimensions
         },
         [A.MatchmakingRulesEffectStatus]: {
-            defaultNamespace: P.MatchmakingDimensions
+            defaultNamespace: v.MatchmakingDimensions
         },
         [A.MembershipEventType]: {
-            defaultNamespace: P.CommunitiesDimensions
+            defaultNamespace: v.CommunitiesDimensions
         },
         [A.MemoryGroup]: {
-            defaultNamespace: P.SharedDimensions,
+            defaultNamespace: v.SharedDimensions,
             overrides: {
-                [R.OomUnexpectedExitsMigration]: P.CreatorAnalyticsPerformanceEngineTelemetryDimensions,
-                [d.SessionDurationSecondsAvgMigration]: P.CreatorAnalyticsPerformanceEngineTelemetryDimensions,
-                [d.SessionDurationSecondsP10Migration]: P.CreatorAnalyticsPerformanceEngineTelemetryDimensions,
-                [d.SessionDurationSecondsP50Migration]: P.CreatorAnalyticsPerformanceEngineTelemetryDimensions,
-                [d.SessionDurationSecondsP90Migration]: P.CreatorAnalyticsPerformanceEngineTelemetryDimensions,
-                [R.ClientCpuTimeAvg]: P.EngineAnalyticsDimensions,
-                [d.ExperienceLaunchTimeP50]: P.EngineAnalyticsDimensions,
-                [d.ExperienceLaunchTimeP90]: P.EngineAnalyticsDimensions,
-                [d.BandwidthTotalRecvBpsAvg]: P.EngineAnalyticsNetworkingDimensions,
-                [R.BandwidthTotalRecvBpsForOrdering]: P.EngineAnalyticsNetworkingDimensions,
-                [d.BandwidthTotalRecvBpsP10]: P.EngineAnalyticsNetworkingDimensions,
-                [d.BandwidthTotalRecvBpsP50]: P.EngineAnalyticsNetworkingDimensions,
-                [d.BandwidthTotalRecvBpsP90]: P.EngineAnalyticsNetworkingDimensions,
-                [R.BandwidthTotalRecvMaxBytes]: P.EngineAnalyticsNetworkingDimensions,
-                [R.BandwidthTotalRecvUpdatesPerSecond]: P.EngineAnalyticsNetworkingDimensions,
-                [d.BandwidthTotalSendBpsAvg]: P.EngineAnalyticsNetworkingDimensions,
-                [R.BandwidthTotalSendBpsForOrdering]: P.EngineAnalyticsNetworkingDimensions,
-                [d.BandwidthTotalSendBpsP10]: P.EngineAnalyticsNetworkingDimensions,
-                [d.BandwidthTotalSendBpsP50]: P.EngineAnalyticsNetworkingDimensions,
-                [d.BandwidthTotalSendBpsP90]: P.EngineAnalyticsNetworkingDimensions,
-                [R.BandwidthTotalSendMaxBytes]: P.EngineAnalyticsNetworkingDimensions,
-                [R.BandwidthTotalSendUpdatesPerSecond]: P.EngineAnalyticsNetworkingDimensions
+                [R.OomUnexpectedExitsMigration]: v.CreatorAnalyticsPerformanceEngineTelemetryDimensions,
+                [d.SessionDurationSecondsAvgMigration]: v.CreatorAnalyticsPerformanceEngineTelemetryDimensions,
+                [d.SessionDurationSecondsP10Migration]: v.CreatorAnalyticsPerformanceEngineTelemetryDimensions,
+                [d.SessionDurationSecondsP50Migration]: v.CreatorAnalyticsPerformanceEngineTelemetryDimensions,
+                [d.SessionDurationSecondsP90Migration]: v.CreatorAnalyticsPerformanceEngineTelemetryDimensions,
+                [R.ClientCpuTimeAvg]: v.EngineAnalyticsDimensions,
+                [d.ExperienceLaunchTimeP50]: v.EngineAnalyticsDimensions,
+                [d.ExperienceLaunchTimeP90]: v.EngineAnalyticsDimensions,
+                [d.BandwidthTotalRecvBpsAvg]: v.EngineAnalyticsNetworkingDimensions,
+                [R.BandwidthTotalRecvBpsForOrdering]: v.EngineAnalyticsNetworkingDimensions,
+                [d.BandwidthTotalRecvBpsP10]: v.EngineAnalyticsNetworkingDimensions,
+                [d.BandwidthTotalRecvBpsP50]: v.EngineAnalyticsNetworkingDimensions,
+                [d.BandwidthTotalRecvBpsP90]: v.EngineAnalyticsNetworkingDimensions,
+                [R.BandwidthTotalRecvMaxBytes]: v.EngineAnalyticsNetworkingDimensions,
+                [R.BandwidthTotalRecvUpdatesPerSecond]: v.EngineAnalyticsNetworkingDimensions,
+                [d.BandwidthTotalSendBpsAvg]: v.EngineAnalyticsNetworkingDimensions,
+                [R.BandwidthTotalSendBpsForOrdering]: v.EngineAnalyticsNetworkingDimensions,
+                [d.BandwidthTotalSendBpsP10]: v.EngineAnalyticsNetworkingDimensions,
+                [d.BandwidthTotalSendBpsP50]: v.EngineAnalyticsNetworkingDimensions,
+                [d.BandwidthTotalSendBpsP90]: v.EngineAnalyticsNetworkingDimensions,
+                [R.BandwidthTotalSendMaxBytes]: v.EngineAnalyticsNetworkingDimensions,
+                [R.BandwidthTotalSendUpdatesPerSecond]: v.EngineAnalyticsNetworkingDimensions
             }
         },
         [A.MemoryStoreErrorRateAlertSeverity]: {
-            defaultNamespace: P.ServiceEfficiencyMemoryStoreDimensions
+            defaultNamespace: v.ServiceEfficiencyMemoryStoreDimensions
         },
         [A.MemoryStoreMemoryUsageAlertSeverity]: {
-            defaultNamespace: P.ServiceEfficiencyMemoryStoreDimensions
+            defaultNamespace: v.ServiceEfficiencyMemoryStoreDimensions
         },
         [A.MemoryStoreOperation]: {
-            defaultNamespace: P.ServiceEfficiencyMemoryStoreDimensions
+            defaultNamespace: v.ServiceEfficiencyMemoryStoreDimensions
         },
         [A.MemoryStoreStatus]: {
-            defaultNamespace: P.ServiceEfficiencyMemoryStoreDimensions
+            defaultNamespace: v.ServiceEfficiencyMemoryStoreDimensions
         },
         [A.MemoryStoreThrottlingAlertSeverity]: {
-            defaultNamespace: P.ServiceEfficiencyMemoryStoreDimensions
+            defaultNamespace: v.ServiceEfficiencyMemoryStoreDimensions
         },
         [A.MemoryUsageCategory]: {
-            defaultNamespace: P.RccServerEfficiencyDimensions
+            defaultNamespace: v.RccServerEfficiencyDimensions
         },
         [A.MemoryUsageSubCategory]: {
-            defaultNamespace: P.RccServerEfficiencyDimensions
+            defaultNamespace: v.RccServerEfficiencyDimensions
         },
         [A.MessageHash]: {
-            defaultNamespace: P.ErrorReportingDimensions
+            defaultNamespace: v.ErrorReportingDimensions
         },
         [A.MetricResultType]: {
-            defaultNamespace: P.CreatorExperimentsDimensions
+            defaultNamespace: v.CreatorExperimentsDimensions
         },
         [A.NotificationChannel]: {
-            defaultNamespace: P.CommunitiesDimensions
+            defaultNamespace: v.CommunitiesDimensions
         },
         [A.OccurrenceId]: {
-            defaultNamespace: P.ExperienceEventsSummaryDimensions
+            defaultNamespace: v.ExperienceEventsSummaryDimensions
         },
         [A.OperatingSystem]: {
-            defaultNamespace: P.SharedDimensions,
+            defaultNamespace: v.SharedDimensions,
             overrides: {
-                [R.CommerceCheckouts]: P.CommerceDimensions,
-                [R.CommerceClicks]: P.CommerceDimensions,
-                [R.CommerceGMV]: P.CommerceDimensions,
-                [R.CommerceImpressions]: P.CommerceDimensions,
-                [R.CommerceOrders]: P.CommerceDimensions,
-                [R.CommerceQuantitySold]: P.CommerceDimensions,
-                [R.CommerceUniqueCheckouts]: P.CommerceDimensions,
-                [R.CommerceUniqueClicks]: P.CommerceDimensions,
-                [R.CommerceUniqueImpressions]: P.CommerceDimensions,
-                [R.CommerceUniqueOrders]: P.CommerceDimensions,
-                [R.ClientCrashCount]: P.CreatorAnalyticsDimensions,
-                [R.ClientCrashCountMigration]: P.CreatorAnalyticsDimensions,
-                [R.ClientCrashRate15m]: P.CreatorAnalyticsDimensions,
-                [R.ClientCrashRate15mMigration]: P.CreatorAnalyticsDimensions,
-                [R.ClientCrashRateNotStableAlert]: P.CreatorAnalyticsDimensions,
-                [R.ClientCrashRateNotStableAlertMigration]: P.CreatorAnalyticsDimensions,
-                [d.ClientFpsAvg]: P.CreatorAnalyticsDimensions,
-                [d.ClientFpsP10]: P.CreatorAnalyticsDimensions,
-                [d.ClientFpsP50]: P.CreatorAnalyticsDimensions,
-                [d.ClientFpsP90]: P.CreatorAnalyticsDimensions,
-                [d.ClientMemoryUsageAvg]: P.CreatorAnalyticsDimensions,
-                [d.ClientMemoryUsageP10]: P.CreatorAnalyticsDimensions,
-                [d.ClientMemoryUsageP50]: P.CreatorAnalyticsDimensions,
-                [d.ClientMemoryUsageP90]: P.CreatorAnalyticsDimensions,
-                [d.ClientMemoryUsagePercentageAvg]: P.CreatorAnalyticsDimensions,
-                [d.ClientMemoryUsagePercentageP10]: P.CreatorAnalyticsDimensions,
-                [d.ClientMemoryUsagePercentageP50]: P.CreatorAnalyticsDimensions,
-                [d.ClientMemoryUsagePercentageP90]: P.CreatorAnalyticsDimensions,
-                [R.ConcurrentPlayers]: P.CreatorAnalyticsDimensions,
-                [R.OomUnexpectedExits]: P.CreatorAnalyticsDimensions,
-                [R.PeakConcurrentPlayers]: P.CreatorAnalyticsDimensions,
-                [d.SessionDurationSecondsAvg]: P.CreatorAnalyticsDimensions,
-                [d.SessionDurationSecondsP10]: P.CreatorAnalyticsDimensions,
-                [d.SessionDurationSecondsP50]: P.CreatorAnalyticsDimensions,
-                [d.SessionDurationSecondsP90]: P.CreatorAnalyticsDimensions,
-                [R.OomUnexpectedExitsMigration]: P.CreatorAnalyticsPerformanceEngineTelemetryDimensions,
-                [d.SessionDurationSecondsAvgMigration]: P.CreatorAnalyticsPerformanceEngineTelemetryDimensions,
-                [d.SessionDurationSecondsP10Migration]: P.CreatorAnalyticsPerformanceEngineTelemetryDimensions,
-                [d.SessionDurationSecondsP50Migration]: P.CreatorAnalyticsPerformanceEngineTelemetryDimensions,
-                [d.SessionDurationSecondsP90Migration]: P.CreatorAnalyticsPerformanceEngineTelemetryDimensions,
-                [R.ClientCpuTimeAvg]: P.EngineAnalyticsDimensions,
-                [d.ExperienceLaunchTimeP50]: P.EngineAnalyticsDimensions,
-                [d.ExperienceLaunchTimeP90]: P.EngineAnalyticsDimensions,
-                [d.BandwidthTotalRecvBpsAvg]: P.EngineAnalyticsNetworkingDimensions,
-                [R.BandwidthTotalRecvBpsForOrdering]: P.EngineAnalyticsNetworkingDimensions,
-                [d.BandwidthTotalRecvBpsP10]: P.EngineAnalyticsNetworkingDimensions,
-                [d.BandwidthTotalRecvBpsP50]: P.EngineAnalyticsNetworkingDimensions,
-                [d.BandwidthTotalRecvBpsP90]: P.EngineAnalyticsNetworkingDimensions,
-                [R.BandwidthTotalRecvMaxBytes]: P.EngineAnalyticsNetworkingDimensions,
-                [R.BandwidthTotalRecvUpdatesPerSecond]: P.EngineAnalyticsNetworkingDimensions,
-                [d.BandwidthTotalSendBpsAvg]: P.EngineAnalyticsNetworkingDimensions,
-                [R.BandwidthTotalSendBpsForOrdering]: P.EngineAnalyticsNetworkingDimensions,
-                [d.BandwidthTotalSendBpsP10]: P.EngineAnalyticsNetworkingDimensions,
-                [d.BandwidthTotalSendBpsP50]: P.EngineAnalyticsNetworkingDimensions,
-                [d.BandwidthTotalSendBpsP90]: P.EngineAnalyticsNetworkingDimensions,
-                [R.BandwidthTotalSendMaxBytes]: P.EngineAnalyticsNetworkingDimensions,
-                [R.BandwidthTotalSendUpdatesPerSecond]: P.EngineAnalyticsNetworkingDimensions,
-                [R.ErrorCount]: P.ErrorReportingDimensions,
-                [R.ActionRatePerDau]: P.RecommendationServiceDimensions,
-                [R.ActionRatePerDauByActionType]: P.RecommendationServiceDimensions,
-                [R.ActionRatePerImpression]: P.RecommendationServiceDimensions,
-                [R.AverageImpressionsPerUser]: P.RecommendationServiceDimensions,
-                [R.AvgViewTimePerView]: P.RecommendationServiceDimensions,
-                [R.AvgViewTimePerViewer]: P.RecommendationServiceDimensions,
-                [R.CommentRatePerImpression]: P.RecommendationServiceDimensions,
-                [R.JoinRatePerImpression]: P.RecommendationServiceDimensions,
-                [R.PurchaseRatePerImpression]: P.RecommendationServiceDimensions,
-                [R.ReactionRatePerImpression]: P.RecommendationServiceDimensions,
-                [R.RecommendationDau]: P.RecommendationServiceDimensions,
-                [R.RecommendationViewsTotal]: P.RecommendationServiceDimensions,
-                [R.ShareRatePerImpression]: P.RecommendationServiceDimensions,
-                [R.TotalActions]: P.RecommendationServiceDimensions,
-                [R.TotalActionsByActionType]: P.RecommendationServiceDimensions,
-                [R.TotalComments]: P.RecommendationServiceDimensions,
-                [R.TotalJoins]: P.RecommendationServiceDimensions,
-                [R.TotalPurchases]: P.RecommendationServiceDimensions,
-                [R.TotalReactionsAdded]: P.RecommendationServiceDimensions,
-                [R.TotalShares]: P.RecommendationServiceDimensions,
-                [R.TotalViewHours]: P.RecommendationServiceDimensions,
-                [R.UniqueItemsPerUser]: P.RecommendationServiceDimensions,
-                [d.CustomEventAvgPerUserValue]: P.RecommendedEventsDimensions,
-                [d.CustomEventAvgValue]: P.RecommendedEventsDimensions,
-                [d.CustomEventCount]: P.RecommendedEventsDimensions,
-                [d.CustomEventCountUser]: P.RecommendedEventsDimensions,
-                [d.CustomEventMaxValue]: P.RecommendedEventsDimensions,
-                [d.CustomEventMinValue]: P.RecommendedEventsDimensions,
-                [d.CustomEventSumValue]: P.RecommendedEventsDimensions,
-                [R.EconomyAverageWalletBalance]: P.RecommendedEventsDimensions,
-                [R.EconomyTransactionAmount]: P.RecommendedEventsDimensions,
-                [R.EconomyTransactionAmountSinks]: P.RecommendedEventsDimensions,
-                [R.EconomyTransactionCount]: P.RecommendedEventsDimensions,
-                [R.FunnelCohortCompletionRate]: P.RecommendedEventsDimensions,
-                [R.FunnelCohortSessionCompletionRate]: P.RecommendedEventsDimensions,
-                [R.FunnelStepChurnRate]: P.RecommendedEventsDimensions,
-                [R.FunnelStepCompletionRate]: P.RecommendedEventsDimensions,
-                [R.FunnelStepOverallCompletionRate]: P.RecommendedEventsDimensions,
-                [R.FunnelStepTotalCount]: P.RecommendedEventsDimensions,
-                [R.FunnelUserChurnRate]: P.RecommendedEventsDimensions,
-                [R.FunnelUserOverallCompletionRate]: P.RecommendedEventsDimensions,
-                [R.FunnelUserStepCompletionRate]: P.RecommendedEventsDimensions,
-                [R.FunnelUserTotalCount]: P.RecommendedEventsDimensions,
-                [R.JourneyCompletionUsers]: P.RecommendedEventsDimensions,
-                [R.JourneyEntryTransitions]: P.RecommendedEventsDimensions,
-                [R.JourneyLastStageTransitions]: P.RecommendedEventsDimensions,
-                [R.JourneyNodeTransitionChurnCount]: P.RecommendedEventsDimensions,
-                [R.JourneyNodeTransitionChurnRate]: P.RecommendedEventsDimensions,
-                [R.JourneyNodeTransitionCount]: P.RecommendedEventsDimensions,
-                [R.JourneyNodeUserChurnCount]: P.RecommendedEventsDimensions,
-                [R.JourneyNodeUserChurnRate]: P.RecommendedEventsDimensions,
-                [R.JourneyNodeUserCount]: P.RecommendedEventsDimensions,
-                [R.JourneyStageChurnRate]: P.RecommendedEventsDimensions,
-                [R.JourneyStageSkipRate]: P.RecommendedEventsDimensions,
-                [R.JourneyStageSkipTransitionCount]: P.RecommendedEventsDimensions,
-                [R.JourneyStageSkipTransitionRate]: P.RecommendedEventsDimensions,
-                [R.JourneyStageSkipUserCount]: P.RecommendedEventsDimensions,
-                [R.JourneyStageTransitionChurnRate]: P.RecommendedEventsDimensions,
-                [R.JourneyStageTransitionCount]: P.RecommendedEventsDimensions,
-                [R.JourneyStageUserCount]: P.RecommendedEventsDimensions,
-                [R.JourneyTotalUsers]: P.RecommendedEventsDimensions,
-                [R.JourneyTransitionCount]: P.RecommendedEventsDimensions,
-                [R.JourneyTransitionCountUser]: P.RecommendedEventsDimensions,
-                [R.JourneyTransitionPctOfSource]: P.RecommendedEventsDimensions,
-                [R.JourneyTransitionPctOfStart]: P.RecommendedEventsDimensions,
-                [R.JourneyUserPctOfSource]: P.RecommendedEventsDimensions,
-                [R.JourneyUserPctOfStart]: P.RecommendedEventsDimensions,
-                [R.DeviceTrustDailyActiveUsers]: P.SafetyAntiCheatDimensions,
-                [R.DeviceTrustRobuxSpentLast28Days]: P.SafetyAntiCheatDimensions
+                [R.CommerceCheckouts]: v.CommerceDimensions,
+                [R.CommerceClicks]: v.CommerceDimensions,
+                [R.CommerceGMV]: v.CommerceDimensions,
+                [R.CommerceImpressions]: v.CommerceDimensions,
+                [R.CommerceOrders]: v.CommerceDimensions,
+                [R.CommerceQuantitySold]: v.CommerceDimensions,
+                [R.CommerceUniqueCheckouts]: v.CommerceDimensions,
+                [R.CommerceUniqueClicks]: v.CommerceDimensions,
+                [R.CommerceUniqueImpressions]: v.CommerceDimensions,
+                [R.CommerceUniqueOrders]: v.CommerceDimensions,
+                [R.ClientCrashCount]: v.CreatorAnalyticsDimensions,
+                [R.ClientCrashCountMigration]: v.CreatorAnalyticsDimensions,
+                [R.ClientCrashRate15m]: v.CreatorAnalyticsDimensions,
+                [R.ClientCrashRate15mMigration]: v.CreatorAnalyticsDimensions,
+                [R.ClientCrashRateNotStableAlert]: v.CreatorAnalyticsDimensions,
+                [R.ClientCrashRateNotStableAlertMigration]: v.CreatorAnalyticsDimensions,
+                [d.ClientFpsAvg]: v.CreatorAnalyticsDimensions,
+                [d.ClientFpsP10]: v.CreatorAnalyticsDimensions,
+                [d.ClientFpsP50]: v.CreatorAnalyticsDimensions,
+                [d.ClientFpsP90]: v.CreatorAnalyticsDimensions,
+                [d.ClientMemoryUsageAvg]: v.CreatorAnalyticsDimensions,
+                [d.ClientMemoryUsageP10]: v.CreatorAnalyticsDimensions,
+                [d.ClientMemoryUsageP50]: v.CreatorAnalyticsDimensions,
+                [d.ClientMemoryUsageP90]: v.CreatorAnalyticsDimensions,
+                [d.ClientMemoryUsagePercentageAvg]: v.CreatorAnalyticsDimensions,
+                [d.ClientMemoryUsagePercentageP10]: v.CreatorAnalyticsDimensions,
+                [d.ClientMemoryUsagePercentageP50]: v.CreatorAnalyticsDimensions,
+                [d.ClientMemoryUsagePercentageP90]: v.CreatorAnalyticsDimensions,
+                [R.ConcurrentPlayers]: v.CreatorAnalyticsDimensions,
+                [R.OomUnexpectedExits]: v.CreatorAnalyticsDimensions,
+                [R.PeakConcurrentPlayers]: v.CreatorAnalyticsDimensions,
+                [d.SessionDurationSecondsAvg]: v.CreatorAnalyticsDimensions,
+                [d.SessionDurationSecondsP10]: v.CreatorAnalyticsDimensions,
+                [d.SessionDurationSecondsP50]: v.CreatorAnalyticsDimensions,
+                [d.SessionDurationSecondsP90]: v.CreatorAnalyticsDimensions,
+                [R.OomUnexpectedExitsMigration]: v.CreatorAnalyticsPerformanceEngineTelemetryDimensions,
+                [d.SessionDurationSecondsAvgMigration]: v.CreatorAnalyticsPerformanceEngineTelemetryDimensions,
+                [d.SessionDurationSecondsP10Migration]: v.CreatorAnalyticsPerformanceEngineTelemetryDimensions,
+                [d.SessionDurationSecondsP50Migration]: v.CreatorAnalyticsPerformanceEngineTelemetryDimensions,
+                [d.SessionDurationSecondsP90Migration]: v.CreatorAnalyticsPerformanceEngineTelemetryDimensions,
+                [R.ClientCpuTimeAvg]: v.EngineAnalyticsDimensions,
+                [d.ExperienceLaunchTimeP50]: v.EngineAnalyticsDimensions,
+                [d.ExperienceLaunchTimeP90]: v.EngineAnalyticsDimensions,
+                [d.BandwidthTotalRecvBpsAvg]: v.EngineAnalyticsNetworkingDimensions,
+                [R.BandwidthTotalRecvBpsForOrdering]: v.EngineAnalyticsNetworkingDimensions,
+                [d.BandwidthTotalRecvBpsP10]: v.EngineAnalyticsNetworkingDimensions,
+                [d.BandwidthTotalRecvBpsP50]: v.EngineAnalyticsNetworkingDimensions,
+                [d.BandwidthTotalRecvBpsP90]: v.EngineAnalyticsNetworkingDimensions,
+                [R.BandwidthTotalRecvMaxBytes]: v.EngineAnalyticsNetworkingDimensions,
+                [R.BandwidthTotalRecvUpdatesPerSecond]: v.EngineAnalyticsNetworkingDimensions,
+                [d.BandwidthTotalSendBpsAvg]: v.EngineAnalyticsNetworkingDimensions,
+                [R.BandwidthTotalSendBpsForOrdering]: v.EngineAnalyticsNetworkingDimensions,
+                [d.BandwidthTotalSendBpsP10]: v.EngineAnalyticsNetworkingDimensions,
+                [d.BandwidthTotalSendBpsP50]: v.EngineAnalyticsNetworkingDimensions,
+                [d.BandwidthTotalSendBpsP90]: v.EngineAnalyticsNetworkingDimensions,
+                [R.BandwidthTotalSendMaxBytes]: v.EngineAnalyticsNetworkingDimensions,
+                [R.BandwidthTotalSendUpdatesPerSecond]: v.EngineAnalyticsNetworkingDimensions,
+                [R.ErrorCount]: v.ErrorReportingDimensions,
+                [R.ActionRatePerDau]: v.RecommendationServiceDimensions,
+                [R.ActionRatePerDauByActionType]: v.RecommendationServiceDimensions,
+                [R.ActionRatePerImpression]: v.RecommendationServiceDimensions,
+                [R.AverageImpressionsPerUser]: v.RecommendationServiceDimensions,
+                [R.AvgViewTimePerView]: v.RecommendationServiceDimensions,
+                [R.AvgViewTimePerViewer]: v.RecommendationServiceDimensions,
+                [R.CommentRatePerImpression]: v.RecommendationServiceDimensions,
+                [R.JoinRatePerImpression]: v.RecommendationServiceDimensions,
+                [R.PurchaseRatePerImpression]: v.RecommendationServiceDimensions,
+                [R.ReactionRatePerImpression]: v.RecommendationServiceDimensions,
+                [R.RecommendationDau]: v.RecommendationServiceDimensions,
+                [R.RecommendationViewsTotal]: v.RecommendationServiceDimensions,
+                [R.ShareRatePerImpression]: v.RecommendationServiceDimensions,
+                [R.TotalActions]: v.RecommendationServiceDimensions,
+                [R.TotalActionsByActionType]: v.RecommendationServiceDimensions,
+                [R.TotalComments]: v.RecommendationServiceDimensions,
+                [R.TotalJoins]: v.RecommendationServiceDimensions,
+                [R.TotalPurchases]: v.RecommendationServiceDimensions,
+                [R.TotalReactionsAdded]: v.RecommendationServiceDimensions,
+                [R.TotalShares]: v.RecommendationServiceDimensions,
+                [R.TotalViewHours]: v.RecommendationServiceDimensions,
+                [R.UniqueItemsPerUser]: v.RecommendationServiceDimensions,
+                [d.CustomEventAvgPerUserValue]: v.RecommendedEventsDimensions,
+                [d.CustomEventAvgValue]: v.RecommendedEventsDimensions,
+                [d.CustomEventCount]: v.RecommendedEventsDimensions,
+                [d.CustomEventCountUser]: v.RecommendedEventsDimensions,
+                [d.CustomEventMaxValue]: v.RecommendedEventsDimensions,
+                [d.CustomEventMinValue]: v.RecommendedEventsDimensions,
+                [d.CustomEventSumValue]: v.RecommendedEventsDimensions,
+                [R.EconomyAverageWalletBalance]: v.RecommendedEventsDimensions,
+                [R.EconomyTransactionAmount]: v.RecommendedEventsDimensions,
+                [R.EconomyTransactionAmountSinks]: v.RecommendedEventsDimensions,
+                [R.EconomyTransactionCount]: v.RecommendedEventsDimensions,
+                [R.FunnelCohortCompletionRate]: v.RecommendedEventsDimensions,
+                [R.FunnelCohortSessionCompletionRate]: v.RecommendedEventsDimensions,
+                [R.FunnelStepChurnRate]: v.RecommendedEventsDimensions,
+                [R.FunnelStepCompletionRate]: v.RecommendedEventsDimensions,
+                [R.FunnelStepOverallCompletionRate]: v.RecommendedEventsDimensions,
+                [R.FunnelStepTotalCount]: v.RecommendedEventsDimensions,
+                [R.FunnelUserChurnRate]: v.RecommendedEventsDimensions,
+                [R.FunnelUserOverallCompletionRate]: v.RecommendedEventsDimensions,
+                [R.FunnelUserStepCompletionRate]: v.RecommendedEventsDimensions,
+                [R.FunnelUserTotalCount]: v.RecommendedEventsDimensions,
+                [R.JourneyCompletionUsers]: v.RecommendedEventsDimensions,
+                [R.JourneyEntryTransitions]: v.RecommendedEventsDimensions,
+                [R.JourneyLastStageTransitions]: v.RecommendedEventsDimensions,
+                [R.JourneyNodeTransitionChurnCount]: v.RecommendedEventsDimensions,
+                [R.JourneyNodeTransitionChurnRate]: v.RecommendedEventsDimensions,
+                [R.JourneyNodeTransitionCount]: v.RecommendedEventsDimensions,
+                [R.JourneyNodeUserChurnCount]: v.RecommendedEventsDimensions,
+                [R.JourneyNodeUserChurnRate]: v.RecommendedEventsDimensions,
+                [R.JourneyNodeUserCount]: v.RecommendedEventsDimensions,
+                [R.JourneyStageChurnRate]: v.RecommendedEventsDimensions,
+                [R.JourneyStageSkipRate]: v.RecommendedEventsDimensions,
+                [R.JourneyStageSkipTransitionCount]: v.RecommendedEventsDimensions,
+                [R.JourneyStageSkipTransitionRate]: v.RecommendedEventsDimensions,
+                [R.JourneyStageSkipUserCount]: v.RecommendedEventsDimensions,
+                [R.JourneyStageTransitionChurnRate]: v.RecommendedEventsDimensions,
+                [R.JourneyStageTransitionCount]: v.RecommendedEventsDimensions,
+                [R.JourneyStageUserCount]: v.RecommendedEventsDimensions,
+                [R.JourneyTotalUsers]: v.RecommendedEventsDimensions,
+                [R.JourneyTransitionCount]: v.RecommendedEventsDimensions,
+                [R.JourneyTransitionCountUser]: v.RecommendedEventsDimensions,
+                [R.JourneyTransitionPctOfSource]: v.RecommendedEventsDimensions,
+                [R.JourneyTransitionPctOfStart]: v.RecommendedEventsDimensions,
+                [R.JourneyUserPctOfSource]: v.RecommendedEventsDimensions,
+                [R.JourneyUserPctOfStart]: v.RecommendedEventsDimensions,
+                [R.DeviceTrustDailyActiveUsers]: v.SafetyAntiCheatDimensions,
+                [R.DeviceTrustRobuxSpentLast28Days]: v.SafetyAntiCheatDimensions
             }
         },
         [A.Outcome]: {
-            defaultNamespace: P.GenerativeAiDimensions
+            defaultNamespace: v.GenerativeAiDimensions
         },
         [A.PageViewContext]: {
-            defaultNamespace: P.CommunitiesDimensions
+            defaultNamespace: v.CommunitiesDimensions
         },
         [A.PayerStatus]: {
-            defaultNamespace: P.RecommendedEventsDimensions
+            defaultNamespace: v.RecommendedEventsDimensions
         },
         [A.Place]: {
-            defaultNamespace: P.MatchmakingDimensions,
+            defaultNamespace: v.MatchmakingDimensions,
             overrides: {
-                [R.ClientCrashCount]: P.CreatorAnalyticsPerformanceDimensions,
-                [R.ClientCrashCountMigration]: P.CreatorAnalyticsPerformanceDimensions,
-                [R.ClientCrashRate15m]: P.CreatorAnalyticsPerformanceDimensions,
-                [R.ClientCrashRate15mMigration]: P.CreatorAnalyticsPerformanceDimensions,
-                [R.ClientCrashRateNotStableAlert]: P.CreatorAnalyticsPerformanceDimensions,
-                [R.ClientCrashRateNotStableAlertMigration]: P.CreatorAnalyticsPerformanceDimensions,
-                [d.ClientFpsAvg]: P.CreatorAnalyticsPerformanceDimensions,
-                [d.ClientFpsP10]: P.CreatorAnalyticsPerformanceDimensions,
-                [d.ClientFpsP50]: P.CreatorAnalyticsPerformanceDimensions,
-                [d.ClientFpsP90]: P.CreatorAnalyticsPerformanceDimensions,
-                [d.ClientMemoryUsageAvg]: P.CreatorAnalyticsPerformanceDimensions,
-                [d.ClientMemoryUsageP10]: P.CreatorAnalyticsPerformanceDimensions,
-                [d.ClientMemoryUsageP50]: P.CreatorAnalyticsPerformanceDimensions,
-                [d.ClientMemoryUsageP90]: P.CreatorAnalyticsPerformanceDimensions,
-                [d.ClientMemoryUsagePercentageAvg]: P.CreatorAnalyticsPerformanceDimensions,
-                [d.ClientMemoryUsagePercentageP10]: P.CreatorAnalyticsPerformanceDimensions,
-                [d.ClientMemoryUsagePercentageP50]: P.CreatorAnalyticsPerformanceDimensions,
-                [d.ClientMemoryUsagePercentageP90]: P.CreatorAnalyticsPerformanceDimensions,
-                [R.ConcurrentPlayers]: P.CreatorAnalyticsPerformanceDimensions,
-                [R.OomUnexpectedExits]: P.CreatorAnalyticsPerformanceDimensions,
-                [R.OomUnexpectedExitsMigration]: P.CreatorAnalyticsPerformanceDimensions,
-                [R.PeakConcurrentPlayers]: P.CreatorAnalyticsPerformanceDimensions,
-                [d.ServerFrameRateAvg]: P.CreatorAnalyticsPerformanceDimensions,
-                [d.ServerFrameRateP10]: P.CreatorAnalyticsPerformanceDimensions,
-                [d.ServerFrameRateP50]: P.CreatorAnalyticsPerformanceDimensions,
-                [d.ServerFrameRateP90]: P.CreatorAnalyticsPerformanceDimensions,
-                [d.ServerMemoryUsageAvg]: P.CreatorAnalyticsPerformanceDimensions,
-                [d.ServerMemoryUsageP10]: P.CreatorAnalyticsPerformanceDimensions,
-                [d.ServerMemoryUsageP50]: P.CreatorAnalyticsPerformanceDimensions,
-                [d.ServerMemoryUsageP90]: P.CreatorAnalyticsPerformanceDimensions,
-                [d.SessionDurationSecondsAvg]: P.CreatorAnalyticsPerformanceDimensions,
-                [d.SessionDurationSecondsAvgMigration]: P.CreatorAnalyticsPerformanceDimensions,
-                [d.SessionDurationSecondsP10]: P.CreatorAnalyticsPerformanceDimensions,
-                [d.SessionDurationSecondsP10Migration]: P.CreatorAnalyticsPerformanceDimensions,
-                [d.SessionDurationSecondsP50]: P.CreatorAnalyticsPerformanceDimensions,
-                [d.SessionDurationSecondsP50Migration]: P.CreatorAnalyticsPerformanceDimensions,
-                [d.SessionDurationSecondsP90]: P.CreatorAnalyticsPerformanceDimensions,
-                [d.SessionDurationSecondsP90Migration]: P.CreatorAnalyticsPerformanceDimensions,
-                [R.ClientCpuTimeAvg]: P.EngineAnalyticsDimensions,
-                [d.ExperienceLaunchTimeP50]: P.EngineAnalyticsDimensions,
-                [d.ExperienceLaunchTimeP90]: P.EngineAnalyticsDimensions,
-                [d.BandwidthTotalRecvBpsAvg]: P.EngineAnalyticsNetworkingDimensions,
-                [R.BandwidthTotalRecvBpsForOrdering]: P.EngineAnalyticsNetworkingDimensions,
-                [d.BandwidthTotalRecvBpsP10]: P.EngineAnalyticsNetworkingDimensions,
-                [d.BandwidthTotalRecvBpsP50]: P.EngineAnalyticsNetworkingDimensions,
-                [d.BandwidthTotalRecvBpsP90]: P.EngineAnalyticsNetworkingDimensions,
-                [R.BandwidthTotalRecvMaxBytes]: P.EngineAnalyticsNetworkingDimensions,
-                [R.BandwidthTotalRecvUpdatesPerSecond]: P.EngineAnalyticsNetworkingDimensions,
-                [d.BandwidthTotalSendBpsAvg]: P.EngineAnalyticsNetworkingDimensions,
-                [R.BandwidthTotalSendBpsForOrdering]: P.EngineAnalyticsNetworkingDimensions,
-                [d.BandwidthTotalSendBpsP10]: P.EngineAnalyticsNetworkingDimensions,
-                [d.BandwidthTotalSendBpsP50]: P.EngineAnalyticsNetworkingDimensions,
-                [d.BandwidthTotalSendBpsP90]: P.EngineAnalyticsNetworkingDimensions,
-                [R.BandwidthTotalSendMaxBytes]: P.EngineAnalyticsNetworkingDimensions,
-                [R.BandwidthTotalSendUpdatesPerSecond]: P.EngineAnalyticsNetworkingDimensions,
-                [R.ErrorCount]: P.ErrorReportingDimensions,
-                [R.ComputeEfficiency]: P.RccServerEfficiencyDimensions,
-                [d.CoresPerServerAvg]: P.RccServerEfficiencyDimensions,
-                [d.CoresPerServerP10]: P.RccServerEfficiencyDimensions,
-                [d.CoresPerServerP50]: P.RccServerEfficiencyDimensions,
-                [d.CoresPerServerP90]: P.RccServerEfficiencyDimensions,
-                [R.CpuCoreUtilization]: P.RccServerEfficiencyDimensions,
-                [d.CpuTimeAvg]: P.RccServerEfficiencyDimensions,
-                [d.CpuTimeP10]: P.RccServerEfficiencyDimensions,
-                [d.CpuTimeP50]: P.RccServerEfficiencyDimensions,
-                [d.CpuTimeP90]: P.RccServerEfficiencyDimensions,
-                [d.MemoryUsageAvg]: P.RccServerEfficiencyDimensions,
-                [d.MemoryUsageP10]: P.RccServerEfficiencyDimensions,
-                [d.MemoryUsageP50]: P.RccServerEfficiencyDimensions,
-                [d.MemoryUsageP90]: P.RccServerEfficiencyDimensions,
-                [R.ServerCrashCount]: P.ServiceDataDimensions,
-                [R.HttpServiceRequestsCount]: P.ServiceEfficiencyHttpServiceInsightsDimensions,
-                [R.HttpServiceRequestsExtendedCount]: P.ServiceEfficiencyHttpServiceInsightsDimensions,
-                [R.HttpServiceRequestsV2]: P.ServiceEfficiencyHttpServiceInsightsDimensions,
-                [d.HttpServiceResponseTimeAvg]: P.ServiceEfficiencyHttpServiceInsightsDimensions,
-                [d.HttpServiceResponseTimeExtendedAvg]: P.ServiceEfficiencyHttpServiceInsightsDimensions,
-                [d.HttpServiceResponseTimeExtendedP10]: P.ServiceEfficiencyHttpServiceInsightsDimensions,
-                [d.HttpServiceResponseTimeExtendedP50]: P.ServiceEfficiencyHttpServiceInsightsDimensions,
-                [d.HttpServiceResponseTimeExtendedP90]: P.ServiceEfficiencyHttpServiceInsightsDimensions,
-                [d.HttpServiceResponseTimeP10]: P.ServiceEfficiencyHttpServiceInsightsDimensions,
-                [d.HttpServiceResponseTimeP50]: P.ServiceEfficiencyHttpServiceInsightsDimensions,
-                [d.HttpServiceResponseTimeP90]: P.ServiceEfficiencyHttpServiceInsightsDimensions,
-                [R.VideoServiceExclusivePlaybackSeconds]: P.ServiceEfficiencyVideoServiceDimensions,
-                [R.VideoServicePlaybackSeconds]: P.ServiceEfficiencyVideoServiceDimensions
+                [R.ClientCrashCount]: v.CreatorAnalyticsPerformanceDimensions,
+                [R.ClientCrashCountMigration]: v.CreatorAnalyticsPerformanceDimensions,
+                [R.ClientCrashRate15m]: v.CreatorAnalyticsPerformanceDimensions,
+                [R.ClientCrashRate15mMigration]: v.CreatorAnalyticsPerformanceDimensions,
+                [R.ClientCrashRateNotStableAlert]: v.CreatorAnalyticsPerformanceDimensions,
+                [R.ClientCrashRateNotStableAlertMigration]: v.CreatorAnalyticsPerformanceDimensions,
+                [d.ClientFpsAvg]: v.CreatorAnalyticsPerformanceDimensions,
+                [d.ClientFpsP10]: v.CreatorAnalyticsPerformanceDimensions,
+                [d.ClientFpsP50]: v.CreatorAnalyticsPerformanceDimensions,
+                [d.ClientFpsP90]: v.CreatorAnalyticsPerformanceDimensions,
+                [d.ClientMemoryUsageAvg]: v.CreatorAnalyticsPerformanceDimensions,
+                [d.ClientMemoryUsageP10]: v.CreatorAnalyticsPerformanceDimensions,
+                [d.ClientMemoryUsageP50]: v.CreatorAnalyticsPerformanceDimensions,
+                [d.ClientMemoryUsageP90]: v.CreatorAnalyticsPerformanceDimensions,
+                [d.ClientMemoryUsagePercentageAvg]: v.CreatorAnalyticsPerformanceDimensions,
+                [d.ClientMemoryUsagePercentageP10]: v.CreatorAnalyticsPerformanceDimensions,
+                [d.ClientMemoryUsagePercentageP50]: v.CreatorAnalyticsPerformanceDimensions,
+                [d.ClientMemoryUsagePercentageP90]: v.CreatorAnalyticsPerformanceDimensions,
+                [R.ConcurrentPlayers]: v.CreatorAnalyticsPerformanceDimensions,
+                [R.OomUnexpectedExits]: v.CreatorAnalyticsPerformanceDimensions,
+                [R.OomUnexpectedExitsMigration]: v.CreatorAnalyticsPerformanceDimensions,
+                [R.PeakConcurrentPlayers]: v.CreatorAnalyticsPerformanceDimensions,
+                [d.ServerFrameRateAvg]: v.CreatorAnalyticsPerformanceDimensions,
+                [d.ServerFrameRateP10]: v.CreatorAnalyticsPerformanceDimensions,
+                [d.ServerFrameRateP50]: v.CreatorAnalyticsPerformanceDimensions,
+                [d.ServerFrameRateP90]: v.CreatorAnalyticsPerformanceDimensions,
+                [d.ServerMemoryUsageAvg]: v.CreatorAnalyticsPerformanceDimensions,
+                [d.ServerMemoryUsageP10]: v.CreatorAnalyticsPerformanceDimensions,
+                [d.ServerMemoryUsageP50]: v.CreatorAnalyticsPerformanceDimensions,
+                [d.ServerMemoryUsageP90]: v.CreatorAnalyticsPerformanceDimensions,
+                [d.SessionDurationSecondsAvg]: v.CreatorAnalyticsPerformanceDimensions,
+                [d.SessionDurationSecondsAvgMigration]: v.CreatorAnalyticsPerformanceDimensions,
+                [d.SessionDurationSecondsP10]: v.CreatorAnalyticsPerformanceDimensions,
+                [d.SessionDurationSecondsP10Migration]: v.CreatorAnalyticsPerformanceDimensions,
+                [d.SessionDurationSecondsP50]: v.CreatorAnalyticsPerformanceDimensions,
+                [d.SessionDurationSecondsP50Migration]: v.CreatorAnalyticsPerformanceDimensions,
+                [d.SessionDurationSecondsP90]: v.CreatorAnalyticsPerformanceDimensions,
+                [d.SessionDurationSecondsP90Migration]: v.CreatorAnalyticsPerformanceDimensions,
+                [R.ClientCpuTimeAvg]: v.EngineAnalyticsDimensions,
+                [d.ExperienceLaunchTimeP50]: v.EngineAnalyticsDimensions,
+                [d.ExperienceLaunchTimeP90]: v.EngineAnalyticsDimensions,
+                [d.BandwidthTotalRecvBpsAvg]: v.EngineAnalyticsNetworkingDimensions,
+                [R.BandwidthTotalRecvBpsForOrdering]: v.EngineAnalyticsNetworkingDimensions,
+                [d.BandwidthTotalRecvBpsP10]: v.EngineAnalyticsNetworkingDimensions,
+                [d.BandwidthTotalRecvBpsP50]: v.EngineAnalyticsNetworkingDimensions,
+                [d.BandwidthTotalRecvBpsP90]: v.EngineAnalyticsNetworkingDimensions,
+                [R.BandwidthTotalRecvMaxBytes]: v.EngineAnalyticsNetworkingDimensions,
+                [R.BandwidthTotalRecvUpdatesPerSecond]: v.EngineAnalyticsNetworkingDimensions,
+                [d.BandwidthTotalSendBpsAvg]: v.EngineAnalyticsNetworkingDimensions,
+                [R.BandwidthTotalSendBpsForOrdering]: v.EngineAnalyticsNetworkingDimensions,
+                [d.BandwidthTotalSendBpsP10]: v.EngineAnalyticsNetworkingDimensions,
+                [d.BandwidthTotalSendBpsP50]: v.EngineAnalyticsNetworkingDimensions,
+                [d.BandwidthTotalSendBpsP90]: v.EngineAnalyticsNetworkingDimensions,
+                [R.BandwidthTotalSendMaxBytes]: v.EngineAnalyticsNetworkingDimensions,
+                [R.BandwidthTotalSendUpdatesPerSecond]: v.EngineAnalyticsNetworkingDimensions,
+                [R.ErrorCount]: v.ErrorReportingDimensions,
+                [R.ComputeEfficiency]: v.RccServerEfficiencyDimensions,
+                [d.CoresPerServerAvg]: v.RccServerEfficiencyDimensions,
+                [d.CoresPerServerP10]: v.RccServerEfficiencyDimensions,
+                [d.CoresPerServerP50]: v.RccServerEfficiencyDimensions,
+                [d.CoresPerServerP90]: v.RccServerEfficiencyDimensions,
+                [R.CpuCoreUtilization]: v.RccServerEfficiencyDimensions,
+                [d.CpuTimeAvg]: v.RccServerEfficiencyDimensions,
+                [d.CpuTimeP10]: v.RccServerEfficiencyDimensions,
+                [d.CpuTimeP50]: v.RccServerEfficiencyDimensions,
+                [d.CpuTimeP90]: v.RccServerEfficiencyDimensions,
+                [d.MemoryUsageAvg]: v.RccServerEfficiencyDimensions,
+                [d.MemoryUsageP10]: v.RccServerEfficiencyDimensions,
+                [d.MemoryUsageP50]: v.RccServerEfficiencyDimensions,
+                [d.MemoryUsageP90]: v.RccServerEfficiencyDimensions,
+                [R.ServerCrashCount]: v.ServiceDataDimensions,
+                [R.HttpServiceRequestsCount]: v.ServiceEfficiencyHttpServiceInsightsDimensions,
+                [R.HttpServiceRequestsExtendedCount]: v.ServiceEfficiencyHttpServiceInsightsDimensions,
+                [R.HttpServiceRequestsV2]: v.ServiceEfficiencyHttpServiceInsightsDimensions,
+                [d.HttpServiceResponseTimeAvg]: v.ServiceEfficiencyHttpServiceInsightsDimensions,
+                [d.HttpServiceResponseTimeExtendedAvg]: v.ServiceEfficiencyHttpServiceInsightsDimensions,
+                [d.HttpServiceResponseTimeExtendedP10]: v.ServiceEfficiencyHttpServiceInsightsDimensions,
+                [d.HttpServiceResponseTimeExtendedP50]: v.ServiceEfficiencyHttpServiceInsightsDimensions,
+                [d.HttpServiceResponseTimeExtendedP90]: v.ServiceEfficiencyHttpServiceInsightsDimensions,
+                [d.HttpServiceResponseTimeP10]: v.ServiceEfficiencyHttpServiceInsightsDimensions,
+                [d.HttpServiceResponseTimeP50]: v.ServiceEfficiencyHttpServiceInsightsDimensions,
+                [d.HttpServiceResponseTimeP90]: v.ServiceEfficiencyHttpServiceInsightsDimensions,
+                [R.VideoServiceExclusivePlaybackSeconds]: v.ServiceEfficiencyVideoServiceDimensions,
+                [R.VideoServicePlaybackSeconds]: v.ServiceEfficiencyVideoServiceDimensions
             }
         },
         [A.PlacementType]: {
-            defaultNamespace: P.AdsPublisherReportingDimensions
+            defaultNamespace: v.AdsPublisherReportingDimensions
         },
         [A.PlaceVersion]: {
-            defaultNamespace: P.CreatorAnalyticsPerformanceDimensions,
+            defaultNamespace: v.CreatorAnalyticsPerformanceDimensions,
             overrides: {
-                [R.ClientCpuTimeAvg]: P.EngineAnalyticsDimensions,
-                [d.BandwidthTotalRecvBpsAvg]: P.EngineAnalyticsNetworkingDimensions,
-                [R.BandwidthTotalRecvBpsForOrdering]: P.EngineAnalyticsNetworkingDimensions,
-                [d.BandwidthTotalRecvBpsP10]: P.EngineAnalyticsNetworkingDimensions,
-                [d.BandwidthTotalRecvBpsP50]: P.EngineAnalyticsNetworkingDimensions,
-                [d.BandwidthTotalRecvBpsP90]: P.EngineAnalyticsNetworkingDimensions,
-                [R.BandwidthTotalRecvMaxBytes]: P.EngineAnalyticsNetworkingDimensions,
-                [R.BandwidthTotalRecvUpdatesPerSecond]: P.EngineAnalyticsNetworkingDimensions,
-                [d.BandwidthTotalSendBpsAvg]: P.EngineAnalyticsNetworkingDimensions,
-                [R.BandwidthTotalSendBpsForOrdering]: P.EngineAnalyticsNetworkingDimensions,
-                [d.BandwidthTotalSendBpsP10]: P.EngineAnalyticsNetworkingDimensions,
-                [d.BandwidthTotalSendBpsP50]: P.EngineAnalyticsNetworkingDimensions,
-                [d.BandwidthTotalSendBpsP90]: P.EngineAnalyticsNetworkingDimensions,
-                [R.BandwidthTotalSendMaxBytes]: P.EngineAnalyticsNetworkingDimensions,
-                [R.BandwidthTotalSendUpdatesPerSecond]: P.EngineAnalyticsNetworkingDimensions,
-                [R.ErrorCount]: P.ErrorReportingDimensions,
-                [d.ExperienceLaunchTimeP50]: P.SharedDimensions,
-                [d.ExperienceLaunchTimeP90]: P.SharedDimensions
+                [R.ClientCpuTimeAvg]: v.EngineAnalyticsDimensions,
+                [d.BandwidthTotalRecvBpsAvg]: v.EngineAnalyticsNetworkingDimensions,
+                [R.BandwidthTotalRecvBpsForOrdering]: v.EngineAnalyticsNetworkingDimensions,
+                [d.BandwidthTotalRecvBpsP10]: v.EngineAnalyticsNetworkingDimensions,
+                [d.BandwidthTotalRecvBpsP50]: v.EngineAnalyticsNetworkingDimensions,
+                [d.BandwidthTotalRecvBpsP90]: v.EngineAnalyticsNetworkingDimensions,
+                [R.BandwidthTotalRecvMaxBytes]: v.EngineAnalyticsNetworkingDimensions,
+                [R.BandwidthTotalRecvUpdatesPerSecond]: v.EngineAnalyticsNetworkingDimensions,
+                [d.BandwidthTotalSendBpsAvg]: v.EngineAnalyticsNetworkingDimensions,
+                [R.BandwidthTotalSendBpsForOrdering]: v.EngineAnalyticsNetworkingDimensions,
+                [d.BandwidthTotalSendBpsP10]: v.EngineAnalyticsNetworkingDimensions,
+                [d.BandwidthTotalSendBpsP50]: v.EngineAnalyticsNetworkingDimensions,
+                [d.BandwidthTotalSendBpsP90]: v.EngineAnalyticsNetworkingDimensions,
+                [R.BandwidthTotalSendMaxBytes]: v.EngineAnalyticsNetworkingDimensions,
+                [R.BandwidthTotalSendUpdatesPerSecond]: v.EngineAnalyticsNetworkingDimensions,
+                [R.ErrorCount]: v.ErrorReportingDimensions,
+                [d.ExperienceLaunchTimeP50]: v.SharedDimensions,
+                [d.ExperienceLaunchTimeP90]: v.SharedDimensions
             }
         },
         [A.Platform]: {
-            defaultNamespace: P.SharedDimensions,
+            defaultNamespace: v.SharedDimensions,
             overrides: {
-                [R.ItemAverageTransactionPrice]: P.AvatarItemsDimensions,
-                [R.ItemTotalCreatorEarning]: P.AvatarItemsDimensions,
-                [R.ItemTotalRobuxSpent]: P.AvatarItemsDimensions,
-                [R.ItemTotalTransactionCount]: P.AvatarItemsDimensions,
-                [R.CommerceCheckouts]: P.CommerceDimensions,
-                [R.CommerceClicks]: P.CommerceDimensions,
-                [R.CommerceGMV]: P.CommerceDimensions,
-                [R.CommerceImpressions]: P.CommerceDimensions,
-                [R.CommerceOrders]: P.CommerceDimensions,
-                [R.CommerceQuantitySold]: P.CommerceDimensions,
-                [R.CommerceUniqueCheckouts]: P.CommerceDimensions,
-                [R.CommerceUniqueClicks]: P.CommerceDimensions,
-                [R.CommerceUniqueImpressions]: P.CommerceDimensions,
-                [R.CommerceUniqueOrders]: P.CommerceDimensions,
-                [R.ClientCrashCount]: P.CreatorAnalyticsDimensions,
-                [R.ClientCrashCountMigration]: P.CreatorAnalyticsDimensions,
-                [R.ClientCrashRate15m]: P.CreatorAnalyticsDimensions,
-                [R.ClientCrashRate15mMigration]: P.CreatorAnalyticsDimensions,
-                [R.ClientCrashRateNotStableAlert]: P.CreatorAnalyticsDimensions,
-                [R.ClientCrashRateNotStableAlertMigration]: P.CreatorAnalyticsDimensions,
-                [d.ClientFpsAvg]: P.CreatorAnalyticsDimensions,
-                [d.ClientFpsP10]: P.CreatorAnalyticsDimensions,
-                [d.ClientFpsP50]: P.CreatorAnalyticsDimensions,
-                [d.ClientFpsP90]: P.CreatorAnalyticsDimensions,
-                [d.ClientMemoryUsageAvg]: P.CreatorAnalyticsDimensions,
-                [d.ClientMemoryUsageP10]: P.CreatorAnalyticsDimensions,
-                [d.ClientMemoryUsageP50]: P.CreatorAnalyticsDimensions,
-                [d.ClientMemoryUsageP90]: P.CreatorAnalyticsDimensions,
-                [d.ClientMemoryUsagePercentageAvg]: P.CreatorAnalyticsDimensions,
-                [d.ClientMemoryUsagePercentageP10]: P.CreatorAnalyticsDimensions,
-                [d.ClientMemoryUsagePercentageP50]: P.CreatorAnalyticsDimensions,
-                [d.ClientMemoryUsagePercentageP90]: P.CreatorAnalyticsDimensions,
-                [R.ConcurrentPlayers]: P.CreatorAnalyticsDimensions,
-                [R.OomUnexpectedExits]: P.CreatorAnalyticsDimensions,
-                [R.PeakConcurrentPlayers]: P.CreatorAnalyticsDimensions,
-                [d.SessionDurationSecondsAvg]: P.CreatorAnalyticsDimensions,
-                [d.SessionDurationSecondsP10]: P.CreatorAnalyticsDimensions,
-                [d.SessionDurationSecondsP50]: P.CreatorAnalyticsDimensions,
-                [d.SessionDurationSecondsP90]: P.CreatorAnalyticsDimensions,
-                [R.OomUnexpectedExitsMigration]: P.CreatorAnalyticsPerformanceEngineTelemetryDimensions,
-                [d.SessionDurationSecondsAvgMigration]: P.CreatorAnalyticsPerformanceEngineTelemetryDimensions,
-                [d.SessionDurationSecondsP10Migration]: P.CreatorAnalyticsPerformanceEngineTelemetryDimensions,
-                [d.SessionDurationSecondsP50Migration]: P.CreatorAnalyticsPerformanceEngineTelemetryDimensions,
-                [d.SessionDurationSecondsP90Migration]: P.CreatorAnalyticsPerformanceEngineTelemetryDimensions,
-                [R.ClientCpuTimeAvg]: P.EngineAnalyticsDimensions,
-                [d.ExperienceLaunchTimeP50]: P.EngineAnalyticsDimensions,
-                [d.ExperienceLaunchTimeP90]: P.EngineAnalyticsDimensions,
-                [d.BandwidthTotalRecvBpsAvg]: P.EngineAnalyticsNetworkingDimensions,
-                [R.BandwidthTotalRecvBpsForOrdering]: P.EngineAnalyticsNetworkingDimensions,
-                [d.BandwidthTotalRecvBpsP10]: P.EngineAnalyticsNetworkingDimensions,
-                [d.BandwidthTotalRecvBpsP50]: P.EngineAnalyticsNetworkingDimensions,
-                [d.BandwidthTotalRecvBpsP90]: P.EngineAnalyticsNetworkingDimensions,
-                [R.BandwidthTotalRecvMaxBytes]: P.EngineAnalyticsNetworkingDimensions,
-                [R.BandwidthTotalRecvUpdatesPerSecond]: P.EngineAnalyticsNetworkingDimensions,
-                [d.BandwidthTotalSendBpsAvg]: P.EngineAnalyticsNetworkingDimensions,
-                [R.BandwidthTotalSendBpsForOrdering]: P.EngineAnalyticsNetworkingDimensions,
-                [d.BandwidthTotalSendBpsP10]: P.EngineAnalyticsNetworkingDimensions,
-                [d.BandwidthTotalSendBpsP50]: P.EngineAnalyticsNetworkingDimensions,
-                [d.BandwidthTotalSendBpsP90]: P.EngineAnalyticsNetworkingDimensions,
-                [R.BandwidthTotalSendMaxBytes]: P.EngineAnalyticsNetworkingDimensions,
-                [R.BandwidthTotalSendUpdatesPerSecond]: P.EngineAnalyticsNetworkingDimensions,
-                [R.ErrorCount]: P.ErrorReportingDimensions,
-                [R.ActionRatePerDau]: P.RecommendationServiceDimensions,
-                [R.ActionRatePerDauByActionType]: P.RecommendationServiceDimensions,
-                [R.ActionRatePerImpression]: P.RecommendationServiceDimensions,
-                [R.AverageImpressionsPerUser]: P.RecommendationServiceDimensions,
-                [R.AvgViewTimePerView]: P.RecommendationServiceDimensions,
-                [R.AvgViewTimePerViewer]: P.RecommendationServiceDimensions,
-                [R.CommentRatePerImpression]: P.RecommendationServiceDimensions,
-                [R.JoinRatePerImpression]: P.RecommendationServiceDimensions,
-                [R.PurchaseRatePerImpression]: P.RecommendationServiceDimensions,
-                [R.ReactionRatePerImpression]: P.RecommendationServiceDimensions,
-                [R.RecommendationDau]: P.RecommendationServiceDimensions,
-                [R.RecommendationViewsTotal]: P.RecommendationServiceDimensions,
-                [R.ShareRatePerImpression]: P.RecommendationServiceDimensions,
-                [R.TotalActions]: P.RecommendationServiceDimensions,
-                [R.TotalActionsByActionType]: P.RecommendationServiceDimensions,
-                [R.TotalComments]: P.RecommendationServiceDimensions,
-                [R.TotalJoins]: P.RecommendationServiceDimensions,
-                [R.TotalPurchases]: P.RecommendationServiceDimensions,
-                [R.TotalReactionsAdded]: P.RecommendationServiceDimensions,
-                [R.TotalShares]: P.RecommendationServiceDimensions,
-                [R.TotalViewHours]: P.RecommendationServiceDimensions,
-                [R.UniqueItemsPerUser]: P.RecommendationServiceDimensions,
-                [d.CustomEventAvgPerUserValue]: P.RecommendedEventsDimensions,
-                [d.CustomEventAvgValue]: P.RecommendedEventsDimensions,
-                [d.CustomEventCount]: P.RecommendedEventsDimensions,
-                [d.CustomEventCountUser]: P.RecommendedEventsDimensions,
-                [d.CustomEventMaxValue]: P.RecommendedEventsDimensions,
-                [d.CustomEventMinValue]: P.RecommendedEventsDimensions,
-                [d.CustomEventSumValue]: P.RecommendedEventsDimensions,
-                [R.EconomyAverageWalletBalance]: P.RecommendedEventsDimensions,
-                [R.EconomyTransactionAmount]: P.RecommendedEventsDimensions,
-                [R.EconomyTransactionAmountSinks]: P.RecommendedEventsDimensions,
-                [R.EconomyTransactionCount]: P.RecommendedEventsDimensions,
-                [R.FunnelCohortCompletionRate]: P.RecommendedEventsDimensions,
-                [R.FunnelCohortSessionCompletionRate]: P.RecommendedEventsDimensions,
-                [R.FunnelStepChurnRate]: P.RecommendedEventsDimensions,
-                [R.FunnelStepCompletionRate]: P.RecommendedEventsDimensions,
-                [R.FunnelStepOverallCompletionRate]: P.RecommendedEventsDimensions,
-                [R.FunnelStepTotalCount]: P.RecommendedEventsDimensions,
-                [R.FunnelUserChurnRate]: P.RecommendedEventsDimensions,
-                [R.FunnelUserOverallCompletionRate]: P.RecommendedEventsDimensions,
-                [R.FunnelUserStepCompletionRate]: P.RecommendedEventsDimensions,
-                [R.FunnelUserTotalCount]: P.RecommendedEventsDimensions,
-                [R.JourneyCompletionUsers]: P.RecommendedEventsDimensions,
-                [R.JourneyEntryTransitions]: P.RecommendedEventsDimensions,
-                [R.JourneyLastStageTransitions]: P.RecommendedEventsDimensions,
-                [R.JourneyNodeTransitionChurnCount]: P.RecommendedEventsDimensions,
-                [R.JourneyNodeTransitionChurnRate]: P.RecommendedEventsDimensions,
-                [R.JourneyNodeTransitionCount]: P.RecommendedEventsDimensions,
-                [R.JourneyNodeUserChurnCount]: P.RecommendedEventsDimensions,
-                [R.JourneyNodeUserChurnRate]: P.RecommendedEventsDimensions,
-                [R.JourneyNodeUserCount]: P.RecommendedEventsDimensions,
-                [R.JourneyStageChurnRate]: P.RecommendedEventsDimensions,
-                [R.JourneyStageSkipRate]: P.RecommendedEventsDimensions,
-                [R.JourneyStageSkipTransitionCount]: P.RecommendedEventsDimensions,
-                [R.JourneyStageSkipTransitionRate]: P.RecommendedEventsDimensions,
-                [R.JourneyStageSkipUserCount]: P.RecommendedEventsDimensions,
-                [R.JourneyStageTransitionChurnRate]: P.RecommendedEventsDimensions,
-                [R.JourneyStageTransitionCount]: P.RecommendedEventsDimensions,
-                [R.JourneyStageUserCount]: P.RecommendedEventsDimensions,
-                [R.JourneyTotalUsers]: P.RecommendedEventsDimensions,
-                [R.JourneyTransitionCount]: P.RecommendedEventsDimensions,
-                [R.JourneyTransitionCountUser]: P.RecommendedEventsDimensions,
-                [R.JourneyTransitionPctOfSource]: P.RecommendedEventsDimensions,
-                [R.JourneyTransitionPctOfStart]: P.RecommendedEventsDimensions,
-                [R.JourneyUserPctOfSource]: P.RecommendedEventsDimensions,
-                [R.JourneyUserPctOfStart]: P.RecommendedEventsDimensions
+                [R.ItemAverageTransactionPrice]: v.AvatarItemsDimensions,
+                [R.ItemTotalCreatorEarning]: v.AvatarItemsDimensions,
+                [R.ItemTotalRobuxSpent]: v.AvatarItemsDimensions,
+                [R.ItemTotalTransactionCount]: v.AvatarItemsDimensions,
+                [R.CommerceCheckouts]: v.CommerceDimensions,
+                [R.CommerceClicks]: v.CommerceDimensions,
+                [R.CommerceGMV]: v.CommerceDimensions,
+                [R.CommerceImpressions]: v.CommerceDimensions,
+                [R.CommerceOrders]: v.CommerceDimensions,
+                [R.CommerceQuantitySold]: v.CommerceDimensions,
+                [R.CommerceUniqueCheckouts]: v.CommerceDimensions,
+                [R.CommerceUniqueClicks]: v.CommerceDimensions,
+                [R.CommerceUniqueImpressions]: v.CommerceDimensions,
+                [R.CommerceUniqueOrders]: v.CommerceDimensions,
+                [R.ClientCrashCount]: v.CreatorAnalyticsDimensions,
+                [R.ClientCrashCountMigration]: v.CreatorAnalyticsDimensions,
+                [R.ClientCrashRate15m]: v.CreatorAnalyticsDimensions,
+                [R.ClientCrashRate15mMigration]: v.CreatorAnalyticsDimensions,
+                [R.ClientCrashRateNotStableAlert]: v.CreatorAnalyticsDimensions,
+                [R.ClientCrashRateNotStableAlertMigration]: v.CreatorAnalyticsDimensions,
+                [d.ClientFpsAvg]: v.CreatorAnalyticsDimensions,
+                [d.ClientFpsP10]: v.CreatorAnalyticsDimensions,
+                [d.ClientFpsP50]: v.CreatorAnalyticsDimensions,
+                [d.ClientFpsP90]: v.CreatorAnalyticsDimensions,
+                [d.ClientMemoryUsageAvg]: v.CreatorAnalyticsDimensions,
+                [d.ClientMemoryUsageP10]: v.CreatorAnalyticsDimensions,
+                [d.ClientMemoryUsageP50]: v.CreatorAnalyticsDimensions,
+                [d.ClientMemoryUsageP90]: v.CreatorAnalyticsDimensions,
+                [d.ClientMemoryUsagePercentageAvg]: v.CreatorAnalyticsDimensions,
+                [d.ClientMemoryUsagePercentageP10]: v.CreatorAnalyticsDimensions,
+                [d.ClientMemoryUsagePercentageP50]: v.CreatorAnalyticsDimensions,
+                [d.ClientMemoryUsagePercentageP90]: v.CreatorAnalyticsDimensions,
+                [R.ConcurrentPlayers]: v.CreatorAnalyticsDimensions,
+                [R.OomUnexpectedExits]: v.CreatorAnalyticsDimensions,
+                [R.PeakConcurrentPlayers]: v.CreatorAnalyticsDimensions,
+                [d.SessionDurationSecondsAvg]: v.CreatorAnalyticsDimensions,
+                [d.SessionDurationSecondsP10]: v.CreatorAnalyticsDimensions,
+                [d.SessionDurationSecondsP50]: v.CreatorAnalyticsDimensions,
+                [d.SessionDurationSecondsP90]: v.CreatorAnalyticsDimensions,
+                [R.OomUnexpectedExitsMigration]: v.CreatorAnalyticsPerformanceEngineTelemetryDimensions,
+                [d.SessionDurationSecondsAvgMigration]: v.CreatorAnalyticsPerformanceEngineTelemetryDimensions,
+                [d.SessionDurationSecondsP10Migration]: v.CreatorAnalyticsPerformanceEngineTelemetryDimensions,
+                [d.SessionDurationSecondsP50Migration]: v.CreatorAnalyticsPerformanceEngineTelemetryDimensions,
+                [d.SessionDurationSecondsP90Migration]: v.CreatorAnalyticsPerformanceEngineTelemetryDimensions,
+                [R.ClientCpuTimeAvg]: v.EngineAnalyticsDimensions,
+                [d.ExperienceLaunchTimeP50]: v.EngineAnalyticsDimensions,
+                [d.ExperienceLaunchTimeP90]: v.EngineAnalyticsDimensions,
+                [d.BandwidthTotalRecvBpsAvg]: v.EngineAnalyticsNetworkingDimensions,
+                [R.BandwidthTotalRecvBpsForOrdering]: v.EngineAnalyticsNetworkingDimensions,
+                [d.BandwidthTotalRecvBpsP10]: v.EngineAnalyticsNetworkingDimensions,
+                [d.BandwidthTotalRecvBpsP50]: v.EngineAnalyticsNetworkingDimensions,
+                [d.BandwidthTotalRecvBpsP90]: v.EngineAnalyticsNetworkingDimensions,
+                [R.BandwidthTotalRecvMaxBytes]: v.EngineAnalyticsNetworkingDimensions,
+                [R.BandwidthTotalRecvUpdatesPerSecond]: v.EngineAnalyticsNetworkingDimensions,
+                [d.BandwidthTotalSendBpsAvg]: v.EngineAnalyticsNetworkingDimensions,
+                [R.BandwidthTotalSendBpsForOrdering]: v.EngineAnalyticsNetworkingDimensions,
+                [d.BandwidthTotalSendBpsP10]: v.EngineAnalyticsNetworkingDimensions,
+                [d.BandwidthTotalSendBpsP50]: v.EngineAnalyticsNetworkingDimensions,
+                [d.BandwidthTotalSendBpsP90]: v.EngineAnalyticsNetworkingDimensions,
+                [R.BandwidthTotalSendMaxBytes]: v.EngineAnalyticsNetworkingDimensions,
+                [R.BandwidthTotalSendUpdatesPerSecond]: v.EngineAnalyticsNetworkingDimensions,
+                [R.ErrorCount]: v.ErrorReportingDimensions,
+                [R.ActionRatePerDau]: v.RecommendationServiceDimensions,
+                [R.ActionRatePerDauByActionType]: v.RecommendationServiceDimensions,
+                [R.ActionRatePerImpression]: v.RecommendationServiceDimensions,
+                [R.AverageImpressionsPerUser]: v.RecommendationServiceDimensions,
+                [R.AvgViewTimePerView]: v.RecommendationServiceDimensions,
+                [R.AvgViewTimePerViewer]: v.RecommendationServiceDimensions,
+                [R.CommentRatePerImpression]: v.RecommendationServiceDimensions,
+                [R.JoinRatePerImpression]: v.RecommendationServiceDimensions,
+                [R.PurchaseRatePerImpression]: v.RecommendationServiceDimensions,
+                [R.ReactionRatePerImpression]: v.RecommendationServiceDimensions,
+                [R.RecommendationDau]: v.RecommendationServiceDimensions,
+                [R.RecommendationViewsTotal]: v.RecommendationServiceDimensions,
+                [R.ShareRatePerImpression]: v.RecommendationServiceDimensions,
+                [R.TotalActions]: v.RecommendationServiceDimensions,
+                [R.TotalActionsByActionType]: v.RecommendationServiceDimensions,
+                [R.TotalComments]: v.RecommendationServiceDimensions,
+                [R.TotalJoins]: v.RecommendationServiceDimensions,
+                [R.TotalPurchases]: v.RecommendationServiceDimensions,
+                [R.TotalReactionsAdded]: v.RecommendationServiceDimensions,
+                [R.TotalShares]: v.RecommendationServiceDimensions,
+                [R.TotalViewHours]: v.RecommendationServiceDimensions,
+                [R.UniqueItemsPerUser]: v.RecommendationServiceDimensions,
+                [d.CustomEventAvgPerUserValue]: v.RecommendedEventsDimensions,
+                [d.CustomEventAvgValue]: v.RecommendedEventsDimensions,
+                [d.CustomEventCount]: v.RecommendedEventsDimensions,
+                [d.CustomEventCountUser]: v.RecommendedEventsDimensions,
+                [d.CustomEventMaxValue]: v.RecommendedEventsDimensions,
+                [d.CustomEventMinValue]: v.RecommendedEventsDimensions,
+                [d.CustomEventSumValue]: v.RecommendedEventsDimensions,
+                [R.EconomyAverageWalletBalance]: v.RecommendedEventsDimensions,
+                [R.EconomyTransactionAmount]: v.RecommendedEventsDimensions,
+                [R.EconomyTransactionAmountSinks]: v.RecommendedEventsDimensions,
+                [R.EconomyTransactionCount]: v.RecommendedEventsDimensions,
+                [R.FunnelCohortCompletionRate]: v.RecommendedEventsDimensions,
+                [R.FunnelCohortSessionCompletionRate]: v.RecommendedEventsDimensions,
+                [R.FunnelStepChurnRate]: v.RecommendedEventsDimensions,
+                [R.FunnelStepCompletionRate]: v.RecommendedEventsDimensions,
+                [R.FunnelStepOverallCompletionRate]: v.RecommendedEventsDimensions,
+                [R.FunnelStepTotalCount]: v.RecommendedEventsDimensions,
+                [R.FunnelUserChurnRate]: v.RecommendedEventsDimensions,
+                [R.FunnelUserOverallCompletionRate]: v.RecommendedEventsDimensions,
+                [R.FunnelUserStepCompletionRate]: v.RecommendedEventsDimensions,
+                [R.FunnelUserTotalCount]: v.RecommendedEventsDimensions,
+                [R.JourneyCompletionUsers]: v.RecommendedEventsDimensions,
+                [R.JourneyEntryTransitions]: v.RecommendedEventsDimensions,
+                [R.JourneyLastStageTransitions]: v.RecommendedEventsDimensions,
+                [R.JourneyNodeTransitionChurnCount]: v.RecommendedEventsDimensions,
+                [R.JourneyNodeTransitionChurnRate]: v.RecommendedEventsDimensions,
+                [R.JourneyNodeTransitionCount]: v.RecommendedEventsDimensions,
+                [R.JourneyNodeUserChurnCount]: v.RecommendedEventsDimensions,
+                [R.JourneyNodeUserChurnRate]: v.RecommendedEventsDimensions,
+                [R.JourneyNodeUserCount]: v.RecommendedEventsDimensions,
+                [R.JourneyStageChurnRate]: v.RecommendedEventsDimensions,
+                [R.JourneyStageSkipRate]: v.RecommendedEventsDimensions,
+                [R.JourneyStageSkipTransitionCount]: v.RecommendedEventsDimensions,
+                [R.JourneyStageSkipTransitionRate]: v.RecommendedEventsDimensions,
+                [R.JourneyStageSkipUserCount]: v.RecommendedEventsDimensions,
+                [R.JourneyStageTransitionChurnRate]: v.RecommendedEventsDimensions,
+                [R.JourneyStageTransitionCount]: v.RecommendedEventsDimensions,
+                [R.JourneyStageUserCount]: v.RecommendedEventsDimensions,
+                [R.JourneyTotalUsers]: v.RecommendedEventsDimensions,
+                [R.JourneyTransitionCount]: v.RecommendedEventsDimensions,
+                [R.JourneyTransitionCountUser]: v.RecommendedEventsDimensions,
+                [R.JourneyTransitionPctOfSource]: v.RecommendedEventsDimensions,
+                [R.JourneyTransitionPctOfStart]: v.RecommendedEventsDimensions,
+                [R.JourneyUserPctOfSource]: v.RecommendedEventsDimensions,
+                [R.JourneyUserPctOfStart]: v.RecommendedEventsDimensions
             }
         },
         [A.PlaybackSegment]: {
-            defaultNamespace: P.ServiceEfficiencyVideoServiceDimensions
+            defaultNamespace: v.ServiceEfficiencyVideoServiceDimensions
         },
         [A.PlaybackType]: {
-            defaultNamespace: P.ServiceEfficiencyVideoServiceDimensions
+            defaultNamespace: v.ServiceEfficiencyVideoServiceDimensions
         },
         [A.ProductKey]: {
-            defaultNamespace: P.ShopsDimensions,
+            defaultNamespace: v.ShopsDimensions,
             overrides: {
-                [R.ItemMonetizationRevenue]: P.CreatorAnalyticsDimensions,
-                [R.ItemMonetizationSales]: P.CreatorAnalyticsDimensions
+                [R.ItemMonetizationRevenue]: v.CreatorAnalyticsDimensions,
+                [R.ItemMonetizationSales]: v.CreatorAnalyticsDimensions
             }
         },
         [A.ProductType]: {
-            defaultNamespace: P.CreatorAnalyticsDimensions
+            defaultNamespace: v.CreatorAnalyticsDimensions
         },
         [A.PurchaseStatus]: {
-            defaultNamespace: P.CreatorStoreDimensions
+            defaultNamespace: v.CreatorStoreDimensions
         },
         [A.RevenueSource]: {
-            defaultNamespace: P.CreatorAnalyticsDimensions
+            defaultNamespace: v.CreatorAnalyticsDimensions
         },
         [A.RewardedVideoEventType]: {
-            defaultNamespace: P.AdsPublisherReportingDimensions
+            defaultNamespace: v.AdsPublisherReportingDimensions
         },
         [A.RobloxPlusDevBountyIsEstimate]: {
-            defaultNamespace: P.RobloxPlusDevBountyDimensions
+            defaultNamespace: v.RobloxPlusDevBountyDimensions
         },
         [A.RobloxPlusDevBountySource]: {
-            defaultNamespace: P.RobloxPlusDevBountyDimensions
+            defaultNamespace: v.RobloxPlusDevBountyDimensions
         },
         [A.RobloxPlusDevBountySubscriptionTenureMonth]: {
-            defaultNamespace: P.RobloxPlusDevBountyDimensions
+            defaultNamespace: v.RobloxPlusDevBountyDimensions
         },
         [A.SaleLocation]: {
-            defaultNamespace: P.AvatarItemsDimensions
+            defaultNamespace: v.AvatarItemsDimensions
         },
         [A.SalesLocation]: {
-            defaultNamespace: P.CreatorAnalyticsDimensions
+            defaultNamespace: v.CreatorAnalyticsDimensions
         },
         [A.SaleType]: {
-            defaultNamespace: P.AvatarItemsDimensions
+            defaultNamespace: v.AvatarItemsDimensions
         },
         [A.ServerAgeBucket]: {
-            defaultNamespace: P.RccServerEfficiencyDimensions
+            defaultNamespace: v.RccServerEfficiencyDimensions
         },
         [A.SessionAcquisitionSource]: {
-            defaultNamespace: P.CreatorAnalyticsDimensions
+            defaultNamespace: v.CreatorAnalyticsDimensions
         },
         [A.SessionTimeBucket]: {
-            defaultNamespace: P.CreatorAnalyticsDimensions
+            defaultNamespace: v.CreatorAnalyticsDimensions
         },
         [A.Severity]: {
-            defaultNamespace: P.AlertingDimensions
+            defaultNamespace: v.AlertingDimensions
         },
         [A.ShareLinkId]: {
-            defaultNamespace: P.ShareLinkUniverseDimensions
+            defaultNamespace: v.ShareLinkUniverseDimensions
         },
         [A.SimplifiedUrl]: {
-            defaultNamespace: P.RotraceDimensions
+            defaultNamespace: v.RotraceDimensions
         },
         [A.SourceId]: {
-            defaultNamespace: P.AdsUnifiedAttributionDimensions
+            defaultNamespace: v.AdsUnifiedAttributionDimensions
         },
         [A.SpeechToTextTranscriptionStatus]: {
-            defaultNamespace: P.ServiceEfficiencySpeechToTextDimensions
+            defaultNamespace: v.ServiceEfficiencySpeechToTextDimensions
         },
         [A.StartTimeUTC]: {
-            defaultNamespace: P.ExperienceEventsSummaryDimensions
+            defaultNamespace: v.ExperienceEventsSummaryDimensions
         },
         [A.StoreItemId]: {
-            defaultNamespace: P.CreatorStoreDimensions
+            defaultNamespace: v.CreatorStoreDimensions
         },
         [A.StoreItemType]: {
-            defaultNamespace: P.CreatorStoreDimensions
+            defaultNamespace: v.CreatorStoreDimensions
         },
         [A.TeleportType]: {
-            defaultNamespace: P.AdsPublisherReportingDimensions
+            defaultNamespace: v.AdsPublisherReportingDimensions
         },
         [A.TextToSpeechRawAudioStatus]: {
-            defaultNamespace: P.ServiceEfficiencyTextToSpeechDimensions
+            defaultNamespace: v.ServiceEfficiencyTextToSpeechDimensions
         },
         [A.ThumbnailAsset]: {
-            defaultNamespace: P.CreatorAnalyticsDimensions
+            defaultNamespace: v.CreatorAnalyticsDimensions
         },
         [A.ThumbnailList]: {
-            defaultNamespace: P.CreatorAnalyticsDimensions
+            defaultNamespace: v.CreatorAnalyticsDimensions
         },
         [A.ToNode]: {
-            defaultNamespace: P.RecommendedEventsJourneysDimensions
+            defaultNamespace: v.RecommendedEventsJourneysDimensions
         },
         [A.ToStage]: {
-            defaultNamespace: P.RecommendedEventsJourneysDimensions
+            defaultNamespace: v.RecommendedEventsJourneysDimensions
         },
         [A.TransactionType]: {
-            defaultNamespace: P.RecommendedEventsEconomyDimensions
+            defaultNamespace: v.RecommendedEventsEconomyDimensions
         },
         [A.Universe]: {
-            defaultNamespace: P.AvatarItemsDimensions
+            defaultNamespace: v.AvatarItemsDimensions
         },
         [A.UserO18Eligibility]: {
-            defaultNamespace: P.CreatorAnalyticsDimensions
+            defaultNamespace: v.CreatorAnalyticsDimensions
         },
         [A.UserSegmentationAccountAge]: {
-            defaultNamespace: P.CreatorAnalyticsDimensions,
+            defaultNamespace: v.CreatorAnalyticsDimensions,
             overrides: {
-                [R.ExperimentMetricAdsArpuV2]: P.CreatorExperimentsDimensions,
-                [R.ExperimentMetricAdsEarningsV2]: P.CreatorExperimentsDimensions,
-                [R.ExperimentMetricAdsFrequencyV2]: P.CreatorExperimentsDimensions,
-                [R.ExperimentMetricAdsImpressionsV2]: P.CreatorExperimentsDimensions,
-                [R.ExperimentMetricAdsOptInRateV2]: P.CreatorExperimentsDimensions,
-                [R.ExperimentMetricAverageCurrencySinkDelta]: P.CreatorExperimentsDimensions,
-                [R.ExperimentMetricAverageCurrencySourceDelta]: P.CreatorExperimentsDimensions,
-                [R.ExperimentMetricAverageCustomValue]: P.CreatorExperimentsDimensions,
-                [R.ExperimentMetricAverageCustomValueAllUsers]: P.CreatorExperimentsDimensions,
-                [R.ExperimentMetricAverageNetCurrencyDelta]: P.CreatorExperimentsDimensions,
-                [R.ExperimentMetricAverageRevenuePerPayingUserV2]: P.CreatorExperimentsDimensions,
-                [R.ExperimentMetricAverageRevenuePerUserV2]: P.CreatorExperimentsDimensions,
-                [R.ExperimentMetricAverageSessionTimeV2]: P.CreatorExperimentsDimensions,
-                [R.ExperimentMetricCustomPenetration]: P.CreatorExperimentsDimensions,
-                [R.ExperimentMetricDay1RetentionV2]: P.CreatorExperimentsDimensions,
-                [R.ExperimentMetricDay7RetentionV2]: P.CreatorExperimentsDimensions,
-                [R.ExperimentMetricMean]: P.CreatorExperimentsDimensions,
-                [R.ExperimentMetricPayerConversionRateV2]: P.CreatorExperimentsDimensions,
-                [R.ExperimentMetricPerSessionFunnelConversion]: P.CreatorExperimentsDimensions,
-                [R.ExperimentMetricPerUserFunnelConversion]: P.CreatorExperimentsDimensions,
-                [R.ExperimentMetricPlaytimePerUserV2]: P.CreatorExperimentsDimensions,
-                [R.ExperimentMetricQualifiedPlayThroughRateV2]: P.CreatorExperimentsDimensions
+                [R.ExperimentMetricAdsArpuV2]: v.CreatorExperimentsDimensions,
+                [R.ExperimentMetricAdsEarningsV2]: v.CreatorExperimentsDimensions,
+                [R.ExperimentMetricAdsFrequencyV2]: v.CreatorExperimentsDimensions,
+                [R.ExperimentMetricAdsImpressionsV2]: v.CreatorExperimentsDimensions,
+                [R.ExperimentMetricAdsOptInRateV2]: v.CreatorExperimentsDimensions,
+                [R.ExperimentMetricAverageCurrencySinkDelta]: v.CreatorExperimentsDimensions,
+                [R.ExperimentMetricAverageCurrencySourceDelta]: v.CreatorExperimentsDimensions,
+                [R.ExperimentMetricAverageCustomValue]: v.CreatorExperimentsDimensions,
+                [R.ExperimentMetricAverageCustomValueAllUsers]: v.CreatorExperimentsDimensions,
+                [R.ExperimentMetricAverageNetCurrencyDelta]: v.CreatorExperimentsDimensions,
+                [R.ExperimentMetricAverageRevenuePerPayingUserV2]: v.CreatorExperimentsDimensions,
+                [R.ExperimentMetricAverageRevenuePerUserV2]: v.CreatorExperimentsDimensions,
+                [R.ExperimentMetricAverageSessionTimeV2]: v.CreatorExperimentsDimensions,
+                [R.ExperimentMetricCustomPenetration]: v.CreatorExperimentsDimensions,
+                [R.ExperimentMetricDay1RetentionV2]: v.CreatorExperimentsDimensions,
+                [R.ExperimentMetricDay7RetentionV2]: v.CreatorExperimentsDimensions,
+                [R.ExperimentMetricMean]: v.CreatorExperimentsDimensions,
+                [R.ExperimentMetricPayerConversionRateV2]: v.CreatorExperimentsDimensions,
+                [R.ExperimentMetricPerSessionFunnelConversion]: v.CreatorExperimentsDimensions,
+                [R.ExperimentMetricPerUserFunnelConversion]: v.CreatorExperimentsDimensions,
+                [R.ExperimentMetricPlaytimePerUserV2]: v.CreatorExperimentsDimensions,
+                [R.ExperimentMetricQualifiedPlayThroughRateV2]: v.CreatorExperimentsDimensions
             }
         },
         [A.UserSegmentationAcquisitionSource]: {
-            defaultNamespace: P.SharedDimensions
+            defaultNamespace: v.SharedDimensions
         },
         [A.UserSegmentationActivationStatus]: {
-            defaultNamespace: P.CreatorAnalyticsDimensions,
+            defaultNamespace: v.CreatorAnalyticsDimensions,
             overrides: {
-                [R.ExperimentMetricAdsArpuV2]: P.CreatorExperimentsDimensions,
-                [R.ExperimentMetricAdsEarningsV2]: P.CreatorExperimentsDimensions,
-                [R.ExperimentMetricAdsFrequencyV2]: P.CreatorExperimentsDimensions,
-                [R.ExperimentMetricAdsImpressionsV2]: P.CreatorExperimentsDimensions,
-                [R.ExperimentMetricAdsOptInRateV2]: P.CreatorExperimentsDimensions,
-                [R.ExperimentMetricAverageCurrencySinkDelta]: P.CreatorExperimentsDimensions,
-                [R.ExperimentMetricAverageCurrencySourceDelta]: P.CreatorExperimentsDimensions,
-                [R.ExperimentMetricAverageCustomValue]: P.CreatorExperimentsDimensions,
-                [R.ExperimentMetricAverageCustomValueAllUsers]: P.CreatorExperimentsDimensions,
-                [R.ExperimentMetricAverageNetCurrencyDelta]: P.CreatorExperimentsDimensions,
-                [R.ExperimentMetricAverageRevenuePerPayingUserV2]: P.CreatorExperimentsDimensions,
-                [R.ExperimentMetricAverageRevenuePerUserV2]: P.CreatorExperimentsDimensions,
-                [R.ExperimentMetricAverageSessionTimeV2]: P.CreatorExperimentsDimensions,
-                [R.ExperimentMetricCustomPenetration]: P.CreatorExperimentsDimensions,
-                [R.ExperimentMetricDay1RetentionV2]: P.CreatorExperimentsDimensions,
-                [R.ExperimentMetricDay7RetentionV2]: P.CreatorExperimentsDimensions,
-                [R.ExperimentMetricMean]: P.CreatorExperimentsDimensions,
-                [R.ExperimentMetricPayerConversionRateV2]: P.CreatorExperimentsDimensions,
-                [R.ExperimentMetricPerSessionFunnelConversion]: P.CreatorExperimentsDimensions,
-                [R.ExperimentMetricPerUserFunnelConversion]: P.CreatorExperimentsDimensions,
-                [R.ExperimentMetricPlaytimePerUserV2]: P.CreatorExperimentsDimensions,
-                [R.ExperimentMetricQualifiedPlayThroughRateV2]: P.CreatorExperimentsDimensions
+                [R.ExperimentMetricAdsArpuV2]: v.CreatorExperimentsDimensions,
+                [R.ExperimentMetricAdsEarningsV2]: v.CreatorExperimentsDimensions,
+                [R.ExperimentMetricAdsFrequencyV2]: v.CreatorExperimentsDimensions,
+                [R.ExperimentMetricAdsImpressionsV2]: v.CreatorExperimentsDimensions,
+                [R.ExperimentMetricAdsOptInRateV2]: v.CreatorExperimentsDimensions,
+                [R.ExperimentMetricAverageCurrencySinkDelta]: v.CreatorExperimentsDimensions,
+                [R.ExperimentMetricAverageCurrencySourceDelta]: v.CreatorExperimentsDimensions,
+                [R.ExperimentMetricAverageCustomValue]: v.CreatorExperimentsDimensions,
+                [R.ExperimentMetricAverageCustomValueAllUsers]: v.CreatorExperimentsDimensions,
+                [R.ExperimentMetricAverageNetCurrencyDelta]: v.CreatorExperimentsDimensions,
+                [R.ExperimentMetricAverageRevenuePerPayingUserV2]: v.CreatorExperimentsDimensions,
+                [R.ExperimentMetricAverageRevenuePerUserV2]: v.CreatorExperimentsDimensions,
+                [R.ExperimentMetricAverageSessionTimeV2]: v.CreatorExperimentsDimensions,
+                [R.ExperimentMetricCustomPenetration]: v.CreatorExperimentsDimensions,
+                [R.ExperimentMetricDay1RetentionV2]: v.CreatorExperimentsDimensions,
+                [R.ExperimentMetricDay7RetentionV2]: v.CreatorExperimentsDimensions,
+                [R.ExperimentMetricMean]: v.CreatorExperimentsDimensions,
+                [R.ExperimentMetricPayerConversionRateV2]: v.CreatorExperimentsDimensions,
+                [R.ExperimentMetricPerSessionFunnelConversion]: v.CreatorExperimentsDimensions,
+                [R.ExperimentMetricPerUserFunnelConversion]: v.CreatorExperimentsDimensions,
+                [R.ExperimentMetricPlaytimePerUserV2]: v.CreatorExperimentsDimensions,
+                [R.ExperimentMetricQualifiedPlayThroughRateV2]: v.CreatorExperimentsDimensions
             }
         },
         [A.UserSegmentationEngagementLevel]: {
-            defaultNamespace: P.CreatorAnalyticsDimensions,
+            defaultNamespace: v.CreatorAnalyticsDimensions,
             overrides: {
-                [R.ExperimentMetricAdsArpuV2]: P.CreatorExperimentsDimensions,
-                [R.ExperimentMetricAdsEarningsV2]: P.CreatorExperimentsDimensions,
-                [R.ExperimentMetricAdsFrequencyV2]: P.CreatorExperimentsDimensions,
-                [R.ExperimentMetricAdsImpressionsV2]: P.CreatorExperimentsDimensions,
-                [R.ExperimentMetricAdsOptInRateV2]: P.CreatorExperimentsDimensions,
-                [R.ExperimentMetricAverageCurrencySinkDelta]: P.CreatorExperimentsDimensions,
-                [R.ExperimentMetricAverageCurrencySourceDelta]: P.CreatorExperimentsDimensions,
-                [R.ExperimentMetricAverageCustomValue]: P.CreatorExperimentsDimensions,
-                [R.ExperimentMetricAverageCustomValueAllUsers]: P.CreatorExperimentsDimensions,
-                [R.ExperimentMetricAverageNetCurrencyDelta]: P.CreatorExperimentsDimensions,
-                [R.ExperimentMetricAverageRevenuePerPayingUserV2]: P.CreatorExperimentsDimensions,
-                [R.ExperimentMetricAverageRevenuePerUserV2]: P.CreatorExperimentsDimensions,
-                [R.ExperimentMetricAverageSessionTimeV2]: P.CreatorExperimentsDimensions,
-                [R.ExperimentMetricCustomPenetration]: P.CreatorExperimentsDimensions,
-                [R.ExperimentMetricDay1RetentionV2]: P.CreatorExperimentsDimensions,
-                [R.ExperimentMetricDay7RetentionV2]: P.CreatorExperimentsDimensions,
-                [R.ExperimentMetricMean]: P.CreatorExperimentsDimensions,
-                [R.ExperimentMetricPayerConversionRateV2]: P.CreatorExperimentsDimensions,
-                [R.ExperimentMetricPerSessionFunnelConversion]: P.CreatorExperimentsDimensions,
-                [R.ExperimentMetricPerUserFunnelConversion]: P.CreatorExperimentsDimensions,
-                [R.ExperimentMetricPlaytimePerUserV2]: P.CreatorExperimentsDimensions,
-                [R.ExperimentMetricQualifiedPlayThroughRateV2]: P.CreatorExperimentsDimensions
+                [R.ExperimentMetricAdsArpuV2]: v.CreatorExperimentsDimensions,
+                [R.ExperimentMetricAdsEarningsV2]: v.CreatorExperimentsDimensions,
+                [R.ExperimentMetricAdsFrequencyV2]: v.CreatorExperimentsDimensions,
+                [R.ExperimentMetricAdsImpressionsV2]: v.CreatorExperimentsDimensions,
+                [R.ExperimentMetricAdsOptInRateV2]: v.CreatorExperimentsDimensions,
+                [R.ExperimentMetricAverageCurrencySinkDelta]: v.CreatorExperimentsDimensions,
+                [R.ExperimentMetricAverageCurrencySourceDelta]: v.CreatorExperimentsDimensions,
+                [R.ExperimentMetricAverageCustomValue]: v.CreatorExperimentsDimensions,
+                [R.ExperimentMetricAverageCustomValueAllUsers]: v.CreatorExperimentsDimensions,
+                [R.ExperimentMetricAverageNetCurrencyDelta]: v.CreatorExperimentsDimensions,
+                [R.ExperimentMetricAverageRevenuePerPayingUserV2]: v.CreatorExperimentsDimensions,
+                [R.ExperimentMetricAverageRevenuePerUserV2]: v.CreatorExperimentsDimensions,
+                [R.ExperimentMetricAverageSessionTimeV2]: v.CreatorExperimentsDimensions,
+                [R.ExperimentMetricCustomPenetration]: v.CreatorExperimentsDimensions,
+                [R.ExperimentMetricDay1RetentionV2]: v.CreatorExperimentsDimensions,
+                [R.ExperimentMetricDay7RetentionV2]: v.CreatorExperimentsDimensions,
+                [R.ExperimentMetricMean]: v.CreatorExperimentsDimensions,
+                [R.ExperimentMetricPayerConversionRateV2]: v.CreatorExperimentsDimensions,
+                [R.ExperimentMetricPerSessionFunnelConversion]: v.CreatorExperimentsDimensions,
+                [R.ExperimentMetricPerUserFunnelConversion]: v.CreatorExperimentsDimensions,
+                [R.ExperimentMetricPlaytimePerUserV2]: v.CreatorExperimentsDimensions,
+                [R.ExperimentMetricQualifiedPlayThroughRateV2]: v.CreatorExperimentsDimensions
             }
         },
         [A.UserSegmentationPayerStatus]: {
-            defaultNamespace: P.CreatorAnalyticsDimensions,
+            defaultNamespace: v.CreatorAnalyticsDimensions,
             overrides: {
-                [R.ExperimentMetricAdsArpuV2]: P.CreatorExperimentsDimensions,
-                [R.ExperimentMetricAdsEarningsV2]: P.CreatorExperimentsDimensions,
-                [R.ExperimentMetricAdsFrequencyV2]: P.CreatorExperimentsDimensions,
-                [R.ExperimentMetricAdsImpressionsV2]: P.CreatorExperimentsDimensions,
-                [R.ExperimentMetricAdsOptInRateV2]: P.CreatorExperimentsDimensions,
-                [R.ExperimentMetricAverageCurrencySinkDelta]: P.CreatorExperimentsDimensions,
-                [R.ExperimentMetricAverageCurrencySourceDelta]: P.CreatorExperimentsDimensions,
-                [R.ExperimentMetricAverageCustomValue]: P.CreatorExperimentsDimensions,
-                [R.ExperimentMetricAverageCustomValueAllUsers]: P.CreatorExperimentsDimensions,
-                [R.ExperimentMetricAverageNetCurrencyDelta]: P.CreatorExperimentsDimensions,
-                [R.ExperimentMetricAverageRevenuePerPayingUserV2]: P.CreatorExperimentsDimensions,
-                [R.ExperimentMetricAverageRevenuePerUserV2]: P.CreatorExperimentsDimensions,
-                [R.ExperimentMetricAverageSessionTimeV2]: P.CreatorExperimentsDimensions,
-                [R.ExperimentMetricCustomPenetration]: P.CreatorExperimentsDimensions,
-                [R.ExperimentMetricDay1RetentionV2]: P.CreatorExperimentsDimensions,
-                [R.ExperimentMetricDay7RetentionV2]: P.CreatorExperimentsDimensions,
-                [R.ExperimentMetricMean]: P.CreatorExperimentsDimensions,
-                [R.ExperimentMetricPayerConversionRateV2]: P.CreatorExperimentsDimensions,
-                [R.ExperimentMetricPerSessionFunnelConversion]: P.CreatorExperimentsDimensions,
-                [R.ExperimentMetricPerUserFunnelConversion]: P.CreatorExperimentsDimensions,
-                [R.ExperimentMetricPlaytimePerUserV2]: P.CreatorExperimentsDimensions,
-                [R.ExperimentMetricQualifiedPlayThroughRateV2]: P.CreatorExperimentsDimensions
+                [R.ExperimentMetricAdsArpuV2]: v.CreatorExperimentsDimensions,
+                [R.ExperimentMetricAdsEarningsV2]: v.CreatorExperimentsDimensions,
+                [R.ExperimentMetricAdsFrequencyV2]: v.CreatorExperimentsDimensions,
+                [R.ExperimentMetricAdsImpressionsV2]: v.CreatorExperimentsDimensions,
+                [R.ExperimentMetricAdsOptInRateV2]: v.CreatorExperimentsDimensions,
+                [R.ExperimentMetricAverageCurrencySinkDelta]: v.CreatorExperimentsDimensions,
+                [R.ExperimentMetricAverageCurrencySourceDelta]: v.CreatorExperimentsDimensions,
+                [R.ExperimentMetricAverageCustomValue]: v.CreatorExperimentsDimensions,
+                [R.ExperimentMetricAverageCustomValueAllUsers]: v.CreatorExperimentsDimensions,
+                [R.ExperimentMetricAverageNetCurrencyDelta]: v.CreatorExperimentsDimensions,
+                [R.ExperimentMetricAverageRevenuePerPayingUserV2]: v.CreatorExperimentsDimensions,
+                [R.ExperimentMetricAverageRevenuePerUserV2]: v.CreatorExperimentsDimensions,
+                [R.ExperimentMetricAverageSessionTimeV2]: v.CreatorExperimentsDimensions,
+                [R.ExperimentMetricCustomPenetration]: v.CreatorExperimentsDimensions,
+                [R.ExperimentMetricDay1RetentionV2]: v.CreatorExperimentsDimensions,
+                [R.ExperimentMetricDay7RetentionV2]: v.CreatorExperimentsDimensions,
+                [R.ExperimentMetricMean]: v.CreatorExperimentsDimensions,
+                [R.ExperimentMetricPayerConversionRateV2]: v.CreatorExperimentsDimensions,
+                [R.ExperimentMetricPerSessionFunnelConversion]: v.CreatorExperimentsDimensions,
+                [R.ExperimentMetricPerUserFunnelConversion]: v.CreatorExperimentsDimensions,
+                [R.ExperimentMetricPlaytimePerUserV2]: v.CreatorExperimentsDimensions,
+                [R.ExperimentMetricQualifiedPlayThroughRateV2]: v.CreatorExperimentsDimensions
             }
         },
         [A.UserSegmentationPlatformActivationStatus]: {
-            defaultNamespace: P.CreatorAnalyticsDimensions,
+            defaultNamespace: v.CreatorAnalyticsDimensions,
             overrides: {
-                [R.ExperimentMetricAdsArpuV2]: P.CreatorExperimentsDimensions,
-                [R.ExperimentMetricAdsEarningsV2]: P.CreatorExperimentsDimensions,
-                [R.ExperimentMetricAdsFrequencyV2]: P.CreatorExperimentsDimensions,
-                [R.ExperimentMetricAdsImpressionsV2]: P.CreatorExperimentsDimensions,
-                [R.ExperimentMetricAdsOptInRateV2]: P.CreatorExperimentsDimensions,
-                [R.ExperimentMetricAverageCurrencySinkDelta]: P.CreatorExperimentsDimensions,
-                [R.ExperimentMetricAverageCurrencySourceDelta]: P.CreatorExperimentsDimensions,
-                [R.ExperimentMetricAverageCustomValue]: P.CreatorExperimentsDimensions,
-                [R.ExperimentMetricAverageCustomValueAllUsers]: P.CreatorExperimentsDimensions,
-                [R.ExperimentMetricAverageNetCurrencyDelta]: P.CreatorExperimentsDimensions,
-                [R.ExperimentMetricAverageRevenuePerPayingUserV2]: P.CreatorExperimentsDimensions,
-                [R.ExperimentMetricAverageRevenuePerUserV2]: P.CreatorExperimentsDimensions,
-                [R.ExperimentMetricAverageSessionTimeV2]: P.CreatorExperimentsDimensions,
-                [R.ExperimentMetricCustomPenetration]: P.CreatorExperimentsDimensions,
-                [R.ExperimentMetricDay1RetentionV2]: P.CreatorExperimentsDimensions,
-                [R.ExperimentMetricDay7RetentionV2]: P.CreatorExperimentsDimensions,
-                [R.ExperimentMetricMean]: P.CreatorExperimentsDimensions,
-                [R.ExperimentMetricPayerConversionRateV2]: P.CreatorExperimentsDimensions,
-                [R.ExperimentMetricPerSessionFunnelConversion]: P.CreatorExperimentsDimensions,
-                [R.ExperimentMetricPerUserFunnelConversion]: P.CreatorExperimentsDimensions,
-                [R.ExperimentMetricPlaytimePerUserV2]: P.CreatorExperimentsDimensions,
-                [R.ExperimentMetricQualifiedPlayThroughRateV2]: P.CreatorExperimentsDimensions
+                [R.ExperimentMetricAdsArpuV2]: v.CreatorExperimentsDimensions,
+                [R.ExperimentMetricAdsEarningsV2]: v.CreatorExperimentsDimensions,
+                [R.ExperimentMetricAdsFrequencyV2]: v.CreatorExperimentsDimensions,
+                [R.ExperimentMetricAdsImpressionsV2]: v.CreatorExperimentsDimensions,
+                [R.ExperimentMetricAdsOptInRateV2]: v.CreatorExperimentsDimensions,
+                [R.ExperimentMetricAverageCurrencySinkDelta]: v.CreatorExperimentsDimensions,
+                [R.ExperimentMetricAverageCurrencySourceDelta]: v.CreatorExperimentsDimensions,
+                [R.ExperimentMetricAverageCustomValue]: v.CreatorExperimentsDimensions,
+                [R.ExperimentMetricAverageCustomValueAllUsers]: v.CreatorExperimentsDimensions,
+                [R.ExperimentMetricAverageNetCurrencyDelta]: v.CreatorExperimentsDimensions,
+                [R.ExperimentMetricAverageRevenuePerPayingUserV2]: v.CreatorExperimentsDimensions,
+                [R.ExperimentMetricAverageRevenuePerUserV2]: v.CreatorExperimentsDimensions,
+                [R.ExperimentMetricAverageSessionTimeV2]: v.CreatorExperimentsDimensions,
+                [R.ExperimentMetricCustomPenetration]: v.CreatorExperimentsDimensions,
+                [R.ExperimentMetricDay1RetentionV2]: v.CreatorExperimentsDimensions,
+                [R.ExperimentMetricDay7RetentionV2]: v.CreatorExperimentsDimensions,
+                [R.ExperimentMetricMean]: v.CreatorExperimentsDimensions,
+                [R.ExperimentMetricPayerConversionRateV2]: v.CreatorExperimentsDimensions,
+                [R.ExperimentMetricPerSessionFunnelConversion]: v.CreatorExperimentsDimensions,
+                [R.ExperimentMetricPerUserFunnelConversion]: v.CreatorExperimentsDimensions,
+                [R.ExperimentMetricPlaytimePerUserV2]: v.CreatorExperimentsDimensions,
+                [R.ExperimentMetricQualifiedPlayThroughRateV2]: v.CreatorExperimentsDimensions
             }
         },
         [A.UserSegmentationPlatformSpenderStatus]: {
-            defaultNamespace: P.CreatorAnalyticsDimensions,
+            defaultNamespace: v.CreatorAnalyticsDimensions,
             overrides: {
-                [R.ExperimentMetricAdsArpuV2]: P.CreatorExperimentsDimensions,
-                [R.ExperimentMetricAdsEarningsV2]: P.CreatorExperimentsDimensions,
-                [R.ExperimentMetricAdsFrequencyV2]: P.CreatorExperimentsDimensions,
-                [R.ExperimentMetricAdsImpressionsV2]: P.CreatorExperimentsDimensions,
-                [R.ExperimentMetricAdsOptInRateV2]: P.CreatorExperimentsDimensions,
-                [R.ExperimentMetricAverageCurrencySinkDelta]: P.CreatorExperimentsDimensions,
-                [R.ExperimentMetricAverageCurrencySourceDelta]: P.CreatorExperimentsDimensions,
-                [R.ExperimentMetricAverageCustomValue]: P.CreatorExperimentsDimensions,
-                [R.ExperimentMetricAverageCustomValueAllUsers]: P.CreatorExperimentsDimensions,
-                [R.ExperimentMetricAverageNetCurrencyDelta]: P.CreatorExperimentsDimensions,
-                [R.ExperimentMetricAverageRevenuePerPayingUserV2]: P.CreatorExperimentsDimensions,
-                [R.ExperimentMetricAverageRevenuePerUserV2]: P.CreatorExperimentsDimensions,
-                [R.ExperimentMetricAverageSessionTimeV2]: P.CreatorExperimentsDimensions,
-                [R.ExperimentMetricCustomPenetration]: P.CreatorExperimentsDimensions,
-                [R.ExperimentMetricDay1RetentionV2]: P.CreatorExperimentsDimensions,
-                [R.ExperimentMetricDay7RetentionV2]: P.CreatorExperimentsDimensions,
-                [R.ExperimentMetricMean]: P.CreatorExperimentsDimensions,
-                [R.ExperimentMetricPayerConversionRateV2]: P.CreatorExperimentsDimensions,
-                [R.ExperimentMetricPerSessionFunnelConversion]: P.CreatorExperimentsDimensions,
-                [R.ExperimentMetricPerUserFunnelConversion]: P.CreatorExperimentsDimensions,
-                [R.ExperimentMetricPlaytimePerUserV2]: P.CreatorExperimentsDimensions,
-                [R.ExperimentMetricQualifiedPlayThroughRateV2]: P.CreatorExperimentsDimensions
+                [R.ExperimentMetricAdsArpuV2]: v.CreatorExperimentsDimensions,
+                [R.ExperimentMetricAdsEarningsV2]: v.CreatorExperimentsDimensions,
+                [R.ExperimentMetricAdsFrequencyV2]: v.CreatorExperimentsDimensions,
+                [R.ExperimentMetricAdsImpressionsV2]: v.CreatorExperimentsDimensions,
+                [R.ExperimentMetricAdsOptInRateV2]: v.CreatorExperimentsDimensions,
+                [R.ExperimentMetricAverageCurrencySinkDelta]: v.CreatorExperimentsDimensions,
+                [R.ExperimentMetricAverageCurrencySourceDelta]: v.CreatorExperimentsDimensions,
+                [R.ExperimentMetricAverageCustomValue]: v.CreatorExperimentsDimensions,
+                [R.ExperimentMetricAverageCustomValueAllUsers]: v.CreatorExperimentsDimensions,
+                [R.ExperimentMetricAverageNetCurrencyDelta]: v.CreatorExperimentsDimensions,
+                [R.ExperimentMetricAverageRevenuePerPayingUserV2]: v.CreatorExperimentsDimensions,
+                [R.ExperimentMetricAverageRevenuePerUserV2]: v.CreatorExperimentsDimensions,
+                [R.ExperimentMetricAverageSessionTimeV2]: v.CreatorExperimentsDimensions,
+                [R.ExperimentMetricCustomPenetration]: v.CreatorExperimentsDimensions,
+                [R.ExperimentMetricDay1RetentionV2]: v.CreatorExperimentsDimensions,
+                [R.ExperimentMetricDay7RetentionV2]: v.CreatorExperimentsDimensions,
+                [R.ExperimentMetricMean]: v.CreatorExperimentsDimensions,
+                [R.ExperimentMetricPayerConversionRateV2]: v.CreatorExperimentsDimensions,
+                [R.ExperimentMetricPerSessionFunnelConversion]: v.CreatorExperimentsDimensions,
+                [R.ExperimentMetricPerUserFunnelConversion]: v.CreatorExperimentsDimensions,
+                [R.ExperimentMetricPlaytimePerUserV2]: v.CreatorExperimentsDimensions,
+                [R.ExperimentMetricQualifiedPlayThroughRateV2]: v.CreatorExperimentsDimensions
             }
         },
         [A.UserSegmentationReturnStatus]: {
-            defaultNamespace: P.SharedDimensions
+            defaultNamespace: v.SharedDimensions
         },
         [A.VideoType]: {
-            defaultNamespace: P.ServiceEfficiencyVideoServiceDimensions
+            defaultNamespace: v.ServiceEfficiencyVideoServiceDimensions
         },
         [A.ViolationCategory]: {
-            defaultNamespace: P.SafetyDimensions
+            defaultNamespace: v.SafetyDimensions
         },
         [A.VirtualEventId]: {
-            defaultNamespace: P.ExperienceEventsSummaryDimensions
+            defaultNamespace: v.ExperienceEventsSummaryDimensions
         },
         [A.VoteType]: {
-            defaultNamespace: P.PlayerFeedbackDimensions
+            defaultNamespace: v.PlayerFeedbackDimensions
         },
         [A.WorkflowType]: {
-            defaultNamespace: P.GenerativeAiDimensions
+            defaultNamespace: v.GenerativeAiDimensions
         }
     };
     (C = U || (U = {})).Bullying = "Bullying", C.Cheating = "Cheating", C.Dating = "Dating", C.HateSpeech = "HateSpeech", C.InappropriateContent = "InappropriateContent", C.InappropriateUsername = "InappropriateUsername", C.OffsiteLinks = "OffsiteLinks", C.Other = "Other", C.PersonalQuestion = "PersonalQuestion", C.Scamming = "Scamming", C.Swearing = "Swearing";
-    var v, C, U, b, T = U;
+    var S, C, U, b, T = U;
     (k = b || (b = {})).Audio = "Audio", k.Avatar = "Avatar", k.Chat = "Chat", k.Place = "Place", k.Voice = "Voice";
     var k, f, M = b;
     (E = f || (f = {})).Charts = "Charts", E.ContinueToPlay = "ContinueToPlay", E.CrossGame = "CrossGame", E.Curation = "Curation", E.Friends = "Friends", E.HomeRecommendation = "HomeRecommendation", E.Moments = "Moments", E.Others = "Others", E.PortalAds = "PortalAds", E.Search = "Search", E.SearchAds = "SearchAds", E.SponsoredAds = "SponsoredAds";
     var E, N, h = f;
     (L = N || (N = {})).ImmersiveDisplay = "ImmersiveDisplay", L.ImmersivePortal = "ImmersivePortal", L.ImmersiveVideo = "ImmersiveVideo", L.RewardedVideo = "RewardedVideo";
-    var L, x, w = N;
-    (V = x || (x = {})).Unverified = "Unverified", V.Verified = "Verified";
-    var V, I, O = x;
+    var L, w, x = N;
+    (V = w || (w = {})).Unverified = "Unverified", V.Verified = "Verified";
+    var V, I, O = w;
     (F = I || (I = {})).Actual = "Actual", F.Estimate = "Estimate";
     var F, B, G = I;
     (q = B || (B = {})).Existing = "Existing", q.New = "New", q.Recent = "Recent";
@@ -1575,19 +1575,19 @@
     (ep = ed || (ed = {})).Attributes = "Attributes", ep.Events = "Events", ep.NewInstance = "NewInstance", ep.Properties = "Properties", ep.Total = "Total";
     var ep, eA, eD = ed;
     (eg = eA || (eA = {})).Animation = "Animation", eg.Miscellaneous = "Miscellaneous", eg.Networking = "Networking", eg.Physics = "Physics", eg.Scripts = "Scripts";
-    var eg, eR, eP = eA;
-    (eS = eR || (eR = {})).Asset = "Asset", eS.Bundle = "Bundle";
-    var eS, ev, eC = eR;
-    (eU = ev || (ev = {})).Limited = "Limited", eU.NonLimited = "NonLimited";
-    var eU, eb, eT = ev;
+    var eg, eR, ev = eA;
+    (eP = eR || (eR = {})).Asset = "Asset", eP.Bundle = "Bundle";
+    var eP, eS, eC = eR;
+    (eU = eS || (eS = {})).Limited = "Limited", eU.NonLimited = "NonLimited";
+    var eU, eb, eT = eS;
     (ek = eb || (eb = {})).Afghanistan = "AF", ek.AlandIslands = "AX", ek.Albania = "AL", ek.Algeria = "DZ", ek.AmericanSamoa = "AS", ek.Andorra = "AD", ek.Angola = "AO", ek.Anguilla = "AI", ek.Antarctica = "AQ", ek.AntiguaAndBarbuda = "AG", ek.Argentina = "AR", ek.Armenia = "AM", ek.Aruba = "AW", ek.Australia = "AU", ek.Austria = "AT", ek.Azerbaijan = "AZ", ek.Bahamas = "BS", ek.Bahrain = "BH", ek.Bangladesh = "BD", ek.Barbados = "BB", ek.Belarus = "BY", ek.Belgium = "BE", ek.Belize = "BZ", ek.Benin = "BJ", ek.Bermuda = "BM", ek.Bhutan = "BT", ek.Bolivia = "BO", ek.BonaireSaintEustatiusAndSaba = "BQ", ek.BosniaAndHerzegovina = "BA", ek.Botswana = "BW", ek.BouvetIsland = "BV", ek.Brazil = "BR", ek.BritishIndianOceanTerritory = "IO", ek.BruneiDarussalam = "BN", ek.Bulgaria = "BG", ek.BurkinaFaso = "BF", ek.Burundi = "BI", ek.Cambodia = "KH", ek.Cameroon = "CM", ek.Canada = "CA", ek.CapeVerde = "CV", ek.CaymanIslands = "KY", ek.CentralAfricanRepublic = "CF", ek.Chad = "TD", ek.Chile = "CL", ek.China = "CN", ek.ChristmasIsland = "CX", ek.CocosIslands = "CC", ek.Colombia = "CO", ek.Comoros = "KM", ek.Congo = "CG", ek.CongoDrc_ = "CD", ek.CookIslands = "CK", ek.CostaRica = "CR", ek.Croatia = "HR", ek.Cuba = "CU", ek.CuraAo = "CW", ek.Cyprus = "CY", ek.CzechRepublic = "CZ", ek.Denmark = "DK", ek.Djibouti = "DJ", ek.Dominica = "DM", ek.DominicanRepublic = "DO", ek.Ecuador = "EC", ek.Egypt = "EG", ek.ElSalvador = "SV", ek.EquatorialGuinea = "GQ", ek.Eritrea = "ER", ek.Estonia = "EE", ek.Ethiopia = "ET", ek.FalklandIslandsMalvinas_ = "FK", ek.FaroeIslands = "FO", ek.Fiji = "FJ", ek.Finland = "FI", ek.France = "FR", ek.FrenchGuiana = "GF", ek.FrenchPolynesia = "PF", ek.FrenchSouthernTerritories = "TF", ek.Gabon = "GA", ek.Gambia = "GM", ek.Georgia = "GE", ek.Germany = "DE", ek.Ghana = "GH", ek.Gibraltar = "GI", ek.Greece = "GR", ek.Greenland = "GL", ek.Grenada = "GD", ek.Guadeloupe = "GP", ek.Guam = "GU", ek.Guatemala = "GT", ek.Guernsey = "GG", ek.Guinea = "GN", ek.GuineaBissau = "GW", ek.Guyana = "GY", ek.Haiti = "HT", ek.HeardIslandAndTheMcdonaldIslands = "HM", ek.HolySee = "VA", ek.Honduras = "HN", ek.HongKong = "HK", ek.Hungary = "HU", ek.Iceland = "IS", ek.India = "IN", ek.Indonesia = "ID", ek.Iran = "IR", ek.Iraq = "IQ", ek.Ireland = "IE", ek.IsleOfMan = "IM", ek.Israel = "IL", ek.Italy = "IT", ek.IvoryCoast = "CI", ek.Jamaica = "JM", ek.Japan = "JP", ek.Jersey = "JE", ek.Jordan = "JO", ek.Kazakhstan = "KZ", ek.Kenya = "KE", ek.Kiribati = "KI", ek.Korea = "KR", ek.Kosovo = "XK", ek.Kuwait = "KW", ek.Kyrgyzstan = "KG", ek.Laos = "LA", ek.Latvia = "LV", ek.Lebanon = "LB", ek.Lesotho = "LS", ek.Liberia = "LR", ek.Libya = "LY", ek.Liechtenstein = "LI", ek.Lithuania = "LT", ek.Luxembourg = "LU", ek.Macao = "MO", ek.Macedonia = "MK", ek.Madagascar = "MG", ek.Malawi = "MW", ek.Malaysia = "MY", ek.Maldives = "MV", ek.Mali = "ML", ek.Malta = "MT", ek.MarshallIslands = "MH", ek.Martinique = "MQ", ek.Mauritania = "MR", ek.Mauritius = "MU", ek.Mayotte = "YT", ek.Mexico = "MX", ek.Micronesia = "FM", ek.Moldova = "MD", ek.Monaco = "MC", ek.Mongolia = "MN", ek.Montenegro = "ME", ek.Montserrat = "MS", ek.Morocco = "MA", ek.Mozambique = "MZ", ek.Myanmar = "MM", ek.Namibia = "NA", ek.Nauru = "NR", ek.Nepal = "NP", ek.Netherlands = "NL", ek.NetherlandsAntilles = "AN", ek.NewCaledonia = "NC", ek.NewZealand = "NZ", ek.Nicaragua = "NI", ek.Niger = "NE", ek.Nigeria = "NG", ek.Niue = "NU", ek.NorfolkIsland = "NF", ek.NorthernMarianaIslands = "MP", ek.NorthKorea = "KP", ek.Norway = "NO", ek.Oman = "OM", ek.Pakistan = "PK", ek.Palau = "PW", ek.Palestine = "PS", ek.Panama = "PA", ek.PapuaNewGuinea = "PG", ek.Paraguay = "PY", ek.Peru = "PE", ek.Philippines = "PH", ek.PitcairnIslands = "PN", ek.Poland = "PL", ek.Portugal = "PT", ek.PuertoRico = "PR", ek.Qatar = "QA", ek.Reunion = "RE", ek.Romania = "RO", ek.RussianFederation = "RU", ek.Rwanda = "RW", ek.SaintBarthelemy = "BL", ek.SaintHelenaAscensionAndTristanDaCunha = "SH", ek.SaintKittsAndNevis = "KN", ek.SaintLucia = "LC", ek.SaintMartin = "MF", ek.SaintPierreAndMiquelon = "PM", ek.SaintVincentAndTheGrenadines = "VC", ek.Samoa = "WS", ek.SanMarino = "SM", ek.SaoTomeAndPrincipe = "ST", ek.SaudiArabia = "SA", ek.Senegal = "SN", ek.Serbia = "RS", ek.Seychelles = "SC", ek.SierraLeone = "SL", ek.Singapore = "SG", ek.SintMaarten = "SX", ek.Slovakia = "SK", ek.Slovenia = "SI", ek.SolomonIslands = "SB", ek.Somalia = "SO", ek.SouthAfrica = "ZA", ek.SouthGeorgiaAndTheSouthSandwichIslands = "GS", ek.SouthSudan = "SS", ek.Spain = "ES", ek.SriLanka = "LK", ek.Suriname = "SR", ek.SvalbardAndJanMayen = "SJ", ek.Swaziland = "SZ", ek.Sweden = "SE", ek.Switzerland = "CH", ek.Syria = "SY", ek.Taiwan = "TW", ek.Tajikistan = "TJ", ek.Tanzania = "TZ", ek.Thailand = "TH", ek.TimorLeste = "TL", ek.Togo = "TG", ek.Tokelau = "TK", ek.Tonga = "TO", ek.TrinidadAndTobago = "TT", ek.Tunisia = "TN", ek.Turkey = "TR", ek.Turkmenistan = "TM", ek.TurksAndCaicosIslands = "TC", ek.Tuvalu = "TV", ek.Uganda = "UG", ek.Ukraine = "UA", ek.UnitedArabEmirates = "AE", ek.UnitedKingdom = "GB", ek.UnitedStates = "US", ek.UnitedStatesMinorOutlyingIslands = "UM", ek.Uruguay = "UY", ek.Uzbekistan = "UZ", ek.Vanuatu = "VU", ek.Venezuela = "VE", ek.Vietnam = "VN", ek.VirginIslandsBritish_ = "VG", ek.VirginIslandsUS = "VI", ek.WallisAndFutuna = "WF", ek.WesternSahara = "EH", ek.Yemen = "YE", ek.Zambia = "ZM", ek.Zimbabwe = "ZW";
     var ek, ef, eM = eb;
     (eE = ef || (ef = {})).Animation = "Animation", eE.Miscellaneous = "Miscellaneous", eE.Networking = "Networking", eE.Physics = "Physics", eE.Scripts = "Scripts";
     var eE, eN, eh = ef;
     (eL = eN || (eN = {})).OutOfMemory = "OutOfMemory", eL.Runtime = "Runtime";
-    var eL, ex, ew = eN;
-    (eV = ex || (ex = {})).NewUsers = "NewUsers", eV.ReactivatedUsers = "ReactivatedUsers";
-    var eV, eI, eO = ex;
+    var eL, ew, ex = eN;
+    (eV = ew || (ew = {})).NewUsers = "NewUsers", eV.ReactivatedUsers = "ReactivatedUsers";
+    var eV, eI, eO = ew;
     (eF = eI || (eI = {})).Actual = "Actual", eF.Estimate = "Estimate";
     var eF, eB, eG = eI;
     (eq = eB || (eB = {})).Actual = "Actual", eq.Estimate = "Estimate";
@@ -1619,19 +1619,19 @@
     (ip || (ip = {})).Onboarding = "FUNNEL_TYPE_ONBOARDING";
     var iD, ig = ip;
     (iR = iD || (iD = {})).Female = "Female", iR.Male = "Male", iR.Unknown = "Unknown";
-    var iR, iP, iS = iD;
-    (iP || (iP = {})).Other = "Other";
-    var iv, iC = iP;
-    (iU = iv || (iv = {})).ExternalError = "ExternalError", iU.InternalError = "InternalError", iU.Redirects = "Redirects", iU.Success = "Success";
-    var iU, ib, iT = iv;
+    var iR, iv, iP = iD;
+    (iv || (iv = {})).Other = "Other";
+    var iS, iC = iv;
+    (iU = iS || (iS = {})).ExternalError = "ExternalError", iU.InternalError = "InternalError", iU.Redirects = "Redirects", iU.Success = "Success";
+    var iU, ib, iT = iS;
     (ik = ib || (ib = {})).Completion = "Completion", ik.Impression = "Impression", ik.Teleport = "Teleport", ik.View = "View";
     var ik, iM, iE = ib;
     (iN = iM || (iM = {})).Free = "Free", iN.Paid = "Paid";
     var iN, ih, iL = iM;
-    (ix = ih || (ih = {})).New = "New", ix.Returning = "Returning";
-    var ix, iw, iV = ih;
-    (iI = iw || (iw = {})).Albanian = "sq_al", iI.Arabic = "ar_001", iI.Bengali = "bn_bd", iI.Bokmal = "nb_no", iI.Bosnian = "bs_ba", iI.Bulgarian = "bg_bg", iI.Burmese = "my_mm", iI.ChineseSimplified = "zh_cn", iI.ChineseTraditional = "zh_tw", iI.Croatian = "hr_hr", iI.Czech = "cs_cz", iI.Danish = "da_dk", iI.Dutch = "nl_nl", iI.English = "en_us", iI.Estonian = "et_ee", iI.Filipino = "fil_ph", iI.Finnish = "fi_fi", iI.French = "fr_fr", iI.Georgian = "ka_ge", iI.German = "de_de", iI.Greek = "el_gr", iI.Hindi = "hi_in", iI.Hungarian = "hu_hu", iI.Indonesian = "id_id", iI.Italian = "it_it", iI.Japanese = "ja_jp", iI.Kazakh = "kk_kz", iI.Khmer = "km_kh", iI.Korean = "ko_kr", iI.Latvian = "lv_lv", iI.Lithuanian = "lt_lt", iI.Malay = "ms_my", iI.Polish = "pl_pl", iI.Portuguese = "pt_br", iI.Romanian = "ro_ro", iI.Russian = "ru_ru", iI.Serbian = "sr_rs", iI.Sinhala = "si_lk", iI.Slovak = "sk_sk", iI.Slovenian = "sl_sl", iI.Spanish = "es_es", iI.Swedish = "sv_se", iI.Thai = "th_th", iI.Turkish = "tr_tr", iI.Ukrainian = "uk_ua", iI.Vietnamese = "vi_vn";
-    var iI, iO, iF = iw;
+    (iw = ih || (ih = {})).New = "New", iw.Returning = "Returning";
+    var iw, ix, iV = ih;
+    (iI = ix || (ix = {})).Albanian = "sq_al", iI.Arabic = "ar_001", iI.Bengali = "bn_bd", iI.Bokmal = "nb_no", iI.Bosnian = "bs_ba", iI.Bulgarian = "bg_bg", iI.Burmese = "my_mm", iI.ChineseSimplified = "zh_cn", iI.ChineseTraditional = "zh_tw", iI.Croatian = "hr_hr", iI.Czech = "cs_cz", iI.Danish = "da_dk", iI.Dutch = "nl_nl", iI.English = "en_us", iI.Estonian = "et_ee", iI.Filipino = "fil_ph", iI.Finnish = "fi_fi", iI.French = "fr_fr", iI.Georgian = "ka_ge", iI.German = "de_de", iI.Greek = "el_gr", iI.Hindi = "hi_in", iI.Hungarian = "hu_hu", iI.Indonesian = "id_id", iI.Italian = "it_it", iI.Japanese = "ja_jp", iI.Kazakh = "kk_kz", iI.Khmer = "km_kh", iI.Korean = "ko_kr", iI.Latvian = "lv_lv", iI.Lithuanian = "lt_lt", iI.Malay = "ms_my", iI.Polish = "pl_pl", iI.Portuguese = "pt_br", iI.Romanian = "ro_ro", iI.Russian = "ru_ru", iI.Serbian = "sr_rs", iI.Sinhala = "si_lk", iI.Slovak = "sk_sk", iI.Slovenian = "sl_sl", iI.Spanish = "es_es", iI.Swedish = "sv_se", iI.Thai = "th_th", iI.Turkish = "tr_tr", iI.Ukrainian = "uk_ua", iI.Vietnamese = "vi_vn";
+    var iI, iO, iF = ix;
     (iB = iO || (iO = {})).Error = "Error", iB.Warning = "Warning";
     var iB, iG, iq = iO;
     (iz = iG || (iG = {})).Client = "Client", iz.Server = "Server";
@@ -1661,19 +1661,19 @@
     (np = nd || (nd = {})).ForumView = "ForumView", np.PageViewApp = "PageViewApp", np.PageViewWeb = "PageViewWeb", np.PostView = "PostView";
     var np, nA, nD = nd;
     (ng = nA || (nA = {})).NonPayer = "NonPayer", ng.Payer = "Payer";
-    var ng, nR, nP = nA;
-    (nS = nR || (nR = {})).OnDemandAd = "OnDemandAd", nS.PlayWithReward = "PlayWithReward", nS.Unknown = "Unknown";
-    var nS, nv, nC = nR;
-    (nU = nv || (nv = {})).Computer = "Computer", nU.Console = "Console", nU.Phone = "Phone", nU.Tablet = "Tablet", nU.TV = "TV", nU.VR = "VR";
-    var nU, nb, nT = nv;
+    var ng, nR, nv = nA;
+    (nP = nR || (nR = {})).OnDemandAd = "OnDemandAd", nP.PlayWithReward = "PlayWithReward", nP.Unknown = "Unknown";
+    var nP, nS, nC = nR;
+    (nU = nS || (nS = {})).Computer = "Computer", nU.Console = "Console", nU.Phone = "Phone", nU.Tablet = "Tablet", nU.TV = "TV", nU.VR = "VR";
+    var nU, nb, nT = nS;
     (nk = nb || (nb = {})).PlayedOnly = "PlayedOnly", nk.PreloadedOnly = "PreloadedOnly", nk.Viewed = "Viewed";
     var nk, nf, nM = nb;
     (nE = nf || (nf = {})).CommissionAvatar = "CommissionAvatar", nE.CommissionGamePass = "CommissionGamePass", nE.DeveloperSubscription = "DeveloperSubscription", nE.DevProduct = "DevProduct", nE.GamePass = "GamePass", nE.PayToPlay = "PayToPlay", nE.PrivateServer = "PrivateServer", nE.TransferCommission = "TransferCommission";
     var nE, nN, nh = nf;
     (nL = nN || (nN = {})).Refund = "Refund", nL.Success = "Success";
-    var nL, nx, nw = nN;
-    (nV = nx || (nx = {})).AffiliateFeeGamePass = "AffiliateFeeGamePass", nV.CommissionAvatar = "CommissionAvatar", nV.DevProduct = "DevProduct", nV.GamePass = "GamePass", nV.PayToPlay = "PayToPlay", nV.PrivateServer = "PrivateServer", nV.Subscription = "Subscription", nV.TransferCommission = "TransferCommission";
-    var nV, nI, nO = nx;
+    var nL, nw, nx = nN;
+    (nV = nw || (nw = {})).AffiliateFeeGamePass = "AffiliateFeeGamePass", nV.CommissionAvatar = "CommissionAvatar", nV.DevProduct = "DevProduct", nV.GamePass = "GamePass", nV.PayToPlay = "PayToPlay", nV.PrivateServer = "PrivateServer", nV.Subscription = "Subscription", nV.TransferCommission = "TransferCommission";
+    var nV, nI, nO = nw;
     (nF = nI || (nI = {})).Completion = "Completion", nF.Fill = "Fill", nF.Impression = "Impression", nF.Opportunity = "Opportunity", nF.Request = "Request", nF.Reward = "Reward", nF.Unknown = "Unknown";
     var nF, nB, nG = nI;
     (nq = nB || (nB = {})).Actual = "Actual", nq.Estimate = "Estimate";
@@ -1705,19 +1705,19 @@
     (tA = ty || (ty = {})).Ads = "Ads", tA.ContinueToPlay = "ContinueToPlay", tA.Curation = "Curation", tA.Friends = "Friends", tA.HomeOther = "HomeOther", tA.HomeRecommendation = "HomeRecommendation", tA.Moments = "Moments", tA.Other = "Other", tA.PendingAttribution = "PendingAttribution", tA.Search = "Search", tA.Teleport = "Teleport";
     var tA, tD, tg = ty;
     (tR = tD || (tD = {})).Active = "Active", tR.Early = "Early", tR.Lapsed = "Lapsed", tR.NeverPlayed = "NeverPlayed", tR.Reactivated = "Reactivated";
-    var tR, tP, tS = tD;
-    (tv = tP || (tP = {})).High = "High", tv.Inactive = "Inactive", tv.Low = "Low", tv.Medium = "Medium";
-    var tv, tC, tU = tP;
+    var tR, tv, tP = tD;
+    (tS = tv || (tv = {})).High = "High", tS.Inactive = "Inactive", tS.Low = "Low", tS.Medium = "Medium";
+    var tS, tC, tU = tv;
     (tb = tC || (tC = {})).ActiveHighPayer = "ActiveHighPayer", tb.ActiveLowPayer = "ActiveLowPayer", tb.ActiveMediumPayer = "ActiveMediumPayer", tb.LapsedPayer = "LapsedPayer", tb.NeverPayer = "NeverPayer";
     var tb, tT, tk = tC;
     (tf = tT || (tT = {})).Active = "Active", tf.Lapsed = "Lapsed", tf.NewSignup = "NewSignup", tf.Reactivation = "Reactivation";
     var tf, tM, tE = tT;
     (tN = tM || (tM = {})).ActiveSpender = "ActiveSpender", tN.OtherSpender = "OtherSpender";
     var tN, th, tL = tM;
-    (tx = th || (th = {})).New = "New", tx.Returning = "Returning";
-    var tx, tw, tV = th;
-    (tI = tw || (tw = {})).DiscriminationAndHate = "DiscriminationAndHate", tI.SexualContent = "SexualContent";
-    var tI, tO, tF = tw;
+    (tw = th || (th = {})).New = "New", tw.Returning = "Returning";
+    var tw, tx, tV = th;
+    (tI = tx || (tx = {})).DiscriminationAndHate = "DiscriminationAndHate", tI.SexualContent = "SexualContent";
+    var tI, tO, tF = tx;
     (aB = tO || (tO = {})).Downvote = "Downvote", aB.Recall = "Recall", aB.Upvote = "Upvote";
     var tB = tO;
     let tG = {
@@ -1943,25 +1943,25 @@
             }
         },
         tH = {
-            [w.ImmersiveDisplay]: {
+            [x.ImmersiveDisplay]: {
                 name: {
                     key: "Label.Dimension.AdFormat.ImmersiveDisplay",
                     namespace: u.Analytics
                 }
             },
-            [w.ImmersivePortal]: {
+            [x.ImmersivePortal]: {
                 name: {
                     key: "Label.Dimension.AdFormat.ImmersivePortal",
                     namespace: u.Analytics
                 }
             },
-            [w.ImmersiveVideo]: {
+            [x.ImmersiveVideo]: {
                 name: {
                     key: "Label.Dimension.AdFormat.ImmersiveVideo",
                     namespace: u.Analytics
                 }
             },
-            [w.RewardedVideo]: {
+            [x.RewardedVideo]: {
                 name: {
                     key: "Label.Dimension.AdFormat.RewardedVideo",
                     namespace: u.Analytics
@@ -2467,31 +2467,31 @@
             }
         },
         t2 = {
-            [eP.Animation]: {
+            [ev.Animation]: {
                 name: {
                     key: "Label.Dimension.ClientCpuTimeCategory.Animation",
                     namespace: u.Analytics
                 }
             },
-            [eP.Miscellaneous]: {
+            [ev.Miscellaneous]: {
                 name: {
                     key: "Label.Dimension.ClientCpuTimeCategory.Miscellaneous",
                     namespace: u.Analytics
                 }
             },
-            [eP.Networking]: {
+            [ev.Networking]: {
                 name: {
                     key: "Label.Dimension.ClientCpuTimeCategory.Networking",
                     namespace: u.Analytics
                 }
             },
-            [eP.Physics]: {
+            [ev.Physics]: {
                 name: {
                     key: "Label.Dimension.ClientCpuTimeCategory.Physics",
                     namespace: u.Analytics
                 }
             },
-            [eP.Scripts]: {
+            [ev.Scripts]: {
                 name: {
                     key: "Label.Dimension.ClientCpuTimeCategory.Scripts",
                     namespace: u.Analytics
@@ -2559,13 +2559,13 @@
             }
         },
         t3 = {
-            [ew.OutOfMemory]: {
+            [ex.OutOfMemory]: {
                 name: {
                     key: "Label.Dimension.CrashType.OutOfMemory",
                     namespace: u.Analytics
                 }
             },
-            [ew.Runtime]: {
+            [ex.Runtime]: {
                 name: {
                     key: "Label.Dimension.CrashType.Runtime",
                     namespace: u.Analytics
@@ -3103,19 +3103,19 @@
             }
         },
         ay = {
-            [iS.Female]: {
+            [iP.Female]: {
                 name: {
                     key: "Label.Female",
                     namespace: u.Analytics
                 }
             },
-            [iS.Male]: {
+            [iP.Male]: {
                 name: {
                     key: "Label.Male",
                     namespace: u.Analytics
                 }
             },
-            [iS.Unknown]: {
+            [iP.Unknown]: {
                 name: {
                     key: "Label.Unknown",
                     namespace: u.Analytics
@@ -3230,7 +3230,7 @@
                 }
             }
         },
-        aP = {
+        av = {
             [iq.Error]: {
                 name: {
                     key: "Label.Dimension.LogSeverity.Error",
@@ -3244,7 +3244,7 @@
                 }
             }
         },
-        aS = {
+        aP = {
             [iQ.Client]: {
                 name: {
                     key: "Label.Dimension.LogSource.Client",
@@ -3258,7 +3258,7 @@
                 }
             }
         },
-        av = {
+        aS = {
             [iY.DefaultFromAbsent]: {
                 name: {
                     key: "Label.Dimension.MatchmakingPlayerAttributesLoadingStatus.DefaultFromAbsent",
@@ -3552,21 +3552,21 @@
                 }
             }
         },
-        ax = {
-            [nP.NonPayer]: {
+        aw = {
+            [nv.NonPayer]: {
                 name: {
                     key: "Label.Dimension.PayerStatus.NonPayer",
                     namespace: u.Analytics
                 }
             },
-            [nP.Payer]: {
+            [nv.Payer]: {
                 name: {
                     key: "Label.Dimension.PayerStatus.Payer",
                     namespace: u.Analytics
                 }
             }
         },
-        aw = {
+        ax = {
             [nC.OnDemandAd]: {
                 name: {
                     key: "Label.Dimension.PlacementType.OnDemandAd",
@@ -3707,13 +3707,13 @@
             }
         },
         aF = {
-            [nw.Refund]: {
+            [nx.Refund]: {
                 name: {
                     key: "Label.Dimension.PurchaseStatus.Refund",
                     namespace: u.StoreAnalytics
                 }
             },
-            [nw.Success]: {
+            [nx.Success]: {
                 name: {
                     key: "Label.Dimension.PurchaseStatus.Success",
                     namespace: u.StoreAnalytics
@@ -4275,31 +4275,31 @@
             }
         },
         sn = {
-            [tS.Active]: {
+            [tP.Active]: {
                 name: {
                     key: "Label.Dimension.UserSegActivationStatus.Active",
                     namespace: u.Analytics
                 }
             },
-            [tS.Early]: {
+            [tP.Early]: {
                 name: {
                     key: "Label.Dimension.UserSegActivationStatus.Early",
                     namespace: u.Analytics
                 }
             },
-            [tS.Lapsed]: {
+            [tP.Lapsed]: {
                 name: {
                     key: "Label.Dimension.UserSegActivationStatus.Lapsed",
                     namespace: u.Analytics
                 }
             },
-            [tS.NeverPlayed]: {
+            [tP.NeverPlayed]: {
                 name: {
                     key: "Label.Dimension.UserSegActivationStatus.NeverPlayed",
                     namespace: u.Analytics
                 }
             },
-            [tS.Reactivated]: {
+            [tP.Reactivated]: {
                 name: {
                     key: "Label.Dimension.UserSegActivationStatus.Reactivated",
                     namespace: u.Analytics
@@ -4547,7 +4547,7 @@
                     namespace: u.Analytics
                 },
                 valueType: aW.Enum,
-                dimensionValues: w,
+                dimensionValues: x,
                 supportedFilterOperations: [aK.Contains, aK.NotContains],
                 renderer: {
                     breakdownValueKeys: tH
@@ -4987,7 +4987,7 @@
                     namespace: u.Analytics
                 },
                 valueType: aW.Enum,
-                dimensionValues: eP,
+                dimensionValues: ev,
                 supportedFilterOperations: [aK.Contains, aK.NotContains],
                 renderer: {
                     breakdownValueKeys: t2
@@ -5171,7 +5171,7 @@
                     namespace: u.Analytics
                 },
                 valueType: aW.Enum,
-                dimensionValues: ew,
+                dimensionValues: ex,
                 supportedFilterOperations: [aK.Contains, aK.NotContains],
                 renderer: {
                     breakdownValueKeys: t3
@@ -5733,13 +5733,13 @@
                     namespace: u.Analytics
                 },
                 valueType: aW.Enum,
-                dimensionValues: iS,
+                dimensionValues: iP,
                 supportedFilterOperations: [aK.Contains, aK.NotContains],
                 renderer: {
                     breakdownValueKeys: ay
                 },
                 breakdownOrdering: {
-                    completeOrder: [iS.Male, iS.Female, iS.Unknown]
+                    completeOrder: [iP.Male, iP.Female, iP.Unknown]
                 }
             },
             [A.HttpServiceDomains]: {
@@ -5984,7 +5984,7 @@
                 dimensionValues: iq,
                 supportedFilterOperations: [aK.Contains, aK.NotContains],
                 renderer: {
-                    breakdownValueKeys: aP
+                    breakdownValueKeys: av
                 },
                 breakdownOrdering: {
                     completeOrder: [iq.Error, iq.Warning]
@@ -6003,7 +6003,7 @@
                 dimensionValues: iQ,
                 supportedFilterOperations: [aK.Contains, aK.NotContains],
                 renderer: {
-                    breakdownValueKeys: aS
+                    breakdownValueKeys: aP
                 },
                 breakdownOrdering: {
                     completeOrder: [iQ.Client, iQ.Server]
@@ -6087,7 +6087,7 @@
                 dimensionValues: iY,
                 supportedFilterOperations: [aK.Contains, aK.NotContains],
                 renderer: {
-                    breakdownValueKeys: av
+                    breakdownValueKeys: aS
                 },
                 breakdownOrdering: aH.Unsorted
             },
@@ -6373,10 +6373,10 @@
                     namespace: u.Analytics
                 },
                 valueType: aW.Enum,
-                dimensionValues: nP,
+                dimensionValues: nv,
                 supportedFilterOperations: [aK.Contains, aK.NotContains],
                 renderer: {
-                    breakdownValueKeys: ax
+                    breakdownValueKeys: aw
                 },
                 breakdownOrdering: aH.Unsorted
             },
@@ -6409,7 +6409,7 @@
                 dimensionValues: nC,
                 supportedFilterOperations: [aK.Contains, aK.NotContains],
                 renderer: {
-                    breakdownValueKeys: aw
+                    breakdownValueKeys: ax
                 },
                 breakdownOrdering: aH.Unsorted
             },
@@ -6516,7 +6516,7 @@
                     namespace: u.Analytics
                 },
                 valueType: aW.Enum,
-                dimensionValues: nw,
+                dimensionValues: nx,
                 supportedFilterOperations: [aK.Contains, aK.NotContains],
                 renderer: {
                     breakdownValueKeys: aF
@@ -6981,7 +6981,7 @@
                     namespace: u.Analytics
                 },
                 valueType: aW.Enum,
-                dimensionValues: tS,
+                dimensionValues: tP,
                 supportedFilterOperations: [aK.Contains, aK.NotContains],
                 renderer: {
                     breakdownValueKeys: sn,
@@ -6991,7 +6991,7 @@
                     }
                 },
                 breakdownOrdering: {
-                    completeOrder: [tS.Early, tS.Active, tS.Lapsed, tS.Reactivated, tS.NeverPlayed]
+                    completeOrder: [tP.Early, tP.Active, tP.Lapsed, tP.Reactivated, tP.NeverPlayed]
                 }
             },
             [A.UserSegmentationEngagementLevel]: {
@@ -7183,8 +7183,8 @@
                 breakdownOrdering: aH.SortBySum
             }
         };
-    (sD = sP || (sP = {})).Average = "Average", sD.AveragePerUser = "AveragePerUser", sD.Count = "Count", sD.CountUser = "CountUser", sD.Max = "Max", sD.Min = "Min", sD.Sum = "Sum";
-    var sm = sP;
+    (sD = sv || (sv = {})).Average = "Average", sD.AveragePerUser = "AveragePerUser", sD.Count = "Count", sD.CountUser = "CountUser", sD.Max = "Max", sD.Min = "Min", sD.Sum = "Sum";
+    var sm = sv;
     let sd = {
         [sm.Average]: {
             name: {
@@ -7229,8 +7229,8 @@
             }
         }
     };
-    (sg = sS || (sS = {})).AVG = "AVG", sg.P10 = "P10", sg.P50 = "P50", sg.P90 = "P90";
-    var sy = sS;
+    (sg = sP || (sP = {})).AVG = "AVG", sg.P10 = "P10", sg.P50 = "P50", sg.P90 = "P90";
+    var sy = sP;
     let sp = {
         [sy.AVG]: {
             name: {
@@ -7257,8 +7257,8 @@
             }
         }
     };
-    (sR = sv || (sv = {})).AggregationType = "AggregationType", sR.LatestPlaceVersion = "LatestPlaceVersion", sR.LatestPlaceVersionOnly = "LatestPlaceVersionOnly", sR.PercentileType = "PercentileType", sR.TopAcquisitionSources = "TopAcquisitionSources", sR.TopAvatarItemIdForTotalCreatorEarning = "TopAvatarItemIdForTotalCreatorEarning", sR.TopAvatarItemIdForTotalTransactionCount = "TopAvatarItemIdForTotalTransactionCount", sR.TopCountries = "TopCountries", sR.TopFirstPlayAcquisitionSources = "TopFirstPlayAcquisitionSources", sR.TopInstanceTypeBwTotalRecvBps = "TopInstanceTypeBwTotalRecvBps", sR.TopInstanceTypeBwTotalRecvMaxBytes = "TopInstanceTypeBwTotalRecvMaxBytes", sR.TopInstanceTypeBwTotalRecvUps = "TopInstanceTypeBwTotalRecvUps", sR.TopInstanceTypeBwTotalSendBps = "TopInstanceTypeBwTotalSendBps", sR.TopInstanceTypeBwTotalSendMaxBytes = "TopInstanceTypeBwTotalSendMaxBytes", sR.TopInstanceTypeBwTotalSendUps = "TopInstanceTypeBwTotalSendUps", sR.TopItemSkus = "TopItemSkus", sR.TopItemSkusMigration = "TopItemSkusMigration", sR.TopLocales = "TopLocales", sR.TopProductKeyForRevenue = "TopProductKeyForRevenue", sR.TopProductKeyForSales = "TopProductKeyForSales", sR.TopSimplifiedUrls = "TopSimplifiedUrls", sR.TopSinksItemSkus = "TopSinksItemSkus", sR.TopSinksItemSkusMigration = "TopSinksItemSkusMigration", sR.TopStoreRevenue = "TopStoreRevenue", sR.TopStoreTransactions = "TopStoreTransactions";
-    var sA, sD, sg, sR, sP, sS, sv, sC, sU = sv;
+    (sR = sS || (sS = {})).AggregationType = "AggregationType", sR.LatestPlaceVersion = "LatestPlaceVersion", sR.LatestPlaceVersionOnly = "LatestPlaceVersionOnly", sR.PercentileType = "PercentileType", sR.TopAcquisitionSources = "TopAcquisitionSources", sR.TopAvatarItemIdForTotalCreatorEarning = "TopAvatarItemIdForTotalCreatorEarning", sR.TopAvatarItemIdForTotalTransactionCount = "TopAvatarItemIdForTotalTransactionCount", sR.TopCountries = "TopCountries", sR.TopFirstPlayAcquisitionSources = "TopFirstPlayAcquisitionSources", sR.TopInstanceTypeBwTotalRecvBps = "TopInstanceTypeBwTotalRecvBps", sR.TopInstanceTypeBwTotalRecvMaxBytes = "TopInstanceTypeBwTotalRecvMaxBytes", sR.TopInstanceTypeBwTotalRecvUps = "TopInstanceTypeBwTotalRecvUps", sR.TopInstanceTypeBwTotalSendBps = "TopInstanceTypeBwTotalSendBps", sR.TopInstanceTypeBwTotalSendMaxBytes = "TopInstanceTypeBwTotalSendMaxBytes", sR.TopInstanceTypeBwTotalSendUps = "TopInstanceTypeBwTotalSendUps", sR.TopItemSkus = "TopItemSkus", sR.TopItemSkusMigration = "TopItemSkusMigration", sR.TopLocales = "TopLocales", sR.TopProductKeyForRevenue = "TopProductKeyForRevenue", sR.TopProductKeyForSales = "TopProductKeyForSales", sR.TopSimplifiedUrls = "TopSimplifiedUrls", sR.TopSinksItemSkus = "TopSinksItemSkus", sR.TopSinksItemSkusMigration = "TopSinksItemSkusMigration", sR.TopStoreRevenue = "TopStoreRevenue", sR.TopStoreTransactions = "TopStoreTransactions";
+    var sA, sD, sg, sR, sv, sP, sS, sC, sU = sS;
     (sM = sC || (sC = {})).MetricFanout = "MetricFanout", sM.TopNBreakdown = "TopNBreakdown";
     var sb = sC;
     let sT = {
@@ -7868,8 +7868,8 @@
         };
     A.AbuseCategory, A.AbuseChannel, A.AcquisitionSource, A.ActionType, A.AdAccountId, A.AdFormat, A.AdId, A.AdInstanceName, A.AdPlacementId, A.AdRewardId, A.AdSetId, A.AdsPublisherReportingDataVersion, A.AffiliateLinkDailyCampaignName, A.AffiliateLinkDailyIsEstimate, A.AffiliateLinkDailyLinkId, A.AffiliateLinkDailyTimeBucket, A.AgeGroup, A.AgeGroupV2, sU.AggregationType, A.AgreementId, A.AlertId, A.AnnouncementEventType, A.AnnouncementId, A.AnnouncementPublishDate, A.AttributionDateHour, A.AvatarAssetBundleType, A.AvatarItemId, A.AvatarItemLimitedStatus, A.AvatarItemTargetType, A.AvatarItemTimedOptions, A.BalanceType, A.BandwidthCategory, A.CampaignId, A.CampaignName, A.ClientCpuTimeCategory, A.ClientCpuTimeSubCategory, A.CohortDay, A.CohortWeek, A.CollectibleItemTargetType, A.CollectibleItemTargetTypeId, A.CollectibleItemType, A.CommerceProductId, A.ConfigName, A.Country, A.CpuTimeCategory, A.CpuTimeSubCategory, A.CrashType, A.CreatorRewardsAcquisitionSource, A.CreatorRewardsAudienceExpansionFunnelIsEstimate, A.CreatorRewardsAudienceExpansionFunnelIsReactivation, A.CreatorRewardsAudienceExpansionFunnelIsSignup, A.CreatorRewardsDailyIsEstimate, A.CreatorRewardsDailySource, A.CsmResult, A.CsmTopic, A.CurrencyType, A.CustomEventName, A.CustomField1, A.CustomField2, A.CustomField3, A.DataModelRecvInstanceType, A.DataModelSendInstanceType, A.DataQuality, A.DataStoreOperation, A.DataStoreRequestSource, A.DataStoreStatus, A.DataStoreTypeV2, A.DeviceTrustLevel, A.EarningsType, A.EndTimeUTC, A.EventCategory, A.Experiment, A.ExperimentMetric, A.ExperimentMetricKey, A.ExperimentVariant, A.FirstPlayAcquisitionSource, A.FirstSeenPlaceVersion, A.FlowType, A.ForumContentEventType, A.FromNode, A.FromStage, A.FunnelName, A.FunnelStep, A.GamePassId, A.Gender, A.HttpServiceDomains, A.HttpServiceDomainsExtended, A.HttpServiceMethod, A.HttpServiceStatus, A.ImmersiveEventType, A.IpFamilyName, A.IsFree, A.IsNewUser, A.ItemSku, A.JourneyName, A.JourneyVersion, A.Keyword, sU.LatestPlaceVersion, sU.LatestPlaceVersionOnly, A.LicenseName, A.Locale, A.LocationId, A.LogSeverity, A.LogSource, A.MarketplaceAffiliateLinkId, A.MarketplaceAffiliateLinkItemId, A.MatchmakingAttribute, A.MatchmakingCategoricalCustomSignal, A.MatchmakingNumericCustomSignal, A.MatchmakingPlayerAttributesLoadingStatus, A.MatchmakingRule, A.MatchmakingRulesEffectStatus, A.MembershipEventType, A.MemoryGroup, A.MemoryStoreErrorRateAlertSeverity, A.MemoryStoreMemoryUsageAlertSeverity, A.MemoryStoreOperation, A.MemoryStoreStatus, A.MemoryStoreThrottlingAlertSeverity, A.MemoryUsageCategory, A.MemoryUsageSubCategory, A.MessageHash, A.MetricResultType, A.NotificationChannel, A.OccurrenceId, A.OperatingSystem, A.Outcome, A.PageViewContext, A.PayerStatus, sU.PercentileType, A.Place, A.PlacementType, A.PlaceVersion, A.Platform, A.PlaybackSegment, A.PlaybackType, A.ProductKey, A.ProductType, A.PurchaseStatus, A.RevenueSource, A.RewardedVideoEventType, A.RobloxPlusDevBountyIsEstimate, A.RobloxPlusDevBountySource, A.RobloxPlusDevBountySubscriptionTenureMonth, A.SaleLocation, A.SalesLocation, A.SaleType, A.ServerAgeBucket, A.SessionAcquisitionSource, A.SessionTimeBucket, A.Severity, A.ShareLinkId, A.SimplifiedUrl, A.SourceId, A.SpeechToTextTranscriptionStatus, A.StartTimeUTC, A.StoreItemId, A.StoreItemType, A.TeleportType, A.TextToSpeechRawAudioStatus, A.ThumbnailAsset, A.ThumbnailList, A.ToNode, sU.TopAcquisitionSources, sU.TopAvatarItemIdForTotalCreatorEarning, sU.TopAvatarItemIdForTotalTransactionCount, sU.TopCountries, sU.TopFirstPlayAcquisitionSources, sU.TopInstanceTypeBwTotalRecvBps, sU.TopInstanceTypeBwTotalRecvMaxBytes, sU.TopInstanceTypeBwTotalRecvUps, sU.TopInstanceTypeBwTotalSendBps, sU.TopInstanceTypeBwTotalSendMaxBytes, sU.TopInstanceTypeBwTotalSendUps, sU.TopItemSkus, sU.TopItemSkusMigration, sU.TopLocales, sU.TopProductKeyForRevenue, sU.TopProductKeyForSales, sU.TopSimplifiedUrls, sU.TopSinksItemSkus, sU.TopSinksItemSkusMigration, sU.TopStoreRevenue, sU.TopStoreTransactions, A.ToStage, A.TransactionType, A.Universe, A.UserO18Eligibility, A.UserSegmentationAccountAge, A.UserSegmentationAcquisitionSource, A.UserSegmentationActivationStatus, A.UserSegmentationEngagementLevel, A.UserSegmentationPayerStatus, A.UserSegmentationPlatformActivationStatus, A.UserSegmentationPlatformSpenderStatus, A.UserSegmentationReturnStatus, A.VideoType, A.ViolationCategory, A.VirtualEventId, A.VoteType, A.WorkflowType, A.Country, A.ItemSku, A.Locale, A.Place, sU.AggregationType, (sE = sh || (sh = {})).Invalid = "Invalid", sE.NA = "NA", sE.Zero = "Zero";
     var sf = sh;
-    R.ActionRatePerDau, R.ActionRatePerDauByActionType, R.ActionRatePerImpression, R.AdsPublisherReportingAdsPerEDAU, R.AdsPublisherReportingArpu, R.AdsPublisherReportingDisplayAdImpressions, R.AdsPublisherReportingImmersiveDisplayRevenue, R.AdsPublisherReportingImmersiveDisplayRobuxEpm, R.AdsPublisherReportingImmersiveEvents, R.AdsPublisherReportingImmersiveVideoViews, R.AdsPublisherReportingPortalRevenueRobux, R.AdsPublisherReportingRobuxEpm, R.AdsPublisherReportingRobuxEpt, R.AdsPublisherReportingTotalImpressions, R.AdsPublisherReportingTotalRevenueRobux, R.AdsPublisherReportingTotalTeleports, R.AdsPublisherReportingVideo2DAdsPerDUV, R.AdsPublisherReportingVideo2DAverageEarningPerDailyUniqueViewer, R.AdsPublisherReportingVideo2DConversionRate, R.AdsPublisherReportingVideo2DDailyUniqueViewer, R.AdsPublisherReportingVideo2DEligibleDau, R.AdsPublisherReportingVideo2DEpmNoUnvalidatedPc, R.AdsPublisherReportingVideo2DEvents, R.AdsPublisherReportingVideo2DFillPercent, R.AdsPublisherReportingVideo2DFills, R.AdsPublisherReportingVideo2DImpressions, R.AdsPublisherReportingVideo2DReachRatio, R.AdsPublisherReportingVideo2DRequests, R.AdsPublisherReportingVideo2DRevenueRobux, R.AdsPublisherReportingVideo2DRewardPercent, R.AdsPublisherReportingVideo2DRewards, R.AdsPublisherReportingVideo2DRobuxEpm, R.AdsRoasEstimate, R.AdsRoasEstimateByUniverse, R.AdsUAEarningsUsdDefaultView, R.AdsUAEarningsUsdDefaultViewByUniverse, R.AdsUAExpNumPlaysDefaultView, R.AdsUAExpNumPlaysDefaultViewByUniverse, R.AdsUAExpNumPlaysNewUserView, R.AdsUAExpNumPlaysNewUserViewByUniverse, R.AdsUAExpNumPlaysResurrected30dUserView, R.AdsUAExpNumPlaysResurrected30dUserViewByUniverse, R.AdsUAExpNumPlaysResurrected7dUserView, R.AdsUAExpNumPlaysResurrected7dUserViewByUniverse, R.AdsUAExpNumPlaysReturningUserView, R.AdsUAExpNumPlaysReturningUserViewByUniverse, R.AdsUAExpPlaytimeDefaultView, R.AdsUAExpPlaytimeDefaultViewByUniverse, R.AdsUAExpPlaytimeNewUserView, R.AdsUAExpPlaytimeNewUserViewByUniverse, R.AdsUAExpPlaytimeResurrected30dUserView, R.AdsUAExpPlaytimeResurrected30dUserViewByUniverse, R.AdsUAExpPlaytimeResurrected7dUserView, R.AdsUAExpPlaytimeResurrected7dUserViewByUniverse, R.AdsUAExpPlaytimeReturningUserView, R.AdsUAExpPlaytimeReturningUserViewByUniverse, R.AdsUAExpRobuxRevenueDefaultView, R.AdsUAExpRobuxRevenueDefaultViewByUniverse, R.AdsUAExpRobuxRevenueNewUserView, R.AdsUAExpRobuxRevenueNewUserViewByUniverse, R.AdsUAExpRobuxRevenueResurrected30dUserView, R.AdsUAExpRobuxRevenueResurrected30dUserViewByUniverse, R.AdsUAExpRobuxRevenueResurrected7dUserView, R.AdsUAExpRobuxRevenueResurrected7dUserViewByUniverse, R.AdsUAExpRobuxRevenueReturningUserView, R.AdsUAExpRobuxRevenueReturningUserViewByUniverse, R.AdsUANumClicksDefaultView, R.AdsUANumClicksDefaultViewByUniverse, R.AdsUANumClicksNewUsers, R.AdsUANumClicksNewUsersByUniverse, R.AdsUANumClicksResurrected30dUsers, R.AdsUANumClicksResurrected30dUsersByUniverse, R.AdsUANumClicksResurrected7dUsers, R.AdsUANumClicksResurrected7dUsersByUniverse, R.AdsUANumClicksReturningUsers, R.AdsUANumClicksReturningUsersByUniverse, R.AdsUANumImpressionsDefaultView, R.AdsUANumImpressionsDefaultViewByUniverse, R.AdsUANumImpressionsNewUsers, R.AdsUANumImpressionsNewUsersByUniverse, R.AdsUANumImpressionsResurrected30dUsers, R.AdsUANumImpressionsResurrected30dUsersByUniverse, R.AdsUANumImpressionsResurrected7dUsers, R.AdsUANumImpressionsResurrected7dUsersByUniverse, R.AdsUANumImpressionsReturningUsers, R.AdsUANumImpressionsReturningUsersByUniverse, R.AdsUANumPlaysDefaultView, R.AdsUANumPlaysDefaultViewByUniverse, R.AdsUANumPlaysNewUserView, R.AdsUANumPlaysNewUserViewByUniverse, R.AdsUANumPlaysResurrected30dUserView, R.AdsUANumPlaysResurrected30dUserViewByUniverse, R.AdsUANumPlaysResurrected7dUserView, R.AdsUANumPlaysResurrected7dUserViewByUniverse, R.AdsUANumPlaysReturningUserView, R.AdsUANumPlaysReturningUserViewByUniverse, R.AdsUAPlaytimeDefaultView, R.AdsUAPlaytimeDefaultViewByUniverse, R.AdsUAPlaytimeNewUserView, R.AdsUAPlaytimeNewUserViewByUniverse, R.AdsUAPlaytimeResurrected30dUserView, R.AdsUAPlaytimeResurrected30dUserViewByUniverse, R.AdsUAPlaytimeResurrected7dUserView, R.AdsUAPlaytimeResurrected7dUserViewByUniverse, R.AdsUAPlaytimeReturningUserView, R.AdsUAPlaytimeReturningUserViewByUniverse, R.AdsUARoas, R.AdsUARoasByUniverse, R.AdsUARobuxRevenueDefaultView, R.AdsUARobuxRevenueDefaultViewByUniverse, R.AdsUARobuxRevenueNewUserView, R.AdsUARobuxRevenueNewUserViewByUniverse, R.AdsUARobuxRevenueResurrected30dUserView, R.AdsUARobuxRevenueResurrected30dUserViewByUniverse, R.AdsUARobuxRevenueResurrected7dUserView, R.AdsUARobuxRevenueResurrected7dUserViewByUniverse, R.AdsUARobuxRevenueReturningUserView, R.AdsUARobuxRevenueReturningUserViewByUniverse, R.AdsUATotalSpendMicroUsdDefaultView, R.AdsUATotalSpendMicroUsdDefaultViewByUniverse, R.AdsUATotalSpendMicroUsdNewUsers, R.AdsUATotalSpendMicroUsdNewUsersByUniverse, R.AdsUATotalSpendMicroUsdResurrected30dUsers, R.AdsUATotalSpendMicroUsdResurrected30dUsersByUniverse, R.AdsUATotalSpendMicroUsdResurrected7dUsers, R.AdsUATotalSpendMicroUsdResurrected7dUsersByUniverse, R.AdsUATotalSpendMicroUsdReturningUsers, R.AdsUATotalSpendMicroUsdReturningUsersByUniverse, R.AdsVideo2DAdsPerEDAUBreakdown, R.AdsVideo2DEligibleDauBreakdown, R.AdsVideo2DReachRatioBreakdown, R.AffiliateLinkDailyAffiliateActiveSpenderReactivationsPayoutRobux, R.AffiliateLinkDailyAffiliateReactivationsPayoutRobux, R.AffiliateLinkDailyAffiliateSignupsPayoutRobux, R.AffiliateLinkDailyAverageRobuxBookingsPerReactivationSpender, R.AffiliateLinkDailyAverageRobuxBookingsPerSignupSpender, R.AffiliateLinkDailyBookingsPerSpenderCombined, R.AffiliateLinkDailyQualifiedActiveSpenderReactivations, R.AffiliateLinkDailyQualifiedReactivations, R.AffiliateLinkDailyQualifiedReactivationsBookingsRobux, R.AffiliateLinkDailyQualifiedReactivationsSpenders, R.AffiliateLinkDailyQualifiedSignups, R.AffiliateLinkDailyQualifiedSignupsBookingsRobux, R.AffiliateLinkDailyQualifiedSignupSpenders, R.AffiliateLinkDailyTotalPayoutRobux, R.AffiliateLinkDailyUniqueClick, R.AffiliateLinkDailyVisits, R.AlertIncidentCount, R.Attribution1DPayerConversionRatio, R.Attribution1DPayerConversionRatioMigration, R.Attribution1DPlaytimePerUserInMinutes, R.Attribution1DPlaytimePerUserInMinutesMigration, R.Attribution1DRobuxPerUser, R.Attribution1DRobuxPerUserMigration, R.Attribution30DPayerConversionRatio, R.Attribution30DPayerConversionRatioMigration, R.Attribution30DPlaytimePerUserInMinutes, R.Attribution30DPlaytimePerUserInMinutesMigration, R.Attribution30DRobuxPerUser, R.Attribution30DRobuxPerUserMigration, R.Attribution7DPayerConversionRatio, R.Attribution7DPayerConversionRatioMigration, R.Attribution7DPlaytimePerUserInMinutes, R.Attribution7DPlaytimePerUserInMinutesMigration, R.Attribution7DRobuxPerUser, R.Attribution7DRobuxPerUserMigration, R.AttributionD1RetentionRatio, R.AttributionD1RetentionRatioMigration, R.AttributionD30RetentionRatio, R.AttributionD30RetentionRatioMigration, R.AttributionD7RetentionRatio, R.AttributionD7RetentionRatioMigration, R.AverageImpressionsPerUser, R.AveragePlayTimeMinutesPerDAU, R.AverageRevenuePerPayingUser, R.AverageRevenuePerUser, R.AverageSessionLengthMinutes, R.AvgViewTimePerView, R.AvgViewTimePerViewer, d.BandwidthTotalRecvBpsAvg, R.BandwidthTotalRecvBpsForOrdering, d.BandwidthTotalRecvBpsP10, d.BandwidthTotalRecvBpsP50, d.BandwidthTotalRecvBpsP90, R.BandwidthTotalRecvMaxBytes, R.BandwidthTotalRecvUpdatesPerSecond, d.BandwidthTotalSendBpsAvg, R.BandwidthTotalSendBpsForOrdering, d.BandwidthTotalSendBpsP10, d.BandwidthTotalSendBpsP50, d.BandwidthTotalSendBpsP90, R.BandwidthTotalSendMaxBytes, R.BandwidthTotalSendUpdatesPerSecond, R.BonusPromotionsAwardedCount, R.BonusPromotionsGameJoinCount, R.BonusPromotionsImpressionCount, R.ClickCVR, R.ClickCVRMigration, R.ClientCpuTimeAvg, R.ClientCrashCount, R.ClientCrashCountMigration, R.ClientCrashRate15m, R.ClientCrashRate15mMigration, R.ClientCrashRateNotStableAlert, R.ClientCrashRateNotStableAlertMigration, d.ClientFpsAvg, d.ClientFpsP10, d.ClientFpsP50, d.ClientFpsP90, d.ClientMemoryUsageAvg, d.ClientMemoryUsageP10, d.ClientMemoryUsageP50, d.ClientMemoryUsageP90, d.ClientMemoryUsagePercentageAvg, d.ClientMemoryUsagePercentageP10, d.ClientMemoryUsagePercentageP50, d.ClientMemoryUsagePercentageP90, R.CommentRatePerImpression, R.CommerceCheckouts, R.CommerceClicks, R.CommerceGMV, R.CommerceImpressions, R.CommerceOrders, R.CommerceQuantitySold, R.CommerceUniqueCheckouts, R.CommerceUniqueClicks, R.CommerceUniqueImpressions, R.CommerceUniqueOrders, R.CommunityAnnouncementDeliveries, R.CommunityAnnouncementEngagement, R.CommunityAnnouncementEventCount, R.CommunityAnnouncementNetReactions, R.CommunityAnnouncementNotificationCTR, R.CommunityAnnouncementUniqueClicks, R.CommunityAnnouncementUniqueUsers, R.CommunityForumContentEventCount, R.CommunityForumContentUniqueUsers, R.CommunityGroupPageUniqueVisitors, R.CommunityGroupPageViews, R.CommunityMembershipChangeEvents, R.CommunityMembershipCount, R.ComputeEfficiency, R.ConcurrentPlayers, d.CoresPerServerAvg, d.CoresPerServerP10, d.CoresPerServerP50, d.CoresPerServerP90, R.CpuCoreUtilization, d.CpuTimeAvg, d.CpuTimeP10, d.CpuTimeP50, d.CpuTimeP90, R.CreatorRewardsAudienceExpansionFunnelEstimatedPayout, R.CreatorRewardsAudienceExpansionFunnelPayerConversion60D, R.CreatorRewardsAudienceExpansionFunnelPayerConversion7D, R.CreatorRewardsAudienceExpansionFunnelPercentOfNewUsers, R.CreatorRewardsAudienceExpansionFunnelReactivations, R.CreatorRewardsAudienceExpansionFunnelRetentionD1, R.CreatorRewardsAudienceExpansionFunnelRetentionD7, R.CreatorRewardsAudienceExpansionFunnelRevenue1D, R.CreatorRewardsAudienceExpansionFunnelRevenue60D, R.CreatorRewardsAudienceExpansionFunnelRevenue7D, R.CreatorRewardsAudienceExpansionFunnelRevenuePerPayer60D, R.CreatorRewardsAudienceExpansionFunnelRevenuePerPayer7D, R.CreatorRewardsAudienceExpansionFunnelRevenuePerUser60D, R.CreatorRewardsAudienceExpansionFunnelRevenuePerUser7D, R.CreatorRewardsAudienceExpansionFunnelSignups, R.CreatorRewardsAudienceExpansionFunnelUserCount, R.CreatorRewardsAverageRobuxBookingsPerSpender, R.CreatorRewardsLifetimeEstimatedAffiliatePayoutRobux, R.CreatorRewardsLifetimeQualifiedReactivations, R.CreatorRewardsLifetimeQualifiedSignups, R.CreatorRewardsLifetimeQualifiedSpenders, R.CreatorWalletClosingBalanceUsd, R.CreatorWalletIncomingUsd, R.CreatorWalletOutgoingUsd, R.CsmFanoutRatio, R.CsmFanoutRatioExtended, R.CsmGameServersConnectedCount, R.CsmMessageSizeBytes, R.CsmMessageSizeQuota, R.CsmPublishedMessagesCount, R.CsmPublishedMessagesExtendedCount, R.CsmReceivedMessagesCount, R.CsmReceivedMessagesExtendedCount, R.CsmReceivedMessagesQuota, R.CubeDailyRequests, R.CubeLatencyAvg, R.CubeLatencyP99, R.CubeOutcomes, R.CubeTotalRequests, d.CustomEventAvgPerUserValue, d.CustomEventAvgValue, d.CustomEventCount, d.CustomEventCountUser, d.CustomEventMaxValue, d.CustomEventMinValue, d.CustomEventSumValue, R.D1Retention, R.D30Retention, R.D7Retention, R.DailyActiveUsers, R.DailyCohortRetention, R.DailyRetentionCohortNoDim, R.DailyRevenue, R.DataStoreConsumedListRequests, R.DataStoreConsumedReadRequests, R.DataStoreConsumedRemoveRequests, R.DataStoreConsumedWriteRequests, R.DataStoreListRequests, R.DataStoreListRequestsByEndpoint, R.DataStoreListRequestsQuota, R.DataStoreListRequestsQuotaOrdered, R.DataStoreListRequestsQuotaStandard, R.DataStoreReadRequests, R.DataStoreReadRequestsByEndpoint, R.DataStoreReadRequestsQuotaOrdered, R.DataStoreReadRequestsQuotaStandard, R.DataStoreRemoveRequests, R.DataStoreRemoveRequestsByEndpoint, R.DataStoreRemoveRequestsQuotaOrdered, R.DataStoreRemoveRequestsQuotaStandard, R.DataStoreRequests, R.DataStoreRequestsByEndpoint, R.DataStoreRequestsByStatus, R.DataStoreStorageQuotaBytes, R.DataStoreStorageUsageBytes, R.DataStoreWriteRequests, R.DataStoreWriteRequestsByEndpoint, R.DataStoreWriteRequestsQuotaOrdered, R.DataStoreWriteRequestsQuotaStandard, R.DauMauStickiness, R.DeviceTrustDailyActiveUsers, R.DeviceTrustRobuxSpentLast28Days, R.EarningsTotalUsd, R.EconomyAverageWalletBalance, R.EconomyTransactionAmount, R.EconomyTransactionAmountSinks, R.EconomyTransactionCount, R.EndToEndCVR, R.EndToEndCVRMigration, R.ErrorCount, R.EventAvgDailyActiveUsers, R.EventAvgDailyRevenue, R.EventAvgDailyUserPlaytimeMinutes, R.EventAvgRevenuePerDailyActiveUser, d.ExperienceLaunchTimeP50, d.ExperienceLaunchTimeP90, R.ExperimentMetricAdsArpu, R.ExperimentMetricAdsArpuV2, R.ExperimentMetricAdsEarnings, R.ExperimentMetricAdsEarningsV2, R.ExperimentMetricAdsFrequency, R.ExperimentMetricAdsFrequencyV2, R.ExperimentMetricAdsImpressions, R.ExperimentMetricAdsImpressionsV2, R.ExperimentMetricAdsOptInRate, R.ExperimentMetricAdsOptInRateV2, R.ExperimentMetricAverageCurrencySinkDelta, R.ExperimentMetricAverageCurrencySourceDelta, R.ExperimentMetricAverageCustomValue, R.ExperimentMetricAverageCustomValueAllUsers, R.ExperimentMetricAverageNetCurrencyDelta, R.ExperimentMetricAverageRevenuePerPayingUser, R.ExperimentMetricAverageRevenuePerPayingUserV2, R.ExperimentMetricAverageRevenuePerUser, R.ExperimentMetricAverageRevenuePerUserV2, R.ExperimentMetricAverageSessionTime, R.ExperimentMetricAverageSessionTimeV2, R.ExperimentMetricCustomPenetration, R.ExperimentMetricDay1Retention, R.ExperimentMetricDay1RetentionV2, R.ExperimentMetricDay7Retention, R.ExperimentMetricDay7RetentionV2, R.ExperimentMetricMean, R.ExperimentMetricPayerConversionRate, R.ExperimentMetricPayerConversionRateV2, R.ExperimentMetricPerSessionFunnelConversion, R.ExperimentMetricPerUserFunnelConversion, R.ExperimentMetricPlaytimePerUser, R.ExperimentMetricPlaytimePerUserV2, R.ExperimentMetricQualifiedPlayThroughRate, R.ExperimentMetricQualifiedPlayThroughRateV2, R.ForwardD1Retention, R.ForwardD30Retention, R.ForwardD7Retention, R.FriendReferralAverageRobuxBookingsPerSpender, R.FriendReferralLifetimeEstimatedAffiliatePayoutRobux, R.FriendReferralLifetimeQualifiedSignups, R.FriendReferralLifetimeQualifiedSpenders, R.FriendReferralLifetimeVisits, R.FunnelCohortCompletionRate, R.FunnelCohortSessionCompletionRate, R.FunnelStepChurnRate, R.FunnelStepCompletionRate, R.FunnelStepOverallCompletionRate, R.FunnelStepTotalCount, R.FunnelUserChurnRate, R.FunnelUserOverallCompletionRate, R.FunnelUserStepCompletionRate, R.FunnelUserTotalCount, R.HttpServiceRequestsCount, R.HttpServiceRequestsExtendedCount, R.HttpServiceRequestsV2, d.HttpServiceResponseTimeAvg, d.HttpServiceResponseTimeExtendedAvg, d.HttpServiceResponseTimeExtendedP10, d.HttpServiceResponseTimeExtendedP50, d.HttpServiceResponseTimeExtendedP90, d.HttpServiceResponseTimeP10, d.HttpServiceResponseTimeP50, d.HttpServiceResponseTimeP90, R.ImpressionCVR, R.ImpressionCVRMigration, R.IphEarningsRobux, R.IphEarningsRobuxPartial, R.IphTransactionCount, R.IphTransactionCountPartial, R.ItemAvatar3dLimitedAvailableQuantity, R.ItemAvatar3dLimitedTotalQuantity, R.ItemAverageTransactionPrice, R.ItemLifetimeCreatorEarning, R.ItemLifetimeRebateAmount, R.ItemLifetimeRobuxSpent, R.ItemLifetimeTransactionCount, R.ItemLimitedSoldPercentage, R.ItemMonetizationRevenue, R.ItemMonetizationSales, R.ItemPublishAdvance, R.ItemPublishAdvanceRecoupedPercentage, R.ItemTotalCreatorEarning, R.ItemTotalRobuxSpent, R.ItemTotalTransactionCount, R.JoinRatePerImpression, R.JourneyCompletionUsers, R.JourneyEntryTransitions, R.JourneyLastStageTransitions, R.JourneyNodeTransitionChurnCount, R.JourneyNodeTransitionChurnRate, R.JourneyNodeTransitionCount, R.JourneyNodeUserChurnCount, R.JourneyNodeUserChurnRate, R.JourneyNodeUserCount, R.JourneyStageChurnRate, R.JourneyStageSkipRate, R.JourneyStageSkipTransitionCount, R.JourneyStageSkipTransitionRate, R.JourneyStageSkipUserCount, R.JourneyStageTransitionChurnRate, R.JourneyStageTransitionCount, R.JourneyStageUserCount, R.JourneyTotalUsers, R.JourneyTransitionCount, R.JourneyTransitionCountUser, R.JourneyTransitionPctOfSource, R.JourneyTransitionPctOfStart, R.JourneyUserPctOfSource, R.JourneyUserPctOfStart, R.MaintenanceThreshold, R.MarketplaceAffiliateLinkAttributedPurchases, R.MarketplaceAffiliateLinkAttributedSpendRobux, R.MarketplaceAffiliateLinkClicks, R.MarketplaceAffiliateLinkConversionRate, R.MarketplaceAffiliateLinkEstimatedPayoutRobux, R.MarketplaceAffiliateLinkUniqueClicks, d.MatchmakingCategoricalCustomSignalsSimilarityRatioAvg, d.MatchmakingCategoricalCustomSignalsSimilarityRatioP10, d.MatchmakingCategoricalCustomSignalsSimilarityRatioP50, d.MatchmakingCategoricalCustomSignalsSimilarityRatioP90, d.MatchmakingNumericCustomSignalsDifferenceAvg, d.MatchmakingNumericCustomSignalsDifferenceP10, d.MatchmakingNumericCustomSignalsDifferenceP50, d.MatchmakingNumericCustomSignalsDifferenceP90, R.MatchmakingPlayerAttributesLoadingStatusAvg, d.MatchmakingSignalsAgeDifferenceAvg, d.MatchmakingSignalsAgeDifferenceP10, d.MatchmakingSignalsAgeDifferenceP50, d.MatchmakingSignalsAgeDifferenceP90, d.MatchmakingSignalsCommonChatGroupRatioAvg, d.MatchmakingSignalsCommonChatGroupRatioP10, d.MatchmakingSignalsCommonChatGroupRatioP50, d.MatchmakingSignalsCommonChatGroupRatioP90, d.MatchmakingSignalsCommonDeviceTypeRatioAvg, d.MatchmakingSignalsCommonDeviceTypeRatioP10, d.MatchmakingSignalsCommonDeviceTypeRatioP50, d.MatchmakingSignalsCommonDeviceTypeRatioP90, d.MatchmakingSignalsCommonLanguageRatioAvg, d.MatchmakingSignalsCommonLanguageRatioP10, d.MatchmakingSignalsCommonLanguageRatioP50, d.MatchmakingSignalsCommonLanguageRatioP90, d.MatchmakingSignalsDeltaPingAvg, d.MatchmakingSignalsDeltaPingP10, d.MatchmakingSignalsDeltaPingP50, d.MatchmakingSignalsDeltaPingP90, d.MatchmakingSignalsEstimatePingAvg, d.MatchmakingSignalsEstimatePingP10, d.MatchmakingSignalsEstimatePingP50, d.MatchmakingSignalsEstimatePingP90, d.MatchmakingSignalsOccupancyRatioAvg, d.MatchmakingSignalsOccupancyRatioP10, d.MatchmakingSignalsOccupancyRatioP50, d.MatchmakingSignalsOccupancyRatioP90, d.MatchmakingSignalsPlayHistoryDifferenceAvg, d.MatchmakingSignalsPlayHistoryDifferenceP10, d.MatchmakingSignalsPlayHistoryDifferenceP50, d.MatchmakingSignalsPlayHistoryDifferenceP90, R.MatchmakingSignalsPreferredPlayerMatchRatioAvg, d.MatchmakingSignalsVoiceChatRatioAvg, d.MatchmakingSignalsVoiceChatRatioP10, d.MatchmakingSignalsVoiceChatRatioP50, d.MatchmakingSignalsVoiceChatRatioP90, R.MemoryStoreErrorRateAlert, R.MemoryStoreMemoryQuotaBytes, R.MemoryStoreMemoryUsageAlert, R.MemoryStoreMemoryUsageBytes, R.MemoryStoreRequests, R.MemoryStoreRequestsByEndpoint, R.MemoryStoreRequestsByStatus, R.MemoryStoreRequestUnits, R.MemoryStoreRequestUnitsByEndpoint, R.MemoryStoreRequestUnitsQuota, R.MemoryStoreThrottlingAlert, d.MemoryUsageAvg, d.MemoryUsageP10, d.MemoryUsageP50, d.MemoryUsageP90, R.MonthlyActiveUsers, R.OomUnexpectedExits, R.OomUnexpectedExitsMigration, R.PayingUsers, R.PayingUsersCVR, R.PayoutRobux, R.PayoutRobuxV2, R.PeakConcurrentPlayers, R.PersonalizedShopsConversionRate, R.PersonalizedShopsImpressions, R.PersonalizedShopsPurchases, R.PersonalizedShopsRevenue, R.PlayerFeedbackVotesCount, R.PotentialEarningsTotalUsd, R.PotentialExtraEarningsTotalUsd, R.PurchaseRatePerImpression, R.QualifiedEndToEndCVR, R.QualifiedEndToEndCVRMigration, R.QualifiedUniqueUsersWithPlaySessions, R.QualifiedUniqueUsersWithPlaySessionsMigration, R.ReactionRatePerImpression, R.RecommendationDau, R.RecommendationViewsTotal, R.RelativeThresholdCapture, R.RFYD1CoplayDays, R.RFYD1Playtime, R.RFYD1QualifiedPlaySessions, R.RFYD1RobuxSpend, R.RFYD1SpendDay, R.RFYD2To7CoplayDays, R.RFYD2To7PlayDays, R.RFYD2To7Playtime, R.RFYD2To7QualifiedPlaySessions, R.RFYD2To7RobuxSpend, R.RFYD2To7SpendDays, R.RFYD8To28CoplayDays, R.RFYD8To28PlayDays, R.RFYD8To28Playtime, R.RFYD8To28QualifiedPlaySessions, R.RFYD8To28RobuxSpend, R.RFYD8To28SpendDays, R.RFYDeepEngagementRate, R.RFYDuration0To60, R.RFYDuration181To600, R.RFYDuration61To180, R.RFYDurationGreaterThan600, R.RFYL7IntentionalCoplayDays, R.RFYL7PlayDays, R.RFYL7PlaySessionsPerUser, R.RFYL7PlayTime, R.RFYL7RobuxSpent, R.RFYL7RobuxSpentDays, R.RFYPlayThroughRate, R.RFYQualifiedPTR, R.RFYUniqueNotInterestedUsersPerMillionImpressions, R.RobloxPlusDevBountyAvgPlaytimePerSubscriberMins, R.RobloxPlusDevBountyAvgRobuxSpentPerSubscriber, R.RobloxPlusDevBountyDailySubscribers, R.RobloxPlusDevBountyPayoutRobux, R.RobloxPlusDevBountySubscriberCount, R.RobloxPlusDevBountySubscriberSpend, R.RotraceTotalCalls, R.RSVPCount, R.ServerCrashCount, d.ServerFrameRateAvg, d.ServerFrameRateP10, d.ServerFrameRateP50, d.ServerFrameRateP90, d.ServerMemoryUsageAvg, d.ServerMemoryUsageP10, d.ServerMemoryUsageP50, d.ServerMemoryUsageP90, d.SessionDurationSecondsAvg, d.SessionDurationSecondsAvgMigration, d.SessionDurationSecondsP10, d.SessionDurationSecondsP10Migration, d.SessionDurationSecondsP50, d.SessionDurationSecondsP50Migration, d.SessionDurationSecondsP90, d.SessionDurationSecondsP90Migration, R.ShareLinkAttribution1DPayerConversionRatio, R.ShareLinkAttribution1DPlaytimePerUserInMinutes, R.ShareLinkAttribution1DRobuxPerUser, R.ShareLinkAttribution30DPayerConversionRatio, R.ShareLinkAttribution30DPlaytimePerUserInMinutes, R.ShareLinkAttribution30DRobuxPerUser, R.ShareLinkAttribution7DPayerConversionRatio, R.ShareLinkAttribution7DPlaytimePerUserInMinutes, R.ShareLinkAttribution7DRobuxPerUser, R.ShareLinkAttributionD1RetentionRatio, R.ShareLinkAttributionD30RetentionRatio, R.ShareLinkAttributionD7RetentionRatio, R.ShareLinkClickCVR, R.ShareLinkQualifiedClickCVR, R.ShareLinkQualifiedUniqueUsersWithPlaySessions, R.ShareLinkUniqueUsersWithClicks, R.ShareLinkUniqueUsersWithPlaySessions, R.ShareRatePerImpression, R.SourceCount, R.SourceCountRatioKpi, R.SpeechToTextTranscriptionQuota, R.SpeechToTextTranscriptionStatuses, R.SpeechToTextTranscriptionUsage, R.SponsoredAdPlays, R.StoreRevenue, R.StoreTransactions, R.TargetThreshold, R.TextToSpeechAssetSuccesses, R.TextToSpeechRawAudioErrors, R.TextToSpeechRawAudioQuota, R.TextToSpeechRawAudioSuccesses, R.ThumbnailAverageSessionLengthMinutes, R.ThumbnailImpressions, R.ThumbnailL7QualifiedPTR, R.ThumbnailQualifiedPlays, R.ThumbnailQualifiedPTR, R.ThumbnailWinningSegments, R.TotalAbuseReports, R.TotalActions, R.TotalActionsByActionType, R.TotalComments, R.TotalJoins, R.TotalPlayTimeHours, R.TotalPurchases, R.TotalReactionsAdded, R.TotalSessionsEndedInBucket, R.TotalShares, R.TotalViewHours, R.UniqueAbuseReportSubmittersPer1000PlaytimeHours, R.UniqueItemsPerUser, R.UniqueServerShutdowns, R.UniqueUsersWithClicks, R.UniqueUsersWithClicksMigration, R.UniqueUsersWithImpressions, R.UniqueUsersWithImpressionsMigration, R.UniqueUsersWithPlaySessions, R.UniqueUsersWithPlaySessionsMigration, R.UsersInExperiment, R.UsersInExperimentV2, R.UsersJoinedFromNotifications, R.VideoServiceExclusivePlaybackSeconds, R.VideoServicePlaybackSeconds, R.Visits, R.WeeklyCohortRetention, (sN = sL || (sL = {})).ActionRatePerDau = "ActionRatePerDau", sN.ActionRatePerDauByActionType = "ActionRatePerDauByActionType", sN.ActionRatePerImpression = "ActionRatePerImpression", sN.AdsPublisherReportingAdsPerEDAU = "AdsPublisherReportingAdsPerEDAU", sN.AdsPublisherReportingDisplayAdImpressions = "AdsPublisherReportingDisplayAdImpressions", sN.AdsPublisherReportingImmersiveDisplayRevenue = "AdsPublisherReportingImmersiveDisplayRevenue", sN.AdsPublisherReportingImmersiveDisplayRobuxEpm = "AdsPublisherReportingImmersiveDisplayRobuxEpm", sN.AdsPublisherReportingImmersiveEvents = "AdsPublisherReportingImmersiveEvents", sN.AdsPublisherReportingImmersiveVideoViews = "AdsPublisherReportingImmersiveVideoViews", sN.AdsPublisherReportingPortalRevenueRobux = "AdsPublisherReportingPortalRevenueRobux", sN.AdsPublisherReportingRobuxEpm = "AdsPublisherReportingRobuxEpm", sN.AdsPublisherReportingRobuxEpt = "AdsPublisherReportingRobuxEpt", sN.AdsPublisherReportingTotalImpressions = "AdsPublisherReportingTotalImpressions", sN.AdsPublisherReportingTotalRevenueRobux = "AdsPublisherReportingTotalRevenueRobux", sN.AdsPublisherReportingTotalTeleports = "AdsPublisherReportingTotalTeleports", sN.AdsPublisherReportingVideo2DAdsPerDUV = "AdsPublisherReportingVideo2DAdsPerDUV", sN.AdsPublisherReportingVideo2DAverageEarningPerDailyUniqueViewer = "AdsPublisherReportingVideo2DAverageEarningPerDailyUniqueViewer", sN.AdsPublisherReportingVideo2DConversionRate = "AdsPublisherReportingVideo2DConversionRate", sN.AdsPublisherReportingVideo2DDailyUniqueViewer = "AdsPublisherReportingVideo2DDailyUniqueViewer", sN.AdsPublisherReportingVideo2DEligibleDau = "AdsPublisherReportingVideo2DEligibleDau", sN.AdsPublisherReportingVideo2DEpmNoUnvalidatedPc = "AdsPublisherReportingVideo2DEpmNoUnvalidatedPc", sN.AdsPublisherReportingVideo2DEvents = "AdsPublisherReportingVideo2DEvents", sN.AdsPublisherReportingVideo2DFillPercent = "AdsPublisherReportingVideo2DFillPercent", sN.AdsPublisherReportingVideo2DFills = "AdsPublisherReportingVideo2DFills", sN.AdsPublisherReportingVideo2DImpressions = "AdsPublisherReportingVideo2DImpressions", sN.AdsPublisherReportingVideo2DReachRatio = "AdsPublisherReportingVideo2DReachRatio", sN.AdsPublisherReportingVideo2DRequests = "AdsPublisherReportingVideo2DRequests", sN.AdsPublisherReportingVideo2DRevenueRobux = "AdsPublisherReportingVideo2DRevenueRobux", sN.AdsPublisherReportingVideo2DRewardPercent = "AdsPublisherReportingVideo2DRewardPercent", sN.AdsPublisherReportingVideo2DRewards = "AdsPublisherReportingVideo2DRewards", sN.AdsPublisherReportingVideo2DRobuxEpm = "AdsPublisherReportingVideo2DRobuxEpm", sN.AdsUAEarningsUsdDefaultViewByUniverse = "AdsUAEarningsUsdDefaultViewByUniverse", sN.AdsUANumClicksDefaultViewByUniverse = "AdsUANumClicksDefaultViewByUniverse", sN.AdsUANumClicksNewUsersByUniverse = "AdsUANumClicksNewUsersByUniverse", sN.AdsUANumClicksResurrected30dUsersByUniverse = "AdsUANumClicksResurrected30dUsersByUniverse", sN.AdsUANumClicksResurrected7dUsersByUniverse = "AdsUANumClicksResurrected7dUsersByUniverse", sN.AdsUANumClicksReturningUsersByUniverse = "AdsUANumClicksReturningUsersByUniverse", sN.AdsUANumImpressionsDefaultViewByUniverse = "AdsUANumImpressionsDefaultViewByUniverse", sN.AdsUANumImpressionsNewUsersByUniverse = "AdsUANumImpressionsNewUsersByUniverse", sN.AdsUANumImpressionsResurrected30dUsersByUniverse = "AdsUANumImpressionsResurrected30dUsersByUniverse", sN.AdsUANumImpressionsResurrected7dUsersByUniverse = "AdsUANumImpressionsResurrected7dUsersByUniverse", sN.AdsUANumImpressionsReturningUsersByUniverse = "AdsUANumImpressionsReturningUsersByUniverse", sN.AdsUANumPlaysDefaultViewByUniverse = "AdsUANumPlaysDefaultViewByUniverse", sN.AdsUANumPlaysNewUserViewByUniverse = "AdsUANumPlaysNewUserViewByUniverse", sN.AdsUANumPlaysResurrected30dUserViewByUniverse = "AdsUANumPlaysResurrected30dUserViewByUniverse", sN.AdsUANumPlaysResurrected7dUserViewByUniverse = "AdsUANumPlaysResurrected7dUserViewByUniverse", sN.AdsUANumPlaysReturningUserViewByUniverse = "AdsUANumPlaysReturningUserViewByUniverse", sN.AdsUAPlaytimeDefaultViewByUniverse = "AdsUAPlaytimeDefaultViewByUniverse", sN.AdsUAPlaytimeNewUserViewByUniverse = "AdsUAPlaytimeNewUserViewByUniverse", sN.AdsUAPlaytimeResurrected30dUserViewByUniverse = "AdsUAPlaytimeResurrected30dUserViewByUniverse", sN.AdsUAPlaytimeResurrected7dUserViewByUniverse = "AdsUAPlaytimeResurrected7dUserViewByUniverse", sN.AdsUAPlaytimeReturningUserViewByUniverse = "AdsUAPlaytimeReturningUserViewByUniverse", sN.AdsUARobuxRevenueDefaultViewByUniverse = "AdsUARobuxRevenueDefaultViewByUniverse", sN.AdsUARobuxRevenueNewUserViewByUniverse = "AdsUARobuxRevenueNewUserViewByUniverse", sN.AdsUARobuxRevenueResurrected30dUserViewByUniverse = "AdsUARobuxRevenueResurrected30dUserViewByUniverse", sN.AdsUARobuxRevenueResurrected7dUserViewByUniverse = "AdsUARobuxRevenueResurrected7dUserViewByUniverse", sN.AdsUARobuxRevenueReturningUserViewByUniverse = "AdsUARobuxRevenueReturningUserViewByUniverse", sN.AdsUATotalSpendMicroUsdDefaultViewByUniverse = "AdsUATotalSpendMicroUsdDefaultViewByUniverse", sN.AdsUATotalSpendMicroUsdNewUsersByUniverse = "AdsUATotalSpendMicroUsdNewUsersByUniverse", sN.AdsUATotalSpendMicroUsdResurrected30dUsersByUniverse = "AdsUATotalSpendMicroUsdResurrected30dUsersByUniverse", sN.AdsUATotalSpendMicroUsdResurrected7dUsersByUniverse = "AdsUATotalSpendMicroUsdResurrected7dUsersByUniverse", sN.AdsUATotalSpendMicroUsdReturningUsersByUniverse = "AdsUATotalSpendMicroUsdReturningUsersByUniverse", sN.AdsVideo2DAdsPerEDAUBreakdown = "AdsVideo2DAdsPerEDAUBreakdown", sN.AdsVideo2DEligibleDauBreakdown = "AdsVideo2DEligibleDauBreakdown", sN.AdsVideo2DReachRatioBreakdown = "AdsVideo2DReachRatioBreakdown", sN.AlertIncidentCount = "AlertIncidentCount", sN.Attribution1DPayerConversionRatio = "Attribution1DPayerConversionRatio", sN.Attribution1DPlaytimePerUserInMinutes = "Attribution1DPlaytimePerUserInMinutes", sN.Attribution1DRobuxPerUser = "Attribution1DRobuxPerUser", sN.Attribution30DPayerConversionRatio = "Attribution30DPayerConversionRatio", sN.Attribution30DPlaytimePerUserInMinutes = "Attribution30DPlaytimePerUserInMinutes", sN.Attribution30DRobuxPerUser = "Attribution30DRobuxPerUser", sN.Attribution7DPayerConversionRatio = "Attribution7DPayerConversionRatio", sN.Attribution7DPlaytimePerUserInMinutes = "Attribution7DPlaytimePerUserInMinutes", sN.Attribution7DRobuxPerUser = "Attribution7DRobuxPerUser", sN.AttributionD1RetentionRatio = "AttributionD1RetentionRatio", sN.AttributionD30RetentionRatio = "AttributionD30RetentionRatio", sN.AttributionD7RetentionRatio = "AttributionD7RetentionRatio", sN.AverageImpressionsPerUser = "AverageImpressionsPerUser", sN.AveragePlayTimeMinutesPerDAU = "AveragePlayTimeMinutesPerDAU", sN.AverageRevenuePerPayingUser = "AverageRevenuePerPayingUser", sN.AverageRevenuePerUser = "AverageRevenuePerUser", sN.AverageSessionLengthMinutes = "AverageSessionLengthMinutes", sN.AvgViewTimePerView = "AvgViewTimePerView", sN.AvgViewTimePerViewer = "AvgViewTimePerViewer", sN.BandwidthTotalRecvBps = "BandwidthTotalRecvBps", sN.BandwidthTotalSendBps = "BandwidthTotalSendBps", sN.ClickCVR = "ClickCVR", sN.ClientCrashCount = "ClientCrashCount", sN.ClientCrashRate15m = "ClientCrashRate15m", sN.ClientFps = "ClientFps", sN.ClientMemoryUsage = "ClientMemoryUsage", sN.ClientMemoryUsagePercentage = "ClientMemoryUsagePercentage", sN.CommentRatePerImpression = "CommentRatePerImpression", sN.CommerceCheckouts = "CommerceCheckouts", sN.CommerceClicks = "CommerceClicks", sN.CommerceGMV = "CommerceGMV", sN.CommerceImpressions = "CommerceImpressions", sN.CommerceOrders = "CommerceOrders", sN.CommerceQuantitySold = "CommerceQuantitySold", sN.CommerceUniqueCheckouts = "CommerceUniqueCheckouts", sN.CommerceUniqueClicks = "CommerceUniqueClicks", sN.CommerceUniqueImpressions = "CommerceUniqueImpressions", sN.CommerceUniqueOrders = "CommerceUniqueOrders", sN.CpuCoreUtilization = "CpuCoreUtilization", sN.CreatorRewardsAudienceExpansionFunnelEstimatedPayout = "CreatorRewardsAudienceExpansionFunnelEstimatedPayout", sN.CreatorRewardsAudienceExpansionFunnelPayerConversion60D = "CreatorRewardsAudienceExpansionFunnelPayerConversion60D", sN.CreatorRewardsAudienceExpansionFunnelPayerConversion7D = "CreatorRewardsAudienceExpansionFunnelPayerConversion7D", sN.CreatorRewardsAudienceExpansionFunnelPercentOfNewUsers = "CreatorRewardsAudienceExpansionFunnelPercentOfNewUsers", sN.CreatorRewardsAudienceExpansionFunnelReactivations = "CreatorRewardsAudienceExpansionFunnelReactivations", sN.CreatorRewardsAudienceExpansionFunnelRetentionD1 = "CreatorRewardsAudienceExpansionFunnelRetentionD1", sN.CreatorRewardsAudienceExpansionFunnelRetentionD7 = "CreatorRewardsAudienceExpansionFunnelRetentionD7", sN.CreatorRewardsAudienceExpansionFunnelRevenue1D = "CreatorRewardsAudienceExpansionFunnelRevenue1D", sN.CreatorRewardsAudienceExpansionFunnelRevenue60D = "CreatorRewardsAudienceExpansionFunnelRevenue60D", sN.CreatorRewardsAudienceExpansionFunnelRevenue7D = "CreatorRewardsAudienceExpansionFunnelRevenue7D", sN.CreatorRewardsAudienceExpansionFunnelRevenuePerPayer60D = "CreatorRewardsAudienceExpansionFunnelRevenuePerPayer60D", sN.CreatorRewardsAudienceExpansionFunnelRevenuePerPayer7D = "CreatorRewardsAudienceExpansionFunnelRevenuePerPayer7D", sN.CreatorRewardsAudienceExpansionFunnelRevenuePerUser60D = "CreatorRewardsAudienceExpansionFunnelRevenuePerUser60D", sN.CreatorRewardsAudienceExpansionFunnelRevenuePerUser7D = "CreatorRewardsAudienceExpansionFunnelRevenuePerUser7D", sN.CreatorRewardsAudienceExpansionFunnelSignups = "CreatorRewardsAudienceExpansionFunnelSignups", sN.CreatorRewardsAudienceExpansionFunnelUserCount = "CreatorRewardsAudienceExpansionFunnelUserCount", sN.CreatorRewardsAverageRobuxBookingsPerSpender = "CreatorRewardsAverageRobuxBookingsPerSpender", sN.CreatorRewardsLifetimeEstimatedAffiliatePayoutRobux = "CreatorRewardsLifetimeEstimatedAffiliatePayoutRobux", sN.CreatorRewardsLifetimeQualifiedReactivations = "CreatorRewardsLifetimeQualifiedReactivations", sN.CreatorRewardsLifetimeQualifiedSignups = "CreatorRewardsLifetimeQualifiedSignups", sN.CreatorRewardsLifetimeQualifiedSpenders = "CreatorRewardsLifetimeQualifiedSpenders", sN.CsmFanoutRatio = "CsmFanoutRatio", sN.CsmFanoutRatioExtended = "CsmFanoutRatioExtended", sN.CsmGameServersConnectedCount = "CsmGameServersConnectedCount", sN.CsmMessageSizeBytes = "CsmMessageSizeBytes", sN.CsmMessageSizeQuota = "CsmMessageSizeQuota", sN.CsmPublishedMessagesCount = "CsmPublishedMessagesCount", sN.CsmPublishedMessagesExtendedCount = "CsmPublishedMessagesExtendedCount", sN.CsmReceivedMessagesCount = "CsmReceivedMessagesCount", sN.CsmReceivedMessagesExtendedCount = "CsmReceivedMessagesExtendedCount", sN.CsmReceivedMessagesQuota = "CsmReceivedMessagesQuota", sN.CubeDailyRequests = "CubeDailyRequests", sN.CubeLatencyAvg = "CubeLatencyAvg", sN.CubeLatencyP99 = "CubeLatencyP99", sN.CubeOutcomes = "CubeOutcomes", sN.CubeTotalRequests = "CubeTotalRequests", sN.CustomEventsV2 = "CustomEventsV2", sN.DailyActiveUsers = "DailyActiveUsers", sN.DailyCohortRetention = "DailyCohortRetention", sN.DailyRevenue = "DailyRevenue", sN.DataStoreConsumedListRequests = "DataStoreConsumedListRequests", sN.DataStoreConsumedReadRequests = "DataStoreConsumedReadRequests", sN.DataStoreConsumedRemoveRequests = "DataStoreConsumedRemoveRequests", sN.DataStoreConsumedWriteRequests = "DataStoreConsumedWriteRequests", sN.DataStoreListRequests = "DataStoreListRequests", sN.DataStoreListRequestsByEndpoint = "DataStoreListRequestsByEndpoint", sN.DataStoreListRequestsQuota = "DataStoreListRequestsQuota", sN.DataStoreListRequestsQuotaOrdered = "DataStoreListRequestsQuotaOrdered", sN.DataStoreListRequestsQuotaStandard = "DataStoreListRequestsQuotaStandard", sN.DataStoreReadRequests = "DataStoreReadRequests", sN.DataStoreReadRequestsByEndpoint = "DataStoreReadRequestsByEndpoint", sN.DataStoreReadRequestsQuotaOrdered = "DataStoreReadRequestsQuotaOrdered", sN.DataStoreReadRequestsQuotaStandard = "DataStoreReadRequestsQuotaStandard", sN.DataStoreRemoveRequests = "DataStoreRemoveRequests", sN.DataStoreRemoveRequestsByEndpoint = "DataStoreRemoveRequestsByEndpoint", sN.DataStoreRemoveRequestsQuotaOrdered = "DataStoreRemoveRequestsQuotaOrdered", sN.DataStoreRemoveRequestsQuotaStandard = "DataStoreRemoveRequestsQuotaStandard", sN.DataStoreRequests = "DataStoreRequests", sN.DataStoreRequestsByEndpoint = "DataStoreRequestsByEndpoint", sN.DataStoreRequestsByStatus = "DataStoreRequestsByStatus", sN.DataStoreStorageQuotaBytes = "DataStoreStorageQuotaBytes", sN.DataStoreStorageUsageBytes = "DataStoreStorageUsageBytes", sN.DataStoreWriteRequests = "DataStoreWriteRequests", sN.DataStoreWriteRequestsByEndpoint = "DataStoreWriteRequestsByEndpoint", sN.DataStoreWriteRequestsQuotaOrdered = "DataStoreWriteRequestsQuotaOrdered", sN.DataStoreWriteRequestsQuotaStandard = "DataStoreWriteRequestsQuotaStandard", sN.DauMauStickiness = "DauMauStickiness", sN.EarningsTotalUsd = "EarningsTotalUsd", sN.EconomyAverageWalletBalance = "EconomyAverageWalletBalance", sN.EconomyTransactionAmount = "EconomyTransactionAmount", sN.EconomyTransactionAmountSinks = "EconomyTransactionAmountSinks", sN.EconomyTransactionCount = "EconomyTransactionCount", sN.EndToEndCVR = "EndToEndCVR", sN.ErrorCount = "ErrorCount", sN.EventAvgDailyActiveUsers = "EventAvgDailyActiveUsers", sN.EventAvgDailyRevenue = "EventAvgDailyRevenue", sN.EventAvgDailyUserPlaytimeMinutes = "EventAvgDailyUserPlaytimeMinutes", sN.EventAvgRevenuePerDailyActiveUser = "EventAvgRevenuePerDailyActiveUser", sN.ForwardD1Retention = "ForwardD1Retention", sN.ForwardD30Retention = "ForwardD30Retention", sN.ForwardD7Retention = "ForwardD7Retention", sN.FriendReferralAverageRobuxBookingsPerSpender = "FriendReferralAverageRobuxBookingsPerSpender", sN.FriendReferralLifetimeEstimatedAffiliatePayoutRobux = "FriendReferralLifetimeEstimatedAffiliatePayoutRobux", sN.FriendReferralLifetimeQualifiedSignups = "FriendReferralLifetimeQualifiedSignups", sN.FriendReferralLifetimeQualifiedSpenders = "FriendReferralLifetimeQualifiedSpenders", sN.FriendReferralLifetimeVisits = "FriendReferralLifetimeVisits", sN.FunnelCohortCompletionRate = "FunnelCohortCompletionRate", sN.FunnelCohortSessionCompletionRate = "FunnelCohortSessionCompletionRate", sN.FunnelStepChurnRate = "FunnelStepChurnRate", sN.FunnelStepCompletionRate = "FunnelStepCompletionRate", sN.FunnelStepOverallCompletionRate = "FunnelStepOverallCompletionRate", sN.FunnelStepTotalCount = "FunnelStepTotalCount", sN.FunnelUserChurnRate = "FunnelUserChurnRate", sN.FunnelUserOverallCompletionRate = "FunnelUserOverallCompletionRate", sN.FunnelUserStepCompletionRate = "FunnelUserStepCompletionRate", sN.FunnelUserTotalCount = "FunnelUserTotalCount", sN.HttpServiceRequestsCount = "HttpServiceRequestsCount", sN.HttpServiceRequestsExtendedCount = "HttpServiceRequestsExtendedCount", sN.HttpServiceRequestsV2 = "HttpServiceRequestsV2", sN.HttpServiceResponseTime = "HttpServiceResponseTime", sN.HttpServiceResponseTimeExtended = "HttpServiceResponseTimeExtended", sN.ImpressionCVR = "ImpressionCVR", sN.ItemMonetizationRevenue = "ItemMonetizationRevenue", sN.ItemMonetizationSales = "ItemMonetizationSales", sN.JoinRatePerImpression = "JoinRatePerImpression", sN.MatchmakingCategoricalCustomSignalsSimilarityRatio = "MatchmakingCategoricalCustomSignalsSimilarityRatio", sN.MatchmakingNumericCustomSignalsDifference = "MatchmakingNumericCustomSignalsDifference", sN.MatchmakingPlayerAttributesLoadingStatusAvg = "MatchmakingPlayerAttributesLoadingStatusAvg", sN.MatchmakingSignalsAgeDifference = "MatchmakingSignalsAgeDifference", sN.MatchmakingSignalsCommonChatGroupRatio = "MatchmakingSignalsCommonChatGroupRatio", sN.MatchmakingSignalsCommonDeviceTypeRatio = "MatchmakingSignalsCommonDeviceTypeRatio", sN.MatchmakingSignalsCommonLanguageRatio = "MatchmakingSignalsCommonLanguageRatio", sN.MatchmakingSignalsDeltaPing = "MatchmakingSignalsDeltaPing", sN.MatchmakingSignalsEstimatePing = "MatchmakingSignalsEstimatePing", sN.MatchmakingSignalsOccupancyRatio = "MatchmakingSignalsOccupancyRatio", sN.MatchmakingSignalsPlayHistoryDifference = "MatchmakingSignalsPlayHistoryDifference", sN.MatchmakingSignalsPreferredPlayerMatchRatioAvg = "MatchmakingSignalsPreferredPlayerMatchRatioAvg", sN.MatchmakingSignalsVoiceChatRatio = "MatchmakingSignalsVoiceChatRatio", sN.MemoryStoreErrorRateAlert = "MemoryStoreErrorRateAlert", sN.MemoryStoreMemoryQuotaBytes = "MemoryStoreMemoryQuotaBytes", sN.MemoryStoreMemoryUsageAlert = "MemoryStoreMemoryUsageAlert", sN.MemoryStoreMemoryUsageBytes = "MemoryStoreMemoryUsageBytes", sN.MemoryStoreRequests = "MemoryStoreRequests", sN.MemoryStoreRequestsByEndpoint = "MemoryStoreRequestsByEndpoint", sN.MemoryStoreRequestsByStatus = "MemoryStoreRequestsByStatus", sN.MemoryStoreRequestUnits = "MemoryStoreRequestUnits", sN.MemoryStoreRequestUnitsByEndpoint = "MemoryStoreRequestUnitsByEndpoint", sN.MemoryStoreRequestUnitsQuota = "MemoryStoreRequestUnitsQuota", sN.MemoryStoreThrottlingAlert = "MemoryStoreThrottlingAlert", sN.MonthlyActiveUsers = "MonthlyActiveUsers", sN.OomUnexpectedExits = "OomUnexpectedExits", sN.PayingUsers = "PayingUsers", sN.PayingUsersCVR = "PayingUsersCVR", sN.PayoutRobux = "PayoutRobux", sN.PayoutRobuxV2 = "PayoutRobuxV2", sN.PeakConcurrentPlayers = "PeakConcurrentPlayers", sN.PersonalizedShopsConversionRate = "PersonalizedShopsConversionRate", sN.PersonalizedShopsImpressions = "PersonalizedShopsImpressions", sN.PersonalizedShopsPurchases = "PersonalizedShopsPurchases", sN.PersonalizedShopsRevenue = "PersonalizedShopsRevenue", sN.PlayerFeedbackVotesCount = "PlayerFeedbackVotesCount", sN.PotentialEarningsTotalUsd = "PotentialEarningsTotalUsd", sN.PotentialExtraEarningsTotalUsd = "PotentialExtraEarningsTotalUsd", sN.PurchaseRatePerImpression = "PurchaseRatePerImpression", sN.QualifiedEndToEndCVR = "QualifiedEndToEndCVR", sN.QualifiedUniqueUsersWithPlaySessions = "QualifiedUniqueUsersWithPlaySessions", sN.ReactionRatePerImpression = "ReactionRatePerImpression", sN.RecommendationDau = "RecommendationDau", sN.RecommendationViewsTotal = "RecommendationViewsTotal", sN.RFYD1CoplayDays = "RFYD1CoplayDays", sN.RFYD1Playtime = "RFYD1Playtime", sN.RFYD1QualifiedPlaySessions = "RFYD1QualifiedPlaySessions", sN.RFYD1RobuxSpend = "RFYD1RobuxSpend", sN.RFYD1SpendDay = "RFYD1SpendDay", sN.RFYD2To7CoplayDays = "RFYD2To7CoplayDays", sN.RFYD2To7PlayDays = "RFYD2To7PlayDays", sN.RFYD2To7Playtime = "RFYD2To7Playtime", sN.RFYD2To7QualifiedPlaySessions = "RFYD2To7QualifiedPlaySessions", sN.RFYD2To7RobuxSpend = "RFYD2To7RobuxSpend", sN.RFYD2To7SpendDays = "RFYD2To7SpendDays", sN.RFYD8To28CoplayDays = "RFYD8To28CoplayDays", sN.RFYD8To28PlayDays = "RFYD8To28PlayDays", sN.RFYD8To28Playtime = "RFYD8To28Playtime", sN.RFYD8To28QualifiedPlaySessions = "RFYD8To28QualifiedPlaySessions", sN.RFYD8To28RobuxSpend = "RFYD8To28RobuxSpend", sN.RFYD8To28SpendDays = "RFYD8To28SpendDays", sN.RFYDuration0To60 = "RFYDuration0To60", sN.RFYDuration61To180 = "RFYDuration61To180", sN.RFYPlayThroughRate = "RFYPlayThroughRate", sN.RobloxPlusDevBountyAvgPlaytimePerSubscriberMins = "RobloxPlusDevBountyAvgPlaytimePerSubscriberMins", sN.RobloxPlusDevBountyAvgRobuxSpentPerSubscriber = "RobloxPlusDevBountyAvgRobuxSpentPerSubscriber", sN.RobloxPlusDevBountyDailySubscribers = "RobloxPlusDevBountyDailySubscribers", sN.RobloxPlusDevBountyPayoutRobux = "RobloxPlusDevBountyPayoutRobux", sN.RobloxPlusDevBountySubscriberCount = "RobloxPlusDevBountySubscriberCount", sN.RobloxPlusDevBountySubscriberSpend = "RobloxPlusDevBountySubscriberSpend", sN.RSVPCount = "RSVPCount", sN.ServerCpuTime = "ServerCpuTime", sN.ServerCrashCount = "ServerCrashCount", sN.ServerFrameRate = "ServerFrameRate", sN.ServerMemoryUsageV2 = "ServerMemoryUsageV2", sN.SessionDurationSeconds = "SessionDurationSeconds", sN.ShareLinkAttribution1DPayerConversionRatio = "ShareLinkAttribution1DPayerConversionRatio", sN.ShareLinkAttribution1DPlaytimePerUserInMinutes = "ShareLinkAttribution1DPlaytimePerUserInMinutes", sN.ShareLinkAttribution1DRobuxPerUser = "ShareLinkAttribution1DRobuxPerUser", sN.ShareLinkAttribution30DPayerConversionRatio = "ShareLinkAttribution30DPayerConversionRatio", sN.ShareLinkAttribution30DPlaytimePerUserInMinutes = "ShareLinkAttribution30DPlaytimePerUserInMinutes", sN.ShareLinkAttribution30DRobuxPerUser = "ShareLinkAttribution30DRobuxPerUser", sN.ShareLinkAttribution7DPayerConversionRatio = "ShareLinkAttribution7DPayerConversionRatio", sN.ShareLinkAttribution7DPlaytimePerUserInMinutes = "ShareLinkAttribution7DPlaytimePerUserInMinutes", sN.ShareLinkAttribution7DRobuxPerUser = "ShareLinkAttribution7DRobuxPerUser", sN.ShareLinkAttributionD1RetentionRatio = "ShareLinkAttributionD1RetentionRatio", sN.ShareLinkAttributionD30RetentionRatio = "ShareLinkAttributionD30RetentionRatio", sN.ShareLinkAttributionD7RetentionRatio = "ShareLinkAttributionD7RetentionRatio", sN.ShareLinkClickCVR = "ShareLinkClickCVR", sN.ShareLinkQualifiedClickCVR = "ShareLinkQualifiedClickCVR", sN.ShareLinkQualifiedUniqueUsersWithPlaySessions = "ShareLinkQualifiedUniqueUsersWithPlaySessions", sN.ShareLinkUniqueUsersWithClicks = "ShareLinkUniqueUsersWithClicks", sN.ShareLinkUniqueUsersWithPlaySessions = "ShareLinkUniqueUsersWithPlaySessions", sN.ShareRatePerImpression = "ShareRatePerImpression", sN.SourceCount = "SourceCount", sN.SourceCountRatioKpi = "SourceCountRatioKpi", sN.SpeechToTextTranscriptionQuota = "SpeechToTextTranscriptionQuota", sN.SpeechToTextTranscriptionStatuses = "SpeechToTextTranscriptionStatuses", sN.SpeechToTextTranscriptionUsage = "SpeechToTextTranscriptionUsage", sN.TextToSpeechAssetSuccesses = "TextToSpeechAssetSuccesses", sN.TextToSpeechRawAudioErrors = "TextToSpeechRawAudioErrors", sN.TextToSpeechRawAudioQuota = "TextToSpeechRawAudioQuota", sN.TextToSpeechRawAudioSuccesses = "TextToSpeechRawAudioSuccesses", sN.ThumbnailImpressions = "ThumbnailImpressions", sN.ThumbnailQualifiedPTR = "ThumbnailQualifiedPTR", sN.TotalActions = "TotalActions", sN.TotalActionsByActionType = "TotalActionsByActionType", sN.TotalComments = "TotalComments", sN.TotalJoins = "TotalJoins", sN.TotalPlayTimeHours = "TotalPlayTimeHours", sN.TotalPurchases = "TotalPurchases", sN.TotalReactionsAdded = "TotalReactionsAdded", sN.TotalSessionsEndedInBucket = "TotalSessionsEndedInBucket", sN.TotalShares = "TotalShares", sN.TotalViewHours = "TotalViewHours", sN.UniqueItemsPerUser = "UniqueItemsPerUser", sN.UniqueUsersWithClicks = "UniqueUsersWithClicks", sN.UniqueUsersWithImpressions = "UniqueUsersWithImpressions", sN.UniqueUsersWithPlaySessions = "UniqueUsersWithPlaySessions", sN.UsersJoinedFromNotifications = "UsersJoinedFromNotifications", sN.VideoServiceExclusivePlaybackSeconds = "VideoServiceExclusivePlaybackSeconds", sN.VideoServicePlaybackSeconds = "VideoServicePlaybackSeconds", sN.Visits = "Visits", sN.WeeklyCohortRetention = "WeeklyCohortRetention", (sw = sx || (sx = {})).L7AverageDailyActiveUsers = "L7AverageDailyActiveUsers", sw.L7AverageDailyRevenue = "L7AverageDailyRevenue", sw.L7AverageForwardD1Retention = "L7AverageForwardD1Retention", sw.L7AverageForwardD7Retention = "L7AverageForwardD7Retention", sw.L7AveragePayingUsersCVR = "L7AveragePayingUsersCVR", sw.L7AveragePlayTimeMinutesPerDAU = "L7AveragePlayTimeMinutesPerDAU", sw.L7AverageRevenuePerPayingUser = "L7AverageRevenuePerPayingUser", sw.L7AverageRFYPlayThroughRate = "L7AverageRFYPlayThroughRate", sw.L7AverageRFYQualifiedPTR = "L7AverageRFYQualifiedPTR", sw.L7AverageUniqueUsersWithPlaySessions = "L7AverageUniqueUsersWithPlaySessions";
-    var sM, sE, sN, sh, sL, sx, sw, sV, sI = sx;
+    R.ActionRatePerDau, R.ActionRatePerDauByActionType, R.ActionRatePerImpression, R.AdsPublisherReportingAdsPerEDAU, R.AdsPublisherReportingArpu, R.AdsPublisherReportingDisplayAdImpressions, R.AdsPublisherReportingImmersiveDisplayRevenue, R.AdsPublisherReportingImmersiveDisplayRobuxEpm, R.AdsPublisherReportingImmersiveEvents, R.AdsPublisherReportingImmersiveVideoViews, R.AdsPublisherReportingPortalRevenueRobux, R.AdsPublisherReportingRobuxEpm, R.AdsPublisherReportingRobuxEpt, R.AdsPublisherReportingTotalImpressions, R.AdsPublisherReportingTotalRevenueRobux, R.AdsPublisherReportingTotalTeleports, R.AdsPublisherReportingVideo2DAdsPerDUV, R.AdsPublisherReportingVideo2DAverageEarningPerDailyUniqueViewer, R.AdsPublisherReportingVideo2DConversionRate, R.AdsPublisherReportingVideo2DDailyUniqueViewer, R.AdsPublisherReportingVideo2DEligibleDau, R.AdsPublisherReportingVideo2DEpmNoUnvalidatedPc, R.AdsPublisherReportingVideo2DEvents, R.AdsPublisherReportingVideo2DFillPercent, R.AdsPublisherReportingVideo2DFills, R.AdsPublisherReportingVideo2DImpressions, R.AdsPublisherReportingVideo2DReachRatio, R.AdsPublisherReportingVideo2DRequests, R.AdsPublisherReportingVideo2DRevenueRobux, R.AdsPublisherReportingVideo2DRewardPercent, R.AdsPublisherReportingVideo2DRewards, R.AdsPublisherReportingVideo2DRobuxEpm, R.AdsRoasEstimate, R.AdsRoasEstimateByUniverse, R.AdsUAEarningsUsdDefaultView, R.AdsUAEarningsUsdDefaultViewByUniverse, R.AdsUAEarningsUsdNewUserView, R.AdsUAEarningsUsdNewUserViewByUniverse, R.AdsUAEarningsUsdResurrected30dUserView, R.AdsUAEarningsUsdResurrected30dUserViewByUniverse, R.AdsUAEarningsUsdResurrected7dUserView, R.AdsUAEarningsUsdResurrected7dUserViewByUniverse, R.AdsUAEarningsUsdReturningUserView, R.AdsUAEarningsUsdReturningUserViewByUniverse, R.AdsUAExpNumPlaysDefaultView, R.AdsUAExpNumPlaysDefaultViewByUniverse, R.AdsUAExpNumPlaysNewUserView, R.AdsUAExpNumPlaysNewUserViewByUniverse, R.AdsUAExpNumPlaysResurrected30dUserView, R.AdsUAExpNumPlaysResurrected30dUserViewByUniverse, R.AdsUAExpNumPlaysResurrected7dUserView, R.AdsUAExpNumPlaysResurrected7dUserViewByUniverse, R.AdsUAExpNumPlaysReturningUserView, R.AdsUAExpNumPlaysReturningUserViewByUniverse, R.AdsUAExpPlaytimeDefaultView, R.AdsUAExpPlaytimeDefaultViewByUniverse, R.AdsUAExpPlaytimeNewUserView, R.AdsUAExpPlaytimeNewUserViewByUniverse, R.AdsUAExpPlaytimeResurrected30dUserView, R.AdsUAExpPlaytimeResurrected30dUserViewByUniverse, R.AdsUAExpPlaytimeResurrected7dUserView, R.AdsUAExpPlaytimeResurrected7dUserViewByUniverse, R.AdsUAExpPlaytimeReturningUserView, R.AdsUAExpPlaytimeReturningUserViewByUniverse, R.AdsUAExpRobuxRevenueDefaultView, R.AdsUAExpRobuxRevenueDefaultViewByUniverse, R.AdsUAExpRobuxRevenueNewUserView, R.AdsUAExpRobuxRevenueNewUserViewByUniverse, R.AdsUAExpRobuxRevenueResurrected30dUserView, R.AdsUAExpRobuxRevenueResurrected30dUserViewByUniverse, R.AdsUAExpRobuxRevenueResurrected7dUserView, R.AdsUAExpRobuxRevenueResurrected7dUserViewByUniverse, R.AdsUAExpRobuxRevenueReturningUserView, R.AdsUAExpRobuxRevenueReturningUserViewByUniverse, R.AdsUANumClicksDefaultView, R.AdsUANumClicksDefaultViewByUniverse, R.AdsUANumClicksNewUsers, R.AdsUANumClicksNewUsersByUniverse, R.AdsUANumClicksResurrected30dUsers, R.AdsUANumClicksResurrected30dUsersByUniverse, R.AdsUANumClicksResurrected7dUsers, R.AdsUANumClicksResurrected7dUsersByUniverse, R.AdsUANumClicksReturningUsers, R.AdsUANumClicksReturningUsersByUniverse, R.AdsUANumImpressionsDefaultView, R.AdsUANumImpressionsDefaultViewByUniverse, R.AdsUANumImpressionsNewUsers, R.AdsUANumImpressionsNewUsersByUniverse, R.AdsUANumImpressionsResurrected30dUsers, R.AdsUANumImpressionsResurrected30dUsersByUniverse, R.AdsUANumImpressionsResurrected7dUsers, R.AdsUANumImpressionsResurrected7dUsersByUniverse, R.AdsUANumImpressionsReturningUsers, R.AdsUANumImpressionsReturningUsersByUniverse, R.AdsUANumPlaysDefaultView, R.AdsUANumPlaysDefaultViewByUniverse, R.AdsUANumPlaysNewUserView, R.AdsUANumPlaysNewUserViewByUniverse, R.AdsUANumPlaysResurrected30dUserView, R.AdsUANumPlaysResurrected30dUserViewByUniverse, R.AdsUANumPlaysResurrected7dUserView, R.AdsUANumPlaysResurrected7dUserViewByUniverse, R.AdsUANumPlaysReturningUserView, R.AdsUANumPlaysReturningUserViewByUniverse, R.AdsUAPlaytimeDefaultView, R.AdsUAPlaytimeDefaultViewByUniverse, R.AdsUAPlaytimeNewUserView, R.AdsUAPlaytimeNewUserViewByUniverse, R.AdsUAPlaytimeResurrected30dUserView, R.AdsUAPlaytimeResurrected30dUserViewByUniverse, R.AdsUAPlaytimeResurrected7dUserView, R.AdsUAPlaytimeResurrected7dUserViewByUniverse, R.AdsUAPlaytimeReturningUserView, R.AdsUAPlaytimeReturningUserViewByUniverse, R.AdsUARoas, R.AdsUARoasByUniverse, R.AdsUARobuxRevenueDefaultView, R.AdsUARobuxRevenueDefaultViewByUniverse, R.AdsUARobuxRevenueNewUserView, R.AdsUARobuxRevenueNewUserViewByUniverse, R.AdsUARobuxRevenueResurrected30dUserView, R.AdsUARobuxRevenueResurrected30dUserViewByUniverse, R.AdsUARobuxRevenueResurrected7dUserView, R.AdsUARobuxRevenueResurrected7dUserViewByUniverse, R.AdsUARobuxRevenueReturningUserView, R.AdsUARobuxRevenueReturningUserViewByUniverse, R.AdsUATotalSpendMicroUsdDefaultView, R.AdsUATotalSpendMicroUsdDefaultViewByUniverse, R.AdsUATotalSpendMicroUsdNewUsers, R.AdsUATotalSpendMicroUsdNewUsersByUniverse, R.AdsUATotalSpendMicroUsdResurrected30dUsers, R.AdsUATotalSpendMicroUsdResurrected30dUsersByUniverse, R.AdsUATotalSpendMicroUsdResurrected7dUsers, R.AdsUATotalSpendMicroUsdResurrected7dUsersByUniverse, R.AdsUATotalSpendMicroUsdReturningUsers, R.AdsUATotalSpendMicroUsdReturningUsersByUniverse, R.AdsVideo2DAdsPerEDAUBreakdown, R.AdsVideo2DEligibleDauBreakdown, R.AdsVideo2DReachRatioBreakdown, R.AffiliateLinkDailyAffiliateActiveSpenderReactivationsPayoutRobux, R.AffiliateLinkDailyAffiliateReactivationsPayoutRobux, R.AffiliateLinkDailyAffiliateSignupsPayoutRobux, R.AffiliateLinkDailyAverageRobuxBookingsPerReactivationSpender, R.AffiliateLinkDailyAverageRobuxBookingsPerSignupSpender, R.AffiliateLinkDailyBookingsPerSpenderCombined, R.AffiliateLinkDailyQualifiedActiveSpenderReactivations, R.AffiliateLinkDailyQualifiedReactivations, R.AffiliateLinkDailyQualifiedReactivationsBookingsRobux, R.AffiliateLinkDailyQualifiedReactivationsSpenders, R.AffiliateLinkDailyQualifiedSignups, R.AffiliateLinkDailyQualifiedSignupsBookingsRobux, R.AffiliateLinkDailyQualifiedSignupSpenders, R.AffiliateLinkDailyTotalPayoutRobux, R.AffiliateLinkDailyUniqueClick, R.AffiliateLinkDailyVisits, R.AlertIncidentCount, R.Attribution1DPayerConversionRatio, R.Attribution1DPayerConversionRatioMigration, R.Attribution1DPlaytimePerUserInMinutes, R.Attribution1DPlaytimePerUserInMinutesMigration, R.Attribution1DRobuxPerUser, R.Attribution1DRobuxPerUserMigration, R.Attribution30DPayerConversionRatio, R.Attribution30DPayerConversionRatioMigration, R.Attribution30DPlaytimePerUserInMinutes, R.Attribution30DPlaytimePerUserInMinutesMigration, R.Attribution30DRobuxPerUser, R.Attribution30DRobuxPerUserMigration, R.Attribution7DPayerConversionRatio, R.Attribution7DPayerConversionRatioMigration, R.Attribution7DPlaytimePerUserInMinutes, R.Attribution7DPlaytimePerUserInMinutesMigration, R.Attribution7DRobuxPerUser, R.Attribution7DRobuxPerUserMigration, R.AttributionD1RetentionRatio, R.AttributionD1RetentionRatioMigration, R.AttributionD30RetentionRatio, R.AttributionD30RetentionRatioMigration, R.AttributionD7RetentionRatio, R.AttributionD7RetentionRatioMigration, R.AverageImpressionsPerUser, R.AveragePlayTimeMinutesPerDAU, R.AverageRevenuePerPayingUser, R.AverageRevenuePerUser, R.AverageSessionLengthMinutes, R.AvgViewTimePerView, R.AvgViewTimePerViewer, d.BandwidthTotalRecvBpsAvg, R.BandwidthTotalRecvBpsForOrdering, d.BandwidthTotalRecvBpsP10, d.BandwidthTotalRecvBpsP50, d.BandwidthTotalRecvBpsP90, R.BandwidthTotalRecvMaxBytes, R.BandwidthTotalRecvUpdatesPerSecond, d.BandwidthTotalSendBpsAvg, R.BandwidthTotalSendBpsForOrdering, d.BandwidthTotalSendBpsP10, d.BandwidthTotalSendBpsP50, d.BandwidthTotalSendBpsP90, R.BandwidthTotalSendMaxBytes, R.BandwidthTotalSendUpdatesPerSecond, R.BonusPromotionsAwardedCount, R.BonusPromotionsGameJoinCount, R.BonusPromotionsImpressionCount, R.ClickCVR, R.ClickCVRMigration, R.ClientCpuTimeAvg, R.ClientCrashCount, R.ClientCrashCountMigration, R.ClientCrashRate15m, R.ClientCrashRate15mMigration, R.ClientCrashRateNotStableAlert, R.ClientCrashRateNotStableAlertMigration, d.ClientFpsAvg, d.ClientFpsP10, d.ClientFpsP50, d.ClientFpsP90, d.ClientMemoryUsageAvg, d.ClientMemoryUsageP10, d.ClientMemoryUsageP50, d.ClientMemoryUsageP90, d.ClientMemoryUsagePercentageAvg, d.ClientMemoryUsagePercentageP10, d.ClientMemoryUsagePercentageP50, d.ClientMemoryUsagePercentageP90, R.CommentRatePerImpression, R.CommerceCheckouts, R.CommerceClicks, R.CommerceGMV, R.CommerceImpressions, R.CommerceOrders, R.CommerceQuantitySold, R.CommerceUniqueCheckouts, R.CommerceUniqueClicks, R.CommerceUniqueImpressions, R.CommerceUniqueOrders, R.CommunityAnnouncementDeliveries, R.CommunityAnnouncementEngagement, R.CommunityAnnouncementEventCount, R.CommunityAnnouncementNetReactions, R.CommunityAnnouncementNotificationCTR, R.CommunityAnnouncementUniqueClicks, R.CommunityAnnouncementUniqueUsers, R.CommunityForumContentEventCount, R.CommunityForumContentUniqueUsers, R.CommunityGroupPageUniqueVisitors, R.CommunityGroupPageViews, R.CommunityMembershipChangeEvents, R.CommunityMembershipCount, R.ComputeEfficiency, R.ConcurrentPlayers, d.CoresPerServerAvg, d.CoresPerServerP10, d.CoresPerServerP50, d.CoresPerServerP90, R.CpuCoreUtilization, d.CpuTimeAvg, d.CpuTimeP10, d.CpuTimeP50, d.CpuTimeP90, R.CreatorRewardsAudienceExpansionFunnelEstimatedPayout, R.CreatorRewardsAudienceExpansionFunnelPayerConversion60D, R.CreatorRewardsAudienceExpansionFunnelPayerConversion7D, R.CreatorRewardsAudienceExpansionFunnelPercentOfNewUsers, R.CreatorRewardsAudienceExpansionFunnelReactivations, R.CreatorRewardsAudienceExpansionFunnelRetentionD1, R.CreatorRewardsAudienceExpansionFunnelRetentionD7, R.CreatorRewardsAudienceExpansionFunnelRevenue1D, R.CreatorRewardsAudienceExpansionFunnelRevenue60D, R.CreatorRewardsAudienceExpansionFunnelRevenue7D, R.CreatorRewardsAudienceExpansionFunnelRevenuePerPayer60D, R.CreatorRewardsAudienceExpansionFunnelRevenuePerPayer7D, R.CreatorRewardsAudienceExpansionFunnelRevenuePerUser60D, R.CreatorRewardsAudienceExpansionFunnelRevenuePerUser7D, R.CreatorRewardsAudienceExpansionFunnelSignups, R.CreatorRewardsAudienceExpansionFunnelUserCount, R.CreatorRewardsAverageRobuxBookingsPerSpender, R.CreatorRewardsLifetimeEstimatedAffiliatePayoutRobux, R.CreatorRewardsLifetimeQualifiedReactivations, R.CreatorRewardsLifetimeQualifiedSignups, R.CreatorRewardsLifetimeQualifiedSpenders, R.CreatorWalletClosingBalanceUsd, R.CreatorWalletIncomingUsd, R.CreatorWalletOutgoingUsd, R.CsmFanoutRatio, R.CsmFanoutRatioExtended, R.CsmGameServersConnectedCount, R.CsmMessageSizeBytes, R.CsmMessageSizeQuota, R.CsmPublishedMessagesCount, R.CsmPublishedMessagesExtendedCount, R.CsmReceivedMessagesCount, R.CsmReceivedMessagesExtendedCount, R.CsmReceivedMessagesQuota, R.CubeDailyRequests, R.CubeLatencyAvg, R.CubeLatencyP99, R.CubeOutcomes, R.CubeTotalRequests, d.CustomEventAvgPerUserValue, d.CustomEventAvgValue, d.CustomEventCount, d.CustomEventCountUser, d.CustomEventMaxValue, d.CustomEventMinValue, d.CustomEventSumValue, R.D1Retention, R.D30Retention, R.D7Retention, R.DailyActiveUsers, R.DailyCohortRetention, R.DailyRetentionCohortNoDim, R.DailyRevenue, R.DataStoreConsumedListRequests, R.DataStoreConsumedReadRequests, R.DataStoreConsumedRemoveRequests, R.DataStoreConsumedWriteRequests, R.DataStoreListRequests, R.DataStoreListRequestsByEndpoint, R.DataStoreListRequestsQuota, R.DataStoreListRequestsQuotaOrdered, R.DataStoreListRequestsQuotaStandard, R.DataStoreReadRequests, R.DataStoreReadRequestsByEndpoint, R.DataStoreReadRequestsQuotaOrdered, R.DataStoreReadRequestsQuotaStandard, R.DataStoreRemoveRequests, R.DataStoreRemoveRequestsByEndpoint, R.DataStoreRemoveRequestsQuotaOrdered, R.DataStoreRemoveRequestsQuotaStandard, R.DataStoreRequests, R.DataStoreRequestsByEndpoint, R.DataStoreRequestsByStatus, R.DataStoreStorageQuotaBytes, R.DataStoreStorageUsageBytes, R.DataStoreWriteRequests, R.DataStoreWriteRequestsByEndpoint, R.DataStoreWriteRequestsQuotaOrdered, R.DataStoreWriteRequestsQuotaStandard, R.DauMauStickiness, R.DeviceTrustDailyActiveUsers, R.DeviceTrustRobuxSpentLast28Days, R.EarningsTotalUsd, R.EconomyAverageWalletBalance, R.EconomyTransactionAmount, R.EconomyTransactionAmountSinks, R.EconomyTransactionCount, R.EndToEndCVR, R.EndToEndCVRMigration, R.ErrorCount, R.EventAvgDailyActiveUsers, R.EventAvgDailyRevenue, R.EventAvgDailyUserPlaytimeMinutes, R.EventAvgRevenuePerDailyActiveUser, d.ExperienceLaunchTimeP50, d.ExperienceLaunchTimeP90, R.ExperimentMetricAdsArpu, R.ExperimentMetricAdsArpuV2, R.ExperimentMetricAdsEarnings, R.ExperimentMetricAdsEarningsV2, R.ExperimentMetricAdsFrequency, R.ExperimentMetricAdsFrequencyV2, R.ExperimentMetricAdsImpressions, R.ExperimentMetricAdsImpressionsV2, R.ExperimentMetricAdsOptInRate, R.ExperimentMetricAdsOptInRateV2, R.ExperimentMetricAverageCurrencySinkDelta, R.ExperimentMetricAverageCurrencySourceDelta, R.ExperimentMetricAverageCustomValue, R.ExperimentMetricAverageCustomValueAllUsers, R.ExperimentMetricAverageNetCurrencyDelta, R.ExperimentMetricAverageRevenuePerPayingUser, R.ExperimentMetricAverageRevenuePerPayingUserV2, R.ExperimentMetricAverageRevenuePerUser, R.ExperimentMetricAverageRevenuePerUserV2, R.ExperimentMetricAverageSessionTime, R.ExperimentMetricAverageSessionTimeV2, R.ExperimentMetricCustomPenetration, R.ExperimentMetricDay1Retention, R.ExperimentMetricDay1RetentionV2, R.ExperimentMetricDay7Retention, R.ExperimentMetricDay7RetentionV2, R.ExperimentMetricMean, R.ExperimentMetricPayerConversionRate, R.ExperimentMetricPayerConversionRateV2, R.ExperimentMetricPerSessionFunnelConversion, R.ExperimentMetricPerUserFunnelConversion, R.ExperimentMetricPlaytimePerUser, R.ExperimentMetricPlaytimePerUserV2, R.ExperimentMetricQualifiedPlayThroughRate, R.ExperimentMetricQualifiedPlayThroughRateV2, R.ForwardD1Retention, R.ForwardD30Retention, R.ForwardD7Retention, R.FriendReferralAverageRobuxBookingsPerSpender, R.FriendReferralLifetimeEstimatedAffiliatePayoutRobux, R.FriendReferralLifetimeQualifiedSignups, R.FriendReferralLifetimeQualifiedSpenders, R.FriendReferralLifetimeVisits, R.FunnelCohortCompletionRate, R.FunnelCohortSessionCompletionRate, R.FunnelStepChurnRate, R.FunnelStepCompletionRate, R.FunnelStepOverallCompletionRate, R.FunnelStepTotalCount, R.FunnelUserChurnRate, R.FunnelUserOverallCompletionRate, R.FunnelUserStepCompletionRate, R.FunnelUserTotalCount, R.HttpServiceRequestsCount, R.HttpServiceRequestsExtendedCount, R.HttpServiceRequestsV2, d.HttpServiceResponseTimeAvg, d.HttpServiceResponseTimeExtendedAvg, d.HttpServiceResponseTimeExtendedP10, d.HttpServiceResponseTimeExtendedP50, d.HttpServiceResponseTimeExtendedP90, d.HttpServiceResponseTimeP10, d.HttpServiceResponseTimeP50, d.HttpServiceResponseTimeP90, R.ImpressionCVR, R.ImpressionCVRMigration, R.IphEarningsRobux, R.IphEarningsRobuxPartial, R.IphTransactionCount, R.IphTransactionCountPartial, R.ItemAvatar3dLimitedAvailableQuantity, R.ItemAvatar3dLimitedTotalQuantity, R.ItemAverageTransactionPrice, R.ItemLifetimeCreatorEarning, R.ItemLifetimeRebateAmount, R.ItemLifetimeRobuxSpent, R.ItemLifetimeTransactionCount, R.ItemLimitedSoldPercentage, R.ItemMonetizationRevenue, R.ItemMonetizationSales, R.ItemPublishAdvance, R.ItemPublishAdvanceRecoupedPercentage, R.ItemTotalCreatorEarning, R.ItemTotalRobuxSpent, R.ItemTotalTransactionCount, R.JoinRatePerImpression, R.JourneyCompletionUsers, R.JourneyEntryTransitions, R.JourneyLastStageTransitions, R.JourneyNodeTransitionChurnCount, R.JourneyNodeTransitionChurnRate, R.JourneyNodeTransitionCount, R.JourneyNodeUserChurnCount, R.JourneyNodeUserChurnRate, R.JourneyNodeUserCount, R.JourneyStageChurnRate, R.JourneyStageSkipRate, R.JourneyStageSkipTransitionCount, R.JourneyStageSkipTransitionRate, R.JourneyStageSkipUserCount, R.JourneyStageTransitionChurnRate, R.JourneyStageTransitionCount, R.JourneyStageUserCount, R.JourneyTotalUsers, R.JourneyTransitionCount, R.JourneyTransitionCountUser, R.JourneyTransitionPctOfSource, R.JourneyTransitionPctOfStart, R.JourneyUserPctOfSource, R.JourneyUserPctOfStart, R.MaintenanceThreshold, R.MarketplaceAffiliateLinkAttributedPurchases, R.MarketplaceAffiliateLinkAttributedSpendRobux, R.MarketplaceAffiliateLinkClicks, R.MarketplaceAffiliateLinkConversionRate, R.MarketplaceAffiliateLinkEstimatedPayoutRobux, R.MarketplaceAffiliateLinkUniqueClicks, d.MatchmakingCategoricalCustomSignalsSimilarityRatioAvg, d.MatchmakingCategoricalCustomSignalsSimilarityRatioP10, d.MatchmakingCategoricalCustomSignalsSimilarityRatioP50, d.MatchmakingCategoricalCustomSignalsSimilarityRatioP90, d.MatchmakingNumericCustomSignalsDifferenceAvg, d.MatchmakingNumericCustomSignalsDifferenceP10, d.MatchmakingNumericCustomSignalsDifferenceP50, d.MatchmakingNumericCustomSignalsDifferenceP90, R.MatchmakingPlayerAttributesLoadingStatusAvg, d.MatchmakingSignalsAgeDifferenceAvg, d.MatchmakingSignalsAgeDifferenceP10, d.MatchmakingSignalsAgeDifferenceP50, d.MatchmakingSignalsAgeDifferenceP90, d.MatchmakingSignalsCommonChatGroupRatioAvg, d.MatchmakingSignalsCommonChatGroupRatioP10, d.MatchmakingSignalsCommonChatGroupRatioP50, d.MatchmakingSignalsCommonChatGroupRatioP90, d.MatchmakingSignalsCommonDeviceTypeRatioAvg, d.MatchmakingSignalsCommonDeviceTypeRatioP10, d.MatchmakingSignalsCommonDeviceTypeRatioP50, d.MatchmakingSignalsCommonDeviceTypeRatioP90, d.MatchmakingSignalsCommonLanguageRatioAvg, d.MatchmakingSignalsCommonLanguageRatioP10, d.MatchmakingSignalsCommonLanguageRatioP50, d.MatchmakingSignalsCommonLanguageRatioP90, d.MatchmakingSignalsDeltaPingAvg, d.MatchmakingSignalsDeltaPingP10, d.MatchmakingSignalsDeltaPingP50, d.MatchmakingSignalsDeltaPingP90, d.MatchmakingSignalsEstimatePingAvg, d.MatchmakingSignalsEstimatePingP10, d.MatchmakingSignalsEstimatePingP50, d.MatchmakingSignalsEstimatePingP90, d.MatchmakingSignalsOccupancyRatioAvg, d.MatchmakingSignalsOccupancyRatioP10, d.MatchmakingSignalsOccupancyRatioP50, d.MatchmakingSignalsOccupancyRatioP90, d.MatchmakingSignalsPlayHistoryDifferenceAvg, d.MatchmakingSignalsPlayHistoryDifferenceP10, d.MatchmakingSignalsPlayHistoryDifferenceP50, d.MatchmakingSignalsPlayHistoryDifferenceP90, R.MatchmakingSignalsPreferredPlayerMatchRatioAvg, d.MatchmakingSignalsVoiceChatRatioAvg, d.MatchmakingSignalsVoiceChatRatioP10, d.MatchmakingSignalsVoiceChatRatioP50, d.MatchmakingSignalsVoiceChatRatioP90, R.MemoryStoreErrorRateAlert, R.MemoryStoreMemoryQuotaBytes, R.MemoryStoreMemoryUsageAlert, R.MemoryStoreMemoryUsageBytes, R.MemoryStoreRequests, R.MemoryStoreRequestsByEndpoint, R.MemoryStoreRequestsByStatus, R.MemoryStoreRequestUnits, R.MemoryStoreRequestUnitsByEndpoint, R.MemoryStoreRequestUnitsQuota, R.MemoryStoreThrottlingAlert, d.MemoryUsageAvg, d.MemoryUsageP10, d.MemoryUsageP50, d.MemoryUsageP90, R.MonthlyActiveUsers, R.OomUnexpectedExits, R.OomUnexpectedExitsMigration, R.PayingUsers, R.PayingUsersCVR, R.PayoutRobux, R.PayoutRobuxV2, R.PeakConcurrentPlayers, R.PersonalizedShopsConversionRate, R.PersonalizedShopsImpressions, R.PersonalizedShopsPurchases, R.PersonalizedShopsRevenue, R.PlayerFeedbackVotesCount, R.PotentialEarningsTotalUsd, R.PotentialExtraEarningsTotalUsd, R.PurchaseRatePerImpression, R.QualifiedEndToEndCVR, R.QualifiedEndToEndCVRMigration, R.QualifiedUniqueUsersWithPlaySessions, R.QualifiedUniqueUsersWithPlaySessionsMigration, R.ReactionRatePerImpression, R.RecommendationDau, R.RecommendationViewsTotal, R.RelativeThresholdCapture, R.RFYD1CoplayDays, R.RFYD1Playtime, R.RFYD1QualifiedPlaySessions, R.RFYD1RobuxSpend, R.RFYD1SpendDay, R.RFYD2To7CoplayDays, R.RFYD2To7PlayDays, R.RFYD2To7Playtime, R.RFYD2To7QualifiedPlaySessions, R.RFYD2To7RobuxSpend, R.RFYD2To7SpendDays, R.RFYD8To28CoplayDays, R.RFYD8To28PlayDays, R.RFYD8To28Playtime, R.RFYD8To28QualifiedPlaySessions, R.RFYD8To28RobuxSpend, R.RFYD8To28SpendDays, R.RFYDeepEngagementRate, R.RFYDuration0To60, R.RFYDuration181To600, R.RFYDuration61To180, R.RFYDurationGreaterThan600, R.RFYL7IntentionalCoplayDays, R.RFYL7PlayDays, R.RFYL7PlaySessionsPerUser, R.RFYL7PlayTime, R.RFYL7RobuxSpent, R.RFYL7RobuxSpentDays, R.RFYPlayThroughRate, R.RFYQualifiedPTR, R.RFYUniqueNotInterestedUsersPerMillionImpressions, R.RobloxPlusDevBountyAvgPlaytimePerSubscriberMins, R.RobloxPlusDevBountyAvgRobuxSpentPerSubscriber, R.RobloxPlusDevBountyDailySubscribers, R.RobloxPlusDevBountyPayoutRobux, R.RobloxPlusDevBountySubscriberCount, R.RobloxPlusDevBountySubscriberSpend, R.RotraceTotalCalls, R.RSVPCount, R.ServerCrashCount, d.ServerFrameRateAvg, d.ServerFrameRateP10, d.ServerFrameRateP50, d.ServerFrameRateP90, d.ServerMemoryUsageAvg, d.ServerMemoryUsageP10, d.ServerMemoryUsageP50, d.ServerMemoryUsageP90, d.SessionDurationSecondsAvg, d.SessionDurationSecondsAvgMigration, d.SessionDurationSecondsP10, d.SessionDurationSecondsP10Migration, d.SessionDurationSecondsP50, d.SessionDurationSecondsP50Migration, d.SessionDurationSecondsP90, d.SessionDurationSecondsP90Migration, R.ShareLinkAttribution1DPayerConversionRatio, R.ShareLinkAttribution1DPlaytimePerUserInMinutes, R.ShareLinkAttribution1DRobuxPerUser, R.ShareLinkAttribution30DPayerConversionRatio, R.ShareLinkAttribution30DPlaytimePerUserInMinutes, R.ShareLinkAttribution30DRobuxPerUser, R.ShareLinkAttribution7DPayerConversionRatio, R.ShareLinkAttribution7DPlaytimePerUserInMinutes, R.ShareLinkAttribution7DRobuxPerUser, R.ShareLinkAttributionD1RetentionRatio, R.ShareLinkAttributionD30RetentionRatio, R.ShareLinkAttributionD7RetentionRatio, R.ShareLinkClickCVR, R.ShareLinkQualifiedClickCVR, R.ShareLinkQualifiedUniqueUsersWithPlaySessions, R.ShareLinkUniqueUsersWithClicks, R.ShareLinkUniqueUsersWithPlaySessions, R.ShareRatePerImpression, R.SourceCount, R.SourceCountRatioKpi, R.SpeechToTextTranscriptionQuota, R.SpeechToTextTranscriptionStatuses, R.SpeechToTextTranscriptionUsage, R.SponsoredAdPlays, R.StoreRevenue, R.StoreTransactions, R.TargetThreshold, R.TextToSpeechAssetSuccesses, R.TextToSpeechRawAudioErrors, R.TextToSpeechRawAudioQuota, R.TextToSpeechRawAudioSuccesses, R.ThumbnailAverageSessionLengthMinutes, R.ThumbnailImpressions, R.ThumbnailL7QualifiedPTR, R.ThumbnailQualifiedPlays, R.ThumbnailQualifiedPTR, R.ThumbnailWinningSegments, R.TotalAbuseReports, R.TotalActions, R.TotalActionsByActionType, R.TotalComments, R.TotalJoins, R.TotalPlayTimeHours, R.TotalPurchases, R.TotalReactionsAdded, R.TotalSessionsEndedInBucket, R.TotalShares, R.TotalViewHours, R.UniqueAbuseReportSubmittersPer1000PlaytimeHours, R.UniqueItemsPerUser, R.UniqueServerShutdowns, R.UniqueUsersWithClicks, R.UniqueUsersWithClicksMigration, R.UniqueUsersWithImpressions, R.UniqueUsersWithImpressionsMigration, R.UniqueUsersWithPlaySessions, R.UniqueUsersWithPlaySessionsMigration, R.UsersInExperiment, R.UsersInExperimentV2, R.UsersJoinedFromNotifications, R.VideoServiceExclusivePlaybackSeconds, R.VideoServicePlaybackSeconds, R.Visits, R.WeeklyCohortRetention, (sN = sL || (sL = {})).ActionRatePerDau = "ActionRatePerDau", sN.ActionRatePerDauByActionType = "ActionRatePerDauByActionType", sN.ActionRatePerImpression = "ActionRatePerImpression", sN.AdsPublisherReportingAdsPerEDAU = "AdsPublisherReportingAdsPerEDAU", sN.AdsPublisherReportingDisplayAdImpressions = "AdsPublisherReportingDisplayAdImpressions", sN.AdsPublisherReportingImmersiveDisplayRevenue = "AdsPublisherReportingImmersiveDisplayRevenue", sN.AdsPublisherReportingImmersiveDisplayRobuxEpm = "AdsPublisherReportingImmersiveDisplayRobuxEpm", sN.AdsPublisherReportingImmersiveEvents = "AdsPublisherReportingImmersiveEvents", sN.AdsPublisherReportingImmersiveVideoViews = "AdsPublisherReportingImmersiveVideoViews", sN.AdsPublisherReportingPortalRevenueRobux = "AdsPublisherReportingPortalRevenueRobux", sN.AdsPublisherReportingRobuxEpm = "AdsPublisherReportingRobuxEpm", sN.AdsPublisherReportingRobuxEpt = "AdsPublisherReportingRobuxEpt", sN.AdsPublisherReportingTotalImpressions = "AdsPublisherReportingTotalImpressions", sN.AdsPublisherReportingTotalRevenueRobux = "AdsPublisherReportingTotalRevenueRobux", sN.AdsPublisherReportingTotalTeleports = "AdsPublisherReportingTotalTeleports", sN.AdsPublisherReportingVideo2DAdsPerDUV = "AdsPublisherReportingVideo2DAdsPerDUV", sN.AdsPublisherReportingVideo2DAverageEarningPerDailyUniqueViewer = "AdsPublisherReportingVideo2DAverageEarningPerDailyUniqueViewer", sN.AdsPublisherReportingVideo2DConversionRate = "AdsPublisherReportingVideo2DConversionRate", sN.AdsPublisherReportingVideo2DDailyUniqueViewer = "AdsPublisherReportingVideo2DDailyUniqueViewer", sN.AdsPublisherReportingVideo2DEligibleDau = "AdsPublisherReportingVideo2DEligibleDau", sN.AdsPublisherReportingVideo2DEpmNoUnvalidatedPc = "AdsPublisherReportingVideo2DEpmNoUnvalidatedPc", sN.AdsPublisherReportingVideo2DEvents = "AdsPublisherReportingVideo2DEvents", sN.AdsPublisherReportingVideo2DFillPercent = "AdsPublisherReportingVideo2DFillPercent", sN.AdsPublisherReportingVideo2DFills = "AdsPublisherReportingVideo2DFills", sN.AdsPublisherReportingVideo2DImpressions = "AdsPublisherReportingVideo2DImpressions", sN.AdsPublisherReportingVideo2DReachRatio = "AdsPublisherReportingVideo2DReachRatio", sN.AdsPublisherReportingVideo2DRequests = "AdsPublisherReportingVideo2DRequests", sN.AdsPublisherReportingVideo2DRevenueRobux = "AdsPublisherReportingVideo2DRevenueRobux", sN.AdsPublisherReportingVideo2DRewardPercent = "AdsPublisherReportingVideo2DRewardPercent", sN.AdsPublisherReportingVideo2DRewards = "AdsPublisherReportingVideo2DRewards", sN.AdsPublisherReportingVideo2DRobuxEpm = "AdsPublisherReportingVideo2DRobuxEpm", sN.AdsUAEarningsUsdDefaultViewByUniverse = "AdsUAEarningsUsdDefaultViewByUniverse", sN.AdsUAEarningsUsdNewUserViewByUniverse = "AdsUAEarningsUsdNewUserViewByUniverse", sN.AdsUAEarningsUsdResurrected30dUserViewByUniverse = "AdsUAEarningsUsdResurrected30dUserViewByUniverse", sN.AdsUAEarningsUsdResurrected7dUserViewByUniverse = "AdsUAEarningsUsdResurrected7dUserViewByUniverse", sN.AdsUAEarningsUsdReturningUserViewByUniverse = "AdsUAEarningsUsdReturningUserViewByUniverse", sN.AdsUANumClicksDefaultViewByUniverse = "AdsUANumClicksDefaultViewByUniverse", sN.AdsUANumClicksNewUsersByUniverse = "AdsUANumClicksNewUsersByUniverse", sN.AdsUANumClicksResurrected30dUsersByUniverse = "AdsUANumClicksResurrected30dUsersByUniverse", sN.AdsUANumClicksResurrected7dUsersByUniverse = "AdsUANumClicksResurrected7dUsersByUniverse", sN.AdsUANumClicksReturningUsersByUniverse = "AdsUANumClicksReturningUsersByUniverse", sN.AdsUANumImpressionsDefaultViewByUniverse = "AdsUANumImpressionsDefaultViewByUniverse", sN.AdsUANumImpressionsNewUsersByUniverse = "AdsUANumImpressionsNewUsersByUniverse", sN.AdsUANumImpressionsResurrected30dUsersByUniverse = "AdsUANumImpressionsResurrected30dUsersByUniverse", sN.AdsUANumImpressionsResurrected7dUsersByUniverse = "AdsUANumImpressionsResurrected7dUsersByUniverse", sN.AdsUANumImpressionsReturningUsersByUniverse = "AdsUANumImpressionsReturningUsersByUniverse", sN.AdsUANumPlaysDefaultViewByUniverse = "AdsUANumPlaysDefaultViewByUniverse", sN.AdsUANumPlaysNewUserViewByUniverse = "AdsUANumPlaysNewUserViewByUniverse", sN.AdsUANumPlaysResurrected30dUserViewByUniverse = "AdsUANumPlaysResurrected30dUserViewByUniverse", sN.AdsUANumPlaysResurrected7dUserViewByUniverse = "AdsUANumPlaysResurrected7dUserViewByUniverse", sN.AdsUANumPlaysReturningUserViewByUniverse = "AdsUANumPlaysReturningUserViewByUniverse", sN.AdsUAPlaytimeDefaultViewByUniverse = "AdsUAPlaytimeDefaultViewByUniverse", sN.AdsUAPlaytimeNewUserViewByUniverse = "AdsUAPlaytimeNewUserViewByUniverse", sN.AdsUAPlaytimeResurrected30dUserViewByUniverse = "AdsUAPlaytimeResurrected30dUserViewByUniverse", sN.AdsUAPlaytimeResurrected7dUserViewByUniverse = "AdsUAPlaytimeResurrected7dUserViewByUniverse", sN.AdsUAPlaytimeReturningUserViewByUniverse = "AdsUAPlaytimeReturningUserViewByUniverse", sN.AdsUARobuxRevenueDefaultViewByUniverse = "AdsUARobuxRevenueDefaultViewByUniverse", sN.AdsUARobuxRevenueNewUserViewByUniverse = "AdsUARobuxRevenueNewUserViewByUniverse", sN.AdsUARobuxRevenueResurrected30dUserViewByUniverse = "AdsUARobuxRevenueResurrected30dUserViewByUniverse", sN.AdsUARobuxRevenueResurrected7dUserViewByUniverse = "AdsUARobuxRevenueResurrected7dUserViewByUniverse", sN.AdsUARobuxRevenueReturningUserViewByUniverse = "AdsUARobuxRevenueReturningUserViewByUniverse", sN.AdsUATotalSpendMicroUsdDefaultViewByUniverse = "AdsUATotalSpendMicroUsdDefaultViewByUniverse", sN.AdsUATotalSpendMicroUsdNewUsersByUniverse = "AdsUATotalSpendMicroUsdNewUsersByUniverse", sN.AdsUATotalSpendMicroUsdResurrected30dUsersByUniverse = "AdsUATotalSpendMicroUsdResurrected30dUsersByUniverse", sN.AdsUATotalSpendMicroUsdResurrected7dUsersByUniverse = "AdsUATotalSpendMicroUsdResurrected7dUsersByUniverse", sN.AdsUATotalSpendMicroUsdReturningUsersByUniverse = "AdsUATotalSpendMicroUsdReturningUsersByUniverse", sN.AdsVideo2DAdsPerEDAUBreakdown = "AdsVideo2DAdsPerEDAUBreakdown", sN.AdsVideo2DEligibleDauBreakdown = "AdsVideo2DEligibleDauBreakdown", sN.AdsVideo2DReachRatioBreakdown = "AdsVideo2DReachRatioBreakdown", sN.AlertIncidentCount = "AlertIncidentCount", sN.Attribution1DPayerConversionRatio = "Attribution1DPayerConversionRatio", sN.Attribution1DPlaytimePerUserInMinutes = "Attribution1DPlaytimePerUserInMinutes", sN.Attribution1DRobuxPerUser = "Attribution1DRobuxPerUser", sN.Attribution30DPayerConversionRatio = "Attribution30DPayerConversionRatio", sN.Attribution30DPlaytimePerUserInMinutes = "Attribution30DPlaytimePerUserInMinutes", sN.Attribution30DRobuxPerUser = "Attribution30DRobuxPerUser", sN.Attribution7DPayerConversionRatio = "Attribution7DPayerConversionRatio", sN.Attribution7DPlaytimePerUserInMinutes = "Attribution7DPlaytimePerUserInMinutes", sN.Attribution7DRobuxPerUser = "Attribution7DRobuxPerUser", sN.AttributionD1RetentionRatio = "AttributionD1RetentionRatio", sN.AttributionD30RetentionRatio = "AttributionD30RetentionRatio", sN.AttributionD7RetentionRatio = "AttributionD7RetentionRatio", sN.AverageImpressionsPerUser = "AverageImpressionsPerUser", sN.AveragePlayTimeMinutesPerDAU = "AveragePlayTimeMinutesPerDAU", sN.AverageRevenuePerPayingUser = "AverageRevenuePerPayingUser", sN.AverageRevenuePerUser = "AverageRevenuePerUser", sN.AverageSessionLengthMinutes = "AverageSessionLengthMinutes", sN.AvgViewTimePerView = "AvgViewTimePerView", sN.AvgViewTimePerViewer = "AvgViewTimePerViewer", sN.BandwidthTotalRecvBps = "BandwidthTotalRecvBps", sN.BandwidthTotalSendBps = "BandwidthTotalSendBps", sN.ClickCVR = "ClickCVR", sN.ClientCrashCount = "ClientCrashCount", sN.ClientCrashRate15m = "ClientCrashRate15m", sN.ClientFps = "ClientFps", sN.ClientMemoryUsage = "ClientMemoryUsage", sN.ClientMemoryUsagePercentage = "ClientMemoryUsagePercentage", sN.CommentRatePerImpression = "CommentRatePerImpression", sN.CommerceCheckouts = "CommerceCheckouts", sN.CommerceClicks = "CommerceClicks", sN.CommerceGMV = "CommerceGMV", sN.CommerceImpressions = "CommerceImpressions", sN.CommerceOrders = "CommerceOrders", sN.CommerceQuantitySold = "CommerceQuantitySold", sN.CommerceUniqueCheckouts = "CommerceUniqueCheckouts", sN.CommerceUniqueClicks = "CommerceUniqueClicks", sN.CommerceUniqueImpressions = "CommerceUniqueImpressions", sN.CommerceUniqueOrders = "CommerceUniqueOrders", sN.CpuCoreUtilization = "CpuCoreUtilization", sN.CreatorRewardsAudienceExpansionFunnelEstimatedPayout = "CreatorRewardsAudienceExpansionFunnelEstimatedPayout", sN.CreatorRewardsAudienceExpansionFunnelPayerConversion60D = "CreatorRewardsAudienceExpansionFunnelPayerConversion60D", sN.CreatorRewardsAudienceExpansionFunnelPayerConversion7D = "CreatorRewardsAudienceExpansionFunnelPayerConversion7D", sN.CreatorRewardsAudienceExpansionFunnelPercentOfNewUsers = "CreatorRewardsAudienceExpansionFunnelPercentOfNewUsers", sN.CreatorRewardsAudienceExpansionFunnelReactivations = "CreatorRewardsAudienceExpansionFunnelReactivations", sN.CreatorRewardsAudienceExpansionFunnelRetentionD1 = "CreatorRewardsAudienceExpansionFunnelRetentionD1", sN.CreatorRewardsAudienceExpansionFunnelRetentionD7 = "CreatorRewardsAudienceExpansionFunnelRetentionD7", sN.CreatorRewardsAudienceExpansionFunnelRevenue1D = "CreatorRewardsAudienceExpansionFunnelRevenue1D", sN.CreatorRewardsAudienceExpansionFunnelRevenue60D = "CreatorRewardsAudienceExpansionFunnelRevenue60D", sN.CreatorRewardsAudienceExpansionFunnelRevenue7D = "CreatorRewardsAudienceExpansionFunnelRevenue7D", sN.CreatorRewardsAudienceExpansionFunnelRevenuePerPayer60D = "CreatorRewardsAudienceExpansionFunnelRevenuePerPayer60D", sN.CreatorRewardsAudienceExpansionFunnelRevenuePerPayer7D = "CreatorRewardsAudienceExpansionFunnelRevenuePerPayer7D", sN.CreatorRewardsAudienceExpansionFunnelRevenuePerUser60D = "CreatorRewardsAudienceExpansionFunnelRevenuePerUser60D", sN.CreatorRewardsAudienceExpansionFunnelRevenuePerUser7D = "CreatorRewardsAudienceExpansionFunnelRevenuePerUser7D", sN.CreatorRewardsAudienceExpansionFunnelSignups = "CreatorRewardsAudienceExpansionFunnelSignups", sN.CreatorRewardsAudienceExpansionFunnelUserCount = "CreatorRewardsAudienceExpansionFunnelUserCount", sN.CreatorRewardsAverageRobuxBookingsPerSpender = "CreatorRewardsAverageRobuxBookingsPerSpender", sN.CreatorRewardsLifetimeEstimatedAffiliatePayoutRobux = "CreatorRewardsLifetimeEstimatedAffiliatePayoutRobux", sN.CreatorRewardsLifetimeQualifiedReactivations = "CreatorRewardsLifetimeQualifiedReactivations", sN.CreatorRewardsLifetimeQualifiedSignups = "CreatorRewardsLifetimeQualifiedSignups", sN.CreatorRewardsLifetimeQualifiedSpenders = "CreatorRewardsLifetimeQualifiedSpenders", sN.CsmFanoutRatio = "CsmFanoutRatio", sN.CsmFanoutRatioExtended = "CsmFanoutRatioExtended", sN.CsmGameServersConnectedCount = "CsmGameServersConnectedCount", sN.CsmMessageSizeBytes = "CsmMessageSizeBytes", sN.CsmMessageSizeQuota = "CsmMessageSizeQuota", sN.CsmPublishedMessagesCount = "CsmPublishedMessagesCount", sN.CsmPublishedMessagesExtendedCount = "CsmPublishedMessagesExtendedCount", sN.CsmReceivedMessagesCount = "CsmReceivedMessagesCount", sN.CsmReceivedMessagesExtendedCount = "CsmReceivedMessagesExtendedCount", sN.CsmReceivedMessagesQuota = "CsmReceivedMessagesQuota", sN.CubeDailyRequests = "CubeDailyRequests", sN.CubeLatencyAvg = "CubeLatencyAvg", sN.CubeLatencyP99 = "CubeLatencyP99", sN.CubeOutcomes = "CubeOutcomes", sN.CubeTotalRequests = "CubeTotalRequests", sN.CustomEventsV2 = "CustomEventsV2", sN.DailyActiveUsers = "DailyActiveUsers", sN.DailyCohortRetention = "DailyCohortRetention", sN.DailyRevenue = "DailyRevenue", sN.DataStoreConsumedListRequests = "DataStoreConsumedListRequests", sN.DataStoreConsumedReadRequests = "DataStoreConsumedReadRequests", sN.DataStoreConsumedRemoveRequests = "DataStoreConsumedRemoveRequests", sN.DataStoreConsumedWriteRequests = "DataStoreConsumedWriteRequests", sN.DataStoreListRequests = "DataStoreListRequests", sN.DataStoreListRequestsByEndpoint = "DataStoreListRequestsByEndpoint", sN.DataStoreListRequestsQuota = "DataStoreListRequestsQuota", sN.DataStoreListRequestsQuotaOrdered = "DataStoreListRequestsQuotaOrdered", sN.DataStoreListRequestsQuotaStandard = "DataStoreListRequestsQuotaStandard", sN.DataStoreReadRequests = "DataStoreReadRequests", sN.DataStoreReadRequestsByEndpoint = "DataStoreReadRequestsByEndpoint", sN.DataStoreReadRequestsQuotaOrdered = "DataStoreReadRequestsQuotaOrdered", sN.DataStoreReadRequestsQuotaStandard = "DataStoreReadRequestsQuotaStandard", sN.DataStoreRemoveRequests = "DataStoreRemoveRequests", sN.DataStoreRemoveRequestsByEndpoint = "DataStoreRemoveRequestsByEndpoint", sN.DataStoreRemoveRequestsQuotaOrdered = "DataStoreRemoveRequestsQuotaOrdered", sN.DataStoreRemoveRequestsQuotaStandard = "DataStoreRemoveRequestsQuotaStandard", sN.DataStoreRequests = "DataStoreRequests", sN.DataStoreRequestsByEndpoint = "DataStoreRequestsByEndpoint", sN.DataStoreRequestsByStatus = "DataStoreRequestsByStatus", sN.DataStoreStorageQuotaBytes = "DataStoreStorageQuotaBytes", sN.DataStoreStorageUsageBytes = "DataStoreStorageUsageBytes", sN.DataStoreWriteRequests = "DataStoreWriteRequests", sN.DataStoreWriteRequestsByEndpoint = "DataStoreWriteRequestsByEndpoint", sN.DataStoreWriteRequestsQuotaOrdered = "DataStoreWriteRequestsQuotaOrdered", sN.DataStoreWriteRequestsQuotaStandard = "DataStoreWriteRequestsQuotaStandard", sN.DauMauStickiness = "DauMauStickiness", sN.EarningsTotalUsd = "EarningsTotalUsd", sN.EconomyAverageWalletBalance = "EconomyAverageWalletBalance", sN.EconomyTransactionAmount = "EconomyTransactionAmount", sN.EconomyTransactionAmountSinks = "EconomyTransactionAmountSinks", sN.EconomyTransactionCount = "EconomyTransactionCount", sN.EndToEndCVR = "EndToEndCVR", sN.ErrorCount = "ErrorCount", sN.EventAvgDailyActiveUsers = "EventAvgDailyActiveUsers", sN.EventAvgDailyRevenue = "EventAvgDailyRevenue", sN.EventAvgDailyUserPlaytimeMinutes = "EventAvgDailyUserPlaytimeMinutes", sN.EventAvgRevenuePerDailyActiveUser = "EventAvgRevenuePerDailyActiveUser", sN.ForwardD1Retention = "ForwardD1Retention", sN.ForwardD30Retention = "ForwardD30Retention", sN.ForwardD7Retention = "ForwardD7Retention", sN.FriendReferralAverageRobuxBookingsPerSpender = "FriendReferralAverageRobuxBookingsPerSpender", sN.FriendReferralLifetimeEstimatedAffiliatePayoutRobux = "FriendReferralLifetimeEstimatedAffiliatePayoutRobux", sN.FriendReferralLifetimeQualifiedSignups = "FriendReferralLifetimeQualifiedSignups", sN.FriendReferralLifetimeQualifiedSpenders = "FriendReferralLifetimeQualifiedSpenders", sN.FriendReferralLifetimeVisits = "FriendReferralLifetimeVisits", sN.FunnelCohortCompletionRate = "FunnelCohortCompletionRate", sN.FunnelCohortSessionCompletionRate = "FunnelCohortSessionCompletionRate", sN.FunnelStepChurnRate = "FunnelStepChurnRate", sN.FunnelStepCompletionRate = "FunnelStepCompletionRate", sN.FunnelStepOverallCompletionRate = "FunnelStepOverallCompletionRate", sN.FunnelStepTotalCount = "FunnelStepTotalCount", sN.FunnelUserChurnRate = "FunnelUserChurnRate", sN.FunnelUserOverallCompletionRate = "FunnelUserOverallCompletionRate", sN.FunnelUserStepCompletionRate = "FunnelUserStepCompletionRate", sN.FunnelUserTotalCount = "FunnelUserTotalCount", sN.HttpServiceRequestsCount = "HttpServiceRequestsCount", sN.HttpServiceRequestsExtendedCount = "HttpServiceRequestsExtendedCount", sN.HttpServiceRequestsV2 = "HttpServiceRequestsV2", sN.HttpServiceResponseTime = "HttpServiceResponseTime", sN.HttpServiceResponseTimeExtended = "HttpServiceResponseTimeExtended", sN.ImpressionCVR = "ImpressionCVR", sN.ItemMonetizationRevenue = "ItemMonetizationRevenue", sN.ItemMonetizationSales = "ItemMonetizationSales", sN.JoinRatePerImpression = "JoinRatePerImpression", sN.MatchmakingCategoricalCustomSignalsSimilarityRatio = "MatchmakingCategoricalCustomSignalsSimilarityRatio", sN.MatchmakingNumericCustomSignalsDifference = "MatchmakingNumericCustomSignalsDifference", sN.MatchmakingPlayerAttributesLoadingStatusAvg = "MatchmakingPlayerAttributesLoadingStatusAvg", sN.MatchmakingSignalsAgeDifference = "MatchmakingSignalsAgeDifference", sN.MatchmakingSignalsCommonChatGroupRatio = "MatchmakingSignalsCommonChatGroupRatio", sN.MatchmakingSignalsCommonDeviceTypeRatio = "MatchmakingSignalsCommonDeviceTypeRatio", sN.MatchmakingSignalsCommonLanguageRatio = "MatchmakingSignalsCommonLanguageRatio", sN.MatchmakingSignalsDeltaPing = "MatchmakingSignalsDeltaPing", sN.MatchmakingSignalsEstimatePing = "MatchmakingSignalsEstimatePing", sN.MatchmakingSignalsOccupancyRatio = "MatchmakingSignalsOccupancyRatio", sN.MatchmakingSignalsPlayHistoryDifference = "MatchmakingSignalsPlayHistoryDifference", sN.MatchmakingSignalsPreferredPlayerMatchRatioAvg = "MatchmakingSignalsPreferredPlayerMatchRatioAvg", sN.MatchmakingSignalsVoiceChatRatio = "MatchmakingSignalsVoiceChatRatio", sN.MemoryStoreErrorRateAlert = "MemoryStoreErrorRateAlert", sN.MemoryStoreMemoryQuotaBytes = "MemoryStoreMemoryQuotaBytes", sN.MemoryStoreMemoryUsageAlert = "MemoryStoreMemoryUsageAlert", sN.MemoryStoreMemoryUsageBytes = "MemoryStoreMemoryUsageBytes", sN.MemoryStoreRequests = "MemoryStoreRequests", sN.MemoryStoreRequestsByEndpoint = "MemoryStoreRequestsByEndpoint", sN.MemoryStoreRequestsByStatus = "MemoryStoreRequestsByStatus", sN.MemoryStoreRequestUnits = "MemoryStoreRequestUnits", sN.MemoryStoreRequestUnitsByEndpoint = "MemoryStoreRequestUnitsByEndpoint", sN.MemoryStoreRequestUnitsQuota = "MemoryStoreRequestUnitsQuota", sN.MemoryStoreThrottlingAlert = "MemoryStoreThrottlingAlert", sN.MonthlyActiveUsers = "MonthlyActiveUsers", sN.OomUnexpectedExits = "OomUnexpectedExits", sN.PayingUsers = "PayingUsers", sN.PayingUsersCVR = "PayingUsersCVR", sN.PayoutRobux = "PayoutRobux", sN.PayoutRobuxV2 = "PayoutRobuxV2", sN.PeakConcurrentPlayers = "PeakConcurrentPlayers", sN.PersonalizedShopsConversionRate = "PersonalizedShopsConversionRate", sN.PersonalizedShopsImpressions = "PersonalizedShopsImpressions", sN.PersonalizedShopsPurchases = "PersonalizedShopsPurchases", sN.PersonalizedShopsRevenue = "PersonalizedShopsRevenue", sN.PlayerFeedbackVotesCount = "PlayerFeedbackVotesCount", sN.PotentialEarningsTotalUsd = "PotentialEarningsTotalUsd", sN.PotentialExtraEarningsTotalUsd = "PotentialExtraEarningsTotalUsd", sN.PurchaseRatePerImpression = "PurchaseRatePerImpression", sN.QualifiedEndToEndCVR = "QualifiedEndToEndCVR", sN.QualifiedUniqueUsersWithPlaySessions = "QualifiedUniqueUsersWithPlaySessions", sN.ReactionRatePerImpression = "ReactionRatePerImpression", sN.RecommendationDau = "RecommendationDau", sN.RecommendationViewsTotal = "RecommendationViewsTotal", sN.RFYD1CoplayDays = "RFYD1CoplayDays", sN.RFYD1Playtime = "RFYD1Playtime", sN.RFYD1QualifiedPlaySessions = "RFYD1QualifiedPlaySessions", sN.RFYD1RobuxSpend = "RFYD1RobuxSpend", sN.RFYD1SpendDay = "RFYD1SpendDay", sN.RFYD2To7CoplayDays = "RFYD2To7CoplayDays", sN.RFYD2To7PlayDays = "RFYD2To7PlayDays", sN.RFYD2To7Playtime = "RFYD2To7Playtime", sN.RFYD2To7QualifiedPlaySessions = "RFYD2To7QualifiedPlaySessions", sN.RFYD2To7RobuxSpend = "RFYD2To7RobuxSpend", sN.RFYD2To7SpendDays = "RFYD2To7SpendDays", sN.RFYD8To28CoplayDays = "RFYD8To28CoplayDays", sN.RFYD8To28PlayDays = "RFYD8To28PlayDays", sN.RFYD8To28Playtime = "RFYD8To28Playtime", sN.RFYD8To28QualifiedPlaySessions = "RFYD8To28QualifiedPlaySessions", sN.RFYD8To28RobuxSpend = "RFYD8To28RobuxSpend", sN.RFYD8To28SpendDays = "RFYD8To28SpendDays", sN.RFYDuration0To60 = "RFYDuration0To60", sN.RFYDuration61To180 = "RFYDuration61To180", sN.RFYPlayThroughRate = "RFYPlayThroughRate", sN.RobloxPlusDevBountyAvgPlaytimePerSubscriberMins = "RobloxPlusDevBountyAvgPlaytimePerSubscriberMins", sN.RobloxPlusDevBountyAvgRobuxSpentPerSubscriber = "RobloxPlusDevBountyAvgRobuxSpentPerSubscriber", sN.RobloxPlusDevBountyDailySubscribers = "RobloxPlusDevBountyDailySubscribers", sN.RobloxPlusDevBountyPayoutRobux = "RobloxPlusDevBountyPayoutRobux", sN.RobloxPlusDevBountySubscriberCount = "RobloxPlusDevBountySubscriberCount", sN.RobloxPlusDevBountySubscriberSpend = "RobloxPlusDevBountySubscriberSpend", sN.RSVPCount = "RSVPCount", sN.ServerCpuTime = "ServerCpuTime", sN.ServerCrashCount = "ServerCrashCount", sN.ServerFrameRate = "ServerFrameRate", sN.ServerMemoryUsageV2 = "ServerMemoryUsageV2", sN.SessionDurationSeconds = "SessionDurationSeconds", sN.ShareLinkAttribution1DPayerConversionRatio = "ShareLinkAttribution1DPayerConversionRatio", sN.ShareLinkAttribution1DPlaytimePerUserInMinutes = "ShareLinkAttribution1DPlaytimePerUserInMinutes", sN.ShareLinkAttribution1DRobuxPerUser = "ShareLinkAttribution1DRobuxPerUser", sN.ShareLinkAttribution30DPayerConversionRatio = "ShareLinkAttribution30DPayerConversionRatio", sN.ShareLinkAttribution30DPlaytimePerUserInMinutes = "ShareLinkAttribution30DPlaytimePerUserInMinutes", sN.ShareLinkAttribution30DRobuxPerUser = "ShareLinkAttribution30DRobuxPerUser", sN.ShareLinkAttribution7DPayerConversionRatio = "ShareLinkAttribution7DPayerConversionRatio", sN.ShareLinkAttribution7DPlaytimePerUserInMinutes = "ShareLinkAttribution7DPlaytimePerUserInMinutes", sN.ShareLinkAttribution7DRobuxPerUser = "ShareLinkAttribution7DRobuxPerUser", sN.ShareLinkAttributionD1RetentionRatio = "ShareLinkAttributionD1RetentionRatio", sN.ShareLinkAttributionD30RetentionRatio = "ShareLinkAttributionD30RetentionRatio", sN.ShareLinkAttributionD7RetentionRatio = "ShareLinkAttributionD7RetentionRatio", sN.ShareLinkClickCVR = "ShareLinkClickCVR", sN.ShareLinkQualifiedClickCVR = "ShareLinkQualifiedClickCVR", sN.ShareLinkQualifiedUniqueUsersWithPlaySessions = "ShareLinkQualifiedUniqueUsersWithPlaySessions", sN.ShareLinkUniqueUsersWithClicks = "ShareLinkUniqueUsersWithClicks", sN.ShareLinkUniqueUsersWithPlaySessions = "ShareLinkUniqueUsersWithPlaySessions", sN.ShareRatePerImpression = "ShareRatePerImpression", sN.SourceCount = "SourceCount", sN.SourceCountRatioKpi = "SourceCountRatioKpi", sN.SpeechToTextTranscriptionQuota = "SpeechToTextTranscriptionQuota", sN.SpeechToTextTranscriptionStatuses = "SpeechToTextTranscriptionStatuses", sN.SpeechToTextTranscriptionUsage = "SpeechToTextTranscriptionUsage", sN.TextToSpeechAssetSuccesses = "TextToSpeechAssetSuccesses", sN.TextToSpeechRawAudioErrors = "TextToSpeechRawAudioErrors", sN.TextToSpeechRawAudioQuota = "TextToSpeechRawAudioQuota", sN.TextToSpeechRawAudioSuccesses = "TextToSpeechRawAudioSuccesses", sN.ThumbnailImpressions = "ThumbnailImpressions", sN.ThumbnailQualifiedPTR = "ThumbnailQualifiedPTR", sN.TotalActions = "TotalActions", sN.TotalActionsByActionType = "TotalActionsByActionType", sN.TotalComments = "TotalComments", sN.TotalJoins = "TotalJoins", sN.TotalPlayTimeHours = "TotalPlayTimeHours", sN.TotalPurchases = "TotalPurchases", sN.TotalReactionsAdded = "TotalReactionsAdded", sN.TotalSessionsEndedInBucket = "TotalSessionsEndedInBucket", sN.TotalShares = "TotalShares", sN.TotalViewHours = "TotalViewHours", sN.UniqueItemsPerUser = "UniqueItemsPerUser", sN.UniqueUsersWithClicks = "UniqueUsersWithClicks", sN.UniqueUsersWithImpressions = "UniqueUsersWithImpressions", sN.UniqueUsersWithPlaySessions = "UniqueUsersWithPlaySessions", sN.UsersJoinedFromNotifications = "UsersJoinedFromNotifications", sN.VideoServiceExclusivePlaybackSeconds = "VideoServiceExclusivePlaybackSeconds", sN.VideoServicePlaybackSeconds = "VideoServicePlaybackSeconds", sN.Visits = "Visits", sN.WeeklyCohortRetention = "WeeklyCohortRetention", (sx = sw || (sw = {})).L7AverageDailyActiveUsers = "L7AverageDailyActiveUsers", sx.L7AverageDailyRevenue = "L7AverageDailyRevenue", sx.L7AverageForwardD1Retention = "L7AverageForwardD1Retention", sx.L7AverageForwardD7Retention = "L7AverageForwardD7Retention", sx.L7AveragePayingUsersCVR = "L7AveragePayingUsersCVR", sx.L7AveragePlayTimeMinutesPerDAU = "L7AveragePlayTimeMinutesPerDAU", sx.L7AverageRevenuePerPayingUser = "L7AverageRevenuePerPayingUser", sx.L7AverageRFYPlayThroughRate = "L7AverageRFYPlayThroughRate", sx.L7AverageRFYQualifiedPTR = "L7AverageRFYQualifiedPTR", sx.L7AverageUniqueUsersWithPlaySessions = "L7AverageUniqueUsersWithPlaySessions";
+    var sM, sE, sN, sh, sL, sw, sx, sV, sI = sw;
     (sV || (sV = {})).L7Average = "l7_average";
     var sO = sV;
     let sF = {
@@ -8696,6 +8696,158 @@
             },
             localizedDescription: {
                 key: "Description.AdsUAEarningsUsdDefaultView",
+                namespace: u.AdsUnifiedAttribution
+            },
+            noDataFallback: sf.NA,
+            fillMissingDatapoints: !1,
+            retentionDurationDays: 1468,
+            metricDisplayType: sj.Count
+        },
+        [R.AdsUAEarningsUsdNewUserView]: {
+            resourceTypes: [s4.AdAccountId],
+            valueType: s7.Numeric,
+            unit: s1.Usd,
+            decimalPrecision: 2,
+            isPositiveGood: !0,
+            localizedName: {
+                key: "Label.Metric.AdsUAEarningsUsdNewUserView",
+                namespace: u.AdsUnifiedAttribution
+            },
+            localizedDescription: {
+                key: "Description.AdsUAEarningsUsdNewUserView",
+                namespace: u.AdsUnifiedAttribution
+            },
+            noDataFallback: sf.NA,
+            fillMissingDatapoints: !1,
+            retentionDurationDays: 1468,
+            metricDisplayType: sj.Count
+        },
+        [R.AdsUAEarningsUsdNewUserViewByUniverse]: {
+            resourceTypes: [s4.Universe],
+            valueType: s7.Numeric,
+            unit: s1.Usd,
+            decimalPrecision: 2,
+            isPositiveGood: !0,
+            localizedName: {
+                key: "Label.Metric.AdsUAEarningsUsdNewUserView",
+                namespace: u.AdsUnifiedAttribution
+            },
+            localizedDescription: {
+                key: "Description.AdsUAEarningsUsdNewUserView",
+                namespace: u.AdsUnifiedAttribution
+            },
+            noDataFallback: sf.NA,
+            fillMissingDatapoints: !1,
+            retentionDurationDays: 1468,
+            metricDisplayType: sj.Count
+        },
+        [R.AdsUAEarningsUsdResurrected30dUserView]: {
+            resourceTypes: [s4.AdAccountId],
+            valueType: s7.Numeric,
+            unit: s1.Usd,
+            decimalPrecision: 2,
+            isPositiveGood: !0,
+            localizedName: {
+                key: "Label.Metric.AdsUAEarningsUsdResurrected30dUserView",
+                namespace: u.AdsUnifiedAttribution
+            },
+            localizedDescription: {
+                key: "Description.AdsUAEarningsUsdResurrected30dUserView",
+                namespace: u.AdsUnifiedAttribution
+            },
+            noDataFallback: sf.NA,
+            fillMissingDatapoints: !1,
+            retentionDurationDays: 1468,
+            metricDisplayType: sj.Count
+        },
+        [R.AdsUAEarningsUsdResurrected30dUserViewByUniverse]: {
+            resourceTypes: [s4.Universe],
+            valueType: s7.Numeric,
+            unit: s1.Usd,
+            decimalPrecision: 2,
+            isPositiveGood: !0,
+            localizedName: {
+                key: "Label.Metric.AdsUAEarningsUsdResurrected30dUserView",
+                namespace: u.AdsUnifiedAttribution
+            },
+            localizedDescription: {
+                key: "Description.AdsUAEarningsUsdResurrected30dUserView",
+                namespace: u.AdsUnifiedAttribution
+            },
+            noDataFallback: sf.NA,
+            fillMissingDatapoints: !1,
+            retentionDurationDays: 1468,
+            metricDisplayType: sj.Count
+        },
+        [R.AdsUAEarningsUsdResurrected7dUserView]: {
+            resourceTypes: [s4.AdAccountId],
+            valueType: s7.Numeric,
+            unit: s1.Usd,
+            decimalPrecision: 2,
+            isPositiveGood: !0,
+            localizedName: {
+                key: "Label.Metric.AdsUAEarningsUsdResurrected7dUserView",
+                namespace: u.AdsUnifiedAttribution
+            },
+            localizedDescription: {
+                key: "Description.AdsUAEarningsUsdResurrected7dUserView",
+                namespace: u.AdsUnifiedAttribution
+            },
+            noDataFallback: sf.NA,
+            fillMissingDatapoints: !1,
+            retentionDurationDays: 1468,
+            metricDisplayType: sj.Count
+        },
+        [R.AdsUAEarningsUsdResurrected7dUserViewByUniverse]: {
+            resourceTypes: [s4.Universe],
+            valueType: s7.Numeric,
+            unit: s1.Usd,
+            decimalPrecision: 2,
+            isPositiveGood: !0,
+            localizedName: {
+                key: "Label.Metric.AdsUAEarningsUsdResurrected7dUserView",
+                namespace: u.AdsUnifiedAttribution
+            },
+            localizedDescription: {
+                key: "Description.AdsUAEarningsUsdResurrected7dUserView",
+                namespace: u.AdsUnifiedAttribution
+            },
+            noDataFallback: sf.NA,
+            fillMissingDatapoints: !1,
+            retentionDurationDays: 1468,
+            metricDisplayType: sj.Count
+        },
+        [R.AdsUAEarningsUsdReturningUserView]: {
+            resourceTypes: [s4.AdAccountId],
+            valueType: s7.Numeric,
+            unit: s1.Usd,
+            decimalPrecision: 2,
+            isPositiveGood: !0,
+            localizedName: {
+                key: "Label.Metric.AdsUAEarningsUsdReturningUserView",
+                namespace: u.AdsUnifiedAttribution
+            },
+            localizedDescription: {
+                key: "Description.AdsUAEarningsUsdReturningUserView",
+                namespace: u.AdsUnifiedAttribution
+            },
+            noDataFallback: sf.NA,
+            fillMissingDatapoints: !1,
+            retentionDurationDays: 1468,
+            metricDisplayType: sj.Count
+        },
+        [R.AdsUAEarningsUsdReturningUserViewByUniverse]: {
+            resourceTypes: [s4.Universe],
+            valueType: s7.Numeric,
+            unit: s1.Usd,
+            decimalPrecision: 2,
+            isPositiveGood: !0,
+            localizedName: {
+                key: "Label.Metric.AdsUAEarningsUsdReturningUserView",
+                namespace: u.AdsUnifiedAttribution
+            },
+            localizedDescription: {
+                key: "Description.AdsUAEarningsUsdReturningUserView",
                 namespace: u.AdsUnifiedAttribution
             },
             noDataFallback: sf.NA,
@@ -21038,6 +21190,38 @@
                 filter: [],
                 breakdown: []
             },
+            [R.AdsUAEarningsUsdNewUserView]: {
+                filter: [],
+                breakdown: []
+            },
+            [R.AdsUAEarningsUsdNewUserViewByUniverse]: {
+                filter: [],
+                breakdown: []
+            },
+            [R.AdsUAEarningsUsdResurrected30dUserView]: {
+                filter: [],
+                breakdown: []
+            },
+            [R.AdsUAEarningsUsdResurrected30dUserViewByUniverse]: {
+                filter: [],
+                breakdown: []
+            },
+            [R.AdsUAEarningsUsdResurrected7dUserView]: {
+                filter: [],
+                breakdown: []
+            },
+            [R.AdsUAEarningsUsdResurrected7dUserViewByUniverse]: {
+                filter: [],
+                breakdown: []
+            },
+            [R.AdsUAEarningsUsdReturningUserView]: {
+                filter: [],
+                breakdown: []
+            },
+            [R.AdsUAEarningsUsdReturningUserViewByUniverse]: {
+                filter: [],
+                breakdown: []
+            },
             [R.AdsUAExpNumPlaysDefaultView]: {
                 filter: [],
                 breakdown: []
@@ -23251,7 +23435,7 @@
                 breakdown: []
             }
         },
-        rs = (R.ActionRatePerDau, R.ActionRatePerDauByActionType, R.ActionRatePerImpression, R.AdsPublisherReportingAdsPerEDAU, R.AdsPublisherReportingDisplayAdImpressions, R.AdsPublisherReportingImmersiveDisplayRevenue, R.AdsPublisherReportingImmersiveDisplayRobuxEpm, R.AdsPublisherReportingImmersiveEvents, R.AdsPublisherReportingImmersiveVideoViews, R.AdsPublisherReportingPortalRevenueRobux, R.AdsPublisherReportingRobuxEpm, R.AdsPublisherReportingRobuxEpt, R.AdsPublisherReportingTotalImpressions, R.AdsPublisherReportingTotalRevenueRobux, R.AdsPublisherReportingTotalTeleports, R.AdsPublisherReportingVideo2DAdsPerDUV, R.AdsPublisherReportingVideo2DAverageEarningPerDailyUniqueViewer, R.AdsPublisherReportingVideo2DConversionRate, R.AdsPublisherReportingVideo2DDailyUniqueViewer, R.AdsPublisherReportingVideo2DEligibleDau, R.AdsPublisherReportingVideo2DEpmNoUnvalidatedPc, R.AdsPublisherReportingVideo2DEvents, R.AdsPublisherReportingVideo2DFillPercent, R.AdsPublisherReportingVideo2DFills, R.AdsPublisherReportingVideo2DImpressions, R.AdsPublisherReportingVideo2DReachRatio, R.AdsPublisherReportingVideo2DRequests, R.AdsPublisherReportingVideo2DRevenueRobux, R.AdsPublisherReportingVideo2DRewardPercent, R.AdsPublisherReportingVideo2DRewards, R.AdsPublisherReportingVideo2DRobuxEpm, R.AdsRoasEstimate, R.AdsRoasEstimateByUniverse, R.AdsUAEarningsUsdDefaultView, R.AdsUAEarningsUsdDefaultViewByUniverse, R.AdsUAExpNumPlaysDefaultView, R.AdsUAExpNumPlaysDefaultViewByUniverse, R.AdsUAExpNumPlaysNewUserView, R.AdsUAExpNumPlaysNewUserViewByUniverse, R.AdsUAExpNumPlaysResurrected30dUserView, R.AdsUAExpNumPlaysResurrected30dUserViewByUniverse, R.AdsUAExpNumPlaysResurrected7dUserView, R.AdsUAExpNumPlaysResurrected7dUserViewByUniverse, R.AdsUAExpNumPlaysReturningUserView, R.AdsUAExpNumPlaysReturningUserViewByUniverse, R.AdsUAExpPlaytimeDefaultView, R.AdsUAExpPlaytimeDefaultViewByUniverse, R.AdsUAExpPlaytimeNewUserView, R.AdsUAExpPlaytimeNewUserViewByUniverse, R.AdsUAExpPlaytimeResurrected30dUserView, R.AdsUAExpPlaytimeResurrected30dUserViewByUniverse, R.AdsUAExpPlaytimeResurrected7dUserView, R.AdsUAExpPlaytimeResurrected7dUserViewByUniverse, R.AdsUAExpPlaytimeReturningUserView, R.AdsUAExpPlaytimeReturningUserViewByUniverse, R.AdsUAExpRobuxRevenueDefaultView, R.AdsUAExpRobuxRevenueDefaultViewByUniverse, R.AdsUAExpRobuxRevenueNewUserView, R.AdsUAExpRobuxRevenueNewUserViewByUniverse, R.AdsUAExpRobuxRevenueResurrected30dUserView, R.AdsUAExpRobuxRevenueResurrected30dUserViewByUniverse, R.AdsUAExpRobuxRevenueResurrected7dUserView, R.AdsUAExpRobuxRevenueResurrected7dUserViewByUniverse, R.AdsUAExpRobuxRevenueReturningUserView, R.AdsUAExpRobuxRevenueReturningUserViewByUniverse, R.AdsUANumClicksDefaultView, R.AdsUANumClicksDefaultViewByUniverse, R.AdsUANumClicksNewUsers, R.AdsUANumClicksNewUsersByUniverse, R.AdsUANumClicksResurrected30dUsers, R.AdsUANumClicksResurrected30dUsersByUniverse, R.AdsUANumClicksResurrected7dUsers, R.AdsUANumClicksResurrected7dUsersByUniverse, R.AdsUANumClicksReturningUsers, R.AdsUANumClicksReturningUsersByUniverse, R.AdsUANumImpressionsDefaultView, R.AdsUANumImpressionsDefaultViewByUniverse, R.AdsUANumImpressionsNewUsers, R.AdsUANumImpressionsNewUsersByUniverse, R.AdsUANumImpressionsResurrected30dUsers, R.AdsUANumImpressionsResurrected30dUsersByUniverse, R.AdsUANumImpressionsResurrected7dUsers, R.AdsUANumImpressionsResurrected7dUsersByUniverse, R.AdsUANumImpressionsReturningUsers, R.AdsUANumImpressionsReturningUsersByUniverse, R.AdsUANumPlaysDefaultView, R.AdsUANumPlaysDefaultViewByUniverse, R.AdsUANumPlaysNewUserView, R.AdsUANumPlaysNewUserViewByUniverse, R.AdsUANumPlaysResurrected30dUserView, R.AdsUANumPlaysResurrected30dUserViewByUniverse, R.AdsUANumPlaysResurrected7dUserView, R.AdsUANumPlaysResurrected7dUserViewByUniverse, R.AdsUANumPlaysReturningUserView, R.AdsUANumPlaysReturningUserViewByUniverse, R.AdsUAPlaytimeDefaultView, R.AdsUAPlaytimeDefaultViewByUniverse, R.AdsUAPlaytimeNewUserView, R.AdsUAPlaytimeNewUserViewByUniverse, R.AdsUAPlaytimeResurrected30dUserView, R.AdsUAPlaytimeResurrected30dUserViewByUniverse, R.AdsUAPlaytimeResurrected7dUserView, R.AdsUAPlaytimeResurrected7dUserViewByUniverse, R.AdsUAPlaytimeReturningUserView, R.AdsUAPlaytimeReturningUserViewByUniverse, R.AdsUARoas, R.AdsUARoasByUniverse, R.AdsUARobuxRevenueDefaultView, R.AdsUARobuxRevenueDefaultViewByUniverse, R.AdsUARobuxRevenueNewUserView, R.AdsUARobuxRevenueNewUserViewByUniverse, R.AdsUARobuxRevenueResurrected30dUserView, R.AdsUARobuxRevenueResurrected30dUserViewByUniverse, R.AdsUARobuxRevenueResurrected7dUserView, R.AdsUARobuxRevenueResurrected7dUserViewByUniverse, R.AdsUARobuxRevenueReturningUserView, R.AdsUARobuxRevenueReturningUserViewByUniverse, R.AdsUATotalSpendMicroUsdDefaultView, R.AdsUATotalSpendMicroUsdDefaultViewByUniverse, R.AdsUATotalSpendMicroUsdNewUsers, R.AdsUATotalSpendMicroUsdNewUsersByUniverse, R.AdsUATotalSpendMicroUsdResurrected30dUsers, R.AdsUATotalSpendMicroUsdResurrected30dUsersByUniverse, R.AdsUATotalSpendMicroUsdResurrected7dUsers, R.AdsUATotalSpendMicroUsdResurrected7dUsersByUniverse, R.AdsUATotalSpendMicroUsdReturningUsers, R.AdsUATotalSpendMicroUsdReturningUsersByUniverse, R.AdsVideo2DAdsPerEDAUBreakdown, R.AdsVideo2DEligibleDauBreakdown, R.AdsVideo2DReachRatioBreakdown, R.AffiliateLinkDailyAffiliateActiveSpenderReactivationsPayoutRobux, R.AffiliateLinkDailyAffiliateReactivationsPayoutRobux, R.AffiliateLinkDailyAffiliateSignupsPayoutRobux, R.AffiliateLinkDailyAverageRobuxBookingsPerReactivationSpender, R.AffiliateLinkDailyAverageRobuxBookingsPerSignupSpender, R.AffiliateLinkDailyBookingsPerSpenderCombined, R.AffiliateLinkDailyQualifiedActiveSpenderReactivations, R.AffiliateLinkDailyQualifiedReactivations, R.AffiliateLinkDailyQualifiedReactivationsBookingsRobux, R.AffiliateLinkDailyQualifiedReactivationsSpenders, R.AffiliateLinkDailyQualifiedSignupSpenders, R.AffiliateLinkDailyQualifiedSignups, R.AffiliateLinkDailyQualifiedSignupsBookingsRobux, R.AffiliateLinkDailyTotalPayoutRobux, R.AffiliateLinkDailyUniqueClick, R.AffiliateLinkDailyVisits, R.Attribution1DPayerConversionRatio, R.Attribution1DPayerConversionRatioMigration, R.Attribution1DPlaytimePerUserInMinutes, R.Attribution1DPlaytimePerUserInMinutesMigration, R.Attribution1DRobuxPerUser, R.Attribution1DRobuxPerUserMigration, R.Attribution30DPayerConversionRatio, R.Attribution30DPayerConversionRatioMigration, R.Attribution30DPlaytimePerUserInMinutes, R.Attribution30DPlaytimePerUserInMinutesMigration, R.Attribution30DRobuxPerUser, R.Attribution30DRobuxPerUserMigration, R.Attribution7DPayerConversionRatio, R.Attribution7DPayerConversionRatioMigration, R.Attribution7DPlaytimePerUserInMinutes, R.Attribution7DPlaytimePerUserInMinutesMigration, R.Attribution7DRobuxPerUser, R.Attribution7DRobuxPerUserMigration, R.AttributionD1RetentionRatio, R.AttributionD1RetentionRatioMigration, R.AttributionD30RetentionRatio, R.AttributionD30RetentionRatioMigration, R.AttributionD7RetentionRatio, R.AttributionD7RetentionRatioMigration, R.AverageImpressionsPerUser, R.AveragePlayTimeMinutesPerDAU, R.AverageRevenuePerPayingUser, R.AverageRevenuePerUser, R.AverageSessionLengthMinutes, R.AvgViewTimePerView, R.AvgViewTimePerViewer, d.BandwidthTotalRecvBpsAvg, R.BandwidthTotalRecvBpsForOrdering, d.BandwidthTotalRecvBpsP10, d.BandwidthTotalRecvBpsP50, d.BandwidthTotalRecvBpsP90, R.BandwidthTotalRecvMaxBytes, R.BandwidthTotalRecvUpdatesPerSecond, d.BandwidthTotalSendBpsAvg, R.BandwidthTotalSendBpsForOrdering, d.BandwidthTotalSendBpsP10, d.BandwidthTotalSendBpsP50, d.BandwidthTotalSendBpsP90, R.BandwidthTotalSendMaxBytes, R.BandwidthTotalSendUpdatesPerSecond, R.BonusPromotionsAwardedCount, R.BonusPromotionsGameJoinCount, R.BonusPromotionsImpressionCount, R.ClickCVR, R.ClickCVRMigration, R.CommentRatePerImpression, R.CommerceCheckouts, R.CommerceClicks, R.CommerceGMV, R.CommerceImpressions, R.CommerceOrders, R.CommerceQuantitySold, R.CommerceUniqueCheckouts, R.CommerceUniqueClicks, R.CommerceUniqueImpressions, R.CommerceUniqueOrders, R.CommunityAnnouncementDeliveries, R.CommunityAnnouncementEngagement, R.CommunityAnnouncementEventCount, R.CommunityAnnouncementNetReactions, R.CommunityAnnouncementNotificationCTR, R.CommunityAnnouncementUniqueClicks, R.CommunityAnnouncementUniqueUsers, R.CommunityForumContentEventCount, R.CommunityForumContentUniqueUsers, R.CommunityGroupPageUniqueVisitors, R.CommunityGroupPageViews, R.CommunityMembershipChangeEvents, R.CommunityMembershipCount, R.CreatorRewardsAudienceExpansionFunnelEstimatedPayout, R.CreatorRewardsAudienceExpansionFunnelPayerConversion60D, R.CreatorRewardsAudienceExpansionFunnelPayerConversion7D, R.CreatorRewardsAudienceExpansionFunnelPercentOfNewUsers, R.CreatorRewardsAudienceExpansionFunnelReactivations, R.CreatorRewardsAudienceExpansionFunnelRetentionD1, R.CreatorRewardsAudienceExpansionFunnelRetentionD7, R.CreatorRewardsAudienceExpansionFunnelRevenue1D, R.CreatorRewardsAudienceExpansionFunnelRevenue60D, R.CreatorRewardsAudienceExpansionFunnelRevenue7D, R.CreatorRewardsAudienceExpansionFunnelRevenuePerPayer60D, R.CreatorRewardsAudienceExpansionFunnelRevenuePerPayer7D, R.CreatorRewardsAudienceExpansionFunnelRevenuePerUser60D, R.CreatorRewardsAudienceExpansionFunnelRevenuePerUser7D, R.CreatorRewardsAudienceExpansionFunnelSignups, R.CreatorRewardsAudienceExpansionFunnelUserCount, R.CreatorRewardsAverageRobuxBookingsPerSpender, R.CreatorRewardsLifetimeEstimatedAffiliatePayoutRobux, R.CreatorRewardsLifetimeQualifiedReactivations, R.CreatorRewardsLifetimeQualifiedSignups, R.CreatorRewardsLifetimeQualifiedSpenders, R.CubeDailyRequests, R.CubeLatencyAvg, R.CubeLatencyP99, R.CubeOutcomes, R.CubeTotalRequests, d.CustomEventAvgPerUserValue, d.CustomEventAvgValue, d.CustomEventCount, d.CustomEventCountUser, d.CustomEventMaxValue, d.CustomEventMinValue, d.CustomEventSumValue, R.D1Retention, R.D30Retention, R.D7Retention, R.DailyActiveUsers, R.DailyCohortRetention, R.DailyRetentionCohortNoDim, R.DailyRevenue, R.DauMauStickiness, R.DeviceTrustDailyActiveUsers, R.DeviceTrustRobuxSpentLast28Days, R.EarningsTotalUsd, R.EconomyAverageWalletBalance, R.EconomyTransactionAmount, R.EconomyTransactionAmountSinks, R.EconomyTransactionCount, R.EndToEndCVR, R.EndToEndCVRMigration, R.EventAvgDailyActiveUsers, R.EventAvgDailyRevenue, R.EventAvgDailyUserPlaytimeMinutes, R.EventAvgRevenuePerDailyActiveUser, R.ForwardD1Retention, R.ForwardD30Retention, R.ForwardD7Retention, R.FriendReferralAverageRobuxBookingsPerSpender, R.FriendReferralLifetimeEstimatedAffiliatePayoutRobux, R.FriendReferralLifetimeQualifiedSignups, R.FriendReferralLifetimeQualifiedSpenders, R.FriendReferralLifetimeVisits, R.FunnelCohortCompletionRate, R.FunnelCohortSessionCompletionRate, R.FunnelStepChurnRate, R.FunnelStepCompletionRate, R.FunnelStepOverallCompletionRate, R.FunnelStepTotalCount, R.FunnelUserChurnRate, R.FunnelUserOverallCompletionRate, R.FunnelUserStepCompletionRate, R.FunnelUserTotalCount, R.ImpressionCVR, R.ImpressionCVRMigration, R.IphEarningsRobux, R.IphEarningsRobuxPartial, R.IphTransactionCount, R.IphTransactionCountPartial, R.ItemAvatar3dLimitedAvailableQuantity, R.ItemAvatar3dLimitedTotalQuantity, R.ItemAverageTransactionPrice, R.ItemLifetimeCreatorEarning, R.ItemLifetimeRebateAmount, R.ItemLifetimeRobuxSpent, R.ItemLifetimeTransactionCount, R.ItemLimitedSoldPercentage, R.ItemMonetizationRevenue, R.ItemMonetizationSales, R.ItemPublishAdvance, R.ItemPublishAdvanceRecoupedPercentage, R.ItemTotalCreatorEarning, R.ItemTotalRobuxSpent, R.ItemTotalTransactionCount, R.JoinRatePerImpression, R.JourneyCompletionUsers, R.JourneyEntryTransitions, R.JourneyLastStageTransitions, R.JourneyNodeTransitionChurnCount, R.JourneyNodeTransitionChurnRate, R.JourneyNodeTransitionCount, R.JourneyNodeUserChurnCount, R.JourneyNodeUserChurnRate, R.JourneyNodeUserCount, R.JourneyStageChurnRate, R.JourneyStageSkipRate, R.JourneyStageSkipTransitionCount, R.JourneyStageSkipTransitionRate, R.JourneyStageSkipUserCount, R.JourneyStageTransitionChurnRate, R.JourneyStageTransitionCount, R.JourneyStageUserCount, R.JourneyTotalUsers, R.JourneyTransitionCount, R.JourneyTransitionCountUser, R.JourneyTransitionPctOfSource, R.JourneyTransitionPctOfStart, R.JourneyUserPctOfSource, R.JourneyUserPctOfStart, R.MaintenanceThreshold, R.MarketplaceAffiliateLinkAttributedPurchases, R.MarketplaceAffiliateLinkAttributedSpendRobux, R.MarketplaceAffiliateLinkClicks, R.MarketplaceAffiliateLinkConversionRate, R.MarketplaceAffiliateLinkEstimatedPayoutRobux, R.MarketplaceAffiliateLinkUniqueClicks, d.MatchmakingCategoricalCustomSignalsSimilarityRatioAvg, d.MatchmakingCategoricalCustomSignalsSimilarityRatioP10, d.MatchmakingCategoricalCustomSignalsSimilarityRatioP50, d.MatchmakingCategoricalCustomSignalsSimilarityRatioP90, d.MatchmakingNumericCustomSignalsDifferenceAvg, d.MatchmakingNumericCustomSignalsDifferenceP10, d.MatchmakingNumericCustomSignalsDifferenceP50, d.MatchmakingNumericCustomSignalsDifferenceP90, d.MatchmakingSignalsAgeDifferenceAvg, d.MatchmakingSignalsAgeDifferenceP10, d.MatchmakingSignalsAgeDifferenceP50, d.MatchmakingSignalsAgeDifferenceP90, d.MatchmakingSignalsCommonChatGroupRatioAvg, d.MatchmakingSignalsCommonChatGroupRatioP10, d.MatchmakingSignalsCommonChatGroupRatioP50, d.MatchmakingSignalsCommonChatGroupRatioP90, d.MatchmakingSignalsCommonDeviceTypeRatioAvg, d.MatchmakingSignalsCommonDeviceTypeRatioP10, d.MatchmakingSignalsCommonDeviceTypeRatioP50, d.MatchmakingSignalsCommonDeviceTypeRatioP90, d.MatchmakingSignalsCommonLanguageRatioAvg, d.MatchmakingSignalsCommonLanguageRatioP10, d.MatchmakingSignalsCommonLanguageRatioP50, d.MatchmakingSignalsCommonLanguageRatioP90, d.MatchmakingSignalsDeltaPingAvg, d.MatchmakingSignalsDeltaPingP10, d.MatchmakingSignalsDeltaPingP50, d.MatchmakingSignalsDeltaPingP90, d.MatchmakingSignalsEstimatePingAvg, d.MatchmakingSignalsEstimatePingP10, d.MatchmakingSignalsEstimatePingP50, d.MatchmakingSignalsEstimatePingP90, d.MatchmakingSignalsOccupancyRatioAvg, d.MatchmakingSignalsOccupancyRatioP10, d.MatchmakingSignalsOccupancyRatioP50, d.MatchmakingSignalsOccupancyRatioP90, d.MatchmakingSignalsPlayHistoryDifferenceAvg, d.MatchmakingSignalsPlayHistoryDifferenceP10, d.MatchmakingSignalsPlayHistoryDifferenceP50, d.MatchmakingSignalsPlayHistoryDifferenceP90, R.MatchmakingSignalsPreferredPlayerMatchRatioAvg, d.MatchmakingSignalsVoiceChatRatioAvg, d.MatchmakingSignalsVoiceChatRatioP10, d.MatchmakingSignalsVoiceChatRatioP50, d.MatchmakingSignalsVoiceChatRatioP90, R.MonthlyActiveUsers, R.PayingUsers, R.PayingUsersCVR, R.PayoutRobux, R.PayoutRobuxV2, R.PersonalizedShopsConversionRate, R.PersonalizedShopsImpressions, R.PersonalizedShopsPurchases, R.PersonalizedShopsRevenue, R.PlayerFeedbackVotesCount, R.PotentialEarningsTotalUsd, R.PotentialExtraEarningsTotalUsd, R.PurchaseRatePerImpression, R.QualifiedEndToEndCVR, R.QualifiedEndToEndCVRMigration, R.QualifiedUniqueUsersWithPlaySessions, R.QualifiedUniqueUsersWithPlaySessionsMigration, R.RFYD1CoplayDays, R.RFYD1Playtime, R.RFYD1QualifiedPlaySessions, R.RFYD1RobuxSpend, R.RFYD1SpendDay, R.RFYD2To7CoplayDays, R.RFYD2To7PlayDays, R.RFYD2To7Playtime, R.RFYD2To7QualifiedPlaySessions, R.RFYD2To7RobuxSpend, R.RFYD2To7SpendDays, R.RFYD8To28CoplayDays, R.RFYD8To28PlayDays, R.RFYD8To28Playtime, R.RFYD8To28QualifiedPlaySessions, R.RFYD8To28RobuxSpend, R.RFYD8To28SpendDays, R.RFYDeepEngagementRate, R.RFYDuration0To60, R.RFYDuration181To600, R.RFYDuration61To180, R.RFYDurationGreaterThan600, R.RFYL7IntentionalCoplayDays, R.RFYL7PlayDays, R.RFYL7PlaySessionsPerUser, R.RFYL7PlayTime, R.RFYL7RobuxSpent, R.RFYL7RobuxSpentDays, R.RFYPlayThroughRate, R.RFYQualifiedPTR, R.RFYUniqueNotInterestedUsersPerMillionImpressions, R.RSVPCount, R.ReactionRatePerImpression, R.RecommendationDau, R.RecommendationViewsTotal, R.RelativeThresholdCapture, R.RobloxPlusDevBountyAvgPlaytimePerSubscriberMins, R.RobloxPlusDevBountyAvgRobuxSpentPerSubscriber, R.RobloxPlusDevBountyDailySubscribers, R.RobloxPlusDevBountyPayoutRobux, R.RobloxPlusDevBountySubscriberCount, R.RobloxPlusDevBountySubscriberSpend, R.RotraceTotalCalls, R.ShareLinkAttribution1DPayerConversionRatio, R.ShareLinkAttribution1DPlaytimePerUserInMinutes, R.ShareLinkAttribution1DRobuxPerUser, R.ShareLinkAttribution30DPayerConversionRatio, R.ShareLinkAttribution30DPlaytimePerUserInMinutes, R.ShareLinkAttribution30DRobuxPerUser, R.ShareLinkAttribution7DPayerConversionRatio, R.ShareLinkAttribution7DPlaytimePerUserInMinutes, R.ShareLinkAttribution7DRobuxPerUser, R.ShareLinkAttributionD1RetentionRatio, R.ShareLinkAttributionD30RetentionRatio, R.ShareLinkAttributionD7RetentionRatio, R.ShareLinkClickCVR, R.ShareLinkQualifiedClickCVR, R.ShareLinkQualifiedUniqueUsersWithPlaySessions, R.ShareLinkUniqueUsersWithClicks, R.ShareLinkUniqueUsersWithPlaySessions, R.ShareRatePerImpression, R.SourceCount, R.SourceCountRatioKpi, R.SponsoredAdPlays, R.StoreRevenue, R.StoreTransactions, R.TargetThreshold, R.ThumbnailAverageSessionLengthMinutes, R.ThumbnailImpressions, R.ThumbnailL7QualifiedPTR, R.ThumbnailQualifiedPTR, R.ThumbnailQualifiedPlays, R.ThumbnailWinningSegments, R.TotalAbuseReports, R.TotalActions, R.TotalActionsByActionType, R.TotalComments, R.TotalJoins, R.TotalPlayTimeHours, R.TotalPurchases, R.TotalReactionsAdded, R.TotalSessionsEndedInBucket, R.TotalShares, R.TotalViewHours, R.UniqueAbuseReportSubmittersPer1000PlaytimeHours, R.UniqueItemsPerUser, R.UniqueServerShutdowns, R.UniqueUsersWithClicks, R.UniqueUsersWithClicksMigration, R.UniqueUsersWithImpressions, R.UniqueUsersWithImpressionsMigration, R.UniqueUsersWithPlaySessions, R.UniqueUsersWithPlaySessionsMigration, R.UsersJoinedFromNotifications, R.Visits, R.WeeklyCohortRetention, {
+        rs = (R.ActionRatePerDau, R.ActionRatePerDauByActionType, R.ActionRatePerImpression, R.AdsPublisherReportingAdsPerEDAU, R.AdsPublisherReportingDisplayAdImpressions, R.AdsPublisherReportingImmersiveDisplayRevenue, R.AdsPublisherReportingImmersiveDisplayRobuxEpm, R.AdsPublisherReportingImmersiveEvents, R.AdsPublisherReportingImmersiveVideoViews, R.AdsPublisherReportingPortalRevenueRobux, R.AdsPublisherReportingRobuxEpm, R.AdsPublisherReportingRobuxEpt, R.AdsPublisherReportingTotalImpressions, R.AdsPublisherReportingTotalRevenueRobux, R.AdsPublisherReportingTotalTeleports, R.AdsPublisherReportingVideo2DAdsPerDUV, R.AdsPublisherReportingVideo2DAverageEarningPerDailyUniqueViewer, R.AdsPublisherReportingVideo2DConversionRate, R.AdsPublisherReportingVideo2DDailyUniqueViewer, R.AdsPublisherReportingVideo2DEligibleDau, R.AdsPublisherReportingVideo2DEpmNoUnvalidatedPc, R.AdsPublisherReportingVideo2DEvents, R.AdsPublisherReportingVideo2DFillPercent, R.AdsPublisherReportingVideo2DFills, R.AdsPublisherReportingVideo2DImpressions, R.AdsPublisherReportingVideo2DReachRatio, R.AdsPublisherReportingVideo2DRequests, R.AdsPublisherReportingVideo2DRevenueRobux, R.AdsPublisherReportingVideo2DRewardPercent, R.AdsPublisherReportingVideo2DRewards, R.AdsPublisherReportingVideo2DRobuxEpm, R.AdsRoasEstimate, R.AdsRoasEstimateByUniverse, R.AdsUAEarningsUsdDefaultView, R.AdsUAEarningsUsdDefaultViewByUniverse, R.AdsUAEarningsUsdNewUserView, R.AdsUAEarningsUsdNewUserViewByUniverse, R.AdsUAEarningsUsdResurrected30dUserView, R.AdsUAEarningsUsdResurrected30dUserViewByUniverse, R.AdsUAEarningsUsdResurrected7dUserView, R.AdsUAEarningsUsdResurrected7dUserViewByUniverse, R.AdsUAEarningsUsdReturningUserView, R.AdsUAEarningsUsdReturningUserViewByUniverse, R.AdsUAExpNumPlaysDefaultView, R.AdsUAExpNumPlaysDefaultViewByUniverse, R.AdsUAExpNumPlaysNewUserView, R.AdsUAExpNumPlaysNewUserViewByUniverse, R.AdsUAExpNumPlaysResurrected30dUserView, R.AdsUAExpNumPlaysResurrected30dUserViewByUniverse, R.AdsUAExpNumPlaysResurrected7dUserView, R.AdsUAExpNumPlaysResurrected7dUserViewByUniverse, R.AdsUAExpNumPlaysReturningUserView, R.AdsUAExpNumPlaysReturningUserViewByUniverse, R.AdsUAExpPlaytimeDefaultView, R.AdsUAExpPlaytimeDefaultViewByUniverse, R.AdsUAExpPlaytimeNewUserView, R.AdsUAExpPlaytimeNewUserViewByUniverse, R.AdsUAExpPlaytimeResurrected30dUserView, R.AdsUAExpPlaytimeResurrected30dUserViewByUniverse, R.AdsUAExpPlaytimeResurrected7dUserView, R.AdsUAExpPlaytimeResurrected7dUserViewByUniverse, R.AdsUAExpPlaytimeReturningUserView, R.AdsUAExpPlaytimeReturningUserViewByUniverse, R.AdsUAExpRobuxRevenueDefaultView, R.AdsUAExpRobuxRevenueDefaultViewByUniverse, R.AdsUAExpRobuxRevenueNewUserView, R.AdsUAExpRobuxRevenueNewUserViewByUniverse, R.AdsUAExpRobuxRevenueResurrected30dUserView, R.AdsUAExpRobuxRevenueResurrected30dUserViewByUniverse, R.AdsUAExpRobuxRevenueResurrected7dUserView, R.AdsUAExpRobuxRevenueResurrected7dUserViewByUniverse, R.AdsUAExpRobuxRevenueReturningUserView, R.AdsUAExpRobuxRevenueReturningUserViewByUniverse, R.AdsUANumClicksDefaultView, R.AdsUANumClicksDefaultViewByUniverse, R.AdsUANumClicksNewUsers, R.AdsUANumClicksNewUsersByUniverse, R.AdsUANumClicksResurrected30dUsers, R.AdsUANumClicksResurrected30dUsersByUniverse, R.AdsUANumClicksResurrected7dUsers, R.AdsUANumClicksResurrected7dUsersByUniverse, R.AdsUANumClicksReturningUsers, R.AdsUANumClicksReturningUsersByUniverse, R.AdsUANumImpressionsDefaultView, R.AdsUANumImpressionsDefaultViewByUniverse, R.AdsUANumImpressionsNewUsers, R.AdsUANumImpressionsNewUsersByUniverse, R.AdsUANumImpressionsResurrected30dUsers, R.AdsUANumImpressionsResurrected30dUsersByUniverse, R.AdsUANumImpressionsResurrected7dUsers, R.AdsUANumImpressionsResurrected7dUsersByUniverse, R.AdsUANumImpressionsReturningUsers, R.AdsUANumImpressionsReturningUsersByUniverse, R.AdsUANumPlaysDefaultView, R.AdsUANumPlaysDefaultViewByUniverse, R.AdsUANumPlaysNewUserView, R.AdsUANumPlaysNewUserViewByUniverse, R.AdsUANumPlaysResurrected30dUserView, R.AdsUANumPlaysResurrected30dUserViewByUniverse, R.AdsUANumPlaysResurrected7dUserView, R.AdsUANumPlaysResurrected7dUserViewByUniverse, R.AdsUANumPlaysReturningUserView, R.AdsUANumPlaysReturningUserViewByUniverse, R.AdsUAPlaytimeDefaultView, R.AdsUAPlaytimeDefaultViewByUniverse, R.AdsUAPlaytimeNewUserView, R.AdsUAPlaytimeNewUserViewByUniverse, R.AdsUAPlaytimeResurrected30dUserView, R.AdsUAPlaytimeResurrected30dUserViewByUniverse, R.AdsUAPlaytimeResurrected7dUserView, R.AdsUAPlaytimeResurrected7dUserViewByUniverse, R.AdsUAPlaytimeReturningUserView, R.AdsUAPlaytimeReturningUserViewByUniverse, R.AdsUARoas, R.AdsUARoasByUniverse, R.AdsUARobuxRevenueDefaultView, R.AdsUARobuxRevenueDefaultViewByUniverse, R.AdsUARobuxRevenueNewUserView, R.AdsUARobuxRevenueNewUserViewByUniverse, R.AdsUARobuxRevenueResurrected30dUserView, R.AdsUARobuxRevenueResurrected30dUserViewByUniverse, R.AdsUARobuxRevenueResurrected7dUserView, R.AdsUARobuxRevenueResurrected7dUserViewByUniverse, R.AdsUARobuxRevenueReturningUserView, R.AdsUARobuxRevenueReturningUserViewByUniverse, R.AdsUATotalSpendMicroUsdDefaultView, R.AdsUATotalSpendMicroUsdDefaultViewByUniverse, R.AdsUATotalSpendMicroUsdNewUsers, R.AdsUATotalSpendMicroUsdNewUsersByUniverse, R.AdsUATotalSpendMicroUsdResurrected30dUsers, R.AdsUATotalSpendMicroUsdResurrected30dUsersByUniverse, R.AdsUATotalSpendMicroUsdResurrected7dUsers, R.AdsUATotalSpendMicroUsdResurrected7dUsersByUniverse, R.AdsUATotalSpendMicroUsdReturningUsers, R.AdsUATotalSpendMicroUsdReturningUsersByUniverse, R.AdsVideo2DAdsPerEDAUBreakdown, R.AdsVideo2DEligibleDauBreakdown, R.AdsVideo2DReachRatioBreakdown, R.AffiliateLinkDailyAffiliateActiveSpenderReactivationsPayoutRobux, R.AffiliateLinkDailyAffiliateReactivationsPayoutRobux, R.AffiliateLinkDailyAffiliateSignupsPayoutRobux, R.AffiliateLinkDailyAverageRobuxBookingsPerReactivationSpender, R.AffiliateLinkDailyAverageRobuxBookingsPerSignupSpender, R.AffiliateLinkDailyBookingsPerSpenderCombined, R.AffiliateLinkDailyQualifiedActiveSpenderReactivations, R.AffiliateLinkDailyQualifiedReactivations, R.AffiliateLinkDailyQualifiedReactivationsBookingsRobux, R.AffiliateLinkDailyQualifiedReactivationsSpenders, R.AffiliateLinkDailyQualifiedSignupSpenders, R.AffiliateLinkDailyQualifiedSignups, R.AffiliateLinkDailyQualifiedSignupsBookingsRobux, R.AffiliateLinkDailyTotalPayoutRobux, R.AffiliateLinkDailyUniqueClick, R.AffiliateLinkDailyVisits, R.Attribution1DPayerConversionRatio, R.Attribution1DPayerConversionRatioMigration, R.Attribution1DPlaytimePerUserInMinutes, R.Attribution1DPlaytimePerUserInMinutesMigration, R.Attribution1DRobuxPerUser, R.Attribution1DRobuxPerUserMigration, R.Attribution30DPayerConversionRatio, R.Attribution30DPayerConversionRatioMigration, R.Attribution30DPlaytimePerUserInMinutes, R.Attribution30DPlaytimePerUserInMinutesMigration, R.Attribution30DRobuxPerUser, R.Attribution30DRobuxPerUserMigration, R.Attribution7DPayerConversionRatio, R.Attribution7DPayerConversionRatioMigration, R.Attribution7DPlaytimePerUserInMinutes, R.Attribution7DPlaytimePerUserInMinutesMigration, R.Attribution7DRobuxPerUser, R.Attribution7DRobuxPerUserMigration, R.AttributionD1RetentionRatio, R.AttributionD1RetentionRatioMigration, R.AttributionD30RetentionRatio, R.AttributionD30RetentionRatioMigration, R.AttributionD7RetentionRatio, R.AttributionD7RetentionRatioMigration, R.AverageImpressionsPerUser, R.AveragePlayTimeMinutesPerDAU, R.AverageRevenuePerPayingUser, R.AverageRevenuePerUser, R.AverageSessionLengthMinutes, R.AvgViewTimePerView, R.AvgViewTimePerViewer, d.BandwidthTotalRecvBpsAvg, R.BandwidthTotalRecvBpsForOrdering, d.BandwidthTotalRecvBpsP10, d.BandwidthTotalRecvBpsP50, d.BandwidthTotalRecvBpsP90, R.BandwidthTotalRecvMaxBytes, R.BandwidthTotalRecvUpdatesPerSecond, d.BandwidthTotalSendBpsAvg, R.BandwidthTotalSendBpsForOrdering, d.BandwidthTotalSendBpsP10, d.BandwidthTotalSendBpsP50, d.BandwidthTotalSendBpsP90, R.BandwidthTotalSendMaxBytes, R.BandwidthTotalSendUpdatesPerSecond, R.BonusPromotionsAwardedCount, R.BonusPromotionsGameJoinCount, R.BonusPromotionsImpressionCount, R.ClickCVR, R.ClickCVRMigration, R.CommentRatePerImpression, R.CommerceCheckouts, R.CommerceClicks, R.CommerceGMV, R.CommerceImpressions, R.CommerceOrders, R.CommerceQuantitySold, R.CommerceUniqueCheckouts, R.CommerceUniqueClicks, R.CommerceUniqueImpressions, R.CommerceUniqueOrders, R.CommunityAnnouncementDeliveries, R.CommunityAnnouncementEngagement, R.CommunityAnnouncementEventCount, R.CommunityAnnouncementNetReactions, R.CommunityAnnouncementNotificationCTR, R.CommunityAnnouncementUniqueClicks, R.CommunityAnnouncementUniqueUsers, R.CommunityForumContentEventCount, R.CommunityForumContentUniqueUsers, R.CommunityGroupPageUniqueVisitors, R.CommunityGroupPageViews, R.CommunityMembershipChangeEvents, R.CommunityMembershipCount, R.CreatorRewardsAudienceExpansionFunnelEstimatedPayout, R.CreatorRewardsAudienceExpansionFunnelPayerConversion60D, R.CreatorRewardsAudienceExpansionFunnelPayerConversion7D, R.CreatorRewardsAudienceExpansionFunnelPercentOfNewUsers, R.CreatorRewardsAudienceExpansionFunnelReactivations, R.CreatorRewardsAudienceExpansionFunnelRetentionD1, R.CreatorRewardsAudienceExpansionFunnelRetentionD7, R.CreatorRewardsAudienceExpansionFunnelRevenue1D, R.CreatorRewardsAudienceExpansionFunnelRevenue60D, R.CreatorRewardsAudienceExpansionFunnelRevenue7D, R.CreatorRewardsAudienceExpansionFunnelRevenuePerPayer60D, R.CreatorRewardsAudienceExpansionFunnelRevenuePerPayer7D, R.CreatorRewardsAudienceExpansionFunnelRevenuePerUser60D, R.CreatorRewardsAudienceExpansionFunnelRevenuePerUser7D, R.CreatorRewardsAudienceExpansionFunnelSignups, R.CreatorRewardsAudienceExpansionFunnelUserCount, R.CreatorRewardsAverageRobuxBookingsPerSpender, R.CreatorRewardsLifetimeEstimatedAffiliatePayoutRobux, R.CreatorRewardsLifetimeQualifiedReactivations, R.CreatorRewardsLifetimeQualifiedSignups, R.CreatorRewardsLifetimeQualifiedSpenders, R.CubeDailyRequests, R.CubeLatencyAvg, R.CubeLatencyP99, R.CubeOutcomes, R.CubeTotalRequests, d.CustomEventAvgPerUserValue, d.CustomEventAvgValue, d.CustomEventCount, d.CustomEventCountUser, d.CustomEventMaxValue, d.CustomEventMinValue, d.CustomEventSumValue, R.D1Retention, R.D30Retention, R.D7Retention, R.DailyActiveUsers, R.DailyCohortRetention, R.DailyRetentionCohortNoDim, R.DailyRevenue, R.DauMauStickiness, R.DeviceTrustDailyActiveUsers, R.DeviceTrustRobuxSpentLast28Days, R.EarningsTotalUsd, R.EconomyAverageWalletBalance, R.EconomyTransactionAmount, R.EconomyTransactionAmountSinks, R.EconomyTransactionCount, R.EndToEndCVR, R.EndToEndCVRMigration, R.EventAvgDailyActiveUsers, R.EventAvgDailyRevenue, R.EventAvgDailyUserPlaytimeMinutes, R.EventAvgRevenuePerDailyActiveUser, R.ForwardD1Retention, R.ForwardD30Retention, R.ForwardD7Retention, R.FriendReferralAverageRobuxBookingsPerSpender, R.FriendReferralLifetimeEstimatedAffiliatePayoutRobux, R.FriendReferralLifetimeQualifiedSignups, R.FriendReferralLifetimeQualifiedSpenders, R.FriendReferralLifetimeVisits, R.FunnelCohortCompletionRate, R.FunnelCohortSessionCompletionRate, R.FunnelStepChurnRate, R.FunnelStepCompletionRate, R.FunnelStepOverallCompletionRate, R.FunnelStepTotalCount, R.FunnelUserChurnRate, R.FunnelUserOverallCompletionRate, R.FunnelUserStepCompletionRate, R.FunnelUserTotalCount, R.ImpressionCVR, R.ImpressionCVRMigration, R.IphEarningsRobux, R.IphEarningsRobuxPartial, R.IphTransactionCount, R.IphTransactionCountPartial, R.ItemAvatar3dLimitedAvailableQuantity, R.ItemAvatar3dLimitedTotalQuantity, R.ItemAverageTransactionPrice, R.ItemLifetimeCreatorEarning, R.ItemLifetimeRebateAmount, R.ItemLifetimeRobuxSpent, R.ItemLifetimeTransactionCount, R.ItemLimitedSoldPercentage, R.ItemMonetizationRevenue, R.ItemMonetizationSales, R.ItemPublishAdvance, R.ItemPublishAdvanceRecoupedPercentage, R.ItemTotalCreatorEarning, R.ItemTotalRobuxSpent, R.ItemTotalTransactionCount, R.JoinRatePerImpression, R.JourneyCompletionUsers, R.JourneyEntryTransitions, R.JourneyLastStageTransitions, R.JourneyNodeTransitionChurnCount, R.JourneyNodeTransitionChurnRate, R.JourneyNodeTransitionCount, R.JourneyNodeUserChurnCount, R.JourneyNodeUserChurnRate, R.JourneyNodeUserCount, R.JourneyStageChurnRate, R.JourneyStageSkipRate, R.JourneyStageSkipTransitionCount, R.JourneyStageSkipTransitionRate, R.JourneyStageSkipUserCount, R.JourneyStageTransitionChurnRate, R.JourneyStageTransitionCount, R.JourneyStageUserCount, R.JourneyTotalUsers, R.JourneyTransitionCount, R.JourneyTransitionCountUser, R.JourneyTransitionPctOfSource, R.JourneyTransitionPctOfStart, R.JourneyUserPctOfSource, R.JourneyUserPctOfStart, R.MaintenanceThreshold, R.MarketplaceAffiliateLinkAttributedPurchases, R.MarketplaceAffiliateLinkAttributedSpendRobux, R.MarketplaceAffiliateLinkClicks, R.MarketplaceAffiliateLinkConversionRate, R.MarketplaceAffiliateLinkEstimatedPayoutRobux, R.MarketplaceAffiliateLinkUniqueClicks, d.MatchmakingCategoricalCustomSignalsSimilarityRatioAvg, d.MatchmakingCategoricalCustomSignalsSimilarityRatioP10, d.MatchmakingCategoricalCustomSignalsSimilarityRatioP50, d.MatchmakingCategoricalCustomSignalsSimilarityRatioP90, d.MatchmakingNumericCustomSignalsDifferenceAvg, d.MatchmakingNumericCustomSignalsDifferenceP10, d.MatchmakingNumericCustomSignalsDifferenceP50, d.MatchmakingNumericCustomSignalsDifferenceP90, d.MatchmakingSignalsAgeDifferenceAvg, d.MatchmakingSignalsAgeDifferenceP10, d.MatchmakingSignalsAgeDifferenceP50, d.MatchmakingSignalsAgeDifferenceP90, d.MatchmakingSignalsCommonChatGroupRatioAvg, d.MatchmakingSignalsCommonChatGroupRatioP10, d.MatchmakingSignalsCommonChatGroupRatioP50, d.MatchmakingSignalsCommonChatGroupRatioP90, d.MatchmakingSignalsCommonDeviceTypeRatioAvg, d.MatchmakingSignalsCommonDeviceTypeRatioP10, d.MatchmakingSignalsCommonDeviceTypeRatioP50, d.MatchmakingSignalsCommonDeviceTypeRatioP90, d.MatchmakingSignalsCommonLanguageRatioAvg, d.MatchmakingSignalsCommonLanguageRatioP10, d.MatchmakingSignalsCommonLanguageRatioP50, d.MatchmakingSignalsCommonLanguageRatioP90, d.MatchmakingSignalsDeltaPingAvg, d.MatchmakingSignalsDeltaPingP10, d.MatchmakingSignalsDeltaPingP50, d.MatchmakingSignalsDeltaPingP90, d.MatchmakingSignalsEstimatePingAvg, d.MatchmakingSignalsEstimatePingP10, d.MatchmakingSignalsEstimatePingP50, d.MatchmakingSignalsEstimatePingP90, d.MatchmakingSignalsOccupancyRatioAvg, d.MatchmakingSignalsOccupancyRatioP10, d.MatchmakingSignalsOccupancyRatioP50, d.MatchmakingSignalsOccupancyRatioP90, d.MatchmakingSignalsPlayHistoryDifferenceAvg, d.MatchmakingSignalsPlayHistoryDifferenceP10, d.MatchmakingSignalsPlayHistoryDifferenceP50, d.MatchmakingSignalsPlayHistoryDifferenceP90, R.MatchmakingSignalsPreferredPlayerMatchRatioAvg, d.MatchmakingSignalsVoiceChatRatioAvg, d.MatchmakingSignalsVoiceChatRatioP10, d.MatchmakingSignalsVoiceChatRatioP50, d.MatchmakingSignalsVoiceChatRatioP90, R.MonthlyActiveUsers, R.PayingUsers, R.PayingUsersCVR, R.PayoutRobux, R.PayoutRobuxV2, R.PersonalizedShopsConversionRate, R.PersonalizedShopsImpressions, R.PersonalizedShopsPurchases, R.PersonalizedShopsRevenue, R.PlayerFeedbackVotesCount, R.PotentialEarningsTotalUsd, R.PotentialExtraEarningsTotalUsd, R.PurchaseRatePerImpression, R.QualifiedEndToEndCVR, R.QualifiedEndToEndCVRMigration, R.QualifiedUniqueUsersWithPlaySessions, R.QualifiedUniqueUsersWithPlaySessionsMigration, R.RFYD1CoplayDays, R.RFYD1Playtime, R.RFYD1QualifiedPlaySessions, R.RFYD1RobuxSpend, R.RFYD1SpendDay, R.RFYD2To7CoplayDays, R.RFYD2To7PlayDays, R.RFYD2To7Playtime, R.RFYD2To7QualifiedPlaySessions, R.RFYD2To7RobuxSpend, R.RFYD2To7SpendDays, R.RFYD8To28CoplayDays, R.RFYD8To28PlayDays, R.RFYD8To28Playtime, R.RFYD8To28QualifiedPlaySessions, R.RFYD8To28RobuxSpend, R.RFYD8To28SpendDays, R.RFYDeepEngagementRate, R.RFYDuration0To60, R.RFYDuration181To600, R.RFYDuration61To180, R.RFYDurationGreaterThan600, R.RFYL7IntentionalCoplayDays, R.RFYL7PlayDays, R.RFYL7PlaySessionsPerUser, R.RFYL7PlayTime, R.RFYL7RobuxSpent, R.RFYL7RobuxSpentDays, R.RFYPlayThroughRate, R.RFYQualifiedPTR, R.RFYUniqueNotInterestedUsersPerMillionImpressions, R.RSVPCount, R.ReactionRatePerImpression, R.RecommendationDau, R.RecommendationViewsTotal, R.RelativeThresholdCapture, R.RobloxPlusDevBountyAvgPlaytimePerSubscriberMins, R.RobloxPlusDevBountyAvgRobuxSpentPerSubscriber, R.RobloxPlusDevBountyDailySubscribers, R.RobloxPlusDevBountyPayoutRobux, R.RobloxPlusDevBountySubscriberCount, R.RobloxPlusDevBountySubscriberSpend, R.RotraceTotalCalls, R.ShareLinkAttribution1DPayerConversionRatio, R.ShareLinkAttribution1DPlaytimePerUserInMinutes, R.ShareLinkAttribution1DRobuxPerUser, R.ShareLinkAttribution30DPayerConversionRatio, R.ShareLinkAttribution30DPlaytimePerUserInMinutes, R.ShareLinkAttribution30DRobuxPerUser, R.ShareLinkAttribution7DPayerConversionRatio, R.ShareLinkAttribution7DPlaytimePerUserInMinutes, R.ShareLinkAttribution7DRobuxPerUser, R.ShareLinkAttributionD1RetentionRatio, R.ShareLinkAttributionD30RetentionRatio, R.ShareLinkAttributionD7RetentionRatio, R.ShareLinkClickCVR, R.ShareLinkQualifiedClickCVR, R.ShareLinkQualifiedUniqueUsersWithPlaySessions, R.ShareLinkUniqueUsersWithClicks, R.ShareLinkUniqueUsersWithPlaySessions, R.ShareRatePerImpression, R.SourceCount, R.SourceCountRatioKpi, R.SponsoredAdPlays, R.StoreRevenue, R.StoreTransactions, R.TargetThreshold, R.ThumbnailAverageSessionLengthMinutes, R.ThumbnailImpressions, R.ThumbnailL7QualifiedPTR, R.ThumbnailQualifiedPTR, R.ThumbnailQualifiedPlays, R.ThumbnailWinningSegments, R.TotalAbuseReports, R.TotalActions, R.TotalActionsByActionType, R.TotalComments, R.TotalJoins, R.TotalPlayTimeHours, R.TotalPurchases, R.TotalReactionsAdded, R.TotalSessionsEndedInBucket, R.TotalShares, R.TotalViewHours, R.UniqueAbuseReportSubmittersPer1000PlaytimeHours, R.UniqueItemsPerUser, R.UniqueServerShutdowns, R.UniqueUsersWithClicks, R.UniqueUsersWithClicksMigration, R.UniqueUsersWithImpressions, R.UniqueUsersWithImpressionsMigration, R.UniqueUsersWithPlaySessions, R.UniqueUsersWithPlaySessionsMigration, R.UsersJoinedFromNotifications, R.Visits, R.WeeklyCohortRetention, {
             [R.ActionRatePerDau]: [A.AgeGroup, A.ConfigName, A.Gender, A.LocationId, A.OperatingSystem, A.Platform],
             [R.ActionRatePerDauByActionType]: [A.ActionType, A.AgeGroup, A.ConfigName, A.Gender, A.LocationId, A.OperatingSystem, A.Platform],
             [R.ActionRatePerImpression]: [A.AgeGroup, A.ConfigName, A.Gender, A.LocationId, A.OperatingSystem, A.Platform],
@@ -23288,6 +23472,14 @@
             [R.AdsRoasEstimateByUniverse]: [A.CampaignId],
             [R.AdsUAEarningsUsdDefaultView]: [A.AdAccountId, A.AdId, A.AdSetId, A.AgeGroup, A.AttributionDateHour, A.CampaignId, A.DataQuality, A.Gender, A.OperatingSystem, A.Platform, A.SourceId],
             [R.AdsUAEarningsUsdDefaultViewByUniverse]: [A.AdId, A.AdSetId, A.AgeGroup, A.AttributionDateHour, A.CampaignId, A.DataQuality, A.Gender, A.OperatingSystem, A.Platform, A.SourceId],
+            [R.AdsUAEarningsUsdNewUserView]: [A.AdAccountId, A.AdId, A.AdSetId, A.AgeGroup, A.AttributionDateHour, A.CampaignId, A.DataQuality, A.Gender, A.OperatingSystem, A.Platform, A.SourceId],
+            [R.AdsUAEarningsUsdNewUserViewByUniverse]: [A.AdId, A.AdSetId, A.AgeGroup, A.AttributionDateHour, A.CampaignId, A.DataQuality, A.Gender, A.OperatingSystem, A.Platform, A.SourceId],
+            [R.AdsUAEarningsUsdResurrected30dUserView]: [A.AdAccountId, A.AdId, A.AdSetId, A.AgeGroup, A.AttributionDateHour, A.CampaignId, A.DataQuality, A.Gender, A.OperatingSystem, A.Platform, A.SourceId],
+            [R.AdsUAEarningsUsdResurrected30dUserViewByUniverse]: [A.AdId, A.AdSetId, A.AgeGroup, A.AttributionDateHour, A.CampaignId, A.DataQuality, A.Gender, A.OperatingSystem, A.Platform, A.SourceId],
+            [R.AdsUAEarningsUsdResurrected7dUserView]: [A.AdAccountId, A.AdId, A.AdSetId, A.AgeGroup, A.AttributionDateHour, A.CampaignId, A.DataQuality, A.Gender, A.OperatingSystem, A.Platform, A.SourceId],
+            [R.AdsUAEarningsUsdResurrected7dUserViewByUniverse]: [A.AdId, A.AdSetId, A.AgeGroup, A.AttributionDateHour, A.CampaignId, A.DataQuality, A.Gender, A.OperatingSystem, A.Platform, A.SourceId],
+            [R.AdsUAEarningsUsdReturningUserView]: [A.AdAccountId, A.AdId, A.AdSetId, A.AgeGroup, A.AttributionDateHour, A.CampaignId, A.DataQuality, A.Gender, A.OperatingSystem, A.Platform, A.SourceId],
+            [R.AdsUAEarningsUsdReturningUserViewByUniverse]: [A.AdId, A.AdSetId, A.AgeGroup, A.AttributionDateHour, A.CampaignId, A.DataQuality, A.Gender, A.OperatingSystem, A.Platform, A.SourceId],
             [R.AdsUAExpNumPlaysDefaultView]: [A.AdAccountId, A.AdId, A.AdSetId, A.AgeGroup, A.AttributionDateHour, A.CampaignId, A.DataQuality, A.Gender, A.OperatingSystem, A.Platform, A.SourceId],
             [R.AdsUAExpNumPlaysDefaultViewByUniverse]: [A.AdId, A.AdSetId, A.AgeGroup, A.AttributionDateHour, A.CampaignId, A.DataQuality, A.Gender, A.OperatingSystem, A.Platform, A.SourceId],
             [R.AdsUAExpNumPlaysNewUserView]: [A.AdAccountId, A.AdId, A.AdSetId, A.AgeGroup, A.AttributionDateHour, A.CampaignId, A.DataQuality, A.Gender, A.OperatingSystem, A.Platform, A.SourceId],
@@ -23879,6 +24071,14 @@
             [R.AdsRoasEstimateByUniverse]: [rt.None, rt.OneDay],
             [R.AdsUAEarningsUsdDefaultView]: [rt.None, rt.OneDay, rt.OneHour],
             [R.AdsUAEarningsUsdDefaultViewByUniverse]: [rt.None, rt.OneDay, rt.OneHour],
+            [R.AdsUAEarningsUsdNewUserView]: [rt.None, rt.OneDay, rt.OneHour],
+            [R.AdsUAEarningsUsdNewUserViewByUniverse]: [rt.None, rt.OneDay, rt.OneHour],
+            [R.AdsUAEarningsUsdResurrected30dUserView]: [rt.None, rt.OneDay, rt.OneHour],
+            [R.AdsUAEarningsUsdResurrected30dUserViewByUniverse]: [rt.None, rt.OneDay, rt.OneHour],
+            [R.AdsUAEarningsUsdResurrected7dUserView]: [rt.None, rt.OneDay, rt.OneHour],
+            [R.AdsUAEarningsUsdResurrected7dUserViewByUniverse]: [rt.None, rt.OneDay, rt.OneHour],
+            [R.AdsUAEarningsUsdReturningUserView]: [rt.None, rt.OneDay, rt.OneHour],
+            [R.AdsUAEarningsUsdReturningUserViewByUniverse]: [rt.None, rt.OneDay, rt.OneHour],
             [R.AdsUAExpNumPlaysDefaultView]: [rt.None, rt.OneDay, rt.OneHour],
             [R.AdsUAExpNumPlaysDefaultViewByUniverse]: [rt.None, rt.OneDay, rt.OneHour],
             [R.AdsUAExpNumPlaysNewUserView]: [rt.None, rt.OneDay, rt.OneHour],
@@ -24470,6 +24670,14 @@
             [R.AdsRoasEstimateByUniverse]: !1,
             [R.AdsUAEarningsUsdDefaultView]: !1,
             [R.AdsUAEarningsUsdDefaultViewByUniverse]: !1,
+            [R.AdsUAEarningsUsdNewUserView]: !1,
+            [R.AdsUAEarningsUsdNewUserViewByUniverse]: !1,
+            [R.AdsUAEarningsUsdResurrected30dUserView]: !1,
+            [R.AdsUAEarningsUsdResurrected30dUserViewByUniverse]: !1,
+            [R.AdsUAEarningsUsdResurrected7dUserView]: !1,
+            [R.AdsUAEarningsUsdResurrected7dUserViewByUniverse]: !1,
+            [R.AdsUAEarningsUsdReturningUserView]: !1,
+            [R.AdsUAEarningsUsdReturningUserViewByUniverse]: !1,
             [R.AdsUAExpNumPlaysDefaultView]: !1,
             [R.AdsUAExpNumPlaysDefaultViewByUniverse]: !1,
             [R.AdsUAExpNumPlaysNewUserView]: !1,
@@ -25393,10 +25601,10 @@
                 percentileTypes: [sy.AVG, sy.P10, sy.P50, sy.P90]
             }
         };
-    R.ActionRatePerDau, R.ActionRatePerDauByActionType, R.ActionRatePerImpression, R.AdsPublisherReportingAdsPerEDAU, R.AdsPublisherReportingArpu, R.AdsPublisherReportingDisplayAdImpressions, R.AdsPublisherReportingImmersiveDisplayRevenue, R.AdsPublisherReportingImmersiveDisplayRobuxEpm, R.AdsPublisherReportingImmersiveEvents, R.AdsPublisherReportingImmersiveVideoViews, R.AdsPublisherReportingPortalRevenueRobux, R.AdsPublisherReportingRobuxEpm, R.AdsPublisherReportingRobuxEpt, R.AdsPublisherReportingTotalImpressions, R.AdsPublisherReportingTotalRevenueRobux, R.AdsPublisherReportingTotalTeleports, R.AdsPublisherReportingVideo2DAdsPerDUV, R.AdsPublisherReportingVideo2DAverageEarningPerDailyUniqueViewer, R.AdsPublisherReportingVideo2DConversionRate, R.AdsPublisherReportingVideo2DDailyUniqueViewer, R.AdsPublisherReportingVideo2DEligibleDau, R.AdsPublisherReportingVideo2DEpmNoUnvalidatedPc, R.AdsPublisherReportingVideo2DEvents, R.AdsPublisherReportingVideo2DFillPercent, R.AdsPublisherReportingVideo2DFills, R.AdsPublisherReportingVideo2DImpressions, R.AdsPublisherReportingVideo2DReachRatio, R.AdsPublisherReportingVideo2DRequests, R.AdsPublisherReportingVideo2DRevenueRobux, R.AdsPublisherReportingVideo2DRewardPercent, R.AdsPublisherReportingVideo2DRewards, R.AdsPublisherReportingVideo2DRobuxEpm, R.AdsRoasEstimate, R.AdsRoasEstimateByUniverse, R.AdsUAEarningsUsdDefaultView, R.AdsUAEarningsUsdDefaultViewByUniverse, R.AdsUAExpNumPlaysDefaultView, R.AdsUAExpNumPlaysDefaultViewByUniverse, R.AdsUAExpNumPlaysNewUserView, R.AdsUAExpNumPlaysNewUserViewByUniverse, R.AdsUAExpNumPlaysResurrected30dUserView, R.AdsUAExpNumPlaysResurrected30dUserViewByUniverse, R.AdsUAExpNumPlaysResurrected7dUserView, R.AdsUAExpNumPlaysResurrected7dUserViewByUniverse, R.AdsUAExpNumPlaysReturningUserView, R.AdsUAExpNumPlaysReturningUserViewByUniverse, R.AdsUAExpPlaytimeDefaultView, R.AdsUAExpPlaytimeDefaultViewByUniverse, R.AdsUAExpPlaytimeNewUserView, R.AdsUAExpPlaytimeNewUserViewByUniverse, R.AdsUAExpPlaytimeResurrected30dUserView, R.AdsUAExpPlaytimeResurrected30dUserViewByUniverse, R.AdsUAExpPlaytimeResurrected7dUserView, R.AdsUAExpPlaytimeResurrected7dUserViewByUniverse, R.AdsUAExpPlaytimeReturningUserView, R.AdsUAExpPlaytimeReturningUserViewByUniverse, R.AdsUAExpRobuxRevenueDefaultView, R.AdsUAExpRobuxRevenueDefaultViewByUniverse, R.AdsUAExpRobuxRevenueNewUserView, R.AdsUAExpRobuxRevenueNewUserViewByUniverse, R.AdsUAExpRobuxRevenueResurrected30dUserView, R.AdsUAExpRobuxRevenueResurrected30dUserViewByUniverse, R.AdsUAExpRobuxRevenueResurrected7dUserView, R.AdsUAExpRobuxRevenueResurrected7dUserViewByUniverse, R.AdsUAExpRobuxRevenueReturningUserView, R.AdsUAExpRobuxRevenueReturningUserViewByUniverse, R.AdsUANumClicksDefaultView, R.AdsUANumClicksDefaultViewByUniverse, R.AdsUANumClicksNewUsers, R.AdsUANumClicksNewUsersByUniverse, R.AdsUANumClicksResurrected30dUsers, R.AdsUANumClicksResurrected30dUsersByUniverse, R.AdsUANumClicksResurrected7dUsers, R.AdsUANumClicksResurrected7dUsersByUniverse, R.AdsUANumClicksReturningUsers, R.AdsUANumClicksReturningUsersByUniverse, R.AdsUANumImpressionsDefaultView, R.AdsUANumImpressionsDefaultViewByUniverse, R.AdsUANumImpressionsNewUsers, R.AdsUANumImpressionsNewUsersByUniverse, R.AdsUANumImpressionsResurrected30dUsers, R.AdsUANumImpressionsResurrected30dUsersByUniverse, R.AdsUANumImpressionsResurrected7dUsers, R.AdsUANumImpressionsResurrected7dUsersByUniverse, R.AdsUANumImpressionsReturningUsers, R.AdsUANumImpressionsReturningUsersByUniverse, R.AdsUANumPlaysDefaultView, R.AdsUANumPlaysDefaultViewByUniverse, R.AdsUANumPlaysNewUserView, R.AdsUANumPlaysNewUserViewByUniverse, R.AdsUANumPlaysResurrected30dUserView, R.AdsUANumPlaysResurrected30dUserViewByUniverse, R.AdsUANumPlaysResurrected7dUserView, R.AdsUANumPlaysResurrected7dUserViewByUniverse, R.AdsUANumPlaysReturningUserView, R.AdsUANumPlaysReturningUserViewByUniverse, R.AdsUAPlaytimeDefaultView, R.AdsUAPlaytimeDefaultViewByUniverse, R.AdsUAPlaytimeNewUserView, R.AdsUAPlaytimeNewUserViewByUniverse, R.AdsUAPlaytimeResurrected30dUserView, R.AdsUAPlaytimeResurrected30dUserViewByUniverse, R.AdsUAPlaytimeResurrected7dUserView, R.AdsUAPlaytimeResurrected7dUserViewByUniverse, R.AdsUAPlaytimeReturningUserView, R.AdsUAPlaytimeReturningUserViewByUniverse, R.AdsUARoas, R.AdsUARoasByUniverse, R.AdsUARobuxRevenueDefaultView, R.AdsUARobuxRevenueDefaultViewByUniverse, R.AdsUARobuxRevenueNewUserView, R.AdsUARobuxRevenueNewUserViewByUniverse, R.AdsUARobuxRevenueResurrected30dUserView, R.AdsUARobuxRevenueResurrected30dUserViewByUniverse, R.AdsUARobuxRevenueResurrected7dUserView, R.AdsUARobuxRevenueResurrected7dUserViewByUniverse, R.AdsUARobuxRevenueReturningUserView, R.AdsUARobuxRevenueReturningUserViewByUniverse, R.AdsUATotalSpendMicroUsdDefaultView, R.AdsUATotalSpendMicroUsdDefaultViewByUniverse, R.AdsUATotalSpendMicroUsdNewUsers, R.AdsUATotalSpendMicroUsdNewUsersByUniverse, R.AdsUATotalSpendMicroUsdResurrected30dUsers, R.AdsUATotalSpendMicroUsdResurrected30dUsersByUniverse, R.AdsUATotalSpendMicroUsdResurrected7dUsers, R.AdsUATotalSpendMicroUsdResurrected7dUsersByUniverse, R.AdsUATotalSpendMicroUsdReturningUsers, R.AdsUATotalSpendMicroUsdReturningUsersByUniverse, R.AdsVideo2DAdsPerEDAUBreakdown, R.AdsVideo2DEligibleDauBreakdown, R.AdsVideo2DReachRatioBreakdown, R.AffiliateLinkDailyAffiliateActiveSpenderReactivationsPayoutRobux, R.AffiliateLinkDailyAffiliateReactivationsPayoutRobux, R.AffiliateLinkDailyAffiliateSignupsPayoutRobux, R.AffiliateLinkDailyAverageRobuxBookingsPerReactivationSpender, R.AffiliateLinkDailyAverageRobuxBookingsPerSignupSpender, R.AffiliateLinkDailyBookingsPerSpenderCombined, R.AffiliateLinkDailyQualifiedActiveSpenderReactivations, R.AffiliateLinkDailyQualifiedReactivations, R.AffiliateLinkDailyQualifiedReactivationsBookingsRobux, R.AffiliateLinkDailyQualifiedReactivationsSpenders, R.AffiliateLinkDailyQualifiedSignups, R.AffiliateLinkDailyQualifiedSignupsBookingsRobux, R.AffiliateLinkDailyQualifiedSignupSpenders, R.AffiliateLinkDailyTotalPayoutRobux, R.AffiliateLinkDailyUniqueClick, R.AffiliateLinkDailyVisits, R.AlertIncidentCount, R.Attribution1DPayerConversionRatio, R.Attribution1DPayerConversionRatioMigration, R.Attribution1DPlaytimePerUserInMinutes, R.Attribution1DPlaytimePerUserInMinutesMigration, R.Attribution1DRobuxPerUser, R.Attribution1DRobuxPerUserMigration, R.Attribution30DPayerConversionRatio, R.Attribution30DPayerConversionRatioMigration, R.Attribution30DPlaytimePerUserInMinutes, R.Attribution30DPlaytimePerUserInMinutesMigration, R.Attribution30DRobuxPerUser, R.Attribution30DRobuxPerUserMigration, R.Attribution7DPayerConversionRatio, R.Attribution7DPayerConversionRatioMigration, R.Attribution7DPlaytimePerUserInMinutes, R.Attribution7DPlaytimePerUserInMinutesMigration, R.Attribution7DRobuxPerUser, R.Attribution7DRobuxPerUserMigration, R.AttributionD1RetentionRatio, R.AttributionD1RetentionRatioMigration, R.AttributionD30RetentionRatio, R.AttributionD30RetentionRatioMigration, R.AttributionD7RetentionRatio, R.AttributionD7RetentionRatioMigration, R.AverageImpressionsPerUser, R.AveragePlayTimeMinutesPerDAU, R.AverageRevenuePerPayingUser, R.AverageRevenuePerUser, R.AverageSessionLengthMinutes, R.AvgViewTimePerView, R.AvgViewTimePerViewer, re.BandwidthTotalRecvBps, R.BandwidthTotalRecvBpsForOrdering, R.BandwidthTotalRecvMaxBytes, R.BandwidthTotalRecvUpdatesPerSecond, re.BandwidthTotalSendBps, R.BandwidthTotalSendBpsForOrdering, R.BandwidthTotalSendMaxBytes, R.BandwidthTotalSendUpdatesPerSecond, R.BonusPromotionsAwardedCount, R.BonusPromotionsGameJoinCount, R.BonusPromotionsImpressionCount, R.ClickCVR, R.ClickCVRMigration, R.ClientCpuTimeAvg, R.ClientCrashCount, R.ClientCrashCountMigration, R.ClientCrashRate15m, R.ClientCrashRate15mMigration, R.ClientCrashRateNotStableAlert, R.ClientCrashRateNotStableAlertMigration, re.ClientFps, re.ClientMemoryUsage, re.ClientMemoryUsagePercentage, R.CommentRatePerImpression, R.CommerceCheckouts, R.CommerceClicks, R.CommerceGMV, R.CommerceImpressions, R.CommerceOrders, R.CommerceQuantitySold, R.CommerceUniqueCheckouts, R.CommerceUniqueClicks, R.CommerceUniqueImpressions, R.CommerceUniqueOrders, R.CommunityAnnouncementDeliveries, R.CommunityAnnouncementEngagement, R.CommunityAnnouncementEventCount, R.CommunityAnnouncementNetReactions, R.CommunityAnnouncementNotificationCTR, R.CommunityAnnouncementUniqueClicks, R.CommunityAnnouncementUniqueUsers, R.CommunityForumContentEventCount, R.CommunityForumContentUniqueUsers, R.CommunityGroupPageUniqueVisitors, R.CommunityGroupPageViews, R.CommunityMembershipChangeEvents, R.CommunityMembershipCount, R.ComputeEfficiency, R.ConcurrentPlayers, re.CoresPerServer, R.CpuCoreUtilization, R.CreatorRewardsAudienceExpansionFunnelEstimatedPayout, R.CreatorRewardsAudienceExpansionFunnelPayerConversion60D, R.CreatorRewardsAudienceExpansionFunnelPayerConversion7D, R.CreatorRewardsAudienceExpansionFunnelPercentOfNewUsers, R.CreatorRewardsAudienceExpansionFunnelReactivations, R.CreatorRewardsAudienceExpansionFunnelRetentionD1, R.CreatorRewardsAudienceExpansionFunnelRetentionD7, R.CreatorRewardsAudienceExpansionFunnelRevenue1D, R.CreatorRewardsAudienceExpansionFunnelRevenue60D, R.CreatorRewardsAudienceExpansionFunnelRevenue7D, R.CreatorRewardsAudienceExpansionFunnelRevenuePerPayer60D, R.CreatorRewardsAudienceExpansionFunnelRevenuePerPayer7D, R.CreatorRewardsAudienceExpansionFunnelRevenuePerUser60D, R.CreatorRewardsAudienceExpansionFunnelRevenuePerUser7D, R.CreatorRewardsAudienceExpansionFunnelSignups, R.CreatorRewardsAudienceExpansionFunnelUserCount, R.CreatorRewardsAverageRobuxBookingsPerSpender, R.CreatorRewardsLifetimeEstimatedAffiliatePayoutRobux, R.CreatorRewardsLifetimeQualifiedReactivations, R.CreatorRewardsLifetimeQualifiedSignups, R.CreatorRewardsLifetimeQualifiedSpenders, R.CreatorWalletClosingBalanceUsd, R.CreatorWalletIncomingUsd, R.CreatorWalletOutgoingUsd, R.CsmFanoutRatio, R.CsmFanoutRatioExtended, R.CsmGameServersConnectedCount, R.CsmMessageSizeBytes, R.CsmMessageSizeQuota, R.CsmPublishedMessagesCount, R.CsmPublishedMessagesExtendedCount, R.CsmReceivedMessagesCount, R.CsmReceivedMessagesExtendedCount, R.CsmReceivedMessagesQuota, R.CubeDailyRequests, R.CubeLatencyAvg, R.CubeLatencyP99, R.CubeOutcomes, R.CubeTotalRequests, re.CustomEventsV2, R.D1Retention, R.D30Retention, R.D7Retention, R.DailyActiveUsers, R.DailyCohortRetention, R.DailyRetentionCohortNoDim, R.DailyRevenue, R.DataStoreConsumedListRequests, R.DataStoreConsumedReadRequests, R.DataStoreConsumedRemoveRequests, R.DataStoreConsumedWriteRequests, R.DataStoreListRequests, R.DataStoreListRequestsByEndpoint, R.DataStoreListRequestsQuota, R.DataStoreListRequestsQuotaOrdered, R.DataStoreListRequestsQuotaStandard, R.DataStoreReadRequests, R.DataStoreReadRequestsByEndpoint, R.DataStoreReadRequestsQuotaOrdered, R.DataStoreReadRequestsQuotaStandard, R.DataStoreRemoveRequests, R.DataStoreRemoveRequestsByEndpoint, R.DataStoreRemoveRequestsQuotaOrdered, R.DataStoreRemoveRequestsQuotaStandard, R.DataStoreRequests, R.DataStoreRequestsByEndpoint, R.DataStoreRequestsByStatus, R.DataStoreStorageQuotaBytes, R.DataStoreStorageUsageBytes, R.DataStoreWriteRequests, R.DataStoreWriteRequestsByEndpoint, R.DataStoreWriteRequestsQuotaOrdered, R.DataStoreWriteRequestsQuotaStandard, R.DauMauStickiness, R.DeviceTrustDailyActiveUsers, R.DeviceTrustRobuxSpentLast28Days, R.EarningsTotalUsd, R.EconomyAverageWalletBalance, R.EconomyTransactionAmount, R.EconomyTransactionAmountSinks, R.EconomyTransactionCount, R.EndToEndCVR, R.EndToEndCVRMigration, R.ErrorCount, R.EventAvgDailyActiveUsers, R.EventAvgDailyRevenue, R.EventAvgDailyUserPlaytimeMinutes, R.EventAvgRevenuePerDailyActiveUser, re.ExperienceLaunchTime, R.ExperimentMetricAdsArpu, R.ExperimentMetricAdsArpuV2, R.ExperimentMetricAdsEarnings, R.ExperimentMetricAdsEarningsV2, R.ExperimentMetricAdsFrequency, R.ExperimentMetricAdsFrequencyV2, R.ExperimentMetricAdsImpressions, R.ExperimentMetricAdsImpressionsV2, R.ExperimentMetricAdsOptInRate, R.ExperimentMetricAdsOptInRateV2, R.ExperimentMetricAverageCurrencySinkDelta, R.ExperimentMetricAverageCurrencySourceDelta, R.ExperimentMetricAverageCustomValue, R.ExperimentMetricAverageCustomValueAllUsers, R.ExperimentMetricAverageNetCurrencyDelta, R.ExperimentMetricAverageRevenuePerPayingUser, R.ExperimentMetricAverageRevenuePerPayingUserV2, R.ExperimentMetricAverageRevenuePerUser, R.ExperimentMetricAverageRevenuePerUserV2, R.ExperimentMetricAverageSessionTime, R.ExperimentMetricAverageSessionTimeV2, R.ExperimentMetricCustomPenetration, R.ExperimentMetricDay1Retention, R.ExperimentMetricDay1RetentionV2, R.ExperimentMetricDay7Retention, R.ExperimentMetricDay7RetentionV2, R.ExperimentMetricMean, R.ExperimentMetricPayerConversionRate, R.ExperimentMetricPayerConversionRateV2, R.ExperimentMetricPerSessionFunnelConversion, R.ExperimentMetricPerUserFunnelConversion, R.ExperimentMetricPlaytimePerUser, R.ExperimentMetricPlaytimePerUserV2, R.ExperimentMetricQualifiedPlayThroughRate, R.ExperimentMetricQualifiedPlayThroughRateV2, R.ForwardD1Retention, R.ForwardD30Retention, R.ForwardD7Retention, R.FriendReferralAverageRobuxBookingsPerSpender, R.FriendReferralLifetimeEstimatedAffiliatePayoutRobux, R.FriendReferralLifetimeQualifiedSignups, R.FriendReferralLifetimeQualifiedSpenders, R.FriendReferralLifetimeVisits, R.FunnelCohortCompletionRate, R.FunnelCohortSessionCompletionRate, R.FunnelStepChurnRate, R.FunnelStepCompletionRate, R.FunnelStepOverallCompletionRate, R.FunnelStepTotalCount, R.FunnelUserChurnRate, R.FunnelUserOverallCompletionRate, R.FunnelUserStepCompletionRate, R.FunnelUserTotalCount, R.HttpServiceRequestsCount, R.HttpServiceRequestsExtendedCount, R.HttpServiceRequestsV2, re.HttpServiceResponseTime, re.HttpServiceResponseTimeExtended, R.ImpressionCVR, R.ImpressionCVRMigration, R.IphEarningsRobux, R.IphEarningsRobuxPartial, R.IphTransactionCount, R.IphTransactionCountPartial, R.ItemAvatar3dLimitedAvailableQuantity, R.ItemAvatar3dLimitedTotalQuantity, R.ItemAverageTransactionPrice, R.ItemLifetimeCreatorEarning, R.ItemLifetimeRebateAmount, R.ItemLifetimeRobuxSpent, R.ItemLifetimeTransactionCount, R.ItemLimitedSoldPercentage, R.ItemMonetizationRevenue, R.ItemMonetizationSales, R.ItemPublishAdvance, R.ItemPublishAdvanceRecoupedPercentage, R.ItemTotalCreatorEarning, R.ItemTotalRobuxSpent, R.ItemTotalTransactionCount, R.JoinRatePerImpression, R.JourneyCompletionUsers, R.JourneyEntryTransitions, R.JourneyLastStageTransitions, R.JourneyNodeTransitionChurnCount, R.JourneyNodeTransitionChurnRate, R.JourneyNodeTransitionCount, R.JourneyNodeUserChurnCount, R.JourneyNodeUserChurnRate, R.JourneyNodeUserCount, R.JourneyStageChurnRate, R.JourneyStageSkipRate, R.JourneyStageSkipTransitionCount, R.JourneyStageSkipTransitionRate, R.JourneyStageSkipUserCount, R.JourneyStageTransitionChurnRate, R.JourneyStageTransitionCount, R.JourneyStageUserCount, R.JourneyTotalUsers, R.JourneyTransitionCount, R.JourneyTransitionCountUser, R.JourneyTransitionPctOfSource, R.JourneyTransitionPctOfStart, R.JourneyUserPctOfSource, R.JourneyUserPctOfStart, R.MaintenanceThreshold, R.MarketplaceAffiliateLinkAttributedPurchases, R.MarketplaceAffiliateLinkAttributedSpendRobux, R.MarketplaceAffiliateLinkClicks, R.MarketplaceAffiliateLinkConversionRate, R.MarketplaceAffiliateLinkEstimatedPayoutRobux, R.MarketplaceAffiliateLinkUniqueClicks, re.MatchmakingCategoricalCustomSignalsSimilarityRatio, re.MatchmakingNumericCustomSignalsDifference, R.MatchmakingPlayerAttributesLoadingStatusAvg, re.MatchmakingSignalsAgeDifference, re.MatchmakingSignalsCommonChatGroupRatio, re.MatchmakingSignalsCommonDeviceTypeRatio, re.MatchmakingSignalsCommonLanguageRatio, re.MatchmakingSignalsDeltaPing, re.MatchmakingSignalsEstimatePing, re.MatchmakingSignalsOccupancyRatio, re.MatchmakingSignalsPlayHistoryDifference, R.MatchmakingSignalsPreferredPlayerMatchRatioAvg, re.MatchmakingSignalsVoiceChatRatio, R.MemoryStoreErrorRateAlert, R.MemoryStoreMemoryQuotaBytes, R.MemoryStoreMemoryUsageAlert, R.MemoryStoreMemoryUsageBytes, R.MemoryStoreRequests, R.MemoryStoreRequestsByEndpoint, R.MemoryStoreRequestsByStatus, R.MemoryStoreRequestUnits, R.MemoryStoreRequestUnitsByEndpoint, R.MemoryStoreRequestUnitsQuota, R.MemoryStoreThrottlingAlert, R.MonthlyActiveUsers, R.OomUnexpectedExits, R.OomUnexpectedExitsMigration, R.PayingUsers, R.PayingUsersCVR, R.PayoutRobux, R.PayoutRobuxV2, R.PeakConcurrentPlayers, R.PersonalizedShopsConversionRate, R.PersonalizedShopsImpressions, R.PersonalizedShopsPurchases, R.PersonalizedShopsRevenue, R.PlayerFeedbackVotesCount, R.PotentialEarningsTotalUsd, R.PotentialExtraEarningsTotalUsd, R.PurchaseRatePerImpression, R.QualifiedEndToEndCVR, R.QualifiedEndToEndCVRMigration, R.QualifiedUniqueUsersWithPlaySessions, R.QualifiedUniqueUsersWithPlaySessionsMigration, R.ReactionRatePerImpression, R.RecommendationDau, R.RecommendationViewsTotal, R.RelativeThresholdCapture, R.RFYD1CoplayDays, R.RFYD1Playtime, R.RFYD1QualifiedPlaySessions, R.RFYD1RobuxSpend, R.RFYD1SpendDay, R.RFYD2To7CoplayDays, R.RFYD2To7PlayDays, R.RFYD2To7Playtime, R.RFYD2To7QualifiedPlaySessions, R.RFYD2To7RobuxSpend, R.RFYD2To7SpendDays, R.RFYD8To28CoplayDays, R.RFYD8To28PlayDays, R.RFYD8To28Playtime, R.RFYD8To28QualifiedPlaySessions, R.RFYD8To28RobuxSpend, R.RFYD8To28SpendDays, R.RFYDeepEngagementRate, R.RFYDuration0To60, R.RFYDuration181To600, R.RFYDuration61To180, R.RFYDurationGreaterThan600, R.RFYL7IntentionalCoplayDays, R.RFYL7PlayDays, R.RFYL7PlaySessionsPerUser, R.RFYL7PlayTime, R.RFYL7RobuxSpent, R.RFYL7RobuxSpentDays, R.RFYPlayThroughRate, R.RFYQualifiedPTR, R.RFYUniqueNotInterestedUsersPerMillionImpressions, R.RobloxPlusDevBountyAvgPlaytimePerSubscriberMins, R.RobloxPlusDevBountyAvgRobuxSpentPerSubscriber, R.RobloxPlusDevBountyDailySubscribers, R.RobloxPlusDevBountyPayoutRobux, R.RobloxPlusDevBountySubscriberCount, R.RobloxPlusDevBountySubscriberSpend, R.RotraceTotalCalls, R.RSVPCount, re.ServerCpuTime, R.ServerCrashCount, re.ServerFrameRate, re.ServerMemoryUsage, re.ServerMemoryUsageByServerAge, re.ServerMemoryUsageV2, re.SessionDurationSeconds, re.SessionDurationSecondsMigration, R.ShareLinkAttribution1DPayerConversionRatio, R.ShareLinkAttribution1DPlaytimePerUserInMinutes, R.ShareLinkAttribution1DRobuxPerUser, R.ShareLinkAttribution30DPayerConversionRatio, R.ShareLinkAttribution30DPlaytimePerUserInMinutes, R.ShareLinkAttribution30DRobuxPerUser, R.ShareLinkAttribution7DPayerConversionRatio, R.ShareLinkAttribution7DPlaytimePerUserInMinutes, R.ShareLinkAttribution7DRobuxPerUser, R.ShareLinkAttributionD1RetentionRatio, R.ShareLinkAttributionD30RetentionRatio, R.ShareLinkAttributionD7RetentionRatio, R.ShareLinkClickCVR, R.ShareLinkQualifiedClickCVR, R.ShareLinkQualifiedUniqueUsersWithPlaySessions, R.ShareLinkUniqueUsersWithClicks, R.ShareLinkUniqueUsersWithPlaySessions, R.ShareRatePerImpression, R.SourceCount, R.SourceCountRatioKpi, R.SpeechToTextTranscriptionQuota, R.SpeechToTextTranscriptionStatuses, R.SpeechToTextTranscriptionUsage, R.SponsoredAdPlays, R.StoreRevenue, R.StoreTransactions, R.TargetThreshold, R.TextToSpeechAssetSuccesses, R.TextToSpeechRawAudioErrors, R.TextToSpeechRawAudioQuota, R.TextToSpeechRawAudioSuccesses, R.ThumbnailAverageSessionLengthMinutes, R.ThumbnailImpressions, R.ThumbnailL7QualifiedPTR, R.ThumbnailQualifiedPlays, R.ThumbnailQualifiedPTR, R.ThumbnailWinningSegments, R.TotalAbuseReports, R.TotalActions, R.TotalActionsByActionType, R.TotalComments, R.TotalJoins, R.TotalPlayTimeHours, R.TotalPurchases, R.TotalReactionsAdded, R.TotalSessionsEndedInBucket, R.TotalShares, R.TotalViewHours, R.UniqueAbuseReportSubmittersPer1000PlaytimeHours, R.UniqueItemsPerUser, R.UniqueServerShutdowns, R.UniqueUsersWithClicks, R.UniqueUsersWithClicksMigration, R.UniqueUsersWithImpressions, R.UniqueUsersWithImpressionsMigration, R.UniqueUsersWithPlaySessions, R.UniqueUsersWithPlaySessionsMigration, R.UsersInExperiment, R.UsersInExperimentV2, R.UsersJoinedFromNotifications, R.VideoServiceExclusivePlaybackSeconds, R.VideoServicePlaybackSeconds, R.Visits, R.WeeklyCohortRetention, (t = r || (r = {})).AbuseReports = "abuse-reports", t.Acquisition = "acquisition", t.AdsForecastDaily = "ads-forecast-daily", t.AdsHistoricalSketches = "ads-historical-sketches", t.AdsJointEventsAgg = "ads-joint-events-agg", t.AdsLiftStudyUniverseMetrics = "ads-lift-study-universe-metrics", t.AdsPublisherReporting = "ads-publisher-reporting", t.AdsRoi = "ads-roi", t.AdsVideo2dEngagementBreakdown = "ads-video-2d-engagement-breakdown", t.AffiliatelinkDaily = "affiliatelink-daily", t.AffiliatelinkDailyUniqueClicks = "affiliatelink-daily-unique-clicks", t.AffiliatelinkFriendReferral = "affiliatelink-friend-referral", t.Attribution = "attribution", t.BandwidthByInstanceType = "bandwidth-by-instance-type", t.BonusPromotions = "bonus-promotions", t.BountyPayoutsRobloxPlusByUniverse = "bounty-payouts-roblox-plus-by-universe", t.CampaignRoas = "campaign-roas", t.CommerceUserEvents = "commerce-user-events", t.CommunityAnnouncementAnalytics = "community-announcement-analytics", t.CommunityForumContentEvents = "community-forum-content-events", t.CommunityGroupPageViews = "community-group-page-views", t.CommunityMembershipChanges = "community-membership-changes", t.CommunityMembershipCount = "community-membership-count", t.CoreContentQualifiedPaidPlaytimeDaily = "core-content-qualified-paid-playtime-daily", t.CreatorRewardsAcquisition = "creator-rewards-acquisition", t.CreatorRewardsAudienceExpansionFunnel = "creator-rewards-audience-expansion-funnel", t.CreatorRewardsAudienceExpansionFunnelRollingEstimates = "creator-rewards-audience-expansion-funnel-rolling-estimates", t.CreatorRewardsDailyV2 = "creator-rewards-daily-v2", t.CustomEventsHourly = "custom-events-hourly", t.DailyRetentionCohortNoCardinality = "daily-retention-cohort-no-cardinality", t.DailyRetentionCohortNoDim = "daily-retention-cohort-no-dim", t.DevSubProductStatsDaily = "dev-sub-product-stats-daily", t.Engagement = "engagement", t.EngagementAllDim = "engagement-all-dim", t.EngagementCountryLocale = "engagement-country-locale", t.EngagementRobloxPlusByUniverse = "engagement-roblox-plus-by-universe", t.EntityAttributedConversionAggregation = "entity-attributed-conversion-aggregation", t.ExpEnrollmentSummary = "exp-enrollment-summary", t.ExperienceEventsSummary = "experience-events-summary", t.FirstTimeRetention = "first-time-retention", t.GenerativeAiEvents = "generative-ai-events", t.IpLicensingEarnings = "ip-licensing-earnings", t.IpLicensingPartialEarnings = "ip-licensing-partial-earnings", t.ItemMonetizationHourly = "item-monetization-hourly", t.MarketplaceAffiliateLinksDaily = "marketplace-affiliate-links-daily", t.MatchmakingDefaultSignals = "matchmaking-default-signals", t.MatchmakingNumericCustomSignals = "matchmaking-numeric-custom-signals", t.MatchmakingNumericPlayerAttributes = "matchmaking-numeric-player-attributes", t.Monetization = "monetization", t.PersonalizedShops = "personalized-shops", t.PersonalizedShopsPurchases = "personalized-shops-purchases", t.PlayerFeedbackVotes = "player-feedback-votes", t.PurchasePlatformStatsDaily = "purchase-platform-stats-daily", t.RecommendationAnalyticsByActionHourly = "recommendation-analytics-by-action-hourly", t.RecommendationAnalyticsHourly = "recommendation-analytics-hourly", t.RecommendedEventsFunnelsHourly = "recommended-events-funnels-hourly", t.RecommendedEventsJourneyDaily = "recommended-events-journey-daily", t.RecommendedEventsTransactionsHourly = "recommended-events-transactions-hourly", t.RecommendedEventsWalletBalanceHourly = "recommended-events-wallet-balance-hourly", t.RfySignals = "rfy-signals", t.RotraceTestingV1 = "rotrace-testing-v1", t.ServerShutdowns = "server-shutdowns", t.ShareLinkAcquisition = "share-link-acquisition", t.ShareLinkAttribution = "share-link-attribution", t.SponsoredAdsUniverseStats = "sponsored-ads-universe-stats", t.StoreAssetTransactions = "store-asset-transactions", t.SubscriptionTypeStatsDaily = "subscription-type-stats-daily", t.ThumbnailPersonalization = "thumbnail-personalization", t.ThumbnailPersonalization7Day = "thumbnail-personalization-7-day", t.UenStreamAnalytics = "uen-stream-analytics", t.UgcAnalytics = "ugc-analytics", t.UgcSalesData = "ugc-sales-data", t.UnifiedAdsEngagementEvents = "unified-ads-engagement-events";
+    R.ActionRatePerDau, R.ActionRatePerDauByActionType, R.ActionRatePerImpression, R.AdsPublisherReportingAdsPerEDAU, R.AdsPublisherReportingArpu, R.AdsPublisherReportingDisplayAdImpressions, R.AdsPublisherReportingImmersiveDisplayRevenue, R.AdsPublisherReportingImmersiveDisplayRobuxEpm, R.AdsPublisherReportingImmersiveEvents, R.AdsPublisherReportingImmersiveVideoViews, R.AdsPublisherReportingPortalRevenueRobux, R.AdsPublisherReportingRobuxEpm, R.AdsPublisherReportingRobuxEpt, R.AdsPublisherReportingTotalImpressions, R.AdsPublisherReportingTotalRevenueRobux, R.AdsPublisherReportingTotalTeleports, R.AdsPublisherReportingVideo2DAdsPerDUV, R.AdsPublisherReportingVideo2DAverageEarningPerDailyUniqueViewer, R.AdsPublisherReportingVideo2DConversionRate, R.AdsPublisherReportingVideo2DDailyUniqueViewer, R.AdsPublisherReportingVideo2DEligibleDau, R.AdsPublisherReportingVideo2DEpmNoUnvalidatedPc, R.AdsPublisherReportingVideo2DEvents, R.AdsPublisherReportingVideo2DFillPercent, R.AdsPublisherReportingVideo2DFills, R.AdsPublisherReportingVideo2DImpressions, R.AdsPublisherReportingVideo2DReachRatio, R.AdsPublisherReportingVideo2DRequests, R.AdsPublisherReportingVideo2DRevenueRobux, R.AdsPublisherReportingVideo2DRewardPercent, R.AdsPublisherReportingVideo2DRewards, R.AdsPublisherReportingVideo2DRobuxEpm, R.AdsRoasEstimate, R.AdsRoasEstimateByUniverse, R.AdsUAEarningsUsdDefaultView, R.AdsUAEarningsUsdDefaultViewByUniverse, R.AdsUAEarningsUsdNewUserView, R.AdsUAEarningsUsdNewUserViewByUniverse, R.AdsUAEarningsUsdResurrected30dUserView, R.AdsUAEarningsUsdResurrected30dUserViewByUniverse, R.AdsUAEarningsUsdResurrected7dUserView, R.AdsUAEarningsUsdResurrected7dUserViewByUniverse, R.AdsUAEarningsUsdReturningUserView, R.AdsUAEarningsUsdReturningUserViewByUniverse, R.AdsUAExpNumPlaysDefaultView, R.AdsUAExpNumPlaysDefaultViewByUniverse, R.AdsUAExpNumPlaysNewUserView, R.AdsUAExpNumPlaysNewUserViewByUniverse, R.AdsUAExpNumPlaysResurrected30dUserView, R.AdsUAExpNumPlaysResurrected30dUserViewByUniverse, R.AdsUAExpNumPlaysResurrected7dUserView, R.AdsUAExpNumPlaysResurrected7dUserViewByUniverse, R.AdsUAExpNumPlaysReturningUserView, R.AdsUAExpNumPlaysReturningUserViewByUniverse, R.AdsUAExpPlaytimeDefaultView, R.AdsUAExpPlaytimeDefaultViewByUniverse, R.AdsUAExpPlaytimeNewUserView, R.AdsUAExpPlaytimeNewUserViewByUniverse, R.AdsUAExpPlaytimeResurrected30dUserView, R.AdsUAExpPlaytimeResurrected30dUserViewByUniverse, R.AdsUAExpPlaytimeResurrected7dUserView, R.AdsUAExpPlaytimeResurrected7dUserViewByUniverse, R.AdsUAExpPlaytimeReturningUserView, R.AdsUAExpPlaytimeReturningUserViewByUniverse, R.AdsUAExpRobuxRevenueDefaultView, R.AdsUAExpRobuxRevenueDefaultViewByUniverse, R.AdsUAExpRobuxRevenueNewUserView, R.AdsUAExpRobuxRevenueNewUserViewByUniverse, R.AdsUAExpRobuxRevenueResurrected30dUserView, R.AdsUAExpRobuxRevenueResurrected30dUserViewByUniverse, R.AdsUAExpRobuxRevenueResurrected7dUserView, R.AdsUAExpRobuxRevenueResurrected7dUserViewByUniverse, R.AdsUAExpRobuxRevenueReturningUserView, R.AdsUAExpRobuxRevenueReturningUserViewByUniverse, R.AdsUANumClicksDefaultView, R.AdsUANumClicksDefaultViewByUniverse, R.AdsUANumClicksNewUsers, R.AdsUANumClicksNewUsersByUniverse, R.AdsUANumClicksResurrected30dUsers, R.AdsUANumClicksResurrected30dUsersByUniverse, R.AdsUANumClicksResurrected7dUsers, R.AdsUANumClicksResurrected7dUsersByUniverse, R.AdsUANumClicksReturningUsers, R.AdsUANumClicksReturningUsersByUniverse, R.AdsUANumImpressionsDefaultView, R.AdsUANumImpressionsDefaultViewByUniverse, R.AdsUANumImpressionsNewUsers, R.AdsUANumImpressionsNewUsersByUniverse, R.AdsUANumImpressionsResurrected30dUsers, R.AdsUANumImpressionsResurrected30dUsersByUniverse, R.AdsUANumImpressionsResurrected7dUsers, R.AdsUANumImpressionsResurrected7dUsersByUniverse, R.AdsUANumImpressionsReturningUsers, R.AdsUANumImpressionsReturningUsersByUniverse, R.AdsUANumPlaysDefaultView, R.AdsUANumPlaysDefaultViewByUniverse, R.AdsUANumPlaysNewUserView, R.AdsUANumPlaysNewUserViewByUniverse, R.AdsUANumPlaysResurrected30dUserView, R.AdsUANumPlaysResurrected30dUserViewByUniverse, R.AdsUANumPlaysResurrected7dUserView, R.AdsUANumPlaysResurrected7dUserViewByUniverse, R.AdsUANumPlaysReturningUserView, R.AdsUANumPlaysReturningUserViewByUniverse, R.AdsUAPlaytimeDefaultView, R.AdsUAPlaytimeDefaultViewByUniverse, R.AdsUAPlaytimeNewUserView, R.AdsUAPlaytimeNewUserViewByUniverse, R.AdsUAPlaytimeResurrected30dUserView, R.AdsUAPlaytimeResurrected30dUserViewByUniverse, R.AdsUAPlaytimeResurrected7dUserView, R.AdsUAPlaytimeResurrected7dUserViewByUniverse, R.AdsUAPlaytimeReturningUserView, R.AdsUAPlaytimeReturningUserViewByUniverse, R.AdsUARoas, R.AdsUARoasByUniverse, R.AdsUARobuxRevenueDefaultView, R.AdsUARobuxRevenueDefaultViewByUniverse, R.AdsUARobuxRevenueNewUserView, R.AdsUARobuxRevenueNewUserViewByUniverse, R.AdsUARobuxRevenueResurrected30dUserView, R.AdsUARobuxRevenueResurrected30dUserViewByUniverse, R.AdsUARobuxRevenueResurrected7dUserView, R.AdsUARobuxRevenueResurrected7dUserViewByUniverse, R.AdsUARobuxRevenueReturningUserView, R.AdsUARobuxRevenueReturningUserViewByUniverse, R.AdsUATotalSpendMicroUsdDefaultView, R.AdsUATotalSpendMicroUsdDefaultViewByUniverse, R.AdsUATotalSpendMicroUsdNewUsers, R.AdsUATotalSpendMicroUsdNewUsersByUniverse, R.AdsUATotalSpendMicroUsdResurrected30dUsers, R.AdsUATotalSpendMicroUsdResurrected30dUsersByUniverse, R.AdsUATotalSpendMicroUsdResurrected7dUsers, R.AdsUATotalSpendMicroUsdResurrected7dUsersByUniverse, R.AdsUATotalSpendMicroUsdReturningUsers, R.AdsUATotalSpendMicroUsdReturningUsersByUniverse, R.AdsVideo2DAdsPerEDAUBreakdown, R.AdsVideo2DEligibleDauBreakdown, R.AdsVideo2DReachRatioBreakdown, R.AffiliateLinkDailyAffiliateActiveSpenderReactivationsPayoutRobux, R.AffiliateLinkDailyAffiliateReactivationsPayoutRobux, R.AffiliateLinkDailyAffiliateSignupsPayoutRobux, R.AffiliateLinkDailyAverageRobuxBookingsPerReactivationSpender, R.AffiliateLinkDailyAverageRobuxBookingsPerSignupSpender, R.AffiliateLinkDailyBookingsPerSpenderCombined, R.AffiliateLinkDailyQualifiedActiveSpenderReactivations, R.AffiliateLinkDailyQualifiedReactivations, R.AffiliateLinkDailyQualifiedReactivationsBookingsRobux, R.AffiliateLinkDailyQualifiedReactivationsSpenders, R.AffiliateLinkDailyQualifiedSignups, R.AffiliateLinkDailyQualifiedSignupsBookingsRobux, R.AffiliateLinkDailyQualifiedSignupSpenders, R.AffiliateLinkDailyTotalPayoutRobux, R.AffiliateLinkDailyUniqueClick, R.AffiliateLinkDailyVisits, R.AlertIncidentCount, R.Attribution1DPayerConversionRatio, R.Attribution1DPayerConversionRatioMigration, R.Attribution1DPlaytimePerUserInMinutes, R.Attribution1DPlaytimePerUserInMinutesMigration, R.Attribution1DRobuxPerUser, R.Attribution1DRobuxPerUserMigration, R.Attribution30DPayerConversionRatio, R.Attribution30DPayerConversionRatioMigration, R.Attribution30DPlaytimePerUserInMinutes, R.Attribution30DPlaytimePerUserInMinutesMigration, R.Attribution30DRobuxPerUser, R.Attribution30DRobuxPerUserMigration, R.Attribution7DPayerConversionRatio, R.Attribution7DPayerConversionRatioMigration, R.Attribution7DPlaytimePerUserInMinutes, R.Attribution7DPlaytimePerUserInMinutesMigration, R.Attribution7DRobuxPerUser, R.Attribution7DRobuxPerUserMigration, R.AttributionD1RetentionRatio, R.AttributionD1RetentionRatioMigration, R.AttributionD30RetentionRatio, R.AttributionD30RetentionRatioMigration, R.AttributionD7RetentionRatio, R.AttributionD7RetentionRatioMigration, R.AverageImpressionsPerUser, R.AveragePlayTimeMinutesPerDAU, R.AverageRevenuePerPayingUser, R.AverageRevenuePerUser, R.AverageSessionLengthMinutes, R.AvgViewTimePerView, R.AvgViewTimePerViewer, re.BandwidthTotalRecvBps, R.BandwidthTotalRecvBpsForOrdering, R.BandwidthTotalRecvMaxBytes, R.BandwidthTotalRecvUpdatesPerSecond, re.BandwidthTotalSendBps, R.BandwidthTotalSendBpsForOrdering, R.BandwidthTotalSendMaxBytes, R.BandwidthTotalSendUpdatesPerSecond, R.BonusPromotionsAwardedCount, R.BonusPromotionsGameJoinCount, R.BonusPromotionsImpressionCount, R.ClickCVR, R.ClickCVRMigration, R.ClientCpuTimeAvg, R.ClientCrashCount, R.ClientCrashCountMigration, R.ClientCrashRate15m, R.ClientCrashRate15mMigration, R.ClientCrashRateNotStableAlert, R.ClientCrashRateNotStableAlertMigration, re.ClientFps, re.ClientMemoryUsage, re.ClientMemoryUsagePercentage, R.CommentRatePerImpression, R.CommerceCheckouts, R.CommerceClicks, R.CommerceGMV, R.CommerceImpressions, R.CommerceOrders, R.CommerceQuantitySold, R.CommerceUniqueCheckouts, R.CommerceUniqueClicks, R.CommerceUniqueImpressions, R.CommerceUniqueOrders, R.CommunityAnnouncementDeliveries, R.CommunityAnnouncementEngagement, R.CommunityAnnouncementEventCount, R.CommunityAnnouncementNetReactions, R.CommunityAnnouncementNotificationCTR, R.CommunityAnnouncementUniqueClicks, R.CommunityAnnouncementUniqueUsers, R.CommunityForumContentEventCount, R.CommunityForumContentUniqueUsers, R.CommunityGroupPageUniqueVisitors, R.CommunityGroupPageViews, R.CommunityMembershipChangeEvents, R.CommunityMembershipCount, R.ComputeEfficiency, R.ConcurrentPlayers, re.CoresPerServer, R.CpuCoreUtilization, R.CreatorRewardsAudienceExpansionFunnelEstimatedPayout, R.CreatorRewardsAudienceExpansionFunnelPayerConversion60D, R.CreatorRewardsAudienceExpansionFunnelPayerConversion7D, R.CreatorRewardsAudienceExpansionFunnelPercentOfNewUsers, R.CreatorRewardsAudienceExpansionFunnelReactivations, R.CreatorRewardsAudienceExpansionFunnelRetentionD1, R.CreatorRewardsAudienceExpansionFunnelRetentionD7, R.CreatorRewardsAudienceExpansionFunnelRevenue1D, R.CreatorRewardsAudienceExpansionFunnelRevenue60D, R.CreatorRewardsAudienceExpansionFunnelRevenue7D, R.CreatorRewardsAudienceExpansionFunnelRevenuePerPayer60D, R.CreatorRewardsAudienceExpansionFunnelRevenuePerPayer7D, R.CreatorRewardsAudienceExpansionFunnelRevenuePerUser60D, R.CreatorRewardsAudienceExpansionFunnelRevenuePerUser7D, R.CreatorRewardsAudienceExpansionFunnelSignups, R.CreatorRewardsAudienceExpansionFunnelUserCount, R.CreatorRewardsAverageRobuxBookingsPerSpender, R.CreatorRewardsLifetimeEstimatedAffiliatePayoutRobux, R.CreatorRewardsLifetimeQualifiedReactivations, R.CreatorRewardsLifetimeQualifiedSignups, R.CreatorRewardsLifetimeQualifiedSpenders, R.CreatorWalletClosingBalanceUsd, R.CreatorWalletIncomingUsd, R.CreatorWalletOutgoingUsd, R.CsmFanoutRatio, R.CsmFanoutRatioExtended, R.CsmGameServersConnectedCount, R.CsmMessageSizeBytes, R.CsmMessageSizeQuota, R.CsmPublishedMessagesCount, R.CsmPublishedMessagesExtendedCount, R.CsmReceivedMessagesCount, R.CsmReceivedMessagesExtendedCount, R.CsmReceivedMessagesQuota, R.CubeDailyRequests, R.CubeLatencyAvg, R.CubeLatencyP99, R.CubeOutcomes, R.CubeTotalRequests, re.CustomEventsV2, R.D1Retention, R.D30Retention, R.D7Retention, R.DailyActiveUsers, R.DailyCohortRetention, R.DailyRetentionCohortNoDim, R.DailyRevenue, R.DataStoreConsumedListRequests, R.DataStoreConsumedReadRequests, R.DataStoreConsumedRemoveRequests, R.DataStoreConsumedWriteRequests, R.DataStoreListRequests, R.DataStoreListRequestsByEndpoint, R.DataStoreListRequestsQuota, R.DataStoreListRequestsQuotaOrdered, R.DataStoreListRequestsQuotaStandard, R.DataStoreReadRequests, R.DataStoreReadRequestsByEndpoint, R.DataStoreReadRequestsQuotaOrdered, R.DataStoreReadRequestsQuotaStandard, R.DataStoreRemoveRequests, R.DataStoreRemoveRequestsByEndpoint, R.DataStoreRemoveRequestsQuotaOrdered, R.DataStoreRemoveRequestsQuotaStandard, R.DataStoreRequests, R.DataStoreRequestsByEndpoint, R.DataStoreRequestsByStatus, R.DataStoreStorageQuotaBytes, R.DataStoreStorageUsageBytes, R.DataStoreWriteRequests, R.DataStoreWriteRequestsByEndpoint, R.DataStoreWriteRequestsQuotaOrdered, R.DataStoreWriteRequestsQuotaStandard, R.DauMauStickiness, R.DeviceTrustDailyActiveUsers, R.DeviceTrustRobuxSpentLast28Days, R.EarningsTotalUsd, R.EconomyAverageWalletBalance, R.EconomyTransactionAmount, R.EconomyTransactionAmountSinks, R.EconomyTransactionCount, R.EndToEndCVR, R.EndToEndCVRMigration, R.ErrorCount, R.EventAvgDailyActiveUsers, R.EventAvgDailyRevenue, R.EventAvgDailyUserPlaytimeMinutes, R.EventAvgRevenuePerDailyActiveUser, re.ExperienceLaunchTime, R.ExperimentMetricAdsArpu, R.ExperimentMetricAdsArpuV2, R.ExperimentMetricAdsEarnings, R.ExperimentMetricAdsEarningsV2, R.ExperimentMetricAdsFrequency, R.ExperimentMetricAdsFrequencyV2, R.ExperimentMetricAdsImpressions, R.ExperimentMetricAdsImpressionsV2, R.ExperimentMetricAdsOptInRate, R.ExperimentMetricAdsOptInRateV2, R.ExperimentMetricAverageCurrencySinkDelta, R.ExperimentMetricAverageCurrencySourceDelta, R.ExperimentMetricAverageCustomValue, R.ExperimentMetricAverageCustomValueAllUsers, R.ExperimentMetricAverageNetCurrencyDelta, R.ExperimentMetricAverageRevenuePerPayingUser, R.ExperimentMetricAverageRevenuePerPayingUserV2, R.ExperimentMetricAverageRevenuePerUser, R.ExperimentMetricAverageRevenuePerUserV2, R.ExperimentMetricAverageSessionTime, R.ExperimentMetricAverageSessionTimeV2, R.ExperimentMetricCustomPenetration, R.ExperimentMetricDay1Retention, R.ExperimentMetricDay1RetentionV2, R.ExperimentMetricDay7Retention, R.ExperimentMetricDay7RetentionV2, R.ExperimentMetricMean, R.ExperimentMetricPayerConversionRate, R.ExperimentMetricPayerConversionRateV2, R.ExperimentMetricPerSessionFunnelConversion, R.ExperimentMetricPerUserFunnelConversion, R.ExperimentMetricPlaytimePerUser, R.ExperimentMetricPlaytimePerUserV2, R.ExperimentMetricQualifiedPlayThroughRate, R.ExperimentMetricQualifiedPlayThroughRateV2, R.ForwardD1Retention, R.ForwardD30Retention, R.ForwardD7Retention, R.FriendReferralAverageRobuxBookingsPerSpender, R.FriendReferralLifetimeEstimatedAffiliatePayoutRobux, R.FriendReferralLifetimeQualifiedSignups, R.FriendReferralLifetimeQualifiedSpenders, R.FriendReferralLifetimeVisits, R.FunnelCohortCompletionRate, R.FunnelCohortSessionCompletionRate, R.FunnelStepChurnRate, R.FunnelStepCompletionRate, R.FunnelStepOverallCompletionRate, R.FunnelStepTotalCount, R.FunnelUserChurnRate, R.FunnelUserOverallCompletionRate, R.FunnelUserStepCompletionRate, R.FunnelUserTotalCount, R.HttpServiceRequestsCount, R.HttpServiceRequestsExtendedCount, R.HttpServiceRequestsV2, re.HttpServiceResponseTime, re.HttpServiceResponseTimeExtended, R.ImpressionCVR, R.ImpressionCVRMigration, R.IphEarningsRobux, R.IphEarningsRobuxPartial, R.IphTransactionCount, R.IphTransactionCountPartial, R.ItemAvatar3dLimitedAvailableQuantity, R.ItemAvatar3dLimitedTotalQuantity, R.ItemAverageTransactionPrice, R.ItemLifetimeCreatorEarning, R.ItemLifetimeRebateAmount, R.ItemLifetimeRobuxSpent, R.ItemLifetimeTransactionCount, R.ItemLimitedSoldPercentage, R.ItemMonetizationRevenue, R.ItemMonetizationSales, R.ItemPublishAdvance, R.ItemPublishAdvanceRecoupedPercentage, R.ItemTotalCreatorEarning, R.ItemTotalRobuxSpent, R.ItemTotalTransactionCount, R.JoinRatePerImpression, R.JourneyCompletionUsers, R.JourneyEntryTransitions, R.JourneyLastStageTransitions, R.JourneyNodeTransitionChurnCount, R.JourneyNodeTransitionChurnRate, R.JourneyNodeTransitionCount, R.JourneyNodeUserChurnCount, R.JourneyNodeUserChurnRate, R.JourneyNodeUserCount, R.JourneyStageChurnRate, R.JourneyStageSkipRate, R.JourneyStageSkipTransitionCount, R.JourneyStageSkipTransitionRate, R.JourneyStageSkipUserCount, R.JourneyStageTransitionChurnRate, R.JourneyStageTransitionCount, R.JourneyStageUserCount, R.JourneyTotalUsers, R.JourneyTransitionCount, R.JourneyTransitionCountUser, R.JourneyTransitionPctOfSource, R.JourneyTransitionPctOfStart, R.JourneyUserPctOfSource, R.JourneyUserPctOfStart, R.MaintenanceThreshold, R.MarketplaceAffiliateLinkAttributedPurchases, R.MarketplaceAffiliateLinkAttributedSpendRobux, R.MarketplaceAffiliateLinkClicks, R.MarketplaceAffiliateLinkConversionRate, R.MarketplaceAffiliateLinkEstimatedPayoutRobux, R.MarketplaceAffiliateLinkUniqueClicks, re.MatchmakingCategoricalCustomSignalsSimilarityRatio, re.MatchmakingNumericCustomSignalsDifference, R.MatchmakingPlayerAttributesLoadingStatusAvg, re.MatchmakingSignalsAgeDifference, re.MatchmakingSignalsCommonChatGroupRatio, re.MatchmakingSignalsCommonDeviceTypeRatio, re.MatchmakingSignalsCommonLanguageRatio, re.MatchmakingSignalsDeltaPing, re.MatchmakingSignalsEstimatePing, re.MatchmakingSignalsOccupancyRatio, re.MatchmakingSignalsPlayHistoryDifference, R.MatchmakingSignalsPreferredPlayerMatchRatioAvg, re.MatchmakingSignalsVoiceChatRatio, R.MemoryStoreErrorRateAlert, R.MemoryStoreMemoryQuotaBytes, R.MemoryStoreMemoryUsageAlert, R.MemoryStoreMemoryUsageBytes, R.MemoryStoreRequests, R.MemoryStoreRequestsByEndpoint, R.MemoryStoreRequestsByStatus, R.MemoryStoreRequestUnits, R.MemoryStoreRequestUnitsByEndpoint, R.MemoryStoreRequestUnitsQuota, R.MemoryStoreThrottlingAlert, R.MonthlyActiveUsers, R.OomUnexpectedExits, R.OomUnexpectedExitsMigration, R.PayingUsers, R.PayingUsersCVR, R.PayoutRobux, R.PayoutRobuxV2, R.PeakConcurrentPlayers, R.PersonalizedShopsConversionRate, R.PersonalizedShopsImpressions, R.PersonalizedShopsPurchases, R.PersonalizedShopsRevenue, R.PlayerFeedbackVotesCount, R.PotentialEarningsTotalUsd, R.PotentialExtraEarningsTotalUsd, R.PurchaseRatePerImpression, R.QualifiedEndToEndCVR, R.QualifiedEndToEndCVRMigration, R.QualifiedUniqueUsersWithPlaySessions, R.QualifiedUniqueUsersWithPlaySessionsMigration, R.ReactionRatePerImpression, R.RecommendationDau, R.RecommendationViewsTotal, R.RelativeThresholdCapture, R.RFYD1CoplayDays, R.RFYD1Playtime, R.RFYD1QualifiedPlaySessions, R.RFYD1RobuxSpend, R.RFYD1SpendDay, R.RFYD2To7CoplayDays, R.RFYD2To7PlayDays, R.RFYD2To7Playtime, R.RFYD2To7QualifiedPlaySessions, R.RFYD2To7RobuxSpend, R.RFYD2To7SpendDays, R.RFYD8To28CoplayDays, R.RFYD8To28PlayDays, R.RFYD8To28Playtime, R.RFYD8To28QualifiedPlaySessions, R.RFYD8To28RobuxSpend, R.RFYD8To28SpendDays, R.RFYDeepEngagementRate, R.RFYDuration0To60, R.RFYDuration181To600, R.RFYDuration61To180, R.RFYDurationGreaterThan600, R.RFYL7IntentionalCoplayDays, R.RFYL7PlayDays, R.RFYL7PlaySessionsPerUser, R.RFYL7PlayTime, R.RFYL7RobuxSpent, R.RFYL7RobuxSpentDays, R.RFYPlayThroughRate, R.RFYQualifiedPTR, R.RFYUniqueNotInterestedUsersPerMillionImpressions, R.RobloxPlusDevBountyAvgPlaytimePerSubscriberMins, R.RobloxPlusDevBountyAvgRobuxSpentPerSubscriber, R.RobloxPlusDevBountyDailySubscribers, R.RobloxPlusDevBountyPayoutRobux, R.RobloxPlusDevBountySubscriberCount, R.RobloxPlusDevBountySubscriberSpend, R.RotraceTotalCalls, R.RSVPCount, re.ServerCpuTime, R.ServerCrashCount, re.ServerFrameRate, re.ServerMemoryUsage, re.ServerMemoryUsageByServerAge, re.ServerMemoryUsageV2, re.SessionDurationSeconds, re.SessionDurationSecondsMigration, R.ShareLinkAttribution1DPayerConversionRatio, R.ShareLinkAttribution1DPlaytimePerUserInMinutes, R.ShareLinkAttribution1DRobuxPerUser, R.ShareLinkAttribution30DPayerConversionRatio, R.ShareLinkAttribution30DPlaytimePerUserInMinutes, R.ShareLinkAttribution30DRobuxPerUser, R.ShareLinkAttribution7DPayerConversionRatio, R.ShareLinkAttribution7DPlaytimePerUserInMinutes, R.ShareLinkAttribution7DRobuxPerUser, R.ShareLinkAttributionD1RetentionRatio, R.ShareLinkAttributionD30RetentionRatio, R.ShareLinkAttributionD7RetentionRatio, R.ShareLinkClickCVR, R.ShareLinkQualifiedClickCVR, R.ShareLinkQualifiedUniqueUsersWithPlaySessions, R.ShareLinkUniqueUsersWithClicks, R.ShareLinkUniqueUsersWithPlaySessions, R.ShareRatePerImpression, R.SourceCount, R.SourceCountRatioKpi, R.SpeechToTextTranscriptionQuota, R.SpeechToTextTranscriptionStatuses, R.SpeechToTextTranscriptionUsage, R.SponsoredAdPlays, R.StoreRevenue, R.StoreTransactions, R.TargetThreshold, R.TextToSpeechAssetSuccesses, R.TextToSpeechRawAudioErrors, R.TextToSpeechRawAudioQuota, R.TextToSpeechRawAudioSuccesses, R.ThumbnailAverageSessionLengthMinutes, R.ThumbnailImpressions, R.ThumbnailL7QualifiedPTR, R.ThumbnailQualifiedPlays, R.ThumbnailQualifiedPTR, R.ThumbnailWinningSegments, R.TotalAbuseReports, R.TotalActions, R.TotalActionsByActionType, R.TotalComments, R.TotalJoins, R.TotalPlayTimeHours, R.TotalPurchases, R.TotalReactionsAdded, R.TotalSessionsEndedInBucket, R.TotalShares, R.TotalViewHours, R.UniqueAbuseReportSubmittersPer1000PlaytimeHours, R.UniqueItemsPerUser, R.UniqueServerShutdowns, R.UniqueUsersWithClicks, R.UniqueUsersWithClicksMigration, R.UniqueUsersWithImpressions, R.UniqueUsersWithImpressionsMigration, R.UniqueUsersWithPlaySessions, R.UniqueUsersWithPlaySessionsMigration, R.UsersInExperiment, R.UsersInExperimentV2, R.UsersJoinedFromNotifications, R.VideoServiceExclusivePlaybackSeconds, R.VideoServicePlaybackSeconds, R.Visits, R.WeeklyCohortRetention, (t = r || (r = {})).AbuseReports = "abuse-reports", t.Acquisition = "acquisition", t.AdsForecastDaily = "ads-forecast-daily", t.AdsHistoricalSketches = "ads-historical-sketches", t.AdsJointEventsAgg = "ads-joint-events-agg", t.AdsLiftStudyUniverseMetrics = "ads-lift-study-universe-metrics", t.AdsPublisherReporting = "ads-publisher-reporting", t.AdsRoi = "ads-roi", t.AdsVideo2dEngagementBreakdown = "ads-video-2d-engagement-breakdown", t.AffiliatelinkDaily = "affiliatelink-daily", t.AffiliatelinkDailyUniqueClicks = "affiliatelink-daily-unique-clicks", t.AffiliatelinkFriendReferral = "affiliatelink-friend-referral", t.Attribution = "attribution", t.BandwidthByInstanceType = "bandwidth-by-instance-type", t.BonusPromotions = "bonus-promotions", t.BountyPayoutsRobloxPlusByUniverse = "bounty-payouts-roblox-plus-by-universe", t.CampaignRoas = "campaign-roas", t.CommerceUserEvents = "commerce-user-events", t.CommunityAnnouncementAnalytics = "community-announcement-analytics", t.CommunityForumContentEvents = "community-forum-content-events", t.CommunityGroupPageViews = "community-group-page-views", t.CommunityMembershipChanges = "community-membership-changes", t.CommunityMembershipCount = "community-membership-count", t.CoreContentQualifiedPaidPlaytimeDaily = "core-content-qualified-paid-playtime-daily", t.CreatorRewardsAcquisition = "creator-rewards-acquisition", t.CreatorRewardsAudienceExpansionFunnel = "creator-rewards-audience-expansion-funnel", t.CreatorRewardsAudienceExpansionFunnelRollingEstimates = "creator-rewards-audience-expansion-funnel-rolling-estimates", t.CreatorRewardsDailyV2 = "creator-rewards-daily-v2", t.CustomEventsHourly = "custom-events-hourly", t.CustomEventVariance = "custom-event-variance", t.DailyRetentionCohortNoCardinality = "daily-retention-cohort-no-cardinality", t.DailyRetentionCohortNoDim = "daily-retention-cohort-no-dim", t.DevSubProductStatsDaily = "dev-sub-product-stats-daily", t.EconomyVariance = "economy-variance", t.Engagement = "engagement", t.EngagementAllDim = "engagement-all-dim", t.EngagementCountryLocale = "engagement-country-locale", t.EngagementRobloxPlusByUniverse = "engagement-roblox-plus-by-universe", t.EntityAttributedConversionAggregation = "entity-attributed-conversion-aggregation", t.ExpEnrollmentSummary = "exp-enrollment-summary", t.ExperienceEventsSummary = "experience-events-summary", t.FirstTimeRetention = "first-time-retention", t.FunnelVariance = "funnel-variance", t.GenerativeAiEvents = "generative-ai-events", t.IpLicensingEarnings = "ip-licensing-earnings", t.IpLicensingPartialEarnings = "ip-licensing-partial-earnings", t.ItemMonetizationHourly = "item-monetization-hourly", t.MarketplaceAffiliateLinksDaily = "marketplace-affiliate-links-daily", t.MatchmakingDefaultSignals = "matchmaking-default-signals", t.MatchmakingNumericCustomSignals = "matchmaking-numeric-custom-signals", t.MatchmakingNumericPlayerAttributes = "matchmaking-numeric-player-attributes", t.Monetization = "monetization", t.PersonalizedShops = "personalized-shops", t.PersonalizedShopsPurchases = "personalized-shops-purchases", t.PlayerFeedbackVotes = "player-feedback-votes", t.PurchasePlatformStatsDaily = "purchase-platform-stats-daily", t.RecommendationAnalyticsByActionHourly = "recommendation-analytics-by-action-hourly", t.RecommendationAnalyticsHourly = "recommendation-analytics-hourly", t.RecommendedEventsFunnelsHourly = "recommended-events-funnels-hourly", t.RecommendedEventsJourneyDaily = "recommended-events-journey-daily", t.RecommendedEventsTransactionsHourly = "recommended-events-transactions-hourly", t.RecommendedEventsWalletBalanceHourly = "recommended-events-wallet-balance-hourly", t.RfySignals = "rfy-signals", t.RotraceTestingV1 = "rotrace-testing-v1", t.ServerShutdowns = "server-shutdowns", t.ShareLinkAcquisition = "share-link-acquisition", t.ShareLinkAttribution = "share-link-attribution", t.SponsoredAdsUniverseStats = "sponsored-ads-universe-stats", t.StoreAssetTransactions = "store-asset-transactions", t.SubscriptionTypeStatsDaily = "subscription-type-stats-daily", t.ThumbnailPersonalization = "thumbnail-personalization", t.ThumbnailPersonalization7Day = "thumbnail-personalization-7-day", t.UenStreamAnalytics = "uen-stream-analytics", t.UgcAnalytics = "ugc-analytics", t.UgcSalesData = "ugc-sales-data", t.UnifiedAdsEngagementEvents = "unified-ads-engagement-events";
     var rc = r;
-    rc.Monetization, rc.Monetization, rc.Monetization, rc.RecommendationAnalyticsHourly, rc.RecommendationAnalyticsByActionHourly, rc.RecommendationAnalyticsHourly, rc.AdsPublisherReporting, rc.AdsPublisherReporting, rc.AdsPublisherReporting, rc.AdsPublisherReporting, rc.AdsPublisherReporting, rc.AdsPublisherReporting, rc.AdsPublisherReporting, rc.AdsPublisherReporting, rc.AdsPublisherReporting, rc.AdsPublisherReporting, rc.AdsPublisherReporting, rc.AdsPublisherReporting, rc.AdsPublisherReporting, rc.AdsPublisherReporting, rc.AdsPublisherReporting, rc.AdsPublisherReporting, rc.AdsPublisherReporting, rc.AdsPublisherReporting, rc.AdsPublisherReporting, rc.AdsPublisherReporting, rc.AdsPublisherReporting, rc.AdsPublisherReporting, rc.AdsPublisherReporting, rc.AdsPublisherReporting, rc.AdsPublisherReporting, rc.AdsPublisherReporting, rc.AdsPublisherReporting, rc.AdsPublisherReporting, rc.CampaignRoas, rc.CampaignRoas, rc.EntityAttributedConversionAggregation, rc.EntityAttributedConversionAggregation, rc.EntityAttributedConversionAggregation, rc.EntityAttributedConversionAggregation, rc.EntityAttributedConversionAggregation, rc.EntityAttributedConversionAggregation, rc.EntityAttributedConversionAggregation, rc.EntityAttributedConversionAggregation, rc.EntityAttributedConversionAggregation, rc.EntityAttributedConversionAggregation, rc.EntityAttributedConversionAggregation, rc.EntityAttributedConversionAggregation, rc.EntityAttributedConversionAggregation, rc.EntityAttributedConversionAggregation, rc.EntityAttributedConversionAggregation, rc.EntityAttributedConversionAggregation, rc.EntityAttributedConversionAggregation, rc.EntityAttributedConversionAggregation, rc.EntityAttributedConversionAggregation, rc.EntityAttributedConversionAggregation, rc.EntityAttributedConversionAggregation, rc.EntityAttributedConversionAggregation, rc.EntityAttributedConversionAggregation, rc.EntityAttributedConversionAggregation, rc.EntityAttributedConversionAggregation, rc.EntityAttributedConversionAggregation, rc.EntityAttributedConversionAggregation, rc.EntityAttributedConversionAggregation, rc.EntityAttributedConversionAggregation, rc.EntityAttributedConversionAggregation, rc.EntityAttributedConversionAggregation, rc.EntityAttributedConversionAggregation, rc.EntityAttributedConversionAggregation, rc.EntityAttributedConversionAggregation, rc.EntityAttributedConversionAggregation, rc.EntityAttributedConversionAggregation, rc.EntityAttributedConversionAggregation, rc.EntityAttributedConversionAggregation, rc.EntityAttributedConversionAggregation, rc.EntityAttributedConversionAggregation, rc.EntityAttributedConversionAggregation, rc.EntityAttributedConversionAggregation, rc.EntityAttributedConversionAggregation, rc.EntityAttributedConversionAggregation, rc.EntityAttributedConversionAggregation, rc.EntityAttributedConversionAggregation, rc.EntityAttributedConversionAggregation, rc.EntityAttributedConversionAggregation, rc.EntityAttributedConversionAggregation, rc.EntityAttributedConversionAggregation, rc.EntityAttributedConversionAggregation, rc.EntityAttributedConversionAggregation, rc.EntityAttributedConversionAggregation, rc.EntityAttributedConversionAggregation, rc.EntityAttributedConversionAggregation, rc.EntityAttributedConversionAggregation, rc.EntityAttributedConversionAggregation, rc.EntityAttributedConversionAggregation, rc.EntityAttributedConversionAggregation, rc.EntityAttributedConversionAggregation, rc.EntityAttributedConversionAggregation, rc.EntityAttributedConversionAggregation, rc.EntityAttributedConversionAggregation, rc.EntityAttributedConversionAggregation, rc.EntityAttributedConversionAggregation, rc.EntityAttributedConversionAggregation, rc.EntityAttributedConversionAggregation, rc.EntityAttributedConversionAggregation, rc.EntityAttributedConversionAggregation, rc.EntityAttributedConversionAggregation, rc.EntityAttributedConversionAggregation, rc.EntityAttributedConversionAggregation, rc.EntityAttributedConversionAggregation, rc.EntityAttributedConversionAggregation, rc.EntityAttributedConversionAggregation, rc.EntityAttributedConversionAggregation, rc.EntityAttributedConversionAggregation, rc.EntityAttributedConversionAggregation, rc.EntityAttributedConversionAggregation, rc.EntityAttributedConversionAggregation, rc.EntityAttributedConversionAggregation, rc.EntityAttributedConversionAggregation, rc.EntityAttributedConversionAggregation, rc.EntityAttributedConversionAggregation, rc.EntityAttributedConversionAggregation, rc.EntityAttributedConversionAggregation, rc.EntityAttributedConversionAggregation, rc.EntityAttributedConversionAggregation, rc.EntityAttributedConversionAggregation, rc.EntityAttributedConversionAggregation, rc.EntityAttributedConversionAggregation, rc.EntityAttributedConversionAggregation, rc.EntityAttributedConversionAggregation, rc.EntityAttributedConversionAggregation, rc.AdsVideo2dEngagementBreakdown, rc.AdsVideo2dEngagementBreakdown, rc.AdsVideo2dEngagementBreakdown, rc.AffiliatelinkDaily, rc.AffiliatelinkDaily, rc.AffiliatelinkDaily, rc.AffiliatelinkDaily, rc.AffiliatelinkDaily, rc.AffiliatelinkDaily, rc.AffiliatelinkDaily, rc.AffiliatelinkDaily, rc.AffiliatelinkDaily, rc.AffiliatelinkDaily, rc.AffiliatelinkDaily, rc.AffiliatelinkDaily, rc.AffiliatelinkDaily, rc.AffiliatelinkDaily, rc.AffiliatelinkDailyUniqueClicks, rc.AffiliatelinkDaily, rc.Attribution, rc.Attribution, rc.Attribution, rc.Attribution, rc.Attribution, rc.Attribution, rc.Attribution, rc.Attribution, rc.Attribution, rc.Attribution, rc.Attribution, rc.Attribution, rc.Attribution, rc.Attribution, rc.Attribution, rc.Attribution, rc.Attribution, rc.Attribution, rc.Attribution, rc.Attribution, rc.Attribution, rc.Attribution, rc.Attribution, rc.Attribution, rc.RecommendationAnalyticsHourly, rc.Engagement, rc.Engagement, rc.Monetization, rc.Monetization, rc.Engagement, rc.Engagement, rc.RecommendationAnalyticsHourly, rc.RecommendationAnalyticsHourly, rc.BandwidthByInstanceType, rc.BandwidthByInstanceType, rc.BandwidthByInstanceType, rc.BandwidthByInstanceType, rc.BandwidthByInstanceType, rc.BandwidthByInstanceType, rc.BandwidthByInstanceType, rc.BandwidthByInstanceType, rc.BandwidthByInstanceType, rc.BandwidthByInstanceType, rc.BandwidthByInstanceType, rc.BandwidthByInstanceType, rc.BandwidthByInstanceType, rc.BandwidthByInstanceType, rc.BonusPromotions, rc.BonusPromotions, rc.BonusPromotions, rc.MatchmakingNumericPlayerAttributes, rc.Acquisition, rc.Acquisition, rc.RecommendationAnalyticsHourly, rc.CommerceUserEvents, rc.CommerceUserEvents, rc.CommerceUserEvents, rc.CommerceUserEvents, rc.CommerceUserEvents, rc.CommerceUserEvents, rc.CommerceUserEvents, rc.CommerceUserEvents, rc.CommerceUserEvents, rc.CommerceUserEvents, rc.CommunityAnnouncementAnalytics, rc.CommunityAnnouncementAnalytics, rc.CommunityAnnouncementAnalytics, rc.CommunityAnnouncementAnalytics, rc.CommunityAnnouncementAnalytics, rc.CommunityAnnouncementAnalytics, rc.CommunityAnnouncementAnalytics, rc.CommunityForumContentEvents, rc.CommunityForumContentEvents, rc.CommunityGroupPageViews, rc.CommunityGroupPageViews, rc.CommunityMembershipChanges, rc.CommunityMembershipCount, rc.CreatorRewardsAudienceExpansionFunnel, rc.CreatorRewardsAudienceExpansionFunnelRollingEstimates, rc.CreatorRewardsAudienceExpansionFunnel, rc.CreatorRewardsAudienceExpansionFunnelRollingEstimates, rc.CreatorRewardsAudienceExpansionFunnel, rc.CreatorRewardsAudienceExpansionFunnelRollingEstimates, rc.CreatorRewardsAudienceExpansionFunnel, rc.CreatorRewardsAudienceExpansionFunnelRollingEstimates, rc.CreatorRewardsAudienceExpansionFunnel, rc.CreatorRewardsAudienceExpansionFunnelRollingEstimates, rc.CreatorRewardsAudienceExpansionFunnel, rc.CreatorRewardsAudienceExpansionFunnelRollingEstimates, rc.CreatorRewardsAudienceExpansionFunnel, rc.CreatorRewardsAudienceExpansionFunnelRollingEstimates, rc.CreatorRewardsAudienceExpansionFunnel, rc.CreatorRewardsAudienceExpansionFunnelRollingEstimates, rc.CreatorRewardsAudienceExpansionFunnel, rc.CreatorRewardsAudienceExpansionFunnelRollingEstimates, rc.CreatorRewardsAudienceExpansionFunnel, rc.CreatorRewardsAudienceExpansionFunnelRollingEstimates, rc.CreatorRewardsAudienceExpansionFunnel, rc.CreatorRewardsAudienceExpansionFunnelRollingEstimates, rc.CreatorRewardsAudienceExpansionFunnel, rc.CreatorRewardsAudienceExpansionFunnelRollingEstimates, rc.CreatorRewardsAudienceExpansionFunnel, rc.CreatorRewardsAudienceExpansionFunnelRollingEstimates, rc.CreatorRewardsAudienceExpansionFunnel, rc.CreatorRewardsAudienceExpansionFunnelRollingEstimates, rc.CreatorRewardsAudienceExpansionFunnel, rc.CreatorRewardsAudienceExpansionFunnelRollingEstimates, rc.CreatorRewardsAudienceExpansionFunnel, rc.CreatorRewardsAudienceExpansionFunnelRollingEstimates, rc.CreatorRewardsAcquisition, rc.CreatorRewardsAcquisition, rc.CreatorRewardsAcquisition, rc.CreatorRewardsAcquisition, rc.CreatorRewardsAcquisition, rc.GenerativeAiEvents, rc.GenerativeAiEvents, rc.GenerativeAiEvents, rc.GenerativeAiEvents, rc.GenerativeAiEvents, rc.CustomEventsHourly, rc.CustomEventsHourly, rc.CustomEventsHourly, rc.CustomEventsHourly, rc.CustomEventsHourly, rc.CustomEventsHourly, rc.CustomEventsHourly, rc.Engagement, rc.Engagement, rc.Engagement, rc.Engagement, rc.Engagement, rc.Engagement, rc.Engagement, rc.DailyRetentionCohortNoDim, rc.Monetization, rc.Engagement, rc.Monetization, rc.RecommendedEventsWalletBalanceHourly, rc.RecommendedEventsTransactionsHourly, rc.RecommendedEventsTransactionsHourly, rc.RecommendedEventsTransactionsHourly, rc.Acquisition, rc.Acquisition, rc.ExperienceEventsSummary, rc.ExperienceEventsSummary, rc.ExperienceEventsSummary, rc.ExperienceEventsSummary, rc.Engagement, rc.Engagement, rc.Engagement, rc.AffiliatelinkFriendReferral, rc.AffiliatelinkFriendReferral, rc.AffiliatelinkFriendReferral, rc.AffiliatelinkFriendReferral, rc.AffiliatelinkFriendReferral, rc.RecommendedEventsFunnelsHourly, rc.RecommendedEventsFunnelsHourly, rc.RecommendedEventsFunnelsHourly, rc.RecommendedEventsFunnelsHourly, rc.RecommendedEventsFunnelsHourly, rc.RecommendedEventsFunnelsHourly, rc.RecommendedEventsFunnelsHourly, rc.RecommendedEventsFunnelsHourly, rc.RecommendedEventsFunnelsHourly, rc.RecommendedEventsFunnelsHourly, rc.RecommendedEventsFunnelsHourly, rc.RecommendedEventsFunnelsHourly, rc.Acquisition, rc.Acquisition, rc.IpLicensingEarnings, rc.IpLicensingPartialEarnings, rc.IpLicensingEarnings, rc.IpLicensingPartialEarnings, rc.UgcAnalytics, rc.UgcAnalytics, rc.UgcAnalytics, rc.UgcAnalytics, rc.UgcAnalytics, rc.UgcAnalytics, rc.UgcAnalytics, rc.UgcAnalytics, rc.ItemMonetizationHourly, rc.ItemMonetizationHourly, rc.UgcAnalytics, rc.UgcAnalytics, rc.UgcAnalytics, rc.UgcAnalytics, rc.UgcAnalytics, rc.RecommendationAnalyticsHourly, rc.RecommendedEventsJourneyDaily, rc.RecommendedEventsJourneyDaily, rc.RecommendedEventsJourneyDaily, rc.RecommendedEventsJourneyDaily, rc.RecommendedEventsJourneyDaily, rc.RecommendedEventsJourneyDaily, rc.RecommendedEventsJourneyDaily, rc.RecommendedEventsJourneyDaily, rc.RecommendedEventsJourneyDaily, rc.RecommendedEventsJourneyDaily, rc.RecommendedEventsJourneyDaily, rc.RecommendedEventsJourneyDaily, rc.RecommendedEventsJourneyDaily, rc.RecommendedEventsJourneyDaily, rc.RecommendedEventsJourneyDaily, rc.RecommendedEventsJourneyDaily, rc.RecommendedEventsJourneyDaily, rc.RecommendedEventsJourneyDaily, rc.RecommendedEventsJourneyDaily, rc.RecommendedEventsJourneyDaily, rc.RecommendedEventsJourneyDaily, rc.RecommendedEventsJourneyDaily, rc.RecommendedEventsJourneyDaily, rc.RecommendedEventsJourneyDaily, rc.RecommendedEventsJourneyDaily, rc.CoreContentQualifiedPaidPlaytimeDaily, rc.MarketplaceAffiliateLinksDaily, rc.MarketplaceAffiliateLinksDaily, rc.MarketplaceAffiliateLinksDaily, rc.MarketplaceAffiliateLinksDaily, rc.MarketplaceAffiliateLinksDaily, rc.MarketplaceAffiliateLinksDaily, rc.MatchmakingNumericCustomSignals, rc.MatchmakingNumericCustomSignals, rc.MatchmakingNumericCustomSignals, rc.MatchmakingNumericCustomSignals, rc.MatchmakingNumericCustomSignals, rc.MatchmakingNumericCustomSignals, rc.MatchmakingNumericCustomSignals, rc.MatchmakingNumericCustomSignals, rc.MatchmakingDefaultSignals, rc.MatchmakingDefaultSignals, rc.MatchmakingDefaultSignals, rc.MatchmakingDefaultSignals, rc.MatchmakingDefaultSignals, rc.MatchmakingDefaultSignals, rc.MatchmakingDefaultSignals, rc.MatchmakingDefaultSignals, rc.MatchmakingDefaultSignals, rc.MatchmakingDefaultSignals, rc.MatchmakingDefaultSignals, rc.MatchmakingDefaultSignals, rc.MatchmakingDefaultSignals, rc.MatchmakingDefaultSignals, rc.MatchmakingDefaultSignals, rc.MatchmakingDefaultSignals, rc.MatchmakingDefaultSignals, rc.MatchmakingDefaultSignals, rc.MatchmakingDefaultSignals, rc.MatchmakingDefaultSignals, rc.MatchmakingDefaultSignals, rc.MatchmakingDefaultSignals, rc.MatchmakingDefaultSignals, rc.MatchmakingDefaultSignals, rc.MatchmakingDefaultSignals, rc.MatchmakingDefaultSignals, rc.MatchmakingDefaultSignals, rc.MatchmakingDefaultSignals, rc.MatchmakingDefaultSignals, rc.MatchmakingDefaultSignals, rc.MatchmakingDefaultSignals, rc.MatchmakingDefaultSignals, rc.MatchmakingDefaultSignals, rc.MatchmakingDefaultSignals, rc.MatchmakingDefaultSignals, rc.MatchmakingDefaultSignals, rc.MatchmakingDefaultSignals, rc.MatchmakingDefaultSignals, rc.MatchmakingDefaultSignals, rc.MatchmakingDefaultSignals, rc.MatchmakingDefaultSignals, rc.Monetization, rc.Engagement, rc.MatchmakingNumericPlayerAttributes, rc.MatchmakingNumericPlayerAttributes, rc.MatchmakingNumericPlayerAttributes, rc.MatchmakingNumericPlayerAttributes, rc.Monetization, rc.Monetization, rc.CreatorRewardsDailyV2, rc.CreatorRewardsDailyV2, rc.PersonalizedShops, rc.PersonalizedShops, rc.PersonalizedShopsPurchases, rc.PersonalizedShopsPurchases, rc.PlayerFeedbackVotes, rc.Monetization, rc.Monetization, rc.RecommendationAnalyticsHourly, rc.RfySignals, rc.Acquisition, rc.Acquisition, rc.Acquisition, rc.Acquisition, rc.RfySignals, rc.RfySignals, rc.RfySignals, rc.RfySignals, rc.RfySignals, rc.RfySignals, rc.RfySignals, rc.RfySignals, rc.RfySignals, rc.RfySignals, rc.RfySignals, rc.RfySignals, rc.RfySignals, rc.RfySignals, rc.RfySignals, rc.RfySignals, rc.RfySignals, rc.RfySignals, rc.RfySignals, rc.RfySignals, rc.RfySignals, rc.RfySignals, rc.RfySignals, rc.RfySignals, rc.RfySignals, rc.RfySignals, rc.RfySignals, rc.RfySignals, rc.RfySignals, rc.RfySignals, rc.RfySignals, rc.ExperienceEventsSummary, rc.RecommendationAnalyticsHourly, rc.RecommendationAnalyticsHourly, rc.RecommendationAnalyticsHourly, rc.CoreContentQualifiedPaidPlaytimeDaily, rc.EngagementRobloxPlusByUniverse, rc.EngagementRobloxPlusByUniverse, rc.EngagementRobloxPlusByUniverse, rc.BountyPayoutsRobloxPlusByUniverse, rc.BountyPayoutsRobloxPlusByUniverse, rc.EngagementRobloxPlusByUniverse, rc.RotraceTestingV1, rc.ShareLinkAttribution, rc.ShareLinkAttribution, rc.ShareLinkAttribution, rc.ShareLinkAttribution, rc.ShareLinkAttribution, rc.ShareLinkAttribution, rc.ShareLinkAttribution, rc.ShareLinkAttribution, rc.ShareLinkAttribution, rc.ShareLinkAttribution, rc.ShareLinkAttribution, rc.ShareLinkAttribution, rc.ShareLinkAcquisition, rc.ShareLinkAcquisition, rc.ShareLinkAcquisition, rc.ShareLinkAcquisition, rc.ShareLinkAcquisition, rc.RecommendationAnalyticsHourly, rc.CreatorRewardsDailyV2, rc.CreatorRewardsDailyV2, rc.SponsoredAdsUniverseStats, rc.StoreAssetTransactions, rc.StoreAssetTransactions, rc.CoreContentQualifiedPaidPlaytimeDaily, rc.ThumbnailPersonalization7Day, rc.ThumbnailPersonalization7Day, rc.ThumbnailPersonalization7Day, rc.ThumbnailPersonalization7Day, rc.ThumbnailPersonalization7Day, rc.ThumbnailPersonalization7Day, rc.AbuseReports, rc.RecommendationAnalyticsHourly, rc.RecommendationAnalyticsByActionHourly, rc.RecommendationAnalyticsHourly, rc.RecommendationAnalyticsHourly, rc.Engagement, rc.RecommendationAnalyticsHourly, rc.RecommendationAnalyticsHourly, rc.FirstTimeRetention, rc.RecommendationAnalyticsHourly, rc.RecommendationAnalyticsHourly, rc.AbuseReports, rc.RecommendationAnalyticsHourly, rc.ServerShutdowns, rc.Acquisition, rc.Acquisition, rc.Acquisition, rc.Acquisition, rc.Acquisition, rc.Acquisition, rc.ExperienceEventsSummary, rc.Engagement, rc.Engagement, e.s(["AnalyticsTranslationNamespace", 0, u, "DimensionToMetricToNamespaceMap", 0, S, "FallbackValue", 0, sf, "RAQIV2APIMetric", 0, d, "RAQIV2AbuseChannel", 0, M, "RAQIV2AcquisitionSource", 0, h, "RAQIV2AdFormat", 0, w, "RAQIV2AggregationType", 0, sm, "RAQIV2AnnouncementEventType", 0, j, "RAQIV2AvatarItemTargetType", 0, eo, "RAQIV2BandwidthCategory", 0, eD, "RAQIV2BenchmarkDatasetKey", 0, sI, "RAQIV2BenchmarkDatasetKeyToVariant", 0, sF, "RAQIV2BenchmarkVariantId", 0, sO, "RAQIV2BenchmarkVariantsByMetric", 0, sG, "RAQIV2BreakdownValueOrder", 0, aH, "RAQIV2DateRangeType", 0, sq, "RAQIV2Dimension", 0, A, "RAQIV2DimensionDisplayConfig", 0, sk, "RAQIV2DimensionValueType", 0, aW, "RAQIV2ExperimentationMetrics", 0, sz, "RAQIV2FilterOperation", 0, aK, "RAQIV2FlowType", 0, id, "RAQIV2ForumContentEventType", 0, iA, "RAQIV2IsNewUser", 0, iV, "RAQIV2MembershipEventType", 0, i$, "RAQIV2MemoryGroup", 0, i2, "RAQIV2Metric", 0, R, "RAQIV2MetricDisplayConfig", 0, rn, "RAQIV2MetricDisplayType", 0, sj, "RAQIV2MetricGranularity", 0, rt, "RAQIV2MetricResultType", 0, no, "RAQIV2MetricToAlertingEligibleDimensions", 0, ra, "RAQIV2MetricToSupportedDimensions", 0, rs, "RAQIV2MetricToSupportedGranularities", 0, rr, "RAQIV2MetricToSupportsPeriodSummary", 0, ro, "RAQIV2MetricUnit", 0, s1, "RAQIV2MetricValueType", 0, s7, "RAQIV2OperatingSystem", 0, ny, "RAQIV2PageViewContext", 0, nD, "RAQIV2PercentileType", 0, sy, "RAQIV2Platform", 0, nT, "RAQIV2ProductType", 0, nh, "RAQIV2PseudoDimensionDisplayConfig", 0, sT, "RAQIV2PurchaseStatus", 0, nw, "RAQIV2RevenueSource", 0, nO, "RAQIV2RewardedVideoEventType", 0, nG, "RAQIV2Severity", 0, n4, "RAQIV2SpecialDimensionRenderer", 0, aX, "RAQIV2UIMetric", 0, re, "RAQIV2UIMetricToAPIConfig", 0, rl, "RAQIV2UIMetricToSupportedMetricTypes", 0, ru, "RAQIV2UIPseudoDimension", 0, sU, "RAQIV2UIPseudoDimensionType", 0, sb, "RAQIV2Universe", 0, tl, "RAQIV2VoteType", 0, tB, "Severity", 0, ri])
+    rc.Monetization, rc.Monetization, rc.Monetization, rc.RecommendationAnalyticsHourly, rc.RecommendationAnalyticsByActionHourly, rc.RecommendationAnalyticsHourly, rc.AdsPublisherReporting, rc.AdsPublisherReporting, rc.AdsPublisherReporting, rc.AdsPublisherReporting, rc.AdsPublisherReporting, rc.AdsPublisherReporting, rc.AdsPublisherReporting, rc.AdsPublisherReporting, rc.AdsPublisherReporting, rc.AdsPublisherReporting, rc.AdsPublisherReporting, rc.AdsPublisherReporting, rc.AdsPublisherReporting, rc.AdsPublisherReporting, rc.AdsPublisherReporting, rc.AdsPublisherReporting, rc.AdsPublisherReporting, rc.AdsPublisherReporting, rc.AdsPublisherReporting, rc.AdsPublisherReporting, rc.AdsPublisherReporting, rc.AdsPublisherReporting, rc.AdsPublisherReporting, rc.AdsPublisherReporting, rc.AdsPublisherReporting, rc.AdsPublisherReporting, rc.AdsPublisherReporting, rc.AdsPublisherReporting, rc.CampaignRoas, rc.CampaignRoas, rc.EntityAttributedConversionAggregation, rc.EntityAttributedConversionAggregation, rc.EntityAttributedConversionAggregation, rc.EntityAttributedConversionAggregation, rc.EntityAttributedConversionAggregation, rc.EntityAttributedConversionAggregation, rc.EntityAttributedConversionAggregation, rc.EntityAttributedConversionAggregation, rc.EntityAttributedConversionAggregation, rc.EntityAttributedConversionAggregation, rc.EntityAttributedConversionAggregation, rc.EntityAttributedConversionAggregation, rc.EntityAttributedConversionAggregation, rc.EntityAttributedConversionAggregation, rc.EntityAttributedConversionAggregation, rc.EntityAttributedConversionAggregation, rc.EntityAttributedConversionAggregation, rc.EntityAttributedConversionAggregation, rc.EntityAttributedConversionAggregation, rc.EntityAttributedConversionAggregation, rc.EntityAttributedConversionAggregation, rc.EntityAttributedConversionAggregation, rc.EntityAttributedConversionAggregation, rc.EntityAttributedConversionAggregation, rc.EntityAttributedConversionAggregation, rc.EntityAttributedConversionAggregation, rc.EntityAttributedConversionAggregation, rc.EntityAttributedConversionAggregation, rc.EntityAttributedConversionAggregation, rc.EntityAttributedConversionAggregation, rc.EntityAttributedConversionAggregation, rc.EntityAttributedConversionAggregation, rc.EntityAttributedConversionAggregation, rc.EntityAttributedConversionAggregation, rc.EntityAttributedConversionAggregation, rc.EntityAttributedConversionAggregation, rc.EntityAttributedConversionAggregation, rc.EntityAttributedConversionAggregation, rc.EntityAttributedConversionAggregation, rc.EntityAttributedConversionAggregation, rc.EntityAttributedConversionAggregation, rc.EntityAttributedConversionAggregation, rc.EntityAttributedConversionAggregation, rc.EntityAttributedConversionAggregation, rc.EntityAttributedConversionAggregation, rc.EntityAttributedConversionAggregation, rc.EntityAttributedConversionAggregation, rc.EntityAttributedConversionAggregation, rc.EntityAttributedConversionAggregation, rc.EntityAttributedConversionAggregation, rc.EntityAttributedConversionAggregation, rc.EntityAttributedConversionAggregation, rc.EntityAttributedConversionAggregation, rc.EntityAttributedConversionAggregation, rc.EntityAttributedConversionAggregation, rc.EntityAttributedConversionAggregation, rc.EntityAttributedConversionAggregation, rc.EntityAttributedConversionAggregation, rc.EntityAttributedConversionAggregation, rc.EntityAttributedConversionAggregation, rc.EntityAttributedConversionAggregation, rc.EntityAttributedConversionAggregation, rc.EntityAttributedConversionAggregation, rc.EntityAttributedConversionAggregation, rc.EntityAttributedConversionAggregation, rc.EntityAttributedConversionAggregation, rc.EntityAttributedConversionAggregation, rc.EntityAttributedConversionAggregation, rc.EntityAttributedConversionAggregation, rc.EntityAttributedConversionAggregation, rc.EntityAttributedConversionAggregation, rc.EntityAttributedConversionAggregation, rc.EntityAttributedConversionAggregation, rc.EntityAttributedConversionAggregation, rc.EntityAttributedConversionAggregation, rc.EntityAttributedConversionAggregation, rc.EntityAttributedConversionAggregation, rc.EntityAttributedConversionAggregation, rc.EntityAttributedConversionAggregation, rc.EntityAttributedConversionAggregation, rc.EntityAttributedConversionAggregation, rc.EntityAttributedConversionAggregation, rc.EntityAttributedConversionAggregation, rc.EntityAttributedConversionAggregation, rc.EntityAttributedConversionAggregation, rc.EntityAttributedConversionAggregation, rc.EntityAttributedConversionAggregation, rc.EntityAttributedConversionAggregation, rc.EntityAttributedConversionAggregation, rc.EntityAttributedConversionAggregation, rc.EntityAttributedConversionAggregation, rc.EntityAttributedConversionAggregation, rc.EntityAttributedConversionAggregation, rc.EntityAttributedConversionAggregation, rc.EntityAttributedConversionAggregation, rc.EntityAttributedConversionAggregation, rc.EntityAttributedConversionAggregation, rc.EntityAttributedConversionAggregation, rc.EntityAttributedConversionAggregation, rc.EntityAttributedConversionAggregation, rc.EntityAttributedConversionAggregation, rc.EntityAttributedConversionAggregation, rc.AdsVideo2dEngagementBreakdown, rc.AdsVideo2dEngagementBreakdown, rc.AdsVideo2dEngagementBreakdown, rc.AffiliatelinkDaily, rc.AffiliatelinkDaily, rc.AffiliatelinkDaily, rc.AffiliatelinkDaily, rc.AffiliatelinkDaily, rc.AffiliatelinkDaily, rc.AffiliatelinkDaily, rc.AffiliatelinkDaily, rc.AffiliatelinkDaily, rc.AffiliatelinkDaily, rc.AffiliatelinkDaily, rc.AffiliatelinkDaily, rc.AffiliatelinkDaily, rc.AffiliatelinkDaily, rc.AffiliatelinkDailyUniqueClicks, rc.AffiliatelinkDaily, rc.Attribution, rc.Attribution, rc.Attribution, rc.Attribution, rc.Attribution, rc.Attribution, rc.Attribution, rc.Attribution, rc.Attribution, rc.Attribution, rc.Attribution, rc.Attribution, rc.Attribution, rc.Attribution, rc.Attribution, rc.Attribution, rc.Attribution, rc.Attribution, rc.Attribution, rc.Attribution, rc.Attribution, rc.Attribution, rc.Attribution, rc.Attribution, rc.EconomyVariance, rc.EconomyVariance, rc.EconomyVariance, rc.EconomyVariance, rc.CustomEventVariance, rc.CustomEventVariance, rc.CustomEventVariance, rc.CustomEventVariance, rc.RecommendationAnalyticsHourly, rc.EconomyVariance, rc.EconomyVariance, rc.Engagement, rc.Engagement, rc.Monetization, rc.Monetization, rc.Engagement, rc.Engagement, rc.RecommendationAnalyticsHourly, rc.RecommendationAnalyticsHourly, rc.BandwidthByInstanceType, rc.BandwidthByInstanceType, rc.BandwidthByInstanceType, rc.BandwidthByInstanceType, rc.BandwidthByInstanceType, rc.BandwidthByInstanceType, rc.BandwidthByInstanceType, rc.BandwidthByInstanceType, rc.BandwidthByInstanceType, rc.BandwidthByInstanceType, rc.BandwidthByInstanceType, rc.BandwidthByInstanceType, rc.BandwidthByInstanceType, rc.BandwidthByInstanceType, rc.BonusPromotions, rc.BonusPromotions, rc.BonusPromotions, rc.MatchmakingNumericPlayerAttributes, rc.Acquisition, rc.Acquisition, rc.RecommendationAnalyticsHourly, rc.CommerceUserEvents, rc.CommerceUserEvents, rc.CommerceUserEvents, rc.CommerceUserEvents, rc.CommerceUserEvents, rc.CommerceUserEvents, rc.CommerceUserEvents, rc.CommerceUserEvents, rc.CommerceUserEvents, rc.CommerceUserEvents, rc.CommunityAnnouncementAnalytics, rc.CommunityAnnouncementAnalytics, rc.CommunityAnnouncementAnalytics, rc.CommunityAnnouncementAnalytics, rc.CommunityAnnouncementAnalytics, rc.CommunityAnnouncementAnalytics, rc.CommunityAnnouncementAnalytics, rc.CommunityForumContentEvents, rc.CommunityForumContentEvents, rc.CommunityGroupPageViews, rc.CommunityGroupPageViews, rc.CommunityMembershipChanges, rc.CommunityMembershipCount, rc.CreatorRewardsAudienceExpansionFunnel, rc.CreatorRewardsAudienceExpansionFunnelRollingEstimates, rc.CreatorRewardsAudienceExpansionFunnel, rc.CreatorRewardsAudienceExpansionFunnelRollingEstimates, rc.CreatorRewardsAudienceExpansionFunnel, rc.CreatorRewardsAudienceExpansionFunnelRollingEstimates, rc.CreatorRewardsAudienceExpansionFunnel, rc.CreatorRewardsAudienceExpansionFunnelRollingEstimates, rc.CreatorRewardsAudienceExpansionFunnel, rc.CreatorRewardsAudienceExpansionFunnelRollingEstimates, rc.CreatorRewardsAudienceExpansionFunnel, rc.CreatorRewardsAudienceExpansionFunnelRollingEstimates, rc.CreatorRewardsAudienceExpansionFunnel, rc.CreatorRewardsAudienceExpansionFunnelRollingEstimates, rc.CreatorRewardsAudienceExpansionFunnel, rc.CreatorRewardsAudienceExpansionFunnelRollingEstimates, rc.CreatorRewardsAudienceExpansionFunnel, rc.CreatorRewardsAudienceExpansionFunnelRollingEstimates, rc.CreatorRewardsAudienceExpansionFunnel, rc.CreatorRewardsAudienceExpansionFunnelRollingEstimates, rc.CreatorRewardsAudienceExpansionFunnel, rc.CreatorRewardsAudienceExpansionFunnelRollingEstimates, rc.CreatorRewardsAudienceExpansionFunnel, rc.CreatorRewardsAudienceExpansionFunnelRollingEstimates, rc.CreatorRewardsAudienceExpansionFunnel, rc.CreatorRewardsAudienceExpansionFunnelRollingEstimates, rc.CreatorRewardsAudienceExpansionFunnel, rc.CreatorRewardsAudienceExpansionFunnelRollingEstimates, rc.CreatorRewardsAudienceExpansionFunnel, rc.CreatorRewardsAudienceExpansionFunnelRollingEstimates, rc.CreatorRewardsAudienceExpansionFunnel, rc.CreatorRewardsAudienceExpansionFunnelRollingEstimates, rc.CreatorRewardsAcquisition, rc.CreatorRewardsAcquisition, rc.CreatorRewardsAcquisition, rc.CreatorRewardsAcquisition, rc.CreatorRewardsAcquisition, rc.GenerativeAiEvents, rc.GenerativeAiEvents, rc.GenerativeAiEvents, rc.GenerativeAiEvents, rc.GenerativeAiEvents, rc.CustomEventsHourly, rc.CustomEventsHourly, rc.CustomEventsHourly, rc.CustomEventsHourly, rc.CustomEventsHourly, rc.CustomEventsHourly, rc.CustomEventsHourly, rc.CustomEventVariance, rc.Engagement, rc.Engagement, rc.Engagement, rc.Engagement, rc.Engagement, rc.Engagement, rc.Engagement, rc.DailyRetentionCohortNoDim, rc.Monetization, rc.Engagement, rc.Monetization, rc.RecommendedEventsWalletBalanceHourly, rc.RecommendedEventsTransactionsHourly, rc.RecommendedEventsTransactionsHourly, rc.RecommendedEventsTransactionsHourly, rc.Acquisition, rc.Acquisition, rc.ExperienceEventsSummary, rc.ExperienceEventsSummary, rc.ExperienceEventsSummary, rc.ExperienceEventsSummary, rc.Engagement, rc.Engagement, rc.Engagement, rc.AffiliatelinkFriendReferral, rc.AffiliatelinkFriendReferral, rc.AffiliatelinkFriendReferral, rc.AffiliatelinkFriendReferral, rc.AffiliatelinkFriendReferral, rc.RecommendedEventsFunnelsHourly, rc.RecommendedEventsFunnelsHourly, rc.RecommendedEventsFunnelsHourly, rc.RecommendedEventsFunnelsHourly, rc.RecommendedEventsFunnelsHourly, rc.RecommendedEventsFunnelsHourly, rc.RecommendedEventsFunnelsHourly, rc.RecommendedEventsFunnelsHourly, rc.RecommendedEventsFunnelsHourly, rc.RecommendedEventsFunnelsHourly, rc.RecommendedEventsFunnelsHourly, rc.RecommendedEventsFunnelsHourly, rc.Acquisition, rc.Acquisition, rc.IpLicensingEarnings, rc.IpLicensingPartialEarnings, rc.IpLicensingEarnings, rc.IpLicensingPartialEarnings, rc.UgcAnalytics, rc.UgcAnalytics, rc.UgcAnalytics, rc.UgcAnalytics, rc.UgcAnalytics, rc.UgcAnalytics, rc.UgcAnalytics, rc.UgcAnalytics, rc.ItemMonetizationHourly, rc.ItemMonetizationHourly, rc.UgcAnalytics, rc.UgcAnalytics, rc.UgcAnalytics, rc.UgcAnalytics, rc.UgcAnalytics, rc.RecommendationAnalyticsHourly, rc.RecommendedEventsJourneyDaily, rc.RecommendedEventsJourneyDaily, rc.RecommendedEventsJourneyDaily, rc.RecommendedEventsJourneyDaily, rc.RecommendedEventsJourneyDaily, rc.RecommendedEventsJourneyDaily, rc.RecommendedEventsJourneyDaily, rc.RecommendedEventsJourneyDaily, rc.RecommendedEventsJourneyDaily, rc.RecommendedEventsJourneyDaily, rc.RecommendedEventsJourneyDaily, rc.RecommendedEventsJourneyDaily, rc.RecommendedEventsJourneyDaily, rc.RecommendedEventsJourneyDaily, rc.RecommendedEventsJourneyDaily, rc.RecommendedEventsJourneyDaily, rc.RecommendedEventsJourneyDaily, rc.RecommendedEventsJourneyDaily, rc.RecommendedEventsJourneyDaily, rc.RecommendedEventsJourneyDaily, rc.RecommendedEventsJourneyDaily, rc.RecommendedEventsJourneyDaily, rc.RecommendedEventsJourneyDaily, rc.RecommendedEventsJourneyDaily, rc.RecommendedEventsJourneyDaily, rc.CoreContentQualifiedPaidPlaytimeDaily, rc.MarketplaceAffiliateLinksDaily, rc.MarketplaceAffiliateLinksDaily, rc.MarketplaceAffiliateLinksDaily, rc.MarketplaceAffiliateLinksDaily, rc.MarketplaceAffiliateLinksDaily, rc.MarketplaceAffiliateLinksDaily, rc.MatchmakingNumericCustomSignals, rc.MatchmakingNumericCustomSignals, rc.MatchmakingNumericCustomSignals, rc.MatchmakingNumericCustomSignals, rc.MatchmakingNumericCustomSignals, rc.MatchmakingNumericCustomSignals, rc.MatchmakingNumericCustomSignals, rc.MatchmakingNumericCustomSignals, rc.MatchmakingDefaultSignals, rc.MatchmakingDefaultSignals, rc.MatchmakingDefaultSignals, rc.MatchmakingDefaultSignals, rc.MatchmakingDefaultSignals, rc.MatchmakingDefaultSignals, rc.MatchmakingDefaultSignals, rc.MatchmakingDefaultSignals, rc.MatchmakingDefaultSignals, rc.MatchmakingDefaultSignals, rc.MatchmakingDefaultSignals, rc.MatchmakingDefaultSignals, rc.MatchmakingDefaultSignals, rc.MatchmakingDefaultSignals, rc.MatchmakingDefaultSignals, rc.MatchmakingDefaultSignals, rc.MatchmakingDefaultSignals, rc.MatchmakingDefaultSignals, rc.MatchmakingDefaultSignals, rc.MatchmakingDefaultSignals, rc.MatchmakingDefaultSignals, rc.MatchmakingDefaultSignals, rc.MatchmakingDefaultSignals, rc.MatchmakingDefaultSignals, rc.MatchmakingDefaultSignals, rc.MatchmakingDefaultSignals, rc.MatchmakingDefaultSignals, rc.MatchmakingDefaultSignals, rc.MatchmakingDefaultSignals, rc.MatchmakingDefaultSignals, rc.MatchmakingDefaultSignals, rc.MatchmakingDefaultSignals, rc.MatchmakingDefaultSignals, rc.MatchmakingDefaultSignals, rc.MatchmakingDefaultSignals, rc.MatchmakingDefaultSignals, rc.MatchmakingDefaultSignals, rc.MatchmakingDefaultSignals, rc.MatchmakingDefaultSignals, rc.MatchmakingDefaultSignals, rc.MatchmakingDefaultSignals, rc.Monetization, rc.Engagement, rc.MatchmakingNumericPlayerAttributes, rc.MatchmakingNumericPlayerAttributes, rc.MatchmakingNumericPlayerAttributes, rc.MatchmakingNumericPlayerAttributes, rc.Monetization, rc.Monetization, rc.CreatorRewardsDailyV2, rc.CreatorRewardsDailyV2, rc.FunnelVariance, rc.FunnelVariance, rc.FunnelVariance, rc.FunnelVariance, rc.PersonalizedShops, rc.PersonalizedShops, rc.PersonalizedShopsPurchases, rc.PersonalizedShopsPurchases, rc.PlayerFeedbackVotes, rc.Monetization, rc.Monetization, rc.RecommendationAnalyticsHourly, rc.RfySignals, rc.Acquisition, rc.Acquisition, rc.Acquisition, rc.Acquisition, rc.RfySignals, rc.RfySignals, rc.RfySignals, rc.RfySignals, rc.RfySignals, rc.RfySignals, rc.RfySignals, rc.RfySignals, rc.RfySignals, rc.RfySignals, rc.RfySignals, rc.RfySignals, rc.RfySignals, rc.RfySignals, rc.RfySignals, rc.RfySignals, rc.RfySignals, rc.RfySignals, rc.RfySignals, rc.RfySignals, rc.RfySignals, rc.RfySignals, rc.RfySignals, rc.RfySignals, rc.RfySignals, rc.RfySignals, rc.RfySignals, rc.RfySignals, rc.RfySignals, rc.RfySignals, rc.RfySignals, rc.ExperienceEventsSummary, rc.RecommendationAnalyticsHourly, rc.RecommendationAnalyticsHourly, rc.RecommendationAnalyticsHourly, rc.CoreContentQualifiedPaidPlaytimeDaily, rc.EngagementRobloxPlusByUniverse, rc.EngagementRobloxPlusByUniverse, rc.EngagementRobloxPlusByUniverse, rc.BountyPayoutsRobloxPlusByUniverse, rc.BountyPayoutsRobloxPlusByUniverse, rc.EngagementRobloxPlusByUniverse, rc.RotraceTestingV1, rc.ShareLinkAttribution, rc.ShareLinkAttribution, rc.ShareLinkAttribution, rc.ShareLinkAttribution, rc.ShareLinkAttribution, rc.ShareLinkAttribution, rc.ShareLinkAttribution, rc.ShareLinkAttribution, rc.ShareLinkAttribution, rc.ShareLinkAttribution, rc.ShareLinkAttribution, rc.ShareLinkAttribution, rc.ShareLinkAcquisition, rc.ShareLinkAcquisition, rc.ShareLinkAcquisition, rc.ShareLinkAcquisition, rc.ShareLinkAcquisition, rc.RecommendationAnalyticsHourly, rc.CreatorRewardsDailyV2, rc.CreatorRewardsDailyV2, rc.SponsoredAdsUniverseStats, rc.StoreAssetTransactions, rc.StoreAssetTransactions, rc.CoreContentQualifiedPaidPlaytimeDaily, rc.ThumbnailPersonalization7Day, rc.ThumbnailPersonalization7Day, rc.ThumbnailPersonalization7Day, rc.ThumbnailPersonalization7Day, rc.ThumbnailPersonalization7Day, rc.ThumbnailPersonalization7Day, rc.AbuseReports, rc.RecommendationAnalyticsHourly, rc.RecommendationAnalyticsByActionHourly, rc.RecommendationAnalyticsHourly, rc.RecommendationAnalyticsHourly, rc.Engagement, rc.RecommendationAnalyticsHourly, rc.RecommendationAnalyticsHourly, rc.FirstTimeRetention, rc.RecommendationAnalyticsHourly, rc.RecommendationAnalyticsHourly, rc.AbuseReports, rc.RecommendationAnalyticsHourly, rc.ServerShutdowns, rc.Acquisition, rc.Acquisition, rc.Acquisition, rc.Acquisition, rc.Acquisition, rc.Acquisition, rc.ExperienceEventsSummary, rc.Engagement, rc.Engagement, e.s(["AnalyticsTranslationNamespace", 0, u, "DimensionToMetricToNamespaceMap", 0, P, "FallbackValue", 0, sf, "RAQIV2APIMetric", 0, d, "RAQIV2AbuseChannel", 0, M, "RAQIV2AcquisitionSource", 0, h, "RAQIV2AdFormat", 0, x, "RAQIV2AggregationType", 0, sm, "RAQIV2AnnouncementEventType", 0, j, "RAQIV2AvatarItemTargetType", 0, eo, "RAQIV2BandwidthCategory", 0, eD, "RAQIV2BenchmarkDatasetKey", 0, sI, "RAQIV2BenchmarkDatasetKeyToVariant", 0, sF, "RAQIV2BenchmarkVariantId", 0, sO, "RAQIV2BenchmarkVariantsByMetric", 0, sG, "RAQIV2BreakdownValueOrder", 0, aH, "RAQIV2DateRangeType", 0, sq, "RAQIV2Dimension", 0, A, "RAQIV2DimensionDisplayConfig", 0, sk, "RAQIV2DimensionValueType", 0, aW, "RAQIV2ExperimentationMetrics", 0, sz, "RAQIV2FilterOperation", 0, aK, "RAQIV2FlowType", 0, id, "RAQIV2ForumContentEventType", 0, iA, "RAQIV2IsNewUser", 0, iV, "RAQIV2MembershipEventType", 0, i$, "RAQIV2MemoryGroup", 0, i2, "RAQIV2Metric", 0, R, "RAQIV2MetricDisplayConfig", 0, rn, "RAQIV2MetricDisplayType", 0, sj, "RAQIV2MetricGranularity", 0, rt, "RAQIV2MetricResultType", 0, no, "RAQIV2MetricToAlertingEligibleDimensions", 0, ra, "RAQIV2MetricToSupportedDimensions", 0, rs, "RAQIV2MetricToSupportedGranularities", 0, rr, "RAQIV2MetricToSupportsPeriodSummary", 0, ro, "RAQIV2MetricUnit", 0, s1, "RAQIV2MetricValueType", 0, s7, "RAQIV2OperatingSystem", 0, ny, "RAQIV2PageViewContext", 0, nD, "RAQIV2PercentileType", 0, sy, "RAQIV2Platform", 0, nT, "RAQIV2ProductType", 0, nh, "RAQIV2PseudoDimensionDisplayConfig", 0, sT, "RAQIV2PurchaseStatus", 0, nx, "RAQIV2RevenueSource", 0, nO, "RAQIV2RewardedVideoEventType", 0, nG, "RAQIV2Severity", 0, n4, "RAQIV2SpecialDimensionRenderer", 0, aX, "RAQIV2UIMetric", 0, re, "RAQIV2UIMetricToAPIConfig", 0, rl, "RAQIV2UIMetricToSupportedMetricTypes", 0, ru, "RAQIV2UIPseudoDimension", 0, sU, "RAQIV2UIPseudoDimensionType", 0, sb, "RAQIV2Universe", 0, tl, "RAQIV2VoteType", 0, tB, "Severity", 0, ri])
 }]);
 
-//# debugId=fa76985a-3d70-c065-68c6-73b1d932c4d4
-//# sourceMappingURL=3sytealcermij.js.map
+//# debugId=5480a2b5-cb7a-ac9f-47d9-9e1fee8c9c4e
+//# sourceMappingURL=0p7vdvpbrfbx_.js.map
