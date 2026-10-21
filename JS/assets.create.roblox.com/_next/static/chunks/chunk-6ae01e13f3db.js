@@ -3,7 +3,7 @@
     try {
         var e = "undefined" != typeof globalThis ? globalThis : "undefined" != typeof global ? global : "undefined" != typeof window ? window : "undefined" != typeof self ? self : {},
             n = (new e.Error).stack;
-        n && ((e._debugIds || (e._debugIds = {}))[n] = "b8877c4b-c4f2-04e3-0f6d-c40b02314bc4")
+        n && ((e._debugIds || (e._debugIds = {}))[n] = "998969c6-43f6-1318-39ff-b5eac80e168d")
     } catch (e) {}
 }();
 (globalThis.TURBOPACK || (globalThis.TURBOPACK = [])).push(["object" == typeof document ? document.currentScript : void 0, 745873, 67262, t => {
@@ -92,13 +92,13 @@
         }, [d, E]), B = null == A ? void 0 : A.id, C = null == u ? void 0 : u.id, {
             data: x,
             error: T,
-            isPending: P,
-            refetch: S
+            isPending: S,
+            refetch: P
         } = (0, y.useGroupResolvedPermissionsQuery)(B, C), {
             data: I,
             isPending: U,
             refetch: R
-        } = (0, y.useGroupOwnershipQuery)(B, C), L = (0, r.useCallback)(() => null == B || null == C ? Promise.resolve() : Promise.all([S(), R()]), [R, S, B, C]);
+        } = (0, y.useGroupOwnershipQuery)(B, C), L = (0, r.useCallback)(() => null == B || null == C ? Promise.resolve() : Promise.all([P(), R()]), [R, P, B, C]);
         (0, r.useEffect)(() => {
             (null == u ? void 0 : u.id) && (null == f ? void 0 : f.groups) && !a && p(null == f ? void 0 : f.groups)
         }, [null == f ? void 0 : f.groups, E, a, p, null == u ? void 0 : u.id]);
@@ -114,11 +114,11 @@
                 ...s,
                 permissions: x,
                 isOwner: null != C && (null == I || null == (t = I.owner) ? void 0 : t.userId) === C,
-                isPermissionsLoading: null != A && (P || U),
+                isPermissionsLoading: null != A && (S || U),
                 permissionsError: T,
                 refreshPermissions: L
             }
-        }, [A, m, E, a, U, P, I, s, x, T, l, L, w, C]);
+        }, [A, m, E, a, U, S, I, s, x, T, l, L, w, C]);
         return (0, e.jsx)(g.Provider, {
             value: O,
             children: o
@@ -234,9 +234,7 @@
     var e = t.i(221628),
         r = t.i(416340),
         n = t.i(639102);
-    let i = {
-            enableIpPlatformMatchesTableEsIndexImprovements: !1
-        },
+    let i = {},
         o = {
             ...i
         },
@@ -472,7 +470,7 @@
                         case "hex":
                             return r >>> 1;
                         case "base64":
-                            return P(t).length;
+                            return S(t).length;
                         default:
                             if (i) return n ? -1 : x(t).length;
                             e = ("" + e).toLowerCase(), i = !0
@@ -736,21 +734,21 @@
                             }(this, t, e, r);
                         case "utf8":
                         case "utf-8":
-                            return i = e, o = r, S(x(t, this.length - i), this, i, o);
+                            return i = e, o = r, P(x(t, this.length - i), this, i, o);
                         case "ascii":
-                            return u = e, s = r, S(T(t), this, u, s);
+                            return u = e, s = r, P(T(t), this, u, s);
                         case "latin1":
                         case "binary":
                             return function(t, e, r, n) {
-                                return S(T(e), t, r, n)
+                                return P(T(e), t, r, n)
                             }(this, t, e, r);
                         case "base64":
-                            return f = e, a = r, S(P(t), this, f, a);
+                            return f = e, a = r, P(S(t), this, f, a);
                         case "ucs2":
                         case "ucs-2":
                         case "utf16le":
                         case "utf-16le":
-                            return l = e, h = r, S(function(t, e) {
+                            return l = e, h = r, P(function(t, e) {
                                 for (var r, n, i = [], o = 0; o < t.length && !((e -= 2) < 0); ++o) n = (r = t.charCodeAt(o)) >> 8, i.push(r % 256), i.push(n);
                                 return i
                             }(t, this.length - l), this, l, h);
@@ -958,7 +956,7 @@
                     return e
                 }
 
-                function P(t) {
+                function S(t) {
                     return n.toByteArray(function(t) {
                         if ((t = (t = t.split("=")[0]).trim().replace(C, "")).length < 2) return "";
                         for (; t.length % 4 != 0;) t += "=";
@@ -966,7 +964,7 @@
                     }(t))
                 }
 
-                function S(t, e, r, n) {
+                function P(t, e, r, n) {
                     for (var i = 0; i < n && !(i + r >= e.length) && !(i >= t.length); ++i) e[i + r] = t[i];
                     return i
                 }
@@ -1142,5 +1140,5 @@
     }, "useUnifiedLoggerProvider", 0, u])
 }]);
 
-//# debugId=b8877c4b-c4f2-04e3-0f6d-c40b02314bc4
-//# sourceMappingURL=31dl75ar1eefz.js.map
+//# debugId=998969c6-43f6-1318-39ff-b5eac80e168d
+//# sourceMappingURL=1s74zpn3z348l.js.map

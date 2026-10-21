@@ -3,7 +3,7 @@
     try {
         var e = "undefined" != typeof globalThis ? globalThis : "undefined" != typeof global ? global : "undefined" != typeof window ? window : "undefined" != typeof self ? self : {},
             n = (new e.Error).stack;
-        n && ((e._debugIds || (e._debugIds = {}))[n] = "cc672214-3e49-8677-4f99-9f9d3d3a66c7")
+        n && ((e._debugIds || (e._debugIds = {}))[n] = "b8132c32-d04c-4939-477a-d59f7355b55d")
     } catch (e) {}
 }();
 (globalThis.TURBOPACK || (globalThis.TURBOPACK = [])).push(["object" == typeof document ? document.currentScript : void 0, 401263, 884213, e => {
@@ -624,9 +624,7 @@
     var t = e.i(221628),
         a = e.i(416340),
         r = e.i(639102);
-    let n = {
-            enableIpPlatformMatchesTableEsIndexImprovements: !1
-        },
+    let n = {},
         l = {
             ...n
         },
@@ -1151,5 +1149,5 @@
     }, "useUnifiedLoggerProvider", 0, i])
 }]);
 
-//# debugId=cc672214-3e49-8677-4f99-9f9d3d3a66c7
-//# sourceMappingURL=15ws3gre13qd0.js.map
+//# debugId=b8132c32-d04c-4939-477a-d59f7355b55d
+//# sourceMappingURL=1pssm76x1c-5y.js.map

@@ -2,10 +2,10 @@
     try {
         var e = "u" > typeof window ? window : "u" > typeof global ? global : "u" > typeof globalThis ? globalThis : "u" > typeof self ? self : {};
         e.SENTRY_RELEASE = {
-            id: "c49daa755178641486ff82573283962f2928150a"
+            id: "d1de0109cb6aa37d68648b19def33f493cc1b0e9"
         };
         var t = (new e.Error).stack;
-        t && (e._sentryDebugIds = e._sentryDebugIds || {}, e._sentryDebugIds[t] = "16fdff60-d9f0-4552-b22d-0e907e800b07", e._sentryDebugIdIdentifier = "sentry-dbid-16fdff60-d9f0-4552-b22d-0e907e800b07")
+        t && (e._sentryDebugIds = e._sentryDebugIds || {}, e._sentryDebugIds[t] = "6b5d1168-3e05-4d4b-947d-c9bce0b9fbc8", e._sentryDebugIdIdentifier = "sentry-dbid-6b5d1168-3e05-4d4b-947d-c9bce0b9fbc8")
     } catch (e) {}
 }(),
 function() {
@@ -45437,7 +45437,7 @@ function() {
                         hasMarginTop: !0,
                         hasMarginBottom: !0,
                         children: (0, rX.jsx)(gP, {
-                            className: "width-[calc(var(--size-100)*160)]",
+                            className: "width-full",
                             children: (0, rX.jsxs)(gR, {
                                 className: "gap-xxlarge flex flex-col",
                                 children: [(0, rX.jsx)(g_, {
@@ -55924,4 +55924,4 @@ function() {
             })
         }()
 }(), window.Roblox && window.Roblox.BundleDetector && window.Roblox.BundleDetector.bundleDetected("ProfilePlatform");
-//# sourceMappingURL=https://sourcemaps.rbxcdn.com/profilePlatform-e6f0c2d934cbae83.js.map
+//# sourceMappingURL=https://sourcemaps.rbxcdn.com/profilePlatform-2ca4bf5f12faf00c.js.map

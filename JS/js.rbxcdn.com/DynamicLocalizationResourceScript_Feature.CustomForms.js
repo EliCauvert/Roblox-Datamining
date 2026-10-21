@@ -30,6 +30,7 @@ Roblox.LangDynamic["Feature.CustomForms"] = {
     "Label.MultiChoiceDescription": "Select all that apply",
     "Validation.Error.ContentRejectedConcatenated": "Your submission contains content that isn't allowed.",
     "Validation.Error.Generic": "Something went wrong. Please try again.",
-    "Heading.Poll": "Poll"
+    "Heading.Poll": "Poll",
+    "Label.Percent": "{number}%"
 };
 window.Roblox && window.Roblox.BundleDetector && window.Roblox.BundleDetector.bundleDetected("DynamicLocalizationResourceScript_Feature.CustomForms");

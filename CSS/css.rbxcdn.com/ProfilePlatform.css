@@ -1369,10 +1369,6 @@
     width: 48px
 }
 
-.width-\[calc\(var\(--size-100\)\*160\)\] {
-    width: calc(var(--size-100)*160)
-}
-
 .width-\[fit-content\] {
     width: -webkit-fit-content;
     width: -moz-fit-content;
