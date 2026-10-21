@@ -73,7 +73,8 @@ return function()
 			hasMore = HasMore,
 			onLoadMore = if HasMore then FetchMore else nil,
 			renderRow = UseResult,
-			ctaConfig = if FFlagUserListCtaIntegrationEnabled then SocialTabsCtaConfigModule.Friends else nil
+			ctaConfig = if FFlagUserListCtaIntegrationEnabled then SocialTabsCtaConfigModule.Friends else nil,
+			rowSelectionConfig = SocialTabsCtaConfigModule.RowSelection
 		})
 	}) else ReactModule.createElement(SocialTabsEmptyStateModule, { text = UseLocalizationResult.emptyText })
 end

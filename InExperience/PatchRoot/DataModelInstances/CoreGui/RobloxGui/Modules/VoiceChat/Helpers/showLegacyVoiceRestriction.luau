@@ -1,6 +1,6 @@
 ﻿local CorePackages = game:GetService("CorePackages")
 local Players = game:GetService("Players")
-local BuildProactiveVoiceRestrictionDetailModule = require(script.Parent.buildProactiveVoiceRestrictionDetail)
+local BuildLegacyVoiceRestrictionDetailModule = require(script.Parent.buildLegacyVoiceRestrictionDetail)
 local _ = require(CorePackages.Workspace.Packages.VoiceChat.createVoiceRestrictionController)
 local GetRestrictionTypeModule = require(script.Parent.getRestrictionType)
 local UniversalFeatureRestrictionsModule = require(CorePackages.Workspace.Packages.UniversalFeatureRestrictions)
@@ -13,14 +13,14 @@ local function format(p1, p2)
 end
 
 return function(p1)
-	-- upvalues: Players (copy), GetRestrictionTypeModule (copy), BuildProactiveVoiceRestrictionDetailModule (copy), format (copy), VoiceChatModule (copy), UniversalFeatureRestrictionsModule (copy)
+	-- upvalues: Players (copy), GetRestrictionTypeModule (copy), BuildLegacyVoiceRestrictionDetailModule (copy), format (copy), VoiceChatModule (copy), UniversalFeatureRestrictionsModule (copy)
 	local LocalPlayer = Players.LocalPlayer
 	
 	if not LocalPlayer then return end
 	local UserId = LocalPlayer.UserId
 	local Manager = p1.manager
 	local Settings = p1.settings
-	local Origin = p1.origin
+	local Trigger = p1.trigger
 	local IsCurrentFunction = p1.isCurrent
 	local PreviousSessionId = if Manager.service then Manager.previousSessionId else ""
 	local Analytics = Manager.Analytics
@@ -32,7 +32,7 @@ return function(p1)
 	if not Settings then
 		v1, v19 = Manager:GetNudgeAnalyticsData()
 	end
-	local ProactiveVoiceRestrictionDetailModule = BuildProactiveVoiceRestrictionDetailModule({
+	local LegacyVoiceRestrictionDetailModule = BuildLegacyVoiceRestrictionDetailModule({
 		settings = Settings,
 		userId = UserId,
 		now = DateTime.now().UnixTimestamp,
@@ -62,7 +62,7 @@ return function(p1)
 		end
 	end
 	
-	UniversalFeatureRestrictionsModule.showFeatureRestrictionDirect(UniversalFeatureRestrictionsModule.AbuseVector.Voice, ProactiveVoiceRestrictionDetailModule, {
+	UniversalFeatureRestrictionsModule.showFeatureRestrictionDirect(UniversalFeatureRestrictionsModule.AbuseVector.Voice, LegacyVoiceRestrictionDetailModule, {
 		onShown = function()
 			-- upvalues: Flag2 (ref), RestrictionTypeModule (copy), Analytics (copy), BanReason (copy), UserId (copy), PreviousSessionId (copy)
 			if not Flag2 then
@@ -75,11 +75,11 @@ return function(p1)
 			end
 		end,
 		onDismiss = function()
-			-- upvalues: Flag (ref), RestrictionTypeModule (copy), Origin (copy), IsCurrentFunction (copy), VoiceChatModule (upval), Manager (copy), Analytics (copy), v1 (ref), v2 (ref), Flag1 (ref), BanReason (copy), UserId (copy), PreviousSessionId (copy)
+			-- upvalues: Flag (ref), RestrictionTypeModule (copy), Trigger (copy), IsCurrentFunction (copy), VoiceChatModule (upval), Manager (copy), Analytics (copy), v1 (ref), v2 (ref), Flag1 (ref), BanReason (copy), UserId (copy), PreviousSessionId (copy)
 			if Flag then return end
 			Flag = true
 			
-			if Origin ~= "mic" and (RestrictionTypeModule == "TemporaryBan" or RestrictionTypeModule == "NudgeBan") and IsCurrentFunction() then
+			if Trigger ~= "micTap" and (RestrictionTypeModule == "TemporaryBan" or RestrictionTypeModule == "NudgeBan") and IsCurrentFunction() then
 				VoiceChatModule.PostInformedOfBan(function(p2, p3, p4)
 					-- upvalues: Manager (upval)
 					return Manager:PostRequest(p2, p3, p4)

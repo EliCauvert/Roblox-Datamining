@@ -66,7 +66,6 @@ return {
 	AvatarExperienceQuickMenu = "AvatarExperienceQuickMenu",
 	EquipOutfitConfirmation = "EquipOutfitConfirmation",
 	PremiumUpsellPrompt = "PremiumUpsellPrompt",
-	RobuxUpsellPrompt = "RobuxUpsellPrompt",
 	SaveOutfitPrompt = "SaveOutfitPrompt",
 	RenameOutfitPrompt = "RenameOutfitPrompt",
 	DeleteOutfitPrompt = "DeleteOutfitPrompt",

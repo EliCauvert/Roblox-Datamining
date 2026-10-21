@@ -61,7 +61,8 @@ return function()
 			hasMore = UseMutualsListModuleResult.hasMore,
 			onLoadMore = if UseMutualsListModuleResult.hasMore then UseMutualsListModuleResult.loadMore else nil,
 			renderRow = UseResult,
-			ctaConfig = if FFlagUserListCtaIntegrationEnabled then SocialTabsCtaConfigModule.Mutuals else nil
+			ctaConfig = if FFlagUserListCtaIntegrationEnabled then SocialTabsCtaConfigModule.Mutuals else nil,
+			rowSelectionConfig = SocialTabsCtaConfigModule.RowSelection
 		})
 	})
 end

@@ -18,7 +18,7 @@ local CONTEXTID = require(CorePackages.Workspace.Packages.CrossExperience).Const
 local GetFFlagIntegratePhoneUpsellJoinVoiceFunction = require(CorePackages.Workspace.Packages.SharedFlags).GetFFlagIntegratePhoneUpsellJoinVoice
 local GetFFlagFixSeamlessVoiceIntegrationWithPrivateVoiceFunction = require(CorePackages.Workspace.Packages.SharedFlags).GetFFlagFixSeamlessVoiceIntegrationWithPrivateVoice
 local GetFFlagEnableVoiceUxUpdatesFunction = require(CorePackages.Workspace.Packages.SharedFlags).GetFFlagEnableVoiceUxUpdates
-local FFlagProactiveVoiceRestrictionsUFRModule = require(RobloxGui.Modules.VoiceChat.Flags.FFlagProactiveVoiceRestrictionsUFR)
+local FFlagProactiveVoiceRestrictionsUFR = require(CorePackages.Workspace.Packages.SharedFlags).FFlagProactiveVoiceRestrictionsUFR
 local FFlagTokenizeUnibarConstantsWithStyleProvider = require(Chrome.ChromeShared.Flags).FFlagTokenizeUnibarConstantsWithStyleProvider
 local CheckShouldShowJoinVoiceInEvent = game:DefineFastFlag("CheckShouldShowJoinVoiceInEvent", false)
 local ReplaceJoinVoiceIconToMuted = game:DefineFastFlag("ReplaceJoinVoiceIconToMuted", false)
@@ -49,8 +49,8 @@ RegisterResult = ServiceModule:register({
 	initialAvailability = ServiceModule.AvailabilitySignal.Unavailable,
 	sideSheetPlacement = SideSheetPlacement.Unibar,
 	activated = function()
-		-- upvalues: FFlagProactiveVoiceRestrictionsUFRModule (copy), Default (copy), GetFFlagIntegratePhoneUpsellJoinVoiceFunction (copy), RobloxGui (copy), ConstantsModule (copy)
-		if not FFlagProactiveVoiceRestrictionsUFRModule or Default:GetVoiceRestrictionState(false) == "normal" then
+		-- upvalues: FFlagProactiveVoiceRestrictionsUFR (copy), Default (copy), GetFFlagIntegratePhoneUpsellJoinVoiceFunction (copy), RobloxGui (copy), ConstantsModule (copy)
+		if not FFlagProactiveVoiceRestrictionsUFR or Default:GetVoiceRestrictionState(false) == "normal" then
 			local SettingsHubModule = if GetFFlagIntegratePhoneUpsellJoinVoiceFunction() then require(RobloxGui.Modules.Settings.SettingsHub) else nil
 			Default.pendingConnectionSource = ConstantsModule.VOICE_CONNECTION_SOURCE.IN_EXPERIENCE
 			Default:JoinVoice(SettingsHubModule)
@@ -92,8 +92,8 @@ if GetFFlagFixSeamlessVoiceIntegrationWithPrivateVoiceFunction() then
 	return RegisterResult
 end
 local function setAvailability(Available)
-	-- upvalues: FFlagProactiveVoiceRestrictionsUFRModule (copy), Default (copy), RegisterResult (ref), Unavailable (ref), v1 (ref), ServiceModule (copy)
-	if FFlagProactiveVoiceRestrictionsUFRModule and Default:GetVoiceRestrictionState(false) ~= "normal" then
+	-- upvalues: FFlagProactiveVoiceRestrictionsUFR (copy), Default (copy), RegisterResult (ref), Unavailable (ref), v1 (ref), ServiceModule (copy)
+	if FFlagProactiveVoiceRestrictionsUFR and Default:GetVoiceRestrictionState(false) ~= "normal" then
 		RegisterResult.availability:unavailable()
 		
 		return
@@ -113,8 +113,8 @@ local function setAvailability(Available)
 end
 
 local function HideOrShowJoinVoiceButton(Joined)
-	-- upvalues: FFlagProactiveVoiceRestrictionsUFRModule (copy), Default (copy), RegisterResult (ref), VOICEJOINPROGRESS (copy), CheckShouldShowJoinVoiceInEvent (copy), setAvailability (copy), ServiceModule (copy), ConstantsModule (copy), PromptTypeModule (copy)
-	if FFlagProactiveVoiceRestrictionsUFRModule and Default:GetVoiceRestrictionState(false) ~= "normal" then
+	-- upvalues: FFlagProactiveVoiceRestrictionsUFR (copy), Default (copy), RegisterResult (ref), VOICEJOINPROGRESS (copy), CheckShouldShowJoinVoiceInEvent (copy), setAvailability (copy), ServiceModule (copy), ConstantsModule (copy), PromptTypeModule (copy)
+	if FFlagProactiveVoiceRestrictionsUFR and Default:GetVoiceRestrictionState(false) ~= "normal" then
 		RegisterResult.availability:unavailable()
 		
 		return
@@ -134,7 +134,7 @@ local function HideOrShowJoinVoiceButton(Joined)
 	end
 end
 
-if FFlagProactiveVoiceRestrictionsUFRModule then
+if FFlagProactiveVoiceRestrictionsUFR then
 	script.Destroying:Once((SignalsModule.createEffect(function(p1)
 		-- upvalues: Default (copy), RegisterResult (ref)
 		if Default:GetVoiceRestrictionState(p1) ~= "normal" then

@@ -11,6 +11,7 @@ local UseRenderEntityModule = require(UserList.Hooks.useRenderEntity)
 local FFlagUserListCtaIntegrationEnabled = require(Parent.SharedFlags).FFlagUserListCtaIntegrationEnabled
 local FFlagUserListComposeRenderRowWithCta = require(Parent.SharedFlags).FFlagUserListComposeRenderRowWithCta
 local FFlagUserListSurfaceExtensions = require(Parent.SharedFlags).FFlagUserListSurfaceExtensions
+local FFlagUserListRowSelectionOriginSourceModule = require(UserList.Flags.FFlagUserListRowSelectionOriginSource)
 local CtaModule = if FFlagUserListCtaIntegrationEnabled then require(UserList.Cta) else nil
 local config = {
 	BackgroundTransparency = 1,
@@ -25,7 +26,7 @@ local function keyExtractor(p1, _)
 end
 
 local function VerticalUserList(p1)
-	-- upvalues: UseEntitiesModule (copy), UseEntitySelectionHandlerModule (copy), ReactModule (copy), UseRenderEntityModule (copy), EnumsModule (copy), FFlagUserListSurfaceExtensions (copy), View (copy), FlatList (copy), keyExtractor (copy), JoinResult (copy), config (copy), ContentContainerStyle (copy)
+	-- upvalues: UseEntitiesModule (copy), UseEntitySelectionHandlerModule (copy), FFlagUserListRowSelectionOriginSourceModule (copy), ReactModule (copy), UseRenderEntityModule (copy), EnumsModule (copy), FFlagUserListSurfaceExtensions (copy), View (copy), FlatList (copy), keyExtractor (copy), JoinResult (copy), config (copy), ContentContainerStyle (copy)
 	local UseMemoResult = ReactModule.useMemo(function()
 		-- upvalues: p1 (copy)
 		if not p1.initialRowCount or p1.initialRowCount >= #p1.entities then
@@ -49,7 +50,7 @@ local function VerticalUserList(p1)
 	end, { UseMemoResult })
 	local UseRenderEntityModuleResult = UseRenderEntityModule({
 		entitiesMap = UseEntitiesModule(p1.entities).entitiesMap,
-		onActivated = UseEntitySelectionHandlerModule(p1.onRowSelected),
+		onActivated = UseEntitySelectionHandlerModule(p1.onRowSelected, if FFlagUserListRowSelectionOriginSourceModule then p1.rowSelectionConfig else nil),
 		renderRow = p1.renderRow,
 		configs = p1.configs,
 		layoutMode = EnumsModule.LayoutMode.Vertical,

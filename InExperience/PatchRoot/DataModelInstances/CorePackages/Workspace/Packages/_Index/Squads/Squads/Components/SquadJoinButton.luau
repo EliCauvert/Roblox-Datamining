@@ -30,11 +30,10 @@ local AppChatSquadButtonColorUpdate = game:DefineFastFlag("AppChatSquadButtonCol
 local AppChatSquadButtonColorVariantB = game:DefineFastFlag("AppChatSquadButtonColorVariantB", false)
 local AppChatSquadButtonColorUpdateIxpEnabled = game:DefineFastFlag("AppChatSquadButtonColorUpdateIxpEnabled", false)
 local AppChatSquadButtonColorUpdateIxpLayer = game:DefineFastString("AppChatSquadButtonColorUpdateIxpLayer", "Social.AppChat")
-local AppChatSquadButtonHideGamepadIconOnTvRemote = game:DefineFastFlag("AppChatSquadButtonHideGamepadIconOnTvRemote", false)
 local config = { dampingRatio = 1, frequency = 1 }
 
 return function(p1)
-	-- upvalues: UseLocalizationFunction (copy), UseDispatchFunction (copy), UsePreferredInputFunction (copy), AppChatSquadButtonHideGamepadIconOnTvRemote (copy), UseIsTvRemoteDeviceFunction (copy), UseTokensFunction (copy), React (copy), SquadExternalContractContext (copy), FFlagPartyDevAPIToRespectThirdPartySettingsEnabled (copy), UseSquadStateFunction (copy), ReactOtterModule (copy), config (copy), UseSelectorFunction (copy), SquadButtonClickIntentionEnumModule (copy), EventNamesModule (copy), LeaveSquadFunction (copy), SquadPromptType (copy), AppChatSquadButtonColorVariantB (copy), AppChatSquadButtonColorUpdateIxpEnabled (copy), IXPService (copy), AppChatSquadButtonColorUpdateIxpLayer (copy), Foundation (copy), AppChatSquadButtonColorUpdate (copy), SquadState (copy), FFlagDebugAppChatEnableDomLocators (copy), AppChatNewSquadJoinButtonLookIconless (copy), ResponsiveModule (copy), UserInputService (copy)
+	-- upvalues: UseLocalizationFunction (copy), UseDispatchFunction (copy), UsePreferredInputFunction (copy), UseIsTvRemoteDeviceFunction (copy), UseTokensFunction (copy), React (copy), SquadExternalContractContext (copy), FFlagPartyDevAPIToRespectThirdPartySettingsEnabled (copy), UseSquadStateFunction (copy), ReactOtterModule (copy), config (copy), UseSelectorFunction (copy), SquadButtonClickIntentionEnumModule (copy), EventNamesModule (copy), LeaveSquadFunction (copy), SquadPromptType (copy), AppChatSquadButtonColorVariantB (copy), AppChatSquadButtonColorUpdateIxpEnabled (copy), IXPService (copy), AppChatSquadButtonColorUpdateIxpLayer (copy), Foundation (copy), AppChatSquadButtonColorUpdate (copy), SquadState (copy), FFlagDebugAppChatEnableDomLocators (copy), AppChatNewSquadJoinButtonLookIconless (copy), ResponsiveModule (copy), UserInputService (copy)
 	local UseLocalizationResult = UseLocalizationFunction({
 		joinButtonText = "Feature.Squads.Action.Join",
 		startButtonText = "Feature.Squads.Action.Start",
@@ -42,7 +41,7 @@ return function(p1)
 	})
 	local UseDispatchResult = UseDispatchFunction()
 	local UsePreferredInputResult = UsePreferredInputFunction()
-	local UseIsTvRemoteDeviceResult = if AppChatSquadButtonHideGamepadIconOnTvRemote then UseIsTvRemoteDeviceFunction() else false
+	local UseIsTvRemoteDeviceResult = UseIsTvRemoteDeviceFunction()
 	local UseTokensResult = UseTokensFunction()
 	local UseContextResult = React.useContext(SquadExternalContractContext)
 	local UseParentChannelHasGroupUpResult = UseContextResult.useParentChannelHasGroupUp(p1.conversationId)

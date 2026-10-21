@@ -10,9 +10,10 @@ local VerticalUserListModule = require(script.Parent.VerticalUserList)
 local UserListTightHeaderSpacing = game:DefineFastFlag("UserListTightHeaderSpacing", false)
 local FFlagUserListCtaIntegrationEnabled = require(Parent.SharedFlags).FFlagUserListCtaIntegrationEnabled
 local FFlagUserListSurfaceExtensions = require(Parent.SharedFlags).FFlagUserListSurfaceExtensions
+local FFlagUserListRowSelectionOriginSourceModule = require(UserList.Flags.FFlagUserListRowSelectionOriginSource)
 
 return function(p1)
-	-- upvalues: ReactModule (copy), View (copy), UserListTightHeaderSpacing (copy), UserListHeaderModule (copy), UserListFooterModule (copy), VerticalUserListModule (copy), FFlagUserListCtaIntegrationEnabled (copy), FFlagUserListSurfaceExtensions (copy)
+	-- upvalues: ReactModule (copy), View (copy), UserListTightHeaderSpacing (copy), UserListHeaderModule (copy), UserListFooterModule (copy), VerticalUserListModule (copy), FFlagUserListRowSelectionOriginSourceModule (copy), FFlagUserListCtaIntegrationEnabled (copy), FFlagUserListSurfaceExtensions (copy)
 	local Element = if p1.header then ReactModule.createElement(View, {
 		tag = {
 			["size-full-0 auto-y"] = true,
@@ -38,6 +39,7 @@ return function(p1)
 		entities = p1.entities,
 		initialRowCount = p1.initialRowCount,
 		onRowSelected = p1.onRowSelectedOverride,
+		rowSelectionConfig = if FFlagUserListRowSelectionOriginSourceModule then p1.rowSelectionConfig else nil,
 		ListHeaderComponent = Element,
 		ListFooterComponent = Element1,
 		renderRow = p1.renderRow,
@@ -60,6 +62,7 @@ return function(p1)
 			entities = p1.entities,
 			initialRowCount = p1.initialRowCount,
 			onRowSelected = p1.onRowSelectedOverride,
+			rowSelectionConfig = if FFlagUserListRowSelectionOriginSourceModule then p1.rowSelectionConfig else nil,
 			renderRow = p1.renderRow,
 			ctaConfig = if FFlagUserListCtaIntegrationEnabled then p1.ctaConfig else nil,
 			configs = p1.configs,

@@ -16,6 +16,9 @@ local function _(Subpage)
 	return Copy
 end
 
+local RowSelection = {
+	friendshipOriginSourceType = Tbl.friendshipOriginSourceType
+}
 local Copy = table.clone(Tbl)
 Copy.analytics = {
 	surface = CtaSurfaces.SocialTabsPage,
@@ -27,4 +30,8 @@ Copy1.analytics = {
 	subpage = AppPage.SocialTabsMutuals
 }
 
-return { Friends = Copy, Mutuals = Copy1 }
+return {
+	Friends = Copy,
+	Mutuals = Copy1,
+	RowSelection = RowSelection
+}

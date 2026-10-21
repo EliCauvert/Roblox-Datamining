@@ -15,7 +15,7 @@ local PromptTypeModule = require(RobloxGui.Modules.VoiceChatPrompt.PromptType)
 local GetFFlagIntegratePhoneUpsellJoinVoiceFunction = require(CorePackages.Workspace.Packages.SharedFlags).GetFFlagIntegratePhoneUpsellJoinVoice
 local GetFFlagEnableVoiceUxUpdatesFunction = require(CorePackages.Workspace.Packages.SharedFlags).GetFFlagEnableVoiceUxUpdates
 local FFlagVoiceRewarmTelemetry = require(CorePackages.Workspace.Packages.SharedFlags).FFlagVoiceRewarmTelemetry
-local FFlagProactiveVoiceRestrictionsUFRModule = require(RobloxGui.Modules.VoiceChat.Flags.FFlagProactiveVoiceRestrictionsUFR)
+local FFlagProactiveVoiceRestrictionsUFR = require(CorePackages.Workspace.Packages.SharedFlags).FFlagProactiveVoiceRestrictionsUFR
 
 local function _(Callback)
 	local Flag = false
@@ -51,7 +51,7 @@ local function v16(...)
 end
 
 return function()
-	-- upvalues: UseIsVoiceFocusedFunction (copy), UseIsVoiceConnectingFunction (copy), ReactModule (copy), ServiceModule (copy), FFlagProactiveVoiceRestrictionsUFRModule (copy), Default (copy), v16 (copy), GetFFlagIntegratePhoneUpsellJoinVoiceFunction (copy), IsVoiceFocusedFunction (copy), VOICEJOINPROGRESS (copy), GetFFlagEnableVoiceUxUpdatesFunction (copy), ConstantsModule (copy), PromptTypeModule (copy), SignalsModule (copy)
+	-- upvalues: UseIsVoiceFocusedFunction (copy), UseIsVoiceConnectingFunction (copy), ReactModule (copy), ServiceModule (copy), FFlagProactiveVoiceRestrictionsUFR (copy), Default (copy), v16 (copy), GetFFlagIntegratePhoneUpsellJoinVoiceFunction (copy), IsVoiceFocusedFunction (copy), VOICEJOINPROGRESS (copy), GetFFlagEnableVoiceUxUpdatesFunction (copy), ConstantsModule (copy), PromptTypeModule (copy), SignalsModule (copy)
 	local UseIsVoiceFocusedResult = UseIsVoiceFocusedFunction()
 	local UseIsVoiceConnectingResult = UseIsVoiceConnectingFunction()
 	local UseMemoResult = ReactModule.useMemo(function()
@@ -63,9 +63,9 @@ return function()
 		return if ServiceModule then ServiceModule:integrations().join_voice else nil
 	end, {})
 	local UseResult = ReactModule.useCallback(function(Available)
-		-- upvalues: UseMemoResult1 (copy), ServiceModule (upval), FFlagProactiveVoiceRestrictionsUFRModule (upval), Default (upval), UseIsVoiceFocusedResult (copy), v16 (upval)
+		-- upvalues: UseMemoResult1 (copy), ServiceModule (upval), FFlagProactiveVoiceRestrictionsUFR (upval), Default (upval), UseIsVoiceFocusedResult (copy), v16 (upval)
 		if not UseMemoResult1 or not ServiceModule then return end
-		if FFlagProactiveVoiceRestrictionsUFRModule and Default:GetVoiceRestrictionState(false) ~= "normal" then
+		if FFlagProactiveVoiceRestrictionsUFR and Default:GetVoiceRestrictionState(false) ~= "normal" then
 			UseMemoResult1.availability:unavailable()
 			
 			return
@@ -100,9 +100,9 @@ return function()
 		end
 	end, { UseMemoResult1, UseMemoResult })
 	local UseResult2 = ReactModule.useCallback(function(Idle)
-		-- upvalues: UseMemoResult1 (copy), FFlagProactiveVoiceRestrictionsUFRModule (upval), Default (upval), UseMemoResult (copy), IsVoiceFocusedFunction (upval), VOICEJOINPROGRESS (upval), UseResult1 (copy), GetFFlagEnableVoiceUxUpdatesFunction (upval), ConstantsModule (upval), PromptTypeModule (upval)
+		-- upvalues: UseMemoResult1 (copy), FFlagProactiveVoiceRestrictionsUFR (upval), Default (upval), UseMemoResult (copy), IsVoiceFocusedFunction (upval), VOICEJOINPROGRESS (upval), UseResult1 (copy), GetFFlagEnableVoiceUxUpdatesFunction (upval), ConstantsModule (upval), PromptTypeModule (upval)
 		if not UseMemoResult1 then return end
-		if FFlagProactiveVoiceRestrictionsUFRModule and Default:GetVoiceRestrictionState(false) ~= "normal" then
+		if FFlagProactiveVoiceRestrictionsUFR and Default:GetVoiceRestrictionState(false) ~= "normal" then
 			UseMemoResult1.availability:unavailable()
 			
 			return
@@ -136,8 +136,8 @@ return function()
 		UseMemoResult1.availability:unavailable()
 	end, { UseMemoResult1 })
 	local UseResult4 = ReactModule.useCallback(function()
-		-- upvalues: FFlagProactiveVoiceRestrictionsUFRModule (upval), Default (upval), UseMemoResult1 (copy), UseMemoResult (copy), IsVoiceFocusedFunction (upval)
-		if FFlagProactiveVoiceRestrictionsUFRModule and Default:GetVoiceRestrictionState(false) ~= "normal" then
+		-- upvalues: FFlagProactiveVoiceRestrictionsUFR (upval), Default (upval), UseMemoResult1 (copy), UseMemoResult (copy), IsVoiceFocusedFunction (upval)
+		if FFlagProactiveVoiceRestrictionsUFR and Default:GetVoiceRestrictionState(false) ~= "normal" then
 			UseMemoResult1.availability:unavailable()
 			
 			return
@@ -151,10 +151,10 @@ return function()
 		end
 	end, { UseMemoResult1, UseMemoResult })
 	local UseResult5 = ReactModule.useCallback(function()
-		-- upvalues: FFlagProactiveVoiceRestrictionsUFRModule (upval), UseMemoResult1 (copy), SignalsModule (upval), Default (upval), UseResult2 (copy), UseResult3 (copy), GetFFlagEnableVoiceUxUpdatesFunction (upval), UseResult4 (copy)
+		-- upvalues: FFlagProactiveVoiceRestrictionsUFR (upval), UseMemoResult1 (copy), SignalsModule (upval), Default (upval), UseResult2 (copy), UseResult3 (copy), GetFFlagEnableVoiceUxUpdatesFunction (upval), UseResult4 (copy)
 		local EventConnection1 = nil
 		local Connection = nil
-		local Effect = if FFlagProactiveVoiceRestrictionsUFRModule and UseMemoResult1 then SignalsModule.createEffect(function(p1)
+		local Effect = if FFlagProactiveVoiceRestrictionsUFR and UseMemoResult1 then SignalsModule.createEffect(function(p1)
 			-- upvalues: Default (upval), UseMemoResult1 (upval)
 			if Default:GetVoiceRestrictionState(p1) ~= "normal" then
 				UseMemoResult1.availability:unavailable()
@@ -183,10 +183,10 @@ return function()
 		end
 	end, {})
 	ReactModule.useEffect(function()
-		-- upvalues: UseResult1 (copy), FFlagProactiveVoiceRestrictionsUFRModule (upval), UseResult5 (copy)
+		-- upvalues: UseResult1 (copy), FFlagProactiveVoiceRestrictionsUFR (upval), UseResult5 (copy)
 		UseResult1()
 		
-		if FFlagProactiveVoiceRestrictionsUFRModule then
+		if FFlagProactiveVoiceRestrictionsUFR then
 			return UseResult5()
 		else
 			UseResult5()

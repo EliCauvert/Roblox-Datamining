@@ -17,9 +17,10 @@ local UseRenderEntityModule = require(UserList.Hooks.useRenderEntity)
 local UseIsWideModeFunction = require(Parent.SocialCommon).Hooks.useIsWideMode
 local AdjustHorizontalUserListSizeForMobile = game:DefineFastFlag("AdjustHorizontalUserListSizeForMobile", false)
 local FFlagLuaAppCompositionAlways = require(Parent.SharedFlags).FFlagLuaAppCompositionAlways
+local FFlagUserListRowSelectionOriginSourceModule = require(UserList.Flags.FFlagUserListRowSelectionOriginSource)
 
 return function(p1)
-	-- upvalues: FFlagLuaAppCompositionAlways (copy), ReactModule (copy), UseIsWideModeFunction (copy), AdjustHorizontalUserListSizeForMobile (copy), CollectionItemSize (copy), UsePageSideMarginFunction (copy), UseCollectionLayoutParamsFunction (copy), UseCompactTileHeightModule (copy), UseEntitiesModule (copy), UseEntitySelectionHandlerModule (copy), UseRenderEntityModule (copy), EnumsModule (copy), CryoModule (copy), View (copy), CollectionCarousel (copy)
+	-- upvalues: FFlagLuaAppCompositionAlways (copy), ReactModule (copy), UseIsWideModeFunction (copy), AdjustHorizontalUserListSizeForMobile (copy), CollectionItemSize (copy), UsePageSideMarginFunction (copy), UseCollectionLayoutParamsFunction (copy), UseCompactTileHeightModule (copy), UseEntitiesModule (copy), UseEntitySelectionHandlerModule (copy), FFlagUserListRowSelectionOriginSourceModule (copy), UseRenderEntityModule (copy), EnumsModule (copy), CryoModule (copy), View (copy), CollectionCarousel (copy)
 	local FFlagLuaAppCompositionAlways1 = FFlagLuaAppCompositionAlways or p1.appCompositionEnabled
 	local UseStateResult, UseStateResult2 = ReactModule.useState(nil)
 	local UseRefResult = ReactModule.useRef(nil)
@@ -37,7 +38,7 @@ return function(p1)
 	end, { UseCompactTileHeightModuleResult })
 	local UseRenderEntityModuleResult = UseRenderEntityModule({
 		entitiesMap = UseEntitiesModule(p1.entities).entitiesMap,
-		onActivated = UseEntitySelectionHandlerModule(p1.onRowSelected),
+		onActivated = UseEntitySelectionHandlerModule(p1.onRowSelected, if FFlagUserListRowSelectionOriginSourceModule then p1.rowSelectionConfig else nil),
 		renderRow = p1.renderRow,
 		layoutMode = EnumsModule.LayoutMode.Horizontal,
 		configs = p1.listConfigs

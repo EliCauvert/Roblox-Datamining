@@ -60,7 +60,7 @@ return function(p1)
 		end
 	end
 	
-	local function updateRestrictionPresentation(p2, Settings, Callback)
+	local function runCheck(p2, Settings, Callback)
 		-- upvalues: p1 (copy), DelayedThread (ref), Normal2 (copy), scheduleExpiry (copy), Flag1 (ref)
 		local Settings1 = Settings
 		
@@ -80,12 +80,12 @@ return function(p1)
 			
 			if not Callback() then return end
 			if InformedOfBan == false then
-				p1.showRestriction(Settings1, p2, Callback)
+				p1.showLegacyRestriction(Settings1, p2, Callback)
 				
 				return
 			end
 			if Flag1 then
-				p1.showRestriction(Settings1, "mic", Callback)
+				p1.showLegacyRestriction(Settings1, "micTap", Callback)
 				
 				return
 			end
@@ -94,7 +94,7 @@ return function(p1)
 			end
 			return
 		else
-			if p2 ~= "mic" then
+			if p2 ~= "micTap" then
 				p1.onError("PlayerModeratedBadState")
 				
 				return
@@ -109,8 +109,8 @@ return function(p1)
 	
 	return {
 		getPresentationState = Normal,
-		refresh = function(p2, p3)
-			-- upvalues: Flag (ref), PromiseModule (upval), DelayedThread (ref), Count (ref), Normal2 (copy), Promise (ref), v1 (ref), Flag1 (ref), updateRestrictionPresentation (copy), p1 (copy)
+		check = function(p2, p3)
+			-- upvalues: Flag (ref), PromiseModule (upval), DelayedThread (ref), Count (ref), Normal2 (copy), Promise (ref), v1 (ref), Flag1 (ref), runCheck (copy), p1 (copy)
 			if Flag then
 				return PromiseModule.resolve()
 			end
@@ -124,13 +124,13 @@ return function(p1)
 					Normal2("hiddenUntilRejoin")
 				end
 				return PromiseModule.resolve()
-			elseif p2 == "mic" and Promise then
+			elseif p2 == "micTap" and Promise then
 				if v1 == "gameJoin" then
 					Flag1 = true
 				end
 				return Promise
 			else
-				if (p2 == "gameJoin" or p2 == "realtime") and DelayedThread then
+				if (p2 == "gameJoin" or p2 == "removedFromVoice") and DelayedThread then
 					task.cancel(DelayedThread)
 					DelayedThread = nil
 				end
@@ -143,12 +143,12 @@ return function(p1)
 					return not Flag and Count == Count1
 				end
 				
-				if p2 ~= "mic" then
+				if p2 ~= "micTap" then
 					Normal2("restricted")
 				end
 				local Promise1 = PromiseModule.defer(function(Callback: () -> ())
-					-- upvalues: updateRestrictionPresentation (upval), p2 (copy), p3 (copy), isCurrent (copy)
-					updateRestrictionPresentation(p2, p3, isCurrent)
+					-- upvalues: runCheck (upval), p2 (copy), p3 (copy), isCurrent (copy)
+					runCheck(p2, p3, isCurrent)
 					Callback()
 				end):catch(function()
 					-- upvalues: Flag (upval), Count (upval), Count1 (copy), p1 (upval)

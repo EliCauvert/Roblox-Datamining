@@ -2,7 +2,6 @@
 local TModule = require(CorePackages.Packages.t)
 local MessageBus = require(CorePackages.Workspace.Packages.MessageBus).MessageBus
 local SharedFlagsModule = require(CorePackages.Workspace.Packages.SharedFlags)
-local FFlagEnableGameLeftMessage = SharedFlagsModule.FFlagEnableGameLeftMessage
 local FFlagRenameRespawnConfirmationPage = SharedFlagsModule.FFlagRenameRespawnConfirmationPage
 local InputType = {
 	MouseAndKeyboard = "MouseAndKeyboard",
@@ -110,11 +109,11 @@ return {
 		[Enum.UserInputType.Gamepad8] = InputType.Gamepad,
 		[Enum.UserInputType.Touch] = InputType.Touch
 	},
-	FramerateCaps = if game:DefineFastFlag("MoreFramerateOptions", false) then {
+	FramerateCaps = {
 		60, 120, 144, 160, 165, 180, 200, 240
-	} else { 60, 120, 144, 240 },
+	},
 	FramerateCapsIOS = { 60, 120 },
-	OnAppRatingPromptEventDescriptor = if FFlagEnableGameLeftMessage then {
+	OnAppRatingPromptEventDescriptor = if SharedFlagsModule.FFlagEnableGameLeftMessage then {
 		mid = MessageBus.getMessageId("AppRatingPrompt", "leftGame"),
 		validateParams = TModule.strictInterface({ gameTime = TModule.number })
 	} else nil,

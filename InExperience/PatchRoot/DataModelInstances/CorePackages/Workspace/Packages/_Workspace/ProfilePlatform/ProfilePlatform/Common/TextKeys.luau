@@ -1,5 +1,6 @@
 ﻿local ProfilePlatform = script:FindFirstAncestor("ProfilePlatform")
 local FFlagProfilePlatformTradeActionLabelModule = require(ProfilePlatform.Flags.FFlagProfilePlatformTradeActionLabel)
+local ProfilePlatformExperiencesGamesLabel = game:DefineFastFlag("ProfilePlatformExperiencesGamesLabel", false)
 
 return {
 	Profile = "CommonUI.Features.Label.Profile",
@@ -120,7 +121,7 @@ return {
 	ContentTextLow = "Feature.Groups.Modal.ContentTextLow",
 	Continue = "Feature.Groups.Action.Continue",
 	Cancel = "Feature.Groups.Action.Cancel",
-	Experiences = "CommonUI.Features.Label.Game",
+	Experiences = if ProfilePlatformExperiencesGamesLabel then "CommonUI.Features.Label.Games" else "CommonUI.Features.Label.Game",
 	SocialMedia = "Feature.Groups.Heading.SocialMedia",
 	Facebook = "Feature.AccountSettings.Label.Facebook",
 	X = "Feature.AccountSettings.Label.X",

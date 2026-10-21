@@ -52,7 +52,6 @@
 	SduiLandingPage = "SduiLandingPage",
 	YouTubePlayer = "YouTubePlayer",
 	PurchaseRobux = "PurchaseRobux",
-	RobuxUpsell = "RobuxUpsell",
 	SubscriptionPurchase = "SubscriptionPurchase",
 	Payment = "Payment",
 	Notifications = "Notifications",

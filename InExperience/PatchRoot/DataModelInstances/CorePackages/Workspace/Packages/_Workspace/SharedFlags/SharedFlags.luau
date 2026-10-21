@@ -719,6 +719,7 @@ return {
 	FFlagUpdateTranslateInReportRevamp = require(script.FFlagUpdateTranslateInReportRevamp),
 	FFlagAppChatReactiveFeatureRestrictions = game:DefineFastFlag("AppChatReactiveFeatureRestrictions", false),
 	FFlagAppChatUniversalFeatureRestriction = game:DefineFastFlag("AppChatUniversalFeatureRestriction", false),
+	FFlagProactiveVoiceRestrictionsUFR = require(script.FFlagProactiveVoiceRestrictionsUFR),
 	FFlagNavigateToSafetyDashboardForAppeals = require(script.FFlagNavigateToSafetyDashboardForAppeals),
 	FFlagAddTakeItDownReportLinkToSurfaces = require(script.FFlagAddTakeItDownReportLinkToSurfaces),
 	GetFFlagEnableSupportCenter = require(script.GetFFlagEnableSupportCenter),

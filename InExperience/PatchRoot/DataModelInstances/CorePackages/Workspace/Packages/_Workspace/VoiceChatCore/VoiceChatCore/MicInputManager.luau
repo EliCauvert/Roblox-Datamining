@@ -12,9 +12,7 @@ local GetFFlagLocalMutedNilFixFunction = require(Parent.SharedFlags).GetFFlagLoc
 local GetFFlagDebugVoiceChatMicPermissionCliBypassModule = require(Flags.GetFFlagDebugVoiceChatMicPermissionCliBypass)
 local GetFFlagEnableExpJoinMicPermAnalyticsModule = require(Flags.GetFFlagEnableExpJoinMicPermAnalytics)
 local FFlagExpChatDictation = require(Parent.SharedFlags).FFlagExpChatDictation
-local v1 = require(Flags.GetFFlagTalkingChangedWithDebounceV2)()
-local v2 = require(Flags.GetFIntTalkingChangedDebounceTime)()
-local v3 = require(Flags.GetFFlagUseAudioAnalyzerForLocalMetering2)()
+local v1 = require(Flags.GetFFlagUseAudioAnalyzerForLocalMetering2)()
 local GetFFlagMicConsumerRegistryModule = require(Flags.GetFFlagMicConsumerRegistry)
 local PERMISSIONSTATE = ConstantsModule.PERMISSION_STATE
 local MINVOICECHATAPIVERSIONLOCALMICACTIVITY = ConstantsModule.MIN_VOICE_CHAT_API_VERSION_LOCAL_MIC_ACTIVITY
@@ -33,8 +31,6 @@ function MicInputManager.new(p1)
 	self.talkingChanged = Instance.new("BindableEvent")
 	self.permissionPromise = nil
 	self.isPlayerWatchingAd = false
-	self._lastTalkingChangedFireTime = 0
-	self._lastTalkingChangedFireValue = nil
 	self._connections = {}
 	self.localMeteringTask = nil
 	
@@ -250,34 +246,17 @@ function MicInputManager:RequestMicPermission()
 end
 
 function MicInputManager:UpdateLocalMetering()
-	-- upvalues: Players (copy), v1 (copy)
+	-- upvalues: Players (copy)
 	self.isTalking = self.callbacks.isSignalActive(Players.LocalPlayer.UserId)
 	
 	if self.localMuted == false then
-		if v1 then
-			self:FireTalkingChangedDebounced(self.isTalking)
-			
-			return
-		end
 		self.talkingChanged:Fire(self.isTalking)
 	end
 end
 
-function MicInputManager:FireTalkingChangedDebounced(IsTalking)
-	-- upvalues: v2 (copy)
-	local ScaledCurrentTime = tick() * 1000
-	local IsScaledCurrentTimeAbove = v2 < ScaledCurrentTime - self._lastTalkingChangedFireTime
-	
-	if IsTalking ~= self._lastTalkingChangedFireValue or IsScaledCurrentTimeAbove then
-		self._lastTalkingChangedFireTime = ScaledCurrentTime
-		self._lastTalkingChangedFireValue = IsTalking
-		self.talkingChanged:Fire(IsTalking)
-	end
-end
-
 function MicInputManager:SetupMicActivityListener(VoiceChatInternal)
-	-- upvalues: v3 (copy), VoiceChatService (copy), MINVOICECHATAPIVERSIONLOCALMICACTIVITY (copy), GetFFlagLocalMutedNilFixFunction (copy), v1 (copy)
-	if v3 and VoiceChatService.UseNewAudioApi then
+	-- upvalues: v1 (copy), VoiceChatService (copy), MINVOICECHATAPIVERSIONLOCALMICACTIVITY (copy), GetFFlagLocalMutedNilFixFunction (copy)
+	if v1 and VoiceChatService.UseNewAudioApi then
 		if not self.localMeteringTask then
 			self.localMeteringTask = task.spawn(function()
 				-- upvalues: self (copy)
@@ -291,28 +270,17 @@ function MicInputManager:SetupMicActivityListener(VoiceChatInternal)
 		end
 	elseif MINVOICECHATAPIVERSIONLOCALMICACTIVITY <= VoiceChatInternal:GetVoiceChatApiVersion() then
 		table.insert(self._connections, (VoiceChatInternal.PlayerMicActivitySignalChange:Connect(function(ActivityInfo)
-			-- upvalues: self (copy), GetFFlagLocalMutedNilFixFunction (upval), v1 (upval)
+			-- upvalues: self (copy), GetFFlagLocalMutedNilFixFunction (upval)
 			self.callbacks.onVoiceCapturedDuringVideoCapture(ActivityInfo.isActive)
 			self.isTalking = ActivityInfo.isActive
 			
 			if GetFFlagLocalMutedNilFixFunction() then
 				if self.localMuted == false then
-					if v1 then
-						self:FireTalkingChangedDebounced(self.isTalking)
-						
-						return
-					else
-						self.talkingChanged:Fire(self.isTalking)
-						
-						return
-					end
-				end
-			elseif not self.localMuted then
-				if v1 then
-					self:FireTalkingChangedDebounced(self.isTalking)
+					self.talkingChanged:Fire(self.isTalking)
 					
 					return
 				end
+			elseif not self.localMuted then
 				self.talkingChanged:Fire(self.isTalking)
 			end
 		end)))
@@ -477,9 +445,9 @@ function MicInputManager:_stopLevelDetectionTask()
 end
 
 function MicInputManager:_updateCustomLevelDetection()
-	-- upvalues: v1 (copy), GetFFlagMicConsumerRegistryModule (copy)
+	-- upvalues: GetFFlagMicConsumerRegistryModule (copy)
 	if self.localMuted ~= false then return end
-	local v4 = 0
+	local v2 = 0
 	
 	for _, consumer in self._consumers do
 		if consumer.analyzer then
@@ -491,21 +459,17 @@ function MicInputManager:_updateCustomLevelDetection()
 				if ScaledLog10Result > -36 then
 					local ClampedValue = math.clamp((ScaledLog10Result - -36) / 36, 0, 1)
 					
-					if v4 < ClampedValue then
-						v4 = ClampedValue
+					if v2 < ClampedValue then
+						v2 = ClampedValue
 					end
 				end
 			end
 		end
 	end
-	local ClampedValue = math.clamp(math.floor(v4 * 100 / 20 + 0.5) * 20, 0, 100)
+	local ClampedValue = math.clamp(math.floor(v2 * 100 / 20 + 0.5) * 20, 0, 100)
 	self.isTalking = ClampedValue > 0
+	self.talkingChanged:Fire(self.isTalking)
 	
-	if v1 then
-		self:FireTalkingChangedDebounced(self.isTalking)
-	else
-		self.talkingChanged:Fire(self.isTalking)
-	end
 	if GetFFlagMicConsumerRegistryModule() and ClampedValue ~= self._lastLevel then
 		self._lastLevel = ClampedValue
 		self.levelChanged:Fire(ClampedValue)
