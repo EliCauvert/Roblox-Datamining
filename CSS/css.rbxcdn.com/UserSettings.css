@@ -5310,6 +5310,87 @@ input[type=button].btn-block {
     color: #fff
 }
 
+.bg-\[\#0242dc\] {
+    background-color: #0242dc
+}
+
+.bg-\[\#e92127\] {
+    background-color: #e92127
+}
+
+.bg-\[light-dark\(\#6cd1ed\,\#065684\)\] {
+    background-color: var(--lightningcss-light, #6cd1ed)var(--lightningcss-dark, #065684)
+}
+
+.bg-\[light-dark\(\#81d887\,\#045d4a\)\] {
+    background-color: var(--lightningcss-light, #81d887)var(--lightningcss-dark, #045d4a)
+}
+
+.bg-\[light-dark\(\#98e3f4\,\#043b5d\)\] {
+    background-color: var(--lightningcss-light, #98e3f4)var(--lightningcss-dark, #043b5d)
+}
+
+.bg-\[light-dark\(\#ade7b1\,\#043e32\)\] {
+    background-color: var(--lightningcss-light, #ade7b1)var(--lightningcss-dark, #043e32)
+}
+
+.bg-\[light-dark\(\#b4d159\,\#455903\)\] {
+    background-color: var(--lightningcss-light, #b4d159)var(--lightningcss-dark, #455903)
+}
+
+.bg-\[light-dark\(\#cae388\,\#2e3c02\)\] {
+    background-color: var(--lightningcss-light, #cae388)var(--lightningcss-dark, #2e3c02)
+}
+
+.bg-\[light-dark\(\#cbb7fd\,\#6625d0\)\] {
+    background-color: var(--lightningcss-light, #cbb7fd)var(--lightningcss-dark, #6625d0)
+}
+
+.bg-\[light-dark\(\#ddcffe\,\#480b98\)\] {
+    background-color: var(--lightningcss-light, #ddcffe)var(--lightningcss-dark, #480b98)
+}
+
+.bg-\[light-dark\(\#e42727\,\#e42727\)\] {
+    background-color: var(--lightningcss-light, #e42727)var(--lightningcss-dark, #e42727)
+}
+
+.bg-\[light-dark\(\#f7acf4\,\#8e1f8e\)\] {
+    background-color: var(--lightningcss-light, #f7acf4)var(--lightningcss-dark, #8e1f8e)
+}
+
+.bg-\[light-dark\(\#fbadc6\,\#a5094f\)\] {
+    background-color: var(--lightningcss-light, #fbadc6)var(--lightningcss-dark, #a5094f)
+}
+
+.bg-\[light-dark\(\#fbb2a9\,\#a71811\)\] {
+    background-color: var(--lightningcss-light, #fbb2a9)var(--lightningcss-dark, #a71811)
+}
+
+.bg-\[light-dark\(\#fbc8f8\,\#5d0e5d\)\] {
+    background-color: var(--lightningcss-light, #fbc8f8)var(--lightningcss-dark, #5d0e5d)
+}
+
+.bg-\[light-dark\(\#fbc9d8\,\#710437\)\] {
+    background-color: var(--lightningcss-light, #fbc9d8)var(--lightningcss-dark, #710437)
+}
+
+.bg-\[light-dark\(\#fecec8\,\#6b0f0b\)\] {
+    background-color: var(--lightningcss-light, #fecec8)var(--lightningcss-dark, #6b0f0b)
+}
+
+.bg-\[light-dark\(\#ffffff\,\#121215\)\] {
+    background-color: var(--lightningcss-light, #fff)var(--lightningcss-dark, #121215)
+}
+
+.bg-\[light-dark\(\$\{string\}\,\$\{string\}\)\] {
+    background-color:var(--lightningcss-light, $ {
+            string
+
+        })var(--lightningcss-dark, $ {
+            string
+        })
+}
+
 .bg-\[rgb\(from_var\(--color-system-alert\)_r_g_b_\/_0\.2\)\] {
     background-color: rgb(from var(--color-system-alert)r g b/.2)
 }

@@ -83,6 +83,7 @@ https://images.rbxcdn.com/97ece22f2b7d710a8d25196c871af810-lock.png
 https://images.rbxcdn.com/98b4eaf0b0465f0a.svg
 https://images.rbxcdn.com/9a3716f4b327244da4a47a53b0be94fe-economy_medium_dark.svg
 https://images.rbxcdn.com/9fa217abcb507eac.svg
+https://images.rbxcdn.com/a157d1faf0499409.webp
 https://images.rbxcdn.com/a45a2c4db559f443613c4b3ee06cbe7d-glint_vfx.png
 https://images.rbxcdn.com/a52871834c02d5fc.svg
 https://images.rbxcdn.com/acf70d53171c9eef23d5173c027b8cb1-economy_medium_light.svg

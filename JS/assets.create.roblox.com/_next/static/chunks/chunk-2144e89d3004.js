@@ -3,49 +3,49 @@
     try {
         var e = "undefined" != typeof globalThis ? globalThis : "undefined" != typeof global ? global : "undefined" != typeof window ? window : "undefined" != typeof self ? self : {},
             n = (new e.Error).stack;
-        n && ((e._debugIds || (e._debugIds = {}))[n] = "23d92360-b006-385f-a05a-825bf1f565c0")
+        n && ((e._debugIds || (e._debugIds = {}))[n] = "abca706f-cd95-a260-b4d2-c0ea808d7689")
     } catch (e) {}
 }();
 (globalThis.TURBOPACK || (globalThis.TURBOPACK = [])).push(["object" == typeof document ? document.currentScript : void 0, 401263, 884213, e => {
     "use strict";
     var t = e.i(416340);
-    let a = /{(.+?)}/g,
-        r = (e, t) => void 0 === t || 0 === Object.keys(t).length ? e : e.replace(a, (e, a) => {
-            var r;
-            return null != (r = t[a]) ? r : "{".concat(a, "}")
+    let r = /{(.+?)}/g,
+        a = (e, t) => void 0 === t || 0 === Object.keys(t).length ? e : e.replace(r, (e, r) => {
+            var a;
+            return null != (a = t[r]) ? a : "{".concat(r, "}")
         });
-    e.s(["default", 0, r], 884213);
+    e.s(["default", 0, a], 884213);
     let n = /{(.+?)}/,
         l = /({.+?})/g,
         i = /^[a-zA-Z0-9-]+\.(?:capture-loopback\.)?chromatic\.com$/,
         o = /(?:^|\.)robloxlabs\.com$/,
         s = () => {
             let e, t = i.test(window.location.hostname),
-                a = window.location.hostname.includes("localhost"),
-                r = "string" == typeof(e = window.location.hostname) && o.test(e);
+                r = window.location.hostname.includes("localhost"),
+                a = "string" == typeof(e = window.location.hostname) && o.test(e);
             return {
                 isSSR: !1,
-                isAllowed: t || a || r,
-                isDangerous: t || r,
-                preferLoadedTranslations: r
+                isAllowed: t || r || a,
+                isDangerous: t || a,
+                preferLoadedTranslations: a
             }
         },
         u = (e, t) => t.isDangerous ? "[!!".concat(e, "!!]") : e;
     var d = e.i(730530);
     e.s(["default", 0, e => {
         let {
-            ready: a,
+            ready: r,
             translate: i,
             translateHTML: o,
             translateWithNamespace: c,
             translateWithNamespaceHTML: m
         } = e, b = (0, t.useMemo)(() => ({
-            ready: a,
+            ready: r,
             translate: i,
             translateHTML: o,
             translateWithNamespace: c,
             translateWithNamespaceHTML: m
-        }), [a, i, o, c, m]);
+        }), [r, i, o, c, m]);
         return (0, t.useMemo)(() => {
             let e = {
                 ready: b.ready,
@@ -59,77 +59,77 @@
                 tPendingTranslation: (e => {
                     let {
                         ready: t,
-                        translate: a
+                        translate: r
                     } = e;
                     return (e, n, l, i) => {
                         let o = s();
-                        if (!o.isAllowed) return a(l, i);
+                        if (!o.isAllowed) return r(l, i);
                         if (o.preferLoadedTranslations && t) {
-                            let e = a(l, i);
+                            let e = r(l, i);
                             if (e.length > 0) return e
                         }
-                        return r(o.preferLoadedTranslations && !t ? e : u(e, o), i)
+                        return a(o.preferLoadedTranslations && !t ? e : u(e, o), i)
                     }
                 })(e),
                 tPendingHtmlTranslation: (e => {
                     let {
-                        ready: a,
+                        ready: r,
                         translateHTML: i
                     } = e;
                     return (e, o, d, c, m) => {
                         let b = s();
                         if (!b.isAllowed) return i(d, c, m);
-                        if (b.preferLoadedTranslations && a) {
+                        if (b.preferLoadedTranslations && r) {
                             let e = i(d, c, m);
                             if ("" !== e) return e
                         }
-                        return ((e, a, i) => {
+                        return ((e, r, i) => {
                             let o, s;
-                            if (void 0 === a && void 0 === i) return e;
+                            if (void 0 === r && void 0 === i) return e;
                             let {
                                 stringArgs: u,
                                 htmlArgs: d
                             } = (o = {}, s = {}, void 0 === i || Object.entries(i).forEach(e => {
-                                let [t, a] = e;
-                                "string" == typeof a ? o[t] = a : s[t] = a
+                                let [t, r] = e;
+                                "string" == typeof r ? o[t] = r : s[t] = r
                             }), {
                                 stringArgs: o,
                                 htmlArgs: s
-                            }), c = r(e, u), m = c.split(l).filter(e => !!e);
+                            }), c = a(e, u), m = c.split(l).filter(e => !!e);
                             if (1 === m.length) return c;
                             let b = [...m];
                             if (0 !== Object.keys(d).length) {
-                                let e = m.reduce((e, t, a) => {
-                                    let r = n.exec(t);
-                                    if (r) {
-                                        let t = r[1];
+                                let e = m.reduce((e, t, r) => {
+                                    let a = n.exec(t);
+                                    if (a) {
+                                        let t = a[1];
                                         if (Object.hasOwn(d, t)) {
-                                            let r = e[t];
-                                            if (!r) return Object.assign(e, {
-                                                [t]: [a]
+                                            let a = e[t];
+                                            if (!a) return Object.assign(e, {
+                                                [t]: [r]
                                             });
-                                            r.push(a)
+                                            a.push(r)
                                         }
                                     }
                                     return e
                                 }, {});
                                 Object.entries(d).forEach(t => {
-                                    let [a, r] = t, n = e[a];
+                                    let [r, a] = t, n = e[r];
                                     n && n.forEach(e => {
-                                        b[e] = r
+                                        b[e] = a
                                     })
                                 })
                             }
-                            if (!Array.isArray(a) || 0 === a.length) return (0, t.createElement)(t.Fragment, null, ...b);
-                            let p = a.reduce((e, t) => {
+                            if (!Array.isArray(r) || 0 === r.length) return (0, t.createElement)(t.Fragment, null, ...b);
+                            let p = r.reduce((e, t) => {
                                     let {
-                                        opening: a,
-                                        closing: r,
+                                        opening: r,
+                                        closing: a,
                                         content: n
                                     } = t;
                                     return Object.assign(e, {
-                                        ["{".concat(a, "}")]: {
-                                            match: "{".concat(r, "}"),
+                                        ["{".concat(r, "}")]: {
+                                            match: "{".concat(a, "}"),
                                             content: n
                                         }
                                     })
@@ -141,18 +141,18 @@
                                 if ("string" == typeof e && n.test(e))
                                     if (Object.hasOwn(p, e)) f.push(e), h.push(e);
                                     else {
-                                        let a = f.pop();
-                                        if (void 0 !== a) {
+                                        let r = f.pop();
+                                        if (void 0 !== r) {
                                             let {
-                                                match: r,
+                                                match: a,
                                                 content: n
-                                            } = p[a];
-                                            if (e !== r) break;
+                                            } = p[r];
+                                            if (e !== a) break;
                                             let l = [],
                                                 i = !1;
                                             for (; h.length > 0 && !i;) {
                                                 let e = h.pop();
-                                                e === a ? i = !0 : l.unshift(e)
+                                                e === r ? i = !0 : l.unshift(e)
                                             }
                                             let o = n(l.every(e => "string" == typeof e) ? l : (0, t.createElement)(t.Fragment, null, ...l));
                                             0 === h.length ? g.push(o) : h.push(o)
@@ -160,7 +160,7 @@
                                     }
                             else 0 === h.length ? g.push(e) : h.push(e);
                             return (0, t.createElement)(t.Fragment, null, ...g)
-                        })(b.preferLoadedTranslations && !a ? e : u(e, b), c, m)
+                        })(b.preferLoadedTranslations && !r ? e : u(e, b), c, m)
                     }
                 })(e)
             }
@@ -169,8 +169,8 @@
 }, 358763, e => {
     "use strict";
     var t = e.i(416340),
-        a = e.i(296380);
-    let r = () => {};
+        r = e.i(296380);
+    let a = () => {};
     e.s(["default", 0, function(e, n) {
         let {
             debounceDelay: l,
@@ -178,14 +178,14 @@
             resetOncePer: o
         } = arguments.length > 2 && void 0 !== arguments[2] ? arguments[2] : {}, s = (0, t.useRef)(!1), u = (0, t.useCallback)(e => {
             !e || s.current || (s.current = !0, n())
-        }, [n]), [d] = (0, a.default)(u, null != l ? l : 250), c = (0, t.useCallback)(e => {
+        }, [n]), [d] = (0, r.default)(u, null != l ? l : 250), c = (0, t.useCallback)(e => {
             let [t] = e;
             d(t.isIntersecting)
         }, [d]), m = null != o ? o : "instance";
         (0, t.useMemo)(() => {
             "callback" === m && (s.current = !1)
         }, [n]), (0, t.useEffect)(() => {
-            if (!e.current) return r;
+            if (!e.current) return a;
             let t = new IntersectionObserver(c, {
                 threshold: null != i ? i : .5
             });
@@ -196,11 +196,11 @@
     }])
 }, 29929, e => {
     "use strict";
-    var t, a, r, n, l, i, o, s, u, d, c, m, b, p, g, f, h, v = e.i(650502),
+    var t, r, a, n, l, i, o, s, u, d, c, m, b, p, g, f, h, v = e.i(650502),
         y = e.i(864392),
         C = ((t = {}).ShowVrDeviceOption = "showVrDeviceOption", t.ShowIXPClientTest = "showIXPClientTest", t.ShowMemoryStoresDashboard = "showMemoryStoresDashboard", t.ShowAdvancedSettingsPage = "showAdvancedSettingsPage", t.EnableIA = "enableIA", t.EnableSubscriptionActivationTest = "enableSubscriptionActivationTest", t.EnableDevexEarnedRobux = "enableDevexEarnedRobux", t.EnableExperienceGenre = "enableExperienceGenre", t.EnablePlayerFeedbackTranslationsWeb = "EnablePlayerFeedbackTranslationsWeb", t.EnablePlayerFeedbackTranslationRetries = "EnablePlayerFeedbackTranslationRetries", t.EnablePlayerFeedbackDetailedFilter = "enablePlayerFeedbackDetailedFilter", t.EnableEventRequestFeaturing = "enableEventRequestFeaturing", t.EnableCollaboratorsPageV2 = "enableCollaboratorsPageV2", t),
-        E = ((a = {}).EnableRightsManager = "enableRightsManager", a.EnableBulkFiling = "enableBulkFiling", a.EnableOnDemandSearch = "enableOnDemandSearch", a.EnableEditRegistration = "enableEditRegistration", a.EnableImageSearch = "enableImageSearch", a.EnableClaimsAgainstMe = "enableClaimsAgainstMe", a.EnableGenAiOptOut = "enableGenAiOptOut", a.EnableInExperienceIpReporting = "enableInExperienceIpReporting", a.EnableIpContentSearch = "enableIpContentSearch", a.EnableTrademark = "enableTrademark", a),
-        w = ((r = {}).EnableIPRecommender = "enableIPRecommender", r),
+        E = ((r = {}).EnableRightsManager = "enableRightsManager", r.EnableBulkFiling = "enableBulkFiling", r.EnableOnDemandSearch = "enableOnDemandSearch", r.EnableEditRegistration = "enableEditRegistration", r.EnableImageSearch = "enableImageSearch", r.EnableClaimsAgainstMe = "enableClaimsAgainstMe", r.EnableGenAiOptOut = "enableGenAiOptOut", r.EnableInExperienceIpReporting = "enableInExperienceIpReporting", r.EnableIpContentSearch = "enableIpContentSearch", r.EnableTrademark = "enableTrademark", r),
+        w = ((a = {}).EnableIPRecommender = "enableIPRecommender", a),
         S = ((n = S || {}).EnableVideoOnboarding = "enableVideoOnboarding", n),
         P = ((l = P || {}).EnableSignalLookup = "enableSignalLookup", l.AlwaysShow = "alwaysShow", l),
         x = x || {},
@@ -238,9 +238,9 @@
     };
     async function D(e) {
         let t = (0, v.getBEDEV2ServiceBasePath)("product-experimentation-platform"),
-            a = Object.values(U[e]).join(","),
-            r = "".concat(t, "/v1/projects/1/layers/").concat(e, "/values?parameters=").concat(a);
-        return (await fetch(r, {
+            r = Object.values(U[e]).join(","),
+            a = "".concat(t, "/v1/projects/1/layers/").concat(e, "/values?parameters=").concat(r);
+        return (await fetch(a, {
             credentials: "include"
         })).json()
     }
@@ -250,37 +250,37 @@
     "use strict";
     e.s(["default", 0, function(e) {
         let t = new Map;
-        return a => {
-            if (t.has(a)) return t.get(a);
-            let r = e(a);
-            return t.set(a, r), r
+        return r => {
+            if (t.has(r)) return t.get(r);
+            let a = e(r);
+            return t.set(r, a), a
         }
     }])
 }, 296380, e => {
     "use strict";
     var t = e.i(416340);
-    let a = (e, a) => {
-        let r = (0, t.useRef)(null),
+    let r = (e, r) => {
+        let a = (0, t.useRef)(null),
             n = (0, t.useCallback)(() => {
-                null !== r.current && (clearTimeout(r.current), r.current = null)
-            }, [r]);
+                null !== a.current && (clearTimeout(a.current), a.current = null)
+            }, [a]);
         return [(0, t.useCallback)(function() {
             for (var t = arguments.length, l = Array(t), i = 0; i < t; i++) l[i] = arguments[i];
-            n(), r.current = window.setTimeout(() => {
-                e(...l), r.current = null
-            }, a)
-        }, [e, a, n]), n, r]
+            n(), a.current = window.setTimeout(() => {
+                e(...l), a.current = null
+            }, r)
+        }, [e, r, n]), n, a]
     };
-    e.s(["default", 0, a, "useDebouncedFunction", 0, a])
+    e.s(["default", 0, r, "useDebouncedFunction", 0, r])
 }, 60373, e => {
     "use strict";
     var t = e.i(416340),
-        a = e.i(29929);
-    let r = function(e) {
+        r = e.i(29929);
+    let a = function(e) {
             let t = arguments.length > 1 && void 0 !== arguments[1] ? arguments[1] : {};
             try {
-                let a = window.localStorage.getItem(e);
-                return a ? JSON.parse(a) : t
+                let r = window.localStorage.getItem(e);
+                return r ? JSON.parse(r) : t
             } catch (e) {
                 return t
             }
@@ -297,11 +297,11 @@
         var i;
         let o = null != (i = null == l ? void 0 : l.cacheOnly) && i,
             [s, u] = (0, t.useState)(() => o ? {
-                params: r(e),
+                params: a(e),
                 status: "success",
                 isFetched: !0
             } : {
-                params: (null == l ? void 0 : l.restoreInitialValueFromCache) ? r(e) : {},
+                params: (null == l ? void 0 : l.restoreInitialValueFromCache) ? a(e) : {},
                 status: "initial",
                 isFetched: !1
             });
@@ -312,7 +312,7 @@
                     u(e => ({
                         ...e,
                         status: "loading"
-                    })), t = await (0, a.fetchIXPParametersForCurrentUser)(e), u({
+                    })), t = await (0, r.fetchIXPParametersForCurrentUser)(e), u({
                         params: t,
                         isFetched: !0,
                         status: "success"
@@ -330,42 +330,42 @@
 }, 198528, e => {
     "use strict";
     var t = e.i(416340),
-        a = e.i(589624);
-    e.s(["default", 0, (e, r) => {
-        let n = (0, a.useRouter)(),
+        r = e.i(589624);
+    e.s(["default", 0, (e, a) => {
+        let n = (0, r.useRouter)(),
             l = n.query;
         return [(0, t.useMemo)(() => {
             let t = null != l ? l : {},
-                a = {};
-            for (let r of e) a[r] = t[r];
-            return a
+                r = {};
+            for (let a of e) r[a] = t[a];
+            return r
         }, [e, l]), (0, t.useCallback)(function(t) {
-            var a;
+            var r;
             let l = arguments.length > 1 && void 0 !== arguments[1] ? arguments[1] : {
                     skipHistory: !1
                 },
-                i = null != (a = n.query) ? a : {},
+                i = null != (r = n.query) ? r : {},
                 o = {
                     ...i
                 };
             e.forEach(e => {
                 if (!Object.hasOwn(t, e)) return;
-                let a = t[e];
-                null == a ? delete o[e] : Array.isArray(a) ? o[e] = a.map(e => e.toString()) : o[e] = a.toString()
+                let r = t[e];
+                null == r ? delete o[e] : Array.isArray(r) ? o[e] = r.map(e => e.toString()) : o[e] = r.toString()
             }), Array.from(new Set([...Object.keys(i), ...Object.keys(o)])).every(e => ((e, t) => {
                 if (null == e && null == t) return !0;
                 if (null == e || null == t) return !1;
-                let a = Array.isArray(e) ? e : [e],
-                    r = Array.isArray(t) ? t : [t];
-                return a.length === r.length && a.every((e, t) => e === r[t])
+                let r = Array.isArray(e) ? e : [e],
+                    a = Array.isArray(t) ? t : [t];
+                return r.length === a.length && r.every((e, t) => e === a[t])
             })(i[e], o[e])) || (l.skipHistory ? n.replace({
                 pathname: n.pathname,
                 query: o
             }) : n.push({
                 pathname: n.pathname,
                 query: o
-            }, void 0, r))
-        }, [n, e, r])]
+            }, void 0, a))
+        }, [n, e, a])]
     }, "normalizeSingleQueryParam", 0, e => {
         let t = Array.isArray(e) ? e[0] : e;
         return "" === t || null == t ? void 0 : t
@@ -381,17 +381,17 @@
 }, 927868, e => {
     "use strict";
     e.s(["getEnumKeyByValue", 0, (e, t) => {
-        let a = Object.entries(e).find(e => {
-            let [, a] = e;
-            return a === t
+        let r = Object.entries(e).find(e => {
+            let [, r] = e;
+            return r === t
         });
-        return a ? a[0] : null
+        return r ? r[0] : null
     }, "isValidArrayEnumValue", 0, (e, t) => e.includes(t), "isValidEnumValue", 0, (e, t) => Object.values(e).includes(t)])
 }, 745873, 67262, e => {
     "use strict";
     var t = e.i(221628),
-        a = e.i(416340),
-        r = e.i(458451),
+        r = e.i(416340),
+        a = e.i(458451),
         n = e.i(533414),
         l = e.i(157310),
         i = e.i(279149),
@@ -423,37 +423,37 @@
         })
     };
     var p = e.i(809576);
-    let g = (0, a.createContext)(null);
+    let g = (0, r.createContext)(null);
     e.s(["GroupsProvider", 0, e => {
         let {
             children: l
         } = e, {
             user: i
-        } = (0, r.useRobloxAuthentication)(), o = (0, p.useGroupPermissionFetchers)(), {
+        } = (0, a.useRobloxAuthentication)(), o = (0, p.useGroupPermissionFetchers)(), {
             data: s,
             isLoading: u,
             refetch: d
-        } = b(), [c, m] = (0, n.useLocalStorage)("creatorHubGroups.".concat(null == i ? void 0 : i.id), null), [f, h] = (0, n.useLocalStorage)("creatorHubGroup.".concat(null == i ? void 0 : i.id), null), [v, y] = (0, n.useLocalStorage)("creatorHubGroupData.".concat(null == i ? void 0 : i.id), {}), C = (0, a.useCallback)(e => {
+        } = b(), [c, m] = (0, n.useLocalStorage)("creatorHubGroups.".concat(null == i ? void 0 : i.id), null), [f, h] = (0, n.useLocalStorage)("creatorHubGroup.".concat(null == i ? void 0 : i.id), null), [v, y] = (0, n.useLocalStorage)("creatorHubGroupData.".concat(null == i ? void 0 : i.id), {}), C = (0, r.useCallback)(e => {
             h(e);
             let t = null != e ? e : "user";
             y(e => {
-                let a = {
+                let r = {
                     lastSelected: Date.now(),
                     priority: 1
                 };
                 if (e[t]) {
                     let {
-                        priority: r,
+                        priority: a,
                         lastSelected: n
                     } = e[t];
-                    "number" != typeof r || Number.isNaN(r) || "number" != typeof n || Number.isNaN(n) || (a.priority = r * (1 + Math.log10(1 + 10 / Math.max(Date.now() - n, 864e5))))
+                    "number" != typeof a || Number.isNaN(a) || "number" != typeof n || Number.isNaN(n) || (r.priority = a * (1 + Math.log10(1 + 10 / Math.max(Date.now() - n, 864e5))))
                 }
                 return {
                     ...e,
-                    [t]: a
+                    [t]: r
                 }
             })
-        }, [h, y]), E = (0, a.useMemo)(() => {
+        }, [h, y]), E = (0, r.useMemo)(() => {
             if (null == s ? void 0 : s.groups) return null == s ? void 0 : s.groups;
             if (null === c) return [];
             try {
@@ -462,7 +462,7 @@
             } catch (e) {
                 return []
             }
-        }, [c, null == s ? void 0 : s.groups]), w = (0, a.useMemo)(() => {
+        }, [c, null == s ? void 0 : s.groups]), w = (0, r.useMemo)(() => {
             var e;
             return f && null != (e = E.find(e => {
                 let {
@@ -479,11 +479,11 @@
             data: A,
             isPending: I,
             refetch: R
-        } = (0, p.useGroupOwnershipQuery)(S, P), M = (0, a.useCallback)(() => null == S || null == P ? Promise.resolve() : Promise.all([k(), R()]), [R, k, S, P]);
-        (0, a.useEffect)(() => {
+        } = (0, p.useGroupOwnershipQuery)(S, P), M = (0, r.useCallback)(() => null == S || null == P ? Promise.resolve() : Promise.all([k(), R()]), [R, k, S, P]);
+        (0, r.useEffect)(() => {
             (null == i ? void 0 : i.id) && (null == s ? void 0 : s.groups) && !u && m(null == s ? void 0 : s.groups)
         }, [null == s ? void 0 : s.groups, E, u, m, null == i ? void 0 : i.id]);
-        let N = (0, a.useMemo)(() => {
+        let N = (0, r.useMemo)(() => {
             var e;
             return {
                 groups: E,
@@ -505,46 +505,46 @@
             children: l
         })
     }, "useCurrentGroup", 0, () => {
-        let e = (0, a.useContext)(g);
+        let e = (0, r.useContext)(g);
         if (null === e) throw Error("useCurrentGroup must be used within a GroupsProvider");
         return e.currentGroup
     }, "useGroups", 0, () => {
-        let e = (0, a.useContext)(g);
+        let e = (0, r.useContext)(g);
         if (null === e) throw Error("useGroups must be used within a GroupsProvider");
         return e
     }], 745873)
 }, 809576, e => {
     "use strict";
     var t = e.i(416340),
-        a = e.i(711367),
-        r = e.i(157310),
+        r = e.i(711367),
+        a = e.i(157310),
         n = e.i(795621),
         l = e.i(458451),
         i = e.i(285666),
         o = e.i(272593);
     let s = new i.PermissionsV2Api((0, o.createClientConfiguration)("groups", "bedev1"));
-    async function u(e, t, a) {
-        var r;
-        return null != (r = (await s.v2GroupsGroupIdEntityTypeEntityIdPermissionsResolvedGet({
+    async function u(e, t, r) {
+        var a;
+        return null != (a = (await s.v2GroupsGroupIdEntityTypeEntityIdPermissionsResolvedGet({
             groupId: e,
             entityType: t,
-            entityId: a
-        })).permissions) ? r : {}
+            entityId: r
+        })).permissions) ? a : {}
     }
     async function d(e) {
         return u(e, "groups", String(e))
     }
     async function c(e) {
-        let t, a = [];
+        let t, r = [];
         do {
-            var r, n;
+            var a, n;
             let l = await s.v2GroupsGroupIdEntityTypePermissionsResolvedGet({
                 groupId: e,
                 entityType: "roles",
                 cursor: t
             });
-            a.push(...null != (r = l.data) ? r : []), t = null != (n = l.nextPageCursor) ? n : void 0
-        } while (t) return a
+            r.push(...null != (a = l.data) ? a : []), t = null != (n = l.nextPageCursor) ? n : void 0
+        } while (t) return r
     }
     var m = e.i(156071);
     let b = new i.PermissionsV2Api((0, o.createClientConfiguration)("groups", "bedev1"));
@@ -560,65 +560,62 @@
         h = (e, t) => ["groups", e, t, "roles", "resolved-permissions"],
         v = (e, t) => ["universe-resolved-permissions", t, void 0 === e ? e : String(e)];
     e.s(["useGroupOwnershipQuery", 0, function(e, t) {
-        return (0, r.useQuery)({
+        return (0, a.useQuery)({
             queryKey: ["groups", e, t, "owner"],
-            queryFn: e && t ? () => m.default.getGroupInfo(e) : a.skipToken
+            queryFn: e && t ? () => m.default.getGroupInfo(e) : r.skipToken
         })
     }, "useGroupPermissionFetchers", 0, function() {
         let {
             user: e
-        } = (0, l.useRobloxAuthentication)(), a = (0, n.useQueryClient)(), r = null == e ? void 0 : e.id, i = (0, t.useCallback)(e => a.fetchQuery({
-            queryKey: v(e, r),
+        } = (0, l.useRobloxAuthentication)(), r = (0, n.useQueryClient)(), a = null == e ? void 0 : e.id, i = (0, t.useCallback)(e => r.fetchQuery({
+            queryKey: v(e, a),
             queryFn: () => p(e),
             staleTime: 6e4
-        }), [a, r]), o = (0, t.useCallback)(e => a.fetchQuery({
-            queryKey: f(e, r),
+        }), [r, a]), o = (0, t.useCallback)(e => r.fetchQuery({
+            queryKey: f(e, a),
             queryFn: () => d(e),
             staleTime: 6e4
-        }), [a, r]), s = (0, t.useCallback)(e => a.fetchQuery({
-            queryKey: h(e, r),
+        }), [r, a]), s = (0, t.useCallback)(e => r.fetchQuery({
+            queryKey: h(e, a),
             queryFn: () => c(e),
             staleTime: 6e4
-        }), [a, r]);
+        }), [r, a]);
         return (0, t.useMemo)(() => ({
             fetchGroupPermissions: o,
             fetchRolePermissions: s,
             fetchUniversePermissions: i
         }), [o, s, i])
     }, "useGroupResolvedPermissionsQuery", 0, function(e, t) {
-        return (0, r.useQuery)({
+        return (0, a.useQuery)({
             queryKey: f(e, t),
-            queryFn: e && t ? () => d(e) : a.skipToken,
+            queryFn: e && t ? () => d(e) : r.skipToken,
             staleTime: 6e4
         })
     }, "useGroupRolesResolvedPermissions", 0, function(e) {
         let {
             user: t
         } = (0, l.useRobloxAuthentication)(), n = null == t ? void 0 : t.id;
-        return (0, r.useQuery)({
+        return (0, a.useQuery)({
             queryKey: h(e, n),
-            queryFn: e && n ? () => c(e) : a.skipToken,
+            queryFn: e && n ? () => c(e) : r.skipToken,
             staleTime: 6e4
         })
     }, "useUniversePermissions", 0, function(e) {
         let {
             user: t
         } = (0, l.useRobloxAuthentication)(), n = null == t ? void 0 : t.id;
-        return (0, r.useQuery)({
+        return (0, a.useQuery)({
             queryKey: v(e, n),
-            queryFn: void 0 !== e && e !== g.uninitializedUniverseId ? () => p(e) : a.skipToken,
+            queryFn: void 0 !== e && e !== g.uninitializedUniverseId ? () => p(e) : r.skipToken,
             staleTime: 6e4
         })
     }], 809576)
 }, 486736, e => {
     "use strict";
     var t = e.i(221628),
-        a = e.i(416340),
-        r = e.i(639102);
+        r = e.i(416340),
+        a = e.i(639102);
     let n = {
-            enableImageTranslationEnrollment: !1,
-            enableImageTranslationListingTab: !1,
-            enableSharedTranslationListComponents: !1,
             enableIpPlatformMatchesTableEsIndexImprovements: !1
         },
         l = {
@@ -628,12 +625,12 @@
             try {
                 let {
                     applicationSettings: e = {}
-                } = await r.settingsClient.getApplicationSettings(), t = {};
+                } = await a.settingsClient.getApplicationSettings(), t = {};
                 return Object.entries(e).forEach(e => {
-                    let [a, r] = e;
+                    let [r, a] = e;
                     try {
-                        let e = typeof n[a];
-                        t[a] = "boolean" === e || "number" === e ? JSON.parse(r) : r
+                        let e = typeof n[r];
+                        t[r] = "boolean" === e || "number" === e ? JSON.parse(a) : a
                     } catch (e) {
                         console.error(e)
                     }
@@ -641,7 +638,7 @@
             } catch (e) {
                 return n
             }
-        }, o = (0, a.createContext)({
+        }, o = (0, r.createContext)({
             settings: {
                 ...l
             },
@@ -650,15 +647,15 @@
         });
     e.s(["SettingsProvider", 0, e => {
         let {
-            children: r
-        } = e, [n, s] = (0, a.useState)(() => ({
+            children: a
+        } = e, [n, s] = (0, r.useState)(() => ({
             settings: {
                 ...l
             },
             status: "initial",
             isFetched: !1
         }));
-        return (0, a.useEffect)(() => {
+        return (0, r.useEffect)(() => {
             (async () => {
                 let e = await Promise.allSettled([i()]);
                 s({
@@ -672,28 +669,28 @@
             })()
         }, []), (0, t.jsx)(o.Provider, {
             value: n,
-            children: r
+            children: a
         })
     }, "useSettings", 0, () => {
         let {
             settings: e,
             status: t,
-            isFetched: r
-        } = (0, a.useContext)(o), n = (0, a.useRef)(e);
+            isFetched: a
+        } = (0, r.useContext)(o), n = (0, r.useRef)(e);
         return {
-            settings: (0, a.useMemo)(() => {
+            settings: (0, r.useMemo)(() => {
                 let t = n.current;
-                return Object.keys(e).some(a => e[a] !== t[a]) && (n.current = e), n.current
+                return Object.keys(e).some(r => e[r] !== t[r]) && (n.current = e), n.current
             }, [e]),
             status: t,
-            isFetched: r
+            isFetched: a
         }
     }], 486736)
 }, 369114, e => {
     "use strict";
     var t = e.i(75584),
-        a = e.i(659332),
-        r = e.i(197649),
+        r = e.i(659332),
+        a = e.i(197649),
         n = e.i(416340);
     let l = (0, n.createContext)(null),
         i = e => {
@@ -738,7 +735,7 @@
         },
         p = (0, n.forwardRef)((e, t) => {
             let {
-                children: a,
+                children: r,
                 size: i = "Medium",
                 variant: o = "Divided",
                 className: s,
@@ -750,43 +747,43 @@
             return n.default.createElement(l.Provider, {
                 value: d
             }, n.default.createElement("div", {
-                className: (0, r.default)("width-full bg-surface-100", c && "radius-medium clip stroke-standard stroke-default")
+                className: (0, a.default)("width-full bg-surface-100", c && "radius-medium clip stroke-standard stroke-default")
             }, n.default.createElement("table", {
                 ref: t,
-                className: (0, r.default)("foundation-web-table width-full content-default", s),
+                className: (0, a.default)("foundation-web-table width-full content-default", s),
                 ...u
-            }, a)))
+            }, r)))
         });
     p.displayName = "Table";
     let g = (0, n.forwardRef)((e, t) => {
         let {
-            children: a,
+            children: r,
             className: l,
             ...o
         } = e;
         return i("TableHeader"), n.default.createElement("thead", {
             ref: t,
-            className: (0, r.default)("foundation-web-table-header", l),
+            className: (0, a.default)("foundation-web-table-header", l),
             ...o
-        }, a)
+        }, r)
     });
     g.displayName = "TableHeader";
     let f = (0, n.forwardRef)((e, t) => {
         let {
-            children: a,
+            children: r,
             className: l,
             ...o
         } = e;
         return i("TableBody"), n.default.createElement("tbody", {
             ref: t,
-            className: (0, r.default)("foundation-web-table-body", l),
+            className: (0, a.default)("foundation-web-table-body", l),
             ...o
-        }, a)
+        }, r)
     });
     f.displayName = "TableBody";
     let h = (0, n.forwardRef)((e, t) => {
         let {
-            children: a,
+            children: r,
             className: l,
             isInteractive: o = !1,
             isHoverable: s = !1,
@@ -817,13 +814,13 @@
             "aria-selected": o ? u : void 0,
             "aria-disabled": !!o && !!d || void 0,
             "data-selected": u || void 0,
-            className: (0, r.default)("foundation-web-table-row", (o || s) && "hover:bg-shift-100", o && !d && "cursor-pointer", o && d && "opacity-disabled pointer-events-none", u && "bg-shift-200", l),
+            className: (0, a.default)("foundation-web-table-row", (o || s) && "hover:bg-shift-100", o && !d && "cursor-pointer", o && d && "opacity-disabled pointer-events-none", u && "bg-shift-200", l),
             ...f,
             ...g
-        }, a)
+        }, r)
     });
     h.displayName = "TableRow";
-    let v = (0, n.forwardRef)((e, a) => {
+    let v = (0, n.forwardRef)((e, r) => {
         let {
             children: l,
             className: o,
@@ -840,15 +837,15 @@
             size: "XSmall",
             className: "shrink-0 content-muted"
         }), S = n.default.createElement("div", {
-            className: (0, r.default)("flex items-center gap-xsmall", d[y], "content-muted", b[g])
+            className: (0, a.default)("flex items-center gap-xsmall", d[y], "content-muted", b[g])
         }, "end" === g && w, n.default.createElement("span", {
             className: "text-truncate-end"
         }, l), "end" !== g && w), P = "string" == typeof l ? "Sort by ".concat(l) : void 0;
         return n.default.createElement("th", {
-            ref: a,
+            ref: r,
             scope: null != h ? h : "col",
             "aria-sort": C ? E : void 0,
-            className: (0, r.default)("foundation-web-table-header-cell foundation-web-table-header-cell-divider", u[y], s[y], m[g], "content-muted", o),
+            className: (0, a.default)("foundation-web-table-header-cell foundation-web-table-header-cell-divider", u[y], s[y], m[g], "content-muted", o),
             ...v
         }, C ? n.default.createElement("button", {
             type: "button",
@@ -860,7 +857,7 @@
     v.displayName = "TableHeaderCell";
     let y = (0, n.forwardRef)((e, t) => {
         let {
-            children: a,
+            children: r,
             className: l,
             align: u = "start",
             ...d
@@ -869,9 +866,9 @@
         } = i("TableCell");
         return n.default.createElement("td", {
             ref: t,
-            className: (0, r.default)("foundation-web-table-cell foundation-web-table-row-divider", o[b], s[b], c[b], m[u], "content-default", l),
+            className: (0, a.default)("foundation-web-table-cell foundation-web-table-row-divider", o[b], s[b], c[b], m[u], "content-default", l),
             ...d
-        }, a)
+        }, r)
     });
     y.displayName = "TableCell";
     let C = {
@@ -927,7 +924,7 @@
             }, [c, d]), M = x[l];
             return n.default.createElement("div", {
                 ref: t,
-                className: (0, r.default)("flex items-center justify-end", C[l], E[l], v),
+                className: (0, a.default)("flex items-center justify-end", C[l], E[l], v),
                 ...y
             }, n.default.createElement("div", {
                 className: "flex items-center gap-large"
@@ -936,11 +933,11 @@
             }, c && n.default.createElement("div", {
                 className: "flex items-center gap-small"
             }, n.default.createElement("span", {
-                className: (0, r.default)(w[l], "content-default")
+                className: (0, a.default)(w[l], "content-default")
             }, m), n.default.createElement("div", {
                 className: "foundation-web-table-pagination-select-wrapper relative"
             }, n.default.createElement("select", {
-                className: (0, r.default)("foundation-web-table-pagination-select", w[l], "content-default bg-action-standard radius-small cursor-pointer", "Medium" === l ? "height-800 padding-x-medium" : "height-600 padding-x-small"),
+                className: (0, a.default)("foundation-web-table-pagination-select", w[l], "content-default bg-action-standard radius-small cursor-pointer", "Medium" === l ? "height-800 padding-x-medium" : "height-600 padding-x-small"),
                 value: o,
                 onChange: R,
                 "aria-label": m
@@ -948,31 +945,31 @@
                 key: e,
                 value: e
             }, e))))), n.default.createElement("span", {
-                className: (0, r.default)(S[l], "content-default")
+                className: (0, a.default)(S[l], "content-default")
             }, h ? h(A, I, s) : "".concat(A, "-").concat(I, " of ").concat(s))), n.default.createElement("div", {
-                className: (0, r.default)("flex items-center", P[l])
-            }, n.default.createElement(a.IconButton, {
+                className: (0, a.default)("flex items-center", P[l])
+            }, n.default.createElement(r.IconButton, {
                 icon: "icon-regular-double-chevron-large-left",
                 ariaLabel: b,
                 size: M,
                 variant: "Utility",
                 isDisabled: H,
                 onClick: () => d(0)
-            }), n.default.createElement(a.IconButton, {
+            }), n.default.createElement(r.IconButton, {
                 icon: "icon-regular-chevron-small-left",
                 ariaLabel: p,
                 size: M,
                 variant: "Utility",
                 isDisabled: H,
                 onClick: () => d(i - 1)
-            }), n.default.createElement(a.IconButton, {
+            }), n.default.createElement(r.IconButton, {
                 icon: "icon-regular-chevron-small-right",
                 ariaLabel: g,
                 size: M,
                 variant: "Utility",
                 isDisabled: k,
                 onClick: () => d(i + 1)
-            }), n.default.createElement(a.IconButton, {
+            }), n.default.createElement(r.IconButton, {
                 icon: "icon-regular-double-chevron-large-right",
                 ariaLabel: f,
                 size: M,
@@ -985,10 +982,10 @@
 }, 990729, e => {
     "use strict";
     var t = e.i(194250),
-        a = e.i(416340),
-        r = e.i(863762);
+        r = e.i(416340),
+        a = e.i(863762);
     e.i(221628), e.i(149285);
-    var n = (0, a.createContext)({
+    var n = (0, r.createContext)({
         ref: {
             current: null
         },
@@ -1002,56 +999,56 @@
     e.s(["default", 0, function(e) {
         var l, i, o, s, u = e.children,
             d = (0, t.a)(e, ["children"]),
-            c = (0, a.useRef)(null),
-            m = (0, a.useState)(!1),
+            c = (0, r.useRef)(null),
+            m = (0, r.useState)(!1),
             b = m[0],
             p = m[1],
-            g = (0, a.useState)([]),
+            g = (0, r.useState)([]),
             f = g[0],
             h = g[1],
-            v = (0, a.useCallback)(function(e, a) {
-                void 0 === e && (e = {}), void 0 === a && (a = function() {
+            v = (0, r.useCallback)(function(e, r) {
+                void 0 === e && (e = {}), void 0 === r && (r = function() {
                     return !0
-                }), h(function(r) {
-                    return (0, t.b)((0, t.b)([], r, !0), [{
+                }), h(function(a) {
+                    return (0, t.b)((0, t.b)([], a, !0), [{
                         props: e,
-                        shouldClose: a
+                        shouldClose: r
                     }], !1)
                 })
             }, [h]),
-            y = (0, a.useCallback)(function() {
+            y = (0, r.useCallback)(function() {
                 p(!1)
             }, [p]);
-        (0, a.useEffect)(function() {
+        (0, r.useEffect)(function() {
             f.length > 0 && p(!0)
         }, [f.length]);
-        var C = (0, a.useMemo)(function() {
+        var C = (0, r.useMemo)(function() {
             return {
                 ref: c,
                 enqueue: v,
                 close: y
             }
         }, [y, v]);
-        return a.default.createElement(a.default.Fragment, null, a.default.createElement(n.Provider, {
+        return r.default.createElement(r.default.Fragment, null, r.default.createElement(n.Provider, {
             value: C
-        }, u), a.default.createElement(r.S, (0, t._)({}, (null == (l = f[0]) ? void 0 : l.props) || {}, d, {
+        }, u), r.default.createElement(a.S, (0, t._)({}, (null == (l = f[0]) ? void 0 : l.props) || {}, d, {
             TransitionProps: (0, t._)((0, t._)({}, (null == (o = null == (i = f[0]) ? void 0 : i.props) ? void 0 : o.TransitionProps) || {}), {
                 onExited: function(e) {
-                    var a, r, n, l;
+                    var r, a, n, l;
                     h(function(e) {
-                        var a = e.slice(1);
-                        return (0, t.b)([], a, !0)
-                    }), (null == (r = null == (a = f[0]) ? void 0 : a.props.TransitionProps) ? void 0 : r.onExited) && (null == (l = null == (n = f[0]) ? void 0 : n.props.TransitionProps) || l.onExited(e))
+                        var r = e.slice(1);
+                        return (0, t.b)([], r, !0)
+                    }), (null == (a = null == (r = f[0]) ? void 0 : r.props.TransitionProps) ? void 0 : a.onExited) && (null == (l = null == (n = f[0]) ? void 0 : n.props.TransitionProps) || l.onExited(e))
                 }
             }),
             onClose: function(e, t) {
-                var a, r, n;
-                (null == (a = f[0]) ? void 0 : a.shouldClose(t)) && p(!1), (null == (r = f[0]) ? void 0 : r.props.onClose) && (null == (n = f[0]) || n.props.onClose(e, t))
+                var r, a, n;
+                (null == (r = f[0]) ? void 0 : r.shouldClose(t)) && p(!1), (null == (a = f[0]) ? void 0 : a.props.onClose) && (null == (n = f[0]) || n.props.onClose(e, t))
             },
             open: b
         }), null == (s = f[0]) ? void 0 : s.props.children))
     }, "useSnackbar", 0, function() {
-        var e = (0, a.useContext)(n);
+        var e = (0, r.useContext)(n);
         return {
             ref: e.ref,
             enqueue: e.enqueue,
@@ -1061,13 +1058,13 @@
 }, 823062, e => {
     "use strict";
     var t = e.i(416340);
-    let a = (0, t.createContext)(null),
-        r = [],
+    let r = (0, t.createContext)(null),
+        a = [],
         n = ["pageload", "click", "impression", "hover", "webvitals", "apivitals", "formvitals", "error", "session"],
         l = new Set(["TTFB", "FCP", "LCP", "FID", "CLS", "INP"]);
 
     function i() {
-        let e = (0, t.useContext)(a);
+        let e = (0, t.useContext)(r);
         if (null === e) throw Error("useUnifiedLoggerProvider must be used within a UnifiedLoggerProvider");
         return e
     }
@@ -1081,7 +1078,7 @@
             path: d,
             url: c,
             isReady: m = !0
-        } = e, b = null != (i = null == u ? void 0 : u.tags) ? i : r, p = null == u ? void 0 : u.rosId, g = (0, t.useMemo)(() => ({
+        } = e, b = null != (i = null == u ? void 0 : u.tags) ? i : a, p = null == u ? void 0 : u.rosId, g = (0, t.useMemo)(() => ({
             tags: b,
             rosId: p,
             path: d,
@@ -1096,11 +1093,11 @@
         }, [g]), (0, t.useLayoutEffect)(() => {
             let e = e => {
                 var t;
-                let a, r = (a = null == (t = e.parameters) ? void 0 : t.metricName, "webvitals" === e.eventType && void 0 !== a && l.has(a)) ? f.current : h.current;
-                void 0 !== r.path && (e.parameters = {
+                let r, a = (r = null == (t = e.parameters) ? void 0 : t.metricName, "webvitals" === e.eventType && void 0 !== r && l.has(r)) ? f.current : h.current;
+                void 0 !== a.path && (e.parameters = {
                     ...e.parameters,
-                    path: r.path
-                }), r.tags.forEach(t => e.addTag(t)), void 0 !== r.rosId && e.addTag("owner: ".concat(r.rosId))
+                    path: a.path
+                }), a.tags.forEach(t => e.addTag(t)), void 0 !== a.rosId && e.addTag("owner: ".concat(a.rosId))
             };
             return n.forEach(t => {
                 s.events.on(t, e)
@@ -1114,36 +1111,36 @@
             unifiedLogger: s,
             pageContext: g
         }), [s, g]);
-        return t.default.createElement(a.Provider, {
+        return t.default.createElement(r.Provider, {
             value: v
         }, o)
     }, "useOptionalUnifiedLoggerProvider", 0, function() {
-        return (0, t.useContext)(a)
+        return (0, t.useContext)(r)
     }, "usePageSettled", 0, e => {
         let {
-            unifiedLogger: a,
-            pageContext: r
+            unifiedLogger: r,
+            pageContext: a
         } = i(), {
             path: n,
             url: l,
             isReady: s
-        } = r, u = a.pageSettledTracker, d = (0, t.useSyncExternalStore)(u.subscribe, u.getSnapshot, o);
+        } = a, u = r.pageSettledTracker, d = (0, t.useSyncExternalStore)(u.subscribe, u.getSnapshot, o);
         (0, t.useEffect)(() => {
             if (!d || d.isNavigating || !s || !n || !l || !e || d.url.split(/[?#]/)[0] !== l.split(/[?#]/)[0]) return;
             let t = new URL(n, window.location.origin).pathname,
-                r = requestAnimationFrame(() => {
-                    r = requestAnimationFrame(() => {
-                        a.logPageSettledEvent({
+                a = requestAnimationFrame(() => {
+                    a = requestAnimationFrame(() => {
+                        r.logPageSettledEvent({
                             navigationId: d.id,
                             page: t,
                             outcome: e
                         })
                     })
                 });
-            return () => cancelAnimationFrame(r)
-        }, [d, s, l, n, e, a])
+            return () => cancelAnimationFrame(a)
+        }, [d, s, l, n, e, r])
     }, "useUnifiedLoggerProvider", 0, i])
 }]);
 
-//# debugId=23d92360-b006-385f-a05a-825bf1f565c0
-//# sourceMappingURL=3fqdsufiwwfmn.js.map
+//# debugId=abca706f-cd95-a260-b4d2-c0ea808d7689
+//# sourceMappingURL=27u59tlcf--m8.js.map

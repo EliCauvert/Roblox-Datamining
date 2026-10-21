@@ -3,7 +3,7 @@
     try {
         var e = "undefined" != typeof globalThis ? globalThis : "undefined" != typeof global ? global : "undefined" != typeof window ? window : "undefined" != typeof self ? self : {},
             n = (new e.Error).stack;
-        n && ((e._debugIds || (e._debugIds = {}))[n] = "c7043054-c1a1-f950-56db-081191caa3b6")
+        n && ((e._debugIds || (e._debugIds = {}))[n] = "b8877c4b-c4f2-04e3-0f6d-c40b02314bc4")
     } catch (e) {}
 }();
 (globalThis.TURBOPACK || (globalThis.TURBOPACK = [])).push(["object" == typeof document ? document.currentScript : void 0, 745873, 67262, t => {
@@ -89,16 +89,16 @@
                 } = t;
                 return e === d
             })) ? t : null
-        }, [d, E]), B = null == A ? void 0 : A.id, T = null == u ? void 0 : u.id, {
-            data: C,
-            error: x,
-            isPending: I,
+        }, [d, E]), B = null == A ? void 0 : A.id, C = null == u ? void 0 : u.id, {
+            data: x,
+            error: T,
+            isPending: P,
             refetch: S
-        } = (0, y.useGroupResolvedPermissionsQuery)(B, T), {
-            data: P,
+        } = (0, y.useGroupResolvedPermissionsQuery)(B, C), {
+            data: I,
             isPending: U,
-            refetch: L
-        } = (0, y.useGroupOwnershipQuery)(B, T), R = (0, r.useCallback)(() => null == B || null == T ? Promise.resolve() : Promise.all([S(), L()]), [L, S, B, T]);
+            refetch: R
+        } = (0, y.useGroupOwnershipQuery)(B, C), L = (0, r.useCallback)(() => null == B || null == C ? Promise.resolve() : Promise.all([S(), R()]), [R, S, B, C]);
         (0, r.useEffect)(() => {
             (null == u ? void 0 : u.id) && (null == f ? void 0 : f.groups) && !a && p(null == f ? void 0 : f.groups)
         }, [null == f ? void 0 : f.groups, E, a, p, null == u ? void 0 : u.id]);
@@ -108,17 +108,17 @@
                 groups: E,
                 currentGroup: A,
                 groupData: m,
-                isFetched: !a && !!T,
+                isFetched: !a && !!C,
                 refreshGroups: l,
                 setCurrentGroup: w,
                 ...s,
-                permissions: C,
-                isOwner: null != T && (null == P || null == (t = P.owner) ? void 0 : t.userId) === T,
-                isPermissionsLoading: null != A && (I || U),
-                permissionsError: x,
-                refreshPermissions: R
+                permissions: x,
+                isOwner: null != C && (null == I || null == (t = I.owner) ? void 0 : t.userId) === C,
+                isPermissionsLoading: null != A && (P || U),
+                permissionsError: T,
+                refreshPermissions: L
             }
-        }, [A, m, E, a, U, I, P, s, C, x, l, R, w, T]);
+        }, [A, m, E, a, U, P, I, s, x, T, l, L, w, C]);
         return (0, e.jsx)(g.Provider, {
             value: O,
             children: o
@@ -235,9 +235,6 @@
         r = t.i(416340),
         n = t.i(639102);
     let i = {
-            enableImageTranslationEnrollment: !1,
-            enableImageTranslationListingTab: !1,
-            enableSharedTranslationListComponents: !1,
             enableIpPlatformMatchesTableEsIndexImprovements: !1
         },
         o = {
@@ -376,7 +373,7 @@
                     }
                     if (ArrayBuffer.isView(t)) return h(t);
                     if (null == t) throw TypeError("The first argument must be one of type string, Buffer, ArrayBuffer, Array, or Array-like Object. Received type " + typeof t);
-                    if (P(t, ArrayBuffer) || t && P(t.buffer, ArrayBuffer) || "u" > typeof SharedArrayBuffer && (P(t, SharedArrayBuffer) || t && P(t.buffer, SharedArrayBuffer))) return function(t, e, r) {
+                    if (I(t, ArrayBuffer) || t && I(t.buffer, ArrayBuffer) || "u" > typeof SharedArrayBuffer && (I(t, SharedArrayBuffer) || t && I(t.buffer, SharedArrayBuffer))) return function(t, e, r) {
                         var n;
                         if (e < 0 || t.byteLength < e) throw RangeError('"offset" is outside of buffer bounds');
                         if (t.byteLength < e + (r || 0)) throw RangeError('"length" is outside of buffer bounds');
@@ -454,7 +451,7 @@
 
                 function c(t, e) {
                     if (s.isBuffer(t)) return t.length;
-                    if (ArrayBuffer.isView(t) || P(t, ArrayBuffer)) return t.byteLength;
+                    if (ArrayBuffer.isView(t) || I(t, ArrayBuffer)) return t.byteLength;
                     if ("string" != typeof t) throw TypeError('The "string" argument must be one of type string, Buffer, or ArrayBuffer. Received type ' + typeof t);
                     var r = t.length,
                         n = arguments.length > 2 && !0 === arguments[2];
@@ -466,7 +463,7 @@
                             return r;
                         case "utf8":
                         case "utf-8":
-                            return C(t).length;
+                            return x(t).length;
                         case "ucs2":
                         case "ucs-2":
                         case "utf16le":
@@ -475,9 +472,9 @@
                         case "hex":
                             return r >>> 1;
                         case "base64":
-                            return I(t).length;
+                            return P(t).length;
                         default:
-                            if (i) return n ? -1 : C(t).length;
+                            if (i) return n ? -1 : x(t).length;
                             e = ("" + e).toLowerCase(), i = !0
                     }
                 }
@@ -582,7 +579,7 @@
                 s.isBuffer = function(t) {
                     return null != t && !0 === t._isBuffer && t !== s.prototype
                 }, s.compare = function(t, e) {
-                    if (P(t, Uint8Array) && (t = s.from(t, t.offset, t.byteLength)), P(e, Uint8Array) && (e = s.from(e, e.offset, e.byteLength)), !s.isBuffer(t) || !s.isBuffer(e)) throw TypeError('The "buf1", "buf2" arguments must be one of type Buffer or Uint8Array');
+                    if (I(t, Uint8Array) && (t = s.from(t, t.offset, t.byteLength)), I(e, Uint8Array) && (e = s.from(e, e.offset, e.byteLength)), !s.isBuffer(t) || !s.isBuffer(e)) throw TypeError('The "buf1", "buf2" arguments must be one of type Buffer or Uint8Array');
                     if (t === e) return 0;
                     for (var r = t.length, n = e.length, i = 0, o = Math.min(r, n); i < o; ++i)
                         if (t[i] !== e[i]) {
@@ -615,7 +612,7 @@
                         i = 0;
                     for (r = 0; r < t.length; ++r) {
                         var o = t[r];
-                        if (P(o, Uint8Array) && (o = s.from(o)), !s.isBuffer(o)) throw TypeError('"list" argument must be an Array of Buffers');
+                        if (I(o, Uint8Array) && (o = s.from(o)), !s.isBuffer(o)) throw TypeError('"list" argument must be an Array of Buffers');
                         o.copy(n, i), i += o.length
                     }
                     return n
@@ -645,7 +642,7 @@
                         r = e.INSPECT_MAX_BYTES;
                     return t = this.toString("hex", 0, r).replace(/(.{2})/g, "$1 ").trim(), this.length > r && (t += " ... "), "<Buffer " + t + ">"
                 }, o && (s.prototype[o] = s.prototype.inspect), s.prototype.compare = function(t, e, r, n, i) {
-                    if (P(t, Uint8Array) && (t = s.from(t, t.offset, t.byteLength)), !s.isBuffer(t)) throw TypeError('The "target" argument must be one of type Buffer or Uint8Array. Received type ' + typeof t);
+                    if (I(t, Uint8Array) && (t = s.from(t, t.offset, t.byteLength)), !s.isBuffer(t)) throw TypeError('The "target" argument must be one of type Buffer or Uint8Array. Received type ' + typeof t);
                     if (void 0 === e && (e = 0), void 0 === r && (r = t ? t.length : 0), void 0 === n && (n = 0), void 0 === i && (i = this.length), e < 0 || r > t.length || n < 0 || i > this.length) throw RangeError("out of range index");
                     if (n >= i && e >= r) return 0;
                     if (n >= i) return -1;
@@ -739,16 +736,16 @@
                             }(this, t, e, r);
                         case "utf8":
                         case "utf-8":
-                            return i = e, o = r, S(C(t, this.length - i), this, i, o);
+                            return i = e, o = r, S(x(t, this.length - i), this, i, o);
                         case "ascii":
-                            return u = e, s = r, S(x(t), this, u, s);
+                            return u = e, s = r, S(T(t), this, u, s);
                         case "latin1":
                         case "binary":
                             return function(t, e, r, n) {
-                                return S(x(e), t, r, n)
+                                return S(T(e), t, r, n)
                             }(this, t, e, r);
                         case "base64":
-                            return f = e, a = r, S(I(t), this, f, a);
+                            return f = e, a = r, S(P(t), this, f, a);
                         case "ucs2":
                         case "ucs-2":
                         case "utf16le":
@@ -919,9 +916,9 @@
                     }
                     return this
                 };
-                var T = /[^+/0-9A-Za-z-_]/g;
+                var C = /[^+/0-9A-Za-z-_]/g;
 
-                function C(t, e) {
+                function x(t, e) {
                     e = e || 1 / 0;
                     for (var r, n = t.length, i = null, o = [], u = 0; u < n; ++u) {
                         if ((r = t.charCodeAt(u)) > 55295 && r < 57344) {
@@ -956,14 +953,14 @@
                     return o
                 }
 
-                function x(t) {
+                function T(t) {
                     for (var e = [], r = 0; r < t.length; ++r) e.push(255 & t.charCodeAt(r));
                     return e
                 }
 
-                function I(t) {
+                function P(t) {
                     return n.toByteArray(function(t) {
-                        if ((t = (t = t.split("=")[0]).trim().replace(T, "")).length < 2) return "";
+                        if ((t = (t = t.split("=")[0]).trim().replace(C, "")).length < 2) return "";
                         for (; t.length % 4 != 0;) t += "=";
                         return t
                     }(t))
@@ -974,7 +971,7 @@
                     return i
                 }
 
-                function P(t, e) {
+                function I(t, e) {
                     return t instanceof e || null != t && null != t.constructor && null != t.constructor.name && t.constructor.name === e.name
                 }
                 var U = function() {
@@ -1145,5 +1142,5 @@
     }, "useUnifiedLoggerProvider", 0, u])
 }]);
 
-//# debugId=c7043054-c1a1-f950-56db-081191caa3b6
-//# sourceMappingURL=0yu1q1h3ihofn.js.map
+//# debugId=b8877c4b-c4f2-04e3-0f6d-c40b02314bc4
+//# sourceMappingURL=31dl75ar1eefz.js.map

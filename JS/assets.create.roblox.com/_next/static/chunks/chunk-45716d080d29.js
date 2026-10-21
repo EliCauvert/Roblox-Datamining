@@ -3,7 +3,7 @@
     try {
         var e = "undefined" != typeof globalThis ? globalThis : "undefined" != typeof global ? global : "undefined" != typeof window ? window : "undefined" != typeof self ? self : {},
             n = (new e.Error).stack;
-        n && ((e._debugIds || (e._debugIds = {}))[n] = "abcee41f-c0e2-7a0a-c895-41ca8b2b7b9a")
+        n && ((e._debugIds || (e._debugIds = {}))[n] = "8d76c799-4924-390d-5b12-fbb227e07675")
     } catch (e) {}
 }();
 (globalThis.TURBOPACK || (globalThis.TURBOPACK = [])).push(["object" == typeof document ? document.currentScript : void 0, 523426, e => {
@@ -146,17 +146,17 @@
             name: "isInGameSalesLicensingEnabled",
             defaultValue: !1
         }),
-        u = (0, t.defineFlag)({
+        c = (0, t.defineFlag)({
             namespace: "content-licensing",
             name: "maxCollectibleItemDetailsRequestCount",
             defaultValue: 30
         }),
-        c = (0, t.defineFlag)({
+        u = (0, t.defineFlag)({
             namespace: "content-licensing",
             name: "isIphInGameSalesAvatarMarketplaceSalesLicenseCreationEnabled",
             defaultValue: !1
         });
-    e.s(["enableIpPlatformLicenseRecommendations", 0, a, "isAvatarItemLicensingEnabled", 0, o, "isExperiencePreviewEnabled", 0, n, "isIgnoreMatchEnabled", 0, s, "isImageAttachmentEnabledInLicenseApplication", 0, i, "isInGameSalesLicensingEnabled", 0, l, "isIphInGameSalesAvatarMarketplaceSalesLicenseCreationEnabled", 0, c, "isShowcaseExperiencesEnabled", 0, r, "maxCollectibleItemDetailsRequestCount", 0, u])
+    e.s(["enableIpPlatformLicenseRecommendations", 0, a, "isAvatarItemLicensingEnabled", 0, o, "isExperiencePreviewEnabled", 0, n, "isIgnoreMatchEnabled", 0, s, "isImageAttachmentEnabledInLicenseApplication", 0, i, "isInGameSalesLicensingEnabled", 0, l, "isIphInGameSalesAvatarMarketplaceSalesLicenseCreationEnabled", 0, u, "isShowcaseExperiencesEnabled", 0, r, "maxCollectibleItemDetailsRequestCount", 0, c])
 }, 942100, e => {
     "use strict";
     var t = e.i(157700);
@@ -223,12 +223,12 @@
             name: "isMomentsShareLinkEnabled",
             defaultValue: !1
         }),
-        u = (0, t.defineFlag)({
+        c = (0, t.defineFlag)({
             namespace: "creator-creations",
             name: "isMomentsPostCreationEnabled",
             defaultValue: !1
         });
-    e.s(["isBadgeDefaultIconEnabled", 0, n, "isMomentsFeedIdEnabled", 0, o, "isMomentsPostCreationEnabled", 0, u, "isMomentsShareLinkEnabled", 0, l, "isMomentsSitetestUrlParsingEnabled", 0, i, "isMomentsUploadEnabled", 0, a, "isMomentsUploadLanguageSelectEnabled", 0, s, "isTextDocumentEnabled", 0, r])
+    e.s(["isBadgeDefaultIconEnabled", 0, n, "isMomentsFeedIdEnabled", 0, o, "isMomentsPostCreationEnabled", 0, c, "isMomentsShareLinkEnabled", 0, l, "isMomentsSitetestUrlParsingEnabled", 0, i, "isMomentsUploadEnabled", 0, a, "isMomentsUploadLanguageSelectEnabled", 0, s, "isTextDocumentEnabled", 0, r])
 }, 846130, e => {
     "use strict";
     var t = e.i(157700);
@@ -267,12 +267,12 @@
             name: "enablePlayerSupportSpamManagement",
             defaultValue: !1
         }),
-        u = (0, t.defineFlag)({
+        c = (0, t.defineFlag)({
             namespace: "creator-gameops",
             name: "enableEarlyTestersUserOwnedGame",
             defaultValue: !1
         });
-    e.s(["enableEarlyTestersUserOwnedGame", 0, u, "enablePlayerHostedEvents", 0, i, "enablePlayerSupport", 0, n, "enablePlayerSupportArchive", 0, s, "enablePlayerSupportCategoryChange", 0, o, "enablePlayerSupportCreatorTicketReroute", 0, r, "enablePlayerSupportSpamManagement", 0, l, "enablePlayerSupportTicketTranslation", 0, a])
+    e.s(["enableEarlyTestersUserOwnedGame", 0, c, "enablePlayerHostedEvents", 0, i, "enablePlayerSupport", 0, n, "enablePlayerSupportArchive", 0, s, "enablePlayerSupportCategoryChange", 0, o, "enablePlayerSupportCreatorTicketReroute", 0, r, "enablePlayerSupportSpamManagement", 0, l, "enablePlayerSupportTicketTranslation", 0, a])
 }, 360894, e => {
     "use strict";
     let t = (0, e.i(157700).defineFlag)({
@@ -379,8 +379,23 @@
             namespace: "localization",
             name: "imageTranslationAllowlist",
             defaultValue: !1
+        }),
+        i = (0, t.defineFlag)({
+            namespace: "localization",
+            name: "enableImageTranslationEnrollment",
+            defaultValue: !1
+        }),
+        r = (0, t.defineFlag)({
+            namespace: "localization",
+            name: "enableImageTranslationListingTab",
+            defaultValue: !1
+        }),
+        s = (0, t.defineFlag)({
+            namespace: "localization",
+            name: "enableSharedTranslationListComponents",
+            defaultValue: !1
         });
-    e.s(["imageLocalizationSettingsEnabled", 0, n, "imageTranslationAllowlist", 0, a])
+    e.s(["enableImageTranslationEnrollment", 0, i, "enableImageTranslationListingTab", 0, r, "enableSharedTranslationListComponents", 0, s, "imageLocalizationSettingsEnabled", 0, n, "imageTranslationAllowlist", 0, a])
 }, 477797, e => {
     "use strict";
     var t = e.i(157700);
@@ -472,9 +487,9 @@
         s = e.i(814984),
         o = e.i(904969);
     let l = "CreatorHub.AgeVerificationBannerSettings",
-        u = async () => {
+        c = async () => {
             localStorage.removeItem(l)
-        }, c = async () => {
+        }, u = async () => {
             let e, t = localStorage.getItem(l);
             if (!t) return !1;
             try {
@@ -492,7 +507,7 @@
                 })(t);
                 e = n
             } catch (e) {
-                return u(), !1
+                return c(), !1
             }
             let n = new Date;
             return e.getFullYear() === n.getFullYear() && e.getMonth() === n.getMonth() && e.getDate() === n.getDate()
@@ -513,7 +528,7 @@
     e.s(["AgeVerificationUpsellProvider", 0, e => {
         let {
             children: s
-        } = e, [l, u] = (0, n.useState)(!0), [g, h] = (0, n.useState)("doNotShow"), {
+        } = e, [l, c] = (0, n.useState)(!0), [g, h] = (0, n.useState)("doNotShow"), {
             isFetched: y,
             user: b
         } = (0, a.useRobloxAuthentication)(), {
@@ -531,13 +546,13 @@
                 isEnabled: e <= a && a < t
             }
         }, []), A = (0, n.useCallback)(async () => {
-            await d(), u(!0)
-        }, [u]);
+            await d(), c(!0)
+        }, [c]);
         (0, n.useEffect)(() => {
             E && y && (null == b ? void 0 : b.id) && (async () => {
                 let e = !1;
                 try {
-                    e = await c()
+                    e = await u()
                 } catch (e) {
                     w.logErrorEvent({
                         eventName: i.default.AgeVerificationUpsellBannerError,
@@ -547,7 +562,7 @@
                         }
                     })
                 }
-                u(e);
+                c(e);
                 let t = "doNotShow";
                 try {
                     t = await m()
@@ -637,10 +652,10 @@
         },
         o = (0, i.createClientConfiguration)("oauth", "bedev2"),
         l = new a.AuthorizationApi(o),
-        u = new a.DiscoveryApi(o);
+        c = new a.DiscoveryApi(o);
     e.s(["ApplicationAuthorizationsClient", 0, {
         authorizationApi: l,
-        discoveryApi: u
+        discoveryApi: c
     }, "EApplicationErrorResponseFields", () => r, "default", 0, s])
 }, 6923, e => {
     "use strict";
@@ -767,55 +782,55 @@
 
         function o(o) {
             return function(l) {
-                var u = [o, l];
+                var c = [o, l];
                 if (n) throw TypeError("Generator is already executing.");
-                for (; s && (s = 0, u[0] && (r = 0)), r;) try {
-                    if (n = 1, a && (i = 2 & u[0] ? a.return : u[0] ? a.throw || ((i = a.return) && i.call(a), 0) : a.next) && !(i = i.call(a, u[1])).done) return i;
-                    switch (a = 0, i && (u = [2 & u[0], i.value]), u[0]) {
+                for (; s && (s = 0, c[0] && (r = 0)), r;) try {
+                    if (n = 1, a && (i = 2 & c[0] ? a.return : c[0] ? a.throw || ((i = a.return) && i.call(a), 0) : a.next) && !(i = i.call(a, c[1])).done) return i;
+                    switch (a = 0, i && (c = [2 & c[0], i.value]), c[0]) {
                         case 0:
                         case 1:
-                            i = u;
+                            i = c;
                             break;
                         case 4:
                             return r.label++, {
-                                value: u[1],
+                                value: c[1],
                                 done: !1
                             };
                         case 5:
-                            r.label++, a = u[1], u = [0];
+                            r.label++, a = c[1], c = [0];
                             continue;
                         case 7:
-                            u = r.ops.pop(), r.trys.pop();
+                            c = r.ops.pop(), r.trys.pop();
                             continue;
                         default:
-                            if (!(i = (i = r.trys).length > 0 && i[i.length - 1]) && (6 === u[0] || 2 === u[0])) {
+                            if (!(i = (i = r.trys).length > 0 && i[i.length - 1]) && (6 === c[0] || 2 === c[0])) {
                                 r = 0;
                                 continue
                             }
-                            if (3 === u[0] && (!i || u[1] > i[0] && u[1] < i[3])) {
-                                r.label = u[1];
+                            if (3 === c[0] && (!i || c[1] > i[0] && c[1] < i[3])) {
+                                r.label = c[1];
                                 break
                             }
-                            if (6 === u[0] && r.label < i[1]) {
-                                r.label = i[1], i = u;
+                            if (6 === c[0] && r.label < i[1]) {
+                                r.label = i[1], i = c;
                                 break
                             }
                             if (i && r.label < i[2]) {
-                                r.label = i[2], r.ops.push(u);
+                                r.label = i[2], r.ops.push(c);
                                 break
                             }
                             i[2] && r.ops.pop(), r.trys.pop();
                             continue
                     }
-                    u = t.call(e, r)
+                    c = t.call(e, r)
                 } catch (e) {
-                    u = [6, e], a = 0
+                    c = [6, e], a = 0
                 } finally {
                     n = i = 0
                 }
-                if (5 & u[0]) throw u[1];
+                if (5 & c[0]) throw c[1];
                 return {
-                    value: u[0] ? u[1] : void 0,
+                    value: c[0] ? c[1] : void 0,
                     done: !0
                 }
             }
@@ -852,7 +867,7 @@
         }
     }
 
-    function u(e) {
+    function c(e) {
         var t;
         return null == (t = e) ? t : {
             createdAt: (0, n.exists)(t, "created_at") ? new Date(t.created_at) : void 0,
@@ -861,7 +876,7 @@
             policyLabelKey: (0, n.exists)(t, "policy_label_key") ? t.policy_label_key : void 0
         }
     }
-    var c = function(e) {
+    var u = function(e) {
             function t() {
                 return null !== e && e.apply(this, arguments) || this
             }
@@ -1028,7 +1043,7 @@
                             case 1:
                                 return r = s.sent(), [2, new n.JSONApiResponse(r, function(e) {
                                     return null == e ? e : {
-                                        items: (0, n.exists)(e, "items") ? e.items.map(u) : void 0
+                                        items: (0, n.exists)(e, "items") ? e.items.map(c) : void 0
                                     }
                                 })]
                         }
@@ -1049,8 +1064,9 @@
                 })
             }, t
         }(n.BaseAPI),
-        d = e.i(272593);
-    let p = new class {
+        d = n,
+        p = e.i(272593);
+    class f extends d.BaseAPI {
         async getRestriction(e, t, n) {
             return this.api.creatorTransparencyServiceGetRestriction({
                 contentId: e,
@@ -1075,13 +1091,26 @@
                 universeId: e
             }, t)
         }
-        constructor() {
-            (0, t._)(this, "api", void 0);
-            const e = (0, d.createClientConfiguration)("creator-transparency-service", "bedev2");
-            this.api = new c(e)
+        async createUniverseViolationAppeal(e, t, n) {
+            await this.request({
+                path: "/v1/universes/".concat(e, "/violations/").concat(encodeURIComponent(t), "/appeals"),
+                schemaPath: "/v1/universes/{universe_id}/violations/{violation_id}/appeals",
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: {
+                    message: n
+                }
+            })
         }
-    };
-    e.s(["default", 0, p], 28850)
+        constructor() {
+            const e = (0, p.createClientConfiguration)("creator-transparency-service", "bedev2");
+            super(e), (0, t._)(this, "api", void 0), this.api = new u(e)
+        }
+    }
+    let m = new f;
+    e.s(["default", 0, m], 28850)
 }, 66424, 992598, e => {
     "use strict";
     var t = e.i(813705),
@@ -1118,7 +1147,7 @@
         }
     }
 
-    function u(e) {
+    function c(e) {
         let {
             inquiryId: t,
             sessionToken: n
@@ -1129,7 +1158,7 @@
             sessionToken: n
         }
     }
-    e.s(["C", 0, i, "a", 0, u, "g", 0, function(e) {
+    e.s(["C", 0, i, "a", 0, c, "g", 0, function(e) {
         if (!(e instanceof i) || !s(e.body)) return null;
         let {
             details: t
@@ -1147,8 +1176,8 @@
         var t, n;
         return e && (void 0 !== e.units || void 0 !== e.attos) ? (null != (t = e.units) ? t : 0) + (null != (n = e.attos) ? n : 0) / 1e18 : null
     }, "w", 0, l], 992598);
-    var c = e.i(272593);
-    let d = new t.CreatorWalletsAPIApi((0, c.createClientConfiguration)("creator-wallets", "bedev2"));
+    var u = e.i(272593);
+    let d = new t.CreatorWalletsAPIApi((0, u.createClientConfiguration)("creator-wallets", "bedev2"));
 
     function p(e) {
         if (void 0 === e) return;
@@ -1176,7 +1205,7 @@
         startSanctionsScreening: () => l(d.v1SelfOnboardingSanctionsScreeningstartPost({
             startSanctionsScreeningRequest: {}
         })),
-        initializeSanctionsScreeningEmbedding: async () => u(await l(d.v1SelfOnboardingSanctionsScreeningEmbeddinginitializePost({
+        initializeSanctionsScreeningEmbedding: async () => c(await l(d.v1SelfOnboardingSanctionsScreeningEmbeddinginitializePost({
             initializeSanctionsScreeningEmbeddingRequest: {}
         }))),
         getWalletBalance(e, t) {
@@ -1310,7 +1339,7 @@
         s = new t.InvitationApi(i),
         o = new t.RoleApi(i),
         l = new t.UserApi(i),
-        u = new t.GroupUniversePayoutApi(i);
+        c = new t.GroupUniversePayoutApi(i);
     e.s(["default", 0, {
         organizationClient: {
             getOrganization: async e => r.v1OrganizationsGet({
@@ -1392,17 +1421,17 @@
             })
         },
         groupUniversePayoutClient: {
-            getUniversePayouts: async e => u.v1OrganizationsOrganizationIdPayoutsUniverseIdGet(e),
-            updateUniversePayouts: async e => u.v1OrganizationsOrganizationIdPayoutsUniverseIdPatch(e),
-            findUniversePayouts: async e => u.v1OrganizationsOrganizationIdPayoutsUniversesGet(e),
+            getUniversePayouts: async e => c.v1OrganizationsOrganizationIdPayoutsUniverseIdGet(e),
+            updateUniversePayouts: async e => c.v1OrganizationsOrganizationIdPayoutsUniverseIdPatch(e),
+            findUniversePayouts: async e => c.v1OrganizationsOrganizationIdPayoutsUniversesGet(e),
             getLatestOneTimePayoutForUsers: async (e, t) => {
                 let n = {
                     organizationId: e,
                     userIds: t.map(String)
                 };
-                return u.v1OrganizationsOrganizationIdPayoutsLatestGet(n)
+                return c.v1OrganizationsOrganizationIdPayoutsLatestGet(n)
             },
-            getSuggestedPayouts: async e => u.v1OrganizationsOrganizationIdPayoutsSuggestedGet({
+            getSuggestedPayouts: async e => c.v1OrganizationsOrganizationIdPayoutsSuggestedGet({
                 organizationId: e
             })
         }
@@ -1535,7 +1564,7 @@
                 a = n[e];
             return t.sort((e, t) => s(e.notificationType, t.notificationType, a))
         },
-        u = (0, n.createContext)({
+        c = (0, n.createContext)({
             notificationSettings: [],
             notificationsSettingsContextStored: !1,
             notificationSettingsFailedToLoad: !1,
@@ -1543,12 +1572,12 @@
             getNotificationSettings: () => {},
             setNotificationSettings: () => {}
         });
-    e.s(["CreatorNotificationsSettingsContext", 0, u, "default", 0, e => {
+    e.s(["CreatorNotificationsSettingsContext", 0, c, "default", 0, e => {
         let {
             children: r
         } = e, {
             user: s
-        } = (0, a.useAuthentication)(), [c, d] = (0, n.useState)([]), [p, f] = (0, n.useState)(!1), [m, g] = (0, n.useState)(!0), [h, y] = (0, n.useState)(!1), b = (0, n.useCallback)(async () => {
+        } = (0, a.useAuthentication)(), [u, d] = (0, n.useState)([]), [p, f] = (0, n.useState)(!1), [m, g] = (0, n.useState)(!0), [h, y] = (0, n.useState)(!1), b = (0, n.useCallback)(async () => {
             if (!p && (null == s ? void 0 : s.id) != null) try {
                 y(!1), g(!0);
                 let e = await i.creatorSettingsClient.getCreatorSettings(s.id.toString()),
@@ -1566,14 +1595,14 @@
                 g(!1)
             }
         }, [null == s ? void 0 : s.id, p]), w = (0, n.useMemo)(() => ({
-            notificationSettings: c,
+            notificationSettings: u,
             notificationsSettingsContextStored: p,
             notificationSettingsFailedToLoad: h,
             notificationSettingsContextLoading: m,
             getNotificationSettings: b,
             setNotificationSettings: d
-        }), [c, h, b, m, p]);
-        return (0, t.jsx)(u.Provider, {
+        }), [u, h, b, m, p]);
+        return (0, t.jsx)(c.Provider, {
             value: w,
             children: r
         })
@@ -1644,8 +1673,8 @@
         s = e.i(607204),
         o = e.i(581548),
         l = e.i(881670),
-        u = e.i(509049),
-        c = e.i(745873),
+        c = e.i(509049),
+        u = e.i(745873),
         d = e.i(748893),
         p = e.i(226519),
         f = e.i(976457),
@@ -1677,9 +1706,9 @@
                 onClose: r,
                 invitation: l
             } = e, {
-                translate: u
+                translate: c
             } = (0, i.useTranslation)(), {
-                organization: c
+                organization: u
             } = (0, A.default)(), {
                 classes: {
                     dialogTitle: y,
@@ -1700,28 +1729,28 @@
                     autoHide: !0,
                     onClose: x
                 })
-            }, [P, x]), [O, _] = (0, n.useState)(), [k, N] = (0, n.useState)(), [U, M] = (0, n.useState)(), [L, F] = (0, n.useState)(), D = (0, n.useCallback)(async () => {
+            }, [P, x]), [O, _] = (0, n.useState)(), [k, N] = (0, n.useState)(), [U, L] = (0, n.useState)(), [M, F] = (0, n.useState)(), D = (0, n.useCallback)(async () => {
                 if (null == l ? void 0 : l.senderUserId) try {
                     let e = await S.default.getUserById(Number.parseInt(l.senderUserId, 10));
-                    M(e.name), F(!1)
+                    L(e.name), F(!1)
                 } catch (e) {
                     F(!0)
                 }
             }, [l]), q = (0, n.useCallback)(async () => {
-                if ((null == c ? void 0 : c.id) && (null == c ? void 0 : c.groupId)) try {
-                    let e = await w.default.getGroupInfo(Number.parseInt(c.groupId, 10));
+                if ((null == u ? void 0 : u.id) && (null == u ? void 0 : u.groupId)) try {
+                    let e = await w.default.getGroupInfo(Number.parseInt(u.groupId, 10));
                     _(null == e ? void 0 : e.name)
                 } catch (e) {
-                    R(u("Error.GroupInformation"))
+                    R(c("Error.GroupInformation"))
                 }
-            }, [null == c ? void 0 : c.groupId, null == c ? void 0 : c.id, R, u]);
+            }, [null == u ? void 0 : u.groupId, null == u ? void 0 : u.id, R, c]);
             (0, n.useEffect)(() => {
                 D(), q()
             }, [q, D]);
             let B = (0, n.useCallback)(() => {
                     r(void 0)
                 }, [r]),
-                z = (0, n.useCallback)(async () => {
+                V = (0, n.useCallback)(async () => {
                     if ((null == l ? void 0 : l.organizationId) && (null == l ? void 0 : l.id)) {
                         N(!0);
                         try {
@@ -1729,11 +1758,11 @@
                                 status: o.InvitationStatusType.Declined
                             }), r(!1)
                         } catch (e) {
-                            R(u("Error.DecliningInvitation")), N(!1)
+                            R(c("Error.DecliningInvitation")), N(!1)
                         }
                     }
-                }, [l.id, l.organizationId, r, R, u]),
-                G = (0, n.useCallback)(async () => {
+                }, [l.id, l.organizationId, r, R, c]),
+                z = (0, n.useCallback)(async () => {
                     if ((null == l ? void 0 : l.organizationId) && (null == l ? void 0 : l.id)) {
                         N(!0);
                         try {
@@ -1741,10 +1770,10 @@
                                 status: o.InvitationStatusType.Accepted
                             }), r(!0)
                         } catch (e) {
-                            R(u("Error.AcceptingInvitation")), N(!1)
+                            R(c("Error.AcceptingInvitation")), N(!1)
                         }
                     }
-                }, [l.id, l.organizationId, r, R, u]);
+                }, [l.id, l.organizationId, r, R, c]);
             return (0, t.jsxs)(p.Dialog, {
                 maxWidth: "Medium",
                 open: a,
@@ -1759,15 +1788,15 @@
                             children: (0, t.jsx)(h.Typography, {
                                 variant: "h4",
                                 className: y,
-                                children: u("Label.JoinOrganization", {
-                                    organizationName: null != O ? O : u("Label.Group")
+                                children: c("Label.JoinOrganization", {
+                                    organizationName: null != O ? O : c("Label.Group")
                                 })
                             })
                         }), (0, t.jsx)(g.Grid, {
                             container: !0,
                             children: (0, t.jsx)(h.Typography, {
                                 variant: "body1",
-                                children: L ? u("Message.JoinOrganizationWithoutUsername") : u("Message.JoinOrganization", {
+                                children: M ? c("Message.JoinOrganizationWithoutUsername") : c("Message.JoinOrganization", {
                                     username: null != U ? U : ""
                                 })
                             })
@@ -1783,23 +1812,23 @@
                             size: "small",
                             onClick: B,
                             disabled: k,
-                            children: u("Action.NotNow")
+                            children: c("Action.NotNow")
                         }), (0, t.jsxs)(g.Grid, {
                             className: T,
                             children: [(0, t.jsx)(d.Button, {
                                 variant: "outlined",
                                 color: "primary",
                                 size: "small",
-                                onClick: z,
+                                onClick: V,
                                 disabled: k,
-                                children: u("Action.Decline")
+                                children: c("Action.Decline")
                             }), (0, t.jsx)(d.Button, {
                                 variant: "contained",
                                 color: "primaryBrand",
                                 size: "small",
-                                onClick: G,
+                                onClick: z,
                                 loading: k,
-                                children: u("Action.Accept")
+                                children: c("Action.Accept")
                             })]
                         })]
                     })
@@ -1827,8 +1856,8 @@
                 translate: l
             } = (0, i.useTranslation)(), {
                 classes: {
-                    dialogTitle: u,
-                    dialogContent: c,
+                    dialogTitle: c,
+                    dialogContent: u,
                     dialogActions: y
                 }
             } = T(), [b, w] = (0, n.useState)(), [E, A] = (0, n.useState)(), C = (0, n.useCallback)(async () => {
@@ -1850,14 +1879,14 @@
                 open: a,
                 onClose: r,
                 children: [(0, t.jsx)(m.DialogContent, {
-                    className: c,
+                    className: u,
                     children: (0, t.jsxs)(g.Grid, {
                         container: !0,
                         wrap: "wrap",
                         alignItems: "flex-start",
                         children: [(0, t.jsx)(h.Typography, {
                             variant: "h4",
-                            className: u,
+                            className: c,
                             children: l(o ? "Label.InvitationAccepted" : "Label.InvitationDeclined")
                         }), (0, t.jsx)(h.Typography, {
                             variant: "body1",
@@ -1895,26 +1924,26 @@
             children: i
         } = e, l = (0, a.useRouter)(), {
             user: d
-        } = (0, r.useAuthentication)(), p = (0, c.useCurrentGroup)(), {
+        } = (0, r.useAuthentication)(), p = (0, u.useCurrentGroup)(), {
             currentItemGroupId: f
-        } = (0, u.default)(), [m, g] = (0, n.useState)(), [h, y] = (0, n.useState)(), [b, w] = (0, n.useState)(!1), [S, E] = (0, n.useState)(!1), [A, C] = (0, n.useState)(), [T, O] = (0, n.useState)(!1), _ = null == d ? void 0 : d.id, k = (0, n.useMemo)(() => {
+        } = (0, c.default)(), [m, g] = (0, n.useState)(), [h, y] = (0, n.useState)(), [b, w] = (0, n.useState)(!1), [S, E] = (0, n.useState)(!1), [A, C] = (0, n.useState)(), [T, O] = (0, n.useState)(!1), _ = null == d ? void 0 : d.id, k = (0, n.useMemo)(() => {
             var e;
             return null != (e = null == p ? void 0 : p.id) ? e : f
-        }, [p, f]), N = l.query[x.InviteQueryKey], U = l.isReady, M = (0, n.useCallback)(() => {
+        }, [p, f]), N = l.query[x.InviteQueryKey], U = l.isReady, L = (0, n.useCallback)(() => {
             a.default.push("https://create.".concat("roblox.com", "/dashboard/creations"))
-        }, []), L = (0, n.useCallback)(async e => {
+        }, []), M = (0, n.useCallback)(async e => {
             if (!_) return void y(null);
             try {
                 let t = await s.default.userClient.getUserInvitationByOrganization(e, _.toString());
                 y(t)
             } catch (e) {
-                y(null), M()
+                y(null), L()
             }
-        }, [_, M]), F = (0, n.useCallback)(async () => {
+        }, [_, L]), F = (0, n.useCallback)(async () => {
             if (U) {
                 E(!0);
                 try {
-                    if ("string" == typeof N) return void await L(N);
+                    if ("string" == typeof N) return void await M(N);
                     if (!k) return void g(null);
                     if (y(null), k) {
                         let e = await s.default.organizationClient.getOrganization(k.toString());
@@ -1927,7 +1956,7 @@
                     E(!1)
                 }
             }
-        }, [k, L, N, U]), D = (0, n.useCallback)(() => {
+        }, [k, M, N, U]), D = (0, n.useCallback)(() => {
             w(!0), F()
         }, [F]), q = (0, n.useMemo)(() => ({
             organization: m,
@@ -1944,13 +1973,13 @@
                     children: [(0, t.jsx)(I, {
                         open: h.invitationStatusType === o.InvitationStatusType.Open && void 0 === A,
                         onClose: e => {
-                            !0 === e ? (C(!0), O(!0)) : !1 === e ? (C(!1), O(!0)) : (M(), y(null))
+                            !0 === e ? (C(!0), O(!0)) : !1 === e ? (C(!1), O(!0)) : (L(), y(null))
                         },
                         invitation: h
                     }), (0, t.jsx)(P, {
                         open: T,
                         onClose: () => {
-                            O(!1), !0 === A && D(), M()
+                            O(!1), !0 === A && D(), L()
                         },
                         invitation: h,
                         accepted: !0 === A
@@ -2196,10 +2225,10 @@
             children: i
         } = e, {
             pathname: r
-        } = (0, a.useRouter)(), [l, u] = (0, n.useState)(!0), c = (0, n.useCallback)(() => u(!1), []), d = s.some(e => r.startsWith(e)), p = (0, n.useMemo)(() => ({
+        } = (0, a.useRouter)(), [l, c] = (0, n.useState)(!0), u = (0, n.useCallback)(() => c(!1), []), d = s.some(e => r.startsWith(e)), p = (0, n.useMemo)(() => ({
             isPending: l && !d,
-            completeCheck: c
-        }), [l, d, c]);
+            completeCheck: u
+        }), [l, d, u]);
         return (0, t.jsx)(o.Provider, {
             value: p,
             children: i
@@ -2266,8 +2295,8 @@
         s = e.i(811683);
     let o = t.Locale.English,
         l = t.NativeName.English,
-        u = o === t.Locale.SimplifiedChinese ? s.default : r.default;
-    e.s(["defaultLocale", 0, o, "defaultMetadataJson", 0, u, "defaultNativeName", 0, l, "fallbackLocale", 0, void 0], 272749)
+        c = o === t.Locale.SimplifiedChinese ? s.default : r.default;
+    e.s(["defaultLocale", 0, o, "defaultMetadataJson", 0, c, "defaultNativeName", 0, l, "fallbackLocale", 0, void 0], 272749)
 }, 169525, e => {
     "use strict";
     var t = e.i(416340),
@@ -2275,13 +2304,13 @@
         a = e.i(723570),
         i = e => {
             var i, s, o;
-            let l, u, {
-                    present: c,
+            let l, c, {
+                    present: u,
                     children: d
                 } = e,
                 p = function(e) {
                     var n, i;
-                    let [s, o] = t.useState(), l = t.useRef(null), u = t.useRef(e), c = t.useRef("none"), [d, p] = (n = e ? "mounted" : "unmounted", i = {
+                    let [s, o] = t.useState(), l = t.useRef(null), c = t.useRef(e), u = t.useRef("none"), [d, p] = (n = e ? "mounted" : "unmounted", i = {
                         mounted: {
                             UNMOUNT: "unmounted",
                             ANIMATION_OUT: "unmountSuspended"
@@ -2299,14 +2328,14 @@
                     }, n));
                     return t.useEffect(() => {
                         let e = r(l.current);
-                        c.current = "mounted" === d ? e : "none"
+                        u.current = "mounted" === d ? e : "none"
                     }, [d]), (0, a.useLayoutEffect)(() => {
                         let t = l.current,
-                            n = u.current;
+                            n = c.current;
                         if (n !== e) {
-                            let a = c.current,
+                            let a = u.current,
                                 i = r(t);
-                            e ? p("MOUNT") : "none" === i || (null == t ? void 0 : t.display) === "none" ? p("UNMOUNT") : n && a !== i ? p("ANIMATION_OUT") : p("UNMOUNT"), u.current = e
+                            e ? p("MOUNT") : "none" === i || (null == t ? void 0 : t.display) === "none" ? p("UNMOUNT") : n && a !== i ? p("ANIMATION_OUT") : p("UNMOUNT"), c.current = e
                         }
                     }, [e, p]), (0, a.useLayoutEffect)(() => {
                         if (s) {
@@ -2314,7 +2343,7 @@
                             let t, n = null != (e = s.ownerDocument.defaultView) ? e : window,
                                 a = e => {
                                     let a = r(l.current).includes(CSS.escape(e.animationName));
-                                    if (e.target === s && a && (p("ANIMATION_END"), !u.current)) {
+                                    if (e.target === s && a && (p("ANIMATION_END"), !c.current)) {
                                         let e = s.style.animationFillMode;
                                         s.style.animationFillMode = "forwards", t = n.setTimeout(() => {
                                             "forwards" === s.style.animationFillMode && (s.style.animationFillMode = e)
@@ -2322,7 +2351,7 @@
                                     }
                                 },
                                 i = e => {
-                                    e.target === s && (c.current = r(l.current))
+                                    e.target === s && (u.current = r(l.current))
                                 };
                             return s.addEventListener("animationstart", i), s.addEventListener("animationcancel", a), s.addEventListener("animationend", a), () => {
                                 n.clearTimeout(t), s.removeEventListener("animationstart", i), s.removeEventListener("animationcancel", a), s.removeEventListener("animationend", a)
@@ -2335,11 +2364,11 @@
                             l.current = e ? getComputedStyle(e) : null, o(e)
                         }, [])
                     }
-                }(c),
+                }(u),
                 f = "function" == typeof d ? d({
                     present: p.isPresent
                 }) : t.Children.only(d),
-                m = (0, n.useComposedRefs)(p.ref, (u = (l = null == (s = Object.getOwnPropertyDescriptor((i = f).props, "ref")) ? void 0 : s.get) && "isReactWarning" in l && l.isReactWarning) ? i.ref : (u = (l = null == (o = Object.getOwnPropertyDescriptor(i, "ref")) ? void 0 : o.get) && "isReactWarning" in l && l.isReactWarning) ? i.props.ref : i.props.ref || i.ref);
+                m = (0, n.useComposedRefs)(p.ref, (c = (l = null == (s = Object.getOwnPropertyDescriptor((i = f).props, "ref")) ? void 0 : s.get) && "isReactWarning" in l && l.isReactWarning) ? i.ref : (c = (l = null == (o = Object.getOwnPropertyDescriptor(i, "ref")) ? void 0 : o.get) && "isReactWarning" in l && l.isReactWarning) ? i.props.ref : i.props.ref || i.ref);
             return "function" == typeof d || p.isPresent ? t.cloneElement(f, {
                 ref: m
             }) : null
@@ -2416,55 +2445,55 @@
 
         function o(o) {
             return function(l) {
-                var u = [o, l];
+                var c = [o, l];
                 if (n) throw TypeError("Generator is already executing.");
-                for (; s && (s = 0, u[0] && (r = 0)), r;) try {
-                    if (n = 1, a && (i = 2 & u[0] ? a.return : u[0] ? a.throw || ((i = a.return) && i.call(a), 0) : a.next) && !(i = i.call(a, u[1])).done) return i;
-                    switch (a = 0, i && (u = [2 & u[0], i.value]), u[0]) {
+                for (; s && (s = 0, c[0] && (r = 0)), r;) try {
+                    if (n = 1, a && (i = 2 & c[0] ? a.return : c[0] ? a.throw || ((i = a.return) && i.call(a), 0) : a.next) && !(i = i.call(a, c[1])).done) return i;
+                    switch (a = 0, i && (c = [2 & c[0], i.value]), c[0]) {
                         case 0:
                         case 1:
-                            i = u;
+                            i = c;
                             break;
                         case 4:
                             return r.label++, {
-                                value: u[1],
+                                value: c[1],
                                 done: !1
                             };
                         case 5:
-                            r.label++, a = u[1], u = [0];
+                            r.label++, a = c[1], c = [0];
                             continue;
                         case 7:
-                            u = r.ops.pop(), r.trys.pop();
+                            c = r.ops.pop(), r.trys.pop();
                             continue;
                         default:
-                            if (!(i = (i = r.trys).length > 0 && i[i.length - 1]) && (6 === u[0] || 2 === u[0])) {
+                            if (!(i = (i = r.trys).length > 0 && i[i.length - 1]) && (6 === c[0] || 2 === c[0])) {
                                 r = 0;
                                 continue
                             }
-                            if (3 === u[0] && (!i || u[1] > i[0] && u[1] < i[3])) {
-                                r.label = u[1];
+                            if (3 === c[0] && (!i || c[1] > i[0] && c[1] < i[3])) {
+                                r.label = c[1];
                                 break
                             }
-                            if (6 === u[0] && r.label < i[1]) {
-                                r.label = i[1], i = u;
+                            if (6 === c[0] && r.label < i[1]) {
+                                r.label = i[1], i = c;
                                 break
                             }
                             if (i && r.label < i[2]) {
-                                r.label = i[2], r.ops.push(u);
+                                r.label = i[2], r.ops.push(c);
                                 break
                             }
                             i[2] && r.ops.pop(), r.trys.pop();
                             continue
                     }
-                    u = t.call(e, r)
+                    c = t.call(e, r)
                 } catch (e) {
-                    u = [6, e], a = 0
+                    c = [6, e], a = 0
                 } finally {
                     n = i = 0
                 }
-                if (5 & u[0]) throw u[1];
+                if (5 & c[0]) throw c[1];
                 return {
-                    value: u[0] ? u[1] : void 0,
+                    value: c[0] ? c[1] : void 0,
                     done: !0
                 }
             }
@@ -2507,13 +2536,13 @@
         }
     }
 
-    function u(e) {
+    function c(e) {
         if (void 0 !== e) return null === e ? null : {
             acceptances: e.acceptances.map(l)
         }
     }
 
-    function c(e) {
+    function u(e) {
         var n;
         return null == (n = e) ? n : {
             errorCode: (0, t.exists)(n, "errorCode") ? n.errorCode : void 0,
@@ -2524,7 +2553,7 @@
 
     function d(e, n) {
         return null == e ? e : {
-            results: (0, t.exists)(e, "results") ? null === e.results ? null : e.results.map(c) : void 0
+            results: (0, t.exists)(e, "results") ? null === e.results ? null : e.results.map(u) : void 0
         }
     }
     var p = function(e) {
@@ -2621,7 +2650,7 @@
                                     method: "POST",
                                     headers: i,
                                     query: a,
-                                    body: u(e.insertAcceptancesRequest)
+                                    body: c(e.insertAcceptancesRequest)
                                 }, n)];
                             case 1:
                                 return s = r.sent(), [2, new t.JSONApiResponse(s, function(e) {
@@ -2656,7 +2685,7 @@
                                     method: "POST",
                                     headers: i,
                                     query: a,
-                                    body: u(e.insertAcceptancesRequest)
+                                    body: c(e.insertAcceptancesRequest)
                                 }, n)];
                             case 1:
                                 return s = r.sent(), [2, new t.JSONApiResponse(s, function(e) {
@@ -2764,13 +2793,13 @@
             Success: "icon-filled-circle-check",
             Error: "icon-filled-circle-x"
         },
-        u = {
+        c = {
             Info: "var(--color-system-emphasis)",
             Warning: "var(--color-system-warning)",
             Success: "var(--color-extended-green-700, var(--color-system-success))",
             Error: "var(--color-action-alert-foreground)"
         },
-        c = {
+        u = {
             Info: "stroke-emphasis",
             Warning: "stroke-system-warning",
             Success: "stroke-emphasis",
@@ -2853,7 +2882,7 @@
                 className: x,
                 style: R,
                 ...O
-            } = e, _ = (0, a.default)("foundation-web-alert-message-"), k = !!h, N = !!S, U = !!(I && P), M = "Feedback" === m && (k || N || U), L = "Warning" === g || "Error" === g ? "alert" : "status", F = null;
+            } = e, _ = (0, a.default)("foundation-web-alert-message-"), k = !!h, N = !!S, U = !!(I && P), L = "Feedback" === m && (k || N || U), M = "Warning" === g || "Error" === g ? "alert" : "status", F = null;
             k && (F = N ? o.default.createElement(p, {
                 label: h || "",
                 href: y,
@@ -2875,9 +2904,9 @@
             }) : null;
             return o.default.createElement("div", {
                 ref: n,
-                role: M ? "region" : L,
-                "aria-labelledby": M ? _ : void 0,
-                className: (0, s.default)("foundation-web-alert relative width-full stroke-standard", "System" === m ? "[border-left-width:0] [border-right-width:0]" : "radius-medium", c[g], x),
+                role: L ? "region" : M,
+                "aria-labelledby": L ? _ : void 0,
+                className: (0, s.default)("foundation-web-alert relative width-full stroke-standard", "System" === m ? "[border-left-width:0] [border-right-width:0]" : "radius-medium", u[g], x),
                 ...O
             }, o.default.createElement("div", {
                 "aria-hidden": "true",
@@ -2905,13 +2934,13 @@
                 size: "Medium",
                 className: "relative",
                 style: {
-                    color: u[g]
+                    color: c[g]
                 }
             }))), o.default.createElement("div", {
                 className: (0, s.default)("flex grow-1 basis-0 min-width-0 items-start gap-x-medium gap-y-small", N ? "flex-col" : "wrap")
             }, o.default.createElement("div", {
-                id: M ? _ : void 0,
-                role: M ? L : void 0,
+                id: L ? _ : void 0,
+                role: L ? M : void 0,
                 className: (0, s.default)("flex items-center padding-top-[var(--size-150)] text-body-medium text-wrap content-emphasis [overflow-wrap:anywhere]", N ? "width-full min-width-0" : "grow-1 basis-0 min-width-[min(200px,100%)]")
             }, i), (F || D) && o.default.createElement("div", {
                 className: (0, s.default)("flex items-center gap-small wrap shrink-0", !N && "padding-y-[var(--size-150)]")
@@ -2935,8 +2964,8 @@
         s = e.i(608652),
         o = e.i(174617),
         l = e.i(199786),
-        u = e.i(300792),
-        c = e.i(692166),
+        c = e.i(300792),
+        u = e.i(692166),
         d = e.i(169525),
         p = e.i(600317),
         f = e.i(221628),
@@ -2952,15 +2981,15 @@
             defaultChecked: r,
             disabled: s,
             form: o,
-            name: u,
-            onCheckedChange: c,
+            name: c,
+            onCheckedChange: u,
             required: d,
             value: p = "on",
             internal_do_not_use_render: g
         } = e, [h, b] = (0, l.useControllableState)({
             prop: n,
             defaultProp: null != r && r,
-            onChange: c,
+            onChange: u,
             caller: m
         }), [w, S] = i.useState(null), [E, A] = i.useState(null), C = i.useRef(!1), I = !w || !!o || !!w.closest("form"), T = {
             checked: h,
@@ -2968,7 +2997,7 @@
             setChecked: b,
             control: w,
             setControl: S,
-            name: u,
+            name: c,
             form: o,
             value: p,
             hasConsumerStoppedPropagationRef: C,
@@ -2992,8 +3021,8 @@
                 onClick: s,
                 ...l
             } = e, {
-                control: u,
-                value: c,
+                control: c,
+                value: u,
                 disabled: d,
                 checked: m,
                 required: g,
@@ -3004,12 +3033,12 @@
                 bubbleInput: A
             } = b(S, n), C = (0, r.useComposedRefs)(t, h), I = i.useRef(m);
             return i.useEffect(() => {
-                let e = null == u ? void 0 : u.form;
+                let e = null == c ? void 0 : c.form;
                 if (e) {
                     let t = () => y(I.current);
                     return e.addEventListener("reset", t), () => e.removeEventListener("reset", t)
                 }
-            }, [u, y]), (0, f.jsx)(p.Primitive.button, {
+            }, [c, y]), (0, f.jsx)(p.Primitive.button, {
                 type: "button",
                 role: "checkbox",
                 "aria-checked": x(m) ? "mixed" : m,
@@ -3017,7 +3046,7 @@
                 "data-state": R(m),
                 "data-disabled": d ? "" : void 0,
                 disabled: d,
-                value: c,
+                value: u,
                 ...l,
                 ref: C,
                 onKeyDown: (0, o.composeEventHandlers)(a, e => {
@@ -3038,8 +3067,8 @@
             required: s,
             disabled: o,
             value: l,
-            onCheckedChange: u,
-            form: c,
+            onCheckedChange: c,
+            form: u,
             ...d
         } = e;
         return (0, f.jsx)(w, {
@@ -3048,9 +3077,9 @@
             defaultChecked: r,
             disabled: o,
             required: s,
-            onCheckedChange: u,
+            onCheckedChange: c,
             name: a,
-            form: c,
+            form: u,
             value: l,
             internal_do_not_use_render: e => {
                 let {
@@ -3108,7 +3137,7 @@
                 form: w,
                 bubbleInput: S,
                 setBubbleInput: E
-            } = b(T, n), A = (0, r.useComposedRefs)(t, E), C = (0, u.usePrevious)(l), I = (0, c.useSize)(s);
+            } = b(T, n), A = (0, r.useComposedRefs)(t, E), C = (0, c.usePrevious)(l), I = (0, u.useSize)(s);
             i.useEffect(() => {
                 if (!S) return;
                 let e = Object.getOwnPropertyDescriptor(window.HTMLInputElement.prototype, "checked").set,
@@ -3183,8 +3212,8 @@
             className: s,
             isChecked: o,
             isDisabled: l,
-            size: u,
-            hint: c,
+            size: c,
+            hint: u,
             placement: d,
             onCheckedChange: p,
             id: f,
@@ -3193,17 +3222,17 @@
             htmlFor: h,
             className: (0, a.default)("flex flex-col grow-1 gap-xsmall", !l && "cursor-pointer")
         }, i.default.createElement("span", {
-            className: (0, a.default)(k[u], N[u], "content-emphasis")
-        }, r), c && i.default.createElement("span", {
+            className: (0, a.default)(k[c], N[c], "content-emphasis")
+        }, r), u && i.default.createElement("span", {
             className: "text-body-medium content-default"
-        }, c));
+        }, u));
         return i.default.createElement("div", {
             className: (0, a.default)("foundation-web-checkbox flex gap-medium", l && "opacity-[0.5]", !l && "cursor-pointer", s)
         }, "End" === d && y, i.default.createElement("div", {
-            className: (0, a.default)(_[u])
+            className: (0, a.default)(_[c])
         }, i.default.createElement(A, {
             "data-slot": "checkbox",
-            className: (0, a.default)(O[u], t.interactable, !l && "cursor-pointer", "flex items-center justify-center radius-small padding-none content-default", "data-[state=unchecked]:bg-none data-[state=unchecked]:stroke-standard data-[state=unchecked]:stroke-contrast-alpha", "data-[state=indeterminate]:bg-system-contrast data-[state=indeterminate]:stroke-none", "data-[state=checked]:bg-system-contrast data-[state=checked]:stroke-none"),
+            className: (0, a.default)(O[c], t.interactable, !l && "cursor-pointer", "flex items-center justify-center radius-small padding-none content-default", "data-[state=unchecked]:bg-none data-[state=unchecked]:stroke-standard data-[state=unchecked]:stroke-contrast-alpha", "data-[state=indeterminate]:bg-system-contrast data-[state=indeterminate]:stroke-none", "data-[state=checked]:bg-system-contrast data-[state=checked]:stroke-none"),
             id: h,
             checked: o,
             disabled: l,
@@ -3212,7 +3241,7 @@
             ...m
         }, i.default.createElement(t.StateLayer, null), i.default.createElement(I, {
             "data-slot": "checkbox-indicator",
-            className: (0, a.default)(O[u], "content-[var(--inverse-content-emphasis)] icon", "data-[state=indeterminate]:icon-filled-minus", "data-[state=checked]:icon-filled-check")
+            className: (0, a.default)(O[c], "content-[var(--inverse-content-emphasis)] icon", "data-[state=indeterminate]:icon-filled-minus", "data-[state=checked]:icon-filled-check")
         }))), "Start" === d && y)
     }], 904451)
 }, 607895, e => {
@@ -3232,7 +3261,7 @@
             Inverse: "content-inverse-default"
         },
         o = (0, n.forwardRef)((e, o) => {
-            var l, u, c;
+            var l, c, u;
             let {
                 children: d,
                 className: p,
@@ -3243,7 +3272,7 @@
                 isExternal: y,
                 asChild: b,
                 ...w
-            } = e, S = (u = null != (l = w.as) ? l : "a", c = "button" === w.as ? void 0 : w.target, void 0 !== y ? y : "button" !== u && void 0 !== c && !i.has(c)), E = (0, t.default)("foundation-web-link", "button" === w.as && "bg-none stroke-none padding-none appearance-none [text-align:inherit]", ("Standalone" === g || S) && "inline-flex items-center gap-xsmall", void 0 !== f && r[f], s[m], "always" === h ? "underline" : "no-underline", "hover" === h && "hover:underline", "motion-safe:transition-opacity", "hover:cursor-pointer hover:[opacity:0.8]", "radius-xsmall focus-visible:[outline-style:solid] focus-visible:[outline-width:var(--stroke-standard)] focus-visible:[outline-color:var(--color-system-emphasis)]", p), A = S ? n.default.createElement("span", {
+            } = e, S = (c = null != (l = w.as) ? l : "a", u = "button" === w.as ? void 0 : w.target, void 0 !== y ? y : "button" !== c && void 0 !== u && !i.has(u)), E = (0, t.default)("foundation-web-link", "button" === w.as && "bg-none stroke-none padding-none appearance-none [text-align:inherit]", ("Standalone" === g || S) && "inline-flex items-center gap-xsmall", void 0 !== f && r[f], s[m], "always" === h ? "underline" : "no-underline", "hover" === h && "hover:underline", "motion-safe:transition-opacity", "hover:cursor-pointer hover:[opacity:0.8]", "radius-xsmall focus-visible:[outline-style:solid] focus-visible:[outline-width:var(--stroke-standard)] focus-visible:[outline-color:var(--color-system-emphasis)]", p), A = S ? n.default.createElement("span", {
                 "aria-hidden": !0,
                 "data-testid": "foundation-web-icon",
                 className: (0, t.default)("grow-0 shrink-0 basis-auto icon size-[1em]", "icon-regular-arrow-up-right-from-square")
@@ -3294,11 +3323,11 @@
                 variant: s = "Determinate",
                 value: o = 0,
                 minValue: l,
-                maxValue: u,
-                valuesLocation: c = "None",
+                maxValue: c,
+                valuesLocation: u = "None",
                 ariaLabel: d,
                 ...p
-            } = e, f = "Determinate" === s, m = Math.min(100, Math.max(0, o)), g = f && void 0 !== l && "None" !== c, h = f && void 0 !== u && "None" !== c, y = "Sides" === c, b = n.default.createElement("div", {
+            } = e, f = "Determinate" === s, m = Math.min(100, Math.max(0, o)), g = f && void 0 !== l && "None" !== u, h = f && void 0 !== c && "None" !== u, y = "Sides" === u, b = n.default.createElement("div", {
                 className: (0, t.default)("relative height-100 radius-circle bg-shift-200", y ? "grow-1 shrink-1 min-width-0" : "block width-full"),
                 style: y ? {
                     flexBasis: 0
@@ -3317,7 +3346,7 @@
             }, l), S = h && n.default.createElement("span", {
                 className: (0, t.default)("content-emphasis flex-shrink-0", a),
                 "aria-hidden": "true"
-            }, u), E = (g || h) && n.default.createElement("div", {
+            }, c), E = (g || h) && n.default.createElement("div", {
                 className: "flex justify-between width-full gap-xsmall"
             }, g ? w : n.default.createElement("span", null), h ? S : n.default.createElement("span", null));
             return n.default.createElement("div", {
@@ -3333,7 +3362,7 @@
                 className: "flex items-center gap-small width-full"
             }, w, b, S) : n.default.createElement("div", {
                 className: "flex flex-col gap-small width-full"
-            }, "Top" === c && E, b, "Bottom" === c && E))
+            }, "Top" === u && E, b, "Bottom" === u && E))
         });
     i.displayName = "ProgressBar", e.s(["ProgressBar", 0, i])
 }, 270384, e => {
@@ -3347,10 +3376,10 @@
         o = e.i(396249),
         l = e.i(121880);
 
-    function u(e) {
+    function c(e) {
         return (0, t.g)("MuiDialogContentText", e)
     }(0, r.g)("MuiDialogContentText", ["root"]);
-    let c = ["children", "className"],
+    let u = ["children", "className"],
         d = (0, i.s)(o.T, {
             shouldForwardProp: e => (0, i.r)(e) || "classes" === e,
             name: "MuiDialogContentText",
@@ -3365,13 +3394,13 @@
                 {
                     className: o
                 } = r,
-                p = (0, t._)(r, c),
+                p = (0, t._)(r, u),
                 f = (e => {
                     let {
                         classes: t
                     } = e, a = (0, i.a)({
                         root: ["root"]
-                    }, u, t);
+                    }, c, t);
                     return (0, n._)({}, t, a)
                 })(p);
             return (0, s.jsx)(d, (0, n._)({
@@ -3414,8 +3443,8 @@
                 props: {},
                 children: void 0
             }),
-            u = l[0],
-            c = l[1],
+            c = l[0],
+            u = l[1],
             d = (0, n.useState)(!1),
             p = d[0],
             f = d[1],
@@ -3426,11 +3455,11 @@
                 f(!1)
             }, [f]),
             h = (0, n.useCallback)(function(e, t) {
-                void 0 === t && (t = {}), c({
+                void 0 === t && (t = {}), u({
                     props: t,
                     children: e
                 })
-            }, [c]),
+            }, [u]),
             y = (0, n.useMemo)(function() {
                 return {
                     ref: o,
@@ -3441,13 +3470,13 @@
             }, [g, h, m]);
         return n.default.createElement(n.default.Fragment, null, n.default.createElement(i.Provider, {
             value: y
-        }, r), n.default.createElement(a.default, (0, t._)({}, u.props, s, {
-            "aria-labelledby": u.props.id,
+        }, r), n.default.createElement(a.default, (0, t._)({}, c.props, s, {
+            "aria-labelledby": c.props.id,
             "aria-describedby": "dialog-content-text-describe-id",
             open: p,
             onClose: g,
             ref: o
-        }), u.children))
+        }), c.children))
     }, "useDialog", 0, function() {
         var e = (0, n.useContext)(i);
         return {
@@ -3473,9 +3502,9 @@
         var o = e.id;
         e.variant;
         var l = e.title,
-            u = e.color,
-            c = e.loading,
-            d = void 0 !== c && c,
+            c = e.color,
+            u = e.loading,
+            d = void 0 !== u && u,
             p = e.content,
             f = e.confirmText,
             m = e.cancelText,
@@ -3497,7 +3526,7 @@
             variant: "contained",
             loading: d,
             "aria-label": f,
-            color: void 0 === u ? "primaryBrand" : u,
+            color: void 0 === c ? "primaryBrand" : c,
             onClick: h
         }, f)))
     }], 458442)
@@ -3549,26 +3578,26 @@
             open: i
         }, l] = (0, r.useState)({
             open: !1
-        }), u = (0, r.useCallback)(e => {
+        }), c = (0, r.useCallback)(e => {
             l({
                 request: e,
                 open: !0
             })
-        }, []), c = (0, r.useCallback)(() => {
+        }, []), u = (0, r.useCallback)(() => {
             l(e => ({
                 ...e,
                 open: !1
             }))
         }, []), d = (0, r.useMemo)(() => ({
-            showFeatureRestriction: u,
-            closeFeatureRestriction: c
-        }), [u, c]);
+            showFeatureRestriction: c,
+            closeFeatureRestriction: u
+        }), [c, u]);
         return (0, s.jsxs)(o.Provider, {
             value: d,
             children: [n, a && (0, s.jsx)(t, {
                 request: a,
                 open: i,
-                onDismiss: c
+                onDismiss: u
             })]
         })
     }, "createUniversalFeatureRestrictionsApi", 0, function(e) {
@@ -3611,11 +3640,11 @@
     }, "infiniteQueryBehavior", 0, function(e) {
         return {
             onFetch: (i, r) => {
-                var s, o, l, u, c;
+                var s, o, l, c, u;
                 let d = i.options,
                     p = null == (l = i.fetchOptions) || null == (o = l.meta) || null == (s = o.fetchMore) ? void 0 : s.direction,
-                    f = (null == (u = i.state.data) ? void 0 : u.pages) || [],
-                    m = (null == (c = i.state.data) ? void 0 : c.pageParams) || [],
+                    f = (null == (c = i.state.data) ? void 0 : c.pages) || [],
+                    m = (null == (u = i.state.data) ? void 0 : u.pageParams) || [],
                     g = {
                         pages: [],
                         pageParams: []
@@ -3640,14 +3669,14 @@
                                             r = !0
                                         }), i.signal)
                                     }), o),
-                                    u = await s(l),
+                                    c = await s(l),
                                     {
-                                        maxPages: c
+                                        maxPages: u
                                     } = i.options,
                                     d = a ? t.addToStart : t.addToEnd;
                                 return {
-                                    pages: d(e.pages, u, c),
-                                    pageParams: d(e.pageParams, n, c)
+                                    pages: d(e.pages, c, u),
+                                    pageParams: d(e.pageParams, n, u)
                                 }
                             };
                         if (p && f.length) {
@@ -3683,7 +3712,7 @@
     }])
 }, 387125, e => {
     "use strict";
-    var t, n, a, i, r, s, o, l, u, c, d, p, f = e.i(711300),
+    var t, n, a, i, r, s, o, l, c, u, d, p, f = e.i(711300),
         m = e.i(634203),
         g = e.i(35877),
         h = e.i(747304);
@@ -3904,9 +3933,9 @@
     var x = e.i(549772),
         R = e.i(841246),
         O = e.i(117437),
-        _ = (r = new WeakMap, s = new WeakMap, o = new WeakMap, l = new WeakMap, u = new WeakMap, c = new WeakMap, d = new WeakMap, p = new WeakMap, class {
+        _ = (r = new WeakMap, s = new WeakMap, o = new WeakMap, l = new WeakMap, c = new WeakMap, u = new WeakMap, d = new WeakMap, p = new WeakMap, class {
             mount() {
-                y(this, c).value++, 1 === (0, f._)(this, c) && ((0, g._)(this, d, x.focusManager.subscribe(async e => {
+                y(this, u).value++, 1 === (0, f._)(this, u) && ((0, g._)(this, d, x.focusManager.subscribe(async e => {
                     e && (await this.resumePausedMutations(), (0, f._)(this, r).onFocus())
                 })), (0, g._)(this, p, R.onlineManager.subscribe(async e => {
                     e && (await this.resumePausedMutations(), (0, f._)(this, r).onOnline())
@@ -3914,7 +3943,7 @@
             }
             unmount() {
                 var e, t;
-                y(this, c).value--, 0 === (0, f._)(this, c) && (null == (e = (0, f._)(this, d)) || e.call(this), (0, g._)(this, d, void 0), null == (t = (0, f._)(this, p)) || t.call(this), (0, g._)(this, p, void 0))
+                y(this, u).value--, 0 === (0, f._)(this, u) && (null == (e = (0, f._)(this, d)) || e.call(this), (0, g._)(this, d, void 0), null == (t = (0, f._)(this, p)) || t.call(this), (0, g._)(this, p, void 0))
             }
             isFetching(e) {
                 return (0, f._)(this, r).findAll({
@@ -4073,13 +4102,13 @@
                 }), n
             }
             setMutationDefaults(e, t) {
-                (0, f._)(this, u).set((0, b.hashKey)(e), {
+                (0, f._)(this, c).set((0, b.hashKey)(e), {
                     mutationKey: e,
                     defaultOptions: t
                 })
             }
             getMutationDefaults(e) {
-                let t = [...(0, f._)(this, u).values()],
+                let t = [...(0, f._)(this, c).values()],
                     n = {};
                 return t.forEach(t => {
                     (0, b.partialMatchKey)(e, t.mutationKey) && Object.assign(n, t.defaultOptions)
@@ -4119,10 +4148,10 @@
                 }), (0, m._)(this, l, {
                     writable: !0,
                     value: void 0
-                }), (0, m._)(this, u, {
+                }), (0, m._)(this, c, {
                     writable: !0,
                     value: void 0
-                }), (0, m._)(this, c, {
+                }), (0, m._)(this, u, {
                     writable: !0,
                     value: void 0
                 }), (0, m._)(this, d, {
@@ -4131,7 +4160,7 @@
                 }), (0, m._)(this, p, {
                     writable: !0,
                     value: void 0
-                }), (0, g._)(this, r, e.queryCache || new A), (0, g._)(this, s, e.mutationCache || new T), (0, g._)(this, o, e.defaultOptions || {}), (0, g._)(this, l, new Map), (0, g._)(this, u, new Map), (0, g._)(this, c, 0)
+                }), (0, g._)(this, r, e.queryCache || new A), (0, g._)(this, s, e.mutationCache || new T), (0, g._)(this, o, e.defaultOptions || {}), (0, g._)(this, l, new Map), (0, g._)(this, c, new Map), (0, g._)(this, u, 0)
             }
         });
     e.s(["QueryClient", 0, _], 387125)
@@ -4162,7 +4191,7 @@
             await e(), await (null == t ? void 0 : t(...a))
         }
     }
-    let u = {
+    let c = {
         all: ["creatorWallets"],
         onboardingState: e => ["creatorWallets", "onboardingState", null != e ? e : "self"],
         onboardingRequirements: () => ["creatorWallets", "onboardingRequirements", "self"],
@@ -4191,7 +4220,7 @@
             ...e,
             mutationFn: e => a.acceptOnboardingTerms(e),
             onSuccess: l(() => i.invalidateQueries({
-                queryKey: u.onboardingState()
+                queryKey: c.onboardingState()
             }), null == e ? void 0 : e.onSuccess)
         })
     }, "b", 0, function(e, a) {
@@ -4202,14 +4231,14 @@
             ...a,
             mutationFn: e => i.archiveBeneficiary(e, s),
             onSuccess: l(() => r.invalidateQueries({
-                queryKey: u.beneficiaries(s)
+                queryKey: c.beneficiaries(s)
             }), null == a ? void 0 : a.onSuccess)
         })
-    }, "c", 0, u, "d", 0, function(e, t) {
+    }, "c", 0, c, "d", 0, function(e, t) {
         let n = o(),
             i = null == e ? void 0 : e.groupId;
         return (0, a.useQuery)({
-            queryKey: u.beneficiaries(i),
+            queryKey: c.beneficiaries(i),
             queryFn: e => {
                 let {
                     signal: t
@@ -4227,7 +4256,7 @@
             ...e,
             mutationFn: () => a.deleteOnboardingDraft(),
             onSuccess: l(() => i.invalidateQueries({
-                queryKey: u.onboardingState()
+                queryKey: c.onboardingState()
             }), null == e ? void 0 : e.onSuccess)
         })
     }, "f", 0, function(e, n) {
@@ -4259,13 +4288,13 @@
             ...a,
             mutationFn: e => i.initiateWithdrawal(e, s),
             onSuccess: l(() => r.invalidateQueries({
-                queryKey: u.walletBalance(s)
+                queryKey: c.walletBalance(s)
             }), null == a ? void 0 : a.onSuccess)
         })
     }, "j", 0, function(e) {
         let t = o();
         return (0, a.useQuery)({
-            queryKey: u.onboardingRequirements(),
+            queryKey: c.onboardingRequirements(),
             queryFn: e => {
                 let {
                     signal: n
@@ -4280,7 +4309,7 @@
         let n = o(),
             i = null == e ? void 0 : e.groupId;
         return (0, a.useQuery)({
-            queryKey: u.onboardingState(i),
+            queryKey: c.onboardingState(i),
             queryFn: e => {
                 let {
                     signal: t
@@ -4299,7 +4328,7 @@
             ...a,
             mutationFn: e => i.saveBeneficiary(e, s),
             onSuccess: l(() => r.invalidateQueries({
-                queryKey: u.beneficiaries(s)
+                queryKey: c.beneficiaries(s)
             }), null == a ? void 0 : a.onSuccess)
         })
     }, "m", 0, function(e) {
@@ -4309,14 +4338,14 @@
             ...e,
             mutationFn: e => a.selectOnboardingAccountType(e),
             onSuccess: l(() => i.invalidateQueries({
-                queryKey: u.onboardingState()
+                queryKey: c.onboardingState()
             }), null == e ? void 0 : e.onSuccess)
         })
     }, "n", 0, function(e, t) {
         let n = o(),
             i = null == e ? void 0 : e.groupId;
         return (0, a.useQuery)({
-            queryKey: u.walletBalance(i),
+            queryKey: c.walletBalance(i),
             queryFn: e => {
                 let {
                     signal: t
@@ -4339,7 +4368,7 @@
     }, "q", 0, function(e) {
         let t = o();
         return (0, a.useQuery)({
-            queryKey: u.sanctionsScreening(),
+            queryKey: c.sanctionsScreening(),
             queryFn: e => {
                 let {
                     signal: n
@@ -4357,9 +4386,9 @@
             ...e,
             mutationFn: () => a.startSanctionsScreening(),
             onSuccess: l(() => Promise.all([i.invalidateQueries({
-                queryKey: u.sanctionsScreening()
+                queryKey: c.sanctionsScreening()
             }), i.invalidateQueries({
-                queryKey: u.onboardingRequirements()
+                queryKey: c.onboardingRequirements()
             })]), null == e ? void 0 : e.onSuccess)
         })
     }])
@@ -4395,5 +4424,5 @@
     }])
 }]);
 
-//# debugId=abcee41f-c0e2-7a0a-c895-41ca8b2b7b9a
-//# sourceMappingURL=0vy_pxvw48zsz.js.map
+//# debugId=8d76c799-4924-390d-5b12-fbb227e07675
+//# sourceMappingURL=2l872jj4g_adv.js.map
