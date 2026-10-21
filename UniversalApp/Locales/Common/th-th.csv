@@ -4256,6 +4256,7 @@ Feature.Moments.Title.LeaveMomentCreation,ต้องการออกจา�
 Feature.Moments.Title.MomentRemoved,
 Feature.Moments.Title.PostInsights,ชื่อส่วนหัวของหน้า
 Feature.Moments.Title.ReportPost,รายงานโพสต์
+Feature.Moments.Tooltip.PostInsightsTitle,ข้อมูลเชิงลึกเกี่ยวกับโมเมนต์ของคุณพร้อมแล้ว
 Feature.Moments.Tooltip.ShareFirstMomentBody,สร้างโมเมนต์จากภาพที่คุณจับ
 Feature.Moments.Tooltip.ShareFirstMomentTitle,แชร์โมเมนต์แรกของคุณ
 Feature.NotApproved.Action.Continue,ต่อไป

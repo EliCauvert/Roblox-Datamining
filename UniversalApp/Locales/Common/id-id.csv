@@ -4271,6 +4271,7 @@ Feature.Moments.Title.LeaveMomentCreation,Keluar dari kreasi Moment?
 Feature.Moments.Title.MomentRemoved,
 Feature.Moments.Title.PostInsights,Judul header halaman
 Feature.Moments.Title.ReportPost,Laporkan postingan
+Feature.Moments.Tooltip.PostInsightsTitle,Insight Moment-mu ada di sini
 Feature.Moments.Tooltip.ShareFirstMomentBody,Buat Moment dari mediamu
 Feature.Moments.Tooltip.ShareFirstMomentTitle,Bagikan Moment pertamamu
 Feature.NotApproved.Action.Continue,

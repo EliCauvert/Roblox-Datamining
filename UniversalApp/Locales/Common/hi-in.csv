@@ -4253,6 +4253,7 @@ Feature.Moments.Title.LeaveMomentCreation,क्या आपको ‘Moment’
 Feature.Moments.Title.MomentRemoved,Moment हटा दिया गया
 Feature.Moments.Title.PostInsights,पेज हेडर का टाइटल
 Feature.Moments.Title.ReportPost,पोस्ट की रिपोर्ट करें
+Feature.Moments.Tooltip.PostInsightsTitle,आपके Moment की जानकारी यहाँ है
 Feature.Moments.Tooltip.ShareFirstMomentBody,अपने कैप्चर्स से एक Moment क्रिएट करें
 Feature.Moments.Tooltip.ShareFirstMomentTitle,अपना पहला Moment शेयर करें
 Feature.NotApproved.Action.Continue,

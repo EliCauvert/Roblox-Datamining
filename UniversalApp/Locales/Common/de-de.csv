@@ -4266,6 +4266,7 @@ Feature.Moments.Title.LeaveMomentCreation,Moment-Kreation verlassen?
 Feature.Moments.Title.MomentRemoved,Moment entfernt
 Feature.Moments.Title.PostInsights,Titel der Seitenkopfzeile
 Feature.Moments.Title.ReportPost,Post melden
+Feature.Moments.Tooltip.PostInsightsTitle,Die Einblicke für deinen Moment sind da
 Feature.Moments.Tooltip.ShareFirstMomentBody,Erstelle einen Moment aus deinen Aufnahmen
 Feature.Moments.Tooltip.ShareFirstMomentTitle,Teile deinen ersten Moment
 Feature.NotApproved.Action.Continue,

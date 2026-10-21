@@ -4273,6 +4273,7 @@ Feature.Moments.Title.LeaveMomentCreation,Quitter la création de Moment ?
 Feature.Moments.Title.MomentRemoved,
 Feature.Moments.Title.PostInsights,Titre de la page
 Feature.Moments.Title.ReportPost,Signaler un post
+Feature.Moments.Tooltip.PostInsightsTitle,Retrouve ici les statistiques de ton Moment
 Feature.Moments.Tooltip.ShareFirstMomentBody,Créer un Moment à partir de tes captures
 Feature.Moments.Tooltip.ShareFirstMomentTitle,Partage ton premier Moment
 Feature.NotApproved.Action.Continue,
