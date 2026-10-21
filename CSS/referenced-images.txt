@@ -1,5 +1,4 @@
 https://images.rbxcdn.com/0175aaae4995a706.svg
-https://images.rbxcdn.com/02cfd8d33121f77eb83ebf14acf69300-verifyid_light.svg
 https://images.rbxcdn.com/040c0fbe67952168f4089029cec13e53-reaction_skull.png
 https://images.rbxcdn.com/059b09408c6b199c.gif
 https://images.rbxcdn.com/07a2b232943e5e401523f463e8401dd3-SuccessIcon.svg
@@ -11,7 +10,6 @@ https://images.rbxcdn.com/0bcfca506b32337d.svg
 https://images.rbxcdn.com/116061d62aec2b59.svg
 https://images.rbxcdn.com/12fa6ee6a029c07f2d5903f71177e151-reaction_thumbs_up.png
 https://images.rbxcdn.com/1307182ffda0fcef.png
-https://images.rbxcdn.com/136ab702d795509181fe3813e83fd4dd-verifyid_dark.svg
 https://images.rbxcdn.com/14f90134de033a4e.png
 https://images.rbxcdn.com/18fc22df4975f378.png
 https://images.rbxcdn.com/1bcca464c2031dbd7afc2f89aef781da-shield.png
@@ -46,7 +44,6 @@ https://images.rbxcdn.com/54dbfb641714fb63.png
 https://images.rbxcdn.com/55a78b84c12495198bcbcf0cac3b017a-reaction_thinking.png
 https://images.rbxcdn.com/5a1edd5a80c90267f5ffb58f29cc2dc5-reaction_love.png
 https://images.rbxcdn.com/5b162443d27ff099.gif
-https://images.rbxcdn.com/5b2015df1bc794a0ecadddd1967eeaef-two_people_light.svg
 https://images.rbxcdn.com/5b562400ef0f7642252081c7f1e99a34-badges_05052025.svg
 https://images.rbxcdn.com/5c1ecc5accbc4762.gif
 https://images.rbxcdn.com/5e84a95c26e327a8.png
@@ -67,7 +64,6 @@ https://images.rbxcdn.com/7848b1fcc93c818196e84dbe20054111-premium_xmas_large.sv
 https://images.rbxcdn.com/7954b96cb143df92.png
 https://images.rbxcdn.com/7b2ced365aabb1b6.svg
 https://images.rbxcdn.com/7cfb408d45f99ceb1e67f072f6f350ae-error.png
-https://images.rbxcdn.com/7e05464c9b924869209defc1b17ceed1-two_people_dark.svg
 https://images.rbxcdn.com/80105920316fcf23.png
 https://images.rbxcdn.com/831671a85d301d4a.svg
 https://images.rbxcdn.com/832ccf166229af21.png

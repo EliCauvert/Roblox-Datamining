@@ -3,7 +3,7 @@
     try {
         var e = "undefined" != typeof globalThis ? globalThis : "undefined" != typeof global ? global : "undefined" != typeof window ? window : "undefined" != typeof self ? self : {},
             n = (new e.Error).stack;
-        n && ((e._debugIds || (e._debugIds = {}))[n] = "e7965716-c3ce-2e32-86cb-8945659f672b")
+        n && ((e._debugIds || (e._debugIds = {}))[n] = "60bf6556-7e9e-98b4-7eef-b33151fcd0d6")
     } catch (e) {}
 }();
 (globalThis.TURBOPACK || (globalThis.TURBOPACK = [])).push(["object" == typeof document ? document.currentScript : void 0, 805386, e => {
@@ -3143,49 +3143,50 @@
 }, 479236, 743209, 593431, 582078, 852209, 322172, e => {
     "use strict";
     var t = e.i(221628),
-        r = e.i(416340),
-        n = e.i(589624),
-        a = e.i(795621),
-        i = e.i(692734),
-        o = e.i(118413),
-        s = e.i(257969),
-        c = e.i(731197),
-        u = e.i(283561),
-        l = e.i(964956),
-        d = e.i(258576),
-        h = e.i(466386),
-        m = e.i(721281),
-        p = e.i(509434),
-        f = e.i(650040),
-        y = e.i(379843),
-        g = e.i(296150),
-        v = e.i(718389),
-        b = e.i(436025);
+        r = e.i(999061),
+        n = e.i(416340),
+        a = e.i(589624),
+        i = e.i(795621),
+        o = e.i(692734),
+        s = e.i(118413),
+        c = e.i(257969),
+        u = e.i(731197),
+        l = e.i(283561),
+        d = e.i(964956),
+        h = e.i(258576),
+        m = e.i(466386),
+        p = e.i(721281),
+        f = e.i(509434),
+        y = e.i(650040),
+        g = e.i(379843),
+        v = e.i(296150),
+        b = e.i(718389),
+        A = e.i(436025);
 
-    function A(e) {
-        let t = arguments.length > 1 && void 0 !== arguments[1] ? arguments[1] : b.createTileId;
+    function D(e) {
+        let t = arguments.length > 1 && void 0 !== arguments[1] ? arguments[1] : A.createTileId;
         return {
-            ...(0, v.default)(e),
+            ...(0, b.default)(e),
             tileId: t()
         }
     }
 
-    function D(e) {
+    function C(e) {
         return e.toSorted((e, t) => e.isPinned !== t.isPinned ? e.isPinned ? -1 : 1 : e.updatedAt !== t.updatedAt ? e.updatedAt < t.updatedAt ? 1 : -1 : e.id === t.id ? 0 : e.id < t.id ? -1 : 1)
     }
-    e.s(["cloneTileWithNewId", 0, A], 743209), e.s(["sortDashboardsForList", 0, D], 593431);
-    let C = c.CONSERVATIVE_DASHBOARD_LIMITS.maxDashboardNameLength;
+    e.s(["cloneTileWithNewId", 0, D], 743209), e.s(["sortDashboardsForList", 0, C], 593431);
+    let w = u.CONSERVATIVE_DASHBOARD_LIMITS.maxDashboardNameLength;
 
-    function w(e) {
-        return e.length > C ? e.slice(0, C) : e
-    }
-
-    function T(e, t) {
-        let r = C - t.length;
-        return r <= 0 ? "" : e.length > r ? e.slice(0, r) : e
+    function T(e) {
+        return e.length > w ? e.slice(0, w) : e
     }
 
     function S(e, t) {
+        let r = w - t.length;
+        return r <= 0 ? "" : e.length > r ? e.slice(0, r) : e
+    }
+
+    function E(e, t) {
         let r = arguments.length > 2 && void 0 !== arguments[2] ? arguments[2] : 1,
             n = arguments.length > 3 && void 0 !== arguments[3] ? arguments[3] : 1e3,
             a = new Set(Array.from(e, e => e.trim())),
@@ -3195,54 +3196,54 @@
         return t(i)
     }
 
-    function E(e, t, r) {
+    function I(e, t, r) {
         let n = new Set(Array.from(e, e => e.trim())),
             a = " ".concat(r.first),
-            i = "".concat(T(t, a)).concat(a);
-        return n.has(i) ? w(S(e, e => {
+            i = "".concat(S(t, a)).concat(a);
+        return n.has(i) ? T(E(e, e => {
             let n = " ".concat(r.numbered(e));
-            return "".concat(T(t, n)).concat(n)
+            return "".concat(S(t, n)).concat(n)
         }, 2, 1e3)) : i
     }
 
-    function I(e) {
-        return w(S(e, e => "Dashboard #".concat(e)))
+    function R(e) {
+        return T(E(e, e => "Dashboard #".concat(e)))
     }
-    e.s(["DUPLICATE_COPY_NUMBERED_SUFFIX_START", 0, 2, "buildDuplicateDashboardName", 0, E, "clipDashboardName", 0, w, "findUnusedNumberedName", 0, S, "suggestDefaultName", 0, I], 582078);
-    var R = e.i(619130),
-        _ = e.i(650502);
-    let V = (0, R.default)({
-        baseUrl: (0, _.getBEDEV2ServiceBasePath)("analytics-custom-dashboards"),
+    e.s(["DUPLICATE_COPY_NUMBERED_SUFFIX_START", 0, 2, "buildDuplicateDashboardName", 0, I, "clipDashboardName", 0, T, "findUnusedNumberedName", 0, E, "suggestDefaultName", 0, R], 582078);
+    var _ = e.i(619130),
+        V = e.i(650502);
+    let O = (0, _.default)({
+        baseUrl: (0, V.getBEDEV2ServiceBasePath)("analytics-custom-dashboards"),
         credentials: "include",
         enableMrRouter: !0
     });
-    class O extends Error {
+    class N extends Error {
         constructor(e, t, r) {
-            super(t), (0, m._)(this, "status", void 0), (0, m._)(this, "body", void 0), this.name = "CustomDashboardsApiRequestError", this.status = e, this.body = r
+            super(t), (0, p._)(this, "status", void 0), (0, p._)(this, "body", void 0), this.name = "CustomDashboardsApiRequestError", this.status = e, this.body = r
         }
     }
 
-    function N(e) {
+    function M(e) {
         let t = {};
         return void 0 !== e.name && (t.name = e.name), void 0 !== e.description && (t.description = e.description), void 0 !== e.isPinned && (t.isPinned = e.isPinned), t
     }
 
-    function M(e) {
+    function U(e) {
         return "object" == typeof e && null !== e && !Array.isArray(e)
     }
 
-    function U(e, t) {
+    function P(e, t) {
         var r, n, a, i;
         let o = null != (r = null == e ? void 0 : e.status) ? r : 0,
             s = function(e) {
-                if (!M(e)) return;
+                if (!U(e)) return;
                 let {
                     code: t,
                     message: r,
                     error: n,
                     details: a
                 } = e, i = function(e) {
-                    if (!M(e)) return;
+                    if (!U(e)) return;
                     let {
                         code: t,
                         message: r,
@@ -3276,11 +3277,11 @@
                 }
             }(t),
             c = null != (n = null != (a = null == s ? void 0 : s.message) ? a : null == s || null == (i = s.error) ? void 0 : i.message) ? n : "HTTP ".concat(o);
-        throw new O(o, c, s)
+        throw new N(o, c, s)
     }
 
-    function P() {
-        let e = arguments.length > 0 && void 0 !== arguments[0] ? arguments[0] : V;
+    function k() {
+        let e = arguments.length > 0 && void 0 !== arguments[0] ? arguments[0] : O;
         return {
             async listDashboards(t, r) {
                 let {
@@ -3298,7 +3299,7 @@
                         }
                     }
                 });
-                return (a || !n) && U(i, a), n
+                return (a || !n) && P(i, a), n
             },
             async listPinnedDashboards(t) {
                 let {
@@ -3312,7 +3313,7 @@
                         }
                     }
                 });
-                return (n || !r) && U(a, n), r
+                return (n || !r) && P(a, n), r
             },
             async getDashboardCapabilities(t) {
                 var r;
@@ -3327,7 +3328,7 @@
                         }
                     }
                 });
-                return (a || !n) && U(i, a), null != (r = n.capabilities) ? r : {}
+                return (a || !n) && P(i, a), null != (r = n.capabilities) ? r : {}
             },
             async getDashboard(t) {
                 var r;
@@ -3346,7 +3347,7 @@
                         }
                     }
                 });
-                return (o || !i) && U(s, o), null != (r = i.dashboard) ? r : {}
+                return (o || !i) && P(s, o), null != (r = i.dashboard) ? r : {}
             },
             async createDashboard(t) {
                 var r;
@@ -3372,7 +3373,7 @@
                         document: o
                     }
                 });
-                return (c || !s) && U(u, c), null != (r = s.dashboard) ? r : {}
+                return (c || !s) && P(u, c), null != (r = s.dashboard) ? r : {}
             },
             async updateDashboardMetadata(t) {
                 var r;
@@ -3396,10 +3397,10 @@
                         universeId: n,
                         dashboardId: a,
                         expectedHeadEtag: i,
-                        patch: N(o)
+                        patch: M(o)
                     }
                 });
-                return (c || !s) && U(u, c), null != (r = s.metadata) ? r : {}
+                return (c || !s) && P(u, c), null != (r = s.metadata) ? r : {}
             },
             async publishDashboard(t) {
                 var r;
@@ -3409,7 +3410,7 @@
                     expectedHeadEtag: i,
                     document: o,
                     metadataPatch: s
-                } = t, c = void 0 === s ? void 0 : N(s), u = {
+                } = t, c = void 0 === s ? void 0 : M(s), u = {
                     universeId: n,
                     dashboardId: a,
                     expectedHeadEtag: i,
@@ -3430,7 +3431,7 @@
                     },
                     body: u
                 });
-                return (d || !l) && U(h, d), null != (r = l.dashboard) ? r : {}
+                return (d || !l) && P(h, d), null != (r = l.dashboard) ? r : {}
             },
             async duplicateDashboard(t) {
                 var r;
@@ -3455,7 +3456,7 @@
                         name: o
                     }
                 });
-                return (c || !s) && U(u, c), null != (r = s.dashboard) ? r : {}
+                return (c || !s) && P(u, c), null != (r = s.dashboard) ? r : {}
             },
             async deleteDashboard(t) {
                 let {
@@ -3476,7 +3477,7 @@
                         dashboardId: n
                     }
                 });
-                a && U(i, a)
+                a && P(i, a)
             },
             async filterDashboardText(t) {
                 let {
@@ -3499,9 +3500,9 @@
                         format: "description" === a ? 2 : 1
                     }
                 });
-                if ((o || !i) && U(s, o), "boolean" != typeof i.isFiltered) {
+                if ((o || !i) && P(s, o), "boolean" != typeof i.isFiltered) {
                     var c;
-                    throw new O(null != (c = null == s ? void 0 : s.status) ? c : 0, "Response is missing isFiltered")
+                    throw new N(null != (c = null == s ? void 0 : s.status) ? c : 0, "Response is missing isFiltered")
                 }
                 return {
                     isFiltered: i.isFiltered
@@ -3509,10 +3510,10 @@
             }
         }
     }
-    e.s(["CustomDashboardsApiRequestError", 0, O, "createDefaultCustomDashboardsApiClient", 0, P], 852209);
-    var k = e.i(646877);
+    e.s(["CustomDashboardsApiRequestError", 0, N, "createDefaultCustomDashboardsApiClient", 0, k], 852209);
+    var x = e.i(646877);
 
-    function x(e) {
+    function B(e) {
         if ("string" == typeof e) return e;
         if (!("object" == typeof e && null !== e && !Array.isArray(e))) return;
         let {
@@ -3526,42 +3527,42 @@
         }
     }
 
-    function B(e) {
+    function L(e) {
         let t = "number" == typeof e ? e : "string" == typeof e && e.trim().length > 0 ? Number(e) : NaN;
         return Number.isSafeInteger(t) && t > 0 ? t : void 0
     }
 
-    function L(e) {
+    function Q(e) {
         var t;
         return null != (t = e.dashboardId) ? t : ""
     }
 
-    function Q(e) {
-        return (0, p.customDashboardConfigToBackendDocument)(e)
+    function G(e) {
+        return (0, f.customDashboardConfigToBackendDocument)(e)
     }
 
-    function G(e) {
+    function H(e) {
         var t, r, n, a, i, o, s;
-        let c, u, l = arguments.length > 1 && void 0 !== arguments[1] ? arguments[1] : y.EMPTY_DASHBOARD_CONFIG,
-            d = L(e),
-            h = null != (t = B(e.universeId)) ? t : 0,
-            m = null != (r = x(e.createdTime)) ? r : new Date(0).toISOString(),
-            p = null != (n = x(e.updatedTime)) ? n : m,
-            f = x(e.publishedTime),
-            g = !0 === e.isPinned,
+        let c, u, l = arguments.length > 1 && void 0 !== arguments[1] ? arguments[1] : g.EMPTY_DASHBOARD_CONFIG,
+            d = Q(e),
+            h = null != (t = L(e.universeId)) ? t : 0,
+            m = null != (r = B(e.createdTime)) ? r : new Date(0).toISOString(),
+            p = null != (n = B(e.updatedTime)) ? n : m,
+            f = B(e.publishedTime),
+            y = !0 === e.isPinned,
             v = e.createdBy,
             b = e.updatedBy,
-            A = B(null == v ? void 0 : v.userId),
-            D = B(null == b ? void 0 : b.userId);
-        return (0, k.validateCustomDashboardDocument)({
+            A = L(null == v ? void 0 : v.userId),
+            D = L(null == b ? void 0 : b.userId);
+        return (0, x.validateCustomDashboardDocument)({
             id: d,
-            schemaVersion: y.LOCAL_STORAGE_DOCUMENT_SCHEMA_VERSION,
+            schemaVersion: g.LOCAL_STORAGE_DOCUMENT_SCHEMA_VERSION,
             universeId: h,
-            name: (0, k.validateDashboardName)(null != (a = e.name) ? a : "", null),
-            description: (0, k.validateDashboardDescription)(null != (i = e.description) ? i : void 0, null),
+            name: (0, x.validateDashboardName)(null != (a = e.name) ? a : "", null),
+            description: (0, x.validateDashboardDescription)(null != (i = e.description) ? i : void 0, null),
             status: (c = (o = e).latestPublishedDocumentId, u = null != (s = o.latestPublishedVersion) ? s : 0, c || u > 0 ? "published" : "draft"),
-            isPinned: g,
-            pinnedAt: g ? x(e.pinnedTime) : void 0,
+            isPinned: y,
+            pinnedAt: y ? B(e.pinnedTime) : void 0,
             createdAt: m,
             updatedAt: p,
             publishedAt: f,
@@ -3574,26 +3575,26 @@
         })
     }
 
-    function H(e) {
+    function F(e) {
         var t;
         if (!e.metadata) throw Error("Custom dashboard API response is missing metadata.");
-        return G(e.metadata, (t = e.document) ? (0, p.backendDocumentToCustomDashboardConfig)(t) : y.EMPTY_DASHBOARD_CONFIG)
+        return H(e.metadata, (t = e.document) ? (0, f.backendDocumentToCustomDashboardConfig)(t) : g.EMPTY_DASHBOARD_CONFIG)
     }
 
-    function F(e, t) {
+    function K(e, t) {
         return "".concat(e, ":").concat(t)
     }
-    let K = class {
+    let j = class {
         async list(e, t) {
             return this.withApiErrors(e, void 0, async () => {
                 var r, n;
                 this.ensureAvailable();
                 let a = t ? await this.client.listDashboards(e, t) : await this.listAllDashboards(e);
                 return {
-                    items: D((null != (r = a.dashboards) ? r : []).map(t => (this.rememberMetadata(e, t), G(t)))),
+                    items: C((null != (r = a.dashboards) ? r : []).map(t => (this.rememberMetadata(e, t), H(t)))),
                     migrationFailedCount: 0,
                     nextPageToken: t && null != (n = a.nextPageToken) ? n : void 0,
-                    capabilities: void 0 === a.capabilities ? void 0 : (0, s.parseDashboardCapabilities)(a.capabilities)
+                    capabilities: void 0 === a.capabilities ? void 0 : (0, c.parseDashboardCapabilities)(a.capabilities)
                 }
             })
         }
@@ -3610,7 +3611,7 @@
             return this.withApiErrors(e, void 0, async () => {
                 this.ensureAvailable();
                 let t = await this.client.getDashboardCapabilities(e);
-                return (0, s.parseDashboardCapabilities)(t)
+                return (0, c.parseDashboardCapabilities)(t)
             })
         }
         async get(e, t) {
@@ -3621,7 +3622,7 @@
                         dashboardId: t
                     }),
                     n = this.rememberMetadata(e, r.metadata),
-                    a = H(r);
+                    a = F(r);
                 if (this.shouldRepairStoredDocument(e, a, r)) {
                     var i;
                     return null != (i = await this.repairStoredDocument(e, a, n)) ? i : a
@@ -3634,28 +3635,28 @@
                 universeId: e,
                 dashboardId: t
             });
-            return this.rememberMetadata(e, r.metadata), H(r)
+            return this.rememberMetadata(e, r.metadata), F(r)
         }
         shouldRepairStoredDocument(e, t, r) {
-            return this.repairLegacyDocumentsOnRead && !this.legacyDocumentRepairUnavailable && !this.legacyDocumentRepairAttempted.has(F(e, t.id)) && "published" === t.status && (0, p.backendDocumentHasUpperSnakeAggregationVariants)(r.document)
+            return this.repairLegacyDocumentsOnRead && !this.legacyDocumentRepairUnavailable && !this.legacyDocumentRepairAttempted.has(K(e, t.id)) && "published" === t.status && (0, f.backendDocumentHasUpperSnakeAggregationVariants)(r.document)
         }
         async repairStoredDocument(e, t, r) {
-            this.legacyDocumentRepairAttempted.add(F(e, t.id));
+            this.legacyDocumentRepairAttempted.add(K(e, t.id));
             let {
                 headEtag: n
-            } = r, a = Q(t.config);
-            if (!(!n || (0, p.backendDocumentHasUpperSnakeAggregationVariants)(a))) try {
+            } = r, a = G(t.config);
+            if (!(!n || (0, f.backendDocumentHasUpperSnakeAggregationVariants)(a))) try {
                 let r = await this.client.publishDashboard({
                     universeId: e,
                     dashboardId: t.id,
                     expectedHeadEtag: n,
                     document: a
                 });
-                return this.rememberMetadata(e, r.metadata), (0, p.backendDocumentHasUpperSnakeAggregationVariants)(r.document) && (this.legacyDocumentRepairUnavailable = !0), this.emit({
+                return this.rememberMetadata(e, r.metadata), (0, f.backendDocumentHasUpperSnakeAggregationVariants)(r.document) && (this.legacyDocumentRepairUnavailable = !0), this.emit({
                     universeId: e,
                     dashboardId: t.id,
                     eventType: "update"
-                }), H(r)
+                }), F(r)
             } catch (e) {
                 console.warn("ApiCustomDashboardService: could not repair stored dashboard document", {
                     dashboardId: t.id,
@@ -3668,23 +3669,23 @@
             return this.withApiErrors(e, t, async () => {
                 var r, n;
                 this.ensureAvailable();
-                let a = this.tokens.get(F(e, t));
-                return a ? a.revision : (await this.read(e, t), null != (r = null == (n = this.tokens.get(F(e, t))) ? void 0 : n.revision) ? r : null)
+                let a = this.tokens.get(K(e, t));
+                return a ? a.revision : (await this.read(e, t), null != (r = null == (n = this.tokens.get(K(e, t))) ? void 0 : n.revision) ? r : null)
             })
         }
         async create(e) {
             return this.withApiErrors(e.universeId, void 0, async () => {
                 var t;
                 this.ensureAvailable();
-                let r = null != (t = e.config) ? t : y.EMPTY_DASHBOARD_CONFIG,
+                let r = null != (t = e.config) ? t : g.EMPTY_DASHBOARD_CONFIG,
                     n = await this.client.createDashboard({
                         universeId: e.universeId,
                         name: e.name,
                         description: e.description,
-                        document: Q(r)
+                        document: G(r)
                     });
                 this.rememberMetadata(e.universeId, n.metadata);
-                let a = H(n);
+                let a = F(n);
                 return this.emit({
                     universeId: e.universeId,
                     dashboardId: a.id,
@@ -3709,12 +3710,12 @@
                         universeId: e,
                         dashboardId: t,
                         expectedHeadEtag: this.requireHeadEtag(u, t, l),
-                        document: Q(o),
+                        document: G(o),
                         ...s ? {
                             metadataPatch: i
                         } : {}
                     });
-                    this.rememberMetadata(e, r.metadata), a = H(r)
+                    this.rememberMetadata(e, r.metadata), a = F(r)
                 } else if (s) {
                     let r = await this.client.updateDashboardMetadata({
                         universeId: e,
@@ -3757,10 +3758,10 @@
                     {
                         config: i,
                         tile: o
-                    } = (0, g.addChartTileToConfig)({
+                    } = (0, v.addChartTileToConfig)({
                         config: a.config,
                         tile: r.tile,
-                        nextTileId: (0, b.createTileId)(),
+                        nextTileId: (0, A.createTileId)(),
                         limits: r.limits
                     }),
                     s = await this.ensureTokens(e, t),
@@ -3768,10 +3769,10 @@
                         universeId: e,
                         dashboardId: t,
                         expectedHeadEtag: this.requireHeadEtag(s, t, null == n ? void 0 : n.expectedVersion),
-                        document: Q(i)
+                        document: G(i)
                     });
                 this.rememberMetadata(e, c.metadata);
-                let u = H(c);
+                let u = F(c);
                 return this.emit({
                     universeId: e,
                     dashboardId: t,
@@ -3787,7 +3788,7 @@
                 this.ensureAvailable(), await this.client.deleteDashboard({
                     universeId: e,
                     dashboardId: t
-                }), this.tokens.delete(F(e, t)), this.emit({
+                }), this.tokens.delete(K(e, t)), this.emit({
                     universeId: e,
                     dashboardId: t,
                     eventType: "delete"
@@ -3806,11 +3807,11 @@
                     name: s
                 });
                 this.rememberMetadata(e, c.metadata);
-                let u = H(c),
-                    l = (r = u.config, n = (0, f.getSummaryCards)(r).map(e => A(e)), a = (0, f.getChartRows)(r).map(e => ({
+                let u = F(c),
+                    l = (r = u.config, n = (0, y.getSummaryCards)(r).map(e => D(e)), a = (0, y.getChartRows)(r).map(e => ({
                         ...e,
-                        tiles: e.tiles.map(e => A(e))
-                    })), (0, f.withChartRows)((0, f.withSummaryCards)(r, n), a));
+                        tiles: e.tiles.map(e => D(e))
+                    })), (0, y.withChartRows)((0, y.withSummaryCards)(r, n), a));
                 if ("published" !== u.status) {
                     let t = {
                         ...u,
@@ -3827,10 +3828,10 @@
                         universeId: e,
                         dashboardId: u.id,
                         expectedHeadEtag: this.requireHeadEtag(d, u.id),
-                        document: Q(l)
+                        document: G(l)
                     });
                 this.rememberMetadata(e, h.metadata);
-                let m = H(h);
+                let m = F(h);
                 return this.emit({
                     universeId: e,
                     dashboardId: m.id,
@@ -3847,10 +3848,10 @@
                         universeId: e,
                         dashboardId: t,
                         expectedHeadEtag: this.requireHeadEtag(a, t, null == r ? void 0 : r.expectedVersion),
-                        document: Q(n.config)
+                        document: G(n.config)
                     });
                 this.rememberMetadata(e, i.metadata);
-                let o = H(i);
+                let o = F(i);
                 return this.emit({
                     universeId: e,
                     dashboardId: t,
@@ -3860,7 +3861,7 @@
         }
         async unpublish(e, t) {
             return this.withApiErrors(e, t, async () => {
-                throw this.ensureAvailable(), new u.CustomDashboardNotAvailableError
+                throw this.ensureAvailable(), new l.CustomDashboardNotAvailableError
             })
         }
         async pin(e, t) {
@@ -3870,7 +3871,7 @@
             return this.updatePinned(e, t, !1)
         }
         async suggestDefaultName(e) {
-            return I((await this.list(e)).items.map(e => e.name))
+            return R((await this.list(e)).items.map(e => e.name))
         }
         subscribe(e) {
             return this.ensureAvailable(), this.listeners.add(e), () => {
@@ -3902,22 +3903,22 @@
                     }), this.read(e, t)
                 })
             } catch (e) {
-                if (n = e, !(e instanceof u.CustomDashboardVersionConflictError) || 2 === a) throw e
+                if (n = e, !(e instanceof l.CustomDashboardVersionConflictError) || 2 === a) throw e
             }
             throw n
         }
         async ensureTokens(e, t) {
-            let r = this.tokens.get(F(e, t));
+            let r = this.tokens.get(K(e, t));
             if (r) return r;
             await this.read(e, t);
-            let n = this.tokens.get(F(e, t));
-            if (!n) throw new u.CustomDashboardVersionConflictError(t);
+            let n = this.tokens.get(K(e, t));
+            if (!n) throw new l.CustomDashboardVersionConflictError(t);
             return n
         }
         rememberMetadata(e, t) {
             var r, n;
-            let a = t ? L(t) : "",
-                i = F(e, a),
+            let a = t ? Q(t) : "",
+                i = K(e, a),
                 o = this.tokens.get(i),
                 s = t && null != (n = t.headEtag) ? n : void 0,
                 c = o && o.headEtag === s ? o.revision : (null != (r = null == o ? void 0 : o.revision) ? r : 0) + 1,
@@ -3932,7 +3933,7 @@
         }
         requireHeadEtag(e, t, r) {
             let n = void 0 === r ? e.headEtag : e.headEtagsByRevision.get(r);
-            if (!n) throw new u.CustomDashboardVersionConflictError(t);
+            if (!n) throw new l.CustomDashboardVersionConflictError(t);
             return n
         }
         async refreshTokens(e, t) {
@@ -3947,7 +3948,7 @@
         dedupeName(e, t) {
             let r = new Set(t.map(e => e.trim())),
                 n = "".concat(e, " (copy)");
-            return r.has(n) ? S(t, t => "".concat(e, " (copy ").concat(t, ")"), 2) : n
+            return r.has(n) ? E(t, t => "".concat(e, " (copy ").concat(t, ")"), 2) : n
         }
         async listAllDashboards(e, t) {
             var r, n;
@@ -3976,37 +3977,30 @@
             })
         }
         ensureAvailable() {
-            if (this.disposed) throw new u.CustomDashboardNotAvailableError
+            if (this.disposed) throw new l.CustomDashboardNotAvailableError
         }
         async withApiErrors(e, t, r) {
             try {
                 return await r()
             } catch (n) {
                 let r = function(e, t) {
-                    var r, n, a, i, o, s, c, l, d;
-                    if (e instanceof u.CustomDashboardServiceError) return e;
-                    if (!(e instanceof O)) return new u.CustomDashboardStorageWriteError(e);
-                    let h = null != (i = null != (o = null == (s = e.body) ? void 0 : s.message) ? o : null == (l = e.body) || null == (c = l.error) ? void 0 : c.message) ? i : e.message,
+                    var r, n, a, i, o, s, c, u, d;
+                    if (e instanceof l.CustomDashboardServiceError) return e;
+                    if (!(e instanceof N)) return new l.CustomDashboardStorageWriteError(e);
+                    let h = null != (i = null != (o = null == (s = e.body) ? void 0 : s.message) ? o : null == (u = e.body) || null == (c = u.error) ? void 0 : c.message) ? i : e.message,
                         m = (null != (d = "".concat(null != h ? h : "", " ").concat(null != (r = null == (a = e.body) || null == (n = a.error) ? void 0 : n.status) ? r : "")) ? d : "").toUpperCase().replaceAll("-", "_");
-                    return 404 === e.status || m.includes("NOT_FOUND") ? new u.CustomDashboardNotFoundError(null != t ? t : "unknown") : 409 === e.status || m.includes("VERSION_CONFLICT") || m.includes("CONFLICT") ? new u.CustomDashboardVersionConflictError(null != t ? t : "unknown") : 429 === e.status || m.includes("QUOTA_EXCEEDED") || m.includes("RESOURCE_EXHAUSTED") ? new u.CustomDashboardQuotaExceededError(h) : 401 === e.status || m.includes("UNAUTHENTICATED") ? new u.CustomDashboardUnauthenticatedError(h) : 403 === e.status || m.includes("PERMISSION_DENIED") ? new u.CustomDashboardPermissionDeniedError(h) : 400 === e.status || m.includes("VALIDATION_FAILED") || m.includes("INVALID_ARGUMENT") ? new u.CustomDashboardValidationError("document", null != h ? h : "Invalid custom dashboard.") : 503 === e.status || m.includes("UNAVAILABLE") ? new u.CustomDashboardNotAvailableError : new u.CustomDashboardStorageWriteError(e)
+                    return 404 === e.status || m.includes("NOT_FOUND") ? new l.CustomDashboardNotFoundError(null != t ? t : "unknown") : 409 === e.status || m.includes("VERSION_CONFLICT") || m.includes("CONFLICT") ? new l.CustomDashboardVersionConflictError(null != t ? t : "unknown") : 429 === e.status || m.includes("QUOTA_EXCEEDED") || m.includes("RESOURCE_EXHAUSTED") ? new l.CustomDashboardQuotaExceededError(h) : 401 === e.status || m.includes("UNAUTHENTICATED") ? new l.CustomDashboardUnauthenticatedError(h) : 403 === e.status || m.includes("PERMISSION_DENIED") ? new l.CustomDashboardPermissionDeniedError(h) : 400 === e.status || m.includes("VALIDATION_FAILED") || m.includes("INVALID_ARGUMENT") ? new l.CustomDashboardValidationError("document", null != h ? h : "Invalid custom dashboard.") : 503 === e.status || m.includes("UNAVAILABLE") ? new l.CustomDashboardNotAvailableError : new l.CustomDashboardStorageWriteError(e)
                 }(n, t);
-                throw r instanceof u.CustomDashboardVersionConflictError && void 0 !== e && t && await this.refreshTokens(e, t), r
+                throw r instanceof l.CustomDashboardVersionConflictError && void 0 !== e && t && await this.refreshTokens(e, t), r
             }
         }
-        constructor(e = P(), t = {}) {
-            (0, m._)(this, "pagesOnServer", !0), (0, m._)(this, "client", void 0), (0, m._)(this, "listeners", new Set), (0, m._)(this, "tokens", new Map), (0, m._)(this, "disposed", !1), (0, m._)(this, "repairLegacyDocumentsOnRead", void 0), (0, m._)(this, "legacyDocumentRepairUnavailable", !1), (0, m._)(this, "legacyDocumentRepairAttempted", new Set), this.client = e, this.repairLegacyDocumentsOnRead = !0 === t.repairLegacyDocumentsOnRead
+        constructor(e = k(), t = {}) {
+            (0, p._)(this, "pagesOnServer", !0), (0, p._)(this, "client", void 0), (0, p._)(this, "listeners", new Set), (0, p._)(this, "tokens", new Map), (0, p._)(this, "disposed", !1), (0, p._)(this, "repairLegacyDocumentsOnRead", void 0), (0, p._)(this, "legacyDocumentRepairUnavailable", !1), (0, p._)(this, "legacyDocumentRepairAttempted", new Set), this.client = e, this.repairLegacyDocumentsOnRead = !0 === t.repairLegacyDocumentsOnRead
         }
     };
 
-    function j(e) {
-        return e instanceof u.CustomDashboardNotFoundError
-    }
-
     function z(e) {
-        return {
-            ...e,
-            hybridOrigin: "localCopy"
-        }
+        return e instanceof l.CustomDashboardNotFoundError
     }
 
     function q(e) {
@@ -4019,17 +4013,24 @@
     function Y(e) {
         return {
             ...e,
+            hybridOrigin: "localCopy"
+        }
+    }
+
+    function W(e) {
+        return {
+            ...e,
             hybridOrigin: "server"
         }
     }
-    let W = class {
+    let X = class {
             async list(e, t) {
                 var r;
                 let [n, a] = await Promise.all([this.apiService.list(e, t), this.localService.list(e)]);
                 return {
-                    items: n.items.map(Y),
-                    capabilities: null != (r = n.capabilities) ? r : s.DENIED_DASHBOARD_CAPABILITIES,
-                    localItems: a.items.map(q),
+                    items: n.items.map(W),
+                    capabilities: null != (r = n.capabilities) ? r : c.DENIED_DASHBOARD_CAPABILITIES,
+                    localItems: a.items.map(Y),
                     nextPageToken: n.nextPageToken,
                     migrationFailedCount: n.migrationFailedCount + a.migrationFailedCount
                 }
@@ -4039,13 +4040,13 @@
             }
             async getCapabilities(e) {
                 var t, r, n;
-                return null != (t = null == (r = (n = this.apiService).getCapabilities) ? void 0 : r.call(n, e)) ? t : s.DENIED_DASHBOARD_CAPABILITIES
+                return null != (t = null == (r = (n = this.apiService).getCapabilities) ? void 0 : r.call(n, e)) ? t : c.DENIED_DASHBOARD_CAPABILITIES
             }
             async get(e, t) {
                 try {
-                    return z(await this.localService.get(e, t))
+                    return q(await this.localService.get(e, t))
                 } catch (e) {
-                    if (!j(e)) throw e
+                    if (!z(e)) throw e
                 }
                 return {
                     ...await this.apiService.get(e, t),
@@ -4053,20 +4054,20 @@
                 }
             }
             async create(e) {
-                return z(await this.localService.create(e))
+                return q(await this.localService.create(e))
             }
             async createAndPublish(e) {
-                return z(await this.localService.createAndPublish(e))
+                return q(await this.localService.createAndPublish(e))
             }
             async update(e, t, r, n) {
-                return await this.ensureLocalDashboard(e, t), z(await this.localService.update(e, t, r, n))
+                return await this.ensureLocalDashboard(e, t), q(await this.localService.update(e, t, r, n))
             }
             async addChartTile(e, t, r, n) {
                 await this.ensureLocalDashboard(e, t);
                 let a = await this.localService.addChartTile(e, t, r, n);
                 return {
                     ...a,
-                    document: z(a.document)
+                    document: q(a.document)
                 }
             }
             async delete(e, t) {
@@ -4074,9 +4075,9 @@
             }
             async duplicate(e, t, r) {
                 try {
-                    return await this.ensureLocalDashboard(e, t), z(await this.localService.duplicate(e, t, r))
+                    return await this.ensureLocalDashboard(e, t), q(await this.localService.duplicate(e, t, r))
                 } catch (e) {
-                    if (!j(e) && !(e instanceof u.CustomDashboardNotAvailableError)) throw e
+                    if (!z(e) && !(e instanceof l.CustomDashboardNotAvailableError)) throw e
                 }
                 return this.forkApiDashboardToLocal(e, t, r)
             }
@@ -4084,29 +4085,29 @@
                 var n, a, i;
                 let o, s, c, u, l = await this.apiService.get(e, t),
                     d = await this.localService.list(e);
-                return z(await this.localService.create({
+                return q(await this.localService.create({
                     universeId: e,
-                    name: (n = d.items.map(e => e.name), a = l.name, o = w("".concat(a).concat(" (local copy)")), (s = new Set(Array.from(n, e => e.trim()))).has(o) ? S(s, e => w("".concat(a, " (local copy ").concat(e, ")")), 2) : o),
+                    name: (n = d.items.map(e => e.name), a = l.name, o = T("".concat(a).concat(" (local copy)")), (s = new Set(Array.from(n, e => e.trim()))).has(o) ? E(s, e => T("".concat(a, " (local copy ").concat(e, ")")), 2) : o),
                     description: l.description,
                     createdByUserId: r.createdByUserId,
                     createdByUsername: r.createdByUsername,
-                    config: (i = l.config, c = (0, f.getSummaryCards)(i).map(e => A(e)), u = (0, f.getChartRows)(i).map(e => ({
+                    config: (i = l.config, c = (0, y.getSummaryCards)(i).map(e => D(e)), u = (0, y.getChartRows)(i).map(e => ({
                         ...e,
-                        tiles: e.tiles.map(e => A(e))
-                    })), (0, f.withChartRows)((0, f.withSummaryCards)(i, c), u))
+                        tiles: e.tiles.map(e => D(e))
+                    })), (0, y.withChartRows)((0, y.withSummaryCards)(i, c), u))
                 }))
             }
             async publish(e, t, r) {
-                return await this.ensureLocalDashboard(e, t), z(await this.localService.publish(e, t, r))
+                return await this.ensureLocalDashboard(e, t), q(await this.localService.publish(e, t, r))
             }
             async unpublish(e, t) {
-                return await this.ensureLocalDashboard(e, t), z(await this.localService.unpublish(e, t))
+                return await this.ensureLocalDashboard(e, t), q(await this.localService.unpublish(e, t))
             }
             async pin(e, t) {
-                return await this.ensureLocalDashboard(e, t), z(await this.localService.pin(e, t))
+                return await this.ensureLocalDashboard(e, t), q(await this.localService.pin(e, t))
             }
             async unpin(e, t) {
-                return await this.ensureLocalDashboard(e, t), z(await this.localService.unpin(e, t))
+                return await this.ensureLocalDashboard(e, t), q(await this.localService.unpin(e, t))
             }
             async suggestDefaultName(e) {
                 return this.localService.suggestDefaultName(e)
@@ -4115,7 +4116,7 @@
                 try {
                     await this.ensureLocalDashboard(e, t)
                 } catch (e) {
-                    if (e instanceof u.CustomDashboardNotAvailableError) return null;
+                    if (e instanceof l.CustomDashboardNotAvailableError) return null;
                     throw e
                 }
                 return this.localService.getVersion(e, t)
@@ -4133,27 +4134,27 @@
             }
             async ensureLocalDashboard(e, t) {
                 try {
-                    return z(await this.localService.get(e, t))
+                    return q(await this.localService.get(e, t))
                 } catch (e) {
-                    if (j(e)) throw new u.CustomDashboardNotAvailableError;
+                    if (z(e)) throw new l.CustomDashboardNotAvailableError;
                     throw e
                 }
             }
             constructor(e) {
-                (0, m._)(this, "pagesOnServer", !0), (0, m._)(this, "localService", void 0), (0, m._)(this, "apiService", void 0), this.localService = e.localService, this.apiService = e.apiService
+                (0, p._)(this, "pagesOnServer", !0), (0, p._)(this, "localService", void 0), (0, p._)(this, "apiService", void 0), this.localService = e.localService, this.apiService = e.apiService
             }
         },
-        X = {
+        $ = {
             isoNow: () => new Date().toISOString()
         };
-    var $ = e.i(730530),
-        J = e.i(881670);
-    let Z = {
+    var J = e.i(730530),
+        Z = e.i(881670);
+    let ee = {
         first: "(copy)",
         numbered: e => "(copy ".concat(e, ")")
     };
 
-    function ee(e, t) {
+    function et(e, t) {
         let r = null == t ? void 0 : t.pageSize;
         if (void 0 === r || r <= 0) return {
             items: e
@@ -4171,13 +4172,13 @@
     }
     e.s(["createDuplicateDashboardNameSuffixes", 0, function(e) {
         return {
-            first: e.tPendingTranslation("(copy)", "Suffix appended to a duplicated dashboard name when the first copy is free; a leading space is added when concatenating with the base name", (0, $.translationKey)("Label.CustomDashboards.DuplicateName.FirstSuffix", J.TranslationNamespace.Analytics)),
-            numbered: t => e.tPendingTranslation("(copy {n})", "Suffix appended when a duplicate dashboard name collides; {n} is the disambiguation number (2, 3, …); a leading space is added when concatenating with the base name", (0, $.translationKey)("Label.CustomDashboards.DuplicateName.NumberedSuffix", J.TranslationNamespace.Analytics), {
+            first: e.tPendingTranslation("(copy)", "Suffix appended to a duplicated dashboard name when the first copy is free; a leading space is added when concatenating with the base name", (0, J.translationKey)("Label.CustomDashboards.DuplicateName.FirstSuffix", Z.TranslationNamespace.Analytics)),
+            numbered: t => e.tPendingTranslation("(copy {n})", "Suffix appended when a duplicate dashboard name collides; {n} is the disambiguation number (2, 3, …); a leading space is added when concatenating with the base name", (0, J.translationKey)("Label.CustomDashboards.DuplicateName.NumberedSuffix", Z.TranslationNamespace.Analytics), {
                 n: String(t)
             })
         }
-    }, "testOnlyEnglishDuplicateDashboardNameSuffixes", 0, Z], 322172);
-    let et = class {
+    }, "testOnlyEnglishDuplicateDashboardNameSuffixes", 0, ee], 322172);
+    let er = class {
             peekUniverseMap(e) {
                 return this.store.get(e)
             }
@@ -4198,19 +4199,19 @@
                 var t, r;
                 let n = null != (t = null == (r = this.peekUniverseMap(e)) ? void 0 : r.size) ? t : 0,
                     a = this.getLimits(e).maxDashboardsPerUniverse;
-                if (n >= a) throw new u.CustomDashboardQuotaExceededError("Universe ".concat(e, " is at the per-universe cap of ").concat(a, " dashboards. Delete one to create another."))
+                if (n >= a) throw new l.CustomDashboardQuotaExceededError("Universe ".concat(e, " is at the per-universe cap of ").concat(a, " dashboards. Delete one to create another."))
             }
             assertUnderPinnedCap(e, t) {
                 let r = this.peekUniverseMap(e);
                 if (!r) return;
                 let n = Array.from(r.values()).filter(e => e.document.isPinned && e.document.id !== t).length,
                     a = this.getLimits(e).maxPinnedDashboardsPerUniverse;
-                if (n >= a) throw new u.CustomDashboardQuotaExceededError("Universe ".concat(e, " is at the pinned-dashboard cap of ").concat(a, ". Unpin one to pin another."))
+                if (n >= a) throw new l.CustomDashboardQuotaExceededError("Universe ".concat(e, " is at the pinned-dashboard cap of ").concat(a, ". Unpin one to pin another."))
             }
             loadOrThrow(e, t) {
                 let r = this.peekUniverseMap(e),
                     n = null == r ? void 0 : r.get(t);
-                if (!r || !n) throw new u.CustomDashboardNotFoundError(t);
+                if (!r || !n) throw new l.CustomDashboardNotFoundError(t);
                 return {
                     universeMap: r,
                     record: n
@@ -4221,7 +4222,7 @@
                     universeMap: i,
                     record: o
                 } = this.loadOrThrow(e, t);
-                if ((null == a ? void 0 : a.expectedVersion) !== void 0 && a.expectedVersion !== o.version) throw new u.CustomDashboardVersionConflictError(t);
+                if ((null == a ? void 0 : a.expectedVersion) !== void 0 && a.expectedVersion !== o.version) throw new l.CustomDashboardVersionConflictError(t);
                 let s = this.clock.isoNow(),
                     c = {
                         ...o.document,
@@ -4242,7 +4243,7 @@
                     universeMap: i,
                     record: o
                 } = this.loadOrThrow(e, t);
-                if ((null == a ? void 0 : a.expectedVersion) !== void 0 && a.expectedVersion !== o.version) throw new u.CustomDashboardVersionConflictError(t);
+                if ((null == a ? void 0 : a.expectedVersion) !== void 0 && a.expectedVersion !== o.version) throw new l.CustomDashboardVersionConflictError(t);
                 let {
                     document: s,
                     result: c
@@ -4259,13 +4260,13 @@
             async list(e, t) {
                 let r = this.peekUniverseMap(e);
                 return {
-                    ...ee(r ? D([...r.values()].map(e => e.document)) : [], t),
+                    ...et(r ? C([...r.values()].map(e => e.document)) : [], t),
                     migrationFailedCount: 0
                 }
             }
             async listPinned(e) {
                 let t = this.peekUniverseMap(e);
-                return t ? D([...t.values()].map(e => e.document)).filter(e => e.isPinned).map(e => {
+                return t ? C([...t.values()].map(e => e.document)).filter(e => e.isPinned).map(e => {
                     let {
                         id: t,
                         name: r
@@ -4286,15 +4287,15 @@
             insertNewDocument(e, t) {
                 this.assertUnderUniverseCap(e.universeId);
                 let r = this.getLimits(e.universeId),
-                    n = (0, k.validateDashboardName)(e.name, r),
-                    a = (0, k.validateDashboardDescription)(e.description, r),
-                    i = void 0 !== e.config ? (0, k.validateCustomDashboardConfig)(e.config, {
+                    n = (0, x.validateDashboardName)(e.name, r),
+                    a = (0, x.validateDashboardDescription)(e.description, r),
+                    i = void 0 !== e.config ? (0, x.validateCustomDashboardConfig)(e.config, {
                         limits: r
-                    }) : y.EMPTY_DASHBOARD_CONFIG,
+                    }) : g.EMPTY_DASHBOARD_CONFIG,
                     o = this.clock.isoNow(),
                     s = {
                         id: this.idFactory.nextDashboardId(),
-                        schemaVersion: y.LOCAL_STORAGE_DOCUMENT_SCHEMA_VERSION,
+                        schemaVersion: g.LOCAL_STORAGE_DOCUMENT_SCHEMA_VERSION,
                         universeId: e.universeId,
                         name: n,
                         description: a,
@@ -4331,17 +4332,17 @@
                     universeMap: a,
                     record: i
                 } = this.loadOrThrow(e, t), o = this.getLimits(e);
-                if ((null == n ? void 0 : n.expectedVersion) !== void 0 && n.expectedVersion !== i.version) throw new u.CustomDashboardVersionConflictError(t);
-                let s = void 0 !== r.name ? (0, k.validateDashboardName)(r.name, o) : i.document.name,
-                    c = void 0 !== r.description ? (0, k.validateDashboardDescription)(r.description, o) : i.document.description,
-                    l = void 0 !== r.config ? (0, k.validateCustomDashboardConfig)(r.config, {
+                if ((null == n ? void 0 : n.expectedVersion) !== void 0 && n.expectedVersion !== i.version) throw new l.CustomDashboardVersionConflictError(t);
+                let s = void 0 !== r.name ? (0, x.validateDashboardName)(r.name, o) : i.document.name,
+                    c = void 0 !== r.description ? (0, x.validateDashboardDescription)(r.description, o) : i.document.description,
+                    u = void 0 !== r.config ? (0, x.validateCustomDashboardConfig)(r.config, {
                         limits: o
                     }) : i.document.config,
                     d = {
                         ...i.document,
                         name: s,
                         description: c,
-                        config: l,
+                        config: u,
                         updatedAt: this.clock.isoNow(),
                         ...(null == n ? void 0 : n.actor) ? {
                             updatedByUserId: n.actor.userId,
@@ -4362,7 +4363,7 @@
                     let {
                         config: a,
                         tile: i
-                    } = (0, g.addChartTileToConfig)({
+                    } = (0, v.addChartTileToConfig)({
                         config: e.document.config,
                         tile: r.tile,
                         nextTileId: this.idFactory.nextTileId(),
@@ -4401,10 +4402,10 @@
                 let a = this.clock.isoNow(),
                     i = this.dedupeName(e, n.name),
                     o = () => this.idFactory.nextTileId(),
-                    s = (0, f.getSummaryCards)(n.config).map(e => A(e, o)),
-                    c = (0, f.getChartRows)(n.config).map(e => ({
+                    s = (0, y.getSummaryCards)(n.config).map(e => D(e, o)),
+                    c = (0, y.getChartRows)(n.config).map(e => ({
                         ...e,
-                        tiles: e.tiles.map(e => A(e, o))
+                        tiles: e.tiles.map(e => D(e, o))
                     })),
                     u = {
                         ...n,
@@ -4420,7 +4421,7 @@
                         createdByUsername: r.createdByUsername,
                         updatedByUserId: r.createdByUserId,
                         updatedByUsername: r.createdByUsername,
-                        config: (0, f.withChartRows)((0, f.withSummaryCards)(n.config, s), c)
+                        config: (0, y.withChartRows)((0, y.withSummaryCards)(n.config, s), c)
                     };
                 return this.getOrCreateUniverseMap(e).set(u.id, {
                     document: u,
@@ -4456,7 +4457,7 @@
             }
             async suggestDefaultName(e) {
                 let t = this.peekUniverseMap(e);
-                return I(t ? [...t.values()].map(e => e.document.name) : [])
+                return R(t ? [...t.values()].map(e => e.document.name) : [])
             }
             subscribe(e) {
                 return this.listeners.add(e), () => {
@@ -4465,28 +4466,28 @@
             }
             dedupeName(e, t) {
                 let r = this.peekUniverseMap(e);
-                return E(r ? [...r.values()].map(e => e.document.name) : [], t, this.duplicateNameSuffixes)
+                return I(r ? [...r.values()].map(e => e.document.name) : [], t, this.duplicateNameSuffixes)
             }
             constructor(e = {}) {
                 var t, r, n, a, i;
-                (0, m._)(this, "pagesOnServer", void 0), (0, m._)(this, "store", new Map), (0, m._)(this, "listeners", new Set), (0, m._)(this, "clock", void 0), (0, m._)(this, "idFactory", void 0), (0, m._)(this, "duplicateNameSuffixes", void 0), (0, m._)(this, "getLimits", void 0), this.getLimits = null != (t = e.getLimits) ? t : () => c.CONSERVATIVE_DASHBOARD_LIMITS, this.clock = null != (r = e.clock) ? r : X, this.idFactory = null != (n = e.idFactory) ? n : b.defaultIdFactory, this.duplicateNameSuffixes = null != (a = e.duplicateNameSuffixes) ? a : Z, this.pagesOnServer = null != (i = e.pagesOnServer) && i
+                (0, p._)(this, "pagesOnServer", void 0), (0, p._)(this, "store", new Map), (0, p._)(this, "listeners", new Set), (0, p._)(this, "clock", void 0), (0, p._)(this, "idFactory", void 0), (0, p._)(this, "duplicateNameSuffixes", void 0), (0, p._)(this, "getLimits", void 0), this.getLimits = null != (t = e.getLimits) ? t : () => u.CONSERVATIVE_DASHBOARD_LIMITS, this.clock = null != (r = e.clock) ? r : $, this.idFactory = null != (n = e.idFactory) ? n : A.defaultIdFactory, this.duplicateNameSuffixes = null != (a = e.duplicateNameSuffixes) ? a : ee, this.pagesOnServer = null != (i = e.pagesOnServer) && i
             }
         },
-        er = [{
+        en = [{
             fromVersion: 0,
             toVersion: 1,
             description: "v0 → v1 identity: alpha records had no schemaVersion field but were v1-shaped.",
             migrate: e => e
         }];
-    var en = e.i(115232);
-    let ea = "creator-hub:custom-dashboards:v1:universe:",
-        ei = /^\d+$/;
+    var ea = e.i(115232);
+    let ei = "creator-hub:custom-dashboards:v1:universe:",
+        eo = /^\d+$/;
 
-    function eo(e) {
-        return "".concat(ea).concat(e)
+    function es(e) {
+        return "".concat(ei).concat(e)
     }
 
-    function es(e, t, r) {
+    function ec(e, t, r) {
         let n = "".concat("creator-hub:custom-dashboards:v1:unreadable:universe:").concat(t);
         try {
             e.setItem(n, r)
@@ -4497,7 +4498,7 @@
         }
     }
 
-    function ec(e, t, r, n) {
+    function eu(e, t, r, n) {
         let a = {};
         Object.entries(r).forEach(e => {
             let [t, r] = e;
@@ -4510,25 +4511,25 @@
             t in a || (a[t] = r)
         });
         try {
-            e.setItem(eo(t), JSON.stringify({
+            e.setItem(es(t), JSON.stringify({
                 records: a
             }))
         } catch (e) {
             if (function(e) {
-                    if (!(0, en.isRecord)(e)) return !1;
+                    if (!(0, ea.isRecord)(e)) return !1;
                     let t = e.code,
                         r = e.name;
                     return 22 === t || "QuotaExceededError" === r || "NS_ERROR_DOM_QUOTA_REACHED" === r
-                }(e)) throw new u.CustomDashboardQuotaExceededError;
-            if (e instanceof u.CustomDashboardStorageWriteError) throw e;
-            throw new u.CustomDashboardStorageWriteError(e)
+                }(e)) throw new l.CustomDashboardQuotaExceededError;
+            if (e instanceof l.CustomDashboardStorageWriteError) throw e;
+            throw new l.CustomDashboardStorageWriteError(e)
         }
     }
 
-    function eu(e, t, r) {
-        if (Object.keys(t).length >= r) throw new u.CustomDashboardQuotaExceededError("Universe ".concat(e, " is at the per-universe cap of ").concat(r, " dashboards. Delete one to create another."))
+    function el(e, t, r) {
+        if (Object.keys(t).length >= r) throw new l.CustomDashboardQuotaExceededError("Universe ".concat(e, " is at the per-universe cap of ").concat(r, " dashboards. Delete one to create another."))
     }
-    let el = class {
+    let ed = class {
             getCorruptedRecordsForUniverse(e) {
                 var t;
                 return null != (t = this.corruptedByUniverse.get(e)) ? t : []
@@ -4544,7 +4545,7 @@
                 this.disposed || this.storageListenerAttached || (window.addEventListener("storage", this.handleStorageEvent), this.storageListenerAttached = !0)
             }
             requireStorage() {
-                if (this.disposed) throw new u.CustomDashboardNotAvailableError;
+                if (this.disposed) throw new l.CustomDashboardNotAvailableError;
                 let e = function() {
                     try {
                         var e;
@@ -4553,7 +4554,7 @@
                         return null
                     }
                 }();
-                if (!e) throw new u.CustomDashboardNotAvailableError;
+                if (!e) throw new l.CustomDashboardNotAvailableError;
                 return this.ensureStorageListener(), e
             }
             emit(e) {
@@ -4569,16 +4570,16 @@
                 let {
                     records: t
                 } = this.readMaterialised(e, "swallowUnreadable");
-                eu(e, t, this.getLimits(e).maxDashboardsPerUniverse)
+                el(e, t, this.getLimits(e).maxDashboardsPerUniverse)
             }
             readMaterialised(e) {
                 var t, r, n;
                 let a, i, o, s, c = arguments.length > 1 && void 0 !== arguments[1] ? arguments[1] : "throwOnUnreadable",
-                    l = this.requireStorage(),
-                    d = l.getItem(eo(e)),
+                    u = this.requireStorage(),
+                    d = u.getItem(es(e)),
                     h = this.materialisedByUniverse.get(e);
                 if (h && h.rawString === d) return {
-                    storage: l,
+                    storage: u,
                     records: h.records,
                     quarantine: h.quarantine
                 };
@@ -4593,19 +4594,19 @@
                     try {
                         n = JSON.parse(r)
                     } catch (n) {
-                        return es(e, t, r)
+                        return ec(e, t, r)
                     }
-                    return (0, en.isRecord)(n) && (0, en.isRecord)(n.records) ? {
+                    return (0, ea.isRecord)(n) && (0, ea.isRecord)(n.records) ? {
                         ok: !0,
                         bucket: {
                             records: n.records
                         }
-                    } : es(e, t, r)
-                }(l, e, d);
+                    } : ec(e, t, r)
+                }(u, e, d);
                 if (!m.ok) {
-                    if (this.storageUnreadableByUniverse.set(e, m.unreadableSidecarKey), "throwOnUnreadable" === c) throw new u.CustomDashboardStorageUnreadableError(m.unreadableSidecarKey);
+                    if (this.storageUnreadableByUniverse.set(e, m.unreadableSidecarKey), "throwOnUnreadable" === c) throw new l.CustomDashboardStorageUnreadableError(m.unreadableSidecarKey);
                     return {
-                        storage: l,
+                        storage: u,
                         records: {},
                         quarantine: {}
                     }
@@ -4614,7 +4615,7 @@
                 let {
                     records: p,
                     quarantine: f,
-                    corrupted: g,
+                    corrupted: y,
                     mutatedOnRead: v
                 } = (t = m.bucket, a = {}, i = {}, o = [], s = !1, Object.entries(null != (r = t.records) ? r : {}).forEach(t => {
                     var r;
@@ -4632,7 +4633,7 @@
                         });
                         return
                     }
-                    if ((0, en.isRecord)(c) && !0 === c.migrationFailed) {
+                    if ((0, ea.isRecord)(c) && !0 === c.migrationFailed) {
                         i[n] = c, o.push({
                             id: n,
                             reason: c.reason,
@@ -4640,7 +4641,7 @@
                         });
                         return
                     }
-                    if (!(0, en.isRecord)(c) || "number" != typeof c.version || !("document" in c)) {
+                    if (!(0, ea.isRecord)(c) || "number" != typeof c.version || !("document" in c)) {
                         i[n] = {
                             version: 1,
                             migrationFailed: !0,
@@ -4654,9 +4655,9 @@
                         return
                     }
                     let {
-                        document: l,
+                        document: u,
                         version: d
-                    } = c, h = (0, en.isRecord)(l) ? l : {}, m = "number" == typeof h.schemaVersion ? h.schemaVersion : void 0;
+                    } = c, h = (0, ea.isRecord)(u) ? u : {}, m = "number" == typeof h.schemaVersion ? h.schemaVersion : void 0;
                     try {
                         let t = (r = {
                             schemaVersion: m,
@@ -4666,30 +4667,30 @@
                                     ...e
                                 },
                                 a = "number" == typeof e.schemaVersion ? e.schemaVersion : 0;
-                            if (a > r) throw new u.CustomDashboardUnsupportedSchemaError(a, r);
+                            if (a > r) throw new l.CustomDashboardUnsupportedSchemaError(a, r);
                             let i = a,
                                 o = t.length + 1,
                                 s = 0;
                             for (; i < r && s < o;) {
                                 let e = i,
                                     a = t.find(t => t.fromVersion === e);
-                                if (!a) throw new u.CustomDashboardMigrationGapError(e, r);
+                                if (!a) throw new l.CustomDashboardMigrationGapError(e, r);
                                 let o = a.migrate(n),
                                     c = o.schemaVersion;
-                                if ("number" == typeof c && c !== e && c !== a.toVersion) throw new u.CustomDashboardMigrationGapError(e, r, "Migration step ".concat(e, " → ").concat(a.toVersion, " produced schemaVersion ").concat(c, "."));
+                                if ("number" == typeof c && c !== e && c !== a.toVersion) throw new l.CustomDashboardMigrationGapError(e, r, "Migration step ".concat(e, " → ").concat(a.toVersion, " produced schemaVersion ").concat(c, "."));
                                 n = {
                                     ...o,
                                     schemaVersion: a.toVersion
                                 }, i = a.toVersion, s += 1
                             }
-                            if (i !== r) throw new u.CustomDashboardMigrationGapError(i, r, "Migration pipeline did not converge after ".concat(s, " steps (stopped at version ").concat(i, ")."));
+                            if (i !== r) throw new l.CustomDashboardMigrationGapError(i, r, "Migration pipeline did not converge after ".concat(s, " steps (stopped at version ").concat(i, ")."));
                             return {
                                 ...n,
                                 schemaVersion: r
                             }
-                        }(r, er, y.LOCAL_STORAGE_DOCUMENT_SCHEMA_VERSION));
+                        }(r, en, g.LOCAL_STORAGE_DOCUMENT_SCHEMA_VERSION));
                         m !== t.schemaVersion && (s = !0);
-                        let c = (0, k.validateCustomDashboardDocument)({
+                        let c = (0, x.validateCustomDashboardDocument)({
                             ...t,
                             universeId: e
                         });
@@ -4699,7 +4700,7 @@
                                 version: "number" == typeof d ? d : 1,
                                 migrationFailed: !0,
                                 reason: e,
-                                raw: l
+                                raw: u
                             }, o.push({
                                 id: n,
                                 reason: e,
@@ -4712,13 +4713,13 @@
                             version: "number" == typeof d ? d : 1
                         }
                     } catch (r) {
-                        let e = r instanceof u.CustomDashboardUnsupportedSchemaError,
+                        let e = r instanceof l.CustomDashboardUnsupportedSchemaError,
                             t = r instanceof Error ? r.message : String(r);
                         i[n] = {
                             version: "number" == typeof d ? d : 1,
                             migrationFailed: !0,
                             reason: t,
-                            raw: l
+                            raw: u
                         }, o.push({
                             id: n,
                             reason: t,
@@ -4731,9 +4732,9 @@
                     corrupted: o,
                     mutatedOnRead: s
                 });
-                if (this.corruptedByUniverse.set(e, g), v) try {
-                    ec(l, e, p, f);
-                    let t = l.getItem(eo(e));
+                if (this.corruptedByUniverse.set(e, y), v) try {
+                    eu(u, e, p, f);
+                    let t = u.getItem(es(e));
                     this.materialisedByUniverse.set(e, {
                         rawString: t,
                         records: p,
@@ -4747,7 +4748,7 @@
                     quarantine: f
                 });
                 return {
-                    storage: l,
+                    storage: u,
                     records: p,
                     quarantine: f
                 }
@@ -4756,9 +4757,9 @@
                 var r, n;
                 let {
                     records: a
-                } = this.readMaterialised(e), i = D(Object.values(a).map(e => e.document)), o = null != (r = null == (n = this.corruptedByUniverse.get(e)) ? void 0 : n.length) ? r : 0;
+                } = this.readMaterialised(e), i = C(Object.values(a).map(e => e.document)), o = null != (r = null == (n = this.corruptedByUniverse.get(e)) ? void 0 : n.length) ? r : 0;
                 return {
-                    ...ee(i, t),
+                    ...et(i, t),
                     migrationFailedCount: o
                 }
             }
@@ -4766,7 +4767,7 @@
                 let {
                     records: t
                 } = this.readMaterialised(e);
-                return D(Object.values(t).map(e => e.document)).filter(e => e.isPinned).map(e => {
+                return C(Object.values(t).map(e => e.document)).filter(e => e.isPinned).map(e => {
                     let {
                         id: t,
                         name: r
@@ -4781,7 +4782,7 @@
                 let {
                     records: r
                 } = this.readMaterialised(e), n = r[t];
-                if (!n) throw new u.CustomDashboardNotFoundError(t);
+                if (!n) throw new l.CustomDashboardNotFoundError(t);
                 return n.document
             }
             async getVersion(e, t) {
@@ -4800,8 +4801,8 @@
                     next: i,
                     result: o
                 } = t(n, a);
-                ec(r, e, i, a);
-                let s = r.getItem(eo(e));
+                eu(r, e, i, a);
+                let s = r.getItem(es(e));
                 return this.materialisedByUniverse.set(e, {
                     rawString: s,
                     records: i,
@@ -4811,15 +4812,15 @@
             insertNewDocument(e, t) {
                 this.assertUnderUniverseCap(e.universeId);
                 let r = this.getLimits(e.universeId),
-                    n = (0, k.validateDashboardName)(e.name, r),
-                    a = (0, k.validateDashboardDescription)(e.description, r),
-                    i = void 0 !== e.config ? (0, k.validateCustomDashboardConfig)(e.config, {
+                    n = (0, x.validateDashboardName)(e.name, r),
+                    a = (0, x.validateDashboardDescription)(e.description, r),
+                    i = void 0 !== e.config ? (0, x.validateCustomDashboardConfig)(e.config, {
                         limits: r
-                    }) : y.EMPTY_DASHBOARD_CONFIG,
+                    }) : g.EMPTY_DASHBOARD_CONFIG,
                     o = this.clock.isoNow(),
                     s = {
                         id: this.idFactory.nextDashboardId(),
-                        schemaVersion: y.LOCAL_STORAGE_DOCUMENT_SCHEMA_VERSION,
+                        schemaVersion: g.LOCAL_STORAGE_DOCUMENT_SCHEMA_VERSION,
                         universeId: e.universeId,
                         name: n,
                         description: a,
@@ -4836,7 +4837,7 @@
                         updatedByUsername: e.createdByUsername,
                         config: i
                     };
-                return this.commit(e.universeId, t => (eu(e.universeId, t, r.maxDashboardsPerUniverse), {
+                return this.commit(e.universeId, t => (el(e.universeId, t, r.maxDashboardsPerUniverse), {
                     next: {
                         ...t,
                         [s.id]: {
@@ -4860,7 +4861,7 @@
             async update(e, t, r, n) {
                 let a = this.getLimits(e),
                     i = {};
-                return void 0 !== r.name && (i.name = (0, k.validateDashboardName)(r.name, a)), void 0 !== r.description && (i.description = (0, k.validateDashboardDescription)(r.description, a)), void 0 !== r.config && (i.config = (0, k.validateCustomDashboardConfig)(r.config, {
+                return void 0 !== r.name && (i.name = (0, x.validateDashboardName)(r.name, a)), void 0 !== r.description && (i.description = (0, x.validateDashboardDescription)(r.description, a)), void 0 !== r.config && (i.config = (0, x.validateCustomDashboardConfig)(r.config, {
                     limits: a
                 })), this.applyMutation(e, t, "update", () => ({
                     ...i,
@@ -4875,12 +4876,12 @@
             async addChartTile(e, t, r, n) {
                 let a = this.commit(e, e => {
                     let a = e[t];
-                    if (!a) throw new u.CustomDashboardNotFoundError(t);
-                    if ((null == n ? void 0 : n.expectedVersion) !== void 0 && n.expectedVersion !== a.version) throw new u.CustomDashboardVersionConflictError(t);
+                    if (!a) throw new l.CustomDashboardNotFoundError(t);
+                    if ((null == n ? void 0 : n.expectedVersion) !== void 0 && n.expectedVersion !== a.version) throw new l.CustomDashboardVersionConflictError(t);
                     let {
                         config: i,
                         tile: o
-                    } = (0, g.addChartTileToConfig)({
+                    } = (0, v.addChartTileToConfig)({
                         config: a.document.config,
                         tile: r.tile,
                         nextTileId: this.idFactory.nextTileId(),
@@ -4916,7 +4917,7 @@
             }
             async delete(e, t) {
                 this.commit(e, e => {
-                    if (!e[t]) throw new u.CustomDashboardNotFoundError(t);
+                    if (!e[t]) throw new l.CustomDashboardNotFoundError(t);
                     let r = {
                         ...e
                     };
@@ -4935,15 +4936,15 @@
                 let n = this.commit(e, n => {
                     var a;
                     let i = null == (a = n[t]) ? void 0 : a.document;
-                    if (!i) throw new u.CustomDashboardNotFoundError(t);
-                    eu(e, n, this.getLimits(e).maxDashboardsPerUniverse);
-                    let o = E(Object.values(n).map(e => e.document.name), i.name, this.duplicateNameSuffixes),
+                    if (!i) throw new l.CustomDashboardNotFoundError(t);
+                    el(e, n, this.getLimits(e).maxDashboardsPerUniverse);
+                    let o = I(Object.values(n).map(e => e.document.name), i.name, this.duplicateNameSuffixes),
                         s = this.clock.isoNow(),
                         c = () => this.idFactory.nextTileId(),
-                        l = (0, f.getSummaryCards)(i.config).map(e => A(e, c)),
-                        d = (0, f.getChartRows)(i.config).map(e => ({
+                        u = (0, y.getSummaryCards)(i.config).map(e => D(e, c)),
+                        d = (0, y.getChartRows)(i.config).map(e => ({
                             ...e,
-                            tiles: e.tiles.map(e => A(e, c))
+                            tiles: e.tiles.map(e => D(e, c))
                         })),
                         h = {
                             ...i,
@@ -4959,7 +4960,7 @@
                             createdByUsername: r.createdByUsername,
                             updatedByUserId: r.createdByUserId,
                             updatedByUsername: r.createdByUsername,
-                            config: (0, f.withChartRows)((0, f.withSummaryCards)(i.config, l), d)
+                            config: (0, y.withChartRows)((0, y.withSummaryCards)(i.config, u), d)
                         };
                     return {
                         next: {
@@ -4992,9 +4993,9 @@
             async pin(e, t) {
                 let r = this.commit(e, r => {
                     let n = r[t];
-                    if (!n) throw new u.CustomDashboardNotFoundError(t);
+                    if (!n) throw new l.CustomDashboardNotFoundError(t);
                     var a = this.getLimits(e).maxPinnedDashboardsPerUniverse;
-                    if (Object.values(r).filter(e => e.document.isPinned && e.document.id !== t).length >= a) throw new u.CustomDashboardQuotaExceededError("Universe ".concat(e, " is at the pinned-dashboard cap of ").concat(a, ". Unpin one to pin another."));
+                    if (Object.values(r).filter(e => e.document.isPinned && e.document.id !== t).length >= a) throw new l.CustomDashboardQuotaExceededError("Universe ".concat(e, " is at the pinned-dashboard cap of ").concat(a, ". Unpin one to pin another."));
                     let i = this.clock.isoNow(),
                         o = {
                             ...n.document,
@@ -5029,7 +5030,7 @@
                 let {
                     records: t
                 } = this.readMaterialised(e, "swallowUnreadable");
-                return I(Object.values(t).map(e => e.document.name))
+                return R(Object.values(t).map(e => e.document.name))
             }
             subscribe(e) {
                 return this.disposed ? () => void 0 : (this.ensureStorageListener(), this.listeners.add(e), () => {
@@ -5039,8 +5040,8 @@
             async applyMutation(e, t, r, n, a) {
                 let i = this.commit(e, e => {
                     let r = e[t];
-                    if (!r) throw new u.CustomDashboardNotFoundError(t);
-                    if ((null == a ? void 0 : a.expectedVersion) !== void 0 && a.expectedVersion !== r.version) throw new u.CustomDashboardVersionConflictError(t);
+                    if (!r) throw new l.CustomDashboardNotFoundError(t);
+                    if ((null == a ? void 0 : a.expectedVersion) !== void 0 && a.expectedVersion !== r.version) throw new l.CustomDashboardVersionConflictError(t);
                     let i = this.clock.isoNow(),
                         o = {
                             ...r.document,
@@ -5066,12 +5067,12 @@
             }
             constructor(e = {}) {
                 var t, r, n, a;
-                (0, m._)(this, "listeners", new Set), (0, m._)(this, "storageListenerAttached", !1), (0, m._)(this, "disposed", !1), (0, m._)(this, "corruptedByUniverse", new Map), (0, m._)(this, "storageUnreadableByUniverse", new Map), (0, m._)(this, "materialisedByUniverse", new Map), (0, m._)(this, "clock", void 0), (0, m._)(this, "idFactory", void 0), (0, m._)(this, "onPersistError", void 0), (0, m._)(this, "duplicateNameSuffixes", void 0), (0, m._)(this, "getLimits", void 0), (0, m._)(this, "handleStorageEvent", e => {
+                (0, p._)(this, "listeners", new Set), (0, p._)(this, "storageListenerAttached", !1), (0, p._)(this, "disposed", !1), (0, p._)(this, "corruptedByUniverse", new Map), (0, p._)(this, "storageUnreadableByUniverse", new Map), (0, p._)(this, "materialisedByUniverse", new Map), (0, p._)(this, "clock", void 0), (0, p._)(this, "idFactory", void 0), (0, p._)(this, "onPersistError", void 0), (0, p._)(this, "duplicateNameSuffixes", void 0), (0, p._)(this, "getLimits", void 0), (0, p._)(this, "handleStorageEvent", e => {
                     if (!e.key) return;
                     let t = function(e) {
-                        if (!e.startsWith(ea)) return null;
-                        let t = e.slice(ea.length);
-                        if (!ei.test(t)) return null;
+                        if (!e.startsWith(ei)) return null;
+                        let t = e.slice(ei.length);
+                        if (!eo.test(t)) return null;
                         let r = Number(t);
                         return Number.isSafeInteger(r) ? r : null
                     }(e.key);
@@ -5079,26 +5080,26 @@
                         universeId: t,
                         eventType: "external"
                     }))
-                }), this.getLimits = null != (t = e.getLimits) ? t : () => c.CONSERVATIVE_DASHBOARD_LIMITS, this.clock = null != (r = e.clock) ? r : X, this.onPersistError = e.onPersistError, this.idFactory = null != (n = e.idFactory) ? n : b.defaultIdFactory, this.duplicateNameSuffixes = null != (a = e.duplicateNameSuffixes) ? a : Z
+                }), this.getLimits = null != (t = e.getLimits) ? t : () => u.CONSERVATIVE_DASHBOARD_LIMITS, this.clock = null != (r = e.clock) ? r : $, this.onPersistError = e.onPersistError, this.idFactory = null != (n = e.idFactory) ? n : A.defaultIdFactory, this.duplicateNameSuffixes = null != (a = e.duplicateNameSuffixes) ? a : ee
             }
         },
-        ed = {
+        eh = {
             canCreate: !1,
             canEdit: !1,
             canPublish: !1,
             canDelete: !1
         },
-        eh = {
-            actions: ed,
-            limits: (0, c.resolveEffectiveDashboardLimits)(s.DENIED_DASHBOARD_CAPABILITIES.limits),
-            isResolved: !1
-        },
         em = {
-            ...eh,
-            isResolved: !0
+            actions: eh,
+            limits: (0, u.resolveEffectiveDashboardLimits)(c.DENIED_DASHBOARD_CAPABILITIES.limits),
+            isResolved: !1
         },
         ep = {
             ...em,
+            isResolved: !0
+        },
+        ef = {
+            ...ep,
             actions: {
                 canCreate: !0,
                 canEdit: !0,
@@ -5106,123 +5107,130 @@
                 canDelete: !0
             }
         },
-        ef = {
-            kind: "fixed",
-            state: eh
-        },
         ey = {
+            kind: "fixed",
+            state: em
+        },
+        eg = {
             list: async () => ({
                 items: [],
                 migrationFailedCount: 0
             }),
             listPinned: async () => [],
             async get() {
-                throw new u.CustomDashboardNotAvailableError
+                throw new l.CustomDashboardNotAvailableError
             },
             async create() {
-                throw new u.CustomDashboardNotAvailableError
+                throw new l.CustomDashboardNotAvailableError
             },
             async createAndPublish() {
-                throw new u.CustomDashboardNotAvailableError
+                throw new l.CustomDashboardNotAvailableError
             },
             async update() {
-                throw new u.CustomDashboardNotAvailableError
+                throw new l.CustomDashboardNotAvailableError
             },
             async addChartTile() {
-                throw new u.CustomDashboardNotAvailableError
+                throw new l.CustomDashboardNotAvailableError
             },
             async delete() {
-                throw new u.CustomDashboardNotAvailableError
+                throw new l.CustomDashboardNotAvailableError
             },
             async duplicate() {
-                throw new u.CustomDashboardNotAvailableError
+                throw new l.CustomDashboardNotAvailableError
             },
             async publish() {
-                throw new u.CustomDashboardNotAvailableError
+                throw new l.CustomDashboardNotAvailableError
             },
             async unpublish() {
-                throw new u.CustomDashboardNotAvailableError
+                throw new l.CustomDashboardNotAvailableError
             },
             async pin() {
-                throw new u.CustomDashboardNotAvailableError
+                throw new l.CustomDashboardNotAvailableError
             },
             async unpin() {
-                throw new u.CustomDashboardNotAvailableError
+                throw new l.CustomDashboardNotAvailableError
             },
             async suggestDefaultName() {
-                throw new u.CustomDashboardNotAvailableError
+                throw new l.CustomDashboardNotAvailableError
             },
             getVersion: async () => null,
             subscribe: () => () => void 0
         },
-        eg = (0, r.createContext)(null),
-        ev = (0, r.createContext)(!1);
+        ev = (0, n.createContext)(null),
+        eb = (0, n.createContext)(!1);
 
-    function eb(e, t) {
-        var n, a, i;
-        let o = (0, r.useContext)(ev),
-            s = null != (n = null == e ? void 0 : e.capabilitySource) ? n : ef,
-            u = "fixed" === s.kind ? null : s,
-            {
-                capabilities: l,
-                isResolved: h,
-                isError: m
-            } = (0, d.useDashboardCapabilitiesQuery)(null != (a = null == u ? void 0 : u.universeId) ? a : 0, null != (i = null == e ? void 0 : e.backends.api) ? i : ey, {
-                enabled: "server" === s.kind && t && !o
-            });
-        return (0, r.useMemo)(() => "fixed" === s.kind ? s.state : "hybrid" === s.kind ? {
-            ...ep,
-            limits: (0, c.resolveHybridDashboardLimits)(h ? l : void 0)
+    function eA(e, t) {
+        var a, i, o;
+        let s, c, l = (0, r.c)(9),
+            d = (0, n.useContext)(eb),
+            m = null != (a = null == e ? void 0 : e.capabilitySource) ? a : ey,
+            p = "fixed" === m.kind ? null : m,
+            f = "server" === m.kind && t && !d;
+        l[0] !== f ? (s = {
+            enabled: f
+        }, l[0] = f, l[1] = s) : s = l[1];
+        let {
+            capabilities: y,
+            isResolved: g,
+            isError: v
+        } = (0, h.useDashboardCapabilitiesQuery)(null != (i = null == p ? void 0 : p.universeId) ? i : 0, null != (o = null == e ? void 0 : e.backends.api) ? o : eg, s);
+        return l[2] !== y || l[3] !== v || l[4] !== g || l[5] !== m.isBackendChosen || l[6] !== m.kind || l[7] !== m.state ? (c = "fixed" === m.kind ? m.state : "hybrid" === m.kind ? {
+            ...ef,
+            limits: (0, u.resolveHybridDashboardLimits)(g ? y : void 0)
         } : function(e, t) {
             let {
                 capabilities: r,
                 isResolved: n,
                 isError: a
             } = e;
-            return t ? a ? em : {
+            return t ? a ? ep : {
                 actions: {
                     canCreate: r.canCreate,
                     canEdit: r.canEdit,
                     canPublish: r.canPublish,
                     canDelete: r.canDelete
                 },
-                limits: (0, c.resolveEffectiveDashboardLimits)(r.limits),
+                limits: (0, u.resolveEffectiveDashboardLimits)(r.limits),
                 isResolved: n
-            } : eh
+            } : em
         }({
-            capabilities: l,
-            isResolved: h,
-            isError: m
-        }, s.isBackendChosen), [l, m, h, s])
+            capabilities: y,
+            isResolved: g,
+            isError: v
+        }, m.isBackendChosen), l[2] = y, l[3] = v, l[4] = g, l[5] = m.isBackendChosen, l[6] = m.kind, l[7] = m.state, l[8] = c) : c = l[8], c
     }
     e.s(["CustomDashboardCapabilitiesFromList", 0, e => {
-        let {
-            children: r
-        } = e;
-        return (0, t.jsx)(ev.Provider, {
+        let n, a = (0, r.c)(2),
+            {
+                children: i
+            } = e;
+        return a[0] !== i ? (n = (0, t.jsx)(eb.Provider, {
             value: !0,
-            children: r
-        })
+            children: i
+        }), a[0] = i, a[1] = n) : n = a[1], n
     }, "CustomDashboardServiceProvider", 0, e => {
-        let {
-            service: n,
-            canMutateDashboards: i = !0,
-            children: o
-        } = e, s = (0, a.useQueryClient)(), [u] = (0, r.useState)(() => {
+        let a, o, s, c, l, h = (0, r.c)(22),
+            {
+                service: m,
+                canMutateDashboards: p,
+                children: f
+            } = e,
+            y = (0, i.useQueryClient)();
+        h[0] !== y ? (a = () => {
             let e, t, r;
-            return e = new K(P(), {
+            return e = new j(k(), {
                 repairLegacyDocumentsOnRead: !0
-            }), t = null, r = e => (0, c.resolveHybridDashboardLimits)(s.getQueryData(l.customDashboardQueryKeys.capabilities(e))), {
+            }), t = null, r = e => (0, u.resolveHybridDashboardLimits)(y.getQueryData(d.customDashboardQueryKeys.capabilities(e))), {
                 api: e,
-                getHybrid: () => (null != t || (t = new W({
+                getHybrid: () => (null != t || (t = new X({
                     apiService: e,
                     localService: function(e) {
                         try {
-                            if (window.localStorage) return new el({
+                            if (window.localStorage) return new ed({
                                 getLimits: e
                             })
                         } catch (e) {}
-                        return new et({
+                        return new er({
                             getLimits: e
                         })
                     }(r)
@@ -5231,48 +5239,64 @@
                     null == t || t.dispose(), e.dispose()
                 }
             }
-        });
-        (0, r.useEffect)(() => u.dispose, [u]);
-        let d = (0, r.useMemo)(() => n ? {
-            service: n,
-            isReady: !0,
-            capabilitySource: {
-                kind: "fixed",
-                state: i ? ep : em
-            },
-            backends: {
-                api: n,
-                getHybrid: () => n
+        }, h[0] = y, h[1] = a) : a = h[1];
+        let [g] = (0, n.useState)(a);
+        h[2] !== g.dispose ? (o = () => g.dispose, h[2] = g.dispose, h[3] = o) : o = h[3], h[4] !== g ? (s = [g], h[4] = g, h[5] = s) : s = h[5], (0, n.useEffect)(o, s);
+        e: {
+            let e, t, r, n;
+            if (!m) {
+                let e;
+                h[6] !== g ? (e = {
+                    service: eg,
+                    isReady: !1,
+                    capabilitySource: ey,
+                    backends: g
+                }, h[6] = g, h[7] = e) : e = h[7], c = e;
+                break e
             }
-        } : {
-            service: ey,
-            isReady: !1,
-            capabilitySource: ef,
-            backends: u
-        }, [i, u, n]);
-        return (0, t.jsx)(eg.Provider, {
-            value: d,
-            children: o
-        })
+            let a = void 0 === p || p ? ef : ep;h[8] !== a ? (e = {
+                kind: "fixed",
+                state: a
+            }, h[8] = a, h[9] = e) : e = h[9],
+            h[10] !== m ? (t = () => m, h[10] = m, h[11] = t) : t = h[11],
+            h[12] !== m || h[13] !== t ? (r = {
+                api: m,
+                getHybrid: t
+            }, h[12] = m, h[13] = t, h[14] = r) : r = h[14],
+            h[15] !== m || h[16] !== e || h[17] !== r ? (n = {
+                service: m,
+                isReady: !0,
+                capabilitySource: e,
+                backends: r
+            }, h[15] = m, h[16] = e, h[17] = r, h[18] = n) : n = h[18],
+            c = n
+        }
+        let v = c;
+        return h[19] !== f || h[20] !== v ? (l = (0, t.jsx)(ev.Provider, {
+            value: v,
+            children: f
+        }), h[19] = f, h[20] = v, h[21] = l) : l = h[21], l
     }, "UniverseFlaggedCustomDashboardProvider", 0, e => {
-        let {
-            children: a
-        } = e, s = (0, r.useContext)(eg);
-        if (!s) throw Error("UniverseFlaggedCustomDashboardProvider must be used within CustomDashboardServiceProvider.");
-        let c = (0, h.parseExperienceUniverseIdFromRouter)((0, n.useRouter)()),
-            u = Number.isFinite(c) && c > 0,
+        let i, c, u, l, d, p, f = (0, r.c)(26),
             {
-                ready: l,
-                value: m
-            } = (0, i.useFlag)(o.isCustomDashboardsLocalStorageEnabled),
-            p = l && m,
+                children: y
+            } = e,
+            g = (0, n.useContext)(ev);
+        if (!g) throw Error("UniverseFlaggedCustomDashboardProvider must be used within CustomDashboardServiceProvider.");
+        let v = (d = (0, r.c)(2), p = (0, a.useRouter)(), d[0] !== p ? (l = (0, m.parseExperienceUniverseIdFromRouter)(p), d[0] = p, d[1] = l) : l = d[1], l),
+            b = Number.isFinite(v) && v > 0,
             {
-                backends: f
-            } = s,
-            y = (0, d.useDashboardCapabilitiesQuery)(c, f.api, {
-                enabled: p
-            }),
-            g = function(e) {
+                ready: A,
+                value: D
+            } = (0, o.useFlag)(s.isCustomDashboardsLocalStorageEnabled),
+            C = A && D,
+            {
+                backends: w
+            } = g;
+        f[0] !== C ? (i = {
+            enabled: C
+        }, f[0] = C, f[1] = i) : i = f[1];
+        let T = function(e) {
                 let {
                     isFlagReady: t,
                     isHybridCandidate: r,
@@ -5285,105 +5309,127 @@
                 } = e;
                 return t ? r ? !n || i || o ? !o && n && (a.canCreate || a.canEdit) ? "api" : "hybrid" : "pending" : "api" : "pending"
             }({
-                isFlagReady: l,
-                isHybridCandidate: p,
-                hasUniverse: u,
-                capabilitiesQuery: y
+                isFlagReady: A,
+                isHybridCandidate: C,
+                hasUniverse: b,
+                capabilitiesQuery: (0, h.useDashboardCapabilitiesQuery)(v, w.api, i)
             }),
-            [v, b] = (0, r.useState)(null);
-        "pending" !== g && (null == v ? void 0 : v.universeId) !== c && b({
-            universeId: c,
-            mode: g
+            [S, E] = (0, n.useState)(null);
+        "pending" !== T && (null == S ? void 0 : S.universeId) !== v && E({
+            universeId: v,
+            mode: T
         });
-        let A = (null == v ? void 0 : v.universeId) === c ? v.mode : g,
-            D = (0, r.useMemo)(() => "hybrid" === A ? {
-                backends: f,
-                service: f.getHybrid(),
-                isReady: !0,
-                capabilitySource: {
+        let I = (null == S ? void 0 : S.universeId) === v ? S.mode : T;
+        e: {
+            let e, t;
+            if ("hybrid" === I) {
+                let e, t, r;
+                f[2] !== w ? (e = w.getHybrid(), f[2] = w, f[3] = e) : e = f[3], f[4] !== v ? (t = {
                     kind: "hybrid",
-                    universeId: c
-                }
-            } : "api" === A ? {
-                backends: f,
-                service: f.api,
-                isReady: !0,
-                capabilitySource: u ? {
+                    universeId: v
+                }, f[4] = v, f[5] = t) : t = f[5], f[6] !== w || f[7] !== e || f[8] !== t ? (r = {
+                    backends: w,
+                    service: e,
+                    isReady: !0,
+                    capabilitySource: t
+                }, f[6] = w, f[7] = e, f[8] = t, f[9] = r) : r = f[9], c = r;
+                break e
+            }
+            if ("api" === I) {
+                let e, t;
+                f[10] !== b || f[11] !== v ? (e = b ? {
                     kind: "server",
-                    universeId: c,
+                    universeId: v,
                     isBackendChosen: !0
                 } : {
                     kind: "fixed",
-                    state: em
-                }
-            } : {
-                backends: f,
-                service: s.service,
+                    state: ep
+                }, f[10] = b, f[11] = v, f[12] = e) : e = f[12], f[13] !== w || f[14] !== e ? (t = {
+                    backends: w,
+                    service: w.api,
+                    isReady: !0,
+                    capabilitySource: e
+                }, f[13] = w, f[14] = e, f[15] = t) : t = f[15], c = t;
+                break e
+            }
+            f[16] !== b || f[17] !== v ? (e = b ? {
+                kind: "server",
+                universeId: v,
+                isBackendChosen: !1
+            } : ey, f[16] = b, f[17] = v, f[18] = e) : e = f[18],
+            f[19] !== w || f[20] !== g.service || f[21] !== e ? (t = {
+                backends: w,
+                service: g.service,
                 isReady: !1,
-                capabilitySource: u ? {
-                    kind: "server",
-                    universeId: c,
-                    isBackendChosen: !1
-                } : ef
-            }, [A, f, u, s.service, c]);
-        return (0, t.jsx)(eg.Provider, {
-            value: D,
-            children: a
-        })
+                capabilitySource: e
+            }, f[19] = w, f[20] = g.service, f[21] = e, f[22] = t) : t = f[22],
+            c = t
+        }
+        let R = c;
+        return f[23] !== y || f[24] !== R ? (u = (0, t.jsx)(ev.Provider, {
+            value: R,
+            children: y
+        }), f[23] = y, f[24] = R, f[25] = u) : u = f[25], u
     }, "useCustomDashboardActions", 0, function() {
-        let e = (0, r.useContext)(eg),
+        let e = (0, n.useContext)(ev),
             {
                 actions: t
-            } = eb(e, !0);
+            } = eA(e, !0);
         if (!e) throw Error("useCustomDashboardActions() must be used within a CustomDashboardServiceProvider.");
         return t
     }, "useCustomDashboardActionsResolved", 0, function() {
-        let e = (0, r.useContext)(eg),
+        let e = (0, n.useContext)(ev),
             {
                 isResolved: t
-            } = eb(e, !0);
+            } = eA(e, !0);
         if (!e) throw Error("useCustomDashboardActionsResolved() must be used within a CustomDashboardServiceProvider.");
         return t
     }, "useCustomDashboardLimits", 0, function() {
-        let e = (0, r.useContext)(eg),
+        let e = (0, n.useContext)(ev),
             {
                 limits: t
-            } = eb(e, !0);
+            } = eA(e, !0);
         if (!e) throw Error("useCustomDashboardLimits() must be used within a CustomDashboardServiceProvider.");
         return t
     }, "useCustomDashboardService", 0, function() {
-        let e = (0, r.useContext)(eg);
+        let e = (0, n.useContext)(ev);
         if (!e) throw Error("useCustomDashboardService() must be used within a CustomDashboardServiceProvider.");
         return e.service
     }, "useCustomDashboardsBackendState", 0, function() {
-        let e = (0, r.useContext)(eg);
-        if (!e) throw Error("useCustomDashboardsBackendState() must be used within CustomDashboardServiceProvider.");
-        return {
-            isReady: e.isReady
-        }
+        let e, t = (0, r.c)(2),
+            a = (0, n.useContext)(ev);
+        if (!a) throw Error("useCustomDashboardsBackendState() must be used within CustomDashboardServiceProvider.");
+        return t[0] !== a.isReady ? (e = {
+            isReady: a.isReady
+        }, t[0] = a.isReady, t[1] = e) : e = t[1], e
     }, "useOptionalCustomDashboardActionState", 0, function(e) {
-        let {
-            isRequested: t
-        } = e, n = (0, r.useContext)(eg), {
-            actions: a,
-            isResolved: i
-        } = eb(n, t);
-        return (0, r.useMemo)(() => n ? {
-            actions: a,
-            isResolved: i
+        let t, a = (0, r.c)(4),
+            {
+                isRequested: i
+            } = e,
+            o = (0, n.useContext)(ev),
+            {
+                actions: s,
+                isResolved: c
+            } = eA(o, i);
+        return a[0] !== s || a[1] !== o || a[2] !== c ? (t = o ? {
+            actions: s,
+            isResolved: c
         } : {
-            actions: ed,
+            actions: eh,
             isResolved: !0
-        }, [a, n, i])
+        }, a[0] = s, a[1] = o, a[2] = c, a[3] = t) : t = a[3], t
     }, "useOptionalCustomDashboardService", 0, function() {
         var e, t;
-        return null != (e = null == (t = (0, r.useContext)(eg)) ? void 0 : t.service) ? e : null
+        return null != (e = null == (t = (0, n.useContext)(ev)) ? void 0 : t.service) ? e : null
     }, "useOptionalCustomDashboardsBackendState", 0, function() {
         var e;
-        let t = (0, r.useContext)(eg);
-        return {
-            isReady: null != (e = null == t ? void 0 : t.isReady) && e
-        }
+        let t, a = (0, r.c)(2),
+            i = (0, n.useContext)(ev),
+            o = null != (e = null == i ? void 0 : i.isReady) && e;
+        return a[0] !== o ? (t = {
+            isReady: o
+        }, a[0] = o, a[1] = t) : t = a[1], t
     }], 479236)
 }, 379843, e => {
     "use strict";
@@ -5505,5 +5551,5 @@
     }])
 }]);
 
-//# debugId=e7965716-c3ce-2e32-86cb-8945659f672b
-//# sourceMappingURL=2s4e1xmv394z9.js.map
+//# debugId=60bf6556-7e9e-98b4-7eef-b33151fcd0d6
+//# sourceMappingURL=0beh009e00tm5.js.map

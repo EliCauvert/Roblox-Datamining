@@ -7423,9 +7423,6 @@
             getAllGroupRolePermissionsURL: function(e) {
                 return "".concat(r.EnvironmentUrls.groupsApi, "/v1/groups/").concat(e, "/roles/permissions")
             },
-            getGroupMigrationStatusURL: function(e) {
-                return "".concat(r.EnvironmentUrls.groupsApi, "/v1/groups/").concat(e, "/migration")
-            },
             getGroupURL: function(e) {
                 return "".concat(r.EnvironmentUrls.groupsApi, "/v1/groups/").concat(e)
             },
@@ -7865,7 +7862,7 @@
         GroupAffiliatesService: G
     })
 }();
-//# sourceMappingURL=https://sourcemaps.rbxcdn.com/915d968b51fb2dd557f533170366cc32-groupAffiliates.bundle.min.js.map
+//# sourceMappingURL=https://sourcemaps.rbxcdn.com/77bf06a8e5eb4999b3f9439603272e3a-groupAffiliates.bundle.min.js.map
 
 /*! For license information please see groupDetails.bundle.min.js.LICENSE.txt */
 ! function() {
@@ -34943,9 +34940,6 @@
                     getAllGroupRolePermissionsURL: function(t) {
                         return "".concat(e.EnvironmentUrls.groupsApi, "/v1/groups/").concat(t, "/roles/permissions")
                     },
-                    getGroupMigrationStatusURL: function(t) {
-                        return "".concat(e.EnvironmentUrls.groupsApi, "/v1/groups/").concat(t, "/migration")
-                    },
                     getGroupURL: function(t) {
                         return "".concat(e.EnvironmentUrls.groupsApi, "/v1/groups/").concat(t)
                     },
@@ -43305,7 +43299,7 @@
             })
         }()
 }();
-//# sourceMappingURL=https://sourcemaps.rbxcdn.com/407ee03ad8cf0d33c7250f38b3c77656-groupProfileHeader.bundle.min.js.map
+//# sourceMappingURL=https://sourcemaps.rbxcdn.com/8fbcf90dbce826aaa2386191eefec713-groupProfileHeader.bundle.min.js.map
 
 /*! For license information please see groupExperiences.bundle.min.js.LICENSE.txt */
 ! function() {

@@ -3,7 +3,7 @@
     try {
         var e = "undefined" != typeof globalThis ? globalThis : "undefined" != typeof global ? global : "undefined" != typeof window ? window : "undefined" != typeof self ? self : {},
             n = (new e.Error).stack;
-        n && ((e._debugIds || (e._debugIds = {}))[n] = "8c806960-30f4-4014-322d-c7626ad4ddff")
+        n && ((e._debugIds || (e._debugIds = {}))[n] = "114bc19c-dbe4-e20b-c212-64b8f33435f9")
     } catch (e) {}
 }();
 (globalThis.TURBOPACK || (globalThis.TURBOPACK = [])).push(["object" == typeof document ? document.currentScript : void 0, 962059, e => {
@@ -107,9 +107,9 @@
             items: n
         })
     };
-    var P = e.i(75584),
-        k = e.i(659332),
-        L = e.i(222643),
+    var P = e.i(562991),
+        k = e.i(489098),
+        L = e.i(36482),
         R = e.i(197649);
     let N = () => a.default.createElement("div", {
             className: "flex items-center justify-center shrink-0 width-600"
@@ -304,7 +304,7 @@
         Q = e.i(507742),
         X = e.i(9618),
         Z = e.i(37819),
-        $ = e.i(631226),
+        $ = e.i(580683),
         ee = e.i(345886),
         et = e.i(714039),
         en = e.i(896852),
@@ -313,9 +313,9 @@
         es = e.i(845592),
         eo = e.i(339544),
         er = e.i(475642),
-        el = e.i(41466),
-        ed = e.i(842051),
-        eu = e.i(984656),
+        el = e.i(278862),
+        ed = e.i(711950),
+        eu = e.i(643992),
         ec = e.i(211388);
     let em = "CreatorHub.MomentsCreations.local",
         ep = e => "".concat(em, ".").concat(e),
@@ -3032,7 +3032,7 @@
             })]
         })
     }, [ea.TranslationNamespace.Creations]);
-    var ny = e.i(395203),
+    var ny = e.i(809166),
         nI = e.i(392782);
     let nT = "UniverseId",
         nC = "PlaceId",
@@ -3162,8 +3162,8 @@
                 })]
             })
         }, [ea.TranslationNamespace.Creations, ea.TranslationNamespace.Controls]);
-    var nE = e.i(316413),
-        nP = e.i(95899);
+    var nE = e.i(108872),
+        nP = e.i(152324);
     let nk = (0, u.withTranslation)(e => {
         let {
             value: t,
@@ -3639,7 +3639,7 @@
                 })
             })
         };
-    var nH = e.i(836344);
+    var nH = e.i(591012);
     let nK = e => {
             let {
                 selected: t,
@@ -4369,7 +4369,7 @@
                 return "Message.GrantedItemCannotBePublished"
         }
     };
-    var iY = e.i(904451),
+    var iY = e.i(614875),
         iQ = e.i(691236);
     let iX = (0, n1.makeStyles)()(e => ({
             dialogPaper: {
@@ -5296,8 +5296,8 @@
     function ar(e) {
         return null != e.universeId ? e.universeId : "experienceId" in e && "number" == typeof e.experienceId ? e.experienceId : void 0
     }
-    var al = e.i(517359),
-        ad = e.i(986939);
+    var al = e.i(130058),
+        ad = e.i(921378);
     let au = (e, t) => {
             let {
                 user: n
@@ -5537,7 +5537,7 @@
                 })
             })
         }, [ea.TranslationNamespace.Creations, ea.TranslationNamespace.Controls]);
-    var av = e.i(607895),
+    var av = e.i(927072),
         af = e.i(493924);
     let ax = e => {
         let {
@@ -5570,8 +5570,8 @@
             })
         })
     };
-    var ag = e.i(369114),
-        ab = e.i(515351),
+    var ag = e.i(25505),
+        ab = e.i(508019),
         ay = e.i(125677),
         aI = e.i(20227),
         aT = e.i(494601);
@@ -5672,7 +5672,7 @@
             })
         };
     var aj = e.i(458451),
-        aE = e.i(905943),
+        aE = e.i(984863),
         aP = e.i(751846),
         ak = e.i(186930);
     let aL = (0, u.withTranslation)(e => {
@@ -5997,6 +5997,7 @@
                                 }, np(e)))
                             })]
                         }), y.length > 0 ? (0, i.jsx)(ag.TablePagination, {
+                            paginationAriaLabel: "Pagination",
                             page: I,
                             rowsPerPage: T,
                             totalRows: y.length,
@@ -6761,5 +6762,5 @@
     })
 }]);
 
-//# debugId=8c806960-30f4-4014-322d-c7626ad4ddff
-//# sourceMappingURL=03t1loa7-qae1.js.map
+//# debugId=114bc19c-dbe4-e20b-c212-64b8f33435f9
+//# sourceMappingURL=084wx-1cqkidt.js.map

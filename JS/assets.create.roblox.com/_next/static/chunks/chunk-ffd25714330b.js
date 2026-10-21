@@ -3,7 +3,7 @@
     try {
         var e = "undefined" != typeof globalThis ? globalThis : "undefined" != typeof global ? global : "undefined" != typeof window ? window : "undefined" != typeof self ? self : {},
             n = (new e.Error).stack;
-        n && ((e._debugIds || (e._debugIds = {}))[n] = "41f9589c-1aff-9ce4-18ff-a346b21e2b1a")
+        n && ((e._debugIds || (e._debugIds = {}))[n] = "1082bed4-2a67-0a8c-b77e-044ceb1fec2f")
     } catch (e) {}
 }();
 (globalThis.TURBOPACK || (globalThis.TURBOPACK = [])).push(["object" == typeof document ? document.currentScript : void 0, 138726, e => {
@@ -57,10 +57,10 @@
         } = d(), {
             status: v,
             login: g
-        } = (0, r.useRobloxAuthentication)(), w = (0, o.usePolyfills)();
+        } = (0, r.useRobloxAuthentication)(), m = (0, o.usePolyfills)();
         return ((0, n.useEffect)(() => {
             "unauthenticated" === v && g(), "logged-out" === v && i.default.push(c.creatorHub.getUrl())
-        }, [g, v]), "initial" !== v && "loading" !== v && w) ? "error" === v ? (0, t.jsx)("div", {
+        }, [g, v]), "initial" !== v && "loading" !== v && m) ? "error" === v ? (0, t.jsx)("div", {
             className: h,
             children: (0, t.jsx)("div", {
                 className: f,
@@ -168,14 +168,14 @@
                     flex: v,
                     ...g
                 },
-                cx: w
+                cx: m
             } = o({
                 gap: f
             });
             return (0, t.jsx)("div", {
                 ref: n,
                 id: i,
-                className: w(v, g.gap, s, null == a ? void 0 : a.root, g["flexDirection".concat((0, r.snakeToPascalCase)(null != l ? l : ""))], g["flexWrap".concat((0, r.snakeToPascalCase)(null != u ? u : ""))], g["alignItems".concat((0, r.snakeToPascalCase)(null != d ? d : ""))], g["justifyContent".concat((0, r.snakeToPascalCase)(null != c ? c : ""))]),
+                className: m(v, g.gap, s, null == a ? void 0 : a.root, g["flexDirection".concat((0, r.snakeToPascalCase)(null != l ? l : ""))], g["flexWrap".concat((0, r.snakeToPascalCase)(null != u ? u : ""))], g["alignItems".concat((0, r.snakeToPascalCase)(null != d ? d : ""))], g["justifyContent".concat((0, r.snakeToPascalCase)(null != c ? c : ""))]),
                 children: h
             })
         });
@@ -496,7 +496,7 @@
 
         function c(e, t, c) {
             var g = [],
-                w = h(function e(t, n) {
+                m = h(function e(t, n) {
                     var i, r = [],
                         o = typeof t;
                     if (n && "object" == o)
@@ -516,21 +516,21 @@
                         return [+new Date, n, r, n.screen, v(i)]
                     }
                 }() : e, 3), g),
-                m = new d(g),
+                w = new d(g),
                 x = function() {
-                    for (var e = m.g(6), t = a, n = 0; e < l;) e = (e + n) * 256, t *= 256, n = m.g(1);
+                    for (var e = w.g(6), t = a, n = 0; e < l;) e = (e + n) * 256, t *= 256, n = w.g(1);
                     for (; e >= u;) e /= 2, t /= 2, n >>>= 1;
                     return (e + n) / t
                 };
             return x.int32 = function() {
-                return 0 | m.g(4)
+                return 0 | w.g(4)
             }, x.quick = function() {
-                return m.g(4) / 0x100000000
-            }, x.double = x, h(v(m.S), i), (t.pass || c || function(e, t, n, i) {
-                return (i && (i.S && f(i, m), e.state = function() {
-                    return f(m, {})
+                return w.g(4) / 0x100000000
+            }, x.double = x, h(v(w.S), i), (t.pass || c || function(e, t, n, i) {
+                return (i && (i.S && f(i, w), e.state = function() {
+                    return f(w, {})
                 }), n) ? (r[s] = e, t) : e
-            })(x, w, "global" in t ? t.global : this == r, t.state)
+            })(x, m, "global" in t ? t.global : this == r, t.state)
         }
 
         function d(e) {
@@ -613,13 +613,13 @@
         h = e.i(80768),
         v = e.i(533414),
         g = ((r = {}).TIMED_OUT = "TIMED_OUT", r.WEBVIEW_NOT_INITIALIZED = "WEBVIEW_NOT_INITIALIZED", r.WEBVIEW_NOT_FOUND = "WEBVIEW_NOT_FOUND", r.INVALID_MESSAGE = "INVALID_MESSAGE", r);
-    class w extends Error {
+    class m extends Error {
         constructor(e, t, n) {
             let i = "MessageBusError, code: ".concat(e);
             t && (i += ", eventName: ".concat(t)), n && (i += ", type: ".concat(n)), super(i), (0, u._)(this, "code", void 0), (0, u._)(this, "eventName", void 0), (0, u._)(this, "eventType", void 0), this.code = e, this.eventName = t, this.eventType = n
         }
     }
-    var m = ((o = m || {}).DarkFoundation = "darkFoundation", o.LightFoundation = "lightFoundation", o);
+    var w = ((o = w || {}).DarkFoundation = "darkFoundation", o.LightFoundation = "lightFoundation", o);
     let x = "darkFoundation";
     var p = ((s = {}).Fire = "fire", s.Response = "response", s.Request = "request", s);
 
@@ -674,9 +674,9 @@
     class C {
         getStudioConfiguration() {
             var e;
-            if (!b() || !(null == (e = window.rbx) ? void 0 : e.messageBus)) throw new w(g.WEBVIEW_NOT_INITIALIZED);
+            if (!b() || !(null == (e = window.rbx) ? void 0 : e.messageBus)) throw new m(g.WEBVIEW_NOT_INITIALIZED);
             let t = window.rbx.studio;
-            return Object.values(d.Locale).includes(t.locale) || (console.warn("Locale: ".concat(t.locale, " is not valid. Defaulting to ").concat(S, ".")), t.locale = S), Object.values(m).includes(t.theme) || (console.warn("Theme: ".concat(t.theme, " is not valid. Defaulting to ").concat(x, ".")), t.theme = x), t
+            return Object.values(d.Locale).includes(t.locale) || (console.warn("Locale: ".concat(t.locale, " is not valid. Defaulting to ").concat(S, ".")), t.locale = S), Object.values(w).includes(t.theme) || (console.warn("Theme: ".concat(t.theme, " is not valid. Defaulting to ").concat(x, ".")), t.theme = x), t
         }
         getOrCreateEventListenersMap(e) {
             let t = e.events;
@@ -686,7 +686,7 @@
         }
         loadWebView() {
             var e, t, n, i;
-            if (!b() || !(null == (e = window.rbx) ? void 0 : e.messageBus)) throw new w(g.WEBVIEW_NOT_INITIALIZED);
+            if (!b() || !(null == (e = window.rbx) ? void 0 : e.messageBus)) throw new m(g.WEBVIEW_NOT_INITIALIZED);
             if ((null == (t = window.rbx) ? void 0 : t.postMessageFrameUrl) && (null == (i = window.webkit) || null == (n = i.messageHandlers) ? void 0 : n.roblox)) {
                 let e = new E(window.rbx.postMessageFrameUrl);
                 window.webkit.messageHandlers.roblox.postMessage = t => {
@@ -717,17 +717,17 @@
         }
         postMessage(e, t, n) {
             var i;
-            if (!b() || !(null == (i = window.rbx) ? void 0 : i.postMessage)) throw new w(g.WEBVIEW_NOT_FOUND, e, t.type);
+            if (!b() || !(null == (i = window.rbx) ? void 0 : i.postMessage)) throw new m(g.WEBVIEW_NOT_FOUND, e, t.type);
             let r = JSON.stringify(t),
                 o = JSON.stringify(n);
-            if (r.includes("|")) throw new w(g.INVALID_MESSAGE, e, t.type);
+            if (r.includes("|")) throw new m(g.INVALID_MESSAGE, e, t.type);
             let s = "1|".concat(e, "|").concat(r, "|").concat(o);
             window.rbx.postMessage("messageBusEvent", s)
         }
         setListenerInternal(e, t, n) {
             var i;
             let r = null == (i = window.rbx) ? void 0 : i.messageBus;
-            if (!b() || !r) throw new w(g.WEBVIEW_NOT_FOUND, String(e));
+            if (!b() || !r) throw new m(g.WEBVIEW_NOT_FOUND, String(e));
             let o = this.getFullEventName(e),
                 s = this.getOrCreateEventListenersMap(r),
                 a = new Map,
@@ -749,7 +749,7 @@
         setListener(e, t) {
             var n;
             let i = null == (n = window.rbx) ? void 0 : n.messageBus;
-            if (!b() || !i) throw new w(g.WEBVIEW_NOT_FOUND, String(e));
+            if (!b() || !i) throw new m(g.WEBVIEW_NOT_FOUND, String(e));
             let r = this.getFullEventName(e),
                 o = (e, n) => {
                     var i;
@@ -780,7 +780,7 @@
         }
         async call(e, t) {
             let n, i = arguments.length > 2 && void 0 !== arguments[2] ? arguments[2] : 3e3;
-            if (!b()) throw new w(g.WEBVIEW_NOT_FOUND, String(e), p.Request);
+            if (!b()) throw new m(g.WEBVIEW_NOT_FOUND, String(e), p.Request);
             let r = n => new Promise(i => {
                     let r = (t, r) => {
                         this.removeListenerInternal(e, n), i(t)
@@ -793,12 +793,12 @@
                 o = c.uuidService.generateRandomUuid();
             return i <= 0 ? r(o) : Promise.race([new Promise((t, r) => {
                 n = setTimeout(() => {
-                    this.removeListenerInternal(e, o), r(new w(g.TIMED_OUT, String(e), p.Request))
+                    this.removeListenerInternal(e, o), r(new m(g.TIMED_OUT, String(e), p.Request))
                 }, i)
             }), r(o).then(e => (n && clearTimeout(n), e))])
         }
         fire(e, t) {
-            if (!b()) throw new w(g.WEBVIEW_NOT_FOUND, String(e), p.Fire);
+            if (!b()) throw new m(g.WEBVIEW_NOT_FOUND, String(e), p.Fire);
             let n = c.uuidService.generateRandomUuid();
             this.postMessage(this.getFullEventName(e), {
                 type: p.Fire,
@@ -860,7 +860,7 @@
             super({
                 namespace: e
             }), (0, u._)(this, "studioConfiguration", void 0), (0, u._)(this, "loadWebView", N), (0, u._)(this, "setListener", A), (0, u._)(this, "fire", N), this.studioConfiguration = {
-                theme: m.DarkFoundation,
+                theme: w.DarkFoundation,
                 locale: d.Locale.English,
                 isPrewarm: !1
             }, window.rbx = {
@@ -873,7 +873,7 @@
                 postMessage: null != (i = null == (s = window.rbx) ? void 0 : s.postMessage) ? i : N
             }
         }
-    }, "StudioTheme", 0, m, "StudioWebViewMessageBusConnector", 0, function(e) {
+    }, "StudioTheme", 0, w, "StudioWebViewMessageBusConnector", 0, function(e) {
         var t, n;
         let {
             children: i,
@@ -888,8 +888,8 @@
             removeListener: d,
             setListener: v,
             loadWebView: g,
-            studioVersion: w
-        } = r(), m = (0, f.useRef)(a && null != (t = l().volume) ? t : 1), x = (0, f.useRef)(a ? (n = () => m.current, new MutationObserver(e => {
+            studioVersion: m
+        } = r(), w = (0, f.useRef)(a && null != (t = l().volume) ? t : 1), x = (0, f.useRef)(a ? (n = () => w.current, new MutationObserver(e => {
             e.forEach(e => {
                 "childList" === e.type && e.addedNodes.forEach(e => {
                     e instanceof Element && (("AUDIO" === e.tagName || "VIDEO" === e.tagName) && (e.volume = n()), e.children.length > 0 && M(e, n()))
@@ -904,17 +904,17 @@
             let {
                 volume: t
             } = e;
-            m.current = t, M(document.body, t)
-        }, [m]);
+            w.current = t, M(document.body, t)
+        }, [w]);
         return (0, f.useEffect)(() => {
             var e;
-            h.setTag("isWebView", a), a && (M(document.body, m.current), null == (e = x.current) || e.observe(document.body, {
+            h.setTag("isWebView", a), a && (M(document.body, w.current), null == (e = x.current) || e.observe(document.body, {
                 childList: !0,
                 subtree: !0
             }), window.addEventListener("dragover", e => e.preventDefault(), !0), window.addEventListener("drop", e => e.preventDefault(), !0))
         }, [a]), (0, f.useEffect)(() => {
-            a && w && h.setTag("studioVersion", w)
-        }, [a, w]), (0, f.useEffect)(() => {
+            a && m && h.setTag("studioVersion", m)
+        }, [a, m]), (0, f.useEffect)(() => {
             if (a) {
                 var e;
                 void 0 === (null == (e = window.rbx) ? void 0 : e.messageBus.dispatchEvent) && g();
@@ -930,24 +930,14 @@
                 capabilities: o
             }))
         }, [a, c, o, s]), f.default.createElement(f.default.Fragment, null, i)
-    }, "getWebViewLoadingStyles", 0, function() {
-        let {
-            lightColor: e,
-            darkColor: t
-        } = arguments.length > 0 && void 0 !== arguments[0] ? arguments[0] : {};
+    }, "getWebViewLoadingStyles", 0, function(e) {
         return {
             ".studio-webview &": {
                 height: "100vh",
                 position: "fixed",
-                width: "100vw"
-            },
-            ".dark-theme.studio-webview &": {
-                backgroundColor: "#191A1F",
-                color: t
-            },
-            ".light-theme.studio-webview &": {
-                backgroundColor: "#FFFFFF",
-                color: e
+                width: "100vw",
+                backgroundColor: "light-dark(#FFFFFF, #191A1F)",
+                color: null == e ? void 0 : "light-dark(".concat(e.lightColor, ", ").concat(e.darkColor, ")")
             }
         }
     }, "isWebViewAvailable", 0, b, "makeStudioWebViewMessageBusContextProvider", 0, e => {
@@ -969,7 +959,7 @@
             return function(e) {
                 let {
                     children: s
-                } = e, a = (0, f.useMemo)(() => b(), []), u = i(), [c, h] = (0, v.useSessionStorage)("mock_web_view", null), g = (0, f.useRef)(null), w = !a && (!0 === c || o), p = a || w, y = (0, f.useMemo)(() => w ? (null != g.current || (g.current = new r), g.current) : n, [w]), E = (0, f.useCallback)((e, t, n) => y.call(e, t, n), [y]), S = (0, f.useCallback)((e, t) => {
+                } = e, a = (0, f.useMemo)(() => b(), []), u = i(), [c, h] = (0, v.useSessionStorage)("mock_web_view", null), g = (0, f.useRef)(null), m = !a && (!0 === c || o), p = a || m, y = (0, f.useMemo)(() => m ? (null != g.current || (g.current = new r), g.current) : n, [m]), E = (0, f.useCallback)((e, t, n) => y.call(e, t, n), [y]), S = (0, f.useCallback)((e, t) => {
                     y.fire(e, t)
                 }, [y]), C = (0, f.useCallback)(() => y.getStudioConfiguration(), [y]), [L, M] = (0, f.useState)(null), T = (0, f.useCallback)(async e => {
                     let t = await y.initHandshake(e);
@@ -995,11 +985,11 @@
                 (0, f.useEffect)(() => {
                     let e = u.get("mockWebview"),
                         t = "true" === l.default.env.NEXT_PUBLIC_MOCK_WEB_VIEW || "true" === e;
-                    if (a || (t ? h(!0) : "false" === e && h(!1)), w) {
+                    if (a || (t ? h(!0) : "false" === e && h(!1)), m) {
                         let e = u.get("theme");
-                        e && O(e.includes("light") ? m.LightFoundation : m.DarkFoundation), R ? B(R) : j && console.warn("Ignoring unsupported mocked Studio locale: ".concat(j))
+                        e && O(e.includes("light") ? w.LightFoundation : w.DarkFoundation), R ? B(R) : j && console.warn("Ignoring unsupported mocked Studio locale: ".concat(j))
                     }
-                }, [a, u, h, j, R, B, O, w]);
+                }, [a, u, h, j, R, B, O, m]);
                 let P = (0, f.useMemo)(() => {
                         let e = p && 1 ? C().theme : x;
                         return null != D ? D : e
@@ -1007,8 +997,8 @@
                     U = (0, f.useMemo)(() => {
                         var e;
                         let t = p && 1 ? C().locale : d.Locale.English;
-                        return w && null != (e = null != R ? R : I(V)) ? e : t
-                    }, [C, w, p, R, V]),
+                        return m && null != (e = null != R ? R : I(V)) ? e : t
+                    }, [C, m, p, R, V]),
                     q = (0, f.useMemo)(() => ({
                         call: E,
                         currentStudioLocale: U,
@@ -1051,5 +1041,5 @@
     }])
 }]);
 
-//# debugId=41f9589c-1aff-9ce4-18ff-a346b21e2b1a
-//# sourceMappingURL=0ho9khljd82k4.js.map
+//# debugId=1082bed4-2a67-0a8c-b77e-044ceb1fec2f
+//# sourceMappingURL=396b2msc15m_1.js.map

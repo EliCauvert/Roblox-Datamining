@@ -3,7 +3,7 @@
     try {
         var e = "undefined" != typeof globalThis ? globalThis : "undefined" != typeof global ? global : "undefined" != typeof window ? window : "undefined" != typeof self ? self : {},
             n = (new e.Error).stack;
-        n && ((e._debugIds || (e._debugIds = {}))[n] = "2ef58d61-ab2a-15b9-1850-349133c3e4f2")
+        n && ((e._debugIds || (e._debugIds = {}))[n] = "a7adae50-45c3-7364-78d0-7121655f6bc3")
     } catch (e) {}
 }();
 (globalThis.TURBOPACK || (globalThis.TURBOPACK = [])).push(["object" == typeof document ? document.currentScript : void 0, 656350, t => {
@@ -9773,19 +9773,23 @@
             themeMode: a
         } = (0, lu.useThemeMode)();
         return (0, oc.useEffect)(() => {
+            let t;
             if (null == n) return;
-            let {
-                classList: t
-            } = n;
-            switch (t.remove("light-theme", "dark-theme", "system-theme"), a) {
+            switch (a) {
                 case "light":
-                    t.add("light-theme");
+                    t = "color-mode-light";
                     break;
                 case "dark":
-                    t.add("dark-theme");
+                    t = "color-mode-dark";
                     break;
-                case "system":
-                    t.add("system-theme")
+                default:
+                    t = "color-mode-system"
+            }
+            let {
+                classList: r
+            } = n;
+            return r.add(t), () => {
+                r.remove(t)
             }
         }, [a, n]), (0, m.jsx)(lf.UIThemeProvider, {
             theme: a,
@@ -9797,10 +9801,10 @@
         lm = t.i(950492);
     let ly = ["creatorTransparency", "creatorAcknowledgments"];
     var lg = t.i(945451),
-        lb = t.i(842051),
-        lw = t.i(41466),
-        lx = t.i(984656),
-        lP = t.i(631226),
+        lb = t.i(711950),
+        lw = t.i(278862),
+        lx = t.i(643992),
+        lP = t.i(580683),
         lT = t.i(710675),
         lR = t.i(401263),
         lS = t.i(889311),
@@ -9825,7 +9829,7 @@
     var lj = t.i(330159),
         lL = t.i(641831),
         lN = t.i(438641),
-        lO = t.i(306607);
+        lO = t.i(262069);
     let lD = new Set(["VIOLATION_TYPE_NONE", "VIOLATION_TYPE_INVALID"]),
         lM = lN.z.union([lN.z.object({
             type: lN.z.literal("text"),
@@ -11421,7 +11425,7 @@
     };
     var cI = t.i(37819),
         cj = t.i(532045);
-    let cL = "".concat("".concat("https://assets.create.roblox.com/2d1b1447be2886e883d0d8984ca107b92376e088/assets", "/opengraph"), "/global_og_image.png"),
+    let cL = "".concat("".concat("https://assets.create.roblox.com/137a87797dbf24bd81a3bd67f14a0b39383ae48d/assets", "/opengraph"), "/global_og_image.png"),
         cN = (0, oT.withTranslation)(t => {
             let {
                 openGraphMetadata: {
@@ -11611,14 +11615,14 @@
     }
     cB.describe, cB.meta;
     var c4 = t.i(566387),
-        c3 = t.i(75584),
+        c3 = t.i(562991),
         c6 = t.i(182012),
-        c8 = t.i(905943),
-        c5 = t.i(95899),
-        c9 = t.i(659332),
-        c7 = t.i(818170),
-        de = t.i(607895),
-        dt = t.i(904451),
+        c8 = t.i(984863),
+        c5 = t.i(152324),
+        c9 = t.i(489098),
+        c7 = t.i(128690),
+        de = t.i(927072),
+        dt = t.i(614875),
         dn = (0, oc.createContext)(void 0),
         dr = t => {
             let {
@@ -13674,7 +13678,7 @@
             } = (0, ll.useAuthentication)();
             return "moderated" === t ? (0, m.jsx)(fD, {}) : null
         };
-    var f_ = t.i(200400);
+    var f_ = t.i(733968);
     let fB = (0, lH.default)(() => t.A(14667), {
             loadableGenerated: {
                 modules: [573249]
@@ -13734,7 +13738,7 @@
             children: l
         })
     }
-    var fK = t.i(18685),
+    var fK = t.i(600373),
         fW = t.i(209534);
 
     function fz() {
@@ -14481,5 +14485,5 @@
     n.exports = t.r(816657)
 }]);
 
-//# debugId=2ef58d61-ab2a-15b9-1850-349133c3e4f2
-//# sourceMappingURL=0iw860dg9n6k2.js.map
+//# debugId=a7adae50-45c3-7364-78d0-7121655f6bc3
+//# sourceMappingURL=0g51dv5lzjefp.js.map

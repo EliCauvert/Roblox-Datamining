@@ -3822,14 +3822,6 @@ ul.hlist.game-cards {
 }
 
 @media (min-width:601px) {
-    .medium\:margin-left-small {
-        margin-left: var(--margin-small)
-    }
-
-    .medium\:margin-top-none {
-        margin-top: var(--margin-none)
-    }
-
     .medium\:flex-row {
         flex-direction: row
     }
@@ -5288,14 +5280,6 @@ ul.hlist.game-cards {
 }
 
 @media (min-width:601px) {
-    .medium\:margin-left-small {
-        margin-left: var(--margin-small)
-    }
-
-    .medium\:margin-top-none {
-        margin-top: var(--margin-none)
-    }
-
     .medium\:flex-row {
         flex-direction: row
     }
@@ -6669,14 +6653,6 @@ ul.hlist.game-cards {
 }
 
 @media (min-width:601px) {
-    .medium\:margin-left-small {
-        margin-left: var(--margin-small)
-    }
-
-    .medium\:margin-top-none {
-        margin-top: var(--margin-none)
-    }
-
     .medium\:flex-row {
         flex-direction: row
     }
@@ -8104,14 +8080,6 @@ ul.hlist.game-cards {
 }
 
 @media (min-width:601px) {
-    .medium\:margin-left-small {
-        margin-left: var(--margin-small)
-    }
-
-    .medium\:margin-top-none {
-        margin-top: var(--margin-none)
-    }
-
     .medium\:flex-row {
         flex-direction: row
     }
