@@ -69,7 +69,8 @@ return function(p1, p2, MessageId, p3, p4, p5, p6)
 		additionalProps = {
 			placeId = p2.placeId,
 			universeId = p2.gameLink and p2.gameLink.universeId,
-			senderUserId = IsNotSenderTargetIdMatch and p2.senderTargetId or nil
+			senderUserId = IsNotSenderTargetIdMatch and p2.senderTargetId or nil,
+			isEarlyTesting = p2.isEarlyTesting
 		}
 	})
 end

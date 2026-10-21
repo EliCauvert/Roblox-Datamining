@@ -128,7 +128,13 @@ function GameCardGroupable(p1)
 						}) else nil
 					}) else nil
 				}),
-				PlayButton = if UnionResult.onPlayButtonActivated then ReactModule.createElement(FoundationModule.IconButton, {
+				PlayButton = if UnionResult.onPlayButtonActivated and UnionResult.playButtonLabel then ReactModule.createElement(FoundationModule.Button, {
+					LayoutOrder = 2,
+					text = UnionResult.playButtonLabel,
+					variant = FoundationModule.Enums.ButtonVariant.SubEmphasis,
+					size = FoundationModule.Enums.InputSize.Small,
+					onActivated = UnionResult.onPlayButtonActivated
+				}) elseif UnionResult.onPlayButtonActivated then ReactModule.createElement(FoundationModule.IconButton, {
 					isCircular = true,
 					LayoutOrder = 2,
 					icon = IconName.PlayLarge,

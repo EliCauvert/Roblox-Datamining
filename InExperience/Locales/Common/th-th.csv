@@ -3336,12 +3336,14 @@ Feature.Friends.Label.FollowsYou,ติดตามคุณ
 Feature.Friends.Label.Frequent,เล่นด้วยกัน
 Feature.Friends.Label.Friend,
 Feature.Friends.Label.FriendInvite,เชิญคุณให้เป็นเพื่อนบน Roblox
+Feature.Friends.Label.FriendOwns,เพื่อน 1 คนเป็นเจ้าของ
 Feature.Friends.Label.FriendRecentlyPlayed,<b>เพื่อน 1 คน</b>เพิ่งเล่นเมื่อเร็วๆ นี้
 Feature.Friends.Label.FriendRequest,
 Feature.Friends.Label.Friends,
 Feature.Friends.Label.FriendsAreNowConnections,เพื่อนเปลี่ยนเป็นคนรู้จักแล้ว!
 Feature.Friends.Label.FriendsHintBold,มาเล่นกันเถอะ!
 Feature.Friends.Label.FriendsHintPlain,เริ่มต้นโดยการเพิ่มเพื่อน
+Feature.Friends.Label.FriendsOwn,เพื่อน {numberOfConnections} คนเป็นเจ้าของ
 Feature.Friends.Label.FriendsPlayed,เล่นแล้ว {numberOfConnections} คน
 Feature.Friends.Label.FriendsRecentlyPlayed,<b>เพื่อน {numberOfConnections} คน</b>เพิ่งเล่นเมื่อเร็วๆ นี้
 Feature.Friends.Label.InGame,

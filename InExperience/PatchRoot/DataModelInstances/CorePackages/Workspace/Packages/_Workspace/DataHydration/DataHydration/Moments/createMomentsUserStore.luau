@@ -9,7 +9,6 @@ local CreateDataResolverModule = require(DataHydration.createDataResolver)
 local _ = require(DataHydration.DataHydrationTypes)
 local _ = require(script.Parent.MomentsStoreTypes)
 local FetchUserMomentsModule = require(script.Parent.Requests.fetchUserMoments)
-local FFlagProfileMomentsOrderingAndReactions = require(Parent.SharedFlags).FFlagProfileMomentsOrderingAndReactions
 
 local function _(TargetUserId, p1)
 	-- upvalues: HttpService (copy)
@@ -21,7 +20,7 @@ local function _(TargetUserId, p1)
 end
 
 return function(p1)
-	-- upvalues: CreateDataCacheModule (copy), CreateDataResolverModule (copy), PromiseModule (copy), HttpClientModule (copy), FetchUserMomentsModule (copy), HttpService (copy), FFlagProfileMomentsOrderingAndReactions (copy), SignalsModule (copy)
+	-- upvalues: CreateDataCacheModule (copy), CreateDataResolverModule (copy), PromiseModule (copy), HttpClientModule (copy), FetchUserMomentsModule (copy), HttpService (copy), SignalsModule (copy)
 	local P2 = p1 or {}
 	local T = {}
 	local AsPromiseResults = {}
@@ -90,10 +89,7 @@ return function(p1)
 	end
 	
 	local function getUserMoments(TargetUserId, p3)
-		-- upvalues: FFlagProfileMomentsOrderingAndReactions (upval), HttpClientModule (upval), FetchUserMomentsModule (upval), P2 (copy), HttpService (upval), AsPromiseResults (ref), TargetUserIds (ref)
-		if not FFlagProfileMomentsOrderingAndReactions then
-			return HttpClientModule.asPromise(FetchUserMomentsModule(TargetUserId, p3, P2.network))
-		end
+		-- upvalues: HttpService (upval), AsPromiseResults (ref), HttpClientModule (upval), FetchUserMomentsModule (upval), P2 (copy), TargetUserIds (ref)
 		local Json = HttpService:JSONEncode({
 			targetUserId = TargetUserId,
 			hasCursor = p3 ~= nil,
@@ -209,25 +205,19 @@ return function(p1)
 			end
 		end,
 		clear = function()
-			-- upvalues: Signal2_1 (copy), T (ref), FFlagProfileMomentsOrderingAndReactions (upval), AsPromiseResults (ref), TargetUserIds (ref), DataResolverModule (copy)
+			-- upvalues: Signal2_1 (copy), T (ref), AsPromiseResults (ref), TargetUserIds (ref), DataResolverModule (copy)
 			Signal2_1({})
 			T = {}
-			
-			if FFlagProfileMomentsOrderingAndReactions then
-				AsPromiseResults = {}
-				TargetUserIds = {}
-			end
+			AsPromiseResults = {}
+			TargetUserIds = {}
 			DataResolverModule.clear()
 		end,
 		dispose = function()
-			-- upvalues: Signal2_1 (copy), T (ref), FFlagProfileMomentsOrderingAndReactions (upval), AsPromiseResults (ref), TargetUserIds (ref), DataResolverModule (copy)
+			-- upvalues: Signal2_1 (copy), T (ref), AsPromiseResults (ref), TargetUserIds (ref), DataResolverModule (copy)
 			Signal2_1({})
 			T = {}
-			
-			if FFlagProfileMomentsOrderingAndReactions then
-				AsPromiseResults = {}
-				TargetUserIds = {}
-			end
+			AsPromiseResults = {}
+			TargetUserIds = {}
 			DataResolverModule.dispose()
 		end
 	}

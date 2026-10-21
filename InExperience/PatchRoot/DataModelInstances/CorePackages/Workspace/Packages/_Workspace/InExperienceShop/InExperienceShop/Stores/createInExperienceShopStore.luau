@@ -59,6 +59,8 @@ local MockGetPassOwnershipModule = require(InExperienceShop.Mocks.MockGetPassOwn
 local PromoteBonusRobuxPackageToTopPicksModule = require(InExperienceShop.Api.promoteBonusRobuxPackageToTopPicks)
 local BonusPromotionEligibilityModule = require(InExperienceShop.Api.BonusPromotionEligibility)
 local SortRobuxPackagesByAmountDescendingModule = require(InExperienceShop.Utils.sortRobuxPackagesByAmountDescending)
+local FindTopPicksSectionIndexModule = require(InExperienceShop.Utils.findTopPicksSectionIndex)
+local MoveItemToPositionInShopModule = require(InExperienceShop.Utils.moveItemToPositionInShop)
 local FFlagEnableExperienceShopGlobalIconModule = require(InExperienceShop.Flags.FFlagEnableExperienceShopGlobalIcon)
 local FFlagInExperienceShopExpectStringMetadataValuesModule = require(InExperienceShop.Flags.FFlagInExperienceShopExpectStringMetadataValues)
 local list = { InExperienceOffersModule.FeatureKeys.RobloxShop }
@@ -73,7 +75,7 @@ local _ = function()
 end
 
 return function()
-	-- upvalues: CreateSignalFunction (copy), ConstantsModule (copy), ShopDebugLoggerModule (copy), FFlagRefetchRobuxWidgetAfterPurchaseModule (copy), FFlagShopRobuxPurchaseCompletionModalModule (copy), PioneerInfo (copy), SortRobuxPackagesByAmountDescendingModule (copy), PromoteBonusRobuxPackageToTopPicksModule (copy), FFlagEnableRobuxInExperienceShop (copy), BonusPromotionEligibilityModule (copy), FFlagUseGetGamePassOwnershipApi (copy), Players (copy), PromiseModule (copy), FFlagMockGetGamePassOwnershipModule (copy), MockGetPassOwnershipModule (copy), GetPassOwnershipModule (copy), FFlagShopUseMockUserOwnsGamePassModule (copy), MockUserOwnsGamePassModule (copy), UserOwnsGamePassModule (copy), FFlagLuaAppEnableGamePassFreeTrialsModule (copy), FFlagShopUseMockGamePassTrialAvailabilitiesModule (copy), MockGamePassTrialAvailabilitiesModule (copy), FetchGamePassTrialAvailabilitiesModule (copy), MarketplaceService (copy), FFlagShopUseMockGamePassTrialRedemptionModule (copy), RedeemGamePassTrialModule (copy), FFlagEnableExperienceShopGlobalIconModule (copy), FFlagInExperienceShopExpectStringMetadataValuesModule (copy), FFlagHideOfferNotificationsWhenShopEmpty (copy), InExperienceOffersModule (copy), HasOfferEligibleCategoryModule (copy), InExperienceShop (copy), FFlagShopUseMockDataModule (copy), FFlagShopUseMockMultiGetProductInfoModule (copy), MockMultiGetProductInfoModule (copy), StreamMultiGetProductInfoModule (copy), LogCounterModule (copy), ProductInfoFailedItemsCounterModule (copy), ErrorsModule (copy), FFlagEnableUserOffers (copy), FFlagEnableOffersPrefetch (copy), list (copy), FFlagEnablePartialDisplayInExperienceShopModule (copy), FetchShopWidgetsOnlyModule (copy), MockFetchAllShopDataModule (copy), FetchAllShopDataModule (copy), FFlagEnableShopProductInfoRefreshModule (copy), MultiGetProductInfoModule (copy), FFlagOfferNineDotActivityIndicator (copy), FFlagOfferNotifyOnGlobalIcon (copy), FFlagEnableShopExposureLoggingModule (copy), RunService (copy), Parent (copy), FStringExperienceShopIXPLayersCommaSeparatedModule (copy), FetchRobuxWidgetsAfterPurchaseModule (copy), MergeRobuxShopDataModule (copy), FIntShopOwnershipFetchMaxAttemptsModule (copy), FFlagShopListenNativePurchaseFinishedModule (copy), UserOwnsGamePassHttpModule (copy), FFlagSkipPaymentSessionForPlainRobuxModule (copy), FFlagLuaAppEnableNativePurchaseFinishedV2Signals (copy)
+	-- upvalues: CreateSignalFunction (copy), ConstantsModule (copy), ShopDebugLoggerModule (copy), FFlagRefetchRobuxWidgetAfterPurchaseModule (copy), FFlagShopRobuxPurchaseCompletionModalModule (copy), PioneerInfo (copy), SortRobuxPackagesByAmountDescendingModule (copy), PromoteBonusRobuxPackageToTopPicksModule (copy), FindTopPicksSectionIndexModule (copy), MoveItemToPositionInShopModule (copy), FFlagEnableRobuxInExperienceShop (copy), BonusPromotionEligibilityModule (copy), FFlagUseGetGamePassOwnershipApi (copy), Players (copy), PromiseModule (copy), FFlagMockGetGamePassOwnershipModule (copy), MockGetPassOwnershipModule (copy), GetPassOwnershipModule (copy), FFlagShopUseMockUserOwnsGamePassModule (copy), MockUserOwnsGamePassModule (copy), UserOwnsGamePassModule (copy), FFlagLuaAppEnableGamePassFreeTrialsModule (copy), FFlagShopUseMockGamePassTrialAvailabilitiesModule (copy), MockGamePassTrialAvailabilitiesModule (copy), FetchGamePassTrialAvailabilitiesModule (copy), MarketplaceService (copy), FFlagShopUseMockGamePassTrialRedemptionModule (copy), RedeemGamePassTrialModule (copy), FFlagEnableExperienceShopGlobalIconModule (copy), FFlagInExperienceShopExpectStringMetadataValuesModule (copy), FFlagHideOfferNotificationsWhenShopEmpty (copy), InExperienceOffersModule (copy), HasOfferEligibleCategoryModule (copy), InExperienceShop (copy), FFlagShopUseMockDataModule (copy), FFlagShopUseMockMultiGetProductInfoModule (copy), MockMultiGetProductInfoModule (copy), StreamMultiGetProductInfoModule (copy), LogCounterModule (copy), ProductInfoFailedItemsCounterModule (copy), ErrorsModule (copy), FFlagEnableUserOffers (copy), FFlagEnableOffersPrefetch (copy), list (copy), FFlagEnablePartialDisplayInExperienceShopModule (copy), FetchShopWidgetsOnlyModule (copy), MockFetchAllShopDataModule (copy), FetchAllShopDataModule (copy), FFlagEnableShopProductInfoRefreshModule (copy), MultiGetProductInfoModule (copy), FFlagOfferNineDotActivityIndicator (copy), FFlagOfferNotifyOnGlobalIcon (copy), FFlagEnableShopExposureLoggingModule (copy), RunService (copy), Parent (copy), FStringExperienceShopIXPLayersCommaSeparatedModule (copy), FetchRobuxWidgetsAfterPurchaseModule (copy), MergeRobuxShopDataModule (copy), FIntShopOwnershipFetchMaxAttemptsModule (copy), FFlagShopListenNativePurchaseFinishedModule (copy), UserOwnsGamePassHttpModule (copy), FFlagSkipPaymentSessionForPlainRobuxModule (copy), FFlagLuaAppEnableNativePurchaseFinishedV2Signals (copy)
 	local Signal, Signal2 = CreateSignalFunction({})
 	local Signal1, Signal2_1 = CreateSignalFunction({})
 	local Signal3, Signal2_2 = CreateSignalFunction(false)
@@ -174,6 +176,16 @@ return function()
 	
 	local _ = function()
 		-- upvalues: PromoteBonusRobuxPackageToTopPicksModule (upval), WithoutFeaturedPromotionResult (ref), Tbl (copy), Signal2_1 (copy), sortRobuxPackagesInSections (copy)
+		Signal2_1((sortRobuxPackagesInSections((PromoteBonusRobuxPackageToTopPicksModule.promoteBonusRobuxPackageToTopPicks(WithoutFeaturedPromotionResult, Tbl)))))
+	end
+	
+	local _ = function(p1)
+		-- upvalues: FindTopPicksSectionIndexModule (upval), WithoutFeaturedPromotionResult (ref), MoveItemToPositionInShopModule (upval), PromoteBonusRobuxPackageToTopPicksModule (upval), Tbl (copy), Signal2_1 (copy), sortRobuxPackagesInSections (copy)
+		local TopPicksSectionIndexModule = FindTopPicksSectionIndexModule(WithoutFeaturedPromotionResult)
+		
+		if TopPicksSectionIndexModule ~= nil then
+			WithoutFeaturedPromotionResult = MoveItemToPositionInShopModule(WithoutFeaturedPromotionResult, TopPicksSectionIndexModule, p1, "GamePass", 1)
+		end
 		Signal2_1((sortRobuxPackagesInSections((PromoteBonusRobuxPackageToTopPicksModule.promoteBonusRobuxPackageToTopPicks(WithoutFeaturedPromotionResult, Tbl)))))
 	end
 	
@@ -310,30 +322,36 @@ return function()
 	end
 	
 	local function redeemGamePassTrial(Key)
-		-- upvalues: Signal15 (copy), FFlagShopUseMockGamePassTrialRedemptionModule (upval), markGamePassTrialActive (copy), Players (upval), MarketplaceService (upval), Signal2_14 (copy), RedeemGamePassTrialModule (upval), FetchGamePassTrialAvailabilitiesModule (upval), Signal2_8 (copy), Flag1 (ref)
+		-- upvalues: Signal15 (copy), FFlagShopUseMockGamePassTrialRedemptionModule (upval), markGamePassTrialActive (copy), FindTopPicksSectionIndexModule (upval), WithoutFeaturedPromotionResult (ref), MoveItemToPositionInShopModule (upval), PromoteBonusRobuxPackageToTopPicksModule (upval), Tbl (copy), Signal2_1 (copy), sortRobuxPackagesInSections (copy), Players (upval), MarketplaceService (upval), Signal2_14 (copy), RedeemGamePassTrialModule (upval), FetchGamePassTrialAvailabilitiesModule (upval), Signal2_8 (copy), Flag1 (ref)
 		if Signal15(false)[Key] then return end
 		if FFlagShopUseMockGamePassTrialRedemptionModule then
 			markGamePassTrialActive(Key)
-			local Number: number? = tonumber(Key)
+			local TopPicksSectionIndexModule = FindTopPicksSectionIndexModule(WithoutFeaturedPromotionResult)
 			
-			if Number ~= nil then
+			if TopPicksSectionIndexModule ~= nil then
+				WithoutFeaturedPromotionResult = MoveItemToPositionInShopModule(WithoutFeaturedPromotionResult, TopPicksSectionIndexModule, Key, "GamePass", 1)
+			end
+			Signal2_1((sortRobuxPackagesInSections((PromoteBonusRobuxPackageToTopPicksModule.promoteBonusRobuxPackageToTopPicks(WithoutFeaturedPromotionResult, Tbl)))))
+			local Number1: number? = tonumber(Key)
+			
+			if Number1 ~= nil then
 				local LocalPlayer = Players.LocalPlayer
 				
 				if LocalPlayer == nil then return end
 				local Success, Result = pcall(function()
-					-- upvalues: MarketplaceService (copy), LocalPlayer (copy), Number (copy)
-					MarketplaceService:SignalGamePassFreeTrialRedeemed(LocalPlayer, Number)
+					-- upvalues: MarketplaceService (copy), LocalPlayer (copy), Number1 (copy)
+					MarketplaceService:SignalGamePassFreeTrialRedeemed(LocalPlayer, Number1)
 				end)
 				
 				if not Success then
-					warn("[Shop] SignalGamePassFreeTrialRedeemed failed", Number, Result)
+					warn("[Shop] SignalGamePassFreeTrialRedeemed failed", Number1, Result)
 				end
 			end
 			return
 		else
-			local Number1: number? = tonumber(Key)
+			local Number: number? = tonumber(Key)
 			
-			if Number1 == nil then
+			if Number == nil then
 				warn("[Shop] redeemGamePassTrial skipped, gamePassId is not numeric", Key)
 				
 				return
@@ -342,19 +360,25 @@ return function()
 				Copy[Key] = true
 				Signal2_14(Copy)
 				local Flag = false
-				RedeemGamePassTrialModule.redeemGamePassTrial(Number1):andThen(function()
-					-- upvalues: Flag (ref), Number1 (copy), Players (upval), MarketplaceService (upval), FetchGamePassTrialAvailabilitiesModule (upval)
+				RedeemGamePassTrialModule.redeemGamePassTrial(Number):andThen(function()
+					-- upvalues: Flag (ref), Key (copy), FindTopPicksSectionIndexModule (upval), WithoutFeaturedPromotionResult (upval), MoveItemToPositionInShopModule (upval), PromoteBonusRobuxPackageToTopPicksModule (upval), Tbl (upval), Signal2_1 (upval), sortRobuxPackagesInSections (upval), Number (copy), Players (upval), MarketplaceService (upval), FetchGamePassTrialAvailabilitiesModule (upval)
 					Flag = true
+					local TopPicksSectionIndexModule = FindTopPicksSectionIndexModule(WithoutFeaturedPromotionResult)
+					
+					if TopPicksSectionIndexModule ~= nil then
+						WithoutFeaturedPromotionResult = MoveItemToPositionInShopModule(WithoutFeaturedPromotionResult, TopPicksSectionIndexModule, Key, "GamePass", 1)
+					end
+					Signal2_1((sortRobuxPackagesInSections((PromoteBonusRobuxPackageToTopPicksModule.promoteBonusRobuxPackageToTopPicks(WithoutFeaturedPromotionResult, Tbl)))))
 					local LocalPlayer = Players.LocalPlayer
 					
 					if LocalPlayer ~= nil then
 						local Success, Result = pcall(function()
-							-- upvalues: MarketplaceService (copy), LocalPlayer (copy), Number1 (copy)
-							MarketplaceService:SignalGamePassFreeTrialRedeemed(LocalPlayer, Number1)
+							-- upvalues: MarketplaceService (copy), LocalPlayer (copy), Number (copy)
+							MarketplaceService:SignalGamePassFreeTrialRedeemed(LocalPlayer, Number)
 						end)
 						
 						if not Success then
-							warn("[Shop] SignalGamePassFreeTrialRedeemed failed", Number1, Result)
+							warn("[Shop] SignalGamePassFreeTrialRedeemed failed", Number, Result)
 						end
 					end
 					return FetchGamePassTrialAvailabilitiesModule.fetchGamePassTrialAvailabilities(game.GameId)

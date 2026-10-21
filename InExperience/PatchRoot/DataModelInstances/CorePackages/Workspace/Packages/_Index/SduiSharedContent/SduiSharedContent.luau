@@ -34,6 +34,8 @@
 	SduiMediaGallery = require(script.Components.SduiMediaGallery),
 	SduiSkeleton = require(script.Components.SduiSkeleton),
 	SduiSharedRegister = require(script.SduiSharedRegister),
+	registerSharedActions = require(script.Actions.registerSharedActions),
+	registerSharedUiComponents = require(script.Components.registerSharedUiComponents),
 	useCollectionAnalyticsContext = require(script.Components.useCollectionAnalyticsContext),
 	SduiFeedContext = require(script.Components.SduiFeedContext),
 	reportPromptDismiss = require(script.Actions.reportPromptDismiss)

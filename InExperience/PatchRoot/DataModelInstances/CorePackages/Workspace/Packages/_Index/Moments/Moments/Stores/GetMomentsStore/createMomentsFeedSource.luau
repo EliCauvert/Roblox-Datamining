@@ -7,7 +7,6 @@ local SharedFlagsModule = require(Parent.SharedFlags)
 local _ = require(Moments.Components.Feed)
 local Analytics = MomentsCommonModule.Analytics
 local RecommendationSource = MomentsCommonModule.Analytics.RecommendationSource
-local FFlagMomentsContentStatsTelemetry = MomentsCommonModule.Flags.FFlagMomentsContentStatsTelemetry
 local _ = require(Moments.SignalTracker)
 local MomentsGetMomentsTrendingStoreModule = require(Parent.DataHydration.MomentsGetMomentsTrendingStore)
 local _ = require(Parent.DataHydration.MomentsStoreTypes)
@@ -23,7 +22,6 @@ local GetReactionsStoreModule = require(Moments.Stores.GetReactionsStore)
 local GetShareCountsStoreModule = require(Moments.Stores.GetShareCountsStore)
 local FFlagMomentsOptimisticProfilePending = SharedFlagsModule.FFlagMomentsOptimisticProfilePending
 local FFlagMomentsModeratedMomentPageModule = require(Moments.Flags.FFlagMomentsModeratedMomentPage)
-local FFlagMomentsPassFeedItemIdToBackendApis = SharedFlagsModule.FFlagMomentsPassFeedItemIdToBackendApis
 local FFlagMomentsComments = SharedFlagsModule.FFlagMomentsComments
 local MomentsGetMomentsCommentsStoreModule = if FFlagMomentsComments then require(Parent.DataHydration.MomentsGetMomentsCommentsStore) else nil
 local MomentStatus = require(Parent.MomentsTypes).Enums.MomentStatus
@@ -39,10 +37,10 @@ local function _(OnAccepted, p1, p2, p3)
 end
 
 local function defaultFetchDeepLinkedMoments(p1, p2)
-	-- upvalues: PromiseModule (copy), FFlagMomentsPassFeedItemIdToBackendApis (copy), FetchMomentsByIdsModule (copy)
+	-- upvalues: PromiseModule (copy), FetchMomentsByIdsModule (copy)
 	return PromiseModule.resolve():andThen(function()
-		-- upvalues: FFlagMomentsPassFeedItemIdToBackendApis (upval), FetchMomentsByIdsModule (upval), p1 (copy), p2 (copy)
-		return if FFlagMomentsPassFeedItemIdToBackendApis then FetchMomentsByIdsModule({ p1 }, p2) else FetchMomentsByIdsModule({ p1 })
+		-- upvalues: FetchMomentsByIdsModule (upval), p1 (copy), p2 (copy)
+		return FetchMomentsByIdsModule({ p1 }, p2)
 	end)
 end
 
@@ -125,9 +123,9 @@ local function makeUnavailableMomentItem(FeedItemId, Moments, Moments1)
 end
 
 local function loadDeepLinkedMomentsForUnavailableDialog(Callback, DeepLinkedMomentId, DeepLinkedMomentTargetIdType, DeepLinkFetchTimeoutSeconds)
-	-- upvalues: FFlagMomentsPassFeedItemIdToBackendApis (copy), PromiseModule (copy)
+	-- upvalues: PromiseModule (copy)
 	local v2, v3 = PromiseModule.race({
-		(if FFlagMomentsPassFeedItemIdToBackendApis then Callback(DeepLinkedMomentId, DeepLinkedMomentTargetIdType) else Callback(DeepLinkedMomentId)):catch(function()
+		Callback(DeepLinkedMomentId, DeepLinkedMomentTargetIdType):catch(function()
 			return nil
 		end),
 		(PromiseModule.delay(DeepLinkFetchTimeoutSeconds):andThen(function()
@@ -139,7 +137,7 @@ local function loadDeepLinkedMomentsForUnavailableDialog(Callback, DeepLinkedMom
 end
 
 return function(Callback, p2)
-	-- upvalues: MomentsGetMomentsTrendingStoreModule (copy), FFlagMomentsComments (copy), MomentsGetMomentsCommentsStoreModule (copy), GetDeepLinkStoreModule (copy), defaultFetchDeepLinkedMoments (copy), FFlagMomentsOptimisticProfilePending (copy), GetLocalUserIdModule (copy), CreatePendingFeedGetterModule (copy), MomentsGetMomentsUserStoreModule (copy), RecommendationSource (copy), GetReactionsStoreModule (copy), GetShareCountsStoreModule (copy), FFlagMomentsPassFeedItemIdToBackendApis (copy), ShouldShowMomentInFeedModule (copy), loadDeepLinkedMomentsForUnavailableDialog (copy), FFlagMomentsModeratedMomentPageModule (copy), makeUnavailableMomentItem (copy), FFlagMomentsContentStatsTelemetry (copy), Analytics (copy), ReportUnavailableFeedItemModule (copy)
+	-- upvalues: MomentsGetMomentsTrendingStoreModule (copy), FFlagMomentsComments (copy), MomentsGetMomentsCommentsStoreModule (copy), GetDeepLinkStoreModule (copy), defaultFetchDeepLinkedMoments (copy), FFlagMomentsOptimisticProfilePending (copy), GetLocalUserIdModule (copy), CreatePendingFeedGetterModule (copy), MomentsGetMomentsUserStoreModule (copy), RecommendationSource (copy), GetReactionsStoreModule (copy), GetShareCountsStoreModule (copy), ShouldShowMomentInFeedModule (copy), loadDeepLinkedMomentsForUnavailableDialog (copy), FFlagMomentsModeratedMomentPageModule (copy), makeUnavailableMomentItem (copy), Analytics (copy), ReportUnavailableFeedItemModule (copy)
 	local P18 = p2 or {}
 	local MomentsGetMomentsTrendingStoreModuleResult = if P18.trendingStore == nil then MomentsGetMomentsTrendingStoreModule(false) else P18.trendingStore
 	local CommentsStore = nil
@@ -169,7 +167,7 @@ return function(Callback, p2)
 		getPendingItems = GetPendingItems,
 		recommendationSource = RecommendationSource.Trending,
 		fetchAsync = function(p3)
-			-- upvalues: CommentsStore (ref), NextCursor (ref), P18 (copy), MomentsGetMomentsTrendingStoreModuleResult (copy), Callback (copy), GetReactionsStoreModule (upval), GetShareCountsStoreModule (upval), DeepLinkStore (copy), FFlagMomentsPassFeedItemIdToBackendApis (upval), ShouldShowMomentInFeedModule (upval), loadDeepLinkedMomentsForUnavailableDialog (upval), FetchDeepLinkedMoments (copy), DeepLinkFetchTimeoutSeconds (copy), FFlagMomentsModeratedMomentPageModule (upval), makeUnavailableMomentItem (upval), FFlagMomentsComments (upval), FFlagMomentsOptimisticProfilePending (upval), FFlagMomentsContentStatsTelemetry (upval), Analytics (upval), RecommendationSource (upval), ReportUnavailableFeedItemModule (upval)
+			-- upvalues: CommentsStore (ref), NextCursor (ref), P18 (copy), MomentsGetMomentsTrendingStoreModuleResult (copy), Callback (copy), GetReactionsStoreModule (upval), GetShareCountsStoreModule (upval), DeepLinkStore (copy), ShouldShowMomentInFeedModule (upval), loadDeepLinkedMomentsForUnavailableDialog (upval), FetchDeepLinkedMoments (copy), DeepLinkFetchTimeoutSeconds (copy), FFlagMomentsModeratedMomentPageModule (upval), makeUnavailableMomentItem (upval), FFlagMomentsComments (upval), FFlagMomentsOptimisticProfilePending (upval), Analytics (upval), RecommendationSource (upval), ReportUnavailableFeedItemModule (upval)
 			local OwnerGeneration = if CommentsStore == nil then nil else CommentsStore.getOwnerGeneration(false)
 			local SignalTracker = P18.signalTracker
 			local v2, v3 = MomentsGetMomentsTrendingStoreModuleResult.getTrending(Callback(false), p3 or NextCursor, if SignalTracker then SignalTracker:getSignalsPayload() else nil):await()
@@ -205,7 +203,7 @@ return function(Callback, p2)
 			
 			if p3 == nil then
 				local DeepLinkedMomentId = DeepLinkStore.getDeepLinkedMomentId(false)
-				local DeepLinkedMomentTargetIdType = if FFlagMomentsPassFeedItemIdToBackendApis then DeepLinkStore.getDeepLinkedMomentTargetIdType(false) else nil
+				local DeepLinkedMomentTargetIdType = DeepLinkStore.getDeepLinkedMomentTargetIdType(false)
 				
 				if DeepLinkedMomentId ~= nil then
 					local t = {}
@@ -256,16 +254,16 @@ return function(Callback, p2)
 							if DeepLinkedMomentsForUnavailableDialog.shareInfoByMomentId then
 								GetShareCountsStoreModule(false).setBatchShareCounts(DeepLinkedMomentsForUnavailableDialog.shareInfoByMomentId)
 							end
-							for _, moment1 in DeepLinkedMomentsForUnavailableDialog.moments do
+							for _, moment2 in DeepLinkedMomentsForUnavailableDialog.moments do
 								local IsFeedItemIdMatch = nil
-								if moment1.momentId == DeepLinkedMomentId then
+								if moment2.momentId == DeepLinkedMomentId then
 									IsFeedItemIdMatch = true
 								else
-									local RecommendationMetadata = moment1.recommendationMetadata
+									local RecommendationMetadata = moment2.recommendationMetadata
 									IsFeedItemIdMatch = RecommendationMetadata ~= nil and RecommendationMetadata.feedItemId == DeepLinkedMomentId
 								end
-								if ShouldShowMomentInFeedModule(moment1) and IsFeedItemIdMatch then
-									table.insert(List, { kind = "moment", moment = moment1 })
+								if ShouldShowMomentInFeedModule(moment2) and IsFeedItemIdMatch then
+									table.insert(List, { kind = "moment", moment = moment2 })
 									Flag = true
 								end
 							end
@@ -304,22 +302,21 @@ return function(Callback, p2)
 			end
 			local Entry = List[1]
 			
-			if FFlagMomentsOptimisticProfilePending and (p3 == nil and Entry ~= nil) then
+			if FFlagMomentsOptimisticProfilePending and p3 == nil and Entry ~= nil then
 				if Entry.kind == "moment" then
 					MomentId1 = Entry.moment.momentId
 				elseif Entry.kind == "unavailableMoment" then
 					MomentId1 = Entry.targetId
 				end
 			end
-			for _, moment2 in v3.moments do
-				if FFlagMomentsContentStatsTelemetry then
-					Analytics.reportMomentsFeedItemsReceived(RecommendationSource.Trending)
-				end
-				if MomentId == nil or moment2.momentId ~= MomentId then
-					if ShouldShowMomentInFeedModule(moment2) then
-						table.insert(List, { kind = "moment", moment = moment2 })
-					elseif FFlagMomentsContentStatsTelemetry then
-						ReportUnavailableFeedItemModule(moment2, RecommendationSource.Trending)
+			for _, moment1 in v3.moments do
+				Analytics.reportMomentsFeedItemsReceived(RecommendationSource.Trending)
+				
+				if MomentId == nil or moment1.momentId ~= MomentId then
+					if ShouldShowMomentInFeedModule(moment1) then
+						table.insert(List, { kind = "moment", moment = moment1 })
+					else
+						ReportUnavailableFeedItemModule(moment1, RecommendationSource.Trending)
 					end
 				end
 			end

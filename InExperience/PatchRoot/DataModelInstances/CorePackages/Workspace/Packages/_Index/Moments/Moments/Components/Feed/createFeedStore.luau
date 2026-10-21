@@ -8,7 +8,6 @@ local CreatePendingFeedOverlayModule = require(script.Parent.createPendingFeedOv
 local GetDeletedMomentsStoreModule = require(Moments.Stores.GetDeletedMomentsStore)
 local Analytics = MomentsCommonModule.Analytics
 local MomentsSurfaceLoadManager = MomentsCommonModule.Performance.MomentsSurfaceLoadManager
-local FFlagMomentsContentStatsTelemetry = MomentsCommonModule.Flags.FFlagMomentsContentStatsTelemetry
 local _ = require(script.Parent.FeedTypes)
 local CreatePagerStoreModule = require(Moments.Components.VerticalPager.createPagerStore)
 local FFlagMomentsNonInfiniteScrollEndStateFixesModule = require(Moments.Flags.FFlagMomentsNonInfiniteScrollEndStateFixes)
@@ -19,7 +18,7 @@ local config = { kind = "skeleton" }
 local config1 = { kind = "endState" }
 
 return function(p1, Callback, p2, p3)
-	-- upvalues: CreatePagerStoreModule (copy), FFlagMomentsOptimisticProfilePending (copy), CreatePendingFeedOverlayModule (copy), CreateSignalFunction (copy), FFlagMomentsNonInfiniteScrollEndStateFixesModule (copy), FFlagMomentsContentStatsTelemetry (copy), Analytics (copy), config1 (copy), SignalsExperimentalModule (copy), config (copy), MomentsSurfaceLoadManager (copy), FFlagMomentsLoadMoreKeepsPositionModule (copy), FFlagMomentsModeratedMomentPageModule (copy), SignalsModule (copy), GetDeletedMomentsStoreModule (copy)
+	-- upvalues: CreatePagerStoreModule (copy), FFlagMomentsOptimisticProfilePending (copy), CreatePendingFeedOverlayModule (copy), CreateSignalFunction (copy), FFlagMomentsNonInfiniteScrollEndStateFixesModule (copy), Analytics (copy), config1 (copy), SignalsExperimentalModule (copy), config (copy), MomentsSurfaceLoadManager (copy), FFlagMomentsLoadMoreKeepsPositionModule (copy), FFlagMomentsModeratedMomentPageModule (copy), SignalsModule (copy), GetDeletedMomentsStoreModule (copy)
 	local PagerStoreModule = CreatePagerStoreModule()
 	local PendingFeedOverlayModule = if FFlagMomentsOptimisticProfilePending and p1.getPendingItems ~= nil then CreatePendingFeedOverlayModule() else nil
 	local Callback1 = nil
@@ -42,7 +41,7 @@ return function(p1, Callback, p2, p3)
 	local v3 = nil
 	
 	if FFlagMomentsNonInfiniteScrollEndStateFixesModule then
-		GetCanLoadMoreBeyondLimit, v42 = CreateSignalFunction(false)
+		GetCanLoadMoreBeyondLimit, v41 = CreateSignalFunction(false)
 	end
 	local Tbl = {}
 	
@@ -57,7 +56,7 @@ return function(p1, Callback, p2, p3)
 	end
 	
 	local function dedupeAndTrack(Items)
-		-- upvalues: Callback (copy), t (ref), FFlagMomentsContentStatsTelemetry (upval), Analytics (upval), RecommendationSource (copy)
+		-- upvalues: Callback (copy), t (ref), Analytics (upval), RecommendationSource (copy)
 		if Callback == nil then
 			return Items
 		end
@@ -67,19 +66,16 @@ return function(p1, Callback, p2, p3)
 			local Success, Result = pcall(Callback, item)
 			
 			if not Success then
-				if FFlagMomentsContentStatsTelemetry then
-					Analytics.reportMomentsFeedItemFiltered("malformed", RecommendationSource)
-					continue
-				end
+				Analytics.reportMomentsFeedItemFiltered("malformed", RecommendationSource)
 				continue
 			end
 			if Result == nil or Result == "" then
 				table.insert(List, item)
-			elseif not t[Result] then
+			elseif t[Result] then
+				Analytics.reportMomentsFeedItemFiltered("duplicate", RecommendationSource)
+			else
 				t[Result] = true
 				table.insert(List, item)
-			elseif FFlagMomentsContentStatsTelemetry then
-				Analytics.reportMomentsFeedItemFiltered("duplicate", RecommendationSource)
 			end
 		end
 		return List

@@ -3335,12 +3335,14 @@ Feature.Friends.Label.FollowsYou,Volgt jou
 Feature.Friends.Label.Frequent,Samen gespeeld
 Feature.Friends.Label.Friend,
 Feature.Friends.Label.FriendInvite,Heeft je uitgenodigd om vrienden te zijn op Roblox
+Feature.Friends.Label.FriendOwns,1 vriend bezit
 Feature.Friends.Label.FriendRecentlyPlayed,<b>1 vriend</b> speelde onlangs
 Feature.Friends.Label.FriendRequest,
 Feature.Friends.Label.Friends,
 Feature.Friends.Label.FriendsAreNowConnections,Vrienden zijn nu connecties!
 Feature.Friends.Label.FriendsHintBold,Laten we gaan!
 Feature.Friends.Label.FriendsHintPlain,Voeg eerst een vriend toe.
+Feature.Friends.Label.FriendsOwn,{numberOfConnections} vrienden bezitten
 Feature.Friends.Label.FriendsPlayed, {numberOfConnections} speelden
 Feature.Friends.Label.FriendsRecentlyPlayed,<b>{numberOfConnections} vrienden</b> speelden onlangs
 Feature.Friends.Label.InGame,

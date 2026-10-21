@@ -3353,12 +3353,14 @@ Feature.Friends.Label.FollowsYou,Te suit
 Feature.Friends.Label.Frequent,Joué ensemble
 Feature.Friends.Label.Friend,Ami
 Feature.Friends.Label.FriendInvite,T'a invité à devenir ami sur Roblox
+Feature.Friends.Label.FriendOwns,Possédé par 1 ami
 Feature.Friends.Label.FriendRecentlyPlayed,Joué récemment par <b>1 ami</b>
 Feature.Friends.Label.FriendRequest,Demande d'ami
 Feature.Friends.Label.Friends,
 Feature.Friends.Label.FriendsAreNowConnections,Les amis sont désormais des connexions !
 Feature.Friends.Label.FriendsHintBold,Jouons !
 Feature.Friends.Label.FriendsHintPlain,Commence par ajouter un ami.
+Feature.Friends.Label.FriendsOwn,Possédé par {numberOfConnections} amis
 Feature.Friends.Label.FriendsPlayed,{numberOfConnections} a ou ont joué
 Feature.Friends.Label.FriendsRecentlyPlayed,<b>{numberOfConnections} amis</b> ont joué récemment
 Feature.Friends.Label.InGame,

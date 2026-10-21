@@ -46,6 +46,7 @@
 	FFlagAXItemDetailsIxpExposure = require(script.FFlagAXItemDetailsIxpExposure),
 	FFlagAXItemDetailsSdui = require(script.FFlagAXItemDetailsSdui),
 	FFlagAXItemDetailsSduiActions = require(script.FFlagAXItemDetailsSduiActions),
+	FFlagAXItemDetailsSduiBodyActions = require(script.FFlagAXItemDetailsSduiBodyActions),
 	FFlagAXItemDetailsMediaHeader = require(script.FFlagAXItemDetailsMediaHeader),
 	FFlagAXAvatarEditorStoresContext = require(script.FFlagAXAvatarEditorStoresContext),
 	FFlagAXItemsViewContentSizeBinding = require(script.FFlagAXItemsViewContentSizeBinding),

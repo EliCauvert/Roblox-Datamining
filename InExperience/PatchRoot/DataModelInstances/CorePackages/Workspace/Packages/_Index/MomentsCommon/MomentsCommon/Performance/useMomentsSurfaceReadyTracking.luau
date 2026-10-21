@@ -6,11 +6,10 @@ local SignalsReactModule = require(Parent.SignalsReact)
 local _ = require(MomentsCommon.Media.MediaTypes)
 local UseHasPresentedFrameModule = require(MomentsCommon.Media.useHasPresentedFrame)
 local MomentsSurfaceLoadManagerModule = require(script.Parent.MomentsSurfaceLoadManager)
-local FFlagMomentsMediaSmoothnessTelemetryModule = require(MomentsCommon.Flags.FFlagMomentsMediaSmoothnessTelemetry)
 local CaptureKindModule = require(MomentsCommon.Enums.CaptureKind)
 
 return function(p1)
-	-- upvalues: ReactModule (copy), UseHasPresentedFrameModule (copy), SignalsModule (copy), SignalsReactModule (copy), FFlagMomentsMediaSmoothnessTelemetryModule (copy), MomentsSurfaceLoadManagerModule (copy), CaptureKindModule (copy)
+	-- upvalues: ReactModule (copy), UseHasPresentedFrameModule (copy), SignalsModule (copy), SignalsReactModule (copy), MomentsSurfaceLoadManagerModule (copy), CaptureKindModule (copy)
 	local Controller = p1.controller
 	local IsVideo = p1.isVideo
 	local Enabled = p1.enabled
@@ -25,16 +24,10 @@ return function(p1)
 	end, { Controller })))
 	local UseHasPresentedFrameModuleResult1 = if IsVideo then UseHasPresentedFrameModuleResult else UseSignalStateResult == "Ready"
 	ReactModule.useEffect(function()
-		-- upvalues: Enabled (copy), UseHasPresentedFrameModuleResult1 (copy), Controller (copy), UseRefResult (copy), FFlagMomentsMediaSmoothnessTelemetryModule (upval), MomentsSurfaceLoadManagerModule (upval), IsVideo (copy), CaptureKindModule (upval)
+		-- upvalues: Enabled (copy), UseHasPresentedFrameModuleResult1 (copy), Controller (copy), UseRefResult (copy), MomentsSurfaceLoadManagerModule (upval), IsVideo (copy), CaptureKindModule (upval)
 		if Enabled and UseHasPresentedFrameModuleResult1 and Controller ~= nil and UseRefResult.current ~= Controller then
 			UseRefResult.current = Controller
-			
-			if FFlagMomentsMediaSmoothnessTelemetryModule then
-				MomentsSurfaceLoadManagerModule.markSurfaceReady(if IsVideo then CaptureKindModule.Video else CaptureKindModule.Screenshot)
-				
-				return
-			end
-			MomentsSurfaceLoadManagerModule.markSurfaceReady()
+			MomentsSurfaceLoadManagerModule.markSurfaceReady(if IsVideo then CaptureKindModule.Video else CaptureKindModule.Screenshot)
 		end
 	end, {
 		Enabled,

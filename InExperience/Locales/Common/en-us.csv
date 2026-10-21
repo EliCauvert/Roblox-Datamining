@@ -3363,12 +3363,14 @@ Feature.Friends.Label.FollowsYou,Follows You
 Feature.Friends.Label.Frequent,Played together
 Feature.Friends.Label.Friend,
 Feature.Friends.Label.FriendInvite,Invited you to be friends on Roblox
+Feature.Friends.Label.FriendOwns,1 Friend owns
 Feature.Friends.Label.FriendRecentlyPlayed,<b>1 Friend</b> recently played
 Feature.Friends.Label.FriendRequest,
 Feature.Friends.Label.Friends,
 Feature.Friends.Label.FriendsAreNowConnections,Friends are now Connections!
 Feature.Friends.Label.FriendsHintBold,Let’s play!
 Feature.Friends.Label.FriendsHintPlain,Start by adding a friend.
+Feature.Friends.Label.FriendsOwn,{numberOfConnections} Friends own
 Feature.Friends.Label.FriendsPlayed,{numberOfConnections} played
 Feature.Friends.Label.FriendsRecentlyPlayed,<b>{numberOfConnections} Friends</b> recently played
 Feature.Friends.Label.InGame,In-Experience
@@ -3648,6 +3650,7 @@ Feature.InExperienceIntervention.Label.TimeLeft.Day.Singular,
 Feature.InExperienceIntervention.Label.TimeLeft.Hours,{time} left
 Feature.InExperienceShop.Description.RobuxPurchaseLegalDisclosure,"By purchasing Robux, you agree to our {termsLinkStart}Terms of Use{termsLinkEnd}, including the arbitration clause and revocation policy."
 Feature.InExperienceShop.GamePass,Game pass
+Feature.InExperienceShop.Label.Active,
 Feature.InExperienceShop.Label.BonusItem,Bonus item
 Feature.InExperienceShop.Label.DescriptionWithTime,{description} {timeRemaining}
 Feature.InExperienceShop.Label.EndTime,Ends in {timeRemaining}

@@ -8,10 +8,10 @@ local Text = FoundationModule.Text
 local View = FoundationModule.View
 local Icon = FoundationModule.Icon
 local UseTokensFunction = FoundationModule.Hooks.useTokens
-local UseLocalizationFunction = require(Parent1.Localization).Hooks.useLocalization
+local UseLocalizedLabelsModule = require(Parent.Hooks.useLocalizedLabels)
 
 return function(p1)
-	-- upvalues: UseTokensFunction (copy), UseLocalizationFunction (copy), ReactModule (copy), View (copy), Text (copy), ConstantsModule (copy), Icon (copy)
+	-- upvalues: UseTokensFunction (copy), UseLocalizedLabelsModule (copy), ReactModule (copy), View (copy), Text (copy), ConstantsModule (copy), Icon (copy)
 	local UseTokensResult = UseTokensFunction()
 	local TOUCHENUMTOICONEntry = ConstantsModule.HELP_PAGE.TOUCH_ENUM_TO_ICON[p1.touchInput]
 	local Element = TOUCHENUMTOICONEntry and ReactModule.createElement(Icon, {
@@ -20,7 +20,7 @@ return function(p1)
 	})
 	
 	return ReactModule.createElement(View, {
-		tag = "align-x-center auto-xy col gap-small",
+		tag = "col align-x-center gap-small auto-xy",
 		LayoutOrder = p1.layoutOrder
 	}, {
 		actionComponent = ReactModule.createElement(View, {
@@ -29,9 +29,9 @@ return function(p1)
 			backgroundStyle = UseTokensResult.Color.Extended.Gray.Gray_600
 		}, {
 			InnerAction = ReactModule.createElement(Text, {
-				tag = "auto-xy text-align-x-center text-title-small",
+				tag = "auto-xy text-title-small text-align-x-center",
 				textStyle = UseTokensResult.Color.Extended.White.White_100,
-				Text = UseLocalizationFunction({ action = p1.action }).action
+				Text = UseLocalizedLabelsModule({ action = p1.action }).action
 			})
 		}),
 		iconComponent = TOUCHENUMTOICONEntry and ReactModule.createElement(View, { tag = "auto-xy", LayoutOrder = 2 }, { InnerIcon = Element }) or nil

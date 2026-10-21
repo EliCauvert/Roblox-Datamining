@@ -14,8 +14,6 @@ local MomentsSurfaceLoadManager = MomentsCommonModule.Performance.MomentsSurface
 local FFlagMomentsRemoveDeletedFromProfile = SharedFlagsModule.FFlagMomentsRemoveDeletedFromProfile
 local FFlagMomentsOptimisticProfilePending = SharedFlagsModule.FFlagMomentsOptimisticProfilePending
 local FFlagMomentsFeedMediaLoadAttemptedEvent = MomentsCommonModule.Flags.FFlagMomentsFeedMediaLoadAttemptedEvent
-local FFlagMomentsMediaSmoothnessTelemetry = MomentsCommonModule.Flags.FFlagMomentsMediaSmoothnessTelemetry
-local FFlagMomentsPassFeedItemIdToBackendApis = SharedFlagsModule.FFlagMomentsPassFeedItemIdToBackendApis
 local FFlagMomentsComments = SharedFlagsModule.FFlagMomentsComments
 local GetCommentsSheetStoreModule = if FFlagMomentsComments then require(Moments.Components.Comments.Sheet.getCommentsSheetStore) else nil
 local FFlagMomentsCreatorAnalyticsModule = require(Moments.Flags.FFlagMomentsCreatorAnalytics)
@@ -122,7 +120,7 @@ local _ = function()
 end
 
 return function(Frame: Frame)
-	-- upvalues: NoopTelemetry (copy), FFlagMomentsComments (copy), GetCommentsSheetStoreModule (copy), SignalsReactModule (copy), FFlagMomentsCreatorAnalyticsModule (copy), GetPostInsightsPageStoreModule (copy), GetImmersiveChromeStoreModule (copy), UseLocalizationFunction (copy), config (copy), UseMomentsSessionFunction (copy), GetToastStoreModule (copy), ReactModule (copy), GetFeedScrollLimitModule (copy), FFlagMomentsNonInfiniteScrollEndStateFixesModule (copy), GetFFlagMomentsNonInfiniteScrollFunction (copy), GetMomentsCapabilitiesFunction (copy), CreateFeedStoreModule (copy), feedItemDedupeKey (copy), FFlagMomentsCommentsCloseOnFeedJumpModule (copy), SignalsModule (copy), FFlagMomentsMediaSmoothnessTelemetry (copy), FFlagMomentsNavigationEventModule (copy), UseMomentsHostFunction (copy), LogMomentViewBeganModule (copy), FFlagMomentsImpressionPrimaryEntityModule (copy), Moments (copy), FireAnalyticsEventFunction (copy), EventNames (copy), LogFeedEndStateReachedModule (copy), UseFeedTelemetryModule (copy), feedItemAttribution (copy), FFlagMomentsOptimisticProfilePending (copy), MomentsSurfaceLoadManager (copy), FeedItemRegistryModule (copy), FFlagMomentsPassFeedItemIdToBackendApis (copy), DeleteMomentModule (copy), MomentsFeed (ref), Parent (copy), FFlagMomentsRemoveDeletedFromProfile (copy), GetDeletedMomentsStoreModule (copy), MakeFeedActionFieldsModule (copy), FFlagMomentsDeleteSnackbarModule (copy), FFlagMomentsFixDeleteToastCopyModule (copy), makeMediaLoadEventFields (copy), Analytics (copy), FFlagMomentsFeedMediaLoadAttemptedEvent (copy), FeedContext (copy), VerticalPager (copy), renderFeedItem (copy), feedItemKey (copy), FeedStateViewModule (copy), FeedNavigationBarModule (copy), ImmersiveChromeControllerModule (copy), SwipeLatencyTrackerModule (copy), DeletionConfirmationDialogModule (copy), MomentMediaCoordinatorProviderModule (copy), SurfaceReadyTrackerModule (copy)
+	-- upvalues: NoopTelemetry (copy), FFlagMomentsComments (copy), GetCommentsSheetStoreModule (copy), SignalsReactModule (copy), FFlagMomentsCreatorAnalyticsModule (copy), GetPostInsightsPageStoreModule (copy), GetImmersiveChromeStoreModule (copy), UseLocalizationFunction (copy), config (copy), UseMomentsSessionFunction (copy), GetToastStoreModule (copy), ReactModule (copy), GetFeedScrollLimitModule (copy), FFlagMomentsNonInfiniteScrollEndStateFixesModule (copy), GetFFlagMomentsNonInfiniteScrollFunction (copy), GetMomentsCapabilitiesFunction (copy), CreateFeedStoreModule (copy), feedItemDedupeKey (copy), FFlagMomentsCommentsCloseOnFeedJumpModule (copy), SignalsModule (copy), FFlagMomentsNavigationEventModule (copy), UseMomentsHostFunction (copy), LogMomentViewBeganModule (copy), FFlagMomentsImpressionPrimaryEntityModule (copy), Moments (copy), FireAnalyticsEventFunction (copy), EventNames (copy), LogFeedEndStateReachedModule (copy), UseFeedTelemetryModule (copy), feedItemAttribution (copy), FFlagMomentsOptimisticProfilePending (copy), MomentsSurfaceLoadManager (copy), FeedItemRegistryModule (copy), DeleteMomentModule (copy), MomentsFeed (ref), Parent (copy), FFlagMomentsRemoveDeletedFromProfile (copy), GetDeletedMomentsStoreModule (copy), MakeFeedActionFieldsModule (copy), FFlagMomentsDeleteSnackbarModule (copy), FFlagMomentsFixDeleteToastCopyModule (copy), makeMediaLoadEventFields (copy), Analytics (copy), FFlagMomentsFeedMediaLoadAttemptedEvent (copy), FeedContext (copy), VerticalPager (copy), renderFeedItem (copy), feedItemKey (copy), FeedStateViewModule (copy), FeedNavigationBarModule (copy), ImmersiveChromeControllerModule (copy), SwipeLatencyTrackerModule (copy), DeletionConfirmationDialogModule (copy), MomentMediaCoordinatorProviderModule (copy), SurfaceReadyTrackerModule (copy)
 	local Source = Frame.source
 	local NoActive = Frame.active == nil or Frame.active
 	local NoActive1 = if Frame.playbackActive == nil then NoActive else Frame.playbackActive
@@ -228,14 +226,9 @@ return function(Frame: Frame)
 	local UseRefResult1 = ReactModule.useRef(nil)
 	local UseRefResult2 = ReactModule.useRef(nil)
 	local UseMemoResult1 = ReactModule.useMemo(function()
-		-- upvalues: FFlagMomentsMediaSmoothnessTelemetry (upval), FFlagMomentsNavigationEventModule (upval), UseRefResult1 (copy), UseRefResult2 (copy)
-		if not FFlagMomentsMediaSmoothnessTelemetry and not FFlagMomentsNavigationEventModule then
-			return nil
-		end
-		local t = {}
-		
-		if FFlagMomentsMediaSmoothnessTelemetry then
-			function t.onTargetCommitted(p1, p2, p3)
+		-- upvalues: UseRefResult1 (copy), FFlagMomentsNavigationEventModule (upval), UseRefResult2 (copy)
+		local config = {
+			onTargetCommitted = function(p1, p2, p3)
 				-- upvalues: UseRefResult1 (upval)
 				local CurrentFunction: (any, any, any) -> () = UseRefResult1.current
 				
@@ -243,9 +236,10 @@ return function(Frame: Frame)
 					CurrentFunction(p1, p2, p3)
 				end
 			end
-		end
+		}
+		
 		if FFlagMomentsNavigationEventModule then
-			function t.onUserStep(p1, p2)
+			function config.onUserStep(p1, p2)
 				-- upvalues: UseRefResult2 (upval)
 				local CurrentFunction: (any, any) -> () = UseRefResult2.current
 				
@@ -254,7 +248,7 @@ return function(Frame: Frame)
 				end
 			end
 		end
-		return t
+		return config
 	end, {})
 	local UseRefResult3 = ReactModule.useRef(0)
 	local UseRefResult4 = ReactModule.useRef(false)
@@ -482,20 +476,20 @@ return function(Frame: Frame)
 		end
 	end, { UseMemoResult })
 	local UseResult8 = ReactModule.useCallback(function()
-		-- upvalues: UseSignalStateResult3 (copy), FFlagMomentsPassFeedItemIdToBackendApis (upval), UseMomentsSessionResult (copy), DeleteMomentModule (upval), MomentsFeed (upval), Parent (upval), UseResult7 (copy), FFlagMomentsRemoveDeletedFromProfile (upval), FFlagMomentsOptimisticProfilePending (upval), GetDeletedMomentsStoreModule (upval), MakeFeedActionFieldsModule (upval), FireAnalyticsEventFunction (upval), EventNames (upval), FFlagMomentsDeleteSnackbarModule (upval), ToastStoreModule (copy), UseLocalizationResult (copy), FFlagMomentsFixDeleteToastCopyModule (upval)
+		-- upvalues: UseSignalStateResult3 (copy), UseMomentsSessionResult (copy), DeleteMomentModule (upval), MomentsFeed (upval), Parent (upval), UseResult7 (copy), FFlagMomentsRemoveDeletedFromProfile (upval), FFlagMomentsOptimisticProfilePending (upval), GetDeletedMomentsStoreModule (upval), MakeFeedActionFieldsModule (upval), FireAnalyticsEventFunction (upval), EventNames (upval), FFlagMomentsDeleteSnackbarModule (upval), ToastStoreModule (copy), UseLocalizationResult (copy), FFlagMomentsFixDeleteToastCopyModule (upval)
 		if UseSignalStateResult3 then
 			local MomentId = UseSignalStateResult3.momentId
 			local FeedItemId = UseSignalStateResult3.feedItemId
 			local FeedSessionId = UseSignalStateResult3.feedSessionId
 			
-			if FFlagMomentsPassFeedItemIdToBackendApis and (FeedItemId == nil or FeedItemId == "") then
+			if FeedItemId == nil or FeedItemId == "" then
 				UseMomentsSessionResult.clearPendingDeletion()
 				
 				return
 			end
 			task.spawn(function()
-				-- upvalues: FFlagMomentsPassFeedItemIdToBackendApis (upval), DeleteMomentModule (upval), MomentId (copy), FeedItemId (copy), MomentsFeed (upval), Parent (upval)
-				local v1, v2 = (if FFlagMomentsPassFeedItemIdToBackendApis then DeleteMomentModule(MomentId, nil, FeedItemId) else DeleteMomentModule(MomentId)):await()
+				-- upvalues: DeleteMomentModule (upval), FeedItemId (copy), MomentsFeed (upval), Parent (upval), MomentId (copy)
+				local v1, v2 = DeleteMomentModule(FeedItemId):await()
 				
 				if not v1 then
 					if MomentsFeed == nil then
@@ -641,11 +635,11 @@ return function(Frame: Frame)
 				controllerRef = UseRefResult,
 				coveringOverlay = UseSignalStateResult
 			}),
-			SwipeLatency = if FFlagMomentsMediaSmoothnessTelemetry then ReactModule.createElement(SwipeLatencyTrackerModule, {
+			SwipeLatency = ReactModule.createElement(SwipeLatencyTrackerModule, {
 				pager = UseMemoResult.pager,
 				controllerRef = UseRefResult,
 				onTargetCommittedRef = UseRefResult1
-			}) else nil,
+			}),
 			DeletionDialog = if UseSignalStateResult3 == nil then nil else ReactModule.createElement(DeletionConfirmationDialogModule, { onCancel = UseResult9, onConfirm = UseResult8 })
 		})
 	})

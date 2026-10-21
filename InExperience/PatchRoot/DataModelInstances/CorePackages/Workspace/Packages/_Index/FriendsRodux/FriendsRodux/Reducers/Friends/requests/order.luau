@@ -2,7 +2,6 @@
 local Parent = FriendsRodux.Parent
 local RoduxModule = require(Parent.Rodux)
 local _ = require(FriendsRodux.roduxFriendsTypes)
-local FFlagAddFriendsPageHighlightUnseenRequests = require(Parent.SharedFlags).FFlagAddFriendsPageHighlightUnseenRequests
 local FFlagAddFriendsRefreshRequestOrder = require(Parent.SharedFlags).FFlagAddFriendsRefreshRequestOrder
 local t = {}
 
@@ -32,10 +31,10 @@ local function parkTrailingScores(p1, List)
 end
 
 return function(p2)
-	-- upvalues: RoduxModule (copy), t (copy), FFlagAddFriendsRefreshRequestOrder (copy), parkTrailingScores (copy), FFlagAddFriendsPageHighlightUnseenRequests (copy)
+	-- upvalues: RoduxModule (copy), t (copy), FFlagAddFriendsRefreshRequestOrder (copy), parkTrailingScores (copy)
 	return RoduxModule.createReducer(t, {
 		[p2.friendsNetworking.GetFriendRequests.Succeeded.name] = function(p3, p4)
-			-- upvalues: FFlagAddFriendsRefreshRequestOrder (upval), parkTrailingScores (upval), FFlagAddFriendsPageHighlightUnseenRequests (upval)
+			-- upvalues: FFlagAddFriendsRefreshRequestOrder (upval), parkTrailingScores (upval)
 			local Amount = 0
 			
 			if FFlagAddFriendsRefreshRequestOrder and p4.queryArgs and p4.queryArgs.cursor == nil then
@@ -57,8 +56,6 @@ return function(p2)
 				
 				if not RequestsById[tostring(entry.id)] then
 					if FFlagAddFriendsRefreshRequestOrder then
-						RequestsById[tostring(entry.id)] = NewCount
-					elseif not FFlagAddFriendsPageHighlightUnseenRequests then
 						RequestsById[tostring(entry.id)] = NewCount
 					elseif entry.isUnseen then
 						RequestsById[tostring(entry.id)] = -(tonumber((string.gsub(string.gsub(entry.friendRequest.sentAt, "%.%d+Z$", "Z"), "%D", ""))) or 0)

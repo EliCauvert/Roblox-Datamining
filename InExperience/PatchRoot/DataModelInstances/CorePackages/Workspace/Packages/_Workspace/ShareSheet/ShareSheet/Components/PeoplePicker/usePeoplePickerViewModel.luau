@@ -37,7 +37,7 @@ return function(p1)
 				LayoutOrder = 1,
 				conversations = p1.conversations,
 				recipients = p1.recipients,
-				filterQuery = if FFlagShareSheetFriendsSort then p1.clientFilterQuery else Search.debouncedQuery,
+				filterQuery = if FFlagShareSheetFriendsSort then p1.filterQuery else Search.debouncedQuery,
 				scrollResetQuery = Search.debouncedQuery,
 				isLoading = UsePeoplePickerPaginationModuleResult.isLoading,
 				onConversationActivated = p1.onConversationActivated,

@@ -4,6 +4,7 @@ local Components = Foundation.Components
 local InputFieldModule = require(Components.InputField)
 local _ = require(Foundation.Components.Types)
 local ComposerTextInputModule = require(script.Parent.ComposerTextInput)
+local FFlagComposerFooter = require(script:FindFirstAncestor("AppBlox").Parent.SharedFlags).FFlagComposerFooter
 local UseTextInputVariantsModule = require(Components.TextInput.useTextInputVariants)
 local UseTokensModule = require(Foundation.Providers.Style.useTokens)
 local WithCommonPropsModule = require(Foundation.Utility.withCommonProps)
@@ -16,7 +17,7 @@ local config = {
 }
 
 return ReactModule.memo(ReactModule.forwardRef(function(p1, Ref)
-	-- upvalues: WithDefaultsModule (copy), config (copy), UseTokensModule (copy), UseTextInputVariantsModule (copy), ReactModule (copy), InputFieldModule (copy), WithCommonPropsModule (copy), ComposerTextInputModule (copy)
+	-- upvalues: WithDefaultsModule (copy), config (copy), UseTokensModule (copy), UseTextInputVariantsModule (copy), FFlagComposerFooter (copy), ReactModule (copy), InputFieldModule (copy), WithCommonPropsModule (copy), ComposerTextInputModule (copy)
 	local WithDefaultsModuleResult = WithDefaultsModule(p1, config)
 	local UseTokensModuleResult = UseTokensModule()
 	local UseTextInputVariantsModuleResult = UseTextInputVariantsModule(UseTokensModuleResult, WithDefaultsModuleResult.size, WithDefaultsModuleResult.variant)
@@ -26,10 +27,10 @@ return ReactModule.memo(ReactModule.forwardRef(function(p1, Ref)
 		label = WithDefaultsModuleResult.label,
 		hint = WithDefaultsModuleResult.hint,
 		hasError = WithDefaultsModuleResult.hasError,
-		isDisabled = WithDefaultsModuleResult.leadingElement == nil and WithDefaultsModuleResult.trailingElement == nil and WithDefaultsModuleResult.isDisabled,
+		isDisabled = if FFlagComposerFooter then WithDefaultsModuleResult.leadingElement == nil and WithDefaultsModuleResult.trailingElement == nil and WithDefaultsModuleResult.footerElement == nil and WithDefaultsModuleResult.isDisabled else WithDefaultsModuleResult.leadingElement == nil and WithDefaultsModuleResult.trailingElement == nil and WithDefaultsModuleResult.isDisabled,
 		isRequired = WithDefaultsModuleResult.isRequired,
 		input = function(Ref)
-			-- upvalues: ReactModule (upval), ComposerTextInputModule (upval), WithDefaultsModuleResult (copy), UseTokensModuleResult (copy), UseTextInputVariantsModuleResult (copy)
+			-- upvalues: ReactModule (upval), ComposerTextInputModule (upval), WithDefaultsModuleResult (copy), UseTokensModuleResult (copy), UseTextInputVariantsModuleResult (copy), FFlagComposerFooter (upval)
 			return ReactModule.createElement(ComposerTextInputModule, {
 				alwaysMultiLine = true,
 				manualFocusRelease = true,
@@ -57,6 +58,7 @@ return ReactModule.memo(ReactModule.forwardRef(function(p1, Ref)
 				},
 				leadingElement = WithDefaultsModuleResult.leadingElement,
 				trailingElement = WithDefaultsModuleResult.trailingElement,
+				footerElement = if FFlagComposerFooter then WithDefaultsModuleResult.footerElement else nil,
 				ref = Ref,
 				testId = `{WithDefaultsModuleResult.testId}--input`
 			})

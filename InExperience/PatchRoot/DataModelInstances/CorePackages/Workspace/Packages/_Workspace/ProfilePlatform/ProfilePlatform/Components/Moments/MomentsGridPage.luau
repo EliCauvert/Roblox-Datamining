@@ -42,7 +42,6 @@ local NavigateDownFunction = require(Parent.NavigationRodux).Thunks.NavigateDown
 local GetSafeAreaSizeFunction = require(Parent.InputUi).getSafeAreaSize
 local FFlagProfilePlatformNewProfileHeader = SharedFlagsModule.FFlagProfilePlatformNewProfileHeader
 local FFlagSwitchProfileWidthHookToSocialCommon = SharedFlagsModule.FFlagSwitchProfileWidthHookToSocialCommon
-local FFlagProfileMomentsVideoPlaybackFix = SharedFlagsModule.FFlagProfileMomentsVideoPlaybackFix
 local FFlagMomentsOptimisticProfilePending = SharedFlagsModule.FFlagMomentsOptimisticProfilePending
 local FFlagAXEnableProfileTab = SharedFlagsModule.FFlagAXEnableProfileTab
 local FFlagSignalsNavP3Dispatch = SharedFlagsModule.FFlagSignalsNavP3Dispatch
@@ -58,7 +57,7 @@ local ChevronLargeLeft = FoundationModule.Enums.IconName.ChevronLargeLeft
 local Frozen = table.freeze({})
 
 return function()
-	-- upvalues: UseNavigationFunction (copy), FFlagProfileMomentsFeedRootRoute (copy), UseDispatchFunction (copy), UseStyleFunction (copy), UseTokensFunction (copy), UseProfileFormFactorModule (copy), EnumsModule (copy), FFlagAXEnableProfileTab (copy), UseProfileWrapperContextModule (copy), UseScreenSizeFunction (copy), UseSelectorFunction (copy), GetSafeAreaSizeFunction (copy), ProfileMomentsGridMeTabTopInset (copy), UseStatusBarHeightFunction (copy), FFlagProfilePlatformNewProfileHeader (copy), FFlagSwitchProfileWidthHookToSocialCommon (copy), UseProfileCardWidthFunction (copy), UseProfileCardWidthModule (copy), ConstantsModule (copy), ReactModule (copy), UseUserProfilesFetchFunction (copy), UserProfilesModule (copy), UseUserMomentsModule (copy), UseLocalizationFunction (copy), TextKeysModule (copy), UseAppPolicyFunction (copy), FFlagMomentsOptimisticProfilePending (copy), FireAnalyticsEventFunction (copy), EventNames (copy), FFlagProfileMomentsLoadFailureAnalyticsModule (copy), MakeProfileTileFieldsModule (copy), AppPage (copy), FFlagSignalsNavP3Dispatch (copy), NavigationCommands (copy), NavigateDownFunction (copy), MomentGridItemModule (copy), View (copy), IconButton (copy), ChevronLargeLeft (copy), ButtonSize (copy), UserTile (copy), LayoutMode (copy), FFlagProfileMomentsVideoPlaybackFix (copy), UseNavigationFocusFunction (copy), FoundationModule (copy), ScrollingGridView (copy), MomentsCarouselMediaProviderModule (copy), Frozen (copy), ProfileModalViewModule (copy), FullscreenPageWithSafeArea (copy)
+	-- upvalues: UseNavigationFunction (copy), FFlagProfileMomentsFeedRootRoute (copy), UseDispatchFunction (copy), UseStyleFunction (copy), UseTokensFunction (copy), UseProfileFormFactorModule (copy), EnumsModule (copy), FFlagAXEnableProfileTab (copy), UseProfileWrapperContextModule (copy), UseScreenSizeFunction (copy), UseSelectorFunction (copy), GetSafeAreaSizeFunction (copy), ProfileMomentsGridMeTabTopInset (copy), UseStatusBarHeightFunction (copy), FFlagProfilePlatformNewProfileHeader (copy), FFlagSwitchProfileWidthHookToSocialCommon (copy), UseProfileCardWidthFunction (copy), UseProfileCardWidthModule (copy), ConstantsModule (copy), ReactModule (copy), UseUserProfilesFetchFunction (copy), UserProfilesModule (copy), UseUserMomentsModule (copy), UseLocalizationFunction (copy), TextKeysModule (copy), UseAppPolicyFunction (copy), FFlagMomentsOptimisticProfilePending (copy), FireAnalyticsEventFunction (copy), EventNames (copy), FFlagProfileMomentsLoadFailureAnalyticsModule (copy), MakeProfileTileFieldsModule (copy), AppPage (copy), FFlagSignalsNavP3Dispatch (copy), NavigationCommands (copy), NavigateDownFunction (copy), MomentGridItemModule (copy), View (copy), IconButton (copy), ChevronLargeLeft (copy), ButtonSize (copy), UserTile (copy), LayoutMode (copy), UseNavigationFocusFunction (copy), FoundationModule (copy), ScrollingGridView (copy), MomentsCarouselMediaProviderModule (copy), Frozen (copy), ProfileModalViewModule (copy), FullscreenPageWithSafeArea (copy)
 	local UseNavigationResult = UseNavigationFunction()
 	local UseDispatchResult = if FFlagProfileMomentsFeedRootRoute then UseDispatchFunction() else nil
 	local ExtraPropsParam = UseNavigationResult.getParam("extraProps")
@@ -219,9 +218,9 @@ return function()
 		end
 		return false
 	end, { Moments })
-	local NoFFlagMomentsOptimisticProfilePending = not FFlagProfileMomentsVideoPlaybackFix and not FFlagMomentsOptimisticProfilePending or UseNavigationFocusFunction()
+	local UseNavigationFocusResult = UseNavigationFocusFunction()
 	local Moment = if UseStateResult == nil then nil else Moments[UseStateResult]
-	local NoFFlagMomentsOptimisticProfilePending1 = Moment ~= nil and (Moment.metadata.captureType == Enum.CaptureType.Video and NoFFlagMomentsOptimisticProfilePending)
+	local UseNavigationFocusResult1 = Moment ~= nil and (Moment.metadata.captureType == Enum.CaptureType.Video and UseNavigationFocusResult)
 	local Element1 = ReactModule.createElement(View, {
 		tag = "grow size-full-0",
 		padding = {
@@ -253,9 +252,9 @@ return function()
 		})
 	})
 	local Element2 = if UseMemoResult then ReactModule.createElement(MomentsCarouselMediaProviderModule, {
-		moments = if NoFFlagMomentsOptimisticProfilePending1 then Moments else Frozen,
+		moments = if UseNavigationFocusResult1 then Moments else Frozen,
 		activeIndex = UseStateResult or 1,
-		playbackActive = NoFFlagMomentsOptimisticProfilePending1,
+		playbackActive = UseNavigationFocusResult1,
 		handoffRef = if FFlagMomentsOptimisticProfilePending then UseRefResult else nil
 	}, { Grid = Element1 }) else Element1
 	

@@ -17,25 +17,6 @@ return function()
 			-- upvalues: Signal2 (copy), Signal2_1 (copy)
 			Signal2(p1)
 			Signal2_1(if p1 == nil then nil else p2)
-		end,
-		consumeDeepLinkedMoment = function()
-			-- upvalues: Signal (copy), Signal1 (copy), Signal2 (copy), Signal2_1 (copy)
-			local SignalResult = Signal(false)
-			local SignalResult1 = Signal1(false)
-			Signal2(nil)
-			Signal2_1(nil)
-			
-			return if SignalResult == nil then nil else { targetId = SignalResult, targetIdType = SignalResult1 }
-		end,
-		consumeDeepLinkedMomentId = function()
-			-- upvalues: Signal (copy), Signal1 (copy), Signal2 (copy), Signal2_1 (copy)
-			local SignalResult = Signal(false)
-			local SignalResult1 = Signal1(false)
-			Signal2(nil)
-			Signal2_1(nil)
-			local Config = if SignalResult == nil then nil else { targetId = SignalResult, targetIdType = SignalResult1 }
-			
-			return if Config == nil then nil else Config.targetId
 		end
 	}
 end

@@ -6,7 +6,6 @@ local SharedFlagsModule = require(Parent.SharedFlags)
 local _ = require(Moments.Components.Feed)
 local Analytics = MomentsCommonModule.Analytics
 local RecommendationSource = MomentsCommonModule.Analytics.RecommendationSource
-local FFlagMomentsContentStatsTelemetry = MomentsCommonModule.Flags.FFlagMomentsContentStatsTelemetry
 local MomentsGetMomentsUserStoreModule = require(Parent.DataHydration.MomentsGetMomentsUserStore)
 local _ = require(Parent.DataHydration.MomentsStoreTypes)
 local CreatePendingFeedGetterModule = require(script.Parent.createPendingFeedGetter)
@@ -16,13 +15,12 @@ local GetReactionsStoreModule = require(Moments.Stores.GetReactionsStore)
 local GetShareCountsStoreModule = require(Moments.Stores.GetShareCountsStore)
 local GetDeletedMomentsStoreModule = require(Moments.Stores.GetDeletedMomentsStore)
 local FFlagMomentsOptimisticProfilePending = SharedFlagsModule.FFlagMomentsOptimisticProfilePending
-local FFlagProfileMomentsOrderingAndReactions = SharedFlagsModule.FFlagProfileMomentsOrderingAndReactions
 local FFlagMomentsRemoveDeletedFromProfile = SharedFlagsModule.FFlagMomentsRemoveDeletedFromProfile
 local FFlagMomentsComments = SharedFlagsModule.FFlagMomentsComments
 local MomentsGetMomentsCommentsStoreModule = if FFlagMomentsComments then require(Parent.DataHydration.MomentsGetMomentsCommentsStore) else nil
 
 return function(p1, p2)
-	-- upvalues: MomentsGetMomentsUserStoreModule (copy), FFlagMomentsComments (copy), MomentsGetMomentsCommentsStoreModule (copy), FFlagMomentsOptimisticProfilePending (copy), CreatePendingFeedGetterModule (copy), RecommendationSource (copy), FFlagProfileMomentsOrderingAndReactions (copy), GetReactionsStoreModule (copy), GetShareCountsStoreModule (copy), FFlagMomentsRemoveDeletedFromProfile (copy), GetDeletedMomentsStoreModule (copy), FFlagMomentsContentStatsTelemetry (copy), Analytics (copy), ShouldShowMomentInFeedModule (copy), ReportUnavailableFeedItemModule (copy)
+	-- upvalues: MomentsGetMomentsUserStoreModule (copy), FFlagMomentsComments (copy), MomentsGetMomentsCommentsStoreModule (copy), FFlagMomentsOptimisticProfilePending (copy), CreatePendingFeedGetterModule (copy), RecommendationSource (copy), GetReactionsStoreModule (copy), GetShareCountsStoreModule (copy), FFlagMomentsRemoveDeletedFromProfile (copy), GetDeletedMomentsStoreModule (copy), Analytics (copy), ShouldShowMomentInFeedModule (copy), ReportUnavailableFeedItemModule (copy)
 	local P1 = p2 or {}
 	local MomentsGetMomentsUserStoreModuleResult = if P1.userStore == nil then MomentsGetMomentsUserStoreModule(false) else P1.userStore
 	local CommentsStore = nil
@@ -42,7 +40,7 @@ return function(p1, p2)
 		getPendingItems = if FFlagMomentsOptimisticProfilePending then CreatePendingFeedGetterModule(p1, MomentsGetMomentsUserStoreModuleResult) else nil,
 		recommendationSource = RecommendationSource.Profile,
 		fetchAsync = function(NextCursor)
-			-- upvalues: CommentsStore (ref), MomentsGetMomentsUserStoreModuleResult (copy), p1 (copy), FFlagProfileMomentsOrderingAndReactions (upval), GetReactionsStoreModule (upval), GetShareCountsStoreModule (upval), FFlagMomentsRemoveDeletedFromProfile (upval), FFlagMomentsOptimisticProfilePending (upval), GetDeletedMomentsStoreModule (upval), FFlagMomentsContentStatsTelemetry (upval), Analytics (upval), RecommendationSource (upval), ShouldShowMomentInFeedModule (upval), ReportUnavailableFeedItemModule (upval), InitialIndex (copy), FFlagMomentsComments (upval)
+			-- upvalues: CommentsStore (ref), MomentsGetMomentsUserStoreModuleResult (copy), p1 (copy), GetReactionsStoreModule (upval), GetShareCountsStoreModule (upval), FFlagMomentsRemoveDeletedFromProfile (upval), FFlagMomentsOptimisticProfilePending (upval), GetDeletedMomentsStoreModule (upval), Analytics (upval), RecommendationSource (upval), ShouldShowMomentInFeedModule (upval), ReportUnavailableFeedItemModule (upval), InitialIndex (copy), FFlagMomentsComments (upval)
 			local OwnerGeneration = if CommentsStore == nil then nil else CommentsStore.getOwnerGeneration(false)
 			local v1 = nil
 			local Items = {}
@@ -60,26 +58,22 @@ return function(p1, p2)
 						v1[i] = value
 					end
 				end
-				if FFlagProfileMomentsOrderingAndReactions then
-					GetReactionsStoreModule(false).setBatchReactionCounts(v3.reactionsByMomentId or {})
-					GetShareCountsStoreModule(false).setBatchShareCounts(v3.shareInfoByMomentId or {})
-				end
+				GetReactionsStoreModule(false).setBatchReactionCounts(v3.reactionsByMomentId or {})
+				GetShareCountsStoreModule(false).setBatchShareCounts(v3.shareInfoByMomentId or {})
 				local DeletedIds = if FFlagMomentsRemoveDeletedFromProfile or FFlagMomentsOptimisticProfilePending then GetDeletedMomentsStoreModule(false).getDeletedIds(false) else nil
 				for _, moment in v3.moments do
-					if FFlagMomentsContentStatsTelemetry then
-						Analytics.reportMomentsFeedItemsReceived(RecommendationSource.Profile)
-					end
+					Analytics.reportMomentsFeedItemsReceived(RecommendationSource.Profile)
 					local HasFoundIndex: boolean = DeletedIds ~= nil and table.find(DeletedIds, moment.momentId) ~= nil
 					local ShouldShowMomentInFeedModule1 = ShouldShowMomentInFeedModule(moment)
 					
 					if not HasFoundIndex and ShouldShowMomentInFeedModule1 then
 						table.insert(Items, { kind = "moment", moment = moment })
-					elseif FFlagMomentsContentStatsTelemetry then
-						if HasFoundIndex then
-							Analytics.reportMomentsFeedItemFiltered("deleted", RecommendationSource.Profile)
-						else
-							ReportUnavailableFeedItemModule(moment, RecommendationSource.Profile)
-						end
+						continue
+					end
+					if HasFoundIndex then
+						Analytics.reportMomentsFeedItemFiltered("deleted", RecommendationSource.Profile)
+					else
+						ReportUnavailableFeedItemModule(moment, RecommendationSource.Profile)
 					end
 				end
 				NextCursor1 = v3.nextCursor

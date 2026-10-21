@@ -1,29 +1,23 @@
 ﻿local Parent = script.Parent.Parent.Parent
 local Parent1 = Parent.Parent
 local ReactModule = require(Parent1.React)
-local UseLocalizationFunction = require(Parent1.Localization).Hooks.useLocalization
 local Text = require(Parent1.Foundation).Text
 local EscapeRichTextModule = require(Parent.Utils.escapeRichText)
+local UseLocalizedLabelsModule = require(Parent.Hooks.useLocalizedLabels)
 
 return (ReactModule.memo(function(Frame)
-	-- upvalues: UseLocalizationFunction (copy), EscapeRichTextModule (copy), ReactModule (copy), Text (copy)
+	-- upvalues: UseLocalizedLabelsModule (copy), EscapeRichTextModule (copy), ReactModule (copy), Text (copy)
 	local ActionLabels = Frame.actionLabels
 	local Labels = {}
 	
 	for i, actionLabel in ipairs(ActionLabels) do
 		Labels[tostring(i)] = actionLabel.label
 	end
-	Labels.genericAction = "InGame.HelpMenu.GenericAction"
-	local UseLocalizationResult = UseLocalizationFunction(Labels)
+	local UseLocalizedLabelsModuleResult = UseLocalizedLabelsModule(Labels)
 	local List = {}
 	
 	for i1, actionLabel1 in ipairs(ActionLabels) do
-		local UseLocalizationResultEntry = UseLocalizationResult[tostring(i1)]
-		
-		if UseLocalizationResultEntry == nil or UseLocalizationResultEntry == "" then
-			UseLocalizationResultEntry = UseLocalizationResult.genericAction
-		end
-		local EscapeRichTextModuleResult = EscapeRichTextModule(UseLocalizationResultEntry)
+		local EscapeRichTextModuleResult = EscapeRichTextModule(UseLocalizedLabelsModuleResult[tostring(i1)])
 		
 		if actionLabel1.disabled then
 			EscapeRichTextModuleResult = "<font transparency=\"0.5\">" .. EscapeRichTextModuleResult .. "</font>"

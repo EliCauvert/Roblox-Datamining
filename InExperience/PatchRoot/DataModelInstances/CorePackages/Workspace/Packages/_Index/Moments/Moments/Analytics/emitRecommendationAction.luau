@@ -1,6 +1,5 @@
 ﻿local Moments = script:FindFirstAncestor("Moments")
 local ConstantsModule = require(Moments.Constants)
-local FFlagMomentsRecommendationClientEventTimestampModule = require(Moments.Flags.FFlagMomentsRecommendationClientEventTimestamp)
 local FFlagMomentsComments = require(Moments.Parent.SharedFlags).FFlagMomentsComments
 local config = {
 	eventName = "RecommendationActionEvent",
@@ -11,7 +10,7 @@ local config = {
 }
 
 return function(p1)
-	-- upvalues: ConstantsModule (copy), config (copy), FFlagMomentsRecommendationClientEventTimestampModule (copy), FFlagMomentsComments (copy)
+	-- upvalues: ConstantsModule (copy), config (copy), FFlagMomentsComments (copy)
 	local HttpService = game:GetService("HttpService")
 	local Guid = if p1.actionType == ConstantsModule.RecommendationActionType.Play then HttpService:GenerateGUID(false) else nil
 	game:GetService("TelemetryService"):LogEvent(config, {
@@ -20,7 +19,7 @@ return function(p1)
 			playsessionid = "",
 			universeid = ConstantsModule.MOMENTS_UNIVERSE_ID,
 			placeid = ConstantsModule.MOMENTS_PLACE_ID,
-			client_event_timestamp_ms = if FFlagMomentsRecommendationClientEventTimestampModule then DateTime.now().UnixTimestampMillis else nil,
+			client_event_timestamp_ms = DateTime.now().UnixTimestampMillis,
 			item_id = p1.itemId,
 			tracing_id = p1.tracingId,
 			action_type = tostring(p1.actionType),

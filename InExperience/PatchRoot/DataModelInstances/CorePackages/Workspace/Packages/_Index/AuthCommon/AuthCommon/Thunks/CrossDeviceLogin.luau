@@ -8,18 +8,27 @@ local PostCreateLoginCodeModule = require(AuthCommon.Http.Requests.PostCreateLog
 local PostLoginCodeStatusModule = require(AuthCommon.Http.Requests.PostLoginCodeStatus)
 local PostCancelLoginCodeModule = require(AuthCommon.Http.Requests.PostCancelLoginCode)
 local GetFFlagEnableCrossDeviceLoginUsingQRCodesFunction = require(Parent.SharedFlags).GetFFlagEnableCrossDeviceLoginUsingQRCodes
+local FFlagEnableCrossDeviceApproverDialogModule = require(AuthCommon.Flags.FFlagEnableCrossDeviceApproverDialog)
 
 return {
 	EnterCode = function(p1, p2)
-		-- upvalues: PostEnterLoginCodeModule (copy)
+		-- upvalues: PostEnterLoginCodeModule (copy), FFlagEnableCrossDeviceApproverDialogModule (copy)
 		return function(_)
-			-- upvalues: PostEnterLoginCodeModule (upval), p1 (copy), p2 (copy)
+			-- upvalues: PostEnterLoginCodeModule (upval), p1 (copy), p2 (copy), FFlagEnableCrossDeviceApproverDialogModule (upval)
 			return PostEnterLoginCodeModule(p1, p2):andThen(function(Result)
-				local ResponseBody = Result and Result.responseBody
-				
-				return if ResponseBody then {
+				-- upvalues: FFlagEnableCrossDeviceApproverDialogModule (upval)
+				if not Result or not Result.responseBody then
+					return nil
+				end
+				local config = {
 					DeviceInfo = string.format("%s\n%s", Result.responseBody.deviceInfo or "", Result.responseBody.location or "")
-				} else nil
+				}
+				
+				if FFlagEnableCrossDeviceApproverDialogModule then
+					config.Location = Result.responseBody.location or ""
+					config.MapImagePath = Result.responseBody.mapImagePath or ""
+				end
+				return config
 			end)
 		end
 	end,

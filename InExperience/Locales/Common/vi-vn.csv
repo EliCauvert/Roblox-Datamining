@@ -3353,12 +3353,14 @@ Feature.Friends.Label.FollowsYou,Theo Dõi Bạn
 Feature.Friends.Label.Frequent,Đã chơi cùng
 Feature.Friends.Label.Friend,
 Feature.Friends.Label.FriendInvite,Đã mời bạn trở thành bạn bè trên Roblox
+Feature.Friends.Label.FriendOwns,1 Người bạn sở hữu
 Feature.Friends.Label.FriendRecentlyPlayed,<b>1 Người bạn</b> vừa mới chơi
 Feature.Friends.Label.FriendRequest,
 Feature.Friends.Label.Friends,
 Feature.Friends.Label.FriendsAreNowConnections,"Bạn bè bây giờ được gọi là ""Người quen""!"
 Feature.Friends.Label.FriendsHintBold,Cùng chơi nào!
 Feature.Friends.Label.FriendsHintPlain,"Trước tiên, hãy thêm bạn bè."
+Feature.Friends.Label.FriendsOwn,{numberOfConnections} bạn bè sở hữu
 Feature.Friends.Label.FriendsPlayed,{numberOfConnections} bạn bè đã chơi
 Feature.Friends.Label.FriendsRecentlyPlayed,<b>{numberOfConnections} bạn bè</b> vừa mới chơi
 Feature.Friends.Label.InGame,

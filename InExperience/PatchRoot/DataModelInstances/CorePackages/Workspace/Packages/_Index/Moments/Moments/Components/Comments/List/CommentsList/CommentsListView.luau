@@ -31,6 +31,7 @@ return function(p1)
 				autoScrollOnChange = if FFlagViewRecyclerReact06 then ViewRecyclerModule.AutoScrollPolicy.WhenAtStart else p1.autoScrollOnChange,
 				autoScrollThreshold = if FFlagViewRecyclerReact06 then 33 else nil,
 				scrollingFrameRef = p1.listScrollingFrameRef,
+				listRef = p1.listRef,
 				scrollingFrameProps = {
 					Name = "MomentsCommentsListScrollingFrame",
 					BackgroundTransparency = 1,

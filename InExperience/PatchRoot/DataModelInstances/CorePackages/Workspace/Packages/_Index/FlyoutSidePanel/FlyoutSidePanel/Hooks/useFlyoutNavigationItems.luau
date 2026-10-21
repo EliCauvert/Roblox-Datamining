@@ -14,12 +14,10 @@ local FFlagEnableBlackbirdCheck = SharedFlagsModule.FFlagEnableBlackbirdCheck
 local FFlagEnableRMOnMorePageGUAC = SharedFlagsModule.FFlagEnableRMOnMorePageGUAC
 local FFlagEnableRMOnMorePageForAll = SharedFlagsModule.FFlagEnableRMOnMorePageForAll
 local FFlagLuaAppFixNotificationBadgeCountsSync = SharedFlagsModule.FFlagLuaAppFixNotificationBadgeCountsSync
-local FFlagFixMomentsExperienceFallback = SharedFlagsModule.FFlagFixMomentsExperienceFallback
 local FFlagFlyoutRemoveMomentsForArgoEnabled = SharedFlagsModule.FFlagFlyoutRemoveMomentsForArgoEnabled
 local FFlagEnableArgus = SharedFlagsModule.FFlagEnableArgus
 local FFlagArgoEnableMoments = SharedFlagsModule.FFlagArgoEnableMoments
 local FFlagLuaAppEnableSduiHomePage = SharedFlagsModule.FFlagLuaAppEnableSduiHomePage
-local FlyoutGateMomentsTile = game:DefineFastFlag("FlyoutGateMomentsTile", false)
 local FFlagFlyoutFilterWebViewsAndBrowserLinks = SharedFlagsModule.FFlagFlyoutFilterWebViewsAndBrowserLinks
 local FFlagFlyoutSidePanelTradesEntryModule = require(script.Parent.Parent.Flags.FFlagFlyoutSidePanelTradesEntry)
 local FFlagFlyoutHideSortDeeplinkItemsModule = require(script.Parent.Parent.Flags.FFlagFlyoutHideSortDeeplinkItems)
@@ -77,7 +75,7 @@ local function shouldSkipLibraryItem(Premium, Item, p1): boolean
 end
 
 return function()
-	-- upvalues: ConstantsModule (copy), UseSelectorFunction (copy), FFlagLuaAppFixNotificationBadgeCountsSync (copy), FFlagLuaAppEnableSduiHomePage (copy), UseHomeSortDropDownOptionsModule (copy), ReactModule (copy), UseAppPolicyFunction (copy), FFlagFlyoutGateLearnPlace (copy), FFlagFlyoutFilterWebViewsAndBrowserLinks (copy), FFlagFlyoutSidePanelTradesEntryModule (copy), FFlagEnableBlackbirdCheck (copy), FlyoutGateMomentsTile (copy), FFlagFixMomentsExperienceFallback (copy), FFlagFlyoutRemoveMomentsForArgoEnabled (copy), UseMomentsGatingFunction (copy), FFlagEnableRMOnMorePageGUAC (copy), FlyoutContentSettingsModule (copy), shouldSkipLibraryItem (copy), updateNotifications (copy), GetFFlagPlatformEventEnabledFunction (copy), GetFStringPlatformEventUrlFunction (copy), FFlagEnableArgus (copy), FFlagArgoEnableMoments (copy), FFlagEnableRMOnMorePageForAll (copy), CanRenderNativeMomentsFunction (copy), AppPage (copy)
+	-- upvalues: ConstantsModule (copy), UseSelectorFunction (copy), FFlagLuaAppFixNotificationBadgeCountsSync (copy), FFlagLuaAppEnableSduiHomePage (copy), UseHomeSortDropDownOptionsModule (copy), ReactModule (copy), UseAppPolicyFunction (copy), FFlagFlyoutGateLearnPlace (copy), FFlagFlyoutFilterWebViewsAndBrowserLinks (copy), FFlagFlyoutSidePanelTradesEntryModule (copy), FFlagEnableBlackbirdCheck (copy), UseMomentsGatingFunction (copy), FFlagEnableRMOnMorePageGUAC (copy), FlyoutContentSettingsModule (copy), shouldSkipLibraryItem (copy), updateNotifications (copy), GetFFlagPlatformEventEnabledFunction (copy), GetFStringPlatformEventUrlFunction (copy), FFlagFlyoutRemoveMomentsForArgoEnabled (copy), FFlagEnableArgus (copy), FFlagArgoEnableMoments (copy), FFlagEnableRMOnMorePageForAll (copy), CanRenderNativeMomentsFunction (copy), AppPage (copy)
 	local FLYOUTDEFAULTPOLICY = ConstantsModule.FLYOUT_DEFAULT_POLICY
 	local UseSelectorResult = UseSelectorFunction(function(p1)
 		return p1.NotificationBadgeCounts
@@ -169,13 +167,13 @@ return function()
 			return false
 		end
 	end) else false
-	local UseMomentsGatingResult = if FlyoutGateMomentsTile or FFlagFixMomentsExperienceFallback or FFlagFlyoutRemoveMomentsForArgoEnabled then UseMomentsGatingFunction() else nil
-	local IsAmpPolicyEnabled = if FlyoutGateMomentsTile then UseMomentsGatingResult.isAmpPolicyEnabled else false
-	local NoFlyoutGateMomentsTile = not FlyoutGateMomentsTile or not FFlagEnableRMOnMorePageGUAC or IsAmpPolicyEnabled
+	local UseMomentsGatingResult = UseMomentsGatingFunction()
+	local IsAmpPolicyEnabled = UseMomentsGatingResult.isAmpPolicyEnabled
+	local NoFFlagEnableRMOnMorePageGUAC = not FFlagEnableRMOnMorePageGUAC or IsAmpPolicyEnabled
 	local NoUseAppPolicyResult2: boolean = not UseAppPolicyResult2 or UseAppPolicyResult2 == ""
 	
 	return ReactModule.useMemo(function()
-		-- upvalues: UseMemoResult2 (ref), UseMemoResult (ref), UseAppPolicyResult (copy), NoUseAppPolicyResult2 (copy), UseAppPolicyResult3 (copy), UseSelectorResult4 (copy), UseAppPolicyResult1 (copy), NoFFlagFlyoutFilterWebViewsAndBrowserLinks (copy), UseAppPolicyResult4 (copy), FLYOUTDEFAULTPOLICY (copy), FlyoutContentSettingsModule (upval), shouldSkipLibraryItem (upval), updateNotifications (upval), UseSelectorResult (copy), UseSelectorResult1 (copy), UseSelectorResult2 (copy), GetFFlagPlatformEventEnabledFunction (upval), GetFStringPlatformEventUrlFunction (upval), FFlagFlyoutGateLearnPlace (upval), NoFFlagFlyoutGateLearnPlace (copy), FlyoutGateMomentsTile (upval), FFlagFlyoutRemoveMomentsForArgoEnabled (upval), FFlagEnableArgus (upval), FFlagArgoEnableMoments (upval), UseMomentsGatingResult (copy), FFlagEnableRMOnMorePageForAll (upval), NoFlyoutGateMomentsTile (copy), FFlagFlyoutFilterWebViewsAndBrowserLinks (upval), FFlagFixMomentsExperienceFallback (upval), CanRenderNativeMomentsFunction (upval), AppPage (upval)
+		-- upvalues: UseMemoResult2 (ref), UseMemoResult (ref), UseAppPolicyResult (copy), NoUseAppPolicyResult2 (copy), UseAppPolicyResult3 (copy), UseSelectorResult4 (copy), UseAppPolicyResult1 (copy), NoFFlagFlyoutFilterWebViewsAndBrowserLinks (copy), UseAppPolicyResult4 (copy), FLYOUTDEFAULTPOLICY (copy), FlyoutContentSettingsModule (upval), shouldSkipLibraryItem (upval), updateNotifications (upval), UseSelectorResult (copy), UseSelectorResult1 (copy), UseSelectorResult2 (copy), GetFFlagPlatformEventEnabledFunction (upval), GetFStringPlatformEventUrlFunction (upval), FFlagFlyoutGateLearnPlace (upval), NoFFlagFlyoutGateLearnPlace (copy), FFlagFlyoutRemoveMomentsForArgoEnabled (upval), FFlagEnableArgus (upval), FFlagArgoEnableMoments (upval), UseMomentsGatingResult (copy), FFlagEnableRMOnMorePageForAll (upval), NoFFlagEnableRMOnMorePageGUAC (copy), FFlagFlyoutFilterWebViewsAndBrowserLinks (upval), CanRenderNativeMomentsFunction (upval), AppPage (upval)
 		local MyLibraryItems = {}
 		local AdditionalNavigationItems = {}
 		local config = {
@@ -209,27 +207,20 @@ return function()
 					if not NoFFlagFlyoutGateLearnPlace then
 						continue
 					end
-				elseif Moments == FlyoutContentSettingsModule.ItemType.Moments and (FlyoutGateMomentsTile or FFlagFlyoutRemoveMomentsForArgoEnabled) and (FFlagFlyoutRemoveMomentsForArgoEnabled and FFlagEnableArgus and FFlagArgoEnableMoments or FFlagFlyoutRemoveMomentsForArgoEnabled and UseMomentsGatingResult ~= nil and not UseMomentsGatingResult.isSupportedOnPlatform or FlyoutGateMomentsTile and (UseMomentsGatingResult == nil or not UseMomentsGatingResult.isFlyoutEntryEnabled) and (not FFlagEnableRMOnMorePageForAll and not NoFlyoutGateMomentsTile)) then
+				elseif Moments == FlyoutContentSettingsModule.ItemType.Moments and (FFlagFlyoutRemoveMomentsForArgoEnabled and FFlagEnableArgus and FFlagArgoEnableMoments or FFlagFlyoutRemoveMomentsForArgoEnabled and UseMomentsGatingResult ~= nil and not UseMomentsGatingResult.isSupportedOnPlatform or (UseMomentsGatingResult == nil or not UseMomentsGatingResult.isFlyoutEntryEnabled) and (not FFlagEnableRMOnMorePageForAll and not NoFFlagEnableRMOnMorePageGUAC)) then
 					continue
 				end
 				if not FFlagFlyoutFilterWebViewsAndBrowserLinks or NoFFlagFlyoutFilterWebViewsAndBrowserLinks or not FlyoutContentSettingsModule.itemRequiresWebView(Item, UseAppPolicyResult4) then
 					local Copy = table.clone(Item)
 					
 					if Moments == FlyoutContentSettingsModule.ItemType.Moments and UseMomentsGatingResult ~= nil then
-						if FFlagFixMomentsExperienceFallback then
-							Copy.context = if CanRenderNativeMomentsFunction(UseMomentsGatingResult) then {
-								appPage = AppPage.Moments,
-								destinationType = FlyoutContentSettingsModule.DestinationType.AppPage
-							} else {
-								appUri = FlyoutContentSettingsModule.MomentsExperienceUri,
-								destinationType = FlyoutContentSettingsModule.DestinationType.PlaceLaunch
-							}
-						elseif UseMomentsGatingResult.isFlyoutEntryEnabled and UseMomentsGatingResult.platformIntegrationEnabled then
-							Copy.context = {
-								appPage = AppPage.Moments,
-								destinationType = FlyoutContentSettingsModule.DestinationType.AppPage
-							}
-						end
+						Copy.context = if CanRenderNativeMomentsFunction(UseMomentsGatingResult) then {
+							appPage = AppPage.Moments,
+							destinationType = FlyoutContentSettingsModule.DestinationType.AppPage
+						} else {
+							appUri = FlyoutContentSettingsModule.MomentsExperienceUri,
+							destinationType = FlyoutContentSettingsModule.DestinationType.PlaceLaunch
+						}
 					end
 					table.insert(AdditionalNavigationItems, Copy)
 				end
@@ -245,7 +236,7 @@ return function()
 		if FFlagFlyoutFilterWebViewsAndBrowserLinks then NoFFlagFlyoutFilterWebViewsAndBrowserLinks else nil,
 		if FFlagFlyoutFilterWebViewsAndBrowserLinks then UseAppPolicyResult4 else nil,
 		if FFlagFlyoutSidePanelTradesEntryModule then UseSelectorResult4 else nil,
-		if FlyoutGateMomentsTile then NoFlyoutGateMomentsTile else nil,
+		NoFFlagEnableRMOnMorePageGUAC,
 		if FFlagFlyoutGateLearnPlace then NoFFlagFlyoutGateLearnPlace else nil,
 		UseMomentsGatingResult,
 		if FFlagLuaAppFixNotificationBadgeCountsSync then UseSelectorResult1 else nil,

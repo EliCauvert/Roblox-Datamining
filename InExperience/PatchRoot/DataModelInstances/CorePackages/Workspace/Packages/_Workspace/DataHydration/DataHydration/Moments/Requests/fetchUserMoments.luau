@@ -11,7 +11,6 @@ local ExtractShareInfoByMomentIdModule = require(DataHydration.Moments.Util.extr
 local ConstructApiUrlModule = require(DataHydration.Moments.Util.constructApiUrl)
 local FFlagMomentsComments = SharedFlagsModule.FFlagMomentsComments
 local FFlagMomentsResolvePublishedPostFeedItem = SharedFlagsModule.FFlagMomentsResolvePublishedPostFeedItem
-local FFlagProfileMomentsOrderingAndReactions = SharedFlagsModule.FFlagProfileMomentsOrderingAndReactions
 
 local function collectExcludedMomentIds(p1)
 	local Copy = table.clone(p1.moderatedMomentIds or {})
@@ -23,7 +22,7 @@ local function collectExcludedMomentIds(p1)
 end
 
 return function(TargetUserId, PaginationContext, Network)
-	-- upvalues: ConstructApiUrlModule (copy), HttpModule (copy), HttpClientModule (copy), ConvertApiMomentsToMomentItemsModule (copy), FFlagProfileMomentsOrderingAndReactions (copy), ExtractReactionsByMomentIdModule (copy), ExtractShareInfoByMomentIdModule (copy), FFlagMomentsComments (copy), ExtractCommentsByFeedItemIdModule (copy), FFlagMomentsResolvePublishedPostFeedItem (copy), collectExcludedMomentIds (copy)
+	-- upvalues: ConstructApiUrlModule (copy), HttpModule (copy), HttpClientModule (copy), ConvertApiMomentsToMomentItemsModule (copy), ExtractReactionsByMomentIdModule (copy), ExtractShareInfoByMomentIdModule (copy), FFlagMomentsComments (copy), ExtractCommentsByFeedItemIdModule (copy), FFlagMomentsResolvePublishedPostFeedItem (copy), collectExcludedMomentIds (copy)
 	local GetUsersMoments, GetUsersMoments2 = ConstructApiUrlModule("content-captures-api/v2/moments/get-users-moments")
 	
 	return HttpClientModule.fetch({
@@ -37,15 +36,15 @@ return function(TargetUserId, PaginationContext, Network)
 		headers = GetUsersMoments2,
 		network = Network,
 		decode = function(p2)
-			-- upvalues: ConvertApiMomentsToMomentItemsModule (upval), PaginationContext (copy), FFlagProfileMomentsOrderingAndReactions (upval), ExtractReactionsByMomentIdModule (upval), ExtractShareInfoByMomentIdModule (upval), FFlagMomentsComments (upval), ExtractCommentsByFeedItemIdModule (upval), FFlagMomentsResolvePublishedPostFeedItem (upval), collectExcludedMomentIds (upval)
+			-- upvalues: ConvertApiMomentsToMomentItemsModule (upval), PaginationContext (copy), ExtractReactionsByMomentIdModule (upval), ExtractShareInfoByMomentIdModule (upval), FFlagMomentsComments (upval), ExtractCommentsByFeedItemIdModule (upval), FFlagMomentsResolvePublishedPostFeedItem (upval), collectExcludedMomentIds (upval)
 			local Items = p2.items
 			local v1: boolean = Items ~= nil and #Items >= 18
 			
 			return {
 				moments = ConvertApiMomentsToMomentItemsModule(Items),
 				nextCursor = if v1 then p2.paginationContext or PaginationContext else nil,
-				reactionsByMomentId = if FFlagProfileMomentsOrderingAndReactions then ExtractReactionsByMomentIdModule(Items) else nil,
-				shareInfoByMomentId = if FFlagProfileMomentsOrderingAndReactions then ExtractShareInfoByMomentIdModule(Items) else nil,
+				reactionsByMomentId = ExtractReactionsByMomentIdModule(Items),
+				shareInfoByMomentId = ExtractShareInfoByMomentIdModule(Items),
 				commentsByFeedItemId = if FFlagMomentsComments then ExtractCommentsByFeedItemIdModule(Items) else nil,
 				excludedMomentIds = if FFlagMomentsResolvePublishedPostFeedItem then collectExcludedMomentIds(p2) else nil
 			}

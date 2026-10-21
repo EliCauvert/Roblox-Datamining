@@ -46,6 +46,7 @@
 	Fragment = "Fragment",
 	FriendCarousel = "FriendCarousel",
 	FriendRequestButton = "FriendRequestButton",
+	FriendsOwnedChip = "FriendsOwnedChip",
 	PymkCarousel = "PymkCarousel",
 	VirtualGameItemText = "VirtualGameItemText",
 	GameSortDropDown = "GameSortDropDown",

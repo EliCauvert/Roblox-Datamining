@@ -1,16 +1,17 @@
 ﻿local AppChat = script:FindFirstAncestor("AppChat")
 local Parent = AppChat.Parent
+local FoundationModule = require(Parent.Foundation)
 local ReactModule = require(Parent.React)
 local LocalizationModule = require(Parent.Localization)
 local AssetCardViewModule = require(AppChat.Components.ChatConversation.AssetCardView.AssetCardView)
 local _ = require(AppChat.Components.ChatConversation.Grouping.MessageGroupShape)
-local IconName = require(Parent.Foundation).Enums.IconName
+local IconName = FoundationModule.Enums.IconName
 local Status = require(AppChat.Components.ChatConversation.AssetCardView.AssetCardTypes).Status
 local UseAbbreviatedNumberLocalizationFunction = LocalizationModule.Hooks.useAbbreviatedNumberLocalization
 local UseLocalizationFunction = LocalizationModule.Hooks.useLocalization
 
 return ReactModule.memo(function(Frame)
-	-- upvalues: UseAbbreviatedNumberLocalizationFunction (copy), UseLocalizationFunction (copy), Status (copy), ReactModule (copy), AssetCardViewModule (copy), IconName (copy)
+	-- upvalues: UseAbbreviatedNumberLocalizationFunction (copy), UseLocalizationFunction (copy), Status (copy), ReactModule (copy), AssetCardViewModule (copy), IconName (copy), FoundationModule (copy)
 	local IsNotGameThumbnailMatch: boolean = Frame.gameThumbnail ~= nil and Frame.gameThumbnail ~= ""
 	
 	return ReactModule.createElement(AssetCardViewModule, {
@@ -36,7 +37,9 @@ return ReactModule.memo(function(Frame)
 			onActivated = Frame.onMetadataActivated,
 			action = if Frame.onPlayButtonActivated then {
 				isSelectable = true,
-				icon = IconName.PlayLarge,
+				icon = if Frame.playButtonLabel then nil else IconName.PlayLarge,
+				label = Frame.playButtonLabel,
+				variant = if Frame.playButtonLabel then FoundationModule.Enums.ButtonVariant.SubEmphasis else nil,
 				onActivated = Frame.onPlayButtonActivated
 			} else nil
 		}

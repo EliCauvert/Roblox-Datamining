@@ -3353,12 +3353,14 @@ Feature.Friends.Label.FollowsYou,Segue você
 Feature.Friends.Label.Frequent,Jogaram juntos(as)
 Feature.Friends.Label.Friend,
 Feature.Friends.Label.FriendInvite,Convidou você para ser uma amizade na Roblox
+Feature.Friends.Label.FriendOwns,1 amizade tem
 Feature.Friends.Label.FriendRecentlyPlayed,<b>1 amizade</b> jogou recentemente
 Feature.Friends.Label.FriendRequest,Solicitação de amizade
 Feature.Friends.Label.Friends,
 Feature.Friends.Label.FriendsAreNowConnections,As amizades agora são conexões!
 Feature.Friends.Label.FriendsHintBold,Vamos jogar!
 Feature.Friends.Label.FriendsHintPlain,Comece adicionando uma amizade.
+Feature.Friends.Label.FriendsOwn,{numberOfConnections} amigos têm
 Feature.Friends.Label.FriendsPlayed,{numberOfConnections} jogaram
 Feature.Friends.Label.FriendsRecentlyPlayed,<b>{numberOfConnections} amigos</b> jogaram recentemente
 Feature.Friends.Label.InGame,Em uma Experiência

@@ -12,13 +12,13 @@ return ReactModule.memo(function(p1)
 	local Elements = {}
 	
 	for i, slot in ipairs(p1.slots) do
-		local NewJumpPosition = Layout.jumpPosition + Layout.slotOffsets[i]
+		local NewCenterButtonPosition = Layout.centerButtonPosition + Layout.slotOffsets[i]
 		Elements[slot.id] = ReactModule.createElement(TouchControlIconModule, {
 			name = slot.icon,
 			diameter = Layout.smallButtonSize,
 			disabled = slot.disabled,
 			AnchorPoint = Vector2.new(0.5, 0.5),
-			Position = UDim2.fromOffset(NewJumpPosition.X, NewJumpPosition.Y),
+			Position = UDim2.fromOffset(NewCenterButtonPosition.X, NewCenterButtonPosition.Y),
 			testId = "TouchMockIcon-" .. slot.id
 		})
 	end
@@ -31,12 +31,13 @@ return ReactModule.memo(function(p1)
 			testId = "TouchMockTopAction-" .. i1
 		})
 	end
-	Elements.Jump = ReactModule.createElement(TouchControlIconModule, {
-		testId = "TouchMockJump",
-		name = FoundationModule.Enums.IconName.KeyShift,
-		diameter = Layout.jumpSize,
+	Elements[p1.centerControl.id] = ReactModule.createElement(TouchControlIconModule, {
+		name = p1.centerControl.icon,
+		diameter = Layout.centerButtonSize,
+		disabled = p1.centerControl.disabled,
 		AnchorPoint = Vector2.new(0.5, 0.5),
-		Position = UDim2.fromOffset(Layout.jumpPosition.X, Layout.jumpPosition.Y)
+		Position = UDim2.fromOffset(Layout.centerButtonPosition.X, Layout.centerButtonPosition.Y),
+		testId = "TouchMock" .. p1.centerControl.id
 	})
 	Elements.Roblox = ReactModule.createElement(TouchControlIconModule, {
 		inverted = true,

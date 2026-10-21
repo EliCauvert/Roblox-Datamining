@@ -158,7 +158,7 @@ return function(p1)
 					-- upvalues: UseTokensResult (copy)
 					local Entry1: number = Entry[2]
 					
-					return UDim2.new(1, 0, 0, (math.min(Entry[3], (math.max(0, Entry[1] - (UseTokensResult.Padding.XLarge * 3 + Entry1 + (if Entry1 > 0 then UseTokensResult.Gap.XLarge else 0)))))))
+					return UDim2.new(1, 0, 0, (math.min(math.ceil(Entry[3]), (math.max(0, Entry[1] - (UseTokensResult.Padding.XLarge * 3 + Entry1 + (if Entry1 > 0 then UseTokensResult.Gap.XLarge else 0)))))))
 				end),
 				ScrollingDirection = Enum.ScrollingDirection.Y,
 				VerticalScrollBarInset = Enum.ScrollBarInset.ScrollBar,

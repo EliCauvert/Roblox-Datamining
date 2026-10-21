@@ -20,7 +20,7 @@ return function(p1, p2)
 	end, { UseMemoResult })
 	
 	return {
-		clientFilterQuery = if UseMemoResult then "" else p2,
+		filterQuery = if UseMemoResult then "" else p2,
 		pageList = UseMemoResult or p1,
 		result = if UseMemoResult then UseSignalStateResult else nil
 	}

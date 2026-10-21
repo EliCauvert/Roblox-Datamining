@@ -3354,12 +3354,14 @@ Feature.Friends.Label.FollowsYou,Te sigue
 Feature.Friends.Label.Frequent,Jugado juntos
 Feature.Friends.Label.Friend,Amigo(a)
 Feature.Friends.Label.FriendInvite,Te invitó a hacer amistad en Roblox
+Feature.Friends.Label.FriendOwns,1 amigo lo tiene
 Feature.Friends.Label.FriendRecentlyPlayed,<b>1 amigo lo jugó</b> recientemente
 Feature.Friends.Label.FriendRequest,Solicitud de amistad
 Feature.Friends.Label.Friends,
 Feature.Friends.Label.FriendsAreNowConnections,¡Amigos ahora es Conexiones!
 Feature.Friends.Label.FriendsHintBold,¡Juguemos!
 Feature.Friends.Label.FriendsHintPlain,Empieza por agregar una amistad.
+Feature.Friends.Label.FriendsOwn,{numberOfConnections} amigos lo tienen
 Feature.Friends.Label.FriendsPlayed,{numberOfConnections} lo han jugado
 Feature.Friends.Label.FriendsRecentlyPlayed,<b>{numberOfConnections} amigos</b> lo jugaron recientemente
 Feature.Friends.Label.InGame,

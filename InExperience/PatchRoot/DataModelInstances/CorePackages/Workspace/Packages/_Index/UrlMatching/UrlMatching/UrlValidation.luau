@@ -6,6 +6,7 @@ local StringUtilitiesModule = require(Parent.StringUtilities)
 local StringSplitFunction = StringUtilitiesModule.StringSplit
 local StringTrimFunction = StringUtilitiesModule.StringTrim
 local ParseQueryFunction = StringUtilitiesModule.ParseQuery
+local FFlagAppChatEarlyTestingLinks = require(Parent.SharedFlags).FFlagAppChatEarlyTestingLinks
 local _ = require(script.Parent.Types)
 
 local function filterParams(p1, p2)
@@ -27,18 +28,18 @@ local _ = function(p1)
 end
 
 local _ = function(p1)
-	-- upvalues: RegexModule (copy), RegExpModule (copy)
+	-- upvalues: RegexModule (copy), FFlagAppChatEarlyTestingLinks (copy), RegExpModule (copy)
 	return function(p2)
-		-- upvalues: RegexModule (upval), p1 (copy), RegExpModule (upval)
+		-- upvalues: RegexModule (upval), p1 (copy), FFlagAppChatEarlyTestingLinks (upval), RegExpModule (upval)
 		local MatchWholeResult = RegexModule.matchWhole(RegexModule.oneOrMore(p2.pattern))
 		local v1 = p1[p2.name]
 		
-		return if v1 == nil or not RegExpModule(MatchWholeResult):exec(v1) then nil else p2.name
+		return if FFlagAppChatEarlyTestingLinks and type(v1) ~= "string" then nil elseif v1 == nil or not RegExpModule(MatchWholeResult):exec(v1) then nil else p2.name
 	end
 end
 
 local function validateParams(MapResult, QueryParams)
-	-- upvalues: CryoModule (copy), RegexModule (copy), RegExpModule (copy)
+	-- upvalues: CryoModule (copy), RegexModule (copy), FFlagAppChatEarlyTestingLinks (copy), RegExpModule (copy)
 	local MapResult1 = MapResult or {}
 	local v1 = false
 	local FilterResult = CryoModule.List.filter(QueryParams, function(p1): boolean
@@ -46,22 +47,22 @@ local function validateParams(MapResult, QueryParams)
 		return p1.optional == v1 or not v1 and p1.optional == nil
 	end)
 	
-	local function v18(p1)
-		-- upvalues: RegexModule (upval), MapResult1 (copy), RegExpModule (upval)
+	local function v19(p1)
+		-- upvalues: RegexModule (upval), MapResult1 (copy), FFlagAppChatEarlyTestingLinks (upval), RegExpModule (upval)
 		local MatchWholeResult = RegexModule.matchWhole(RegexModule.oneOrMore(p1.pattern))
 		local v2 = MapResult1[p1.name]
 		
-		return if v2 == nil or not RegExpModule(MatchWholeResult):exec(v2) then nil else p1.name
+		return if FFlagAppChatEarlyTestingLinks and type(v2) ~= "string" then nil elseif v2 == nil or not RegExpModule(MatchWholeResult):exec(v2) then nil else p1.name
 	end
 	
-	local FilterMapResult = CryoModule.List.filterMap(FilterResult, v18)
+	local FilterMapResult = CryoModule.List.filterMap(FilterResult, v19)
 	
 	if #FilterMapResult == #FilterResult then
 		local v2 = true
 		local Set = CryoModule.List.toSet((CryoModule.List.join(FilterMapResult, (CryoModule.List.filterMap(CryoModule.List.filter(QueryParams, function(p1): boolean
 			-- upvalues: v2 (copy)
 			return p1.optional == v2 or not v2 and p1.optional == nil
-		end), v18)))))
+		end), v19)))))
 		
 		return true, (CryoModule.Dictionary.filter(MapResult1, function(_, p1): boolean
 			-- upvalues: Set (copy)

@@ -8,6 +8,7 @@ local ViewRecyclerModule = require(Parent.ViewRecycler)
 local FFlagMomentsComments = require(Parent.SharedFlags).FFlagMomentsComments
 local FFlagMomentsCommentActionsRealtimeModule = require(Moments.Flags.FFlagMomentsCommentActionsRealtime)
 local FFlagMomentsCommentsRevealAfterMeasureModule = require(Moments.Flags.FFlagMomentsCommentsRevealAfterMeasure)
+local FFlagMomentsCommentsScrollToPostedCommentModule = require(Moments.Flags.FFlagMomentsCommentsScrollToPostedComment)
 local EventNames = require(Parent.MomentsCommon).Analytics.EventNames
 local MomentsGetMomentsCommentsStoreModule = require(Parent.DataHydration.MomentsGetMomentsCommentsStore)
 local MomentsGetMomentsReactionsStoreModule = require(Parent.DataHydration.MomentsGetMomentsReactionsStore)
@@ -63,7 +64,7 @@ local _ = function(p1)
 end
 
 return function(p2)
-	-- upvalues: UseLocalizationFunction (copy), config (copy), Players (copy), GetCommentCollectionStoreModule (copy), ReactModule (copy), SignalsReactModule (copy), CreateExpandedCommentsStoreModule (copy), SignalsModule (copy), BuildCommentRowsModule (copy), MomentsGetMomentsCommentsStoreModule (copy), MomentsGetMomentsReactionsStoreModule (copy), MomentsResolveEmoteIdModule (copy), ReactionTypeModule (copy), UseCommentCapabilitiesModule (copy), FoundationModule (copy), ViewRecyclerModule (copy), LoadStatus (copy), CommentsListItemsModule (copy), FFlagMomentsCommentsRevealAfterMeasureModule (copy), UseCommentsListRevealModule (copy), GetCommentsListCoordinatorModule (copy), FFlagMomentsComments (copy), GetCommentsSheetStoreModule (copy), EventNames (copy), UseMomentsHostFunction (copy), FFlagMomentsCommentActionsRealtimeModule (copy), GetToastStoreModule (copy)
+	-- upvalues: UseLocalizationFunction (copy), config (copy), Players (copy), GetCommentCollectionStoreModule (copy), ReactModule (copy), SignalsReactModule (copy), CreateExpandedCommentsStoreModule (copy), SignalsModule (copy), BuildCommentRowsModule (copy), MomentsGetMomentsCommentsStoreModule (copy), MomentsGetMomentsReactionsStoreModule (copy), MomentsResolveEmoteIdModule (copy), ReactionTypeModule (copy), UseCommentCapabilitiesModule (copy), FoundationModule (copy), ViewRecyclerModule (copy), LoadStatus (copy), CommentsListItemsModule (copy), FFlagMomentsCommentsRevealAfterMeasureModule (copy), UseCommentsListRevealModule (copy), GetCommentsListCoordinatorModule (copy), FFlagMomentsComments (copy), GetCommentsSheetStoreModule (copy), EventNames (copy), UseMomentsHostFunction (copy), FFlagMomentsCommentActionsRealtimeModule (copy), GetToastStoreModule (copy), FFlagMomentsCommentsScrollToPostedCommentModule (copy)
 	local DeleteFailed = UseLocalizationFunction(config).deleteFailed
 	local LocalPlayer = Players.LocalPlayer
 	local Name = if LocalPlayer == nil then "" else LocalPlayer.Name
@@ -330,6 +331,25 @@ return function(p2)
 		DeleteFailed
 	})
 	local UseRefResult3 = ReactModule.useRef(nil)
+	local ListRef = nil
+	
+	if FFlagMomentsCommentsScrollToPostedCommentModule then
+		local UseRefResult4 = ReactModule.useRef(nil)
+		ListRef = UseRefResult4
+		local PendingSubmission = UseSignalStateResult.pendingSubmission
+		local ClientRequestId = if PendingSubmission == nil then nil else PendingSubmission.clientRequestId
+		local UseRefResult5 = ReactModule.useRef(ClientRequestId)
+		ReactModule.useEffect(function()
+			-- upvalues: ClientRequestId (copy), UseRefResult5 (copy), UseRefResult4 (copy)
+			if ClientRequestId == nil or ClientRequestId == UseRefResult5.current then return end
+			UseRefResult5.current = ClientRequestId
+			local Current = UseRefResult4.current
+			
+			if Current ~= nil then
+				Current.scrollToOffset(0)
+			end
+		end, { ClientRequestId })
+	end
 	local Shift300 = UseTokensResult.Color.Shift.Shift_300
 	local CreatorEnabled = UseSignalStateResult2 ~= nil and UseSignalStateResult2.creatorEnabled
 	local ViewerCanWrite = UseSignalStateResult2 ~= nil and UseSignalStateResult2.viewerCanWrite
@@ -364,6 +384,7 @@ return function(p2)
 			UseStateResult, UseResult6, UseResult7, UseResult5
 		}),
 		listScrollingFrameRef = UseRefResult3,
+		listRef = ListRef,
 		isScrollingEnabled = SignalsReactModule.useSignalBinding(GetCommentsSheetStoreModule(false).getIsListScrollingEnabled),
 		onEndReached = if UseSignalStateResult.hasMore then UseResult1 else nil,
 		onViewportChanged = UseResult3,

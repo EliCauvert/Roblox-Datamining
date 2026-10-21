@@ -3309,12 +3309,14 @@ Feature.Friends.Label.FollowsYou,Seni Takip Ediyor
 Feature.Friends.Label.Frequent,Beraber oynadınız
 Feature.Friends.Label.Friend,
 Feature.Friends.Label.FriendInvite,Seni Roblox'ta arkadaş olmaya davet etti
+Feature.Friends.Label.FriendOwns,1 Arkadaşında var
 Feature.Friends.Label.FriendRecentlyPlayed,<b>1 Arkadaşın</b> yakın zamanda oynadı
 Feature.Friends.Label.FriendRequest,
 Feature.Friends.Label.Friends,
 Feature.Friends.Label.FriendsAreNowConnections,Arkadaşlar artık Etkileşim Ağı oldu!
 Feature.Friends.Label.FriendsHintBold,Hadi oynayalım!
 Feature.Friends.Label.FriendsHintPlain,Bir arkadaş ekleyerek başla.
+Feature.Friends.Label.FriendsOwn,{numberOfConnections} Arkadaşında var
 Feature.Friends.Label.FriendsPlayed,{numberOfConnections} arkadaşın oynadı
 Feature.Friends.Label.FriendsRecentlyPlayed,<b>{numberOfConnections} Arkadaşın</b> yakın zamanda oynadı
 Feature.Friends.Label.InGame,

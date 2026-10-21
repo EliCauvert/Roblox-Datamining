@@ -5,7 +5,6 @@ local _ = require(Parent.MomentsTypes)
 local MomentsGetPostAssetStoreModule = require(Parent.DataHydration.MomentsGetPostAssetStore)
 local GetFFlagMomentsRenderPostAssetsModule = require(Parent.MomentsCommon.GetFFlagMomentsRenderPostAssets)
 local FFlagMomentsAvatarLookTryOn = require(Parent.SharedFlags).FFlagMomentsAvatarLookTryOn
-local FFlagMomentsImpressionDestinationUniverseIdModule = require(Moments.Flags.FFlagMomentsImpressionDestinationUniverseId)
 local FFlagMomentsImpressionPrimaryEntityModule = require(Moments.Flags.FFlagMomentsImpressionPrimaryEntity)
 local DeriveMomentFromPostModule = require(Moments.Utils.deriveMomentFromPost)
 local config = {
@@ -38,7 +37,7 @@ local function resolveTryOnOutfitId(p1, p2)
 end
 
 return function(p1, Entry, ViewId, Enabled)
-	-- upvalues: MomentsCommonModule (copy), FFlagMomentsImpressionDestinationUniverseIdModule (copy), FFlagMomentsImpressionPrimaryEntityModule (copy), resolveTryOnOutfitId (copy), config (copy)
+	-- upvalues: MomentsCommonModule (copy), FFlagMomentsImpressionPrimaryEntityModule (copy), resolveTryOnOutfitId (copy), config (copy)
 	local RecommendationMetadata = p1.recommendationMetadata
 	local FeedItemId = RecommendationMetadata.feedItemId
 	
@@ -56,7 +55,7 @@ return function(p1, Entry, ViewId, Enabled)
 	}
 	local UniverseId: number = p1.metadata.universeId
 	
-	if FFlagMomentsImpressionDestinationUniverseIdModule and UniverseId ~= nil and UniverseId > 0 then
+	if UniverseId ~= nil and UniverseId > 0 then
 		config1.destinationUniverseId = tostring(UniverseId)
 	end
 	if FFlagMomentsImpressionPrimaryEntityModule then

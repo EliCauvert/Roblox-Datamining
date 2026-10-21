@@ -158,12 +158,13 @@ return function(Form)
 						size = InputSize.Large
 					}),
 					MarketingConsent = if Form.marketingConsentText == nil then nil else ReactModule.createElement(MarketingConsentCheckboxModule, {
+						smallGap = true,
 						LayoutOrder = 3,
 						text = Form.marketingConsentText,
 						isChecked = Form.isMarketingConsentChecked == true,
 						isDisabled = Form.isSubmitting or Form.isMarketingConsentDisabled == true,
 						onToggled = Form.onMarketingConsentToggled or noop,
-						size = InputSize.Large
+						size = InputSize.Small
 					}),
 					Actions = ReactModule.createElement(View, {
 						tag = "col gap-small size-full-0 auto-y",

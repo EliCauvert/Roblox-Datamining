@@ -3353,12 +3353,14 @@ Feature.Friends.Label.FollowsYou,Obserwuje cię
 Feature.Friends.Label.Frequent,Graliście razem
 Feature.Friends.Label.Friend,
 Feature.Friends.Label.FriendInvite,Użytkownik zaprosił cię do znajomych na platformie Roblox
+Feature.Friends.Label.FriendOwns,Posiadane przez 1 znajomego
 Feature.Friends.Label.FriendRecentlyPlayed,Ostatnio grane przez <b>1 znajomego</b>
 Feature.Friends.Label.FriendRequest,
 Feature.Friends.Label.Friends,
 Feature.Friends.Label.FriendsAreNowConnections,Koledzy to od teraz znajomi.
 Feature.Friends.Label.FriendsHintBold,Zagrajmy!
 Feature.Friends.Label.FriendsHintPlain,Zacznij od dodania znajomego.
+Feature.Friends.Label.FriendsOwn,Posiadane przez {numberOfConnections} znajomych
 Feature.Friends.Label.FriendsPlayed,Grało w to {numberOfConnections} znajomych
 Feature.Friends.Label.FriendsRecentlyPlayed,Ostatnio grało w to <b>{numberOfConnections} znajomych</b>
 Feature.Friends.Label.InGame,

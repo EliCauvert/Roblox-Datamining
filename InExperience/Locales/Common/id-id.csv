@@ -3351,12 +3351,14 @@ Feature.Friends.Label.FollowsYou,Mengikuti Kamu
 Feature.Friends.Label.Frequent,Dimainkan bersama
 Feature.Friends.Label.Friend,
 Feature.Friends.Label.FriendInvite,Mengundang kamu untuk berteman di Roblox
+Feature.Friends.Label.FriendOwns,1 Teman memiliki
 Feature.Friends.Label.FriendRecentlyPlayed,<b>1 Teman</b> telah bermain baru-baru ini
 Feature.Friends.Label.FriendRequest,
 Feature.Friends.Label.Friends,
 Feature.Friends.Label.FriendsAreNowConnections,Teman sekarang disebut Koneksi!
 Feature.Friends.Label.FriendsHintBold,Ayo main
 Feature.Friends.Label.FriendsHintPlain,Mulailah dengan menambahkan teman.
+Feature.Friends.Label.FriendsOwn,{numberOfConnections} Teman memiliki
 Feature.Friends.Label.FriendsPlayed,{numberOfConnections} telah bermain
 Feature.Friends.Label.FriendsRecentlyPlayed,<b>{numberOfConnections} Teman</b> telah bermain baru-baru ini
 Feature.Friends.Label.InGame,

@@ -37,6 +37,8 @@ local ConsoleVoiceIXPEnabled = game:DefineFastFlag("ConsoleVoiceIXPEnabled", fal
 local FFlagExpChatDictation = require(Parent1.SharedFlags).FFlagExpChatDictation
 local ConsoleVoiceIXPLayerName = game:DefineFastString("ConsoleVoiceIXPLayerName", "User.Communication.ConsoleVoice")
 local ConsoleVoiceEnabledIXPLayerValue = game:DefineFastString("ConsoleVoiceEnabledIXPLayerValue", "ConsoleVoiceEnabled")
+local SendVoiceCapturedDuringVideoCaptureEvent = game:DefineFastFlag("SendVoiceCapturedDuringVideoCaptureEvent", false)
+game:DefineFastInt("VoiceRewarmReArmCount", 0)
 local GetFFlagFixSeamlessVoiceIntegrationWithPrivateVoiceFunction = require(Parent1.SharedFlags).GetFFlagFixSeamlessVoiceIntegrationWithPrivateVoice
 local GetFFlagLuaConsumePlayerModeratedModule = require(Flags.GetFFlagLuaConsumePlayerModerated)
 local GetFFlagLocalMutedNilFixFunction = require(Parent1.SharedFlags).GetFFlagLocalMutedNilFix
@@ -68,7 +70,7 @@ local EnableMutedByLocalUserEngineFeature = game:GetEngineFeature("EnableMutedBy
 local VoiceChatMuteAllSyncMutedPlayers = game:DefineFastFlag("VoiceChatMuteAllSyncMutedPlayers", false)
 local RbxAnalyticsServiceExposePlaySessionIdEngineFeature = game:GetEngineFeature("RbxAnalyticsServiceExposePlaySessionId")
 local GetFFlagEnableVoiceChatMuteForVideoCapturesFunction = require(Parent1.SharedFlags).GetFFlagEnableVoiceChatMuteForVideoCaptures
-local FFlagEnableVoiceChatMuteForVideoCaptures = game:DefineFastFlag("SendVoiceCapturedDuringVideoCaptureEvent", false) and GetFFlagEnableVoiceChatMuteForVideoCapturesFunction()
+local FFlagEnableVoiceChatMuteForVideoCaptures = SendVoiceCapturedDuringVideoCaptureEvent and GetFFlagEnableVoiceChatMuteForVideoCapturesFunction()
 local GetFFlagDebugVoiceChatMicPermissionCliBypassModule = require(Flags.GetFFlagDebugVoiceChatMicPermissionCliBypass)
 local GetFFlagEnableVoiceSignalFunction = require(Parent1.SharedFlags).GetFFlagEnableVoiceSignal
 local GetFFlagEnableInExpPhoneVoiceUpsellEntrypointsFunction = require(Parent1.SharedFlags).GetFFlagEnableInExpPhoneVoiceUpsellEntrypoints
@@ -1900,11 +1902,13 @@ function config1.SetVoiceRewarmCookie(p4, p5)
 end
 
 function config1:ShouldRewarmUser(): boolean
-	return self:GetVoiceRewarmCookie() == ""
+	local VoiceRewarmCookie = self:GetVoiceRewarmCookie()
+	
+	return VoiceRewarmCookie == "" or (tonumber(VoiceRewarmCookie) or 0) < game:GetFastInt("VoiceRewarmReArmCount")
 end
 
-function config1:RewarmUser()
-	self:SetVoiceRewarmCookie("true")
+function config1:ConsumeVoiceRewarm()
+	self:SetVoiceRewarmCookie((tostring(game:GetFastInt("VoiceRewarmReArmCount"))))
 end
 
 function config1.SetNewUserFTUXCookieValue(p4, p5)

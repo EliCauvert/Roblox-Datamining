@@ -23,6 +23,7 @@ local FFlagDeferInExperienceRbxmDownload = require(Parent.SharedFlags).FFlagDefe
 local DashModule = require(Parent.Dash)
 local GetFFlagLuaAppEnableVirtualEventPlaceIdFunction = require(Parent.SharedFlags).GetFFlagLuaAppEnableVirtualEventPlaceId
 local FFlagLuaAppEnableStratusStreamingTestOnly = require(Parent.SharedFlags).FFlagLuaAppEnableStratusStreamingTestOnly
+local FFlagLuaAppStratusPassUniverseId = require(Parent.SharedFlags).FFlagLuaAppStratusPassUniverseId
 local NavigateToRouteFunction = require(Parent.NavigationRodux).Thunks.NavigateToRoute
 local AppPage = require(Parent.RobloxAppEnums).AppPage
 local FFlagSignalsNavP3Dispatch = require(Parent.SharedFlags).FFlagSignalsNavP3Dispatch
@@ -35,7 +36,7 @@ local FFlagLuaAppDemoModePlayButtonTelemetry = require(Parent.SharedFlags).FFlag
 local VideoService = game:GetService("VideoService")
 
 return function(UniverseId, p1, p2, ReferralSource, Ctx, LaunchSource, ExtraParams)
-	-- upvalues: UseRoactServiceFunction (copy), RoactAnalytics (copy), AppEventIngestService (copy), AppGame (copy), UseSelectorFunction (copy), UseDispatchFunction (copy), FFlagLuaAppEnablePlayButtonThrottle (copy), ReactModule (copy), FIntLuaAppPlayButtonThrottleTimeSeconds (copy), GetFFlagLuaAppEnableVirtualEventPlaceIdFunction (copy), FFlagLuaAppDemoModePlayButtonTelemetry (copy), GamePlayIntentFunction (copy), JoinGamePlayButtonFunction (copy), FFlagLuaAppEnableStratusStreamingTestOnly (copy), FFlagLuaAppEnableStratusStreamingCheck (copy), VideoService (copy), AppPage (copy), FFlagSignalsNavP3Dispatch (copy), NavigationCommands (copy), NavigateToRouteFunction (copy), IsVRAppBuildFunction (copy), SplashScreenManager (copy), FFlagDeferInExperienceRbxmDownload (copy), DashModule (copy), FFlagLuaAppFixLaunchGameSourceParam (copy), LaunchGameFunction (copy), ReasonForNotVoteable (copy), ClearUserGameVotesFunction (copy)
+	-- upvalues: UseRoactServiceFunction (copy), RoactAnalytics (copy), AppEventIngestService (copy), AppGame (copy), UseSelectorFunction (copy), UseDispatchFunction (copy), FFlagLuaAppEnablePlayButtonThrottle (copy), ReactModule (copy), FIntLuaAppPlayButtonThrottleTimeSeconds (copy), GetFFlagLuaAppEnableVirtualEventPlaceIdFunction (copy), FFlagLuaAppDemoModePlayButtonTelemetry (copy), GamePlayIntentFunction (copy), JoinGamePlayButtonFunction (copy), FFlagLuaAppEnableStratusStreamingTestOnly (copy), FFlagLuaAppEnableStratusStreamingCheck (copy), VideoService (copy), AppPage (copy), FFlagLuaAppStratusPassUniverseId (copy), FFlagSignalsNavP3Dispatch (copy), NavigationCommands (copy), NavigateToRouteFunction (copy), IsVRAppBuildFunction (copy), SplashScreenManager (copy), FFlagDeferInExperienceRbxmDownload (copy), DashModule (copy), FFlagLuaAppFixLaunchGameSourceParam (copy), LaunchGameFunction (copy), ReasonForNotVoteable (copy), ClearUserGameVotesFunction (copy)
 	local UseRoactServiceResult = UseRoactServiceFunction(RoactAnalytics)
 	local UseRoactServiceResult1 = UseRoactServiceFunction(AppEventIngestService)
 	local UseRoactServiceResult2 = UseRoactServiceFunction(AppGame)
@@ -47,7 +48,7 @@ return function(UniverseId, p1, p2, ReferralSource, Ctx, LaunchSource, ExtraPara
 	local UseRefResult = if FFlagLuaAppEnablePlayButtonThrottle then ReactModule.useRef(0) else nil
 	
 	return (ReactModule.useCallback(function(Callback: (any) -> (), p3)
-		-- upvalues: FFlagLuaAppEnablePlayButtonThrottle (upval), UseRefResult (copy), FIntLuaAppPlayButtonThrottleTimeSeconds (upval), GetFFlagLuaAppEnableVirtualEventPlaceIdFunction (upval), p1 (copy), p2 (copy), FFlagLuaAppDemoModePlayButtonTelemetry (upval), GamePlayIntentFunction (upval), UseRoactServiceResult1 (copy), ReferralSource (copy), UniverseId (copy), ExtraParams (ref), JoinGamePlayButtonFunction (upval), UseRoactServiceResult (copy), Ctx (copy), FFlagLuaAppEnableStratusStreamingTestOnly (upval), FFlagLuaAppEnableStratusStreamingCheck (upval), VideoService (upval), AppPage (upval), LaunchSource (copy), FFlagSignalsNavP3Dispatch (upval), NavigationCommands (upval), UseDispatchResult (copy), NavigateToRouteFunction (upval), IsVRAppBuildFunction (upval), SplashScreenManager (upval), FFlagDeferInExperienceRbxmDownload (upval), DashModule (upval), FFlagLuaAppFixLaunchGameSourceParam (upval), LaunchGameFunction (upval), UseRoactServiceResult2 (copy), UseSelectorResult (copy), ReasonForNotVoteable (upval), ClearUserGameVotesFunction (upval)
+		-- upvalues: FFlagLuaAppEnablePlayButtonThrottle (upval), UseRefResult (copy), FIntLuaAppPlayButtonThrottleTimeSeconds (upval), GetFFlagLuaAppEnableVirtualEventPlaceIdFunction (upval), p1 (copy), p2 (copy), FFlagLuaAppDemoModePlayButtonTelemetry (upval), GamePlayIntentFunction (upval), UseRoactServiceResult1 (copy), ReferralSource (copy), UniverseId (copy), ExtraParams (ref), JoinGamePlayButtonFunction (upval), UseRoactServiceResult (copy), Ctx (copy), FFlagLuaAppEnableStratusStreamingTestOnly (upval), FFlagLuaAppEnableStratusStreamingCheck (upval), VideoService (upval), AppPage (upval), FFlagLuaAppStratusPassUniverseId (upval), LaunchSource (copy), FFlagSignalsNavP3Dispatch (upval), NavigationCommands (upval), UseDispatchResult (copy), NavigateToRouteFunction (upval), IsVRAppBuildFunction (upval), SplashScreenManager (upval), FFlagDeferInExperienceRbxmDownload (upval), DashModule (upval), FFlagLuaAppFixLaunchGameSourceParam (upval), LaunchGameFunction (upval), UseRoactServiceResult2 (copy), UseSelectorResult (copy), ReasonForNotVoteable (upval), ClearUserGameVotesFunction (upval)
 		if FFlagLuaAppEnablePlayButtonThrottle then
 			local CurrentTime = tick()
 			
@@ -86,6 +87,7 @@ return function(UniverseId, p1, p2, ReferralSource, Ctx, LaunchSource, ExtraPara
 						{
 							name = AppPage.VideoServer,
 							placeId = if GetFFlagLuaAppEnableVirtualEventPlaceIdFunction() then p1 else p2,
+							universeId = if FFlagLuaAppStratusPassUniverseId then UniverseId else nil,
 							launchSource = LaunchSource,
 							extraParams = ExtraParams
 						}
@@ -106,6 +108,7 @@ return function(UniverseId, p1, p2, ReferralSource, Ctx, LaunchSource, ExtraPara
 					{
 						name = AppPage.VideoServer,
 						placeId = if GetFFlagLuaAppEnableVirtualEventPlaceIdFunction() then p1 else p2,
+						universeId = if FFlagLuaAppStratusPassUniverseId then UniverseId else nil,
 						launchSource = LaunchSource,
 						extraParams = ExtraParams
 					}

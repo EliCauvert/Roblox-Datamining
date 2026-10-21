@@ -29,17 +29,18 @@ local _ = require(InExperienceShop.Types)
 local ConstantsModule = require(InExperienceShop.Constants)
 local config = {
 	freeTrial = "Feature.InExperienceShop.Label.FreeTrial",
-	trial = "Feature.InExperienceShop.Label.Trial"
+	trial = "Feature.InExperienceShop.Label.Trial",
+	active = "Feature.InExperienceShop.Label.Active"
 }
 
-local function TrialBadge()
+local function TrialBadge(p1)
 	-- upvalues: UseLocalizationFunction (copy), config (copy), UseTokensFunction (copy), ReactModule (copy), Badge (copy), Enums (copy)
 	local UseLocalizationResult = UseLocalizationFunction(config)
 	local UseTokensResult = UseTokensFunction()
 	
 	return ReactModule.createElement(Badge, {
-		text = UseLocalizationResult.trial,
-		variant = Enums.BadgeVariant.OverMedia,
+		text = if p1.isActive then UseLocalizationResult.active else UseLocalizationResult.trial,
+		variant = if p1.isActive then Enums.BadgeVariant.Emphasis else Enums.BadgeVariant.OverMedia,
 		size = Enums.BadgeSize.Small,
 		Position = UDim2.fromOffset(UseTokensResult.Gap.Small, UseTokensResult.Gap.Small)
 	})
@@ -80,6 +81,13 @@ return ReactModule.memo(function(Frame)
 		return if FFlagLuaAppEnableGamePassFreeTrialsModule and Frame.itemType == "GamePass" then Available[Frame.itemId] == true else false
 	end)
 	local NoUseSignalStateResult1: boolean = FFlagLuaAppEnableGamePassFreeTrialsModule and (UseSignalStateResult2 and not UseSignalStateResult1)
+	local UseSignalStateResult3 = if FFlagLuaAppEnableGamePassFreeTrialsModule then SignalsReactModule.useSignalState(function(p1): boolean
+		-- upvalues: UseSignalStateResult (copy), Frame (copy)
+		local Active = UseSignalStateResult.getTrialAvailabilities(p1).active
+		
+		return Frame.itemType == "GamePass" and Active[Frame.itemId] == true
+	end) else false
+	local NoUseSignalStateResult1_1: boolean = NoUseSignalStateResult1 or UseSignalStateResult3 and not UseSignalStateResult1
 	local UseGamePassTrialRedemptionModuleResult = UseGamePassTrialRedemptionModule(Frame.itemId)
 	ReactModule.useEffect(function()
 		-- upvalues: FFlagEnableInExperienceShopUnifiedLoggingModule (upval), Parent (upval), InExperienceShop (upval), Frame (copy), FFlagEnableCategoryLoggingInShopModule (upval), UseRefResult (copy), SessionService (upval)
@@ -162,7 +170,7 @@ return ReactModule.memo(function(Frame)
 			Image = Frame.thumbnail,
 			ScaleType = Enum.ScaleType.Fit
 		}, {
-			TrialBadge = if NoUseSignalStateResult1 then ReactModule.createElement(TrialBadge) else nil
+			TrialBadge = if NoUseSignalStateResult1_1 then ReactModule.createElement(TrialBadge, { isActive = UseSignalStateResult3 }) else nil
 		}),
 		TileContent = ReactModule.createElement(View, {
 			tag = "col gap-medium size-full-0 auto-y padding-medium",

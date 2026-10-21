@@ -5,7 +5,6 @@ local FoundationModule = require(Parent1.Foundation)
 local _ = require(Parent.Configs.ConfigTypes)
 local ConstantsModule = require(Parent.Constants)
 local _ = require(Parent.Components.Common.ActionText)
-local UseLocalizationFunction = require(Parent1.Localization).Hooks.useLocalization
 local ControlActionRowModule = require(Parent.Components.Common.ControlActionRow)
 local View = FoundationModule.View
 local Text = FoundationModule.Text
@@ -14,11 +13,12 @@ local Enums = FoundationModule.Enums
 local UseTokensFunction = FoundationModule.Hooks.useTokens
 local ExtraKeysEnumModule = require(Parent.Enums.ExtraKeysEnum)
 local FFlagHelpPageCCLModule = require(Parent.Flags.FFlagHelpPageCCL)
+local UseLocalizedLabelsModule = require(Parent.Hooks.useLocalizedLabels)
 local MemoResult = ReactModule.memo(function(p1)
-	-- upvalues: UseLocalizationFunction (copy), ReactModule (copy), Text (copy)
+	-- upvalues: UseLocalizedLabelsModule (copy), ReactModule (copy), Text (copy)
 	return ReactModule.createElement(Text, {
 		tag = "auto-xy text-title-large text-align-x-center text-align-y-center",
-		Text = UseLocalizationFunction({ action = p1.action }).action
+		Text = UseLocalizedLabelsModule({ action = p1.action }).action
 	})
 end)
 local MemoResult1 = ReactModule.memo(function(Frame)

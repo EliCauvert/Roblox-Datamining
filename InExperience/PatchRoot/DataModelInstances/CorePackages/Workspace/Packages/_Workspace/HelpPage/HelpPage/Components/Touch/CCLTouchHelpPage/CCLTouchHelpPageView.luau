@@ -32,6 +32,7 @@ return function(p1)
 			renderDiagram = function(p2)
 				-- upvalues: ReactModule (upval), TouchDeviceMockModule (upval), p1 (copy)
 				return ReactModule.createElement(TouchDeviceMockModule, {
+					centerControl = p1.centerControl,
 					slots = p1.slots,
 					layout = p1.mockLayout,
 					scale = p2.X / p1.mockLayout.size.X

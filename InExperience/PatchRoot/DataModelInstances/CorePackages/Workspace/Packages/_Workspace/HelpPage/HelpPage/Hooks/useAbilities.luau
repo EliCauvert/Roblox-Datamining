@@ -60,9 +60,9 @@ local function getKeyboardCombo(Input)
 	return if #List == 0 then nil else List
 end
 
-local function readAction(InputAction)
+local function readAction(Player)
 	-- upvalues: v1 (copy), ConstantsModule (copy), getKeyboardCombo (copy), BindingConfigsModule (copy)
-	local Name: string = InputAction.Name
+	local Name: string = Player.Name
 	local LayoutOrder = nil
 	
 	if string.match(Name, "^AbilityAction%d+$") == nil then
@@ -77,7 +77,7 @@ local function readAction(InputAction)
 	local Input = {}
 	local Input1 = {}
 	
-	for _, InputBinding in InputAction:GetChildren() do
+	for _, InputBinding in Player:GetChildren() do
 		if InputBinding:IsA("InputBinding") then
 			local KeyCode = InputBinding.KeyCode
 			
@@ -95,8 +95,8 @@ local function readAction(InputAction)
 		end
 	end
 	local config = {
-		label = "InGame.HelpMenu.GenericAction",
-		disabled = not InputAction.Enabled
+		label = Player.DisplayName,
+		disabled = not Player.Enabled
 	}
 	
 	if #Input > 0 then

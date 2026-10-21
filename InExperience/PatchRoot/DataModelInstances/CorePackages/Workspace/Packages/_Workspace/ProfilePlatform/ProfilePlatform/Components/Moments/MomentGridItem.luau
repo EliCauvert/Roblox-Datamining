@@ -6,7 +6,6 @@ local MomentsCommonModule = require(Parent.MomentsCommon)
 local _ = require(Parent.DataHydration.MomentsStoreTypes)
 local ToMediaItemModule = require(Parent.Moments.ToMediaItem)
 local MomentEngagementCountModule = require(script.Parent.MomentEngagementCount)
-local FFlagProfileMomentsOrderingAndReactions = require(Parent.SharedFlags).FFlagProfileMomentsOrderingAndReactions
 local FFlagMomentsEngagementMetricsFeature = MomentsCommonModule.Flags.FFlagMomentsEngagementMetricsFeature
 local View = FoundationModule.View
 local ControlState = FoundationModule.Enums.ControlState
@@ -23,7 +22,7 @@ local GradientBackdrop = MomentsCommonModule.Components.GradientBackdrop
 local ThumbUp = require(Parent.BuilderIcons).Icon.ThumbUp
 
 return function(p1)
-	-- upvalues: UseTokensFunction (copy), FFlagMomentsEngagementMetricsFeature (copy), UseSignalStateFunction (copy), GetMomentsCapabilitiesFunction (copy), ReactModule (copy), MakeProfileTileFieldsModule (copy), FireAnalyticsEventFunction (copy), EventNames (copy), ToMediaItemModule (copy), ControlState (copy), FFlagProfileMomentsOrderingAndReactions (copy), View (copy), StateLayerAffordance (copy), MomentMediaTile (copy), GradientBackdrop (copy), MomentEngagementCountModule (copy), ThumbUp (copy)
+	-- upvalues: UseTokensFunction (copy), FFlagMomentsEngagementMetricsFeature (copy), UseSignalStateFunction (copy), GetMomentsCapabilitiesFunction (copy), ReactModule (copy), MakeProfileTileFieldsModule (copy), FireAnalyticsEventFunction (copy), EventNames (copy), ToMediaItemModule (copy), ControlState (copy), View (copy), StateLayerAffordance (copy), MomentMediaTile (copy), GradientBackdrop (copy), MomentEngagementCountModule (copy), ThumbUp (copy)
 	local Moment = p1.moment
 	local OnHoverChangedFunction = p1.onHoverChanged
 	local UseTokensResult = UseTokensFunction()
@@ -38,7 +37,7 @@ return function(p1)
 			end
 		end
 	end, {})
-	local NoFFlagProfileMomentsOrderingAndReactions: boolean = if FFlagMomentsEngagementMetricsFeature then UseSignalStateResult and (not FFlagProfileMomentsOrderingAndReactions or Moment.metadata.likeCount ~= nil and Moment.metadata.likeCount > 0) else not FFlagProfileMomentsOrderingAndReactions or Moment.metadata.likeCount ~= nil and Moment.metadata.likeCount > 0
+	local IsLikeCountAbove: boolean = if FFlagMomentsEngagementMetricsFeature then UseSignalStateResult and (Moment.metadata.likeCount ~= nil and Moment.metadata.likeCount > 0) else Moment.metadata.likeCount ~= nil and Moment.metadata.likeCount > 0
 	
 	return ReactModule.createElement(View, {
 		tag = "clip",
@@ -57,7 +56,7 @@ return function(p1)
 			end, { Moment.momentId }),
 			isActive = p1.isActive
 		}),
-		BottomGradient = if NoFFlagProfileMomentsOrderingAndReactions then ReactModule.createElement(GradientBackdrop, {
+		BottomGradient = if IsLikeCountAbove then ReactModule.createElement(GradientBackdrop, {
 			rotation = -90,
 			startingTransparency = 0,
 			zIndex = 2,
@@ -66,7 +65,7 @@ return function(p1)
 			position = UDim2.fromScale(0, 1),
 			size = UDim2.fromScale(1, 0.5)
 		}) else nil,
-		Engagement = if NoFFlagProfileMomentsOrderingAndReactions then ReactModule.createElement(View, {
+		Engagement = if IsLikeCountAbove then ReactModule.createElement(View, {
 			tag = "row align-x-right align-y-center gap-small position-bottom-right anchor-bottom-right auto-xy padding-small",
 			ZIndex = 3
 		}, {

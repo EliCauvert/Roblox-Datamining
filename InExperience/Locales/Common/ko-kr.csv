@@ -3353,12 +3353,14 @@ Feature.Friends.Label.FollowsYou,나를 팔로우 중
 Feature.Friends.Label.Frequent,함께 플레이함
 Feature.Friends.Label.Friend,
 Feature.Friends.Label.FriendInvite,Roblox 친구로 초대받았어요.
+Feature.Friends.Label.FriendOwns,친구 1명이 보유함
 Feature.Friends.Label.FriendRecentlyPlayed,<b>친구 1명</b>이 최근에 플레이함
 Feature.Friends.Label.FriendRequest,친구 요청
 Feature.Friends.Label.Friends,
 Feature.Friends.Label.FriendsAreNowConnections,Roblox의 친구라는 명칭이 이제 인맥으로 변경되었습니다!
 Feature.Friends.Label.FriendsHintBold,같이 플레이해요!
 Feature.Friends.Label.FriendsHintPlain,먼저 친구를 추가하세요.
+Feature.Friends.Label.FriendsOwn,친구 {numberOfConnections}명이 보유함
 Feature.Friends.Label.FriendsPlayed,{numberOfConnections}명이 플레이함
 Feature.Friends.Label.FriendsRecentlyPlayed,<b>친구 {numberOfConnections}명</b>이 최근에 플레이함
 Feature.Friends.Label.InGame,체험 중

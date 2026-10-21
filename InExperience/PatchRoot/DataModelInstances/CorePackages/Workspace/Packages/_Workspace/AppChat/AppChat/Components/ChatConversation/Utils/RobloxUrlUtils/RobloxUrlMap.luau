@@ -2,6 +2,7 @@
 local Regex = require(AppChat.Parent.UrlMatching).Regex
 local FFlagAppChatResolveShareLinkV2Module = require(AppChat.Flags.FFlagAppChatResolveShareLinkV2)
 local FFlagAppChatPlusReferralAssetCardModule = require(AppChat.Flags.FFlagAppChatPlusReferralAssetCard)
+local FFlagAppChatEarlyTestingLinksModule = require(AppChat.Flags.FFlagAppChatEarlyTestingLinks)
 local list = { "ExperienceDetails" }
 local List = if FFlagAppChatResolveShareLinkV2Module then {
 	{ name = "code", pattern = "[a-fA-F0-9-]+" },
@@ -31,8 +32,19 @@ return {
 				optional = true
 			}
 		},
+		queryParams = if FFlagAppChatEarlyTestingLinksModule then {
+			{
+				name = "isEarlyTesting",
+				pattern = "true",
+				optional = true
+			}
+		} else nil,
 		paramCallback = function(p1)
-			return { placeId = p1.id }
+			-- upvalues: FFlagAppChatEarlyTestingLinksModule (copy)
+			return {
+				placeId = p1.id,
+				isEarlyTesting = FFlagAppChatEarlyTestingLinksModule and p1.isEarlyTesting == "true" or nil
+			}
 		end
 	},
 	["/share"] = {

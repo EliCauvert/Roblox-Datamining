@@ -3,7 +3,9 @@ local Parent = Foundation.Parent
 local Parent1 = script:FindFirstAncestor("AppBlox").Parent
 local ReactModule = require(Parent.React)
 local ReactUtilsModule = require(Parent.ReactUtils)
-local FFlagComposerControlAlignment = require(Parent1.SharedFlags).FFlagComposerControlAlignment
+local SharedFlagsModule = require(Parent1.SharedFlags)
+local FFlagComposerControlAlignment = SharedFlagsModule.FFlagComposerControlAlignment
+local FFlagComposerFooter = SharedFlagsModule.FFlagComposerFooter
 local ComposerMultiLineCaretFix = game:DefineFastFlag("ComposerMultiLineCaretFix", false)
 local FoundationFontFaceMigration = require(Parent1.Foundation).Utility.Flags.FoundationFontFaceMigration
 local Components = Foundation.Components
@@ -87,7 +89,7 @@ local MemoResult = ReactModule.memo(ReactModule.forwardRef(function(p1, Ref)
 end))
 
 return ReactModule.memo(ReactModule.forwardRef(function(Tbl, p1)
-	-- upvalues: WithDefaultsModule (copy), config (copy), UseTokensModule (copy), ReactModule (copy), GetBindableValueModule (copy), UseTextInputVariantsModule (copy), FFlagComposerControlAlignment (copy), InputVariantModule (copy), UseStyleTagsModule (copy), UsePreferredInputModule (copy), UseComposerFocusLockModule (copy), GetDisabledStyleModule (copy), GetMultiLineTextHeightModule (copy), ComposerDebugModule (copy), MeasureTextLineCountModule (copy), FoundationFontFaceMigration (copy), NormalizeFontFaceModule (copy), ComposerMultiLineCaretFix (copy), InputFocusBehaviorModule (copy), UseComposerKeyboardConnectionsModule (copy), ControlStateModule (copy), RadiusModule (copy), TruncateTextToCursorModule (copy), UseBindableModule (copy), ReactUtilsModule (copy), ViewModule (copy), WithCommonPropsModule (copy), BlendTransparenciesModule (copy), ConstantsModule (copy), StateLayerAffordanceModule (copy), ScrollViewModule (copy), MemoResult (copy), MapBindableModule (copy), IconModule (copy)
+	-- upvalues: WithDefaultsModule (copy), config (copy), UseTokensModule (copy), FFlagComposerFooter (copy), ReactModule (copy), GetBindableValueModule (copy), UseTextInputVariantsModule (copy), FFlagComposerControlAlignment (copy), InputVariantModule (copy), UseStyleTagsModule (copy), UsePreferredInputModule (copy), UseComposerFocusLockModule (copy), GetDisabledStyleModule (copy), GetMultiLineTextHeightModule (copy), ComposerDebugModule (copy), MeasureTextLineCountModule (copy), FoundationFontFaceMigration (copy), NormalizeFontFaceModule (copy), ComposerMultiLineCaretFix (copy), InputFocusBehaviorModule (copy), UseComposerKeyboardConnectionsModule (copy), ControlStateModule (copy), RadiusModule (copy), TruncateTextToCursorModule (copy), UseBindableModule (copy), ReactUtilsModule (copy), ViewModule (copy), WithCommonPropsModule (copy), BlendTransparenciesModule (copy), ConstantsModule (copy), StateLayerAffordanceModule (copy), ScrollViewModule (copy), MemoResult (copy), MapBindableModule (copy), IconModule (copy)
 	local Tbl1 = Tbl
 	
 	if Tbl.Selectable == nil then
@@ -96,6 +98,7 @@ return ReactModule.memo(ReactModule.forwardRef(function(Tbl, p1)
 	end
 	local WithDefaultsModuleResult = WithDefaultsModule(Tbl1, config)
 	local UseTokensModuleResult = UseTokensModule()
+	local HasFooterElement: boolean = FFlagComposerFooter and WithDefaultsModuleResult.footerElement ~= nil
 	local UseRefResult = ReactModule.useRef(nil)
 	local UseRefResult1 = ReactModule.useRef(nil)
 	local UseRefResult2 = ReactModule.useRef(nil)
@@ -117,7 +120,7 @@ return ReactModule.memo(ReactModule.forwardRef(function(Tbl, p1)
 	local IsDisabled = WithDefaultsModuleResult.isDisabled
 	local UseRefResult10 = ReactModule.useRef(IsDisabled)
 	UseRefResult10.current = IsDisabled
-	local NoTrailingElement: boolean = WithDefaultsModuleResult.isDisabled and WithDefaultsModuleResult.trailingElement == nil
+	local NoHasFooterElement: boolean = WithDefaultsModuleResult.isDisabled and (WithDefaultsModuleResult.trailingElement == nil and not HasFooterElement)
 	local UsePreferredInputModuleResult = UsePreferredInputModule()
 	local UseStateResult3, UseStateResult2_2 = ReactModule.useState(false)
 	local IsUsePreferredInputModuleResultMatch = UsePreferredInputModuleResult == Enum.PreferredInput.Touch
@@ -560,19 +563,29 @@ return ReactModule.memo(ReactModule.forwardRef(function(Tbl, p1)
 			borderWidth = UseTokensModuleResult.Stroke.Thick
 		}
 	end, { UseTokensModuleResult, Container.radius, UseMemoResult2 })
-	local UseMemoResult4, UseMemoResult2_1 = ReactModule.useMemo(function()
-		-- upvalues: Container (copy), ScaledCeiled (copy), GetMultiLineTextHeightModule (upval), FontSize (copy), LineHeight (copy), UseMemoResult (copy)
+	local UseMemoResult4, UseMemoResult2_1, UseMemoResult3_1 = ReactModule.useMemo(function()
+		-- upvalues: Container (copy), ScaledCeiled (copy), GetMultiLineTextHeightModule (upval), FontSize (copy), LineHeight (copy), FFlagComposerFooter (upval), HasFooterElement (copy), UseTokensModuleResult (copy), UseMemoResult (copy)
 		local RoundedRatio = math.round((Container.minHeight - ScaledCeiled - GetMultiLineTextHeightModule(FontSize, 1, LineHeight)) * 2) / 2
+		local _UDim = UDim.new(0, (math.floor(RoundedRatio / 2)))
+		local _UDim1 = UDim.new(0, (math.ceil(RoundedRatio / 2)))
+		
+		if FFlagComposerFooter and HasFooterElement then
+			local Smallest = math.min(UseTokensModuleResult.Size.Size_100, _UDim1.Offset)
+			_UDim += UDim.new(0, Smallest)
+			_UDim1 -= UDim.new(0, Smallest)
+		end
+		local NewUseMemoResult = UseMemoResult + math.round(RoundedRatio)
 		
 		return {
-			top = UDim.new(0, (math.floor(RoundedRatio / 2))),
-			bottom = UDim.new(0, (math.ceil(RoundedRatio / 2))),
+			top = _UDim,
+			bottom = _UDim1,
 			left = UDim.new(0, 0),
 			right = UDim.new(0, 0)
-		}, UseMemoResult + math.round(RoundedRatio) + ScaledCeiled
+		}, NewUseMemoResult + ScaledCeiled, NewUseMemoResult
 	end, {
 		Container.minHeight, ScaledCeiled, ScaledCeiled1, FontSize, UseMemoResult,
-		LineHeight
+		LineHeight, if FFlagComposerFooter then HasFooterElement else nil,
+		if FFlagComposerFooter then UseTokensModuleResult else nil
 	})
 	local NewOffset = UseMemoResult4.bottom.Offset + UseMemoResult4.top.Offset
 	local NoUseStateResult3: boolean = IsLargestAbove and (WithDefaultsModuleResult.maxLines ~= nil and not UseStateResult3)
@@ -580,12 +593,12 @@ return ReactModule.memo(ReactModule.forwardRef(function(Tbl, p1)
 	local NoUseStateResult3_1: boolean = IsTextPaddingOnParent and NoUseStateResult3
 	local NoNoUseStateResult3_1: boolean = IsTextPaddingOnParent and not NoUseStateResult3_1
 	local UseMemoResult5 = if IsTextPaddingOnParent then nil else UseMemoResult4
-	local YOffset = if IsTextPaddingOnParent then UseMemoResult else UseMemoResult + NewOffset
+	local YOffset1 = if IsTextPaddingOnParent then UseMemoResult else UseMemoResult + NewOffset
 	local UseStateResult7 = if IsTextPaddingOnParent then UseStateResult5 else UseStateResult5 + NewOffset
-	local Largest2 = if NoUseStateResult3 then math.max(YOffset, UseStateResult7) else YOffset
-	local YOffset1 = if NoNoUseStateResult3_1 then Largest2 + NewOffset else Largest2
+	local Largest2 = if NoUseStateResult3 then math.max(YOffset1, UseStateResult7) else YOffset1
+	local YOffset = if NoNoUseStateResult3_1 then Largest2 + NewOffset else Largest2
 	local _UDim2 = UDim2.new(1, 0, 0, Largest2)
-	local _UDim2_1 = UDim2.new(1, 0, 0, YOffset)
+	local _UDim2_1 = UDim2.new(1, 0, 0, YOffset1)
 	ReactModule.useEffect(function()
 		-- upvalues: WithDefaultsModuleResult (copy), ComposerDebugModule (upval), Largest1 (copy), UseMemoResult2_1 (copy)
 		if WithDefaultsModuleResult.maxLines then
@@ -694,9 +707,15 @@ return ReactModule.memo(ReactModule.forwardRef(function(Tbl, p1)
 		UseTokensModuleResult.Stroke.Standard
 	})
 	local UseComposedRefResult = ReactUtilsModule.useComposedRef(UseRefResult1, UseResult26)
+	local Config = if XSmall == nil then nil else {
+		FillDirection = Enum.FillDirection.Horizontal,
+		Padding = UDim.new(0, XSmall),
+		SortOrder = Enum.SortOrder.LayoutOrder
+	}
 	
 	return ReactModule.createElement(ViewModule, WithCommonPropsModule(WithDefaultsModuleResult, {
 		Size = UDim2.new(1, 0, 0, UseMemoResult2_1),
+		AutomaticSize = if FFlagComposerFooter then Enum.AutomaticSize.Y else nil,
 		selection = {
 			Selectable = WithDefaultsModuleResult.Selectable and not IsDisabled,
 			NextSelectionUp = WithDefaultsModuleResult.NextSelectionUp,
@@ -711,8 +730,13 @@ return ReactModule.memo(ReactModule.forwardRef(function(Tbl, p1)
 			Thickness = Container.strokeThickness,
 			BorderStrokePosition = if UseStateResult1 or UseStateResult then Enum.BorderStrokePosition.Center else Enum.BorderStrokePosition.Inner
 		} else nil,
-		cornerRadius = UseMemoResult2,
-		padding = {
+		cornerRadius = if FFlagComposerFooter then UseMemoResult2 or UDim.new(0, if WithDefaultsModuleResult.radius then UseTokensModuleResult.Radius[WithDefaultsModuleResult.radius] else Container.radius) else UseMemoResult2,
+		padding = if FFlagComposerFooter then {
+			left = UDim.new(0, Standard),
+			right = UDim.new(0, Standard),
+			top = UDim.new(0, Standard),
+			bottom = UDim.new(0, Standard)
+		} else {
 			left = UseBindableModuleResult:map(function(p2): UDim
 				-- upvalues: Standard (copy)
 				return UDim.new(0, Standard) + p2
@@ -726,141 +750,158 @@ return ReactModule.memo(ReactModule.forwardRef(function(Tbl, p1)
 		},
 		onActivated = if IsDisabled then nil else UseResult5,
 		onStateChanged = UseResult19,
-		isDisabled = NoTrailingElement,
+		isDisabled = NoHasFooterElement,
 		backgroundStyle = if Container.bgStyle then GetDisabledStyleModule({
 			Color3 = Container.bgStyle.Color3,
 			Transparency = if WithDefaultsModuleResult.backgroundGradient then 0 else Container.bgStyle.Transparency
-		}, NoTrailingElement) else nil,
+		}, NoHasFooterElement) else nil,
 		stateLayer = { affordance = StateLayerAffordanceModule.None },
-		layout = if XSmall == nil then nil else {
-			FillDirection = Enum.FillDirection.Horizontal,
-			Padding = UDim.new(0, XSmall),
+		layout = if FFlagComposerFooter then {
+			FillDirection = Enum.FillDirection.Vertical,
 			SortOrder = Enum.SortOrder.LayoutOrder
-		},
-		tag = Replaced,
+		} else Config,
+		tag = if FFlagComposerFooter then "col" else Replaced,
 		testId = `{WithDefaultsModuleResult.testId}--outer-container`
 	}), {
 		DragDetector = UseMemoResult8,
 		Background = WithDefaultsModuleResult.backgroundGradient,
-		Leading = if WithDefaultsModuleResult.leadingElement then ReactModule.createElement(ViewModule, {
+		InputRow = ReactModule.createElement(if FFlagComposerFooter then ViewModule else ReactModule.Fragment, if FFlagComposerFooter then {
 			LayoutOrder = 1,
-			tag = "col align-y-bottom self-stretch size-0-full auto-x",
-			GroupTransparency = if NoTrailingElement then ConstantsModule.DISABLED_TRANSPARENCY else nil,
-			testId = `{WithDefaultsModuleResult.testId}--leading`
-		}, WithDefaultsModuleResult.leadingElement) else nil,
-		TextBoxWrapper = ReactModule.createElement(if IsLargestAbove then ScrollViewModule else ViewModule, {
-			LayoutOrder = 2,
-			tag = "fill size-full clip",
-			padding = if NoUseStateResult3_1 then UseMemoResult4 else nil,
-			selection = { Selectable = false },
-			scroll = UseMemoResult7,
-			layout = UseMemoResult6,
-			onCanvasPositionChanged = if IsLargestAbove then UseResult27 else nil,
-			scrollingFrameRef = if IsLargestAbove then UseResult25 else nil
-		}, {
-			TextContent = ReactModule.createElement(ViewModule, {
-				Size = if NoUseStateResult3 then UDim2.new(1, 0, 0, YOffset1) else nil,
-				tag = { ["fill size-full"] = not NoUseStateResult3 },
-				padding = if NoNoUseStateResult3_1 then UseMemoResult4 else nil,
+			Size = UDim2.new(1, 0, 0, UseMemoResult3_1),
+			layout = Config,
+			padding = {
+				left = UseBindableModuleResult,
+				right = if WithDefaultsModuleResult.trailingElement == nil and WithDefaultsModuleResult.hasClearButton then UDim.new(0, 0) else UseBindableModuleResult1
+			},
+			tag = Replaced,
+			testId = `{WithDefaultsModuleResult.testId}--input-row`
+		} else nil, {
+			Leading = if WithDefaultsModuleResult.leadingElement then ReactModule.createElement(ViewModule, {
+				LayoutOrder = 1,
+				tag = "col align-y-bottom self-stretch size-0-full auto-x",
+				GroupTransparency = if NoHasFooterElement then ConstantsModule.DISABLED_TRANSPARENCY else nil,
+				testId = `{WithDefaultsModuleResult.testId}--leading`
+			}, WithDefaultsModuleResult.leadingElement) else nil,
+			TextBoxWrapper = ReactModule.createElement(if IsLargestAbove then ScrollViewModule else ViewModule, {
+				LayoutOrder = 2,
+				tag = "fill size-full clip",
+				testId = if FFlagComposerFooter then `{WithDefaultsModuleResult.testId}--viewport` else nil,
+				padding = if NoUseStateResult3_1 then UseMemoResult4 else nil,
 				selection = { Selectable = false },
-				onActivated = if IsDisabled then nil else UseResult5,
-				stateLayer = { affordance = StateLayerAffordanceModule.None }
+				scroll = UseMemoResult7,
+				layout = UseMemoResult6,
+				onCanvasPositionChanged = if IsLargestAbove then UseResult27 else nil,
+				scrollingFrameRef = if IsLargestAbove then UseResult25 else nil
 			}, {
-				TextBox = if UseStateResult3 then nil else ReactModule.createElement(MemoResult, {
-					overlayNativeInput = nil,
-					text = Text,
-					placeholder = WithDefaultsModuleResult.placeholder,
-					textInputType = WithDefaultsModuleResult.textInputType,
-					fontStyle = FontStyle,
-					textStyle = DisabledStyleModule,
-					isMultiLine = IsLargestAbove,
-					isDisabled = IsDisabled,
-					ref = UseRefResult,
-					tag = `{UseStyleTagsModuleResult or ""} data-testid={WithDefaultsModuleResult.testId}--textbox`,
-					Size = if IsLargestAbove then _UDim2 else nil,
-					automaticSize = if WithDefaultsModuleResult.maxLines then nil elseif HasMaxLines then if IsLargestAbove and not UseStateResult3 and UseStateResult6 ~= "" then Enum.AutomaticSize.Y else nil else MapBindableModule(WithDefaultsModuleResult.text, function(p2)
-						-- upvalues: IsLargestAbove (copy), UseStateResult3 (copy)
-						return if IsLargestAbove and not UseStateResult3 and p2 ~= "" then Enum.AutomaticSize.Y else nil
-					end),
-					padding = UseMemoResult5,
-					onFocusGained = UseResult16,
-					onFocusLost = if IsLargestAbove and IsUsePreferredInputModuleResultMatch then nil else UseResult18,
-					onTextChanged = UseResult11,
-					onCursorPositionChanged = if IsLargestAbove then UseResult23 else nil,
-					onAbsoluteSizeChanged = if ComposerMultiLineCaretFix and IsLargestAbove then UseResult24 else nil,
-					onInputChanged = UseResult12,
-					onInputEnded = UseResult17,
-					manualFocusRelease = if IsUsePreferredInputModuleResultMatch then WithDefaultsModuleResult.manualFocusRelease else nil,
-					shouldEmitReturnEvents = IsUsePreferredInputModuleResultMatch and WithDefaultsModuleResult.manualFocusRelease == true and WithDefaultsModuleResult.alwaysMultiLine == true or nil
+				TextContent = ReactModule.createElement(ViewModule, {
+					Size = if NoUseStateResult3 then UDim2.new(1, 0, 0, YOffset) else nil,
+					tag = { ["fill size-full"] = not NoUseStateResult3 },
+					padding = if NoNoUseStateResult3_1 then UseMemoResult4 else nil,
+					selection = { Selectable = false },
+					onActivated = if IsDisabled then nil else UseResult5,
+					stateLayer = { affordance = StateLayerAffordanceModule.None }
 				}, {
-					DragDetector = UseMemoResult8,
-					BoundsChecker = if IsLargestAbove then ReactModule.createElement(MemoResult, {
-						isBoundsChecker = true,
+					TextBox = if UseStateResult3 then nil else ReactModule.createElement(MemoResult, {
+						overlayNativeInput = nil,
+						text = Text,
+						placeholder = WithDefaultsModuleResult.placeholder,
+						textInputType = WithDefaultsModuleResult.textInputType,
 						fontStyle = FontStyle,
 						textStyle = DisabledStyleModule,
-						Size = if IsTextPaddingOnParent then UDim2.fromScale(1, 1) else UDim2.new(1, 0, 1, NewOffset),
-						ref = UseRefResult2
+						isMultiLine = IsLargestAbove,
+						isDisabled = IsDisabled,
+						ref = UseRefResult,
+						tag = `{UseStyleTagsModuleResult or ""} data-testid={WithDefaultsModuleResult.testId}--textbox`,
+						Size = if IsLargestAbove then _UDim2 else nil,
+						automaticSize = if WithDefaultsModuleResult.maxLines then nil elseif HasMaxLines then if IsLargestAbove and (not UseStateResult3 and UseStateResult6 ~= "") then Enum.AutomaticSize.Y else nil else MapBindableModule(WithDefaultsModuleResult.text, function(p2)
+							-- upvalues: IsLargestAbove (copy), UseStateResult3 (copy)
+							return if IsLargestAbove and not UseStateResult3 and p2 ~= "" then Enum.AutomaticSize.Y else nil
+						end),
+						padding = UseMemoResult5,
+						onFocusGained = UseResult16,
+						onFocusLost = if IsLargestAbove and IsUsePreferredInputModuleResultMatch then nil else UseResult18,
+						onTextChanged = UseResult11,
+						onCursorPositionChanged = if IsLargestAbove then UseResult23 else nil,
+						onAbsoluteSizeChanged = if ComposerMultiLineCaretFix and IsLargestAbove then UseResult24 else nil,
+						onInputChanged = UseResult12,
+						onInputEnded = UseResult17,
+						manualFocusRelease = if IsUsePreferredInputModuleResultMatch then WithDefaultsModuleResult.manualFocusRelease else nil,
+						shouldEmitReturnEvents = IsUsePreferredInputModuleResultMatch and (WithDefaultsModuleResult.manualFocusRelease == true and WithDefaultsModuleResult.alwaysMultiLine == true) or nil
+					}, {
+						DragDetector = UseMemoResult8,
+						BoundsChecker = if IsLargestAbove then ReactModule.createElement(MemoResult, {
+							isBoundsChecker = true,
+							fontStyle = FontStyle,
+							textStyle = DisabledStyleModule,
+							Size = if IsTextPaddingOnParent then UDim2.fromScale(1, 1) else UDim2.new(1, 0, 1, NewOffset),
+							ref = UseRefResult2
+						}) else nil
+					}),
+					MobileFocusTarget = if IsLargestAbove and IsUsePreferredInputModuleResultMatch and (not UseStateResult3 and not IsDisabled) then ReactModule.createElement(ViewModule, {
+						tag = "size-full",
+						ZIndex = 2,
+						onActivated = UseResult5,
+						selection = { Selectable = false },
+						stateLayer = { affordance = StateLayerAffordanceModule.None },
+						testId = `{WithDefaultsModuleResult.testId}--mobile-focus-target`
+					}) else nil,
+					MobileTextBox = if UseStateResult3_1 then ReactModule.createElement(MemoResult, {
+						overlayNativeInput = nil,
+						text = Text,
+						placeholder = WithDefaultsModuleResult.placeholder,
+						textInputType = WithDefaultsModuleResult.textInputType,
+						fontStyle = FontStyle,
+						textStyle = DisabledStyleModule,
+						isMultiLine = IsLargestAbove,
+						isDisabled = IsDisabled,
+						padding = UseMemoResult5,
+						ref = UseComposedRefResult,
+						tag = `{UseStyleTagsModuleResult or ""} data-testid={WithDefaultsModuleResult.testId}--mobile-textbox`,
+						Size = _UDim2_1,
+						onFocusGained = UseResult16,
+						onFocusLost = if IsLargestAbove and IsUsePreferredInputModuleResultMatch then UseResult18 else nil,
+						onTextChanged = UseResult11,
+						onCursorPositionChanged = if IsLargestAbove then UseResult23 else nil,
+						onInputEnded = UseResult17,
+						manualFocusRelease = if IsUsePreferredInputModuleResultMatch then WithDefaultsModuleResult.manualFocusRelease else nil,
+						shouldEmitReturnEvents = IsUsePreferredInputModuleResultMatch and WithDefaultsModuleResult.manualFocusRelease == true and WithDefaultsModuleResult.alwaysMultiLine == true or nil
 					}) else nil
-				}),
-				MobileFocusTarget = if IsLargestAbove and IsUsePreferredInputModuleResultMatch and not UseStateResult3 and not IsDisabled then ReactModule.createElement(ViewModule, {
-					tag = "size-full",
-					ZIndex = 2,
-					onActivated = UseResult5,
-					selection = { Selectable = false },
-					stateLayer = { affordance = StateLayerAffordanceModule.None },
-					testId = `{WithDefaultsModuleResult.testId}--mobile-focus-target`
-				}) else nil,
-				MobileTextBox = if UseStateResult3_1 then ReactModule.createElement(MemoResult, {
-					overlayNativeInput = nil,
-					text = Text,
-					placeholder = WithDefaultsModuleResult.placeholder,
-					textInputType = WithDefaultsModuleResult.textInputType,
-					fontStyle = FontStyle,
-					textStyle = DisabledStyleModule,
-					isMultiLine = IsLargestAbove,
-					isDisabled = IsDisabled,
-					padding = UseMemoResult5,
-					ref = UseComposedRefResult,
-					tag = `{UseStyleTagsModuleResult or ""} data-testid={WithDefaultsModuleResult.testId}--mobile-textbox`,
-					Size = _UDim2_1,
-					onFocusGained = UseResult16,
-					onFocusLost = if IsLargestAbove and IsUsePreferredInputModuleResultMatch then UseResult18 else nil,
-					onTextChanged = UseResult11,
-					onCursorPositionChanged = if IsLargestAbove then UseResult23 else nil,
-					onInputEnded = UseResult17,
-					manualFocusRelease = if IsUsePreferredInputModuleResultMatch then WithDefaultsModuleResult.manualFocusRelease else nil,
-					shouldEmitReturnEvents = IsUsePreferredInputModuleResultMatch and WithDefaultsModuleResult.manualFocusRelease == true and WithDefaultsModuleResult.alwaysMultiLine == true or nil
-				}) else nil
-			})
-		}),
-		Clear = if WithDefaultsModuleResult.hasClearButton then ReactModule.createElement(ViewModule, {
-			LayoutOrder = 3,
-			isDisabled = IsDisabled,
-			GroupTransparency = if IsDisabled then ConstantsModule.DISABLED_TRANSPARENCY else nil,
-			Visible = MapBindableModule(WithDefaultsModuleResult.text, function(p2): boolean
-				return p2 ~= ""
-			end),
-			tag = UseTextInputVariantsModuleResult.clearButton.tag
-		}, {
-			ClearButton = ReactModule.createElement(ViewModule, {
-				tag = "anchor-center-left auto-xy",
-				onActivated = UseResult10,
-				padding = UDim.new(0, UseTextInputVariantsModuleResult.clearButton.padding),
-				Position = UseMemoResult9,
-				stateLayer = { affordance = StateLayerAffordanceModule.None },
-				testId = `{WithDefaultsModuleResult.testId}--clear-button`
+				})
+			}),
+			Clear = if WithDefaultsModuleResult.hasClearButton then ReactModule.createElement(ViewModule, {
+				LayoutOrder = 3,
+				isDisabled = IsDisabled,
+				GroupTransparency = if IsDisabled then ConstantsModule.DISABLED_TRANSPARENCY else nil,
+				Visible = MapBindableModule(WithDefaultsModuleResult.text, function(p2): boolean
+					return p2 ~= ""
+				end),
+				tag = UseTextInputVariantsModuleResult.clearButton.tag
 			}, {
-				Icon = ReactModule.createElement(IconModule, { name = UseTextInputVariantsModuleResult.clearButton.icon })
-			})
-		}) else nil,
-		Trailing = if WithDefaultsModuleResult.trailingElement then ReactModule.createElement(ViewModule, {
-			LayoutOrder = 4,
-			GroupTransparency = if NoTrailingElement then ConstantsModule.DISABLED_TRANSPARENCY else nil,
-			tag = {
-				["col align-y-bottom self-stretch size-0-full auto-x"] = WithDefaultsModuleResult.trailingAlignBottom == true,
-				["row align-y-center size-0-full auto-x"] = WithDefaultsModuleResult.trailingAlignBottom ~= true
-			},
-			testId = `{WithDefaultsModuleResult.testId}--trailing`
-		}, WithDefaultsModuleResult.trailingElement) else nil
+				ClearButton = ReactModule.createElement(ViewModule, {
+					tag = "anchor-center-left auto-xy",
+					onActivated = UseResult10,
+					padding = UDim.new(0, UseTextInputVariantsModuleResult.clearButton.padding),
+					Position = UseMemoResult9,
+					stateLayer = { affordance = StateLayerAffordanceModule.None },
+					testId = `{WithDefaultsModuleResult.testId}--clear-button`
+				}, {
+					Icon = ReactModule.createElement(IconModule, { name = UseTextInputVariantsModuleResult.clearButton.icon })
+				})
+			}) else nil,
+			Trailing = if WithDefaultsModuleResult.trailingElement then ReactModule.createElement(ViewModule, {
+				LayoutOrder = 4,
+				GroupTransparency = if NoHasFooterElement then ConstantsModule.DISABLED_TRANSPARENCY else nil,
+				tag = {
+					["col align-y-bottom self-stretch size-0-full auto-x"] = WithDefaultsModuleResult.trailingAlignBottom == true,
+					["row align-y-center size-0-full auto-x"] = WithDefaultsModuleResult.trailingAlignBottom ~= true
+				},
+				testId = `{WithDefaultsModuleResult.testId}--trailing`
+			}, WithDefaultsModuleResult.trailingElement) else nil
+		}),
+		Footer = if HasFooterElement then ReactModule.createElement(ViewModule, {
+			LayoutOrder = 2,
+			tag = "size-full-0 auto-y",
+			testId = `{WithDefaultsModuleResult.testId}--footer`
+		}, WithDefaultsModuleResult.footerElement) else nil
 	})
 end))

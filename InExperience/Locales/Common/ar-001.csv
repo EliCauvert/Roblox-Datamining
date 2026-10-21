@@ -3289,12 +3289,14 @@ Feature.Friends.Label.FollowsYou,يتابعك
 Feature.Friends.Label.Frequent,لعبتما معًا
 Feature.Friends.Label.Friend,
 Feature.Friends.Label.FriendInvite,دعاك لتكون صديقهم على Roblox
+Feature.Friends.Label.FriendOwns,يملكها صديق واحد
 Feature.Friends.Label.FriendRecentlyPlayed,<b>صديق واحد</b> لعبها مؤخرًا
 Feature.Friends.Label.FriendRequest,
 Feature.Friends.Label.Friends,
 Feature.Friends.Label.FriendsAreNowConnections,أصبح الأصدقاء الآن ضمن جهات التواصل لديك!
 Feature.Friends.Label.FriendsHintBold,هيا نلعب!
 Feature.Friends.Label.FriendsHintPlain,ابدأ بإضافة صديق.
+Feature.Friends.Label.FriendsOwn,يملكه {numberOfConnections} من الأصدقاء
 Feature.Friends.Label.FriendsPlayed,{numberOfConnections} من الأصدقاء قاموا باللعب
 Feature.Friends.Label.FriendsRecentlyPlayed,<b>{numberOfConnections} من الأصدقاء</b> لعبوا مؤخرًا
 Feature.Friends.Label.InGame,

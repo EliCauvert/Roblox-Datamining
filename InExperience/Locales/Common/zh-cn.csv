@@ -3332,12 +3332,14 @@ Feature.Friends.Label.FollowsYou,已关注了你
 Feature.Friends.Label.Frequent,一起玩过
 Feature.Friends.Label.Friend,
 Feature.Friends.Label.FriendInvite,已邀请你成为 Roblox 好友
+Feature.Friends.Label.FriendOwns,1 位好友拥有
 Feature.Friends.Label.FriendRecentlyPlayed,<b>1 位好友</b>最近玩过
 Feature.Friends.Label.FriendRequest,
 Feature.Friends.Label.Friends,
 Feature.Friends.Label.FriendsAreNowConnections,好友现已升级为“联系人”！
 Feature.Friends.Label.FriendsHintBold,一起开始游戏吧！
 Feature.Friends.Label.FriendsHintPlain,首先，添加一位好友。
+Feature.Friends.Label.FriendsOwn,{numberOfConnections} 位好友拥有
 Feature.Friends.Label.FriendsPlayed,{numberOfConnections} 个人玩过
 Feature.Friends.Label.FriendsRecentlyPlayed,<b>{numberOfConnections} 位好友</b>最近玩过
 Feature.Friends.Label.InGame,

@@ -74,7 +74,6 @@ return {
 			local Element1 = ReactModule.createElement(MomentItemModule, {
 				data = {
 					kind = "experience",
-					creatorIsVerified = nil,
 					momentId = Moment.momentId,
 					creatorId = Moment.creatorId,
 					placeId = Moment.metadata.placeId or 0,

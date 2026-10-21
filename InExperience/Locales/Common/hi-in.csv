@@ -3334,12 +3334,14 @@ Feature.Friends.Label.FollowsYou,आपको फ़ॉलो करता ह�
 Feature.Friends.Label.Frequent,एक साथ खेले
 Feature.Friends.Label.Friend,
 Feature.Friends.Label.FriendInvite,Roblox पर फ़्रेंड्स बनने के लिए इनवाइट किया है
+Feature.Friends.Label.FriendOwns,1 फ़्रेंड के पास है
 Feature.Friends.Label.FriendRecentlyPlayed,<b>1 फ़्रेंड ने</b> हाल ही में खेला
 Feature.Friends.Label.FriendRequest,
 Feature.Friends.Label.Friends,
 Feature.Friends.Label.FriendsAreNowConnections,फ़्रेंड्स अब कनेक्शन हैं!
 Feature.Friends.Label.FriendsHintBold,"चलिए, खेलें!"
 Feature.Friends.Label.FriendsHintPlain,शुरू करने के लिए एक फ़्रेंड जोड़ें.
+Feature.Friends.Label.FriendsOwn,{numberOfConnections} फ़्रेंड्स के पास है
 Feature.Friends.Label.FriendsPlayed,{numberOfConnections} ने खेला
 Feature.Friends.Label.FriendsRecentlyPlayed,<b>{numberOfConnections} फ़्रेंड्स</b> ने हाल में खेला
 Feature.Friends.Label.InGame,एक्सपीरिएंस किया जा रहा है

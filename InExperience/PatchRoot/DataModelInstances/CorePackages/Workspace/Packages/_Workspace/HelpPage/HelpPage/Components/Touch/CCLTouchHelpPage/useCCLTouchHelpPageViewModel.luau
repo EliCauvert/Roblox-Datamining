@@ -7,6 +7,7 @@ local SignalsReactModule = require(Parent.SignalsReact)
 local RobloxAppHooksModule = require(Parent.RobloxAppHooks)
 local ConstantsModule = require(HelpPage.Constants)
 local BindingConfigsModule = require(HelpPage.Configs.BindingConfigs)
+local _ = require(HelpPage.Configs.ConfigTypes)
 local UseKeybindsModule = require(HelpPage.Hooks.useKeybinds)
 local _ = require(HelpPage.Components.Touch.TouchControlList)
 local _ = require(script.Parent.CCLTouchHelpPageView)
@@ -23,10 +24,10 @@ local function createMockLayout(UseTokensResult, SmallButtonSize: number)
 	return {
 		size = _Vector2,
 		smallButtonSize = SmallButtonSize,
-		jumpSize = SmallButtonSize * 1.625,
+		centerButtonSize = SmallButtonSize * 1.625,
 		inset = ScaledXSmall,
 		cornerRadius = UseTokensResult.Radius.Large * SmallButtonSizeRatio,
-		jumpPosition = _Vector2 - Vector2.new(ScaledXSmall, ScaledXSmall) - Vector2.new(UseTokensResult.Padding.XLarge * SmallButtonSizeRatio + SmallButtonSize / 2 + Y, UseTokensResult.Padding.Medium * SmallButtonSizeRatio + SmallButtonSize / 2 + Y),
+		centerButtonPosition = _Vector2 - Vector2.new(ScaledXSmall, ScaledXSmall) - Vector2.new(UseTokensResult.Padding.XLarge * SmallButtonSizeRatio + SmallButtonSize / 2 + Y, UseTokensResult.Padding.Medium * SmallButtonSizeRatio + SmallButtonSize / 2 + Y),
 		slotOffsets = {
 			Vector2.new(-Y, -Y), Vector2.new(-Y, Y), Vector2.new(Y, -Y),
 			Vector2.new(-ScaledSize, 0), Vector2.new(0, -ScaledSize), Vector2.new(Y, Y)
@@ -61,7 +62,7 @@ return function()
 	local Controls = UseKeybindsModuleResult.controls or {}
 	local LeftControls = {}
 	
-	for _, value in ipairs({
+	for _, CenterControl in ipairs({
 		{
 			id = "UseTool",
 			icon = ConstantsModule.HELP_PAGE.TOUCH_ICONS.TAP
@@ -79,20 +80,27 @@ return function()
 			icon = ConstantsModule.HELP_PAGE.TOUCH_ICONS.ROTATE
 		}
 	}) do
-		local Control = Controls[value.id] or BindingConfigsModule.Controls[value.id]
+		local Control = Controls[CenterControl.id] or BindingConfigsModule.Controls[CenterControl.id]
 		
 		if Control then
 			table.insert(LeftControls, {
-				id = value.id,
+				id = CenterControl.id,
 				label = Control.label,
-				icon = value.icon,
+				icon = CenterControl.icon,
 				disabled = Control.disabled
 			})
 		end
 	end
+	local AbilityAction1 = Controls.AbilityAction1
+	local CenterControl1 = {
+		id = "AbilityAction1",
+		label = if AbilityAction1 then AbilityAction1.label else "InGame.HelpMenu.GenericAction",
+		icon = FoundationModule.Enums.IconName.DiamondSimplified,
+		disabled = AbilityAction1 == nil or AbilityAction1.disabled == true
+	}
 	local Slots = {}
 	
-	for i = 1, 6 do
+	for i = 2, 7 do
 		local Text = "AbilityAction" .. i
 		local Control = Controls[Text]
 		table.insert(Slots, {
@@ -102,13 +110,7 @@ return function()
 			disabled = Control == nil or Control.disabled == true
 		})
 	end
-	local List = {
-		{
-			id = "Jump",
-			label = BindingConfigsModule.Controls.Jump.label,
-			icon = FoundationModule.Enums.IconName.KeyShift
-		}
-	}
+	local List = { CenterControl1 }
 	
 	for _, slot in ipairs(Slots) do
 		table.insert(List, slot)
@@ -128,6 +130,7 @@ return function()
 		abilitiesAvailable = UseKeybindsModuleResult.abilitiesAvailable == true,
 		leftControls = LeftControls,
 		rightControls = List,
+		centerControl = CenterControl1,
 		slots = Slots,
 		layout = {
 			columnScale = 1,

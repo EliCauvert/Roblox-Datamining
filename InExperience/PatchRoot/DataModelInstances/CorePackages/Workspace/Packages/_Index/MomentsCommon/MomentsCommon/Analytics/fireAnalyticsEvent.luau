@@ -8,7 +8,6 @@ local TelemetryEmitterModule = require(MomentsCommon.Analytics.telemetryEmitter)
 local FunnelEventActionListModule = require(MomentsCommon.Analytics.FunnelEventActionList)
 local SessionManagerModule = require(MomentsCommon.Analytics.SessionManager)
 local FireFunnelAnalyticsEventModule = require(MomentsCommon.Analytics.fireFunnelAnalyticsEvent)
-local FFlagMomentsAnalyticsClientEventTimestampModule = require(MomentsCommon.Flags.FFlagMomentsAnalyticsClientEventTimestamp)
 local GetFFlagMomentsCreationSaveDraftModule = require(MomentsCommon.Flags.GetFFlagMomentsCreationSaveDraft)
 local MomentsAnalyticsEvent = SocialLuaAnalyticsModule.Telemetry.new({
 	name = "MomentsAnalyticsEvent",
@@ -23,10 +22,10 @@ local MomentsAnalyticsEvent = SocialLuaAnalyticsModule.Telemetry.new({
 				return p1.eventName
 			end,
 			format = function(p1, _)
-				-- upvalues: FFlagMomentsAnalyticsClientEventTimestampModule (copy), CryoModule (copy)
-				return if FFlagMomentsAnalyticsClientEventTimestampModule then CryoModule.Dictionary.join(p1.additionalInfo or {}, {
+				-- upvalues: CryoModule (copy)
+				return CryoModule.Dictionary.join(p1.additionalInfo or {}, {
 					client_event_timestamp_ms = DateTime.now().UnixTimestampMillis
-				}) else p1.additionalInfo or {}
+				})
 			end
 		}
 	}

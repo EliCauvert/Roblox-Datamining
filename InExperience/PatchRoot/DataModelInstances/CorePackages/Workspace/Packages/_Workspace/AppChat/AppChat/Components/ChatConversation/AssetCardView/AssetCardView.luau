@@ -212,7 +212,7 @@ local function ActionButton(Frame: Frame)
 		testId = "AssetCardAction",
 		text = Frame.label,
 		icon = Frame.icon,
-		variant = ButtonVariant.Standard,
+		variant = Frame.variant or ButtonVariant.Standard,
 		size = InputSize.Small,
 		onActivated = Frame.onActivated,
 		Selectable = Frame.isSelectable,
@@ -308,6 +308,7 @@ return ReactModule.memo(function(Frame)
 			Action = if IsStatusMatch and Footer.action then ReactModule.createElement(ActionButton, {
 				LayoutOrder = 2,
 				label = Footer.action.label,
+				variant = Footer.action.variant,
 				icon = Footer.action.icon,
 				onActivated = Footer.action.onActivated,
 				isSelectable = Footer.action.isSelectable

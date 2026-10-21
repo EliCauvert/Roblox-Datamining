@@ -8,6 +8,7 @@ local GetSduiServiceDependenciesStoreFunction = SduiCoreSystemModule.getSduiServ
 local GetSduiTokensStoreFunction = SduiCoreSystemModule.getSduiTokensStore
 local GetSduiPolicyStoreFunction = SduiCoreSystemModule.getSduiPolicyStore
 local UseAppPolicyFunction = require(Parent.UniversalAppPolicy).useAppPolicy
+local FFlagInitializeSduiForApp = require(Parent.SharedFlags).FFlagInitializeSduiForApp
 local RegisterDiscoveryActionsModule = require(ServerDrivenUi.Actions.registerDiscoveryActions)
 local RegisterDiscoveryActionTelemetryHandlersModule = require(ServerDrivenUi.Actions.TelemetryHandlers.registerDiscoveryActionTelemetryHandlers)
 local RegisterDiscoveryImpressionsModule = require(ServerDrivenUi.Impressions.registerDiscoveryImpressions)
@@ -17,7 +18,7 @@ local UseSduiSocialDataModule = require(ServerDrivenUi.DataStore.useSduiSocialDa
 local SduiInGameFriendsDataModule = require(ServerDrivenUi.DataStore.SduiInGameFriendsData)
 
 return ReactModule.memo(function()
-	-- upvalues: ReactModule (copy), SduiInstrumentation (copy), UseSduiDependenciesModule (copy), GetSduiServiceDependenciesStoreFunction (copy), UseTokensFunction (copy), GetSduiTokensStoreFunction (copy), UseAppPolicyFunction (copy), GetSduiPolicyStoreFunction (copy), RegisterDiscoveryActionsModule (copy), RegisterDiscoveryUiComponentsModule (copy), RegisterDiscoveryImpressionsModule (copy), RegisterDiscoveryActionTelemetryHandlersModule (copy), UseSduiSocialDataModule (copy), SduiInGameFriendsDataModule (copy)
+	-- upvalues: ReactModule (copy), SduiInstrumentation (copy), UseSduiDependenciesModule (copy), GetSduiServiceDependenciesStoreFunction (copy), UseTokensFunction (copy), GetSduiTokensStoreFunction (copy), UseAppPolicyFunction (copy), GetSduiPolicyStoreFunction (copy), FFlagInitializeSduiForApp (copy), RegisterDiscoveryActionsModule (copy), RegisterDiscoveryUiComponentsModule (copy), RegisterDiscoveryImpressionsModule (copy), RegisterDiscoveryActionTelemetryHandlersModule (copy), UseSduiSocialDataModule (copy), SduiInGameFriendsDataModule (copy)
 	local UseSduiDependenciesModuleResult = UseSduiDependenciesModule((ReactModule.useMemo(function()
 		-- upvalues: SduiInstrumentation (upval)
 		return SduiInstrumentation.new()
@@ -38,13 +39,16 @@ return ReactModule.memo(function()
 		-- upvalues: GetSduiPolicyStoreFunction (upval), UseAppPolicyResult (copy)
 		GetSduiPolicyStoreFunction().setAppPolicy(UseAppPolicyResult)
 	end, { UseAppPolicyResult })
-	ReactModule.useEffect(function()
-		-- upvalues: RegisterDiscoveryActionsModule (upval), RegisterDiscoveryUiComponentsModule (upval), RegisterDiscoveryImpressionsModule (upval), RegisterDiscoveryActionTelemetryHandlersModule (upval)
-		RegisterDiscoveryActionsModule()
-		RegisterDiscoveryUiComponentsModule()
-		RegisterDiscoveryImpressionsModule()
-		RegisterDiscoveryActionTelemetryHandlersModule()
-	end, {})
+	
+	if not FFlagInitializeSduiForApp then
+		ReactModule.useEffect(function()
+			-- upvalues: RegisterDiscoveryActionsModule (upval), RegisterDiscoveryUiComponentsModule (upval), RegisterDiscoveryImpressionsModule (upval), RegisterDiscoveryActionTelemetryHandlersModule (upval)
+			RegisterDiscoveryActionsModule()
+			RegisterDiscoveryUiComponentsModule()
+			RegisterDiscoveryImpressionsModule()
+			RegisterDiscoveryActionTelemetryHandlersModule()
+		end, {})
+	end
 	local UseSduiSocialDataModuleResult = UseSduiSocialDataModule()
 	ReactModule.useEffect(function()
 		-- upvalues: SduiInGameFriendsDataModule (upval), UseSduiSocialDataModuleResult (copy)

@@ -1,6 +1,9 @@
-﻿local Parent = script:FindFirstAncestor("BuildExperience").Parent
+﻿local BuildExperience = script:FindFirstAncestor("BuildExperience")
+local Parent = BuildExperience.Parent
 local FoundationModule = require(Parent.Foundation)
 local ReactModule = require(Parent.React)
+local FFlagBuildExperienceAnswerFormModule = require(BuildExperience.Flags.FFlagBuildExperienceAnswerForm)
+local Composer = if FFlagBuildExperienceAnswerFormModule then require(Parent.AppBlox).Composer else FoundationModule.TextInput
 local List = FoundationModule.List
 local View = FoundationModule.View
 local Text = FoundationModule.Text
@@ -8,46 +11,68 @@ local Divider = FoundationModule.Divider
 local IconButton = FoundationModule.IconButton
 
 return function(Frame)
-	-- upvalues: ReactModule (copy), FoundationModule (copy), View (copy), List (copy), Text (copy), IconButton (copy), Divider (copy)
+	-- upvalues: FFlagBuildExperienceAnswerFormModule (copy), FoundationModule (copy), ReactModule (copy), List (copy), View (copy), Divider (copy), Composer (copy), Text (copy), IconButton (copy)
+	local UseTokensResult = if FFlagBuildExperienceAnswerFormModule then FoundationModule.Hooks.useTokens() else nil
 	local IsIsReadOnly = Frame.isReadOnly == true
 	local IsSubmitting = Frame.isSubmitting or IsIsReadOnly
 	local Elements = {}
 	
 	for LayoutOrder, option in Frame.options do
-		Elements[option.id] = ReactModule.createElement(View, {
-			tag = "size-full-0 auto-y radius-medium",
+		local Element = ReactModule.createElement(List.Item, {
+			title = option.title,
+			description = option.description,
 			LayoutOrder = LayoutOrder,
+			testId = `AnswerForm.Option.{option.id}`,
+			trailing = if Frame.isMultiSelect then ReactModule.createElement(FoundationModule.Checkbox, {
+				label = "",
+				Selectable = false,
+				isChecked = option.isSelected,
+				isDisabled = IsSubmitting,
+				onActivated = option.onActivated
+			}) else nil
+		})
+		Elements[option.id] = ReactModule.createElement(View, {
+			LayoutOrder = LayoutOrder,
+			tag = {
+				["size-full-0 auto-y radius-medium"] = true,
+				col = FFlagBuildExperienceAnswerFormModule
+			},
 			onActivated = option.onActivated,
 			isDisabled = IsSubmitting,
 			selection = { Selectable = not IsSubmitting }
 		}, {
-			Item = ReactModule.createElement(List.Item, {
-				title = option.title,
-				description = option.description,
-				LayoutOrder = LayoutOrder,
-				testId = `AnswerForm.Option.{option.id}`,
-				trailing = if Frame.isMultiSelect then ReactModule.createElement(FoundationModule.Checkbox, {
-					label = "",
-					Selectable = false,
-					isChecked = option.isSelected,
-					isDisabled = IsSubmitting,
-					onActivated = option.onActivated
-				}) else nil
-			})
+			Item = if FFlagBuildExperienceAnswerFormModule then ReactModule.createElement(View, {
+				LayoutOrder = 1,
+				tag = "size-full-0 auto-y padding-x-large"
+			}, Element) else Element,
+			Divider = if FFlagBuildExperienceAnswerFormModule then ReactModule.createElement(Divider, {
+				LayoutOrder = 2,
+				testId = `AnswerForm.OptionDivider.{option.id}`
+			}) else nil
 		})
 	end
-	Elements.Custom = if Frame.isCustom then ReactModule.createElement(FoundationModule.TextInput, {
+	local Element = ReactModule.createElement(Composer, {
 		label = "",
 		placeholder = "",
 		testId = "AnswerForm.CustomInput",
-		LayoutOrder = #Frame.options + 1,
+		LayoutOrder = if FFlagBuildExperienceAnswerFormModule then 1 else #Frame.options + 1,
 		text = Frame.customText,
 		onChanged = Frame.onCustomChanged,
 		isDisabled = IsSubmitting,
 		width = UDim.new(1, 0),
-		size = FoundationModule.Enums.InputSize.Large,
+		maxLines = if FFlagBuildExperienceAnswerFormModule then 5 else nil,
+		size = if FFlagBuildExperienceAnswerFormModule then FoundationModule.Enums.InputSize.Medium else FoundationModule.Enums.InputSize.Large,
 		variant = FoundationModule.Enums.InputVariant.Utility
-	}) else ReactModule.createElement(View, {
+	})
+	Elements.Custom = if Frame.isCustom then if FFlagBuildExperienceAnswerFormModule then ReactModule.createElement(View, {
+		tag = "size-full-0 auto-y",
+		testId = "AnswerForm.CustomRow",
+		LayoutOrder = #Frame.options + 1,
+		padding = {
+			top = UDim.new(0, UseTokensResult.Size.Size_150),
+			bottom = UDim.new(0, UseTokensResult.Size.Size_150)
+		}
+	}, { Input = Element }) else Element else ReactModule.createElement(View, {
 		tag = "size-full-0 auto-y padding-large",
 		testId = "AnswerForm.Custom",
 		LayoutOrder = #Frame.options + 1,
@@ -55,8 +80,12 @@ return function(Frame)
 		isDisabled = IsSubmitting
 	}, {
 		Label = ReactModule.createElement(Text, {
-			tag = "size-full-0 auto-y text-title-small text-wrap text-align-x-left content-emphasis",
-			Text = Frame.customLabel
+			Text = Frame.customLabel,
+			tag = {
+				["size-full-0 auto-y text-wrap text-align-x-left"] = true,
+				["text-body-medium content-default"] = FFlagBuildExperienceAnswerFormModule,
+				["text-title-small content-emphasis"] = not FFlagBuildExperienceAnswerFormModule
+			}
 		})
 	})
 	
@@ -93,8 +122,11 @@ return function(Frame)
 		}, {
 			Options = ReactModule.createElement(List.Root, {
 				LayoutOrder = 1,
-				hasDivider = { hasDivider = true, isInset = false },
-				isContained = { isContained = false, hasMargin = true }
+				hasDivider = not FFlagBuildExperienceAnswerFormModule and { hasDivider = true, isInset = false },
+				isContained = {
+					isContained = false,
+					hasMargin = not FFlagBuildExperienceAnswerFormModule
+				}
 			}, Elements)
 		}),
 		Error = if Frame.errorText == nil then nil else ReactModule.createElement(Text, {

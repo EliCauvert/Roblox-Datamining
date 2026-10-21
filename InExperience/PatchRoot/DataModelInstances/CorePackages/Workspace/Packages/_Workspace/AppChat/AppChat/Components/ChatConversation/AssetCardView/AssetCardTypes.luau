@@ -1,5 +1,7 @@
 ﻿local AppChat = script:FindFirstAncestor("AppChat")
-local _ = require(AppChat.Parent.React)
+local Parent = AppChat.Parent
+local _ = require(Parent.React)
+local _ = require(Parent.Foundation).Enums.ButtonVariant
 local _ = require(AppChat.Components.ChatConversation.Grouping.MessageGroupShape)
 
 return table.freeze({

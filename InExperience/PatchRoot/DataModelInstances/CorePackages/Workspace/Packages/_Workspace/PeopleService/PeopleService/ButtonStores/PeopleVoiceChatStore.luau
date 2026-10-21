@@ -28,7 +28,7 @@ local VOICEVOLUME = ConstantsModule1.VOICE_CHAT.VOICE_VOLUME
 local PlayerMuteStatusIcons = Default.PlayerMuteStatusIcons
 
 return ((function()
-	-- upvalues: SignalsModule (copy), FFlagVoiceVolumeControlsPerUserPlayerListButton (copy), FFlagVoiceVolumeControlsPerUserPlayerGridMenu (copy), RunService (copy), FRAMEBUFFER (copy), PlayerMuteStatusIcons (copy), Default (copy), VoiceStore (copy), Players (copy), VOICESTATE (copy), FFlagVoiceChatVolumePerUserMuteVolumeSync (copy), ConstantsModule (copy), VOICEVOLUME (copy), LuaFlagVoiceChatDisableSubscribeRetryForMultistream (copy), VoiceChatMultistreamSubscriptionsEnabledEngineFeature (copy), ICONS (copy), GetFFlagNewPeoplePageIconsFunction (copy), GetFFlagAddPeoplePageCardLayoutFunction (copy), VoiceVolumeControlsEligibility (copy), VoiceChatService (copy), GetFFlagVoiceChatUILoggingModule (copy), NewResult (copy), FFlagVoiceVolumeControlsEnablePerUserVolumeInteractionTelemetry (copy)
+	-- upvalues: SignalsModule (copy), FFlagVoiceVolumeControlsPerUserPlayerListButton (copy), FFlagVoiceVolumeControlsPerUserPlayerGridMenu (copy), RunService (copy), FRAMEBUFFER (copy), PlayerMuteStatusIcons (copy), Default (copy), VoiceStore (copy), Players (copy), VOICESTATE (copy), FFlagVoiceChatVolumePerUserMuteVolumeSync (copy), ConstantsModule (copy), VOICEVOLUME (copy), LuaFlagVoiceChatDisableSubscribeRetryForMultistream (copy), VoiceChatMultistreamSubscriptionsEnabledEngineFeature (copy), ICONS (copy), GetFFlagNewPeoplePageIconsFunction (copy), GetFFlagAddPeoplePageCardLayoutFunction (copy), VoiceVolumeControlsEligibility (copy), VoiceChatService (copy), GetFFlagVoiceChatUILoggingModule (copy), NewResult (copy), FFlagVoiceVolumeControlsEnablePerUserVolumeInteractionTelemetry (copy), Parent (copy)
 	local Signal, Signal2 = SignalsModule.createSignal(false)
 	local Signal1, Signal2_1 = SignalsModule.createSignal(false)
 	local Signal3, Signal2_2 = SignalsModule.createSignal(nil)
@@ -291,7 +291,7 @@ return ((function()
 		return VOICEVOLUME.DEFAULT
 	end
 	
-	local function subscribePlayerVoiceVolume(UserId, Callback)
+	local function subscribePlayerVoiceVolume(UserId, Callback1)
 		-- upvalues: FFlagVoiceVolumeControlsPerUserPlayerListButton (upval), FFlagVoiceVolumeControlsPerUserPlayerGridMenu (upval), Players (upval), FFlagVoiceChatVolumePerUserMuteVolumeSync (upval), VoiceStore (upval), VOICESTATE (upval), VOICEVOLUME (upval), SignalsModule (upval)
 		if not FFlagVoiceVolumeControlsPerUserPlayerListButton and not FFlagVoiceVolumeControlsPerUserPlayerGridMenu then
 			return function() end
@@ -302,7 +302,7 @@ return ((function()
 			return function() end
 		end
 		local Connection = Player:GetPropertyChangedSignal("VoiceChatVolume"):Connect(function()
-			-- upvalues: Callback (copy), UserId (copy), FFlagVoiceVolumeControlsPerUserPlayerListButton (upval), FFlagVoiceVolumeControlsPerUserPlayerGridMenu (upval), Players (upval), FFlagVoiceChatVolumePerUserMuteVolumeSync (upval), VoiceStore (upval), VOICESTATE (upval), VOICEVOLUME (upval)
+			-- upvalues: Callback1 (copy), UserId (copy), FFlagVoiceVolumeControlsPerUserPlayerListButton (upval), FFlagVoiceVolumeControlsPerUserPlayerGridMenu (upval), Players (upval), FFlagVoiceChatVolumePerUserMuteVolumeSync (upval), VoiceStore (upval), VOICESTATE (upval), VOICEVOLUME (upval)
 			local DEFAULT = nil
 			repeat
 				if FFlagVoiceVolumeControlsPerUserPlayerListButton or FFlagVoiceVolumeControlsPerUserPlayerGridMenu then
@@ -315,17 +315,17 @@ return ((function()
 				end
 				DEFAULT = VOICEVOLUME.DEFAULT
 			until true
-			Callback(DEFAULT)
+			Callback1(DEFAULT)
 		end)
-		local Callback1 = nil
+		local Callback = nil
 		
 		if FFlagVoiceChatVolumePerUserMuteVolumeSync then
 			local Computed = SignalsModule.createComputed(function(p4): boolean
 				-- upvalues: UserId (copy), VoiceStore (upval), VOICESTATE (upval)
 				return if UserId then VoiceStore.getOrCreateVoiceState(UserId)(p4) == VOICESTATE.LOCAL_MUTED else false
 			end)
-			Callback1 = SignalsModule.createEffect(function(p4)
-				-- upvalues: Computed (copy), Callback (copy), UserId (copy), FFlagVoiceVolumeControlsPerUserPlayerListButton (upval), FFlagVoiceVolumeControlsPerUserPlayerGridMenu (upval), Players (upval), FFlagVoiceChatVolumePerUserMuteVolumeSync (upval), VoiceStore (upval), VOICESTATE (upval), VOICEVOLUME (upval)
+			Callback = SignalsModule.createEffect(function(p4)
+				-- upvalues: Computed (copy), Callback1 (copy), UserId (copy), FFlagVoiceVolumeControlsPerUserPlayerListButton (upval), FFlagVoiceVolumeControlsPerUserPlayerGridMenu (upval), Players (upval), FFlagVoiceChatVolumePerUserMuteVolumeSync (upval), VoiceStore (upval), VOICESTATE (upval), VOICEVOLUME (upval)
 				Computed(p4)
 				local DEFAULT = nil
 				repeat
@@ -339,15 +339,15 @@ return ((function()
 					end
 					DEFAULT = VOICEVOLUME.DEFAULT
 				until true
-				Callback(DEFAULT)
+				Callback1(DEFAULT)
 			end)
 		end
 		return function()
-			-- upvalues: Connection (copy), Callback1 (ref)
+			-- upvalues: Connection (copy), Callback (ref)
 			Connection:Disconnect()
 			
-			if Callback1 then
-				Callback1()
+			if Callback then
+				Callback()
 			end
 		end
 	end
@@ -586,6 +586,9 @@ return ((function()
 		end
 	end)()
 	
+	if FFlagVoiceVolumeControlsEnablePerUserVolumeInteractionTelemetry then
+		require(Parent.Analytics.PerUserVoiceVolumeSessionLifecycle).ensureStarted()
+	end
 	return {
 		voiceChatServiceConnected = Signal,
 		voiceUIVisible = Signal1,

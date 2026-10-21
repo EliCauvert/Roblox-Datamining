@@ -3352,12 +3352,14 @@ Feature.Friends.Label.FollowsYou,正在追蹤您
 Feature.Friends.Label.Frequent,密切玩伴
 Feature.Friends.Label.Friend,
 Feature.Friends.Label.FriendInvite,已邀請您成為 Roblox 好友
+Feature.Friends.Label.FriendOwns,1 位好友擁有
 Feature.Friends.Label.FriendRecentlyPlayed,<b>1 位好友</b>最近玩過
 Feature.Friends.Label.FriendRequest,
 Feature.Friends.Label.Friends,
 Feature.Friends.Label.FriendsAreNowConnections,好友現在稱為「聯絡對象」！
 Feature.Friends.Label.FriendsHintBold,開始遊玩！
 Feature.Friends.Label.FriendsHintPlain,先從新增好友開始。
+Feature.Friends.Label.FriendsOwn,{numberOfConnections} 位好友擁有
 Feature.Friends.Label.FriendsPlayed,{numberOfConnections} 個人已玩過
 Feature.Friends.Label.FriendsRecentlyPlayed,<b>{numberOfConnections} 位好友</b>最近玩過
 Feature.Friends.Label.InGame,

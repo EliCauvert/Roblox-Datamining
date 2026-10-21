@@ -3,7 +3,6 @@ local Parent = Moments.Parent
 local Default = require(Parent.ExternalContentSharingProtocol).ExternalContentSharingProtocol.default
 local Analytics = require(Parent.MomentsCommon).Analytics
 local EventNames = Analytics.EventNames
-local FFlagMomentsPassFeedItemIdToBackendApis = require(Parent.SharedFlags).FFlagMomentsPassFeedItemIdToBackendApis
 local MakeFeedActionFieldsModule = require(Moments.Analytics.makeFeedActionFields)
 local FetchShareLinkModule = require(script.Parent.fetchShareLink)
 local GetShareCountsStoreModule = require(Moments.Stores.GetShareCountsStore)
@@ -11,24 +10,24 @@ local GetToastStoreModule = require(Moments.Stores.GetToastStore)
 local ReadAppPolicyModule = require(script.Parent.readAppPolicy)
 
 return function(p1)
-	-- upvalues: GetToastStoreModule (copy), FFlagMomentsPassFeedItemIdToBackendApis (copy), FetchShareLinkModule (copy), ReadAppPolicyModule (copy), Default (copy), GetShareCountsStoreModule (copy), MakeFeedActionFieldsModule (copy), Analytics (copy), EventNames (copy)
+	-- upvalues: GetToastStoreModule (copy), FetchShareLinkModule (copy), ReadAppPolicyModule (copy), Default (copy), GetShareCountsStoreModule (copy), MakeFeedActionFieldsModule (copy), Analytics (copy), EventNames (copy)
 	local MomentId = p1.momentId
 	local Strings = p1.strings
 	task.spawn(function()
-		-- upvalues: GetToastStoreModule (upval), Strings (copy), FFlagMomentsPassFeedItemIdToBackendApis (upval), p1 (copy), FetchShareLinkModule (upval), MomentId (copy), ReadAppPolicyModule (upval), Default (upval), GetShareCountsStoreModule (upval), MakeFeedActionFieldsModule (upval), Analytics (upval), EventNames (upval)
+		-- upvalues: GetToastStoreModule (upval), Strings (copy), p1 (copy), FetchShareLinkModule (upval), MomentId (copy), ReadAppPolicyModule (upval), Default (upval), GetShareCountsStoreModule (upval), MakeFeedActionFieldsModule (upval), Analytics (upval), EventNames (upval)
 		local function _()
 			-- upvalues: GetToastStoreModule (upval), Strings (upval)
 			GetToastStoreModule(false).triggerToast({ text = "", title = Strings.linkCopyFailed })
 		end
 		
-		if FFlagMomentsPassFeedItemIdToBackendApis and (p1.feedItemId == nil or p1.feedItemId == "") then
+		if p1.feedItemId == nil or p1.feedItemId == "" then
 			GetToastStoreModule(false).triggerToast({ text = "", title = Strings.linkCopyFailed })
 			
 			return
 		end
 		local Success, Result = pcall(FetchShareLinkModule, {
 			momentId = MomentId,
-			feedItemId = if FFlagMomentsPassFeedItemIdToBackendApis then p1.feedItemId else nil,
+			feedItemId = p1.feedItemId,
 			description = p1.description,
 			title = Strings.linkPreviewTitle
 		})

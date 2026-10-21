@@ -30,14 +30,13 @@ local SessionManager = MomentsCommonModule.Analytics.SessionManager
 local FunnelEventNames = MomentsCommonModule.Analytics.FunnelEventNames
 local GetFFlagEnableMomentTextGenerationFunction = MomentsCommonModule.Flags.GetFFlagEnableMomentTextGeneration
 local GetFFlagMomentsCreationSaveDraftFunction = MomentsCommonModule.Flags.GetFFlagMomentsCreationSaveDraft
-local FFlagMomentsContentStatsTelemetry = MomentsCommonModule.Flags.FFlagMomentsContentStatsTelemetry
 local FFlagMomentTextGenerationFilteredSignal = MomentsCommonModule.Flags.FFlagMomentTextGenerationFilteredSignal
 local FFlagMomentsTextOverlayV2Redesign = MomentsCommonModule.Flags.FFlagMomentsTextOverlayV2Redesign
 local CreateComputedFunction = SignalsModule.createComputed
 local CreateSignalFunction = SignalsModule.createSignal
 
 return function(p1)
-	-- upvalues: DefaultCreationToolsModule (copy), CreationToolRegistryModule (copy), SessionManager (copy), FunnelEventNames (copy), CreateSignalFunction (copy), CreateComputedFunction (copy), GetFFlagEnableMomentTextGenerationFunction (copy), GetFFlagMomentsTTSAudioOverlayModule (copy), CreateCapturePreviewControllerModule (copy), CreateTTSAudioManagerModule (copy), CryoModule (copy), MakeCreationEventFieldsModule (copy), CreationFlowStateModule (copy), GetFFlagMomentsCreationSaveDraftFunction (copy), MomentsDraftStorageModule (copy), FireAnalyticsEventModule (copy), EventNames (copy), MomentsCommonModule (copy), FFlagMomentsContentStatsTelemetry (copy), CreateEditSessionModule (copy), GetFFlagMomentsTTSStartTimePositioningModule (copy), ClampTtsStartTimeModule (copy), FFlagMomentTextGenerationFilteredSignal (copy), DialogTypeModule (copy), FFlagMomentsTTSDraftRestoreModule (copy), FFlagMomentsCommentsCreatorControlModule (copy), FFlagMomentsTTSPublishMetadataEditsModule (copy), FFlagMomentsTTSVoiceSelectorModule (copy), FFlagMomentsTextOverlayV2Redesign (copy), FFlagMomentsTextOverlayOnPhotosModule (copy), MakeDefaultTextOverlayEditModule (copy), GetFFlagMomentsGenerateTextInTextOverlayModule (copy)
+	-- upvalues: DefaultCreationToolsModule (copy), CreationToolRegistryModule (copy), SessionManager (copy), FunnelEventNames (copy), CreateSignalFunction (copy), CreateComputedFunction (copy), GetFFlagEnableMomentTextGenerationFunction (copy), GetFFlagMomentsTTSAudioOverlayModule (copy), CreateCapturePreviewControllerModule (copy), CreateTTSAudioManagerModule (copy), CryoModule (copy), MakeCreationEventFieldsModule (copy), CreationFlowStateModule (copy), GetFFlagMomentsCreationSaveDraftFunction (copy), MomentsDraftStorageModule (copy), FireAnalyticsEventModule (copy), EventNames (copy), MomentsCommonModule (copy), CreateEditSessionModule (copy), GetFFlagMomentsTTSStartTimePositioningModule (copy), ClampTtsStartTimeModule (copy), FFlagMomentTextGenerationFilteredSignal (copy), DialogTypeModule (copy), FFlagMomentsTTSDraftRestoreModule (copy), FFlagMomentsCommentsCreatorControlModule (copy), FFlagMomentsTTSPublishMetadataEditsModule (copy), FFlagMomentsTTSVoiceSelectorModule (copy), FFlagMomentsTextOverlayV2Redesign (copy), FFlagMomentsTextOverlayOnPhotosModule (copy), MakeDefaultTextOverlayEditModule (copy), GetFFlagMomentsGenerateTextInTextOverlayModule (copy)
 	local Store = p1.store
 	local Host = p1.host or {}
 	local List = DefaultCreationToolsModule
@@ -342,13 +341,12 @@ return function(p1)
 		getComposedEdits = Computed,
 		getEffectiveTTS = Computed5,
 		beginTool = function(p5)
-			-- upvalues: Registry (copy), FFlagMomentsContentStatsTelemetry (upval), MomentsCommonModule (upval), FireAnalyticsEventModule (upval), withCreationSession (copy), MakeCreationEventFieldsModule (upval), v1 (ref), CreateEditSessionModule (upval), Store (copy), SetActiveSessionFunction (ref)
+			-- upvalues: Registry (copy), MomentsCommonModule (upval), FireAnalyticsEventModule (upval), withCreationSession (copy), MakeCreationEventFieldsModule (upval), v1 (ref), CreateEditSessionModule (upval), Store (copy), SetActiveSessionFunction (ref)
 			local GetResult = Registry.get(p5)
 			
 			if GetResult == nil then return end
-			if FFlagMomentsContentStatsTelemetry then
-				MomentsCommonModule.Analytics.reportMomentsEditToolOpened(GetResult.kind)
-			end
+			MomentsCommonModule.Analytics.reportMomentsEditToolOpened(GetResult.kind)
+			
 			if GetResult.cta.analyticsEvent ~= nil then
 				FireAnalyticsEventModule(GetResult.cta.analyticsEvent, withCreationSession(MakeCreationEventFieldsModule.makeToolField(GetResult)))
 			end
@@ -429,7 +427,7 @@ return function(p1)
 			end
 		end,
 		discardActiveTool = function()
-			-- upvalues: GetActiveSessionFunction (ref), Computed2 (copy), TtsAudio (ref), Computed (copy), FireAnalyticsEventModule (upval), withCreationSession (copy), MakeCreationEventFieldsModule (upval), FFlagMomentsContentStatsTelemetry (upval), MomentsCommonModule (upval), SetActiveSessionFunction (ref), Store (copy), CreationFlowStateModule (upval)
+			-- upvalues: GetActiveSessionFunction (ref), Computed2 (copy), TtsAudio (ref), Computed (copy), FireAnalyticsEventModule (upval), withCreationSession (copy), MakeCreationEventFieldsModule (upval), MomentsCommonModule (upval), SetActiveSessionFunction (ref), Store (copy), CreationFlowStateModule (upval)
 			local ActiveSession = GetActiveSessionFunction(false)
 			local ComputedResult = Computed2(false)
 			
@@ -448,7 +446,7 @@ return function(p1)
 			if ComputedResult ~= nil and ComputedResult.cta.cancelAnalyticsEvent ~= nil then
 				FireAnalyticsEventModule(ComputedResult.cta.cancelAnalyticsEvent, withCreationSession(MakeCreationEventFieldsModule.makeToolField(ComputedResult)))
 			end
-			if FFlagMomentsContentStatsTelemetry and ComputedResult ~= nil then
+			if ComputedResult ~= nil then
 				MomentsCommonModule.Analytics.reportMomentsEditToolAbandoned(ComputedResult.kind)
 			end
 			SetActiveSessionFunction(nil)
@@ -478,7 +476,7 @@ return function(p1)
 		getSelectedVoiceId = Signal3,
 		setSelectedVoiceId = Signal2_2,
 		publish = function()
-			-- upvalues: Store (copy), Host (copy), Signal2 (copy), DialogTypeModule (upval), dismissModal (copy), p1 (copy), v2 (ref), FFlagMomentsTTSDraftRestoreModule (upval), FFlagMomentTextGenerationFilteredSignal (upval), emitGeneratedTextFeedback (copy), SessionManager (upval), FunnelEventNames (upval), Preview (copy), FFlagMomentsCommentsCreatorControlModule (upval), Computed (copy), CryoModule (upval), MakeCreationEventFieldsModule (upval), EventNames (upval), GetFFlagEnableMomentTextGenerationFunction (upval), GetFFlagMomentsTTSAudioOverlayModule (upval), FFlagMomentsTTSPublishMetadataEditsModule (upval), FFlagMomentsTTSVoiceSelectorModule (upval), GetFFlagMomentsTTSStartTimePositioningModule (upval), TtsAudio (ref), FFlagMomentsTextOverlayV2Redesign (upval), FireAnalyticsEventModule (upval), MomentsCommonModule (upval), FFlagMomentsContentStatsTelemetry (upval), dismiss (copy)
+			-- upvalues: Store (copy), Host (copy), Signal2 (copy), DialogTypeModule (upval), dismissModal (copy), p1 (copy), v2 (ref), FFlagMomentsTTSDraftRestoreModule (upval), FFlagMomentTextGenerationFilteredSignal (upval), emitGeneratedTextFeedback (copy), SessionManager (upval), FunnelEventNames (upval), Preview (copy), FFlagMomentsCommentsCreatorControlModule (upval), Computed (copy), CryoModule (upval), MakeCreationEventFieldsModule (upval), EventNames (upval), GetFFlagEnableMomentTextGenerationFunction (upval), GetFFlagMomentsTTSAudioOverlayModule (upval), FFlagMomentsTTSPublishMetadataEditsModule (upval), FFlagMomentsTTSVoiceSelectorModule (upval), GetFFlagMomentsTTSStartTimePositioningModule (upval), TtsAudio (ref), FFlagMomentsTextOverlayV2Redesign (upval), FireAnalyticsEventModule (upval), MomentsCommonModule (upval), dismiss (copy)
 			local Description = Store.getDescription(false)
 			
 			if Host.isTextFiltered ~= nil and Host.isTextFiltered(Description) then
@@ -568,42 +566,39 @@ return function(p1)
 			end
 			FireAnalyticsEventModule(EventNames.MomentsEditingFlowPublished, JoinResult)
 			MomentsCommonModule.Analytics.reportMomentsCreationStep("published")
+			local Analytics = MomentsCommonModule.Analytics
+			local ComputedResult = Computed(false)
+			local Count = 0
 			
-			if FFlagMomentsContentStatsTelemetry then
-				local Analytics = MomentsCommonModule.Analytics
-				local ComputedResult = Computed(false)
-				local Count = 0
-				
-				if ComputedResult.music ~= nil then
-					Count += 1
-					Analytics.reportMomentsPublishedWithEdit("music")
-				end
-				if ComputedResult.trim ~= nil then
-					Count += 1
-					Analytics.reportMomentsPublishedWithEdit("trim")
-				end
-				if ComputedResult.textOverlays ~= nil and #ComputedResult.textOverlays > 0 then
-					Count += 1
-					Analytics.reportMomentsPublishedWithEdit("text_overlay")
-				end
-				if ComputedResult.stickerOverlays ~= nil and #ComputedResult.stickerOverlays > 0 then
-					Count += 1
-					Analytics.reportMomentsPublishedWithEdit("sticker")
-				end
-				if Description ~= nil and Description ~= "" then
-					Count += 1
-					Analytics.reportMomentsPublishedWithEdit("description")
-				end
-				if GetFFlagMomentsTTSAudioOverlayModule and ComputedResult.tts ~= nil then
-					Count += 1
-					Analytics.reportMomentsPublishedWithEdit("tts")
-				end
-				Analytics.reportMomentsPublishedEditCount(Count)
-				local SelectedCapture = Store.getSelectedCapture(false)
-				
-				if SelectedCapture ~= nil then
-					Analytics.reportMomentsPublishedByCaptureType(if SelectedCapture.CaptureType == Enum.CaptureType.Video then "video" elseif SelectedCapture.CaptureType == Enum.CaptureType.Screenshot then "screenshot" else "unknown")
-				end
+			if ComputedResult.music ~= nil then
+				Count += 1
+				Analytics.reportMomentsPublishedWithEdit("music")
+			end
+			if ComputedResult.trim ~= nil then
+				Count += 1
+				Analytics.reportMomentsPublishedWithEdit("trim")
+			end
+			if ComputedResult.textOverlays ~= nil and #ComputedResult.textOverlays > 0 then
+				Count += 1
+				Analytics.reportMomentsPublishedWithEdit("text_overlay")
+			end
+			if ComputedResult.stickerOverlays ~= nil and #ComputedResult.stickerOverlays > 0 then
+				Count += 1
+				Analytics.reportMomentsPublishedWithEdit("sticker")
+			end
+			if Description ~= nil and Description ~= "" then
+				Count += 1
+				Analytics.reportMomentsPublishedWithEdit("description")
+			end
+			if GetFFlagMomentsTTSAudioOverlayModule and ComputedResult.tts ~= nil then
+				Count += 1
+				Analytics.reportMomentsPublishedWithEdit("tts")
+			end
+			Analytics.reportMomentsPublishedEditCount(Count)
+			local SelectedCapture = Store.getSelectedCapture(false)
+			
+			if SelectedCapture ~= nil then
+				Analytics.reportMomentsPublishedByCaptureType(if SelectedCapture.CaptureType == Enum.CaptureType.Video then "video" elseif SelectedCapture.CaptureType == Enum.CaptureType.Screenshot then "screenshot" else "unknown")
 			end
 			dismiss()
 		end,
@@ -613,7 +608,7 @@ return function(p1)
 			dismiss()
 		end,
 		generateText = function(p5)
-			-- upvalues: GetIsGeneratingFunction (ref), Host (copy), Store (copy), GetFFlagEnableMomentTextGenerationFunction (upval), SetIsGeneratingFunction (ref), SetActiveGenerationFunction (ref), FFlagMomentTextGenerationFilteredSignal (upval), FireAnalyticsEventModule (upval), EventNames (upval), withCreationSession (copy), FFlagMomentsContentStatsTelemetry (upval), MomentsCommonModule (upval), MakeDefaultTextOverlayEditModule (upval), GetFFlagMomentsGenerateTextInTextOverlayModule (upval), GetActiveSessionFunction (ref), Computed2 (copy)
+			-- upvalues: GetIsGeneratingFunction (ref), Host (copy), Store (copy), GetFFlagEnableMomentTextGenerationFunction (upval), SetIsGeneratingFunction (ref), SetActiveGenerationFunction (ref), FFlagMomentTextGenerationFilteredSignal (upval), FireAnalyticsEventModule (upval), EventNames (upval), withCreationSession (copy), MomentsCommonModule (upval), MakeDefaultTextOverlayEditModule (upval), GetFFlagMomentsGenerateTextInTextOverlayModule (upval), GetActiveSessionFunction (ref), Computed2 (copy)
 			if GetIsGeneratingFunction(false) then return end
 			if Host.generateMomentText == nil then return end
 			local SelectedCapture = Store.getSelectedCapture(false)
@@ -638,16 +633,14 @@ return function(p1)
 				SetActiveGenerationFunction({ promise = MomentText, capture = SelectedCapture })
 			end
 			MomentText:andThen(function(Result)
-				-- upvalues: GetFFlagEnableMomentTextGenerationFunction (upval), SetActiveGenerationFunction (upval), FFlagMomentTextGenerationFilteredSignal (upval), FireAnalyticsEventModule (upval), EventNames (upval), withCreationSession (upval), FFlagMomentsContentStatsTelemetry (upval), MomentsCommonModule (upval), Host (upval), SetIsGeneratingFunction (upval), Store (upval), MakeDefaultTextOverlayEditModule (upval), GetFFlagMomentsGenerateTextInTextOverlayModule (upval), GetActiveSessionFunction (upval), Computed2 (upval)
+				-- upvalues: GetFFlagEnableMomentTextGenerationFunction (upval), SetActiveGenerationFunction (upval), FFlagMomentTextGenerationFilteredSignal (upval), FireAnalyticsEventModule (upval), EventNames (upval), withCreationSession (upval), MomentsCommonModule (upval), Host (upval), SetIsGeneratingFunction (upval), Store (upval), MakeDefaultTextOverlayEditModule (upval), GetFFlagMomentsGenerateTextInTextOverlayModule (upval), GetActiveSessionFunction (upval), Computed2 (upval)
 				if GetFFlagEnableMomentTextGenerationFunction() then
 					SetActiveGenerationFunction(nil)
 				end
 				if FFlagMomentTextGenerationFilteredSignal and Result ~= nil and Result.error == "CONTENT_FILTERED" then
 					FireAnalyticsEventModule(EventNames.EditingFlowGenerateTextFiltered, withCreationSession({}))
+					MomentsCommonModule.Analytics.reportMomentsGenerateText("filtered")
 					
-					if FFlagMomentsContentStatsTelemetry then
-						MomentsCommonModule.Analytics.reportMomentsGenerateText("filtered")
-					end
 					if Host.onGenerateTextFiltered ~= nil then
 						Host.onGenerateTextFiltered()
 					end
@@ -656,10 +649,8 @@ return function(p1)
 					return
 				elseif Result == nil or Result.error ~= nil then
 					FireAnalyticsEventModule(EventNames.EditingFlowGenerateTextFailed, withCreationSession({}))
+					MomentsCommonModule.Analytics.reportMomentsGenerateText("failed")
 					
-					if FFlagMomentsContentStatsTelemetry then
-						MomentsCommonModule.Analytics.reportMomentsGenerateText("failed")
-					end
 					if Host.onGenerateTextFailure ~= nil then
 						Host.onGenerateTextFailure()
 					end
@@ -719,25 +710,21 @@ return function(p1)
 						end
 					end
 					FireAnalyticsEventModule(EventNames.EditingFlowGenerateTextSucceeded, withCreationSession({}))
+					MomentsCommonModule.Analytics.reportMomentsGenerateText("succeeded")
 					
-					if FFlagMomentsContentStatsTelemetry then
-						MomentsCommonModule.Analytics.reportMomentsGenerateText("succeeded")
-					end
 					if Host.onGenerateTextSuccess ~= nil then
 						Host.onGenerateTextSuccess()
 					end
 					SetIsGeneratingFunction(false)
 				end
 			end):catch(function()
-				-- upvalues: GetFFlagEnableMomentTextGenerationFunction (upval), SetActiveGenerationFunction (upval), FireAnalyticsEventModule (upval), EventNames (upval), withCreationSession (upval), FFlagMomentsContentStatsTelemetry (upval), MomentsCommonModule (upval), Host (upval), SetIsGeneratingFunction (upval)
+				-- upvalues: GetFFlagEnableMomentTextGenerationFunction (upval), SetActiveGenerationFunction (upval), FireAnalyticsEventModule (upval), EventNames (upval), withCreationSession (upval), MomentsCommonModule (upval), Host (upval), SetIsGeneratingFunction (upval)
 				if GetFFlagEnableMomentTextGenerationFunction() then
 					SetActiveGenerationFunction(nil)
 				end
 				FireAnalyticsEventModule(EventNames.EditingFlowGenerateTextFailed, withCreationSession({}))
+				MomentsCommonModule.Analytics.reportMomentsGenerateText("failed")
 				
-				if FFlagMomentsContentStatsTelemetry then
-					MomentsCommonModule.Analytics.reportMomentsGenerateText("failed")
-				end
 				if Host.onGenerateTextFailure ~= nil then
 					Host.onGenerateTextFailure()
 				end

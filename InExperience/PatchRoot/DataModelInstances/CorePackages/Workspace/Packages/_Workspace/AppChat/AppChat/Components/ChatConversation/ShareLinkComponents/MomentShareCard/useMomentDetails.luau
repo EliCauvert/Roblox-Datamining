@@ -7,15 +7,14 @@ local GetMomentDetailsStoreModule = require(AppChat.Stores.GetMomentDetailsStore
 local MomentDetailsStatusModule = require(script.Parent.MomentDetailsStatus)
 local FFlagAppChatMomentShareCardEdgeCasesModule = require(AppChat.Flags.FFlagAppChatMomentShareCardEdgeCases)
 local MomentStatus = require(Parent.MomentsTypes).Enums.MomentStatus
-local FFlagMomentsPassFeedItemIdToBackendApis = require(Parent.SharedFlags).FFlagMomentsPassFeedItemIdToBackendApis
 local config = { metadata = {} }
 
 return function(p1, p2)
-	-- upvalues: GetMomentDetailsStoreModule (copy), ReactModule (copy), FFlagMomentsPassFeedItemIdToBackendApis (copy), SignalsReactModule (copy), config (copy), DataHydrationModule (copy), MomentDetailsStatusModule (copy), FFlagAppChatMomentShareCardEdgeCasesModule (copy), MomentStatus (copy)
+	-- upvalues: GetMomentDetailsStoreModule (copy), ReactModule (copy), SignalsReactModule (copy), config (copy), DataHydrationModule (copy), MomentDetailsStatusModule (copy), FFlagAppChatMomentShareCardEdgeCasesModule (copy), MomentStatus (copy)
 	local MomentDetailsStoreModule = GetMomentDetailsStoreModule(false)
 	local UseMemoResult = ReactModule.useMemo(function()
-		-- upvalues: FFlagMomentsPassFeedItemIdToBackendApis (upval), MomentDetailsStoreModule (copy), p1 (copy), p2 (copy)
-		return if FFlagMomentsPassFeedItemIdToBackendApis then MomentDetailsStoreModule.getAndFetchMomentDetails(p1, p2) else MomentDetailsStoreModule.getAndFetchMomentDetails(p1)
+		-- upvalues: MomentDetailsStoreModule (copy), p1 (copy), p2 (copy)
+		return MomentDetailsStoreModule.getAndFetchMomentDetails(p1, p2)
 	end, { MomentDetailsStoreModule, p1, p2 })
 	local UseSignalStateResult = SignalsReactModule.useSignalState(UseMemoResult.data)
 	local UseSignalStateResult1 = SignalsReactModule.useSignalState(UseMemoResult.status)

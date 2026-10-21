@@ -1,14 +1,13 @@
 ﻿local MomentsCreation = script:FindFirstAncestor("MomentsCreation")
 local Parent = MomentsCreation.Parent
-local BuilderIconsModule = require(Parent.BuilderIcons)
 local FoundationModule = require(Parent.Foundation)
 local MomentsCommonModule = require(Parent.MomentsCommon)
 local ReactModule = require(Parent.React)
 local SignalsModule = require(Parent.Signals)
 local Button = FoundationModule.Button
-local Icon = FoundationModule.Icon
 local Loading = FoundationModule.Loading
 local View = FoundationModule.View
+local EditorTopNavModule = require(MomentsCreation.Components.EditorTopNav)
 local GradientBackdrop = MomentsCommonModule.Components.GradientBackdrop
 local MusicPreviewItemModule = require(MomentsCreation.Components.MusicPreviewItem)
 local WaveformModule = require(MomentsCreation.Components.Waveform)
@@ -32,7 +31,7 @@ local SegmentSelectorWidth = require(MomentsCreation.Constants).AudioWaveform.Se
 local _UDim2 = UDim2.new(0, 48, 1, 0)
 
 return function(p1)
-	-- upvalues: UseTokensFunction (copy), UseDeviceInsetsFunction (copy), UseCreationFlowStringsModule (copy), UseToggleStateFunction (copy), ReactModule (copy), UseMusicInfoModule (copy), UseEffectFunction (copy), SignalsModule (copy), UseCallbackFunction (copy), FFlagMomentsCreationStartAudioOnLoadModule (copy), UseMusicEditorControllerModule (copy), FFlagMomentsCreationMusicEditorRedesignModule (copy), UseContextFunction (copy), DockedEditorContextModule (copy), UseMemoFunction (copy), UseSignalBindingFunction (copy), View (copy), GradientBackdrop (copy), _UDim2 (copy), SegmentSelectorWidth (copy), WaveformModule (copy), Loading (copy), FoundationModule (copy), MusicPreviewItemModule (copy), Icon (copy), BuilderIconsModule (copy), Button (copy)
+	-- upvalues: UseTokensFunction (copy), UseDeviceInsetsFunction (copy), UseCreationFlowStringsModule (copy), UseToggleStateFunction (copy), ReactModule (copy), UseMusicInfoModule (copy), UseEffectFunction (copy), SignalsModule (copy), UseCallbackFunction (copy), FFlagMomentsCreationStartAudioOnLoadModule (copy), UseMusicEditorControllerModule (copy), FFlagMomentsCreationMusicEditorRedesignModule (copy), UseContextFunction (copy), DockedEditorContextModule (copy), UseMemoFunction (copy), UseSignalBindingFunction (copy), View (copy), GradientBackdrop (copy), _UDim2 (copy), SegmentSelectorWidth (copy), WaveformModule (copy), Loading (copy), FoundationModule (copy), MusicPreviewItemModule (copy), EditorTopNavModule (copy), Button (copy)
 	local Playback = p1.controller.preview.playback
 	local UseTokensResult = UseTokensFunction()
 	local UseDeviceInsetsResult = UseDeviceInsetsFunction()
@@ -190,47 +189,11 @@ return function(p1)
 	})
 	
 	return if FFlagMomentsCreationMusicEditorRedesignModule then ReactModule.createElement(View, { tag = "size-full", ZIndex = 5 }, {
-		TopScrim = ReactModule.createElement(GradientBackdrop, {
-			rotation = 90,
-			startingTransparency = 0.4,
-			zIndex = 1,
-			color3 = Color3.new(0, 0, 0),
-			cornerRadius = UDim.new(0, UseTokensResult.Radius.Large),
-			size = UDim2.new(1, 0, 0, UseDeviceInsetsResult.top + UseTokensResult.Size.Size_2000 + UseTokensResult.Size.Size_1600)
-		}),
-		Nav = ReactModule.createElement(View, {
-			tag = "row flex-x-between align-y-center position-top-center anchor-top-center size-full-0 auto-y",
-			ZIndex = 2,
-			padding = {
-				top = UDim.new(0, UseDeviceInsetsResult.top + UseTokensResult.Padding.Medium),
-				left = UDim.new(0, UseDeviceInsetsResult.left + UseTokensResult.Padding.Medium),
-				right = UDim.new(0, UseDeviceInsetsResult.right + UseTokensResult.Padding.Medium)
-			}
-		}, {
-			BackButton = ReactModule.createElement(View, {
-				LayoutOrder = 1,
-				tag = "auto-xy padding-small radius-circle",
-				testId = "--moments-creation-view-musiceditor-back",
-				onActivated = p1.onBack,
-				stateLayer = {
-					affordance = FoundationModule.Enums.StateLayerAffordance.Background
-				}
-			}, {
-				BackIcon = ReactModule.createElement(Icon, {
-					name = BuilderIconsModule.Icon.ChevronLargeLeft,
-					size = FoundationModule.Enums.IconSize.Large,
-					style = UseTokensResult.Color.Content.Emphasis
-				})
-			}),
-			SaveButton = ReactModule.createElement(Button, {
-				LayoutOrder = 2,
-				testId = "--moments-creation-button-musiceditor-save",
-				fillBehavior = FoundationModule.Enums.FillBehavior.Fit,
-				text = UseCreationFlowStringsModuleResult.GeneralCtaSave,
-				variant = FoundationModule.Enums.ButtonVariant.Text,
-				onActivated = p1.onDone,
-				size = FoundationModule.Enums.InputSize.Medium
-			})
+		TopNav = ReactModule.createElement(EditorTopNavModule, {
+			backTestId = "--moments-creation-view-musiceditor-back",
+			saveTestId = "--moments-creation-button-musiceditor-save",
+			onBack = p1.onBack,
+			onSave = p1.onDone
 		}),
 		DockedPanel = ReactModule.createElement(View, {
 			tag = "col align-x-center align-y-top gap-large position-bottom-center anchor-bottom-center size-full-0 auto-y radius-large bg-surface-0",

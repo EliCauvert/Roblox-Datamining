@@ -30,7 +30,7 @@ local function createAuditContent(AuditContent)
 end
 
 return function(Form)
-	-- upvalues: AccountUpgradeFieldModule (copy), ReactModule (copy), View (copy), AccountUpgradeFieldsModule (copy), AccountUpgradeDialogActionsModule (copy), ButtonVariant (copy), AccountUpgradeFieldErrorModule (copy), MarketingConsentCheckboxModule (copy), noop (copy), InputSize (copy), LegalTextWithLinks (copy), createAuditContent (copy), AccountUpgradeDialogModule (copy), BirthdayPickerSheetModule (copy), FFlagAccountUpgradeOAuthTelemetryModule (copy), CloseConfirmationDialogModule (copy)
+	-- upvalues: AccountUpgradeFieldModule (copy), ReactModule (copy), View (copy), AccountUpgradeFieldsModule (copy), MarketingConsentCheckboxModule (copy), noop (copy), InputSize (copy), AccountUpgradeDialogActionsModule (copy), ButtonVariant (copy), AccountUpgradeFieldErrorModule (copy), LegalTextWithLinks (copy), createAuditContent (copy), AccountUpgradeDialogModule (copy), BirthdayPickerSheetModule (copy), FFlagAccountUpgradeOAuthTelemetryModule (copy), CloseConfirmationDialogModule (copy)
 	local NoIsSubmitting: boolean = not Form.isSaveEnabled and not Form.isSubmitting
 	local HasFieldState = Form.fieldStates[AccountUpgradeFieldModule.Birthday] ~= nil
 	local OnCloseFunction = Form.onClose
@@ -65,40 +65,45 @@ return function(Form)
 				}, {
 					Fields = ReactModule.createElement(AccountUpgradeFieldsModule, { LayoutOrder = 1, form = Form }),
 					Actions = ReactModule.createElement(View, {
-						tag = "col gap-small size-full-0 auto-y",
+						tag = "col gap-large size-full-0 auto-y",
 						LayoutOrder = 2
 					}, {
-						Buttons = ReactModule.createElement(AccountUpgradeDialogActionsModule, {
-							LayoutOrder = 1,
-							buttons = {
-								{
-									text = Form.saveText,
-									variant = if NoIsSubmitting then ButtonVariant.Standard else ButtonVariant.Emphasis,
-									onActivated = Form.onSaveActivated,
-									isDisabled = NoIsSubmitting,
-									isLoading = Form.isSubmitting
-								}
-							}
-						}),
-						Error = ReactModule.createElement(AccountUpgradeFieldErrorModule, {
-							LayoutOrder = 2,
-							testId = "AccountUpgradeSubmitError",
-							text = Form.submitError
-						}),
 						MarketingConsent = if Form.marketingConsentText == nil then nil else ReactModule.createElement(MarketingConsentCheckboxModule, {
-							LayoutOrder = 3,
+							LayoutOrder = 1,
 							text = Form.marketingConsentText,
 							isChecked = Form.isMarketingConsentChecked == true,
 							isDisabled = Form.isSubmitting or Form.isMarketingConsentDisabled == true,
 							onToggled = Form.onMarketingConsentToggled or noop,
-							size = InputSize.Medium
+							size = InputSize.Small
 						}),
-						LegalText = if Form.legalText then ReactModule.createElement(LegalTextWithLinks, {
-							LayoutOrder = 4,
-							testId = "AccountUpgradeLegalText",
-							text = Form.legalText,
-							onLinkActivated = Form.onLegalLinkActivated
-						}) else nil
+						Submit = ReactModule.createElement(View, {
+							tag = "col gap-small size-full-0 auto-y",
+							LayoutOrder = 2
+						}, {
+							Buttons = ReactModule.createElement(AccountUpgradeDialogActionsModule, {
+								LayoutOrder = 1,
+								buttons = {
+									{
+										text = Form.saveText,
+										variant = if NoIsSubmitting then ButtonVariant.Standard else ButtonVariant.Emphasis,
+										onActivated = Form.onSaveActivated,
+										isDisabled = NoIsSubmitting,
+										isLoading = Form.isSubmitting
+									}
+								}
+							}),
+							Error = ReactModule.createElement(AccountUpgradeFieldErrorModule, {
+								LayoutOrder = 2,
+								testId = "AccountUpgradeSubmitError",
+								text = Form.submitError
+							}),
+							LegalText = if Form.legalText then ReactModule.createElement(LegalTextWithLinks, {
+								LayoutOrder = 3,
+								testId = "AccountUpgradeLegalText",
+								text = Form.legalText,
+								onLinkActivated = Form.onLegalLinkActivated
+							}) else nil
+						})
 					})
 				}),
 				AuditContent = if Form.auditContent then createAuditContent(Form.auditContent) else nil

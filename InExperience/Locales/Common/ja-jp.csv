@@ -3353,12 +3353,14 @@ Feature.Friends.Label.FollowsYou,あなたをフォロー中
 Feature.Friends.Label.Frequent,一緒に遊んだ人
 Feature.Friends.Label.Friend,
 Feature.Friends.Label.FriendInvite,Robloxで友達になるように招待しました。
+Feature.Friends.Label.FriendOwns,友達1人が持っています
 Feature.Friends.Label.FriendRecentlyPlayed,<b>友達1人が</b>最近プレイしました
 Feature.Friends.Label.FriendRequest,
 Feature.Friends.Label.Friends,
 Feature.Friends.Label.FriendsAreNowConnections,「友達」が「つながり」に変わりました！
 Feature.Friends.Label.FriendsHintBold,プレイしよう！
 Feature.Friends.Label.FriendsHintPlain,まずは友達を追加しましょう。
+Feature.Friends.Label.FriendsOwn,{numberOfConnections}人の友達が持っています
 Feature.Friends.Label.FriendsPlayed,{numberOfConnections}人がプレイ済み
 Feature.Friends.Label.FriendsRecentlyPlayed,<b>{numberOfConnections}人の友達</b>が最近プレイしました
 Feature.Friends.Label.InGame,

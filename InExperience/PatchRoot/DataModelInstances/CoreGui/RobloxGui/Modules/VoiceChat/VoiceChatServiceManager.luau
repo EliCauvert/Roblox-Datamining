@@ -67,6 +67,7 @@ local GetFFlagEnableInExpPhoneVoiceUpsellEntrypointsFunction = require(CorePacka
 local GetFFlagShowDevicePermissionsModalFunction = require(CorePackages.Workspace.Packages.SharedFlags).GetFFlagShowDevicePermissionsModal
 local FFlagEnableRetryForLinkingProtocolFetch = require(CorePackages.Workspace.Packages.SharedFlags).FFlagEnableRetryForLinkingProtocolFetch
 local ShowJoinVoiceWhenDisconnectedV3 = game:DefineFastFlag("ShowJoinVoiceWhenDisconnectedV3", false)
+local EnableVoiceRewarmReArm = game:DefineFastFlag("EnableVoiceRewarmReArm", false)
 local FFlagVoiceVolumeControlsEnableVoiceChatVolumeSliderModule = require(RobloxGui.Modules.Settings.Flags.FFlagVoiceVolumeControlsEnableVoiceChatVolumeSlider)
 local FFlagVoiceVolumeControlsEnableNotAudibleVoiceChatVolumeToastModule = require(script.Parent.Flags.FFlagVoiceVolumeControlsEnableNotAudibleVoiceChatVolumeToast)
 local FFlagVoiceRewarmTelemetry = require(CorePackages.Workspace.Packages.SharedFlags).FFlagVoiceRewarmTelemetry
@@ -93,7 +94,6 @@ local SeamlessVoiceStatusModule = require(RobloxGui.Modules.Settings.Enum.Seamle
 local UniversalAppPolicyModule = require(CorePackages.Workspace.Packages.UniversalAppPolicy)
 local GetFFlagVoiceChatClientRewriteMasterLuaFunction = require(CorePackages.Workspace.Packages.SharedFlags).GetFFlagVoiceChatClientRewriteMasterLua
 local GetFFlagDisconnectToastClientRewriteFunction = require(CorePackages.Workspace.Packages.SharedFlags).GetFFlagDisconnectToastClientRewrite
-local GetFFlagEnableVrVoiceParityFunction = require(CorePackages.Workspace.Packages.SharedFlags).GetFFlagEnableVrVoiceParity
 local Analytics = VoiceChatCoreModule.Analytics
 local HttpService = game:GetService("HttpService")
 local HttpRbxApiService = game:GetService("HttpRbxApiService")
@@ -1061,6 +1061,14 @@ function VoiceChatServiceManager:SetVoiceRewarmCookie(p3)
 	self.coreVoiceManager:SetVoiceRewarmCookie(p3)
 end
 
+function VoiceChatServiceManager:ShouldRewarmUser()
+	return self.coreVoiceManager:ShouldRewarmUser()
+end
+
+function VoiceChatServiceManager:ConsumeVoiceRewarm()
+	self.coreVoiceManager:ConsumeVoiceRewarm()
+end
+
 function VoiceChatServiceManager:SetNewUserFTUXCookieValue(p3)
 	return self.coreVoiceManager:SetNewUserFTUXCookieValue(p3)
 end
@@ -1222,7 +1230,7 @@ function VoiceChatServiceManager:createPromptInstance(OnReadyForSignal, DevicePe
 			for _ = 0, FIntLinkingProtocolFetchRetries do
 				local SpawnedThread = task.spawn(function()
 					-- upvalues: v1 (ref), v2 (ref), Default2 (upval), SettingsRoute (upval)
-					v1, v144 = Default2:supportsSwitchToSettingsApp(SettingsRoute.Microphone):await()
+					v1, v145 = Default2:supportsSwitchToSettingsApp(SettingsRoute.Microphone):await()
 				end)
 				task.wait(FIntLinkingProtocolFetchTimeoutMS / 1000)
 				task.cancel(SpawnedThread)
@@ -1230,7 +1238,7 @@ function VoiceChatServiceManager:createPromptInstance(OnReadyForSignal, DevicePe
 				if v2 ~= nil then break end
 			end
 		else
-			v1, v144 = Default2:supportsSwitchToSettingsApp(SettingsRoute.Microphone):await()
+			v1, v145 = Default2:supportsSwitchToSettingsApp(SettingsRoute.Microphone):await()
 		end
 		self.settingsAppAvailable = v1 and v2
 	end
@@ -1586,7 +1594,7 @@ function VoiceChatServiceManager:GetIcon(p3, p4)
 end
 
 function VoiceChatServiceManager:JoinVoice(p3)
-	-- upvalues: FFlagVoiceRewarmTelemetry (copy), ShowJoinVoiceWhenDisconnectedV3 (copy), NewResult (copy), GuardVoiceInExpUpsellVariant (copy), ConstantsModule (copy), GetFFlagNonVoiceFTUXFunction (copy), AppStorageService (copy), GetFFlagEnableVrVoiceParityFunction (copy), PromiseModule (copy), SeamlessVoiceV2JoinVoiceToast (copy), EnableVerifiedCheckViaOverlay (copy), GetFFlagDisableConsentModalForExistingUsersModule (copy), PromptTypeModule (copy), GetFFlagIntegratePhoneUpsellJoinVoiceFunction (copy), GetFFlagEnableInExpPhoneVoiceUpsellEntrypointsFunction (copy), GetOverlayStoreFunction (copy), OverlayTypes (copy), SocialUpsellType (copy), AnalyticsEnum (copy), SendUserConnectionStatus (copy)
+	-- upvalues: FFlagVoiceRewarmTelemetry (copy), ShowJoinVoiceWhenDisconnectedV3 (copy), NewResult (copy), EnableVoiceRewarmReArm (copy), GuardVoiceInExpUpsellVariant (copy), ConstantsModule (copy), GetFFlagNonVoiceFTUXFunction (copy), AppStorageService (copy), SeamlessVoiceV2JoinVoiceToast (copy), EnableVerifiedCheckViaOverlay (copy), GetFFlagDisableConsentModalForExistingUsersModule (copy), PromptTypeModule (copy), GetFFlagIntegratePhoneUpsellJoinVoiceFunction (copy), GetFFlagEnableInExpPhoneVoiceUpsellEntrypointsFunction (copy), GetOverlayStoreFunction (copy), OverlayTypes (copy), SocialUpsellType (copy), AnalyticsEnum (copy), SendUserConnectionStatus (copy)
 	local JoinVoiceButtonContext = nil
 	local v3: string? = nil
 	
@@ -1596,7 +1604,12 @@ function VoiceChatServiceManager:JoinVoice(p3)
 	end
 	if ShowJoinVoiceWhenDisconnectedV3 then
 		NewResult:debug("Consuming voice re-warm cookie on JoinVoice")
-		self:SetVoiceRewarmCookie("true")
+		
+		if EnableVoiceRewarmReArm then
+			self:ConsumeVoiceRewarm()
+		else
+			self:SetVoiceRewarmCookie("true")
+		end
 	end
 	local AgeVerificationOverlay = self:FetchAgeVerificationOverlay()
 	local ShowVoiceInExperienceUpsellVariant = (if GuardVoiceInExpUpsellVariant then if type(AgeVerificationOverlay) == "table" then AgeVerificationOverlay.showVoiceInExperienceUpsellVariant else nil else AgeVerificationOverlay.showVoiceInExperienceUpsellVariant) or ConstantsModule.IN_EXP_UPSELL_VARIANT.VARIANT3
@@ -1621,11 +1634,7 @@ function VoiceChatServiceManager:JoinVoice(p3)
 		if FFlagVoiceRewarmTelemetry then
 			v3 = "MicPermissionPrompt"
 		end
-		if GetFFlagEnableVrVoiceParityFunction() then
-			self:CheckAndShowPermissionPrompt()
-		else
-			self:CheckAndShowPermissionPrompt():finallyReturn(PromiseModule.reject())
-		end
+		self:CheckAndShowPermissionPrompt()
 	elseif self:UserVoiceEnabled() then
 		if FFlagVoiceRewarmTelemetry then
 			v3 = "FirstJoinSession"
@@ -1726,7 +1735,7 @@ function VoiceChatServiceManager:EligibleForAgeCheckToast()
 end
 
 function VoiceChatServiceManager:ShouldShowJoinVoice()
-	-- upvalues: GetFFlagEnableVoiceUxUpdatesFunction (copy), FFlagVoiceRewarmTelemetry (copy), VoiceChatCoreModule (copy), ShowJoinVoiceWhenDisconnectedV3 (copy), GetFFlagOnlyEnableJoinVoiceInVoiceEnabledUniversesModule (copy), AlwaysSetJoinVoiceButtonContext (copy), GetFFlagIntegratePhoneUpsellJoinVoiceFunction (copy), GetFFlagEnableInExpPhoneVoiceUpsellEntrypointsFunction (copy), ConstantsModule (copy)
+	-- upvalues: GetFFlagEnableVoiceUxUpdatesFunction (copy), FFlagVoiceRewarmTelemetry (copy), VoiceChatCoreModule (copy), ShowJoinVoiceWhenDisconnectedV3 (copy), EnableVoiceRewarmReArm (copy), GetFFlagOnlyEnableJoinVoiceInVoiceEnabledUniversesModule (copy), AlwaysSetJoinVoiceButtonContext (copy), GetFFlagIntegratePhoneUpsellJoinVoiceFunction (copy), GetFFlagEnableInExpPhoneVoiceUpsellEntrypointsFunction (copy), ConstantsModule (copy)
 	if GetFFlagEnableVoiceUxUpdatesFunction() then
 		if FFlagVoiceRewarmTelemetry then
 			if self:EligibleForFaeUpsell() then
@@ -1739,12 +1748,12 @@ function VoiceChatServiceManager:ShouldShowJoinVoice()
 				
 				return true
 			end
-			if ShowJoinVoiceWhenDisconnectedV3 and self:GetVoiceRewarmCookie() == "" and self:GetVoiceConnectCookie() == "false" and self:UserVoiceEnabled() then
+			if ShowJoinVoiceWhenDisconnectedV3 and ((if EnableVoiceRewarmReArm then self:ShouldRewarmUser() else self:GetVoiceRewarmCookie() == "") and self:GetVoiceConnectCookie() == "false" and self:UserVoiceEnabled()) then
 				self.joinVoiceButtonContext = "Rewarm"
 				
 				return true
 			end
-		elseif self:EligibleForFaeUpsell() or self:HasSeamlessVoiceFeature(VoiceChatCoreModule.Constants.SeamlessVoiceFeatures.InitialJoinVoice) and self:GetVoiceConnectCookie() == "" or ShowJoinVoiceWhenDisconnectedV3 and self:GetVoiceRewarmCookie() == "" and self:VoiceChatEnded() then
+		elseif self:EligibleForFaeUpsell() or self:HasSeamlessVoiceFeature(VoiceChatCoreModule.Constants.SeamlessVoiceFeatures.InitialJoinVoice) and self:GetVoiceConnectCookie() == "" or ShowJoinVoiceWhenDisconnectedV3 and ((if EnableVoiceRewarmReArm then self:ShouldRewarmUser() else self:GetVoiceRewarmCookie() == "") and self:VoiceChatEnded()) then
 			return true
 		end
 	elseif GetFFlagOnlyEnableJoinVoiceInVoiceEnabledUniversesModule() then
@@ -2035,7 +2044,4 @@ end
 
 VoiceChatServiceManager.default = VoiceChatServiceManager.new(CoreVoiceManager.default, nil, HttpRbxApiService, PermissionsProtocol.default, BlockingUtilityModule:GetAfterBlockedStatusChangedEvent())
 
-if game:DefineFastFlag("VoiceVolumeControlsEnablePerUserVolumeInteractionTelemetry", false) then
-	require(CorePackages.Workspace.Packages.PeopleService).getService("PerUserVoiceVolumeSessionLifecycle").ensureStarted()
-end
 return VoiceChatServiceManager

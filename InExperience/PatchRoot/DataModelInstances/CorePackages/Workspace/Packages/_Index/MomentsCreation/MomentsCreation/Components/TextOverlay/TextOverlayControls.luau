@@ -19,9 +19,10 @@ local UseCreationFlowStringsModule = require(MomentsCreation.Hooks.useCreationFl
 local _ = require(MomentsCreation.Types.CreationFlowTypes)
 local _ = require(Parent.MomentsTypes)
 local FFlagMomentsTextOverlayV2Redesign = MomentsCommonModule.Flags.FFlagMomentsTextOverlayV2Redesign
+local FFlagMomentsTextOverlayTopNavModule = require(MomentsCreation.Flags.FFlagMomentsTextOverlayTopNav)
 
 return function(p1)
-	-- upvalues: UseDeviceInsetsFunction (copy), UseTokensFunction (copy), UseCreationFlowStringsModule (copy), FFlagMomentsTextOverlayV2Redesign (copy), UseMemoFunction (copy), SignalsModule (copy), ConstantsModule (copy), UseSignalStateFunction (copy), UseCallbackFunction (copy), DashModule (copy), ReactModule (copy), View (copy), Slider (copy), Knob (copy), FoundationModule (copy), Button (copy)
+	-- upvalues: UseDeviceInsetsFunction (copy), UseTokensFunction (copy), UseCreationFlowStringsModule (copy), FFlagMomentsTextOverlayV2Redesign (copy), UseMemoFunction (copy), SignalsModule (copy), ConstantsModule (copy), UseSignalStateFunction (copy), UseCallbackFunction (copy), DashModule (copy), FFlagMomentsTextOverlayTopNavModule (copy), ReactModule (copy), View (copy), Slider (copy), Knob (copy), FoundationModule (copy), Button (copy)
 	local Controller = p1.controller
 	local UseDeviceInsetsResult = UseDeviceInsetsFunction()
 	local UseTokensResult = UseTokensFunction()
@@ -57,8 +58,16 @@ return function(p1)
 			return
 		end
 	end, { Controller })
+	local UseCallbackResult1 = UseCallbackFunction(function()
+		-- upvalues: Controller (copy)
+		Controller.discardActiveTool()
+	end, { Controller })
+	local UseCallbackResult2 = UseCallbackFunction(function()
+		-- upvalues: Controller (copy)
+		Controller.commitActiveTool()
+	end, { Controller })
 	
-	return ReactModule.createElement(View, {
+	return if FFlagMomentsTextOverlayTopNavModule then nil else ReactModule.createElement(View, {
 		tag = "col align-x-center align-y-bottom gap-large position-bottom-center anchor-bottom-center size-full-0 auto-y",
 		LayoutOrder = p1.layoutOrder,
 		padding = {
@@ -87,10 +96,7 @@ return function(p1)
 				fillBehavior = FoundationModule.Enums.FillBehavior.Fit,
 				text = UseCreationFlowStringsModuleResult.GeneralCtaBack,
 				variant = FoundationModule.Enums.ButtonVariant.Text,
-				onActivated = UseCallbackFunction(function()
-					-- upvalues: Controller (copy)
-					Controller.discardActiveTool()
-				end, { Controller }),
+				onActivated = UseCallbackResult1,
 				size = FoundationModule.Enums.InputSize.Medium
 			}),
 			DoneButton = ReactModule.createElement(Button, {
@@ -98,10 +104,7 @@ return function(p1)
 				fillBehavior = FoundationModule.Enums.FillBehavior.Fit,
 				text = UseCreationFlowStringsModuleResult.GeneralCtaDone,
 				variant = FoundationModule.Enums.ButtonVariant.Text,
-				onActivated = UseCallbackFunction(function()
-					-- upvalues: Controller (copy)
-					Controller.commitActiveTool()
-				end, { Controller }),
+				onActivated = UseCallbackResult2,
 				size = FoundationModule.Enums.InputSize.Medium
 			})
 		})

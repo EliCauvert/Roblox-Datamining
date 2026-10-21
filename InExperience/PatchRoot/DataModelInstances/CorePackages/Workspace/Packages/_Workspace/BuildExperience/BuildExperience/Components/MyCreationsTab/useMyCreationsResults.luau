@@ -6,6 +6,7 @@ local FIntMyCreationsSessionListPollingIntervalSecondsModule = require(BuildExpe
 local FFlagBuildExperienceMyCreationsUseUniverseListModule = require(BuildExperience.Flags.FFlagBuildExperienceMyCreationsUseUniverseList)
 local FFlagBuildExperienceMyCreationsFindSessionsByUniverseModule = require(BuildExperience.Flags.FFlagBuildExperienceMyCreationsFindSessionsByUniverse)
 local FFlagBuildWithGroupsModule = require(BuildExperience.Flags.FFlagBuildWithGroups)
+local FFlagBuildExperienceCursorSearchPagesModule = require(BuildExperience.Flags.FFlagBuildExperienceCursorSearchPages)
 local LocalizationModule = require(Parent.Localization)
 local PromiseModule = require(Parent.Promise)
 local ReactModule = require(Parent.React)
@@ -21,6 +22,8 @@ local UniverseSearchModule = require(Parent.DataHydration.UniverseSearch)
 local PrivacyType = UniverseConfigurationModule.PrivacyType
 local ContentMaturityUtilsModule = require(BuildExperience.utils.ContentMaturityUtils)
 local MatchesSearchQueryModule = require(BuildExperience.utils.matchesSearchQuery)
+local ThumbForUniverseIdModule = require(BuildExperience.utils.thumbForUniverseId)
+local UseCursorSearchPagesModule = require(BuildExperience.utils.useCursorSearchPages)
 local GetBuildExperienceRefreshStoreModule = require(BuildExperience.Stores.GetBuildExperienceRefreshStore)
 local _ = require(BuildExperience.Stores.GetMyCreationsFilterStore)
 local GetSearchQueryStoreModule = require(BuildExperience.Stores.GetSearchQueryStore)
@@ -32,11 +35,7 @@ local t = {}
 local t1 = {}
 local config = { games = "All" }
 
-local function _(p1): string
-	return string.format("rbxthumb://type=GameIcon&id=%d&w=150&h=150", p1)
-end
-
-local _ = function(p1, p2, p3)
+local function _(p1, p2, p3)
 	-- upvalues: UniverseConfigurationModule (copy), PrivacyType (copy)
 	local PrivacyTypeForAudiences = UniverseConfigurationModule.getPrivacyTypeForAudiences(p1.audiences)
 	
@@ -151,7 +150,7 @@ local _ = function(p2)
 end
 
 local function buildExperienceMetadataByUniverseId(List, p2, p3)
-	-- upvalues: UniverseConfigurationModule (copy), PrivacyType (copy)
+	-- upvalues: UniverseConfigurationModule (copy), PrivacyType (copy), ThumbForUniverseIdModule (copy)
 	local t = {}
 	
 	for i, value in List do
@@ -166,7 +165,7 @@ local function buildExperienceMetadataByUniverseId(List, p2, p3)
 				experienceName = Name,
 				creatorName = if typeof(CreatorName) == "string" and CreatorName ~= "" then CreatorName else nil,
 				visibilityLabel = if value.isActive == true and PrivacyTypeForAudiences == PrivacyType.Public and (v1 == nil or v1) then nil elseif PrivacyTypeForAudiences == PrivacyType.Public then p3.live else nil,
-				gameIcon = string.format("rbxthumb://type=GameIcon&id=%d&w=150&h=150", i)
+				gameIcon = ThumbForUniverseIdModule(i)
 			}
 		end
 	end
@@ -174,6 +173,7 @@ local function buildExperienceMetadataByUniverseId(List, p2, p3)
 end
 
 local function buildSessionItems(List, UseMemoResult, p4, _, Callback)
+	-- upvalues: ThumbForUniverseIdModule (copy)
 	local t = {}
 	local List1 = {}
 	
@@ -199,7 +199,7 @@ local function buildSessionItems(List, UseMemoResult, p4, _, Callback)
 				creatorName = if UseMemoResultEntry then UseMemoResultEntry.creatorName else nil,
 				description = if SessionStatus == nil then nil else p4[SessionStatus],
 				visibilityLabel = if UseMemoResultEntry then UseMemoResultEntry.visibilityLabel else nil,
-				gameIcon = if UseMemoResultEntry then UseMemoResultEntry.gameIcon else string.format("rbxthumb://type=GameIcon&id=%d&w=150&h=150", UniverseId)
+				gameIcon = if UseMemoResultEntry then UseMemoResultEntry.gameIcon else ThumbForUniverseIdModule(UniverseId)
 			}
 			local Roblox1 = value._meta and value._meta._roblox
 			local SessionStatus = if Roblox1 then Roblox1.sessionStatus else nil
@@ -350,22 +350,22 @@ local function useUniverseSessions(p5, Current)
 	}
 end
 
-local function buildUniverseItems(Items, Entries, p7, p8, Callback)
-	-- upvalues: buildLatestSessionByUniverseId (copy), UniverseConfigurationModule (copy), PrivacyType (copy), FFlagBuildWithGroupsModule (copy)
+local function buildUniverseItems(Current, Entries, p7, p8, Callback)
+	-- upvalues: buildLatestSessionByUniverseId (copy), UniverseConfigurationModule (copy), PrivacyType (copy), ThumbForUniverseIdModule (copy), FFlagBuildWithGroupsModule (copy)
 	local LatestSessionByUniverseId = buildLatestSessionByUniverseId(Entries)
 	local List = {}
 	
-	for _, item in Items do
-		if not item.isArchived then
-			local Id = item.id
+	for _, value in Current do
+		if not value.isArchived then
+			local Id = value.id
 			local LatestSessionByUniverseIdEntry = LatestSessionByUniverseId[Id]
-			local Name = item.name
+			local Name = value.name
 			local config = {
 				sessionId = if LatestSessionByUniverseIdEntry then LatestSessionByUniverseIdEntry.sessionId else nil,
 				universeId = Id,
-				placeId = item.rootPlaceId,
+				placeId = value.rootPlaceId,
 				experienceName = if typeof(Name) == "string" and Name ~= "" then Name else Callback(Id),
-				creatorName = if typeof(item.creatorName) == "string" and item.creatorName ~= "" then item.creatorName else nil
+				creatorName = if typeof(value.creatorName) == "string" and value.creatorName ~= "" then value.creatorName else nil
 			}
 			local Description = nil
 			
@@ -377,9 +377,9 @@ local function buildUniverseItems(Items, Entries, p7, p8, Callback)
 				Description = nil
 			end
 			config.description = Description
-			config.visibilityLabel = if UniverseConfigurationModule.getPrivacyTypeForAudiences(item.audiences) == PrivacyType.Public then p8.live else nil
-			config.gameIcon = string.format("rbxthumb://type=GameIcon&id=%d&w=150&h=150", Id)
-			config.isGroupGame = if FFlagBuildWithGroupsModule then item.creatorType == "Group" else nil
+			config.visibilityLabel = if UniverseConfigurationModule.getPrivacyTypeForAudiences(value.audiences) == PrivacyType.Public then p8.live else nil
+			config.gameIcon = ThumbForUniverseIdModule(Id)
+			config.isGroupGame = if FFlagBuildWithGroupsModule then value.creatorType == "Group" else nil
 			table.insert(List, config)
 		end
 	end
@@ -598,22 +598,22 @@ local function useUniverseSearchList(SearchStore, CreatorTargetId, Query, IsIsFo
 	end, { SearchStore, CreatorTargetId })
 	local UseResult2 = ReactModule.useCallback(function(p13)
 		-- upvalues: UseRefResult1 (copy), FFlagBuildWithGroupsModule (upval), UseRefResult2 (copy), UseStateResult2 (copy), PromiseModule (upval), UseResult1 (copy)
-		local P52 = p13 or UseRefResult1.current
+		local P51 = p13 or UseRefResult1.current
 		
 		if FFlagBuildWithGroupsModule then
 			local Current = UseRefResult2.current
 			UseStateResult2({
-				query = P52,
+				query = P51,
 				pageIndexes = { 0 },
 				creators = Current,
 				cursors = {}
 			})
 			
-			return if Current == nil then PromiseModule.resolve() else UseResult1(P52, 0, nil, nil, Current)
+			return if Current == nil then PromiseModule.resolve() else UseResult1(P51, 0, nil, nil, Current)
 		else
-			UseStateResult2({ query = P52, pageIndexes = { 0 } })
+			UseStateResult2({ query = P51, pageIndexes = { 0 } })
 			
-			return UseResult1(P52, 0)
+			return UseResult1(P51, 0)
 		end
 	end, { UseResult1 })
 	ReactModule.useEffect(function()
@@ -642,7 +642,7 @@ local function useUniverseSearchList(SearchStore, CreatorTargetId, Query, IsIsFo
 		}),
 		status = if FFlagBuildWithGroupsModule and p11.creators == nil then p11.status else UseSignalStateResult.status,
 		sourceItemCount = #UseSignalStateResult.items,
-		failedPageIndex = UseSignalStateResult.failedPageIndex,
+		failedLoadMore = UseSignalStateResult.failedPageIndex ~= nil,
 		isLoadingMore = UseSignalStateResult.isLoadingMore,
 		query = UseStateResult.query,
 		refresh = UseResult2,
@@ -706,6 +706,74 @@ local function useUniverseSearchList(SearchStore, CreatorTargetId, Query, IsIsFo
 			UseStateResult.cursors,
 			UseStateResult.query
 		})
+	}
+end
+
+local function useUniverseListItems(Current, p13, p14, p15, p16, p17)
+	-- upvalues: FFlagBuildExperienceMyCreationsFindSessionsByUniverseModule (copy), useUniverseSessions (copy), ReactModule (copy), buildUniverseItems (copy)
+	local UseUniverseSessionsResult = if FFlagBuildExperienceMyCreationsFindSessionsByUniverseModule then useUniverseSessions(p17, Current) else nil
+	local Entries = if FFlagBuildExperienceMyCreationsFindSessionsByUniverseModule then UseUniverseSessionsResult.entries else p13
+	
+	return {
+		items = ReactModule.useMemo(function()
+			-- upvalues: buildUniverseItems (upval), Current (copy), Entries (copy), p14 (copy), p15 (copy), p16 (copy)
+			return (buildUniverseItems(Current, Entries, p14, p15, p16))
+		end, {
+			p14,
+			Entries,
+			Current,
+			p15,
+			p16
+		}),
+		refreshSessions = if FFlagBuildExperienceMyCreationsFindSessionsByUniverseModule then UseUniverseSessionsResult.refresh else nil
+	}
+end
+
+local function useCreatorSearchList(SearchStore, Current, IsIsFocused, p13, UseMemoResult, UseMemoResult1, UseResult, p14, p15)
+	-- upvalues: keyForCreators (copy), ReactModule (copy), PageSize (copy), UseCursorSearchPagesModule (copy), useUniverseListItems (copy)
+	local Creators = p15.creators
+	local KeyForCreatorsResult = keyForCreators(Creators)
+	local UseRefResult = ReactModule.useRef(Current)
+	
+	if IsIsFocused then
+		UseRefResult.current = Current
+	end
+	local Current1 = UseRefResult.current
+	local UseCursorSearchPagesModuleResult = UseCursorSearchPagesModule({
+		searchStore = SearchStore,
+		sources = ReactModule.useMemo(function()
+			-- upvalues: Creators (copy), Current1 (copy), KeyForCreatorsResult (copy), PageSize (upval)
+			return if Creators == nil then nil else {
+				{
+					key = `{Current1}\0{KeyForCreatorsResult}`,
+					params = {
+						surface = "Build",
+						isArchived = false,
+						isTeamCreateEnabled = true,
+						sortParam = "LastUpdated",
+						sortOrder = "Desc",
+						cursor = nil,
+						needsAssetOptions = true,
+						creators = Creators,
+						pageSize = PageSize,
+						search = if Current1 == "" then nil else Current1
+					}
+				}
+			}
+		end, { Current1, Creators, KeyForCreatorsResult })
+	})
+	local UseUniverseListItemsResult = useUniverseListItems(UseCursorSearchPagesModuleResult.items, p13, UseMemoResult, UseMemoResult1, UseResult, p14)
+	
+	return {
+		items = UseUniverseListItemsResult.items,
+		status = if Creators == nil then p15.status else UseCursorSearchPagesModuleResult.status,
+		sourceItemCount = #UseCursorSearchPagesModuleResult.items,
+		failedLoadMore = UseCursorSearchPagesModuleResult.failedLoadMore,
+		isLoadingMore = UseCursorSearchPagesModuleResult.isLoadingMore,
+		query = Current1,
+		refresh = UseCursorSearchPagesModuleResult.refresh,
+		refreshSessions = UseUniverseListItemsResult.refreshSessions,
+		loadMore = UseCursorSearchPagesModuleResult.loadMore
 	}
 end
 
@@ -887,7 +955,7 @@ local function useLegacySessionList(p13, ConfigurationStore, UniverseActivationS
 end
 
 return function(p14)
-	-- upvalues: UseLocalizationFunction (copy), LocalizationStringsModule (copy), ReactModule (copy), LocalizationRoactContext (copy), LocalizationModule (copy), CreatorAgentChatModule (copy), FFlagBuildExperienceMyCreationsUseUniverseListModule (copy), UniverseSearchModule (copy), UniverseActivationModule (copy), UniverseConfigurationModule (copy), GetSearchQueryStoreModule (copy), GetBuildExperienceRefreshStoreModule (copy), AppLifecycleObserverService (copy), UseSignalStateFunction (copy), FFlagBuildExperienceMyCreationsFindSessionsByUniverseModule (copy), Players (copy), FFlagBuildWithGroupsModule (copy), CreatorGroupsModule (copy), useBuildCreators (copy), config (copy), useUniverseSearchList (copy), useLegacySessionList (copy), PromiseModule (copy), ignorePromiseRejection (copy), SignalsModule (copy), FIntMyCreationsSessionListPollingIntervalSecondsModule (copy), requestHandleToPromise (copy), noOp (copy)
+	-- upvalues: UseLocalizationFunction (copy), LocalizationStringsModule (copy), ReactModule (copy), LocalizationRoactContext (copy), LocalizationModule (copy), CreatorAgentChatModule (copy), FFlagBuildExperienceMyCreationsUseUniverseListModule (copy), UniverseSearchModule (copy), UniverseActivationModule (copy), UniverseConfigurationModule (copy), GetSearchQueryStoreModule (copy), GetBuildExperienceRefreshStoreModule (copy), AppLifecycleObserverService (copy), UseSignalStateFunction (copy), FFlagBuildExperienceMyCreationsFindSessionsByUniverseModule (copy), Players (copy), FFlagBuildWithGroupsModule (copy), CreatorGroupsModule (copy), useBuildCreators (copy), config (copy), FFlagBuildExperienceCursorSearchPagesModule (copy), useCreatorSearchList (copy), useUniverseSearchList (copy), useLegacySessionList (copy), PromiseModule (copy), ignorePromiseRejection (copy), SignalsModule (copy), FIntMyCreationsSessionListPollingIntervalSecondsModule (copy), requestHandleToPromise (copy), noOp (copy)
 	local UseLocalizationResult = UseLocalizationFunction({
 		building = LocalizationStringsModule.MY_CREATIONS_BUILDING,
 		inputNeeded = LocalizationStringsModule.MY_CREATIONS_INPUT_NEEDED,
@@ -962,10 +1030,10 @@ return function(p14)
 	local UserId = p14.userId or (if Players.LocalPlayer then Players.LocalPlayer.UserId else 0)
 	local CreatorGroupsStore = if FFlagBuildWithGroupsModule then p14.creatorGroupsStore or CreatorGroupsModule.getCreatorGroupsStore() else nil
 	local UseBuildCreatorsResult = if FFlagBuildWithGroupsModule then useBuildCreators(CreatorGroupsStore, UserId, p14.filter or config) else nil
-	local UseUniverseSearchListResult = if FFlagBuildExperienceMyCreationsUseUniverseListModule then useUniverseSearchList(SearchStore, UserId, UseDebouncedQueryResult, IsIsFocused, UseSignalStateResult1, UseMemoResult, UseMemoResult1, UseResult, if FFlagBuildExperienceMyCreationsFindSessionsByUniverseModule then CreatorAgentChatStore else nil, UseBuildCreatorsResult) else nil
+	local UseCreatorSearchListResult = if FFlagBuildExperienceMyCreationsUseUniverseListModule then if FFlagBuildExperienceCursorSearchPagesModule then useCreatorSearchList(SearchStore, UseDebouncedQueryResult, IsIsFocused, UseSignalStateResult1, UseMemoResult, UseMemoResult1, UseResult, if FFlagBuildExperienceMyCreationsFindSessionsByUniverseModule then CreatorAgentChatStore else nil, UseBuildCreatorsResult) else useUniverseSearchList(SearchStore, UserId, UseDebouncedQueryResult, IsIsFocused, UseSignalStateResult1, UseMemoResult, UseMemoResult1, UseResult, if FFlagBuildExperienceMyCreationsFindSessionsByUniverseModule then CreatorAgentChatStore else nil, UseBuildCreatorsResult) else nil
 	local UseLegacySessionListResult = if FFlagBuildExperienceMyCreationsUseUniverseListModule then nil else useLegacySessionList(UseSignalStateResult1, ConfigurationStore, UniverseActivationStore, UseDebouncedQueryResult, UseMemoResult, UseMemoResult1, UseResult)
-	local Refresh = if FFlagBuildExperienceMyCreationsUseUniverseListModule then UseUniverseSearchListResult.refresh else nil
-	local RefreshSessions = if FFlagBuildExperienceMyCreationsFindSessionsByUniverseModule and FFlagBuildExperienceMyCreationsUseUniverseListModule then UseUniverseSearchListResult.refreshSessions else nil
+	local Refresh = if FFlagBuildExperienceMyCreationsUseUniverseListModule then UseCreatorSearchListResult.refresh else nil
+	local RefreshSessions = if FFlagBuildExperienceMyCreationsFindSessionsByUniverseModule and FFlagBuildExperienceMyCreationsUseUniverseListModule then UseCreatorSearchListResult.refreshSessions else nil
 	local UseRefResult2 = if FFlagBuildExperienceMyCreationsFindSessionsByUniverseModule then ReactModule.useRef(RefreshSessions) else nil
 	
 	if FFlagBuildExperienceMyCreationsFindSessionsByUniverseModule then
@@ -1099,13 +1167,13 @@ return function(p14)
 			Flag = true
 		end
 	end, { IsIsFocused, Largest, SessionListStore })
-	local Items = if FFlagBuildExperienceMyCreationsUseUniverseListModule then UseUniverseSearchListResult.items else UseLegacySessionListResult.joinableItems
+	local Items = if FFlagBuildExperienceMyCreationsUseUniverseListModule then UseCreatorSearchListResult.items else UseLegacySessionListResult.joinableItems
 	local HasPendingSummary = not FFlagBuildExperienceMyCreationsUseUniverseListModule and UseLegacySessionListResult.hasPendingSummary
-	local Status = if FFlagBuildExperienceMyCreationsUseUniverseListModule then UseUniverseSearchListResult.status else NotReady
-	local SourceItemCount = if FFlagBuildExperienceMyCreationsUseUniverseListModule then UseUniverseSearchListResult.sourceItemCount else #UseSignalStateResult1
+	local Status = if FFlagBuildExperienceMyCreationsUseUniverseListModule then UseCreatorSearchListResult.status else NotReady
+	local SourceItemCount = if FFlagBuildExperienceMyCreationsUseUniverseListModule then UseCreatorSearchListResult.sourceItemCount else #UseSignalStateResult1
 	local IsReady: boolean = Status == "Ready" or SourceItemCount > 0
 	local IsPending = UseSignalStateResult4 == "pending"
-	local IsLoadingMore = if FFlagBuildExperienceMyCreationsUseUniverseListModule then UseUniverseSearchListResult.isLoadingMore else false
+	local IsLoadingMore = if FFlagBuildExperienceMyCreationsUseUniverseListModule then UseCreatorSearchListResult.isLoadingMore else false
 	local UseResult11 = ReactModule.useCallback(function()
 		-- upvalues: SessionListStore (copy), PromiseModule (upval), requestHandleToPromise (upval)
 		local More = SessionListStore.loadMore()
@@ -1117,11 +1185,11 @@ return function(p14)
 		NotReady,
 		SessionListStore
 	})
-	local LoadMore = if FFlagBuildExperienceMyCreationsUseUniverseListModule then UseUniverseSearchListResult.loadMore else nil
-	local Query = if FFlagBuildExperienceMyCreationsUseUniverseListModule then UseUniverseSearchListResult.query else UseDebouncedQueryResult
+	local LoadMore = if FFlagBuildExperienceMyCreationsUseUniverseListModule then UseCreatorSearchListResult.loadMore else nil
+	local Query = if FFlagBuildExperienceMyCreationsUseUniverseListModule then UseCreatorSearchListResult.query else UseDebouncedQueryResult
 	
 	return {
-		displayedItems = if FFlagBuildExperienceMyCreationsUseUniverseListModule then UseUniverseSearchListResult.items else UseLegacySessionListResult.displayedItems,
+		displayedItems = if FFlagBuildExperienceMyCreationsUseUniverseListModule then UseCreatorSearchListResult.items else UseLegacySessionListResult.displayedItems,
 		items = Items,
 		listStatus = Status,
 		hasDisplayedResult = IsReady,
@@ -1159,7 +1227,7 @@ return function(p14)
 			UseSignalStateResult2,
 			NotReady
 		}),
-		failedLoadMore = (if FFlagBuildExperienceMyCreationsUseUniverseListModule then UseUniverseSearchListResult.failedPageIndex else nil) ~= nil,
+		failedLoadMore = if FFlagBuildExperienceMyCreationsUseUniverseListModule then UseCreatorSearchListResult.failedLoadMore else false,
 		retryLoadMore = if FFlagBuildExperienceMyCreationsUseUniverseListModule then LoadMore else noOp,
 		isLoadingMore = if FFlagBuildExperienceMyCreationsUseUniverseListModule then IsLoadingMore else IsPending
 	}

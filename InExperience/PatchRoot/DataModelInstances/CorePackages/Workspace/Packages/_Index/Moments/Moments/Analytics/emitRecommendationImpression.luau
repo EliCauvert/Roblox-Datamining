@@ -1,6 +1,4 @@
-﻿local Moments = script:FindFirstAncestor("Moments")
-local ConstantsModule = require(Moments.Constants)
-local FFlagMomentsRecommendationClientEventTimestampModule = require(Moments.Flags.FFlagMomentsRecommendationClientEventTimestamp)
+﻿local ConstantsModule = require(script:FindFirstAncestor("Moments").Constants)
 local config = {
 	eventName = "RecommendationImpressionEvent",
 	throttlingPercentage = 10000,
@@ -10,14 +8,14 @@ local config = {
 }
 
 return function(p1)
-	-- upvalues: config (copy), ConstantsModule (copy), FFlagMomentsRecommendationClientEventTimestampModule (copy)
+	-- upvalues: config (copy), ConstantsModule (copy)
 	game:GetService("TelemetryService"):LogEvent(config, {
 		standardizedFields = { "addSessionInfo", "addSessionId", "addOSInfo" },
 		customFields = {
 			playsessionid = "",
 			universeid = ConstantsModule.MOMENTS_UNIVERSE_ID,
 			placeid = ConstantsModule.MOMENTS_PLACE_ID,
-			client_event_timestamp_ms = if FFlagMomentsRecommendationClientEventTimestampModule then DateTime.now().UnixTimestampMillis else nil,
+			client_event_timestamp_ms = DateTime.now().UnixTimestampMillis,
 			item_id = p1.itemId,
 			tracing_id = p1.tracingId,
 			item_position = tostring(p1.position),

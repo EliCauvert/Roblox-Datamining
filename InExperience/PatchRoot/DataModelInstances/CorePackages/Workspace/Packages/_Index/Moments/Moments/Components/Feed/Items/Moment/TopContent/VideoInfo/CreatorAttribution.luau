@@ -19,7 +19,6 @@ local GetRbxThumbFunction = FoundationModule.Utility.getRbxThumb
 local UseTokensFunction = FoundationModule.Hooks.useTokens
 local UseUsernameModule = require(Moments.Hooks.useUsername)
 local UseCreatorVerifiedModule = require(Moments.Hooks.useCreatorVerified)
-local GetFFlagMomentsCreatorVerifiedBadgeModule = require(Moments.Flags.GetFFlagMomentsCreatorVerifiedBadge)
 local FFlagMomentsFlushDwellBeforeNavigationModule = require(Moments.Flags.FFlagMomentsFlushDwellBeforeNavigation)
 local NavigationDestinationTypeModule = require(Moments.Enums.NavigationDestinationType)
 local FFlagMomentsNavigationEventModule = require(Moments.Flags.FFlagMomentsNavigationEvent)
@@ -34,7 +33,7 @@ local config = { Transparency = 0, Color3 = Color3.new(1, 1, 1) }
 local Character = utf8.char(57344)
 
 return ReactModule.memo(function(Frame)
-	-- upvalues: UseTokensFunction (copy), MomentContextModule (copy), ReactModule (copy), ReactOtterModule (copy), UseUsernameModule (copy), GetFFlagMomentsCreatorVerifiedBadgeModule (copy), UseCreatorVerifiedModule (copy), UseMomentsHostFunction (copy), FFlagMomentsFlushDwellBeforeNavigationModule (copy), FeedContextModule (copy), MakeFeedActionFieldsModule (copy), FireAnalyticsEventFunction (copy), EventNames (copy), FFlagMomentsNavigationEventModule (copy), NavigationDestinationTypeModule (copy), Character (copy), View (copy), StateLayerAffordance (copy), ControlState (copy), ImageWithSkeletonModule (copy), GetRbxThumbFunction (copy), ThumbnailType (copy), ThumbnailSize (copy), Radius (copy), GetColorStyleWithTransparencyModule (copy), config (copy), Text (copy), Skeleton (copy), _Vector2 (copy)
+	-- upvalues: UseTokensFunction (copy), MomentContextModule (copy), ReactModule (copy), ReactOtterModule (copy), UseUsernameModule (copy), UseCreatorVerifiedModule (copy), UseMomentsHostFunction (copy), FFlagMomentsFlushDwellBeforeNavigationModule (copy), FeedContextModule (copy), MakeFeedActionFieldsModule (copy), FireAnalyticsEventFunction (copy), EventNames (copy), FFlagMomentsNavigationEventModule (copy), NavigationDestinationTypeModule (copy), Character (copy), View (copy), StateLayerAffordance (copy), ControlState (copy), ImageWithSkeletonModule (copy), GetRbxThumbFunction (copy), ThumbnailType (copy), ThumbnailSize (copy), Radius (copy), GetColorStyleWithTransparencyModule (copy), config (copy), Text (copy), Skeleton (copy), _Vector2 (copy)
 	local UseTokensResult = UseTokensFunction()
 	local UseMomentResult = MomentContextModule.useMoment()
 	local Data = UseMomentResult.store.getData(false)
@@ -51,7 +50,7 @@ return ReactModule.memo(function(Frame)
 		return 1 - (1 - Entry[1]) * (1 - Entry[2])
 	end)
 	local UseUsernameModuleResult = UseUsernameModule(Data.creatorId)
-	local UseCreatorVerifiedModuleResult = if GetFFlagMomentsCreatorVerifiedBadgeModule() then UseCreatorVerifiedModule(Data.creatorId) else Data.creatorIsVerified
+	local UseCreatorVerifiedModuleResult = UseCreatorVerifiedModule(Data.creatorId)
 	local OpenProfileFunction = UseMomentsHostFunction().openProfile
 	local UseFeedOptionalResult = if FFlagMomentsFlushDwellBeforeNavigationModule then FeedContextModule.useFeedOptional() else nil
 	local UseResult = ReactModule.useCallback(function()

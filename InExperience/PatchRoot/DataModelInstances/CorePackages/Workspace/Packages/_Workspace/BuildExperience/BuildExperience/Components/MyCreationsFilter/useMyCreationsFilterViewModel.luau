@@ -5,20 +5,22 @@ local ReactModule = require(Parent.React)
 local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
 local UseSignalStateFunction = require(Parent.SignalsReact).useSignalState
 local LocalizationStringsModule = require(BuildExperience.LocalizationStrings)
+local FFlagBuildExperiencePreviewsTabModule = require(BuildExperience.Flags.FFlagBuildExperiencePreviewsTab)
+local GamesFilterModule = require(BuildExperience.Stores.GetMyCreationsFilterStore.GamesFilter)
 local GetMyCreationsFilterStoreModule = require(BuildExperience.Stores.GetMyCreationsFilterStore)
 local MatchesSearchQueryModule = require(BuildExperience.utils.matchesSearchQuery)
 local UseClosableFocusRootModule = require(BuildExperience.utils.useClosableFocusRoot)
 local _ = require(script.Parent.MyCreationsFilterView)
 local FocusNavigableSurfaceIdentifierEnum = require(Parent.FocusNavigationUtils).FocusNavigableSurfaceIdentifierEnum
 local config = { games = "MyGames" }
-local List = { "All", "MyGames", "GroupGames", "SharedGames" }
+local list = { "All", "MyGames", "GroupGames", "SharedGames" }
 
 local function _(p1): string
 	return string.format("rbxthumb://type=GroupIcon&id=%d&w=150&h=150", p1)
 end
 
 return function(Frame)
-	-- upvalues: GetMyCreationsFilterStoreModule (copy), CreatorGroupsModule (copy), ReactModule (copy), UseSignalStateFunction (copy), UseLocalizationFunction (copy), LocalizationStringsModule (copy), UseClosableFocusRootModule (copy), FocusNavigableSurfaceIdentifierEnum (copy), List (copy), config (copy), MatchesSearchQueryModule (copy)
+	-- upvalues: GetMyCreationsFilterStoreModule (copy), CreatorGroupsModule (copy), ReactModule (copy), UseSignalStateFunction (copy), config (copy), list (copy), FFlagBuildExperiencePreviewsTabModule (copy), LocalizationStringsModule (copy), UseLocalizationFunction (copy), UseClosableFocusRootModule (copy), FocusNavigableSurfaceIdentifierEnum (copy), GamesFilterModule (copy), MatchesSearchQueryModule (copy)
 	local FilterStore = Frame.filterStore or GetMyCreationsFilterStoreModule()
 	local UseFilterResult = FilterStore.useFilter()
 	local CreatorGroupsStore = Frame.creatorGroupsStore or CreatorGroupsModule.getCreatorGroupsStore()
@@ -26,6 +28,15 @@ return function(Frame)
 		-- upvalues: CreatorGroupsStore (copy)
 		return (CreatorGroupsStore.getAndFetchGroups("Build"))
 	end, { CreatorGroupsStore }).data)
+	local Groups = if UseSignalStateResult == nil then nil else UseSignalStateResult.groups
+	local DefaultFilter = config
+	local List = list
+	
+	if FFlagBuildExperiencePreviewsTabModule then
+		Groups = Frame.groups or Groups
+		DefaultFilter = Frame.defaultFilter or DefaultFilter
+		List = Frame.options or List
+	end
 	local UseLocalizationResult = UseLocalizationFunction({
 		all = LocalizationStringsModule.MY_CREATIONS_FILTER_ALL,
 		allGames = LocalizationStringsModule.MY_CREATIONS_FILTER_ALL_GAMES,
@@ -63,7 +74,7 @@ return function(Frame)
 		onClose = UseResult1
 	})
 	local UseResult2 = ReactModule.useCallback(function(Value)
-		-- upvalues: List (upval), UseStateResult2 (copy)
+		-- upvalues: List (ref), UseStateResult2 (copy)
 		if table.find(List, Value) then
 			UseStateResult2(function(p1)
 				-- upvalues: Value (copy)
@@ -73,7 +84,7 @@ return function(Frame)
 				}
 			end)
 		end
-	end, {})
+	end, { List })
 	local UseResult3 = ReactModule.useCallback(function(GroupId)
 		-- upvalues: UseStateResult2 (copy)
 		UseStateResult2(function(p1)
@@ -90,28 +101,49 @@ return function(Frame)
 		UseStateResult2_2(false)
 	end, { UseStateResult, FilterStore })
 	local UseResult5 = ReactModule.useCallback(function()
-		-- upvalues: UseStateResult2 (copy), config (upval), UseStateResult2_1 (copy)
-		UseStateResult2(config)
+		-- upvalues: UseStateResult2 (copy), DefaultFilter (ref), UseStateResult2_1 (copy)
+		UseStateResult2(DefaultFilter)
 		UseStateResult2_1("")
-	end, {})
+	end, { DefaultFilter })
 	local UseMemoResult = ReactModule.useMemo(function()
-		-- upvalues: All (copy), MyGames (copy), GroupGames (copy), SharedGames (copy)
-		return {
-			{ value = "All", label = All },
-			{ value = "MyGames", label = MyGames },
-			{ value = "GroupGames", label = GroupGames },
-			{ value = "SharedGames", label = SharedGames }
+		-- upvalues: FFlagBuildExperiencePreviewsTabModule (upval), GamesFilterModule (upval), All (copy), MyGames (copy), GroupGames (copy), SharedGames (copy), List (ref)
+		if not FFlagBuildExperiencePreviewsTabModule then
+			return {
+				{ value = "All", label = All },
+				{ value = "MyGames", label = MyGames },
+				{ value = "GroupGames", label = GroupGames },
+				{ value = "SharedGames", label = SharedGames }
+			}
+		end
+		local config = {
+			[GamesFilterModule.All] = All,
+			[GamesFilterModule.MyGames] = MyGames,
+			[GamesFilterModule.GroupGames] = GroupGames,
+			[GamesFilterModule.SharedGames] = SharedGames,
+			[GamesFilterModule.SharedWithMe] = SharedGames
 		}
-	end, { All, GroupGames, MyGames, SharedGames })
+		local List1 = {}
+		
+		for _, Value in List do
+			table.insert(List1, { value = Value, label = config[Value] })
+		end
+		return List1
+	end, {
+		All,
+		GroupGames,
+		MyGames,
+		SharedGames,
+		List
+	})
 	local GroupId = UseStateResult.groupId
 	local UseMemoResult1 = ReactModule.useMemo(function()
-		-- upvalues: UseSignalStateResult (copy), MatchesSearchQueryModule (upval), UseStateResult1 (copy), GroupId (copy), UseResult3 (copy)
+		-- upvalues: Groups (ref), MatchesSearchQueryModule (upval), UseStateResult1 (copy), GroupId (copy), UseResult3 (copy)
 		local List = {}
 		
-		if UseSignalStateResult == nil then
+		if Groups == nil then
 			return List
 		end
-		for _, group in UseSignalStateResult.groups do
+		for _, group in Groups do
 			if MatchesSearchQueryModule(group.name, UseStateResult1) then
 				table.insert(List, {
 					id = group.id,
@@ -126,16 +158,11 @@ return function(Frame)
 			end
 		end
 		return List
-	end, {
-		UseStateResult1,
-		UseSignalStateResult,
-		UseResult3,
-		GroupId
-	})
+	end, { UseStateResult1, Groups, UseResult3, GroupId })
 	local Name = nil
 	
-	if UseFilterResult.games == "GroupGames" and UseFilterResult.groupId ~= nil and UseSignalStateResult ~= nil then
-		for _, group in UseSignalStateResult.groups do
+	if UseFilterResult.games == "GroupGames" and UseFilterResult.groupId ~= nil and Groups ~= nil then
+		for _, group in Groups do
 			if group.id == UseFilterResult.groupId then
 				Name = group.name
 				break
@@ -144,7 +171,7 @@ return function(Frame)
 	end
 	return {
 		LayoutOrder = Frame.LayoutOrder,
-		label = if Name == nil then if UseFilterResult.games == "MyGames" then MyGames elseif UseFilterResult.games == "GroupGames" then GroupGames elseif UseFilterResult.games == "SharedGames" then SharedGames else AllGames else Name,
+		label = if Name == nil then if UseFilterResult.games == "MyGames" then MyGames elseif UseFilterResult.games == "GroupGames" then GroupGames elseif UseFilterResult.games == "SharedGames" then SharedGames elseif FFlagBuildExperiencePreviewsTabModule and UseFilterResult.games == GamesFilterModule.SharedWithMe then SharedGames else AllGames else Name,
 		onOpenSheet = UseResult,
 		isSheetOpen = UseStateResult3,
 		onSheetClosed = UseResult1,
@@ -154,7 +181,7 @@ return function(Frame)
 		gamesOptions = UseMemoResult,
 		selectedGames = UseStateResult.games,
 		onGamesChanged = UseResult2,
-		isGroupsVisible = UseStateResult.games == "GroupGames" and (UseSignalStateResult ~= nil and #UseSignalStateResult.groups > 0),
+		isGroupsVisible = UseStateResult.games == "GroupGames" and (Groups ~= nil and #Groups > 0),
 		groupsLegend = UseLocalizationResult.groups,
 		groupSearchText = UseStateResult1,
 		groupSearchPlaceholder = UseLocalizationResult.searchGroups,

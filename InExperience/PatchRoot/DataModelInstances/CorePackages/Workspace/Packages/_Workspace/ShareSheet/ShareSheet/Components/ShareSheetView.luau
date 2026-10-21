@@ -132,7 +132,7 @@ return function(p1)
 				SocialRow = if p1.shouldShowSocialRow then ReactModule.createElement(ShareSheetSocialRowModule, {
 					LayoutOrder = 1,
 					conversationEligibility = if FFlagShareSheetFriendsSort then nil else p1.conversationEligibility,
-					eligibleRecipients = if FFlagShareSheetFriendsSort then p1.eligibleRecipients else nil,
+					socialRowRecipients = if FFlagShareSheetFriendsSort then p1.socialRowRecipients else nil,
 					isLoading = p1.isSocialRowLoading,
 					onConversationActivated = p1.onConversationActivated,
 					onMoreActivated = if FFlagShareSheetPeoplePickerEnabledModule then p1.onMoreActivated else nil,

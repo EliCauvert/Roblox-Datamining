@@ -14,6 +14,7 @@ end)
 local UpsellFlowModule = require(PurchasePrompt.Enums.UpsellFlow)
 local GetUpsellFlowModule = require(PurchasePrompt.NativeUpsell.getUpsellFlow)
 local GetFFlagEnablePaymentSessionIdInRobuxPurchaseModule = require(PurchasePrompt.Flags.GetFFlagEnablePaymentSessionIdInRobuxPurchase)
+local GetEngineFeaturePromptNativePurchaseWithContextModule = require(PurchasePrompt.Flags.getEngineFeaturePromptNativePurchaseWithContext)
 local FFlagEnableBonusJwtInShop = SharedFlagsModule.FFlagEnableBonusJwtInShop
 
 local function _(): string
@@ -39,13 +40,85 @@ local _ = function(Url, p1)
 	WebViewService:OpenWindow(Url, "", true)
 end
 
+local function tryLaunchNativePurchaseWithContext(p1, p2): boolean
+	-- upvalues: MarketplaceService (copy)
+	local PurchaseType = p1.purchaseType
+	local IsInApp = p1.isInApp
+	
+	if PurchaseType == nil or IsInApp == nil then
+		return false
+	end
+	local PromptNativePurchaseWithContextFunction = MarketplaceService.PromptNativePurchaseWithContext
+	
+	if typeof(PromptNativePurchaseWithContextFunction) == "function" then
+		local config = {
+			paymentSessionId = if p2 == "" then nil else p2,
+			purchaseType = PurchaseType,
+			isInApp = IsInApp
+		}
+		local Flag = false
+		pcall(function()
+			-- upvalues: PromptNativePurchaseWithContextFunction (copy), MarketplaceService (copy), p1 (copy), config (copy), Flag (ref)
+			PromptNativePurchaseWithContextFunction(MarketplaceService, p1.mobileProductId, config)
+			Flag = true
+			
+			if p1.onNativePurchaseLaunched ~= nil then
+				p1.onNativePurchaseLaunched()
+			end
+		end)
+		
+		return Flag
+	else
+		return false
+	end
+end
+
 local function startPurchase(p1, PaymentSessionId)
-	-- upvalues: UserInputService (copy), GetUpsellFlowModule (copy), UpsellFlowModule (copy), Players (copy), MarketplaceService (copy), PlatformService (ref), ContentProvider (copy), WebViewService (copy)
+	-- upvalues: UserInputService (copy), GetUpsellFlowModule (copy), UpsellFlowModule (copy), GetEngineFeaturePromptNativePurchaseWithContextModule (copy), tryLaunchNativePurchaseWithContext (copy), Players (copy), MarketplaceService (copy), PlatformService (ref), ContentProvider (copy), WebViewService (copy)
 	local MobileProductId = p1.mobileProductId
 	local ProductId = p1.productId
 	local UpsellFlowModule1 = GetUpsellFlowModule((UserInputService:GetPlatform()))
 	
-	if UpsellFlowModule1 == UpsellFlowModule.Mobile then
+	if UpsellFlowModule1 ~= UpsellFlowModule.Mobile then
+		if UpsellFlowModule1 ~= UpsellFlowModule.Xbox then
+			if UpsellFlowModule1 == UpsellFlowModule.Web then
+				if ProductId == nil then return end
+				local PaymentmethodsName: string = ("%supgrades/paymentmethods?ap=%s"):format(string.gsub(ContentProvider.BaseUrl:lower(), "/m%.", "/www."), (tostring(ProductId)))
+				
+				if PaymentSessionId ~= "" then
+					PaymentmethodsName = ("%s&paymentSessionId=%s"):format(PaymentmethodsName, PaymentSessionId)
+				end
+				pcall(function()
+					-- upvalues: PaymentmethodsName (ref), p1 (copy), WebViewService (upval)
+					local OnWebViewClosedFunction = p1.onWebViewClosed
+					local Connection = nil
+					Connection = WebViewService.OnWindowClosed:Connect(function()
+						-- upvalues: WebViewService (upval), Connection (ref), OnWebViewClosedFunction (copy)
+						WebViewService:CloseWindow()
+						
+						if Connection then
+							Connection:Disconnect()
+							Connection = nil
+						end
+						if OnWebViewClosedFunction then
+							OnWebViewClosedFunction()
+						end
+					end)
+					WebViewService:OpenWindow(PaymentmethodsName, "", true)
+				end)
+			end
+			return
+		elseif PlatformService ~= nil then
+			pcall(function()
+				-- upvalues: PlatformService (upval), MobileProductId (copy)
+				PlatformService:BeginPlatformStorePurchase(MobileProductId)
+			end)
+			
+			return
+		else
+			return
+		end
+	elseif not GetEngineFeaturePromptNativePurchaseWithContextModule() or not tryLaunchNativePurchaseWithContext(p1, PaymentSessionId) then
 		local LocalPlayer = Players.LocalPlayer
 		local NativePurchaseWithLocalPlayerEngineFeature = game:GetEngineFeature("NativePurchaseWithLocalPlayer")
 		local PromptNativePurchaseWithPaymentSessionIdEngineFeature = game:GetEngineFeature("PromptNativePurchaseWithPaymentSessionId")
@@ -70,42 +143,6 @@ local function startPurchase(p1, PaymentSessionId)
 			if p1.onNativePurchaseLaunched ~= nil then
 				p1.onNativePurchaseLaunched()
 			end
-		end)
-		
-		return
-	end
-	if UpsellFlowModule1 ~= UpsellFlowModule.Xbox then
-		if UpsellFlowModule1 == UpsellFlowModule.Web then
-			if ProductId == nil then return end
-			local PaymentmethodsName: string = ("%supgrades/paymentmethods?ap=%s"):format(string.gsub(ContentProvider.BaseUrl:lower(), "/m%.", "/www."), (tostring(ProductId)))
-			
-			if PaymentSessionId ~= "" then
-				PaymentmethodsName = ("%s&paymentSessionId=%s"):format(PaymentmethodsName, PaymentSessionId)
-			end
-			pcall(function()
-				-- upvalues: PaymentmethodsName (ref), p1 (copy), WebViewService (upval)
-				local OnWebViewClosedFunction = p1.onWebViewClosed
-				local Connection = nil
-				Connection = WebViewService.OnWindowClosed:Connect(function()
-					-- upvalues: WebViewService (upval), Connection (ref), OnWebViewClosedFunction (copy)
-					WebViewService:CloseWindow()
-					
-					if Connection then
-						Connection:Disconnect()
-						Connection = nil
-					end
-					if OnWebViewClosedFunction then
-						OnWebViewClosedFunction()
-					end
-				end)
-				WebViewService:OpenWindow(PaymentmethodsName, "", true)
-			end)
-		end
-		return
-	elseif PlatformService ~= nil then
-		pcall(function()
-			-- upvalues: PlatformService (upval), MobileProductId (copy)
-			PlatformService:BeginPlatformStorePurchase(MobileProductId)
 		end)
 		
 		return

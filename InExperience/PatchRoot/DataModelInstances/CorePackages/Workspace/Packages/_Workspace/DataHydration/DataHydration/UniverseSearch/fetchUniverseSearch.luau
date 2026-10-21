@@ -26,6 +26,7 @@ return function(p1, p2)
 				search = p1.search,
 				isArchived = p1.isArchived,
 				isPublic = p1.isPublic,
+				isShared = p1.isShared,
 				isTeamCreateEnabled = p1.isTeamCreateEnabled,
 				sortParam = p1.sortParam,
 				sortOrder = p1.sortOrder,

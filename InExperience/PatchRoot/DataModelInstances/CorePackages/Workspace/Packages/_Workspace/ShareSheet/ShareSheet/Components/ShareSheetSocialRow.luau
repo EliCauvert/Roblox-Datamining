@@ -132,14 +132,14 @@ return function(Frame)
 	local Text = tostring(Players.LocalPlayer and Players.LocalPlayer.UserId or 0)
 	local UseLocalizationResult = if FFlagShareSheetPeoplePickerEnabledModule then UseLocalizationFunction({ more = "CommonUI.Features.Label.More" }) else nil
 	local Elements = {}
-	local IsLoading = if FFlagShareSheetFriendsSort then Frame.eligibleRecipients.isLoading else Frame.conversationEligibility.isLoading
+	local IsLoading = if FFlagShareSheetFriendsSort then Frame.socialRowRecipients.isLoading else Frame.conversationEligibility.isLoading
 	
 	if Frame.isLoading or IsLoading then
 		Elements = createSkeletonItems()
 	else
 		local CountRecipients = nil
 		if FFlagShareSheetFriendsSort then
-			local Recipients = Frame.eligibleRecipients.recipients
+			local Recipients = Frame.socialRowRecipients.recipients
 			
 			for LayoutOrder, recipient in Recipients do
 				Elements[recipient.id] = ReactModule.createElement(ShareSheetRecipientItem, {
