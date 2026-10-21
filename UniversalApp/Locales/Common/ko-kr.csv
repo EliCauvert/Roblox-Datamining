@@ -2571,6 +2571,7 @@ Feature.Build.Label.Search,
 Feature.Build.Label.SearchGames,게임 검색
 Feature.Build.Label.SearchTasks,작업 검색
 Feature.Build.Label.SelectOption,옵션 선택
+Feature.Build.Label.SharedWithMe,나와 공유된 항목
 Feature.Build.Label.ShopButton,상점 버튼
 Feature.Build.Label.ShopUi,상점 UI
 Feature.Build.Label.Sounds,사운드

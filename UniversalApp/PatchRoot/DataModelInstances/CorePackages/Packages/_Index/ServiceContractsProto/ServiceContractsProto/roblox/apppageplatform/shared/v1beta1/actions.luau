@@ -44,21 +44,21 @@ do
 		local v1 = 0
 		while v1 < buffer.len(Buf) do
 			local Tag, Tag2
-			Tag, Tag2, v244 = ProtoModule.readTag(Buf, v1)
+			Tag, Tag2, v254 = ProtoModule.readTag(Buf, v1)
 			
 			if Tag2 == ProtoModule.wireTypes.varint then
 				if Tag == 1 then
 					local VarIntI32
-					VarIntI32, v244 = ProtoModule.readVarIntI32(Buf, v1)
+					VarIntI32, v254 = ProtoModule.readVarIntI32(Buf, v1)
 					NewModule.action_type = t.ActionType.fromNumber(VarIntI32) or VarIntI32
 				else
 					local _
-					_, v244 = ProtoModule.readVarInt(Buf, v1)
+					_, v254 = ProtoModule.readVarInt(Buf, v1)
 				end
 			elseif Tag2 == ProtoModule.wireTypes.lengthDelimited then
 				if Tag == 2 then
 					local Buffer1
-					Buffer1, v244 = ProtoModule.readBuffer(Buf, v1)
+					Buffer1, v254 = ProtoModule.readBuffer(Buf, v1)
 					NewModule.action_params = t.DismissDialogAction_Params.decode(Buffer1)
 				else
 					local VarInt, VarInt2 = ProtoModule.readVarInt(Buf, v1)
@@ -66,10 +66,10 @@ do
 				end
 			elseif Tag2 == ProtoModule.wireTypes.i32 then
 				local _
-				_, v244 = ProtoModule.readFixed32(Buf, v1)
+				_, v254 = ProtoModule.readFixed32(Buf, v1)
 			elseif Tag2 == ProtoModule.wireTypes.i64 then
 				local _
-				_, v244 = ProtoModule.readFixed64(Buf, v1)
+				_, v254 = ProtoModule.readFixed64(Buf, v1)
 			else
 				error("Unsupported wire type: " .. Tag2)
 			end
@@ -147,15 +147,15 @@ do
 		local v2 = 0
 		while v2 < buffer.len(Buf) do
 			local Tag, Tag2
-			Tag, Tag2, v262 = ProtoModule.readTag(Buf, v2)
+			Tag, Tag2, v272 = ProtoModule.readTag(Buf, v2)
 			
 			if Tag2 == ProtoModule.wireTypes.varint then
 				local _
-				_, v262 = ProtoModule.readVarInt(Buf, v2)
+				_, v272 = ProtoModule.readVarInt(Buf, v2)
 			elseif Tag2 == ProtoModule.wireTypes.lengthDelimited then
 				if Tag == 1 then
 					local Buffer1
-					Buffer1, v262 = ProtoModule.readBuffer(Buf, v2)
+					Buffer1, v272 = ProtoModule.readBuffer(Buf, v2)
 					NewModule.dialog_type = PropTypesModule.StringProp.decode(Buffer1)
 				else
 					local VarInt, VarInt2 = ProtoModule.readVarInt(Buf, v2)
@@ -163,10 +163,10 @@ do
 				end
 			elseif Tag2 == ProtoModule.wireTypes.i32 then
 				local _
-				_, v262 = ProtoModule.readFixed32(Buf, v2)
+				_, v272 = ProtoModule.readFixed32(Buf, v2)
 			elseif Tag2 == ProtoModule.wireTypes.i64 then
 				local _
-				_, v262 = ProtoModule.readFixed64(Buf, v2)
+				_, v272 = ProtoModule.readFixed64(Buf, v2)
 			else
 				error("Unsupported wire type: " .. Tag2)
 			end
@@ -239,21 +239,21 @@ do
 		local v3 = 0
 		while v3 < buffer.len(Buf) do
 			local Tag, Tag2
-			Tag, Tag2, v281 = ProtoModule.readTag(Buf, v3)
+			Tag, Tag2, v291 = ProtoModule.readTag(Buf, v3)
 			
 			if Tag2 == ProtoModule.wireTypes.varint then
 				if Tag == 1 then
 					local VarIntI32
-					VarIntI32, v281 = ProtoModule.readVarIntI32(Buf, v3)
+					VarIntI32, v291 = ProtoModule.readVarIntI32(Buf, v3)
 					NewModule.action_type = t.ActionType.fromNumber(VarIntI32) or VarIntI32
 				else
 					local _
-					_, v281 = ProtoModule.readVarInt(Buf, v3)
+					_, v291 = ProtoModule.readVarInt(Buf, v3)
 				end
 			elseif Tag2 == ProtoModule.wireTypes.lengthDelimited then
 				if Tag == 2 then
 					local Buffer1
-					Buffer1, v281 = ProtoModule.readBuffer(Buf, v3)
+					Buffer1, v291 = ProtoModule.readBuffer(Buf, v3)
 					NewModule.action_params = t.LinkAction_Params.decode(Buffer1)
 				else
 					local VarInt, VarInt2 = ProtoModule.readVarInt(Buf, v3)
@@ -261,10 +261,10 @@ do
 				end
 			elseif Tag2 == ProtoModule.wireTypes.i32 then
 				local _
-				_, v281 = ProtoModule.readFixed32(Buf, v3)
+				_, v291 = ProtoModule.readFixed32(Buf, v3)
 			elseif Tag2 == ProtoModule.wireTypes.i64 then
 				local _
-				_, v281 = ProtoModule.readFixed64(Buf, v3)
+				_, v291 = ProtoModule.readFixed64(Buf, v3)
 			else
 				error("Unsupported wire type: " .. Tag2)
 			end
@@ -356,23 +356,23 @@ do
 		local v3 = 0
 		while v3 < buffer.len(Buf) do
 			local Tag, Tag2
-			Tag, Tag2, v305 = ProtoModule.readTag(Buf, v3)
+			Tag, Tag2, v315 = ProtoModule.readTag(Buf, v3)
 			
 			if Tag2 == ProtoModule.wireTypes.varint then
 				local _
-				_, v305 = ProtoModule.readVarInt(Buf, v3)
+				_, v315 = ProtoModule.readVarInt(Buf, v3)
 			elseif Tag2 == ProtoModule.wireTypes.lengthDelimited then
 				if Tag == 1 then
 					local Buffer1
-					Buffer1, v305 = ProtoModule.readBuffer(Buf, v3)
+					Buffer1, v315 = ProtoModule.readBuffer(Buf, v3)
 					NewModule.url = PropTypesModule.StringProp.decode(Buffer1)
 				elseif Tag == 2 then
 					local Buffer2
-					Buffer2, v305 = ProtoModule.readBuffer(Buf, v3)
+					Buffer2, v315 = ProtoModule.readBuffer(Buf, v3)
 					NewModule.title_key = PropTypesModule.StringProp.decode(Buffer2)
 				elseif Tag == 4 then
 					local Buffer3
-					Buffer3, v305 = ProtoModule.readBuffer(Buf, v3)
+					Buffer3, v315 = ProtoModule.readBuffer(Buf, v3)
 					NewModule.on_webview_close = t.ActionProp.decode(Buffer3)
 				else
 					local VarInt, VarInt2 = ProtoModule.readVarInt(Buf, v3)
@@ -380,10 +380,10 @@ do
 				end
 			elseif Tag2 == ProtoModule.wireTypes.i32 then
 				local _
-				_, v305 = ProtoModule.readFixed32(Buf, v3)
+				_, v315 = ProtoModule.readFixed32(Buf, v3)
 			elseif Tag2 == ProtoModule.wireTypes.i64 then
 				local _
-				_, v305 = ProtoModule.readFixed64(Buf, v3)
+				_, v315 = ProtoModule.readFixed64(Buf, v3)
 			else
 				error("Unsupported wire type: " .. Tag2)
 			end
@@ -471,21 +471,21 @@ do
 		local v4 = 0
 		while v4 < buffer.len(Buf) do
 			local Tag, Tag2
-			Tag, Tag2, v326 = ProtoModule.readTag(Buf, v4)
+			Tag, Tag2, v336 = ProtoModule.readTag(Buf, v4)
 			
 			if Tag2 == ProtoModule.wireTypes.varint then
 				if Tag == 1 then
 					local VarIntI32
-					VarIntI32, v326 = ProtoModule.readVarIntI32(Buf, v4)
+					VarIntI32, v336 = ProtoModule.readVarIntI32(Buf, v4)
 					NewModule.action_type = t.ActionType.fromNumber(VarIntI32) or VarIntI32
 				else
 					local _
-					_, v326 = ProtoModule.readVarInt(Buf, v4)
+					_, v336 = ProtoModule.readVarInt(Buf, v4)
 				end
 			elseif Tag2 == ProtoModule.wireTypes.lengthDelimited then
 				if Tag == 2 then
 					local Buffer1
-					Buffer1, v326 = ProtoModule.readBuffer(Buf, v4)
+					Buffer1, v336 = ProtoModule.readBuffer(Buf, v4)
 					NewModule.action_params = t.OpenExternalLinkAction_Params.decode(Buffer1)
 				else
 					local VarInt, VarInt2 = ProtoModule.readVarInt(Buf, v4)
@@ -493,10 +493,10 @@ do
 				end
 			elseif Tag2 == ProtoModule.wireTypes.i32 then
 				local _
-				_, v326 = ProtoModule.readFixed32(Buf, v4)
+				_, v336 = ProtoModule.readFixed32(Buf, v4)
 			elseif Tag2 == ProtoModule.wireTypes.i64 then
 				local _
-				_, v326 = ProtoModule.readFixed64(Buf, v4)
+				_, v336 = ProtoModule.readFixed64(Buf, v4)
 			else
 				error("Unsupported wire type: " .. Tag2)
 			end
@@ -574,15 +574,15 @@ do
 		local v5 = 0
 		while v5 < buffer.len(Buf) do
 			local Tag, Tag2
-			Tag, Tag2, v344 = ProtoModule.readTag(Buf, v5)
+			Tag, Tag2, v354 = ProtoModule.readTag(Buf, v5)
 			
 			if Tag2 == ProtoModule.wireTypes.varint then
 				local _
-				_, v344 = ProtoModule.readVarInt(Buf, v5)
+				_, v354 = ProtoModule.readVarInt(Buf, v5)
 			elseif Tag2 == ProtoModule.wireTypes.lengthDelimited then
 				if Tag == 1 then
 					local Buffer1
-					Buffer1, v344 = ProtoModule.readBuffer(Buf, v5)
+					Buffer1, v354 = ProtoModule.readBuffer(Buf, v5)
 					NewModule.url = PropTypesModule.StringProp.decode(Buffer1)
 				else
 					local VarInt, VarInt2 = ProtoModule.readVarInt(Buf, v5)
@@ -590,10 +590,10 @@ do
 				end
 			elseif Tag2 == ProtoModule.wireTypes.i32 then
 				local _
-				_, v344 = ProtoModule.readFixed32(Buf, v5)
+				_, v354 = ProtoModule.readFixed32(Buf, v5)
 			elseif Tag2 == ProtoModule.wireTypes.i64 then
 				local _
-				_, v344 = ProtoModule.readFixed64(Buf, v5)
+				_, v354 = ProtoModule.readFixed64(Buf, v5)
 			else
 				error("Unsupported wire type: " .. Tag2)
 			end
@@ -665,21 +665,21 @@ do
 		local v5 = 0
 		while v5 < buffer.len(Buf) do
 			local Tag, Tag2
-			Tag, Tag2, v363 = ProtoModule.readTag(Buf, v5)
+			Tag, Tag2, v373 = ProtoModule.readTag(Buf, v5)
 			
 			if Tag2 == ProtoModule.wireTypes.varint then
 				if Tag == 1 then
 					local VarIntI32
-					VarIntI32, v363 = ProtoModule.readVarIntI32(Buf, v5)
+					VarIntI32, v373 = ProtoModule.readVarIntI32(Buf, v5)
 					NewModule.action_type = t.ActionType.fromNumber(VarIntI32) or VarIntI32
 				else
 					local _
-					_, v363 = ProtoModule.readVarInt(Buf, v5)
+					_, v373 = ProtoModule.readVarInt(Buf, v5)
 				end
 			elseif Tag2 == ProtoModule.wireTypes.lengthDelimited then
 				if Tag == 2 then
 					local Buffer1
-					Buffer1, v363 = ProtoModule.readBuffer(Buf, v5)
+					Buffer1, v373 = ProtoModule.readBuffer(Buf, v5)
 					NewModule.action_params = t.OpenSocialLinkAction_Params.decode(Buffer1)
 				else
 					local VarInt, VarInt2 = ProtoModule.readVarInt(Buf, v5)
@@ -687,10 +687,10 @@ do
 				end
 			elseif Tag2 == ProtoModule.wireTypes.i32 then
 				local _
-				_, v363 = ProtoModule.readFixed32(Buf, v5)
+				_, v373 = ProtoModule.readFixed32(Buf, v5)
 			elseif Tag2 == ProtoModule.wireTypes.i64 then
 				local _
-				_, v363 = ProtoModule.readFixed64(Buf, v5)
+				_, v373 = ProtoModule.readFixed64(Buf, v5)
 			else
 				error("Unsupported wire type: " .. Tag2)
 			end
@@ -792,31 +792,31 @@ do
 		local v6 = 0
 		while v6 < buffer.len(Buf) do
 			local Tag, Tag2
-			Tag, Tag2, v393 = ProtoModule.readTag(Buf, v6)
+			Tag, Tag2, v403 = ProtoModule.readTag(Buf, v6)
 			
 			if Tag2 == ProtoModule.wireTypes.varint then
 				local _
-				_, v393 = ProtoModule.readVarInt(Buf, v6)
+				_, v403 = ProtoModule.readVarInt(Buf, v6)
 			elseif Tag2 == ProtoModule.wireTypes.lengthDelimited then
 				if Tag == 1 then
 					local Buffer1
-					Buffer1, v393 = ProtoModule.readBuffer(Buf, v6)
+					Buffer1, v403 = ProtoModule.readBuffer(Buf, v6)
 					NewModule.assignment_id = PropTypesModule.StringProp.decode(Buffer1)
 				elseif Tag == 2 then
 					local Buffer2
-					Buffer2, v393 = ProtoModule.readBuffer(Buf, v6)
+					Buffer2, v403 = ProtoModule.readBuffer(Buf, v6)
 					NewModule.assignment_type = PropTypesModule.StringProp.decode(Buffer2)
 				elseif Tag == 3 then
 					local Buffer3
-					Buffer3, v393 = ProtoModule.readBuffer(Buf, v6)
+					Buffer3, v403 = ProtoModule.readBuffer(Buf, v6)
 					NewModule.social_link_type = PropTypesModule.StringProp.decode(Buffer3)
 				elseif Tag == 4 then
 					local Buffer4
-					Buffer4, v393 = ProtoModule.readBuffer(Buf, v6)
+					Buffer4, v403 = ProtoModule.readBuffer(Buf, v6)
 					NewModule.social_link_url = PropTypesModule.StringProp.decode(Buffer4)
 				elseif Tag == 5 then
 					local Buffer5
-					Buffer5, v393 = ProtoModule.readBuffer(Buf, v6)
+					Buffer5, v403 = ProtoModule.readBuffer(Buf, v6)
 					NewModule.social_link_display_type = PropTypesModule.StringProp.decode(Buffer5)
 				else
 					local VarInt, VarInt2 = ProtoModule.readVarInt(Buf, v6)
@@ -824,10 +824,10 @@ do
 				end
 			elseif Tag2 == ProtoModule.wireTypes.i32 then
 				local _
-				_, v393 = ProtoModule.readFixed32(Buf, v6)
+				_, v403 = ProtoModule.readFixed32(Buf, v6)
 			elseif Tag2 == ProtoModule.wireTypes.i64 then
 				local _
-				_, v393 = ProtoModule.readFixed64(Buf, v6)
+				_, v403 = ProtoModule.readFixed64(Buf, v6)
 			else
 				error("Unsupported wire type: " .. Tag2)
 			end
@@ -936,21 +936,21 @@ do
 		local v7 = 0
 		while v7 < buffer.len(Buf) do
 			local Tag, Tag2
-			Tag, Tag2, v416 = ProtoModule.readTag(Buf, v7)
+			Tag, Tag2, v426 = ProtoModule.readTag(Buf, v7)
 			
 			if Tag2 == ProtoModule.wireTypes.varint then
 				if Tag == 1 then
 					local VarIntI32
-					VarIntI32, v416 = ProtoModule.readVarIntI32(Buf, v7)
+					VarIntI32, v426 = ProtoModule.readVarIntI32(Buf, v7)
 					NewModule.action_type = t.ActionType.fromNumber(VarIntI32) or VarIntI32
 				else
 					local _
-					_, v416 = ProtoModule.readVarInt(Buf, v7)
+					_, v426 = ProtoModule.readVarInt(Buf, v7)
 				end
 			elseif Tag2 == ProtoModule.wireTypes.lengthDelimited then
 				if Tag == 2 then
 					local Buffer1
-					Buffer1, v416 = ProtoModule.readBuffer(Buf, v7)
+					Buffer1, v426 = ProtoModule.readBuffer(Buf, v7)
 					NewModule.action_params = t.OpenGameDetailsAction_Params.decode(Buffer1)
 				else
 					local VarInt, VarInt2 = ProtoModule.readVarInt(Buf, v7)
@@ -958,10 +958,10 @@ do
 				end
 			elseif Tag2 == ProtoModule.wireTypes.i32 then
 				local _
-				_, v416 = ProtoModule.readFixed32(Buf, v7)
+				_, v426 = ProtoModule.readFixed32(Buf, v7)
 			elseif Tag2 == ProtoModule.wireTypes.i64 then
 				local _
-				_, v416 = ProtoModule.readFixed64(Buf, v7)
+				_, v426 = ProtoModule.readFixed64(Buf, v7)
 			else
 				error("Unsupported wire type: " .. Tag2)
 			end
@@ -1077,39 +1077,39 @@ do
 		local v7 = 0
 		while v7 < buffer.len(Buf) do
 			local Tag, Tag2
-			Tag, Tag2, v452 = ProtoModule.readTag(Buf, v7)
+			Tag, Tag2, v462 = ProtoModule.readTag(Buf, v7)
 			
 			if Tag2 == ProtoModule.wireTypes.varint then
 				local _
-				_, v452 = ProtoModule.readVarInt(Buf, v7)
+				_, v462 = ProtoModule.readVarInt(Buf, v7)
 			elseif Tag2 == ProtoModule.wireTypes.lengthDelimited then
 				if Tag == 1 then
 					local Buffer1
-					Buffer1, v452 = ProtoModule.readBuffer(Buf, v7)
+					Buffer1, v462 = ProtoModule.readBuffer(Buf, v7)
 					NewModule.place_id = PropTypesModule.StringProp.decode(Buffer1)
 				elseif Tag == 2 then
 					local Buffer2
-					Buffer2, v452 = ProtoModule.readBuffer(Buf, v7)
+					Buffer2, v462 = ProtoModule.readBuffer(Buf, v7)
 					NewModule.universe_id = PropTypesModule.StringProp.decode(Buffer2)
 				elseif Tag == 3 then
 					local Buffer3
-					Buffer3, v452 = ProtoModule.readBuffer(Buf, v7)
+					Buffer3, v462 = ProtoModule.readBuffer(Buf, v7)
 					NewModule.inherit_referral_session = PropTypesModule.BoolProp.decode(Buffer3)
 				elseif Tag == 4 then
 					local Buffer4
-					Buffer4, v452 = ProtoModule.readBuffer(Buf, v7)
+					Buffer4, v462 = ProtoModule.readBuffer(Buf, v7)
 					NewModule.place_id_override = PropTypesModule.StringProp.decode(Buffer4)
 				elseif Tag == 5 then
 					local Buffer5
-					Buffer5, v452 = ProtoModule.readBuffer(Buf, v7)
+					Buffer5, v462 = ProtoModule.readBuffer(Buf, v7)
 					NewModule.experience_join_data = t.LaunchExperienceAction_ExperienceJoinData.decode(Buffer5)
 				elseif Tag == 6 then
 					local Buffer6
-					Buffer6, v452 = ProtoModule.readBuffer(Buf, v7)
+					Buffer6, v462 = ProtoModule.readBuffer(Buf, v7)
 					NewModule.skip_sponsored_click_recording = PropTypesModule.BoolProp.decode(Buffer6)
 				elseif Tag == 7 then
 					local Buffer7
-					Buffer7, v452 = ProtoModule.readBuffer(Buf, v7)
+					Buffer7, v462 = ProtoModule.readBuffer(Buf, v7)
 					NewModule.canonical_url_path = PropTypesModule.StringProp.decode(Buffer7)
 				else
 					local VarInt, VarInt2 = ProtoModule.readVarInt(Buf, v7)
@@ -1117,10 +1117,10 @@ do
 				end
 			elseif Tag2 == ProtoModule.wireTypes.i32 then
 				local _
-				_, v452 = ProtoModule.readFixed32(Buf, v7)
+				_, v462 = ProtoModule.readFixed32(Buf, v7)
 			elseif Tag2 == ProtoModule.wireTypes.i64 then
 				local _
-				_, v452 = ProtoModule.readFixed64(Buf, v7)
+				_, v462 = ProtoModule.readFixed64(Buf, v7)
 			else
 				error("Unsupported wire type: " .. Tag2)
 			end
@@ -1247,21 +1247,21 @@ do
 		local v8 = 0
 		while v8 < buffer.len(Buf) do
 			local Tag, Tag2
-			Tag, Tag2, v477 = ProtoModule.readTag(Buf, v8)
+			Tag, Tag2, v487 = ProtoModule.readTag(Buf, v8)
 			
 			if Tag2 == ProtoModule.wireTypes.varint then
 				if Tag == 1 then
 					local VarIntI32
-					VarIntI32, v477 = ProtoModule.readVarIntI32(Buf, v8)
+					VarIntI32, v487 = ProtoModule.readVarIntI32(Buf, v8)
 					NewModule.action_type = t.ActionType.fromNumber(VarIntI32) or VarIntI32
 				else
 					local _
-					_, v477 = ProtoModule.readVarInt(Buf, v8)
+					_, v487 = ProtoModule.readVarInt(Buf, v8)
 				end
 			elseif Tag2 == ProtoModule.wireTypes.lengthDelimited then
 				if Tag == 2 then
 					local Buffer1
-					Buffer1, v477 = ProtoModule.readBuffer(Buf, v8)
+					Buffer1, v487 = ProtoModule.readBuffer(Buf, v8)
 					NewModule.action_params = t.OpenJoinFriendsAction_Params.decode(Buffer1)
 				else
 					local VarInt, VarInt2 = ProtoModule.readVarInt(Buf, v8)
@@ -1269,10 +1269,10 @@ do
 				end
 			elseif Tag2 == ProtoModule.wireTypes.i32 then
 				local _
-				_, v477 = ProtoModule.readFixed32(Buf, v8)
+				_, v487 = ProtoModule.readFixed32(Buf, v8)
 			elseif Tag2 == ProtoModule.wireTypes.i64 then
 				local _
-				_, v477 = ProtoModule.readFixed64(Buf, v8)
+				_, v487 = ProtoModule.readFixed64(Buf, v8)
 			else
 				error("Unsupported wire type: " .. Tag2)
 			end
@@ -1356,19 +1356,19 @@ do
 		local v9 = 0
 		while v9 < buffer.len(Buf) do
 			local Tag, Tag2
-			Tag, Tag2, v498 = ProtoModule.readTag(Buf, v9)
+			Tag, Tag2, v508 = ProtoModule.readTag(Buf, v9)
 			
 			if Tag2 == ProtoModule.wireTypes.varint then
 				local _
-				_, v498 = ProtoModule.readVarInt(Buf, v9)
+				_, v508 = ProtoModule.readVarInt(Buf, v9)
 			elseif Tag2 == ProtoModule.wireTypes.lengthDelimited then
 				if Tag == 1 then
 					local Buffer1
-					Buffer1, v498 = ProtoModule.readBuffer(Buf, v9)
+					Buffer1, v508 = ProtoModule.readBuffer(Buf, v9)
 					NewModule.place_id = PropTypesModule.StringProp.decode(Buffer1)
 				elseif Tag == 2 then
 					local Buffer2
-					Buffer2, v498 = ProtoModule.readBuffer(Buf, v9)
+					Buffer2, v508 = ProtoModule.readBuffer(Buf, v9)
 					NewModule.universe_id = PropTypesModule.StringProp.decode(Buffer2)
 				else
 					local VarInt, VarInt2 = ProtoModule.readVarInt(Buf, v9)
@@ -1376,10 +1376,10 @@ do
 				end
 			elseif Tag2 == ProtoModule.wireTypes.i32 then
 				local _
-				_, v498 = ProtoModule.readFixed32(Buf, v9)
+				_, v508 = ProtoModule.readFixed32(Buf, v9)
 			elseif Tag2 == ProtoModule.wireTypes.i64 then
 				local _
-				_, v498 = ProtoModule.readFixed64(Buf, v9)
+				_, v508 = ProtoModule.readFixed64(Buf, v9)
 			else
 				error("Unsupported wire type: " .. Tag2)
 			end
@@ -1463,21 +1463,21 @@ do
 		local v9 = 0
 		while v9 < buffer.len(Buf) do
 			local Tag, Tag2
-			Tag, Tag2, v518 = ProtoModule.readTag(Buf, v9)
+			Tag, Tag2, v528 = ProtoModule.readTag(Buf, v9)
 			
 			if Tag2 == ProtoModule.wireTypes.varint then
 				if Tag == 1 then
 					local VarIntI32
-					VarIntI32, v518 = ProtoModule.readVarIntI32(Buf, v9)
+					VarIntI32, v528 = ProtoModule.readVarIntI32(Buf, v9)
 					NewModule.action_type = t.ActionType.fromNumber(VarIntI32) or VarIntI32
 				else
 					local _
-					_, v518 = ProtoModule.readVarInt(Buf, v9)
+					_, v528 = ProtoModule.readVarInt(Buf, v9)
 				end
 			elseif Tag2 == ProtoModule.wireTypes.lengthDelimited then
 				if Tag == 2 then
 					local Buffer1
-					Buffer1, v518 = ProtoModule.readBuffer(Buf, v9)
+					Buffer1, v528 = ProtoModule.readBuffer(Buf, v9)
 					NewModule.action_params = t.OpenMarketplaceTryOnAction_Params.decode(Buffer1)
 				else
 					local VarInt, VarInt2 = ProtoModule.readVarInt(Buf, v9)
@@ -1485,10 +1485,10 @@ do
 				end
 			elseif Tag2 == ProtoModule.wireTypes.i32 then
 				local _
-				_, v518 = ProtoModule.readFixed32(Buf, v9)
+				_, v528 = ProtoModule.readFixed32(Buf, v9)
 			elseif Tag2 == ProtoModule.wireTypes.i64 then
 				local _
-				_, v518 = ProtoModule.readFixed64(Buf, v9)
+				_, v528 = ProtoModule.readFixed64(Buf, v9)
 			else
 				error("Unsupported wire type: " .. Tag2)
 			end
@@ -1584,27 +1584,27 @@ do
 		local v10 = 0
 		while v10 < buffer.len(Buf) do
 			local Tag, Tag2
-			Tag, Tag2, v545 = ProtoModule.readTag(Buf, v10)
+			Tag, Tag2, v555 = ProtoModule.readTag(Buf, v10)
 			
 			if Tag2 == ProtoModule.wireTypes.varint then
 				local _
-				_, v545 = ProtoModule.readVarInt(Buf, v10)
+				_, v555 = ProtoModule.readVarInt(Buf, v10)
 			elseif Tag2 == ProtoModule.wireTypes.lengthDelimited then
 				if Tag == 1 then
 					local Buffer1
-					Buffer1, v545 = ProtoModule.readBuffer(Buf, v10)
+					Buffer1, v555 = ProtoModule.readBuffer(Buf, v10)
 					NewModule.item_id = PropTypesModule.StringProp.decode(Buffer1)
 				elseif Tag == 2 then
 					local Buffer2
-					Buffer2, v545 = ProtoModule.readBuffer(Buf, v10)
+					Buffer2, v555 = ProtoModule.readBuffer(Buf, v10)
 					NewModule.item_type = PropTypesModule.StringProp.decode(Buffer2)
 				elseif Tag == 3 then
 					local Buffer3
-					Buffer3, v545 = ProtoModule.readBuffer(Buf, v10)
+					Buffer3, v555 = ProtoModule.readBuffer(Buf, v10)
 					NewModule.item_sub_type_name = PropTypesModule.StringProp.decode(Buffer3)
 				elseif Tag == 4 then
 					local Buffer4
-					Buffer4, v545 = ProtoModule.readBuffer(Buf, v10)
+					Buffer4, v555 = ProtoModule.readBuffer(Buf, v10)
 					NewModule.item_price = PropTypesModule.Int64Prop.decode(Buffer4)
 				else
 					local VarInt, VarInt2 = ProtoModule.readVarInt(Buf, v10)
@@ -1612,10 +1612,10 @@ do
 				end
 			elseif Tag2 == ProtoModule.wireTypes.i32 then
 				local _
-				_, v545 = ProtoModule.readFixed32(Buf, v10)
+				_, v555 = ProtoModule.readFixed32(Buf, v10)
 			elseif Tag2 == ProtoModule.wireTypes.i64 then
 				local _
-				_, v545 = ProtoModule.readFixed64(Buf, v10)
+				_, v555 = ProtoModule.readFixed64(Buf, v10)
 			else
 				error("Unsupported wire type: " .. Tag2)
 			end
@@ -1715,21 +1715,21 @@ do
 		local v11 = 0
 		while v11 < buffer.len(Buf) do
 			local Tag, Tag2
-			Tag, Tag2, v567 = ProtoModule.readTag(Buf, v11)
+			Tag, Tag2, v577 = ProtoModule.readTag(Buf, v11)
 			
 			if Tag2 == ProtoModule.wireTypes.varint then
 				if Tag == 1 then
 					local VarIntI32
-					VarIntI32, v567 = ProtoModule.readVarIntI32(Buf, v11)
+					VarIntI32, v577 = ProtoModule.readVarIntI32(Buf, v11)
 					NewModule.action_type = t.ActionType.fromNumber(VarIntI32) or VarIntI32
 				else
 					local _
-					_, v567 = ProtoModule.readVarInt(Buf, v11)
+					_, v577 = ProtoModule.readVarInt(Buf, v11)
 				end
 			elseif Tag2 == ProtoModule.wireTypes.lengthDelimited then
 				if Tag == 2 then
 					local Buffer1
-					Buffer1, v567 = ProtoModule.readBuffer(Buf, v11)
+					Buffer1, v577 = ProtoModule.readBuffer(Buf, v11)
 					NewModule.action_params = t.OpenSeeAllAction_Params.decode(Buffer1)
 				else
 					local VarInt, VarInt2 = ProtoModule.readVarInt(Buf, v11)
@@ -1737,10 +1737,10 @@ do
 				end
 			elseif Tag2 == ProtoModule.wireTypes.i32 then
 				local _
-				_, v567 = ProtoModule.readFixed32(Buf, v11)
+				_, v577 = ProtoModule.readFixed32(Buf, v11)
 			elseif Tag2 == ProtoModule.wireTypes.i64 then
 				local _
-				_, v567 = ProtoModule.readFixed64(Buf, v11)
+				_, v577 = ProtoModule.readFixed64(Buf, v11)
 			else
 				error("Unsupported wire type: " .. Tag2)
 			end
@@ -1832,23 +1832,23 @@ do
 		local v11 = 0
 		while v11 < buffer.len(Buf) do
 			local Tag, Tag2
-			Tag, Tag2, v591 = ProtoModule.readTag(Buf, v11)
+			Tag, Tag2, v601 = ProtoModule.readTag(Buf, v11)
 			
 			if Tag2 == ProtoModule.wireTypes.varint then
 				local _
-				_, v591 = ProtoModule.readVarInt(Buf, v11)
+				_, v601 = ProtoModule.readVarInt(Buf, v11)
 			elseif Tag2 == ProtoModule.wireTypes.lengthDelimited then
 				if Tag == 1 then
 					local Buffer1
-					Buffer1, v591 = ProtoModule.readBuffer(Buf, v11)
+					Buffer1, v601 = ProtoModule.readBuffer(Buf, v11)
 					NewModule.collection_id = PropTypesModule.StringProp.decode(Buffer1)
 				elseif Tag == 2 then
 					local Buffer2
-					Buffer2, v591 = ProtoModule.readBuffer(Buf, v11)
+					Buffer2, v601 = ProtoModule.readBuffer(Buf, v11)
 					NewModule.game_set_target_id = PropTypesModule.StringProp.decode(Buffer2)
 				elseif Tag == 3 then
 					local Buffer3
-					Buffer3, v591 = ProtoModule.readBuffer(Buf, v11)
+					Buffer3, v601 = ProtoModule.readBuffer(Buf, v11)
 					NewModule.collection_position = PropTypesModule.StringProp.decode(Buffer3)
 				else
 					local VarInt, VarInt2 = ProtoModule.readVarInt(Buf, v11)
@@ -1856,10 +1856,10 @@ do
 				end
 			elseif Tag2 == ProtoModule.wireTypes.i32 then
 				local _
-				_, v591 = ProtoModule.readFixed32(Buf, v11)
+				_, v601 = ProtoModule.readFixed32(Buf, v11)
 			elseif Tag2 == ProtoModule.wireTypes.i64 then
 				local _
-				_, v591 = ProtoModule.readFixed64(Buf, v11)
+				_, v601 = ProtoModule.readFixed64(Buf, v11)
 			else
 				error("Unsupported wire type: " .. Tag2)
 			end
@@ -1950,21 +1950,21 @@ do
 		local v12 = 0
 		while v12 < buffer.len(Buf) do
 			local Tag, Tag2
-			Tag, Tag2, v612 = ProtoModule.readTag(Buf, v12)
+			Tag, Tag2, v622 = ProtoModule.readTag(Buf, v12)
 			
 			if Tag2 == ProtoModule.wireTypes.varint then
 				if Tag == 1 then
 					local VarIntI32
-					VarIntI32, v612 = ProtoModule.readVarIntI32(Buf, v12)
+					VarIntI32, v622 = ProtoModule.readVarIntI32(Buf, v12)
 					NewModule.action_type = t.ActionType.fromNumber(VarIntI32) or VarIntI32
 				else
 					local _
-					_, v612 = ProtoModule.readVarInt(Buf, v12)
+					_, v622 = ProtoModule.readVarInt(Buf, v12)
 				end
 			elseif Tag2 == ProtoModule.wireTypes.lengthDelimited then
 				if Tag == 2 then
 					local Buffer1
-					Buffer1, v612 = ProtoModule.readBuffer(Buf, v12)
+					Buffer1, v622 = ProtoModule.readBuffer(Buf, v12)
 					NewModule.action_params = t.OpenSponsoredTooltipAction_Params.decode(Buffer1)
 				else
 					local VarInt, VarInt2 = ProtoModule.readVarInt(Buf, v12)
@@ -1972,10 +1972,10 @@ do
 				end
 			elseif Tag2 == ProtoModule.wireTypes.i32 then
 				local _
-				_, v612 = ProtoModule.readFixed32(Buf, v12)
+				_, v622 = ProtoModule.readFixed32(Buf, v12)
 			elseif Tag2 == ProtoModule.wireTypes.i64 then
 				local _
-				_, v612 = ProtoModule.readFixed64(Buf, v12)
+				_, v622 = ProtoModule.readFixed64(Buf, v12)
 			else
 				error("Unsupported wire type: " .. Tag2)
 			end
@@ -2042,20 +2042,20 @@ do
 		local v13 = 0
 		while v13 < buffer.len(Buf) do
 			local _, Tag2
-			_, Tag2, v626 = ProtoModule.readTag(Buf, v13)
+			_, Tag2, v636 = ProtoModule.readTag(Buf, v13)
 			
 			if Tag2 == ProtoModule.wireTypes.varint then
 				local _
-				_, v626 = ProtoModule.readVarInt(Buf, v13)
+				_, v636 = ProtoModule.readVarInt(Buf, v13)
 			elseif Tag2 == ProtoModule.wireTypes.lengthDelimited then
 				local VarInt, VarInt2 = ProtoModule.readVarInt(Buf, v13)
 				v13 = VarInt2 + VarInt
 			elseif Tag2 == ProtoModule.wireTypes.i32 then
 				local _
-				_, v626 = ProtoModule.readFixed32(Buf, v13)
+				_, v636 = ProtoModule.readFixed32(Buf, v13)
 			elseif Tag2 == ProtoModule.wireTypes.i64 then
 				local _
-				_, v626 = ProtoModule.readFixed64(Buf, v13)
+				_, v636 = ProtoModule.readFixed64(Buf, v13)
 			else
 				error("Unsupported wire type: " .. Tag2)
 			end
@@ -2117,21 +2117,21 @@ do
 		local v13 = 0
 		while v13 < buffer.len(Buf) do
 			local Tag, Tag2
-			Tag, Tag2, v642 = ProtoModule.readTag(Buf, v13)
+			Tag, Tag2, v652 = ProtoModule.readTag(Buf, v13)
 			
 			if Tag2 == ProtoModule.wireTypes.varint then
 				if Tag == 1 then
 					local VarIntI32
-					VarIntI32, v642 = ProtoModule.readVarIntI32(Buf, v13)
+					VarIntI32, v652 = ProtoModule.readVarIntI32(Buf, v13)
 					NewModule.action_type = t.ActionType.fromNumber(VarIntI32) or VarIntI32
 				else
 					local _
-					_, v642 = ProtoModule.readVarInt(Buf, v13)
+					_, v652 = ProtoModule.readVarInt(Buf, v13)
 				end
 			elseif Tag2 == ProtoModule.wireTypes.lengthDelimited then
 				if Tag == 2 then
 					local Buffer1
-					Buffer1, v642 = ProtoModule.readBuffer(Buf, v13)
+					Buffer1, v652 = ProtoModule.readBuffer(Buf, v13)
 					NewModule.action_params = t.PlayButtonClickAction_Params.decode(Buffer1)
 				else
 					local VarInt, VarInt2 = ProtoModule.readVarInt(Buf, v13)
@@ -2139,10 +2139,10 @@ do
 				end
 			elseif Tag2 == ProtoModule.wireTypes.i32 then
 				local _
-				_, v642 = ProtoModule.readFixed32(Buf, v13)
+				_, v652 = ProtoModule.readFixed32(Buf, v13)
 			elseif Tag2 == ProtoModule.wireTypes.i64 then
 				local _
-				_, v642 = ProtoModule.readFixed64(Buf, v13)
+				_, v652 = ProtoModule.readFixed64(Buf, v13)
 			else
 				error("Unsupported wire type: " .. Tag2)
 			end
@@ -2209,20 +2209,20 @@ do
 		local v14 = 0
 		while v14 < buffer.len(Buf) do
 			local _, Tag2
-			_, Tag2, v656 = ProtoModule.readTag(Buf, v14)
+			_, Tag2, v666 = ProtoModule.readTag(Buf, v14)
 			
 			if Tag2 == ProtoModule.wireTypes.varint then
 				local _
-				_, v656 = ProtoModule.readVarInt(Buf, v14)
+				_, v666 = ProtoModule.readVarInt(Buf, v14)
 			elseif Tag2 == ProtoModule.wireTypes.lengthDelimited then
 				local VarInt, VarInt2 = ProtoModule.readVarInt(Buf, v14)
 				v14 = VarInt2 + VarInt
 			elseif Tag2 == ProtoModule.wireTypes.i32 then
 				local _
-				_, v656 = ProtoModule.readFixed32(Buf, v14)
+				_, v666 = ProtoModule.readFixed32(Buf, v14)
 			elseif Tag2 == ProtoModule.wireTypes.i64 then
 				local _
-				_, v656 = ProtoModule.readFixed64(Buf, v14)
+				_, v666 = ProtoModule.readFixed64(Buf, v14)
 			else
 				error("Unsupported wire type: " .. Tag2)
 			end
@@ -2282,21 +2282,21 @@ do
 		local v15 = 0
 		while v15 < buffer.len(Buf) do
 			local Tag, Tag2
-			Tag, Tag2, v672 = ProtoModule.readTag(Buf, v15)
+			Tag, Tag2, v682 = ProtoModule.readTag(Buf, v15)
 			
 			if Tag2 == ProtoModule.wireTypes.varint then
 				if Tag == 1 then
 					local VarIntI32
-					VarIntI32, v672 = ProtoModule.readVarIntI32(Buf, v15)
+					VarIntI32, v682 = ProtoModule.readVarIntI32(Buf, v15)
 					NewModule.action_type = t.ActionType.fromNumber(VarIntI32) or VarIntI32
 				else
 					local _
-					_, v672 = ProtoModule.readVarInt(Buf, v15)
+					_, v682 = ProtoModule.readVarInt(Buf, v15)
 				end
 			elseif Tag2 == ProtoModule.wireTypes.lengthDelimited then
 				if Tag == 2 then
 					local Buffer1
-					Buffer1, v672 = ProtoModule.readBuffer(Buf, v15)
+					Buffer1, v682 = ProtoModule.readBuffer(Buf, v15)
 					NewModule.action_params = t.PlayWithRewardAdAction_Params.decode(Buffer1)
 				else
 					local VarInt, VarInt2 = ProtoModule.readVarInt(Buf, v15)
@@ -2304,10 +2304,10 @@ do
 				end
 			elseif Tag2 == ProtoModule.wireTypes.i32 then
 				local _
-				_, v672 = ProtoModule.readFixed32(Buf, v15)
+				_, v682 = ProtoModule.readFixed32(Buf, v15)
 			elseif Tag2 == ProtoModule.wireTypes.i64 then
 				local _
-				_, v672 = ProtoModule.readFixed64(Buf, v15)
+				_, v682 = ProtoModule.readFixed64(Buf, v15)
 			else
 				error("Unsupported wire type: " .. Tag2)
 			end
@@ -2429,43 +2429,43 @@ do
 		local v15 = 0
 		while v15 < buffer.len(Buf) do
 			local Tag, Tag2
-			Tag, Tag2, v711 = ProtoModule.readTag(Buf, v15)
+			Tag, Tag2, v721 = ProtoModule.readTag(Buf, v15)
 			
 			if Tag2 == ProtoModule.wireTypes.varint then
 				local _
-				_, v711 = ProtoModule.readVarInt(Buf, v15)
+				_, v721 = ProtoModule.readVarInt(Buf, v15)
 			elseif Tag2 == ProtoModule.wireTypes.lengthDelimited then
 				if Tag == 1 then
 					local Buffer1
-					Buffer1, v711 = ProtoModule.readBuffer(Buf, v15)
+					Buffer1, v721 = ProtoModule.readBuffer(Buf, v15)
 					NewModule.universe_id = PropTypesModule.StringProp.decode(Buffer1)
 				elseif Tag == 2 then
 					local Buffer2
-					Buffer2, v711 = ProtoModule.readBuffer(Buf, v15)
+					Buffer2, v721 = ProtoModule.readBuffer(Buf, v15)
 					NewModule.place_id = PropTypesModule.StringProp.decode(Buffer2)
 				elseif Tag == 3 then
 					local Buffer3
-					Buffer3, v711 = ProtoModule.readBuffer(Buf, v15)
+					Buffer3, v721 = ProtoModule.readBuffer(Buf, v15)
 					NewModule.place_id_override = PropTypesModule.StringProp.decode(Buffer3)
 				elseif Tag == 4 then
 					local Buffer4
-					Buffer4, v711 = ProtoModule.readBuffer(Buf, v15)
+					Buffer4, v721 = ProtoModule.readBuffer(Buf, v15)
 					NewModule.experience_join_data = t.LaunchExperienceAction_ExperienceJoinData.decode(Buffer4)
 				elseif Tag == 5 then
 					local Buffer5
-					Buffer5, v711 = ProtoModule.readBuffer(Buf, v15)
+					Buffer5, v721 = ProtoModule.readBuffer(Buf, v15)
 					NewModule.product_id = PropTypesModule.StringProp.decode(Buffer5)
 				elseif Tag == 6 then
 					local Buffer6
-					Buffer6, v711 = ProtoModule.readBuffer(Buf, v15)
+					Buffer6, v721 = ProtoModule.readBuffer(Buf, v15)
 					NewModule.product_image_asset_id = PropTypesModule.StringProp.decode(Buffer6)
 				elseif Tag == 7 then
 					local Buffer7
-					Buffer7, v711 = ProtoModule.readBuffer(Buf, v15)
+					Buffer7, v721 = ProtoModule.readBuffer(Buf, v15)
 					NewModule.product_name = PropTypesModule.StringProp.decode(Buffer7)
 				elseif Tag == 8 then
 					local Buffer8
-					Buffer8, v711 = ProtoModule.readBuffer(Buf, v15)
+					Buffer8, v721 = ProtoModule.readBuffer(Buf, v15)
 					NewModule.flow_id = PropTypesModule.StringProp.decode(Buffer8)
 				else
 					local VarInt, VarInt2 = ProtoModule.readVarInt(Buf, v15)
@@ -2473,10 +2473,10 @@ do
 				end
 			elseif Tag2 == ProtoModule.wireTypes.i32 then
 				local _
-				_, v711 = ProtoModule.readFixed32(Buf, v15)
+				_, v721 = ProtoModule.readFixed32(Buf, v15)
 			elseif Tag2 == ProtoModule.wireTypes.i64 then
 				local _
-				_, v711 = ProtoModule.readFixed64(Buf, v15)
+				_, v721 = ProtoModule.readFixed64(Buf, v15)
 			else
 				error("Unsupported wire type: " .. Tag2)
 			end
@@ -2612,21 +2612,21 @@ do
 		local v16 = 0
 		while v16 < buffer.len(Buf) do
 			local Tag, Tag2
-			Tag, Tag2, v737 = ProtoModule.readTag(Buf, v16)
+			Tag, Tag2, v747 = ProtoModule.readTag(Buf, v16)
 			
 			if Tag2 == ProtoModule.wireTypes.varint then
 				if Tag == 1 then
 					local VarIntI32
-					VarIntI32, v737 = ProtoModule.readVarIntI32(Buf, v16)
+					VarIntI32, v747 = ProtoModule.readVarIntI32(Buf, v16)
 					NewModule.action_type = t.ActionType.fromNumber(VarIntI32) or VarIntI32
 				else
 					local _
-					_, v737 = ProtoModule.readVarInt(Buf, v16)
+					_, v747 = ProtoModule.readVarInt(Buf, v16)
 				end
 			elseif Tag2 == ProtoModule.wireTypes.lengthDelimited then
 				if Tag == 2 then
 					local Buffer1
-					Buffer1, v737 = ProtoModule.readBuffer(Buf, v16)
+					Buffer1, v747 = ProtoModule.readBuffer(Buf, v16)
 					NewModule.action_params = t.UpdateUserSettingsAction_Params.decode(Buffer1)
 				else
 					local VarInt, VarInt2 = ProtoModule.readVarInt(Buf, v16)
@@ -2634,10 +2634,10 @@ do
 				end
 			elseif Tag2 == ProtoModule.wireTypes.i32 then
 				local _
-				_, v737 = ProtoModule.readFixed32(Buf, v16)
+				_, v747 = ProtoModule.readFixed32(Buf, v16)
 			elseif Tag2 == ProtoModule.wireTypes.i64 then
 				local _
-				_, v737 = ProtoModule.readFixed64(Buf, v16)
+				_, v747 = ProtoModule.readFixed64(Buf, v16)
 			else
 				error("Unsupported wire type: " .. Tag2)
 			end
@@ -2733,27 +2733,27 @@ do
 		local v17 = 0
 		while v17 < buffer.len(Buf) do
 			local Tag, Tag2
-			Tag, Tag2, v764 = ProtoModule.readTag(Buf, v17)
+			Tag, Tag2, v774 = ProtoModule.readTag(Buf, v17)
 			
 			if Tag2 == ProtoModule.wireTypes.varint then
 				local _
-				_, v764 = ProtoModule.readVarInt(Buf, v17)
+				_, v774 = ProtoModule.readVarInt(Buf, v17)
 			elseif Tag2 == ProtoModule.wireTypes.lengthDelimited then
 				if Tag == 1 then
 					local Buffer1
-					Buffer1, v764 = ProtoModule.readBuffer(Buf, v17)
+					Buffer1, v774 = ProtoModule.readBuffer(Buf, v17)
 					NewModule.settings = PropTypesModule.StructProp.decode(Buffer1)
 				elseif Tag == 2 then
 					local Buffer2
-					Buffer2, v764 = ProtoModule.readBuffer(Buf, v17)
+					Buffer2, v774 = ProtoModule.readBuffer(Buf, v17)
 					NewModule.audit_data = PropTypesModule.StringProp.decode(Buffer2)
 				elseif Tag == 3 then
 					local Buffer3
-					Buffer3, v764 = ProtoModule.readBuffer(Buf, v17)
+					Buffer3, v774 = ProtoModule.readBuffer(Buf, v17)
 					NewModule.on_success = t.ActionProp.decode(Buffer3)
 				elseif Tag == 4 then
 					local Buffer4
-					Buffer4, v764 = ProtoModule.readBuffer(Buf, v17)
+					Buffer4, v774 = ProtoModule.readBuffer(Buf, v17)
 					NewModule.on_failure = t.ActionProp.decode(Buffer4)
 				else
 					local VarInt, VarInt2 = ProtoModule.readVarInt(Buf, v17)
@@ -2761,10 +2761,10 @@ do
 				end
 			elseif Tag2 == ProtoModule.wireTypes.i32 then
 				local _
-				_, v764 = ProtoModule.readFixed32(Buf, v17)
+				_, v774 = ProtoModule.readFixed32(Buf, v17)
 			elseif Tag2 == ProtoModule.wireTypes.i64 then
 				local _
-				_, v764 = ProtoModule.readFixed64(Buf, v17)
+				_, v774 = ProtoModule.readFixed64(Buf, v17)
 			else
 				error("Unsupported wire type: " .. Tag2)
 			end
@@ -2863,21 +2863,21 @@ do
 		local v17 = 0
 		while v17 < buffer.len(Buf) do
 			local Tag, Tag2
-			Tag, Tag2, v786 = ProtoModule.readTag(Buf, v17)
+			Tag, Tag2, v796 = ProtoModule.readTag(Buf, v17)
 			
 			if Tag2 == ProtoModule.wireTypes.varint then
 				if Tag == 1 then
 					local VarIntI32
-					VarIntI32, v786 = ProtoModule.readVarIntI32(Buf, v17)
+					VarIntI32, v796 = ProtoModule.readVarIntI32(Buf, v17)
 					NewModule.action_type = t.ActionType.fromNumber(VarIntI32) or VarIntI32
 				else
 					local _
-					_, v786 = ProtoModule.readVarInt(Buf, v17)
+					_, v796 = ProtoModule.readVarInt(Buf, v17)
 				end
 			elseif Tag2 == ProtoModule.wireTypes.lengthDelimited then
 				if Tag == 2 then
 					local Buffer1
-					Buffer1, v786 = ProtoModule.readBuffer(Buf, v17)
+					Buffer1, v796 = ProtoModule.readBuffer(Buf, v17)
 					NewModule.action_params = t.OpenTooltipAction_Params.decode(Buffer1)
 				else
 					local VarInt, VarInt2 = ProtoModule.readVarInt(Buf, v17)
@@ -2885,10 +2885,10 @@ do
 				end
 			elseif Tag2 == ProtoModule.wireTypes.i32 then
 				local _
-				_, v786 = ProtoModule.readFixed32(Buf, v17)
+				_, v796 = ProtoModule.readFixed32(Buf, v17)
 			elseif Tag2 == ProtoModule.wireTypes.i64 then
 				local _
-				_, v786 = ProtoModule.readFixed64(Buf, v17)
+				_, v796 = ProtoModule.readFixed64(Buf, v17)
 			else
 				error("Unsupported wire type: " .. Tag2)
 			end
@@ -2972,19 +2972,19 @@ do
 		local v18 = 0
 		while v18 < buffer.len(Buf) do
 			local Tag, Tag2
-			Tag, Tag2, v807 = ProtoModule.readTag(Buf, v18)
+			Tag, Tag2, v817 = ProtoModule.readTag(Buf, v18)
 			
 			if Tag2 == ProtoModule.wireTypes.varint then
 				local _
-				_, v807 = ProtoModule.readVarInt(Buf, v18)
+				_, v817 = ProtoModule.readVarInt(Buf, v18)
 			elseif Tag2 == ProtoModule.wireTypes.lengthDelimited then
 				if Tag == 1 then
 					local Buffer1
-					Buffer1, v807 = ProtoModule.readBuffer(Buf, v18)
+					Buffer1, v817 = ProtoModule.readBuffer(Buf, v18)
 					NewModule.tooltip_title = PropTypesModule.StringProp.decode(Buffer1)
 				elseif Tag == 2 then
 					local Buffer2
-					Buffer2, v807 = ProtoModule.readBuffer(Buf, v18)
+					Buffer2, v817 = ProtoModule.readBuffer(Buf, v18)
 					NewModule.tooltip_info_text = PropTypesModule.StringProp.decode(Buffer2)
 				else
 					local VarInt, VarInt2 = ProtoModule.readVarInt(Buf, v18)
@@ -2992,10 +2992,10 @@ do
 				end
 			elseif Tag2 == ProtoModule.wireTypes.i32 then
 				local _
-				_, v807 = ProtoModule.readFixed32(Buf, v18)
+				_, v817 = ProtoModule.readFixed32(Buf, v18)
 			elseif Tag2 == ProtoModule.wireTypes.i64 then
 				local _
-				_, v807 = ProtoModule.readFixed64(Buf, v18)
+				_, v817 = ProtoModule.readFixed64(Buf, v18)
 			else
 				error("Unsupported wire type: " .. Tag2)
 			end
@@ -3077,21 +3077,21 @@ do
 		local v19 = 0
 		while v19 < buffer.len(Buf) do
 			local Tag, Tag2
-			Tag, Tag2, v827 = ProtoModule.readTag(Buf, v19)
+			Tag, Tag2, v837 = ProtoModule.readTag(Buf, v19)
 			
 			if Tag2 == ProtoModule.wireTypes.varint then
 				if Tag == 1 then
 					local VarIntI32
-					VarIntI32, v827 = ProtoModule.readVarIntI32(Buf, v19)
+					VarIntI32, v837 = ProtoModule.readVarIntI32(Buf, v19)
 					NewModule.action_type = t.ActionType.fromNumber(VarIntI32) or VarIntI32
 				else
 					local _
-					_, v827 = ProtoModule.readVarInt(Buf, v19)
+					_, v837 = ProtoModule.readVarInt(Buf, v19)
 				end
 			elseif Tag2 == ProtoModule.wireTypes.lengthDelimited then
 				if Tag == 2 then
 					local Buffer1
-					Buffer1, v827 = ProtoModule.readBuffer(Buf, v19)
+					Buffer1, v837 = ProtoModule.readBuffer(Buf, v19)
 					NewModule.action_params = t.OpenBadgeDetailsAction_Params.decode(Buffer1)
 				else
 					local VarInt, VarInt2 = ProtoModule.readVarInt(Buf, v19)
@@ -3099,10 +3099,10 @@ do
 				end
 			elseif Tag2 == ProtoModule.wireTypes.i32 then
 				local _
-				_, v827 = ProtoModule.readFixed32(Buf, v19)
+				_, v837 = ProtoModule.readFixed32(Buf, v19)
 			elseif Tag2 == ProtoModule.wireTypes.i64 then
 				local _
-				_, v827 = ProtoModule.readFixed64(Buf, v19)
+				_, v837 = ProtoModule.readFixed64(Buf, v19)
 			else
 				error("Unsupported wire type: " .. Tag2)
 			end
@@ -3188,19 +3188,19 @@ do
 		local v19 = 0
 		while v19 < buffer.len(Buf) do
 			local Tag, Tag2
-			Tag, Tag2, v848 = ProtoModule.readTag(Buf, v19)
+			Tag, Tag2, v858 = ProtoModule.readTag(Buf, v19)
 			
 			if Tag2 == ProtoModule.wireTypes.varint then
 				local _
-				_, v848 = ProtoModule.readVarInt(Buf, v19)
+				_, v858 = ProtoModule.readVarInt(Buf, v19)
 			elseif Tag2 == ProtoModule.wireTypes.lengthDelimited then
 				if Tag == 1 then
 					local Buffer1
-					Buffer1, v848 = ProtoModule.readBuffer(Buf, v19)
+					Buffer1, v858 = ProtoModule.readBuffer(Buf, v19)
 					NewModule.badge_id = PropTypesModule.StringProp.decode(Buffer1)
 				elseif Tag == 2 then
 					local Buffer2
-					Buffer2, v848 = ProtoModule.readBuffer(Buf, v19)
+					Buffer2, v858 = ProtoModule.readBuffer(Buf, v19)
 					NewModule.title_text = PropTypesModule.StringProp.decode(Buffer2)
 				else
 					local VarInt, VarInt2 = ProtoModule.readVarInt(Buf, v19)
@@ -3208,10 +3208,10 @@ do
 				end
 			elseif Tag2 == ProtoModule.wireTypes.i32 then
 				local _
-				_, v848 = ProtoModule.readFixed32(Buf, v19)
+				_, v858 = ProtoModule.readFixed32(Buf, v19)
 			elseif Tag2 == ProtoModule.wireTypes.i64 then
 				local _
-				_, v848 = ProtoModule.readFixed64(Buf, v19)
+				_, v858 = ProtoModule.readFixed64(Buf, v19)
 			else
 				error("Unsupported wire type: " .. Tag2)
 			end
@@ -3293,21 +3293,21 @@ do
 		local v20 = 0
 		while v20 < buffer.len(Buf) do
 			local Tag, Tag2
-			Tag, Tag2, v868 = ProtoModule.readTag(Buf, v20)
+			Tag, Tag2, v878 = ProtoModule.readTag(Buf, v20)
 			
 			if Tag2 == ProtoModule.wireTypes.varint then
 				if Tag == 1 then
 					local VarIntI32
-					VarIntI32, v868 = ProtoModule.readVarIntI32(Buf, v20)
+					VarIntI32, v878 = ProtoModule.readVarIntI32(Buf, v20)
 					NewModule.action_type = t.ActionType.fromNumber(VarIntI32) or VarIntI32
 				else
 					local _
-					_, v868 = ProtoModule.readVarInt(Buf, v20)
+					_, v878 = ProtoModule.readVarInt(Buf, v20)
 				end
 			elseif Tag2 == ProtoModule.wireTypes.lengthDelimited then
 				if Tag == 2 then
 					local Buffer1
-					Buffer1, v868 = ProtoModule.readBuffer(Buf, v20)
+					Buffer1, v878 = ProtoModule.readBuffer(Buf, v20)
 					NewModule.action_params = t.LoadMoreFromApiAction_Params.decode(Buffer1)
 				else
 					local VarInt, VarInt2 = ProtoModule.readVarInt(Buf, v20)
@@ -3315,10 +3315,10 @@ do
 				end
 			elseif Tag2 == ProtoModule.wireTypes.i32 then
 				local _
-				_, v868 = ProtoModule.readFixed32(Buf, v20)
+				_, v878 = ProtoModule.readFixed32(Buf, v20)
 			elseif Tag2 == ProtoModule.wireTypes.i64 then
 				local _
-				_, v868 = ProtoModule.readFixed64(Buf, v20)
+				_, v878 = ProtoModule.readFixed64(Buf, v20)
 			else
 				error("Unsupported wire type: " .. Tag2)
 			end
@@ -3402,19 +3402,19 @@ do
 		local v21 = 0
 		while v21 < buffer.len(Buf) do
 			local Tag, Tag2
-			Tag, Tag2, v889 = ProtoModule.readTag(Buf, v21)
+			Tag, Tag2, v899 = ProtoModule.readTag(Buf, v21)
 			
 			if Tag2 == ProtoModule.wireTypes.varint then
 				local _
-				_, v889 = ProtoModule.readVarInt(Buf, v21)
+				_, v899 = ProtoModule.readVarInt(Buf, v21)
 			elseif Tag2 == ProtoModule.wireTypes.lengthDelimited then
 				if Tag == 1 then
 					local Buffer1
-					Buffer1, v889 = ProtoModule.readBuffer(Buf, v21)
+					Buffer1, v899 = ProtoModule.readBuffer(Buf, v21)
 					NewModule.surface_key = PropTypesModule.StringProp.decode(Buffer1)
 				elseif Tag == 2 then
 					local Buffer2
-					Buffer2, v889 = ProtoModule.readBuffer(Buf, v21)
+					Buffer2, v899 = ProtoModule.readBuffer(Buf, v21)
 					NewModule.config_key = PropTypesModule.StringProp.decode(Buffer2)
 				else
 					local VarInt, VarInt2 = ProtoModule.readVarInt(Buf, v21)
@@ -3422,10 +3422,10 @@ do
 				end
 			elseif Tag2 == ProtoModule.wireTypes.i32 then
 				local _
-				_, v889 = ProtoModule.readFixed32(Buf, v21)
+				_, v899 = ProtoModule.readFixed32(Buf, v21)
 			elseif Tag2 == ProtoModule.wireTypes.i64 then
 				local _
-				_, v889 = ProtoModule.readFixed64(Buf, v21)
+				_, v899 = ProtoModule.readFixed64(Buf, v21)
 			else
 				error("Unsupported wire type: " .. Tag2)
 			end
@@ -3509,21 +3509,21 @@ do
 		local v21 = 0
 		while v21 < buffer.len(Buf) do
 			local Tag, Tag2
-			Tag, Tag2, v909 = ProtoModule.readTag(Buf, v21)
+			Tag, Tag2, v919 = ProtoModule.readTag(Buf, v21)
 			
 			if Tag2 == ProtoModule.wireTypes.varint then
 				if Tag == 1 then
 					local VarIntI32
-					VarIntI32, v909 = ProtoModule.readVarIntI32(Buf, v21)
+					VarIntI32, v919 = ProtoModule.readVarIntI32(Buf, v21)
 					NewModule.action_type = t.ActionType.fromNumber(VarIntI32) or VarIntI32
 				else
 					local _
-					_, v909 = ProtoModule.readVarInt(Buf, v21)
+					_, v919 = ProtoModule.readVarInt(Buf, v21)
 				end
 			elseif Tag2 == ProtoModule.wireTypes.lengthDelimited then
 				if Tag == 2 then
 					local Buffer1
-					Buffer1, v909 = ProtoModule.readBuffer(Buf, v21)
+					Buffer1, v919 = ProtoModule.readBuffer(Buf, v21)
 					NewModule.action_params = t.ShareAction_Params.decode(Buffer1)
 				else
 					local VarInt, VarInt2 = ProtoModule.readVarInt(Buf, v21)
@@ -3531,10 +3531,10 @@ do
 				end
 			elseif Tag2 == ProtoModule.wireTypes.i32 then
 				local _
-				_, v909 = ProtoModule.readFixed32(Buf, v21)
+				_, v919 = ProtoModule.readFixed32(Buf, v21)
 			elseif Tag2 == ProtoModule.wireTypes.i64 then
 				local _
-				_, v909 = ProtoModule.readFixed64(Buf, v21)
+				_, v919 = ProtoModule.readFixed64(Buf, v21)
 			else
 				error("Unsupported wire type: " .. Tag2)
 			end
@@ -3618,22 +3618,22 @@ do
 		local v22 = 0
 		while v22 < buffer.len(Buf) do
 			local Tag, Tag2
-			Tag, Tag2, v930 = ProtoModule.readTag(Buf, v22)
+			Tag, Tag2, v940 = ProtoModule.readTag(Buf, v22)
 			
 			if Tag2 == ProtoModule.wireTypes.varint then
 				local _
-				_, v930 = ProtoModule.readVarInt(Buf, v22)
+				_, v940 = ProtoModule.readVarInt(Buf, v22)
 			elseif Tag2 == ProtoModule.wireTypes.lengthDelimited then
 				if Tag == 1 then
 					local Buffer1
-					Buffer1, v930 = ProtoModule.readBuffer(Buf, v22)
+					Buffer1, v940 = ProtoModule.readBuffer(Buf, v22)
 					NewModule.oneof_prop = {
 						type = "generic_share_link_data",
 						value = ShareLinkDataModule.GenericShareLinkData.decode(Buffer1)
 					}
 				elseif Tag == 2 then
 					local Buffer2
-					Buffer2, v930 = ProtoModule.readBuffer(Buf, v22)
+					Buffer2, v940 = ProtoModule.readBuffer(Buf, v22)
 					NewModule.oneof_prop = {
 						type = "share_link_fetch_data",
 						value = ShareLinkDataModule.ShareLinkFetchData.decode(Buffer2)
@@ -3644,10 +3644,10 @@ do
 				end
 			elseif Tag2 == ProtoModule.wireTypes.i32 then
 				local _
-				_, v930 = ProtoModule.readFixed32(Buf, v22)
+				_, v940 = ProtoModule.readFixed32(Buf, v22)
 			elseif Tag2 == ProtoModule.wireTypes.i64 then
 				local _
-				_, v930 = ProtoModule.readFixed64(Buf, v22)
+				_, v940 = ProtoModule.readFixed64(Buf, v22)
 			else
 				error("Unsupported wire type: " .. Tag2)
 			end
@@ -3752,23 +3752,23 @@ do
 		local v23 = 0
 		while v23 < buffer.len(Buf) do
 			local Tag, Tag2
-			Tag, Tag2, v954 = ProtoModule.readTag(Buf, v23)
+			Tag, Tag2, v964 = ProtoModule.readTag(Buf, v23)
 			
 			if Tag2 == ProtoModule.wireTypes.varint then
 				local _
-				_, v954 = ProtoModule.readVarInt(Buf, v23)
+				_, v964 = ProtoModule.readVarInt(Buf, v23)
 			elseif Tag2 == ProtoModule.wireTypes.lengthDelimited then
 				if Tag == 1 then
 					local Buffer1
-					Buffer1, v954 = ProtoModule.readBuffer(Buf, v23)
+					Buffer1, v964 = ProtoModule.readBuffer(Buf, v23)
 					NewModule.share_link_type = PropTypesModule.StringProp.decode(Buffer1)
 				elseif Tag == 2 then
 					local Buffer2
-					Buffer2, v954 = ProtoModule.readBuffer(Buf, v23)
+					Buffer2, v964 = ProtoModule.readBuffer(Buf, v23)
 					NewModule.share_link_data = t.ShareAction_ShareLinkData.decode(Buffer2)
 				elseif Tag == 3 then
 					local Buffer3
-					Buffer3, v954 = ProtoModule.readBuffer(Buf, v23)
+					Buffer3, v964 = ProtoModule.readBuffer(Buf, v23)
 					NewModule.entry_point_key = PropTypesModule.StringProp.decode(Buffer3)
 				else
 					local VarInt, VarInt2 = ProtoModule.readVarInt(Buf, v23)
@@ -3776,10 +3776,10 @@ do
 				end
 			elseif Tag2 == ProtoModule.wireTypes.i32 then
 				local _
-				_, v954 = ProtoModule.readFixed32(Buf, v23)
+				_, v964 = ProtoModule.readFixed32(Buf, v23)
 			elseif Tag2 == ProtoModule.wireTypes.i64 then
 				local _
-				_, v954 = ProtoModule.readFixed64(Buf, v23)
+				_, v964 = ProtoModule.readFixed64(Buf, v23)
 			else
 				error("Unsupported wire type: " .. Tag2)
 			end
@@ -3872,21 +3872,21 @@ do
 		local v23 = 0
 		while v23 < buffer.len(Buf) do
 			local Tag, Tag2
-			Tag, Tag2, v975 = ProtoModule.readTag(Buf, v23)
+			Tag, Tag2, v985 = ProtoModule.readTag(Buf, v23)
 			
 			if Tag2 == ProtoModule.wireTypes.varint then
 				if Tag == 1 then
 					local VarIntI32
-					VarIntI32, v975 = ProtoModule.readVarIntI32(Buf, v23)
+					VarIntI32, v985 = ProtoModule.readVarIntI32(Buf, v23)
 					NewModule.action_type = t.ActionType.fromNumber(VarIntI32) or VarIntI32
 				else
 					local _
-					_, v975 = ProtoModule.readVarInt(Buf, v23)
+					_, v985 = ProtoModule.readVarInt(Buf, v23)
 				end
 			elseif Tag2 == ProtoModule.wireTypes.lengthDelimited then
 				if Tag == 2 then
 					local Buffer1
-					Buffer1, v975 = ProtoModule.readBuffer(Buf, v23)
+					Buffer1, v985 = ProtoModule.readBuffer(Buf, v23)
 					NewModule.action_params = t.OpenAbuseReportAction_Params.decode(Buffer1)
 				else
 					local VarInt, VarInt2 = ProtoModule.readVarInt(Buf, v23)
@@ -3894,10 +3894,10 @@ do
 				end
 			elseif Tag2 == ProtoModule.wireTypes.i32 then
 				local _
-				_, v975 = ProtoModule.readFixed32(Buf, v23)
+				_, v985 = ProtoModule.readFixed32(Buf, v23)
 			elseif Tag2 == ProtoModule.wireTypes.i64 then
 				local _
-				_, v975 = ProtoModule.readFixed64(Buf, v23)
+				_, v985 = ProtoModule.readFixed64(Buf, v23)
 			else
 				error("Unsupported wire type: " .. Tag2)
 			end
@@ -3999,31 +3999,31 @@ do
 		local v24 = 0
 		while v24 < buffer.len(Buf) do
 			local Tag, Tag2
-			Tag, Tag2, v1005 = ProtoModule.readTag(Buf, v24)
+			Tag, Tag2, v1015 = ProtoModule.readTag(Buf, v24)
 			
 			if Tag2 == ProtoModule.wireTypes.varint then
 				local _
-				_, v1005 = ProtoModule.readVarInt(Buf, v24)
+				_, v1015 = ProtoModule.readVarInt(Buf, v24)
 			elseif Tag2 == ProtoModule.wireTypes.lengthDelimited then
 				if Tag == 1 then
 					local Buffer1
-					Buffer1, v1005 = ProtoModule.readBuffer(Buf, v24)
+					Buffer1, v1015 = ProtoModule.readBuffer(Buf, v24)
 					NewModule.target_id = PropTypesModule.StringProp.decode(Buffer1)
 				elseif Tag == 2 then
 					local Buffer2
-					Buffer2, v1005 = ProtoModule.readBuffer(Buf, v24)
+					Buffer2, v1015 = ProtoModule.readBuffer(Buf, v24)
 					NewModule.abuse_vector = PropTypesModule.StringProp.decode(Buffer2)
 				elseif Tag == 3 then
 					local Buffer3
-					Buffer3, v1005 = ProtoModule.readBuffer(Buf, v24)
+					Buffer3, v1015 = ProtoModule.readBuffer(Buf, v24)
 					NewModule.asset_type_name = PropTypesModule.StringProp.decode(Buffer3)
 				elseif Tag == 4 then
 					local Buffer4
-					Buffer4, v1005 = ProtoModule.readBuffer(Buf, v24)
+					Buffer4, v1015 = ProtoModule.readBuffer(Buf, v24)
 					NewModule.universe_id = PropTypesModule.StringProp.decode(Buffer4)
 				elseif Tag == 5 then
 					local Buffer5
-					Buffer5, v1005 = ProtoModule.readBuffer(Buf, v24)
+					Buffer5, v1015 = ProtoModule.readBuffer(Buf, v24)
 					NewModule.group_id = PropTypesModule.StringProp.decode(Buffer5)
 				else
 					local VarInt, VarInt2 = ProtoModule.readVarInt(Buf, v24)
@@ -4031,10 +4031,10 @@ do
 				end
 			elseif Tag2 == ProtoModule.wireTypes.i32 then
 				local _
-				_, v1005 = ProtoModule.readFixed32(Buf, v24)
+				_, v1015 = ProtoModule.readFixed32(Buf, v24)
 			elseif Tag2 == ProtoModule.wireTypes.i64 then
 				local _
-				_, v1005 = ProtoModule.readFixed64(Buf, v24)
+				_, v1015 = ProtoModule.readFixed64(Buf, v24)
 			else
 				error("Unsupported wire type: " .. Tag2)
 			end
@@ -4143,21 +4143,21 @@ do
 		local v25 = 0
 		while v25 < buffer.len(Buf) do
 			local Tag, Tag2
-			Tag, Tag2, v1028 = ProtoModule.readTag(Buf, v25)
+			Tag, Tag2, v1038 = ProtoModule.readTag(Buf, v25)
 			
 			if Tag2 == ProtoModule.wireTypes.varint then
 				if Tag == 1 then
 					local VarIntI32
-					VarIntI32, v1028 = ProtoModule.readVarIntI32(Buf, v25)
+					VarIntI32, v1038 = ProtoModule.readVarIntI32(Buf, v25)
 					NewModule.action_type = t.ActionType.fromNumber(VarIntI32) or VarIntI32
 				else
 					local _
-					_, v1028 = ProtoModule.readVarInt(Buf, v25)
+					_, v1038 = ProtoModule.readVarInt(Buf, v25)
 				end
 			elseif Tag2 == ProtoModule.wireTypes.lengthDelimited then
 				if Tag == 2 then
 					local Buffer1
-					Buffer1, v1028 = ProtoModule.readBuffer(Buf, v25)
+					Buffer1, v1038 = ProtoModule.readBuffer(Buf, v25)
 					NewModule.action_params = t.RemoveBadgeFromInventoryAction_Params.decode(Buffer1)
 				else
 					local VarInt, VarInt2 = ProtoModule.readVarInt(Buf, v25)
@@ -4165,10 +4165,10 @@ do
 				end
 			elseif Tag2 == ProtoModule.wireTypes.i32 then
 				local _
-				_, v1028 = ProtoModule.readFixed32(Buf, v25)
+				_, v1038 = ProtoModule.readFixed32(Buf, v25)
 			elseif Tag2 == ProtoModule.wireTypes.i64 then
 				local _
-				_, v1028 = ProtoModule.readFixed64(Buf, v25)
+				_, v1038 = ProtoModule.readFixed64(Buf, v25)
 			else
 				error("Unsupported wire type: " .. Tag2)
 			end
@@ -4248,15 +4248,15 @@ do
 		local v25 = 0
 		while v25 < buffer.len(Buf) do
 			local Tag, Tag2
-			Tag, Tag2, v1046 = ProtoModule.readTag(Buf, v25)
+			Tag, Tag2, v1056 = ProtoModule.readTag(Buf, v25)
 			
 			if Tag2 == ProtoModule.wireTypes.varint then
 				local _
-				_, v1046 = ProtoModule.readVarInt(Buf, v25)
+				_, v1056 = ProtoModule.readVarInt(Buf, v25)
 			elseif Tag2 == ProtoModule.wireTypes.lengthDelimited then
 				if Tag == 1 then
 					local Buffer1
-					Buffer1, v1046 = ProtoModule.readBuffer(Buf, v25)
+					Buffer1, v1056 = ProtoModule.readBuffer(Buf, v25)
 					NewModule.asset_id = PropTypesModule.StringProp.decode(Buffer1)
 				else
 					local VarInt, VarInt2 = ProtoModule.readVarInt(Buf, v25)
@@ -4264,10 +4264,10 @@ do
 				end
 			elseif Tag2 == ProtoModule.wireTypes.i32 then
 				local _
-				_, v1046 = ProtoModule.readFixed32(Buf, v25)
+				_, v1056 = ProtoModule.readFixed32(Buf, v25)
 			elseif Tag2 == ProtoModule.wireTypes.i64 then
 				local _
-				_, v1046 = ProtoModule.readFixed64(Buf, v25)
+				_, v1056 = ProtoModule.readFixed64(Buf, v25)
 			else
 				error("Unsupported wire type: " .. Tag2)
 			end
@@ -4340,21 +4340,21 @@ do
 		local v26 = 0
 		while v26 < buffer.len(Buf) do
 			local Tag, Tag2
-			Tag, Tag2, v1065 = ProtoModule.readTag(Buf, v26)
+			Tag, Tag2, v1075 = ProtoModule.readTag(Buf, v26)
 			
 			if Tag2 == ProtoModule.wireTypes.varint then
 				if Tag == 1 then
 					local VarIntI32
-					VarIntI32, v1065 = ProtoModule.readVarIntI32(Buf, v26)
+					VarIntI32, v1075 = ProtoModule.readVarIntI32(Buf, v26)
 					NewModule.action_type = t.ActionType.fromNumber(VarIntI32) or VarIntI32
 				else
 					local _
-					_, v1065 = ProtoModule.readVarInt(Buf, v26)
+					_, v1075 = ProtoModule.readVarInt(Buf, v26)
 				end
 			elseif Tag2 == ProtoModule.wireTypes.lengthDelimited then
 				if Tag == 2 then
 					local Buffer1
-					Buffer1, v1065 = ProtoModule.readBuffer(Buf, v26)
+					Buffer1, v1075 = ProtoModule.readBuffer(Buf, v26)
 					NewModule.action_params = t.OpenProfileAction_Params.decode(Buffer1)
 				else
 					local VarInt, VarInt2 = ProtoModule.readVarInt(Buf, v26)
@@ -4362,10 +4362,10 @@ do
 				end
 			elseif Tag2 == ProtoModule.wireTypes.i32 then
 				local _
-				_, v1065 = ProtoModule.readFixed32(Buf, v26)
+				_, v1075 = ProtoModule.readFixed32(Buf, v26)
 			elseif Tag2 == ProtoModule.wireTypes.i64 then
 				local _
-				_, v1065 = ProtoModule.readFixed64(Buf, v26)
+				_, v1075 = ProtoModule.readFixed64(Buf, v26)
 			else
 				error("Unsupported wire type: " .. Tag2)
 			end
@@ -4455,23 +4455,23 @@ do
 		local v27 = 0
 		while v27 < buffer.len(Buf) do
 			local Tag, Tag2
-			Tag, Tag2, v1089 = ProtoModule.readTag(Buf, v27)
+			Tag, Tag2, v1099 = ProtoModule.readTag(Buf, v27)
 			
 			if Tag2 == ProtoModule.wireTypes.varint then
 				local _
-				_, v1089 = ProtoModule.readVarInt(Buf, v27)
+				_, v1099 = ProtoModule.readVarInt(Buf, v27)
 			elseif Tag2 == ProtoModule.wireTypes.lengthDelimited then
 				if Tag == 1 then
 					local Buffer1
-					Buffer1, v1089 = ProtoModule.readBuffer(Buf, v27)
+					Buffer1, v1099 = ProtoModule.readBuffer(Buf, v27)
 					NewModule.profile_id = PropTypesModule.StringProp.decode(Buffer1)
 				elseif Tag == 2 then
 					local Buffer2
-					Buffer2, v1089 = ProtoModule.readBuffer(Buf, v27)
+					Buffer2, v1099 = ProtoModule.readBuffer(Buf, v27)
 					NewModule.profile_type = PropTypesModule.StringProp.decode(Buffer2)
 				elseif Tag == 3 then
 					local Buffer3
-					Buffer3, v1089 = ProtoModule.readBuffer(Buf, v27)
+					Buffer3, v1099 = ProtoModule.readBuffer(Buf, v27)
 					NewModule.source = PropTypesModule.StringProp.decode(Buffer3)
 				else
 					local VarInt, VarInt2 = ProtoModule.readVarInt(Buf, v27)
@@ -4479,10 +4479,10 @@ do
 				end
 			elseif Tag2 == ProtoModule.wireTypes.i32 then
 				local _
-				_, v1089 = ProtoModule.readFixed32(Buf, v27)
+				_, v1099 = ProtoModule.readFixed32(Buf, v27)
 			elseif Tag2 == ProtoModule.wireTypes.i64 then
 				local _
-				_, v1089 = ProtoModule.readFixed64(Buf, v27)
+				_, v1099 = ProtoModule.readFixed64(Buf, v27)
 			else
 				error("Unsupported wire type: " .. Tag2)
 			end
@@ -4572,21 +4572,21 @@ do
 		local v27 = 0
 		while v27 < buffer.len(Buf) do
 			local Tag, Tag2
-			Tag, Tag2, v1110 = ProtoModule.readTag(Buf, v27)
+			Tag, Tag2, v1120 = ProtoModule.readTag(Buf, v27)
 			
 			if Tag2 == ProtoModule.wireTypes.varint then
 				if Tag == 1 then
 					local VarIntI32
-					VarIntI32, v1110 = ProtoModule.readVarIntI32(Buf, v27)
+					VarIntI32, v1120 = ProtoModule.readVarIntI32(Buf, v27)
 					NewModule.action_type = t.ActionType.fromNumber(VarIntI32) or VarIntI32
 				else
 					local _
-					_, v1110 = ProtoModule.readVarInt(Buf, v27)
+					_, v1120 = ProtoModule.readVarInt(Buf, v27)
 				end
 			elseif Tag2 == ProtoModule.wireTypes.lengthDelimited then
 				if Tag == 2 then
 					local Buffer1
-					Buffer1, v1110 = ProtoModule.readBuffer(Buf, v27)
+					Buffer1, v1120 = ProtoModule.readBuffer(Buf, v27)
 					NewModule.action_params = t.OpenExperienceLeaderboardSeeAllAction_Params.decode(Buffer1)
 				else
 					local VarInt, VarInt2 = ProtoModule.readVarInt(Buf, v27)
@@ -4594,10 +4594,10 @@ do
 				end
 			elseif Tag2 == ProtoModule.wireTypes.i32 then
 				local _
-				_, v1110 = ProtoModule.readFixed32(Buf, v27)
+				_, v1120 = ProtoModule.readFixed32(Buf, v27)
 			elseif Tag2 == ProtoModule.wireTypes.i64 then
 				local _
-				_, v1110 = ProtoModule.readFixed64(Buf, v27)
+				_, v1120 = ProtoModule.readFixed64(Buf, v27)
 			else
 				error("Unsupported wire type: " .. Tag2)
 			end
@@ -4687,23 +4687,23 @@ do
 		local v28 = 0
 		while v28 < buffer.len(Buf) do
 			local Tag, Tag2
-			Tag, Tag2, v1134 = ProtoModule.readTag(Buf, v28)
+			Tag, Tag2, v1144 = ProtoModule.readTag(Buf, v28)
 			
 			if Tag2 == ProtoModule.wireTypes.varint then
 				local _
-				_, v1134 = ProtoModule.readVarInt(Buf, v28)
+				_, v1144 = ProtoModule.readVarInt(Buf, v28)
 			elseif Tag2 == ProtoModule.wireTypes.lengthDelimited then
 				if Tag == 1 then
 					local Buffer1
-					Buffer1, v1134 = ProtoModule.readBuffer(Buf, v28)
+					Buffer1, v1144 = ProtoModule.readBuffer(Buf, v28)
 					NewModule.universe_id = PropTypesModule.StringProp.decode(Buffer1)
 				elseif Tag == 2 then
 					local Buffer2
-					Buffer2, v1134 = ProtoModule.readBuffer(Buf, v28)
+					Buffer2, v1144 = ProtoModule.readBuffer(Buf, v28)
 					NewModule.initial_tab = PropTypesModule.StringProp.decode(Buffer2)
 				elseif Tag == 3 then
 					local Buffer3
-					Buffer3, v1134 = ProtoModule.readBuffer(Buf, v28)
+					Buffer3, v1144 = ProtoModule.readBuffer(Buf, v28)
 					NewModule.source = PropTypesModule.StringProp.decode(Buffer3)
 				else
 					local VarInt, VarInt2 = ProtoModule.readVarInt(Buf, v28)
@@ -4711,10 +4711,10 @@ do
 				end
 			elseif Tag2 == ProtoModule.wireTypes.i32 then
 				local _
-				_, v1134 = ProtoModule.readFixed32(Buf, v28)
+				_, v1144 = ProtoModule.readFixed32(Buf, v28)
 			elseif Tag2 == ProtoModule.wireTypes.i64 then
 				local _
-				_, v1134 = ProtoModule.readFixed64(Buf, v28)
+				_, v1144 = ProtoModule.readFixed64(Buf, v28)
 			else
 				error("Unsupported wire type: " .. Tag2)
 			end
@@ -4802,21 +4802,21 @@ do
 		local v29 = 0
 		while v29 < buffer.len(Buf) do
 			local Tag, Tag2
-			Tag, Tag2, v1155 = ProtoModule.readTag(Buf, v29)
+			Tag, Tag2, v1165 = ProtoModule.readTag(Buf, v29)
 			
 			if Tag2 == ProtoModule.wireTypes.varint then
 				if Tag == 1 then
 					local VarIntI32
-					VarIntI32, v1155 = ProtoModule.readVarIntI32(Buf, v29)
+					VarIntI32, v1165 = ProtoModule.readVarIntI32(Buf, v29)
 					NewModule.action_type = t.ActionType.fromNumber(VarIntI32) or VarIntI32
 				else
 					local _
-					_, v1155 = ProtoModule.readVarInt(Buf, v29)
+					_, v1165 = ProtoModule.readVarInt(Buf, v29)
 				end
 			elseif Tag2 == ProtoModule.wireTypes.lengthDelimited then
 				if Tag == 2 then
 					local Buffer1
-					Buffer1, v1155 = ProtoModule.readBuffer(Buf, v29)
+					Buffer1, v1165 = ProtoModule.readBuffer(Buf, v29)
 					NewModule.action_params = t.OpenFacialAgeEstimationAction_Params.decode(Buffer1)
 				else
 					local VarInt, VarInt2 = ProtoModule.readVarInt(Buf, v29)
@@ -4824,10 +4824,10 @@ do
 				end
 			elseif Tag2 == ProtoModule.wireTypes.i32 then
 				local _
-				_, v1155 = ProtoModule.readFixed32(Buf, v29)
+				_, v1165 = ProtoModule.readFixed32(Buf, v29)
 			elseif Tag2 == ProtoModule.wireTypes.i64 then
 				local _
-				_, v1155 = ProtoModule.readFixed64(Buf, v29)
+				_, v1165 = ProtoModule.readFixed64(Buf, v29)
 			else
 				error("Unsupported wire type: " .. Tag2)
 			end
@@ -4943,39 +4943,39 @@ do
 		local v29 = 0
 		while v29 < buffer.len(Buf) do
 			local Tag, Tag2
-			Tag, Tag2, v1191 = ProtoModule.readTag(Buf, v29)
+			Tag, Tag2, v1201 = ProtoModule.readTag(Buf, v29)
 			
 			if Tag2 == ProtoModule.wireTypes.varint then
 				local _
-				_, v1191 = ProtoModule.readVarInt(Buf, v29)
+				_, v1201 = ProtoModule.readVarInt(Buf, v29)
 			elseif Tag2 == ProtoModule.wireTypes.lengthDelimited then
 				if Tag == 1 then
 					local Buffer1
-					Buffer1, v1191 = ProtoModule.readBuffer(Buf, v29)
+					Buffer1, v1201 = ProtoModule.readBuffer(Buf, v29)
 					NewModule.user_id = PropTypesModule.StringProp.decode(Buffer1)
 				elseif Tag == 2 then
 					local Buffer2
-					Buffer2, v1191 = ProtoModule.readBuffer(Buf, v29)
+					Buffer2, v1201 = ProtoModule.readBuffer(Buf, v29)
 					NewModule.source = PropTypesModule.StringProp.decode(Buffer2)
 				elseif Tag == 3 then
 					local Buffer3
-					Buffer3, v1191 = ProtoModule.readBuffer(Buf, v29)
+					Buffer3, v1201 = ProtoModule.readBuffer(Buf, v29)
 					NewModule.context = PropTypesModule.StringProp.decode(Buffer3)
 				elseif Tag == 4 then
 					local Buffer4
-					Buffer4, v1191 = ProtoModule.readBuffer(Buf, v29)
+					Buffer4, v1201 = ProtoModule.readBuffer(Buf, v29)
 					NewModule.is_in_experience = PropTypesModule.BoolProp.decode(Buffer4)
 				elseif Tag == 5 then
 					local Buffer5
-					Buffer5, v1191 = ProtoModule.readBuffer(Buf, v29)
+					Buffer5, v1201 = ProtoModule.readBuffer(Buf, v29)
 					NewModule.on_success = t.ActionProp.decode(Buffer5)
 				elseif Tag == 6 then
 					local Buffer6
-					Buffer6, v1191 = ProtoModule.readBuffer(Buf, v29)
+					Buffer6, v1201 = ProtoModule.readBuffer(Buf, v29)
 					NewModule.on_failure = t.ActionProp.decode(Buffer6)
 				elseif Tag == 7 then
 					local Buffer7
-					Buffer7, v1191 = ProtoModule.readBuffer(Buf, v29)
+					Buffer7, v1201 = ProtoModule.readBuffer(Buf, v29)
 					NewModule.should_include_vpc = PropTypesModule.BoolProp.decode(Buffer7)
 				else
 					local VarInt, VarInt2 = ProtoModule.readVarInt(Buf, v29)
@@ -4983,10 +4983,10 @@ do
 				end
 			elseif Tag2 == ProtoModule.wireTypes.i32 then
 				local _
-				_, v1191 = ProtoModule.readFixed32(Buf, v29)
+				_, v1201 = ProtoModule.readFixed32(Buf, v29)
 			elseif Tag2 == ProtoModule.wireTypes.i64 then
 				local _
-				_, v1191 = ProtoModule.readFixed64(Buf, v29)
+				_, v1201 = ProtoModule.readFixed64(Buf, v29)
 			else
 				error("Unsupported wire type: " .. Tag2)
 			end
@@ -5107,21 +5107,21 @@ do
 		local v30 = 0
 		while v30 < buffer.len(Buf) do
 			local Tag, Tag2
-			Tag, Tag2, v1216 = ProtoModule.readTag(Buf, v30)
+			Tag, Tag2, v1226 = ProtoModule.readTag(Buf, v30)
 			
 			if Tag2 == ProtoModule.wireTypes.varint then
 				if Tag == 1 then
 					local VarIntI32
-					VarIntI32, v1216 = ProtoModule.readVarIntI32(Buf, v30)
+					VarIntI32, v1226 = ProtoModule.readVarIntI32(Buf, v30)
 					NewModule.action_type = t.ActionType.fromNumber(VarIntI32) or VarIntI32
 				else
 					local _
-					_, v1216 = ProtoModule.readVarInt(Buf, v30)
+					_, v1226 = ProtoModule.readVarInt(Buf, v30)
 				end
 			elseif Tag2 == ProtoModule.wireTypes.lengthDelimited then
 				if Tag == 2 then
 					local Buffer1
-					Buffer1, v1216 = ProtoModule.readBuffer(Buf, v30)
+					Buffer1, v1226 = ProtoModule.readBuffer(Buf, v30)
 					NewModule.action_params = t.ShowToastAction_Params.decode(Buffer1)
 				else
 					local VarInt, VarInt2 = ProtoModule.readVarInt(Buf, v30)
@@ -5129,10 +5129,10 @@ do
 				end
 			elseif Tag2 == ProtoModule.wireTypes.i32 then
 				local _
-				_, v1216 = ProtoModule.readFixed32(Buf, v30)
+				_, v1226 = ProtoModule.readFixed32(Buf, v30)
 			elseif Tag2 == ProtoModule.wireTypes.i64 then
 				local _
-				_, v1216 = ProtoModule.readFixed64(Buf, v30)
+				_, v1226 = ProtoModule.readFixed64(Buf, v30)
 			else
 				error("Unsupported wire type: " .. Tag2)
 			end
@@ -5234,31 +5234,31 @@ do
 		local v31 = 0
 		while v31 < buffer.len(Buf) do
 			local Tag, Tag2
-			Tag, Tag2, v1246 = ProtoModule.readTag(Buf, v31)
+			Tag, Tag2, v1256 = ProtoModule.readTag(Buf, v31)
 			
 			if Tag2 == ProtoModule.wireTypes.varint then
 				local _
-				_, v1246 = ProtoModule.readVarInt(Buf, v31)
+				_, v1256 = ProtoModule.readVarInt(Buf, v31)
 			elseif Tag2 == ProtoModule.wireTypes.lengthDelimited then
 				if Tag == 1 then
 					local Buffer1
-					Buffer1, v1246 = ProtoModule.readBuffer(Buf, v31)
+					Buffer1, v1256 = ProtoModule.readBuffer(Buf, v31)
 					NewModule.toast_message = PropTypesModule.StringProp.decode(Buffer1)
 				elseif Tag == 2 then
 					local Buffer2
-					Buffer2, v1246 = ProtoModule.readBuffer(Buf, v31)
+					Buffer2, v1256 = ProtoModule.readBuffer(Buf, v31)
 					NewModule.toast_type = PropTypesModule.StringProp.decode(Buffer2)
 				elseif Tag == 3 then
 					local Buffer3
-					Buffer3, v1246 = ProtoModule.readBuffer(Buf, v31)
+					Buffer3, v1256 = ProtoModule.readBuffer(Buf, v31)
 					NewModule.dismiss_prompt = PropTypesModule.BoolProp.decode(Buffer3)
 				elseif Tag == 4 then
 					local Buffer4
-					Buffer4, v1246 = ProtoModule.readBuffer(Buf, v31)
+					Buffer4, v1256 = ProtoModule.readBuffer(Buf, v31)
 					NewModule.prompt_type = PropTypesModule.StringProp.decode(Buffer4)
 				elseif Tag == 5 then
 					local Buffer5
-					Buffer5, v1246 = ProtoModule.readBuffer(Buf, v31)
+					Buffer5, v1256 = ProtoModule.readBuffer(Buf, v31)
 					NewModule.prompt_id = PropTypesModule.StringProp.decode(Buffer5)
 				else
 					local VarInt, VarInt2 = ProtoModule.readVarInt(Buf, v31)
@@ -5266,10 +5266,10 @@ do
 				end
 			elseif Tag2 == ProtoModule.wireTypes.i32 then
 				local _
-				_, v1246 = ProtoModule.readFixed32(Buf, v31)
+				_, v1256 = ProtoModule.readFixed32(Buf, v31)
 			elseif Tag2 == ProtoModule.wireTypes.i64 then
 				local _
-				_, v1246 = ProtoModule.readFixed64(Buf, v31)
+				_, v1256 = ProtoModule.readFixed64(Buf, v31)
 			else
 				error("Unsupported wire type: " .. Tag2)
 			end
@@ -5380,21 +5380,21 @@ do
 		local v31 = 0
 		while v31 < buffer.len(Buf) do
 			local Tag, Tag2
-			Tag, Tag2, v1269 = ProtoModule.readTag(Buf, v31)
+			Tag, Tag2, v1279 = ProtoModule.readTag(Buf, v31)
 			
 			if Tag2 == ProtoModule.wireTypes.varint then
 				if Tag == 1 then
 					local VarIntI32
-					VarIntI32, v1269 = ProtoModule.readVarIntI32(Buf, v31)
+					VarIntI32, v1279 = ProtoModule.readVarIntI32(Buf, v31)
 					NewModule.action_type = t.ActionType.fromNumber(VarIntI32) or VarIntI32
 				else
 					local _
-					_, v1269 = ProtoModule.readVarInt(Buf, v31)
+					_, v1279 = ProtoModule.readVarInt(Buf, v31)
 				end
 			elseif Tag2 == ProtoModule.wireTypes.lengthDelimited then
 				if Tag == 2 then
 					local Buffer1
-					Buffer1, v1269 = ProtoModule.readBuffer(Buf, v31)
+					Buffer1, v1279 = ProtoModule.readBuffer(Buf, v31)
 					NewModule.action_params = t.OpenPhoneUpsellModalAction_Params.decode(Buffer1)
 				else
 					local VarInt, VarInt2 = ProtoModule.readVarInt(Buf, v31)
@@ -5402,10 +5402,10 @@ do
 				end
 			elseif Tag2 == ProtoModule.wireTypes.i32 then
 				local _
-				_, v1269 = ProtoModule.readFixed32(Buf, v31)
+				_, v1279 = ProtoModule.readFixed32(Buf, v31)
 			elseif Tag2 == ProtoModule.wireTypes.i64 then
 				local _
-				_, v1269 = ProtoModule.readFixed64(Buf, v31)
+				_, v1279 = ProtoModule.readFixed64(Buf, v31)
 			else
 				error("Unsupported wire type: " .. Tag2)
 			end
@@ -5525,43 +5525,43 @@ do
 		local v32 = 0
 		while v32 < buffer.len(Buf) do
 			local Tag, Tag2
-			Tag, Tag2, v1308 = ProtoModule.readTag(Buf, v32)
+			Tag, Tag2, v1318 = ProtoModule.readTag(Buf, v32)
 			
 			if Tag2 == ProtoModule.wireTypes.varint then
 				local _
-				_, v1308 = ProtoModule.readVarInt(Buf, v32)
+				_, v1318 = ProtoModule.readVarInt(Buf, v32)
 			elseif Tag2 == ProtoModule.wireTypes.lengthDelimited then
 				if Tag == 1 then
 					local Buffer1
-					Buffer1, v1308 = ProtoModule.readBuffer(Buf, v32)
+					Buffer1, v1318 = ProtoModule.readBuffer(Buf, v32)
 					NewModule.voice_opt_in = PropTypesModule.BoolProp.decode(Buffer1)
 				elseif Tag == 2 then
 					local Buffer2
-					Buffer2, v1308 = ProtoModule.readBuffer(Buf, v32)
+					Buffer2, v1318 = ProtoModule.readBuffer(Buf, v32)
 					NewModule.event_context = PropTypesModule.StringProp.decode(Buffer2)
 				elseif Tag == 3 then
 					local Buffer3
-					Buffer3, v1308 = ProtoModule.readBuffer(Buf, v32)
+					Buffer3, v1318 = ProtoModule.readBuffer(Buf, v32)
 					NewModule.origin = PropTypesModule.StringProp.decode(Buffer3)
 				elseif Tag == 4 then
 					local Buffer4
-					Buffer4, v1308 = ProtoModule.readBuffer(Buf, v32)
+					Buffer4, v1318 = ProtoModule.readBuffer(Buf, v32)
 					NewModule.should_autofill_android_phone_number_at_launch = PropTypesModule.BoolProp.decode(Buffer4)
 				elseif Tag == 5 then
 					local Buffer5
-					Buffer5, v1308 = ProtoModule.readBuffer(Buf, v32)
+					Buffer5, v1318 = ProtoModule.readBuffer(Buf, v32)
 					NewModule.add_phone_description_key = PropTypesModule.StringProp.decode(Buffer5)
 				elseif Tag == 6 then
 					local Buffer6
-					Buffer6, v1308 = ProtoModule.readBuffer(Buf, v32)
+					Buffer6, v1318 = ProtoModule.readBuffer(Buf, v32)
 					NewModule.on_success = t.ActionProp.decode(Buffer6)
 				elseif Tag == 7 then
 					local Buffer7
-					Buffer7, v1308 = ProtoModule.readBuffer(Buf, v32)
+					Buffer7, v1318 = ProtoModule.readBuffer(Buf, v32)
 					NewModule.on_failure = t.ActionProp.decode(Buffer7)
 				elseif Tag == 8 then
 					local Buffer8
-					Buffer8, v1308 = ProtoModule.readBuffer(Buf, v32)
+					Buffer8, v1318 = ProtoModule.readBuffer(Buf, v32)
 					NewModule.on_cancelled = t.ActionProp.decode(Buffer8)
 				else
 					local VarInt, VarInt2 = ProtoModule.readVarInt(Buf, v32)
@@ -5569,10 +5569,10 @@ do
 				end
 			elseif Tag2 == ProtoModule.wireTypes.i32 then
 				local _
-				_, v1308 = ProtoModule.readFixed32(Buf, v32)
+				_, v1318 = ProtoModule.readFixed32(Buf, v32)
 			elseif Tag2 == ProtoModule.wireTypes.i64 then
 				local _
-				_, v1308 = ProtoModule.readFixed64(Buf, v32)
+				_, v1318 = ProtoModule.readFixed64(Buf, v32)
 			else
 				error("Unsupported wire type: " .. Tag2)
 			end
@@ -5705,21 +5705,21 @@ do
 		local v33 = 0
 		while v33 < buffer.len(Buf) do
 			local Tag, Tag2
-			Tag, Tag2, v1334 = ProtoModule.readTag(Buf, v33)
+			Tag, Tag2, v1344 = ProtoModule.readTag(Buf, v33)
 			
 			if Tag2 == ProtoModule.wireTypes.varint then
 				if Tag == 1 then
 					local VarIntI32
-					VarIntI32, v1334 = ProtoModule.readVarIntI32(Buf, v33)
+					VarIntI32, v1344 = ProtoModule.readVarIntI32(Buf, v33)
 					NewModule.action_type = t.ActionType.fromNumber(VarIntI32) or VarIntI32
 				else
 					local _
-					_, v1334 = ProtoModule.readVarInt(Buf, v33)
+					_, v1344 = ProtoModule.readVarInt(Buf, v33)
 				end
 			elseif Tag2 == ProtoModule.wireTypes.lengthDelimited then
 				if Tag == 2 then
 					local Buffer1
-					Buffer1, v1334 = ProtoModule.readBuffer(Buf, v33)
+					Buffer1, v1344 = ProtoModule.readBuffer(Buf, v33)
 					NewModule.action_params = t.OpenEmailUpsellModalAction_Params.decode(Buffer1)
 				else
 					local VarInt, VarInt2 = ProtoModule.readVarInt(Buf, v33)
@@ -5727,10 +5727,10 @@ do
 				end
 			elseif Tag2 == ProtoModule.wireTypes.i32 then
 				local _
-				_, v1334 = ProtoModule.readFixed32(Buf, v33)
+				_, v1344 = ProtoModule.readFixed32(Buf, v33)
 			elseif Tag2 == ProtoModule.wireTypes.i64 then
 				local _
-				_, v1334 = ProtoModule.readFixed64(Buf, v33)
+				_, v1344 = ProtoModule.readFixed64(Buf, v33)
 			else
 				error("Unsupported wire type: " .. Tag2)
 			end
@@ -5852,43 +5852,43 @@ do
 		local v33 = 0
 		while v33 < buffer.len(Buf) do
 			local Tag, Tag2
-			Tag, Tag2, v1373 = ProtoModule.readTag(Buf, v33)
+			Tag, Tag2, v1383 = ProtoModule.readTag(Buf, v33)
 			
 			if Tag2 == ProtoModule.wireTypes.varint then
 				local _
-				_, v1373 = ProtoModule.readVarInt(Buf, v33)
+				_, v1383 = ProtoModule.readVarInt(Buf, v33)
 			elseif Tag2 == ProtoModule.wireTypes.lengthDelimited then
 				if Tag == 1 then
 					local Buffer1
-					Buffer1, v1373 = ProtoModule.readBuffer(Buf, v33)
+					Buffer1, v1383 = ProtoModule.readBuffer(Buf, v33)
 					NewModule.add_email_over13_text_key = PropTypesModule.StringProp.decode(Buffer1)
 				elseif Tag == 2 then
 					local Buffer2
-					Buffer2, v1373 = ProtoModule.readBuffer(Buf, v33)
+					Buffer2, v1383 = ProtoModule.readBuffer(Buf, v33)
 					NewModule.add_email_title_key = PropTypesModule.StringProp.decode(Buffer2)
 				elseif Tag == 3 then
 					local Buffer3
-					Buffer3, v1373 = ProtoModule.readBuffer(Buf, v33)
+					Buffer3, v1383 = ProtoModule.readBuffer(Buf, v33)
 					NewModule.is_email_modal_called_from_home_page = PropTypesModule.BoolProp.decode(Buffer3)
 				elseif Tag == 4 then
 					local Buffer4
-					Buffer4, v1373 = ProtoModule.readBuffer(Buf, v33)
+					Buffer4, v1383 = ProtoModule.readBuffer(Buf, v33)
 					NewModule.event_context = PropTypesModule.StringProp.decode(Buffer4)
 				elseif Tag == 5 then
 					local Buffer5
-					Buffer5, v1373 = ProtoModule.readBuffer(Buf, v33)
+					Buffer5, v1383 = ProtoModule.readBuffer(Buf, v33)
 					NewModule.origin = PropTypesModule.StringProp.decode(Buffer5)
 				elseif Tag == 6 then
 					local Buffer6
-					Buffer6, v1373 = ProtoModule.readBuffer(Buf, v33)
+					Buffer6, v1383 = ProtoModule.readBuffer(Buf, v33)
 					NewModule.section = PropTypesModule.StringProp.decode(Buffer6)
 				elseif Tag == 7 then
 					local Buffer7
-					Buffer7, v1373 = ProtoModule.readBuffer(Buf, v33)
+					Buffer7, v1383 = ProtoModule.readBuffer(Buf, v33)
 					NewModule.on_success = t.ActionProp.decode(Buffer7)
 				elseif Tag == 8 then
 					local Buffer8
-					Buffer8, v1373 = ProtoModule.readBuffer(Buf, v33)
+					Buffer8, v1383 = ProtoModule.readBuffer(Buf, v33)
 					NewModule.on_failure = t.ActionProp.decode(Buffer8)
 				else
 					local VarInt, VarInt2 = ProtoModule.readVarInt(Buf, v33)
@@ -5896,10 +5896,10 @@ do
 				end
 			elseif Tag2 == ProtoModule.wireTypes.i32 then
 				local _
-				_, v1373 = ProtoModule.readFixed32(Buf, v33)
+				_, v1383 = ProtoModule.readFixed32(Buf, v33)
 			elseif Tag2 == ProtoModule.wireTypes.i64 then
 				local _
-				_, v1373 = ProtoModule.readFixed64(Buf, v33)
+				_, v1383 = ProtoModule.readFixed64(Buf, v33)
 			else
 				error("Unsupported wire type: " .. Tag2)
 			end
@@ -6029,21 +6029,21 @@ do
 		local v34 = 0
 		while v34 < buffer.len(Buf) do
 			local Tag, Tag2
-			Tag, Tag2, v1399 = ProtoModule.readTag(Buf, v34)
+			Tag, Tag2, v1409 = ProtoModule.readTag(Buf, v34)
 			
 			if Tag2 == ProtoModule.wireTypes.varint then
 				if Tag == 1 then
 					local VarIntI32
-					VarIntI32, v1399 = ProtoModule.readVarIntI32(Buf, v34)
+					VarIntI32, v1409 = ProtoModule.readVarIntI32(Buf, v34)
 					NewModule.action_type = t.ActionType.fromNumber(VarIntI32) or VarIntI32
 				else
 					local _
-					_, v1399 = ProtoModule.readVarInt(Buf, v34)
+					_, v1409 = ProtoModule.readVarInt(Buf, v34)
 				end
 			elseif Tag2 == ProtoModule.wireTypes.lengthDelimited then
 				if Tag == 2 then
 					local Buffer1
-					Buffer1, v1399 = ProtoModule.readBuffer(Buf, v34)
+					Buffer1, v1409 = ProtoModule.readBuffer(Buf, v34)
 					NewModule.action_params = t.OpenAddConnectionsPageAction_Params.decode(Buffer1)
 				else
 					local VarInt, VarInt2 = ProtoModule.readVarInt(Buf, v34)
@@ -6051,10 +6051,10 @@ do
 				end
 			elseif Tag2 == ProtoModule.wireTypes.i32 then
 				local _
-				_, v1399 = ProtoModule.readFixed32(Buf, v34)
+				_, v1409 = ProtoModule.readFixed32(Buf, v34)
 			elseif Tag2 == ProtoModule.wireTypes.i64 then
 				local _
-				_, v1399 = ProtoModule.readFixed64(Buf, v34)
+				_, v1409 = ProtoModule.readFixed64(Buf, v34)
 			else
 				error("Unsupported wire type: " .. Tag2)
 			end
@@ -6138,19 +6138,19 @@ do
 		local v35 = 0
 		while v35 < buffer.len(Buf) do
 			local Tag, Tag2
-			Tag, Tag2, v1420 = ProtoModule.readTag(Buf, v35)
+			Tag, Tag2, v1430 = ProtoModule.readTag(Buf, v35)
 			
 			if Tag2 == ProtoModule.wireTypes.varint then
 				local _
-				_, v1420 = ProtoModule.readVarInt(Buf, v35)
+				_, v1430 = ProtoModule.readVarInt(Buf, v35)
 			elseif Tag2 == ProtoModule.wireTypes.lengthDelimited then
 				if Tag == 1 then
 					local Buffer1
-					Buffer1, v1420 = ProtoModule.readBuffer(Buf, v35)
+					Buffer1, v1430 = ProtoModule.readBuffer(Buf, v35)
 					NewModule.user_id = PropTypesModule.StringProp.decode(Buffer1)
 				elseif Tag == 2 then
 					local Buffer2
-					Buffer2, v1420 = ProtoModule.readBuffer(Buf, v35)
+					Buffer2, v1430 = ProtoModule.readBuffer(Buf, v35)
 					NewModule.source = PropTypesModule.StringProp.decode(Buffer2)
 				else
 					local VarInt, VarInt2 = ProtoModule.readVarInt(Buf, v35)
@@ -6158,10 +6158,10 @@ do
 				end
 			elseif Tag2 == ProtoModule.wireTypes.i32 then
 				local _
-				_, v1420 = ProtoModule.readFixed32(Buf, v35)
+				_, v1430 = ProtoModule.readFixed32(Buf, v35)
 			elseif Tag2 == ProtoModule.wireTypes.i64 then
 				local _
-				_, v1420 = ProtoModule.readFixed64(Buf, v35)
+				_, v1430 = ProtoModule.readFixed64(Buf, v35)
 			else
 				error("Unsupported wire type: " .. Tag2)
 			end
@@ -6242,21 +6242,21 @@ do
 		local v35 = 0
 		while v35 < buffer.len(Buf) do
 			local Tag, Tag2
-			Tag, Tag2, v1440 = ProtoModule.readTag(Buf, v35)
+			Tag, Tag2, v1450 = ProtoModule.readTag(Buf, v35)
 			
 			if Tag2 == ProtoModule.wireTypes.varint then
 				if Tag == 1 then
 					local VarIntI32
-					VarIntI32, v1440 = ProtoModule.readVarIntI32(Buf, v35)
+					VarIntI32, v1450 = ProtoModule.readVarIntI32(Buf, v35)
 					NewModule.action_type = t.ActionType.fromNumber(VarIntI32) or VarIntI32
 				else
 					local _
-					_, v1440 = ProtoModule.readVarInt(Buf, v35)
+					_, v1450 = ProtoModule.readVarInt(Buf, v35)
 				end
 			elseif Tag2 == ProtoModule.wireTypes.lengthDelimited then
 				if Tag == 2 then
 					local Buffer1
-					Buffer1, v1440 = ProtoModule.readBuffer(Buf, v35)
+					Buffer1, v1450 = ProtoModule.readBuffer(Buf, v35)
 					NewModule.action_params = t.OpenMarketplaceAction_Params.decode(Buffer1)
 				else
 					local VarInt, VarInt2 = ProtoModule.readVarInt(Buf, v35)
@@ -6264,10 +6264,10 @@ do
 				end
 			elseif Tag2 == ProtoModule.wireTypes.i32 then
 				local _
-				_, v1440 = ProtoModule.readFixed32(Buf, v35)
+				_, v1450 = ProtoModule.readFixed32(Buf, v35)
 			elseif Tag2 == ProtoModule.wireTypes.i64 then
 				local _
-				_, v1440 = ProtoModule.readFixed64(Buf, v35)
+				_, v1450 = ProtoModule.readFixed64(Buf, v35)
 			else
 				error("Unsupported wire type: " .. Tag2)
 			end
@@ -6351,19 +6351,19 @@ do
 		local v36 = 0
 		while v36 < buffer.len(Buf) do
 			local Tag, Tag2
-			Tag, Tag2, v1461 = ProtoModule.readTag(Buf, v36)
+			Tag, Tag2, v1471 = ProtoModule.readTag(Buf, v36)
 			
 			if Tag2 == ProtoModule.wireTypes.varint then
 				local _
-				_, v1461 = ProtoModule.readVarInt(Buf, v36)
+				_, v1471 = ProtoModule.readVarInt(Buf, v36)
 			elseif Tag2 == ProtoModule.wireTypes.lengthDelimited then
 				if Tag == 1 then
 					local Buffer1
-					Buffer1, v1461 = ProtoModule.readBuffer(Buf, v36)
+					Buffer1, v1471 = ProtoModule.readBuffer(Buf, v36)
 					NewModule.user_id = PropTypesModule.StringProp.decode(Buffer1)
 				elseif Tag == 2 then
 					local Buffer2
-					Buffer2, v1461 = ProtoModule.readBuffer(Buf, v36)
+					Buffer2, v1471 = ProtoModule.readBuffer(Buf, v36)
 					NewModule.source = PropTypesModule.StringProp.decode(Buffer2)
 				else
 					local VarInt, VarInt2 = ProtoModule.readVarInt(Buf, v36)
@@ -6371,10 +6371,10 @@ do
 				end
 			elseif Tag2 == ProtoModule.wireTypes.i32 then
 				local _
-				_, v1461 = ProtoModule.readFixed32(Buf, v36)
+				_, v1471 = ProtoModule.readFixed32(Buf, v36)
 			elseif Tag2 == ProtoModule.wireTypes.i64 then
 				local _
-				_, v1461 = ProtoModule.readFixed64(Buf, v36)
+				_, v1471 = ProtoModule.readFixed64(Buf, v36)
 			else
 				error("Unsupported wire type: " .. Tag2)
 			end
@@ -6453,21 +6453,21 @@ do
 		local v37 = 0
 		while v37 < buffer.len(Buf) do
 			local Tag, Tag2
-			Tag, Tag2, v1481 = ProtoModule.readTag(Buf, v37)
+			Tag, Tag2, v1491 = ProtoModule.readTag(Buf, v37)
 			
 			if Tag2 == ProtoModule.wireTypes.varint then
 				if Tag == 1 then
 					local VarIntI32
-					VarIntI32, v1481 = ProtoModule.readVarIntI32(Buf, v37)
+					VarIntI32, v1491 = ProtoModule.readVarIntI32(Buf, v37)
 					NewModule.action_type = t.ActionType.fromNumber(VarIntI32) or VarIntI32
 				else
 					local _
-					_, v1481 = ProtoModule.readVarInt(Buf, v37)
+					_, v1491 = ProtoModule.readVarInt(Buf, v37)
 				end
 			elseif Tag2 == ProtoModule.wireTypes.lengthDelimited then
 				if Tag == 2 then
 					local Buffer1
-					Buffer1, v1481 = ProtoModule.readBuffer(Buf, v37)
+					Buffer1, v1491 = ProtoModule.readBuffer(Buf, v37)
 					NewModule.action_params = t.HideProfileCompletionAction_Params.decode(Buffer1)
 				else
 					local VarInt, VarInt2 = ProtoModule.readVarInt(Buf, v37)
@@ -6475,10 +6475,10 @@ do
 				end
 			elseif Tag2 == ProtoModule.wireTypes.i32 then
 				local _
-				_, v1481 = ProtoModule.readFixed32(Buf, v37)
+				_, v1491 = ProtoModule.readFixed32(Buf, v37)
 			elseif Tag2 == ProtoModule.wireTypes.i64 then
 				local _
-				_, v1481 = ProtoModule.readFixed64(Buf, v37)
+				_, v1491 = ProtoModule.readFixed64(Buf, v37)
 			else
 				error("Unsupported wire type: " .. Tag2)
 			end
@@ -6576,27 +6576,27 @@ do
 		local v37 = 0
 		while v37 < buffer.len(Buf) do
 			local Tag, Tag2
-			Tag, Tag2, v1508 = ProtoModule.readTag(Buf, v37)
+			Tag, Tag2, v1518 = ProtoModule.readTag(Buf, v37)
 			
 			if Tag2 == ProtoModule.wireTypes.varint then
 				local _
-				_, v1508 = ProtoModule.readVarInt(Buf, v37)
+				_, v1518 = ProtoModule.readVarInt(Buf, v37)
 			elseif Tag2 == ProtoModule.wireTypes.lengthDelimited then
 				if Tag == 1 then
 					local Buffer1
-					Buffer1, v1508 = ProtoModule.readBuffer(Buf, v37)
+					Buffer1, v1518 = ProtoModule.readBuffer(Buf, v37)
 					NewModule.user_id = PropTypesModule.StringProp.decode(Buffer1)
 				elseif Tag == 2 then
 					local Buffer2
-					Buffer2, v1508 = ProtoModule.readBuffer(Buf, v37)
+					Buffer2, v1518 = ProtoModule.readBuffer(Buf, v37)
 					NewModule.prompt_id = PropTypesModule.StringProp.decode(Buffer2)
 				elseif Tag == 3 then
 					local Buffer3
-					Buffer3, v1508 = ProtoModule.readBuffer(Buf, v37)
+					Buffer3, v1518 = ProtoModule.readBuffer(Buf, v37)
 					NewModule.source = PropTypesModule.StringProp.decode(Buffer3)
 				elseif Tag == 4 then
 					local Buffer4
-					Buffer4, v1508 = ProtoModule.readBuffer(Buf, v37)
+					Buffer4, v1518 = ProtoModule.readBuffer(Buf, v37)
 					NewModule.prompt_type = PropTypesModule.StringProp.decode(Buffer4)
 				else
 					local VarInt, VarInt2 = ProtoModule.readVarInt(Buf, v37)
@@ -6604,10 +6604,10 @@ do
 				end
 			elseif Tag2 == ProtoModule.wireTypes.i32 then
 				local _
-				_, v1508 = ProtoModule.readFixed32(Buf, v37)
+				_, v1518 = ProtoModule.readFixed32(Buf, v37)
 			elseif Tag2 == ProtoModule.wireTypes.i64 then
 				local _
-				_, v1508 = ProtoModule.readFixed64(Buf, v37)
+				_, v1518 = ProtoModule.readFixed64(Buf, v37)
 			else
 				error("Unsupported wire type: " .. Tag2)
 			end
@@ -6704,21 +6704,21 @@ do
 		local v38 = 0
 		while v38 < buffer.len(Buf) do
 			local Tag, Tag2
-			Tag, Tag2, v1530 = ProtoModule.readTag(Buf, v38)
+			Tag, Tag2, v1540 = ProtoModule.readTag(Buf, v38)
 			
 			if Tag2 == ProtoModule.wireTypes.varint then
 				if Tag == 1 then
 					local VarIntI32
-					VarIntI32, v1530 = ProtoModule.readVarIntI32(Buf, v38)
+					VarIntI32, v1540 = ProtoModule.readVarIntI32(Buf, v38)
 					NewModule.action_type = t.ActionType.fromNumber(VarIntI32) or VarIntI32
 				else
 					local _
-					_, v1530 = ProtoModule.readVarInt(Buf, v38)
+					_, v1540 = ProtoModule.readVarInt(Buf, v38)
 				end
 			elseif Tag2 == ProtoModule.wireTypes.lengthDelimited then
 				if Tag == 2 then
 					local Buffer1
-					Buffer1, v1530 = ProtoModule.readBuffer(Buf, v38)
+					Buffer1, v1540 = ProtoModule.readBuffer(Buf, v38)
 					NewModule.action_params = t.SelectMarketplaceCatalogCategory_Params.decode(Buffer1)
 				else
 					local VarInt, VarInt2 = ProtoModule.readVarInt(Buf, v38)
@@ -6726,10 +6726,10 @@ do
 				end
 			elseif Tag2 == ProtoModule.wireTypes.i32 then
 				local _
-				_, v1530 = ProtoModule.readFixed32(Buf, v38)
+				_, v1540 = ProtoModule.readFixed32(Buf, v38)
 			elseif Tag2 == ProtoModule.wireTypes.i64 then
 				local _
-				_, v1530 = ProtoModule.readFixed64(Buf, v38)
+				_, v1540 = ProtoModule.readFixed64(Buf, v38)
 			else
 				error("Unsupported wire type: " .. Tag2)
 			end
@@ -6807,15 +6807,15 @@ do
 		local v39 = 0
 		while v39 < buffer.len(Buf) do
 			local Tag, Tag2
-			Tag, Tag2, v1548 = ProtoModule.readTag(Buf, v39)
+			Tag, Tag2, v1558 = ProtoModule.readTag(Buf, v39)
 			
 			if Tag2 == ProtoModule.wireTypes.varint then
 				local _
-				_, v1548 = ProtoModule.readVarInt(Buf, v39)
+				_, v1558 = ProtoModule.readVarInt(Buf, v39)
 			elseif Tag2 == ProtoModule.wireTypes.lengthDelimited then
 				if Tag == 1 then
 					local Buffer1
-					Buffer1, v1548 = ProtoModule.readBuffer(Buf, v39)
+					Buffer1, v1558 = ProtoModule.readBuffer(Buf, v39)
 					NewModule.category_id = PropTypesModule.StringProp.decode(Buffer1)
 				else
 					local VarInt, VarInt2 = ProtoModule.readVarInt(Buf, v39)
@@ -6823,10 +6823,10 @@ do
 				end
 			elseif Tag2 == ProtoModule.wireTypes.i32 then
 				local _
-				_, v1548 = ProtoModule.readFixed32(Buf, v39)
+				_, v1558 = ProtoModule.readFixed32(Buf, v39)
 			elseif Tag2 == ProtoModule.wireTypes.i64 then
 				local _
-				_, v1548 = ProtoModule.readFixed64(Buf, v39)
+				_, v1558 = ProtoModule.readFixed64(Buf, v39)
 			else
 				error("Unsupported wire type: " .. Tag2)
 			end
@@ -6901,21 +6901,21 @@ do
 		local v39 = 0
 		while v39 < buffer.len(Buf) do
 			local Tag, Tag2
-			Tag, Tag2, v1567 = ProtoModule.readTag(Buf, v39)
+			Tag, Tag2, v1577 = ProtoModule.readTag(Buf, v39)
 			
 			if Tag2 == ProtoModule.wireTypes.varint then
 				if Tag == 1 then
 					local VarIntI32
-					VarIntI32, v1567 = ProtoModule.readVarIntI32(Buf, v39)
+					VarIntI32, v1577 = ProtoModule.readVarIntI32(Buf, v39)
 					NewModule.action_type = t.ActionType.fromNumber(VarIntI32) or VarIntI32
 				else
 					local _
-					_, v1567 = ProtoModule.readVarInt(Buf, v39)
+					_, v1577 = ProtoModule.readVarInt(Buf, v39)
 				end
 			elseif Tag2 == ProtoModule.wireTypes.lengthDelimited then
 				if Tag == 2 then
 					local Buffer1
-					Buffer1, v1567 = ProtoModule.readBuffer(Buf, v39)
+					Buffer1, v1577 = ProtoModule.readBuffer(Buf, v39)
 					NewModule.action_params = t.SelectMarketplaceCatalogSubcategory_Params.decode(Buffer1)
 				else
 					local VarInt, VarInt2 = ProtoModule.readVarInt(Buf, v39)
@@ -6923,10 +6923,10 @@ do
 				end
 			elseif Tag2 == ProtoModule.wireTypes.i32 then
 				local _
-				_, v1567 = ProtoModule.readFixed32(Buf, v39)
+				_, v1577 = ProtoModule.readFixed32(Buf, v39)
 			elseif Tag2 == ProtoModule.wireTypes.i64 then
 				local _
-				_, v1567 = ProtoModule.readFixed64(Buf, v39)
+				_, v1577 = ProtoModule.readFixed64(Buf, v39)
 			else
 				error("Unsupported wire type: " .. Tag2)
 			end
@@ -7004,15 +7004,15 @@ do
 		local v40 = 0
 		while v40 < buffer.len(Buf) do
 			local Tag, Tag2
-			Tag, Tag2, v1585 = ProtoModule.readTag(Buf, v40)
+			Tag, Tag2, v1595 = ProtoModule.readTag(Buf, v40)
 			
 			if Tag2 == ProtoModule.wireTypes.varint then
 				local _
-				_, v1585 = ProtoModule.readVarInt(Buf, v40)
+				_, v1595 = ProtoModule.readVarInt(Buf, v40)
 			elseif Tag2 == ProtoModule.wireTypes.lengthDelimited then
 				if Tag == 1 then
 					local Buffer1
-					Buffer1, v1585 = ProtoModule.readBuffer(Buf, v40)
+					Buffer1, v1595 = ProtoModule.readBuffer(Buf, v40)
 					NewModule.subcategory_id = PropTypesModule.StringProp.decode(Buffer1)
 				else
 					local VarInt, VarInt2 = ProtoModule.readVarInt(Buf, v40)
@@ -7020,10 +7020,10 @@ do
 				end
 			elseif Tag2 == ProtoModule.wireTypes.i32 then
 				local _
-				_, v1585 = ProtoModule.readFixed32(Buf, v40)
+				_, v1595 = ProtoModule.readFixed32(Buf, v40)
 			elseif Tag2 == ProtoModule.wireTypes.i64 then
 				local _
-				_, v1585 = ProtoModule.readFixed64(Buf, v40)
+				_, v1595 = ProtoModule.readFixed64(Buf, v40)
 			else
 				error("Unsupported wire type: " .. Tag2)
 			end
@@ -7096,21 +7096,21 @@ do
 		local v41 = 0
 		while v41 < buffer.len(Buf) do
 			local Tag, Tag2
-			Tag, Tag2, v1604 = ProtoModule.readTag(Buf, v41)
+			Tag, Tag2, v1614 = ProtoModule.readTag(Buf, v41)
 			
 			if Tag2 == ProtoModule.wireTypes.varint then
 				if Tag == 1 then
 					local VarIntI32
-					VarIntI32, v1604 = ProtoModule.readVarIntI32(Buf, v41)
+					VarIntI32, v1614 = ProtoModule.readVarIntI32(Buf, v41)
 					NewModule.action_type = t.ActionType.fromNumber(VarIntI32) or VarIntI32
 				else
 					local _
-					_, v1604 = ProtoModule.readVarInt(Buf, v41)
+					_, v1614 = ProtoModule.readVarInt(Buf, v41)
 				end
 			elseif Tag2 == ProtoModule.wireTypes.lengthDelimited then
 				if Tag == 2 then
 					local Buffer1
-					Buffer1, v1604 = ProtoModule.readBuffer(Buf, v41)
+					Buffer1, v1614 = ProtoModule.readBuffer(Buf, v41)
 					NewModule.action_params = t.OpenMarketplaceCatalogSeeAll_Params.decode(Buffer1)
 				else
 					local VarInt, VarInt2 = ProtoModule.readVarInt(Buf, v41)
@@ -7118,10 +7118,10 @@ do
 				end
 			elseif Tag2 == ProtoModule.wireTypes.i32 then
 				local _
-				_, v1604 = ProtoModule.readFixed32(Buf, v41)
+				_, v1614 = ProtoModule.readFixed32(Buf, v41)
 			elseif Tag2 == ProtoModule.wireTypes.i64 then
 				local _
-				_, v1604 = ProtoModule.readFixed64(Buf, v41)
+				_, v1614 = ProtoModule.readFixed64(Buf, v41)
 			else
 				error("Unsupported wire type: " .. Tag2)
 			end
@@ -7219,27 +7219,27 @@ do
 		local v41 = 0
 		while v41 < buffer.len(Buf) do
 			local Tag, Tag2
-			Tag, Tag2, v1631 = ProtoModule.readTag(Buf, v41)
+			Tag, Tag2, v1641 = ProtoModule.readTag(Buf, v41)
 			
 			if Tag2 == ProtoModule.wireTypes.varint then
 				local _
-				_, v1631 = ProtoModule.readVarInt(Buf, v41)
+				_, v1641 = ProtoModule.readVarInt(Buf, v41)
 			elseif Tag2 == ProtoModule.wireTypes.lengthDelimited then
 				if Tag == 1 then
 					local Buffer1
-					Buffer1, v1631 = ProtoModule.readBuffer(Buf, v41)
+					Buffer1, v1641 = ProtoModule.readBuffer(Buf, v41)
 					NewModule.sort_id = PropTypesModule.StringProp.decode(Buffer1)
 				elseif Tag == 2 then
 					local Buffer2
-					Buffer2, v1631 = ProtoModule.readBuffer(Buf, v41)
+					Buffer2, v1641 = ProtoModule.readBuffer(Buf, v41)
 					NewModule.title = PropTypesModule.StringProp.decode(Buffer2)
 				elseif Tag == 3 then
 					local Buffer3
-					Buffer3, v1631 = ProtoModule.readBuffer(Buf, v41)
+					Buffer3, v1641 = ProtoModule.readBuffer(Buf, v41)
 					NewModule.description = PropTypesModule.StringProp.decode(Buffer3)
 				elseif Tag == 4 then
 					local Buffer4
-					Buffer4, v1631 = ProtoModule.readBuffer(Buf, v41)
+					Buffer4, v1641 = ProtoModule.readBuffer(Buf, v41)
 					NewModule.tooltip_text = PropTypesModule.StringProp.decode(Buffer4)
 				else
 					local VarInt, VarInt2 = ProtoModule.readVarInt(Buf, v41)
@@ -7247,10 +7247,10 @@ do
 				end
 			elseif Tag2 == ProtoModule.wireTypes.i32 then
 				local _
-				_, v1631 = ProtoModule.readFixed32(Buf, v41)
+				_, v1641 = ProtoModule.readFixed32(Buf, v41)
 			elseif Tag2 == ProtoModule.wireTypes.i64 then
 				local _
-				_, v1631 = ProtoModule.readFixed64(Buf, v41)
+				_, v1641 = ProtoModule.readFixed64(Buf, v41)
 			else
 				error("Unsupported wire type: " .. Tag2)
 			end
@@ -7344,21 +7344,21 @@ do
 		local v42 = 0
 		while v42 < buffer.len(Buf) do
 			local Tag, Tag2
-			Tag, Tag2, v1653 = ProtoModule.readTag(Buf, v42)
+			Tag, Tag2, v1663 = ProtoModule.readTag(Buf, v42)
 			
 			if Tag2 == ProtoModule.wireTypes.varint then
 				if Tag == 1 then
 					local VarIntI32
-					VarIntI32, v1653 = ProtoModule.readVarIntI32(Buf, v42)
+					VarIntI32, v1663 = ProtoModule.readVarIntI32(Buf, v42)
 					NewModule.action_type = t.ActionType.fromNumber(VarIntI32) or VarIntI32
 				else
 					local _
-					_, v1653 = ProtoModule.readVarInt(Buf, v42)
+					_, v1663 = ProtoModule.readVarInt(Buf, v42)
 				end
 			elseif Tag2 == ProtoModule.wireTypes.lengthDelimited then
 				if Tag == 2 then
 					local Buffer1
-					Buffer1, v1653 = ProtoModule.readBuffer(Buf, v42)
+					Buffer1, v1663 = ProtoModule.readBuffer(Buf, v42)
 					NewModule.action_params = t.CloseMarketplaceCategoryTooltip_Params.decode(Buffer1)
 				else
 					local VarInt, VarInt2 = ProtoModule.readVarInt(Buf, v42)
@@ -7366,10 +7366,10 @@ do
 				end
 			elseif Tag2 == ProtoModule.wireTypes.i32 then
 				local _
-				_, v1653 = ProtoModule.readFixed32(Buf, v42)
+				_, v1663 = ProtoModule.readFixed32(Buf, v42)
 			elseif Tag2 == ProtoModule.wireTypes.i64 then
 				local _
-				_, v1653 = ProtoModule.readFixed64(Buf, v42)
+				_, v1663 = ProtoModule.readFixed64(Buf, v42)
 			else
 				error("Unsupported wire type: " .. Tag2)
 			end
@@ -7447,15 +7447,15 @@ do
 		local v43 = 0
 		while v43 < buffer.len(Buf) do
 			local Tag, Tag2
-			Tag, Tag2, v1671 = ProtoModule.readTag(Buf, v43)
+			Tag, Tag2, v1681 = ProtoModule.readTag(Buf, v43)
 			
 			if Tag2 == ProtoModule.wireTypes.varint then
 				local _
-				_, v1671 = ProtoModule.readVarInt(Buf, v43)
+				_, v1681 = ProtoModule.readVarInt(Buf, v43)
 			elseif Tag2 == ProtoModule.wireTypes.lengthDelimited then
 				if Tag == 1 then
 					local Buffer1
-					Buffer1, v1671 = ProtoModule.readBuffer(Buf, v43)
+					Buffer1, v1681 = ProtoModule.readBuffer(Buf, v43)
 					NewModule.tooltip_id = PropTypesModule.StringProp.decode(Buffer1)
 				else
 					local VarInt, VarInt2 = ProtoModule.readVarInt(Buf, v43)
@@ -7463,10 +7463,10 @@ do
 				end
 			elseif Tag2 == ProtoModule.wireTypes.i32 then
 				local _
-				_, v1671 = ProtoModule.readFixed32(Buf, v43)
+				_, v1681 = ProtoModule.readFixed32(Buf, v43)
 			elseif Tag2 == ProtoModule.wireTypes.i64 then
 				local _
-				_, v1671 = ProtoModule.readFixed64(Buf, v43)
+				_, v1681 = ProtoModule.readFixed64(Buf, v43)
 			else
 				error("Unsupported wire type: " .. Tag2)
 			end
@@ -7541,21 +7541,21 @@ do
 		local v43 = 0
 		while v43 < buffer.len(Buf) do
 			local Tag, Tag2
-			Tag, Tag2, v1690 = ProtoModule.readTag(Buf, v43)
+			Tag, Tag2, v1700 = ProtoModule.readTag(Buf, v43)
 			
 			if Tag2 == ProtoModule.wireTypes.varint then
 				if Tag == 1 then
 					local VarIntI32
-					VarIntI32, v1690 = ProtoModule.readVarIntI32(Buf, v43)
+					VarIntI32, v1700 = ProtoModule.readVarIntI32(Buf, v43)
 					NewModule.action_type = t.ActionType.fromNumber(VarIntI32) or VarIntI32
 				else
 					local _
-					_, v1690 = ProtoModule.readVarInt(Buf, v43)
+					_, v1700 = ProtoModule.readVarInt(Buf, v43)
 				end
 			elseif Tag2 == ProtoModule.wireTypes.lengthDelimited then
 				if Tag == 2 then
 					local Buffer1
-					Buffer1, v1690 = ProtoModule.readBuffer(Buf, v43)
+					Buffer1, v1700 = ProtoModule.readBuffer(Buf, v43)
 					NewModule.action_params = t.ResizeMarketplaceCatalog_Params.decode(Buffer1)
 				else
 					local VarInt, VarInt2 = ProtoModule.readVarInt(Buf, v43)
@@ -7563,10 +7563,10 @@ do
 				end
 			elseif Tag2 == ProtoModule.wireTypes.i32 then
 				local _
-				_, v1690 = ProtoModule.readFixed32(Buf, v43)
+				_, v1700 = ProtoModule.readFixed32(Buf, v43)
 			elseif Tag2 == ProtoModule.wireTypes.i64 then
 				local _
-				_, v1690 = ProtoModule.readFixed64(Buf, v43)
+				_, v1700 = ProtoModule.readFixed64(Buf, v43)
 			else
 				error("Unsupported wire type: " .. Tag2)
 			end
@@ -7656,23 +7656,23 @@ do
 		local v44 = 0
 		while v44 < buffer.len(Buf) do
 			local Tag, Tag2
-			Tag, Tag2, v1714 = ProtoModule.readTag(Buf, v44)
+			Tag, Tag2, v1724 = ProtoModule.readTag(Buf, v44)
 			
 			if Tag2 == ProtoModule.wireTypes.varint then
 				local _
-				_, v1714 = ProtoModule.readVarInt(Buf, v44)
+				_, v1724 = ProtoModule.readVarInt(Buf, v44)
 			elseif Tag2 == ProtoModule.wireTypes.lengthDelimited then
 				if Tag == 1 then
 					local Buffer1
-					Buffer1, v1714 = ProtoModule.readBuffer(Buf, v44)
+					Buffer1, v1724 = ProtoModule.readBuffer(Buf, v44)
 					NewModule.category_id = PropTypesModule.StringProp.decode(Buffer1)
 				elseif Tag == 2 then
 					local Buffer2
-					Buffer2, v1714 = ProtoModule.readBuffer(Buf, v44)
+					Buffer2, v1724 = ProtoModule.readBuffer(Buf, v44)
 					NewModule.subcategory_id = PropTypesModule.StringProp.decode(Buffer2)
 				elseif Tag == 3 then
 					local Buffer3
-					Buffer3, v1714 = ProtoModule.readBuffer(Buf, v44)
+					Buffer3, v1724 = ProtoModule.readBuffer(Buf, v44)
 					NewModule.screen_size = PropTypesModule.StringProp.decode(Buffer3)
 				else
 					local VarInt, VarInt2 = ProtoModule.readVarInt(Buf, v44)
@@ -7680,10 +7680,10 @@ do
 				end
 			elseif Tag2 == ProtoModule.wireTypes.i32 then
 				local _
-				_, v1714 = ProtoModule.readFixed32(Buf, v44)
+				_, v1724 = ProtoModule.readFixed32(Buf, v44)
 			elseif Tag2 == ProtoModule.wireTypes.i64 then
 				local _
-				_, v1714 = ProtoModule.readFixed64(Buf, v44)
+				_, v1724 = ProtoModule.readFixed64(Buf, v44)
 			else
 				error("Unsupported wire type: " .. Tag2)
 			end
@@ -7774,21 +7774,21 @@ do
 		local v45 = 0
 		while v45 < buffer.len(Buf) do
 			local Tag, Tag2
-			Tag, Tag2, v1735 = ProtoModule.readTag(Buf, v45)
+			Tag, Tag2, v1745 = ProtoModule.readTag(Buf, v45)
 			
 			if Tag2 == ProtoModule.wireTypes.varint then
 				if Tag == 1 then
 					local VarIntI32
-					VarIntI32, v1735 = ProtoModule.readVarIntI32(Buf, v45)
+					VarIntI32, v1745 = ProtoModule.readVarIntI32(Buf, v45)
 					NewModule.action_type = t.ActionType.fromNumber(VarIntI32) or VarIntI32
 				else
 					local _
-					_, v1735 = ProtoModule.readVarInt(Buf, v45)
+					_, v1745 = ProtoModule.readVarInt(Buf, v45)
 				end
 			elseif Tag2 == ProtoModule.wireTypes.lengthDelimited then
 				if Tag == 2 then
 					local Buffer1
-					Buffer1, v1735 = ProtoModule.readBuffer(Buf, v45)
+					Buffer1, v1745 = ProtoModule.readBuffer(Buf, v45)
 					NewModule.action_params = t.OpenChartsSortDetailAction_Params.decode(Buffer1)
 				else
 					local VarInt, VarInt2 = ProtoModule.readVarInt(Buf, v45)
@@ -7796,10 +7796,10 @@ do
 				end
 			elseif Tag2 == ProtoModule.wireTypes.i32 then
 				local _
-				_, v1735 = ProtoModule.readFixed32(Buf, v45)
+				_, v1745 = ProtoModule.readFixed32(Buf, v45)
 			elseif Tag2 == ProtoModule.wireTypes.i64 then
 				local _
-				_, v1735 = ProtoModule.readFixed64(Buf, v45)
+				_, v1745 = ProtoModule.readFixed64(Buf, v45)
 			else
 				error("Unsupported wire type: " .. Tag2)
 			end
@@ -7885,19 +7885,19 @@ do
 		local v45 = 0
 		while v45 < buffer.len(Buf) do
 			local Tag, Tag2
-			Tag, Tag2, v1756 = ProtoModule.readTag(Buf, v45)
+			Tag, Tag2, v1766 = ProtoModule.readTag(Buf, v45)
 			
 			if Tag2 == ProtoModule.wireTypes.varint then
 				local _
-				_, v1756 = ProtoModule.readVarInt(Buf, v45)
+				_, v1766 = ProtoModule.readVarInt(Buf, v45)
 			elseif Tag2 == ProtoModule.wireTypes.lengthDelimited then
 				if Tag == 1 then
 					local Buffer1
-					Buffer1, v1756 = ProtoModule.readBuffer(Buf, v45)
+					Buffer1, v1766 = ProtoModule.readBuffer(Buf, v45)
 					NewModule.sort_id = PropTypesModule.StringProp.decode(Buffer1)
 				elseif Tag == 2 then
 					local Buffer2
-					Buffer2, v1756 = ProtoModule.readBuffer(Buf, v45)
+					Buffer2, v1766 = ProtoModule.readBuffer(Buf, v45)
 					NewModule.secondary_sort_id = PropTypesModule.Int32Prop.decode(Buffer2)
 				else
 					local VarInt, VarInt2 = ProtoModule.readVarInt(Buf, v45)
@@ -7905,10 +7905,10 @@ do
 				end
 			elseif Tag2 == ProtoModule.wireTypes.i32 then
 				local _
-				_, v1756 = ProtoModule.readFixed32(Buf, v45)
+				_, v1766 = ProtoModule.readFixed32(Buf, v45)
 			elseif Tag2 == ProtoModule.wireTypes.i64 then
 				local _
-				_, v1756 = ProtoModule.readFixed64(Buf, v45)
+				_, v1766 = ProtoModule.readFixed64(Buf, v45)
 			else
 				error("Unsupported wire type: " .. Tag2)
 			end
@@ -7990,21 +7990,21 @@ do
 		local v46 = 0
 		while v46 < buffer.len(Buf) do
 			local Tag, Tag2
-			Tag, Tag2, v1776 = ProtoModule.readTag(Buf, v46)
+			Tag, Tag2, v1786 = ProtoModule.readTag(Buf, v46)
 			
 			if Tag2 == ProtoModule.wireTypes.varint then
 				if Tag == 1 then
 					local VarIntI32
-					VarIntI32, v1776 = ProtoModule.readVarIntI32(Buf, v46)
+					VarIntI32, v1786 = ProtoModule.readVarIntI32(Buf, v46)
 					NewModule.action_type = t.ActionType.fromNumber(VarIntI32) or VarIntI32
 				else
 					local _
-					_, v1776 = ProtoModule.readVarInt(Buf, v46)
+					_, v1786 = ProtoModule.readVarInt(Buf, v46)
 				end
 			elseif Tag2 == ProtoModule.wireTypes.lengthDelimited then
 				if Tag == 2 then
 					local Buffer1
-					Buffer1, v1776 = ProtoModule.readBuffer(Buf, v46)
+					Buffer1, v1786 = ProtoModule.readBuffer(Buf, v46)
 					NewModule.action_params = t.OpenSongDetailAction_Params.decode(Buffer1)
 				else
 					local VarInt, VarInt2 = ProtoModule.readVarInt(Buf, v46)
@@ -8012,10 +8012,10 @@ do
 				end
 			elseif Tag2 == ProtoModule.wireTypes.i32 then
 				local _
-				_, v1776 = ProtoModule.readFixed32(Buf, v46)
+				_, v1786 = ProtoModule.readFixed32(Buf, v46)
 			elseif Tag2 == ProtoModule.wireTypes.i64 then
 				local _
-				_, v1776 = ProtoModule.readFixed64(Buf, v46)
+				_, v1786 = ProtoModule.readFixed64(Buf, v46)
 			else
 				error("Unsupported wire type: " .. Tag2)
 			end
@@ -8093,15 +8093,15 @@ do
 		local v47 = 0
 		while v47 < buffer.len(Buf) do
 			local Tag, Tag2
-			Tag, Tag2, v1794 = ProtoModule.readTag(Buf, v47)
+			Tag, Tag2, v1804 = ProtoModule.readTag(Buf, v47)
 			
 			if Tag2 == ProtoModule.wireTypes.varint then
 				local _
-				_, v1794 = ProtoModule.readVarInt(Buf, v47)
+				_, v1804 = ProtoModule.readVarInt(Buf, v47)
 			elseif Tag2 == ProtoModule.wireTypes.lengthDelimited then
 				if Tag == 1 then
 					local Buffer1
-					Buffer1, v1794 = ProtoModule.readBuffer(Buf, v47)
+					Buffer1, v1804 = ProtoModule.readBuffer(Buf, v47)
 					NewModule.song_id = PropTypesModule.StringProp.decode(Buffer1)
 				else
 					local VarInt, VarInt2 = ProtoModule.readVarInt(Buf, v47)
@@ -8109,10 +8109,10 @@ do
 				end
 			elseif Tag2 == ProtoModule.wireTypes.i32 then
 				local _
-				_, v1794 = ProtoModule.readFixed32(Buf, v47)
+				_, v1804 = ProtoModule.readFixed32(Buf, v47)
 			elseif Tag2 == ProtoModule.wireTypes.i64 then
 				local _
-				_, v1794 = ProtoModule.readFixed64(Buf, v47)
+				_, v1804 = ProtoModule.readFixed64(Buf, v47)
 			else
 				error("Unsupported wire type: " .. Tag2)
 			end
@@ -8187,21 +8187,21 @@ do
 		local v47 = 0
 		while v47 < buffer.len(Buf) do
 			local Tag, Tag2
-			Tag, Tag2, v1813 = ProtoModule.readTag(Buf, v47)
+			Tag, Tag2, v1823 = ProtoModule.readTag(Buf, v47)
 			
 			if Tag2 == ProtoModule.wireTypes.varint then
 				if Tag == 1 then
 					local VarIntI32
-					VarIntI32, v1813 = ProtoModule.readVarIntI32(Buf, v47)
+					VarIntI32, v1823 = ProtoModule.readVarIntI32(Buf, v47)
 					NewModule.action_type = t.ActionType.fromNumber(VarIntI32) or VarIntI32
 				else
 					local _
-					_, v1813 = ProtoModule.readVarInt(Buf, v47)
+					_, v1823 = ProtoModule.readVarInt(Buf, v47)
 				end
 			elseif Tag2 == ProtoModule.wireTypes.lengthDelimited then
 				if Tag == 2 then
 					local Buffer1
-					Buffer1, v1813 = ProtoModule.readBuffer(Buf, v47)
+					Buffer1, v1823 = ProtoModule.readBuffer(Buf, v47)
 					NewModule.action_params = t.OpenMarketplaceCatalogFilters_Params.decode(Buffer1)
 				else
 					local VarInt, VarInt2 = ProtoModule.readVarInt(Buf, v47)
@@ -8209,10 +8209,10 @@ do
 				end
 			elseif Tag2 == ProtoModule.wireTypes.i32 then
 				local _
-				_, v1813 = ProtoModule.readFixed32(Buf, v47)
+				_, v1823 = ProtoModule.readFixed32(Buf, v47)
 			elseif Tag2 == ProtoModule.wireTypes.i64 then
 				local _
-				_, v1813 = ProtoModule.readFixed64(Buf, v47)
+				_, v1823 = ProtoModule.readFixed64(Buf, v47)
 			else
 				error("Unsupported wire type: " .. Tag2)
 			end
@@ -8279,20 +8279,20 @@ do
 		local v48 = 0
 		while v48 < buffer.len(Buf) do
 			local _, Tag2
-			_, Tag2, v1827 = ProtoModule.readTag(Buf, v48)
+			_, Tag2, v1837 = ProtoModule.readTag(Buf, v48)
 			
 			if Tag2 == ProtoModule.wireTypes.varint then
 				local _
-				_, v1827 = ProtoModule.readVarInt(Buf, v48)
+				_, v1837 = ProtoModule.readVarInt(Buf, v48)
 			elseif Tag2 == ProtoModule.wireTypes.lengthDelimited then
 				local VarInt, VarInt2 = ProtoModule.readVarInt(Buf, v48)
 				v48 = VarInt2 + VarInt
 			elseif Tag2 == ProtoModule.wireTypes.i32 then
 				local _
-				_, v1827 = ProtoModule.readFixed32(Buf, v48)
+				_, v1837 = ProtoModule.readFixed32(Buf, v48)
 			elseif Tag2 == ProtoModule.wireTypes.i64 then
 				local _
-				_, v1827 = ProtoModule.readFixed64(Buf, v48)
+				_, v1837 = ProtoModule.readFixed64(Buf, v48)
 			else
 				error("Unsupported wire type: " .. Tag2)
 			end
@@ -8352,21 +8352,21 @@ do
 		local v49 = 0
 		while v49 < buffer.len(Buf) do
 			local Tag, Tag2
-			Tag, Tag2, v1843 = ProtoModule.readTag(Buf, v49)
+			Tag, Tag2, v1853 = ProtoModule.readTag(Buf, v49)
 			
 			if Tag2 == ProtoModule.wireTypes.varint then
 				if Tag == 1 then
 					local VarIntI32
-					VarIntI32, v1843 = ProtoModule.readVarIntI32(Buf, v49)
+					VarIntI32, v1853 = ProtoModule.readVarIntI32(Buf, v49)
 					NewModule.action_type = t.ActionType.fromNumber(VarIntI32) or VarIntI32
 				else
 					local _
-					_, v1843 = ProtoModule.readVarInt(Buf, v49)
+					_, v1853 = ProtoModule.readVarInt(Buf, v49)
 				end
 			elseif Tag2 == ProtoModule.wireTypes.lengthDelimited then
 				if Tag == 2 then
 					local Buffer1
-					Buffer1, v1843 = ProtoModule.readBuffer(Buf, v49)
+					Buffer1, v1853 = ProtoModule.readBuffer(Buf, v49)
 					NewModule.action_params = t.RefreshFromApiAction_Params.decode(Buffer1)
 				else
 					local VarInt, VarInt2 = ProtoModule.readVarInt(Buf, v49)
@@ -8374,10 +8374,10 @@ do
 				end
 			elseif Tag2 == ProtoModule.wireTypes.i32 then
 				local _
-				_, v1843 = ProtoModule.readFixed32(Buf, v49)
+				_, v1853 = ProtoModule.readFixed32(Buf, v49)
 			elseif Tag2 == ProtoModule.wireTypes.i64 then
 				local _
-				_, v1843 = ProtoModule.readFixed64(Buf, v49)
+				_, v1853 = ProtoModule.readFixed64(Buf, v49)
 			else
 				error("Unsupported wire type: " .. Tag2)
 			end
@@ -8463,19 +8463,19 @@ do
 		local v49 = 0
 		while v49 < buffer.len(Buf) do
 			local Tag, Tag2
-			Tag, Tag2, v1864 = ProtoModule.readTag(Buf, v49)
+			Tag, Tag2, v1874 = ProtoModule.readTag(Buf, v49)
 			
 			if Tag2 == ProtoModule.wireTypes.varint then
 				local _
-				_, v1864 = ProtoModule.readVarInt(Buf, v49)
+				_, v1874 = ProtoModule.readVarInt(Buf, v49)
 			elseif Tag2 == ProtoModule.wireTypes.lengthDelimited then
 				if Tag == 1 then
 					local Buffer1
-					Buffer1, v1864 = ProtoModule.readBuffer(Buf, v49)
+					Buffer1, v1874 = ProtoModule.readBuffer(Buf, v49)
 					NewModule.surface_key = PropTypesModule.StringProp.decode(Buffer1)
 				elseif Tag == 2 then
 					local Buffer2
-					Buffer2, v1864 = ProtoModule.readBuffer(Buf, v49)
+					Buffer2, v1874 = ProtoModule.readBuffer(Buf, v49)
 					NewModule.config_key = PropTypesModule.StringProp.decode(Buffer2)
 				else
 					local VarInt, VarInt2 = ProtoModule.readVarInt(Buf, v49)
@@ -8483,10 +8483,10 @@ do
 				end
 			elseif Tag2 == ProtoModule.wireTypes.i32 then
 				local _
-				_, v1864 = ProtoModule.readFixed32(Buf, v49)
+				_, v1874 = ProtoModule.readFixed32(Buf, v49)
 			elseif Tag2 == ProtoModule.wireTypes.i64 then
 				local _
-				_, v1864 = ProtoModule.readFixed64(Buf, v49)
+				_, v1874 = ProtoModule.readFixed64(Buf, v49)
 			else
 				error("Unsupported wire type: " .. Tag2)
 			end
@@ -8568,21 +8568,21 @@ do
 		local v50 = 0
 		while v50 < buffer.len(Buf) do
 			local Tag, Tag2
-			Tag, Tag2, v1884 = ProtoModule.readTag(Buf, v50)
+			Tag, Tag2, v1894 = ProtoModule.readTag(Buf, v50)
 			
 			if Tag2 == ProtoModule.wireTypes.varint then
 				if Tag == 1 then
 					local VarIntI32
-					VarIntI32, v1884 = ProtoModule.readVarIntI32(Buf, v50)
+					VarIntI32, v1894 = ProtoModule.readVarIntI32(Buf, v50)
 					NewModule.action_type = t.ActionType.fromNumber(VarIntI32) or VarIntI32
 				else
 					local _
-					_, v1884 = ProtoModule.readVarInt(Buf, v50)
+					_, v1894 = ProtoModule.readVarInt(Buf, v50)
 				end
 			elseif Tag2 == ProtoModule.wireTypes.lengthDelimited then
 				if Tag == 2 then
 					local Buffer1
-					Buffer1, v1884 = ProtoModule.readBuffer(Buf, v50)
+					Buffer1, v1894 = ProtoModule.readBuffer(Buf, v50)
 					NewModule.action_params = t.RefreshHomeAction_Params.decode(Buffer1)
 				else
 					local VarInt, VarInt2 = ProtoModule.readVarInt(Buf, v50)
@@ -8590,10 +8590,10 @@ do
 				end
 			elseif Tag2 == ProtoModule.wireTypes.i32 then
 				local _
-				_, v1884 = ProtoModule.readFixed32(Buf, v50)
+				_, v1894 = ProtoModule.readFixed32(Buf, v50)
 			elseif Tag2 == ProtoModule.wireTypes.i64 then
 				local _
-				_, v1884 = ProtoModule.readFixed64(Buf, v50)
+				_, v1894 = ProtoModule.readFixed64(Buf, v50)
 			else
 				error("Unsupported wire type: " .. Tag2)
 			end
@@ -8671,15 +8671,15 @@ do
 		local v51 = 0
 		while v51 < buffer.len(Buf) do
 			local Tag, Tag2
-			Tag, Tag2, v1902 = ProtoModule.readTag(Buf, v51)
+			Tag, Tag2, v1912 = ProtoModule.readTag(Buf, v51)
 			
 			if Tag2 == ProtoModule.wireTypes.varint then
 				local _
-				_, v1902 = ProtoModule.readVarInt(Buf, v51)
+				_, v1912 = ProtoModule.readVarInt(Buf, v51)
 			elseif Tag2 == ProtoModule.wireTypes.lengthDelimited then
 				if Tag == 1 then
 					local Buffer1
-					Buffer1, v1902 = ProtoModule.readBuffer(Buf, v51)
+					Buffer1, v1912 = ProtoModule.readBuffer(Buf, v51)
 					NewModule.request_intent = PropTypesModule.StringProp.decode(Buffer1)
 				else
 					local VarInt, VarInt2 = ProtoModule.readVarInt(Buf, v51)
@@ -8687,10 +8687,10 @@ do
 				end
 			elseif Tag2 == ProtoModule.wireTypes.i32 then
 				local _
-				_, v1902 = ProtoModule.readFixed32(Buf, v51)
+				_, v1912 = ProtoModule.readFixed32(Buf, v51)
 			elseif Tag2 == ProtoModule.wireTypes.i64 then
 				local _
-				_, v1902 = ProtoModule.readFixed64(Buf, v51)
+				_, v1912 = ProtoModule.readFixed64(Buf, v51)
 			else
 				error("Unsupported wire type: " .. Tag2)
 			end
@@ -8765,21 +8765,21 @@ do
 		local v51 = 0
 		while v51 < buffer.len(Buf) do
 			local Tag, Tag2
-			Tag, Tag2, v1921 = ProtoModule.readTag(Buf, v51)
+			Tag, Tag2, v1931 = ProtoModule.readTag(Buf, v51)
 			
 			if Tag2 == ProtoModule.wireTypes.varint then
 				if Tag == 1 then
 					local VarIntI32
-					VarIntI32, v1921 = ProtoModule.readVarIntI32(Buf, v51)
+					VarIntI32, v1931 = ProtoModule.readVarIntI32(Buf, v51)
 					NewModule.action_type = t.ActionType.fromNumber(VarIntI32) or VarIntI32
 				else
 					local _
-					_, v1921 = ProtoModule.readVarInt(Buf, v51)
+					_, v1931 = ProtoModule.readVarInt(Buf, v51)
 				end
 			elseif Tag2 == ProtoModule.wireTypes.lengthDelimited then
 				if Tag == 2 then
 					local Buffer1
-					Buffer1, v1921 = ProtoModule.readBuffer(Buf, v51)
+					Buffer1, v1931 = ProtoModule.readBuffer(Buf, v51)
 					NewModule.action_params = t.RefreshOmniRecommendationFeedItemAction_Params.decode(Buffer1)
 				else
 					local VarInt, VarInt2 = ProtoModule.readVarInt(Buf, v51)
@@ -8787,10 +8787,10 @@ do
 				end
 			elseif Tag2 == ProtoModule.wireTypes.i32 then
 				local _
-				_, v1921 = ProtoModule.readFixed32(Buf, v51)
+				_, v1931 = ProtoModule.readFixed32(Buf, v51)
 			elseif Tag2 == ProtoModule.wireTypes.i64 then
 				local _
-				_, v1921 = ProtoModule.readFixed64(Buf, v51)
+				_, v1931 = ProtoModule.readFixed64(Buf, v51)
 			else
 				error("Unsupported wire type: " .. Tag2)
 			end
@@ -8886,27 +8886,27 @@ do
 		local v52 = 0
 		while v52 < buffer.len(Buf) do
 			local Tag, Tag2
-			Tag, Tag2, v1948 = ProtoModule.readTag(Buf, v52)
+			Tag, Tag2, v1958 = ProtoModule.readTag(Buf, v52)
 			
 			if Tag2 == ProtoModule.wireTypes.varint then
 				local _
-				_, v1948 = ProtoModule.readVarInt(Buf, v52)
+				_, v1958 = ProtoModule.readVarInt(Buf, v52)
 			elseif Tag2 == ProtoModule.wireTypes.lengthDelimited then
 				if Tag == 1 then
 					local Buffer1
-					Buffer1, v1948 = ProtoModule.readBuffer(Buf, v52)
+					Buffer1, v1958 = ProtoModule.readBuffer(Buf, v52)
 					NewModule.topic_id = PropTypesModule.StringProp.decode(Buffer1)
 				elseif Tag == 2 then
 					local Buffer2
-					Buffer2, v1948 = ProtoModule.readBuffer(Buf, v52)
+					Buffer2, v1958 = ProtoModule.readBuffer(Buf, v52)
 					NewModule.selected_option = PropTypesModule.StringProp.decode(Buffer2)
 				elseif Tag == 3 then
 					local Buffer3
-					Buffer3, v1948 = ProtoModule.readBuffer(Buf, v52)
+					Buffer3, v1958 = ProtoModule.readBuffer(Buf, v52)
 					NewModule.request_intent = PropTypesModule.StringProp.decode(Buffer3)
 				elseif Tag == 4 then
 					local Buffer4
-					Buffer4, v1948 = ProtoModule.readBuffer(Buf, v52)
+					Buffer4, v1958 = ProtoModule.readBuffer(Buf, v52)
 					NewModule.feed_item_key = PropTypesModule.StringProp.decode(Buffer4)
 				else
 					local VarInt, VarInt2 = ProtoModule.readVarInt(Buf, v52)
@@ -8914,10 +8914,10 @@ do
 				end
 			elseif Tag2 == ProtoModule.wireTypes.i32 then
 				local _
-				_, v1948 = ProtoModule.readFixed32(Buf, v52)
+				_, v1958 = ProtoModule.readFixed32(Buf, v52)
 			elseif Tag2 == ProtoModule.wireTypes.i64 then
 				local _
-				_, v1948 = ProtoModule.readFixed64(Buf, v52)
+				_, v1958 = ProtoModule.readFixed64(Buf, v52)
 			else
 				error("Unsupported wire type: " .. Tag2)
 			end
@@ -9017,21 +9017,21 @@ do
 		local v53 = 0
 		while v53 < buffer.len(Buf) do
 			local Tag, Tag2
-			Tag, Tag2, v1970 = ProtoModule.readTag(Buf, v53)
+			Tag, Tag2, v1980 = ProtoModule.readTag(Buf, v53)
 			
 			if Tag2 == ProtoModule.wireTypes.varint then
 				if Tag == 1 then
 					local VarIntI32
-					VarIntI32, v1970 = ProtoModule.readVarIntI32(Buf, v53)
+					VarIntI32, v1980 = ProtoModule.readVarIntI32(Buf, v53)
 					NewModule.action_type = t.ActionType.fromNumber(VarIntI32) or VarIntI32
 				else
 					local _
-					_, v1970 = ProtoModule.readVarInt(Buf, v53)
+					_, v1980 = ProtoModule.readVarInt(Buf, v53)
 				end
 			elseif Tag2 == ProtoModule.wireTypes.lengthDelimited then
 				if Tag == 2 then
 					local Buffer1
-					Buffer1, v1970 = ProtoModule.readBuffer(Buf, v53)
+					Buffer1, v1980 = ProtoModule.readBuffer(Buf, v53)
 					NewModule.action_params = t.RsvpToEventAction_Params.decode(Buffer1)
 				else
 					local VarInt, VarInt2 = ProtoModule.readVarInt(Buf, v53)
@@ -9039,10 +9039,10 @@ do
 				end
 			elseif Tag2 == ProtoModule.wireTypes.i32 then
 				local _
-				_, v1970 = ProtoModule.readFixed32(Buf, v53)
+				_, v1980 = ProtoModule.readFixed32(Buf, v53)
 			elseif Tag2 == ProtoModule.wireTypes.i64 then
 				local _
-				_, v1970 = ProtoModule.readFixed64(Buf, v53)
+				_, v1980 = ProtoModule.readFixed64(Buf, v53)
 			else
 				error("Unsupported wire type: " .. Tag2)
 			end
@@ -9134,23 +9134,23 @@ do
 		local v53 = 0
 		while v53 < buffer.len(Buf) do
 			local Tag, Tag2
-			Tag, Tag2, v1994 = ProtoModule.readTag(Buf, v53)
+			Tag, Tag2, v2004 = ProtoModule.readTag(Buf, v53)
 			
 			if Tag2 == ProtoModule.wireTypes.varint then
 				local _
-				_, v1994 = ProtoModule.readVarInt(Buf, v53)
+				_, v2004 = ProtoModule.readVarInt(Buf, v53)
 			elseif Tag2 == ProtoModule.wireTypes.lengthDelimited then
 				if Tag == 1 then
 					local Buffer1
-					Buffer1, v1994 = ProtoModule.readBuffer(Buf, v53)
+					Buffer1, v2004 = ProtoModule.readBuffer(Buf, v53)
 					NewModule.event_id = PropTypesModule.StringProp.decode(Buffer1)
 				elseif Tag == 2 then
 					local Buffer2
-					Buffer2, v1994 = ProtoModule.readBuffer(Buf, v53)
+					Buffer2, v2004 = ProtoModule.readBuffer(Buf, v53)
 					NewModule.user_rsvp = PropTypesModule.BoolProp.decode(Buffer2)
 				elseif Tag == 3 then
 					local Buffer3
-					Buffer3, v1994 = ProtoModule.readBuffer(Buf, v53)
+					Buffer3, v2004 = ProtoModule.readBuffer(Buf, v53)
 					NewModule.notifications_modal_identifier = PropTypesModule.StringProp.decode(Buffer3)
 				else
 					local VarInt, VarInt2 = ProtoModule.readVarInt(Buf, v53)
@@ -9158,10 +9158,10 @@ do
 				end
 			elseif Tag2 == ProtoModule.wireTypes.i32 then
 				local _
-				_, v1994 = ProtoModule.readFixed32(Buf, v53)
+				_, v2004 = ProtoModule.readFixed32(Buf, v53)
 			elseif Tag2 == ProtoModule.wireTypes.i64 then
 				local _
-				_, v1994 = ProtoModule.readFixed64(Buf, v53)
+				_, v2004 = ProtoModule.readFixed64(Buf, v53)
 			else
 				error("Unsupported wire type: " .. Tag2)
 			end
@@ -9252,21 +9252,21 @@ do
 		local v54 = 0
 		while v54 < buffer.len(Buf) do
 			local Tag, Tag2
-			Tag, Tag2, v2015 = ProtoModule.readTag(Buf, v54)
+			Tag, Tag2, v2025 = ProtoModule.readTag(Buf, v54)
 			
 			if Tag2 == ProtoModule.wireTypes.varint then
 				if Tag == 1 then
 					local VarIntI32
-					VarIntI32, v2015 = ProtoModule.readVarIntI32(Buf, v54)
+					VarIntI32, v2025 = ProtoModule.readVarIntI32(Buf, v54)
 					NewModule.action_type = t.ActionType.fromNumber(VarIntI32) or VarIntI32
 				else
 					local _
-					_, v2015 = ProtoModule.readVarInt(Buf, v54)
+					_, v2025 = ProtoModule.readVarInt(Buf, v54)
 				end
 			elseif Tag2 == ProtoModule.wireTypes.lengthDelimited then
 				if Tag == 2 then
 					local Buffer1
-					Buffer1, v2015 = ProtoModule.readBuffer(Buf, v54)
+					Buffer1, v2025 = ProtoModule.readBuffer(Buf, v54)
 					NewModule.action_params = t.OpenEventDetailsAction_Params.decode(Buffer1)
 				else
 					local VarInt, VarInt2 = ProtoModule.readVarInt(Buf, v54)
@@ -9274,10 +9274,10 @@ do
 				end
 			elseif Tag2 == ProtoModule.wireTypes.i32 then
 				local _
-				_, v2015 = ProtoModule.readFixed32(Buf, v54)
+				_, v2025 = ProtoModule.readFixed32(Buf, v54)
 			elseif Tag2 == ProtoModule.wireTypes.i64 then
 				local _
-				_, v2015 = ProtoModule.readFixed64(Buf, v54)
+				_, v2025 = ProtoModule.readFixed64(Buf, v54)
 			else
 				error("Unsupported wire type: " .. Tag2)
 			end
@@ -9355,15 +9355,15 @@ do
 		local v55 = 0
 		while v55 < buffer.len(Buf) do
 			local Tag, Tag2
-			Tag, Tag2, v2033 = ProtoModule.readTag(Buf, v55)
+			Tag, Tag2, v2043 = ProtoModule.readTag(Buf, v55)
 			
 			if Tag2 == ProtoModule.wireTypes.varint then
 				local _
-				_, v2033 = ProtoModule.readVarInt(Buf, v55)
+				_, v2043 = ProtoModule.readVarInt(Buf, v55)
 			elseif Tag2 == ProtoModule.wireTypes.lengthDelimited then
 				if Tag == 1 then
 					local Buffer1
-					Buffer1, v2033 = ProtoModule.readBuffer(Buf, v55)
+					Buffer1, v2043 = ProtoModule.readBuffer(Buf, v55)
 					NewModule.event_id = PropTypesModule.StringProp.decode(Buffer1)
 				else
 					local VarInt, VarInt2 = ProtoModule.readVarInt(Buf, v55)
@@ -9371,10 +9371,10 @@ do
 				end
 			elseif Tag2 == ProtoModule.wireTypes.i32 then
 				local _
-				_, v2033 = ProtoModule.readFixed32(Buf, v55)
+				_, v2043 = ProtoModule.readFixed32(Buf, v55)
 			elseif Tag2 == ProtoModule.wireTypes.i64 then
 				local _
-				_, v2033 = ProtoModule.readFixed64(Buf, v55)
+				_, v2043 = ProtoModule.readFixed64(Buf, v55)
 			else
 				error("Unsupported wire type: " .. Tag2)
 			end
@@ -9449,21 +9449,21 @@ do
 		local v55 = 0
 		while v55 < buffer.len(Buf) do
 			local Tag, Tag2
-			Tag, Tag2, v2052 = ProtoModule.readTag(Buf, v55)
+			Tag, Tag2, v2062 = ProtoModule.readTag(Buf, v55)
 			
 			if Tag2 == ProtoModule.wireTypes.varint then
 				if Tag == 1 then
 					local VarIntI32
-					VarIntI32, v2052 = ProtoModule.readVarIntI32(Buf, v55)
+					VarIntI32, v2062 = ProtoModule.readVarIntI32(Buf, v55)
 					NewModule.action_type = t.ActionType.fromNumber(VarIntI32) or VarIntI32
 				else
 					local _
-					_, v2052 = ProtoModule.readVarInt(Buf, v55)
+					_, v2062 = ProtoModule.readVarInt(Buf, v55)
 				end
 			elseif Tag2 == ProtoModule.wireTypes.lengthDelimited then
 				if Tag == 2 then
 					local Buffer1
-					Buffer1, v2052 = ProtoModule.readBuffer(Buf, v55)
+					Buffer1, v2062 = ProtoModule.readBuffer(Buf, v55)
 					NewModule.action_params = t.OpenBadgesSeeAllAction_Params.decode(Buffer1)
 				else
 					local VarInt, VarInt2 = ProtoModule.readVarInt(Buf, v55)
@@ -9471,10 +9471,10 @@ do
 				end
 			elseif Tag2 == ProtoModule.wireTypes.i32 then
 				local _
-				_, v2052 = ProtoModule.readFixed32(Buf, v55)
+				_, v2062 = ProtoModule.readFixed32(Buf, v55)
 			elseif Tag2 == ProtoModule.wireTypes.i64 then
 				local _
-				_, v2052 = ProtoModule.readFixed64(Buf, v55)
+				_, v2062 = ProtoModule.readFixed64(Buf, v55)
 			else
 				error("Unsupported wire type: " .. Tag2)
 			end
@@ -9552,15 +9552,15 @@ do
 		local v56 = 0
 		while v56 < buffer.len(Buf) do
 			local Tag, Tag2
-			Tag, Tag2, v2070 = ProtoModule.readTag(Buf, v56)
+			Tag, Tag2, v2080 = ProtoModule.readTag(Buf, v56)
 			
 			if Tag2 == ProtoModule.wireTypes.varint then
 				local _
-				_, v2070 = ProtoModule.readVarInt(Buf, v56)
+				_, v2080 = ProtoModule.readVarInt(Buf, v56)
 			elseif Tag2 == ProtoModule.wireTypes.lengthDelimited then
 				if Tag == 1 then
 					local Buffer1
-					Buffer1, v2070 = ProtoModule.readBuffer(Buf, v56)
+					Buffer1, v2080 = ProtoModule.readBuffer(Buf, v56)
 					NewModule.universe_id = PropTypesModule.StringProp.decode(Buffer1)
 				else
 					local VarInt, VarInt2 = ProtoModule.readVarInt(Buf, v56)
@@ -9568,10 +9568,10 @@ do
 				end
 			elseif Tag2 == ProtoModule.wireTypes.i32 then
 				local _
-				_, v2070 = ProtoModule.readFixed32(Buf, v56)
+				_, v2080 = ProtoModule.readFixed32(Buf, v56)
 			elseif Tag2 == ProtoModule.wireTypes.i64 then
 				local _
-				_, v2070 = ProtoModule.readFixed64(Buf, v56)
+				_, v2080 = ProtoModule.readFixed64(Buf, v56)
 			else
 				error("Unsupported wire type: " .. Tag2)
 			end
@@ -9644,21 +9644,21 @@ do
 		local v57 = 0
 		while v57 < buffer.len(Buf) do
 			local Tag, Tag2
-			Tag, Tag2, v2089 = ProtoModule.readTag(Buf, v57)
+			Tag, Tag2, v2099 = ProtoModule.readTag(Buf, v57)
 			
 			if Tag2 == ProtoModule.wireTypes.varint then
 				if Tag == 1 then
 					local VarIntI32
-					VarIntI32, v2089 = ProtoModule.readVarIntI32(Buf, v57)
+					VarIntI32, v2099 = ProtoModule.readVarIntI32(Buf, v57)
 					NewModule.action_type = t.ActionType.fromNumber(VarIntI32) or VarIntI32
 				else
 					local _
-					_, v2089 = ProtoModule.readVarInt(Buf, v57)
+					_, v2099 = ProtoModule.readVarInt(Buf, v57)
 				end
 			elseif Tag2 == ProtoModule.wireTypes.lengthDelimited then
 				if Tag == 2 then
 					local Buffer1
-					Buffer1, v2089 = ProtoModule.readBuffer(Buf, v57)
+					Buffer1, v2099 = ProtoModule.readBuffer(Buf, v57)
 					NewModule.action_params = t.OpenExperienceStoreSeeAllAction_Params.decode(Buffer1)
 				else
 					local VarInt, VarInt2 = ProtoModule.readVarInt(Buf, v57)
@@ -9666,10 +9666,10 @@ do
 				end
 			elseif Tag2 == ProtoModule.wireTypes.i32 then
 				local _
-				_, v2089 = ProtoModule.readFixed32(Buf, v57)
+				_, v2099 = ProtoModule.readFixed32(Buf, v57)
 			elseif Tag2 == ProtoModule.wireTypes.i64 then
 				local _
-				_, v2089 = ProtoModule.readFixed64(Buf, v57)
+				_, v2099 = ProtoModule.readFixed64(Buf, v57)
 			else
 				error("Unsupported wire type: " .. Tag2)
 			end
@@ -9749,15 +9749,15 @@ do
 		local v57 = 0
 		while v57 < buffer.len(Buf) do
 			local Tag, Tag2
-			Tag, Tag2, v2107 = ProtoModule.readTag(Buf, v57)
+			Tag, Tag2, v2117 = ProtoModule.readTag(Buf, v57)
 			
 			if Tag2 == ProtoModule.wireTypes.varint then
 				local _
-				_, v2107 = ProtoModule.readVarInt(Buf, v57)
+				_, v2117 = ProtoModule.readVarInt(Buf, v57)
 			elseif Tag2 == ProtoModule.wireTypes.lengthDelimited then
 				if Tag == 1 then
 					local Buffer1
-					Buffer1, v2107 = ProtoModule.readBuffer(Buf, v57)
+					Buffer1, v2117 = ProtoModule.readBuffer(Buf, v57)
 					NewModule.universe_id = PropTypesModule.StringProp.decode(Buffer1)
 				else
 					local VarInt, VarInt2 = ProtoModule.readVarInt(Buf, v57)
@@ -9765,10 +9765,10 @@ do
 				end
 			elseif Tag2 == ProtoModule.wireTypes.i32 then
 				local _
-				_, v2107 = ProtoModule.readFixed32(Buf, v57)
+				_, v2117 = ProtoModule.readFixed32(Buf, v57)
 			elseif Tag2 == ProtoModule.wireTypes.i64 then
 				local _
-				_, v2107 = ProtoModule.readFixed64(Buf, v57)
+				_, v2117 = ProtoModule.readFixed64(Buf, v57)
 			else
 				error("Unsupported wire type: " .. Tag2)
 			end
@@ -9841,21 +9841,21 @@ do
 		local v58 = 0
 		while v58 < buffer.len(Buf) do
 			local Tag, Tag2
-			Tag, Tag2, v2126 = ProtoModule.readTag(Buf, v58)
+			Tag, Tag2, v2136 = ProtoModule.readTag(Buf, v58)
 			
 			if Tag2 == ProtoModule.wireTypes.varint then
 				if Tag == 1 then
 					local VarIntI32
-					VarIntI32, v2126 = ProtoModule.readVarIntI32(Buf, v58)
+					VarIntI32, v2136 = ProtoModule.readVarIntI32(Buf, v58)
 					NewModule.action_type = t.ActionType.fromNumber(VarIntI32) or VarIntI32
 				else
 					local _
-					_, v2126 = ProtoModule.readVarInt(Buf, v58)
+					_, v2136 = ProtoModule.readVarInt(Buf, v58)
 				end
 			elseif Tag2 == ProtoModule.wireTypes.lengthDelimited then
 				if Tag == 2 then
 					local Buffer1
-					Buffer1, v2126 = ProtoModule.readBuffer(Buf, v58)
+					Buffer1, v2136 = ProtoModule.readBuffer(Buf, v58)
 					NewModule.action_params = t.OpenSubscriptionPurchasePageAction_Params.decode(Buffer1)
 				else
 					local VarInt, VarInt2 = ProtoModule.readVarInt(Buf, v58)
@@ -9863,10 +9863,10 @@ do
 				end
 			elseif Tag2 == ProtoModule.wireTypes.i32 then
 				local _
-				_, v2126 = ProtoModule.readFixed32(Buf, v58)
+				_, v2136 = ProtoModule.readFixed32(Buf, v58)
 			elseif Tag2 == ProtoModule.wireTypes.i64 then
 				local _
-				_, v2126 = ProtoModule.readFixed64(Buf, v58)
+				_, v2136 = ProtoModule.readFixed64(Buf, v58)
 			else
 				error("Unsupported wire type: " .. Tag2)
 			end
@@ -10016,63 +10016,63 @@ do
 		local v59 = 0
 		while v59 < buffer.len(Buf) do
 			local Tag, Tag2
-			Tag, Tag2, v2180 = ProtoModule.readTag(Buf, v59)
+			Tag, Tag2, v2190 = ProtoModule.readTag(Buf, v59)
 			
 			if Tag2 == ProtoModule.wireTypes.varint then
 				local _
-				_, v2180 = ProtoModule.readVarInt(Buf, v59)
+				_, v2190 = ProtoModule.readVarInt(Buf, v59)
 			elseif Tag2 == ProtoModule.wireTypes.lengthDelimited then
 				if Tag == 1 then
 					local Buffer1
-					Buffer1, v2180 = ProtoModule.readBuffer(Buf, v59)
+					Buffer1, v2190 = ProtoModule.readBuffer(Buf, v59)
 					NewModule.subscription_id = PropTypesModule.StringProp.decode(Buffer1)
 				elseif Tag == 2 then
 					local Buffer2
-					Buffer2, v2180 = ProtoModule.readBuffer(Buf, v59)
+					Buffer2, v2190 = ProtoModule.readBuffer(Buf, v59)
 					NewModule.universe_id = PropTypesModule.StringProp.decode(Buffer2)
 				elseif Tag == 3 then
 					local Buffer3
-					Buffer3, v2180 = ProtoModule.readBuffer(Buf, v59)
+					Buffer3, v2190 = ProtoModule.readBuffer(Buf, v59)
 					NewModule.creator_name = PropTypesModule.StringProp.decode(Buffer3)
 				elseif Tag == 4 then
 					local Buffer4
-					Buffer4, v2180 = ProtoModule.readBuffer(Buf, v59)
+					Buffer4, v2190 = ProtoModule.readBuffer(Buf, v59)
 					NewModule.creator_verified = PropTypesModule.BoolProp.decode(Buffer4)
 				elseif Tag == 5 then
 					local Buffer5
-					Buffer5, v2180 = ProtoModule.readBuffer(Buf, v59)
+					Buffer5, v2190 = ProtoModule.readBuffer(Buf, v59)
 					NewModule.name = PropTypesModule.StringProp.decode(Buffer5)
 				elseif Tag == 6 then
 					local Buffer6
-					Buffer6, v2180 = ProtoModule.readBuffer(Buf, v59)
+					Buffer6, v2190 = ProtoModule.readBuffer(Buf, v59)
 					NewModule.description = PropTypesModule.StringProp.decode(Buffer6)
 				elseif Tag == 7 then
 					local Buffer7
-					Buffer7, v2180 = ProtoModule.readBuffer(Buf, v59)
+					Buffer7, v2190 = ProtoModule.readBuffer(Buf, v59)
 					NewModule.image_asset_id = PropTypesModule.Int64Prop.decode(Buffer7)
 				elseif Tag == 8 then
 					local Buffer8
-					Buffer8, v2180 = ProtoModule.readBuffer(Buf, v59)
+					Buffer8, v2190 = ProtoModule.readBuffer(Buf, v59)
 					NewModule.period_type = PropTypesModule.StringProp.decode(Buffer8)
 				elseif Tag == 9 then
 					local Buffer9
-					Buffer9, v2180 = ProtoModule.readBuffer(Buf, v59)
+					Buffer9, v2190 = ProtoModule.readBuffer(Buf, v59)
 					NewModule.is_subscribed = PropTypesModule.BoolProp.decode(Buffer9)
 				elseif Tag == 10 then
 					local Buffer10
-					Buffer10, v2180 = ProtoModule.readBuffer(Buf, v59)
+					Buffer10, v2190 = ProtoModule.readBuffer(Buf, v59)
 					NewModule.price_display = PropTypesModule.StringProp.decode(Buffer10)
 				elseif Tag == 11 then
 					local Buffer11
-					Buffer11, v2180 = ProtoModule.readBuffer(Buf, v59)
+					Buffer11, v2190 = ProtoModule.readBuffer(Buf, v59)
 					NewModule.price_in_robux = PropTypesModule.Int64Prop.decode(Buffer11)
 				elseif Tag == 12 then
 					local Buffer12
-					Buffer12, v2180 = ProtoModule.readBuffer(Buf, v59)
+					Buffer12, v2190 = ProtoModule.readBuffer(Buf, v59)
 					NewModule.price_tier = PropTypesModule.Int64Prop.decode(Buffer12)
 				elseif Tag == 13 then
 					local Buffer13
-					Buffer13, v2180 = ProtoModule.readBuffer(Buf, v59)
+					Buffer13, v2190 = ProtoModule.readBuffer(Buf, v59)
 					NewModule.thumbnail_string = PropTypesModule.StringProp.decode(Buffer13)
 				else
 					local VarInt, VarInt2 = ProtoModule.readVarInt(Buf, v59)
@@ -10080,10 +10080,10 @@ do
 				end
 			elseif Tag2 == ProtoModule.wireTypes.i32 then
 				local _
-				_, v2180 = ProtoModule.readFixed32(Buf, v59)
+				_, v2190 = ProtoModule.readFixed32(Buf, v59)
 			elseif Tag2 == ProtoModule.wireTypes.i64 then
 				local _
-				_, v2180 = ProtoModule.readFixed64(Buf, v59)
+				_, v2190 = ProtoModule.readFixed64(Buf, v59)
 			else
 				error("Unsupported wire type: " .. Tag2)
 			end
@@ -10260,21 +10260,21 @@ do
 		local v59 = 0
 		while v59 < buffer.len(Buf) do
 			local Tag, Tag2
-			Tag, Tag2, v2211 = ProtoModule.readTag(Buf, v59)
+			Tag, Tag2, v2221 = ProtoModule.readTag(Buf, v59)
 			
 			if Tag2 == ProtoModule.wireTypes.varint then
 				if Tag == 1 then
 					local VarIntI32
-					VarIntI32, v2211 = ProtoModule.readVarIntI32(Buf, v59)
+					VarIntI32, v2221 = ProtoModule.readVarIntI32(Buf, v59)
 					NewModule.action_type = t.ActionType.fromNumber(VarIntI32) or VarIntI32
 				else
 					local _
-					_, v2211 = ProtoModule.readVarInt(Buf, v59)
+					_, v2221 = ProtoModule.readVarInt(Buf, v59)
 				end
 			elseif Tag2 == ProtoModule.wireTypes.lengthDelimited then
 				if Tag == 2 then
 					local Buffer1
-					Buffer1, v2211 = ProtoModule.readBuffer(Buf, v59)
+					Buffer1, v2221 = ProtoModule.readBuffer(Buf, v59)
 					NewModule.action_params = t.RefreshGamePassesAction_Params.decode(Buffer1)
 				else
 					local VarInt, VarInt2 = ProtoModule.readVarInt(Buf, v59)
@@ -10282,10 +10282,10 @@ do
 				end
 			elseif Tag2 == ProtoModule.wireTypes.i32 then
 				local _
-				_, v2211 = ProtoModule.readFixed32(Buf, v59)
+				_, v2221 = ProtoModule.readFixed32(Buf, v59)
 			elseif Tag2 == ProtoModule.wireTypes.i64 then
 				local _
-				_, v2211 = ProtoModule.readFixed64(Buf, v59)
+				_, v2221 = ProtoModule.readFixed64(Buf, v59)
 			else
 				error("Unsupported wire type: " .. Tag2)
 			end
@@ -10363,15 +10363,15 @@ do
 		local v60 = 0
 		while v60 < buffer.len(Buf) do
 			local Tag, Tag2
-			Tag, Tag2, v2229 = ProtoModule.readTag(Buf, v60)
+			Tag, Tag2, v2239 = ProtoModule.readTag(Buf, v60)
 			
 			if Tag2 == ProtoModule.wireTypes.varint then
 				local _
-				_, v2229 = ProtoModule.readVarInt(Buf, v60)
+				_, v2239 = ProtoModule.readVarInt(Buf, v60)
 			elseif Tag2 == ProtoModule.wireTypes.lengthDelimited then
 				if Tag == 1 then
 					local Buffer1
-					Buffer1, v2229 = ProtoModule.readBuffer(Buf, v60)
+					Buffer1, v2239 = ProtoModule.readBuffer(Buf, v60)
 					NewModule.universe_id = PropTypesModule.StringProp.decode(Buffer1)
 				else
 					local VarInt, VarInt2 = ProtoModule.readVarInt(Buf, v60)
@@ -10379,10 +10379,10 @@ do
 				end
 			elseif Tag2 == ProtoModule.wireTypes.i32 then
 				local _
-				_, v2229 = ProtoModule.readFixed32(Buf, v60)
+				_, v2239 = ProtoModule.readFixed32(Buf, v60)
 			elseif Tag2 == ProtoModule.wireTypes.i64 then
 				local _
-				_, v2229 = ProtoModule.readFixed64(Buf, v60)
+				_, v2239 = ProtoModule.readFixed64(Buf, v60)
 			else
 				error("Unsupported wire type: " .. Tag2)
 			end
@@ -10455,21 +10455,21 @@ do
 		local v61 = 0
 		while v61 < buffer.len(Buf) do
 			local Tag, Tag2
-			Tag, Tag2, v2248 = ProtoModule.readTag(Buf, v61)
+			Tag, Tag2, v2258 = ProtoModule.readTag(Buf, v61)
 			
 			if Tag2 == ProtoModule.wireTypes.varint then
 				if Tag == 1 then
 					local VarIntI32
-					VarIntI32, v2248 = ProtoModule.readVarIntI32(Buf, v61)
+					VarIntI32, v2258 = ProtoModule.readVarIntI32(Buf, v61)
 					NewModule.action_type = t.ActionType.fromNumber(VarIntI32) or VarIntI32
 				else
 					local _
-					_, v2248 = ProtoModule.readVarInt(Buf, v61)
+					_, v2258 = ProtoModule.readVarInt(Buf, v61)
 				end
 			elseif Tag2 == ProtoModule.wireTypes.lengthDelimited then
 				if Tag == 2 then
 					local Buffer1
-					Buffer1, v2248 = ProtoModule.readBuffer(Buf, v61)
+					Buffer1, v2258 = ProtoModule.readBuffer(Buf, v61)
 					NewModule.action_params = t.RefreshPlayabilityAction_Params.decode(Buffer1)
 				else
 					local VarInt, VarInt2 = ProtoModule.readVarInt(Buf, v61)
@@ -10477,10 +10477,10 @@ do
 				end
 			elseif Tag2 == ProtoModule.wireTypes.i32 then
 				local _
-				_, v2248 = ProtoModule.readFixed32(Buf, v61)
+				_, v2258 = ProtoModule.readFixed32(Buf, v61)
 			elseif Tag2 == ProtoModule.wireTypes.i64 then
 				local _
-				_, v2248 = ProtoModule.readFixed64(Buf, v61)
+				_, v2258 = ProtoModule.readFixed64(Buf, v61)
 			else
 				error("Unsupported wire type: " .. Tag2)
 			end
@@ -10560,15 +10560,15 @@ do
 		local v61 = 0
 		while v61 < buffer.len(Buf) do
 			local Tag, Tag2
-			Tag, Tag2, v2266 = ProtoModule.readTag(Buf, v61)
+			Tag, Tag2, v2276 = ProtoModule.readTag(Buf, v61)
 			
 			if Tag2 == ProtoModule.wireTypes.varint then
 				local _
-				_, v2266 = ProtoModule.readVarInt(Buf, v61)
+				_, v2276 = ProtoModule.readVarInt(Buf, v61)
 			elseif Tag2 == ProtoModule.wireTypes.lengthDelimited then
 				if Tag == 1 then
 					local Buffer1
-					Buffer1, v2266 = ProtoModule.readBuffer(Buf, v61)
+					Buffer1, v2276 = ProtoModule.readBuffer(Buf, v61)
 					NewModule.universe_id = PropTypesModule.StringProp.decode(Buffer1)
 				else
 					local VarInt, VarInt2 = ProtoModule.readVarInt(Buf, v61)
@@ -10576,10 +10576,10 @@ do
 				end
 			elseif Tag2 == ProtoModule.wireTypes.i32 then
 				local _
-				_, v2266 = ProtoModule.readFixed32(Buf, v61)
+				_, v2276 = ProtoModule.readFixed32(Buf, v61)
 			elseif Tag2 == ProtoModule.wireTypes.i64 then
 				local _
-				_, v2266 = ProtoModule.readFixed64(Buf, v61)
+				_, v2276 = ProtoModule.readFixed64(Buf, v61)
 			else
 				error("Unsupported wire type: " .. Tag2)
 			end
@@ -10652,21 +10652,21 @@ do
 		local v62 = 0
 		while v62 < buffer.len(Buf) do
 			local Tag, Tag2
-			Tag, Tag2, v2285 = ProtoModule.readTag(Buf, v62)
+			Tag, Tag2, v2295 = ProtoModule.readTag(Buf, v62)
 			
 			if Tag2 == ProtoModule.wireTypes.varint then
 				if Tag == 1 then
 					local VarIntI32
-					VarIntI32, v2285 = ProtoModule.readVarIntI32(Buf, v62)
+					VarIntI32, v2295 = ProtoModule.readVarIntI32(Buf, v62)
 					NewModule.action_type = t.ActionType.fromNumber(VarIntI32) or VarIntI32
 				else
 					local _
-					_, v2285 = ProtoModule.readVarInt(Buf, v62)
+					_, v2295 = ProtoModule.readVarInt(Buf, v62)
 				end
 			elseif Tag2 == ProtoModule.wireTypes.lengthDelimited then
 				if Tag == 2 then
 					local Buffer1
-					Buffer1, v2285 = ProtoModule.readBuffer(Buf, v62)
+					Buffer1, v2295 = ProtoModule.readBuffer(Buf, v62)
 					NewModule.action_params = t.RefreshDeveloperProductsAction_Params.decode(Buffer1)
 				else
 					local VarInt, VarInt2 = ProtoModule.readVarInt(Buf, v62)
@@ -10674,10 +10674,10 @@ do
 				end
 			elseif Tag2 == ProtoModule.wireTypes.i32 then
 				local _
-				_, v2285 = ProtoModule.readFixed32(Buf, v62)
+				_, v2295 = ProtoModule.readFixed32(Buf, v62)
 			elseif Tag2 == ProtoModule.wireTypes.i64 then
 				local _
-				_, v2285 = ProtoModule.readFixed64(Buf, v62)
+				_, v2295 = ProtoModule.readFixed64(Buf, v62)
 			else
 				error("Unsupported wire type: " .. Tag2)
 			end
@@ -10755,15 +10755,15 @@ do
 		local v63 = 0
 		while v63 < buffer.len(Buf) do
 			local Tag, Tag2
-			Tag, Tag2, v2303 = ProtoModule.readTag(Buf, v63)
+			Tag, Tag2, v2313 = ProtoModule.readTag(Buf, v63)
 			
 			if Tag2 == ProtoModule.wireTypes.varint then
 				local _
-				_, v2303 = ProtoModule.readVarInt(Buf, v63)
+				_, v2313 = ProtoModule.readVarInt(Buf, v63)
 			elseif Tag2 == ProtoModule.wireTypes.lengthDelimited then
 				if Tag == 1 then
 					local Buffer1
-					Buffer1, v2303 = ProtoModule.readBuffer(Buf, v63)
+					Buffer1, v2313 = ProtoModule.readBuffer(Buf, v63)
 					NewModule.place_id = PropTypesModule.StringProp.decode(Buffer1)
 				else
 					local VarInt, VarInt2 = ProtoModule.readVarInt(Buf, v63)
@@ -10771,10 +10771,10 @@ do
 				end
 			elseif Tag2 == ProtoModule.wireTypes.i32 then
 				local _
-				_, v2303 = ProtoModule.readFixed32(Buf, v63)
+				_, v2313 = ProtoModule.readFixed32(Buf, v63)
 			elseif Tag2 == ProtoModule.wireTypes.i64 then
 				local _
-				_, v2303 = ProtoModule.readFixed64(Buf, v63)
+				_, v2313 = ProtoModule.readFixed64(Buf, v63)
 			else
 				error("Unsupported wire type: " .. Tag2)
 			end
@@ -10849,21 +10849,21 @@ do
 		local v63 = 0
 		while v63 < buffer.len(Buf) do
 			local Tag, Tag2
-			Tag, Tag2, v2322 = ProtoModule.readTag(Buf, v63)
+			Tag, Tag2, v2332 = ProtoModule.readTag(Buf, v63)
 			
 			if Tag2 == ProtoModule.wireTypes.varint then
 				if Tag == 1 then
 					local VarIntI32
-					VarIntI32, v2322 = ProtoModule.readVarIntI32(Buf, v63)
+					VarIntI32, v2332 = ProtoModule.readVarIntI32(Buf, v63)
 					NewModule.action_type = t.ActionType.fromNumber(VarIntI32) or VarIntI32
 				else
 					local _
-					_, v2322 = ProtoModule.readVarInt(Buf, v63)
+					_, v2332 = ProtoModule.readVarInt(Buf, v63)
 				end
 			elseif Tag2 == ProtoModule.wireTypes.lengthDelimited then
 				if Tag == 2 then
 					local Buffer1
-					Buffer1, v2322 = ProtoModule.readBuffer(Buf, v63)
+					Buffer1, v2332 = ProtoModule.readBuffer(Buf, v63)
 					NewModule.action_params = t.OpenFaeTrialUpsellAction_Params.decode(Buffer1)
 				else
 					local VarInt, VarInt2 = ProtoModule.readVarInt(Buf, v63)
@@ -10871,10 +10871,10 @@ do
 				end
 			elseif Tag2 == ProtoModule.wireTypes.i32 then
 				local _
-				_, v2322 = ProtoModule.readFixed32(Buf, v63)
+				_, v2332 = ProtoModule.readFixed32(Buf, v63)
 			elseif Tag2 == ProtoModule.wireTypes.i64 then
 				local _
-				_, v2322 = ProtoModule.readFixed64(Buf, v63)
+				_, v2332 = ProtoModule.readFixed64(Buf, v63)
 			else
 				error("Unsupported wire type: " .. Tag2)
 			end
@@ -10970,27 +10970,27 @@ do
 		local v64 = 0
 		while v64 < buffer.len(Buf) do
 			local Tag, Tag2
-			Tag, Tag2, v2349 = ProtoModule.readTag(Buf, v64)
+			Tag, Tag2, v2359 = ProtoModule.readTag(Buf, v64)
 			
 			if Tag2 == ProtoModule.wireTypes.varint then
 				local _
-				_, v2349 = ProtoModule.readVarInt(Buf, v64)
+				_, v2359 = ProtoModule.readVarInt(Buf, v64)
 			elseif Tag2 == ProtoModule.wireTypes.lengthDelimited then
 				if Tag == 1 then
 					local Buffer1
-					Buffer1, v2349 = ProtoModule.readBuffer(Buf, v64)
+					Buffer1, v2359 = ProtoModule.readBuffer(Buf, v64)
 					NewModule.source = PropTypesModule.StringProp.decode(Buffer1)
 				elseif Tag == 2 then
 					local Buffer2
-					Buffer2, v2349 = ProtoModule.readBuffer(Buf, v64)
+					Buffer2, v2359 = ProtoModule.readBuffer(Buf, v64)
 					NewModule.config_key = PropTypesModule.StringProp.decode(Buffer2)
 				elseif Tag == 3 then
 					local Buffer3
-					Buffer3, v2349 = ProtoModule.readBuffer(Buf, v64)
+					Buffer3, v2359 = ProtoModule.readBuffer(Buf, v64)
 					NewModule.surface_key = PropTypesModule.StringProp.decode(Buffer3)
 				elseif Tag == 4 then
 					local Buffer4
-					Buffer4, v2349 = ProtoModule.readBuffer(Buf, v64)
+					Buffer4, v2359 = ProtoModule.readBuffer(Buf, v64)
 					NewModule.prompt_type = PropTypesModule.StringProp.decode(Buffer4)
 				else
 					local VarInt, VarInt2 = ProtoModule.readVarInt(Buf, v64)
@@ -10998,10 +10998,10 @@ do
 				end
 			elseif Tag2 == ProtoModule.wireTypes.i32 then
 				local _
-				_, v2349 = ProtoModule.readFixed32(Buf, v64)
+				_, v2359 = ProtoModule.readFixed32(Buf, v64)
 			elseif Tag2 == ProtoModule.wireTypes.i64 then
 				local _
-				_, v2349 = ProtoModule.readFixed64(Buf, v64)
+				_, v2359 = ProtoModule.readFixed64(Buf, v64)
 			else
 				error("Unsupported wire type: " .. Tag2)
 			end
@@ -11098,32 +11098,32 @@ do
 		local v65 = 0
 		while v65 < buffer.len(Buf) do
 			local Tag, Tag2
-			Tag, Tag2, v2371 = ProtoModule.readTag(Buf, v65)
+			Tag, Tag2, v2381 = ProtoModule.readTag(Buf, v65)
 			
 			if Tag2 == ProtoModule.wireTypes.varint then
 				if Tag == 1 then
 					local VarIntI32
-					VarIntI32, v2371 = ProtoModule.readVarIntI32(Buf, v65)
+					VarIntI32, v2381 = ProtoModule.readVarIntI32(Buf, v65)
 					NewModule.action_type = t.ActionType.fromNumber(VarIntI32) or VarIntI32
 				else
 					local _
-					_, v2371 = ProtoModule.readVarInt(Buf, v65)
+					_, v2381 = ProtoModule.readVarInt(Buf, v65)
 				end
 			elseif Tag2 == ProtoModule.wireTypes.lengthDelimited then
 				if Tag == 2 then
 					local Buffer1
-					Buffer1, v2371 = ProtoModule.readBuffer(Buf, v65)
-					NewModule.action_params = t.OpenIncomingTransferUpsellAction_Params.decode(Buffer1)
+					Buffer1, v2381 = ProtoModule.readBuffer(Buf, v65)
+					NewModule.action_params = t.PurchaseBuyRobuxProductAction_Params.decode(Buffer1)
 				else
 					local VarInt, VarInt2 = ProtoModule.readVarInt(Buf, v65)
 					v65 = VarInt2 + VarInt
 				end
 			elseif Tag2 == ProtoModule.wireTypes.i32 then
 				local _
-				_, v2371 = ProtoModule.readFixed32(Buf, v65)
+				_, v2381 = ProtoModule.readFixed32(Buf, v65)
 			elseif Tag2 == ProtoModule.wireTypes.i64 then
 				local _
-				_, v2371 = ProtoModule.readFixed64(Buf, v65)
+				_, v2381 = ProtoModule.readFixed64(Buf, v65)
 			else
 				error("Unsupported wire type: " .. Tag2)
 			end
@@ -11155,31 +11155,31 @@ do
 			NewModule.action_type = (if typeof(self.actionType) == "number" then t.ActionType.fromNumber(self.actionType) else t.ActionType.fromName(self.actionType)) or self.actionType
 		end
 		if self.action_params ~= nil then
-			NewModule.action_params = t.OpenIncomingTransferUpsellAction_Params.jsonDecode(self.action_params)
+			NewModule.action_params = t.PurchaseBuyRobuxProductAction_Params.jsonDecode(self.action_params)
 		end
 		if self.actionParams ~= nil then
-			NewModule.action_params = t.OpenIncomingTransferUpsellAction_Params.jsonDecode(self.actionParams)
+			NewModule.action_params = t.PurchaseBuyRobuxProductAction_Params.jsonDecode(self.actionParams)
 		end
 		return NewModule
 	end
 
 	Module95.descriptor = {
-		name = "OpenIncomingTransferUpsellAction",
-		fullName = "roblox.apppageplatform.shared.v1beta1.OpenIncomingTransferUpsellAction"
+		name = "PurchaseBuyRobuxProductAction",
+		fullName = "roblox.apppageplatform.shared.v1beta1.PurchaseBuyRobuxProductAction"
 	}
-	t.OpenIncomingTransferUpsellAction = Module95
+	t.PurchaseBuyRobuxProductAction = Module95
 end
 do
-	TypeRegistryModule.default:register(t.OpenIncomingTransferUpsellAction)
+	TypeRegistryModule.default:register(t.PurchaseBuyRobuxProductAction)
 	local Module96 = {}
 	Module96.__index = Module96
 
 	function Module96.new(p1)
 		-- upvalues: Module96 (copy)
 		return (setmetatable({
-			url = if p1 == nil or p1.url == nil then nil else p1.url,
-			prompt_type = if p1 == nil or p1.prompt_type == nil then nil else p1.prompt_type,
-			prompt_id = if p1 == nil or p1.prompt_id == nil then nil else p1.prompt_id
+			product_id = if p1 == nil or p1.product_id == nil then nil else p1.product_id,
+			provider_product_id = if p1 == nil or p1.provider_product_id == nil then nil else p1.provider_product_id,
+			is_redirect = if p1 == nil or p1.is_redirect == nil then nil else p1.is_redirect
 		}, Module96))
 	end
 
@@ -11188,18 +11188,18 @@ do
 		local Buf = buffer.create(0)
 		local Count = 0
 		
-		if self.url ~= nil then
-			local EncodeResult = self.url:encode()
+		if self.product_id ~= nil then
+			local EncodeResult = self.product_id:encode()
 			local WriteTagResult, WriteTagResult2 = ProtoModule.writeTag(Buf, Count, 1, ProtoModule.wireTypes.lengthDelimited)
 			Buf, Count = ProtoModule.writeBuffer(WriteTagResult, WriteTagResult2, EncodeResult, buffer.len(EncodeResult))
 		end
-		if self.prompt_type ~= nil then
-			local EncodeResult = self.prompt_type:encode()
+		if self.provider_product_id ~= nil then
+			local EncodeResult = self.provider_product_id:encode()
 			local WriteTagResult1, WriteTagResult2_1 = ProtoModule.writeTag(Buf, Count, 2, ProtoModule.wireTypes.lengthDelimited)
 			Buf, Count = ProtoModule.writeBuffer(WriteTagResult1, WriteTagResult2_1, EncodeResult, buffer.len(EncodeResult))
 		end
-		if self.prompt_id ~= nil then
-			local EncodeResult = self.prompt_id:encode()
+		if self.is_redirect ~= nil then
+			local EncodeResult = self.is_redirect:encode()
 			local WriteTagResult3, WriteTagResult2_2 = ProtoModule.writeTag(Buf, Count, 3, ProtoModule.wireTypes.lengthDelimited)
 			Buf, Count = ProtoModule.writeBuffer(WriteTagResult3, WriteTagResult2_2, EncodeResult, buffer.len(EncodeResult))
 		end
@@ -11215,34 +11215,34 @@ do
 		local v65 = 0
 		while v65 < buffer.len(Buf) do
 			local Tag, Tag2
-			Tag, Tag2, v2395 = ProtoModule.readTag(Buf, v65)
+			Tag, Tag2, v2405 = ProtoModule.readTag(Buf, v65)
 			
 			if Tag2 == ProtoModule.wireTypes.varint then
 				local _
-				_, v2395 = ProtoModule.readVarInt(Buf, v65)
+				_, v2405 = ProtoModule.readVarInt(Buf, v65)
 			elseif Tag2 == ProtoModule.wireTypes.lengthDelimited then
 				if Tag == 1 then
 					local Buffer1
-					Buffer1, v2395 = ProtoModule.readBuffer(Buf, v65)
-					NewModule.url = PropTypesModule.StringProp.decode(Buffer1)
+					Buffer1, v2405 = ProtoModule.readBuffer(Buf, v65)
+					NewModule.product_id = PropTypesModule.StringProp.decode(Buffer1)
 				elseif Tag == 2 then
 					local Buffer2
-					Buffer2, v2395 = ProtoModule.readBuffer(Buf, v65)
-					NewModule.prompt_type = PropTypesModule.StringProp.decode(Buffer2)
+					Buffer2, v2405 = ProtoModule.readBuffer(Buf, v65)
+					NewModule.provider_product_id = PropTypesModule.StringProp.decode(Buffer2)
 				elseif Tag == 3 then
 					local Buffer3
-					Buffer3, v2395 = ProtoModule.readBuffer(Buf, v65)
-					NewModule.prompt_id = PropTypesModule.StringProp.decode(Buffer3)
+					Buffer3, v2405 = ProtoModule.readBuffer(Buf, v65)
+					NewModule.is_redirect = PropTypesModule.BoolProp.decode(Buffer3)
 				else
 					local VarInt, VarInt2 = ProtoModule.readVarInt(Buf, v65)
 					v65 = VarInt2 + VarInt
 				end
 			elseif Tag2 == ProtoModule.wireTypes.i32 then
 				local _
-				_, v2395 = ProtoModule.readFixed32(Buf, v65)
+				_, v2405 = ProtoModule.readFixed32(Buf, v65)
 			elseif Tag2 == ProtoModule.wireTypes.i64 then
 				local _
-				_, v2395 = ProtoModule.readFixed64(Buf, v65)
+				_, v2405 = ProtoModule.readFixed64(Buf, v65)
 			else
 				error("Unsupported wire type: " .. Tag2)
 			end
@@ -11253,14 +11253,14 @@ do
 	function Module96:jsonEncode()
 		local t = {}
 		
-		if self.url ~= nil then
-			t.url = self.url:jsonEncode()
+		if self.product_id ~= nil then
+			t.productId = self.product_id:jsonEncode()
 		end
-		if self.prompt_type ~= nil then
-			t.promptType = self.prompt_type:jsonEncode()
+		if self.provider_product_id ~= nil then
+			t.providerProductId = self.provider_product_id:jsonEncode()
 		end
-		if self.prompt_id ~= nil then
-			t.promptId = self.prompt_id:jsonEncode()
+		if self.is_redirect ~= nil then
+			t.isRedirect = self.is_redirect:jsonEncode()
 		end
 		return t
 	end
@@ -11269,30 +11269,33 @@ do
 		-- upvalues: Module96 (copy), PropTypesModule (copy)
 		local NewModule = Module96.new()
 		
-		if self.url ~= nil then
-			NewModule.url = PropTypesModule.StringProp.jsonDecode(self.url)
+		if self.product_id ~= nil then
+			NewModule.product_id = PropTypesModule.StringProp.jsonDecode(self.product_id)
 		end
-		if self.prompt_type ~= nil then
-			NewModule.prompt_type = PropTypesModule.StringProp.jsonDecode(self.prompt_type)
+		if self.productId ~= nil then
+			NewModule.product_id = PropTypesModule.StringProp.jsonDecode(self.productId)
 		end
-		if self.promptType ~= nil then
-			NewModule.prompt_type = PropTypesModule.StringProp.jsonDecode(self.promptType)
+		if self.provider_product_id ~= nil then
+			NewModule.provider_product_id = PropTypesModule.StringProp.jsonDecode(self.provider_product_id)
 		end
-		if self.prompt_id ~= nil then
-			NewModule.prompt_id = PropTypesModule.StringProp.jsonDecode(self.prompt_id)
+		if self.providerProductId ~= nil then
+			NewModule.provider_product_id = PropTypesModule.StringProp.jsonDecode(self.providerProductId)
 		end
-		if self.promptId ~= nil then
-			NewModule.prompt_id = PropTypesModule.StringProp.jsonDecode(self.promptId)
+		if self.is_redirect ~= nil then
+			NewModule.is_redirect = PropTypesModule.BoolProp.jsonDecode(self.is_redirect)
+		end
+		if self.isRedirect ~= nil then
+			NewModule.is_redirect = PropTypesModule.BoolProp.jsonDecode(self.isRedirect)
 		end
 		return NewModule
 	end
 
 	Module96.descriptor = {
-		name = "OpenIncomingTransferUpsellAction_Params",
+		name = "PurchaseBuyRobuxProductAction_Params",
 		fullName = "roblox.apppageplatform.shared.v1beta1.Params"
 	}
-	t.OpenIncomingTransferUpsellAction_Params = Module96
-	TypeRegistryModule.default:register(t.OpenIncomingTransferUpsellAction_Params)
+	t.PurchaseBuyRobuxProductAction_Params = Module96
+	TypeRegistryModule.default:register(t.PurchaseBuyRobuxProductAction_Params)
 	local Module97 = {}
 	Module97.__index = Module97
 
@@ -11330,32 +11333,32 @@ do
 		local v66 = 0
 		while v66 < buffer.len(Buf) do
 			local Tag, Tag2
-			Tag, Tag2, v2416 = ProtoModule.readTag(Buf, v66)
+			Tag, Tag2, v2426 = ProtoModule.readTag(Buf, v66)
 			
 			if Tag2 == ProtoModule.wireTypes.varint then
 				if Tag == 1 then
 					local VarIntI32
-					VarIntI32, v2416 = ProtoModule.readVarIntI32(Buf, v66)
+					VarIntI32, v2426 = ProtoModule.readVarIntI32(Buf, v66)
 					NewModule.action_type = t.ActionType.fromNumber(VarIntI32) or VarIntI32
 				else
 					local _
-					_, v2416 = ProtoModule.readVarInt(Buf, v66)
+					_, v2426 = ProtoModule.readVarInt(Buf, v66)
 				end
 			elseif Tag2 == ProtoModule.wireTypes.lengthDelimited then
 				if Tag == 2 then
 					local Buffer1
-					Buffer1, v2416 = ProtoModule.readBuffer(Buf, v66)
-					NewModule.action_params = t.OpenSduiOverlayAction_Params.decode(Buffer1)
+					Buffer1, v2426 = ProtoModule.readBuffer(Buf, v66)
+					NewModule.action_params = t.PurchaseBuyRobuxSubscriptionAction_Params.decode(Buffer1)
 				else
 					local VarInt, VarInt2 = ProtoModule.readVarInt(Buf, v66)
 					v66 = VarInt2 + VarInt
 				end
 			elseif Tag2 == ProtoModule.wireTypes.i32 then
 				local _
-				_, v2416 = ProtoModule.readFixed32(Buf, v66)
+				_, v2426 = ProtoModule.readFixed32(Buf, v66)
 			elseif Tag2 == ProtoModule.wireTypes.i64 then
 				local _
-				_, v2416 = ProtoModule.readFixed64(Buf, v66)
+				_, v2426 = ProtoModule.readFixed64(Buf, v66)
 			else
 				error("Unsupported wire type: " .. Tag2)
 			end
@@ -11387,28 +11390,28 @@ do
 			NewModule.action_type = (if typeof(self.actionType) == "number" then t.ActionType.fromNumber(self.actionType) else t.ActionType.fromName(self.actionType)) or self.actionType
 		end
 		if self.action_params ~= nil then
-			NewModule.action_params = t.OpenSduiOverlayAction_Params.jsonDecode(self.action_params)
+			NewModule.action_params = t.PurchaseBuyRobuxSubscriptionAction_Params.jsonDecode(self.action_params)
 		end
 		if self.actionParams ~= nil then
-			NewModule.action_params = t.OpenSduiOverlayAction_Params.jsonDecode(self.actionParams)
+			NewModule.action_params = t.PurchaseBuyRobuxSubscriptionAction_Params.jsonDecode(self.actionParams)
 		end
 		return NewModule
 	end
 
 	Module97.descriptor = {
-		name = "OpenSduiOverlayAction",
-		fullName = "roblox.apppageplatform.shared.v1beta1.OpenSduiOverlayAction"
+		name = "PurchaseBuyRobuxSubscriptionAction",
+		fullName = "roblox.apppageplatform.shared.v1beta1.PurchaseBuyRobuxSubscriptionAction"
 	}
-	t.OpenSduiOverlayAction = Module97
-	TypeRegistryModule.default:register(t.OpenSduiOverlayAction)
+	t.PurchaseBuyRobuxSubscriptionAction = Module97
+	TypeRegistryModule.default:register(t.PurchaseBuyRobuxSubscriptionAction)
 	local Module98 = {}
 	Module98.__index = Module98
 
 	function Module98.new(p1)
 		-- upvalues: Module98 (copy)
 		return (setmetatable({
-			config_key = if p1 == nil or p1.config_key == nil then nil else p1.config_key,
-			identifier = if p1 == nil or p1.identifier == nil then nil else p1.identifier
+			product_id = if p1 == nil or p1.product_id == nil then nil else p1.product_id,
+			is_redirect = if p1 == nil or p1.is_redirect == nil then nil else p1.is_redirect
 		}, Module98))
 	end
 
@@ -11417,13 +11420,13 @@ do
 		local Buf = buffer.create(0)
 		local Count = 0
 		
-		if self.config_key ~= nil then
-			local EncodeResult = self.config_key:encode()
+		if self.product_id ~= nil then
+			local EncodeResult = self.product_id:encode()
 			local WriteTagResult, WriteTagResult2 = ProtoModule.writeTag(Buf, Count, 1, ProtoModule.wireTypes.lengthDelimited)
 			Buf, Count = ProtoModule.writeBuffer(WriteTagResult, WriteTagResult2, EncodeResult, buffer.len(EncodeResult))
 		end
-		if self.identifier ~= nil then
-			local EncodeResult = self.identifier:encode()
+		if self.is_redirect ~= nil then
+			local EncodeResult = self.is_redirect:encode()
 			local WriteTagResult1, WriteTagResult2_1 = ProtoModule.writeTag(Buf, Count, 2, ProtoModule.wireTypes.lengthDelimited)
 			Buf, Count = ProtoModule.writeBuffer(WriteTagResult1, WriteTagResult2_1, EncodeResult, buffer.len(EncodeResult))
 		end
@@ -11439,30 +11442,30 @@ do
 		local v67 = 0
 		while v67 < buffer.len(Buf) do
 			local Tag, Tag2
-			Tag, Tag2, v2437 = ProtoModule.readTag(Buf, v67)
+			Tag, Tag2, v2447 = ProtoModule.readTag(Buf, v67)
 			
 			if Tag2 == ProtoModule.wireTypes.varint then
 				local _
-				_, v2437 = ProtoModule.readVarInt(Buf, v67)
+				_, v2447 = ProtoModule.readVarInt(Buf, v67)
 			elseif Tag2 == ProtoModule.wireTypes.lengthDelimited then
 				if Tag == 1 then
 					local Buffer1
-					Buffer1, v2437 = ProtoModule.readBuffer(Buf, v67)
-					NewModule.config_key = PropTypesModule.StringProp.decode(Buffer1)
+					Buffer1, v2447 = ProtoModule.readBuffer(Buf, v67)
+					NewModule.product_id = PropTypesModule.StringProp.decode(Buffer1)
 				elseif Tag == 2 then
 					local Buffer2
-					Buffer2, v2437 = ProtoModule.readBuffer(Buf, v67)
-					NewModule.identifier = PropTypesModule.StringProp.decode(Buffer2)
+					Buffer2, v2447 = ProtoModule.readBuffer(Buf, v67)
+					NewModule.is_redirect = PropTypesModule.BoolProp.decode(Buffer2)
 				else
 					local VarInt, VarInt2 = ProtoModule.readVarInt(Buf, v67)
 					v67 = VarInt2 + VarInt
 				end
 			elseif Tag2 == ProtoModule.wireTypes.i32 then
 				local _
-				_, v2437 = ProtoModule.readFixed32(Buf, v67)
+				_, v2447 = ProtoModule.readFixed32(Buf, v67)
 			elseif Tag2 == ProtoModule.wireTypes.i64 then
 				local _
-				_, v2437 = ProtoModule.readFixed64(Buf, v67)
+				_, v2447 = ProtoModule.readFixed64(Buf, v67)
 			else
 				error("Unsupported wire type: " .. Tag2)
 			end
@@ -11473,11 +11476,11 @@ do
 	function Module98:jsonEncode()
 		local t = {}
 		
-		if self.config_key ~= nil then
-			t.configKey = self.config_key:jsonEncode()
+		if self.product_id ~= nil then
+			t.productId = self.product_id:jsonEncode()
 		end
-		if self.identifier ~= nil then
-			t.identifier = self.identifier:jsonEncode()
+		if self.is_redirect ~= nil then
+			t.isRedirect = self.is_redirect:jsonEncode()
 		end
 		return t
 	end
@@ -11486,26 +11489,29 @@ do
 		-- upvalues: Module98 (copy), PropTypesModule (copy)
 		local NewModule = Module98.new()
 		
-		if self.config_key ~= nil then
-			NewModule.config_key = PropTypesModule.StringProp.jsonDecode(self.config_key)
+		if self.product_id ~= nil then
+			NewModule.product_id = PropTypesModule.StringProp.jsonDecode(self.product_id)
 		end
-		if self.configKey ~= nil then
-			NewModule.config_key = PropTypesModule.StringProp.jsonDecode(self.configKey)
+		if self.productId ~= nil then
+			NewModule.product_id = PropTypesModule.StringProp.jsonDecode(self.productId)
 		end
-		if self.identifier ~= nil then
-			NewModule.identifier = PropTypesModule.StringProp.jsonDecode(self.identifier)
+		if self.is_redirect ~= nil then
+			NewModule.is_redirect = PropTypesModule.BoolProp.jsonDecode(self.is_redirect)
+		end
+		if self.isRedirect ~= nil then
+			NewModule.is_redirect = PropTypesModule.BoolProp.jsonDecode(self.isRedirect)
 		end
 		return NewModule
 	end
 
 	Module98.descriptor = {
-		name = "OpenSduiOverlayAction_Params",
+		name = "PurchaseBuyRobuxSubscriptionAction_Params",
 		fullName = "roblox.apppageplatform.shared.v1beta1.Params"
 	}
-	t.OpenSduiOverlayAction_Params = Module98
+	t.PurchaseBuyRobuxSubscriptionAction_Params = Module98
 end
 do
-	TypeRegistryModule.default:register(t.OpenSduiOverlayAction_Params)
+	TypeRegistryModule.default:register(t.PurchaseBuyRobuxSubscriptionAction_Params)
 	local Module99 = {}
 	Module99.__index = Module99
 
@@ -11543,32 +11549,32 @@ do
 		local v67 = 0
 		while v67 < buffer.len(Buf) do
 			local Tag, Tag2
-			Tag, Tag2, v2457 = ProtoModule.readTag(Buf, v67)
+			Tag, Tag2, v2467 = ProtoModule.readTag(Buf, v67)
 			
 			if Tag2 == ProtoModule.wireTypes.varint then
 				if Tag == 1 then
 					local VarIntI32
-					VarIntI32, v2457 = ProtoModule.readVarIntI32(Buf, v67)
+					VarIntI32, v2467 = ProtoModule.readVarIntI32(Buf, v67)
 					NewModule.action_type = t.ActionType.fromNumber(VarIntI32) or VarIntI32
 				else
 					local _
-					_, v2457 = ProtoModule.readVarInt(Buf, v67)
+					_, v2467 = ProtoModule.readVarInt(Buf, v67)
 				end
 			elseif Tag2 == ProtoModule.wireTypes.lengthDelimited then
 				if Tag == 2 then
 					local Buffer1
-					Buffer1, v2457 = ProtoModule.readBuffer(Buf, v67)
-					NewModule.action_params = t.ApplyChartsFilterAction_Params.decode(Buffer1)
+					Buffer1, v2467 = ProtoModule.readBuffer(Buf, v67)
+					NewModule.action_params = t.OpenRobloxPlusSheetAction_Params.decode(Buffer1)
 				else
 					local VarInt, VarInt2 = ProtoModule.readVarInt(Buf, v67)
 					v67 = VarInt2 + VarInt
 				end
 			elseif Tag2 == ProtoModule.wireTypes.i32 then
 				local _
-				_, v2457 = ProtoModule.readFixed32(Buf, v67)
+				_, v2467 = ProtoModule.readFixed32(Buf, v67)
 			elseif Tag2 == ProtoModule.wireTypes.i64 then
 				local _
-				_, v2457 = ProtoModule.readFixed64(Buf, v67)
+				_, v2467 = ProtoModule.readFixed64(Buf, v67)
 			else
 				error("Unsupported wire type: " .. Tag2)
 			end
@@ -11600,72 +11606,55 @@ do
 			NewModule.action_type = (if typeof(self.actionType) == "number" then t.ActionType.fromNumber(self.actionType) else t.ActionType.fromName(self.actionType)) or self.actionType
 		end
 		if self.action_params ~= nil then
-			NewModule.action_params = t.ApplyChartsFilterAction_Params.jsonDecode(self.action_params)
+			NewModule.action_params = t.OpenRobloxPlusSheetAction_Params.jsonDecode(self.action_params)
 		end
 		if self.actionParams ~= nil then
-			NewModule.action_params = t.ApplyChartsFilterAction_Params.jsonDecode(self.actionParams)
+			NewModule.action_params = t.OpenRobloxPlusSheetAction_Params.jsonDecode(self.actionParams)
 		end
 		return NewModule
 	end
 
 	Module99.descriptor = {
-		name = "ApplyChartsFilterAction",
-		fullName = "roblox.apppageplatform.shared.v1beta1.ApplyChartsFilterAction"
+		name = "OpenRobloxPlusSheetAction",
+		fullName = "roblox.apppageplatform.shared.v1beta1.OpenRobloxPlusSheetAction"
 	}
-	t.ApplyChartsFilterAction = Module99
-	TypeRegistryModule.default:register(t.ApplyChartsFilterAction)
+	t.OpenRobloxPlusSheetAction = Module99
+	TypeRegistryModule.default:register(t.OpenRobloxPlusSheetAction)
 	local Module100 = {}
 	Module100.__index = Module100
 
-	function Module100.new(p1)
+	function Module100:new()
 		-- upvalues: Module100 (copy)
-		return (setmetatable({
-			session_id = if p1 == nil or p1.session_id == nil then nil else p1.session_id
-		}, Module100))
+		return (setmetatable({}, Module100))
 	end
 
 	function Module100:encode()
-		-- upvalues: ProtoModule (copy)
 		local Buf = buffer.create(0)
-		local Count = 0
+		buffer.copy(Buf, 0, buffer.create(0), 0, 0)
 		
-		if self.session_id ~= nil then
-			local EncodeResult = self.session_id:encode()
-			local WriteTagResult, WriteTagResult2 = ProtoModule.writeTag(Buf, Count, 1, ProtoModule.wireTypes.lengthDelimited)
-			Buf, Count = ProtoModule.writeBuffer(WriteTagResult, WriteTagResult2, EncodeResult, buffer.len(EncodeResult))
-		end
-		local Buf1 = buffer.create(Count)
-		buffer.copy(Buf1, 0, Buf, 0, Count)
-		
-		return Buf1
+		return Buf
 	end
 
 	function Module100.decode(Buf)
-		-- upvalues: Module100 (copy), ProtoModule (copy), PropTypesModule (copy)
+		-- upvalues: Module100 (copy), ProtoModule (copy)
 		local NewModule = Module100.new()
 		local v68 = 0
 		while v68 < buffer.len(Buf) do
-			local Tag, Tag2
-			Tag, Tag2, v2475 = ProtoModule.readTag(Buf, v68)
+			local _, Tag2
+			_, Tag2, v2481 = ProtoModule.readTag(Buf, v68)
 			
 			if Tag2 == ProtoModule.wireTypes.varint then
 				local _
-				_, v2475 = ProtoModule.readVarInt(Buf, v68)
+				_, v2481 = ProtoModule.readVarInt(Buf, v68)
 			elseif Tag2 == ProtoModule.wireTypes.lengthDelimited then
-				if Tag == 1 then
-					local Buffer1
-					Buffer1, v2475 = ProtoModule.readBuffer(Buf, v68)
-					NewModule.session_id = PropTypesModule.StringProp.decode(Buffer1)
-				else
-					local VarInt, VarInt2 = ProtoModule.readVarInt(Buf, v68)
-					v68 = VarInt2 + VarInt
-				end
+				local VarInt, VarInt2 = ProtoModule.readVarInt(Buf, v68)
+				v68 = VarInt2 + VarInt
 			elseif Tag2 == ProtoModule.wireTypes.i32 then
 				local _
-				_, v2475 = ProtoModule.readFixed32(Buf, v68)
+				_, v2481 = ProtoModule.readFixed32(Buf, v68)
 			elseif Tag2 == ProtoModule.wireTypes.i64 then
 				local _
-				_, v2475 = ProtoModule.readFixed64(Buf, v68)
+				_, v2481 = ProtoModule.readFixed64(Buf, v68)
 			else
 				error("Unsupported wire type: " .. Tag2)
 			end
@@ -11674,33 +11663,20 @@ do
 	end
 
 	function Module100:jsonEncode()
-		local t = {}
-		
-		if self.session_id ~= nil then
-			t.sessionId = self.session_id:jsonEncode()
-		end
-		return t
+		return {}
 	end
 
 	function Module100:jsonDecode()
-		-- upvalues: Module100 (copy), PropTypesModule (copy)
-		local NewModule = Module100.new()
-		
-		if self.session_id ~= nil then
-			NewModule.session_id = PropTypesModule.StringProp.jsonDecode(self.session_id)
-		end
-		if self.sessionId ~= nil then
-			NewModule.session_id = PropTypesModule.StringProp.jsonDecode(self.sessionId)
-		end
-		return NewModule
+		-- upvalues: Module100 (copy)
+		return (Module100.new())
 	end
 
 	Module100.descriptor = {
-		name = "ApplyChartsFilterAction_Params",
+		name = "OpenRobloxPlusSheetAction_Params",
 		fullName = "roblox.apppageplatform.shared.v1beta1.Params"
 	}
-	t.ApplyChartsFilterAction_Params = Module100
-	TypeRegistryModule.default:register(t.ApplyChartsFilterAction_Params)
+	t.OpenRobloxPlusSheetAction_Params = Module100
+	TypeRegistryModule.default:register(t.OpenRobloxPlusSheetAction_Params)
 	local Module101 = {}
 	Module101.__index = Module101
 
@@ -11738,32 +11714,32 @@ do
 		local v69 = 0
 		while v69 < buffer.len(Buf) do
 			local Tag, Tag2
-			Tag, Tag2, v2494 = ProtoModule.readTag(Buf, v69)
+			Tag, Tag2, v2497 = ProtoModule.readTag(Buf, v69)
 			
 			if Tag2 == ProtoModule.wireTypes.varint then
 				if Tag == 1 then
 					local VarIntI32
-					VarIntI32, v2494 = ProtoModule.readVarIntI32(Buf, v69)
+					VarIntI32, v2497 = ProtoModule.readVarIntI32(Buf, v69)
 					NewModule.action_type = t.ActionType.fromNumber(VarIntI32) or VarIntI32
 				else
 					local _
-					_, v2494 = ProtoModule.readVarInt(Buf, v69)
+					_, v2497 = ProtoModule.readVarInt(Buf, v69)
 				end
 			elseif Tag2 == ProtoModule.wireTypes.lengthDelimited then
 				if Tag == 2 then
 					local Buffer1
-					Buffer1, v2494 = ProtoModule.readBuffer(Buf, v69)
-					NewModule.action_params = t.RefreshChartsSortDetailAction_Params.decode(Buffer1)
+					Buffer1, v2497 = ProtoModule.readBuffer(Buf, v69)
+					NewModule.action_params = t.OpenSendRobuxAction_Params.decode(Buffer1)
 				else
 					local VarInt, VarInt2 = ProtoModule.readVarInt(Buf, v69)
 					v69 = VarInt2 + VarInt
 				end
 			elseif Tag2 == ProtoModule.wireTypes.i32 then
 				local _
-				_, v2494 = ProtoModule.readFixed32(Buf, v69)
+				_, v2497 = ProtoModule.readFixed32(Buf, v69)
 			elseif Tag2 == ProtoModule.wireTypes.i64 then
 				local _
-				_, v2494 = ProtoModule.readFixed64(Buf, v69)
+				_, v2497 = ProtoModule.readFixed64(Buf, v69)
 			else
 				error("Unsupported wire type: " .. Tag2)
 			end
@@ -11795,104 +11771,57 @@ do
 			NewModule.action_type = (if typeof(self.actionType) == "number" then t.ActionType.fromNumber(self.actionType) else t.ActionType.fromName(self.actionType)) or self.actionType
 		end
 		if self.action_params ~= nil then
-			NewModule.action_params = t.RefreshChartsSortDetailAction_Params.jsonDecode(self.action_params)
+			NewModule.action_params = t.OpenSendRobuxAction_Params.jsonDecode(self.action_params)
 		end
 		if self.actionParams ~= nil then
-			NewModule.action_params = t.RefreshChartsSortDetailAction_Params.jsonDecode(self.actionParams)
+			NewModule.action_params = t.OpenSendRobuxAction_Params.jsonDecode(self.actionParams)
 		end
 		return NewModule
 	end
 
 	Module101.descriptor = {
-		name = "RefreshChartsSortDetailAction",
-		fullName = "roblox.apppageplatform.shared.v1beta1.RefreshChartsSortDetailAction"
+		name = "OpenSendRobuxAction",
+		fullName = "roblox.apppageplatform.shared.v1beta1.OpenSendRobuxAction"
 	}
-	t.RefreshChartsSortDetailAction = Module101
+	t.OpenSendRobuxAction = Module101
 end
 do
-	TypeRegistryModule.default:register(t.RefreshChartsSortDetailAction)
+	TypeRegistryModule.default:register(t.OpenSendRobuxAction)
 	local Module102 = {}
 	Module102.__index = Module102
 
-	function Module102.new(p1)
+	function Module102:new()
 		-- upvalues: Module102 (copy)
-		return (setmetatable({
-			config_key = if p1 == nil or p1.config_key == nil then nil else p1.config_key,
-			selected_option = if p1 == nil or p1.selected_option == nil then nil else p1.selected_option,
-			surface_key = if p1 == nil or p1.surface_key == nil then nil else p1.surface_key,
-			sort_id = if p1 == nil or p1.sort_id == nil then nil else p1.sort_id
-		}, Module102))
+		return (setmetatable({}, Module102))
 	end
 
 	function Module102:encode()
-		-- upvalues: ProtoModule (copy)
 		local Buf = buffer.create(0)
-		local Count = 0
+		buffer.copy(Buf, 0, buffer.create(0), 0, 0)
 		
-		if self.config_key ~= nil then
-			local EncodeResult = self.config_key:encode()
-			local WriteTagResult, WriteTagResult2 = ProtoModule.writeTag(Buf, Count, 1, ProtoModule.wireTypes.lengthDelimited)
-			Buf, Count = ProtoModule.writeBuffer(WriteTagResult, WriteTagResult2, EncodeResult, buffer.len(EncodeResult))
-		end
-		if self.selected_option ~= nil then
-			local EncodeResult = self.selected_option:encode()
-			local WriteTagResult1, WriteTagResult2_1 = ProtoModule.writeTag(Buf, Count, 2, ProtoModule.wireTypes.lengthDelimited)
-			Buf, Count = ProtoModule.writeBuffer(WriteTagResult1, WriteTagResult2_1, EncodeResult, buffer.len(EncodeResult))
-		end
-		if self.surface_key ~= nil then
-			local EncodeResult = self.surface_key:encode()
-			local WriteTagResult3, WriteTagResult2_2 = ProtoModule.writeTag(Buf, Count, 3, ProtoModule.wireTypes.lengthDelimited)
-			Buf, Count = ProtoModule.writeBuffer(WriteTagResult3, WriteTagResult2_2, EncodeResult, buffer.len(EncodeResult))
-		end
-		if self.sort_id ~= nil then
-			local EncodeResult = self.sort_id:encode()
-			local WriteTagResult4, WriteTagResult2_3 = ProtoModule.writeTag(Buf, Count, 4, ProtoModule.wireTypes.lengthDelimited)
-			Buf, Count = ProtoModule.writeBuffer(WriteTagResult4, WriteTagResult2_3, EncodeResult, buffer.len(EncodeResult))
-		end
-		local Buf1 = buffer.create(Count)
-		buffer.copy(Buf1, 0, Buf, 0, Count)
-		
-		return Buf1
+		return Buf
 	end
 
 	function Module102.decode(Buf)
-		-- upvalues: Module102 (copy), ProtoModule (copy), PropTypesModule (copy)
+		-- upvalues: Module102 (copy), ProtoModule (copy)
 		local NewModule = Module102.new()
 		local v69 = 0
 		while v69 < buffer.len(Buf) do
-			local Tag, Tag2
-			Tag, Tag2, v2521 = ProtoModule.readTag(Buf, v69)
+			local _, Tag2
+			_, Tag2, v2511 = ProtoModule.readTag(Buf, v69)
 			
 			if Tag2 == ProtoModule.wireTypes.varint then
 				local _
-				_, v2521 = ProtoModule.readVarInt(Buf, v69)
+				_, v2511 = ProtoModule.readVarInt(Buf, v69)
 			elseif Tag2 == ProtoModule.wireTypes.lengthDelimited then
-				if Tag == 1 then
-					local Buffer1
-					Buffer1, v2521 = ProtoModule.readBuffer(Buf, v69)
-					NewModule.config_key = PropTypesModule.StringProp.decode(Buffer1)
-				elseif Tag == 2 then
-					local Buffer2
-					Buffer2, v2521 = ProtoModule.readBuffer(Buf, v69)
-					NewModule.selected_option = PropTypesModule.StringProp.decode(Buffer2)
-				elseif Tag == 3 then
-					local Buffer3
-					Buffer3, v2521 = ProtoModule.readBuffer(Buf, v69)
-					NewModule.surface_key = PropTypesModule.StringProp.decode(Buffer3)
-				elseif Tag == 4 then
-					local Buffer4
-					Buffer4, v2521 = ProtoModule.readBuffer(Buf, v69)
-					NewModule.sort_id = PropTypesModule.StringProp.decode(Buffer4)
-				else
-					local VarInt, VarInt2 = ProtoModule.readVarInt(Buf, v69)
-					v69 = VarInt2 + VarInt
-				end
+				local VarInt, VarInt2 = ProtoModule.readVarInt(Buf, v69)
+				v69 = VarInt2 + VarInt
 			elseif Tag2 == ProtoModule.wireTypes.i32 then
 				local _
-				_, v2521 = ProtoModule.readFixed32(Buf, v69)
+				_, v2511 = ProtoModule.readFixed32(Buf, v69)
 			elseif Tag2 == ProtoModule.wireTypes.i64 then
 				local _
-				_, v2521 = ProtoModule.readFixed64(Buf, v69)
+				_, v2511 = ProtoModule.readFixed64(Buf, v69)
 			else
 				error("Unsupported wire type: " .. Tag2)
 			end
@@ -11901,60 +11830,20 @@ do
 	end
 
 	function Module102:jsonEncode()
-		local t = {}
-		
-		if self.config_key ~= nil then
-			t.configKey = self.config_key:jsonEncode()
-		end
-		if self.selected_option ~= nil then
-			t.selectedOption = self.selected_option:jsonEncode()
-		end
-		if self.surface_key ~= nil then
-			t.surfaceKey = self.surface_key:jsonEncode()
-		end
-		if self.sort_id ~= nil then
-			t.sortId = self.sort_id:jsonEncode()
-		end
-		return t
+		return {}
 	end
 
 	function Module102:jsonDecode()
-		-- upvalues: Module102 (copy), PropTypesModule (copy)
-		local NewModule = Module102.new()
-		
-		if self.config_key ~= nil then
-			NewModule.config_key = PropTypesModule.StringProp.jsonDecode(self.config_key)
-		end
-		if self.configKey ~= nil then
-			NewModule.config_key = PropTypesModule.StringProp.jsonDecode(self.configKey)
-		end
-		if self.selected_option ~= nil then
-			NewModule.selected_option = PropTypesModule.StringProp.jsonDecode(self.selected_option)
-		end
-		if self.selectedOption ~= nil then
-			NewModule.selected_option = PropTypesModule.StringProp.jsonDecode(self.selectedOption)
-		end
-		if self.surface_key ~= nil then
-			NewModule.surface_key = PropTypesModule.StringProp.jsonDecode(self.surface_key)
-		end
-		if self.surfaceKey ~= nil then
-			NewModule.surface_key = PropTypesModule.StringProp.jsonDecode(self.surfaceKey)
-		end
-		if self.sort_id ~= nil then
-			NewModule.sort_id = PropTypesModule.StringProp.jsonDecode(self.sort_id)
-		end
-		if self.sortId ~= nil then
-			NewModule.sort_id = PropTypesModule.StringProp.jsonDecode(self.sortId)
-		end
-		return NewModule
+		-- upvalues: Module102 (copy)
+		return (Module102.new())
 	end
 
 	Module102.descriptor = {
-		name = "RefreshChartsSortDetailAction_Params",
+		name = "OpenSendRobuxAction_Params",
 		fullName = "roblox.apppageplatform.shared.v1beta1.Params"
 	}
-	t.RefreshChartsSortDetailAction_Params = Module102
-	TypeRegistryModule.default:register(t.RefreshChartsSortDetailAction_Params)
+	t.OpenSendRobuxAction_Params = Module102
+	TypeRegistryModule.default:register(t.OpenSendRobuxAction_Params)
 	local Module103 = {}
 	Module103.__index = Module103
 
@@ -11992,32 +11881,32 @@ do
 		local v70 = 0
 		while v70 < buffer.len(Buf) do
 			local Tag, Tag2
-			Tag, Tag2, v2543 = ProtoModule.readTag(Buf, v70)
+			Tag, Tag2, v2527 = ProtoModule.readTag(Buf, v70)
 			
 			if Tag2 == ProtoModule.wireTypes.varint then
 				if Tag == 1 then
 					local VarIntI32
-					VarIntI32, v2543 = ProtoModule.readVarIntI32(Buf, v70)
+					VarIntI32, v2527 = ProtoModule.readVarIntI32(Buf, v70)
 					NewModule.action_type = t.ActionType.fromNumber(VarIntI32) or VarIntI32
 				else
 					local _
-					_, v2543 = ProtoModule.readVarInt(Buf, v70)
+					_, v2527 = ProtoModule.readVarInt(Buf, v70)
 				end
 			elseif Tag2 == ProtoModule.wireTypes.lengthDelimited then
 				if Tag == 2 then
 					local Buffer1
-					Buffer1, v2543 = ProtoModule.readBuffer(Buf, v70)
-					NewModule.action_params = t.JoinCommunityAction_Params.decode(Buffer1)
+					Buffer1, v2527 = ProtoModule.readBuffer(Buf, v70)
+					NewModule.action_params = t.ReviewTransferAction_Params.decode(Buffer1)
 				else
 					local VarInt, VarInt2 = ProtoModule.readVarInt(Buf, v70)
 					v70 = VarInt2 + VarInt
 				end
 			elseif Tag2 == ProtoModule.wireTypes.i32 then
 				local _
-				_, v2543 = ProtoModule.readFixed32(Buf, v70)
+				_, v2527 = ProtoModule.readFixed32(Buf, v70)
 			elseif Tag2 == ProtoModule.wireTypes.i64 then
 				local _
-				_, v2543 = ProtoModule.readFixed64(Buf, v70)
+				_, v2527 = ProtoModule.readFixed64(Buf, v70)
 			else
 				error("Unsupported wire type: " .. Tag2)
 			end
@@ -12049,72 +11938,55 @@ do
 			NewModule.action_type = (if typeof(self.actionType) == "number" then t.ActionType.fromNumber(self.actionType) else t.ActionType.fromName(self.actionType)) or self.actionType
 		end
 		if self.action_params ~= nil then
-			NewModule.action_params = t.JoinCommunityAction_Params.jsonDecode(self.action_params)
+			NewModule.action_params = t.ReviewTransferAction_Params.jsonDecode(self.action_params)
 		end
 		if self.actionParams ~= nil then
-			NewModule.action_params = t.JoinCommunityAction_Params.jsonDecode(self.actionParams)
+			NewModule.action_params = t.ReviewTransferAction_Params.jsonDecode(self.actionParams)
 		end
 		return NewModule
 	end
 
 	Module103.descriptor = {
-		name = "JoinCommunityAction",
-		fullName = "roblox.apppageplatform.shared.v1beta1.JoinCommunityAction"
+		name = "ReviewTransferAction",
+		fullName = "roblox.apppageplatform.shared.v1beta1.ReviewTransferAction"
 	}
-	t.JoinCommunityAction = Module103
-	TypeRegistryModule.default:register(t.JoinCommunityAction)
+	t.ReviewTransferAction = Module103
+	TypeRegistryModule.default:register(t.ReviewTransferAction)
 	local Module104 = {}
 	Module104.__index = Module104
 
-	function Module104.new(p1)
+	function Module104:new()
 		-- upvalues: Module104 (copy)
-		return (setmetatable({
-			community_id = if p1 == nil or p1.community_id == nil then nil else p1.community_id
-		}, Module104))
+		return (setmetatable({}, Module104))
 	end
 
 	function Module104:encode()
-		-- upvalues: ProtoModule (copy)
 		local Buf = buffer.create(0)
-		local Count = 0
+		buffer.copy(Buf, 0, buffer.create(0), 0, 0)
 		
-		if self.community_id ~= nil then
-			local EncodeResult = self.community_id:encode()
-			local WriteTagResult, WriteTagResult2 = ProtoModule.writeTag(Buf, Count, 1, ProtoModule.wireTypes.lengthDelimited)
-			Buf, Count = ProtoModule.writeBuffer(WriteTagResult, WriteTagResult2, EncodeResult, buffer.len(EncodeResult))
-		end
-		local Buf1 = buffer.create(Count)
-		buffer.copy(Buf1, 0, Buf, 0, Count)
-		
-		return Buf1
+		return Buf
 	end
 
 	function Module104.decode(Buf)
-		-- upvalues: Module104 (copy), ProtoModule (copy), PropTypesModule (copy)
+		-- upvalues: Module104 (copy), ProtoModule (copy)
 		local NewModule = Module104.new()
 		local v71 = 0
 		while v71 < buffer.len(Buf) do
-			local Tag, Tag2
-			Tag, Tag2, v2561 = ProtoModule.readTag(Buf, v71)
+			local _, Tag2
+			_, Tag2, v2541 = ProtoModule.readTag(Buf, v71)
 			
 			if Tag2 == ProtoModule.wireTypes.varint then
 				local _
-				_, v2561 = ProtoModule.readVarInt(Buf, v71)
+				_, v2541 = ProtoModule.readVarInt(Buf, v71)
 			elseif Tag2 == ProtoModule.wireTypes.lengthDelimited then
-				if Tag == 1 then
-					local Buffer1
-					Buffer1, v2561 = ProtoModule.readBuffer(Buf, v71)
-					NewModule.community_id = PropTypesModule.StringProp.decode(Buffer1)
-				else
-					local VarInt, VarInt2 = ProtoModule.readVarInt(Buf, v71)
-					v71 = VarInt2 + VarInt
-				end
+				local VarInt, VarInt2 = ProtoModule.readVarInt(Buf, v71)
+				v71 = VarInt2 + VarInt
 			elseif Tag2 == ProtoModule.wireTypes.i32 then
 				local _
-				_, v2561 = ProtoModule.readFixed32(Buf, v71)
+				_, v2541 = ProtoModule.readFixed32(Buf, v71)
 			elseif Tag2 == ProtoModule.wireTypes.i64 then
 				local _
-				_, v2561 = ProtoModule.readFixed64(Buf, v71)
+				_, v2541 = ProtoModule.readFixed64(Buf, v71)
 			else
 				error("Unsupported wire type: " .. Tag2)
 			end
@@ -12123,35 +11995,22 @@ do
 	end
 
 	function Module104:jsonEncode()
-		local t = {}
-		
-		if self.community_id ~= nil then
-			t.communityId = self.community_id:jsonEncode()
-		end
-		return t
+		return {}
 	end
 
 	function Module104:jsonDecode()
-		-- upvalues: Module104 (copy), PropTypesModule (copy)
-		local NewModule = Module104.new()
-		
-		if self.community_id ~= nil then
-			NewModule.community_id = PropTypesModule.StringProp.jsonDecode(self.community_id)
-		end
-		if self.communityId ~= nil then
-			NewModule.community_id = PropTypesModule.StringProp.jsonDecode(self.communityId)
-		end
-		return NewModule
+		-- upvalues: Module104 (copy)
+		return (Module104.new())
 	end
 
 	Module104.descriptor = {
-		name = "JoinCommunityAction_Params",
+		name = "ReviewTransferAction_Params",
 		fullName = "roblox.apppageplatform.shared.v1beta1.Params"
 	}
-	t.JoinCommunityAction_Params = Module104
+	t.ReviewTransferAction_Params = Module104
 end
 do
-	TypeRegistryModule.default:register(t.JoinCommunityAction_Params)
+	TypeRegistryModule.default:register(t.ReviewTransferAction_Params)
 	local Module105 = {}
 	Module105.__index = Module105
 
@@ -12189,32 +12048,32 @@ do
 		local v71 = 0
 		while v71 < buffer.len(Buf) do
 			local Tag, Tag2
-			Tag, Tag2, v2580 = ProtoModule.readTag(Buf, v71)
+			Tag, Tag2, v2557 = ProtoModule.readTag(Buf, v71)
 			
 			if Tag2 == ProtoModule.wireTypes.varint then
 				if Tag == 1 then
 					local VarIntI32
-					VarIntI32, v2580 = ProtoModule.readVarIntI32(Buf, v71)
+					VarIntI32, v2557 = ProtoModule.readVarIntI32(Buf, v71)
 					NewModule.action_type = t.ActionType.fromNumber(VarIntI32) or VarIntI32
 				else
 					local _
-					_, v2580 = ProtoModule.readVarInt(Buf, v71)
+					_, v2557 = ProtoModule.readVarInt(Buf, v71)
 				end
 			elseif Tag2 == ProtoModule.wireTypes.lengthDelimited then
 				if Tag == 2 then
 					local Buffer1
-					Buffer1, v2580 = ProtoModule.readBuffer(Buf, v71)
-					NewModule.action_params = t.ViewCommunityAction_Params.decode(Buffer1)
+					Buffer1, v2557 = ProtoModule.readBuffer(Buf, v71)
+					NewModule.action_params = t.OpenIncomingTransferUpsellAction_Params.decode(Buffer1)
 				else
 					local VarInt, VarInt2 = ProtoModule.readVarInt(Buf, v71)
 					v71 = VarInt2 + VarInt
 				end
 			elseif Tag2 == ProtoModule.wireTypes.i32 then
 				local _
-				_, v2580 = ProtoModule.readFixed32(Buf, v71)
+				_, v2557 = ProtoModule.readFixed32(Buf, v71)
 			elseif Tag2 == ProtoModule.wireTypes.i64 then
 				local _
-				_, v2580 = ProtoModule.readFixed64(Buf, v71)
+				_, v2557 = ProtoModule.readFixed64(Buf, v71)
 			else
 				error("Unsupported wire type: " .. Tag2)
 			end
@@ -12246,27 +12105,29 @@ do
 			NewModule.action_type = (if typeof(self.actionType) == "number" then t.ActionType.fromNumber(self.actionType) else t.ActionType.fromName(self.actionType)) or self.actionType
 		end
 		if self.action_params ~= nil then
-			NewModule.action_params = t.ViewCommunityAction_Params.jsonDecode(self.action_params)
+			NewModule.action_params = t.OpenIncomingTransferUpsellAction_Params.jsonDecode(self.action_params)
 		end
 		if self.actionParams ~= nil then
-			NewModule.action_params = t.ViewCommunityAction_Params.jsonDecode(self.actionParams)
+			NewModule.action_params = t.OpenIncomingTransferUpsellAction_Params.jsonDecode(self.actionParams)
 		end
 		return NewModule
 	end
 
 	Module105.descriptor = {
-		name = "ViewCommunityAction",
-		fullName = "roblox.apppageplatform.shared.v1beta1.ViewCommunityAction"
+		name = "OpenIncomingTransferUpsellAction",
+		fullName = "roblox.apppageplatform.shared.v1beta1.OpenIncomingTransferUpsellAction"
 	}
-	t.ViewCommunityAction = Module105
-	TypeRegistryModule.default:register(t.ViewCommunityAction)
+	t.OpenIncomingTransferUpsellAction = Module105
+	TypeRegistryModule.default:register(t.OpenIncomingTransferUpsellAction)
 	local Module106 = {}
 	Module106.__index = Module106
 
 	function Module106.new(p1)
 		-- upvalues: Module106 (copy)
 		return (setmetatable({
-			community_id = if p1 == nil or p1.community_id == nil then nil else p1.community_id
+			url = if p1 == nil or p1.url == nil then nil else p1.url,
+			prompt_type = if p1 == nil or p1.prompt_type == nil then nil else p1.prompt_type,
+			prompt_id = if p1 == nil or p1.prompt_id == nil then nil else p1.prompt_id
 		}, Module106))
 	end
 
@@ -12275,10 +12136,20 @@ do
 		local Buf = buffer.create(0)
 		local Count = 0
 		
-		if self.community_id ~= nil then
-			local EncodeResult = self.community_id:encode()
+		if self.url ~= nil then
+			local EncodeResult = self.url:encode()
 			local WriteTagResult, WriteTagResult2 = ProtoModule.writeTag(Buf, Count, 1, ProtoModule.wireTypes.lengthDelimited)
 			Buf, Count = ProtoModule.writeBuffer(WriteTagResult, WriteTagResult2, EncodeResult, buffer.len(EncodeResult))
+		end
+		if self.prompt_type ~= nil then
+			local EncodeResult = self.prompt_type:encode()
+			local WriteTagResult1, WriteTagResult2_1 = ProtoModule.writeTag(Buf, Count, 2, ProtoModule.wireTypes.lengthDelimited)
+			Buf, Count = ProtoModule.writeBuffer(WriteTagResult1, WriteTagResult2_1, EncodeResult, buffer.len(EncodeResult))
+		end
+		if self.prompt_id ~= nil then
+			local EncodeResult = self.prompt_id:encode()
+			local WriteTagResult3, WriteTagResult2_2 = ProtoModule.writeTag(Buf, Count, 3, ProtoModule.wireTypes.lengthDelimited)
+			Buf, Count = ProtoModule.writeBuffer(WriteTagResult3, WriteTagResult2_2, EncodeResult, buffer.len(EncodeResult))
 		end
 		local Buf1 = buffer.create(Count)
 		buffer.copy(Buf1, 0, Buf, 0, Count)
@@ -12292,26 +12163,34 @@ do
 		local v72 = 0
 		while v72 < buffer.len(Buf) do
 			local Tag, Tag2
-			Tag, Tag2, v2598 = ProtoModule.readTag(Buf, v72)
+			Tag, Tag2, v2581 = ProtoModule.readTag(Buf, v72)
 			
 			if Tag2 == ProtoModule.wireTypes.varint then
 				local _
-				_, v2598 = ProtoModule.readVarInt(Buf, v72)
+				_, v2581 = ProtoModule.readVarInt(Buf, v72)
 			elseif Tag2 == ProtoModule.wireTypes.lengthDelimited then
 				if Tag == 1 then
 					local Buffer1
-					Buffer1, v2598 = ProtoModule.readBuffer(Buf, v72)
-					NewModule.community_id = PropTypesModule.StringProp.decode(Buffer1)
+					Buffer1, v2581 = ProtoModule.readBuffer(Buf, v72)
+					NewModule.url = PropTypesModule.StringProp.decode(Buffer1)
+				elseif Tag == 2 then
+					local Buffer2
+					Buffer2, v2581 = ProtoModule.readBuffer(Buf, v72)
+					NewModule.prompt_type = PropTypesModule.StringProp.decode(Buffer2)
+				elseif Tag == 3 then
+					local Buffer3
+					Buffer3, v2581 = ProtoModule.readBuffer(Buf, v72)
+					NewModule.prompt_id = PropTypesModule.StringProp.decode(Buffer3)
 				else
 					local VarInt, VarInt2 = ProtoModule.readVarInt(Buf, v72)
 					v72 = VarInt2 + VarInt
 				end
 			elseif Tag2 == ProtoModule.wireTypes.i32 then
 				local _
-				_, v2598 = ProtoModule.readFixed32(Buf, v72)
+				_, v2581 = ProtoModule.readFixed32(Buf, v72)
 			elseif Tag2 == ProtoModule.wireTypes.i64 then
 				local _
-				_, v2598 = ProtoModule.readFixed64(Buf, v72)
+				_, v2581 = ProtoModule.readFixed64(Buf, v72)
 			else
 				error("Unsupported wire type: " .. Tag2)
 			end
@@ -12322,8 +12201,14 @@ do
 	function Module106:jsonEncode()
 		local t = {}
 		
-		if self.community_id ~= nil then
-			t.communityId = self.community_id:jsonEncode()
+		if self.url ~= nil then
+			t.url = self.url:jsonEncode()
+		end
+		if self.prompt_type ~= nil then
+			t.promptType = self.prompt_type:jsonEncode()
+		end
+		if self.prompt_id ~= nil then
+			t.promptId = self.prompt_id:jsonEncode()
 		end
 		return t
 	end
@@ -12332,21 +12217,30 @@ do
 		-- upvalues: Module106 (copy), PropTypesModule (copy)
 		local NewModule = Module106.new()
 		
-		if self.community_id ~= nil then
-			NewModule.community_id = PropTypesModule.StringProp.jsonDecode(self.community_id)
+		if self.url ~= nil then
+			NewModule.url = PropTypesModule.StringProp.jsonDecode(self.url)
 		end
-		if self.communityId ~= nil then
-			NewModule.community_id = PropTypesModule.StringProp.jsonDecode(self.communityId)
+		if self.prompt_type ~= nil then
+			NewModule.prompt_type = PropTypesModule.StringProp.jsonDecode(self.prompt_type)
+		end
+		if self.promptType ~= nil then
+			NewModule.prompt_type = PropTypesModule.StringProp.jsonDecode(self.promptType)
+		end
+		if self.prompt_id ~= nil then
+			NewModule.prompt_id = PropTypesModule.StringProp.jsonDecode(self.prompt_id)
+		end
+		if self.promptId ~= nil then
+			NewModule.prompt_id = PropTypesModule.StringProp.jsonDecode(self.promptId)
 		end
 		return NewModule
 	end
 
 	Module106.descriptor = {
-		name = "ViewCommunityAction_Params",
+		name = "OpenIncomingTransferUpsellAction_Params",
 		fullName = "roblox.apppageplatform.shared.v1beta1.Params"
 	}
-	t.ViewCommunityAction_Params = Module106
-	TypeRegistryModule.default:register(t.ViewCommunityAction_Params)
+	t.OpenIncomingTransferUpsellAction_Params = Module106
+	TypeRegistryModule.default:register(t.OpenIncomingTransferUpsellAction_Params)
 	local Module107 = {}
 	Module107.__index = Module107
 
@@ -12384,32 +12278,32 @@ do
 		local v73 = 0
 		while v73 < buffer.len(Buf) do
 			local Tag, Tag2
-			Tag, Tag2, v2617 = ProtoModule.readTag(Buf, v73)
+			Tag, Tag2, v2602 = ProtoModule.readTag(Buf, v73)
 			
 			if Tag2 == ProtoModule.wireTypes.varint then
 				if Tag == 1 then
 					local VarIntI32
-					VarIntI32, v2617 = ProtoModule.readVarIntI32(Buf, v73)
+					VarIntI32, v2602 = ProtoModule.readVarIntI32(Buf, v73)
 					NewModule.action_type = t.ActionType.fromNumber(VarIntI32) or VarIntI32
 				else
 					local _
-					_, v2617 = ProtoModule.readVarInt(Buf, v73)
+					_, v2602 = ProtoModule.readVarInt(Buf, v73)
 				end
 			elseif Tag2 == ProtoModule.wireTypes.lengthDelimited then
 				if Tag == 2 then
 					local Buffer1
-					Buffer1, v2617 = ProtoModule.readBuffer(Buf, v73)
-					NewModule.action_params = t.AnalyticsEventAction_Params.decode(Buffer1)
+					Buffer1, v2602 = ProtoModule.readBuffer(Buf, v73)
+					NewModule.action_params = t.OpenSduiOverlayAction_Params.decode(Buffer1)
 				else
 					local VarInt, VarInt2 = ProtoModule.readVarInt(Buf, v73)
 					v73 = VarInt2 + VarInt
 				end
 			elseif Tag2 == ProtoModule.wireTypes.i32 then
 				local _
-				_, v2617 = ProtoModule.readFixed32(Buf, v73)
+				_, v2602 = ProtoModule.readFixed32(Buf, v73)
 			elseif Tag2 == ProtoModule.wireTypes.i64 then
 				local _
-				_, v2617 = ProtoModule.readFixed64(Buf, v73)
+				_, v2602 = ProtoModule.readFixed64(Buf, v73)
 			else
 				error("Unsupported wire type: " .. Tag2)
 			end
@@ -12441,30 +12335,30 @@ do
 			NewModule.action_type = (if typeof(self.actionType) == "number" then t.ActionType.fromNumber(self.actionType) else t.ActionType.fromName(self.actionType)) or self.actionType
 		end
 		if self.action_params ~= nil then
-			NewModule.action_params = t.AnalyticsEventAction_Params.jsonDecode(self.action_params)
+			NewModule.action_params = t.OpenSduiOverlayAction_Params.jsonDecode(self.action_params)
 		end
 		if self.actionParams ~= nil then
-			NewModule.action_params = t.AnalyticsEventAction_Params.jsonDecode(self.actionParams)
+			NewModule.action_params = t.OpenSduiOverlayAction_Params.jsonDecode(self.actionParams)
 		end
 		return NewModule
 	end
 
 	Module107.descriptor = {
-		name = "AnalyticsEventAction",
-		fullName = "roblox.apppageplatform.shared.v1beta1.AnalyticsEventAction"
+		name = "OpenSduiOverlayAction",
+		fullName = "roblox.apppageplatform.shared.v1beta1.OpenSduiOverlayAction"
 	}
-	t.AnalyticsEventAction = Module107
+	t.OpenSduiOverlayAction = Module107
 end
 do
-	TypeRegistryModule.default:register(t.AnalyticsEventAction)
+	TypeRegistryModule.default:register(t.OpenSduiOverlayAction)
 	local Module108 = {}
 	Module108.__index = Module108
 
 	function Module108.new(p1)
 		-- upvalues: Module108 (copy)
 		return (setmetatable({
-			event_name = if p1 == nil or p1.event_name == nil then nil else p1.event_name,
-			event_fields = if p1 == nil or p1.event_fields == nil then nil else p1.event_fields
+			config_key = if p1 == nil or p1.config_key == nil then nil else p1.config_key,
+			identifier = if p1 == nil or p1.identifier == nil then nil else p1.identifier
 		}, Module108))
 	end
 
@@ -12473,13 +12367,13 @@ do
 		local Buf = buffer.create(0)
 		local Count = 0
 		
-		if self.event_name ~= nil then
-			local EncodeResult = self.event_name:encode()
+		if self.config_key ~= nil then
+			local EncodeResult = self.config_key:encode()
 			local WriteTagResult, WriteTagResult2 = ProtoModule.writeTag(Buf, Count, 1, ProtoModule.wireTypes.lengthDelimited)
 			Buf, Count = ProtoModule.writeBuffer(WriteTagResult, WriteTagResult2, EncodeResult, buffer.len(EncodeResult))
 		end
-		if self.event_fields ~= nil then
-			local EncodeResult = self.event_fields:encode()
+		if self.identifier ~= nil then
+			local EncodeResult = self.identifier:encode()
 			local WriteTagResult1, WriteTagResult2_1 = ProtoModule.writeTag(Buf, Count, 2, ProtoModule.wireTypes.lengthDelimited)
 			Buf, Count = ProtoModule.writeBuffer(WriteTagResult1, WriteTagResult2_1, EncodeResult, buffer.len(EncodeResult))
 		end
@@ -12495,30 +12389,30 @@ do
 		local v73 = 0
 		while v73 < buffer.len(Buf) do
 			local Tag, Tag2
-			Tag, Tag2, v2638 = ProtoModule.readTag(Buf, v73)
+			Tag, Tag2, v2623 = ProtoModule.readTag(Buf, v73)
 			
 			if Tag2 == ProtoModule.wireTypes.varint then
 				local _
-				_, v2638 = ProtoModule.readVarInt(Buf, v73)
+				_, v2623 = ProtoModule.readVarInt(Buf, v73)
 			elseif Tag2 == ProtoModule.wireTypes.lengthDelimited then
 				if Tag == 1 then
 					local Buffer1
-					Buffer1, v2638 = ProtoModule.readBuffer(Buf, v73)
-					NewModule.event_name = PropTypesModule.StringProp.decode(Buffer1)
+					Buffer1, v2623 = ProtoModule.readBuffer(Buf, v73)
+					NewModule.config_key = PropTypesModule.StringProp.decode(Buffer1)
 				elseif Tag == 2 then
 					local Buffer2
-					Buffer2, v2638 = ProtoModule.readBuffer(Buf, v73)
-					NewModule.event_fields = PropTypesModule.StructProp.decode(Buffer2)
+					Buffer2, v2623 = ProtoModule.readBuffer(Buf, v73)
+					NewModule.identifier = PropTypesModule.StringProp.decode(Buffer2)
 				else
 					local VarInt, VarInt2 = ProtoModule.readVarInt(Buf, v73)
 					v73 = VarInt2 + VarInt
 				end
 			elseif Tag2 == ProtoModule.wireTypes.i32 then
 				local _
-				_, v2638 = ProtoModule.readFixed32(Buf, v73)
+				_, v2623 = ProtoModule.readFixed32(Buf, v73)
 			elseif Tag2 == ProtoModule.wireTypes.i64 then
 				local _
-				_, v2638 = ProtoModule.readFixed64(Buf, v73)
+				_, v2623 = ProtoModule.readFixed64(Buf, v73)
 			else
 				error("Unsupported wire type: " .. Tag2)
 			end
@@ -12529,11 +12423,11 @@ do
 	function Module108:jsonEncode()
 		local t = {}
 		
-		if self.event_name ~= nil then
-			t.eventName = self.event_name:jsonEncode()
+		if self.config_key ~= nil then
+			t.configKey = self.config_key:jsonEncode()
 		end
-		if self.event_fields ~= nil then
-			t.eventFields = self.event_fields:jsonEncode()
+		if self.identifier ~= nil then
+			t.identifier = self.identifier:jsonEncode()
 		end
 		return t
 	end
@@ -12542,27 +12436,24 @@ do
 		-- upvalues: Module108 (copy), PropTypesModule (copy)
 		local NewModule = Module108.new()
 		
-		if self.event_name ~= nil then
-			NewModule.event_name = PropTypesModule.StringProp.jsonDecode(self.event_name)
+		if self.config_key ~= nil then
+			NewModule.config_key = PropTypesModule.StringProp.jsonDecode(self.config_key)
 		end
-		if self.eventName ~= nil then
-			NewModule.event_name = PropTypesModule.StringProp.jsonDecode(self.eventName)
+		if self.configKey ~= nil then
+			NewModule.config_key = PropTypesModule.StringProp.jsonDecode(self.configKey)
 		end
-		if self.event_fields ~= nil then
-			NewModule.event_fields = PropTypesModule.StructProp.jsonDecode(self.event_fields)
-		end
-		if self.eventFields ~= nil then
-			NewModule.event_fields = PropTypesModule.StructProp.jsonDecode(self.eventFields)
+		if self.identifier ~= nil then
+			NewModule.identifier = PropTypesModule.StringProp.jsonDecode(self.identifier)
 		end
 		return NewModule
 	end
 
 	Module108.descriptor = {
-		name = "AnalyticsEventAction_Params",
+		name = "OpenSduiOverlayAction_Params",
 		fullName = "roblox.apppageplatform.shared.v1beta1.Params"
 	}
-	t.AnalyticsEventAction_Params = Module108
-	TypeRegistryModule.default:register(t.AnalyticsEventAction_Params)
+	t.OpenSduiOverlayAction_Params = Module108
+	TypeRegistryModule.default:register(t.OpenSduiOverlayAction_Params)
 	local Module109 = {}
 	Module109.__index = Module109
 
@@ -12600,32 +12491,32 @@ do
 		local v74 = 0
 		while v74 < buffer.len(Buf) do
 			local Tag, Tag2
-			Tag, Tag2, v2658 = ProtoModule.readTag(Buf, v74)
+			Tag, Tag2, v2643 = ProtoModule.readTag(Buf, v74)
 			
 			if Tag2 == ProtoModule.wireTypes.varint then
 				if Tag == 1 then
 					local VarIntI32
-					VarIntI32, v2658 = ProtoModule.readVarIntI32(Buf, v74)
+					VarIntI32, v2643 = ProtoModule.readVarIntI32(Buf, v74)
 					NewModule.action_type = t.ActionType.fromNumber(VarIntI32) or VarIntI32
 				else
 					local _
-					_, v2658 = ProtoModule.readVarInt(Buf, v74)
+					_, v2643 = ProtoModule.readVarInt(Buf, v74)
 				end
 			elseif Tag2 == ProtoModule.wireTypes.lengthDelimited then
 				if Tag == 2 then
 					local Buffer1
-					Buffer1, v2658 = ProtoModule.readBuffer(Buf, v74)
-					NewModule.action_params = t.CustomAnalyticsEventAction_Params.decode(Buffer1)
+					Buffer1, v2643 = ProtoModule.readBuffer(Buf, v74)
+					NewModule.action_params = t.ApplyChartsFilterAction_Params.decode(Buffer1)
 				else
 					local VarInt, VarInt2 = ProtoModule.readVarInt(Buf, v74)
 					v74 = VarInt2 + VarInt
 				end
 			elseif Tag2 == ProtoModule.wireTypes.i32 then
 				local _
-				_, v2658 = ProtoModule.readFixed32(Buf, v74)
+				_, v2643 = ProtoModule.readFixed32(Buf, v74)
 			elseif Tag2 == ProtoModule.wireTypes.i64 then
 				local _
-				_, v2658 = ProtoModule.readFixed64(Buf, v74)
+				_, v2643 = ProtoModule.readFixed64(Buf, v74)
 			else
 				error("Unsupported wire type: " .. Tag2)
 			end
@@ -12657,28 +12548,27 @@ do
 			NewModule.action_type = (if typeof(self.actionType) == "number" then t.ActionType.fromNumber(self.actionType) else t.ActionType.fromName(self.actionType)) or self.actionType
 		end
 		if self.action_params ~= nil then
-			NewModule.action_params = t.CustomAnalyticsEventAction_Params.jsonDecode(self.action_params)
+			NewModule.action_params = t.ApplyChartsFilterAction_Params.jsonDecode(self.action_params)
 		end
 		if self.actionParams ~= nil then
-			NewModule.action_params = t.CustomAnalyticsEventAction_Params.jsonDecode(self.actionParams)
+			NewModule.action_params = t.ApplyChartsFilterAction_Params.jsonDecode(self.actionParams)
 		end
 		return NewModule
 	end
 
 	Module109.descriptor = {
-		name = "CustomAnalyticsEventAction",
-		fullName = "roblox.apppageplatform.shared.v1beta1.CustomAnalyticsEventAction"
+		name = "ApplyChartsFilterAction",
+		fullName = "roblox.apppageplatform.shared.v1beta1.ApplyChartsFilterAction"
 	}
-	t.CustomAnalyticsEventAction = Module109
-	TypeRegistryModule.default:register(t.CustomAnalyticsEventAction)
+	t.ApplyChartsFilterAction = Module109
+	TypeRegistryModule.default:register(t.ApplyChartsFilterAction)
 	local Module110 = {}
 	Module110.__index = Module110
 
 	function Module110.new(p1)
 		-- upvalues: Module110 (copy)
 		return (setmetatable({
-			event_name = if p1 == nil or p1.event_name == nil then nil else p1.event_name,
-			event_fields = if p1 == nil or p1.event_fields == nil then nil else p1.event_fields
+			session_id = if p1 == nil or p1.session_id == nil then nil else p1.session_id
 		}, Module110))
 	end
 
@@ -12687,15 +12577,10 @@ do
 		local Buf = buffer.create(0)
 		local Count = 0
 		
-		if self.event_name ~= nil then
-			local EncodeResult = self.event_name:encode()
+		if self.session_id ~= nil then
+			local EncodeResult = self.session_id:encode()
 			local WriteTagResult, WriteTagResult2 = ProtoModule.writeTag(Buf, Count, 1, ProtoModule.wireTypes.lengthDelimited)
 			Buf, Count = ProtoModule.writeBuffer(WriteTagResult, WriteTagResult2, EncodeResult, buffer.len(EncodeResult))
-		end
-		if self.event_fields ~= nil then
-			local EncodeResult = self.event_fields:encode()
-			local WriteTagResult1, WriteTagResult2_1 = ProtoModule.writeTag(Buf, Count, 2, ProtoModule.wireTypes.lengthDelimited)
-			Buf, Count = ProtoModule.writeBuffer(WriteTagResult1, WriteTagResult2_1, EncodeResult, buffer.len(EncodeResult))
 		end
 		local Buf1 = buffer.create(Count)
 		buffer.copy(Buf1, 0, Buf, 0, Count)
@@ -12709,30 +12594,26 @@ do
 		local v75 = 0
 		while v75 < buffer.len(Buf) do
 			local Tag, Tag2
-			Tag, Tag2, v2679 = ProtoModule.readTag(Buf, v75)
+			Tag, Tag2, v2661 = ProtoModule.readTag(Buf, v75)
 			
 			if Tag2 == ProtoModule.wireTypes.varint then
 				local _
-				_, v2679 = ProtoModule.readVarInt(Buf, v75)
+				_, v2661 = ProtoModule.readVarInt(Buf, v75)
 			elseif Tag2 == ProtoModule.wireTypes.lengthDelimited then
 				if Tag == 1 then
 					local Buffer1
-					Buffer1, v2679 = ProtoModule.readBuffer(Buf, v75)
-					NewModule.event_name = PropTypesModule.StringProp.decode(Buffer1)
-				elseif Tag == 2 then
-					local Buffer2
-					Buffer2, v2679 = ProtoModule.readBuffer(Buf, v75)
-					NewModule.event_fields = PropTypesModule.StructProp.decode(Buffer2)
+					Buffer1, v2661 = ProtoModule.readBuffer(Buf, v75)
+					NewModule.session_id = PropTypesModule.StringProp.decode(Buffer1)
 				else
 					local VarInt, VarInt2 = ProtoModule.readVarInt(Buf, v75)
 					v75 = VarInt2 + VarInt
 				end
 			elseif Tag2 == ProtoModule.wireTypes.i32 then
 				local _
-				_, v2679 = ProtoModule.readFixed32(Buf, v75)
+				_, v2661 = ProtoModule.readFixed32(Buf, v75)
 			elseif Tag2 == ProtoModule.wireTypes.i64 then
 				local _
-				_, v2679 = ProtoModule.readFixed64(Buf, v75)
+				_, v2661 = ProtoModule.readFixed64(Buf, v75)
 			else
 				error("Unsupported wire type: " .. Tag2)
 			end
@@ -12743,11 +12624,8 @@ do
 	function Module110:jsonEncode()
 		local t = {}
 		
-		if self.event_name ~= nil then
-			t.eventName = self.event_name:jsonEncode()
-		end
-		if self.event_fields ~= nil then
-			t.eventFields = self.event_fields:jsonEncode()
+		if self.session_id ~= nil then
+			t.sessionId = self.session_id:jsonEncode()
 		end
 		return t
 	end
@@ -12756,29 +12634,23 @@ do
 		-- upvalues: Module110 (copy), PropTypesModule (copy)
 		local NewModule = Module110.new()
 		
-		if self.event_name ~= nil then
-			NewModule.event_name = PropTypesModule.StringProp.jsonDecode(self.event_name)
+		if self.session_id ~= nil then
+			NewModule.session_id = PropTypesModule.StringProp.jsonDecode(self.session_id)
 		end
-		if self.eventName ~= nil then
-			NewModule.event_name = PropTypesModule.StringProp.jsonDecode(self.eventName)
-		end
-		if self.event_fields ~= nil then
-			NewModule.event_fields = PropTypesModule.StructProp.jsonDecode(self.event_fields)
-		end
-		if self.eventFields ~= nil then
-			NewModule.event_fields = PropTypesModule.StructProp.jsonDecode(self.eventFields)
+		if self.sessionId ~= nil then
+			NewModule.session_id = PropTypesModule.StringProp.jsonDecode(self.sessionId)
 		end
 		return NewModule
 	end
 
 	Module110.descriptor = {
-		name = "CustomAnalyticsEventAction_Params",
+		name = "ApplyChartsFilterAction_Params",
 		fullName = "roblox.apppageplatform.shared.v1beta1.Params"
 	}
-	t.CustomAnalyticsEventAction_Params = Module110
+	t.ApplyChartsFilterAction_Params = Module110
 end
 do
-	TypeRegistryModule.default:register(t.CustomAnalyticsEventAction_Params)
+	TypeRegistryModule.default:register(t.ApplyChartsFilterAction_Params)
 	local Module111 = {}
 	Module111.__index = Module111
 
@@ -12816,32 +12688,32 @@ do
 		local v75 = 0
 		while v75 < buffer.len(Buf) do
 			local Tag, Tag2
-			Tag, Tag2, v2699 = ProtoModule.readTag(Buf, v75)
+			Tag, Tag2, v2680 = ProtoModule.readTag(Buf, v75)
 			
 			if Tag2 == ProtoModule.wireTypes.varint then
 				if Tag == 1 then
 					local VarIntI32
-					VarIntI32, v2699 = ProtoModule.readVarIntI32(Buf, v75)
+					VarIntI32, v2680 = ProtoModule.readVarIntI32(Buf, v75)
 					NewModule.action_type = t.ActionType.fromNumber(VarIntI32) or VarIntI32
 				else
 					local _
-					_, v2699 = ProtoModule.readVarInt(Buf, v75)
+					_, v2680 = ProtoModule.readVarInt(Buf, v75)
 				end
 			elseif Tag2 == ProtoModule.wireTypes.lengthDelimited then
 				if Tag == 2 then
 					local Buffer1
-					Buffer1, v2699 = ProtoModule.readBuffer(Buf, v75)
-					NewModule.action_params = t.OpenGameInviteAction_Params.decode(Buffer1)
+					Buffer1, v2680 = ProtoModule.readBuffer(Buf, v75)
+					NewModule.action_params = t.RefreshChartsSortDetailAction_Params.decode(Buffer1)
 				else
 					local VarInt, VarInt2 = ProtoModule.readVarInt(Buf, v75)
 					v75 = VarInt2 + VarInt
 				end
 			elseif Tag2 == ProtoModule.wireTypes.i32 then
 				local _
-				_, v2699 = ProtoModule.readFixed32(Buf, v75)
+				_, v2680 = ProtoModule.readFixed32(Buf, v75)
 			elseif Tag2 == ProtoModule.wireTypes.i64 then
 				local _
-				_, v2699 = ProtoModule.readFixed64(Buf, v75)
+				_, v2680 = ProtoModule.readFixed64(Buf, v75)
 			else
 				error("Unsupported wire type: " .. Tag2)
 			end
@@ -12873,30 +12745,30 @@ do
 			NewModule.action_type = (if typeof(self.actionType) == "number" then t.ActionType.fromNumber(self.actionType) else t.ActionType.fromName(self.actionType)) or self.actionType
 		end
 		if self.action_params ~= nil then
-			NewModule.action_params = t.OpenGameInviteAction_Params.jsonDecode(self.action_params)
+			NewModule.action_params = t.RefreshChartsSortDetailAction_Params.jsonDecode(self.action_params)
 		end
 		if self.actionParams ~= nil then
-			NewModule.action_params = t.OpenGameInviteAction_Params.jsonDecode(self.actionParams)
+			NewModule.action_params = t.RefreshChartsSortDetailAction_Params.jsonDecode(self.actionParams)
 		end
 		return NewModule
 	end
 
 	Module111.descriptor = {
-		name = "OpenGameInviteAction",
-		fullName = "roblox.apppageplatform.shared.v1beta1.OpenGameInviteAction"
+		name = "RefreshChartsSortDetailAction",
+		fullName = "roblox.apppageplatform.shared.v1beta1.RefreshChartsSortDetailAction"
 	}
-	t.OpenGameInviteAction = Module111
-	TypeRegistryModule.default:register(t.OpenGameInviteAction)
+	t.RefreshChartsSortDetailAction = Module111
+	TypeRegistryModule.default:register(t.RefreshChartsSortDetailAction)
 	local Module112 = {}
 	Module112.__index = Module112
 
 	function Module112.new(p1)
 		-- upvalues: Module112 (copy)
 		return (setmetatable({
-			universe_id = if p1 == nil or p1.universe_id == nil then nil else p1.universe_id,
-			root_place_id = if p1 == nil or p1.root_place_id == nil then nil else p1.root_place_id,
-			trigger = if p1 == nil or p1.trigger == nil then nil else p1.trigger,
-			button_name = if p1 == nil or p1.button_name == nil then nil else p1.button_name
+			config_key = if p1 == nil or p1.config_key == nil then nil else p1.config_key,
+			selected_option = if p1 == nil or p1.selected_option == nil then nil else p1.selected_option,
+			surface_key = if p1 == nil or p1.surface_key == nil then nil else p1.surface_key,
+			sort_id = if p1 == nil or p1.sort_id == nil then nil else p1.sort_id
 		}, Module112))
 	end
 
@@ -12905,23 +12777,23 @@ do
 		local Buf = buffer.create(0)
 		local Count = 0
 		
-		if self.universe_id ~= nil then
-			local EncodeResult = self.universe_id:encode()
+		if self.config_key ~= nil then
+			local EncodeResult = self.config_key:encode()
 			local WriteTagResult, WriteTagResult2 = ProtoModule.writeTag(Buf, Count, 1, ProtoModule.wireTypes.lengthDelimited)
 			Buf, Count = ProtoModule.writeBuffer(WriteTagResult, WriteTagResult2, EncodeResult, buffer.len(EncodeResult))
 		end
-		if self.root_place_id ~= nil then
-			local EncodeResult = self.root_place_id:encode()
+		if self.selected_option ~= nil then
+			local EncodeResult = self.selected_option:encode()
 			local WriteTagResult1, WriteTagResult2_1 = ProtoModule.writeTag(Buf, Count, 2, ProtoModule.wireTypes.lengthDelimited)
 			Buf, Count = ProtoModule.writeBuffer(WriteTagResult1, WriteTagResult2_1, EncodeResult, buffer.len(EncodeResult))
 		end
-		if self.trigger ~= nil then
-			local EncodeResult = self.trigger:encode()
+		if self.surface_key ~= nil then
+			local EncodeResult = self.surface_key:encode()
 			local WriteTagResult3, WriteTagResult2_2 = ProtoModule.writeTag(Buf, Count, 3, ProtoModule.wireTypes.lengthDelimited)
 			Buf, Count = ProtoModule.writeBuffer(WriteTagResult3, WriteTagResult2_2, EncodeResult, buffer.len(EncodeResult))
 		end
-		if self.button_name ~= nil then
-			local EncodeResult = self.button_name:encode()
+		if self.sort_id ~= nil then
+			local EncodeResult = self.sort_id:encode()
 			local WriteTagResult4, WriteTagResult2_3 = ProtoModule.writeTag(Buf, Count, 4, ProtoModule.wireTypes.lengthDelimited)
 			Buf, Count = ProtoModule.writeBuffer(WriteTagResult4, WriteTagResult2_3, EncodeResult, buffer.len(EncodeResult))
 		end
@@ -12937,38 +12809,38 @@ do
 		local v76 = 0
 		while v76 < buffer.len(Buf) do
 			local Tag, Tag2
-			Tag, Tag2, v2726 = ProtoModule.readTag(Buf, v76)
+			Tag, Tag2, v2707 = ProtoModule.readTag(Buf, v76)
 			
 			if Tag2 == ProtoModule.wireTypes.varint then
 				local _
-				_, v2726 = ProtoModule.readVarInt(Buf, v76)
+				_, v2707 = ProtoModule.readVarInt(Buf, v76)
 			elseif Tag2 == ProtoModule.wireTypes.lengthDelimited then
 				if Tag == 1 then
 					local Buffer1
-					Buffer1, v2726 = ProtoModule.readBuffer(Buf, v76)
-					NewModule.universe_id = PropTypesModule.StringProp.decode(Buffer1)
+					Buffer1, v2707 = ProtoModule.readBuffer(Buf, v76)
+					NewModule.config_key = PropTypesModule.StringProp.decode(Buffer1)
 				elseif Tag == 2 then
 					local Buffer2
-					Buffer2, v2726 = ProtoModule.readBuffer(Buf, v76)
-					NewModule.root_place_id = PropTypesModule.StringProp.decode(Buffer2)
+					Buffer2, v2707 = ProtoModule.readBuffer(Buf, v76)
+					NewModule.selected_option = PropTypesModule.StringProp.decode(Buffer2)
 				elseif Tag == 3 then
 					local Buffer3
-					Buffer3, v2726 = ProtoModule.readBuffer(Buf, v76)
-					NewModule.trigger = PropTypesModule.StringProp.decode(Buffer3)
+					Buffer3, v2707 = ProtoModule.readBuffer(Buf, v76)
+					NewModule.surface_key = PropTypesModule.StringProp.decode(Buffer3)
 				elseif Tag == 4 then
 					local Buffer4
-					Buffer4, v2726 = ProtoModule.readBuffer(Buf, v76)
-					NewModule.button_name = PropTypesModule.StringProp.decode(Buffer4)
+					Buffer4, v2707 = ProtoModule.readBuffer(Buf, v76)
+					NewModule.sort_id = PropTypesModule.StringProp.decode(Buffer4)
 				else
 					local VarInt, VarInt2 = ProtoModule.readVarInt(Buf, v76)
 					v76 = VarInt2 + VarInt
 				end
 			elseif Tag2 == ProtoModule.wireTypes.i32 then
 				local _
-				_, v2726 = ProtoModule.readFixed32(Buf, v76)
+				_, v2707 = ProtoModule.readFixed32(Buf, v76)
 			elseif Tag2 == ProtoModule.wireTypes.i64 then
 				local _
-				_, v2726 = ProtoModule.readFixed64(Buf, v76)
+				_, v2707 = ProtoModule.readFixed64(Buf, v76)
 			else
 				error("Unsupported wire type: " .. Tag2)
 			end
@@ -12979,17 +12851,17 @@ do
 	function Module112:jsonEncode()
 		local t = {}
 		
-		if self.universe_id ~= nil then
-			t.universeId = self.universe_id:jsonEncode()
+		if self.config_key ~= nil then
+			t.configKey = self.config_key:jsonEncode()
 		end
-		if self.root_place_id ~= nil then
-			t.rootPlaceId = self.root_place_id:jsonEncode()
+		if self.selected_option ~= nil then
+			t.selectedOption = self.selected_option:jsonEncode()
 		end
-		if self.trigger ~= nil then
-			t.trigger = self.trigger:jsonEncode()
+		if self.surface_key ~= nil then
+			t.surfaceKey = self.surface_key:jsonEncode()
 		end
-		if self.button_name ~= nil then
-			t.buttonName = self.button_name:jsonEncode()
+		if self.sort_id ~= nil then
+			t.sortId = self.sort_id:jsonEncode()
 		end
 		return t
 	end
@@ -12998,36 +12870,39 @@ do
 		-- upvalues: Module112 (copy), PropTypesModule (copy)
 		local NewModule = Module112.new()
 		
-		if self.universe_id ~= nil then
-			NewModule.universe_id = PropTypesModule.StringProp.jsonDecode(self.universe_id)
+		if self.config_key ~= nil then
+			NewModule.config_key = PropTypesModule.StringProp.jsonDecode(self.config_key)
 		end
-		if self.universeId ~= nil then
-			NewModule.universe_id = PropTypesModule.StringProp.jsonDecode(self.universeId)
+		if self.configKey ~= nil then
+			NewModule.config_key = PropTypesModule.StringProp.jsonDecode(self.configKey)
 		end
-		if self.root_place_id ~= nil then
-			NewModule.root_place_id = PropTypesModule.StringProp.jsonDecode(self.root_place_id)
+		if self.selected_option ~= nil then
+			NewModule.selected_option = PropTypesModule.StringProp.jsonDecode(self.selected_option)
 		end
-		if self.rootPlaceId ~= nil then
-			NewModule.root_place_id = PropTypesModule.StringProp.jsonDecode(self.rootPlaceId)
+		if self.selectedOption ~= nil then
+			NewModule.selected_option = PropTypesModule.StringProp.jsonDecode(self.selectedOption)
 		end
-		if self.trigger ~= nil then
-			NewModule.trigger = PropTypesModule.StringProp.jsonDecode(self.trigger)
+		if self.surface_key ~= nil then
+			NewModule.surface_key = PropTypesModule.StringProp.jsonDecode(self.surface_key)
 		end
-		if self.button_name ~= nil then
-			NewModule.button_name = PropTypesModule.StringProp.jsonDecode(self.button_name)
+		if self.surfaceKey ~= nil then
+			NewModule.surface_key = PropTypesModule.StringProp.jsonDecode(self.surfaceKey)
 		end
-		if self.buttonName ~= nil then
-			NewModule.button_name = PropTypesModule.StringProp.jsonDecode(self.buttonName)
+		if self.sort_id ~= nil then
+			NewModule.sort_id = PropTypesModule.StringProp.jsonDecode(self.sort_id)
+		end
+		if self.sortId ~= nil then
+			NewModule.sort_id = PropTypesModule.StringProp.jsonDecode(self.sortId)
 		end
 		return NewModule
 	end
 
 	Module112.descriptor = {
-		name = "OpenGameInviteAction_Params",
+		name = "RefreshChartsSortDetailAction_Params",
 		fullName = "roblox.apppageplatform.shared.v1beta1.Params"
 	}
-	t.OpenGameInviteAction_Params = Module112
-	TypeRegistryModule.default:register(t.OpenGameInviteAction_Params)
+	t.RefreshChartsSortDetailAction_Params = Module112
+	TypeRegistryModule.default:register(t.RefreshChartsSortDetailAction_Params)
 	local Module113 = {}
 	Module113.__index = Module113
 
@@ -13065,32 +12940,32 @@ do
 		local v77 = 0
 		while v77 < buffer.len(Buf) do
 			local Tag, Tag2
-			Tag, Tag2, v2748 = ProtoModule.readTag(Buf, v77)
+			Tag, Tag2, v2729 = ProtoModule.readTag(Buf, v77)
 			
 			if Tag2 == ProtoModule.wireTypes.varint then
 				if Tag == 1 then
 					local VarIntI32
-					VarIntI32, v2748 = ProtoModule.readVarIntI32(Buf, v77)
+					VarIntI32, v2729 = ProtoModule.readVarIntI32(Buf, v77)
 					NewModule.action_type = t.ActionType.fromNumber(VarIntI32) or VarIntI32
 				else
 					local _
-					_, v2748 = ProtoModule.readVarInt(Buf, v77)
+					_, v2729 = ProtoModule.readVarInt(Buf, v77)
 				end
 			elseif Tag2 == ProtoModule.wireTypes.lengthDelimited then
 				if Tag == 2 then
 					local Buffer1
-					Buffer1, v2748 = ProtoModule.readBuffer(Buf, v77)
-					NewModule.action_params = t.LaunchExperienceAction_Params.decode(Buffer1)
+					Buffer1, v2729 = ProtoModule.readBuffer(Buf, v77)
+					NewModule.action_params = t.JoinCommunityAction_Params.decode(Buffer1)
 				else
 					local VarInt, VarInt2 = ProtoModule.readVarInt(Buf, v77)
 					v77 = VarInt2 + VarInt
 				end
 			elseif Tag2 == ProtoModule.wireTypes.i32 then
 				local _
-				_, v2748 = ProtoModule.readFixed32(Buf, v77)
+				_, v2729 = ProtoModule.readFixed32(Buf, v77)
 			elseif Tag2 == ProtoModule.wireTypes.i64 then
 				local _
-				_, v2748 = ProtoModule.readFixed64(Buf, v77)
+				_, v2729 = ProtoModule.readFixed64(Buf, v77)
 			else
 				error("Unsupported wire type: " .. Tag2)
 			end
@@ -13122,29 +12997,29 @@ do
 			NewModule.action_type = (if typeof(self.actionType) == "number" then t.ActionType.fromNumber(self.actionType) else t.ActionType.fromName(self.actionType)) or self.actionType
 		end
 		if self.action_params ~= nil then
-			NewModule.action_params = t.LaunchExperienceAction_Params.jsonDecode(self.action_params)
+			NewModule.action_params = t.JoinCommunityAction_Params.jsonDecode(self.action_params)
 		end
 		if self.actionParams ~= nil then
-			NewModule.action_params = t.LaunchExperienceAction_Params.jsonDecode(self.actionParams)
+			NewModule.action_params = t.JoinCommunityAction_Params.jsonDecode(self.actionParams)
 		end
 		return NewModule
 	end
 
 	Module113.descriptor = {
-		name = "LaunchExperienceAction",
-		fullName = "roblox.apppageplatform.shared.v1beta1.LaunchExperienceAction"
+		name = "JoinCommunityAction",
+		fullName = "roblox.apppageplatform.shared.v1beta1.JoinCommunityAction"
 	}
-	t.LaunchExperienceAction = Module113
+	t.JoinCommunityAction = Module113
 end
 do
-	TypeRegistryModule.default:register(t.LaunchExperienceAction)
+	TypeRegistryModule.default:register(t.JoinCommunityAction)
 	local Module114 = {}
 	Module114.__index = Module114
 
 	function Module114.new(p1)
 		-- upvalues: Module114 (copy)
 		return (setmetatable({
-			kind = if p1 == nil or p1.kind == nil then nil else p1.kind
+			community_id = if p1 == nil or p1.community_id == nil then nil else p1.community_id
 		}, Module114))
 	end
 
@@ -13153,15 +13028,10 @@ do
 		local Buf = buffer.create(0)
 		local Count = 0
 		
-		if self.kind ~= nil then
-			if self.kind.type == "literal" then
-				local EncodeResult = self.kind.value:encode()
-				local WriteTagResult, WriteTagResult2 = ProtoModule.writeTag(Buf, Count, 1, ProtoModule.wireTypes.lengthDelimited)
-				Buf, Count = ProtoModule.writeBuffer(WriteTagResult, WriteTagResult2, EncodeResult, buffer.len(EncodeResult))
-			elseif self.kind.type == "binding_path" then
-				local WriteTagResult1, WriteTagResult2_1 = ProtoModule.writeTag(Buf, Count, 2, ProtoModule.wireTypes.lengthDelimited)
-				Buf, Count = ProtoModule.writeString(WriteTagResult1, WriteTagResult2_1, self.kind.value)
-			end
+		if self.community_id ~= nil then
+			local EncodeResult = self.community_id:encode()
+			local WriteTagResult, WriteTagResult2 = ProtoModule.writeTag(Buf, Count, 1, ProtoModule.wireTypes.lengthDelimited)
+			Buf, Count = ProtoModule.writeBuffer(WriteTagResult, WriteTagResult2, EncodeResult, buffer.len(EncodeResult))
 		end
 		local Buf1 = buffer.create(Count)
 		buffer.copy(Buf1, 0, Buf, 0, Count)
@@ -13170,38 +13040,31 @@ do
 	end
 
 	function Module114.decode(Buf)
-		-- upvalues: Module114 (copy), ProtoModule (copy), t (copy)
+		-- upvalues: Module114 (copy), ProtoModule (copy), PropTypesModule (copy)
 		local NewModule = Module114.new()
 		local v77 = 0
 		while v77 < buffer.len(Buf) do
 			local Tag, Tag2
-			Tag, Tag2, v2768 = ProtoModule.readTag(Buf, v77)
+			Tag, Tag2, v2747 = ProtoModule.readTag(Buf, v77)
 			
 			if Tag2 == ProtoModule.wireTypes.varint then
 				local _
-				_, v2768 = ProtoModule.readVarInt(Buf, v77)
+				_, v2747 = ProtoModule.readVarInt(Buf, v77)
 			elseif Tag2 == ProtoModule.wireTypes.lengthDelimited then
 				if Tag == 1 then
 					local Buffer1
-					Buffer1, v2768 = ProtoModule.readBuffer(Buf, v77)
-					NewModule.kind = {
-						type = "literal",
-						value = t.LaunchExperienceAction_ExperienceJoinData_ExperienceJoinDataLiteral.decode(Buffer1)
-					}
-				elseif Tag == 2 then
-					local Buffer2
-					Buffer2, v2768 = ProtoModule.readBuffer(Buf, v77)
-					NewModule.kind = { type = "binding_path", value = buffer.tostring(Buffer2) }
+					Buffer1, v2747 = ProtoModule.readBuffer(Buf, v77)
+					NewModule.community_id = PropTypesModule.StringProp.decode(Buffer1)
 				else
 					local VarInt, VarInt2 = ProtoModule.readVarInt(Buf, v77)
 					v77 = VarInt2 + VarInt
 				end
 			elseif Tag2 == ProtoModule.wireTypes.i32 then
 				local _
-				_, v2768 = ProtoModule.readFixed32(Buf, v77)
+				_, v2747 = ProtoModule.readFixed32(Buf, v77)
 			elseif Tag2 == ProtoModule.wireTypes.i64 then
 				local _
-				_, v2768 = ProtoModule.readFixed64(Buf, v77)
+				_, v2747 = ProtoModule.readFixed64(Buf, v77)
 			else
 				error("Unsupported wire type: " .. Tag2)
 			end
@@ -13212,67 +13075,53 @@ do
 	function Module114:jsonEncode()
 		local t = {}
 		
-		if self.kind ~= nil then
-			if self.kind.type == "literal" then
-				t.literal = self.kind.value:jsonEncode()
-				
-				return t
-			end
-			if self.kind.type == "binding_path" then
-				t.bindingPath = self.kind.value
-			end
+		if self.community_id ~= nil then
+			t.communityId = self.community_id:jsonEncode()
 		end
 		return t
 	end
 
 	function Module114:jsonDecode()
-		-- upvalues: Module114 (copy), t (copy)
+		-- upvalues: Module114 (copy), PropTypesModule (copy)
 		local NewModule = Module114.new()
 		
-		if self.literal ~= nil then
-			NewModule.kind = {
-				type = "literal",
-				value = t.LaunchExperienceAction_ExperienceJoinData_ExperienceJoinDataLiteral.jsonDecode(self.literal)
-			}
+		if self.community_id ~= nil then
+			NewModule.community_id = PropTypesModule.StringProp.jsonDecode(self.community_id)
 		end
-		if self.binding_path ~= nil then
-			NewModule.kind = { type = "binding_path", value = self.binding_path }
-		end
-		if self.bindingPath ~= nil then
-			NewModule.kind = { type = "binding_path", value = self.bindingPath }
+		if self.communityId ~= nil then
+			NewModule.community_id = PropTypesModule.StringProp.jsonDecode(self.communityId)
 		end
 		return NewModule
 	end
 
 	Module114.descriptor = {
-		name = "LaunchExperienceAction_ExperienceJoinData",
-		fullName = "roblox.apppageplatform.shared.v1beta1.ExperienceJoinData"
+		name = "JoinCommunityAction_Params",
+		fullName = "roblox.apppageplatform.shared.v1beta1.Params"
 	}
-	t.LaunchExperienceAction_ExperienceJoinData = Module114
-	TypeRegistryModule.default:register(t.LaunchExperienceAction_ExperienceJoinData)
+	t.JoinCommunityAction_Params = Module114
+	TypeRegistryModule.default:register(t.JoinCommunityAction_Params)
 	local Module115 = {}
 	Module115.__index = Module115
 
 	function Module115.new(p1)
-		-- upvalues: Module115 (copy)
+		-- upvalues: t (copy), Module115 (copy)
 		return (setmetatable({
-			launch_data = if p1 == nil or p1.launch_data == nil then nil else p1.launch_data,
-			event_id = if p1 == nil or p1.event_id == nil then nil else p1.event_id
+			action_type = if p1 == nil or p1.action_type == nil then assert(t.ActionType.fromNumber(0), "Enum has no 0 default") else p1.action_type,
+			action_params = if p1 == nil or p1.action_params == nil then nil else p1.action_params
 		}, Module115))
 	end
 
 	function Module115:encode()
-		-- upvalues: ProtoModule (copy)
+		-- upvalues: t (copy), ProtoModule (copy)
 		local Buf = buffer.create(0)
 		local Count = 0
 		
-		if self.launch_data ~= nil then
-			local EncodeResult = self.launch_data:encode()
-			local WriteTagResult, WriteTagResult2 = ProtoModule.writeTag(Buf, Count, 1, ProtoModule.wireTypes.lengthDelimited)
-			Buf, Count = ProtoModule.writeBuffer(WriteTagResult, WriteTagResult2, EncodeResult, buffer.len(EncodeResult))
+		if self.action_type ~= nil and (self.action_type ~= nil and self.action_type ~= 0 or self.action_type ~= t.ActionType.fromNumber(0)) then
+			local WriteTagResult, WriteTagResult2 = ProtoModule.writeTag(Buf, Count, 1, ProtoModule.wireTypes.varint)
+			Buf, Count = ProtoModule.writeVarInt(WriteTagResult, WriteTagResult2, t.ActionType.toNumber(self.action_type))
 		end
-		if self.event_id ~= nil then
-			local EncodeResult = self.event_id:encode()
+		if self.action_params ~= nil then
+			local EncodeResult = self.action_params:encode()
 			local WriteTagResult1, WriteTagResult2_1 = ProtoModule.writeTag(Buf, Count, 2, ProtoModule.wireTypes.lengthDelimited)
 			Buf, Count = ProtoModule.writeBuffer(WriteTagResult1, WriteTagResult2_1, EncodeResult, buffer.len(EncodeResult))
 		end
@@ -13283,35 +13132,37 @@ do
 	end
 
 	function Module115.decode(Buf)
-		-- upvalues: Module115 (copy), ProtoModule (copy), PropTypesModule (copy)
+		-- upvalues: Module115 (copy), ProtoModule (copy), t (copy)
 		local NewModule = Module115.new()
 		local v78 = 0
 		while v78 < buffer.len(Buf) do
 			local Tag, Tag2
-			Tag, Tag2, v2789 = ProtoModule.readTag(Buf, v78)
+			Tag, Tag2, v2766 = ProtoModule.readTag(Buf, v78)
 			
 			if Tag2 == ProtoModule.wireTypes.varint then
-				local _
-				_, v2789 = ProtoModule.readVarInt(Buf, v78)
-			elseif Tag2 == ProtoModule.wireTypes.lengthDelimited then
 				if Tag == 1 then
+					local VarIntI32
+					VarIntI32, v2766 = ProtoModule.readVarIntI32(Buf, v78)
+					NewModule.action_type = t.ActionType.fromNumber(VarIntI32) or VarIntI32
+				else
+					local _
+					_, v2766 = ProtoModule.readVarInt(Buf, v78)
+				end
+			elseif Tag2 == ProtoModule.wireTypes.lengthDelimited then
+				if Tag == 2 then
 					local Buffer1
-					Buffer1, v2789 = ProtoModule.readBuffer(Buf, v78)
-					NewModule.launch_data = PropTypesModule.StringProp.decode(Buffer1)
-				elseif Tag == 2 then
-					local Buffer2
-					Buffer2, v2789 = ProtoModule.readBuffer(Buf, v78)
-					NewModule.event_id = PropTypesModule.StringProp.decode(Buffer2)
+					Buffer1, v2766 = ProtoModule.readBuffer(Buf, v78)
+					NewModule.action_params = t.ViewCommunityAction_Params.decode(Buffer1)
 				else
 					local VarInt, VarInt2 = ProtoModule.readVarInt(Buf, v78)
 					v78 = VarInt2 + VarInt
 				end
 			elseif Tag2 == ProtoModule.wireTypes.i32 then
 				local _
-				_, v2789 = ProtoModule.readFixed32(Buf, v78)
+				_, v2766 = ProtoModule.readFixed32(Buf, v78)
 			elseif Tag2 == ProtoModule.wireTypes.i64 then
 				local _
-				_, v2789 = ProtoModule.readFixed64(Buf, v78)
+				_, v2766 = ProtoModule.readFixed64(Buf, v78)
 			else
 				error("Unsupported wire type: " .. Tag2)
 			end
@@ -13320,52 +13171,50 @@ do
 	end
 
 	function Module115:jsonEncode()
-		local t = {}
+		-- upvalues: t (copy)
+		local t1 = {}
 		
-		if self.launch_data ~= nil then
-			t.launchData = self.launch_data:jsonEncode()
+		if self.action_type ~= nil and (self.action_type ~= nil and self.action_type ~= 0 or self.action_type ~= t.ActionType.fromNumber(0)) then
+			t1.actionType = if typeof(self.action_type) == "number" then self.action_type else t.ActionType.toNumber(self.action_type)
 		end
-		if self.event_id ~= nil then
-			t.eventId = self.event_id:jsonEncode()
+		if self.action_params ~= nil then
+			t1.actionParams = self.action_params:jsonEncode()
 		end
-		return t
+		return t1
 	end
 
 	function Module115:jsonDecode()
-		-- upvalues: Module115 (copy), PropTypesModule (copy)
+		-- upvalues: Module115 (copy), t (copy)
 		local NewModule = Module115.new()
 		
-		if self.launch_data ~= nil then
-			NewModule.launch_data = PropTypesModule.StringProp.jsonDecode(self.launch_data)
+		if self.action_type ~= nil then
+			NewModule.action_type = (if typeof(self.action_type) == "number" then t.ActionType.fromNumber(self.action_type) else t.ActionType.fromName(self.action_type)) or self.action_type
 		end
-		if self.launchData ~= nil then
-			NewModule.launch_data = PropTypesModule.StringProp.jsonDecode(self.launchData)
+		if self.actionType ~= nil then
+			NewModule.action_type = (if typeof(self.actionType) == "number" then t.ActionType.fromNumber(self.actionType) else t.ActionType.fromName(self.actionType)) or self.actionType
 		end
-		if self.event_id ~= nil then
-			NewModule.event_id = PropTypesModule.StringProp.jsonDecode(self.event_id)
+		if self.action_params ~= nil then
+			NewModule.action_params = t.ViewCommunityAction_Params.jsonDecode(self.action_params)
 		end
-		if self.eventId ~= nil then
-			NewModule.event_id = PropTypesModule.StringProp.jsonDecode(self.eventId)
+		if self.actionParams ~= nil then
+			NewModule.action_params = t.ViewCommunityAction_Params.jsonDecode(self.actionParams)
 		end
 		return NewModule
 	end
 
 	Module115.descriptor = {
-		name = "LaunchExperienceAction_ExperienceJoinData_ExperienceJoinDataLiteral",
-		fullName = "roblox.apppageplatform.shared.v1beta1.ExperienceJoinDataLiteral"
+		name = "ViewCommunityAction",
+		fullName = "roblox.apppageplatform.shared.v1beta1.ViewCommunityAction"
 	}
-	t.LaunchExperienceAction_ExperienceJoinData_ExperienceJoinDataLiteral = Module115
-	TypeRegistryModule.default:register(t.LaunchExperienceAction_ExperienceJoinData_ExperienceJoinDataLiteral)
+	t.ViewCommunityAction = Module115
+	TypeRegistryModule.default:register(t.ViewCommunityAction)
 	local Module116 = {}
 	Module116.__index = Module116
 
 	function Module116.new(p1)
 		-- upvalues: Module116 (copy)
 		return (setmetatable({
-			place_id = if p1 == nil or p1.place_id == nil then nil else p1.place_id,
-			universe_id = if p1 == nil or p1.universe_id == nil then nil else p1.universe_id,
-			launch_source = if p1 == nil or p1.launch_source == nil then nil else p1.launch_source,
-			experience_join_data = if p1 == nil or p1.experience_join_data == nil then nil else p1.experience_join_data
+			community_id = if p1 == nil or p1.community_id == nil then nil else p1.community_id
 		}, Module116))
 	end
 
@@ -13374,25 +13223,10 @@ do
 		local Buf = buffer.create(0)
 		local Count = 0
 		
-		if self.place_id ~= nil then
-			local EncodeResult = self.place_id:encode()
+		if self.community_id ~= nil then
+			local EncodeResult = self.community_id:encode()
 			local WriteTagResult, WriteTagResult2 = ProtoModule.writeTag(Buf, Count, 1, ProtoModule.wireTypes.lengthDelimited)
 			Buf, Count = ProtoModule.writeBuffer(WriteTagResult, WriteTagResult2, EncodeResult, buffer.len(EncodeResult))
-		end
-		if self.universe_id ~= nil then
-			local EncodeResult = self.universe_id:encode()
-			local WriteTagResult1, WriteTagResult2_1 = ProtoModule.writeTag(Buf, Count, 2, ProtoModule.wireTypes.lengthDelimited)
-			Buf, Count = ProtoModule.writeBuffer(WriteTagResult1, WriteTagResult2_1, EncodeResult, buffer.len(EncodeResult))
-		end
-		if self.launch_source ~= nil then
-			local EncodeResult = self.launch_source:encode()
-			local WriteTagResult3, WriteTagResult2_2 = ProtoModule.writeTag(Buf, Count, 3, ProtoModule.wireTypes.lengthDelimited)
-			Buf, Count = ProtoModule.writeBuffer(WriteTagResult3, WriteTagResult2_2, EncodeResult, buffer.len(EncodeResult))
-		end
-		if self.experience_join_data ~= nil then
-			local EncodeResult = self.experience_join_data:encode()
-			local WriteTagResult4, WriteTagResult2_3 = ProtoModule.writeTag(Buf, Count, 4, ProtoModule.wireTypes.lengthDelimited)
-			Buf, Count = ProtoModule.writeBuffer(WriteTagResult4, WriteTagResult2_3, EncodeResult, buffer.len(EncodeResult))
 		end
 		local Buf1 = buffer.create(Count)
 		buffer.copy(Buf1, 0, Buf, 0, Count)
@@ -13401,43 +13235,31 @@ do
 	end
 
 	function Module116.decode(Buf)
-		-- upvalues: Module116 (copy), ProtoModule (copy), PropTypesModule (copy), t (copy)
+		-- upvalues: Module116 (copy), ProtoModule (copy), PropTypesModule (copy)
 		local NewModule = Module116.new()
 		local v79 = 0
 		while v79 < buffer.len(Buf) do
 			local Tag, Tag2
-			Tag, Tag2, v2816 = ProtoModule.readTag(Buf, v79)
+			Tag, Tag2, v2784 = ProtoModule.readTag(Buf, v79)
 			
 			if Tag2 == ProtoModule.wireTypes.varint then
 				local _
-				_, v2816 = ProtoModule.readVarInt(Buf, v79)
+				_, v2784 = ProtoModule.readVarInt(Buf, v79)
 			elseif Tag2 == ProtoModule.wireTypes.lengthDelimited then
 				if Tag == 1 then
 					local Buffer1
-					Buffer1, v2816 = ProtoModule.readBuffer(Buf, v79)
-					NewModule.place_id = PropTypesModule.StringProp.decode(Buffer1)
-				elseif Tag == 2 then
-					local Buffer2
-					Buffer2, v2816 = ProtoModule.readBuffer(Buf, v79)
-					NewModule.universe_id = PropTypesModule.StringProp.decode(Buffer2)
-				elseif Tag == 3 then
-					local Buffer3
-					Buffer3, v2816 = ProtoModule.readBuffer(Buf, v79)
-					NewModule.launch_source = PropTypesModule.StringProp.decode(Buffer3)
-				elseif Tag == 4 then
-					local Buffer4
-					Buffer4, v2816 = ProtoModule.readBuffer(Buf, v79)
-					NewModule.experience_join_data = t.LaunchExperienceAction_ExperienceJoinData.decode(Buffer4)
+					Buffer1, v2784 = ProtoModule.readBuffer(Buf, v79)
+					NewModule.community_id = PropTypesModule.StringProp.decode(Buffer1)
 				else
 					local VarInt, VarInt2 = ProtoModule.readVarInt(Buf, v79)
 					v79 = VarInt2 + VarInt
 				end
 			elseif Tag2 == ProtoModule.wireTypes.i32 then
 				local _
-				_, v2816 = ProtoModule.readFixed32(Buf, v79)
+				_, v2784 = ProtoModule.readFixed32(Buf, v79)
 			elseif Tag2 == ProtoModule.wireTypes.i64 then
 				local _
-				_, v2816 = ProtoModule.readFixed64(Buf, v79)
+				_, v2784 = ProtoModule.readFixed64(Buf, v79)
 			else
 				error("Unsupported wire type: " .. Tag2)
 			end
@@ -13448,60 +13270,33 @@ do
 	function Module116:jsonEncode()
 		local t = {}
 		
-		if self.place_id ~= nil then
-			t.placeId = self.place_id:jsonEncode()
-		end
-		if self.universe_id ~= nil then
-			t.universeId = self.universe_id:jsonEncode()
-		end
-		if self.launch_source ~= nil then
-			t.launchSource = self.launch_source:jsonEncode()
-		end
-		if self.experience_join_data ~= nil then
-			t.experienceJoinData = self.experience_join_data:jsonEncode()
+		if self.community_id ~= nil then
+			t.communityId = self.community_id:jsonEncode()
 		end
 		return t
 	end
 
 	function Module116:jsonDecode()
-		-- upvalues: Module116 (copy), PropTypesModule (copy), t (copy)
+		-- upvalues: Module116 (copy), PropTypesModule (copy)
 		local NewModule = Module116.new()
 		
-		if self.place_id ~= nil then
-			NewModule.place_id = PropTypesModule.StringProp.jsonDecode(self.place_id)
+		if self.community_id ~= nil then
+			NewModule.community_id = PropTypesModule.StringProp.jsonDecode(self.community_id)
 		end
-		if self.placeId ~= nil then
-			NewModule.place_id = PropTypesModule.StringProp.jsonDecode(self.placeId)
-		end
-		if self.universe_id ~= nil then
-			NewModule.universe_id = PropTypesModule.StringProp.jsonDecode(self.universe_id)
-		end
-		if self.universeId ~= nil then
-			NewModule.universe_id = PropTypesModule.StringProp.jsonDecode(self.universeId)
-		end
-		if self.launch_source ~= nil then
-			NewModule.launch_source = PropTypesModule.StringProp.jsonDecode(self.launch_source)
-		end
-		if self.launchSource ~= nil then
-			NewModule.launch_source = PropTypesModule.StringProp.jsonDecode(self.launchSource)
-		end
-		if self.experience_join_data ~= nil then
-			NewModule.experience_join_data = t.LaunchExperienceAction_ExperienceJoinData.jsonDecode(self.experience_join_data)
-		end
-		if self.experienceJoinData ~= nil then
-			NewModule.experience_join_data = t.LaunchExperienceAction_ExperienceJoinData.jsonDecode(self.experienceJoinData)
+		if self.communityId ~= nil then
+			NewModule.community_id = PropTypesModule.StringProp.jsonDecode(self.communityId)
 		end
 		return NewModule
 	end
 
 	Module116.descriptor = {
-		name = "LaunchExperienceAction_Params",
+		name = "ViewCommunityAction_Params",
 		fullName = "roblox.apppageplatform.shared.v1beta1.Params"
 	}
-	t.LaunchExperienceAction_Params = Module116
+	t.ViewCommunityAction_Params = Module116
 end
 do
-	TypeRegistryModule.default:register(t.LaunchExperienceAction_Params)
+	TypeRegistryModule.default:register(t.ViewCommunityAction_Params)
 	local Module117 = {}
 	Module117.__index = Module117
 
@@ -13539,32 +13334,32 @@ do
 		local v79 = 0
 		while v79 < buffer.len(Buf) do
 			local Tag, Tag2
-			Tag, Tag2, v2838 = ProtoModule.readTag(Buf, v79)
+			Tag, Tag2, v2803 = ProtoModule.readTag(Buf, v79)
 			
 			if Tag2 == ProtoModule.wireTypes.varint then
 				if Tag == 1 then
 					local VarIntI32
-					VarIntI32, v2838 = ProtoModule.readVarIntI32(Buf, v79)
+					VarIntI32, v2803 = ProtoModule.readVarIntI32(Buf, v79)
 					NewModule.action_type = t.ActionType.fromNumber(VarIntI32) or VarIntI32
 				else
 					local _
-					_, v2838 = ProtoModule.readVarInt(Buf, v79)
+					_, v2803 = ProtoModule.readVarInt(Buf, v79)
 				end
 			elseif Tag2 == ProtoModule.wireTypes.lengthDelimited then
 				if Tag == 2 then
 					local Buffer1
-					Buffer1, v2838 = ProtoModule.readBuffer(Buf, v79)
-					NewModule.action_params = t.ToggleExperienceFavoriteAction_Params.decode(Buffer1)
+					Buffer1, v2803 = ProtoModule.readBuffer(Buf, v79)
+					NewModule.action_params = t.AnalyticsEventAction_Params.decode(Buffer1)
 				else
 					local VarInt, VarInt2 = ProtoModule.readVarInt(Buf, v79)
 					v79 = VarInt2 + VarInt
 				end
 			elseif Tag2 == ProtoModule.wireTypes.i32 then
 				local _
-				_, v2838 = ProtoModule.readFixed32(Buf, v79)
+				_, v2803 = ProtoModule.readFixed32(Buf, v79)
 			elseif Tag2 == ProtoModule.wireTypes.i64 then
 				local _
-				_, v2838 = ProtoModule.readFixed64(Buf, v79)
+				_, v2803 = ProtoModule.readFixed64(Buf, v79)
 			else
 				error("Unsupported wire type: " .. Tag2)
 			end
@@ -13596,29 +13391,28 @@ do
 			NewModule.action_type = (if typeof(self.actionType) == "number" then t.ActionType.fromNumber(self.actionType) else t.ActionType.fromName(self.actionType)) or self.actionType
 		end
 		if self.action_params ~= nil then
-			NewModule.action_params = t.ToggleExperienceFavoriteAction_Params.jsonDecode(self.action_params)
+			NewModule.action_params = t.AnalyticsEventAction_Params.jsonDecode(self.action_params)
 		end
 		if self.actionParams ~= nil then
-			NewModule.action_params = t.ToggleExperienceFavoriteAction_Params.jsonDecode(self.actionParams)
+			NewModule.action_params = t.AnalyticsEventAction_Params.jsonDecode(self.actionParams)
 		end
 		return NewModule
 	end
 
 	Module117.descriptor = {
-		name = "ToggleExperienceFavoriteAction",
-		fullName = "roblox.apppageplatform.shared.v1beta1.ToggleExperienceFavoriteAction"
+		name = "AnalyticsEventAction",
+		fullName = "roblox.apppageplatform.shared.v1beta1.AnalyticsEventAction"
 	}
-	t.ToggleExperienceFavoriteAction = Module117
-	TypeRegistryModule.default:register(t.ToggleExperienceFavoriteAction)
+	t.AnalyticsEventAction = Module117
+	TypeRegistryModule.default:register(t.AnalyticsEventAction)
 	local Module118 = {}
 	Module118.__index = Module118
 
 	function Module118.new(p1)
 		-- upvalues: Module118 (copy)
 		return (setmetatable({
-			universe_id = if p1 == nil or p1.universe_id == nil then nil else p1.universe_id,
-			place_id = if p1 == nil or p1.place_id == nil then nil else p1.place_id,
-			ctx = if p1 == nil or p1.ctx == nil then nil else p1.ctx
+			event_name = if p1 == nil or p1.event_name == nil then nil else p1.event_name,
+			event_fields = if p1 == nil or p1.event_fields == nil then nil else p1.event_fields
 		}, Module118))
 	end
 
@@ -13627,20 +13421,15 @@ do
 		local Buf = buffer.create(0)
 		local Count = 0
 		
-		if self.universe_id ~= nil then
-			local EncodeResult = self.universe_id:encode()
+		if self.event_name ~= nil then
+			local EncodeResult = self.event_name:encode()
 			local WriteTagResult, WriteTagResult2 = ProtoModule.writeTag(Buf, Count, 1, ProtoModule.wireTypes.lengthDelimited)
 			Buf, Count = ProtoModule.writeBuffer(WriteTagResult, WriteTagResult2, EncodeResult, buffer.len(EncodeResult))
 		end
-		if self.place_id ~= nil then
-			local EncodeResult = self.place_id:encode()
+		if self.event_fields ~= nil then
+			local EncodeResult = self.event_fields:encode()
 			local WriteTagResult1, WriteTagResult2_1 = ProtoModule.writeTag(Buf, Count, 2, ProtoModule.wireTypes.lengthDelimited)
 			Buf, Count = ProtoModule.writeBuffer(WriteTagResult1, WriteTagResult2_1, EncodeResult, buffer.len(EncodeResult))
-		end
-		if self.ctx ~= nil then
-			local EncodeResult = self.ctx:encode()
-			local WriteTagResult3, WriteTagResult2_2 = ProtoModule.writeTag(Buf, Count, 3, ProtoModule.wireTypes.lengthDelimited)
-			Buf, Count = ProtoModule.writeBuffer(WriteTagResult3, WriteTagResult2_2, EncodeResult, buffer.len(EncodeResult))
 		end
 		local Buf1 = buffer.create(Count)
 		buffer.copy(Buf1, 0, Buf, 0, Count)
@@ -13654,34 +13443,30 @@ do
 		local v80 = 0
 		while v80 < buffer.len(Buf) do
 			local Tag, Tag2
-			Tag, Tag2, v2862 = ProtoModule.readTag(Buf, v80)
+			Tag, Tag2, v2824 = ProtoModule.readTag(Buf, v80)
 			
 			if Tag2 == ProtoModule.wireTypes.varint then
 				local _
-				_, v2862 = ProtoModule.readVarInt(Buf, v80)
+				_, v2824 = ProtoModule.readVarInt(Buf, v80)
 			elseif Tag2 == ProtoModule.wireTypes.lengthDelimited then
 				if Tag == 1 then
 					local Buffer1
-					Buffer1, v2862 = ProtoModule.readBuffer(Buf, v80)
-					NewModule.universe_id = PropTypesModule.StringProp.decode(Buffer1)
+					Buffer1, v2824 = ProtoModule.readBuffer(Buf, v80)
+					NewModule.event_name = PropTypesModule.StringProp.decode(Buffer1)
 				elseif Tag == 2 then
 					local Buffer2
-					Buffer2, v2862 = ProtoModule.readBuffer(Buf, v80)
-					NewModule.place_id = PropTypesModule.StringProp.decode(Buffer2)
-				elseif Tag == 3 then
-					local Buffer3
-					Buffer3, v2862 = ProtoModule.readBuffer(Buf, v80)
-					NewModule.ctx = PropTypesModule.StringProp.decode(Buffer3)
+					Buffer2, v2824 = ProtoModule.readBuffer(Buf, v80)
+					NewModule.event_fields = PropTypesModule.StructProp.decode(Buffer2)
 				else
 					local VarInt, VarInt2 = ProtoModule.readVarInt(Buf, v80)
 					v80 = VarInt2 + VarInt
 				end
 			elseif Tag2 == ProtoModule.wireTypes.i32 then
 				local _
-				_, v2862 = ProtoModule.readFixed32(Buf, v80)
+				_, v2824 = ProtoModule.readFixed32(Buf, v80)
 			elseif Tag2 == ProtoModule.wireTypes.i64 then
 				local _
-				_, v2862 = ProtoModule.readFixed64(Buf, v80)
+				_, v2824 = ProtoModule.readFixed64(Buf, v80)
 			else
 				error("Unsupported wire type: " .. Tag2)
 			end
@@ -13692,14 +13477,11 @@ do
 	function Module118:jsonEncode()
 		local t = {}
 		
-		if self.universe_id ~= nil then
-			t.universeId = self.universe_id:jsonEncode()
+		if self.event_name ~= nil then
+			t.eventName = self.event_name:jsonEncode()
 		end
-		if self.place_id ~= nil then
-			t.placeId = self.place_id:jsonEncode()
-		end
-		if self.ctx ~= nil then
-			t.ctx = self.ctx:jsonEncode()
+		if self.event_fields ~= nil then
+			t.eventFields = self.event_fields:jsonEncode()
 		end
 		return t
 	end
@@ -13708,30 +13490,27 @@ do
 		-- upvalues: Module118 (copy), PropTypesModule (copy)
 		local NewModule = Module118.new()
 		
-		if self.universe_id ~= nil then
-			NewModule.universe_id = PropTypesModule.StringProp.jsonDecode(self.universe_id)
+		if self.event_name ~= nil then
+			NewModule.event_name = PropTypesModule.StringProp.jsonDecode(self.event_name)
 		end
-		if self.universeId ~= nil then
-			NewModule.universe_id = PropTypesModule.StringProp.jsonDecode(self.universeId)
+		if self.eventName ~= nil then
+			NewModule.event_name = PropTypesModule.StringProp.jsonDecode(self.eventName)
 		end
-		if self.place_id ~= nil then
-			NewModule.place_id = PropTypesModule.StringProp.jsonDecode(self.place_id)
+		if self.event_fields ~= nil then
+			NewModule.event_fields = PropTypesModule.StructProp.jsonDecode(self.event_fields)
 		end
-		if self.placeId ~= nil then
-			NewModule.place_id = PropTypesModule.StringProp.jsonDecode(self.placeId)
-		end
-		if self.ctx ~= nil then
-			NewModule.ctx = PropTypesModule.StringProp.jsonDecode(self.ctx)
+		if self.eventFields ~= nil then
+			NewModule.event_fields = PropTypesModule.StructProp.jsonDecode(self.eventFields)
 		end
 		return NewModule
 	end
 
 	Module118.descriptor = {
-		name = "ToggleExperienceFavoriteAction_Params",
+		name = "AnalyticsEventAction_Params",
 		fullName = "roblox.apppageplatform.shared.v1beta1.Params"
 	}
-	t.ToggleExperienceFavoriteAction_Params = Module118
-	TypeRegistryModule.default:register(t.ToggleExperienceFavoriteAction_Params)
+	t.AnalyticsEventAction_Params = Module118
+	TypeRegistryModule.default:register(t.AnalyticsEventAction_Params)
 	local Module119 = {}
 	Module119.__index = Module119
 
@@ -13769,32 +13548,32 @@ do
 		local v81 = 0
 		while v81 < buffer.len(Buf) do
 			local Tag, Tag2
-			Tag, Tag2, v2883 = ProtoModule.readTag(Buf, v81)
+			Tag, Tag2, v2844 = ProtoModule.readTag(Buf, v81)
 			
 			if Tag2 == ProtoModule.wireTypes.varint then
 				if Tag == 1 then
 					local VarIntI32
-					VarIntI32, v2883 = ProtoModule.readVarIntI32(Buf, v81)
+					VarIntI32, v2844 = ProtoModule.readVarIntI32(Buf, v81)
 					NewModule.action_type = t.ActionType.fromNumber(VarIntI32) or VarIntI32
 				else
 					local _
-					_, v2883 = ProtoModule.readVarInt(Buf, v81)
+					_, v2844 = ProtoModule.readVarInt(Buf, v81)
 				end
 			elseif Tag2 == ProtoModule.wireTypes.lengthDelimited then
 				if Tag == 2 then
 					local Buffer1
-					Buffer1, v2883 = ProtoModule.readBuffer(Buf, v81)
-					NewModule.action_params = t.ToggleExperienceFollowAction_Params.decode(Buffer1)
+					Buffer1, v2844 = ProtoModule.readBuffer(Buf, v81)
+					NewModule.action_params = t.CustomAnalyticsEventAction_Params.decode(Buffer1)
 				else
 					local VarInt, VarInt2 = ProtoModule.readVarInt(Buf, v81)
 					v81 = VarInt2 + VarInt
 				end
 			elseif Tag2 == ProtoModule.wireTypes.i32 then
 				local _
-				_, v2883 = ProtoModule.readFixed32(Buf, v81)
+				_, v2844 = ProtoModule.readFixed32(Buf, v81)
 			elseif Tag2 == ProtoModule.wireTypes.i64 then
 				local _
-				_, v2883 = ProtoModule.readFixed64(Buf, v81)
+				_, v2844 = ProtoModule.readFixed64(Buf, v81)
 			else
 				error("Unsupported wire type: " .. Tag2)
 			end
@@ -13826,31 +13605,30 @@ do
 			NewModule.action_type = (if typeof(self.actionType) == "number" then t.ActionType.fromNumber(self.actionType) else t.ActionType.fromName(self.actionType)) or self.actionType
 		end
 		if self.action_params ~= nil then
-			NewModule.action_params = t.ToggleExperienceFollowAction_Params.jsonDecode(self.action_params)
+			NewModule.action_params = t.CustomAnalyticsEventAction_Params.jsonDecode(self.action_params)
 		end
 		if self.actionParams ~= nil then
-			NewModule.action_params = t.ToggleExperienceFollowAction_Params.jsonDecode(self.actionParams)
+			NewModule.action_params = t.CustomAnalyticsEventAction_Params.jsonDecode(self.actionParams)
 		end
 		return NewModule
 	end
 
 	Module119.descriptor = {
-		name = "ToggleExperienceFollowAction",
-		fullName = "roblox.apppageplatform.shared.v1beta1.ToggleExperienceFollowAction"
+		name = "CustomAnalyticsEventAction",
+		fullName = "roblox.apppageplatform.shared.v1beta1.CustomAnalyticsEventAction"
 	}
-	t.ToggleExperienceFollowAction = Module119
+	t.CustomAnalyticsEventAction = Module119
 end
 do
-	TypeRegistryModule.default:register(t.ToggleExperienceFollowAction)
+	TypeRegistryModule.default:register(t.CustomAnalyticsEventAction)
 	local Module120 = {}
 	Module120.__index = Module120
 
 	function Module120.new(p1)
 		-- upvalues: Module120 (copy)
 		return (setmetatable({
-			universe_id = if p1 == nil or p1.universe_id == nil then nil else p1.universe_id,
-			game_name = if p1 == nil or p1.game_name == nil then nil else p1.game_name,
-			ctx = if p1 == nil or p1.ctx == nil then nil else p1.ctx
+			event_name = if p1 == nil or p1.event_name == nil then nil else p1.event_name,
+			event_fields = if p1 == nil or p1.event_fields == nil then nil else p1.event_fields
 		}, Module120))
 	end
 
@@ -13859,20 +13637,15 @@ do
 		local Buf = buffer.create(0)
 		local Count = 0
 		
-		if self.universe_id ~= nil then
-			local EncodeResult = self.universe_id:encode()
+		if self.event_name ~= nil then
+			local EncodeResult = self.event_name:encode()
 			local WriteTagResult, WriteTagResult2 = ProtoModule.writeTag(Buf, Count, 1, ProtoModule.wireTypes.lengthDelimited)
 			Buf, Count = ProtoModule.writeBuffer(WriteTagResult, WriteTagResult2, EncodeResult, buffer.len(EncodeResult))
 		end
-		if self.game_name ~= nil then
-			local EncodeResult = self.game_name:encode()
+		if self.event_fields ~= nil then
+			local EncodeResult = self.event_fields:encode()
 			local WriteTagResult1, WriteTagResult2_1 = ProtoModule.writeTag(Buf, Count, 2, ProtoModule.wireTypes.lengthDelimited)
 			Buf, Count = ProtoModule.writeBuffer(WriteTagResult1, WriteTagResult2_1, EncodeResult, buffer.len(EncodeResult))
-		end
-		if self.ctx ~= nil then
-			local EncodeResult = self.ctx:encode()
-			local WriteTagResult3, WriteTagResult2_2 = ProtoModule.writeTag(Buf, Count, 3, ProtoModule.wireTypes.lengthDelimited)
-			Buf, Count = ProtoModule.writeBuffer(WriteTagResult3, WriteTagResult2_2, EncodeResult, buffer.len(EncodeResult))
 		end
 		local Buf1 = buffer.create(Count)
 		buffer.copy(Buf1, 0, Buf, 0, Count)
@@ -13886,34 +13659,30 @@ do
 		local v81 = 0
 		while v81 < buffer.len(Buf) do
 			local Tag, Tag2
-			Tag, Tag2, v2907 = ProtoModule.readTag(Buf, v81)
+			Tag, Tag2, v2865 = ProtoModule.readTag(Buf, v81)
 			
 			if Tag2 == ProtoModule.wireTypes.varint then
 				local _
-				_, v2907 = ProtoModule.readVarInt(Buf, v81)
+				_, v2865 = ProtoModule.readVarInt(Buf, v81)
 			elseif Tag2 == ProtoModule.wireTypes.lengthDelimited then
 				if Tag == 1 then
 					local Buffer1
-					Buffer1, v2907 = ProtoModule.readBuffer(Buf, v81)
-					NewModule.universe_id = PropTypesModule.StringProp.decode(Buffer1)
+					Buffer1, v2865 = ProtoModule.readBuffer(Buf, v81)
+					NewModule.event_name = PropTypesModule.StringProp.decode(Buffer1)
 				elseif Tag == 2 then
 					local Buffer2
-					Buffer2, v2907 = ProtoModule.readBuffer(Buf, v81)
-					NewModule.game_name = PropTypesModule.StringProp.decode(Buffer2)
-				elseif Tag == 3 then
-					local Buffer3
-					Buffer3, v2907 = ProtoModule.readBuffer(Buf, v81)
-					NewModule.ctx = PropTypesModule.StringProp.decode(Buffer3)
+					Buffer2, v2865 = ProtoModule.readBuffer(Buf, v81)
+					NewModule.event_fields = PropTypesModule.StructProp.decode(Buffer2)
 				else
 					local VarInt, VarInt2 = ProtoModule.readVarInt(Buf, v81)
 					v81 = VarInt2 + VarInt
 				end
 			elseif Tag2 == ProtoModule.wireTypes.i32 then
 				local _
-				_, v2907 = ProtoModule.readFixed32(Buf, v81)
+				_, v2865 = ProtoModule.readFixed32(Buf, v81)
 			elseif Tag2 == ProtoModule.wireTypes.i64 then
 				local _
-				_, v2907 = ProtoModule.readFixed64(Buf, v81)
+				_, v2865 = ProtoModule.readFixed64(Buf, v81)
 			else
 				error("Unsupported wire type: " .. Tag2)
 			end
@@ -13924,14 +13693,11 @@ do
 	function Module120:jsonEncode()
 		local t = {}
 		
-		if self.universe_id ~= nil then
-			t.universeId = self.universe_id:jsonEncode()
+		if self.event_name ~= nil then
+			t.eventName = self.event_name:jsonEncode()
 		end
-		if self.game_name ~= nil then
-			t.gameName = self.game_name:jsonEncode()
-		end
-		if self.ctx ~= nil then
-			t.ctx = self.ctx:jsonEncode()
+		if self.event_fields ~= nil then
+			t.eventFields = self.event_fields:jsonEncode()
 		end
 		return t
 	end
@@ -13940,30 +13706,27 @@ do
 		-- upvalues: Module120 (copy), PropTypesModule (copy)
 		local NewModule = Module120.new()
 		
-		if self.universe_id ~= nil then
-			NewModule.universe_id = PropTypesModule.StringProp.jsonDecode(self.universe_id)
+		if self.event_name ~= nil then
+			NewModule.event_name = PropTypesModule.StringProp.jsonDecode(self.event_name)
 		end
-		if self.universeId ~= nil then
-			NewModule.universe_id = PropTypesModule.StringProp.jsonDecode(self.universeId)
+		if self.eventName ~= nil then
+			NewModule.event_name = PropTypesModule.StringProp.jsonDecode(self.eventName)
 		end
-		if self.game_name ~= nil then
-			NewModule.game_name = PropTypesModule.StringProp.jsonDecode(self.game_name)
+		if self.event_fields ~= nil then
+			NewModule.event_fields = PropTypesModule.StructProp.jsonDecode(self.event_fields)
 		end
-		if self.gameName ~= nil then
-			NewModule.game_name = PropTypesModule.StringProp.jsonDecode(self.gameName)
-		end
-		if self.ctx ~= nil then
-			NewModule.ctx = PropTypesModule.StringProp.jsonDecode(self.ctx)
+		if self.eventFields ~= nil then
+			NewModule.event_fields = PropTypesModule.StructProp.jsonDecode(self.eventFields)
 		end
 		return NewModule
 	end
 
 	Module120.descriptor = {
-		name = "ToggleExperienceFollowAction_Params",
+		name = "CustomAnalyticsEventAction_Params",
 		fullName = "roblox.apppageplatform.shared.v1beta1.Params"
 	}
-	t.ToggleExperienceFollowAction_Params = Module120
-	TypeRegistryModule.default:register(t.ToggleExperienceFollowAction_Params)
+	t.CustomAnalyticsEventAction_Params = Module120
+	TypeRegistryModule.default:register(t.CustomAnalyticsEventAction_Params)
 	local Module121 = {}
 	Module121.__index = Module121
 
@@ -14001,32 +13764,32 @@ do
 		local v82 = 0
 		while v82 < buffer.len(Buf) do
 			local Tag, Tag2
-			Tag, Tag2, v2928 = ProtoModule.readTag(Buf, v82)
+			Tag, Tag2, v2885 = ProtoModule.readTag(Buf, v82)
 			
 			if Tag2 == ProtoModule.wireTypes.varint then
 				if Tag == 1 then
 					local VarIntI32
-					VarIntI32, v2928 = ProtoModule.readVarIntI32(Buf, v82)
+					VarIntI32, v2885 = ProtoModule.readVarIntI32(Buf, v82)
 					NewModule.action_type = t.ActionType.fromNumber(VarIntI32) or VarIntI32
 				else
 					local _
-					_, v2928 = ProtoModule.readVarInt(Buf, v82)
+					_, v2885 = ProtoModule.readVarInt(Buf, v82)
 				end
 			elseif Tag2 == ProtoModule.wireTypes.lengthDelimited then
 				if Tag == 2 then
 					local Buffer1
-					Buffer1, v2928 = ProtoModule.readBuffer(Buf, v82)
-					NewModule.action_params = t.ToggleExperienceVoteAction_Params.decode(Buffer1)
+					Buffer1, v2885 = ProtoModule.readBuffer(Buf, v82)
+					NewModule.action_params = t.OpenGameInviteAction_Params.decode(Buffer1)
 				else
 					local VarInt, VarInt2 = ProtoModule.readVarInt(Buf, v82)
 					v82 = VarInt2 + VarInt
 				end
 			elseif Tag2 == ProtoModule.wireTypes.i32 then
 				local _
-				_, v2928 = ProtoModule.readFixed32(Buf, v82)
+				_, v2885 = ProtoModule.readFixed32(Buf, v82)
 			elseif Tag2 == ProtoModule.wireTypes.i64 then
 				local _
-				_, v2928 = ProtoModule.readFixed64(Buf, v82)
+				_, v2885 = ProtoModule.readFixed64(Buf, v82)
 			else
 				error("Unsupported wire type: " .. Tag2)
 			end
@@ -14058,20 +13821,20 @@ do
 			NewModule.action_type = (if typeof(self.actionType) == "number" then t.ActionType.fromNumber(self.actionType) else t.ActionType.fromName(self.actionType)) or self.actionType
 		end
 		if self.action_params ~= nil then
-			NewModule.action_params = t.ToggleExperienceVoteAction_Params.jsonDecode(self.action_params)
+			NewModule.action_params = t.OpenGameInviteAction_Params.jsonDecode(self.action_params)
 		end
 		if self.actionParams ~= nil then
-			NewModule.action_params = t.ToggleExperienceVoteAction_Params.jsonDecode(self.actionParams)
+			NewModule.action_params = t.OpenGameInviteAction_Params.jsonDecode(self.actionParams)
 		end
 		return NewModule
 	end
 
 	Module121.descriptor = {
-		name = "ToggleExperienceVoteAction",
-		fullName = "roblox.apppageplatform.shared.v1beta1.ToggleExperienceVoteAction"
+		name = "OpenGameInviteAction",
+		fullName = "roblox.apppageplatform.shared.v1beta1.OpenGameInviteAction"
 	}
-	t.ToggleExperienceVoteAction = Module121
-	TypeRegistryModule.default:register(t.ToggleExperienceVoteAction)
+	t.OpenGameInviteAction = Module121
+	TypeRegistryModule.default:register(t.OpenGameInviteAction)
 	local Module122 = {}
 	Module122.__index = Module122
 
@@ -14079,9 +13842,9 @@ do
 		-- upvalues: Module122 (copy)
 		return (setmetatable({
 			universe_id = if p1 == nil or p1.universe_id == nil then nil else p1.universe_id,
-			vote_direction = if p1 == nil or p1.vote_direction == nil then nil else p1.vote_direction,
-			place_id = if p1 == nil or p1.place_id == nil then nil else p1.place_id,
-			ctx = if p1 == nil or p1.ctx == nil then nil else p1.ctx
+			root_place_id = if p1 == nil or p1.root_place_id == nil then nil else p1.root_place_id,
+			trigger = if p1 == nil or p1.trigger == nil then nil else p1.trigger,
+			button_name = if p1 == nil or p1.button_name == nil then nil else p1.button_name
 		}, Module122))
 	end
 
@@ -14095,18 +13858,18 @@ do
 			local WriteTagResult, WriteTagResult2 = ProtoModule.writeTag(Buf, Count, 1, ProtoModule.wireTypes.lengthDelimited)
 			Buf, Count = ProtoModule.writeBuffer(WriteTagResult, WriteTagResult2, EncodeResult, buffer.len(EncodeResult))
 		end
-		if self.vote_direction ~= nil then
-			local EncodeResult = self.vote_direction:encode()
+		if self.root_place_id ~= nil then
+			local EncodeResult = self.root_place_id:encode()
 			local WriteTagResult1, WriteTagResult2_1 = ProtoModule.writeTag(Buf, Count, 2, ProtoModule.wireTypes.lengthDelimited)
 			Buf, Count = ProtoModule.writeBuffer(WriteTagResult1, WriteTagResult2_1, EncodeResult, buffer.len(EncodeResult))
 		end
-		if self.place_id ~= nil then
-			local EncodeResult = self.place_id:encode()
+		if self.trigger ~= nil then
+			local EncodeResult = self.trigger:encode()
 			local WriteTagResult3, WriteTagResult2_2 = ProtoModule.writeTag(Buf, Count, 3, ProtoModule.wireTypes.lengthDelimited)
 			Buf, Count = ProtoModule.writeBuffer(WriteTagResult3, WriteTagResult2_2, EncodeResult, buffer.len(EncodeResult))
 		end
-		if self.ctx ~= nil then
-			local EncodeResult = self.ctx:encode()
+		if self.button_name ~= nil then
+			local EncodeResult = self.button_name:encode()
 			local WriteTagResult4, WriteTagResult2_3 = ProtoModule.writeTag(Buf, Count, 4, ProtoModule.wireTypes.lengthDelimited)
 			Buf, Count = ProtoModule.writeBuffer(WriteTagResult4, WriteTagResult2_3, EncodeResult, buffer.len(EncodeResult))
 		end
@@ -14122,38 +13885,38 @@ do
 		local v83 = 0
 		while v83 < buffer.len(Buf) do
 			local Tag, Tag2
-			Tag, Tag2, v2955 = ProtoModule.readTag(Buf, v83)
+			Tag, Tag2, v2912 = ProtoModule.readTag(Buf, v83)
 			
 			if Tag2 == ProtoModule.wireTypes.varint then
 				local _
-				_, v2955 = ProtoModule.readVarInt(Buf, v83)
+				_, v2912 = ProtoModule.readVarInt(Buf, v83)
 			elseif Tag2 == ProtoModule.wireTypes.lengthDelimited then
 				if Tag == 1 then
 					local Buffer1
-					Buffer1, v2955 = ProtoModule.readBuffer(Buf, v83)
+					Buffer1, v2912 = ProtoModule.readBuffer(Buf, v83)
 					NewModule.universe_id = PropTypesModule.StringProp.decode(Buffer1)
 				elseif Tag == 2 then
 					local Buffer2
-					Buffer2, v2955 = ProtoModule.readBuffer(Buf, v83)
-					NewModule.vote_direction = PropTypesModule.BoolProp.decode(Buffer2)
+					Buffer2, v2912 = ProtoModule.readBuffer(Buf, v83)
+					NewModule.root_place_id = PropTypesModule.StringProp.decode(Buffer2)
 				elseif Tag == 3 then
 					local Buffer3
-					Buffer3, v2955 = ProtoModule.readBuffer(Buf, v83)
-					NewModule.place_id = PropTypesModule.StringProp.decode(Buffer3)
+					Buffer3, v2912 = ProtoModule.readBuffer(Buf, v83)
+					NewModule.trigger = PropTypesModule.StringProp.decode(Buffer3)
 				elseif Tag == 4 then
 					local Buffer4
-					Buffer4, v2955 = ProtoModule.readBuffer(Buf, v83)
-					NewModule.ctx = PropTypesModule.StringProp.decode(Buffer4)
+					Buffer4, v2912 = ProtoModule.readBuffer(Buf, v83)
+					NewModule.button_name = PropTypesModule.StringProp.decode(Buffer4)
 				else
 					local VarInt, VarInt2 = ProtoModule.readVarInt(Buf, v83)
 					v83 = VarInt2 + VarInt
 				end
 			elseif Tag2 == ProtoModule.wireTypes.i32 then
 				local _
-				_, v2955 = ProtoModule.readFixed32(Buf, v83)
+				_, v2912 = ProtoModule.readFixed32(Buf, v83)
 			elseif Tag2 == ProtoModule.wireTypes.i64 then
 				local _
-				_, v2955 = ProtoModule.readFixed64(Buf, v83)
+				_, v2912 = ProtoModule.readFixed64(Buf, v83)
 			else
 				error("Unsupported wire type: " .. Tag2)
 			end
@@ -14167,14 +13930,14 @@ do
 		if self.universe_id ~= nil then
 			t.universeId = self.universe_id:jsonEncode()
 		end
-		if self.vote_direction ~= nil then
-			t.voteDirection = self.vote_direction:jsonEncode()
+		if self.root_place_id ~= nil then
+			t.rootPlaceId = self.root_place_id:jsonEncode()
 		end
-		if self.place_id ~= nil then
-			t.placeId = self.place_id:jsonEncode()
+		if self.trigger ~= nil then
+			t.trigger = self.trigger:jsonEncode()
 		end
-		if self.ctx ~= nil then
-			t.ctx = self.ctx:jsonEncode()
+		if self.button_name ~= nil then
+			t.buttonName = self.button_name:jsonEncode()
 		end
 		return t
 	end
@@ -14189,32 +13952,32 @@ do
 		if self.universeId ~= nil then
 			NewModule.universe_id = PropTypesModule.StringProp.jsonDecode(self.universeId)
 		end
-		if self.vote_direction ~= nil then
-			NewModule.vote_direction = PropTypesModule.BoolProp.jsonDecode(self.vote_direction)
+		if self.root_place_id ~= nil then
+			NewModule.root_place_id = PropTypesModule.StringProp.jsonDecode(self.root_place_id)
 		end
-		if self.voteDirection ~= nil then
-			NewModule.vote_direction = PropTypesModule.BoolProp.jsonDecode(self.voteDirection)
+		if self.rootPlaceId ~= nil then
+			NewModule.root_place_id = PropTypesModule.StringProp.jsonDecode(self.rootPlaceId)
 		end
-		if self.place_id ~= nil then
-			NewModule.place_id = PropTypesModule.StringProp.jsonDecode(self.place_id)
+		if self.trigger ~= nil then
+			NewModule.trigger = PropTypesModule.StringProp.jsonDecode(self.trigger)
 		end
-		if self.placeId ~= nil then
-			NewModule.place_id = PropTypesModule.StringProp.jsonDecode(self.placeId)
+		if self.button_name ~= nil then
+			NewModule.button_name = PropTypesModule.StringProp.jsonDecode(self.button_name)
 		end
-		if self.ctx ~= nil then
-			NewModule.ctx = PropTypesModule.StringProp.jsonDecode(self.ctx)
+		if self.buttonName ~= nil then
+			NewModule.button_name = PropTypesModule.StringProp.jsonDecode(self.buttonName)
 		end
 		return NewModule
 	end
 
 	Module122.descriptor = {
-		name = "ToggleExperienceVoteAction_Params",
+		name = "OpenGameInviteAction_Params",
 		fullName = "roblox.apppageplatform.shared.v1beta1.Params"
 	}
-	t.ToggleExperienceVoteAction_Params = Module122
+	t.OpenGameInviteAction_Params = Module122
 end
 do
-	TypeRegistryModule.default:register(t.ToggleExperienceVoteAction_Params)
+	TypeRegistryModule.default:register(t.OpenGameInviteAction_Params)
 	local Module123 = {}
 	Module123.__index = Module123
 
@@ -14252,32 +14015,32 @@ do
 		local v83 = 0
 		while v83 < buffer.len(Buf) do
 			local Tag, Tag2
-			Tag, Tag2, v2977 = ProtoModule.readTag(Buf, v83)
+			Tag, Tag2, v2934 = ProtoModule.readTag(Buf, v83)
 			
 			if Tag2 == ProtoModule.wireTypes.varint then
 				if Tag == 1 then
 					local VarIntI32
-					VarIntI32, v2977 = ProtoModule.readVarIntI32(Buf, v83)
+					VarIntI32, v2934 = ProtoModule.readVarIntI32(Buf, v83)
 					NewModule.action_type = t.ActionType.fromNumber(VarIntI32) or VarIntI32
 				else
 					local _
-					_, v2977 = ProtoModule.readVarInt(Buf, v83)
+					_, v2934 = ProtoModule.readVarInt(Buf, v83)
 				end
 			elseif Tag2 == ProtoModule.wireTypes.lengthDelimited then
 				if Tag == 2 then
 					local Buffer1
-					Buffer1, v2977 = ProtoModule.readBuffer(Buf, v83)
-					NewModule.action_params = t.OpenPurchasePromptAction_Params.decode(Buffer1)
+					Buffer1, v2934 = ProtoModule.readBuffer(Buf, v83)
+					NewModule.action_params = t.LaunchExperienceAction_Params.decode(Buffer1)
 				else
 					local VarInt, VarInt2 = ProtoModule.readVarInt(Buf, v83)
 					v83 = VarInt2 + VarInt
 				end
 			elseif Tag2 == ProtoModule.wireTypes.i32 then
 				local _
-				_, v2977 = ProtoModule.readFixed32(Buf, v83)
+				_, v2934 = ProtoModule.readFixed32(Buf, v83)
 			elseif Tag2 == ProtoModule.wireTypes.i64 then
 				local _
-				_, v2977 = ProtoModule.readFixed64(Buf, v83)
+				_, v2934 = ProtoModule.readFixed64(Buf, v83)
 			else
 				error("Unsupported wire type: " .. Tag2)
 			end
@@ -14309,20 +14072,20 @@ do
 			NewModule.action_type = (if typeof(self.actionType) == "number" then t.ActionType.fromNumber(self.actionType) else t.ActionType.fromName(self.actionType)) or self.actionType
 		end
 		if self.action_params ~= nil then
-			NewModule.action_params = t.OpenPurchasePromptAction_Params.jsonDecode(self.action_params)
+			NewModule.action_params = t.LaunchExperienceAction_Params.jsonDecode(self.action_params)
 		end
 		if self.actionParams ~= nil then
-			NewModule.action_params = t.OpenPurchasePromptAction_Params.jsonDecode(self.actionParams)
+			NewModule.action_params = t.LaunchExperienceAction_Params.jsonDecode(self.actionParams)
 		end
 		return NewModule
 	end
 
 	Module123.descriptor = {
-		name = "OpenPurchasePromptAction",
-		fullName = "roblox.apppageplatform.shared.v1beta1.OpenPurchasePromptAction"
+		name = "LaunchExperienceAction",
+		fullName = "roblox.apppageplatform.shared.v1beta1.LaunchExperienceAction"
 	}
-	t.OpenPurchasePromptAction = Module123
-	TypeRegistryModule.default:register(t.OpenPurchasePromptAction)
+	t.LaunchExperienceAction = Module123
+	TypeRegistryModule.default:register(t.LaunchExperienceAction)
 	local Module124 = {}
 	Module124.__index = Module124
 
@@ -14360,22 +14123,22 @@ do
 		local v84 = 0
 		while v84 < buffer.len(Buf) do
 			local Tag, Tag2
-			Tag, Tag2, v2997 = ProtoModule.readTag(Buf, v84)
+			Tag, Tag2, v2954 = ProtoModule.readTag(Buf, v84)
 			
 			if Tag2 == ProtoModule.wireTypes.varint then
 				local _
-				_, v2997 = ProtoModule.readVarInt(Buf, v84)
+				_, v2954 = ProtoModule.readVarInt(Buf, v84)
 			elseif Tag2 == ProtoModule.wireTypes.lengthDelimited then
 				if Tag == 1 then
 					local Buffer1
-					Buffer1, v2997 = ProtoModule.readBuffer(Buf, v84)
+					Buffer1, v2954 = ProtoModule.readBuffer(Buf, v84)
 					NewModule.kind = {
 						type = "literal",
-						value = t.OpenPurchasePromptAction_ProductPayload_ProductPayloadLiteral.decode(Buffer1)
+						value = t.LaunchExperienceAction_ExperienceJoinData_ExperienceJoinDataLiteral.decode(Buffer1)
 					}
 				elseif Tag == 2 then
 					local Buffer2
-					Buffer2, v2997 = ProtoModule.readBuffer(Buf, v84)
+					Buffer2, v2954 = ProtoModule.readBuffer(Buf, v84)
 					NewModule.kind = { type = "binding_path", value = buffer.tostring(Buffer2) }
 				else
 					local VarInt, VarInt2 = ProtoModule.readVarInt(Buf, v84)
@@ -14383,10 +14146,10 @@ do
 				end
 			elseif Tag2 == ProtoModule.wireTypes.i32 then
 				local _
-				_, v2997 = ProtoModule.readFixed32(Buf, v84)
+				_, v2954 = ProtoModule.readFixed32(Buf, v84)
 			elseif Tag2 == ProtoModule.wireTypes.i64 then
 				local _
-				_, v2997 = ProtoModule.readFixed64(Buf, v84)
+				_, v2954 = ProtoModule.readFixed64(Buf, v84)
 			else
 				error("Unsupported wire type: " .. Tag2)
 			end
@@ -14417,7 +14180,7 @@ do
 		if self.literal ~= nil then
 			NewModule.kind = {
 				type = "literal",
-				value = t.OpenPurchasePromptAction_ProductPayload_ProductPayloadLiteral.jsonDecode(self.literal)
+				value = t.LaunchExperienceAction_ExperienceJoinData_ExperienceJoinDataLiteral.jsonDecode(self.literal)
 			}
 		end
 		if self.binding_path ~= nil then
@@ -14430,16 +14193,1203 @@ do
 	end
 
 	Module124.descriptor = {
-		name = "OpenPurchasePromptAction_ProductPayload",
-		fullName = "roblox.apppageplatform.shared.v1beta1.ProductPayload"
+		name = "LaunchExperienceAction_ExperienceJoinData",
+		fullName = "roblox.apppageplatform.shared.v1beta1.ExperienceJoinData"
 	}
-	t.OpenPurchasePromptAction_ProductPayload = Module124
-	TypeRegistryModule.default:register(t.OpenPurchasePromptAction_ProductPayload)
+	t.LaunchExperienceAction_ExperienceJoinData = Module124
+	TypeRegistryModule.default:register(t.LaunchExperienceAction_ExperienceJoinData)
 	local Module125 = {}
 	Module125.__index = Module125
 
 	function Module125.new(p1)
 		-- upvalues: Module125 (copy)
+		return (setmetatable({
+			launch_data = if p1 == nil or p1.launch_data == nil then nil else p1.launch_data,
+			event_id = if p1 == nil or p1.event_id == nil then nil else p1.event_id
+		}, Module125))
+	end
+
+	function Module125:encode()
+		-- upvalues: ProtoModule (copy)
+		local Buf = buffer.create(0)
+		local Count = 0
+		
+		if self.launch_data ~= nil then
+			local EncodeResult = self.launch_data:encode()
+			local WriteTagResult, WriteTagResult2 = ProtoModule.writeTag(Buf, Count, 1, ProtoModule.wireTypes.lengthDelimited)
+			Buf, Count = ProtoModule.writeBuffer(WriteTagResult, WriteTagResult2, EncodeResult, buffer.len(EncodeResult))
+		end
+		if self.event_id ~= nil then
+			local EncodeResult = self.event_id:encode()
+			local WriteTagResult1, WriteTagResult2_1 = ProtoModule.writeTag(Buf, Count, 2, ProtoModule.wireTypes.lengthDelimited)
+			Buf, Count = ProtoModule.writeBuffer(WriteTagResult1, WriteTagResult2_1, EncodeResult, buffer.len(EncodeResult))
+		end
+		local Buf1 = buffer.create(Count)
+		buffer.copy(Buf1, 0, Buf, 0, Count)
+		
+		return Buf1
+	end
+
+	function Module125.decode(Buf)
+		-- upvalues: Module125 (copy), ProtoModule (copy), PropTypesModule (copy)
+		local NewModule = Module125.new()
+		local v85 = 0
+		while v85 < buffer.len(Buf) do
+			local Tag, Tag2
+			Tag, Tag2, v2975 = ProtoModule.readTag(Buf, v85)
+			
+			if Tag2 == ProtoModule.wireTypes.varint then
+				local _
+				_, v2975 = ProtoModule.readVarInt(Buf, v85)
+			elseif Tag2 == ProtoModule.wireTypes.lengthDelimited then
+				if Tag == 1 then
+					local Buffer1
+					Buffer1, v2975 = ProtoModule.readBuffer(Buf, v85)
+					NewModule.launch_data = PropTypesModule.StringProp.decode(Buffer1)
+				elseif Tag == 2 then
+					local Buffer2
+					Buffer2, v2975 = ProtoModule.readBuffer(Buf, v85)
+					NewModule.event_id = PropTypesModule.StringProp.decode(Buffer2)
+				else
+					local VarInt, VarInt2 = ProtoModule.readVarInt(Buf, v85)
+					v85 = VarInt2 + VarInt
+				end
+			elseif Tag2 == ProtoModule.wireTypes.i32 then
+				local _
+				_, v2975 = ProtoModule.readFixed32(Buf, v85)
+			elseif Tag2 == ProtoModule.wireTypes.i64 then
+				local _
+				_, v2975 = ProtoModule.readFixed64(Buf, v85)
+			else
+				error("Unsupported wire type: " .. Tag2)
+			end
+		end
+		return NewModule
+	end
+
+	function Module125:jsonEncode()
+		local t = {}
+		
+		if self.launch_data ~= nil then
+			t.launchData = self.launch_data:jsonEncode()
+		end
+		if self.event_id ~= nil then
+			t.eventId = self.event_id:jsonEncode()
+		end
+		return t
+	end
+
+	function Module125:jsonDecode()
+		-- upvalues: Module125 (copy), PropTypesModule (copy)
+		local NewModule = Module125.new()
+		
+		if self.launch_data ~= nil then
+			NewModule.launch_data = PropTypesModule.StringProp.jsonDecode(self.launch_data)
+		end
+		if self.launchData ~= nil then
+			NewModule.launch_data = PropTypesModule.StringProp.jsonDecode(self.launchData)
+		end
+		if self.event_id ~= nil then
+			NewModule.event_id = PropTypesModule.StringProp.jsonDecode(self.event_id)
+		end
+		if self.eventId ~= nil then
+			NewModule.event_id = PropTypesModule.StringProp.jsonDecode(self.eventId)
+		end
+		return NewModule
+	end
+
+	Module125.descriptor = {
+		name = "LaunchExperienceAction_ExperienceJoinData_ExperienceJoinDataLiteral",
+		fullName = "roblox.apppageplatform.shared.v1beta1.ExperienceJoinDataLiteral"
+	}
+	t.LaunchExperienceAction_ExperienceJoinData_ExperienceJoinDataLiteral = Module125
+end
+do
+	TypeRegistryModule.default:register(t.LaunchExperienceAction_ExperienceJoinData_ExperienceJoinDataLiteral)
+	local Module126 = {}
+	Module126.__index = Module126
+
+	function Module126.new(p1)
+		-- upvalues: Module126 (copy)
+		return (setmetatable({
+			place_id = if p1 == nil or p1.place_id == nil then nil else p1.place_id,
+			universe_id = if p1 == nil or p1.universe_id == nil then nil else p1.universe_id,
+			launch_source = if p1 == nil or p1.launch_source == nil then nil else p1.launch_source,
+			experience_join_data = if p1 == nil or p1.experience_join_data == nil then nil else p1.experience_join_data
+		}, Module126))
+	end
+
+	function Module126:encode()
+		-- upvalues: ProtoModule (copy)
+		local Buf = buffer.create(0)
+		local Count = 0
+		
+		if self.place_id ~= nil then
+			local EncodeResult = self.place_id:encode()
+			local WriteTagResult, WriteTagResult2 = ProtoModule.writeTag(Buf, Count, 1, ProtoModule.wireTypes.lengthDelimited)
+			Buf, Count = ProtoModule.writeBuffer(WriteTagResult, WriteTagResult2, EncodeResult, buffer.len(EncodeResult))
+		end
+		if self.universe_id ~= nil then
+			local EncodeResult = self.universe_id:encode()
+			local WriteTagResult1, WriteTagResult2_1 = ProtoModule.writeTag(Buf, Count, 2, ProtoModule.wireTypes.lengthDelimited)
+			Buf, Count = ProtoModule.writeBuffer(WriteTagResult1, WriteTagResult2_1, EncodeResult, buffer.len(EncodeResult))
+		end
+		if self.launch_source ~= nil then
+			local EncodeResult = self.launch_source:encode()
+			local WriteTagResult3, WriteTagResult2_2 = ProtoModule.writeTag(Buf, Count, 3, ProtoModule.wireTypes.lengthDelimited)
+			Buf, Count = ProtoModule.writeBuffer(WriteTagResult3, WriteTagResult2_2, EncodeResult, buffer.len(EncodeResult))
+		end
+		if self.experience_join_data ~= nil then
+			local EncodeResult = self.experience_join_data:encode()
+			local WriteTagResult4, WriteTagResult2_3 = ProtoModule.writeTag(Buf, Count, 4, ProtoModule.wireTypes.lengthDelimited)
+			Buf, Count = ProtoModule.writeBuffer(WriteTagResult4, WriteTagResult2_3, EncodeResult, buffer.len(EncodeResult))
+		end
+		local Buf1 = buffer.create(Count)
+		buffer.copy(Buf1, 0, Buf, 0, Count)
+		
+		return Buf1
+	end
+
+	function Module126.decode(Buf)
+		-- upvalues: Module126 (copy), ProtoModule (copy), PropTypesModule (copy), t (copy)
+		local NewModule = Module126.new()
+		local v85 = 0
+		while v85 < buffer.len(Buf) do
+			local Tag, Tag2
+			Tag, Tag2, v3002 = ProtoModule.readTag(Buf, v85)
+			
+			if Tag2 == ProtoModule.wireTypes.varint then
+				local _
+				_, v3002 = ProtoModule.readVarInt(Buf, v85)
+			elseif Tag2 == ProtoModule.wireTypes.lengthDelimited then
+				if Tag == 1 then
+					local Buffer1
+					Buffer1, v3002 = ProtoModule.readBuffer(Buf, v85)
+					NewModule.place_id = PropTypesModule.StringProp.decode(Buffer1)
+				elseif Tag == 2 then
+					local Buffer2
+					Buffer2, v3002 = ProtoModule.readBuffer(Buf, v85)
+					NewModule.universe_id = PropTypesModule.StringProp.decode(Buffer2)
+				elseif Tag == 3 then
+					local Buffer3
+					Buffer3, v3002 = ProtoModule.readBuffer(Buf, v85)
+					NewModule.launch_source = PropTypesModule.StringProp.decode(Buffer3)
+				elseif Tag == 4 then
+					local Buffer4
+					Buffer4, v3002 = ProtoModule.readBuffer(Buf, v85)
+					NewModule.experience_join_data = t.LaunchExperienceAction_ExperienceJoinData.decode(Buffer4)
+				else
+					local VarInt, VarInt2 = ProtoModule.readVarInt(Buf, v85)
+					v85 = VarInt2 + VarInt
+				end
+			elseif Tag2 == ProtoModule.wireTypes.i32 then
+				local _
+				_, v3002 = ProtoModule.readFixed32(Buf, v85)
+			elseif Tag2 == ProtoModule.wireTypes.i64 then
+				local _
+				_, v3002 = ProtoModule.readFixed64(Buf, v85)
+			else
+				error("Unsupported wire type: " .. Tag2)
+			end
+		end
+		return NewModule
+	end
+
+	function Module126:jsonEncode()
+		local t = {}
+		
+		if self.place_id ~= nil then
+			t.placeId = self.place_id:jsonEncode()
+		end
+		if self.universe_id ~= nil then
+			t.universeId = self.universe_id:jsonEncode()
+		end
+		if self.launch_source ~= nil then
+			t.launchSource = self.launch_source:jsonEncode()
+		end
+		if self.experience_join_data ~= nil then
+			t.experienceJoinData = self.experience_join_data:jsonEncode()
+		end
+		return t
+	end
+
+	function Module126:jsonDecode()
+		-- upvalues: Module126 (copy), PropTypesModule (copy), t (copy)
+		local NewModule = Module126.new()
+		
+		if self.place_id ~= nil then
+			NewModule.place_id = PropTypesModule.StringProp.jsonDecode(self.place_id)
+		end
+		if self.placeId ~= nil then
+			NewModule.place_id = PropTypesModule.StringProp.jsonDecode(self.placeId)
+		end
+		if self.universe_id ~= nil then
+			NewModule.universe_id = PropTypesModule.StringProp.jsonDecode(self.universe_id)
+		end
+		if self.universeId ~= nil then
+			NewModule.universe_id = PropTypesModule.StringProp.jsonDecode(self.universeId)
+		end
+		if self.launch_source ~= nil then
+			NewModule.launch_source = PropTypesModule.StringProp.jsonDecode(self.launch_source)
+		end
+		if self.launchSource ~= nil then
+			NewModule.launch_source = PropTypesModule.StringProp.jsonDecode(self.launchSource)
+		end
+		if self.experience_join_data ~= nil then
+			NewModule.experience_join_data = t.LaunchExperienceAction_ExperienceJoinData.jsonDecode(self.experience_join_data)
+		end
+		if self.experienceJoinData ~= nil then
+			NewModule.experience_join_data = t.LaunchExperienceAction_ExperienceJoinData.jsonDecode(self.experienceJoinData)
+		end
+		return NewModule
+	end
+
+	Module126.descriptor = {
+		name = "LaunchExperienceAction_Params",
+		fullName = "roblox.apppageplatform.shared.v1beta1.Params"
+	}
+	t.LaunchExperienceAction_Params = Module126
+	TypeRegistryModule.default:register(t.LaunchExperienceAction_Params)
+	local Module127 = {}
+	Module127.__index = Module127
+
+	function Module127.new(p1)
+		-- upvalues: t (copy), Module127 (copy)
+		return (setmetatable({
+			action_type = if p1 == nil or p1.action_type == nil then assert(t.ActionType.fromNumber(0), "Enum has no 0 default") else p1.action_type,
+			action_params = if p1 == nil or p1.action_params == nil then nil else p1.action_params
+		}, Module127))
+	end
+
+	function Module127:encode()
+		-- upvalues: t (copy), ProtoModule (copy)
+		local Buf = buffer.create(0)
+		local Count = 0
+		
+		if self.action_type ~= nil and (self.action_type ~= nil and self.action_type ~= 0 or self.action_type ~= t.ActionType.fromNumber(0)) then
+			local WriteTagResult, WriteTagResult2 = ProtoModule.writeTag(Buf, Count, 1, ProtoModule.wireTypes.varint)
+			Buf, Count = ProtoModule.writeVarInt(WriteTagResult, WriteTagResult2, t.ActionType.toNumber(self.action_type))
+		end
+		if self.action_params ~= nil then
+			local EncodeResult = self.action_params:encode()
+			local WriteTagResult1, WriteTagResult2_1 = ProtoModule.writeTag(Buf, Count, 2, ProtoModule.wireTypes.lengthDelimited)
+			Buf, Count = ProtoModule.writeBuffer(WriteTagResult1, WriteTagResult2_1, EncodeResult, buffer.len(EncodeResult))
+		end
+		local Buf1 = buffer.create(Count)
+		buffer.copy(Buf1, 0, Buf, 0, Count)
+		
+		return Buf1
+	end
+
+	function Module127.decode(Buf)
+		-- upvalues: Module127 (copy), ProtoModule (copy), t (copy)
+		local NewModule = Module127.new()
+		local v86 = 0
+		while v86 < buffer.len(Buf) do
+			local Tag, Tag2
+			Tag, Tag2, v3024 = ProtoModule.readTag(Buf, v86)
+			
+			if Tag2 == ProtoModule.wireTypes.varint then
+				if Tag == 1 then
+					local VarIntI32
+					VarIntI32, v3024 = ProtoModule.readVarIntI32(Buf, v86)
+					NewModule.action_type = t.ActionType.fromNumber(VarIntI32) or VarIntI32
+				else
+					local _
+					_, v3024 = ProtoModule.readVarInt(Buf, v86)
+				end
+			elseif Tag2 == ProtoModule.wireTypes.lengthDelimited then
+				if Tag == 2 then
+					local Buffer1
+					Buffer1, v3024 = ProtoModule.readBuffer(Buf, v86)
+					NewModule.action_params = t.ToggleExperienceFavoriteAction_Params.decode(Buffer1)
+				else
+					local VarInt, VarInt2 = ProtoModule.readVarInt(Buf, v86)
+					v86 = VarInt2 + VarInt
+				end
+			elseif Tag2 == ProtoModule.wireTypes.i32 then
+				local _
+				_, v3024 = ProtoModule.readFixed32(Buf, v86)
+			elseif Tag2 == ProtoModule.wireTypes.i64 then
+				local _
+				_, v3024 = ProtoModule.readFixed64(Buf, v86)
+			else
+				error("Unsupported wire type: " .. Tag2)
+			end
+		end
+		return NewModule
+	end
+
+	function Module127:jsonEncode()
+		-- upvalues: t (copy)
+		local t1 = {}
+		
+		if self.action_type ~= nil and (self.action_type ~= nil and self.action_type ~= 0 or self.action_type ~= t.ActionType.fromNumber(0)) then
+			t1.actionType = if typeof(self.action_type) == "number" then self.action_type else t.ActionType.toNumber(self.action_type)
+		end
+		if self.action_params ~= nil then
+			t1.actionParams = self.action_params:jsonEncode()
+		end
+		return t1
+	end
+
+	function Module127:jsonDecode()
+		-- upvalues: Module127 (copy), t (copy)
+		local NewModule = Module127.new()
+		
+		if self.action_type ~= nil then
+			NewModule.action_type = (if typeof(self.action_type) == "number" then t.ActionType.fromNumber(self.action_type) else t.ActionType.fromName(self.action_type)) or self.action_type
+		end
+		if self.actionType ~= nil then
+			NewModule.action_type = (if typeof(self.actionType) == "number" then t.ActionType.fromNumber(self.actionType) else t.ActionType.fromName(self.actionType)) or self.actionType
+		end
+		if self.action_params ~= nil then
+			NewModule.action_params = t.ToggleExperienceFavoriteAction_Params.jsonDecode(self.action_params)
+		end
+		if self.actionParams ~= nil then
+			NewModule.action_params = t.ToggleExperienceFavoriteAction_Params.jsonDecode(self.actionParams)
+		end
+		return NewModule
+	end
+
+	Module127.descriptor = {
+		name = "ToggleExperienceFavoriteAction",
+		fullName = "roblox.apppageplatform.shared.v1beta1.ToggleExperienceFavoriteAction"
+	}
+	t.ToggleExperienceFavoriteAction = Module127
+	TypeRegistryModule.default:register(t.ToggleExperienceFavoriteAction)
+	local Module128 = {}
+	Module128.__index = Module128
+
+	function Module128.new(p1)
+		-- upvalues: Module128 (copy)
+		return (setmetatable({
+			universe_id = if p1 == nil or p1.universe_id == nil then nil else p1.universe_id,
+			place_id = if p1 == nil or p1.place_id == nil then nil else p1.place_id,
+			ctx = if p1 == nil or p1.ctx == nil then nil else p1.ctx
+		}, Module128))
+	end
+
+	function Module128:encode()
+		-- upvalues: ProtoModule (copy)
+		local Buf = buffer.create(0)
+		local Count = 0
+		
+		if self.universe_id ~= nil then
+			local EncodeResult = self.universe_id:encode()
+			local WriteTagResult, WriteTagResult2 = ProtoModule.writeTag(Buf, Count, 1, ProtoModule.wireTypes.lengthDelimited)
+			Buf, Count = ProtoModule.writeBuffer(WriteTagResult, WriteTagResult2, EncodeResult, buffer.len(EncodeResult))
+		end
+		if self.place_id ~= nil then
+			local EncodeResult = self.place_id:encode()
+			local WriteTagResult1, WriteTagResult2_1 = ProtoModule.writeTag(Buf, Count, 2, ProtoModule.wireTypes.lengthDelimited)
+			Buf, Count = ProtoModule.writeBuffer(WriteTagResult1, WriteTagResult2_1, EncodeResult, buffer.len(EncodeResult))
+		end
+		if self.ctx ~= nil then
+			local EncodeResult = self.ctx:encode()
+			local WriteTagResult3, WriteTagResult2_2 = ProtoModule.writeTag(Buf, Count, 3, ProtoModule.wireTypes.lengthDelimited)
+			Buf, Count = ProtoModule.writeBuffer(WriteTagResult3, WriteTagResult2_2, EncodeResult, buffer.len(EncodeResult))
+		end
+		local Buf1 = buffer.create(Count)
+		buffer.copy(Buf1, 0, Buf, 0, Count)
+		
+		return Buf1
+	end
+
+	function Module128.decode(Buf)
+		-- upvalues: Module128 (copy), ProtoModule (copy), PropTypesModule (copy)
+		local NewModule = Module128.new()
+		local v87 = 0
+		while v87 < buffer.len(Buf) do
+			local Tag, Tag2
+			Tag, Tag2, v3048 = ProtoModule.readTag(Buf, v87)
+			
+			if Tag2 == ProtoModule.wireTypes.varint then
+				local _
+				_, v3048 = ProtoModule.readVarInt(Buf, v87)
+			elseif Tag2 == ProtoModule.wireTypes.lengthDelimited then
+				if Tag == 1 then
+					local Buffer1
+					Buffer1, v3048 = ProtoModule.readBuffer(Buf, v87)
+					NewModule.universe_id = PropTypesModule.StringProp.decode(Buffer1)
+				elseif Tag == 2 then
+					local Buffer2
+					Buffer2, v3048 = ProtoModule.readBuffer(Buf, v87)
+					NewModule.place_id = PropTypesModule.StringProp.decode(Buffer2)
+				elseif Tag == 3 then
+					local Buffer3
+					Buffer3, v3048 = ProtoModule.readBuffer(Buf, v87)
+					NewModule.ctx = PropTypesModule.StringProp.decode(Buffer3)
+				else
+					local VarInt, VarInt2 = ProtoModule.readVarInt(Buf, v87)
+					v87 = VarInt2 + VarInt
+				end
+			elseif Tag2 == ProtoModule.wireTypes.i32 then
+				local _
+				_, v3048 = ProtoModule.readFixed32(Buf, v87)
+			elseif Tag2 == ProtoModule.wireTypes.i64 then
+				local _
+				_, v3048 = ProtoModule.readFixed64(Buf, v87)
+			else
+				error("Unsupported wire type: " .. Tag2)
+			end
+		end
+		return NewModule
+	end
+
+	function Module128:jsonEncode()
+		local t = {}
+		
+		if self.universe_id ~= nil then
+			t.universeId = self.universe_id:jsonEncode()
+		end
+		if self.place_id ~= nil then
+			t.placeId = self.place_id:jsonEncode()
+		end
+		if self.ctx ~= nil then
+			t.ctx = self.ctx:jsonEncode()
+		end
+		return t
+	end
+
+	function Module128:jsonDecode()
+		-- upvalues: Module128 (copy), PropTypesModule (copy)
+		local NewModule = Module128.new()
+		
+		if self.universe_id ~= nil then
+			NewModule.universe_id = PropTypesModule.StringProp.jsonDecode(self.universe_id)
+		end
+		if self.universeId ~= nil then
+			NewModule.universe_id = PropTypesModule.StringProp.jsonDecode(self.universeId)
+		end
+		if self.place_id ~= nil then
+			NewModule.place_id = PropTypesModule.StringProp.jsonDecode(self.place_id)
+		end
+		if self.placeId ~= nil then
+			NewModule.place_id = PropTypesModule.StringProp.jsonDecode(self.placeId)
+		end
+		if self.ctx ~= nil then
+			NewModule.ctx = PropTypesModule.StringProp.jsonDecode(self.ctx)
+		end
+		return NewModule
+	end
+
+	Module128.descriptor = {
+		name = "ToggleExperienceFavoriteAction_Params",
+		fullName = "roblox.apppageplatform.shared.v1beta1.Params"
+	}
+	t.ToggleExperienceFavoriteAction_Params = Module128
+end
+do
+	TypeRegistryModule.default:register(t.ToggleExperienceFavoriteAction_Params)
+	local Module129 = {}
+	Module129.__index = Module129
+
+	function Module129.new(p1)
+		-- upvalues: t (copy), Module129 (copy)
+		return (setmetatable({
+			action_type = if p1 == nil or p1.action_type == nil then assert(t.ActionType.fromNumber(0), "Enum has no 0 default") else p1.action_type,
+			action_params = if p1 == nil or p1.action_params == nil then nil else p1.action_params
+		}, Module129))
+	end
+
+	function Module129:encode()
+		-- upvalues: t (copy), ProtoModule (copy)
+		local Buf = buffer.create(0)
+		local Count = 0
+		
+		if self.action_type ~= nil and (self.action_type ~= nil and self.action_type ~= 0 or self.action_type ~= t.ActionType.fromNumber(0)) then
+			local WriteTagResult, WriteTagResult2 = ProtoModule.writeTag(Buf, Count, 1, ProtoModule.wireTypes.varint)
+			Buf, Count = ProtoModule.writeVarInt(WriteTagResult, WriteTagResult2, t.ActionType.toNumber(self.action_type))
+		end
+		if self.action_params ~= nil then
+			local EncodeResult = self.action_params:encode()
+			local WriteTagResult1, WriteTagResult2_1 = ProtoModule.writeTag(Buf, Count, 2, ProtoModule.wireTypes.lengthDelimited)
+			Buf, Count = ProtoModule.writeBuffer(WriteTagResult1, WriteTagResult2_1, EncodeResult, buffer.len(EncodeResult))
+		end
+		local Buf1 = buffer.create(Count)
+		buffer.copy(Buf1, 0, Buf, 0, Count)
+		
+		return Buf1
+	end
+
+	function Module129.decode(Buf)
+		-- upvalues: Module129 (copy), ProtoModule (copy), t (copy)
+		local NewModule = Module129.new()
+		local v87 = 0
+		while v87 < buffer.len(Buf) do
+			local Tag, Tag2
+			Tag, Tag2, v3069 = ProtoModule.readTag(Buf, v87)
+			
+			if Tag2 == ProtoModule.wireTypes.varint then
+				if Tag == 1 then
+					local VarIntI32
+					VarIntI32, v3069 = ProtoModule.readVarIntI32(Buf, v87)
+					NewModule.action_type = t.ActionType.fromNumber(VarIntI32) or VarIntI32
+				else
+					local _
+					_, v3069 = ProtoModule.readVarInt(Buf, v87)
+				end
+			elseif Tag2 == ProtoModule.wireTypes.lengthDelimited then
+				if Tag == 2 then
+					local Buffer1
+					Buffer1, v3069 = ProtoModule.readBuffer(Buf, v87)
+					NewModule.action_params = t.ToggleExperienceFollowAction_Params.decode(Buffer1)
+				else
+					local VarInt, VarInt2 = ProtoModule.readVarInt(Buf, v87)
+					v87 = VarInt2 + VarInt
+				end
+			elseif Tag2 == ProtoModule.wireTypes.i32 then
+				local _
+				_, v3069 = ProtoModule.readFixed32(Buf, v87)
+			elseif Tag2 == ProtoModule.wireTypes.i64 then
+				local _
+				_, v3069 = ProtoModule.readFixed64(Buf, v87)
+			else
+				error("Unsupported wire type: " .. Tag2)
+			end
+		end
+		return NewModule
+	end
+
+	function Module129:jsonEncode()
+		-- upvalues: t (copy)
+		local t1 = {}
+		
+		if self.action_type ~= nil and (self.action_type ~= nil and self.action_type ~= 0 or self.action_type ~= t.ActionType.fromNumber(0)) then
+			t1.actionType = if typeof(self.action_type) == "number" then self.action_type else t.ActionType.toNumber(self.action_type)
+		end
+		if self.action_params ~= nil then
+			t1.actionParams = self.action_params:jsonEncode()
+		end
+		return t1
+	end
+
+	function Module129:jsonDecode()
+		-- upvalues: Module129 (copy), t (copy)
+		local NewModule = Module129.new()
+		
+		if self.action_type ~= nil then
+			NewModule.action_type = (if typeof(self.action_type) == "number" then t.ActionType.fromNumber(self.action_type) else t.ActionType.fromName(self.action_type)) or self.action_type
+		end
+		if self.actionType ~= nil then
+			NewModule.action_type = (if typeof(self.actionType) == "number" then t.ActionType.fromNumber(self.actionType) else t.ActionType.fromName(self.actionType)) or self.actionType
+		end
+		if self.action_params ~= nil then
+			NewModule.action_params = t.ToggleExperienceFollowAction_Params.jsonDecode(self.action_params)
+		end
+		if self.actionParams ~= nil then
+			NewModule.action_params = t.ToggleExperienceFollowAction_Params.jsonDecode(self.actionParams)
+		end
+		return NewModule
+	end
+
+	Module129.descriptor = {
+		name = "ToggleExperienceFollowAction",
+		fullName = "roblox.apppageplatform.shared.v1beta1.ToggleExperienceFollowAction"
+	}
+	t.ToggleExperienceFollowAction = Module129
+	TypeRegistryModule.default:register(t.ToggleExperienceFollowAction)
+	local Module130 = {}
+	Module130.__index = Module130
+
+	function Module130.new(p1)
+		-- upvalues: Module130 (copy)
+		return (setmetatable({
+			universe_id = if p1 == nil or p1.universe_id == nil then nil else p1.universe_id,
+			game_name = if p1 == nil or p1.game_name == nil then nil else p1.game_name,
+			ctx = if p1 == nil or p1.ctx == nil then nil else p1.ctx
+		}, Module130))
+	end
+
+	function Module130:encode()
+		-- upvalues: ProtoModule (copy)
+		local Buf = buffer.create(0)
+		local Count = 0
+		
+		if self.universe_id ~= nil then
+			local EncodeResult = self.universe_id:encode()
+			local WriteTagResult, WriteTagResult2 = ProtoModule.writeTag(Buf, Count, 1, ProtoModule.wireTypes.lengthDelimited)
+			Buf, Count = ProtoModule.writeBuffer(WriteTagResult, WriteTagResult2, EncodeResult, buffer.len(EncodeResult))
+		end
+		if self.game_name ~= nil then
+			local EncodeResult = self.game_name:encode()
+			local WriteTagResult1, WriteTagResult2_1 = ProtoModule.writeTag(Buf, Count, 2, ProtoModule.wireTypes.lengthDelimited)
+			Buf, Count = ProtoModule.writeBuffer(WriteTagResult1, WriteTagResult2_1, EncodeResult, buffer.len(EncodeResult))
+		end
+		if self.ctx ~= nil then
+			local EncodeResult = self.ctx:encode()
+			local WriteTagResult3, WriteTagResult2_2 = ProtoModule.writeTag(Buf, Count, 3, ProtoModule.wireTypes.lengthDelimited)
+			Buf, Count = ProtoModule.writeBuffer(WriteTagResult3, WriteTagResult2_2, EncodeResult, buffer.len(EncodeResult))
+		end
+		local Buf1 = buffer.create(Count)
+		buffer.copy(Buf1, 0, Buf, 0, Count)
+		
+		return Buf1
+	end
+
+	function Module130.decode(Buf)
+		-- upvalues: Module130 (copy), ProtoModule (copy), PropTypesModule (copy)
+		local NewModule = Module130.new()
+		local v88 = 0
+		while v88 < buffer.len(Buf) do
+			local Tag, Tag2
+			Tag, Tag2, v3093 = ProtoModule.readTag(Buf, v88)
+			
+			if Tag2 == ProtoModule.wireTypes.varint then
+				local _
+				_, v3093 = ProtoModule.readVarInt(Buf, v88)
+			elseif Tag2 == ProtoModule.wireTypes.lengthDelimited then
+				if Tag == 1 then
+					local Buffer1
+					Buffer1, v3093 = ProtoModule.readBuffer(Buf, v88)
+					NewModule.universe_id = PropTypesModule.StringProp.decode(Buffer1)
+				elseif Tag == 2 then
+					local Buffer2
+					Buffer2, v3093 = ProtoModule.readBuffer(Buf, v88)
+					NewModule.game_name = PropTypesModule.StringProp.decode(Buffer2)
+				elseif Tag == 3 then
+					local Buffer3
+					Buffer3, v3093 = ProtoModule.readBuffer(Buf, v88)
+					NewModule.ctx = PropTypesModule.StringProp.decode(Buffer3)
+				else
+					local VarInt, VarInt2 = ProtoModule.readVarInt(Buf, v88)
+					v88 = VarInt2 + VarInt
+				end
+			elseif Tag2 == ProtoModule.wireTypes.i32 then
+				local _
+				_, v3093 = ProtoModule.readFixed32(Buf, v88)
+			elseif Tag2 == ProtoModule.wireTypes.i64 then
+				local _
+				_, v3093 = ProtoModule.readFixed64(Buf, v88)
+			else
+				error("Unsupported wire type: " .. Tag2)
+			end
+		end
+		return NewModule
+	end
+
+	function Module130:jsonEncode()
+		local t = {}
+		
+		if self.universe_id ~= nil then
+			t.universeId = self.universe_id:jsonEncode()
+		end
+		if self.game_name ~= nil then
+			t.gameName = self.game_name:jsonEncode()
+		end
+		if self.ctx ~= nil then
+			t.ctx = self.ctx:jsonEncode()
+		end
+		return t
+	end
+
+	function Module130:jsonDecode()
+		-- upvalues: Module130 (copy), PropTypesModule (copy)
+		local NewModule = Module130.new()
+		
+		if self.universe_id ~= nil then
+			NewModule.universe_id = PropTypesModule.StringProp.jsonDecode(self.universe_id)
+		end
+		if self.universeId ~= nil then
+			NewModule.universe_id = PropTypesModule.StringProp.jsonDecode(self.universeId)
+		end
+		if self.game_name ~= nil then
+			NewModule.game_name = PropTypesModule.StringProp.jsonDecode(self.game_name)
+		end
+		if self.gameName ~= nil then
+			NewModule.game_name = PropTypesModule.StringProp.jsonDecode(self.gameName)
+		end
+		if self.ctx ~= nil then
+			NewModule.ctx = PropTypesModule.StringProp.jsonDecode(self.ctx)
+		end
+		return NewModule
+	end
+
+	Module130.descriptor = {
+		name = "ToggleExperienceFollowAction_Params",
+		fullName = "roblox.apppageplatform.shared.v1beta1.Params"
+	}
+	t.ToggleExperienceFollowAction_Params = Module130
+	TypeRegistryModule.default:register(t.ToggleExperienceFollowAction_Params)
+	local Module131 = {}
+	Module131.__index = Module131
+
+	function Module131.new(p1)
+		-- upvalues: t (copy), Module131 (copy)
+		return (setmetatable({
+			action_type = if p1 == nil or p1.action_type == nil then assert(t.ActionType.fromNumber(0), "Enum has no 0 default") else p1.action_type,
+			action_params = if p1 == nil or p1.action_params == nil then nil else p1.action_params
+		}, Module131))
+	end
+
+	function Module131:encode()
+		-- upvalues: t (copy), ProtoModule (copy)
+		local Buf = buffer.create(0)
+		local Count = 0
+		
+		if self.action_type ~= nil and (self.action_type ~= nil and self.action_type ~= 0 or self.action_type ~= t.ActionType.fromNumber(0)) then
+			local WriteTagResult, WriteTagResult2 = ProtoModule.writeTag(Buf, Count, 1, ProtoModule.wireTypes.varint)
+			Buf, Count = ProtoModule.writeVarInt(WriteTagResult, WriteTagResult2, t.ActionType.toNumber(self.action_type))
+		end
+		if self.action_params ~= nil then
+			local EncodeResult = self.action_params:encode()
+			local WriteTagResult1, WriteTagResult2_1 = ProtoModule.writeTag(Buf, Count, 2, ProtoModule.wireTypes.lengthDelimited)
+			Buf, Count = ProtoModule.writeBuffer(WriteTagResult1, WriteTagResult2_1, EncodeResult, buffer.len(EncodeResult))
+		end
+		local Buf1 = buffer.create(Count)
+		buffer.copy(Buf1, 0, Buf, 0, Count)
+		
+		return Buf1
+	end
+
+	function Module131.decode(Buf)
+		-- upvalues: Module131 (copy), ProtoModule (copy), t (copy)
+		local NewModule = Module131.new()
+		local v89 = 0
+		while v89 < buffer.len(Buf) do
+			local Tag, Tag2
+			Tag, Tag2, v3114 = ProtoModule.readTag(Buf, v89)
+			
+			if Tag2 == ProtoModule.wireTypes.varint then
+				if Tag == 1 then
+					local VarIntI32
+					VarIntI32, v3114 = ProtoModule.readVarIntI32(Buf, v89)
+					NewModule.action_type = t.ActionType.fromNumber(VarIntI32) or VarIntI32
+				else
+					local _
+					_, v3114 = ProtoModule.readVarInt(Buf, v89)
+				end
+			elseif Tag2 == ProtoModule.wireTypes.lengthDelimited then
+				if Tag == 2 then
+					local Buffer1
+					Buffer1, v3114 = ProtoModule.readBuffer(Buf, v89)
+					NewModule.action_params = t.ToggleExperienceVoteAction_Params.decode(Buffer1)
+				else
+					local VarInt, VarInt2 = ProtoModule.readVarInt(Buf, v89)
+					v89 = VarInt2 + VarInt
+				end
+			elseif Tag2 == ProtoModule.wireTypes.i32 then
+				local _
+				_, v3114 = ProtoModule.readFixed32(Buf, v89)
+			elseif Tag2 == ProtoModule.wireTypes.i64 then
+				local _
+				_, v3114 = ProtoModule.readFixed64(Buf, v89)
+			else
+				error("Unsupported wire type: " .. Tag2)
+			end
+		end
+		return NewModule
+	end
+
+	function Module131:jsonEncode()
+		-- upvalues: t (copy)
+		local t1 = {}
+		
+		if self.action_type ~= nil and (self.action_type ~= nil and self.action_type ~= 0 or self.action_type ~= t.ActionType.fromNumber(0)) then
+			t1.actionType = if typeof(self.action_type) == "number" then self.action_type else t.ActionType.toNumber(self.action_type)
+		end
+		if self.action_params ~= nil then
+			t1.actionParams = self.action_params:jsonEncode()
+		end
+		return t1
+	end
+
+	function Module131:jsonDecode()
+		-- upvalues: Module131 (copy), t (copy)
+		local NewModule = Module131.new()
+		
+		if self.action_type ~= nil then
+			NewModule.action_type = (if typeof(self.action_type) == "number" then t.ActionType.fromNumber(self.action_type) else t.ActionType.fromName(self.action_type)) or self.action_type
+		end
+		if self.actionType ~= nil then
+			NewModule.action_type = (if typeof(self.actionType) == "number" then t.ActionType.fromNumber(self.actionType) else t.ActionType.fromName(self.actionType)) or self.actionType
+		end
+		if self.action_params ~= nil then
+			NewModule.action_params = t.ToggleExperienceVoteAction_Params.jsonDecode(self.action_params)
+		end
+		if self.actionParams ~= nil then
+			NewModule.action_params = t.ToggleExperienceVoteAction_Params.jsonDecode(self.actionParams)
+		end
+		return NewModule
+	end
+
+	Module131.descriptor = {
+		name = "ToggleExperienceVoteAction",
+		fullName = "roblox.apppageplatform.shared.v1beta1.ToggleExperienceVoteAction"
+	}
+	t.ToggleExperienceVoteAction = Module131
+end
+do
+	TypeRegistryModule.default:register(t.ToggleExperienceVoteAction)
+	local Module132 = {}
+	Module132.__index = Module132
+
+	function Module132.new(p1)
+		-- upvalues: Module132 (copy)
+		return (setmetatable({
+			universe_id = if p1 == nil or p1.universe_id == nil then nil else p1.universe_id,
+			vote_direction = if p1 == nil or p1.vote_direction == nil then nil else p1.vote_direction,
+			place_id = if p1 == nil or p1.place_id == nil then nil else p1.place_id,
+			ctx = if p1 == nil or p1.ctx == nil then nil else p1.ctx
+		}, Module132))
+	end
+
+	function Module132:encode()
+		-- upvalues: ProtoModule (copy)
+		local Buf = buffer.create(0)
+		local Count = 0
+		
+		if self.universe_id ~= nil then
+			local EncodeResult = self.universe_id:encode()
+			local WriteTagResult, WriteTagResult2 = ProtoModule.writeTag(Buf, Count, 1, ProtoModule.wireTypes.lengthDelimited)
+			Buf, Count = ProtoModule.writeBuffer(WriteTagResult, WriteTagResult2, EncodeResult, buffer.len(EncodeResult))
+		end
+		if self.vote_direction ~= nil then
+			local EncodeResult = self.vote_direction:encode()
+			local WriteTagResult1, WriteTagResult2_1 = ProtoModule.writeTag(Buf, Count, 2, ProtoModule.wireTypes.lengthDelimited)
+			Buf, Count = ProtoModule.writeBuffer(WriteTagResult1, WriteTagResult2_1, EncodeResult, buffer.len(EncodeResult))
+		end
+		if self.place_id ~= nil then
+			local EncodeResult = self.place_id:encode()
+			local WriteTagResult3, WriteTagResult2_2 = ProtoModule.writeTag(Buf, Count, 3, ProtoModule.wireTypes.lengthDelimited)
+			Buf, Count = ProtoModule.writeBuffer(WriteTagResult3, WriteTagResult2_2, EncodeResult, buffer.len(EncodeResult))
+		end
+		if self.ctx ~= nil then
+			local EncodeResult = self.ctx:encode()
+			local WriteTagResult4, WriteTagResult2_3 = ProtoModule.writeTag(Buf, Count, 4, ProtoModule.wireTypes.lengthDelimited)
+			Buf, Count = ProtoModule.writeBuffer(WriteTagResult4, WriteTagResult2_3, EncodeResult, buffer.len(EncodeResult))
+		end
+		local Buf1 = buffer.create(Count)
+		buffer.copy(Buf1, 0, Buf, 0, Count)
+		
+		return Buf1
+	end
+
+	function Module132.decode(Buf)
+		-- upvalues: Module132 (copy), ProtoModule (copy), PropTypesModule (copy)
+		local NewModule = Module132.new()
+		local v89 = 0
+		while v89 < buffer.len(Buf) do
+			local Tag, Tag2
+			Tag, Tag2, v3141 = ProtoModule.readTag(Buf, v89)
+			
+			if Tag2 == ProtoModule.wireTypes.varint then
+				local _
+				_, v3141 = ProtoModule.readVarInt(Buf, v89)
+			elseif Tag2 == ProtoModule.wireTypes.lengthDelimited then
+				if Tag == 1 then
+					local Buffer1
+					Buffer1, v3141 = ProtoModule.readBuffer(Buf, v89)
+					NewModule.universe_id = PropTypesModule.StringProp.decode(Buffer1)
+				elseif Tag == 2 then
+					local Buffer2
+					Buffer2, v3141 = ProtoModule.readBuffer(Buf, v89)
+					NewModule.vote_direction = PropTypesModule.BoolProp.decode(Buffer2)
+				elseif Tag == 3 then
+					local Buffer3
+					Buffer3, v3141 = ProtoModule.readBuffer(Buf, v89)
+					NewModule.place_id = PropTypesModule.StringProp.decode(Buffer3)
+				elseif Tag == 4 then
+					local Buffer4
+					Buffer4, v3141 = ProtoModule.readBuffer(Buf, v89)
+					NewModule.ctx = PropTypesModule.StringProp.decode(Buffer4)
+				else
+					local VarInt, VarInt2 = ProtoModule.readVarInt(Buf, v89)
+					v89 = VarInt2 + VarInt
+				end
+			elseif Tag2 == ProtoModule.wireTypes.i32 then
+				local _
+				_, v3141 = ProtoModule.readFixed32(Buf, v89)
+			elseif Tag2 == ProtoModule.wireTypes.i64 then
+				local _
+				_, v3141 = ProtoModule.readFixed64(Buf, v89)
+			else
+				error("Unsupported wire type: " .. Tag2)
+			end
+		end
+		return NewModule
+	end
+
+	function Module132:jsonEncode()
+		local t = {}
+		
+		if self.universe_id ~= nil then
+			t.universeId = self.universe_id:jsonEncode()
+		end
+		if self.vote_direction ~= nil then
+			t.voteDirection = self.vote_direction:jsonEncode()
+		end
+		if self.place_id ~= nil then
+			t.placeId = self.place_id:jsonEncode()
+		end
+		if self.ctx ~= nil then
+			t.ctx = self.ctx:jsonEncode()
+		end
+		return t
+	end
+
+	function Module132:jsonDecode()
+		-- upvalues: Module132 (copy), PropTypesModule (copy)
+		local NewModule = Module132.new()
+		
+		if self.universe_id ~= nil then
+			NewModule.universe_id = PropTypesModule.StringProp.jsonDecode(self.universe_id)
+		end
+		if self.universeId ~= nil then
+			NewModule.universe_id = PropTypesModule.StringProp.jsonDecode(self.universeId)
+		end
+		if self.vote_direction ~= nil then
+			NewModule.vote_direction = PropTypesModule.BoolProp.jsonDecode(self.vote_direction)
+		end
+		if self.voteDirection ~= nil then
+			NewModule.vote_direction = PropTypesModule.BoolProp.jsonDecode(self.voteDirection)
+		end
+		if self.place_id ~= nil then
+			NewModule.place_id = PropTypesModule.StringProp.jsonDecode(self.place_id)
+		end
+		if self.placeId ~= nil then
+			NewModule.place_id = PropTypesModule.StringProp.jsonDecode(self.placeId)
+		end
+		if self.ctx ~= nil then
+			NewModule.ctx = PropTypesModule.StringProp.jsonDecode(self.ctx)
+		end
+		return NewModule
+	end
+
+	Module132.descriptor = {
+		name = "ToggleExperienceVoteAction_Params",
+		fullName = "roblox.apppageplatform.shared.v1beta1.Params"
+	}
+	t.ToggleExperienceVoteAction_Params = Module132
+	TypeRegistryModule.default:register(t.ToggleExperienceVoteAction_Params)
+	local Module133 = {}
+	Module133.__index = Module133
+
+	function Module133.new(p1)
+		-- upvalues: t (copy), Module133 (copy)
+		return (setmetatable({
+			action_type = if p1 == nil or p1.action_type == nil then assert(t.ActionType.fromNumber(0), "Enum has no 0 default") else p1.action_type,
+			action_params = if p1 == nil or p1.action_params == nil then nil else p1.action_params
+		}, Module133))
+	end
+
+	function Module133:encode()
+		-- upvalues: t (copy), ProtoModule (copy)
+		local Buf = buffer.create(0)
+		local Count = 0
+		
+		if self.action_type ~= nil and (self.action_type ~= nil and self.action_type ~= 0 or self.action_type ~= t.ActionType.fromNumber(0)) then
+			local WriteTagResult, WriteTagResult2 = ProtoModule.writeTag(Buf, Count, 1, ProtoModule.wireTypes.varint)
+			Buf, Count = ProtoModule.writeVarInt(WriteTagResult, WriteTagResult2, t.ActionType.toNumber(self.action_type))
+		end
+		if self.action_params ~= nil then
+			local EncodeResult = self.action_params:encode()
+			local WriteTagResult1, WriteTagResult2_1 = ProtoModule.writeTag(Buf, Count, 2, ProtoModule.wireTypes.lengthDelimited)
+			Buf, Count = ProtoModule.writeBuffer(WriteTagResult1, WriteTagResult2_1, EncodeResult, buffer.len(EncodeResult))
+		end
+		local Buf1 = buffer.create(Count)
+		buffer.copy(Buf1, 0, Buf, 0, Count)
+		
+		return Buf1
+	end
+
+	function Module133.decode(Buf)
+		-- upvalues: Module133 (copy), ProtoModule (copy), t (copy)
+		local NewModule = Module133.new()
+		local v90 = 0
+		while v90 < buffer.len(Buf) do
+			local Tag, Tag2
+			Tag, Tag2, v3163 = ProtoModule.readTag(Buf, v90)
+			
+			if Tag2 == ProtoModule.wireTypes.varint then
+				if Tag == 1 then
+					local VarIntI32
+					VarIntI32, v3163 = ProtoModule.readVarIntI32(Buf, v90)
+					NewModule.action_type = t.ActionType.fromNumber(VarIntI32) or VarIntI32
+				else
+					local _
+					_, v3163 = ProtoModule.readVarInt(Buf, v90)
+				end
+			elseif Tag2 == ProtoModule.wireTypes.lengthDelimited then
+				if Tag == 2 then
+					local Buffer1
+					Buffer1, v3163 = ProtoModule.readBuffer(Buf, v90)
+					NewModule.action_params = t.OpenPurchasePromptAction_Params.decode(Buffer1)
+				else
+					local VarInt, VarInt2 = ProtoModule.readVarInt(Buf, v90)
+					v90 = VarInt2 + VarInt
+				end
+			elseif Tag2 == ProtoModule.wireTypes.i32 then
+				local _
+				_, v3163 = ProtoModule.readFixed32(Buf, v90)
+			elseif Tag2 == ProtoModule.wireTypes.i64 then
+				local _
+				_, v3163 = ProtoModule.readFixed64(Buf, v90)
+			else
+				error("Unsupported wire type: " .. Tag2)
+			end
+		end
+		return NewModule
+	end
+
+	function Module133:jsonEncode()
+		-- upvalues: t (copy)
+		local t1 = {}
+		
+		if self.action_type ~= nil and (self.action_type ~= nil and self.action_type ~= 0 or self.action_type ~= t.ActionType.fromNumber(0)) then
+			t1.actionType = if typeof(self.action_type) == "number" then self.action_type else t.ActionType.toNumber(self.action_type)
+		end
+		if self.action_params ~= nil then
+			t1.actionParams = self.action_params:jsonEncode()
+		end
+		return t1
+	end
+
+	function Module133:jsonDecode()
+		-- upvalues: Module133 (copy), t (copy)
+		local NewModule = Module133.new()
+		
+		if self.action_type ~= nil then
+			NewModule.action_type = (if typeof(self.action_type) == "number" then t.ActionType.fromNumber(self.action_type) else t.ActionType.fromName(self.action_type)) or self.action_type
+		end
+		if self.actionType ~= nil then
+			NewModule.action_type = (if typeof(self.actionType) == "number" then t.ActionType.fromNumber(self.actionType) else t.ActionType.fromName(self.actionType)) or self.actionType
+		end
+		if self.action_params ~= nil then
+			NewModule.action_params = t.OpenPurchasePromptAction_Params.jsonDecode(self.action_params)
+		end
+		if self.actionParams ~= nil then
+			NewModule.action_params = t.OpenPurchasePromptAction_Params.jsonDecode(self.actionParams)
+		end
+		return NewModule
+	end
+
+	Module133.descriptor = {
+		name = "OpenPurchasePromptAction",
+		fullName = "roblox.apppageplatform.shared.v1beta1.OpenPurchasePromptAction"
+	}
+	t.OpenPurchasePromptAction = Module133
+	TypeRegistryModule.default:register(t.OpenPurchasePromptAction)
+	local Module134 = {}
+	Module134.__index = Module134
+
+	function Module134.new(p1)
+		-- upvalues: Module134 (copy)
+		return (setmetatable({
+			kind = if p1 == nil or p1.kind == nil then nil else p1.kind
+		}, Module134))
+	end
+
+	function Module134:encode()
+		-- upvalues: ProtoModule (copy)
+		local Buf = buffer.create(0)
+		local Count = 0
+		
+		if self.kind ~= nil then
+			if self.kind.type == "literal" then
+				local EncodeResult = self.kind.value:encode()
+				local WriteTagResult, WriteTagResult2 = ProtoModule.writeTag(Buf, Count, 1, ProtoModule.wireTypes.lengthDelimited)
+				Buf, Count = ProtoModule.writeBuffer(WriteTagResult, WriteTagResult2, EncodeResult, buffer.len(EncodeResult))
+			elseif self.kind.type == "binding_path" then
+				local WriteTagResult1, WriteTagResult2_1 = ProtoModule.writeTag(Buf, Count, 2, ProtoModule.wireTypes.lengthDelimited)
+				Buf, Count = ProtoModule.writeString(WriteTagResult1, WriteTagResult2_1, self.kind.value)
+			end
+		end
+		local Buf1 = buffer.create(Count)
+		buffer.copy(Buf1, 0, Buf, 0, Count)
+		
+		return Buf1
+	end
+
+	function Module134.decode(Buf)
+		-- upvalues: Module134 (copy), ProtoModule (copy), t (copy)
+		local NewModule = Module134.new()
+		local v91 = 0
+		while v91 < buffer.len(Buf) do
+			local Tag, Tag2
+			Tag, Tag2, v3183 = ProtoModule.readTag(Buf, v91)
+			
+			if Tag2 == ProtoModule.wireTypes.varint then
+				local _
+				_, v3183 = ProtoModule.readVarInt(Buf, v91)
+			elseif Tag2 == ProtoModule.wireTypes.lengthDelimited then
+				if Tag == 1 then
+					local Buffer1
+					Buffer1, v3183 = ProtoModule.readBuffer(Buf, v91)
+					NewModule.kind = {
+						type = "literal",
+						value = t.OpenPurchasePromptAction_ProductPayload_ProductPayloadLiteral.decode(Buffer1)
+					}
+				elseif Tag == 2 then
+					local Buffer2
+					Buffer2, v3183 = ProtoModule.readBuffer(Buf, v91)
+					NewModule.kind = { type = "binding_path", value = buffer.tostring(Buffer2) }
+				else
+					local VarInt, VarInt2 = ProtoModule.readVarInt(Buf, v91)
+					v91 = VarInt2 + VarInt
+				end
+			elseif Tag2 == ProtoModule.wireTypes.i32 then
+				local _
+				_, v3183 = ProtoModule.readFixed32(Buf, v91)
+			elseif Tag2 == ProtoModule.wireTypes.i64 then
+				local _
+				_, v3183 = ProtoModule.readFixed64(Buf, v91)
+			else
+				error("Unsupported wire type: " .. Tag2)
+			end
+		end
+		return NewModule
+	end
+
+	function Module134:jsonEncode()
+		local t = {}
+		
+		if self.kind ~= nil then
+			if self.kind.type == "literal" then
+				t.literal = self.kind.value:jsonEncode()
+				
+				return t
+			end
+			if self.kind.type == "binding_path" then
+				t.bindingPath = self.kind.value
+			end
+		end
+		return t
+	end
+
+	function Module134:jsonDecode()
+		-- upvalues: Module134 (copy), t (copy)
+		local NewModule = Module134.new()
+		
+		if self.literal ~= nil then
+			NewModule.kind = {
+				type = "literal",
+				value = t.OpenPurchasePromptAction_ProductPayload_ProductPayloadLiteral.jsonDecode(self.literal)
+			}
+		end
+		if self.binding_path ~= nil then
+			NewModule.kind = { type = "binding_path", value = self.binding_path }
+		end
+		if self.bindingPath ~= nil then
+			NewModule.kind = { type = "binding_path", value = self.bindingPath }
+		end
+		return NewModule
+	end
+
+	Module134.descriptor = {
+		name = "OpenPurchasePromptAction_ProductPayload",
+		fullName = "roblox.apppageplatform.shared.v1beta1.ProductPayload"
+	}
+	t.OpenPurchasePromptAction_ProductPayload = Module134
+end
+do
+	TypeRegistryModule.default:register(t.OpenPurchasePromptAction_ProductPayload)
+	local Module135 = {}
+	Module135.__index = Module135
+
+	function Module135.new(p1)
+		-- upvalues: Module135 (copy)
 		return (setmetatable({
 			kind = if p1 == nil or p1.kind == nil then nil else p1.kind,
 			id = if p1 == nil or p1.id == nil then nil else p1.id,
@@ -14451,10 +15401,10 @@ do
 			icon_image_asset_id = if p1 == nil or p1.icon_image_asset_id == nil then nil else p1.icon_image_asset_id,
 			is_subscription_in_robux = if p1 == nil or p1.is_subscription_in_robux == nil then nil else p1.is_subscription_in_robux,
 			display_price = if p1 == nil or p1.display_price == nil then nil else p1.display_price
-		}, Module125))
+		}, Module135))
 	end
 
-	function Module125:encode()
+	function Module135:encode()
 		-- upvalues: ProtoModule (copy)
 		local Buf = buffer.create(0)
 		local Count = 0
@@ -14515,68 +15465,68 @@ do
 		return Buf1
 	end
 
-	function Module125.decode(Buf)
-		-- upvalues: Module125 (copy), ProtoModule (copy), PropTypesModule (copy)
-		local NewModule = Module125.new()
-		local v85 = 0
-		while v85 < buffer.len(Buf) do
+	function Module135.decode(Buf)
+		-- upvalues: Module135 (copy), ProtoModule (copy), PropTypesModule (copy)
+		local NewModule = Module135.new()
+		local v91 = 0
+		while v91 < buffer.len(Buf) do
 			local Tag, Tag2
-			Tag, Tag2, v3042 = ProtoModule.readTag(Buf, v85)
+			Tag, Tag2, v3228 = ProtoModule.readTag(Buf, v91)
 			
 			if Tag2 == ProtoModule.wireTypes.varint then
 				local _
-				_, v3042 = ProtoModule.readVarInt(Buf, v85)
+				_, v3228 = ProtoModule.readVarInt(Buf, v91)
 			elseif Tag2 == ProtoModule.wireTypes.lengthDelimited then
 				if Tag == 1 then
 					local Buffer1
-					Buffer1, v3042 = ProtoModule.readBuffer(Buf, v85)
+					Buffer1, v3228 = ProtoModule.readBuffer(Buf, v91)
 					NewModule.kind = PropTypesModule.StringProp.decode(Buffer1)
 				elseif Tag == 2 then
 					local Buffer2
-					Buffer2, v3042 = ProtoModule.readBuffer(Buf, v85)
+					Buffer2, v3228 = ProtoModule.readBuffer(Buf, v91)
 					NewModule.id = PropTypesModule.StringProp.decode(Buffer2)
 				elseif Tag == 3 then
 					local Buffer3
-					Buffer3, v3042 = ProtoModule.readBuffer(Buf, v85)
+					Buffer3, v3228 = ProtoModule.readBuffer(Buf, v91)
 					NewModule.subscription_id = PropTypesModule.StringProp.decode(Buffer3)
 				elseif Tag == 4 then
 					local Buffer4
-					Buffer4, v3042 = ProtoModule.readBuffer(Buf, v85)
+					Buffer4, v3228 = ProtoModule.readBuffer(Buf, v91)
 					NewModule.universe_id = PropTypesModule.StringProp.decode(Buffer4)
 				elseif Tag == 5 then
 					local Buffer5
-					Buffer5, v3042 = ProtoModule.readBuffer(Buf, v85)
+					Buffer5, v3228 = ProtoModule.readBuffer(Buf, v91)
 					NewModule.equip_if_purchased = PropTypesModule.BoolProp.decode(Buffer5)
 				elseif Tag == 6 then
 					local Buffer6
-					Buffer6, v3042 = ProtoModule.readBuffer(Buf, v85)
+					Buffer6, v3228 = ProtoModule.readBuffer(Buf, v91)
 					NewModule.name = PropTypesModule.StringProp.decode(Buffer6)
 				elseif Tag == 7 then
 					local Buffer7
-					Buffer7, v3042 = ProtoModule.readBuffer(Buf, v85)
+					Buffer7, v3228 = ProtoModule.readBuffer(Buf, v91)
 					NewModule.expected_price = PropTypesModule.Int64Prop.decode(Buffer7)
 				elseif Tag == 8 then
 					local Buffer8
-					Buffer8, v3042 = ProtoModule.readBuffer(Buf, v85)
+					Buffer8, v3228 = ProtoModule.readBuffer(Buf, v91)
 					NewModule.icon_image_asset_id = PropTypesModule.Int64Prop.decode(Buffer8)
 				elseif Tag == 9 then
 					local Buffer9
-					Buffer9, v3042 = ProtoModule.readBuffer(Buf, v85)
+					Buffer9, v3228 = ProtoModule.readBuffer(Buf, v91)
 					NewModule.is_subscription_in_robux = PropTypesModule.BoolProp.decode(Buffer9)
 				elseif Tag == 10 then
 					local Buffer10
-					Buffer10, v3042 = ProtoModule.readBuffer(Buf, v85)
+					Buffer10, v3228 = ProtoModule.readBuffer(Buf, v91)
 					NewModule.display_price = PropTypesModule.StringProp.decode(Buffer10)
 				else
-					local VarInt, VarInt2 = ProtoModule.readVarInt(Buf, v85)
-					v85 = VarInt2 + VarInt
+					local VarInt, VarInt2 = ProtoModule.readVarInt(Buf, v91)
+					v91 = VarInt2 + VarInt
 				end
 			elseif Tag2 == ProtoModule.wireTypes.i32 then
 				local _
-				_, v3042 = ProtoModule.readFixed32(Buf, v85)
+				_, v3228 = ProtoModule.readFixed32(Buf, v91)
 			elseif Tag2 == ProtoModule.wireTypes.i64 then
 				local _
-				_, v3042 = ProtoModule.readFixed64(Buf, v85)
+				_, v3228 = ProtoModule.readFixed64(Buf, v91)
 			else
 				error("Unsupported wire type: " .. Tag2)
 			end
@@ -14584,7 +15534,7 @@ do
 		return NewModule
 	end
 
-	function Module125:jsonEncode()
+	function Module135:jsonEncode()
 		local t = {}
 		
 		if self.kind ~= nil then
@@ -14620,9 +15570,9 @@ do
 		return t
 	end
 
-	function Module125:jsonDecode()
-		-- upvalues: Module125 (copy), PropTypesModule (copy)
-		local NewModule = Module125.new()
+	function Module135:jsonDecode()
+		-- upvalues: Module135 (copy), PropTypesModule (copy)
+		local NewModule = Module135.new()
 		
 		if self.kind ~= nil then
 			NewModule.kind = PropTypesModule.StringProp.jsonDecode(self.kind)
@@ -14678,25 +15628,23 @@ do
 		return NewModule
 	end
 
-	Module125.descriptor = {
+	Module135.descriptor = {
 		name = "OpenPurchasePromptAction_ProductPayload_ProductPayloadLiteral",
 		fullName = "roblox.apppageplatform.shared.v1beta1.ProductPayloadLiteral"
 	}
-	t.OpenPurchasePromptAction_ProductPayload_ProductPayloadLiteral = Module125
-end
-do
+	t.OpenPurchasePromptAction_ProductPayload_ProductPayloadLiteral = Module135
 	TypeRegistryModule.default:register(t.OpenPurchasePromptAction_ProductPayload_ProductPayloadLiteral)
-	local Module126 = {}
-	Module126.__index = Module126
+	local Module136 = {}
+	Module136.__index = Module136
 
-	function Module126.new(p1)
-		-- upvalues: Module126 (copy)
+	function Module136.new(p1)
+		-- upvalues: Module136 (copy)
 		return (setmetatable({
 			kind = if p1 == nil or p1.kind == nil then nil else p1.kind
-		}, Module126))
+		}, Module136))
 	end
 
-	function Module126:encode()
+	function Module136:encode()
 		-- upvalues: ProtoModule (copy)
 		local Buf = buffer.create(0)
 		local Count = 0
@@ -14717,39 +15665,39 @@ do
 		return Buf1
 	end
 
-	function Module126.decode(Buf)
-		-- upvalues: Module126 (copy), ProtoModule (copy), t (copy)
-		local NewModule = Module126.new()
-		local v85 = 0
-		while v85 < buffer.len(Buf) do
+	function Module136.decode(Buf)
+		-- upvalues: Module136 (copy), ProtoModule (copy), t (copy)
+		local NewModule = Module136.new()
+		local v92 = 0
+		while v92 < buffer.len(Buf) do
 			local Tag, Tag2
-			Tag, Tag2, v3070 = ProtoModule.readTag(Buf, v85)
+			Tag, Tag2, v3256 = ProtoModule.readTag(Buf, v92)
 			
 			if Tag2 == ProtoModule.wireTypes.varint then
 				local _
-				_, v3070 = ProtoModule.readVarInt(Buf, v85)
+				_, v3256 = ProtoModule.readVarInt(Buf, v92)
 			elseif Tag2 == ProtoModule.wireTypes.lengthDelimited then
 				if Tag == 1 then
 					local Buffer1
-					Buffer1, v3070 = ProtoModule.readBuffer(Buf, v85)
+					Buffer1, v3256 = ProtoModule.readBuffer(Buf, v92)
 					NewModule.kind = {
 						type = "literal",
 						value = t.OpenPurchasePromptAction_DisplayInfo_DisplayInfoLiteral.decode(Buffer1)
 					}
 				elseif Tag == 2 then
 					local Buffer2
-					Buffer2, v3070 = ProtoModule.readBuffer(Buf, v85)
+					Buffer2, v3256 = ProtoModule.readBuffer(Buf, v92)
 					NewModule.kind = { type = "binding_path", value = buffer.tostring(Buffer2) }
 				else
-					local VarInt, VarInt2 = ProtoModule.readVarInt(Buf, v85)
-					v85 = VarInt2 + VarInt
+					local VarInt, VarInt2 = ProtoModule.readVarInt(Buf, v92)
+					v92 = VarInt2 + VarInt
 				end
 			elseif Tag2 == ProtoModule.wireTypes.i32 then
 				local _
-				_, v3070 = ProtoModule.readFixed32(Buf, v85)
+				_, v3256 = ProtoModule.readFixed32(Buf, v92)
 			elseif Tag2 == ProtoModule.wireTypes.i64 then
 				local _
-				_, v3070 = ProtoModule.readFixed64(Buf, v85)
+				_, v3256 = ProtoModule.readFixed64(Buf, v92)
 			else
 				error("Unsupported wire type: " .. Tag2)
 			end
@@ -14757,7 +15705,7 @@ do
 		return NewModule
 	end
 
-	function Module126:jsonEncode()
+	function Module136:jsonEncode()
 		local t = {}
 		
 		if self.kind ~= nil then
@@ -14773,9 +15721,9 @@ do
 		return t
 	end
 
-	function Module126:jsonDecode()
-		-- upvalues: Module126 (copy), t (copy)
-		local NewModule = Module126.new()
+	function Module136:jsonDecode()
+		-- upvalues: Module136 (copy), t (copy)
+		local NewModule = Module136.new()
 		
 		if self.literal ~= nil then
 			NewModule.kind = {
@@ -14792,17 +15740,17 @@ do
 		return NewModule
 	end
 
-	Module126.descriptor = {
+	Module136.descriptor = {
 		name = "OpenPurchasePromptAction_DisplayInfo",
 		fullName = "roblox.apppageplatform.shared.v1beta1.DisplayInfo"
 	}
-	t.OpenPurchasePromptAction_DisplayInfo = Module126
+	t.OpenPurchasePromptAction_DisplayInfo = Module136
 	TypeRegistryModule.default:register(t.OpenPurchasePromptAction_DisplayInfo)
-	local Module127 = {}
-	Module127.__index = Module127
+	local Module137 = {}
+	Module137.__index = Module137
 
-	function Module127.new(p1)
-		-- upvalues: Module127 (copy)
+	function Module137.new(p1)
+		-- upvalues: Module137 (copy)
 		return (setmetatable({
 			product_name = if p1 == nil or p1.product_name == nil then nil else p1.product_name,
 			description = if p1 == nil or p1.description == nil then nil else p1.description,
@@ -14816,10 +15764,10 @@ do
 			product_type = if p1 == nil or p1.product_type == nil then nil else p1.product_type,
 			base_price_in_robux = if p1 == nil or p1.base_price_in_robux == nil then nil else p1.base_price_in_robux,
 			price_discount_details = if p1 == nil or p1.price_discount_details == nil then nil else p1.price_discount_details
-		}, Module127))
+		}, Module137))
 	end
 
-	function Module127:encode()
+	function Module137:encode()
 		-- upvalues: ProtoModule (copy)
 		local Buf = buffer.create(0)
 		local Count = 0
@@ -14890,76 +15838,76 @@ do
 		return Buf1
 	end
 
-	function Module127.decode(Buf)
-		-- upvalues: Module127 (copy), ProtoModule (copy), PropTypesModule (copy)
-		local NewModule = Module127.new()
-		local v86 = 0
-		while v86 < buffer.len(Buf) do
+	function Module137.decode(Buf)
+		-- upvalues: Module137 (copy), ProtoModule (copy), PropTypesModule (copy)
+		local NewModule = Module137.new()
+		local v93 = 0
+		while v93 < buffer.len(Buf) do
 			local Tag, Tag2
-			Tag, Tag2, v3121 = ProtoModule.readTag(Buf, v86)
+			Tag, Tag2, v3307 = ProtoModule.readTag(Buf, v93)
 			
 			if Tag2 == ProtoModule.wireTypes.varint then
 				local _
-				_, v3121 = ProtoModule.readVarInt(Buf, v86)
+				_, v3307 = ProtoModule.readVarInt(Buf, v93)
 			elseif Tag2 == ProtoModule.wireTypes.lengthDelimited then
 				if Tag == 1 then
 					local Buffer1
-					Buffer1, v3121 = ProtoModule.readBuffer(Buf, v86)
+					Buffer1, v3307 = ProtoModule.readBuffer(Buf, v93)
 					NewModule.product_name = PropTypesModule.StringProp.decode(Buffer1)
 				elseif Tag == 2 then
 					local Buffer2
-					Buffer2, v3121 = ProtoModule.readBuffer(Buf, v86)
+					Buffer2, v3307 = ProtoModule.readBuffer(Buf, v93)
 					NewModule.description = PropTypesModule.StringProp.decode(Buffer2)
 				elseif Tag == 3 then
 					local Buffer3
-					Buffer3, v3121 = ProtoModule.readBuffer(Buf, v86)
+					Buffer3, v3307 = ProtoModule.readBuffer(Buf, v93)
 					NewModule.image_url = PropTypesModule.StringProp.decode(Buffer3)
 				elseif Tag == 4 then
 					local Buffer4
-					Buffer4, v3121 = ProtoModule.readBuffer(Buf, v86)
+					Buffer4, v3307 = ProtoModule.readBuffer(Buf, v93)
 					NewModule.price_in_robux = PropTypesModule.Int64Prop.decode(Buffer4)
 				elseif Tag == 5 then
 					local Buffer5
-					Buffer5, v3121 = ProtoModule.readBuffer(Buf, v86)
+					Buffer5, v3307 = ProtoModule.readBuffer(Buf, v93)
 					NewModule.display_price = PropTypesModule.StringProp.decode(Buffer5)
 				elseif Tag == 6 then
 					local Buffer6
-					Buffer6, v3121 = ProtoModule.readBuffer(Buf, v86)
+					Buffer6, v3307 = ProtoModule.readBuffer(Buf, v93)
 					NewModule.icon_image_asset_id = PropTypesModule.Int64Prop.decode(Buffer6)
 				elseif Tag == 7 then
 					local Buffer7
-					Buffer7, v3121 = ProtoModule.readBuffer(Buf, v86)
+					Buffer7, v3307 = ProtoModule.readBuffer(Buf, v93)
 					NewModule.product_id = PropTypesModule.Int64Prop.decode(Buffer7)
 				elseif Tag == 8 then
 					local Buffer8
-					Buffer8, v3121 = ProtoModule.readBuffer(Buf, v86)
+					Buffer8, v3307 = ProtoModule.readBuffer(Buf, v93)
 					NewModule.target_id = PropTypesModule.StringProp.decode(Buffer8)
 				elseif Tag == 9 then
 					local Buffer9
-					Buffer9, v3121 = ProtoModule.readBuffer(Buf, v86)
+					Buffer9, v3307 = ProtoModule.readBuffer(Buf, v93)
 					NewModule.is_for_sale = PropTypesModule.BoolProp.decode(Buffer9)
 				elseif Tag == 10 then
 					local Buffer10
-					Buffer10, v3121 = ProtoModule.readBuffer(Buf, v86)
+					Buffer10, v3307 = ProtoModule.readBuffer(Buf, v93)
 					NewModule.product_type = PropTypesModule.StringProp.decode(Buffer10)
 				elseif Tag == 11 then
 					local Buffer11
-					Buffer11, v3121 = ProtoModule.readBuffer(Buf, v86)
+					Buffer11, v3307 = ProtoModule.readBuffer(Buf, v93)
 					NewModule.base_price_in_robux = PropTypesModule.Int64Prop.decode(Buffer11)
 				elseif Tag == 12 then
 					local Buffer12
-					Buffer12, v3121 = ProtoModule.readBuffer(Buf, v86)
+					Buffer12, v3307 = ProtoModule.readBuffer(Buf, v93)
 					NewModule.price_discount_details = PropTypesModule.ArrayOfStructProp.decode(Buffer12)
 				else
-					local VarInt, VarInt2 = ProtoModule.readVarInt(Buf, v86)
-					v86 = VarInt2 + VarInt
+					local VarInt, VarInt2 = ProtoModule.readVarInt(Buf, v93)
+					v93 = VarInt2 + VarInt
 				end
 			elseif Tag2 == ProtoModule.wireTypes.i32 then
 				local _
-				_, v3121 = ProtoModule.readFixed32(Buf, v86)
+				_, v3307 = ProtoModule.readFixed32(Buf, v93)
 			elseif Tag2 == ProtoModule.wireTypes.i64 then
 				local _
-				_, v3121 = ProtoModule.readFixed64(Buf, v86)
+				_, v3307 = ProtoModule.readFixed64(Buf, v93)
 			else
 				error("Unsupported wire type: " .. Tag2)
 			end
@@ -14967,7 +15915,7 @@ do
 		return NewModule
 	end
 
-	function Module127:jsonEncode()
+	function Module137:jsonEncode()
 		local t = {}
 		
 		if self.product_name ~= nil then
@@ -15009,9 +15957,9 @@ do
 		return t
 	end
 
-	function Module127:jsonDecode()
-		-- upvalues: Module127 (copy), PropTypesModule (copy)
-		local NewModule = Module127.new()
+	function Module137:jsonDecode()
+		-- upvalues: Module137 (copy), PropTypesModule (copy)
+		local NewModule = Module137.new()
 		
 		if self.product_name ~= nil then
 			NewModule.product_name = PropTypesModule.StringProp.jsonDecode(self.product_name)
@@ -15085,23 +16033,25 @@ do
 		return NewModule
 	end
 
-	Module127.descriptor = {
+	Module137.descriptor = {
 		name = "OpenPurchasePromptAction_DisplayInfo_DisplayInfoLiteral",
 		fullName = "roblox.apppageplatform.shared.v1beta1.DisplayInfoLiteral"
 	}
-	t.OpenPurchasePromptAction_DisplayInfo_DisplayInfoLiteral = Module127
+	t.OpenPurchasePromptAction_DisplayInfo_DisplayInfoLiteral = Module137
+end
+do
 	TypeRegistryModule.default:register(t.OpenPurchasePromptAction_DisplayInfo_DisplayInfoLiteral)
-	local Module128 = {}
-	Module128.__index = Module128
+	local Module138 = {}
+	Module138.__index = Module138
 
-	function Module128.new(p1)
-		-- upvalues: Module128 (copy)
+	function Module138.new(p1)
+		-- upvalues: Module138 (copy)
 		return (setmetatable({
 			kind = if p1 == nil or p1.kind == nil then nil else p1.kind
-		}, Module128))
+		}, Module138))
 	end
 
-	function Module128:encode()
+	function Module138:encode()
 		-- upvalues: ProtoModule (copy)
 		local Buf = buffer.create(0)
 		local Count = 0
@@ -15122,39 +16072,39 @@ do
 		return Buf1
 	end
 
-	function Module128.decode(Buf)
-		-- upvalues: Module128 (copy), ProtoModule (copy), t (copy)
-		local NewModule = Module128.new()
-		local v87 = 0
-		while v87 < buffer.len(Buf) do
+	function Module138.decode(Buf)
+		-- upvalues: Module138 (copy), ProtoModule (copy), t (copy)
+		local NewModule = Module138.new()
+		local v93 = 0
+		while v93 < buffer.len(Buf) do
 			local Tag, Tag2
-			Tag, Tag2, v3151 = ProtoModule.readTag(Buf, v87)
+			Tag, Tag2, v3337 = ProtoModule.readTag(Buf, v93)
 			
 			if Tag2 == ProtoModule.wireTypes.varint then
 				local _
-				_, v3151 = ProtoModule.readVarInt(Buf, v87)
+				_, v3337 = ProtoModule.readVarInt(Buf, v93)
 			elseif Tag2 == ProtoModule.wireTypes.lengthDelimited then
 				if Tag == 1 then
 					local Buffer1
-					Buffer1, v3151 = ProtoModule.readBuffer(Buf, v87)
+					Buffer1, v3337 = ProtoModule.readBuffer(Buf, v93)
 					NewModule.kind = {
 						type = "literal",
 						value = t.OpenPurchasePromptAction_PurchaseOptions_PurchaseOptionsLiteral.decode(Buffer1)
 					}
 				elseif Tag == 2 then
 					local Buffer2
-					Buffer2, v3151 = ProtoModule.readBuffer(Buf, v87)
+					Buffer2, v3337 = ProtoModule.readBuffer(Buf, v93)
 					NewModule.kind = { type = "binding_path", value = buffer.tostring(Buffer2) }
 				else
-					local VarInt, VarInt2 = ProtoModule.readVarInt(Buf, v87)
-					v87 = VarInt2 + VarInt
+					local VarInt, VarInt2 = ProtoModule.readVarInt(Buf, v93)
+					v93 = VarInt2 + VarInt
 				end
 			elseif Tag2 == ProtoModule.wireTypes.i32 then
 				local _
-				_, v3151 = ProtoModule.readFixed32(Buf, v87)
+				_, v3337 = ProtoModule.readFixed32(Buf, v93)
 			elseif Tag2 == ProtoModule.wireTypes.i64 then
 				local _
-				_, v3151 = ProtoModule.readFixed64(Buf, v87)
+				_, v3337 = ProtoModule.readFixed64(Buf, v93)
 			else
 				error("Unsupported wire type: " .. Tag2)
 			end
@@ -15162,7 +16112,7 @@ do
 		return NewModule
 	end
 
-	function Module128:jsonEncode()
+	function Module138:jsonEncode()
 		local t = {}
 		
 		if self.kind ~= nil then
@@ -15178,9 +16128,9 @@ do
 		return t
 	end
 
-	function Module128:jsonDecode()
-		-- upvalues: Module128 (copy), t (copy)
-		local NewModule = Module128.new()
+	function Module138:jsonDecode()
+		-- upvalues: Module138 (copy), t (copy)
+		local NewModule = Module138.new()
 		
 		if self.literal ~= nil then
 			NewModule.kind = {
@@ -15197,19 +16147,17 @@ do
 		return NewModule
 	end
 
-	Module128.descriptor = {
+	Module138.descriptor = {
 		name = "OpenPurchasePromptAction_PurchaseOptions",
 		fullName = "roblox.apppageplatform.shared.v1beta1.PurchaseOptions"
 	}
-	t.OpenPurchasePromptAction_PurchaseOptions = Module128
-end
-do
+	t.OpenPurchasePromptAction_PurchaseOptions = Module138
 	TypeRegistryModule.default:register(t.OpenPurchasePromptAction_PurchaseOptions)
-	local Module129 = {}
-	Module129.__index = Module129
+	local Module139 = {}
+	Module139.__index = Module139
 
-	function Module129.new(p1)
-		-- upvalues: Module129 (copy)
+	function Module139.new(p1)
+		-- upvalues: Module139 (copy)
 		return (setmetatable({
 			should_skip_ownership_check = if p1 == nil or p1.should_skip_ownership_check == nil then nil else p1.should_skip_ownership_check,
 			enable_preloaded_purchase_ui = if p1 == nil or p1.enable_preloaded_purchase_ui == nil then nil else p1.enable_preloaded_purchase_ui,
@@ -15218,10 +16166,10 @@ do
 			prevent_double_confirm = if p1 == nil or p1.prevent_double_confirm == nil then nil else p1.prevent_double_confirm,
 			provided_robux_balance = if p1 == nil or p1.provided_robux_balance == nil then nil else p1.provided_robux_balance,
 			launch_after_purchase_root_place_id = if p1 == nil or p1.launch_after_purchase_root_place_id == nil then nil else p1.launch_after_purchase_root_place_id
-		}, Module129))
+		}, Module139))
 	end
 
-	function Module129:encode()
+	function Module139:encode()
 		-- upvalues: ProtoModule (copy)
 		local Buf = buffer.create(0)
 		local Count = 0
@@ -15267,56 +16215,56 @@ do
 		return Buf1
 	end
 
-	function Module129.decode(Buf)
-		-- upvalues: Module129 (copy), ProtoModule (copy), PropTypesModule (copy)
-		local NewModule = Module129.new()
-		local v87 = 0
-		while v87 < buffer.len(Buf) do
+	function Module139.decode(Buf)
+		-- upvalues: Module139 (copy), ProtoModule (copy), PropTypesModule (copy)
+		local NewModule = Module139.new()
+		local v94 = 0
+		while v94 < buffer.len(Buf) do
 			local Tag, Tag2
-			Tag, Tag2, v3187 = ProtoModule.readTag(Buf, v87)
+			Tag, Tag2, v3373 = ProtoModule.readTag(Buf, v94)
 			
 			if Tag2 == ProtoModule.wireTypes.varint then
 				local _
-				_, v3187 = ProtoModule.readVarInt(Buf, v87)
+				_, v3373 = ProtoModule.readVarInt(Buf, v94)
 			elseif Tag2 == ProtoModule.wireTypes.lengthDelimited then
 				if Tag == 1 then
 					local Buffer1
-					Buffer1, v3187 = ProtoModule.readBuffer(Buf, v87)
+					Buffer1, v3373 = ProtoModule.readBuffer(Buf, v94)
 					NewModule.should_skip_ownership_check = PropTypesModule.BoolProp.decode(Buffer1)
 				elseif Tag == 2 then
 					local Buffer2
-					Buffer2, v3187 = ProtoModule.readBuffer(Buf, v87)
+					Buffer2, v3373 = ProtoModule.readBuffer(Buf, v94)
 					NewModule.enable_preloaded_purchase_ui = PropTypesModule.BoolProp.decode(Buffer2)
 				elseif Tag == 3 then
 					local Buffer3
-					Buffer3, v3187 = ProtoModule.readBuffer(Buf, v87)
+					Buffer3, v3373 = ProtoModule.readBuffer(Buf, v94)
 					NewModule.completion_message = PropTypesModule.StringProp.decode(Buffer3)
 				elseif Tag == 4 then
 					local Buffer4
-					Buffer4, v3187 = ProtoModule.readBuffer(Buf, v87)
+					Buffer4, v3373 = ProtoModule.readBuffer(Buf, v94)
 					NewModule.completion_button_text = PropTypesModule.StringProp.decode(Buffer4)
 				elseif Tag == 5 then
 					local Buffer5
-					Buffer5, v3187 = ProtoModule.readBuffer(Buf, v87)
+					Buffer5, v3373 = ProtoModule.readBuffer(Buf, v94)
 					NewModule.prevent_double_confirm = PropTypesModule.BoolProp.decode(Buffer5)
 				elseif Tag == 6 then
 					local Buffer6
-					Buffer6, v3187 = ProtoModule.readBuffer(Buf, v87)
+					Buffer6, v3373 = ProtoModule.readBuffer(Buf, v94)
 					NewModule.provided_robux_balance = PropTypesModule.Int64Prop.decode(Buffer6)
 				elseif Tag == 7 then
 					local Buffer7
-					Buffer7, v3187 = ProtoModule.readBuffer(Buf, v87)
+					Buffer7, v3373 = ProtoModule.readBuffer(Buf, v94)
 					NewModule.launch_after_purchase_root_place_id = PropTypesModule.StringProp.decode(Buffer7)
 				else
-					local VarInt, VarInt2 = ProtoModule.readVarInt(Buf, v87)
-					v87 = VarInt2 + VarInt
+					local VarInt, VarInt2 = ProtoModule.readVarInt(Buf, v94)
+					v94 = VarInt2 + VarInt
 				end
 			elseif Tag2 == ProtoModule.wireTypes.i32 then
 				local _
-				_, v3187 = ProtoModule.readFixed32(Buf, v87)
+				_, v3373 = ProtoModule.readFixed32(Buf, v94)
 			elseif Tag2 == ProtoModule.wireTypes.i64 then
 				local _
-				_, v3187 = ProtoModule.readFixed64(Buf, v87)
+				_, v3373 = ProtoModule.readFixed64(Buf, v94)
 			else
 				error("Unsupported wire type: " .. Tag2)
 			end
@@ -15324,7 +16272,7 @@ do
 		return NewModule
 	end
 
-	function Module129:jsonEncode()
+	function Module139:jsonEncode()
 		local t = {}
 		
 		if self.should_skip_ownership_check ~= nil then
@@ -15351,9 +16299,9 @@ do
 		return t
 	end
 
-	function Module129:jsonDecode()
-		-- upvalues: Module129 (copy), PropTypesModule (copy)
-		local NewModule = Module129.new()
+	function Module139:jsonDecode()
+		-- upvalues: Module139 (copy), PropTypesModule (copy)
+		local NewModule = Module139.new()
 		
 		if self.should_skip_ownership_check ~= nil then
 			NewModule.should_skip_ownership_check = PropTypesModule.BoolProp.jsonDecode(self.should_skip_ownership_check)
@@ -15400,23 +16348,23 @@ do
 		return NewModule
 	end
 
-	Module129.descriptor = {
+	Module139.descriptor = {
 		name = "OpenPurchasePromptAction_PurchaseOptions_PurchaseOptionsLiteral",
 		fullName = "roblox.apppageplatform.shared.v1beta1.PurchaseOptionsLiteral"
 	}
-	t.OpenPurchasePromptAction_PurchaseOptions_PurchaseOptionsLiteral = Module129
+	t.OpenPurchasePromptAction_PurchaseOptions_PurchaseOptionsLiteral = Module139
 	TypeRegistryModule.default:register(t.OpenPurchasePromptAction_PurchaseOptions_PurchaseOptionsLiteral)
-	local Module130 = {}
-	Module130.__index = Module130
+	local Module140 = {}
+	Module140.__index = Module140
 
-	function Module130.new(p1)
-		-- upvalues: Module130 (copy)
+	function Module140.new(p1)
+		-- upvalues: Module140 (copy)
 		return (setmetatable({
 			kind = if p1 == nil or p1.kind == nil then nil else p1.kind
-		}, Module130))
+		}, Module140))
 	end
 
-	function Module130:encode()
+	function Module140:encode()
 		-- upvalues: ProtoModule (copy)
 		local Buf = buffer.create(0)
 		local Count = 0
@@ -15437,39 +16385,39 @@ do
 		return Buf1
 	end
 
-	function Module130.decode(Buf)
-		-- upvalues: Module130 (copy), ProtoModule (copy), t (copy)
-		local NewModule = Module130.new()
-		local v88 = 0
-		while v88 < buffer.len(Buf) do
+	function Module140.decode(Buf)
+		-- upvalues: Module140 (copy), ProtoModule (copy), t (copy)
+		local NewModule = Module140.new()
+		local v95 = 0
+		while v95 < buffer.len(Buf) do
 			local Tag, Tag2
-			Tag, Tag2, v3212 = ProtoModule.readTag(Buf, v88)
+			Tag, Tag2, v3398 = ProtoModule.readTag(Buf, v95)
 			
 			if Tag2 == ProtoModule.wireTypes.varint then
 				local _
-				_, v3212 = ProtoModule.readVarInt(Buf, v88)
+				_, v3398 = ProtoModule.readVarInt(Buf, v95)
 			elseif Tag2 == ProtoModule.wireTypes.lengthDelimited then
 				if Tag == 1 then
 					local Buffer1
-					Buffer1, v3212 = ProtoModule.readBuffer(Buf, v88)
+					Buffer1, v3398 = ProtoModule.readBuffer(Buf, v95)
 					NewModule.kind = {
 						type = "literal",
 						value = t.OpenPurchasePromptAction_PurchaseAnalyticsMetadata_PurchaseAnalyticsMetadataLiteral.decode(Buffer1)
 					}
 				elseif Tag == 2 then
 					local Buffer2
-					Buffer2, v3212 = ProtoModule.readBuffer(Buf, v88)
+					Buffer2, v3398 = ProtoModule.readBuffer(Buf, v95)
 					NewModule.kind = { type = "binding_path", value = buffer.tostring(Buffer2) }
 				else
-					local VarInt, VarInt2 = ProtoModule.readVarInt(Buf, v88)
-					v88 = VarInt2 + VarInt
+					local VarInt, VarInt2 = ProtoModule.readVarInt(Buf, v95)
+					v95 = VarInt2 + VarInt
 				end
 			elseif Tag2 == ProtoModule.wireTypes.i32 then
 				local _
-				_, v3212 = ProtoModule.readFixed32(Buf, v88)
+				_, v3398 = ProtoModule.readFixed32(Buf, v95)
 			elseif Tag2 == ProtoModule.wireTypes.i64 then
 				local _
-				_, v3212 = ProtoModule.readFixed64(Buf, v88)
+				_, v3398 = ProtoModule.readFixed64(Buf, v95)
 			else
 				error("Unsupported wire type: " .. Tag2)
 			end
@@ -15477,7 +16425,7 @@ do
 		return NewModule
 	end
 
-	function Module130:jsonEncode()
+	function Module140:jsonEncode()
 		local t = {}
 		
 		if self.kind ~= nil then
@@ -15493,9 +16441,9 @@ do
 		return t
 	end
 
-	function Module130:jsonDecode()
-		-- upvalues: Module130 (copy), t (copy)
-		local NewModule = Module130.new()
+	function Module140:jsonDecode()
+		-- upvalues: Module140 (copy), t (copy)
+		local NewModule = Module140.new()
 		
 		if self.literal ~= nil then
 			NewModule.kind = {
@@ -15512,24 +16460,26 @@ do
 		return NewModule
 	end
 
-	Module130.descriptor = {
+	Module140.descriptor = {
 		name = "OpenPurchasePromptAction_PurchaseAnalyticsMetadata",
 		fullName = "roblox.apppageplatform.shared.v1beta1.PurchaseAnalyticsMetadata"
 	}
-	t.OpenPurchasePromptAction_PurchaseAnalyticsMetadata = Module130
+	t.OpenPurchasePromptAction_PurchaseAnalyticsMetadata = Module140
+end
+do
 	TypeRegistryModule.default:register(t.OpenPurchasePromptAction_PurchaseAnalyticsMetadata)
-	local Module131 = {}
-	Module131.__index = Module131
+	local Module141 = {}
+	Module141.__index = Module141
 
-	function Module131.new(p1)
-		-- upvalues: Module131 (copy)
+	function Module141.new(p1)
+		-- upvalues: Module141 (copy)
 		return (setmetatable({
 			surface = if p1 == nil or p1.surface == nil then nil else p1.surface,
 			product_universe_id = if p1 == nil or p1.product_universe_id == nil then nil else p1.product_universe_id
-		}, Module131))
+		}, Module141))
 	end
 
-	function Module131:encode()
+	function Module141:encode()
 		-- upvalues: ProtoModule (copy)
 		local Buf = buffer.create(0)
 		local Count = 0
@@ -15550,36 +16500,36 @@ do
 		return Buf1
 	end
 
-	function Module131.decode(Buf)
-		-- upvalues: Module131 (copy), ProtoModule (copy), PropTypesModule (copy)
-		local NewModule = Module131.new()
-		local v89 = 0
-		while v89 < buffer.len(Buf) do
+	function Module141.decode(Buf)
+		-- upvalues: Module141 (copy), ProtoModule (copy), PropTypesModule (copy)
+		local NewModule = Module141.new()
+		local v95 = 0
+		while v95 < buffer.len(Buf) do
 			local Tag, Tag2
-			Tag, Tag2, v3233 = ProtoModule.readTag(Buf, v89)
+			Tag, Tag2, v3419 = ProtoModule.readTag(Buf, v95)
 			
 			if Tag2 == ProtoModule.wireTypes.varint then
 				local _
-				_, v3233 = ProtoModule.readVarInt(Buf, v89)
+				_, v3419 = ProtoModule.readVarInt(Buf, v95)
 			elseif Tag2 == ProtoModule.wireTypes.lengthDelimited then
 				if Tag == 1 then
 					local Buffer1
-					Buffer1, v3233 = ProtoModule.readBuffer(Buf, v89)
+					Buffer1, v3419 = ProtoModule.readBuffer(Buf, v95)
 					NewModule.surface = PropTypesModule.StringProp.decode(Buffer1)
 				elseif Tag == 2 then
 					local Buffer2
-					Buffer2, v3233 = ProtoModule.readBuffer(Buf, v89)
+					Buffer2, v3419 = ProtoModule.readBuffer(Buf, v95)
 					NewModule.product_universe_id = PropTypesModule.StringProp.decode(Buffer2)
 				else
-					local VarInt, VarInt2 = ProtoModule.readVarInt(Buf, v89)
-					v89 = VarInt2 + VarInt
+					local VarInt, VarInt2 = ProtoModule.readVarInt(Buf, v95)
+					v95 = VarInt2 + VarInt
 				end
 			elseif Tag2 == ProtoModule.wireTypes.i32 then
 				local _
-				_, v3233 = ProtoModule.readFixed32(Buf, v89)
+				_, v3419 = ProtoModule.readFixed32(Buf, v95)
 			elseif Tag2 == ProtoModule.wireTypes.i64 then
 				local _
-				_, v3233 = ProtoModule.readFixed64(Buf, v89)
+				_, v3419 = ProtoModule.readFixed64(Buf, v95)
 			else
 				error("Unsupported wire type: " .. Tag2)
 			end
@@ -15587,7 +16537,7 @@ do
 		return NewModule
 	end
 
-	function Module131:jsonEncode()
+	function Module141:jsonEncode()
 		local t = {}
 		
 		if self.surface ~= nil then
@@ -15599,9 +16549,9 @@ do
 		return t
 	end
 
-	function Module131:jsonDecode()
-		-- upvalues: Module131 (copy), PropTypesModule (copy)
-		local NewModule = Module131.new()
+	function Module141:jsonDecode()
+		-- upvalues: Module141 (copy), PropTypesModule (copy)
+		local NewModule = Module141.new()
 		
 		if self.surface ~= nil then
 			NewModule.surface = PropTypesModule.StringProp.jsonDecode(self.surface)
@@ -15615,29 +16565,27 @@ do
 		return NewModule
 	end
 
-	Module131.descriptor = {
+	Module141.descriptor = {
 		name = "OpenPurchasePromptAction_PurchaseAnalyticsMetadata_PurchaseAnalyticsMetadataLiteral",
 		fullName = "roblox.apppageplatform.shared.v1beta1.PurchaseAnalyticsMetadataLiteral"
 	}
-	t.OpenPurchasePromptAction_PurchaseAnalyticsMetadata_PurchaseAnalyticsMetadataLiteral = Module131
-end
-do
+	t.OpenPurchasePromptAction_PurchaseAnalyticsMetadata_PurchaseAnalyticsMetadataLiteral = Module141
 	TypeRegistryModule.default:register(t.OpenPurchasePromptAction_PurchaseAnalyticsMetadata_PurchaseAnalyticsMetadataLiteral)
-	local Module132 = {}
-	Module132.__index = Module132
+	local Module142 = {}
+	Module142.__index = Module142
 
-	function Module132.new(p1)
-		-- upvalues: Module132 (copy)
+	function Module142.new(p1)
+		-- upvalues: Module142 (copy)
 		return (setmetatable({
 			product_payload = if p1 == nil or p1.product_payload == nil then nil else p1.product_payload,
 			display_info = if p1 == nil or p1.display_info == nil then nil else p1.display_info,
 			purchase_options = if p1 == nil or p1.purchase_options == nil then nil else p1.purchase_options,
 			purchase_analytics_metadata = if p1 == nil or p1.purchase_analytics_metadata == nil then nil else p1.purchase_analytics_metadata,
 			root_place_id = if p1 == nil or p1.root_place_id == nil then nil else p1.root_place_id
-		}, Module132))
+		}, Module142))
 	end
 
-	function Module132:encode()
+	function Module142:encode()
 		-- upvalues: ProtoModule (copy)
 		local Buf = buffer.create(0)
 		local Count = 0
@@ -15673,48 +16621,48 @@ do
 		return Buf1
 	end
 
-	function Module132.decode(Buf)
-		-- upvalues: Module132 (copy), ProtoModule (copy), t (copy), PropTypesModule (copy)
-		local NewModule = Module132.new()
-		local v89 = 0
-		while v89 < buffer.len(Buf) do
+	function Module142.decode(Buf)
+		-- upvalues: Module142 (copy), ProtoModule (copy), t (copy), PropTypesModule (copy)
+		local NewModule = Module142.new()
+		local v96 = 0
+		while v96 < buffer.len(Buf) do
 			local Tag, Tag2
-			Tag, Tag2, v3263 = ProtoModule.readTag(Buf, v89)
+			Tag, Tag2, v3449 = ProtoModule.readTag(Buf, v96)
 			
 			if Tag2 == ProtoModule.wireTypes.varint then
 				local _
-				_, v3263 = ProtoModule.readVarInt(Buf, v89)
+				_, v3449 = ProtoModule.readVarInt(Buf, v96)
 			elseif Tag2 == ProtoModule.wireTypes.lengthDelimited then
 				if Tag == 1 then
 					local Buffer1
-					Buffer1, v3263 = ProtoModule.readBuffer(Buf, v89)
+					Buffer1, v3449 = ProtoModule.readBuffer(Buf, v96)
 					NewModule.product_payload = t.OpenPurchasePromptAction_ProductPayload.decode(Buffer1)
 				elseif Tag == 2 then
 					local Buffer2
-					Buffer2, v3263 = ProtoModule.readBuffer(Buf, v89)
+					Buffer2, v3449 = ProtoModule.readBuffer(Buf, v96)
 					NewModule.display_info = t.OpenPurchasePromptAction_DisplayInfo.decode(Buffer2)
 				elseif Tag == 3 then
 					local Buffer3
-					Buffer3, v3263 = ProtoModule.readBuffer(Buf, v89)
+					Buffer3, v3449 = ProtoModule.readBuffer(Buf, v96)
 					NewModule.purchase_options = t.OpenPurchasePromptAction_PurchaseOptions.decode(Buffer3)
 				elseif Tag == 4 then
 					local Buffer4
-					Buffer4, v3263 = ProtoModule.readBuffer(Buf, v89)
+					Buffer4, v3449 = ProtoModule.readBuffer(Buf, v96)
 					NewModule.purchase_analytics_metadata = t.OpenPurchasePromptAction_PurchaseAnalyticsMetadata.decode(Buffer4)
 				elseif Tag == 5 then
 					local Buffer5
-					Buffer5, v3263 = ProtoModule.readBuffer(Buf, v89)
+					Buffer5, v3449 = ProtoModule.readBuffer(Buf, v96)
 					NewModule.root_place_id = PropTypesModule.StringProp.decode(Buffer5)
 				else
-					local VarInt, VarInt2 = ProtoModule.readVarInt(Buf, v89)
-					v89 = VarInt2 + VarInt
+					local VarInt, VarInt2 = ProtoModule.readVarInt(Buf, v96)
+					v96 = VarInt2 + VarInt
 				end
 			elseif Tag2 == ProtoModule.wireTypes.i32 then
 				local _
-				_, v3263 = ProtoModule.readFixed32(Buf, v89)
+				_, v3449 = ProtoModule.readFixed32(Buf, v96)
 			elseif Tag2 == ProtoModule.wireTypes.i64 then
 				local _
-				_, v3263 = ProtoModule.readFixed64(Buf, v89)
+				_, v3449 = ProtoModule.readFixed64(Buf, v96)
 			else
 				error("Unsupported wire type: " .. Tag2)
 			end
@@ -15722,7 +16670,7 @@ do
 		return NewModule
 	end
 
-	function Module132:jsonEncode()
+	function Module142:jsonEncode()
 		local t = {}
 		
 		if self.product_payload ~= nil then
@@ -15743,9 +16691,9 @@ do
 		return t
 	end
 
-	function Module132:jsonDecode()
-		-- upvalues: Module132 (copy), t (copy), PropTypesModule (copy)
-		local NewModule = Module132.new()
+	function Module142:jsonDecode()
+		-- upvalues: Module142 (copy), t (copy), PropTypesModule (copy)
+		local NewModule = Module142.new()
 		
 		if self.product_payload ~= nil then
 			NewModule.product_payload = t.OpenPurchasePromptAction_ProductPayload.jsonDecode(self.product_payload)
@@ -15780,1114 +16728,12 @@ do
 		return NewModule
 	end
 
-	Module132.descriptor = {
+	Module142.descriptor = {
 		name = "OpenPurchasePromptAction_Params",
 		fullName = "roblox.apppageplatform.shared.v1beta1.Params"
 	}
-	t.OpenPurchasePromptAction_Params = Module132
+	t.OpenPurchasePromptAction_Params = Module142
 	TypeRegistryModule.default:register(t.OpenPurchasePromptAction_Params)
-	local Module133 = {}
-	Module133.__index = Module133
-
-	function Module133.new(p1)
-		-- upvalues: t (copy), Module133 (copy)
-		return (setmetatable({
-			action_type = if p1 == nil or p1.action_type == nil then assert(t.ActionType.fromNumber(0), "Enum has no 0 default") else p1.action_type,
-			action_params = if p1 == nil or p1.action_params == nil then nil else p1.action_params
-		}, Module133))
-	end
-
-	function Module133:encode()
-		-- upvalues: t (copy), ProtoModule (copy)
-		local Buf = buffer.create(0)
-		local Count = 0
-		
-		if self.action_type ~= nil and (self.action_type ~= nil and self.action_type ~= 0 or self.action_type ~= t.ActionType.fromNumber(0)) then
-			local WriteTagResult, WriteTagResult2 = ProtoModule.writeTag(Buf, Count, 1, ProtoModule.wireTypes.varint)
-			Buf, Count = ProtoModule.writeVarInt(WriteTagResult, WriteTagResult2, t.ActionType.toNumber(self.action_type))
-		end
-		if self.action_params ~= nil then
-			local EncodeResult = self.action_params:encode()
-			local WriteTagResult1, WriteTagResult2_1 = ProtoModule.writeTag(Buf, Count, 2, ProtoModule.wireTypes.lengthDelimited)
-			Buf, Count = ProtoModule.writeBuffer(WriteTagResult1, WriteTagResult2_1, EncodeResult, buffer.len(EncodeResult))
-		end
-		local Buf1 = buffer.create(Count)
-		buffer.copy(Buf1, 0, Buf, 0, Count)
-		
-		return Buf1
-	end
-
-	function Module133.decode(Buf)
-		-- upvalues: Module133 (copy), ProtoModule (copy), t (copy)
-		local NewModule = Module133.new()
-		local v90 = 0
-		while v90 < buffer.len(Buf) do
-			local Tag, Tag2
-			Tag, Tag2, v3286 = ProtoModule.readTag(Buf, v90)
-			
-			if Tag2 == ProtoModule.wireTypes.varint then
-				if Tag == 1 then
-					local VarIntI32
-					VarIntI32, v3286 = ProtoModule.readVarIntI32(Buf, v90)
-					NewModule.action_type = t.ActionType.fromNumber(VarIntI32) or VarIntI32
-				else
-					local _
-					_, v3286 = ProtoModule.readVarInt(Buf, v90)
-				end
-			elseif Tag2 == ProtoModule.wireTypes.lengthDelimited then
-				if Tag == 2 then
-					local Buffer1
-					Buffer1, v3286 = ProtoModule.readBuffer(Buf, v90)
-					NewModule.action_params = t.ReportSurfaceLoadTimeMilestoneAction_Params.decode(Buffer1)
-				else
-					local VarInt, VarInt2 = ProtoModule.readVarInt(Buf, v90)
-					v90 = VarInt2 + VarInt
-				end
-			elseif Tag2 == ProtoModule.wireTypes.i32 then
-				local _
-				_, v3286 = ProtoModule.readFixed32(Buf, v90)
-			elseif Tag2 == ProtoModule.wireTypes.i64 then
-				local _
-				_, v3286 = ProtoModule.readFixed64(Buf, v90)
-			else
-				error("Unsupported wire type: " .. Tag2)
-			end
-		end
-		return NewModule
-	end
-
-	function Module133:jsonEncode()
-		-- upvalues: t (copy)
-		local t1 = {}
-		
-		if self.action_type ~= nil and (self.action_type ~= nil and self.action_type ~= 0 or self.action_type ~= t.ActionType.fromNumber(0)) then
-			t1.actionType = if typeof(self.action_type) == "number" then self.action_type else t.ActionType.toNumber(self.action_type)
-		end
-		if self.action_params ~= nil then
-			t1.actionParams = self.action_params:jsonEncode()
-		end
-		return t1
-	end
-
-	function Module133:jsonDecode()
-		-- upvalues: Module133 (copy), t (copy)
-		local NewModule = Module133.new()
-		
-		if self.action_type ~= nil then
-			NewModule.action_type = (if typeof(self.action_type) == "number" then t.ActionType.fromNumber(self.action_type) else t.ActionType.fromName(self.action_type)) or self.action_type
-		end
-		if self.actionType ~= nil then
-			NewModule.action_type = (if typeof(self.actionType) == "number" then t.ActionType.fromNumber(self.actionType) else t.ActionType.fromName(self.actionType)) or self.actionType
-		end
-		if self.action_params ~= nil then
-			NewModule.action_params = t.ReportSurfaceLoadTimeMilestoneAction_Params.jsonDecode(self.action_params)
-		end
-		if self.actionParams ~= nil then
-			NewModule.action_params = t.ReportSurfaceLoadTimeMilestoneAction_Params.jsonDecode(self.actionParams)
-		end
-		return NewModule
-	end
-
-	Module133.descriptor = {
-		name = "ReportSurfaceLoadTimeMilestoneAction",
-		fullName = "roblox.apppageplatform.shared.v1beta1.ReportSurfaceLoadTimeMilestoneAction"
-	}
-	t.ReportSurfaceLoadTimeMilestoneAction = Module133
-	TypeRegistryModule.default:register(t.ReportSurfaceLoadTimeMilestoneAction)
-	local Module134 = {}
-	Module134.__index = Module134
-
-	function Module134.new(p1)
-		-- upvalues: Module134 (copy)
-		return (setmetatable({
-			milestone = if p1 == nil or p1.milestone == nil then nil else p1.milestone,
-			metadata = if p1 == nil or p1.metadata == nil then nil else p1.metadata
-		}, Module134))
-	end
-
-	function Module134:encode()
-		-- upvalues: ProtoModule (copy)
-		local Buf = buffer.create(0)
-		local Count = 0
-		
-		if self.milestone ~= nil then
-			local EncodeResult = self.milestone:encode()
-			local WriteTagResult, WriteTagResult2 = ProtoModule.writeTag(Buf, Count, 1, ProtoModule.wireTypes.lengthDelimited)
-			Buf, Count = ProtoModule.writeBuffer(WriteTagResult, WriteTagResult2, EncodeResult, buffer.len(EncodeResult))
-		end
-		if self.metadata ~= nil then
-			local EncodeResult = self.metadata:encode()
-			local WriteTagResult1, WriteTagResult2_1 = ProtoModule.writeTag(Buf, Count, 3, ProtoModule.wireTypes.lengthDelimited)
-			Buf, Count = ProtoModule.writeBuffer(WriteTagResult1, WriteTagResult2_1, EncodeResult, buffer.len(EncodeResult))
-		end
-		local Buf1 = buffer.create(Count)
-		buffer.copy(Buf1, 0, Buf, 0, Count)
-		
-		return Buf1
-	end
-
-	function Module134.decode(Buf)
-		-- upvalues: Module134 (copy), ProtoModule (copy), PropTypesModule (copy)
-		local NewModule = Module134.new()
-		local v91 = 0
-		while v91 < buffer.len(Buf) do
-			local Tag, Tag2
-			Tag, Tag2, v3307 = ProtoModule.readTag(Buf, v91)
-			
-			if Tag2 == ProtoModule.wireTypes.varint then
-				local _
-				_, v3307 = ProtoModule.readVarInt(Buf, v91)
-			elseif Tag2 == ProtoModule.wireTypes.lengthDelimited then
-				if Tag == 1 then
-					local Buffer1
-					Buffer1, v3307 = ProtoModule.readBuffer(Buf, v91)
-					NewModule.milestone = PropTypesModule.StringProp.decode(Buffer1)
-				elseif Tag == 3 then
-					local Buffer2
-					Buffer2, v3307 = ProtoModule.readBuffer(Buf, v91)
-					NewModule.metadata = PropTypesModule.StructProp.decode(Buffer2)
-				else
-					local VarInt, VarInt2 = ProtoModule.readVarInt(Buf, v91)
-					v91 = VarInt2 + VarInt
-				end
-			elseif Tag2 == ProtoModule.wireTypes.i32 then
-				local _
-				_, v3307 = ProtoModule.readFixed32(Buf, v91)
-			elseif Tag2 == ProtoModule.wireTypes.i64 then
-				local _
-				_, v3307 = ProtoModule.readFixed64(Buf, v91)
-			else
-				error("Unsupported wire type: " .. Tag2)
-			end
-		end
-		return NewModule
-	end
-
-	function Module134:jsonEncode()
-		local t = {}
-		
-		if self.milestone ~= nil then
-			t.milestone = self.milestone:jsonEncode()
-		end
-		if self.metadata ~= nil then
-			t.metadata = self.metadata:jsonEncode()
-		end
-		return t
-	end
-
-	function Module134:jsonDecode()
-		-- upvalues: Module134 (copy), PropTypesModule (copy)
-		local NewModule = Module134.new()
-		
-		if self.milestone ~= nil then
-			NewModule.milestone = PropTypesModule.StringProp.jsonDecode(self.milestone)
-		end
-		if self.metadata ~= nil then
-			NewModule.metadata = PropTypesModule.StructProp.jsonDecode(self.metadata)
-		end
-		return NewModule
-	end
-
-	Module134.descriptor = {
-		name = "ReportSurfaceLoadTimeMilestoneAction_Params",
-		fullName = "roblox.apppageplatform.shared.v1beta1.Params"
-	}
-	t.ReportSurfaceLoadTimeMilestoneAction_Params = Module134
-end
-do
-	TypeRegistryModule.default:register(t.ReportSurfaceLoadTimeMilestoneAction_Params)
-	local Module135 = {}
-	Module135.__index = Module135
-
-	function Module135.new(p1)
-		-- upvalues: t (copy), Module135 (copy)
-		return (setmetatable({
-			action_type = if p1 == nil or p1.action_type == nil then assert(t.ActionType.fromNumber(0), "Enum has no 0 default") else p1.action_type,
-			action_params = if p1 == nil or p1.action_params == nil then nil else p1.action_params
-		}, Module135))
-	end
-
-	function Module135:encode()
-		-- upvalues: t (copy), ProtoModule (copy)
-		local Buf = buffer.create(0)
-		local Count = 0
-		
-		if self.action_type ~= nil and (self.action_type ~= nil and self.action_type ~= 0 or self.action_type ~= t.ActionType.fromNumber(0)) then
-			local WriteTagResult, WriteTagResult2 = ProtoModule.writeTag(Buf, Count, 1, ProtoModule.wireTypes.varint)
-			Buf, Count = ProtoModule.writeVarInt(WriteTagResult, WriteTagResult2, t.ActionType.toNumber(self.action_type))
-		end
-		if self.action_params ~= nil then
-			local EncodeResult = self.action_params:encode()
-			local WriteTagResult1, WriteTagResult2_1 = ProtoModule.writeTag(Buf, Count, 2, ProtoModule.wireTypes.lengthDelimited)
-			Buf, Count = ProtoModule.writeBuffer(WriteTagResult1, WriteTagResult2_1, EncodeResult, buffer.len(EncodeResult))
-		end
-		local Buf1 = buffer.create(Count)
-		buffer.copy(Buf1, 0, Buf, 0, Count)
-		
-		return Buf1
-	end
-
-	function Module135.decode(Buf)
-		-- upvalues: Module135 (copy), ProtoModule (copy), t (copy)
-		local NewModule = Module135.new()
-		local v91 = 0
-		while v91 < buffer.len(Buf) do
-			local Tag, Tag2
-			Tag, Tag2, v3327 = ProtoModule.readTag(Buf, v91)
-			
-			if Tag2 == ProtoModule.wireTypes.varint then
-				if Tag == 1 then
-					local VarIntI32
-					VarIntI32, v3327 = ProtoModule.readVarIntI32(Buf, v91)
-					NewModule.action_type = t.ActionType.fromNumber(VarIntI32) or VarIntI32
-				else
-					local _
-					_, v3327 = ProtoModule.readVarInt(Buf, v91)
-				end
-			elseif Tag2 == ProtoModule.wireTypes.lengthDelimited then
-				if Tag == 2 then
-					local Buffer1
-					Buffer1, v3327 = ProtoModule.readBuffer(Buf, v91)
-					NewModule.action_params = t.DismissGameFeedbackAction_Params.decode(Buffer1)
-				else
-					local VarInt, VarInt2 = ProtoModule.readVarInt(Buf, v91)
-					v91 = VarInt2 + VarInt
-				end
-			elseif Tag2 == ProtoModule.wireTypes.i32 then
-				local _
-				_, v3327 = ProtoModule.readFixed32(Buf, v91)
-			elseif Tag2 == ProtoModule.wireTypes.i64 then
-				local _
-				_, v3327 = ProtoModule.readFixed64(Buf, v91)
-			else
-				error("Unsupported wire type: " .. Tag2)
-			end
-		end
-		return NewModule
-	end
-
-	function Module135:jsonEncode()
-		-- upvalues: t (copy)
-		local t1 = {}
-		
-		if self.action_type ~= nil and (self.action_type ~= nil and self.action_type ~= 0 or self.action_type ~= t.ActionType.fromNumber(0)) then
-			t1.actionType = if typeof(self.action_type) == "number" then self.action_type else t.ActionType.toNumber(self.action_type)
-		end
-		if self.action_params ~= nil then
-			t1.actionParams = self.action_params:jsonEncode()
-		end
-		return t1
-	end
-
-	function Module135:jsonDecode()
-		-- upvalues: Module135 (copy), t (copy)
-		local NewModule = Module135.new()
-		
-		if self.action_type ~= nil then
-			NewModule.action_type = (if typeof(self.action_type) == "number" then t.ActionType.fromNumber(self.action_type) else t.ActionType.fromName(self.action_type)) or self.action_type
-		end
-		if self.actionType ~= nil then
-			NewModule.action_type = (if typeof(self.actionType) == "number" then t.ActionType.fromNumber(self.actionType) else t.ActionType.fromName(self.actionType)) or self.actionType
-		end
-		if self.action_params ~= nil then
-			NewModule.action_params = t.DismissGameFeedbackAction_Params.jsonDecode(self.action_params)
-		end
-		if self.actionParams ~= nil then
-			NewModule.action_params = t.DismissGameFeedbackAction_Params.jsonDecode(self.actionParams)
-		end
-		return NewModule
-	end
-
-	Module135.descriptor = {
-		name = "DismissGameFeedbackAction",
-		fullName = "roblox.apppageplatform.shared.v1beta1.DismissGameFeedbackAction"
-	}
-	t.DismissGameFeedbackAction = Module135
-	TypeRegistryModule.default:register(t.DismissGameFeedbackAction)
-	local Module136 = {}
-	Module136.__index = Module136
-
-	function Module136.new(p1)
-		-- upvalues: Module136 (copy)
-		return (setmetatable({
-			root_place_id = if p1 == nil or p1.root_place_id == nil then nil else p1.root_place_id
-		}, Module136))
-	end
-
-	function Module136:encode()
-		-- upvalues: ProtoModule (copy)
-		local Buf = buffer.create(0)
-		local Count = 0
-		
-		if self.root_place_id ~= nil then
-			local EncodeResult = self.root_place_id:encode()
-			local WriteTagResult, WriteTagResult2 = ProtoModule.writeTag(Buf, Count, 1, ProtoModule.wireTypes.lengthDelimited)
-			Buf, Count = ProtoModule.writeBuffer(WriteTagResult, WriteTagResult2, EncodeResult, buffer.len(EncodeResult))
-		end
-		local Buf1 = buffer.create(Count)
-		buffer.copy(Buf1, 0, Buf, 0, Count)
-		
-		return Buf1
-	end
-
-	function Module136.decode(Buf)
-		-- upvalues: Module136 (copy), ProtoModule (copy), PropTypesModule (copy)
-		local NewModule = Module136.new()
-		local v92 = 0
-		while v92 < buffer.len(Buf) do
-			local Tag, Tag2
-			Tag, Tag2, v3345 = ProtoModule.readTag(Buf, v92)
-			
-			if Tag2 == ProtoModule.wireTypes.varint then
-				local _
-				_, v3345 = ProtoModule.readVarInt(Buf, v92)
-			elseif Tag2 == ProtoModule.wireTypes.lengthDelimited then
-				if Tag == 1 then
-					local Buffer1
-					Buffer1, v3345 = ProtoModule.readBuffer(Buf, v92)
-					NewModule.root_place_id = PropTypesModule.StringProp.decode(Buffer1)
-				else
-					local VarInt, VarInt2 = ProtoModule.readVarInt(Buf, v92)
-					v92 = VarInt2 + VarInt
-				end
-			elseif Tag2 == ProtoModule.wireTypes.i32 then
-				local _
-				_, v3345 = ProtoModule.readFixed32(Buf, v92)
-			elseif Tag2 == ProtoModule.wireTypes.i64 then
-				local _
-				_, v3345 = ProtoModule.readFixed64(Buf, v92)
-			else
-				error("Unsupported wire type: " .. Tag2)
-			end
-		end
-		return NewModule
-	end
-
-	function Module136:jsonEncode()
-		local t = {}
-		
-		if self.root_place_id ~= nil then
-			t.rootPlaceId = self.root_place_id:jsonEncode()
-		end
-		return t
-	end
-
-	function Module136:jsonDecode()
-		-- upvalues: Module136 (copy), PropTypesModule (copy)
-		local NewModule = Module136.new()
-		
-		if self.root_place_id ~= nil then
-			NewModule.root_place_id = PropTypesModule.StringProp.jsonDecode(self.root_place_id)
-		end
-		if self.rootPlaceId ~= nil then
-			NewModule.root_place_id = PropTypesModule.StringProp.jsonDecode(self.rootPlaceId)
-		end
-		return NewModule
-	end
-
-	Module136.descriptor = {
-		name = "DismissGameFeedbackAction_Params",
-		fullName = "roblox.apppageplatform.shared.v1beta1.Params"
-	}
-	t.DismissGameFeedbackAction_Params = Module136
-	TypeRegistryModule.default:register(t.DismissGameFeedbackAction_Params)
-	local Module137 = {}
-	Module137.__index = Module137
-
-	function Module137.new(p1)
-		-- upvalues: t (copy), Module137 (copy)
-		return (setmetatable({
-			action_type = if p1 == nil or p1.action_type == nil then assert(t.ActionType.fromNumber(0), "Enum has no 0 default") else p1.action_type,
-			action_params = if p1 == nil or p1.action_params == nil then nil else p1.action_params
-		}, Module137))
-	end
-
-	function Module137:encode()
-		-- upvalues: t (copy), ProtoModule (copy)
-		local Buf = buffer.create(0)
-		local Count = 0
-		
-		if self.action_type ~= nil and (self.action_type ~= nil and self.action_type ~= 0 or self.action_type ~= t.ActionType.fromNumber(0)) then
-			local WriteTagResult, WriteTagResult2 = ProtoModule.writeTag(Buf, Count, 1, ProtoModule.wireTypes.varint)
-			Buf, Count = ProtoModule.writeVarInt(WriteTagResult, WriteTagResult2, t.ActionType.toNumber(self.action_type))
-		end
-		if self.action_params ~= nil then
-			local EncodeResult = self.action_params:encode()
-			local WriteTagResult1, WriteTagResult2_1 = ProtoModule.writeTag(Buf, Count, 2, ProtoModule.wireTypes.lengthDelimited)
-			Buf, Count = ProtoModule.writeBuffer(WriteTagResult1, WriteTagResult2_1, EncodeResult, buffer.len(EncodeResult))
-		end
-		local Buf1 = buffer.create(Count)
-		buffer.copy(Buf1, 0, Buf, 0, Count)
-		
-		return Buf1
-	end
-
-	function Module137.decode(Buf)
-		-- upvalues: Module137 (copy), ProtoModule (copy), t (copy)
-		local NewModule = Module137.new()
-		local v93 = 0
-		while v93 < buffer.len(Buf) do
-			local Tag, Tag2
-			Tag, Tag2, v3364 = ProtoModule.readTag(Buf, v93)
-			
-			if Tag2 == ProtoModule.wireTypes.varint then
-				if Tag == 1 then
-					local VarIntI32
-					VarIntI32, v3364 = ProtoModule.readVarIntI32(Buf, v93)
-					NewModule.action_type = t.ActionType.fromNumber(VarIntI32) or VarIntI32
-				else
-					local _
-					_, v3364 = ProtoModule.readVarInt(Buf, v93)
-				end
-			elseif Tag2 == ProtoModule.wireTypes.lengthDelimited then
-				if Tag == 2 then
-					local Buffer1
-					Buffer1, v3364 = ProtoModule.readBuffer(Buf, v93)
-					NewModule.action_params = t.OpenGameFeedbackFormAction_Params.decode(Buffer1)
-				else
-					local VarInt, VarInt2 = ProtoModule.readVarInt(Buf, v93)
-					v93 = VarInt2 + VarInt
-				end
-			elseif Tag2 == ProtoModule.wireTypes.i32 then
-				local _
-				_, v3364 = ProtoModule.readFixed32(Buf, v93)
-			elseif Tag2 == ProtoModule.wireTypes.i64 then
-				local _
-				_, v3364 = ProtoModule.readFixed64(Buf, v93)
-			else
-				error("Unsupported wire type: " .. Tag2)
-			end
-		end
-		return NewModule
-	end
-
-	function Module137:jsonEncode()
-		-- upvalues: t (copy)
-		local t1 = {}
-		
-		if self.action_type ~= nil and (self.action_type ~= nil and self.action_type ~= 0 or self.action_type ~= t.ActionType.fromNumber(0)) then
-			t1.actionType = if typeof(self.action_type) == "number" then self.action_type else t.ActionType.toNumber(self.action_type)
-		end
-		if self.action_params ~= nil then
-			t1.actionParams = self.action_params:jsonEncode()
-		end
-		return t1
-	end
-
-	function Module137:jsonDecode()
-		-- upvalues: Module137 (copy), t (copy)
-		local NewModule = Module137.new()
-		
-		if self.action_type ~= nil then
-			NewModule.action_type = (if typeof(self.action_type) == "number" then t.ActionType.fromNumber(self.action_type) else t.ActionType.fromName(self.action_type)) or self.action_type
-		end
-		if self.actionType ~= nil then
-			NewModule.action_type = (if typeof(self.actionType) == "number" then t.ActionType.fromNumber(self.actionType) else t.ActionType.fromName(self.actionType)) or self.actionType
-		end
-		if self.action_params ~= nil then
-			NewModule.action_params = t.OpenGameFeedbackFormAction_Params.jsonDecode(self.action_params)
-		end
-		if self.actionParams ~= nil then
-			NewModule.action_params = t.OpenGameFeedbackFormAction_Params.jsonDecode(self.actionParams)
-		end
-		return NewModule
-	end
-
-	Module137.descriptor = {
-		name = "OpenGameFeedbackFormAction",
-		fullName = "roblox.apppageplatform.shared.v1beta1.OpenGameFeedbackFormAction"
-	}
-	t.OpenGameFeedbackFormAction = Module137
-end
-do
-	TypeRegistryModule.default:register(t.OpenGameFeedbackFormAction)
-	local Module138 = {}
-	Module138.__index = Module138
-
-	function Module138.new(p1)
-		-- upvalues: Module138 (copy)
-		return (setmetatable({
-			universe_id = if p1 == nil or p1.universe_id == nil then nil else p1.universe_id,
-			root_place_id = if p1 == nil or p1.root_place_id == nil then nil else p1.root_place_id
-		}, Module138))
-	end
-
-	function Module138:encode()
-		-- upvalues: ProtoModule (copy)
-		local Buf = buffer.create(0)
-		local Count = 0
-		
-		if self.universe_id ~= nil then
-			local EncodeResult = self.universe_id:encode()
-			local WriteTagResult, WriteTagResult2 = ProtoModule.writeTag(Buf, Count, 1, ProtoModule.wireTypes.lengthDelimited)
-			Buf, Count = ProtoModule.writeBuffer(WriteTagResult, WriteTagResult2, EncodeResult, buffer.len(EncodeResult))
-		end
-		if self.root_place_id ~= nil then
-			local EncodeResult = self.root_place_id:encode()
-			local WriteTagResult1, WriteTagResult2_1 = ProtoModule.writeTag(Buf, Count, 2, ProtoModule.wireTypes.lengthDelimited)
-			Buf, Count = ProtoModule.writeBuffer(WriteTagResult1, WriteTagResult2_1, EncodeResult, buffer.len(EncodeResult))
-		end
-		local Buf1 = buffer.create(Count)
-		buffer.copy(Buf1, 0, Buf, 0, Count)
-		
-		return Buf1
-	end
-
-	function Module138.decode(Buf)
-		-- upvalues: Module138 (copy), ProtoModule (copy), PropTypesModule (copy)
-		local NewModule = Module138.new()
-		local v93 = 0
-		while v93 < buffer.len(Buf) do
-			local Tag, Tag2
-			Tag, Tag2, v3385 = ProtoModule.readTag(Buf, v93)
-			
-			if Tag2 == ProtoModule.wireTypes.varint then
-				local _
-				_, v3385 = ProtoModule.readVarInt(Buf, v93)
-			elseif Tag2 == ProtoModule.wireTypes.lengthDelimited then
-				if Tag == 1 then
-					local Buffer1
-					Buffer1, v3385 = ProtoModule.readBuffer(Buf, v93)
-					NewModule.universe_id = PropTypesModule.StringProp.decode(Buffer1)
-				elseif Tag == 2 then
-					local Buffer2
-					Buffer2, v3385 = ProtoModule.readBuffer(Buf, v93)
-					NewModule.root_place_id = PropTypesModule.StringProp.decode(Buffer2)
-				else
-					local VarInt, VarInt2 = ProtoModule.readVarInt(Buf, v93)
-					v93 = VarInt2 + VarInt
-				end
-			elseif Tag2 == ProtoModule.wireTypes.i32 then
-				local _
-				_, v3385 = ProtoModule.readFixed32(Buf, v93)
-			elseif Tag2 == ProtoModule.wireTypes.i64 then
-				local _
-				_, v3385 = ProtoModule.readFixed64(Buf, v93)
-			else
-				error("Unsupported wire type: " .. Tag2)
-			end
-		end
-		return NewModule
-	end
-
-	function Module138:jsonEncode()
-		local t = {}
-		
-		if self.universe_id ~= nil then
-			t.universeId = self.universe_id:jsonEncode()
-		end
-		if self.root_place_id ~= nil then
-			t.rootPlaceId = self.root_place_id:jsonEncode()
-		end
-		return t
-	end
-
-	function Module138:jsonDecode()
-		-- upvalues: Module138 (copy), PropTypesModule (copy)
-		local NewModule = Module138.new()
-		
-		if self.universe_id ~= nil then
-			NewModule.universe_id = PropTypesModule.StringProp.jsonDecode(self.universe_id)
-		end
-		if self.universeId ~= nil then
-			NewModule.universe_id = PropTypesModule.StringProp.jsonDecode(self.universeId)
-		end
-		if self.root_place_id ~= nil then
-			NewModule.root_place_id = PropTypesModule.StringProp.jsonDecode(self.root_place_id)
-		end
-		if self.rootPlaceId ~= nil then
-			NewModule.root_place_id = PropTypesModule.StringProp.jsonDecode(self.rootPlaceId)
-		end
-		return NewModule
-	end
-
-	Module138.descriptor = {
-		name = "OpenGameFeedbackFormAction_Params",
-		fullName = "roblox.apppageplatform.shared.v1beta1.Params"
-	}
-	t.OpenGameFeedbackFormAction_Params = Module138
-	TypeRegistryModule.default:register(t.OpenGameFeedbackFormAction_Params)
-	local Module139 = {}
-	Module139.__index = Module139
-
-	function Module139.new(p1)
-		-- upvalues: t (copy), Module139 (copy)
-		return (setmetatable({
-			action_type = if p1 == nil or p1.action_type == nil then assert(t.ActionType.fromNumber(0), "Enum has no 0 default") else p1.action_type,
-			action_params = if p1 == nil or p1.action_params == nil then nil else p1.action_params
-		}, Module139))
-	end
-
-	function Module139:encode()
-		-- upvalues: t (copy), ProtoModule (copy)
-		local Buf = buffer.create(0)
-		local Count = 0
-		
-		if self.action_type ~= nil and (self.action_type ~= nil and self.action_type ~= 0 or self.action_type ~= t.ActionType.fromNumber(0)) then
-			local WriteTagResult, WriteTagResult2 = ProtoModule.writeTag(Buf, Count, 1, ProtoModule.wireTypes.varint)
-			Buf, Count = ProtoModule.writeVarInt(WriteTagResult, WriteTagResult2, t.ActionType.toNumber(self.action_type))
-		end
-		if self.action_params ~= nil then
-			local EncodeResult = self.action_params:encode()
-			local WriteTagResult1, WriteTagResult2_1 = ProtoModule.writeTag(Buf, Count, 2, ProtoModule.wireTypes.lengthDelimited)
-			Buf, Count = ProtoModule.writeBuffer(WriteTagResult1, WriteTagResult2_1, EncodeResult, buffer.len(EncodeResult))
-		end
-		local Buf1 = buffer.create(Count)
-		buffer.copy(Buf1, 0, Buf, 0, Count)
-		
-		return Buf1
-	end
-
-	function Module139.decode(Buf)
-		-- upvalues: Module139 (copy), ProtoModule (copy), t (copy)
-		local NewModule = Module139.new()
-		local v94 = 0
-		while v94 < buffer.len(Buf) do
-			local Tag, Tag2
-			Tag, Tag2, v3405 = ProtoModule.readTag(Buf, v94)
-			
-			if Tag2 == ProtoModule.wireTypes.varint then
-				if Tag == 1 then
-					local VarIntI32
-					VarIntI32, v3405 = ProtoModule.readVarIntI32(Buf, v94)
-					NewModule.action_type = t.ActionType.fromNumber(VarIntI32) or VarIntI32
-				else
-					local _
-					_, v3405 = ProtoModule.readVarInt(Buf, v94)
-				end
-			elseif Tag2 == ProtoModule.wireTypes.lengthDelimited then
-				if Tag == 2 then
-					local Buffer1
-					Buffer1, v3405 = ProtoModule.readBuffer(Buf, v94)
-					NewModule.action_params = t.AiOverviewFeedbackAction_Params.decode(Buffer1)
-				else
-					local VarInt, VarInt2 = ProtoModule.readVarInt(Buf, v94)
-					v94 = VarInt2 + VarInt
-				end
-			elseif Tag2 == ProtoModule.wireTypes.i32 then
-				local _
-				_, v3405 = ProtoModule.readFixed32(Buf, v94)
-			elseif Tag2 == ProtoModule.wireTypes.i64 then
-				local _
-				_, v3405 = ProtoModule.readFixed64(Buf, v94)
-			else
-				error("Unsupported wire type: " .. Tag2)
-			end
-		end
-		return NewModule
-	end
-
-	function Module139:jsonEncode()
-		-- upvalues: t (copy)
-		local t1 = {}
-		
-		if self.action_type ~= nil and (self.action_type ~= nil and self.action_type ~= 0 or self.action_type ~= t.ActionType.fromNumber(0)) then
-			t1.actionType = if typeof(self.action_type) == "number" then self.action_type else t.ActionType.toNumber(self.action_type)
-		end
-		if self.action_params ~= nil then
-			t1.actionParams = self.action_params:jsonEncode()
-		end
-		return t1
-	end
-
-	function Module139:jsonDecode()
-		-- upvalues: Module139 (copy), t (copy)
-		local NewModule = Module139.new()
-		
-		if self.action_type ~= nil then
-			NewModule.action_type = (if typeof(self.action_type) == "number" then t.ActionType.fromNumber(self.action_type) else t.ActionType.fromName(self.action_type)) or self.action_type
-		end
-		if self.actionType ~= nil then
-			NewModule.action_type = (if typeof(self.actionType) == "number" then t.ActionType.fromNumber(self.actionType) else t.ActionType.fromName(self.actionType)) or self.actionType
-		end
-		if self.action_params ~= nil then
-			NewModule.action_params = t.AiOverviewFeedbackAction_Params.jsonDecode(self.action_params)
-		end
-		if self.actionParams ~= nil then
-			NewModule.action_params = t.AiOverviewFeedbackAction_Params.jsonDecode(self.actionParams)
-		end
-		return NewModule
-	end
-
-	Module139.descriptor = {
-		name = "AiOverviewFeedbackAction",
-		fullName = "roblox.apppageplatform.shared.v1beta1.AiOverviewFeedbackAction"
-	}
-	t.AiOverviewFeedbackAction = Module139
-	TypeRegistryModule.default:register(t.AiOverviewFeedbackAction)
-	local Module140 = {}
-	Module140.__index = Module140
-
-	function Module140.new(p1)
-		-- upvalues: Module140 (copy)
-		return (setmetatable({
-			sentiment = if p1 == nil or p1.sentiment == nil then nil else p1.sentiment,
-			dialog_title = if p1 == nil or p1.dialog_title == nil then nil else p1.dialog_title,
-			dialog_text = if p1 == nil or p1.dialog_text == nil then nil else p1.dialog_text,
-			placeholder_text = if p1 == nil or p1.placeholder_text == nil then nil else p1.placeholder_text
-		}, Module140))
-	end
-
-	function Module140:encode()
-		-- upvalues: ProtoModule (copy)
-		local Buf = buffer.create(0)
-		local Count = 0
-		
-		if self.sentiment ~= nil then
-			local EncodeResult = self.sentiment:encode()
-			local WriteTagResult, WriteTagResult2 = ProtoModule.writeTag(Buf, Count, 1, ProtoModule.wireTypes.lengthDelimited)
-			Buf, Count = ProtoModule.writeBuffer(WriteTagResult, WriteTagResult2, EncodeResult, buffer.len(EncodeResult))
-		end
-		if self.dialog_title ~= nil then
-			local EncodeResult = self.dialog_title:encode()
-			local WriteTagResult1, WriteTagResult2_1 = ProtoModule.writeTag(Buf, Count, 2, ProtoModule.wireTypes.lengthDelimited)
-			Buf, Count = ProtoModule.writeBuffer(WriteTagResult1, WriteTagResult2_1, EncodeResult, buffer.len(EncodeResult))
-		end
-		if self.dialog_text ~= nil then
-			local EncodeResult = self.dialog_text:encode()
-			local WriteTagResult3, WriteTagResult2_2 = ProtoModule.writeTag(Buf, Count, 3, ProtoModule.wireTypes.lengthDelimited)
-			Buf, Count = ProtoModule.writeBuffer(WriteTagResult3, WriteTagResult2_2, EncodeResult, buffer.len(EncodeResult))
-		end
-		if self.placeholder_text ~= nil then
-			local EncodeResult = self.placeholder_text:encode()
-			local WriteTagResult4, WriteTagResult2_3 = ProtoModule.writeTag(Buf, Count, 4, ProtoModule.wireTypes.lengthDelimited)
-			Buf, Count = ProtoModule.writeBuffer(WriteTagResult4, WriteTagResult2_3, EncodeResult, buffer.len(EncodeResult))
-		end
-		local Buf1 = buffer.create(Count)
-		buffer.copy(Buf1, 0, Buf, 0, Count)
-		
-		return Buf1
-	end
-
-	function Module140.decode(Buf)
-		-- upvalues: Module140 (copy), ProtoModule (copy), PropTypesModule (copy)
-		local NewModule = Module140.new()
-		local v95 = 0
-		while v95 < buffer.len(Buf) do
-			local Tag, Tag2
-			Tag, Tag2, v3432 = ProtoModule.readTag(Buf, v95)
-			
-			if Tag2 == ProtoModule.wireTypes.varint then
-				local _
-				_, v3432 = ProtoModule.readVarInt(Buf, v95)
-			elseif Tag2 == ProtoModule.wireTypes.lengthDelimited then
-				if Tag == 1 then
-					local Buffer1
-					Buffer1, v3432 = ProtoModule.readBuffer(Buf, v95)
-					NewModule.sentiment = PropTypesModule.StringProp.decode(Buffer1)
-				elseif Tag == 2 then
-					local Buffer2
-					Buffer2, v3432 = ProtoModule.readBuffer(Buf, v95)
-					NewModule.dialog_title = PropTypesModule.StringProp.decode(Buffer2)
-				elseif Tag == 3 then
-					local Buffer3
-					Buffer3, v3432 = ProtoModule.readBuffer(Buf, v95)
-					NewModule.dialog_text = PropTypesModule.StringProp.decode(Buffer3)
-				elseif Tag == 4 then
-					local Buffer4
-					Buffer4, v3432 = ProtoModule.readBuffer(Buf, v95)
-					NewModule.placeholder_text = PropTypesModule.StringProp.decode(Buffer4)
-				else
-					local VarInt, VarInt2 = ProtoModule.readVarInt(Buf, v95)
-					v95 = VarInt2 + VarInt
-				end
-			elseif Tag2 == ProtoModule.wireTypes.i32 then
-				local _
-				_, v3432 = ProtoModule.readFixed32(Buf, v95)
-			elseif Tag2 == ProtoModule.wireTypes.i64 then
-				local _
-				_, v3432 = ProtoModule.readFixed64(Buf, v95)
-			else
-				error("Unsupported wire type: " .. Tag2)
-			end
-		end
-		return NewModule
-	end
-
-	function Module140:jsonEncode()
-		local t = {}
-		
-		if self.sentiment ~= nil then
-			t.sentiment = self.sentiment:jsonEncode()
-		end
-		if self.dialog_title ~= nil then
-			t.dialogTitle = self.dialog_title:jsonEncode()
-		end
-		if self.dialog_text ~= nil then
-			t.dialogText = self.dialog_text:jsonEncode()
-		end
-		if self.placeholder_text ~= nil then
-			t.placeholderText = self.placeholder_text:jsonEncode()
-		end
-		return t
-	end
-
-	function Module140:jsonDecode()
-		-- upvalues: Module140 (copy), PropTypesModule (copy)
-		local NewModule = Module140.new()
-		
-		if self.sentiment ~= nil then
-			NewModule.sentiment = PropTypesModule.StringProp.jsonDecode(self.sentiment)
-		end
-		if self.dialog_title ~= nil then
-			NewModule.dialog_title = PropTypesModule.StringProp.jsonDecode(self.dialog_title)
-		end
-		if self.dialogTitle ~= nil then
-			NewModule.dialog_title = PropTypesModule.StringProp.jsonDecode(self.dialogTitle)
-		end
-		if self.dialog_text ~= nil then
-			NewModule.dialog_text = PropTypesModule.StringProp.jsonDecode(self.dialog_text)
-		end
-		if self.dialogText ~= nil then
-			NewModule.dialog_text = PropTypesModule.StringProp.jsonDecode(self.dialogText)
-		end
-		if self.placeholder_text ~= nil then
-			NewModule.placeholder_text = PropTypesModule.StringProp.jsonDecode(self.placeholder_text)
-		end
-		if self.placeholderText ~= nil then
-			NewModule.placeholder_text = PropTypesModule.StringProp.jsonDecode(self.placeholderText)
-		end
-		return NewModule
-	end
-
-	Module140.descriptor = {
-		name = "AiOverviewFeedbackAction_Params",
-		fullName = "roblox.apppageplatform.shared.v1beta1.Params"
-	}
-	t.AiOverviewFeedbackAction_Params = Module140
-end
-do
-	TypeRegistryModule.default:register(t.AiOverviewFeedbackAction_Params)
-	local Module141 = {}
-	Module141.__index = Module141
-
-	function Module141.new(p1)
-		-- upvalues: t (copy), Module141 (copy)
-		return (setmetatable({
-			action_type = if p1 == nil or p1.action_type == nil then assert(t.ActionType.fromNumber(0), "Enum has no 0 default") else p1.action_type,
-			action_params = if p1 == nil or p1.action_params == nil then nil else p1.action_params
-		}, Module141))
-	end
-
-	function Module141:encode()
-		-- upvalues: t (copy), ProtoModule (copy)
-		local Buf = buffer.create(0)
-		local Count = 0
-		
-		if self.action_type ~= nil and (self.action_type ~= nil and self.action_type ~= 0 or self.action_type ~= t.ActionType.fromNumber(0)) then
-			local WriteTagResult, WriteTagResult2 = ProtoModule.writeTag(Buf, Count, 1, ProtoModule.wireTypes.varint)
-			Buf, Count = ProtoModule.writeVarInt(WriteTagResult, WriteTagResult2, t.ActionType.toNumber(self.action_type))
-		end
-		if self.action_params ~= nil then
-			local EncodeResult = self.action_params:encode()
-			local WriteTagResult1, WriteTagResult2_1 = ProtoModule.writeTag(Buf, Count, 2, ProtoModule.wireTypes.lengthDelimited)
-			Buf, Count = ProtoModule.writeBuffer(WriteTagResult1, WriteTagResult2_1, EncodeResult, buffer.len(EncodeResult))
-		end
-		local Buf1 = buffer.create(Count)
-		buffer.copy(Buf1, 0, Buf, 0, Count)
-		
-		return Buf1
-	end
-
-	function Module141.decode(Buf)
-		-- upvalues: Module141 (copy), ProtoModule (copy), t (copy)
-		local NewModule = Module141.new()
-		local v95 = 0
-		while v95 < buffer.len(Buf) do
-			local Tag, Tag2
-			Tag, Tag2, v3454 = ProtoModule.readTag(Buf, v95)
-			
-			if Tag2 == ProtoModule.wireTypes.varint then
-				if Tag == 1 then
-					local VarIntI32
-					VarIntI32, v3454 = ProtoModule.readVarIntI32(Buf, v95)
-					NewModule.action_type = t.ActionType.fromNumber(VarIntI32) or VarIntI32
-				else
-					local _
-					_, v3454 = ProtoModule.readVarInt(Buf, v95)
-				end
-			elseif Tag2 == ProtoModule.wireTypes.lengthDelimited then
-				if Tag == 2 then
-					local Buffer1
-					Buffer1, v3454 = ProtoModule.readBuffer(Buf, v95)
-					NewModule.action_params = t.EnableEventNotificationsAction_Params.decode(Buffer1)
-				else
-					local VarInt, VarInt2 = ProtoModule.readVarInt(Buf, v95)
-					v95 = VarInt2 + VarInt
-				end
-			elseif Tag2 == ProtoModule.wireTypes.i32 then
-				local _
-				_, v3454 = ProtoModule.readFixed32(Buf, v95)
-			elseif Tag2 == ProtoModule.wireTypes.i64 then
-				local _
-				_, v3454 = ProtoModule.readFixed64(Buf, v95)
-			else
-				error("Unsupported wire type: " .. Tag2)
-			end
-		end
-		return NewModule
-	end
-
-	function Module141:jsonEncode()
-		-- upvalues: t (copy)
-		local t1 = {}
-		
-		if self.action_type ~= nil and (self.action_type ~= nil and self.action_type ~= 0 or self.action_type ~= t.ActionType.fromNumber(0)) then
-			t1.actionType = if typeof(self.action_type) == "number" then self.action_type else t.ActionType.toNumber(self.action_type)
-		end
-		if self.action_params ~= nil then
-			t1.actionParams = self.action_params:jsonEncode()
-		end
-		return t1
-	end
-
-	function Module141:jsonDecode()
-		-- upvalues: Module141 (copy), t (copy)
-		local NewModule = Module141.new()
-		
-		if self.action_type ~= nil then
-			NewModule.action_type = (if typeof(self.action_type) == "number" then t.ActionType.fromNumber(self.action_type) else t.ActionType.fromName(self.action_type)) or self.action_type
-		end
-		if self.actionType ~= nil then
-			NewModule.action_type = (if typeof(self.actionType) == "number" then t.ActionType.fromNumber(self.actionType) else t.ActionType.fromName(self.actionType)) or self.actionType
-		end
-		if self.action_params ~= nil then
-			NewModule.action_params = t.EnableEventNotificationsAction_Params.jsonDecode(self.action_params)
-		end
-		if self.actionParams ~= nil then
-			NewModule.action_params = t.EnableEventNotificationsAction_Params.jsonDecode(self.actionParams)
-		end
-		return NewModule
-	end
-
-	Module141.descriptor = {
-		name = "EnableEventNotificationsAction",
-		fullName = "roblox.apppageplatform.shared.v1beta1.EnableEventNotificationsAction"
-	}
-	t.EnableEventNotificationsAction = Module141
-	TypeRegistryModule.default:register(t.EnableEventNotificationsAction)
-	local Module142 = {}
-	Module142.__index = Module142
-
-	function Module142.new(p1)
-		-- upvalues: Module142 (copy)
-		return (setmetatable({
-			event_id = if p1 == nil or p1.event_id == nil then nil else p1.event_id,
-			universe_id = if p1 == nil or p1.universe_id == nil then nil else p1.universe_id,
-			channel = if p1 == nil or p1.channel == nil then nil else p1.channel
-		}, Module142))
-	end
-
-	function Module142:encode()
-		-- upvalues: ProtoModule (copy)
-		local Buf = buffer.create(0)
-		local Count = 0
-		
-		if self.event_id ~= nil then
-			local EncodeResult = self.event_id:encode()
-			local WriteTagResult, WriteTagResult2 = ProtoModule.writeTag(Buf, Count, 1, ProtoModule.wireTypes.lengthDelimited)
-			Buf, Count = ProtoModule.writeBuffer(WriteTagResult, WriteTagResult2, EncodeResult, buffer.len(EncodeResult))
-		end
-		if self.universe_id ~= nil then
-			local EncodeResult = self.universe_id:encode()
-			local WriteTagResult1, WriteTagResult2_1 = ProtoModule.writeTag(Buf, Count, 2, ProtoModule.wireTypes.lengthDelimited)
-			Buf, Count = ProtoModule.writeBuffer(WriteTagResult1, WriteTagResult2_1, EncodeResult, buffer.len(EncodeResult))
-		end
-		if self.channel ~= nil then
-			local EncodeResult = self.channel:encode()
-			local WriteTagResult3, WriteTagResult2_2 = ProtoModule.writeTag(Buf, Count, 3, ProtoModule.wireTypes.lengthDelimited)
-			Buf, Count = ProtoModule.writeBuffer(WriteTagResult3, WriteTagResult2_2, EncodeResult, buffer.len(EncodeResult))
-		end
-		local Buf1 = buffer.create(Count)
-		buffer.copy(Buf1, 0, Buf, 0, Count)
-		
-		return Buf1
-	end
-
-	function Module142.decode(Buf)
-		-- upvalues: Module142 (copy), ProtoModule (copy), PropTypesModule (copy)
-		local NewModule = Module142.new()
-		local v96 = 0
-		while v96 < buffer.len(Buf) do
-			local Tag, Tag2
-			Tag, Tag2, v3478 = ProtoModule.readTag(Buf, v96)
-			
-			if Tag2 == ProtoModule.wireTypes.varint then
-				local _
-				_, v3478 = ProtoModule.readVarInt(Buf, v96)
-			elseif Tag2 == ProtoModule.wireTypes.lengthDelimited then
-				if Tag == 1 then
-					local Buffer1
-					Buffer1, v3478 = ProtoModule.readBuffer(Buf, v96)
-					NewModule.event_id = PropTypesModule.StringProp.decode(Buffer1)
-				elseif Tag == 2 then
-					local Buffer2
-					Buffer2, v3478 = ProtoModule.readBuffer(Buf, v96)
-					NewModule.universe_id = PropTypesModule.StringProp.decode(Buffer2)
-				elseif Tag == 3 then
-					local Buffer3
-					Buffer3, v3478 = ProtoModule.readBuffer(Buf, v96)
-					NewModule.channel = PropTypesModule.StringProp.decode(Buffer3)
-				else
-					local VarInt, VarInt2 = ProtoModule.readVarInt(Buf, v96)
-					v96 = VarInt2 + VarInt
-				end
-			elseif Tag2 == ProtoModule.wireTypes.i32 then
-				local _
-				_, v3478 = ProtoModule.readFixed32(Buf, v96)
-			elseif Tag2 == ProtoModule.wireTypes.i64 then
-				local _
-				_, v3478 = ProtoModule.readFixed64(Buf, v96)
-			else
-				error("Unsupported wire type: " .. Tag2)
-			end
-		end
-		return NewModule
-	end
-
-	function Module142:jsonEncode()
-		local t = {}
-		
-		if self.event_id ~= nil then
-			t.eventId = self.event_id:jsonEncode()
-		end
-		if self.universe_id ~= nil then
-			t.universeId = self.universe_id:jsonEncode()
-		end
-		if self.channel ~= nil then
-			t.channel = self.channel:jsonEncode()
-		end
-		return t
-	end
-
-	function Module142:jsonDecode()
-		-- upvalues: Module142 (copy), PropTypesModule (copy)
-		local NewModule = Module142.new()
-		
-		if self.event_id ~= nil then
-			NewModule.event_id = PropTypesModule.StringProp.jsonDecode(self.event_id)
-		end
-		if self.eventId ~= nil then
-			NewModule.event_id = PropTypesModule.StringProp.jsonDecode(self.eventId)
-		end
-		if self.universe_id ~= nil then
-			NewModule.universe_id = PropTypesModule.StringProp.jsonDecode(self.universe_id)
-		end
-		if self.universeId ~= nil then
-			NewModule.universe_id = PropTypesModule.StringProp.jsonDecode(self.universeId)
-		end
-		if self.channel ~= nil then
-			NewModule.channel = PropTypesModule.StringProp.jsonDecode(self.channel)
-		end
-		return NewModule
-	end
-
-	Module142.descriptor = {
-		name = "EnableEventNotificationsAction_Params",
-		fullName = "roblox.apppageplatform.shared.v1beta1.Params"
-	}
-	t.EnableEventNotificationsAction_Params = Module142
-	TypeRegistryModule.default:register(t.EnableEventNotificationsAction_Params)
 	local Module143 = {}
 	Module143.__index = Module143
 
@@ -16925,32 +16771,32 @@ do
 		local v97 = 0
 		while v97 < buffer.len(Buf) do
 			local Tag, Tag2
-			Tag, Tag2, v3499 = ProtoModule.readTag(Buf, v97)
+			Tag, Tag2, v3472 = ProtoModule.readTag(Buf, v97)
 			
 			if Tag2 == ProtoModule.wireTypes.varint then
 				if Tag == 1 then
 					local VarIntI32
-					VarIntI32, v3499 = ProtoModule.readVarIntI32(Buf, v97)
+					VarIntI32, v3472 = ProtoModule.readVarIntI32(Buf, v97)
 					NewModule.action_type = t.ActionType.fromNumber(VarIntI32) or VarIntI32
 				else
 					local _
-					_, v3499 = ProtoModule.readVarInt(Buf, v97)
+					_, v3472 = ProtoModule.readVarInt(Buf, v97)
 				end
 			elseif Tag2 == ProtoModule.wireTypes.lengthDelimited then
 				if Tag == 2 then
 					local Buffer1
-					Buffer1, v3499 = ProtoModule.readBuffer(Buf, v97)
-					NewModule.action_params = t.DismissEventNotificationsModalAction_Params.decode(Buffer1)
+					Buffer1, v3472 = ProtoModule.readBuffer(Buf, v97)
+					NewModule.action_params = t.ReportSurfaceLoadTimeMilestoneAction_Params.decode(Buffer1)
 				else
 					local VarInt, VarInt2 = ProtoModule.readVarInt(Buf, v97)
 					v97 = VarInt2 + VarInt
 				end
 			elseif Tag2 == ProtoModule.wireTypes.i32 then
 				local _
-				_, v3499 = ProtoModule.readFixed32(Buf, v97)
+				_, v3472 = ProtoModule.readFixed32(Buf, v97)
 			elseif Tag2 == ProtoModule.wireTypes.i64 then
 				local _
-				_, v3499 = ProtoModule.readFixed64(Buf, v97)
+				_, v3472 = ProtoModule.readFixed64(Buf, v97)
 			else
 				error("Unsupported wire type: " .. Tag2)
 			end
@@ -16982,29 +16828,30 @@ do
 			NewModule.action_type = (if typeof(self.actionType) == "number" then t.ActionType.fromNumber(self.actionType) else t.ActionType.fromName(self.actionType)) or self.actionType
 		end
 		if self.action_params ~= nil then
-			NewModule.action_params = t.DismissEventNotificationsModalAction_Params.jsonDecode(self.action_params)
+			NewModule.action_params = t.ReportSurfaceLoadTimeMilestoneAction_Params.jsonDecode(self.action_params)
 		end
 		if self.actionParams ~= nil then
-			NewModule.action_params = t.DismissEventNotificationsModalAction_Params.jsonDecode(self.actionParams)
+			NewModule.action_params = t.ReportSurfaceLoadTimeMilestoneAction_Params.jsonDecode(self.actionParams)
 		end
 		return NewModule
 	end
 
 	Module143.descriptor = {
-		name = "DismissEventNotificationsModalAction",
-		fullName = "roblox.apppageplatform.shared.v1beta1.DismissEventNotificationsModalAction"
+		name = "ReportSurfaceLoadTimeMilestoneAction",
+		fullName = "roblox.apppageplatform.shared.v1beta1.ReportSurfaceLoadTimeMilestoneAction"
 	}
-	t.DismissEventNotificationsModalAction = Module143
+	t.ReportSurfaceLoadTimeMilestoneAction = Module143
 end
 do
-	TypeRegistryModule.default:register(t.DismissEventNotificationsModalAction)
+	TypeRegistryModule.default:register(t.ReportSurfaceLoadTimeMilestoneAction)
 	local Module144 = {}
 	Module144.__index = Module144
 
 	function Module144.new(p1)
 		-- upvalues: Module144 (copy)
 		return (setmetatable({
-			event_id = if p1 == nil or p1.event_id == nil then nil else p1.event_id
+			milestone = if p1 == nil or p1.milestone == nil then nil else p1.milestone,
+			metadata = if p1 == nil or p1.metadata == nil then nil else p1.metadata
 		}, Module144))
 	end
 
@@ -17013,10 +16860,15 @@ do
 		local Buf = buffer.create(0)
 		local Count = 0
 		
-		if self.event_id ~= nil then
-			local EncodeResult = self.event_id:encode()
+		if self.milestone ~= nil then
+			local EncodeResult = self.milestone:encode()
 			local WriteTagResult, WriteTagResult2 = ProtoModule.writeTag(Buf, Count, 1, ProtoModule.wireTypes.lengthDelimited)
 			Buf, Count = ProtoModule.writeBuffer(WriteTagResult, WriteTagResult2, EncodeResult, buffer.len(EncodeResult))
+		end
+		if self.metadata ~= nil then
+			local EncodeResult = self.metadata:encode()
+			local WriteTagResult1, WriteTagResult2_1 = ProtoModule.writeTag(Buf, Count, 3, ProtoModule.wireTypes.lengthDelimited)
+			Buf, Count = ProtoModule.writeBuffer(WriteTagResult1, WriteTagResult2_1, EncodeResult, buffer.len(EncodeResult))
 		end
 		local Buf1 = buffer.create(Count)
 		buffer.copy(Buf1, 0, Buf, 0, Count)
@@ -17030,26 +16882,30 @@ do
 		local v97 = 0
 		while v97 < buffer.len(Buf) do
 			local Tag, Tag2
-			Tag, Tag2, v3517 = ProtoModule.readTag(Buf, v97)
+			Tag, Tag2, v3493 = ProtoModule.readTag(Buf, v97)
 			
 			if Tag2 == ProtoModule.wireTypes.varint then
 				local _
-				_, v3517 = ProtoModule.readVarInt(Buf, v97)
+				_, v3493 = ProtoModule.readVarInt(Buf, v97)
 			elseif Tag2 == ProtoModule.wireTypes.lengthDelimited then
 				if Tag == 1 then
 					local Buffer1
-					Buffer1, v3517 = ProtoModule.readBuffer(Buf, v97)
-					NewModule.event_id = PropTypesModule.StringProp.decode(Buffer1)
+					Buffer1, v3493 = ProtoModule.readBuffer(Buf, v97)
+					NewModule.milestone = PropTypesModule.StringProp.decode(Buffer1)
+				elseif Tag == 3 then
+					local Buffer2
+					Buffer2, v3493 = ProtoModule.readBuffer(Buf, v97)
+					NewModule.metadata = PropTypesModule.StructProp.decode(Buffer2)
 				else
 					local VarInt, VarInt2 = ProtoModule.readVarInt(Buf, v97)
 					v97 = VarInt2 + VarInt
 				end
 			elseif Tag2 == ProtoModule.wireTypes.i32 then
 				local _
-				_, v3517 = ProtoModule.readFixed32(Buf, v97)
+				_, v3493 = ProtoModule.readFixed32(Buf, v97)
 			elseif Tag2 == ProtoModule.wireTypes.i64 then
 				local _
-				_, v3517 = ProtoModule.readFixed64(Buf, v97)
+				_, v3493 = ProtoModule.readFixed64(Buf, v97)
 			else
 				error("Unsupported wire type: " .. Tag2)
 			end
@@ -17060,8 +16916,11 @@ do
 	function Module144:jsonEncode()
 		local t = {}
 		
-		if self.event_id ~= nil then
-			t.eventId = self.event_id:jsonEncode()
+		if self.milestone ~= nil then
+			t.milestone = self.milestone:jsonEncode()
+		end
+		if self.metadata ~= nil then
+			t.metadata = self.metadata:jsonEncode()
 		end
 		return t
 	end
@@ -17070,21 +16929,21 @@ do
 		-- upvalues: Module144 (copy), PropTypesModule (copy)
 		local NewModule = Module144.new()
 		
-		if self.event_id ~= nil then
-			NewModule.event_id = PropTypesModule.StringProp.jsonDecode(self.event_id)
+		if self.milestone ~= nil then
+			NewModule.milestone = PropTypesModule.StringProp.jsonDecode(self.milestone)
 		end
-		if self.eventId ~= nil then
-			NewModule.event_id = PropTypesModule.StringProp.jsonDecode(self.eventId)
+		if self.metadata ~= nil then
+			NewModule.metadata = PropTypesModule.StructProp.jsonDecode(self.metadata)
 		end
 		return NewModule
 	end
 
 	Module144.descriptor = {
-		name = "DismissEventNotificationsModalAction_Params",
+		name = "ReportSurfaceLoadTimeMilestoneAction_Params",
 		fullName = "roblox.apppageplatform.shared.v1beta1.Params"
 	}
-	t.DismissEventNotificationsModalAction_Params = Module144
-	TypeRegistryModule.default:register(t.DismissEventNotificationsModalAction_Params)
+	t.ReportSurfaceLoadTimeMilestoneAction_Params = Module144
+	TypeRegistryModule.default:register(t.ReportSurfaceLoadTimeMilestoneAction_Params)
 	local Module145 = {}
 	Module145.__index = Module145
 
@@ -17122,32 +16981,32 @@ do
 		local v98 = 0
 		while v98 < buffer.len(Buf) do
 			local Tag, Tag2
-			Tag, Tag2, v3536 = ProtoModule.readTag(Buf, v98)
+			Tag, Tag2, v3513 = ProtoModule.readTag(Buf, v98)
 			
 			if Tag2 == ProtoModule.wireTypes.varint then
 				if Tag == 1 then
 					local VarIntI32
-					VarIntI32, v3536 = ProtoModule.readVarIntI32(Buf, v98)
+					VarIntI32, v3513 = ProtoModule.readVarIntI32(Buf, v98)
 					NewModule.action_type = t.ActionType.fromNumber(VarIntI32) or VarIntI32
 				else
 					local _
-					_, v3536 = ProtoModule.readVarInt(Buf, v98)
+					_, v3513 = ProtoModule.readVarInt(Buf, v98)
 				end
 			elseif Tag2 == ProtoModule.wireTypes.lengthDelimited then
 				if Tag == 2 then
 					local Buffer1
-					Buffer1, v3536 = ProtoModule.readBuffer(Buf, v98)
-					NewModule.action_params = t.OpenAmpWizardAction_Params.decode(Buffer1)
+					Buffer1, v3513 = ProtoModule.readBuffer(Buf, v98)
+					NewModule.action_params = t.DismissGameFeedbackAction_Params.decode(Buffer1)
 				else
 					local VarInt, VarInt2 = ProtoModule.readVarInt(Buf, v98)
 					v98 = VarInt2 + VarInt
 				end
 			elseif Tag2 == ProtoModule.wireTypes.i32 then
 				local _
-				_, v3536 = ProtoModule.readFixed32(Buf, v98)
+				_, v3513 = ProtoModule.readFixed32(Buf, v98)
 			elseif Tag2 == ProtoModule.wireTypes.i64 then
 				local _
-				_, v3536 = ProtoModule.readFixed64(Buf, v98)
+				_, v3513 = ProtoModule.readFixed64(Buf, v98)
 			else
 				error("Unsupported wire type: " .. Tag2)
 			end
@@ -17179,6 +17038,1095 @@ do
 			NewModule.action_type = (if typeof(self.actionType) == "number" then t.ActionType.fromNumber(self.actionType) else t.ActionType.fromName(self.actionType)) or self.actionType
 		end
 		if self.action_params ~= nil then
+			NewModule.action_params = t.DismissGameFeedbackAction_Params.jsonDecode(self.action_params)
+		end
+		if self.actionParams ~= nil then
+			NewModule.action_params = t.DismissGameFeedbackAction_Params.jsonDecode(self.actionParams)
+		end
+		return NewModule
+	end
+
+	Module145.descriptor = {
+		name = "DismissGameFeedbackAction",
+		fullName = "roblox.apppageplatform.shared.v1beta1.DismissGameFeedbackAction"
+	}
+	t.DismissGameFeedbackAction = Module145
+	TypeRegistryModule.default:register(t.DismissGameFeedbackAction)
+	local Module146 = {}
+	Module146.__index = Module146
+
+	function Module146.new(p1)
+		-- upvalues: Module146 (copy)
+		return (setmetatable({
+			root_place_id = if p1 == nil or p1.root_place_id == nil then nil else p1.root_place_id
+		}, Module146))
+	end
+
+	function Module146:encode()
+		-- upvalues: ProtoModule (copy)
+		local Buf = buffer.create(0)
+		local Count = 0
+		
+		if self.root_place_id ~= nil then
+			local EncodeResult = self.root_place_id:encode()
+			local WriteTagResult, WriteTagResult2 = ProtoModule.writeTag(Buf, Count, 1, ProtoModule.wireTypes.lengthDelimited)
+			Buf, Count = ProtoModule.writeBuffer(WriteTagResult, WriteTagResult2, EncodeResult, buffer.len(EncodeResult))
+		end
+		local Buf1 = buffer.create(Count)
+		buffer.copy(Buf1, 0, Buf, 0, Count)
+		
+		return Buf1
+	end
+
+	function Module146.decode(Buf)
+		-- upvalues: Module146 (copy), ProtoModule (copy), PropTypesModule (copy)
+		local NewModule = Module146.new()
+		local v99 = 0
+		while v99 < buffer.len(Buf) do
+			local Tag, Tag2
+			Tag, Tag2, v3531 = ProtoModule.readTag(Buf, v99)
+			
+			if Tag2 == ProtoModule.wireTypes.varint then
+				local _
+				_, v3531 = ProtoModule.readVarInt(Buf, v99)
+			elseif Tag2 == ProtoModule.wireTypes.lengthDelimited then
+				if Tag == 1 then
+					local Buffer1
+					Buffer1, v3531 = ProtoModule.readBuffer(Buf, v99)
+					NewModule.root_place_id = PropTypesModule.StringProp.decode(Buffer1)
+				else
+					local VarInt, VarInt2 = ProtoModule.readVarInt(Buf, v99)
+					v99 = VarInt2 + VarInt
+				end
+			elseif Tag2 == ProtoModule.wireTypes.i32 then
+				local _
+				_, v3531 = ProtoModule.readFixed32(Buf, v99)
+			elseif Tag2 == ProtoModule.wireTypes.i64 then
+				local _
+				_, v3531 = ProtoModule.readFixed64(Buf, v99)
+			else
+				error("Unsupported wire type: " .. Tag2)
+			end
+		end
+		return NewModule
+	end
+
+	function Module146:jsonEncode()
+		local t = {}
+		
+		if self.root_place_id ~= nil then
+			t.rootPlaceId = self.root_place_id:jsonEncode()
+		end
+		return t
+	end
+
+	function Module146:jsonDecode()
+		-- upvalues: Module146 (copy), PropTypesModule (copy)
+		local NewModule = Module146.new()
+		
+		if self.root_place_id ~= nil then
+			NewModule.root_place_id = PropTypesModule.StringProp.jsonDecode(self.root_place_id)
+		end
+		if self.rootPlaceId ~= nil then
+			NewModule.root_place_id = PropTypesModule.StringProp.jsonDecode(self.rootPlaceId)
+		end
+		return NewModule
+	end
+
+	Module146.descriptor = {
+		name = "DismissGameFeedbackAction_Params",
+		fullName = "roblox.apppageplatform.shared.v1beta1.Params"
+	}
+	t.DismissGameFeedbackAction_Params = Module146
+end
+do
+	TypeRegistryModule.default:register(t.DismissGameFeedbackAction_Params)
+	local Module147 = {}
+	Module147.__index = Module147
+
+	function Module147.new(p1)
+		-- upvalues: t (copy), Module147 (copy)
+		return (setmetatable({
+			action_type = if p1 == nil or p1.action_type == nil then assert(t.ActionType.fromNumber(0), "Enum has no 0 default") else p1.action_type,
+			action_params = if p1 == nil or p1.action_params == nil then nil else p1.action_params
+		}, Module147))
+	end
+
+	function Module147:encode()
+		-- upvalues: t (copy), ProtoModule (copy)
+		local Buf = buffer.create(0)
+		local Count = 0
+		
+		if self.action_type ~= nil and (self.action_type ~= nil and self.action_type ~= 0 or self.action_type ~= t.ActionType.fromNumber(0)) then
+			local WriteTagResult, WriteTagResult2 = ProtoModule.writeTag(Buf, Count, 1, ProtoModule.wireTypes.varint)
+			Buf, Count = ProtoModule.writeVarInt(WriteTagResult, WriteTagResult2, t.ActionType.toNumber(self.action_type))
+		end
+		if self.action_params ~= nil then
+			local EncodeResult = self.action_params:encode()
+			local WriteTagResult1, WriteTagResult2_1 = ProtoModule.writeTag(Buf, Count, 2, ProtoModule.wireTypes.lengthDelimited)
+			Buf, Count = ProtoModule.writeBuffer(WriteTagResult1, WriteTagResult2_1, EncodeResult, buffer.len(EncodeResult))
+		end
+		local Buf1 = buffer.create(Count)
+		buffer.copy(Buf1, 0, Buf, 0, Count)
+		
+		return Buf1
+	end
+
+	function Module147.decode(Buf)
+		-- upvalues: Module147 (copy), ProtoModule (copy), t (copy)
+		local NewModule = Module147.new()
+		local v99 = 0
+		while v99 < buffer.len(Buf) do
+			local Tag, Tag2
+			Tag, Tag2, v3550 = ProtoModule.readTag(Buf, v99)
+			
+			if Tag2 == ProtoModule.wireTypes.varint then
+				if Tag == 1 then
+					local VarIntI32
+					VarIntI32, v3550 = ProtoModule.readVarIntI32(Buf, v99)
+					NewModule.action_type = t.ActionType.fromNumber(VarIntI32) or VarIntI32
+				else
+					local _
+					_, v3550 = ProtoModule.readVarInt(Buf, v99)
+				end
+			elseif Tag2 == ProtoModule.wireTypes.lengthDelimited then
+				if Tag == 2 then
+					local Buffer1
+					Buffer1, v3550 = ProtoModule.readBuffer(Buf, v99)
+					NewModule.action_params = t.OpenGameFeedbackFormAction_Params.decode(Buffer1)
+				else
+					local VarInt, VarInt2 = ProtoModule.readVarInt(Buf, v99)
+					v99 = VarInt2 + VarInt
+				end
+			elseif Tag2 == ProtoModule.wireTypes.i32 then
+				local _
+				_, v3550 = ProtoModule.readFixed32(Buf, v99)
+			elseif Tag2 == ProtoModule.wireTypes.i64 then
+				local _
+				_, v3550 = ProtoModule.readFixed64(Buf, v99)
+			else
+				error("Unsupported wire type: " .. Tag2)
+			end
+		end
+		return NewModule
+	end
+
+	function Module147:jsonEncode()
+		-- upvalues: t (copy)
+		local t1 = {}
+		
+		if self.action_type ~= nil and (self.action_type ~= nil and self.action_type ~= 0 or self.action_type ~= t.ActionType.fromNumber(0)) then
+			t1.actionType = if typeof(self.action_type) == "number" then self.action_type else t.ActionType.toNumber(self.action_type)
+		end
+		if self.action_params ~= nil then
+			t1.actionParams = self.action_params:jsonEncode()
+		end
+		return t1
+	end
+
+	function Module147:jsonDecode()
+		-- upvalues: Module147 (copy), t (copy)
+		local NewModule = Module147.new()
+		
+		if self.action_type ~= nil then
+			NewModule.action_type = (if typeof(self.action_type) == "number" then t.ActionType.fromNumber(self.action_type) else t.ActionType.fromName(self.action_type)) or self.action_type
+		end
+		if self.actionType ~= nil then
+			NewModule.action_type = (if typeof(self.actionType) == "number" then t.ActionType.fromNumber(self.actionType) else t.ActionType.fromName(self.actionType)) or self.actionType
+		end
+		if self.action_params ~= nil then
+			NewModule.action_params = t.OpenGameFeedbackFormAction_Params.jsonDecode(self.action_params)
+		end
+		if self.actionParams ~= nil then
+			NewModule.action_params = t.OpenGameFeedbackFormAction_Params.jsonDecode(self.actionParams)
+		end
+		return NewModule
+	end
+
+	Module147.descriptor = {
+		name = "OpenGameFeedbackFormAction",
+		fullName = "roblox.apppageplatform.shared.v1beta1.OpenGameFeedbackFormAction"
+	}
+	t.OpenGameFeedbackFormAction = Module147
+	TypeRegistryModule.default:register(t.OpenGameFeedbackFormAction)
+	local Module148 = {}
+	Module148.__index = Module148
+
+	function Module148.new(p1)
+		-- upvalues: Module148 (copy)
+		return (setmetatable({
+			universe_id = if p1 == nil or p1.universe_id == nil then nil else p1.universe_id,
+			root_place_id = if p1 == nil or p1.root_place_id == nil then nil else p1.root_place_id
+		}, Module148))
+	end
+
+	function Module148:encode()
+		-- upvalues: ProtoModule (copy)
+		local Buf = buffer.create(0)
+		local Count = 0
+		
+		if self.universe_id ~= nil then
+			local EncodeResult = self.universe_id:encode()
+			local WriteTagResult, WriteTagResult2 = ProtoModule.writeTag(Buf, Count, 1, ProtoModule.wireTypes.lengthDelimited)
+			Buf, Count = ProtoModule.writeBuffer(WriteTagResult, WriteTagResult2, EncodeResult, buffer.len(EncodeResult))
+		end
+		if self.root_place_id ~= nil then
+			local EncodeResult = self.root_place_id:encode()
+			local WriteTagResult1, WriteTagResult2_1 = ProtoModule.writeTag(Buf, Count, 2, ProtoModule.wireTypes.lengthDelimited)
+			Buf, Count = ProtoModule.writeBuffer(WriteTagResult1, WriteTagResult2_1, EncodeResult, buffer.len(EncodeResult))
+		end
+		local Buf1 = buffer.create(Count)
+		buffer.copy(Buf1, 0, Buf, 0, Count)
+		
+		return Buf1
+	end
+
+	function Module148.decode(Buf)
+		-- upvalues: Module148 (copy), ProtoModule (copy), PropTypesModule (copy)
+		local NewModule = Module148.new()
+		local v100 = 0
+		while v100 < buffer.len(Buf) do
+			local Tag, Tag2
+			Tag, Tag2, v3571 = ProtoModule.readTag(Buf, v100)
+			
+			if Tag2 == ProtoModule.wireTypes.varint then
+				local _
+				_, v3571 = ProtoModule.readVarInt(Buf, v100)
+			elseif Tag2 == ProtoModule.wireTypes.lengthDelimited then
+				if Tag == 1 then
+					local Buffer1
+					Buffer1, v3571 = ProtoModule.readBuffer(Buf, v100)
+					NewModule.universe_id = PropTypesModule.StringProp.decode(Buffer1)
+				elseif Tag == 2 then
+					local Buffer2
+					Buffer2, v3571 = ProtoModule.readBuffer(Buf, v100)
+					NewModule.root_place_id = PropTypesModule.StringProp.decode(Buffer2)
+				else
+					local VarInt, VarInt2 = ProtoModule.readVarInt(Buf, v100)
+					v100 = VarInt2 + VarInt
+				end
+			elseif Tag2 == ProtoModule.wireTypes.i32 then
+				local _
+				_, v3571 = ProtoModule.readFixed32(Buf, v100)
+			elseif Tag2 == ProtoModule.wireTypes.i64 then
+				local _
+				_, v3571 = ProtoModule.readFixed64(Buf, v100)
+			else
+				error("Unsupported wire type: " .. Tag2)
+			end
+		end
+		return NewModule
+	end
+
+	function Module148:jsonEncode()
+		local t = {}
+		
+		if self.universe_id ~= nil then
+			t.universeId = self.universe_id:jsonEncode()
+		end
+		if self.root_place_id ~= nil then
+			t.rootPlaceId = self.root_place_id:jsonEncode()
+		end
+		return t
+	end
+
+	function Module148:jsonDecode()
+		-- upvalues: Module148 (copy), PropTypesModule (copy)
+		local NewModule = Module148.new()
+		
+		if self.universe_id ~= nil then
+			NewModule.universe_id = PropTypesModule.StringProp.jsonDecode(self.universe_id)
+		end
+		if self.universeId ~= nil then
+			NewModule.universe_id = PropTypesModule.StringProp.jsonDecode(self.universeId)
+		end
+		if self.root_place_id ~= nil then
+			NewModule.root_place_id = PropTypesModule.StringProp.jsonDecode(self.root_place_id)
+		end
+		if self.rootPlaceId ~= nil then
+			NewModule.root_place_id = PropTypesModule.StringProp.jsonDecode(self.rootPlaceId)
+		end
+		return NewModule
+	end
+
+	Module148.descriptor = {
+		name = "OpenGameFeedbackFormAction_Params",
+		fullName = "roblox.apppageplatform.shared.v1beta1.Params"
+	}
+	t.OpenGameFeedbackFormAction_Params = Module148
+	TypeRegistryModule.default:register(t.OpenGameFeedbackFormAction_Params)
+	local Module149 = {}
+	Module149.__index = Module149
+
+	function Module149.new(p1)
+		-- upvalues: t (copy), Module149 (copy)
+		return (setmetatable({
+			action_type = if p1 == nil or p1.action_type == nil then assert(t.ActionType.fromNumber(0), "Enum has no 0 default") else p1.action_type,
+			action_params = if p1 == nil or p1.action_params == nil then nil else p1.action_params
+		}, Module149))
+	end
+
+	function Module149:encode()
+		-- upvalues: t (copy), ProtoModule (copy)
+		local Buf = buffer.create(0)
+		local Count = 0
+		
+		if self.action_type ~= nil and (self.action_type ~= nil and self.action_type ~= 0 or self.action_type ~= t.ActionType.fromNumber(0)) then
+			local WriteTagResult, WriteTagResult2 = ProtoModule.writeTag(Buf, Count, 1, ProtoModule.wireTypes.varint)
+			Buf, Count = ProtoModule.writeVarInt(WriteTagResult, WriteTagResult2, t.ActionType.toNumber(self.action_type))
+		end
+		if self.action_params ~= nil then
+			local EncodeResult = self.action_params:encode()
+			local WriteTagResult1, WriteTagResult2_1 = ProtoModule.writeTag(Buf, Count, 2, ProtoModule.wireTypes.lengthDelimited)
+			Buf, Count = ProtoModule.writeBuffer(WriteTagResult1, WriteTagResult2_1, EncodeResult, buffer.len(EncodeResult))
+		end
+		local Buf1 = buffer.create(Count)
+		buffer.copy(Buf1, 0, Buf, 0, Count)
+		
+		return Buf1
+	end
+
+	function Module149.decode(Buf)
+		-- upvalues: Module149 (copy), ProtoModule (copy), t (copy)
+		local NewModule = Module149.new()
+		local v101 = 0
+		while v101 < buffer.len(Buf) do
+			local Tag, Tag2
+			Tag, Tag2, v3591 = ProtoModule.readTag(Buf, v101)
+			
+			if Tag2 == ProtoModule.wireTypes.varint then
+				if Tag == 1 then
+					local VarIntI32
+					VarIntI32, v3591 = ProtoModule.readVarIntI32(Buf, v101)
+					NewModule.action_type = t.ActionType.fromNumber(VarIntI32) or VarIntI32
+				else
+					local _
+					_, v3591 = ProtoModule.readVarInt(Buf, v101)
+				end
+			elseif Tag2 == ProtoModule.wireTypes.lengthDelimited then
+				if Tag == 2 then
+					local Buffer1
+					Buffer1, v3591 = ProtoModule.readBuffer(Buf, v101)
+					NewModule.action_params = t.AiOverviewFeedbackAction_Params.decode(Buffer1)
+				else
+					local VarInt, VarInt2 = ProtoModule.readVarInt(Buf, v101)
+					v101 = VarInt2 + VarInt
+				end
+			elseif Tag2 == ProtoModule.wireTypes.i32 then
+				local _
+				_, v3591 = ProtoModule.readFixed32(Buf, v101)
+			elseif Tag2 == ProtoModule.wireTypes.i64 then
+				local _
+				_, v3591 = ProtoModule.readFixed64(Buf, v101)
+			else
+				error("Unsupported wire type: " .. Tag2)
+			end
+		end
+		return NewModule
+	end
+
+	function Module149:jsonEncode()
+		-- upvalues: t (copy)
+		local t1 = {}
+		
+		if self.action_type ~= nil and (self.action_type ~= nil and self.action_type ~= 0 or self.action_type ~= t.ActionType.fromNumber(0)) then
+			t1.actionType = if typeof(self.action_type) == "number" then self.action_type else t.ActionType.toNumber(self.action_type)
+		end
+		if self.action_params ~= nil then
+			t1.actionParams = self.action_params:jsonEncode()
+		end
+		return t1
+	end
+
+	function Module149:jsonDecode()
+		-- upvalues: Module149 (copy), t (copy)
+		local NewModule = Module149.new()
+		
+		if self.action_type ~= nil then
+			NewModule.action_type = (if typeof(self.action_type) == "number" then t.ActionType.fromNumber(self.action_type) else t.ActionType.fromName(self.action_type)) or self.action_type
+		end
+		if self.actionType ~= nil then
+			NewModule.action_type = (if typeof(self.actionType) == "number" then t.ActionType.fromNumber(self.actionType) else t.ActionType.fromName(self.actionType)) or self.actionType
+		end
+		if self.action_params ~= nil then
+			NewModule.action_params = t.AiOverviewFeedbackAction_Params.jsonDecode(self.action_params)
+		end
+		if self.actionParams ~= nil then
+			NewModule.action_params = t.AiOverviewFeedbackAction_Params.jsonDecode(self.actionParams)
+		end
+		return NewModule
+	end
+
+	Module149.descriptor = {
+		name = "AiOverviewFeedbackAction",
+		fullName = "roblox.apppageplatform.shared.v1beta1.AiOverviewFeedbackAction"
+	}
+	t.AiOverviewFeedbackAction = Module149
+end
+do
+	TypeRegistryModule.default:register(t.AiOverviewFeedbackAction)
+	local Module150 = {}
+	Module150.__index = Module150
+
+	function Module150.new(p1)
+		-- upvalues: Module150 (copy)
+		return (setmetatable({
+			sentiment = if p1 == nil or p1.sentiment == nil then nil else p1.sentiment,
+			dialog_title = if p1 == nil or p1.dialog_title == nil then nil else p1.dialog_title,
+			dialog_text = if p1 == nil or p1.dialog_text == nil then nil else p1.dialog_text,
+			placeholder_text = if p1 == nil or p1.placeholder_text == nil then nil else p1.placeholder_text
+		}, Module150))
+	end
+
+	function Module150:encode()
+		-- upvalues: ProtoModule (copy)
+		local Buf = buffer.create(0)
+		local Count = 0
+		
+		if self.sentiment ~= nil then
+			local EncodeResult = self.sentiment:encode()
+			local WriteTagResult, WriteTagResult2 = ProtoModule.writeTag(Buf, Count, 1, ProtoModule.wireTypes.lengthDelimited)
+			Buf, Count = ProtoModule.writeBuffer(WriteTagResult, WriteTagResult2, EncodeResult, buffer.len(EncodeResult))
+		end
+		if self.dialog_title ~= nil then
+			local EncodeResult = self.dialog_title:encode()
+			local WriteTagResult1, WriteTagResult2_1 = ProtoModule.writeTag(Buf, Count, 2, ProtoModule.wireTypes.lengthDelimited)
+			Buf, Count = ProtoModule.writeBuffer(WriteTagResult1, WriteTagResult2_1, EncodeResult, buffer.len(EncodeResult))
+		end
+		if self.dialog_text ~= nil then
+			local EncodeResult = self.dialog_text:encode()
+			local WriteTagResult3, WriteTagResult2_2 = ProtoModule.writeTag(Buf, Count, 3, ProtoModule.wireTypes.lengthDelimited)
+			Buf, Count = ProtoModule.writeBuffer(WriteTagResult3, WriteTagResult2_2, EncodeResult, buffer.len(EncodeResult))
+		end
+		if self.placeholder_text ~= nil then
+			local EncodeResult = self.placeholder_text:encode()
+			local WriteTagResult4, WriteTagResult2_3 = ProtoModule.writeTag(Buf, Count, 4, ProtoModule.wireTypes.lengthDelimited)
+			Buf, Count = ProtoModule.writeBuffer(WriteTagResult4, WriteTagResult2_3, EncodeResult, buffer.len(EncodeResult))
+		end
+		local Buf1 = buffer.create(Count)
+		buffer.copy(Buf1, 0, Buf, 0, Count)
+		
+		return Buf1
+	end
+
+	function Module150.decode(Buf)
+		-- upvalues: Module150 (copy), ProtoModule (copy), PropTypesModule (copy)
+		local NewModule = Module150.new()
+		local v101 = 0
+		while v101 < buffer.len(Buf) do
+			local Tag, Tag2
+			Tag, Tag2, v3618 = ProtoModule.readTag(Buf, v101)
+			
+			if Tag2 == ProtoModule.wireTypes.varint then
+				local _
+				_, v3618 = ProtoModule.readVarInt(Buf, v101)
+			elseif Tag2 == ProtoModule.wireTypes.lengthDelimited then
+				if Tag == 1 then
+					local Buffer1
+					Buffer1, v3618 = ProtoModule.readBuffer(Buf, v101)
+					NewModule.sentiment = PropTypesModule.StringProp.decode(Buffer1)
+				elseif Tag == 2 then
+					local Buffer2
+					Buffer2, v3618 = ProtoModule.readBuffer(Buf, v101)
+					NewModule.dialog_title = PropTypesModule.StringProp.decode(Buffer2)
+				elseif Tag == 3 then
+					local Buffer3
+					Buffer3, v3618 = ProtoModule.readBuffer(Buf, v101)
+					NewModule.dialog_text = PropTypesModule.StringProp.decode(Buffer3)
+				elseif Tag == 4 then
+					local Buffer4
+					Buffer4, v3618 = ProtoModule.readBuffer(Buf, v101)
+					NewModule.placeholder_text = PropTypesModule.StringProp.decode(Buffer4)
+				else
+					local VarInt, VarInt2 = ProtoModule.readVarInt(Buf, v101)
+					v101 = VarInt2 + VarInt
+				end
+			elseif Tag2 == ProtoModule.wireTypes.i32 then
+				local _
+				_, v3618 = ProtoModule.readFixed32(Buf, v101)
+			elseif Tag2 == ProtoModule.wireTypes.i64 then
+				local _
+				_, v3618 = ProtoModule.readFixed64(Buf, v101)
+			else
+				error("Unsupported wire type: " .. Tag2)
+			end
+		end
+		return NewModule
+	end
+
+	function Module150:jsonEncode()
+		local t = {}
+		
+		if self.sentiment ~= nil then
+			t.sentiment = self.sentiment:jsonEncode()
+		end
+		if self.dialog_title ~= nil then
+			t.dialogTitle = self.dialog_title:jsonEncode()
+		end
+		if self.dialog_text ~= nil then
+			t.dialogText = self.dialog_text:jsonEncode()
+		end
+		if self.placeholder_text ~= nil then
+			t.placeholderText = self.placeholder_text:jsonEncode()
+		end
+		return t
+	end
+
+	function Module150:jsonDecode()
+		-- upvalues: Module150 (copy), PropTypesModule (copy)
+		local NewModule = Module150.new()
+		
+		if self.sentiment ~= nil then
+			NewModule.sentiment = PropTypesModule.StringProp.jsonDecode(self.sentiment)
+		end
+		if self.dialog_title ~= nil then
+			NewModule.dialog_title = PropTypesModule.StringProp.jsonDecode(self.dialog_title)
+		end
+		if self.dialogTitle ~= nil then
+			NewModule.dialog_title = PropTypesModule.StringProp.jsonDecode(self.dialogTitle)
+		end
+		if self.dialog_text ~= nil then
+			NewModule.dialog_text = PropTypesModule.StringProp.jsonDecode(self.dialog_text)
+		end
+		if self.dialogText ~= nil then
+			NewModule.dialog_text = PropTypesModule.StringProp.jsonDecode(self.dialogText)
+		end
+		if self.placeholder_text ~= nil then
+			NewModule.placeholder_text = PropTypesModule.StringProp.jsonDecode(self.placeholder_text)
+		end
+		if self.placeholderText ~= nil then
+			NewModule.placeholder_text = PropTypesModule.StringProp.jsonDecode(self.placeholderText)
+		end
+		return NewModule
+	end
+
+	Module150.descriptor = {
+		name = "AiOverviewFeedbackAction_Params",
+		fullName = "roblox.apppageplatform.shared.v1beta1.Params"
+	}
+	t.AiOverviewFeedbackAction_Params = Module150
+	TypeRegistryModule.default:register(t.AiOverviewFeedbackAction_Params)
+	local Module151 = {}
+	Module151.__index = Module151
+
+	function Module151.new(p1)
+		-- upvalues: t (copy), Module151 (copy)
+		return (setmetatable({
+			action_type = if p1 == nil or p1.action_type == nil then assert(t.ActionType.fromNumber(0), "Enum has no 0 default") else p1.action_type,
+			action_params = if p1 == nil or p1.action_params == nil then nil else p1.action_params
+		}, Module151))
+	end
+
+	function Module151:encode()
+		-- upvalues: t (copy), ProtoModule (copy)
+		local Buf = buffer.create(0)
+		local Count = 0
+		
+		if self.action_type ~= nil and (self.action_type ~= nil and self.action_type ~= 0 or self.action_type ~= t.ActionType.fromNumber(0)) then
+			local WriteTagResult, WriteTagResult2 = ProtoModule.writeTag(Buf, Count, 1, ProtoModule.wireTypes.varint)
+			Buf, Count = ProtoModule.writeVarInt(WriteTagResult, WriteTagResult2, t.ActionType.toNumber(self.action_type))
+		end
+		if self.action_params ~= nil then
+			local EncodeResult = self.action_params:encode()
+			local WriteTagResult1, WriteTagResult2_1 = ProtoModule.writeTag(Buf, Count, 2, ProtoModule.wireTypes.lengthDelimited)
+			Buf, Count = ProtoModule.writeBuffer(WriteTagResult1, WriteTagResult2_1, EncodeResult, buffer.len(EncodeResult))
+		end
+		local Buf1 = buffer.create(Count)
+		buffer.copy(Buf1, 0, Buf, 0, Count)
+		
+		return Buf1
+	end
+
+	function Module151.decode(Buf)
+		-- upvalues: Module151 (copy), ProtoModule (copy), t (copy)
+		local NewModule = Module151.new()
+		local v102 = 0
+		while v102 < buffer.len(Buf) do
+			local Tag, Tag2
+			Tag, Tag2, v3640 = ProtoModule.readTag(Buf, v102)
+			
+			if Tag2 == ProtoModule.wireTypes.varint then
+				if Tag == 1 then
+					local VarIntI32
+					VarIntI32, v3640 = ProtoModule.readVarIntI32(Buf, v102)
+					NewModule.action_type = t.ActionType.fromNumber(VarIntI32) or VarIntI32
+				else
+					local _
+					_, v3640 = ProtoModule.readVarInt(Buf, v102)
+				end
+			elseif Tag2 == ProtoModule.wireTypes.lengthDelimited then
+				if Tag == 2 then
+					local Buffer1
+					Buffer1, v3640 = ProtoModule.readBuffer(Buf, v102)
+					NewModule.action_params = t.EnableEventNotificationsAction_Params.decode(Buffer1)
+				else
+					local VarInt, VarInt2 = ProtoModule.readVarInt(Buf, v102)
+					v102 = VarInt2 + VarInt
+				end
+			elseif Tag2 == ProtoModule.wireTypes.i32 then
+				local _
+				_, v3640 = ProtoModule.readFixed32(Buf, v102)
+			elseif Tag2 == ProtoModule.wireTypes.i64 then
+				local _
+				_, v3640 = ProtoModule.readFixed64(Buf, v102)
+			else
+				error("Unsupported wire type: " .. Tag2)
+			end
+		end
+		return NewModule
+	end
+
+	function Module151:jsonEncode()
+		-- upvalues: t (copy)
+		local t1 = {}
+		
+		if self.action_type ~= nil and (self.action_type ~= nil and self.action_type ~= 0 or self.action_type ~= t.ActionType.fromNumber(0)) then
+			t1.actionType = if typeof(self.action_type) == "number" then self.action_type else t.ActionType.toNumber(self.action_type)
+		end
+		if self.action_params ~= nil then
+			t1.actionParams = self.action_params:jsonEncode()
+		end
+		return t1
+	end
+
+	function Module151:jsonDecode()
+		-- upvalues: Module151 (copy), t (copy)
+		local NewModule = Module151.new()
+		
+		if self.action_type ~= nil then
+			NewModule.action_type = (if typeof(self.action_type) == "number" then t.ActionType.fromNumber(self.action_type) else t.ActionType.fromName(self.action_type)) or self.action_type
+		end
+		if self.actionType ~= nil then
+			NewModule.action_type = (if typeof(self.actionType) == "number" then t.ActionType.fromNumber(self.actionType) else t.ActionType.fromName(self.actionType)) or self.actionType
+		end
+		if self.action_params ~= nil then
+			NewModule.action_params = t.EnableEventNotificationsAction_Params.jsonDecode(self.action_params)
+		end
+		if self.actionParams ~= nil then
+			NewModule.action_params = t.EnableEventNotificationsAction_Params.jsonDecode(self.actionParams)
+		end
+		return NewModule
+	end
+
+	Module151.descriptor = {
+		name = "EnableEventNotificationsAction",
+		fullName = "roblox.apppageplatform.shared.v1beta1.EnableEventNotificationsAction"
+	}
+	t.EnableEventNotificationsAction = Module151
+	TypeRegistryModule.default:register(t.EnableEventNotificationsAction)
+	local Module152 = {}
+	Module152.__index = Module152
+
+	function Module152.new(p1)
+		-- upvalues: Module152 (copy)
+		return (setmetatable({
+			event_id = if p1 == nil or p1.event_id == nil then nil else p1.event_id,
+			universe_id = if p1 == nil or p1.universe_id == nil then nil else p1.universe_id,
+			channel = if p1 == nil or p1.channel == nil then nil else p1.channel
+		}, Module152))
+	end
+
+	function Module152:encode()
+		-- upvalues: ProtoModule (copy)
+		local Buf = buffer.create(0)
+		local Count = 0
+		
+		if self.event_id ~= nil then
+			local EncodeResult = self.event_id:encode()
+			local WriteTagResult, WriteTagResult2 = ProtoModule.writeTag(Buf, Count, 1, ProtoModule.wireTypes.lengthDelimited)
+			Buf, Count = ProtoModule.writeBuffer(WriteTagResult, WriteTagResult2, EncodeResult, buffer.len(EncodeResult))
+		end
+		if self.universe_id ~= nil then
+			local EncodeResult = self.universe_id:encode()
+			local WriteTagResult1, WriteTagResult2_1 = ProtoModule.writeTag(Buf, Count, 2, ProtoModule.wireTypes.lengthDelimited)
+			Buf, Count = ProtoModule.writeBuffer(WriteTagResult1, WriteTagResult2_1, EncodeResult, buffer.len(EncodeResult))
+		end
+		if self.channel ~= nil then
+			local EncodeResult = self.channel:encode()
+			local WriteTagResult3, WriteTagResult2_2 = ProtoModule.writeTag(Buf, Count, 3, ProtoModule.wireTypes.lengthDelimited)
+			Buf, Count = ProtoModule.writeBuffer(WriteTagResult3, WriteTagResult2_2, EncodeResult, buffer.len(EncodeResult))
+		end
+		local Buf1 = buffer.create(Count)
+		buffer.copy(Buf1, 0, Buf, 0, Count)
+		
+		return Buf1
+	end
+
+	function Module152.decode(Buf)
+		-- upvalues: Module152 (copy), ProtoModule (copy), PropTypesModule (copy)
+		local NewModule = Module152.new()
+		local v103 = 0
+		while v103 < buffer.len(Buf) do
+			local Tag, Tag2
+			Tag, Tag2, v3664 = ProtoModule.readTag(Buf, v103)
+			
+			if Tag2 == ProtoModule.wireTypes.varint then
+				local _
+				_, v3664 = ProtoModule.readVarInt(Buf, v103)
+			elseif Tag2 == ProtoModule.wireTypes.lengthDelimited then
+				if Tag == 1 then
+					local Buffer1
+					Buffer1, v3664 = ProtoModule.readBuffer(Buf, v103)
+					NewModule.event_id = PropTypesModule.StringProp.decode(Buffer1)
+				elseif Tag == 2 then
+					local Buffer2
+					Buffer2, v3664 = ProtoModule.readBuffer(Buf, v103)
+					NewModule.universe_id = PropTypesModule.StringProp.decode(Buffer2)
+				elseif Tag == 3 then
+					local Buffer3
+					Buffer3, v3664 = ProtoModule.readBuffer(Buf, v103)
+					NewModule.channel = PropTypesModule.StringProp.decode(Buffer3)
+				else
+					local VarInt, VarInt2 = ProtoModule.readVarInt(Buf, v103)
+					v103 = VarInt2 + VarInt
+				end
+			elseif Tag2 == ProtoModule.wireTypes.i32 then
+				local _
+				_, v3664 = ProtoModule.readFixed32(Buf, v103)
+			elseif Tag2 == ProtoModule.wireTypes.i64 then
+				local _
+				_, v3664 = ProtoModule.readFixed64(Buf, v103)
+			else
+				error("Unsupported wire type: " .. Tag2)
+			end
+		end
+		return NewModule
+	end
+
+	function Module152:jsonEncode()
+		local t = {}
+		
+		if self.event_id ~= nil then
+			t.eventId = self.event_id:jsonEncode()
+		end
+		if self.universe_id ~= nil then
+			t.universeId = self.universe_id:jsonEncode()
+		end
+		if self.channel ~= nil then
+			t.channel = self.channel:jsonEncode()
+		end
+		return t
+	end
+
+	function Module152:jsonDecode()
+		-- upvalues: Module152 (copy), PropTypesModule (copy)
+		local NewModule = Module152.new()
+		
+		if self.event_id ~= nil then
+			NewModule.event_id = PropTypesModule.StringProp.jsonDecode(self.event_id)
+		end
+		if self.eventId ~= nil then
+			NewModule.event_id = PropTypesModule.StringProp.jsonDecode(self.eventId)
+		end
+		if self.universe_id ~= nil then
+			NewModule.universe_id = PropTypesModule.StringProp.jsonDecode(self.universe_id)
+		end
+		if self.universeId ~= nil then
+			NewModule.universe_id = PropTypesModule.StringProp.jsonDecode(self.universeId)
+		end
+		if self.channel ~= nil then
+			NewModule.channel = PropTypesModule.StringProp.jsonDecode(self.channel)
+		end
+		return NewModule
+	end
+
+	Module152.descriptor = {
+		name = "EnableEventNotificationsAction_Params",
+		fullName = "roblox.apppageplatform.shared.v1beta1.Params"
+	}
+	t.EnableEventNotificationsAction_Params = Module152
+end
+do
+	TypeRegistryModule.default:register(t.EnableEventNotificationsAction_Params)
+	local Module153 = {}
+	Module153.__index = Module153
+
+	function Module153.new(p1)
+		-- upvalues: t (copy), Module153 (copy)
+		return (setmetatable({
+			action_type = if p1 == nil or p1.action_type == nil then assert(t.ActionType.fromNumber(0), "Enum has no 0 default") else p1.action_type,
+			action_params = if p1 == nil or p1.action_params == nil then nil else p1.action_params
+		}, Module153))
+	end
+
+	function Module153:encode()
+		-- upvalues: t (copy), ProtoModule (copy)
+		local Buf = buffer.create(0)
+		local Count = 0
+		
+		if self.action_type ~= nil and (self.action_type ~= nil and self.action_type ~= 0 or self.action_type ~= t.ActionType.fromNumber(0)) then
+			local WriteTagResult, WriteTagResult2 = ProtoModule.writeTag(Buf, Count, 1, ProtoModule.wireTypes.varint)
+			Buf, Count = ProtoModule.writeVarInt(WriteTagResult, WriteTagResult2, t.ActionType.toNumber(self.action_type))
+		end
+		if self.action_params ~= nil then
+			local EncodeResult = self.action_params:encode()
+			local WriteTagResult1, WriteTagResult2_1 = ProtoModule.writeTag(Buf, Count, 2, ProtoModule.wireTypes.lengthDelimited)
+			Buf, Count = ProtoModule.writeBuffer(WriteTagResult1, WriteTagResult2_1, EncodeResult, buffer.len(EncodeResult))
+		end
+		local Buf1 = buffer.create(Count)
+		buffer.copy(Buf1, 0, Buf, 0, Count)
+		
+		return Buf1
+	end
+
+	function Module153.decode(Buf)
+		-- upvalues: Module153 (copy), ProtoModule (copy), t (copy)
+		local NewModule = Module153.new()
+		local v103 = 0
+		while v103 < buffer.len(Buf) do
+			local Tag, Tag2
+			Tag, Tag2, v3685 = ProtoModule.readTag(Buf, v103)
+			
+			if Tag2 == ProtoModule.wireTypes.varint then
+				if Tag == 1 then
+					local VarIntI32
+					VarIntI32, v3685 = ProtoModule.readVarIntI32(Buf, v103)
+					NewModule.action_type = t.ActionType.fromNumber(VarIntI32) or VarIntI32
+				else
+					local _
+					_, v3685 = ProtoModule.readVarInt(Buf, v103)
+				end
+			elseif Tag2 == ProtoModule.wireTypes.lengthDelimited then
+				if Tag == 2 then
+					local Buffer1
+					Buffer1, v3685 = ProtoModule.readBuffer(Buf, v103)
+					NewModule.action_params = t.DismissEventNotificationsModalAction_Params.decode(Buffer1)
+				else
+					local VarInt, VarInt2 = ProtoModule.readVarInt(Buf, v103)
+					v103 = VarInt2 + VarInt
+				end
+			elseif Tag2 == ProtoModule.wireTypes.i32 then
+				local _
+				_, v3685 = ProtoModule.readFixed32(Buf, v103)
+			elseif Tag2 == ProtoModule.wireTypes.i64 then
+				local _
+				_, v3685 = ProtoModule.readFixed64(Buf, v103)
+			else
+				error("Unsupported wire type: " .. Tag2)
+			end
+		end
+		return NewModule
+	end
+
+	function Module153:jsonEncode()
+		-- upvalues: t (copy)
+		local t1 = {}
+		
+		if self.action_type ~= nil and (self.action_type ~= nil and self.action_type ~= 0 or self.action_type ~= t.ActionType.fromNumber(0)) then
+			t1.actionType = if typeof(self.action_type) == "number" then self.action_type else t.ActionType.toNumber(self.action_type)
+		end
+		if self.action_params ~= nil then
+			t1.actionParams = self.action_params:jsonEncode()
+		end
+		return t1
+	end
+
+	function Module153:jsonDecode()
+		-- upvalues: Module153 (copy), t (copy)
+		local NewModule = Module153.new()
+		
+		if self.action_type ~= nil then
+			NewModule.action_type = (if typeof(self.action_type) == "number" then t.ActionType.fromNumber(self.action_type) else t.ActionType.fromName(self.action_type)) or self.action_type
+		end
+		if self.actionType ~= nil then
+			NewModule.action_type = (if typeof(self.actionType) == "number" then t.ActionType.fromNumber(self.actionType) else t.ActionType.fromName(self.actionType)) or self.actionType
+		end
+		if self.action_params ~= nil then
+			NewModule.action_params = t.DismissEventNotificationsModalAction_Params.jsonDecode(self.action_params)
+		end
+		if self.actionParams ~= nil then
+			NewModule.action_params = t.DismissEventNotificationsModalAction_Params.jsonDecode(self.actionParams)
+		end
+		return NewModule
+	end
+
+	Module153.descriptor = {
+		name = "DismissEventNotificationsModalAction",
+		fullName = "roblox.apppageplatform.shared.v1beta1.DismissEventNotificationsModalAction"
+	}
+	t.DismissEventNotificationsModalAction = Module153
+	TypeRegistryModule.default:register(t.DismissEventNotificationsModalAction)
+	local Module154 = {}
+	Module154.__index = Module154
+
+	function Module154.new(p1)
+		-- upvalues: Module154 (copy)
+		return (setmetatable({
+			event_id = if p1 == nil or p1.event_id == nil then nil else p1.event_id
+		}, Module154))
+	end
+
+	function Module154:encode()
+		-- upvalues: ProtoModule (copy)
+		local Buf = buffer.create(0)
+		local Count = 0
+		
+		if self.event_id ~= nil then
+			local EncodeResult = self.event_id:encode()
+			local WriteTagResult, WriteTagResult2 = ProtoModule.writeTag(Buf, Count, 1, ProtoModule.wireTypes.lengthDelimited)
+			Buf, Count = ProtoModule.writeBuffer(WriteTagResult, WriteTagResult2, EncodeResult, buffer.len(EncodeResult))
+		end
+		local Buf1 = buffer.create(Count)
+		buffer.copy(Buf1, 0, Buf, 0, Count)
+		
+		return Buf1
+	end
+
+	function Module154.decode(Buf)
+		-- upvalues: Module154 (copy), ProtoModule (copy), PropTypesModule (copy)
+		local NewModule = Module154.new()
+		local v104 = 0
+		while v104 < buffer.len(Buf) do
+			local Tag, Tag2
+			Tag, Tag2, v3703 = ProtoModule.readTag(Buf, v104)
+			
+			if Tag2 == ProtoModule.wireTypes.varint then
+				local _
+				_, v3703 = ProtoModule.readVarInt(Buf, v104)
+			elseif Tag2 == ProtoModule.wireTypes.lengthDelimited then
+				if Tag == 1 then
+					local Buffer1
+					Buffer1, v3703 = ProtoModule.readBuffer(Buf, v104)
+					NewModule.event_id = PropTypesModule.StringProp.decode(Buffer1)
+				else
+					local VarInt, VarInt2 = ProtoModule.readVarInt(Buf, v104)
+					v104 = VarInt2 + VarInt
+				end
+			elseif Tag2 == ProtoModule.wireTypes.i32 then
+				local _
+				_, v3703 = ProtoModule.readFixed32(Buf, v104)
+			elseif Tag2 == ProtoModule.wireTypes.i64 then
+				local _
+				_, v3703 = ProtoModule.readFixed64(Buf, v104)
+			else
+				error("Unsupported wire type: " .. Tag2)
+			end
+		end
+		return NewModule
+	end
+
+	function Module154:jsonEncode()
+		local t = {}
+		
+		if self.event_id ~= nil then
+			t.eventId = self.event_id:jsonEncode()
+		end
+		return t
+	end
+
+	function Module154:jsonDecode()
+		-- upvalues: Module154 (copy), PropTypesModule (copy)
+		local NewModule = Module154.new()
+		
+		if self.event_id ~= nil then
+			NewModule.event_id = PropTypesModule.StringProp.jsonDecode(self.event_id)
+		end
+		if self.eventId ~= nil then
+			NewModule.event_id = PropTypesModule.StringProp.jsonDecode(self.eventId)
+		end
+		return NewModule
+	end
+
+	Module154.descriptor = {
+		name = "DismissEventNotificationsModalAction_Params",
+		fullName = "roblox.apppageplatform.shared.v1beta1.Params"
+	}
+	t.DismissEventNotificationsModalAction_Params = Module154
+	TypeRegistryModule.default:register(t.DismissEventNotificationsModalAction_Params)
+	local Module155 = {}
+	Module155.__index = Module155
+
+	function Module155.new(p1)
+		-- upvalues: t (copy), Module155 (copy)
+		return (setmetatable({
+			action_type = if p1 == nil or p1.action_type == nil then assert(t.ActionType.fromNumber(0), "Enum has no 0 default") else p1.action_type,
+			action_params = if p1 == nil or p1.action_params == nil then nil else p1.action_params
+		}, Module155))
+	end
+
+	function Module155:encode()
+		-- upvalues: t (copy), ProtoModule (copy)
+		local Buf = buffer.create(0)
+		local Count = 0
+		
+		if self.action_type ~= nil and (self.action_type ~= nil and self.action_type ~= 0 or self.action_type ~= t.ActionType.fromNumber(0)) then
+			local WriteTagResult, WriteTagResult2 = ProtoModule.writeTag(Buf, Count, 1, ProtoModule.wireTypes.varint)
+			Buf, Count = ProtoModule.writeVarInt(WriteTagResult, WriteTagResult2, t.ActionType.toNumber(self.action_type))
+		end
+		if self.action_params ~= nil then
+			local EncodeResult = self.action_params:encode()
+			local WriteTagResult1, WriteTagResult2_1 = ProtoModule.writeTag(Buf, Count, 2, ProtoModule.wireTypes.lengthDelimited)
+			Buf, Count = ProtoModule.writeBuffer(WriteTagResult1, WriteTagResult2_1, EncodeResult, buffer.len(EncodeResult))
+		end
+		local Buf1 = buffer.create(Count)
+		buffer.copy(Buf1, 0, Buf, 0, Count)
+		
+		return Buf1
+	end
+
+	function Module155.decode(Buf)
+		-- upvalues: Module155 (copy), ProtoModule (copy), t (copy)
+		local NewModule = Module155.new()
+		local v105 = 0
+		while v105 < buffer.len(Buf) do
+			local Tag, Tag2
+			Tag, Tag2, v3722 = ProtoModule.readTag(Buf, v105)
+			
+			if Tag2 == ProtoModule.wireTypes.varint then
+				if Tag == 1 then
+					local VarIntI32
+					VarIntI32, v3722 = ProtoModule.readVarIntI32(Buf, v105)
+					NewModule.action_type = t.ActionType.fromNumber(VarIntI32) or VarIntI32
+				else
+					local _
+					_, v3722 = ProtoModule.readVarInt(Buf, v105)
+				end
+			elseif Tag2 == ProtoModule.wireTypes.lengthDelimited then
+				if Tag == 2 then
+					local Buffer1
+					Buffer1, v3722 = ProtoModule.readBuffer(Buf, v105)
+					NewModule.action_params = t.OpenAmpWizardAction_Params.decode(Buffer1)
+				else
+					local VarInt, VarInt2 = ProtoModule.readVarInt(Buf, v105)
+					v105 = VarInt2 + VarInt
+				end
+			elseif Tag2 == ProtoModule.wireTypes.i32 then
+				local _
+				_, v3722 = ProtoModule.readFixed32(Buf, v105)
+			elseif Tag2 == ProtoModule.wireTypes.i64 then
+				local _
+				_, v3722 = ProtoModule.readFixed64(Buf, v105)
+			else
+				error("Unsupported wire type: " .. Tag2)
+			end
+		end
+		return NewModule
+	end
+
+	function Module155:jsonEncode()
+		-- upvalues: t (copy)
+		local t1 = {}
+		
+		if self.action_type ~= nil and (self.action_type ~= nil and self.action_type ~= 0 or self.action_type ~= t.ActionType.fromNumber(0)) then
+			t1.actionType = if typeof(self.action_type) == "number" then self.action_type else t.ActionType.toNumber(self.action_type)
+		end
+		if self.action_params ~= nil then
+			t1.actionParams = self.action_params:jsonEncode()
+		end
+		return t1
+	end
+
+	function Module155:jsonDecode()
+		-- upvalues: Module155 (copy), t (copy)
+		local NewModule = Module155.new()
+		
+		if self.action_type ~= nil then
+			NewModule.action_type = (if typeof(self.action_type) == "number" then t.ActionType.fromNumber(self.action_type) else t.ActionType.fromName(self.action_type)) or self.action_type
+		end
+		if self.actionType ~= nil then
+			NewModule.action_type = (if typeof(self.actionType) == "number" then t.ActionType.fromNumber(self.actionType) else t.ActionType.fromName(self.actionType)) or self.actionType
+		end
+		if self.action_params ~= nil then
 			NewModule.action_params = t.OpenAmpWizardAction_Params.jsonDecode(self.action_params)
 		end
 		if self.actionParams ~= nil then
@@ -17187,17 +18135,19 @@ do
 		return NewModule
 	end
 
-	Module145.descriptor = {
+	Module155.descriptor = {
 		name = "OpenAmpWizardAction",
 		fullName = "roblox.apppageplatform.shared.v1beta1.OpenAmpWizardAction"
 	}
-	t.OpenAmpWizardAction = Module145
+	t.OpenAmpWizardAction = Module155
+end
+do
 	TypeRegistryModule.default:register(t.OpenAmpWizardAction)
-	local Module146 = {}
-	Module146.__index = Module146
+	local Module156 = {}
+	Module156.__index = Module156
 
-	function Module146.new(p1)
-		-- upvalues: Module146 (copy)
+	function Module156.new(p1)
+		-- upvalues: Module156 (copy)
 		return (setmetatable({
 			feature_name = if p1 == nil or p1.feature_name == nil then nil else p1.feature_name,
 			name_space = if p1 == nil or p1.name_space == nil then nil else p1.name_space,
@@ -17205,10 +18155,10 @@ do
 			skip_facial_age_estimation_web_link_modal = if p1 == nil or p1.skip_facial_age_estimation_web_link_modal == nil then nil else p1.skip_facial_age_estimation_web_link_modal,
 			on_open = if p1 == nil or p1.on_open == nil then nil else p1.on_open,
 			on_success = if p1 == nil or p1.on_success == nil then nil else p1.on_success
-		}, Module146))
+		}, Module156))
 	end
 
-	function Module146:encode()
+	function Module156:encode()
 		-- upvalues: ProtoModule (copy)
 		local Buf = buffer.create(0)
 		local Count = 0
@@ -17249,52 +18199,52 @@ do
 		return Buf1
 	end
 
-	function Module146.decode(Buf)
-		-- upvalues: Module146 (copy), ProtoModule (copy), PropTypesModule (copy), t (copy)
-		local NewModule = Module146.new()
-		local v99 = 0
-		while v99 < buffer.len(Buf) do
+	function Module156.decode(Buf)
+		-- upvalues: Module156 (copy), ProtoModule (copy), PropTypesModule (copy), t (copy)
+		local NewModule = Module156.new()
+		local v105 = 0
+		while v105 < buffer.len(Buf) do
 			local Tag, Tag2
-			Tag, Tag2, v3569 = ProtoModule.readTag(Buf, v99)
+			Tag, Tag2, v3755 = ProtoModule.readTag(Buf, v105)
 			
 			if Tag2 == ProtoModule.wireTypes.varint then
 				local _
-				_, v3569 = ProtoModule.readVarInt(Buf, v99)
+				_, v3755 = ProtoModule.readVarInt(Buf, v105)
 			elseif Tag2 == ProtoModule.wireTypes.lengthDelimited then
 				if Tag == 1 then
 					local Buffer1
-					Buffer1, v3569 = ProtoModule.readBuffer(Buf, v99)
+					Buffer1, v3755 = ProtoModule.readBuffer(Buf, v105)
 					NewModule.feature_name = PropTypesModule.StringProp.decode(Buffer1)
 				elseif Tag == 2 then
 					local Buffer2
-					Buffer2, v3569 = ProtoModule.readBuffer(Buf, v99)
+					Buffer2, v3755 = ProtoModule.readBuffer(Buf, v105)
 					NewModule.name_space = PropTypesModule.StringProp.decode(Buffer2)
 				elseif Tag == 3 then
 					local Buffer3
-					Buffer3, v3569 = ProtoModule.readBuffer(Buf, v99)
+					Buffer3, v3755 = ProtoModule.readBuffer(Buf, v105)
 					NewModule.entry_point_event_ctx = PropTypesModule.StringProp.decode(Buffer3)
 				elseif Tag == 4 then
 					local Buffer4
-					Buffer4, v3569 = ProtoModule.readBuffer(Buf, v99)
+					Buffer4, v3755 = ProtoModule.readBuffer(Buf, v105)
 					NewModule.skip_facial_age_estimation_web_link_modal = PropTypesModule.BoolProp.decode(Buffer4)
 				elseif Tag == 5 then
 					local Buffer5
-					Buffer5, v3569 = ProtoModule.readBuffer(Buf, v99)
+					Buffer5, v3755 = ProtoModule.readBuffer(Buf, v105)
 					NewModule.on_open = t.ActionProp.decode(Buffer5)
 				elseif Tag == 6 then
 					local Buffer6
-					Buffer6, v3569 = ProtoModule.readBuffer(Buf, v99)
+					Buffer6, v3755 = ProtoModule.readBuffer(Buf, v105)
 					NewModule.on_success = t.ActionProp.decode(Buffer6)
 				else
-					local VarInt, VarInt2 = ProtoModule.readVarInt(Buf, v99)
-					v99 = VarInt2 + VarInt
+					local VarInt, VarInt2 = ProtoModule.readVarInt(Buf, v105)
+					v105 = VarInt2 + VarInt
 				end
 			elseif Tag2 == ProtoModule.wireTypes.i32 then
 				local _
-				_, v3569 = ProtoModule.readFixed32(Buf, v99)
+				_, v3755 = ProtoModule.readFixed32(Buf, v105)
 			elseif Tag2 == ProtoModule.wireTypes.i64 then
 				local _
-				_, v3569 = ProtoModule.readFixed64(Buf, v99)
+				_, v3755 = ProtoModule.readFixed64(Buf, v105)
 			else
 				error("Unsupported wire type: " .. Tag2)
 			end
@@ -17302,7 +18252,7 @@ do
 		return NewModule
 	end
 
-	function Module146:jsonEncode()
+	function Module156:jsonEncode()
 		local t = {}
 		
 		if self.feature_name ~= nil then
@@ -17326,9 +18276,9 @@ do
 		return t
 	end
 
-	function Module146:jsonDecode()
-		-- upvalues: Module146 (copy), PropTypesModule (copy), t (copy)
-		local NewModule = Module146.new()
+	function Module156:jsonDecode()
+		-- upvalues: Module156 (copy), PropTypesModule (copy), t (copy)
+		local NewModule = Module156.new()
 		
 		if self.feature_name ~= nil then
 			NewModule.feature_name = PropTypesModule.StringProp.jsonDecode(self.feature_name)
@@ -17369,1220 +18319,12 @@ do
 		return NewModule
 	end
 
-	Module146.descriptor = {
+	Module156.descriptor = {
 		name = "OpenAmpWizardAction_Params",
 		fullName = "roblox.apppageplatform.shared.v1beta1.Params"
 	}
-	t.OpenAmpWizardAction_Params = Module146
-end
-do
+	t.OpenAmpWizardAction_Params = Module156
 	TypeRegistryModule.default:register(t.OpenAmpWizardAction_Params)
-	local Module147 = {}
-	Module147.__index = Module147
-
-	function Module147.new(p1)
-		-- upvalues: t (copy), Module147 (copy)
-		return (setmetatable({
-			action_type = if p1 == nil or p1.action_type == nil then assert(t.ActionType.fromNumber(0), "Enum has no 0 default") else p1.action_type,
-			action_params = if p1 == nil or p1.action_params == nil then nil else p1.action_params
-		}, Module147))
-	end
-
-	function Module147:encode()
-		-- upvalues: t (copy), ProtoModule (copy)
-		local Buf = buffer.create(0)
-		local Count = 0
-		
-		if self.action_type ~= nil and (self.action_type ~= nil and self.action_type ~= 0 or self.action_type ~= t.ActionType.fromNumber(0)) then
-			local WriteTagResult, WriteTagResult2 = ProtoModule.writeTag(Buf, Count, 1, ProtoModule.wireTypes.varint)
-			Buf, Count = ProtoModule.writeVarInt(WriteTagResult, WriteTagResult2, t.ActionType.toNumber(self.action_type))
-		end
-		if self.action_params ~= nil then
-			local EncodeResult = self.action_params:encode()
-			local WriteTagResult1, WriteTagResult2_1 = ProtoModule.writeTag(Buf, Count, 2, ProtoModule.wireTypes.lengthDelimited)
-			Buf, Count = ProtoModule.writeBuffer(WriteTagResult1, WriteTagResult2_1, EncodeResult, buffer.len(EncodeResult))
-		end
-		local Buf1 = buffer.create(Count)
-		buffer.copy(Buf1, 0, Buf, 0, Count)
-		
-		return Buf1
-	end
-
-	function Module147.decode(Buf)
-		-- upvalues: Module147 (copy), ProtoModule (copy), t (copy)
-		local NewModule = Module147.new()
-		local v99 = 0
-		while v99 < buffer.len(Buf) do
-			local Tag, Tag2
-			Tag, Tag2, v3593 = ProtoModule.readTag(Buf, v99)
-			
-			if Tag2 == ProtoModule.wireTypes.varint then
-				if Tag == 1 then
-					local VarIntI32
-					VarIntI32, v3593 = ProtoModule.readVarIntI32(Buf, v99)
-					NewModule.action_type = t.ActionType.fromNumber(VarIntI32) or VarIntI32
-				else
-					local _
-					_, v3593 = ProtoModule.readVarInt(Buf, v99)
-				end
-			elseif Tag2 == ProtoModule.wireTypes.lengthDelimited then
-				if Tag == 2 then
-					local Buffer1
-					Buffer1, v3593 = ProtoModule.readBuffer(Buf, v99)
-					NewModule.action_params = t.OpenSocialProofUserListSheetAction_Params.decode(Buffer1)
-				else
-					local VarInt, VarInt2 = ProtoModule.readVarInt(Buf, v99)
-					v99 = VarInt2 + VarInt
-				end
-			elseif Tag2 == ProtoModule.wireTypes.i32 then
-				local _
-				_, v3593 = ProtoModule.readFixed32(Buf, v99)
-			elseif Tag2 == ProtoModule.wireTypes.i64 then
-				local _
-				_, v3593 = ProtoModule.readFixed64(Buf, v99)
-			else
-				error("Unsupported wire type: " .. Tag2)
-			end
-		end
-		return NewModule
-	end
-
-	function Module147:jsonEncode()
-		-- upvalues: t (copy)
-		local t1 = {}
-		
-		if self.action_type ~= nil and (self.action_type ~= nil and self.action_type ~= 0 or self.action_type ~= t.ActionType.fromNumber(0)) then
-			t1.actionType = if typeof(self.action_type) == "number" then self.action_type else t.ActionType.toNumber(self.action_type)
-		end
-		if self.action_params ~= nil then
-			t1.actionParams = self.action_params:jsonEncode()
-		end
-		return t1
-	end
-
-	function Module147:jsonDecode()
-		-- upvalues: Module147 (copy), t (copy)
-		local NewModule = Module147.new()
-		
-		if self.action_type ~= nil then
-			NewModule.action_type = (if typeof(self.action_type) == "number" then t.ActionType.fromNumber(self.action_type) else t.ActionType.fromName(self.action_type)) or self.action_type
-		end
-		if self.actionType ~= nil then
-			NewModule.action_type = (if typeof(self.actionType) == "number" then t.ActionType.fromNumber(self.actionType) else t.ActionType.fromName(self.actionType)) or self.actionType
-		end
-		if self.action_params ~= nil then
-			NewModule.action_params = t.OpenSocialProofUserListSheetAction_Params.jsonDecode(self.action_params)
-		end
-		if self.actionParams ~= nil then
-			NewModule.action_params = t.OpenSocialProofUserListSheetAction_Params.jsonDecode(self.actionParams)
-		end
-		return NewModule
-	end
-
-	Module147.descriptor = {
-		name = "OpenSocialProofUserListSheetAction",
-		fullName = "roblox.apppageplatform.shared.v1beta1.OpenSocialProofUserListSheetAction"
-	}
-	t.OpenSocialProofUserListSheetAction = Module147
-	TypeRegistryModule.default:register(t.OpenSocialProofUserListSheetAction)
-	local Module148 = {}
-	Module148.__index = Module148
-
-	function Module148.new(p1)
-		-- upvalues: Module148 (copy)
-		return (setmetatable({
-			universe_id = if p1 == nil or p1.universe_id == nil then nil else p1.universe_id,
-			place_id = if p1 == nil or p1.place_id == nil then nil else p1.place_id,
-			total_connections = if p1 == nil or p1.total_connections == nil then nil else p1.total_connections,
-			user_ids = if p1 == nil or p1.user_ids == nil then nil else p1.user_ids,
-			sheet_title = if p1 == nil or p1.sheet_title == nil then nil else p1.sheet_title
-		}, Module148))
-	end
-
-	function Module148:encode()
-		-- upvalues: ProtoModule (copy)
-		local Buf = buffer.create(0)
-		local Count = 0
-		
-		if self.universe_id ~= nil then
-			local EncodeResult = self.universe_id:encode()
-			local WriteTagResult, WriteTagResult2 = ProtoModule.writeTag(Buf, Count, 1, ProtoModule.wireTypes.lengthDelimited)
-			Buf, Count = ProtoModule.writeBuffer(WriteTagResult, WriteTagResult2, EncodeResult, buffer.len(EncodeResult))
-		end
-		if self.place_id ~= nil then
-			local EncodeResult = self.place_id:encode()
-			local WriteTagResult1, WriteTagResult2_1 = ProtoModule.writeTag(Buf, Count, 2, ProtoModule.wireTypes.lengthDelimited)
-			Buf, Count = ProtoModule.writeBuffer(WriteTagResult1, WriteTagResult2_1, EncodeResult, buffer.len(EncodeResult))
-		end
-		if self.total_connections ~= nil then
-			local EncodeResult = self.total_connections:encode()
-			local WriteTagResult3, WriteTagResult2_2 = ProtoModule.writeTag(Buf, Count, 3, ProtoModule.wireTypes.lengthDelimited)
-			Buf, Count = ProtoModule.writeBuffer(WriteTagResult3, WriteTagResult2_2, EncodeResult, buffer.len(EncodeResult))
-		end
-		if self.user_ids ~= nil then
-			local EncodeResult = self.user_ids:encode()
-			local WriteTagResult4, WriteTagResult2_3 = ProtoModule.writeTag(Buf, Count, 4, ProtoModule.wireTypes.lengthDelimited)
-			Buf, Count = ProtoModule.writeBuffer(WriteTagResult4, WriteTagResult2_3, EncodeResult, buffer.len(EncodeResult))
-		end
-		if self.sheet_title ~= nil then
-			local EncodeResult = self.sheet_title:encode()
-			local WriteTagResult5, WriteTagResult2_4 = ProtoModule.writeTag(Buf, Count, 5, ProtoModule.wireTypes.lengthDelimited)
-			Buf, Count = ProtoModule.writeBuffer(WriteTagResult5, WriteTagResult2_4, EncodeResult, buffer.len(EncodeResult))
-		end
-		local Buf1 = buffer.create(Count)
-		buffer.copy(Buf1, 0, Buf, 0, Count)
-		
-		return Buf1
-	end
-
-	function Module148.decode(Buf)
-		-- upvalues: Module148 (copy), ProtoModule (copy), PropTypesModule (copy)
-		local NewModule = Module148.new()
-		local v100 = 0
-		while v100 < buffer.len(Buf) do
-			local Tag, Tag2
-			Tag, Tag2, v3623 = ProtoModule.readTag(Buf, v100)
-			
-			if Tag2 == ProtoModule.wireTypes.varint then
-				local _
-				_, v3623 = ProtoModule.readVarInt(Buf, v100)
-			elseif Tag2 == ProtoModule.wireTypes.lengthDelimited then
-				if Tag == 1 then
-					local Buffer1
-					Buffer1, v3623 = ProtoModule.readBuffer(Buf, v100)
-					NewModule.universe_id = PropTypesModule.StringProp.decode(Buffer1)
-				elseif Tag == 2 then
-					local Buffer2
-					Buffer2, v3623 = ProtoModule.readBuffer(Buf, v100)
-					NewModule.place_id = PropTypesModule.StringProp.decode(Buffer2)
-				elseif Tag == 3 then
-					local Buffer3
-					Buffer3, v3623 = ProtoModule.readBuffer(Buf, v100)
-					NewModule.total_connections = PropTypesModule.Int32Prop.decode(Buffer3)
-				elseif Tag == 4 then
-					local Buffer4
-					Buffer4, v3623 = ProtoModule.readBuffer(Buf, v100)
-					NewModule.user_ids = PropTypesModule.ArrayOfAvatarProp.decode(Buffer4)
-				elseif Tag == 5 then
-					local Buffer5
-					Buffer5, v3623 = ProtoModule.readBuffer(Buf, v100)
-					NewModule.sheet_title = PropTypesModule.StringProp.decode(Buffer5)
-				else
-					local VarInt, VarInt2 = ProtoModule.readVarInt(Buf, v100)
-					v100 = VarInt2 + VarInt
-				end
-			elseif Tag2 == ProtoModule.wireTypes.i32 then
-				local _
-				_, v3623 = ProtoModule.readFixed32(Buf, v100)
-			elseif Tag2 == ProtoModule.wireTypes.i64 then
-				local _
-				_, v3623 = ProtoModule.readFixed64(Buf, v100)
-			else
-				error("Unsupported wire type: " .. Tag2)
-			end
-		end
-		return NewModule
-	end
-
-	function Module148:jsonEncode()
-		local t = {}
-		
-		if self.universe_id ~= nil then
-			t.universeId = self.universe_id:jsonEncode()
-		end
-		if self.place_id ~= nil then
-			t.placeId = self.place_id:jsonEncode()
-		end
-		if self.total_connections ~= nil then
-			t.totalConnections = self.total_connections:jsonEncode()
-		end
-		if self.user_ids ~= nil then
-			t.userIds = self.user_ids:jsonEncode()
-		end
-		if self.sheet_title ~= nil then
-			t.sheetTitle = self.sheet_title:jsonEncode()
-		end
-		return t
-	end
-
-	function Module148:jsonDecode()
-		-- upvalues: Module148 (copy), PropTypesModule (copy)
-		local NewModule = Module148.new()
-		
-		if self.universe_id ~= nil then
-			NewModule.universe_id = PropTypesModule.StringProp.jsonDecode(self.universe_id)
-		end
-		if self.universeId ~= nil then
-			NewModule.universe_id = PropTypesModule.StringProp.jsonDecode(self.universeId)
-		end
-		if self.place_id ~= nil then
-			NewModule.place_id = PropTypesModule.StringProp.jsonDecode(self.place_id)
-		end
-		if self.placeId ~= nil then
-			NewModule.place_id = PropTypesModule.StringProp.jsonDecode(self.placeId)
-		end
-		if self.total_connections ~= nil then
-			NewModule.total_connections = PropTypesModule.Int32Prop.jsonDecode(self.total_connections)
-		end
-		if self.totalConnections ~= nil then
-			NewModule.total_connections = PropTypesModule.Int32Prop.jsonDecode(self.totalConnections)
-		end
-		if self.user_ids ~= nil then
-			NewModule.user_ids = PropTypesModule.ArrayOfAvatarProp.jsonDecode(self.user_ids)
-		end
-		if self.userIds ~= nil then
-			NewModule.user_ids = PropTypesModule.ArrayOfAvatarProp.jsonDecode(self.userIds)
-		end
-		if self.sheet_title ~= nil then
-			NewModule.sheet_title = PropTypesModule.StringProp.jsonDecode(self.sheet_title)
-		end
-		if self.sheetTitle ~= nil then
-			NewModule.sheet_title = PropTypesModule.StringProp.jsonDecode(self.sheetTitle)
-		end
-		return NewModule
-	end
-
-	Module148.descriptor = {
-		name = "OpenSocialProofUserListSheetAction_Params",
-		fullName = "roblox.apppageplatform.shared.v1beta1.Params"
-	}
-	t.OpenSocialProofUserListSheetAction_Params = Module148
-	TypeRegistryModule.default:register(t.OpenSocialProofUserListSheetAction_Params)
-	local Module149 = {}
-	Module149.__index = Module149
-
-	function Module149.new(p1)
-		-- upvalues: t (copy), Module149 (copy)
-		return (setmetatable({
-			action_type = if p1 == nil or p1.action_type == nil then assert(t.ActionType.fromNumber(0), "Enum has no 0 default") else p1.action_type,
-			action_params = if p1 == nil or p1.action_params == nil then nil else p1.action_params
-		}, Module149))
-	end
-
-	function Module149:encode()
-		-- upvalues: t (copy), ProtoModule (copy)
-		local Buf = buffer.create(0)
-		local Count = 0
-		
-		if self.action_type ~= nil and (self.action_type ~= nil and self.action_type ~= 0 or self.action_type ~= t.ActionType.fromNumber(0)) then
-			local WriteTagResult, WriteTagResult2 = ProtoModule.writeTag(Buf, Count, 1, ProtoModule.wireTypes.varint)
-			Buf, Count = ProtoModule.writeVarInt(WriteTagResult, WriteTagResult2, t.ActionType.toNumber(self.action_type))
-		end
-		if self.action_params ~= nil then
-			local EncodeResult = self.action_params:encode()
-			local WriteTagResult1, WriteTagResult2_1 = ProtoModule.writeTag(Buf, Count, 2, ProtoModule.wireTypes.lengthDelimited)
-			Buf, Count = ProtoModule.writeBuffer(WriteTagResult1, WriteTagResult2_1, EncodeResult, buffer.len(EncodeResult))
-		end
-		local Buf1 = buffer.create(Count)
-		buffer.copy(Buf1, 0, Buf, 0, Count)
-		
-		return Buf1
-	end
-
-	function Module149.decode(Buf)
-		-- upvalues: Module149 (copy), ProtoModule (copy), t (copy)
-		local NewModule = Module149.new()
-		local v101 = 0
-		while v101 < buffer.len(Buf) do
-			local Tag, Tag2
-			Tag, Tag2, v3646 = ProtoModule.readTag(Buf, v101)
-			
-			if Tag2 == ProtoModule.wireTypes.varint then
-				if Tag == 1 then
-					local VarIntI32
-					VarIntI32, v3646 = ProtoModule.readVarIntI32(Buf, v101)
-					NewModule.action_type = t.ActionType.fromNumber(VarIntI32) or VarIntI32
-				else
-					local _
-					_, v3646 = ProtoModule.readVarInt(Buf, v101)
-				end
-			elseif Tag2 == ProtoModule.wireTypes.lengthDelimited then
-				if Tag == 2 then
-					local Buffer1
-					Buffer1, v3646 = ProtoModule.readBuffer(Buf, v101)
-					NewModule.action_params = t.OpenSearchResultsTabAction_Params.decode(Buffer1)
-				else
-					local VarInt, VarInt2 = ProtoModule.readVarInt(Buf, v101)
-					v101 = VarInt2 + VarInt
-				end
-			elseif Tag2 == ProtoModule.wireTypes.i32 then
-				local _
-				_, v3646 = ProtoModule.readFixed32(Buf, v101)
-			elseif Tag2 == ProtoModule.wireTypes.i64 then
-				local _
-				_, v3646 = ProtoModule.readFixed64(Buf, v101)
-			else
-				error("Unsupported wire type: " .. Tag2)
-			end
-		end
-		return NewModule
-	end
-
-	function Module149:jsonEncode()
-		-- upvalues: t (copy)
-		local t1 = {}
-		
-		if self.action_type ~= nil and (self.action_type ~= nil and self.action_type ~= 0 or self.action_type ~= t.ActionType.fromNumber(0)) then
-			t1.actionType = if typeof(self.action_type) == "number" then self.action_type else t.ActionType.toNumber(self.action_type)
-		end
-		if self.action_params ~= nil then
-			t1.actionParams = self.action_params:jsonEncode()
-		end
-		return t1
-	end
-
-	function Module149:jsonDecode()
-		-- upvalues: Module149 (copy), t (copy)
-		local NewModule = Module149.new()
-		
-		if self.action_type ~= nil then
-			NewModule.action_type = (if typeof(self.action_type) == "number" then t.ActionType.fromNumber(self.action_type) else t.ActionType.fromName(self.action_type)) or self.action_type
-		end
-		if self.actionType ~= nil then
-			NewModule.action_type = (if typeof(self.actionType) == "number" then t.ActionType.fromNumber(self.actionType) else t.ActionType.fromName(self.actionType)) or self.actionType
-		end
-		if self.action_params ~= nil then
-			NewModule.action_params = t.OpenSearchResultsTabAction_Params.jsonDecode(self.action_params)
-		end
-		if self.actionParams ~= nil then
-			NewModule.action_params = t.OpenSearchResultsTabAction_Params.jsonDecode(self.actionParams)
-		end
-		return NewModule
-	end
-
-	Module149.descriptor = {
-		name = "OpenSearchResultsTabAction",
-		fullName = "roblox.apppageplatform.shared.v1beta1.OpenSearchResultsTabAction"
-	}
-	t.OpenSearchResultsTabAction = Module149
-end
-do
-	TypeRegistryModule.default:register(t.OpenSearchResultsTabAction)
-	local Module150 = {}
-	Module150.__index = Module150
-
-	function Module150.new(p1)
-		-- upvalues: Module150 (copy)
-		return (setmetatable({
-			search_type = if p1 == nil or p1.search_type == nil then nil else p1.search_type
-		}, Module150))
-	end
-
-	function Module150:encode()
-		-- upvalues: ProtoModule (copy)
-		local Buf = buffer.create(0)
-		local Count = 0
-		
-		if self.search_type ~= nil then
-			local EncodeResult = self.search_type:encode()
-			local WriteTagResult, WriteTagResult2 = ProtoModule.writeTag(Buf, Count, 1, ProtoModule.wireTypes.lengthDelimited)
-			Buf, Count = ProtoModule.writeBuffer(WriteTagResult, WriteTagResult2, EncodeResult, buffer.len(EncodeResult))
-		end
-		local Buf1 = buffer.create(Count)
-		buffer.copy(Buf1, 0, Buf, 0, Count)
-		
-		return Buf1
-	end
-
-	function Module150.decode(Buf)
-		-- upvalues: Module150 (copy), ProtoModule (copy), PropTypesModule (copy)
-		local NewModule = Module150.new()
-		local v101 = 0
-		while v101 < buffer.len(Buf) do
-			local Tag, Tag2
-			Tag, Tag2, v3664 = ProtoModule.readTag(Buf, v101)
-			
-			if Tag2 == ProtoModule.wireTypes.varint then
-				local _
-				_, v3664 = ProtoModule.readVarInt(Buf, v101)
-			elseif Tag2 == ProtoModule.wireTypes.lengthDelimited then
-				if Tag == 1 then
-					local Buffer1
-					Buffer1, v3664 = ProtoModule.readBuffer(Buf, v101)
-					NewModule.search_type = PropTypesModule.StringProp.decode(Buffer1)
-				else
-					local VarInt, VarInt2 = ProtoModule.readVarInt(Buf, v101)
-					v101 = VarInt2 + VarInt
-				end
-			elseif Tag2 == ProtoModule.wireTypes.i32 then
-				local _
-				_, v3664 = ProtoModule.readFixed32(Buf, v101)
-			elseif Tag2 == ProtoModule.wireTypes.i64 then
-				local _
-				_, v3664 = ProtoModule.readFixed64(Buf, v101)
-			else
-				error("Unsupported wire type: " .. Tag2)
-			end
-		end
-		return NewModule
-	end
-
-	function Module150:jsonEncode()
-		local t = {}
-		
-		if self.search_type ~= nil then
-			t.searchType = self.search_type:jsonEncode()
-		end
-		return t
-	end
-
-	function Module150:jsonDecode()
-		-- upvalues: Module150 (copy), PropTypesModule (copy)
-		local NewModule = Module150.new()
-		
-		if self.search_type ~= nil then
-			NewModule.search_type = PropTypesModule.StringProp.jsonDecode(self.search_type)
-		end
-		if self.searchType ~= nil then
-			NewModule.search_type = PropTypesModule.StringProp.jsonDecode(self.searchType)
-		end
-		return NewModule
-	end
-
-	Module150.descriptor = {
-		name = "OpenSearchResultsTabAction_Params",
-		fullName = "roblox.apppageplatform.shared.v1beta1.Params"
-	}
-	t.OpenSearchResultsTabAction_Params = Module150
-	TypeRegistryModule.default:register(t.OpenSearchResultsTabAction_Params)
-	local Module151 = {}
-	Module151.__index = Module151
-
-	function Module151.new(p1)
-		-- upvalues: t (copy), Module151 (copy)
-		return (setmetatable({
-			action_type = if p1 == nil or p1.action_type == nil then assert(t.ActionType.fromNumber(0), "Enum has no 0 default") else p1.action_type,
-			action_params = if p1 == nil or p1.action_params == nil then nil else p1.action_params
-		}, Module151))
-	end
-
-	function Module151:encode()
-		-- upvalues: t (copy), ProtoModule (copy)
-		local Buf = buffer.create(0)
-		local Count = 0
-		
-		if self.action_type ~= nil and (self.action_type ~= nil and self.action_type ~= 0 or self.action_type ~= t.ActionType.fromNumber(0)) then
-			local WriteTagResult, WriteTagResult2 = ProtoModule.writeTag(Buf, Count, 1, ProtoModule.wireTypes.varint)
-			Buf, Count = ProtoModule.writeVarInt(WriteTagResult, WriteTagResult2, t.ActionType.toNumber(self.action_type))
-		end
-		if self.action_params ~= nil then
-			local EncodeResult = self.action_params:encode()
-			local WriteTagResult1, WriteTagResult2_1 = ProtoModule.writeTag(Buf, Count, 2, ProtoModule.wireTypes.lengthDelimited)
-			Buf, Count = ProtoModule.writeBuffer(WriteTagResult1, WriteTagResult2_1, EncodeResult, buffer.len(EncodeResult))
-		end
-		local Buf1 = buffer.create(Count)
-		buffer.copy(Buf1, 0, Buf, 0, Count)
-		
-		return Buf1
-	end
-
-	function Module151.decode(Buf)
-		-- upvalues: Module151 (copy), ProtoModule (copy), t (copy)
-		local NewModule = Module151.new()
-		local v102 = 0
-		while v102 < buffer.len(Buf) do
-			local Tag, Tag2
-			Tag, Tag2, v3683 = ProtoModule.readTag(Buf, v102)
-			
-			if Tag2 == ProtoModule.wireTypes.varint then
-				if Tag == 1 then
-					local VarIntI32
-					VarIntI32, v3683 = ProtoModule.readVarIntI32(Buf, v102)
-					NewModule.action_type = t.ActionType.fromNumber(VarIntI32) or VarIntI32
-				else
-					local _
-					_, v3683 = ProtoModule.readVarInt(Buf, v102)
-				end
-			elseif Tag2 == ProtoModule.wireTypes.lengthDelimited then
-				if Tag == 2 then
-					local Buffer1
-					Buffer1, v3683 = ProtoModule.readBuffer(Buf, v102)
-					NewModule.action_params = t.DismissPromptAction_Params.decode(Buffer1)
-				else
-					local VarInt, VarInt2 = ProtoModule.readVarInt(Buf, v102)
-					v102 = VarInt2 + VarInt
-				end
-			elseif Tag2 == ProtoModule.wireTypes.i32 then
-				local _
-				_, v3683 = ProtoModule.readFixed32(Buf, v102)
-			elseif Tag2 == ProtoModule.wireTypes.i64 then
-				local _
-				_, v3683 = ProtoModule.readFixed64(Buf, v102)
-			else
-				error("Unsupported wire type: " .. Tag2)
-			end
-		end
-		return NewModule
-	end
-
-	function Module151:jsonEncode()
-		-- upvalues: t (copy)
-		local t1 = {}
-		
-		if self.action_type ~= nil and (self.action_type ~= nil and self.action_type ~= 0 or self.action_type ~= t.ActionType.fromNumber(0)) then
-			t1.actionType = if typeof(self.action_type) == "number" then self.action_type else t.ActionType.toNumber(self.action_type)
-		end
-		if self.action_params ~= nil then
-			t1.actionParams = self.action_params:jsonEncode()
-		end
-		return t1
-	end
-
-	function Module151:jsonDecode()
-		-- upvalues: Module151 (copy), t (copy)
-		local NewModule = Module151.new()
-		
-		if self.action_type ~= nil then
-			NewModule.action_type = (if typeof(self.action_type) == "number" then t.ActionType.fromNumber(self.action_type) else t.ActionType.fromName(self.action_type)) or self.action_type
-		end
-		if self.actionType ~= nil then
-			NewModule.action_type = (if typeof(self.actionType) == "number" then t.ActionType.fromNumber(self.actionType) else t.ActionType.fromName(self.actionType)) or self.actionType
-		end
-		if self.action_params ~= nil then
-			NewModule.action_params = t.DismissPromptAction_Params.jsonDecode(self.action_params)
-		end
-		if self.actionParams ~= nil then
-			NewModule.action_params = t.DismissPromptAction_Params.jsonDecode(self.actionParams)
-		end
-		return NewModule
-	end
-
-	Module151.descriptor = {
-		name = "DismissPromptAction",
-		fullName = "roblox.apppageplatform.shared.v1beta1.DismissPromptAction"
-	}
-	t.DismissPromptAction = Module151
-	TypeRegistryModule.default:register(t.DismissPromptAction)
-	local Module152 = {}
-	Module152.__index = Module152
-
-	function Module152.new(p1)
-		-- upvalues: Module152 (copy)
-		return (setmetatable({
-			prompt_type = if p1 == nil or p1.prompt_type == nil then nil else p1.prompt_type,
-			prompt_id = if p1 == nil or p1.prompt_id == nil then nil else p1.prompt_id,
-			entity_type = if p1 == nil or p1.entity_type == nil then nil else p1.entity_type,
-			entity_id = if p1 == nil or p1.entity_id == nil then nil else p1.entity_id
-		}, Module152))
-	end
-
-	function Module152:encode()
-		-- upvalues: ProtoModule (copy)
-		local Buf = buffer.create(0)
-		local Count = 0
-		
-		if self.prompt_type ~= nil then
-			local EncodeResult = self.prompt_type:encode()
-			local WriteTagResult, WriteTagResult2 = ProtoModule.writeTag(Buf, Count, 1, ProtoModule.wireTypes.lengthDelimited)
-			Buf, Count = ProtoModule.writeBuffer(WriteTagResult, WriteTagResult2, EncodeResult, buffer.len(EncodeResult))
-		end
-		if self.prompt_id ~= nil then
-			local EncodeResult = self.prompt_id:encode()
-			local WriteTagResult1, WriteTagResult2_1 = ProtoModule.writeTag(Buf, Count, 2, ProtoModule.wireTypes.lengthDelimited)
-			Buf, Count = ProtoModule.writeBuffer(WriteTagResult1, WriteTagResult2_1, EncodeResult, buffer.len(EncodeResult))
-		end
-		if self.entity_type ~= nil then
-			local EncodeResult = self.entity_type:encode()
-			local WriteTagResult3, WriteTagResult2_2 = ProtoModule.writeTag(Buf, Count, 3, ProtoModule.wireTypes.lengthDelimited)
-			Buf, Count = ProtoModule.writeBuffer(WriteTagResult3, WriteTagResult2_2, EncodeResult, buffer.len(EncodeResult))
-		end
-		if self.entity_id ~= nil then
-			local EncodeResult = self.entity_id:encode()
-			local WriteTagResult4, WriteTagResult2_3 = ProtoModule.writeTag(Buf, Count, 4, ProtoModule.wireTypes.lengthDelimited)
-			Buf, Count = ProtoModule.writeBuffer(WriteTagResult4, WriteTagResult2_3, EncodeResult, buffer.len(EncodeResult))
-		end
-		local Buf1 = buffer.create(Count)
-		buffer.copy(Buf1, 0, Buf, 0, Count)
-		
-		return Buf1
-	end
-
-	function Module152.decode(Buf)
-		-- upvalues: Module152 (copy), ProtoModule (copy), PropTypesModule (copy)
-		local NewModule = Module152.new()
-		local v103 = 0
-		while v103 < buffer.len(Buf) do
-			local Tag, Tag2
-			Tag, Tag2, v3710 = ProtoModule.readTag(Buf, v103)
-			
-			if Tag2 == ProtoModule.wireTypes.varint then
-				local _
-				_, v3710 = ProtoModule.readVarInt(Buf, v103)
-			elseif Tag2 == ProtoModule.wireTypes.lengthDelimited then
-				if Tag == 1 then
-					local Buffer1
-					Buffer1, v3710 = ProtoModule.readBuffer(Buf, v103)
-					NewModule.prompt_type = PropTypesModule.StringProp.decode(Buffer1)
-				elseif Tag == 2 then
-					local Buffer2
-					Buffer2, v3710 = ProtoModule.readBuffer(Buf, v103)
-					NewModule.prompt_id = PropTypesModule.StringProp.decode(Buffer2)
-				elseif Tag == 3 then
-					local Buffer3
-					Buffer3, v3710 = ProtoModule.readBuffer(Buf, v103)
-					NewModule.entity_type = PropTypesModule.StringProp.decode(Buffer3)
-				elseif Tag == 4 then
-					local Buffer4
-					Buffer4, v3710 = ProtoModule.readBuffer(Buf, v103)
-					NewModule.entity_id = PropTypesModule.StringProp.decode(Buffer4)
-				else
-					local VarInt, VarInt2 = ProtoModule.readVarInt(Buf, v103)
-					v103 = VarInt2 + VarInt
-				end
-			elseif Tag2 == ProtoModule.wireTypes.i32 then
-				local _
-				_, v3710 = ProtoModule.readFixed32(Buf, v103)
-			elseif Tag2 == ProtoModule.wireTypes.i64 then
-				local _
-				_, v3710 = ProtoModule.readFixed64(Buf, v103)
-			else
-				error("Unsupported wire type: " .. Tag2)
-			end
-		end
-		return NewModule
-	end
-
-	function Module152:jsonEncode()
-		local t = {}
-		
-		if self.prompt_type ~= nil then
-			t.promptType = self.prompt_type:jsonEncode()
-		end
-		if self.prompt_id ~= nil then
-			t.promptId = self.prompt_id:jsonEncode()
-		end
-		if self.entity_type ~= nil then
-			t.entityType = self.entity_type:jsonEncode()
-		end
-		if self.entity_id ~= nil then
-			t.entityId = self.entity_id:jsonEncode()
-		end
-		return t
-	end
-
-	function Module152:jsonDecode()
-		-- upvalues: Module152 (copy), PropTypesModule (copy)
-		local NewModule = Module152.new()
-		
-		if self.prompt_type ~= nil then
-			NewModule.prompt_type = PropTypesModule.StringProp.jsonDecode(self.prompt_type)
-		end
-		if self.promptType ~= nil then
-			NewModule.prompt_type = PropTypesModule.StringProp.jsonDecode(self.promptType)
-		end
-		if self.prompt_id ~= nil then
-			NewModule.prompt_id = PropTypesModule.StringProp.jsonDecode(self.prompt_id)
-		end
-		if self.promptId ~= nil then
-			NewModule.prompt_id = PropTypesModule.StringProp.jsonDecode(self.promptId)
-		end
-		if self.entity_type ~= nil then
-			NewModule.entity_type = PropTypesModule.StringProp.jsonDecode(self.entity_type)
-		end
-		if self.entityType ~= nil then
-			NewModule.entity_type = PropTypesModule.StringProp.jsonDecode(self.entityType)
-		end
-		if self.entity_id ~= nil then
-			NewModule.entity_id = PropTypesModule.StringProp.jsonDecode(self.entity_id)
-		end
-		if self.entityId ~= nil then
-			NewModule.entity_id = PropTypesModule.StringProp.jsonDecode(self.entityId)
-		end
-		return NewModule
-	end
-
-	Module152.descriptor = {
-		name = "DismissPromptAction_Params",
-		fullName = "roblox.apppageplatform.shared.v1beta1.Params"
-	}
-	t.DismissPromptAction_Params = Module152
-end
-do
-	TypeRegistryModule.default:register(t.DismissPromptAction_Params)
-	local Module153 = {}
-	Module153.__index = Module153
-
-	function Module153.new(p1)
-		-- upvalues: t (copy), Module153 (copy)
-		return (setmetatable({
-			action_type = if p1 == nil or p1.action_type == nil then assert(t.ActionType.fromNumber(0), "Enum has no 0 default") else p1.action_type,
-			action_params = if p1 == nil or p1.action_params == nil then nil else p1.action_params
-		}, Module153))
-	end
-
-	function Module153:encode()
-		-- upvalues: t (copy), ProtoModule (copy)
-		local Buf = buffer.create(0)
-		local Count = 0
-		
-		if self.action_type ~= nil and (self.action_type ~= nil and self.action_type ~= 0 or self.action_type ~= t.ActionType.fromNumber(0)) then
-			local WriteTagResult, WriteTagResult2 = ProtoModule.writeTag(Buf, Count, 1, ProtoModule.wireTypes.varint)
-			Buf, Count = ProtoModule.writeVarInt(WriteTagResult, WriteTagResult2, t.ActionType.toNumber(self.action_type))
-		end
-		if self.action_params ~= nil then
-			local EncodeResult = self.action_params:encode()
-			local WriteTagResult1, WriteTagResult2_1 = ProtoModule.writeTag(Buf, Count, 2, ProtoModule.wireTypes.lengthDelimited)
-			Buf, Count = ProtoModule.writeBuffer(WriteTagResult1, WriteTagResult2_1, EncodeResult, buffer.len(EncodeResult))
-		end
-		local Buf1 = buffer.create(Count)
-		buffer.copy(Buf1, 0, Buf, 0, Count)
-		
-		return Buf1
-	end
-
-	function Module153.decode(Buf)
-		-- upvalues: Module153 (copy), ProtoModule (copy), t (copy)
-		local NewModule = Module153.new()
-		local v103 = 0
-		while v103 < buffer.len(Buf) do
-			local Tag, Tag2
-			Tag, Tag2, v3732 = ProtoModule.readTag(Buf, v103)
-			
-			if Tag2 == ProtoModule.wireTypes.varint then
-				if Tag == 1 then
-					local VarIntI32
-					VarIntI32, v3732 = ProtoModule.readVarIntI32(Buf, v103)
-					NewModule.action_type = t.ActionType.fromNumber(VarIntI32) or VarIntI32
-				else
-					local _
-					_, v3732 = ProtoModule.readVarInt(Buf, v103)
-				end
-			elseif Tag2 == ProtoModule.wireTypes.lengthDelimited then
-				if Tag == 2 then
-					local Buffer1
-					Buffer1, v3732 = ProtoModule.readBuffer(Buf, v103)
-					NewModule.action_params = t.RecordPartyChatConversationUpsellAcknowledgementAction_Params.decode(Buffer1)
-				else
-					local VarInt, VarInt2 = ProtoModule.readVarInt(Buf, v103)
-					v103 = VarInt2 + VarInt
-				end
-			elseif Tag2 == ProtoModule.wireTypes.i32 then
-				local _
-				_, v3732 = ProtoModule.readFixed32(Buf, v103)
-			elseif Tag2 == ProtoModule.wireTypes.i64 then
-				local _
-				_, v3732 = ProtoModule.readFixed64(Buf, v103)
-			else
-				error("Unsupported wire type: " .. Tag2)
-			end
-		end
-		return NewModule
-	end
-
-	function Module153:jsonEncode()
-		-- upvalues: t (copy)
-		local t1 = {}
-		
-		if self.action_type ~= nil and (self.action_type ~= nil and self.action_type ~= 0 or self.action_type ~= t.ActionType.fromNumber(0)) then
-			t1.actionType = if typeof(self.action_type) == "number" then self.action_type else t.ActionType.toNumber(self.action_type)
-		end
-		if self.action_params ~= nil then
-			t1.actionParams = self.action_params:jsonEncode()
-		end
-		return t1
-	end
-
-	function Module153:jsonDecode()
-		-- upvalues: Module153 (copy), t (copy)
-		local NewModule = Module153.new()
-		
-		if self.action_type ~= nil then
-			NewModule.action_type = (if typeof(self.action_type) == "number" then t.ActionType.fromNumber(self.action_type) else t.ActionType.fromName(self.action_type)) or self.action_type
-		end
-		if self.actionType ~= nil then
-			NewModule.action_type = (if typeof(self.actionType) == "number" then t.ActionType.fromNumber(self.actionType) else t.ActionType.fromName(self.actionType)) or self.actionType
-		end
-		if self.action_params ~= nil then
-			NewModule.action_params = t.RecordPartyChatConversationUpsellAcknowledgementAction_Params.jsonDecode(self.action_params)
-		end
-		if self.actionParams ~= nil then
-			NewModule.action_params = t.RecordPartyChatConversationUpsellAcknowledgementAction_Params.jsonDecode(self.actionParams)
-		end
-		return NewModule
-	end
-
-	Module153.descriptor = {
-		name = "RecordPartyChatConversationUpsellAcknowledgementAction",
-		fullName = "roblox.apppageplatform.shared.v1beta1.RecordPartyChatConversationUpsellAcknowledgementAction"
-	}
-	t.RecordPartyChatConversationUpsellAcknowledgementAction = Module153
-	TypeRegistryModule.default:register(t.RecordPartyChatConversationUpsellAcknowledgementAction)
-	local Module154 = {}
-	Module154.__index = Module154
-
-	function Module154.new(p1)
-		-- upvalues: Module154 (copy)
-		return (setmetatable({
-			modal_action = if p1 == nil or p1.modal_action == nil then nil else p1.modal_action,
-			modal_variant = if p1 == nil or p1.modal_variant == nil then nil else p1.modal_variant,
-			modal_sequence = if p1 == nil or p1.modal_sequence == nil then nil else p1.modal_sequence,
-			conversation_id = if p1 == nil or p1.conversation_id == nil then nil else p1.conversation_id,
-			friend_id = if p1 == nil or p1.friend_id == nil then nil else p1.friend_id
-		}, Module154))
-	end
-
-	function Module154:encode()
-		-- upvalues: ProtoModule (copy)
-		local Buf = buffer.create(0)
-		local Count = 0
-		
-		if self.modal_action ~= nil then
-			local EncodeResult = self.modal_action:encode()
-			local WriteTagResult, WriteTagResult2 = ProtoModule.writeTag(Buf, Count, 1, ProtoModule.wireTypes.lengthDelimited)
-			Buf, Count = ProtoModule.writeBuffer(WriteTagResult, WriteTagResult2, EncodeResult, buffer.len(EncodeResult))
-		end
-		if self.modal_variant ~= nil then
-			local EncodeResult = self.modal_variant:encode()
-			local WriteTagResult1, WriteTagResult2_1 = ProtoModule.writeTag(Buf, Count, 2, ProtoModule.wireTypes.lengthDelimited)
-			Buf, Count = ProtoModule.writeBuffer(WriteTagResult1, WriteTagResult2_1, EncodeResult, buffer.len(EncodeResult))
-		end
-		if self.modal_sequence ~= nil then
-			local EncodeResult = self.modal_sequence:encode()
-			local WriteTagResult3, WriteTagResult2_2 = ProtoModule.writeTag(Buf, Count, 3, ProtoModule.wireTypes.lengthDelimited)
-			Buf, Count = ProtoModule.writeBuffer(WriteTagResult3, WriteTagResult2_2, EncodeResult, buffer.len(EncodeResult))
-		end
-		if self.conversation_id ~= nil then
-			local EncodeResult = self.conversation_id:encode()
-			local WriteTagResult4, WriteTagResult2_3 = ProtoModule.writeTag(Buf, Count, 4, ProtoModule.wireTypes.lengthDelimited)
-			Buf, Count = ProtoModule.writeBuffer(WriteTagResult4, WriteTagResult2_3, EncodeResult, buffer.len(EncodeResult))
-		end
-		if self.friend_id ~= nil then
-			local EncodeResult = self.friend_id:encode()
-			local WriteTagResult5, WriteTagResult2_4 = ProtoModule.writeTag(Buf, Count, 5, ProtoModule.wireTypes.lengthDelimited)
-			Buf, Count = ProtoModule.writeBuffer(WriteTagResult5, WriteTagResult2_4, EncodeResult, buffer.len(EncodeResult))
-		end
-		local Buf1 = buffer.create(Count)
-		buffer.copy(Buf1, 0, Buf, 0, Count)
-		
-		return Buf1
-	end
-
-	function Module154.decode(Buf)
-		-- upvalues: Module154 (copy), ProtoModule (copy), PropTypesModule (copy)
-		local NewModule = Module154.new()
-		local v104 = 0
-		while v104 < buffer.len(Buf) do
-			local Tag, Tag2
-			Tag, Tag2, v3762 = ProtoModule.readTag(Buf, v104)
-			
-			if Tag2 == ProtoModule.wireTypes.varint then
-				local _
-				_, v3762 = ProtoModule.readVarInt(Buf, v104)
-			elseif Tag2 == ProtoModule.wireTypes.lengthDelimited then
-				if Tag == 1 then
-					local Buffer1
-					Buffer1, v3762 = ProtoModule.readBuffer(Buf, v104)
-					NewModule.modal_action = PropTypesModule.StringProp.decode(Buffer1)
-				elseif Tag == 2 then
-					local Buffer2
-					Buffer2, v3762 = ProtoModule.readBuffer(Buf, v104)
-					NewModule.modal_variant = PropTypesModule.StringProp.decode(Buffer2)
-				elseif Tag == 3 then
-					local Buffer3
-					Buffer3, v3762 = ProtoModule.readBuffer(Buf, v104)
-					NewModule.modal_sequence = PropTypesModule.StringProp.decode(Buffer3)
-				elseif Tag == 4 then
-					local Buffer4
-					Buffer4, v3762 = ProtoModule.readBuffer(Buf, v104)
-					NewModule.conversation_id = PropTypesModule.StringProp.decode(Buffer4)
-				elseif Tag == 5 then
-					local Buffer5
-					Buffer5, v3762 = ProtoModule.readBuffer(Buf, v104)
-					NewModule.friend_id = PropTypesModule.StringProp.decode(Buffer5)
-				else
-					local VarInt, VarInt2 = ProtoModule.readVarInt(Buf, v104)
-					v104 = VarInt2 + VarInt
-				end
-			elseif Tag2 == ProtoModule.wireTypes.i32 then
-				local _
-				_, v3762 = ProtoModule.readFixed32(Buf, v104)
-			elseif Tag2 == ProtoModule.wireTypes.i64 then
-				local _
-				_, v3762 = ProtoModule.readFixed64(Buf, v104)
-			else
-				error("Unsupported wire type: " .. Tag2)
-			end
-		end
-		return NewModule
-	end
-
-	function Module154:jsonEncode()
-		local t = {}
-		
-		if self.modal_action ~= nil then
-			t.modalAction = self.modal_action:jsonEncode()
-		end
-		if self.modal_variant ~= nil then
-			t.modalVariant = self.modal_variant:jsonEncode()
-		end
-		if self.modal_sequence ~= nil then
-			t.modalSequence = self.modal_sequence:jsonEncode()
-		end
-		if self.conversation_id ~= nil then
-			t.conversationId = self.conversation_id:jsonEncode()
-		end
-		if self.friend_id ~= nil then
-			t.friendId = self.friend_id:jsonEncode()
-		end
-		return t
-	end
-
-	function Module154:jsonDecode()
-		-- upvalues: Module154 (copy), PropTypesModule (copy)
-		local NewModule = Module154.new()
-		
-		if self.modal_action ~= nil then
-			NewModule.modal_action = PropTypesModule.StringProp.jsonDecode(self.modal_action)
-		end
-		if self.modalAction ~= nil then
-			NewModule.modal_action = PropTypesModule.StringProp.jsonDecode(self.modalAction)
-		end
-		if self.modal_variant ~= nil then
-			NewModule.modal_variant = PropTypesModule.StringProp.jsonDecode(self.modal_variant)
-		end
-		if self.modalVariant ~= nil then
-			NewModule.modal_variant = PropTypesModule.StringProp.jsonDecode(self.modalVariant)
-		end
-		if self.modal_sequence ~= nil then
-			NewModule.modal_sequence = PropTypesModule.StringProp.jsonDecode(self.modal_sequence)
-		end
-		if self.modalSequence ~= nil then
-			NewModule.modal_sequence = PropTypesModule.StringProp.jsonDecode(self.modalSequence)
-		end
-		if self.conversation_id ~= nil then
-			NewModule.conversation_id = PropTypesModule.StringProp.jsonDecode(self.conversation_id)
-		end
-		if self.conversationId ~= nil then
-			NewModule.conversation_id = PropTypesModule.StringProp.jsonDecode(self.conversationId)
-		end
-		if self.friend_id ~= nil then
-			NewModule.friend_id = PropTypesModule.StringProp.jsonDecode(self.friend_id)
-		end
-		if self.friendId ~= nil then
-			NewModule.friend_id = PropTypesModule.StringProp.jsonDecode(self.friendId)
-		end
-		return NewModule
-	end
-
-	Module154.descriptor = {
-		name = "RecordPartyChatConversationUpsellAcknowledgementAction_Params",
-		fullName = "roblox.apppageplatform.shared.v1beta1.Params"
-	}
-	t.RecordPartyChatConversationUpsellAcknowledgementAction_Params = Module154
-	TypeRegistryModule.default:register(t.RecordPartyChatConversationUpsellAcknowledgementAction_Params)
-	local Module155 = {}
-	Module155.__index = Module155
-
-	function Module155.new(p1)
-		-- upvalues: t (copy), Module155 (copy)
-		return (setmetatable({
-			action_type = if p1 == nil or p1.action_type == nil then assert(t.ActionType.fromNumber(0), "Enum has no 0 default") else p1.action_type,
-			action_params = if p1 == nil or p1.action_params == nil then nil else p1.action_params
-		}, Module155))
-	end
-
-	function Module155:encode()
-		-- upvalues: t (copy), ProtoModule (copy)
-		local Buf = buffer.create(0)
-		local Count = 0
-		
-		if self.action_type ~= nil and (self.action_type ~= nil and self.action_type ~= 0 or self.action_type ~= t.ActionType.fromNumber(0)) then
-			local WriteTagResult, WriteTagResult2 = ProtoModule.writeTag(Buf, Count, 1, ProtoModule.wireTypes.varint)
-			Buf, Count = ProtoModule.writeVarInt(WriteTagResult, WriteTagResult2, t.ActionType.toNumber(self.action_type))
-		end
-		if self.action_params ~= nil then
-			local EncodeResult = self.action_params:encode()
-			local WriteTagResult1, WriteTagResult2_1 = ProtoModule.writeTag(Buf, Count, 2, ProtoModule.wireTypes.lengthDelimited)
-			Buf, Count = ProtoModule.writeBuffer(WriteTagResult1, WriteTagResult2_1, EncodeResult, buffer.len(EncodeResult))
-		end
-		local Buf1 = buffer.create(Count)
-		buffer.copy(Buf1, 0, Buf, 0, Count)
-		
-		return Buf1
-	end
-
-	function Module155.decode(Buf)
-		-- upvalues: Module155 (copy), ProtoModule (copy), t (copy)
-		local NewModule = Module155.new()
-		local v105 = 0
-		while v105 < buffer.len(Buf) do
-			local Tag, Tag2
-			Tag, Tag2, v3785 = ProtoModule.readTag(Buf, v105)
-			
-			if Tag2 == ProtoModule.wireTypes.varint then
-				if Tag == 1 then
-					local VarIntI32
-					VarIntI32, v3785 = ProtoModule.readVarIntI32(Buf, v105)
-					NewModule.action_type = t.ActionType.fromNumber(VarIntI32) or VarIntI32
-				else
-					local _
-					_, v3785 = ProtoModule.readVarInt(Buf, v105)
-				end
-			elseif Tag2 == ProtoModule.wireTypes.lengthDelimited then
-				if Tag == 2 then
-					local Buffer1
-					Buffer1, v3785 = ProtoModule.readBuffer(Buf, v105)
-					NewModule.action_params = t.RequestFriendshipAction_Params.decode(Buffer1)
-				else
-					local VarInt, VarInt2 = ProtoModule.readVarInt(Buf, v105)
-					v105 = VarInt2 + VarInt
-				end
-			elseif Tag2 == ProtoModule.wireTypes.i32 then
-				local _
-				_, v3785 = ProtoModule.readFixed32(Buf, v105)
-			elseif Tag2 == ProtoModule.wireTypes.i64 then
-				local _
-				_, v3785 = ProtoModule.readFixed64(Buf, v105)
-			else
-				error("Unsupported wire type: " .. Tag2)
-			end
-		end
-		return NewModule
-	end
-
-	function Module155:jsonEncode()
-		-- upvalues: t (copy)
-		local t1 = {}
-		
-		if self.action_type ~= nil and (self.action_type ~= nil and self.action_type ~= 0 or self.action_type ~= t.ActionType.fromNumber(0)) then
-			t1.actionType = if typeof(self.action_type) == "number" then self.action_type else t.ActionType.toNumber(self.action_type)
-		end
-		if self.action_params ~= nil then
-			t1.actionParams = self.action_params:jsonEncode()
-		end
-		return t1
-	end
-
-	function Module155:jsonDecode()
-		-- upvalues: Module155 (copy), t (copy)
-		local NewModule = Module155.new()
-		
-		if self.action_type ~= nil then
-			NewModule.action_type = (if typeof(self.action_type) == "number" then t.ActionType.fromNumber(self.action_type) else t.ActionType.fromName(self.action_type)) or self.action_type
-		end
-		if self.actionType ~= nil then
-			NewModule.action_type = (if typeof(self.actionType) == "number" then t.ActionType.fromNumber(self.actionType) else t.ActionType.fromName(self.actionType)) or self.actionType
-		end
-		if self.action_params ~= nil then
-			NewModule.action_params = t.RequestFriendshipAction_Params.jsonDecode(self.action_params)
-		end
-		if self.actionParams ~= nil then
-			NewModule.action_params = t.RequestFriendshipAction_Params.jsonDecode(self.actionParams)
-		end
-		return NewModule
-	end
-
-	Module155.descriptor = {
-		name = "RequestFriendshipAction",
-		fullName = "roblox.apppageplatform.shared.v1beta1.RequestFriendshipAction"
-	}
-	t.RequestFriendshipAction = Module155
-end
-do
-	TypeRegistryModule.default:register(t.RequestFriendshipAction)
-	local Module156 = {}
-	Module156.__index = Module156
-
-	function Module156.new(p1)
-		-- upvalues: Module156 (copy)
-		return (setmetatable({
-			target_user_id = if p1 == nil or p1.target_user_id == nil then nil else p1.target_user_id,
-			source = if p1 == nil or p1.source == nil then nil else p1.source
-		}, Module156))
-	end
-
-	function Module156:encode()
-		-- upvalues: ProtoModule (copy)
-		local Buf = buffer.create(0)
-		local Count = 0
-		
-		if self.target_user_id ~= nil then
-			local EncodeResult = self.target_user_id:encode()
-			local WriteTagResult, WriteTagResult2 = ProtoModule.writeTag(Buf, Count, 1, ProtoModule.wireTypes.lengthDelimited)
-			Buf, Count = ProtoModule.writeBuffer(WriteTagResult, WriteTagResult2, EncodeResult, buffer.len(EncodeResult))
-		end
-		if self.source ~= nil then
-			local EncodeResult = self.source:encode()
-			local WriteTagResult1, WriteTagResult2_1 = ProtoModule.writeTag(Buf, Count, 2, ProtoModule.wireTypes.lengthDelimited)
-			Buf, Count = ProtoModule.writeBuffer(WriteTagResult1, WriteTagResult2_1, EncodeResult, buffer.len(EncodeResult))
-		end
-		local Buf1 = buffer.create(Count)
-		buffer.copy(Buf1, 0, Buf, 0, Count)
-		
-		return Buf1
-	end
-
-	function Module156.decode(Buf)
-		-- upvalues: Module156 (copy), ProtoModule (copy), PropTypesModule (copy)
-		local NewModule = Module156.new()
-		local v105 = 0
-		while v105 < buffer.len(Buf) do
-			local Tag, Tag2
-			Tag, Tag2, v3806 = ProtoModule.readTag(Buf, v105)
-			
-			if Tag2 == ProtoModule.wireTypes.varint then
-				local _
-				_, v3806 = ProtoModule.readVarInt(Buf, v105)
-			elseif Tag2 == ProtoModule.wireTypes.lengthDelimited then
-				if Tag == 1 then
-					local Buffer1
-					Buffer1, v3806 = ProtoModule.readBuffer(Buf, v105)
-					NewModule.target_user_id = PropTypesModule.StringProp.decode(Buffer1)
-				elseif Tag == 2 then
-					local Buffer2
-					Buffer2, v3806 = ProtoModule.readBuffer(Buf, v105)
-					NewModule.source = PropTypesModule.StringProp.decode(Buffer2)
-				else
-					local VarInt, VarInt2 = ProtoModule.readVarInt(Buf, v105)
-					v105 = VarInt2 + VarInt
-				end
-			elseif Tag2 == ProtoModule.wireTypes.i32 then
-				local _
-				_, v3806 = ProtoModule.readFixed32(Buf, v105)
-			elseif Tag2 == ProtoModule.wireTypes.i64 then
-				local _
-				_, v3806 = ProtoModule.readFixed64(Buf, v105)
-			else
-				error("Unsupported wire type: " .. Tag2)
-			end
-		end
-		return NewModule
-	end
-
-	function Module156:jsonEncode()
-		local t = {}
-		
-		if self.target_user_id ~= nil then
-			t.targetUserId = self.target_user_id:jsonEncode()
-		end
-		if self.source ~= nil then
-			t.source = self.source:jsonEncode()
-		end
-		return t
-	end
-
-	function Module156:jsonDecode()
-		-- upvalues: Module156 (copy), PropTypesModule (copy)
-		local NewModule = Module156.new()
-		
-		if self.target_user_id ~= nil then
-			NewModule.target_user_id = PropTypesModule.StringProp.jsonDecode(self.target_user_id)
-		end
-		if self.targetUserId ~= nil then
-			NewModule.target_user_id = PropTypesModule.StringProp.jsonDecode(self.targetUserId)
-		end
-		if self.source ~= nil then
-			NewModule.source = PropTypesModule.StringProp.jsonDecode(self.source)
-		end
-		return NewModule
-	end
-
-	Module156.descriptor = {
-		name = "RequestFriendshipAction_Params",
-		fullName = "roblox.apppageplatform.shared.v1beta1.Params"
-	}
-	t.RequestFriendshipAction_Params = Module156
-	TypeRegistryModule.default:register(t.RequestFriendshipAction_Params)
 	local Module157 = {}
 	Module157.__index = Module157
 
@@ -18620,32 +18362,32 @@ do
 		local v106 = 0
 		while v106 < buffer.len(Buf) do
 			local Tag, Tag2
-			Tag, Tag2, v3826 = ProtoModule.readTag(Buf, v106)
+			Tag, Tag2, v3779 = ProtoModule.readTag(Buf, v106)
 			
 			if Tag2 == ProtoModule.wireTypes.varint then
 				if Tag == 1 then
 					local VarIntI32
-					VarIntI32, v3826 = ProtoModule.readVarIntI32(Buf, v106)
+					VarIntI32, v3779 = ProtoModule.readVarIntI32(Buf, v106)
 					NewModule.action_type = t.ActionType.fromNumber(VarIntI32) or VarIntI32
 				else
 					local _
-					_, v3826 = ProtoModule.readVarInt(Buf, v106)
+					_, v3779 = ProtoModule.readVarInt(Buf, v106)
 				end
 			elseif Tag2 == ProtoModule.wireTypes.lengthDelimited then
 				if Tag == 2 then
 					local Buffer1
-					Buffer1, v3826 = ProtoModule.readBuffer(Buf, v106)
-					NewModule.action_params = t.OpenTrustedFriendsUpsellModalAction_Params.decode(Buffer1)
+					Buffer1, v3779 = ProtoModule.readBuffer(Buf, v106)
+					NewModule.action_params = t.OpenSocialProofUserListSheetAction_Params.decode(Buffer1)
 				else
 					local VarInt, VarInt2 = ProtoModule.readVarInt(Buf, v106)
 					v106 = VarInt2 + VarInt
 				end
 			elseif Tag2 == ProtoModule.wireTypes.i32 then
 				local _
-				_, v3826 = ProtoModule.readFixed32(Buf, v106)
+				_, v3779 = ProtoModule.readFixed32(Buf, v106)
 			elseif Tag2 == ProtoModule.wireTypes.i64 then
 				local _
-				_, v3826 = ProtoModule.readFixed64(Buf, v106)
+				_, v3779 = ProtoModule.readFixed64(Buf, v106)
 			else
 				error("Unsupported wire type: " .. Tag2)
 			end
@@ -18677,27 +18419,31 @@ do
 			NewModule.action_type = (if typeof(self.actionType) == "number" then t.ActionType.fromNumber(self.actionType) else t.ActionType.fromName(self.actionType)) or self.actionType
 		end
 		if self.action_params ~= nil then
-			NewModule.action_params = t.OpenTrustedFriendsUpsellModalAction_Params.jsonDecode(self.action_params)
+			NewModule.action_params = t.OpenSocialProofUserListSheetAction_Params.jsonDecode(self.action_params)
 		end
 		if self.actionParams ~= nil then
-			NewModule.action_params = t.OpenTrustedFriendsUpsellModalAction_Params.jsonDecode(self.actionParams)
+			NewModule.action_params = t.OpenSocialProofUserListSheetAction_Params.jsonDecode(self.actionParams)
 		end
 		return NewModule
 	end
 
 	Module157.descriptor = {
-		name = "OpenTrustedFriendsUpsellModalAction",
-		fullName = "roblox.apppageplatform.shared.v1beta1.OpenTrustedFriendsUpsellModalAction"
+		name = "OpenSocialProofUserListSheetAction",
+		fullName = "roblox.apppageplatform.shared.v1beta1.OpenSocialProofUserListSheetAction"
 	}
-	t.OpenTrustedFriendsUpsellModalAction = Module157
-	TypeRegistryModule.default:register(t.OpenTrustedFriendsUpsellModalAction)
+	t.OpenSocialProofUserListSheetAction = Module157
+	TypeRegistryModule.default:register(t.OpenSocialProofUserListSheetAction)
 	local Module158 = {}
 	Module158.__index = Module158
 
 	function Module158.new(p1)
 		-- upvalues: Module158 (copy)
 		return (setmetatable({
-			target_user_id = if p1 == nil or p1.target_user_id == nil then nil else p1.target_user_id
+			universe_id = if p1 == nil or p1.universe_id == nil then nil else p1.universe_id,
+			place_id = if p1 == nil or p1.place_id == nil then nil else p1.place_id,
+			total_connections = if p1 == nil or p1.total_connections == nil then nil else p1.total_connections,
+			user_ids = if p1 == nil or p1.user_ids == nil then nil else p1.user_ids,
+			sheet_title = if p1 == nil or p1.sheet_title == nil then nil else p1.sheet_title
 		}, Module158))
 	end
 
@@ -18706,10 +18452,30 @@ do
 		local Buf = buffer.create(0)
 		local Count = 0
 		
-		if self.target_user_id ~= nil then
-			local EncodeResult = self.target_user_id:encode()
+		if self.universe_id ~= nil then
+			local EncodeResult = self.universe_id:encode()
 			local WriteTagResult, WriteTagResult2 = ProtoModule.writeTag(Buf, Count, 1, ProtoModule.wireTypes.lengthDelimited)
 			Buf, Count = ProtoModule.writeBuffer(WriteTagResult, WriteTagResult2, EncodeResult, buffer.len(EncodeResult))
+		end
+		if self.place_id ~= nil then
+			local EncodeResult = self.place_id:encode()
+			local WriteTagResult1, WriteTagResult2_1 = ProtoModule.writeTag(Buf, Count, 2, ProtoModule.wireTypes.lengthDelimited)
+			Buf, Count = ProtoModule.writeBuffer(WriteTagResult1, WriteTagResult2_1, EncodeResult, buffer.len(EncodeResult))
+		end
+		if self.total_connections ~= nil then
+			local EncodeResult = self.total_connections:encode()
+			local WriteTagResult3, WriteTagResult2_2 = ProtoModule.writeTag(Buf, Count, 3, ProtoModule.wireTypes.lengthDelimited)
+			Buf, Count = ProtoModule.writeBuffer(WriteTagResult3, WriteTagResult2_2, EncodeResult, buffer.len(EncodeResult))
+		end
+		if self.user_ids ~= nil then
+			local EncodeResult = self.user_ids:encode()
+			local WriteTagResult4, WriteTagResult2_3 = ProtoModule.writeTag(Buf, Count, 4, ProtoModule.wireTypes.lengthDelimited)
+			Buf, Count = ProtoModule.writeBuffer(WriteTagResult4, WriteTagResult2_3, EncodeResult, buffer.len(EncodeResult))
+		end
+		if self.sheet_title ~= nil then
+			local EncodeResult = self.sheet_title:encode()
+			local WriteTagResult5, WriteTagResult2_4 = ProtoModule.writeTag(Buf, Count, 5, ProtoModule.wireTypes.lengthDelimited)
+			Buf, Count = ProtoModule.writeBuffer(WriteTagResult5, WriteTagResult2_4, EncodeResult, buffer.len(EncodeResult))
 		end
 		local Buf1 = buffer.create(Count)
 		buffer.copy(Buf1, 0, Buf, 0, Count)
@@ -18723,26 +18489,42 @@ do
 		local v107 = 0
 		while v107 < buffer.len(Buf) do
 			local Tag, Tag2
-			Tag, Tag2, v3844 = ProtoModule.readTag(Buf, v107)
+			Tag, Tag2, v3809 = ProtoModule.readTag(Buf, v107)
 			
 			if Tag2 == ProtoModule.wireTypes.varint then
 				local _
-				_, v3844 = ProtoModule.readVarInt(Buf, v107)
+				_, v3809 = ProtoModule.readVarInt(Buf, v107)
 			elseif Tag2 == ProtoModule.wireTypes.lengthDelimited then
 				if Tag == 1 then
 					local Buffer1
-					Buffer1, v3844 = ProtoModule.readBuffer(Buf, v107)
-					NewModule.target_user_id = PropTypesModule.StringProp.decode(Buffer1)
+					Buffer1, v3809 = ProtoModule.readBuffer(Buf, v107)
+					NewModule.universe_id = PropTypesModule.StringProp.decode(Buffer1)
+				elseif Tag == 2 then
+					local Buffer2
+					Buffer2, v3809 = ProtoModule.readBuffer(Buf, v107)
+					NewModule.place_id = PropTypesModule.StringProp.decode(Buffer2)
+				elseif Tag == 3 then
+					local Buffer3
+					Buffer3, v3809 = ProtoModule.readBuffer(Buf, v107)
+					NewModule.total_connections = PropTypesModule.Int32Prop.decode(Buffer3)
+				elseif Tag == 4 then
+					local Buffer4
+					Buffer4, v3809 = ProtoModule.readBuffer(Buf, v107)
+					NewModule.user_ids = PropTypesModule.ArrayOfAvatarProp.decode(Buffer4)
+				elseif Tag == 5 then
+					local Buffer5
+					Buffer5, v3809 = ProtoModule.readBuffer(Buf, v107)
+					NewModule.sheet_title = PropTypesModule.StringProp.decode(Buffer5)
 				else
 					local VarInt, VarInt2 = ProtoModule.readVarInt(Buf, v107)
 					v107 = VarInt2 + VarInt
 				end
 			elseif Tag2 == ProtoModule.wireTypes.i32 then
 				local _
-				_, v3844 = ProtoModule.readFixed32(Buf, v107)
+				_, v3809 = ProtoModule.readFixed32(Buf, v107)
 			elseif Tag2 == ProtoModule.wireTypes.i64 then
 				local _
-				_, v3844 = ProtoModule.readFixed64(Buf, v107)
+				_, v3809 = ProtoModule.readFixed64(Buf, v107)
 			else
 				error("Unsupported wire type: " .. Tag2)
 			end
@@ -18753,8 +18535,20 @@ do
 	function Module158:jsonEncode()
 		local t = {}
 		
-		if self.target_user_id ~= nil then
-			t.targetUserId = self.target_user_id:jsonEncode()
+		if self.universe_id ~= nil then
+			t.universeId = self.universe_id:jsonEncode()
+		end
+		if self.place_id ~= nil then
+			t.placeId = self.place_id:jsonEncode()
+		end
+		if self.total_connections ~= nil then
+			t.totalConnections = self.total_connections:jsonEncode()
+		end
+		if self.user_ids ~= nil then
+			t.userIds = self.user_ids:jsonEncode()
+		end
+		if self.sheet_title ~= nil then
+			t.sheetTitle = self.sheet_title:jsonEncode()
 		end
 		return t
 	end
@@ -18763,23 +18557,47 @@ do
 		-- upvalues: Module158 (copy), PropTypesModule (copy)
 		local NewModule = Module158.new()
 		
-		if self.target_user_id ~= nil then
-			NewModule.target_user_id = PropTypesModule.StringProp.jsonDecode(self.target_user_id)
+		if self.universe_id ~= nil then
+			NewModule.universe_id = PropTypesModule.StringProp.jsonDecode(self.universe_id)
 		end
-		if self.targetUserId ~= nil then
-			NewModule.target_user_id = PropTypesModule.StringProp.jsonDecode(self.targetUserId)
+		if self.universeId ~= nil then
+			NewModule.universe_id = PropTypesModule.StringProp.jsonDecode(self.universeId)
+		end
+		if self.place_id ~= nil then
+			NewModule.place_id = PropTypesModule.StringProp.jsonDecode(self.place_id)
+		end
+		if self.placeId ~= nil then
+			NewModule.place_id = PropTypesModule.StringProp.jsonDecode(self.placeId)
+		end
+		if self.total_connections ~= nil then
+			NewModule.total_connections = PropTypesModule.Int32Prop.jsonDecode(self.total_connections)
+		end
+		if self.totalConnections ~= nil then
+			NewModule.total_connections = PropTypesModule.Int32Prop.jsonDecode(self.totalConnections)
+		end
+		if self.user_ids ~= nil then
+			NewModule.user_ids = PropTypesModule.ArrayOfAvatarProp.jsonDecode(self.user_ids)
+		end
+		if self.userIds ~= nil then
+			NewModule.user_ids = PropTypesModule.ArrayOfAvatarProp.jsonDecode(self.userIds)
+		end
+		if self.sheet_title ~= nil then
+			NewModule.sheet_title = PropTypesModule.StringProp.jsonDecode(self.sheet_title)
+		end
+		if self.sheetTitle ~= nil then
+			NewModule.sheet_title = PropTypesModule.StringProp.jsonDecode(self.sheetTitle)
 		end
 		return NewModule
 	end
 
 	Module158.descriptor = {
-		name = "OpenTrustedFriendsUpsellModalAction_Params",
+		name = "OpenSocialProofUserListSheetAction_Params",
 		fullName = "roblox.apppageplatform.shared.v1beta1.Params"
 	}
-	t.OpenTrustedFriendsUpsellModalAction_Params = Module158
+	t.OpenSocialProofUserListSheetAction_Params = Module158
 end
 do
-	TypeRegistryModule.default:register(t.OpenTrustedFriendsUpsellModalAction_Params)
+	TypeRegistryModule.default:register(t.OpenSocialProofUserListSheetAction_Params)
 	local Module159 = {}
 	Module159.__index = Module159
 
@@ -18817,32 +18635,32 @@ do
 		local v107 = 0
 		while v107 < buffer.len(Buf) do
 			local Tag, Tag2
-			Tag, Tag2, v3863 = ProtoModule.readTag(Buf, v107)
+			Tag, Tag2, v3832 = ProtoModule.readTag(Buf, v107)
 			
 			if Tag2 == ProtoModule.wireTypes.varint then
 				if Tag == 1 then
 					local VarIntI32
-					VarIntI32, v3863 = ProtoModule.readVarIntI32(Buf, v107)
+					VarIntI32, v3832 = ProtoModule.readVarIntI32(Buf, v107)
 					NewModule.action_type = t.ActionType.fromNumber(VarIntI32) or VarIntI32
 				else
 					local _
-					_, v3863 = ProtoModule.readVarInt(Buf, v107)
+					_, v3832 = ProtoModule.readVarInt(Buf, v107)
 				end
 			elseif Tag2 == ProtoModule.wireTypes.lengthDelimited then
 				if Tag == 2 then
 					local Buffer1
-					Buffer1, v3863 = ProtoModule.readBuffer(Buf, v107)
-					NewModule.action_params = t.OpenSearchResultsWithQueryAction_Params.decode(Buffer1)
+					Buffer1, v3832 = ProtoModule.readBuffer(Buf, v107)
+					NewModule.action_params = t.OpenSearchResultsTabAction_Params.decode(Buffer1)
 				else
 					local VarInt, VarInt2 = ProtoModule.readVarInt(Buf, v107)
 					v107 = VarInt2 + VarInt
 				end
 			elseif Tag2 == ProtoModule.wireTypes.i32 then
 				local _
-				_, v3863 = ProtoModule.readFixed32(Buf, v107)
+				_, v3832 = ProtoModule.readFixed32(Buf, v107)
 			elseif Tag2 == ProtoModule.wireTypes.i64 then
 				local _
-				_, v3863 = ProtoModule.readFixed64(Buf, v107)
+				_, v3832 = ProtoModule.readFixed64(Buf, v107)
 			else
 				error("Unsupported wire type: " .. Tag2)
 			end
@@ -18874,29 +18692,27 @@ do
 			NewModule.action_type = (if typeof(self.actionType) == "number" then t.ActionType.fromNumber(self.actionType) else t.ActionType.fromName(self.actionType)) or self.actionType
 		end
 		if self.action_params ~= nil then
-			NewModule.action_params = t.OpenSearchResultsWithQueryAction_Params.jsonDecode(self.action_params)
+			NewModule.action_params = t.OpenSearchResultsTabAction_Params.jsonDecode(self.action_params)
 		end
 		if self.actionParams ~= nil then
-			NewModule.action_params = t.OpenSearchResultsWithQueryAction_Params.jsonDecode(self.actionParams)
+			NewModule.action_params = t.OpenSearchResultsTabAction_Params.jsonDecode(self.actionParams)
 		end
 		return NewModule
 	end
 
 	Module159.descriptor = {
-		name = "OpenSearchResultsWithQueryAction",
-		fullName = "roblox.apppageplatform.shared.v1beta1.OpenSearchResultsWithQueryAction"
+		name = "OpenSearchResultsTabAction",
+		fullName = "roblox.apppageplatform.shared.v1beta1.OpenSearchResultsTabAction"
 	}
-	t.OpenSearchResultsWithQueryAction = Module159
-	TypeRegistryModule.default:register(t.OpenSearchResultsWithQueryAction)
+	t.OpenSearchResultsTabAction = Module159
+	TypeRegistryModule.default:register(t.OpenSearchResultsTabAction)
 	local Module160 = {}
 	Module160.__index = Module160
 
 	function Module160.new(p1)
 		-- upvalues: Module160 (copy)
 		return (setmetatable({
-			search_query = if p1 == nil or p1.search_query == nil then nil else p1.search_query,
-			search_type = if p1 == nil or p1.search_type == nil then nil else p1.search_type,
-			is_autocomplete_suggestion = if p1 == nil or p1.is_autocomplete_suggestion == nil then nil else p1.is_autocomplete_suggestion
+			search_type = if p1 == nil or p1.search_type == nil then nil else p1.search_type
 		}, Module160))
 	end
 
@@ -18905,20 +18721,10 @@ do
 		local Buf = buffer.create(0)
 		local Count = 0
 		
-		if self.search_query ~= nil then
-			local EncodeResult = self.search_query:encode()
-			local WriteTagResult, WriteTagResult2 = ProtoModule.writeTag(Buf, Count, 1, ProtoModule.wireTypes.lengthDelimited)
-			Buf, Count = ProtoModule.writeBuffer(WriteTagResult, WriteTagResult2, EncodeResult, buffer.len(EncodeResult))
-		end
 		if self.search_type ~= nil then
 			local EncodeResult = self.search_type:encode()
-			local WriteTagResult1, WriteTagResult2_1 = ProtoModule.writeTag(Buf, Count, 2, ProtoModule.wireTypes.lengthDelimited)
-			Buf, Count = ProtoModule.writeBuffer(WriteTagResult1, WriteTagResult2_1, EncodeResult, buffer.len(EncodeResult))
-		end
-		if self.is_autocomplete_suggestion ~= nil then
-			local EncodeResult = self.is_autocomplete_suggestion:encode()
-			local WriteTagResult3, WriteTagResult2_2 = ProtoModule.writeTag(Buf, Count, 3, ProtoModule.wireTypes.lengthDelimited)
-			Buf, Count = ProtoModule.writeBuffer(WriteTagResult3, WriteTagResult2_2, EncodeResult, buffer.len(EncodeResult))
+			local WriteTagResult, WriteTagResult2 = ProtoModule.writeTag(Buf, Count, 1, ProtoModule.wireTypes.lengthDelimited)
+			Buf, Count = ProtoModule.writeBuffer(WriteTagResult, WriteTagResult2, EncodeResult, buffer.len(EncodeResult))
 		end
 		local Buf1 = buffer.create(Count)
 		buffer.copy(Buf1, 0, Buf, 0, Count)
@@ -18932,34 +18738,26 @@ do
 		local v108 = 0
 		while v108 < buffer.len(Buf) do
 			local Tag, Tag2
-			Tag, Tag2, v3887 = ProtoModule.readTag(Buf, v108)
+			Tag, Tag2, v3850 = ProtoModule.readTag(Buf, v108)
 			
 			if Tag2 == ProtoModule.wireTypes.varint then
 				local _
-				_, v3887 = ProtoModule.readVarInt(Buf, v108)
+				_, v3850 = ProtoModule.readVarInt(Buf, v108)
 			elseif Tag2 == ProtoModule.wireTypes.lengthDelimited then
 				if Tag == 1 then
 					local Buffer1
-					Buffer1, v3887 = ProtoModule.readBuffer(Buf, v108)
-					NewModule.search_query = PropTypesModule.StringProp.decode(Buffer1)
-				elseif Tag == 2 then
-					local Buffer2
-					Buffer2, v3887 = ProtoModule.readBuffer(Buf, v108)
-					NewModule.search_type = PropTypesModule.StringProp.decode(Buffer2)
-				elseif Tag == 3 then
-					local Buffer3
-					Buffer3, v3887 = ProtoModule.readBuffer(Buf, v108)
-					NewModule.is_autocomplete_suggestion = PropTypesModule.BoolProp.decode(Buffer3)
+					Buffer1, v3850 = ProtoModule.readBuffer(Buf, v108)
+					NewModule.search_type = PropTypesModule.StringProp.decode(Buffer1)
 				else
 					local VarInt, VarInt2 = ProtoModule.readVarInt(Buf, v108)
 					v108 = VarInt2 + VarInt
 				end
 			elseif Tag2 == ProtoModule.wireTypes.i32 then
 				local _
-				_, v3887 = ProtoModule.readFixed32(Buf, v108)
+				_, v3850 = ProtoModule.readFixed32(Buf, v108)
 			elseif Tag2 == ProtoModule.wireTypes.i64 then
 				local _
-				_, v3887 = ProtoModule.readFixed64(Buf, v108)
+				_, v3850 = ProtoModule.readFixed64(Buf, v108)
 			else
 				error("Unsupported wire type: " .. Tag2)
 			end
@@ -18970,14 +18768,8 @@ do
 	function Module160:jsonEncode()
 		local t = {}
 		
-		if self.search_query ~= nil then
-			t.searchQuery = self.search_query:jsonEncode()
-		end
 		if self.search_type ~= nil then
 			t.searchType = self.search_type:jsonEncode()
-		end
-		if self.is_autocomplete_suggestion ~= nil then
-			t.isAutocompleteSuggestion = self.is_autocomplete_suggestion:jsonEncode()
 		end
 		return t
 	end
@@ -18986,33 +18778,21 @@ do
 		-- upvalues: Module160 (copy), PropTypesModule (copy)
 		local NewModule = Module160.new()
 		
-		if self.search_query ~= nil then
-			NewModule.search_query = PropTypesModule.StringProp.jsonDecode(self.search_query)
-		end
-		if self.searchQuery ~= nil then
-			NewModule.search_query = PropTypesModule.StringProp.jsonDecode(self.searchQuery)
-		end
 		if self.search_type ~= nil then
 			NewModule.search_type = PropTypesModule.StringProp.jsonDecode(self.search_type)
 		end
 		if self.searchType ~= nil then
 			NewModule.search_type = PropTypesModule.StringProp.jsonDecode(self.searchType)
 		end
-		if self.is_autocomplete_suggestion ~= nil then
-			NewModule.is_autocomplete_suggestion = PropTypesModule.BoolProp.jsonDecode(self.is_autocomplete_suggestion)
-		end
-		if self.isAutocompleteSuggestion ~= nil then
-			NewModule.is_autocomplete_suggestion = PropTypesModule.BoolProp.jsonDecode(self.isAutocompleteSuggestion)
-		end
 		return NewModule
 	end
 
 	Module160.descriptor = {
-		name = "OpenSearchResultsWithQueryAction_Params",
+		name = "OpenSearchResultsTabAction_Params",
 		fullName = "roblox.apppageplatform.shared.v1beta1.Params"
 	}
-	t.OpenSearchResultsWithQueryAction_Params = Module160
-	TypeRegistryModule.default:register(t.OpenSearchResultsWithQueryAction_Params)
+	t.OpenSearchResultsTabAction_Params = Module160
+	TypeRegistryModule.default:register(t.OpenSearchResultsTabAction_Params)
 	local Module161 = {}
 	Module161.__index = Module161
 
@@ -19050,32 +18830,32 @@ do
 		local v109 = 0
 		while v109 < buffer.len(Buf) do
 			local Tag, Tag2
-			Tag, Tag2, v3908 = ProtoModule.readTag(Buf, v109)
+			Tag, Tag2, v3869 = ProtoModule.readTag(Buf, v109)
 			
 			if Tag2 == ProtoModule.wireTypes.varint then
 				if Tag == 1 then
 					local VarIntI32
-					VarIntI32, v3908 = ProtoModule.readVarIntI32(Buf, v109)
+					VarIntI32, v3869 = ProtoModule.readVarIntI32(Buf, v109)
 					NewModule.action_type = t.ActionType.fromNumber(VarIntI32) or VarIntI32
 				else
 					local _
-					_, v3908 = ProtoModule.readVarInt(Buf, v109)
+					_, v3869 = ProtoModule.readVarInt(Buf, v109)
 				end
 			elseif Tag2 == ProtoModule.wireTypes.lengthDelimited then
 				if Tag == 2 then
 					local Buffer1
-					Buffer1, v3908 = ProtoModule.readBuffer(Buf, v109)
-					NewModule.action_params = t.SelectMarketplaceFavoritesCategory_Params.decode(Buffer1)
+					Buffer1, v3869 = ProtoModule.readBuffer(Buf, v109)
+					NewModule.action_params = t.DismissPromptAction_Params.decode(Buffer1)
 				else
 					local VarInt, VarInt2 = ProtoModule.readVarInt(Buf, v109)
 					v109 = VarInt2 + VarInt
 				end
 			elseif Tag2 == ProtoModule.wireTypes.i32 then
 				local _
-				_, v3908 = ProtoModule.readFixed32(Buf, v109)
+				_, v3869 = ProtoModule.readFixed32(Buf, v109)
 			elseif Tag2 == ProtoModule.wireTypes.i64 then
 				local _
-				_, v3908 = ProtoModule.readFixed64(Buf, v109)
+				_, v3869 = ProtoModule.readFixed64(Buf, v109)
 			else
 				error("Unsupported wire type: " .. Tag2)
 			end
@@ -19107,29 +18887,32 @@ do
 			NewModule.action_type = (if typeof(self.actionType) == "number" then t.ActionType.fromNumber(self.actionType) else t.ActionType.fromName(self.actionType)) or self.actionType
 		end
 		if self.action_params ~= nil then
-			NewModule.action_params = t.SelectMarketplaceFavoritesCategory_Params.jsonDecode(self.action_params)
+			NewModule.action_params = t.DismissPromptAction_Params.jsonDecode(self.action_params)
 		end
 		if self.actionParams ~= nil then
-			NewModule.action_params = t.SelectMarketplaceFavoritesCategory_Params.jsonDecode(self.actionParams)
+			NewModule.action_params = t.DismissPromptAction_Params.jsonDecode(self.actionParams)
 		end
 		return NewModule
 	end
 
 	Module161.descriptor = {
-		name = "SelectMarketplaceFavoritesCategory",
-		fullName = "roblox.apppageplatform.shared.v1beta1.SelectMarketplaceFavoritesCategory"
+		name = "DismissPromptAction",
+		fullName = "roblox.apppageplatform.shared.v1beta1.DismissPromptAction"
 	}
-	t.SelectMarketplaceFavoritesCategory = Module161
+	t.DismissPromptAction = Module161
 end
 do
-	TypeRegistryModule.default:register(t.SelectMarketplaceFavoritesCategory)
+	TypeRegistryModule.default:register(t.DismissPromptAction)
 	local Module162 = {}
 	Module162.__index = Module162
 
 	function Module162.new(p1)
 		-- upvalues: Module162 (copy)
 		return (setmetatable({
-			category_id = if p1 == nil or p1.category_id == nil then nil else p1.category_id
+			prompt_type = if p1 == nil or p1.prompt_type == nil then nil else p1.prompt_type,
+			prompt_id = if p1 == nil or p1.prompt_id == nil then nil else p1.prompt_id,
+			entity_type = if p1 == nil or p1.entity_type == nil then nil else p1.entity_type,
+			entity_id = if p1 == nil or p1.entity_id == nil then nil else p1.entity_id
 		}, Module162))
 	end
 
@@ -19138,10 +18921,25 @@ do
 		local Buf = buffer.create(0)
 		local Count = 0
 		
-		if self.category_id ~= nil then
-			local EncodeResult = self.category_id:encode()
+		if self.prompt_type ~= nil then
+			local EncodeResult = self.prompt_type:encode()
 			local WriteTagResult, WriteTagResult2 = ProtoModule.writeTag(Buf, Count, 1, ProtoModule.wireTypes.lengthDelimited)
 			Buf, Count = ProtoModule.writeBuffer(WriteTagResult, WriteTagResult2, EncodeResult, buffer.len(EncodeResult))
+		end
+		if self.prompt_id ~= nil then
+			local EncodeResult = self.prompt_id:encode()
+			local WriteTagResult1, WriteTagResult2_1 = ProtoModule.writeTag(Buf, Count, 2, ProtoModule.wireTypes.lengthDelimited)
+			Buf, Count = ProtoModule.writeBuffer(WriteTagResult1, WriteTagResult2_1, EncodeResult, buffer.len(EncodeResult))
+		end
+		if self.entity_type ~= nil then
+			local EncodeResult = self.entity_type:encode()
+			local WriteTagResult3, WriteTagResult2_2 = ProtoModule.writeTag(Buf, Count, 3, ProtoModule.wireTypes.lengthDelimited)
+			Buf, Count = ProtoModule.writeBuffer(WriteTagResult3, WriteTagResult2_2, EncodeResult, buffer.len(EncodeResult))
+		end
+		if self.entity_id ~= nil then
+			local EncodeResult = self.entity_id:encode()
+			local WriteTagResult4, WriteTagResult2_3 = ProtoModule.writeTag(Buf, Count, 4, ProtoModule.wireTypes.lengthDelimited)
+			Buf, Count = ProtoModule.writeBuffer(WriteTagResult4, WriteTagResult2_3, EncodeResult, buffer.len(EncodeResult))
 		end
 		local Buf1 = buffer.create(Count)
 		buffer.copy(Buf1, 0, Buf, 0, Count)
@@ -19155,26 +18953,38 @@ do
 		local v109 = 0
 		while v109 < buffer.len(Buf) do
 			local Tag, Tag2
-			Tag, Tag2, v3926 = ProtoModule.readTag(Buf, v109)
+			Tag, Tag2, v3896 = ProtoModule.readTag(Buf, v109)
 			
 			if Tag2 == ProtoModule.wireTypes.varint then
 				local _
-				_, v3926 = ProtoModule.readVarInt(Buf, v109)
+				_, v3896 = ProtoModule.readVarInt(Buf, v109)
 			elseif Tag2 == ProtoModule.wireTypes.lengthDelimited then
 				if Tag == 1 then
 					local Buffer1
-					Buffer1, v3926 = ProtoModule.readBuffer(Buf, v109)
-					NewModule.category_id = PropTypesModule.StringProp.decode(Buffer1)
+					Buffer1, v3896 = ProtoModule.readBuffer(Buf, v109)
+					NewModule.prompt_type = PropTypesModule.StringProp.decode(Buffer1)
+				elseif Tag == 2 then
+					local Buffer2
+					Buffer2, v3896 = ProtoModule.readBuffer(Buf, v109)
+					NewModule.prompt_id = PropTypesModule.StringProp.decode(Buffer2)
+				elseif Tag == 3 then
+					local Buffer3
+					Buffer3, v3896 = ProtoModule.readBuffer(Buf, v109)
+					NewModule.entity_type = PropTypesModule.StringProp.decode(Buffer3)
+				elseif Tag == 4 then
+					local Buffer4
+					Buffer4, v3896 = ProtoModule.readBuffer(Buf, v109)
+					NewModule.entity_id = PropTypesModule.StringProp.decode(Buffer4)
 				else
 					local VarInt, VarInt2 = ProtoModule.readVarInt(Buf, v109)
 					v109 = VarInt2 + VarInt
 				end
 			elseif Tag2 == ProtoModule.wireTypes.i32 then
 				local _
-				_, v3926 = ProtoModule.readFixed32(Buf, v109)
+				_, v3896 = ProtoModule.readFixed32(Buf, v109)
 			elseif Tag2 == ProtoModule.wireTypes.i64 then
 				local _
-				_, v3926 = ProtoModule.readFixed64(Buf, v109)
+				_, v3896 = ProtoModule.readFixed64(Buf, v109)
 			else
 				error("Unsupported wire type: " .. Tag2)
 			end
@@ -19185,8 +18995,17 @@ do
 	function Module162:jsonEncode()
 		local t = {}
 		
-		if self.category_id ~= nil then
-			t.categoryId = self.category_id:jsonEncode()
+		if self.prompt_type ~= nil then
+			t.promptType = self.prompt_type:jsonEncode()
+		end
+		if self.prompt_id ~= nil then
+			t.promptId = self.prompt_id:jsonEncode()
+		end
+		if self.entity_type ~= nil then
+			t.entityType = self.entity_type:jsonEncode()
+		end
+		if self.entity_id ~= nil then
+			t.entityId = self.entity_id:jsonEncode()
 		end
 		return t
 	end
@@ -19195,21 +19014,39 @@ do
 		-- upvalues: Module162 (copy), PropTypesModule (copy)
 		local NewModule = Module162.new()
 		
-		if self.category_id ~= nil then
-			NewModule.category_id = PropTypesModule.StringProp.jsonDecode(self.category_id)
+		if self.prompt_type ~= nil then
+			NewModule.prompt_type = PropTypesModule.StringProp.jsonDecode(self.prompt_type)
 		end
-		if self.categoryId ~= nil then
-			NewModule.category_id = PropTypesModule.StringProp.jsonDecode(self.categoryId)
+		if self.promptType ~= nil then
+			NewModule.prompt_type = PropTypesModule.StringProp.jsonDecode(self.promptType)
+		end
+		if self.prompt_id ~= nil then
+			NewModule.prompt_id = PropTypesModule.StringProp.jsonDecode(self.prompt_id)
+		end
+		if self.promptId ~= nil then
+			NewModule.prompt_id = PropTypesModule.StringProp.jsonDecode(self.promptId)
+		end
+		if self.entity_type ~= nil then
+			NewModule.entity_type = PropTypesModule.StringProp.jsonDecode(self.entity_type)
+		end
+		if self.entityType ~= nil then
+			NewModule.entity_type = PropTypesModule.StringProp.jsonDecode(self.entityType)
+		end
+		if self.entity_id ~= nil then
+			NewModule.entity_id = PropTypesModule.StringProp.jsonDecode(self.entity_id)
+		end
+		if self.entityId ~= nil then
+			NewModule.entity_id = PropTypesModule.StringProp.jsonDecode(self.entityId)
 		end
 		return NewModule
 	end
 
 	Module162.descriptor = {
-		name = "SelectMarketplaceFavoritesCategory_Params",
+		name = "DismissPromptAction_Params",
 		fullName = "roblox.apppageplatform.shared.v1beta1.Params"
 	}
-	t.SelectMarketplaceFavoritesCategory_Params = Module162
-	TypeRegistryModule.default:register(t.SelectMarketplaceFavoritesCategory_Params)
+	t.DismissPromptAction_Params = Module162
+	TypeRegistryModule.default:register(t.DismissPromptAction_Params)
 	local Module163 = {}
 	Module163.__index = Module163
 
@@ -19247,32 +19084,32 @@ do
 		local v110 = 0
 		while v110 < buffer.len(Buf) do
 			local Tag, Tag2
-			Tag, Tag2, v3945 = ProtoModule.readTag(Buf, v110)
+			Tag, Tag2, v3918 = ProtoModule.readTag(Buf, v110)
 			
 			if Tag2 == ProtoModule.wireTypes.varint then
 				if Tag == 1 then
 					local VarIntI32
-					VarIntI32, v3945 = ProtoModule.readVarIntI32(Buf, v110)
+					VarIntI32, v3918 = ProtoModule.readVarIntI32(Buf, v110)
 					NewModule.action_type = t.ActionType.fromNumber(VarIntI32) or VarIntI32
 				else
 					local _
-					_, v3945 = ProtoModule.readVarInt(Buf, v110)
+					_, v3918 = ProtoModule.readVarInt(Buf, v110)
 				end
 			elseif Tag2 == ProtoModule.wireTypes.lengthDelimited then
 				if Tag == 2 then
 					local Buffer1
-					Buffer1, v3945 = ProtoModule.readBuffer(Buf, v110)
-					NewModule.action_params = t.SelectMarketplaceFavoritesSubcategory_Params.decode(Buffer1)
+					Buffer1, v3918 = ProtoModule.readBuffer(Buf, v110)
+					NewModule.action_params = t.RecordPartyChatConversationUpsellAcknowledgementAction_Params.decode(Buffer1)
 				else
 					local VarInt, VarInt2 = ProtoModule.readVarInt(Buf, v110)
 					v110 = VarInt2 + VarInt
 				end
 			elseif Tag2 == ProtoModule.wireTypes.i32 then
 				local _
-				_, v3945 = ProtoModule.readFixed32(Buf, v110)
+				_, v3918 = ProtoModule.readFixed32(Buf, v110)
 			elseif Tag2 == ProtoModule.wireTypes.i64 then
 				local _
-				_, v3945 = ProtoModule.readFixed64(Buf, v110)
+				_, v3918 = ProtoModule.readFixed64(Buf, v110)
 			else
 				error("Unsupported wire type: " .. Tag2)
 			end
@@ -19304,27 +19141,31 @@ do
 			NewModule.action_type = (if typeof(self.actionType) == "number" then t.ActionType.fromNumber(self.actionType) else t.ActionType.fromName(self.actionType)) or self.actionType
 		end
 		if self.action_params ~= nil then
-			NewModule.action_params = t.SelectMarketplaceFavoritesSubcategory_Params.jsonDecode(self.action_params)
+			NewModule.action_params = t.RecordPartyChatConversationUpsellAcknowledgementAction_Params.jsonDecode(self.action_params)
 		end
 		if self.actionParams ~= nil then
-			NewModule.action_params = t.SelectMarketplaceFavoritesSubcategory_Params.jsonDecode(self.actionParams)
+			NewModule.action_params = t.RecordPartyChatConversationUpsellAcknowledgementAction_Params.jsonDecode(self.actionParams)
 		end
 		return NewModule
 	end
 
 	Module163.descriptor = {
-		name = "SelectMarketplaceFavoritesSubcategory",
-		fullName = "roblox.apppageplatform.shared.v1beta1.SelectMarketplaceFavoritesSubcategory"
+		name = "RecordPartyChatConversationUpsellAcknowledgementAction",
+		fullName = "roblox.apppageplatform.shared.v1beta1.RecordPartyChatConversationUpsellAcknowledgementAction"
 	}
-	t.SelectMarketplaceFavoritesSubcategory = Module163
-	TypeRegistryModule.default:register(t.SelectMarketplaceFavoritesSubcategory)
+	t.RecordPartyChatConversationUpsellAcknowledgementAction = Module163
+	TypeRegistryModule.default:register(t.RecordPartyChatConversationUpsellAcknowledgementAction)
 	local Module164 = {}
 	Module164.__index = Module164
 
 	function Module164.new(p1)
 		-- upvalues: Module164 (copy)
 		return (setmetatable({
-			subcategory_id = if p1 == nil or p1.subcategory_id == nil then nil else p1.subcategory_id
+			modal_action = if p1 == nil or p1.modal_action == nil then nil else p1.modal_action,
+			modal_variant = if p1 == nil or p1.modal_variant == nil then nil else p1.modal_variant,
+			modal_sequence = if p1 == nil or p1.modal_sequence == nil then nil else p1.modal_sequence,
+			conversation_id = if p1 == nil or p1.conversation_id == nil then nil else p1.conversation_id,
+			friend_id = if p1 == nil or p1.friend_id == nil then nil else p1.friend_id
 		}, Module164))
 	end
 
@@ -19333,10 +19174,30 @@ do
 		local Buf = buffer.create(0)
 		local Count = 0
 		
-		if self.subcategory_id ~= nil then
-			local EncodeResult = self.subcategory_id:encode()
+		if self.modal_action ~= nil then
+			local EncodeResult = self.modal_action:encode()
 			local WriteTagResult, WriteTagResult2 = ProtoModule.writeTag(Buf, Count, 1, ProtoModule.wireTypes.lengthDelimited)
 			Buf, Count = ProtoModule.writeBuffer(WriteTagResult, WriteTagResult2, EncodeResult, buffer.len(EncodeResult))
+		end
+		if self.modal_variant ~= nil then
+			local EncodeResult = self.modal_variant:encode()
+			local WriteTagResult1, WriteTagResult2_1 = ProtoModule.writeTag(Buf, Count, 2, ProtoModule.wireTypes.lengthDelimited)
+			Buf, Count = ProtoModule.writeBuffer(WriteTagResult1, WriteTagResult2_1, EncodeResult, buffer.len(EncodeResult))
+		end
+		if self.modal_sequence ~= nil then
+			local EncodeResult = self.modal_sequence:encode()
+			local WriteTagResult3, WriteTagResult2_2 = ProtoModule.writeTag(Buf, Count, 3, ProtoModule.wireTypes.lengthDelimited)
+			Buf, Count = ProtoModule.writeBuffer(WriteTagResult3, WriteTagResult2_2, EncodeResult, buffer.len(EncodeResult))
+		end
+		if self.conversation_id ~= nil then
+			local EncodeResult = self.conversation_id:encode()
+			local WriteTagResult4, WriteTagResult2_3 = ProtoModule.writeTag(Buf, Count, 4, ProtoModule.wireTypes.lengthDelimited)
+			Buf, Count = ProtoModule.writeBuffer(WriteTagResult4, WriteTagResult2_3, EncodeResult, buffer.len(EncodeResult))
+		end
+		if self.friend_id ~= nil then
+			local EncodeResult = self.friend_id:encode()
+			local WriteTagResult5, WriteTagResult2_4 = ProtoModule.writeTag(Buf, Count, 5, ProtoModule.wireTypes.lengthDelimited)
+			Buf, Count = ProtoModule.writeBuffer(WriteTagResult5, WriteTagResult2_4, EncodeResult, buffer.len(EncodeResult))
 		end
 		local Buf1 = buffer.create(Count)
 		buffer.copy(Buf1, 0, Buf, 0, Count)
@@ -19350,26 +19211,42 @@ do
 		local v111 = 0
 		while v111 < buffer.len(Buf) do
 			local Tag, Tag2
-			Tag, Tag2, v3963 = ProtoModule.readTag(Buf, v111)
+			Tag, Tag2, v3948 = ProtoModule.readTag(Buf, v111)
 			
 			if Tag2 == ProtoModule.wireTypes.varint then
 				local _
-				_, v3963 = ProtoModule.readVarInt(Buf, v111)
+				_, v3948 = ProtoModule.readVarInt(Buf, v111)
 			elseif Tag2 == ProtoModule.wireTypes.lengthDelimited then
 				if Tag == 1 then
 					local Buffer1
-					Buffer1, v3963 = ProtoModule.readBuffer(Buf, v111)
-					NewModule.subcategory_id = PropTypesModule.StringProp.decode(Buffer1)
+					Buffer1, v3948 = ProtoModule.readBuffer(Buf, v111)
+					NewModule.modal_action = PropTypesModule.StringProp.decode(Buffer1)
+				elseif Tag == 2 then
+					local Buffer2
+					Buffer2, v3948 = ProtoModule.readBuffer(Buf, v111)
+					NewModule.modal_variant = PropTypesModule.StringProp.decode(Buffer2)
+				elseif Tag == 3 then
+					local Buffer3
+					Buffer3, v3948 = ProtoModule.readBuffer(Buf, v111)
+					NewModule.modal_sequence = PropTypesModule.StringProp.decode(Buffer3)
+				elseif Tag == 4 then
+					local Buffer4
+					Buffer4, v3948 = ProtoModule.readBuffer(Buf, v111)
+					NewModule.conversation_id = PropTypesModule.StringProp.decode(Buffer4)
+				elseif Tag == 5 then
+					local Buffer5
+					Buffer5, v3948 = ProtoModule.readBuffer(Buf, v111)
+					NewModule.friend_id = PropTypesModule.StringProp.decode(Buffer5)
 				else
 					local VarInt, VarInt2 = ProtoModule.readVarInt(Buf, v111)
 					v111 = VarInt2 + VarInt
 				end
 			elseif Tag2 == ProtoModule.wireTypes.i32 then
 				local _
-				_, v3963 = ProtoModule.readFixed32(Buf, v111)
+				_, v3948 = ProtoModule.readFixed32(Buf, v111)
 			elseif Tag2 == ProtoModule.wireTypes.i64 then
 				local _
-				_, v3963 = ProtoModule.readFixed64(Buf, v111)
+				_, v3948 = ProtoModule.readFixed64(Buf, v111)
 			else
 				error("Unsupported wire type: " .. Tag2)
 			end
@@ -19380,8 +19257,20 @@ do
 	function Module164:jsonEncode()
 		local t = {}
 		
-		if self.subcategory_id ~= nil then
-			t.subcategoryId = self.subcategory_id:jsonEncode()
+		if self.modal_action ~= nil then
+			t.modalAction = self.modal_action:jsonEncode()
+		end
+		if self.modal_variant ~= nil then
+			t.modalVariant = self.modal_variant:jsonEncode()
+		end
+		if self.modal_sequence ~= nil then
+			t.modalSequence = self.modal_sequence:jsonEncode()
+		end
+		if self.conversation_id ~= nil then
+			t.conversationId = self.conversation_id:jsonEncode()
+		end
+		if self.friend_id ~= nil then
+			t.friendId = self.friend_id:jsonEncode()
 		end
 		return t
 	end
@@ -19390,23 +19279,47 @@ do
 		-- upvalues: Module164 (copy), PropTypesModule (copy)
 		local NewModule = Module164.new()
 		
-		if self.subcategory_id ~= nil then
-			NewModule.subcategory_id = PropTypesModule.StringProp.jsonDecode(self.subcategory_id)
+		if self.modal_action ~= nil then
+			NewModule.modal_action = PropTypesModule.StringProp.jsonDecode(self.modal_action)
 		end
-		if self.subcategoryId ~= nil then
-			NewModule.subcategory_id = PropTypesModule.StringProp.jsonDecode(self.subcategoryId)
+		if self.modalAction ~= nil then
+			NewModule.modal_action = PropTypesModule.StringProp.jsonDecode(self.modalAction)
+		end
+		if self.modal_variant ~= nil then
+			NewModule.modal_variant = PropTypesModule.StringProp.jsonDecode(self.modal_variant)
+		end
+		if self.modalVariant ~= nil then
+			NewModule.modal_variant = PropTypesModule.StringProp.jsonDecode(self.modalVariant)
+		end
+		if self.modal_sequence ~= nil then
+			NewModule.modal_sequence = PropTypesModule.StringProp.jsonDecode(self.modal_sequence)
+		end
+		if self.modalSequence ~= nil then
+			NewModule.modal_sequence = PropTypesModule.StringProp.jsonDecode(self.modalSequence)
+		end
+		if self.conversation_id ~= nil then
+			NewModule.conversation_id = PropTypesModule.StringProp.jsonDecode(self.conversation_id)
+		end
+		if self.conversationId ~= nil then
+			NewModule.conversation_id = PropTypesModule.StringProp.jsonDecode(self.conversationId)
+		end
+		if self.friend_id ~= nil then
+			NewModule.friend_id = PropTypesModule.StringProp.jsonDecode(self.friend_id)
+		end
+		if self.friendId ~= nil then
+			NewModule.friend_id = PropTypesModule.StringProp.jsonDecode(self.friendId)
 		end
 		return NewModule
 	end
 
 	Module164.descriptor = {
-		name = "SelectMarketplaceFavoritesSubcategory_Params",
+		name = "RecordPartyChatConversationUpsellAcknowledgementAction_Params",
 		fullName = "roblox.apppageplatform.shared.v1beta1.Params"
 	}
-	t.SelectMarketplaceFavoritesSubcategory_Params = Module164
+	t.RecordPartyChatConversationUpsellAcknowledgementAction_Params = Module164
 end
 do
-	TypeRegistryModule.default:register(t.SelectMarketplaceFavoritesSubcategory_Params)
+	TypeRegistryModule.default:register(t.RecordPartyChatConversationUpsellAcknowledgementAction_Params)
 	local Module165 = {}
 	Module165.__index = Module165
 
@@ -19444,32 +19357,32 @@ do
 		local v111 = 0
 		while v111 < buffer.len(Buf) do
 			local Tag, Tag2
-			Tag, Tag2, v3982 = ProtoModule.readTag(Buf, v111)
+			Tag, Tag2, v3971 = ProtoModule.readTag(Buf, v111)
 			
 			if Tag2 == ProtoModule.wireTypes.varint then
 				if Tag == 1 then
 					local VarIntI32
-					VarIntI32, v3982 = ProtoModule.readVarIntI32(Buf, v111)
+					VarIntI32, v3971 = ProtoModule.readVarIntI32(Buf, v111)
 					NewModule.action_type = t.ActionType.fromNumber(VarIntI32) or VarIntI32
 				else
 					local _
-					_, v3982 = ProtoModule.readVarInt(Buf, v111)
+					_, v3971 = ProtoModule.readVarInt(Buf, v111)
 				end
 			elseif Tag2 == ProtoModule.wireTypes.lengthDelimited then
 				if Tag == 2 then
 					local Buffer1
-					Buffer1, v3982 = ProtoModule.readBuffer(Buf, v111)
-					NewModule.action_params = t.PinExperienceShortcutAction_Params.decode(Buffer1)
+					Buffer1, v3971 = ProtoModule.readBuffer(Buf, v111)
+					NewModule.action_params = t.RequestFriendshipAction_Params.decode(Buffer1)
 				else
 					local VarInt, VarInt2 = ProtoModule.readVarInt(Buf, v111)
 					v111 = VarInt2 + VarInt
 				end
 			elseif Tag2 == ProtoModule.wireTypes.i32 then
 				local _
-				_, v3982 = ProtoModule.readFixed32(Buf, v111)
+				_, v3971 = ProtoModule.readFixed32(Buf, v111)
 			elseif Tag2 == ProtoModule.wireTypes.i64 then
 				local _
-				_, v3982 = ProtoModule.readFixed64(Buf, v111)
+				_, v3971 = ProtoModule.readFixed64(Buf, v111)
 			else
 				error("Unsupported wire type: " .. Tag2)
 			end
@@ -19501,29 +19414,28 @@ do
 			NewModule.action_type = (if typeof(self.actionType) == "number" then t.ActionType.fromNumber(self.actionType) else t.ActionType.fromName(self.actionType)) or self.actionType
 		end
 		if self.action_params ~= nil then
-			NewModule.action_params = t.PinExperienceShortcutAction_Params.jsonDecode(self.action_params)
+			NewModule.action_params = t.RequestFriendshipAction_Params.jsonDecode(self.action_params)
 		end
 		if self.actionParams ~= nil then
-			NewModule.action_params = t.PinExperienceShortcutAction_Params.jsonDecode(self.actionParams)
+			NewModule.action_params = t.RequestFriendshipAction_Params.jsonDecode(self.actionParams)
 		end
 		return NewModule
 	end
 
 	Module165.descriptor = {
-		name = "PinExperienceShortcutAction",
-		fullName = "roblox.apppageplatform.shared.v1beta1.PinExperienceShortcutAction"
+		name = "RequestFriendshipAction",
+		fullName = "roblox.apppageplatform.shared.v1beta1.RequestFriendshipAction"
 	}
-	t.PinExperienceShortcutAction = Module165
-	TypeRegistryModule.default:register(t.PinExperienceShortcutAction)
+	t.RequestFriendshipAction = Module165
+	TypeRegistryModule.default:register(t.RequestFriendshipAction)
 	local Module166 = {}
 	Module166.__index = Module166
 
 	function Module166.new(p1)
 		-- upvalues: Module166 (copy)
 		return (setmetatable({
-			place_id = if p1 == nil or p1.place_id == nil then nil else p1.place_id,
-			universe_id = if p1 == nil or p1.universe_id == nil then nil else p1.universe_id,
-			game_name = if p1 == nil or p1.game_name == nil then nil else p1.game_name
+			target_user_id = if p1 == nil or p1.target_user_id == nil then nil else p1.target_user_id,
+			source = if p1 == nil or p1.source == nil then nil else p1.source
 		}, Module166))
 	end
 
@@ -19532,20 +19444,15 @@ do
 		local Buf = buffer.create(0)
 		local Count = 0
 		
-		if self.place_id ~= nil then
-			local EncodeResult = self.place_id:encode()
+		if self.target_user_id ~= nil then
+			local EncodeResult = self.target_user_id:encode()
 			local WriteTagResult, WriteTagResult2 = ProtoModule.writeTag(Buf, Count, 1, ProtoModule.wireTypes.lengthDelimited)
 			Buf, Count = ProtoModule.writeBuffer(WriteTagResult, WriteTagResult2, EncodeResult, buffer.len(EncodeResult))
 		end
-		if self.universe_id ~= nil then
-			local EncodeResult = self.universe_id:encode()
+		if self.source ~= nil then
+			local EncodeResult = self.source:encode()
 			local WriteTagResult1, WriteTagResult2_1 = ProtoModule.writeTag(Buf, Count, 2, ProtoModule.wireTypes.lengthDelimited)
 			Buf, Count = ProtoModule.writeBuffer(WriteTagResult1, WriteTagResult2_1, EncodeResult, buffer.len(EncodeResult))
-		end
-		if self.game_name ~= nil then
-			local EncodeResult = self.game_name:encode()
-			local WriteTagResult3, WriteTagResult2_2 = ProtoModule.writeTag(Buf, Count, 3, ProtoModule.wireTypes.lengthDelimited)
-			Buf, Count = ProtoModule.writeBuffer(WriteTagResult3, WriteTagResult2_2, EncodeResult, buffer.len(EncodeResult))
 		end
 		local Buf1 = buffer.create(Count)
 		buffer.copy(Buf1, 0, Buf, 0, Count)
@@ -19559,34 +19466,30 @@ do
 		local v112 = 0
 		while v112 < buffer.len(Buf) do
 			local Tag, Tag2
-			Tag, Tag2, v4006 = ProtoModule.readTag(Buf, v112)
+			Tag, Tag2, v3992 = ProtoModule.readTag(Buf, v112)
 			
 			if Tag2 == ProtoModule.wireTypes.varint then
 				local _
-				_, v4006 = ProtoModule.readVarInt(Buf, v112)
+				_, v3992 = ProtoModule.readVarInt(Buf, v112)
 			elseif Tag2 == ProtoModule.wireTypes.lengthDelimited then
 				if Tag == 1 then
 					local Buffer1
-					Buffer1, v4006 = ProtoModule.readBuffer(Buf, v112)
-					NewModule.place_id = PropTypesModule.StringProp.decode(Buffer1)
+					Buffer1, v3992 = ProtoModule.readBuffer(Buf, v112)
+					NewModule.target_user_id = PropTypesModule.StringProp.decode(Buffer1)
 				elseif Tag == 2 then
 					local Buffer2
-					Buffer2, v4006 = ProtoModule.readBuffer(Buf, v112)
-					NewModule.universe_id = PropTypesModule.StringProp.decode(Buffer2)
-				elseif Tag == 3 then
-					local Buffer3
-					Buffer3, v4006 = ProtoModule.readBuffer(Buf, v112)
-					NewModule.game_name = PropTypesModule.StringProp.decode(Buffer3)
+					Buffer2, v3992 = ProtoModule.readBuffer(Buf, v112)
+					NewModule.source = PropTypesModule.StringProp.decode(Buffer2)
 				else
 					local VarInt, VarInt2 = ProtoModule.readVarInt(Buf, v112)
 					v112 = VarInt2 + VarInt
 				end
 			elseif Tag2 == ProtoModule.wireTypes.i32 then
 				local _
-				_, v4006 = ProtoModule.readFixed32(Buf, v112)
+				_, v3992 = ProtoModule.readFixed32(Buf, v112)
 			elseif Tag2 == ProtoModule.wireTypes.i64 then
 				local _
-				_, v4006 = ProtoModule.readFixed64(Buf, v112)
+				_, v3992 = ProtoModule.readFixed64(Buf, v112)
 			else
 				error("Unsupported wire type: " .. Tag2)
 			end
@@ -19597,14 +19500,11 @@ do
 	function Module166:jsonEncode()
 		local t = {}
 		
-		if self.place_id ~= nil then
-			t.placeId = self.place_id:jsonEncode()
+		if self.target_user_id ~= nil then
+			t.targetUserId = self.target_user_id:jsonEncode()
 		end
-		if self.universe_id ~= nil then
-			t.universeId = self.universe_id:jsonEncode()
-		end
-		if self.game_name ~= nil then
-			t.gameName = self.game_name:jsonEncode()
+		if self.source ~= nil then
+			t.source = self.source:jsonEncode()
 		end
 		return t
 	end
@@ -19613,33 +19513,24 @@ do
 		-- upvalues: Module166 (copy), PropTypesModule (copy)
 		local NewModule = Module166.new()
 		
-		if self.place_id ~= nil then
-			NewModule.place_id = PropTypesModule.StringProp.jsonDecode(self.place_id)
+		if self.target_user_id ~= nil then
+			NewModule.target_user_id = PropTypesModule.StringProp.jsonDecode(self.target_user_id)
 		end
-		if self.placeId ~= nil then
-			NewModule.place_id = PropTypesModule.StringProp.jsonDecode(self.placeId)
+		if self.targetUserId ~= nil then
+			NewModule.target_user_id = PropTypesModule.StringProp.jsonDecode(self.targetUserId)
 		end
-		if self.universe_id ~= nil then
-			NewModule.universe_id = PropTypesModule.StringProp.jsonDecode(self.universe_id)
-		end
-		if self.universeId ~= nil then
-			NewModule.universe_id = PropTypesModule.StringProp.jsonDecode(self.universeId)
-		end
-		if self.game_name ~= nil then
-			NewModule.game_name = PropTypesModule.StringProp.jsonDecode(self.game_name)
-		end
-		if self.gameName ~= nil then
-			NewModule.game_name = PropTypesModule.StringProp.jsonDecode(self.gameName)
+		if self.source ~= nil then
+			NewModule.source = PropTypesModule.StringProp.jsonDecode(self.source)
 		end
 		return NewModule
 	end
 
 	Module166.descriptor = {
-		name = "PinExperienceShortcutAction_Params",
+		name = "RequestFriendshipAction_Params",
 		fullName = "roblox.apppageplatform.shared.v1beta1.Params"
 	}
-	t.PinExperienceShortcutAction_Params = Module166
-	TypeRegistryModule.default:register(t.PinExperienceShortcutAction_Params)
+	t.RequestFriendshipAction_Params = Module166
+	TypeRegistryModule.default:register(t.RequestFriendshipAction_Params)
 	local Module167 = {}
 	Module167.__index = Module167
 
@@ -19677,32 +19568,32 @@ do
 		local v113 = 0
 		while v113 < buffer.len(Buf) do
 			local Tag, Tag2
-			Tag, Tag2, v4027 = ProtoModule.readTag(Buf, v113)
+			Tag, Tag2, v4012 = ProtoModule.readTag(Buf, v113)
 			
 			if Tag2 == ProtoModule.wireTypes.varint then
 				if Tag == 1 then
 					local VarIntI32
-					VarIntI32, v4027 = ProtoModule.readVarIntI32(Buf, v113)
+					VarIntI32, v4012 = ProtoModule.readVarIntI32(Buf, v113)
 					NewModule.action_type = t.ActionType.fromNumber(VarIntI32) or VarIntI32
 				else
 					local _
-					_, v4027 = ProtoModule.readVarInt(Buf, v113)
+					_, v4012 = ProtoModule.readVarInt(Buf, v113)
 				end
 			elseif Tag2 == ProtoModule.wireTypes.lengthDelimited then
 				if Tag == 2 then
 					local Buffer1
-					Buffer1, v4027 = ProtoModule.readBuffer(Buf, v113)
-					NewModule.action_params = t.NavigateAction_Params.decode(Buffer1)
+					Buffer1, v4012 = ProtoModule.readBuffer(Buf, v113)
+					NewModule.action_params = t.OpenTrustedFriendsUpsellModalAction_Params.decode(Buffer1)
 				else
 					local VarInt, VarInt2 = ProtoModule.readVarInt(Buf, v113)
 					v113 = VarInt2 + VarInt
 				end
 			elseif Tag2 == ProtoModule.wireTypes.i32 then
 				local _
-				_, v4027 = ProtoModule.readFixed32(Buf, v113)
+				_, v4012 = ProtoModule.readFixed32(Buf, v113)
 			elseif Tag2 == ProtoModule.wireTypes.i64 then
 				local _
-				_, v4027 = ProtoModule.readFixed64(Buf, v113)
+				_, v4012 = ProtoModule.readFixed64(Buf, v113)
 			else
 				error("Unsupported wire type: " .. Tag2)
 			end
@@ -19734,30 +19625,29 @@ do
 			NewModule.action_type = (if typeof(self.actionType) == "number" then t.ActionType.fromNumber(self.actionType) else t.ActionType.fromName(self.actionType)) or self.actionType
 		end
 		if self.action_params ~= nil then
-			NewModule.action_params = t.NavigateAction_Params.jsonDecode(self.action_params)
+			NewModule.action_params = t.OpenTrustedFriendsUpsellModalAction_Params.jsonDecode(self.action_params)
 		end
 		if self.actionParams ~= nil then
-			NewModule.action_params = t.NavigateAction_Params.jsonDecode(self.actionParams)
+			NewModule.action_params = t.OpenTrustedFriendsUpsellModalAction_Params.jsonDecode(self.actionParams)
 		end
 		return NewModule
 	end
 
 	Module167.descriptor = {
-		name = "NavigateAction",
-		fullName = "roblox.apppageplatform.shared.v1beta1.NavigateAction"
+		name = "OpenTrustedFriendsUpsellModalAction",
+		fullName = "roblox.apppageplatform.shared.v1beta1.OpenTrustedFriendsUpsellModalAction"
 	}
-	t.NavigateAction = Module167
+	t.OpenTrustedFriendsUpsellModalAction = Module167
 end
 do
-	TypeRegistryModule.default:register(t.NavigateAction)
+	TypeRegistryModule.default:register(t.OpenTrustedFriendsUpsellModalAction)
 	local Module168 = {}
 	Module168.__index = Module168
 
 	function Module168.new(p1)
 		-- upvalues: Module168 (copy)
 		return (setmetatable({
-			destination = if p1 == nil or p1.destination == nil then nil else p1.destination,
-			source = if p1 == nil or p1.source == nil then nil else p1.source
+			target_user_id = if p1 == nil or p1.target_user_id == nil then nil else p1.target_user_id
 		}, Module168))
 	end
 
@@ -19766,15 +19656,10 @@ do
 		local Buf = buffer.create(0)
 		local Count = 0
 		
-		if self.destination ~= nil then
-			local EncodeResult = self.destination:encode()
+		if self.target_user_id ~= nil then
+			local EncodeResult = self.target_user_id:encode()
 			local WriteTagResult, WriteTagResult2 = ProtoModule.writeTag(Buf, Count, 1, ProtoModule.wireTypes.lengthDelimited)
 			Buf, Count = ProtoModule.writeBuffer(WriteTagResult, WriteTagResult2, EncodeResult, buffer.len(EncodeResult))
-		end
-		if self.source ~= nil then
-			local EncodeResult = self.source:encode()
-			local WriteTagResult1, WriteTagResult2_1 = ProtoModule.writeTag(Buf, Count, 2, ProtoModule.wireTypes.lengthDelimited)
-			Buf, Count = ProtoModule.writeBuffer(WriteTagResult1, WriteTagResult2_1, EncodeResult, buffer.len(EncodeResult))
 		end
 		local Buf1 = buffer.create(Count)
 		buffer.copy(Buf1, 0, Buf, 0, Count)
@@ -19788,30 +19673,26 @@ do
 		local v113 = 0
 		while v113 < buffer.len(Buf) do
 			local Tag, Tag2
-			Tag, Tag2, v4048 = ProtoModule.readTag(Buf, v113)
+			Tag, Tag2, v4030 = ProtoModule.readTag(Buf, v113)
 			
 			if Tag2 == ProtoModule.wireTypes.varint then
 				local _
-				_, v4048 = ProtoModule.readVarInt(Buf, v113)
+				_, v4030 = ProtoModule.readVarInt(Buf, v113)
 			elseif Tag2 == ProtoModule.wireTypes.lengthDelimited then
 				if Tag == 1 then
 					local Buffer1
-					Buffer1, v4048 = ProtoModule.readBuffer(Buf, v113)
-					NewModule.destination = PropTypesModule.StringProp.decode(Buffer1)
-				elseif Tag == 2 then
-					local Buffer2
-					Buffer2, v4048 = ProtoModule.readBuffer(Buf, v113)
-					NewModule.source = PropTypesModule.StringProp.decode(Buffer2)
+					Buffer1, v4030 = ProtoModule.readBuffer(Buf, v113)
+					NewModule.target_user_id = PropTypesModule.StringProp.decode(Buffer1)
 				else
 					local VarInt, VarInt2 = ProtoModule.readVarInt(Buf, v113)
 					v113 = VarInt2 + VarInt
 				end
 			elseif Tag2 == ProtoModule.wireTypes.i32 then
 				local _
-				_, v4048 = ProtoModule.readFixed32(Buf, v113)
+				_, v4030 = ProtoModule.readFixed32(Buf, v113)
 			elseif Tag2 == ProtoModule.wireTypes.i64 then
 				local _
-				_, v4048 = ProtoModule.readFixed64(Buf, v113)
+				_, v4030 = ProtoModule.readFixed64(Buf, v113)
 			else
 				error("Unsupported wire type: " .. Tag2)
 			end
@@ -19822,11 +19703,8 @@ do
 	function Module168:jsonEncode()
 		local t = {}
 		
-		if self.destination ~= nil then
-			t.destination = self.destination:jsonEncode()
-		end
-		if self.source ~= nil then
-			t.source = self.source:jsonEncode()
+		if self.target_user_id ~= nil then
+			t.targetUserId = self.target_user_id:jsonEncode()
 		end
 		return t
 	end
@@ -19835,21 +19713,21 @@ do
 		-- upvalues: Module168 (copy), PropTypesModule (copy)
 		local NewModule = Module168.new()
 		
-		if self.destination ~= nil then
-			NewModule.destination = PropTypesModule.StringProp.jsonDecode(self.destination)
+		if self.target_user_id ~= nil then
+			NewModule.target_user_id = PropTypesModule.StringProp.jsonDecode(self.target_user_id)
 		end
-		if self.source ~= nil then
-			NewModule.source = PropTypesModule.StringProp.jsonDecode(self.source)
+		if self.targetUserId ~= nil then
+			NewModule.target_user_id = PropTypesModule.StringProp.jsonDecode(self.targetUserId)
 		end
 		return NewModule
 	end
 
 	Module168.descriptor = {
-		name = "NavigateAction_Params",
+		name = "OpenTrustedFriendsUpsellModalAction_Params",
 		fullName = "roblox.apppageplatform.shared.v1beta1.Params"
 	}
-	t.NavigateAction_Params = Module168
-	TypeRegistryModule.default:register(t.NavigateAction_Params)
+	t.OpenTrustedFriendsUpsellModalAction_Params = Module168
+	TypeRegistryModule.default:register(t.OpenTrustedFriendsUpsellModalAction_Params)
 	local Module169 = {}
 	Module169.__index = Module169
 
@@ -19887,32 +19765,32 @@ do
 		local v114 = 0
 		while v114 < buffer.len(Buf) do
 			local Tag, Tag2
-			Tag, Tag2, v4068 = ProtoModule.readTag(Buf, v114)
+			Tag, Tag2, v4049 = ProtoModule.readTag(Buf, v114)
 			
 			if Tag2 == ProtoModule.wireTypes.varint then
 				if Tag == 1 then
 					local VarIntI32
-					VarIntI32, v4068 = ProtoModule.readVarIntI32(Buf, v114)
+					VarIntI32, v4049 = ProtoModule.readVarIntI32(Buf, v114)
 					NewModule.action_type = t.ActionType.fromNumber(VarIntI32) or VarIntI32
 				else
 					local _
-					_, v4068 = ProtoModule.readVarInt(Buf, v114)
+					_, v4049 = ProtoModule.readVarInt(Buf, v114)
 				end
 			elseif Tag2 == ProtoModule.wireTypes.lengthDelimited then
 				if Tag == 2 then
 					local Buffer1
-					Buffer1, v4068 = ProtoModule.readBuffer(Buf, v114)
-					NewModule.action_params = t.DownloadAppAction_Params.decode(Buffer1)
+					Buffer1, v4049 = ProtoModule.readBuffer(Buf, v114)
+					NewModule.action_params = t.OpenSearchResultsWithQueryAction_Params.decode(Buffer1)
 				else
 					local VarInt, VarInt2 = ProtoModule.readVarInt(Buf, v114)
 					v114 = VarInt2 + VarInt
 				end
 			elseif Tag2 == ProtoModule.wireTypes.i32 then
 				local _
-				_, v4068 = ProtoModule.readFixed32(Buf, v114)
+				_, v4049 = ProtoModule.readFixed32(Buf, v114)
 			elseif Tag2 == ProtoModule.wireTypes.i64 then
 				local _
-				_, v4068 = ProtoModule.readFixed64(Buf, v114)
+				_, v4049 = ProtoModule.readFixed64(Buf, v114)
 			else
 				error("Unsupported wire type: " .. Tag2)
 			end
@@ -19944,28 +19822,29 @@ do
 			NewModule.action_type = (if typeof(self.actionType) == "number" then t.ActionType.fromNumber(self.actionType) else t.ActionType.fromName(self.actionType)) or self.actionType
 		end
 		if self.action_params ~= nil then
-			NewModule.action_params = t.DownloadAppAction_Params.jsonDecode(self.action_params)
+			NewModule.action_params = t.OpenSearchResultsWithQueryAction_Params.jsonDecode(self.action_params)
 		end
 		if self.actionParams ~= nil then
-			NewModule.action_params = t.DownloadAppAction_Params.jsonDecode(self.actionParams)
+			NewModule.action_params = t.OpenSearchResultsWithQueryAction_Params.jsonDecode(self.actionParams)
 		end
 		return NewModule
 	end
 
 	Module169.descriptor = {
-		name = "DownloadAppAction",
-		fullName = "roblox.apppageplatform.shared.v1beta1.DownloadAppAction"
+		name = "OpenSearchResultsWithQueryAction",
+		fullName = "roblox.apppageplatform.shared.v1beta1.OpenSearchResultsWithQueryAction"
 	}
-	t.DownloadAppAction = Module169
-	TypeRegistryModule.default:register(t.DownloadAppAction)
+	t.OpenSearchResultsWithQueryAction = Module169
+	TypeRegistryModule.default:register(t.OpenSearchResultsWithQueryAction)
 	local Module170 = {}
 	Module170.__index = Module170
 
 	function Module170.new(p1)
 		-- upvalues: Module170 (copy)
 		return (setmetatable({
-			source = if p1 == nil or p1.source == nil then nil else p1.source,
-			download_type = if p1 == nil or p1.download_type == nil then nil else p1.download_type
+			search_query = if p1 == nil or p1.search_query == nil then nil else p1.search_query,
+			search_type = if p1 == nil or p1.search_type == nil then nil else p1.search_type,
+			is_autocomplete_suggestion = if p1 == nil or p1.is_autocomplete_suggestion == nil then nil else p1.is_autocomplete_suggestion
 		}, Module170))
 	end
 
@@ -19974,15 +19853,20 @@ do
 		local Buf = buffer.create(0)
 		local Count = 0
 		
-		if self.source ~= nil then
-			local EncodeResult = self.source:encode()
+		if self.search_query ~= nil then
+			local EncodeResult = self.search_query:encode()
 			local WriteTagResult, WriteTagResult2 = ProtoModule.writeTag(Buf, Count, 1, ProtoModule.wireTypes.lengthDelimited)
 			Buf, Count = ProtoModule.writeBuffer(WriteTagResult, WriteTagResult2, EncodeResult, buffer.len(EncodeResult))
 		end
-		if self.download_type ~= nil then
-			local EncodeResult = self.download_type:encode()
+		if self.search_type ~= nil then
+			local EncodeResult = self.search_type:encode()
 			local WriteTagResult1, WriteTagResult2_1 = ProtoModule.writeTag(Buf, Count, 2, ProtoModule.wireTypes.lengthDelimited)
 			Buf, Count = ProtoModule.writeBuffer(WriteTagResult1, WriteTagResult2_1, EncodeResult, buffer.len(EncodeResult))
+		end
+		if self.is_autocomplete_suggestion ~= nil then
+			local EncodeResult = self.is_autocomplete_suggestion:encode()
+			local WriteTagResult3, WriteTagResult2_2 = ProtoModule.writeTag(Buf, Count, 3, ProtoModule.wireTypes.lengthDelimited)
+			Buf, Count = ProtoModule.writeBuffer(WriteTagResult3, WriteTagResult2_2, EncodeResult, buffer.len(EncodeResult))
 		end
 		local Buf1 = buffer.create(Count)
 		buffer.copy(Buf1, 0, Buf, 0, Count)
@@ -19996,30 +19880,34 @@ do
 		local v115 = 0
 		while v115 < buffer.len(Buf) do
 			local Tag, Tag2
-			Tag, Tag2, v4089 = ProtoModule.readTag(Buf, v115)
+			Tag, Tag2, v4073 = ProtoModule.readTag(Buf, v115)
 			
 			if Tag2 == ProtoModule.wireTypes.varint then
 				local _
-				_, v4089 = ProtoModule.readVarInt(Buf, v115)
+				_, v4073 = ProtoModule.readVarInt(Buf, v115)
 			elseif Tag2 == ProtoModule.wireTypes.lengthDelimited then
 				if Tag == 1 then
 					local Buffer1
-					Buffer1, v4089 = ProtoModule.readBuffer(Buf, v115)
-					NewModule.source = PropTypesModule.StringProp.decode(Buffer1)
+					Buffer1, v4073 = ProtoModule.readBuffer(Buf, v115)
+					NewModule.search_query = PropTypesModule.StringProp.decode(Buffer1)
 				elseif Tag == 2 then
 					local Buffer2
-					Buffer2, v4089 = ProtoModule.readBuffer(Buf, v115)
-					NewModule.download_type = PropTypesModule.StringProp.decode(Buffer2)
+					Buffer2, v4073 = ProtoModule.readBuffer(Buf, v115)
+					NewModule.search_type = PropTypesModule.StringProp.decode(Buffer2)
+				elseif Tag == 3 then
+					local Buffer3
+					Buffer3, v4073 = ProtoModule.readBuffer(Buf, v115)
+					NewModule.is_autocomplete_suggestion = PropTypesModule.BoolProp.decode(Buffer3)
 				else
 					local VarInt, VarInt2 = ProtoModule.readVarInt(Buf, v115)
 					v115 = VarInt2 + VarInt
 				end
 			elseif Tag2 == ProtoModule.wireTypes.i32 then
 				local _
-				_, v4089 = ProtoModule.readFixed32(Buf, v115)
+				_, v4073 = ProtoModule.readFixed32(Buf, v115)
 			elseif Tag2 == ProtoModule.wireTypes.i64 then
 				local _
-				_, v4089 = ProtoModule.readFixed64(Buf, v115)
+				_, v4073 = ProtoModule.readFixed64(Buf, v115)
 			else
 				error("Unsupported wire type: " .. Tag2)
 			end
@@ -20030,11 +19918,14 @@ do
 	function Module170:jsonEncode()
 		local t = {}
 		
-		if self.source ~= nil then
-			t.source = self.source:jsonEncode()
+		if self.search_query ~= nil then
+			t.searchQuery = self.search_query:jsonEncode()
 		end
-		if self.download_type ~= nil then
-			t.downloadType = self.download_type:jsonEncode()
+		if self.search_type ~= nil then
+			t.searchType = self.search_type:jsonEncode()
+		end
+		if self.is_autocomplete_suggestion ~= nil then
+			t.isAutocompleteSuggestion = self.is_autocomplete_suggestion:jsonEncode()
 		end
 		return t
 	end
@@ -20043,26 +19934,35 @@ do
 		-- upvalues: Module170 (copy), PropTypesModule (copy)
 		local NewModule = Module170.new()
 		
-		if self.source ~= nil then
-			NewModule.source = PropTypesModule.StringProp.jsonDecode(self.source)
+		if self.search_query ~= nil then
+			NewModule.search_query = PropTypesModule.StringProp.jsonDecode(self.search_query)
 		end
-		if self.download_type ~= nil then
-			NewModule.download_type = PropTypesModule.StringProp.jsonDecode(self.download_type)
+		if self.searchQuery ~= nil then
+			NewModule.search_query = PropTypesModule.StringProp.jsonDecode(self.searchQuery)
 		end
-		if self.downloadType ~= nil then
-			NewModule.download_type = PropTypesModule.StringProp.jsonDecode(self.downloadType)
+		if self.search_type ~= nil then
+			NewModule.search_type = PropTypesModule.StringProp.jsonDecode(self.search_type)
+		end
+		if self.searchType ~= nil then
+			NewModule.search_type = PropTypesModule.StringProp.jsonDecode(self.searchType)
+		end
+		if self.is_autocomplete_suggestion ~= nil then
+			NewModule.is_autocomplete_suggestion = PropTypesModule.BoolProp.jsonDecode(self.is_autocomplete_suggestion)
+		end
+		if self.isAutocompleteSuggestion ~= nil then
+			NewModule.is_autocomplete_suggestion = PropTypesModule.BoolProp.jsonDecode(self.isAutocompleteSuggestion)
 		end
 		return NewModule
 	end
 
 	Module170.descriptor = {
-		name = "DownloadAppAction_Params",
+		name = "OpenSearchResultsWithQueryAction_Params",
 		fullName = "roblox.apppageplatform.shared.v1beta1.Params"
 	}
-	t.DownloadAppAction_Params = Module170
+	t.OpenSearchResultsWithQueryAction_Params = Module170
 end
 do
-	TypeRegistryModule.default:register(t.DownloadAppAction_Params)
+	TypeRegistryModule.default:register(t.OpenSearchResultsWithQueryAction_Params)
 	local Module171 = {}
 	Module171.__index = Module171
 
@@ -20100,32 +20000,32 @@ do
 		local v115 = 0
 		while v115 < buffer.len(Buf) do
 			local Tag, Tag2
-			Tag, Tag2, v4109 = ProtoModule.readTag(Buf, v115)
+			Tag, Tag2, v4094 = ProtoModule.readTag(Buf, v115)
 			
 			if Tag2 == ProtoModule.wireTypes.varint then
 				if Tag == 1 then
 					local VarIntI32
-					VarIntI32, v4109 = ProtoModule.readVarIntI32(Buf, v115)
+					VarIntI32, v4094 = ProtoModule.readVarIntI32(Buf, v115)
 					NewModule.action_type = t.ActionType.fromNumber(VarIntI32) or VarIntI32
 				else
 					local _
-					_, v4109 = ProtoModule.readVarInt(Buf, v115)
+					_, v4094 = ProtoModule.readVarInt(Buf, v115)
 				end
 			elseif Tag2 == ProtoModule.wireTypes.lengthDelimited then
 				if Tag == 2 then
 					local Buffer1
-					Buffer1, v4109 = ProtoModule.readBuffer(Buf, v115)
-					NewModule.action_params = t.ActionSequenceAction_Params.decode(Buffer1)
+					Buffer1, v4094 = ProtoModule.readBuffer(Buf, v115)
+					NewModule.action_params = t.SelectMarketplaceFavoritesCategory_Params.decode(Buffer1)
 				else
 					local VarInt, VarInt2 = ProtoModule.readVarInt(Buf, v115)
 					v115 = VarInt2 + VarInt
 				end
 			elseif Tag2 == ProtoModule.wireTypes.i32 then
 				local _
-				_, v4109 = ProtoModule.readFixed32(Buf, v115)
+				_, v4094 = ProtoModule.readFixed32(Buf, v115)
 			elseif Tag2 == ProtoModule.wireTypes.i64 then
 				local _
-				_, v4109 = ProtoModule.readFixed64(Buf, v115)
+				_, v4094 = ProtoModule.readFixed64(Buf, v115)
 			else
 				error("Unsupported wire type: " .. Tag2)
 			end
@@ -20157,27 +20057,27 @@ do
 			NewModule.action_type = (if typeof(self.actionType) == "number" then t.ActionType.fromNumber(self.actionType) else t.ActionType.fromName(self.actionType)) or self.actionType
 		end
 		if self.action_params ~= nil then
-			NewModule.action_params = t.ActionSequenceAction_Params.jsonDecode(self.action_params)
+			NewModule.action_params = t.SelectMarketplaceFavoritesCategory_Params.jsonDecode(self.action_params)
 		end
 		if self.actionParams ~= nil then
-			NewModule.action_params = t.ActionSequenceAction_Params.jsonDecode(self.actionParams)
+			NewModule.action_params = t.SelectMarketplaceFavoritesCategory_Params.jsonDecode(self.actionParams)
 		end
 		return NewModule
 	end
 
 	Module171.descriptor = {
-		name = "ActionSequenceAction",
-		fullName = "roblox.apppageplatform.shared.v1beta1.ActionSequenceAction"
+		name = "SelectMarketplaceFavoritesCategory",
+		fullName = "roblox.apppageplatform.shared.v1beta1.SelectMarketplaceFavoritesCategory"
 	}
-	t.ActionSequenceAction = Module171
-	TypeRegistryModule.default:register(t.ActionSequenceAction)
+	t.SelectMarketplaceFavoritesCategory = Module171
+	TypeRegistryModule.default:register(t.SelectMarketplaceFavoritesCategory)
 	local Module172 = {}
 	Module172.__index = Module172
 
 	function Module172.new(p1)
 		-- upvalues: Module172 (copy)
 		return (setmetatable({
-			actions = if p1 == nil or p1.actions == nil then {} else p1.actions
+			category_id = if p1 == nil or p1.category_id == nil then nil else p1.category_id
 		}, Module172))
 	end
 
@@ -20186,12 +20086,10 @@ do
 		local Buf = buffer.create(0)
 		local Count = 0
 		
-		if self.actions ~= nil and #self.actions > 0 then
-			for _, action in self.actions do
-				local EncodeResult = action:encode()
-				local WriteTagResult, WriteTagResult2 = ProtoModule.writeTag(Buf, Count, 1, ProtoModule.wireTypes.lengthDelimited)
-				Buf, Count = ProtoModule.writeBuffer(WriteTagResult, WriteTagResult2, EncodeResult, buffer.len(EncodeResult))
-			end
+		if self.category_id ~= nil then
+			local EncodeResult = self.category_id:encode()
+			local WriteTagResult, WriteTagResult2 = ProtoModule.writeTag(Buf, Count, 1, ProtoModule.wireTypes.lengthDelimited)
+			Buf, Count = ProtoModule.writeBuffer(WriteTagResult, WriteTagResult2, EncodeResult, buffer.len(EncodeResult))
 		end
 		local Buf1 = buffer.create(Count)
 		buffer.copy(Buf1, 0, Buf, 0, Count)
@@ -20200,31 +20098,31 @@ do
 	end
 
 	function Module172.decode(Buf)
-		-- upvalues: Module172 (copy), ProtoModule (copy), t (copy)
+		-- upvalues: Module172 (copy), ProtoModule (copy), PropTypesModule (copy)
 		local NewModule = Module172.new()
 		local v116 = 0
 		while v116 < buffer.len(Buf) do
 			local Tag, Tag2
-			Tag, Tag2, v4127 = ProtoModule.readTag(Buf, v116)
+			Tag, Tag2, v4112 = ProtoModule.readTag(Buf, v116)
 			
 			if Tag2 == ProtoModule.wireTypes.varint then
 				local _
-				_, v4127 = ProtoModule.readVarInt(Buf, v116)
+				_, v4112 = ProtoModule.readVarInt(Buf, v116)
 			elseif Tag2 == ProtoModule.wireTypes.lengthDelimited then
 				if Tag == 1 then
 					local Buffer1
-					Buffer1, v4127 = ProtoModule.readBuffer(Buf, v116)
-					table.insert(NewModule.actions, t.ActionProp.decode(Buffer1))
+					Buffer1, v4112 = ProtoModule.readBuffer(Buf, v116)
+					NewModule.category_id = PropTypesModule.StringProp.decode(Buffer1)
 				else
 					local VarInt, VarInt2 = ProtoModule.readVarInt(Buf, v116)
 					v116 = VarInt2 + VarInt
 				end
 			elseif Tag2 == ProtoModule.wireTypes.i32 then
 				local _
-				_, v4127 = ProtoModule.readFixed32(Buf, v116)
+				_, v4112 = ProtoModule.readFixed32(Buf, v116)
 			elseif Tag2 == ProtoModule.wireTypes.i64 then
 				local _
-				_, v4127 = ProtoModule.readFixed64(Buf, v116)
+				_, v4112 = ProtoModule.readFixed64(Buf, v116)
 			else
 				error("Unsupported wire type: " .. Tag2)
 			end
@@ -20235,38 +20133,31 @@ do
 	function Module172:jsonEncode()
 		local t = {}
 		
-		if self.actions ~= nil and #self.actions > 0 then
-			local Actions = {}
-			
-			for _, action in self.actions do
-				table.insert(Actions, action:jsonEncode())
-			end
-			t.actions = Actions
+		if self.category_id ~= nil then
+			t.categoryId = self.category_id:jsonEncode()
 		end
 		return t
 	end
 
 	function Module172:jsonDecode()
-		-- upvalues: Module172 (copy), t (copy)
+		-- upvalues: Module172 (copy), PropTypesModule (copy)
 		local NewModule = Module172.new()
 		
-		if self.actions ~= nil then
-			local Actions = {}
-			
-			for _, action in self.actions do
-				table.insert(Actions, t.ActionProp.jsonDecode(action))
-			end
-			NewModule.actions = Actions
+		if self.category_id ~= nil then
+			NewModule.category_id = PropTypesModule.StringProp.jsonDecode(self.category_id)
+		end
+		if self.categoryId ~= nil then
+			NewModule.category_id = PropTypesModule.StringProp.jsonDecode(self.categoryId)
 		end
 		return NewModule
 	end
 
 	Module172.descriptor = {
-		name = "ActionSequenceAction_Params",
+		name = "SelectMarketplaceFavoritesCategory_Params",
 		fullName = "roblox.apppageplatform.shared.v1beta1.Params"
 	}
-	t.ActionSequenceAction_Params = Module172
-	TypeRegistryModule.default:register(t.ActionSequenceAction_Params)
+	t.SelectMarketplaceFavoritesCategory_Params = Module172
+	TypeRegistryModule.default:register(t.SelectMarketplaceFavoritesCategory_Params)
 	local Module173 = {}
 	Module173.__index = Module173
 
@@ -20304,32 +20195,32 @@ do
 		local v117 = 0
 		while v117 < buffer.len(Buf) do
 			local Tag, Tag2
-			Tag, Tag2, v4148 = ProtoModule.readTag(Buf, v117)
+			Tag, Tag2, v4131 = ProtoModule.readTag(Buf, v117)
 			
 			if Tag2 == ProtoModule.wireTypes.varint then
 				if Tag == 1 then
 					local VarIntI32
-					VarIntI32, v4148 = ProtoModule.readVarIntI32(Buf, v117)
+					VarIntI32, v4131 = ProtoModule.readVarIntI32(Buf, v117)
 					NewModule.action_type = t.ActionType.fromNumber(VarIntI32) or VarIntI32
 				else
 					local _
-					_, v4148 = ProtoModule.readVarInt(Buf, v117)
+					_, v4131 = ProtoModule.readVarInt(Buf, v117)
 				end
 			elseif Tag2 == ProtoModule.wireTypes.lengthDelimited then
 				if Tag == 2 then
 					local Buffer1
-					Buffer1, v4148 = ProtoModule.readBuffer(Buf, v117)
-					NewModule.action_params = t.RefreshFeedEntryFromApiAction_Params.decode(Buffer1)
+					Buffer1, v4131 = ProtoModule.readBuffer(Buf, v117)
+					NewModule.action_params = t.SelectMarketplaceFavoritesSubcategory_Params.decode(Buffer1)
 				else
 					local VarInt, VarInt2 = ProtoModule.readVarInt(Buf, v117)
 					v117 = VarInt2 + VarInt
 				end
 			elseif Tag2 == ProtoModule.wireTypes.i32 then
 				local _
-				_, v4148 = ProtoModule.readFixed32(Buf, v117)
+				_, v4131 = ProtoModule.readFixed32(Buf, v117)
 			elseif Tag2 == ProtoModule.wireTypes.i64 then
 				local _
-				_, v4148 = ProtoModule.readFixed64(Buf, v117)
+				_, v4131 = ProtoModule.readFixed64(Buf, v117)
 			else
 				error("Unsupported wire type: " .. Tag2)
 			end
@@ -20361,31 +20252,29 @@ do
 			NewModule.action_type = (if typeof(self.actionType) == "number" then t.ActionType.fromNumber(self.actionType) else t.ActionType.fromName(self.actionType)) or self.actionType
 		end
 		if self.action_params ~= nil then
-			NewModule.action_params = t.RefreshFeedEntryFromApiAction_Params.jsonDecode(self.action_params)
+			NewModule.action_params = t.SelectMarketplaceFavoritesSubcategory_Params.jsonDecode(self.action_params)
 		end
 		if self.actionParams ~= nil then
-			NewModule.action_params = t.RefreshFeedEntryFromApiAction_Params.jsonDecode(self.actionParams)
+			NewModule.action_params = t.SelectMarketplaceFavoritesSubcategory_Params.jsonDecode(self.actionParams)
 		end
 		return NewModule
 	end
 
 	Module173.descriptor = {
-		name = "RefreshFeedEntryFromApiAction",
-		fullName = "roblox.apppageplatform.shared.v1beta1.RefreshFeedEntryFromApiAction"
+		name = "SelectMarketplaceFavoritesSubcategory",
+		fullName = "roblox.apppageplatform.shared.v1beta1.SelectMarketplaceFavoritesSubcategory"
 	}
-	t.RefreshFeedEntryFromApiAction = Module173
+	t.SelectMarketplaceFavoritesSubcategory = Module173
 end
 do
-	TypeRegistryModule.default:register(t.RefreshFeedEntryFromApiAction)
+	TypeRegistryModule.default:register(t.SelectMarketplaceFavoritesSubcategory)
 	local Module174 = {}
 	Module174.__index = Module174
 
 	function Module174.new(p1)
 		-- upvalues: Module174 (copy)
 		return (setmetatable({
-			page_entry_identifier = if p1 == nil or p1.page_entry_identifier == nil then nil else p1.page_entry_identifier,
-			feed_entry_identifier = if p1 == nil or p1.feed_entry_identifier == nil then nil else p1.feed_entry_identifier,
-			selected_option_ids = if p1 == nil or p1.selected_option_ids == nil then nil else p1.selected_option_ids
+			subcategory_id = if p1 == nil or p1.subcategory_id == nil then nil else p1.subcategory_id
 		}, Module174))
 	end
 
@@ -20394,20 +20283,10 @@ do
 		local Buf = buffer.create(0)
 		local Count = 0
 		
-		if self.page_entry_identifier ~= nil then
-			local EncodeResult = self.page_entry_identifier:encode()
+		if self.subcategory_id ~= nil then
+			local EncodeResult = self.subcategory_id:encode()
 			local WriteTagResult, WriteTagResult2 = ProtoModule.writeTag(Buf, Count, 1, ProtoModule.wireTypes.lengthDelimited)
 			Buf, Count = ProtoModule.writeBuffer(WriteTagResult, WriteTagResult2, EncodeResult, buffer.len(EncodeResult))
-		end
-		if self.feed_entry_identifier ~= nil then
-			local EncodeResult = self.feed_entry_identifier:encode()
-			local WriteTagResult1, WriteTagResult2_1 = ProtoModule.writeTag(Buf, Count, 2, ProtoModule.wireTypes.lengthDelimited)
-			Buf, Count = ProtoModule.writeBuffer(WriteTagResult1, WriteTagResult2_1, EncodeResult, buffer.len(EncodeResult))
-		end
-		if self.selected_option_ids ~= nil then
-			local EncodeResult = self.selected_option_ids:encode()
-			local WriteTagResult3, WriteTagResult2_2 = ProtoModule.writeTag(Buf, Count, 3, ProtoModule.wireTypes.lengthDelimited)
-			Buf, Count = ProtoModule.writeBuffer(WriteTagResult3, WriteTagResult2_2, EncodeResult, buffer.len(EncodeResult))
 		end
 		local Buf1 = buffer.create(Count)
 		buffer.copy(Buf1, 0, Buf, 0, Count)
@@ -20421,34 +20300,26 @@ do
 		local v117 = 0
 		while v117 < buffer.len(Buf) do
 			local Tag, Tag2
-			Tag, Tag2, v4172 = ProtoModule.readTag(Buf, v117)
+			Tag, Tag2, v4149 = ProtoModule.readTag(Buf, v117)
 			
 			if Tag2 == ProtoModule.wireTypes.varint then
 				local _
-				_, v4172 = ProtoModule.readVarInt(Buf, v117)
+				_, v4149 = ProtoModule.readVarInt(Buf, v117)
 			elseif Tag2 == ProtoModule.wireTypes.lengthDelimited then
 				if Tag == 1 then
 					local Buffer1
-					Buffer1, v4172 = ProtoModule.readBuffer(Buf, v117)
-					NewModule.page_entry_identifier = PropTypesModule.StringProp.decode(Buffer1)
-				elseif Tag == 2 then
-					local Buffer2
-					Buffer2, v4172 = ProtoModule.readBuffer(Buf, v117)
-					NewModule.feed_entry_identifier = PropTypesModule.StringProp.decode(Buffer2)
-				elseif Tag == 3 then
-					local Buffer3
-					Buffer3, v4172 = ProtoModule.readBuffer(Buf, v117)
-					NewModule.selected_option_ids = PropTypesModule.StringArrayProp.decode(Buffer3)
+					Buffer1, v4149 = ProtoModule.readBuffer(Buf, v117)
+					NewModule.subcategory_id = PropTypesModule.StringProp.decode(Buffer1)
 				else
 					local VarInt, VarInt2 = ProtoModule.readVarInt(Buf, v117)
 					v117 = VarInt2 + VarInt
 				end
 			elseif Tag2 == ProtoModule.wireTypes.i32 then
 				local _
-				_, v4172 = ProtoModule.readFixed32(Buf, v117)
+				_, v4149 = ProtoModule.readFixed32(Buf, v117)
 			elseif Tag2 == ProtoModule.wireTypes.i64 then
 				local _
-				_, v4172 = ProtoModule.readFixed64(Buf, v117)
+				_, v4149 = ProtoModule.readFixed64(Buf, v117)
 			else
 				error("Unsupported wire type: " .. Tag2)
 			end
@@ -20459,14 +20330,8 @@ do
 	function Module174:jsonEncode()
 		local t = {}
 		
-		if self.page_entry_identifier ~= nil then
-			t.pageEntryIdentifier = self.page_entry_identifier:jsonEncode()
-		end
-		if self.feed_entry_identifier ~= nil then
-			t.feedEntryIdentifier = self.feed_entry_identifier:jsonEncode()
-		end
-		if self.selected_option_ids ~= nil then
-			t.selectedOptionIds = self.selected_option_ids:jsonEncode()
+		if self.subcategory_id ~= nil then
+			t.subcategoryId = self.subcategory_id:jsonEncode()
 		end
 		return t
 	end
@@ -20475,33 +20340,21 @@ do
 		-- upvalues: Module174 (copy), PropTypesModule (copy)
 		local NewModule = Module174.new()
 		
-		if self.page_entry_identifier ~= nil then
-			NewModule.page_entry_identifier = PropTypesModule.StringProp.jsonDecode(self.page_entry_identifier)
+		if self.subcategory_id ~= nil then
+			NewModule.subcategory_id = PropTypesModule.StringProp.jsonDecode(self.subcategory_id)
 		end
-		if self.pageEntryIdentifier ~= nil then
-			NewModule.page_entry_identifier = PropTypesModule.StringProp.jsonDecode(self.pageEntryIdentifier)
-		end
-		if self.feed_entry_identifier ~= nil then
-			NewModule.feed_entry_identifier = PropTypesModule.StringProp.jsonDecode(self.feed_entry_identifier)
-		end
-		if self.feedEntryIdentifier ~= nil then
-			NewModule.feed_entry_identifier = PropTypesModule.StringProp.jsonDecode(self.feedEntryIdentifier)
-		end
-		if self.selected_option_ids ~= nil then
-			NewModule.selected_option_ids = PropTypesModule.StringArrayProp.jsonDecode(self.selected_option_ids)
-		end
-		if self.selectedOptionIds ~= nil then
-			NewModule.selected_option_ids = PropTypesModule.StringArrayProp.jsonDecode(self.selectedOptionIds)
+		if self.subcategoryId ~= nil then
+			NewModule.subcategory_id = PropTypesModule.StringProp.jsonDecode(self.subcategoryId)
 		end
 		return NewModule
 	end
 
 	Module174.descriptor = {
-		name = "RefreshFeedEntryFromApiAction_Params",
+		name = "SelectMarketplaceFavoritesSubcategory_Params",
 		fullName = "roblox.apppageplatform.shared.v1beta1.Params"
 	}
-	t.RefreshFeedEntryFromApiAction_Params = Module174
-	TypeRegistryModule.default:register(t.RefreshFeedEntryFromApiAction_Params)
+	t.SelectMarketplaceFavoritesSubcategory_Params = Module174
+	TypeRegistryModule.default:register(t.SelectMarketplaceFavoritesSubcategory_Params)
 	local Module175 = {}
 	Module175.__index = Module175
 
@@ -20539,32 +20392,32 @@ do
 		local v118 = 0
 		while v118 < buffer.len(Buf) do
 			local Tag, Tag2
-			Tag, Tag2, v4193 = ProtoModule.readTag(Buf, v118)
+			Tag, Tag2, v4168 = ProtoModule.readTag(Buf, v118)
 			
 			if Tag2 == ProtoModule.wireTypes.varint then
 				if Tag == 1 then
 					local VarIntI32
-					VarIntI32, v4193 = ProtoModule.readVarIntI32(Buf, v118)
+					VarIntI32, v4168 = ProtoModule.readVarIntI32(Buf, v118)
 					NewModule.action_type = t.ActionType.fromNumber(VarIntI32) or VarIntI32
 				else
 					local _
-					_, v4193 = ProtoModule.readVarInt(Buf, v118)
+					_, v4168 = ProtoModule.readVarInt(Buf, v118)
 				end
 			elseif Tag2 == ProtoModule.wireTypes.lengthDelimited then
 				if Tag == 2 then
 					local Buffer1
-					Buffer1, v4193 = ProtoModule.readBuffer(Buf, v118)
-					NewModule.action_params = t.OpenProfileFramesEditorAction_Params.decode(Buffer1)
+					Buffer1, v4168 = ProtoModule.readBuffer(Buf, v118)
+					NewModule.action_params = t.PinExperienceShortcutAction_Params.decode(Buffer1)
 				else
 					local VarInt, VarInt2 = ProtoModule.readVarInt(Buf, v118)
 					v118 = VarInt2 + VarInt
 				end
 			elseif Tag2 == ProtoModule.wireTypes.i32 then
 				local _
-				_, v4193 = ProtoModule.readFixed32(Buf, v118)
+				_, v4168 = ProtoModule.readFixed32(Buf, v118)
 			elseif Tag2 == ProtoModule.wireTypes.i64 then
 				local _
-				_, v4193 = ProtoModule.readFixed64(Buf, v118)
+				_, v4168 = ProtoModule.readFixed64(Buf, v118)
 			else
 				error("Unsupported wire type: " .. Tag2)
 			end
@@ -20596,29 +20449,29 @@ do
 			NewModule.action_type = (if typeof(self.actionType) == "number" then t.ActionType.fromNumber(self.actionType) else t.ActionType.fromName(self.actionType)) or self.actionType
 		end
 		if self.action_params ~= nil then
-			NewModule.action_params = t.OpenProfileFramesEditorAction_Params.jsonDecode(self.action_params)
+			NewModule.action_params = t.PinExperienceShortcutAction_Params.jsonDecode(self.action_params)
 		end
 		if self.actionParams ~= nil then
-			NewModule.action_params = t.OpenProfileFramesEditorAction_Params.jsonDecode(self.actionParams)
+			NewModule.action_params = t.PinExperienceShortcutAction_Params.jsonDecode(self.actionParams)
 		end
 		return NewModule
 	end
 
 	Module175.descriptor = {
-		name = "OpenProfileFramesEditorAction",
-		fullName = "roblox.apppageplatform.shared.v1beta1.OpenProfileFramesEditorAction"
+		name = "PinExperienceShortcutAction",
+		fullName = "roblox.apppageplatform.shared.v1beta1.PinExperienceShortcutAction"
 	}
-	t.OpenProfileFramesEditorAction = Module175
-	TypeRegistryModule.default:register(t.OpenProfileFramesEditorAction)
+	t.PinExperienceShortcutAction = Module175
+	TypeRegistryModule.default:register(t.PinExperienceShortcutAction)
 	local Module176 = {}
 	Module176.__index = Module176
 
 	function Module176.new(p1)
 		-- upvalues: Module176 (copy)
 		return (setmetatable({
-			prompt_id = if p1 == nil or p1.prompt_id == nil then nil else p1.prompt_id,
-			prompt_type = if p1 == nil or p1.prompt_type == nil then nil else p1.prompt_type,
-			source = if p1 == nil or p1.source == nil then nil else p1.source
+			place_id = if p1 == nil or p1.place_id == nil then nil else p1.place_id,
+			universe_id = if p1 == nil or p1.universe_id == nil then nil else p1.universe_id,
+			game_name = if p1 == nil or p1.game_name == nil then nil else p1.game_name
 		}, Module176))
 	end
 
@@ -20627,18 +20480,18 @@ do
 		local Buf = buffer.create(0)
 		local Count = 0
 		
-		if self.prompt_id ~= nil then
-			local EncodeResult = self.prompt_id:encode()
+		if self.place_id ~= nil then
+			local EncodeResult = self.place_id:encode()
 			local WriteTagResult, WriteTagResult2 = ProtoModule.writeTag(Buf, Count, 1, ProtoModule.wireTypes.lengthDelimited)
 			Buf, Count = ProtoModule.writeBuffer(WriteTagResult, WriteTagResult2, EncodeResult, buffer.len(EncodeResult))
 		end
-		if self.prompt_type ~= nil then
-			local EncodeResult = self.prompt_type:encode()
+		if self.universe_id ~= nil then
+			local EncodeResult = self.universe_id:encode()
 			local WriteTagResult1, WriteTagResult2_1 = ProtoModule.writeTag(Buf, Count, 2, ProtoModule.wireTypes.lengthDelimited)
 			Buf, Count = ProtoModule.writeBuffer(WriteTagResult1, WriteTagResult2_1, EncodeResult, buffer.len(EncodeResult))
 		end
-		if self.source ~= nil then
-			local EncodeResult = self.source:encode()
+		if self.game_name ~= nil then
+			local EncodeResult = self.game_name:encode()
 			local WriteTagResult3, WriteTagResult2_2 = ProtoModule.writeTag(Buf, Count, 3, ProtoModule.wireTypes.lengthDelimited)
 			Buf, Count = ProtoModule.writeBuffer(WriteTagResult3, WriteTagResult2_2, EncodeResult, buffer.len(EncodeResult))
 		end
@@ -20654,34 +20507,34 @@ do
 		local v119 = 0
 		while v119 < buffer.len(Buf) do
 			local Tag, Tag2
-			Tag, Tag2, v4217 = ProtoModule.readTag(Buf, v119)
+			Tag, Tag2, v4192 = ProtoModule.readTag(Buf, v119)
 			
 			if Tag2 == ProtoModule.wireTypes.varint then
 				local _
-				_, v4217 = ProtoModule.readVarInt(Buf, v119)
+				_, v4192 = ProtoModule.readVarInt(Buf, v119)
 			elseif Tag2 == ProtoModule.wireTypes.lengthDelimited then
 				if Tag == 1 then
 					local Buffer1
-					Buffer1, v4217 = ProtoModule.readBuffer(Buf, v119)
-					NewModule.prompt_id = PropTypesModule.StringProp.decode(Buffer1)
+					Buffer1, v4192 = ProtoModule.readBuffer(Buf, v119)
+					NewModule.place_id = PropTypesModule.StringProp.decode(Buffer1)
 				elseif Tag == 2 then
 					local Buffer2
-					Buffer2, v4217 = ProtoModule.readBuffer(Buf, v119)
-					NewModule.prompt_type = PropTypesModule.StringProp.decode(Buffer2)
+					Buffer2, v4192 = ProtoModule.readBuffer(Buf, v119)
+					NewModule.universe_id = PropTypesModule.StringProp.decode(Buffer2)
 				elseif Tag == 3 then
 					local Buffer3
-					Buffer3, v4217 = ProtoModule.readBuffer(Buf, v119)
-					NewModule.source = PropTypesModule.StringProp.decode(Buffer3)
+					Buffer3, v4192 = ProtoModule.readBuffer(Buf, v119)
+					NewModule.game_name = PropTypesModule.StringProp.decode(Buffer3)
 				else
 					local VarInt, VarInt2 = ProtoModule.readVarInt(Buf, v119)
 					v119 = VarInt2 + VarInt
 				end
 			elseif Tag2 == ProtoModule.wireTypes.i32 then
 				local _
-				_, v4217 = ProtoModule.readFixed32(Buf, v119)
+				_, v4192 = ProtoModule.readFixed32(Buf, v119)
 			elseif Tag2 == ProtoModule.wireTypes.i64 then
 				local _
-				_, v4217 = ProtoModule.readFixed64(Buf, v119)
+				_, v4192 = ProtoModule.readFixed64(Buf, v119)
 			else
 				error("Unsupported wire type: " .. Tag2)
 			end
@@ -20692,14 +20545,14 @@ do
 	function Module176:jsonEncode()
 		local t = {}
 		
-		if self.prompt_id ~= nil then
-			t.promptId = self.prompt_id:jsonEncode()
+		if self.place_id ~= nil then
+			t.placeId = self.place_id:jsonEncode()
 		end
-		if self.prompt_type ~= nil then
-			t.promptType = self.prompt_type:jsonEncode()
+		if self.universe_id ~= nil then
+			t.universeId = self.universe_id:jsonEncode()
 		end
-		if self.source ~= nil then
-			t.source = self.source:jsonEncode()
+		if self.game_name ~= nil then
+			t.gameName = self.game_name:jsonEncode()
 		end
 		return t
 	end
@@ -20708,32 +20561,35 @@ do
 		-- upvalues: Module176 (copy), PropTypesModule (copy)
 		local NewModule = Module176.new()
 		
-		if self.prompt_id ~= nil then
-			NewModule.prompt_id = PropTypesModule.StringProp.jsonDecode(self.prompt_id)
+		if self.place_id ~= nil then
+			NewModule.place_id = PropTypesModule.StringProp.jsonDecode(self.place_id)
 		end
-		if self.promptId ~= nil then
-			NewModule.prompt_id = PropTypesModule.StringProp.jsonDecode(self.promptId)
+		if self.placeId ~= nil then
+			NewModule.place_id = PropTypesModule.StringProp.jsonDecode(self.placeId)
 		end
-		if self.prompt_type ~= nil then
-			NewModule.prompt_type = PropTypesModule.StringProp.jsonDecode(self.prompt_type)
+		if self.universe_id ~= nil then
+			NewModule.universe_id = PropTypesModule.StringProp.jsonDecode(self.universe_id)
 		end
-		if self.promptType ~= nil then
-			NewModule.prompt_type = PropTypesModule.StringProp.jsonDecode(self.promptType)
+		if self.universeId ~= nil then
+			NewModule.universe_id = PropTypesModule.StringProp.jsonDecode(self.universeId)
 		end
-		if self.source ~= nil then
-			NewModule.source = PropTypesModule.StringProp.jsonDecode(self.source)
+		if self.game_name ~= nil then
+			NewModule.game_name = PropTypesModule.StringProp.jsonDecode(self.game_name)
+		end
+		if self.gameName ~= nil then
+			NewModule.game_name = PropTypesModule.StringProp.jsonDecode(self.gameName)
 		end
 		return NewModule
 	end
 
 	Module176.descriptor = {
-		name = "OpenProfileFramesEditorAction_Params",
+		name = "PinExperienceShortcutAction_Params",
 		fullName = "roblox.apppageplatform.shared.v1beta1.Params"
 	}
-	t.OpenProfileFramesEditorAction_Params = Module176
+	t.PinExperienceShortcutAction_Params = Module176
 end
 do
-	TypeRegistryModule.default:register(t.OpenProfileFramesEditorAction_Params)
+	TypeRegistryModule.default:register(t.PinExperienceShortcutAction_Params)
 	local Module177 = {}
 	Module177.__index = Module177
 
@@ -20771,32 +20627,32 @@ do
 		local v119 = 0
 		while v119 < buffer.len(Buf) do
 			local Tag, Tag2
-			Tag, Tag2, v4238 = ProtoModule.readTag(Buf, v119)
+			Tag, Tag2, v4213 = ProtoModule.readTag(Buf, v119)
 			
 			if Tag2 == ProtoModule.wireTypes.varint then
 				if Tag == 1 then
 					local VarIntI32
-					VarIntI32, v4238 = ProtoModule.readVarIntI32(Buf, v119)
+					VarIntI32, v4213 = ProtoModule.readVarIntI32(Buf, v119)
 					NewModule.action_type = t.ActionType.fromNumber(VarIntI32) or VarIntI32
 				else
 					local _
-					_, v4238 = ProtoModule.readVarInt(Buf, v119)
+					_, v4213 = ProtoModule.readVarInt(Buf, v119)
 				end
 			elseif Tag2 == ProtoModule.wireTypes.lengthDelimited then
 				if Tag == 2 then
 					local Buffer1
-					Buffer1, v4238 = ProtoModule.readBuffer(Buf, v119)
-					NewModule.action_params = t.ApplyDevStoreSeeAllCategoryFilterAction_Params.decode(Buffer1)
+					Buffer1, v4213 = ProtoModule.readBuffer(Buf, v119)
+					NewModule.action_params = t.NavigateAction_Params.decode(Buffer1)
 				else
 					local VarInt, VarInt2 = ProtoModule.readVarInt(Buf, v119)
 					v119 = VarInt2 + VarInt
 				end
 			elseif Tag2 == ProtoModule.wireTypes.i32 then
 				local _
-				_, v4238 = ProtoModule.readFixed32(Buf, v119)
+				_, v4213 = ProtoModule.readFixed32(Buf, v119)
 			elseif Tag2 == ProtoModule.wireTypes.i64 then
 				local _
-				_, v4238 = ProtoModule.readFixed64(Buf, v119)
+				_, v4213 = ProtoModule.readFixed64(Buf, v119)
 			else
 				error("Unsupported wire type: " .. Tag2)
 			end
@@ -20828,27 +20684,28 @@ do
 			NewModule.action_type = (if typeof(self.actionType) == "number" then t.ActionType.fromNumber(self.actionType) else t.ActionType.fromName(self.actionType)) or self.actionType
 		end
 		if self.action_params ~= nil then
-			NewModule.action_params = t.ApplyDevStoreSeeAllCategoryFilterAction_Params.jsonDecode(self.action_params)
+			NewModule.action_params = t.NavigateAction_Params.jsonDecode(self.action_params)
 		end
 		if self.actionParams ~= nil then
-			NewModule.action_params = t.ApplyDevStoreSeeAllCategoryFilterAction_Params.jsonDecode(self.actionParams)
+			NewModule.action_params = t.NavigateAction_Params.jsonDecode(self.actionParams)
 		end
 		return NewModule
 	end
 
 	Module177.descriptor = {
-		name = "ApplyDevStoreSeeAllCategoryFilterAction",
-		fullName = "roblox.apppageplatform.shared.v1beta1.ApplyDevStoreSeeAllCategoryFilterAction"
+		name = "NavigateAction",
+		fullName = "roblox.apppageplatform.shared.v1beta1.NavigateAction"
 	}
-	t.ApplyDevStoreSeeAllCategoryFilterAction = Module177
-	TypeRegistryModule.default:register(t.ApplyDevStoreSeeAllCategoryFilterAction)
+	t.NavigateAction = Module177
+	TypeRegistryModule.default:register(t.NavigateAction)
 	local Module178 = {}
 	Module178.__index = Module178
 
 	function Module178.new(p1)
 		-- upvalues: Module178 (copy)
 		return (setmetatable({
-			selected_category_id = if p1 == nil or p1.selected_category_id == nil then nil else p1.selected_category_id
+			destination = if p1 == nil or p1.destination == nil then nil else p1.destination,
+			source = if p1 == nil or p1.source == nil then nil else p1.source
 		}, Module178))
 	end
 
@@ -20857,10 +20714,15 @@ do
 		local Buf = buffer.create(0)
 		local Count = 0
 		
-		if self.selected_category_id ~= nil then
-			local EncodeResult = self.selected_category_id:encode()
+		if self.destination ~= nil then
+			local EncodeResult = self.destination:encode()
 			local WriteTagResult, WriteTagResult2 = ProtoModule.writeTag(Buf, Count, 1, ProtoModule.wireTypes.lengthDelimited)
 			Buf, Count = ProtoModule.writeBuffer(WriteTagResult, WriteTagResult2, EncodeResult, buffer.len(EncodeResult))
+		end
+		if self.source ~= nil then
+			local EncodeResult = self.source:encode()
+			local WriteTagResult1, WriteTagResult2_1 = ProtoModule.writeTag(Buf, Count, 2, ProtoModule.wireTypes.lengthDelimited)
+			Buf, Count = ProtoModule.writeBuffer(WriteTagResult1, WriteTagResult2_1, EncodeResult, buffer.len(EncodeResult))
 		end
 		local Buf1 = buffer.create(Count)
 		buffer.copy(Buf1, 0, Buf, 0, Count)
@@ -20874,26 +20736,30 @@ do
 		local v120 = 0
 		while v120 < buffer.len(Buf) do
 			local Tag, Tag2
-			Tag, Tag2, v4256 = ProtoModule.readTag(Buf, v120)
+			Tag, Tag2, v4234 = ProtoModule.readTag(Buf, v120)
 			
 			if Tag2 == ProtoModule.wireTypes.varint then
 				local _
-				_, v4256 = ProtoModule.readVarInt(Buf, v120)
+				_, v4234 = ProtoModule.readVarInt(Buf, v120)
 			elseif Tag2 == ProtoModule.wireTypes.lengthDelimited then
 				if Tag == 1 then
 					local Buffer1
-					Buffer1, v4256 = ProtoModule.readBuffer(Buf, v120)
-					NewModule.selected_category_id = PropTypesModule.StringProp.decode(Buffer1)
+					Buffer1, v4234 = ProtoModule.readBuffer(Buf, v120)
+					NewModule.destination = PropTypesModule.StringProp.decode(Buffer1)
+				elseif Tag == 2 then
+					local Buffer2
+					Buffer2, v4234 = ProtoModule.readBuffer(Buf, v120)
+					NewModule.source = PropTypesModule.StringProp.decode(Buffer2)
 				else
 					local VarInt, VarInt2 = ProtoModule.readVarInt(Buf, v120)
 					v120 = VarInt2 + VarInt
 				end
 			elseif Tag2 == ProtoModule.wireTypes.i32 then
 				local _
-				_, v4256 = ProtoModule.readFixed32(Buf, v120)
+				_, v4234 = ProtoModule.readFixed32(Buf, v120)
 			elseif Tag2 == ProtoModule.wireTypes.i64 then
 				local _
-				_, v4256 = ProtoModule.readFixed64(Buf, v120)
+				_, v4234 = ProtoModule.readFixed64(Buf, v120)
 			else
 				error("Unsupported wire type: " .. Tag2)
 			end
@@ -20904,8 +20770,11 @@ do
 	function Module178:jsonEncode()
 		local t = {}
 		
-		if self.selected_category_id ~= nil then
-			t.selectedCategoryId = self.selected_category_id:jsonEncode()
+		if self.destination ~= nil then
+			t.destination = self.destination:jsonEncode()
+		end
+		if self.source ~= nil then
+			t.source = self.source:jsonEncode()
 		end
 		return t
 	end
@@ -20914,21 +20783,21 @@ do
 		-- upvalues: Module178 (copy), PropTypesModule (copy)
 		local NewModule = Module178.new()
 		
-		if self.selected_category_id ~= nil then
-			NewModule.selected_category_id = PropTypesModule.StringProp.jsonDecode(self.selected_category_id)
+		if self.destination ~= nil then
+			NewModule.destination = PropTypesModule.StringProp.jsonDecode(self.destination)
 		end
-		if self.selectedCategoryId ~= nil then
-			NewModule.selected_category_id = PropTypesModule.StringProp.jsonDecode(self.selectedCategoryId)
+		if self.source ~= nil then
+			NewModule.source = PropTypesModule.StringProp.jsonDecode(self.source)
 		end
 		return NewModule
 	end
 
 	Module178.descriptor = {
-		name = "ApplyDevStoreSeeAllCategoryFilterAction_Params",
+		name = "NavigateAction_Params",
 		fullName = "roblox.apppageplatform.shared.v1beta1.Params"
 	}
-	t.ApplyDevStoreSeeAllCategoryFilterAction_Params = Module178
-	TypeRegistryModule.default:register(t.ApplyDevStoreSeeAllCategoryFilterAction_Params)
+	t.NavigateAction_Params = Module178
+	TypeRegistryModule.default:register(t.NavigateAction_Params)
 	local Module179 = {}
 	Module179.__index = Module179
 
@@ -20966,32 +20835,32 @@ do
 		local v121 = 0
 		while v121 < buffer.len(Buf) do
 			local Tag, Tag2
-			Tag, Tag2, v4275 = ProtoModule.readTag(Buf, v121)
+			Tag, Tag2, v4254 = ProtoModule.readTag(Buf, v121)
 			
 			if Tag2 == ProtoModule.wireTypes.varint then
 				if Tag == 1 then
 					local VarIntI32
-					VarIntI32, v4275 = ProtoModule.readVarIntI32(Buf, v121)
+					VarIntI32, v4254 = ProtoModule.readVarIntI32(Buf, v121)
 					NewModule.action_type = t.ActionType.fromNumber(VarIntI32) or VarIntI32
 				else
 					local _
-					_, v4275 = ProtoModule.readVarInt(Buf, v121)
+					_, v4254 = ProtoModule.readVarInt(Buf, v121)
 				end
 			elseif Tag2 == ProtoModule.wireTypes.lengthDelimited then
 				if Tag == 2 then
 					local Buffer1
-					Buffer1, v4275 = ProtoModule.readBuffer(Buf, v121)
-					NewModule.action_params = t.SetPageScopeFieldAction_Params.decode(Buffer1)
+					Buffer1, v4254 = ProtoModule.readBuffer(Buf, v121)
+					NewModule.action_params = t.DownloadAppAction_Params.decode(Buffer1)
 				else
 					local VarInt, VarInt2 = ProtoModule.readVarInt(Buf, v121)
 					v121 = VarInt2 + VarInt
 				end
 			elseif Tag2 == ProtoModule.wireTypes.i32 then
 				local _
-				_, v4275 = ProtoModule.readFixed32(Buf, v121)
+				_, v4254 = ProtoModule.readFixed32(Buf, v121)
 			elseif Tag2 == ProtoModule.wireTypes.i64 then
 				local _
-				_, v4275 = ProtoModule.readFixed64(Buf, v121)
+				_, v4254 = ProtoModule.readFixed64(Buf, v121)
 			else
 				error("Unsupported wire type: " .. Tag2)
 			end
@@ -21023,31 +20892,30 @@ do
 			NewModule.action_type = (if typeof(self.actionType) == "number" then t.ActionType.fromNumber(self.actionType) else t.ActionType.fromName(self.actionType)) or self.actionType
 		end
 		if self.action_params ~= nil then
-			NewModule.action_params = t.SetPageScopeFieldAction_Params.jsonDecode(self.action_params)
+			NewModule.action_params = t.DownloadAppAction_Params.jsonDecode(self.action_params)
 		end
 		if self.actionParams ~= nil then
-			NewModule.action_params = t.SetPageScopeFieldAction_Params.jsonDecode(self.actionParams)
+			NewModule.action_params = t.DownloadAppAction_Params.jsonDecode(self.actionParams)
 		end
 		return NewModule
 	end
 
 	Module179.descriptor = {
-		name = "SetPageScopeFieldAction",
-		fullName = "roblox.apppageplatform.shared.v1beta1.SetPageScopeFieldAction"
+		name = "DownloadAppAction",
+		fullName = "roblox.apppageplatform.shared.v1beta1.DownloadAppAction"
 	}
-	t.SetPageScopeFieldAction = Module179
+	t.DownloadAppAction = Module179
 end
 do
-	TypeRegistryModule.default:register(t.SetPageScopeFieldAction)
+	TypeRegistryModule.default:register(t.DownloadAppAction)
 	local Module180 = {}
 	Module180.__index = Module180
 
 	function Module180.new(p1)
 		-- upvalues: Module180 (copy)
 		return (setmetatable({
-			field_name = if p1 == nil or p1.field_name == nil then nil else p1.field_name,
-			value = if p1 == nil or p1.value == nil then nil else p1.value,
-			set_if_unset = if p1 == nil or p1.set_if_unset == nil then nil else p1.set_if_unset
+			source = if p1 == nil or p1.source == nil then nil else p1.source,
+			download_type = if p1 == nil or p1.download_type == nil then nil else p1.download_type
 		}, Module180))
 	end
 
@@ -21056,20 +20924,15 @@ do
 		local Buf = buffer.create(0)
 		local Count = 0
 		
-		if self.field_name ~= nil then
-			local EncodeResult = self.field_name:encode()
+		if self.source ~= nil then
+			local EncodeResult = self.source:encode()
 			local WriteTagResult, WriteTagResult2 = ProtoModule.writeTag(Buf, Count, 1, ProtoModule.wireTypes.lengthDelimited)
 			Buf, Count = ProtoModule.writeBuffer(WriteTagResult, WriteTagResult2, EncodeResult, buffer.len(EncodeResult))
 		end
-		if self.value ~= nil then
-			local EncodeResult = self.value:encode()
+		if self.download_type ~= nil then
+			local EncodeResult = self.download_type:encode()
 			local WriteTagResult1, WriteTagResult2_1 = ProtoModule.writeTag(Buf, Count, 2, ProtoModule.wireTypes.lengthDelimited)
 			Buf, Count = ProtoModule.writeBuffer(WriteTagResult1, WriteTagResult2_1, EncodeResult, buffer.len(EncodeResult))
-		end
-		if self.set_if_unset ~= nil then
-			local EncodeResult = self.set_if_unset:encode()
-			local WriteTagResult3, WriteTagResult2_2 = ProtoModule.writeTag(Buf, Count, 3, ProtoModule.wireTypes.lengthDelimited)
-			Buf, Count = ProtoModule.writeBuffer(WriteTagResult3, WriteTagResult2_2, EncodeResult, buffer.len(EncodeResult))
 		end
 		local Buf1 = buffer.create(Count)
 		buffer.copy(Buf1, 0, Buf, 0, Count)
@@ -21083,34 +20946,30 @@ do
 		local v121 = 0
 		while v121 < buffer.len(Buf) do
 			local Tag, Tag2
-			Tag, Tag2, v4299 = ProtoModule.readTag(Buf, v121)
+			Tag, Tag2, v4275 = ProtoModule.readTag(Buf, v121)
 			
 			if Tag2 == ProtoModule.wireTypes.varint then
 				local _
-				_, v4299 = ProtoModule.readVarInt(Buf, v121)
+				_, v4275 = ProtoModule.readVarInt(Buf, v121)
 			elseif Tag2 == ProtoModule.wireTypes.lengthDelimited then
 				if Tag == 1 then
 					local Buffer1
-					Buffer1, v4299 = ProtoModule.readBuffer(Buf, v121)
-					NewModule.field_name = PropTypesModule.StringProp.decode(Buffer1)
+					Buffer1, v4275 = ProtoModule.readBuffer(Buf, v121)
+					NewModule.source = PropTypesModule.StringProp.decode(Buffer1)
 				elseif Tag == 2 then
 					local Buffer2
-					Buffer2, v4299 = ProtoModule.readBuffer(Buf, v121)
-					NewModule.value = PropTypesModule.StringProp.decode(Buffer2)
-				elseif Tag == 3 then
-					local Buffer3
-					Buffer3, v4299 = ProtoModule.readBuffer(Buf, v121)
-					NewModule.set_if_unset = PropTypesModule.BoolProp.decode(Buffer3)
+					Buffer2, v4275 = ProtoModule.readBuffer(Buf, v121)
+					NewModule.download_type = PropTypesModule.StringProp.decode(Buffer2)
 				else
 					local VarInt, VarInt2 = ProtoModule.readVarInt(Buf, v121)
 					v121 = VarInt2 + VarInt
 				end
 			elseif Tag2 == ProtoModule.wireTypes.i32 then
 				local _
-				_, v4299 = ProtoModule.readFixed32(Buf, v121)
+				_, v4275 = ProtoModule.readFixed32(Buf, v121)
 			elseif Tag2 == ProtoModule.wireTypes.i64 then
 				local _
-				_, v4299 = ProtoModule.readFixed64(Buf, v121)
+				_, v4275 = ProtoModule.readFixed64(Buf, v121)
 			else
 				error("Unsupported wire type: " .. Tag2)
 			end
@@ -21121,14 +20980,11 @@ do
 	function Module180:jsonEncode()
 		local t = {}
 		
-		if self.field_name ~= nil then
-			t.fieldName = self.field_name:jsonEncode()
+		if self.source ~= nil then
+			t.source = self.source:jsonEncode()
 		end
-		if self.value ~= nil then
-			t.value = self.value:jsonEncode()
-		end
-		if self.set_if_unset ~= nil then
-			t.setIfUnset = self.set_if_unset:jsonEncode()
+		if self.download_type ~= nil then
+			t.downloadType = self.download_type:jsonEncode()
 		end
 		return t
 	end
@@ -21137,30 +20993,24 @@ do
 		-- upvalues: Module180 (copy), PropTypesModule (copy)
 		local NewModule = Module180.new()
 		
-		if self.field_name ~= nil then
-			NewModule.field_name = PropTypesModule.StringProp.jsonDecode(self.field_name)
+		if self.source ~= nil then
+			NewModule.source = PropTypesModule.StringProp.jsonDecode(self.source)
 		end
-		if self.fieldName ~= nil then
-			NewModule.field_name = PropTypesModule.StringProp.jsonDecode(self.fieldName)
+		if self.download_type ~= nil then
+			NewModule.download_type = PropTypesModule.StringProp.jsonDecode(self.download_type)
 		end
-		if self.value ~= nil then
-			NewModule.value = PropTypesModule.StringProp.jsonDecode(self.value)
-		end
-		if self.set_if_unset ~= nil then
-			NewModule.set_if_unset = PropTypesModule.BoolProp.jsonDecode(self.set_if_unset)
-		end
-		if self.setIfUnset ~= nil then
-			NewModule.set_if_unset = PropTypesModule.BoolProp.jsonDecode(self.setIfUnset)
+		if self.downloadType ~= nil then
+			NewModule.download_type = PropTypesModule.StringProp.jsonDecode(self.downloadType)
 		end
 		return NewModule
 	end
 
 	Module180.descriptor = {
-		name = "SetPageScopeFieldAction_Params",
+		name = "DownloadAppAction_Params",
 		fullName = "roblox.apppageplatform.shared.v1beta1.Params"
 	}
-	t.SetPageScopeFieldAction_Params = Module180
-	TypeRegistryModule.default:register(t.SetPageScopeFieldAction_Params)
+	t.DownloadAppAction_Params = Module180
+	TypeRegistryModule.default:register(t.DownloadAppAction_Params)
 	local Module181 = {}
 	Module181.__index = Module181
 
@@ -21198,32 +21048,32 @@ do
 		local v122 = 0
 		while v122 < buffer.len(Buf) do
 			local Tag, Tag2
-			Tag, Tag2, v4320 = ProtoModule.readTag(Buf, v122)
+			Tag, Tag2, v4295 = ProtoModule.readTag(Buf, v122)
 			
 			if Tag2 == ProtoModule.wireTypes.varint then
 				if Tag == 1 then
 					local VarIntI32
-					VarIntI32, v4320 = ProtoModule.readVarIntI32(Buf, v122)
+					VarIntI32, v4295 = ProtoModule.readVarIntI32(Buf, v122)
 					NewModule.action_type = t.ActionType.fromNumber(VarIntI32) or VarIntI32
 				else
 					local _
-					_, v4320 = ProtoModule.readVarInt(Buf, v122)
+					_, v4295 = ProtoModule.readVarInt(Buf, v122)
 				end
 			elseif Tag2 == ProtoModule.wireTypes.lengthDelimited then
 				if Tag == 2 then
 					local Buffer1
-					Buffer1, v4320 = ProtoModule.readBuffer(Buf, v122)
-					NewModule.action_params = t.SetGameTileNotInterestedAction_Params.decode(Buffer1)
+					Buffer1, v4295 = ProtoModule.readBuffer(Buf, v122)
+					NewModule.action_params = t.ActionSequenceAction_Params.decode(Buffer1)
 				else
 					local VarInt, VarInt2 = ProtoModule.readVarInt(Buf, v122)
 					v122 = VarInt2 + VarInt
 				end
 			elseif Tag2 == ProtoModule.wireTypes.i32 then
 				local _
-				_, v4320 = ProtoModule.readFixed32(Buf, v122)
+				_, v4295 = ProtoModule.readFixed32(Buf, v122)
 			elseif Tag2 == ProtoModule.wireTypes.i64 then
 				local _
-				_, v4320 = ProtoModule.readFixed64(Buf, v122)
+				_, v4295 = ProtoModule.readFixed64(Buf, v122)
 			else
 				error("Unsupported wire type: " .. Tag2)
 			end
@@ -21255,30 +21105,27 @@ do
 			NewModule.action_type = (if typeof(self.actionType) == "number" then t.ActionType.fromNumber(self.actionType) else t.ActionType.fromName(self.actionType)) or self.actionType
 		end
 		if self.action_params ~= nil then
-			NewModule.action_params = t.SetGameTileNotInterestedAction_Params.jsonDecode(self.action_params)
+			NewModule.action_params = t.ActionSequenceAction_Params.jsonDecode(self.action_params)
 		end
 		if self.actionParams ~= nil then
-			NewModule.action_params = t.SetGameTileNotInterestedAction_Params.jsonDecode(self.actionParams)
+			NewModule.action_params = t.ActionSequenceAction_Params.jsonDecode(self.actionParams)
 		end
 		return NewModule
 	end
 
 	Module181.descriptor = {
-		name = "SetGameTileNotInterestedAction",
-		fullName = "roblox.apppageplatform.shared.v1beta1.SetGameTileNotInterestedAction"
+		name = "ActionSequenceAction",
+		fullName = "roblox.apppageplatform.shared.v1beta1.ActionSequenceAction"
 	}
-	t.SetGameTileNotInterestedAction = Module181
-	TypeRegistryModule.default:register(t.SetGameTileNotInterestedAction)
+	t.ActionSequenceAction = Module181
+	TypeRegistryModule.default:register(t.ActionSequenceAction)
 	local Module182 = {}
 	Module182.__index = Module182
 
 	function Module182.new(p1)
 		-- upvalues: Module182 (copy)
 		return (setmetatable({
-			universe_id = if p1 == nil or p1.universe_id == nil then nil else p1.universe_id,
-			place_id = if p1 == nil or p1.place_id == nil then nil else p1.place_id,
-			collection_id = if p1 == nil or p1.collection_id == nil then nil else p1.collection_id,
-			is_sponsored = if p1 == nil or p1.is_sponsored == nil then nil else p1.is_sponsored
+			actions = if p1 == nil or p1.actions == nil then {} else p1.actions
 		}, Module182))
 	end
 
@@ -21287,25 +21134,12 @@ do
 		local Buf = buffer.create(0)
 		local Count = 0
 		
-		if self.universe_id ~= nil then
-			local EncodeResult = self.universe_id:encode()
-			local WriteTagResult, WriteTagResult2 = ProtoModule.writeTag(Buf, Count, 1, ProtoModule.wireTypes.lengthDelimited)
-			Buf, Count = ProtoModule.writeBuffer(WriteTagResult, WriteTagResult2, EncodeResult, buffer.len(EncodeResult))
-		end
-		if self.place_id ~= nil then
-			local EncodeResult = self.place_id:encode()
-			local WriteTagResult1, WriteTagResult2_1 = ProtoModule.writeTag(Buf, Count, 2, ProtoModule.wireTypes.lengthDelimited)
-			Buf, Count = ProtoModule.writeBuffer(WriteTagResult1, WriteTagResult2_1, EncodeResult, buffer.len(EncodeResult))
-		end
-		if self.collection_id ~= nil then
-			local EncodeResult = self.collection_id:encode()
-			local WriteTagResult3, WriteTagResult2_2 = ProtoModule.writeTag(Buf, Count, 3, ProtoModule.wireTypes.lengthDelimited)
-			Buf, Count = ProtoModule.writeBuffer(WriteTagResult3, WriteTagResult2_2, EncodeResult, buffer.len(EncodeResult))
-		end
-		if self.is_sponsored ~= nil then
-			local EncodeResult = self.is_sponsored:encode()
-			local WriteTagResult4, WriteTagResult2_3 = ProtoModule.writeTag(Buf, Count, 4, ProtoModule.wireTypes.lengthDelimited)
-			Buf, Count = ProtoModule.writeBuffer(WriteTagResult4, WriteTagResult2_3, EncodeResult, buffer.len(EncodeResult))
+		if self.actions ~= nil and #self.actions > 0 then
+			for _, action in self.actions do
+				local EncodeResult = action:encode()
+				local WriteTagResult, WriteTagResult2 = ProtoModule.writeTag(Buf, Count, 1, ProtoModule.wireTypes.lengthDelimited)
+				Buf, Count = ProtoModule.writeBuffer(WriteTagResult, WriteTagResult2, EncodeResult, buffer.len(EncodeResult))
+			end
 		end
 		local Buf1 = buffer.create(Count)
 		buffer.copy(Buf1, 0, Buf, 0, Count)
@@ -21314,43 +21148,31 @@ do
 	end
 
 	function Module182.decode(Buf)
-		-- upvalues: Module182 (copy), ProtoModule (copy), PropTypesModule (copy)
+		-- upvalues: Module182 (copy), ProtoModule (copy), t (copy)
 		local NewModule = Module182.new()
 		local v123 = 0
 		while v123 < buffer.len(Buf) do
 			local Tag, Tag2
-			Tag, Tag2, v4347 = ProtoModule.readTag(Buf, v123)
+			Tag, Tag2, v4313 = ProtoModule.readTag(Buf, v123)
 			
 			if Tag2 == ProtoModule.wireTypes.varint then
 				local _
-				_, v4347 = ProtoModule.readVarInt(Buf, v123)
+				_, v4313 = ProtoModule.readVarInt(Buf, v123)
 			elseif Tag2 == ProtoModule.wireTypes.lengthDelimited then
 				if Tag == 1 then
 					local Buffer1
-					Buffer1, v4347 = ProtoModule.readBuffer(Buf, v123)
-					NewModule.universe_id = PropTypesModule.StringProp.decode(Buffer1)
-				elseif Tag == 2 then
-					local Buffer2
-					Buffer2, v4347 = ProtoModule.readBuffer(Buf, v123)
-					NewModule.place_id = PropTypesModule.StringProp.decode(Buffer2)
-				elseif Tag == 3 then
-					local Buffer3
-					Buffer3, v4347 = ProtoModule.readBuffer(Buf, v123)
-					NewModule.collection_id = PropTypesModule.StringProp.decode(Buffer3)
-				elseif Tag == 4 then
-					local Buffer4
-					Buffer4, v4347 = ProtoModule.readBuffer(Buf, v123)
-					NewModule.is_sponsored = PropTypesModule.BoolProp.decode(Buffer4)
+					Buffer1, v4313 = ProtoModule.readBuffer(Buf, v123)
+					table.insert(NewModule.actions, t.ActionProp.decode(Buffer1))
 				else
 					local VarInt, VarInt2 = ProtoModule.readVarInt(Buf, v123)
 					v123 = VarInt2 + VarInt
 				end
 			elseif Tag2 == ProtoModule.wireTypes.i32 then
 				local _
-				_, v4347 = ProtoModule.readFixed32(Buf, v123)
+				_, v4313 = ProtoModule.readFixed32(Buf, v123)
 			elseif Tag2 == ProtoModule.wireTypes.i64 then
 				local _
-				_, v4347 = ProtoModule.readFixed64(Buf, v123)
+				_, v4313 = ProtoModule.readFixed64(Buf, v123)
 			else
 				error("Unsupported wire type: " .. Tag2)
 			end
@@ -21361,60 +21183,40 @@ do
 	function Module182:jsonEncode()
 		local t = {}
 		
-		if self.universe_id ~= nil then
-			t.universeId = self.universe_id:jsonEncode()
-		end
-		if self.place_id ~= nil then
-			t.placeId = self.place_id:jsonEncode()
-		end
-		if self.collection_id ~= nil then
-			t.collectionId = self.collection_id:jsonEncode()
-		end
-		if self.is_sponsored ~= nil then
-			t.isSponsored = self.is_sponsored:jsonEncode()
+		if self.actions ~= nil and #self.actions > 0 then
+			local Actions = {}
+			
+			for _, action in self.actions do
+				table.insert(Actions, action:jsonEncode())
+			end
+			t.actions = Actions
 		end
 		return t
 	end
 
 	function Module182:jsonDecode()
-		-- upvalues: Module182 (copy), PropTypesModule (copy)
+		-- upvalues: Module182 (copy), t (copy)
 		local NewModule = Module182.new()
 		
-		if self.universe_id ~= nil then
-			NewModule.universe_id = PropTypesModule.StringProp.jsonDecode(self.universe_id)
-		end
-		if self.universeId ~= nil then
-			NewModule.universe_id = PropTypesModule.StringProp.jsonDecode(self.universeId)
-		end
-		if self.place_id ~= nil then
-			NewModule.place_id = PropTypesModule.StringProp.jsonDecode(self.place_id)
-		end
-		if self.placeId ~= nil then
-			NewModule.place_id = PropTypesModule.StringProp.jsonDecode(self.placeId)
-		end
-		if self.collection_id ~= nil then
-			NewModule.collection_id = PropTypesModule.StringProp.jsonDecode(self.collection_id)
-		end
-		if self.collectionId ~= nil then
-			NewModule.collection_id = PropTypesModule.StringProp.jsonDecode(self.collectionId)
-		end
-		if self.is_sponsored ~= nil then
-			NewModule.is_sponsored = PropTypesModule.BoolProp.jsonDecode(self.is_sponsored)
-		end
-		if self.isSponsored ~= nil then
-			NewModule.is_sponsored = PropTypesModule.BoolProp.jsonDecode(self.isSponsored)
+		if self.actions ~= nil then
+			local Actions = {}
+			
+			for _, action in self.actions do
+				table.insert(Actions, t.ActionProp.jsonDecode(action))
+			end
+			NewModule.actions = Actions
 		end
 		return NewModule
 	end
 
 	Module182.descriptor = {
-		name = "SetGameTileNotInterestedAction_Params",
+		name = "ActionSequenceAction_Params",
 		fullName = "roblox.apppageplatform.shared.v1beta1.Params"
 	}
-	t.SetGameTileNotInterestedAction_Params = Module182
+	t.ActionSequenceAction_Params = Module182
 end
 do
-	TypeRegistryModule.default:register(t.SetGameTileNotInterestedAction_Params)
+	TypeRegistryModule.default:register(t.ActionSequenceAction_Params)
 	local Module183 = {}
 	Module183.__index = Module183
 
@@ -21449,35 +21251,35 @@ do
 	function Module183.decode(Buf)
 		-- upvalues: Module183 (copy), ProtoModule (copy), t (copy)
 		local NewModule = Module183.new()
-		local v123 = 0
-		while v123 < buffer.len(Buf) do
+		local v124 = 0
+		while v124 < buffer.len(Buf) do
 			local Tag, Tag2
-			Tag, Tag2, v4369 = ProtoModule.readTag(Buf, v123)
+			Tag, Tag2, v4334 = ProtoModule.readTag(Buf, v124)
 			
 			if Tag2 == ProtoModule.wireTypes.varint then
 				if Tag == 1 then
 					local VarIntI32
-					VarIntI32, v4369 = ProtoModule.readVarIntI32(Buf, v123)
+					VarIntI32, v4334 = ProtoModule.readVarIntI32(Buf, v124)
 					NewModule.action_type = t.ActionType.fromNumber(VarIntI32) or VarIntI32
 				else
 					local _
-					_, v4369 = ProtoModule.readVarInt(Buf, v123)
+					_, v4334 = ProtoModule.readVarInt(Buf, v124)
 				end
 			elseif Tag2 == ProtoModule.wireTypes.lengthDelimited then
 				if Tag == 2 then
 					local Buffer1
-					Buffer1, v4369 = ProtoModule.readBuffer(Buf, v123)
-					NewModule.action_params = t.UndoGameTileNotInterestedAction_Params.decode(Buffer1)
+					Buffer1, v4334 = ProtoModule.readBuffer(Buf, v124)
+					NewModule.action_params = t.RefreshFeedEntryFromApiAction_Params.decode(Buffer1)
 				else
-					local VarInt, VarInt2 = ProtoModule.readVarInt(Buf, v123)
-					v123 = VarInt2 + VarInt
+					local VarInt, VarInt2 = ProtoModule.readVarInt(Buf, v124)
+					v124 = VarInt2 + VarInt
 				end
 			elseif Tag2 == ProtoModule.wireTypes.i32 then
 				local _
-				_, v4369 = ProtoModule.readFixed32(Buf, v123)
+				_, v4334 = ProtoModule.readFixed32(Buf, v124)
 			elseif Tag2 == ProtoModule.wireTypes.i64 then
 				local _
-				_, v4369 = ProtoModule.readFixed64(Buf, v123)
+				_, v4334 = ProtoModule.readFixed64(Buf, v124)
 			else
 				error("Unsupported wire type: " .. Tag2)
 			end
@@ -21509,28 +21311,29 @@ do
 			NewModule.action_type = (if typeof(self.actionType) == "number" then t.ActionType.fromNumber(self.actionType) else t.ActionType.fromName(self.actionType)) or self.actionType
 		end
 		if self.action_params ~= nil then
-			NewModule.action_params = t.UndoGameTileNotInterestedAction_Params.jsonDecode(self.action_params)
+			NewModule.action_params = t.RefreshFeedEntryFromApiAction_Params.jsonDecode(self.action_params)
 		end
 		if self.actionParams ~= nil then
-			NewModule.action_params = t.UndoGameTileNotInterestedAction_Params.jsonDecode(self.actionParams)
+			NewModule.action_params = t.RefreshFeedEntryFromApiAction_Params.jsonDecode(self.actionParams)
 		end
 		return NewModule
 	end
 
 	Module183.descriptor = {
-		name = "UndoGameTileNotInterestedAction",
-		fullName = "roblox.apppageplatform.shared.v1beta1.UndoGameTileNotInterestedAction"
+		name = "RefreshFeedEntryFromApiAction",
+		fullName = "roblox.apppageplatform.shared.v1beta1.RefreshFeedEntryFromApiAction"
 	}
-	t.UndoGameTileNotInterestedAction = Module183
-	TypeRegistryModule.default:register(t.UndoGameTileNotInterestedAction)
+	t.RefreshFeedEntryFromApiAction = Module183
+	TypeRegistryModule.default:register(t.RefreshFeedEntryFromApiAction)
 	local Module184 = {}
 	Module184.__index = Module184
 
 	function Module184.new(p1)
 		-- upvalues: Module184 (copy)
 		return (setmetatable({
-			universe_id = if p1 == nil or p1.universe_id == nil then nil else p1.universe_id,
-			collection_id = if p1 == nil or p1.collection_id == nil then nil else p1.collection_id
+			page_entry_identifier = if p1 == nil or p1.page_entry_identifier == nil then nil else p1.page_entry_identifier,
+			feed_entry_identifier = if p1 == nil or p1.feed_entry_identifier == nil then nil else p1.feed_entry_identifier,
+			selected_option_ids = if p1 == nil or p1.selected_option_ids == nil then nil else p1.selected_option_ids
 		}, Module184))
 	end
 
@@ -21539,15 +21342,20 @@ do
 		local Buf = buffer.create(0)
 		local Count = 0
 		
-		if self.universe_id ~= nil then
-			local EncodeResult = self.universe_id:encode()
+		if self.page_entry_identifier ~= nil then
+			local EncodeResult = self.page_entry_identifier:encode()
 			local WriteTagResult, WriteTagResult2 = ProtoModule.writeTag(Buf, Count, 1, ProtoModule.wireTypes.lengthDelimited)
 			Buf, Count = ProtoModule.writeBuffer(WriteTagResult, WriteTagResult2, EncodeResult, buffer.len(EncodeResult))
 		end
-		if self.collection_id ~= nil then
-			local EncodeResult = self.collection_id:encode()
+		if self.feed_entry_identifier ~= nil then
+			local EncodeResult = self.feed_entry_identifier:encode()
 			local WriteTagResult1, WriteTagResult2_1 = ProtoModule.writeTag(Buf, Count, 2, ProtoModule.wireTypes.lengthDelimited)
 			Buf, Count = ProtoModule.writeBuffer(WriteTagResult1, WriteTagResult2_1, EncodeResult, buffer.len(EncodeResult))
+		end
+		if self.selected_option_ids ~= nil then
+			local EncodeResult = self.selected_option_ids:encode()
+			local WriteTagResult3, WriteTagResult2_2 = ProtoModule.writeTag(Buf, Count, 3, ProtoModule.wireTypes.lengthDelimited)
+			Buf, Count = ProtoModule.writeBuffer(WriteTagResult3, WriteTagResult2_2, EncodeResult, buffer.len(EncodeResult))
 		end
 		local Buf1 = buffer.create(Count)
 		buffer.copy(Buf1, 0, Buf, 0, Count)
@@ -21558,33 +21366,37 @@ do
 	function Module184.decode(Buf)
 		-- upvalues: Module184 (copy), ProtoModule (copy), PropTypesModule (copy)
 		local NewModule = Module184.new()
-		local v124 = 0
-		while v124 < buffer.len(Buf) do
+		local v125 = 0
+		while v125 < buffer.len(Buf) do
 			local Tag, Tag2
-			Tag, Tag2, v4390 = ProtoModule.readTag(Buf, v124)
+			Tag, Tag2, v4358 = ProtoModule.readTag(Buf, v125)
 			
 			if Tag2 == ProtoModule.wireTypes.varint then
 				local _
-				_, v4390 = ProtoModule.readVarInt(Buf, v124)
+				_, v4358 = ProtoModule.readVarInt(Buf, v125)
 			elseif Tag2 == ProtoModule.wireTypes.lengthDelimited then
 				if Tag == 1 then
 					local Buffer1
-					Buffer1, v4390 = ProtoModule.readBuffer(Buf, v124)
-					NewModule.universe_id = PropTypesModule.StringProp.decode(Buffer1)
+					Buffer1, v4358 = ProtoModule.readBuffer(Buf, v125)
+					NewModule.page_entry_identifier = PropTypesModule.StringProp.decode(Buffer1)
 				elseif Tag == 2 then
 					local Buffer2
-					Buffer2, v4390 = ProtoModule.readBuffer(Buf, v124)
-					NewModule.collection_id = PropTypesModule.StringProp.decode(Buffer2)
+					Buffer2, v4358 = ProtoModule.readBuffer(Buf, v125)
+					NewModule.feed_entry_identifier = PropTypesModule.StringProp.decode(Buffer2)
+				elseif Tag == 3 then
+					local Buffer3
+					Buffer3, v4358 = ProtoModule.readBuffer(Buf, v125)
+					NewModule.selected_option_ids = PropTypesModule.StringArrayProp.decode(Buffer3)
 				else
-					local VarInt, VarInt2 = ProtoModule.readVarInt(Buf, v124)
-					v124 = VarInt2 + VarInt
+					local VarInt, VarInt2 = ProtoModule.readVarInt(Buf, v125)
+					v125 = VarInt2 + VarInt
 				end
 			elseif Tag2 == ProtoModule.wireTypes.i32 then
 				local _
-				_, v4390 = ProtoModule.readFixed32(Buf, v124)
+				_, v4358 = ProtoModule.readFixed32(Buf, v125)
 			elseif Tag2 == ProtoModule.wireTypes.i64 then
 				local _
-				_, v4390 = ProtoModule.readFixed64(Buf, v124)
+				_, v4358 = ProtoModule.readFixed64(Buf, v125)
 			else
 				error("Unsupported wire type: " .. Tag2)
 			end
@@ -21595,11 +21407,14 @@ do
 	function Module184:jsonEncode()
 		local t = {}
 		
-		if self.universe_id ~= nil then
-			t.universeId = self.universe_id:jsonEncode()
+		if self.page_entry_identifier ~= nil then
+			t.pageEntryIdentifier = self.page_entry_identifier:jsonEncode()
 		end
-		if self.collection_id ~= nil then
-			t.collectionId = self.collection_id:jsonEncode()
+		if self.feed_entry_identifier ~= nil then
+			t.feedEntryIdentifier = self.feed_entry_identifier:jsonEncode()
+		end
+		if self.selected_option_ids ~= nil then
+			t.selectedOptionIds = self.selected_option_ids:jsonEncode()
 		end
 		return t
 	end
@@ -21608,27 +21423,33 @@ do
 		-- upvalues: Module184 (copy), PropTypesModule (copy)
 		local NewModule = Module184.new()
 		
-		if self.universe_id ~= nil then
-			NewModule.universe_id = PropTypesModule.StringProp.jsonDecode(self.universe_id)
+		if self.page_entry_identifier ~= nil then
+			NewModule.page_entry_identifier = PropTypesModule.StringProp.jsonDecode(self.page_entry_identifier)
 		end
-		if self.universeId ~= nil then
-			NewModule.universe_id = PropTypesModule.StringProp.jsonDecode(self.universeId)
+		if self.pageEntryIdentifier ~= nil then
+			NewModule.page_entry_identifier = PropTypesModule.StringProp.jsonDecode(self.pageEntryIdentifier)
 		end
-		if self.collection_id ~= nil then
-			NewModule.collection_id = PropTypesModule.StringProp.jsonDecode(self.collection_id)
+		if self.feed_entry_identifier ~= nil then
+			NewModule.feed_entry_identifier = PropTypesModule.StringProp.jsonDecode(self.feed_entry_identifier)
 		end
-		if self.collectionId ~= nil then
-			NewModule.collection_id = PropTypesModule.StringProp.jsonDecode(self.collectionId)
+		if self.feedEntryIdentifier ~= nil then
+			NewModule.feed_entry_identifier = PropTypesModule.StringProp.jsonDecode(self.feedEntryIdentifier)
+		end
+		if self.selected_option_ids ~= nil then
+			NewModule.selected_option_ids = PropTypesModule.StringArrayProp.jsonDecode(self.selected_option_ids)
+		end
+		if self.selectedOptionIds ~= nil then
+			NewModule.selected_option_ids = PropTypesModule.StringArrayProp.jsonDecode(self.selectedOptionIds)
 		end
 		return NewModule
 	end
 
 	Module184.descriptor = {
-		name = "UndoGameTileNotInterestedAction_Params",
+		name = "RefreshFeedEntryFromApiAction_Params",
 		fullName = "roblox.apppageplatform.shared.v1beta1.Params"
 	}
-	t.UndoGameTileNotInterestedAction_Params = Module184
-	TypeRegistryModule.default:register(t.UndoGameTileNotInterestedAction_Params)
+	t.RefreshFeedEntryFromApiAction_Params = Module184
+	TypeRegistryModule.default:register(t.RefreshFeedEntryFromApiAction_Params)
 	local Module185 = {}
 	Module185.__index = Module185
 
@@ -21663,35 +21484,35 @@ do
 	function Module185.decode(Buf)
 		-- upvalues: Module185 (copy), ProtoModule (copy), t (copy)
 		local NewModule = Module185.new()
-		local v125 = 0
-		while v125 < buffer.len(Buf) do
+		local v126 = 0
+		while v126 < buffer.len(Buf) do
 			local Tag, Tag2
-			Tag, Tag2, v4410 = ProtoModule.readTag(Buf, v125)
+			Tag, Tag2, v4379 = ProtoModule.readTag(Buf, v126)
 			
 			if Tag2 == ProtoModule.wireTypes.varint then
 				if Tag == 1 then
 					local VarIntI32
-					VarIntI32, v4410 = ProtoModule.readVarIntI32(Buf, v125)
+					VarIntI32, v4379 = ProtoModule.readVarIntI32(Buf, v126)
 					NewModule.action_type = t.ActionType.fromNumber(VarIntI32) or VarIntI32
 				else
 					local _
-					_, v4410 = ProtoModule.readVarInt(Buf, v125)
+					_, v4379 = ProtoModule.readVarInt(Buf, v126)
 				end
 			elseif Tag2 == ProtoModule.wireTypes.lengthDelimited then
 				if Tag == 2 then
 					local Buffer1
-					Buffer1, v4410 = ProtoModule.readBuffer(Buf, v125)
-					NewModule.action_params = t.OpenWhyThisAdAction_Params.decode(Buffer1)
+					Buffer1, v4379 = ProtoModule.readBuffer(Buf, v126)
+					NewModule.action_params = t.OpenProfileFramesEditorAction_Params.decode(Buffer1)
 				else
-					local VarInt, VarInt2 = ProtoModule.readVarInt(Buf, v125)
-					v125 = VarInt2 + VarInt
+					local VarInt, VarInt2 = ProtoModule.readVarInt(Buf, v126)
+					v126 = VarInt2 + VarInt
 				end
 			elseif Tag2 == ProtoModule.wireTypes.i32 then
 				local _
-				_, v4410 = ProtoModule.readFixed32(Buf, v125)
+				_, v4379 = ProtoModule.readFixed32(Buf, v126)
 			elseif Tag2 == ProtoModule.wireTypes.i64 then
 				local _
-				_, v4410 = ProtoModule.readFixed64(Buf, v125)
+				_, v4379 = ProtoModule.readFixed64(Buf, v126)
 			else
 				error("Unsupported wire type: " .. Tag2)
 			end
@@ -21723,32 +21544,31 @@ do
 			NewModule.action_type = (if typeof(self.actionType) == "number" then t.ActionType.fromNumber(self.actionType) else t.ActionType.fromName(self.actionType)) or self.actionType
 		end
 		if self.action_params ~= nil then
-			NewModule.action_params = t.OpenWhyThisAdAction_Params.jsonDecode(self.action_params)
+			NewModule.action_params = t.OpenProfileFramesEditorAction_Params.jsonDecode(self.action_params)
 		end
 		if self.actionParams ~= nil then
-			NewModule.action_params = t.OpenWhyThisAdAction_Params.jsonDecode(self.actionParams)
+			NewModule.action_params = t.OpenProfileFramesEditorAction_Params.jsonDecode(self.actionParams)
 		end
 		return NewModule
 	end
 
 	Module185.descriptor = {
-		name = "OpenWhyThisAdAction",
-		fullName = "roblox.apppageplatform.shared.v1beta1.OpenWhyThisAdAction"
+		name = "OpenProfileFramesEditorAction",
+		fullName = "roblox.apppageplatform.shared.v1beta1.OpenProfileFramesEditorAction"
 	}
-	t.OpenWhyThisAdAction = Module185
+	t.OpenProfileFramesEditorAction = Module185
 end
 do
-	TypeRegistryModule.default:register(t.OpenWhyThisAdAction)
+	TypeRegistryModule.default:register(t.OpenProfileFramesEditorAction)
 	local Module186 = {}
 	Module186.__index = Module186
 
 	function Module186.new(p1)
 		-- upvalues: Module186 (copy)
 		return (setmetatable({
-			universe_id = if p1 == nil or p1.universe_id == nil then nil else p1.universe_id,
-			payer_name = if p1 == nil or p1.payer_name == nil then nil else p1.payer_name,
-			sponsored_user_cohort = if p1 == nil or p1.sponsored_user_cohort == nil then nil else p1.sponsored_user_cohort,
-			content_type = if p1 == nil or p1.content_type == nil then nil else p1.content_type
+			prompt_id = if p1 == nil or p1.prompt_id == nil then nil else p1.prompt_id,
+			prompt_type = if p1 == nil or p1.prompt_type == nil then nil else p1.prompt_type,
+			source = if p1 == nil or p1.source == nil then nil else p1.source
 		}, Module186))
 	end
 
@@ -21757,25 +21577,20 @@ do
 		local Buf = buffer.create(0)
 		local Count = 0
 		
-		if self.universe_id ~= nil then
-			local EncodeResult = self.universe_id:encode()
+		if self.prompt_id ~= nil then
+			local EncodeResult = self.prompt_id:encode()
 			local WriteTagResult, WriteTagResult2 = ProtoModule.writeTag(Buf, Count, 1, ProtoModule.wireTypes.lengthDelimited)
 			Buf, Count = ProtoModule.writeBuffer(WriteTagResult, WriteTagResult2, EncodeResult, buffer.len(EncodeResult))
 		end
-		if self.payer_name ~= nil then
-			local EncodeResult = self.payer_name:encode()
+		if self.prompt_type ~= nil then
+			local EncodeResult = self.prompt_type:encode()
 			local WriteTagResult1, WriteTagResult2_1 = ProtoModule.writeTag(Buf, Count, 2, ProtoModule.wireTypes.lengthDelimited)
 			Buf, Count = ProtoModule.writeBuffer(WriteTagResult1, WriteTagResult2_1, EncodeResult, buffer.len(EncodeResult))
 		end
-		if self.sponsored_user_cohort ~= nil then
-			local EncodeResult = self.sponsored_user_cohort:encode()
+		if self.source ~= nil then
+			local EncodeResult = self.source:encode()
 			local WriteTagResult3, WriteTagResult2_2 = ProtoModule.writeTag(Buf, Count, 3, ProtoModule.wireTypes.lengthDelimited)
 			Buf, Count = ProtoModule.writeBuffer(WriteTagResult3, WriteTagResult2_2, EncodeResult, buffer.len(EncodeResult))
-		end
-		if self.content_type ~= nil then
-			local EncodeResult = self.content_type:encode()
-			local WriteTagResult4, WriteTagResult2_3 = ProtoModule.writeTag(Buf, Count, 4, ProtoModule.wireTypes.lengthDelimited)
-			Buf, Count = ProtoModule.writeBuffer(WriteTagResult4, WriteTagResult2_3, EncodeResult, buffer.len(EncodeResult))
 		end
 		local Buf1 = buffer.create(Count)
 		buffer.copy(Buf1, 0, Buf, 0, Count)
@@ -21786,41 +21601,37 @@ do
 	function Module186.decode(Buf)
 		-- upvalues: Module186 (copy), ProtoModule (copy), PropTypesModule (copy)
 		local NewModule = Module186.new()
-		local v125 = 0
-		while v125 < buffer.len(Buf) do
+		local v126 = 0
+		while v126 < buffer.len(Buf) do
 			local Tag, Tag2
-			Tag, Tag2, v4437 = ProtoModule.readTag(Buf, v125)
+			Tag, Tag2, v4403 = ProtoModule.readTag(Buf, v126)
 			
 			if Tag2 == ProtoModule.wireTypes.varint then
 				local _
-				_, v4437 = ProtoModule.readVarInt(Buf, v125)
+				_, v4403 = ProtoModule.readVarInt(Buf, v126)
 			elseif Tag2 == ProtoModule.wireTypes.lengthDelimited then
 				if Tag == 1 then
 					local Buffer1
-					Buffer1, v4437 = ProtoModule.readBuffer(Buf, v125)
-					NewModule.universe_id = PropTypesModule.StringProp.decode(Buffer1)
+					Buffer1, v4403 = ProtoModule.readBuffer(Buf, v126)
+					NewModule.prompt_id = PropTypesModule.StringProp.decode(Buffer1)
 				elseif Tag == 2 then
 					local Buffer2
-					Buffer2, v4437 = ProtoModule.readBuffer(Buf, v125)
-					NewModule.payer_name = PropTypesModule.StringProp.decode(Buffer2)
+					Buffer2, v4403 = ProtoModule.readBuffer(Buf, v126)
+					NewModule.prompt_type = PropTypesModule.StringProp.decode(Buffer2)
 				elseif Tag == 3 then
 					local Buffer3
-					Buffer3, v4437 = ProtoModule.readBuffer(Buf, v125)
-					NewModule.sponsored_user_cohort = PropTypesModule.StringProp.decode(Buffer3)
-				elseif Tag == 4 then
-					local Buffer4
-					Buffer4, v4437 = ProtoModule.readBuffer(Buf, v125)
-					NewModule.content_type = PropTypesModule.StringProp.decode(Buffer4)
+					Buffer3, v4403 = ProtoModule.readBuffer(Buf, v126)
+					NewModule.source = PropTypesModule.StringProp.decode(Buffer3)
 				else
-					local VarInt, VarInt2 = ProtoModule.readVarInt(Buf, v125)
-					v125 = VarInt2 + VarInt
+					local VarInt, VarInt2 = ProtoModule.readVarInt(Buf, v126)
+					v126 = VarInt2 + VarInt
 				end
 			elseif Tag2 == ProtoModule.wireTypes.i32 then
 				local _
-				_, v4437 = ProtoModule.readFixed32(Buf, v125)
+				_, v4403 = ProtoModule.readFixed32(Buf, v126)
 			elseif Tag2 == ProtoModule.wireTypes.i64 then
 				local _
-				_, v4437 = ProtoModule.readFixed64(Buf, v125)
+				_, v4403 = ProtoModule.readFixed64(Buf, v126)
 			else
 				error("Unsupported wire type: " .. Tag2)
 			end
@@ -21831,17 +21642,14 @@ do
 	function Module186:jsonEncode()
 		local t = {}
 		
-		if self.universe_id ~= nil then
-			t.universeId = self.universe_id:jsonEncode()
+		if self.prompt_id ~= nil then
+			t.promptId = self.prompt_id:jsonEncode()
 		end
-		if self.payer_name ~= nil then
-			t.payerName = self.payer_name:jsonEncode()
+		if self.prompt_type ~= nil then
+			t.promptType = self.prompt_type:jsonEncode()
 		end
-		if self.sponsored_user_cohort ~= nil then
-			t.sponsoredUserCohort = self.sponsored_user_cohort:jsonEncode()
-		end
-		if self.content_type ~= nil then
-			t.contentType = self.content_type:jsonEncode()
+		if self.source ~= nil then
+			t.source = self.source:jsonEncode()
 		end
 		return t
 	end
@@ -21850,39 +21658,30 @@ do
 		-- upvalues: Module186 (copy), PropTypesModule (copy)
 		local NewModule = Module186.new()
 		
-		if self.universe_id ~= nil then
-			NewModule.universe_id = PropTypesModule.StringProp.jsonDecode(self.universe_id)
+		if self.prompt_id ~= nil then
+			NewModule.prompt_id = PropTypesModule.StringProp.jsonDecode(self.prompt_id)
 		end
-		if self.universeId ~= nil then
-			NewModule.universe_id = PropTypesModule.StringProp.jsonDecode(self.universeId)
+		if self.promptId ~= nil then
+			NewModule.prompt_id = PropTypesModule.StringProp.jsonDecode(self.promptId)
 		end
-		if self.payer_name ~= nil then
-			NewModule.payer_name = PropTypesModule.StringProp.jsonDecode(self.payer_name)
+		if self.prompt_type ~= nil then
+			NewModule.prompt_type = PropTypesModule.StringProp.jsonDecode(self.prompt_type)
 		end
-		if self.payerName ~= nil then
-			NewModule.payer_name = PropTypesModule.StringProp.jsonDecode(self.payerName)
+		if self.promptType ~= nil then
+			NewModule.prompt_type = PropTypesModule.StringProp.jsonDecode(self.promptType)
 		end
-		if self.sponsored_user_cohort ~= nil then
-			NewModule.sponsored_user_cohort = PropTypesModule.StringProp.jsonDecode(self.sponsored_user_cohort)
-		end
-		if self.sponsoredUserCohort ~= nil then
-			NewModule.sponsored_user_cohort = PropTypesModule.StringProp.jsonDecode(self.sponsoredUserCohort)
-		end
-		if self.content_type ~= nil then
-			NewModule.content_type = PropTypesModule.StringProp.jsonDecode(self.content_type)
-		end
-		if self.contentType ~= nil then
-			NewModule.content_type = PropTypesModule.StringProp.jsonDecode(self.contentType)
+		if self.source ~= nil then
+			NewModule.source = PropTypesModule.StringProp.jsonDecode(self.source)
 		end
 		return NewModule
 	end
 
 	Module186.descriptor = {
-		name = "OpenWhyThisAdAction_Params",
+		name = "OpenProfileFramesEditorAction_Params",
 		fullName = "roblox.apppageplatform.shared.v1beta1.Params"
 	}
-	t.OpenWhyThisAdAction_Params = Module186
-	TypeRegistryModule.default:register(t.OpenWhyThisAdAction_Params)
+	t.OpenProfileFramesEditorAction_Params = Module186
+	TypeRegistryModule.default:register(t.OpenProfileFramesEditorAction_Params)
 	local Module187 = {}
 	Module187.__index = Module187
 
@@ -21917,35 +21716,35 @@ do
 	function Module187.decode(Buf)
 		-- upvalues: Module187 (copy), ProtoModule (copy), t (copy)
 		local NewModule = Module187.new()
-		local v126 = 0
-		while v126 < buffer.len(Buf) do
+		local v127 = 0
+		while v127 < buffer.len(Buf) do
 			local Tag, Tag2
-			Tag, Tag2, v4459 = ProtoModule.readTag(Buf, v126)
+			Tag, Tag2, v4424 = ProtoModule.readTag(Buf, v127)
 			
 			if Tag2 == ProtoModule.wireTypes.varint then
 				if Tag == 1 then
 					local VarIntI32
-					VarIntI32, v4459 = ProtoModule.readVarIntI32(Buf, v126)
+					VarIntI32, v4424 = ProtoModule.readVarIntI32(Buf, v127)
 					NewModule.action_type = t.ActionType.fromNumber(VarIntI32) or VarIntI32
 				else
 					local _
-					_, v4459 = ProtoModule.readVarInt(Buf, v126)
+					_, v4424 = ProtoModule.readVarInt(Buf, v127)
 				end
 			elseif Tag2 == ProtoModule.wireTypes.lengthDelimited then
 				if Tag == 2 then
 					local Buffer1
-					Buffer1, v4459 = ProtoModule.readBuffer(Buf, v126)
-					NewModule.action_params = t.RequestPushNotificationPermissionAction_Params.decode(Buffer1)
+					Buffer1, v4424 = ProtoModule.readBuffer(Buf, v127)
+					NewModule.action_params = t.ApplyDevStoreSeeAllCategoryFilterAction_Params.decode(Buffer1)
 				else
-					local VarInt, VarInt2 = ProtoModule.readVarInt(Buf, v126)
-					v126 = VarInt2 + VarInt
+					local VarInt, VarInt2 = ProtoModule.readVarInt(Buf, v127)
+					v127 = VarInt2 + VarInt
 				end
 			elseif Tag2 == ProtoModule.wireTypes.i32 then
 				local _
-				_, v4459 = ProtoModule.readFixed32(Buf, v126)
+				_, v4424 = ProtoModule.readFixed32(Buf, v127)
 			elseif Tag2 == ProtoModule.wireTypes.i64 then
 				local _
-				_, v4459 = ProtoModule.readFixed64(Buf, v126)
+				_, v4424 = ProtoModule.readFixed64(Buf, v127)
 			else
 				error("Unsupported wire type: " .. Tag2)
 			end
@@ -21977,27 +21776,27 @@ do
 			NewModule.action_type = (if typeof(self.actionType) == "number" then t.ActionType.fromNumber(self.actionType) else t.ActionType.fromName(self.actionType)) or self.actionType
 		end
 		if self.action_params ~= nil then
-			NewModule.action_params = t.RequestPushNotificationPermissionAction_Params.jsonDecode(self.action_params)
+			NewModule.action_params = t.ApplyDevStoreSeeAllCategoryFilterAction_Params.jsonDecode(self.action_params)
 		end
 		if self.actionParams ~= nil then
-			NewModule.action_params = t.RequestPushNotificationPermissionAction_Params.jsonDecode(self.actionParams)
+			NewModule.action_params = t.ApplyDevStoreSeeAllCategoryFilterAction_Params.jsonDecode(self.actionParams)
 		end
 		return NewModule
 	end
 
 	Module187.descriptor = {
-		name = "RequestPushNotificationPermissionAction",
-		fullName = "roblox.apppageplatform.shared.v1beta1.RequestPushNotificationPermissionAction"
+		name = "ApplyDevStoreSeeAllCategoryFilterAction",
+		fullName = "roblox.apppageplatform.shared.v1beta1.ApplyDevStoreSeeAllCategoryFilterAction"
 	}
-	t.RequestPushNotificationPermissionAction = Module187
-	TypeRegistryModule.default:register(t.RequestPushNotificationPermissionAction)
+	t.ApplyDevStoreSeeAllCategoryFilterAction = Module187
+	TypeRegistryModule.default:register(t.ApplyDevStoreSeeAllCategoryFilterAction)
 	local Module188 = {}
 	Module188.__index = Module188
 
 	function Module188.new(p1)
 		-- upvalues: Module188 (copy)
 		return (setmetatable({
-			source = if p1 == nil or p1.source == nil then nil else p1.source
+			selected_category_id = if p1 == nil or p1.selected_category_id == nil then nil else p1.selected_category_id
 		}, Module188))
 	end
 
@@ -22006,8 +21805,8 @@ do
 		local Buf = buffer.create(0)
 		local Count = 0
 		
-		if self.source ~= nil then
-			local EncodeResult = self.source:encode()
+		if self.selected_category_id ~= nil then
+			local EncodeResult = self.selected_category_id:encode()
 			local WriteTagResult, WriteTagResult2 = ProtoModule.writeTag(Buf, Count, 1, ProtoModule.wireTypes.lengthDelimited)
 			Buf, Count = ProtoModule.writeBuffer(WriteTagResult, WriteTagResult2, EncodeResult, buffer.len(EncodeResult))
 		end
@@ -22020,29 +21819,29 @@ do
 	function Module188.decode(Buf)
 		-- upvalues: Module188 (copy), ProtoModule (copy), PropTypesModule (copy)
 		local NewModule = Module188.new()
-		local v127 = 0
-		while v127 < buffer.len(Buf) do
+		local v128 = 0
+		while v128 < buffer.len(Buf) do
 			local Tag, Tag2
-			Tag, Tag2, v4477 = ProtoModule.readTag(Buf, v127)
+			Tag, Tag2, v4442 = ProtoModule.readTag(Buf, v128)
 			
 			if Tag2 == ProtoModule.wireTypes.varint then
 				local _
-				_, v4477 = ProtoModule.readVarInt(Buf, v127)
+				_, v4442 = ProtoModule.readVarInt(Buf, v128)
 			elseif Tag2 == ProtoModule.wireTypes.lengthDelimited then
 				if Tag == 1 then
 					local Buffer1
-					Buffer1, v4477 = ProtoModule.readBuffer(Buf, v127)
-					NewModule.source = PropTypesModule.StringProp.decode(Buffer1)
+					Buffer1, v4442 = ProtoModule.readBuffer(Buf, v128)
+					NewModule.selected_category_id = PropTypesModule.StringProp.decode(Buffer1)
 				else
-					local VarInt, VarInt2 = ProtoModule.readVarInt(Buf, v127)
-					v127 = VarInt2 + VarInt
+					local VarInt, VarInt2 = ProtoModule.readVarInt(Buf, v128)
+					v128 = VarInt2 + VarInt
 				end
 			elseif Tag2 == ProtoModule.wireTypes.i32 then
 				local _
-				_, v4477 = ProtoModule.readFixed32(Buf, v127)
+				_, v4442 = ProtoModule.readFixed32(Buf, v128)
 			elseif Tag2 == ProtoModule.wireTypes.i64 then
 				local _
-				_, v4477 = ProtoModule.readFixed64(Buf, v127)
+				_, v4442 = ProtoModule.readFixed64(Buf, v128)
 			else
 				error("Unsupported wire type: " .. Tag2)
 			end
@@ -22053,8 +21852,8 @@ do
 	function Module188:jsonEncode()
 		local t = {}
 		
-		if self.source ~= nil then
-			t.source = self.source:jsonEncode()
+		if self.selected_category_id ~= nil then
+			t.selectedCategoryId = self.selected_category_id:jsonEncode()
 		end
 		return t
 	end
@@ -22063,20 +21862,23 @@ do
 		-- upvalues: Module188 (copy), PropTypesModule (copy)
 		local NewModule = Module188.new()
 		
-		if self.source ~= nil then
-			NewModule.source = PropTypesModule.StringProp.jsonDecode(self.source)
+		if self.selected_category_id ~= nil then
+			NewModule.selected_category_id = PropTypesModule.StringProp.jsonDecode(self.selected_category_id)
+		end
+		if self.selectedCategoryId ~= nil then
+			NewModule.selected_category_id = PropTypesModule.StringProp.jsonDecode(self.selectedCategoryId)
 		end
 		return NewModule
 	end
 
 	Module188.descriptor = {
-		name = "RequestPushNotificationPermissionAction_Params",
+		name = "ApplyDevStoreSeeAllCategoryFilterAction_Params",
 		fullName = "roblox.apppageplatform.shared.v1beta1.Params"
 	}
-	t.RequestPushNotificationPermissionAction_Params = Module188
+	t.ApplyDevStoreSeeAllCategoryFilterAction_Params = Module188
 end
 do
-	TypeRegistryModule.default:register(t.RequestPushNotificationPermissionAction_Params)
+	TypeRegistryModule.default:register(t.ApplyDevStoreSeeAllCategoryFilterAction_Params)
 	local Module189 = {}
 	Module189.__index = Module189
 
@@ -22111,35 +21913,35 @@ do
 	function Module189.decode(Buf)
 		-- upvalues: Module189 (copy), ProtoModule (copy), t (copy)
 		local NewModule = Module189.new()
-		local v127 = 0
-		while v127 < buffer.len(Buf) do
+		local v128 = 0
+		while v128 < buffer.len(Buf) do
 			local Tag, Tag2
-			Tag, Tag2, v4496 = ProtoModule.readTag(Buf, v127)
+			Tag, Tag2, v4461 = ProtoModule.readTag(Buf, v128)
 			
 			if Tag2 == ProtoModule.wireTypes.varint then
 				if Tag == 1 then
 					local VarIntI32
-					VarIntI32, v4496 = ProtoModule.readVarIntI32(Buf, v127)
+					VarIntI32, v4461 = ProtoModule.readVarIntI32(Buf, v128)
 					NewModule.action_type = t.ActionType.fromNumber(VarIntI32) or VarIntI32
 				else
 					local _
-					_, v4496 = ProtoModule.readVarInt(Buf, v127)
+					_, v4461 = ProtoModule.readVarInt(Buf, v128)
 				end
 			elseif Tag2 == ProtoModule.wireTypes.lengthDelimited then
 				if Tag == 2 then
 					local Buffer1
-					Buffer1, v4496 = ProtoModule.readBuffer(Buf, v127)
-					NewModule.action_params = t.OpenBuildCreationChatAction_Params.decode(Buffer1)
+					Buffer1, v4461 = ProtoModule.readBuffer(Buf, v128)
+					NewModule.action_params = t.SetPageScopeFieldAction_Params.decode(Buffer1)
 				else
-					local VarInt, VarInt2 = ProtoModule.readVarInt(Buf, v127)
-					v127 = VarInt2 + VarInt
+					local VarInt, VarInt2 = ProtoModule.readVarInt(Buf, v128)
+					v128 = VarInt2 + VarInt
 				end
 			elseif Tag2 == ProtoModule.wireTypes.i32 then
 				local _
-				_, v4496 = ProtoModule.readFixed32(Buf, v127)
+				_, v4461 = ProtoModule.readFixed32(Buf, v128)
 			elseif Tag2 == ProtoModule.wireTypes.i64 then
 				local _
-				_, v4496 = ProtoModule.readFixed64(Buf, v127)
+				_, v4461 = ProtoModule.readFixed64(Buf, v128)
 			else
 				error("Unsupported wire type: " .. Tag2)
 			end
@@ -22171,6 +21973,1152 @@ do
 			NewModule.action_type = (if typeof(self.actionType) == "number" then t.ActionType.fromNumber(self.actionType) else t.ActionType.fromName(self.actionType)) or self.actionType
 		end
 		if self.action_params ~= nil then
+			NewModule.action_params = t.SetPageScopeFieldAction_Params.jsonDecode(self.action_params)
+		end
+		if self.actionParams ~= nil then
+			NewModule.action_params = t.SetPageScopeFieldAction_Params.jsonDecode(self.actionParams)
+		end
+		return NewModule
+	end
+
+	Module189.descriptor = {
+		name = "SetPageScopeFieldAction",
+		fullName = "roblox.apppageplatform.shared.v1beta1.SetPageScopeFieldAction"
+	}
+	t.SetPageScopeFieldAction = Module189
+	TypeRegistryModule.default:register(t.SetPageScopeFieldAction)
+	local Module190 = {}
+	Module190.__index = Module190
+
+	function Module190.new(p1)
+		-- upvalues: Module190 (copy)
+		return (setmetatable({
+			field_name = if p1 == nil or p1.field_name == nil then nil else p1.field_name,
+			value = if p1 == nil or p1.value == nil then nil else p1.value,
+			set_if_unset = if p1 == nil or p1.set_if_unset == nil then nil else p1.set_if_unset
+		}, Module190))
+	end
+
+	function Module190:encode()
+		-- upvalues: ProtoModule (copy)
+		local Buf = buffer.create(0)
+		local Count = 0
+		
+		if self.field_name ~= nil then
+			local EncodeResult = self.field_name:encode()
+			local WriteTagResult, WriteTagResult2 = ProtoModule.writeTag(Buf, Count, 1, ProtoModule.wireTypes.lengthDelimited)
+			Buf, Count = ProtoModule.writeBuffer(WriteTagResult, WriteTagResult2, EncodeResult, buffer.len(EncodeResult))
+		end
+		if self.value ~= nil then
+			local EncodeResult = self.value:encode()
+			local WriteTagResult1, WriteTagResult2_1 = ProtoModule.writeTag(Buf, Count, 2, ProtoModule.wireTypes.lengthDelimited)
+			Buf, Count = ProtoModule.writeBuffer(WriteTagResult1, WriteTagResult2_1, EncodeResult, buffer.len(EncodeResult))
+		end
+		if self.set_if_unset ~= nil then
+			local EncodeResult = self.set_if_unset:encode()
+			local WriteTagResult3, WriteTagResult2_2 = ProtoModule.writeTag(Buf, Count, 3, ProtoModule.wireTypes.lengthDelimited)
+			Buf, Count = ProtoModule.writeBuffer(WriteTagResult3, WriteTagResult2_2, EncodeResult, buffer.len(EncodeResult))
+		end
+		local Buf1 = buffer.create(Count)
+		buffer.copy(Buf1, 0, Buf, 0, Count)
+		
+		return Buf1
+	end
+
+	function Module190.decode(Buf)
+		-- upvalues: Module190 (copy), ProtoModule (copy), PropTypesModule (copy)
+		local NewModule = Module190.new()
+		local v129 = 0
+		while v129 < buffer.len(Buf) do
+			local Tag, Tag2
+			Tag, Tag2, v4485 = ProtoModule.readTag(Buf, v129)
+			
+			if Tag2 == ProtoModule.wireTypes.varint then
+				local _
+				_, v4485 = ProtoModule.readVarInt(Buf, v129)
+			elseif Tag2 == ProtoModule.wireTypes.lengthDelimited then
+				if Tag == 1 then
+					local Buffer1
+					Buffer1, v4485 = ProtoModule.readBuffer(Buf, v129)
+					NewModule.field_name = PropTypesModule.StringProp.decode(Buffer1)
+				elseif Tag == 2 then
+					local Buffer2
+					Buffer2, v4485 = ProtoModule.readBuffer(Buf, v129)
+					NewModule.value = PropTypesModule.StringProp.decode(Buffer2)
+				elseif Tag == 3 then
+					local Buffer3
+					Buffer3, v4485 = ProtoModule.readBuffer(Buf, v129)
+					NewModule.set_if_unset = PropTypesModule.BoolProp.decode(Buffer3)
+				else
+					local VarInt, VarInt2 = ProtoModule.readVarInt(Buf, v129)
+					v129 = VarInt2 + VarInt
+				end
+			elseif Tag2 == ProtoModule.wireTypes.i32 then
+				local _
+				_, v4485 = ProtoModule.readFixed32(Buf, v129)
+			elseif Tag2 == ProtoModule.wireTypes.i64 then
+				local _
+				_, v4485 = ProtoModule.readFixed64(Buf, v129)
+			else
+				error("Unsupported wire type: " .. Tag2)
+			end
+		end
+		return NewModule
+	end
+
+	function Module190:jsonEncode()
+		local t = {}
+		
+		if self.field_name ~= nil then
+			t.fieldName = self.field_name:jsonEncode()
+		end
+		if self.value ~= nil then
+			t.value = self.value:jsonEncode()
+		end
+		if self.set_if_unset ~= nil then
+			t.setIfUnset = self.set_if_unset:jsonEncode()
+		end
+		return t
+	end
+
+	function Module190:jsonDecode()
+		-- upvalues: Module190 (copy), PropTypesModule (copy)
+		local NewModule = Module190.new()
+		
+		if self.field_name ~= nil then
+			NewModule.field_name = PropTypesModule.StringProp.jsonDecode(self.field_name)
+		end
+		if self.fieldName ~= nil then
+			NewModule.field_name = PropTypesModule.StringProp.jsonDecode(self.fieldName)
+		end
+		if self.value ~= nil then
+			NewModule.value = PropTypesModule.StringProp.jsonDecode(self.value)
+		end
+		if self.set_if_unset ~= nil then
+			NewModule.set_if_unset = PropTypesModule.BoolProp.jsonDecode(self.set_if_unset)
+		end
+		if self.setIfUnset ~= nil then
+			NewModule.set_if_unset = PropTypesModule.BoolProp.jsonDecode(self.setIfUnset)
+		end
+		return NewModule
+	end
+
+	Module190.descriptor = {
+		name = "SetPageScopeFieldAction_Params",
+		fullName = "roblox.apppageplatform.shared.v1beta1.Params"
+	}
+	t.SetPageScopeFieldAction_Params = Module190
+	TypeRegistryModule.default:register(t.SetPageScopeFieldAction_Params)
+	local Module191 = {}
+	Module191.__index = Module191
+
+	function Module191.new(p1)
+		-- upvalues: t (copy), Module191 (copy)
+		return (setmetatable({
+			action_type = if p1 == nil or p1.action_type == nil then assert(t.ActionType.fromNumber(0), "Enum has no 0 default") else p1.action_type,
+			action_params = if p1 == nil or p1.action_params == nil then nil else p1.action_params
+		}, Module191))
+	end
+
+	function Module191:encode()
+		-- upvalues: t (copy), ProtoModule (copy)
+		local Buf = buffer.create(0)
+		local Count = 0
+		
+		if self.action_type ~= nil and (self.action_type ~= nil and self.action_type ~= 0 or self.action_type ~= t.ActionType.fromNumber(0)) then
+			local WriteTagResult, WriteTagResult2 = ProtoModule.writeTag(Buf, Count, 1, ProtoModule.wireTypes.varint)
+			Buf, Count = ProtoModule.writeVarInt(WriteTagResult, WriteTagResult2, t.ActionType.toNumber(self.action_type))
+		end
+		if self.action_params ~= nil then
+			local EncodeResult = self.action_params:encode()
+			local WriteTagResult1, WriteTagResult2_1 = ProtoModule.writeTag(Buf, Count, 2, ProtoModule.wireTypes.lengthDelimited)
+			Buf, Count = ProtoModule.writeBuffer(WriteTagResult1, WriteTagResult2_1, EncodeResult, buffer.len(EncodeResult))
+		end
+		local Buf1 = buffer.create(Count)
+		buffer.copy(Buf1, 0, Buf, 0, Count)
+		
+		return Buf1
+	end
+
+	function Module191.decode(Buf)
+		-- upvalues: Module191 (copy), ProtoModule (copy), t (copy)
+		local NewModule = Module191.new()
+		local v130 = 0
+		while v130 < buffer.len(Buf) do
+			local Tag, Tag2
+			Tag, Tag2, v4506 = ProtoModule.readTag(Buf, v130)
+			
+			if Tag2 == ProtoModule.wireTypes.varint then
+				if Tag == 1 then
+					local VarIntI32
+					VarIntI32, v4506 = ProtoModule.readVarIntI32(Buf, v130)
+					NewModule.action_type = t.ActionType.fromNumber(VarIntI32) or VarIntI32
+				else
+					local _
+					_, v4506 = ProtoModule.readVarInt(Buf, v130)
+				end
+			elseif Tag2 == ProtoModule.wireTypes.lengthDelimited then
+				if Tag == 2 then
+					local Buffer1
+					Buffer1, v4506 = ProtoModule.readBuffer(Buf, v130)
+					NewModule.action_params = t.SetGameTileNotInterestedAction_Params.decode(Buffer1)
+				else
+					local VarInt, VarInt2 = ProtoModule.readVarInt(Buf, v130)
+					v130 = VarInt2 + VarInt
+				end
+			elseif Tag2 == ProtoModule.wireTypes.i32 then
+				local _
+				_, v4506 = ProtoModule.readFixed32(Buf, v130)
+			elseif Tag2 == ProtoModule.wireTypes.i64 then
+				local _
+				_, v4506 = ProtoModule.readFixed64(Buf, v130)
+			else
+				error("Unsupported wire type: " .. Tag2)
+			end
+		end
+		return NewModule
+	end
+
+	function Module191:jsonEncode()
+		-- upvalues: t (copy)
+		local t1 = {}
+		
+		if self.action_type ~= nil and (self.action_type ~= nil and self.action_type ~= 0 or self.action_type ~= t.ActionType.fromNumber(0)) then
+			t1.actionType = if typeof(self.action_type) == "number" then self.action_type else t.ActionType.toNumber(self.action_type)
+		end
+		if self.action_params ~= nil then
+			t1.actionParams = self.action_params:jsonEncode()
+		end
+		return t1
+	end
+
+	function Module191:jsonDecode()
+		-- upvalues: Module191 (copy), t (copy)
+		local NewModule = Module191.new()
+		
+		if self.action_type ~= nil then
+			NewModule.action_type = (if typeof(self.action_type) == "number" then t.ActionType.fromNumber(self.action_type) else t.ActionType.fromName(self.action_type)) or self.action_type
+		end
+		if self.actionType ~= nil then
+			NewModule.action_type = (if typeof(self.actionType) == "number" then t.ActionType.fromNumber(self.actionType) else t.ActionType.fromName(self.actionType)) or self.actionType
+		end
+		if self.action_params ~= nil then
+			NewModule.action_params = t.SetGameTileNotInterestedAction_Params.jsonDecode(self.action_params)
+		end
+		if self.actionParams ~= nil then
+			NewModule.action_params = t.SetGameTileNotInterestedAction_Params.jsonDecode(self.actionParams)
+		end
+		return NewModule
+	end
+
+	Module191.descriptor = {
+		name = "SetGameTileNotInterestedAction",
+		fullName = "roblox.apppageplatform.shared.v1beta1.SetGameTileNotInterestedAction"
+	}
+	t.SetGameTileNotInterestedAction = Module191
+end
+do
+	TypeRegistryModule.default:register(t.SetGameTileNotInterestedAction)
+	local Module192 = {}
+	Module192.__index = Module192
+
+	function Module192.new(p1)
+		-- upvalues: Module192 (copy)
+		return (setmetatable({
+			universe_id = if p1 == nil or p1.universe_id == nil then nil else p1.universe_id,
+			place_id = if p1 == nil or p1.place_id == nil then nil else p1.place_id,
+			collection_id = if p1 == nil or p1.collection_id == nil then nil else p1.collection_id,
+			is_sponsored = if p1 == nil or p1.is_sponsored == nil then nil else p1.is_sponsored
+		}, Module192))
+	end
+
+	function Module192:encode()
+		-- upvalues: ProtoModule (copy)
+		local Buf = buffer.create(0)
+		local Count = 0
+		
+		if self.universe_id ~= nil then
+			local EncodeResult = self.universe_id:encode()
+			local WriteTagResult, WriteTagResult2 = ProtoModule.writeTag(Buf, Count, 1, ProtoModule.wireTypes.lengthDelimited)
+			Buf, Count = ProtoModule.writeBuffer(WriteTagResult, WriteTagResult2, EncodeResult, buffer.len(EncodeResult))
+		end
+		if self.place_id ~= nil then
+			local EncodeResult = self.place_id:encode()
+			local WriteTagResult1, WriteTagResult2_1 = ProtoModule.writeTag(Buf, Count, 2, ProtoModule.wireTypes.lengthDelimited)
+			Buf, Count = ProtoModule.writeBuffer(WriteTagResult1, WriteTagResult2_1, EncodeResult, buffer.len(EncodeResult))
+		end
+		if self.collection_id ~= nil then
+			local EncodeResult = self.collection_id:encode()
+			local WriteTagResult3, WriteTagResult2_2 = ProtoModule.writeTag(Buf, Count, 3, ProtoModule.wireTypes.lengthDelimited)
+			Buf, Count = ProtoModule.writeBuffer(WriteTagResult3, WriteTagResult2_2, EncodeResult, buffer.len(EncodeResult))
+		end
+		if self.is_sponsored ~= nil then
+			local EncodeResult = self.is_sponsored:encode()
+			local WriteTagResult4, WriteTagResult2_3 = ProtoModule.writeTag(Buf, Count, 4, ProtoModule.wireTypes.lengthDelimited)
+			Buf, Count = ProtoModule.writeBuffer(WriteTagResult4, WriteTagResult2_3, EncodeResult, buffer.len(EncodeResult))
+		end
+		local Buf1 = buffer.create(Count)
+		buffer.copy(Buf1, 0, Buf, 0, Count)
+		
+		return Buf1
+	end
+
+	function Module192.decode(Buf)
+		-- upvalues: Module192 (copy), ProtoModule (copy), PropTypesModule (copy)
+		local NewModule = Module192.new()
+		local v130 = 0
+		while v130 < buffer.len(Buf) do
+			local Tag, Tag2
+			Tag, Tag2, v4533 = ProtoModule.readTag(Buf, v130)
+			
+			if Tag2 == ProtoModule.wireTypes.varint then
+				local _
+				_, v4533 = ProtoModule.readVarInt(Buf, v130)
+			elseif Tag2 == ProtoModule.wireTypes.lengthDelimited then
+				if Tag == 1 then
+					local Buffer1
+					Buffer1, v4533 = ProtoModule.readBuffer(Buf, v130)
+					NewModule.universe_id = PropTypesModule.StringProp.decode(Buffer1)
+				elseif Tag == 2 then
+					local Buffer2
+					Buffer2, v4533 = ProtoModule.readBuffer(Buf, v130)
+					NewModule.place_id = PropTypesModule.StringProp.decode(Buffer2)
+				elseif Tag == 3 then
+					local Buffer3
+					Buffer3, v4533 = ProtoModule.readBuffer(Buf, v130)
+					NewModule.collection_id = PropTypesModule.StringProp.decode(Buffer3)
+				elseif Tag == 4 then
+					local Buffer4
+					Buffer4, v4533 = ProtoModule.readBuffer(Buf, v130)
+					NewModule.is_sponsored = PropTypesModule.BoolProp.decode(Buffer4)
+				else
+					local VarInt, VarInt2 = ProtoModule.readVarInt(Buf, v130)
+					v130 = VarInt2 + VarInt
+				end
+			elseif Tag2 == ProtoModule.wireTypes.i32 then
+				local _
+				_, v4533 = ProtoModule.readFixed32(Buf, v130)
+			elseif Tag2 == ProtoModule.wireTypes.i64 then
+				local _
+				_, v4533 = ProtoModule.readFixed64(Buf, v130)
+			else
+				error("Unsupported wire type: " .. Tag2)
+			end
+		end
+		return NewModule
+	end
+
+	function Module192:jsonEncode()
+		local t = {}
+		
+		if self.universe_id ~= nil then
+			t.universeId = self.universe_id:jsonEncode()
+		end
+		if self.place_id ~= nil then
+			t.placeId = self.place_id:jsonEncode()
+		end
+		if self.collection_id ~= nil then
+			t.collectionId = self.collection_id:jsonEncode()
+		end
+		if self.is_sponsored ~= nil then
+			t.isSponsored = self.is_sponsored:jsonEncode()
+		end
+		return t
+	end
+
+	function Module192:jsonDecode()
+		-- upvalues: Module192 (copy), PropTypesModule (copy)
+		local NewModule = Module192.new()
+		
+		if self.universe_id ~= nil then
+			NewModule.universe_id = PropTypesModule.StringProp.jsonDecode(self.universe_id)
+		end
+		if self.universeId ~= nil then
+			NewModule.universe_id = PropTypesModule.StringProp.jsonDecode(self.universeId)
+		end
+		if self.place_id ~= nil then
+			NewModule.place_id = PropTypesModule.StringProp.jsonDecode(self.place_id)
+		end
+		if self.placeId ~= nil then
+			NewModule.place_id = PropTypesModule.StringProp.jsonDecode(self.placeId)
+		end
+		if self.collection_id ~= nil then
+			NewModule.collection_id = PropTypesModule.StringProp.jsonDecode(self.collection_id)
+		end
+		if self.collectionId ~= nil then
+			NewModule.collection_id = PropTypesModule.StringProp.jsonDecode(self.collectionId)
+		end
+		if self.is_sponsored ~= nil then
+			NewModule.is_sponsored = PropTypesModule.BoolProp.jsonDecode(self.is_sponsored)
+		end
+		if self.isSponsored ~= nil then
+			NewModule.is_sponsored = PropTypesModule.BoolProp.jsonDecode(self.isSponsored)
+		end
+		return NewModule
+	end
+
+	Module192.descriptor = {
+		name = "SetGameTileNotInterestedAction_Params",
+		fullName = "roblox.apppageplatform.shared.v1beta1.Params"
+	}
+	t.SetGameTileNotInterestedAction_Params = Module192
+	TypeRegistryModule.default:register(t.SetGameTileNotInterestedAction_Params)
+	local Module193 = {}
+	Module193.__index = Module193
+
+	function Module193.new(p1)
+		-- upvalues: t (copy), Module193 (copy)
+		return (setmetatable({
+			action_type = if p1 == nil or p1.action_type == nil then assert(t.ActionType.fromNumber(0), "Enum has no 0 default") else p1.action_type,
+			action_params = if p1 == nil or p1.action_params == nil then nil else p1.action_params
+		}, Module193))
+	end
+
+	function Module193:encode()
+		-- upvalues: t (copy), ProtoModule (copy)
+		local Buf = buffer.create(0)
+		local Count = 0
+		
+		if self.action_type ~= nil and (self.action_type ~= nil and self.action_type ~= 0 or self.action_type ~= t.ActionType.fromNumber(0)) then
+			local WriteTagResult, WriteTagResult2 = ProtoModule.writeTag(Buf, Count, 1, ProtoModule.wireTypes.varint)
+			Buf, Count = ProtoModule.writeVarInt(WriteTagResult, WriteTagResult2, t.ActionType.toNumber(self.action_type))
+		end
+		if self.action_params ~= nil then
+			local EncodeResult = self.action_params:encode()
+			local WriteTagResult1, WriteTagResult2_1 = ProtoModule.writeTag(Buf, Count, 2, ProtoModule.wireTypes.lengthDelimited)
+			Buf, Count = ProtoModule.writeBuffer(WriteTagResult1, WriteTagResult2_1, EncodeResult, buffer.len(EncodeResult))
+		end
+		local Buf1 = buffer.create(Count)
+		buffer.copy(Buf1, 0, Buf, 0, Count)
+		
+		return Buf1
+	end
+
+	function Module193.decode(Buf)
+		-- upvalues: Module193 (copy), ProtoModule (copy), t (copy)
+		local NewModule = Module193.new()
+		local v131 = 0
+		while v131 < buffer.len(Buf) do
+			local Tag, Tag2
+			Tag, Tag2, v4555 = ProtoModule.readTag(Buf, v131)
+			
+			if Tag2 == ProtoModule.wireTypes.varint then
+				if Tag == 1 then
+					local VarIntI32
+					VarIntI32, v4555 = ProtoModule.readVarIntI32(Buf, v131)
+					NewModule.action_type = t.ActionType.fromNumber(VarIntI32) or VarIntI32
+				else
+					local _
+					_, v4555 = ProtoModule.readVarInt(Buf, v131)
+				end
+			elseif Tag2 == ProtoModule.wireTypes.lengthDelimited then
+				if Tag == 2 then
+					local Buffer1
+					Buffer1, v4555 = ProtoModule.readBuffer(Buf, v131)
+					NewModule.action_params = t.UndoGameTileNotInterestedAction_Params.decode(Buffer1)
+				else
+					local VarInt, VarInt2 = ProtoModule.readVarInt(Buf, v131)
+					v131 = VarInt2 + VarInt
+				end
+			elseif Tag2 == ProtoModule.wireTypes.i32 then
+				local _
+				_, v4555 = ProtoModule.readFixed32(Buf, v131)
+			elseif Tag2 == ProtoModule.wireTypes.i64 then
+				local _
+				_, v4555 = ProtoModule.readFixed64(Buf, v131)
+			else
+				error("Unsupported wire type: " .. Tag2)
+			end
+		end
+		return NewModule
+	end
+
+	function Module193:jsonEncode()
+		-- upvalues: t (copy)
+		local t1 = {}
+		
+		if self.action_type ~= nil and (self.action_type ~= nil and self.action_type ~= 0 or self.action_type ~= t.ActionType.fromNumber(0)) then
+			t1.actionType = if typeof(self.action_type) == "number" then self.action_type else t.ActionType.toNumber(self.action_type)
+		end
+		if self.action_params ~= nil then
+			t1.actionParams = self.action_params:jsonEncode()
+		end
+		return t1
+	end
+
+	function Module193:jsonDecode()
+		-- upvalues: Module193 (copy), t (copy)
+		local NewModule = Module193.new()
+		
+		if self.action_type ~= nil then
+			NewModule.action_type = (if typeof(self.action_type) == "number" then t.ActionType.fromNumber(self.action_type) else t.ActionType.fromName(self.action_type)) or self.action_type
+		end
+		if self.actionType ~= nil then
+			NewModule.action_type = (if typeof(self.actionType) == "number" then t.ActionType.fromNumber(self.actionType) else t.ActionType.fromName(self.actionType)) or self.actionType
+		end
+		if self.action_params ~= nil then
+			NewModule.action_params = t.UndoGameTileNotInterestedAction_Params.jsonDecode(self.action_params)
+		end
+		if self.actionParams ~= nil then
+			NewModule.action_params = t.UndoGameTileNotInterestedAction_Params.jsonDecode(self.actionParams)
+		end
+		return NewModule
+	end
+
+	Module193.descriptor = {
+		name = "UndoGameTileNotInterestedAction",
+		fullName = "roblox.apppageplatform.shared.v1beta1.UndoGameTileNotInterestedAction"
+	}
+	t.UndoGameTileNotInterestedAction = Module193
+	TypeRegistryModule.default:register(t.UndoGameTileNotInterestedAction)
+	local Module194 = {}
+	Module194.__index = Module194
+
+	function Module194.new(p1)
+		-- upvalues: Module194 (copy)
+		return (setmetatable({
+			universe_id = if p1 == nil or p1.universe_id == nil then nil else p1.universe_id,
+			collection_id = if p1 == nil or p1.collection_id == nil then nil else p1.collection_id
+		}, Module194))
+	end
+
+	function Module194:encode()
+		-- upvalues: ProtoModule (copy)
+		local Buf = buffer.create(0)
+		local Count = 0
+		
+		if self.universe_id ~= nil then
+			local EncodeResult = self.universe_id:encode()
+			local WriteTagResult, WriteTagResult2 = ProtoModule.writeTag(Buf, Count, 1, ProtoModule.wireTypes.lengthDelimited)
+			Buf, Count = ProtoModule.writeBuffer(WriteTagResult, WriteTagResult2, EncodeResult, buffer.len(EncodeResult))
+		end
+		if self.collection_id ~= nil then
+			local EncodeResult = self.collection_id:encode()
+			local WriteTagResult1, WriteTagResult2_1 = ProtoModule.writeTag(Buf, Count, 2, ProtoModule.wireTypes.lengthDelimited)
+			Buf, Count = ProtoModule.writeBuffer(WriteTagResult1, WriteTagResult2_1, EncodeResult, buffer.len(EncodeResult))
+		end
+		local Buf1 = buffer.create(Count)
+		buffer.copy(Buf1, 0, Buf, 0, Count)
+		
+		return Buf1
+	end
+
+	function Module194.decode(Buf)
+		-- upvalues: Module194 (copy), ProtoModule (copy), PropTypesModule (copy)
+		local NewModule = Module194.new()
+		local v132 = 0
+		while v132 < buffer.len(Buf) do
+			local Tag, Tag2
+			Tag, Tag2, v4576 = ProtoModule.readTag(Buf, v132)
+			
+			if Tag2 == ProtoModule.wireTypes.varint then
+				local _
+				_, v4576 = ProtoModule.readVarInt(Buf, v132)
+			elseif Tag2 == ProtoModule.wireTypes.lengthDelimited then
+				if Tag == 1 then
+					local Buffer1
+					Buffer1, v4576 = ProtoModule.readBuffer(Buf, v132)
+					NewModule.universe_id = PropTypesModule.StringProp.decode(Buffer1)
+				elseif Tag == 2 then
+					local Buffer2
+					Buffer2, v4576 = ProtoModule.readBuffer(Buf, v132)
+					NewModule.collection_id = PropTypesModule.StringProp.decode(Buffer2)
+				else
+					local VarInt, VarInt2 = ProtoModule.readVarInt(Buf, v132)
+					v132 = VarInt2 + VarInt
+				end
+			elseif Tag2 == ProtoModule.wireTypes.i32 then
+				local _
+				_, v4576 = ProtoModule.readFixed32(Buf, v132)
+			elseif Tag2 == ProtoModule.wireTypes.i64 then
+				local _
+				_, v4576 = ProtoModule.readFixed64(Buf, v132)
+			else
+				error("Unsupported wire type: " .. Tag2)
+			end
+		end
+		return NewModule
+	end
+
+	function Module194:jsonEncode()
+		local t = {}
+		
+		if self.universe_id ~= nil then
+			t.universeId = self.universe_id:jsonEncode()
+		end
+		if self.collection_id ~= nil then
+			t.collectionId = self.collection_id:jsonEncode()
+		end
+		return t
+	end
+
+	function Module194:jsonDecode()
+		-- upvalues: Module194 (copy), PropTypesModule (copy)
+		local NewModule = Module194.new()
+		
+		if self.universe_id ~= nil then
+			NewModule.universe_id = PropTypesModule.StringProp.jsonDecode(self.universe_id)
+		end
+		if self.universeId ~= nil then
+			NewModule.universe_id = PropTypesModule.StringProp.jsonDecode(self.universeId)
+		end
+		if self.collection_id ~= nil then
+			NewModule.collection_id = PropTypesModule.StringProp.jsonDecode(self.collection_id)
+		end
+		if self.collectionId ~= nil then
+			NewModule.collection_id = PropTypesModule.StringProp.jsonDecode(self.collectionId)
+		end
+		return NewModule
+	end
+
+	Module194.descriptor = {
+		name = "UndoGameTileNotInterestedAction_Params",
+		fullName = "roblox.apppageplatform.shared.v1beta1.Params"
+	}
+	t.UndoGameTileNotInterestedAction_Params = Module194
+end
+do
+	TypeRegistryModule.default:register(t.UndoGameTileNotInterestedAction_Params)
+	local Module195 = {}
+	Module195.__index = Module195
+
+	function Module195.new(p1)
+		-- upvalues: t (copy), Module195 (copy)
+		return (setmetatable({
+			action_type = if p1 == nil or p1.action_type == nil then assert(t.ActionType.fromNumber(0), "Enum has no 0 default") else p1.action_type,
+			action_params = if p1 == nil or p1.action_params == nil then nil else p1.action_params
+		}, Module195))
+	end
+
+	function Module195:encode()
+		-- upvalues: t (copy), ProtoModule (copy)
+		local Buf = buffer.create(0)
+		local Count = 0
+		
+		if self.action_type ~= nil and (self.action_type ~= nil and self.action_type ~= 0 or self.action_type ~= t.ActionType.fromNumber(0)) then
+			local WriteTagResult, WriteTagResult2 = ProtoModule.writeTag(Buf, Count, 1, ProtoModule.wireTypes.varint)
+			Buf, Count = ProtoModule.writeVarInt(WriteTagResult, WriteTagResult2, t.ActionType.toNumber(self.action_type))
+		end
+		if self.action_params ~= nil then
+			local EncodeResult = self.action_params:encode()
+			local WriteTagResult1, WriteTagResult2_1 = ProtoModule.writeTag(Buf, Count, 2, ProtoModule.wireTypes.lengthDelimited)
+			Buf, Count = ProtoModule.writeBuffer(WriteTagResult1, WriteTagResult2_1, EncodeResult, buffer.len(EncodeResult))
+		end
+		local Buf1 = buffer.create(Count)
+		buffer.copy(Buf1, 0, Buf, 0, Count)
+		
+		return Buf1
+	end
+
+	function Module195.decode(Buf)
+		-- upvalues: Module195 (copy), ProtoModule (copy), t (copy)
+		local NewModule = Module195.new()
+		local v132 = 0
+		while v132 < buffer.len(Buf) do
+			local Tag, Tag2
+			Tag, Tag2, v4596 = ProtoModule.readTag(Buf, v132)
+			
+			if Tag2 == ProtoModule.wireTypes.varint then
+				if Tag == 1 then
+					local VarIntI32
+					VarIntI32, v4596 = ProtoModule.readVarIntI32(Buf, v132)
+					NewModule.action_type = t.ActionType.fromNumber(VarIntI32) or VarIntI32
+				else
+					local _
+					_, v4596 = ProtoModule.readVarInt(Buf, v132)
+				end
+			elseif Tag2 == ProtoModule.wireTypes.lengthDelimited then
+				if Tag == 2 then
+					local Buffer1
+					Buffer1, v4596 = ProtoModule.readBuffer(Buf, v132)
+					NewModule.action_params = t.OpenWhyThisAdAction_Params.decode(Buffer1)
+				else
+					local VarInt, VarInt2 = ProtoModule.readVarInt(Buf, v132)
+					v132 = VarInt2 + VarInt
+				end
+			elseif Tag2 == ProtoModule.wireTypes.i32 then
+				local _
+				_, v4596 = ProtoModule.readFixed32(Buf, v132)
+			elseif Tag2 == ProtoModule.wireTypes.i64 then
+				local _
+				_, v4596 = ProtoModule.readFixed64(Buf, v132)
+			else
+				error("Unsupported wire type: " .. Tag2)
+			end
+		end
+		return NewModule
+	end
+
+	function Module195:jsonEncode()
+		-- upvalues: t (copy)
+		local t1 = {}
+		
+		if self.action_type ~= nil and (self.action_type ~= nil and self.action_type ~= 0 or self.action_type ~= t.ActionType.fromNumber(0)) then
+			t1.actionType = if typeof(self.action_type) == "number" then self.action_type else t.ActionType.toNumber(self.action_type)
+		end
+		if self.action_params ~= nil then
+			t1.actionParams = self.action_params:jsonEncode()
+		end
+		return t1
+	end
+
+	function Module195:jsonDecode()
+		-- upvalues: Module195 (copy), t (copy)
+		local NewModule = Module195.new()
+		
+		if self.action_type ~= nil then
+			NewModule.action_type = (if typeof(self.action_type) == "number" then t.ActionType.fromNumber(self.action_type) else t.ActionType.fromName(self.action_type)) or self.action_type
+		end
+		if self.actionType ~= nil then
+			NewModule.action_type = (if typeof(self.actionType) == "number" then t.ActionType.fromNumber(self.actionType) else t.ActionType.fromName(self.actionType)) or self.actionType
+		end
+		if self.action_params ~= nil then
+			NewModule.action_params = t.OpenWhyThisAdAction_Params.jsonDecode(self.action_params)
+		end
+		if self.actionParams ~= nil then
+			NewModule.action_params = t.OpenWhyThisAdAction_Params.jsonDecode(self.actionParams)
+		end
+		return NewModule
+	end
+
+	Module195.descriptor = {
+		name = "OpenWhyThisAdAction",
+		fullName = "roblox.apppageplatform.shared.v1beta1.OpenWhyThisAdAction"
+	}
+	t.OpenWhyThisAdAction = Module195
+	TypeRegistryModule.default:register(t.OpenWhyThisAdAction)
+	local Module196 = {}
+	Module196.__index = Module196
+
+	function Module196.new(p1)
+		-- upvalues: Module196 (copy)
+		return (setmetatable({
+			universe_id = if p1 == nil or p1.universe_id == nil then nil else p1.universe_id,
+			payer_name = if p1 == nil or p1.payer_name == nil then nil else p1.payer_name,
+			sponsored_user_cohort = if p1 == nil or p1.sponsored_user_cohort == nil then nil else p1.sponsored_user_cohort,
+			content_type = if p1 == nil or p1.content_type == nil then nil else p1.content_type
+		}, Module196))
+	end
+
+	function Module196:encode()
+		-- upvalues: ProtoModule (copy)
+		local Buf = buffer.create(0)
+		local Count = 0
+		
+		if self.universe_id ~= nil then
+			local EncodeResult = self.universe_id:encode()
+			local WriteTagResult, WriteTagResult2 = ProtoModule.writeTag(Buf, Count, 1, ProtoModule.wireTypes.lengthDelimited)
+			Buf, Count = ProtoModule.writeBuffer(WriteTagResult, WriteTagResult2, EncodeResult, buffer.len(EncodeResult))
+		end
+		if self.payer_name ~= nil then
+			local EncodeResult = self.payer_name:encode()
+			local WriteTagResult1, WriteTagResult2_1 = ProtoModule.writeTag(Buf, Count, 2, ProtoModule.wireTypes.lengthDelimited)
+			Buf, Count = ProtoModule.writeBuffer(WriteTagResult1, WriteTagResult2_1, EncodeResult, buffer.len(EncodeResult))
+		end
+		if self.sponsored_user_cohort ~= nil then
+			local EncodeResult = self.sponsored_user_cohort:encode()
+			local WriteTagResult3, WriteTagResult2_2 = ProtoModule.writeTag(Buf, Count, 3, ProtoModule.wireTypes.lengthDelimited)
+			Buf, Count = ProtoModule.writeBuffer(WriteTagResult3, WriteTagResult2_2, EncodeResult, buffer.len(EncodeResult))
+		end
+		if self.content_type ~= nil then
+			local EncodeResult = self.content_type:encode()
+			local WriteTagResult4, WriteTagResult2_3 = ProtoModule.writeTag(Buf, Count, 4, ProtoModule.wireTypes.lengthDelimited)
+			Buf, Count = ProtoModule.writeBuffer(WriteTagResult4, WriteTagResult2_3, EncodeResult, buffer.len(EncodeResult))
+		end
+		local Buf1 = buffer.create(Count)
+		buffer.copy(Buf1, 0, Buf, 0, Count)
+		
+		return Buf1
+	end
+
+	function Module196.decode(Buf)
+		-- upvalues: Module196 (copy), ProtoModule (copy), PropTypesModule (copy)
+		local NewModule = Module196.new()
+		local v133 = 0
+		while v133 < buffer.len(Buf) do
+			local Tag, Tag2
+			Tag, Tag2, v4623 = ProtoModule.readTag(Buf, v133)
+			
+			if Tag2 == ProtoModule.wireTypes.varint then
+				local _
+				_, v4623 = ProtoModule.readVarInt(Buf, v133)
+			elseif Tag2 == ProtoModule.wireTypes.lengthDelimited then
+				if Tag == 1 then
+					local Buffer1
+					Buffer1, v4623 = ProtoModule.readBuffer(Buf, v133)
+					NewModule.universe_id = PropTypesModule.StringProp.decode(Buffer1)
+				elseif Tag == 2 then
+					local Buffer2
+					Buffer2, v4623 = ProtoModule.readBuffer(Buf, v133)
+					NewModule.payer_name = PropTypesModule.StringProp.decode(Buffer2)
+				elseif Tag == 3 then
+					local Buffer3
+					Buffer3, v4623 = ProtoModule.readBuffer(Buf, v133)
+					NewModule.sponsored_user_cohort = PropTypesModule.StringProp.decode(Buffer3)
+				elseif Tag == 4 then
+					local Buffer4
+					Buffer4, v4623 = ProtoModule.readBuffer(Buf, v133)
+					NewModule.content_type = PropTypesModule.StringProp.decode(Buffer4)
+				else
+					local VarInt, VarInt2 = ProtoModule.readVarInt(Buf, v133)
+					v133 = VarInt2 + VarInt
+				end
+			elseif Tag2 == ProtoModule.wireTypes.i32 then
+				local _
+				_, v4623 = ProtoModule.readFixed32(Buf, v133)
+			elseif Tag2 == ProtoModule.wireTypes.i64 then
+				local _
+				_, v4623 = ProtoModule.readFixed64(Buf, v133)
+			else
+				error("Unsupported wire type: " .. Tag2)
+			end
+		end
+		return NewModule
+	end
+
+	function Module196:jsonEncode()
+		local t = {}
+		
+		if self.universe_id ~= nil then
+			t.universeId = self.universe_id:jsonEncode()
+		end
+		if self.payer_name ~= nil then
+			t.payerName = self.payer_name:jsonEncode()
+		end
+		if self.sponsored_user_cohort ~= nil then
+			t.sponsoredUserCohort = self.sponsored_user_cohort:jsonEncode()
+		end
+		if self.content_type ~= nil then
+			t.contentType = self.content_type:jsonEncode()
+		end
+		return t
+	end
+
+	function Module196:jsonDecode()
+		-- upvalues: Module196 (copy), PropTypesModule (copy)
+		local NewModule = Module196.new()
+		
+		if self.universe_id ~= nil then
+			NewModule.universe_id = PropTypesModule.StringProp.jsonDecode(self.universe_id)
+		end
+		if self.universeId ~= nil then
+			NewModule.universe_id = PropTypesModule.StringProp.jsonDecode(self.universeId)
+		end
+		if self.payer_name ~= nil then
+			NewModule.payer_name = PropTypesModule.StringProp.jsonDecode(self.payer_name)
+		end
+		if self.payerName ~= nil then
+			NewModule.payer_name = PropTypesModule.StringProp.jsonDecode(self.payerName)
+		end
+		if self.sponsored_user_cohort ~= nil then
+			NewModule.sponsored_user_cohort = PropTypesModule.StringProp.jsonDecode(self.sponsored_user_cohort)
+		end
+		if self.sponsoredUserCohort ~= nil then
+			NewModule.sponsored_user_cohort = PropTypesModule.StringProp.jsonDecode(self.sponsoredUserCohort)
+		end
+		if self.content_type ~= nil then
+			NewModule.content_type = PropTypesModule.StringProp.jsonDecode(self.content_type)
+		end
+		if self.contentType ~= nil then
+			NewModule.content_type = PropTypesModule.StringProp.jsonDecode(self.contentType)
+		end
+		return NewModule
+	end
+
+	Module196.descriptor = {
+		name = "OpenWhyThisAdAction_Params",
+		fullName = "roblox.apppageplatform.shared.v1beta1.Params"
+	}
+	t.OpenWhyThisAdAction_Params = Module196
+	TypeRegistryModule.default:register(t.OpenWhyThisAdAction_Params)
+	local Module197 = {}
+	Module197.__index = Module197
+
+	function Module197.new(p1)
+		-- upvalues: t (copy), Module197 (copy)
+		return (setmetatable({
+			action_type = if p1 == nil or p1.action_type == nil then assert(t.ActionType.fromNumber(0), "Enum has no 0 default") else p1.action_type,
+			action_params = if p1 == nil or p1.action_params == nil then nil else p1.action_params
+		}, Module197))
+	end
+
+	function Module197:encode()
+		-- upvalues: t (copy), ProtoModule (copy)
+		local Buf = buffer.create(0)
+		local Count = 0
+		
+		if self.action_type ~= nil and (self.action_type ~= nil and self.action_type ~= 0 or self.action_type ~= t.ActionType.fromNumber(0)) then
+			local WriteTagResult, WriteTagResult2 = ProtoModule.writeTag(Buf, Count, 1, ProtoModule.wireTypes.varint)
+			Buf, Count = ProtoModule.writeVarInt(WriteTagResult, WriteTagResult2, t.ActionType.toNumber(self.action_type))
+		end
+		if self.action_params ~= nil then
+			local EncodeResult = self.action_params:encode()
+			local WriteTagResult1, WriteTagResult2_1 = ProtoModule.writeTag(Buf, Count, 2, ProtoModule.wireTypes.lengthDelimited)
+			Buf, Count = ProtoModule.writeBuffer(WriteTagResult1, WriteTagResult2_1, EncodeResult, buffer.len(EncodeResult))
+		end
+		local Buf1 = buffer.create(Count)
+		buffer.copy(Buf1, 0, Buf, 0, Count)
+		
+		return Buf1
+	end
+
+	function Module197.decode(Buf)
+		-- upvalues: Module197 (copy), ProtoModule (copy), t (copy)
+		local NewModule = Module197.new()
+		local v134 = 0
+		while v134 < buffer.len(Buf) do
+			local Tag, Tag2
+			Tag, Tag2, v4645 = ProtoModule.readTag(Buf, v134)
+			
+			if Tag2 == ProtoModule.wireTypes.varint then
+				if Tag == 1 then
+					local VarIntI32
+					VarIntI32, v4645 = ProtoModule.readVarIntI32(Buf, v134)
+					NewModule.action_type = t.ActionType.fromNumber(VarIntI32) or VarIntI32
+				else
+					local _
+					_, v4645 = ProtoModule.readVarInt(Buf, v134)
+				end
+			elseif Tag2 == ProtoModule.wireTypes.lengthDelimited then
+				if Tag == 2 then
+					local Buffer1
+					Buffer1, v4645 = ProtoModule.readBuffer(Buf, v134)
+					NewModule.action_params = t.RequestPushNotificationPermissionAction_Params.decode(Buffer1)
+				else
+					local VarInt, VarInt2 = ProtoModule.readVarInt(Buf, v134)
+					v134 = VarInt2 + VarInt
+				end
+			elseif Tag2 == ProtoModule.wireTypes.i32 then
+				local _
+				_, v4645 = ProtoModule.readFixed32(Buf, v134)
+			elseif Tag2 == ProtoModule.wireTypes.i64 then
+				local _
+				_, v4645 = ProtoModule.readFixed64(Buf, v134)
+			else
+				error("Unsupported wire type: " .. Tag2)
+			end
+		end
+		return NewModule
+	end
+
+	function Module197:jsonEncode()
+		-- upvalues: t (copy)
+		local t1 = {}
+		
+		if self.action_type ~= nil and (self.action_type ~= nil and self.action_type ~= 0 or self.action_type ~= t.ActionType.fromNumber(0)) then
+			t1.actionType = if typeof(self.action_type) == "number" then self.action_type else t.ActionType.toNumber(self.action_type)
+		end
+		if self.action_params ~= nil then
+			t1.actionParams = self.action_params:jsonEncode()
+		end
+		return t1
+	end
+
+	function Module197:jsonDecode()
+		-- upvalues: Module197 (copy), t (copy)
+		local NewModule = Module197.new()
+		
+		if self.action_type ~= nil then
+			NewModule.action_type = (if typeof(self.action_type) == "number" then t.ActionType.fromNumber(self.action_type) else t.ActionType.fromName(self.action_type)) or self.action_type
+		end
+		if self.actionType ~= nil then
+			NewModule.action_type = (if typeof(self.actionType) == "number" then t.ActionType.fromNumber(self.actionType) else t.ActionType.fromName(self.actionType)) or self.actionType
+		end
+		if self.action_params ~= nil then
+			NewModule.action_params = t.RequestPushNotificationPermissionAction_Params.jsonDecode(self.action_params)
+		end
+		if self.actionParams ~= nil then
+			NewModule.action_params = t.RequestPushNotificationPermissionAction_Params.jsonDecode(self.actionParams)
+		end
+		return NewModule
+	end
+
+	Module197.descriptor = {
+		name = "RequestPushNotificationPermissionAction",
+		fullName = "roblox.apppageplatform.shared.v1beta1.RequestPushNotificationPermissionAction"
+	}
+	t.RequestPushNotificationPermissionAction = Module197
+end
+do
+	TypeRegistryModule.default:register(t.RequestPushNotificationPermissionAction)
+	local Module198 = {}
+	Module198.__index = Module198
+
+	function Module198.new(p1)
+		-- upvalues: Module198 (copy)
+		return (setmetatable({
+			source = if p1 == nil or p1.source == nil then nil else p1.source
+		}, Module198))
+	end
+
+	function Module198:encode()
+		-- upvalues: ProtoModule (copy)
+		local Buf = buffer.create(0)
+		local Count = 0
+		
+		if self.source ~= nil then
+			local EncodeResult = self.source:encode()
+			local WriteTagResult, WriteTagResult2 = ProtoModule.writeTag(Buf, Count, 1, ProtoModule.wireTypes.lengthDelimited)
+			Buf, Count = ProtoModule.writeBuffer(WriteTagResult, WriteTagResult2, EncodeResult, buffer.len(EncodeResult))
+		end
+		local Buf1 = buffer.create(Count)
+		buffer.copy(Buf1, 0, Buf, 0, Count)
+		
+		return Buf1
+	end
+
+	function Module198.decode(Buf)
+		-- upvalues: Module198 (copy), ProtoModule (copy), PropTypesModule (copy)
+		local NewModule = Module198.new()
+		local v134 = 0
+		while v134 < buffer.len(Buf) do
+			local Tag, Tag2
+			Tag, Tag2, v4663 = ProtoModule.readTag(Buf, v134)
+			
+			if Tag2 == ProtoModule.wireTypes.varint then
+				local _
+				_, v4663 = ProtoModule.readVarInt(Buf, v134)
+			elseif Tag2 == ProtoModule.wireTypes.lengthDelimited then
+				if Tag == 1 then
+					local Buffer1
+					Buffer1, v4663 = ProtoModule.readBuffer(Buf, v134)
+					NewModule.source = PropTypesModule.StringProp.decode(Buffer1)
+				else
+					local VarInt, VarInt2 = ProtoModule.readVarInt(Buf, v134)
+					v134 = VarInt2 + VarInt
+				end
+			elseif Tag2 == ProtoModule.wireTypes.i32 then
+				local _
+				_, v4663 = ProtoModule.readFixed32(Buf, v134)
+			elseif Tag2 == ProtoModule.wireTypes.i64 then
+				local _
+				_, v4663 = ProtoModule.readFixed64(Buf, v134)
+			else
+				error("Unsupported wire type: " .. Tag2)
+			end
+		end
+		return NewModule
+	end
+
+	function Module198:jsonEncode()
+		local t = {}
+		
+		if self.source ~= nil then
+			t.source = self.source:jsonEncode()
+		end
+		return t
+	end
+
+	function Module198:jsonDecode()
+		-- upvalues: Module198 (copy), PropTypesModule (copy)
+		local NewModule = Module198.new()
+		
+		if self.source ~= nil then
+			NewModule.source = PropTypesModule.StringProp.jsonDecode(self.source)
+		end
+		return NewModule
+	end
+
+	Module198.descriptor = {
+		name = "RequestPushNotificationPermissionAction_Params",
+		fullName = "roblox.apppageplatform.shared.v1beta1.Params"
+	}
+	t.RequestPushNotificationPermissionAction_Params = Module198
+	TypeRegistryModule.default:register(t.RequestPushNotificationPermissionAction_Params)
+	local Module199 = {}
+	Module199.__index = Module199
+
+	function Module199.new(p1)
+		-- upvalues: t (copy), Module199 (copy)
+		return (setmetatable({
+			action_type = if p1 == nil or p1.action_type == nil then assert(t.ActionType.fromNumber(0), "Enum has no 0 default") else p1.action_type,
+			action_params = if p1 == nil or p1.action_params == nil then nil else p1.action_params
+		}, Module199))
+	end
+
+	function Module199:encode()
+		-- upvalues: t (copy), ProtoModule (copy)
+		local Buf = buffer.create(0)
+		local Count = 0
+		
+		if self.action_type ~= nil and (self.action_type ~= nil and self.action_type ~= 0 or self.action_type ~= t.ActionType.fromNumber(0)) then
+			local WriteTagResult, WriteTagResult2 = ProtoModule.writeTag(Buf, Count, 1, ProtoModule.wireTypes.varint)
+			Buf, Count = ProtoModule.writeVarInt(WriteTagResult, WriteTagResult2, t.ActionType.toNumber(self.action_type))
+		end
+		if self.action_params ~= nil then
+			local EncodeResult = self.action_params:encode()
+			local WriteTagResult1, WriteTagResult2_1 = ProtoModule.writeTag(Buf, Count, 2, ProtoModule.wireTypes.lengthDelimited)
+			Buf, Count = ProtoModule.writeBuffer(WriteTagResult1, WriteTagResult2_1, EncodeResult, buffer.len(EncodeResult))
+		end
+		local Buf1 = buffer.create(Count)
+		buffer.copy(Buf1, 0, Buf, 0, Count)
+		
+		return Buf1
+	end
+
+	function Module199.decode(Buf)
+		-- upvalues: Module199 (copy), ProtoModule (copy), t (copy)
+		local NewModule = Module199.new()
+		local v135 = 0
+		while v135 < buffer.len(Buf) do
+			local Tag, Tag2
+			Tag, Tag2, v4682 = ProtoModule.readTag(Buf, v135)
+			
+			if Tag2 == ProtoModule.wireTypes.varint then
+				if Tag == 1 then
+					local VarIntI32
+					VarIntI32, v4682 = ProtoModule.readVarIntI32(Buf, v135)
+					NewModule.action_type = t.ActionType.fromNumber(VarIntI32) or VarIntI32
+				else
+					local _
+					_, v4682 = ProtoModule.readVarInt(Buf, v135)
+				end
+			elseif Tag2 == ProtoModule.wireTypes.lengthDelimited then
+				if Tag == 2 then
+					local Buffer1
+					Buffer1, v4682 = ProtoModule.readBuffer(Buf, v135)
+					NewModule.action_params = t.OpenBuildCreationChatAction_Params.decode(Buffer1)
+				else
+					local VarInt, VarInt2 = ProtoModule.readVarInt(Buf, v135)
+					v135 = VarInt2 + VarInt
+				end
+			elseif Tag2 == ProtoModule.wireTypes.i32 then
+				local _
+				_, v4682 = ProtoModule.readFixed32(Buf, v135)
+			elseif Tag2 == ProtoModule.wireTypes.i64 then
+				local _
+				_, v4682 = ProtoModule.readFixed64(Buf, v135)
+			else
+				error("Unsupported wire type: " .. Tag2)
+			end
+		end
+		return NewModule
+	end
+
+	function Module199:jsonEncode()
+		-- upvalues: t (copy)
+		local t1 = {}
+		
+		if self.action_type ~= nil and (self.action_type ~= nil and self.action_type ~= 0 or self.action_type ~= t.ActionType.fromNumber(0)) then
+			t1.actionType = if typeof(self.action_type) == "number" then self.action_type else t.ActionType.toNumber(self.action_type)
+		end
+		if self.action_params ~= nil then
+			t1.actionParams = self.action_params:jsonEncode()
+		end
+		return t1
+	end
+
+	function Module199:jsonDecode()
+		-- upvalues: Module199 (copy), t (copy)
+		local NewModule = Module199.new()
+		
+		if self.action_type ~= nil then
+			NewModule.action_type = (if typeof(self.action_type) == "number" then t.ActionType.fromNumber(self.action_type) else t.ActionType.fromName(self.action_type)) or self.action_type
+		end
+		if self.actionType ~= nil then
+			NewModule.action_type = (if typeof(self.actionType) == "number" then t.ActionType.fromNumber(self.actionType) else t.ActionType.fromName(self.actionType)) or self.actionType
+		end
+		if self.action_params ~= nil then
 			NewModule.action_params = t.OpenBuildCreationChatAction_Params.jsonDecode(self.action_params)
 		end
 		if self.actionParams ~= nil then
@@ -22179,27 +23127,27 @@ do
 		return NewModule
 	end
 
-	Module189.descriptor = {
+	Module199.descriptor = {
 		name = "OpenBuildCreationChatAction",
 		fullName = "roblox.apppageplatform.shared.v1beta1.OpenBuildCreationChatAction"
 	}
-	t.OpenBuildCreationChatAction = Module189
+	t.OpenBuildCreationChatAction = Module199
 	TypeRegistryModule.default:register(t.OpenBuildCreationChatAction)
-	local Module190 = {}
-	Module190.__index = Module190
+	local Module200 = {}
+	Module200.__index = Module200
 
-	function Module190.new(p1)
-		-- upvalues: Module190 (copy)
+	function Module200.new(p1)
+		-- upvalues: Module200 (copy)
 		return (setmetatable({
 			experience_name = if p1 == nil or p1.experience_name == nil then nil else p1.experience_name,
 			universe_id = if p1 == nil or p1.universe_id == nil then nil else p1.universe_id,
 			session_id = if p1 == nil or p1.session_id == nil then nil else p1.session_id,
 			place_id = if p1 == nil or p1.place_id == nil then nil else p1.place_id,
 			creator_name = if p1 == nil or p1.creator_name == nil then nil else p1.creator_name
-		}, Module190))
+		}, Module200))
 	end
 
-	function Module190:encode()
+	function Module200:encode()
 		-- upvalues: ProtoModule (copy)
 		local Buf = buffer.create(0)
 		local Count = 0
@@ -22235,48 +23183,48 @@ do
 		return Buf1
 	end
 
-	function Module190.decode(Buf)
-		-- upvalues: Module190 (copy), ProtoModule (copy), PropTypesModule (copy)
-		local NewModule = Module190.new()
-		local v128 = 0
-		while v128 < buffer.len(Buf) do
+	function Module200.decode(Buf)
+		-- upvalues: Module200 (copy), ProtoModule (copy), PropTypesModule (copy)
+		local NewModule = Module200.new()
+		local v136 = 0
+		while v136 < buffer.len(Buf) do
 			local Tag, Tag2
-			Tag, Tag2, v4526 = ProtoModule.readTag(Buf, v128)
+			Tag, Tag2, v4712 = ProtoModule.readTag(Buf, v136)
 			
 			if Tag2 == ProtoModule.wireTypes.varint then
 				local _
-				_, v4526 = ProtoModule.readVarInt(Buf, v128)
+				_, v4712 = ProtoModule.readVarInt(Buf, v136)
 			elseif Tag2 == ProtoModule.wireTypes.lengthDelimited then
 				if Tag == 1 then
 					local Buffer1
-					Buffer1, v4526 = ProtoModule.readBuffer(Buf, v128)
+					Buffer1, v4712 = ProtoModule.readBuffer(Buf, v136)
 					NewModule.experience_name = PropTypesModule.StringProp.decode(Buffer1)
 				elseif Tag == 2 then
 					local Buffer2
-					Buffer2, v4526 = ProtoModule.readBuffer(Buf, v128)
+					Buffer2, v4712 = ProtoModule.readBuffer(Buf, v136)
 					NewModule.universe_id = PropTypesModule.StringProp.decode(Buffer2)
 				elseif Tag == 3 then
 					local Buffer3
-					Buffer3, v4526 = ProtoModule.readBuffer(Buf, v128)
+					Buffer3, v4712 = ProtoModule.readBuffer(Buf, v136)
 					NewModule.session_id = PropTypesModule.StringProp.decode(Buffer3)
 				elseif Tag == 4 then
 					local Buffer4
-					Buffer4, v4526 = ProtoModule.readBuffer(Buf, v128)
+					Buffer4, v4712 = ProtoModule.readBuffer(Buf, v136)
 					NewModule.place_id = PropTypesModule.StringProp.decode(Buffer4)
 				elseif Tag == 5 then
 					local Buffer5
-					Buffer5, v4526 = ProtoModule.readBuffer(Buf, v128)
+					Buffer5, v4712 = ProtoModule.readBuffer(Buf, v136)
 					NewModule.creator_name = PropTypesModule.StringProp.decode(Buffer5)
 				else
-					local VarInt, VarInt2 = ProtoModule.readVarInt(Buf, v128)
-					v128 = VarInt2 + VarInt
+					local VarInt, VarInt2 = ProtoModule.readVarInt(Buf, v136)
+					v136 = VarInt2 + VarInt
 				end
 			elseif Tag2 == ProtoModule.wireTypes.i32 then
 				local _
-				_, v4526 = ProtoModule.readFixed32(Buf, v128)
+				_, v4712 = ProtoModule.readFixed32(Buf, v136)
 			elseif Tag2 == ProtoModule.wireTypes.i64 then
 				local _
-				_, v4526 = ProtoModule.readFixed64(Buf, v128)
+				_, v4712 = ProtoModule.readFixed64(Buf, v136)
 			else
 				error("Unsupported wire type: " .. Tag2)
 			end
@@ -22284,7 +23232,7 @@ do
 		return NewModule
 	end
 
-	function Module190:jsonEncode()
+	function Module200:jsonEncode()
 		local t = {}
 		
 		if self.experience_name ~= nil then
@@ -22305,9 +23253,9 @@ do
 		return t
 	end
 
-	function Module190:jsonDecode()
-		-- upvalues: Module190 (copy), PropTypesModule (copy)
-		local NewModule = Module190.new()
+	function Module200:jsonDecode()
+		-- upvalues: Module200 (copy), PropTypesModule (copy)
+		local NewModule = Module200.new()
 		
 		if self.experience_name ~= nil then
 			NewModule.experience_name = PropTypesModule.StringProp.jsonDecode(self.experience_name)
@@ -22342,1119 +23290,14 @@ do
 		return NewModule
 	end
 
-	Module190.descriptor = {
+	Module200.descriptor = {
 		name = "OpenBuildCreationChatAction_Params",
 		fullName = "roblox.apppageplatform.shared.v1beta1.Params"
 	}
-	t.OpenBuildCreationChatAction_Params = Module190
+	t.OpenBuildCreationChatAction_Params = Module200
+end
+do
 	TypeRegistryModule.default:register(t.OpenBuildCreationChatAction_Params)
-	local Module191 = {}
-	Module191.__index = Module191
-
-	function Module191.new(p1)
-		-- upvalues: t (copy), Module191 (copy)
-		return (setmetatable({
-			action_type = if p1 == nil or p1.action_type == nil then assert(t.ActionType.fromNumber(0), "Enum has no 0 default") else p1.action_type,
-			action_params = if p1 == nil or p1.action_params == nil then nil else p1.action_params
-		}, Module191))
-	end
-
-	function Module191:encode()
-		-- upvalues: t (copy), ProtoModule (copy)
-		local Buf = buffer.create(0)
-		local Count = 0
-		
-		if self.action_type ~= nil and (self.action_type ~= nil and self.action_type ~= 0 or self.action_type ~= t.ActionType.fromNumber(0)) then
-			local WriteTagResult, WriteTagResult2 = ProtoModule.writeTag(Buf, Count, 1, ProtoModule.wireTypes.varint)
-			Buf, Count = ProtoModule.writeVarInt(WriteTagResult, WriteTagResult2, t.ActionType.toNumber(self.action_type))
-		end
-		if self.action_params ~= nil then
-			local EncodeResult = self.action_params:encode()
-			local WriteTagResult1, WriteTagResult2_1 = ProtoModule.writeTag(Buf, Count, 2, ProtoModule.wireTypes.lengthDelimited)
-			Buf, Count = ProtoModule.writeBuffer(WriteTagResult1, WriteTagResult2_1, EncodeResult, buffer.len(EncodeResult))
-		end
-		local Buf1 = buffer.create(Count)
-		buffer.copy(Buf1, 0, Buf, 0, Count)
-		
-		return Buf1
-	end
-
-	function Module191.decode(Buf)
-		-- upvalues: Module191 (copy), ProtoModule (copy), t (copy)
-		local NewModule = Module191.new()
-		local v129 = 0
-		while v129 < buffer.len(Buf) do
-			local Tag, Tag2
-			Tag, Tag2, v4549 = ProtoModule.readTag(Buf, v129)
-			
-			if Tag2 == ProtoModule.wireTypes.varint then
-				if Tag == 1 then
-					local VarIntI32
-					VarIntI32, v4549 = ProtoModule.readVarIntI32(Buf, v129)
-					NewModule.action_type = t.ActionType.fromNumber(VarIntI32) or VarIntI32
-				else
-					local _
-					_, v4549 = ProtoModule.readVarInt(Buf, v129)
-				end
-			elseif Tag2 == ProtoModule.wireTypes.lengthDelimited then
-				if Tag == 2 then
-					local Buffer1
-					Buffer1, v4549 = ProtoModule.readBuffer(Buf, v129)
-					NewModule.action_params = t.OpenCatalogItemDetailsAction_Params.decode(Buffer1)
-				else
-					local VarInt, VarInt2 = ProtoModule.readVarInt(Buf, v129)
-					v129 = VarInt2 + VarInt
-				end
-			elseif Tag2 == ProtoModule.wireTypes.i32 then
-				local _
-				_, v4549 = ProtoModule.readFixed32(Buf, v129)
-			elseif Tag2 == ProtoModule.wireTypes.i64 then
-				local _
-				_, v4549 = ProtoModule.readFixed64(Buf, v129)
-			else
-				error("Unsupported wire type: " .. Tag2)
-			end
-		end
-		return NewModule
-	end
-
-	function Module191:jsonEncode()
-		-- upvalues: t (copy)
-		local t1 = {}
-		
-		if self.action_type ~= nil and (self.action_type ~= nil and self.action_type ~= 0 or self.action_type ~= t.ActionType.fromNumber(0)) then
-			t1.actionType = if typeof(self.action_type) == "number" then self.action_type else t.ActionType.toNumber(self.action_type)
-		end
-		if self.action_params ~= nil then
-			t1.actionParams = self.action_params:jsonEncode()
-		end
-		return t1
-	end
-
-	function Module191:jsonDecode()
-		-- upvalues: Module191 (copy), t (copy)
-		local NewModule = Module191.new()
-		
-		if self.action_type ~= nil then
-			NewModule.action_type = (if typeof(self.action_type) == "number" then t.ActionType.fromNumber(self.action_type) else t.ActionType.fromName(self.action_type)) or self.action_type
-		end
-		if self.actionType ~= nil then
-			NewModule.action_type = (if typeof(self.actionType) == "number" then t.ActionType.fromNumber(self.actionType) else t.ActionType.fromName(self.actionType)) or self.actionType
-		end
-		if self.action_params ~= nil then
-			NewModule.action_params = t.OpenCatalogItemDetailsAction_Params.jsonDecode(self.action_params)
-		end
-		if self.actionParams ~= nil then
-			NewModule.action_params = t.OpenCatalogItemDetailsAction_Params.jsonDecode(self.actionParams)
-		end
-		return NewModule
-	end
-
-	Module191.descriptor = {
-		name = "OpenCatalogItemDetailsAction",
-		fullName = "roblox.apppageplatform.shared.v1beta1.OpenCatalogItemDetailsAction"
-	}
-	t.OpenCatalogItemDetailsAction = Module191
-end
-do
-	TypeRegistryModule.default:register(t.OpenCatalogItemDetailsAction)
-	local Module192 = {}
-	Module192.__index = Module192
-
-	function Module192.new(p1)
-		-- upvalues: Module192 (copy)
-		return (setmetatable({
-			item_id = if p1 == nil or p1.item_id == nil then nil else p1.item_id,
-			item_type = if p1 == nil or p1.item_type == nil then nil else p1.item_type,
-			item_sub_type = if p1 == nil or p1.item_sub_type == nil then nil else p1.item_sub_type
-		}, Module192))
-	end
-
-	function Module192:encode()
-		-- upvalues: ProtoModule (copy)
-		local Buf = buffer.create(0)
-		local Count = 0
-		
-		if self.item_id ~= nil then
-			local EncodeResult = self.item_id:encode()
-			local WriteTagResult, WriteTagResult2 = ProtoModule.writeTag(Buf, Count, 1, ProtoModule.wireTypes.lengthDelimited)
-			Buf, Count = ProtoModule.writeBuffer(WriteTagResult, WriteTagResult2, EncodeResult, buffer.len(EncodeResult))
-		end
-		if self.item_type ~= nil then
-			local EncodeResult = self.item_type:encode()
-			local WriteTagResult1, WriteTagResult2_1 = ProtoModule.writeTag(Buf, Count, 2, ProtoModule.wireTypes.lengthDelimited)
-			Buf, Count = ProtoModule.writeBuffer(WriteTagResult1, WriteTagResult2_1, EncodeResult, buffer.len(EncodeResult))
-		end
-		if self.item_sub_type ~= nil then
-			local EncodeResult = self.item_sub_type:encode()
-			local WriteTagResult3, WriteTagResult2_2 = ProtoModule.writeTag(Buf, Count, 3, ProtoModule.wireTypes.lengthDelimited)
-			Buf, Count = ProtoModule.writeBuffer(WriteTagResult3, WriteTagResult2_2, EncodeResult, buffer.len(EncodeResult))
-		end
-		local Buf1 = buffer.create(Count)
-		buffer.copy(Buf1, 0, Buf, 0, Count)
-		
-		return Buf1
-	end
-
-	function Module192.decode(Buf)
-		-- upvalues: Module192 (copy), ProtoModule (copy), PropTypesModule (copy)
-		local NewModule = Module192.new()
-		local v129 = 0
-		while v129 < buffer.len(Buf) do
-			local Tag, Tag2
-			Tag, Tag2, v4573 = ProtoModule.readTag(Buf, v129)
-			
-			if Tag2 == ProtoModule.wireTypes.varint then
-				local _
-				_, v4573 = ProtoModule.readVarInt(Buf, v129)
-			elseif Tag2 == ProtoModule.wireTypes.lengthDelimited then
-				if Tag == 1 then
-					local Buffer1
-					Buffer1, v4573 = ProtoModule.readBuffer(Buf, v129)
-					NewModule.item_id = PropTypesModule.StringProp.decode(Buffer1)
-				elseif Tag == 2 then
-					local Buffer2
-					Buffer2, v4573 = ProtoModule.readBuffer(Buf, v129)
-					NewModule.item_type = PropTypesModule.StringProp.decode(Buffer2)
-				elseif Tag == 3 then
-					local Buffer3
-					Buffer3, v4573 = ProtoModule.readBuffer(Buf, v129)
-					NewModule.item_sub_type = PropTypesModule.StringProp.decode(Buffer3)
-				else
-					local VarInt, VarInt2 = ProtoModule.readVarInt(Buf, v129)
-					v129 = VarInt2 + VarInt
-				end
-			elseif Tag2 == ProtoModule.wireTypes.i32 then
-				local _
-				_, v4573 = ProtoModule.readFixed32(Buf, v129)
-			elseif Tag2 == ProtoModule.wireTypes.i64 then
-				local _
-				_, v4573 = ProtoModule.readFixed64(Buf, v129)
-			else
-				error("Unsupported wire type: " .. Tag2)
-			end
-		end
-		return NewModule
-	end
-
-	function Module192:jsonEncode()
-		local t = {}
-		
-		if self.item_id ~= nil then
-			t.itemId = self.item_id:jsonEncode()
-		end
-		if self.item_type ~= nil then
-			t.itemType = self.item_type:jsonEncode()
-		end
-		if self.item_sub_type ~= nil then
-			t.itemSubType = self.item_sub_type:jsonEncode()
-		end
-		return t
-	end
-
-	function Module192:jsonDecode()
-		-- upvalues: Module192 (copy), PropTypesModule (copy)
-		local NewModule = Module192.new()
-		
-		if self.item_id ~= nil then
-			NewModule.item_id = PropTypesModule.StringProp.jsonDecode(self.item_id)
-		end
-		if self.itemId ~= nil then
-			NewModule.item_id = PropTypesModule.StringProp.jsonDecode(self.itemId)
-		end
-		if self.item_type ~= nil then
-			NewModule.item_type = PropTypesModule.StringProp.jsonDecode(self.item_type)
-		end
-		if self.itemType ~= nil then
-			NewModule.item_type = PropTypesModule.StringProp.jsonDecode(self.itemType)
-		end
-		if self.item_sub_type ~= nil then
-			NewModule.item_sub_type = PropTypesModule.StringProp.jsonDecode(self.item_sub_type)
-		end
-		if self.itemSubType ~= nil then
-			NewModule.item_sub_type = PropTypesModule.StringProp.jsonDecode(self.itemSubType)
-		end
-		return NewModule
-	end
-
-	Module192.descriptor = {
-		name = "OpenCatalogItemDetailsAction_Params",
-		fullName = "roblox.apppageplatform.shared.v1beta1.Params"
-	}
-	t.OpenCatalogItemDetailsAction_Params = Module192
-	TypeRegistryModule.default:register(t.OpenCatalogItemDetailsAction_Params)
-	local Module193 = {}
-	Module193.__index = Module193
-
-	function Module193.new(p1)
-		-- upvalues: t (copy), Module193 (copy)
-		return (setmetatable({
-			action_type = if p1 == nil or p1.action_type == nil then assert(t.ActionType.fromNumber(0), "Enum has no 0 default") else p1.action_type,
-			action_params = if p1 == nil or p1.action_params == nil then nil else p1.action_params
-		}, Module193))
-	end
-
-	function Module193:encode()
-		-- upvalues: t (copy), ProtoModule (copy)
-		local Buf = buffer.create(0)
-		local Count = 0
-		
-		if self.action_type ~= nil and (self.action_type ~= nil and self.action_type ~= 0 or self.action_type ~= t.ActionType.fromNumber(0)) then
-			local WriteTagResult, WriteTagResult2 = ProtoModule.writeTag(Buf, Count, 1, ProtoModule.wireTypes.varint)
-			Buf, Count = ProtoModule.writeVarInt(WriteTagResult, WriteTagResult2, t.ActionType.toNumber(self.action_type))
-		end
-		if self.action_params ~= nil then
-			local EncodeResult = self.action_params:encode()
-			local WriteTagResult1, WriteTagResult2_1 = ProtoModule.writeTag(Buf, Count, 2, ProtoModule.wireTypes.lengthDelimited)
-			Buf, Count = ProtoModule.writeBuffer(WriteTagResult1, WriteTagResult2_1, EncodeResult, buffer.len(EncodeResult))
-		end
-		local Buf1 = buffer.create(Count)
-		buffer.copy(Buf1, 0, Buf, 0, Count)
-		
-		return Buf1
-	end
-
-	function Module193.decode(Buf)
-		-- upvalues: Module193 (copy), ProtoModule (copy), t (copy)
-		local NewModule = Module193.new()
-		local v130 = 0
-		while v130 < buffer.len(Buf) do
-			local Tag, Tag2
-			Tag, Tag2, v4594 = ProtoModule.readTag(Buf, v130)
-			
-			if Tag2 == ProtoModule.wireTypes.varint then
-				if Tag == 1 then
-					local VarIntI32
-					VarIntI32, v4594 = ProtoModule.readVarIntI32(Buf, v130)
-					NewModule.action_type = t.ActionType.fromNumber(VarIntI32) or VarIntI32
-				else
-					local _
-					_, v4594 = ProtoModule.readVarInt(Buf, v130)
-				end
-			elseif Tag2 == ProtoModule.wireTypes.lengthDelimited then
-				if Tag == 2 then
-					local Buffer1
-					Buffer1, v4594 = ProtoModule.readBuffer(Buf, v130)
-					NewModule.action_params = t.OpenItemInfoRowPromptAction_Params.decode(Buffer1)
-				else
-					local VarInt, VarInt2 = ProtoModule.readVarInt(Buf, v130)
-					v130 = VarInt2 + VarInt
-				end
-			elseif Tag2 == ProtoModule.wireTypes.i32 then
-				local _
-				_, v4594 = ProtoModule.readFixed32(Buf, v130)
-			elseif Tag2 == ProtoModule.wireTypes.i64 then
-				local _
-				_, v4594 = ProtoModule.readFixed64(Buf, v130)
-			else
-				error("Unsupported wire type: " .. Tag2)
-			end
-		end
-		return NewModule
-	end
-
-	function Module193:jsonEncode()
-		-- upvalues: t (copy)
-		local t1 = {}
-		
-		if self.action_type ~= nil and (self.action_type ~= nil and self.action_type ~= 0 or self.action_type ~= t.ActionType.fromNumber(0)) then
-			t1.actionType = if typeof(self.action_type) == "number" then self.action_type else t.ActionType.toNumber(self.action_type)
-		end
-		if self.action_params ~= nil then
-			t1.actionParams = self.action_params:jsonEncode()
-		end
-		return t1
-	end
-
-	function Module193:jsonDecode()
-		-- upvalues: Module193 (copy), t (copy)
-		local NewModule = Module193.new()
-		
-		if self.action_type ~= nil then
-			NewModule.action_type = (if typeof(self.action_type) == "number" then t.ActionType.fromNumber(self.action_type) else t.ActionType.fromName(self.action_type)) or self.action_type
-		end
-		if self.actionType ~= nil then
-			NewModule.action_type = (if typeof(self.actionType) == "number" then t.ActionType.fromNumber(self.actionType) else t.ActionType.fromName(self.actionType)) or self.actionType
-		end
-		if self.action_params ~= nil then
-			NewModule.action_params = t.OpenItemInfoRowPromptAction_Params.jsonDecode(self.action_params)
-		end
-		if self.actionParams ~= nil then
-			NewModule.action_params = t.OpenItemInfoRowPromptAction_Params.jsonDecode(self.actionParams)
-		end
-		return NewModule
-	end
-
-	Module193.descriptor = {
-		name = "OpenItemInfoRowPromptAction",
-		fullName = "roblox.apppageplatform.shared.v1beta1.OpenItemInfoRowPromptAction"
-	}
-	t.OpenItemInfoRowPromptAction = Module193
-	TypeRegistryModule.default:register(t.OpenItemInfoRowPromptAction)
-	local Module194 = {}
-	Module194.__index = Module194
-
-	function Module194.new(p1)
-		-- upvalues: Module194 (copy)
-		return (setmetatable({
-			title = if p1 == nil or p1.title == nil then nil else p1.title,
-			message = if p1 == nil or p1.message == nil then nil else p1.message,
-			sections = if p1 == nil or p1.sections == nil then nil else p1.sections
-		}, Module194))
-	end
-
-	function Module194:encode()
-		-- upvalues: ProtoModule (copy)
-		local Buf = buffer.create(0)
-		local Count = 0
-		
-		if self.title ~= nil then
-			local EncodeResult = self.title:encode()
-			local WriteTagResult, WriteTagResult2 = ProtoModule.writeTag(Buf, Count, 1, ProtoModule.wireTypes.lengthDelimited)
-			Buf, Count = ProtoModule.writeBuffer(WriteTagResult, WriteTagResult2, EncodeResult, buffer.len(EncodeResult))
-		end
-		if self.message ~= nil then
-			local EncodeResult = self.message:encode()
-			local WriteTagResult1, WriteTagResult2_1 = ProtoModule.writeTag(Buf, Count, 2, ProtoModule.wireTypes.lengthDelimited)
-			Buf, Count = ProtoModule.writeBuffer(WriteTagResult1, WriteTagResult2_1, EncodeResult, buffer.len(EncodeResult))
-		end
-		if self.sections ~= nil then
-			local EncodeResult = self.sections:encode()
-			local WriteTagResult3, WriteTagResult2_2 = ProtoModule.writeTag(Buf, Count, 3, ProtoModule.wireTypes.lengthDelimited)
-			Buf, Count = ProtoModule.writeBuffer(WriteTagResult3, WriteTagResult2_2, EncodeResult, buffer.len(EncodeResult))
-		end
-		local Buf1 = buffer.create(Count)
-		buffer.copy(Buf1, 0, Buf, 0, Count)
-		
-		return Buf1
-	end
-
-	function Module194.decode(Buf)
-		-- upvalues: Module194 (copy), ProtoModule (copy), PropTypesModule (copy)
-		local NewModule = Module194.new()
-		local v131 = 0
-		while v131 < buffer.len(Buf) do
-			local Tag, Tag2
-			Tag, Tag2, v4618 = ProtoModule.readTag(Buf, v131)
-			
-			if Tag2 == ProtoModule.wireTypes.varint then
-				local _
-				_, v4618 = ProtoModule.readVarInt(Buf, v131)
-			elseif Tag2 == ProtoModule.wireTypes.lengthDelimited then
-				if Tag == 1 then
-					local Buffer1
-					Buffer1, v4618 = ProtoModule.readBuffer(Buf, v131)
-					NewModule.title = PropTypesModule.StringProp.decode(Buffer1)
-				elseif Tag == 2 then
-					local Buffer2
-					Buffer2, v4618 = ProtoModule.readBuffer(Buf, v131)
-					NewModule.message = PropTypesModule.StringProp.decode(Buffer2)
-				elseif Tag == 3 then
-					local Buffer3
-					Buffer3, v4618 = ProtoModule.readBuffer(Buf, v131)
-					NewModule.sections = PropTypesModule.ArrayOfStructProp.decode(Buffer3)
-				else
-					local VarInt, VarInt2 = ProtoModule.readVarInt(Buf, v131)
-					v131 = VarInt2 + VarInt
-				end
-			elseif Tag2 == ProtoModule.wireTypes.i32 then
-				local _
-				_, v4618 = ProtoModule.readFixed32(Buf, v131)
-			elseif Tag2 == ProtoModule.wireTypes.i64 then
-				local _
-				_, v4618 = ProtoModule.readFixed64(Buf, v131)
-			else
-				error("Unsupported wire type: " .. Tag2)
-			end
-		end
-		return NewModule
-	end
-
-	function Module194:jsonEncode()
-		local t = {}
-		
-		if self.title ~= nil then
-			t.title = self.title:jsonEncode()
-		end
-		if self.message ~= nil then
-			t.message = self.message:jsonEncode()
-		end
-		if self.sections ~= nil then
-			t.sections = self.sections:jsonEncode()
-		end
-		return t
-	end
-
-	function Module194:jsonDecode()
-		-- upvalues: Module194 (copy), PropTypesModule (copy)
-		local NewModule = Module194.new()
-		
-		if self.title ~= nil then
-			NewModule.title = PropTypesModule.StringProp.jsonDecode(self.title)
-		end
-		if self.message ~= nil then
-			NewModule.message = PropTypesModule.StringProp.jsonDecode(self.message)
-		end
-		if self.sections ~= nil then
-			NewModule.sections = PropTypesModule.ArrayOfStructProp.jsonDecode(self.sections)
-		end
-		return NewModule
-	end
-
-	Module194.descriptor = {
-		name = "OpenItemInfoRowPromptAction_Params",
-		fullName = "roblox.apppageplatform.shared.v1beta1.Params"
-	}
-	t.OpenItemInfoRowPromptAction_Params = Module194
-end
-do
-	TypeRegistryModule.default:register(t.OpenItemInfoRowPromptAction_Params)
-	local Module195 = {}
-	Module195.__index = Module195
-
-	function Module195.new(p1)
-		-- upvalues: t (copy), Module195 (copy)
-		return (setmetatable({
-			action_type = if p1 == nil or p1.action_type == nil then assert(t.ActionType.fromNumber(0), "Enum has no 0 default") else p1.action_type,
-			action_params = if p1 == nil or p1.action_params == nil then nil else p1.action_params
-		}, Module195))
-	end
-
-	function Module195:encode()
-		-- upvalues: t (copy), ProtoModule (copy)
-		local Buf = buffer.create(0)
-		local Count = 0
-		
-		if self.action_type ~= nil and (self.action_type ~= nil and self.action_type ~= 0 or self.action_type ~= t.ActionType.fromNumber(0)) then
-			local WriteTagResult, WriteTagResult2 = ProtoModule.writeTag(Buf, Count, 1, ProtoModule.wireTypes.varint)
-			Buf, Count = ProtoModule.writeVarInt(WriteTagResult, WriteTagResult2, t.ActionType.toNumber(self.action_type))
-		end
-		if self.action_params ~= nil then
-			local EncodeResult = self.action_params:encode()
-			local WriteTagResult1, WriteTagResult2_1 = ProtoModule.writeTag(Buf, Count, 2, ProtoModule.wireTypes.lengthDelimited)
-			Buf, Count = ProtoModule.writeBuffer(WriteTagResult1, WriteTagResult2_1, EncodeResult, buffer.len(EncodeResult))
-		end
-		local Buf1 = buffer.create(Count)
-		buffer.copy(Buf1, 0, Buf, 0, Count)
-		
-		return Buf1
-	end
-
-	function Module195.decode(Buf)
-		-- upvalues: Module195 (copy), ProtoModule (copy), t (copy)
-		local NewModule = Module195.new()
-		local v131 = 0
-		while v131 < buffer.len(Buf) do
-			local Tag, Tag2
-			Tag, Tag2, v4639 = ProtoModule.readTag(Buf, v131)
-			
-			if Tag2 == ProtoModule.wireTypes.varint then
-				if Tag == 1 then
-					local VarIntI32
-					VarIntI32, v4639 = ProtoModule.readVarIntI32(Buf, v131)
-					NewModule.action_type = t.ActionType.fromNumber(VarIntI32) or VarIntI32
-				else
-					local _
-					_, v4639 = ProtoModule.readVarInt(Buf, v131)
-				end
-			elseif Tag2 == ProtoModule.wireTypes.lengthDelimited then
-				if Tag == 2 then
-					local Buffer1
-					Buffer1, v4639 = ProtoModule.readBuffer(Buf, v131)
-					NewModule.action_params = t.ToggleCatalogItemFavoriteAction_Params.decode(Buffer1)
-				else
-					local VarInt, VarInt2 = ProtoModule.readVarInt(Buf, v131)
-					v131 = VarInt2 + VarInt
-				end
-			elseif Tag2 == ProtoModule.wireTypes.i32 then
-				local _
-				_, v4639 = ProtoModule.readFixed32(Buf, v131)
-			elseif Tag2 == ProtoModule.wireTypes.i64 then
-				local _
-				_, v4639 = ProtoModule.readFixed64(Buf, v131)
-			else
-				error("Unsupported wire type: " .. Tag2)
-			end
-		end
-		return NewModule
-	end
-
-	function Module195:jsonEncode()
-		-- upvalues: t (copy)
-		local t1 = {}
-		
-		if self.action_type ~= nil and (self.action_type ~= nil and self.action_type ~= 0 or self.action_type ~= t.ActionType.fromNumber(0)) then
-			t1.actionType = if typeof(self.action_type) == "number" then self.action_type else t.ActionType.toNumber(self.action_type)
-		end
-		if self.action_params ~= nil then
-			t1.actionParams = self.action_params:jsonEncode()
-		end
-		return t1
-	end
-
-	function Module195:jsonDecode()
-		-- upvalues: Module195 (copy), t (copy)
-		local NewModule = Module195.new()
-		
-		if self.action_type ~= nil then
-			NewModule.action_type = (if typeof(self.action_type) == "number" then t.ActionType.fromNumber(self.action_type) else t.ActionType.fromName(self.action_type)) or self.action_type
-		end
-		if self.actionType ~= nil then
-			NewModule.action_type = (if typeof(self.actionType) == "number" then t.ActionType.fromNumber(self.actionType) else t.ActionType.fromName(self.actionType)) or self.actionType
-		end
-		if self.action_params ~= nil then
-			NewModule.action_params = t.ToggleCatalogItemFavoriteAction_Params.jsonDecode(self.action_params)
-		end
-		if self.actionParams ~= nil then
-			NewModule.action_params = t.ToggleCatalogItemFavoriteAction_Params.jsonDecode(self.actionParams)
-		end
-		return NewModule
-	end
-
-	Module195.descriptor = {
-		name = "ToggleCatalogItemFavoriteAction",
-		fullName = "roblox.apppageplatform.shared.v1beta1.ToggleCatalogItemFavoriteAction"
-	}
-	t.ToggleCatalogItemFavoriteAction = Module195
-	TypeRegistryModule.default:register(t.ToggleCatalogItemFavoriteAction)
-	local Module196 = {}
-	Module196.__index = Module196
-
-	function Module196.new(p1)
-		-- upvalues: Module196 (copy)
-		return (setmetatable({
-			item_id = if p1 == nil or p1.item_id == nil then nil else p1.item_id,
-			item_type = if p1 == nil or p1.item_type == nil then nil else p1.item_type
-		}, Module196))
-	end
-
-	function Module196:encode()
-		-- upvalues: ProtoModule (copy)
-		local Buf = buffer.create(0)
-		local Count = 0
-		
-		if self.item_id ~= nil then
-			local EncodeResult = self.item_id:encode()
-			local WriteTagResult, WriteTagResult2 = ProtoModule.writeTag(Buf, Count, 1, ProtoModule.wireTypes.lengthDelimited)
-			Buf, Count = ProtoModule.writeBuffer(WriteTagResult, WriteTagResult2, EncodeResult, buffer.len(EncodeResult))
-		end
-		if self.item_type ~= nil then
-			local EncodeResult = self.item_type:encode()
-			local WriteTagResult1, WriteTagResult2_1 = ProtoModule.writeTag(Buf, Count, 2, ProtoModule.wireTypes.lengthDelimited)
-			Buf, Count = ProtoModule.writeBuffer(WriteTagResult1, WriteTagResult2_1, EncodeResult, buffer.len(EncodeResult))
-		end
-		local Buf1 = buffer.create(Count)
-		buffer.copy(Buf1, 0, Buf, 0, Count)
-		
-		return Buf1
-	end
-
-	function Module196.decode(Buf)
-		-- upvalues: Module196 (copy), ProtoModule (copy), PropTypesModule (copy)
-		local NewModule = Module196.new()
-		local v132 = 0
-		while v132 < buffer.len(Buf) do
-			local Tag, Tag2
-			Tag, Tag2, v4660 = ProtoModule.readTag(Buf, v132)
-			
-			if Tag2 == ProtoModule.wireTypes.varint then
-				local _
-				_, v4660 = ProtoModule.readVarInt(Buf, v132)
-			elseif Tag2 == ProtoModule.wireTypes.lengthDelimited then
-				if Tag == 1 then
-					local Buffer1
-					Buffer1, v4660 = ProtoModule.readBuffer(Buf, v132)
-					NewModule.item_id = PropTypesModule.StringProp.decode(Buffer1)
-				elseif Tag == 2 then
-					local Buffer2
-					Buffer2, v4660 = ProtoModule.readBuffer(Buf, v132)
-					NewModule.item_type = PropTypesModule.StringProp.decode(Buffer2)
-				else
-					local VarInt, VarInt2 = ProtoModule.readVarInt(Buf, v132)
-					v132 = VarInt2 + VarInt
-				end
-			elseif Tag2 == ProtoModule.wireTypes.i32 then
-				local _
-				_, v4660 = ProtoModule.readFixed32(Buf, v132)
-			elseif Tag2 == ProtoModule.wireTypes.i64 then
-				local _
-				_, v4660 = ProtoModule.readFixed64(Buf, v132)
-			else
-				error("Unsupported wire type: " .. Tag2)
-			end
-		end
-		return NewModule
-	end
-
-	function Module196:jsonEncode()
-		local t = {}
-		
-		if self.item_id ~= nil then
-			t.itemId = self.item_id:jsonEncode()
-		end
-		if self.item_type ~= nil then
-			t.itemType = self.item_type:jsonEncode()
-		end
-		return t
-	end
-
-	function Module196:jsonDecode()
-		-- upvalues: Module196 (copy), PropTypesModule (copy)
-		local NewModule = Module196.new()
-		
-		if self.item_id ~= nil then
-			NewModule.item_id = PropTypesModule.StringProp.jsonDecode(self.item_id)
-		end
-		if self.itemId ~= nil then
-			NewModule.item_id = PropTypesModule.StringProp.jsonDecode(self.itemId)
-		end
-		if self.item_type ~= nil then
-			NewModule.item_type = PropTypesModule.StringProp.jsonDecode(self.item_type)
-		end
-		if self.itemType ~= nil then
-			NewModule.item_type = PropTypesModule.StringProp.jsonDecode(self.itemType)
-		end
-		return NewModule
-	end
-
-	Module196.descriptor = {
-		name = "ToggleCatalogItemFavoriteAction_Params",
-		fullName = "roblox.apppageplatform.shared.v1beta1.Params"
-	}
-	t.ToggleCatalogItemFavoriteAction_Params = Module196
-	TypeRegistryModule.default:register(t.ToggleCatalogItemFavoriteAction_Params)
-	local Module197 = {}
-	Module197.__index = Module197
-
-	function Module197.new(p1)
-		-- upvalues: t (copy), Module197 (copy)
-		return (setmetatable({
-			action_type = if p1 == nil or p1.action_type == nil then assert(t.ActionType.fromNumber(0), "Enum has no 0 default") else p1.action_type,
-			action_params = if p1 == nil or p1.action_params == nil then nil else p1.action_params
-		}, Module197))
-	end
-
-	function Module197:encode()
-		-- upvalues: t (copy), ProtoModule (copy)
-		local Buf = buffer.create(0)
-		local Count = 0
-		
-		if self.action_type ~= nil and (self.action_type ~= nil and self.action_type ~= 0 or self.action_type ~= t.ActionType.fromNumber(0)) then
-			local WriteTagResult, WriteTagResult2 = ProtoModule.writeTag(Buf, Count, 1, ProtoModule.wireTypes.varint)
-			Buf, Count = ProtoModule.writeVarInt(WriteTagResult, WriteTagResult2, t.ActionType.toNumber(self.action_type))
-		end
-		if self.action_params ~= nil then
-			local EncodeResult = self.action_params:encode()
-			local WriteTagResult1, WriteTagResult2_1 = ProtoModule.writeTag(Buf, Count, 2, ProtoModule.wireTypes.lengthDelimited)
-			Buf, Count = ProtoModule.writeBuffer(WriteTagResult1, WriteTagResult2_1, EncodeResult, buffer.len(EncodeResult))
-		end
-		local Buf1 = buffer.create(Count)
-		buffer.copy(Buf1, 0, Buf, 0, Count)
-		
-		return Buf1
-	end
-
-	function Module197.decode(Buf)
-		-- upvalues: Module197 (copy), ProtoModule (copy), t (copy)
-		local NewModule = Module197.new()
-		local v133 = 0
-		while v133 < buffer.len(Buf) do
-			local Tag, Tag2
-			Tag, Tag2, v4680 = ProtoModule.readTag(Buf, v133)
-			
-			if Tag2 == ProtoModule.wireTypes.varint then
-				if Tag == 1 then
-					local VarIntI32
-					VarIntI32, v4680 = ProtoModule.readVarIntI32(Buf, v133)
-					NewModule.action_type = t.ActionType.fromNumber(VarIntI32) or VarIntI32
-				else
-					local _
-					_, v4680 = ProtoModule.readVarInt(Buf, v133)
-				end
-			elseif Tag2 == ProtoModule.wireTypes.lengthDelimited then
-				if Tag == 2 then
-					local Buffer1
-					Buffer1, v4680 = ProtoModule.readBuffer(Buf, v133)
-					NewModule.action_params = t.OpenCatalogItemExperiencesAction_Params.decode(Buffer1)
-				else
-					local VarInt, VarInt2 = ProtoModule.readVarInt(Buf, v133)
-					v133 = VarInt2 + VarInt
-				end
-			elseif Tag2 == ProtoModule.wireTypes.i32 then
-				local _
-				_, v4680 = ProtoModule.readFixed32(Buf, v133)
-			elseif Tag2 == ProtoModule.wireTypes.i64 then
-				local _
-				_, v4680 = ProtoModule.readFixed64(Buf, v133)
-			else
-				error("Unsupported wire type: " .. Tag2)
-			end
-		end
-		return NewModule
-	end
-
-	function Module197:jsonEncode()
-		-- upvalues: t (copy)
-		local t1 = {}
-		
-		if self.action_type ~= nil and (self.action_type ~= nil and self.action_type ~= 0 or self.action_type ~= t.ActionType.fromNumber(0)) then
-			t1.actionType = if typeof(self.action_type) == "number" then self.action_type else t.ActionType.toNumber(self.action_type)
-		end
-		if self.action_params ~= nil then
-			t1.actionParams = self.action_params:jsonEncode()
-		end
-		return t1
-	end
-
-	function Module197:jsonDecode()
-		-- upvalues: Module197 (copy), t (copy)
-		local NewModule = Module197.new()
-		
-		if self.action_type ~= nil then
-			NewModule.action_type = (if typeof(self.action_type) == "number" then t.ActionType.fromNumber(self.action_type) else t.ActionType.fromName(self.action_type)) or self.action_type
-		end
-		if self.actionType ~= nil then
-			NewModule.action_type = (if typeof(self.actionType) == "number" then t.ActionType.fromNumber(self.actionType) else t.ActionType.fromName(self.actionType)) or self.actionType
-		end
-		if self.action_params ~= nil then
-			NewModule.action_params = t.OpenCatalogItemExperiencesAction_Params.jsonDecode(self.action_params)
-		end
-		if self.actionParams ~= nil then
-			NewModule.action_params = t.OpenCatalogItemExperiencesAction_Params.jsonDecode(self.actionParams)
-		end
-		return NewModule
-	end
-
-	Module197.descriptor = {
-		name = "OpenCatalogItemExperiencesAction",
-		fullName = "roblox.apppageplatform.shared.v1beta1.OpenCatalogItemExperiencesAction"
-	}
-	t.OpenCatalogItemExperiencesAction = Module197
-end
-do
-	TypeRegistryModule.default:register(t.OpenCatalogItemExperiencesAction)
-	local Module198 = {}
-	Module198.__index = Module198
-
-	function Module198.new(p1)
-		-- upvalues: Module198 (copy)
-		return (setmetatable({
-			item_id = if p1 == nil or p1.item_id == nil then nil else p1.item_id,
-			item_type = if p1 == nil or p1.item_type == nil then nil else p1.item_type
-		}, Module198))
-	end
-
-	function Module198:encode()
-		-- upvalues: ProtoModule (copy)
-		local Buf = buffer.create(0)
-		local Count = 0
-		
-		if self.item_id ~= nil then
-			local EncodeResult = self.item_id:encode()
-			local WriteTagResult, WriteTagResult2 = ProtoModule.writeTag(Buf, Count, 1, ProtoModule.wireTypes.lengthDelimited)
-			Buf, Count = ProtoModule.writeBuffer(WriteTagResult, WriteTagResult2, EncodeResult, buffer.len(EncodeResult))
-		end
-		if self.item_type ~= nil then
-			local EncodeResult = self.item_type:encode()
-			local WriteTagResult1, WriteTagResult2_1 = ProtoModule.writeTag(Buf, Count, 2, ProtoModule.wireTypes.lengthDelimited)
-			Buf, Count = ProtoModule.writeBuffer(WriteTagResult1, WriteTagResult2_1, EncodeResult, buffer.len(EncodeResult))
-		end
-		local Buf1 = buffer.create(Count)
-		buffer.copy(Buf1, 0, Buf, 0, Count)
-		
-		return Buf1
-	end
-
-	function Module198.decode(Buf)
-		-- upvalues: Module198 (copy), ProtoModule (copy), PropTypesModule (copy)
-		local NewModule = Module198.new()
-		local v133 = 0
-		while v133 < buffer.len(Buf) do
-			local Tag, Tag2
-			Tag, Tag2, v4701 = ProtoModule.readTag(Buf, v133)
-			
-			if Tag2 == ProtoModule.wireTypes.varint then
-				local _
-				_, v4701 = ProtoModule.readVarInt(Buf, v133)
-			elseif Tag2 == ProtoModule.wireTypes.lengthDelimited then
-				if Tag == 1 then
-					local Buffer1
-					Buffer1, v4701 = ProtoModule.readBuffer(Buf, v133)
-					NewModule.item_id = PropTypesModule.StringProp.decode(Buffer1)
-				elseif Tag == 2 then
-					local Buffer2
-					Buffer2, v4701 = ProtoModule.readBuffer(Buf, v133)
-					NewModule.item_type = PropTypesModule.StringProp.decode(Buffer2)
-				else
-					local VarInt, VarInt2 = ProtoModule.readVarInt(Buf, v133)
-					v133 = VarInt2 + VarInt
-				end
-			elseif Tag2 == ProtoModule.wireTypes.i32 then
-				local _
-				_, v4701 = ProtoModule.readFixed32(Buf, v133)
-			elseif Tag2 == ProtoModule.wireTypes.i64 then
-				local _
-				_, v4701 = ProtoModule.readFixed64(Buf, v133)
-			else
-				error("Unsupported wire type: " .. Tag2)
-			end
-		end
-		return NewModule
-	end
-
-	function Module198:jsonEncode()
-		local t = {}
-		
-		if self.item_id ~= nil then
-			t.itemId = self.item_id:jsonEncode()
-		end
-		if self.item_type ~= nil then
-			t.itemType = self.item_type:jsonEncode()
-		end
-		return t
-	end
-
-	function Module198:jsonDecode()
-		-- upvalues: Module198 (copy), PropTypesModule (copy)
-		local NewModule = Module198.new()
-		
-		if self.item_id ~= nil then
-			NewModule.item_id = PropTypesModule.StringProp.jsonDecode(self.item_id)
-		end
-		if self.itemId ~= nil then
-			NewModule.item_id = PropTypesModule.StringProp.jsonDecode(self.itemId)
-		end
-		if self.item_type ~= nil then
-			NewModule.item_type = PropTypesModule.StringProp.jsonDecode(self.item_type)
-		end
-		if self.itemType ~= nil then
-			NewModule.item_type = PropTypesModule.StringProp.jsonDecode(self.itemType)
-		end
-		return NewModule
-	end
-
-	Module198.descriptor = {
-		name = "OpenCatalogItemExperiencesAction_Params",
-		fullName = "roblox.apppageplatform.shared.v1beta1.Params"
-	}
-	t.OpenCatalogItemExperiencesAction_Params = Module198
-	TypeRegistryModule.default:register(t.OpenCatalogItemExperiencesAction_Params)
-	local Module199 = {}
-	Module199.__index = Module199
-
-	function Module199.new(p1)
-		-- upvalues: t (copy), Module199 (copy)
-		return (setmetatable({
-			action_type = if p1 == nil or p1.action_type == nil then assert(t.ActionType.fromNumber(0), "Enum has no 0 default") else p1.action_type,
-			action_params = if p1 == nil or p1.action_params == nil then nil else p1.action_params
-		}, Module199))
-	end
-
-	function Module199:encode()
-		-- upvalues: t (copy), ProtoModule (copy)
-		local Buf = buffer.create(0)
-		local Count = 0
-		
-		if self.action_type ~= nil and (self.action_type ~= nil and self.action_type ~= 0 or self.action_type ~= t.ActionType.fromNumber(0)) then
-			local WriteTagResult, WriteTagResult2 = ProtoModule.writeTag(Buf, Count, 1, ProtoModule.wireTypes.varint)
-			Buf, Count = ProtoModule.writeVarInt(WriteTagResult, WriteTagResult2, t.ActionType.toNumber(self.action_type))
-		end
-		if self.action_params ~= nil then
-			local EncodeResult = self.action_params:encode()
-			local WriteTagResult1, WriteTagResult2_1 = ProtoModule.writeTag(Buf, Count, 2, ProtoModule.wireTypes.lengthDelimited)
-			Buf, Count = ProtoModule.writeBuffer(WriteTagResult1, WriteTagResult2_1, EncodeResult, buffer.len(EncodeResult))
-		end
-		local Buf1 = buffer.create(Count)
-		buffer.copy(Buf1, 0, Buf, 0, Count)
-		
-		return Buf1
-	end
-
-	function Module199.decode(Buf)
-		-- upvalues: Module199 (copy), ProtoModule (copy), t (copy)
-		local NewModule = Module199.new()
-		local v134 = 0
-		while v134 < buffer.len(Buf) do
-			local Tag, Tag2
-			Tag, Tag2, v4721 = ProtoModule.readTag(Buf, v134)
-			
-			if Tag2 == ProtoModule.wireTypes.varint then
-				if Tag == 1 then
-					local VarIntI32
-					VarIntI32, v4721 = ProtoModule.readVarIntI32(Buf, v134)
-					NewModule.action_type = t.ActionType.fromNumber(VarIntI32) or VarIntI32
-				else
-					local _
-					_, v4721 = ProtoModule.readVarInt(Buf, v134)
-				end
-			elseif Tag2 == ProtoModule.wireTypes.lengthDelimited then
-				if Tag == 2 then
-					local Buffer1
-					Buffer1, v4721 = ProtoModule.readBuffer(Buf, v134)
-					NewModule.action_params = t.OpenCatalogItemCreatorProfileAction_Params.decode(Buffer1)
-				else
-					local VarInt, VarInt2 = ProtoModule.readVarInt(Buf, v134)
-					v134 = VarInt2 + VarInt
-				end
-			elseif Tag2 == ProtoModule.wireTypes.i32 then
-				local _
-				_, v4721 = ProtoModule.readFixed32(Buf, v134)
-			elseif Tag2 == ProtoModule.wireTypes.i64 then
-				local _
-				_, v4721 = ProtoModule.readFixed64(Buf, v134)
-			else
-				error("Unsupported wire type: " .. Tag2)
-			end
-		end
-		return NewModule
-	end
-
-	function Module199:jsonEncode()
-		-- upvalues: t (copy)
-		local t1 = {}
-		
-		if self.action_type ~= nil and (self.action_type ~= nil and self.action_type ~= 0 or self.action_type ~= t.ActionType.fromNumber(0)) then
-			t1.actionType = if typeof(self.action_type) == "number" then self.action_type else t.ActionType.toNumber(self.action_type)
-		end
-		if self.action_params ~= nil then
-			t1.actionParams = self.action_params:jsonEncode()
-		end
-		return t1
-	end
-
-	function Module199:jsonDecode()
-		-- upvalues: Module199 (copy), t (copy)
-		local NewModule = Module199.new()
-		
-		if self.action_type ~= nil then
-			NewModule.action_type = (if typeof(self.action_type) == "number" then t.ActionType.fromNumber(self.action_type) else t.ActionType.fromName(self.action_type)) or self.action_type
-		end
-		if self.actionType ~= nil then
-			NewModule.action_type = (if typeof(self.actionType) == "number" then t.ActionType.fromNumber(self.actionType) else t.ActionType.fromName(self.actionType)) or self.actionType
-		end
-		if self.action_params ~= nil then
-			NewModule.action_params = t.OpenCatalogItemCreatorProfileAction_Params.jsonDecode(self.action_params)
-		end
-		if self.actionParams ~= nil then
-			NewModule.action_params = t.OpenCatalogItemCreatorProfileAction_Params.jsonDecode(self.actionParams)
-		end
-		return NewModule
-	end
-
-	Module199.descriptor = {
-		name = "OpenCatalogItemCreatorProfileAction",
-		fullName = "roblox.apppageplatform.shared.v1beta1.OpenCatalogItemCreatorProfileAction"
-	}
-	t.OpenCatalogItemCreatorProfileAction = Module199
-	TypeRegistryModule.default:register(t.OpenCatalogItemCreatorProfileAction)
-	local Module200 = {}
-	Module200.__index = Module200
-
-	function Module200.new(p1)
-		-- upvalues: Module200 (copy)
-		return (setmetatable({
-			creator_id = if p1 == nil or p1.creator_id == nil then nil else p1.creator_id,
-			creator_type = if p1 == nil or p1.creator_type == nil then nil else p1.creator_type
-		}, Module200))
-	end
-
-	function Module200:encode()
-		-- upvalues: ProtoModule (copy)
-		local Buf = buffer.create(0)
-		local Count = 0
-		
-		if self.creator_id ~= nil then
-			local EncodeResult = self.creator_id:encode()
-			local WriteTagResult, WriteTagResult2 = ProtoModule.writeTag(Buf, Count, 1, ProtoModule.wireTypes.lengthDelimited)
-			Buf, Count = ProtoModule.writeBuffer(WriteTagResult, WriteTagResult2, EncodeResult, buffer.len(EncodeResult))
-		end
-		if self.creator_type ~= nil then
-			local EncodeResult = self.creator_type:encode()
-			local WriteTagResult1, WriteTagResult2_1 = ProtoModule.writeTag(Buf, Count, 2, ProtoModule.wireTypes.lengthDelimited)
-			Buf, Count = ProtoModule.writeBuffer(WriteTagResult1, WriteTagResult2_1, EncodeResult, buffer.len(EncodeResult))
-		end
-		local Buf1 = buffer.create(Count)
-		buffer.copy(Buf1, 0, Buf, 0, Count)
-		
-		return Buf1
-	end
-
-	function Module200.decode(Buf)
-		-- upvalues: Module200 (copy), ProtoModule (copy), PropTypesModule (copy)
-		local NewModule = Module200.new()
-		local v135 = 0
-		while v135 < buffer.len(Buf) do
-			local Tag, Tag2
-			Tag, Tag2, v4742 = ProtoModule.readTag(Buf, v135)
-			
-			if Tag2 == ProtoModule.wireTypes.varint then
-				local _
-				_, v4742 = ProtoModule.readVarInt(Buf, v135)
-			elseif Tag2 == ProtoModule.wireTypes.lengthDelimited then
-				if Tag == 1 then
-					local Buffer1
-					Buffer1, v4742 = ProtoModule.readBuffer(Buf, v135)
-					NewModule.creator_id = PropTypesModule.StringProp.decode(Buffer1)
-				elseif Tag == 2 then
-					local Buffer2
-					Buffer2, v4742 = ProtoModule.readBuffer(Buf, v135)
-					NewModule.creator_type = PropTypesModule.StringProp.decode(Buffer2)
-				else
-					local VarInt, VarInt2 = ProtoModule.readVarInt(Buf, v135)
-					v135 = VarInt2 + VarInt
-				end
-			elseif Tag2 == ProtoModule.wireTypes.i32 then
-				local _
-				_, v4742 = ProtoModule.readFixed32(Buf, v135)
-			elseif Tag2 == ProtoModule.wireTypes.i64 then
-				local _
-				_, v4742 = ProtoModule.readFixed64(Buf, v135)
-			else
-				error("Unsupported wire type: " .. Tag2)
-			end
-		end
-		return NewModule
-	end
-
-	function Module200:jsonEncode()
-		local t = {}
-		
-		if self.creator_id ~= nil then
-			t.creatorId = self.creator_id:jsonEncode()
-		end
-		if self.creator_type ~= nil then
-			t.creatorType = self.creator_type:jsonEncode()
-		end
-		return t
-	end
-
-	function Module200:jsonDecode()
-		-- upvalues: Module200 (copy), PropTypesModule (copy)
-		local NewModule = Module200.new()
-		
-		if self.creator_id ~= nil then
-			NewModule.creator_id = PropTypesModule.StringProp.jsonDecode(self.creator_id)
-		end
-		if self.creatorId ~= nil then
-			NewModule.creator_id = PropTypesModule.StringProp.jsonDecode(self.creatorId)
-		end
-		if self.creator_type ~= nil then
-			NewModule.creator_type = PropTypesModule.StringProp.jsonDecode(self.creator_type)
-		end
-		if self.creatorType ~= nil then
-			NewModule.creator_type = PropTypesModule.StringProp.jsonDecode(self.creatorType)
-		end
-		return NewModule
-	end
-
-	Module200.descriptor = {
-		name = "OpenCatalogItemCreatorProfileAction_Params",
-		fullName = "roblox.apppageplatform.shared.v1beta1.Params"
-	}
-	t.OpenCatalogItemCreatorProfileAction_Params = Module200
-end
-do
-	TypeRegistryModule.default:register(t.OpenCatalogItemCreatorProfileAction_Params)
 	local Module201 = {}
 	Module201.__index = Module201
 
@@ -23489,35 +23332,35 @@ do
 	function Module201.decode(Buf)
 		-- upvalues: Module201 (copy), ProtoModule (copy), t (copy)
 		local NewModule = Module201.new()
-		local v135 = 0
-		while v135 < buffer.len(Buf) do
+		local v136 = 0
+		while v136 < buffer.len(Buf) do
 			local Tag, Tag2
-			Tag, Tag2, v4762 = ProtoModule.readTag(Buf, v135)
+			Tag, Tag2, v4735 = ProtoModule.readTag(Buf, v136)
 			
 			if Tag2 == ProtoModule.wireTypes.varint then
 				if Tag == 1 then
 					local VarIntI32
-					VarIntI32, v4762 = ProtoModule.readVarIntI32(Buf, v135)
+					VarIntI32, v4735 = ProtoModule.readVarIntI32(Buf, v136)
 					NewModule.action_type = t.ActionType.fromNumber(VarIntI32) or VarIntI32
 				else
 					local _
-					_, v4762 = ProtoModule.readVarInt(Buf, v135)
+					_, v4735 = ProtoModule.readVarInt(Buf, v136)
 				end
 			elseif Tag2 == ProtoModule.wireTypes.lengthDelimited then
 				if Tag == 2 then
 					local Buffer1
-					Buffer1, v4762 = ProtoModule.readBuffer(Buf, v135)
-					NewModule.action_params = t.PlayCatalogItemAttributionExperienceAction_Params.decode(Buffer1)
+					Buffer1, v4735 = ProtoModule.readBuffer(Buf, v136)
+					NewModule.action_params = t.OpenCatalogItemDetailsAction_Params.decode(Buffer1)
 				else
-					local VarInt, VarInt2 = ProtoModule.readVarInt(Buf, v135)
-					v135 = VarInt2 + VarInt
+					local VarInt, VarInt2 = ProtoModule.readVarInt(Buf, v136)
+					v136 = VarInt2 + VarInt
 				end
 			elseif Tag2 == ProtoModule.wireTypes.i32 then
 				local _
-				_, v4762 = ProtoModule.readFixed32(Buf, v135)
+				_, v4735 = ProtoModule.readFixed32(Buf, v136)
 			elseif Tag2 == ProtoModule.wireTypes.i64 then
 				local _
-				_, v4762 = ProtoModule.readFixed64(Buf, v135)
+				_, v4735 = ProtoModule.readFixed64(Buf, v136)
 			else
 				error("Unsupported wire type: " .. Tag2)
 			end
@@ -23549,27 +23392,29 @@ do
 			NewModule.action_type = (if typeof(self.actionType) == "number" then t.ActionType.fromNumber(self.actionType) else t.ActionType.fromName(self.actionType)) or self.actionType
 		end
 		if self.action_params ~= nil then
-			NewModule.action_params = t.PlayCatalogItemAttributionExperienceAction_Params.jsonDecode(self.action_params)
+			NewModule.action_params = t.OpenCatalogItemDetailsAction_Params.jsonDecode(self.action_params)
 		end
 		if self.actionParams ~= nil then
-			NewModule.action_params = t.PlayCatalogItemAttributionExperienceAction_Params.jsonDecode(self.actionParams)
+			NewModule.action_params = t.OpenCatalogItemDetailsAction_Params.jsonDecode(self.actionParams)
 		end
 		return NewModule
 	end
 
 	Module201.descriptor = {
-		name = "PlayCatalogItemAttributionExperienceAction",
-		fullName = "roblox.apppageplatform.shared.v1beta1.PlayCatalogItemAttributionExperienceAction"
+		name = "OpenCatalogItemDetailsAction",
+		fullName = "roblox.apppageplatform.shared.v1beta1.OpenCatalogItemDetailsAction"
 	}
-	t.PlayCatalogItemAttributionExperienceAction = Module201
-	TypeRegistryModule.default:register(t.PlayCatalogItemAttributionExperienceAction)
+	t.OpenCatalogItemDetailsAction = Module201
+	TypeRegistryModule.default:register(t.OpenCatalogItemDetailsAction)
 	local Module202 = {}
 	Module202.__index = Module202
 
 	function Module202.new(p1)
 		-- upvalues: Module202 (copy)
 		return (setmetatable({
-			universe_id = if p1 == nil or p1.universe_id == nil then nil else p1.universe_id
+			item_id = if p1 == nil or p1.item_id == nil then nil else p1.item_id,
+			item_type = if p1 == nil or p1.item_type == nil then nil else p1.item_type,
+			item_sub_type = if p1 == nil or p1.item_sub_type == nil then nil else p1.item_sub_type
 		}, Module202))
 	end
 
@@ -23578,10 +23423,20 @@ do
 		local Buf = buffer.create(0)
 		local Count = 0
 		
-		if self.universe_id ~= nil then
-			local EncodeResult = self.universe_id:encode()
+		if self.item_id ~= nil then
+			local EncodeResult = self.item_id:encode()
 			local WriteTagResult, WriteTagResult2 = ProtoModule.writeTag(Buf, Count, 1, ProtoModule.wireTypes.lengthDelimited)
 			Buf, Count = ProtoModule.writeBuffer(WriteTagResult, WriteTagResult2, EncodeResult, buffer.len(EncodeResult))
+		end
+		if self.item_type ~= nil then
+			local EncodeResult = self.item_type:encode()
+			local WriteTagResult1, WriteTagResult2_1 = ProtoModule.writeTag(Buf, Count, 2, ProtoModule.wireTypes.lengthDelimited)
+			Buf, Count = ProtoModule.writeBuffer(WriteTagResult1, WriteTagResult2_1, EncodeResult, buffer.len(EncodeResult))
+		end
+		if self.item_sub_type ~= nil then
+			local EncodeResult = self.item_sub_type:encode()
+			local WriteTagResult3, WriteTagResult2_2 = ProtoModule.writeTag(Buf, Count, 3, ProtoModule.wireTypes.lengthDelimited)
+			Buf, Count = ProtoModule.writeBuffer(WriteTagResult3, WriteTagResult2_2, EncodeResult, buffer.len(EncodeResult))
 		end
 		local Buf1 = buffer.create(Count)
 		buffer.copy(Buf1, 0, Buf, 0, Count)
@@ -23592,29 +23447,37 @@ do
 	function Module202.decode(Buf)
 		-- upvalues: Module202 (copy), ProtoModule (copy), PropTypesModule (copy)
 		local NewModule = Module202.new()
-		local v136 = 0
-		while v136 < buffer.len(Buf) do
+		local v137 = 0
+		while v137 < buffer.len(Buf) do
 			local Tag, Tag2
-			Tag, Tag2, v4780 = ProtoModule.readTag(Buf, v136)
+			Tag, Tag2, v4759 = ProtoModule.readTag(Buf, v137)
 			
 			if Tag2 == ProtoModule.wireTypes.varint then
 				local _
-				_, v4780 = ProtoModule.readVarInt(Buf, v136)
+				_, v4759 = ProtoModule.readVarInt(Buf, v137)
 			elseif Tag2 == ProtoModule.wireTypes.lengthDelimited then
 				if Tag == 1 then
 					local Buffer1
-					Buffer1, v4780 = ProtoModule.readBuffer(Buf, v136)
-					NewModule.universe_id = PropTypesModule.StringProp.decode(Buffer1)
+					Buffer1, v4759 = ProtoModule.readBuffer(Buf, v137)
+					NewModule.item_id = PropTypesModule.StringProp.decode(Buffer1)
+				elseif Tag == 2 then
+					local Buffer2
+					Buffer2, v4759 = ProtoModule.readBuffer(Buf, v137)
+					NewModule.item_type = PropTypesModule.StringProp.decode(Buffer2)
+				elseif Tag == 3 then
+					local Buffer3
+					Buffer3, v4759 = ProtoModule.readBuffer(Buf, v137)
+					NewModule.item_sub_type = PropTypesModule.StringProp.decode(Buffer3)
 				else
-					local VarInt, VarInt2 = ProtoModule.readVarInt(Buf, v136)
-					v136 = VarInt2 + VarInt
+					local VarInt, VarInt2 = ProtoModule.readVarInt(Buf, v137)
+					v137 = VarInt2 + VarInt
 				end
 			elseif Tag2 == ProtoModule.wireTypes.i32 then
 				local _
-				_, v4780 = ProtoModule.readFixed32(Buf, v136)
+				_, v4759 = ProtoModule.readFixed32(Buf, v137)
 			elseif Tag2 == ProtoModule.wireTypes.i64 then
 				local _
-				_, v4780 = ProtoModule.readFixed64(Buf, v136)
+				_, v4759 = ProtoModule.readFixed64(Buf, v137)
 			else
 				error("Unsupported wire type: " .. Tag2)
 			end
@@ -23625,8 +23488,14 @@ do
 	function Module202:jsonEncode()
 		local t = {}
 		
-		if self.universe_id ~= nil then
-			t.universeId = self.universe_id:jsonEncode()
+		if self.item_id ~= nil then
+			t.itemId = self.item_id:jsonEncode()
+		end
+		if self.item_type ~= nil then
+			t.itemType = self.item_type:jsonEncode()
+		end
+		if self.item_sub_type ~= nil then
+			t.itemSubType = self.item_sub_type:jsonEncode()
 		end
 		return t
 	end
@@ -23635,21 +23504,33 @@ do
 		-- upvalues: Module202 (copy), PropTypesModule (copy)
 		local NewModule = Module202.new()
 		
-		if self.universe_id ~= nil then
-			NewModule.universe_id = PropTypesModule.StringProp.jsonDecode(self.universe_id)
+		if self.item_id ~= nil then
+			NewModule.item_id = PropTypesModule.StringProp.jsonDecode(self.item_id)
 		end
-		if self.universeId ~= nil then
-			NewModule.universe_id = PropTypesModule.StringProp.jsonDecode(self.universeId)
+		if self.itemId ~= nil then
+			NewModule.item_id = PropTypesModule.StringProp.jsonDecode(self.itemId)
+		end
+		if self.item_type ~= nil then
+			NewModule.item_type = PropTypesModule.StringProp.jsonDecode(self.item_type)
+		end
+		if self.itemType ~= nil then
+			NewModule.item_type = PropTypesModule.StringProp.jsonDecode(self.itemType)
+		end
+		if self.item_sub_type ~= nil then
+			NewModule.item_sub_type = PropTypesModule.StringProp.jsonDecode(self.item_sub_type)
+		end
+		if self.itemSubType ~= nil then
+			NewModule.item_sub_type = PropTypesModule.StringProp.jsonDecode(self.itemSubType)
 		end
 		return NewModule
 	end
 
 	Module202.descriptor = {
-		name = "PlayCatalogItemAttributionExperienceAction_Params",
+		name = "OpenCatalogItemDetailsAction_Params",
 		fullName = "roblox.apppageplatform.shared.v1beta1.Params"
 	}
-	t.PlayCatalogItemAttributionExperienceAction_Params = Module202
-	TypeRegistryModule.default:register(t.PlayCatalogItemAttributionExperienceAction_Params)
+	t.OpenCatalogItemDetailsAction_Params = Module202
+	TypeRegistryModule.default:register(t.OpenCatalogItemDetailsAction_Params)
 	local Module203 = {}
 	Module203.__index = Module203
 
@@ -23684,35 +23565,35 @@ do
 	function Module203.decode(Buf)
 		-- upvalues: Module203 (copy), ProtoModule (copy), t (copy)
 		local NewModule = Module203.new()
-		local v137 = 0
-		while v137 < buffer.len(Buf) do
+		local v138 = 0
+		while v138 < buffer.len(Buf) do
 			local Tag, Tag2
-			Tag, Tag2, v4799 = ProtoModule.readTag(Buf, v137)
+			Tag, Tag2, v4780 = ProtoModule.readTag(Buf, v138)
 			
 			if Tag2 == ProtoModule.wireTypes.varint then
 				if Tag == 1 then
 					local VarIntI32
-					VarIntI32, v4799 = ProtoModule.readVarIntI32(Buf, v137)
+					VarIntI32, v4780 = ProtoModule.readVarIntI32(Buf, v138)
 					NewModule.action_type = t.ActionType.fromNumber(VarIntI32) or VarIntI32
 				else
 					local _
-					_, v4799 = ProtoModule.readVarInt(Buf, v137)
+					_, v4780 = ProtoModule.readVarInt(Buf, v138)
 				end
 			elseif Tag2 == ProtoModule.wireTypes.lengthDelimited then
 				if Tag == 2 then
 					local Buffer1
-					Buffer1, v4799 = ProtoModule.readBuffer(Buf, v137)
-					NewModule.action_params = t.OpenCatalogItemResellersAction_Params.decode(Buffer1)
+					Buffer1, v4780 = ProtoModule.readBuffer(Buf, v138)
+					NewModule.action_params = t.OpenItemInfoRowPromptAction_Params.decode(Buffer1)
 				else
-					local VarInt, VarInt2 = ProtoModule.readVarInt(Buf, v137)
-					v137 = VarInt2 + VarInt
+					local VarInt, VarInt2 = ProtoModule.readVarInt(Buf, v138)
+					v138 = VarInt2 + VarInt
 				end
 			elseif Tag2 == ProtoModule.wireTypes.i32 then
 				local _
-				_, v4799 = ProtoModule.readFixed32(Buf, v137)
+				_, v4780 = ProtoModule.readFixed32(Buf, v138)
 			elseif Tag2 == ProtoModule.wireTypes.i64 then
 				local _
-				_, v4799 = ProtoModule.readFixed64(Buf, v137)
+				_, v4780 = ProtoModule.readFixed64(Buf, v138)
 			else
 				error("Unsupported wire type: " .. Tag2)
 			end
@@ -23744,30 +23625,31 @@ do
 			NewModule.action_type = (if typeof(self.actionType) == "number" then t.ActionType.fromNumber(self.actionType) else t.ActionType.fromName(self.actionType)) or self.actionType
 		end
 		if self.action_params ~= nil then
-			NewModule.action_params = t.OpenCatalogItemResellersAction_Params.jsonDecode(self.action_params)
+			NewModule.action_params = t.OpenItemInfoRowPromptAction_Params.jsonDecode(self.action_params)
 		end
 		if self.actionParams ~= nil then
-			NewModule.action_params = t.OpenCatalogItemResellersAction_Params.jsonDecode(self.actionParams)
+			NewModule.action_params = t.OpenItemInfoRowPromptAction_Params.jsonDecode(self.actionParams)
 		end
 		return NewModule
 	end
 
 	Module203.descriptor = {
-		name = "OpenCatalogItemResellersAction",
-		fullName = "roblox.apppageplatform.shared.v1beta1.OpenCatalogItemResellersAction"
+		name = "OpenItemInfoRowPromptAction",
+		fullName = "roblox.apppageplatform.shared.v1beta1.OpenItemInfoRowPromptAction"
 	}
-	t.OpenCatalogItemResellersAction = Module203
+	t.OpenItemInfoRowPromptAction = Module203
 end
 do
-	TypeRegistryModule.default:register(t.OpenCatalogItemResellersAction)
+	TypeRegistryModule.default:register(t.OpenItemInfoRowPromptAction)
 	local Module204 = {}
 	Module204.__index = Module204
 
 	function Module204.new(p1)
 		-- upvalues: Module204 (copy)
 		return (setmetatable({
-			item_id = if p1 == nil or p1.item_id == nil then nil else p1.item_id,
-			item_type = if p1 == nil or p1.item_type == nil then nil else p1.item_type
+			title = if p1 == nil or p1.title == nil then nil else p1.title,
+			message = if p1 == nil or p1.message == nil then nil else p1.message,
+			sections = if p1 == nil or p1.sections == nil then nil else p1.sections
 		}, Module204))
 	end
 
@@ -23776,15 +23658,20 @@ do
 		local Buf = buffer.create(0)
 		local Count = 0
 		
-		if self.item_id ~= nil then
-			local EncodeResult = self.item_id:encode()
+		if self.title ~= nil then
+			local EncodeResult = self.title:encode()
 			local WriteTagResult, WriteTagResult2 = ProtoModule.writeTag(Buf, Count, 1, ProtoModule.wireTypes.lengthDelimited)
 			Buf, Count = ProtoModule.writeBuffer(WriteTagResult, WriteTagResult2, EncodeResult, buffer.len(EncodeResult))
 		end
-		if self.item_type ~= nil then
-			local EncodeResult = self.item_type:encode()
+		if self.message ~= nil then
+			local EncodeResult = self.message:encode()
 			local WriteTagResult1, WriteTagResult2_1 = ProtoModule.writeTag(Buf, Count, 2, ProtoModule.wireTypes.lengthDelimited)
 			Buf, Count = ProtoModule.writeBuffer(WriteTagResult1, WriteTagResult2_1, EncodeResult, buffer.len(EncodeResult))
+		end
+		if self.sections ~= nil then
+			local EncodeResult = self.sections:encode()
+			local WriteTagResult3, WriteTagResult2_2 = ProtoModule.writeTag(Buf, Count, 3, ProtoModule.wireTypes.lengthDelimited)
+			Buf, Count = ProtoModule.writeBuffer(WriteTagResult3, WriteTagResult2_2, EncodeResult, buffer.len(EncodeResult))
 		end
 		local Buf1 = buffer.create(Count)
 		buffer.copy(Buf1, 0, Buf, 0, Count)
@@ -23795,33 +23682,37 @@ do
 	function Module204.decode(Buf)
 		-- upvalues: Module204 (copy), ProtoModule (copy), PropTypesModule (copy)
 		local NewModule = Module204.new()
-		local v137 = 0
-		while v137 < buffer.len(Buf) do
+		local v138 = 0
+		while v138 < buffer.len(Buf) do
 			local Tag, Tag2
-			Tag, Tag2, v4820 = ProtoModule.readTag(Buf, v137)
+			Tag, Tag2, v4804 = ProtoModule.readTag(Buf, v138)
 			
 			if Tag2 == ProtoModule.wireTypes.varint then
 				local _
-				_, v4820 = ProtoModule.readVarInt(Buf, v137)
+				_, v4804 = ProtoModule.readVarInt(Buf, v138)
 			elseif Tag2 == ProtoModule.wireTypes.lengthDelimited then
 				if Tag == 1 then
 					local Buffer1
-					Buffer1, v4820 = ProtoModule.readBuffer(Buf, v137)
-					NewModule.item_id = PropTypesModule.StringProp.decode(Buffer1)
+					Buffer1, v4804 = ProtoModule.readBuffer(Buf, v138)
+					NewModule.title = PropTypesModule.StringProp.decode(Buffer1)
 				elseif Tag == 2 then
 					local Buffer2
-					Buffer2, v4820 = ProtoModule.readBuffer(Buf, v137)
-					NewModule.item_type = PropTypesModule.StringProp.decode(Buffer2)
+					Buffer2, v4804 = ProtoModule.readBuffer(Buf, v138)
+					NewModule.message = PropTypesModule.StringProp.decode(Buffer2)
+				elseif Tag == 3 then
+					local Buffer3
+					Buffer3, v4804 = ProtoModule.readBuffer(Buf, v138)
+					NewModule.sections = PropTypesModule.ArrayOfStructProp.decode(Buffer3)
 				else
-					local VarInt, VarInt2 = ProtoModule.readVarInt(Buf, v137)
-					v137 = VarInt2 + VarInt
+					local VarInt, VarInt2 = ProtoModule.readVarInt(Buf, v138)
+					v138 = VarInt2 + VarInt
 				end
 			elseif Tag2 == ProtoModule.wireTypes.i32 then
 				local _
-				_, v4820 = ProtoModule.readFixed32(Buf, v137)
+				_, v4804 = ProtoModule.readFixed32(Buf, v138)
 			elseif Tag2 == ProtoModule.wireTypes.i64 then
 				local _
-				_, v4820 = ProtoModule.readFixed64(Buf, v137)
+				_, v4804 = ProtoModule.readFixed64(Buf, v138)
 			else
 				error("Unsupported wire type: " .. Tag2)
 			end
@@ -23832,11 +23723,14 @@ do
 	function Module204:jsonEncode()
 		local t = {}
 		
-		if self.item_id ~= nil then
-			t.itemId = self.item_id:jsonEncode()
+		if self.title ~= nil then
+			t.title = self.title:jsonEncode()
 		end
-		if self.item_type ~= nil then
-			t.itemType = self.item_type:jsonEncode()
+		if self.message ~= nil then
+			t.message = self.message:jsonEncode()
+		end
+		if self.sections ~= nil then
+			t.sections = self.sections:jsonEncode()
 		end
 		return t
 	end
@@ -23845,27 +23739,24 @@ do
 		-- upvalues: Module204 (copy), PropTypesModule (copy)
 		local NewModule = Module204.new()
 		
-		if self.item_id ~= nil then
-			NewModule.item_id = PropTypesModule.StringProp.jsonDecode(self.item_id)
+		if self.title ~= nil then
+			NewModule.title = PropTypesModule.StringProp.jsonDecode(self.title)
 		end
-		if self.itemId ~= nil then
-			NewModule.item_id = PropTypesModule.StringProp.jsonDecode(self.itemId)
+		if self.message ~= nil then
+			NewModule.message = PropTypesModule.StringProp.jsonDecode(self.message)
 		end
-		if self.item_type ~= nil then
-			NewModule.item_type = PropTypesModule.StringProp.jsonDecode(self.item_type)
-		end
-		if self.itemType ~= nil then
-			NewModule.item_type = PropTypesModule.StringProp.jsonDecode(self.itemType)
+		if self.sections ~= nil then
+			NewModule.sections = PropTypesModule.ArrayOfStructProp.jsonDecode(self.sections)
 		end
 		return NewModule
 	end
 
 	Module204.descriptor = {
-		name = "OpenCatalogItemResellersAction_Params",
+		name = "OpenItemInfoRowPromptAction_Params",
 		fullName = "roblox.apppageplatform.shared.v1beta1.Params"
 	}
-	t.OpenCatalogItemResellersAction_Params = Module204
-	TypeRegistryModule.default:register(t.OpenCatalogItemResellersAction_Params)
+	t.OpenItemInfoRowPromptAction_Params = Module204
+	TypeRegistryModule.default:register(t.OpenItemInfoRowPromptAction_Params)
 	local Module205 = {}
 	Module205.__index = Module205
 
@@ -23900,35 +23791,35 @@ do
 	function Module205.decode(Buf)
 		-- upvalues: Module205 (copy), ProtoModule (copy), t (copy)
 		local NewModule = Module205.new()
-		local v138 = 0
-		while v138 < buffer.len(Buf) do
+		local v139 = 0
+		while v139 < buffer.len(Buf) do
 			local Tag, Tag2
-			Tag, Tag2, v4840 = ProtoModule.readTag(Buf, v138)
+			Tag, Tag2, v4825 = ProtoModule.readTag(Buf, v139)
 			
 			if Tag2 == ProtoModule.wireTypes.varint then
 				if Tag == 1 then
 					local VarIntI32
-					VarIntI32, v4840 = ProtoModule.readVarIntI32(Buf, v138)
+					VarIntI32, v4825 = ProtoModule.readVarIntI32(Buf, v139)
 					NewModule.action_type = t.ActionType.fromNumber(VarIntI32) or VarIntI32
 				else
 					local _
-					_, v4840 = ProtoModule.readVarInt(Buf, v138)
+					_, v4825 = ProtoModule.readVarInt(Buf, v139)
 				end
 			elseif Tag2 == ProtoModule.wireTypes.lengthDelimited then
 				if Tag == 2 then
 					local Buffer1
-					Buffer1, v4840 = ProtoModule.readBuffer(Buf, v138)
-					NewModule.action_params = t.PurchaseCatalogItemFromStockAction_Params.decode(Buffer1)
+					Buffer1, v4825 = ProtoModule.readBuffer(Buf, v139)
+					NewModule.action_params = t.ToggleCatalogItemFavoriteAction_Params.decode(Buffer1)
 				else
-					local VarInt, VarInt2 = ProtoModule.readVarInt(Buf, v138)
-					v138 = VarInt2 + VarInt
+					local VarInt, VarInt2 = ProtoModule.readVarInt(Buf, v139)
+					v139 = VarInt2 + VarInt
 				end
 			elseif Tag2 == ProtoModule.wireTypes.i32 then
 				local _
-				_, v4840 = ProtoModule.readFixed32(Buf, v138)
+				_, v4825 = ProtoModule.readFixed32(Buf, v139)
 			elseif Tag2 == ProtoModule.wireTypes.i64 then
 				local _
-				_, v4840 = ProtoModule.readFixed64(Buf, v138)
+				_, v4825 = ProtoModule.readFixed64(Buf, v139)
 			else
 				error("Unsupported wire type: " .. Tag2)
 			end
@@ -23960,20 +23851,20 @@ do
 			NewModule.action_type = (if typeof(self.actionType) == "number" then t.ActionType.fromNumber(self.actionType) else t.ActionType.fromName(self.actionType)) or self.actionType
 		end
 		if self.action_params ~= nil then
-			NewModule.action_params = t.PurchaseCatalogItemFromStockAction_Params.jsonDecode(self.action_params)
+			NewModule.action_params = t.ToggleCatalogItemFavoriteAction_Params.jsonDecode(self.action_params)
 		end
 		if self.actionParams ~= nil then
-			NewModule.action_params = t.PurchaseCatalogItemFromStockAction_Params.jsonDecode(self.actionParams)
+			NewModule.action_params = t.ToggleCatalogItemFavoriteAction_Params.jsonDecode(self.actionParams)
 		end
 		return NewModule
 	end
 
 	Module205.descriptor = {
-		name = "PurchaseCatalogItemFromStockAction",
-		fullName = "roblox.apppageplatform.shared.v1beta1.PurchaseCatalogItemFromStockAction"
+		name = "ToggleCatalogItemFavoriteAction",
+		fullName = "roblox.apppageplatform.shared.v1beta1.ToggleCatalogItemFavoriteAction"
 	}
-	t.PurchaseCatalogItemFromStockAction = Module205
-	TypeRegistryModule.default:register(t.PurchaseCatalogItemFromStockAction)
+	t.ToggleCatalogItemFavoriteAction = Module205
+	TypeRegistryModule.default:register(t.ToggleCatalogItemFavoriteAction)
 	local Module206 = {}
 	Module206.__index = Module206
 
@@ -24009,33 +23900,33 @@ do
 	function Module206.decode(Buf)
 		-- upvalues: Module206 (copy), ProtoModule (copy), PropTypesModule (copy)
 		local NewModule = Module206.new()
-		local v139 = 0
-		while v139 < buffer.len(Buf) do
+		local v140 = 0
+		while v140 < buffer.len(Buf) do
 			local Tag, Tag2
-			Tag, Tag2, v4861 = ProtoModule.readTag(Buf, v139)
+			Tag, Tag2, v4846 = ProtoModule.readTag(Buf, v140)
 			
 			if Tag2 == ProtoModule.wireTypes.varint then
 				local _
-				_, v4861 = ProtoModule.readVarInt(Buf, v139)
+				_, v4846 = ProtoModule.readVarInt(Buf, v140)
 			elseif Tag2 == ProtoModule.wireTypes.lengthDelimited then
 				if Tag == 1 then
 					local Buffer1
-					Buffer1, v4861 = ProtoModule.readBuffer(Buf, v139)
+					Buffer1, v4846 = ProtoModule.readBuffer(Buf, v140)
 					NewModule.item_id = PropTypesModule.StringProp.decode(Buffer1)
 				elseif Tag == 2 then
 					local Buffer2
-					Buffer2, v4861 = ProtoModule.readBuffer(Buf, v139)
+					Buffer2, v4846 = ProtoModule.readBuffer(Buf, v140)
 					NewModule.item_type = PropTypesModule.StringProp.decode(Buffer2)
 				else
-					local VarInt, VarInt2 = ProtoModule.readVarInt(Buf, v139)
-					v139 = VarInt2 + VarInt
+					local VarInt, VarInt2 = ProtoModule.readVarInt(Buf, v140)
+					v140 = VarInt2 + VarInt
 				end
 			elseif Tag2 == ProtoModule.wireTypes.i32 then
 				local _
-				_, v4861 = ProtoModule.readFixed32(Buf, v139)
+				_, v4846 = ProtoModule.readFixed32(Buf, v140)
 			elseif Tag2 == ProtoModule.wireTypes.i64 then
 				local _
-				_, v4861 = ProtoModule.readFixed64(Buf, v139)
+				_, v4846 = ProtoModule.readFixed64(Buf, v140)
 			else
 				error("Unsupported wire type: " .. Tag2)
 			end
@@ -24075,13 +23966,13 @@ do
 	end
 
 	Module206.descriptor = {
-		name = "PurchaseCatalogItemFromStockAction_Params",
+		name = "ToggleCatalogItemFavoriteAction_Params",
 		fullName = "roblox.apppageplatform.shared.v1beta1.Params"
 	}
-	t.PurchaseCatalogItemFromStockAction_Params = Module206
+	t.ToggleCatalogItemFavoriteAction_Params = Module206
 end
 do
-	TypeRegistryModule.default:register(t.PurchaseCatalogItemFromStockAction_Params)
+	TypeRegistryModule.default:register(t.ToggleCatalogItemFavoriteAction_Params)
 	local Module207 = {}
 	Module207.__index = Module207
 
@@ -24116,35 +24007,35 @@ do
 	function Module207.decode(Buf)
 		-- upvalues: Module207 (copy), ProtoModule (copy), t (copy)
 		local NewModule = Module207.new()
-		local v139 = 0
-		while v139 < buffer.len(Buf) do
+		local v140 = 0
+		while v140 < buffer.len(Buf) do
 			local Tag, Tag2
-			Tag, Tag2, v4881 = ProtoModule.readTag(Buf, v139)
+			Tag, Tag2, v4866 = ProtoModule.readTag(Buf, v140)
 			
 			if Tag2 == ProtoModule.wireTypes.varint then
 				if Tag == 1 then
 					local VarIntI32
-					VarIntI32, v4881 = ProtoModule.readVarIntI32(Buf, v139)
+					VarIntI32, v4866 = ProtoModule.readVarIntI32(Buf, v140)
 					NewModule.action_type = t.ActionType.fromNumber(VarIntI32) or VarIntI32
 				else
 					local _
-					_, v4881 = ProtoModule.readVarInt(Buf, v139)
+					_, v4866 = ProtoModule.readVarInt(Buf, v140)
 				end
 			elseif Tag2 == ProtoModule.wireTypes.lengthDelimited then
 				if Tag == 2 then
 					local Buffer1
-					Buffer1, v4881 = ProtoModule.readBuffer(Buf, v139)
-					NewModule.action_params = t.OpenCatalogItemOwnershipAction_Params.decode(Buffer1)
+					Buffer1, v4866 = ProtoModule.readBuffer(Buf, v140)
+					NewModule.action_params = t.OpenCatalogItemExperiencesAction_Params.decode(Buffer1)
 				else
-					local VarInt, VarInt2 = ProtoModule.readVarInt(Buf, v139)
-					v139 = VarInt2 + VarInt
+					local VarInt, VarInt2 = ProtoModule.readVarInt(Buf, v140)
+					v140 = VarInt2 + VarInt
 				end
 			elseif Tag2 == ProtoModule.wireTypes.i32 then
 				local _
-				_, v4881 = ProtoModule.readFixed32(Buf, v139)
+				_, v4866 = ProtoModule.readFixed32(Buf, v140)
 			elseif Tag2 == ProtoModule.wireTypes.i64 then
 				local _
-				_, v4881 = ProtoModule.readFixed64(Buf, v139)
+				_, v4866 = ProtoModule.readFixed64(Buf, v140)
 			else
 				error("Unsupported wire type: " .. Tag2)
 			end
@@ -24176,20 +24067,20 @@ do
 			NewModule.action_type = (if typeof(self.actionType) == "number" then t.ActionType.fromNumber(self.actionType) else t.ActionType.fromName(self.actionType)) or self.actionType
 		end
 		if self.action_params ~= nil then
-			NewModule.action_params = t.OpenCatalogItemOwnershipAction_Params.jsonDecode(self.action_params)
+			NewModule.action_params = t.OpenCatalogItemExperiencesAction_Params.jsonDecode(self.action_params)
 		end
 		if self.actionParams ~= nil then
-			NewModule.action_params = t.OpenCatalogItemOwnershipAction_Params.jsonDecode(self.actionParams)
+			NewModule.action_params = t.OpenCatalogItemExperiencesAction_Params.jsonDecode(self.actionParams)
 		end
 		return NewModule
 	end
 
 	Module207.descriptor = {
-		name = "OpenCatalogItemOwnershipAction",
-		fullName = "roblox.apppageplatform.shared.v1beta1.OpenCatalogItemOwnershipAction"
+		name = "OpenCatalogItemExperiencesAction",
+		fullName = "roblox.apppageplatform.shared.v1beta1.OpenCatalogItemExperiencesAction"
 	}
-	t.OpenCatalogItemOwnershipAction = Module207
-	TypeRegistryModule.default:register(t.OpenCatalogItemOwnershipAction)
+	t.OpenCatalogItemExperiencesAction = Module207
+	TypeRegistryModule.default:register(t.OpenCatalogItemExperiencesAction)
 	local Module208 = {}
 	Module208.__index = Module208
 
@@ -24225,33 +24116,33 @@ do
 	function Module208.decode(Buf)
 		-- upvalues: Module208 (copy), ProtoModule (copy), PropTypesModule (copy)
 		local NewModule = Module208.new()
-		local v140 = 0
-		while v140 < buffer.len(Buf) do
+		local v141 = 0
+		while v141 < buffer.len(Buf) do
 			local Tag, Tag2
-			Tag, Tag2, v4902 = ProtoModule.readTag(Buf, v140)
+			Tag, Tag2, v4887 = ProtoModule.readTag(Buf, v141)
 			
 			if Tag2 == ProtoModule.wireTypes.varint then
 				local _
-				_, v4902 = ProtoModule.readVarInt(Buf, v140)
+				_, v4887 = ProtoModule.readVarInt(Buf, v141)
 			elseif Tag2 == ProtoModule.wireTypes.lengthDelimited then
 				if Tag == 1 then
 					local Buffer1
-					Buffer1, v4902 = ProtoModule.readBuffer(Buf, v140)
+					Buffer1, v4887 = ProtoModule.readBuffer(Buf, v141)
 					NewModule.item_id = PropTypesModule.StringProp.decode(Buffer1)
 				elseif Tag == 2 then
 					local Buffer2
-					Buffer2, v4902 = ProtoModule.readBuffer(Buf, v140)
+					Buffer2, v4887 = ProtoModule.readBuffer(Buf, v141)
 					NewModule.item_type = PropTypesModule.StringProp.decode(Buffer2)
 				else
-					local VarInt, VarInt2 = ProtoModule.readVarInt(Buf, v140)
-					v140 = VarInt2 + VarInt
+					local VarInt, VarInt2 = ProtoModule.readVarInt(Buf, v141)
+					v141 = VarInt2 + VarInt
 				end
 			elseif Tag2 == ProtoModule.wireTypes.i32 then
 				local _
-				_, v4902 = ProtoModule.readFixed32(Buf, v140)
+				_, v4887 = ProtoModule.readFixed32(Buf, v141)
 			elseif Tag2 == ProtoModule.wireTypes.i64 then
 				local _
-				_, v4902 = ProtoModule.readFixed64(Buf, v140)
+				_, v4887 = ProtoModule.readFixed64(Buf, v141)
 			else
 				error("Unsupported wire type: " .. Tag2)
 			end
@@ -24291,11 +24182,11 @@ do
 	end
 
 	Module208.descriptor = {
-		name = "OpenCatalogItemOwnershipAction_Params",
+		name = "OpenCatalogItemExperiencesAction_Params",
 		fullName = "roblox.apppageplatform.shared.v1beta1.Params"
 	}
-	t.OpenCatalogItemOwnershipAction_Params = Module208
-	TypeRegistryModule.default:register(t.OpenCatalogItemOwnershipAction_Params)
+	t.OpenCatalogItemExperiencesAction_Params = Module208
+	TypeRegistryModule.default:register(t.OpenCatalogItemExperiencesAction_Params)
 	local Module209 = {}
 	Module209.__index = Module209
 
@@ -24330,35 +24221,35 @@ do
 	function Module209.decode(Buf)
 		-- upvalues: Module209 (copy), ProtoModule (copy), t (copy)
 		local NewModule = Module209.new()
-		local v141 = 0
-		while v141 < buffer.len(Buf) do
+		local v142 = 0
+		while v142 < buffer.len(Buf) do
 			local Tag, Tag2
-			Tag, Tag2, v4922 = ProtoModule.readTag(Buf, v141)
+			Tag, Tag2, v4907 = ProtoModule.readTag(Buf, v142)
 			
 			if Tag2 == ProtoModule.wireTypes.varint then
 				if Tag == 1 then
 					local VarIntI32
-					VarIntI32, v4922 = ProtoModule.readVarIntI32(Buf, v141)
+					VarIntI32, v4907 = ProtoModule.readVarIntI32(Buf, v142)
 					NewModule.action_type = t.ActionType.fromNumber(VarIntI32) or VarIntI32
 				else
 					local _
-					_, v4922 = ProtoModule.readVarInt(Buf, v141)
+					_, v4907 = ProtoModule.readVarInt(Buf, v142)
 				end
 			elseif Tag2 == ProtoModule.wireTypes.lengthDelimited then
 				if Tag == 2 then
 					local Buffer1
-					Buffer1, v4922 = ProtoModule.readBuffer(Buf, v141)
-					NewModule.action_params = t.TryOnCatalogItemAction_Params.decode(Buffer1)
+					Buffer1, v4907 = ProtoModule.readBuffer(Buf, v142)
+					NewModule.action_params = t.OpenCatalogItemCreatorProfileAction_Params.decode(Buffer1)
 				else
-					local VarInt, VarInt2 = ProtoModule.readVarInt(Buf, v141)
-					v141 = VarInt2 + VarInt
+					local VarInt, VarInt2 = ProtoModule.readVarInt(Buf, v142)
+					v142 = VarInt2 + VarInt
 				end
 			elseif Tag2 == ProtoModule.wireTypes.i32 then
 				local _
-				_, v4922 = ProtoModule.readFixed32(Buf, v141)
+				_, v4907 = ProtoModule.readFixed32(Buf, v142)
 			elseif Tag2 == ProtoModule.wireTypes.i64 then
 				local _
-				_, v4922 = ProtoModule.readFixed64(Buf, v141)
+				_, v4907 = ProtoModule.readFixed64(Buf, v142)
 			else
 				error("Unsupported wire type: " .. Tag2)
 			end
@@ -24390,6 +24281,1065 @@ do
 			NewModule.action_type = (if typeof(self.actionType) == "number" then t.ActionType.fromNumber(self.actionType) else t.ActionType.fromName(self.actionType)) or self.actionType
 		end
 		if self.action_params ~= nil then
+			NewModule.action_params = t.OpenCatalogItemCreatorProfileAction_Params.jsonDecode(self.action_params)
+		end
+		if self.actionParams ~= nil then
+			NewModule.action_params = t.OpenCatalogItemCreatorProfileAction_Params.jsonDecode(self.actionParams)
+		end
+		return NewModule
+	end
+
+	Module209.descriptor = {
+		name = "OpenCatalogItemCreatorProfileAction",
+		fullName = "roblox.apppageplatform.shared.v1beta1.OpenCatalogItemCreatorProfileAction"
+	}
+	t.OpenCatalogItemCreatorProfileAction = Module209
+end
+do
+	TypeRegistryModule.default:register(t.OpenCatalogItemCreatorProfileAction)
+	local Module210 = {}
+	Module210.__index = Module210
+
+	function Module210.new(p1)
+		-- upvalues: Module210 (copy)
+		return (setmetatable({
+			creator_id = if p1 == nil or p1.creator_id == nil then nil else p1.creator_id,
+			creator_type = if p1 == nil or p1.creator_type == nil then nil else p1.creator_type
+		}, Module210))
+	end
+
+	function Module210:encode()
+		-- upvalues: ProtoModule (copy)
+		local Buf = buffer.create(0)
+		local Count = 0
+		
+		if self.creator_id ~= nil then
+			local EncodeResult = self.creator_id:encode()
+			local WriteTagResult, WriteTagResult2 = ProtoModule.writeTag(Buf, Count, 1, ProtoModule.wireTypes.lengthDelimited)
+			Buf, Count = ProtoModule.writeBuffer(WriteTagResult, WriteTagResult2, EncodeResult, buffer.len(EncodeResult))
+		end
+		if self.creator_type ~= nil then
+			local EncodeResult = self.creator_type:encode()
+			local WriteTagResult1, WriteTagResult2_1 = ProtoModule.writeTag(Buf, Count, 2, ProtoModule.wireTypes.lengthDelimited)
+			Buf, Count = ProtoModule.writeBuffer(WriteTagResult1, WriteTagResult2_1, EncodeResult, buffer.len(EncodeResult))
+		end
+		local Buf1 = buffer.create(Count)
+		buffer.copy(Buf1, 0, Buf, 0, Count)
+		
+		return Buf1
+	end
+
+	function Module210.decode(Buf)
+		-- upvalues: Module210 (copy), ProtoModule (copy), PropTypesModule (copy)
+		local NewModule = Module210.new()
+		local v142 = 0
+		while v142 < buffer.len(Buf) do
+			local Tag, Tag2
+			Tag, Tag2, v4928 = ProtoModule.readTag(Buf, v142)
+			
+			if Tag2 == ProtoModule.wireTypes.varint then
+				local _
+				_, v4928 = ProtoModule.readVarInt(Buf, v142)
+			elseif Tag2 == ProtoModule.wireTypes.lengthDelimited then
+				if Tag == 1 then
+					local Buffer1
+					Buffer1, v4928 = ProtoModule.readBuffer(Buf, v142)
+					NewModule.creator_id = PropTypesModule.StringProp.decode(Buffer1)
+				elseif Tag == 2 then
+					local Buffer2
+					Buffer2, v4928 = ProtoModule.readBuffer(Buf, v142)
+					NewModule.creator_type = PropTypesModule.StringProp.decode(Buffer2)
+				else
+					local VarInt, VarInt2 = ProtoModule.readVarInt(Buf, v142)
+					v142 = VarInt2 + VarInt
+				end
+			elseif Tag2 == ProtoModule.wireTypes.i32 then
+				local _
+				_, v4928 = ProtoModule.readFixed32(Buf, v142)
+			elseif Tag2 == ProtoModule.wireTypes.i64 then
+				local _
+				_, v4928 = ProtoModule.readFixed64(Buf, v142)
+			else
+				error("Unsupported wire type: " .. Tag2)
+			end
+		end
+		return NewModule
+	end
+
+	function Module210:jsonEncode()
+		local t = {}
+		
+		if self.creator_id ~= nil then
+			t.creatorId = self.creator_id:jsonEncode()
+		end
+		if self.creator_type ~= nil then
+			t.creatorType = self.creator_type:jsonEncode()
+		end
+		return t
+	end
+
+	function Module210:jsonDecode()
+		-- upvalues: Module210 (copy), PropTypesModule (copy)
+		local NewModule = Module210.new()
+		
+		if self.creator_id ~= nil then
+			NewModule.creator_id = PropTypesModule.StringProp.jsonDecode(self.creator_id)
+		end
+		if self.creatorId ~= nil then
+			NewModule.creator_id = PropTypesModule.StringProp.jsonDecode(self.creatorId)
+		end
+		if self.creator_type ~= nil then
+			NewModule.creator_type = PropTypesModule.StringProp.jsonDecode(self.creator_type)
+		end
+		if self.creatorType ~= nil then
+			NewModule.creator_type = PropTypesModule.StringProp.jsonDecode(self.creatorType)
+		end
+		return NewModule
+	end
+
+	Module210.descriptor = {
+		name = "OpenCatalogItemCreatorProfileAction_Params",
+		fullName = "roblox.apppageplatform.shared.v1beta1.Params"
+	}
+	t.OpenCatalogItemCreatorProfileAction_Params = Module210
+	TypeRegistryModule.default:register(t.OpenCatalogItemCreatorProfileAction_Params)
+	local Module211 = {}
+	Module211.__index = Module211
+
+	function Module211.new(p1)
+		-- upvalues: t (copy), Module211 (copy)
+		return (setmetatable({
+			action_type = if p1 == nil or p1.action_type == nil then assert(t.ActionType.fromNumber(0), "Enum has no 0 default") else p1.action_type,
+			action_params = if p1 == nil or p1.action_params == nil then nil else p1.action_params
+		}, Module211))
+	end
+
+	function Module211:encode()
+		-- upvalues: t (copy), ProtoModule (copy)
+		local Buf = buffer.create(0)
+		local Count = 0
+		
+		if self.action_type ~= nil and (self.action_type ~= nil and self.action_type ~= 0 or self.action_type ~= t.ActionType.fromNumber(0)) then
+			local WriteTagResult, WriteTagResult2 = ProtoModule.writeTag(Buf, Count, 1, ProtoModule.wireTypes.varint)
+			Buf, Count = ProtoModule.writeVarInt(WriteTagResult, WriteTagResult2, t.ActionType.toNumber(self.action_type))
+		end
+		if self.action_params ~= nil then
+			local EncodeResult = self.action_params:encode()
+			local WriteTagResult1, WriteTagResult2_1 = ProtoModule.writeTag(Buf, Count, 2, ProtoModule.wireTypes.lengthDelimited)
+			Buf, Count = ProtoModule.writeBuffer(WriteTagResult1, WriteTagResult2_1, EncodeResult, buffer.len(EncodeResult))
+		end
+		local Buf1 = buffer.create(Count)
+		buffer.copy(Buf1, 0, Buf, 0, Count)
+		
+		return Buf1
+	end
+
+	function Module211.decode(Buf)
+		-- upvalues: Module211 (copy), ProtoModule (copy), t (copy)
+		local NewModule = Module211.new()
+		local v143 = 0
+		while v143 < buffer.len(Buf) do
+			local Tag, Tag2
+			Tag, Tag2, v4948 = ProtoModule.readTag(Buf, v143)
+			
+			if Tag2 == ProtoModule.wireTypes.varint then
+				if Tag == 1 then
+					local VarIntI32
+					VarIntI32, v4948 = ProtoModule.readVarIntI32(Buf, v143)
+					NewModule.action_type = t.ActionType.fromNumber(VarIntI32) or VarIntI32
+				else
+					local _
+					_, v4948 = ProtoModule.readVarInt(Buf, v143)
+				end
+			elseif Tag2 == ProtoModule.wireTypes.lengthDelimited then
+				if Tag == 2 then
+					local Buffer1
+					Buffer1, v4948 = ProtoModule.readBuffer(Buf, v143)
+					NewModule.action_params = t.PlayCatalogItemAttributionExperienceAction_Params.decode(Buffer1)
+				else
+					local VarInt, VarInt2 = ProtoModule.readVarInt(Buf, v143)
+					v143 = VarInt2 + VarInt
+				end
+			elseif Tag2 == ProtoModule.wireTypes.i32 then
+				local _
+				_, v4948 = ProtoModule.readFixed32(Buf, v143)
+			elseif Tag2 == ProtoModule.wireTypes.i64 then
+				local _
+				_, v4948 = ProtoModule.readFixed64(Buf, v143)
+			else
+				error("Unsupported wire type: " .. Tag2)
+			end
+		end
+		return NewModule
+	end
+
+	function Module211:jsonEncode()
+		-- upvalues: t (copy)
+		local t1 = {}
+		
+		if self.action_type ~= nil and (self.action_type ~= nil and self.action_type ~= 0 or self.action_type ~= t.ActionType.fromNumber(0)) then
+			t1.actionType = if typeof(self.action_type) == "number" then self.action_type else t.ActionType.toNumber(self.action_type)
+		end
+		if self.action_params ~= nil then
+			t1.actionParams = self.action_params:jsonEncode()
+		end
+		return t1
+	end
+
+	function Module211:jsonDecode()
+		-- upvalues: Module211 (copy), t (copy)
+		local NewModule = Module211.new()
+		
+		if self.action_type ~= nil then
+			NewModule.action_type = (if typeof(self.action_type) == "number" then t.ActionType.fromNumber(self.action_type) else t.ActionType.fromName(self.action_type)) or self.action_type
+		end
+		if self.actionType ~= nil then
+			NewModule.action_type = (if typeof(self.actionType) == "number" then t.ActionType.fromNumber(self.actionType) else t.ActionType.fromName(self.actionType)) or self.actionType
+		end
+		if self.action_params ~= nil then
+			NewModule.action_params = t.PlayCatalogItemAttributionExperienceAction_Params.jsonDecode(self.action_params)
+		end
+		if self.actionParams ~= nil then
+			NewModule.action_params = t.PlayCatalogItemAttributionExperienceAction_Params.jsonDecode(self.actionParams)
+		end
+		return NewModule
+	end
+
+	Module211.descriptor = {
+		name = "PlayCatalogItemAttributionExperienceAction",
+		fullName = "roblox.apppageplatform.shared.v1beta1.PlayCatalogItemAttributionExperienceAction"
+	}
+	t.PlayCatalogItemAttributionExperienceAction = Module211
+	TypeRegistryModule.default:register(t.PlayCatalogItemAttributionExperienceAction)
+	local Module212 = {}
+	Module212.__index = Module212
+
+	function Module212.new(p1)
+		-- upvalues: Module212 (copy)
+		return (setmetatable({
+			universe_id = if p1 == nil or p1.universe_id == nil then nil else p1.universe_id
+		}, Module212))
+	end
+
+	function Module212:encode()
+		-- upvalues: ProtoModule (copy)
+		local Buf = buffer.create(0)
+		local Count = 0
+		
+		if self.universe_id ~= nil then
+			local EncodeResult = self.universe_id:encode()
+			local WriteTagResult, WriteTagResult2 = ProtoModule.writeTag(Buf, Count, 1, ProtoModule.wireTypes.lengthDelimited)
+			Buf, Count = ProtoModule.writeBuffer(WriteTagResult, WriteTagResult2, EncodeResult, buffer.len(EncodeResult))
+		end
+		local Buf1 = buffer.create(Count)
+		buffer.copy(Buf1, 0, Buf, 0, Count)
+		
+		return Buf1
+	end
+
+	function Module212.decode(Buf)
+		-- upvalues: Module212 (copy), ProtoModule (copy), PropTypesModule (copy)
+		local NewModule = Module212.new()
+		local v144 = 0
+		while v144 < buffer.len(Buf) do
+			local Tag, Tag2
+			Tag, Tag2, v4966 = ProtoModule.readTag(Buf, v144)
+			
+			if Tag2 == ProtoModule.wireTypes.varint then
+				local _
+				_, v4966 = ProtoModule.readVarInt(Buf, v144)
+			elseif Tag2 == ProtoModule.wireTypes.lengthDelimited then
+				if Tag == 1 then
+					local Buffer1
+					Buffer1, v4966 = ProtoModule.readBuffer(Buf, v144)
+					NewModule.universe_id = PropTypesModule.StringProp.decode(Buffer1)
+				else
+					local VarInt, VarInt2 = ProtoModule.readVarInt(Buf, v144)
+					v144 = VarInt2 + VarInt
+				end
+			elseif Tag2 == ProtoModule.wireTypes.i32 then
+				local _
+				_, v4966 = ProtoModule.readFixed32(Buf, v144)
+			elseif Tag2 == ProtoModule.wireTypes.i64 then
+				local _
+				_, v4966 = ProtoModule.readFixed64(Buf, v144)
+			else
+				error("Unsupported wire type: " .. Tag2)
+			end
+		end
+		return NewModule
+	end
+
+	function Module212:jsonEncode()
+		local t = {}
+		
+		if self.universe_id ~= nil then
+			t.universeId = self.universe_id:jsonEncode()
+		end
+		return t
+	end
+
+	function Module212:jsonDecode()
+		-- upvalues: Module212 (copy), PropTypesModule (copy)
+		local NewModule = Module212.new()
+		
+		if self.universe_id ~= nil then
+			NewModule.universe_id = PropTypesModule.StringProp.jsonDecode(self.universe_id)
+		end
+		if self.universeId ~= nil then
+			NewModule.universe_id = PropTypesModule.StringProp.jsonDecode(self.universeId)
+		end
+		return NewModule
+	end
+
+	Module212.descriptor = {
+		name = "PlayCatalogItemAttributionExperienceAction_Params",
+		fullName = "roblox.apppageplatform.shared.v1beta1.Params"
+	}
+	t.PlayCatalogItemAttributionExperienceAction_Params = Module212
+end
+do
+	TypeRegistryModule.default:register(t.PlayCatalogItemAttributionExperienceAction_Params)
+	local Module213 = {}
+	Module213.__index = Module213
+
+	function Module213.new(p1)
+		-- upvalues: t (copy), Module213 (copy)
+		return (setmetatable({
+			action_type = if p1 == nil or p1.action_type == nil then assert(t.ActionType.fromNumber(0), "Enum has no 0 default") else p1.action_type,
+			action_params = if p1 == nil or p1.action_params == nil then nil else p1.action_params
+		}, Module213))
+	end
+
+	function Module213:encode()
+		-- upvalues: t (copy), ProtoModule (copy)
+		local Buf = buffer.create(0)
+		local Count = 0
+		
+		if self.action_type ~= nil and (self.action_type ~= nil and self.action_type ~= 0 or self.action_type ~= t.ActionType.fromNumber(0)) then
+			local WriteTagResult, WriteTagResult2 = ProtoModule.writeTag(Buf, Count, 1, ProtoModule.wireTypes.varint)
+			Buf, Count = ProtoModule.writeVarInt(WriteTagResult, WriteTagResult2, t.ActionType.toNumber(self.action_type))
+		end
+		if self.action_params ~= nil then
+			local EncodeResult = self.action_params:encode()
+			local WriteTagResult1, WriteTagResult2_1 = ProtoModule.writeTag(Buf, Count, 2, ProtoModule.wireTypes.lengthDelimited)
+			Buf, Count = ProtoModule.writeBuffer(WriteTagResult1, WriteTagResult2_1, EncodeResult, buffer.len(EncodeResult))
+		end
+		local Buf1 = buffer.create(Count)
+		buffer.copy(Buf1, 0, Buf, 0, Count)
+		
+		return Buf1
+	end
+
+	function Module213.decode(Buf)
+		-- upvalues: Module213 (copy), ProtoModule (copy), t (copy)
+		local NewModule = Module213.new()
+		local v144 = 0
+		while v144 < buffer.len(Buf) do
+			local Tag, Tag2
+			Tag, Tag2, v4985 = ProtoModule.readTag(Buf, v144)
+			
+			if Tag2 == ProtoModule.wireTypes.varint then
+				if Tag == 1 then
+					local VarIntI32
+					VarIntI32, v4985 = ProtoModule.readVarIntI32(Buf, v144)
+					NewModule.action_type = t.ActionType.fromNumber(VarIntI32) or VarIntI32
+				else
+					local _
+					_, v4985 = ProtoModule.readVarInt(Buf, v144)
+				end
+			elseif Tag2 == ProtoModule.wireTypes.lengthDelimited then
+				if Tag == 2 then
+					local Buffer1
+					Buffer1, v4985 = ProtoModule.readBuffer(Buf, v144)
+					NewModule.action_params = t.OpenCatalogItemResellersAction_Params.decode(Buffer1)
+				else
+					local VarInt, VarInt2 = ProtoModule.readVarInt(Buf, v144)
+					v144 = VarInt2 + VarInt
+				end
+			elseif Tag2 == ProtoModule.wireTypes.i32 then
+				local _
+				_, v4985 = ProtoModule.readFixed32(Buf, v144)
+			elseif Tag2 == ProtoModule.wireTypes.i64 then
+				local _
+				_, v4985 = ProtoModule.readFixed64(Buf, v144)
+			else
+				error("Unsupported wire type: " .. Tag2)
+			end
+		end
+		return NewModule
+	end
+
+	function Module213:jsonEncode()
+		-- upvalues: t (copy)
+		local t1 = {}
+		
+		if self.action_type ~= nil and (self.action_type ~= nil and self.action_type ~= 0 or self.action_type ~= t.ActionType.fromNumber(0)) then
+			t1.actionType = if typeof(self.action_type) == "number" then self.action_type else t.ActionType.toNumber(self.action_type)
+		end
+		if self.action_params ~= nil then
+			t1.actionParams = self.action_params:jsonEncode()
+		end
+		return t1
+	end
+
+	function Module213:jsonDecode()
+		-- upvalues: Module213 (copy), t (copy)
+		local NewModule = Module213.new()
+		
+		if self.action_type ~= nil then
+			NewModule.action_type = (if typeof(self.action_type) == "number" then t.ActionType.fromNumber(self.action_type) else t.ActionType.fromName(self.action_type)) or self.action_type
+		end
+		if self.actionType ~= nil then
+			NewModule.action_type = (if typeof(self.actionType) == "number" then t.ActionType.fromNumber(self.actionType) else t.ActionType.fromName(self.actionType)) or self.actionType
+		end
+		if self.action_params ~= nil then
+			NewModule.action_params = t.OpenCatalogItemResellersAction_Params.jsonDecode(self.action_params)
+		end
+		if self.actionParams ~= nil then
+			NewModule.action_params = t.OpenCatalogItemResellersAction_Params.jsonDecode(self.actionParams)
+		end
+		return NewModule
+	end
+
+	Module213.descriptor = {
+		name = "OpenCatalogItemResellersAction",
+		fullName = "roblox.apppageplatform.shared.v1beta1.OpenCatalogItemResellersAction"
+	}
+	t.OpenCatalogItemResellersAction = Module213
+	TypeRegistryModule.default:register(t.OpenCatalogItemResellersAction)
+	local Module214 = {}
+	Module214.__index = Module214
+
+	function Module214.new(p1)
+		-- upvalues: Module214 (copy)
+		return (setmetatable({
+			item_id = if p1 == nil or p1.item_id == nil then nil else p1.item_id,
+			item_type = if p1 == nil or p1.item_type == nil then nil else p1.item_type
+		}, Module214))
+	end
+
+	function Module214:encode()
+		-- upvalues: ProtoModule (copy)
+		local Buf = buffer.create(0)
+		local Count = 0
+		
+		if self.item_id ~= nil then
+			local EncodeResult = self.item_id:encode()
+			local WriteTagResult, WriteTagResult2 = ProtoModule.writeTag(Buf, Count, 1, ProtoModule.wireTypes.lengthDelimited)
+			Buf, Count = ProtoModule.writeBuffer(WriteTagResult, WriteTagResult2, EncodeResult, buffer.len(EncodeResult))
+		end
+		if self.item_type ~= nil then
+			local EncodeResult = self.item_type:encode()
+			local WriteTagResult1, WriteTagResult2_1 = ProtoModule.writeTag(Buf, Count, 2, ProtoModule.wireTypes.lengthDelimited)
+			Buf, Count = ProtoModule.writeBuffer(WriteTagResult1, WriteTagResult2_1, EncodeResult, buffer.len(EncodeResult))
+		end
+		local Buf1 = buffer.create(Count)
+		buffer.copy(Buf1, 0, Buf, 0, Count)
+		
+		return Buf1
+	end
+
+	function Module214.decode(Buf)
+		-- upvalues: Module214 (copy), ProtoModule (copy), PropTypesModule (copy)
+		local NewModule = Module214.new()
+		local v145 = 0
+		while v145 < buffer.len(Buf) do
+			local Tag, Tag2
+			Tag, Tag2, v5006 = ProtoModule.readTag(Buf, v145)
+			
+			if Tag2 == ProtoModule.wireTypes.varint then
+				local _
+				_, v5006 = ProtoModule.readVarInt(Buf, v145)
+			elseif Tag2 == ProtoModule.wireTypes.lengthDelimited then
+				if Tag == 1 then
+					local Buffer1
+					Buffer1, v5006 = ProtoModule.readBuffer(Buf, v145)
+					NewModule.item_id = PropTypesModule.StringProp.decode(Buffer1)
+				elseif Tag == 2 then
+					local Buffer2
+					Buffer2, v5006 = ProtoModule.readBuffer(Buf, v145)
+					NewModule.item_type = PropTypesModule.StringProp.decode(Buffer2)
+				else
+					local VarInt, VarInt2 = ProtoModule.readVarInt(Buf, v145)
+					v145 = VarInt2 + VarInt
+				end
+			elseif Tag2 == ProtoModule.wireTypes.i32 then
+				local _
+				_, v5006 = ProtoModule.readFixed32(Buf, v145)
+			elseif Tag2 == ProtoModule.wireTypes.i64 then
+				local _
+				_, v5006 = ProtoModule.readFixed64(Buf, v145)
+			else
+				error("Unsupported wire type: " .. Tag2)
+			end
+		end
+		return NewModule
+	end
+
+	function Module214:jsonEncode()
+		local t = {}
+		
+		if self.item_id ~= nil then
+			t.itemId = self.item_id:jsonEncode()
+		end
+		if self.item_type ~= nil then
+			t.itemType = self.item_type:jsonEncode()
+		end
+		return t
+	end
+
+	function Module214:jsonDecode()
+		-- upvalues: Module214 (copy), PropTypesModule (copy)
+		local NewModule = Module214.new()
+		
+		if self.item_id ~= nil then
+			NewModule.item_id = PropTypesModule.StringProp.jsonDecode(self.item_id)
+		end
+		if self.itemId ~= nil then
+			NewModule.item_id = PropTypesModule.StringProp.jsonDecode(self.itemId)
+		end
+		if self.item_type ~= nil then
+			NewModule.item_type = PropTypesModule.StringProp.jsonDecode(self.item_type)
+		end
+		if self.itemType ~= nil then
+			NewModule.item_type = PropTypesModule.StringProp.jsonDecode(self.itemType)
+		end
+		return NewModule
+	end
+
+	Module214.descriptor = {
+		name = "OpenCatalogItemResellersAction_Params",
+		fullName = "roblox.apppageplatform.shared.v1beta1.Params"
+	}
+	t.OpenCatalogItemResellersAction_Params = Module214
+	TypeRegistryModule.default:register(t.OpenCatalogItemResellersAction_Params)
+	local Module215 = {}
+	Module215.__index = Module215
+
+	function Module215.new(p1)
+		-- upvalues: t (copy), Module215 (copy)
+		return (setmetatable({
+			action_type = if p1 == nil or p1.action_type == nil then assert(t.ActionType.fromNumber(0), "Enum has no 0 default") else p1.action_type,
+			action_params = if p1 == nil or p1.action_params == nil then nil else p1.action_params
+		}, Module215))
+	end
+
+	function Module215:encode()
+		-- upvalues: t (copy), ProtoModule (copy)
+		local Buf = buffer.create(0)
+		local Count = 0
+		
+		if self.action_type ~= nil and (self.action_type ~= nil and self.action_type ~= 0 or self.action_type ~= t.ActionType.fromNumber(0)) then
+			local WriteTagResult, WriteTagResult2 = ProtoModule.writeTag(Buf, Count, 1, ProtoModule.wireTypes.varint)
+			Buf, Count = ProtoModule.writeVarInt(WriteTagResult, WriteTagResult2, t.ActionType.toNumber(self.action_type))
+		end
+		if self.action_params ~= nil then
+			local EncodeResult = self.action_params:encode()
+			local WriteTagResult1, WriteTagResult2_1 = ProtoModule.writeTag(Buf, Count, 2, ProtoModule.wireTypes.lengthDelimited)
+			Buf, Count = ProtoModule.writeBuffer(WriteTagResult1, WriteTagResult2_1, EncodeResult, buffer.len(EncodeResult))
+		end
+		local Buf1 = buffer.create(Count)
+		buffer.copy(Buf1, 0, Buf, 0, Count)
+		
+		return Buf1
+	end
+
+	function Module215.decode(Buf)
+		-- upvalues: Module215 (copy), ProtoModule (copy), t (copy)
+		local NewModule = Module215.new()
+		local v146 = 0
+		while v146 < buffer.len(Buf) do
+			local Tag, Tag2
+			Tag, Tag2, v5026 = ProtoModule.readTag(Buf, v146)
+			
+			if Tag2 == ProtoModule.wireTypes.varint then
+				if Tag == 1 then
+					local VarIntI32
+					VarIntI32, v5026 = ProtoModule.readVarIntI32(Buf, v146)
+					NewModule.action_type = t.ActionType.fromNumber(VarIntI32) or VarIntI32
+				else
+					local _
+					_, v5026 = ProtoModule.readVarInt(Buf, v146)
+				end
+			elseif Tag2 == ProtoModule.wireTypes.lengthDelimited then
+				if Tag == 2 then
+					local Buffer1
+					Buffer1, v5026 = ProtoModule.readBuffer(Buf, v146)
+					NewModule.action_params = t.PurchaseCatalogItemFromStockAction_Params.decode(Buffer1)
+				else
+					local VarInt, VarInt2 = ProtoModule.readVarInt(Buf, v146)
+					v146 = VarInt2 + VarInt
+				end
+			elseif Tag2 == ProtoModule.wireTypes.i32 then
+				local _
+				_, v5026 = ProtoModule.readFixed32(Buf, v146)
+			elseif Tag2 == ProtoModule.wireTypes.i64 then
+				local _
+				_, v5026 = ProtoModule.readFixed64(Buf, v146)
+			else
+				error("Unsupported wire type: " .. Tag2)
+			end
+		end
+		return NewModule
+	end
+
+	function Module215:jsonEncode()
+		-- upvalues: t (copy)
+		local t1 = {}
+		
+		if self.action_type ~= nil and (self.action_type ~= nil and self.action_type ~= 0 or self.action_type ~= t.ActionType.fromNumber(0)) then
+			t1.actionType = if typeof(self.action_type) == "number" then self.action_type else t.ActionType.toNumber(self.action_type)
+		end
+		if self.action_params ~= nil then
+			t1.actionParams = self.action_params:jsonEncode()
+		end
+		return t1
+	end
+
+	function Module215:jsonDecode()
+		-- upvalues: Module215 (copy), t (copy)
+		local NewModule = Module215.new()
+		
+		if self.action_type ~= nil then
+			NewModule.action_type = (if typeof(self.action_type) == "number" then t.ActionType.fromNumber(self.action_type) else t.ActionType.fromName(self.action_type)) or self.action_type
+		end
+		if self.actionType ~= nil then
+			NewModule.action_type = (if typeof(self.actionType) == "number" then t.ActionType.fromNumber(self.actionType) else t.ActionType.fromName(self.actionType)) or self.actionType
+		end
+		if self.action_params ~= nil then
+			NewModule.action_params = t.PurchaseCatalogItemFromStockAction_Params.jsonDecode(self.action_params)
+		end
+		if self.actionParams ~= nil then
+			NewModule.action_params = t.PurchaseCatalogItemFromStockAction_Params.jsonDecode(self.actionParams)
+		end
+		return NewModule
+	end
+
+	Module215.descriptor = {
+		name = "PurchaseCatalogItemFromStockAction",
+		fullName = "roblox.apppageplatform.shared.v1beta1.PurchaseCatalogItemFromStockAction"
+	}
+	t.PurchaseCatalogItemFromStockAction = Module215
+end
+do
+	TypeRegistryModule.default:register(t.PurchaseCatalogItemFromStockAction)
+	local Module216 = {}
+	Module216.__index = Module216
+
+	function Module216.new(p1)
+		-- upvalues: Module216 (copy)
+		return (setmetatable({
+			item_id = if p1 == nil or p1.item_id == nil then nil else p1.item_id,
+			item_type = if p1 == nil or p1.item_type == nil then nil else p1.item_type
+		}, Module216))
+	end
+
+	function Module216:encode()
+		-- upvalues: ProtoModule (copy)
+		local Buf = buffer.create(0)
+		local Count = 0
+		
+		if self.item_id ~= nil then
+			local EncodeResult = self.item_id:encode()
+			local WriteTagResult, WriteTagResult2 = ProtoModule.writeTag(Buf, Count, 1, ProtoModule.wireTypes.lengthDelimited)
+			Buf, Count = ProtoModule.writeBuffer(WriteTagResult, WriteTagResult2, EncodeResult, buffer.len(EncodeResult))
+		end
+		if self.item_type ~= nil then
+			local EncodeResult = self.item_type:encode()
+			local WriteTagResult1, WriteTagResult2_1 = ProtoModule.writeTag(Buf, Count, 2, ProtoModule.wireTypes.lengthDelimited)
+			Buf, Count = ProtoModule.writeBuffer(WriteTagResult1, WriteTagResult2_1, EncodeResult, buffer.len(EncodeResult))
+		end
+		local Buf1 = buffer.create(Count)
+		buffer.copy(Buf1, 0, Buf, 0, Count)
+		
+		return Buf1
+	end
+
+	function Module216.decode(Buf)
+		-- upvalues: Module216 (copy), ProtoModule (copy), PropTypesModule (copy)
+		local NewModule = Module216.new()
+		local v146 = 0
+		while v146 < buffer.len(Buf) do
+			local Tag, Tag2
+			Tag, Tag2, v5047 = ProtoModule.readTag(Buf, v146)
+			
+			if Tag2 == ProtoModule.wireTypes.varint then
+				local _
+				_, v5047 = ProtoModule.readVarInt(Buf, v146)
+			elseif Tag2 == ProtoModule.wireTypes.lengthDelimited then
+				if Tag == 1 then
+					local Buffer1
+					Buffer1, v5047 = ProtoModule.readBuffer(Buf, v146)
+					NewModule.item_id = PropTypesModule.StringProp.decode(Buffer1)
+				elseif Tag == 2 then
+					local Buffer2
+					Buffer2, v5047 = ProtoModule.readBuffer(Buf, v146)
+					NewModule.item_type = PropTypesModule.StringProp.decode(Buffer2)
+				else
+					local VarInt, VarInt2 = ProtoModule.readVarInt(Buf, v146)
+					v146 = VarInt2 + VarInt
+				end
+			elseif Tag2 == ProtoModule.wireTypes.i32 then
+				local _
+				_, v5047 = ProtoModule.readFixed32(Buf, v146)
+			elseif Tag2 == ProtoModule.wireTypes.i64 then
+				local _
+				_, v5047 = ProtoModule.readFixed64(Buf, v146)
+			else
+				error("Unsupported wire type: " .. Tag2)
+			end
+		end
+		return NewModule
+	end
+
+	function Module216:jsonEncode()
+		local t = {}
+		
+		if self.item_id ~= nil then
+			t.itemId = self.item_id:jsonEncode()
+		end
+		if self.item_type ~= nil then
+			t.itemType = self.item_type:jsonEncode()
+		end
+		return t
+	end
+
+	function Module216:jsonDecode()
+		-- upvalues: Module216 (copy), PropTypesModule (copy)
+		local NewModule = Module216.new()
+		
+		if self.item_id ~= nil then
+			NewModule.item_id = PropTypesModule.StringProp.jsonDecode(self.item_id)
+		end
+		if self.itemId ~= nil then
+			NewModule.item_id = PropTypesModule.StringProp.jsonDecode(self.itemId)
+		end
+		if self.item_type ~= nil then
+			NewModule.item_type = PropTypesModule.StringProp.jsonDecode(self.item_type)
+		end
+		if self.itemType ~= nil then
+			NewModule.item_type = PropTypesModule.StringProp.jsonDecode(self.itemType)
+		end
+		return NewModule
+	end
+
+	Module216.descriptor = {
+		name = "PurchaseCatalogItemFromStockAction_Params",
+		fullName = "roblox.apppageplatform.shared.v1beta1.Params"
+	}
+	t.PurchaseCatalogItemFromStockAction_Params = Module216
+	TypeRegistryModule.default:register(t.PurchaseCatalogItemFromStockAction_Params)
+	local Module217 = {}
+	Module217.__index = Module217
+
+	function Module217.new(p1)
+		-- upvalues: t (copy), Module217 (copy)
+		return (setmetatable({
+			action_type = if p1 == nil or p1.action_type == nil then assert(t.ActionType.fromNumber(0), "Enum has no 0 default") else p1.action_type,
+			action_params = if p1 == nil or p1.action_params == nil then nil else p1.action_params
+		}, Module217))
+	end
+
+	function Module217:encode()
+		-- upvalues: t (copy), ProtoModule (copy)
+		local Buf = buffer.create(0)
+		local Count = 0
+		
+		if self.action_type ~= nil and (self.action_type ~= nil and self.action_type ~= 0 or self.action_type ~= t.ActionType.fromNumber(0)) then
+			local WriteTagResult, WriteTagResult2 = ProtoModule.writeTag(Buf, Count, 1, ProtoModule.wireTypes.varint)
+			Buf, Count = ProtoModule.writeVarInt(WriteTagResult, WriteTagResult2, t.ActionType.toNumber(self.action_type))
+		end
+		if self.action_params ~= nil then
+			local EncodeResult = self.action_params:encode()
+			local WriteTagResult1, WriteTagResult2_1 = ProtoModule.writeTag(Buf, Count, 2, ProtoModule.wireTypes.lengthDelimited)
+			Buf, Count = ProtoModule.writeBuffer(WriteTagResult1, WriteTagResult2_1, EncodeResult, buffer.len(EncodeResult))
+		end
+		local Buf1 = buffer.create(Count)
+		buffer.copy(Buf1, 0, Buf, 0, Count)
+		
+		return Buf1
+	end
+
+	function Module217.decode(Buf)
+		-- upvalues: Module217 (copy), ProtoModule (copy), t (copy)
+		local NewModule = Module217.new()
+		local v147 = 0
+		while v147 < buffer.len(Buf) do
+			local Tag, Tag2
+			Tag, Tag2, v5067 = ProtoModule.readTag(Buf, v147)
+			
+			if Tag2 == ProtoModule.wireTypes.varint then
+				if Tag == 1 then
+					local VarIntI32
+					VarIntI32, v5067 = ProtoModule.readVarIntI32(Buf, v147)
+					NewModule.action_type = t.ActionType.fromNumber(VarIntI32) or VarIntI32
+				else
+					local _
+					_, v5067 = ProtoModule.readVarInt(Buf, v147)
+				end
+			elseif Tag2 == ProtoModule.wireTypes.lengthDelimited then
+				if Tag == 2 then
+					local Buffer1
+					Buffer1, v5067 = ProtoModule.readBuffer(Buf, v147)
+					NewModule.action_params = t.OpenCatalogItemOwnershipAction_Params.decode(Buffer1)
+				else
+					local VarInt, VarInt2 = ProtoModule.readVarInt(Buf, v147)
+					v147 = VarInt2 + VarInt
+				end
+			elseif Tag2 == ProtoModule.wireTypes.i32 then
+				local _
+				_, v5067 = ProtoModule.readFixed32(Buf, v147)
+			elseif Tag2 == ProtoModule.wireTypes.i64 then
+				local _
+				_, v5067 = ProtoModule.readFixed64(Buf, v147)
+			else
+				error("Unsupported wire type: " .. Tag2)
+			end
+		end
+		return NewModule
+	end
+
+	function Module217:jsonEncode()
+		-- upvalues: t (copy)
+		local t1 = {}
+		
+		if self.action_type ~= nil and (self.action_type ~= nil and self.action_type ~= 0 or self.action_type ~= t.ActionType.fromNumber(0)) then
+			t1.actionType = if typeof(self.action_type) == "number" then self.action_type else t.ActionType.toNumber(self.action_type)
+		end
+		if self.action_params ~= nil then
+			t1.actionParams = self.action_params:jsonEncode()
+		end
+		return t1
+	end
+
+	function Module217:jsonDecode()
+		-- upvalues: Module217 (copy), t (copy)
+		local NewModule = Module217.new()
+		
+		if self.action_type ~= nil then
+			NewModule.action_type = (if typeof(self.action_type) == "number" then t.ActionType.fromNumber(self.action_type) else t.ActionType.fromName(self.action_type)) or self.action_type
+		end
+		if self.actionType ~= nil then
+			NewModule.action_type = (if typeof(self.actionType) == "number" then t.ActionType.fromNumber(self.actionType) else t.ActionType.fromName(self.actionType)) or self.actionType
+		end
+		if self.action_params ~= nil then
+			NewModule.action_params = t.OpenCatalogItemOwnershipAction_Params.jsonDecode(self.action_params)
+		end
+		if self.actionParams ~= nil then
+			NewModule.action_params = t.OpenCatalogItemOwnershipAction_Params.jsonDecode(self.actionParams)
+		end
+		return NewModule
+	end
+
+	Module217.descriptor = {
+		name = "OpenCatalogItemOwnershipAction",
+		fullName = "roblox.apppageplatform.shared.v1beta1.OpenCatalogItemOwnershipAction"
+	}
+	t.OpenCatalogItemOwnershipAction = Module217
+	TypeRegistryModule.default:register(t.OpenCatalogItemOwnershipAction)
+	local Module218 = {}
+	Module218.__index = Module218
+
+	function Module218.new(p1)
+		-- upvalues: Module218 (copy)
+		return (setmetatable({
+			item_id = if p1 == nil or p1.item_id == nil then nil else p1.item_id,
+			item_type = if p1 == nil or p1.item_type == nil then nil else p1.item_type
+		}, Module218))
+	end
+
+	function Module218:encode()
+		-- upvalues: ProtoModule (copy)
+		local Buf = buffer.create(0)
+		local Count = 0
+		
+		if self.item_id ~= nil then
+			local EncodeResult = self.item_id:encode()
+			local WriteTagResult, WriteTagResult2 = ProtoModule.writeTag(Buf, Count, 1, ProtoModule.wireTypes.lengthDelimited)
+			Buf, Count = ProtoModule.writeBuffer(WriteTagResult, WriteTagResult2, EncodeResult, buffer.len(EncodeResult))
+		end
+		if self.item_type ~= nil then
+			local EncodeResult = self.item_type:encode()
+			local WriteTagResult1, WriteTagResult2_1 = ProtoModule.writeTag(Buf, Count, 2, ProtoModule.wireTypes.lengthDelimited)
+			Buf, Count = ProtoModule.writeBuffer(WriteTagResult1, WriteTagResult2_1, EncodeResult, buffer.len(EncodeResult))
+		end
+		local Buf1 = buffer.create(Count)
+		buffer.copy(Buf1, 0, Buf, 0, Count)
+		
+		return Buf1
+	end
+
+	function Module218.decode(Buf)
+		-- upvalues: Module218 (copy), ProtoModule (copy), PropTypesModule (copy)
+		local NewModule = Module218.new()
+		local v148 = 0
+		while v148 < buffer.len(Buf) do
+			local Tag, Tag2
+			Tag, Tag2, v5088 = ProtoModule.readTag(Buf, v148)
+			
+			if Tag2 == ProtoModule.wireTypes.varint then
+				local _
+				_, v5088 = ProtoModule.readVarInt(Buf, v148)
+			elseif Tag2 == ProtoModule.wireTypes.lengthDelimited then
+				if Tag == 1 then
+					local Buffer1
+					Buffer1, v5088 = ProtoModule.readBuffer(Buf, v148)
+					NewModule.item_id = PropTypesModule.StringProp.decode(Buffer1)
+				elseif Tag == 2 then
+					local Buffer2
+					Buffer2, v5088 = ProtoModule.readBuffer(Buf, v148)
+					NewModule.item_type = PropTypesModule.StringProp.decode(Buffer2)
+				else
+					local VarInt, VarInt2 = ProtoModule.readVarInt(Buf, v148)
+					v148 = VarInt2 + VarInt
+				end
+			elseif Tag2 == ProtoModule.wireTypes.i32 then
+				local _
+				_, v5088 = ProtoModule.readFixed32(Buf, v148)
+			elseif Tag2 == ProtoModule.wireTypes.i64 then
+				local _
+				_, v5088 = ProtoModule.readFixed64(Buf, v148)
+			else
+				error("Unsupported wire type: " .. Tag2)
+			end
+		end
+		return NewModule
+	end
+
+	function Module218:jsonEncode()
+		local t = {}
+		
+		if self.item_id ~= nil then
+			t.itemId = self.item_id:jsonEncode()
+		end
+		if self.item_type ~= nil then
+			t.itemType = self.item_type:jsonEncode()
+		end
+		return t
+	end
+
+	function Module218:jsonDecode()
+		-- upvalues: Module218 (copy), PropTypesModule (copy)
+		local NewModule = Module218.new()
+		
+		if self.item_id ~= nil then
+			NewModule.item_id = PropTypesModule.StringProp.jsonDecode(self.item_id)
+		end
+		if self.itemId ~= nil then
+			NewModule.item_id = PropTypesModule.StringProp.jsonDecode(self.itemId)
+		end
+		if self.item_type ~= nil then
+			NewModule.item_type = PropTypesModule.StringProp.jsonDecode(self.item_type)
+		end
+		if self.itemType ~= nil then
+			NewModule.item_type = PropTypesModule.StringProp.jsonDecode(self.itemType)
+		end
+		return NewModule
+	end
+
+	Module218.descriptor = {
+		name = "OpenCatalogItemOwnershipAction_Params",
+		fullName = "roblox.apppageplatform.shared.v1beta1.Params"
+	}
+	t.OpenCatalogItemOwnershipAction_Params = Module218
+end
+do
+	TypeRegistryModule.default:register(t.OpenCatalogItemOwnershipAction_Params)
+	local Module219 = {}
+	Module219.__index = Module219
+
+	function Module219.new(p1)
+		-- upvalues: t (copy), Module219 (copy)
+		return (setmetatable({
+			action_type = if p1 == nil or p1.action_type == nil then assert(t.ActionType.fromNumber(0), "Enum has no 0 default") else p1.action_type,
+			action_params = if p1 == nil or p1.action_params == nil then nil else p1.action_params
+		}, Module219))
+	end
+
+	function Module219:encode()
+		-- upvalues: t (copy), ProtoModule (copy)
+		local Buf = buffer.create(0)
+		local Count = 0
+		
+		if self.action_type ~= nil and (self.action_type ~= nil and self.action_type ~= 0 or self.action_type ~= t.ActionType.fromNumber(0)) then
+			local WriteTagResult, WriteTagResult2 = ProtoModule.writeTag(Buf, Count, 1, ProtoModule.wireTypes.varint)
+			Buf, Count = ProtoModule.writeVarInt(WriteTagResult, WriteTagResult2, t.ActionType.toNumber(self.action_type))
+		end
+		if self.action_params ~= nil then
+			local EncodeResult = self.action_params:encode()
+			local WriteTagResult1, WriteTagResult2_1 = ProtoModule.writeTag(Buf, Count, 2, ProtoModule.wireTypes.lengthDelimited)
+			Buf, Count = ProtoModule.writeBuffer(WriteTagResult1, WriteTagResult2_1, EncodeResult, buffer.len(EncodeResult))
+		end
+		local Buf1 = buffer.create(Count)
+		buffer.copy(Buf1, 0, Buf, 0, Count)
+		
+		return Buf1
+	end
+
+	function Module219.decode(Buf)
+		-- upvalues: Module219 (copy), ProtoModule (copy), t (copy)
+		local NewModule = Module219.new()
+		local v148 = 0
+		while v148 < buffer.len(Buf) do
+			local Tag, Tag2
+			Tag, Tag2, v5108 = ProtoModule.readTag(Buf, v148)
+			
+			if Tag2 == ProtoModule.wireTypes.varint then
+				if Tag == 1 then
+					local VarIntI32
+					VarIntI32, v5108 = ProtoModule.readVarIntI32(Buf, v148)
+					NewModule.action_type = t.ActionType.fromNumber(VarIntI32) or VarIntI32
+				else
+					local _
+					_, v5108 = ProtoModule.readVarInt(Buf, v148)
+				end
+			elseif Tag2 == ProtoModule.wireTypes.lengthDelimited then
+				if Tag == 2 then
+					local Buffer1
+					Buffer1, v5108 = ProtoModule.readBuffer(Buf, v148)
+					NewModule.action_params = t.TryOnCatalogItemAction_Params.decode(Buffer1)
+				else
+					local VarInt, VarInt2 = ProtoModule.readVarInt(Buf, v148)
+					v148 = VarInt2 + VarInt
+				end
+			elseif Tag2 == ProtoModule.wireTypes.i32 then
+				local _
+				_, v5108 = ProtoModule.readFixed32(Buf, v148)
+			elseif Tag2 == ProtoModule.wireTypes.i64 then
+				local _
+				_, v5108 = ProtoModule.readFixed64(Buf, v148)
+			else
+				error("Unsupported wire type: " .. Tag2)
+			end
+		end
+		return NewModule
+	end
+
+	function Module219:jsonEncode()
+		-- upvalues: t (copy)
+		local t1 = {}
+		
+		if self.action_type ~= nil and (self.action_type ~= nil and self.action_type ~= 0 or self.action_type ~= t.ActionType.fromNumber(0)) then
+			t1.actionType = if typeof(self.action_type) == "number" then self.action_type else t.ActionType.toNumber(self.action_type)
+		end
+		if self.action_params ~= nil then
+			t1.actionParams = self.action_params:jsonEncode()
+		end
+		return t1
+	end
+
+	function Module219:jsonDecode()
+		-- upvalues: Module219 (copy), t (copy)
+		local NewModule = Module219.new()
+		
+		if self.action_type ~= nil then
+			NewModule.action_type = (if typeof(self.action_type) == "number" then t.ActionType.fromNumber(self.action_type) else t.ActionType.fromName(self.action_type)) or self.action_type
+		end
+		if self.actionType ~= nil then
+			NewModule.action_type = (if typeof(self.actionType) == "number" then t.ActionType.fromNumber(self.actionType) else t.ActionType.fromName(self.actionType)) or self.actionType
+		end
+		if self.action_params ~= nil then
 			NewModule.action_params = t.TryOnCatalogItemAction_Params.jsonDecode(self.action_params)
 		end
 		if self.actionParams ~= nil then
@@ -24398,27 +25348,25 @@ do
 		return NewModule
 	end
 
-	Module209.descriptor = {
+	Module219.descriptor = {
 		name = "TryOnCatalogItemAction",
 		fullName = "roblox.apppageplatform.shared.v1beta1.TryOnCatalogItemAction"
 	}
-	t.TryOnCatalogItemAction = Module209
-end
-do
+	t.TryOnCatalogItemAction = Module219
 	TypeRegistryModule.default:register(t.TryOnCatalogItemAction)
-	local Module210 = {}
-	Module210.__index = Module210
+	local Module220 = {}
+	Module220.__index = Module220
 
-	function Module210.new(p1)
-		-- upvalues: Module210 (copy)
+	function Module220.new(p1)
+		-- upvalues: Module220 (copy)
 		return (setmetatable({
 			item_id = if p1 == nil or p1.item_id == nil then nil else p1.item_id,
 			item_type = if p1 == nil or p1.item_type == nil then nil else p1.item_type,
 			item_sub_type = if p1 == nil or p1.item_sub_type == nil then nil else p1.item_sub_type
-		}, Module210))
+		}, Module220))
 	end
 
-	function Module210:encode()
+	function Module220:encode()
 		-- upvalues: ProtoModule (copy)
 		local Buf = buffer.create(0)
 		local Count = 0
@@ -24444,40 +25392,40 @@ do
 		return Buf1
 	end
 
-	function Module210.decode(Buf)
-		-- upvalues: Module210 (copy), ProtoModule (copy), PropTypesModule (copy)
-		local NewModule = Module210.new()
-		local v141 = 0
-		while v141 < buffer.len(Buf) do
+	function Module220.decode(Buf)
+		-- upvalues: Module220 (copy), ProtoModule (copy), PropTypesModule (copy)
+		local NewModule = Module220.new()
+		local v149 = 0
+		while v149 < buffer.len(Buf) do
 			local Tag, Tag2
-			Tag, Tag2, v4946 = ProtoModule.readTag(Buf, v141)
+			Tag, Tag2, v5132 = ProtoModule.readTag(Buf, v149)
 			
 			if Tag2 == ProtoModule.wireTypes.varint then
 				local _
-				_, v4946 = ProtoModule.readVarInt(Buf, v141)
+				_, v5132 = ProtoModule.readVarInt(Buf, v149)
 			elseif Tag2 == ProtoModule.wireTypes.lengthDelimited then
 				if Tag == 1 then
 					local Buffer1
-					Buffer1, v4946 = ProtoModule.readBuffer(Buf, v141)
+					Buffer1, v5132 = ProtoModule.readBuffer(Buf, v149)
 					NewModule.item_id = PropTypesModule.StringProp.decode(Buffer1)
 				elseif Tag == 2 then
 					local Buffer2
-					Buffer2, v4946 = ProtoModule.readBuffer(Buf, v141)
+					Buffer2, v5132 = ProtoModule.readBuffer(Buf, v149)
 					NewModule.item_type = PropTypesModule.StringProp.decode(Buffer2)
 				elseif Tag == 3 then
 					local Buffer3
-					Buffer3, v4946 = ProtoModule.readBuffer(Buf, v141)
+					Buffer3, v5132 = ProtoModule.readBuffer(Buf, v149)
 					NewModule.item_sub_type = PropTypesModule.StringProp.decode(Buffer3)
 				else
-					local VarInt, VarInt2 = ProtoModule.readVarInt(Buf, v141)
-					v141 = VarInt2 + VarInt
+					local VarInt, VarInt2 = ProtoModule.readVarInt(Buf, v149)
+					v149 = VarInt2 + VarInt
 				end
 			elseif Tag2 == ProtoModule.wireTypes.i32 then
 				local _
-				_, v4946 = ProtoModule.readFixed32(Buf, v141)
+				_, v5132 = ProtoModule.readFixed32(Buf, v149)
 			elseif Tag2 == ProtoModule.wireTypes.i64 then
 				local _
-				_, v4946 = ProtoModule.readFixed64(Buf, v141)
+				_, v5132 = ProtoModule.readFixed64(Buf, v149)
 			else
 				error("Unsupported wire type: " .. Tag2)
 			end
@@ -24485,7 +25433,7 @@ do
 		return NewModule
 	end
 
-	function Module210:jsonEncode()
+	function Module220:jsonEncode()
 		local t = {}
 		
 		if self.item_id ~= nil then
@@ -24500,9 +25448,9 @@ do
 		return t
 	end
 
-	function Module210:jsonDecode()
-		-- upvalues: Module210 (copy), PropTypesModule (copy)
-		local NewModule = Module210.new()
+	function Module220:jsonDecode()
+		-- upvalues: Module220 (copy), PropTypesModule (copy)
+		local NewModule = Module220.new()
 		
 		if self.item_id ~= nil then
 			NewModule.item_id = PropTypesModule.StringProp.jsonDecode(self.item_id)
@@ -24525,23 +25473,23 @@ do
 		return NewModule
 	end
 
-	Module210.descriptor = {
+	Module220.descriptor = {
 		name = "TryOnCatalogItemAction_Params",
 		fullName = "roblox.apppageplatform.shared.v1beta1.Params"
 	}
-	t.TryOnCatalogItemAction_Params = Module210
+	t.TryOnCatalogItemAction_Params = Module220
 	TypeRegistryModule.default:register(t.TryOnCatalogItemAction_Params)
-	local Module211 = {}
-	Module211.__index = Module211
+	local Module221 = {}
+	Module221.__index = Module221
 
-	function Module211.new(p1)
-		-- upvalues: Module211 (copy)
+	function Module221.new(p1)
+		-- upvalues: Module221 (copy)
 		return (setmetatable({
 			oneof_prop = if p1 == nil or p1.oneof_prop == nil then nil else p1.oneof_prop
-		}, Module211))
+		}, Module221))
 	end
 
-	function Module211:encode()
+	function Module221:encode()
 		-- upvalues: ProtoModule (copy)
 		local Buf = buffer.create(0)
 		local Count = 0
@@ -24563,39 +25511,39 @@ do
 		return Buf1
 	end
 
-	function Module211.decode(Buf)
-		-- upvalues: Module211 (copy), ProtoModule (copy), ExperimentalPropTypesModule (copy), t (copy)
-		local NewModule = Module211.new()
-		local v142 = 0
-		while v142 < buffer.len(Buf) do
+	function Module221.decode(Buf)
+		-- upvalues: Module221 (copy), ProtoModule (copy), ExperimentalPropTypesModule (copy), t (copy)
+		local NewModule = Module221.new()
+		local v150 = 0
+		while v150 < buffer.len(Buf) do
 			local Tag, Tag2
-			Tag, Tag2, v4968 = ProtoModule.readTag(Buf, v142)
+			Tag, Tag2, v5154 = ProtoModule.readTag(Buf, v150)
 			
 			if Tag2 == ProtoModule.wireTypes.varint then
 				local _
-				_, v4968 = ProtoModule.readVarInt(Buf, v142)
+				_, v5154 = ProtoModule.readVarInt(Buf, v150)
 			elseif Tag2 == ProtoModule.wireTypes.lengthDelimited then
 				if Tag == 1 then
 					local Buffer1
-					Buffer1, v4968 = ProtoModule.readBuffer(Buf, v142)
+					Buffer1, v5154 = ProtoModule.readBuffer(Buf, v150)
 					NewModule.oneof_prop = {
 						type = "value",
 						value = ExperimentalPropTypesModule.ExperimentalProp.decode(Buffer1)
 					}
 				elseif Tag == 2 then
 					local Buffer2
-					Buffer2, v4968 = ProtoModule.readBuffer(Buf, v142)
+					Buffer2, v5154 = ProtoModule.readBuffer(Buf, v150)
 					NewModule.oneof_prop = { type = "action", value = t.ActionProp.decode(Buffer2) }
 				else
-					local VarInt, VarInt2 = ProtoModule.readVarInt(Buf, v142)
-					v142 = VarInt2 + VarInt
+					local VarInt, VarInt2 = ProtoModule.readVarInt(Buf, v150)
+					v150 = VarInt2 + VarInt
 				end
 			elseif Tag2 == ProtoModule.wireTypes.i32 then
 				local _
-				_, v4968 = ProtoModule.readFixed32(Buf, v142)
+				_, v5154 = ProtoModule.readFixed32(Buf, v150)
 			elseif Tag2 == ProtoModule.wireTypes.i64 then
 				local _
-				_, v4968 = ProtoModule.readFixed64(Buf, v142)
+				_, v5154 = ProtoModule.readFixed64(Buf, v150)
 			else
 				error("Unsupported wire type: " .. Tag2)
 			end
@@ -24603,7 +25551,7 @@ do
 		return NewModule
 	end
 
-	function Module211:jsonEncode()
+	function Module221:jsonEncode()
 		local t = {}
 		
 		if self.oneof_prop ~= nil then
@@ -24619,9 +25567,9 @@ do
 		return t
 	end
 
-	function Module211:jsonDecode()
-		-- upvalues: Module211 (copy), ExperimentalPropTypesModule (copy), t (copy)
-		local NewModule = Module211.new()
+	function Module221:jsonDecode()
+		-- upvalues: Module221 (copy), ExperimentalPropTypesModule (copy), t (copy)
+		local NewModule = Module221.new()
 		
 		if self.value ~= nil then
 			NewModule.oneof_prop = {
@@ -24638,25 +25586,27 @@ do
 		return NewModule
 	end
 
-	Module211.descriptor = {
+	Module221.descriptor = {
 		name = "ExperimentalActionProp",
 		fullName = "roblox.apppageplatform.shared.v1beta1.ExperimentalActionProp"
 	}
-	t.ExperimentalActionProp = Module211
+	t.ExperimentalActionProp = Module221
+end
+do
 	TypeRegistryModule.default:register(t.ExperimentalActionProp)
-	local Module212 = {}
-	Module212.__index = Module212
+	local Module222 = {}
+	Module222.__index = Module222
 
-	function Module212.new(p1)
-		-- upvalues: t (copy), Module212 (copy)
+	function Module222.new(p1)
+		-- upvalues: t (copy), Module222 (copy)
 		return (setmetatable({
 			action_type = if p1 == nil or p1.action_type == nil then assert(t.ActionType.fromNumber(0), "Enum has no 0 default") else p1.action_type,
 			action_params = if p1 == nil or p1.action_params == nil then {} else p1.action_params,
 			experimental_type = if p1 == nil or p1.experimental_type == nil then "" else p1.experimental_type
-		}, Module212))
+		}, Module222))
 	end
 
-	function Module212:encode()
+	function Module222:encode()
 		-- upvalues: t (copy), ProtoModule (copy)
 		local Buf = buffer.create(0)
 		local Count = 0
@@ -24686,44 +25636,44 @@ do
 		return Buf1
 	end
 
-	function Module212.decode(Buf)
-		-- upvalues: Module212 (copy), ProtoModule (copy), t (copy)
-		local NewModule = Module212.new()
-		local v143 = 0
-		while v143 < buffer.len(Buf) do
+	function Module222.decode(Buf)
+		-- upvalues: Module222 (copy), ProtoModule (copy), t (copy)
+		local NewModule = Module222.new()
+		local v150 = 0
+		while v150 < buffer.len(Buf) do
 			local Tag, Tag2
-			Tag, Tag2, v4998 = ProtoModule.readTag(Buf, v143)
+			Tag, Tag2, v5184 = ProtoModule.readTag(Buf, v150)
 			
 			if Tag2 == ProtoModule.wireTypes.varint then
 				if Tag == 1 then
 					local VarIntI32
-					VarIntI32, v4998 = ProtoModule.readVarIntI32(Buf, v143)
+					VarIntI32, v5184 = ProtoModule.readVarIntI32(Buf, v150)
 					NewModule.action_type = t.ActionType.fromNumber(VarIntI32) or VarIntI32
 				else
 					local _
-					_, v4998 = ProtoModule.readVarInt(Buf, v143)
+					_, v5184 = ProtoModule.readVarInt(Buf, v150)
 				end
 			elseif Tag2 == ProtoModule.wireTypes.lengthDelimited then
 				if Tag == 2 then
 					local Buffer1
-					Buffer1, v4998 = ProtoModule.readBuffer(Buf, v143)
+					Buffer1, v5184 = ProtoModule.readBuffer(Buf, v150)
 					local DecodeResult = t.ExperimentalAction_ActionParamsEntry.decode(Buffer1)
 					local NewResult = t.ExperimentalActionProp.new()
 					NewModule.action_params[DecodeResult.key or ""] = DecodeResult.value or NewResult
 				elseif Tag == 3 then
 					local Buffer2
-					Buffer2, v4998 = ProtoModule.readBuffer(Buf, v143)
+					Buffer2, v5184 = ProtoModule.readBuffer(Buf, v150)
 					NewModule.experimental_type = buffer.tostring(Buffer2)
 				else
-					local VarInt, VarInt2 = ProtoModule.readVarInt(Buf, v143)
-					v143 = VarInt2 + VarInt
+					local VarInt, VarInt2 = ProtoModule.readVarInt(Buf, v150)
+					v150 = VarInt2 + VarInt
 				end
 			elseif Tag2 == ProtoModule.wireTypes.i32 then
 				local _
-				_, v4998 = ProtoModule.readFixed32(Buf, v143)
+				_, v5184 = ProtoModule.readFixed32(Buf, v150)
 			elseif Tag2 == ProtoModule.wireTypes.i64 then
 				local _
-				_, v4998 = ProtoModule.readFixed64(Buf, v143)
+				_, v5184 = ProtoModule.readFixed64(Buf, v150)
 			else
 				error("Unsupported wire type: " .. Tag2)
 			end
@@ -24731,7 +25681,7 @@ do
 		return NewModule
 	end
 
-	function Module212:jsonEncode()
+	function Module222:jsonEncode()
 		-- upvalues: t (copy)
 		local t1 = {}
 		
@@ -24752,9 +25702,9 @@ do
 		return t1
 	end
 
-	function Module212:jsonDecode()
-		-- upvalues: Module212 (copy), t (copy)
-		local NewModule = Module212.new()
+	function Module222:jsonDecode()
+		-- upvalues: Module222 (copy), t (copy)
+		local NewModule = Module222.new()
 		
 		if self.action_type ~= nil then
 			NewModule.action_type = (if typeof(self.action_type) == "number" then t.ActionType.fromNumber(self.action_type) else t.ActionType.fromName(self.action_type)) or self.action_type
@@ -24787,26 +25737,24 @@ do
 		return NewModule
 	end
 
-	Module212.descriptor = {
+	Module222.descriptor = {
 		name = "ExperimentalAction",
 		fullName = "roblox.apppageplatform.shared.v1beta1.ExperimentalAction"
 	}
-	t.ExperimentalAction = Module212
-end
-do
+	t.ExperimentalAction = Module222
 	TypeRegistryModule.default:register(t.ExperimentalAction)
-	local Module213 = {}
-	Module213.__index = Module213
+	local Module223 = {}
+	Module223.__index = Module223
 
-	function Module213.new(p1)
-		-- upvalues: Module213 (copy)
+	function Module223.new(p1)
+		-- upvalues: Module223 (copy)
 		return (setmetatable({
 			key = if p1 == nil or p1.key == nil then "" else p1.key,
 			value = if p1 == nil or p1.value == nil then nil else p1.value
-		}, Module213))
+		}, Module223))
 	end
 
-	function Module213:encode()
+	function Module223:encode()
 		-- upvalues: ProtoModule (copy)
 		local Buf = buffer.create(0)
 		local Count = 0
@@ -24826,36 +25774,36 @@ do
 		return Buf1
 	end
 
-	function Module213.decode(Buf)
-		-- upvalues: Module213 (copy), ProtoModule (copy), t (copy)
-		local NewModule = Module213.new()
-		local v144 = 0
-		while v144 < buffer.len(Buf) do
+	function Module223.decode(Buf)
+		-- upvalues: Module223 (copy), ProtoModule (copy), t (copy)
+		local NewModule = Module223.new()
+		local v151 = 0
+		while v151 < buffer.len(Buf) do
 			local Tag, Tag2
-			Tag, Tag2, v5024 = ProtoModule.readTag(Buf, v144)
+			Tag, Tag2, v5210 = ProtoModule.readTag(Buf, v151)
 			
 			if Tag2 == ProtoModule.wireTypes.varint then
 				local _
-				_, v5024 = ProtoModule.readVarInt(Buf, v144)
+				_, v5210 = ProtoModule.readVarInt(Buf, v151)
 			elseif Tag2 == ProtoModule.wireTypes.lengthDelimited then
 				if Tag == 1 then
 					local Buffer1
-					Buffer1, v5024 = ProtoModule.readBuffer(Buf, v144)
+					Buffer1, v5210 = ProtoModule.readBuffer(Buf, v151)
 					NewModule.key = buffer.tostring(Buffer1)
 				elseif Tag == 2 then
 					local Buffer2
-					Buffer2, v5024 = ProtoModule.readBuffer(Buf, v144)
+					Buffer2, v5210 = ProtoModule.readBuffer(Buf, v151)
 					NewModule.value = t.ExperimentalActionProp.decode(Buffer2)
 				else
-					local VarInt, VarInt2 = ProtoModule.readVarInt(Buf, v144)
-					v144 = VarInt2 + VarInt
+					local VarInt, VarInt2 = ProtoModule.readVarInt(Buf, v151)
+					v151 = VarInt2 + VarInt
 				end
 			elseif Tag2 == ProtoModule.wireTypes.i32 then
 				local _
-				_, v5024 = ProtoModule.readFixed32(Buf, v144)
+				_, v5210 = ProtoModule.readFixed32(Buf, v151)
 			elseif Tag2 == ProtoModule.wireTypes.i64 then
 				local _
-				_, v5024 = ProtoModule.readFixed64(Buf, v144)
+				_, v5210 = ProtoModule.readFixed64(Buf, v151)
 			else
 				error("Unsupported wire type: " .. Tag2)
 			end
@@ -24863,7 +25811,7 @@ do
 		return NewModule
 	end
 
-	function Module213:jsonEncode()
+	function Module223:jsonEncode()
 		local t = {}
 		
 		if self.key ~= nil and self.key ~= "" then
@@ -24875,9 +25823,9 @@ do
 		return t
 	end
 
-	function Module213:jsonDecode()
-		-- upvalues: Module213 (copy), t (copy)
-		local NewModule = Module213.new()
+	function Module223:jsonDecode()
+		-- upvalues: Module223 (copy), t (copy)
+		local NewModule = Module223.new()
 		
 		if self.key ~= nil then
 			NewModule.key = self.key
@@ -24888,24 +25836,24 @@ do
 		return NewModule
 	end
 
-	Module213.descriptor = {
+	Module223.descriptor = {
 		name = "ExperimentalAction_ActionParamsEntry",
 		fullName = "roblox.apppageplatform.shared.v1beta1.ActionParamsEntry"
 	}
-	t.ExperimentalAction_ActionParamsEntry = Module213
+	t.ExperimentalAction_ActionParamsEntry = Module223
 	TypeRegistryModule.default:register(t.ExperimentalAction_ActionParamsEntry)
-	local Module214 = {}
-	Module214.__index = Module214
+	local Module224 = {}
+	Module224.__index = Module224
 
-	function Module214.new(p1)
-		-- upvalues: t (copy), Module214 (copy)
+	function Module224.new(p1)
+		-- upvalues: t (copy), Module224 (copy)
 		return (setmetatable({
 			action_type = if p1 == nil or p1.action_type == nil then assert(t.ActionType.fromNumber(0), "Enum has no 0 default") else p1.action_type,
 			action_params = if p1 == nil or p1.action_params == nil then nil else p1.action_params
-		}, Module214))
+		}, Module224))
 	end
 
-	function Module214:encode()
+	function Module224:encode()
 		-- upvalues: t (copy), ProtoModule (copy)
 		local Buf = buffer.create(0)
 		local Count = 0
@@ -24925,38 +25873,38 @@ do
 		return Buf1
 	end
 
-	function Module214.decode(Buf)
-		-- upvalues: Module214 (copy), ProtoModule (copy), t (copy)
-		local NewModule = Module214.new()
-		local v145 = 0
-		while v145 < buffer.len(Buf) do
+	function Module224.decode(Buf)
+		-- upvalues: Module224 (copy), ProtoModule (copy), t (copy)
+		local NewModule = Module224.new()
+		local v152 = 0
+		while v152 < buffer.len(Buf) do
 			local Tag, Tag2
-			Tag, Tag2, v5044 = ProtoModule.readTag(Buf, v145)
+			Tag, Tag2, v5230 = ProtoModule.readTag(Buf, v152)
 			
 			if Tag2 == ProtoModule.wireTypes.varint then
 				if Tag == 1 then
 					local VarIntI32
-					VarIntI32, v5044 = ProtoModule.readVarIntI32(Buf, v145)
+					VarIntI32, v5230 = ProtoModule.readVarIntI32(Buf, v152)
 					NewModule.action_type = t.ActionType.fromNumber(VarIntI32) or VarIntI32
 				else
 					local _
-					_, v5044 = ProtoModule.readVarInt(Buf, v145)
+					_, v5230 = ProtoModule.readVarInt(Buf, v152)
 				end
 			elseif Tag2 == ProtoModule.wireTypes.lengthDelimited then
 				if Tag == 2 then
 					local Buffer1
-					Buffer1, v5044 = ProtoModule.readBuffer(Buf, v145)
+					Buffer1, v5230 = ProtoModule.readBuffer(Buf, v152)
 					NewModule.action_params = t.SubmitCustomFormResponseAction_Params.decode(Buffer1)
 				else
-					local VarInt, VarInt2 = ProtoModule.readVarInt(Buf, v145)
-					v145 = VarInt2 + VarInt
+					local VarInt, VarInt2 = ProtoModule.readVarInt(Buf, v152)
+					v152 = VarInt2 + VarInt
 				end
 			elseif Tag2 == ProtoModule.wireTypes.i32 then
 				local _
-				_, v5044 = ProtoModule.readFixed32(Buf, v145)
+				_, v5230 = ProtoModule.readFixed32(Buf, v152)
 			elseif Tag2 == ProtoModule.wireTypes.i64 then
 				local _
-				_, v5044 = ProtoModule.readFixed64(Buf, v145)
+				_, v5230 = ProtoModule.readFixed64(Buf, v152)
 			else
 				error("Unsupported wire type: " .. Tag2)
 			end
@@ -24964,7 +25912,7 @@ do
 		return NewModule
 	end
 
-	function Module214:jsonEncode()
+	function Module224:jsonEncode()
 		-- upvalues: t (copy)
 		local t2 = {}
 		
@@ -24977,9 +25925,9 @@ do
 		return t2
 	end
 
-	function Module214:jsonDecode()
-		-- upvalues: Module214 (copy), t (copy)
-		local NewModule = Module214.new()
+	function Module224:jsonDecode()
+		-- upvalues: Module224 (copy), t (copy)
+		local NewModule = Module224.new()
 		
 		if self.action_type ~= nil then
 			NewModule.action_type = (if typeof(self.action_type) == "number" then t.ActionType.fromNumber(self.action_type) else t.ActionType.fromName(self.action_type)) or self.action_type
@@ -24996,26 +25944,28 @@ do
 		return NewModule
 	end
 
-	Module214.descriptor = {
+	Module224.descriptor = {
 		name = "SubmitCustomFormResponseAction",
 		fullName = "roblox.apppageplatform.shared.v1beta1.SubmitCustomFormResponseAction"
 	}
-	t.SubmitCustomFormResponseAction = Module214
+	t.SubmitCustomFormResponseAction = Module224
+end
+do
 	TypeRegistryModule.default:register(t.SubmitCustomFormResponseAction)
-	local Module215 = {}
-	Module215.__index = Module215
+	local Module225 = {}
+	Module225.__index = Module225
 
-	function Module215.new(p1)
-		-- upvalues: Module215 (copy)
+	function Module225.new(p1)
+		-- upvalues: Module225 (copy)
 		return (setmetatable({
 			entity_id = if p1 == nil or p1.entity_id == nil then nil else p1.entity_id,
 			form_id = if p1 == nil or p1.form_id == nil then nil else p1.form_id,
 			cf_vertical = if p1 == nil or p1.cf_vertical == nil then nil else p1.cf_vertical,
 			response = if p1 == nil or p1.response == nil then nil else p1.response
-		}, Module215))
+		}, Module225))
 	end
 
-	function Module215:encode()
+	function Module225:encode()
 		-- upvalues: ProtoModule (copy)
 		local Buf = buffer.create(0)
 		local Count = 0
@@ -25046,44 +25996,44 @@ do
 		return Buf1
 	end
 
-	function Module215.decode(Buf)
-		-- upvalues: Module215 (copy), ProtoModule (copy), PropTypesModule (copy)
-		local NewModule = Module215.new()
-		local v146 = 0
-		while v146 < buffer.len(Buf) do
+	function Module225.decode(Buf)
+		-- upvalues: Module225 (copy), ProtoModule (copy), PropTypesModule (copy)
+		local NewModule = Module225.new()
+		local v152 = 0
+		while v152 < buffer.len(Buf) do
 			local Tag, Tag2
-			Tag, Tag2, v5071 = ProtoModule.readTag(Buf, v146)
+			Tag, Tag2, v5257 = ProtoModule.readTag(Buf, v152)
 			
 			if Tag2 == ProtoModule.wireTypes.varint then
 				local _
-				_, v5071 = ProtoModule.readVarInt(Buf, v146)
+				_, v5257 = ProtoModule.readVarInt(Buf, v152)
 			elseif Tag2 == ProtoModule.wireTypes.lengthDelimited then
 				if Tag == 1 then
 					local Buffer1
-					Buffer1, v5071 = ProtoModule.readBuffer(Buf, v146)
+					Buffer1, v5257 = ProtoModule.readBuffer(Buf, v152)
 					NewModule.entity_id = PropTypesModule.StringProp.decode(Buffer1)
 				elseif Tag == 2 then
 					local Buffer2
-					Buffer2, v5071 = ProtoModule.readBuffer(Buf, v146)
+					Buffer2, v5257 = ProtoModule.readBuffer(Buf, v152)
 					NewModule.form_id = PropTypesModule.StringProp.decode(Buffer2)
 				elseif Tag == 3 then
 					local Buffer3
-					Buffer3, v5071 = ProtoModule.readBuffer(Buf, v146)
+					Buffer3, v5257 = ProtoModule.readBuffer(Buf, v152)
 					NewModule.cf_vertical = PropTypesModule.StringProp.decode(Buffer3)
 				elseif Tag == 4 then
 					local Buffer4
-					Buffer4, v5071 = ProtoModule.readBuffer(Buf, v146)
+					Buffer4, v5257 = ProtoModule.readBuffer(Buf, v152)
 					NewModule.response = PropTypesModule.StructProp.decode(Buffer4)
 				else
-					local VarInt, VarInt2 = ProtoModule.readVarInt(Buf, v146)
-					v146 = VarInt2 + VarInt
+					local VarInt, VarInt2 = ProtoModule.readVarInt(Buf, v152)
+					v152 = VarInt2 + VarInt
 				end
 			elseif Tag2 == ProtoModule.wireTypes.i32 then
 				local _
-				_, v5071 = ProtoModule.readFixed32(Buf, v146)
+				_, v5257 = ProtoModule.readFixed32(Buf, v152)
 			elseif Tag2 == ProtoModule.wireTypes.i64 then
 				local _
-				_, v5071 = ProtoModule.readFixed64(Buf, v146)
+				_, v5257 = ProtoModule.readFixed64(Buf, v152)
 			else
 				error("Unsupported wire type: " .. Tag2)
 			end
@@ -25091,7 +26041,7 @@ do
 		return NewModule
 	end
 
-	function Module215:jsonEncode()
+	function Module225:jsonEncode()
 		local t = {}
 		
 		if self.entity_id ~= nil then
@@ -25109,9 +26059,9 @@ do
 		return t
 	end
 
-	function Module215:jsonDecode()
-		-- upvalues: Module215 (copy), PropTypesModule (copy)
-		local NewModule = Module215.new()
+	function Module225:jsonDecode()
+		-- upvalues: Module225 (copy), PropTypesModule (copy)
+		local NewModule = Module225.new()
 		
 		if self.entity_id ~= nil then
 			NewModule.entity_id = PropTypesModule.StringProp.jsonDecode(self.entity_id)
@@ -25137,26 +26087,24 @@ do
 		return NewModule
 	end
 
-	Module215.descriptor = {
+	Module225.descriptor = {
 		name = "SubmitCustomFormResponseAction_Params",
 		fullName = "roblox.apppageplatform.shared.v1beta1.Params"
 	}
-	t.SubmitCustomFormResponseAction_Params = Module215
-end
-do
+	t.SubmitCustomFormResponseAction_Params = Module225
 	TypeRegistryModule.default:register(t.SubmitCustomFormResponseAction_Params)
-	local Module216 = {}
-	Module216.__index = Module216
+	local Module226 = {}
+	Module226.__index = Module226
 
-	function Module216.new(p1)
-		-- upvalues: t (copy), Module216 (copy)
+	function Module226.new(p1)
+		-- upvalues: t (copy), Module226 (copy)
 		return (setmetatable({
 			action_type = if p1 == nil or p1.action_type == nil then assert(t.ActionType.fromNumber(0), "Enum has no 0 default") else p1.action_type,
 			action_params = if p1 == nil or p1.action_params == nil then nil else p1.action_params
-		}, Module216))
+		}, Module226))
 	end
 
-	function Module216:encode()
+	function Module226:encode()
 		-- upvalues: t (copy), ProtoModule (copy)
 		local Buf = buffer.create(0)
 		local Count = 0
@@ -25176,38 +26124,38 @@ do
 		return Buf1
 	end
 
-	function Module216.decode(Buf)
-		-- upvalues: Module216 (copy), ProtoModule (copy), t (copy)
-		local NewModule = Module216.new()
-		local v146 = 0
-		while v146 < buffer.len(Buf) do
+	function Module226.decode(Buf)
+		-- upvalues: Module226 (copy), ProtoModule (copy), t (copy)
+		local NewModule = Module226.new()
+		local v153 = 0
+		while v153 < buffer.len(Buf) do
 			local Tag, Tag2
-			Tag, Tag2, v5093 = ProtoModule.readTag(Buf, v146)
+			Tag, Tag2, v5279 = ProtoModule.readTag(Buf, v153)
 			
 			if Tag2 == ProtoModule.wireTypes.varint then
 				if Tag == 1 then
 					local VarIntI32
-					VarIntI32, v5093 = ProtoModule.readVarIntI32(Buf, v146)
+					VarIntI32, v5279 = ProtoModule.readVarIntI32(Buf, v153)
 					NewModule.action_type = t.ActionType.fromNumber(VarIntI32) or VarIntI32
 				else
 					local _
-					_, v5093 = ProtoModule.readVarInt(Buf, v146)
+					_, v5279 = ProtoModule.readVarInt(Buf, v153)
 				end
 			elseif Tag2 == ProtoModule.wireTypes.lengthDelimited then
 				if Tag == 2 then
 					local Buffer1
-					Buffer1, v5093 = ProtoModule.readBuffer(Buf, v146)
+					Buffer1, v5279 = ProtoModule.readBuffer(Buf, v153)
 					NewModule.action_params = t.RefreshCustomFormResultsAction_Params.decode(Buffer1)
 				else
-					local VarInt, VarInt2 = ProtoModule.readVarInt(Buf, v146)
-					v146 = VarInt2 + VarInt
+					local VarInt, VarInt2 = ProtoModule.readVarInt(Buf, v153)
+					v153 = VarInt2 + VarInt
 				end
 			elseif Tag2 == ProtoModule.wireTypes.i32 then
 				local _
-				_, v5093 = ProtoModule.readFixed32(Buf, v146)
+				_, v5279 = ProtoModule.readFixed32(Buf, v153)
 			elseif Tag2 == ProtoModule.wireTypes.i64 then
 				local _
-				_, v5093 = ProtoModule.readFixed64(Buf, v146)
+				_, v5279 = ProtoModule.readFixed64(Buf, v153)
 			else
 				error("Unsupported wire type: " .. Tag2)
 			end
@@ -25215,7 +26163,7 @@ do
 		return NewModule
 	end
 
-	function Module216:jsonEncode()
+	function Module226:jsonEncode()
 		-- upvalues: t (copy)
 		local t2 = {}
 		
@@ -25228,9 +26176,9 @@ do
 		return t2
 	end
 
-	function Module216:jsonDecode()
-		-- upvalues: Module216 (copy), t (copy)
-		local NewModule = Module216.new()
+	function Module226:jsonDecode()
+		-- upvalues: Module226 (copy), t (copy)
+		local NewModule = Module226.new()
 		
 		if self.action_type ~= nil then
 			NewModule.action_type = (if typeof(self.action_type) == "number" then t.ActionType.fromNumber(self.action_type) else t.ActionType.fromName(self.action_type)) or self.action_type
@@ -25247,25 +26195,25 @@ do
 		return NewModule
 	end
 
-	Module216.descriptor = {
+	Module226.descriptor = {
 		name = "RefreshCustomFormResultsAction",
 		fullName = "roblox.apppageplatform.shared.v1beta1.RefreshCustomFormResultsAction"
 	}
-	t.RefreshCustomFormResultsAction = Module216
+	t.RefreshCustomFormResultsAction = Module226
 	TypeRegistryModule.default:register(t.RefreshCustomFormResultsAction)
-	local Module217 = {}
-	Module217.__index = Module217
+	local Module227 = {}
+	Module227.__index = Module227
 
-	function Module217.new(p1)
-		-- upvalues: Module217 (copy)
+	function Module227.new(p1)
+		-- upvalues: Module227 (copy)
 		return (setmetatable({
 			entity_id = if p1 == nil or p1.entity_id == nil then nil else p1.entity_id,
 			form_id = if p1 == nil or p1.form_id == nil then nil else p1.form_id,
 			cf_vertical = if p1 == nil or p1.cf_vertical == nil then nil else p1.cf_vertical
-		}, Module217))
+		}, Module227))
 	end
 
-	function Module217:encode()
+	function Module227:encode()
 		-- upvalues: ProtoModule (copy)
 		local Buf = buffer.create(0)
 		local Count = 0
@@ -25291,40 +26239,40 @@ do
 		return Buf1
 	end
 
-	function Module217.decode(Buf)
-		-- upvalues: Module217 (copy), ProtoModule (copy), PropTypesModule (copy)
-		local NewModule = Module217.new()
-		local v147 = 0
-		while v147 < buffer.len(Buf) do
+	function Module227.decode(Buf)
+		-- upvalues: Module227 (copy), ProtoModule (copy), PropTypesModule (copy)
+		local NewModule = Module227.new()
+		local v154 = 0
+		while v154 < buffer.len(Buf) do
 			local Tag, Tag2
-			Tag, Tag2, v5117 = ProtoModule.readTag(Buf, v147)
+			Tag, Tag2, v5303 = ProtoModule.readTag(Buf, v154)
 			
 			if Tag2 == ProtoModule.wireTypes.varint then
 				local _
-				_, v5117 = ProtoModule.readVarInt(Buf, v147)
+				_, v5303 = ProtoModule.readVarInt(Buf, v154)
 			elseif Tag2 == ProtoModule.wireTypes.lengthDelimited then
 				if Tag == 1 then
 					local Buffer1
-					Buffer1, v5117 = ProtoModule.readBuffer(Buf, v147)
+					Buffer1, v5303 = ProtoModule.readBuffer(Buf, v154)
 					NewModule.entity_id = PropTypesModule.StringProp.decode(Buffer1)
 				elseif Tag == 2 then
 					local Buffer2
-					Buffer2, v5117 = ProtoModule.readBuffer(Buf, v147)
+					Buffer2, v5303 = ProtoModule.readBuffer(Buf, v154)
 					NewModule.form_id = PropTypesModule.StringProp.decode(Buffer2)
 				elseif Tag == 3 then
 					local Buffer3
-					Buffer3, v5117 = ProtoModule.readBuffer(Buf, v147)
+					Buffer3, v5303 = ProtoModule.readBuffer(Buf, v154)
 					NewModule.cf_vertical = PropTypesModule.StringProp.decode(Buffer3)
 				else
-					local VarInt, VarInt2 = ProtoModule.readVarInt(Buf, v147)
-					v147 = VarInt2 + VarInt
+					local VarInt, VarInt2 = ProtoModule.readVarInt(Buf, v154)
+					v154 = VarInt2 + VarInt
 				end
 			elseif Tag2 == ProtoModule.wireTypes.i32 then
 				local _
-				_, v5117 = ProtoModule.readFixed32(Buf, v147)
+				_, v5303 = ProtoModule.readFixed32(Buf, v154)
 			elseif Tag2 == ProtoModule.wireTypes.i64 then
 				local _
-				_, v5117 = ProtoModule.readFixed64(Buf, v147)
+				_, v5303 = ProtoModule.readFixed64(Buf, v154)
 			else
 				error("Unsupported wire type: " .. Tag2)
 			end
@@ -25332,7 +26280,7 @@ do
 		return NewModule
 	end
 
-	function Module217:jsonEncode()
+	function Module227:jsonEncode()
 		local t = {}
 		
 		if self.entity_id ~= nil then
@@ -25347,9 +26295,9 @@ do
 		return t
 	end
 
-	function Module217:jsonDecode()
-		-- upvalues: Module217 (copy), PropTypesModule (copy)
-		local NewModule = Module217.new()
+	function Module227:jsonDecode()
+		-- upvalues: Module227 (copy), PropTypesModule (copy)
+		local NewModule = Module227.new()
 		
 		if self.entity_id ~= nil then
 			NewModule.entity_id = PropTypesModule.StringProp.jsonDecode(self.entity_id)
@@ -25372,27 +26320,29 @@ do
 		return NewModule
 	end
 
-	Module217.descriptor = {
+	Module227.descriptor = {
 		name = "RefreshCustomFormResultsAction_Params",
 		fullName = "roblox.apppageplatform.shared.v1beta1.Params"
 	}
-	t.RefreshCustomFormResultsAction_Params = Module217
+	t.RefreshCustomFormResultsAction_Params = Module227
+end
+do
 	TypeRegistryModule.default:register(t.RefreshCustomFormResultsAction_Params)
-	local Module218 = {}
-	Module218.__index = Module218
+	local Module228 = {}
+	Module228.__index = Module228
 
-	function Module218.new(p1)
-		-- upvalues: Module218 (copy)
+	function Module228.new(p1)
+		-- upvalues: Module228 (copy)
 		return (setmetatable({
 			kind = if p1 == nil or p1.kind == nil then nil else p1.kind,
 			telemetry_handler = if p1 == nil or p1.telemetry_handler == nil then nil else p1.telemetry_handler,
 			accessibility_label = if p1 == nil or p1.accessibility_label == nil then nil else p1.accessibility_label,
 			skip_unified_logging = if p1 == nil or p1.skip_unified_logging == nil then nil else p1.skip_unified_logging,
 			action_event_name = if p1 == nil or p1.action_event_name == nil then nil else p1.action_event_name
-		}, Module218))
+		}, Module228))
 	end
 
-	function Module218:encode()
+	function Module228:encode()
 		-- upvalues: ProtoModule (copy)
 		local Buf = buffer.create(0)
 		local Count = 0
@@ -25696,12 +26646,12 @@ do
 				Buf, Count = ProtoModule.writeBuffer(WriteTagResult88, WriteTagResult2_87, EncodeResult, buffer.len(EncodeResult))
 			elseif self.kind.type == "open_incoming_transfer_upsell_action" then
 				local EncodeResult = self.kind.value:encode()
-				local WriteTagResult89, WriteTagResult2_88 = ProtoModule.writeTag(Buf, Count, 75, ProtoModule.wireTypes.lengthDelimited)
-				Buf, Count = ProtoModule.writeBuffer(WriteTagResult89, WriteTagResult2_88, EncodeResult, buffer.len(EncodeResult))
+				local WriteTagResult90, WriteTagResult2_89 = ProtoModule.writeTag(Buf, Count, 75, ProtoModule.wireTypes.lengthDelimited)
+				Buf, Count = ProtoModule.writeBuffer(WriteTagResult90, WriteTagResult2_89, EncodeResult, buffer.len(EncodeResult))
 			elseif self.kind.type == "action_sequence_action" then
 				local EncodeResult = self.kind.value:encode()
-				local WriteTagResult91, WriteTagResult2_90 = ProtoModule.writeTag(Buf, Count, 76, ProtoModule.wireTypes.lengthDelimited)
-				Buf, Count = ProtoModule.writeBuffer(WriteTagResult91, WriteTagResult2_90, EncodeResult, buffer.len(EncodeResult))
+				local WriteTagResult92, WriteTagResult2_91 = ProtoModule.writeTag(Buf, Count, 76, ProtoModule.wireTypes.lengthDelimited)
+				Buf, Count = ProtoModule.writeBuffer(WriteTagResult92, WriteTagResult2_91, EncodeResult, buffer.len(EncodeResult))
 			elseif self.kind.type == "refresh_feed_entry_from_api_action" then
 				local EncodeResult = self.kind.value:encode()
 				local WriteTagResult36, WriteTagResult2_35 = ProtoModule.writeTag(Buf, Count, 77, ProtoModule.wireTypes.lengthDelimited)
@@ -25716,8 +26666,8 @@ do
 				Buf, Count = ProtoModule.writeBuffer(WriteTagResult17, WriteTagResult2_16, EncodeResult, buffer.len(EncodeResult))
 			elseif self.kind.type == "set_game_tile_not_interested_action" then
 				local EncodeResult = self.kind.value:encode()
-				local WriteTagResult93, WriteTagResult2_92 = ProtoModule.writeTag(Buf, Count, 80, ProtoModule.wireTypes.lengthDelimited)
-				Buf, Count = ProtoModule.writeBuffer(WriteTagResult93, WriteTagResult2_92, EncodeResult, buffer.len(EncodeResult))
+				local WriteTagResult94, WriteTagResult2_93 = ProtoModule.writeTag(Buf, Count, 80, ProtoModule.wireTypes.lengthDelimited)
+				Buf, Count = ProtoModule.writeBuffer(WriteTagResult94, WriteTagResult2_93, EncodeResult, buffer.len(EncodeResult))
 			elseif self.kind.type == "refresh_home_action" then
 				local EncodeResult = self.kind.value:encode()
 				local WriteTagResult23, WriteTagResult2_22 = ProtoModule.writeTag(Buf, Count, 81, ProtoModule.wireTypes.lengthDelimited)
@@ -25728,44 +26678,44 @@ do
 				Buf, Count = ProtoModule.writeBuffer(WriteTagResult65, WriteTagResult2_64, EncodeResult, buffer.len(EncodeResult))
 			elseif self.kind.type == "apply_dev_store_see_all_category_filter_action" then
 				local EncodeResult = self.kind.value:encode()
-				local WriteTagResult94, WriteTagResult2_93 = ProtoModule.writeTag(Buf, Count, 83, ProtoModule.wireTypes.lengthDelimited)
-				Buf, Count = ProtoModule.writeBuffer(WriteTagResult94, WriteTagResult2_93, EncodeResult, buffer.len(EncodeResult))
+				local WriteTagResult96, WriteTagResult2_95 = ProtoModule.writeTag(Buf, Count, 83, ProtoModule.wireTypes.lengthDelimited)
+				Buf, Count = ProtoModule.writeBuffer(WriteTagResult96, WriteTagResult2_95, EncodeResult, buffer.len(EncodeResult))
 			elseif self.kind.type == "open_why_this_ad_action" then
 				local EncodeResult = self.kind.value:encode()
 				local WriteTagResult13, WriteTagResult2_12 = ProtoModule.writeTag(Buf, Count, 84, ProtoModule.wireTypes.lengthDelimited)
 				Buf, Count = ProtoModule.writeBuffer(WriteTagResult13, WriteTagResult2_12, EncodeResult, buffer.len(EncodeResult))
 			elseif self.kind.type == "request_push_notification_permission_action" then
 				local EncodeResult = self.kind.value:encode()
-				local WriteTagResult97, WriteTagResult2_96 = ProtoModule.writeTag(Buf, Count, 85, ProtoModule.wireTypes.lengthDelimited)
-				Buf, Count = ProtoModule.writeBuffer(WriteTagResult97, WriteTagResult2_96, EncodeResult, buffer.len(EncodeResult))
+				local WriteTagResult98, WriteTagResult2_97 = ProtoModule.writeTag(Buf, Count, 85, ProtoModule.wireTypes.lengthDelimited)
+				Buf, Count = ProtoModule.writeBuffer(WriteTagResult98, WriteTagResult2_97, EncodeResult, buffer.len(EncodeResult))
 			elseif self.kind.type == "open_build_creation_chat_action" then
 				local EncodeResult = self.kind.value:encode()
 				local WriteTagResult77, WriteTagResult2_76 = ProtoModule.writeTag(Buf, Count, 86, ProtoModule.wireTypes.lengthDelimited)
 				Buf, Count = ProtoModule.writeBuffer(WriteTagResult77, WriteTagResult2_76, EncodeResult, buffer.len(EncodeResult))
 			elseif self.kind.type == "experimental_action" then
 				local EncodeResult = self.kind.value:encode()
-				local WriteTagResult98, WriteTagResult2_97 = ProtoModule.writeTag(Buf, Count, 87, ProtoModule.wireTypes.lengthDelimited)
-				Buf, Count = ProtoModule.writeBuffer(WriteTagResult98, WriteTagResult2_97, EncodeResult, buffer.len(EncodeResult))
+				local WriteTagResult99, WriteTagResult2_98 = ProtoModule.writeTag(Buf, Count, 87, ProtoModule.wireTypes.lengthDelimited)
+				Buf, Count = ProtoModule.writeBuffer(WriteTagResult99, WriteTagResult2_98, EncodeResult, buffer.len(EncodeResult))
 			elseif self.kind.type == "open_external_link_action" then
 				local EncodeResult = self.kind.value:encode()
-				local WriteTagResult99, WriteTagResult2_98 = ProtoModule.writeTag(Buf, Count, 88, ProtoModule.wireTypes.lengthDelimited)
-				Buf, Count = ProtoModule.writeBuffer(WriteTagResult99, WriteTagResult2_98, EncodeResult, buffer.len(EncodeResult))
+				local WriteTagResult100, WriteTagResult2_99 = ProtoModule.writeTag(Buf, Count, 88, ProtoModule.wireTypes.lengthDelimited)
+				Buf, Count = ProtoModule.writeBuffer(WriteTagResult100, WriteTagResult2_99, EncodeResult, buffer.len(EncodeResult))
 			elseif self.kind.type == "open_catalog_item_details_action" then
 				local EncodeResult = self.kind.value:encode()
 				local WriteTagResult67, WriteTagResult2_66 = ProtoModule.writeTag(Buf, Count, 89, ProtoModule.wireTypes.lengthDelimited)
 				Buf, Count = ProtoModule.writeBuffer(WriteTagResult67, WriteTagResult2_66, EncodeResult, buffer.len(EncodeResult))
 			elseif self.kind.type == "open_item_info_row_prompt_action" then
 				local EncodeResult = self.kind.value:encode()
-				local WriteTagResult90, WriteTagResult2_89 = ProtoModule.writeTag(Buf, Count, 90, ProtoModule.wireTypes.lengthDelimited)
-				Buf, Count = ProtoModule.writeBuffer(WriteTagResult90, WriteTagResult2_89, EncodeResult, buffer.len(EncodeResult))
+				local WriteTagResult91, WriteTagResult2_90 = ProtoModule.writeTag(Buf, Count, 90, ProtoModule.wireTypes.lengthDelimited)
+				Buf, Count = ProtoModule.writeBuffer(WriteTagResult91, WriteTagResult2_90, EncodeResult, buffer.len(EncodeResult))
 			elseif self.kind.type == "toggle_catalog_item_favorite_action" then
 				local EncodeResult = self.kind.value:encode()
 				local WriteTagResult27, WriteTagResult2_26 = ProtoModule.writeTag(Buf, Count, 91, ProtoModule.wireTypes.lengthDelimited)
 				Buf, Count = ProtoModule.writeBuffer(WriteTagResult27, WriteTagResult2_26, EncodeResult, buffer.len(EncodeResult))
 			elseif self.kind.type == "play_with_reward_ad_action" then
 				local EncodeResult = self.kind.value:encode()
-				local WriteTagResult95, WriteTagResult2_94 = ProtoModule.writeTag(Buf, Count, 92, ProtoModule.wireTypes.lengthDelimited)
-				Buf, Count = ProtoModule.writeBuffer(WriteTagResult95, WriteTagResult2_94, EncodeResult, buffer.len(EncodeResult))
+				local WriteTagResult97, WriteTagResult2_96 = ProtoModule.writeTag(Buf, Count, 92, ProtoModule.wireTypes.lengthDelimited)
+				Buf, Count = ProtoModule.writeBuffer(WriteTagResult97, WriteTagResult2_96, EncodeResult, buffer.len(EncodeResult))
 			elseif self.kind.type == "set_page_scope_field_action" then
 				local EncodeResult = self.kind.value:encode()
 				local WriteTagResult85, WriteTagResult2_84 = ProtoModule.writeTag(Buf, Count, 93, ProtoModule.wireTypes.lengthDelimited)
@@ -25784,53 +26734,73 @@ do
 				Buf, Count = ProtoModule.writeBuffer(WriteTagResult82, WriteTagResult2_81, EncodeResult, buffer.len(EncodeResult))
 			elseif self.kind.type == "open_catalog_item_experiences_action" then
 				local EncodeResult = self.kind.value:encode()
-				local WriteTagResult100, WriteTagResult2_99 = ProtoModule.writeTag(Buf, Count, 97, ProtoModule.wireTypes.lengthDelimited)
-				Buf, Count = ProtoModule.writeBuffer(WriteTagResult100, WriteTagResult2_99, EncodeResult, buffer.len(EncodeResult))
+				local WriteTagResult101, WriteTagResult2_100 = ProtoModule.writeTag(Buf, Count, 97, ProtoModule.wireTypes.lengthDelimited)
+				Buf, Count = ProtoModule.writeBuffer(WriteTagResult101, WriteTagResult2_100, EncodeResult, buffer.len(EncodeResult))
 			elseif self.kind.type == "open_catalog_item_creator_profile_action" then
 				local EncodeResult = self.kind.value:encode()
 				local WriteTagResult6, WriteTagResult2_5 = ProtoModule.writeTag(Buf, Count, 98, ProtoModule.wireTypes.lengthDelimited)
 				Buf, Count = ProtoModule.writeBuffer(WriteTagResult6, WriteTagResult2_5, EncodeResult, buffer.len(EncodeResult))
 			elseif self.kind.type == "play_catalog_item_attribution_experience_action" then
 				local EncodeResult = self.kind.value:encode()
-				local WriteTagResult101, WriteTagResult2_100 = ProtoModule.writeTag(Buf, Count, 99, ProtoModule.wireTypes.lengthDelimited)
-				Buf, Count = ProtoModule.writeBuffer(WriteTagResult101, WriteTagResult2_100, EncodeResult, buffer.len(EncodeResult))
+				local WriteTagResult102, WriteTagResult2_101 = ProtoModule.writeTag(Buf, Count, 99, ProtoModule.wireTypes.lengthDelimited)
+				Buf, Count = ProtoModule.writeBuffer(WriteTagResult102, WriteTagResult2_101, EncodeResult, buffer.len(EncodeResult))
 			elseif self.kind.type == "open_catalog_item_resellers_action" then
 				local EncodeResult = self.kind.value:encode()
-				local WriteTagResult92, WriteTagResult2_91 = ProtoModule.writeTag(Buf, Count, 100, ProtoModule.wireTypes.lengthDelimited)
-				Buf, Count = ProtoModule.writeBuffer(WriteTagResult92, WriteTagResult2_91, EncodeResult, buffer.len(EncodeResult))
+				local WriteTagResult93, WriteTagResult2_92 = ProtoModule.writeTag(Buf, Count, 100, ProtoModule.wireTypes.lengthDelimited)
+				Buf, Count = ProtoModule.writeBuffer(WriteTagResult93, WriteTagResult2_92, EncodeResult, buffer.len(EncodeResult))
 			elseif self.kind.type == "purchase_catalog_item_from_stock_action" then
 				local EncodeResult = self.kind.value:encode()
-				local WriteTagResult102, WriteTagResult2_101 = ProtoModule.writeTag(Buf, Count, 101, ProtoModule.wireTypes.lengthDelimited)
-				Buf, Count = ProtoModule.writeBuffer(WriteTagResult102, WriteTagResult2_101, EncodeResult, buffer.len(EncodeResult))
+				local WriteTagResult103, WriteTagResult2_102 = ProtoModule.writeTag(Buf, Count, 101, ProtoModule.wireTypes.lengthDelimited)
+				Buf, Count = ProtoModule.writeBuffer(WriteTagResult103, WriteTagResult2_102, EncodeResult, buffer.len(EncodeResult))
 			elseif self.kind.type == "open_catalog_item_ownership_action" then
 				local EncodeResult = self.kind.value:encode()
-				local WriteTagResult103, WriteTagResult2_102 = ProtoModule.writeTag(Buf, Count, 102, ProtoModule.wireTypes.lengthDelimited)
-				Buf, Count = ProtoModule.writeBuffer(WriteTagResult103, WriteTagResult2_102, EncodeResult, buffer.len(EncodeResult))
+				local WriteTagResult104, WriteTagResult2_103 = ProtoModule.writeTag(Buf, Count, 102, ProtoModule.wireTypes.lengthDelimited)
+				Buf, Count = ProtoModule.writeBuffer(WriteTagResult104, WriteTagResult2_103, EncodeResult, buffer.len(EncodeResult))
 			elseif self.kind.type == "try_on_catalog_item_action" then
 				local EncodeResult = self.kind.value:encode()
-				local WriteTagResult104, WriteTagResult2_103 = ProtoModule.writeTag(Buf, Count, 103, ProtoModule.wireTypes.lengthDelimited)
-				Buf, Count = ProtoModule.writeBuffer(WriteTagResult104, WriteTagResult2_103, EncodeResult, buffer.len(EncodeResult))
+				local WriteTagResult105, WriteTagResult2_104 = ProtoModule.writeTag(Buf, Count, 103, ProtoModule.wireTypes.lengthDelimited)
+				Buf, Count = ProtoModule.writeBuffer(WriteTagResult105, WriteTagResult2_104, EncodeResult, buffer.len(EncodeResult))
+			elseif self.kind.type == "purchase_buy_robux_product_action" then
+				local EncodeResult = self.kind.value:encode()
+				local WriteTagResult106, WriteTagResult2_105 = ProtoModule.writeTag(Buf, Count, 104, ProtoModule.wireTypes.lengthDelimited)
+				Buf, Count = ProtoModule.writeBuffer(WriteTagResult106, WriteTagResult2_105, EncodeResult, buffer.len(EncodeResult))
+			elseif self.kind.type == "purchase_buy_robux_subscription_action" then
+				local EncodeResult = self.kind.value:encode()
+				local WriteTagResult107, WriteTagResult2_106 = ProtoModule.writeTag(Buf, Count, 105, ProtoModule.wireTypes.lengthDelimited)
+				Buf, Count = ProtoModule.writeBuffer(WriteTagResult107, WriteTagResult2_106, EncodeResult, buffer.len(EncodeResult))
+			elseif self.kind.type == "open_roblox_plus_sheet_action" then
+				local EncodeResult = self.kind.value:encode()
+				local WriteTagResult108, WriteTagResult2_107 = ProtoModule.writeTag(Buf, Count, 106, ProtoModule.wireTypes.lengthDelimited)
+				Buf, Count = ProtoModule.writeBuffer(WriteTagResult108, WriteTagResult2_107, EncodeResult, buffer.len(EncodeResult))
+			elseif self.kind.type == "open_send_robux_action" then
+				local EncodeResult = self.kind.value:encode()
+				local WriteTagResult109, WriteTagResult2_108 = ProtoModule.writeTag(Buf, Count, 107, ProtoModule.wireTypes.lengthDelimited)
+				Buf, Count = ProtoModule.writeBuffer(WriteTagResult109, WriteTagResult2_108, EncodeResult, buffer.len(EncodeResult))
+			elseif self.kind.type == "review_transfer_action" then
+				local EncodeResult = self.kind.value:encode()
+				local WriteTagResult89, WriteTagResult2_88 = ProtoModule.writeTag(Buf, Count, 108, ProtoModule.wireTypes.lengthDelimited)
+				Buf, Count = ProtoModule.writeBuffer(WriteTagResult89, WriteTagResult2_88, EncodeResult, buffer.len(EncodeResult))
 			end
 		end
 		if self.telemetry_handler ~= nil then
 			local EncodeResult = self.telemetry_handler:encode()
-			local WriteTagResult105, WriteTagResult2_104 = ProtoModule.writeTag(Buf, Count, 1000, ProtoModule.wireTypes.lengthDelimited)
-			Buf, Count = ProtoModule.writeBuffer(WriteTagResult105, WriteTagResult2_104, EncodeResult, buffer.len(EncodeResult))
+			local WriteTagResult110, WriteTagResult2_109 = ProtoModule.writeTag(Buf, Count, 1000, ProtoModule.wireTypes.lengthDelimited)
+			Buf, Count = ProtoModule.writeBuffer(WriteTagResult110, WriteTagResult2_109, EncodeResult, buffer.len(EncodeResult))
 		end
 		if self.accessibility_label ~= nil then
 			local EncodeResult = self.accessibility_label:encode()
-			local WriteTagResult106, WriteTagResult2_105 = ProtoModule.writeTag(Buf, Count, 1001, ProtoModule.wireTypes.lengthDelimited)
-			Buf, Count = ProtoModule.writeBuffer(WriteTagResult106, WriteTagResult2_105, EncodeResult, buffer.len(EncodeResult))
+			local WriteTagResult95, WriteTagResult2_94 = ProtoModule.writeTag(Buf, Count, 1001, ProtoModule.wireTypes.lengthDelimited)
+			Buf, Count = ProtoModule.writeBuffer(WriteTagResult95, WriteTagResult2_94, EncodeResult, buffer.len(EncodeResult))
 		end
 		if self.skip_unified_logging ~= nil then
 			local EncodeResult = self.skip_unified_logging:encode()
-			local WriteTagResult107, WriteTagResult2_106 = ProtoModule.writeTag(Buf, Count, 1002, ProtoModule.wireTypes.lengthDelimited)
-			Buf, Count = ProtoModule.writeBuffer(WriteTagResult107, WriteTagResult2_106, EncodeResult, buffer.len(EncodeResult))
+			local WriteTagResult111, WriteTagResult2_110 = ProtoModule.writeTag(Buf, Count, 1002, ProtoModule.wireTypes.lengthDelimited)
+			Buf, Count = ProtoModule.writeBuffer(WriteTagResult111, WriteTagResult2_110, EncodeResult, buffer.len(EncodeResult))
 		end
 		if self.action_event_name ~= nil then
 			local EncodeResult = self.action_event_name:encode()
-			local WriteTagResult96, WriteTagResult2_95 = ProtoModule.writeTag(Buf, Count, 1003, ProtoModule.wireTypes.lengthDelimited)
-			Buf, Count = ProtoModule.writeBuffer(WriteTagResult96, WriteTagResult2_95, EncodeResult, buffer.len(EncodeResult))
+			local WriteTagResult112, WriteTagResult2_111 = ProtoModule.writeTag(Buf, Count, 1003, ProtoModule.wireTypes.lengthDelimited)
+			Buf, Count = ProtoModule.writeBuffer(WriteTagResult112, WriteTagResult2_111, EncodeResult, buffer.len(EncodeResult))
 		end
 		local Buf1 = buffer.create(Count)
 		buffer.copy(Buf1, 0, Buf, 0, Count)
@@ -25838,765 +26808,800 @@ do
 		return Buf1
 	end
 
-	function Module218.decode(Buf)
-		-- upvalues: Module218 (copy), ProtoModule (copy), t (copy), PropTypesModule (copy)
-		local NewModule = Module218.new()
-		local v148 = 0
-		while v148 < buffer.len(Buf) do
+	function Module228.decode(Buf)
+		-- upvalues: Module228 (copy), ProtoModule (copy), t (copy), PropTypesModule (copy)
+		local NewModule = Module228.new()
+		local v154 = 0
+		while v154 < buffer.len(Buf) do
 			local Tag, Tag2
-			Tag, Tag2, v5454 = ProtoModule.readTag(Buf, v148)
+			Tag, Tag2, v5655 = ProtoModule.readTag(Buf, v154)
 			
 			if Tag2 == ProtoModule.wireTypes.varint then
 				local _
-				_, v5454 = ProtoModule.readVarInt(Buf, v148)
+				_, v5655 = ProtoModule.readVarInt(Buf, v154)
 			elseif Tag2 == ProtoModule.wireTypes.lengthDelimited then
 				if Tag == 1 then
 					local Buffer1
-					Buffer1, v5454 = ProtoModule.readBuffer(Buf, v148)
+					Buffer1, v5655 = ProtoModule.readBuffer(Buf, v154)
 					NewModule.kind = {
 						type = "dismiss_dialog_action",
 						value = t.DismissDialogAction.decode(Buffer1)
 					}
 				elseif Tag == 2 then
 					local Buffer2
-					Buffer2, v5454 = ProtoModule.readBuffer(Buf, v148)
+					Buffer2, v5655 = ProtoModule.readBuffer(Buf, v154)
 					NewModule.kind = {
 						type = "link_action",
 						value = t.LinkAction.decode(Buffer2)
 					}
 				elseif Tag == 3 then
 					local Buffer4
-					Buffer4, v5454 = ProtoModule.readBuffer(Buf, v148)
+					Buffer4, v5655 = ProtoModule.readBuffer(Buf, v154)
 					NewModule.kind = {
 						type = "open_game_details_action",
 						value = t.OpenGameDetailsAction.decode(Buffer4)
 					}
 				elseif Tag == 4 then
 					local Buffer5
-					Buffer5, v5454 = ProtoModule.readBuffer(Buf, v148)
+					Buffer5, v5655 = ProtoModule.readBuffer(Buf, v154)
 					NewModule.kind = {
 						type = "open_join_friends_action",
 						value = t.OpenJoinFriendsAction.decode(Buffer5)
 					}
 				elseif Tag == 5 then
 					local Buffer6
-					Buffer6, v5454 = ProtoModule.readBuffer(Buf, v148)
+					Buffer6, v5655 = ProtoModule.readBuffer(Buf, v154)
 					NewModule.kind = {
 						type = "open_marketplace_try_on_action",
 						value = t.OpenMarketplaceTryOnAction.decode(Buffer6)
 					}
 				elseif Tag == 6 then
 					local Buffer8
-					Buffer8, v5454 = ProtoModule.readBuffer(Buf, v148)
+					Buffer8, v5655 = ProtoModule.readBuffer(Buf, v154)
 					NewModule.kind = {
 						type = "open_see_all_action",
 						value = t.OpenSeeAllAction.decode(Buffer8)
 					}
 				elseif Tag == 7 then
 					local Buffer11
-					Buffer11, v5454 = ProtoModule.readBuffer(Buf, v148)
+					Buffer11, v5655 = ProtoModule.readBuffer(Buf, v154)
 					NewModule.kind = {
 						type = "open_sponsored_tooltip_action",
 						value = t.OpenSponsoredTooltipAction.decode(Buffer11)
 					}
 				elseif Tag == 8 then
 					local Buffer14
-					Buffer14, v5454 = ProtoModule.readBuffer(Buf, v148)
+					Buffer14, v5655 = ProtoModule.readBuffer(Buf, v154)
 					NewModule.kind = {
 						type = "play_button_click_action",
 						value = t.PlayButtonClickAction.decode(Buffer14)
 					}
 				elseif Tag == 9 then
 					local Buffer15
-					Buffer15, v5454 = ProtoModule.readBuffer(Buf, v148)
+					Buffer15, v5655 = ProtoModule.readBuffer(Buf, v154)
 					NewModule.kind = {
 						type = "update_user_settings_action",
 						value = t.UpdateUserSettingsAction.decode(Buffer15)
 					}
 				elseif Tag == 10 then
 					local Buffer16
-					Buffer16, v5454 = ProtoModule.readBuffer(Buf, v148)
+					Buffer16, v5655 = ProtoModule.readBuffer(Buf, v154)
 					NewModule.kind = {
 						type = "open_tooltip_action",
 						value = t.OpenTooltipAction.decode(Buffer16)
 					}
 				elseif Tag == 11 then
 					local Buffer17
-					Buffer17, v5454 = ProtoModule.readBuffer(Buf, v148)
+					Buffer17, v5655 = ProtoModule.readBuffer(Buf, v154)
 					NewModule.kind = {
 						type = "open_badge_details_action",
 						value = t.OpenBadgeDetailsAction.decode(Buffer17)
 					}
 				elseif Tag == 12 then
 					local Buffer18
-					Buffer18, v5454 = ProtoModule.readBuffer(Buf, v148)
+					Buffer18, v5655 = ProtoModule.readBuffer(Buf, v154)
 					NewModule.kind = {
 						type = "load_more_from_api_action",
 						value = t.LoadMoreFromApiAction.decode(Buffer18)
 					}
 				elseif Tag == 13 then
 					local Buffer19
-					Buffer19, v5454 = ProtoModule.readBuffer(Buf, v148)
+					Buffer19, v5655 = ProtoModule.readBuffer(Buf, v154)
 					NewModule.kind = {
 						type = "share_action",
 						value = t.ShareAction.decode(Buffer19)
 					}
 				elseif Tag == 14 then
 					local Buffer20
-					Buffer20, v5454 = ProtoModule.readBuffer(Buf, v148)
+					Buffer20, v5655 = ProtoModule.readBuffer(Buf, v154)
 					NewModule.kind = {
 						type = "open_abuse_report_action",
 						value = t.OpenAbuseReportAction.decode(Buffer20)
 					}
 				elseif Tag == 15 then
 					local Buffer21
-					Buffer21, v5454 = ProtoModule.readBuffer(Buf, v148)
+					Buffer21, v5655 = ProtoModule.readBuffer(Buf, v154)
 					NewModule.kind = {
 						type = "remove_badge_from_inventory_action",
 						value = t.RemoveBadgeFromInventoryAction.decode(Buffer21)
 					}
 				elseif Tag == 16 then
 					local Buffer24
-					Buffer24, v5454 = ProtoModule.readBuffer(Buf, v148)
+					Buffer24, v5655 = ProtoModule.readBuffer(Buf, v154)
 					NewModule.kind = {
 						type = "open_profile_action",
 						value = t.OpenProfileAction.decode(Buffer24)
 					}
 				elseif Tag == 17 then
 					local Buffer26
-					Buffer26, v5454 = ProtoModule.readBuffer(Buf, v148)
+					Buffer26, v5655 = ProtoModule.readBuffer(Buf, v154)
 					NewModule.kind = {
 						type = "open_facial_age_estimation_action",
 						value = t.OpenFacialAgeEstimationAction.decode(Buffer26)
 					}
 				elseif Tag == 18 then
 					local Buffer28
-					Buffer28, v5454 = ProtoModule.readBuffer(Buf, v148)
+					Buffer28, v5655 = ProtoModule.readBuffer(Buf, v154)
 					NewModule.kind = {
 						type = "open_add_connections_page_action",
 						value = t.OpenAddConnectionsPageAction.decode(Buffer28)
 					}
 				elseif Tag == 19 then
 					local Buffer31
-					Buffer31, v5454 = ProtoModule.readBuffer(Buf, v148)
+					Buffer31, v5655 = ProtoModule.readBuffer(Buf, v154)
 					NewModule.kind = {
 						type = "open_marketplace_action",
 						value = t.OpenMarketplaceAction.decode(Buffer31)
 					}
 				elseif Tag == 20 then
 					local Buffer33
-					Buffer33, v5454 = ProtoModule.readBuffer(Buf, v148)
+					Buffer33, v5655 = ProtoModule.readBuffer(Buf, v154)
 					NewModule.kind = {
 						type = "hide_profile_completion_action",
 						value = t.HideProfileCompletionAction.decode(Buffer33)
 					}
 				elseif Tag == 21 then
 					local Buffer35
-					Buffer35, v5454 = ProtoModule.readBuffer(Buf, v148)
+					Buffer35, v5655 = ProtoModule.readBuffer(Buf, v154)
 					NewModule.kind = {
 						type = "select_marketplace_catalog_category",
 						value = t.SelectMarketplaceCatalogCategory.decode(Buffer35)
 					}
 				elseif Tag == 22 then
 					local Buffer36
-					Buffer36, v5454 = ProtoModule.readBuffer(Buf, v148)
+					Buffer36, v5655 = ProtoModule.readBuffer(Buf, v154)
 					NewModule.kind = {
 						type = "select_marketplace_catalog_subcategory",
 						value = t.SelectMarketplaceCatalogSubcategory.decode(Buffer36)
 					}
 				elseif Tag == 23 then
 					local Buffer37
-					Buffer37, v5454 = ProtoModule.readBuffer(Buf, v148)
+					Buffer37, v5655 = ProtoModule.readBuffer(Buf, v154)
 					NewModule.kind = {
 						type = "open_marketplace_catalog_see_all",
 						value = t.OpenMarketplaceCatalogSeeAll.decode(Buffer37)
 					}
 				elseif Tag == 24 then
 					local Buffer38
-					Buffer38, v5454 = ProtoModule.readBuffer(Buf, v148)
+					Buffer38, v5655 = ProtoModule.readBuffer(Buf, v154)
 					NewModule.kind = {
 						type = "close_marketplace_category_tooltip",
 						value = t.CloseMarketplaceCategoryTooltip.decode(Buffer38)
 					}
 				elseif Tag == 25 then
 					local Buffer39
-					Buffer39, v5454 = ProtoModule.readBuffer(Buf, v148)
+					Buffer39, v5655 = ProtoModule.readBuffer(Buf, v154)
 					NewModule.kind = {
 						type = "resize_marketplace_catalog",
 						value = t.ResizeMarketplaceCatalog.decode(Buffer39)
 					}
 				elseif Tag == 26 then
 					local Buffer40
-					Buffer40, v5454 = ProtoModule.readBuffer(Buf, v148)
+					Buffer40, v5655 = ProtoModule.readBuffer(Buf, v154)
 					NewModule.kind = {
 						type = "open_marketplace_catalog_filters",
 						value = t.OpenMarketplaceCatalogFilters.decode(Buffer40)
 					}
 				elseif Tag == 27 then
 					local Buffer43
-					Buffer43, v5454 = ProtoModule.readBuffer(Buf, v148)
+					Buffer43, v5655 = ProtoModule.readBuffer(Buf, v154)
 					NewModule.kind = {
 						type = "open_social_link_action",
 						value = t.OpenSocialLinkAction.decode(Buffer43)
 					}
 				elseif Tag == 28 then
 					local Buffer45
-					Buffer45, v5454 = ProtoModule.readBuffer(Buf, v148)
+					Buffer45, v5655 = ProtoModule.readBuffer(Buf, v154)
 					NewModule.kind = {
 						type = "open_charts_sort_detail_action",
 						value = t.OpenChartsSortDetailAction.decode(Buffer45)
 					}
 				elseif Tag == 29 then
 					local Buffer46
-					Buffer46, v5454 = ProtoModule.readBuffer(Buf, v148)
+					Buffer46, v5655 = ProtoModule.readBuffer(Buf, v154)
 					NewModule.kind = {
 						type = "open_song_detail_action",
 						value = t.OpenSongDetailAction.decode(Buffer46)
 					}
 				elseif Tag == 30 then
 					local Buffer48
-					Buffer48, v5454 = ProtoModule.readBuffer(Buf, v148)
+					Buffer48, v5655 = ProtoModule.readBuffer(Buf, v154)
 					NewModule.kind = {
 						type = "refresh_from_api_action",
 						value = t.RefreshFromApiAction.decode(Buffer48)
 					}
 				elseif Tag == 31 then
 					local Buffer51
-					Buffer51, v5454 = ProtoModule.readBuffer(Buf, v148)
+					Buffer51, v5655 = ProtoModule.readBuffer(Buf, v154)
 					NewModule.kind = {
 						type = "rsvp_to_event_action",
 						value = t.RsvpToEventAction.decode(Buffer51)
 					}
 				elseif Tag == 32 then
 					local Buffer52
-					Buffer52, v5454 = ProtoModule.readBuffer(Buf, v148)
+					Buffer52, v5655 = ProtoModule.readBuffer(Buf, v154)
 					NewModule.kind = {
 						type = "apply_charts_filter_action",
 						value = t.ApplyChartsFilterAction.decode(Buffer52)
 					}
 				elseif Tag == 33 then
 					local Buffer53
-					Buffer53, v5454 = ProtoModule.readBuffer(Buf, v148)
+					Buffer53, v5655 = ProtoModule.readBuffer(Buf, v154)
 					NewModule.kind = {
 						type = "analytics_event_action",
 						value = t.AnalyticsEventAction.decode(Buffer53)
 					}
 				elseif Tag == 34 then
 					local Buffer55
-					Buffer55, v5454 = ProtoModule.readBuffer(Buf, v148)
+					Buffer55, v5655 = ProtoModule.readBuffer(Buf, v154)
 					NewModule.kind = {
 						type = "custom_analytics_event_action",
 						value = t.CustomAnalyticsEventAction.decode(Buffer55)
 					}
 				elseif Tag == 35 then
 					local Buffer56
-					Buffer56, v5454 = ProtoModule.readBuffer(Buf, v148)
+					Buffer56, v5655 = ProtoModule.readBuffer(Buf, v154)
 					NewModule.kind = {
 						type = "open_game_invite_action",
 						value = t.OpenGameInviteAction.decode(Buffer56)
 					}
 				elseif Tag == 36 then
 					local Buffer57
-					Buffer57, v5454 = ProtoModule.readBuffer(Buf, v148)
+					Buffer57, v5655 = ProtoModule.readBuffer(Buf, v154)
 					NewModule.kind = {
 						type = "open_event_details_action",
 						value = t.OpenEventDetailsAction.decode(Buffer57)
 					}
 				elseif Tag == 37 then
 					local Buffer59
-					Buffer59, v5454 = ProtoModule.readBuffer(Buf, v148)
+					Buffer59, v5655 = ProtoModule.readBuffer(Buf, v154)
 					NewModule.kind = {
 						type = "launch_experience_action",
 						value = t.LaunchExperienceAction.decode(Buffer59)
 					}
 				elseif Tag == 38 then
 					local Buffer60
-					Buffer60, v5454 = ProtoModule.readBuffer(Buf, v148)
+					Buffer60, v5655 = ProtoModule.readBuffer(Buf, v154)
 					NewModule.kind = {
 						type = "toggle_experience_favorite_action",
 						value = t.ToggleExperienceFavoriteAction.decode(Buffer60)
 					}
 				elseif Tag == 39 then
 					local Buffer61
-					Buffer61, v5454 = ProtoModule.readBuffer(Buf, v148)
+					Buffer61, v5655 = ProtoModule.readBuffer(Buf, v154)
 					NewModule.kind = {
 						type = "toggle_experience_follow_action",
 						value = t.ToggleExperienceFollowAction.decode(Buffer61)
 					}
 				elseif Tag == 40 then
 					local Buffer64
-					Buffer64, v5454 = ProtoModule.readBuffer(Buf, v148)
+					Buffer64, v5655 = ProtoModule.readBuffer(Buf, v154)
 					NewModule.kind = {
 						type = "toggle_experience_vote_action",
 						value = t.ToggleExperienceVoteAction.decode(Buffer64)
 					}
 				elseif Tag == 41 then
 					local Buffer66
-					Buffer66, v5454 = ProtoModule.readBuffer(Buf, v148)
+					Buffer66, v5655 = ProtoModule.readBuffer(Buf, v154)
 					NewModule.kind = {
 						type = "open_purchase_prompt_action",
 						value = t.OpenPurchasePromptAction.decode(Buffer66)
 					}
 				elseif Tag == 42 then
 					local Buffer27
-					Buffer27, v5454 = ProtoModule.readBuffer(Buf, v148)
+					Buffer27, v5655 = ProtoModule.readBuffer(Buf, v154)
 					NewModule.kind = {
 						type = "open_sdui_overlay_action",
 						value = t.OpenSduiOverlayAction.decode(Buffer27)
 					}
 				elseif Tag == 43 then
 					local Buffer22
-					Buffer22, v5454 = ProtoModule.readBuffer(Buf, v148)
+					Buffer22, v5655 = ProtoModule.readBuffer(Buf, v154)
 					NewModule.kind = {
 						type = "open_badges_see_all_action",
 						value = t.OpenBadgesSeeAllAction.decode(Buffer22)
 					}
 				elseif Tag == 44 then
 					local Buffer25
-					Buffer25, v5454 = ProtoModule.readBuffer(Buf, v148)
+					Buffer25, v5655 = ProtoModule.readBuffer(Buf, v154)
 					NewModule.kind = {
 						type = "open_experience_store_see_all_action",
 						value = t.OpenExperienceStoreSeeAllAction.decode(Buffer25)
 					}
 				elseif Tag == 45 then
 					local Buffer34
-					Buffer34, v5454 = ProtoModule.readBuffer(Buf, v148)
+					Buffer34, v5655 = ProtoModule.readBuffer(Buf, v154)
 					NewModule.kind = {
 						type = "dismiss_game_feedback_action",
 						value = t.DismissGameFeedbackAction.decode(Buffer34)
 					}
 				elseif Tag == 46 then
 					local Buffer23
-					Buffer23, v5454 = ProtoModule.readBuffer(Buf, v148)
+					Buffer23, v5655 = ProtoModule.readBuffer(Buf, v154)
 					NewModule.kind = {
 						type = "open_game_feedback_form_action",
 						value = t.OpenGameFeedbackFormAction.decode(Buffer23)
 					}
 				elseif Tag == 47 then
 					local Buffer32
-					Buffer32, v5454 = ProtoModule.readBuffer(Buf, v148)
+					Buffer32, v5655 = ProtoModule.readBuffer(Buf, v154)
 					NewModule.kind = {
 						type = "enable_event_notifications_action",
 						value = t.EnableEventNotificationsAction.decode(Buffer32)
 					}
 				elseif Tag == 48 then
-					local Buffer69
-					Buffer69, v5454 = ProtoModule.readBuffer(Buf, v148)
+					local Buffer68
+					Buffer68, v5655 = ProtoModule.readBuffer(Buf, v154)
 					NewModule.kind = {
 						type = "dismiss_event_notifications_modal_action",
-						value = t.DismissEventNotificationsModalAction.decode(Buffer69)
+						value = t.DismissEventNotificationsModalAction.decode(Buffer68)
 					}
 				elseif Tag == 49 then
 					local Buffer30
-					Buffer30, v5454 = ProtoModule.readBuffer(Buf, v148)
+					Buffer30, v5655 = ProtoModule.readBuffer(Buf, v154)
 					NewModule.kind = {
 						type = "open_amp_wizard_action",
 						value = t.OpenAmpWizardAction.decode(Buffer30)
 					}
 				elseif Tag == 50 then
-					local Buffer70
-					Buffer70, v5454 = ProtoModule.readBuffer(Buf, v148)
+					local Buffer69
+					Buffer69, v5655 = ProtoModule.readBuffer(Buf, v154)
 					NewModule.kind = {
 						type = "open_subscription_purchase_page_action",
-						value = t.OpenSubscriptionPurchasePageAction.decode(Buffer70)
+						value = t.OpenSubscriptionPurchasePageAction.decode(Buffer69)
 					}
 				elseif Tag == 51 then
-					local Buffer71
-					Buffer71, v5454 = ProtoModule.readBuffer(Buf, v148)
+					local Buffer70
+					Buffer70, v5655 = ProtoModule.readBuffer(Buf, v154)
 					NewModule.kind = {
 						type = "refresh_game_passes_action",
-						value = t.RefreshGamePassesAction.decode(Buffer71)
+						value = t.RefreshGamePassesAction.decode(Buffer70)
 					}
 				elseif Tag == 52 then
-					local Buffer72
-					Buffer72, v5454 = ProtoModule.readBuffer(Buf, v148)
+					local Buffer71
+					Buffer71, v5655 = ProtoModule.readBuffer(Buf, v154)
 					NewModule.kind = {
 						type = "refresh_playability_action",
-						value = t.RefreshPlayabilityAction.decode(Buffer72)
+						value = t.RefreshPlayabilityAction.decode(Buffer71)
 					}
 				elseif Tag == 53 then
 					local Buffer10
-					Buffer10, v5454 = ProtoModule.readBuffer(Buf, v148)
+					Buffer10, v5655 = ProtoModule.readBuffer(Buf, v154)
 					NewModule.kind = {
 						type = "open_social_proof_user_list_sheet_action",
 						value = t.OpenSocialProofUserListSheetAction.decode(Buffer10)
 					}
 				elseif Tag == 54 then
 					local Buffer3
-					Buffer3, v5454 = ProtoModule.readBuffer(Buf, v148)
+					Buffer3, v5655 = ProtoModule.readBuffer(Buf, v154)
 					NewModule.kind = {
 						type = "report_surface_load_time_milestone_action",
 						value = t.ReportSurfaceLoadTimeMilestoneAction.decode(Buffer3)
 					}
 				elseif Tag == 55 then
 					local Buffer9
-					Buffer9, v5454 = ProtoModule.readBuffer(Buf, v148)
+					Buffer9, v5655 = ProtoModule.readBuffer(Buf, v154)
 					NewModule.kind = {
 						type = "open_search_results_tab_action",
 						value = t.OpenSearchResultsTabAction.decode(Buffer9)
 					}
 				elseif Tag == 56 then
 					local Buffer12
-					Buffer12, v5454 = ProtoModule.readBuffer(Buf, v148)
+					Buffer12, v5655 = ProtoModule.readBuffer(Buf, v154)
 					NewModule.kind = {
 						type = "open_phone_upsell_modal_action",
 						value = t.OpenPhoneUpsellModalAction.decode(Buffer12)
 					}
 				elseif Tag == 57 then
 					local Buffer7
-					Buffer7, v5454 = ProtoModule.readBuffer(Buf, v148)
+					Buffer7, v5655 = ProtoModule.readBuffer(Buf, v154)
 					NewModule.kind = {
 						type = "open_email_upsell_modal_action",
 						value = t.OpenEmailUpsellModalAction.decode(Buffer7)
 					}
 				elseif Tag == 58 then
-					local Buffer73
-					Buffer73, v5454 = ProtoModule.readBuffer(Buf, v148)
+					local Buffer72
+					Buffer72, v5655 = ProtoModule.readBuffer(Buf, v154)
 					NewModule.kind = {
 						type = "dismiss_prompt_action",
-						value = t.DismissPromptAction.decode(Buffer73)
+						value = t.DismissPromptAction.decode(Buffer72)
 					}
 				elseif Tag == 59 then
-					local Buffer74
-					Buffer74, v5454 = ProtoModule.readBuffer(Buf, v148)
+					local Buffer73
+					Buffer73, v5655 = ProtoModule.readBuffer(Buf, v154)
 					NewModule.kind = {
 						type = "request_friendship_action",
-						value = t.RequestFriendshipAction.decode(Buffer74)
+						value = t.RequestFriendshipAction.decode(Buffer73)
 					}
 				elseif Tag == 60 then
-					local Buffer75
-					Buffer75, v5454 = ProtoModule.readBuffer(Buf, v148)
+					local Buffer74
+					Buffer74, v5655 = ProtoModule.readBuffer(Buf, v154)
 					NewModule.kind = {
 						type = "refresh_developer_products_action",
-						value = t.RefreshDeveloperProductsAction.decode(Buffer75)
+						value = t.RefreshDeveloperProductsAction.decode(Buffer74)
 					}
 				elseif Tag == 61 then
-					local Buffer76
-					Buffer76, v5454 = ProtoModule.readBuffer(Buf, v148)
+					local Buffer75
+					Buffer75, v5655 = ProtoModule.readBuffer(Buf, v154)
 					NewModule.kind = {
 						type = "open_fae_trial_upsell_action",
-						value = t.OpenFaeTrialUpsellAction.decode(Buffer76)
+						value = t.OpenFaeTrialUpsellAction.decode(Buffer75)
 					}
 				elseif Tag == 62 then
-					local Buffer77
-					Buffer77, v5454 = ProtoModule.readBuffer(Buf, v148)
+					local Buffer76
+					Buffer76, v5655 = ProtoModule.readBuffer(Buf, v154)
 					NewModule.kind = {
 						type = "refresh_omni_recommendation_feed_item_action",
-						value = t.RefreshOmniRecommendationFeedItemAction.decode(Buffer77)
+						value = t.RefreshOmniRecommendationFeedItemAction.decode(Buffer76)
 					}
 				elseif Tag == 63 then
-					local Buffer78
-					Buffer78, v5454 = ProtoModule.readBuffer(Buf, v148)
+					local Buffer77
+					Buffer77, v5655 = ProtoModule.readBuffer(Buf, v154)
 					NewModule.kind = {
 						type = "ai_overview_feedback_action",
-						value = t.AiOverviewFeedbackAction.decode(Buffer78)
+						value = t.AiOverviewFeedbackAction.decode(Buffer77)
 					}
 				elseif Tag == 64 then
 					local Buffer58
-					Buffer58, v5454 = ProtoModule.readBuffer(Buf, v148)
+					Buffer58, v5655 = ProtoModule.readBuffer(Buf, v154)
 					NewModule.kind = {
 						type = "open_trusted_friends_upsell_modal_action",
 						value = t.OpenTrustedFriendsUpsellModalAction.decode(Buffer58)
 					}
 				elseif Tag == 65 then
 					local Buffer13
-					Buffer13, v5454 = ProtoModule.readBuffer(Buf, v148)
+					Buffer13, v5655 = ProtoModule.readBuffer(Buf, v154)
 					NewModule.kind = {
 						type = "record_party_chat_conversation_upsell_acknowledgement_action",
 						value = t.RecordPartyChatConversationUpsellAcknowledgementAction.decode(Buffer13)
 					}
 				elseif Tag == 66 then
 					local Buffer67
-					Buffer67, v5454 = ProtoModule.readBuffer(Buf, v148)
+					Buffer67, v5655 = ProtoModule.readBuffer(Buf, v154)
 					NewModule.kind = {
 						type = "open_search_results_with_query_action",
 						value = t.OpenSearchResultsWithQueryAction.decode(Buffer67)
 					}
 				elseif Tag == 67 then
 					local Buffer62
-					Buffer62, v5454 = ProtoModule.readBuffer(Buf, v148)
+					Buffer62, v5655 = ProtoModule.readBuffer(Buf, v154)
 					NewModule.kind = {
 						type = "select_marketplace_favorites_category",
 						value = t.SelectMarketplaceFavoritesCategory.decode(Buffer62)
 					}
 				elseif Tag == 68 then
 					local Buffer65
-					Buffer65, v5454 = ProtoModule.readBuffer(Buf, v148)
+					Buffer65, v5655 = ProtoModule.readBuffer(Buf, v154)
 					NewModule.kind = {
 						type = "download_app_action",
 						value = t.DownloadAppAction.decode(Buffer65)
 					}
 				elseif Tag == 69 then
-					local Buffer80
-					Buffer80, v5454 = ProtoModule.readBuffer(Buf, v148)
+					local Buffer79
+					Buffer79, v5655 = ProtoModule.readBuffer(Buf, v154)
 					NewModule.kind = {
 						type = "refresh_charts_sort_detail_action",
-						value = t.RefreshChartsSortDetailAction.decode(Buffer80)
+						value = t.RefreshChartsSortDetailAction.decode(Buffer79)
 					}
 				elseif Tag == 70 then
 					local Buffer63
-					Buffer63, v5454 = ProtoModule.readBuffer(Buf, v148)
+					Buffer63, v5655 = ProtoModule.readBuffer(Buf, v154)
 					NewModule.kind = {
 						type = "join_community_action",
 						value = t.JoinCommunityAction.decode(Buffer63)
 					}
 				elseif Tag == 71 then
-					local Buffer81
-					Buffer81, v5454 = ProtoModule.readBuffer(Buf, v148)
+					local Buffer80
+					Buffer80, v5655 = ProtoModule.readBuffer(Buf, v154)
 					NewModule.kind = {
 						type = "view_community_action",
-						value = t.ViewCommunityAction.decode(Buffer81)
+						value = t.ViewCommunityAction.decode(Buffer80)
 					}
 				elseif Tag == 72 then
-					local Buffer82
-					Buffer82, v5454 = ProtoModule.readBuffer(Buf, v148)
+					local Buffer81
+					Buffer81, v5655 = ProtoModule.readBuffer(Buf, v154)
 					NewModule.kind = {
 						type = "pin_experience_shortcut_action",
-						value = t.PinExperienceShortcutAction.decode(Buffer82)
+						value = t.PinExperienceShortcutAction.decode(Buffer81)
 					}
 				elseif Tag == 73 then
-					local Buffer83
-					Buffer83, v5454 = ProtoModule.readBuffer(Buf, v148)
+					local Buffer82
+					Buffer82, v5655 = ProtoModule.readBuffer(Buf, v154)
 					NewModule.kind = {
 						type = "select_marketplace_favorites_subcategory",
-						value = t.SelectMarketplaceFavoritesSubcategory.decode(Buffer83)
+						value = t.SelectMarketplaceFavoritesSubcategory.decode(Buffer82)
 					}
 				elseif Tag == 74 then
 					local Buffer44
-					Buffer44, v5454 = ProtoModule.readBuffer(Buf, v148)
+					Buffer44, v5655 = ProtoModule.readBuffer(Buf, v154)
 					NewModule.kind = {
 						type = "show_toast_action",
 						value = t.ShowToastAction.decode(Buffer44)
 					}
 				elseif Tag == 75 then
 					local Buffer41
-					Buffer41, v5454 = ProtoModule.readBuffer(Buf, v148)
+					Buffer41, v5655 = ProtoModule.readBuffer(Buf, v154)
 					NewModule.kind = {
 						type = "open_incoming_transfer_upsell_action",
 						value = t.OpenIncomingTransferUpsellAction.decode(Buffer41)
 					}
 				elseif Tag == 76 then
 					local Buffer29
-					Buffer29, v5454 = ProtoModule.readBuffer(Buf, v148)
+					Buffer29, v5655 = ProtoModule.readBuffer(Buf, v154)
 					NewModule.kind = {
 						type = "action_sequence_action",
 						value = t.ActionSequenceAction.decode(Buffer29)
 					}
 				elseif Tag == 77 then
 					local Buffer50
-					Buffer50, v5454 = ProtoModule.readBuffer(Buf, v148)
+					Buffer50, v5655 = ProtoModule.readBuffer(Buf, v154)
 					NewModule.kind = {
 						type = "refresh_feed_entry_from_api_action",
 						value = t.RefreshFeedEntryFromApiAction.decode(Buffer50)
 					}
 				elseif Tag == 78 then
 					local Buffer42
-					Buffer42, v5454 = ProtoModule.readBuffer(Buf, v148)
+					Buffer42, v5655 = ProtoModule.readBuffer(Buf, v154)
 					NewModule.kind = {
 						type = "open_profile_frames_editor_action",
 						value = t.OpenProfileFramesEditorAction.decode(Buffer42)
 					}
 				elseif Tag == 79 then
 					local Buffer49
-					Buffer49, v5454 = ProtoModule.readBuffer(Buf, v148)
+					Buffer49, v5655 = ProtoModule.readBuffer(Buf, v154)
 					NewModule.kind = {
 						type = "navigate_action",
 						value = t.NavigateAction.decode(Buffer49)
 					}
 				elseif Tag == 80 then
 					local Buffer87
-					Buffer87, v5454 = ProtoModule.readBuffer(Buf, v148)
+					Buffer87, v5655 = ProtoModule.readBuffer(Buf, v154)
 					NewModule.kind = {
 						type = "set_game_tile_not_interested_action",
 						value = t.SetGameTileNotInterestedAction.decode(Buffer87)
 					}
 				elseif Tag == 81 then
 					local Buffer47
-					Buffer47, v5454 = ProtoModule.readBuffer(Buf, v148)
+					Buffer47, v5655 = ProtoModule.readBuffer(Buf, v154)
 					NewModule.kind = {
 						type = "refresh_home_action",
 						value = t.RefreshHomeAction.decode(Buffer47)
 					}
 				elseif Tag == 82 then
 					local Buffer88
-					Buffer88, v5454 = ProtoModule.readBuffer(Buf, v148)
+					Buffer88, v5655 = ProtoModule.readBuffer(Buf, v154)
 					NewModule.kind = {
 						type = "undo_game_tile_not_interested_action",
 						value = t.UndoGameTileNotInterestedAction.decode(Buffer88)
 					}
 				elseif Tag == 83 then
 					local Buffer89
-					Buffer89, v5454 = ProtoModule.readBuffer(Buf, v148)
+					Buffer89, v5655 = ProtoModule.readBuffer(Buf, v154)
 					NewModule.kind = {
 						type = "apply_dev_store_see_all_category_filter_action",
 						value = t.ApplyDevStoreSeeAllCategoryFilterAction.decode(Buffer89)
 					}
 				elseif Tag == 84 then
-					local Buffer90
-					Buffer90, v5454 = ProtoModule.readBuffer(Buf, v148)
+					local Buffer91
+					Buffer91, v5655 = ProtoModule.readBuffer(Buf, v154)
 					NewModule.kind = {
 						type = "open_why_this_ad_action",
-						value = t.OpenWhyThisAdAction.decode(Buffer90)
+						value = t.OpenWhyThisAdAction.decode(Buffer91)
 					}
 				elseif Tag == 85 then
-					local Buffer91
-					Buffer91, v5454 = ProtoModule.readBuffer(Buf, v148)
+					local Buffer92
+					Buffer92, v5655 = ProtoModule.readBuffer(Buf, v154)
 					NewModule.kind = {
 						type = "request_push_notification_permission_action",
-						value = t.RequestPushNotificationPermissionAction.decode(Buffer91)
+						value = t.RequestPushNotificationPermissionAction.decode(Buffer92)
 					}
 				elseif Tag == 86 then
-					local Buffer92
-					Buffer92, v5454 = ProtoModule.readBuffer(Buf, v148)
+					local Buffer93
+					Buffer93, v5655 = ProtoModule.readBuffer(Buf, v154)
 					NewModule.kind = {
 						type = "open_build_creation_chat_action",
-						value = t.OpenBuildCreationChatAction.decode(Buffer92)
+						value = t.OpenBuildCreationChatAction.decode(Buffer93)
 					}
 				elseif Tag == 87 then
-					local Buffer93
-					Buffer93, v5454 = ProtoModule.readBuffer(Buf, v148)
+					local Buffer94
+					Buffer94, v5655 = ProtoModule.readBuffer(Buf, v154)
 					NewModule.kind = {
 						type = "experimental_action",
-						value = t.ExperimentalAction.decode(Buffer93)
+						value = t.ExperimentalAction.decode(Buffer94)
 					}
 				elseif Tag == 88 then
 					local Buffer85
-					Buffer85, v5454 = ProtoModule.readBuffer(Buf, v148)
+					Buffer85, v5655 = ProtoModule.readBuffer(Buf, v154)
 					NewModule.kind = {
 						type = "open_external_link_action",
 						value = t.OpenExternalLinkAction.decode(Buffer85)
 					}
 				elseif Tag == 89 then
-					local Buffer94
-					Buffer94, v5454 = ProtoModule.readBuffer(Buf, v148)
+					local Buffer95
+					Buffer95, v5655 = ProtoModule.readBuffer(Buf, v154)
 					NewModule.kind = {
 						type = "open_catalog_item_details_action",
-						value = t.OpenCatalogItemDetailsAction.decode(Buffer94)
+						value = t.OpenCatalogItemDetailsAction.decode(Buffer95)
 					}
 				elseif Tag == 90 then
 					local Buffer84
-					Buffer84, v5454 = ProtoModule.readBuffer(Buf, v148)
+					Buffer84, v5655 = ProtoModule.readBuffer(Buf, v154)
 					NewModule.kind = {
 						type = "open_item_info_row_prompt_action",
 						value = t.OpenItemInfoRowPromptAction.decode(Buffer84)
 					}
 				elseif Tag == 91 then
-					local Buffer95
-					Buffer95, v5454 = ProtoModule.readBuffer(Buf, v148)
+					local Buffer96
+					Buffer96, v5655 = ProtoModule.readBuffer(Buf, v154)
 					NewModule.kind = {
 						type = "toggle_catalog_item_favorite_action",
-						value = t.ToggleCatalogItemFavoriteAction.decode(Buffer95)
+						value = t.ToggleCatalogItemFavoriteAction.decode(Buffer96)
 					}
 				elseif Tag == 92 then
-					local Buffer96
-					Buffer96, v5454 = ProtoModule.readBuffer(Buf, v148)
+					local Buffer97
+					Buffer97, v5655 = ProtoModule.readBuffer(Buf, v154)
 					NewModule.kind = {
 						type = "play_with_reward_ad_action",
-						value = t.PlayWithRewardAdAction.decode(Buffer96)
+						value = t.PlayWithRewardAdAction.decode(Buffer97)
 					}
 				elseif Tag == 93 then
-					local Buffer97
-					Buffer97, v5454 = ProtoModule.readBuffer(Buf, v148)
+					local Buffer98
+					Buffer98, v5655 = ProtoModule.readBuffer(Buf, v154)
 					NewModule.kind = {
 						type = "set_page_scope_field_action",
-						value = t.SetPageScopeFieldAction.decode(Buffer97)
+						value = t.SetPageScopeFieldAction.decode(Buffer98)
 					}
 				elseif Tag == 94 then
 					local Buffer86
-					Buffer86, v5454 = ProtoModule.readBuffer(Buf, v148)
+					Buffer86, v5655 = ProtoModule.readBuffer(Buf, v154)
 					NewModule.kind = {
 						type = "submit_custom_form_response_action",
 						value = t.SubmitCustomFormResponseAction.decode(Buffer86)
 					}
 				elseif Tag == 95 then
-					local Buffer98
-					Buffer98, v5454 = ProtoModule.readBuffer(Buf, v148)
+					local Buffer99
+					Buffer99, v5655 = ProtoModule.readBuffer(Buf, v154)
 					NewModule.kind = {
 						type = "refresh_custom_form_results_action",
-						value = t.RefreshCustomFormResultsAction.decode(Buffer98)
+						value = t.RefreshCustomFormResultsAction.decode(Buffer99)
 					}
 				elseif Tag == 96 then
-					local Buffer99
-					Buffer99, v5454 = ProtoModule.readBuffer(Buf, v148)
+					local Buffer100
+					Buffer100, v5655 = ProtoModule.readBuffer(Buf, v154)
 					NewModule.kind = {
 						type = "open_experience_leaderboard_see_all_action",
-						value = t.OpenExperienceLeaderboardSeeAllAction.decode(Buffer99)
+						value = t.OpenExperienceLeaderboardSeeAllAction.decode(Buffer100)
 					}
 				elseif Tag == 97 then
-					local Buffer100
-					Buffer100, v5454 = ProtoModule.readBuffer(Buf, v148)
+					local Buffer101
+					Buffer101, v5655 = ProtoModule.readBuffer(Buf, v154)
 					NewModule.kind = {
 						type = "open_catalog_item_experiences_action",
-						value = t.OpenCatalogItemExperiencesAction.decode(Buffer100)
+						value = t.OpenCatalogItemExperiencesAction.decode(Buffer101)
 					}
 				elseif Tag == 98 then
-					local Buffer101
-					Buffer101, v5454 = ProtoModule.readBuffer(Buf, v148)
+					local Buffer102
+					Buffer102, v5655 = ProtoModule.readBuffer(Buf, v154)
 					NewModule.kind = {
 						type = "open_catalog_item_creator_profile_action",
-						value = t.OpenCatalogItemCreatorProfileAction.decode(Buffer101)
+						value = t.OpenCatalogItemCreatorProfileAction.decode(Buffer102)
 					}
 				elseif Tag == 99 then
-					local Buffer102
-					Buffer102, v5454 = ProtoModule.readBuffer(Buf, v148)
+					local Buffer103
+					Buffer103, v5655 = ProtoModule.readBuffer(Buf, v154)
 					NewModule.kind = {
 						type = "play_catalog_item_attribution_experience_action",
-						value = t.PlayCatalogItemAttributionExperienceAction.decode(Buffer102)
+						value = t.PlayCatalogItemAttributionExperienceAction.decode(Buffer103)
 					}
 				elseif Tag == 100 then
-					local Buffer103
-					Buffer103, v5454 = ProtoModule.readBuffer(Buf, v148)
+					local Buffer104
+					Buffer104, v5655 = ProtoModule.readBuffer(Buf, v154)
 					NewModule.kind = {
 						type = "open_catalog_item_resellers_action",
-						value = t.OpenCatalogItemResellersAction.decode(Buffer103)
+						value = t.OpenCatalogItemResellersAction.decode(Buffer104)
 					}
 				elseif Tag == 101 then
-					local Buffer104
-					Buffer104, v5454 = ProtoModule.readBuffer(Buf, v148)
+					local Buffer105
+					Buffer105, v5655 = ProtoModule.readBuffer(Buf, v154)
 					NewModule.kind = {
 						type = "purchase_catalog_item_from_stock_action",
-						value = t.PurchaseCatalogItemFromStockAction.decode(Buffer104)
+						value = t.PurchaseCatalogItemFromStockAction.decode(Buffer105)
 					}
 				elseif Tag == 102 then
-					local Buffer79
-					Buffer79, v5454 = ProtoModule.readBuffer(Buf, v148)
+					local Buffer78
+					Buffer78, v5655 = ProtoModule.readBuffer(Buf, v154)
 					NewModule.kind = {
 						type = "open_catalog_item_ownership_action",
-						value = t.OpenCatalogItemOwnershipAction.decode(Buffer79)
+						value = t.OpenCatalogItemOwnershipAction.decode(Buffer78)
 					}
 				elseif Tag == 103 then
-					local Buffer105
-					Buffer105, v5454 = ProtoModule.readBuffer(Buf, v148)
+					local Buffer106
+					Buffer106, v5655 = ProtoModule.readBuffer(Buf, v154)
 					NewModule.kind = {
 						type = "try_on_catalog_item_action",
-						value = t.TryOnCatalogItemAction.decode(Buffer105)
+						value = t.TryOnCatalogItemAction.decode(Buffer106)
+					}
+				elseif Tag == 104 then
+					local Buffer54
+					Buffer54, v5655 = ProtoModule.readBuffer(Buf, v154)
+					NewModule.kind = {
+						type = "purchase_buy_robux_product_action",
+						value = t.PurchaseBuyRobuxProductAction.decode(Buffer54)
+					}
+				elseif Tag == 105 then
+					local Buffer107
+					Buffer107, v5655 = ProtoModule.readBuffer(Buf, v154)
+					NewModule.kind = {
+						type = "purchase_buy_robux_subscription_action",
+						value = t.PurchaseBuyRobuxSubscriptionAction.decode(Buffer107)
+					}
+				elseif Tag == 106 then
+					local Buffer108
+					Buffer108, v5655 = ProtoModule.readBuffer(Buf, v154)
+					NewModule.kind = {
+						type = "open_roblox_plus_sheet_action",
+						value = t.OpenRobloxPlusSheetAction.decode(Buffer108)
+					}
+				elseif Tag == 107 then
+					local Buffer109
+					Buffer109, v5655 = ProtoModule.readBuffer(Buf, v154)
+					NewModule.kind = {
+						type = "open_send_robux_action",
+						value = t.OpenSendRobuxAction.decode(Buffer109)
+					}
+				elseif Tag == 108 then
+					local Buffer110
+					Buffer110, v5655 = ProtoModule.readBuffer(Buf, v154)
+					NewModule.kind = {
+						type = "review_transfer_action",
+						value = t.ReviewTransferAction.decode(Buffer110)
 					}
 				elseif Tag == 1000 then
-					local Buffer54
-					Buffer54, v5454 = ProtoModule.readBuffer(Buf, v148)
-					NewModule.telemetry_handler = PropTypesModule.StringProp.decode(Buffer54)
+					local Buffer111
+					Buffer111, v5655 = ProtoModule.readBuffer(Buf, v154)
+					NewModule.telemetry_handler = PropTypesModule.StringProp.decode(Buffer111)
 				elseif Tag == 1001 then
-					local Buffer68
-					Buffer68, v5454 = ProtoModule.readBuffer(Buf, v148)
-					NewModule.accessibility_label = PropTypesModule.StringFormat.decode(Buffer68)
+					local Buffer112
+					Buffer112, v5655 = ProtoModule.readBuffer(Buf, v154)
+					NewModule.accessibility_label = PropTypesModule.StringFormat.decode(Buffer112)
 				elseif Tag == 1002 then
-					local Buffer106
-					Buffer106, v5454 = ProtoModule.readBuffer(Buf, v148)
-					NewModule.skip_unified_logging = PropTypesModule.BoolProp.decode(Buffer106)
+					local Buffer90
+					Buffer90, v5655 = ProtoModule.readBuffer(Buf, v154)
+					NewModule.skip_unified_logging = PropTypesModule.BoolProp.decode(Buffer90)
 				elseif Tag == 1003 then
-					local Buffer107
-					Buffer107, v5454 = ProtoModule.readBuffer(Buf, v148)
-					NewModule.action_event_name = PropTypesModule.StringProp.decode(Buffer107)
+					local Buffer83
+					Buffer83, v5655 = ProtoModule.readBuffer(Buf, v154)
+					NewModule.action_event_name = PropTypesModule.StringProp.decode(Buffer83)
 				else
-					local VarInt, VarInt2 = ProtoModule.readVarInt(Buf, v148)
-					v148 = VarInt2 + VarInt
+					local VarInt, VarInt2 = ProtoModule.readVarInt(Buf, v154)
+					v154 = VarInt2 + VarInt
 				end
 			elseif Tag2 == ProtoModule.wireTypes.i32 then
 				local _
-				_, v5454 = ProtoModule.readFixed32(Buf, v148)
+				_, v5655 = ProtoModule.readFixed32(Buf, v154)
 			elseif Tag2 == ProtoModule.wireTypes.i64 then
 				local _
-				_, v5454 = ProtoModule.readFixed64(Buf, v148)
+				_, v5655 = ProtoModule.readFixed64(Buf, v154)
 			else
 				error("Unsupported wire type: " .. Tag2)
 			end
@@ -26604,7 +27609,7 @@ do
 		return NewModule
 	end
 
-	function Module218:jsonEncode()
+	function Module228:jsonEncode()
 		local t = {}
 		
 		if self.kind ~= nil then
@@ -26814,6 +27819,16 @@ do
 				t.openCatalogItemOwnershipAction = self.kind.value:jsonEncode()
 			elseif self.kind.type == "try_on_catalog_item_action" then
 				t.tryOnCatalogItemAction = self.kind.value:jsonEncode()
+			elseif self.kind.type == "purchase_buy_robux_product_action" then
+				t.purchaseBuyRobuxProductAction = self.kind.value:jsonEncode()
+			elseif self.kind.type == "purchase_buy_robux_subscription_action" then
+				t.purchaseBuyRobuxSubscriptionAction = self.kind.value:jsonEncode()
+			elseif self.kind.type == "open_roblox_plus_sheet_action" then
+				t.openRobloxPlusSheetAction = self.kind.value:jsonEncode()
+			elseif self.kind.type == "open_send_robux_action" then
+				t.openSendRobuxAction = self.kind.value:jsonEncode()
+			elseif self.kind.type == "review_transfer_action" then
+				t.reviewTransferAction = self.kind.value:jsonEncode()
 			end
 		end
 		if self.telemetry_handler ~= nil then
@@ -26831,9 +27846,9 @@ do
 		return t
 	end
 
-	function Module218:jsonDecode()
-		-- upvalues: Module218 (copy), t (copy), PropTypesModule (copy)
-		local NewModule = Module218.new()
+	function Module228:jsonDecode()
+		-- upvalues: Module228 (copy), t (copy), PropTypesModule (copy)
+		local NewModule = Module228.new()
 		
 		if self.dismiss_dialog_action ~= nil then
 			NewModule.kind = {
@@ -28071,6 +29086,66 @@ do
 				value = t.TryOnCatalogItemAction.jsonDecode(self.tryOnCatalogItemAction)
 			}
 		end
+		if self.purchase_buy_robux_product_action ~= nil then
+			NewModule.kind = {
+				type = "purchase_buy_robux_product_action",
+				value = t.PurchaseBuyRobuxProductAction.jsonDecode(self.purchase_buy_robux_product_action)
+			}
+		end
+		if self.purchaseBuyRobuxProductAction ~= nil then
+			NewModule.kind = {
+				type = "purchase_buy_robux_product_action",
+				value = t.PurchaseBuyRobuxProductAction.jsonDecode(self.purchaseBuyRobuxProductAction)
+			}
+		end
+		if self.purchase_buy_robux_subscription_action ~= nil then
+			NewModule.kind = {
+				type = "purchase_buy_robux_subscription_action",
+				value = t.PurchaseBuyRobuxSubscriptionAction.jsonDecode(self.purchase_buy_robux_subscription_action)
+			}
+		end
+		if self.purchaseBuyRobuxSubscriptionAction ~= nil then
+			NewModule.kind = {
+				type = "purchase_buy_robux_subscription_action",
+				value = t.PurchaseBuyRobuxSubscriptionAction.jsonDecode(self.purchaseBuyRobuxSubscriptionAction)
+			}
+		end
+		if self.open_roblox_plus_sheet_action ~= nil then
+			NewModule.kind = {
+				type = "open_roblox_plus_sheet_action",
+				value = t.OpenRobloxPlusSheetAction.jsonDecode(self.open_roblox_plus_sheet_action)
+			}
+		end
+		if self.openRobloxPlusSheetAction ~= nil then
+			NewModule.kind = {
+				type = "open_roblox_plus_sheet_action",
+				value = t.OpenRobloxPlusSheetAction.jsonDecode(self.openRobloxPlusSheetAction)
+			}
+		end
+		if self.open_send_robux_action ~= nil then
+			NewModule.kind = {
+				type = "open_send_robux_action",
+				value = t.OpenSendRobuxAction.jsonDecode(self.open_send_robux_action)
+			}
+		end
+		if self.openSendRobuxAction ~= nil then
+			NewModule.kind = {
+				type = "open_send_robux_action",
+				value = t.OpenSendRobuxAction.jsonDecode(self.openSendRobuxAction)
+			}
+		end
+		if self.review_transfer_action ~= nil then
+			NewModule.kind = {
+				type = "review_transfer_action",
+				value = t.ReviewTransferAction.jsonDecode(self.review_transfer_action)
+			}
+		end
+		if self.reviewTransferAction ~= nil then
+			NewModule.kind = {
+				type = "review_transfer_action",
+				value = t.ReviewTransferAction.jsonDecode(self.reviewTransferAction)
+			}
+		end
 		if self.telemetry_handler ~= nil then
 			NewModule.telemetry_handler = PropTypesModule.StringProp.jsonDecode(self.telemetry_handler)
 		end
@@ -28098,25 +29173,23 @@ do
 		return NewModule
 	end
 
-	Module218.descriptor = {
+	Module228.descriptor = {
 		name = "Action",
 		fullName = "roblox.apppageplatform.shared.v1beta1.Action"
 	}
-	t.Action = Module218
-end
-do
+	t.Action = Module228
 	TypeRegistryModule.default:register(t.Action)
-	local Module219 = {}
-	Module219.__index = Module219
+	local Module229 = {}
+	Module229.__index = Module229
 
-	function Module219.new(p1)
-		-- upvalues: Module219 (copy)
+	function Module229.new(p1)
+		-- upvalues: Module229 (copy)
 		return (setmetatable({
 			kind = if p1 == nil or p1.kind == nil then nil else p1.kind
-		}, Module219))
+		}, Module229))
 	end
 
-	function Module219:encode()
+	function Module229:encode()
 		-- upvalues: ProtoModule (copy)
 		local Buf = buffer.create(0)
 		local Count = 0
@@ -28138,39 +29211,39 @@ do
 		return Buf1
 	end
 
-	function Module219.decode(Buf)
-		-- upvalues: Module219 (copy), ProtoModule (copy), t (copy)
-		local NewModule = Module219.new()
-		local v148 = 0
-		while v148 < buffer.len(Buf) do
+	function Module229.decode(Buf)
+		-- upvalues: Module229 (copy), ProtoModule (copy), t (copy)
+		local NewModule = Module229.new()
+		local v155 = 0
+		while v155 < buffer.len(Buf) do
 			local Tag, Tag2
-			Tag, Tag2, v5580 = ProtoModule.readTag(Buf, v148)
+			Tag, Tag2, v5786 = ProtoModule.readTag(Buf, v155)
 			
 			if Tag2 == ProtoModule.wireTypes.varint then
 				local _
-				_, v5580 = ProtoModule.readVarInt(Buf, v148)
+				_, v5786 = ProtoModule.readVarInt(Buf, v155)
 			elseif Tag2 == ProtoModule.wireTypes.lengthDelimited then
 				if Tag == 1 then
 					local Buffer1
-					Buffer1, v5580 = ProtoModule.readBuffer(Buf, v148)
+					Buffer1, v5786 = ProtoModule.readBuffer(Buf, v155)
 					NewModule.kind = { type = "value", value = t.Action.decode(Buffer1) }
 				elseif Tag == 2 then
 					local Buffer2
-					Buffer2, v5580 = ProtoModule.readBuffer(Buf, v148)
+					Buffer2, v5786 = ProtoModule.readBuffer(Buf, v155)
 					NewModule.kind = {
 						type = "conditional",
 						value = t.ActionProp_ConditionalOptions.decode(Buffer2)
 					}
 				else
-					local VarInt, VarInt2 = ProtoModule.readVarInt(Buf, v148)
-					v148 = VarInt2 + VarInt
+					local VarInt, VarInt2 = ProtoModule.readVarInt(Buf, v155)
+					v155 = VarInt2 + VarInt
 				end
 			elseif Tag2 == ProtoModule.wireTypes.i32 then
 				local _
-				_, v5580 = ProtoModule.readFixed32(Buf, v148)
+				_, v5786 = ProtoModule.readFixed32(Buf, v155)
 			elseif Tag2 == ProtoModule.wireTypes.i64 then
 				local _
-				_, v5580 = ProtoModule.readFixed64(Buf, v148)
+				_, v5786 = ProtoModule.readFixed64(Buf, v155)
 			else
 				error("Unsupported wire type: " .. Tag2)
 			end
@@ -28178,7 +29251,7 @@ do
 		return NewModule
 	end
 
-	function Module219:jsonEncode()
+	function Module229:jsonEncode()
 		local t = {}
 		
 		if self.kind ~= nil then
@@ -28194,9 +29267,9 @@ do
 		return t
 	end
 
-	function Module219:jsonDecode()
-		-- upvalues: Module219 (copy), t (copy)
-		local NewModule = Module219.new()
+	function Module229:jsonDecode()
+		-- upvalues: Module229 (copy), t (copy)
+		local NewModule = Module229.new()
 		
 		if self.value ~= nil then
 			NewModule.kind = { type = "value", value = t.Action.jsonDecode(self.value) }
@@ -28210,24 +29283,24 @@ do
 		return NewModule
 	end
 
-	Module219.descriptor = {
+	Module229.descriptor = {
 		name = "ActionProp",
 		fullName = "roblox.apppageplatform.shared.v1beta1.ActionProp"
 	}
-	t.ActionProp = Module219
+	t.ActionProp = Module229
 	TypeRegistryModule.default:register(t.ActionProp)
-	local Module220 = {}
-	Module220.__index = Module220
+	local Module230 = {}
+	Module230.__index = Module230
 
-	function Module220.new(p1)
-		-- upvalues: Module220 (copy)
+	function Module230.new(p1)
+		-- upvalues: Module230 (copy)
 		return (setmetatable({
 			condition = if p1 == nil or p1.condition == nil then nil else p1.condition,
 			kind = if p1 == nil or p1.kind == nil then nil else p1.kind
-		}, Module220))
+		}, Module230))
 	end
 
-	function Module220:encode()
+	function Module230:encode()
 		-- upvalues: ProtoModule (copy)
 		local Buf = buffer.create(0)
 		local Count = 0
@@ -28248,36 +29321,36 @@ do
 		return Buf1
 	end
 
-	function Module220.decode(Buf)
-		-- upvalues: Module220 (copy), ProtoModule (copy), PropConditionModule (copy), t (copy)
-		local NewModule = Module220.new()
-		local v149 = 0
-		while v149 < buffer.len(Buf) do
+	function Module230.decode(Buf)
+		-- upvalues: Module230 (copy), ProtoModule (copy), PropConditionModule (copy), t (copy)
+		local NewModule = Module230.new()
+		local v156 = 0
+		while v156 < buffer.len(Buf) do
 			local Tag, Tag2
-			Tag, Tag2, v5601 = ProtoModule.readTag(Buf, v149)
+			Tag, Tag2, v5807 = ProtoModule.readTag(Buf, v156)
 			
 			if Tag2 == ProtoModule.wireTypes.varint then
 				local _
-				_, v5601 = ProtoModule.readVarInt(Buf, v149)
+				_, v5807 = ProtoModule.readVarInt(Buf, v156)
 			elseif Tag2 == ProtoModule.wireTypes.lengthDelimited then
 				if Tag == 1 then
 					local Buffer1
-					Buffer1, v5601 = ProtoModule.readBuffer(Buf, v149)
+					Buffer1, v5807 = ProtoModule.readBuffer(Buf, v156)
 					NewModule.condition = PropConditionModule.PropCondition.decode(Buffer1)
 				elseif Tag == 3 then
 					local Buffer2
-					Buffer2, v5601 = ProtoModule.readBuffer(Buf, v149)
+					Buffer2, v5807 = ProtoModule.readBuffer(Buf, v156)
 					NewModule.kind = { type = "value", value = t.Action.decode(Buffer2) }
 				else
-					local VarInt, VarInt2 = ProtoModule.readVarInt(Buf, v149)
-					v149 = VarInt2 + VarInt
+					local VarInt, VarInt2 = ProtoModule.readVarInt(Buf, v156)
+					v156 = VarInt2 + VarInt
 				end
 			elseif Tag2 == ProtoModule.wireTypes.i32 then
 				local _
-				_, v5601 = ProtoModule.readFixed32(Buf, v149)
+				_, v5807 = ProtoModule.readFixed32(Buf, v156)
 			elseif Tag2 == ProtoModule.wireTypes.i64 then
 				local _
-				_, v5601 = ProtoModule.readFixed64(Buf, v149)
+				_, v5807 = ProtoModule.readFixed64(Buf, v156)
 			else
 				error("Unsupported wire type: " .. Tag2)
 			end
@@ -28285,7 +29358,7 @@ do
 		return NewModule
 	end
 
-	function Module220:jsonEncode()
+	function Module230:jsonEncode()
 		local t = {}
 		
 		if self.condition ~= nil then
@@ -28297,9 +29370,9 @@ do
 		return t
 	end
 
-	function Module220:jsonDecode()
-		-- upvalues: Module220 (copy), PropConditionModule (copy), t (copy)
-		local NewModule = Module220.new()
+	function Module230:jsonDecode()
+		-- upvalues: Module230 (copy), PropConditionModule (copy), t (copy)
+		local NewModule = Module230.new()
 		
 		if self.condition ~= nil then
 			NewModule.condition = PropConditionModule.PropCondition.jsonDecode(self.condition)
@@ -28310,23 +29383,25 @@ do
 		return NewModule
 	end
 
-	Module220.descriptor = {
+	Module230.descriptor = {
 		name = "ActionProp_ConditionalOption",
 		fullName = "roblox.apppageplatform.shared.v1beta1.ConditionalOption"
 	}
-	t.ActionProp_ConditionalOption = Module220
+	t.ActionProp_ConditionalOption = Module230
+end
+do
 	TypeRegistryModule.default:register(t.ActionProp_ConditionalOption)
-	local Module221 = {}
-	Module221.__index = Module221
+	local Module231 = {}
+	Module231.__index = Module231
 
-	function Module221.new(p1)
-		-- upvalues: Module221 (copy)
+	function Module231.new(p1)
+		-- upvalues: Module231 (copy)
 		return (setmetatable({
 			options = if p1 == nil or p1.options == nil then {} else p1.options
-		}, Module221))
+		}, Module231))
 	end
 
-	function Module221:encode()
+	function Module231:encode()
 		-- upvalues: ProtoModule (copy)
 		local Buf = buffer.create(0)
 		local Count = 0
@@ -28344,32 +29419,32 @@ do
 		return Buf1
 	end
 
-	function Module221.decode(Buf)
-		-- upvalues: Module221 (copy), ProtoModule (copy), t (copy)
-		local NewModule = Module221.new()
-		local v150 = 0
-		while v150 < buffer.len(Buf) do
+	function Module231.decode(Buf)
+		-- upvalues: Module231 (copy), ProtoModule (copy), t (copy)
+		local NewModule = Module231.new()
+		local v156 = 0
+		while v156 < buffer.len(Buf) do
 			local Tag, Tag2
-			Tag, Tag2, v5619 = ProtoModule.readTag(Buf, v150)
+			Tag, Tag2, v5825 = ProtoModule.readTag(Buf, v156)
 			
 			if Tag2 == ProtoModule.wireTypes.varint then
 				local _
-				_, v5619 = ProtoModule.readVarInt(Buf, v150)
+				_, v5825 = ProtoModule.readVarInt(Buf, v156)
 			elseif Tag2 == ProtoModule.wireTypes.lengthDelimited then
 				if Tag == 1 then
 					local Buffer1
-					Buffer1, v5619 = ProtoModule.readBuffer(Buf, v150)
+					Buffer1, v5825 = ProtoModule.readBuffer(Buf, v156)
 					table.insert(NewModule.options, t.ActionProp_ConditionalOption.decode(Buffer1))
 				else
-					local VarInt, VarInt2 = ProtoModule.readVarInt(Buf, v150)
-					v150 = VarInt2 + VarInt
+					local VarInt, VarInt2 = ProtoModule.readVarInt(Buf, v156)
+					v156 = VarInt2 + VarInt
 				end
 			elseif Tag2 == ProtoModule.wireTypes.i32 then
 				local _
-				_, v5619 = ProtoModule.readFixed32(Buf, v150)
+				_, v5825 = ProtoModule.readFixed32(Buf, v156)
 			elseif Tag2 == ProtoModule.wireTypes.i64 then
 				local _
-				_, v5619 = ProtoModule.readFixed64(Buf, v150)
+				_, v5825 = ProtoModule.readFixed64(Buf, v156)
 			else
 				error("Unsupported wire type: " .. Tag2)
 			end
@@ -28377,7 +29452,7 @@ do
 		return NewModule
 	end
 
-	function Module221:jsonEncode()
+	function Module231:jsonEncode()
 		local t = {}
 		
 		if self.options ~= nil and #self.options > 0 then
@@ -28391,9 +29466,9 @@ do
 		return t
 	end
 
-	function Module221:jsonDecode()
-		-- upvalues: Module221 (copy), t (copy)
-		local NewModule = Module221.new()
+	function Module231:jsonDecode()
+		-- upvalues: Module231 (copy), t (copy)
+		local NewModule = Module231.new()
 		
 		if self.options ~= nil then
 			local Options = {}
@@ -28406,25 +29481,23 @@ do
 		return NewModule
 	end
 
-	Module221.descriptor = {
+	Module231.descriptor = {
 		name = "ActionProp_ConditionalOptions",
 		fullName = "roblox.apppageplatform.shared.v1beta1.ConditionalOptions"
 	}
-	t.ActionProp_ConditionalOptions = Module221
-end
-do
+	t.ActionProp_ConditionalOptions = Module231
 	TypeRegistryModule.default:register(t.ActionProp_ConditionalOptions)
-	local Module222 = {}
-	Module222.__index = Module222
+	local Module232 = {}
+	Module232.__index = Module232
 
-	function Module222.new(p1)
-		-- upvalues: Module222 (copy)
+	function Module232.new(p1)
+		-- upvalues: Module232 (copy)
 		return (setmetatable({
 			kind = if p1 == nil or p1.kind == nil then nil else p1.kind
-		}, Module222))
+		}, Module232))
 	end
 
-	function Module222:encode()
+	function Module232:encode()
 		-- upvalues: ProtoModule (copy)
 		local Buf = buffer.create(0)
 		local Count = 0
@@ -28449,46 +29522,46 @@ do
 		return Buf1
 	end
 
-	function Module222.decode(Buf)
-		-- upvalues: Module222 (copy), ProtoModule (copy), t (copy)
-		local NewModule = Module222.new()
-		local v151 = 0
-		while v151 < buffer.len(Buf) do
+	function Module232.decode(Buf)
+		-- upvalues: Module232 (copy), ProtoModule (copy), t (copy)
+		local NewModule = Module232.new()
+		local v157 = 0
+		while v157 < buffer.len(Buf) do
 			local Tag, Tag2
-			Tag, Tag2, v5643 = ProtoModule.readTag(Buf, v151)
+			Tag, Tag2, v5849 = ProtoModule.readTag(Buf, v157)
 			
 			if Tag2 == ProtoModule.wireTypes.varint then
 				local _
-				_, v5643 = ProtoModule.readVarInt(Buf, v151)
+				_, v5849 = ProtoModule.readVarInt(Buf, v157)
 			elseif Tag2 == ProtoModule.wireTypes.lengthDelimited then
 				if Tag == 1 then
 					local Buffer1
-					Buffer1, v5643 = ProtoModule.readBuffer(Buf, v151)
+					Buffer1, v5849 = ProtoModule.readBuffer(Buf, v157)
 					NewModule.kind = {
 						type = "literal",
 						value = t.FocusNavActionsProp_FocusNavData.decode(Buffer1)
 					}
 				elseif Tag == 2 then
 					local Buffer2
-					Buffer2, v5643 = ProtoModule.readBuffer(Buf, v151)
+					Buffer2, v5849 = ProtoModule.readBuffer(Buf, v157)
 					NewModule.kind = {
 						type = "conditional",
 						value = t.FocusNavActionsProp_ConditionalOptions.decode(Buffer2)
 					}
 				elseif Tag == 3 then
 					local Buffer3
-					Buffer3, v5643 = ProtoModule.readBuffer(Buf, v151)
+					Buffer3, v5849 = ProtoModule.readBuffer(Buf, v157)
 					NewModule.kind = { type = "binding_path", value = buffer.tostring(Buffer3) }
 				else
-					local VarInt, VarInt2 = ProtoModule.readVarInt(Buf, v151)
-					v151 = VarInt2 + VarInt
+					local VarInt, VarInt2 = ProtoModule.readVarInt(Buf, v157)
+					v157 = VarInt2 + VarInt
 				end
 			elseif Tag2 == ProtoModule.wireTypes.i32 then
 				local _
-				_, v5643 = ProtoModule.readFixed32(Buf, v151)
+				_, v5849 = ProtoModule.readFixed32(Buf, v157)
 			elseif Tag2 == ProtoModule.wireTypes.i64 then
 				local _
-				_, v5643 = ProtoModule.readFixed64(Buf, v151)
+				_, v5849 = ProtoModule.readFixed64(Buf, v157)
 			else
 				error("Unsupported wire type: " .. Tag2)
 			end
@@ -28496,7 +29569,7 @@ do
 		return NewModule
 	end
 
-	function Module222:jsonEncode()
+	function Module232:jsonEncode()
 		local t = {}
 		
 		if self.kind ~= nil then
@@ -28517,9 +29590,9 @@ do
 		return t
 	end
 
-	function Module222:jsonDecode()
-		-- upvalues: Module222 (copy), t (copy)
-		local NewModule = Module222.new()
+	function Module232:jsonDecode()
+		-- upvalues: Module232 (copy), t (copy)
+		local NewModule = Module232.new()
 		
 		if self.literal ~= nil then
 			NewModule.kind = {
@@ -28542,24 +29615,24 @@ do
 		return NewModule
 	end
 
-	Module222.descriptor = {
+	Module232.descriptor = {
 		name = "FocusNavActionsProp",
 		fullName = "roblox.apppageplatform.shared.v1beta1.FocusNavActionsProp"
 	}
-	t.FocusNavActionsProp = Module222
+	t.FocusNavActionsProp = Module232
 	TypeRegistryModule.default:register(t.FocusNavActionsProp)
-	local Module223 = {}
-	Module223.__index = Module223
+	local Module233 = {}
+	Module233.__index = Module233
 
-	function Module223.new(p1)
-		-- upvalues: Module223 (copy)
+	function Module233.new(p1)
+		-- upvalues: Module233 (copy)
 		return (setmetatable({
 			condition = if p1 == nil or p1.condition == nil then nil else p1.condition,
 			kind = if p1 == nil or p1.kind == nil then nil else p1.kind
-		}, Module223))
+		}, Module233))
 	end
 
-	function Module223:encode()
+	function Module233:encode()
 		-- upvalues: ProtoModule (copy)
 		local Buf = buffer.create(0)
 		local Count = 0
@@ -28585,43 +29658,43 @@ do
 		return Buf1
 	end
 
-	function Module223.decode(Buf)
-		-- upvalues: Module223 (copy), ProtoModule (copy), PropConditionModule (copy), t (copy)
-		local NewModule = Module223.new()
-		local v152 = 0
-		while v152 < buffer.len(Buf) do
+	function Module233.decode(Buf)
+		-- upvalues: Module233 (copy), ProtoModule (copy), PropConditionModule (copy), t (copy)
+		local NewModule = Module233.new()
+		local v158 = 0
+		while v158 < buffer.len(Buf) do
 			local Tag, Tag2
-			Tag, Tag2, v5667 = ProtoModule.readTag(Buf, v152)
+			Tag, Tag2, v5873 = ProtoModule.readTag(Buf, v158)
 			
 			if Tag2 == ProtoModule.wireTypes.varint then
 				local _
-				_, v5667 = ProtoModule.readVarInt(Buf, v152)
+				_, v5873 = ProtoModule.readVarInt(Buf, v158)
 			elseif Tag2 == ProtoModule.wireTypes.lengthDelimited then
 				if Tag == 1 then
 					local Buffer1
-					Buffer1, v5667 = ProtoModule.readBuffer(Buf, v152)
+					Buffer1, v5873 = ProtoModule.readBuffer(Buf, v158)
 					NewModule.condition = PropConditionModule.PropCondition.decode(Buffer1)
 				elseif Tag == 3 then
 					local Buffer2
-					Buffer2, v5667 = ProtoModule.readBuffer(Buf, v152)
+					Buffer2, v5873 = ProtoModule.readBuffer(Buf, v158)
 					NewModule.kind = {
 						type = "literal",
 						value = t.FocusNavActionsProp_FocusNavData.decode(Buffer2)
 					}
 				elseif Tag == 4 then
 					local Buffer3
-					Buffer3, v5667 = ProtoModule.readBuffer(Buf, v152)
+					Buffer3, v5873 = ProtoModule.readBuffer(Buf, v158)
 					NewModule.kind = { type = "binding_path", value = buffer.tostring(Buffer3) }
 				else
-					local VarInt, VarInt2 = ProtoModule.readVarInt(Buf, v152)
-					v152 = VarInt2 + VarInt
+					local VarInt, VarInt2 = ProtoModule.readVarInt(Buf, v158)
+					v158 = VarInt2 + VarInt
 				end
 			elseif Tag2 == ProtoModule.wireTypes.i32 then
 				local _
-				_, v5667 = ProtoModule.readFixed32(Buf, v152)
+				_, v5873 = ProtoModule.readFixed32(Buf, v158)
 			elseif Tag2 == ProtoModule.wireTypes.i64 then
 				local _
-				_, v5667 = ProtoModule.readFixed64(Buf, v152)
+				_, v5873 = ProtoModule.readFixed64(Buf, v158)
 			else
 				error("Unsupported wire type: " .. Tag2)
 			end
@@ -28629,7 +29702,7 @@ do
 		return NewModule
 	end
 
-	function Module223:jsonEncode()
+	function Module233:jsonEncode()
 		local t = {}
 		
 		if self.condition ~= nil then
@@ -28648,9 +29721,9 @@ do
 		return t
 	end
 
-	function Module223:jsonDecode()
-		-- upvalues: Module223 (copy), PropConditionModule (copy), t (copy)
-		local NewModule = Module223.new()
+	function Module233:jsonDecode()
+		-- upvalues: Module233 (copy), PropConditionModule (copy), t (copy)
+		local NewModule = Module233.new()
 		
 		if self.condition ~= nil then
 			NewModule.condition = PropConditionModule.PropCondition.jsonDecode(self.condition)
@@ -28670,23 +29743,25 @@ do
 		return NewModule
 	end
 
-	Module223.descriptor = {
+	Module233.descriptor = {
 		name = "FocusNavActionsProp_ConditionalOption",
 		fullName = "roblox.apppageplatform.shared.v1beta1.ConditionalOption"
 	}
-	t.FocusNavActionsProp_ConditionalOption = Module223
+	t.FocusNavActionsProp_ConditionalOption = Module233
+end
+do
 	TypeRegistryModule.default:register(t.FocusNavActionsProp_ConditionalOption)
-	local Module224 = {}
-	Module224.__index = Module224
+	local Module234 = {}
+	Module234.__index = Module234
 
-	function Module224.new(p1)
-		-- upvalues: Module224 (copy)
+	function Module234.new(p1)
+		-- upvalues: Module234 (copy)
 		return (setmetatable({
 			options = if p1 == nil or p1.options == nil then {} else p1.options
-		}, Module224))
+		}, Module234))
 	end
 
-	function Module224:encode()
+	function Module234:encode()
 		-- upvalues: ProtoModule (copy)
 		local Buf = buffer.create(0)
 		local Count = 0
@@ -28704,32 +29779,32 @@ do
 		return Buf1
 	end
 
-	function Module224.decode(Buf)
-		-- upvalues: Module224 (copy), ProtoModule (copy), t (copy)
-		local NewModule = Module224.new()
-		local v153 = 0
-		while v153 < buffer.len(Buf) do
+	function Module234.decode(Buf)
+		-- upvalues: Module234 (copy), ProtoModule (copy), t (copy)
+		local NewModule = Module234.new()
+		local v158 = 0
+		while v158 < buffer.len(Buf) do
 			local Tag, Tag2
-			Tag, Tag2, v5686 = ProtoModule.readTag(Buf, v153)
+			Tag, Tag2, v5892 = ProtoModule.readTag(Buf, v158)
 			
 			if Tag2 == ProtoModule.wireTypes.varint then
 				local _
-				_, v5686 = ProtoModule.readVarInt(Buf, v153)
+				_, v5892 = ProtoModule.readVarInt(Buf, v158)
 			elseif Tag2 == ProtoModule.wireTypes.lengthDelimited then
 				if Tag == 1 then
 					local Buffer1
-					Buffer1, v5686 = ProtoModule.readBuffer(Buf, v153)
+					Buffer1, v5892 = ProtoModule.readBuffer(Buf, v158)
 					table.insert(NewModule.options, t.FocusNavActionsProp_ConditionalOption.decode(Buffer1))
 				else
-					local VarInt, VarInt2 = ProtoModule.readVarInt(Buf, v153)
-					v153 = VarInt2 + VarInt
+					local VarInt, VarInt2 = ProtoModule.readVarInt(Buf, v158)
+					v158 = VarInt2 + VarInt
 				end
 			elseif Tag2 == ProtoModule.wireTypes.i32 then
 				local _
-				_, v5686 = ProtoModule.readFixed32(Buf, v153)
+				_, v5892 = ProtoModule.readFixed32(Buf, v158)
 			elseif Tag2 == ProtoModule.wireTypes.i64 then
 				local _
-				_, v5686 = ProtoModule.readFixed64(Buf, v153)
+				_, v5892 = ProtoModule.readFixed64(Buf, v158)
 			else
 				error("Unsupported wire type: " .. Tag2)
 			end
@@ -28737,7 +29812,7 @@ do
 		return NewModule
 	end
 
-	function Module224:jsonEncode()
+	function Module234:jsonEncode()
 		local t = {}
 		
 		if self.options ~= nil and #self.options > 0 then
@@ -28751,9 +29826,9 @@ do
 		return t
 	end
 
-	function Module224:jsonDecode()
-		-- upvalues: Module224 (copy), t (copy)
-		local NewModule = Module224.new()
+	function Module234:jsonDecode()
+		-- upvalues: Module234 (copy), t (copy)
+		local NewModule = Module234.new()
 		
 		if self.options ~= nil then
 			local Options = {}
@@ -28766,26 +29841,24 @@ do
 		return NewModule
 	end
 
-	Module224.descriptor = {
+	Module234.descriptor = {
 		name = "FocusNavActionsProp_ConditionalOptions",
 		fullName = "roblox.apppageplatform.shared.v1beta1.ConditionalOptions"
 	}
-	t.FocusNavActionsProp_ConditionalOptions = Module224
-end
-do
+	t.FocusNavActionsProp_ConditionalOptions = Module234
 	TypeRegistryModule.default:register(t.FocusNavActionsProp_ConditionalOptions)
-	local Module225 = {}
-	Module225.__index = Module225
+	local Module235 = {}
+	Module235.__index = Module235
 
-	function Module225.new(p1)
-		-- upvalues: Module225 (copy)
+	function Module235.new(p1)
+		-- upvalues: Module235 (copy)
 		return (setmetatable({
 			keys = if p1 == nil or p1.keys == nil then {} else p1.keys,
 			events = if p1 == nil or p1.events == nil then {} else p1.events
-		}, Module225))
+		}, Module235))
 	end
 
-	function Module225:encode()
+	function Module235:encode()
 		-- upvalues: ProtoModule (copy)
 		local Buf = buffer.create(0)
 		local Count = 0
@@ -28818,40 +29891,40 @@ do
 		return Buf1
 	end
 
-	function Module225.decode(Buf)
-		-- upvalues: Module225 (copy), ProtoModule (copy), t (copy), PropTypesEngineModule (copy)
-		local NewModule = Module225.new()
-		local v154 = 0
-		while v154 < buffer.len(Buf) do
+	function Module235.decode(Buf)
+		-- upvalues: Module235 (copy), ProtoModule (copy), t (copy), PropTypesEngineModule (copy)
+		local NewModule = Module235.new()
+		local v159 = 0
+		while v159 < buffer.len(Buf) do
 			local Tag, Tag2
-			Tag, Tag2, v5724 = ProtoModule.readTag(Buf, v154)
+			Tag, Tag2, v5930 = ProtoModule.readTag(Buf, v159)
 			
 			if Tag2 == ProtoModule.wireTypes.varint then
 				local _
-				_, v5724 = ProtoModule.readVarInt(Buf, v154)
+				_, v5930 = ProtoModule.readVarInt(Buf, v159)
 			elseif Tag2 == ProtoModule.wireTypes.lengthDelimited then
 				if Tag == 3 then
 					local Buffer1
-					Buffer1, v5724 = ProtoModule.readBuffer(Buf, v154)
+					Buffer1, v5930 = ProtoModule.readBuffer(Buf, v159)
 					local DecodeResult = t.FocusNavActionsProp_FocusNavData_KeysEntry.decode(Buffer1)
 					local NewResult = PropTypesEngineModule.KeyCodeProp.new()
 					NewModule.keys[DecodeResult.key or ""] = DecodeResult.value or NewResult
 				elseif Tag == 4 then
 					local Buffer2
-					Buffer2, v5724 = ProtoModule.readBuffer(Buf, v154)
+					Buffer2, v5930 = ProtoModule.readBuffer(Buf, v159)
 					local DecodeResult = t.FocusNavActionsProp_FocusNavData_EventsEntry.decode(Buffer2)
 					local NewResult = t.ActionProp.new()
 					NewModule.events[DecodeResult.key or ""] = DecodeResult.value or NewResult
 				else
-					local VarInt, VarInt2 = ProtoModule.readVarInt(Buf, v154)
-					v154 = VarInt2 + VarInt
+					local VarInt, VarInt2 = ProtoModule.readVarInt(Buf, v159)
+					v159 = VarInt2 + VarInt
 				end
 			elseif Tag2 == ProtoModule.wireTypes.i32 then
 				local _
-				_, v5724 = ProtoModule.readFixed32(Buf, v154)
+				_, v5930 = ProtoModule.readFixed32(Buf, v159)
 			elseif Tag2 == ProtoModule.wireTypes.i64 then
 				local _
-				_, v5724 = ProtoModule.readFixed64(Buf, v154)
+				_, v5930 = ProtoModule.readFixed64(Buf, v159)
 			else
 				error("Unsupported wire type: " .. Tag2)
 			end
@@ -28859,7 +29932,7 @@ do
 		return NewModule
 	end
 
-	function Module225:jsonEncode()
+	function Module235:jsonEncode()
 		local t = {}
 		
 		if self.keys ~= nil and next(self.keys) ~= nil then
@@ -28881,9 +29954,9 @@ do
 		return t
 	end
 
-	function Module225:jsonDecode()
-		-- upvalues: Module225 (copy), PropTypesEngineModule (copy), t (copy)
-		local NewModule = Module225.new()
+	function Module235:jsonDecode()
+		-- upvalues: Module235 (copy), PropTypesEngineModule (copy), t (copy)
+		local NewModule = Module235.new()
 		
 		if self.keys ~= nil then
 			local Keys = {}
@@ -28904,24 +29977,24 @@ do
 		return NewModule
 	end
 
-	Module225.descriptor = {
+	Module235.descriptor = {
 		name = "FocusNavActionsProp_FocusNavData",
 		fullName = "roblox.apppageplatform.shared.v1beta1.FocusNavData"
 	}
-	t.FocusNavActionsProp_FocusNavData = Module225
+	t.FocusNavActionsProp_FocusNavData = Module235
 	TypeRegistryModule.default:register(t.FocusNavActionsProp_FocusNavData)
-	local Module226 = {}
-	Module226.__index = Module226
+	local Module236 = {}
+	Module236.__index = Module236
 
-	function Module226.new(p1)
-		-- upvalues: Module226 (copy)
+	function Module236.new(p1)
+		-- upvalues: Module236 (copy)
 		return (setmetatable({
 			key = if p1 == nil or p1.key == nil then "" else p1.key,
 			value = if p1 == nil or p1.value == nil then nil else p1.value
-		}, Module226))
+		}, Module236))
 	end
 
-	function Module226:encode()
+	function Module236:encode()
 		-- upvalues: ProtoModule (copy)
 		local Buf = buffer.create(0)
 		local Count = 0
@@ -28941,36 +30014,36 @@ do
 		return Buf1
 	end
 
-	function Module226.decode(Buf)
-		-- upvalues: Module226 (copy), ProtoModule (copy), PropTypesEngineModule (copy)
-		local NewModule = Module226.new()
-		local v155 = 0
-		while v155 < buffer.len(Buf) do
+	function Module236.decode(Buf)
+		-- upvalues: Module236 (copy), ProtoModule (copy), PropTypesEngineModule (copy)
+		local NewModule = Module236.new()
+		local v160 = 0
+		while v160 < buffer.len(Buf) do
 			local Tag, Tag2
-			Tag, Tag2, v5752 = ProtoModule.readTag(Buf, v155)
+			Tag, Tag2, v5958 = ProtoModule.readTag(Buf, v160)
 			
 			if Tag2 == ProtoModule.wireTypes.varint then
 				local _
-				_, v5752 = ProtoModule.readVarInt(Buf, v155)
+				_, v5958 = ProtoModule.readVarInt(Buf, v160)
 			elseif Tag2 == ProtoModule.wireTypes.lengthDelimited then
 				if Tag == 1 then
 					local Buffer1
-					Buffer1, v5752 = ProtoModule.readBuffer(Buf, v155)
+					Buffer1, v5958 = ProtoModule.readBuffer(Buf, v160)
 					NewModule.key = buffer.tostring(Buffer1)
 				elseif Tag == 2 then
 					local Buffer2
-					Buffer2, v5752 = ProtoModule.readBuffer(Buf, v155)
+					Buffer2, v5958 = ProtoModule.readBuffer(Buf, v160)
 					NewModule.value = PropTypesEngineModule.KeyCodeProp.decode(Buffer2)
 				else
-					local VarInt, VarInt2 = ProtoModule.readVarInt(Buf, v155)
-					v155 = VarInt2 + VarInt
+					local VarInt, VarInt2 = ProtoModule.readVarInt(Buf, v160)
+					v160 = VarInt2 + VarInt
 				end
 			elseif Tag2 == ProtoModule.wireTypes.i32 then
 				local _
-				_, v5752 = ProtoModule.readFixed32(Buf, v155)
+				_, v5958 = ProtoModule.readFixed32(Buf, v160)
 			elseif Tag2 == ProtoModule.wireTypes.i64 then
 				local _
-				_, v5752 = ProtoModule.readFixed64(Buf, v155)
+				_, v5958 = ProtoModule.readFixed64(Buf, v160)
 			else
 				error("Unsupported wire type: " .. Tag2)
 			end
@@ -28978,7 +30051,7 @@ do
 		return NewModule
 	end
 
-	function Module226:jsonEncode()
+	function Module236:jsonEncode()
 		local t = {}
 		
 		if self.key ~= nil and self.key ~= "" then
@@ -28990,9 +30063,9 @@ do
 		return t
 	end
 
-	function Module226:jsonDecode()
-		-- upvalues: Module226 (copy), PropTypesEngineModule (copy)
-		local NewModule = Module226.new()
+	function Module236:jsonDecode()
+		-- upvalues: Module236 (copy), PropTypesEngineModule (copy)
+		local NewModule = Module236.new()
 		
 		if self.key ~= nil then
 			NewModule.key = self.key
@@ -29003,121 +30076,121 @@ do
 		return NewModule
 	end
 
-	Module226.descriptor = {
+	Module236.descriptor = {
 		name = "FocusNavActionsProp_FocusNavData_KeysEntry",
 		fullName = "roblox.apppageplatform.shared.v1beta1.KeysEntry"
 	}
-	t.FocusNavActionsProp_FocusNavData_KeysEntry = Module226
-	TypeRegistryModule.default:register(t.FocusNavActionsProp_FocusNavData_KeysEntry)
-	local Module227 = {}
-	Module227.__index = Module227
-
-	function Module227.new(p1)
-		-- upvalues: Module227 (copy)
-		return (setmetatable({
-			key = if p1 == nil or p1.key == nil then "" else p1.key,
-			value = if p1 == nil or p1.value == nil then nil else p1.value
-		}, Module227))
-	end
-
-	function Module227:encode()
-		-- upvalues: ProtoModule (copy)
-		local Buf = buffer.create(0)
-		local Count = 0
-		
-		if self.key ~= nil and self.key ~= "" then
-			local WriteTagResult, WriteTagResult2 = ProtoModule.writeTag(Buf, Count, 1, ProtoModule.wireTypes.lengthDelimited)
-			Buf, Count = ProtoModule.writeString(WriteTagResult, WriteTagResult2, self.key)
-		end
-		if self.value ~= nil then
-			local EncodeResult = self.value:encode()
-			local WriteTagResult1, WriteTagResult2_1 = ProtoModule.writeTag(Buf, Count, 2, ProtoModule.wireTypes.lengthDelimited)
-			Buf, Count = ProtoModule.writeBuffer(WriteTagResult1, WriteTagResult2_1, EncodeResult, buffer.len(EncodeResult))
-		end
-		local Buf1 = buffer.create(Count)
-		buffer.copy(Buf1, 0, Buf, 0, Count)
-		
-		return Buf1
-	end
-
-	function Module227.decode(Buf)
-		-- upvalues: Module227 (copy), ProtoModule (copy), t (copy)
-		local NewModule = Module227.new()
-		local v156 = 0
-		while v156 < buffer.len(Buf) do
-			local Tag, Tag2
-			Tag, Tag2, v5772 = ProtoModule.readTag(Buf, v156)
-			
-			if Tag2 == ProtoModule.wireTypes.varint then
-				local _
-				_, v5772 = ProtoModule.readVarInt(Buf, v156)
-			elseif Tag2 == ProtoModule.wireTypes.lengthDelimited then
-				if Tag == 1 then
-					local Buffer1
-					Buffer1, v5772 = ProtoModule.readBuffer(Buf, v156)
-					NewModule.key = buffer.tostring(Buffer1)
-				elseif Tag == 2 then
-					local Buffer2
-					Buffer2, v5772 = ProtoModule.readBuffer(Buf, v156)
-					NewModule.value = t.ActionProp.decode(Buffer2)
-				else
-					local VarInt, VarInt2 = ProtoModule.readVarInt(Buf, v156)
-					v156 = VarInt2 + VarInt
-				end
-			elseif Tag2 == ProtoModule.wireTypes.i32 then
-				local _
-				_, v5772 = ProtoModule.readFixed32(Buf, v156)
-			elseif Tag2 == ProtoModule.wireTypes.i64 then
-				local _
-				_, v5772 = ProtoModule.readFixed64(Buf, v156)
-			else
-				error("Unsupported wire type: " .. Tag2)
-			end
-		end
-		return NewModule
-	end
-
-	function Module227:jsonEncode()
-		local t = {}
-		
-		if self.key ~= nil and self.key ~= "" then
-			t.key = self.key
-		end
-		if self.value ~= nil then
-			t.value = self.value:jsonEncode()
-		end
-		return t
-	end
-
-	function Module227:jsonDecode()
-		-- upvalues: Module227 (copy), t (copy)
-		local NewModule = Module227.new()
-		
-		if self.key ~= nil then
-			NewModule.key = self.key
-		end
-		if self.value ~= nil then
-			NewModule.value = t.ActionProp.jsonDecode(self.value)
-		end
-		return NewModule
-	end
-
-	Module227.descriptor = {
-		name = "FocusNavActionsProp_FocusNavData_EventsEntry",
-		fullName = "roblox.apppageplatform.shared.v1beta1.EventsEntry"
-	}
-	t.FocusNavActionsProp_FocusNavData_EventsEntry = Module227
+	t.FocusNavActionsProp_FocusNavData_KeysEntry = Module236
 end
+TypeRegistryModule.default:register(t.FocusNavActionsProp_FocusNavData_KeysEntry)
+local Module237 = {}
+Module237.__index = Module237
+
+function Module237.new(p1)
+	-- upvalues: Module237 (copy)
+	return (setmetatable({
+		key = if p1 == nil or p1.key == nil then "" else p1.key,
+		value = if p1 == nil or p1.value == nil then nil else p1.value
+	}, Module237))
+end
+
+function Module237:encode()
+	-- upvalues: ProtoModule (copy)
+	local Buf = buffer.create(0)
+	local Count = 0
+	
+	if self.key ~= nil and self.key ~= "" then
+		local WriteTagResult, WriteTagResult2 = ProtoModule.writeTag(Buf, Count, 1, ProtoModule.wireTypes.lengthDelimited)
+		Buf, Count = ProtoModule.writeString(WriteTagResult, WriteTagResult2, self.key)
+	end
+	if self.value ~= nil then
+		local EncodeResult = self.value:encode()
+		local WriteTagResult1, WriteTagResult2_1 = ProtoModule.writeTag(Buf, Count, 2, ProtoModule.wireTypes.lengthDelimited)
+		Buf, Count = ProtoModule.writeBuffer(WriteTagResult1, WriteTagResult2_1, EncodeResult, buffer.len(EncodeResult))
+	end
+	local Buf1 = buffer.create(Count)
+	buffer.copy(Buf1, 0, Buf, 0, Count)
+	
+	return Buf1
+end
+
+function Module237.decode(Buf)
+	-- upvalues: Module237 (copy), ProtoModule (copy), t (copy)
+	local NewModule = Module237.new()
+	local v160 = 0
+	while v160 < buffer.len(Buf) do
+		local Tag, Tag2
+		Tag, Tag2, v5978 = ProtoModule.readTag(Buf, v160)
+		
+		if Tag2 == ProtoModule.wireTypes.varint then
+			local _
+			_, v5978 = ProtoModule.readVarInt(Buf, v160)
+		elseif Tag2 == ProtoModule.wireTypes.lengthDelimited then
+			if Tag == 1 then
+				local Buffer1
+				Buffer1, v5978 = ProtoModule.readBuffer(Buf, v160)
+				NewModule.key = buffer.tostring(Buffer1)
+			elseif Tag == 2 then
+				local Buffer2
+				Buffer2, v5978 = ProtoModule.readBuffer(Buf, v160)
+				NewModule.value = t.ActionProp.decode(Buffer2)
+			else
+				local VarInt, VarInt2 = ProtoModule.readVarInt(Buf, v160)
+				v160 = VarInt2 + VarInt
+			end
+		elseif Tag2 == ProtoModule.wireTypes.i32 then
+			local _
+			_, v5978 = ProtoModule.readFixed32(Buf, v160)
+		elseif Tag2 == ProtoModule.wireTypes.i64 then
+			local _
+			_, v5978 = ProtoModule.readFixed64(Buf, v160)
+		else
+			error("Unsupported wire type: " .. Tag2)
+		end
+	end
+	return NewModule
+end
+
+function Module237:jsonEncode()
+	local t = {}
+	
+	if self.key ~= nil and self.key ~= "" then
+		t.key = self.key
+	end
+	if self.value ~= nil then
+		t.value = self.value:jsonEncode()
+	end
+	return t
+end
+
+function Module237:jsonDecode()
+	-- upvalues: Module237 (copy), t (copy)
+	local NewModule = Module237.new()
+	
+	if self.key ~= nil then
+		NewModule.key = self.key
+	end
+	if self.value ~= nil then
+		NewModule.value = t.ActionProp.jsonDecode(self.value)
+	end
+	return NewModule
+end
+
+Module237.descriptor = {
+	name = "FocusNavActionsProp_FocusNavData_EventsEntry",
+	fullName = "roblox.apppageplatform.shared.v1beta1.EventsEntry"
+}
+t.FocusNavActionsProp_FocusNavData_EventsEntry = Module237
 TypeRegistryModule.default:register(t.FocusNavActionsProp_FocusNavData_EventsEntry)
 t.ActionType = {
 	fromNumber = function(p1)
-		return if p1 == 0 then "ACTION_TYPE_INVALID" elseif p1 == 1 then "ACTION_TYPE_DISMISS_DIALOG" elseif p1 == 2 then "ACTION_TYPE_LINK" elseif p1 == 3 then "ACTION_TYPE_OPEN_GAME_DETAILS" elseif p1 == 4 then "ACTION_TYPE_OPEN_JOIN_FRIENDS" elseif p1 == 5 then "ACTION_TYPE_OPEN_MARKETPLACE_TRY_ON" elseif p1 == 6 then "ACTION_TYPE_OPEN_SEE_ALL" elseif p1 == 7 then "ACTION_TYPE_OPEN_SPONSORED_TOOLTIP" elseif p1 == 8 then "ACTION_TYPE_PLAY_BUTTON_CLICK" elseif p1 == 9 then "ACTION_TYPE_UPDATE_USER_SETTINGS" elseif p1 == 10 then "ACTION_TYPE_OPEN_TOOLTIP" elseif p1 == 11 then "ACTION_TYPE_OPEN_BADGE_DETAILS" elseif p1 == 12 then "ACTION_TYPE_LOAD_MORE_FROM_API" elseif p1 == 13 then "ACTION_TYPE_SHARE" elseif p1 == 14 then "ACTION_TYPE_OPEN_ABUSE_REPORT" elseif p1 == 15 then "ACTION_TYPE_REMOVE_BADGE_FROM_INVENTORY" elseif p1 == 16 then "ACTION_TYPE_OPEN_PROFILE" elseif p1 == 17 then "ACTION_TYPE_OPEN_FACIAL_AGE_ESTIMATION" elseif p1 == 18 then "ACTION_TYPE_OPEN_ADD_CONNECTIONS_PAGE" elseif p1 == 19 then "ACTION_TYPE_OPEN_MARKETPLACE" elseif p1 == 20 then "ACTION_TYPE_HIDE_PROFILE_COMPLETION" elseif p1 == 21 then "ACTION_TYPE_SELECT_MARKETPLACE_CATALOG_CATEGORY" elseif p1 == 22 then "ACTION_TYPE_SELECT_MARKETPLACE_CATALOG_SUBCATEGORY" elseif p1 == 23 then "ACTION_TYPE_OPEN_MARKETPLACE_CATALOG_SEE_ALL" elseif p1 == 24 then "ACTION_TYPE_CLOSE_MARKETPLACE_CATEGORY_TOOLTIP" elseif p1 == 25 then "ACTION_TYPE_RESIZE_MARKETPLACE_CATALOG" elseif p1 == 26 then "ACTION_TYPE_OPEN_MARKETPLACE_CATALOG_FILTERS" elseif p1 == 27 then "ACTION_TYPE_OPEN_SOCIAL_LINK" elseif p1 == 28 then "ACTION_TYPE_OPEN_CHARTS_SORT_DETAIL" elseif p1 == 29 then "ACTION_TYPE_OPEN_SONG_DETAIL" elseif p1 == 30 then "ACTION_TYPE_REFRESH_FROM_API" elseif p1 == 31 then "ACTION_TYPE_RSVP_TO_EVENT" elseif p1 == 32 then "ACTION_TYPE_APPLY_CHARTS_FILTER" elseif p1 == 33 then "ACTION_TYPE_ANALYTICS_EVENT" elseif p1 == 34 then "ACTION_TYPE_CUSTOM_ANALYTICS_EVENT" elseif p1 == 35 then "ACTION_TYPE_OPEN_GAME_INVITE" elseif p1 == 36 then "ACTION_TYPE_OPEN_EVENT_DETAILS" elseif p1 == 37 then "ACTION_TYPE_LAUNCH_EXPERIENCE" elseif p1 == 38 then "ACTION_TYPE_TOGGLE_EXPERIENCE_FAVORITE" elseif p1 == 39 then "ACTION_TYPE_TOGGLE_EXPERIENCE_FOLLOW" elseif p1 == 40 then "ACTION_TYPE_TOGGLE_EXPERIENCE_VOTE" elseif p1 == 41 then "ACTION_TYPE_OPEN_PURCHASE_PROMPT" elseif p1 == 42 then "ACTION_TYPE_OPEN_SDUI_OVERLAY" elseif p1 == 43 then "ACTION_TYPE_OPEN_BADGES_SEE_ALL" elseif p1 == 44 then "ACTION_TYPE_OPEN_EXPERIENCE_STORE_SEE_ALL" elseif p1 == 45 then "ACTION_TYPE_DISMISS_GAME_FEEDBACK" elseif p1 == 46 then "ACTION_TYPE_OPEN_GAME_FEEDBACK_FORM" elseif p1 == 47 then "ACTION_TYPE_ENABLE_EVENT_NOTIFICATIONS" elseif p1 == 48 then "ACTION_TYPE_DISMISS_EVENT_NOTIFICATIONS_MODAL" elseif p1 == 49 then "ACTION_TYPE_OPEN_AMP_WIZARD" elseif p1 == 50 then "ACTION_TYPE_OPEN_SUBSCRIPTION_PURCHASE_PAGE" elseif p1 == 51 then "ACTION_TYPE_REFRESH_GAME_PASSES" elseif p1 == 52 then "ACTION_TYPE_REFRESH_PLAYABILITY" elseif p1 == 53 then "ACTION_TYPE_OPEN_SOCIAL_PROOF_USER_LIST_SHEET" elseif p1 == 54 then "ACTION_TYPE_REPORT_SURFACE_LOAD_TIME_MILESTONE" elseif p1 == 55 then "ACTION_TYPE_OPEN_SEARCH_RESULTS_TAB" elseif p1 == 56 then "ACTION_TYPE_OPEN_PHONE_UPSELL_MODAL" elseif p1 == 57 then "ACTION_TYPE_OPEN_EMAIL_UPSELL_MODAL" elseif p1 == 58 then "ACTION_TYPE_DISMISS_PROMPT" elseif p1 == 59 then "ACTION_TYPE_REQUEST_FRIENDSHIP" elseif p1 == 60 then "ACTION_TYPE_REFRESH_DEVELOPER_PRODUCTS" elseif p1 == 61 then "ACTION_TYPE_OPEN_FAE_TRIAL_UPSELL" elseif p1 == 62 then "ACTION_TYPE_REFRESH_OMNI_RECOMMENDATION_FEED_ITEM" elseif p1 == 63 then "ACTION_TYPE_AI_OVERVIEW_FEEDBACK" elseif p1 == 64 then "ACTION_TYPE_OPEN_TRUSTED_FRIENDS_UPSELL_MODAL" elseif p1 == 65 then "ACTION_TYPE_RECORD_PARTY_CHAT_CONVERSATION_UPSELL_ACKNOWLEDGEMENT" elseif p1 == 66 then "ACTION_TYPE_OPEN_SEARCH_RESULTS_WITH_QUERY" elseif p1 == 67 then "ACTION_TYPE_SELECT_MARKETPLACE_FAVORITES_CATEGORY" elseif p1 == 68 then "ACTION_TYPE_DOWNLOAD_APP" elseif p1 == 69 then "ACTION_TYPE_REFRESH_CHARTS_SORT_DETAIL" elseif p1 == 70 then "ACTION_TYPE_JOIN_COMMUNITY" elseif p1 == 71 then "ACTION_TYPE_VIEW_COMMUNITY" elseif p1 == 72 then "ACTION_TYPE_PIN_EXPERIENCE_SHORTCUT" elseif p1 == 73 then "ACTION_TYPE_SELECT_MARKETPLACE_FAVORITES_SUBCATEGORY" elseif p1 == 74 then "ACTION_TYPE_SHOW_TOAST" elseif p1 == 75 then "ACTION_TYPE_OPEN_INCOMING_TRANSFER_UPSELL" elseif p1 == 76 then "ACTION_TYPE_ACTION_SEQUENCE" elseif p1 == 77 then "ACTION_TYPE_REFRESH_FEED_ENTRY_FROM_API" elseif p1 == 78 then "ACTION_TYPE_OPEN_PROFILE_FRAMES_EDITOR" elseif p1 == 79 then "ACTION_TYPE_NAVIGATE" elseif p1 == 80 then "ACTION_TYPE_SET_GAME_TILE_NOT_INTERESTED" elseif p1 == 81 then "ACTION_TYPE_REFRESH_HOME" elseif p1 == 82 then "ACTION_TYPE_UNDO_GAME_TILE_NOT_INTERESTED" elseif p1 == 83 then "ACTION_TYPE_APPLY_DEV_STORE_SEE_ALL_CATEGORY_FILTER" elseif p1 == 84 then "ACTION_TYPE_OPEN_WHY_THIS_AD" elseif p1 == 85 then "ACTION_TYPE_REQUEST_PUSH_NOTIFICATION_PERMISSION" elseif p1 == 86 then "ACTION_TYPE_OPEN_BUILD_CREATION_CHAT" elseif p1 == 87 then "ACTION_TYPE_EXPERIMENTAL" elseif p1 == 88 then "ACTION_TYPE_OPEN_EXTERNAL_LINK" elseif p1 == 89 then "ACTION_TYPE_OPEN_CATALOG_ITEM_DETAILS" elseif p1 == 90 then "ACTION_TYPE_OPEN_ITEM_INFO_ROW_PROMPT" elseif p1 == 91 then "ACTION_TYPE_TOGGLE_CATALOG_ITEM_FAVORITE" elseif p1 == 92 then "ACTION_TYPE_PLAY_WITH_REWARD_AD" elseif p1 == 93 then "ACTION_TYPE_SET_PAGE_SCOPE_FIELD" elseif p1 == 94 then "ACTION_TYPE_SUBMIT_CUSTOM_FORM_RESPONSE" elseif p1 == 95 then "ACTION_TYPE_REFRESH_CUSTOM_FORM_RESULTS" elseif p1 == 96 then "ACTION_TYPE_OPEN_EXPERIENCE_LEADERBOARD_SEE_ALL" elseif p1 == 97 then "ACTION_TYPE_OPEN_CATALOG_ITEM_EXPERIENCES" elseif p1 == 98 then "ACTION_TYPE_OPEN_CATALOG_ITEM_CREATOR_PROFILE" elseif p1 == 99 then "ACTION_TYPE_PLAY_CATALOG_ITEM_ATTRIBUTION_EXPERIENCE" elseif p1 == 100 then "ACTION_TYPE_OPEN_CATALOG_ITEM_RESELLERS" elseif p1 == 101 then "ACTION_TYPE_PURCHASE_CATALOG_ITEM_FROM_STOCK" elseif p1 == 102 then "ACTION_TYPE_OPEN_CATALOG_ITEM_OWNERSHIP" elseif p1 == 103 then "ACTION_TYPE_TRY_ON_CATALOG_ITEM" else nil
+		return if p1 == 0 then "ACTION_TYPE_INVALID" elseif p1 == 1 then "ACTION_TYPE_DISMISS_DIALOG" elseif p1 == 2 then "ACTION_TYPE_LINK" elseif p1 == 3 then "ACTION_TYPE_OPEN_GAME_DETAILS" elseif p1 == 4 then "ACTION_TYPE_OPEN_JOIN_FRIENDS" elseif p1 == 5 then "ACTION_TYPE_OPEN_MARKETPLACE_TRY_ON" elseif p1 == 6 then "ACTION_TYPE_OPEN_SEE_ALL" elseif p1 == 7 then "ACTION_TYPE_OPEN_SPONSORED_TOOLTIP" elseif p1 == 8 then "ACTION_TYPE_PLAY_BUTTON_CLICK" elseif p1 == 9 then "ACTION_TYPE_UPDATE_USER_SETTINGS" elseif p1 == 10 then "ACTION_TYPE_OPEN_TOOLTIP" elseif p1 == 11 then "ACTION_TYPE_OPEN_BADGE_DETAILS" elseif p1 == 12 then "ACTION_TYPE_LOAD_MORE_FROM_API" elseif p1 == 13 then "ACTION_TYPE_SHARE" elseif p1 == 14 then "ACTION_TYPE_OPEN_ABUSE_REPORT" elseif p1 == 15 then "ACTION_TYPE_REMOVE_BADGE_FROM_INVENTORY" elseif p1 == 16 then "ACTION_TYPE_OPEN_PROFILE" elseif p1 == 17 then "ACTION_TYPE_OPEN_FACIAL_AGE_ESTIMATION" elseif p1 == 18 then "ACTION_TYPE_OPEN_ADD_CONNECTIONS_PAGE" elseif p1 == 19 then "ACTION_TYPE_OPEN_MARKETPLACE" elseif p1 == 20 then "ACTION_TYPE_HIDE_PROFILE_COMPLETION" elseif p1 == 21 then "ACTION_TYPE_SELECT_MARKETPLACE_CATALOG_CATEGORY" elseif p1 == 22 then "ACTION_TYPE_SELECT_MARKETPLACE_CATALOG_SUBCATEGORY" elseif p1 == 23 then "ACTION_TYPE_OPEN_MARKETPLACE_CATALOG_SEE_ALL" elseif p1 == 24 then "ACTION_TYPE_CLOSE_MARKETPLACE_CATEGORY_TOOLTIP" elseif p1 == 25 then "ACTION_TYPE_RESIZE_MARKETPLACE_CATALOG" elseif p1 == 26 then "ACTION_TYPE_OPEN_MARKETPLACE_CATALOG_FILTERS" elseif p1 == 27 then "ACTION_TYPE_OPEN_SOCIAL_LINK" elseif p1 == 28 then "ACTION_TYPE_OPEN_CHARTS_SORT_DETAIL" elseif p1 == 29 then "ACTION_TYPE_OPEN_SONG_DETAIL" elseif p1 == 30 then "ACTION_TYPE_REFRESH_FROM_API" elseif p1 == 31 then "ACTION_TYPE_RSVP_TO_EVENT" elseif p1 == 32 then "ACTION_TYPE_APPLY_CHARTS_FILTER" elseif p1 == 33 then "ACTION_TYPE_ANALYTICS_EVENT" elseif p1 == 34 then "ACTION_TYPE_CUSTOM_ANALYTICS_EVENT" elseif p1 == 35 then "ACTION_TYPE_OPEN_GAME_INVITE" elseif p1 == 36 then "ACTION_TYPE_OPEN_EVENT_DETAILS" elseif p1 == 37 then "ACTION_TYPE_LAUNCH_EXPERIENCE" elseif p1 == 38 then "ACTION_TYPE_TOGGLE_EXPERIENCE_FAVORITE" elseif p1 == 39 then "ACTION_TYPE_TOGGLE_EXPERIENCE_FOLLOW" elseif p1 == 40 then "ACTION_TYPE_TOGGLE_EXPERIENCE_VOTE" elseif p1 == 41 then "ACTION_TYPE_OPEN_PURCHASE_PROMPT" elseif p1 == 42 then "ACTION_TYPE_OPEN_SDUI_OVERLAY" elseif p1 == 43 then "ACTION_TYPE_OPEN_BADGES_SEE_ALL" elseif p1 == 44 then "ACTION_TYPE_OPEN_EXPERIENCE_STORE_SEE_ALL" elseif p1 == 45 then "ACTION_TYPE_DISMISS_GAME_FEEDBACK" elseif p1 == 46 then "ACTION_TYPE_OPEN_GAME_FEEDBACK_FORM" elseif p1 == 47 then "ACTION_TYPE_ENABLE_EVENT_NOTIFICATIONS" elseif p1 == 48 then "ACTION_TYPE_DISMISS_EVENT_NOTIFICATIONS_MODAL" elseif p1 == 49 then "ACTION_TYPE_OPEN_AMP_WIZARD" elseif p1 == 50 then "ACTION_TYPE_OPEN_SUBSCRIPTION_PURCHASE_PAGE" elseif p1 == 51 then "ACTION_TYPE_REFRESH_GAME_PASSES" elseif p1 == 52 then "ACTION_TYPE_REFRESH_PLAYABILITY" elseif p1 == 53 then "ACTION_TYPE_OPEN_SOCIAL_PROOF_USER_LIST_SHEET" elseif p1 == 54 then "ACTION_TYPE_REPORT_SURFACE_LOAD_TIME_MILESTONE" elseif p1 == 55 then "ACTION_TYPE_OPEN_SEARCH_RESULTS_TAB" elseif p1 == 56 then "ACTION_TYPE_OPEN_PHONE_UPSELL_MODAL" elseif p1 == 57 then "ACTION_TYPE_OPEN_EMAIL_UPSELL_MODAL" elseif p1 == 58 then "ACTION_TYPE_DISMISS_PROMPT" elseif p1 == 59 then "ACTION_TYPE_REQUEST_FRIENDSHIP" elseif p1 == 60 then "ACTION_TYPE_REFRESH_DEVELOPER_PRODUCTS" elseif p1 == 61 then "ACTION_TYPE_OPEN_FAE_TRIAL_UPSELL" elseif p1 == 62 then "ACTION_TYPE_REFRESH_OMNI_RECOMMENDATION_FEED_ITEM" elseif p1 == 63 then "ACTION_TYPE_AI_OVERVIEW_FEEDBACK" elseif p1 == 64 then "ACTION_TYPE_OPEN_TRUSTED_FRIENDS_UPSELL_MODAL" elseif p1 == 65 then "ACTION_TYPE_RECORD_PARTY_CHAT_CONVERSATION_UPSELL_ACKNOWLEDGEMENT" elseif p1 == 66 then "ACTION_TYPE_OPEN_SEARCH_RESULTS_WITH_QUERY" elseif p1 == 67 then "ACTION_TYPE_SELECT_MARKETPLACE_FAVORITES_CATEGORY" elseif p1 == 68 then "ACTION_TYPE_DOWNLOAD_APP" elseif p1 == 69 then "ACTION_TYPE_REFRESH_CHARTS_SORT_DETAIL" elseif p1 == 70 then "ACTION_TYPE_JOIN_COMMUNITY" elseif p1 == 71 then "ACTION_TYPE_VIEW_COMMUNITY" elseif p1 == 72 then "ACTION_TYPE_PIN_EXPERIENCE_SHORTCUT" elseif p1 == 73 then "ACTION_TYPE_SELECT_MARKETPLACE_FAVORITES_SUBCATEGORY" elseif p1 == 74 then "ACTION_TYPE_SHOW_TOAST" elseif p1 == 75 then "ACTION_TYPE_OPEN_INCOMING_TRANSFER_UPSELL" elseif p1 == 76 then "ACTION_TYPE_ACTION_SEQUENCE" elseif p1 == 77 then "ACTION_TYPE_REFRESH_FEED_ENTRY_FROM_API" elseif p1 == 78 then "ACTION_TYPE_OPEN_PROFILE_FRAMES_EDITOR" elseif p1 == 79 then "ACTION_TYPE_NAVIGATE" elseif p1 == 80 then "ACTION_TYPE_SET_GAME_TILE_NOT_INTERESTED" elseif p1 == 81 then "ACTION_TYPE_REFRESH_HOME" elseif p1 == 82 then "ACTION_TYPE_UNDO_GAME_TILE_NOT_INTERESTED" elseif p1 == 83 then "ACTION_TYPE_APPLY_DEV_STORE_SEE_ALL_CATEGORY_FILTER" elseif p1 == 84 then "ACTION_TYPE_OPEN_WHY_THIS_AD" elseif p1 == 85 then "ACTION_TYPE_REQUEST_PUSH_NOTIFICATION_PERMISSION" elseif p1 == 86 then "ACTION_TYPE_OPEN_BUILD_CREATION_CHAT" elseif p1 == 87 then "ACTION_TYPE_EXPERIMENTAL" elseif p1 == 88 then "ACTION_TYPE_OPEN_EXTERNAL_LINK" elseif p1 == 89 then "ACTION_TYPE_OPEN_CATALOG_ITEM_DETAILS" elseif p1 == 90 then "ACTION_TYPE_OPEN_ITEM_INFO_ROW_PROMPT" elseif p1 == 91 then "ACTION_TYPE_TOGGLE_CATALOG_ITEM_FAVORITE" elseif p1 == 92 then "ACTION_TYPE_PLAY_WITH_REWARD_AD" elseif p1 == 93 then "ACTION_TYPE_SET_PAGE_SCOPE_FIELD" elseif p1 == 94 then "ACTION_TYPE_SUBMIT_CUSTOM_FORM_RESPONSE" elseif p1 == 95 then "ACTION_TYPE_REFRESH_CUSTOM_FORM_RESULTS" elseif p1 == 96 then "ACTION_TYPE_OPEN_EXPERIENCE_LEADERBOARD_SEE_ALL" elseif p1 == 97 then "ACTION_TYPE_OPEN_CATALOG_ITEM_EXPERIENCES" elseif p1 == 98 then "ACTION_TYPE_OPEN_CATALOG_ITEM_CREATOR_PROFILE" elseif p1 == 99 then "ACTION_TYPE_PLAY_CATALOG_ITEM_ATTRIBUTION_EXPERIENCE" elseif p1 == 100 then "ACTION_TYPE_OPEN_CATALOG_ITEM_RESELLERS" elseif p1 == 101 then "ACTION_TYPE_PURCHASE_CATALOG_ITEM_FROM_STOCK" elseif p1 == 102 then "ACTION_TYPE_OPEN_CATALOG_ITEM_OWNERSHIP" elseif p1 == 103 then "ACTION_TYPE_TRY_ON_CATALOG_ITEM" elseif p1 == 104 then "ACTION_TYPE_PURCHASE_BUY_ROBUX_PRODUCT" elseif p1 == 105 then "ACTION_TYPE_PURCHASE_BUY_ROBUX_SUBSCRIPTION" elseif p1 == 106 then "ACTION_TYPE_OPEN_ROBLOX_PLUS_SHEET" elseif p1 == 107 then "ACTION_TYPE_OPEN_SEND_ROBUX" elseif p1 == 108 then "ACTION_TYPE_REVIEW_TRANSFER" else nil
 	end,
 	toNumber = function(p1)
-		return if p1 == "ACTION_TYPE_INVALID" then 0 elseif p1 == "ACTION_TYPE_DISMISS_DIALOG" then 1 elseif p1 == "ACTION_TYPE_LINK" then 2 elseif p1 == "ACTION_TYPE_OPEN_GAME_DETAILS" then 3 elseif p1 == "ACTION_TYPE_OPEN_JOIN_FRIENDS" then 4 elseif p1 == "ACTION_TYPE_OPEN_MARKETPLACE_TRY_ON" then 5 elseif p1 == "ACTION_TYPE_OPEN_SEE_ALL" then 6 elseif p1 == "ACTION_TYPE_OPEN_SPONSORED_TOOLTIP" then 7 elseif p1 == "ACTION_TYPE_PLAY_BUTTON_CLICK" then 8 elseif p1 == "ACTION_TYPE_UPDATE_USER_SETTINGS" then 9 elseif p1 == "ACTION_TYPE_OPEN_TOOLTIP" then 10 elseif p1 == "ACTION_TYPE_OPEN_BADGE_DETAILS" then 11 elseif p1 == "ACTION_TYPE_LOAD_MORE_FROM_API" then 12 elseif p1 == "ACTION_TYPE_SHARE" then 13 elseif p1 == "ACTION_TYPE_OPEN_ABUSE_REPORT" then 14 elseif p1 == "ACTION_TYPE_REMOVE_BADGE_FROM_INVENTORY" then 15 elseif p1 == "ACTION_TYPE_OPEN_PROFILE" then 16 elseif p1 == "ACTION_TYPE_OPEN_FACIAL_AGE_ESTIMATION" then 17 elseif p1 == "ACTION_TYPE_OPEN_ADD_CONNECTIONS_PAGE" then 18 elseif p1 == "ACTION_TYPE_OPEN_MARKETPLACE" then 19 elseif p1 == "ACTION_TYPE_HIDE_PROFILE_COMPLETION" then 20 elseif p1 == "ACTION_TYPE_SELECT_MARKETPLACE_CATALOG_CATEGORY" then 21 elseif p1 == "ACTION_TYPE_SELECT_MARKETPLACE_CATALOG_SUBCATEGORY" then 22 elseif p1 == "ACTION_TYPE_OPEN_MARKETPLACE_CATALOG_SEE_ALL" then 23 elseif p1 == "ACTION_TYPE_CLOSE_MARKETPLACE_CATEGORY_TOOLTIP" then 24 elseif p1 == "ACTION_TYPE_RESIZE_MARKETPLACE_CATALOG" then 25 elseif p1 == "ACTION_TYPE_OPEN_MARKETPLACE_CATALOG_FILTERS" then 26 elseif p1 == "ACTION_TYPE_OPEN_SOCIAL_LINK" then 27 elseif p1 == "ACTION_TYPE_OPEN_CHARTS_SORT_DETAIL" then 28 elseif p1 == "ACTION_TYPE_OPEN_SONG_DETAIL" then 29 elseif p1 == "ACTION_TYPE_REFRESH_FROM_API" then 30 elseif p1 == "ACTION_TYPE_RSVP_TO_EVENT" then 31 elseif p1 == "ACTION_TYPE_APPLY_CHARTS_FILTER" then 32 elseif p1 == "ACTION_TYPE_ANALYTICS_EVENT" then 33 elseif p1 == "ACTION_TYPE_CUSTOM_ANALYTICS_EVENT" then 34 elseif p1 == "ACTION_TYPE_OPEN_GAME_INVITE" then 35 elseif p1 == "ACTION_TYPE_OPEN_EVENT_DETAILS" then 36 elseif p1 == "ACTION_TYPE_LAUNCH_EXPERIENCE" then 37 elseif p1 == "ACTION_TYPE_TOGGLE_EXPERIENCE_FAVORITE" then 38 elseif p1 == "ACTION_TYPE_TOGGLE_EXPERIENCE_FOLLOW" then 39 elseif p1 == "ACTION_TYPE_TOGGLE_EXPERIENCE_VOTE" then 40 elseif p1 == "ACTION_TYPE_OPEN_PURCHASE_PROMPT" then 41 elseif p1 == "ACTION_TYPE_OPEN_SDUI_OVERLAY" then 42 elseif p1 == "ACTION_TYPE_OPEN_BADGES_SEE_ALL" then 43 elseif p1 == "ACTION_TYPE_OPEN_EXPERIENCE_STORE_SEE_ALL" then 44 elseif p1 == "ACTION_TYPE_DISMISS_GAME_FEEDBACK" then 45 elseif p1 == "ACTION_TYPE_OPEN_GAME_FEEDBACK_FORM" then 46 elseif p1 == "ACTION_TYPE_ENABLE_EVENT_NOTIFICATIONS" then 47 elseif p1 == "ACTION_TYPE_DISMISS_EVENT_NOTIFICATIONS_MODAL" then 48 elseif p1 == "ACTION_TYPE_OPEN_AMP_WIZARD" then 49 elseif p1 == "ACTION_TYPE_OPEN_SUBSCRIPTION_PURCHASE_PAGE" then 50 elseif p1 == "ACTION_TYPE_REFRESH_GAME_PASSES" then 51 elseif p1 == "ACTION_TYPE_REFRESH_PLAYABILITY" then 52 elseif p1 == "ACTION_TYPE_OPEN_SOCIAL_PROOF_USER_LIST_SHEET" then 53 elseif p1 == "ACTION_TYPE_REPORT_SURFACE_LOAD_TIME_MILESTONE" then 54 elseif p1 == "ACTION_TYPE_OPEN_SEARCH_RESULTS_TAB" then 55 elseif p1 == "ACTION_TYPE_OPEN_PHONE_UPSELL_MODAL" then 56 elseif p1 == "ACTION_TYPE_OPEN_EMAIL_UPSELL_MODAL" then 57 elseif p1 == "ACTION_TYPE_DISMISS_PROMPT" then 58 elseif p1 == "ACTION_TYPE_REQUEST_FRIENDSHIP" then 59 elseif p1 == "ACTION_TYPE_REFRESH_DEVELOPER_PRODUCTS" then 60 elseif p1 == "ACTION_TYPE_OPEN_FAE_TRIAL_UPSELL" then 61 elseif p1 == "ACTION_TYPE_REFRESH_OMNI_RECOMMENDATION_FEED_ITEM" then 62 elseif p1 == "ACTION_TYPE_AI_OVERVIEW_FEEDBACK" then 63 elseif p1 == "ACTION_TYPE_OPEN_TRUSTED_FRIENDS_UPSELL_MODAL" then 64 elseif p1 == "ACTION_TYPE_RECORD_PARTY_CHAT_CONVERSATION_UPSELL_ACKNOWLEDGEMENT" then 65 elseif p1 == "ACTION_TYPE_OPEN_SEARCH_RESULTS_WITH_QUERY" then 66 elseif p1 == "ACTION_TYPE_SELECT_MARKETPLACE_FAVORITES_CATEGORY" then 67 elseif p1 == "ACTION_TYPE_DOWNLOAD_APP" then 68 elseif p1 == "ACTION_TYPE_REFRESH_CHARTS_SORT_DETAIL" then 69 elseif p1 == "ACTION_TYPE_JOIN_COMMUNITY" then 70 elseif p1 == "ACTION_TYPE_VIEW_COMMUNITY" then 71 elseif p1 == "ACTION_TYPE_PIN_EXPERIENCE_SHORTCUT" then 72 elseif p1 == "ACTION_TYPE_SELECT_MARKETPLACE_FAVORITES_SUBCATEGORY" then 73 elseif p1 == "ACTION_TYPE_SHOW_TOAST" then 74 elseif p1 == "ACTION_TYPE_OPEN_INCOMING_TRANSFER_UPSELL" then 75 elseif p1 == "ACTION_TYPE_ACTION_SEQUENCE" then 76 elseif p1 == "ACTION_TYPE_REFRESH_FEED_ENTRY_FROM_API" then 77 elseif p1 == "ACTION_TYPE_OPEN_PROFILE_FRAMES_EDITOR" then 78 elseif p1 == "ACTION_TYPE_NAVIGATE" then 79 elseif p1 == "ACTION_TYPE_SET_GAME_TILE_NOT_INTERESTED" then 80 elseif p1 == "ACTION_TYPE_REFRESH_HOME" then 81 elseif p1 == "ACTION_TYPE_UNDO_GAME_TILE_NOT_INTERESTED" then 82 elseif p1 == "ACTION_TYPE_APPLY_DEV_STORE_SEE_ALL_CATEGORY_FILTER" then 83 elseif p1 == "ACTION_TYPE_OPEN_WHY_THIS_AD" then 84 elseif p1 == "ACTION_TYPE_REQUEST_PUSH_NOTIFICATION_PERMISSION" then 85 elseif p1 == "ACTION_TYPE_OPEN_BUILD_CREATION_CHAT" then 86 elseif p1 == "ACTION_TYPE_EXPERIMENTAL" then 87 elseif p1 == "ACTION_TYPE_OPEN_EXTERNAL_LINK" then 88 elseif p1 == "ACTION_TYPE_OPEN_CATALOG_ITEM_DETAILS" then 89 elseif p1 == "ACTION_TYPE_OPEN_ITEM_INFO_ROW_PROMPT" then 90 elseif p1 == "ACTION_TYPE_TOGGLE_CATALOG_ITEM_FAVORITE" then 91 elseif p1 == "ACTION_TYPE_PLAY_WITH_REWARD_AD" then 92 elseif p1 == "ACTION_TYPE_SET_PAGE_SCOPE_FIELD" then 93 elseif p1 == "ACTION_TYPE_SUBMIT_CUSTOM_FORM_RESPONSE" then 94 elseif p1 == "ACTION_TYPE_REFRESH_CUSTOM_FORM_RESULTS" then 95 elseif p1 == "ACTION_TYPE_OPEN_EXPERIENCE_LEADERBOARD_SEE_ALL" then 96 elseif p1 == "ACTION_TYPE_OPEN_CATALOG_ITEM_EXPERIENCES" then 97 elseif p1 == "ACTION_TYPE_OPEN_CATALOG_ITEM_CREATOR_PROFILE" then 98 elseif p1 == "ACTION_TYPE_PLAY_CATALOG_ITEM_ATTRIBUTION_EXPERIENCE" then 99 elseif p1 == "ACTION_TYPE_OPEN_CATALOG_ITEM_RESELLERS" then 100 elseif p1 == "ACTION_TYPE_PURCHASE_CATALOG_ITEM_FROM_STOCK" then 101 elseif p1 == "ACTION_TYPE_OPEN_CATALOG_ITEM_OWNERSHIP" then 102 elseif p1 == "ACTION_TYPE_TRY_ON_CATALOG_ITEM" then 103 else p1
+		return if p1 == "ACTION_TYPE_INVALID" then 0 elseif p1 == "ACTION_TYPE_DISMISS_DIALOG" then 1 elseif p1 == "ACTION_TYPE_LINK" then 2 elseif p1 == "ACTION_TYPE_OPEN_GAME_DETAILS" then 3 elseif p1 == "ACTION_TYPE_OPEN_JOIN_FRIENDS" then 4 elseif p1 == "ACTION_TYPE_OPEN_MARKETPLACE_TRY_ON" then 5 elseif p1 == "ACTION_TYPE_OPEN_SEE_ALL" then 6 elseif p1 == "ACTION_TYPE_OPEN_SPONSORED_TOOLTIP" then 7 elseif p1 == "ACTION_TYPE_PLAY_BUTTON_CLICK" then 8 elseif p1 == "ACTION_TYPE_UPDATE_USER_SETTINGS" then 9 elseif p1 == "ACTION_TYPE_OPEN_TOOLTIP" then 10 elseif p1 == "ACTION_TYPE_OPEN_BADGE_DETAILS" then 11 elseif p1 == "ACTION_TYPE_LOAD_MORE_FROM_API" then 12 elseif p1 == "ACTION_TYPE_SHARE" then 13 elseif p1 == "ACTION_TYPE_OPEN_ABUSE_REPORT" then 14 elseif p1 == "ACTION_TYPE_REMOVE_BADGE_FROM_INVENTORY" then 15 elseif p1 == "ACTION_TYPE_OPEN_PROFILE" then 16 elseif p1 == "ACTION_TYPE_OPEN_FACIAL_AGE_ESTIMATION" then 17 elseif p1 == "ACTION_TYPE_OPEN_ADD_CONNECTIONS_PAGE" then 18 elseif p1 == "ACTION_TYPE_OPEN_MARKETPLACE" then 19 elseif p1 == "ACTION_TYPE_HIDE_PROFILE_COMPLETION" then 20 elseif p1 == "ACTION_TYPE_SELECT_MARKETPLACE_CATALOG_CATEGORY" then 21 elseif p1 == "ACTION_TYPE_SELECT_MARKETPLACE_CATALOG_SUBCATEGORY" then 22 elseif p1 == "ACTION_TYPE_OPEN_MARKETPLACE_CATALOG_SEE_ALL" then 23 elseif p1 == "ACTION_TYPE_CLOSE_MARKETPLACE_CATEGORY_TOOLTIP" then 24 elseif p1 == "ACTION_TYPE_RESIZE_MARKETPLACE_CATALOG" then 25 elseif p1 == "ACTION_TYPE_OPEN_MARKETPLACE_CATALOG_FILTERS" then 26 elseif p1 == "ACTION_TYPE_OPEN_SOCIAL_LINK" then 27 elseif p1 == "ACTION_TYPE_OPEN_CHARTS_SORT_DETAIL" then 28 elseif p1 == "ACTION_TYPE_OPEN_SONG_DETAIL" then 29 elseif p1 == "ACTION_TYPE_REFRESH_FROM_API" then 30 elseif p1 == "ACTION_TYPE_RSVP_TO_EVENT" then 31 elseif p1 == "ACTION_TYPE_APPLY_CHARTS_FILTER" then 32 elseif p1 == "ACTION_TYPE_ANALYTICS_EVENT" then 33 elseif p1 == "ACTION_TYPE_CUSTOM_ANALYTICS_EVENT" then 34 elseif p1 == "ACTION_TYPE_OPEN_GAME_INVITE" then 35 elseif p1 == "ACTION_TYPE_OPEN_EVENT_DETAILS" then 36 elseif p1 == "ACTION_TYPE_LAUNCH_EXPERIENCE" then 37 elseif p1 == "ACTION_TYPE_TOGGLE_EXPERIENCE_FAVORITE" then 38 elseif p1 == "ACTION_TYPE_TOGGLE_EXPERIENCE_FOLLOW" then 39 elseif p1 == "ACTION_TYPE_TOGGLE_EXPERIENCE_VOTE" then 40 elseif p1 == "ACTION_TYPE_OPEN_PURCHASE_PROMPT" then 41 elseif p1 == "ACTION_TYPE_OPEN_SDUI_OVERLAY" then 42 elseif p1 == "ACTION_TYPE_OPEN_BADGES_SEE_ALL" then 43 elseif p1 == "ACTION_TYPE_OPEN_EXPERIENCE_STORE_SEE_ALL" then 44 elseif p1 == "ACTION_TYPE_DISMISS_GAME_FEEDBACK" then 45 elseif p1 == "ACTION_TYPE_OPEN_GAME_FEEDBACK_FORM" then 46 elseif p1 == "ACTION_TYPE_ENABLE_EVENT_NOTIFICATIONS" then 47 elseif p1 == "ACTION_TYPE_DISMISS_EVENT_NOTIFICATIONS_MODAL" then 48 elseif p1 == "ACTION_TYPE_OPEN_AMP_WIZARD" then 49 elseif p1 == "ACTION_TYPE_OPEN_SUBSCRIPTION_PURCHASE_PAGE" then 50 elseif p1 == "ACTION_TYPE_REFRESH_GAME_PASSES" then 51 elseif p1 == "ACTION_TYPE_REFRESH_PLAYABILITY" then 52 elseif p1 == "ACTION_TYPE_OPEN_SOCIAL_PROOF_USER_LIST_SHEET" then 53 elseif p1 == "ACTION_TYPE_REPORT_SURFACE_LOAD_TIME_MILESTONE" then 54 elseif p1 == "ACTION_TYPE_OPEN_SEARCH_RESULTS_TAB" then 55 elseif p1 == "ACTION_TYPE_OPEN_PHONE_UPSELL_MODAL" then 56 elseif p1 == "ACTION_TYPE_OPEN_EMAIL_UPSELL_MODAL" then 57 elseif p1 == "ACTION_TYPE_DISMISS_PROMPT" then 58 elseif p1 == "ACTION_TYPE_REQUEST_FRIENDSHIP" then 59 elseif p1 == "ACTION_TYPE_REFRESH_DEVELOPER_PRODUCTS" then 60 elseif p1 == "ACTION_TYPE_OPEN_FAE_TRIAL_UPSELL" then 61 elseif p1 == "ACTION_TYPE_REFRESH_OMNI_RECOMMENDATION_FEED_ITEM" then 62 elseif p1 == "ACTION_TYPE_AI_OVERVIEW_FEEDBACK" then 63 elseif p1 == "ACTION_TYPE_OPEN_TRUSTED_FRIENDS_UPSELL_MODAL" then 64 elseif p1 == "ACTION_TYPE_RECORD_PARTY_CHAT_CONVERSATION_UPSELL_ACKNOWLEDGEMENT" then 65 elseif p1 == "ACTION_TYPE_OPEN_SEARCH_RESULTS_WITH_QUERY" then 66 elseif p1 == "ACTION_TYPE_SELECT_MARKETPLACE_FAVORITES_CATEGORY" then 67 elseif p1 == "ACTION_TYPE_DOWNLOAD_APP" then 68 elseif p1 == "ACTION_TYPE_REFRESH_CHARTS_SORT_DETAIL" then 69 elseif p1 == "ACTION_TYPE_JOIN_COMMUNITY" then 70 elseif p1 == "ACTION_TYPE_VIEW_COMMUNITY" then 71 elseif p1 == "ACTION_TYPE_PIN_EXPERIENCE_SHORTCUT" then 72 elseif p1 == "ACTION_TYPE_SELECT_MARKETPLACE_FAVORITES_SUBCATEGORY" then 73 elseif p1 == "ACTION_TYPE_SHOW_TOAST" then 74 elseif p1 == "ACTION_TYPE_OPEN_INCOMING_TRANSFER_UPSELL" then 75 elseif p1 == "ACTION_TYPE_ACTION_SEQUENCE" then 76 elseif p1 == "ACTION_TYPE_REFRESH_FEED_ENTRY_FROM_API" then 77 elseif p1 == "ACTION_TYPE_OPEN_PROFILE_FRAMES_EDITOR" then 78 elseif p1 == "ACTION_TYPE_NAVIGATE" then 79 elseif p1 == "ACTION_TYPE_SET_GAME_TILE_NOT_INTERESTED" then 80 elseif p1 == "ACTION_TYPE_REFRESH_HOME" then 81 elseif p1 == "ACTION_TYPE_UNDO_GAME_TILE_NOT_INTERESTED" then 82 elseif p1 == "ACTION_TYPE_APPLY_DEV_STORE_SEE_ALL_CATEGORY_FILTER" then 83 elseif p1 == "ACTION_TYPE_OPEN_WHY_THIS_AD" then 84 elseif p1 == "ACTION_TYPE_REQUEST_PUSH_NOTIFICATION_PERMISSION" then 85 elseif p1 == "ACTION_TYPE_OPEN_BUILD_CREATION_CHAT" then 86 elseif p1 == "ACTION_TYPE_EXPERIMENTAL" then 87 elseif p1 == "ACTION_TYPE_OPEN_EXTERNAL_LINK" then 88 elseif p1 == "ACTION_TYPE_OPEN_CATALOG_ITEM_DETAILS" then 89 elseif p1 == "ACTION_TYPE_OPEN_ITEM_INFO_ROW_PROMPT" then 90 elseif p1 == "ACTION_TYPE_TOGGLE_CATALOG_ITEM_FAVORITE" then 91 elseif p1 == "ACTION_TYPE_PLAY_WITH_REWARD_AD" then 92 elseif p1 == "ACTION_TYPE_SET_PAGE_SCOPE_FIELD" then 93 elseif p1 == "ACTION_TYPE_SUBMIT_CUSTOM_FORM_RESPONSE" then 94 elseif p1 == "ACTION_TYPE_REFRESH_CUSTOM_FORM_RESULTS" then 95 elseif p1 == "ACTION_TYPE_OPEN_EXPERIENCE_LEADERBOARD_SEE_ALL" then 96 elseif p1 == "ACTION_TYPE_OPEN_CATALOG_ITEM_EXPERIENCES" then 97 elseif p1 == "ACTION_TYPE_OPEN_CATALOG_ITEM_CREATOR_PROFILE" then 98 elseif p1 == "ACTION_TYPE_PLAY_CATALOG_ITEM_ATTRIBUTION_EXPERIENCE" then 99 elseif p1 == "ACTION_TYPE_OPEN_CATALOG_ITEM_RESELLERS" then 100 elseif p1 == "ACTION_TYPE_PURCHASE_CATALOG_ITEM_FROM_STOCK" then 101 elseif p1 == "ACTION_TYPE_OPEN_CATALOG_ITEM_OWNERSHIP" then 102 elseif p1 == "ACTION_TYPE_TRY_ON_CATALOG_ITEM" then 103 elseif p1 == "ACTION_TYPE_PURCHASE_BUY_ROBUX_PRODUCT" then 104 elseif p1 == "ACTION_TYPE_PURCHASE_BUY_ROBUX_SUBSCRIPTION" then 105 elseif p1 == "ACTION_TYPE_OPEN_ROBLOX_PLUS_SHEET" then 106 elseif p1 == "ACTION_TYPE_OPEN_SEND_ROBUX" then 107 elseif p1 == "ACTION_TYPE_REVIEW_TRANSFER" then 108 else p1
 	end,
 	fromName = function(p1)
-		return if p1 == "ACTION_TYPE_INVALID" then "ACTION_TYPE_INVALID" elseif p1 == "ACTION_TYPE_DISMISS_DIALOG" then "ACTION_TYPE_DISMISS_DIALOG" elseif p1 == "ACTION_TYPE_LINK" then "ACTION_TYPE_LINK" elseif p1 == "ACTION_TYPE_OPEN_GAME_DETAILS" then "ACTION_TYPE_OPEN_GAME_DETAILS" elseif p1 == "ACTION_TYPE_OPEN_JOIN_FRIENDS" then "ACTION_TYPE_OPEN_JOIN_FRIENDS" elseif p1 == "ACTION_TYPE_OPEN_MARKETPLACE_TRY_ON" then "ACTION_TYPE_OPEN_MARKETPLACE_TRY_ON" elseif p1 == "ACTION_TYPE_OPEN_SEE_ALL" then "ACTION_TYPE_OPEN_SEE_ALL" elseif p1 == "ACTION_TYPE_OPEN_SPONSORED_TOOLTIP" then "ACTION_TYPE_OPEN_SPONSORED_TOOLTIP" elseif p1 == "ACTION_TYPE_PLAY_BUTTON_CLICK" then "ACTION_TYPE_PLAY_BUTTON_CLICK" elseif p1 == "ACTION_TYPE_UPDATE_USER_SETTINGS" then "ACTION_TYPE_UPDATE_USER_SETTINGS" elseif p1 == "ACTION_TYPE_OPEN_TOOLTIP" then "ACTION_TYPE_OPEN_TOOLTIP" elseif p1 == "ACTION_TYPE_OPEN_BADGE_DETAILS" then "ACTION_TYPE_OPEN_BADGE_DETAILS" elseif p1 == "ACTION_TYPE_LOAD_MORE_FROM_API" then "ACTION_TYPE_LOAD_MORE_FROM_API" elseif p1 == "ACTION_TYPE_SHARE" then "ACTION_TYPE_SHARE" elseif p1 == "ACTION_TYPE_OPEN_ABUSE_REPORT" then "ACTION_TYPE_OPEN_ABUSE_REPORT" elseif p1 == "ACTION_TYPE_REMOVE_BADGE_FROM_INVENTORY" then "ACTION_TYPE_REMOVE_BADGE_FROM_INVENTORY" elseif p1 == "ACTION_TYPE_OPEN_PROFILE" then "ACTION_TYPE_OPEN_PROFILE" elseif p1 == "ACTION_TYPE_OPEN_FACIAL_AGE_ESTIMATION" then "ACTION_TYPE_OPEN_FACIAL_AGE_ESTIMATION" elseif p1 == "ACTION_TYPE_OPEN_ADD_CONNECTIONS_PAGE" then "ACTION_TYPE_OPEN_ADD_CONNECTIONS_PAGE" elseif p1 == "ACTION_TYPE_OPEN_MARKETPLACE" then "ACTION_TYPE_OPEN_MARKETPLACE" elseif p1 == "ACTION_TYPE_HIDE_PROFILE_COMPLETION" then "ACTION_TYPE_HIDE_PROFILE_COMPLETION" elseif p1 == "ACTION_TYPE_SELECT_MARKETPLACE_CATALOG_CATEGORY" then "ACTION_TYPE_SELECT_MARKETPLACE_CATALOG_CATEGORY" elseif p1 == "ACTION_TYPE_SELECT_MARKETPLACE_CATALOG_SUBCATEGORY" then "ACTION_TYPE_SELECT_MARKETPLACE_CATALOG_SUBCATEGORY" elseif p1 == "ACTION_TYPE_OPEN_MARKETPLACE_CATALOG_SEE_ALL" then "ACTION_TYPE_OPEN_MARKETPLACE_CATALOG_SEE_ALL" elseif p1 == "ACTION_TYPE_CLOSE_MARKETPLACE_CATEGORY_TOOLTIP" then "ACTION_TYPE_CLOSE_MARKETPLACE_CATEGORY_TOOLTIP" elseif p1 == "ACTION_TYPE_RESIZE_MARKETPLACE_CATALOG" then "ACTION_TYPE_RESIZE_MARKETPLACE_CATALOG" elseif p1 == "ACTION_TYPE_OPEN_MARKETPLACE_CATALOG_FILTERS" then "ACTION_TYPE_OPEN_MARKETPLACE_CATALOG_FILTERS" elseif p1 == "ACTION_TYPE_OPEN_SOCIAL_LINK" then "ACTION_TYPE_OPEN_SOCIAL_LINK" elseif p1 == "ACTION_TYPE_OPEN_CHARTS_SORT_DETAIL" then "ACTION_TYPE_OPEN_CHARTS_SORT_DETAIL" elseif p1 == "ACTION_TYPE_OPEN_SONG_DETAIL" then "ACTION_TYPE_OPEN_SONG_DETAIL" elseif p1 == "ACTION_TYPE_REFRESH_FROM_API" then "ACTION_TYPE_REFRESH_FROM_API" elseif p1 == "ACTION_TYPE_RSVP_TO_EVENT" then "ACTION_TYPE_RSVP_TO_EVENT" elseif p1 == "ACTION_TYPE_APPLY_CHARTS_FILTER" then "ACTION_TYPE_APPLY_CHARTS_FILTER" elseif p1 == "ACTION_TYPE_ANALYTICS_EVENT" then "ACTION_TYPE_ANALYTICS_EVENT" elseif p1 == "ACTION_TYPE_CUSTOM_ANALYTICS_EVENT" then "ACTION_TYPE_CUSTOM_ANALYTICS_EVENT" elseif p1 == "ACTION_TYPE_OPEN_GAME_INVITE" then "ACTION_TYPE_OPEN_GAME_INVITE" elseif p1 == "ACTION_TYPE_OPEN_EVENT_DETAILS" then "ACTION_TYPE_OPEN_EVENT_DETAILS" elseif p1 == "ACTION_TYPE_LAUNCH_EXPERIENCE" then "ACTION_TYPE_LAUNCH_EXPERIENCE" elseif p1 == "ACTION_TYPE_TOGGLE_EXPERIENCE_FAVORITE" then "ACTION_TYPE_TOGGLE_EXPERIENCE_FAVORITE" elseif p1 == "ACTION_TYPE_TOGGLE_EXPERIENCE_FOLLOW" then "ACTION_TYPE_TOGGLE_EXPERIENCE_FOLLOW" elseif p1 == "ACTION_TYPE_TOGGLE_EXPERIENCE_VOTE" then "ACTION_TYPE_TOGGLE_EXPERIENCE_VOTE" elseif p1 == "ACTION_TYPE_OPEN_PURCHASE_PROMPT" then "ACTION_TYPE_OPEN_PURCHASE_PROMPT" elseif p1 == "ACTION_TYPE_OPEN_SDUI_OVERLAY" then "ACTION_TYPE_OPEN_SDUI_OVERLAY" elseif p1 == "ACTION_TYPE_OPEN_BADGES_SEE_ALL" then "ACTION_TYPE_OPEN_BADGES_SEE_ALL" elseif p1 == "ACTION_TYPE_OPEN_EXPERIENCE_STORE_SEE_ALL" then "ACTION_TYPE_OPEN_EXPERIENCE_STORE_SEE_ALL" elseif p1 == "ACTION_TYPE_DISMISS_GAME_FEEDBACK" then "ACTION_TYPE_DISMISS_GAME_FEEDBACK" elseif p1 == "ACTION_TYPE_OPEN_GAME_FEEDBACK_FORM" then "ACTION_TYPE_OPEN_GAME_FEEDBACK_FORM" elseif p1 == "ACTION_TYPE_ENABLE_EVENT_NOTIFICATIONS" then "ACTION_TYPE_ENABLE_EVENT_NOTIFICATIONS" elseif p1 == "ACTION_TYPE_DISMISS_EVENT_NOTIFICATIONS_MODAL" then "ACTION_TYPE_DISMISS_EVENT_NOTIFICATIONS_MODAL" elseif p1 == "ACTION_TYPE_OPEN_AMP_WIZARD" then "ACTION_TYPE_OPEN_AMP_WIZARD" elseif p1 == "ACTION_TYPE_OPEN_SUBSCRIPTION_PURCHASE_PAGE" then "ACTION_TYPE_OPEN_SUBSCRIPTION_PURCHASE_PAGE" elseif p1 == "ACTION_TYPE_REFRESH_GAME_PASSES" then "ACTION_TYPE_REFRESH_GAME_PASSES" elseif p1 == "ACTION_TYPE_REFRESH_PLAYABILITY" then "ACTION_TYPE_REFRESH_PLAYABILITY" elseif p1 == "ACTION_TYPE_OPEN_SOCIAL_PROOF_USER_LIST_SHEET" then "ACTION_TYPE_OPEN_SOCIAL_PROOF_USER_LIST_SHEET" elseif p1 == "ACTION_TYPE_REPORT_SURFACE_LOAD_TIME_MILESTONE" then "ACTION_TYPE_REPORT_SURFACE_LOAD_TIME_MILESTONE" elseif p1 == "ACTION_TYPE_OPEN_SEARCH_RESULTS_TAB" then "ACTION_TYPE_OPEN_SEARCH_RESULTS_TAB" elseif p1 == "ACTION_TYPE_OPEN_PHONE_UPSELL_MODAL" then "ACTION_TYPE_OPEN_PHONE_UPSELL_MODAL" elseif p1 == "ACTION_TYPE_OPEN_EMAIL_UPSELL_MODAL" then "ACTION_TYPE_OPEN_EMAIL_UPSELL_MODAL" elseif p1 == "ACTION_TYPE_DISMISS_PROMPT" then "ACTION_TYPE_DISMISS_PROMPT" elseif p1 == "ACTION_TYPE_REQUEST_FRIENDSHIP" then "ACTION_TYPE_REQUEST_FRIENDSHIP" elseif p1 == "ACTION_TYPE_REFRESH_DEVELOPER_PRODUCTS" then "ACTION_TYPE_REFRESH_DEVELOPER_PRODUCTS" elseif p1 == "ACTION_TYPE_OPEN_FAE_TRIAL_UPSELL" then "ACTION_TYPE_OPEN_FAE_TRIAL_UPSELL" elseif p1 == "ACTION_TYPE_REFRESH_OMNI_RECOMMENDATION_FEED_ITEM" then "ACTION_TYPE_REFRESH_OMNI_RECOMMENDATION_FEED_ITEM" elseif p1 == "ACTION_TYPE_AI_OVERVIEW_FEEDBACK" then "ACTION_TYPE_AI_OVERVIEW_FEEDBACK" elseif p1 == "ACTION_TYPE_OPEN_TRUSTED_FRIENDS_UPSELL_MODAL" then "ACTION_TYPE_OPEN_TRUSTED_FRIENDS_UPSELL_MODAL" elseif p1 == "ACTION_TYPE_RECORD_PARTY_CHAT_CONVERSATION_UPSELL_ACKNOWLEDGEMENT" then "ACTION_TYPE_RECORD_PARTY_CHAT_CONVERSATION_UPSELL_ACKNOWLEDGEMENT" elseif p1 == "ACTION_TYPE_OPEN_SEARCH_RESULTS_WITH_QUERY" then "ACTION_TYPE_OPEN_SEARCH_RESULTS_WITH_QUERY" elseif p1 == "ACTION_TYPE_SELECT_MARKETPLACE_FAVORITES_CATEGORY" then "ACTION_TYPE_SELECT_MARKETPLACE_FAVORITES_CATEGORY" elseif p1 == "ACTION_TYPE_DOWNLOAD_APP" then "ACTION_TYPE_DOWNLOAD_APP" elseif p1 == "ACTION_TYPE_REFRESH_CHARTS_SORT_DETAIL" then "ACTION_TYPE_REFRESH_CHARTS_SORT_DETAIL" elseif p1 == "ACTION_TYPE_JOIN_COMMUNITY" then "ACTION_TYPE_JOIN_COMMUNITY" elseif p1 == "ACTION_TYPE_VIEW_COMMUNITY" then "ACTION_TYPE_VIEW_COMMUNITY" elseif p1 == "ACTION_TYPE_PIN_EXPERIENCE_SHORTCUT" then "ACTION_TYPE_PIN_EXPERIENCE_SHORTCUT" elseif p1 == "ACTION_TYPE_SELECT_MARKETPLACE_FAVORITES_SUBCATEGORY" then "ACTION_TYPE_SELECT_MARKETPLACE_FAVORITES_SUBCATEGORY" elseif p1 == "ACTION_TYPE_SHOW_TOAST" then "ACTION_TYPE_SHOW_TOAST" elseif p1 == "ACTION_TYPE_OPEN_INCOMING_TRANSFER_UPSELL" then "ACTION_TYPE_OPEN_INCOMING_TRANSFER_UPSELL" elseif p1 == "ACTION_TYPE_ACTION_SEQUENCE" then "ACTION_TYPE_ACTION_SEQUENCE" elseif p1 == "ACTION_TYPE_REFRESH_FEED_ENTRY_FROM_API" then "ACTION_TYPE_REFRESH_FEED_ENTRY_FROM_API" elseif p1 == "ACTION_TYPE_OPEN_PROFILE_FRAMES_EDITOR" then "ACTION_TYPE_OPEN_PROFILE_FRAMES_EDITOR" elseif p1 == "ACTION_TYPE_NAVIGATE" then "ACTION_TYPE_NAVIGATE" elseif p1 == "ACTION_TYPE_SET_GAME_TILE_NOT_INTERESTED" then "ACTION_TYPE_SET_GAME_TILE_NOT_INTERESTED" elseif p1 == "ACTION_TYPE_REFRESH_HOME" then "ACTION_TYPE_REFRESH_HOME" elseif p1 == "ACTION_TYPE_UNDO_GAME_TILE_NOT_INTERESTED" then "ACTION_TYPE_UNDO_GAME_TILE_NOT_INTERESTED" elseif p1 == "ACTION_TYPE_APPLY_DEV_STORE_SEE_ALL_CATEGORY_FILTER" then "ACTION_TYPE_APPLY_DEV_STORE_SEE_ALL_CATEGORY_FILTER" elseif p1 == "ACTION_TYPE_OPEN_WHY_THIS_AD" then "ACTION_TYPE_OPEN_WHY_THIS_AD" elseif p1 == "ACTION_TYPE_REQUEST_PUSH_NOTIFICATION_PERMISSION" then "ACTION_TYPE_REQUEST_PUSH_NOTIFICATION_PERMISSION" elseif p1 == "ACTION_TYPE_OPEN_BUILD_CREATION_CHAT" then "ACTION_TYPE_OPEN_BUILD_CREATION_CHAT" elseif p1 == "ACTION_TYPE_EXPERIMENTAL" then "ACTION_TYPE_EXPERIMENTAL" elseif p1 == "ACTION_TYPE_OPEN_EXTERNAL_LINK" then "ACTION_TYPE_OPEN_EXTERNAL_LINK" elseif p1 == "ACTION_TYPE_OPEN_CATALOG_ITEM_DETAILS" then "ACTION_TYPE_OPEN_CATALOG_ITEM_DETAILS" elseif p1 == "ACTION_TYPE_OPEN_ITEM_INFO_ROW_PROMPT" then "ACTION_TYPE_OPEN_ITEM_INFO_ROW_PROMPT" elseif p1 == "ACTION_TYPE_TOGGLE_CATALOG_ITEM_FAVORITE" then "ACTION_TYPE_TOGGLE_CATALOG_ITEM_FAVORITE" elseif p1 == "ACTION_TYPE_PLAY_WITH_REWARD_AD" then "ACTION_TYPE_PLAY_WITH_REWARD_AD" elseif p1 == "ACTION_TYPE_SET_PAGE_SCOPE_FIELD" then "ACTION_TYPE_SET_PAGE_SCOPE_FIELD" elseif p1 == "ACTION_TYPE_SUBMIT_CUSTOM_FORM_RESPONSE" then "ACTION_TYPE_SUBMIT_CUSTOM_FORM_RESPONSE" elseif p1 == "ACTION_TYPE_REFRESH_CUSTOM_FORM_RESULTS" then "ACTION_TYPE_REFRESH_CUSTOM_FORM_RESULTS" elseif p1 == "ACTION_TYPE_OPEN_EXPERIENCE_LEADERBOARD_SEE_ALL" then "ACTION_TYPE_OPEN_EXPERIENCE_LEADERBOARD_SEE_ALL" elseif p1 == "ACTION_TYPE_OPEN_CATALOG_ITEM_EXPERIENCES" then "ACTION_TYPE_OPEN_CATALOG_ITEM_EXPERIENCES" elseif p1 == "ACTION_TYPE_OPEN_CATALOG_ITEM_CREATOR_PROFILE" then "ACTION_TYPE_OPEN_CATALOG_ITEM_CREATOR_PROFILE" elseif p1 == "ACTION_TYPE_PLAY_CATALOG_ITEM_ATTRIBUTION_EXPERIENCE" then "ACTION_TYPE_PLAY_CATALOG_ITEM_ATTRIBUTION_EXPERIENCE" elseif p1 == "ACTION_TYPE_OPEN_CATALOG_ITEM_RESELLERS" then "ACTION_TYPE_OPEN_CATALOG_ITEM_RESELLERS" elseif p1 == "ACTION_TYPE_PURCHASE_CATALOG_ITEM_FROM_STOCK" then "ACTION_TYPE_PURCHASE_CATALOG_ITEM_FROM_STOCK" elseif p1 == "ACTION_TYPE_OPEN_CATALOG_ITEM_OWNERSHIP" then "ACTION_TYPE_OPEN_CATALOG_ITEM_OWNERSHIP" elseif p1 == "ACTION_TYPE_TRY_ON_CATALOG_ITEM" then "ACTION_TYPE_TRY_ON_CATALOG_ITEM" else nil
+		return if p1 == "ACTION_TYPE_INVALID" then "ACTION_TYPE_INVALID" elseif p1 == "ACTION_TYPE_DISMISS_DIALOG" then "ACTION_TYPE_DISMISS_DIALOG" elseif p1 == "ACTION_TYPE_LINK" then "ACTION_TYPE_LINK" elseif p1 == "ACTION_TYPE_OPEN_GAME_DETAILS" then "ACTION_TYPE_OPEN_GAME_DETAILS" elseif p1 == "ACTION_TYPE_OPEN_JOIN_FRIENDS" then "ACTION_TYPE_OPEN_JOIN_FRIENDS" elseif p1 == "ACTION_TYPE_OPEN_MARKETPLACE_TRY_ON" then "ACTION_TYPE_OPEN_MARKETPLACE_TRY_ON" elseif p1 == "ACTION_TYPE_OPEN_SEE_ALL" then "ACTION_TYPE_OPEN_SEE_ALL" elseif p1 == "ACTION_TYPE_OPEN_SPONSORED_TOOLTIP" then "ACTION_TYPE_OPEN_SPONSORED_TOOLTIP" elseif p1 == "ACTION_TYPE_PLAY_BUTTON_CLICK" then "ACTION_TYPE_PLAY_BUTTON_CLICK" elseif p1 == "ACTION_TYPE_UPDATE_USER_SETTINGS" then "ACTION_TYPE_UPDATE_USER_SETTINGS" elseif p1 == "ACTION_TYPE_OPEN_TOOLTIP" then "ACTION_TYPE_OPEN_TOOLTIP" elseif p1 == "ACTION_TYPE_OPEN_BADGE_DETAILS" then "ACTION_TYPE_OPEN_BADGE_DETAILS" elseif p1 == "ACTION_TYPE_LOAD_MORE_FROM_API" then "ACTION_TYPE_LOAD_MORE_FROM_API" elseif p1 == "ACTION_TYPE_SHARE" then "ACTION_TYPE_SHARE" elseif p1 == "ACTION_TYPE_OPEN_ABUSE_REPORT" then "ACTION_TYPE_OPEN_ABUSE_REPORT" elseif p1 == "ACTION_TYPE_REMOVE_BADGE_FROM_INVENTORY" then "ACTION_TYPE_REMOVE_BADGE_FROM_INVENTORY" elseif p1 == "ACTION_TYPE_OPEN_PROFILE" then "ACTION_TYPE_OPEN_PROFILE" elseif p1 == "ACTION_TYPE_OPEN_FACIAL_AGE_ESTIMATION" then "ACTION_TYPE_OPEN_FACIAL_AGE_ESTIMATION" elseif p1 == "ACTION_TYPE_OPEN_ADD_CONNECTIONS_PAGE" then "ACTION_TYPE_OPEN_ADD_CONNECTIONS_PAGE" elseif p1 == "ACTION_TYPE_OPEN_MARKETPLACE" then "ACTION_TYPE_OPEN_MARKETPLACE" elseif p1 == "ACTION_TYPE_HIDE_PROFILE_COMPLETION" then "ACTION_TYPE_HIDE_PROFILE_COMPLETION" elseif p1 == "ACTION_TYPE_SELECT_MARKETPLACE_CATALOG_CATEGORY" then "ACTION_TYPE_SELECT_MARKETPLACE_CATALOG_CATEGORY" elseif p1 == "ACTION_TYPE_SELECT_MARKETPLACE_CATALOG_SUBCATEGORY" then "ACTION_TYPE_SELECT_MARKETPLACE_CATALOG_SUBCATEGORY" elseif p1 == "ACTION_TYPE_OPEN_MARKETPLACE_CATALOG_SEE_ALL" then "ACTION_TYPE_OPEN_MARKETPLACE_CATALOG_SEE_ALL" elseif p1 == "ACTION_TYPE_CLOSE_MARKETPLACE_CATEGORY_TOOLTIP" then "ACTION_TYPE_CLOSE_MARKETPLACE_CATEGORY_TOOLTIP" elseif p1 == "ACTION_TYPE_RESIZE_MARKETPLACE_CATALOG" then "ACTION_TYPE_RESIZE_MARKETPLACE_CATALOG" elseif p1 == "ACTION_TYPE_OPEN_MARKETPLACE_CATALOG_FILTERS" then "ACTION_TYPE_OPEN_MARKETPLACE_CATALOG_FILTERS" elseif p1 == "ACTION_TYPE_OPEN_SOCIAL_LINK" then "ACTION_TYPE_OPEN_SOCIAL_LINK" elseif p1 == "ACTION_TYPE_OPEN_CHARTS_SORT_DETAIL" then "ACTION_TYPE_OPEN_CHARTS_SORT_DETAIL" elseif p1 == "ACTION_TYPE_OPEN_SONG_DETAIL" then "ACTION_TYPE_OPEN_SONG_DETAIL" elseif p1 == "ACTION_TYPE_REFRESH_FROM_API" then "ACTION_TYPE_REFRESH_FROM_API" elseif p1 == "ACTION_TYPE_RSVP_TO_EVENT" then "ACTION_TYPE_RSVP_TO_EVENT" elseif p1 == "ACTION_TYPE_APPLY_CHARTS_FILTER" then "ACTION_TYPE_APPLY_CHARTS_FILTER" elseif p1 == "ACTION_TYPE_ANALYTICS_EVENT" then "ACTION_TYPE_ANALYTICS_EVENT" elseif p1 == "ACTION_TYPE_CUSTOM_ANALYTICS_EVENT" then "ACTION_TYPE_CUSTOM_ANALYTICS_EVENT" elseif p1 == "ACTION_TYPE_OPEN_GAME_INVITE" then "ACTION_TYPE_OPEN_GAME_INVITE" elseif p1 == "ACTION_TYPE_OPEN_EVENT_DETAILS" then "ACTION_TYPE_OPEN_EVENT_DETAILS" elseif p1 == "ACTION_TYPE_LAUNCH_EXPERIENCE" then "ACTION_TYPE_LAUNCH_EXPERIENCE" elseif p1 == "ACTION_TYPE_TOGGLE_EXPERIENCE_FAVORITE" then "ACTION_TYPE_TOGGLE_EXPERIENCE_FAVORITE" elseif p1 == "ACTION_TYPE_TOGGLE_EXPERIENCE_FOLLOW" then "ACTION_TYPE_TOGGLE_EXPERIENCE_FOLLOW" elseif p1 == "ACTION_TYPE_TOGGLE_EXPERIENCE_VOTE" then "ACTION_TYPE_TOGGLE_EXPERIENCE_VOTE" elseif p1 == "ACTION_TYPE_OPEN_PURCHASE_PROMPT" then "ACTION_TYPE_OPEN_PURCHASE_PROMPT" elseif p1 == "ACTION_TYPE_OPEN_SDUI_OVERLAY" then "ACTION_TYPE_OPEN_SDUI_OVERLAY" elseif p1 == "ACTION_TYPE_OPEN_BADGES_SEE_ALL" then "ACTION_TYPE_OPEN_BADGES_SEE_ALL" elseif p1 == "ACTION_TYPE_OPEN_EXPERIENCE_STORE_SEE_ALL" then "ACTION_TYPE_OPEN_EXPERIENCE_STORE_SEE_ALL" elseif p1 == "ACTION_TYPE_DISMISS_GAME_FEEDBACK" then "ACTION_TYPE_DISMISS_GAME_FEEDBACK" elseif p1 == "ACTION_TYPE_OPEN_GAME_FEEDBACK_FORM" then "ACTION_TYPE_OPEN_GAME_FEEDBACK_FORM" elseif p1 == "ACTION_TYPE_ENABLE_EVENT_NOTIFICATIONS" then "ACTION_TYPE_ENABLE_EVENT_NOTIFICATIONS" elseif p1 == "ACTION_TYPE_DISMISS_EVENT_NOTIFICATIONS_MODAL" then "ACTION_TYPE_DISMISS_EVENT_NOTIFICATIONS_MODAL" elseif p1 == "ACTION_TYPE_OPEN_AMP_WIZARD" then "ACTION_TYPE_OPEN_AMP_WIZARD" elseif p1 == "ACTION_TYPE_OPEN_SUBSCRIPTION_PURCHASE_PAGE" then "ACTION_TYPE_OPEN_SUBSCRIPTION_PURCHASE_PAGE" elseif p1 == "ACTION_TYPE_REFRESH_GAME_PASSES" then "ACTION_TYPE_REFRESH_GAME_PASSES" elseif p1 == "ACTION_TYPE_REFRESH_PLAYABILITY" then "ACTION_TYPE_REFRESH_PLAYABILITY" elseif p1 == "ACTION_TYPE_OPEN_SOCIAL_PROOF_USER_LIST_SHEET" then "ACTION_TYPE_OPEN_SOCIAL_PROOF_USER_LIST_SHEET" elseif p1 == "ACTION_TYPE_REPORT_SURFACE_LOAD_TIME_MILESTONE" then "ACTION_TYPE_REPORT_SURFACE_LOAD_TIME_MILESTONE" elseif p1 == "ACTION_TYPE_OPEN_SEARCH_RESULTS_TAB" then "ACTION_TYPE_OPEN_SEARCH_RESULTS_TAB" elseif p1 == "ACTION_TYPE_OPEN_PHONE_UPSELL_MODAL" then "ACTION_TYPE_OPEN_PHONE_UPSELL_MODAL" elseif p1 == "ACTION_TYPE_OPEN_EMAIL_UPSELL_MODAL" then "ACTION_TYPE_OPEN_EMAIL_UPSELL_MODAL" elseif p1 == "ACTION_TYPE_DISMISS_PROMPT" then "ACTION_TYPE_DISMISS_PROMPT" elseif p1 == "ACTION_TYPE_REQUEST_FRIENDSHIP" then "ACTION_TYPE_REQUEST_FRIENDSHIP" elseif p1 == "ACTION_TYPE_REFRESH_DEVELOPER_PRODUCTS" then "ACTION_TYPE_REFRESH_DEVELOPER_PRODUCTS" elseif p1 == "ACTION_TYPE_OPEN_FAE_TRIAL_UPSELL" then "ACTION_TYPE_OPEN_FAE_TRIAL_UPSELL" elseif p1 == "ACTION_TYPE_REFRESH_OMNI_RECOMMENDATION_FEED_ITEM" then "ACTION_TYPE_REFRESH_OMNI_RECOMMENDATION_FEED_ITEM" elseif p1 == "ACTION_TYPE_AI_OVERVIEW_FEEDBACK" then "ACTION_TYPE_AI_OVERVIEW_FEEDBACK" elseif p1 == "ACTION_TYPE_OPEN_TRUSTED_FRIENDS_UPSELL_MODAL" then "ACTION_TYPE_OPEN_TRUSTED_FRIENDS_UPSELL_MODAL" elseif p1 == "ACTION_TYPE_RECORD_PARTY_CHAT_CONVERSATION_UPSELL_ACKNOWLEDGEMENT" then "ACTION_TYPE_RECORD_PARTY_CHAT_CONVERSATION_UPSELL_ACKNOWLEDGEMENT" elseif p1 == "ACTION_TYPE_OPEN_SEARCH_RESULTS_WITH_QUERY" then "ACTION_TYPE_OPEN_SEARCH_RESULTS_WITH_QUERY" elseif p1 == "ACTION_TYPE_SELECT_MARKETPLACE_FAVORITES_CATEGORY" then "ACTION_TYPE_SELECT_MARKETPLACE_FAVORITES_CATEGORY" elseif p1 == "ACTION_TYPE_DOWNLOAD_APP" then "ACTION_TYPE_DOWNLOAD_APP" elseif p1 == "ACTION_TYPE_REFRESH_CHARTS_SORT_DETAIL" then "ACTION_TYPE_REFRESH_CHARTS_SORT_DETAIL" elseif p1 == "ACTION_TYPE_JOIN_COMMUNITY" then "ACTION_TYPE_JOIN_COMMUNITY" elseif p1 == "ACTION_TYPE_VIEW_COMMUNITY" then "ACTION_TYPE_VIEW_COMMUNITY" elseif p1 == "ACTION_TYPE_PIN_EXPERIENCE_SHORTCUT" then "ACTION_TYPE_PIN_EXPERIENCE_SHORTCUT" elseif p1 == "ACTION_TYPE_SELECT_MARKETPLACE_FAVORITES_SUBCATEGORY" then "ACTION_TYPE_SELECT_MARKETPLACE_FAVORITES_SUBCATEGORY" elseif p1 == "ACTION_TYPE_SHOW_TOAST" then "ACTION_TYPE_SHOW_TOAST" elseif p1 == "ACTION_TYPE_OPEN_INCOMING_TRANSFER_UPSELL" then "ACTION_TYPE_OPEN_INCOMING_TRANSFER_UPSELL" elseif p1 == "ACTION_TYPE_ACTION_SEQUENCE" then "ACTION_TYPE_ACTION_SEQUENCE" elseif p1 == "ACTION_TYPE_REFRESH_FEED_ENTRY_FROM_API" then "ACTION_TYPE_REFRESH_FEED_ENTRY_FROM_API" elseif p1 == "ACTION_TYPE_OPEN_PROFILE_FRAMES_EDITOR" then "ACTION_TYPE_OPEN_PROFILE_FRAMES_EDITOR" elseif p1 == "ACTION_TYPE_NAVIGATE" then "ACTION_TYPE_NAVIGATE" elseif p1 == "ACTION_TYPE_SET_GAME_TILE_NOT_INTERESTED" then "ACTION_TYPE_SET_GAME_TILE_NOT_INTERESTED" elseif p1 == "ACTION_TYPE_REFRESH_HOME" then "ACTION_TYPE_REFRESH_HOME" elseif p1 == "ACTION_TYPE_UNDO_GAME_TILE_NOT_INTERESTED" then "ACTION_TYPE_UNDO_GAME_TILE_NOT_INTERESTED" elseif p1 == "ACTION_TYPE_APPLY_DEV_STORE_SEE_ALL_CATEGORY_FILTER" then "ACTION_TYPE_APPLY_DEV_STORE_SEE_ALL_CATEGORY_FILTER" elseif p1 == "ACTION_TYPE_OPEN_WHY_THIS_AD" then "ACTION_TYPE_OPEN_WHY_THIS_AD" elseif p1 == "ACTION_TYPE_REQUEST_PUSH_NOTIFICATION_PERMISSION" then "ACTION_TYPE_REQUEST_PUSH_NOTIFICATION_PERMISSION" elseif p1 == "ACTION_TYPE_OPEN_BUILD_CREATION_CHAT" then "ACTION_TYPE_OPEN_BUILD_CREATION_CHAT" elseif p1 == "ACTION_TYPE_EXPERIMENTAL" then "ACTION_TYPE_EXPERIMENTAL" elseif p1 == "ACTION_TYPE_OPEN_EXTERNAL_LINK" then "ACTION_TYPE_OPEN_EXTERNAL_LINK" elseif p1 == "ACTION_TYPE_OPEN_CATALOG_ITEM_DETAILS" then "ACTION_TYPE_OPEN_CATALOG_ITEM_DETAILS" elseif p1 == "ACTION_TYPE_OPEN_ITEM_INFO_ROW_PROMPT" then "ACTION_TYPE_OPEN_ITEM_INFO_ROW_PROMPT" elseif p1 == "ACTION_TYPE_TOGGLE_CATALOG_ITEM_FAVORITE" then "ACTION_TYPE_TOGGLE_CATALOG_ITEM_FAVORITE" elseif p1 == "ACTION_TYPE_PLAY_WITH_REWARD_AD" then "ACTION_TYPE_PLAY_WITH_REWARD_AD" elseif p1 == "ACTION_TYPE_SET_PAGE_SCOPE_FIELD" then "ACTION_TYPE_SET_PAGE_SCOPE_FIELD" elseif p1 == "ACTION_TYPE_SUBMIT_CUSTOM_FORM_RESPONSE" then "ACTION_TYPE_SUBMIT_CUSTOM_FORM_RESPONSE" elseif p1 == "ACTION_TYPE_REFRESH_CUSTOM_FORM_RESULTS" then "ACTION_TYPE_REFRESH_CUSTOM_FORM_RESULTS" elseif p1 == "ACTION_TYPE_OPEN_EXPERIENCE_LEADERBOARD_SEE_ALL" then "ACTION_TYPE_OPEN_EXPERIENCE_LEADERBOARD_SEE_ALL" elseif p1 == "ACTION_TYPE_OPEN_CATALOG_ITEM_EXPERIENCES" then "ACTION_TYPE_OPEN_CATALOG_ITEM_EXPERIENCES" elseif p1 == "ACTION_TYPE_OPEN_CATALOG_ITEM_CREATOR_PROFILE" then "ACTION_TYPE_OPEN_CATALOG_ITEM_CREATOR_PROFILE" elseif p1 == "ACTION_TYPE_PLAY_CATALOG_ITEM_ATTRIBUTION_EXPERIENCE" then "ACTION_TYPE_PLAY_CATALOG_ITEM_ATTRIBUTION_EXPERIENCE" elseif p1 == "ACTION_TYPE_OPEN_CATALOG_ITEM_RESELLERS" then "ACTION_TYPE_OPEN_CATALOG_ITEM_RESELLERS" elseif p1 == "ACTION_TYPE_PURCHASE_CATALOG_ITEM_FROM_STOCK" then "ACTION_TYPE_PURCHASE_CATALOG_ITEM_FROM_STOCK" elseif p1 == "ACTION_TYPE_OPEN_CATALOG_ITEM_OWNERSHIP" then "ACTION_TYPE_OPEN_CATALOG_ITEM_OWNERSHIP" elseif p1 == "ACTION_TYPE_TRY_ON_CATALOG_ITEM" then "ACTION_TYPE_TRY_ON_CATALOG_ITEM" elseif p1 == "ACTION_TYPE_PURCHASE_BUY_ROBUX_PRODUCT" then "ACTION_TYPE_PURCHASE_BUY_ROBUX_PRODUCT" elseif p1 == "ACTION_TYPE_PURCHASE_BUY_ROBUX_SUBSCRIPTION" then "ACTION_TYPE_PURCHASE_BUY_ROBUX_SUBSCRIPTION" elseif p1 == "ACTION_TYPE_OPEN_ROBLOX_PLUS_SHEET" then "ACTION_TYPE_OPEN_ROBLOX_PLUS_SHEET" elseif p1 == "ACTION_TYPE_OPEN_SEND_ROBUX" then "ACTION_TYPE_OPEN_SEND_ROBUX" elseif p1 == "ACTION_TYPE_REVIEW_TRANSFER" then "ACTION_TYPE_REVIEW_TRANSFER" else nil
 	end
 }
 
@@ -29217,6 +30290,16 @@ return {
 	RefreshDeveloperProductsAction_Params = t.RefreshDeveloperProductsAction_Params,
 	OpenFaeTrialUpsellAction = t.OpenFaeTrialUpsellAction,
 	OpenFaeTrialUpsellAction_Params = t.OpenFaeTrialUpsellAction_Params,
+	PurchaseBuyRobuxProductAction = t.PurchaseBuyRobuxProductAction,
+	PurchaseBuyRobuxProductAction_Params = t.PurchaseBuyRobuxProductAction_Params,
+	PurchaseBuyRobuxSubscriptionAction = t.PurchaseBuyRobuxSubscriptionAction,
+	PurchaseBuyRobuxSubscriptionAction_Params = t.PurchaseBuyRobuxSubscriptionAction_Params,
+	OpenRobloxPlusSheetAction = t.OpenRobloxPlusSheetAction,
+	OpenRobloxPlusSheetAction_Params = t.OpenRobloxPlusSheetAction_Params,
+	OpenSendRobuxAction = t.OpenSendRobuxAction,
+	OpenSendRobuxAction_Params = t.OpenSendRobuxAction_Params,
+	ReviewTransferAction = t.ReviewTransferAction,
+	ReviewTransferAction_Params = t.ReviewTransferAction_Params,
 	OpenIncomingTransferUpsellAction = t.OpenIncomingTransferUpsellAction,
 	OpenIncomingTransferUpsellAction_Params = t.OpenIncomingTransferUpsellAction_Params,
 	OpenSduiOverlayAction = t.OpenSduiOverlayAction,
