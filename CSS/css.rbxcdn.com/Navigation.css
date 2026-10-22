@@ -749,6 +749,43 @@ div.MuiDialog-root:not(:first-of-type) .MuiDialog-container {
     background-color: #494d5a
 }
 
+.d-inline {
+    display: inline
+}
+
+.d-flex {
+    display: -ms-flexbox;
+    display: flex
+}
+
+.d-flex-inline {
+    display: -ms-inline-flexbox;
+    display: inline-flex
+}
+
+.gap-1 {
+    gap: .25rem !important
+}
+
+.justify-content-between {
+    -ms-flex-pack: justify;
+    justify-content: space-between
+}
+
+.justify-content-start {
+    -ms-flex-pack: start;
+    justify-content: flex-start
+}
+
+.align-items-center {
+    -ms-flex-align: center;
+    align-items: center
+}
+
+.ml-1 {
+    margin-left: .25rem !important
+}
+
 .inset-\[0\] {
     top: 0;
     bottom: 0;
@@ -4342,6 +4379,50 @@ a.btn-uiblox-common-common-notification-bell-md .btn-text {
     display: inline-flex
 }
 
+.rbx-header .rbx-navbar-icon-group>li.age-bracket-label {
+    padding: 6px 0 0;
+    position: static
+}
+
+.rbx-header .rbx-navbar-icon-group>li.age-bracket-label:not(:-webkit-any(:lang(ae), :lang(ar), :lang(arc), :lang(bcc), :lang(bqi), :lang(ckb), :lang(dv), :lang(fa), :lang(glk), :lang(he), :lang(ku), :lang(mzn), :lang(nqo), :lang(pnb), :lang(ps), :lang(sd), :lang(ug), :lang(ur), :lang(yi))) {
+    text-align: left
+}
+
+.rbx-header .rbx-navbar-icon-group>li.age-bracket-label:not(:-moz-any(:lang(ae), :lang(ar), :lang(arc), :lang(bcc), :lang(bqi), :lang(ckb), :lang(dv), :lang(fa), :lang(glk), :lang(he), :lang(ku), :lang(mzn), :lang(nqo), :lang(pnb), :lang(ps), :lang(sd), :lang(ug), :lang(ur), :lang(yi))) {
+    text-align: left
+}
+
+.rbx-header .rbx-navbar-icon-group>li.age-bracket-label:not(:-webkit-any(:lang(ae), :lang(ar), :lang(arc), :lang(bcc), :lang(bqi), :lang(ckb), :lang(dv), :lang(fa), :lang(glk), :lang(he), :lang(ku), :lang(mzn), :lang(nqo), :lang(pnb), :lang(ps), :lang(sd), :lang(ug), :lang(ur), :lang(yi))) {
+    text-align: left
+}
+
+.rbx-header .rbx-navbar-icon-group>li.age-bracket-label:not(:-moz-any(:lang(ae), :lang(ar), :lang(arc), :lang(bcc), :lang(bqi), :lang(ckb), :lang(dv), :lang(fa), :lang(glk), :lang(he), :lang(ku), :lang(mzn), :lang(nqo), :lang(pnb), :lang(ps), :lang(sd), :lang(ug), :lang(ur), :lang(yi))) {
+    text-align: left
+}
+
+.rbx-header .rbx-navbar-icon-group>li.age-bracket-label:not(:is(:lang(ae), :lang(ar), :lang(arc), :lang(bcc), :lang(bqi), :lang(ckb), :lang(dv), :lang(fa), :lang(glk), :lang(he), :lang(ku), :lang(mzn), :lang(nqo), :lang(pnb), :lang(ps), :lang(sd), :lang(ug), :lang(ur), :lang(yi))) {
+    text-align: left
+}
+
+.rbx-header .rbx-navbar-icon-group>li.age-bracket-label:-webkit-any(:lang(ae), :lang(ar), :lang(arc), :lang(bcc), :lang(bqi), :lang(ckb), :lang(dv), :lang(fa), :lang(glk), :lang(he), :lang(ku), :lang(mzn), :lang(nqo), :lang(pnb), :lang(ps), :lang(sd), :lang(ug), :lang(ur), :lang(yi)) {
+    text-align: right
+}
+
+.rbx-header .rbx-navbar-icon-group>li.age-bracket-label:-moz-any(:lang(ae), :lang(ar), :lang(arc), :lang(bcc), :lang(bqi), :lang(ckb), :lang(dv), :lang(fa), :lang(glk), :lang(he), :lang(ku), :lang(mzn), :lang(nqo), :lang(pnb), :lang(ps), :lang(sd), :lang(ug), :lang(ur), :lang(yi)) {
+    text-align: right
+}
+
+.rbx-header .rbx-navbar-icon-group>li.age-bracket-label:is(:lang(ae), :lang(ar), :lang(arc), :lang(bcc), :lang(bqi), :lang(ckb), :lang(dv), :lang(fa), :lang(glk), :lang(he), :lang(ku), :lang(mzn), :lang(nqo), :lang(pnb), :lang(ps), :lang(sd), :lang(ug), :lang(ur), :lang(yi)) {
+    text-align: right
+}
+
+.rbx-header .rbx-navbar-icon-group>li.age-bracket-label>a {
+    padding: 0;
+    display: -ms-flexbox;
+    display: flex;
+    position: static
+}
+
 .rbx-header .rbx-navbar-icon-group .age-bracket-label .dynamic-overflow-container {
     -ms-flex-align: center;
     align-items: center
@@ -4819,6 +4900,12 @@ a.btn-uiblox-common-common-notification-bell-md .btn-text {
 @media (min-width:601px) {
     .left-nav-new-width .rbx-header .navbar-search {
         width: 30%
+    }
+}
+
+@media (max-width:600px) {
+    .left-nav-new-width .rbx-header .navbar-search {
+        width: calc(100% - 24px)
     }
 }
 

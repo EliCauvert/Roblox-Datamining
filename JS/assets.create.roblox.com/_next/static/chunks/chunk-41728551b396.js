@@ -3,7 +3,7 @@
     try {
         var e = "undefined" != typeof globalThis ? globalThis : "undefined" != typeof global ? global : "undefined" != typeof window ? window : "undefined" != typeof self ? self : {},
             n = (new e.Error).stack;
-        n && ((e._debugIds || (e._debugIds = {}))[n] = "5a6f1fef-e46a-8310-f022-10695f30be0b")
+        n && ((e._debugIds || (e._debugIds = {}))[n] = "3a4527ec-4437-ce8d-e6ed-8bee1619db42")
     } catch (e) {}
 }();
 (globalThis.TURBOPACK || (globalThis.TURBOPACK = [])).push(["object" == typeof document ? document.currentScript : void 0, 239328, e => {
@@ -126,8 +126,13 @@
             namespace: "creator-creations",
             name: "isMomentsPostCreationEnabled",
             defaultValue: !1
+        }),
+        c = (0, t.defineFlag)({
+            namespace: "creator-creations",
+            name: "isMomentsModeratedTabEnabled",
+            defaultValue: !1
         });
-    e.s(["isBadgeDefaultIconEnabled", 0, a, "isMomentsFeedIdEnabled", 0, l, "isMomentsPostCreationEnabled", 0, d, "isMomentsShareLinkEnabled", 0, o, "isMomentsSitetestUrlParsingEnabled", 0, s, "isMomentsUploadEnabled", 0, n, "isMomentsUploadLanguageSelectEnabled", 0, i, "isTextDocumentEnabled", 0, r])
+    e.s(["isBadgeDefaultIconEnabled", 0, a, "isMomentsFeedIdEnabled", 0, l, "isMomentsModeratedTabEnabled", 0, c, "isMomentsPostCreationEnabled", 0, d, "isMomentsShareLinkEnabled", 0, o, "isMomentsSitetestUrlParsingEnabled", 0, s, "isMomentsUploadEnabled", 0, n, "isMomentsUploadLanguageSelectEnabled", 0, i, "isTextDocumentEnabled", 0, r])
 }, 203450, e => {
     "use strict";
     var t = e.i(221628),
@@ -153,7 +158,7 @@
             children: s
         } = e, {
             user: l
-        } = (0, r.useAuthentication)(), u = (0, o.useCurrentGroup)(), [m, p] = (0, a.useState)(void 0), [h, v] = (0, a.useState)(), [y, g] = (0, a.useState)(), [f, A] = (0, a.useState)(), [b, T] = (0, a.useState)(), I = (0, a.useMemo)(() => {
+        } = (0, r.useAuthentication)(), u = (0, o.useCurrentGroup)(), [m, p] = (0, a.useState)(void 0), [h, v] = (0, a.useState)(), [y, f] = (0, a.useState)(), [g, A] = (0, a.useState)(), [b, T] = (0, a.useState)(), I = (0, a.useMemo)(() => {
             var e;
             return (null != (e = null == u ? void 0 : u.id) ? e : 0) !== 0
         }, [u]), [S, C] = (0, a.useState)(void 0), E = void 0 === m || void 0 === h || void 0 === y && I, x = (0, a.useCallback)(async () => {
@@ -184,14 +189,14 @@
         }, [S, I]), D = (0, a.useCallback)(async () => {
             if (I && (null == u ? void 0 : u.id)) try {
                 let e = await (0, d.getGroupEligibility)(u.id);
-                g(e.isEligible)
+                f(e.isEligible)
             } catch (e) {
-                g(!1)
+                f(!1)
             }
         }, [u, I]);
         (0, a.useEffect)(() => {
-            E ? T(void 0) : I && !S ? T(!1) : T(!1 === f)
-        }, [I, S, f, E]), (0, a.useEffect)(() => {
+            E ? T(void 0) : I && !S ? T(!1) : T(!1 === g)
+        }, [I, S, g, E]), (0, a.useEffect)(() => {
             (async () => {
                 if (I && (null == u ? void 0 : u.id)) {
                     var e;
@@ -212,12 +217,12 @@
         let N = (0, a.useMemo)(() => ({
             isAffiliateProgramLoading: E,
             requiresActionToJoinProgram: b,
-            compliantWithAllUserRequirements: f,
+            compliantWithAllUserRequirements: g,
             creatorMetadata: null != m ? m : void 0,
             requirements: null != h ? h : void 0,
             isCurrentUserGroupOwner: S,
             isGroupEligible: null != y ? y : void 0
-        }), [E, b, f, m, h, S, y]);
+        }), [E, b, g, m, h, S, y]);
         return (0, t.jsx)(c.Provider, {
             value: N,
             children: s
@@ -262,8 +267,8 @@
         h = e.i(823062),
         v = e.i(881670),
         y = e.i(904969),
-        g = e.i(906791);
-    let f = (0, e.i(697973).makeStyles)()(e => ({
+        f = e.i(906791);
+    let g = (0, e.i(697973).makeStyles)()(e => ({
         alertContainer: {
             marginBottom: "16px",
             [e.breakpoints.down("Medium")]: {
@@ -299,7 +304,7 @@
             backgroundColor: "rgba(255, 255, 255, 0.1)"
         }
     }));
-    e.s(["default", 0, f], 540082);
+    e.s(["default", 0, g], 540082);
     var A = ((t = {}).Home = "home", t.Creations = "creations", t);
     let b = (0, s.withTranslation)(e => {
         let t, v, A, b, {
@@ -311,10 +316,10 @@
                 isHighPriority: C,
                 variant: E,
                 dismissBanner: x
-            } = (0, g.useAgeVerificationUpsellContext)(),
+            } = (0, f.useAgeVerificationUpsellContext)(),
             {
                 classes: w
-            } = f(),
+            } = g(),
             D = (0, n.useRef)(null),
             {
                 unifiedLogger: N
@@ -466,8 +471,8 @@
         let {
             children: i
         } = e, [o, d] = (0, a.useState)(!0), [v, y] = (0, a.useState)("doNotShow"), {
-            isFetched: g,
-            user: f
+            isFetched: f,
+            user: g
         } = (0, n.useRobloxAuthentication)(), {
             unifiedLogger: A
         } = (0, r.useUnifiedLoggerProvider)(), {
@@ -486,7 +491,7 @@
             await u(), d(!0)
         }, [d]);
         (0, a.useEffect)(() => {
-            T && g && (null == f ? void 0 : f.id) && (async () => {
+            T && f && (null == g ? void 0 : g.id) && (async () => {
                 let e = !1;
                 try {
                     e = await c()
@@ -522,7 +527,7 @@
                     }
                 })
             })
-        }, [T, g, f, A]);
+        }, [T, f, g, A]);
         let S = (0, a.useMemo)(() => {
             let e = T && "doNotShow" !== v;
             return {
@@ -686,9 +691,9 @@
         h = e.i(114209),
         v = e.i(373736),
         y = e.i(917852),
-        g = e.i(576069),
-        f = e.i(663563);
-    let A = "".concat("https://assets.create.roblox.com/66df0644966e3caed40b543d10488e422a2ae84e/assets", "/home/publish_eligibility_banner.webp"),
+        f = e.i(576069),
+        g = e.i(663563);
+    let A = "".concat("https://assets.create.roblox.com/e6ff6e34e83a1037af860448b9799edcfaf78eb6/assets", "/home/publish_eligibility_banner.webp"),
         b = (0, l.withTranslation)(e => {
             var b;
             let {
@@ -705,7 +710,7 @@
                 data: k,
                 isLoading: P,
                 isFetching: M
-            } = (0, g.useCreatorEligibility)(), U = (0, a.useRef)(!1), [_, F] = (0, a.useState)(!1), B = (null == k ? void 0 : k.ageBracket) === s.AgeBracketEnum.Over18, V = (null == k ? void 0 : k.ageBracket) === s.AgeBracketEnum.Between13And18, R = null != (b = null == k ? void 0 : k.creatorEligibility.includes(s.CreatorEligibilityEnum.IdVerified)) && b, O = B || V, j = x && w && !(P || M) && !!k && !R;
+            } = (0, f.useCreatorEligibility)(), U = (0, a.useRef)(!1), [_, F] = (0, a.useState)(!1), B = (null == k ? void 0 : k.ageBracket) === s.AgeBracketEnum.Over18, V = (null == k ? void 0 : k.ageBracket) === s.AgeBracketEnum.Between13And18, R = null != (b = null == k ? void 0 : k.creatorEligibility.includes(s.CreatorEligibilityEnum.IdVerified)) && b, O = B || V, j = x && w && !(P || M) && !!k && !R;
             (0, a.useEffect)(() => {
                 j && !U.current && (U.current = !0, u.default.logImpressionEvent({
                     eventName: c.default.AudienceReachGrowthOpportunitiesBannerImpression,
@@ -739,7 +744,7 @@
                 direction: "row",
                 paddingBottom: 4,
                 children: [(0, t.jsxs)("div", {
-                    className: (0, i.clsx)(f.default.heroBanner, "relative width-full flex items-center bg-surface-200 radius-large"),
+                    className: (0, i.clsx)(g.default.heroBanner, "relative width-full flex items-center bg-surface-200 radius-large"),
                     children: [(0, t.jsx)("img", {
                         src: A,
                         alt: "",
@@ -753,7 +758,7 @@
                             e.currentTarget.style.display = "none"
                         }
                     }), (0, t.jsxs)("div", {
-                        className: (0, i.clsx)(f.default.heroTextContent, "color-mode-dark relative flex flex-col gap-medium padding-[32px]"),
+                        className: (0, i.clsx)(g.default.heroTextContent, "color-mode-dark relative flex flex-col gap-medium padding-[32px]"),
                         children: [(0, t.jsxs)("div", {
                             children: [(0, t.jsxs)("div", {
                                 className: "text-heading-medium content-emphasis",
@@ -763,7 +768,7 @@
                                 children: C(p.TranslationNamespace.AudienceReach, "Description.ExpandGrowthOpportunities")
                             })]
                         }), (0, t.jsx)("div", {
-                            className: (0, i.clsx)(f.default.buttonRow, "flex gap-small"),
+                            className: (0, i.clsx)(g.default.buttonRow, "flex gap-small"),
                             children: I ? B ? (0, t.jsx)(r.Button, {
                                 as: "a",
                                 href: y.idVerificationActionUrl,
@@ -992,14 +997,14 @@
             l1Options: m,
             categories: p,
             isLoading: h
-        } = u(e), v = (0, r.isAllAssetTypesActiveTab)(d) || (0, r.isRecentsActiveTab)(d) || (0, r.isAvatarLooksActiveTab)(d) ? void 0 : null != (i = (0, r.parseTaxonomyActiveTab)(d)) ? i : null == (o = m[0]) ? void 0 : o.taxonomyKey, y = (0, t.useMemo)(() => (0, s.findL1Category)(p, v), [p, v]), g = (0, t.useMemo)(() => (0, s.buildTaxonomyL2Options)(y), [y]), f = parseInt(null != (l = null == c ? void 0 : c.toString()) ? l : "", 10), A = (0, n.isValidIndex)(f, g) ? f : 0, b = (0, t.useMemo)(() => {
-            if (y) return g.length > 0 ? g[A] : y.webStableId ? (0, s.categoryToDropdown)(y) : void 0
-        }, [y, g, A]);
+        } = u(e), v = (0, r.isAllAssetTypesActiveTab)(d) || (0, r.isRecentsActiveTab)(d) || (0, r.isAvatarLooksActiveTab)(d) ? void 0 : null != (i = (0, r.parseTaxonomyActiveTab)(d)) ? i : null == (o = m[0]) ? void 0 : o.taxonomyKey, y = (0, t.useMemo)(() => (0, s.findL1Category)(p, v), [p, v]), f = (0, t.useMemo)(() => (0, s.buildTaxonomyL2Options)(y), [y]), g = parseInt(null != (l = null == c ? void 0 : c.toString()) ? l : "", 10), A = (0, n.isValidIndex)(g, f) ? g : 0, b = (0, t.useMemo)(() => {
+            if (y) return f.length > 0 ? f[A] : y.webStableId ? (0, s.categoryToDropdown)(y) : void 0
+        }, [y, f, A]);
         return {
             l1Options: m,
             activeL1Key: v,
             activeL1Node: y,
-            l2Options: g,
+            l2Options: f,
             filterIndex: A,
             selection: b,
             isLoading: h
@@ -1272,8 +1277,8 @@
         h = [r.CreatorInventoryAssetType.Model, r.CreatorInventoryAssetType.Plugin, r.CreatorInventoryAssetType.Audio, r.CreatorInventoryAssetType.Decal, r.CreatorInventoryAssetType.Image, r.CreatorInventoryAssetType.Video, r.CreatorInventoryAssetType.Mesh, r.CreatorInventoryAssetType.MeshPart, r.CreatorInventoryAssetType.Animation],
         v = [...h, r.CreatorInventoryAssetType.TextDocument],
         y = new Set([r.CreatorInventoryAssetType.Audio, r.CreatorInventoryAssetType.Decal, r.CreatorInventoryAssetType.MeshPart, r.CreatorInventoryAssetType.TextDocument, r.CreatorInventoryAssetType.Video]),
-        g = new Set([...y, r.CreatorInventoryAssetType.Image]),
-        f = new Set(v),
+        f = new Set([...y, r.CreatorInventoryAssetType.Image]),
+        g = new Set(v),
         A = new Set([r.CreatorInventoryAssetType.TextDocument]),
         b = new Set(["All", i.CreatorInventorySourceType.Created, i.CreatorInventorySourceType.Purchased, i.CreatorInventorySourceType.Shared]),
         T = new Set([l.Asset.Animation, l.Asset.Audio, l.Asset.Decal, l.Asset.Image, l.Asset.Mesh, l.Asset.MeshPart, l.Asset.Model, l.Asset.Plugin, l.Asset.Video]),
@@ -1341,7 +1346,7 @@
             [s.State.Archived]: "Archived"
         },
         w = e => !0 === e ? v : h,
-        D = e => null != e && g.has(e),
+        D = e => null != e && f.has(e),
         N = e => {
             if (null == e) return;
             let t = e instanceof Date ? e : new Date(e);
@@ -1372,7 +1377,7 @@
             source: n
         } = e;
         return t.trim().length > 0 || a || n !== i.CreatorInventorySourceType.Created
-    }, "hasDevelopmentItemCreatorStorePage", 0, e => e !== r.CreatorInventoryAssetType.TextDocument, "hasDevelopmentItemThumbnail", 0, e => e !== r.CreatorInventoryAssetType.TextDocument, "isDevelopmentItemArchivedViewAvailable", 0, D, "isDevelopmentItemAsset", 0, (e, t) => e === l.Asset.TextDocument ? !0 === t : T.has(e), "isDevelopmentItemDirectlyArchivable", 0, e => null != e && y.has(e), "isDevelopmentItemsAllAssetTypes", 0, e => "All" === e, "isDevelopmentItemsArchivedViewAvailable", 0, (e, t) => t || D(1 === e.length ? e[0] : void 0), "isDevelopmentItemsAssetType", 0, (e, t) => null != e && !!f.has(e) && (!A.has(e) || !0 === t), "isDevelopmentItemsSort", 0, e => u.some(t => t === e), "isDevelopmentItemsSourceSelection", 0, e => null != e && b.has(e), "isDevelopmentItemsView", 0, e => "grid" === e || "list" === e, "mapCreatorInventoryItem", 0, e => {
+    }, "hasDevelopmentItemCreatorStorePage", 0, e => e !== r.CreatorInventoryAssetType.TextDocument, "hasDevelopmentItemThumbnail", 0, e => e !== r.CreatorInventoryAssetType.TextDocument, "isDevelopmentItemArchivedViewAvailable", 0, D, "isDevelopmentItemAsset", 0, (e, t) => e === l.Asset.TextDocument ? !0 === t : T.has(e), "isDevelopmentItemDirectlyArchivable", 0, e => null != e && y.has(e), "isDevelopmentItemsAllAssetTypes", 0, e => "All" === e, "isDevelopmentItemsArchivedViewAvailable", 0, (e, t) => t || D(1 === e.length ? e[0] : void 0), "isDevelopmentItemsAssetType", 0, (e, t) => null != e && !!g.has(e) && (!A.has(e) || !0 === t), "isDevelopmentItemsSort", 0, e => u.some(t => t === e), "isDevelopmentItemsSourceSelection", 0, e => null != e && b.has(e), "isDevelopmentItemsView", 0, e => "grid" === e || "list" === e, "mapCreatorInventoryItem", 0, e => {
         var t, a, n, s, r, i, l;
         let o, d = null == (n = e.assetItem) ? void 0 : n.asset;
         if (null == d) return;
@@ -1575,9 +1580,9 @@
         },
         getValidMenuState(e, t, a, n, s, r, i, l) {
             var o, c, m, p, h, v;
-            let y, g, f = (null == (o = t.submenuItem) ? void 0 : o.type) !== d && (null == (c = t.submenuItem) ? void 0 : c.type) !== u || void 0 !== s;
+            let y, f, g = (null == (o = t.submenuItem) ? void 0 : o.type) !== d && (null == (c = t.submenuItem) ? void 0 : c.type) !== u || void 0 !== s;
             if (void 0 === t.menuItem || this.isMenuItemEnabled(t.menuItem, a, n, s, r, i, l)) {
-                if (void 0 !== t.submenuItem && f && !this.isMenuItemEnabled(t.submenuItem, a, n, s, r, i, l))
+                if (void 0 !== t.submenuItem && g && !this.isMenuItemEnabled(t.submenuItem, a, n, s, r, i, l))
                     if (void 0 !== t.menuItem.submenuItems) {
                         let e = 0,
                             o = 0;
@@ -1588,12 +1593,12 @@
                             }
                             o += 1
                         }
-                        y = t.menuItem, g = null == (h = t.menuItem.submenuItems) ? void 0 : h[e]
-                    } else y = t.menuItem, g = null == (v = t.menuItem.submenuItems) ? void 0 : v[0]
-            } else [y] = e, g = null == (m = e[0].submenuItems) ? void 0 : m[0];
+                        y = t.menuItem, f = null == (h = t.menuItem.submenuItems) ? void 0 : h[e]
+                    } else y = t.menuItem, f = null == (v = t.menuItem.submenuItems) ? void 0 : v[0]
+            } else [y] = e, f = null == (m = e[0].submenuItems) ? void 0 : m[0];
             return y ? {
                 menuItem: y,
-                submenuItem: g
+                submenuItem: f
             } : t
         },
         isAssetTypeDirectlyArchivable: e => i.allowedAssetTypesForDirectArchiving.has(e),
@@ -1786,12 +1791,12 @@
             medium: 16,
             large: 20
         },
-        g = {
+        f = {
             compact: 32,
             medium: 48,
             large: 64
         },
-        f = {
+        g = {
             compact: 4,
             medium: 6,
             large: 8
@@ -1811,10 +1816,10 @@
                     marginRight: y[a]
                 },
                 userBorderRadius: {
-                    borderRadius: g[a]
+                    borderRadius: f[a]
                 },
                 nonUserBorderRadius: {
-                    borderRadius: f[a]
+                    borderRadius: g[a]
                 },
                 thumbnailItemContainer: {
                     display: "flex",
@@ -1852,8 +1857,8 @@
     e.s(["default", 0, e => {
         let l, {
                 target: y,
-                targetType: g,
-                displayNameOverride: f,
+                targetType: f,
+                displayNameOverride: g,
                 adornment: b,
                 label: T,
                 disabled: I,
@@ -1886,20 +1891,20 @@
             {
                 translate: G
             } = (0, n.useTranslation)(),
-            K = (0, a.useMemo)(() => g === p.default.User ? s.ThumbnailTypes.avatarHeadshot : g === p.default.Group ? s.ThumbnailTypes.groupIcon : "Ugc" === g ? s.ThumbnailTypes.assetThumbnail : s.ThumbnailTypes.universeThumbnail, [g]),
+            K = (0, a.useMemo)(() => f === p.default.User ? s.ThumbnailTypes.avatarHeadshot : f === p.default.Group ? s.ThumbnailTypes.groupIcon : "Ugc" === f ? s.ThumbnailTypes.assetThumbnail : s.ThumbnailTypes.universeThumbnail, [f]),
             H = (0, a.useMemo)(() => {
                 if (!C && y.id && !E) {
-                    if (g === p.default.User) return h.www.getUserUrl(y.id);
-                    if (g === p.default.Group) return h.www.getGroupUrl(y.id);
-                    if ("Experience" === g) {
+                    if (f === p.default.User) return h.www.getUserUrl(y.id);
+                    if (f === p.default.Group) return h.www.getGroupUrl(y.id);
+                    if ("Experience" === f) {
                         let e = "rootPlaceId" in y ? y.rootPlaceId : void 0;
                         return e ? h.www.getGameDetailsUrl(e) : void 0
                     }
-                    if ("Ugc" === g) return h.www.getCatalogUrl(y.id)
+                    if ("Ugc" === f) return h.www.getCatalogUrl(y.id)
                 }
-            }, [C, y, E, g]);
-        f ? l = f : g === p.default.User ? l = "displayName" in y ? y.displayName : void 0 : "Ugc" !== g && (l = "name" in y ? y.name : void 0);
-        let q = !f && (g === p.default.User && !("displayName" in y && y.displayName) || "Ugc" === g),
+            }, [C, y, E, f]);
+        g ? l = g : f === p.default.User ? l = "displayName" in y ? y.displayName : void 0 : "Ugc" !== f && (l = "name" in y ? y.name : void 0);
+        let q = !g && (f === p.default.User && !("displayName" in y && y.displayName) || "Ugc" === f),
             W = (0, a.useMemo)(() => {
                 let e;
                 return (0, t.jsxs)(i.Grid, {
@@ -1937,7 +1942,7 @@
                             })
                         })]
                     }), !w && (0, t.jsxs)(t.Fragment, {
-                        children: [g === p.default.User && (0, t.jsx)(t.Fragment, {
+                        children: [f === p.default.User && (0, t.jsx)(t.Fragment, {
                             children: "name" in y && !y.name ? (0, t.jsx)(c.Skeleton, {
                                 animate: !0,
                                 variant: "text",
@@ -1954,7 +1959,7 @@
                                     children: e
                                 }) : e)
                             })
-                        }), (g === p.default.Group || "Experience" === g) && (0, t.jsx)(r.Typography, {
+                        }), (f === p.default.Group || "Experience" === f) && (0, t.jsx)(r.Typography, {
                             variant: "captionBody",
                             className: j(O, {
                                 [V]: void 0 === L && ("secondary" === D || "compact" === S)
@@ -1967,7 +1972,7 @@
                         })]
                     })]
                 })
-            }, [q, l, g, y, O, I, E, G, T, w, j, V, D, S, N, L]);
+            }, [q, l, f, y, O, I, E, G, T, w, j, V, D, S, N, L]);
         return (0, t.jsx)(i.Grid, {
             container: !0,
             direction: "row",
@@ -1991,8 +1996,8 @@
                             variant: "rounded",
                             alt: "avatar",
                             className: j(P, {
-                                [_]: g === p.default.User,
-                                [F]: g !== p.default.User,
+                                [_]: f === p.default.User,
+                                [F]: f !== p.default.User,
                                 [R]: I
                             }),
                             children: (0, t.jsx)(s.Thumbnail2d, {
@@ -2641,8 +2646,8 @@
                 variant: h = "System",
                 severity: v = "Info",
                 primaryActionLabel: y,
-                primaryActionHref: g,
-                primaryActionLinkTarget: f,
+                primaryActionHref: f,
+                primaryActionLinkTarget: g,
                 onPrimaryAction: A,
                 secondaryActionLabel: b,
                 secondaryActionHref: T,
@@ -2657,14 +2662,14 @@
             } = e, L = (0, n.default)("foundation-web-alert-message-"), k = !!y, P = !!b, M = !!(C && x), U = "Feedback" === h && (k || P || M), _ = "Warning" === v || "Error" === v ? "alert" : "status", F = null;
             k && (F = P ? l.default.createElement(m, {
                 label: y || "",
-                href: g,
-                linkTarget: f,
+                href: f,
+                linkTarget: g,
                 onAction: A,
                 variant: "Standard"
             }) : l.default.createElement(p, {
                 label: y || "",
-                href: g,
-                linkTarget: f,
+                href: f,
+                linkTarget: g,
                 onAction: A
             }));
             let B = P ? l.default.createElement(m, {
@@ -2864,8 +2869,8 @@
                 mobileLandscapeClassName: h,
                 largeScreenClassName: v,
                 onOpenAutoFocus: y,
-                onCloseAutoFocus: g,
-                onPointerDownOutside: f,
+                onCloseAutoFocus: f,
+                onPointerDownOutside: g,
                 onEscapeKeyDown: A,
                 onInteractOutside: b
             } = e,
@@ -2890,8 +2895,8 @@
             centerSheetSize: r,
             contentClassName: C,
             onOpenAutoFocus: null != y ? y : l,
-            onCloseAutoFocus: g,
-            onPointerDownOutside: f,
+            onCloseAutoFocus: f,
+            onPointerDownOutside: g,
             onEscapeKeyDown: A,
             onInteractOutside: b
         }, a))
@@ -2983,8 +2988,8 @@
                 value: h,
                 defaultValue: v,
                 isDisabled: y,
-                hasError: g,
-                helperText: f,
+                hasError: f,
+                helperText: g,
                 className: A,
                 style: b,
                 textareaClassName: T,
@@ -3005,19 +3010,19 @@
                 id: x,
                 "data-testid": "text-area-container",
                 style: I,
-                className: (0, s.default)("foundation-web-text-area foundation-web-input outline-none", "radius-medium content-emphasis placeholder:content-muted", n.INPUT_BACKGROUND_BY_VARIANT[m], n.INPUT_STROKE_BY_VARIANT[m], g ? "stroke-system-alert focus-within:stroke-system-alert" : "stroke-contrast-alpha focus-within:stroke-system-emphasis", d[D], i[D], l[D], T),
+                className: (0, s.default)("foundation-web-text-area foundation-web-input outline-none", "radius-medium content-emphasis placeholder:content-muted", n.INPUT_BACKGROUND_BY_VARIANT[m], n.INPUT_STROKE_BY_VARIANT[m], f ? "stroke-system-alert focus-within:stroke-system-alert" : "stroke-contrast-alpha focus-within:stroke-system-emphasis", d[D], i[D], l[D], T),
                 value: h,
                 defaultValue: null == h ? v : void 0,
                 disabled: y,
-                "aria-describedby": f ? w : void 0,
+                "aria-describedby": g ? w : void 0,
                 ...C
-            }), f && r.default.createElement("span", {
+            }), g && r.default.createElement("span", {
                 id: w,
                 className: (0, s.default)("text-caption-small", {
-                    "content-system-alert": g,
-                    "content-default": !g
+                    "content-system-alert": f,
+                    "content-default": !f
                 })
-            }, f))
+            }, g))
         });
     c.displayName = "TextArea", e.s(["TextArea", 0, c])
 }, 763833, e => {
@@ -3030,5 +3035,5 @@
     e.s(["ArrowUpwardIcon", () => t.ArrowUpward])
 }]);
 
-//# debugId=5a6f1fef-e46a-8310-f022-10695f30be0b
-//# sourceMappingURL=2wm4463kqor1l.js.map
+//# debugId=3a4527ec-4437-ce8d-e6ed-8bee1619db42
+//# sourceMappingURL=0r17zbly0lkgf.js.map

@@ -3,7 +3,7 @@
     try {
         var e = "undefined" != typeof globalThis ? globalThis : "undefined" != typeof global ? global : "undefined" != typeof window ? window : "undefined" != typeof self ? self : {},
             n = (new e.Error).stack;
-        n && ((e._debugIds || (e._debugIds = {}))[n] = "786e51e6-ffe9-fb31-7d8b-48f78c577f27")
+        n && ((e._debugIds || (e._debugIds = {}))[n] = "62d3be4c-fc42-109f-fb37-13d12474d01f")
     } catch (e) {}
 }();
 (globalThis.TURBOPACK || (globalThis.TURBOPACK = [])).push(["object" == typeof document ? document.currentScript : void 0, 239328, e => {
@@ -211,8 +211,13 @@
             namespace: "creator-creations",
             name: "isMomentsPostCreationEnabled",
             defaultValue: !1
+        }),
+        u = (0, t.defineFlag)({
+            namespace: "creator-creations",
+            name: "isMomentsModeratedTabEnabled",
+            defaultValue: !1
         });
-    e.s(["isBadgeDefaultIconEnabled", 0, n, "isMomentsFeedIdEnabled", 0, o, "isMomentsPostCreationEnabled", 0, c, "isMomentsShareLinkEnabled", 0, l, "isMomentsSitetestUrlParsingEnabled", 0, i, "isMomentsUploadEnabled", 0, a, "isMomentsUploadLanguageSelectEnabled", 0, s, "isTextDocumentEnabled", 0, r])
+    e.s(["isBadgeDefaultIconEnabled", 0, n, "isMomentsFeedIdEnabled", 0, o, "isMomentsModeratedTabEnabled", 0, u, "isMomentsPostCreationEnabled", 0, c, "isMomentsShareLinkEnabled", 0, l, "isMomentsSitetestUrlParsingEnabled", 0, i, "isMomentsUploadEnabled", 0, a, "isMomentsUploadLanguageSelectEnabled", 0, s, "isTextDocumentEnabled", 0, r])
 }, 360894, e => {
     "use strict";
     let t = (0, e.i(157700).defineFlag)({
@@ -1029,7 +1034,7 @@
     e.s(["default", 0, m], 28850)
 }, 66424, 992598, e => {
     "use strict";
-    var t = e.i(813705),
+    var t = e.i(895279),
         n = e.i(721281),
         a = e.i(677753);
     class i extends Error {
@@ -3781,5 +3786,5 @@
     }])
 }]);
 
-//# debugId=786e51e6-ffe9-fb31-7d8b-48f78c577f27
-//# sourceMappingURL=3pxa0i_462t6n.js.map
+//# debugId=62d3be4c-fc42-109f-fb37-13d12474d01f
+//# sourceMappingURL=12s3yplh_-r1g.js.map

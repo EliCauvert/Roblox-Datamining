@@ -65,6 +65,27 @@
     margin-top: 20px
 }
 
+.light-theme .divider {
+    border-bottom: 1px solid var(--color-extended-black-10);
+    margin-top: 7px;
+    margin-bottom: 7px
+}
+
+.dark-theme .divider {
+    border-bottom: 1px solid var(--color-extended-white-10);
+    margin-top: 7px;
+    margin-bottom: 7px
+}
+
+.space-between-container {
+    -ms-flex-pack: justify;
+    justify-content: space-between;
+    -ms-flex-align: center;
+    align-items: center;
+    display: -ms-flexbox;
+    display: flex
+}
+
 .light-theme .total-due,
 .dark-theme .total-due,
 .light-theme .total-due-price,
@@ -215,11 +236,6 @@
 .product .bonus-item-card-small {
     -ms-flex: 50%;
     flex: 50%
-}
-
-.quick-pay-3ds-modal-content {
-    width: 100%;
-    overflow: hidden
 }
 
 .quick-pay-success-modal-body {
@@ -685,139 +701,6 @@
     width: 100%
 }
 
-.bottom-modal .modal-dialog.modal-md {
-    border-top-left-radius: 16px;
-    border-top-right-radius: 16px;
-    width: 100%;
-    margin: 0;
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    box-shadow: 0 -2px 10px rgba(0, 0, 0, .1)
-}
-
-.bottom-modal .modal-header {
-    -ms-flex-direction: row-reverse;
-    flex-direction: row-reverse;
-    -ms-flex-pack: justify;
-    justify-content: space-between;
-    -ms-flex-align: center;
-    align-items: center;
-    display: -ms-flexbox;
-    display: flex
-}
-
-.bottom-modal .modal-content {
-    background-color: inherit;
-    border: none;
-    border-radius: 16px 16px 0 0;
-    width: 100%
-}
-
-.bottom-modal .modal-body {
-    width: 100%;
-    padding: 1rem
-}
-
-.bottom-modal .modal-header .close {
-    position: static
-}
-
-.bottom-modal .modal-dialog .modal-content .modal-header {
-    border-bottom: none;
-    padding: 16px 20px
-}
-
-.bottom-modal .modal-header .modal-title {
-    text-align: left;
-    border-bottom: none;
-    padding: 0;
-    font-size: 20px;
-    font-weight: 700
-}
-
-.bottom-modal .modal-dialog .modal-content .modal-body {
-    padding: 16px 20px 20px
-}
-
-.light-theme .divider {
-    border-bottom: 1px solid var(--color-extended-black-10);
-    margin-top: 7px;
-    margin-bottom: 7px
-}
-
-.dark-theme .divider {
-    border-bottom: 1px solid var(--color-extended-white-10);
-    margin-top: 7px;
-    margin-bottom: 7px
-}
-
-.space-between-container {
-    -ms-flex-pack: justify;
-    justify-content: space-between;
-    -ms-flex-align: center;
-    align-items: center;
-    display: -ms-flexbox;
-    display: flex
-}
-
-.button-with-icon-text .button-inner {
-    -ms-flex-pack: justify;
-    justify-content: space-between;
-    -ms-flex-align: center;
-    align-items: center;
-    width: 100%;
-    display: -ms-flexbox;
-    display: flex
-}
-
-.button-label {
-    text-align: right;
-    -ms-flex: 1;
-    flex: 1;
-    font-size: 18px
-}
-
-@media (max-width:767px) {
-    .button-label {
-        font-size: 16px
-    }
-}
-
-.bottom-modal .samsung-pay-modal-buttons {
-    margin: 0 0 12px
-}
-
-.bottom-modal .redeem-credit-buttons {
-    margin: 0
-}
-
-@media (max-width:767px) {
-    .bottom-modal .btn-control-lg {
-        padding: 12px
-    }
-}
-
-.payment-method-image {
-    background: url(https://images.rbxcdn.com/84c64723e9fffacee7469f651b0fb764-payment_methods_sprite.svg) no-repeat;
-    width: 42px;
-    height: 28px;
-    display: inline-block
-}
-
-.payment-method-image.robloxCredit {
-    background-position: 0 -194px
-}
-
-.icon-samsung-pay {
-    background: url(https://images.rbxcdn.com/084317fb88c0a8bf49431fd60b40112be093a6d725ff10bdbd3aa44de4a14236-galaxy_store.png) 50%/contain no-repeat;
-    width: 34px;
-    height: 34px;
-    margin-left: 3px;
-    display: inline-block
-}
-
 :root {
     --header-height: 74px;
     --header-height-var: 41px;
@@ -970,6 +853,14 @@
     height: 158px
 }
 
+.height-\[28px\] {
+    height: 28px
+}
+
+.height-\[34px\] {
+    height: 34px
+}
+
 .height-\[40px\] {
     height: 40px
 }
@@ -1032,6 +923,14 @@
 
 .width-\[313px\] {
     width: 313px
+}
+
+.width-\[34px\] {
+    width: 34px
+}
+
+.width-\[42px\] {
+    width: 42px
 }
 
 .width-\[56px\] {
@@ -1618,7 +1517,7 @@
 }
 
 @media (min-width:601px) {
-    .num-badges-0 {
+    .robux-amount-item.num-badges-0 {
         -ms-flex-align: center;
         align-items: center;
         gap: var(--gap-large);
@@ -1628,7 +1527,7 @@
 }
 
 @media (min-width:660px) {
-    .num-badges-1 {
+    .robux-amount-item.num-badges-1 {
         -ms-flex-align: center;
         align-items: center;
         gap: var(--gap-large);
@@ -1638,7 +1537,7 @@
 }
 
 @media (min-width:745px) {
-    .num-badges-2 {
+    .robux-amount-item.num-badges-2 {
         -ms-flex-align: center;
         align-items: center;
         gap: var(--gap-large);
@@ -1647,7 +1546,7 @@
     }
 }
 
-.num-badges-2 {
+.robux-amount-item.num-badges-2 {
     text-overflow: ellipsis;
     white-space: nowrap;
     overflow: hidden
@@ -1661,6 +1560,18 @@
     .robux-section {
         padding: var(--padding-medium)
     }
+}
+
+.icon-samsung-pay {
+    background: url(https://images.rbxcdn.com/084317fb88c0a8bf49431fd60b40112be093a6d725ff10bdbd3aa44de4a14236-galaxy_store.png) 50%/contain no-repeat
+}
+
+.payment-method-image {
+    background: url(https://images.rbxcdn.com/84c64723e9fffacee7469f651b0fb764-payment_methods_sprite.svg) no-repeat
+}
+
+.payment-method-image.robloxCredit {
+    background-position: 0 -194px
 }
 
 .light-theme .buy-robux-section-header {
@@ -1822,11 +1733,6 @@ h5 {
 
 .hover\:\[opacity\:0\.8\]:hover {
     opacity: .8
-}
-
-.focus\:outline-focus:focus {
-    outline: var(--stroke-thicker)solid var(--color-selection-start);
-    outline-offset: var(--stroke-thicker)
 }
 
 .focus-visible\:outline-focus:focus-visible {

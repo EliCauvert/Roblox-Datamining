@@ -3,7 +3,7 @@
     try {
         var e = "undefined" != typeof globalThis ? globalThis : "undefined" != typeof global ? global : "undefined" != typeof window ? window : "undefined" != typeof self ? self : {},
             n = (new e.Error).stack;
-        n && ((e._debugIds || (e._debugIds = {}))[n] = "00b99f31-4ae8-cc05-ca2b-c8aeeadd8052")
+        n && ((e._debugIds || (e._debugIds = {}))[n] = "09cadaaa-04c5-9e89-3a22-7be4cb0bcbf0")
     } catch (e) {}
 }();
 (globalThis.TURBOPACK || (globalThis.TURBOPACK = [])).push(["object" == typeof document ? document.currentScript : void 0, 272593, 650502, t => {
@@ -19,13 +19,13 @@
         return "".concat("https://apis.roblox.com", "/").concat(t)
     }
     t.s(["getBEDEV1ServiceBasePath", 0, o, "getBEDEV2ServiceBasePath", 0, i], 650502), t.s(["createClientConfiguration", 0, function(t, n, r) {
-        var c, l;
+        var l, c;
         let a = "bedev1" === n ? o(t) : i(t),
-            u = null == (c = null == r ? void 0 : r.enableMrRouter) || c;
+            u = null == (l = null == r ? void 0 : r.enableMrRouter) || l;
         return new e.Configuration({
             robloxSiteDomain: "roblox.com",
             basePath: a,
-            credentials: null != (l = null == r ? void 0 : r.credentials) ? l : "include",
+            credentials: null != (c = null == r ? void 0 : r.credentials) ? c : "include",
             unifiedLogger: s.default,
             enableMrRouter: u,
             ...(null == r ? void 0 : r.middleware) && {
@@ -59,27 +59,27 @@
         return new(s || (s = Promise))(function(i, n) {
             function r(t) {
                 try {
-                    l(o.next(t))
-                } catch (t) {
-                    n(t)
-                }
-            }
-
-            function c(t) {
-                try {
-                    l(o.throw(t))
+                    c(o.next(t))
                 } catch (t) {
                     n(t)
                 }
             }
 
             function l(t) {
+                try {
+                    c(o.throw(t))
+                } catch (t) {
+                    n(t)
+                }
+            }
+
+            function c(t) {
                 var e;
                 t.done ? i(t.value) : ((e = t.value) instanceof s ? e : new s(function(t) {
                     t(e)
-                })).then(r, c)
+                })).then(r, l)
             }
-            l((o = o.apply(t, e || [])).next())
+            c((o = o.apply(t, e || [])).next())
         })
     }
 
@@ -94,13 +94,13 @@
                 ops: []
             },
             r = Object.create(("function" == typeof Iterator ? Iterator : Object).prototype);
-        return r.next = c(0), r.throw = c(1), r.return = c(2), "function" == typeof Symbol && (r[Symbol.iterator] = function() {
+        return r.next = l(0), r.throw = l(1), r.return = l(2), "function" == typeof Symbol && (r[Symbol.iterator] = function() {
             return this
         }), r;
 
-        function c(c) {
-            return function(l) {
-                var a = [c, l];
+        function l(l) {
+            return function(c) {
+                var a = [l, c];
                 if (s) throw TypeError("Generator is already executing.");
                 for (; r && (r = 0, a[0] && (n = 0)), n;) try {
                     if (s = 1, o && (i = 2 & a[0] ? o.return : a[0] ? o.throw || ((i = o.return) && i.call(o), 0) : o.next) && !(i = i.call(o, a[1])).done) return i;
@@ -171,7 +171,7 @@
         }
     }
 
-    function c(t) {
+    function l(t) {
         var s;
         return null == (s = t) ? s : {
             notificationType: (0, e.exists)(s, "notificationType") ? s.notificationType : void 0,
@@ -182,7 +182,7 @@
         }
     }
 
-    function l(t) {
+    function c(t) {
         if (void 0 !== t) return null === t ? null : {
             notificationType: t.notificationType,
             status: t.status,
@@ -197,7 +197,7 @@
         return null == (s = t) ? s : {
             notificationCategoryName: (0, e.exists)(s, "notificationCategoryName") ? s.notificationCategoryName : void 0,
             localizedNotificationCategoryName: (0, e.exists)(s, "localizedNotificationCategoryName") ? s.localizedNotificationCategoryName : void 0,
-            notifications: (0, e.exists)(s, "notifications") ? s.notifications.map(c) : void 0
+            notifications: (0, e.exists)(s, "notifications") ? s.notifications.map(l) : void 0
         }
     }
 
@@ -251,7 +251,7 @@
                                 body: function(t) {
                                     if (void 0 !== t) return null === t ? null : {
                                         userId: t.userId,
-                                        notificationsSettings: void 0 === t.notificationsSettings ? void 0 : t.notificationsSettings.map(l)
+                                        notificationsSettings: void 0 === t.notificationsSettings ? void 0 : t.notificationsSettings.map(c)
                                     }
                                 }(t.updateCreatorNotificationSettingsRequest)
                             }, s)];
@@ -771,6 +771,22 @@
 }, 260022, t => {
     "use strict";
     let e = {
+        reportAppealsUrl: {
+            global: {
+                development: "https://www.sitetest3.robloxlabs.com/report-appeals",
+                sitetest3: "https://www.sitetest3.robloxlabs.com/report-appeals",
+                sitetest2: "https://www.sitetest2.robloxlabs.com/report-appeals",
+                sitetest1: "https://www.sitetest1.robloxlabs.com/report-appeals",
+                production: "https://www.roblox.com/report-appeals"
+            },
+            luobu: {
+                development: "",
+                sitetest3: "",
+                sitetest2: "",
+                sitetest1: "",
+                production: ""
+            }
+        },
         playRobloxUrl: {
             global: {
                 development: "https://play.sitetest3.robloxlabs.com",
@@ -1406,13 +1422,13 @@
     let s = e.useLayoutEffect,
         o = (t, o) => (i, n) => {
             var r;
-            let c, l = (0, e.useRef)(n),
+            let l, c = (0, e.useRef)(n),
                 a = (0, e.useCallback)(() => {
                     try {
                         let e = t().getItem(i);
-                        return e ? JSON.parse(e) : l.current
+                        return e ? JSON.parse(e) : c.current
                     } catch (t) {
-                        return console.warn("Error reading backingStorage (eventName: ".concat(o, ") key “").concat(i, "”:"), t), l.current
+                        return console.warn("Error reading backingStorage (eventName: ".concat(o, ") key “").concat(i, "”:"), t), c.current
                     }
                 }, [i]),
                 [u, p] = (0, e.useState)(() => a());
@@ -1433,14 +1449,14 @@
                 } catch (t) {
                     console.warn("Error setting backingStorage (eventName: ".concat(o, ") key “").concat(i, "”:"), t)
                 }
-            }, c = (0, e.useRef)(() => {
+            }, l = (0, e.useRef)(() => {
                 throw Error("Cannot call an event callback while rendering")
             }), s(() => {
-                c.current = r
+                l.current = r
             }, [r]), (0, e.useCallback)(function() {
                 for (var t = arguments.length, e = Array(t), s = 0; s < t; s++) e[s] = arguments[s];
-                return c.current(...e)
-            }, [c]));
+                return l.current(...e)
+            }, [l]));
             return (0, e.useEffect)(() => {
                 let e = t => {
                         let {
@@ -1479,5 +1495,5 @@
     }, "useSessionStorage", 0, (t, e) => o(() => window.sessionStorage, "session-storage")(t, e)])
 }]);
 
-//# debugId=00b99f31-4ae8-cc05-ca2b-c8aeeadd8052
-//# sourceMappingURL=3y1-4qggf-o3j.js.map
+//# debugId=09cadaaa-04c5-9e89-3a22-7be4cb0bcbf0
+//# sourceMappingURL=42ik78qztjtmk.js.map
