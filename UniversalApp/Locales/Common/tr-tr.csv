@@ -237,14 +237,17 @@ Authentication.AccountSwitch.Header.SignOutOtherAccounts,Diğer hesaplardan çı
 Authentication.AccountSwitch.Header.SwitchAccountSentenceCase,Hesap değiştir
 Authentication.AccountSwitch.Heading.SwitchAccount,
 Authentication.AccountSwitch.Label.AccountLimitReached.2,Bir hesap eklemek için önce bir hesaptan çıkış yap.
+Authentication.CrossDevice.Action.Allow,İzin Ver
 Authentication.CrossDevice.Action.CancelLogin,
 Authentication.CrossDevice.Action.ConfirmLogin,Girişi Onayla
 Authentication.CrossDevice.Action.Done,Bitti
+Authentication.CrossDevice.Action.DontAllow,İzin verme
 Authentication.CrossDevice.Action.Enter,Gir
 Authentication.CrossDevice.Action.GoBack,Geri Dön
 Authentication.CrossDevice.Action.Next,İleri
 Authentication.CrossDevice.Action.TryAgain,Tekrar Dene
 Authentication.CrossDevice.Description.ConfirmOnSignedInDevice,Devam etmek için giriş yaptığın cihazında onayla.
+Authentication.CrossDevice.Description.DenyIfNotYou,Sen değil misin? Hemen reddet.
 Authentication.CrossDevice.Description.QuickSignInInstructionsModal,Giriş yaptığın cihazda QR kodunu okut ya da <b>Daha Fazla > Hızlı giriş</b>'e git ve aşağıdaki kodu gir.
 Authentication.CrossDevice.Description.SigningInAs,{identifier} olarak giriş yapılıyor
 Authentication.CrossDevice.EnterCodeInstruction,sonra bu kodu gir
@@ -253,6 +256,9 @@ Authentication.CrossDevice.Heading.LoginAnotherDevice,Başka bir Cihaza giriş y
 Authentication.CrossDevice.Heading.LoginCode,Hızlı Giriş Kodu
 Authentication.CrossDevice.Heading.LoginWarning,GİRİŞ YAPMAK İÇİN AŞAĞIDAKİLERİ YAPTIĞINDAN EMİN OL:
 Authentication.CrossDevice.Heading.QuickLogin,Hızlı giriş
+Authentication.CrossDevice.Heading.RecognizeSignIn,Bu giriş tanıdık geliyor mu?
+Authentication.CrossDevice.Heading.SignInAllowed,Bir girişe izin verdin
+Authentication.CrossDevice.Heading.SignInDenied,Bir girişi reddettin
 Authentication.CrossDevice.Heading.SignInWithQrCode,QR kodu ile giriş yap
 Authentication.CrossDevice.Heading.SigninAnotherDevice,Başka bir cihazda giriş yap
 Authentication.CrossDevice.Heading.WaitingForConfirmation,Onay bekleniyor
@@ -749,6 +755,9 @@ Common.UGCValidation.ErrorLabel.DescendantIdAnimationVersionNotSupported,"{Insta
 Common.UGCValidation.ErrorLabel.DescendantIdNotPublished,{AssetId} kimlikli varlık ({InstanceFullName}.{FieldName}) yayınlanmadı. Yayınla ve tekrar dene.
 Common.UGCValidation.ErrorLabel.DescendantIdVersionNotSupported,{InstanceFullName}.{FieldName} {AssetId} varlığının {Version} versiyonunu kullanıyor ancak şu anda yalnızca versiyon 1 destekleniyor. Versiyon 1'i kullanıp tekrar dene.
 Common.UGCValidation.ErrorLabel.DynamicHeadCageMisaligned,"Pazar yerindeki Dinamik Kafalar, kafes üzerindeki gözler ve ağız köşeleri mesh köşeleriyle hizalanacak şekilde düzgünce kafeslenmelidir. Lütfen kafeslemeni ve mesh ile hizalamasını iyileştir."
+Common.UGCValidation.ErrorLabel.DynamicHeadCageMisalignedLeftEye,"Dinamik Kafa kafesinin sol göz işaretleri mesh ile doğru hizalanmamış. Göz kafesini, sol göze ait mesh yansıtılan kafes alanının içine yer alacak şekilde ayarla."
+Common.UGCValidation.ErrorLabel.DynamicHeadCageMisalignedMouth,"Dinamik Kafa kafesinin ağız işaretleri mesh ile doğru hizalanmamış. Ağız kafesini, ağza ait mesh yansıtılan kafes alanının içine yer alacak şekilde ayarla."
+Common.UGCValidation.ErrorLabel.DynamicHeadCageMisalignedRightEye,"Dinamik Kafa kafesinin sağ göz işaretleri mesh ile doğru hizalanmamış. Göz kafesini, sağ göze ait mesh yansıtılan kafes alanının içine yer alacak şekilde ayarla."
 Common.UGCValidation.ErrorLabel.DynamicHeadHappyNotShown,Dinamik Kafa için gülümseme ifadesi algılanamıyor. Kafada ağzın bulunduğu yerle eşleşmesi için lütfen ağzın kafes işaretlerini ayarla ve gülümseme ifadesini gösterebildiğinden emin ol.
 Common.UGCValidation.ErrorLabel.DynamicHeadLeftEyeNotClose,Dinamik Kafa için sol göz kapalı ifadesi algılanamıyor. Kafada sol gözün bulunduğu yerle eşleşmesi için lütfen sol gözün kafes işaretlerini ayarla ve gözün kapatılabildiğinden emin ol.
 Common.UGCValidation.ErrorLabel.DynamicHeadMISSINGCAGE,Pazar yerindeki Dinamik Kafalarda Kafa Kafesi bulunmuyor. Lütfen Dinamik Kafa için Kafa Kafesi oluştur.
@@ -768,6 +777,13 @@ Common.UGCValidation.ErrorLabel.EmoteAnimation_MaxPartTranslationCalcFailed,Yay�
 Common.UGCValidation.ErrorLabel.EmoteAnimation_MaxPartTranslationMismatch,"Yayınlanan animasyon, maksimum {taggedTranslation} birim karelik parça ötelemesi belirtiyor, ancak animasyon verileri {calculatedTranslation} birim kare olarak hesaplanıyor. Lütfen animasyonu yeniden yayınla."
 Common.UGCValidation.ErrorLabel.Extents_HeadBelowTorso,"Kafa, Üst Gövdenin üzerine yerleştirilmelidir. Kafa merkezi, gövdenin üst kısmının altında. Bu, kafa mesh'inin çöktüğünü veya yanlış yerleştirildiğini gösterir."
 Common.UGCValidation.ErrorLabel.FaceControlsOverrideFACSNotEmpty,FaceControls'taki InternalOverrideFACSData özelliği yükleme sırasında boş olmalıdır.
+Common.UGCValidation.ErrorLabel.FacialFeaturePresence_EyesMissing,Temel yüzde gerekli göz özellikleri eksik. Temel yüze göz ekleyip tekrar dene.
+Common.UGCValidation.ErrorLabel.FacialFeaturePresence_MouthMissing,Temel yüzde gerekli olan ağız eksik. Temel yüze bir ağız ekleyerek tekrar dene.
+Common.UGCValidation.ErrorLabel.FacsDeformation_HappyNotShown,"Mutluluk ifadesi algılanamıyor. Ağız kafesini veya mutlu ifade Yüz Hareketi Kodlama Sistemini (FACS), ağız için yansıtılan mesh beklendiği gibi deforme olacak şekilde ayarla."
+Common.UGCValidation.ErrorLabel.FacsDeformation_LeftEyeNotClose,"Sol göz kapalı ifadesi algılanamıyor. Sol göz kafesini veya sol göz kapalı Yüz Hareketi Kodlama Sistemini (FACS), göz için yansıtılan mesh beklendiği gibi deforme olacak şekilde ayarla."
+Common.UGCValidation.ErrorLabel.FacsDeformation_MouthNotOpen,"Ağız açık ifadesi algılanamıyor. Ağız kafesini veya ağız açık Yüz Hareketi Kodlama Sistemini (FACS), ağız için yansıtılan mesh beklendiği gibi deforme olacak şekilde ayarla."
+Common.UGCValidation.ErrorLabel.FacsDeformation_RightEyeNotClose,"Sağ göz kapalı ifadesi algılanamıyor. Sağ göz kafesini veya sağ göz kapalı Yüz Hareketi Kodlama Sistemini (FACS), göz için yansıtılan mesh beklendiği gibi deforme olacak şekilde ayarla."
+Common.UGCValidation.ErrorLabel.FacsDeformation_SadNotShown,"Üzüntü ifadesi algılanamıyor. Ağız kafesini veya üzgün ifade Yüz Hareketi Kodlama Sistemini (FACS), ağız için yansıtılan mesh beklendiği gibi deforme olacak şekilde ayarla."
 Common.UGCValidation.ErrorLabel.FacsExpandsHead,"Yüz Hareketi Kodlama Sistemi'nin (FAC) başını {modPercent}% oranında büyüttüğü tespit edildi oysa başı değiştirmek, yüz animasyonları için pazar yeri politikasına aykırıdır."
 Common.UGCValidation.ErrorLabel.FacsJointCountBounded,Dinamik kafalarda en fazla {maxFacsJointCount} Yüz Hareketi Kodlama Sistemi (FACS) eklemi olabilir ancak bu kafada {actualJointCount} eklem var. Lütfen FACS eklemi sayısını azaltıp tekrar dene.
 Common.UGCValidation.ErrorLabel.FacsShrinksHead,"Yüz Hareketi Kodlama Sistemi'nin (FAC) başını {modPercent}% oranında küçülttüğü tespit edildi oysa başı değiştirmek, yüz animasyonları için pazar yeri politikasına aykırıdır."
@@ -814,6 +830,7 @@ Common.UGCValidation.ErrorLabel.MeshPartBounds_TooSmall,"{partName} mesh'inin {a
 Common.UGCValidation.ErrorLabel.MissingRequiredAttachment,{attName} eklentisinin {partName} alt öğeleri içinde tam bir kez bulunması gerekir.
 Common.UGCValidation.ErrorLabel.NoAttributes,"""{RootInstanceName}"" (veya alt öğeleri) Öznitelikler içeriyor. Öznitelikleri şunlardan kaldırman gerekir: {InstanceNameList}"
 Common.UGCValidation.ErrorLabel.PropertiesNotSensible,"{ClassName} ""{InstancePath}"" geçersiz özelliklere sahip: {ProblematicProperties}. Gösterilen bayt sınırı aşıldı (0 sınırı, özelliğin boş olması gerektiği anlamına gelir); diğer tüm özellikler NaN/Inf değerleri içeriyor veya varsayılan boyut sınırını aşıyor."
+Common.UGCValidation.ErrorLabel.RenderedAnimation_RequiredExpressionsMissing,"Görsele dönüştürülen animasyonda gerekli yüz ifadelerinden en az biri (göz kapalı, ağız açık, mutlu, üzgün) eksik."
 Common.UGCValidation.ErrorLabel.RigAttachmentOutOfBounds,"""{PartName}"" içindeki ""{AttachmentName}"" düzenek eklentisi, bu vücut parçasının bitişik bir parçaya bağlandığı eklem sınırının yakınına yerleştirilmelidir. Mevcut konum [{CurrentPosition}], bağlantı düzleminden çok uzak. [{ClosestValidPosition}] konumuna yaklaştır."
 Common.UGCValidation.ErrorLabel.SelectionCountNotOne,Roblox'a varlık yüklemek için tam olarak 1 durum ve ilişkili yükleme türünü seçmelisin.
 Common.UGCValidation.ErrorLabel.SerializedAssetTooLarge,"Bu varlık yüklenemeyecek kadar büyük ({sizeBytes} bayt, oysa üst sınır {maxSizeBytes} bayt). Lütfen küçültüp tekrar dene."
@@ -2789,6 +2806,7 @@ Feature.Build.Title.VersionNumber,Sürüm {VERSION}
 Feature.Build.Title.Versions,Versiyonlar
 Feature.Build.Title.WhatsIncluded,Neler dâhil?
 Feature.BuyRobux.Heading.Banner,
+Feature.BuyRobux.Heading.PendingTransfers,Bekleyen Robux
 Feature.BuyRobux.Label.MyFriendsWithCount,Arkadaşlarım ({count})
 Feature.BuyRobux.Label.PeopleWithCount,İnsanlar ({count})
 Feature.BuyRobux.Label.Search,
@@ -4686,7 +4704,7 @@ Feature.NotApproved.SubHeading.RuleExplanation.Spam,Spam göndermek kurallara ay
 Feature.NotApproved.SubHeading.RuleExplanation.Swearing,Küfür yasaktır
 Feature.NotApproved.SubHeading.RuleExplanation.ViolentContentAndGore,Aşırı şiddet yasaktır
 Feature.NotApproved.Title.AvatarBrokeRules,Avatarın kuralları ihlal etti
-Feature.Notifications.Action.PushUpsellAllow,İzin Ver
+Feature.Notifications.Action.PushUpsellAllow,
 Feature.Notifications.Action.PushUpsellNotNow,
 Feature.Notifications.Action.SnoozeFifteenMinutes,15 dakika
 Feature.Notifications.Action.SnoozeFourHours,4 saat
@@ -4995,7 +5013,7 @@ Feature.RobloxSubscription.Label.FreeTrialDisclosureV2,"""Ücretsiz dene"" düğ
 Feature.RobloxSubscription.Label.FreeTrialDisclosureV3,"""Ücretsiz dene"" düğmesine tıklayarak {linkStart}Roblox Abonelik Koşulları{linkEnd}'nı kabul etmiş olursun. Ücretsiz deneme süren {trialDuration} {trialPeriodLabel} içinde sona erer ve ondan sonra her {billingPeriodLabel} senden otomatik olarak ücret alınır. Dilediğin zaman iptal edebilirsin."
 Feature.RobloxSubscription.Label.FreeTrialText,Ücretsiz deneme al
 Feature.RobloxSubscription.Label.New,
-Feature.RobloxSubscription.Label.PendingRobux,Bekleyen Robux
+Feature.RobloxSubscription.Label.PendingRobux,
 Feature.RobloxSubscription.Label.ReferralRewardRobux,{amount} Robux
 Feature.RobloxSubscription.Label.ReferralTheyGet,Yönlendirdiğin kişilerin kazancı:
 Feature.RobloxSubscription.Label.ReferralYouGet,

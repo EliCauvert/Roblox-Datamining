@@ -237,14 +237,17 @@ Authentication.AccountSwitch.Header.SignOutOtherAccounts,Log out dari akun lain?
 Authentication.AccountSwitch.Header.SwitchAccountSentenceCase,Beralih akun
 Authentication.AccountSwitch.Heading.SwitchAccount,
 Authentication.AccountSwitch.Label.AccountLimitReached.2,"Untuk menambahkan akun, log out dari satu akun terlebih dahulu."
+Authentication.CrossDevice.Action.Allow,Izinkan
 Authentication.CrossDevice.Action.CancelLogin,
 Authentication.CrossDevice.Action.ConfirmLogin,Konfirmasi Log In
 Authentication.CrossDevice.Action.Done,Selesai
+Authentication.CrossDevice.Action.DontAllow,Jangan izinkan
 Authentication.CrossDevice.Action.Enter,Masuk
 Authentication.CrossDevice.Action.GoBack,Kembali
 Authentication.CrossDevice.Action.Next,
 Authentication.CrossDevice.Action.TryAgain,
 Authentication.CrossDevice.Description.ConfirmOnSignedInDevice,Konfirmasikan di perangkat tempat kamu sedang log in untuk melanjutkan.
+Authentication.CrossDevice.Description.DenyIfNotYou,Bukan kamu? Langsung tolak.
 Authentication.CrossDevice.Description.QuickSignInInstructionsModal,"Di perangkat tempat kamu sedang log in, scan kode QR atau buka <b>Lainnya > Log in cepat</b> dan masukkan kode di bawah ini."
 Authentication.CrossDevice.Description.SigningInAs,Log in sebagai {identifier}
 Authentication.CrossDevice.EnterCodeInstruction,lalu masukkan kode ini
@@ -253,6 +256,9 @@ Authentication.CrossDevice.Heading.LoginAnotherDevice,Log In ke Perangkat Lain
 Authentication.CrossDevice.Heading.LoginCode,Kode Log In Cepat
 Authentication.CrossDevice.Heading.LoginWarning,"UNTUK LOG IN, PASTIKAN KAMU:"
 Authentication.CrossDevice.Heading.QuickLogin,Log In Cepat
+Authentication.CrossDevice.Heading.RecognizeSignIn,Mengenali log in ini?
+Authentication.CrossDevice.Heading.SignInAllowed,Kamu mengizinkan log in
+Authentication.CrossDevice.Heading.SignInDenied,Kamu menolak log in
 Authentication.CrossDevice.Heading.SignInWithQrCode,Log in dengan kode QR
 Authentication.CrossDevice.Heading.SigninAnotherDevice,Log in di perangkat lain
 Authentication.CrossDevice.Heading.WaitingForConfirmation,Menunggu konfirmasi
@@ -2844,6 +2850,7 @@ Feature.Build.Title.VersionNumber,Versi {VERSION}
 Feature.Build.Title.Versions,
 Feature.Build.Title.WhatsIncluded,Dapat apa saja?
 Feature.BuyRobux.Heading.Banner,
+Feature.BuyRobux.Heading.PendingTransfers,Robux Pending
 Feature.BuyRobux.Label.MyFriendsWithCount,Teman saya ({count})
 Feature.BuyRobux.Label.PeopleWithCount,Pengguna ({count})
 Feature.BuyRobux.Label.Search,
@@ -4739,7 +4746,7 @@ Feature.NotApproved.SubHeading.RuleExplanation.Spam,Spam melanggar aturan
 Feature.NotApproved.SubHeading.RuleExplanation.Swearing,Jangan mengucapkan sumpah serapah
 Feature.NotApproved.SubHeading.RuleExplanation.ViolentContentAndGore,Dilarang melakukan kekerasan ekstrem
 Feature.NotApproved.Title.AvatarBrokeRules,Avatarmu melanggar peraturan
-Feature.Notifications.Action.PushUpsellAllow,Izinkan
+Feature.Notifications.Action.PushUpsellAllow,
 Feature.Notifications.Action.PushUpsellNotNow,
 Feature.Notifications.Action.SnoozeFifteenMinutes,5 menit
 Feature.Notifications.Action.SnoozeFourHours,4 jam
@@ -5048,7 +5055,7 @@ Feature.RobloxSubscription.Label.FreeTrialDisclosureV2,"Dengan mengklik ""Coba g
 Feature.RobloxSubscription.Label.FreeTrialDisclosureV3,"Dengan mengeklik ""Coba gratis"", kamu menyetujui {linkStart}Ketentuan Subscription Roblox.{linkEnd} Uji coba gratis kamu akan berakhir dalam {trialDuration} {trialPeriodLabel} dan biaya akan otomatis dibebankan setiap {billingPeriodLabel}. Kamu bisa membatalkannya kapan saja."
 Feature.RobloxSubscription.Label.FreeTrialText,Dapatkan uji coba gratis
 Feature.RobloxSubscription.Label.New,
-Feature.RobloxSubscription.Label.PendingRobux,Robux Pending
+Feature.RobloxSubscription.Label.PendingRobux,
 Feature.RobloxSubscription.Label.ReferralRewardRobux,{amount} Robux
 Feature.RobloxSubscription.Label.ReferralTheyGet,Referralmu mendapatkan
 Feature.RobloxSubscription.Label.ReferralYouGet,Kamu mendapatkan

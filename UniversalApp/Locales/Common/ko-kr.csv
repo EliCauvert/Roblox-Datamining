@@ -238,14 +238,17 @@ Authentication.AccountSwitch.Header.SignOutOtherAccounts,다른 계정에서 로
 Authentication.AccountSwitch.Header.SwitchAccountSentenceCase,
 Authentication.AccountSwitch.Heading.SwitchAccount,
 Authentication.AccountSwitch.Label.AccountLimitReached.2,계정을 추가하려면 먼저 한 계정에서 로그아웃하세요.
+Authentication.CrossDevice.Action.Allow,허용
 Authentication.CrossDevice.Action.CancelLogin,
 Authentication.CrossDevice.Action.ConfirmLogin,로그인 확인
 Authentication.CrossDevice.Action.Done,완료
+Authentication.CrossDevice.Action.DontAllow,허용하지 않음
 Authentication.CrossDevice.Action.Enter,입력
 Authentication.CrossDevice.Action.GoBack,돌아가기
 Authentication.CrossDevice.Action.Next,
 Authentication.CrossDevice.Action.TryAgain,
 Authentication.CrossDevice.Description.ConfirmOnSignedInDevice,계속하려면 로그인한 기기에서 확인하세요.
+Authentication.CrossDevice.Description.DenyIfNotYou,본인이 아닌가요? 즉시 거부하세요.
 Authentication.CrossDevice.Description.QuickSignInInstructionsModal,로그인된 기기에서 QR 코드를 스캔하거나 <b>더 보기 > 빠른 로그인</b>으로 이동하여 아래 코드를 입력하세요.
 Authentication.CrossDevice.Description.SigningInAs,{identifier}(으)로 로그인
 Authentication.CrossDevice.EnterCodeInstruction,그런 다음 이 코드를 입력하세요
@@ -254,6 +257,9 @@ Authentication.CrossDevice.Heading.LoginAnotherDevice,다른 기기에 로그인
 Authentication.CrossDevice.Heading.LoginCode,빠른 로그인 코드
 Authentication.CrossDevice.Heading.LoginWarning,로그인하려면 다음 사항을 따르세요.
 Authentication.CrossDevice.Heading.QuickLogin,빠른 로그인
+Authentication.CrossDevice.Heading.RecognizeSignIn,이 로그인 시도를 알고 계신가요?
+Authentication.CrossDevice.Heading.SignInAllowed,로그인을 허용하셨습니다.
+Authentication.CrossDevice.Heading.SignInDenied,로그인을 거부하셨습니다.
 Authentication.CrossDevice.Heading.SignInWithQrCode,QR 코드로 로그인
 Authentication.CrossDevice.Heading.SigninAnotherDevice,다른 기기에서 로그인
 Authentication.CrossDevice.Heading.WaitingForConfirmation,확인을 기다리는 중
@@ -2845,6 +2851,7 @@ Feature.Build.Title.VersionNumber,{VERSION} 버전
 Feature.Build.Title.Versions,
 Feature.Build.Title.WhatsIncluded,포함 사항
 Feature.BuyRobux.Heading.Banner,Robux 구매
+Feature.BuyRobux.Heading.PendingTransfers,보류 중인 Robux
 Feature.BuyRobux.Label.MyFriendsWithCount,내 친구({count}명)
 Feature.BuyRobux.Label.PeopleWithCount,회원({count}명)
 Feature.BuyRobux.Label.Search,
@@ -4744,7 +4751,7 @@ Feature.NotApproved.SubHeading.RuleExplanation.Spam,스팸은 규칙에 위배�
 Feature.NotApproved.SubHeading.RuleExplanation.Swearing,욕설 금지
 Feature.NotApproved.SubHeading.RuleExplanation.ViolentContentAndGore,극단적인 폭력 금지
 Feature.NotApproved.Title.AvatarBrokeRules,아바타가 규칙을 위반했습니다
-Feature.Notifications.Action.PushUpsellAllow,허용
+Feature.Notifications.Action.PushUpsellAllow,
 Feature.Notifications.Action.PushUpsellNotNow,
 Feature.Notifications.Action.SnoozeFifteenMinutes,15분
 Feature.Notifications.Action.SnoozeFourHours,4시간
@@ -5053,7 +5060,7 @@ Feature.RobloxSubscription.Label.FreeTrialDisclosureV2,"'무료 체험'을 클�
 Feature.RobloxSubscription.Label.FreeTrialDisclosureV3,"'무료 체험'을 클릭하면 {linkStart}Roblox 구독 약관{linkEnd}에 동의하는 것으로 간주됩니다. 무료 체험 기간은 {trialDuration}{trialPeriodLabel} 후 종료되며, {billingPeriodLabel}마다 자동으로 요금이 청구됩니다. 구독은 언제든지 취소하실 수 있습니다."
 Feature.RobloxSubscription.Label.FreeTrialText,무료 체험하기
 Feature.RobloxSubscription.Label.New,
-Feature.RobloxSubscription.Label.PendingRobux,보류 중인 Robux
+Feature.RobloxSubscription.Label.PendingRobux,
 Feature.RobloxSubscription.Label.ReferralRewardRobux,{amount} Robux
 Feature.RobloxSubscription.Label.ReferralTheyGet,추천받은 사람이 수령하는 금액:
 Feature.RobloxSubscription.Label.ReferralYouGet,수령액:

@@ -220,14 +220,17 @@ Authentication.AccountSwitch.Header.SignOutOtherAccounts,अन्य अका�
 Authentication.AccountSwitch.Header.SwitchAccountSentenceCase,
 Authentication.AccountSwitch.Heading.SwitchAccount,
 Authentication.AccountSwitch.Label.AccountLimitReached.2,"अकाउंट जोड़ने के लिए, पहले किसी अकाउंट से लॉग आउट करें."
+Authentication.CrossDevice.Action.Allow,परमिशन दें
 Authentication.CrossDevice.Action.CancelLogin,
 Authentication.CrossDevice.Action.ConfirmLogin,लॉग इन कंफ़र्म करें
 Authentication.CrossDevice.Action.Done,हो गया
+Authentication.CrossDevice.Action.DontAllow,परमिशन न दें
 Authentication.CrossDevice.Action.Enter,डालें
 Authentication.CrossDevice.Action.GoBack,वापस जाएँ
 Authentication.CrossDevice.Action.Next,अगला
 Authentication.CrossDevice.Action.TryAgain,
 Authentication.CrossDevice.Description.ConfirmOnSignedInDevice,"जारी रखने के लिए, अपने साइन-इन किए हुए डिवाइस पर कन्फ़र्म करें."
+Authentication.CrossDevice.Description.DenyIfNotYou,यह आप नहीं हैं? तुरंत मना करें.
 Authentication.CrossDevice.Description.QuickSignInInstructionsModal,"अपने साइन-इन किए हुए डिवाइस पर, QR कोड स्कैन करें या <b>ज़्यादा > क्विक साइन-इन</b> पर जाकर नीचे कोड डालें."
 Authentication.CrossDevice.Description.SigningInAs,{identifier} के तौर पर साइन-इन किया जा रहा है
 Authentication.CrossDevice.EnterCodeInstruction,फिर यह कोड डालें
@@ -236,6 +239,9 @@ Authentication.CrossDevice.Heading.LoginAnotherDevice,दूसरे डिव�
 Authentication.CrossDevice.Heading.LoginCode,क्विक साइन-इन कोड
 Authentication.CrossDevice.Heading.LoginWarning,"लॉग इन करने के लिए, पक्का करें कि आप:"
 Authentication.CrossDevice.Heading.QuickLogin,क्विक साइन-इन
+Authentication.CrossDevice.Heading.RecognizeSignIn,क्या आपको इस साइन-इन के बारे में पता है?
+Authentication.CrossDevice.Heading.SignInAllowed,आपने साइन-इन करने की परमिशन दी है
+Authentication.CrossDevice.Heading.SignInDenied,आपने साइन-इन करने की परमिशन नहीं दी है
 Authentication.CrossDevice.Heading.SignInWithQrCode,QR कोड से साइन-इन करें
 Authentication.CrossDevice.Heading.SigninAnotherDevice,किसी दूसरे डिवाइस पर साइन-इन करें
 Authentication.CrossDevice.Heading.WaitingForConfirmation,कन्फ़र्मेशन का इंतज़ार है
@@ -732,6 +738,9 @@ Common.UGCValidation.ErrorLabel.DescendantIdAnimationVersionNotSupported,"{Insta
 Common.UGCValidation.ErrorLabel.DescendantIdNotPublished,ऐसेट {AssetId} ({InstanceFullName}.{FieldName}) पब्लिश नहीं किया गया है. इसे पब्लिश करके फिर से कोशिश करें.
 Common.UGCValidation.ErrorLabel.DescendantIdVersionNotSupported,"{InstanceFullName}.{FieldName} में ऐसेट {AssetId} के वर्ज़न {Version} का इस्तेमाल किया जाता है, लेकिन अभी सिर्फ़ वर्ज़न 1 ही काम करता है. वर्ज़न 1 का इस्तेमाल करके फिर से कोशिश करें."
 Common.UGCValidation.ErrorLabel.DynamicHeadCageMisaligned,"मार्केटप्लेस पर डायनैमिक हेड को ठीक से केज किया जाना चाहिए, ताकि केज पर मौजूद आँखों और मुँह के वर्टिस, मेश वर्टिस के साथ लाइन अप हो जाएँ. कृपया अपनी केजिंग और मेश के साथ उसके अलाइनमेंट को बेहतर बनाएँ."
+Common.UGCValidation.ErrorLabel.DynamicHeadCageMisalignedLeftEye,"डायनैमिक हेड के केज में बाईं आँख के लैंडमार्क, मेश के साथ सही तरीके से अलाइन नहीं हैं. आँख के केज में बदलाव करें, ताकि बाईं आँख का मेश, प्रोजेक्ट किए गए केज एरिया के अंदर रहे."
+Common.UGCValidation.ErrorLabel.DynamicHeadCageMisalignedMouth,"डायनैमिक हेड के केज में मुँह के लैंडमार्क, मेश के साथ सही तरीके से अलाइन नहीं हैं. मुँह के केज में बदलाव करें, ताकि मुँह का मेश, प्रोजेक्ट किए गए केज एरिया के अंदर रहे."
+Common.UGCValidation.ErrorLabel.DynamicHeadCageMisalignedRightEye,"डायनैमिक हेड के केज में दाईं आँख के लैंडमार्क, मेश के साथ सही तरीके से अलाइन नहीं हैं. आँख के केज में बदलाव करें, ताकि दाईं आँख का मेश, प्रोजेक्ट किए गए केज एरिया के अंदर रहे."
 Common.UGCValidation.ErrorLabel.DynamicHeadHappyNotShown,डायनैमिक हेड के लिए मुस्कुराहट वाला एक्सप्रेशन नहीं मिल रहा है. कृपया मुँह के लिए केज लैंडमार्क को एडजस्ट करें ताकि वह सिर पर मुँह की जगह से मैच करे और पक्का करें कि वह मुस्कुराहट वाला एक्सप्रेशन दिखा सके.
 Common.UGCValidation.ErrorLabel.DynamicHeadLeftEyeNotClose,"डायनैमिक हेड के लिए बाईं आँख के बंद होने के एक्सप्रेशन का पता नहीं लगाया जा सका. कृपया बाईं आँख के लिए केज लैंडमार्क को एडजस्ट करें, ताकि वह सिर पर बाईं आँख वाली जगह से मैच करे और पक्का करें कि उसे बंद किया जा सकता है."
 Common.UGCValidation.ErrorLabel.DynamicHeadMISSINGCAGE,मार्केटप्लेस पर डायनैमिक हेड के लिए कोई हेड केज नहीं है. कृपया डायनैमिक हेड के लिए हेड केज क्रिएट करें.
@@ -751,6 +760,13 @@ Common.UGCValidation.ErrorLabel.EmoteAnimation_MaxPartTranslationCalcFailed,प�
 Common.UGCValidation.ErrorLabel.EmoteAnimation_MaxPartTranslationMismatch,"पब्लिश किए गए ऐनिमेशन में, {taggedTranslation} स्टड का 'मैक्सिमम पार्ट ट्रांसलेशन' हो सकता है, लेकिन ऐनिमेशन के असल डेटा के मताबिक यह {calculatedTranslation} स्टड है. कृपया ऐनिमेशन को फिर से पब्लिश करें."
 Common.UGCValidation.ErrorLabel.Extents_HeadBelowTorso,"सिर को टॉर्सो के ऊपरी हिस्से पर रखा जाना चाहिए. सिर के बीच का हिस्सा टॉर्सो के ऊपरी हिस्से से नीचे है, जिसका मतलब है कि हेड मेश दब गया है या गलत जगह पर है."
 Common.UGCValidation.ErrorLabel.FaceControlsOverrideFACSNotEmpty,FaceControls पर InternalOverrideFACSData प्रॉपर्टी अपलोड के समय खाली होनी चाहिए.
+Common.UGCValidation.ErrorLabel.FacialFeaturePresence_EyesMissing,बेस चेहरे में आँखों के ज़रूरी फ़ीचर्स मौजूद नहीं हैं. बेस चेहरे में आँखें जोड़कर फिर से कोशिश करें.
+Common.UGCValidation.ErrorLabel.FacialFeaturePresence_MouthMissing,"बेस चेहरे में मुँह ज़रूरी है, लेकिन वह मौजूद नहीं है. बेस चेहरे में मुँह जोड़कर फिर से कोशिश करें."
+Common.UGCValidation.ErrorLabel.FacsDeformation_HappyNotShown,"खुशी का एक्सप्रेशन नहीं पहचाना जा सका. मुँह के केज या खुशी वाले FACS पोज़ में बदलाव करें, ताकि प्रोजेक्ट किया गया मुँह का मेश उम्मीद के मुताबिक मुड़ सके."
+Common.UGCValidation.ErrorLabel.FacsDeformation_LeftEyeNotClose,"बाईं आँख बंद करने का एक्सप्रेशन नहीं पहचाना जा सका. बाईं आँख के केज या बाईं आँख बंद करने वाले FACS पोज़ में बदलाव करें, ताकि प्रोजेक्ट किया गया आँख का मेश उम्मीद के मुताबिक मुड़ सके."
+Common.UGCValidation.ErrorLabel.FacsDeformation_MouthNotOpen,"मुँह खोलने का एक्सप्रेशन नहीं पहचाना जा सका. मुँह के केज या मुँह खोलने वाले FACS पोज़ में बदलाव करें, ताकि प्रोजेक्ट किया गया मुँह का मेश उम्मीद के मुताबिक मुड़ सके."
+Common.UGCValidation.ErrorLabel.FacsDeformation_RightEyeNotClose,"दाईं आँख बंद करने का एक्सप्रेशन नहीं पहचाना जा सका. दाईं आँख के केज या दाईं आँख बंद करने वाले FACS पोज़ में बदलाव करें, ताकि प्रोजेक्ट किया गया आँख का मेश उम्मीद के मुताबिक मुड़ सके."
+Common.UGCValidation.ErrorLabel.FacsDeformation_SadNotShown,"उदासी का एक्सप्रेशन नहीं पहचाना जा सका. मुँह के केज या उदासी वाले FACS पोज़ में बदलाव करें, ताकि प्रोजेक्ट किया गया मुँह का मेश उम्मीद के मुताबिक मुड़ सके."
 Common.UGCValidation.ErrorLabel.FacsExpandsHead,"FACs को आपके सिर को {modPercent}% तक फैलाते हुए पाया गया, लेकिन सिर में बदलाव करना 'चेहरे के ऐनिमेशन के लिए मार्केटप्लेस पॉलिसी' के खिलाफ़ है."
 Common.UGCValidation.ErrorLabel.FacsJointCountBounded,"डायनैमिक हेड में ज़्यादा-से-ज़्यादा {maxFacsJointCount} FACS जॉइंट हो सकते हैं, लेकिन इस हेड में {actualJointCount} हैं. कृपया FACS जॉइंट की संख्या कम करके फिर से कोशिश करें."
 Common.UGCValidation.ErrorLabel.FacsShrinksHead,"FACs को आपके सिर को {modPercent}% तक सिकोड़ते हुए पाया गया, लेकिन सिर में बदलाव करना 'चेहरे के ऐनिमेशन के लिए मार्केटप्लेस पॉलिसी' के खिलाफ़ है."
@@ -796,6 +812,7 @@ Common.UGCValidation.ErrorLabel.MeshPartBounds_TooSmall,"{partName} मेश �
 Common.UGCValidation.ErrorLabel.MissingRequiredAttachment,अटैचमेंट {attName} को {partName} डिसेंडेंट के अंदर सिर्फ़ एक बार मौजूद होना चाहिए.
 Common.UGCValidation.ErrorLabel.NoAttributes,'{RootInstanceName}' (या इसके डिसेंडेंट) में ऐट्रिब्यूट हैं. आपको इनसे ऐट्रिब्यूट हटाने होंगे: {InstanceNameList}
 Common.UGCValidation.ErrorLabel.PropertiesNotSensible,{ClassName} '{InstancePath}' में अमान्य प्रॉपर्टी हैं : {ProblematicProperties}. दिखाई गई बाइट लिमिट पार हो गई है (0 की लिमिट का मतलब है कि प्रॉपर्टी खाली होनी चाहिए); किसी भी अन्य प्रॉपर्टी में NaN/Inf वैल्यू हैं या वह अपनी डिफ़ॉल्ट साइज़ लिमिट से ज़्यादा है.
+Common.UGCValidation.ErrorLabel.RenderedAnimation_RequiredExpressionsMissing,"रेंडर किए गए ऐनिमेशन में एक या एक से ज़्यादा ज़रूरी फ़ेशियल एक्सप्रेशन (आँख बंद, मुँह खुला, खुश, उदास) मौजूद नहीं हैं."
 Common.UGCValidation.ErrorLabel.RigAttachmentOutOfBounds,"'{PartName}' में रिग अटैचमेंट '{AttachmentName}' को जॉइंट की उस सीमा के पास रखना चाहिए, जहाँ यह बॉडी पार्ट आस-पास मौजूद किसी दूसरे पार्ट से जुड़ता है. मौजूदा पोज़िशन [{CurrentPosition}] कनेक्शन प्लेन से बहुत दूर है. इसे [{ClosestValidPosition}] के करीब लाएँ."
 Common.UGCValidation.ErrorLabel.SelectionCountNotOne,"Roblox पर कोई ऐसेट अपलोड करने के लिए, आपको ठीक 1 इंस्टैंस और उससे जुड़ा अपलोड टाइप चुनना होगा."
 Common.UGCValidation.ErrorLabel.SerializedAssetTooLarge,"इतना बड़ा ऐसेट अपलोड नहीं हो सकता ({sizeBytes} बाइट, अधिकतम तय {maxSizeBytes} बाइट से ज़्यादा है). कृपया इसे छोटा करके फिर से कोशिश करें."
@@ -2813,6 +2830,7 @@ Feature.Build.Title.VersionNumber,वर्ज़न {VERSION}
 Feature.Build.Title.Versions,
 Feature.Build.Title.WhatsIncluded,क्या-क्या शामिल है?
 Feature.BuyRobux.Heading.Banner,
+Feature.BuyRobux.Heading.PendingTransfers,पेंडिंग Robux
 Feature.BuyRobux.Label.MyFriendsWithCount,मेरे फ़्रेंड्स ({count})
 Feature.BuyRobux.Label.PeopleWithCount,लोग ({count})
 Feature.BuyRobux.Label.Search,
@@ -4710,7 +4728,7 @@ Feature.NotApproved.SubHeading.RuleExplanation.Spam,स्पैमिंग न
 Feature.NotApproved.SubHeading.RuleExplanation.Swearing,गाली-गलौज न करें
 Feature.NotApproved.SubHeading.RuleExplanation.ViolentContentAndGore,बहुत ज़्यादा हिंसा न दिखाएँ
 Feature.NotApproved.Title.AvatarBrokeRules,आपके अवतार ने नियमों का उल्लंघन किया है
-Feature.Notifications.Action.PushUpsellAllow,परमिशन दें
+Feature.Notifications.Action.PushUpsellAllow,
 Feature.Notifications.Action.PushUpsellNotNow,
 Feature.Notifications.Action.SnoozeFifteenMinutes,15 मिनट
 Feature.Notifications.Action.SnoozeFourHours,4 घंटे
@@ -5019,7 +5037,7 @@ Feature.RobloxSubscription.Label.FreeTrialDisclosureV2,"""इसे फ़्र
 Feature.RobloxSubscription.Label.FreeTrialDisclosureV3,"""इसे फ़्री में आज़माएँ"" पर क्लिक करने का मतलब है कि आप {linkStart}Roblox के सब्सक्रिप्शन की शर्तों{linkEnd} से सहमत हैं. आपका फ़्री ट्रायल {trialDuration} {trialPeriodLabel} में खत्म हो जाएगा और आपसे हर {billingPeriodLabel} में अपने-आप शुल्क ले लिया जाएगा. सब्सक्रिप्शन को कभी भी कैंसिल किया जा सकता है."
 Feature.RobloxSubscription.Label.FreeTrialText,फ़्री ट्रायल पाएँ
 Feature.RobloxSubscription.Label.New,
-Feature.RobloxSubscription.Label.PendingRobux,पेंडिंग Robux
+Feature.RobloxSubscription.Label.PendingRobux,
 Feature.RobloxSubscription.Label.ReferralRewardRobux,{amount} Robux
 Feature.RobloxSubscription.Label.ReferralTheyGet,आपके रेफ़रल को मिलता है
 Feature.RobloxSubscription.Label.ReferralYouGet,आपको मिलता है

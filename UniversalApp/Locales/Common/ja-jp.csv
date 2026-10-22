@@ -237,14 +237,17 @@ Authentication.AccountSwitch.Header.SignOutOtherAccounts,他のアカウント�
 Authentication.AccountSwitch.Header.SwitchAccountSentenceCase,
 Authentication.AccountSwitch.Heading.SwitchAccount,
 Authentication.AccountSwitch.Label.AccountLimitReached.2,アカウントを追加するには、まずログアウトしてください。
+Authentication.CrossDevice.Action.Allow,許可
 Authentication.CrossDevice.Action.CancelLogin,
 Authentication.CrossDevice.Action.ConfirmLogin,ログインを認証
 Authentication.CrossDevice.Action.Done,完了
+Authentication.CrossDevice.Action.DontAllow,許可しない
 Authentication.CrossDevice.Action.Enter,入力
 Authentication.CrossDevice.Action.GoBack,戻る
 Authentication.CrossDevice.Action.Next,
 Authentication.CrossDevice.Action.TryAgain,
 Authentication.CrossDevice.Description.ConfirmOnSignedInDevice,続けるには、ログイン済みのデバイスで確認してください。
+Authentication.CrossDevice.Description.DenyIfNotYou,ご自身ではありませんか？すぐに却下してください。
 Authentication.CrossDevice.Description.QuickSignInInstructionsModal,ログイン済みのデバイスでQRコードをスキャンするか、<b>[その他] > [クイックサインイン]</b>に移動して、以下のコードを入力してください。
 Authentication.CrossDevice.Description.SigningInAs,{identifier}としてログイン中
 Authentication.CrossDevice.EnterCodeInstruction,このコードを入力
@@ -253,6 +256,9 @@ Authentication.CrossDevice.Heading.LoginAnotherDevice,他のデバイスにロ�
 Authentication.CrossDevice.Heading.LoginCode,コード使用でクイックログイン
 Authentication.CrossDevice.Heading.LoginWarning,ログインするには以下を確認：
 Authentication.CrossDevice.Heading.QuickLogin,クイックログイン
+Authentication.CrossDevice.Heading.RecognizeSignIn,このログインに心当たりはありますか？
+Authentication.CrossDevice.Heading.SignInAllowed,ログインを許可しました
+Authentication.CrossDevice.Heading.SignInDenied,ログインを却下しました
 Authentication.CrossDevice.Heading.SignInWithQrCode,QRコードでログイン
 Authentication.CrossDevice.Heading.SigninAnotherDevice,別のデバイスでログインする
 Authentication.CrossDevice.Heading.WaitingForConfirmation,確認待ち
@@ -2844,6 +2850,7 @@ Feature.Build.Title.VersionNumber,バージョン{VERSION}
 Feature.Build.Title.Versions,
 Feature.Build.Title.WhatsIncluded,含まれるもの
 Feature.BuyRobux.Heading.Banner,
+Feature.BuyRobux.Heading.PendingTransfers,保留中のRobux
 Feature.BuyRobux.Label.MyFriendsWithCount,自分の友達（{count}人）
 Feature.BuyRobux.Label.PeopleWithCount,{count}人
 Feature.BuyRobux.Label.Search,
@@ -5048,7 +5055,7 @@ Feature.RobloxSubscription.Label.FreeTrialDisclosureV2,「無料で試す」を�
 Feature.RobloxSubscription.Label.FreeTrialDisclosureV3,「無料で試す」をクリックすると、{linkStart}Roblox定期購入規約{linkEnd}に同意したものとみなされます。無料トライアルは{trialDuration}{trialPeriodLabel}で終了し、以降は{billingPeriodLabel}ごとに自動的に課金されますが、キャンセルはいつでも可能です。
 Feature.RobloxSubscription.Label.FreeTrialText,無料トライアルを入手
 Feature.RobloxSubscription.Label.New,
-Feature.RobloxSubscription.Label.PendingRobux,保留中のRobux
+Feature.RobloxSubscription.Label.PendingRobux,
 Feature.RobloxSubscription.Label.ReferralRewardRobux,{amount} Robux
 Feature.RobloxSubscription.Label.ReferralTheyGet,被紹介者の報酬
 Feature.RobloxSubscription.Label.ReferralYouGet,紹介者の報酬

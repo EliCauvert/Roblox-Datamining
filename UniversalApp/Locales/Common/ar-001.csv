@@ -220,14 +220,17 @@ Authentication.AccountSwitch.Header.SignOutOtherAccounts,هل تريد تسجي�
 Authentication.AccountSwitch.Header.SwitchAccountSentenceCase,
 Authentication.AccountSwitch.Heading.SwitchAccount,
 Authentication.AccountSwitch.Label.AccountLimitReached.2,لإضافة حساب، سجل الخروج من حساب ما أولاً.
+Authentication.CrossDevice.Action.Allow,السماح
 Authentication.CrossDevice.Action.CancelLogin,
 Authentication.CrossDevice.Action.ConfirmLogin,تأكيد تسجيل الدخول
 Authentication.CrossDevice.Action.Done,تم
+Authentication.CrossDevice.Action.DontAllow,عدم السماح
 Authentication.CrossDevice.Action.Enter,إدخال
 Authentication.CrossDevice.Action.GoBack,الرجوع
 Authentication.CrossDevice.Action.Next,
 Authentication.CrossDevice.Action.TryAgain,حاول مرة أخرى
 Authentication.CrossDevice.Description.ConfirmOnSignedInDevice,أكّد على جهازك المُسجّل الدخول إليه للمتابعة.
+Authentication.CrossDevice.Description.DenyIfNotYou,أليس هذا أنت؟ ارفض الطلب على الفور.
 Authentication.CrossDevice.Description.QuickSignInInstructionsModal,على جهازك المُسجَّل الدخول إليه، امسح كود الاستجابة السريعة (QR) أو انتقل إلى <b>المزيد > تسجيل الدخول السريع</b> وأدخل الكود أدناه.
 Authentication.CrossDevice.Description.SigningInAs,جارٍ تسجيل الدخول بصفتك {identifier}
 Authentication.CrossDevice.EnterCodeInstruction,ثم أدخل هذا الرمز
@@ -236,6 +239,9 @@ Authentication.CrossDevice.Heading.LoginAnotherDevice,تسجيل الدخول إ
 Authentication.CrossDevice.Heading.LoginCode,رمز تسجيل الدخول السريع
 Authentication.CrossDevice.Heading.LoginWarning,لتسجيل الدخول، تحقق أنك:
 Authentication.CrossDevice.Heading.QuickLogin,تسجيل دخول سريع
+Authentication.CrossDevice.Heading.RecognizeSignIn,هل تتعرف على عملية تسجيل الدخول هذه؟
+Authentication.CrossDevice.Heading.SignInAllowed,لقد سمحتَ بطلب تسجيل الدخول
+Authentication.CrossDevice.Heading.SignInDenied,لقد رفضتَ طلب تسجيل الدخول
 Authentication.CrossDevice.Heading.SignInWithQrCode,تسجيل الدخول باستخدام كود QR
 Authentication.CrossDevice.Heading.SigninAnotherDevice,تسجيل الدخول على جهاز آخر
 Authentication.CrossDevice.Heading.WaitingForConfirmation,في انتظار التأكيد
@@ -2769,6 +2775,7 @@ Feature.Build.Title.VersionNumber,الإصدار {VERSION}
 Feature.Build.Title.Versions,الإصدارات
 Feature.Build.Title.WhatsIncluded,ما الذي تشمله الحملة؟
 Feature.BuyRobux.Heading.Banner,شراء Robux
+Feature.BuyRobux.Heading.PendingTransfers,عملات Robux المعلقة
 Feature.BuyRobux.Label.MyFriendsWithCount,أصدقائي ({count})
 Feature.BuyRobux.Label.PeopleWithCount,الأشخاص ({count})
 Feature.BuyRobux.Label.Search,
@@ -4666,7 +4673,7 @@ Feature.NotApproved.SubHeading.RuleExplanation.Spam,يُعد إرسال الرس
 Feature.NotApproved.SubHeading.RuleExplanation.Swearing,لا يُسمح باستخدام الألفاظ البذيئة
 Feature.NotApproved.SubHeading.RuleExplanation.ViolentContentAndGore,لا يُسمح بالعنف الشديد
 Feature.NotApproved.Title.AvatarBrokeRules,انتهك أفاتارك القواعد
-Feature.Notifications.Action.PushUpsellAllow,السماح
+Feature.Notifications.Action.PushUpsellAllow,
 Feature.Notifications.Action.PushUpsellNotNow,
 Feature.Notifications.Action.SnoozeFifteenMinutes,15 دقيقة
 Feature.Notifications.Action.SnoozeFourHours,4 ساعات
@@ -4975,7 +4982,7 @@ Feature.RobloxSubscription.Label.FreeTrialDisclosureV2,"بالضغط على ""ج
 Feature.RobloxSubscription.Label.FreeTrialDisclosureV3,"بالضغط على ""جرِّب مجانًا""، فإنك توافق على {linkStart}شروط الاشتراك في منصّة Roblox.{linkEnd} ستنتهي الفترة التجريبية المجانية بعد {trialDuration} {trialPeriodLabel} وسيتم تحصيل الرسوم منك تلقائيًا كل {billingPeriodLabel} ويمكنك الإلغاء في أي وقت."
 Feature.RobloxSubscription.Label.FreeTrialText,احصل على فترة تجريبية مجانية
 Feature.RobloxSubscription.Label.New,
-Feature.RobloxSubscription.Label.PendingRobux,عملات Robux المعلقة
+Feature.RobloxSubscription.Label.PendingRobux,
 Feature.RobloxSubscription.Label.ReferralRewardRobux,{amount} من عملات Robux
 Feature.RobloxSubscription.Label.ReferralTheyGet,يحصل الأشخاص الذين تدعوهم على
 Feature.RobloxSubscription.Label.ReferralYouGet,ستحصل على

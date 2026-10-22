@@ -237,14 +237,17 @@ Authentication.AccountSwitch.Header.SignOutOtherAccounts,Von anderen Konten abme
 Authentication.AccountSwitch.Header.SwitchAccountSentenceCase,
 Authentication.AccountSwitch.Heading.SwitchAccount,
 Authentication.AccountSwitch.Label.AccountLimitReached.2,"Um ein Konto hinzuzufügen, melde dich zuerst von einem anderen ab."
+Authentication.CrossDevice.Action.Allow,Erlauben
 Authentication.CrossDevice.Action.CancelLogin,
 Authentication.CrossDevice.Action.ConfirmLogin,Anmeldung bestätigen
 Authentication.CrossDevice.Action.Done,Fertig
+Authentication.CrossDevice.Action.DontAllow,Nicht erlauben
 Authentication.CrossDevice.Action.Enter,Eingabe
 Authentication.CrossDevice.Action.GoBack,Zurück
 Authentication.CrossDevice.Action.Next,
 Authentication.CrossDevice.Action.TryAgain,
 Authentication.CrossDevice.Description.ConfirmOnSignedInDevice,"Bestätige die Anmeldung auf deinem angemeldeten Gerät, um fortzufahren."
+Authentication.CrossDevice.Description.DenyIfNotYou,Warst du das nicht? Lehne sofort ab.
 Authentication.CrossDevice.Description.QuickSignInInstructionsModal,Scanne den QR-Code auf deinem angemeldeten Gerät oder gehe zu <b>Mehr > Schnellanmeldung</b> und gib den unten stehenden Code ein.
 Authentication.CrossDevice.Description.SigningInAs,Anmeldung als {identifier}
 Authentication.CrossDevice.EnterCodeInstruction,und gib dann diesen Code ein
@@ -253,6 +256,9 @@ Authentication.CrossDevice.Heading.LoginAnotherDevice,Melde dich mit einem ander
 Authentication.CrossDevice.Heading.LoginCode,Code für Schnellanmeldung
 Authentication.CrossDevice.Heading.LoginWarning,"STELLE FOLGENDES SICHER, UM DICH ANZUMELDEN:"
 Authentication.CrossDevice.Heading.QuickLogin,Schnellanmeldung
+Authentication.CrossDevice.Heading.RecognizeSignIn,Erkennst du diese Anmeldung?
+Authentication.CrossDevice.Heading.SignInAllowed,Du hast eine Anmeldung zugelassen
+Authentication.CrossDevice.Heading.SignInDenied,Du hast eine Anmeldung abgelehnt
 Authentication.CrossDevice.Heading.SignInWithQrCode,Mit QR-Code anmelden
 Authentication.CrossDevice.Heading.SigninAnotherDevice,Auf einem anderen Gerät anmelden
 Authentication.CrossDevice.Heading.WaitingForConfirmation,Bestätigung ausstehend
@@ -749,6 +755,9 @@ Common.UGCValidation.ErrorLabel.DescendantIdAnimationVersionNotSupported,"{Insta
 Common.UGCValidation.ErrorLabel.DescendantIdNotPublished,Das Objekt {AssetId} ({InstanceFullName}.{FieldName}) ist nicht veröffentlicht. Veröffentliche es und versuche es erneut.
 Common.UGCValidation.ErrorLabel.DescendantIdVersionNotSupported,"{InstanceFullName}.{FieldName} verwendet Version {Version} des Objekts {AssetId}, aber derzeit wird nur Version 1 unterstützt. Verwende Version 1 und versuche es erneut."
 Common.UGCValidation.ErrorLabel.DynamicHeadCageMisaligned,"Dynamische Köpfe auf dem Marktplatz müssen ordnungsgemäß gecaged sein, damit die Augen- und Mundscheitelpunkte auf dem Cage mit den Mesh-Scheitelpunkten übereinstimmen. Bitte verbessere deine Cages und deren Ausrichtung mit dem Netz."
+Common.UGCValidation.ErrorLabel.DynamicHeadCageMisalignedLeftEye,"Die Orientierungspunkte für das linken Auges des dynamischen Kopf-Cages sind nicht korrekt mit dem Mesh ausgerichtet. Passe den Augen-Cage so an, dass sich das Mesh des linken Auges innerhalb des projizierten Cage-Bereichs befindet."
+Common.UGCValidation.ErrorLabel.DynamicHeadCageMisalignedMouth,"Die Orientierungspunkte für den Mund des dynamischen Kopf-Cages sind nicht korrekt mit dem Mesh ausgerichtet. Passe den Mund-Cage so an, dass sich das Mund-Mesh innerhalb des projizierten Cage-Bereichs befindet."
+Common.UGCValidation.ErrorLabel.DynamicHeadCageMisalignedRightEye,"Die Orientierungspunkte für das rechte Auge des dynamischen Kopf-Cages sind nicht korrekt mit dem Mesh ausgerichtet. Passe den Augen-Cage so an, dass sich das Mesh des rechten Auges innerhalb des projizierten Cage-Bereichs befindet."
 Common.UGCValidation.ErrorLabel.DynamicHeadHappyNotShown,"Der Ausdruck ""Lächeln"" für den dynamischen Kopf kann nicht erkannt werden. Bitte passe die Cage-Orientierungspunkte für den Mund so an, dass sie mit der Position des Mundes auf dem Kopf übereinstimmen, und stelle sicher, dass er den Ausdruck ""Lächeln"" zeigen kann."
 Common.UGCValidation.ErrorLabel.DynamicHeadLeftEyeNotClose,"Der Ausdruck ""Linkes Auge geschlossen"" kann für den dynamischen Kopf nicht erkannt werden. Bitte passe die Cage-Orientierungspunkte für das linke Auge so an, dass sie mit der Position des linken Auges auf dem Kopf übereinstimmen, und stelle sicher, dass es geschlossen werden kann."
 Common.UGCValidation.ErrorLabel.DynamicHeadMISSINGCAGE,Für dynamische Köpfe auf dem Marktplatz sind keine Kopf-Cages angegeben. Bitte erstelle einen Kopf-Cage für den dynamischen Kopf.
@@ -768,6 +777,13 @@ Common.UGCValidation.ErrorLabel.EmoteAnimation_MaxPartTranslationCalcFailed,Die 
 Common.UGCValidation.ErrorLabel.EmoteAnimation_MaxPartTranslationMismatch,"Die veröffentlichte Animation gibt eine maximale Teilverschiebung von {taggedTranslation} Noppen an, aber ihre Animationsdaten ergeben {calculatedTranslation} Noppen. Bitte veröffentliche die Animation erneut."
 Common.UGCValidation.ErrorLabel.Extents_HeadBelowTorso,"Der Kopf muss über dem Oberkörper platziert werden. Die Kopfmitte befindet sich unterhalb der Oberseite des Oberkörpers, was darauf hinweist, dass das Kopf-Mesh eingeklappt oder falsch platziert ist."
 Common.UGCValidation.ErrorLabel.FaceControlsOverrideFACSNotEmpty,Die Eigenschaft InternalOverrideFACSData auf FaceControls muss beim Hochladen leer sein.
+Common.UGCValidation.ErrorLabel.FacialFeaturePresence_EyesMissing,Dem Basisgesicht fehlen die erforderlichen Augenmerkmale. Füge dem Basisgesicht Augen hinzu und versuche es erneut.
+Common.UGCValidation.ErrorLabel.FacialFeaturePresence_MouthMissing,Dem Basisgesicht fehlt ein erforderlicher Mund. Füge dem Basisgesicht einen Mund hinzu und versuche es erneut.
+Common.UGCValidation.ErrorLabel.FacsDeformation_HappyNotShown,"Der fröhliche Gesichtsausdruck kann nicht erkannt werden. Passe den Cage des Mundes oder das FACS für den fröhlichen Gesichtsausdruck an, damit sich das projizierte Mund-Mesh wie erwartet verformt."
+Common.UGCValidation.ErrorLabel.FacsDeformation_LeftEyeNotClose,"Der Gesichtsausdruck ""Linkes Auge geschlossen"" kann nicht erkannt werden. Passe den Cage des linken Auges oder das FACS für das Schließen des linken Auges an, damit sich das projizierte Augen-Mesh wie erwartet verformt."
+Common.UGCValidation.ErrorLabel.FacsDeformation_MouthNotOpen,"Der Ausdruck ""Mund geöffnet"" kann nicht erkannt werden. Passe den Cage des Mundes oder das FACS für den geöffneten Mund an, damit sich das projizierte Mund-Mesh wie erwartet verformt."
+Common.UGCValidation.ErrorLabel.FacsDeformation_RightEyeNotClose,"Der Gesichtsausdruck ""Rechtes Auge geschlossen"" kann nicht erkannt werden. Passe den Cage des rechten Auges oder das FACS für das Schließen des rechten Auges an, damit sich das projizierte Augen-Mesh wie erwartet verformt."
+Common.UGCValidation.ErrorLabel.FacsDeformation_SadNotShown,"Der traurige Gesichtsausdruck kann nicht erkannt werden. Passe den Cage des Mundes oder das FACS für den traurigen Gesichtsausdruck an, damit sich das projizierte Mund-Mesh wie erwartet verformt."
 Common.UGCValidation.ErrorLabel.FacsExpandsHead,"Wir haben festgestellt, dass FACS deinen Kopf auf {modPercent} % vergrößert hat. Die Änderung des Kopfes verstößt jedoch gegen die Marktplatzrichtlinien für Gesichtsanimationen."
 Common.UGCValidation.ErrorLabel.FacsJointCountBounded,"Dynamische Köpfe dürfen höchstens {maxFacsJointCount} FACS-Gelenke haben, aber dieser Kopf hat {actualJointCount}. Bitte reduziere die Anzahl der FACS-Gelenke und versuche es erneut."
 Common.UGCValidation.ErrorLabel.FacsShrinksHead,"Wir haben festgestellt, dass FACS deinen Kopf auf {modPercent} % verkleinert hat. Die Änderung des Kopfes verstößt jedoch gegen die Marktplatzrichtlinien für Gesichtsanimationen."
@@ -814,6 +830,7 @@ Common.UGCValidation.ErrorLabel.MeshPartBounds_TooSmall,Die {axis}-Achsen-Größ
 Common.UGCValidation.ErrorLabel.MissingRequiredAttachment,Der Anhang {attName} darf in Unterelemente von {partName} genau einmal vorhanden sein.
 Common.UGCValidation.ErrorLabel.NoAttributes,"""{RootInstanceName}"" (oder untergeordnete Instanzen) enthalten Attribute. Du musst Attribute aus den folgenden Instanzen entfernen: {InstanceNameList}"
 Common.UGCValidation.ErrorLabel.PropertiesNotSensible,"{ClassName} ""{InstancePath}"" hat ungültige Eigenschaften: {ProblematicProperties}. Ein angezeigtes Byte-Limit wurde überschritten (ein Limit von 0 bedeutet, dass die Eigenschaft leer sein muss). Eine andere Eigenschaft enthält NaN/Inf-Werte oder überschreitet ihr Standardgrößenlimit."
+Common.UGCValidation.ErrorLabel.RenderedAnimation_RequiredExpressionsMissing,"Der gerenderten Animation fehlen ein oder mehrere erforderliche Gesichtsausdrücke (Auge geschlossen, Mund geöffnet, fröhlich, traurig)."
 Common.UGCValidation.ErrorLabel.RigAttachmentOutOfBounds,"Der Rig-Anhang ""{AttachmentName}"" in ""{PartName}"" muss in der Nähe der Gelenkbegrenzung platziert werden, wo dieses Körperteil mit einem benachbarten Teil verbunden ist. Die aktuelle Position [{CurrentPosition}] ist zu weit von der Verbindungsebene entfernt. Bewege den Rig-Anhang ihn näher an [{ClosestValidPosition}]."
 Common.UGCValidation.ErrorLabel.SelectionCountNotOne,"Um ein Objekt auf Roblox hochzuladen, musst du genau 1 Instanz und die zugehörige Upload-Art auswählen."
 Common.UGCValidation.ErrorLabel.SerializedAssetTooLarge,"Dieses Objekt ist zu groß, um es hochzuladen ({sizeBytes} Bytes überschreiten das Maximum von {maxSizeBytes} Bytes). Bitte reduziere seine Größe und versuche es erneut."
@@ -2826,6 +2843,7 @@ Feature.Build.Title.VersionNumber,Version {VERSION}
 Feature.Build.Title.Versions,Versionen
 Feature.Build.Title.WhatsIncluded,Was ist enthalten?
 Feature.BuyRobux.Heading.Banner,
+Feature.BuyRobux.Heading.PendingTransfers,Ausstehende Robux
 Feature.BuyRobux.Label.MyFriendsWithCount,Meine Freunde ({count})
 Feature.BuyRobux.Label.PeopleWithCount,Personen ({count})
 Feature.BuyRobux.Label.Search,
@@ -4723,7 +4741,7 @@ Feature.NotApproved.SubHeading.RuleExplanation.Spam,Spam verstößt gegen die Re
 Feature.NotApproved.SubHeading.RuleExplanation.Swearing,Keine Schimpfwörter
 Feature.NotApproved.SubHeading.RuleExplanation.ViolentContentAndGore,Keine extreme Gewaltdarstellung
 Feature.NotApproved.Title.AvatarBrokeRules,Dein Avatar hat gegen die Regeln verstoßen
-Feature.Notifications.Action.PushUpsellAllow,Erlauben
+Feature.Notifications.Action.PushUpsellAllow,
 Feature.Notifications.Action.PushUpsellNotNow,
 Feature.Notifications.Action.SnoozeFifteenMinutes,15 Minuten
 Feature.Notifications.Action.SnoozeFourHours,4 Stunden
@@ -5029,7 +5047,7 @@ Feature.RobloxSubscription.Label.FreeTrialDisclosureV2,"Indem du auf ""Kostenlos
 Feature.RobloxSubscription.Label.FreeTrialDisclosureV3,"Indem du auf ""Kostenlos ausprobieren"" klickst, stimmst du den {linkStart}Abonnementbedingungen von Roblox{linkEnd} zu. Deine kostenlose Testversion endet in {trialDuration} {trialPeriodLabel}. Dir wird jeden/s {billingPeriodLabel} automatisch eine Gebühr berechnet und du kannst jederzeit kündigen."
 Feature.RobloxSubscription.Label.FreeTrialText,Kostenlose Testversion holen
 Feature.RobloxSubscription.Label.New,
-Feature.RobloxSubscription.Label.PendingRobux,Ausstehende Robux
+Feature.RobloxSubscription.Label.PendingRobux,
 Feature.RobloxSubscription.Label.ReferralRewardRobux,{amount} Robux
 Feature.RobloxSubscription.Label.ReferralTheyGet,Die von dir eingeladenen Personen erhalten
 Feature.RobloxSubscription.Label.ReferralYouGet,Du bekommst

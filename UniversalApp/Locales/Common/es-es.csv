@@ -237,14 +237,17 @@ Authentication.AccountSwitch.Header.SignOutOtherAccounts,¿Cerrar sesión en otr
 Authentication.AccountSwitch.Header.SwitchAccountSentenceCase,
 Authentication.AccountSwitch.Heading.SwitchAccount,
 Authentication.AccountSwitch.Label.AccountLimitReached.2,"Para añadir una cuenta, cierra la sesión de una primero."
+Authentication.CrossDevice.Action.Allow,Permitir
 Authentication.CrossDevice.Action.CancelLogin,
 Authentication.CrossDevice.Action.ConfirmLogin,Confirmar inicio de sesión
 Authentication.CrossDevice.Action.Done,Hecho
+Authentication.CrossDevice.Action.DontAllow,No permitir
 Authentication.CrossDevice.Action.Enter,Ingresar
 Authentication.CrossDevice.Action.GoBack,Atrás
 Authentication.CrossDevice.Action.Next,
 Authentication.CrossDevice.Action.TryAgain,Intentar de nuevo
 Authentication.CrossDevice.Description.ConfirmOnSignedInDevice,Confirma en el dispositivo donde hayas iniciado sesión para continuar.
+Authentication.CrossDevice.Description.DenyIfNotYou,¿No fuiste tú? Recházalo de inmediato.
 Authentication.CrossDevice.Description.QuickSignInInstructionsModal,"En el dispositivo donde iniciaste sesión, escanea el código QR o ve a <b>Más > Inicio de sesión rápido</b> e ingresa el código que aparece a continuación."
 Authentication.CrossDevice.Description.SigningInAs,Iniciando sesión como {identifier}
 Authentication.CrossDevice.EnterCodeInstruction,"luego, ingresa este código"
@@ -253,6 +256,9 @@ Authentication.CrossDevice.Heading.LoginAnotherDevice,Iniciar sesión en otro di
 Authentication.CrossDevice.Heading.LoginCode,Código de inicio de sesión rápido
 Authentication.CrossDevice.Heading.LoginWarning,"Para iniciar sesión, asegúrate de:"
 Authentication.CrossDevice.Heading.QuickLogin,Inicio de sesión rápido
+Authentication.CrossDevice.Heading.RecognizeSignIn,¿Reconoces este inicio de sesión?
+Authentication.CrossDevice.Heading.SignInAllowed,Permitiste un inicio de sesión
+Authentication.CrossDevice.Heading.SignInDenied,Rechazaste un inicio de sesión
 Authentication.CrossDevice.Heading.SignInWithQrCode,Inicia sesión con código QR
 Authentication.CrossDevice.Heading.SigninAnotherDevice,
 Authentication.CrossDevice.Heading.WaitingForConfirmation,Esperando confirmación
@@ -2834,6 +2840,7 @@ Feature.Build.Title.VersionNumber,Versión {VERSION}
 Feature.Build.Title.Versions,Versiones
 Feature.Build.Title.WhatsIncluded,¿Qué incluye?
 Feature.BuyRobux.Heading.Banner,Comprar Robux
+Feature.BuyRobux.Heading.PendingTransfers,Robux pendientes
 Feature.BuyRobux.Label.MyFriendsWithCount,Mis amistades ({count})
 Feature.BuyRobux.Label.PeopleWithCount,Personas ({count})
 Feature.BuyRobux.Label.Search,
@@ -4731,7 +4738,7 @@ Feature.NotApproved.SubHeading.RuleExplanation.Spam,El spam va en contra de las 
 Feature.NotApproved.SubHeading.RuleExplanation.Swearing,No insultes
 Feature.NotApproved.SubHeading.RuleExplanation.ViolentContentAndGore,No uses violencia extrema
 Feature.NotApproved.Title.AvatarBrokeRules,Tu avatar infringió las reglas
-Feature.Notifications.Action.PushUpsellAllow,Permitir
+Feature.Notifications.Action.PushUpsellAllow,
 Feature.Notifications.Action.PushUpsellNotNow,
 Feature.Notifications.Action.SnoozeFifteenMinutes,Por 15 minutos
 Feature.Notifications.Action.SnoozeFourHours,Por 4 horas
@@ -5040,7 +5047,7 @@ Feature.RobloxSubscription.Label.FreeTrialDisclosureV2,"Al hacer clic en Haz la 
 Feature.RobloxSubscription.Label.FreeTrialDisclosureV3,"Al hacer clic en Haz la prueba gratis, aceptas los {linkStart}Términos de suscripción de Roblox.{linkEnd} Tu prueba gratuita finalizará en {trialDuration} {trialPeriodLabel} y se te hará el cargo automáticamente cada {billingPeriodLabel} hasta que canceles la suscripción."
 Feature.RobloxSubscription.Label.FreeTrialText,Obtén una prueba gratuita
 Feature.RobloxSubscription.Label.New,
-Feature.RobloxSubscription.Label.PendingRobux,Robux pendientes
+Feature.RobloxSubscription.Label.PendingRobux,
 Feature.RobloxSubscription.Label.ReferralRewardRobux,{amount} Robux
 Feature.RobloxSubscription.Label.ReferralTheyGet,Tus referidos obtienen
 Feature.RobloxSubscription.Label.ReferralYouGet,Obtendrás

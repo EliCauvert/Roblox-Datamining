@@ -220,14 +220,17 @@ Authentication.AccountSwitch.Header.SignOutOtherAccounts,ลงชื่ออ�
 Authentication.AccountSwitch.Header.SwitchAccountSentenceCase,
 Authentication.AccountSwitch.Heading.SwitchAccount,
 Authentication.AccountSwitch.Label.AccountLimitReached.2,หากต้องการเพิ่มบัญชี โปรดลงชื่อออกก่อน
+Authentication.CrossDevice.Action.Allow,อนุญาต
 Authentication.CrossDevice.Action.CancelLogin,
 Authentication.CrossDevice.Action.ConfirmLogin,ยืนยันการลงชื่อเข้าใช้
 Authentication.CrossDevice.Action.Done,เสร็จสิ้น
+Authentication.CrossDevice.Action.DontAllow,ไม่อนุญาต
 Authentication.CrossDevice.Action.Enter,ส่ง
 Authentication.CrossDevice.Action.GoBack,ย้อนกลับ
 Authentication.CrossDevice.Action.Next,
 Authentication.CrossDevice.Action.TryAgain,
 Authentication.CrossDevice.Description.ConfirmOnSignedInDevice,ยืนยันบนอุปกรณ์ที่คุณลงชื่อเข้าใช้อยู่เพื่อดำเนินการต่อ
+Authentication.CrossDevice.Description.DenyIfNotYou,หากไม่ใช่คุณ ให้ปฏิเสธทันที
 Authentication.CrossDevice.Description.QuickSignInInstructionsModal,บนอุปกรณ์ที่คุณลงชื่อเข้าใช้อยู่ ให้สแกนรหัส QR หรือไปที่ <b>เพิ่มเติม > ลงชื่อเข้าใช้ด่วน</b> แล้วกรอกรหัสด้านล่าง
 Authentication.CrossDevice.Description.SigningInAs,กำลังลงชื่อเข้าใช้ด้วย {identifier}
 Authentication.CrossDevice.EnterCodeInstruction,จากนั้นกรอกรหัสนี้
@@ -236,6 +239,9 @@ Authentication.CrossDevice.Heading.LoginAnotherDevice,ลงชื่อเข�
 Authentication.CrossDevice.Heading.LoginCode,รหัสสำหรับการลงชื่อเข้าใช้ด่วน
 Authentication.CrossDevice.Heading.LoginWarning,ในการลงชื่อเข้าใช้ ตรวจสอบให้แน่ใจว่าคุณ:
 Authentication.CrossDevice.Heading.QuickLogin,ลงชื่อเข้าใช้ด่วน
+Authentication.CrossDevice.Heading.RecognizeSignIn,ทราบเกี่ยวกับการลงชื่อเข้าใช้ครั้งนี้ไหม?
+Authentication.CrossDevice.Heading.SignInAllowed,คุณอนุญาตให้ลงชื่อเข้าใช้
+Authentication.CrossDevice.Heading.SignInDenied,คุณปฏิเสธการลงชื่อเข้าใช้
 Authentication.CrossDevice.Heading.SignInWithQrCode,ลงชื่อเข้าใช้ด้วยรหัส QR
 Authentication.CrossDevice.Heading.SigninAnotherDevice,
 Authentication.CrossDevice.Heading.WaitingForConfirmation,กำลังรอการยืนยัน
@@ -732,6 +738,9 @@ Common.UGCValidation.ErrorLabel.DescendantIdAnimationVersionNotSupported,{Instan
 Common.UGCValidation.ErrorLabel.DescendantIdNotPublished,ยังไม่ได้เผยแพร่ทรัพยากร {AssetId} ({InstanceFullName}.{FieldName}) โปรดเผยแพร่แล้วลองอีกครั้ง
 Common.UGCValidation.ErrorLabel.DescendantIdVersionNotSupported,{InstanceFullName}.{FieldName} ใช้ทรัพยากร {AssetId} เวอร์ชัน {Version} แต่ขณะนี้รองรับเฉพาะเวอร์ชัน 1 เท่านั้น โปรดใช้เวอร์ชัน 1 แล้วลองอีกครั้ง
 Common.UGCValidation.ErrorLabel.DynamicHeadCageMisaligned,ต้องสร้าง Cage ศีรษะแบบเคลื่อนไหวที่ลงในมาร์เก็ตเพลสอย่างเหมาะสม เพื่อให้จุดสูงสุดของดวงตาและปากใน Cage นั้นอยู่ในแนวเดียวกับจุดสูงสุดของเมช โปรดปรับปรุงโครงสร้าง Cage และการจัดตำแหน่งให้ตรงกับเมช
+Common.UGCValidation.ErrorLabel.DynamicHeadCageMisalignedLeftEye,ตำแหน่งอ้างอิงตาซ้ายของ Cage ศีรษะแบบเคลื่อนไหวไม่อยู่ในแนวเดียวกับเมช ปรับ Cage สำหรับตาเพื่อให้เมชตาข้างซ้ายอยู่ภายในพื้นที่ Cage ที่ฉาย
+Common.UGCValidation.ErrorLabel.DynamicHeadCageMisalignedMouth,ตำแหน่งอ้างอิงปากของ Cage ศีรษะแบบเคลื่อนไหวไม่อยู่ในแนวเดียวกับเมช ปรับ Cage สำหรับปากเพื่อให้เมชปากอยู่ภายในพื้นที่ Cage ที่ฉาย
+Common.UGCValidation.ErrorLabel.DynamicHeadCageMisalignedRightEye,ตำแหน่งอ้างอิงตาขวาของ Cage ศีรษะแบบเคลื่อนไหวไม่อยู่ในแนวเดียวกับเมช ปรับ Cage สำหรับตาเพื่อให้เมชตาข้างขวาอยู่ภายในพื้นที่ Cage ที่ฉาย
 Common.UGCValidation.ErrorLabel.DynamicHeadHappyNotShown,ตรวจไม่พบท่ายิ้มสำหรับศีรษะแบบเคลื่อนไหว โปรดปรับจุดสังเกต Cage สำหรับปากให้ตรงกับตำแหน่งของปากบนศีรษะ และตรวจสอบให้แน่ใจว่ายิ้มได้
 Common.UGCValidation.ErrorLabel.DynamicHeadLeftEyeNotClose,ตรวจไม่พบท่าปิดตาข้างซ้ายสำหรับศีรษะแบบเคลื่อนไหว โปรดปรับจุดสังเกต Cage สำหรับตาซ้ายให้ตรงกับตำแหน่งของตาซ้ายบนศีรษะ และตรวจสอบให้แน่ใจว่าปิดตาข้างซ้ายได้
 Common.UGCValidation.ErrorLabel.DynamicHeadMISSINGCAGE,ศีรษะแบบเคลื่อนไหวในมาร์เก็ตเพลสไม่มี Cage ศีรษะ โปรดสร้าง Cage สำหรับศีรษะแบบเคลื่อนไหว
@@ -751,6 +760,13 @@ Common.UGCValidation.ErrorLabel.EmoteAnimation_MaxPartTranslationCalcFailed,ไ�
 Common.UGCValidation.ErrorLabel.EmoteAnimation_MaxPartTranslationMismatch,แอนิเมชันที่เผยแพร่ระบุระยะการขยับชิ้นส่วนสูงสุดไว้ที่ {taggedTranslation} Stud แต่ข้อมูลแอนิเมชันคำนวณได้ {calculatedTranslation} Stud โปรดเผยแพร่แอนิเมชันอีกครั้ง
 Common.UGCValidation.ErrorLabel.Extents_HeadBelowTorso,ต้องวางศีรษะให้อยู่เหนือ UpperTorso ศูนย์กลางของศีรษะอยู่ต่ำกว่าส่วนบนของลำตัว ซึ่งบ่งชี้ว่าเมชของศีรษะยุบตัวหรือวางผิดตำแหน่ง
 Common.UGCValidation.ErrorLabel.FaceControlsOverrideFACSNotEmpty,คุณสมบัติ InternalOverrideFACSData บน FaceControls ต้องว่างเปล่าเมื่ออัปโหลด
+Common.UGCValidation.ErrorLabel.FacialFeaturePresence_EyesMissing,ใบหน้าพื้นฐานไม่มีลักษณะดวงตาที่จำเป็นต้องใช้ เพิ่มตาลงในใบหน้าพื้นฐานแล้วลองอีกครั้ง
+Common.UGCValidation.ErrorLabel.FacialFeaturePresence_MouthMissing,ใบหน้าพื้นฐานไม่มีปากที่จำเป็นต้องใช้ เพิ่มปากลงในใบหน้าพื้นฐานแล้วลองอีกครั้ง
+Common.UGCValidation.ErrorLabel.FacsDeformation_HappyNotShown,ตรวจไม่พบท่าดีใจ ปรับ Cage สำหรับปากหรือ FACS สำหรับท่าดีใจ เพื่อให้เมชปากที่ฉายเปลี่ยนรูปร่างตามที่คาดไว้
+Common.UGCValidation.ErrorLabel.FacsDeformation_LeftEyeNotClose,ตรวจไม่พบท่าปิดตาข้างซ้าย ปรับ Cage สำหรับตาซ้ายหรือ FACS สำหรับปิดตาข้างซ้าย เพื่อให้เมชตาที่ฉายเปลี่ยนรูปร่างตามที่คาดไว้
+Common.UGCValidation.ErrorLabel.FacsDeformation_MouthNotOpen,ตรวจไม่พบท่าอ้าปาก ปรับ Cage สำหรับปากหรือ FACS สำหรับท่าอ้าปาก เพื่อให้เมชปากที่ฉายเปลี่ยนรูปร่างตามที่คาดไว้
+Common.UGCValidation.ErrorLabel.FacsDeformation_RightEyeNotClose,ตรวจไม่พบท่าปิดตาข้างขวา ปรับ Cage สำหรับตาขวาหรือ FACS สำหรับปิดตาข้างขวา เพื่อให้เมชตาที่ฉายเปลี่ยนรูปร่างตามที่คาดไว้
+Common.UGCValidation.ErrorLabel.FacsDeformation_SadNotShown,ตรวจไม่พบท่าเศร้า ปรับ Cage สำหรับปากหรือ FACS สำหรับท่าเศร้า เพื่อให้เมชปากที่ฉายเปลี่ยนรูปร่างตามที่คาดไว้
 Common.UGCValidation.ErrorLabel.FacsExpandsHead,ตรวจพบ FACs ที่ทำให้ศีรษะที่คุณทำให้ใหญ่ขึ้นเป็น {modPercent}% แต่การปรับเปลี่ยนศีรษะนั้นขัดต่อนโยบายของมาร์เก็ตเพลสเกี่ยวกับการเคลื่อนไหวใบหน้า
 Common.UGCValidation.ErrorLabel.FacsJointCountBounded,ศีรษะแบบเคลื่อนไหวมีข้อต่อ FACS ได้สูงสุด {maxFacsJointCount} จุด แต่ศีรษะนี้มีข้อต่อ {actualJointCount} จุด โปรดลดจำนวนข้อต่อ FACS แล้วลองอีกครั้ง
 Common.UGCValidation.ErrorLabel.FacsShrinksHead,ตรวจพบ FACs ที่ทำให้ศีรษะที่คุณทำเล็กลงเหลือ {modPercent}% แต่การปรับเปลี่ยนศีรษะนั้นขัดต่อนโยบายของมาร์เก็ตเพลสเกี่ยวกับการเคลื่อนไหวใบหน้า
@@ -797,6 +813,7 @@ Common.UGCValidation.ErrorLabel.MeshPartBounds_TooSmall,ขนาดของเ
 Common.UGCValidation.ErrorLabel.MissingRequiredAttachment,ต้องมีจุดเชื่อมต่อ {attName} อยู่เพียง 1 จุดภายใน Descendant {partName}
 Common.UGCValidation.ErrorLabel.NoAttributes,'{RootInstanceName}' (หรือ Descendant) มีคุณลักษณะแอตทริบิวต์อยู่ คุณต้องลบแอตทริบิวต์ออกจากรายการต่อไปนี้: {InstanceNameList}
 Common.UGCValidation.ErrorLabel.PropertiesNotSensible,{ClassName} '{InstancePath}' มีคุณสมบัติที่ไม่ถูกต้อง: {ProblematicProperties} เกินขีดจำกัดไบต์ที่แสดง (ขีดจำกัด 0 หมายความว่าคุณสมบัติต้องว่างเปล่า) คุณสมบัติอื่นใดมีค่า NaN/Inf หรือเกินขีดจำกัดขนาดเริ่มต้น
+Common.UGCValidation.ErrorLabel.RenderedAnimation_RequiredExpressionsMissing,แอนิเมชันที่เรนเดอร์ไม่มีการแสดงสีหน้าที่จำเป็นต้องใช้อย่างน้อยหนึ่งอย่าง (ปิดตา อ้าปาก ดีใจ เศร้า)
 Common.UGCValidation.ErrorLabel.RigAttachmentOutOfBounds,ต้องวางจุดเชื่อมต่อ Rig '{AttachmentName}' ใน '{PartName}' ใกล้ขอบเขตข้อต่อที่ชิ้นส่วนร่างกายนี้เชื่อมต่อกับส่วนที่อยู่ติดกัน ตำแหน่งปัจจุบัน [{CurrentPosition}] อยู่ห่างจากระนาบการเชื่อมต่อเกินไป โปรดย้ายไปอยู่ใกล้ๆ [{ClosestValidPosition}]
 Common.UGCValidation.ErrorLabel.SelectionCountNotOne,หากต้องการอัปโหลดทรัพยากรไปยัง Roblox คุณต้องเลือก 1 อินสแตนซ์และประเภทการอัปโหลดที่เกี่ยวข้อง
 Common.UGCValidation.ErrorLabel.SerializedAssetTooLarge,ทรัพยากรนี้มีขนาดใหญ่เกินกว่าจะอัปโหลด ({sizeBytes} ไบต์เกินขนาดสูงสุดที่กำหนดไว้ที่ {maxSizeBytes} ไบต์) โปรดลดขนาดแล้วลองอีกครั้ง
@@ -2816,6 +2833,7 @@ Feature.Build.Title.VersionNumber,เวอร์ชัน {VERSION}
 Feature.Build.Title.Versions,
 Feature.Build.Title.WhatsIncluded,มีอะไรให้บ้าง?
 Feature.BuyRobux.Heading.Banner,
+Feature.BuyRobux.Heading.PendingTransfers,Robux ที่รอดำเนินการ
 Feature.BuyRobux.Label.MyFriendsWithCount,เพื่อนของฉัน ({count})
 Feature.BuyRobux.Label.PeopleWithCount,ผู้ใช้ ({count})
 Feature.BuyRobux.Label.Search,
@@ -4713,7 +4731,7 @@ Feature.NotApproved.SubHeading.RuleExplanation.Spam,การสแปมนั�
 Feature.NotApproved.SubHeading.RuleExplanation.Swearing,ห้ามสบถ
 Feature.NotApproved.SubHeading.RuleExplanation.ViolentContentAndGore,ห้ามแสดงความรุนแรงสุดโต่ง
 Feature.NotApproved.Title.AvatarBrokeRules,อวาตาร์ของคุณละเมิดกฎ
-Feature.Notifications.Action.PushUpsellAllow,อนุญาต
+Feature.Notifications.Action.PushUpsellAllow,
 Feature.Notifications.Action.PushUpsellNotNow,
 Feature.Notifications.Action.SnoozeFifteenMinutes,15 นาที
 Feature.Notifications.Action.SnoozeFourHours,4 ชั่วโมง
@@ -5022,7 +5040,7 @@ Feature.RobloxSubscription.Label.FreeTrialDisclosureV2,"การคลิก ""
 Feature.RobloxSubscription.Label.FreeTrialDisclosureV3,"การคลิก ""ลองใช้ฟรี"" จะถือว่าคุณยอมรับ{linkStart}ข้อกำหนดการสมัครสมาชิกของ Roblox{linkEnd} ช่วงทดลองใช้ฟรีของคุณจะสิ้นสุดในอีก {trialDuration} {trialPeriodLabel} โดยจะมีการเรียกเก็บเงินในแต่ละ{billingPeriodLabel}โดยอัตโนมัติ และคุณยกเลิกได้ทุกเมื่อ"
 Feature.RobloxSubscription.Label.FreeTrialText,ทดลองใช้ฟรี
 Feature.RobloxSubscription.Label.New,
-Feature.RobloxSubscription.Label.PendingRobux,Robux ที่รอดำเนินการ
+Feature.RobloxSubscription.Label.PendingRobux,
 Feature.RobloxSubscription.Label.ReferralRewardRobux,{amount} Robux
 Feature.RobloxSubscription.Label.ReferralTheyGet,ผู้ที่คุณแนะนำจะได้รับ
 Feature.RobloxSubscription.Label.ReferralYouGet,คุณจะได้รับ
@@ -5153,7 +5171,7 @@ Feature.Settings.Heading.SwitchProfile,สลับโปรไฟล์
 Feature.Settings.Label.Allowed,
 Feature.Settings.Label.CrossPlatform,การเล่นข้ามแพลตฟอร์ม
 Feature.Settings.Label.Disabled,ปิดใช้งานอยู่
-Feature.Settings.Label.Disallowed,ไม่อนุญาต
+Feature.Settings.Label.Disallowed,
 Feature.Settings.Label.Enabled,เปิดใช้งานอยู่
 Feature.Settings.Label.Error,
 Feature.Settings.Label.Loading,กำลังโหลด

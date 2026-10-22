@@ -238,14 +238,17 @@ Authentication.AccountSwitch.Header.SignOutOtherAccounts,Sign out of other accou
 Authentication.AccountSwitch.Header.SwitchAccountSentenceCase,Switch accounts
 Authentication.AccountSwitch.Heading.SwitchAccount,
 Authentication.AccountSwitch.Label.AccountLimitReached.2,"To add an account, log out of one first."
+Authentication.CrossDevice.Action.Allow,Allow
 Authentication.CrossDevice.Action.CancelLogin,
 Authentication.CrossDevice.Action.ConfirmLogin,Confirm Login
 Authentication.CrossDevice.Action.Done,Done
+Authentication.CrossDevice.Action.DontAllow,Don’t allow
 Authentication.CrossDevice.Action.Enter,Enter
 Authentication.CrossDevice.Action.GoBack,Go Back
 Authentication.CrossDevice.Action.Next,
 Authentication.CrossDevice.Action.TryAgain,Try Again
 Authentication.CrossDevice.Description.ConfirmOnSignedInDevice,Confirm on your signed-in device to continue.
+Authentication.CrossDevice.Description.DenyIfNotYou,Not you? Deny immediately.
 Authentication.CrossDevice.Description.QuickSignInInstructionsModal,"On your signed-in device, scan the QR code or go to <b>More > Quick sign in</b> and enter the code below."
 Authentication.CrossDevice.Description.SigningInAs,Signing in as {identifier}
 Authentication.CrossDevice.EnterCodeInstruction,then enter this code
@@ -254,6 +257,9 @@ Authentication.CrossDevice.Heading.LoginAnotherDevice,Log in to another Device
 Authentication.CrossDevice.Heading.LoginCode,Quick Sign In Code
 Authentication.CrossDevice.Heading.LoginWarning,"TO LOG IN, MAKE SURE YOU:"
 Authentication.CrossDevice.Heading.QuickLogin,Quick Sign-in
+Authentication.CrossDevice.Heading.RecognizeSignIn,Recognize this sign-in?
+Authentication.CrossDevice.Heading.SignInAllowed,You allowed a sign-in
+Authentication.CrossDevice.Heading.SignInDenied,You denied a sign-in
 Authentication.CrossDevice.Heading.SignInWithQrCode,Sign in with QR code
 Authentication.CrossDevice.Heading.SigninAnotherDevice,Sign in on another device
 Authentication.CrossDevice.Heading.WaitingForConfirmation,Waiting for confirmation
@@ -2541,6 +2547,7 @@ Feature.Build.Label.DeveloperProductDescription,Description: {DESCRIPTION}
 Feature.Build.Label.DeveloperProductName,"Name: ""{NAME}"""
 Feature.Build.Label.DeveloperProductPrice,Price: {PRICE} Robux
 Feature.Build.Label.DeveloperProductPriceUnavailable,?
+Feature.Build.Label.DeveloperProducts,Developer Products
 Feature.Build.Label.Done,
 Feature.Build.Label.EasyPerformanceReport,Easy performance report
 Feature.Build.Label.Error,
@@ -2827,6 +2834,7 @@ Feature.Build.Title.GamePass,Game Pass
 Feature.Build.Title.GenericError,
 Feature.Build.Title.GetUsers,Get users
 Feature.Build.Title.ManagedPricingAcknowledgement,Turn on Managed Pricing?
+Feature.Build.Title.Monetization,Monetization
 Feature.Build.Title.NoMonetizationProducts,Start earning in your game
 Feature.Build.Title.NoRobuxForUsage,No Robux left for Build usage
 Feature.Build.Title.PickCampaign,Pick a length
@@ -2851,6 +2859,7 @@ Feature.Build.Title.VersionNumber,Version {VERSION}
 Feature.Build.Title.Versions,Versions
 Feature.Build.Title.WhatsIncluded,What's included?
 Feature.BuyRobux.Heading.Banner,
+Feature.BuyRobux.Heading.PendingTransfers,Pending Robux
 Feature.BuyRobux.Label.MyFriendsWithCount,My friends ({count})
 Feature.BuyRobux.Label.PeopleWithCount,People ({count})
 Feature.BuyRobux.Label.Search,
@@ -4179,6 +4188,7 @@ Feature.Moments.Action.ShowDetails,Show details
 Feature.Moments.Action.ShowMore,
 Feature.Moments.Action.TrimVideo,Trim Video
 Feature.Moments.Action.TryAgain,
+Feature.Moments.Body.EDPMomentIPReportInstructions,"To report an IP violation in this Moment, continue to the game details page."
 Feature.Moments.Description.CommunityStandards,Check the Community Standards for more info on what you can and can't say.
 Feature.Moments.Description.EmptyCapturesLibrary,This is where your Captures will appear.
 Feature.Moments.Description.GenerateTextFeedbackDisclosure,AI-generated. Review before posting — you're responsible for what's published.
@@ -4306,6 +4316,7 @@ Feature.Moments.Label.WriteComment,Write a comment
 Feature.Moments.Title.Comments,Comments
 Feature.Moments.Title.CommentsWithCappedCount,{count}+ comments
 Feature.Moments.Title.CommentsWithCount,{count} comments
+Feature.Moments.Title.EDPMomentIPReportInstructions,Report on the game details page
 Feature.Moments.Title.GenerateTextFeedbackReason,What went wrong?
 Feature.Moments.Title.GenerateTextOptions,
 Feature.Moments.Title.LeaveMomentCreation,Leave Moment creation?
@@ -4754,7 +4765,7 @@ Feature.NotApproved.SubHeading.RuleExplanation.Spam,Spamming's against the rules
 Feature.NotApproved.SubHeading.RuleExplanation.Swearing,No swearing
 Feature.NotApproved.SubHeading.RuleExplanation.ViolentContentAndGore,No extreme violence
 Feature.NotApproved.Title.AvatarBrokeRules,Your avatar broke the rules
-Feature.Notifications.Action.PushUpsellAllow,Allow
+Feature.Notifications.Action.PushUpsellAllow,
 Feature.Notifications.Action.PushUpsellNotNow,
 Feature.Notifications.Action.SnoozeFifteenMinutes,15 minutes
 Feature.Notifications.Action.SnoozeFourHours,4 hours
@@ -5063,7 +5074,7 @@ Feature.RobloxSubscription.Label.FreeTrialDisclosureV2,"By clicking ""Try it for
 Feature.RobloxSubscription.Label.FreeTrialDisclosureV3,"By clicking ""Try it for free,"" you agree to the {linkStart}Roblox Subscription Terms.{linkEnd} Your free trial will end in {trialDuration} {trialPeriodLabel} and you will be charged automatically each {billingPeriodLabel} and can cancel at any time."
 Feature.RobloxSubscription.Label.FreeTrialText,Get free trial
 Feature.RobloxSubscription.Label.New,
-Feature.RobloxSubscription.Label.PendingRobux,Pending Robux
+Feature.RobloxSubscription.Label.PendingRobux,
 Feature.RobloxSubscription.Label.ReferralRewardRobux,{amount} Robux
 Feature.RobloxSubscription.Label.ReferralTheyGet,Your referrals get
 Feature.RobloxSubscription.Label.ReferralYouGet,You get

@@ -221,14 +221,17 @@ Authentication.AccountSwitch.Header.SignOutOtherAccounts,Vuoi uscire dagli altri
 Authentication.AccountSwitch.Header.SwitchAccountSentenceCase,Cambia account
 Authentication.AccountSwitch.Heading.SwitchAccount,
 Authentication.AccountSwitch.Label.AccountLimitReached.2,"Per aggiungere un account, esci da uno prima."
+Authentication.CrossDevice.Action.Allow,Consenti
 Authentication.CrossDevice.Action.CancelLogin,
 Authentication.CrossDevice.Action.ConfirmLogin,Conferma il login
 Authentication.CrossDevice.Action.Done,Fatto
+Authentication.CrossDevice.Action.DontAllow,Non consentire
 Authentication.CrossDevice.Action.Enter,Entrare
 Authentication.CrossDevice.Action.GoBack,Indietro
 Authentication.CrossDevice.Action.Next,
 Authentication.CrossDevice.Action.TryAgain,
 Authentication.CrossDevice.Description.ConfirmOnSignedInDevice,Conferma sul dispositivo con cui hai effettuato l'accesso per continuare.
+Authentication.CrossDevice.Description.DenyIfNotYou,Non sei tu? Nega immediatamente.
 Authentication.CrossDevice.Description.QuickSignInInstructionsModal,"Sul dispositivo da cui hai effettuato l'accesso, scansiona il codice QR o vai su <b>Altro > Accesso rapido</b> e inserisci il codice qui sotto."
 Authentication.CrossDevice.Description.SigningInAs,Accesso come {identifier}
 Authentication.CrossDevice.EnterCodeInstruction,quindi inserisci questo codice
@@ -237,6 +240,9 @@ Authentication.CrossDevice.Heading.LoginAnotherDevice,Accedi a un altro disposit
 Authentication.CrossDevice.Heading.LoginCode,Codice di accesso rapido
 Authentication.CrossDevice.Heading.LoginWarning,"PER ACCEDERE, ASSICURATI DI:"
 Authentication.CrossDevice.Heading.QuickLogin,Accesso rapido
+Authentication.CrossDevice.Heading.RecognizeSignIn,Riconosci questo accesso?
+Authentication.CrossDevice.Heading.SignInAllowed,Hai consentito un accesso
+Authentication.CrossDevice.Heading.SignInDenied,Hai negato un accesso
 Authentication.CrossDevice.Heading.SignInWithQrCode,Accedi con il codice QR
 Authentication.CrossDevice.Heading.SigninAnotherDevice,Accedi su un altro dispositivo
 Authentication.CrossDevice.Heading.WaitingForConfirmation,In attesa di conferma
@@ -459,6 +465,7 @@ Authentication.SignUp.Description.EnterParentEmail,Inserisci l'indirizzo email d
 Authentication.SignUp.Description.FaceIdPromo,Face ID è il modo più semplice e sicuro per accedere a Roblox.
 Authentication.SignUp.Description.GenderHelp2,Questo ci aiuta a scegliere l'avatar più pertinente per te.
 Authentication.SignUp.Description.OneMoreStep,Ancora un passo
+Authentication.SignUp.Description.OptInMarketingEmailConsent,Vorrei ricevere email da Roblox su notizie e offerte.
 Authentication.SignUp.Description.Or,
 Authentication.SignUp.Description.ParentEmailDisclaimer,"Ti chiediamo l'email di un genitore ai fini del recupero dell'account, in conformità alla Politica sulla riservatezza di Roblox."
 Authentication.SignUp.Description.PasskeyTryAgain,Si è verificato un errore durante la registrazione della tua passkey. Prova a effettuare la registrazione con un nome utente differente.
@@ -732,6 +739,9 @@ Common.UGCValidation.ErrorLabel.DescendantIdAnimationVersionNotSupported,"{Insta
 Common.UGCValidation.ErrorLabel.DescendantIdNotPublished,La risorsa {AssetId} ({InstanceFullName}.{FieldName}) non è pubblicata. Pubblicala e riprova.
 Common.UGCValidation.ErrorLabel.DescendantIdVersionNotSupported,"{InstanceFullName}.{FieldName} utilizza la versione {Version} della risorsa {AssetId}, ma al momento è supportata solo la versione 1. Utilizza quest'ultima e riprova."
 Common.UGCValidation.ErrorLabel.DynamicHeadCageMisaligned,Le teste dinamiche nel marketplace devono essere adeguatamente incorniciate in modo che i vertici degli occhi e della bocca all'interno della gabbia siano allineati con quelli della mesh. Migliora l'incorniciatura e il suo allineamento con la mesh.
+Common.UGCValidation.ErrorLabel.DynamicHeadCageMisalignedLeftEye,I punti di riferimento dell'occhio sinistro della gabbia della testa dinamica non sono allineati con la mesh. Regola la gabbia dell'occhio in modo che la mesh dell'occhio sinistro rientri nell'area della gabbia proiettata.
+Common.UGCValidation.ErrorLabel.DynamicHeadCageMisalignedMouth,I punti di riferimento della bocca della gabbia della testa dinamica non sono allineati con la mesh. Regola la gabbia della bocca in modo che la mesh della bocca rientri nell'area della gabbia proiettata.
+Common.UGCValidation.ErrorLabel.DynamicHeadCageMisalignedRightEye,I punti di riferimento dell'occhio destro della gabbia della testa dinamica non sono allineati con la mesh. Regola la gabbia dell'occhio in modo che la mesh dell'occhio destro rientri nell'area della gabbia proiettata.
 Common.UGCValidation.ErrorLabel.DynamicHeadHappyNotShown,Impossibile rilevare il sorriso della testa dinamica. Regola i punti di riferimento della gabbia per la bocca in modo che corrispondano a dove si trova la bocca sulla testa e assicurati che possa mostrare il sorriso.
 Common.UGCValidation.ErrorLabel.DynamicHeadLeftEyeNotClose,Impossibile rilevare se l'occhio sinistro della testa dinamica sia chiuso o meno. Regola i punti di riferimento della gabbia per l'occhio sinistro in modo che corrispondano a dove si trova l'occhio sinistro sulla testa e assicurati che possa essere chiuso.
 Common.UGCValidation.ErrorLabel.DynamicHeadMISSINGCAGE,Le teste dinamiche sul marketplace sono prive di gabbie. Crea una gabbia per la testa dinamica.
@@ -751,6 +761,13 @@ Common.UGCValidation.ErrorLabel.EmoteAnimation_MaxPartTranslationCalcFailed,Non 
 Common.UGCValidation.ErrorLabel.EmoteAnimation_MaxPartTranslationMismatch,"L'animazione pubblicata indica una traslazione massima della parte di {taggedTranslation} stud, ma i suoi dati di animazione calcolano {calculatedTranslation} stud. Ripubblica l'animazione."
 Common.UGCValidation.ErrorLabel.Extents_HeadBelowTorso,"La testa deve essere posizionata sopra UpperTorso. Il centro della testa si trova al di sotto della parte superiore del busto, il che indica che la mesh della testa è collassata o posizionata in modo errato."
 Common.UGCValidation.ErrorLabel.FaceControlsOverrideFACSNotEmpty,La proprietà InternalOverrideFACSData su FaceControls deve essere vuota al momento del caricamento.
+Common.UGCValidation.ErrorLabel.FacialFeaturePresence_EyesMissing,Al viso di base mancano gli elementi obbligatori degli occhi. Aggiungi gli occhi al viso di base e riprova.
+Common.UGCValidation.ErrorLabel.FacialFeaturePresence_MouthMissing,Al viso di base manca una bocca obbligatoria. Aggiungila e riprova.
+Common.UGCValidation.ErrorLabel.FacsDeformation_HappyNotShown,Impossibile rilevare l'espressione di felicità. Regola la gabbia della bocca o il FACS dell'espressione di felicità in modo che la mesh della bocca proiettata si deformi come previsto.
+Common.UGCValidation.ErrorLabel.FacsDeformation_LeftEyeNotClose,Impossibile rilevare l'espressione con l'occhio sinistro chiuso. Regola la gabbia dell'occhio sinistro o il FACS di chiusura in modo che la mesh dell'occhio proiettata si deformi come previsto.
+Common.UGCValidation.ErrorLabel.FacsDeformation_MouthNotOpen,Impossibile rilevare l'espressione di bocca aperta. Regola la gabbia della bocca o il FACS della bocca aperta in modo che la mesh della bocca proiettata si deformi come previsto.
+Common.UGCValidation.ErrorLabel.FacsDeformation_RightEyeNotClose,Impossibile rilevare l'espressione con l'occhio destro chiuso. Regola la gabbia dell'occhio destro o il FACS di chiusura in modo che la mesh dell'occhio proiettata si deformi come previsto.
+Common.UGCValidation.ErrorLabel.FacsDeformation_SadNotShown,Impossibile rilevare l'espressione di tristezza. Regola la gabbia della bocca o il FACS dell'espressione di tristezza in modo che la mesh della bocca proiettata si deformi come previsto.
 Common.UGCValidation.ErrorLabel.FacsExpandsHead,"È stato rilevato che FACs ha espanso la testa del {modPercent}%, ma l'alterazione della testa è contraria alle norme del marketplace per le animazioni facciali."
 Common.UGCValidation.ErrorLabel.FacsJointCountBounded,"Le teste dinamiche possono avere al massimo {maxFacsJointCount} articolazioni del sistema di codifica facciale, ma questa testa ne ha {actualJointCount}. Riduci il numero di articolazioni del sistema di codifica facciale e riprova."
 Common.UGCValidation.ErrorLabel.FacsShrinksHead,"È stato rilevato che FACs ha ridotto la testa del {modPercent}%, ma l'alterazione della testa è contraria alle norme del marketplace per le animazioni facciali."
@@ -797,6 +814,7 @@ Common.UGCValidation.ErrorLabel.MeshPartBounds_TooSmall,"La dimensione dell'asse
 Common.UGCValidation.ErrorLabel.MissingRequiredAttachment,L'allegato {attName} deve esistere esattamente una volta all'interno dei discendenti di {partName}.
 Common.UGCValidation.ErrorLabel.NoAttributes,"""{RootInstanceName}"" (o i suoi discendenti) contengono attributi. È necessario rimuovere questi ultimi da quanto segue: {InstanceNameList}"
 Common.UGCValidation.ErrorLabel.PropertiesNotSensible,{ClassName} '{InstancePath}' ha proprietà non valide: {ProblematicProperties}. È stato superato un limite di byte mostrato (un limite di 0 significa che la proprietà deve essere vuota); qualsiasi altra proprietà contiene valori NaN/Inf o supera il suo limite di dimensione predefinito.
+Common.UGCValidation.ErrorLabel.RenderedAnimation_RequiredExpressionsMissing,"Nell'animazione renderizzata mancano una o più espressioni facciali richieste (occhio chiuso, bocca aperta, felice, triste)."
 Common.UGCValidation.ErrorLabel.RigAttachmentOutOfBounds,"L'allegato del rig ""{AttachmentName}"" in ""{PartName}"" dovrebbe essere posizionato vicino al punto di articolazione dove questa parte del corpo si unisce a quella adiacente. La posizione corrente [{CurrentPosition}] è troppo lontana dal piano di connessione. Spostalo più vicino a [{ClosestValidPosition}]."
 Common.UGCValidation.ErrorLabel.SelectionCountNotOne,"Per caricare una risorsa su Roblox, devi selezionare esattamente 1 istanza e il tipo di caricamento associato."
 Common.UGCValidation.ErrorLabel.SerializedAssetTooLarge,Questa risorsa è troppo grande per essere caricata ({sizeBytes} byte superano il massimo di {maxSizeBytes} byte). Riduci le sue dimensioni e riprova.
@@ -1816,8 +1834,11 @@ Feature.Avatar.Heading.SharePublicAvatar,Condividi il tuo avatar
 Feature.Avatar.Heading.SortBy,Ordina per
 Feature.Avatar.Heading.UsedName,Nome utilizzato
 Feature.Avatar.Heading.WearConfirmation,Indossa oggetto
+Feature.Avatar.HeroWidget.BundleHeadlessTitle,Ultima occasione per il Cavaliere senza testa
 Feature.Avatar.HeroWidget.BundleTitle,Korblox Pactbreaker
 Feature.Avatar.HeroWidget.CapsuleDescription,Tre nuove interpretazioni degli originali di Roblox
+Feature.Avatar.HeroWidget.CapsuleHalloweenDescription,Nuovi articoli pensati appositamente per Halloween
+Feature.Avatar.HeroWidget.CapsuleHalloweenTitle,Creato per Halloween
 Feature.Avatar.HeroWidget.CapsulePoolDescription,Tre nuovi articoli che faranno splash
 Feature.Avatar.HeroWidget.CapsulePoolTitle,Festa in piscina
 Feature.Avatar.HeroWidget.CapsuleTitle,I classici reinventati
@@ -2811,6 +2832,7 @@ Feature.Build.Title.VersionNumber,Versione {VERSION}
 Feature.Build.Title.Versions,Versioni
 Feature.Build.Title.WhatsIncluded,Cosa è incluso?
 Feature.BuyRobux.Heading.Banner,
+Feature.BuyRobux.Heading.PendingTransfers,Robux in sospeso
 Feature.BuyRobux.Label.MyFriendsWithCount,I miei amici ({count})
 Feature.BuyRobux.Label.PeopleWithCount,Persone ({count})
 Feature.BuyRobux.Label.Search,
@@ -4708,7 +4730,7 @@ Feature.NotApproved.SubHeading.RuleExplanation.Spam,Lo spam è contro le regole
 Feature.NotApproved.SubHeading.RuleExplanation.Swearing,Non imprecare
 Feature.NotApproved.SubHeading.RuleExplanation.ViolentContentAndGore,Niente violenza estrema
 Feature.NotApproved.Title.AvatarBrokeRules,Il tuo avatar ha violato le regole
-Feature.Notifications.Action.PushUpsellAllow,Consenti
+Feature.Notifications.Action.PushUpsellAllow,
 Feature.Notifications.Action.PushUpsellNotNow,
 Feature.Notifications.Action.SnoozeFifteenMinutes,15 minuti
 Feature.Notifications.Action.SnoozeFourHours,4 ore
@@ -5015,7 +5037,7 @@ Feature.RobloxSubscription.Label.FreeTrialDisclosureV2,"Cliccando su ""Prova gra
 Feature.RobloxSubscription.Label.FreeTrialDisclosureV3,"Cliccando su ""Prova gratis"", accetti i {linkStart}Termini di abbonamento di Roblox{linkEnd}. La tua prova gratuita scadrà tra {trialDuration} {trialPeriodLabel}, dopodiché ti verrà addebitato automaticamente un importo a cadenza {billingPeriodLabel} e potrai disdire l'abbonamento in qualsiasi momento."
 Feature.RobloxSubscription.Label.FreeTrialText,Ottieni una prova gratuita
 Feature.RobloxSubscription.Label.New,
-Feature.RobloxSubscription.Label.PendingRobux,Robux in sospeso
+Feature.RobloxSubscription.Label.PendingRobux,
 Feature.RobloxSubscription.Label.ReferralRewardRobux,{amount} Robux
 Feature.RobloxSubscription.Label.ReferralTheyGet,Le persone che inviti ottengono
 Feature.RobloxSubscription.Label.ReferralYouGet,
