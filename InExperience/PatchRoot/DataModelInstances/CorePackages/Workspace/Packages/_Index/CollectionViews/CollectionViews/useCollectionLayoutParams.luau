@@ -10,10 +10,11 @@ local CollectionLayoutCalculatorsModule = require(CollectionViews.CollectionLayo
 local CalculateItemWidthModule = require(CollectionViews.calculateItemWidth)
 local _ = require(CollectionViews.CollectionViewTypes)
 local FFlagLuaAppLayoutParamsInContext = require(Parent.SharedFlags).FFlagLuaAppLayoutParamsInContext
+local FFlagSduiComponentsUseFoundationTokens = require(Parent.SharedFlags).FFlagSduiComponentsUseFoundationTokens
 local LuaAppUseDisplayStoreForCollectionLayoutParams = game:DefineFastFlag("LuaAppUseDisplayStoreForCollectionLayoutParams", false)
 
 return function(p1, Frame: Frame, p2, p3, p4, p5)
-	-- upvalues: UseStoreFunction (copy), LuaAppUseDisplayStoreForCollectionLayoutParams (copy), DisplayModule (copy), CollectionLayoutCalculatorsModule (copy), FFlagLuaAppLayoutParamsInContext (copy), UseTokensFunction (copy), UseDesignTokensFunction (copy), UsePreferredInputFunction (copy), ReactModule (copy), CalculateItemWidthModule (copy)
+	-- upvalues: UseStoreFunction (copy), LuaAppUseDisplayStoreForCollectionLayoutParams (copy), DisplayModule (copy), CollectionLayoutCalculatorsModule (copy), FFlagLuaAppLayoutParamsInContext (copy), FFlagSduiComponentsUseFoundationTokens (copy), UseTokensFunction (copy), UseDesignTokensFunction (copy), UsePreferredInputFunction (copy), ReactModule (copy), CalculateItemWidthModule (copy)
 	local UseStoreResult = UseStoreFunction()
 	local ViewportSize = (if LuaAppUseDisplayStoreForCollectionLayoutParams then DisplayModule.GetDisplayStore(false).getViewportSize(false) else UseStoreResult:getState().ScreenSize) or Vector2.new(0, 0)
 	local P4 = p4 or CollectionLayoutCalculatorsModule
@@ -23,7 +24,7 @@ return function(p1, Frame: Frame, p2, p3, p4, p5)
 	local FractionalItemAmount = p3 and p3.fractionalItemAmount or nil
 	local LoadMoreThreshold = p3 and p3.loadMoreThreshold or nil
 	local VerticalPadding = p3 and p3.verticalPadding or nil
-	local UseTokensResult = if FFlagLuaAppLayoutParamsInContext then UseTokensFunction() else UseDesignTokensFunction()
+	local UseTokensResult = if FFlagLuaAppLayoutParamsInContext or FFlagSduiComponentsUseFoundationTokens then UseTokensFunction() else UseDesignTokensFunction()
 	local UsePreferredInputResult = UsePreferredInputFunction()
 	local VerticalPadding1 = VerticalPadding or P4.calculateVerticalPadding(UseTokensResult, p1)
 	local MaxTilesToShow = P4.calculateMaxTilesToShow(UsePreferredInputResult)

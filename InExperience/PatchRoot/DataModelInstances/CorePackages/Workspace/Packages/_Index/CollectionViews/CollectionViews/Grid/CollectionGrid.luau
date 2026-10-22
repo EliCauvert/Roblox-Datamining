@@ -4,6 +4,7 @@ local ReactModule = require(Parent.React)
 local CryoModule = require(Parent.Cryo)
 local ArgCheckModule = require(Parent.ArgCheck)
 local UseDesignTokensFunction = require(Parent.Style).useDesignTokens
+local UseTokensFunction = require(Parent.Foundation).Hooks.useTokens
 local TModule = require(Parent.t)
 local ValidatePropsFunction = require(Parent.DiscoveryUtils).validateProps
 local UseCollectionSizeBindingsModule = require(CollectionViews.useCollectionSizeBindings)
@@ -15,6 +16,7 @@ local SharedFlagsModule = require(Parent.SharedFlags)
 local FFlagLuaAppRfyRevealRows = SharedFlagsModule.FFlagLuaAppRfyRevealRows
 local FFlagLuaAppSortHeaderAnchorTag = SharedFlagsModule.FFlagLuaAppSortHeaderAnchorTag
 local FFlagSduiCollectionGridRevealRows = SharedFlagsModule.FFlagSduiCollectionGridRevealRows
+local FFlagSduiComponentsUseFoundationTokens = SharedFlagsModule.FFlagSduiComponentsUseFoundationTokens
 local StrictInterfaceResult = TModule.strictInterface({
 	testId = TModule.optional(TModule.string),
 	Position = TModule.optional(TModule.UDim2),
@@ -58,7 +60,7 @@ local config = {
 }
 
 return (ReactModule.memo(function(p1)
-	-- upvalues: ValidatePropsFunction (copy), StrictInterfaceResult (copy), CryoModule (copy), config (copy), UseCollectionLayoutModule (copy), ArgCheckModule (copy), UseDesignTokensFunction (copy), UseCollectionSizeBindingsModule (copy), ReactModule (copy), FFlagLuaAppRfyRevealRows (copy), FFlagSduiCollectionGridRevealRows (copy), CollectionHeaderModule (copy), FFlagLuaAppSortHeaderAnchorTag (copy), GridOfCollectionItemsModule (copy)
+	-- upvalues: ValidatePropsFunction (copy), StrictInterfaceResult (copy), CryoModule (copy), config (copy), UseCollectionLayoutModule (copy), ArgCheckModule (copy), FFlagSduiComponentsUseFoundationTokens (copy), UseTokensFunction (copy), UseDesignTokensFunction (copy), UseCollectionSizeBindingsModule (copy), ReactModule (copy), FFlagLuaAppRfyRevealRows (copy), FFlagSduiCollectionGridRevealRows (copy), CollectionHeaderModule (copy), FFlagLuaAppSortHeaderAnchorTag (copy), GridOfCollectionItemsModule (copy)
 	ValidatePropsFunction(StrictInterfaceResult, p1)
 	local JoinResult = CryoModule.Dictionary.join(config, p1)
 	local SideMargin: number = JoinResult.sideMargin
@@ -70,7 +72,7 @@ return (ReactModule.memo(function(p1)
 	ArgCheckModule.assert(SideMargin >= 0)
 	ArgCheckModule.assert(VerticalPadding >= 0)
 	ArgCheckModule.assert(ColumnGap >= 0)
-	local Size400 = UseDesignTokensFunction().Size.Size_400
+	local Size400 = (if FFlagSduiComponentsUseFoundationTokens then UseTokensFunction() else UseDesignTokensFunction()).Size.Size_400
 	local UseCollectionSizeBindingsModuleResult, _, UseCollectionSizeBindingsModuleResult3, UseCollectionSizeBindingsModuleResult4 = UseCollectionSizeBindingsModule(NumColumns, ColumnGap, SideMargin, 0, JoinResult.getItemHeight, JoinResult.onContainerSizeChanged)
 	local IsNotTitleMatch: boolean = JoinResult.title and JoinResult.title ~= ""
 	

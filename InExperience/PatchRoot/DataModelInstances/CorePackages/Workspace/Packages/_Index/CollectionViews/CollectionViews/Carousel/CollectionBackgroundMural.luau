@@ -2,9 +2,21 @@
 local ReactModule = require(Parent.React)
 local UseDesignTokensFunction = require(Parent.Style).useDesignTokens
 local UseStyleFunction = require(Parent.UIBlox).Core.Style.useStyle
+local UseTokensFunction = require(Parent.Foundation).Hooks.useTokens
+local FFlagSduiComponentsUseFoundationTokens = require(Parent.SharedFlags).FFlagSduiComponentsUseFoundationTokens
 
 return ReactModule.memo(function(Frame)
-	-- upvalues: UseStyleFunction (copy), UseDesignTokensFunction (copy), ReactModule (copy)
+	-- upvalues: FFlagSduiComponentsUseFoundationTokens (copy), UseTokensFunction (copy), UseStyleFunction (copy), UseDesignTokensFunction (copy), ReactModule (copy)
+	local BlackColor3 = nil
+	local SurfaceColor3 = nil
+	if FFlagSduiComponentsUseFoundationTokens then
+		local UseTokensResult = UseTokensFunction()
+		BlackColor3 = UseTokensResult.Color.Extended.Black.Black_100.Color3
+		SurfaceColor3 = UseTokensResult.Color.Surface.Surface_0.Color3
+	else
+		SurfaceColor3 = UseStyleFunction().Theme.BackgroundDefault.Color
+		BlackColor3 = UseDesignTokensFunction().Color.Extended.Black.Black_100.Color3
+	end
 	return ReactModule.createElement("ImageLabel", {
 		ImageTransparency = 0,
 		BackgroundTransparency = 1,
@@ -25,8 +37,8 @@ return ReactModule.memo(function(Frame)
 			Gradient = ReactModule.createElement("UIGradient", {
 				Rotation = 90,
 				Color = ColorSequence.new({
-					ColorSequenceKeypoint.new(0, UseDesignTokensFunction().Color.Extended.Black.Black_100.Color3),
-					ColorSequenceKeypoint.new(1, UseStyleFunction().Theme.BackgroundDefault.Color)
+					ColorSequenceKeypoint.new(0, BlackColor3),
+					ColorSequenceKeypoint.new(1, SurfaceColor3)
 				}),
 				Transparency = NumberSequence.new({
 					NumberSequenceKeypoint.new(0, 1),

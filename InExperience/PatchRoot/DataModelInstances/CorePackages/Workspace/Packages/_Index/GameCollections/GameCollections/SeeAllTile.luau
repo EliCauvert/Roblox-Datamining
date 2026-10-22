@@ -8,25 +8,27 @@ local UseCursorFunction = UIBloxModule.App.SelectionCursor.useCursor
 local ImageSetLabel = UIBloxModule.Core.ImageSet.ImageSetLabel
 local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
 local UseDesignTokensFunction = require(Parent.Style).useDesignTokens
+local UseTokensFunction = FoundationModule.Hooks.useTokens
+local FFlagSduiComponentsUseFoundationTokens = require(Parent.SharedFlags).FFlagSduiComponentsUseFoundationTokens
 local IconsNavigationPushRight = UIBloxModule.App.ImageSet.Images["icons/navigation/pushRight"]
 
 function SeeAllTile(p1)
-	-- upvalues: UseDesignTokensFunction (copy), UseLocalizationFunction (copy), UseCursorFunction (copy), IconsNavigationPushRight (copy), ReactModule (copy), ImageSetLabel (copy), FoundationFontFaceMigration (copy), NormalizeFontFaceFunction (copy)
+	-- upvalues: FFlagSduiComponentsUseFoundationTokens (copy), UseTokensFunction (copy), UseDesignTokensFunction (copy), UseLocalizationFunction (copy), UseCursorFunction (copy), IconsNavigationPushRight (copy), ReactModule (copy), ImageSetLabel (copy), FoundationFontFaceMigration (copy), NormalizeFontFaceFunction (copy)
 	local Size = p1.size
 	local LayoutOrder = p1.layoutOrder
-	local UseDesignTokensResult = UseDesignTokensFunction()
+	local UseTokensResult = if FFlagSduiComponentsUseFoundationTokens then UseTokensFunction() else UseDesignTokensFunction()
 	local UseLocalizationResult = UseLocalizationFunction({ seeAll = "Feature.Home.ActionSeeAll" })
-	local _UDim = UDim.new(0, UseDesignTokensResult.Size.Size_200)
-	local TitleLarge = UseDesignTokensResult.Typography.TitleLarge
-	local Size900 = UseDesignTokensResult.Size.Size_900
+	local _UDim = UDim.new(0, UseTokensResult.Size.Size_200)
+	local TitleLarge = UseTokensResult.Typography.TitleLarge
+	local Size900 = UseTokensResult.Size.Size_900
 	
 	return ReactModule.createElement("TextButton", {
 		AutoButtonColor = false,
 		Text = "",
 		Size = Size,
 		LayoutOrder = LayoutOrder,
-		BackgroundTransparency = UseDesignTokensResult.Color.Surface.Surface_300.Transparency,
-		BackgroundColor3 = UseDesignTokensResult.Color.Surface.Surface_300.Color3,
+		BackgroundTransparency = UseTokensResult.Color.Surface.Surface_300.Transparency,
+		BackgroundColor3 = UseTokensResult.Color.Surface.Surface_300.Color3,
 		[ReactModule.Event.Activated] = p1.onActivated,
 		SelectionImageObject = UseCursorFunction(_UDim)
 	}, {
@@ -36,15 +38,15 @@ function SeeAllTile(p1)
 			HorizontalAlignment = Enum.HorizontalAlignment.Center,
 			VerticalAlignment = Enum.VerticalAlignment.Center,
 			SortOrder = Enum.SortOrder.LayoutOrder,
-			Padding = UDim.new(0, UseDesignTokensResult.Size.Size_100)
+			Padding = UDim.new(0, UseTokensResult.Size.Size_100)
 		}),
 		Icon = ReactModule.createElement(ImageSetLabel, {
 			BackgroundTransparency = 1,
 			LayoutOrder = 1,
 			Size = UDim2.fromOffset(Size900, Size900),
 			Image = p1.icon or IconsNavigationPushRight,
-			ImageColor3 = UseDesignTokensResult.Color.Content.Emphasis.Color3,
-			ImageTransparency = UseDesignTokensResult.Color.Content.Emphasis.Transparency
+			ImageColor3 = UseTokensResult.Color.Content.Emphasis.Color3,
+			ImageTransparency = UseTokensResult.Color.Content.Emphasis.Transparency
 		}),
 		Title = ReactModule.createElement("TextLabel", {
 			LayoutOrder = 2,
@@ -55,7 +57,7 @@ function SeeAllTile(p1)
 			Font = if FoundationFontFaceMigration then nil else TitleLarge.Font,
 			FontFace = if FoundationFontFaceMigration then NormalizeFontFaceFunction(TitleLarge.Font) else nil,
 			TextSize = TitleLarge.FontSize,
-			TextColor3 = UseDesignTokensResult.Color.Content.Emphasis.Color3,
+			TextColor3 = UseTokensResult.Color.Content.Emphasis.Color3,
 			TextTruncate = Enum.TextTruncate.AtEnd
 		})
 	})

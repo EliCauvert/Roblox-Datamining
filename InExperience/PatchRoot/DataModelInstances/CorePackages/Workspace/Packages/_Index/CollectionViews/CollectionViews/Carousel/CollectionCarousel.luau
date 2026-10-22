@@ -4,6 +4,8 @@ local ReactModule = require(Parent.React)
 local CryoModule = require(Parent.Cryo)
 local ArgCheckModule = require(Parent.ArgCheck)
 local UseDesignTokensFunction = require(Parent.Style).useDesignTokens
+local UseTokensFunction = require(Parent.Foundation).Hooks.useTokens
+local FFlagSduiComponentsUseFoundationTokens = require(Parent.SharedFlags).FFlagSduiComponentsUseFoundationTokens
 local ResponsiveModule = require(Parent.Responsive)
 local UseLastInputFunction = ResponsiveModule.useLastInput
 local UsePreferredInputFunction = ResponsiveModule.usePreferredInput
@@ -80,7 +82,7 @@ local _ = function(Pointer, _, p1, p2, p3)
 end
 
 return (ReactModule.memo(function(p1)
-	-- upvalues: ValidatePropsFunction (copy), StrictInterfaceResult (copy), CryoModule (copy), config (copy), UseCollectionLayoutModule (copy), ArgCheckModule (copy), ReactModule (copy), UseLastInputFunction (copy), UsePreferredInputFunction (copy), UseIsSpatialFunction (copy), ResponsiveModule (copy), UseCollectionSizeBindingsModule (copy), UseScrollButtonHandlersModule (copy), UseCarouselScrollingBindingModule (copy), UseDesignTokensFunction (copy), ScrollingRowOfCollectionItemsModule (copy), CollectionBackgroundMuralModule (copy), MaybeForceDarkThemeModule (copy), CollectionHeaderModule (copy), CompositionTags (copy), CarouselScrollButtonsModule (copy)
+	-- upvalues: ValidatePropsFunction (copy), StrictInterfaceResult (copy), CryoModule (copy), config (copy), UseCollectionLayoutModule (copy), ArgCheckModule (copy), ReactModule (copy), UseLastInputFunction (copy), UsePreferredInputFunction (copy), UseIsSpatialFunction (copy), ResponsiveModule (copy), UseCollectionSizeBindingsModule (copy), UseScrollButtonHandlersModule (copy), UseCarouselScrollingBindingModule (copy), FFlagSduiComponentsUseFoundationTokens (copy), UseTokensFunction (copy), UseDesignTokensFunction (copy), ScrollingRowOfCollectionItemsModule (copy), CollectionBackgroundMuralModule (copy), MaybeForceDarkThemeModule (copy), CollectionHeaderModule (copy), CompositionTags (copy), CarouselScrollButtonsModule (copy)
 	ValidatePropsFunction(StrictInterfaceResult, p1)
 	local JoinResult = CryoModule.Dictionary.join(config, p1)
 	local SideMargin: number = JoinResult.sideMargin
@@ -125,41 +127,39 @@ return (ReactModule.memo(function(p1)
 	local UseScrollButtonHandlersModuleResult, UseScrollButtonHandlersModuleResult2, UseScrollButtonHandlersModuleResult3, UseScrollButtonHandlersModuleResult4 = UseScrollButtonHandlersModule(UseRefResult, Smallest, IsUseLastInputResultMatch, NumColumns, UseCollectionSizeBindingsModuleResult, ColumnGap, nil)
 	local UseCarouselScrollingBindingModuleResult = UseCarouselScrollingBindingModule(UseRefResult, JoinResult.enableHoverOverflow == true)
 	local ScaledColumnGap = ColumnGap * 0.5
-	local UseMemoResult = ReactModule.useMemo(function()
-		-- upvalues: JoinResult (copy), ReactModule (upval), UseCollectionSizeBindingsModuleResult (copy), UseCarouselScrollingBindingModuleResult (copy), ScaledColumnGap (copy)
-		return if JoinResult.enableHoverOverflow then ReactModule.joinBindings({
-			UseCollectionSizeBindingsModuleResult,
-			UseCarouselScrollingBindingModuleResult
-		}):map(function(Entry): UDim2
-			-- upvalues: ScaledColumnGap (upval)
-			return UDim2.new(1, if Entry[2] then 0 else -ScaledColumnGap * 2, 0, Entry[1].Y)
-		end) else nil
-	end, {
-		UseCollectionSizeBindingsModuleResult,
-		UseCarouselScrollingBindingModuleResult,
-		ScaledColumnGap,
-		JoinResult.enableHoverOverflow
-	})
-	local UseMemoResult1 = ReactModule.useMemo(function()
-		-- upvalues: JoinResult (copy), UseCarouselScrollingBindingModuleResult (copy), ScaledColumnGap (copy)
-		return if JoinResult.enableHoverOverflow then UseCarouselScrollingBindingModuleResult:map(function(p2): UDim2
-			-- upvalues: ScaledColumnGap (upval)
-			return UDim2.new(0, if p2 then 0 else ScaledColumnGap, 0, 500)
-		end) else nil
-	end, {
-		UseCarouselScrollingBindingModuleResult,
-		ScaledColumnGap,
-		JoinResult.enableHoverOverflow
-	})
-	local UseDesignTokensResult = UseDesignTokensFunction()
-	local Size400 = UseDesignTokensResult.Size.Size_400
-	local Size500 = UseDesignTokensResult.Size.Size_500
-	local White100 = UseDesignTokensResult.Color.Extended.White.White_100
+	local UseTokensResult = if FFlagSduiComponentsUseFoundationTokens then UseTokensFunction() else UseDesignTokensFunction()
+	local Size400 = UseTokensResult.Size.Size_400
+	local Size500 = UseTokensResult.Size.Size_500
+	local White100 = UseTokensResult.Color.Extended.White.White_100
 	local HasBackgroundMuralUrl = JoinResult.backgroundMuralUrl ~= nil
 	local IsNotTitleMatch: boolean = JoinResult.title and JoinResult.title ~= ""
 	local Element = ReactModule.createElement(ScrollingRowOfCollectionItemsModule, {
-		Position = UseMemoResult1,
-		Size = UseMemoResult,
+		Position = ReactModule.useMemo(function()
+			-- upvalues: JoinResult (copy), UseCarouselScrollingBindingModuleResult (copy), ScaledColumnGap (copy)
+			return if JoinResult.enableHoverOverflow then UseCarouselScrollingBindingModuleResult:map(function(p2): UDim2
+				-- upvalues: ScaledColumnGap (upval)
+				return UDim2.new(0, if p2 then 0 else ScaledColumnGap, 0, 500)
+			end) else nil
+		end, {
+			UseCarouselScrollingBindingModuleResult,
+			ScaledColumnGap,
+			JoinResult.enableHoverOverflow
+		}),
+		Size = ReactModule.useMemo(function()
+			-- upvalues: JoinResult (copy), ReactModule (upval), UseCollectionSizeBindingsModuleResult (copy), UseCarouselScrollingBindingModuleResult (copy), ScaledColumnGap (copy)
+			return if JoinResult.enableHoverOverflow then ReactModule.joinBindings({
+				UseCollectionSizeBindingsModuleResult,
+				UseCarouselScrollingBindingModuleResult
+			}):map(function(Entry): UDim2
+				-- upvalues: ScaledColumnGap (upval)
+				return UDim2.new(1, if Entry[2] then 0 else -ScaledColumnGap * 2, 0, Entry[1].Y)
+			end) else nil
+		end, {
+			UseCollectionSizeBindingsModuleResult,
+			UseCarouselScrollingBindingModuleResult,
+			ScaledColumnGap,
+			JoinResult.enableHoverOverflow
+		}),
 		ScrollingEnabled = NoScrollingEnabledOverride,
 		onChangeCanvasPosition = JoinResult.onChangeCanvasPosition,
 		onScrollingFrameRefCallback = UseResult,
@@ -259,7 +259,7 @@ return (ReactModule.memo(function(p1)
 					Size = UDim2.new(1, 2 * SideMargin, 1, 0),
 					Position = UDim2.new(0.5, 0, 0, 0),
 					AnchorPoint = Vector2.new(0.5, 0),
-					buttonOffsetFromEdge = UseDesignTokensResult.Size.Size_200,
+					buttonOffsetFromEdge = UseTokensResult.Size.Size_200,
 					onScrollButtonEnter = JoinResult.onScrollButtonEnter,
 					onScrollButtonLeave = JoinResult.onScrollButtonLeave
 				}) else nil

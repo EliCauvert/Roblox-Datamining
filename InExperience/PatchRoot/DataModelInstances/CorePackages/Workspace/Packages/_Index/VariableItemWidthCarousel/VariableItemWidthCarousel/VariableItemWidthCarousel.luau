@@ -5,12 +5,14 @@ local ReactModule = require(Parent.React)
 local CarouselScrollButtons = CollectionViewsModule.CarouselScrollButtons
 local CollectionHeader = CollectionViewsModule.CollectionHeader
 local UseDesignTokensFunction = require(Parent.Style).useDesignTokens
+local UseTokensFunction = require(Parent.Foundation).Hooks.useTokens
 local ResponsiveModule = require(Parent.Responsive)
 local UseLastInputFunction = ResponsiveModule.useLastInput
 local UsePreferredInputFunction = ResponsiveModule.usePreferredInput
 local UseIsSpatialFunction = ResponsiveModule.useIsSpatial
 local UseVariableItemWidthScrollHandlersModule = require(VariableItemWidthCarousel1.useVariableItemWidthScrollHandlers)
 local FFlagSduiOptionSelectorHeaderComponent = require(Parent.SharedFlags).FFlagSduiOptionSelectorHeaderComponent
+local FFlagSduiComponentsUseFoundationTokens = require(Parent.SharedFlags).FFlagSduiComponentsUseFoundationTokens
 
 local function _(Pointer, Directional, p1, p2)
 	-- upvalues: ResponsiveModule (copy)
@@ -18,8 +20,8 @@ local function _(Pointer, Directional, p1, p2)
 end
 
 function VariableItemWidthCarousel(Frame, Ref)
-	-- upvalues: UseDesignTokensFunction (copy), UseLastInputFunction (copy), UsePreferredInputFunction (copy), UseIsSpatialFunction (copy), ResponsiveModule (copy), ReactModule (copy), UseVariableItemWidthScrollHandlersModule (copy), FFlagSduiOptionSelectorHeaderComponent (copy), CollectionHeader (copy), CarouselScrollButtons (copy)
-	local UseDesignTokensResult = UseDesignTokensFunction()
+	-- upvalues: FFlagSduiComponentsUseFoundationTokens (copy), UseTokensFunction (copy), UseDesignTokensFunction (copy), UseLastInputFunction (copy), UsePreferredInputFunction (copy), UseIsSpatialFunction (copy), ResponsiveModule (copy), ReactModule (copy), UseVariableItemWidthScrollHandlersModule (copy), FFlagSduiOptionSelectorHeaderComponent (copy), CollectionHeader (copy), CarouselScrollButtons (copy)
+	local UseTokensResult = if FFlagSduiComponentsUseFoundationTokens then UseTokensFunction() else UseDesignTokensFunction()
 	local UseLastInputResult = UseLastInputFunction()
 	local UsePreferredInputResult = UsePreferredInputFunction()
 	local UseIsSpatialResult = UseIsSpatialFunction()
@@ -60,7 +62,7 @@ function VariableItemWidthCarousel(Frame, Ref)
 			FillDirection = Enum.FillDirection.Vertical,
 			HorizontalAlignment = Enum.HorizontalAlignment.Center,
 			SortOrder = Enum.SortOrder.LayoutOrder,
-			Padding = UDim.new(0, if IsNotTitleMatch1 or FFlagSduiOptionSelectorHeaderComponent and Frame.headerComponent ~= nil then Frame.headerContentPadding or UseDesignTokensResult.Size.Size_400 else 0)
+			Padding = UDim.new(0, if IsNotTitleMatch1 or FFlagSduiOptionSelectorHeaderComponent and Frame.headerComponent ~= nil then Frame.headerContentPadding or UseTokensResult.Size.Size_400 else 0)
 		}),
 		Header = if FFlagSduiOptionSelectorHeaderComponent and Frame.headerComponent then Frame.headerComponent elseif IsNotTitleMatch1 then ReactModule.createElement(CollectionHeader, {
 			LayoutOrder = 1,
@@ -120,7 +122,7 @@ function VariableItemWidthCarousel(Frame, Ref)
 				AnchorPoint = Vector2.new(0.5, 0),
 				Position = UDim2.new(0.5, 0, 0, 0),
 				Size = UDim2.new(1, 2 * SideMargin, 0, ItemHeight),
-				buttonOffsetFromEdge = UseDesignTokensResult.Size.Size_200,
+				buttonOffsetFromEdge = UseTokensResult.Size.Size_200,
 				handleScrollLeft = UseVariableItemWidthScrollHandlersModuleResult,
 				handleScrollRight = UseVariableItemWidthScrollHandlersModuleResult2,
 				leftScrollingEnabled = UseVariableItemWidthScrollHandlersModuleResult3,

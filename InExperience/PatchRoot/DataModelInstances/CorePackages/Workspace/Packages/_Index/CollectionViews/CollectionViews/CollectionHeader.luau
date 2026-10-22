@@ -7,13 +7,16 @@ local Images = UIBloxModule.App.ImageSet.Images
 local ImageSetLabel = UIBloxModule.Core.ImageSet.ImageSetLabel
 local TooltipOrientation = UIBloxModule.App.Dialog.Enum.TooltipOrientation
 local UseDesignTokensFunction = require(Parent.Style).useDesignTokens
+local UseTokensFunction = require(Parent.Foundation).Hooks.useTokens
 local NormalizeFontFaceFunction = require(Parent.Foundation).Utility.normalizeFontFace
 local IconWithTooltip = require(Parent.AppBlox).IconWithTooltip
 local ResponsiveModule = require(Parent.Responsive)
 local UsePreferredInputFunction = ResponsiveModule.usePreferredInput
 local CheckAndFormatPossibleLinkModule = require(CollectionViews.checkAndFormatPossibleLink)
 local _ = require(CollectionViews.SeeAllButtonType_Legacy)
-local FFlagLuaAppSortHeaderAnchorTag = require(Parent.SharedFlags).FFlagLuaAppSortHeaderAnchorTag
+local SharedFlagsModule = require(Parent.SharedFlags)
+local FFlagLuaAppSortHeaderAnchorTag = SharedFlagsModule.FFlagLuaAppSortHeaderAnchorTag
+local FFlagSduiComponentsUseFoundationTokens = SharedFlagsModule.FFlagSduiComponentsUseFoundationTokens
 local FoundationFontFaceMigration = require(Parent.Foundation).Utility.Flags.FoundationFontFaceMigration
 local IconsActionsTruncationCollapseSmall = Images["icons/actions/truncationCollapse_small"]
 local IconsActionsCycleRight = Images["icons/actions/cycleRight"]
@@ -25,10 +28,10 @@ local config = {
 }
 
 local function HeaderButton(Frame: Frame)
-	-- upvalues: UseDesignTokensFunction (copy), ReactModule (copy), ImageSetLabel (copy)
-	local UseDesignTokensResult = UseDesignTokensFunction()
-	local Size400 = UseDesignTokensResult.Size.Size_400
-	local Emphasis = UseDesignTokensResult.Color.Content.Emphasis
+	-- upvalues: FFlagSduiComponentsUseFoundationTokens (copy), UseTokensFunction (copy), UseDesignTokensFunction (copy), ReactModule (copy), ImageSetLabel (copy)
+	local UseTokensResult = if FFlagSduiComponentsUseFoundationTokens then UseTokensFunction() else UseDesignTokensFunction()
+	local Size400 = UseTokensResult.Size.Size_400
+	local Emphasis = UseTokensResult.Color.Content.Emphasis
 	
 	return ReactModule.createElement(ImageSetLabel, {
 		BackgroundTransparency = 1,
@@ -44,7 +47,7 @@ local function HeaderButton(Frame: Frame)
 end
 
 return ReactModule.memo(function(p1)
-	-- upvalues: CryoModule (copy), config (copy), ReactModule (copy), UsePreferredInputFunction (copy), UseDesignTokensFunction (copy), ResponsiveModule (copy), CheckAndFormatPossibleLinkModule (copy), FFlagLuaAppSortHeaderAnchorTag (copy), FoundationFontFaceMigration (copy), NormalizeFontFaceFunction (copy), HeaderButton (copy), IconsActionsCycleRight (copy), IconsActionsTruncationCollapseSmall (copy), IconWithTooltip (copy), TooltipOrientation (copy)
+	-- upvalues: CryoModule (copy), config (copy), ReactModule (copy), UsePreferredInputFunction (copy), FFlagSduiComponentsUseFoundationTokens (copy), UseTokensFunction (copy), UseDesignTokensFunction (copy), ResponsiveModule (copy), CheckAndFormatPossibleLinkModule (copy), FFlagLuaAppSortHeaderAnchorTag (copy), FoundationFontFaceMigration (copy), NormalizeFontFaceFunction (copy), HeaderButton (copy), IconsActionsCycleRight (copy), IconsActionsTruncationCollapseSmall (copy), IconWithTooltip (copy), TooltipOrientation (copy)
 	local JoinResult = CryoModule.Dictionary.join(config, p1)
 	local UseBindingResult, UseBindingResult2 = ReactModule.useBinding(0)
 	local UseResult = ReactModule.useCallback(function(Frame)
@@ -52,19 +55,19 @@ return ReactModule.memo(function(p1)
 		UseBindingResult2(Frame.AbsoluteSize.X)
 	end, {})
 	local UsePreferredInputResult = UsePreferredInputFunction()
-	local UseDesignTokensResult = UseDesignTokensFunction()
-	local TitleTypography = JoinResult.titleTypography or UseDesignTokensResult.Typography.HeadingSmall
-	local TitleColor = JoinResult.titleColor or UseDesignTokensResult.Color.Content.Emphasis
-	local SubtitleTypography = JoinResult.subtitleTypography or UseDesignTokensResult.Typography.BodySmall
-	local FontSize = JoinResult.subtitleTypography and JoinResult.subtitleTypography.FontSize or 17.64 * UseDesignTokensResult.Stroke.Standard
-	local SubtitleColor = JoinResult.subtitleColor or UseDesignTokensResult.Color.Content.Default
-	local Size50 = UseDesignTokensResult.Size.Size_50
-	local Size300 = UseDesignTokensResult.Size.Size_300
+	local UseTokensResult = if FFlagSduiComponentsUseFoundationTokens then UseTokensFunction() else UseDesignTokensFunction()
+	local TitleTypography = JoinResult.titleTypography or UseTokensResult.Typography.HeadingSmall
+	local TitleColor = JoinResult.titleColor or UseTokensResult.Color.Content.Emphasis
+	local SubtitleTypography = JoinResult.subtitleTypography or UseTokensResult.Typography.BodySmall
+	local FontSize = JoinResult.subtitleTypography and JoinResult.subtitleTypography.FontSize or 17.64 * UseTokensResult.Stroke.Standard
+	local SubtitleColor = JoinResult.subtitleColor or UseTokensResult.Color.Content.Default
+	local Size50 = UseTokensResult.Size.Size_50
+	local Size300 = UseTokensResult.Size.Size_300
 	local IsNotUsePreferredInputResultMatch: boolean = not JoinResult.hideButton and UsePreferredInputResult ~= ResponsiveModule.Input.Directional
 	local Active: boolean = if IsNotUsePreferredInputResultMatch and JoinResult.onActivate then true else false
-	local Size700 = UseDesignTokensResult.Size.Size_700
-	local Size100 = UseDesignTokensResult.Size.Size_100
-	local Size500 = UseDesignTokensResult.Size.Size_500
+	local Size700 = UseTokensResult.Size.Size_700
+	local Size100 = UseTokensResult.Size.Size_100
+	local Size500 = UseTokensResult.Size.Size_500
 	local HasTooltipInfoText = JoinResult.tooltipInfoText ~= nil
 	local Size = if Active then Size500 else 0
 	local NewSize = if HasTooltipInfoText then Size700 + Size300 else 0
@@ -77,7 +80,7 @@ return ReactModule.memo(function(p1)
 		CheckAndFormatPossibleLinkModuleResult = true
 	end
 	local NoActive: boolean = CheckAndFormatPossibleLinkModuleResult and (not JoinResult.hideSubtitleChevron and not Active)
-	local Size250 = UseDesignTokensResult.Size.Size_250
+	local Size250 = UseTokensResult.Size.Size_250
 	local XOffset = if NoActive then Size250 else 0
 	local HasOnActivateSubtitle: boolean = CheckAndFormatPossibleLinkModuleResult and OnActivateSubtitle ~= nil
 	
@@ -170,7 +173,7 @@ return ReactModule.memo(function(p1)
 				UIListLayout = ReactModule.createElement("UIListLayout", {
 					SortOrder = Enum.SortOrder.LayoutOrder,
 					FillDirection = Enum.FillDirection.Horizontal,
-					Padding = UDim.new(0, UseDesignTokensResult.Size.Size_50),
+					Padding = UDim.new(0, UseTokensResult.Size.Size_50),
 					HorizontalAlignment = Enum.HorizontalAlignment.Left,
 					VerticalAlignment = Enum.VerticalAlignment.Center
 				}),
@@ -208,7 +211,7 @@ return ReactModule.memo(function(p1)
 					Icon = ReactModule.createElement(HeaderButton, {
 						Rotation = 90,
 						image = IconsActionsTruncationCollapseSmall,
-						Size = UDim2.new(1, UseDesignTokensResult.Size.Size_50, 1, UseDesignTokensResult.Size.Size_50),
+						Size = UDim2.new(1, UseTokensResult.Size.Size_50, 1, UseTokensResult.Size.Size_50),
 						Position = UDim2.fromScale(0.5, 0.5),
 						AnchorPoint = Vector2.new(0.5, 0.5)
 					})
