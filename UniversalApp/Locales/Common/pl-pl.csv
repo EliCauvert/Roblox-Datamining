@@ -475,6 +475,7 @@ Authentication.SignUp.Description.EnterParentEmail,"Aby otrzymać kod weryfikacy
 Authentication.SignUp.Description.FaceIdPromo,Face ID to najbezpieczniejsza i najłatwiejsza metoda logowania się na Robloxie.
 Authentication.SignUp.Description.GenderHelp2,Pomoże nam to wybrać odpowiedniego awatara dla ciebie.
 Authentication.SignUp.Description.OneMoreStep,Jeszcze jeden krok
+Authentication.SignUp.Description.OptInMarketingEmailConsent,Chcę otrzymywać od Robloxa e-maile na temat aktualności i ofert.
 Authentication.SignUp.Description.Or,
 Authentication.SignUp.Description.ParentEmailDisclaimer,"Prosimy o podanie adresu e-mail rodzica w celu odzyskania konta, zgodnie z Zasadami ochrony prywatności Robloxa"
 Authentication.SignUp.Description.PasskeyTryAgain,"Niestety coś poszło nie tak podczas rejestrowania klucza dostępu. Spróbuj zarejestrować się ponownie, używając innej nazwy użytkownika."
@@ -821,9 +822,13 @@ Common.UGCValidation.ErrorLabel.UnallowedJointSkinned,"Część ciała {partName
 Common.VerifiedParentalConsent.Action.Cancel,
 Common.VerifiedParentalConsent.Action.Close,
 Common.VerifiedParentalConsent.Action.GoToSettings,Przejdź do ustawień
+Common.VerifiedParentalConsent.Description.EnablePurchasesInSettings,"Aby umożliwić dokonanie tego zakupu, włącz zakupy w obszarze Ustawienia > Wydatki."
+Common.VerifiedParentalConsent.Description.ExistingPendingRequestRedirectToSettings,Masz już oczekującą prośbę o zgodę na dokonywanie zakupów. Możesz anulować tę prośbę w obszarze Ustawienia > Wydatki.
 Common.VerifiedParentalConsent.Description.SpendingRestrictionWithSettings,"Ze względu na ograniczenia regionalne w celu dokonania zakupu potrzebujesz zgody rodzica. Wyślij do rodzica prośbę o zgodę, wybierając kolejno Ustawienia > Wydatki."
 Common.VerifiedParentalConsent.Description.SpendingRestrictionWithoutSettings,"Ze względu na ograniczenia regionalne w celu dokonania zakupu potrzebujesz zgody rodzica. Skorzystaj ze strony internetowej lub aplikacji towarzyszącej, aby wysłać do rodzica prośbę o zgodę, wybierając kolejno Ustawienia > Wydatki."
 Common.VerifiedParentalConsent.Label.AskParent,
+Common.VerifiedParentalConsent.Label.RequestPending,Oczekująca prośba
+Common.VerifiedParentalConsent.Label.UpdateYourSettings,Zaktualizuj ustawienia
 Common.VisitGame.Label.Play,Dołącz
 CommonUI.Controls.Action.Accept,Akceptuj
 CommonUI.Controls.Action.Apply,Zastosuj
@@ -831,6 +836,7 @@ CommonUI.Controls.Action.Back,Wróć
 CommonUI.Controls.Action.Cancel,
 CommonUI.Controls.Action.CloseRoblox,Zamknij platformę Roblox
 CommonUI.Controls.Action.Confirm,
+CommonUI.Controls.Action.Continue,
 CommonUI.Controls.Action.Done,
 CommonUI.Controls.Action.Next,
 CommonUI.Controls.Action.OK,
@@ -1829,8 +1835,11 @@ Feature.Avatar.Heading.SharePublicAvatar,Udostępnij awatara
 Feature.Avatar.Heading.SortBy,Sortuj według
 Feature.Avatar.Heading.UsedName,Nazwa w użyciu
 Feature.Avatar.Heading.WearConfirmation,Ubierz przedmiot
+Feature.Avatar.HeroWidget.BundleHeadlessTitle,"Ostatnia szansa, aby zdobyć Bezgłowego Jeźdźca"
 Feature.Avatar.HeroWidget.BundleTitle,Korblox Pactbreaker
 Feature.Avatar.HeroWidget.CapsuleDescription,Trzy nowe wersje Robloxowych klasyków
+Feature.Avatar.HeroWidget.CapsuleHalloweenDescription,Nowe przedmioty specjalnie na upiorny sezon
+Feature.Avatar.HeroWidget.CapsuleHalloweenTitle,Stworzone na Halloween
 Feature.Avatar.HeroWidget.CapsulePoolDescription,"Trzy nowe przedmioty, które zrobią furorę"
 Feature.Avatar.HeroWidget.CapsulePoolTitle,Impreza przy basenie
 Feature.Avatar.HeroWidget.CapsuleTitle,Klasyczne przedmioty w nowej odsłonie
@@ -2427,6 +2436,8 @@ Feature.Build.Description.GameConfiguration,Zmień sposób sprzedawania przedmio
 Feature.Build.Description.GameCreationDone,"Ukończyłem(-am) tworzenie i publikowanie Twojej gry. Możesz ją otworzyć, aby przetestować."
 Feature.Build.Description.GameSavedPlaytest,"Ukończyłem tworzenie Twojej gry i zapisałem nową wersję. Możesz ją otworzyć, aby przetestować."
 Feature.Build.Description.HubSettings,Zarządzaj wszystkimi ustawieniami w Centrum dla twórców
+Feature.Build.Description.InternalSpec,"Pozostaw puste, aby użyć najnowszej specyfikacji"
+Feature.Build.Description.InternalTesting,Wypróbuj specyfikacje nowego modelu
 Feature.Build.Description.InviteFriendLimit,"Możesz zaprosić maksymalnie {MAX_INVITES} znajomych do gry, podczas gdy Ty będziesz tworzyć."
 Feature.Build.Description.LongAdCampaign,"Więcej czasu na dotarcie do nowych graczy i sprawienie, by do Ciebie wracali."
 Feature.Build.Description.MakeAudienceAvail,"Opublikuj swój projekt, aby udostępnić go tym odbiorcom."
@@ -2521,6 +2532,7 @@ Feature.Build.Label.FreeBuildUsage,Bezpłatne użycia funkcji Buduj
 Feature.Build.Label.Friends,
 Feature.Build.Label.FriendsOnly,
 Feature.Build.Label.GamePlays,Rozegrane gry
+Feature.Build.Label.GamesTab,
 Feature.Build.Label.GetMoreBuildUsage,Zdobądź więcej użyć funkcji Buduj
 Feature.Build.Label.GroupGames,Gry grupy
 Feature.Build.Label.Groups,Grupy
@@ -2529,6 +2541,8 @@ Feature.Build.Label.IconThumbnails,Ikona i miniatury
 Feature.Build.Label.Images2D,Obrazy 2D
 Feature.Build.Label.InProgress,W toku
 Feature.Build.Label.InputNeeded,Wymagane wprowadzenie
+Feature.Build.Label.InternalSpec,Specyfikacja wewnętrzna
+Feature.Build.Label.InternalTesting,Testowanie wewnętrzne
 Feature.Build.Label.InviteCount,{COUNT}/{MAX_INVITES}
 Feature.Build.Label.Limited,Z ograniczeniami
 Feature.Build.Label.Live,
@@ -2549,6 +2563,7 @@ Feature.Build.Label.OnSale,W sprzedaży
 Feature.Build.Label.Pending,Oczekujące
 Feature.Build.Label.PercentUsed,Wykorzystano {PERCENT}%
 Feature.Build.Label.PlayTime,Czas gry
+Feature.Build.Label.PreviewsTab,Wersje zapoznawcze
 Feature.Build.Label.PreviouslyPublished,Wcześniej opublikowane
 Feature.Build.Label.Price,Cena
 Feature.Build.Label.PriceUnavailable,--
@@ -2759,6 +2774,7 @@ Feature.Build.Notification.Title.Finished,Kompilacja ukończona
 Feature.Build.Notification.Title.NeedInput,Funkcja Buduj wymaga Twojego wkładu
 Feature.Build.Placeholder.DescribeProduct,"Opisz, co chcesz sprzedać"
 Feature.Build.Placeholder.DescribeProductUpdate,Opisz aktualizację
+Feature.Build.Placeholder.InternalSpec,internal_code
 Feature.Build.Prompt.CreateDeveloperProduct,"Pomóż mi stworzyć produkt deweloperski, połączyć go z grą, zweryfikować i opublikować zmiany oraz udostępnić go do kupienia."
 Feature.Build.Title.AdActive,Kampania reklamowa jest aktywna
 Feature.Build.Title.AdCampaignDuration,{durationDays}-dniowa kampania reklamowa
@@ -2817,6 +2833,9 @@ Feature.Build.Title.VersionNumber,Wersja {VERSION}
 Feature.Build.Title.Versions,Wersje
 Feature.Build.Title.WhatsIncluded,Co jest uwzględnione?
 Feature.BuyRobux.Heading.Banner,
+Feature.BuyRobux.Label.MyFriendsWithCount,Moi znajomi ({count})
+Feature.BuyRobux.Label.PeopleWithCount,Osoby ({count})
+Feature.BuyRobux.Label.Search,
 Feature.Call.Error.Description.Generic,
 Feature.Catalog.Action.Buy,
 Feature.Catalog.Action.Cancel,
@@ -2860,6 +2879,7 @@ Feature.Catalog.AvatarWidgetTitle,
 Feature.Catalog.Checkout.Title.PurchasedFailedPlural,Nie można kupić {count} przedmiotów
 Feature.Catalog.Checkout.WearAfterPurchase,
 Feature.Catalog.Description.AttributionAlertBody,Opuścisz ten obszar i dołączysz do projektu {experienceName}.
+Feature.Catalog.Feature.Catalog.Label.AvatarBackgrounds,
 Feature.Catalog.Feature.Catalog.Label.ClassicShirt,
 Feature.Catalog.Feature.Catalog.Label.ClassicTShirt,
 Feature.Catalog.Feature.Catalog.Label.TotalItems,Łączna liczba przedmiotów: {itemCount}
@@ -3565,7 +3585,7 @@ Feature.Friends.Action.GetStarted,Rozpocznij
 Feature.Friends.Action.GoToAddFriends,Przejdź do obszaru Dodaj znajomych
 Feature.Friends.Action.InviteFriends,Zaproś swoje kontakty do znajomych na platformie Roblox.
 Feature.Friends.Action.InviteProviderFriends,Zaproś znajomych z: {provider}
-Feature.Friends.Action.PendingRequest,Oczekująca prośba
+Feature.Friends.Action.PendingRequest,
 Feature.Friends.Action.ShareQR,Udostępnij kod QR
 Feature.Friends.Action.ShowMore,
 Feature.Friends.Action.Unblock,
@@ -4274,6 +4294,7 @@ Feature.Moments.Title.LeaveMomentCreation,Wyjść z tworzenia momentu?
 Feature.Moments.Title.MomentRemoved,
 Feature.Moments.Title.PostInsights,Tytuł nagłówka strony
 Feature.Moments.Title.ReportPost,Zgłoś posta
+Feature.Moments.Tooltip.PostInsightsBody,"Sprawdź liczbę wyświetleń, czas oglądania i to, jak moment został odebrany przez Twoich odbiorców."
 Feature.Moments.Tooltip.PostInsightsTitle,Tutaj znajdziesz statystyki dotyczące Twojego momentu
 Feature.Moments.Tooltip.ShareFirstMomentBody,Utwórz moment z przechwyconych elementów
 Feature.Moments.Tooltip.ShareFirstMomentTitle,Udostępnij swój pierwszy moment
@@ -4768,6 +4789,14 @@ Feature.PlayerSearchResults.Label.ThisIsYou,To ty
 Feature.PlayerSearchResults.Label.You,Ty
 Feature.PlayerSearchResults.Label.YouAreFollowing,
 Feature.PlayerSearchResults.Label.YouAreFriends,Jesteście znajomymi
+Feature.Premium.Description.ScaryModalBody13To17,"Oświadczam, że jestem rodzicem lub opiekunem prawnym właściciela konta. Wyrażam zgodę na ten zakup i akceptuję Warunki użytkowania."
+Feature.Premium.Description.ScaryModalBodyNew,"Ten zakup wiąże się z wydaniem prawdziwych pieniędzy.{lineBreak}Oświadczam, że mam co najmniej 18 lat i jestem rodzicem lub opiekunem prawnym właściciela tego konta. Wyrażam zgodę na ten zakup i akceptuję Warunki użytkowania."
+Feature.Premium.Description.ScaryModalThreshold1Body,"W tym miesiącu twoje wydatki na platformie Roblox były spore. Chcesz kontynuować?{linebreak}Ten zakup wiąże się z wydaniem prawdziwych pieniędzy. Aby wyrazić zgodę na ten zakup, musisz być rodzicem lub opiekunem prawnym właściciela konta."
+Feature.Premium.Description.ScaryModalThreshold2Body,W tym miesiącu twoje wydatki na platformie Roblox były spore.{linebreak}Potwierdzenia tego i wszystkich kolejnych zakupów zostaną wysłane na zweryfikowany adres e-mail rodzica przypisany do tego konta. 
+Feature.Premium.Heading.GeneralError,
+Feature.Premium.Heading.ScaryModalTitle,
+Feature.Premium.Message.PleaseTryAgain,
+Feature.Premium.Message.SomethingWentWrong,
 Feature.PrivateServers.Action.CreatePrivateServer,
 Feature.PrivateServers.Action.FreeWithBlackbird,Darmowe w ramach subskrypcji Plus
 Feature.PrivateServers.Description.PrivateServerPurchaseUnavailableInStudio,Zakupy na serwerach prywatnych nie są obsługiwane w Studio.
@@ -5495,6 +5524,9 @@ Feature.VerificationUpsell.Response.ErrorTryAgain,
 Feature.VerificationUpsell.Response.InvalidPhoneNumberError,Nie można użyć tego numeru telefonu. Wprowadź inny.
 Feature.VerificationUpsell.Response.PhoneHasTooManyAssociatedAccounts,Osiągnięto limit kont powiązanych z jednym numerem telefonu.
 Feature.VerificationUpsell.Response.TooManyAttemptsTryAgainLater,
+Feature.VerifiedParentalControls.Description.ParentalApprovalConfirmation,Jestem rodzicem lub opiekunem prawnym i wyrażam zgodę na ten zakup zgodnie z {termsLinkStart}Warunki korzystania z usługi{termsLinkEnd}.
+Feature.VerifiedParentalControls.Description.ParentalApprovalRequired,Ten zakup wiąże się z wydaniem prawdziwych pieniędzy. Rodzic lub opiekun prawny musi wyrazić zgodę na ten zakup. Rodzice mogą {learnLinkStart}tutaj uzyskać więcej informacji{learnLinkEnd} na temat zarządzania wydatkami dziecka.
+Feature.VerifiedParentalControls.Label.AskParentFirst,Najpierw poproś rodzica o zgodę
 Feature.VirtualEvents.AttendanceBeforeEvent,Zainteresowani
 Feature.VirtualEvents.AttendanceDuringEvent,Obecni uczestnicy
 Feature.VirtualEvents.DescriptionLabel,
@@ -5724,7 +5756,7 @@ IAPExperience.SubscriptionPurchasePrompt.Label.GetSubscription,Wykup subskrypcj�
 IAPExperience.SubscriptionPurchasePrompt.Label.TestFlowDisclaimer,"To okno dialogowe zawiera podgląd opisu subskrypcji, który zobaczą użytkownicy. Kliknięcie „Subskrybuj” nie spowoduje obciążenia twojego konta."
 IAPExperience.U13Confirm.Action.Cancel,
 IAPExperience.U13Confirm.Action.Confirm,
-IAPExperience.U13Confirm.Text.ParentalConsentWarningPaymentModal13To17,"Oświadczam, że jestem rodzicem lub opiekunem prawnym właściciela konta. Wyrażam zgodę na ten zakup i akceptuję Warunki użytkowania."
+IAPExperience.U13Confirm.Text.ParentalConsentWarningPaymentModal13To17,
 IAPExperience.U13Confirm.Text.U13MonthlyThreshold1Modal,
 IAPExperience.U13Confirm.Text.U13MonthlyThreshold2Modal,
 IAPExperience.U13Confirm.Text.U13PaymentModal,"Ten zakup wiąże się z wydaniem prawdziwych pieniędzy. Oświadczam, że mam co najmniej 18 lat i jestem rodzicem lub opiekunem prawnym właściciela tego konta. Wyrażam zgodę na ten zakup i akceptuję Warunki użytkowania."

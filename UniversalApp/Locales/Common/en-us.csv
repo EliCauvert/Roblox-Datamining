@@ -751,6 +751,9 @@ Common.UGCValidation.ErrorLabel.DescendantIdAnimationVersionNotSupported,"{Insta
 Common.UGCValidation.ErrorLabel.DescendantIdNotPublished,Asset {AssetId} ({InstanceFullName}.{FieldName}) is not published. Publish it and try again.
 Common.UGCValidation.ErrorLabel.DescendantIdVersionNotSupported,"{InstanceFullName}.{FieldName} uses version {Version} of asset {AssetId}, but only version 1 is supported right now. Use version 1 and try again."
 Common.UGCValidation.ErrorLabel.DynamicHeadCageMisaligned,Dynamic Heads on the marketplace must be properly caged so that the eyes and mouth vertices on the cage line up with the mesh vertices. Please improve your caging and its alignment with the mesh.
+Common.UGCValidation.ErrorLabel.DynamicHeadCageMisalignedLeftEye,Dynamic Head cage left eye landmarks are misaligned with the mesh. Adjust the eye cage so the left eye mesh is within the projected cage area.
+Common.UGCValidation.ErrorLabel.DynamicHeadCageMisalignedMouth,Dynamic Head cage mouth landmarks are misaligned with the mesh. Adjust the mouth cage so the mouth mesh is within the projected cage area.
+Common.UGCValidation.ErrorLabel.DynamicHeadCageMisalignedRightEye,Dynamic Head cage right eye landmarks are misaligned with the mesh. Adjust the eye cage so the right eye mesh is within the projected cage area.
 Common.UGCValidation.ErrorLabel.DynamicHeadHappyNotShown,Cannot detect smile expression for the Dynamic Head. Please adjust cage landmarks for the mouth to match where the mouth on the head and make sure it can show smile expression.
 Common.UGCValidation.ErrorLabel.DynamicHeadLeftEyeNotClose,Cannot detect left eye close expression for the Dynamic Head. Please adjust cage landmarks for the left eye to match where the left eye on the head and make sure it can be closed.
 Common.UGCValidation.ErrorLabel.DynamicHeadMISSINGCAGE,Dynamic Heads on the marketplace have no Head Cages. Please create Head Cage for the Dynamic Head.
@@ -770,6 +773,13 @@ Common.UGCValidation.ErrorLabel.EmoteAnimation_MaxPartTranslationCalcFailed,The 
 Common.UGCValidation.ErrorLabel.EmoteAnimation_MaxPartTranslationMismatch,"The published animation specifies a maximum part translation of {taggedTranslation} studs, but its animation data calculates to {calculatedTranslation} studs. Please republish the animation."
 Common.UGCValidation.ErrorLabel.Extents_HeadBelowTorso,"Head must be placed above UpperTorso. The head center is below the top of the torso, which indicates the head mesh is collapsed or misplaced."
 Common.UGCValidation.ErrorLabel.FaceControlsOverrideFACSNotEmpty,The InternalOverrideFACSData property on FaceControls must be empty on upload.
+Common.UGCValidation.ErrorLabel.FacialFeaturePresence_EyesMissing,Base face is missing required eye features. Add eyes to the base face and try again.
+Common.UGCValidation.ErrorLabel.FacialFeaturePresence_MouthMissing,Base face is missing a required mouth. Add a mouth to the base face and try again.
+Common.UGCValidation.ErrorLabel.FacsDeformation_HappyNotShown,Cannot detect happiness expression. Adjust the mouth cage or happy expression FACS so the projected mouth mesh deforms as expected.
+Common.UGCValidation.ErrorLabel.FacsDeformation_LeftEyeNotClose,Cannot detect left eye close expression. Adjust the left eye cage or left eye-close FACS so the projected eye mesh deforms as expected.
+Common.UGCValidation.ErrorLabel.FacsDeformation_MouthNotOpen,Cannot detect mouth open expression. Adjust the mouth cage or mouth-open FACS so the projected mouth mesh deforms as expected.
+Common.UGCValidation.ErrorLabel.FacsDeformation_RightEyeNotClose,Cannot detect right eye close expression. Adjust the right eye cage or right eye-close FACS so the projected eye mesh deforms as expected.
+Common.UGCValidation.ErrorLabel.FacsDeformation_SadNotShown,Cannot detect sadness expression. Adjust the mouth cage or sad expression FACS so the projected mouth mesh deforms as expected.
 Common.UGCValidation.ErrorLabel.FacsExpandsHead,"FACs was detected expanding your head to {modPercent}%, but altering the head is against marketplace policy for facial animations."
 Common.UGCValidation.ErrorLabel.FacsJointCountBounded,"Dynamic heads can have at most {maxFacsJointCount} FACS joints, but this head has {actualJointCount}. Please reduce the number of FACS joints and try again."
 Common.UGCValidation.ErrorLabel.FacsShrinksHead,"FACs was detected shrinking your head to {modPercent}%, but altering the head is against marketplace policy for facial animations."
@@ -816,6 +826,7 @@ Common.UGCValidation.ErrorLabel.MeshPartBounds_TooSmall,{partName} mesh {axis} a
 Common.UGCValidation.ErrorLabel.MissingRequiredAttachment,Attachment {attName} must exist exactly once within {partName} descendants.
 Common.UGCValidation.ErrorLabel.NoAttributes,'{RootInstanceName}' (or its descendants) contain Attributes. You need to remove Attributes from the following: {InstanceNameList}
 Common.UGCValidation.ErrorLabel.PropertiesNotSensible,{ClassName} '{InstancePath}' has invalid properties: {ProblematicProperties}. A shown byte limit was exceeded (a limit of 0 means the property must be empty); any other property contains NaN/Inf values or exceeds its default size limit.
+Common.UGCValidation.ErrorLabel.RenderedAnimation_RequiredExpressionsMissing,"Rendered animation is missing one or more required facial expressions (eye close, mouth open, happy, sad)."
 Common.UGCValidation.ErrorLabel.RigAttachmentOutOfBounds,Rig attachment '{AttachmentName}' in '{PartName}' must be placed near the joint boundary where this body part connects to an adjacent part. Current position [{CurrentPosition}] is too far from the connection plane. Move it closer to [{ClosestValidPosition}].
 Common.UGCValidation.ErrorLabel.SelectionCountNotOne,"To upload an asset to Roblox, you must select exactly 1 instance and the associated upload type."
 Common.UGCValidation.ErrorLabel.SerializedAssetTooLarge,This asset is too large to upload ({sizeBytes} bytes exceeds the maximum of {maxSizeBytes} bytes). Please reduce its size and try again.
@@ -824,9 +835,13 @@ Common.UGCValidation.ErrorLabel.UnallowedJointSkinned,"Bodypart {partName} is sk
 Common.VerifiedParentalConsent.Action.Cancel,
 Common.VerifiedParentalConsent.Action.Close,
 Common.VerifiedParentalConsent.Action.GoToSettings,Go to Settings
+Common.VerifiedParentalConsent.Description.EnablePurchasesInSettings,"To make this purchase, first enable purchases in Settings > Spending."
+Common.VerifiedParentalConsent.Description.ExistingPendingRequestRedirectToSettings,You already have a pending request to make purchases. You can cancel this request in Settings > Spending.
 Common.VerifiedParentalConsent.Description.SpendingRestrictionWithSettings,"Due to regional restrictions, you need parent permission to make a purchase. Ask your parent for permission in Settings > Spending."
 Common.VerifiedParentalConsent.Description.SpendingRestrictionWithoutSettings,"Due to regional restrictions, you need parent permission to make a purchase. Please visit the web or a companion device to ask your parent for permission in Settings > Spending."
 Common.VerifiedParentalConsent.Label.AskParent,Ask Your Parent
+Common.VerifiedParentalConsent.Label.RequestPending,Request Pending
+Common.VerifiedParentalConsent.Label.UpdateYourSettings,Update Your Settings
 Common.VisitGame.Label.Play,Join
 CommonUI.Controls.Action.Accept,Accept
 CommonUI.Controls.Action.Apply,Apply
@@ -834,6 +849,7 @@ CommonUI.Controls.Action.Back,Back
 CommonUI.Controls.Action.Cancel,
 CommonUI.Controls.Action.CloseRoblox,Close Roblox
 CommonUI.Controls.Action.Confirm,
+CommonUI.Controls.Action.Continue,
 CommonUI.Controls.Action.Done,
 CommonUI.Controls.Action.Next,
 CommonUI.Controls.Action.OK,
@@ -2534,6 +2550,7 @@ Feature.Build.Label.FreeBuildUsage,Free Build usage
 Feature.Build.Label.Friends,
 Feature.Build.Label.FriendsOnly,Friends only
 Feature.Build.Label.GamePlays,Game plays
+Feature.Build.Label.GamesTab,
 Feature.Build.Label.GetMoreBuildUsage,Get more Build usage
 Feature.Build.Label.GroupGames,Group games
 Feature.Build.Label.Groups,Groups
@@ -2564,6 +2581,7 @@ Feature.Build.Label.OnSale,On sale
 Feature.Build.Label.Pending,Pending
 Feature.Build.Label.PercentUsed,{PERCENT}% used
 Feature.Build.Label.PlayTime,Play time
+Feature.Build.Label.PreviewsTab,Previews
 Feature.Build.Label.PreviouslyPublished,Previously published
 Feature.Build.Label.Price,Price
 Feature.Build.Label.PriceUnavailable,--
@@ -2833,6 +2851,9 @@ Feature.Build.Title.VersionNumber,Version {VERSION}
 Feature.Build.Title.Versions,Versions
 Feature.Build.Title.WhatsIncluded,What's included?
 Feature.BuyRobux.Heading.Banner,
+Feature.BuyRobux.Label.MyFriendsWithCount,My friends ({count})
+Feature.BuyRobux.Label.PeopleWithCount,People ({count})
+Feature.BuyRobux.Label.Search,
 Feature.Call.Error.Description.Generic,
 Feature.Catalog.Action.Buy,
 Feature.Catalog.Action.Cancel,
@@ -2876,6 +2897,7 @@ Feature.Catalog.AvatarWidgetTitle,
 Feature.Catalog.Checkout.Title.PurchasedFailedPlural,{count} items could not be purchased
 Feature.Catalog.Checkout.WearAfterPurchase,
 Feature.Catalog.Description.AttributionAlertBody,You will leave this area and join {experienceName}.
+Feature.Catalog.Feature.Catalog.Label.AvatarBackgrounds,
 Feature.Catalog.Feature.Catalog.Label.ClassicShirt,Classic Shirt
 Feature.Catalog.Feature.Catalog.Label.ClassicTShirt,Classic T-Shirt
 Feature.Catalog.Feature.Catalog.Label.TotalItems,Total: {itemCount} Items
@@ -4288,7 +4310,7 @@ Feature.Moments.Title.GenerateTextFeedbackReason,What went wrong?
 Feature.Moments.Title.GenerateTextOptions,
 Feature.Moments.Title.LeaveMomentCreation,Leave Moment creation?
 Feature.Moments.Title.MomentRemoved,Moment removed
-Feature.Moments.Title.PostInsights,Page header title
+Feature.Moments.Title.PostInsights,Post insights
 Feature.Moments.Title.ReportPost,Report post
 Feature.Moments.Tooltip.PostInsightsBody,"Check views, watch time, and how the Moment landed with your audience."
 Feature.Moments.Tooltip.PostInsightsTitle,Your Moment insights are here
@@ -4791,6 +4813,14 @@ Feature.PlayerSearchResults.Label.ThisIsYou,This is you
 Feature.PlayerSearchResults.Label.You,You
 Feature.PlayerSearchResults.Label.YouAreFollowing,
 Feature.PlayerSearchResults.Label.YouAreFriends,You are friends
+Feature.Premium.Description.ScaryModalBody13To17,I agree that I am the parent or legal guardian of the account owner. I authorize this purchase and agree to the Terms of Use.
+Feature.Premium.Description.ScaryModalBodyNew,"This purchase involves the exchange of real money.{lineBreak}I agree that I am at least 18 years of age, and am the parent or legal guardian of the account owner. I authorize this purchase and agree to the Terms of Use."
+Feature.Premium.Description.ScaryModalThreshold1Body,You've spent a lot on Roblox this month. Do you want to proceed?{linebreak}This purchase involves the exchange of real money. You must be the parent or legal guardian of the account owner to authorize this purchase.
+Feature.Premium.Description.ScaryModalThreshold2Body,You've spent a lot on Roblox this month.{linebreak}Receipts will be sent to the verified parental email on this account for this and all subsequent purchases. 
+Feature.Premium.Heading.GeneralError,
+Feature.Premium.Heading.ScaryModalTitle,
+Feature.Premium.Message.PleaseTryAgain,Please try again.
+Feature.Premium.Message.SomethingWentWrong,
 Feature.PrivateServers.Action.CreatePrivateServer,
 Feature.PrivateServers.Action.FreeWithBlackbird,Free with Plus
 Feature.PrivateServers.Description.PrivateServerPurchaseUnavailableInStudio,Private server purchases are not supported in Studio.
@@ -5519,6 +5549,9 @@ Feature.VerificationUpsell.Response.ErrorTryAgain,
 Feature.VerificationUpsell.Response.InvalidPhoneNumberError,This phone number cannot be used. Please enter a different phone number.
 Feature.VerificationUpsell.Response.PhoneHasTooManyAssociatedAccounts,You’ve reached the maximum number of accounts linked to one phone number.
 Feature.VerificationUpsell.Response.TooManyAttemptsTryAgainLater,
+Feature.VerifiedParentalControls.Description.ParentalApprovalConfirmation,I’m the parent or legal guardian and I approve this purchase under the {termsLinkStart}Terms of Use{termsLinkEnd}.
+Feature.VerifiedParentalControls.Description.ParentalApprovalRequired,This costs real money. A parent or legal guardian must approve this purchase. Parents can {learnLinkStart}learn more{learnLinkEnd} about managing their child’s spending.
+Feature.VerifiedParentalControls.Label.AskParentFirst,Ask a parent first
 Feature.VirtualEvents.AttendanceBeforeEvent,
 Feature.VirtualEvents.AttendanceDuringEvent,Attending Now
 Feature.VirtualEvents.DescriptionLabel,
@@ -5748,7 +5781,7 @@ IAPExperience.SubscriptionPurchasePrompt.Label.GetSubscription,Get subscription
 IAPExperience.SubscriptionPurchasePrompt.Label.TestFlowDisclaimer,"This dialog is a preview, showing you how your users will see the description of your subscription. You won’t be charged if you click Subscribe."
 IAPExperience.U13Confirm.Action.Cancel,
 IAPExperience.U13Confirm.Action.Confirm,
-IAPExperience.U13Confirm.Text.ParentalConsentWarningPaymentModal13To17,I agree that I am the parent or legal guardian of the account owner. I authorize this purchase and agree to the Terms of Use.
+IAPExperience.U13Confirm.Text.ParentalConsentWarningPaymentModal13To17,
 IAPExperience.U13Confirm.Text.U13MonthlyThreshold1Modal,
 IAPExperience.U13Confirm.Text.U13MonthlyThreshold2Modal,
 IAPExperience.U13Confirm.Text.U13PaymentModal,"This purchase involves the exchange of real money. I agree that I am at least 18 years of age, and am the parent or legal guardian of the account owner. I authorize this purchase and agree to the Terms of Use."

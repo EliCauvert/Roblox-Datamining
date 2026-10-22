@@ -467,7 +467,7 @@ Authentication.SignUp.Description.EnterParentEmail,输入你家长的电子邮�
 Authentication.SignUp.Description.FaceIdPromo,面容 ID 是登录 Roblox 最安全便捷的方式。
 Authentication.SignUp.Description.GenderHelp2,这将帮助我们为你挑选一个相关的虚拟形象。
 Authentication.SignUp.Description.OneMoreStep,还有一步
-Authentication.SignUp.Description.OptInMarketingEmailConsent,
+Authentication.SignUp.Description.OptInMarketingEmailConsent,我愿意接收来自 Roblox 的新闻和优惠信息电子邮件。
 Authentication.SignUp.Description.Or,
 Authentication.SignUp.Description.ParentEmailDisclaimer,根据 Roblox 隐私政策的规定，我们需要你提供家长的电子邮件地址，用于帐户恢复
 Authentication.SignUp.Description.PasskeyTryAgain,对不起，注册你的通行密钥出错。请尝试使用不同的用户名再次注册。
@@ -742,6 +742,9 @@ Common.UGCValidation.ErrorLabel.DescendantIdAnimationVersionNotSupported,{Instan
 Common.UGCValidation.ErrorLabel.DescendantIdNotPublished,素材 {AssetId} ({InstanceFullName}.{FieldName}) 未发布。请先发布，然后重试。
 Common.UGCValidation.ErrorLabel.DescendantIdVersionNotSupported,{InstanceFullName}.{FieldName} 使用了素材 {AssetId} 的版本 {Version}，但目前仅支持版本 1。请使用版本 1 并重试。
 Common.UGCValidation.ErrorLabel.DynamicHeadCageMisaligned,商城中的动态头部必须正确置入笼架，以便笼架上的眼睛和嘴巴顶点与网格顶点对齐。请调整笼架位置，使其与网格对齐。
+Common.UGCValidation.ErrorLabel.DynamicHeadCageMisalignedLeftEye,
+Common.UGCValidation.ErrorLabel.DynamicHeadCageMisalignedMouth,
+Common.UGCValidation.ErrorLabel.DynamicHeadCageMisalignedRightEye,
 Common.UGCValidation.ErrorLabel.DynamicHeadHappyNotShown,无法检测到动态头部的微笑表情。请调整嘴巴的笼架标记，使其与头部的嘴巴位置相匹配，并确保它可以显示微笑表情。
 Common.UGCValidation.ErrorLabel.DynamicHeadLeftEyeNotClose,无法检测到动态头部的左眼闭合表情。请调整左眼的笼架标记，使其与头部的左眼位置相匹配，并确保其可以闭合。
 Common.UGCValidation.ErrorLabel.DynamicHeadMISSINGCAGE,商城中的动态头部没有头部笼架。请为动态头部创建头部笼架。
@@ -761,6 +764,13 @@ Common.UGCValidation.ErrorLabel.EmoteAnimation_MaxPartTranslationCalcFailed,无�
 Common.UGCValidation.ErrorLabel.EmoteAnimation_MaxPartTranslationMismatch,已发布的动画指定了部件的最大位移为 {taggedTranslation} 格，但根据动画数据计算出的位移为 {calculatedTranslation} 格。请重新发布该动画。
 Common.UGCValidation.ErrorLabel.Extents_HeadBelowTorso,头部必须位于上身躯干的上方。头部中心位于躯干顶部下方，表明头部网格塌陷或位置不当。
 Common.UGCValidation.ErrorLabel.FaceControlsOverrideFACSNotEmpty,上传时，FaceControls 上的 InternalOverrideFACSData 属性必须为空。
+Common.UGCValidation.ErrorLabel.FacialFeaturePresence_EyesMissing,
+Common.UGCValidation.ErrorLabel.FacialFeaturePresence_MouthMissing,
+Common.UGCValidation.ErrorLabel.FacsDeformation_HappyNotShown,
+Common.UGCValidation.ErrorLabel.FacsDeformation_LeftEyeNotClose,
+Common.UGCValidation.ErrorLabel.FacsDeformation_MouthNotOpen,
+Common.UGCValidation.ErrorLabel.FacsDeformation_RightEyeNotClose,
+Common.UGCValidation.ErrorLabel.FacsDeformation_SadNotShown,
 Common.UGCValidation.ErrorLabel.FacsExpandsHead,检测到 FACS 将你的头部扩大到 {modPercent}%，但修改头部大小违反了脸部动画的商城政策。
 Common.UGCValidation.ErrorLabel.FacsJointCountBounded,动态头部最多可以有 {maxFacsJointCount} 个 FACS 关节，但此头部有 {actualJointCount} 个。请减少 FACS 关节的数量，然后重试。
 Common.UGCValidation.ErrorLabel.FacsShrinksHead,检测到 FACS 将你的头部缩小到 {modPercent}%，但修改头部大小违反了脸部动画的商城政策。
@@ -807,6 +817,7 @@ Common.UGCValidation.ErrorLabel.MeshPartBounds_TooSmall,“{partName}“网格�
 Common.UGCValidation.ErrorLabel.MissingRequiredAttachment,附件“{attName}”必须存在于“{partName}”的后代中，且只能存在一次。
 Common.UGCValidation.ErrorLabel.NoAttributes,“{RootInstanceName}”（或其后代）包含属性。你需要从以下实例中移除属性：{InstanceNameList}
 Common.UGCValidation.ErrorLabel.PropertiesNotSensible,{ClassName} '{InstancePath}' 有无效属性： {ProblematicProperties}。超出了显示的字节限制（限制为 0 表示属性必须为空）；任何其他属性包含 NaN/Inf 值或超出其默认大小限制。
+Common.UGCValidation.ErrorLabel.RenderedAnimation_RequiredExpressionsMissing,
 Common.UGCValidation.ErrorLabel.RigAttachmentOutOfBounds,“{PartName}”中的骨架附件“{AttachmentName}”必须放置在该身体部位与相邻部位连接的关节边界附近。当前位置 [{CurrentPosition}] 离连接平面过远。请将其移动到更靠近 [{ClosestValidPosition}] 的位置。
 Common.UGCValidation.ErrorLabel.SelectionCountNotOne,要将素材上传到 Roblox，你必须选择恰好 1 个实例及其关联的上传类型。
 Common.UGCValidation.ErrorLabel.SerializedAssetTooLarge,此素材过大，无法上传（{sizeBytes} 字节，超出 {maxSizeBytes} 字节的上限）。请缩小其大小，然后重试。
@@ -815,9 +826,13 @@ Common.UGCValidation.ErrorLabel.UnallowedJointSkinned,身体部位{partName}已�
 Common.VerifiedParentalConsent.Action.Cancel,
 Common.VerifiedParentalConsent.Action.Close,
 Common.VerifiedParentalConsent.Action.GoToSettings,前往设置
+Common.VerifiedParentalConsent.Description.EnablePurchasesInSettings,要进行此购买，请先在“设置 > 预付款”中启用购买。
+Common.VerifiedParentalConsent.Description.ExistingPendingRequestRedirectToSettings,你已经有一个待处理的购买请求。你可以在“设置 > 预付款”中取消此请求。
 Common.VerifiedParentalConsent.Description.SpendingRestrictionWithSettings,由于区域限制，你需要家长权限才能购买。请向家长询问你在“设置 > 预付款”中的设置。
 Common.VerifiedParentalConsent.Description.SpendingRestrictionWithoutSettings,由于区域限制，你需要家长权限才能购买。请访问网页或适配设备，并向家长询问你在“设置 > 预付款”中的设置。
 Common.VerifiedParentalConsent.Label.AskParent,
+Common.VerifiedParentalConsent.Label.RequestPending,请求处理中
+Common.VerifiedParentalConsent.Label.UpdateYourSettings,更新你的设置
 Common.VisitGame.Label.Play,加入
 CommonUI.Controls.Action.Accept,接受
 CommonUI.Controls.Action.Apply,应用
@@ -825,6 +840,7 @@ CommonUI.Controls.Action.Back,
 CommonUI.Controls.Action.Cancel,
 CommonUI.Controls.Action.CloseRoblox,关闭罗布乐思
 CommonUI.Controls.Action.Confirm,
+CommonUI.Controls.Action.Continue,
 CommonUI.Controls.Action.Done,
 CommonUI.Controls.Action.Next,
 CommonUI.Controls.Action.OK,
@@ -1827,11 +1843,11 @@ Feature.Avatar.Heading.SharePublicAvatar,分享你的虚拟形象
 Feature.Avatar.Heading.SortBy,排序依据
 Feature.Avatar.Heading.UsedName,名称已使用
 Feature.Avatar.Heading.WearConfirmation,穿戴物品
-Feature.Avatar.HeroWidget.BundleHeadlessTitle,
+Feature.Avatar.HeroWidget.BundleHeadlessTitle,抓住最后的机会，获取无头骑士
 Feature.Avatar.HeroWidget.BundleTitle,Korblox Pactbreaker
 Feature.Avatar.HeroWidget.CapsuleDescription,Roblox 原创的三款新品
-Feature.Avatar.HeroWidget.CapsuleHalloweenDescription,
-Feature.Avatar.HeroWidget.CapsuleHalloweenTitle,
+Feature.Avatar.HeroWidget.CapsuleHalloweenDescription,专为万圣节推出的新道具
+Feature.Avatar.HeroWidget.CapsuleHalloweenTitle,专为万圣节打造
 Feature.Avatar.HeroWidget.CapsulePoolDescription,三款全新道具，引爆全场
 Feature.Avatar.HeroWidget.CapsulePoolTitle,泳池派对
 Feature.Avatar.HeroWidget.CapsuleTitle,重构经典
@@ -2430,8 +2446,8 @@ Feature.Build.Description.GameConfiguration,更改你销售道具和推广游戏
 Feature.Build.Description.GameCreationDone,我已完成游戏的创建和发布。你可以打开它进行游戏测试。
 Feature.Build.Description.GameSavedPlaytest,我已完成游戏的创建并保存了新版本。你可以打开它进行游戏测试。
 Feature.Build.Description.HubSettings,在创作者中心管理所有设置
-Feature.Build.Description.InternalSpec,
-Feature.Build.Description.InternalTesting,
+Feature.Build.Description.InternalSpec,将最新规格留空
+Feature.Build.Description.InternalTesting,试用新的模型规格
 Feature.Build.Description.InviteFriendLimit,在你创建时，邀请最多 {MAX_INVITES} 位好友一起游玩。
 Feature.Build.Description.LongAdCampaign,有更多时间触达新玩家，并让他们持续回归。
 Feature.Build.Description.MakeAudienceAvail,面向此受众群体发布你的体验。
@@ -2526,6 +2542,7 @@ Feature.Build.Label.FreeBuildUsage,免费 Build 使用额度
 Feature.Build.Label.Friends,
 Feature.Build.Label.FriendsOnly,仅限好友
 Feature.Build.Label.GamePlays,游戏游玩次数
+Feature.Build.Label.GamesTab,
 Feature.Build.Label.GetMoreBuildUsage,获得更多 Build 使用额度
 Feature.Build.Label.GroupGames,群组游戏
 Feature.Build.Label.Groups,
@@ -2534,8 +2551,8 @@ Feature.Build.Label.IconThumbnails,标志和缩略图
 Feature.Build.Label.Images2D,2D 图像
 Feature.Build.Label.InProgress,进行中
 Feature.Build.Label.InputNeeded,需要输入内容
-Feature.Build.Label.InternalSpec,
-Feature.Build.Label.InternalTesting,
+Feature.Build.Label.InternalSpec,内部规格
+Feature.Build.Label.InternalTesting,内部测试
 Feature.Build.Label.InviteCount,{COUNT}/{MAX_INVITES}
 Feature.Build.Label.Limited,受限
 Feature.Build.Label.Live,已发布
@@ -2556,6 +2573,7 @@ Feature.Build.Label.OnSale,在售
 Feature.Build.Label.Pending,待定
 Feature.Build.Label.PercentUsed,已使用 {PERCENT}%
 Feature.Build.Label.PlayTime,游玩时间
+Feature.Build.Label.PreviewsTab,
 Feature.Build.Label.PreviouslyPublished,此前已发布版本
 Feature.Build.Label.Price,价格
 Feature.Build.Label.PriceUnavailable,--
@@ -2766,7 +2784,7 @@ Feature.Build.Notification.Title.Finished,构建已完成
 Feature.Build.Notification.Title.NeedInput,构建需要你的输入
 Feature.Build.Placeholder.DescribeProduct,描述你想出售的内容
 Feature.Build.Placeholder.DescribeProductUpdate,描述一项更新
-Feature.Build.Placeholder.InternalSpec,
+Feature.Build.Placeholder.InternalSpec,内部代码
 Feature.Build.Prompt.CreateDeveloperProduct,帮助我创建开发者产品，将其接入游戏，验证并发布更改，供玩家购买。
 Feature.Build.Title.AdActive,广告活动已启动
 Feature.Build.Title.AdCampaignDuration,{durationDays} 天广告活动
@@ -2825,6 +2843,9 @@ Feature.Build.Title.VersionNumber,版本 {VERSION}
 Feature.Build.Title.Versions,
 Feature.Build.Title.WhatsIncluded,包含哪些内容？
 Feature.BuyRobux.Heading.Banner,购买罗宝
+Feature.BuyRobux.Label.MyFriendsWithCount,我的好友（{count} 位）
+Feature.BuyRobux.Label.PeopleWithCount,用户（{count} 个）
+Feature.BuyRobux.Label.Search,
 Feature.Call.Error.Description.Generic,
 Feature.Catalog.Action.Buy,
 Feature.Catalog.Action.Cancel,
@@ -2868,6 +2889,7 @@ Feature.Catalog.AvatarWidgetTitle,
 Feature.Catalog.Checkout.Title.PurchasedFailedPlural,{count} 件道具无法购买
 Feature.Catalog.Checkout.WearAfterPurchase,
 Feature.Catalog.Description.AttributionAlertBody,你将离开此区域并加入“{experienceName}”。
+Feature.Catalog.Feature.Catalog.Label.AvatarBackgrounds,
 Feature.Catalog.Feature.Catalog.Label.ClassicShirt,
 Feature.Catalog.Feature.Catalog.Label.ClassicTShirt,
 Feature.Catalog.Feature.Catalog.Label.TotalItems,总计：{itemCount} 件道具
@@ -4279,7 +4301,7 @@ Feature.Moments.Title.LeaveMomentCreation,要离开“精彩瞬间”创建页�
 Feature.Moments.Title.MomentRemoved,精彩瞬间已移除
 Feature.Moments.Title.PostInsights,页面标题
 Feature.Moments.Title.ReportPost,举报帖子
-Feature.Moments.Tooltip.PostInsightsBody,
+Feature.Moments.Tooltip.PostInsightsBody,查看观看次数、观看时长以及精彩瞬间在受众中的反响。
 Feature.Moments.Tooltip.PostInsightsTitle,请查看你的精彩瞬间洞察报告
 Feature.Moments.Tooltip.ShareFirstMomentBody,从截图创建精彩瞬间
 Feature.Moments.Tooltip.ShareFirstMomentTitle,分享你的第一个精彩瞬间
@@ -4780,6 +4802,14 @@ Feature.PlayerSearchResults.Label.ThisIsYou,这是你
 Feature.PlayerSearchResults.Label.You,你自己
 Feature.PlayerSearchResults.Label.YouAreFollowing,你正关注
 Feature.PlayerSearchResults.Label.YouAreFriends,你们是好友
+Feature.Premium.Description.ScaryModalBody13To17,我确定自己是该帐户所有者的家长或法定监护人。我授权此次购买，并同意使用条款。
+Feature.Premium.Description.ScaryModalBodyNew,本次购买过程中将会涉及现实货币。{lineBreak}我确定自己已满 18 周岁，且为该帐户所有者的父/母亲或合法监护人。我授权此次购买进行，并同意服务条款。
+Feature.Premium.Description.ScaryModalThreshold1Body,你本月在罗布乐思中已经有了不小的开销。你确定要继续吗？{linebreak}本次购买过程中将会涉及现实货币。你必须是此帐户所有者的家长或合法监护人，才能授权此次购买。
+Feature.Premium.Description.ScaryModalThreshold2Body,你本月在罗布乐思中已经有了不小的开销。{linebreak}此次购买及所有后续购买的收据，都将发送至此帐户已验证的家长邮箱。 
+Feature.Premium.Heading.GeneralError,
+Feature.Premium.Heading.ScaryModalTitle,
+Feature.Premium.Message.PleaseTryAgain,
+Feature.Premium.Message.SomethingWentWrong,
 Feature.PrivateServers.Action.CreatePrivateServer,
 Feature.PrivateServers.Action.FreeWithBlackbird,Plus 订阅用户免费
 Feature.PrivateServers.Description.PrivateServerPurchaseUnavailableInStudio,Studio 中不支持购买私人服务器。
@@ -5508,6 +5538,9 @@ Feature.VerificationUpsell.Response.ErrorTryAgain,
 Feature.VerificationUpsell.Response.InvalidPhoneNumberError,无法使用此电话号码。请输入其他电话号码。
 Feature.VerificationUpsell.Response.PhoneHasTooManyAssociatedAccounts,你已经达到同一手机号码可以关联的帐户数量上限。
 Feature.VerificationUpsell.Response.TooManyAttemptsTryAgainLater,
+Feature.VerifiedParentalControls.Description.ParentalApprovalConfirmation,我是家长或法定监护人，我根据{termsLinkStart}使用条款{termsLinkEnd}批准此次购买。
+Feature.VerifiedParentalControls.Description.ParentalApprovalRequired,本次购买将涉及现实货币。必须由家长或法定监护人批准此次购买。家长可以{learnLinkStart}进一步了解{learnLinkEnd}如何管理孩子的消费。
+Feature.VerifiedParentalControls.Label.AskParentFirst,先询问家长
 Feature.VirtualEvents.AttendanceBeforeEvent,
 Feature.VirtualEvents.AttendanceDuringEvent,立即参加
 Feature.VirtualEvents.DescriptionLabel,
@@ -5737,7 +5770,7 @@ IAPExperience.SubscriptionPurchasePrompt.Label.GetSubscription,取得订阅
 IAPExperience.SubscriptionPurchasePrompt.Label.TestFlowDisclaimer,此预览对话框会显示您的用户如何看到订阅描述。点击“订阅”不会向您收取费用。
 IAPExperience.U13Confirm.Action.Cancel,
 IAPExperience.U13Confirm.Action.Confirm,
-IAPExperience.U13Confirm.Text.ParentalConsentWarningPaymentModal13To17,我确定自己是该帐户所有者的家长或法定监护人。我授权此次购买，并同意使用条款。
+IAPExperience.U13Confirm.Text.ParentalConsentWarningPaymentModal13To17,
 IAPExperience.U13Confirm.Text.U13MonthlyThreshold1Modal,
 IAPExperience.U13Confirm.Text.U13MonthlyThreshold2Modal,
 IAPExperience.U13Confirm.Text.U13PaymentModal,本次购买过程中将会涉及现实货币。我确定本人已满 18 周岁，且为该帐户持有者的父/母亲或合法监护人。我授权此次购买进行，并同意服务条款。

@@ -475,6 +475,7 @@ Authentication.SignUp.Description.EnterParentEmail,Ingresa el correo electrónic
 Authentication.SignUp.Description.FaceIdPromo,Face ID es la forma más segura y sencilla de iniciar sesión en Roblox.
 Authentication.SignUp.Description.GenderHelp2,Esto nos ayuda a elegir un avatar relevante para ti.
 Authentication.SignUp.Description.OneMoreStep,Un paso más
+Authentication.SignUp.Description.OptInMarketingEmailConsent,Me gustaría recibir correos electrónicos de Roblox sobre noticias y ofertas.
 Authentication.SignUp.Description.Or,
 Authentication.SignUp.Description.ParentEmailDisclaimer,"Te pedimos el correo electrónico de tu padre o madre con el fin de recuperar la cuenta, de conformidad con la Política de privacidad de Roblox."
 Authentication.SignUp.Description.PasskeyTryAgain,"Lo sentimos, algo salió mal al registrar tu llave de acceso. Intenta registrarte de nuevo con un nombre de usuario diferente."
@@ -822,9 +823,13 @@ Common.UGCValidation.ErrorLabel.UnallowedJointSkinned,"La parte del cuerpo {part
 Common.VerifiedParentalConsent.Action.Cancel,
 Common.VerifiedParentalConsent.Action.Close,
 Common.VerifiedParentalConsent.Action.GoToSettings,Ir a Configuración
+Common.VerifiedParentalConsent.Description.EnablePurchasesInSettings,"Para realizar esta compra, primero activa las compras en Configuración > Gasto."
+Common.VerifiedParentalConsent.Description.ExistingPendingRequestRedirectToSettings,Ya tienes una solicitud pendiente de compra. Puede cancelarla en Configuración > Gasto.
 Common.VerifiedParentalConsent.Description.SpendingRestrictionWithSettings,"Debido a las restricciones regionales, necesitas permiso parental para realizar una compra. Pide permiso a tus padres en Configuración > Gasto."
 Common.VerifiedParentalConsent.Description.SpendingRestrictionWithoutSettings,"Debido a las restricciones regionales, necesitas permiso parental para realizar una compra. Visita la web o un dispositivo complementario para pedir permiso a tus padres en Configuración > Gasto."
 Common.VerifiedParentalConsent.Label.AskParent,
+Common.VerifiedParentalConsent.Label.RequestPending,Solicitud pendiente
+Common.VerifiedParentalConsent.Label.UpdateYourSettings,Actualiza la configuración
 Common.VisitGame.Label.Play,Unirse
 CommonUI.Controls.Action.Accept,
 CommonUI.Controls.Action.Apply,Aplicar
@@ -832,6 +837,7 @@ CommonUI.Controls.Action.Back,Volver
 CommonUI.Controls.Action.Cancel,
 CommonUI.Controls.Action.CloseRoblox,Cerrar Roblox
 CommonUI.Controls.Action.Confirm,
+CommonUI.Controls.Action.Continue,
 CommonUI.Controls.Action.Done,
 CommonUI.Controls.Action.Next,
 CommonUI.Controls.Action.OK,
@@ -1830,8 +1836,11 @@ Feature.Avatar.Heading.SharePublicAvatar,Comparte tu avatar
 Feature.Avatar.Heading.SortBy,Ordenar por
 Feature.Avatar.Heading.UsedName,Nombre utilizado
 Feature.Avatar.Heading.WearConfirmation,Poner objeto
+Feature.Avatar.HeroWidget.BundleHeadlessTitle,Última oportunidad para obtener al Jinete sin Cabeza
 Feature.Avatar.HeroWidget.BundleTitle,Korblox Pactbreaker
 Feature.Avatar.HeroWidget.CapsuleDescription,Tres nuevas versiones de los originales de Roblox
+Feature.Avatar.HeroWidget.CapsuleHalloweenDescription,Nuevos artículos solo para la temporada espeluznante
+Feature.Avatar.HeroWidget.CapsuleHalloweenTitle,Creado para Halloween
 Feature.Avatar.HeroWidget.CapsulePoolDescription,Tres objetos nuevos para causar sensación
 Feature.Avatar.HeroWidget.CapsulePoolTitle,Fiesta en la alberca
 Feature.Avatar.HeroWidget.CapsuleTitle,Clásicos reinventados
@@ -2428,6 +2437,8 @@ Feature.Build.Description.GameConfiguration,Cambia la forma en que vendes objeto
 Feature.Build.Description.GameCreationDone,Terminé de crear y publicar tu juego. Puedes abrirlo para la prueba de juego.
 Feature.Build.Description.GameSavedPlaytest,Terminé de crear tu juego y guardé una nueva versión. Puedes abrirlo para realizar la prueba de juego.
 Feature.Build.Description.HubSettings,Gestiona toda la configuración en el Centro de creación
+Feature.Build.Description.InternalSpec,Déjalo en blanco para la especificación más reciente
+Feature.Build.Description.InternalTesting,Prueba las especificaciones del nuevo modelo
 Feature.Build.Description.InviteFriendLimit,Invita hasta {MAX_INVITES} amistades a jugar mientras creas.
 Feature.Build.Description.LongAdCampaign,Más tiempo para llegar a nuevos jugadores y hacer que regresen.
 Feature.Build.Description.MakeAudienceAvail,Publica tu experiencia para que esté disponible para este público.
@@ -2522,6 +2533,7 @@ Feature.Build.Label.FreeBuildUsage,Uso gratuito de la compilación
 Feature.Build.Label.Friends,
 Feature.Build.Label.FriendsOnly,Solo amigos
 Feature.Build.Label.GamePlays,Reproducciones del juego
+Feature.Build.Label.GamesTab,
 Feature.Build.Label.GetMoreBuildUsage,Obtener más uso de la compilación
 Feature.Build.Label.GroupGames,Juegos de grupo
 Feature.Build.Label.Groups,Grupos
@@ -2530,6 +2542,8 @@ Feature.Build.Label.IconThumbnails,Ícono y miniaturas
 Feature.Build.Label.Images2D,Imágenes 2D
 Feature.Build.Label.InProgress,En curso
 Feature.Build.Label.InputNeeded,Se necesita una entrada
+Feature.Build.Label.InternalSpec,Especificación interna
+Feature.Build.Label.InternalTesting,Pruebas internas
 Feature.Build.Label.InviteCount,{COUNT}/{MAX_INVITES}
 Feature.Build.Label.Limited,Limitado
 Feature.Build.Label.Live,Publicada
@@ -2550,6 +2564,7 @@ Feature.Build.Label.OnSale,En venta
 Feature.Build.Label.Pending,Pendiente
 Feature.Build.Label.PercentUsed,Se usó {PERCENT}%
 Feature.Build.Label.PlayTime,Tiempo de juego
+Feature.Build.Label.PreviewsTab,Previsualizaciones
 Feature.Build.Label.PreviouslyPublished,Publicado anteriormente
 Feature.Build.Label.Price,Precio
 Feature.Build.Label.PriceUnavailable,--
@@ -2760,6 +2775,7 @@ Feature.Build.Notification.Title.Finished,Compilación finalizada
 Feature.Build.Notification.Title.NeedInput,La compilación necesita tu participación
 Feature.Build.Placeholder.DescribeProduct,Describe lo que quieres vender
 Feature.Build.Placeholder.DescribeProductUpdate,Describe una actualización
+Feature.Build.Placeholder.InternalSpec,internal_code
 Feature.Build.Prompt.CreateDeveloperProduct,"Ayúdame a crear un producto de desarrollador, integrarlo en el juego, verificar y publicar los cambios y ponerlo a la venta."
 Feature.Build.Title.AdActive,La campaña de anuncios está activa
 Feature.Build.Title.AdCampaignDuration,Campaña publicitaria de {durationDays} días
@@ -2818,6 +2834,9 @@ Feature.Build.Title.VersionNumber,Versión {VERSION}
 Feature.Build.Title.Versions,Versiones
 Feature.Build.Title.WhatsIncluded,¿Qué incluye?
 Feature.BuyRobux.Heading.Banner,Comprar Robux
+Feature.BuyRobux.Label.MyFriendsWithCount,Mis amistades ({count})
+Feature.BuyRobux.Label.PeopleWithCount,Personas ({count})
+Feature.BuyRobux.Label.Search,
 Feature.Call.Error.Description.Generic,
 Feature.Catalog.Action.Buy,
 Feature.Catalog.Action.Cancel,
@@ -2861,6 +2880,7 @@ Feature.Catalog.AvatarWidgetTitle,
 Feature.Catalog.Checkout.Title.PurchasedFailedPlural,{count} objetos no se pudieron comprar
 Feature.Catalog.Checkout.WearAfterPurchase,
 Feature.Catalog.Description.AttributionAlertBody,Saldrás de esta área y te unirás a {experienceName}.
+Feature.Catalog.Feature.Catalog.Label.AvatarBackgrounds,
 Feature.Catalog.Feature.Catalog.Label.ClassicShirt,
 Feature.Catalog.Feature.Catalog.Label.ClassicTShirt,
 Feature.Catalog.Feature.Catalog.Label.TotalItems,Total: {itemCount} objetos
@@ -3566,7 +3586,7 @@ Feature.Friends.Action.GetStarted,Primeros pasos
 Feature.Friends.Action.GoToAddFriends,Ir a Añadir amigos
 Feature.Friends.Action.InviteFriends,Invita a contactos a hacer amistad en Roblox.
 Feature.Friends.Action.InviteProviderFriends,Invitar a amigos de {provider}
-Feature.Friends.Action.PendingRequest,Solicitud pendiente
+Feature.Friends.Action.PendingRequest,
 Feature.Friends.Action.ShareQR,Compartir código QR
 Feature.Friends.Action.ShowMore,
 Feature.Friends.Action.Unblock,
@@ -4275,6 +4295,7 @@ Feature.Moments.Title.LeaveMomentCreation,¿Salir de la creación de Momento?
 Feature.Moments.Title.MomentRemoved,
 Feature.Moments.Title.PostInsights,Título del encabezado de la página
 Feature.Moments.Title.ReportPost,Reportar publicación
+Feature.Moments.Tooltip.PostInsightsBody,"Consulta las visualizaciones, el tiempo de visualización y cómo le fue al Momento con tu audiencia."
 Feature.Moments.Tooltip.PostInsightsTitle,Aquí está la información de tu Momento
 Feature.Moments.Tooltip.ShareFirstMomentBody,Crea un Momento a partir de tus capturas
 Feature.Moments.Tooltip.ShareFirstMomentTitle,Comparte tu primer Momento
@@ -4769,6 +4790,14 @@ Feature.PlayerSearchResults.Label.ThisIsYou,Este eres tú
 Feature.PlayerSearchResults.Label.You,Tú
 Feature.PlayerSearchResults.Label.YouAreFollowing,Lo sigues
 Feature.PlayerSearchResults.Label.YouAreFriends,Son amigos
+Feature.Premium.Description.ScaryModalBody13To17,"Acepto que soy el padre, la madre o tutor legal del propietario de la cuenta. Autorizo esta compra y acepto los Términos de Uso."
+Feature.Premium.Description.ScaryModalBodyNew,"Esta compra requiere el intercambio de moneda real.{lineBreak}Certifico que soy mayor de 18 años y que soy el padre, la madre o tutor del propietario de la cuenta. Autorizo esta compra y acepto los Términos de uso."
+Feature.Premium.Description.ScaryModalThreshold1Body,"Ya has gastado mucho dinero en Roblox este mes. ¿Quieres continuar? {linebreak}Esta compra requiere el intercambio de moneda real. Debe ser el padre, la madre o tutor del propietario quien autorice la transacción."
+Feature.Premium.Description.ScaryModalThreshold2Body,Ya has gastado mucho dinero en Roblox este mes. {linebreak}Los recibos de esta compra y de todas las compras sucesivas se enviarán al correo electrónico de uno de los padres que se verificó para esta cuenta. 
+Feature.Premium.Heading.GeneralError,
+Feature.Premium.Heading.ScaryModalTitle,
+Feature.Premium.Message.PleaseTryAgain,Intenta de nuevo.
+Feature.Premium.Message.SomethingWentWrong,
 Feature.PrivateServers.Action.CreatePrivateServer,
 Feature.PrivateServers.Action.FreeWithBlackbird,Gratis con Plus
 Feature.PrivateServers.Description.PrivateServerPurchaseUnavailableInStudio,Las compras de servidores privados no son compatibles en Studio.
@@ -5496,6 +5525,9 @@ Feature.VerificationUpsell.Response.ErrorTryAgain,
 Feature.VerificationUpsell.Response.InvalidPhoneNumberError,Este número de teléfono no se puede usar. Ingresa un número de teléfono diferente.
 Feature.VerificationUpsell.Response.PhoneHasTooManyAssociatedAccounts,Alcanzaste el número máximo de cuentas vinculadas a un número de teléfono.
 Feature.VerificationUpsell.Response.TooManyAttemptsTryAgainLater,Demasiados intentos. Prueba de nuevo más tarde.
+Feature.VerifiedParentalControls.Description.ParentalApprovalConfirmation,"Soy el padre, madre o tutor legal y apruebo esta compra de conformidad con los {termsLinkStart}Términos de uso{termsLinkEnd}."
+Feature.VerifiedParentalControls.Description.ParentalApprovalRequired,"Esto cuesta dinero real. Un padre, madre o tutor legal debe aprobar esta compra. Los padres, madres y tutores pueden {learnLinkStart}obtener más información{learnLinkEnd} sobre cómo administrar el gasto de sus hijos."
+Feature.VerifiedParentalControls.Label.AskParentFirst,"Pide permiso a un padre, madre o tutor primero"
 Feature.VirtualEvents.AttendanceBeforeEvent,Personas interesadas
 Feature.VirtualEvents.AttendanceDuringEvent,Asistiendo ahora
 Feature.VirtualEvents.DescriptionLabel,

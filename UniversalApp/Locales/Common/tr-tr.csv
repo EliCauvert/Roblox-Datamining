@@ -475,6 +475,7 @@ Authentication.SignUp.Description.EnterParentEmail,Bir doğrulama kodu almak iç
 Authentication.SignUp.Description.FaceIdPromo,"Face ID, Roblox'a giriş yapmanın en güvenli ve en kolay yoludur."
 Authentication.SignUp.Description.GenderHelp2,"Bu, senin için uygun bir avatar seçmemize yardımcı olur."
 Authentication.SignUp.Description.OneMoreStep,Bir adım daha
+Authentication.SignUp.Description.OptInMarketingEmailConsent,Roblox'tan haber ve teklifler içeren e-posta almak istiyorum.
 Authentication.SignUp.Description.Or,
 Authentication.SignUp.Description.ParentEmailDisclaimer,Gerektiğinde hesap kurtarmak için kullanılmak üzere ebeveyninin e-posta adresini istiyoruz. Roblox Gizlilik Politikası'na tabidir.
 Authentication.SignUp.Description.PasskeyTryAgain,"Üzgünüz, geçiş anahtarın kaydedilirken bir şeyler yanlış gitti. Lütfen farklı bir kullanıcı adı ile tekrar kaydolmayı dene."
@@ -821,9 +822,13 @@ Common.UGCValidation.ErrorLabel.UnallowedJointSkinned,"{partName} vücut parças
 Common.VerifiedParentalConsent.Action.Cancel,İptal
 Common.VerifiedParentalConsent.Action.Close,
 Common.VerifiedParentalConsent.Action.GoToSettings,Ayarlara git
+Common.VerifiedParentalConsent.Description.EnablePurchasesInSettings,Bu satın alımı gerçekleştirebilmek için önce Ayarlar > Harcama bölümünde satın alımları etkinleştir.
+Common.VerifiedParentalConsent.Description.ExistingPendingRequestRedirectToSettings,Zaten bekleyen bir talebin var. Bu talebi Ayarlar > Harcama bölümünde iptal edebilirsin.
 Common.VerifiedParentalConsent.Description.SpendingRestrictionWithSettings,Satın alım işlemi gerçekleştirmek için bölgesel kısıtlamalar nedeniyle ebeveyn iznine ihtiyacın var. Ayarlar > Harcama bölümünde ebeveyninden izin iste.
 Common.VerifiedParentalConsent.Description.SpendingRestrictionWithoutSettings,Satın alım işlemi gerçekleştirmek için bölgesel kısıtlamalar nedeniyle ebeveyn iznine ihtiyacın var. Ayarlar > Harcama bölümünde ebeveyninden izin istemek için lütfen web'i ziyaret et veya yardımcı bir cihaz kullan.
 Common.VerifiedParentalConsent.Label.AskParent,Ebeveynine Sor
+Common.VerifiedParentalConsent.Label.RequestPending,Talep beklemede
+Common.VerifiedParentalConsent.Label.UpdateYourSettings,Ayarlarını Güncelle
 Common.VisitGame.Label.Play,Katıl
 CommonUI.Controls.Action.Accept,
 CommonUI.Controls.Action.Apply,Uygula
@@ -831,6 +836,7 @@ CommonUI.Controls.Action.Back,Geri
 CommonUI.Controls.Action.Cancel,
 CommonUI.Controls.Action.CloseRoblox,Roblox'u Kapat
 CommonUI.Controls.Action.Confirm,
+CommonUI.Controls.Action.Continue,
 CommonUI.Controls.Action.Done,
 CommonUI.Controls.Action.Next,
 CommonUI.Controls.Action.OK,
@@ -1785,8 +1791,11 @@ Feature.Avatar.Heading.SharePublicAvatar,Avatarını paylaş
 Feature.Avatar.Heading.SortBy,Sıralama ölçütü
 Feature.Avatar.Heading.UsedName,Ad Kullanılmış
 Feature.Avatar.Heading.WearConfirmation,Öğeyi Giy
+Feature.Avatar.HeroWidget.BundleHeadlessTitle,Kellesiz Süvari için son şans
 Feature.Avatar.HeroWidget.BundleTitle,Korblox Pactbreaker
 Feature.Avatar.HeroWidget.CapsuleDescription,Roblox orijinallerinin üç yeni yorumu
+Feature.Avatar.HeroWidget.CapsuleHalloweenDescription,Sadece ürkütücü sezona özel yeni öğeler
+Feature.Avatar.HeroWidget.CapsuleHalloweenTitle,Cadılar Bayramı için hazırlandı
 Feature.Avatar.HeroWidget.CapsulePoolDescription,İlgi uyandıracak üç yeni öğe
 Feature.Avatar.HeroWidget.CapsulePoolTitle,Havuz Partisi
 Feature.Avatar.HeroWidget.CapsuleTitle,Yeniden Tasarlanmış Klasikler
@@ -2383,6 +2392,8 @@ Feature.Build.Description.GameConfiguration,Öğeleri satma ve oyununu tanıtma 
 Feature.Build.Description.GameCreationDone,Oyununun oluşturulmasını ve yayınlanmasını tamamladım. Oynanış testini yapmak için açabilirsin.
 Feature.Build.Description.GameSavedPlaytest,Oyununun oluşturulmasını tamamladım ve yeni bir versiyon kaydettim. Oynanış testini yapmak için açabilirsin.
 Feature.Build.Description.HubSettings,Yaratıcı Merkezi'nde tüm ayarları yönet
+Feature.Build.Description.InternalSpec,En son özellikler için boş bırak
+Feature.Build.Description.InternalTesting,Yeni model özelliklerini dene
 Feature.Build.Description.InviteFriendLimit,Sen bir şeyler oluştururken en fazla {MAX_INVITES} arkadaşını oynamaya davet et.
 Feature.Build.Description.LongAdCampaign,Yeni oyunculara ulaşmak ve onları tekrar tekrar oynamaya teşvik etmek için daha fazla zaman.
 Feature.Build.Description.MakeAudienceAvail,Bu kitleye sunmak için deneyimini yayınla.
@@ -2477,6 +2488,7 @@ Feature.Build.Label.FreeBuildUsage,Ücretsiz İnşa Et kullanım hakkı
 Feature.Build.Label.Friends,
 Feature.Build.Label.FriendsOnly,Yalnızca arkadaşlar
 Feature.Build.Label.GamePlays,Oyun oynama sayısı
+Feature.Build.Label.GamesTab,
 Feature.Build.Label.GetMoreBuildUsage,Daha fazla İnşa Et kullanım hakkı al
 Feature.Build.Label.GroupGames,Grup oyunları
 Feature.Build.Label.Groups,Gruplar
@@ -2485,6 +2497,8 @@ Feature.Build.Label.IconThumbnails,Simge ve küçük resimler
 Feature.Build.Label.Images2D,2 Boyutlu Görseller
 Feature.Build.Label.InProgress,Devam ediyor
 Feature.Build.Label.InputNeeded,Giriş gerekli
+Feature.Build.Label.InternalSpec,Dâhilî Özellikler
+Feature.Build.Label.InternalTesting,Dâhilî Testler
 Feature.Build.Label.InviteCount,{COUNT}/{MAX_INVITES}
 Feature.Build.Label.Limited,Sınırlı
 Feature.Build.Label.Live,Yayınlandı
@@ -2505,6 +2519,7 @@ Feature.Build.Label.OnSale,Satılık
 Feature.Build.Label.Pending,Beklemede
 Feature.Build.Label.PercentUsed,Yüzde {PERCENT} kullanıldı
 Feature.Build.Label.PlayTime,Oynama süresi
+Feature.Build.Label.PreviewsTab,Ön İzlemeler
 Feature.Build.Label.PreviouslyPublished,Daha önce yayınlanan
 Feature.Build.Label.Price,Fiyat
 Feature.Build.Label.PriceUnavailable,--
@@ -2715,6 +2730,7 @@ Feature.Build.Notification.Title.Finished,İnşa Et tamamlandı
 Feature.Build.Notification.Title.NeedInput,İnşa Et için girdin gerekiyor
 Feature.Build.Placeholder.DescribeProduct,Satmak istediğin şeyi açıkla
 Feature.Build.Placeholder.DescribeProductUpdate,Güncellemeyi tarif et
+Feature.Build.Placeholder.InternalSpec,internal_code
 Feature.Build.Prompt.CreateDeveloperProduct,"Bir geliştirici ürünü oluşturmak, oyuna bağlamak, değişiklikleri doğrulayıp yayınlamak ve satın alınabilir hâle getirmek konusunda bana yardımcı ol."
 Feature.Build.Title.AdActive,Reklam kampanyası aktif
 Feature.Build.Title.AdCampaignDuration,{durationDays} günlük reklam kampanyası
@@ -2773,6 +2789,9 @@ Feature.Build.Title.VersionNumber,Sürüm {VERSION}
 Feature.Build.Title.Versions,Versiyonlar
 Feature.Build.Title.WhatsIncluded,Neler dâhil?
 Feature.BuyRobux.Heading.Banner,
+Feature.BuyRobux.Label.MyFriendsWithCount,Arkadaşlarım ({count})
+Feature.BuyRobux.Label.PeopleWithCount,İnsanlar ({count})
+Feature.BuyRobux.Label.Search,
 Feature.Call.Error.Description.Generic,
 Feature.Catalog.Action.Buy,
 Feature.Catalog.Action.Cancel,
@@ -2816,6 +2835,7 @@ Feature.Catalog.AvatarWidgetTitle,Tarzları keşfet
 Feature.Catalog.Checkout.Title.PurchasedFailedPlural,{count} öğe satın alınamadı
 Feature.Catalog.Checkout.WearAfterPurchase,
 Feature.Catalog.Description.AttributionAlertBody,Bu bölgeden ayrılacak ve {experienceName} deneyimine katılacaksın.
+Feature.Catalog.Feature.Catalog.Label.AvatarBackgrounds,
 Feature.Catalog.Feature.Catalog.Label.ClassicShirt,Klasik Gömlek
 Feature.Catalog.Feature.Catalog.Label.ClassicTShirt,Klasik Tişört
 Feature.Catalog.Feature.Catalog.Label.TotalItems,Toplam: {itemCount} öğe
@@ -4230,6 +4250,7 @@ Feature.Moments.Title.LeaveMomentCreation,An yaratmadan çıkılsın mı?
 Feature.Moments.Title.MomentRemoved,An kaldırıldı
 Feature.Moments.Title.PostInsights,Sayfa başlığı
 Feature.Moments.Title.ReportPost,Paylaşımı raporla
+Feature.Moments.Tooltip.PostInsightsBody,"Görüntüleme sayılarını, izleme süresini ve An'ın kitlen tarafından nasıl karşılandığını kontrol et."
 Feature.Moments.Tooltip.PostInsightsTitle,An analizlerin burada
 Feature.Moments.Tooltip.ShareFirstMomentBody,Yakaladığın görüntülerden bir An oluştur
 Feature.Moments.Tooltip.ShareFirstMomentTitle,İlk Anını paylaş
@@ -4724,6 +4745,14 @@ Feature.PlayerSearchResults.Label.ThisIsYou,Bu sensin
 Feature.PlayerSearchResults.Label.You,Sen
 Feature.PlayerSearchResults.Label.YouAreFollowing,Takip ediyorsun
 Feature.PlayerSearchResults.Label.YouAreFriends,Arkadaşsınız
+Feature.Premium.Description.ScaryModalBody13To17,Hesap sahibinin ebeveyni veya yasal vasisi olduğumu kabul ediyorum. Bu satın alım işlemine izin veriyorum ve Kullanım Koşullarını kabul ediyorum.
+Feature.Premium.Description.ScaryModalBodyNew,"Bu satın alım işlemi, gerçek para ile gerçekleşir.{lineBreak}En az 18 yaşında olduğumu ve hesap sahibinin ebeveyni veya yasal vasisi olduğumu kabul ediyorum. Bu satın alım işlemine izin veriyorum ve Kullanım Koşulları'nı kabul ediyorum."
+Feature.Premium.Description.ScaryModalThreshold1Body,"Bu ay Roblox'ta çok para harcadın. Devam etmek istiyor musun?{linebreak}Bu satın alım işlemi, gerçek para ile gerçekleşir. Bu satın alım işlemine izin vermek için hesap sahibinin ebeveyni veya yasal vasisi olman gerekir."
+Feature.Premium.Description.ScaryModalThreshold2Body,"Bu ay Roblox'ta çok para harcadın.{linebreak}Bu ve sonraki tüm satın alım işlemlerinin makbuzları, bu hesaptaki doğrulanmış ebeveyn e-posta adresine gönderilecektir. "
+Feature.Premium.Heading.GeneralError,
+Feature.Premium.Heading.ScaryModalTitle,
+Feature.Premium.Message.PleaseTryAgain,Lütfen tekrar dene.
+Feature.Premium.Message.SomethingWentWrong,
 Feature.PrivateServers.Action.CreatePrivateServer,
 Feature.PrivateServers.Action.FreeWithBlackbird,Plus ile ücretsiz
 Feature.PrivateServers.Description.PrivateServerPurchaseUnavailableInStudio,Özel sunucu satın alma işlemleri Studio'da desteklenmiyor.
@@ -5451,6 +5480,9 @@ Feature.VerificationUpsell.Response.ErrorTryAgain,
 Feature.VerificationUpsell.Response.InvalidPhoneNumberError,Bu telefon numarası kullanılamıyor. Lütfen farklı bir telefon numarası gir.
 Feature.VerificationUpsell.Response.PhoneHasTooManyAssociatedAccounts,Bir telefon numarasına bağlı maksimum hesap sayısına ulaştın.
 Feature.VerificationUpsell.Response.TooManyAttemptsTryAgainLater,
+Feature.VerifiedParentalControls.Description.ParentalApprovalConfirmation,Ebeveyn veya yasal vasiyim ve {termsLinkStart}Kullanım Koşulları{termsLinkEnd} uyarınca bu satın alım işlemine izin veriyorum.
+Feature.VerifiedParentalControls.Description.ParentalApprovalRequired,"Bu işlem için gerçek para ödenir. Bir ebeveynin veya yasal vasinin bu satın alım işlemini onaylaması gerekir. Ebeveynler, çocuklarının harcamalarını yönetme hakkında {learnLinkStart}daha fazla bilgi edinebilir{learnLinkEnd}."
+Feature.VerifiedParentalControls.Label.AskParentFirst,Önce bir ebeveyne sor
 Feature.VirtualEvents.AttendanceBeforeEvent,
 Feature.VirtualEvents.AttendanceDuringEvent,Şu Anda Katılan
 Feature.VirtualEvents.DescriptionLabel,
@@ -5680,7 +5712,7 @@ IAPExperience.SubscriptionPurchasePrompt.Label.GetSubscription,Abonelik al
 IAPExperience.SubscriptionPurchasePrompt.Label.TestFlowDisclaimer,"Bu iletişim kutusu, aboneliğinin açıklamasının senin kullanıcıların tarafından nasıl görüleceğini gösteren bir ön izlemedir. Abone Ol düğmesine tıklarsan senden ücret alınmaz."
 IAPExperience.U13Confirm.Action.Cancel,
 IAPExperience.U13Confirm.Action.Confirm,
-IAPExperience.U13Confirm.Text.ParentalConsentWarningPaymentModal13To17,Hesap sahibinin ebeveyni veya yasal vasisi olduğumu kabul ediyorum. Bu satın alım işlemine izin veriyorum ve Kullanım Koşullarını kabul ediyorum.
+IAPExperience.U13Confirm.Text.ParentalConsentWarningPaymentModal13To17,
 IAPExperience.U13Confirm.Text.U13MonthlyThreshold1Modal,
 IAPExperience.U13Confirm.Text.U13MonthlyThreshold2Modal,
 IAPExperience.U13Confirm.Text.U13PaymentModal,"Bu satın alım işlemi, gerçek para ile gerçekleşir. En az 18 yaşında olduğumu ve hesap sahibinin ebeveyni veya yasal vasisi olduğumu kabul ediyorum. Bu satın alım işlemine izin veriyorum ve Kullanım Koşullarını kabul ediyorum."

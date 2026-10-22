@@ -458,6 +458,7 @@ Authentication.SignUp.Description.EnterParentEmail,"वेरिफ़िके�
 Authentication.SignUp.Description.FaceIdPromo,"फ़ेस ID, Roblox पर साइन-इन करने का सबसे सुरक्षित और आसान तरीका है."
 Authentication.SignUp.Description.GenderHelp2,"इससे, आप अपना अवतार चुन पाते हैं."
 Authentication.SignUp.Description.OneMoreStep,एक और स्टेप
+Authentication.SignUp.Description.OptInMarketingEmailConsent,मुझे Roblox से न्यूज़ और ऑफ़र के बारे में ईमेल चाहिए.
 Authentication.SignUp.Description.Or,
 Authentication.SignUp.Description.ParentEmailDisclaimer,हम अकाउंट रिकवरी के लिए आपके पेरेंट का ईमेल माँगते हैं. ऐसा Roblox की प्राइवेसी पॉलिसी के मुताबिक किया जाता है.
 Authentication.SignUp.Description.PasskeyTryAgain,"माफ़ करें, आपकी पास-की को रजिस्टर करने में कोई गड़बड़ी हुई है. किसी दूसरे यूज़रनेम के साथ फिर से साइन अप करें."
@@ -803,9 +804,13 @@ Common.UGCValidation.ErrorLabel.UnallowedJointSkinned,"बॉडीपार्�
 Common.VerifiedParentalConsent.Action.Cancel,
 Common.VerifiedParentalConsent.Action.Close,
 Common.VerifiedParentalConsent.Action.GoToSettings,सेटिंग्स पर जाएँ
+Common.VerifiedParentalConsent.Description.EnablePurchasesInSettings,"यह खरीदारी के लिए, पहले सेटिंग्स > खर्च में खरीदारी चालू करें."
+Common.VerifiedParentalConsent.Description.ExistingPendingRequestRedirectToSettings,आपके पास खरीदारी के लिए पहले से ही एक पेंडिंग रिक्वेस्ट है. सेटिंग > खर्च में जाकर इस अनुरोध को कैंसिल किया जा सकता है.
 Common.VerifiedParentalConsent.Description.SpendingRestrictionWithSettings,"क्षेत्रीय प्रतिबंधों के कारण, आपको खरीदारी करने के लिए पेरेंट की परमिशन चाहिए. सेटिंग्स > खर्च में जाकर अपने पेरेंट से परमिशन मांगें."
 Common.VerifiedParentalConsent.Description.SpendingRestrictionWithoutSettings,"क्षेत्रीय प्रतिबंधों के कारण, आपको खरीदारी के लिए पेरेंट की परमिशन चाहिए. सेटिंग्स > खर्च में जाकर अपने पेरेंट से परमिशन मांगने के लिए वेब या किसी कंपैनियन डिवाइस विज़िट करें."
 Common.VerifiedParentalConsent.Label.AskParent,
+Common.VerifiedParentalConsent.Label.RequestPending,रिक्वेस्ट पेंडिंग है
+Common.VerifiedParentalConsent.Label.UpdateYourSettings,सेटिंग अपडेट करें
 Common.VisitGame.Label.Play,शामिल हों
 CommonUI.Controls.Action.Accept,मंज़ूर करें
 CommonUI.Controls.Action.Apply,लागू करें
@@ -813,6 +818,7 @@ CommonUI.Controls.Action.Back,
 CommonUI.Controls.Action.Cancel,
 CommonUI.Controls.Action.CloseRoblox,Roblox बंद करें
 CommonUI.Controls.Action.Confirm,कंफ़र्म करें
+CommonUI.Controls.Action.Continue,
 CommonUI.Controls.Action.Done,
 CommonUI.Controls.Action.Next,
 CommonUI.Controls.Action.OK,
@@ -1809,8 +1815,11 @@ Feature.Avatar.Heading.SharePublicAvatar,अपना अवतार शेय�
 Feature.Avatar.Heading.SortBy,इस आधार पर क्रम से लगाएँ
 Feature.Avatar.Heading.UsedName,इस्तेमाल हो चुका नाम
 Feature.Avatar.Heading.WearConfirmation,आइटम पहनें
+Feature.Avatar.HeroWidget.BundleHeadlessTitle,हेडलेस हॉर्समैन पाने का आखिरी मौका
 Feature.Avatar.HeroWidget.BundleTitle,Korblox Pactbreaker
 Feature.Avatar.HeroWidget.CapsuleDescription,Roblox ओरिजनल्स पर तीन नए नज़रिए
+Feature.Avatar.HeroWidget.CapsuleHalloweenDescription,सिर्फ़ डरावने सीज़न के लिए नए आइटम
+Feature.Avatar.HeroWidget.CapsuleHalloweenTitle,हैलोवीन के लिए बनाया गया
 Feature.Avatar.HeroWidget.CapsulePoolDescription,धूम मचाने वाले तीन नए आइटम
 Feature.Avatar.HeroWidget.CapsulePoolTitle,पूल पार्टी
 Feature.Avatar.HeroWidget.CapsuleTitle,"क्लासिक्स, नए अंदाज़ में"
@@ -2407,6 +2416,8 @@ Feature.Build.Description.GameConfiguration,अपने आइटम बेच�
 Feature.Build.Description.GameCreationDone,मैंने आपका गेम बनाने और पब्लिश करने का काम पूरा कर लिया है. इसे प्ले-टेस्ट करने के लिए खोला जा सकता है.
 Feature.Build.Description.GameSavedPlaytest,मैंने आपका गेम बनाने का काम पूरा कर लिया है और एक नया वर्ज़न सेव कर लिया है. इसे प्लेटेस्ट करने के लिए खोला जा सकता है.
 Feature.Build.Description.HubSettings,Creator Hub पर सभी सेटिंग्स मैनेज करें
+Feature.Build.Description.InternalSpec,सबसे नए स्पेसिफ़िकेशन के लिए खाली छोड़ें
+Feature.Build.Description.InternalTesting,नए मॉडल के स्पेसिफ़िकेशन आज़माएँ
 Feature.Build.Description.InviteFriendLimit,"क्रिएट करने के दौरान, ज़्यादा-से-ज़्यादा {MAX_INVITES} फ़्रेंड्स को खेलने के लिए इनवाइट करें."
 Feature.Build.Description.LongAdCampaign,नए प्लेयर्स तक पहुँचने और उन्हें बार-बार वापस लाने के लिए ज़्यादा समय.
 Feature.Build.Description.MakeAudienceAvail,"अपने एक्सपीरिएंस को इस ऑडियंस के लिए उपलब्ध कराने के लिए, उसे पब्लिश करें."
@@ -2501,6 +2512,7 @@ Feature.Build.Label.FreeBuildUsage,मुफ़्त बिल्ड का इ
 Feature.Build.Label.Friends,
 Feature.Build.Label.FriendsOnly,सिर्फ़ फ़्रेंड्स के लिए
 Feature.Build.Label.GamePlays,गेम प्ले
+Feature.Build.Label.GamesTab,
 Feature.Build.Label.GetMoreBuildUsage,बिल्ड का और इस्तेमाल पाएँ
 Feature.Build.Label.GroupGames,ग्रुप गेम्स
 Feature.Build.Label.Groups,
@@ -2509,6 +2521,8 @@ Feature.Build.Label.IconThumbnails,आइकॉन और थंबनेल
 Feature.Build.Label.Images2D,2D इमेज
 Feature.Build.Label.InProgress,जारी है
 Feature.Build.Label.InputNeeded,इनपुट चाहिए
+Feature.Build.Label.InternalSpec,इंटरनल स्पेसिफ़िकेशन
+Feature.Build.Label.InternalTesting,इंटरनल टेस्टिंग
 Feature.Build.Label.InviteCount,{COUNT}/{MAX_INVITES}
 Feature.Build.Label.Limited,सीमित
 Feature.Build.Label.Live,पब्लिश किया गया
@@ -2529,6 +2543,7 @@ Feature.Build.Label.OnSale,बिक्री के लिए उपलब्�
 Feature.Build.Label.Pending,पेंडिंग
 Feature.Build.Label.PercentUsed,{PERCENT}% इस्तेमाल किया गया
 Feature.Build.Label.PlayTime,खेलने में बीता समय
+Feature.Build.Label.PreviewsTab,
 Feature.Build.Label.PreviouslyPublished,पहले पब्लिश किया गया
 Feature.Build.Label.Price,कीमत
 Feature.Build.Label.PriceUnavailable,--
@@ -2739,6 +2754,7 @@ Feature.Build.Notification.Title.Finished,बिल्ड पूरा हुआ
 Feature.Build.Notification.Title.NeedInput,बिल्ड के लिए आपके इनपुट की ज़रूरत है
 Feature.Build.Placeholder.DescribeProduct,बताएँ कि आपको क्या बेचना है
 Feature.Build.Placeholder.DescribeProductUpdate,कोई अपडेट बताएँ
+Feature.Build.Placeholder.InternalSpec,internal_code
 Feature.Build.Prompt.CreateDeveloperProduct,"डेवलपर प्रॉडक्ट बनाने, उसे गेम में जोड़ने, बदलावों को वेरिफ़ाई करके पब्लिश करने और उसे खरीदारी के लिए उपलब्ध कराने में मेरी मदद करें."
 Feature.Build.Title.AdActive,ऐड कैंपेन ऐक्टिव है
 Feature.Build.Title.AdCampaignDuration,{durationDays}-दिन का ऐड कैंपेन
@@ -2797,6 +2813,9 @@ Feature.Build.Title.VersionNumber,वर्ज़न {VERSION}
 Feature.Build.Title.Versions,
 Feature.Build.Title.WhatsIncluded,क्या-क्या शामिल है?
 Feature.BuyRobux.Heading.Banner,
+Feature.BuyRobux.Label.MyFriendsWithCount,मेरे फ़्रेंड्स ({count})
+Feature.BuyRobux.Label.PeopleWithCount,लोग ({count})
+Feature.BuyRobux.Label.Search,
 Feature.Call.Error.Description.Generic,
 Feature.Catalog.Action.Buy,
 Feature.Catalog.Action.Cancel,
@@ -2840,6 +2859,7 @@ Feature.Catalog.AvatarWidgetTitle,
 Feature.Catalog.Checkout.Title.PurchasedFailedPlural,{count} आइटम खरीदे नहीं जा सके
 Feature.Catalog.Checkout.WearAfterPurchase,
 Feature.Catalog.Description.AttributionAlertBody,आप इस एरिया को छोड़कर {experienceName} जॉइन कर लेंगे.
+Feature.Catalog.Feature.Catalog.Label.AvatarBackgrounds,बैकग्राउंड्स
 Feature.Catalog.Feature.Catalog.Label.ClassicShirt,
 Feature.Catalog.Feature.Catalog.Label.ClassicTShirt,
 Feature.Catalog.Feature.Catalog.Label.TotalItems,कुल : {itemCount} आइटम
@@ -4254,6 +4274,7 @@ Feature.Moments.Title.LeaveMomentCreation,क्या आपको ‘Moment’
 Feature.Moments.Title.MomentRemoved,Moment हटा दिया गया
 Feature.Moments.Title.PostInsights,पेज हेडर का टाइटल
 Feature.Moments.Title.ReportPost,पोस्ट की रिपोर्ट करें
+Feature.Moments.Tooltip.PostInsightsBody,"व्यूज़, देखने में बिताया गया समय और यह देखें कि आपकी ऑडियंस को Moment कैसा लगा."
 Feature.Moments.Tooltip.PostInsightsTitle,आपके Moment की जानकारी यहाँ है
 Feature.Moments.Tooltip.ShareFirstMomentBody,अपने कैप्चर्स से एक Moment क्रिएट करें
 Feature.Moments.Tooltip.ShareFirstMomentTitle,अपना पहला Moment शेयर करें
@@ -4748,6 +4769,14 @@ Feature.PlayerSearchResults.Label.ThisIsYou,यह आप हैं
 Feature.PlayerSearchResults.Label.You,आप
 Feature.PlayerSearchResults.Label.YouAreFollowing,आप इन्हें फ़ॉलो कर रहे/रही हैं
 Feature.PlayerSearchResults.Label.YouAreFriends,आप फ़्रेंड्स हैं
+Feature.Premium.Description.ScaryModalBody13To17,मैं इस बात से सहमत हूँ कि मैं अकाउंट ओनर का/की पेरेंट या लीगल गार्जियन हूँ. मैंने इस खरीदारी को मंज़ूरी दी है और उपयोग की शर्तों से सहमत हूँ.
+Feature.Premium.Description.ScaryModalBodyNew,इस खरीदारी में असली पैसे का लेन-देन शामिल है.{lineBreak}मैं इस बात से सहमत हूँ कि मेरी उम्र कम से कम 18 साल है. मैं अकाउंट ओनर का/की पेरेंट या लीगल गार्जियन हूँ. मैंने इस खरीदारी को मंज़ूरी दी है और मैं उपयोग की शर्तों से सहमत हूँ.
+Feature.Premium.Description.ScaryModalThreshold1Body,"आपने इस महीने Roblox पर बहुत खर्च किया है. क्या आपको आगे बढ़ना है?{linebreak}इस खरीद में असली पैसे का लेन-देन शामिल है. इस खरीदारी को मंज़ूरी देने के लिए, आपको अकाउंट ओनर का/की पेरेंट या लीगल गार्जियन होना चाहिए."
+Feature.Premium.Description.ScaryModalThreshold2Body,आपने इस महीने Roblox पर बहुत खर्च किया है.{linebreak}इसकी और आगे की सभी खरीदारी की रसीदें पेरेंट के इस अकाउंट के वेरिफ़ाइड ईमेल पर भेजी जाएँगी. 
+Feature.Premium.Heading.GeneralError,
+Feature.Premium.Heading.ScaryModalTitle,
+Feature.Premium.Message.PleaseTryAgain,
+Feature.Premium.Message.SomethingWentWrong,
 Feature.PrivateServers.Action.CreatePrivateServer,
 Feature.PrivateServers.Action.FreeWithBlackbird,Plus सब्सक्रिप्शन के साथ फ़्री
 Feature.PrivateServers.Description.PrivateServerPurchaseUnavailableInStudio,Studio में प्राइवेट सर्वर नहीं खरीदे जा सकते.
@@ -5474,6 +5503,9 @@ Feature.VerificationUpsell.Response.ErrorTryAgain,
 Feature.VerificationUpsell.Response.InvalidPhoneNumberError,इस फ़ोन नंबर का इस्तेमाल नहीं किया जा सकता. कोई दूसरा फ़ोन नंबर डालें.
 Feature.VerificationUpsell.Response.PhoneHasTooManyAssociatedAccounts,आपने एक फ़ोन नंबर से लिंक किए गए अकाउंट की अधिकतम संख्या पार कर ली है.
 Feature.VerificationUpsell.Response.TooManyAttemptsTryAgainLater,
+Feature.VerifiedParentalControls.Description.ParentalApprovalConfirmation,मैं पेरेंट या लीगल गार्जियन हूँ और मैंने {termsLinkStart}उपयोग की शर्तों{termsLinkEnd} के तहत इस खरीदारी को मंज़ूरी दी है.
+Feature.VerifiedParentalControls.Description.ParentalApprovalRequired,इसके लिए असली पैसे खर्च होते हैं. पेरेंट या लीगल गार्जियन को इस खरीदारी के लिए मंज़ूरी देनी होगी. पेरेंट्स अपने बच्चे के खर्च को मैनेज करने के बारे में {learnLinkStart}ज़्यादा जान{learnLinkEnd} सकते हैं.
+Feature.VerifiedParentalControls.Label.AskParentFirst,पहले पेरेंट से पूछें
 Feature.VirtualEvents.AttendanceBeforeEvent,
 Feature.VirtualEvents.AttendanceDuringEvent,इस समय शामिल हैं
 Feature.VirtualEvents.DescriptionLabel,
@@ -5703,7 +5735,7 @@ IAPExperience.SubscriptionPurchasePrompt.Label.GetSubscription,सब्सक�
 IAPExperience.SubscriptionPurchasePrompt.Label.TestFlowDisclaimer,"यह डायलॉग एक प्रीव्यू है, जो आपको दिखाता है कि आपके यूज़र को आपकी सब्सक्रिप्शन का विवरण कैसे दिखाई देगा. 'सब्सक्राइब करें' पर क्लिक करने पर आपसे कोई शुल्क नहीं लिया जाएगा."
 IAPExperience.U13Confirm.Action.Cancel,
 IAPExperience.U13Confirm.Action.Confirm,
-IAPExperience.U13Confirm.Text.ParentalConsentWarningPaymentModal13To17,मैं इस बात से सहमत हूँ कि मैं अकाउंट ओनर का/की पेरेंट या लीगल गार्जियन हूँ. मैंने इस खरीदारी को मंज़ूरी दी है और उपयोग की शर्तों से सहमत हूँ.
+IAPExperience.U13Confirm.Text.ParentalConsentWarningPaymentModal13To17,
 IAPExperience.U13Confirm.Text.U13MonthlyThreshold1Modal,"आपने इस महीने Roblox पर बहुत खर्च किया है. क्या आपको आगे बढ़ना है? इस खरीद में असली पैसे का लेन-देन शामिल है. इस खरीदारी को मंज़ूरी देने के लिए, आपको अकाउंट ओनर का/की पेरेंट या लीगल गार्जियन होना चाहिए."
 IAPExperience.U13Confirm.Text.U13MonthlyThreshold2Modal,
 IAPExperience.U13Confirm.Text.U13PaymentModal,इस खरीदारी में असली पैसे का लेन-देन शामिल है. मैं इस बात से सहमत हूँ कि मेरी उम्र कम से कम 18 है. मैं अकाउंट ओनर का/की पेरेंट या लीगल गार्जियन हूँ. मेरी तरफ़ से इस खरीदारी को मंज़ूरी है. मैं उपयोग की शर्तों से सहमत हूँ.

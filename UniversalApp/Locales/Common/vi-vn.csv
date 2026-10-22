@@ -475,6 +475,7 @@ Authentication.SignUp.Description.EnterParentEmail,Nhập địa chỉ email c�
 Authentication.SignUp.Description.FaceIdPromo,Face ID là cách thức bảo mật và dễ dàng nhất để đăng nhập vào Roblox.
 Authentication.SignUp.Description.GenderHelp2,Điều này sẽ giúp chúng tôi chọn avatar phù hợp với bạn.
 Authentication.SignUp.Description.OneMoreStep,Còn một bước nữa
+Authentication.SignUp.Description.OptInMarketingEmailConsent,Tôi muốn nhận email từ Roblox về các tin tức và ưu đãi.
 Authentication.SignUp.Description.Or,
 Authentication.SignUp.Description.ParentEmailDisclaimer,"Chúng tôi đề nghị cung cấp email của cha mẹ bạn để giúp khôi phục tài khoản nếu có sự cố, theo Chính sách quyền riêng tư của Roblox"
 Authentication.SignUp.Description.PasskeyTryAgain,"Rất tiếc, đã xảy ra sự cố với thao tác đăng ký mã xác nhận của bạn. Vui lòng thử đăng ký lại bằng tên tài khoản khác."
@@ -821,9 +822,13 @@ Common.UGCValidation.ErrorLabel.UnallowedJointSkinned,"Bộ phận cơ thể {pa
 Common.VerifiedParentalConsent.Action.Cancel,
 Common.VerifiedParentalConsent.Action.Close,
 Common.VerifiedParentalConsent.Action.GoToSettings,Đi Đến Cài Đặt
+Common.VerifiedParentalConsent.Description.EnablePurchasesInSettings,"Để thực hiện giao dịch mua này, trước tiên hãy bật giao dịch mua trong Cài Đặt > Chi Tiêu."
+Common.VerifiedParentalConsent.Description.ExistingPendingRequestRedirectToSettings,Bạn đã có yêu cầu mua hàng đang chờ xử lý. Bạn có thể hủy yêu cầu này trong Cài Đặt > Chi Tiêu.
 Common.VerifiedParentalConsent.Description.SpendingRestrictionWithSettings,"Do hạn chế về khu vực, bạn cần có sự cho phép của phụ huynh để thực hiện giao dịch mua. Hãy xin phép phụ huynh trong Cài Đặt > Chi Tiêu."
 Common.VerifiedParentalConsent.Description.SpendingRestrictionWithoutSettings,"Do hạn chế về khu vực, bạn cần có sự cho phép của phụ huynh để thực hiện giao dịch mua. Vui lòng truy cập trang web hoặc vào một thiết bị liên kết để xin phép phụ huynh trong Cài Đặt > Chi Tiêu."
 Common.VerifiedParentalConsent.Label.AskParent,Hỏi Phụ Huynh Của Bạn
+Common.VerifiedParentalConsent.Label.RequestPending,Yêu Cầu Đang Chờ Xử Lý
+Common.VerifiedParentalConsent.Label.UpdateYourSettings,Cập Nhật Cài Đặt Của Bạn
 Common.VisitGame.Label.Play,Tham Gia
 CommonUI.Controls.Action.Accept,
 CommonUI.Controls.Action.Apply,Áp dụng
@@ -831,6 +836,7 @@ CommonUI.Controls.Action.Back,Quay lại
 CommonUI.Controls.Action.Cancel,
 CommonUI.Controls.Action.CloseRoblox,Đóng Roblox
 CommonUI.Controls.Action.Confirm,
+CommonUI.Controls.Action.Continue,
 CommonUI.Controls.Action.Done,
 CommonUI.Controls.Action.Next,Tiếp
 CommonUI.Controls.Action.OK,
@@ -1829,8 +1835,11 @@ Feature.Avatar.Heading.SharePublicAvatar,Chia sẻ Avatar của bạn
 Feature.Avatar.Heading.SortBy,Sắp xếp theo
 Feature.Avatar.Heading.UsedName,Tên Đã Dùng
 Feature.Avatar.Heading.WearConfirmation,Mặc Vật Phẩm
+Feature.Avatar.HeroWidget.BundleHeadlessTitle,Cơ hội cuối để sở hữu Kỵ sĩ không đầu
 Feature.Avatar.HeroWidget.BundleTitle,Korblox Pactbreaker
 Feature.Avatar.HeroWidget.CapsuleDescription,Ba diện mạo mới cho các vật phẩm nguyên bản của Roblox
+Feature.Avatar.HeroWidget.CapsuleHalloweenDescription,Các vật phẩm mới dành riêng cho mùa ma quái
+Feature.Avatar.HeroWidget.CapsuleHalloweenTitle,Dành riêng cho Halloween
 Feature.Avatar.HeroWidget.CapsulePoolDescription,Ba vật phẩm mới để bạn gây ấn tượng
 Feature.Avatar.HeroWidget.CapsulePoolTitle,Tiệc tùng bên hồ bơi
 Feature.Avatar.HeroWidget.CapsuleTitle,Xưa mà không cũ
@@ -2427,6 +2436,8 @@ Feature.Build.Description.GameConfiguration,Thay đổi cách bạn bán vật p
 Feature.Build.Description.GameCreationDone,Tôi đã tạo xong và đăng trò chơi của bạn. Bạn đã có thể mở lên để chơi thử.
 Feature.Build.Description.GameSavedPlaytest,Tôi đã tạo xong trò chơi của bạn và lưu phiên bản mới. Bạn có thể mở lên để chơi thử nhé.
 Feature.Build.Description.HubSettings,Quản lý tất cả cài đặt trong Trung tâm nhà sáng tạo
+Feature.Build.Description.InternalSpec,Bỏ trống để dùng thông số mới nhất
+Feature.Build.Description.InternalTesting,Thử nghiệm các thông số của mô hình mới
 Feature.Build.Description.InviteFriendLimit,Mời tối đa {MAX_INVITES} người bạn tham gia chơi trong lúc bạn sáng tạo.
 Feature.Build.Description.LongAdCampaign,Có thêm thời gian để tiếp cận người chơi mới và thu hút họ quay lại.
 Feature.Build.Description.MakeAudienceAvail,Đăng trải nghiệm của bạn để cho phép đối tượng này tham gia.
@@ -2521,6 +2532,7 @@ Feature.Build.Label.FreeBuildUsage,Lượt sử dụng Build miễn phí
 Feature.Build.Label.Friends,
 Feature.Build.Label.FriendsOnly,
 Feature.Build.Label.GamePlays,Lượt chơi
+Feature.Build.Label.GamesTab,
 Feature.Build.Label.GetMoreBuildUsage,Mua thêm lượt sử dụng Build
 Feature.Build.Label.GroupGames,Trò chơi của nhóm
 Feature.Build.Label.Groups,
@@ -2529,6 +2541,8 @@ Feature.Build.Label.IconThumbnails,Biểu tượng và hình nhỏ
 Feature.Build.Label.Images2D,Hình ảnh 2D
 Feature.Build.Label.InProgress,Đang thực hiện
 Feature.Build.Label.InputNeeded,Cần thông tin đầu vào
+Feature.Build.Label.InternalSpec,Thông số nội bộ
+Feature.Build.Label.InternalTesting,Thử nghiệm nội bộ
 Feature.Build.Label.InviteCount,{COUNT}/{MAX_INVITES}
 Feature.Build.Label.Limited,Giới hạn
 Feature.Build.Label.Live,Đã đăng
@@ -2549,6 +2563,7 @@ Feature.Build.Label.OnSale,Đang bán
 Feature.Build.Label.Pending,Đang chờ xử lý
 Feature.Build.Label.PercentUsed,Đã dùng {PERCENT}%
 Feature.Build.Label.PlayTime,Thời gian chơi
+Feature.Build.Label.PreviewsTab,Bản xem trước
 Feature.Build.Label.PreviouslyPublished,Đã đăng trước đây
 Feature.Build.Label.Price,Giá
 Feature.Build.Label.PriceUnavailable,--
@@ -2759,6 +2774,7 @@ Feature.Build.Notification.Title.Finished,Đã tạo dựng xong
 Feature.Build.Notification.Title.NeedInput,Tính năng Tạo dựng cần bạn cung cấp thông tin
 Feature.Build.Placeholder.DescribeProduct,Mô tả sản phẩm bạn muốn bán
 Feature.Build.Placeholder.DescribeProductUpdate,Mô tả thông tin trong bản cập nhật
+Feature.Build.Placeholder.InternalSpec,internal_code
 Feature.Build.Prompt.CreateDeveloperProduct,"Giúp tôi tạo một sản phẩm của nhà phát triển, đưa sản phẩm đó vào trò chơi, xác minh và đăng các thay đổi, rồi cho phép người dùng mua sản phẩm đó."
 Feature.Build.Title.AdActive,Chiến dịch quảng cáo đang hoạt động
 Feature.Build.Title.AdCampaignDuration,Chiến dịch quảng cáo dài {durationDays} ngày
@@ -2817,6 +2833,9 @@ Feature.Build.Title.VersionNumber,Phiên bản {VERSION}
 Feature.Build.Title.Versions,
 Feature.Build.Title.WhatsIncluded,Bao gồm những gì?
 Feature.BuyRobux.Heading.Banner,
+Feature.BuyRobux.Label.MyFriendsWithCount,Bạn bè của tôi ({count})
+Feature.BuyRobux.Label.PeopleWithCount,Mọi người ({count})
+Feature.BuyRobux.Label.Search,
 Feature.Call.Error.Description.Generic,
 Feature.Catalog.Action.Buy,
 Feature.Catalog.Action.Cancel,
@@ -2860,6 +2879,7 @@ Feature.Catalog.AvatarWidgetTitle,Khám Phá Phong Cách
 Feature.Catalog.Checkout.Title.PurchasedFailedPlural,Có {count} vật phẩm không mua được
 Feature.Catalog.Checkout.WearAfterPurchase,
 Feature.Catalog.Description.AttributionAlertBody,Bạn sẽ rời khu vực này và tham gia {experienceName}.
+Feature.Catalog.Feature.Catalog.Label.AvatarBackgrounds,
 Feature.Catalog.Feature.Catalog.Label.ClassicShirt,
 Feature.Catalog.Feature.Catalog.Label.ClassicTShirt,
 Feature.Catalog.Feature.Catalog.Label.TotalItems,Tổng: {itemCount} bộ phận
@@ -4274,6 +4294,7 @@ Feature.Moments.Title.LeaveMomentCreation,Rời khỏi quá trình tạo Khoản
 Feature.Moments.Title.MomentRemoved,Đã xóa Khoảnh khắc
 Feature.Moments.Title.PostInsights,Tiêu đề ở đầu trang
 Feature.Moments.Title.ReportPost,Báo cáo bài đăng
+Feature.Moments.Tooltip.PostInsightsBody,"Kiểm tra lượt xem, thời lượng xem và mức độ tương tác của khán giả với Khoảnh khắc của bạn."
 Feature.Moments.Tooltip.PostInsightsTitle,Thông tin chuyên sâu về Khoảnh khắc của bạn đã có tại đây
 Feature.Moments.Tooltip.ShareFirstMomentBody,Tạo Khoảnh khắc từ những gì bạn đã chụp
 Feature.Moments.Tooltip.ShareFirstMomentTitle,Chia sẻ Khoảnh khắc đầu tiên của bạn
@@ -4768,6 +4789,14 @@ Feature.PlayerSearchResults.Label.ThisIsYou,Đây là bạn
 Feature.PlayerSearchResults.Label.You,Bạn
 Feature.PlayerSearchResults.Label.YouAreFollowing,
 Feature.PlayerSearchResults.Label.YouAreFriends,Đã trở thành bạn bè
+Feature.Premium.Description.ScaryModalBody13To17,Tôi đồng ý rằng tôi là phụ huynh hoặc người giám hộ hợp pháp của chủ tài khoản. Tôi cho phép tiến hành giao dịch mua này và đồng ý với Điều Khoản Sử Dụng.
+Feature.Premium.Description.ScaryModalBodyNew,Giao dịch mua này có sử dụng trao đổi tiền thật.{lineBreak}Tôi đồng ý rằng tôi đủ 18 tuổi và là phụ huynh hoặc người giám hộ hợp pháp của chủ sở hữu tài khoản. Tôi cho phép tiến hành giao dịch mua này và đồng ý với Điều Khoản Sử Dụng.
+Feature.Premium.Description.ScaryModalThreshold1Body,Bạn đã tiêu rất nhiều tiền trên Roblox trong tháng này. Bạn có muốn tiếp tục không?{linebreak}Giao dịch mua này có sử dụng trao đổi tiền thật. Bạn phải là phụ huynh hoặc người giám hộ hợp pháp của chủ tài khoản để cho phép tiến hành giao dịch mua này.
+Feature.Premium.Description.ScaryModalThreshold2Body,Bạn đã tiêu rất nhiều tiền trên Roblox trong tháng này.{linebreak}Hóa đơn của giao dịch mua này và các giao dịch mua về sau sẽ được gửi đến email đã xác thực của phụ huynh trong tài khoản này. 
+Feature.Premium.Heading.GeneralError,
+Feature.Premium.Heading.ScaryModalTitle,
+Feature.Premium.Message.PleaseTryAgain,Vui lòng thử lại.
+Feature.Premium.Message.SomethingWentWrong,
 Feature.PrivateServers.Action.CreatePrivateServer,
 Feature.PrivateServers.Action.FreeWithBlackbird,Miễn phí khi có gói Plus
 Feature.PrivateServers.Description.PrivateServerPurchaseUnavailableInStudio,Không hỗ trợ giao dịch mua máy chủ riêng tư trong Studio.
@@ -5495,6 +5524,9 @@ Feature.VerificationUpsell.Response.ErrorTryAgain,
 Feature.VerificationUpsell.Response.InvalidPhoneNumberError,Số điện thoại này không thể sử dụng được. Vui lòng nhập số điện thoại khác.
 Feature.VerificationUpsell.Response.PhoneHasTooManyAssociatedAccounts,Bạn đã đạt số lượng tài khoản tối đa có thể liên kết với một số điện thoại.
 Feature.VerificationUpsell.Response.TooManyAttemptsTryAgainLater,
+Feature.VerifiedParentalControls.Description.ParentalApprovalConfirmation,Tôi là cha mẹ/người giám hộ hợp pháp và tôi chấp thuận giao dịch mua hàng này theo {termsLinkStart}Điều khoản sử dụng{termsLinkEnd}.
+Feature.VerifiedParentalControls.Description.ParentalApprovalRequired,Giao dịch này cần thanh toán bằng tiền thật. Cha mẹ hoặc người giám hộ hợp pháp phải chấp thuận giao dịch mua hàng này. Cha mẹ có thể {learnLinkStart}tìm hiểu thêm{learnLinkEnd} về cách quản lý hoạt động chi tiêu của trẻ.
+Feature.VerifiedParentalControls.Label.AskParentFirst,Xin phép cha mẹ trước
 Feature.VirtualEvents.AttendanceBeforeEvent,Có Quan Tâm
 Feature.VirtualEvents.AttendanceDuringEvent,Đang Tham Dự
 Feature.VirtualEvents.DescriptionLabel,
@@ -5724,7 +5756,7 @@ IAPExperience.SubscriptionPurchasePrompt.Label.GetSubscription,Mua gói đăng k
 IAPExperience.SubscriptionPurchasePrompt.Label.TestFlowDisclaimer,"Hộp thoại này là một bản xem trước, cho bạn thấy cách người chơi sẽ thấy nội dung miêu tả gói đăng ký của bạn. Bạn sẽ không bị tính phí nếu nhấp vào Đăng Ký."
 IAPExperience.U13Confirm.Action.Cancel,
 IAPExperience.U13Confirm.Action.Confirm,
-IAPExperience.U13Confirm.Text.ParentalConsentWarningPaymentModal13To17,Tôi đồng ý rằng tôi là phụ huynh hoặc người giám hộ hợp pháp của chủ tài khoản. Tôi cho phép tiến hành giao dịch mua này và đồng ý với Điều Khoản Sử Dụng.
+IAPExperience.U13Confirm.Text.ParentalConsentWarningPaymentModal13To17,
 IAPExperience.U13Confirm.Text.U13MonthlyThreshold1Modal,
 IAPExperience.U13Confirm.Text.U13MonthlyThreshold2Modal,
 IAPExperience.U13Confirm.Text.U13PaymentModal,Giao dịch mua này có sử dụng tiền thật. Tôi đồng ý rằng tôi từ 18 tuổi trở lên và là phụ huynh hoặc người giám hộ hợp pháp của chủ sở hữu tài khoản. Tôi ủy quyền giao dịch mua này và đồng ý với Điều Khoản Sử Dụng.

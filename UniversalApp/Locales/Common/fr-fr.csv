@@ -475,6 +475,7 @@ Authentication.SignUp.Description.EnterParentEmail,Entre l'adresse e-mail de ton
 Authentication.SignUp.Description.FaceIdPromo,Face ID est la méthode la plus sécurisée et la plus simple pour te connecter à Roblox.
 Authentication.SignUp.Description.GenderHelp2,Cela nous aide à choisir un avatar pertinent pour toi.
 Authentication.SignUp.Description.OneMoreStep,Une étape de plus
+Authentication.SignUp.Description.OptInMarketingEmailConsent,Je souhaite recevoir des e-mails de la part de Roblox concernant les actualités et les offres.
 Authentication.SignUp.Description.Or,
 Authentication.SignUp.Description.ParentEmailDisclaimer,"Nous demandons l'adresse e-mail de ton parent à des fins de récupération de compte, conformément à la Politique de confidentialité de Roblox"
 Authentication.SignUp.Description.PasskeyTryAgain,"Désolé, une erreur s'est produite lors de l'enregistrement de ton passkey. Essaie de t'inscrire à nouveau avec un autre nom d'utilisateur."
@@ -821,9 +822,13 @@ Common.UGCValidation.ErrorLabel.UnallowedJointSkinned,"La partie du corps {partN
 Common.VerifiedParentalConsent.Action.Cancel,
 Common.VerifiedParentalConsent.Action.Close,
 Common.VerifiedParentalConsent.Action.GoToSettings,Aller dans Paramètres
+Common.VerifiedParentalConsent.Description.EnablePurchasesInSettings,"Pour effectuer cet achat, active d'abord les achats dans Paramètres > Dépenses."
+Common.VerifiedParentalConsent.Description.ExistingPendingRequestRedirectToSettings,Tu as déjà une demande en attente pour effectuer des achats. Tu peux annuler cette demande dans Paramètres > Dépenses.
 Common.VerifiedParentalConsent.Description.SpendingRestrictionWithSettings,"En raison de restrictions régionales, tu as besoin de l'autorisation d'un parent pour faire un achat. Demande à un parent l'autorisation dans Paramètres > Dépenses."
 Common.VerifiedParentalConsent.Description.SpendingRestrictionWithoutSettings,"En raison de restrictions régionales, il vous faut l'autorisation de tes parents pour effectuer un achat. Rendez-vous sur le web ou sur un appareil complémentaire pour demander l'autorisation à tes parents dans Paramètres > Dépenses."
 Common.VerifiedParentalConsent.Label.AskParent,
+Common.VerifiedParentalConsent.Label.RequestPending,Demande en attente
+Common.VerifiedParentalConsent.Label.UpdateYourSettings,Mettre à jour tes paramètres
 Common.VisitGame.Label.Play,Rejoindre
 CommonUI.Controls.Action.Accept,
 CommonUI.Controls.Action.Apply,Appliquer
@@ -831,6 +836,7 @@ CommonUI.Controls.Action.Back,
 CommonUI.Controls.Action.Cancel,
 CommonUI.Controls.Action.CloseRoblox,Fermer Roblox
 CommonUI.Controls.Action.Confirm,
+CommonUI.Controls.Action.Continue,
 CommonUI.Controls.Action.Done,
 CommonUI.Controls.Action.Next,
 CommonUI.Controls.Action.OK,
@@ -1829,8 +1835,11 @@ Feature.Avatar.Heading.SharePublicAvatar,Partager ton avatar
 Feature.Avatar.Heading.SortBy,Trié par
 Feature.Avatar.Heading.UsedName,Nom utilisé
 Feature.Avatar.Heading.WearConfirmation,Porter élément
+Feature.Avatar.HeroWidget.BundleHeadlessTitle,Dernière chance de récupérer le Cavalier sans tête
 Feature.Avatar.HeroWidget.BundleTitle,Korblox Brisepacte
 Feature.Avatar.HeroWidget.CapsuleDescription,Trois nouvelles versions des classiques de Roblox
+Feature.Avatar.HeroWidget.CapsuleHalloweenDescription,De nouveaux items pour Halloween
+Feature.Avatar.HeroWidget.CapsuleHalloweenTitle,Conçu pour Halloween
 Feature.Avatar.HeroWidget.CapsulePoolDescription,Trois nouveaux items pour faire des vagues
 Feature.Avatar.HeroWidget.CapsulePoolTitle,Pool Party
 Feature.Avatar.HeroWidget.CapsuleTitle,Des classiques revisités
@@ -2427,6 +2436,8 @@ Feature.Build.Description.GameConfiguration,Modifie la façon dont tu vends des 
 Feature.Build.Description.GameCreationDone,J'ai terminé la création et la publication de ton jeu. Tu peux l'ouvrir pour le tester.
 Feature.Build.Description.GameSavedPlaytest,J'ai terminé la création de ton jeu et j'ai enregistré une nouvelle version. Lance-le pour le tester.
 Feature.Build.Description.HubSettings,Gère tous les paramètres dans le Hub Création
+Feature.Build.Description.InternalSpec,Laisser vide pour les dernières spécifications
+Feature.Build.Description.InternalTesting,Essayer les nouvelles spécifications du modèle
 Feature.Build.Description.InviteFriendLimit,Invite jusqu'à {MAX_INVITES} amis à jouer pendant que tu crées.
 Feature.Build.Description.LongAdCampaign,Accorde plus de temps pour atteindre de nouveaux joueurs et les inciter à revenir.
 Feature.Build.Description.MakeAudienceAvail,Publie ton expérience pour la rendre accessible à ce public.
@@ -2521,6 +2532,7 @@ Feature.Build.Label.FreeBuildUsage,Utilisation gratuite de Construire
 Feature.Build.Label.Friends,
 Feature.Build.Label.FriendsOnly,Amis uniquement
 Feature.Build.Label.GamePlays,Parties jouées
+Feature.Build.Label.GamesTab,
 Feature.Build.Label.GetMoreBuildUsage,Obtenir plus de capacités d'utilisation de Construire
 Feature.Build.Label.GroupGames,Jeux du groupe
 Feature.Build.Label.Groups,Groupes
@@ -2529,6 +2541,8 @@ Feature.Build.Label.IconThumbnails,Icône et miniatures
 Feature.Build.Label.Images2D,Images 2D
 Feature.Build.Label.InProgress,En cours
 Feature.Build.Label.InputNeeded,Saisie requise
+Feature.Build.Label.InternalSpec,Spécification interne
+Feature.Build.Label.InternalTesting,Test interne
 Feature.Build.Label.InviteCount,{COUNT}/{MAX_INVITES}
 Feature.Build.Label.Limited,Limité
 Feature.Build.Label.Live,Publié
@@ -2549,6 +2563,7 @@ Feature.Build.Label.OnSale,En vente
 Feature.Build.Label.Pending,En attente
 Feature.Build.Label.PercentUsed,{PERCENT} % utilisé(s)
 Feature.Build.Label.PlayTime,Temps de jeu
+Feature.Build.Label.PreviewsTab,Prévisualisations
 Feature.Build.Label.PreviouslyPublished,Publiée précédemment
 Feature.Build.Label.Price,Prix
 Feature.Build.Label.PriceUnavailable,--
@@ -2759,6 +2774,7 @@ Feature.Build.Notification.Title.Finished,Construire : terminé
 Feature.Build.Notification.Title.NeedInput,Construire a besoin de ton avis
 Feature.Build.Placeholder.DescribeProduct,Décris ce que tu veux vendre
 Feature.Build.Placeholder.DescribeProductUpdate,Décris une mise à jour
+Feature.Build.Placeholder.InternalSpec,internal_code
 Feature.Build.Prompt.CreateDeveloperProduct,"Aide-moi à créer un produit développeur, à l'intégrer au jeu, à vérifier et à publier les modifications, et à le rendre disponible à l'achat."
 Feature.Build.Title.AdActive,La campagne publicitaire est active
 Feature.Build.Title.AdCampaignDuration,Campagne publicitaire de {durationDays} jours
@@ -2817,6 +2833,9 @@ Feature.Build.Title.VersionNumber,Version {VERSION}
 Feature.Build.Title.Versions,Versions
 Feature.Build.Title.WhatsIncluded,Qu'est-ce qui est inclus ?
 Feature.BuyRobux.Heading.Banner,
+Feature.BuyRobux.Label.MyFriendsWithCount,Mes amis ({count})
+Feature.BuyRobux.Label.PeopleWithCount,Personnes ({count})
+Feature.BuyRobux.Label.Search,
 Feature.Call.Error.Description.Generic,
 Feature.Catalog.Action.Buy,
 Feature.Catalog.Action.Cancel,
@@ -2860,6 +2879,7 @@ Feature.Catalog.AvatarWidgetTitle,
 Feature.Catalog.Checkout.Title.PurchasedFailedPlural,Les {count} items n'ont pas pu être achetés
 Feature.Catalog.Checkout.WearAfterPurchase,
 Feature.Catalog.Description.AttributionAlertBody,Tu vas quitter cette zone et rejoindre {experienceName}.
+Feature.Catalog.Feature.Catalog.Label.AvatarBackgrounds,
 Feature.Catalog.Feature.Catalog.Label.ClassicShirt,
 Feature.Catalog.Feature.Catalog.Label.ClassicTShirt,T-shirt classique
 Feature.Catalog.Feature.Catalog.Label.TotalItems,Total : {itemCount} items
@@ -3565,7 +3585,7 @@ Feature.Friends.Action.GetStarted,Commencer
 Feature.Friends.Action.GoToAddFriends,Aller à Ajouter des amis
 Feature.Friends.Action.InviteFriends,Inviter des contacts à être amis sur Roblox.
 Feature.Friends.Action.InviteProviderFriends,Invite des amis {provider}
-Feature.Friends.Action.PendingRequest,Demande en attente
+Feature.Friends.Action.PendingRequest,
 Feature.Friends.Action.ShareQR,Partager le code QR
 Feature.Friends.Action.ShowMore,
 Feature.Friends.Action.Unblock,
@@ -4274,6 +4294,7 @@ Feature.Moments.Title.LeaveMomentCreation,Quitter la création de Moment ?
 Feature.Moments.Title.MomentRemoved,
 Feature.Moments.Title.PostInsights,Titre de la page
 Feature.Moments.Title.ReportPost,Signaler un post
+Feature.Moments.Tooltip.PostInsightsBody,"Consulte le nombre de vues, la durée de visionnage et l'accueil réservé au Moment par ton audience."
 Feature.Moments.Tooltip.PostInsightsTitle,Retrouve ici les statistiques de ton Moment
 Feature.Moments.Tooltip.ShareFirstMomentBody,Créer un Moment à partir de tes captures
 Feature.Moments.Tooltip.ShareFirstMomentTitle,Partage ton premier Moment
@@ -4768,6 +4789,14 @@ Feature.PlayerSearchResults.Label.ThisIsYou,C'est vous
 Feature.PlayerSearchResults.Label.You,Toi
 Feature.PlayerSearchResults.Label.YouAreFollowing,Vous suivez
 Feature.PlayerSearchResults.Label.YouAreFriends,Vous êtes amis
+Feature.Premium.Description.ScaryModalBody13To17,J'accepte d'être le parent ou le tuteur légal du propriétaire du compte. J'autorise cet achat et j'accepte les conditions d'utilisation.
+Feature.Premium.Description.ScaryModalBodyNew,Cet achat implique l'utilisation d'argent réel. {lineBreak}Je certifie que j'ai au moins 18 ans et que je suis le parent ou le tuteur légal du propriétaire de ce compte. J'autorise cet achat et j'accepte les conditions d'utilisation.
+Feature.Premium.Description.ScaryModalThreshold1Body,Tu as beaucoup dépensé sur Roblox ce mois-ci. Veux-tu continuer ?{linebreak} Cet achat implique l'échange d'argent réel. Tu dois être le parent ou le tuteur légal du propriétaire du compte pour autoriser cet achat.
+Feature.Premium.Description.ScaryModalThreshold2Body,Tu as beaucoup dépensé sur Roblox ce mois-ci.{linebreak}Des reçus seront envoyés à l'adresse électronique parentale vérifiée sur ce compte pour cet achat et tous les achats ultérieurs. 
+Feature.Premium.Heading.GeneralError,
+Feature.Premium.Heading.ScaryModalTitle,
+Feature.Premium.Message.PleaseTryAgain,Réessayer.
+Feature.Premium.Message.SomethingWentWrong,
 Feature.PrivateServers.Action.CreatePrivateServer,
 Feature.PrivateServers.Action.FreeWithBlackbird,Gratuit avec Plus
 Feature.PrivateServers.Description.PrivateServerPurchaseUnavailableInStudio,Studio ne prend pas en charge les achats de serveurs privés.
@@ -5495,6 +5524,9 @@ Feature.VerificationUpsell.Response.ErrorTryAgain,Un problème est survenu. Rée
 Feature.VerificationUpsell.Response.InvalidPhoneNumberError,Ce numéro de téléphone ne peut pas être utilisé. Saisir un autre numéro de téléphone.
 Feature.VerificationUpsell.Response.PhoneHasTooManyAssociatedAccounts,Tu as atteint le nombre maximum de comptes liés à un numéro de téléphone.
 Feature.VerificationUpsell.Response.TooManyAttemptsTryAgainLater,
+Feature.VerifiedParentalControls.Description.ParentalApprovalConfirmation,"Je suis le parent ou le tuteur légal et j'autorise cet achat, conformément aux {termsLinkStart}Conditions d'utilisation{termsLinkEnd}."
+Feature.VerifiedParentalControls.Description.ParentalApprovalRequired,"Tu dois utiliser de l'argent réel pour faire cet achat, alors un parent ou un tuteur légal doit l'approuver. Les parents peuvent {learnLinkStart}en savoir plus{learnLinkEnd} sur la gestion des dépenses de leur enfant."
+Feature.VerifiedParentalControls.Label.AskParentFirst,Demande d'abord à un parent
 Feature.VirtualEvents.AttendanceBeforeEvent,
 Feature.VirtualEvents.AttendanceDuringEvent,Participer maintenant
 Feature.VirtualEvents.DescriptionLabel,
@@ -5724,7 +5756,7 @@ IAPExperience.SubscriptionPurchasePrompt.Label.GetSubscription,Souscrire un abon
 IAPExperience.SubscriptionPurchasePrompt.Label.TestFlowDisclaimer,Cette boîte de dialogue est un aperçu te montrant comment tes utilisateurs verront la description de ton abonnement. Tu ne seras pas facturé si tu cliques sur S'abonner.
 IAPExperience.U13Confirm.Action.Cancel,
 IAPExperience.U13Confirm.Action.Confirm,
-IAPExperience.U13Confirm.Text.ParentalConsentWarningPaymentModal13To17,J'accepte d'être le parent ou le tuteur légal du propriétaire du compte. J'autorise cet achat et j'accepte les conditions d'utilisation.
+IAPExperience.U13Confirm.Text.ParentalConsentWarningPaymentModal13To17,
 IAPExperience.U13Confirm.Text.U13MonthlyThreshold1Modal,Tu as beaucoup dépensé sur Roblox ce mois-ci. Veux-tu continuer ? Cet achat implique l'échange d'argent réel. Tu dois être le parent ou le tuteur légal du propriétaire du compte pour autoriser cet achat.
 IAPExperience.U13Confirm.Text.U13MonthlyThreshold2Modal,Tu as beaucoup dépensé sur Roblox ce mois-ci. Des reçus seront envoyés à l'adresse électronique parentale vérifiée sur ce compte pour cet achat et tous les achats ultérieurs. 
 IAPExperience.U13Confirm.Text.U13PaymentModal,Cet achat implique l'échange d'argent réel. Je certifie avoir au moins 18 ans et être le parent ou le tuteur légal du propriétaire du compte. J'autorise cet achat et j'accepte les conditions d'utilisation.

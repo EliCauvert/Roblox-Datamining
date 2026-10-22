@@ -458,6 +458,7 @@ Authentication.SignUp.Description.EnterParentEmail,Voer het e-mailadres van je o
 Authentication.SignUp.Description.FaceIdPromo,Face-ID is de veiligste en eenvoudigste manier om je aan te melden op Roblox.
 Authentication.SignUp.Description.GenderHelp2,Dit helpt ons om een relevante avatar voor je te kiezen.
 Authentication.SignUp.Description.OneMoreStep,Nog één stap
+Authentication.SignUp.Description.OptInMarketingEmailConsent,Ik wil graag e-mails van Roblox ontvangen over nieuws en aanbiedingen.
 Authentication.SignUp.Description.Or,
 Authentication.SignUp.Description.ParentEmailDisclaimer,"We vragen om het e-mailadres van je ouder voor accountherstel, onder voorbehoud van het Privacybeleid van Roblox."
 Authentication.SignUp.Description.PasskeyTryAgain,"Sorry, er is iets misgegaan bij het registreren van je toegangssleutel. Probeer je opnieuw aan te melden met een andere gebruikersnaam."
@@ -805,9 +806,13 @@ Common.UGCValidation.ErrorLabel.UnallowedJointSkinned,"Lichaamsdeel {partName} i
 Common.VerifiedParentalConsent.Action.Cancel,
 Common.VerifiedParentalConsent.Action.Close,
 Common.VerifiedParentalConsent.Action.GoToSettings,Ga naar Instellingen
+Common.VerifiedParentalConsent.Description.EnablePurchasesInSettings,Schakel eerst aankopen in via Instellingen > Uitgaven om deze aankoop te doen.
+Common.VerifiedParentalConsent.Description.ExistingPendingRequestRedirectToSettings,Je hebt al een openstaand verzoek om aankopen te doen. Je kunt dit verzoek annuleren via Instellingen > Uitgaven.
 Common.VerifiedParentalConsent.Description.SpendingRestrictionWithSettings,Vanwege regionale beperkingen heb je ouderlijke toestemming nodig om een aankoop te doen. Vraag je ouder om toestemming via Instellingen > Uitgaven.
 Common.VerifiedParentalConsent.Description.SpendingRestrictionWithoutSettings,Vanwege regionale beperkingen heb je ouderlijke toestemming nodig om een aankoop te doen. Ga naar het web of een bijbehorend apparaat om je ouder om toestemming te vragen via Instellingen > Uitgaven.
 Common.VerifiedParentalConsent.Label.AskParent,
+Common.VerifiedParentalConsent.Label.RequestPending,Verzoek in behandeling
+Common.VerifiedParentalConsent.Label.UpdateYourSettings,Je instellingen bijwerken
 Common.VisitGame.Label.Play,Deelnemen
 CommonUI.Controls.Action.Accept,Accepteren
 CommonUI.Controls.Action.Apply,Toepassen
@@ -815,6 +820,7 @@ CommonUI.Controls.Action.Back,Terug
 CommonUI.Controls.Action.Cancel,
 CommonUI.Controls.Action.CloseRoblox,Roblox sluiten
 CommonUI.Controls.Action.Confirm,
+CommonUI.Controls.Action.Continue,
 CommonUI.Controls.Action.Done,
 CommonUI.Controls.Action.Next,
 CommonUI.Controls.Action.OK,
@@ -1811,8 +1817,11 @@ Feature.Avatar.Heading.SharePublicAvatar,Deel je avatar
 Feature.Avatar.Heading.SortBy,Sorteren op
 Feature.Avatar.Heading.UsedName,Gebruikte naam
 Feature.Avatar.Heading.WearConfirmation,Item dragen
+Feature.Avatar.HeroWidget.BundleHeadlessTitle,Laatste kans voor de Headless Horseman
 Feature.Avatar.HeroWidget.BundleTitle,Korblox Pactbreker
 Feature.Avatar.HeroWidget.CapsuleDescription,Drie nieuwe versies van Roblox-originals
+Feature.Avatar.HeroWidget.CapsuleHalloweenDescription,Nieuwe items speciaal voor het griezelseizoen
+Feature.Avatar.HeroWidget.CapsuleHalloweenTitle,Gemaakt voor Halloween
 Feature.Avatar.HeroWidget.CapsulePoolDescription,Drie nieuwe items om indruk te maken
 Feature.Avatar.HeroWidget.CapsulePoolTitle,Pool Party
 Feature.Avatar.HeroWidget.CapsuleTitle,"Klassiekers, opnieuw uitgevonden"
@@ -2409,6 +2418,8 @@ Feature.Build.Description.GameConfiguration,Wijzig hoe je items verkoopt en je s
 Feature.Build.Description.GameCreationDone,Ik heb je spel gemaakt en gepubliceerd. Je kunt het openen om een playtest uit te voeren.
 Feature.Build.Description.GameSavedPlaytest,Ik heb je spel gemaakt en een nieuwe versie opgeslagen. Je kunt het openen om een playtest uit te voeren.
 Feature.Build.Description.HubSettings,Alle instellingen in de Creator Hub beheren
+Feature.Build.Description.InternalSpec,Leeg laten voor de nieuwste specificatie
+Feature.Build.Description.InternalTesting,Nieuwe modelspecificaties uitproberen
 Feature.Build.Description.InviteFriendLimit,Nodig maximaal {MAX_INVITES} vrienden uit om te spelen terwijl jij content creëert.
 Feature.Build.Description.LongAdCampaign,Meer tijd om nieuwe spelers te bereiken en ervoor te zorgen dat ze blijven terugkomen.
 Feature.Build.Description.MakeAudienceAvail,Publiceer je ervaring om deze beschikbaar te maken voor deze doelgroep.
@@ -2503,6 +2514,7 @@ Feature.Build.Label.FreeBuildUsage,Gratis Build-tegoed
 Feature.Build.Label.Friends,
 Feature.Build.Label.FriendsOnly,
 Feature.Build.Label.GamePlays,Speelsessies van het spel
+Feature.Build.Label.GamesTab,Games
 Feature.Build.Label.GetMoreBuildUsage,Koop meer Build-tegoed
 Feature.Build.Label.GroupGames,Games van de groep
 Feature.Build.Label.Groups,Groepen
@@ -2511,6 +2523,8 @@ Feature.Build.Label.IconThumbnails,Pictogram en miniaturen
 Feature.Build.Label.Images2D,2D-afbeeldingen
 Feature.Build.Label.InProgress,In uitvoering
 Feature.Build.Label.InputNeeded,Input vereist
+Feature.Build.Label.InternalSpec,Interne specificatie
+Feature.Build.Label.InternalTesting,Intern testen
 Feature.Build.Label.InviteCount,{COUNT}/{MAX_INVITES}
 Feature.Build.Label.Limited,Beperkt
 Feature.Build.Label.Live,Gepubliceerd
@@ -2531,6 +2545,7 @@ Feature.Build.Label.OnSale,In de verkoop
 Feature.Build.Label.Pending,In behandeling
 Feature.Build.Label.PercentUsed,{PERCENT}% gebruikt
 Feature.Build.Label.PlayTime,Speeltijd
+Feature.Build.Label.PreviewsTab,Voorbeeldweergaven
 Feature.Build.Label.PreviouslyPublished,Eerder gepubliceerd
 Feature.Build.Label.Price,Prijs
 Feature.Build.Label.PriceUnavailable,--
@@ -2741,6 +2756,7 @@ Feature.Build.Notification.Title.Finished,Build voltooid
 Feature.Build.Notification.Title.NeedInput,Build heeft je input nodig
 Feature.Build.Placeholder.DescribeProduct,Beschrijf wat je wilt verkopen
 Feature.Build.Placeholder.DescribeProductUpdate,Beschrijf een update
+Feature.Build.Placeholder.InternalSpec,internal_code
 Feature.Build.Prompt.CreateDeveloperProduct,"Help me een ontwikkelaarsproduct te maken, het in de game te integreren, de wijzigingen te verifiëren en te publiceren en het te koop aan te bieden."
 Feature.Build.Title.AdActive,Advertentiecampagne is actief
 Feature.Build.Title.AdCampaignDuration,Advertentiecampagne van {durationDays} dagen
@@ -2799,6 +2815,9 @@ Feature.Build.Title.VersionNumber,Versie {VERSION}
 Feature.Build.Title.Versions,Versies
 Feature.Build.Title.WhatsIncluded,Wat is er inbegrepen?
 Feature.BuyRobux.Heading.Banner,
+Feature.BuyRobux.Label.MyFriendsWithCount,Mijn vrienden ({count})
+Feature.BuyRobux.Label.PeopleWithCount,Personen ({count})
+Feature.BuyRobux.Label.Search,
 Feature.Call.Error.Description.Generic,
 Feature.Catalog.Action.Buy,
 Feature.Catalog.Action.Cancel,
@@ -2842,6 +2861,7 @@ Feature.Catalog.AvatarWidgetTitle,
 Feature.Catalog.Checkout.Title.PurchasedFailedPlural,{count} items konden niet worden gekocht
 Feature.Catalog.Checkout.WearAfterPurchase,
 Feature.Catalog.Description.AttributionAlertBody,Je verlaat dit gebied en zult deelnemen aan {experienceName}.
+Feature.Catalog.Feature.Catalog.Label.AvatarBackgrounds,
 Feature.Catalog.Feature.Catalog.Label.ClassicShirt,
 Feature.Catalog.Feature.Catalog.Label.ClassicTShirt,
 Feature.Catalog.Feature.Catalog.Label.TotalItems,Totaal: {itemCount} items
@@ -3547,7 +3567,7 @@ Feature.Friends.Action.GetStarted,Aan de slag
 Feature.Friends.Action.GoToAddFriends,Ga naar Vrienden toevoegen
 Feature.Friends.Action.InviteFriends,Nodig contactpersonen uit om vrienden te zijn op Roblox.
 Feature.Friends.Action.InviteProviderFriends, {provider}-vrienden uitnodigen
-Feature.Friends.Action.PendingRequest,Verzoek in behandeling
+Feature.Friends.Action.PendingRequest,
 Feature.Friends.Action.ShareQR,QR delen
 Feature.Friends.Action.ShowMore,
 Feature.Friends.Action.Unblock,Deblokkeren
@@ -4256,6 +4276,7 @@ Feature.Moments.Title.LeaveMomentCreation,Moment maken afsluiten?
 Feature.Moments.Title.MomentRemoved,
 Feature.Moments.Title.PostInsights,Titel van paginakoptekst
 Feature.Moments.Title.ReportPost,Post melden
+Feature.Moments.Tooltip.PostInsightsBody,"Bekijk het aantal weergaven, de kijktijd en hoe het Moment bij je doelgroep is overgekomen."
 Feature.Moments.Tooltip.PostInsightsTitle,Je momentinzichten zijn hier
 Feature.Moments.Tooltip.ShareFirstMomentBody,Maak een moment van je opnames
 Feature.Moments.Tooltip.ShareFirstMomentTitle,Je eerste moment delen
@@ -4750,6 +4771,14 @@ Feature.PlayerSearchResults.Label.ThisIsYou,Dit ben jij
 Feature.PlayerSearchResults.Label.You,Jij
 Feature.PlayerSearchResults.Label.YouAreFollowing,
 Feature.PlayerSearchResults.Label.YouAreFriends,Jullie zijn vrienden
+Feature.Premium.Description.ScaryModalBody13To17,Ik ga ermee akkoord dat ik de ouder of wettelijke voogd ben van de accounteigenaar. Ik geef toestemming voor deze aankoop en ga akkoord met de Gebruiksvoorwaarden.
+Feature.Premium.Description.ScaryModalBodyNew,Bij deze aankoop wordt echt geld uitgewisseld.{lineBreak}Ik ga ermee akkoord dat ik ten minste 18 jaar oud ben en de ouder of wettelijke voogd ben van de accounteigenaar. Ik geef toestemming voor deze aankoop en ga akkoord met de Gebruiksvoorwaarden.
+Feature.Premium.Description.ScaryModalThreshold1Body,Je hebt deze maand veel uitgegeven aan Roblox. Wil je doorgaan?{linebreak}Bij deze aankoop wordt echt geld uitgewisseld. Je moet de ouder of wettelijke voogd van de accounteigenaar zijn om toestemming te geven voor deze aankoop.
+Feature.Premium.Description.ScaryModalThreshold2Body,Je hebt deze maand veel uitgegeven aan Roblox.{linebreak}Voor deze en alle volgende aankopen worden betalingsbewijzen verzonden naar het geverifieerde e-mailadres van de ouder op dit account. 
+Feature.Premium.Heading.GeneralError,
+Feature.Premium.Heading.ScaryModalTitle,
+Feature.Premium.Message.PleaseTryAgain,Probeer het opnieuw.
+Feature.Premium.Message.SomethingWentWrong,
 Feature.PrivateServers.Action.CreatePrivateServer,
 Feature.PrivateServers.Action.FreeWithBlackbird,Gratis met Plus
 Feature.PrivateServers.Description.PrivateServerPurchaseUnavailableInStudio,Aankopen van privéservers worden niet ondersteund in Studio.
@@ -5477,6 +5506,9 @@ Feature.VerificationUpsell.Response.ErrorTryAgain,
 Feature.VerificationUpsell.Response.InvalidPhoneNumberError,Dit telefoonnummer kan niet worden gebruikt. Voer een ander telefoonnummer in.
 Feature.VerificationUpsell.Response.PhoneHasTooManyAssociatedAccounts,Je hebt het maximale aantal accounts bereikt dat aan één telefoonnummer kan worden gekoppeld.
 Feature.VerificationUpsell.Response.TooManyAttemptsTryAgainLater,
+Feature.VerifiedParentalControls.Description.ParentalApprovalConfirmation,Ik ben de ouder of wettelijke voogd en ik geef toestemming voor deze aankoop onder de {termsLinkStart}Gebruiksvoorwaarden{termsLinkEnd}.
+Feature.VerifiedParentalControls.Description.ParentalApprovalRequired,Dit kost echt geld. Een ouder of wettelijke voogd moet deze aankoop goedkeuren. Ouders kunnen {learnLinkStart}meer informatie{learnLinkEnd} vinden over het beheren van de uitgaven van hun kind.
+Feature.VerifiedParentalControls.Label.AskParentFirst,Vraag het eerst aan een ouder
 Feature.VirtualEvents.AttendanceBeforeEvent,
 Feature.VirtualEvents.AttendanceDuringEvent,Nu aanwezig
 Feature.VirtualEvents.DescriptionLabel,

@@ -430,9 +430,13 @@ Common.Presence.Label.RobloxStudio,Roblox Studio
 Common.VerifiedParentalConsent.Action.Cancel,
 Common.VerifiedParentalConsent.Action.Close,
 Common.VerifiedParentalConsent.Action.GoToSettings,Перейти в Настройки
+Common.VerifiedParentalConsent.Description.EnablePurchasesInSettings,"Чтобы совершить эту покупку, сначала включи совершение покупок в Настройках > Расходы."
+Common.VerifiedParentalConsent.Description.ExistingPendingRequestRedirectToSettings,"Твой запрос на совершение покупок всё ещё на рассмотрении. Ты можешь отменить этот запрос, перейдя в Настройки > Расходы."
 Common.VerifiedParentalConsent.Description.SpendingRestrictionWithSettings,"В связи с региональными ограничениями требуется разрешение родителя для совершения покупки. Попроси разрешение у родителе, перейдя в Настройки > Расходы."
 Common.VerifiedParentalConsent.Description.SpendingRestrictionWithoutSettings,"В связи с региональными ограничениями требуется разрешение родителя для совершения покупки. Используй веб-версию или устройство-компаньон, чтобы попросить разрешение у родителя, перейдя в Настройки > Расходы."
 Common.VerifiedParentalConsent.Label.AskParent,
+Common.VerifiedParentalConsent.Label.RequestPending,Запрос на рассмотрении
+Common.VerifiedParentalConsent.Label.UpdateYourSettings,Обновить настройки
 Common.VisitGame.Label.Play,Присоединиться
 CommonUI.Controls.Action.Accept,Принять
 CommonUI.Controls.Action.Apply,Применить
@@ -440,6 +444,7 @@ CommonUI.Controls.Action.Back,
 CommonUI.Controls.Action.Cancel,
 CommonUI.Controls.Action.CloseRoblox,Закрыть Roblox
 CommonUI.Controls.Action.Confirm,Подтверждаю
+CommonUI.Controls.Action.Continue,
 CommonUI.Controls.Action.Done,
 CommonUI.Controls.Action.Next,
 CommonUI.Controls.Action.OK,
@@ -2489,6 +2494,14 @@ Feature.PlayerSearchResults.Label.ThisIsYou,Это ты
 Feature.PlayerSearchResults.Label.You,Ты
 Feature.PlayerSearchResults.Label.YouAreFollowing,Твои подписки
 Feature.PlayerSearchResults.Label.YouAreFriends,Вы друзья
+Feature.Premium.Description.ScaryModalBody13To17,"Я подтверждаю, что являюсь родителем или опекуном владельца аккаунта. Я подтверждаю эту покупку и принимаю Условия использования."
+Feature.Premium.Description.ScaryModalBodyNew,"Эта покупка предполагает использование настоящих денег.{lineBreak}Я подтверждаю, что мне исполнилось 18 лет и я являюсь родителем или опекуном владельца аккаунта. Я подтверждаю эту покупку и принимаю Условия использования."
+Feature.Premium.Description.ScaryModalThreshold1Body,"В этом месяце потрачено много денег в Roblox. Продолжить?{linebreak}Эта покупка предполагает использование настоящих денег. Чтобы подтвердить эту покупку, вы должны быть родителем или опекуном владельца аккаунта."
+Feature.Premium.Description.ScaryModalThreshold2Body,В этом месяце потрачено много денег в Roblox.{linebreak}Квитанции этой и всех последующих покупок будут отправлены на подтвержденный адрес эл. почты родителя/опекуна. 
+Feature.Premium.Heading.GeneralError,
+Feature.Premium.Heading.ScaryModalTitle,
+Feature.Premium.Message.PleaseTryAgain,Повтори попытку.
+Feature.Premium.Message.SomethingWentWrong,
 Feature.PrivateServers.Action.CreatePrivateServer,
 Feature.Profile.Action.Accept,
 Feature.Profile.Action.AcceptFriends,
@@ -3074,7 +3087,7 @@ IAPExperience.SubscriptionPurchasePrompt.Label.GetSubscription,
 IAPExperience.SubscriptionPurchasePrompt.Label.TestFlowDisclaimer,"Это диалоговое окно является предварительным просмотром, показывающим, как пользователи будут видеть описание подписки. При нажатии кнопки «Подписаться» оплата не взимается."
 IAPExperience.U13Confirm.Action.Cancel,
 IAPExperience.U13Confirm.Action.Confirm,
-IAPExperience.U13Confirm.Text.ParentalConsentWarningPaymentModal13To17,"Я подтверждаю, что являюсь родителем или опекуном владельца аккаунта. Я подтверждаю эту покупку и принимаю Условия использования."
+IAPExperience.U13Confirm.Text.ParentalConsentWarningPaymentModal13To17,
 IAPExperience.U13Confirm.Text.U13MonthlyThreshold1Modal,
 IAPExperience.U13Confirm.Text.U13MonthlyThreshold2Modal,
 IAPExperience.U13Confirm.Text.U13PaymentModal,"Эта покупка предполагает оплату реальными деньгами. Я подтверждаю, что мне исполнилось 18 лет, и я являюсь родителем или опекуном владельца аккаунта. Я подтверждаю эту покупку и принимаю Условия использования."

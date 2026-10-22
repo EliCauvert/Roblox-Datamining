@@ -476,6 +476,7 @@ Authentication.SignUp.Description.EnterParentEmail,보호자 이메일 주소를
 Authentication.SignUp.Description.FaceIdPromo,Face ID는 Roblox 계정에 로그인하는 가장 안전하고 간편한 방법입니다.
 Authentication.SignUp.Description.GenderHelp2,자신에게 적합한 아바타를 선택하는 데 도움이 됩니다.
 Authentication.SignUp.Description.OneMoreStep,한 단계 추가하기
+Authentication.SignUp.Description.OptInMarketingEmailConsent,Roblox의 소식 및 프로모션 관련 이메일을 받고 싶습니다.
 Authentication.SignUp.Description.Or,
 Authentication.SignUp.Description.ParentEmailDisclaimer,Roblox 개인정보 처리방침에 따라 계정 복구 목적으로 보호자 이메일을 요청합니다
 Authentication.SignUp.Description.PasskeyTryAgain,죄송합니다. 패스키 등록 중 오류가 발생했습니다. 다른 사용자 이름으로 다시 등록해 주세요.
@@ -749,6 +750,9 @@ Common.UGCValidation.ErrorLabel.DescendantIdAnimationVersionNotSupported,"{Insta
 Common.UGCValidation.ErrorLabel.DescendantIdNotPublished,애셋 {AssetId}({InstanceFullName}.{FieldName})이 게시되지 않았습니다. 애셋을 게시하고 다시 시도하세요.
 Common.UGCValidation.ErrorLabel.DescendantIdVersionNotSupported,"{InstanceFullName}.{FieldName}은(는) 애셋 {AssetId}의 {Version}버전을 사용하지만, 현재는 버전 1만 지원됩니다. 버전 1을 사용하고 다시 시도하세요."
 Common.UGCValidation.ErrorLabel.DynamicHeadCageMisaligned,마켓플레이스의 다이내믹 헤드는 케이징을 적절히 처리하여 케이지의 눈과 입 정점이 메시 정점과 일치해야 합니다. 케이징과 메시의 정렬을 개선하세요.
+Common.UGCValidation.ErrorLabel.DynamicHeadCageMisalignedLeftEye,다이내믹 헤드 케이지의 왼쪽 눈 랜드마크가 메시와 정렬되지 않았습니다. 왼쪽 눈 메시가 투영된 케이지 영역 내에 오도록 눈 케이지를 조정하세요.
+Common.UGCValidation.ErrorLabel.DynamicHeadCageMisalignedMouth,다이내믹 헤드 케이지의 입 랜드마크가 메시와 정렬되지 않았습니다. 입 메시가 투영된 케이지 영역 내에 오도록 입 케이지를 조정하세요.
+Common.UGCValidation.ErrorLabel.DynamicHeadCageMisalignedRightEye,다이내믹 헤드 케이지의 오른쪽 눈 랜드마크가 메시와 정렬되지 않았습니다. 오른쪽 눈 메시가 투영된 케이지 영역 내에 오도록 눈 케이지를 조정하세요.
 Common.UGCValidation.ErrorLabel.DynamicHeadHappyNotShown,다이내믹 헤드의 미소 표정을 감지할 수 없습니다. 입의 케이지 랜드마크를 조정하여 머리에서 입이 있는 위치와 일치시키고 미소 표정을 지을 수 있는지 확인하세요.
 Common.UGCValidation.ErrorLabel.DynamicHeadLeftEyeNotClose,다이내믹 헤드의 왼쪽 눈 감기 표정을 감지할 수 없습니다. 왼쪽 눈의 케이지 랜드마크를 조정하여 머리의 왼쪽 눈과 일치시키고 감을 수 있는지 확인하세요.
 Common.UGCValidation.ErrorLabel.DynamicHeadMISSINGCAGE,마켓플레이스의 다이내믹 헤드에 헤드 케이지가 없습니다. 다이내믹 헤드용 헤드 케이지를 만드세요.
@@ -768,6 +772,13 @@ Common.UGCValidation.ErrorLabel.EmoteAnimation_MaxPartTranslationCalcFailed,게�
 Common.UGCValidation.ErrorLabel.EmoteAnimation_MaxPartTranslationMismatch,"게시된 애니메이션은 최대 부위 이동 거리를 {taggedTranslation} 스터드로 지정했지만, 애니메이션 데이터에서는 {calculatedTranslation} 스터드로 계산됩니다. 애니메이션을 다시 게시하세요."
 Common.UGCValidation.ErrorLabel.Extents_HeadBelowTorso,"머리는 UpperTorso 위에 배치해야 합니다. 머리 중심이 몸통 상단 아래에 있어, 헤드 메시가 접혔거나 잘못 배치되었음을 나타냅니다."
 Common.UGCValidation.ErrorLabel.FaceControlsOverrideFACSNotEmpty,FaceControls의 InternalOverrideFACSData 속성은 업로드 시 비워두어야 합니다.
+Common.UGCValidation.ErrorLabel.FacialFeaturePresence_EyesMissing,기본 얼굴에 필수 눈 특징이 없습니다. 기본 얼굴에 눈을 추가하고 다시 시도하세요.
+Common.UGCValidation.ErrorLabel.FacialFeaturePresence_MouthMissing,기본 얼굴에 필수 입이 없습니다. 기본 얼굴에 입을 추가하고 다시 시도하세요.
+Common.UGCValidation.ErrorLabel.FacsDeformation_HappyNotShown,행복한 표정을 감지할 수 없습니다. 투사된 입 메쉬가 예상대로 변형되도록 입 케이지 또는 행복한 표정 FACS를 조정하세요.
+Common.UGCValidation.ErrorLabel.FacsDeformation_LeftEyeNotClose,왼쪽 눈 감기 표정을 감지할 수 없습니다. 투사된 눈 메쉬가 예상대로 변형되도록 왼쪽 눈 케이지 또는 왼쪽 눈 감기 FACS를 조정하세요.
+Common.UGCValidation.ErrorLabel.FacsDeformation_MouthNotOpen,입을 벌린 표정을 감지할 수 없습니다. 투사된 입 메쉬가 예상대로 변형되도록 입 케이지 또는 입 벌림 FACS를 조정하세요.
+Common.UGCValidation.ErrorLabel.FacsDeformation_RightEyeNotClose,오른쪽 눈 감기 표정을 감지할 수 없습니다. 투사된 눈 메쉬가 예상대로 변형되도록 오른쪽 눈 케이지 또는 오른쪽 눈 감기 FACS를 조정하세요.
+Common.UGCValidation.ErrorLabel.FacsDeformation_SadNotShown,슬픈 표정을 감지할 수 없습니다. 투사된 입 메쉬가 예상대로 변형되도록 입 케이지 또는 슬픈 표정 FACS를 조정하세요.
 Common.UGCValidation.ErrorLabel.FacsExpandsHead,FACS(표정 코딩 시스템)이 사용자의 머리가 {modPercent}% 확대된 것을 감지했습니다. 머리를 변경하는 것은 얼굴 애니메이션에 대한 마켓플레이스 정책에 위배됩니다.
 Common.UGCValidation.ErrorLabel.FacsJointCountBounded,"다이내믹 헤드에는 최대 {maxFacsJointCount}개의 FACS 조인트를 포함할 수 있지만, 이 헤드에는 {actualJointCount}개가 있습니다. FACS 조인트 개수를 줄이고 다시 시도하세요."
 Common.UGCValidation.ErrorLabel.FacsShrinksHead,FACS(표정 코딩 시스템)이 사용자의 머리가 {modPercent}% 축소된 것을 감지했습니다. 머리를 변경하는 것은 얼굴 애니메이션에 대한 마켓플레이스 정책에 위배됩니다.
@@ -814,6 +825,7 @@ Common.UGCValidation.ErrorLabel.MeshPartBounds_TooSmall,"{partName} 메시의 {a
 Common.UGCValidation.ErrorLabel.MissingRequiredAttachment,첨부 파일({attName})은 {partName} 하위 항목에 정확히 한 번만 존재해야 합니다.
 Common.UGCValidation.ErrorLabel.NoAttributes,'{RootInstanceName}'(또는 하위 항목)에 속성이 포함되어 있습니다. 다음({InstanceNameList})에서 속성을 제거해야 합니다.
 Common.UGCValidation.ErrorLabel.PropertiesNotSensible,{ClassName} '{InstancePath}'에 유효하지 않은 속성({ProblematicProperties})이 있습니다. 표시된 바이트 제한을 초과했습니다(제한이 0이면 속성이 비어 있어야 함). 다른 속성에는 NaN/Inf 값이 포함되어 있거나 기본 크기 제한을 초과합니다.
+Common.UGCValidation.ErrorLabel.RenderedAnimation_RequiredExpressionsMissing,"렌더링된 애니메이션에 하나 이상의 필수 표정(눈 감기, 입 벌리기, 행복, 슬픔)이 없습니다."
 Common.UGCValidation.ErrorLabel.RigAttachmentOutOfBounds,'{AttachmentName}'의 리그 부착물 '{PartName}'은(는) 이 신체 부위가 인접 부위에 연결되는 조인트 경계 근처에 배치해야 합니다. 현재 위치 [{CurrentPosition}]가 연결 평면에서 너무 멀리 떨어져 있습니다. [{ClosestValidPosition}]에 더 가깝게 이동하세요.
 Common.UGCValidation.ErrorLabel.SelectionCountNotOne,Roblox에 애셋을 업로드하려면 정확히 1개의 인스턴스와 관련된 업로드 유형을 선택해야 합니다.
 Common.UGCValidation.ErrorLabel.SerializedAssetTooLarge,이 애셋은 너무 커서 업로드할 수 없습니다({sizeBytes}바이트가 최대치인 {maxSizeBytes}바이트를 초과합니다). 크기를 줄이고 다시 시도해 주세요.
@@ -822,9 +834,13 @@ Common.UGCValidation.ErrorLabel.UnallowedJointSkinned,바디 파트 {partName}�
 Common.VerifiedParentalConsent.Action.Cancel,
 Common.VerifiedParentalConsent.Action.Close,
 Common.VerifiedParentalConsent.Action.GoToSettings,설정으로 이동
+Common.VerifiedParentalConsent.Description.EnablePurchasesInSettings,구매하려면 먼저 '설정' > '지출'에서 구매를 활성화하세요.
+Common.VerifiedParentalConsent.Description.ExistingPendingRequestRedirectToSettings,이미 구매를 위해 대기 중인 요청이 있습니다. '설정' > '지출'에서 이 요청을 취소할 수 있습니다.
 Common.VerifiedParentalConsent.Description.SpendingRestrictionWithSettings,지역별 제한에 따라 구매하려면 보호자의 동의가 필요합니다. 설정 > 지출에서 보호자의 동의를 받으세요.
 Common.VerifiedParentalConsent.Description.SpendingRestrictionWithoutSettings,지역별 제한에 따라 구매하려면 보호자의 동의가 필요합니다. 웹 또는 호환 기기로 설정 > 지출 페이지를 방문해 보호자의 동의를 받으세요.
 Common.VerifiedParentalConsent.Label.AskParent,
+Common.VerifiedParentalConsent.Label.RequestPending,요청 대기 중
+Common.VerifiedParentalConsent.Label.UpdateYourSettings,설정 업데이트
 Common.VisitGame.Label.Play,참가
 CommonUI.Controls.Action.Accept,수락
 CommonUI.Controls.Action.Apply,적용
@@ -832,6 +848,7 @@ CommonUI.Controls.Action.Back,뒤로
 CommonUI.Controls.Action.Cancel,
 CommonUI.Controls.Action.CloseRoblox,Roblox 닫기
 CommonUI.Controls.Action.Confirm,
+CommonUI.Controls.Action.Continue,
 CommonUI.Controls.Action.Done,
 CommonUI.Controls.Action.Next,
 CommonUI.Controls.Action.OK,
@@ -1830,8 +1847,11 @@ Feature.Avatar.Heading.SharePublicAvatar,아바타를 공유하세요
 Feature.Avatar.Heading.SortBy,정렬 기준
 Feature.Avatar.Heading.UsedName,이미 사용되었던 이름
 Feature.Avatar.Heading.WearConfirmation,아이템 장착
+Feature.Avatar.HeroWidget.BundleHeadlessTitle,머리 없는 기수를 이용할 마지막 기회
 Feature.Avatar.HeroWidget.BundleTitle,코블록스 팩트브레이커
 Feature.Avatar.HeroWidget.CapsuleDescription,Roblox 오리지널 아이템에 대한 세 가지 새로운 해석
+Feature.Avatar.HeroWidget.CapsuleHalloweenDescription,으스스한 시즌을 위한 신규 아이템
+Feature.Avatar.HeroWidget.CapsuleHalloweenTitle,핼러윈 테마 아이템
 Feature.Avatar.HeroWidget.CapsulePoolDescription,물보라를 일으킬 3가지 신규 아이템
 Feature.Avatar.HeroWidget.CapsulePoolTitle,수영장 파티
 Feature.Avatar.HeroWidget.CapsuleTitle,재해석된 클래식 아이템
@@ -2428,6 +2448,8 @@ Feature.Build.Description.GameConfiguration,아이템 판매 방식과 게임 �
 Feature.Build.Description.GameCreationDone,게임 생성 및 게시가 완료되었습니다. 게임을 열어 플레이테스트할 수 있습니다.
 Feature.Build.Description.GameSavedPlaytest,게임 생성이 완료되었으며 새 버전이 저장되었습니다. 게임을 열어 플레이테스트할 수 있습니다.
 Feature.Build.Description.HubSettings,크리에이터 허브에서 모든 설정을 관리하세요
+Feature.Build.Description.InternalSpec,최신 사양의 경우 비워 두세요.
+Feature.Build.Description.InternalTesting,새로운 모델 사양을 사용해 보세요.
 Feature.Build.Description.InviteFriendLimit,최대 {MAX_INVITES}명의 친구를 초대하여 제작하는 동안 플레이해 보세요.
 Feature.Build.Description.LongAdCampaign,새로운 플레이어에게 도달하고 재방문을 유도할 수 있는 시간이 더 늘어납니다.
 Feature.Build.Description.MakeAudienceAvail,이 대상에게 체험을 제공하려면 게시하세요.
@@ -2522,6 +2544,7 @@ Feature.Build.Label.FreeBuildUsage,무료 Build 사용량
 Feature.Build.Label.Friends,
 Feature.Build.Label.FriendsOnly,
 Feature.Build.Label.GamePlays,게임 플레이 횟수
+Feature.Build.Label.GamesTab,
 Feature.Build.Label.GetMoreBuildUsage,Build 사용량 더 구매하기
 Feature.Build.Label.GroupGames,그룹 게임
 Feature.Build.Label.Groups,
@@ -2530,6 +2553,8 @@ Feature.Build.Label.IconThumbnails,아이콘 및 섬네일
 Feature.Build.Label.Images2D,2D 이미지
 Feature.Build.Label.InProgress,진행 중
 Feature.Build.Label.InputNeeded,입력 필요
+Feature.Build.Label.InternalSpec,내부 사양
+Feature.Build.Label.InternalTesting,내부 테스트
 Feature.Build.Label.InviteCount,{COUNT}/{MAX_INVITES}
 Feature.Build.Label.Limited,제한됨
 Feature.Build.Label.Live,게시됨
@@ -2550,6 +2575,7 @@ Feature.Build.Label.OnSale,판매 중
 Feature.Build.Label.Pending,보류 중
 Feature.Build.Label.PercentUsed,{PERCENT}% 사용됨
 Feature.Build.Label.PlayTime,플레이 시간
+Feature.Build.Label.PreviewsTab,
 Feature.Build.Label.PreviouslyPublished,이전에 게시됨
 Feature.Build.Label.Price,가격
 Feature.Build.Label.PriceUnavailable,--
@@ -2760,6 +2786,7 @@ Feature.Build.Notification.Title.Finished,빌드 완료
 Feature.Build.Notification.Title.NeedInput,빌드에 대한 의견 필요
 Feature.Build.Placeholder.DescribeProduct,판매하고자 하는 제품에 대해 설명해 주세요
 Feature.Build.Placeholder.DescribeProductUpdate,업데이트 설명
+Feature.Build.Placeholder.InternalSpec,internal_code
 Feature.Build.Prompt.CreateDeveloperProduct,"개발자 상품을 만들고, 게임에 연결하고, 변경 사항을 확인 및 게시하고, 구매할 수 있도록 도와주세요."
 Feature.Build.Title.AdActive,광고 캠페인이 활성화되었습니다
 Feature.Build.Title.AdCampaignDuration,{durationDays}일 광고 캠페인
@@ -2818,6 +2845,9 @@ Feature.Build.Title.VersionNumber,{VERSION} 버전
 Feature.Build.Title.Versions,
 Feature.Build.Title.WhatsIncluded,포함 사항
 Feature.BuyRobux.Heading.Banner,Robux 구매
+Feature.BuyRobux.Label.MyFriendsWithCount,내 친구({count}명)
+Feature.BuyRobux.Label.PeopleWithCount,회원({count}명)
+Feature.BuyRobux.Label.Search,
 Feature.Call.Error.Description.Generic,
 Feature.Catalog.Action.Buy,구매
 Feature.Catalog.Action.Cancel,
@@ -2861,6 +2891,7 @@ Feature.Catalog.AvatarWidgetTitle,
 Feature.Catalog.Checkout.Title.PurchasedFailedPlural,{count}개의 아이템을 구매할 수 없습니다
 Feature.Catalog.Checkout.WearAfterPurchase,
 Feature.Catalog.Description.AttributionAlertBody,이 지역을 떠나 {experienceName}에 참가합니다.
+Feature.Catalog.Feature.Catalog.Label.AvatarBackgrounds,
 Feature.Catalog.Feature.Catalog.Label.ClassicShirt,기본 셔츠
 Feature.Catalog.Feature.Catalog.Label.ClassicTShirt,기본 티셔츠
 Feature.Catalog.Feature.Catalog.Label.TotalItems,합계: {itemCount}개 아이템
@@ -3567,7 +3598,7 @@ Feature.Friends.Action.GetStarted,시작하기
 Feature.Friends.Action.GoToAddFriends,친구 추가로 이동
 Feature.Friends.Action.InviteFriends,연락처 목록에 있는 사람을 Roblox 친구로 초대하세요.
 Feature.Friends.Action.InviteProviderFriends,{provider} 친구 초대
-Feature.Friends.Action.PendingRequest,요청 대기 중
+Feature.Friends.Action.PendingRequest,
 Feature.Friends.Action.ShareQR,QR 코드 공유
 Feature.Friends.Action.ShowMore,
 Feature.Friends.Action.Unblock,차단 해제
@@ -4277,6 +4308,7 @@ Feature.Moments.Title.LeaveMomentCreation,모멘트 만들기를 종료할까요
 Feature.Moments.Title.MomentRemoved,
 Feature.Moments.Title.PostInsights,페이지 헤더 제목
 Feature.Moments.Title.ReportPost,게시물 신고
+Feature.Moments.Tooltip.PostInsightsBody,"조회수, 시청 시간, 그리고 모멘트에 대한 오디언스의 반응을 확인해 보세요."
 Feature.Moments.Tooltip.PostInsightsTitle,모멘트 인사이트를 확인하세요
 Feature.Moments.Tooltip.ShareFirstMomentBody,캡처에서 모멘트를 만드세요
 Feature.Moments.Tooltip.ShareFirstMomentTitle,첫 모멘트를 공유하세요
@@ -4771,6 +4803,14 @@ Feature.PlayerSearchResults.Label.ThisIsYou,회원님이네요
 Feature.PlayerSearchResults.Label.You,
 Feature.PlayerSearchResults.Label.YouAreFollowing,
 Feature.PlayerSearchResults.Label.YouAreFriends,여러분은 친구예요
+Feature.Premium.Description.ScaryModalBody13To17,본인은 계정 소유자의 부모 또는 법적 보호자입니다. 이 구매를 허용하고 이용 약관에 동의합니다.
+Feature.Premium.Description.ScaryModalBodyNew,이 구매는 실물 화폐 교환으로 이루어집니다.{lineBreak}본인은 18세 이상이며 계정 소유자의 부모 또는 법적 보호자임에 동의합니다. 또한 이 구매를 승인하고 이용 약관에 동의합니다.
+Feature.Premium.Description.ScaryModalThreshold1Body,회원님은 이번 달에 Roblox에서 상당히 많은 구매를 하셨습니다. 그래도 계속 진행할까요?{linebreak}이 구매는 실물 화폐 교환으로 이루어집니다. 이 구매를 승인하려면 회원님이 계정 소유자의 부모 또는 법적 보호자여야 합니다.
+Feature.Premium.Description.ScaryModalThreshold2Body,회원님은 이번 달에 Roblox에서 상당히 많은 구매를 하셨습니다.{linebreak}이 구매 및 이후 모든 구매에 대한 영수증은 이 계정의 인증된 보호자 이메일로 전송됩니다. 
+Feature.Premium.Heading.GeneralError,
+Feature.Premium.Heading.ScaryModalTitle,
+Feature.Premium.Message.PleaseTryAgain,
+Feature.Premium.Message.SomethingWentWrong,문제가 생겼어요
 Feature.PrivateServers.Action.CreatePrivateServer,
 Feature.PrivateServers.Action.FreeWithBlackbird,Plus로 무료 이용
 Feature.PrivateServers.Description.PrivateServerPurchaseUnavailableInStudio,Studio에서는 비공개 서버 구매가 지원되지 않습니다.
@@ -5498,6 +5538,9 @@ Feature.VerificationUpsell.Response.ErrorTryAgain,문제가 발생했습니다.�
 Feature.VerificationUpsell.Response.InvalidPhoneNumberError,사용할 수 없는 휴대폰 번호입니다. 다른 휴대폰 번호를 입력하세요.
 Feature.VerificationUpsell.Response.PhoneHasTooManyAssociatedAccounts,한 휴대폰 번호에 연결 가능한 최대 계정 수에 도달했습니다.
 Feature.VerificationUpsell.Response.TooManyAttemptsTryAgainLater,
+Feature.VerifiedParentalControls.Description.ParentalApprovalConfirmation,"본인은 부모 또는 법적 보호자이며, {termsLinkStart}이용 약관{termsLinkEnd}에 따라 이 구매를 승인합니다."
+Feature.VerifiedParentalControls.Description.ParentalApprovalRequired,이 구매는 실제 돈으로 구매해야 합니다. 구매를 위해 부모 또는 법적 보호자의 승인이 필요합니다. 보호자는 자녀의 지출 관리에 대한 {learnLinkStart}자세한 정보{learnLinkEnd}를 확인할 수 있습니다.
+Feature.VerifiedParentalControls.Label.AskParentFirst,먼저 보호자 허락 요청하기
 Feature.VirtualEvents.AttendanceBeforeEvent,
 Feature.VirtualEvents.AttendanceDuringEvent,지금 참가 중
 Feature.VirtualEvents.DescriptionLabel,
@@ -5727,7 +5770,7 @@ IAPExperience.SubscriptionPurchasePrompt.Label.GetSubscription,구독하기
 IAPExperience.SubscriptionPurchasePrompt.Label.TestFlowDisclaimer,이 대화 상자는 사용자에게 구독 설명이 나타나는 방식을 보여 주는 미리 보기입니다. '구독'을 클릭해도 요금이 청구되지 않습니다.
 IAPExperience.U13Confirm.Action.Cancel,
 IAPExperience.U13Confirm.Action.Confirm,
-IAPExperience.U13Confirm.Text.ParentalConsentWarningPaymentModal13To17,본인은 계정 소유자의 부모 또는 법적 보호자입니다. 이 구매를 허용하고 이용 약관에 동의합니다.
+IAPExperience.U13Confirm.Text.ParentalConsentWarningPaymentModal13To17,
 IAPExperience.U13Confirm.Text.U13MonthlyThreshold1Modal,회원님은 이번 달에 Roblox에서 상당히 많은 구매를 하셨습니다. 그래도 계속 진행할까요? 이 구매에는 실제 화폐가 사용됩니다. 이 구매를 승인하려면 회원님이 계정 소유자의 부모 또는 법적 보호자여야 합니다.
 IAPExperience.U13Confirm.Text.U13MonthlyThreshold2Modal,
 IAPExperience.U13Confirm.Text.U13PaymentModal,이 구매는 실물 화폐 교환으로 이루어집니다. 본인은 18세 이상이며 계정 소유자의 부모 또는 법적 보호자임에 동의합니다. 또한 이 구매를 허용하고 이용 약관에 동의합니다.
