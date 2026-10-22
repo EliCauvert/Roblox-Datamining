@@ -3,7 +3,7 @@
     try {
         var e = "undefined" != typeof globalThis ? globalThis : "undefined" != typeof global ? global : "undefined" != typeof window ? window : "undefined" != typeof self ? self : {},
             n = (new e.Error).stack;
-        n && ((e._debugIds || (e._debugIds = {}))[n] = "726ae6cc-0111-51db-dc35-b669be9420b9")
+        n && ((e._debugIds || (e._debugIds = {}))[n] = "09cf6cfe-ee84-4f43-aa4a-7755e6186dce")
     } catch (e) {}
 }();
 (globalThis.TURBOPACK || (globalThis.TURBOPACK = [])).push(["object" == typeof document ? document.currentScript : void 0, 533968, e => {
@@ -2113,14 +2113,15 @@
             let {
                 currentItemType: e,
                 isCurrentItemLoading: a,
-                currentItemGroupId: r
+                currentItemGroupId: r,
+                hasCurrentItemLoadError: i
             } = (0, es.default)(), {
-                isLoading: i,
-                setWorkspaceByGroupId: s
+                isLoading: s,
+                setWorkspaceByGroupId: l
             } = (0, n.useWorkspaces)();
             return (0, t.useEffect)(() => {
-                !e || a || i || s(null != r ? r : null)
-            }, [r, e, a, i, s]), null
+                !e || a || i || s || l(null != r ? r : null)
+            }, [r, e, i, a, s, l]), null
         },
         ep = "applayout-scroll-container",
         ey = (0, d.default)(() => Promise.resolve(f.default), {
@@ -3248,7 +3249,7 @@
                     color: "secondary",
                     component: "span",
                     children: [F, (0, a.jsx)("img", {
-                        src: "".concat("https://assets.create.roblox.com/137a87797dbf24bd81a3bd67f14a0b39383ae48d/assets", "/navigation/privacy_icon.png"),
+                        src: "".concat("https://assets.create.roblox.com/66df0644966e3caed40b543d10488e422a2ae84e/assets", "/navigation/privacy_icon.png"),
                         alt: "",
                         style: {
                             marginLeft: "8px",
@@ -3532,5 +3533,5 @@
     e.s(["HourglassEmptyIcon", () => a.HourglassEmpty])
 }]);
 
-//# debugId=726ae6cc-0111-51db-dc35-b669be9420b9
-//# sourceMappingURL=19_-x2osg3atm.js.map
+//# debugId=09cf6cfe-ee84-4f43-aa4a-7755e6186dce
+//# sourceMappingURL=2k7hzv_04cktd.js.map

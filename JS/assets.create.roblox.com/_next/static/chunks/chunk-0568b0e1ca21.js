@@ -3,7 +3,7 @@
     try {
         var e = "undefined" != typeof globalThis ? globalThis : "undefined" != typeof global ? global : "undefined" != typeof window ? window : "undefined" != typeof self ? self : {},
             n = (new e.Error).stack;
-        n && ((e._debugIds || (e._debugIds = {}))[n] = "589e5308-36d9-1238-255c-a327dc8e8047")
+        n && ((e._debugIds || (e._debugIds = {}))[n] = "3433c9b7-e993-e102-8e30-cf6952db37aa")
     } catch (e) {}
 }();
 (globalThis.TURBOPACK || (globalThis.TURBOPACK = [])).push(["object" == typeof document ? document.currentScript : void 0, 639102, e => {
@@ -128,253 +128,14 @@
         }
     }
     "function" == typeof SuppressedError && SuppressedError;
-    var s = n.BaseAPI;
 
-    function l() {
-        return null !== s && s.apply(this, arguments) || this
-    }
-
-    function c(e, t) {
-        return null == e ? e : {
-            applicationSettings: (0, n.exists)(e, "applicationSettings") ? e.applicationSettings : void 0
-        }
-    }
-    a(l, s), l.prototype.v1InstallerCdnsGetRaw = function(e) {
-        return r(this, void 0, void 0, function() {
-            var t, i, a;
-            return o(this, function(r) {
-                switch (r.label) {
-                    case 0:
-                        return t = {}, i = {}, [4, this.request({
-                            path: "/v1/installer-cdns",
-                            schemaPath: "/v1/installer-cdns",
-                            method: "GET",
-                            headers: i,
-                            query: t
-                        }, e)];
-                    case 1:
-                        return a = r.sent(), [2, new n.VoidApiResponse(a)]
-                }
-            })
-        })
-    }, l.prototype.v1InstallerCdnsGet = function(e) {
-        return r(this, void 0, void 0, function() {
-            return o(this, function(t) {
-                switch (t.label) {
-                    case 0:
-                        return [4, this.v1InstallerCdnsGetRaw(e)];
-                    case 1:
-                        return t.sent(), [2]
-                }
-            })
-        })
-    };
-    var u = function(e) {
-            function t() {
-                return null !== e && e.apply(this, arguments) || this
-            }
-            return a(t, e), t.prototype.v1SettingsApplicationGetRaw = function(e, t) {
-                return r(this, void 0, void 0, function() {
-                    var i, a, r;
-                    return o(this, function(o) {
-                        switch (o.label) {
-                            case 0:
-                                if (null === e.applicationName || void 0 === e.applicationName) throw new n.RequiredError("applicationName", "Required parameter requestParameters.applicationName was null or undefined when calling v1SettingsApplicationGet.");
-                                return i = {}, void 0 !== e.applicationName && (i.applicationName = e.applicationName), a = {}, void 0 !== e.trueClientIP && null !== e.trueClientIP && (a["True-Client-IP"] = String(e.trueClientIP)), [4, this.request({
-                                    path: "/v1/settings/application",
-                                    schemaPath: "/v1/settings/application",
-                                    method: "GET",
-                                    headers: a,
-                                    query: i
-                                }, t)];
-                            case 1:
-                                return r = o.sent(), [2, new n.JSONApiResponse(r, function(e) {
-                                    return c(e)
-                                })]
-                        }
-                    })
-                })
-            }, t.prototype.v1SettingsApplicationGet = function(e, t) {
-                return r(this, void 0, void 0, function() {
-                    return o(this, function(n) {
-                        switch (n.label) {
-                            case 0:
-                                return [4, this.v1SettingsApplicationGetRaw(e, t)];
-                            case 1:
-                                return [4, n.sent().value()];
-                            case 2:
-                                return [2, n.sent()]
-                        }
-                    })
-                })
-            }, t.prototype.v1SettingsSecuredSettingsGetRaw = function(e, t) {
-                return r(this, void 0, void 0, function() {
-                    var i, a, r;
-                    return o(this, function(o) {
-                        switch (o.label) {
-                            case 0:
-                                if (null === e.applicationName || void 0 === e.applicationName) throw new n.RequiredError("applicationName", "Required parameter requestParameters.applicationName was null or undefined when calling v1SettingsSecuredSettingsGet.");
-                                if (null === e.robloxApiKey || void 0 === e.robloxApiKey) throw new n.RequiredError("robloxApiKey", "Required parameter requestParameters.robloxApiKey was null or undefined when calling v1SettingsSecuredSettingsGet.");
-                                return i = {}, void 0 !== e.applicationName && (i.applicationName = e.applicationName), a = {}, void 0 !== e.robloxApiKey && null !== e.robloxApiKey && (a["Roblox-Api-Key"] = String(e.robloxApiKey)), [4, this.request({
-                                    path: "/v1/settings/secured-settings",
-                                    schemaPath: "/v1/settings/secured-settings",
-                                    method: "GET",
-                                    headers: a,
-                                    query: i
-                                }, t)];
-                            case 1:
-                                return r = o.sent(), [2, new n.JSONApiResponse(r, function(e) {
-                                    return c(e)
-                                })]
-                        }
-                    })
-                })
-            }, t.prototype.v1SettingsSecuredSettingsGet = function(e, t) {
-                return r(this, void 0, void 0, function() {
-                    return o(this, function(n) {
-                        switch (n.label) {
-                            case 0:
-                                return [4, this.v1SettingsSecuredSettingsGetRaw(e, t)];
-                            case 1:
-                                return [4, n.sent().value()];
-                            case 2:
-                                return [2, n.sent()]
-                        }
-                    })
-                })
-            }, t.prototype.v1SettingsSecuredSettingsInternalGetRaw = function(e, t) {
-                return r(this, void 0, void 0, function() {
-                    var i, a, r;
-                    return o(this, function(o) {
-                        switch (o.label) {
-                            case 0:
-                                if (null === e.applicationName || void 0 === e.applicationName) throw new n.RequiredError("applicationName", "Required parameter requestParameters.applicationName was null or undefined when calling v1SettingsSecuredSettingsInternalGet.");
-                                if (null === e.robloxApiKey || void 0 === e.robloxApiKey) throw new n.RequiredError("robloxApiKey", "Required parameter requestParameters.robloxApiKey was null or undefined when calling v1SettingsSecuredSettingsInternalGet.");
-                                return i = {}, void 0 !== e.applicationName && (i.applicationName = e.applicationName), a = {}, void 0 !== e.robloxApiKey && null !== e.robloxApiKey && (a["Roblox-Api-Key"] = String(e.robloxApiKey)), [4, this.request({
-                                    path: "/v1/settings/secured-settings-internal",
-                                    schemaPath: "/v1/settings/secured-settings-internal",
-                                    method: "GET",
-                                    headers: a,
-                                    query: i
-                                }, t)];
-                            case 1:
-                                return r = o.sent(), [2, new n.JSONApiResponse(r, function(e) {
-                                    return c(e)
-                                })]
-                        }
-                    })
-                })
-            }, t.prototype.v1SettingsSecuredSettingsInternalGet = function(e, t) {
-                return r(this, void 0, void 0, function() {
-                    return o(this, function(n) {
-                        switch (n.label) {
-                            case 0:
-                                return [4, this.v1SettingsSecuredSettingsInternalGetRaw(e, t)];
-                            case 1:
-                                return [4, n.sent().value()];
-                            case 2:
-                                return [2, n.sent()]
-                        }
-                    })
-                })
-            }, t
-        }(n.BaseAPI),
-        p = n.BaseAPI;
-
-    function d() {
-        return null !== p && p.apply(this, arguments) || this
-    }
-    a(d, p), d.prototype.v1ClientVersionBinaryTypeGetRaw = function(e, t) {
-        return r(this, void 0, void 0, function() {
-            var i, a, r;
-            return o(this, function(o) {
-                switch (o.label) {
-                    case 0:
-                        if (null === e.binaryType || void 0 === e.binaryType) throw new n.RequiredError("binaryType", "Required parameter requestParameters.binaryType was null or undefined when calling v1ClientVersionBinaryTypeGet.");
-                        return i = {}, a = {}, [4, this.request({
-                            path: "/v1/client-version/{binaryType}".replace("{".concat("binaryType", "}"), encodeURIComponent(String(e.binaryType))),
-                            schemaPath: "/v1/client-version/{binaryType}",
-                            method: "GET",
-                            headers: a,
-                            query: i
-                        }, t)];
-                    case 1:
-                        return r = o.sent(), [2, new n.JSONApiResponse(r, function(e) {
-                            return null == e ? e : {
-                                version: (0, n.exists)(e, "version") ? e.version : void 0,
-                                clientVersionUpload: (0, n.exists)(e, "clientVersionUpload") ? e.clientVersionUpload : void 0,
-                                bootstrapperVersion: (0, n.exists)(e, "bootstrapperVersion") ? e.bootstrapperVersion : void 0,
-                                nextClientVersionUpload: (0, n.exists)(e, "nextClientVersionUpload") ? e.nextClientVersionUpload : void 0,
-                                nextClientVersion: (0, n.exists)(e, "nextClientVersion") ? e.nextClientVersion : void 0
-                            }
-                        })]
-                }
-            })
-        })
-    }, d.prototype.v1ClientVersionBinaryTypeGet = function(e, t) {
-        return r(this, void 0, void 0, function() {
-            return o(this, function(n) {
-                switch (n.label) {
-                    case 0:
-                        return [4, this.v1ClientVersionBinaryTypeGetRaw(e, t)];
-                    case 1:
-                        return [4, n.sent().value()];
-                    case 2:
-                        return [2, n.sent()]
-                }
-            })
-        })
-    }, d.prototype.v1MobileClientVersionGetRaw = function(e, t) {
-        return r(this, void 0, void 0, function() {
-            var i, a, r;
-            return o(this, function(o) {
-                switch (o.label) {
-                    case 0:
-                        if (null === e.appVersion || void 0 === e.appVersion) throw new n.RequiredError("appVersion", "Required parameter requestParameters.appVersion was null or undefined when calling v1MobileClientVersionGet.");
-                        return i = {}, void 0 !== e.appVersion && (i.appVersion = e.appVersion), a = {}, [4, this.request({
-                            path: "/v1/mobile-client-version",
-                            schemaPath: "/v1/mobile-client-version",
-                            method: "GET",
-                            headers: a,
-                            query: i
-                        }, t)];
-                    case 1:
-                        return r = o.sent(), [2, new n.JSONApiResponse(r, function(e) {
-                            var t;
-                            return null == e ? e : {
-                                activeVersion: (0, n.exists)(e, "activeVersion") ? e.activeVersion : void 0,
-                                upgradeSource: (0, n.exists)(e, "upgradeSource") ? e.upgradeSource : void 0,
-                                mD5Sum: (0, n.exists)(e, "MD5Sum") ? e.MD5Sum : void 0,
-                                data: (0, n.exists)(e, "data") ? null == (t = e.data) ? t : {
-                                    upgradeAction: (0, n.exists)(t, "UpgradeAction") ? t.UpgradeAction : void 0
-                                } : void 0
-                            }
-                        })]
-                }
-            })
-        })
-    }, d.prototype.v1MobileClientVersionGet = function(e, t) {
-        return r(this, void 0, void 0, function() {
-            return o(this, function(n) {
-                switch (n.label) {
-                    case 0:
-                        return [4, this.v1MobileClientVersionGetRaw(e, t)];
-                    case 1:
-                        return [4, n.sent().value()];
-                    case 2:
-                        return [2, n.sent()]
-                }
-            })
-        })
-    };
-
-    function v(e, t) {
+    function s(e, t) {
         return null == e ? e : {
             applicationSettings: (0, n.exists)(e, "applicationSettings") ? e.applicationSettings : void 0
         }
     }
 
-    function h(e, t) {
+    function l(e, t) {
         return null == e ? e : {
             version: (0, n.exists)(e, "version") ? e.version : void 0,
             clientVersionUpload: (0, n.exists)(e, "clientVersionUpload") ? e.clientVersionUpload : void 0,
@@ -384,7 +145,7 @@
         }
     }
 
-    function m(e) {
+    function c(e) {
         var t;
         return null == (t = e) ? t : {
             name: (0, n.exists)(t, "name") ? t.name : void 0,
@@ -404,7 +165,7 @@
         }
     }
 
-    function f(e, t) {
+    function u(e, t) {
         var i;
         return null == e ? e : {
             channelName: (0, n.exists)(e, "channelName") ? e.channelName : void 0,
@@ -417,7 +178,7 @@
             isFlagOnly: (0, n.exists)(e, "isFlagOnly") ? e.isFlagOnly : void 0
         }
     }
-    var y = function(e) {
+    var d = function(e) {
         function t() {
             return null !== e && e.apply(this, arguments) || this
         }
@@ -436,7 +197,7 @@
                             }, t)];
                         case 1:
                             return r = o.sent(), [2, new n.JSONApiResponse(r, function(e) {
-                                return f(e)
+                                return u(e)
                             })]
                     }
                 })
@@ -470,7 +231,7 @@
                             }, t)];
                         case 1:
                             return r = o.sent(), [2, new n.JSONApiResponse(r, function(e) {
-                                return f(e)
+                                return u(e)
                             })]
                     }
                 })
@@ -505,7 +266,7 @@
                             }, t)];
                         case 1:
                             return r = o.sent(), [2, new n.JSONApiResponse(r, function(e) {
-                                return f(e)
+                                return u(e)
                             })]
                     }
                 })
@@ -605,7 +366,7 @@
                             }, t)];
                         case 1:
                             return r = o.sent(), [2, new n.JSONApiResponse(r, function(e) {
-                                return v(e)
+                                return s(e)
                             })]
                     }
                 })
@@ -639,7 +400,7 @@
                             }, t)];
                         case 1:
                             return r = o.sent(), [2, new n.JSONApiResponse(r, function(e) {
-                                return v(e)
+                                return s(e)
                             })]
                     }
                 })
@@ -799,7 +560,7 @@
                             }, t)];
                         case 1:
                             return r = o.sent(), [2, new n.JSONApiResponse(r, function(e) {
-                                return v(e)
+                                return s(e)
                             })]
                     }
                 })
@@ -834,7 +595,7 @@
                             }, t)];
                         case 1:
                             return r = o.sent(), [2, new n.JSONApiResponse(r, function(e) {
-                                return v(e)
+                                return s(e)
                             })]
                     }
                 })
@@ -870,7 +631,7 @@
                             }, t)];
                         case 1:
                             return r = o.sent(), [2, new n.JSONApiResponse(r, function(e) {
-                                return v(e)
+                                return s(e)
                             })]
                     }
                 })
@@ -905,7 +666,7 @@
                             }, t)];
                         case 1:
                             return r = o.sent(), [2, new n.JSONApiResponse(r, function(e) {
-                                return v(e)
+                                return s(e)
                             })]
                     }
                 })
@@ -945,7 +706,7 @@
                             }, t)];
                         case 1:
                             return r = o.sent(), [2, new n.JSONApiResponse(r, function(e) {
-                                return e.map(m)
+                                return e.map(c)
                             })]
                     }
                 })
@@ -1028,7 +789,7 @@
                             }, t)];
                         case 1:
                             return r = o.sent(), [2, new n.JSONApiResponse(r, function(e) {
-                                return h(e)
+                                return l(e)
                             })]
                     }
                 })
@@ -1062,7 +823,7 @@
                             }, t)];
                         case 1:
                             return r = o.sent(), [2, new n.JSONApiResponse(r, function(e) {
-                                return h(e)
+                                return l(e)
                             })]
                     }
                 })
@@ -1082,19 +843,11 @@
             })
         }
     }(n.BaseAPI);
-    var g = e.i(272593);
-    let S = new u((0, g.createClientConfiguration)("clientsettingscdn", "bedev1", {
-            credentials: "omit"
-        })),
-        w = new y((0, g.createClientConfiguration)("clientsettings", "bedev1"));
-    var b = ((t = {}).RCCService = "RCCService", t.WindowsPlayer = "WindowsPlayer", t.WindowsStudio = "WindowsStudio64", t.MacPlayer = "MacPlayer", t.MacStudio = "MacStudio", t.WindowsStudioCJV = "WindowsStudio64CJV", t.MacStudioCJV = "MacStudioCJV", t.WindowsPlayerCJV = "WindowsPlayerCJV", t.MacPlayerCJV = "MacPlayerCJV", t);
-    e.s(["EClientBinaryType", () => b, "channelClient", 0, {
-        getUserChannel: e => w.v2UserChannelGet({
+    let p = new d((0, e.i(272593).createClientConfiguration)("clientsettings", "bedev1"));
+    var v = ((t = {}).RCCService = "RCCService", t.WindowsPlayer = "WindowsPlayer", t.WindowsStudio = "WindowsStudio64", t.MacPlayer = "MacPlayer", t.MacStudio = "MacStudio", t.WindowsStudioCJV = "WindowsStudio64CJV", t.MacStudioCJV = "MacStudioCJV", t.WindowsPlayerCJV = "WindowsPlayerCJV", t.MacPlayerCJV = "MacPlayerCJV", t);
+    e.s(["EClientBinaryType", () => v, "channelClient", 0, {
+        getUserChannel: e => p.v2UserChannelGet({
             binaryType: e
-        })
-    }, "settingsClient", 0, {
-        getApplicationSettings: () => S.v1SettingsApplicationGet({
-            applicationName: "CreatorDashboard"
         })
     }], 639102)
 }, 991707, e => {
@@ -1546,8 +1299,8 @@
         l = e.i(345886),
         c = e.i(686762),
         u = e.i(623983),
-        p = e.i(752756),
-        d = e.i(649114),
+        d = e.i(752756),
+        p = e.i(649114),
         v = e.i(15645),
         h = e.i(697973);
     let m = "https://www.".concat("roblox.com", "/info/terms"),
@@ -1577,7 +1330,7 @@
             maxWidth: "Medium",
             children: [(0, t.jsxs)(a.DialogTitle, {
                 className: w.titleWrapper,
-                children: [(0, t.jsx)(d.IconButton, {
+                children: [(0, t.jsx)(p.IconButton, {
                     className: w.closeIcon,
                     color: "secondary",
                     "aria-label": g("Action.Close"),
@@ -1588,7 +1341,7 @@
                     container: !0,
                     alignItems: "center",
                     gap: 2,
-                    children: [(0, t.jsx)(p.WarningIcon, {
+                    children: [(0, t.jsx)(d.WarningIcon, {
                         color: "warning",
                         fontSize: "large"
                     }), (0, t.jsx)(u.Typography, {
@@ -1634,15 +1387,15 @@
         l = e.i(639102),
         c = e.i(413019),
         u = e.i(709337),
-        p = e.i(877051),
-        d = e.i(392782),
+        d = e.i(877051),
+        p = e.i(392782),
         v = e.i(991707);
     async function h(e, t) {
         var n;
         let i = Number(e),
             a = Number(t);
         if (!Number.isFinite(i) || !Number.isFinite(a)) return !1;
-        let r = null == (n = (await d.default.getDetails([i])).data) ? void 0 : n[0],
+        let r = null == (n = (await p.default.getDetails([i])).data) ? void 0 : n[0],
             o = null == r ? void 0 : r.rootPlaceId;
         if (null == o) return !1;
         let s = new Set([a, o]);
@@ -1682,14 +1435,14 @@
         } = (0, s.useAuthentication)(), {
             locale: l
         } = (0, a.useLocalization)(), {
-            translate: d
+            translate: p
         } = (0, a.useTranslation)(), {
             trackerClient: v
         } = (0, u.useEventTrackerProvider)(), m = null == i ? void 0 : i.onDialogClose, y = {
-            "Action.DownloadStudio": d("Action.DownloadStudio"),
-            "Message.CheckingStudio": d("Message.CheckingStudio"),
-            "Message.OpenStudioError": d("Message.OpenStudioError"),
-            "Message.StartYourCreation": d("Message.StartYourCreation")
+            "Action.DownloadStudio": p("Action.DownloadStudio"),
+            "Message.CheckingStudio": p("Message.CheckingStudio"),
+            "Message.OpenStudioError": p("Message.OpenStudioError"),
+            "Message.StartYourCreation": p("Message.StartYourCreation")
         }, {
             isCompatible: g,
             open: S,
@@ -1726,7 +1479,7 @@
                 })().catch(() => {})
             }, [null == r ? void 0 : r.id, l, T]),
             dialog: (0, t.jsxs)(t.Fragment, {
-                children: [w, (0, t.jsx)(p.default, {
+                children: [w, (0, t.jsx)(d.default, {
                     open: N,
                     onClose: A
                 })]
@@ -1773,18 +1526,18 @@
                 }
             })
         }),
-        p = i.forwardRef(function(e, i) {
+        d = i.forwardRef(function(e, i) {
             let r = (0, s.u)({
                     props: e,
                     name: "MuiDialogActions"
                 }),
                 {
-                    className: p,
-                    disableSpacing: d = !1
+                    className: d,
+                    disableSpacing: p = !1
                 } = r,
                 v = (0, t._)(r, c),
                 h = (0, n._)({}, r, {
-                    disableSpacing: d
+                    disableSpacing: p
                 }),
                 m = (e => {
                     let {
@@ -1796,12 +1549,12 @@
                     }, l, t)
                 })(h);
             return (0, o.jsx)(u, (0, n._)({
-                className: (0, a.c)(m.root, p),
+                className: (0, a.c)(m.root, d),
                 ownerState: h,
                 ref: i
             }, v))
         });
-    e.s(["D", 0, p])
+    e.s(["D", 0, d])
 }, 735410, e => {
     "use strict";
     var t = e.i(194250),
@@ -1823,13 +1576,13 @@
                 l = e.children,
                 c = e.className,
                 u = (0, t.a)(e, ["classes", "children", "className"]),
-                p = o(void 0, {
+                d = o(void 0, {
                     props: {
                         classes: (0, a.default)(s, c)
                     }
                 });
             return n.default.createElement(r.D, (0, t._)({}, u, {
-                classes: p.classes,
+                classes: d.classes,
                 ref: i
             }), l)
         });
@@ -1850,10 +1603,10 @@
         l = e.i(502927),
         c = e.i(392848),
         u = e.i(221628),
-        p = e.i(396249),
-        d = e.i(121880);
+        d = e.i(396249),
+        p = e.i(121880);
     let v = ["className", "id"],
-        h = (0, s.s)(p.T, {
+        h = (0, s.s)(d.T, {
             name: "MuiDialogTitle",
             slot: "Root",
             overridesResolver: (e, t) => t.root
@@ -1862,13 +1615,13 @@
             flex: "0 0 auto"
         }),
         m = n.forwardRef(function(e, t) {
-            let i = (0, d.u)({
+            let i = (0, p.u)({
                     props: e,
                     name: "MuiDialogTitle"
                 }),
                 {
                     className: a,
-                    id: p
+                    id: d
                 } = i,
                 m = (0, o._)(i, v),
                 f = (e => {
@@ -1880,7 +1633,7 @@
                     }, l.g, t)
                 })(i),
                 {
-                    titleId: y = p
+                    titleId: y = d
                 } = n.useContext(c.D);
             return (0, u.jsx)(h, (0, r._)({
                 component: "h2",
@@ -1888,7 +1641,7 @@
                 ownerState: i,
                 ref: t,
                 variant: "h6",
-                id: null != p ? p : y
+                id: null != d ? d : y
             }, m))
         });
     var f = (0, i.default)({
@@ -1924,5 +1677,5 @@
     e.s(["DialogTitle", () => t.default])
 }]);
 
-//# debugId=589e5308-36d9-1238-255c-a327dc8e8047
-//# sourceMappingURL=3hzdqc2921bnz.js.map
+//# debugId=3433c9b7-e993-e102-8e30-cf6952db37aa
+//# sourceMappingURL=1549f69d9xl-8.js.map

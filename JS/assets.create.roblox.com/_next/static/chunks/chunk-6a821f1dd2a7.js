@@ -3,7 +3,7 @@
     try {
         var e = "undefined" != typeof globalThis ? globalThis : "undefined" != typeof global ? global : "undefined" != typeof window ? window : "undefined" != typeof self ? self : {},
             n = (new e.Error).stack;
-        n && ((e._debugIds || (e._debugIds = {}))[n] = "a7adae50-45c3-7364-78d0-7121655f6bc3")
+        n && ((e._debugIds || (e._debugIds = {}))[n] = "93ed1990-8c24-9180-1d7d-64ed9af8600c")
     } catch (e) {}
 }();
 (globalThis.TURBOPACK || (globalThis.TURBOPACK = [])).push(["object" == typeof document ? document.currentScript : void 0, 656350, t => {
@@ -11425,7 +11425,7 @@
     };
     var cI = t.i(37819),
         cj = t.i(532045);
-    let cL = "".concat("".concat("https://assets.create.roblox.com/137a87797dbf24bd81a3bd67f14a0b39383ae48d/assets", "/opengraph"), "/global_og_image.png"),
+    let cL = "".concat("".concat("https://assets.create.roblox.com/66df0644966e3caed40b543d10488e422a2ae84e/assets", "/opengraph"), "/global_og_image.png"),
         cN = (0, oT.withTranslation)(t => {
             let {
                 openGraphMetadata: {
@@ -13771,18 +13771,17 @@
         })
     };
     var fX = t.i(729904),
-        f$ = t.i(486736),
-        fZ = t.i(142330),
-        fY = t.i(623983),
-        f0 = t.i(226519),
-        f1 = t.i(458442),
-        f2 = t.i(686762),
-        f4 = t.i(196990),
-        f3 = t.i(533968),
-        f6 = t.i(210205),
-        f8 = t.i(616931),
-        f5 = t.i(407881);
-    let f9 = (0, oT.withTranslation)(t => {
+        f$ = t.i(142330),
+        fZ = t.i(623983),
+        fY = t.i(226519),
+        f0 = t.i(458442),
+        f1 = t.i(686762),
+        f2 = t.i(196990),
+        f4 = t.i(533968),
+        f3 = t.i(210205),
+        f6 = t.i(616931),
+        f8 = t.i(407881);
+    let f5 = (0, oT.withTranslation)(t => {
             var n, r;
             let {
                 onDialogCompletion: a
@@ -13793,23 +13792,23 @@
                 logout: u
             } = (0, ll.useAuthentication)(), l = (0, oc.useRef)(!1), [c, d] = (0, oc.useState)(!1), {
                 completeCheck: f
-            } = (0, f5.useUserAgreementCheck)(), {
+            } = (0, f8.useUserAgreementCheck)(), {
                 captureError: p,
                 error: h,
                 info: v
-            } = (0, f6.useMetricsMonitoring)(), [y, g] = (0, oc.useState)(!1), [b, w] = (0, oc.useState)(!1), [x, P] = (0, oc.useState)([]), T = (0, oc.useCallback)(async t => {
+            } = (0, f3.useMetricsMonitoring)(), [y, g] = (0, oc.useState)(!1), [b, w] = (0, oc.useState)(!1), [x, P] = (0, oc.useState)([]), T = (0, oc.useCallback)(async t => {
                 async function n(t, r) {
-                    if (r <= 0) return void h("User Agreement accept failed after retried ".concat(f8.maxUpdateRetryCount, " times"));
+                    if (r <= 0) return void h("User Agreement accept failed after retried ".concat(f6.maxUpdateRetryCount, " times"));
                     try {
                         var a;
-                        let i = null == (a = (await f4.userAgreementsClient.acceptUserAgreements(t)).results) ? void 0 : a.filter(t => 0 !== t.errorCode).map(t => t.agreementId);
+                        let i = null == (a = (await f2.userAgreementsClient.acceptUserAgreements(t)).results) ? void 0 : a.filter(t => 0 !== t.errorCode).map(t => t.agreementId);
                         i && i.length > 0 && await n(i, r - 1)
                     } catch (i) {
-                        let a = (0, f3.getResponseFromError)(i);
+                        let a = (0, f4.getResponseFromError)(i);
                         (null == a ? void 0 : a.status) === cq.StatusCodes.UNAUTHORIZED ? (v("User Agreement accept failed with 401 from backend"), await od.default.push("/login")) : (h("User Agreement accept failed with status code ".concat(null == a ? void 0 : a.status)), await n(t, r - 1))
                     }
                 }
-                await n(t, f8.maxUpdateRetryCount)
+                await n(t, f6.maxUpdateRetryCount)
             }, [h, v]), R = (0, oc.useCallback)(async () => {
                 try {
                     await u()
@@ -13823,8 +13822,8 @@
                 w(!0), await T(t), d(!0), w(!1), g(!1), null == a || a()
             }, [T, x, a]), E = (0, oc.useCallback)(async () => {
                 try {
-                    let t = f4.userAgreementsClient.getUserAgreements({
-                            clientType: fZ.ClientType.Studio
+                    let t = f2.userAgreementsClient.getUserAgreements({
+                            clientType: f$.ClientType.Studio
                         }),
                         n = await t;
                     n.length > 0 ? (P([...n]), g(!0)) : (f(), null == a || a())
@@ -13837,16 +13836,16 @@
                 }
             }), [f, c]);
             return (0, oc.useEffect)(() => {
-                (null == s ? void 0 : s.id) === void 0 || l.current || !i.isReady || f8.dontShowAgreementPaths.some(t => i.pathname.startsWith(t)) || (E(), l.current = !0)
-            }, [s, E, i.isReady, i.pathname]), (0, m.jsx)(f0.Dialog, {
+                (null == s ? void 0 : s.id) === void 0 || l.current || !i.isReady || f6.dontShowAgreementPaths.some(t => i.pathname.startsWith(t)) || (E(), l.current = !0)
+            }, [s, E, i.isReady, i.pathname]), (0, m.jsx)(fY.Dialog, {
                 open: y,
                 TransitionProps: q,
-                children: (0, m.jsx)(f1.DialogTemplate, {
+                children: (0, m.jsx)(f0.DialogTemplate, {
                     onConfirm: S,
                     onCancel: R,
                     title: o("Heading.AgreementsUpdate"),
                     content: (0, m.jsxs)(m.Fragment, {
-                        children: [(0, m.jsx)(fY.Typography, {
+                        children: [(0, m.jsx)(fZ.Typography, {
                             component: "p",
                             variant: "body1",
                             children: null != (n = null == (r = x.find(t => null != t.agreementBodyText)) ? void 0 : r.agreementBodyText) ? n : o("Description.AgreementsUpdate")
@@ -13855,10 +13854,10 @@
                                 var n;
                                 let r;
                                 return (0, m.jsx)("li", {
-                                    children: (0, m.jsx)(f2.Link, {
+                                    children: (0, m.jsx)(f1.Link, {
                                         href: t.displayUrl,
                                         target: "__blank",
-                                        children: (n = t.agreementType, void 0 === (r = f8.agreementsTranslationMap[n]) ? o(r) : n)
+                                        children: (n = t.agreementType, void 0 === (r = f6.agreementsTranslationMap[n]) ? o(r) : n)
                                     })
                                 }, t.id)
                             })
@@ -13871,17 +13870,17 @@
             })
         }, [lk.TranslationNamespace.AgreementsUpdate]),
         {
-            authenticationApi: f7
+            authenticationApi: f9
         } = {
             authenticationApi: lt
         },
         {
-            discoveryApi: pe
+            discoveryApi: f7
         } = uC.ApplicationAuthorizationsClient,
         {
-            usersApi: pt
+            usersApi: pe
         } = lr.UsersClient,
-        pn = (r = lK.default, t => {
+        pt = (r = lK.default, t => {
             var n, a, i, o, s, u, l, c, d;
             let f, p;
             return r.logWebVitalsEvent({
@@ -13908,7 +13907,7 @@
     (0, ow.c)({
         unifiedLogger: lK.default
     });
-    let pr = (up && (p = null != (d = document.querySelector('meta[name="'.concat("emotion-insertion-point-mui", '"]'))) ? d : void 0, h = null != (f = document.querySelector('meta[name="'.concat("emotion-insertion-point-tss", '"]'))) ? f : void 0), {
+    let pn = (up && (p = null != (d = document.querySelector('meta[name="'.concat("emotion-insertion-point-mui", '"]'))) ? d : void 0, h = null != (f = document.querySelector('meta[name="'.concat("emotion-insertion-point-tss", '"]'))) ? f : void 0), {
         muiCache: (0, oE.c)({
             key: ud,
             prepend: !0,
@@ -13920,12 +13919,12 @@
         })
     });
     (0, oR.createThumbnailsClient)((0, la.getBEDEV1ServiceBasePath)("thumbnails"));
-    let pa = {
+    let pr = {
             locale: cE.defaultLocale,
             nativeName: cE.defaultNativeName
         },
-        pi = new cS.TranslationResourceProvider(pa, cE.fallbackLocale),
-        po = t => {
+        pa = new cS.TranslationResourceProvider(pr, cE.fallbackLocale),
+        pi = t => {
             let n, r, {
                 children: a
             } = t;
@@ -13957,13 +13956,13 @@
                 children: a
             })
         },
-        ps = {
+        po = {
             defaultLocale: cE.defaultLocale,
             title: cE.defaultMetadataJson["OpenGraph.Title"],
             description: cE.defaultMetadataJson["OpenGraph.Description"]
         },
-        pu = t => t,
-        pl = () => ((() => {
+        ps = t => t,
+        pu = () => ((() => {
             let {
                 trackerClient: t
             } = (0, lG.useEventTrackerProvider)(), n = (0, oc.useCallback)(() => {
@@ -13980,12 +13979,12 @@
                     od.default.events.off("routeChangeStart", t.start), od.default.events.off("routeChangeComplete", t.complete), od.default.events.off("routeChangeError", t.cancel)
                 }
             }, [])
-        })(), (0, of.useReportWebVitals)(pn), null),
-        pc = {
+        })(), (0, of.useReportWebVitals)(pt), null),
+        pl = {
             enabled: !0,
             isFetched: !0
         },
-        pd = t => {
+        pc = t => {
             let {
                 children: n
             } = t, {
@@ -14005,13 +14004,13 @@
                 robloxEnvironment: "production",
                 target: "global",
                 drawerVariant: "belowAppBar",
-                signalRCrossTab: pc,
+                signalRCrossTab: pl,
                 creatorWalletsNavigation: a,
                 enableGroupModeration: null != r && r,
                 children: n
             })
         },
-        pf = new oh.QueryClient({
+        pd = new oh.QueryClient({
             defaultOptions: {
                 queries: {
                     refetchOnWindowFocus: !1,
@@ -14019,8 +14018,8 @@
                 }
             }
         }),
-        pp = (0, om.initializeAuthStore)(),
-        ph = t => {
+        pf = (0, om.initializeAuthStore)(),
+        pp = t => {
             var n;
             let {
                 Component: r,
@@ -14028,44 +14027,44 @@
                 cache: i
             } = t, {
                 query: o
-            } = (0, od.useRouter)(), s = null != (n = r.getPageLayout) ? n : pu, u = (0, oc.useMemo)(() => ({
-                ...ps,
+            } = (0, od.useRouter)(), s = null != (n = r.getPageLayout) ? n : ps, u = (0, oc.useMemo)(() => ({
+                ...po,
                 ...r.pageMetadata
             }), [r.pageMetadata]), [l, c] = (0, oc.useState)(!1), d = (0, oc.useCallback)(() => c(!0), []);
             return (0, og.useMaintenanceObserver)("https://create.roblox.com"), (0, oc.useEffect)(() => {
                 uh()
             }, []), lE.default.setUnifiedLoggerClient(lK.default), (0, m.jsx)(op.ErrorBoundary, {
                 children: (0, m.jsx)(uv, {
-                    cache: null != i ? i : pr,
+                    cache: null != i ? i : pn,
                     children: (0, m.jsxs)(cb, {
                         providers: [(0, m.jsx)(fH.BreadcrumbItemNameProvider, {}), (0, m.jsx)(ov.QueryClientProvider, {
-                            client: pf
+                            client: pd
                         }), (0, m.jsx)(ox.C, {
                             client: ln.default
-                        }), (0, m.jsx)(lW.CustomDashboardServiceProvider, {}), (0, m.jsx)(lW.UniverseFlaggedCustomDashboardProvider, {}), (0, m.jsx)(po, {}), (0, m.jsx)(cR, {
+                        }), (0, m.jsx)(lW.CustomDashboardServiceProvider, {}), (0, m.jsx)(lW.UniverseFlaggedCustomDashboardProvider, {}), (0, m.jsx)(pi, {}), (0, m.jsx)(cR, {
                             pageLoggerConfig: r.loggerConfig
                         }), (0, m.jsx)(lG.EventTrackerProvider, {
                             trackerClient: lE.default
                         }), (0, m.jsx)(om.RobloxAuthenticationProvider, {
                             clientId: "4273917941353191905",
-                            authenticationClient: f7,
-                            discoveryClient: pe,
-                            usersClient: pt,
-                            store: pp
+                            authenticationClient: f9,
+                            discoveryClient: f7,
+                            usersClient: pe,
+                            store: pf
                         }), (0, m.jsx)(ch.GroupsProvider, {}), (0, m.jsx)(lc, {}), (0, m.jsx)(lp, {
                             themeElement: "u" > typeof document ? document.documentElement : void 0
                         }), (0, m.jsx)(oT.LocalizationProvider, {
-                            provider: pi
+                            provider: pa
                         }), (0, m.jsx)(um.SnackbarProvider, {}), (0, m.jsx)(uy.DialogProvider, {}), (0, m.jsx)(ld.default, {}), (0, m.jsx)(oR.ThumbnailsProvider, {
                             baseUrl: lE.eventStreamBaseUrl
-                        }), (0, m.jsx)(f$.SettingsProvider, {}), (0, m.jsx)(pd, {}), (0, m.jsx)(cw.ThemeAwareStudioResourcesProvider, {}), (0, m.jsx)(cC, {}), (0, m.jsx)(cg.default, {}), (0, m.jsx)(fQ, {}), (0, m.jsx)(oy.CookieConsentProvider, {
+                        }), (0, m.jsx)(pc, {}), (0, m.jsx)(cw.ThemeAwareStudioResourcesProvider, {}), (0, m.jsx)(cC, {}), (0, m.jsx)(cg.default, {}), (0, m.jsx)(fQ, {}), (0, m.jsx)(oy.CookieConsentProvider, {
                             robloxSiteDomain: "roblox.com"
-                        }), (0, m.jsx)(uA.AgeVerificationUpsellProvider, {}), (0, m.jsx)(fV, {}), (0, m.jsx)(f5.default, {})],
-                        children: [(0, m.jsx)(pl, {}), (0, m.jsx)(ls, {
-                            provider: pi
+                        }), (0, m.jsx)(uA.AgeVerificationUpsellProvider, {}), (0, m.jsx)(fV, {}), (0, m.jsx)(f8.default, {})],
+                        children: [(0, m.jsx)(pu, {}), (0, m.jsx)(ls, {
+                            provider: pa
                         }), (0, m.jsx)(fz, {}), (0, m.jsx)(fG, {}), (0, m.jsx)(fM, {}), (0, m.jsx)(lF, {
                             isSuppressed: !l
-                        }), (0, m.jsx)(f9, {
+                        }), (0, m.jsx)(f5, {
                             onDialogCompletion: d
                         }), (0, m.jsx)(cy, {}), (0, m.jsx)(cN, {
                             openGraphMetadata: u
@@ -14078,7 +14077,7 @@
                 })
             })
         };
-    t.s(["CustomApp", 0, ph, "default", 0, ph, "reportWebVitals", 0, pn], 656350)
+    t.s(["CustomApp", 0, pp, "default", 0, pp, "reportWebVitals", 0, pt], 656350)
 }, 681109, (t, n, r) => {
     let a = "/_app";
     (window.__NEXT_P = window.__NEXT_P || []).push([a, () => t.r(656350)]), n.hot && n.hot.dispose(function() {
@@ -14485,5 +14484,5 @@
     n.exports = t.r(816657)
 }]);
 
-//# debugId=a7adae50-45c3-7364-78d0-7121655f6bc3
-//# sourceMappingURL=0g51dv5lzjefp.js.map
+//# debugId=93ed1990-8c24-9180-1d7d-64ed9af8600c
+//# sourceMappingURL=3ugyistzxoilj.js.map
