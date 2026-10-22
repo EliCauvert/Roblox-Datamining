@@ -23,6 +23,7 @@ local FFlagSduiAccordionComponent = require(Parent.SharedFlags).FFlagSduiAccordi
 local FFlagSduiSystemBannerComponent = require(Parent.SharedFlags).FFlagSduiSystemBannerComponent
 local FFlagSduiBannerContextComponent = require(Parent.SharedFlags).FFlagSduiBannerContextComponent
 local FFlagSduiViewportVisibilityComponent = require(Parent.SharedFlags).FFlagSduiViewportVisibilityComponent
+local FFlagSduiInteractableTileWrapper = require(Parent.SharedFlags).FFlagSduiInteractableTileWrapper
 local FFlagSduiDevStoreSeeAllSupport = require(Parent.SharedFlags).FFlagSduiDevStoreSeeAllSupport
 local FFlagSduiPlayWithReward = require(Parent.SharedFlags).FFlagSduiPlayWithReward
 local FFlagSduiPlayWithRewardRefactor = require(Parent.SharedFlags).FFlagSduiPlayWithRewardRefactor
@@ -37,7 +38,7 @@ local FFlagLuaAppSduiVideoThumbnail = require(Parent.SharedFlags).FFlagLuaAppSdu
 local FFlagEnableGameJoinEarlyAccess = require(Parent.SharedFlags).FFlagEnableGameJoinEarlyAccess
 
 return function()
-	-- upvalues: SduiComponentType (copy), SduiSharedContent (copy), FFlagSduiCardComponent (copy), FFlagSduiSystemBannerComponent (copy), FFlagSduiBannerContextComponent (copy), FFlagSduiViewportVisibilityComponent (copy), GetLuaTableEnumParserFunction (copy), FoundationModule (copy), ParseColorTokenProp (copy), ParseVector2Prop (copy), ParseIntegerProp (copy), ParseUDim2Prop (copy), ParseBooleanProp (copy), ParseNumberProp (copy), ParseStringProp (copy), FFlagSduiShimmerTextComponentEnabled (copy), FFlagSduiRevealTextComponentEnabled (copy), FFlagSduiPreferredTextSizeLineBudgets (copy), FFlagLuaAppSduiVideoThumbnail (copy), FFlagEnableGameJoinEarlyAccess (copy), FFlagSduiPlayWithRewardRefactor (copy), FFlagSduiPlayWithReward (copy), ParseUiComponentProp (copy), ParseCallbackProp (copy), FFlagSduiContentRowStateLayerModule (copy), FFlagSDUIContentRowSelectableModule (copy), FFlagSduiListComponents (copy), FFlagSduiAccordionComponent (copy), FFlagSduiDevStoreSeeAllSupport (copy), FFlagSduiTooltipComponentEnabled (copy), FFlagSduiCollectionCarouselPlaceholderItem (copy), FFlagSduiAiOverviewEnabled (copy), FFlagSduiVerticalListWithImpressionsEnabled (copy), GetSduiComponentRegistryFunction (copy)
+	-- upvalues: SduiComponentType (copy), SduiSharedContent (copy), FFlagSduiCardComponent (copy), FFlagSduiSystemBannerComponent (copy), FFlagSduiBannerContextComponent (copy), FFlagSduiViewportVisibilityComponent (copy), FFlagSduiInteractableTileWrapper (copy), GetLuaTableEnumParserFunction (copy), FoundationModule (copy), ParseColorTokenProp (copy), ParseVector2Prop (copy), ParseIntegerProp (copy), ParseUDim2Prop (copy), ParseBooleanProp (copy), ParseNumberProp (copy), ParseStringProp (copy), FFlagSduiShimmerTextComponentEnabled (copy), FFlagSduiRevealTextComponentEnabled (copy), FFlagSduiPreferredTextSizeLineBudgets (copy), FFlagLuaAppSduiVideoThumbnail (copy), FFlagEnableGameJoinEarlyAccess (copy), FFlagSduiPlayWithRewardRefactor (copy), FFlagSduiPlayWithReward (copy), ParseUiComponentProp (copy), ParseCallbackProp (copy), FFlagSduiContentRowStateLayerModule (copy), FFlagSDUIContentRowSelectableModule (copy), FFlagSduiListComponents (copy), FFlagSduiAccordionComponent (copy), FFlagSduiDevStoreSeeAllSupport (copy), FFlagSduiTooltipComponentEnabled (copy), FFlagSduiCollectionCarouselPlaceholderItem (copy), FFlagSduiAiOverviewEnabled (copy), FFlagSduiVerticalListWithImpressionsEnabled (copy), GetSduiComponentRegistryFunction (copy)
 	GetSduiComponentRegistryFunction().registerComponentDefinitions({
 		[SduiComponentType.DetailsPageImageHeader] = {
 			getLazyComponent = function()
@@ -79,6 +80,12 @@ return function()
 			getLazyComponent = function()
 				-- upvalues: SduiSharedContent (upval)
 				return require(SduiSharedContent.Components.SduiViewportVisibility)
+			end
+		} else nil,
+		[SduiComponentType.InteractableTileWrapper] = if FFlagSduiInteractableTileWrapper then {
+			getLazyComponent = function()
+				-- upvalues: SduiSharedContent (upval)
+				return require(SduiSharedContent.Components.SduiInteractableTileWrapper)
 			end
 		} else nil,
 		[SduiComponentType.CircleIcon] = {

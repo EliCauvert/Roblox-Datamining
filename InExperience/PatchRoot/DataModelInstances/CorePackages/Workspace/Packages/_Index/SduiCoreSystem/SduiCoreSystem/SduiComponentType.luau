@@ -63,6 +63,7 @@
 	VerticalListWithImpressions = "VerticalListWithImpressions",
 	InfoTable = "InfoTable",
 	InfoTableCell = "InfoTableCell",
+	InteractableTileWrapper = "InteractableTileWrapper",
 	ItemMediaHeader = "ItemMediaHeader",
 	LineLimitedText = "LineLimitedText",
 	LinkText = "LinkText",

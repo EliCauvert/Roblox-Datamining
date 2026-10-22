@@ -5,5 +5,9 @@ local t = {}
 
 return function(p1)
 	-- upvalues: ExperienceAnalyticsModule (copy), SignalsReactModule (copy), t (copy)
-	return SignalsReactModule.useSignalState(ExperienceAnalyticsModule.getGoalMilestonesStore(false).getAndFetchGoalMilestones(p1).data) or t
+	local AndFetchGoalMilestones = ExperienceAnalyticsModule.getGoalMilestonesStore(false).getAndFetchGoalMilestones(p1)
+	local UseSignalStateResult = SignalsReactModule.useSignalState(AndFetchGoalMilestones.data)
+	local UseSignalStateResult1 = SignalsReactModule.useSignalState(AndFetchGoalMilestones.status)
+	
+	return UseSignalStateResult or t, UseSignalStateResult ~= nil or UseSignalStateResult1 == "Failed"
 end

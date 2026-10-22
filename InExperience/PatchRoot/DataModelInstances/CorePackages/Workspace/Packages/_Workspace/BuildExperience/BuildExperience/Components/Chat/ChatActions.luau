@@ -1,5 +1,7 @@
 ﻿local BuildExperience = script:FindFirstAncestor("BuildExperience")
 local Parent = BuildExperience.Parent
+local _ = require(BuildExperience.Components.ModelPicker.ModelPickerTypes)
+local FFlagBuildExperienceModelPickerModule = require(BuildExperience.Flags.FFlagBuildExperienceModelPicker)
 local FFlagBuildExperienceChatImageAttachmentsModule = require(BuildExperience.Flags.FFlagBuildExperienceChatImageAttachments)
 local FFlagBuildEnableFTUXChipsModule = require(BuildExperience.Flags.FFlagBuildEnableFTUXChips)
 local IsImageAttachmentSupportedModule = if FFlagBuildExperienceChatImageAttachmentsModule then require(BuildExperience.utils.isImageAttachmentSupported) else nil
@@ -15,7 +17,7 @@ local ChatResourceAttachmentListModule = if FFlagBuildExperienceChatResourceAtta
 local View = require(Parent.Foundation).View
 
 return function(Frame)
-	-- upvalues: FFlagBuildExperienceChatImageAttachmentsModule (copy), FFlagBuildExperienceChatResourceAttachments (copy), FFlagBuildEnableFTUXChipsModule (copy), ReactModule (copy), IsImageAttachmentSupportedModule (copy), CreateGalleryCaptureSourceModule (copy), View (copy), ChatResourceAttachmentListModule (copy), ChatImagePreviewListModule (copy), ChatComposerModule (copy), PromptChipGroupModule (copy), ChatCaptureGalleryContainerModule (copy)
+	-- upvalues: FFlagBuildExperienceChatImageAttachmentsModule (copy), FFlagBuildExperienceChatResourceAttachments (copy), FFlagBuildEnableFTUXChipsModule (copy), ReactModule (copy), IsImageAttachmentSupportedModule (copy), CreateGalleryCaptureSourceModule (copy), View (copy), ChatResourceAttachmentListModule (copy), ChatImagePreviewListModule (copy), ChatComposerModule (copy), FFlagBuildExperienceModelPickerModule (copy), PromptChipGroupModule (copy), ChatCaptureGalleryContainerModule (copy)
 	local Images = Frame.images or {}
 	local ResourceAttachments = Frame.resourceAttachments or {}
 	local PromptChips = Frame.promptChips or {}
@@ -127,6 +129,7 @@ return function(Frame)
 		}) else nil,
 		Composer = ReactModule.createElement(ChatComposerModule, {
 			LayoutOrder = LayoutOrder,
+			modelPicker = if FFlagBuildExperienceModelPickerModule then Frame.modelPicker else nil,
 			text = Frame.composerText,
 			composerErrorText = Frame.composerErrorText,
 			onChanged = Frame.onComposerChanged,
@@ -152,7 +155,7 @@ return function(Frame)
 			promptChips = PromptChips,
 			onActivated = Frame.onPromptChipActivated
 		}) else nil,
-		Gallery = if FFlagBuildExperienceChatImageAttachmentsModule and v4 ~= "unmounted" and (UseRefResult ~= nil and UseRefResult.current ~= nil) then ReactModule.createElement(ChatCaptureGalleryContainerModule, {
+		Gallery = if FFlagBuildExperienceChatImageAttachmentsModule and v4 ~= "unmounted" and UseRefResult ~= nil and UseRefResult.current ~= nil then ReactModule.createElement(ChatCaptureGalleryContainerModule, {
 			maxSelections = 2,
 			captureSource = UseRefResult.current,
 			initialCaptures = InitialCaptures,

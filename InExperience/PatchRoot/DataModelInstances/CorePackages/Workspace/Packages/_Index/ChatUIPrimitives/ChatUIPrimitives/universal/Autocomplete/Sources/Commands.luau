@@ -91,8 +91,8 @@ local function searchSortedAliases(IsNotIdMatch, Text: string)
 	return List
 end
 
-local function formatCommandReplacement(p3)
-	return p3
+local function selectCommand(Text)
+	return { kind = "insert", text = Text }
 end
 
 local function renderCommandEntry(Text, _)
@@ -107,7 +107,7 @@ local function renderCommandEntry(Text, _)
 end
 
 return function(p3)
-	-- upvalues: searchSortedAliases (copy), SignalsModule (copy), buildSortedAliases (copy), matchCommandTrigger (copy), formatCommandReplacement (copy), renderCommandEntry (copy)
+	-- upvalues: searchSortedAliases (copy), SignalsModule (copy), buildSortedAliases (copy), matchCommandTrigger (copy), selectCommand (copy), renderCommandEntry (copy)
 	local t: boolean = type(p3.id) == "string" and p3.id ~= ""
 	assert(t, "AutocompleteSources.commands requires an id")
 	assert(type(p3.getCommandSets) == "table", "AutocompleteSources.commands requires getCommandSets")
@@ -121,7 +121,7 @@ return function(p3)
 			-- upvalues: searchSortedAliases (upval), t (ref)
 			return (searchSortedAliases(t, p4))
 		end,
-		formatReplacement = formatCommandReplacement,
+		select = selectCommand,
 		renderEntry = renderCommandEntry,
 		maxResults = p3.maxResults,
 		subscribe = function(Callback)

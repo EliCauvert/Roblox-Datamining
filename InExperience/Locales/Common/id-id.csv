@@ -115,6 +115,7 @@ Authentication.SignUp.Button.OKCaptialized,OKE
 Authentication.SignUp.Button.RetryLogIn,Coba log in lagi
 Authentication.SignUp.Description.AccountAlreadyLinked,Akunmu di {platformAccountName} sudah terhubung dengan akun Roblox. Coba log in lagi.
 Authentication.SignUp.Description.BirthdayHint,Masukkan tanggal
+Authentication.SignUp.Description.OptInMarketingEmailConsent,Saya ingin menerima email tentang berita dan penawaran dari Roblox.
 Authentication.SignUp.Description.SignUpAgreement.CreateAnAccount,"Dengan membuat akun, kamu menyetujui {startTermsTag}Ketentuan{endTermsTag} kami, termasuk arbitrase, dan memahami {startPrivacyTag}Kebijakan Privasi{endPrivacyTag} kami. Jika kamu berusia di bawah 18 tahun, orang tua atau wali sahmu harus mengizinkan akunmu dan menyetujui Ketentuan kami."
 Authentication.SignUp.Description.Try,Coba
 Authentication.SignUp.Description.UsernameChanged,"Semua siap. Akunmu sudah siap dan terhubung ke {platform}. Respawn sekarang untuk melihat nama pengguna terbarumu dalam game, atau nama pengguna akan diterapkan pada lain waktu."
@@ -273,6 +274,9 @@ Common.UGCValidation.ErrorLabel.DescendantIdAnimationVersionNotSupported,"{Insta
 Common.UGCValidation.ErrorLabel.DescendantIdNotPublished,"Aset {AssetId} ({InstanceFullName}.{FieldName}) tidak dipublikasikan. Publikasikan, lalu coba lagi."
 Common.UGCValidation.ErrorLabel.DescendantIdVersionNotSupported,"{InstanceFullName}.{FieldName} menggunakan versi {Version} dari aset {AssetId}, tetapi saat ini hanya versi 1 yang didukung. Gunakan versi 1 lalu coba lagi."
 Common.UGCValidation.ErrorLabel.DynamicHeadCageMisaligned,Kepala Dinamis di marketplace harus dikurung dengan benar sehingga titik lengkung mata dan mulut pada cage sejajar dengan titik lengkung mesh. Tingkatkan kurungan (caging) dan keselarasan dengan mesh.
+Common.UGCValidation.ErrorLabel.DynamicHeadCageMisalignedLeftEye,Titik penanda mata kiri pada cage Kepala Dinamis tidak sejajar dengan mesh. Sesuaikan cage mata agar mesh mata kiri ada di dalam area cage yang diproyeksikan.
+Common.UGCValidation.ErrorLabel.DynamicHeadCageMisalignedMouth,Titik penanda mulut pada cage Kepala Dinamis tidak sejajar dengan mesh. Sesuaikan cage mulut agar mesh mulut ada di dalam area cage yang diproyeksikan.
+Common.UGCValidation.ErrorLabel.DynamicHeadCageMisalignedRightEye,Titik penanda mata kanan pada cage Kepala Dinamis tidak sejajar dengan mesh. Sesuaikan cage mata agar mesh mata kanan ada dalam area cage yang diproyeksikan.
 Common.UGCValidation.ErrorLabel.DynamicHeadHappyNotShown,Tidak dapat mendeteksi ekspresi senyum untuk Kepala Dinamis. Sesuaikan titik acuan cage untuk mulut agar sesuai dengan posisi mulut di kepala dan pastikan mulut dapat menunjukkan ekspresi senyum.
 Common.UGCValidation.ErrorLabel.DynamicHeadLeftEyeNotClose,Tidak dapat mendeteksi ekspresi mata kiri tertutup untuk Kepala Dinamis. Sesuaikan titik acuan cage untuk mata kiri agar sesuai dengan posisi mata kiri di kepala dan pastikan mata tersebut dapat ditutup.
 Common.UGCValidation.ErrorLabel.DynamicHeadMISSINGCAGE,Kepala Dinamis di marketplace tidak memiliki Cage Kepala. Buat Cage Kepala untuk Kepala Dinamis.
@@ -292,6 +296,13 @@ Common.UGCValidation.ErrorLabel.EmoteAnimation_MaxPartTranslationCalcFailed,Tran
 Common.UGCValidation.ErrorLabel.EmoteAnimation_MaxPartTranslationMismatch,"Animasi yang dipublikasikan menetapkan translasi maksimum bagian sebesar {taggedTranslation} kotak, tetapi hasil perhitungan data animasinya adalah {calculatedTranslation} kotak. Publikasikan ulang animasi."
 Common.UGCValidation.ErrorLabel.Extents_HeadBelowTorso,"Kepala harus ditempatkan di atas UpperTorso. Titik tengah kepala berada di bawah bagian atas badan, yang menunjukkan bahwa mesh kepala menciut atau salah tempat."
 Common.UGCValidation.ErrorLabel.FaceControlsOverrideFACSNotEmpty,Properti InternalOverrideFACSData pada FaceControls harus kosong saat proses upload.
+Common.UGCValidation.ErrorLabel.FacialFeaturePresence_EyesMissing,"Wajah dasar tidak memiliki fitur mata yang diperlukan. Tambahkan mata ke wajah dasar, lalu coba lagi."
+Common.UGCValidation.ErrorLabel.FacialFeaturePresence_MouthMissing,"Wajah dasar tidak memiliki fitur mulut yang diperlukan. Tambahkan mulut ke wajah dasar, lalu coba lagi."
+Common.UGCValidation.ErrorLabel.FacsDeformation_HappyNotShown,Tidak dapat mendeteksi ekspresi senang. Sesuaikan cage mulut atau FACS ekspresi senang agar mesh mulut yang diproyeksikan berubah bentuk sesuai keinginan.
+Common.UGCValidation.ErrorLabel.FacsDeformation_LeftEyeNotClose,Tidak dapat mendeteksi ekspresi mata kiri terpejam. Sesuaikan cage mata kiri atau FACS mata kiri terpejam agar mesh mata yang diproyeksikan berubah bentuk sesuai keinginan.
+Common.UGCValidation.ErrorLabel.FacsDeformation_MouthNotOpen,Tidak dapat mendeteksi ekspresi mulut menganga. Sesuaikan cage mulut atau FACS mulut menganga agar mesh mulut yang diproyeksikan berubah bentuk sesuai keinginan.
+Common.UGCValidation.ErrorLabel.FacsDeformation_RightEyeNotClose,Tidak dapat mendeteksi ekspresi mata kanan terpejam. Sesuaikan cage mata kanan atau FACS mata kanan terpejam agar mesh mata yang diproyeksikan berubah bentuk sesuai keinginan.
+Common.UGCValidation.ErrorLabel.FacsDeformation_SadNotShown,Tidak dapat mendeteksi ekspresi sedih. Sesuaikan cage mulut atau FACS ekspresi sedih agar mesh mulut yang diproyeksikan berubah bentuk sesuai keinginan.
 Common.UGCValidation.ErrorLabel.FacsExpandsHead,"FAC terdeteksi memperbesar kepala Anda menjadi {modPercent}%, tetapi mengubah kepala bertentangan dengan kebijakan marketplace untuk animasi wajah."
 Common.UGCValidation.ErrorLabel.FacsJointCountBounded,"Kepala dinamis dapat memiliki maksimal {maxFacsJointCount} sendi FACS, tetapi kepala ini memiliki {actualJointCount}. Kurangi jumlah sendi FACS, lalu coba lagi."
 Common.UGCValidation.ErrorLabel.FacsShrinksHead,"FAC terdeteksi memperkecil kepala Anda menjadi {modPercent}%, tetapi mengubah kepala bertentangan dengan kebijakan marketplace untuk animasi wajah."
@@ -338,6 +349,7 @@ Common.UGCValidation.ErrorLabel.MeshPartBounds_TooSmall,Ukuran mesh {partName} p
 Common.UGCValidation.ErrorLabel.MissingRequiredAttachment,Sambungan {attName} harus ada tepat 1 kali di dalam {partName} descendant.
 Common.UGCValidation.ErrorLabel.NoAttributes,'{RootInstanceName}' (atau descendant-nya) berisi Atribut. Kamu perlu menghapus Atribut dari daftar berikut: {InstanceNameList}
 Common.UGCValidation.ErrorLabel.PropertiesNotSensible,{ClassName} '{InstancePath}' memiliki properti yang tidak valid: {ProblematicProperties}. Batas byte yang ditampilkan terlampaui (batas 0 berarti properti harus kosong); properti lain berisi nilai NaN/Inf atau melebihi batas ukuran defaultnya.
+Common.UGCValidation.ErrorLabel.RenderedAnimation_RequiredExpressionsMissing,"Animasi yang dirender tidak memiliki satu atau beberapa ekspresi wajah yang diperlukan (mata terpejam, mulut menganga, senang, sedih)."
 Common.UGCValidation.ErrorLabel.RigAttachmentOutOfBounds,Sambungan rig '{AttachmentName}' di '{PartName}' harus ditempatkan di dekat batas sendi tempat bagian tubuh ini terhubung ke bagian yang berdekatan. Posisi saat ini [{CurrentPosition}] terlalu jauh dari bidang sambungan. Pindahkan lebih dekat ke [{ClosestValidPosition}].
 Common.UGCValidation.ErrorLabel.SelectionCountNotOne,"Untuk meng-upload aset ke Roblox, kamu harus memilih persis 1 kejadian dan tipe upload yang terhubung."
 Common.UGCValidation.ErrorLabel.SerializedAssetTooLarge,"Aset ini terlalu besar untuk di-upload ({sizeBytes} byte melebihi batas maksimum {maxSizeBytes} byte). Kecilkan ukurannya, lalu coba lagi."
@@ -790,6 +802,7 @@ CoreScripts.InGameMenu.Controls.CameraMovementTitle,Gerakan kamera
 CoreScripts.InGameMenu.Controls.CameraZoomGamepad,Memperbesar/memperkecil kamera
 CoreScripts.InGameMenu.Controls.CharacterMovementTitle,Kendali avatar
 CoreScripts.InGameMenu.Controls.Chat,
+CoreScripts.InGameMenu.Controls.ControlsPage,Kendali
 CoreScripts.InGameMenu.Controls.DevConsole,Konsol Dev
 CoreScripts.InGameMenu.Controls.DownArrow,Panah bawah
 CoreScripts.InGameMenu.Controls.DropTool,Jatuhkan alat
@@ -1537,8 +1550,11 @@ Feature.Avatar.Heading.SharePublicAvatar,Bagikan Avatarmu
 Feature.Avatar.Heading.SortBy,Urutkan berdasarkan
 Feature.Avatar.Heading.UsedName,Nama yang Sudah Digunakan
 Feature.Avatar.Heading.WearConfirmation,Pakai Item
+Feature.Avatar.HeroWidget.BundleHeadlessTitle,Kesempatan terakhir untuk mendapatkan Headless Horseman
 Feature.Avatar.HeroWidget.BundleTitle,Korblox Pactbreaker
 Feature.Avatar.HeroWidget.CapsuleDescription,Tiga versi baru dari item original Roblox
+Feature.Avatar.HeroWidget.CapsuleHalloweenDescription,Item baru khusus untuk musim seram
+Feature.Avatar.HeroWidget.CapsuleHalloweenTitle,Dibuat untuk Halloween
 Feature.Avatar.HeroWidget.CapsulePoolDescription,Tiga item baru yang menyegarkan
 Feature.Avatar.HeroWidget.CapsulePoolTitle,Pesta Air
 Feature.Avatar.HeroWidget.CapsuleTitle,Klasik dalam Gaya Baru
@@ -2144,6 +2160,8 @@ Feature.Build.Description.GameConfiguration,Ubah caramu menjual item dan memprom
 Feature.Build.Description.GameCreationDone,Saya telah selesai membuat dan memublikasikan game-mu. Kamu dapat membukanya untuk melakukan playtest.
 Feature.Build.Description.GameSavedPlaytest,Saya telah selesai membuat game-mu dan menyimpan versi baru. Kamu dapat membukanya untuk melakukan playtest.
 Feature.Build.Description.HubSettings,Kelola semua pengaturan di Pusat Kreator
+Feature.Build.Description.InternalSpec,Biarkan kosong untuk spesifikasi terbaru
+Feature.Build.Description.InternalTesting,Coba spesifikasi model baru
 Feature.Build.Description.InviteFriendLimit,Undang maksimal {MAX_INVITES} teman untuk bermain sambil berkreasi.
 Feature.Build.Description.LongAdCampaign,Lebih banyak waktu untuk menjangkau pemain baru dan membuat mereka terus kembali bermain.
 Feature.Build.Description.MakeAudienceAvail,Publikasikan pengalaman virtualmu agar tersedia bagi audiens ini.
@@ -2238,6 +2256,7 @@ Feature.Build.Label.FreeBuildUsage,Penggunaan Build gratis
 Feature.Build.Label.Friends,
 Feature.Build.Label.FriendsOnly,Khusus teman
 Feature.Build.Label.GamePlays,Game dimainkan
+Feature.Build.Label.GamesTab,
 Feature.Build.Label.GetMoreBuildUsage,Dapatkan lebih banyak kuota penggunaan Build
 Feature.Build.Label.GroupGames,Game grup
 Feature.Build.Label.Groups,Grup
@@ -2246,6 +2265,8 @@ Feature.Build.Label.IconThumbnails,Ikon & thumbnail
 Feature.Build.Label.Images2D,Gambar 2D
 Feature.Build.Label.InProgress,Sedang berlangsung
 Feature.Build.Label.InputNeeded,Input diperlukan
+Feature.Build.Label.InternalSpec,Spesifikasi Internal
+Feature.Build.Label.InternalTesting,Uji Coba Internal
 Feature.Build.Label.InviteCount,{COUNT}/{MAX_INVITES}
 Feature.Build.Label.Limited,Terbatas
 Feature.Build.Label.Live,Dipublikasikan
@@ -2266,6 +2287,7 @@ Feature.Build.Label.OnSale,Dijual
 Feature.Build.Label.Pending,Pending
 Feature.Build.Label.PercentUsed,{PERCENT}% digunakan
 Feature.Build.Label.PlayTime,Waktu bermain
+Feature.Build.Label.PreviewsTab,Pratinjau
 Feature.Build.Label.PreviouslyPublished,Dipublikasikan sebelumnya
 Feature.Build.Label.Price,Harga
 Feature.Build.Label.PriceUnavailable,--
@@ -2476,6 +2498,7 @@ Feature.Build.Notification.Title.Finished,Build selesai
 Feature.Build.Notification.Title.NeedInput,Build membutuhkan input darimu
 Feature.Build.Placeholder.DescribeProduct,Deskripsikan apa yang ingin kamu jual
 Feature.Build.Placeholder.DescribeProductUpdate,Deskripsikan perubahan
+Feature.Build.Placeholder.InternalSpec,kode_internal
 Feature.Build.Prompt.CreateDeveloperProduct,"Bantu saya membuat produk developer, menghubungkannya ke game, memverifikasi dan memublikasikan perubahannya, serta membuatnya tersedia untuk dibeli."
 Feature.Build.Title.AdActive,Kampanye iklan aktif
 Feature.Build.Title.AdCampaignDuration,Kampanye iklan {durationDays} hari
@@ -2642,6 +2665,7 @@ Feature.Catalog.AvatarWidgetTitle,
 Feature.Catalog.Checkout.Title.PurchasedFailedPlural,{count} item tidak dapat dibeli
 Feature.Catalog.Checkout.WearAfterPurchase,
 Feature.Catalog.Description.AttributionAlertBody,Kamu akan meninggalkan area ini dan bergabung ke {experienceName}.
+Feature.Catalog.Feature.Catalog.Label.AvatarBackgrounds,
 Feature.Catalog.Feature.Catalog.Label.ClassicShirt,
 Feature.Catalog.Feature.Catalog.Label.ClassicTShirt,
 Feature.Catalog.Feature.Catalog.Label.TotalItems,Total: {itemCount} Item
@@ -3638,6 +3662,7 @@ Feature.InExperienceIntervention.Label.TimeLeft.Day.Singular,
 Feature.InExperienceIntervention.Label.TimeLeft.Hours,{time} lagi
 Feature.InExperienceShop.Description.RobuxPurchaseLegalDisclosure,"Dengan membeli Robux, kamu menyetujui {termsLinkStart}Ketentuan Penggunaan{termsLinkEnd} kami, termasuk klausul arbitrase dan kebijakan pembatalan."
 Feature.InExperienceShop.GamePass,Pas game
+Feature.InExperienceShop.Label.Active,
 Feature.InExperienceShop.Label.BonusItem,Item bonus
 Feature.InExperienceShop.Label.DescriptionWithTime,{description} {timeRemaining}
 Feature.InExperienceShop.Label.EndTime,Berakhir dalam {timeRemaining}
@@ -3837,6 +3862,7 @@ Feature.Moments.Title.MomentRemoved,
 Feature.Moments.Title.PostInsights,Judul header halaman
 Feature.Moments.Title.ReportPost,Laporkan postingan
 Feature.Moments.Tooltip.Creation,Semua orang di pengalaman virtual dapat melihat Moment-mu.
+Feature.Moments.Tooltip.PostInsightsBody,"Periksa jumlah tayangan, waktu tonton, dan respons audiens terhadap Momen tersebut."
 Feature.Moments.Tooltip.PostInsightsTitle,Insight Moment-mu ada di sini
 Feature.Moments.Tooltip.ShareFirstMomentBody,Buat Moment dari mediamu
 Feature.Moments.Tooltip.ShareFirstMomentTitle,Bagikan Moment pertamamu

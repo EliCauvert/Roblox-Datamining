@@ -8,6 +8,7 @@
 	useIsGamepad = require(script.useIsGamepad),
 	useGamepadSupports = require(script.useGamepadSupports),
 	useIsTvRemoteDevice = require(script.useIsTvRemoteDevice),
+	useIsRealGamepadConnected = require(script.useIsRealGamepadConnected),
 	useEffectOnMount = require(script.useEffectOnMount),
 	useDidUpdate = require(script.useDidUpdate),
 	usePrevious = require(script.usePrevious),

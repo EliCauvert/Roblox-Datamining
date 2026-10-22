@@ -98,6 +98,7 @@ Authentication.SignUp.Button.OKCaptialized,موافق
 Authentication.SignUp.Button.RetryLogIn,إعادة محاولة تسجيل الدخول
 Authentication.SignUp.Description.AccountAlreadyLinked,حساب على منصة {platformAccountName} مرتبط بالفعل بحساب على منصة Roblox. يُرجى محاولة تسجيل الدخول مرة أخرى.
 Authentication.SignUp.Description.BirthdayHint,أدخِل التاريخ
+Authentication.SignUp.Description.OptInMarketingEmailConsent,أود تلقي رسائل بريد إلكتروني من منصّة Roblox حول الأخبار والعروض.
 Authentication.SignUp.Description.SignUpAgreement.CreateAnAccount,من خلال إنشاء حساب، فإنك توافق على {startTermsTag}شروطنا{endTermsTag}، بما في ذلك بند التحكيم، وتقر {startPrivacyTag}بسياسة الخصوصية{endPrivacyTag} السارية لدينا. إذا كان عمرك أقل من 18 عامًا، يجب على أحد والديك أو الوصي عليك السماح بحسابك والموافقة على شروطنا.
 Authentication.SignUp.Description.Try,جرب
 Authentication.SignUp.Description.UsernameChanged,كل شيء جاهز! حسابك جاهز ومرتبط بمنصّة {platform}. أعد الظهور الآن لرؤية اسم المستخدم المحدث في اللعبة، أو سيُطبق التغيير في المرة القادمة.
@@ -773,6 +774,7 @@ CoreScripts.InGameMenu.Controls.CameraMovementTitle,حركة الكاميرا
 CoreScripts.InGameMenu.Controls.CameraZoomGamepad,تكبير/تصغير الكاميرا
 CoreScripts.InGameMenu.Controls.CharacterMovementTitle,عناصر التحكم في الأفاتار
 CoreScripts.InGameMenu.Controls.Chat,دردشة
+CoreScripts.InGameMenu.Controls.ControlsPage,عناصر التحكم
 CoreScripts.InGameMenu.Controls.DevConsole,وحدة تحكم المطور
 CoreScripts.InGameMenu.Controls.DownArrow,السهم للأسفل
 CoreScripts.InGameMenu.Controls.DropTool,إسقاط الأداة
@@ -1473,8 +1475,11 @@ Feature.Avatar.Heading.SharePublicAvatar,مشاركة أفاتارك
 Feature.Avatar.Heading.SortBy,ترتيب حسب
 Feature.Avatar.Heading.UsedName,الاسم المستخدم
 Feature.Avatar.Heading.WearConfirmation,ارتداء العنصر
+Feature.Avatar.HeroWidget.BundleHeadlessTitle,آخر فرصة للفارس مقطوع الرأس
 Feature.Avatar.HeroWidget.BundleTitle,حزمة Korblox Pactbreaker
 Feature.Avatar.HeroWidget.CapsuleDescription,ثلاثة إصدارات جديدة من كلاسيكيات Roblox
+Feature.Avatar.HeroWidget.CapsuleHalloweenDescription,عناصر جديدة خصيصًا لموسم الرعب
+Feature.Avatar.HeroWidget.CapsuleHalloweenTitle,مصممة خصيصًا لعيد الهالوين
 Feature.Avatar.HeroWidget.CapsulePoolDescription,ثلاثة عناصر جديدة ستُحدث ضجة
 Feature.Avatar.HeroWidget.CapsulePoolTitle,حفلة في المسبح
 Feature.Avatar.HeroWidget.CapsuleTitle,الكلاسيكيات، بحلّة جديدة
@@ -2080,6 +2085,8 @@ Feature.Build.Description.GameConfiguration,غيّر طريقة بيعك للع�
 Feature.Build.Description.GameCreationDone,لقد أكملت إنشاء لعبتك ونشرها. يمكنك فتحها لاختبار اللعب.
 Feature.Build.Description.GameSavedPlaytest,لقد أكملتُ إنشاء لعبتك وحفظت إصدارًا جديدًا. يمكنك فتحها لاختبار اللعب.
 Feature.Build.Description.HubSettings,يمكنك إدارة جميع الإعدادات في مركز المصمم
+Feature.Build.Description.InternalSpec,اتركه فارغًا لأحدث المواصفات
+Feature.Build.Description.InternalTesting,جرِّب مواصفات النموذج الجديد
 Feature.Build.Description.InviteFriendLimit,يمكنك دعوة ما يصل إلى {MAX_INVITES} من الأصدقاء للعب أثناء الإنشاء.
 Feature.Build.Description.LongAdCampaign,المزيد من الوقت للوصول إلى لاعبين جدد وإبقائهم متحمسين للعودة مجددًا.
 Feature.Build.Description.MakeAudienceAvail,انشر تجربتك لتكون متاحة لهذا الجمهور.
@@ -2174,6 +2181,7 @@ Feature.Build.Label.FreeBuildUsage,استخدام ميزة Build المجاني
 Feature.Build.Label.Friends,
 Feature.Build.Label.FriendsOnly,
 Feature.Build.Label.GamePlays,عدد مرات تشغيل اللعبة
+Feature.Build.Label.GamesTab,
 Feature.Build.Label.GetMoreBuildUsage,احصل على المزيد من استخدام ميزة Build
 Feature.Build.Label.GroupGames,ألعاب المجموعات
 Feature.Build.Label.Groups,المجموعات
@@ -2182,6 +2190,8 @@ Feature.Build.Label.IconThumbnails,الأيقونة والصور المصغرة
 Feature.Build.Label.Images2D,الصور ثنائية الأبعاد
 Feature.Build.Label.InProgress,قيد التقدم
 Feature.Build.Label.InputNeeded,الإدخال مطلوب
+Feature.Build.Label.InternalSpec,المواصفات الداخلية
+Feature.Build.Label.InternalTesting,اختبار داخلي
 Feature.Build.Label.InviteCount,{COUNT}/{MAX_INVITES}
 Feature.Build.Label.Limited,محدودة
 Feature.Build.Label.Live,منشورة
@@ -2202,6 +2212,7 @@ Feature.Build.Label.OnSale,معروض للبيع
 Feature.Build.Label.Pending,معلّق
 Feature.Build.Label.PercentUsed,تم استخدام {PERCENT}%
 Feature.Build.Label.PlayTime,وقت اللعب
+Feature.Build.Label.PreviewsTab,المعاينات
 Feature.Build.Label.PreviouslyPublished,تم النشر سابقًا
 Feature.Build.Label.Price,السعر
 Feature.Build.Label.PriceUnavailable,--
@@ -2412,6 +2423,7 @@ Feature.Build.Notification.Title.Finished,اكتملت ميزة Build
 Feature.Build.Notification.Title.NeedInput,ميزة Build بحاجة إلى إدخالك
 Feature.Build.Placeholder.DescribeProduct,صِف ما تريد بيعه
 Feature.Build.Placeholder.DescribeProductUpdate,صِف تحديثًا
+Feature.Build.Placeholder.InternalSpec,كود داخلي
 Feature.Build.Prompt.CreateDeveloperProduct,ساعدني في إنشاء منتج المطوّر، وربطه باللعبة، والتحقق من التغييرات ونشرها، وجعله متاحًا للشراء.
 Feature.Build.Title.AdActive,الحملة الإعلانية نشطة
 Feature.Build.Title.AdCampaignDuration,حملة إعلانية لمدة {durationDays} من الأيام
@@ -2578,6 +2590,7 @@ Feature.Catalog.AvatarWidgetTitle,
 Feature.Catalog.Checkout.Title.PurchasedFailedPlural,تعذَّر شراء {count} من العناصر
 Feature.Catalog.Checkout.WearAfterPurchase,
 Feature.Catalog.Description.AttributionAlertBody,ستغادر هذا المكان وتنتقل إلى {experienceName}.
+Feature.Catalog.Feature.Catalog.Label.AvatarBackgrounds,
 Feature.Catalog.Feature.Catalog.Label.ClassicShirt,
 Feature.Catalog.Feature.Catalog.Label.ClassicTShirt,
 Feature.Catalog.Feature.Catalog.Label.TotalItems,المجموع: {itemCount} من العناصر
@@ -3576,6 +3589,7 @@ Feature.InExperienceIntervention.Label.TimeLeft.Day.Singular,
 Feature.InExperienceIntervention.Label.TimeLeft.Hours,تبقى {time}
 Feature.InExperienceShop.Description.RobuxPurchaseLegalDisclosure,بشراء عملات Robux، فإنك توافق على {termsLinkStart}شروط الاستخدام{termsLinkEnd}، بما في ذلك شرط التحكيم وسياسة الإلغاء.
 Feature.InExperienceShop.GamePass,
+Feature.InExperienceShop.Label.Active,
 Feature.InExperienceShop.Label.BonusItem,عنصر مكافأة
 Feature.InExperienceShop.Label.DescriptionWithTime,{description} {timeRemaining}
 Feature.InExperienceShop.Label.EndTime,ينتهي خلال {timeRemaining}
@@ -3775,6 +3789,7 @@ Feature.Moments.Title.MomentRemoved,تمت إزالة اللحظة
 Feature.Moments.Title.PostInsights,المعلومات التفصيلية للمنشور
 Feature.Moments.Title.ReportPost,الإبلاغ عن المنشور
 Feature.Moments.Tooltip.Creation,يمكن للجميع في التجربة عرض لحظاتك.
+Feature.Moments.Tooltip.PostInsightsBody,تحقق من المشاهدات وزمن المشاهدة ومدى تفاعل جمهورك مع اللحظة.
 Feature.Moments.Tooltip.PostInsightsTitle,المعلومات التفصيلية عن لحظتك أصبحت متاحة هنا
 Feature.Moments.Tooltip.ShareFirstMomentBody,أنشِئ لحظة من لقطاتك
 Feature.Moments.Tooltip.ShareFirstMomentTitle,شارك أولى لحظاتك

@@ -143,11 +143,14 @@ local function searchEmojis(p2)
 	return InternalProvidersModule.searchSortedArray(InternalProvidersModule.getEmojiStructure(), p2, compareEmojiPopularity)
 end
 
-local function formatEmojiReplacement(Text: string)
+local function selectEmoji(Text: string)
 	-- upvalues: EmojiListModule (copy)
 	local EmojiListModuleEntry = EmojiListModule[string.sub(Text, 2)]
 	
-	return if EmojiListModuleEntry == nil then Text else EmojiListModuleEntry.base
+	return {
+		kind = "insert",
+		text = if EmojiListModuleEntry == nil then Text else EmojiListModuleEntry.base
+	}
 end
 
 local function renderEmojiEntry(Text: string, _)
@@ -170,14 +173,14 @@ local function renderEmojiEntry(Text: string, _)
 end
 
 return function(p2)
-	-- upvalues: matchEmojiTrigger (copy), searchEmojis (copy), formatEmojiReplacement (copy), renderEmojiEntry (copy), matchEmojiCompletion (copy)
+	-- upvalues: matchEmojiTrigger (copy), searchEmojis (copy), selectEmoji (copy), renderEmojiEntry (copy), matchEmojiCompletion (copy)
 	assert(type(p2.id) == "string" and p2.id ~= "", "AutocompleteSources.emoji requires an id")
 	
 	return {
 		id = p2.id,
 		matchTrigger = matchEmojiTrigger,
 		search = searchEmojis,
-		formatReplacement = formatEmojiReplacement,
+		select = selectEmoji,
 		renderEntry = renderEmojiEntry,
 		matchCompletion = matchEmojiCompletion
 	}

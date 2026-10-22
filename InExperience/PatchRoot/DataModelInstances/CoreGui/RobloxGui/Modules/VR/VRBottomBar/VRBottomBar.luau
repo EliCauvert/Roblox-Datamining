@@ -27,7 +27,6 @@ local VRUtil = require(CorePackages.Workspace.Packages.VrCommon).VRUtil
 local Default = require(RobloxGui.Modules.VoiceChat.VoiceChatServiceManager).default
 local ConstantsModule = require(RobloxGui.Modules.VoiceChat.Constants)
 local ExternalEventConnection = require(CorePackages.Workspace.Packages.RoactUtils).ExternalEventConnection
-local EnableJoinVoiceVrTelemetry = game:DefineFastFlag("EnableJoinVoiceVrTelemetry", false)
 local PanelType = nil
 local RegisterRoactPanelFunction = nil
 local UIManager = nil
@@ -366,17 +365,14 @@ local config17 = {
 	iconOn = Images["icons/controls/publicAudioJoin"],
 	iconOff = Images["icons/controls/publicAudioJoin"],
 	onActivated = function()
-		-- upvalues: Default (copy), ConstantsModule (copy), EnableJoinVoiceVrTelemetry (copy), VRBottomBarAnalyticsModule (copy), VRBottomBarTypeModule (copy)
+		-- upvalues: Default (copy), ConstantsModule (copy), VRBottomBarAnalyticsModule (copy), VRBottomBarTypeModule (copy)
 		Default.pendingConnectionSource = ConstantsModule.VOICE_CONNECTION_SOURCE.IN_EXPERIENCE
 		Default:JoinVoice()
-		
-		if EnableJoinVoiceVrTelemetry then
-			VRBottomBarAnalyticsModule.sendEventToTelemetryV2({
-				integrationId = VRBottomBarTypeModule.ButtomName.JoinVoice,
-				isToggleOn = Default:ShouldShowJoinVoice(),
-				source = VRBottomBarTypeModule.Source.VRBottomBar
-			})
-		end
+		VRBottomBarAnalyticsModule.sendEventToTelemetryV2({
+			integrationId = VRBottomBarTypeModule.ButtomName.JoinVoice,
+			isToggleOn = Default:ShouldShowJoinVoice(),
+			source = VRBottomBarTypeModule.Source.VRBottomBar
+		})
 	end
 }
 

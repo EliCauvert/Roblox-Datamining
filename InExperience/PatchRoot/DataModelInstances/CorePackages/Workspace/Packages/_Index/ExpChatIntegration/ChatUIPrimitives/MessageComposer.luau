@@ -1,0 +1,1 @@
+﻿return (require(script.Parent.Parent.Parent.Parent._Index.ChatUIPrimitives.ChatUIPrimitives.universal.MessageComposer.MessageComposer))

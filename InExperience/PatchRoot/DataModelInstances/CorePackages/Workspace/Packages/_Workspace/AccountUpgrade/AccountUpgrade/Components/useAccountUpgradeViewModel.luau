@@ -26,9 +26,11 @@ local ComputeIsAccountUpgradeButtonEnabledModule = require(AccountUpgrade.Utils.
 local GetAccountUpgradeErrorCodeModule = require(AccountUpgrade.Utils.getAccountUpgradeErrorCode)
 local GetAccountUpgradeErrorTextKeyModule = require(AccountUpgrade.Utils.getAccountUpgradeErrorTextKey)
 local ResolveFieldStatesModule = require(AccountUpgrade.Utils.resolveFieldStates)
+local UseMarketingConsentModule = require(AccountUpgrade.Hooks.useMarketingConsent)
 local UseTextFieldValueModule = require(AccountUpgrade.Hooks.useTextFieldValue)
 local FFlagAccountUpgradeOAuthTelemetryModule = require(AccountUpgrade.Flags.FFlagAccountUpgradeOAuthTelemetry)
 local FFlagAccountUpgradeOAuthDialogFitsContentModule = require(AccountUpgrade.Flags.FFlagAccountUpgradeOAuthDialogFitsContent)
+local FFlagAccountUpgradeMarketingConsentModule = require(AccountUpgrade.Flags.FFlagAccountUpgradeMarketingConsent)
 local _ = require(script.Parent.AccountUpgradeView)
 local _ = require(script.Parent.AccountUpgradeFields)
 local InputValidity = AuthCommonModule.Enums.InputValidity
@@ -43,20 +45,30 @@ local config = {
 	endPrivacyTag = "</a>"
 }
 
+local function noop() end
+
+local config1 = {
+	text = nil,
+	isChecked = false,
+	isDisabled = false,
+	onToggled = noop,
+	submit = noop
+}
+
 local function _(p1, Value): boolean
 	return table.find(p1.requiredFields, Value) ~= nil or table.find(p1.optionalFields, Value) ~= nil
 end
 
-local config1 = {
+local config2 = {
 	[AccountUpgradeFieldModule.Birthday] = "Authentication.SignUp.Response.BirthdayMustBeSetFirst",
 	[AccountUpgradeFieldModule.Username] = "Authentication.SignUp.Response.UsernameMustBeSetFirst"
 }
 
 local _ = function(p1, p2)
-	-- upvalues: config1 (copy)
+	-- upvalues: config2 (copy)
 	local BlockingField = p1.blockingField
 	
-	return if BlockingField == nil then p2 else assert(config1[BlockingField], `Account upgrade field has no blocker error key: {BlockingField}`)
+	return if BlockingField == nil then p2 else assert(config2[BlockingField], `Account upgrade field has no blocker error key: {BlockingField}`)
 end
 
 local function resolveLegalText(Spec, p1)
@@ -85,7 +97,7 @@ end
 local function reportEmail() end
 
 return function(p1)
-	-- upvalues: AccountUpgradeFlowModule (copy), GetFlowSpecFunction (copy), AccountUpgradeSurfaceModule (copy), FFlagAccountUpgradeOAuthTelemetryModule (copy), AccountUpgradeAnalyticsModule (copy), UseRoactServiceFunction (copy), RoactNetworking (copy), FFlagEnableDesktopSsoSignupDialogModule (copy), FFlagAllowCurrentUsernameOnSignup (copy), ReactModule (copy), InputValidity (copy), UserGender (copy), UseTextFieldValueModule (copy), reportEmail (copy), IsStringEmailFunction (copy), DateHelper (copy), GetAccountUpgradeErrorTextKeyModule (copy), FFlagAccountUpgradeOAuthDialogFitsContentModule (copy), GetFFlagEnableAuditForSinglePageSignUpFunction (copy), resolveLegalText (copy), UseLocalizationFunction (copy), AccountUpgradeFieldModule (copy), config (copy), LocalizationService (copy), ResolveFieldStatesModule (copy), UsernameValidationContext (copy), UsernameSuggestor (copy), ComputeIsAccountUpgradeButtonEnabledModule (copy), AuthButtonClickFunction (copy), EventStreamConstants (copy), PromiseModule (copy), AccountUpgradeRequestFunction (copy), GetAccountUpgradeErrorCodeModule (copy), AuthClientErrorFunction (copy), config1 (copy)
+	-- upvalues: AccountUpgradeFlowModule (copy), GetFlowSpecFunction (copy), AccountUpgradeSurfaceModule (copy), FFlagAccountUpgradeOAuthTelemetryModule (copy), AccountUpgradeAnalyticsModule (copy), UseRoactServiceFunction (copy), RoactNetworking (copy), FFlagEnableDesktopSsoSignupDialogModule (copy), FFlagAllowCurrentUsernameOnSignup (copy), ReactModule (copy), InputValidity (copy), UserGender (copy), UseTextFieldValueModule (copy), reportEmail (copy), IsStringEmailFunction (copy), DateHelper (copy), GetAccountUpgradeErrorTextKeyModule (copy), FFlagAccountUpgradeOAuthDialogFitsContentModule (copy), GetFFlagEnableAuditForSinglePageSignUpFunction (copy), resolveLegalText (copy), UseLocalizationFunction (copy), AccountUpgradeFieldModule (copy), config (copy), LocalizationService (copy), ResolveFieldStatesModule (copy), UsernameValidationContext (copy), UsernameSuggestor (copy), ComputeIsAccountUpgradeButtonEnabledModule (copy), AuthButtonClickFunction (copy), EventStreamConstants (copy), config1 (copy), FFlagAccountUpgradeMarketingConsentModule (copy), UseMarketingConsentModule (copy), PromiseModule (copy), AccountUpgradeRequestFunction (copy), GetAccountUpgradeErrorCodeModule (copy), AuthClientErrorFunction (copy), config2 (copy)
 	local Flow = p1.flow or AccountUpgradeFlowModule.Pioneer
 	local FlowSpec = GetFlowSpecFunction(Flow)
 	assert(FlowSpec ~= nil, `Unsupported account upgrade flow: {Flow}`)
@@ -462,8 +474,14 @@ return function(p1)
 			return not p2
 		end)
 	end, { UseStateResult8, OnFieldInteraction })
+	local UseMarketingConsentModuleResult = if FFlagAccountUpgradeMarketingConsentModule then UseMarketingConsentModule({
+		spec = FlowSpec,
+		flow = Flow,
+		surface = Surface,
+		birthday = UseStateResult
+	}) else config1
 	local UseResult14 = ReactModule.useCallback(function()
-		-- upvalues: UseStateResult7 (copy), IsHostReportsSubmit (copy), AuthButtonClickFunction (upval), EventStreamConstants (upval), FFlagAccountUpgradeOAuthTelemetryModule (upval), Flow (copy), EventOrigin (copy), UseStateResult2_6 (copy), UseStateResult2_10 (copy), Value (copy), Value1 (copy), UseStateResult (copy), Value2 (copy), UseStateResult4 (copy), Submit (copy), PromiseModule (upval), AccountUpgradeRequestFunction (upval), UseRoactServiceResult (copy), FlowSpec (copy), AccountUpgradeAnalyticsModule (upval), Surface (copy), p1 (copy), CurrentUsername (copy), GetAccountUpgradeErrorCodeModule (upval), AuthClientErrorFunction (upval), UseRefResult (copy)
+		-- upvalues: UseStateResult7 (copy), IsHostReportsSubmit (copy), AuthButtonClickFunction (upval), EventStreamConstants (upval), FFlagAccountUpgradeOAuthTelemetryModule (upval), Flow (copy), EventOrigin (copy), UseStateResult2_6 (copy), UseStateResult2_10 (copy), Value (copy), Value1 (copy), UseStateResult (copy), Value2 (copy), UseStateResult4 (copy), Submit (copy), PromiseModule (upval), AccountUpgradeRequestFunction (upval), UseRoactServiceResult (copy), FlowSpec (copy), AccountUpgradeAnalyticsModule (upval), Surface (copy), UseMarketingConsentModuleResult (ref), p1 (copy), CurrentUsername (copy), GetAccountUpgradeErrorCodeModule (upval), AuthClientErrorFunction (upval), UseRefResult (copy)
 		if UseStateResult7 then return end
 		if not IsHostReportsSubmit then
 			AuthButtonClickFunction(EventStreamConstants.Context.AccountUpgrade, EventStreamConstants.Button.Save, if FFlagAccountUpgradeOAuthTelemetryModule then Flow else nil, nil, nil, EventOrigin)
@@ -491,10 +509,11 @@ return function(p1)
 			email = config.email,
 			gender = config.gender
 		})):andThen(function()
-			-- upvalues: FFlagAccountUpgradeOAuthTelemetryModule (upval), IsHostReportsSubmit (upval), AccountUpgradeAnalyticsModule (upval), Flow (upval), Surface (upval), p1 (upval), CurrentUsername (upval), Value (upval)
+			-- upvalues: FFlagAccountUpgradeOAuthTelemetryModule (upval), IsHostReportsSubmit (upval), AccountUpgradeAnalyticsModule (upval), Flow (upval), Surface (upval), UseMarketingConsentModuleResult (upval), p1 (upval), CurrentUsername (upval), Value (upval)
 			if FFlagAccountUpgradeOAuthTelemetryModule and not IsHostReportsSubmit then
 				AccountUpgradeAnalyticsModule.reportSucceeded(Flow, Surface)
 			end
+			UseMarketingConsentModuleResult.submit()
 			p1.onSignUpComplete({
 				isSuccess = true,
 				username = if CurrentUsername == nil then nil else Value,
@@ -521,11 +540,12 @@ return function(p1)
 		end)
 	end, {
 		UseStateResult, CurrentUsername, Value2, EventOrigin, Flow, UseStateResult4,
-		UseStateResult7, UseRoactServiceResult, Value1, p1.onSignUpComplete,
-		p1.onSignUpFailed, Submit, IsHostReportsSubmit, FlowSpec, Surface, Value
+		UseStateResult7, UseMarketingConsentModuleResult.submit, UseRoactServiceResult,
+		Value1, p1.onSignUpComplete, p1.onSignUpFailed, Submit, IsHostReportsSubmit,
+		FlowSpec, Surface, Value
 	})
 	local BlockingField = ResolveFieldStatesModuleResultEntry.blockingField
-	local config2 = {
+	local config3 = {
 		titleText = UseLocalizationResult.titleText,
 		subtitleText = UseLocalizationResult.subtitleText,
 		birthdayLabel = UseLocalizationResult.birthdayLabel,
@@ -533,7 +553,7 @@ return function(p1)
 		birthdayText = BirthdayText,
 		birthdayPlaceholder = UseLocalizationResult.birthdayPlaceholder,
 		usernameTitleTextKey = "Authentication.Login.Label.Username",
-		usernameSummaryErrorTextKey = if BlockingField == nil then "Authentication.SignUp.Label.ErrorsWithUsername" else assert(config1[BlockingField], `Account upgrade field has no blocker error key: {BlockingField}`),
+		usernameSummaryErrorTextKey = if BlockingField == nil then "Authentication.SignUp.Label.ErrorsWithUsername" else assert(config2[BlockingField], `Account upgrade field has no blocker error key: {BlockingField}`),
 		isUsernamePrerequisiteMet = ResolveFieldStatesModuleResultEntry.isUnlocked,
 		fieldStates = ResolveFieldStatesModuleResult,
 		usernameValidatorAdditionalProps = UseMemoResult1,
@@ -572,52 +592,56 @@ return function(p1)
 	
 	if ResolveFieldStatesModuleResultEntry1 then
 		local BlockingField1 = ResolveFieldStatesModuleResultEntry1.blockingField
-		AuthenticationSignUpLabelErrorsWithPassword = if BlockingField1 == nil then "Authentication.SignUp.Label.ErrorsWithPassword" else assert(config1[BlockingField1], `Account upgrade field has no blocker error key: {BlockingField1}`)
+		AuthenticationSignUpLabelErrorsWithPassword = if BlockingField1 == nil then "Authentication.SignUp.Label.ErrorsWithPassword" else assert(config2[BlockingField1], `Account upgrade field has no blocker error key: {BlockingField1}`)
 	else
 		AuthenticationSignUpLabelErrorsWithPassword = "Authentication.SignUp.Label.ErrorsWithPassword"
 	end
-	config2.passwordSummaryErrorTextKey = AuthenticationSignUpLabelErrorsWithPassword
-	config2.isPasswordPrerequisiteMet = if ResolveFieldStatesModuleResultEntry1 then ResolveFieldStatesModuleResultEntry1.isUnlocked else false
-	config2.passwordValidatorAdditionalProps = UseMemoResult2
-	config2.passwordPlaceholder = UseLocalizationResult.passwordPlaceholder
-	config2.onPasswordValidated = UseResult2
-	config2.hidePassword = UseStateResult8
-	config2.emailLabel = UseLocalizationResult.emailLabel
-	config2.emailPlaceholder = UseLocalizationResult.emailPlaceholder
-	config2.email = Value2
-	config2.emailError = UseLocalizationResult.emailError
-	config2.genderLabel = UseLocalizationResult.genderLabel
-	config2.femaleText = UseLocalizationResult.femaleText
-	config2.maleText = UseLocalizationResult.maleText
-	config2.gender = UseStateResult4
-	config2.saveText = UseLocalizationResult.saveText
-	config2.isSaveEnabled = IsAccountUpgradeButtonEnabledModule
-	config2.isSubmitting = UseStateResult7
-	config2.submitError = UseLocalizationResult.submitError
-	config2.legalText = LegalText or UseLocalizationResult.legalText
-	config2.onLegalLinkActivated = UseResult1
-	config2.boldFieldLabels = FFlagEnableDesktopSsoSignupDialogModule and FlowSpec.boldFieldLabels == true
-	config2.fitsDialogToContent = FFlagAccountUpgradeOAuthDialogFitsContentModule and FlowSpec.fitsDialogToContent == true
-	config2.auditContent = UseMemoResult
-	config2.isBirthdayPickerOpen = UseStateResult5
-	config2.hasBackdrop = p1.hasBackdrop
-	config2.onClose = UseResult12
-	config2.confirmsClose = UseResult12 ~= nil and FlowSpec.signsOutOnDismiss
-	config2.isCloseConfirmationOpen = UseStateResult6
-	config2.onCloseConfirmationBack = UseResult111
-	config2.onSignOut = UseMemoResult3
-	config2.onBirthdayActivated = UseResult3
-	config2.onBirthdayConfirmed = UseResult6
-	config2.onBirthdayPickerClosed = UseResult4
-	config2.onBirthdayPickerAllPicked = UseResult5
-	config2.onUsernameChanged = UseTextFieldValueModuleResult.onChanged
-	config2.onPasswordChanged = UseTextFieldValueModuleResult1.onChanged
-	config2.onEmailChanged = UseTextFieldValueModuleResult2.onChanged
-	config2.onGenderChanged = UseResult9 or UseStateResult2_3
-	config2.onUsernameFocused = UseResult7
-	config2.onPasswordFocused = UseResult8
-	config2.onPasswordVisibilityToggle = UseResult13
-	config2.onSaveActivated = UseResult14
+	config3.passwordSummaryErrorTextKey = AuthenticationSignUpLabelErrorsWithPassword
+	config3.isPasswordPrerequisiteMet = if ResolveFieldStatesModuleResultEntry1 then ResolveFieldStatesModuleResultEntry1.isUnlocked else false
+	config3.passwordValidatorAdditionalProps = UseMemoResult2
+	config3.passwordPlaceholder = UseLocalizationResult.passwordPlaceholder
+	config3.onPasswordValidated = UseResult2
+	config3.hidePassword = UseStateResult8
+	config3.emailLabel = UseLocalizationResult.emailLabel
+	config3.emailPlaceholder = UseLocalizationResult.emailPlaceholder
+	config3.email = Value2
+	config3.emailError = UseLocalizationResult.emailError
+	config3.genderLabel = UseLocalizationResult.genderLabel
+	config3.femaleText = UseLocalizationResult.femaleText
+	config3.maleText = UseLocalizationResult.maleText
+	config3.gender = UseStateResult4
+	config3.saveText = UseLocalizationResult.saveText
+	config3.isSaveEnabled = IsAccountUpgradeButtonEnabledModule
+	config3.isSubmitting = UseStateResult7
+	config3.submitError = UseLocalizationResult.submitError
+	config3.legalText = LegalText or UseLocalizationResult.legalText
+	config3.onLegalLinkActivated = UseResult1
+	config3.marketingConsentText = UseMarketingConsentModuleResult.text
+	config3.isMarketingConsentChecked = UseMarketingConsentModuleResult.isChecked
+	config3.isMarketingConsentDisabled = UseMarketingConsentModuleResult.isDisabled
+	config3.onMarketingConsentToggled = UseMarketingConsentModuleResult.onToggled
+	config3.boldFieldLabels = FFlagEnableDesktopSsoSignupDialogModule and FlowSpec.boldFieldLabels == true
+	config3.fitsDialogToContent = FFlagAccountUpgradeOAuthDialogFitsContentModule and FlowSpec.fitsDialogToContent == true
+	config3.auditContent = UseMemoResult
+	config3.isBirthdayPickerOpen = UseStateResult5
+	config3.hasBackdrop = p1.hasBackdrop
+	config3.onClose = UseResult12
+	config3.confirmsClose = UseResult12 ~= nil and FlowSpec.signsOutOnDismiss
+	config3.isCloseConfirmationOpen = UseStateResult6
+	config3.onCloseConfirmationBack = UseResult111
+	config3.onSignOut = UseMemoResult3
+	config3.onBirthdayActivated = UseResult3
+	config3.onBirthdayConfirmed = UseResult6
+	config3.onBirthdayPickerClosed = UseResult4
+	config3.onBirthdayPickerAllPicked = UseResult5
+	config3.onUsernameChanged = UseTextFieldValueModuleResult.onChanged
+	config3.onPasswordChanged = UseTextFieldValueModuleResult1.onChanged
+	config3.onEmailChanged = UseTextFieldValueModuleResult2.onChanged
+	config3.onGenderChanged = UseResult9 or UseStateResult2_3
+	config3.onUsernameFocused = UseResult7
+	config3.onPasswordFocused = UseResult8
+	config3.onPasswordVisibilityToggle = UseResult13
+	config3.onSaveActivated = UseResult14
 	
-	return config2
+	return config3
 end

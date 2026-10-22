@@ -5,7 +5,8 @@ local FoundationModule = require(Parent.Foundation)
 local _ = require(script.Parent.Parent.Types)
 local MessageDraftModelModule = require(script.Parent.Parent.MessageDraftModel)
 local _ = require(ChatUIPrimitives.UniversalMessage.Types)
-local MessageDraftFromExpressionContentModule = require(script.Parent.messageDraftFromExpressionContent)
+local _ = require(ChatUIPrimitives.createExpressionCatalogResource)
+local MessageDraftFromExpressionContentModule = require(script.Parent.Parent.messageDraftFromExpressionContent)
 local _ = require(ChatUIPrimitives.universal.Autocomplete.AutocompleteTypes)
 local _ = require(ChatUIPrimitives.Components.ChatInputBar.ChatInputBarView)
 local ModerationTimeoutModule = require(script.Parent.ModerationTimeout)
@@ -13,6 +14,7 @@ local ModerationTimeoutModule = require(script.Parent.ModerationTimeout)
 return function(p1)
 	-- upvalues: FoundationModule (copy), ReactModule (copy), MessageDraftModelModule (copy), MessageDraftFromExpressionContentModule (copy), ModerationTimeoutModule (copy)
 	local UseTokensResult = FoundationModule.Hooks.useTokens()
+	local UseCursorResult = FoundationModule.Hooks.useCursor(FoundationModule.Enums.CursorType.RoundedRect)
 	local ModerationTimeout = p1.moderationTimeout
 	local Transparency = p1.transparency
 	local IsNotNone: boolean = ModerationTimeout ~= nil and ModerationTimeout.status ~= "none"
@@ -22,7 +24,11 @@ return function(p1)
 	local OnFocusChangedFunction = p1.onFocusChanged
 	local ExpressionTray = p1.expressionTray
 	local DestinationSubtitle = p1.destinationSubtitle
-	local UseResult = ReactModule.useCallback(function(p2): boolean
+	local UseResult = ReactModule.useCallback(function(p2)
+		-- upvalues: SendMessageDraftFunction (copy), MessageDraftModelModule (upval)
+		SendMessageDraftFunction(MessageDraftModelModule.fromPlainText(p2))
+	end, { SendMessageDraftFunction })
+	local UseResult1 = ReactModule.useCallback(function(p2): boolean
 		-- upvalues: MessageDraftFromExpressionContentModule (upval), SendMessageDraftFunction (copy)
 		local MessageDraftFromExpressionContentModuleResult = MessageDraftFromExpressionContentModule(p2)
 		
@@ -34,62 +40,98 @@ return function(p1)
 			return true
 		end
 	end, { SendMessageDraftFunction })
-	local UseResult1 = ReactModule.useCallback(function()
+	local UseRefResult = ReactModule.useRef(SendMessageDraftFunction)
+	UseRefResult.current = SendMessageDraftFunction
+	local Autocomplete = p1.autocomplete
+	local UseMemoResult = ReactModule.useMemo(function()
+		-- upvalues: Autocomplete (copy), UseRefResult (copy)
+		return if Autocomplete == nil then nil else {
+			sources = Autocomplete.sources,
+			onAction = function(p2): boolean
+				-- upvalues: UseRefResult (upval)
+				if p2.kind == "sendDraft" then
+					UseRefResult.current(p2.draft)
+					
+					return true
+				else
+					return false
+				end
+			end
+		}
+	end, { Autocomplete })
+	local UseResult2 = ReactModule.useCallback(function()
 		-- upvalues: OnFocusChangedFunction (copy)
 		if OnFocusChangedFunction then
 			OnFocusChangedFunction(true)
 		end
 	end, { OnFocusChangedFunction })
-	local UseResult2 = ReactModule.useCallback(function()
+	local UseResult3 = ReactModule.useCallback(function()
 		-- upvalues: OnFocusChangedFunction (copy)
 		if OnFocusChangedFunction then
 			OnFocusChangedFunction(false)
 		end
 	end, { OnFocusChangedFunction })
-	local FetchExpressionItems = if ExpressionTray then ExpressionTray.fetchExpressionItems else nil
+	local CatalogResource = if ExpressionTray then ExpressionTray.catalogResource else nil
 	local OnKeyboardActivated = if ExpressionTray then ExpressionTray.onKeyboardActivated else nil
 	local CooldownDurationSeconds = if ExpressionTray then ExpressionTray.cooldownDurationSeconds else nil
 	local HasExpressionTray = ExpressionTray ~= nil
-	local UseMemoResult = ReactModule.useMemo(function()
+	local UseMemoResult1 = ReactModule.useMemo(function()
+		-- upvalues: HasExpressionTray (copy), UseResult1 (copy), NoIsNotNone (copy), CatalogResource (copy), OnKeyboardActivated (copy), CooldownDurationSeconds (copy)
+		return if HasExpressionTray then {
+			sendExpression = UseResult1,
+			canLocalUserChat = NoIsNotNone,
+			canSend = NoIsNotNone,
+			catalogResource = CatalogResource,
+			onKeyboardActivated = OnKeyboardActivated,
+			cooldownDurationSeconds = CooldownDurationSeconds
+		} else nil
+	end, {
+		HasExpressionTray, UseResult1, NoIsNotNone, CatalogResource,
+		OnKeyboardActivated, CooldownDurationSeconds
+	})
+	local UseMemoResult2 = ReactModule.useMemo(function()
 		-- upvalues: IsNotNone (copy), ReactModule (upval), ModerationTimeoutModule (upval), ModerationTimeout (copy), Transparency (copy)
 		return if IsNotNone then ReactModule.createElement(ModerationTimeoutModule, { state = ModerationTimeout, transparency = Transparency }) else nil
 	end, { IsNotNone, ModerationTimeout, Transparency })
+	local TextBoxRef = p1.textBoxRef
+	local NavigationTargetRef = p1.navigationTargetRef
+	local UseRefResult1 = ReactModule.useRef(nil)
+	local UseRefResult2 = if TextBoxRef == nil and NavigationTargetRef ~= nil then UseRefResult1 else TextBoxRef
+	ReactModule.useLayoutEffect(function()
+		-- upvalues: NoIsNotNone (copy), NavigationTargetRef (copy), UseRefResult2 (ref)
+		if not NoIsNotNone or NavigationTargetRef == nil or UseRefResult2 == nil then return end
+		local Current = UseRefResult2.current
+		
+		if Current == nil then return end
+		NavigationTargetRef.current = Current
+		
+		return function()
+			-- upvalues: NavigationTargetRef (upval), Current (copy)
+			if NavigationTargetRef.current == Current then
+				NavigationTargetRef.current = nil
+			end
+		end
+	end, { NavigationTargetRef, UseRefResult2, NoIsNotNone })
 	
 	return {
 		composerLayout = true,
 		themedColors = true,
-		onSend = ReactModule.useCallback(function(p2)
-			-- upvalues: SendMessageDraftFunction (copy), MessageDraftModelModule (upval)
-			SendMessageDraftFunction(MessageDraftModelModule.fromPlainText(p2))
-		end, { SendMessageDraftFunction }),
+		onSend = UseResult,
 		canLocalUserChat = NoIsNotNone,
-		disabledOverlay = if UseMemoResult then UseMemoResult elseif NoIsNotNone then nil else p1.chatAvailability.upsell,
+		disabledOverlay = if UseMemoResult2 then UseMemoResult2 elseif NoIsNotNone then nil else p1.chatAvailability.upsell,
 		pillStrokeStyle = if IsActive then UseTokensResult.Color.System.Alert else nil,
-		expressionTray = ReactModule.useMemo(function()
-			-- upvalues: HasExpressionTray (copy), UseResult (copy), NoIsNotNone (copy), FetchExpressionItems (copy), OnKeyboardActivated (copy), CooldownDurationSeconds (copy)
-			return if HasExpressionTray then {
-				sendExpression = UseResult,
-				canLocalUserChat = NoIsNotNone,
-				canSend = NoIsNotNone,
-				fetchExpressionItems = FetchExpressionItems,
-				onKeyboardActivated = OnKeyboardActivated,
-				cooldownDurationSeconds = CooldownDurationSeconds
-			} else nil
-		end, {
-			HasExpressionTray, UseResult, NoIsNotNone, FetchExpressionItems,
-			OnKeyboardActivated, CooldownDurationSeconds
-		}),
+		expressionTray = UseMemoResult1,
 		sideChipText = if DestinationSubtitle then DestinationSubtitle.text else nil,
 		showSideChip = DestinationSubtitle ~= nil,
 		onSideChipActivated = if DestinationSubtitle then DestinationSubtitle.onActivated else nil,
 		placeholderText = p1.placeholderText,
 		maximumCharacterLimit = p1.maximumCharacterLimit,
-		autocompleteOptions = p1.autocomplete,
-		textBoxRef = p1.textBoxRef,
-		selectionImageObject = FoundationModule.Hooks.useCursor(FoundationModule.Enums.CursorType.RoundedRect),
+		autocompleteOptions = UseMemoResult,
+		textBoxRef = UseRefResult2,
+		selectionImageObject = UseCursorResult,
 		fontFace = p1.fontFace,
 		transparencyValue = Transparency,
-		onFocusGained = if OnFocusChangedFunction then UseResult1 else nil,
-		onFocusLost = if OnFocusChangedFunction then UseResult2 else nil
+		onFocusGained = if OnFocusChangedFunction then UseResult2 else nil,
+		onFocusLost = if OnFocusChangedFunction then UseResult3 else nil
 	}
 end

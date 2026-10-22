@@ -773,6 +773,7 @@ CoreScripts.InGameMenu.Controls.CameraMovementTitle,Movimento visuale
 CoreScripts.InGameMenu.Controls.CameraZoomGamepad,Zoom visuale
 CoreScripts.InGameMenu.Controls.CharacterMovementTitle,Comandi avatar
 CoreScripts.InGameMenu.Controls.Chat,
+CoreScripts.InGameMenu.Controls.ControlsPage,Controlli
 CoreScripts.InGameMenu.Controls.DevConsole,Console svilup.
 CoreScripts.InGameMenu.Controls.DownArrow,Freccia GIÙ
 CoreScripts.InGameMenu.Controls.DropTool,Lascia strumento
@@ -2125,6 +2126,8 @@ Feature.Build.Description.GameConfiguration,Modifica il modo in cui vendi gli ar
 Feature.Build.Description.GameCreationDone,Ho completato la creazione e la pubblicazione del tuo gioco. Puoi aprirlo per eseguire il test di giocabilità.
 Feature.Build.Description.GameSavedPlaytest,Ho completato la creazione del tuo gioco e ho salvato una nuova versione. Puoi aprirlo per eseguire il test di giocabilità.
 Feature.Build.Description.HubSettings,Gestisci tutte le impostazioni sull'Hub Creatore.
+Feature.Build.Description.InternalSpec,Lascia vuoto per le specifiche più recenti
+Feature.Build.Description.InternalTesting,Prova le specifiche del nuovo modello
 Feature.Build.Description.InviteFriendLimit,Invita fino a {MAX_INVITES} amici a giocare mentre crei.
 Feature.Build.Description.LongAdCampaign,Più tempo per raggiungere nuovi giocatori e invogliarli a tornare.
 Feature.Build.Description.MakeAudienceAvail,Pubblica la tua esperienza per renderla disponibile a questo pubblico.
@@ -2219,6 +2222,7 @@ Feature.Build.Label.FreeBuildUsage,Utilizzo gratuito di Build
 Feature.Build.Label.Friends,
 Feature.Build.Label.FriendsOnly,Riservata agli amici
 Feature.Build.Label.GamePlays,Partite giocate
+Feature.Build.Label.GamesTab,
 Feature.Build.Label.GetMoreBuildUsage,Ottieni più utilizzo di Build
 Feature.Build.Label.GroupGames,Giochi dei gruppi
 Feature.Build.Label.Groups,Gruppi
@@ -2227,6 +2231,8 @@ Feature.Build.Label.IconThumbnails,Icona e miniature
 Feature.Build.Label.Images2D,Immagini 2D
 Feature.Build.Label.InProgress,In corso
 Feature.Build.Label.InputNeeded,Input necessario
+Feature.Build.Label.InternalSpec,Specifiche interne
+Feature.Build.Label.InternalTesting,Test interno
 Feature.Build.Label.InviteCount,{COUNT}/{MAX_INVITES}
 Feature.Build.Label.Limited,Limitata
 Feature.Build.Label.Live,Pubblicato
@@ -2247,6 +2253,7 @@ Feature.Build.Label.OnSale,In vendita
 Feature.Build.Label.Pending,In sospeso
 Feature.Build.Label.PercentUsed,{PERCENT}% utilizzata
 Feature.Build.Label.PlayTime,Tempo di gioco
+Feature.Build.Label.PreviewsTab,Anteprime
 Feature.Build.Label.PreviouslyPublished,Pubblicato in precedenza
 Feature.Build.Label.Price,Prezzo
 Feature.Build.Label.PriceUnavailable,--
@@ -2457,6 +2464,7 @@ Feature.Build.Notification.Title.Finished,Creazione terminata
 Feature.Build.Notification.Title.NeedInput,La creazione ha bisogno del tuo contributo
 Feature.Build.Placeholder.DescribeProduct,Descrivi cosa vuoi vendere
 Feature.Build.Placeholder.DescribeProductUpdate,Descrivi un aggiornamento
+Feature.Build.Placeholder.InternalSpec,internal_code
 Feature.Build.Prompt.CreateDeveloperProduct,"Aiutami a creare un Developer Product, a integrarlo nel gioco, a verificare e pubblicare le modifiche e a renderlo disponibile per l'acquisto."
 Feature.Build.Title.AdActive,La campagna pubblicitaria è attiva
 Feature.Build.Title.AdCampaignDuration,Campagna pubblicitaria di {durationDays} giorni
@@ -2623,6 +2631,7 @@ Feature.Catalog.AvatarWidgetTitle,
 Feature.Catalog.Checkout.Title.PurchasedFailedPlural,{count} articoli non possono essere acquistati
 Feature.Catalog.Checkout.WearAfterPurchase,
 Feature.Catalog.Description.AttributionAlertBody,Lascerai quest'area e entrerai {experienceName}.
+Feature.Catalog.Feature.Catalog.Label.AvatarBackgrounds,
 Feature.Catalog.Feature.Catalog.Label.ClassicShirt,
 Feature.Catalog.Feature.Catalog.Label.ClassicTShirt,Maglietta classica
 Feature.Catalog.Feature.Catalog.Label.TotalItems,Totale: {itemCount} articoli
@@ -3621,6 +3630,7 @@ Feature.InExperienceIntervention.Label.TimeLeft.Day.Singular,
 Feature.InExperienceIntervention.Label.TimeLeft.Hours,{time} rimanenti
 Feature.InExperienceShop.Description.RobuxPurchaseLegalDisclosure,"Acquistando Robux, accetti i nostri {termsLinkStart}Termini di utilizzo{termsLinkEnd}, inclusa la clausola compromissoria e la politica di revoca."
 Feature.InExperienceShop.GamePass,
+Feature.InExperienceShop.Label.Active,Attivo
 Feature.InExperienceShop.Label.BonusItem,Articolo bonus
 Feature.InExperienceShop.Label.DescriptionWithTime,{description} {timeRemaining}
 Feature.InExperienceShop.Label.EndTime,Termina tra {timeRemaining}
@@ -3820,6 +3830,7 @@ Feature.Moments.Title.MomentRemoved,Momento rimosso
 Feature.Moments.Title.PostInsights,Titolo dell'intestazione della pagina
 Feature.Moments.Title.ReportPost,Segnala post
 Feature.Moments.Tooltip.Creation,Tutti i partecipanti all'esperienza possono visualizzare i tuoi Momenti.
+Feature.Moments.Tooltip.PostInsightsBody,"Controlla le visualizzazioni, il tempo di visione e l'accoglienza del Momento da parte del tuo pubblico."
 Feature.Moments.Tooltip.PostInsightsTitle,Ecco gli approfondimenti sul tuo Momento
 Feature.Moments.Tooltip.ShareFirstMomentBody,Crea un Momento dai tuoi screenshot
 Feature.Moments.Tooltip.ShareFirstMomentTitle,Condividi il tuo primo Momento
@@ -4935,7 +4946,7 @@ InGame.CommonUI.Label.Default,
 InGame.CommonUI.Label.MicOff,Mic Spento
 InGame.CommonUI.Label.MicOnRecording,Mic On (rec audio)
 InGame.CommonUI.Label.Off,Disattivato
-InGame.CommonUI.Label.On,Attivo
+InGame.CommonUI.Label.On,
 InGame.CommonUI.Label.PossiblyCustom,Forse personalizzato
 InGame.CommonUI.Label.ReturnFallback,Torna all'esperienza precedente
 InGame.CommonUI.Label.ReturnTo,"Ritorna a ""{placeName}"""

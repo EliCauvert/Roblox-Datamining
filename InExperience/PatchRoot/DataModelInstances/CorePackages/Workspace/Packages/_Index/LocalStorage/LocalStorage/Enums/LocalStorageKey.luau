@@ -34,5 +34,6 @@
 	ScheduledSquadTooltipSeen = "ScheduledSquadTooltipSeen",
 	MeTabBadgeDismissed = "MeTabBadgeDismissed",
 	MeTabBadgeSessionCount = "MeTabBadgeSessionCount",
-	AppFirstLaunchTimestamps = "AppFirstLaunchTimestamps"
+	AppFirstLaunchTimestamps = "AppFirstLaunchTimestamps",
+	FirstTimePurchaseConsentAcknowledged = "FirstTimePurchaseConsentAcknowledged"
 }

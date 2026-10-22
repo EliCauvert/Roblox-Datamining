@@ -153,6 +153,14 @@ if require(BuildExperience.Flags.FFlagBuildExperienceMonetizationNativeUI) then
 		failed = "Feature.Build.Title.Subscription",
 		running = "Feature.Build.Title.Subscription"
 	}
+	
+	if SharedFlagsModule.FFlagBuildExperienceManageMonetizationTool then
+		config.manage_monetization = {
+			completed = "Feature.Build.Title.Monetization",
+			failed = "Feature.Build.Title.Monetization",
+			running = "Feature.Build.Title.Monetization"
+		}
+	end
 end
 if FFlagBuildExperienceClientDataModelTools then
 	config.inspect_client_instance = {
@@ -278,6 +286,8 @@ return {
 	BUILD_GREETING = "Feature.Build.Label.Hi",
 	BUILD_GREETING_WITH_NAME = "Feature.Build.Message.HiDisplayName",
 	BUILD_HEADER_TITLE = "Feature.Build.Action.Build",
+	BUILD_HOME_TAB_GAMES = "Feature.Build.Label.GamesTab",
+	BUILD_HOME_TAB_PREVIEWS = "Feature.Build.Label.PreviewsTab",
 	BUILD_SEARCH_PLACEHOLDER = "Feature.Build.Label.SearchGames",
 	BUILD_SUBLINE = "Feature.Build.Message.WhatToCreate",
 	BUILD_MENU_AUDIENCE = "Feature.Build.Title.Audience",

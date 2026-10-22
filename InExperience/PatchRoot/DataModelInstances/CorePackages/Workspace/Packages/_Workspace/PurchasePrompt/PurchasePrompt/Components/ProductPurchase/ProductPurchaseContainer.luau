@@ -92,7 +92,6 @@ local ProductPurchasePromptModule = require(script.Parent.ProductPurchasePrompt)
 local GetFFlagOpenVngTosForVngRobuxUpsellFunction = require(Parent.SharedFlags).GetFFlagOpenVngTosForVngRobuxUpsell
 local GetAppFeaturePoliciesFunction = require(Parent.UniversalAppPolicy).getAppFeaturePolicies
 local UnifiedPurchaseModalTypeEnum = IAPExperienceModule.Enums.UnifiedPurchaseModalTypeEnum
-local FFlagUnifiedPurchaseGamepassAddProductUniverseId = require(Parent.SharedFlags).FFlagUnifiedPurchaseGamepassAddProductUniverseId
 local FFlagUnifiedPurchaseFlowMarketplaceUIImprovements = require(Parent.SharedFlags).FFlagUnifiedPurchaseFlowMarketplaceUIImprovements
 local FFlagAddPerformanceMetricsToUnifiedPurchaseModal = require(Parent.SharedFlags).FFlagAddPerformanceMetricsToUnifiedPurchaseModal
 local FFlagEnableUnifiedPurchaseFlowForDevSubs = require(Parent.SharedFlags).FFlagEnableUnifiedPurchaseFlowForDevSubs
@@ -129,7 +128,7 @@ local _ = function(p1)
 end
 
 function ExtendResult.init(p1)
-	-- upvalues: HttpService (copy), FFlagEnablePurchaseFlowUUIDMigrationModule (copy), LoggingProtocolModule (copy), PurchaseFlowUUIDTelemetryModule (copy), CachedPolicyServiceModule (copy), PromptStateModule (copy), FFlagPurchasePromptUnifiedEventsUseOfferAdjustedPrice (copy), FFlagUnifiedPurchaseGamepassAddProductUniverseId (copy), SendUnifiedPurchaseEventLogModule (copy), RemoveDelayedInputForUnifiedPurchaseModal (copy), FFlagSkipBuyDelayForExperienceShopModule (copy), AppContextModule (copy), Players (copy), isRelevantRequestType (copy), LogUnifiedPurchaseTelemetryCounterModule (copy), UnifiedPurchaseTelemetryModule (copy), UnifiedPurchaseEventNameEnumModule (copy), PurchaseErrorModule (copy), IsGenericChallengeResponseModule (copy), RequestTypeModule (copy), PublishAssetAnalyticsModule (copy), FFlagEnableLaunchAfterPurchase (copy), ExperienceService (copy), WindowStateModule (copy), ContextActionService (copy), VPCModalTypeModule (copy), FFlagAddPerformanceMetricsToUnifiedPurchaseModal (copy), EmitPerformanceMetricsModule (copy), ConstantsModule (copy)
+	-- upvalues: HttpService (copy), FFlagEnablePurchaseFlowUUIDMigrationModule (copy), LoggingProtocolModule (copy), PurchaseFlowUUIDTelemetryModule (copy), CachedPolicyServiceModule (copy), PromptStateModule (copy), FFlagPurchasePromptUnifiedEventsUseOfferAdjustedPrice (copy), SendUnifiedPurchaseEventLogModule (copy), RemoveDelayedInputForUnifiedPurchaseModal (copy), FFlagSkipBuyDelayForExperienceShopModule (copy), AppContextModule (copy), Players (copy), isRelevantRequestType (copy), LogUnifiedPurchaseTelemetryCounterModule (copy), UnifiedPurchaseTelemetryModule (copy), UnifiedPurchaseEventNameEnumModule (copy), PurchaseErrorModule (copy), IsGenericChallengeResponseModule (copy), RequestTypeModule (copy), PublishAssetAnalyticsModule (copy), FFlagEnableLaunchAfterPurchase (copy), ExperienceService (copy), WindowStateModule (copy), ContextActionService (copy), VPCModalTypeModule (copy), FFlagAddPerformanceMetricsToUnifiedPurchaseModal (copy), EmitPerformanceMetricsModule (copy), ConstantsModule (copy)
 	p1.state = {
 		isLuobu = false,
 		screenSize = Vector2.new(0, 0),
@@ -176,7 +175,7 @@ function ExtendResult.init(p1)
 	end
 	
 	function p1.emitUnifiedProductPurchaseFlowEvent(Event_name)
-		-- upvalues: p1 (copy), FFlagPurchasePromptUnifiedEventsUseOfferAdjustedPrice (upval), FFlagUnifiedPurchaseGamepassAddProductUniverseId (upval), SendUnifiedPurchaseEventLogModule (upval)
+		-- upvalues: p1 (copy), FFlagPurchasePromptUnifiedEventsUseOfferAdjustedPrice (upval), SendUnifiedPurchaseEventLogModule (upval)
 		local PurchaseAnalyticsMetadata = p1.props.purchaseAnalyticsMetadata or {}
 		SendUnifiedPurchaseEventLogModule({
 			event_name = Event_name,
@@ -188,7 +187,7 @@ function ExtendResult.init(p1)
 			surface = PurchaseAnalyticsMetadata.surface,
 			user_roblox_balance = PurchaseAnalyticsMetadata.userRobuxBalance,
 			salelocation_universeid = PurchaseAnalyticsMetadata.saleLocationUniverseId,
-			product_universeid = if FFlagUnifiedPurchaseGamepassAddProductUniverseId then PurchaseAnalyticsMetadata.productUniverseId else nil
+			product_universeid = PurchaseAnalyticsMetadata.productUniverseId
 		})
 	end
 	
@@ -550,7 +549,7 @@ function ExtendResult.determinePrompt(p1)
 			local ProductPrice1 = if IsProductPriceMatch or DeriveCartPricingViewResult == nil or UnifiedPurchaseModalTypeModule ~= UnifiedPurchaseModalTypeEnum.MultiItem then p1.props.productPrice else DeriveCartPricingViewResult.priceAfterDiscount
 			local BlackbirdUpsellBannerProductInfoModule = if ShouldShowBlackbirdUpsellModule(Price, p1.props.requestType, IsProductPriceMatch, if FFlagBlackbirdUpsellGateResaleAndTimedOptionModule then p1.props.productPayload else nil) and p1.props.robloxSubscriptionProducts then GetBlackbirdUpsellBannerProductInfoModule(p1.props.robloxSubscriptionProducts) else nil
 			
-			local function v145(p2)
+			local function v144(p2)
 				-- upvalues: p1 (copy), FFlagEnableSubscriptionUpsellUnifiedPurchaseEventTelemetry (upval), BlackbirdUpsellBannerProductInfoModule (copy), UnifiedPurchaseEventNameEnumModule (upval), FFlagEnableBlackbirdUpsellImpressionGating (upval), BlackbirdUpsellImpressionTrackerModule (upval)
 				p1.onBuyItemButtonMounted(p2)
 				
@@ -562,7 +561,7 @@ function ExtendResult.determinePrompt(p1)
 				end
 			end
 			
-			local OnBuyItemButtonMounted = if FFlagEnableSubscriptionUpsellUnifiedPurchaseEventTelemetry or FFlagEnableBlackbirdUpsellImpressionGating then v145 else p1.onBuyItemButtonMounted
+			local OnBuyItemButtonMounted = if FFlagEnableSubscriptionUpsellUnifiedPurchaseEventTelemetry or FFlagEnableBlackbirdUpsellImpressionGating then v144 else p1.onBuyItemButtonMounted
 			
 			local function OnCartOfferAppliedChanged(_, p2)
 				-- upvalues: p1 (copy), FFlagEnableInExperienceOffersPurchaseFlow (upval), RequestTypeModule (upval)

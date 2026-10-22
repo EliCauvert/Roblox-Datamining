@@ -115,6 +115,7 @@ Authentication.SignUp.Button.OKCaptialized,OK
 Authentication.SignUp.Button.RetryLogIn,ログインをやり直す
 Authentication.SignUp.Description.AccountAlreadyLinked,あなたのプロフィール（{platformAccountName}）は、すでにRobloxアカウントにリンク済みです。もう一度ログインしてみてください。
 Authentication.SignUp.Description.BirthdayHint,日付を入力
+Authentication.SignUp.Description.OptInMarketingEmailConsent,Robloxからのニュースやお得情報に関するメールの受信を希望します。
 Authentication.SignUp.Description.SignUpAgreement.CreateAnAccount,アカウントを作成することで、あなたは仲裁条項を含む当社の{startTermsTag}利用規約{endTermsTag}に同意し、当社の{startPrivacyTag}プライバシーポリシー{endPrivacyTag}を承認したものとみなされます。18歳未満の場合は、親または保護者がアカウントの作成を許可し、当社の利用規約に同意する必要があります。
 Authentication.SignUp.Description.Try,こちらをお試しください
 Authentication.SignUp.Description.UsernameChanged,完了しました！お使いのアカウントの準備が整い、{platform}に紐づけられました。更新したユーザー名を今すぐゲーム内に反映させるには、リスポーンしてください。何もしなくても、次回から適用されます。
@@ -273,6 +274,9 @@ Common.UGCValidation.ErrorLabel.DescendantIdAnimationVersionNotSupported,{Instan
 Common.UGCValidation.ErrorLabel.DescendantIdNotPublished,アセット{AssetId}（{InstanceFullName}.{FieldName}）は公開されていません。公開してから、もう一度お試しください。
 Common.UGCValidation.ErrorLabel.DescendantIdVersionNotSupported,{InstanceFullName}.{FieldName}はアセット{AssetId}のバージョン{Version}を使用していますが、現在対応しているのはバージョン1のみです。バージョン1を使用して、もう一度お試しください。
 Common.UGCValidation.ErrorLabel.DynamicHeadCageMisaligned,マーケットプレイスの「動く頭」は、ケージの目と口の頂点がメッシュの頂点と一致するように、適切に合わせる必要があります。ケージとメッシュとの位置合わせを改善してください。
+Common.UGCValidation.ErrorLabel.DynamicHeadCageMisalignedLeftEye,動く頭のケージの左目のランドマークがメッシュとずれています。左目のメッシュが投影されたケージエリア内に入るように、目のケージを調整してください。
+Common.UGCValidation.ErrorLabel.DynamicHeadCageMisalignedMouth,動く頭のケージの口のランドマークがメッシュとずれています。口のメッシュが投影されたケージエリア内に入るように、口のケージを調整してください。
+Common.UGCValidation.ErrorLabel.DynamicHeadCageMisalignedRightEye,動く頭のケージの右目のランドマークがメッシュとずれています。右目のメッシュが投影されたケージエリア内に入るように、目のケージを調整してください。
 Common.UGCValidation.ErrorLabel.DynamicHeadHappyNotShown,動く頭の笑顔の表情を検出できません。口のケージのランドマークを調整して、頭の口の位置に合わせ、笑顔の表情ができるようにしてください。
 Common.UGCValidation.ErrorLabel.DynamicHeadLeftEyeNotClose,動く頭の左目を閉じた表情を検出できません。左目のケージのランドマークを調整して、頭の左目の位置に合わせ、閉じられるようにしてください。
 Common.UGCValidation.ErrorLabel.DynamicHeadMISSINGCAGE,マーケットプレイスの「動く頭」に頭ケージがありません。「動く頭」に頭ケージを作成してください。
@@ -292,6 +296,13 @@ Common.UGCValidation.ErrorLabel.EmoteAnimation_MaxPartTranslationCalcFailed,公�
 Common.UGCValidation.ErrorLabel.EmoteAnimation_MaxPartTranslationMismatch,公開されたアニメーションでは、パーツの最大移動量が{taggedTranslation}マスに指定されていますが、アニメーションデータでは{calculatedTranslation}マスと計算されています。アニメーションを再公開してください。
 Common.UGCValidation.ErrorLabel.Extents_HeadBelowTorso,頭はUpperTorsoの上に配置する必要があります。現在、頭の中心が胴体の最上部より下に位置しています。これは、頭のメッシュが折りたたまれているか、配置が正しくないことを示しています。
 Common.UGCValidation.ErrorLabel.FaceControlsOverrideFACSNotEmpty,アップロード時、FaceControlsのInternalOverrideFACSDataプロパティは空にする必要があります。
+Common.UGCValidation.ErrorLabel.FacialFeaturePresence_EyesMissing,ベースの顔に必須の目の機能がありません。ベースの顔に目を追加してから、もう一度お試しください。
+Common.UGCValidation.ErrorLabel.FacialFeaturePresence_MouthMissing,ベースの顔に必須の口がありません。ベースの顔に口を追加してから、もう一度お試しください。
+Common.UGCValidation.ErrorLabel.FacsDeformation_HappyNotShown,喜びの表情を検出できません。投影された口のメッシュが期待どおりに変形するように、口のケージまたは喜びの表情のFACS（表情コーディングシステム）を調整してください。
+Common.UGCValidation.ErrorLabel.FacsDeformation_LeftEyeNotClose,左目を閉じた表情を検出できません。投影された目のメッシュが期待どおりに変形するように、左目のケージまたは左目を閉じた表情のFACS（表情コーディングシステム）を調整してください。
+Common.UGCValidation.ErrorLabel.FacsDeformation_MouthNotOpen,口を開けた表情を検出できません。投影された口のメッシュが期待どおりに変形するように、口のケージまたは口を開けた表情のFACS（表情コーディングシステム）を調整してください。
+Common.UGCValidation.ErrorLabel.FacsDeformation_RightEyeNotClose,右目を閉じた表情を検出できません。投影された目のメッシュが期待どおりに変形するように、右目のケージまたは右目を閉じた表情のFACS（表情コーディングシステム）を調整してください。
+Common.UGCValidation.ErrorLabel.FacsDeformation_SadNotShown,悲しみの表情を検出できません。投影された口のメッシュが期待どおりに変形するように、口のケージまたは悲しみの表情のFACS（表情コーディングシステム）を調整してください。
 Common.UGCValidation.ErrorLabel.FacsExpandsHead,頭部を{modPercent}%に拡大するFACS（表情コーディングシステム）が検出されましたが、頭部の変更は表情アニメーションに関するマーケットプレイスのポリシーに違反します。
 Common.UGCValidation.ErrorLabel.FacsJointCountBounded,「動く頭」には最大{maxFacsJointCount}個のFACS（表情コーディングシステム）ジョイントを含めることができますが、この頭には{actualJointCount}個含まれています。FACSジョイントの数を減らしてから、もう一度お試しください。
 Common.UGCValidation.ErrorLabel.FacsShrinksHead,頭部を{modPercent}%に縮小するFACS（表情コーディングシステム）が検出されましたが、頭部の変更は表情アニメーションに関するマーケットプレイスのポリシーに違反します。
@@ -338,6 +349,7 @@ Common.UGCValidation.ErrorLabel.MeshPartBounds_TooSmall,{partName}メッシュ{a
 Common.UGCValidation.ErrorLabel.MissingRequiredAttachment,アタッチメント{attName}は、{partName}の子孫要素内に正確に1回だけ存在する必要があります。
 Common.UGCValidation.ErrorLabel.NoAttributes,「{RootInstanceName}」（またはその子孫）に属性が含まれています。「{InstanceNameList}」から属性を削除する必要があります。
 Common.UGCValidation.ErrorLabel.PropertiesNotSensible,{ClassName}「{InstancePath}」に無効なプロパティがあります：{ProblematicProperties}。表示されているバイト数の上限を超えています（上限が0の場合、そのプロパティは空である必要があります）。それ以外のプロパティにはNaN/Inf値が含まれているか、デフォルトのサイズ上限を超えています。
+Common.UGCValidation.ErrorLabel.RenderedAnimation_RequiredExpressionsMissing,レンダリングされたアニメーションに、必須の表情（目を閉じた表情、口を開けた表情、喜びの表情、悲しみの表情）の一部または全部がありません。
 Common.UGCValidation.ErrorLabel.RigAttachmentOutOfBounds,「{PartName}」のリグアタッチメント「{AttachmentName}」は、このボディパーツの隣接パーツに接続するジョイント境界の近くに配置する必要があります。現在の位置[{CurrentPosition}]は接続面から離れすぎています。[{ClosestValidPosition}]に近づけてください。
 Common.UGCValidation.ErrorLabel.SelectionCountNotOne,Robloxにアセットをアップロードするには、必ず1件のインスタンスと関連したアップロードタイプを選択する必要があります。
 Common.UGCValidation.ErrorLabel.SerializedAssetTooLarge,このアセットは大きすぎるためアップロードできません（{sizeBytes}バイト。上限は{maxSizeBytes}バイトです）。サイズを小さくしてから、もう一度お試しください。
@@ -790,6 +802,7 @@ CoreScripts.InGameMenu.Controls.CameraMovementTitle,カメラ動作
 CoreScripts.InGameMenu.Controls.CameraZoomGamepad,カメラズーム
 CoreScripts.InGameMenu.Controls.CharacterMovementTitle,アバター操作
 CoreScripts.InGameMenu.Controls.Chat,
+CoreScripts.InGameMenu.Controls.ControlsPage,操作
 CoreScripts.InGameMenu.Controls.DevConsole,Devコンソール
 CoreScripts.InGameMenu.Controls.DownArrow,下カーソル
 CoreScripts.InGameMenu.Controls.DropTool,ツールを手放す
@@ -1537,8 +1550,11 @@ Feature.Avatar.Heading.SharePublicAvatar,アバターを共有
 Feature.Avatar.Heading.SortBy,並べ替え:
 Feature.Avatar.Heading.UsedName,使用済みの名前
 Feature.Avatar.Heading.WearConfirmation,アイテムを装備
+Feature.Avatar.HeroWidget.BundleHeadlessTitle,ヘッドレス・ホースマンを入手するラストチャンス
 Feature.Avatar.HeroWidget.BundleTitle,Korblox Pactbreaker
 Feature.Avatar.HeroWidget.CapsuleDescription,Robloxオリジナルの3つの新バージョン
+Feature.Avatar.HeroWidget.CapsuleHalloweenDescription,ハロウィンにぴったりの新着アイテム
+Feature.Avatar.HeroWidget.CapsuleHalloweenTitle,ハロウィン限定作品
 Feature.Avatar.HeroWidget.CapsulePoolDescription,水しぶきをあげる3つの新着アイテム
 Feature.Avatar.HeroWidget.CapsulePoolTitle,プールパーティ
 Feature.Avatar.HeroWidget.CapsuleTitle,定番アイテムの最新版
@@ -2144,6 +2160,8 @@ Feature.Build.Description.GameConfiguration,アイテムの販売方法やゲー
 Feature.Build.Description.GameCreationDone,ゲームの作成と公開が完了しました。ゲームを開いてプレイテストできます。
 Feature.Build.Description.GameSavedPlaytest,ゲームの作成が完了し、新しいバージョンが保存されました。ゲームを開いてプレイテストできます。
 Feature.Build.Description.HubSettings,クリエーターハブですべての設定を管理します
+Feature.Build.Description.InternalSpec,最新の仕様の場合は空白のままにしてください
+Feature.Build.Description.InternalTesting,新しいモデルの仕様を試す
 Feature.Build.Description.InviteFriendLimit,最大{MAX_INVITES}人の友達を招待して、制作中のゲームをプレイしてもらえます。
 Feature.Build.Description.LongAdCampaign,新しいプレイヤーにリーチし、リピートしてもらうため、キャンペーン期間を増やしましょう。
 Feature.Build.Description.MakeAudienceAvail,このオーディエンスが利用できるようにするには、バーチャル空間を公開してください。
@@ -2238,6 +2256,7 @@ Feature.Build.Label.FreeBuildUsage,無料のビルド使用量
 Feature.Build.Label.Friends,
 Feature.Build.Label.FriendsOnly,友達限定
 Feature.Build.Label.GamePlays,プレイ数
+Feature.Build.Label.GamesTab,
 Feature.Build.Label.GetMoreBuildUsage,もっとビルド使用量を獲得
 Feature.Build.Label.GroupGames,グループゲーム
 Feature.Build.Label.Groups,グループ
@@ -2246,6 +2265,8 @@ Feature.Build.Label.IconThumbnails,アイコンとサムネイル
 Feature.Build.Label.Images2D,2D画像
 Feature.Build.Label.InProgress,進行中
 Feature.Build.Label.InputNeeded,入力が必要です
+Feature.Build.Label.InternalSpec,内部仕様
+Feature.Build.Label.InternalTesting,内部テスト
 Feature.Build.Label.InviteCount,{COUNT}/{MAX_INVITES}
 Feature.Build.Label.Limited,限定
 Feature.Build.Label.Live,公開済み
@@ -2266,6 +2287,7 @@ Feature.Build.Label.OnSale,販売中
 Feature.Build.Label.Pending,保留中
 Feature.Build.Label.PercentUsed,{PERCENT}%使用済み
 Feature.Build.Label.PlayTime,プレイ時間
+Feature.Build.Label.PreviewsTab,
 Feature.Build.Label.PreviouslyPublished,以前に公開済み
 Feature.Build.Label.Price,価格
 Feature.Build.Label.PriceUnavailable,--
@@ -2476,6 +2498,7 @@ Feature.Build.Notification.Title.Finished,ビルドが完了しました
 Feature.Build.Notification.Title.NeedInput,ビルドを続けるには入力が必要です
 Feature.Build.Placeholder.DescribeProduct,販売したいものについて説明してください
 Feature.Build.Placeholder.DescribeProductUpdate,更新内容を説明してください
+Feature.Build.Placeholder.InternalSpec,internal_code
 Feature.Build.Prompt.CreateDeveloperProduct,開発者製品を作成してゲームに組み込み、変更を検証して公開し、購入できるようにしてください。
 Feature.Build.Title.AdActive,広告キャンペーンは有効になっています
 Feature.Build.Title.AdCampaignDuration,{durationDays}日間の広告キャンペーン
@@ -2642,6 +2665,7 @@ Feature.Catalog.AvatarWidgetTitle,
 Feature.Catalog.Checkout.Title.PurchasedFailedPlural,{count} 点のアイテムを購入できませんでした
 Feature.Catalog.Checkout.WearAfterPurchase,
 Feature.Catalog.Description.AttributionAlertBody,このエリアを離れて {experienceName} に移動します。
+Feature.Catalog.Feature.Catalog.Label.AvatarBackgrounds,
 Feature.Catalog.Feature.Catalog.Label.ClassicShirt,定番シャツ
 Feature.Catalog.Feature.Catalog.Label.ClassicTShirt,定番Tシャツ
 Feature.Catalog.Feature.Catalog.Label.TotalItems,合計: アイテム {itemCount} 点
@@ -3640,6 +3664,7 @@ Feature.InExperienceIntervention.Label.TimeLeft.Day.Singular,
 Feature.InExperienceIntervention.Label.TimeLeft.Hours,残り{time}
 Feature.InExperienceShop.Description.RobuxPurchaseLegalDisclosure,Robuxを購入すると、仲裁条項と撤回ポリシーを含むRobloxの{termsLinkStart}利用規約{termsLinkEnd}に同意したものとみなされます。
 Feature.InExperienceShop.GamePass,
+Feature.InExperienceShop.Label.Active,
 Feature.InExperienceShop.Label.BonusItem,ボーナスアイテム
 Feature.InExperienceShop.Label.DescriptionWithTime,{description} {timeRemaining}
 Feature.InExperienceShop.Label.EndTime,あと{timeRemaining}で終了
@@ -3839,6 +3864,7 @@ Feature.Moments.Title.MomentRemoved,
 Feature.Moments.Title.PostInsights,ページヘッダーのタイトル
 Feature.Moments.Title.ReportPost,投稿の規約違反を報告
 Feature.Moments.Tooltip.Creation,バーチャル空間内の全員があなたのモーメントを見ることができます。
+Feature.Moments.Tooltip.PostInsightsBody,視聴回数、視聴時間、モーメントに対するオーディエンスの反応を確認できます。
 Feature.Moments.Tooltip.PostInsightsTitle,モーメントのインサイトはこちら
 Feature.Moments.Tooltip.ShareFirstMomentBody,切り抜きからモーメントを作成します
 Feature.Moments.Tooltip.ShareFirstMomentTitle,最初のモーメントをシェア

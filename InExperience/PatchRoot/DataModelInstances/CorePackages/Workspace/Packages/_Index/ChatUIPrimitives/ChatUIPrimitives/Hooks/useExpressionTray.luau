@@ -8,77 +8,70 @@ local UseExpressionTrayControllerModule = require(ChatUIPrimitives.Hooks.useExpr
 local UseLayoutModeModule = require(ChatUIPrimitives.Hooks.useLayoutMode)
 local ExpressionCooldownStoreModule = require(ChatUIPrimitives.expressionCooldownStore)
 local ExpressionCatalogStoreModule = require(ChatUIPrimitives.expressionCatalogStore)
+local _ = require(ChatUIPrimitives.createExpressionCatalogResource)
 local _ = require(ChatUIPrimitives.UniversalMessage.Types)
 local PresetChatCooldownLuaMsRatio = game:DefineFastInt("PresetChatCooldownLuaMs", 10000) / 1000
-local FFlagExpChatExpressionTrayHostFetchModule = require(ChatUIPrimitives.Flags.FFlagExpChatExpressionTrayHostFetch)
 local Disabled = SignalsModule.createSignal("disabled")
 local Signal = SignalsModule.createSignal({})
+local Signal1 = SignalsModule.createSignal(nil)
 local t = {}
 
 return function(p1)
-	-- upvalues: UseLayoutModeModule (copy), FFlagExpChatExpressionTrayHostFetchModule (copy), ExpressionCatalogStoreModule (copy), SignalsReactModule (copy), Disabled (copy), Signal (copy), ReactModule (copy), t (copy), ExpressionCooldownStoreModule (copy), UseExpressionTrayControllerModule (copy), PresetChatCooldownLuaMsRatio (copy)
+	-- upvalues: UseLayoutModeModule (copy), ExpressionCatalogStoreModule (copy), SignalsReactModule (copy), Disabled (copy), Signal (copy), Signal1 (copy), t (copy), ExpressionCooldownStoreModule (copy), UseExpressionTrayControllerModule (copy), ReactModule (copy), PresetChatCooldownLuaMsRatio (copy)
 	local UseLayoutModeModuleResult = UseLayoutModeModule()
-	local FetchExpressionItems = if FFlagExpChatExpressionTrayHostFetchModule and p1 then p1.fetchExpressionItems else nil
-	local ExpressionCatalogStoreModule1 = if p1 and FetchExpressionItems == nil then ExpressionCatalogStoreModule else nil
-	local UseSignalStateResult = SignalsReactModule.useSignalState(if ExpressionCatalogStoreModule1 then ExpressionCatalogStoreModule1.getStatus else Disabled)
-	local UseSignalStateResult1 = SignalsReactModule.useSignalState(if ExpressionCatalogStoreModule1 then ExpressionCatalogStoreModule1.getCategoryGroups else Signal)
-	local v1 = nil
-	local Callback = nil
+	local CatalogResource = if p1 then p1.catalogResource else nil
+	local ExpressionCatalogStoreModule1 = if p1 == nil or CatalogResource ~= nil then nil else ExpressionCatalogStoreModule
+	local UseSignalStateResult = SignalsReactModule.useSignalState(if ExpressionCatalogStoreModule1 == nil then Disabled else ExpressionCatalogStoreModule1.getStatus)
+	local UseSignalStateResult1 = SignalsReactModule.useSignalState(if ExpressionCatalogStoreModule1 == nil then Signal else ExpressionCatalogStoreModule1.getCategoryGroups)
+	local UseSignalStateResult2 = SignalsReactModule.useSignalState(if CatalogResource == nil then Signal1 else CatalogResource.getCatalog)
+	local Disabled1 = nil
+	local T = nil
 	
-	if FFlagExpChatExpressionTrayHostFetchModule then
-		v1, Callback = ReactModule.useState(nil)
+	if CatalogResource == nil then
+		Disabled1 = UseSignalStateResult
+		T = UseSignalStateResult1
+	else
+		Disabled1 = if UseSignalStateResult2 == nil then "disabled" else UseSignalStateResult2.status
+		local CategoryGroups = if UseSignalStateResult2 == nil then nil else UseSignalStateResult2.categoryGroups
+		T = if CategoryGroups == nil then t else CategoryGroups
 	end
-	if FetchExpressionItems ~= nil then
-		UseSignalStateResult = if v1 then v1.status else "disabled"
-		UseSignalStateResult1 = v1 and v1.categoryGroups or t
-	end
-	local UseSignalStateResult2 = SignalsReactModule.useSignalState(ExpressionCooldownStoreModule.getCooldownEndsAtByKey)
-	local UseExpressionTrayControllerModuleResult = UseExpressionTrayControllerModule({ categoryGroups = UseSignalStateResult1 })
+	local UseSignalStateResult3 = SignalsReactModule.useSignalState(ExpressionCooldownStoreModule.getCooldownEndsAtByKey)
+	local UseExpressionTrayControllerModuleResult = UseExpressionTrayControllerModule({ categoryGroups = T })
 	local CloseFunction = UseExpressionTrayControllerModuleResult.close
 	local UseRefResult = ReactModule.useRef(false)
 	local CanSend = if p1 then p1.canSend else false
 	ReactModule.useEffect(function()
-		-- upvalues: CanSend (copy), ExpressionCatalogStoreModule1 (copy), CloseFunction (copy)
-		if not CanSend or ExpressionCatalogStoreModule1 == nil then
-			CloseFunction()
-			
-			return
-		end
-		ExpressionCatalogStoreModule1.acquire()
-		
-		return function()
-			-- upvalues: ExpressionCatalogStoreModule1 (upval)
-			ExpressionCatalogStoreModule1.release()
-		end
-	end, { CanSend, ExpressionCatalogStoreModule1, CloseFunction })
-	
-	if FFlagExpChatExpressionTrayHostFetchModule then
-		ReactModule.useEffect(function()
-			-- upvalues: CanSend (copy), FetchExpressionItems (copy), Callback (ref)
-			if not CanSend or FetchExpressionItems == nil then
-				Callback(nil)
+		-- upvalues: CatalogResource (copy), CanSend (copy), CloseFunction (copy), ExpressionCatalogStoreModule1 (copy)
+		if CatalogResource == nil then
+			if not CanSend or ExpressionCatalogStoreModule1 == nil then
+				CloseFunction()
 				
 				return
 			end
-			local Flag = true
-			Callback(nil)
-			task.spawn(function()
-				-- upvalues: FetchExpressionItems (upval), Flag (ref), Callback (upval)
-				local Success, Result = pcall(FetchExpressionItems)
-				
-				if Flag then
-					Callback(if Success then Result else nil)
-					
-					return
-				end
-			end)
+			ExpressionCatalogStoreModule1.acquire()
 			
 			return function()
-				-- upvalues: Flag (ref)
-				Flag = false
+				-- upvalues: ExpressionCatalogStoreModule1 (upval)
+				ExpressionCatalogStoreModule1.release()
 			end
-		end, { CanSend, FetchExpressionItems })
-	end
+		elseif not CanSend then
+			CloseFunction()
+			
+			return
+		else
+			CatalogResource.acquire()
+			
+			return function()
+				-- upvalues: CatalogResource (copy)
+				CatalogResource.release()
+			end
+		end
+	end, {
+		CanSend,
+		CatalogResource,
+		ExpressionCatalogStoreModule1,
+		CloseFunction
+	})
 	local OnKeyboardActivated = if p1 then p1.onKeyboardActivated else nil
 	local UseResult = ReactModule.useCallback(function()
 		-- upvalues: CloseFunction (copy), OnKeyboardActivated (copy)
@@ -123,7 +116,7 @@ return function(p1)
 		CloseFunction
 	})
 	local OnOpenChanged = if p1 then p1.onOpenChanged else nil
-	local IsVisible: boolean = CanSend and (UseSignalStateResult == "enabled" and #UseSignalStateResult1 > 0)
+	local IsVisible: boolean = CanSend and (Disabled1 == "enabled" and #T > 0)
 	local IsVisible1: boolean = UseExpressionTrayControllerModuleResult.isOpen and IsVisible
 	ReactModule.useEffect(function()
 		-- upvalues: OnOpenChanged (copy), IsVisible1 (copy)
@@ -139,10 +132,10 @@ return function(p1)
 		focusNavEnabled = p1.focusNavEnabled,
 		canLocalUserChat = p1.canLocalUserChat,
 		footerText = p1.footerText,
-		categoryGroups = UseSignalStateResult1,
+		categoryGroups = T,
 		activeGroupId = UseExpressionTrayControllerModuleResult.activeGroupId,
 		cooldownDurationSeconds = CooldownDurationSeconds,
-		cooldownEndsAtByKey = UseSignalStateResult2,
+		cooldownEndsAtByKey = UseSignalStateResult3,
 		cooldownKeyForContent = CooldownKeyForContent,
 		onEntryActivated = UseExpressionTrayControllerModuleResult.onEntryActivated,
 		onPressedOutside = CloseFunction,

@@ -346,9 +346,9 @@ return function(p1)
 		})
 	end
 	if FFlagBuildExperienceMonetizationNativeUIModule then
-		UseBuildPromptDraftModule(p1.target.universeId, p1.target.sessionId, UseChatSessionCoreModuleResult.setComposerText, UseChatSessionCoreModuleResult.sendMessage, p1.isFocused ~= false, if FFlagBuildExperienceDeveloperProductContextModule then UseChatSessionCoreModuleResult else nil)
+		UseBuildPromptDraftModule(p1.target.universeId, p1.target.sessionId, UseChatSessionCoreModuleResult.setPrefilledComposerText, UseChatSessionCoreModuleResult.sendMessage, p1.isFocused ~= false, if FFlagBuildExperienceDeveloperProductContextModule then UseChatSessionCoreModuleResult else nil)
 	elseif FFlagBuildExperienceManageDevProductModule then
-		UseBuildPromptDraftModule(p1.target.universeId, p1.target.sessionId, UseChatSessionCoreModuleResult.setComposerText, UseChatSessionCoreModuleResult.sendMessage, nil, if FFlagBuildExperienceDeveloperProductContextModule then UseChatSessionCoreModuleResult else nil)
+		UseBuildPromptDraftModule(p1.target.universeId, p1.target.sessionId, UseChatSessionCoreModuleResult.setPrefilledComposerText, UseChatSessionCoreModuleResult.sendMessage, nil, if FFlagBuildExperienceDeveloperProductContextModule then UseChatSessionCoreModuleResult else nil)
 	end
 	local BuildChatPlaytestCta = UseChatPlaytestFooterModule(UseChatSessionCoreModuleResult, "BuildChatPlaytestCta")
 	local SubagentTaskState = UseChatSessionCoreModuleResult.subagentTaskState

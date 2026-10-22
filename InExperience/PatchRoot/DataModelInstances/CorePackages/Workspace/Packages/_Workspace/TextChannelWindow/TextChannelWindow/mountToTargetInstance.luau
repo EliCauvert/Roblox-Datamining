@@ -3,6 +3,8 @@ local StarterGui = game:GetService("StarterGui")
 local Parent = script.Parent.Parent
 local _ = require(Parent.React)
 local ReactRobloxModule = require(Parent.ReactRoblox)
+local FFlagExpChatTextChannelWindowFixLayerCollectorGeometryModule = require(script.Parent.Flags.FFlagExpChatTextChannelWindowFixLayerCollectorGeometry)
+local CreateLayerCollectorOverlayModule = require(script.Parent.createLayerCollectorOverlay)
 local ExpChatTextChannelWindowMinWidth = game:DefineFastInt("ExpChatTextChannelWindowMinWidth", 200)
 local ExpChatTextChannelWindowMinHeight = game:DefineFastInt("ExpChatTextChannelWindowMinHeight", 200)
 local t = {}
@@ -125,7 +127,7 @@ local _ = function(Object, ScreenGui, p1)
 end
 
 local function doMount(Frame: Frame, p1)
-	-- upvalues: t (copy), createOverlay (copy), ReactRobloxModule (copy), connectGuiObjectSync (copy), connectSurfaceGuiSync (copy), connectScreenGuiSync (copy), ExpChatTextChannelWindowMinWidth (copy), ExpChatTextChannelWindowMinHeight (copy)
+	-- upvalues: t (copy), FFlagExpChatTextChannelWindowFixLayerCollectorGeometryModule (copy), CreateLayerCollectorOverlayModule (copy), createOverlay (copy), ReactRobloxModule (copy), connectGuiObjectSync (copy), connectSurfaceGuiSync (copy), connectScreenGuiSync (copy), ExpChatTextChannelWindowMinWidth (copy), ExpChatTextChannelWindowMinHeight (copy)
 	if not Frame:IsA("TextChannelWindow") then
 		return nil
 	end
@@ -137,41 +139,43 @@ local function doMount(Frame: Frame, p1)
 	if LayerCollector and not LayerCollector:IsA("ScreenGui") and not LayerCollector:IsA("SurfaceGui") then
 		return nil
 	end
-	local Overlay = createOverlay(Frame, LayerCollector)
+	local NewCreateLayerCollectorOverlay = if FFlagExpChatTextChannelWindowFixLayerCollectorGeometryModule then CreateLayerCollectorOverlayModule.create(Frame, LayerCollector) else createOverlay(Frame, LayerCollector)
 	local Frame1 = Instance.new("Frame")
 	Frame1.BackgroundTransparency = 1
 	Frame1.Position = UDim2.fromOffset(Frame.AbsolutePosition.X, Frame.AbsolutePosition.Y)
 	Frame1.Size = UDim2.fromOffset(Frame.AbsoluteSize.X, Frame.AbsoluteSize.Y)
 	Frame1.Rotation = Frame.Rotation
-	Frame1.Parent = Overlay
+	Frame1.Parent = NewCreateLayerCollectorOverlay
 	local Root = ReactRobloxModule.createRoot(Frame1)
 	Root:render(p1)
 	local List = {}
-	connectGuiObjectSync(Frame, Frame1, Overlay, List)
+	connectGuiObjectSync(Frame, Frame1, NewCreateLayerCollectorOverlay, List)
 	
-	if LayerCollector ~= nil then
+	if FFlagExpChatTextChannelWindowFixLayerCollectorGeometryModule then
+		CreateLayerCollectorOverlayModule.connect(LayerCollector, NewCreateLayerCollectorOverlay, List)
+	elseif LayerCollector ~= nil then
 		if LayerCollector:IsA("SurfaceGui") then
-			connectSurfaceGuiSync(LayerCollector, Overlay, List)
+			connectSurfaceGuiSync(LayerCollector, NewCreateLayerCollectorOverlay, List)
 		elseif LayerCollector:IsA("ScreenGui") then
-			connectScreenGuiSync(LayerCollector, Overlay, List)
+			connectScreenGuiSync(LayerCollector, NewCreateLayerCollectorOverlay, List)
 		end
 	end
 	local function updateEnabled()
-		-- upvalues: Overlay (copy), Frame (copy), Frame (copy), ExpChatTextChannelWindowMinWidth (upval), ExpChatTextChannelWindowMinHeight (upval)
-		Overlay.Enabled = Frame.IsRendering and (ExpChatTextChannelWindowMinWidth <= Frame.AbsoluteSize.X and ExpChatTextChannelWindowMinHeight <= Frame.AbsoluteSize.Y)
+		-- upvalues: NewCreateLayerCollectorOverlay (copy), Frame (copy), Frame (copy), ExpChatTextChannelWindowMinWidth (upval), ExpChatTextChannelWindowMinHeight (upval)
+		NewCreateLayerCollectorOverlay.Enabled = Frame.IsRendering and (ExpChatTextChannelWindowMinWidth <= Frame.AbsoluteSize.X and ExpChatTextChannelWindowMinHeight <= Frame.AbsoluteSize.Y)
 	end
 	
-	Overlay.Enabled = Frame.IsRendering and (ExpChatTextChannelWindowMinWidth <= Frame.AbsoluteSize.X and ExpChatTextChannelWindowMinHeight <= Frame.AbsoluteSize.Y)
+	NewCreateLayerCollectorOverlay.Enabled = Frame.IsRendering and (ExpChatTextChannelWindowMinWidth <= Frame.AbsoluteSize.X and ExpChatTextChannelWindowMinHeight <= Frame.AbsoluteSize.Y)
 	table.insert(List, Frame:GetPropertyChangedSignal("IsRendering"):Connect(updateEnabled))
 	table.insert(List, Frame:GetPropertyChangedSignal("AbsoluteSize"):Connect(updateEnabled))
 	
 	local function unmount()
-		-- upvalues: List (copy), Root (copy), Overlay (copy), t (upval), Frame (copy)
+		-- upvalues: List (copy), Root (copy), NewCreateLayerCollectorOverlay (copy), t (upval), Frame (copy)
 		for _, Connection in List do
 			Connection:Disconnect()
 		end
 		Root:unmount()
-		Overlay:Destroy()
+		NewCreateLayerCollectorOverlay:Destroy()
 		t[Frame] = nil
 	end
 	

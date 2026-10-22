@@ -49,7 +49,7 @@ end
 local function Media(Frame)
 	-- upvalues: UseTokensFunction (copy), ReactModule (copy), View (copy), Image (copy), Frozen (copy), Icon (copy), IconSize (copy)
 	local UseTokensResult = UseTokensFunction()
-	local XScale: number = if Frame.isPictogram then 0.66 else 1
+	local PictogramScale = if Frame.isPictogram then Frame.pictogramScale or 0.66 else 1
 	
 	return ReactModule.createElement(View, {
 		tag = "bg-shift-200",
@@ -67,7 +67,7 @@ local function Media(Frame)
 			tag = "position-center-center anchor-center-center",
 			testId = "AssetCardMediaImage",
 			ZIndex = 1,
-			Size = UDim2.fromScale(XScale, XScale),
+			Size = UDim2.fromScale(PictogramScale, PictogramScale),
 			ImageContent = Frame.image,
 			ScaleType = if Frame.isPictogram then Enum.ScaleType.Fit else Enum.ScaleType.Crop,
 			imageStyle = if Frame.isImageLoading then Frozen elseif Frame.isPictogram then UseTokensResult.Color.Content.Emphasis else nil,
@@ -263,6 +263,7 @@ return ReactModule.memo(function(Frame)
 			isImageLoading = Media1.isLoading == true,
 			aspectRatio = Media1.aspectRatio,
 			isPictogram = Media1.isPictogram == true,
+			pictogramScale = Media1.pictogramScale,
 			overlayIcon = Media1.overlayIcon,
 			onActivated = Media1.onActivated,
 			isDisabled = not IsStatusMatch,

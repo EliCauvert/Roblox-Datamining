@@ -61,7 +61,7 @@ local function renderDropdown(p1)
 			renderEntry = Autocomplete.renderEntry,
 			anchorRef = p1.barContainerRef,
 			onHover = Autocomplete.setSelectedIndex,
-			onSelect = Autocomplete.commitSelection,
+			onSelect = p1.onCommitSelection,
 			onDismiss = Autocomplete.dismiss
 		})
 	end
@@ -574,11 +574,32 @@ return ReactModule.memo(function(Props)
 			Props.onFocusGained()
 		end
 	end, { Props.onFocusGained })
-	local UseResult5 = ReactModule.useCallback(function(_, p1)
-		-- upvalues: TextBoxRef (copy), UseChatAutocompleteEngineModuleResult1 (copy), UseResult1 (copy), Props (copy)
+	local UseResult5 = ReactModule.useCallback(function(p1)
+		-- upvalues: Props (copy), UseStateResult2 (copy)
+		if Props.autocompleteOptions ~= nil then
+			UseStateResult2(p1.Text == "")
+		end
+	end, { Props.autocompleteOptions })
+	local UseResult6 = ReactModule.useCallback(function(p1)
+		-- upvalues: UseChatAutocompleteEngineModuleResult1 (copy), TextBoxRef (copy), UseResult5 (copy)
+		UseChatAutocompleteEngineModuleResult1.commitSelection(p1)
 		local Current = TextBoxRef.current
 		
-		if (not Current or not UseChatAutocompleteEngineModuleResult1.interceptSend(Current, p1)) and p1 then
+		if Current ~= nil then
+			UseResult5(Current)
+		end
+	end, {
+		UseChatAutocompleteEngineModuleResult1.commitSelection,
+		TextBoxRef,
+		UseResult5
+	})
+	local UseResult7 = ReactModule.useCallback(function(_, p1)
+		-- upvalues: TextBoxRef (copy), UseChatAutocompleteEngineModuleResult1 (copy), UseResult5 (copy), UseResult1 (copy), Props (copy)
+		local Current = TextBoxRef.current
+		
+		if Current and UseChatAutocompleteEngineModuleResult1.interceptSend(Current, p1) then
+			UseResult5(Current)
+		elseif p1 then
 			UseResult1()
 		end
 		if Props.onFocusLost then
@@ -588,7 +609,8 @@ return ReactModule.memo(function(Props)
 		UseResult1,
 		Props.onFocusLost,
 		TextBoxRef,
-		UseChatAutocompleteEngineModuleResult1.interceptSend
+		UseChatAutocompleteEngineModuleResult1.interceptSend,
+		UseResult5
 	})
 	ReactModule.useEffect(function()
 		-- upvalues: CanLocalUserChat (copy), UseStateResult2 (copy)
@@ -638,10 +660,11 @@ return ReactModule.memo(function(Props)
 		autocomplete = UseChatAutocompleteEngineModuleResult1,
 		onChannelChipAbsoluteSizeChanged = UseResult,
 		onSendActivated = UseResult1,
+		onCommitSelection = UseResult6,
 		onReturnPressedFromOnScreenKeyboard = UseResult2,
 		onTextChanged = UseResult3,
 		onFocused = UseResult4,
-		onFocusLost = UseResult5
+		onFocusLost = UseResult7
 	}
 	
 	return if Props.composerLayout == true then renderComposer(config) else renderLegacy(config)

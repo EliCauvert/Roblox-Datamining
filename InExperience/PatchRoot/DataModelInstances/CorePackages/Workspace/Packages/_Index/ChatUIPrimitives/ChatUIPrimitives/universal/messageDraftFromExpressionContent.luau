@@ -1,6 +1,6 @@
 ﻿local _ = require(script:FindFirstAncestor("ChatUIPrimitives").UniversalMessage.Types)
-local MessageDraftModelModule = require(script.Parent.Parent.MessageDraftModel)
-local _ = require(script.Parent.Parent.Types)
+local MessageDraftModelModule = require(script.Parent.MessageDraftModel)
+local _ = require(script.Parent.Types)
 
 local function _(p1)
 	return if p1.altText == nil then if p1.kind == "plain-text" and p1.text ~= "" then p1.text else nil elseif p1.altText == "" then nil else p1.altText

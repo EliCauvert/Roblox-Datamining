@@ -1,4 +1,5 @@
-﻿local config = {
+﻿local _ = require(script:FindFirstAncestor("TextChannelWindow").Parent.ChatUIPrimitives.ExpressionCatalogResource)
+local config = {
 	status = "enabled",
 	version = "studio-debug",
 	categoryGroups = {

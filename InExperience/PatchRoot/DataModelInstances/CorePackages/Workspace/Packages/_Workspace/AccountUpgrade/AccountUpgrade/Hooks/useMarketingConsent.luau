@@ -7,7 +7,8 @@ local AccountUpgradeAnalyticsModule = require(AccountUpgrade.Analytics.AccountUp
 local _ = require(AccountUpgrade.AccountUpgradeFlow)
 local _ = require(AccountUpgrade.AccountUpgradeSurface)
 local _ = require(AccountUpgrade.FlowSpec)
-local GetMarketingEmailAutoOptInModule = require(AccountUpgrade.Eligibility.getMarketingEmailAutoOptIn)
+local MarketingConsentOptInMethodModule = require(AccountUpgrade.MarketingConsentOptInMethod)
+local GetMarketingConsentOptInMethodModule = require(AccountUpgrade.Eligibility.getMarketingConsentOptInMethod)
 local SendMarketingConsentModule = require(AccountUpgrade.Utils.sendMarketingConsent)
 local FIntAccountUpgradeMarketingConsentMinimumAgeModule = require(AccountUpgrade.Flags.FIntAccountUpgradeMarketingConsentMinimumAge)
 local ConsentName = LegallySensitiveContentModule.ConsentName
@@ -15,7 +16,7 @@ local ConsentName = LegallySensitiveContentModule.ConsentName
 local function noop() end
 
 return function(p1)
-	-- upvalues: LegallySensitiveContentModule (copy), ConsentName (copy), ReactModule (copy), PromiseModule (copy), GetMarketingEmailAutoOptInModule (copy), FIntAccountUpgradeMarketingConsentMinimumAgeModule (copy), AccountUpgradeAnalyticsModule (copy), SendMarketingConsentModule (copy), noop (copy)
+	-- upvalues: LegallySensitiveContentModule (copy), ConsentName (copy), ReactModule (copy), PromiseModule (copy), GetMarketingConsentOptInMethodModule (copy), MarketingConsentOptInMethodModule (copy), FIntAccountUpgradeMarketingConsentMinimumAgeModule (copy), AccountUpgradeAnalyticsModule (copy), SendMarketingConsentModule (copy), noop (copy)
 	local Flow = p1.flow
 	local Surface = p1.surface
 	local Birthday = p1.birthday
@@ -28,11 +29,11 @@ return function(p1)
 	UseRefResult1.current = EmailMarketingAutoOptInDuringAccountUpgrade2
 	local UseStateResult, UseStateResult2 = ReactModule.useState(nil)
 	ReactModule.useEffect(function()
-		-- upvalues: IsShowsMarketingConsent (copy), PromiseModule (upval), GetMarketingEmailAutoOptInModule (upval), UseStateResult2 (copy)
+		-- upvalues: IsShowsMarketingConsent (copy), PromiseModule (upval), GetMarketingConsentOptInMethodModule (upval), UseStateResult2 (copy), MarketingConsentOptInMethodModule (upval)
 		if IsShowsMarketingConsent then
-			local v1 = PromiseModule.try(GetMarketingEmailAutoOptInModule):andThen(UseStateResult2, function()
-				-- upvalues: UseStateResult2 (upval)
-				UseStateResult2(false)
+			local v1 = PromiseModule.try(GetMarketingConsentOptInMethodModule):andThen(UseStateResult2, function()
+				-- upvalues: UseStateResult2 (upval), MarketingConsentOptInMethodModule (upval)
+				UseStateResult2(MarketingConsentOptInMethodModule.None)
 			end)
 			
 			return function()
@@ -43,11 +44,11 @@ return function(p1)
 			return nil
 		end
 	end, { IsShowsMarketingConsent })
-	local IsUseStateResult: boolean = IsShowsMarketingConsent and UseStateResult == true
+	local IsUseStateResultMatch: boolean = IsShowsMarketingConsent and UseStateResult == MarketingConsentOptInMethodModule.AutoOptIn
 	local IsAgeInYearsBelow: boolean = Birthday ~= nil and Birthday:GetAgeInYears() < FIntAccountUpgradeMarketingConsentMinimumAgeModule
 	local NoIsAgeInYearsBelow: boolean = Birthday ~= nil and not IsAgeInYearsBelow
 	local Consent = EmailMarketingCheckboxDuringAccountUpgrade.wordsOfConsent.consent
-	local IsNotConsentMatch: boolean = IsShowsMarketingConsent and (UseStateResult == false and (Consent ~= nil and Consent ~= ""))
+	local IsNotConsentMatch: boolean = IsShowsMarketingConsent and (UseStateResult == MarketingConsentOptInMethodModule.Checkbox and (Consent ~= nil and Consent ~= ""))
 	local NoIsAgeInYearsBelow1: boolean = IsNotConsentMatch and not IsAgeInYearsBelow
 	local UseStateResult1, UseStateResult2_1 = ReactModule.useState(false)
 	
@@ -76,11 +77,11 @@ return function(p1)
 			end
 		end, { NoIsAgeInYearsBelow1, UseStateResult1, Flow, Surface }),
 		submit = ReactModule.useCallback(function()
-			-- upvalues: PromiseModule (upval), NoIsAgeInYearsBelow (copy), IsUseStateResult (copy), SendMarketingConsentModule (upval), UseRefResult1 (copy), Flow (copy), Surface (copy), AccountUpgradeAnalyticsModule (upval), IsNotConsentMatch (copy), UseStateResult1 (copy), UseRefResult (copy), noop (upval)
+			-- upvalues: PromiseModule (upval), NoIsAgeInYearsBelow (copy), IsUseStateResultMatch (copy), SendMarketingConsentModule (upval), UseRefResult1 (copy), Flow (copy), Surface (copy), AccountUpgradeAnalyticsModule (upval), IsNotConsentMatch (copy), UseStateResult1 (copy), UseRefResult (copy), noop (upval)
 			PromiseModule.try(function()
-				-- upvalues: NoIsAgeInYearsBelow (upval), IsUseStateResult (upval), SendMarketingConsentModule (upval), UseRefResult1 (upval), Flow (upval), Surface (upval), AccountUpgradeAnalyticsModule (upval), IsNotConsentMatch (upval), UseStateResult1 (upval), UseRefResult (upval)
+				-- upvalues: NoIsAgeInYearsBelow (upval), IsUseStateResultMatch (upval), SendMarketingConsentModule (upval), UseRefResult1 (upval), Flow (upval), Surface (upval), AccountUpgradeAnalyticsModule (upval), IsNotConsentMatch (upval), UseStateResult1 (upval), UseRefResult (upval)
 				if not NoIsAgeInYearsBelow then return end
-				if IsUseStateResult then
+				if IsUseStateResultMatch then
 					SendMarketingConsentModule(UseRefResult1.current.getBase64EncodedAuditHeader, Flow, Surface)
 					AccountUpgradeAnalyticsModule.reportMarketingConsentAutoOptIn(Flow, Surface)
 					
@@ -94,7 +95,7 @@ return function(p1)
 				end
 			end):catch(noop)
 		end, {
-			NoIsAgeInYearsBelow, IsUseStateResult, IsNotConsentMatch, UseStateResult1,
+			NoIsAgeInYearsBelow, IsUseStateResultMatch, IsNotConsentMatch, UseStateResult1,
 			Flow, Surface
 		})
 	}

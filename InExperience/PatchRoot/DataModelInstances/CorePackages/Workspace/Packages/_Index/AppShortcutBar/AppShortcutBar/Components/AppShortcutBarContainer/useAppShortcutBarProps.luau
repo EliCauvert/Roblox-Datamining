@@ -15,9 +15,11 @@ local UseDesignTokensFunction = require(Parent.Style).useDesignTokens
 local UseAppPolicyFunction = require(Parent.UniversalAppPolicy).useAppPolicy
 local UseSignalStateFunction = require(Parent.SignalsReact).useSignalState
 local UseIsTvRemoteDeviceFunction = require(Parent.RoactUtils).Hooks.useIsTvRemoteDevice
+local UseIsRealGamepadConnectedFunction = require(Parent.RoactUtils).Hooks.useIsRealGamepadConnected
 local UseExternalEventFunction = require(Parent.RoactUtils).Hooks.useExternalEvent
 local DisplayModule = require(Parent.Display)
 local NoShortcutBarWithTvRemote = game:DefineFastFlag("NoShortcutBarWithTvRemote", false)
+local FFlagStickyShortcutBarTvRemoteWithGamepad = require(AppShortcutBar.Flags).FFlagStickyShortcutBarTvRemoteWithGamepad
 local FFlagShortcutBarPlatformGamepadIcons = require(AppShortcutBar.Flags).FFlagShortcutBarPlatformGamepadIcons
 local SharedFlagsModule = require(Parent.SharedFlags)
 local FFlagAXMigrateEquipSlotsInputBindingsToRoactGamepad = SharedFlagsModule.FFlagAXMigrateEquipSlotsInputBindingsToRoactGamepad
@@ -519,13 +521,14 @@ local function useShortcutBarFrameProps()
 end
 
 local function useShortcutBarItems()
-	-- upvalues: ReactFocusNavigationModule (copy), ReactModule (copy), LocalizationRoactContext (copy), UseHeldProgressByEventFunction (copy), UseLastInputMethodFunction (copy), FFlagLuaAppResponsiveEnginePreferredInput (copy), ResponsiveModule (copy), NoShortcutBarWithTvRemote (copy), UseIsTvRemoteDeviceFunction (copy), FFlagShortcutBarPlatformGamepadIcons (copy), usePlatformGamepadImages (copy), UseSelectorFunction (copy), selectRoactGamepadBindings (copy), UseAppPolicyFunction (copy), FFlagEnableStickyShortcutBarOnAllPlatforms (copy), getGamepadItems (copy), getKeyboardItems (copy)
+	-- upvalues: ReactFocusNavigationModule (copy), ReactModule (copy), LocalizationRoactContext (copy), UseHeldProgressByEventFunction (copy), UseLastInputMethodFunction (copy), FFlagLuaAppResponsiveEnginePreferredInput (copy), ResponsiveModule (copy), NoShortcutBarWithTvRemote (copy), UseIsTvRemoteDeviceFunction (copy), FFlagStickyShortcutBarTvRemoteWithGamepad (copy), UseIsRealGamepadConnectedFunction (copy), FFlagShortcutBarPlatformGamepadIcons (copy), usePlatformGamepadImages (copy), UseSelectorFunction (copy), selectRoactGamepadBindings (copy), UseAppPolicyFunction (copy), FFlagEnableStickyShortcutBarOnAllPlatforms (copy), getGamepadItems (copy), getKeyboardItems (copy)
 	local UseActiveEventMapResult = ReactFocusNavigationModule.useActiveEventMap()
 	local UseContextResult = ReactModule.useContext(LocalizationRoactContext)
 	local UseHeldProgressByEventResult = UseHeldProgressByEventFunction()
 	local UseLastInputMethodResult = UseLastInputMethodFunction()
 	local UsePreferredInputResult = if FFlagLuaAppResponsiveEnginePreferredInput then ResponsiveModule.usePreferredInput() else nil
 	local UseIsTvRemoteDeviceResult = if NoShortcutBarWithTvRemote then UseIsTvRemoteDeviceFunction() else nil
+	local UseIsRealGamepadConnectedResult = if FFlagStickyShortcutBarTvRemoteWithGamepad then UseIsRealGamepadConnectedFunction() else false
 	local UsePlatformGamepadImagesResult = if FFlagShortcutBarPlatformGamepadIcons then usePlatformGamepadImages() else nil
 	local UseSelectorResult = UseSelectorFunction(selectRoactGamepadBindings)
 	local UseAppPolicyResult = UseAppPolicyFunction(function(p7)
@@ -537,7 +540,7 @@ local function useShortcutBarItems()
 	end
 	local IsUsePreferredInputResultMatch: boolean = if FFlagLuaAppResponsiveEnginePreferredInput then UsePreferredInputResult == ResponsiveModule.Input.Directional else UseLastInputMethodResult == "Gamepad"
 	
-	return if IsUsePreferredInputResultMatch then if UseIsTvRemoteDeviceResult then {} else getGamepadItems(UseActiveEventMapResult, UseHeldProgressByEventResult, UseContextResult, UseSelectorResult, UseAppPolicyResult, UsePlatformGamepadImagesResult) else getKeyboardItems(UseActiveEventMapResult, UseHeldProgressByEventResult, UseContextResult, UseAppPolicyResult)
+	return if IsUsePreferredInputResultMatch then if UseIsTvRemoteDeviceResult and not UseIsRealGamepadConnectedResult then {} else getGamepadItems(UseActiveEventMapResult, UseHeldProgressByEventResult, UseContextResult, UseSelectorResult, UseAppPolicyResult, UsePlatformGamepadImagesResult) else getKeyboardItems(UseActiveEventMapResult, UseHeldProgressByEventResult, UseContextResult, UseAppPolicyResult)
 end
 
 function useAppShortcutBarProps()

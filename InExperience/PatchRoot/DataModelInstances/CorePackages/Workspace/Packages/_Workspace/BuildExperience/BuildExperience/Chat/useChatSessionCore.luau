@@ -4,6 +4,7 @@ local FFlagBuildExperienceChatImageAttachmentsModule = require(BuildExperience.F
 local FFlagBuildExperienceChatResourceAttachments = require(Parent.SharedFlags).FFlagBuildExperienceChatResourceAttachments
 local FFlagBuildExperiencePersistChatDraftModule = require(BuildExperience.Flags.FFlagBuildExperiencePersistChatDraft)
 local FFlagBuildExperienceRefreshChatDraftOnGameLeaveModule = require(BuildExperience.Flags.FFlagBuildExperienceRefreshChatDraftOnGameLeave)
+local FFlagBuildExperiencePrefillSkipsDraftPersistModule = require(BuildExperience.Flags.FFlagBuildExperiencePrefillSkipsDraftPersist)
 local MessageBusService = game:GetService("MessageBusService")
 local AppLifecycleObserverService = game:GetService("AppLifecycleObserverService")
 local CreatorAgentChatModule = require(Parent.DataHydration.CreatorAgentChat)
@@ -180,7 +181,7 @@ local _ = function(p1, Enabled, p2, p3, SetupErrorText)
 end
 
 return function(p1)
-	-- upvalues: ReactModule (copy), LocalizationRoactContext (copy), LocalizationStringsModule (copy), FFlagBuildExperienceChatImageAttachmentsModule (copy), FFlagBuildExperiencePersistPlaytestLogsModule (copy), FFlagBuildExperienceClientDataModelTools (copy), FFlagBuildExperienceLibrary (copy), FFlagBuildAdUpsellModule (copy), FFlagBuildExperienceChatHistoryLoadingSkeletonModule (copy), CreatorAgentChatModule (copy), GetAgentRollbackRequestStoreModule (copy), Signal4 (copy), SignalsModule (copy), SignalsReactModule (copy), noopSetAgentSpecVersion (copy), IsEnabled (copy), Signal1 (copy), Signal2 (copy), Signal3 (copy), FFlagBuildExperienceShowThinkingBeforeUniverseCreationModule (copy), ParseSessionStreamModule (copy), SessionPromptMessageFilterModule (copy), FFlagBuildExperienceChatResourceAttachments (copy), Signal (copy), hasPendingLocalToolResponse (copy), noteLiveAdUpsellTurns (copy), FFlagBuildExperienceNewGameChatDraftModule (copy), FFlagBuildExperienceRestoreStoppedPromptModule (copy), Frozen (copy), ReactUtilsModule (copy), UseChatScrollModule (copy), GetPlaytestLoadingStoreModule (copy), FFlagBuildExperienceChatHistoryPrefetchModule (copy), FFlagBuildExperiencePinForBuild (copy), MessageBusService (copy), GameMessageId (copy), FFlagBuildExperienceRefreshChatDraftOnGameLeaveModule (copy), FFlagBuildExperiencePersistChatDraftModule (copy), BuildAppStorageModule (copy), AppLifecycleObserverService (copy), FFlagBuildExperienceFixChatBottomLockModule (copy), GetNewGameChatDraftKeyModule (copy), ChatTypesModule (copy), UploadCaptureAsyncModule (copy), FFlagBuildExperienceToolResultFailureRecoveryModule (copy), FFlagBuildExperienceAnswerFormModule (copy), CreatorAgentChatModule1 (copy), BuildAgentRollbackPromptModule (copy), UseAgentRollbackRequestModule (copy), UniverseCreateModule (copy), GetDefaultTemplatePlaceIdModule (copy), Debug (copy), FFlagBuildExperiencePromptFailureTelemetry (copy), UniverseConfigurationModule (copy), ChatConstantsModule (copy), RequestFailureKind (copy), SendBuildExperienceEventModule (copy), LaunchPlaytestWithLoadingStateModule (copy), GetActiveAnswerFormModule (copy), FFlagBuildExperienceChatAccordionScrollAnchorModule (copy)
+	-- upvalues: ReactModule (copy), LocalizationRoactContext (copy), LocalizationStringsModule (copy), FFlagBuildExperienceChatImageAttachmentsModule (copy), FFlagBuildExperiencePersistPlaytestLogsModule (copy), FFlagBuildExperienceClientDataModelTools (copy), FFlagBuildExperienceLibrary (copy), FFlagBuildAdUpsellModule (copy), FFlagBuildExperienceChatHistoryLoadingSkeletonModule (copy), CreatorAgentChatModule (copy), GetAgentRollbackRequestStoreModule (copy), Signal4 (copy), SignalsModule (copy), SignalsReactModule (copy), noopSetAgentSpecVersion (copy), IsEnabled (copy), Signal1 (copy), Signal2 (copy), Signal3 (copy), FFlagBuildExperienceShowThinkingBeforeUniverseCreationModule (copy), ParseSessionStreamModule (copy), SessionPromptMessageFilterModule (copy), FFlagBuildExperienceChatResourceAttachments (copy), Signal (copy), hasPendingLocalToolResponse (copy), noteLiveAdUpsellTurns (copy), FFlagBuildExperiencePrefillSkipsDraftPersistModule (copy), FFlagBuildExperiencePersistChatDraftModule (copy), FFlagBuildExperienceNewGameChatDraftModule (copy), FFlagBuildExperienceRestoreStoppedPromptModule (copy), Frozen (copy), ReactUtilsModule (copy), UseChatScrollModule (copy), GetPlaytestLoadingStoreModule (copy), FFlagBuildExperienceChatHistoryPrefetchModule (copy), FFlagBuildExperiencePinForBuild (copy), MessageBusService (copy), GameMessageId (copy), FFlagBuildExperienceRefreshChatDraftOnGameLeaveModule (copy), BuildAppStorageModule (copy), AppLifecycleObserverService (copy), FFlagBuildExperienceFixChatBottomLockModule (copy), GetNewGameChatDraftKeyModule (copy), ChatTypesModule (copy), UploadCaptureAsyncModule (copy), FFlagBuildExperienceToolResultFailureRecoveryModule (copy), FFlagBuildExperienceAnswerFormModule (copy), CreatorAgentChatModule1 (copy), BuildAgentRollbackPromptModule (copy), UseAgentRollbackRequestModule (copy), UniverseCreateModule (copy), GetDefaultTemplatePlaceIdModule (copy), Debug (copy), FFlagBuildExperiencePromptFailureTelemetry (copy), UniverseConfigurationModule (copy), ChatConstantsModule (copy), RequestFailureKind (copy), SendBuildExperienceEventModule (copy), LaunchPlaytestWithLoadingStateModule (copy), GetActiveAnswerFormModule (copy), FFlagBuildExperienceChatAccordionScrollAnchorModule (copy)
 	local UseContextResult = ReactModule.useContext(LocalizationRoactContext)
 	local FormatResult = UseContextResult:Format(LocalizationStringsModule.CHAT_CREATE_UNIVERSE_ERROR)
 	local FormatResult1 = if FFlagBuildExperienceChatImageAttachmentsModule then UseContextResult:Format(LocalizationStringsModule.CHAT_CAPTURE_UPLOAD_ERROR) else nil
@@ -246,27 +247,27 @@ return function(p1)
 	local v3 = nil
 	
 	if IsEnabled then
-		local UseRefResult1 = ReactModule.useRef(nil)
+		local UseRefResult2 = ReactModule.useRef(nil)
 		
-		if UseRefResult1.current == nil then
-			UseRefResult1.current = CreatorAgentChatModule.experimentOverride.createPendingKey()
+		if UseRefResult2.current == nil then
+			UseRefResult2.current = CreatorAgentChatModule.experimentOverride.createPendingKey()
 		end
-		local Current1 = UseRefResult1.current
+		local Current1 = UseRefResult2.current
 		v2 = Current1
-		local UseRefResult2 = ReactModule.useRef(false)
-		v3 = UseRefResult2
+		local UseRefResult3 = ReactModule.useRef(false)
+		v3 = UseRefResult3
 		local Key = CreatorAgentChatModule.experimentOverride.getKey(CasSessionId) or Current1
 		SpecVersion = SignalsReactModule.useSignalState((ReactModule.useMemo(function()
 			-- upvalues: CreatorAgentChatModule (upval), Key (copy)
 			return CreatorAgentChatModule.experimentOverride.getStateSignal(Key)
 		end, { Key }))).specVersion
 		UseResult1 = ReactModule.useCallback(function(p2)
-			-- upvalues: UseMemoResult (copy), CreatorAgentChatModule (upval), Current1 (copy), UseRefResult2 (copy)
+			-- upvalues: UseMemoResult (copy), CreatorAgentChatModule (upval), Current1 (copy), UseRefResult3 (copy)
 			local Key = CreatorAgentChatModule.experimentOverride.getKey(if UseMemoResult == nil then nil else UseMemoResult.getCasSessionId())
 			
 			if Key == nil then
 				Key = Current1
-				UseRefResult2.current = true
+				UseRefResult3.current = true
 				
 				if UseMemoResult ~= nil then
 					UseMemoResult.setPendingExperimentKey(Current1)
@@ -275,8 +276,8 @@ return function(p1)
 			CreatorAgentChatModule.experimentOverride.set(Key, p2)
 		end, { UseMemoResult, Current1 })
 		ReactModule.useEffect(function()
-			-- upvalues: UseMemoResult (copy), UseRefResult2 (copy), Current1 (copy)
-			if UseMemoResult ~= nil and UseRefResult2.current then
+			-- upvalues: UseMemoResult (copy), UseRefResult3 (copy), Current1 (copy)
+			if UseMemoResult ~= nil and UseRefResult3.current then
 				UseMemoResult.setPendingExperimentKey(Current1)
 				
 				return
@@ -294,10 +295,10 @@ return function(p1)
 	local IsNotSessionIdMatch: boolean = SessionId ~= nil and SessionId ~= "" or UniverseId ~= nil and UniverseId ~= 0
 	local Inverted: boolean = FFlagBuildExperienceChatHistoryLoadingSkeletonModule1 and (NoHydrateHistoryWhen and (UseMemoResult ~= nil and (IsNotSessionIdMatch and not (UseMemoResult.hasLoadedHistory() and #Events > 0))))
 	local v4 = nil
-	local Callback2 = nil
+	local Callback1 = nil
 	
 	if FFlagBuildExperienceChatHistoryLoadingSkeletonModule1 then
-		v4, Callback2 = ReactModule.useState(function()
+		v4, Callback1 = ReactModule.useState(function()
 			-- upvalues: UseMemoResult (copy), SessionId (ref), UniverseId (ref), NoHydrateHistoryWhen (copy), Inverted (copy)
 			return {
 				session = UseMemoResult,
@@ -321,18 +322,18 @@ return function(p1)
 	local NoSessionId: boolean = UseStateResult4 ~= nil and UseStateResult4.session == UseMemoResult and (SessionId1 == nil or SessionId1 == "" or (UseStateResult4.sessionId == SessionId1 or UseStateResult4.sessionId == nil and UseStateResult4.session.getCasSessionId() == SessionId1))
 	local UseStateResult5 = if NoSessionId then UseStateResult4 else nil
 	local UseStateResult6, UseStateResult2_4 = ReactModule.useState(nil)
-	local UseRefResult3 = ReactModule.useRef(nil)
 	local UseRefResult4 = ReactModule.useRef(nil)
-	local UseRefResult5 = ReactModule.useRef(0)
-	local UseRefResult6 = ReactModule.useRef(nil)
+	local UseRefResult5 = ReactModule.useRef(nil)
+	local UseRefResult6 = ReactModule.useRef(0)
+	local UseRefResult7 = ReactModule.useRef(nil)
 	local UseResult2 = ReactModule.useCallback(function(Current, Session)
-		-- upvalues: UseRefResult3 (copy), UseRefResult4 (copy), UseStateResult2_4 (copy)
+		-- upvalues: UseRefResult4 (copy), UseRefResult5 (copy), UseStateResult2_4 (copy)
 		assert(Current == nil or Session ~= nil, "Active turns require an owning session")
-		UseRefResult3.current = Current
-		UseRefResult4.current = if Current == nil then nil else { session = Session, sessionId = Session.getCasSessionId() }
+		UseRefResult4.current = Current
+		UseRefResult5.current = if Current == nil then nil else { session = Session, sessionId = Session.getCasSessionId() }
 		UseStateResult2_4(Current)
 	end, { UseStateResult2_4 })
-	local Current2 = UseRefResult4.current
+	local Current2 = UseRefResult5.current
 	local SessionId2 = SessionId
 	local NoSessionId1: boolean = Current2 ~= nil and Current2.session == UseMemoResult and (SessionId2 == nil or SessionId2 == "" or (Current2.sessionId == SessionId2 or Current2.sessionId == nil and Current2.session.getCasSessionId() == SessionId2))
 	local UseStateResult7 = if NoSessionId1 then UseStateResult6 else nil
@@ -373,7 +374,7 @@ return function(p1)
 		Events, UseMemoResult, SessionId, UniverseId, PlaceId, UseSignalStateResult1,
 		UseStateResult3, UseMemoResult1, UseStateResult5
 	})
-	local UseRefResult7 = if Current then ReactModule.useRef({
+	local UseRefResult8 = if Current then ReactModule.useRef({
 		isInitialized = false,
 		lastProcessedSequenceId = nil,
 		universeId = UniverseId,
@@ -382,12 +383,12 @@ return function(p1)
 		liveTurnIds = {},
 		liveTurnStartSequenceIds = {}
 	}) else nil
-	local UseResult3 = if UseRefResult7 == nil then nil else ReactModule.useCallback(function(p2)
-		-- upvalues: UseRefResult7 (ref)
+	local UseResult3 = if UseRefResult8 == nil then nil else ReactModule.useCallback(function(p2)
+		-- upvalues: UseRefResult8 (ref)
 		if p2 ~= nil then
-			UseRefResult7.current.liveTurnIds[p2] = true
+			UseRefResult8.current.liveTurnIds[p2] = true
 		end
-	end, { UseRefResult7 })
+	end, { UseRefResult8 })
 	local Messages = UseMemoResult2.messages
 	local HasNextHistoryPageToken: boolean = UseMemoResult ~= nil and UseMemoResult.getNextHistoryPageToken() ~= nil
 	local NoUseMemoResult = UseMemoResult == nil or (not IsNotSessionIdMatch or UseMemoResult.hasLoadedHistory())
@@ -414,9 +415,9 @@ return function(p1)
 	
 	if Current then
 		ReactModule.useEffect(function()
-			-- upvalues: p1 (copy), UseRefResult7 (ref), UseMemoResult (copy), UniverseId (ref), SessionId (ref), UseMemoResult2 (copy), NoUseMemoResult1 (copy), noteLiveAdUpsellTurns (upval), Messages (copy)
+			-- upvalues: p1 (copy), UseRefResult8 (ref), UseMemoResult (copy), UniverseId (ref), SessionId (ref), UseMemoResult2 (copy), NoUseMemoResult1 (copy), noteLiveAdUpsellTurns (upval), Messages (copy)
 			local OnAssistantTurnCompletedFunction: (any) -> () = p1.onAssistantTurnCompleted
-			local UseRefResult = UseRefResult7
+			local UseRefResult = UseRefResult8
 			local UniverseId1 = if UseMemoResult == nil then UniverseId else UseMemoResult.universeId or UniverseId
 			local SessionId1 = if UseMemoResult == nil then SessionId else UseMemoResult.getCasSessionId() or SessionId
 			local Current = UseRefResult.current
@@ -489,38 +490,39 @@ return function(p1)
 	local UseStateResult8, UseStateResult2_5 = ReactModule.useState(nil)
 	local UseRefResult9 = ReactModule.useRef("")
 	local UseRefResult10 = ReactModule.useRef("")
-	local UseRefResult11 = ReactModule.useRef(nil)
-	local UseRefResult12 = ReactModule.useRef(CasSessionId)
-	local UseRefResult13 = ReactModule.useRef(nil)
-	UseRefResult12.current = CasSessionId
+	local UseRefResult11 = if FFlagBuildExperiencePrefillSkipsDraftPersistModule and FFlagBuildExperiencePersistChatDraftModule then ReactModule.useRef(nil) else nil
+	local UseRefResult12 = ReactModule.useRef(nil)
+	local UseRefResult13 = ReactModule.useRef(CasSessionId)
+	local UseRefResult14 = ReactModule.useRef(nil)
+	UseRefResult13.current = CasSessionId
 	local NoUniverseId: boolean = p1.createUniverseOnFirstPrompt == true and UniverseId == nil
 	local IsCreateUniverseOnFirstPrompt = p1.createUniverseOnFirstPrompt == true
-	local UseRefResult14 = if FFlagBuildExperienceNewGameChatDraftModule then ReactModule.useRef(IsCreateUniverseOnFirstPrompt) else { current = IsCreateUniverseOnFirstPrompt }
-	UseRefResult14.current = IsCreateUniverseOnFirstPrompt
-	local UseRefResult15 = if FFlagBuildExperienceRestoreStoppedPromptModule then ReactModule.useRef(nil) else nil
+	local UseRefResult15 = if FFlagBuildExperienceNewGameChatDraftModule then ReactModule.useRef(IsCreateUniverseOnFirstPrompt) else { current = IsCreateUniverseOnFirstPrompt }
+	UseRefResult15.current = IsCreateUniverseOnFirstPrompt
+	local UseRefResult16 = if FFlagBuildExperienceRestoreStoppedPromptModule then ReactModule.useRef(nil) else nil
 	local Frozen1 = if IsIsLibraryChat then Frozen else {}
-	local Callback1 = nil
-	local UseRefResult16 = { current = {} }
-	local UseRefResult17 = ReactModule.useRef({})
-	local UseRefResult18 = ReactModule.useRef(0)
+	local Callback = nil
+	local UseRefResult17 = { current = {} }
+	local UseRefResult18 = ReactModule.useRef({})
+	local UseRefResult19 = ReactModule.useRef(0)
 	
 	if FFlagBuildExperienceChatImageAttachmentsModule then
-		Frozen1, Callback1 = ReactModule.useState({})
-		UseRefResult16 = ReactModule.useRef({})
+		Frozen1, Callback = ReactModule.useState({})
+		UseRefResult17 = ReactModule.useRef({})
 	end
 	local t = {}
-	local Callback = nil
-	local UseRefResult19 = { current = {} }
-	local UseRefResult20 = {
+	local Callback2 = nil
+	local UseRefResult20 = { current = {} }
+	local UseRefResult21 = {
 		current = { universeId = p1.universeId, placeId = p1.placeId }
 	}
 	
 	if FFlagBuildExperienceChatResourceAttachments then
-		t, Callback = ReactModule.useState({})
-		UseRefResult19 = ReactModule.useRef({})
-		UseRefResult20 = ReactModule.useRef({ universeId = p1.universeId, placeId = p1.placeId })
+		t, Callback2 = ReactModule.useState({})
+		UseRefResult20 = ReactModule.useRef({})
+		UseRefResult21 = ReactModule.useRef({ universeId = p1.universeId, placeId = p1.placeId })
 	end
-	local UseRefResult21 = ReactModule.useRef(nil)
+	local UseRefResult22 = ReactModule.useRef(nil)
 	local UseClockResult = ReactUtilsModule.useClock()
 	local UseChatScrollModuleResult = UseChatScrollModule(IsIsLibraryChat)
 	local UseResult4 = ReactModule.useCallback(function(p2, p3)
@@ -529,7 +531,7 @@ return function(p1)
 	end, {})
 	local UseResult5 = ReactModule.useCallback(function(Callback)
 		-- upvalues: UseChatScrollModuleResult (copy), UseMemoResult (copy), FFlagBuildExperienceChatHistoryPrefetchModule (upval)
-		local function v238()
+		local function v241()
 			-- upvalues: Callback (copy)
 			return Callback ~= nil and Callback()
 		end
@@ -538,7 +540,7 @@ return function(p1)
 		
 		if UseMemoResult == nil then return end
 		if FFlagBuildExperienceChatHistoryPrefetchModule then
-			UseMemoResult.requestOlderHistoryWhile(v238, function()
+			UseMemoResult.requestOlderHistoryWhile(v241, function()
 				-- upvalues: UseChatScrollModuleResult (upval)
 				return UseChatScrollModuleResult.isNearTopRef.current
 			end)
@@ -546,13 +548,13 @@ return function(p1)
 			return
 		else
 			task.spawn(function()
-				-- upvalues: UseMemoResult (upval), v238 (copy), UseChatScrollModuleResult (upval), Callback (copy)
-				if UseMemoResult.loadOlderHistory(v238) and UseMemoResult.getNextHistoryPageToken() ~= nil and UseChatScrollModuleResult.isAtTopRef.current then
+				-- upvalues: UseMemoResult (upval), v241 (copy), UseChatScrollModuleResult (upval), Callback (copy)
+				if UseMemoResult.loadOlderHistory(v241) and UseMemoResult.getNextHistoryPageToken() ~= nil and UseChatScrollModuleResult.isAtTopRef.current then
 					task.delay(0.1, function()
-						-- upvalues: Callback (upval), UseChatScrollModuleResult (upval), UseMemoResult (upval), v238 (upval)
+						-- upvalues: Callback (upval), UseChatScrollModuleResult (upval), UseMemoResult (upval), v241 (upval)
 						if Callback ~= nil and Callback() then return end
 						if UseChatScrollModuleResult.isViewportUnderfilled() then
-							UseMemoResult.loadOlderHistory(v238)
+							UseMemoResult.loadOlderHistory(v241)
 						end
 					end)
 				end
@@ -581,8 +583,8 @@ return function(p1)
 			return
 		end
 	end, { UseResult6, UseMemoResult })
-	local UseRefResult22 = ReactModule.useRef(UseResult7)
-	UseRefResult22.current = UseResult7
+	local UseRefResult23 = ReactModule.useRef(UseResult7)
+	UseRefResult23.current = UseResult7
 	ReactModule.useEffect(function()
 		-- upvalues: UseChatScrollModuleResult (copy), UseResult5 (copy)
 		UseChatScrollModuleResult.setOnScrolledToTop(function()
@@ -596,14 +598,14 @@ return function(p1)
 		end
 	end, { UseChatScrollModuleResult.setOnScrolledToTop, UseResult5 })
 	ReactModule.useEffect(function()
-		-- upvalues: NoHydrateHistoryWhen (copy), UseMemoResult (copy), FFlagBuildExperienceChatHistoryLoadingSkeletonModule1 (copy), Callback2 (ref), SessionId (ref), UniverseId (ref), UseRefResult22 (copy), IsIsLibraryChat (copy), UseRefResult3 (copy), FFlagBuildExperienceChatHistoryPrefetchModule (upval), CreatorAgentChatStore (copy), FFlagBuildExperiencePinForBuild (upval), UseStateResult2_1 (copy), PlaceId (ref)
+		-- upvalues: NoHydrateHistoryWhen (copy), UseMemoResult (copy), FFlagBuildExperienceChatHistoryLoadingSkeletonModule1 (copy), Callback1 (ref), SessionId (ref), UniverseId (ref), UseRefResult23 (copy), IsIsLibraryChat (copy), UseRefResult4 (copy), FFlagBuildExperienceChatHistoryPrefetchModule (upval), CreatorAgentChatStore (copy), FFlagBuildExperiencePinForBuild (upval), UseStateResult2_1 (copy), PlaceId (ref)
 		if NoHydrateHistoryWhen and UseMemoResult ~= nil then
 			local Flag = false
 			
 			local function _(IsLoading)
-				-- upvalues: FFlagBuildExperienceChatHistoryLoadingSkeletonModule1 (upval), Callback2 (upval), Flag (ref), UseMemoResult (upval), SessionId (upval), UniverseId (upval), NoHydrateHistoryWhen (upval)
-				if FFlagBuildExperienceChatHistoryLoadingSkeletonModule1 and Callback2 ~= nil and not Flag then
-					Callback2({
+				-- upvalues: FFlagBuildExperienceChatHistoryLoadingSkeletonModule1 (upval), Callback1 (upval), Flag (ref), UseMemoResult (upval), SessionId (upval), UniverseId (upval), NoHydrateHistoryWhen (upval)
+				if FFlagBuildExperienceChatHistoryLoadingSkeletonModule1 and Callback1 ~= nil and not Flag then
+					Callback1({
 						session = UseMemoResult,
 						sessionId = SessionId,
 						universeId = UniverseId,
@@ -617,8 +619,8 @@ return function(p1)
 			
 			local Inverted = not (UseMemoResult.hasLoadedHistory() and #UseMemoResult.getMergedHistory(false) > 0)
 			
-			if FFlagBuildExperienceChatHistoryLoadingSkeletonModule1 and Callback2 ~= nil and not Flag then
-				Callback2({
+			if FFlagBuildExperienceChatHistoryLoadingSkeletonModule1 and Callback1 ~= nil and not Flag then
+				Callback1({
 					session = UseMemoResult,
 					sessionId = SessionId,
 					universeId = UniverseId,
@@ -634,26 +636,26 @@ return function(p1)
 			end
 			
 			local _ = function()
-				-- upvalues: Flag (ref), CasSessionId (copy), UseMemoResult (upval), UseRefResult22 (upval), isHydrateCancelled (copy)
+				-- upvalues: Flag (ref), CasSessionId (copy), UseMemoResult (upval), UseRefResult23 (upval), isHydrateCancelled (copy)
 				if not (if Flag then true else CasSessionId ~= nil and CasSessionId ~= "" and UseMemoResult.getCasSessionId() ~= CasSessionId) then
-					UseRefResult22.current(isHydrateCancelled)
+					UseRefResult23.current(isHydrateCancelled)
 					
 					return
 				end
 			end
 			
 			local function hydrateKnownSession(CasSessionId1)
-				-- upvalues: UseMemoResult (upval), IsIsLibraryChat (upval), UseRefResult3 (upval), FFlagBuildExperienceChatHistoryLoadingSkeletonModule1 (upval), Callback2 (upval), Flag (ref), SessionId (upval), UniverseId (upval), NoHydrateHistoryWhen (upval), CasSessionId (copy), UseRefResult22 (upval), isHydrateCancelled (copy), FFlagBuildExperienceChatHistoryPrefetchModule (upval)
+				-- upvalues: UseMemoResult (upval), IsIsLibraryChat (upval), UseRefResult4 (upval), FFlagBuildExperienceChatHistoryLoadingSkeletonModule1 (upval), Callback1 (upval), Flag (ref), SessionId (upval), UniverseId (upval), NoHydrateHistoryWhen (upval), CasSessionId (copy), UseRefResult23 (upval), isHydrateCancelled (copy), FFlagBuildExperienceChatHistoryPrefetchModule (upval)
 				UseMemoResult.setCasSessionId(CasSessionId1)
 				
-				if not IsIsLibraryChat or UseRefResult3.current == nil then
+				if not IsIsLibraryChat or UseRefResult4.current == nil then
 					if IsIsLibraryChat or not UseMemoResult.hasLoadedHistory() or #UseMemoResult.getMergedHistory(false) <= 0 then
 						if (if FFlagBuildExperienceChatHistoryPrefetchModule then UseMemoResult.refreshSession(isHydrateCancelled, true) else UseMemoResult.refreshSession(isHydrateCancelled)) and not (if Flag then true else CasSessionId ~= nil and CasSessionId ~= "" and UseMemoResult.getCasSessionId() ~= CasSessionId) and not (if Flag then true else CasSessionId ~= nil and CasSessionId ~= "" and UseMemoResult.getCasSessionId() ~= CasSessionId) then
-							UseRefResult22.current(isHydrateCancelled)
+							UseRefResult23.current(isHydrateCancelled)
 						end
-						if FFlagBuildExperienceChatHistoryLoadingSkeletonModule1 and Callback2 ~= nil then
+						if FFlagBuildExperienceChatHistoryLoadingSkeletonModule1 and Callback1 ~= nil then
 							if Flag then return end
-							Callback2({
+							Callback1({
 								isLoading = false,
 								session = UseMemoResult,
 								sessionId = SessionId,
@@ -664,11 +666,11 @@ return function(p1)
 						return
 					else
 						if not (if Flag then true else CasSessionId ~= nil and CasSessionId ~= "" and UseMemoResult.getCasSessionId() ~= CasSessionId) then
-							UseRefResult22.current(isHydrateCancelled)
+							UseRefResult23.current(isHydrateCancelled)
 						end
-						if FFlagBuildExperienceChatHistoryLoadingSkeletonModule1 and Callback2 ~= nil then
+						if FFlagBuildExperienceChatHistoryLoadingSkeletonModule1 and Callback1 ~= nil then
 							if Flag then return end
-							Callback2({
+							Callback1({
 								isLoading = false,
 								session = UseMemoResult,
 								sessionId = SessionId,
@@ -678,9 +680,9 @@ return function(p1)
 						end
 						return
 					end
-				elseif FFlagBuildExperienceChatHistoryLoadingSkeletonModule1 and Callback2 ~= nil then
+				elseif FFlagBuildExperienceChatHistoryLoadingSkeletonModule1 and Callback1 ~= nil then
 					if Flag then return end
-					Callback2({
+					Callback1({
 						isLoading = false,
 						session = UseMemoResult,
 						sessionId = SessionId,
@@ -691,7 +693,7 @@ return function(p1)
 			end
 			
 			task.spawn(function()
-				-- upvalues: SessionId (upval), IsIsLibraryChat (upval), UseMemoResult (upval), hydrateKnownSession (copy), UniverseId (upval), FFlagBuildExperienceChatHistoryLoadingSkeletonModule1 (upval), Callback2 (upval), Flag (ref), NoHydrateHistoryWhen (upval), CreatorAgentChatStore (upval), FFlagBuildExperiencePinForBuild (upval), CasSessionId (copy), UseStateResult2_1 (upval), PlaceId (upval)
+				-- upvalues: SessionId (upval), IsIsLibraryChat (upval), UseMemoResult (upval), hydrateKnownSession (copy), UniverseId (upval), FFlagBuildExperienceChatHistoryLoadingSkeletonModule1 (upval), Callback1 (upval), Flag (ref), NoHydrateHistoryWhen (upval), CreatorAgentChatStore (upval), FFlagBuildExperiencePinForBuild (upval), CasSessionId (copy), UseStateResult2_1 (upval), PlaceId (upval)
 				local CasSessionId1 = SessionId
 				
 				if IsIsLibraryChat and (CasSessionId1 == nil or CasSessionId1 == "") then
@@ -739,9 +741,9 @@ return function(p1)
 						end
 						UseMemoResult.markHistoryLoaded()
 						
-						if FFlagBuildExperienceChatHistoryLoadingSkeletonModule1 and Callback2 ~= nil then
+						if FFlagBuildExperienceChatHistoryLoadingSkeletonModule1 and Callback1 ~= nil then
 							if Flag then return end
-							Callback2({
+							Callback1({
 								isLoading = false,
 								session = UseMemoResult,
 								sessionId = SessionId,
@@ -750,9 +752,9 @@ return function(p1)
 							})
 						end
 						return
-					elseif FFlagBuildExperienceChatHistoryLoadingSkeletonModule1 and Callback2 ~= nil then
+					elseif FFlagBuildExperienceChatHistoryLoadingSkeletonModule1 and Callback1 ~= nil then
 						if Flag then return end
-						Callback2({
+						Callback1({
 							isLoading = false,
 							session = UseMemoResult,
 							sessionId = SessionId,
@@ -761,9 +763,9 @@ return function(p1)
 						})
 					end
 					return
-				elseif FFlagBuildExperienceChatHistoryLoadingSkeletonModule1 and Callback2 ~= nil then
+				elseif FFlagBuildExperienceChatHistoryLoadingSkeletonModule1 and Callback1 ~= nil then
 					if Flag then return end
-					Callback2({
+					Callback1({
 						isLoading = false,
 						session = UseMemoResult,
 						sessionId = SessionId,
@@ -777,8 +779,8 @@ return function(p1)
 				-- upvalues: Flag (ref)
 				Flag = true
 			end
-		elseif FFlagBuildExperienceChatHistoryLoadingSkeletonModule1 and Callback2 ~= nil then
-			Callback2({
+		elseif FFlagBuildExperienceChatHistoryLoadingSkeletonModule1 and Callback1 ~= nil then
+			Callback1({
 				isLoading = false,
 				session = UseMemoResult,
 				sessionId = SessionId,
@@ -792,12 +794,12 @@ return function(p1)
 		IsIsLibraryChat
 	})
 	ReactModule.useEffect(function()
-		-- upvalues: UseMemoResult (copy), SessionId (ref), FFlagBuildExperienceChatHistoryPrefetchModule (upval), UseRefResult22 (copy), MessageBusService (upval), GameMessageId (upval), FFlagBuildExperiencePersistPlaytestLogsModule (upval), FFlagBuildExperienceClientDataModelTools (upval), v1 (ref), FFlagBuildExperienceRefreshChatDraftOnGameLeaveModule (upval), FFlagBuildExperiencePersistChatDraftModule (upval), BuildAppStorageModule (upval), UseRefResult10 (copy), UseRefResult9 (copy), UseBindingResult2 (copy), UseStateResult2_5 (copy), AppLifecycleObserverService (upval)
+		-- upvalues: UseMemoResult (copy), SessionId (ref), FFlagBuildExperienceChatHistoryPrefetchModule (upval), UseRefResult23 (copy), MessageBusService (upval), GameMessageId (upval), FFlagBuildExperiencePersistPlaytestLogsModule (upval), FFlagBuildExperienceClientDataModelTools (upval), v1 (ref), FFlagBuildExperienceRefreshChatDraftOnGameLeaveModule (upval), FFlagBuildExperiencePersistChatDraftModule (upval), FFlagBuildExperiencePrefillSkipsDraftPersistModule (upval), UseRefResult9 (copy), UseRefResult11 (copy), BuildAppStorageModule (upval), UseRefResult10 (copy), UseBindingResult2 (copy), UseStateResult2_5 (copy), AppLifecycleObserverService (upval)
 		if UseMemoResult == nil then return end
 		local Flag = false
 		
 		local function refreshKnownSession()
-			-- upvalues: UseMemoResult (upval), SessionId (upval), Flag (ref), FFlagBuildExperienceChatHistoryPrefetchModule (upval), UseRefResult22 (upval)
+			-- upvalues: UseMemoResult (upval), SessionId (upval), Flag (ref), FFlagBuildExperienceChatHistoryPrefetchModule (upval), UseRefResult23 (upval)
 			local CasSessionId = UseMemoResult.getCasSessionId()
 			
 			if (CasSessionId == nil or CasSessionId == "") and (SessionId ~= nil and SessionId ~= "") then
@@ -805,14 +807,14 @@ return function(p1)
 			end
 			if CasSessionId ~= nil and CasSessionId ~= "" then
 				task.spawn(function()
-					-- upvalues: Flag (upval), FFlagBuildExperienceChatHistoryPrefetchModule (upval), UseMemoResult (upval), UseRefResult22 (upval)
+					-- upvalues: Flag (upval), FFlagBuildExperienceChatHistoryPrefetchModule (upval), UseMemoResult (upval), UseRefResult23 (upval)
 					local function isRefreshCancelled()
 						-- upvalues: Flag (upval)
 						return Flag
 					end
 					
 					if (if FFlagBuildExperienceChatHistoryPrefetchModule then UseMemoResult.refreshSession(isRefreshCancelled, true) else UseMemoResult.refreshSession(isRefreshCancelled)) and not Flag then
-						UseRefResult22.current(function()
+						UseRefResult23.current(function()
 							-- upvalues: Flag (upval)
 							return Flag
 						end)
@@ -824,7 +826,7 @@ return function(p1)
 		end
 		
 		local SubscribeResult = MessageBusService:Subscribe(GameMessageId, function(_)
-			-- upvalues: FFlagBuildExperiencePersistPlaytestLogsModule (upval), FFlagBuildExperienceClientDataModelTools (upval), v1 (upval), FFlagBuildExperienceRefreshChatDraftOnGameLeaveModule (upval), FFlagBuildExperiencePersistChatDraftModule (upval), UseMemoResult (upval), SessionId (upval), BuildAppStorageModule (upval), UseRefResult10 (upval), UseRefResult9 (upval), UseBindingResult2 (upval), UseStateResult2_5 (upval), refreshKnownSession (copy)
+			-- upvalues: FFlagBuildExperiencePersistPlaytestLogsModule (upval), FFlagBuildExperienceClientDataModelTools (upval), v1 (upval), FFlagBuildExperienceRefreshChatDraftOnGameLeaveModule (upval), FFlagBuildExperiencePersistChatDraftModule (upval), UseMemoResult (upval), SessionId (upval), FFlagBuildExperiencePrefillSkipsDraftPersistModule (upval), UseRefResult9 (upval), UseRefResult11 (upval), BuildAppStorageModule (upval), UseRefResult10 (upval), UseBindingResult2 (upval), UseStateResult2_5 (upval), refreshKnownSession (copy)
 			if (FFlagBuildExperiencePersistPlaytestLogsModule or FFlagBuildExperienceClientDataModelTools) and v1 ~= nil then
 				v1.current = true
 			end
@@ -834,7 +836,9 @@ return function(p1)
 				if (CasSessionId == nil or CasSessionId == "") and (SessionId ~= nil and SessionId ~= "") then
 					CasSessionId = SessionId
 				end
-				if CasSessionId ~= nil and CasSessionId ~= "" then
+				local IsCurrentMatch: boolean = FFlagBuildExperiencePrefillSkipsDraftPersistModule and (UseRefResult9.current ~= "" and UseRefResult9.current == UseRefResult11.current)
+				
+				if CasSessionId ~= nil and CasSessionId ~= "" and not IsCurrentMatch then
 					local ChatDraft = BuildAppStorageModule.getChatDraft(CasSessionId) or ""
 					UseRefResult10.current = ChatDraft
 					UseRefResult9.current = ChatDraft
@@ -874,28 +878,28 @@ return function(p1)
 		UseStateResult2_5(nil)
 	end, { UseBindingResult2, UseStateResult2_5 })
 	local UseResult9 = if FFlagBuildExperiencePersistChatDraftModule then ReactModule.useCallback(function()
-		-- upvalues: UseRefResult11 (copy)
-		if UseRefResult11.current ~= nil then
-			task.cancel(UseRefResult11.current)
-			UseRefResult11.current = nil
+		-- upvalues: UseRefResult12 (copy)
+		if UseRefResult12.current ~= nil then
+			task.cancel(UseRefResult12.current)
+			UseRefResult12.current = nil
 		end
 	end, {}) else nil
 	local UseResult10 = if FFlagBuildExperienceNewGameChatDraftModule then ReactModule.useCallback(function()
-		-- upvalues: UseRefResult12 (copy), UseRefResult14 (ref), GetNewGameChatDraftKeyModule (upval)
-		local Current = UseRefResult12.current
+		-- upvalues: UseRefResult13 (copy), UseRefResult15 (ref), GetNewGameChatDraftKeyModule (upval)
+		local Current = UseRefResult13.current
 		
-		return if Current == nil or Current == "" then if UseRefResult14.current then GetNewGameChatDraftKeyModule() else nil else Current
+		return if Current == nil or Current == "" then if UseRefResult15.current then GetNewGameChatDraftKeyModule() else nil else Current
 	end, {}) else nil
 	local UseResult11 = if FFlagBuildExperiencePersistChatDraftModule then ReactModule.useCallback(function(Current)
-		-- upvalues: UseRefResult10 (copy), UseResult9 (copy), FFlagBuildExperienceNewGameChatDraftModule (upval), UseResult10 (copy), UseRefResult12 (copy), UseRefResult11 (copy), BuildAppStorageModule (upval)
+		-- upvalues: UseRefResult10 (copy), UseResult9 (copy), FFlagBuildExperienceNewGameChatDraftModule (upval), UseResult10 (copy), UseRefResult13 (copy), UseRefResult12 (copy), BuildAppStorageModule (upval)
 		UseRefResult10.current = Current
 		UseResult9()
-		local UseResultResult = if FFlagBuildExperienceNewGameChatDraftModule then UseResult10() else UseRefResult12.current
+		local UseResultResult = if FFlagBuildExperienceNewGameChatDraftModule then UseResult10() else UseRefResult13.current
 		
 		if UseResultResult ~= nil and UseResultResult ~= "" then
-			UseRefResult11.current = task.delay(0.5, function()
-				-- upvalues: UseRefResult11 (upval), BuildAppStorageModule (upval), UseResultResult (copy), Current (copy)
-				UseRefResult11.current = nil
+			UseRefResult12.current = task.delay(0.5, function()
+				-- upvalues: UseRefResult12 (upval), BuildAppStorageModule (upval), UseResultResult (copy), Current (copy)
+				UseRefResult12.current = nil
 				BuildAppStorageModule.setChatDraft(UseResultResult, Current)
 			end)
 			
@@ -903,8 +907,8 @@ return function(p1)
 		end
 	end, { UseResult9, UseResult10 }) else nil
 	local UseResult12 = if FFlagBuildExperiencePersistChatDraftModule then ReactModule.useCallback(function(Current)
-		-- upvalues: FFlagBuildExperienceNewGameChatDraftModule (upval), UseResult10 (copy), UseRefResult12 (copy), UseRefResult10 (copy), UseResult9 (copy), BuildAppStorageModule (upval)
-		local UseResultResult = if FFlagBuildExperienceNewGameChatDraftModule then UseResult10() else UseRefResult12.current
+		-- upvalues: FFlagBuildExperienceNewGameChatDraftModule (upval), UseResult10 (copy), UseRefResult13 (copy), UseRefResult10 (copy), UseResult9 (copy), BuildAppStorageModule (upval)
+		local UseResultResult = if FFlagBuildExperienceNewGameChatDraftModule then UseResult10() else UseRefResult13.current
 		
 		if UseResultResult ~= nil and UseResultResult ~= "" then
 			UseRefResult10.current = Current
@@ -915,8 +919,8 @@ return function(p1)
 		end
 	end, { UseResult9, UseResult10 }) else nil
 	local UseResult13 = if FFlagBuildExperiencePersistChatDraftModule then ReactModule.useCallback(function(Current, p2)
-		-- upvalues: FFlagBuildExperienceNewGameChatDraftModule (upval), UseRefResult14 (ref), GetNewGameChatDraftKeyModule (upval), BuildAppStorageModule (upval), UseRefResult10 (copy), UseResult9 (copy)
-		local NewGameChatDraftKeyModule = if FFlagBuildExperienceNewGameChatDraftModule and UseRefResult14.current then GetNewGameChatDraftKeyModule() else nil
+		-- upvalues: FFlagBuildExperienceNewGameChatDraftModule (upval), UseRefResult15 (ref), GetNewGameChatDraftKeyModule (upval), BuildAppStorageModule (upval), UseRefResult10 (copy), UseResult9 (copy)
+		local NewGameChatDraftKeyModule = if FFlagBuildExperienceNewGameChatDraftModule and UseRefResult15.current then GetNewGameChatDraftKeyModule() else nil
 		
 		if NewGameChatDraftKeyModule ~= nil then
 			BuildAppStorageModule.setChatDraft(NewGameChatDraftKeyModule, "")
@@ -929,14 +933,25 @@ return function(p1)
 			return
 		end
 	end, { UseResult9 }) else nil
-	local UseResult14 = ReactModule.useCallback(function(p2)
-		-- upvalues: UseResult8 (copy), FFlagBuildExperiencePersistChatDraftModule (upval), UseResult11 (copy)
-		UseResult8(p2)
+	local UseResult14 = ReactModule.useCallback(function(Current)
+		-- upvalues: UseResult8 (copy), FFlagBuildExperiencePersistChatDraftModule (upval), FFlagBuildExperiencePrefillSkipsDraftPersistModule (upval), UseRefResult11 (copy), UseResult11 (copy)
+		UseResult8(Current)
 		
 		if FFlagBuildExperiencePersistChatDraftModule then
-			UseResult11(p2)
+			if FFlagBuildExperiencePrefillSkipsDraftPersistModule then
+				local Current1 = UseRefResult11.current
+				
+				if Current1 ~= nil and Current == Current1 then return end
+				UseRefResult11.current = nil
+			end
+			UseResult11(Current)
 		end
 	end, { UseResult8, UseResult11 })
+	local UseResult15 = if FFlagBuildExperiencePrefillSkipsDraftPersistModule and FFlagBuildExperiencePersistChatDraftModule then ReactModule.useCallback(function(Current)
+		-- upvalues: UseRefResult11 (copy), UseResult8 (copy)
+		UseRefResult11.current = Current
+		UseResult8(Current)
+	end, { UseResult8 }) else UseResult14
 	
 	if FFlagBuildExperienceNewGameChatDraftModule and FFlagBuildExperiencePersistChatDraftModule then
 		ReactModule.useEffect(function()
@@ -954,14 +969,16 @@ return function(p1)
 		end, { NoUniverseId, CasSessionId, UseResult8 })
 	end
 	ReactModule.useEffect(function()
-		-- upvalues: FFlagBuildExperiencePersistChatDraftModule (upval), CasSessionId (copy), UseRefResult13 (copy), UseResult9 (copy), UseRefResult9 (copy), UseRefResult10 (copy), BuildAppStorageModule (upval), UseResult8 (copy), UseRefResult11 (copy)
+		-- upvalues: FFlagBuildExperiencePersistChatDraftModule (upval), CasSessionId (copy), UseRefResult14 (copy), UseResult9 (copy), FFlagBuildExperiencePrefillSkipsDraftPersistModule (upval), UseRefResult9 (copy), UseRefResult11 (copy), UseRefResult10 (copy), BuildAppStorageModule (upval), UseResult8 (copy), UseRefResult12 (copy)
 		if not FFlagBuildExperiencePersistChatDraftModule then return end
 		if CasSessionId == nil or CasSessionId == "" then return end
-		local Current = UseRefResult13.current
-		UseRefResult13.current = CasSessionId
+		local Current = UseRefResult14.current
+		UseRefResult14.current = CasSessionId
 		UseResult9()
 		
-		if Current == nil and UseRefResult9.current ~= "" then
+		if FFlagBuildExperiencePrefillSkipsDraftPersistModule and Current == nil and UseRefResult9.current ~= "" and UseRefResult9.current == UseRefResult11.current then
+			UseRefResult10.current = BuildAppStorageModule.getChatDraft(CasSessionId) or ""
+		elseif Current == nil and UseRefResult9.current ~= "" then
 			UseRefResult10.current = UseRefResult9.current
 			BuildAppStorageModule.setChatDraft(CasSessionId, UseRefResult9.current)
 		else
@@ -970,8 +987,8 @@ return function(p1)
 			UseResult8(ChatDraft)
 		end
 		return function()
-			-- upvalues: UseRefResult11 (upval), UseResult9 (upval), BuildAppStorageModule (upval), CasSessionId (upval), UseRefResult10 (upval)
-			local HasCurrent = UseRefResult11.current ~= nil
+			-- upvalues: UseRefResult12 (upval), UseResult9 (upval), BuildAppStorageModule (upval), CasSessionId (upval), UseRefResult10 (upval)
+			local HasCurrent = UseRefResult12.current ~= nil
 			UseResult9()
 			
 			if HasCurrent then
@@ -981,18 +998,18 @@ return function(p1)
 	end, { CasSessionId, UseResult9, UseResult8 })
 	
 	local function commitComposerResourceAttachments(Current)
-		-- upvalues: UseRefResult19 (ref), Callback (ref), UseStateResult2_5 (copy)
-		UseRefResult19.current = Current
+		-- upvalues: UseRefResult20 (ref), Callback2 (ref), UseStateResult2_5 (copy)
+		UseRefResult20.current = Current
 		
-		if Callback ~= nil then
-			Callback(Current)
+		if Callback2 ~= nil then
+			Callback2(Current)
 		end
 		UseStateResult2_5(nil)
 	end
 	
 	local function findComposerResourceAttachmentIndexByUri(ResourceAttachmentUri)
-		-- upvalues: UseRefResult19 (ref), ChatTypesModule (upval)
-		for i, value in UseRefResult19.current do
+		-- upvalues: UseRefResult20 (ref), ChatTypesModule (upval)
+		for i, value in UseRefResult20.current do
 			if ChatTypesModule.getResourceAttachmentUri(value) == ResourceAttachmentUri then
 				return i
 			end
@@ -1001,60 +1018,60 @@ return function(p1)
 	end
 	
 	local function addComposerResourceAttachment(p2)
-		-- upvalues: UseRefResult19 (ref), Callback (ref), UseStateResult2_5 (copy)
-		local Copy = table.clone(UseRefResult19.current)
+		-- upvalues: UseRefResult20 (ref), Callback2 (ref), UseStateResult2_5 (copy)
+		local Copy = table.clone(UseRefResult20.current)
 		table.insert(Copy, p2)
-		UseRefResult19.current = Copy
+		UseRefResult20.current = Copy
 		
-		if Callback ~= nil then
-			Callback(Copy)
+		if Callback2 ~= nil then
+			Callback2(Copy)
 		end
 		UseStateResult2_5(nil)
 	end
 	
 	local function removeComposerResourceAttachmentAtIndex(Index)
-		-- upvalues: UseRefResult19 (ref), Callback (ref), UseStateResult2_5 (copy)
-		local Copy = table.clone(UseRefResult19.current)
+		-- upvalues: UseRefResult20 (ref), Callback2 (ref), UseStateResult2_5 (copy)
+		local Copy = table.clone(UseRefResult20.current)
 		table.remove(Copy, Index)
-		UseRefResult19.current = Copy
+		UseRefResult20.current = Copy
 		
-		if Callback ~= nil then
-			Callback(Copy)
+		if Callback2 ~= nil then
+			Callback2(Copy)
 		end
 		UseStateResult2_5(nil)
 	end
 	
 	local function clearComposerResourceAttachments()
-		-- upvalues: UseRefResult19 (ref), Callback (ref), UseStateResult2_5 (copy)
+		-- upvalues: UseRefResult20 (ref), Callback2 (ref), UseStateResult2_5 (copy)
 		local Current = {}
-		UseRefResult19.current = Current
+		UseRefResult20.current = Current
 		
-		if Callback ~= nil then
-			Callback(Current)
+		if Callback2 ~= nil then
+			Callback2(Current)
 		end
 		UseStateResult2_5(nil)
 	end
 	
-	local UseRefResult8 = ReactModule.useRef(commitComposerResourceAttachments)
-	UseRefResult8.current = commitComposerResourceAttachments
+	local UseRefResult1 = ReactModule.useRef(commitComposerResourceAttachments)
+	UseRefResult1.current = commitComposerResourceAttachments
 	
 	if FFlagBuildExperienceChatResourceAttachments then
 		ReactModule.useLayoutEffect(function()
-			-- upvalues: UseRefResult20 (ref), p1 (copy), UseRefResult8 (copy)
-			local Current = UseRefResult20.current
+			-- upvalues: UseRefResult21 (ref), p1 (copy), UseRefResult1 (copy)
+			local Current = UseRefResult21.current
 			
 			if Current.universeId ~= p1.universeId or Current.placeId ~= p1.placeId then
-				UseRefResult8.current({})
+				UseRefResult1.current({})
 			end
-			UseRefResult20.current = { universeId = p1.universeId, placeId = p1.placeId }
+			UseRefResult21.current = { universeId = p1.universeId, placeId = p1.placeId }
 		end, { p1.universeId, p1.placeId })
 	end
 	local function _(Current)
-		-- upvalues: UseRefResult16 (ref), Callback1 (ref)
-		UseRefResult16.current = Current
+		-- upvalues: UseRefResult17 (ref), Callback (ref)
+		UseRefResult17.current = Current
 		
-		if Callback1 ~= nil then
-			Callback1(Current)
+		if Callback ~= nil then
+			Callback(Current)
 		end
 	end
 	
@@ -1067,18 +1084,18 @@ return function(p1)
 		return false
 	end
 	
-	local function updateComposerImage(Capture, Callback)
-		-- upvalues: UseRefResult16 (ref), Callback1 (ref)
-		local Current = UseRefResult16.current
+	local function updateComposerImage(Capture, Callback1)
+		-- upvalues: UseRefResult17 (ref), Callback (ref)
+		local Current = UseRefResult17.current
 		local Copy = table.clone(Current)
 		
 		for i, value in Current do
 			if value.capture == Capture then
-				Copy[i] = Callback(value)
-				UseRefResult16.current = Copy
+				Copy[i] = Callback1(value)
+				UseRefResult17.current = Copy
 				
-				if Callback1 ~= nil then
-					Callback1(Copy)
+				if Callback ~= nil then
+					Callback(Copy)
 				end
 				return Copy
 			end
@@ -1087,10 +1104,10 @@ return function(p1)
 	end
 	
 	local function beginComposerImageUpload(Capture)
-		-- upvalues: UseRefResult18 (copy), UseRefResult17 (copy), updateComposerImage (copy), UseStateResult2_5 (copy), UploadCaptureAsyncModule (upval), FFlagBuildExperienceChatImageAttachmentsModule (upval), FormatResult1 (copy)
-		UseRefResult18.current += 1
-		local Current = UseRefResult18.current
-		UseRefResult17.current[Capture] = Current
+		-- upvalues: UseRefResult19 (copy), UseRefResult18 (copy), updateComposerImage (copy), UseStateResult2_5 (copy), UploadCaptureAsyncModule (upval), FFlagBuildExperienceChatImageAttachmentsModule (upval), FormatResult1 (copy)
+		UseRefResult19.current += 1
+		local Current = UseRefResult19.current
+		UseRefResult18.current[Capture] = Current
 		local Flag = false
 		
 		for _, value in updateComposerImage(Capture, function(Tbl)
@@ -1110,9 +1127,9 @@ return function(p1)
 			UseStateResult2_5(nil)
 		end
 		UploadCaptureAsyncModule(Capture):andThen(function(Result)
-			-- upvalues: UseRefResult17 (upval), Capture (copy), Current (copy), updateComposerImage (upval), UseStateResult2_5 (upval)
-			if UseRefResult17.current[Capture] ~= Current then return end
-			UseRefResult17.current[Capture] = nil
+			-- upvalues: UseRefResult18 (upval), Capture (copy), Current (copy), updateComposerImage (upval), UseStateResult2_5 (upval)
+			if UseRefResult18.current[Capture] ~= Current then return end
+			UseRefResult18.current[Capture] = nil
 			local Flag = false
 			
 			for _, value in updateComposerImage(Capture, function(Tbl)
@@ -1133,9 +1150,9 @@ return function(p1)
 				UseStateResult2_5(nil)
 			end
 		end):catch(function(Err)
-			-- upvalues: UseRefResult17 (upval), Capture (copy), Current (copy), updateComposerImage (upval), FFlagBuildExperienceChatImageAttachmentsModule (upval), UseStateResult2_5 (upval), FormatResult1 (upval)
-			if UseRefResult17.current[Capture] ~= Current then return end
-			UseRefResult17.current[Capture] = nil
+			-- upvalues: UseRefResult18 (upval), Capture (copy), Current (copy), updateComposerImage (upval), FFlagBuildExperienceChatImageAttachmentsModule (upval), UseStateResult2_5 (upval), FormatResult1 (upval)
+			if UseRefResult18.current[Capture] ~= Current then return end
+			UseRefResult18.current[Capture] = nil
 			updateComposerImage(Capture, function(Tbl)
 				-- upvalues: Err (copy)
 				local Copy = table.clone(Tbl)
@@ -1153,8 +1170,8 @@ return function(p1)
 	end
 	
 	local function setComposerImages(p2)
-		-- upvalues: UseRefResult16 (ref), UseRefResult17 (copy), Callback1 (ref), UseStateResult2_5 (copy), beginComposerImageUpload (copy)
-		local Current = UseRefResult16.current
+		-- upvalues: UseRefResult17 (ref), UseRefResult18 (copy), Callback (ref), UseStateResult2_5 (copy), beginComposerImageUpload (copy)
+		local Current = UseRefResult17.current
 		local Current1 = {}
 		local Captures = {}
 		local Tbl = nil
@@ -1194,13 +1211,13 @@ return function(p1)
 				end
 			end
 			if not Flag and value1.capture ~= nil then
-				UseRefResult17.current[value1.capture] = nil
+				UseRefResult18.current[value1.capture] = nil
 			end
 		end
-		UseRefResult16.current = Current1
+		UseRefResult17.current = Current1
 		
-		if Callback1 ~= nil then
-			Callback1(Current1)
+		if Callback ~= nil then
+			Callback(Current1)
 		end
 		local Flag1 = false
 		
@@ -1218,12 +1235,12 @@ return function(p1)
 		end
 	end
 	
-	local UseRefResult23 = ReactModule.useRef(setComposerImages)
-	UseRefResult23.current = setComposerImages
+	local UseRefResult24 = ReactModule.useRef(setComposerImages)
+	UseRefResult24.current = setComposerImages
 	
 	local function retryComposerImage(p3)
-		-- upvalues: UseRefResult16 (ref), beginComposerImageUpload (copy)
-		local CurrentEntry = UseRefResult16.current[p3]
+		-- upvalues: UseRefResult17 (ref), beginComposerImageUpload (copy)
+		local CurrentEntry = UseRefResult17.current[p3]
 		
 		if CurrentEntry ~= nil and CurrentEntry.capture ~= nil and CurrentEntry.uploadStatus == "failed" then
 			beginComposerImageUpload(CurrentEntry.capture)
@@ -1240,19 +1257,19 @@ return function(p1)
 			break
 		end
 	end
-	local UseResult15 = if FFlagBuildExperienceToolResultFailureRecoveryModule or FFlagBuildExperienceAnswerFormModule then ReactModule.useCallback(function(Current)
-		-- upvalues: UseRefResult5 (copy), UseRefResult4 (copy), UseMemoResult (copy), SessionId (ref), FFlagBuildExperienceAnswerFormModule (upval), UseRefResult3 (copy), UseRefResult9 (copy), UseResult14 (copy), CreatorAgentChatModule1 (upval), UseContextResult (copy), UseStateResult2_5 (copy)
+	local UseResult16 = if FFlagBuildExperienceToolResultFailureRecoveryModule or FFlagBuildExperienceAnswerFormModule then ReactModule.useCallback(function(Current)
+		-- upvalues: UseRefResult6 (copy), UseRefResult5 (copy), UseMemoResult (copy), SessionId (ref), FFlagBuildExperienceAnswerFormModule (upval), UseRefResult4 (copy), UseRefResult9 (copy), UseResult14 (copy), CreatorAgentChatModule1 (upval), UseContextResult (copy), UseStateResult2_5 (copy)
 		return function(p3, p4)
-			-- upvalues: UseRefResult5 (upval), Current (copy), UseRefResult4 (upval), UseMemoResult (upval), SessionId (upval), FFlagBuildExperienceAnswerFormModule (upval), UseRefResult3 (upval), UseRefResult9 (upval), UseResult14 (upval), CreatorAgentChatModule1 (upval), UseContextResult (upval), UseStateResult2_5 (upval)
-			if UseRefResult5.current == Current then
-				local Current1 = UseRefResult4.current
+			-- upvalues: UseRefResult6 (upval), Current (copy), UseRefResult5 (upval), UseMemoResult (upval), SessionId (upval), FFlagBuildExperienceAnswerFormModule (upval), UseRefResult4 (upval), UseRefResult9 (upval), UseResult14 (upval), CreatorAgentChatModule1 (upval), UseContextResult (upval), UseStateResult2_5 (upval)
+			if UseRefResult6.current == Current then
+				local Current1 = UseRefResult5.current
 				local SessionId1 = SessionId
 				
 				if Current1 ~= nil and Current1.session == UseMemoResult and (SessionId1 == nil or SessionId1 == "" or (Current1.sessionId == SessionId1 or Current1.sessionId == nil and Current1.session.getCasSessionId() == SessionId1)) then
 					local HasNextEntry = false
 					
 					if FFlagBuildExperienceAnswerFormModule then
-						local Current2 = UseRefResult3.current
+						local Current2 = UseRefResult4.current
 						
 						if Current2 ~= nil then
 							HasNextEntry = next(Current2.getLocalToolActions(false).onAnswerSelectedByToolCallId) ~= nil
@@ -1274,11 +1291,11 @@ return function(p1)
 		UseStateResult2_5,
 		UseContextResult
 	}) else nil
-	local UseResult16 = ReactModule.useCallback(function(Current, p3, p4, p5, p6, Current1)
-		-- upvalues: UseRefResult5 (copy), UseResult2 (copy), UseRefResult6 (copy), UseStateResult2_2 (copy), p1 (copy), UseResult4 (copy), FFlagBuildExperienceChatImageAttachmentsModule (upval), UseRefResult23 (copy), FFlagBuildExperienceChatResourceAttachments (upval), UseRefResult8 (copy), UseResult14 (copy), CreatorAgentChatModule1 (upval), UseContextResult (copy), UseStateResult2_5 (copy), UseChatScrollModuleResult (copy), SessionId (ref), UseStateResult2 (copy)
-		if UseRefResult5.current ~= Current then return end
+	local UseResult17 = ReactModule.useCallback(function(Current, p3, p4, p5, p6, Current1)
+		-- upvalues: UseRefResult6 (copy), UseResult2 (copy), UseRefResult7 (copy), UseStateResult2_2 (copy), p1 (copy), UseResult4 (copy), FFlagBuildExperienceChatImageAttachmentsModule (upval), UseRefResult24 (copy), FFlagBuildExperienceChatResourceAttachments (upval), UseRefResult1 (copy), UseResult14 (copy), CreatorAgentChatModule1 (upval), UseContextResult (copy), UseStateResult2_5 (copy), UseChatScrollModuleResult (copy), SessionId (ref), UseStateResult2 (copy)
+		if UseRefResult6.current ~= Current then return end
 		UseResult2(nil)
-		UseRefResult6.current = nil
+		UseRefResult7.current = nil
 		UseStateResult2_2(nil)
 		
 		if p3 == nil then
@@ -1302,10 +1319,10 @@ return function(p1)
 					end
 				end
 				task.spawn(function()
-					-- upvalues: Current1 (copy), UseRefResult5 (upval), Current (copy)
+					-- upvalues: Current1 (copy), UseRefResult6 (upval), Current (copy)
 					Current1.refreshSession(function(): boolean
-						-- upvalues: UseRefResult5 (upval), Current (upval)
-						return UseRefResult5.current ~= Current
+						-- upvalues: UseRefResult6 (upval), Current (upval)
+						return UseRefResult6.current ~= Current
 					end)
 				end)
 			end
@@ -1318,20 +1335,20 @@ return function(p1)
 				UseResult4(Current1.placeId, "Idle")
 			end
 			if FFlagBuildExperienceChatImageAttachmentsModule and p5 ~= nil then
-				UseRefResult23.current(p5)
+				UseRefResult24.current(p5)
 			end
 			if FFlagBuildExperienceChatResourceAttachments and p6 ~= nil then
-				UseRefResult8.current(p6)
+				UseRefResult1.current(p6)
 			end
 			if p4 ~= nil then
 				UseResult14(p4)
 				UseStateResult2_5((UseContextResult:Format((CreatorAgentChatModule1.getPromptFailureComposerError(p3)))))
 			end
 			task.spawn(function()
-				-- upvalues: Current1 (copy), UseRefResult5 (upval), Current (copy)
+				-- upvalues: Current1 (copy), UseRefResult6 (upval), Current (copy)
 				Current1.refreshSession(function(): boolean
-					-- upvalues: UseRefResult5 (upval), Current (upval)
-					return UseRefResult5.current ~= Current
+					-- upvalues: UseRefResult6 (upval), Current (upval)
+					return UseRefResult6.current ~= Current
 				end)
 			end)
 		end
@@ -1340,11 +1357,11 @@ return function(p1)
 		SessionId, UseResult4, UseStateResult2, UseChatScrollModuleResult, UseResult14,
 		UseStateResult2_5, UseResult2, UseStateResult2_2, UseContextResult
 	})
-	local UseRefResult24 = ReactModule.useRef(NoHydrateHistoryWhen)
+	local UseRefResult25 = ReactModule.useRef(NoHydrateHistoryWhen)
 	ReactModule.useEffect(function()
-		-- upvalues: NoHydrateHistoryWhen (copy), UseRefResult24 (copy), IsIsLibraryChat (copy), HasUseStateResult (copy), UseStateResult7 (copy), UseChatScrollModuleResult (copy)
-		local NoCurrent: boolean = NoHydrateHistoryWhen and not UseRefResult24.current
-		UseRefResult24.current = NoHydrateHistoryWhen
+		-- upvalues: NoHydrateHistoryWhen (copy), UseRefResult25 (copy), IsIsLibraryChat (copy), HasUseStateResult (copy), UseStateResult7 (copy), UseChatScrollModuleResult (copy)
+		local NoCurrent: boolean = NoHydrateHistoryWhen and not UseRefResult25.current
+		UseRefResult25.current = NoHydrateHistoryWhen
 		
 		if IsIsLibraryChat then return end
 		if not NoHydrateHistoryWhen then return end
@@ -1360,9 +1377,9 @@ return function(p1)
 		#Messages, UseChatScrollModuleResult
 	})
 	ReactModule.useEffect(function()
-		-- upvalues: UseRefResult3 (copy), UseRefResult4 (copy), UseMemoResult (copy), SessionId (ref), UseStateResult5 (copy), UseRefResult5 (copy), UseRefResult6 (copy), PlaceId (ref), UseResult4 (copy), CreatorAgentChatModule1 (upval), UseResult16 (copy), FFlagBuildExperienceToolResultFailureRecoveryModule (upval), FFlagBuildExperienceAnswerFormModule (upval), UseResult15 (ref), UseResult (ref), UseResult2 (copy), UseChatScrollModuleResult (copy), UseMemoResult2 (copy), UseStateResult7 (copy), CreatorAgentChatStore (copy), HasUseStateResult (copy)
-		if UseRefResult3.current ~= nil then
-			local Current = UseRefResult4.current
+		-- upvalues: UseRefResult4 (copy), UseRefResult5 (copy), UseMemoResult (copy), SessionId (ref), UseStateResult5 (copy), UseRefResult6 (copy), UseRefResult7 (copy), PlaceId (ref), UseResult4 (copy), CreatorAgentChatModule1 (upval), UseResult17 (copy), FFlagBuildExperienceToolResultFailureRecoveryModule (upval), FFlagBuildExperienceAnswerFormModule (upval), UseResult16 (ref), UseResult (ref), UseResult2 (copy), UseChatScrollModuleResult (copy), UseMemoResult2 (copy), UseStateResult7 (copy), CreatorAgentChatStore (copy), HasUseStateResult (copy)
+		if UseRefResult4.current ~= nil then
+			local Current = UseRefResult5.current
 			local SessionId1 = SessionId
 			
 			if Current ~= nil and Current.session == UseMemoResult and (SessionId1 == nil or SessionId1 == "" or (Current.sessionId == SessionId1 or Current.sessionId == nil and Current.session.getCasSessionId() == SessionId1)) then return end
@@ -1381,25 +1398,25 @@ return function(p1)
 		end
 		if Text == nil then return end
 		local function attachResumedTurn(ActiveTurnHandle, Current: number)
-			-- upvalues: UseRefResult5 (upval), UseRefResult6 (upval), PlaceId (upval), UseResult4 (upval), CreatorAgentChatModule1 (upval), UseMemoResult (upval), UseResult16 (upval), FFlagBuildExperienceToolResultFailureRecoveryModule (upval), FFlagBuildExperienceAnswerFormModule (upval), UseResult15 (upval), UseResult (upval), UseResult2 (upval), UseChatScrollModuleResult (upval)
-			UseRefResult5.current += 1
-			local Current1 = UseRefResult5.current
-			UseRefResult6.current = Current
+			-- upvalues: UseRefResult6 (upval), UseRefResult7 (upval), PlaceId (upval), UseResult4 (upval), CreatorAgentChatModule1 (upval), UseMemoResult (upval), UseResult17 (upval), FFlagBuildExperienceToolResultFailureRecoveryModule (upval), FFlagBuildExperienceAnswerFormModule (upval), UseResult16 (upval), UseResult (upval), UseResult2 (upval), UseChatScrollModuleResult (upval)
+			UseRefResult6.current += 1
+			local Current1 = UseRefResult6.current
+			UseRefResult7.current = Current
 			
 			if PlaceId ~= nil then
 				UseResult4(PlaceId, "Loading")
 			end
 			local ResumedAssistantTurn = CreatorAgentChatModule1.createResumedAssistantTurn(UseMemoResult, ActiveTurnHandle, function(p3)
-				-- upvalues: UseResult16 (upval), Current1 (copy), UseMemoResult (upval)
-				UseResult16(Current1, p3, nil, nil, nil, UseMemoResult)
-			end, if Current == nil then nil else Current - 1, if FFlagBuildExperienceToolResultFailureRecoveryModule or FFlagBuildExperienceAnswerFormModule then UseResult15(Current1) else nil, UseResult)
+				-- upvalues: UseResult17 (upval), Current1 (copy), UseMemoResult (upval)
+				UseResult17(Current1, p3, nil, nil, nil, UseMemoResult)
+			end, if Current == nil then nil else Current - 1, if FFlagBuildExperienceToolResultFailureRecoveryModule or FFlagBuildExperienceAnswerFormModule then UseResult16(Current1) else nil, UseResult)
 			UseResult2(ResumedAssistantTurn, UseMemoResult)
 			ResumedAssistantTurn.start()
 			UseChatScrollModuleResult.scrollToBottomUnconditionally()
 		end
 		
 		if UseMemoResult2.activeTurnState == nil or UseMemoResult2.activeTurnItemIndex == nil or UseMemoResult2.activeTurnState.isDone then
-			UseRefResult6.current = nil
+			UseRefResult7.current = nil
 			local ActiveTurnHandle = CreatorAgentChatStore.getActiveTurnHandle(Text)
 			local StateResult = if ActiveTurnHandle == nil then nil else ActiveTurnHandle.state(false)
 			local NoIsDone: boolean = ActiveTurnHandle ~= nil and (StateResult ~= nil and not StateResult.isDone)
@@ -1412,7 +1429,7 @@ return function(p1)
 		else
 			local ActiveTurnStartSequenceId = UseMemoResult2.activeTurnStartSequenceId
 			
-			if UseRefResult6.current == ActiveTurnStartSequenceId and UseStateResult7 ~= nil then return end
+			if UseRefResult7.current == ActiveTurnStartSequenceId and UseStateResult7 ~= nil then return end
 			local ResumeTurnFromHistoryResult = CreatorAgentChatStore.resumeTurnFromHistory(Text, UseMemoResult2.activeTurnState, UseMemoResult2.activeTurnSequenceIds)
 			
 			if ResumeTurnFromHistoryResult ~= nil then
@@ -1421,11 +1438,11 @@ return function(p1)
 		end
 	end, {
 		UseMemoResult2, UseMemoResult, SessionId, CreatorAgentChatStore,
-		HasUseStateResult, UseStateResult7, PlaceId, UseResult4, UseResult16,
-		UseChatScrollModuleResult, UseResult2, UseStateResult5, UseResult15, UseResult
+		HasUseStateResult, UseStateResult7, PlaceId, UseResult4, UseResult17,
+		UseChatScrollModuleResult, UseResult2, UseStateResult5, UseResult16, UseResult
 	})
-	local UseResult17 = ReactModule.useCallback(function(p3, Text, p4, Images, ResourceAttachments, Current, AfterSequenceId, p5, Callback, Callback2, Callback1)
-		-- upvalues: UseStateResult2_2 (copy), UseResult3 (ref), FFlagBuildExperiencePersistChatDraftModule (upval), UseResult13 (copy), SessionId (ref), FFlagBuildExperienceRestoreStoppedPromptModule (upval), UseRefResult15 (ref), FFlagBuildExperienceLibrary (upval), CreatorAgentChatModule1 (upval), UseResult16 (copy), FFlagBuildExperienceToolResultFailureRecoveryModule (upval), FFlagBuildExperienceAnswerFormModule (upval), UseResult15 (ref), UseResult (ref), UseResult4 (copy), UseResult2 (copy), UseChatScrollModuleResult (copy)
+	local UseResult18 = ReactModule.useCallback(function(p3, Text, p4, Images, ResourceAttachments, Current, AfterSequenceId, p5, Callback, Callback2, Callback1)
+		-- upvalues: UseStateResult2_2 (copy), UseResult3 (ref), FFlagBuildExperiencePersistChatDraftModule (upval), UseResult13 (copy), SessionId (ref), FFlagBuildExperienceRestoreStoppedPromptModule (upval), UseRefResult16 (ref), FFlagBuildExperienceLibrary (upval), CreatorAgentChatModule1 (upval), UseResult17 (copy), FFlagBuildExperienceToolResultFailureRecoveryModule (upval), FFlagBuildExperienceAnswerFormModule (upval), UseResult16 (ref), UseResult (ref), UseResult4 (copy), UseResult2 (copy), UseChatScrollModuleResult (copy)
 		UseStateResult2_2({
 			text = Text,
 			images = Images,
@@ -1440,8 +1457,8 @@ return function(p1)
 			UseResult13(p5, p3.getCasSessionId() or SessionId)
 		end else UseResult3
 		
-		if FFlagBuildExperienceRestoreStoppedPromptModule and UseRefResult15 ~= nil then
-			local UseRefResult = UseRefResult15
+		if FFlagBuildExperienceRestoreStoppedPromptModule and UseRefResult16 ~= nil then
+			local UseRefResult = UseRefResult16
 			
 			UseResult1 = function(p6)
 				-- upvalues: UseRefResult (copy), Current (copy), UseResult1 (copy)
@@ -1462,13 +1479,13 @@ return function(p1)
 			end
 		end
 		local LiveAssistantTurn = CreatorAgentChatModule1.createLiveAssistantTurn(p3, p4, function(p6)
-			-- upvalues: UseResult16 (upval), Current (copy), p5 (copy), Images (copy), ResourceAttachments (copy), p3 (copy), Callback2 (copy)
-			UseResult16(Current, p6, p5, Images, ResourceAttachments, p3)
+			-- upvalues: UseResult17 (upval), Current (copy), p5 (copy), Images (copy), ResourceAttachments (copy), p3 (copy), Callback2 (copy)
+			UseResult17(Current, p6, p5, Images, ResourceAttachments, p3)
 			
 			if Callback2 ~= nil then
 				Callback2()
 			end
-		end, if FFlagBuildExperienceToolResultFailureRecoveryModule or FFlagBuildExperienceAnswerFormModule then UseResult15(Current) else nil, UseResult, UseResult1, if FFlagBuildExperienceLibrary and Callback1 ~= nil then function()
+		end, if FFlagBuildExperienceToolResultFailureRecoveryModule or FFlagBuildExperienceAnswerFormModule then UseResult16(Current) else nil, UseResult, UseResult1, if FFlagBuildExperienceLibrary and Callback1 ~= nil then function()
 			-- upvalues: FFlagBuildExperiencePersistChatDraftModule (upval), p5 (copy), UseResult13 (upval), p3 (copy), SessionId (upval), Callback1 (copy)
 			if FFlagBuildExperiencePersistChatDraftModule and p5 ~= nil then
 				UseResult13(p5, p3.getCasSessionId() or SessionId)
@@ -1483,29 +1500,29 @@ return function(p1)
 		UseChatScrollModuleResult.scrollToBottomAfterSend()
 		LiveAssistantTurn.start()
 	end, {
-		UseResult16, UseResult4, UseChatScrollModuleResult, UseResult2,
-		UseStateResult2_2, UseResult15, UseResult, UseResult3, UseResult13, SessionId
+		UseResult17, UseResult4, UseChatScrollModuleResult, UseResult2,
+		UseStateResult2_2, UseResult16, UseResult, UseResult3, UseResult13, SessionId
 	})
-	local UseRefResult25 = ReactModule.useRef(UseMemoResult2.latestSequenceId)
-	UseRefResult25.current = UseMemoResult2.latestSequenceId
+	local UseRefResult26 = ReactModule.useRef(UseMemoResult2.latestSequenceId)
+	UseRefResult26.current = UseMemoResult2.latestSequenceId
 	local UseAgentRollbackRequestModuleResult = UseAgentRollbackRequestModule({
 		universeId = UniverseId,
 		placeId = PlaceId,
 		session = UseMemoResult,
-		activeTurnHandleRef = UseRefResult3,
+		activeTurnHandleRef = UseRefResult4,
 		startRollbackTurn = ReactModule.useCallback(function(p3, Callback1, Callback: () -> ())
-			-- upvalues: UseMemoResult (copy), UseChatScrollModuleResult (copy), UseRefResult5 (copy), UseStateResult2_3 (copy), BuildAgentRollbackPromptModule (upval), UseResult17 (copy), UseRefResult25 (copy)
+			-- upvalues: UseMemoResult (copy), UseChatScrollModuleResult (copy), UseRefResult6 (copy), UseStateResult2_3 (copy), BuildAgentRollbackPromptModule (upval), UseResult18 (copy), UseRefResult26 (copy)
 			if UseMemoResult == nil then
 				Callback()
 				
 				return
 			else
 				UseChatScrollModuleResult.captureStickToBottomForSend()
-				UseRefResult5.current += 1
-				local Current = UseRefResult5.current
+				UseRefResult6.current += 1
+				local Current = UseRefResult6.current
 				UseStateResult2_3(nil)
 				local AgentRollbackPromptModule = BuildAgentRollbackPromptModule(p3.versionNumber, p3.noteTitle, p3.noteDescription)
-				UseResult17(UseMemoResult, AgentRollbackPromptModule, AgentRollbackPromptModule, nil, nil, Current, UseRefResult25.current, nil, function()
+				UseResult18(UseMemoResult, AgentRollbackPromptModule, AgentRollbackPromptModule, nil, nil, Current, UseRefResult26.current, nil, function()
 					-- upvalues: UseChatScrollModuleResult (upval), Callback1 (copy)
 					UseChatScrollModuleResult.scrollToBottomUnconditionally()
 					Callback1()
@@ -1515,19 +1532,19 @@ return function(p1)
 			UseMemoResult,
 			UseChatScrollModuleResult,
 			UseStateResult2_3,
-			UseResult17
+			UseResult18
 		})
 	})
 	ReactModule.useLayoutEffect(function()
-		-- upvalues: UseStateResult6 (copy), UseRefResult4 (copy), UseMemoResult (copy), SessionId (ref), UseRefResult5 (copy), UseRefResult6 (copy), UseAgentRollbackRequestModuleResult (copy), UseResult4 (copy), UseResult2 (copy), UseStateResult2_2 (copy), UseStateResult2_3 (copy)
+		-- upvalues: UseStateResult6 (copy), UseRefResult5 (copy), UseMemoResult (copy), SessionId (ref), UseRefResult6 (copy), UseRefResult7 (copy), UseAgentRollbackRequestModuleResult (copy), UseResult4 (copy), UseResult2 (copy), UseStateResult2_2 (copy), UseStateResult2_3 (copy)
 		if UseStateResult6 ~= nil then
-			local Current = UseRefResult4.current
+			local Current = UseRefResult5.current
 			local SessionId1 = SessionId
 			
 			if Current == nil or Current.session ~= UseMemoResult or SessionId1 ~= nil and SessionId1 ~= "" and (Current.sessionId ~= SessionId1 and (Current.sessionId ~= nil or Current.session.getCasSessionId() ~= SessionId1)) then
-				local Current1 = UseRefResult4.current
-				UseRefResult5.current += 1
-				UseRefResult6.current = nil
+				local Current1 = UseRefResult5.current
+				UseRefResult6.current += 1
+				UseRefResult7.current = nil
 				
 				if UseAgentRollbackRequestModuleResult.stopRequestBeforeReceipt(UseStateResult6) then
 					if Current1 ~= nil and Current1.session.placeId ~= nil then
@@ -1547,8 +1564,8 @@ return function(p1)
 		UseMemoResult, SessionId, UseStateResult6, UseResult2,
 		UseAgentRollbackRequestModuleResult, UseResult4
 	})
-	local UseResult18 = ReactModule.useCallback(function(Text, p3, Images, ResourceAttachments, Current, AfterSequenceId)
-		-- upvalues: UseStateResult2_2 (copy), UniverseCreateModule (upval), GetDefaultTemplatePlaceIdModule (upval), Debug (upval), FFlagBuildExperiencePromptFailureTelemetry (upval), UseRefResult5 (copy), UniverseConfigurationModule (upval), UseStateResult2 (copy), p1 (copy), CreatorAgentChatStore (copy), SessionId (ref), IsEnabled (upval), v3 (ref), v2 (ref), UseResult17 (copy), LocalizationStringsModule (upval), ChatConstantsModule (upval), RequestFailureKind (upval), SendBuildExperienceEventModule (upval), UseResult2 (copy), UseResult14 (copy), FFlagBuildExperienceChatImageAttachmentsModule (upval), UseRefResult23 (copy), FFlagBuildExperienceChatResourceAttachments (upval), UseRefResult8 (copy), UseStateResult2_5 (copy), FormatResult (copy)
+	local UseResult19 = ReactModule.useCallback(function(Text, p3, Images, ResourceAttachments, Current, AfterSequenceId)
+		-- upvalues: UseStateResult2_2 (copy), UniverseCreateModule (upval), GetDefaultTemplatePlaceIdModule (upval), Debug (upval), FFlagBuildExperiencePromptFailureTelemetry (upval), UseRefResult6 (copy), UniverseConfigurationModule (upval), UseStateResult2 (copy), p1 (copy), CreatorAgentChatStore (copy), SessionId (ref), IsEnabled (upval), v3 (ref), v2 (ref), UseResult18 (copy), LocalizationStringsModule (upval), ChatConstantsModule (upval), RequestFailureKind (upval), SendBuildExperienceEventModule (upval), UseResult2 (copy), UseResult14 (copy), FFlagBuildExperienceChatImageAttachmentsModule (upval), UseRefResult24 (copy), FFlagBuildExperienceChatResourceAttachments (upval), UseRefResult1 (copy), UseStateResult2_5 (copy), FormatResult (copy)
 		UseStateResult2_2({
 			text = Text,
 			images = Images,
@@ -1561,7 +1578,7 @@ return function(p1)
 			isPublish = true,
 			templatePlaceId = GetDefaultTemplatePlaceIdModule()
 		}):andThen(function(Result)
-			-- upvalues: Debug (upval), ClockTime (copy), FFlagBuildExperiencePromptFailureTelemetry (upval), Config (ref), UseRefResult5 (upval), Current (copy), UniverseConfigurationModule (upval), UseStateResult2 (upval), p1 (upval), CreatorAgentChatStore (upval), SessionId (upval), IsEnabled (upval), v3 (upval), v2 (upval), UseResult17 (upval), Text (copy), p3 (copy), Images (copy), ResourceAttachments (copy), AfterSequenceId (copy)
+			-- upvalues: Debug (upval), ClockTime (copy), FFlagBuildExperiencePromptFailureTelemetry (upval), Config (ref), UseRefResult6 (upval), Current (copy), UniverseConfigurationModule (upval), UseStateResult2 (upval), p1 (upval), CreatorAgentChatStore (upval), SessionId (upval), IsEnabled (upval), v3 (upval), v2 (upval), UseResult18 (upval), Text (copy), p3 (copy), Images (copy), ResourceAttachments (copy), AfterSequenceId (copy)
 			Debug.log("info", "build_experience create_universe succeeded", {
 				durationMs = math.floor((os.clock() - ClockTime) * 1000 + 0.5),
 				universeId = Result.universeId,
@@ -1574,15 +1591,15 @@ return function(p1)
 					placeId = Result.rootPlaceId
 				}
 			end
-			if UseRefResult5.current == Current then
+			if UseRefResult6.current == Current then
 				local UniverseConfigurationStore = UniverseConfigurationModule.getUniverseConfigurationStore()
 				
 				return UniverseConfigurationStore.patchConfiguration(Result.universeId, { audiences = { 1 } }):andThen(function()
 					-- upvalues: UniverseConfigurationStore (copy), Result (copy)
 					return UniverseConfigurationStore.setTeamCreate(Result.universeId, true)
 				end):andThen(function()
-					-- upvalues: UseRefResult5 (upval), Current (upval), Result (copy), UseStateResult2 (upval), p1 (upval), CreatorAgentChatStore (upval), SessionId (upval), IsEnabled (upval), v3 (upval), v2 (upval), UseResult17 (upval), Text (upval), p3 (upval), Images (upval), ResourceAttachments (upval), AfterSequenceId (upval)
-					if UseRefResult5.current ~= Current then
+					-- upvalues: UseRefResult6 (upval), Current (upval), Result (copy), UseStateResult2 (upval), p1 (upval), CreatorAgentChatStore (upval), SessionId (upval), IsEnabled (upval), v3 (upval), v2 (upval), UseResult18 (upval), Text (upval), p3 (upval), Images (upval), ResourceAttachments (upval), AfterSequenceId (upval)
+					if UseRefResult6.current ~= Current then
 						return nil
 					end
 					local config = {
@@ -1599,7 +1616,7 @@ return function(p1)
 					if IsEnabled and v3 ~= nil and v3.current then
 						SessionForProject.setPendingExperimentKey(v2)
 					end
-					UseResult17(SessionForProject, Text, p3, Images, ResourceAttachments, Current, AfterSequenceId, Text)
+					UseResult18(SessionForProject, Text, p3, Images, ResourceAttachments, Current, AfterSequenceId, Text)
 					
 					return nil
 				end)
@@ -1607,13 +1624,13 @@ return function(p1)
 				return nil
 			end
 		end):catch(function(Err)
-			-- upvalues: Debug (upval), ClockTime (copy), UseRefResult5 (upval), Current (copy), FFlagBuildExperiencePromptFailureTelemetry (upval), Config (ref), LocalizationStringsModule (upval), ChatConstantsModule (upval), RequestFailureKind (upval), SendBuildExperienceEventModule (upval), UseResult2 (upval), UseStateResult2_2 (upval), UseResult14 (upval), Text (copy), FFlagBuildExperienceChatImageAttachmentsModule (upval), Images (copy), UseRefResult23 (upval), FFlagBuildExperienceChatResourceAttachments (upval), ResourceAttachments (copy), UseRefResult8 (upval), UseStateResult2_5 (upval), FormatResult (upval)
+			-- upvalues: Debug (upval), ClockTime (copy), UseRefResult6 (upval), Current (copy), FFlagBuildExperiencePromptFailureTelemetry (upval), Config (ref), LocalizationStringsModule (upval), ChatConstantsModule (upval), RequestFailureKind (upval), SendBuildExperienceEventModule (upval), UseResult2 (upval), UseStateResult2_2 (upval), UseResult14 (upval), Text (copy), FFlagBuildExperienceChatImageAttachmentsModule (upval), Images (copy), UseRefResult24 (upval), FFlagBuildExperienceChatResourceAttachments (upval), ResourceAttachments (copy), UseRefResult1 (upval), UseStateResult2_5 (upval), FormatResult (upval)
 			Debug.log("warn", "build_experience create_or_configure_universe failed", {
 				durationMs = math.floor((os.clock() - ClockTime) * 1000 + 0.5),
 				error = Err
 			})
 			
-			if UseRefResult5.current ~= Current then return end
+			if UseRefResult6.current ~= Current then return end
 			if FFlagBuildExperiencePromptFailureTelemetry then
 				local Rounded = math.round((os.clock() - ClockTime) * 1000)
 				local T = if Config == nil then {} else { universeId = Config.universeId, placeId = Config.placeId }
@@ -1639,26 +1656,26 @@ return function(p1)
 			UseResult14(Text)
 			
 			if FFlagBuildExperienceChatImageAttachmentsModule and Images ~= nil then
-				UseRefResult23.current(Images)
+				UseRefResult24.current(Images)
 			end
 			if FFlagBuildExperienceChatResourceAttachments and ResourceAttachments ~= nil then
-				UseRefResult8.current(ResourceAttachments)
+				UseRefResult1.current(ResourceAttachments)
 			end
 			UseStateResult2_5(FormatResult)
 		end)
 	end, {
 		SessionId, CreatorAgentChatStore, p1.onProjectResolved, UseResult2,
 		UseResult14, UseStateResult2_5, UseStateResult2, UseStateResult2_2,
-		UseResult17, FormatResult, v2, v3
+		UseResult18, FormatResult, v2, v3
 	})
-	local UseResult19 = ReactModule.useCallback(function(p3): boolean
-		-- upvalues: NoSendMessageWhen (copy), UseRefResult9 (copy), FFlagBuildExperienceChatImageAttachmentsModule (upval), UseRefResult16 (ref), FFlagBuildExperienceChatResourceAttachments (upval), UseRefResult19 (ref), UseResult14 (copy), UseRefResult4 (copy), UseMemoResult (copy), SessionId (ref), UseRefResult3 (copy), HasUseStateResult (copy), IsIsLibraryChat (copy), UseRefResult21 (copy), UseChatScrollModuleResult (copy), p1 (copy), UniverseId (ref), PlaceId (ref), AgentRollbackRequestStoreModule (copy), UseRefResult5 (copy), UseStateResult2_3 (copy), FFlagBuildExperiencePersistChatDraftModule (upval), UseResult12 (copy), UseResult8 (copy), UseRefResult23 (copy), UseRefResult8 (copy), UseResult18 (copy), UseMemoResult2 (copy), UseResult17 (copy), FFlagBuildExperienceLibrary (upval)
+	local UseResult20 = ReactModule.useCallback(function(p3): boolean
+		-- upvalues: NoSendMessageWhen (copy), UseRefResult9 (copy), FFlagBuildExperienceChatImageAttachmentsModule (upval), UseRefResult17 (ref), FFlagBuildExperienceChatResourceAttachments (upval), UseRefResult20 (ref), UseResult14 (copy), UseRefResult5 (copy), UseMemoResult (copy), SessionId (ref), UseRefResult4 (copy), HasUseStateResult (copy), IsIsLibraryChat (copy), UseRefResult22 (copy), UseChatScrollModuleResult (copy), p1 (copy), UniverseId (ref), PlaceId (ref), AgentRollbackRequestStoreModule (copy), UseRefResult6 (copy), UseStateResult2_3 (copy), FFlagBuildExperiencePersistChatDraftModule (upval), UseResult12 (copy), UseResult8 (copy), UseRefResult24 (copy), UseRefResult1 (copy), UseResult19 (copy), UseMemoResult2 (copy), UseResult18 (copy), FFlagBuildExperienceLibrary (upval)
 		if not NoSendMessageWhen then
 			return false
 		end
 		local Replaced = string.gsub(UseRefResult9.current, "^%s*(.-)%s*$", "%1")
-		local Current = if FFlagBuildExperienceChatImageAttachmentsModule then UseRefResult16.current else {}
-		local Current1 = if FFlagBuildExperienceChatResourceAttachments then UseRefResult19.current else {}
+		local Current = if FFlagBuildExperienceChatImageAttachmentsModule then UseRefResult17.current else {}
+		local Current1 = if FFlagBuildExperienceChatResourceAttachments then UseRefResult20.current else {}
 		
 		if Replaced == "" and #Current == 0 then
 			UseResult14("")
@@ -1672,10 +1689,10 @@ return function(p1)
 				end
 			end
 		end
-		local Current2 = UseRefResult4.current
+		local Current2 = UseRefResult5.current
 		local SessionId1 = SessionId
 		local NoSessionId: boolean = Current2 ~= nil and Current2.session == UseMemoResult and (SessionId1 == nil or SessionId1 == "" or (Current2.sessionId == SessionId1 or Current2.sessionId == nil and Current2.session.getCasSessionId() == SessionId1))
-		local Current3 = if NoSessionId then UseRefResult3.current else nil
+		local Current3 = if NoSessionId then UseRefResult4.current else nil
 		
 		if HasUseStateResult or IsIsLibraryChat and Current3 ~= nil then
 			if FFlagBuildExperienceChatImageAttachmentsModule and #Current > 0 or FFlagBuildExperienceChatResourceAttachments and #Current1 > 0 then
@@ -1686,8 +1703,8 @@ return function(p1)
 			end
 			UseResult14("")
 			
-			if UseRefResult21.current then
-				UseRefResult21.current.releaseFocus()
+			if UseRefResult22.current then
+				UseRefResult22.current.releaseFocus()
 			end
 			UseChatScrollModuleResult.scrollToBottomAfterSend()
 			
@@ -1702,8 +1719,8 @@ return function(p1)
 				return false
 			end
 			UseChatScrollModuleResult.captureStickToBottomForSend()
-			UseRefResult5.current += 1
-			local Current4 = UseRefResult5.current
+			UseRefResult6.current += 1
+			local Current4 = UseRefResult6.current
 			UseStateResult2_3(nil)
 			
 			if FFlagBuildExperiencePersistChatDraftModule then
@@ -1712,30 +1729,30 @@ return function(p1)
 			UseResult8("")
 			
 			if FFlagBuildExperienceChatImageAttachmentsModule then
-				UseRefResult23.current({})
+				UseRefResult24.current({})
 			end
 			if FFlagBuildExperienceChatResourceAttachments then
-				UseRefResult8.current({})
+				UseRefResult1.current({})
 			end
-			if UseRefResult21.current then
-				UseRefResult21.current.releaseFocus()
+			if UseRefResult22.current then
+				UseRefResult22.current.releaseFocus()
 			end
 			local function _(p4, p5)
-				-- upvalues: NoUniverseId (copy), UseResult18 (upval), Replaced (copy), Current1 (copy), Current4 (copy), UseMemoResult2 (upval), UseResult17 (upval), UseMemoResult (upval), FFlagBuildExperienceLibrary (upval), p3 (copy)
+				-- upvalues: NoUniverseId (copy), UseResult19 (upval), Replaced (copy), Current1 (copy), Current4 (copy), UseMemoResult2 (upval), UseResult18 (upval), UseMemoResult (upval), FFlagBuildExperienceLibrary (upval), p3 (copy)
 				if NoUniverseId then
-					UseResult18(Replaced, p4, p5, Current1, Current4, UseMemoResult2.latestSequenceId)
+					UseResult19(Replaced, p4, p5, Current1, Current4, UseMemoResult2.latestSequenceId)
 					
 					return
 				else
-					UseResult17(UseMemoResult, Replaced, p4, p5, Current1, Current4, UseMemoResult2.latestSequenceId, Replaced, nil, nil, if FFlagBuildExperienceLibrary then p3 else nil)
+					UseResult18(UseMemoResult, Replaced, p4, p5, Current1, Current4, UseMemoResult2.latestSequenceId, Replaced, nil, nil, if FFlagBuildExperienceLibrary then p3 else nil)
 				end
 			end
 			
 			if #Current == 0 and #Current1 == 0 then
 				if NoUniverseId then
-					UseResult18(Replaced, Replaced, nil, Current1, Current4, UseMemoResult2.latestSequenceId)
+					UseResult19(Replaced, Replaced, nil, Current1, Current4, UseMemoResult2.latestSequenceId)
 				else
-					UseResult17(UseMemoResult, Replaced, Replaced, nil, Current1, Current4, UseMemoResult2.latestSequenceId, Replaced, nil, nil, if FFlagBuildExperienceLibrary then p3 else nil)
+					UseResult18(UseMemoResult, Replaced, Replaced, nil, Current1, Current4, UseMemoResult2.latestSequenceId, Replaced, nil, nil, if FFlagBuildExperienceLibrary then p3 else nil)
 				end
 				return true
 			else
@@ -1776,9 +1793,9 @@ return function(p1)
 					})
 				end
 				if NoUniverseId then
-					UseResult18(Replaced, List, List1, Current1, Current4, UseMemoResult2.latestSequenceId)
+					UseResult19(Replaced, List, List1, Current1, Current4, UseMemoResult2.latestSequenceId)
 				else
-					UseResult17(UseMemoResult, Replaced, List, List1, Current1, Current4, UseMemoResult2.latestSequenceId, Replaced, nil, nil, if FFlagBuildExperienceLibrary then p3 else nil)
+					UseResult18(UseMemoResult, Replaced, List, List1, Current1, Current4, UseMemoResult2.latestSequenceId, Replaced, nil, nil, if FFlagBuildExperienceLibrary then p3 else nil)
 				end
 				return true
 			end
@@ -1786,24 +1803,24 @@ return function(p1)
 	end, {
 		NoSendMessageWhen, UseMemoResult, SessionId, UniverseId, PlaceId,
 		HasUseStateResult, IsIsLibraryChat, UseChatScrollModuleResult, UseResult14,
-		UseResult8, UseResult12, UseResult18, UseResult17,
+		UseResult8, UseResult12, UseResult19, UseResult18,
 		p1.createUniverseOnFirstPrompt, UseStateResult2_3, UseMemoResult2,
 		AgentRollbackRequestStoreModule
 	})
-	local UseResult20 = ReactModule.useCallback(function()
-		-- upvalues: UseRefResult4 (copy), UseMemoResult (copy), SessionId (ref), UseRefResult3 (copy), UseAgentRollbackRequestModuleResult (copy), UseRefResult5 (copy), FFlagBuildExperiencePromptFailureTelemetry (upval), UseResult2 (copy), UseRefResult6 (copy), FFlagBuildExperienceRestoreStoppedPromptModule (upval), UseRefResult15 (ref), UseStateResult3 (copy), UseRefResult9 (copy), UseMemoResult2 (copy), UseResult14 (copy), FFlagBuildExperienceChatImageAttachmentsModule (upval), UseRefResult16 (ref), UseRefResult23 (copy), FFlagBuildExperienceChatResourceAttachments (upval), UseRefResult19 (ref), UseRefResult8 (copy), UseStateResult2_2 (copy), UseStateResult2_3 (copy), PlaceId (ref), UseResult4 (copy)
-		local Current = UseRefResult4.current
+	local UseResult21 = ReactModule.useCallback(function()
+		-- upvalues: UseRefResult5 (copy), UseMemoResult (copy), SessionId (ref), UseRefResult4 (copy), UseAgentRollbackRequestModuleResult (copy), UseRefResult6 (copy), FFlagBuildExperiencePromptFailureTelemetry (upval), UseResult2 (copy), UseRefResult7 (copy), FFlagBuildExperienceRestoreStoppedPromptModule (upval), UseRefResult16 (ref), UseStateResult3 (copy), UseRefResult9 (copy), UseMemoResult2 (copy), UseResult14 (copy), FFlagBuildExperienceChatImageAttachmentsModule (upval), UseRefResult17 (ref), UseRefResult24 (copy), FFlagBuildExperienceChatResourceAttachments (upval), UseRefResult20 (ref), UseRefResult1 (copy), UseStateResult2_2 (copy), UseStateResult2_3 (copy), PlaceId (ref), UseResult4 (copy)
+		local Current = UseRefResult5.current
 		local SessionId1 = SessionId
 		local NoSessionId: boolean = Current ~= nil and Current.session == UseMemoResult and (SessionId1 == nil or SessionId1 == "" or (Current.sessionId == SessionId1 or Current.sessionId == nil and Current.session.getCasSessionId() == SessionId1))
-		local Current1 = if NoSessionId then UseRefResult3.current else nil
+		local Current1 = if NoSessionId then UseRefResult4.current else nil
 		
 		if Current1 == nil then
 			UseAgentRollbackRequestModuleResult.cancelRequestBeforeTurnStarts()
 			
 			return
 		end
-		local Current11 = UseRefResult5.current
-		UseRefResult5.current += 1
+		local Current11 = UseRefResult6.current
+		UseRefResult6.current += 1
 		
 		if FFlagBuildExperiencePromptFailureTelemetry and Current1.reportUserStop ~= nil then
 			Current1.reportUserStop()
@@ -1812,16 +1829,16 @@ return function(p1)
 			Current1.stop()
 		end
 		UseResult2(nil)
-		UseRefResult6.current = nil
+		UseRefResult7.current = nil
 		
-		if FFlagBuildExperienceRestoreStoppedPromptModule and UseRefResult15 ~= nil and UseRefResult15.current ~= Current11 and UseStateResult3 ~= nil and UseRefResult9.current == "" and UseMemoResult2.isAwaitingUserMessageEcho then
+		if FFlagBuildExperienceRestoreStoppedPromptModule and UseRefResult16 ~= nil and UseRefResult16.current ~= Current11 and UseStateResult3 ~= nil and UseRefResult9.current == "" and UseMemoResult2.isAwaitingUserMessageEcho then
 			UseResult14(UseStateResult3.text)
 			
-			if FFlagBuildExperienceChatImageAttachmentsModule and UseStateResult3.images ~= nil and #UseRefResult16.current == 0 then
-				UseRefResult23.current(UseStateResult3.images)
+			if FFlagBuildExperienceChatImageAttachmentsModule and UseStateResult3.images ~= nil and #UseRefResult17.current == 0 then
+				UseRefResult24.current(UseStateResult3.images)
 			end
-			if FFlagBuildExperienceChatResourceAttachments and UseStateResult3.resourceAttachments ~= nil and #UseRefResult19.current == 0 then
-				UseRefResult8.current(UseStateResult3.resourceAttachments)
+			if FFlagBuildExperienceChatResourceAttachments and UseStateResult3.resourceAttachments ~= nil and #UseRefResult20.current == 0 then
+				UseRefResult1.current(UseStateResult3.resourceAttachments)
 			end
 		end
 		UseStateResult2_2(nil)
@@ -1843,11 +1860,11 @@ return function(p1)
 	local NoAutoFocusComposer = p1.autoFocusComposer == nil or p1.autoFocusComposer
 	local NoAutoFocusComposer1 = if p1.focusComposerWhen == nil then NoAutoFocusComposer else p1.focusComposerWhen
 	ReactModule.useEffect(function()
-		-- upvalues: NoAutoFocusComposer (copy), NoAutoFocusComposer1 (copy), UseRefResult21 (copy)
+		-- upvalues: NoAutoFocusComposer (copy), NoAutoFocusComposer1 (copy), UseRefResult22 (copy)
 		if NoAutoFocusComposer and NoAutoFocusComposer1 then
 			local Flag = false
 			
-			local function v345()
+			local function v350()
 				-- upvalues: Flag (ref)
 				return Flag
 			end
@@ -1855,9 +1872,9 @@ return function(p1)
 			local v7 = 8
 			
 			local function tryFocus()
-				-- upvalues: v345 (copy), UseRefResult21 (copy), v7 (ref), tryFocus (copy)
-				if v345() then return end
-				local Current = UseRefResult21.current
+				-- upvalues: v350 (copy), UseRefResult22 (copy), v7 (ref), tryFocus (copy)
+				if v350() then return end
+				local Current = UseRefResult22.current
 				
 				if Current then
 					Current.focus()
@@ -1881,7 +1898,7 @@ return function(p1)
 			return function() end
 		end
 	end, { NoAutoFocusComposer, NoAutoFocusComposer1 })
-	local UseResult21 = ReactModule.useCallback(function(p4)
+	local UseResult22 = ReactModule.useCallback(function(p4)
 		-- upvalues: PlaceId (ref), v1 (ref), FFlagBuildExperiencePersistPlaytestLogsModule (upval), FFlagBuildExperienceClientDataModelTools (upval), LaunchPlaytestWithLoadingStateModule (upval)
 		if PlaceId == nil then return end
 		local v7 = v1
@@ -1937,11 +1954,11 @@ return function(p1)
 			return GetActiveAnswerFormModule(ActiveTurnState, UseSignalStateResult1, UseMemoResult3)
 		end, { ActiveTurnState, UseSignalStateResult1, UseMemoResult3 }) else nil,
 		submitAnswerText = if FFlagBuildExperienceAnswerFormModule then ReactModule.useCallback(function(p4, p5, p6)
-			-- upvalues: UseRefResult3 (copy), UseRefResult4 (copy), UseMemoResult (copy), SessionId (ref), UseStateResult2_5 (copy)
-			local Current = UseRefResult3.current
+			-- upvalues: UseRefResult4 (copy), UseRefResult5 (copy), UseMemoResult (copy), SessionId (ref), UseStateResult2_5 (copy)
+			local Current = UseRefResult4.current
 			
 			if Current ~= nil then
-				local Current1 = UseRefResult4.current
+				local Current1 = UseRefResult5.current
 				local SessionId1 = SessionId
 				
 				if Current1 ~= nil and Current1.session == UseMemoResult and (SessionId1 == nil or SessionId1 == "" or (Current1.sessionId == SessionId1 or Current1.sessionId == nil and Current1.session.getCasSessionId() == SessionId1)) then
@@ -1955,6 +1972,7 @@ return function(p1)
 		composerText = UseBindingResult,
 		composerErrorText = UseStateResult8,
 		setComposerText = UseResult14,
+		setPrefilledComposerText = UseResult15,
 		composerImages = if FFlagBuildExperienceChatImageAttachmentsModule then Frozen1 else {},
 		setComposerImages = setComposerImages,
 		retryComposerImage = retryComposerImage,
@@ -1967,14 +1985,14 @@ return function(p1)
 		isAssistantResponding = HasUseStateResult,
 		canStopAssistantResponse = UseStateResult7 ~= nil or UseSignalStateResult4,
 		canSendWhileResponding = HasPendingLocalToolResponse,
-		sendMessage = UseResult19,
-		stopAssistantResponse = UseResult20,
+		sendMessage = UseResult20,
+		stopAssistantResponse = UseResult21,
 		setScrollingFrame = UseChatScrollModuleResult.setScrollingFrame,
 		anchorScrollToInstance = if FFlagBuildExperienceChatAccordionScrollAnchorModule then UseChatScrollModuleResult.anchorToInstance else nil,
-		textBoxRef = UseRefResult21,
+		textBoxRef = UseRefResult22,
 		clockBinding = UseClockResult,
 		playtestPlaceId = PlaceId,
-		launchPlaytest = if PlaceId == nil then nil else UseResult21,
+		launchPlaytest = if PlaceId == nil then nil else UseResult22,
 		hasPublishedTurn = IncludesPublishTool,
 		subagentTaskState = SubagentTaskState,
 		isHistoryLoading = NoNoIsLoading,

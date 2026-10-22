@@ -115,6 +115,7 @@ Authentication.SignUp.Button.OKCaptialized,OK
 Authentication.SignUp.Button.RetryLogIn,Tente fazer login novamente
 Authentication.SignUp.Description.AccountAlreadyLinked,Sua conta para a {platformAccountName} já está vinculada a uma conta Roblox. Tente iniciar a sessão novamente.
 Authentication.SignUp.Description.BirthdayHint,Inserir data
+Authentication.SignUp.Description.OptInMarketingEmailConsent,Gostaria de receber e-mails da Roblox sobre novidades e ofertas.
 Authentication.SignUp.Description.SignUpAgreement.CreateAnAccount,"Ao criar uma conta, você aceita nossos {startTermsTag}Termos{endTermsTag}, incluindo a arbitragem, e reconhece nossa {startPrivacyTag}Política de Privacidade{endPrivacyTag}. Se tiver menos de 18 anos, seus pais ou responsáveis devem dar permissão à sua conta e aceitar nossos Termos."
 Authentication.SignUp.Description.Try,Testar
 Authentication.SignUp.Description.UsernameChanged,"Tudo pronto! Sua conta está pronta e vinculada a {platform}. Renasça agora para ver seu nome de usuário atualizado no jogo, ou ele será aplicado na próxima vez."
@@ -790,6 +791,7 @@ CoreScripts.InGameMenu.Controls.CameraMovementTitle,Movimento da câmera
 CoreScripts.InGameMenu.Controls.CameraZoomGamepad,Zoom da câmera
 CoreScripts.InGameMenu.Controls.CharacterMovementTitle,Controles de avatar
 CoreScripts.InGameMenu.Controls.Chat,
+CoreScripts.InGameMenu.Controls.ControlsPage,Controles
 CoreScripts.InGameMenu.Controls.DevConsole,Console de desenvolvimento
 CoreScripts.InGameMenu.Controls.DownArrow,Seta para baixo
 CoreScripts.InGameMenu.Controls.DropTool,Largar ferramenta
@@ -1537,8 +1539,11 @@ Feature.Avatar.Heading.SharePublicAvatar,Compartilhe seu avatar
 Feature.Avatar.Heading.SortBy,Ordenar por
 Feature.Avatar.Heading.UsedName,Nome já usado
 Feature.Avatar.Heading.WearConfirmation,Vestir item
+Feature.Avatar.HeroWidget.BundleHeadlessTitle,Última chance de conseguir o Cavaleiro Sem Cabeça
 Feature.Avatar.HeroWidget.BundleTitle,Korblox Pactbreaker
 Feature.Avatar.HeroWidget.CapsuleDescription,Três novas versões dos originais da Roblox
+Feature.Avatar.HeroWidget.CapsuleHalloweenDescription,Novos itens só para a temporada assustadora
+Feature.Avatar.HeroWidget.CapsuleHalloweenTitle,Feito para o Dia das Bruxas
 Feature.Avatar.HeroWidget.CapsulePoolDescription,Três itens novos para causar impacto
 Feature.Avatar.HeroWidget.CapsulePoolTitle,Festa na piscina
 Feature.Avatar.HeroWidget.CapsuleTitle,Clássicos reinventados
@@ -2144,6 +2149,8 @@ Feature.Build.Description.GameConfiguration,Altere a forma como você vende iten
 Feature.Build.Description.GameCreationDone,Finalizei a criação e a publicação do seu jogo. Você pode abri-lo para fazer testes.
 Feature.Build.Description.GameSavedPlaytest,Finalizei a criação do seu jogo e salvei uma nova versão. Você pode abri-lo para testar.
 Feature.Build.Description.HubSettings,Gerencie todas as configurações no Salão dos Criadores
+Feature.Build.Description.InternalSpec,Deixe em branco para usar a especificação mais recente
+Feature.Build.Description.InternalTesting,Teste novas especificações de modelo
 Feature.Build.Description.InviteFriendLimit,Convide até {MAX_INVITES} amizades para jogar enquanto você cria.
 Feature.Build.Description.LongAdCampaign,Mais tempo para alcançar novos jogadores e fazer com que eles voltem.
 Feature.Build.Description.MakeAudienceAvail,Publique sua experiência para disponibilizá-la para este público.
@@ -2238,6 +2245,7 @@ Feature.Build.Label.FreeBuildUsage,Limite de uso gratuito da função Criar
 Feature.Build.Label.Friends,
 Feature.Build.Label.FriendsOnly,Apenas amizades
 Feature.Build.Label.GamePlays,Jogadas
+Feature.Build.Label.GamesTab,
 Feature.Build.Label.GetMoreBuildUsage,Obtenha mais limite de uso para a função Criar
 Feature.Build.Label.GroupGames,Jogos em grupo
 Feature.Build.Label.Groups,Grupos
@@ -2246,6 +2254,8 @@ Feature.Build.Label.IconThumbnails,Ícone e miniaturas
 Feature.Build.Label.Images2D,Imagens 2D
 Feature.Build.Label.InProgress,Em andamento
 Feature.Build.Label.InputNeeded,Informações necessárias
+Feature.Build.Label.InternalSpec,Especificação interna
+Feature.Build.Label.InternalTesting,Testes internos
 Feature.Build.Label.InviteCount,{COUNT}/{MAX_INVITES}
 Feature.Build.Label.Limited,Limitado
 Feature.Build.Label.Live,Publicado
@@ -2266,6 +2276,7 @@ Feature.Build.Label.OnSale,À venda
 Feature.Build.Label.Pending,Pendente
 Feature.Build.Label.PercentUsed,Uso: {PERCENT}%
 Feature.Build.Label.PlayTime,Tempo de jogo
+Feature.Build.Label.PreviewsTab,Prévias
 Feature.Build.Label.PreviouslyPublished,Publicado anteriormente
 Feature.Build.Label.Price,Preço
 Feature.Build.Label.PriceUnavailable,--
@@ -2476,6 +2487,7 @@ Feature.Build.Notification.Title.Finished,Criação concluída
 Feature.Build.Notification.Title.NeedInput,A criação precisa da sua contribuição
 Feature.Build.Placeholder.DescribeProduct,Descreva o que você quer vender
 Feature.Build.Placeholder.DescribeProductUpdate,Descreva uma atualização
+Feature.Build.Placeholder.InternalSpec,internal_code
 Feature.Build.Prompt.CreateDeveloperProduct,"Me ajude a criar um produto de desenvolvedor, conectá-lo ao jogo, verificar e publicar as alterações e disponibilizá-lo para compra."
 Feature.Build.Title.AdActive,A campanha de anúncios está ativa
 Feature.Build.Title.AdCampaignDuration,Campanha de anúncios de {durationDays} dias
@@ -2642,6 +2654,7 @@ Feature.Catalog.AvatarWidgetTitle,Explorar estilos
 Feature.Catalog.Checkout.Title.PurchasedFailedPlural,{count} itens não puderam ser comprados
 Feature.Catalog.Checkout.WearAfterPurchase,Usar após a compra
 Feature.Catalog.Description.AttributionAlertBody,Você sairá desta área e entrará em {experienceName}.
+Feature.Catalog.Feature.Catalog.Label.AvatarBackgrounds,
 Feature.Catalog.Feature.Catalog.Label.ClassicShirt,
 Feature.Catalog.Feature.Catalog.Label.ClassicTShirt,
 Feature.Catalog.Feature.Catalog.Label.TotalItems,Total: {itemCount} itens
@@ -3640,6 +3653,7 @@ Feature.InExperienceIntervention.Label.TimeLeft.Day.Singular,
 Feature.InExperienceIntervention.Label.TimeLeft.Hours,Restam {time}
 Feature.InExperienceShop.Description.RobuxPurchaseLegalDisclosure,"Ao comprar Robux, você concorda com nossos {termsLinkStart}Termos de Uso{termsLinkEnd}, incluindo a cláusula de arbitragem e a política de revogação."
 Feature.InExperienceShop.GamePass,
+Feature.InExperienceShop.Label.Active,
 Feature.InExperienceShop.Label.BonusItem,Item bônus
 Feature.InExperienceShop.Label.DescriptionWithTime,{description} {timeRemaining}
 Feature.InExperienceShop.Label.EndTime,Termina em {timeRemaining}
@@ -3839,6 +3853,7 @@ Feature.Moments.Title.MomentRemoved,Momento removido
 Feature.Moments.Title.PostInsights,Título do cabeçalho da página
 Feature.Moments.Title.ReportPost,Denunciar publicação
 Feature.Moments.Tooltip.Creation,Todos na experiência podem ver seus Momentos.
+Feature.Moments.Tooltip.PostInsightsBody,"Confira as visualizações, o tempo de visualização e como o Momento foi recebido pelo seu público."
 Feature.Moments.Tooltip.PostInsightsTitle,Seus insights do Momento estão aqui
 Feature.Moments.Tooltip.ShareFirstMomentBody,Crie um Momento a partir das suas capturas
 Feature.Moments.Tooltip.ShareFirstMomentTitle,Compartilhe seu primeiro Momento

@@ -114,6 +114,7 @@ Authentication.SignUp.Button.OKCaptialized,OK
 Authentication.SignUp.Button.RetryLogIn,Erneut anmelden
 Authentication.SignUp.Description.AccountAlreadyLinked,"Dein {platformAccountName}-Konto ist bereits mit einem Roblox-Konto verlinkt. Bitte versuche erneut, dich anzumelden."
 Authentication.SignUp.Description.BirthdayHint,Datum eingeben
+Authentication.SignUp.Description.OptInMarketingEmailConsent,Ich möchte E-Mails von Roblox über Neuigkeiten und Angebote erhalten.
 Authentication.SignUp.Description.SignUpAgreement.CreateAnAccount,"Wenn du ein Konto erstellst, stimmst du unseren {startTermsTag}Bedingungen{endTermsTag}, einschließlich Schiedsverfahren, zu und erkennst unsere {startPrivacyTag}Datenschutzrichtlinie{endPrivacyTag} an. Wenn du unter 18 Jahre alt bist, muss ein Elternteil oder Erziehungsberechtigter dein Konto genehmigen und unseren Bedingungen zustimmen."
 Authentication.SignUp.Description.Try,Versuchen
 Authentication.SignUp.Description.UsernameChanged,"Erledigt! Dein Konto ist bereit und mit {platform} verknüpft. Respawne jetzt, um deinen aktualisierten Benutzernamen im Spiel zu sehen. Ansonsten wird er erst beim nächsten Mal verwendet."
@@ -1466,8 +1467,11 @@ Feature.Avatar.Heading.SharePublicAvatar,Teile deinen Avatar
 Feature.Avatar.Heading.SortBy,Sortieren nach
 Feature.Avatar.Heading.UsedName,Benutzter Name
 Feature.Avatar.Heading.WearConfirmation,Item tragen
+Feature.Avatar.HeroWidget.BundleHeadlessTitle,Letzte Chance für den kopflosen Reiter
 Feature.Avatar.HeroWidget.BundleTitle,Korblox Paktbrecher
 Feature.Avatar.HeroWidget.CapsuleDescription,Drei neue Versionen von Roblox-Originalen
+Feature.Avatar.HeroWidget.CapsuleHalloweenDescription,Neue Artikel nur für die gruselige Jahreszeit
+Feature.Avatar.HeroWidget.CapsuleHalloweenTitle,Wie gemacht für Halloween
 Feature.Avatar.HeroWidget.CapsulePoolDescription,"Drei neue Artikel, die Wellen schlagen"
 Feature.Avatar.HeroWidget.CapsulePoolTitle,Pool-Party
 Feature.Avatar.HeroWidget.CapsuleTitle,Neu interpretierte Klassiker
@@ -2073,6 +2077,8 @@ Feature.Build.Description.GameConfiguration,"Ändere die Art und Weise, wie du A
 Feature.Build.Description.GameCreationDone,"Ich habe die Erstellung und Veröffentlichung deines Spiels abgeschlossen. Du kannst es öffnen, um es zu testen."
 Feature.Build.Description.GameSavedPlaytest,"Ich habe die Erstellung deines Spiels abgeschlossen und eine neue Version gespeichert. Du kannst es öffnen, um es zu testen."
 Feature.Build.Description.HubSettings,Verwalte alle Einstellungen im Creator Hub
+Feature.Build.Description.InternalSpec,Für die neueste Spezifikation leer lassen
+Feature.Build.Description.InternalTesting,Probiere neue Modellspezifikationen aus
 Feature.Build.Description.InviteFriendLimit,"Lade bis zu {MAX_INVITES} Freunde zum Spielen ein, während du etwas erstellst."
 Feature.Build.Description.LongAdCampaign,"Mehr Zeit, um neue Spieler zu erreichen und sie zum Zurückkommen zu bewegen."
 Feature.Build.Description.MakeAudienceAvail,"Veröffentliche deine Experience, um sie für diese Zielgruppe verfügbar zu machen."
@@ -2167,6 +2173,7 @@ Feature.Build.Label.FreeBuildUsage,Kostenloses Build-Kontingent
 Feature.Build.Label.Friends,
 Feature.Build.Label.FriendsOnly,Nur Freunde
 Feature.Build.Label.GamePlays,Spielaufrufe
+Feature.Build.Label.GamesTab,
 Feature.Build.Label.GetMoreBuildUsage,Mehr Build-Kontingent holen
 Feature.Build.Label.GroupGames,Gruppenspiele
 Feature.Build.Label.Groups,Gruppen
@@ -2175,6 +2182,8 @@ Feature.Build.Label.IconThumbnails,Symbol und Vorschaubilder
 Feature.Build.Label.Images2D,2D-Bilder
 Feature.Build.Label.InProgress,In Arbeit
 Feature.Build.Label.InputNeeded,Eingabe erforderlich
+Feature.Build.Label.InternalSpec,Interne Spezifikation
+Feature.Build.Label.InternalTesting,Interner Test
 Feature.Build.Label.InviteCount,{COUNT}/{MAX_INVITES}
 Feature.Build.Label.Limited,Limitiert
 Feature.Build.Label.Live,Veröffentlicht
@@ -2195,6 +2204,7 @@ Feature.Build.Label.OnSale,Im Verkauf
 Feature.Build.Label.Pending,Ausstehend
 Feature.Build.Label.PercentUsed,{PERCENT} % verwendet
 Feature.Build.Label.PlayTime,Spielzeit
+Feature.Build.Label.PreviewsTab,
 Feature.Build.Label.PreviouslyPublished,Zuvor veröffentlicht
 Feature.Build.Label.Price,Preis
 Feature.Build.Label.PriceUnavailable,--
@@ -2405,6 +2415,7 @@ Feature.Build.Notification.Title.Finished,Build abgeschlossen
 Feature.Build.Notification.Title.NeedInput,Build benötigt deine Eingabe
 Feature.Build.Placeholder.DescribeProduct,"Beschreibe, was du verkaufen möchtest"
 Feature.Build.Placeholder.DescribeProductUpdate,Beschreibe ein Update
+Feature.Build.Placeholder.InternalSpec,internal_code
 Feature.Build.Prompt.CreateDeveloperProduct,"Hilf mir, ein Entwicklerprodukt zu erstellen, es in das Spiel einzubinden, die Änderungen zu prüfen und zu veröffentlichen und es zum Kauf anzubieten."
 Feature.Build.Title.AdActive,Werbekampagne ist aktiv
 Feature.Build.Title.AdCampaignDuration,{durationDays}-tägige Werbekampagne
@@ -2571,6 +2582,7 @@ Feature.Catalog.AvatarWidgetTitle,
 Feature.Catalog.Checkout.Title.PurchasedFailedPlural,{count} Artikel konnten nicht gekauft werden
 Feature.Catalog.Checkout.WearAfterPurchase,Nach dem Kauf tragen
 Feature.Catalog.Description.AttributionAlertBody,Du wirst diesen Bereich verlassen und {experienceName} beitreten.
+Feature.Catalog.Feature.Catalog.Label.AvatarBackgrounds,
 Feature.Catalog.Feature.Catalog.Label.ClassicShirt,
 Feature.Catalog.Feature.Catalog.Label.ClassicTShirt,
 Feature.Catalog.Feature.Catalog.Label.TotalItems,Gesamt: {itemCount} Artikel
@@ -3569,6 +3581,7 @@ Feature.InExperienceIntervention.Label.TimeLeft.Day.Singular,
 Feature.InExperienceIntervention.Label.TimeLeft.Hours,Noch {time}
 Feature.InExperienceShop.Description.RobuxPurchaseLegalDisclosure,"Durch den Kauf von Robux erklärst du dich mit unseren {termsLinkStart}Nutzungsbedingungen{termsLinkEnd}, einschließlich der Schiedsklausel und der Widerrufsbelehrung, einverstanden."
 Feature.InExperienceShop.GamePass,
+Feature.InExperienceShop.Label.Active,
 Feature.InExperienceShop.Label.BonusItem,Bonusartikel
 Feature.InExperienceShop.Label.DescriptionWithTime,{description} {timeRemaining}
 Feature.InExperienceShop.Label.EndTime,Endet in {timeRemaining}
@@ -3768,6 +3781,7 @@ Feature.Moments.Title.MomentRemoved,Moment entfernt
 Feature.Moments.Title.PostInsights,Titel der Seitenkopfzeile
 Feature.Moments.Title.ReportPost,Post melden
 Feature.Moments.Tooltip.Creation,Jeder in der Experience kann deine Moments sehen.
+Feature.Moments.Tooltip.PostInsightsBody,"Überprüfe die Aufrufe, die Wiedergabezeit und wie der Moment bei deiner Zielgruppe angekommen ist."
 Feature.Moments.Tooltip.PostInsightsTitle,Die Einblicke für deinen Moment sind da
 Feature.Moments.Tooltip.ShareFirstMomentBody,Erstelle einen Moment aus deinen Aufnahmen
 Feature.Moments.Tooltip.ShareFirstMomentTitle,Teile deinen ersten Moment

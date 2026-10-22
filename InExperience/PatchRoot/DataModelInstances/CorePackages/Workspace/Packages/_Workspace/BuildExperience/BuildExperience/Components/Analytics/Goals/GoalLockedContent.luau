@@ -9,13 +9,17 @@ local View = FoundationModule.View
 local ButtonVariant = FoundationModule.Enums.ButtonVariant
 local FillBehavior = FoundationModule.Enums.FillBehavior
 local InputSize = FoundationModule.Enums.InputSize
+local _ = require(BuildExperience.Analytics.Goals.GoalLockedActionId)
 local _ = require(BuildExperience.Analytics.Goals.GoalTypes)
+local UseGoalLockedTelemetryModule = require(script.Parent.useGoalLockedTelemetry)
 
 return function(p1)
-	-- upvalues: UseLocalizationFunction (copy), ReactModule (copy), Button (copy), InputSize (copy), ButtonVariant (copy), FillBehavior (copy), View (copy), Text (copy)
+	-- upvalues: UseLocalizationFunction (copy), UseGoalLockedTelemetryModule (copy), ReactModule (copy), Button (copy), InputSize (copy), ButtonVariant (copy), FillBehavior (copy), View (copy), Text (copy)
 	local TestId = p1.testId or "GoalLockedContent"
 	local Locked = p1.locked
 	local Actions = Locked.actions
+	local GoalId = p1.goalId
+	local UniverseId = p1.universeId
 	
 	local function _(p2)
 		-- upvalues: p1 (copy)
@@ -60,17 +64,22 @@ return function(p1)
 		end
 	end
 	local config = { message = Locked.messageKey }
+	local Id = nil
+	local Id1 = nil
 	
 	if Primary ~= nil and v1 ~= nil then
 		config.primary = Primary.textKey
+		Id = Primary.id
 	end
 	if Secondary ~= nil and v2 ~= nil then
 		config.secondary = Secondary.textKey
+		Id1 = Secondary.id
 	end
 	local UseLocalizationResult = UseLocalizationFunction(config)
+	local UseGoalLockedTelemetryModuleResult = UseGoalLockedTelemetryModule(UniverseId, GoalId, Id, Id1)
 	local t = {}
 	
-	if v1 ~= nil then
+	if Primary ~= nil and v1 ~= nil then
 		t.Primary = ReactModule.createElement(Button, {
 			LayoutOrder = 1,
 			text = UseLocalizationResult.primary,
@@ -78,11 +87,15 @@ return function(p1)
 			variant = ButtonVariant.SoftEmphasis,
 			fillBehavior = FillBehavior.Fill,
 			width = UDim.new(1, 0),
-			onActivated = v1.onActivate,
+			onActivated = function()
+				-- upvalues: UseGoalLockedTelemetryModuleResult (copy), Primary (ref), v1 (ref)
+				UseGoalLockedTelemetryModuleResult("primary", Primary.id)
+				v1.onActivate()
+			end,
 			testId = `{TestId}.Primary`
 		})
 		
-		if v2 ~= nil then
+		if Secondary ~= nil and v2 ~= nil then
 			t.Secondary = ReactModule.createElement(Button, {
 				LayoutOrder = 2,
 				text = UseLocalizationResult.secondary,
@@ -90,7 +103,11 @@ return function(p1)
 				variant = ButtonVariant.Standard,
 				fillBehavior = FillBehavior.Fill,
 				width = UDim.new(1, 0),
-				onActivated = v2.onActivate,
+				onActivated = function()
+					-- upvalues: UseGoalLockedTelemetryModuleResult (copy), Secondary (ref), v2 (ref)
+					UseGoalLockedTelemetryModuleResult("secondary", Secondary.id)
+					v2.onActivate()
+				end,
 				testId = `{TestId}.Secondary`
 			})
 		end

@@ -55,7 +55,7 @@ return function(p1)
 	})
 	
 	if FFlagBuildExperienceMonetizationNativeUIModule then
-		UseBuildPromptDraftModule(UniverseId, p1.sessionId, UseChatSessionCoreModuleResult.setComposerText, UseChatSessionCoreModuleResult.sendMessage, NoIsOpen and not UseSignalStateResult, if FFlagBuildExperienceDeveloperProductContextModule then UseChatSessionCoreModuleResult else nil)
+		UseBuildPromptDraftModule(UniverseId, p1.sessionId, UseChatSessionCoreModuleResult.setPrefilledComposerText, UseChatSessionCoreModuleResult.sendMessage, NoIsOpen and not UseSignalStateResult, if FFlagBuildExperienceDeveloperProductContextModule then UseChatSessionCoreModuleResult else nil)
 	end
 	local ChatSheetPlaytestCta = UseChatPlaytestFooterModule(UseChatSessionCoreModuleResult, "ChatSheetPlaytestCta")
 	

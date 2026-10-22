@@ -19,5 +19,6 @@ return {
 	settings = require(script.settings.v1beta1),
 	shared = require(script.shared.v1beta1),
 	spotlightcollection = require(script.spotlightcollection.v1beta1),
-	templates = require(script.templates.v1beta1)
+	templates = require(script.templates.v1beta1),
+	userlibrary = require(script.userlibrary.v1beta1)
 }

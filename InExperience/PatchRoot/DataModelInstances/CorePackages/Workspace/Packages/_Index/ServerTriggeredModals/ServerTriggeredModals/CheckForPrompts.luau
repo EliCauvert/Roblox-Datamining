@@ -40,6 +40,7 @@ return ReactModule.memo((require(Parent.RoactNavigation).withNavigationFocus(fun
 			clearOnEmptyResponse = true,
 			clientAttributes = nil,
 			replaceOnFetch = nil,
+			promptStyles = nil,
 			entryPoint = PromptsEntryPointModule.HomepageLaunch,
 			allowNoConfigsBuilt = if FFlagSduiAllowNoConfigsBuilt then true else nil,
 			loadTimer = SduiLoadTimer.createLoadTimer("HomepagePrompts")

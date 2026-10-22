@@ -35,11 +35,11 @@ return function(Frame)
 	
 	if FFlagBuildExperienceModelPickerModule then
 		ReactModule.useEffect(function()
-			-- upvalues: UseStateResult (copy), IsSelected (copy), UseStateResult2 (copy)
-			if UseStateResult == "spec" and not IsSelected then
+			-- upvalues: UseStateResult (copy), Frame (copy), IsSelected (copy), UseStateResult2 (copy)
+			if UseStateResult ~= nil and (Frame.isDisabled or UseStateResult == "spec" and not IsSelected) then
 				UseStateResult2(nil)
 			end
-		end, { UseStateResult, IsSelected })
+		end, { UseStateResult, IsSelected, Frame.isDisabled })
 	end
 	local UseResult = ReactModule.useCallback(function()
 		-- upvalues: IsPicker (copy), Frame (copy), InternalTesting (copy)
@@ -99,38 +99,38 @@ return function(Frame)
 	local Options = {}
 	
 	for _, option in Frame.data.options do
-		local AdvancedLabel = UseLocalizationResult.unavailable
+		local Unavailable1 = UseLocalizationResult.unavailable
 		local AdvancedDescription = nil
 		
 		if option.model == "Default" then
-			AdvancedLabel = UseLocalizationResult.defaultLabel
+			Unavailable1 = UseLocalizationResult.defaultLabel
 			AdvancedDescription = UseLocalizationResult.defaultDescription
 		elseif option.model == "Advanced" then
-			AdvancedLabel = UseLocalizationResult.advancedLabel
+			Unavailable1 = UseLocalizationResult.advancedLabel
 			AdvancedDescription = UseLocalizationResult.advancedDescription
 		end
 		table.insert(Options, {
 			id = option.id,
 			model = option.model,
 			isAvailable = option.isAvailable,
-			label = AdvancedLabel,
+			label = Unavailable1,
 			description = AdvancedDescription
 		})
 	end
-	local Title = UseLocalizationResult.title
+	local Unavailable = UseLocalizationResult.title
 	
 	if Frame.selectedId ~= nil then
-		Title = UseLocalizationResult.unavailable
+		Unavailable = UseLocalizationResult.unavailable
 		
 		for _, option1 in Options do
 			if option1.id == Frame.selectedId then
-				Title = option1.label
+				Unavailable = option1.label
 				break
 			end
 		end
 	end
 	if IsSelected then
-		Title = UseLocalizationResult.internalLabel
+		Unavailable = UseLocalizationResult.internalLabel
 	end
 	return {
 		internalTesting = if InternalTesting then {
@@ -152,7 +152,7 @@ return function(Frame)
 		selectedId = Frame.selectedId,
 		isDisabled = Frame.isDisabled,
 		LayoutOrder = Frame.LayoutOrder,
-		label = Title,
+		label = Unavailable,
 		title = UseLocalizationResult.title,
 		unavailableText = UseLocalizationResult.unavailable,
 		isOpen = IsPicker,

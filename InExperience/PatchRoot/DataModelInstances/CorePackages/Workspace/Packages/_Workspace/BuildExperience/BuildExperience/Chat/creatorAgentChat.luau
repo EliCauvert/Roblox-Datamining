@@ -18,6 +18,10 @@ local ProposePlanControllerModule = require(script.Parent.proposePlanController)
 local AskManageDevProductControllerModule = if FFlagBuildExperienceManageDevProductModule then require(script.Parent.askManageDevProductController) else nil
 local FFlagBuildExperienceManageDevProductModule1 = SharedFlagsModule.FFlagBuildExperienceManageGamePass and FFlagBuildExperienceManageDevProductModule
 local AskManageGamePassControllerModule = if FFlagBuildExperienceManageDevProductModule1 then require(script.Parent.askManageGamePassController) else nil
+local FFlagBuildExperienceManageDevProductModule2 = SharedFlagsModule.FFlagBuildExperienceManageSubscription and FFlagBuildExperienceManageDevProductModule
+local FFlagBuildExperienceManageDevProductModule1_1 = FFlagBuildExperienceManageDevProductModule1 or FFlagBuildExperienceManageDevProductModule2
+local AskManageSubscriptionControllerModule = if FFlagBuildExperienceManageDevProductModule2 then require(script.Parent.askManageSubscriptionController) else nil
+local UnifiedMonetizationToolModule = require(script.Parent.unifiedMonetizationTool)
 local CreatePromptLifecycleTelemetryModule = require(BuildExperience.Telemetry.createPromptLifecycleTelemetry)
 local SendBuildExperienceEventModule = require(BuildExperience.Telemetry.sendBuildExperienceEvent)
 local FFlagBuildEventsUpdate1Module = require(BuildExperience.Flags.FFlagBuildEventsUpdate1)
@@ -27,6 +31,7 @@ local StudioClientLogsTool = CreatorAgentChatModule.StudioClientLogsTool
 local StudioProposePlanTool = CreatorAgentChatModule.StudioProposePlanTool
 local StudioManageDevProductTool = CreatorAgentChatModule.StudioManageDevProductTool
 local StudioManageGamePassTool = CreatorAgentChatModule.StudioManageGamePassTool
+local StudioManageSubscriptionTool = CreatorAgentChatModule.StudioManageSubscriptionTool
 local Debug = CreatorAgentChatModule.debug
 local TurnStateReducer = CreatorAgentChatModule.TurnStateReducer
 local ErrorCodes = CreatorAgentChatModule.ErrorCodes
@@ -249,25 +254,28 @@ local _ = function(p2)
 end
 
 local function createLocalToolControllers(p2, p3, p4)
-	-- upvalues: LocalToolOverlayModule (copy), AskUserControllerModule (copy), ProposePlanControllerModule (copy), ClientLogsControllerModule (copy), ClientDataModelControllerModule (copy), AskManageDevProductControllerModule (copy), FFlagBuildExperienceManageDevProductModule1 (copy), AskManageGamePassControllerModule (copy), FFlagBuildExperienceManageDevProductModule1 (copy)
+	-- upvalues: LocalToolOverlayModule (copy), AskUserControllerModule (copy), ProposePlanControllerModule (copy), ClientLogsControllerModule (copy), ClientDataModelControllerModule (copy), AskManageDevProductControllerModule (copy), UnifiedMonetizationToolModule (copy), FFlagBuildExperienceManageDevProductModule1 (copy), AskManageGamePassControllerModule (copy), FFlagBuildExperienceManageDevProductModule2 (copy), AskManageSubscriptionControllerModule (copy), FFlagBuildExperienceManageDevProductModule1_1 (copy)
 	local t = {}
 	local LocalToolOverlayModuleResult = LocalToolOverlayModule()
 	local AskUserControllerModuleResult = AskUserControllerModule(p2, t, LocalToolOverlayModuleResult, p3)
 	local ProposePlanControllerModuleResult = ProposePlanControllerModule(p2, t, LocalToolOverlayModuleResult, p3)
 	local ClientLogsControllerModuleResult = ClientLogsControllerModule(p2, t, p4)
 	local ClientDataModelControllerModuleResult = if ClientDataModelControllerModule == nil then nil else ClientDataModelControllerModule(p2, t, p4)
-	local AskManageDevProductControllerModuleResult = if AskManageDevProductControllerModule == nil then nil else AskManageDevProductControllerModule(p2, t, LocalToolOverlayModuleResult, p3)
+	local AskManageDevProductControllerModuleResult = if AskManageDevProductControllerModule == nil then nil else AskManageDevProductControllerModule(p2, t, LocalToolOverlayModuleResult, p3, UnifiedMonetizationToolModule.toolsByKind.developerProduct)
 	local List = {}
 	
 	if FFlagBuildExperienceManageDevProductModule1 then
 		table.insert(List, AskManageGamePassControllerModule(p2, t, LocalToolOverlayModuleResult, p3))
+	end
+	if FFlagBuildExperienceManageDevProductModule2 then
+		table.insert(List, AskManageSubscriptionControllerModule(p2, t, LocalToolOverlayModuleResult, p3))
 	end
 	return {
 		getOptimisticLocalTools = LocalToolOverlayModuleResult.getOptimisticLocalTools,
 		getLocalToolActions = LocalToolOverlayModuleResult.getLocalToolActions,
 		hasDisplayedAnswerStack = AskUserControllerModuleResult.hasDisplayedAnswerStack,
 		syncFromTurnState = function(p5)
-			-- upvalues: AskUserControllerModuleResult (copy), ProposePlanControllerModuleResult (copy), ClientLogsControllerModuleResult (copy), ClientDataModelControllerModuleResult (copy), AskManageDevProductControllerModuleResult (copy), FFlagBuildExperienceManageDevProductModule1 (upval), List (copy)
+			-- upvalues: AskUserControllerModuleResult (copy), ProposePlanControllerModuleResult (copy), ClientLogsControllerModuleResult (copy), ClientDataModelControllerModuleResult (copy), AskManageDevProductControllerModuleResult (copy), FFlagBuildExperienceManageDevProductModule1_1 (upval), List (copy)
 			AskUserControllerModuleResult.syncAnswerStack(p5)
 			ProposePlanControllerModuleResult.syncPlanProposal(p5)
 			ClientLogsControllerModuleResult.syncClientLogsRequest(p5)
@@ -278,15 +286,15 @@ local function createLocalToolControllers(p2, p3, p4)
 			if AskManageDevProductControllerModuleResult ~= nil then
 				AskManageDevProductControllerModuleResult.syncManageDevProductRequests(p5)
 			end
-			if FFlagBuildExperienceManageDevProductModule1 then
+			if FFlagBuildExperienceManageDevProductModule1_1 then
 				for _, value in List do
 					value.syncRequests(p5)
 				end
 			end
 		end,
 		trySubmitComposerText = function(p6)
-			-- upvalues: FFlagBuildExperienceManageDevProductModule1 (upval), AskUserControllerModuleResult (copy), ProposePlanControllerModuleResult (copy), AskManageDevProductControllerModuleResult (copy), List (copy)
-			if not FFlagBuildExperienceManageDevProductModule1 then
+			-- upvalues: FFlagBuildExperienceManageDevProductModule1_1 (upval), AskUserControllerModuleResult (copy), ProposePlanControllerModuleResult (copy), AskManageDevProductControllerModuleResult (copy), List (copy)
+			if not FFlagBuildExperienceManageDevProductModule1_1 then
 				return AskUserControllerModuleResult.trySubmitComposerText(p6) or (ProposePlanControllerModuleResult.trySubmitComposerText(p6) or AskManageDevProductControllerModuleResult ~= nil and AskManageDevProductControllerModuleResult.trySubmitComposerText(p6))
 			end
 			if AskUserControllerModuleResult.trySubmitComposerText(p6) or ProposePlanControllerModuleResult.trySubmitComposerText(p6) or AskManageDevProductControllerModuleResult ~= nil and AskManageDevProductControllerModuleResult.trySubmitComposerText(p6) then
@@ -301,7 +309,7 @@ local function createLocalToolControllers(p2, p3, p4)
 		end,
 		trySubmitAnswerText = AskUserControllerModuleResult.trySubmitAnswerText,
 		stopPending = function()
-			-- upvalues: AskUserControllerModuleResult (copy), ProposePlanControllerModuleResult (copy), ClientDataModelControllerModuleResult (copy), AskManageDevProductControllerModuleResult (copy), FFlagBuildExperienceManageDevProductModule1 (upval), List (copy)
+			-- upvalues: AskUserControllerModuleResult (copy), ProposePlanControllerModuleResult (copy), ClientDataModelControllerModuleResult (copy), AskManageDevProductControllerModuleResult (copy), FFlagBuildExperienceManageDevProductModule1_1 (upval), List (copy)
 			AskUserControllerModuleResult.stopPendingAnswer()
 			ProposePlanControllerModuleResult.stopPendingPlan()
 			
@@ -311,7 +319,7 @@ local function createLocalToolControllers(p2, p3, p4)
 			if AskManageDevProductControllerModuleResult ~= nil then
 				AskManageDevProductControllerModuleResult.stopPending()
 			end
-			if FFlagBuildExperienceManageDevProductModule1 then
+			if FFlagBuildExperienceManageDevProductModule1_1 then
 				for _, value in List do
 					value.stopPending()
 				end
@@ -322,7 +330,7 @@ end
 
 return {
 	createLiveAssistantTurn = function(p7, Prompt, Callback3, p8, p9, Callback, Callback1)
-		-- upvalues: createLocalToolControllers (copy), StudioAskUserTool (copy), StudioProposePlanTool (copy), StudioClientLogsTool (copy), FFlagBuildExperienceClientDataModelTools (copy), StudioClientDataModelTools (copy), FFlagBuildExperienceManageDevProductModule (copy), StudioManageDevProductTool (copy), FFlagBuildExperienceManageDevProductModule1 (copy), StudioManageGamePassTool (copy), FFlagBuildExperiencePromptFailureTelemetry (copy), CreatePromptLifecycleTelemetryModule (copy), SendBuildExperienceEventModule (copy), FFlagBuildEventsUpdate1Module (copy), FFlagBuildExperienceLibrary (copy), resolvePromptFailure (copy), Debug (copy), getPromptFailureTelemetryParameters (copy), LocalizationStringsModule (copy), config1 (copy), trackPromptActivity (copy)
+		-- upvalues: createLocalToolControllers (copy), StudioAskUserTool (copy), StudioProposePlanTool (copy), StudioClientLogsTool (copy), FFlagBuildExperienceClientDataModelTools (copy), StudioClientDataModelTools (copy), UnifiedMonetizationToolModule (copy), FFlagBuildExperienceManageDevProductModule (copy), StudioManageDevProductTool (copy), FFlagBuildExperienceManageDevProductModule1 (copy), StudioManageGamePassTool (copy), FFlagBuildExperienceManageDevProductModule2 (copy), StudioManageSubscriptionTool (copy), FFlagBuildExperiencePromptFailureTelemetry (copy), CreatePromptLifecycleTelemetryModule (copy), SendBuildExperienceEventModule (copy), FFlagBuildEventsUpdate1Module (copy), FFlagBuildExperienceLibrary (copy), resolvePromptFailure (copy), Debug (copy), getPromptFailureTelemetryParameters (copy), LocalizationStringsModule (copy), config1 (copy), trackPromptActivity (copy)
 		local LocalToolControllers = createLocalToolControllers(p7, p8, p9)
 		local UniverseId = p7.universeId
 		local List = {
@@ -335,11 +343,18 @@ return {
 			table.insert(List, StudioClientDataModelTools.SEARCH_LOCAL_TOOL_DEFINITION)
 			table.insert(List, StudioClientDataModelTools.INSPECT_LOCAL_TOOL_DEFINITION)
 		end
-		if FFlagBuildExperienceManageDevProductModule then
-			table.insert(List, StudioManageDevProductTool.LOCAL_TOOL_DEFINITION)
-		end
-		if FFlagBuildExperienceManageDevProductModule1 then
-			table.insert(List, StudioManageGamePassTool.LOCAL_TOOL_DEFINITION)
+		if UnifiedMonetizationToolModule.localToolDefinition == nil then
+			if FFlagBuildExperienceManageDevProductModule then
+				table.insert(List, StudioManageDevProductTool.LOCAL_TOOL_DEFINITION)
+			end
+			if FFlagBuildExperienceManageDevProductModule1 then
+				table.insert(List, StudioManageGamePassTool.LOCAL_TOOL_DEFINITION)
+			end
+			if FFlagBuildExperienceManageDevProductModule2 then
+				table.insert(List, StudioManageSubscriptionTool.LOCAL_TOOL_DEFINITION)
+			end
+		else
+			table.insert(List, UnifiedMonetizationToolModule.localToolDefinition)
 		end
 		local PromptLifecycleTelemetryModule = if FFlagBuildExperiencePromptFailureTelemetry then CreatePromptLifecycleTelemetryModule(function()
 			-- upvalues: UniverseId (copy), p7 (copy)

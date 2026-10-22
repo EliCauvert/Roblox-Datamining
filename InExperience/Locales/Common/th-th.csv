@@ -98,6 +98,7 @@ Authentication.SignUp.Button.OKCaptialized,ตกลง
 Authentication.SignUp.Button.RetryLogIn,ลองเข้าสู่ระบบอีกครั้ง
 Authentication.SignUp.Description.AccountAlreadyLinked,บัญชีสำหรับ {platformAccountName} ของคุณเชื่อมโยงกับบัญชี Roblox อยู่แล้ว โปรดลองลงชื่อเข้าใช้อีกครั้ง
 Authentication.SignUp.Description.BirthdayHint,กรอกวันที่
+Authentication.SignUp.Description.OptInMarketingEmailConsent,ฉันต้องการรับอีเมลข่าวสารและข้อเสนอจาก Roblox
 Authentication.SignUp.Description.SignUpAgreement.CreateAnAccount,การสร้างบัญชีถือว่าคุณยอมรับ{startTermsTag}ข้อกำหนด{endTermsTag}ของเรา รวมถึงอนุญาโตตุลาการ และรับทราบ{startPrivacyTag}นโยบายความเป็นส่วนตัว{endPrivacyTag}ของเรา หากคุณมีอายุต่ำกว่า 18 ปี พ่อแม่หรือผู้ปกครองของคุณต้องอนุญาตให้คุณสร้างบัญชีและยอมรับข้อกำหนดของเรา
 Authentication.SignUp.Description.Try,
 Authentication.SignUp.Description.UsernameChanged,เรียบร้อยแล้ว! บัญชีของคุณพร้อมใช้งานและเชื่อมโยงกับ {platform} แล้ว เกิดใหม่ตอนนี้เลย แล้วมาดูชื่อผู้ใช้ที่อัปเดตในเกมกัน หรือจะใช้ในครั้งต่อไปก็ได้
@@ -773,6 +774,7 @@ CoreScripts.InGameMenu.Controls.CameraMovementTitle,การเคลื่อ�
 CoreScripts.InGameMenu.Controls.CameraZoomGamepad,ซูมกล้อง
 CoreScripts.InGameMenu.Controls.CharacterMovementTitle,การควบคุมอวาตาร์
 CoreScripts.InGameMenu.Controls.Chat,
+CoreScripts.InGameMenu.Controls.ControlsPage,การควบคุม
 CoreScripts.InGameMenu.Controls.DevConsole,คอนโซลนักพัฒนา
 CoreScripts.InGameMenu.Controls.DownArrow,ลูกศรลง
 CoreScripts.InGameMenu.Controls.DropTool,ละทิ้งอุปกรณ์
@@ -1520,8 +1522,11 @@ Feature.Avatar.Heading.SharePublicAvatar,แชร์อวาตาร์ขอ
 Feature.Avatar.Heading.SortBy,เรียงลำดับตาม
 Feature.Avatar.Heading.UsedName,ชื่อนี้ถูกใช้ไปแล้ว
 Feature.Avatar.Heading.WearConfirmation,สวมไอเท็มนี้
+Feature.Avatar.HeroWidget.BundleHeadlessTitle,โอกาสสุดท้ายที่จะรับ Headless Horseman
 Feature.Avatar.HeroWidget.BundleTitle,Korblox Pactbreaker
 Feature.Avatar.HeroWidget.CapsuleDescription,3 ไอเท็มคลาสสิกของ Roblox ในโฉมใหม่
+Feature.Avatar.HeroWidget.CapsuleHalloweenDescription,ไอเท็มใหม่สำหรับเทศกาลหลอนโดยเฉพาะ
+Feature.Avatar.HeroWidget.CapsuleHalloweenTitle,จัดมาเพื่อฮาโลวีน
 Feature.Avatar.HeroWidget.CapsulePoolDescription,3 ไอเท็มใหม่สำหรับสนุกในสระ
 Feature.Avatar.HeroWidget.CapsulePoolTitle,ปาร์ตี้ริมสระว่ายน้ำ
 Feature.Avatar.HeroWidget.CapsuleTitle,ไอเท็มคลาสสิกโฉมใหม่
@@ -2127,6 +2132,8 @@ Feature.Build.Description.GameConfiguration,เปลี่ยนวิธีข
 Feature.Build.Description.GameCreationDone,ฉันสร้างและเผยแพร่เกมของคุณเรียบร้อยแล้ว คุณสามารถเปิดเพื่อทดลองเล่นได้
 Feature.Build.Description.GameSavedPlaytest,ฉันสร้างเกมของคุณและบันทึกเวอร์ชันใหม่เรียบร้อยแล้ว คุณสามารถเปิดเพื่อทดลองเล่นได้
 Feature.Build.Description.HubSettings,จัดการการตั้งค่าทั้งหมดในศูนย์กลางครีเอเตอร์
+Feature.Build.Description.InternalSpec,เว้นว่างไว้เพื่อใช้สเปกล่าสุด
+Feature.Build.Description.InternalTesting,ลองใช้สเปกโมเดลใหม่
 Feature.Build.Description.InviteFriendLimit,เชิญเพื่อนมาเล่นได้สูงสุด {MAX_INVITES} คนระหว่างที่คุณสร้าง
 Feature.Build.Description.LongAdCampaign,มีเวลามากขึ้นในการเข้าถึงผู้เล่นใหม่และทำให้ผู้เล่นกลับมาอีกครั้ง
 Feature.Build.Description.MakeAudienceAvail,เผยแพร่ประสบการณ์ของคุณเพื่อให้กลุ่มเป้าหมายนี้สามารถใช้งานได้
@@ -2221,6 +2228,7 @@ Feature.Build.Label.FreeBuildUsage,โควต้าการใช้งาน
 Feature.Build.Label.Friends,
 Feature.Build.Label.FriendsOnly,
 Feature.Build.Label.GamePlays,จำนวนการเล่นเกม
+Feature.Build.Label.GamesTab,
 Feature.Build.Label.GetMoreBuildUsage,รับโควต้าการใช้งาน Build เพิ่ม
 Feature.Build.Label.GroupGames,เกมของกลุ่ม
 Feature.Build.Label.Groups,กลุ่ม
@@ -2229,6 +2237,8 @@ Feature.Build.Label.IconThumbnails,ไอคอนและภาพขนาด
 Feature.Build.Label.Images2D,ภาพ 2D
 Feature.Build.Label.InProgress,อยู่ระหว่างดำเนินการ
 Feature.Build.Label.InputNeeded,ต้องกรอกข้อมูล
+Feature.Build.Label.InternalSpec,สเปกภายใน
+Feature.Build.Label.InternalTesting,การทดสอบภายใน
 Feature.Build.Label.InviteCount,{COUNT}/{MAX_INVITES}
 Feature.Build.Label.Limited,จำกัด
 Feature.Build.Label.Live,เผยแพร่แล้ว
@@ -2249,6 +2259,7 @@ Feature.Build.Label.OnSale,กำลังวางขายอยู่
 Feature.Build.Label.Pending,รอดำเนินการ
 Feature.Build.Label.PercentUsed,ใช้ไปแล้ว {PERCENT}%
 Feature.Build.Label.PlayTime,เวลาเล่น
+Feature.Build.Label.PreviewsTab,
 Feature.Build.Label.PreviouslyPublished,เผยแพร่ไปก่อนหน้านี้
 Feature.Build.Label.Price,ราคา
 Feature.Build.Label.PriceUnavailable,--
@@ -2459,6 +2470,7 @@ Feature.Build.Notification.Title.Finished,Build ทำเสร็จแล้�
 Feature.Build.Notification.Title.NeedInput,Build ต้องการอินพุตจากคุณ
 Feature.Build.Placeholder.DescribeProduct,อธิบายสิ่งที่คุณต้องการขาย
 Feature.Build.Placeholder.DescribeProductUpdate,อธิบายเกี่ยวกับการอัปเดต
+Feature.Build.Placeholder.InternalSpec,internal_code
 Feature.Build.Prompt.CreateDeveloperProduct,ช่วยฉันสร้างผลิตภัณฑ์นักพัฒนา เชื่อมโยงเข้ากับเกม ตรวจสอบและเผยแพร่การเปลี่ยนแปลง และเปิดให้ซื้อ
 Feature.Build.Title.AdActive,แคมเปญโฆษณาเปิดใช้งานอยู่
 Feature.Build.Title.AdCampaignDuration,แคมเปญโฆษณา {durationDays} วัน
@@ -2625,6 +2637,7 @@ Feature.Catalog.AvatarWidgetTitle,
 Feature.Catalog.Checkout.Title.PurchasedFailedPlural,ไม่สามารถซื้อไอเท็มได้ {count} รายการ
 Feature.Catalog.Checkout.WearAfterPurchase,
 Feature.Catalog.Description.AttributionAlertBody,คุณจะออกจากพื้นที่นี้และเข้าร่วม {experienceName}
+Feature.Catalog.Feature.Catalog.Label.AvatarBackgrounds,
 Feature.Catalog.Feature.Catalog.Label.ClassicShirt,
 Feature.Catalog.Feature.Catalog.Label.ClassicTShirt,
 Feature.Catalog.Feature.Catalog.Label.TotalItems,ทั้งหมด: {itemCount} ไอเท็ม
@@ -3623,6 +3636,7 @@ Feature.InExperienceIntervention.Label.TimeLeft.Day.Singular,
 Feature.InExperienceIntervention.Label.TimeLeft.Hours,เหลืออีก {time}
 Feature.InExperienceShop.Description.RobuxPurchaseLegalDisclosure,เมื่อคุณซื้อ Robux จะถือว่าคุณยอมรับ{termsLinkStart}ข้อกำหนดการใช้งาน{termsLinkEnd} รวมถึงข้อกำหนดการใช้อนุญาโตตุลาการและนโยบายเกี่ยวกับการเพิกถอน
 Feature.InExperienceShop.GamePass,
+Feature.InExperienceShop.Label.Active,
 Feature.InExperienceShop.Label.BonusItem,ไอเท็มโบนัส
 Feature.InExperienceShop.Label.DescriptionWithTime,{description} {timeRemaining}
 Feature.InExperienceShop.Label.EndTime,สิ้นสุดใน {timeRemaining}
@@ -3822,6 +3836,7 @@ Feature.Moments.Title.MomentRemoved,
 Feature.Moments.Title.PostInsights,ชื่อส่วนหัวของหน้า
 Feature.Moments.Title.ReportPost,รายงานโพสต์
 Feature.Moments.Tooltip.Creation,ทุกคนในประสบการณ์สามารถดูโมเมนต์ของคุณได้
+Feature.Moments.Tooltip.PostInsightsBody,ตรวจสอบยอดวิว ระยะเวลารับชม และผลตอบรับจากผู้ชมที่มีต่อโมเมนต์ของคุณ
 Feature.Moments.Tooltip.PostInsightsTitle,ข้อมูลเชิงลึกเกี่ยวกับโมเมนต์ของคุณพร้อมแล้ว
 Feature.Moments.Tooltip.ShareFirstMomentBody,สร้างโมเมนต์จากภาพที่คุณจับ
 Feature.Moments.Tooltip.ShareFirstMomentTitle,แชร์โมเมนต์แรกของคุณ

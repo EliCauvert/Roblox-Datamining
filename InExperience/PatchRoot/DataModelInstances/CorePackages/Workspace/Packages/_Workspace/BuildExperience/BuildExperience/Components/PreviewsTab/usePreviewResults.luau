@@ -20,26 +20,26 @@ local function toPreviewItem(p1)
 		universeId = p1.id,
 		experienceName = p1.name or "",
 		creatorName = if typeof(p1.creatorName) == "string" and p1.creatorName ~= "" then p1.creatorName else nil,
-		gameIcon = ThumbForUniverseIdModule(p1.id)
+		gameIcon = ThumbForUniverseIdModule(p1.id),
+		isGroupGame = p1.creatorType == "Group"
 	}
 end
 
-local function createSource(Creators, IsShared)
+local function createSource(Creators)
 	local Buffer = table.create(#Creators)
 	
 	for i, creator in Creators do
 		Buffer[i] = `{creator.creatorType}:{creator.creatorTargetId}`
 	end
 	return {
-		key = `{if IsShared then "shared" else "owned"}={table.concat(Buffer, ",")}`,
+		key = table.concat(Buffer, ","),
 		params = {
 			surface = "BuildPreview",
 			isArchived = false,
 			sortParam = "LastUpdated",
 			sortOrder = "Desc",
 			pageSize = 15,
-			creators = Creators,
-			isShared = IsShared
+			creators = Creators
 		}
 	}
 end
@@ -74,7 +74,7 @@ local function usePreviewSources(CreatorGroupsStore, CreatorTargetId, Filter)
 		end
 		local List = {}
 		
-		if Games ~= GamesFilterModule.SharedWithMe then
+		if Games ~= GamesFilterModule.SharedGames then
 			local Creators = {}
 			
 			for _, group1 in Groups do
@@ -83,13 +83,13 @@ local function usePreviewSources(CreatorGroupsStore, CreatorTargetId, Filter)
 				end
 			end
 			if #Creators > 0 then
-				table.insert(List, (createSource(Creators, false)))
+				table.insert(List, (createSource(Creators)))
 			end
 		end
 		if Games ~= GamesFilterModule.GroupGames then
 			table.insert(List, (createSource({
-				{ creatorType = "User", creatorTargetId = CreatorTargetId }
-			}, true)))
+				{ creatorType = "Team", creatorTargetId = CreatorTargetId }
+			})))
 		end
 		return {
 			sources = List,

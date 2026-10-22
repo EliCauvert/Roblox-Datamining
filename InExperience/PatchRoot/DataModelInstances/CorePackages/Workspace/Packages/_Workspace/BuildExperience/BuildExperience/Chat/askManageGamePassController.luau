@@ -1,4 +1,5 @@
 ﻿local Parent = script:FindFirstAncestor("BuildExperience").Parent
+local CreatorAgentChatModule = require(Parent.DataHydration.CreatorAgentChat)
 local GamePassConfigModule = require(Parent.DataHydration.GamePassConfig)
 local PromiseModule = require(Parent.Promise)
 local _ = require(script.Parent.chatTypes)
@@ -18,7 +19,7 @@ end
 local config = {
 	itemKind = "gamePass",
 	resultKey = "gamePass",
-	tool = require(Parent.DataHydration.CreatorAgentChat).StudioManageGamePassTool,
+	tool = if require(Parent.SharedFlags).FFlagBuildExperienceManageMonetizationTool then CreatorAgentChatModule.StudioManageMonetizationTool.forKind("gamePass") else CreatorAgentChatModule.StudioManageGamePassTool,
 	list = function(p1)
 		-- upvalues: v1 (ref), CreateManageGamePassStoreModule (copy), GamePassConfigModule (copy), PromiseModule (copy)
 		if v1 == nil then

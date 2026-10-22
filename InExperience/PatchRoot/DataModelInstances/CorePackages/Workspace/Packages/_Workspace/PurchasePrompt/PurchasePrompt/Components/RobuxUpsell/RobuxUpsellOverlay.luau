@@ -29,7 +29,6 @@ local UnifiedPurchaseEventNameEnumModule = require(PurchasePrompt.Enums.UnifiedP
 local ConstantsModule = require(PurchasePrompt.Misc.Constants)
 local HttpService = game:GetService("HttpService")
 local FFlagFixCountersForUpsellModalShownModule = require(PurchasePrompt.Flags.FFlagFixCountersForUpsellModalShown)
-local FFlagUnifiedPurchaseGamepassAddProductUniverseId = require(Parent.SharedFlags).FFlagUnifiedPurchaseGamepassAddProductUniverseId
 local FFlagUnifiedPurchaseFlowMarketplaceUIImprovements = require(Parent.SharedFlags).FFlagUnifiedPurchaseFlowMarketplaceUIImprovements
 local FFlagAddPerformanceMetricsToUnifiedPurchaseModal = require(Parent.SharedFlags).FFlagAddPerformanceMetricsToUnifiedPurchaseModal
 local FFlagSkipBuyDelayForExperienceShopModule = require(PurchasePrompt.Flags.FFlagSkipBuyDelayForExperienceShop)
@@ -185,7 +184,7 @@ function ExtendResult.getVPCModalType(p1)
 end
 
 function ExtendResult.emitUnifiedPurchaseTelemetry(p1, Event_name)
-	-- upvalues: DeriveUnifiedPurchaseEventRobuxPriceModule (copy), FFlagUnifiedPurchaseGamepassAddProductUniverseId (copy), HttpService (copy), SendUnifiedPurchaseEventLogModule (copy)
+	-- upvalues: DeriveUnifiedPurchaseEventRobuxPriceModule (copy), HttpService (copy), SendUnifiedPurchaseEventLogModule (copy)
 	local Props = p1.props
 	local PurchaseAnalyticsMetadata = Props.purchaseAnalyticsMetadata or {}
 	SendUnifiedPurchaseEventLogModule({
@@ -198,7 +197,7 @@ function ExtendResult.emitUnifiedPurchaseTelemetry(p1, Event_name)
 		surface = PurchaseAnalyticsMetadata.surface,
 		user_roblox_balance = PurchaseAnalyticsMetadata.userRobuxBalance,
 		salelocation_universeid = PurchaseAnalyticsMetadata.saleLocationUniverseId,
-		product_universeid = if FFlagUnifiedPurchaseGamepassAddProductUniverseId then PurchaseAnalyticsMetadata.productUniverseId else nil,
+		product_universeid = PurchaseAnalyticsMetadata.productUniverseId,
 		event_metadata = HttpService:JSONEncode({
 			upsell_robux_package_id = Props.robuxProductId,
 			upsell_robux_package_amount = Props.iapRobuxAmount

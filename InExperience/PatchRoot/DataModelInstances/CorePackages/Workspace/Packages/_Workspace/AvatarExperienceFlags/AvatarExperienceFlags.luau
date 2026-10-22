@@ -423,5 +423,6 @@
 	FFlagAXGifting = require(script.FFlagAXGifting),
 	FFlagAXSduiSortLegacyBottomPadding = require(script.FFlagAXSduiSortLegacyBottomPadding),
 	FFlagAXSkipLegacyCatalogFetchWhenSduiServed = require(script.FFlagAXSkipLegacyCatalogFetchWhenSduiServed),
-	FFlagAXSduiPublishRequestIdWithResponse = require(script.FFlagAXSduiPublishRequestIdWithResponse)
+	FFlagAXSduiPublishRequestIdWithResponse = require(script.FFlagAXSduiPublishRequestIdWithResponse),
+	FFlagAXUseUFRForTimeoutPromptInApp = require(script.FFlagAXUseUFRForTimeoutPromptInApp)
 }

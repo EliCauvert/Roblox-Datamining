@@ -61,6 +61,8 @@ local UseOnScreenKeyboardVisibleModule = require(script.Parent.utils.useOnScreen
 local FFlagBuildPublishNavigationSheetModule = require(script.Parent.Flags.FFlagBuildPublishNavigationSheet)
 local FFlagBuildExperiencePrivateInvitesModule = require(script.Parent.Flags.FFlagBuildExperiencePrivateInvites)
 local FFlagBuildExperienceMyCreationsLongPressMenuModule = require(script.Parent.Flags.FFlagBuildExperienceMyCreationsLongPressMenu)
+local FFlagBuildExperiencePreviewsTabModule = require(script.Parent.Flags.FFlagBuildExperiencePreviewsTab)
+local BuildHomeTabsContainerModule = if FFlagBuildExperiencePreviewsTabModule then require(script.Parent.Components.BuildHomeTabs.BuildHomeTabsContainer) else nil
 local FFlagBuildExperienceAnalytics = SharedFlagsModule.FFlagBuildExperienceAnalytics
 local FFlagBuildExperienceHideNavBarOnSubPages = SharedFlagsModule.FFlagBuildExperienceHideNavBarOnSubPages
 local GetAdsCampaignDeepLinkStoreModule = require(BuildExperience.Stores.GetAdsCampaignDeepLinkStore)
@@ -390,7 +392,7 @@ local List = {
 	{
 		[config.BuildHome] = {
 			screen = function(p2)
-				-- upvalues: UseBuildPageLayoutModule (copy), UseNavigationFocusFunction (copy), UseLocalizationFunction (copy), LocalizationStringsModule (copy), ReactModule (copy), config (copy), FFlagBuildExperienceMyCreationsLongPressMenuModule (copy), useHomeConfigurationPages (copy), FFlagBuildAdUpsellModule (copy), GetAdsCampaignDeepLinkStoreModule (copy), SendBuildExperienceEventModule (copy), ResumeBuildChatModule (copy), GetSearchQueryStoreModule (copy), FullscreenPageWithSafeArea (copy), View (copy), BuildPageHeaderModule (copy), MyCreationsTabModule (copy), FFlagBuildPublishNavigationSheetModule (copy), PublishSheetControllerModule (copy)
+				-- upvalues: UseBuildPageLayoutModule (copy), UseNavigationFocusFunction (copy), UseLocalizationFunction (copy), LocalizationStringsModule (copy), ReactModule (copy), config (copy), FFlagBuildExperienceMyCreationsLongPressMenuModule (copy), useHomeConfigurationPages (copy), FFlagBuildAdUpsellModule (copy), GetAdsCampaignDeepLinkStoreModule (copy), SendBuildExperienceEventModule (copy), ResumeBuildChatModule (copy), GetSearchQueryStoreModule (copy), MyCreationsTabModule (copy), FullscreenPageWithSafeArea (copy), View (copy), BuildPageHeaderModule (copy), FFlagBuildExperiencePreviewsTabModule (copy), BuildHomeTabsContainerModule (copy), FFlagBuildPublishNavigationSheetModule (copy), PublishSheetControllerModule (copy)
 				local ScreenProps = p2.screenProps or {}
 				local Navigation = p2.navigation
 				local UseBuildPageLayoutModuleResult = UseBuildPageLayoutModule()
@@ -440,6 +442,17 @@ local List = {
 					FallbackExperienceName
 				})
 				local SearchQueryStore = ScreenProps.searchQueryStore or GetSearchQueryStoreModule()
+				local Element = ReactModule.createElement(MyCreationsTabModule, {
+					LayoutOrder = 3,
+					creatorAgentChatStore = ScreenProps.creatorAgentChatStore,
+					configurationStore = ScreenProps.configurationStore,
+					searchStore = ScreenProps.searchStore,
+					searchQueryStore = ScreenProps.searchQueryStore,
+					isFocused = UseNavigationFocusResult,
+					autoOpenNewGame = ScreenProps.universeId == nil and ScreenProps.sessionId == nil,
+					onOpenChat = UseResult,
+					onOpenConfigurationPage = if UseHomeConfigurationPagesResult == nil then nil else UseHomeConfigurationPagesResult.onOpenConfigurationPage
+				})
 				
 				return ReactModule.createElement(FullscreenPageWithSafeArea, {
 					includeStatusBar = true,
@@ -464,17 +477,12 @@ local List = {
 							tag = "col align-x-center fill gap-small size-full-0"
 						}, {
 							SearchBarContainer = nil,
-							MyCreations = ReactModule.createElement(MyCreationsTabModule, {
+							MyCreations = if FFlagBuildExperiencePreviewsTabModule then ReactModule.createElement(BuildHomeTabsContainerModule, {
 								LayoutOrder = 3,
-								creatorAgentChatStore = ScreenProps.creatorAgentChatStore,
-								configurationStore = ScreenProps.configurationStore,
-								searchStore = ScreenProps.searchStore,
-								searchQueryStore = ScreenProps.searchQueryStore,
+								gamesContent = Element,
 								isFocused = UseNavigationFocusResult,
-								autoOpenNewGame = ScreenProps.universeId == nil and ScreenProps.sessionId == nil,
-								onOpenChat = UseResult,
-								onOpenConfigurationPage = if UseHomeConfigurationPagesResult == nil then nil else UseHomeConfigurationPagesResult.onOpenConfigurationPage
-							})
+								searchStore = ScreenProps.searchStore
+							}) else Element
 						})
 					}),
 					PublishSheet = if FFlagBuildPublishNavigationSheetModule and UseHomeConfigurationPagesResult ~= nil and PublishSheetTarget ~= nil and PublishSheetTarget.universeId ~= nil then ReactModule.createElement(PublishSheetControllerModule, {

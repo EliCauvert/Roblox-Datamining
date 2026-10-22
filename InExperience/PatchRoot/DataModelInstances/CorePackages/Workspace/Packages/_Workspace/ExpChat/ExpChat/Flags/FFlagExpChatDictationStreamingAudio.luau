@@ -1,0 +1,1 @@
+﻿return game:DefineFastFlag("ExpChatDictationStreamingAudio", false) and game:GetEngineFeature("SpeechToTextEnableStreaming")

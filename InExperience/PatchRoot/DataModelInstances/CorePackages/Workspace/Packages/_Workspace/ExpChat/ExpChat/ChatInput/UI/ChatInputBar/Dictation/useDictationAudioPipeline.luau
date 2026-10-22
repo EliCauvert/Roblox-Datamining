@@ -1,10 +1,12 @@
 ﻿local CoreGui = game:GetService("CoreGui")
 local Players = game:GetService("Players")
-local ReactModule = require(script:FindFirstAncestor("ExpChat").Parent.React)
+local ExpChat = script:FindFirstAncestor("ExpChat")
+local ReactModule = require(ExpChat.Parent.React)
 local FinishDictationInputModule = require(script.Parent.finishDictationInput)
 local SetDictationUsageTypeModule = require(script.Parent.setDictationUsageType)
 local EngineAudioSTTIsDictationEnabled = game:DefineFastFlag("EngineAudioSTTIsDictationEnabled", false)
 local ExpChatDictationSendUsageType = game:DefineFastFlag("ExpChatDictationSendUsageType", false)
+local FFlagExpChatDictationStreamingAudioModule = require(ExpChat.Flags.FFlagExpChatDictationStreamingAudio)
 
 local function _(p1)
 	if p1.current then
@@ -60,7 +62,7 @@ local _ = function(p1)
 end
 
 return function()
-	-- upvalues: ReactModule (copy), Players (copy), CoreGui (copy), EngineAudioSTTIsDictationEnabled (copy), ExpChatDictationSendUsageType (copy), SetDictationUsageTypeModule (copy), FinishDictationInputModule (copy)
+	-- upvalues: ReactModule (copy), Players (copy), CoreGui (copy), FFlagExpChatDictationStreamingAudioModule (copy), EngineAudioSTTIsDictationEnabled (copy), ExpChatDictationSendUsageType (copy), SetDictationUsageTypeModule (copy), FinishDictationInputModule (copy)
 	local UseStateResult, UseStateResult2 = ReactModule.useState(nil)
 	local UseRefResult = ReactModule.useRef(nil)
 	local UseRefResult1 = ReactModule.useRef(nil)
@@ -120,7 +122,7 @@ return function()
 		UseStateResult2(nil)
 	end, { UseMemoResult })
 	local UseResult1 = ReactModule.useCallback(function(p1, p2)
-		-- upvalues: Players (upval), UseMemoResult (copy), CoreGui (upval), EngineAudioSTTIsDictationEnabled (upval), ExpChatDictationSendUsageType (upval), SetDictationUsageTypeModule (upval), UseStateResult2 (copy)
+		-- upvalues: Players (upval), UseMemoResult (copy), CoreGui (upval), FFlagExpChatDictationStreamingAudioModule (upval), EngineAudioSTTIsDictationEnabled (upval), ExpChatDictationSendUsageType (upval), SetDictationUsageTypeModule (upval), UseStateResult2 (copy)
 		local LocalPlayer = Players.LocalPlayer
 		
 		if not LocalPlayer then
@@ -170,11 +172,18 @@ return function()
 		local AudioDeviceInput1 = Instance.new("AudioDeviceInput")
 		AudioDeviceInput1.Player = LocalPlayer
 		AudioDeviceInput1.Muted = false
+		
+		if FFlagExpChatDictationStreamingAudioModule and IsContinuous then
+			AudioDeviceInput1.Streaming = true
+		end
 		AudioDeviceInput1.Parent = ExpChatDictation
 		AudioDeviceInput1.Active = true
 		UseMemoResult.audioDeviceInput.current = AudioDeviceInput1
 		local AudioSpeechToText = Instance.new("AudioSpeechToText")
 		
+		if FFlagExpChatDictationStreamingAudioModule and IsContinuous then
+			AudioSpeechToText.Streaming = true
+		end
 		if EngineAudioSTTIsDictationEnabled then
 			AudioSpeechToText.DictationEnabled = true
 		end

@@ -5,7 +5,8 @@ return {
 	mockDataModel = true,
 	testMatch = {
 		"**/GetChatModerationStore/**/*.test",
-		"**/GetUserChatSettingsStore/**/*.test"
+		"**/GetUserChatSettingsStore/**/*.test",
+		"**/useDictationAudioPipeline.test"
 	},
 	setupFilesAfterEnv = {
 		JestConfigsModule.setupFiles.LogHandler,

@@ -92,22 +92,181 @@ return function(p4, Current, p5)
 		end)
 	end
 	
-	local function spliceRow(SelectedIndex)
-		-- upvalues: UseRefResult (copy), p4 (copy), UseRefResult2 (copy), TextBoxRangeModule (upval)
+	local function commitRow(SelectedIndex): boolean
+		-- upvalues: UseRefResult (copy), p4 (copy), UseRefResult6 (copy), TextBoxRangeModule (upval), UseRefResult2 (copy), UseRefResult4 (copy), UseStateResult2 (copy), config (upval), UseRefResult1 (copy)
 		local Current = UseRefResult.current
 		local Row = Current.rows[SelectedIndex]
 		local Current1 = p4.current
 		
 		if Row == nil or Current1 == nil then
-			return false, nil
+			UseRefResult6.current = true
+			local v1 = nil
+			task.defer(function()
+				-- upvalues: UseRefResult6 (upval), p4 (upval), v1 (copy), TextBoxRangeModule (upval)
+				UseRefResult6.current = false
+				local Current = p4.current
+				
+				if Current == nil then return end
+				Current:CaptureFocus()
+				
+				if v1 ~= nil then
+					TextBoxRangeModule.placeCursor(Current, v1)
+				end
+			end)
+			
+			return false
 		end
 		local Section = Current.sections[Row.sectionIndex]
 		local CurrentEntry = UseRefResult2.current[Row.sourceId]
 		
 		if Section == nil or CurrentEntry == nil then
-			return false, nil
+			UseRefResult6.current = true
+			local v2 = nil
+			task.defer(function()
+				-- upvalues: UseRefResult6 (upval), p4 (upval), v2 (copy), TextBoxRangeModule (upval)
+				UseRefResult6.current = false
+				local Current = p4.current
+				
+				if Current == nil then return end
+				Current:CaptureFocus()
+				
+				if v2 ~= nil then
+					TextBoxRangeModule.placeCursor(Current, v2)
+				end
+			end)
+			
+			return false
+		end
+		local v3 = CurrentEntry.select(Row.item)
+		
+		if v3 == nil then
+			local Current2 = p4.current
+			local Current21 = nil
+			repeat
+				if Current2 ~= nil then
+					local Cursor = TextBoxRangeModule.readCursor(Current2)
+					
+					if Cursor ~= nil then
+						Current21 = Cursor
+						break
+					end
+				end
+				Current21 = UseRefResult4.current
+			until true
+			task.defer(function()
+				-- upvalues: UseRefResult6 (upval), p4 (upval), Current21 (copy), TextBoxRangeModule (upval)
+				UseRefResult6.current = false
+				local Current = p4.current
+				
+				if Current == nil then return end
+				Current:CaptureFocus()
+				
+				if Current21 ~= nil then
+					TextBoxRangeModule.placeCursor(Current, Current21)
+				end
+			end)
+			
+			return true
+		elseif v3.kind == "insert" then
+			UseRefResult6.current = true
+			local SpliceResult, SpliceResult2 = TextBoxRangeModule.splice(Current1, Section.replaceStart, Section.replaceFinish, v3.text)
+			
+			if SpliceResult then
+				UseStateResult2(config)
+			end
+			task.defer(function()
+				-- upvalues: UseRefResult6 (upval), p4 (upval), SpliceResult2 (copy), TextBoxRangeModule (upval)
+				UseRefResult6.current = false
+				local Current = p4.current
+				
+				if Current == nil then return end
+				Current:CaptureFocus()
+				
+				if SpliceResult2 ~= nil then
+					TextBoxRangeModule.placeCursor(Current, SpliceResult2)
+				end
+			end)
+			
+			return SpliceResult == true
+		elseif v3.kind == "sendDraft" then
+			local Current3 = UseRefResult1.current
+			local OnAction = if Current3 == nil then nil else Current3.onAction
+			
+			if OnAction ~= nil and OnAction(v3) then
+				UseRefResult6.current = true
+				Current1.Text = ""
+				UseStateResult2(config)
+				local v4 = 1
+				task.defer(function()
+					-- upvalues: UseRefResult6 (upval), p4 (upval), v4 (copy), TextBoxRangeModule (upval)
+					UseRefResult6.current = false
+					local Current = p4.current
+					
+					if Current == nil then return end
+					Current:CaptureFocus()
+					
+					if v4 ~= nil then
+						TextBoxRangeModule.placeCursor(Current, v4)
+					end
+				end)
+				
+				return true
+			end
+			local Current5 = p4.current
+			local Current6 = nil
+			repeat
+				if Current5 ~= nil then
+					local Cursor = TextBoxRangeModule.readCursor(Current5)
+					
+					if Cursor ~= nil then
+						Current6 = Cursor
+						break
+					end
+				end
+				Current6 = UseRefResult4.current
+			until true
+			task.defer(function()
+				-- upvalues: UseRefResult6 (upval), p4 (upval), Current6 (copy), TextBoxRangeModule (upval)
+				UseRefResult6.current = false
+				local Current = p4.current
+				
+				if Current == nil then return end
+				Current:CaptureFocus()
+				
+				if Current6 ~= nil then
+					TextBoxRangeModule.placeCursor(Current, Current6)
+				end
+			end)
+			
+			return true
 		else
-			return TextBoxRangeModule.splice(Current1, Section.replaceStart, Section.replaceFinish, CurrentEntry.formatReplacement(Row.item))
+			local Current4 = p4.current
+			local Current7 = nil
+			repeat
+				if Current4 ~= nil then
+					local Cursor = TextBoxRangeModule.readCursor(Current4)
+					
+					if Cursor ~= nil then
+						Current7 = Cursor
+						break
+					end
+				end
+				Current7 = UseRefResult4.current
+			until true
+			task.defer(function()
+				-- upvalues: UseRefResult6 (upval), p4 (upval), Current7 (copy), TextBoxRangeModule (upval)
+				UseRefResult6.current = false
+				local Current = p4.current
+				
+				if Current == nil then return end
+				Current:CaptureFocus()
+				
+				if Current7 ~= nil then
+					TextBoxRangeModule.placeCursor(Current, Current7)
+				end
+			end)
+			
+			return true
 		end
 	end
 	
@@ -351,56 +510,18 @@ return function(p4, Current, p5)
 		UseResult(Current)
 	end, { UseResult })
 	local UseResult3 = ReactModule.useCallback(function(p6)
-		-- upvalues: UseRefResult6 (copy), spliceRow (copy), UseStateResult2 (copy), config (upval), p4 (copy), TextBoxRangeModule (upval)
-		UseRefResult6.current = true
-		local SpliceRowResult, SpliceRowResult2 = spliceRow(p6)
-		
-		if SpliceRowResult then
-			UseStateResult2(config)
-		end
-		task.defer(function()
-			-- upvalues: UseRefResult6 (upval), p4 (upval), SpliceRowResult2 (copy), TextBoxRangeModule (upval)
-			UseRefResult6.current = false
-			local Current = p4.current
-			
-			if Current == nil then return end
-			Current:CaptureFocus()
-			
-			if SpliceRowResult2 ~= nil then
-				TextBoxRangeModule.placeCursor(Current, SpliceRowResult2)
-			end
-		end)
+		-- upvalues: commitRow (copy)
+		commitRow(p6)
 	end, {})
-	local UseResult4 = ReactModule.useCallback(function(_, p6): boolean
-		-- upvalues: UseRefResult (copy), UseRefResult6 (copy), spliceRow (copy), UseStateResult2 (copy), config (upval), p4 (copy), TextBoxRangeModule (upval)
-		if not p6 then
+	local UseResult4 = ReactModule.useCallback(function(_, p6)
+		-- upvalues: UseRefResult (copy), commitRow (copy)
+		if p6 then
+			local Current = UseRefResult.current
+			
+			return if Current.activated and #Current.rows ~= 0 and Current.selectedIndex >= 1 then commitRow(Current.selectedIndex) else false
+		else
 			return false
 		end
-		local Current = UseRefResult.current
-		
-		if not Current.activated or #Current.rows == 0 or Current.selectedIndex < 1 then
-			return false
-		end
-		UseRefResult6.current = true
-		local SpliceRowResult, SpliceRowResult2 = spliceRow(Current.selectedIndex)
-		
-		if SpliceRowResult then
-			UseStateResult2(config)
-		end
-		task.defer(function()
-			-- upvalues: UseRefResult6 (upval), p4 (upval), SpliceRowResult2 (copy), TextBoxRangeModule (upval)
-			UseRefResult6.current = false
-			local Current = p4.current
-			
-			if Current == nil then return end
-			Current:CaptureFocus()
-			
-			if SpliceRowResult2 ~= nil then
-				TextBoxRangeModule.placeCursor(Current, SpliceRowResult2)
-			end
-		end)
-		
-		return if SpliceRowResult then true else false
 	end, {})
 	local UseResult5 = ReactModule.useCallback(function()
 		-- upvalues: UseStateResult2 (copy), config (upval)

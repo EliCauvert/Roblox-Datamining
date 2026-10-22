@@ -3,6 +3,7 @@ local Parent = script.Parent.Parent
 local ReactModule = require(Parent.React)
 local FoundationModule = require(Parent.Foundation)
 local ChatUIPrimitivesModule = require(Parent.ChatUIPrimitives)
+local ExpressionCatalogResourceModule = require(Parent.ChatUIPrimitives.ExpressionCatalogResource)
 local TextChannelWindowAnalyticsModule = require(script.Parent.TextChannelWindowAnalytics)
 local UseInExperienceLocalizationFunction = require(Parent.ChatUIPrimitives).Hooks.useInExperienceLocalization
 local LoggerModule = require(script.Parent.Logger)
@@ -16,14 +17,14 @@ local FFlagExpChatTextChannelWindowThemeByBackgroundModule = require(script.Pare
 local FFlagExpChatComposerFigmaParity = require(Parent.SharedFlags).FFlagExpChatComposerFigmaParity
 local FFlagExpChatTextChannelWindowExpressionTrayModule = require(script.Parent.Flags.FFlagExpChatTextChannelWindowExpressionTray)
 local FFlagExpChatTextChannelWindowFocusNavModule = require(script.Parent.Flags.FFlagExpChatTextChannelWindowFocusNav)
-local FFlagDebugExpChatTextChannelWindowStaticExpressionsModule = require(script.Parent.Flags.FFlagDebugExpChatTextChannelWindowStaticExpressions)
 local GetDebugExpressionCatalogModule = require(script.Parent.TextChannelWindowExpressionTray.getDebugExpressionCatalog)
 local SendExpressionModule = require(script.Parent.TextChannelWindowExpressionTray.sendExpression)
+local Static = if require(script.Parent.Flags.FFlagDebugExpChatTextChannelWindowStaticExpressions) then ExpressionCatalogResourceModule.createStatic(GetDebugExpressionCatalogModule()) else nil
 local ChatInputBarView = ChatUIPrimitivesModule.ChatInputBarView
 local UseFocusInputBarFunction = ChatUIPrimitivesModule.Hooks.useFocusInputBar
 
 return ReactModule.memo(function(p1)
-	-- upvalues: FoundationModule (copy), GuiService (copy), UseCanSendToChannelFunction (copy), UseInExperienceLocalizationFunction (copy), ReactModule (copy), MessageWriterContextModule (copy), GetFFlagExpChatUseChatMuteStoreModule (copy), RunVirtualChatCommandsModule (copy), MessageModule (copy), GetFFlagExpChatProtectedChatInternalAPIsFunction (copy), TextChannelWindowAnalyticsModule (copy), LoggerModule (copy), UseFocusInputBarFunction (copy), SendExpressionModule (copy), FFlagExpChatTextChannelWindowExpressionTrayModule (copy), FFlagExpChatComposerFigmaParity (copy), FFlagDebugExpChatTextChannelWindowStaticExpressionsModule (copy), GetDebugExpressionCatalogModule (copy), FFlagExpChatTextChannelWindowFocusNavModule (copy), ChatInputBarView (copy), FFlagExpChatTextChannelWindowThemeByBackgroundModule (copy)
+	-- upvalues: FoundationModule (copy), GuiService (copy), UseCanSendToChannelFunction (copy), UseInExperienceLocalizationFunction (copy), ReactModule (copy), MessageWriterContextModule (copy), GetFFlagExpChatUseChatMuteStoreModule (copy), RunVirtualChatCommandsModule (copy), MessageModule (copy), GetFFlagExpChatProtectedChatInternalAPIsFunction (copy), TextChannelWindowAnalyticsModule (copy), LoggerModule (copy), UseFocusInputBarFunction (copy), SendExpressionModule (copy), FFlagExpChatTextChannelWindowExpressionTrayModule (copy), FFlagExpChatComposerFigmaParity (copy), FFlagExpChatTextChannelWindowFocusNavModule (copy), Static (copy), ChatInputBarView (copy), FFlagExpChatTextChannelWindowThemeByBackgroundModule (copy)
 	local TargetChannel = p1.targetChannel
 	local UseTokensResult = FoundationModule.Hooks.useTokens()
 	local GuiService1 = p1.guiService or GuiService
@@ -124,13 +125,13 @@ return ReactModule.memo(function(p1)
 		textBoxRef = UseFocusInputBarResult.ref,
 		expressionTray = if FFlagExpChatTextChannelWindowExpressionTrayModule and FFlagExpChatComposerFigmaParity then {
 			sendExpression = UseResult1,
-			fetchExpressionItems = if FFlagDebugExpChatTextChannelWindowStaticExpressionsModule then GetDebugExpressionCatalogModule else nil,
 			canLocalUserChat = NoCanLocalUserChat,
 			canSend = UseCanSendToChannelResult and TargetChannel ~= nil,
 			onKeyboardActivated = UseFocusInputBarResult.focus,
 			footerText = UseMemoResult.presetDisclaimer,
 			focusNavEnabled = FocusNavEnabled == true and FFlagExpChatTextChannelWindowFocusNavModule,
-			onOpenChanged = if FFlagExpChatTextChannelWindowFocusNavModule then p1.onExpressionTrayOpenChanged else nil
+			onOpenChanged = if FFlagExpChatTextChannelWindowFocusNavModule then p1.onExpressionTrayOpenChanged else nil,
+			catalogResource = Static
 		} else nil,
 		composerLayout = FFlagExpChatComposerFigmaParity,
 		selectionImageObject = if FocusNavEnabled then p1.selectionCursor else nil

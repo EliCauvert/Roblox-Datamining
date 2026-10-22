@@ -26,8 +26,9 @@ local SetGamePlaySessionFunction = RobloxAppSessionizationModule.SetGamePlaySess
 local SessionType = RobloxAppSessionizationModule.SessionType
 local DiscoveryAnalyticsModule = require(Parent.DiscoveryAnalytics)
 local SponsoredGamesRecordClickFunction = DiscoveryAnalyticsModule.Requests.sponsoredGamesRecordClick
+local SponsoredTilesTelemetryModule = require(Parent.SponsoredTilesTelemetry)
+local OneByTwoTileTelemetry = SponsoredTilesTelemetryModule.OneByTwoTileTelemetry
 local DiscoveryEventErrorLogger = require(Parent.DiscoveryUtils).DiscoveryEventErrorLogger
-local OneByTwoTileTelemetry = require(Parent.SponsoredTilesTelemetry).OneByTwoTileTelemetry
 local _ = require(SponsoredTiles.types)
 local VideoPlayerModule = require(Parent.VideoPlayer)
 local VideoDisplay = VideoPlayerModule.VideoDisplay
@@ -69,6 +70,7 @@ local FFlagLuaAppEnableReportExperience = SharedFlagsModule.FFlagLuaAppEnableRep
 local FFlagLuaAppEnableOneByTwoTileFunnelTelemetry = SharedFlagsModule.FFlagLuaAppEnableOneByTwoTileFunnelTelemetry
 local FoundationFontFaceMigration = FoundationModule.Utility.Flags.FoundationFontFaceMigration
 local FFlagLuaAppSponsoredTileBadgeContentPaddingModule = require(SponsoredTiles.Flags.FFlagLuaAppSponsoredTileBadgeContentPadding)
+local FFlagLuaAppAdClickoutEventModule = require(SponsoredTiles.Flags.FFlagLuaAppAdClickoutEvent)
 local LuaAppOneByTwoTileLogoWidthPercentLandscapeRatio = game:DefineFastInt("LuaAppOneByTwoTileLogoWidthPercentLandscape", 40) / 100
 local LuaAppOneByTwoTileLogoWidthPercentSquareRatio = game:DefineFastInt("LuaAppOneByTwoTileLogoWidthPercentSquare", 25) / 100
 local TileLongPress: string = if SharedFlagsModule.FFlagLuaAppFeatureTileHapticsFix then "TileLongPress" else "OneByTwoTileLongPress"
@@ -81,7 +83,7 @@ local function _(p1, p2)
 end
 
 return ReactModule.memo(function(p1)
-	-- upvalues: UseTokensFunction (copy), ResponsiveModule (copy), ReactModule (copy), UseIsHoveredTileFunction (copy), OmniRecommendationsContentType (copy), LuaAppDefaultGameAdTileText (copy), FFlagMigrateGameInfoToStore (copy), GameHydrationReactModule (copy), UseGameInfosSelectorFunction (copy), UseOverflowMenuOpenFunction (copy), UseTriggerFeedbackFunction (copy), DiscoveryEventErrorLogger (copy), GameCollectionItemTypes (copy), FFlagLuaAppEnableOneByTwoTileFunnelTelemetry (copy), OneByTwoTileTelemetry (copy), FFlagLuaAppVideoAutoplayOneByTwoConcurrentPlayback (copy), FFlagLuaAppOneByTwoHoverIdleAutoplay (copy), VideoPlaybackCoordinator (copy), AdsViewportAutoplayCandidateTagModule (copy), UseTagAsAdsViewportAutoplayCandidateModule (copy), UseTagAsViewportAutoplayCandidateFunction (copy), UseTagAsSponsoredAdViewabilityCandidateFunction (copy), GetAvailableGameTileOverflowMenuItemsFunction (copy), FFlagLuaAppEnableReportExperience (copy), FFlagLuaAppSduiSponsoredOneByTwoTile (copy), TileLongPress (copy), GetOverflowMenuSignalStoreFunction (copy), VideoLoadingState (copy), UseCanDevicePlayVideoPreviewFunction (copy), TileVideoBlockingConfig (copy), UseRoactServiceFunction (copy), RoactNetworking (copy), AppSessionService (copy), UseNavigationFunction (copy), UseLocalizationFunction (copy), DiscoveryAnalyticsModule (copy), SponsoredGamesRecordClickFunction (copy), SetGamePlaySessionFunction (copy), SessionType (copy), HoverTileCoordinator (copy), FFlagLuaAppDemoModePlayButtonTelemetry (copy), VideoEndReason (copy), AppPage (copy), ImpressionsTagUtility (copy), UseValidTileBadgesFunction (copy), LuaAppOneByTwoTileLogoWidthPercentLandscapeRatio (copy), LuaAppOneByTwoTileLogoWidthPercentSquareRatio (copy), ButtonSize (copy), VideoDisplay (copy), LuaAppOneByTwoTileGradientTopTransparencyPercentRatio (copy), LuaAppOneByTwoTileGradientBottomHeightPercentRatio (copy), LuaAppOneByTwoTileGradientBottomTransparencyPercentRatio (copy), GameTileThumbnailBadges (copy), FFlagLuaAppSponsoredTileBadgeContentPaddingModule (copy), Image (copy), SpanTileOverflowMenuModule (copy), FoundationFontFaceMigration (copy), NormalizeFontFaceFunction (copy), PlayButton (copy), FFlagLuaAppGameTileSelectionVideoPlayback (copy), GetPlaybackDetectionMethodFunction (copy), VideoPlaybackDetector (copy), VideoPlaybackDetectionMethod (copy), FIntLuaAppGameTileVideoDwellTimeInSec (copy), FIntLuaAppGameTileVideoVisiblePercent (copy)
+	-- upvalues: UseTokensFunction (copy), ResponsiveModule (copy), ReactModule (copy), UseIsHoveredTileFunction (copy), OmniRecommendationsContentType (copy), LuaAppDefaultGameAdTileText (copy), FFlagMigrateGameInfoToStore (copy), GameHydrationReactModule (copy), UseGameInfosSelectorFunction (copy), UseOverflowMenuOpenFunction (copy), UseTriggerFeedbackFunction (copy), DiscoveryEventErrorLogger (copy), GameCollectionItemTypes (copy), FFlagLuaAppEnableOneByTwoTileFunnelTelemetry (copy), OneByTwoTileTelemetry (copy), FFlagLuaAppVideoAutoplayOneByTwoConcurrentPlayback (copy), FFlagLuaAppOneByTwoHoverIdleAutoplay (copy), VideoPlaybackCoordinator (copy), AdsViewportAutoplayCandidateTagModule (copy), UseTagAsAdsViewportAutoplayCandidateModule (copy), UseTagAsViewportAutoplayCandidateFunction (copy), UseTagAsSponsoredAdViewabilityCandidateFunction (copy), GetAvailableGameTileOverflowMenuItemsFunction (copy), FFlagLuaAppEnableReportExperience (copy), FFlagLuaAppSduiSponsoredOneByTwoTile (copy), TileLongPress (copy), GetOverflowMenuSignalStoreFunction (copy), VideoLoadingState (copy), UseCanDevicePlayVideoPreviewFunction (copy), TileVideoBlockingConfig (copy), UseRoactServiceFunction (copy), RoactNetworking (copy), AppSessionService (copy), UseNavigationFunction (copy), UseLocalizationFunction (copy), DiscoveryAnalyticsModule (copy), SponsoredGamesRecordClickFunction (copy), SetGamePlaySessionFunction (copy), SessionType (copy), HoverTileCoordinator (copy), FFlagLuaAppDemoModePlayButtonTelemetry (copy), VideoEndReason (copy), AppPage (copy), FFlagLuaAppAdClickoutEventModule (copy), SponsoredTilesTelemetryModule (copy), ImpressionsTagUtility (copy), UseValidTileBadgesFunction (copy), LuaAppOneByTwoTileLogoWidthPercentLandscapeRatio (copy), LuaAppOneByTwoTileLogoWidthPercentSquareRatio (copy), ButtonSize (copy), VideoDisplay (copy), LuaAppOneByTwoTileGradientTopTransparencyPercentRatio (copy), LuaAppOneByTwoTileGradientBottomHeightPercentRatio (copy), LuaAppOneByTwoTileGradientBottomTransparencyPercentRatio (copy), GameTileThumbnailBadges (copy), FFlagLuaAppSponsoredTileBadgeContentPaddingModule (copy), Image (copy), SpanTileOverflowMenuModule (copy), FoundationFontFaceMigration (copy), NormalizeFontFaceFunction (copy), PlayButton (copy), FFlagLuaAppGameTileSelectionVideoPlayback (copy), GetPlaybackDetectionMethodFunction (copy), VideoPlaybackDetector (copy), VideoPlaybackDetectionMethod (copy), FIntLuaAppGameTileVideoDwellTimeInSec (copy), FIntLuaAppGameTileVideoVisiblePercent (copy)
 	local UseTokensResult = UseTokensFunction()
 	local IsUseResponsiveResultMatch = ResponsiveModule.useResponsive({ ResponsiveModule.BreakpointConfig.sizes.Small }) == ResponsiveModule.Keys.Small
 	local UseRefResult = ReactModule.useRef(nil)
@@ -481,22 +483,28 @@ return ReactModule.memo(function(p1)
 		if FFlagLuaAppSduiSponsoredOneByTwoTile then p1.disableGameLaunchSponsoredClickRecording else nil
 	})
 	local UseResult13 = ReactModule.useCallback(function()
-		-- upvalues: IsNotCtaTextMatch (copy), OneByTwoTileTelemetry (upval), UseResult9 (copy), UseNavigationResult (copy), AppPage (upval), p1 (copy)
-		if IsNotCtaTextMatch then
-			OneByTwoTileTelemetry.logOneByTwoTileCtaActivated(OneByTwoTileTelemetry.CtaType.Clickout)
-			UseResult9()
-			UseNavigationResult.navigate(AppPage.GenericWebPage, {
-				detail = p1.clickoutUrl,
-				extraProps = { showDomainAsTitle = true }
-			})
+		-- upvalues: IsNotCtaTextMatch (copy), OneByTwoTileTelemetry (upval), UseResult9 (copy), FFlagLuaAppAdClickoutEventModule (upval), p1 (copy), SponsoredTilesTelemetryModule (upval), GameCollectionItemTypes (upval), UseNavigationResult (copy), AppPage (upval)
+		if not IsNotCtaTextMatch then return end
+		OneByTwoTileTelemetry.logOneByTwoTileCtaActivated(OneByTwoTileTelemetry.CtaType.Clickout)
+		UseResult9()
+		
+		if FFlagLuaAppAdClickoutEventModule then
+			local AdId = p1.adId
 			
-			return
+			if AdId ~= nil and AdId ~= "" then
+				SponsoredTilesTelemetryModule.Events.adClickout(AdId, GameCollectionItemTypes.GameCollectionItemType.OneByTwoTile, p1.clickoutUrl)
+			end
 		end
+		UseNavigationResult.navigate(AppPage.GenericWebPage, {
+			detail = p1.clickoutUrl,
+			extraProps = { showDomainAsTitle = true }
+		})
 	end, {
 		IsNotCtaTextMatch,
 		UseNavigationResult,
 		p1.clickoutUrl,
-		UseResult9
+		UseResult9,
+		if FFlagLuaAppAdClickoutEventModule then p1.adId else nil
 	})
 	ReactModule.useEffect(function()
 		-- upvalues: ImpressionsTagUtility (upval), UseRefResult1 (copy), p1 (copy)
@@ -511,36 +519,36 @@ return ReactModule.memo(function(p1)
 	local Number: number? = tonumber(p1.logoAspectRatio)
 	local Number1: number = if Number and Number > 0 then Number else 1
 	local LuaAppOneByTwoTileLogoWidthPercentLandscapeRatio1 = if Number1 == 3 then LuaAppOneByTwoTileLogoWidthPercentLandscapeRatio else LuaAppOneByTwoTileLogoWidthPercentSquareRatio
-	local Large = nil
 	local Size500 = nil
-	local Size800 = nil
-	local BodyMedium = nil
-	local HeadingMedium = nil
-	local XSmall = nil
-	local Size1000 = nil
 	local Medium = nil
-	local TitleMedium = nil
+	local TitleLarge = nil
+	local Size600 = nil
+	local BodySmall = nil
+	local XXSmall = nil
+	local Small = nil
+	local Size800 = nil
+	local TitleSmall = nil
 	
 	if IsUseResponsiveResultMatch then
-		Large = UseTokensResult.Padding.Medium
-		HeadingMedium = UseTokensResult.Typography.TitleLarge
-		BodyMedium = UseTokensResult.Typography.BodySmall
-		Size800 = UseTokensResult.Size.Size_600
+		Medium = UseTokensResult.Padding.Medium
+		TitleLarge = UseTokensResult.Typography.TitleLarge
+		BodySmall = UseTokensResult.Typography.BodySmall
+		Size600 = UseTokensResult.Size.Size_600
 		Size500 = UseTokensResult.Size.Size_500
-		XSmall = UseTokensResult.Gap.XXSmall
-		Medium = ButtonSize.Small
-		Size1000 = UseTokensResult.Size.Size_800
-		TitleMedium = UseTokensResult.Typography.TitleSmall
-	else
-		Large = UseTokensResult.Padding.Large
-		HeadingMedium = UseTokensResult.Typography.HeadingMedium
-		BodyMedium = UseTokensResult.Typography.BodyMedium
+		XXSmall = UseTokensResult.Gap.XXSmall
+		Small = ButtonSize.Small
 		Size800 = UseTokensResult.Size.Size_800
+		TitleSmall = UseTokensResult.Typography.TitleSmall
+	else
+		Medium = UseTokensResult.Padding.Large
+		TitleLarge = UseTokensResult.Typography.HeadingMedium
+		BodySmall = UseTokensResult.Typography.BodyMedium
+		Size600 = UseTokensResult.Size.Size_800
 		Size500 = UseTokensResult.Size.Size_500
-		XSmall = UseTokensResult.Gap.XSmall
-		Medium = ButtonSize.Medium
-		Size1000 = UseTokensResult.Size.Size_1000
-		TitleMedium = UseTokensResult.Typography.TitleMedium
+		XXSmall = UseTokensResult.Gap.XSmall
+		Small = ButtonSize.Medium
+		Size800 = UseTokensResult.Size.Size_1000
+		TitleSmall = UseTokensResult.Typography.TitleMedium
 	end
 	local PlaybackDetectionMethod = if FFlagLuaAppOneByTwoHoverIdleAutoplay or FFlagLuaAppGameTileSelectionVideoPlayback then GetPlaybackDetectionMethodFunction(UsePreferredInputResult, IsNotUseLastInputResultMatch) else nil
 	
@@ -617,7 +625,7 @@ return ReactModule.memo(function(p1)
 				}, {
 					Badge = ReactModule.createElement(GameTileThumbnailBadges, {
 						tileBadgesByPosition = UseValidTileBadgesResult,
-						padding = if FFlagLuaAppSponsoredTileBadgeContentPaddingModule then Large else nil
+						padding = if FFlagLuaAppSponsoredTileBadgeContentPaddingModule then Medium else nil
 					})
 				}) else nil,
 				Logo = if p1.logoImageAssetId then ReactModule.createElement(Image, {
@@ -655,16 +663,16 @@ return ReactModule.memo(function(p1)
 					BackgroundTransparency = 1,
 					BorderSizePixel = 0,
 					ZIndex = 2,
-					Size = UDim2.new(1, -2 * Large, 0, 0),
+					Size = UDim2.new(1, -2 * Medium, 0, 0),
 					AutomaticSize = Enum.AutomaticSize.Y,
-					Position = UDim2.new(0, Large, 1, -Large),
+					Position = UDim2.new(0, Medium, 1, -Medium),
 					AnchorPoint = Vector2.new(0, 1)
 				}, {
 					UIListLayout = ReactModule.createElement("UIListLayout", {
 						FillDirection = Enum.FillDirection.Vertical,
 						SortOrder = Enum.SortOrder.LayoutOrder,
 						HorizontalAlignment = Enum.HorizontalAlignment.Left,
-						Padding = UDim.new(0, Large)
+						Padding = UDim.new(0, Medium)
 					}),
 					TextStack = ReactModule.createElement("Frame", {
 						LayoutOrder = 1,
@@ -677,18 +685,18 @@ return ReactModule.memo(function(p1)
 							FillDirection = Enum.FillDirection.Vertical,
 							SortOrder = Enum.SortOrder.LayoutOrder,
 							HorizontalAlignment = Enum.HorizontalAlignment.Left,
-							Padding = UDim.new(0, XSmall)
+							Padding = UDim.new(0, XXSmall)
 						}),
 						Headline = if Headline then ReactModule.createElement("TextLabel", {
 							LayoutOrder = 1,
 							BackgroundTransparency = 1,
 							TextWrapped = true,
-							Size = UDim2.new(1, 0, 0, 2 * Size800),
+							Size = UDim2.new(1, 0, 0, 2 * Size600),
 							Text = Headline,
-							Font = if FoundationFontFaceMigration then nil else HeadingMedium.Font,
-							FontFace = if FoundationFontFaceMigration then NormalizeFontFaceFunction(HeadingMedium.Font) else nil,
-							LineHeight = HeadingMedium.LineHeight,
-							TextSize = HeadingMedium.FontSize,
+							Font = if FoundationFontFaceMigration then nil else TitleLarge.Font,
+							FontFace = if FoundationFontFaceMigration then NormalizeFontFaceFunction(TitleLarge.Font) else nil,
+							LineHeight = TitleLarge.LineHeight,
+							TextSize = TitleLarge.FontSize,
 							TextColor3 = UseTokensResult.LightMode.ActionOverMedia.Foreground.Color3,
 							TextXAlignment = Enum.TextXAlignment.Left,
 							TextYAlignment = Enum.TextYAlignment.Bottom,
@@ -700,10 +708,10 @@ return ReactModule.memo(function(p1)
 							TextWrapped = false,
 							Size = UDim2.new(1, 0, 0, Size500),
 							Text = Subtitle,
-							Font = if FoundationFontFaceMigration then nil else BodyMedium.Font,
-							FontFace = if FoundationFontFaceMigration then NormalizeFontFaceFunction(BodyMedium.Font) else nil,
-							LineHeight = BodyMedium.LineHeight,
-							TextSize = BodyMedium.FontSize,
+							Font = if FoundationFontFaceMigration then nil else BodySmall.Font,
+							FontFace = if FoundationFontFaceMigration then NormalizeFontFaceFunction(BodySmall.Font) else nil,
+							LineHeight = BodySmall.LineHeight,
+							TextSize = BodySmall.FontSize,
 							TextColor3 = UseTokensResult.LightMode.ActionOverMedia.Foreground.Color3,
 							TextXAlignment = Enum.TextXAlignment.Left,
 							TextYAlignment = Enum.TextYAlignment.Top,
@@ -712,16 +720,16 @@ return ReactModule.memo(function(p1)
 					}),
 					CtaButton = if IsContentTypeMatch then if IsNotCtaTextMatch then ReactModule.createElement("TextButton", {
 						LayoutOrder = 2,
-						Size = UDim2.fromOffset(0, Size1000),
+						Size = UDim2.fromOffset(0, Size800),
 						AutomaticSize = Enum.AutomaticSize.X,
 						BackgroundColor3 = UseTokensResult.Color.Extended.White.White_20.Color3,
 						BackgroundTransparency = UseTokensResult.Color.Extended.White.White_20.Transparency,
 						BorderSizePixel = 0,
 						Text = CtaText,
 						TextColor3 = UseTokensResult.LightMode.ActionOverMedia.Foreground.Color3,
-						Font = if FoundationFontFaceMigration then nil else TitleMedium.Font,
-						FontFace = if FoundationFontFaceMigration then NormalizeFontFaceFunction(TitleMedium.Font) else nil,
-						TextSize = TitleMedium.FontSize,
+						Font = if FoundationFontFaceMigration then nil else TitleSmall.Font,
+						FontFace = if FoundationFontFaceMigration then NormalizeFontFaceFunction(TitleSmall.Font) else nil,
+						TextSize = TitleSmall.FontSize,
 						[ReactModule.Event.Activated] = UseResult13
 					}, {
 						UICorner = ReactModule.createElement("UICorner", {
@@ -741,7 +749,7 @@ return ReactModule.memo(function(p1)
 						referralSource = p1.referralSource,
 						eventContext = LaunchExperienceEventContext,
 						playableText = CtaText,
-						buttonSize = Medium,
+						buttonSize = Small,
 						onActivated = UseResult12,
 						reportExperienceLaunched = UseResult10,
 						experienceJoinData = {

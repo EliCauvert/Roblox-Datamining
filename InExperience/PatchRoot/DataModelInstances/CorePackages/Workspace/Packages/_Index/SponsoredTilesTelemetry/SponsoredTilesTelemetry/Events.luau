@@ -1,0 +1,1 @@
+﻿return { adClickout = require(script.adClickout) }

@@ -6,11 +6,14 @@ local AssetCardTypesModule = require(AppChat.Components.ChatConversation.AssetCa
 local _ = require(AppChat.Components.ChatConversation.Grouping.MessageGroupShape)
 local LoadFoundationCloudAssetModule = require(AppChat.Utils.loadFoundationCloudAsset)
 local UseIsInExperienceModule = require(AppChat.Hooks.useIsInExperience)
+local UseLocalUserIdFunction = require(Parent.RobloxAppHooks).useLocalUserId
 local FIntPlusReferralRewardRobux = require(Parent.SharedFlags).FIntPlusReferralRewardRobux
 local FFlagEnablePlusReferralEntrypointTelemetry = require(Parent.SharedFlags).FFlagEnablePlusReferralEntrypointTelemetry
+local FFlagAppChatPlusReferralHideSenderJoinModule = require(AppChat.Flags.FFlagAppChatPlusReferralHideSenderJoin)
+local FFlagAppChatPlusReferralLargerPictogramModule = require(AppChat.Flags.FFlagAppChatPlusReferralLargerPictogram)
 
 return function(p1)
-	-- upvalues: ReactModule (copy), LoadFoundationCloudAssetModule (copy), UseLocalizationFunction (copy), FIntPlusReferralRewardRobux (copy), UseIsInExperienceModule (copy), Parent (copy), FFlagEnablePlusReferralEntrypointTelemetry (copy), AssetCardTypesModule (copy)
+	-- upvalues: ReactModule (copy), LoadFoundationCloudAssetModule (copy), UseLocalizationFunction (copy), FIntPlusReferralRewardRobux (copy), UseIsInExperienceModule (copy), FFlagAppChatPlusReferralHideSenderJoinModule (copy), UseLocalUserIdFunction (copy), Parent (copy), FFlagEnablePlusReferralEntrypointTelemetry (copy), AssetCardTypesModule (copy), FFlagAppChatPlusReferralLargerPictogramModule (copy)
 	local UseMemoResult = ReactModule.useMemo(function()
 		-- upvalues: LoadFoundationCloudAssetModule (upval)
 		return Content.fromUri((LoadFoundationCloudAssetModule("pictograms/plus_robux")))
@@ -23,6 +26,8 @@ return function(p1)
 		}
 	})
 	local UseIsInExperienceModuleResult = UseIsInExperienceModule()
+	local UseLocalUserIdResult = if FFlagAppChatPlusReferralHideSenderJoinModule then UseLocalUserIdFunction() else nil
+	local IsTextMatch: boolean = FFlagAppChatPlusReferralHideSenderJoinModule and tostring(UseLocalUserIdResult) == p1.referrerId
 	local ReferrerId = p1.referrerId
 	local UseResult = ReactModule.useCallback(function()
 		-- upvalues: Parent (upval), UseIsInExperienceModuleResult (copy), FFlagEnablePlusReferralEntrypointTelemetry (upval), ReferrerId (copy)
@@ -31,9 +36,10 @@ return function(p1)
 			entrypoint = RobloxSubscriptionPurchaseAppModule.Entrypoint.AppChat
 		} else nil, (tonumber(ReferrerId)))
 	end, { ReferrerId, UseIsInExperienceModuleResult })
+	local UseResult1 = if IsTextMatch then nil else UseResult
 	
 	return ReactModule.useMemo(function()
-		-- upvalues: AssetCardTypesModule (upval), p1 (copy), UseMemoResult (copy), UseResult (copy), UseLocalizationResult (copy)
+		-- upvalues: AssetCardTypesModule (upval), p1 (copy), UseMemoResult (copy), FFlagAppChatPlusReferralLargerPictogramModule (upval), UseResult1 (copy), IsTextMatch (copy), UseLocalizationResult (copy), UseResult (copy)
 		return {
 			status = AssetCardTypesModule.Status.Ready,
 			groupShape = p1.groupShape,
@@ -41,15 +47,16 @@ return function(p1)
 			media = {
 				aspectRatio = 1,
 				isPictogram = true,
-				isSelectable = true,
 				image = UseMemoResult,
-				onActivated = UseResult
+				pictogramScale = if FFlagAppChatPlusReferralLargerPictogramModule then 1 else nil,
+				onActivated = UseResult1,
+				isSelectable = not IsTextMatch
 			},
 			footer = {
 				titleMaxLines = 2,
 				titleText = UseLocalizationResult.title,
-				onActivated = UseResult,
-				action = {
+				onActivated = UseResult1,
+				action = if IsTextMatch then nil else {
 					isSelectable = false,
 					label = UseLocalizationResult.join,
 					onActivated = UseResult
@@ -58,6 +65,6 @@ return function(p1)
 		}
 	end, {
 		p1.groupShape, p1.mediaRef, UseMemoResult, UseLocalizationResult.title,
-		UseLocalizationResult.join, UseResult
+		UseLocalizationResult.join, UseResult, IsTextMatch, UseResult1
 	})
 end

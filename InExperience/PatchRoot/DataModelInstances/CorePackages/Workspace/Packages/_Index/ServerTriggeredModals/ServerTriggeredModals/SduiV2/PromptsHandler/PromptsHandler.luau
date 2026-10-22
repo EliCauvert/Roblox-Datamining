@@ -40,10 +40,25 @@ local FFlagHomepagePromptsPaddingFix = SharedFlagsModule.FFlagHomepagePromptsPad
 local FFlagHomepagePromptsHandlerPassClientAttributes = SharedFlagsModule.FFlagHomepagePromptsHandlerPassClientAttributes
 local FFlagPromptsEdpOpenReplaceOnFetch = SharedFlagsModule.FFlagPromptsEdpOpenReplaceOnFetch
 
+local function parsePromptStyles(Text: string)
+	local List = {}
+	
+	for i in string.gmatch(Text, "[^,%s]+") do
+		table.insert(List, i)
+	end
+	return if #List == 0 then nil else List
+end
+
+local function _(HomepageLaunch)
+	-- upvalues: PromptsEntryPointModule (copy), parsePromptStyles (copy), SharedFlagsModule (copy)
+	return if HomepageLaunch == PromptsEntryPointModule.HomepageLaunch then parsePromptStyles(SharedFlagsModule.FStringHomePromptsHandlerPromptStyles) else nil
+end
+
 return ReactModule.memo(function(p1)
-	-- upvalues: UseDispatchFunction (copy), FFlagSduiDismissPromptAction (copy), UseStoreFunction (copy), UseModalSignalStoreModule (copy), FFlagEdpGameLeavePromptsHandlerEnabled (copy), FFlagEdpOpenPromptsHandlerEnabled (copy), FFlagPromptsEdpOpenReplaceOnFetch (copy), FFlagPushNotificationsUpsellPassClientAttributesToPrompts (copy), GetHomepagePromptsClientAttributesModule (copy), ReactModule (copy), GetEntryPointSurfaceConfigModule (copy), SignalsReactModule (copy), FFlagHomepagePromptsHandlerPassClientAttributes (copy), PromptsEntryPointModule (copy), FFlagSduiAllowNoConfigsBuilt (copy), SduiLoadTimer (copy), FetchPromptsModule (copy), UsePromptEntriesModule (copy), PromptStyleModule (copy), SetCentralOverlayFunction (copy), CentralOverlayType (copy), FFlagPromptsImpressionUsesTitle (copy), ReportPromptImpressionModule (copy), LoggerModule (copy), SendModalImpressionEventFunction (copy), FFlagPromptsHandlerCoachmarkEnabled (copy), FFlagSduiSurfaceBannerScrollAwaySticky (copy), FFlagAppIaScrollAway (copy), AppNavBarModule (copy), FFlagSduiSurfaceBannerAlwaysMounted (copy), FFlagSduiSystemBannerComponent (copy), SurfaceBannerModule (copy), SduiFeatureEntryPoint (copy), FFlagPromptsActionEventLoggingModule (copy), FFlagHomepagePromptsPaddingFix (copy), View (copy), CoachmarkRendererModule (copy)
+	-- upvalues: SharedFlagsModule (copy), UseDispatchFunction (copy), FFlagSduiDismissPromptAction (copy), UseStoreFunction (copy), UseModalSignalStoreModule (copy), FFlagEdpGameLeavePromptsHandlerEnabled (copy), FFlagEdpOpenPromptsHandlerEnabled (copy), FFlagPromptsEdpOpenReplaceOnFetch (copy), FFlagPushNotificationsUpsellPassClientAttributesToPrompts (copy), GetHomepagePromptsClientAttributesModule (copy), ReactModule (copy), GetEntryPointSurfaceConfigModule (copy), SignalsReactModule (copy), FFlagHomepagePromptsHandlerPassClientAttributes (copy), PromptsEntryPointModule (copy), FFlagSduiAllowNoConfigsBuilt (copy), SduiLoadTimer (copy), parsePromptStyles (copy), FetchPromptsModule (copy), UsePromptEntriesModule (copy), PromptStyleModule (copy), SetCentralOverlayFunction (copy), CentralOverlayType (copy), FFlagPromptsImpressionUsesTitle (copy), ReportPromptImpressionModule (copy), LoggerModule (copy), SendModalImpressionEventFunction (copy), FFlagPromptsHandlerCoachmarkEnabled (copy), FFlagSduiSurfaceBannerScrollAwaySticky (copy), FFlagAppIaScrollAway (copy), AppNavBarModule (copy), FFlagSduiSurfaceBannerAlwaysMounted (copy), FFlagSduiSystemBannerComponent (copy), SurfaceBannerModule (copy), SduiFeatureEntryPoint (copy), FFlagPromptsActionEventLoggingModule (copy), FFlagHomepagePromptsPaddingFix (copy), View (copy), CoachmarkRendererModule (copy)
 	local EntryPoint = p1.entryPoint
 	local PromptStyle = p1.promptStyle
+	local FFlagLuaAppEnableSduiHomePage = SharedFlagsModule.FFlagHomePromptsHandlerRestrictPromptStyles and SharedFlagsModule.FFlagLuaAppEnableSduiHomePage
 	local UseDispatchResult = UseDispatchFunction()
 	local UseStoreResult = if FFlagSduiDismissPromptAction then UseStoreFunction() else nil
 	local UseModalSignalStoreModuleResult = UseModalSignalStoreModule()
@@ -65,7 +80,7 @@ return ReactModule.memo(function(p1)
 			return if FFlagPushNotificationsUpsellPassClientAttributesToPrompts and EntryPoint == PromptsEntryPointModule.HomepageLaunch and (not FFlagEdpGameLeavePromptsHandlerEnabled and not FFlagEdpOpenPromptsHandlerEnabled or p1.clientAttributes == nil) then UseResult elseif (FFlagEdpGameLeavePromptsHandlerEnabled or FFlagEdpOpenPromptsHandlerEnabled) and p1.clientAttributes ~= nil then p1.clientAttributes elseif EntryPoint == PromptsEntryPointModule.HomepageLaunch then GetHomepagePromptsClientAttributesModule.get() else nil
 		end, { EntryPoint, UseResult, p1.clientAttributes })
 		UseMemoResult2 = ReactModule.useMemo(function()
-			-- upvalues: EntryPoint (copy), UseMemoResult (copy), FFlagSduiAllowNoConfigsBuilt (upval), SduiLoadTimer (upval), UseMemoResult1 (ref), FFlagPromptsEdpOpenReplaceOnFetch (upval), ReplaceOnFetch (copy)
+			-- upvalues: EntryPoint (copy), UseMemoResult (copy), FFlagSduiAllowNoConfigsBuilt (upval), SduiLoadTimer (upval), UseMemoResult1 (ref), FFlagPromptsEdpOpenReplaceOnFetch (upval), ReplaceOnFetch (copy), FFlagLuaAppEnableSduiHomePage (copy), PromptsEntryPointModule (upval), parsePromptStyles (upval), SharedFlagsModule (upval)
 			return {
 				clearOnEmptyResponse = true,
 				entryPoint = EntryPoint,
@@ -74,17 +89,19 @@ return ReactModule.memo(function(p1)
 				allowNoConfigsBuilt = if FFlagSduiAllowNoConfigsBuilt then true else nil,
 				loadTimer = SduiLoadTimer.createLoadTimer(UseMemoResult.configKey),
 				clientAttributes = UseMemoResult1,
-				replaceOnFetch = if FFlagPromptsEdpOpenReplaceOnFetch then ReplaceOnFetch else nil
+				replaceOnFetch = if FFlagPromptsEdpOpenReplaceOnFetch then ReplaceOnFetch else nil,
+				promptStyles = if FFlagLuaAppEnableSduiHomePage and EntryPoint == PromptsEntryPointModule.HomepageLaunch then parsePromptStyles(SharedFlagsModule.FStringHomePromptsHandlerPromptStyles) else nil
 			}
 		end, {
 			EntryPoint,
 			UseMemoResult,
 			UseMemoResult1,
+			FFlagLuaAppEnableSduiHomePage,
 			if FFlagPromptsEdpOpenReplaceOnFetch then ReplaceOnFetch else nil
 		})
 	else
 		UseMemoResult2 = ReactModule.useMemo(function()
-			-- upvalues: EntryPoint (copy), UseMemoResult (copy), FFlagSduiAllowNoConfigsBuilt (upval), SduiLoadTimer (upval), FFlagEdpGameLeavePromptsHandlerEnabled (upval), FFlagEdpOpenPromptsHandlerEnabled (upval), p1 (copy), FFlagPromptsEdpOpenReplaceOnFetch (upval), ReplaceOnFetch (copy)
+			-- upvalues: EntryPoint (copy), UseMemoResult (copy), FFlagSduiAllowNoConfigsBuilt (upval), SduiLoadTimer (upval), FFlagEdpGameLeavePromptsHandlerEnabled (upval), FFlagEdpOpenPromptsHandlerEnabled (upval), p1 (copy), FFlagPromptsEdpOpenReplaceOnFetch (upval), ReplaceOnFetch (copy), FFlagLuaAppEnableSduiHomePage (copy), PromptsEntryPointModule (upval), parsePromptStyles (upval), SharedFlagsModule (upval)
 			return {
 				clearOnEmptyResponse = true,
 				entryPoint = EntryPoint,
@@ -93,16 +110,19 @@ return ReactModule.memo(function(p1)
 				allowNoConfigsBuilt = if FFlagSduiAllowNoConfigsBuilt then true else nil,
 				loadTimer = SduiLoadTimer.createLoadTimer(UseMemoResult.configKey),
 				clientAttributes = if FFlagEdpGameLeavePromptsHandlerEnabled or FFlagEdpOpenPromptsHandlerEnabled then p1.clientAttributes else nil,
-				replaceOnFetch = if FFlagPromptsEdpOpenReplaceOnFetch then ReplaceOnFetch else nil
+				replaceOnFetch = if FFlagPromptsEdpOpenReplaceOnFetch then ReplaceOnFetch else nil,
+				promptStyles = if FFlagLuaAppEnableSduiHomePage and EntryPoint == PromptsEntryPointModule.HomepageLaunch then parsePromptStyles(SharedFlagsModule.FStringHomePromptsHandlerPromptStyles) else nil
 			}
 		end, if FFlagEdpGameLeavePromptsHandlerEnabled or FFlagEdpOpenPromptsHandlerEnabled then {
 			EntryPoint,
 			UseMemoResult,
 			p1.clientAttributes,
+			FFlagLuaAppEnableSduiHomePage,
 			if FFlagPromptsEdpOpenReplaceOnFetch then ReplaceOnFetch else nil
 		} else {
 			EntryPoint,
 			UseMemoResult,
+			FFlagLuaAppEnableSduiHomePage,
 			if FFlagPromptsEdpOpenReplaceOnFetch then ReplaceOnFetch else nil
 		})
 	end
@@ -229,10 +249,10 @@ return ReactModule.memo(function(p1)
 	end
 	local ScrollAwayEnabled = FFlagSduiSurfaceBannerScrollAwaySticky and (FFlagAppIaScrollAway and AppNavBarModule.getScrollAwayEnabled())
 	local HasUsePromptEntriesModuleResultEntry = UsePromptEntriesModuleResultEntry1 ~= nil or FFlagSduiSurfaceBannerAlwaysMounted
-	local Element = nil
+	local Frame = nil
 	
 	if IsPromptStyleMatch then
-		Element = if FFlagSduiSystemBannerComponent and HasUsePromptEntriesModuleResultEntry and ScrollAwayEnabled then ReactModule.createElement(SurfaceBannerModule, {
+		Frame = if FFlagSduiSystemBannerComponent and HasUsePromptEntriesModuleResultEntry and ScrollAwayEnabled then ReactModule.createElement(SurfaceBannerModule, {
 			identifier = if UsePromptEntriesModuleResultEntry1 then UsePromptEntriesModuleResultEntry1.identifier else nil,
 			configKey = UseMemoResult.configKey,
 			appPage = UseMemoResult.appPage,
@@ -263,7 +283,7 @@ return ReactModule.memo(function(p1)
 			})
 		}) else p1.surfaceBannerContent
 	elseif IsPromptStyleMatch1 then
-		Element = if UsePromptEntriesModuleResultEntry2 then ReactModule.createElement(SduiFeatureEntryPoint, {
+		Frame = if UsePromptEntriesModuleResultEntry2 then ReactModule.createElement(SduiFeatureEntryPoint, {
 			shouldDisplayLoading = false,
 			shouldDisplayError = false,
 			configKey = UseMemoResult.configKey,
@@ -277,26 +297,26 @@ return ReactModule.memo(function(p1)
 	if FFlagHomepagePromptsPaddingFix and IsPromptStyleMatch1 then
 		local HasUsePromptEntriesModuleResultEntry1 = UsePromptEntriesModuleResult1[1] ~= nil
 		
-		if Element ~= nil then
+		if Frame ~= nil then
 			local HasTopPadding: boolean = HasUsePromptEntriesModuleResultEntry1 and p1.topPadding ~= nil
 			local HasBottomPadding = p1.bottomPadding ~= nil
-			Element = ReactModule.createElement(View, {
+			Frame = ReactModule.createElement(View, {
 				Size = UDim2.new(1, 0, 0, 0),
 				AutomaticSize = Enum.AutomaticSize.Y,
 				padding = {
 					top = if HasTopPadding then UDim.new(0, p1.topPadding) else nil,
 					bottom = if HasBottomPadding then UDim.new(0, p1.bottomPadding) else nil
 				}
-			}, { InlineBanner = Element })
+			}, { InlineBanner = Frame })
 		elseif HasUsePromptEntriesModuleResultEntry1 and p1.topPadding then
-			Element = ReactModule.createElement("Frame", {
+			Frame = ReactModule.createElement("Frame", {
 				BackgroundTransparency = 1,
 				Size = UDim2.new(1, 0, 0, p1.topPadding)
 			})
 		end
 	end
 	return if FFlagPromptsHandlerCoachmarkEnabled and Flag then ReactModule.createElement(ReactModule.Fragment, nil, {
-		Slot = Element,
+		Slot = Frame,
 		Coachmarks = ReactModule.createElement(CoachmarkRendererModule, { surfaceConfig = UseMemoResult, hasShownKey = EntryPoint })
-	}) else Element
+	}) else Frame
 end)

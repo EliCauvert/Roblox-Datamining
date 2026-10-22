@@ -4,6 +4,7 @@ local FoundationModule = require(Parent.Foundation)
 local ReactModule = require(Parent.React)
 local ChatActionsModule = require(BuildExperience.Components.Chat.ChatActions)
 local _ = require(BuildExperience.Chat.chatTypes)
+local _ = require(BuildExperience.Components.ModelPicker.ModelPickerTypes)
 local FFlagBuildExperienceAnswerFormModule = require(BuildExperience.Flags.FFlagBuildExperienceAnswerForm)
 local AnswerFormContainerModule = if FFlagBuildExperienceAnswerFormModule then require(BuildExperience.Components.AnswerForm.AnswerFormContainer) else nil
 local _ = require(BuildExperience.Components.Chat.ChatComposer)

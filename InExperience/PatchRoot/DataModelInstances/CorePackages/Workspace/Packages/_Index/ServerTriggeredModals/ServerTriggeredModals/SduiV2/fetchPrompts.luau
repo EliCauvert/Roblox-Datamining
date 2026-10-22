@@ -19,12 +19,17 @@ local FFlagSplitPaneEducationalTour = require(Parent.SharedFlags).FFlagSplitPane
 local SplitPaneTourPromptModule = if FFlagSplitPaneEducationalTour then require(script.Parent.SplitPaneTourPrompt) else nil
 local FFlagPromptsEdpOpenReplaceOnFetch = require(Parent.SharedFlags).FFlagPromptsEdpOpenReplaceOnFetch
 
-local function getPromptsUrl(EntryPoint, ClientAttributes)
+local function getPromptsUrl(EntryPoint, ClientAttributes, List)
 	-- upvalues: UrlBuilder (copy), UrlBase (copy), HttpService (copy)
+	local Query = { entryPoint = EntryPoint }
+	
+	if List ~= nil then
+		Query.promptStyle = table.concat(List, ",")
+	end
 	local v1 = UrlBuilder.new({
 		path = "modals-api/v1/prompts",
 		base = UrlBase.APIS,
-		query = { entryPoint = EntryPoint }
+		query = Query
 	})()
 	
 	return if ClientAttributes == nil then v1 else `{v1}&clientAttributes={HttpService:UrlEncode(HttpService:JSONEncode(ClientAttributes))}`
@@ -34,14 +39,15 @@ return function(p1, p2)
 	-- upvalues: Parent (copy), FFlagSduiExtendedCapabilitiesPrompts (copy), SduiSharedUtilitiesModule (copy), GetSduiApiStoreFunction (copy), SduiResponseType (copy), UrlBuilder (copy), UrlBase (copy), FFlagEdpGameLeavePromptsHandlerEnabled (copy), FFlagEdpOpenPromptsHandlerEnabled (copy), FFlagHomepagePromptsHandlerPassClientAttributes (copy), getPromptsUrl (copy), FFlagPromptsEdpOpenReplaceOnFetch (copy), FFlagSduiAllowNoConfigsBuilt (copy), PromptsEntryPointModule (copy), FFlagPushNotificationsUpsellHomePromptsExperiment (copy), NativePushNotificationPermissionPrompt (copy), FFlagSplitPaneEducationalTour (copy), SplitPaneTourPromptModule (copy), ParsePageEntriesFromResponseFunction (copy)
 	local ServiceContractsProtoModule = require(Parent.ServiceContractsProto)
 	local GetEligiblePromptsRequest = ServiceContractsProtoModule.apppageplatform.prompts.prompts.GetEligiblePromptsRequest
-	local ClientCapabilities = if FFlagSduiExtendedCapabilitiesPrompts then SduiSharedUtilitiesModule.SduiCapabilities.buildClientCapabilities() else nil
+	local config = {
+		entry_points = { p1.entryPoint },
+		client_attributes = p1.clientAttributes,
+		client_capabilities = if FFlagSduiExtendedCapabilitiesPrompts then SduiSharedUtilitiesModule.SduiCapabilities.buildClientCapabilities() else nil,
+		prompt_styles = p1.promptStyles
+	}
 	GetSduiApiStoreFunction().fetchIfNeeded({
 		responseType = SduiResponseType.ProtobufJson,
-		url = if FFlagSduiExtendedCapabilitiesPrompts then UrlBuilder.new({ path = "modals-api/v1/prompts", base = UrlBase.APIS })() elseif FFlagEdpGameLeavePromptsHandlerEnabled or FFlagEdpOpenPromptsHandlerEnabled or FFlagHomepagePromptsHandlerPassClientAttributes then getPromptsUrl(p1.entryPoint, p1.clientAttributes) else UrlBuilder.new({
-			path = "modals-api/v1/prompts",
-			base = UrlBase.APIS,
-			query = { entryPoint = p1.entryPoint }
-		})(),
+		url = if FFlagSduiExtendedCapabilitiesPrompts then UrlBuilder.new({ path = "modals-api/v1/prompts", base = UrlBase.APIS })() elseif FFlagEdpGameLeavePromptsHandlerEnabled or FFlagEdpOpenPromptsHandlerEnabled or FFlagHomepagePromptsHandlerPassClientAttributes then getPromptsUrl(p1.entryPoint, p1.clientAttributes, p1.promptStyles) else getPromptsUrl(p1.entryPoint, nil, p1.promptStyles),
 		surfaceKey = p1.surfaceKey,
 		configKey = p1.configKey,
 		clearOnEmptyResponse = p1.clearOnEmptyResponse,
@@ -71,11 +77,7 @@ return function(p1, p2)
 		postConfig = if FFlagSduiExtendedCapabilitiesPrompts then {
 			contentType = SduiSharedUtilitiesModule.SduiApiStorePostConfigContentType.Proto,
 			protoMessage = GetEligiblePromptsRequest,
-			body = GetEligiblePromptsRequest.new({
-				entry_points = { p1.entryPoint },
-				client_attributes = p1.clientAttributes,
-				client_capabilities = ClientCapabilities
-			})
+			body = GetEligiblePromptsRequest.new(config)
 		} else nil
 	}, p2)
 end

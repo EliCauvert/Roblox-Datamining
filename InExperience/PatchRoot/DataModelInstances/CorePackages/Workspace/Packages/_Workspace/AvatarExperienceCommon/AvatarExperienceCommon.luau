@@ -185,6 +185,7 @@ return {
 		isLayeredClothingAssetType = require(script.Utils.isLayeredClothingAssetType),
 		isDurableItemExpired = require(script.Utils.isDurableItemExpired),
 		formatTimeoutEndTime = require(script.Utils.formatTimeoutEndTime),
+		showAvatarChangeFeatureRestriction = require(script.Utils.showAvatarChangeFeatureRestriction),
 		isOutfitNameValid = require(script.Utils.isOutfitNameValid),
 		isValidAssetTypeForOutfitType = require(script.Utils.isValidAssetTypeForOutfitType),
 		getHumanoidDescriptionFromStateForOutfitType = require(script.Utils.Humanoid.getHumanoidDescriptionFromStateForOutfitType),

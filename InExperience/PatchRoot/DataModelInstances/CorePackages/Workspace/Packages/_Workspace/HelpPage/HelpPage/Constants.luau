@@ -1,9 +1,11 @@
 ﻿local Parent = script.Parent
-local FoundationModule = require(Parent.Parent.Foundation)
+local Parent1 = Parent.Parent
+local FoundationModule = require(Parent1.Foundation)
 local ExtraKeysEnumModule = require(Parent.Enums.ExtraKeysEnum)
 local TouchControlsEnumModule = require(Parent.Enums.TouchControlsEnum)
 local Enums = FoundationModule.Enums
 local IconName = FoundationModule.Enums.IconName
+local FFlagRenameHelpToControls = require(Parent1.SharedFlags).FFlagRenameHelpToControls
 local config = {
 	ZOOM = Enums.IconName.HandDualArrows,
 	TAP = Enums.IconName.HandHalfEllipse,
@@ -16,7 +18,7 @@ return {
 		TAB_HEADER = {
 			NAME = "HelpTab",
 			ICON = "icons/menu/help",
-			TEXT = "CoreScripts.Feedback.Help.MainHeader"
+			TEXT = if FFlagRenameHelpToControls then "CoreScripts.InGameMenu.Controls.ControlsPage" else "CoreScripts.Feedback.Help.MainHeader"
 		},
 		KEYCODES_LOCALIZED = {
 			[ExtraKeysEnumModule.MouseWheel] = "CoreScripts.InGameMenu.Controls.MouseWheel",

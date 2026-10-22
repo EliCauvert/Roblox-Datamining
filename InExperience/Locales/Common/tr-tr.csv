@@ -115,6 +115,7 @@ Authentication.SignUp.Button.OKCaptialized,Tamam
 Authentication.SignUp.Button.RetryLogIn,Giriş yapmayı tekrar dene
 Authentication.SignUp.Description.AccountAlreadyLinked,{platformAccountName} için hesap zaten bir Roblox hesabına bağlı. Lütfen tekrar giriş yapmayı dene.
 Authentication.SignUp.Description.BirthdayHint,Tarih gir
+Authentication.SignUp.Description.OptInMarketingEmailConsent,Roblox'tan haber ve teklifler içeren e-posta almak istiyorum.
 Authentication.SignUp.Description.SignUpAgreement.CreateAnAccount,Hesap oluşturarak tahkim dâhil olmak üzere {startTermsTag}Koşullarımızı{endTermsTag} kabul etmiş ve {startPrivacyTag}Gizlilik Politikamızı{endPrivacyTag} onaylamış olursun. 18 yaşından küçüksen ebeveyninin veya vasinin hesap açmana izin vermesi ve Koşullarımızı kabul etmesi gerekir.
 Authentication.SignUp.Description.Try,Dene
 Authentication.SignUp.Description.UsernameChanged,"Her şey tamam! Hesabın hazır ve {platform} ile bağlandı. Güncellenen kullanıcı adını oyunda görmek için şimdi sıfırla, aksi takdirde bir dahaki sefere uygulanacak."
@@ -790,6 +791,7 @@ CoreScripts.InGameMenu.Controls.CameraMovementTitle,Kamera hareketi
 CoreScripts.InGameMenu.Controls.CameraZoomGamepad,Kamera yakınlaştırması
 CoreScripts.InGameMenu.Controls.CharacterMovementTitle,Avatar denetimleri
 CoreScripts.InGameMenu.Controls.Chat,
+CoreScripts.InGameMenu.Controls.ControlsPage,Denetimler
 CoreScripts.InGameMenu.Controls.DevConsole,Geliştirici konsolu
 CoreScripts.InGameMenu.Controls.DownArrow,Aşağı ok
 CoreScripts.InGameMenu.Controls.DropTool,Aleti bırak
@@ -1493,8 +1495,11 @@ Feature.Avatar.Heading.SharePublicAvatar,Avatarını paylaş
 Feature.Avatar.Heading.SortBy,Sıralama ölçütü
 Feature.Avatar.Heading.UsedName,Ad Kullanılmış
 Feature.Avatar.Heading.WearConfirmation,Öğeyi Giy
+Feature.Avatar.HeroWidget.BundleHeadlessTitle,Kellesiz Süvari için son şans
 Feature.Avatar.HeroWidget.BundleTitle,Korblox Pactbreaker
 Feature.Avatar.HeroWidget.CapsuleDescription,Roblox orijinallerinin üç yeni yorumu
+Feature.Avatar.HeroWidget.CapsuleHalloweenDescription,Sadece ürkütücü sezona özel yeni öğeler
+Feature.Avatar.HeroWidget.CapsuleHalloweenTitle,Cadılar Bayramı için hazırlandı
 Feature.Avatar.HeroWidget.CapsulePoolDescription,İlgi uyandıracak üç yeni öğe
 Feature.Avatar.HeroWidget.CapsulePoolTitle,Havuz Partisi
 Feature.Avatar.HeroWidget.CapsuleTitle,Yeniden Tasarlanmış Klasikler
@@ -2100,6 +2105,8 @@ Feature.Build.Description.GameConfiguration,Öğeleri satma ve oyununu tanıtma 
 Feature.Build.Description.GameCreationDone,Oyununun oluşturulmasını ve yayınlanmasını tamamladım. Oynanış testini yapmak için açabilirsin.
 Feature.Build.Description.GameSavedPlaytest,Oyununun oluşturulmasını tamamladım ve yeni bir versiyon kaydettim. Oynanış testini yapmak için açabilirsin.
 Feature.Build.Description.HubSettings,Yaratıcı Merkezi'nde tüm ayarları yönet
+Feature.Build.Description.InternalSpec,En son özellikler için boş bırak
+Feature.Build.Description.InternalTesting,Yeni model özelliklerini dene
 Feature.Build.Description.InviteFriendLimit,Sen bir şeyler oluştururken en fazla {MAX_INVITES} arkadaşını oynamaya davet et.
 Feature.Build.Description.LongAdCampaign,Yeni oyunculara ulaşmak ve onları tekrar tekrar oynamaya teşvik etmek için daha fazla zaman.
 Feature.Build.Description.MakeAudienceAvail,Bu kitleye sunmak için deneyimini yayınla.
@@ -2194,6 +2201,7 @@ Feature.Build.Label.FreeBuildUsage,Ücretsiz İnşa Et kullanım hakkı
 Feature.Build.Label.Friends,
 Feature.Build.Label.FriendsOnly,Yalnızca arkadaşlar
 Feature.Build.Label.GamePlays,Oyun oynama sayısı
+Feature.Build.Label.GamesTab,
 Feature.Build.Label.GetMoreBuildUsage,Daha fazla İnşa Et kullanım hakkı al
 Feature.Build.Label.GroupGames,Grup oyunları
 Feature.Build.Label.Groups,Gruplar
@@ -2202,6 +2210,8 @@ Feature.Build.Label.IconThumbnails,Simge ve küçük resimler
 Feature.Build.Label.Images2D,2 Boyutlu Görseller
 Feature.Build.Label.InProgress,Devam ediyor
 Feature.Build.Label.InputNeeded,Giriş gerekli
+Feature.Build.Label.InternalSpec,Dâhilî Özellikler
+Feature.Build.Label.InternalTesting,Dâhilî Testler
 Feature.Build.Label.InviteCount,{COUNT}/{MAX_INVITES}
 Feature.Build.Label.Limited,Sınırlı
 Feature.Build.Label.Live,Yayınlandı
@@ -2222,6 +2232,7 @@ Feature.Build.Label.OnSale,Satılık
 Feature.Build.Label.Pending,Beklemede
 Feature.Build.Label.PercentUsed,Yüzde {PERCENT} kullanıldı
 Feature.Build.Label.PlayTime,Oynama süresi
+Feature.Build.Label.PreviewsTab,Ön İzlemeler
 Feature.Build.Label.PreviouslyPublished,Daha önce yayınlanan
 Feature.Build.Label.Price,Fiyat
 Feature.Build.Label.PriceUnavailable,--
@@ -2432,6 +2443,7 @@ Feature.Build.Notification.Title.Finished,İnşa Et tamamlandı
 Feature.Build.Notification.Title.NeedInput,İnşa Et için girdin gerekiyor
 Feature.Build.Placeholder.DescribeProduct,Satmak istediğin şeyi açıkla
 Feature.Build.Placeholder.DescribeProductUpdate,Güncellemeyi tarif et
+Feature.Build.Placeholder.InternalSpec,internal_code
 Feature.Build.Prompt.CreateDeveloperProduct,"Bir geliştirici ürünü oluşturmak, oyuna bağlamak, değişiklikleri doğrulayıp yayınlamak ve satın alınabilir hâle getirmek konusunda bana yardımcı ol."
 Feature.Build.Title.AdActive,Reklam kampanyası aktif
 Feature.Build.Title.AdCampaignDuration,{durationDays} günlük reklam kampanyası
@@ -2598,6 +2610,7 @@ Feature.Catalog.AvatarWidgetTitle,Tarzları keşfet
 Feature.Catalog.Checkout.Title.PurchasedFailedPlural,{count} öğe satın alınamadı
 Feature.Catalog.Checkout.WearAfterPurchase,
 Feature.Catalog.Description.AttributionAlertBody,Bu bölgeden ayrılacak ve {experienceName} deneyimine katılacaksın.
+Feature.Catalog.Feature.Catalog.Label.AvatarBackgrounds,
 Feature.Catalog.Feature.Catalog.Label.ClassicShirt,Klasik Gömlek
 Feature.Catalog.Feature.Catalog.Label.ClassicTShirt,Klasik Tişört
 Feature.Catalog.Feature.Catalog.Label.TotalItems,Toplam: {itemCount} öğe
@@ -3596,6 +3609,7 @@ Feature.InExperienceIntervention.Label.TimeLeft.Day.Singular,
 Feature.InExperienceIntervention.Label.TimeLeft.Hours,{time} kaldı
 Feature.InExperienceShop.Description.RobuxPurchaseLegalDisclosure,Robux satın alarak tahkim maddesi ve fesih politikası da dâhil olmak üzere {termsLinkStart}Kullanım Koşullarımızı{termsLinkEnd} kabul etmiş olursun.
 Feature.InExperienceShop.GamePass,Oyun bileti
+Feature.InExperienceShop.Label.Active,
 Feature.InExperienceShop.Label.BonusItem,Bonus öğe
 Feature.InExperienceShop.Label.DescriptionWithTime,{description} {timeRemaining}
 Feature.InExperienceShop.Label.EndTime,{timeRemaining} sonra sona erecek
@@ -3795,6 +3809,7 @@ Feature.Moments.Title.MomentRemoved,An kaldırıldı
 Feature.Moments.Title.PostInsights,Sayfa başlığı
 Feature.Moments.Title.ReportPost,Paylaşımı raporla
 Feature.Moments.Tooltip.Creation,"Deneyimdeki herkes, Anlarını görüntüleyebilir."
+Feature.Moments.Tooltip.PostInsightsBody,"Görüntüleme sayılarını, izleme süresini ve An'ın kitlen tarafından nasıl karşılandığını kontrol et."
 Feature.Moments.Tooltip.PostInsightsTitle,An analizlerin burada
 Feature.Moments.Tooltip.ShareFirstMomentBody,Yakaladığın görüntülerden bir An oluştur
 Feature.Moments.Tooltip.ShareFirstMomentTitle,İlk Anını paylaş

@@ -98,6 +98,7 @@ Authentication.SignUp.Button.OKCaptialized,ठीक है
 Authentication.SignUp.Button.RetryLogIn,फिर से लॉग इन करने की कोशिश करें
 Authentication.SignUp.Description.AccountAlreadyLinked,{platformAccountName} पर मौजूद आपका अकाउंट पहले से ही Roblox अकाउंट से लिंक किया हुआ है. दोबारा लॉग इन करने की कोशिश करें.
 Authentication.SignUp.Description.BirthdayHint,तारीख डालें
+Authentication.SignUp.Description.OptInMarketingEmailConsent,मुझे Roblox से न्यूज़ और ऑफ़र के बारे में ईमेल चाहिए.
 Authentication.SignUp.Description.SignUpAgreement.CreateAnAccount,"अकाउंट बनाने का मतलब है कि आप आर्बिट्रेशन सहित हमारी {startTermsTag}शर्तों{endTermsTag} से सहमत हैं और आपको हमारी {startPrivacyTag}प्राइवेसी पॉलिसी{endPrivacyTag} स्वीकार है. अगर आपकी उम्र 18 साल से कम है, तो आपके पेरेंट या गार्जियन को आपके अकाउंट के लिए अनुमति देनी होगी और हमारी शर्तों से सहमत होना होगा."
 Authentication.SignUp.Description.Try,आज़माएँ
 Authentication.SignUp.Description.UsernameChanged,सब हो गया! आपका अकाउंट तैयार है और {platform} से लिंक किया हआ है. गेम में अपना अपडेट किया हुआ यूज़रनेम देखने के लिए अभी रीस्पॉन करें या यह अगली बार लागू होगा.
@@ -772,6 +773,7 @@ CoreScripts.InGameMenu.Controls.CameraMovementTitle,कैमरा मूवम
 CoreScripts.InGameMenu.Controls.CameraZoomGamepad,कैमरा ज़ूम
 CoreScripts.InGameMenu.Controls.CharacterMovementTitle,अवतार कंट्रोल्स
 CoreScripts.InGameMenu.Controls.Chat,
+CoreScripts.InGameMenu.Controls.ControlsPage,कंट्रोल्स
 CoreScripts.InGameMenu.Controls.DevConsole,डेवलपर कंसोल
 CoreScripts.InGameMenu.Controls.DownArrow,डाउन ऐरो
 CoreScripts.InGameMenu.Controls.DropTool,टूल ड्रॉप करें
@@ -1518,8 +1520,11 @@ Feature.Avatar.Heading.SharePublicAvatar,अपना अवतार शेय�
 Feature.Avatar.Heading.SortBy,इस आधार पर क्रम से लगाएँ
 Feature.Avatar.Heading.UsedName,इस्तेमाल हो चुका नाम
 Feature.Avatar.Heading.WearConfirmation,आइटम पहनें
+Feature.Avatar.HeroWidget.BundleHeadlessTitle,हेडलेस हॉर्समैन पाने का आखिरी मौका
 Feature.Avatar.HeroWidget.BundleTitle,Korblox Pactbreaker
 Feature.Avatar.HeroWidget.CapsuleDescription,Roblox ओरिजनल्स पर तीन नए नज़रिए
+Feature.Avatar.HeroWidget.CapsuleHalloweenDescription,सिर्फ़ डरावने सीज़न के लिए नए आइटम
+Feature.Avatar.HeroWidget.CapsuleHalloweenTitle,हैलोवीन के लिए बनाया गया
 Feature.Avatar.HeroWidget.CapsulePoolDescription,धूम मचाने वाले तीन नए आइटम
 Feature.Avatar.HeroWidget.CapsulePoolTitle,पूल पार्टी
 Feature.Avatar.HeroWidget.CapsuleTitle,"क्लासिक्स, नए अंदाज़ में"
@@ -2125,6 +2130,8 @@ Feature.Build.Description.GameConfiguration,अपने आइटम बेच�
 Feature.Build.Description.GameCreationDone,मैंने आपका गेम बनाने और पब्लिश करने का काम पूरा कर लिया है. इसे प्ले-टेस्ट करने के लिए खोला जा सकता है.
 Feature.Build.Description.GameSavedPlaytest,मैंने आपका गेम बनाने का काम पूरा कर लिया है और एक नया वर्ज़न सेव कर लिया है. इसे प्लेटेस्ट करने के लिए खोला जा सकता है.
 Feature.Build.Description.HubSettings,Creator Hub पर सभी सेटिंग्स मैनेज करें
+Feature.Build.Description.InternalSpec,सबसे नए स्पेसिफ़िकेशन के लिए खाली छोड़ें
+Feature.Build.Description.InternalTesting,नए मॉडल के स्पेसिफ़िकेशन आज़माएँ
 Feature.Build.Description.InviteFriendLimit,"क्रिएट करने के दौरान, ज़्यादा-से-ज़्यादा {MAX_INVITES} फ़्रेंड्स को खेलने के लिए इनवाइट करें."
 Feature.Build.Description.LongAdCampaign,नए प्लेयर्स तक पहुँचने और उन्हें बार-बार वापस लाने के लिए ज़्यादा समय.
 Feature.Build.Description.MakeAudienceAvail,"अपने एक्सपीरिएंस को इस ऑडियंस के लिए उपलब्ध कराने के लिए, उसे पब्लिश करें."
@@ -2219,6 +2226,7 @@ Feature.Build.Label.FreeBuildUsage,मुफ़्त बिल्ड का इ
 Feature.Build.Label.Friends,
 Feature.Build.Label.FriendsOnly,सिर्फ़ फ़्रेंड्स के लिए
 Feature.Build.Label.GamePlays,गेम प्ले
+Feature.Build.Label.GamesTab,
 Feature.Build.Label.GetMoreBuildUsage,बिल्ड का और इस्तेमाल पाएँ
 Feature.Build.Label.GroupGames,ग्रुप गेम्स
 Feature.Build.Label.Groups,ग्रुप
@@ -2227,6 +2235,8 @@ Feature.Build.Label.IconThumbnails,आइकॉन और थंबनेल
 Feature.Build.Label.Images2D,2D इमेज
 Feature.Build.Label.InProgress,जारी है
 Feature.Build.Label.InputNeeded,इनपुट चाहिए
+Feature.Build.Label.InternalSpec,इंटरनल स्पेसिफ़िकेशन
+Feature.Build.Label.InternalTesting,इंटरनल टेस्टिंग
 Feature.Build.Label.InviteCount,{COUNT}/{MAX_INVITES}
 Feature.Build.Label.Limited,सीमित
 Feature.Build.Label.Live,पब्लिश किया गया
@@ -2247,6 +2257,7 @@ Feature.Build.Label.OnSale,बिक्री के लिए उपलब्�
 Feature.Build.Label.Pending,पेंडिंग
 Feature.Build.Label.PercentUsed,{PERCENT}% इस्तेमाल किया गया
 Feature.Build.Label.PlayTime,खेलने में बीता समय
+Feature.Build.Label.PreviewsTab,
 Feature.Build.Label.PreviouslyPublished,पहले पब्लिश किया गया
 Feature.Build.Label.Price,कीमत
 Feature.Build.Label.PriceUnavailable,--
@@ -2457,6 +2468,7 @@ Feature.Build.Notification.Title.Finished,बिल्ड पूरा हुआ
 Feature.Build.Notification.Title.NeedInput,बिल्ड के लिए आपके इनपुट की ज़रूरत है
 Feature.Build.Placeholder.DescribeProduct,बताएँ कि आपको क्या बेचना है
 Feature.Build.Placeholder.DescribeProductUpdate,कोई अपडेट बताएँ
+Feature.Build.Placeholder.InternalSpec,internal_code
 Feature.Build.Prompt.CreateDeveloperProduct,"डेवलपर प्रॉडक्ट बनाने, उसे गेम में जोड़ने, बदलावों को वेरिफ़ाई करके पब्लिश करने और उसे खरीदारी के लिए उपलब्ध कराने में मेरी मदद करें."
 Feature.Build.Title.AdActive,ऐड कैंपेन ऐक्टिव है
 Feature.Build.Title.AdCampaignDuration,{durationDays}-दिन का ऐड कैंपेन
@@ -2623,6 +2635,7 @@ Feature.Catalog.AvatarWidgetTitle,
 Feature.Catalog.Checkout.Title.PurchasedFailedPlural,{count} आइटम खरीदे नहीं जा सके
 Feature.Catalog.Checkout.WearAfterPurchase,
 Feature.Catalog.Description.AttributionAlertBody,आप इस एरिया को छोड़कर {experienceName} जॉइन कर लेंगे.
+Feature.Catalog.Feature.Catalog.Label.AvatarBackgrounds,बैकग्राउंड्स
 Feature.Catalog.Feature.Catalog.Label.ClassicShirt,
 Feature.Catalog.Feature.Catalog.Label.ClassicTShirt,
 Feature.Catalog.Feature.Catalog.Label.TotalItems,कुल : {itemCount} आइटम
@@ -3621,6 +3634,7 @@ Feature.InExperienceIntervention.Label.TimeLeft.Day.Singular,
 Feature.InExperienceIntervention.Label.TimeLeft.Hours,{time} बाकी हैं
 Feature.InExperienceShop.Description.RobuxPurchaseLegalDisclosure,"Robux खरीदने का मतलब है कि आप हमारी {termsLinkStart}उपयोग की शर्तों{termsLinkEnd} से सहमत हैं, जिसमें आर्बिट्रेशन क्लॉज़ और वापसी से जुड़ी पॉलिसी शामिल हैं."
 Feature.InExperienceShop.GamePass,
+Feature.InExperienceShop.Label.Active,
 Feature.InExperienceShop.Label.BonusItem,बोनस आइटम
 Feature.InExperienceShop.Label.DescriptionWithTime,{description} {timeRemaining}
 Feature.InExperienceShop.Label.EndTime,{timeRemaining} में खत्म हो जाएगा
@@ -3820,6 +3834,7 @@ Feature.Moments.Title.MomentRemoved,Moment हटा दिया गया
 Feature.Moments.Title.PostInsights,पेज हेडर का टाइटल
 Feature.Moments.Title.ReportPost,पोस्ट की रिपोर्ट करें
 Feature.Moments.Tooltip.Creation,एक्सपीरिएंस में मौजूद हर कोई आपके मोमेंट देख सकता है.
+Feature.Moments.Tooltip.PostInsightsBody,"व्यूज़, देखने में बिताया गया समय और यह देखें कि आपकी ऑडियंस को Moment कैसा लगा."
 Feature.Moments.Tooltip.PostInsightsTitle,आपके Moment की जानकारी यहाँ है
 Feature.Moments.Tooltip.ShareFirstMomentBody,अपने कैप्चर्स से एक Moment क्रिएट करें
 Feature.Moments.Tooltip.ShareFirstMomentTitle,अपना पहला Moment शेयर करें

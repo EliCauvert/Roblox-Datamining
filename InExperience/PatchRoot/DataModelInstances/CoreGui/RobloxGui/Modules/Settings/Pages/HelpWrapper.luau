@@ -9,11 +9,14 @@ local ReactModule = require(CorePackages.Packages.React)
 local ReactRobloxModule = require(CorePackages.Packages.ReactRoblox)
 local FoundationModule = require(CorePackages.Packages.Foundation)
 local FoundationProvider = FoundationModule.FoundationProvider
+local IconName = FoundationModule.Enums.IconName
+local IconVariant = FoundationModule.Enums.IconVariant
 local BuilderIconsModule = require(CorePackages.Packages.BuilderIcons)
 local Uiblox = BuilderIconsModule.Migration.uiblox
 local SignalsModule = require(CorePackages.Packages.Signals)
 local SignalsReactModule = require(CorePackages.Packages.SignalsReact)
 local FFlagRefactorHelpPage = HelpPageModule.Flags.FFlagRefactorHelpPage
+local FFlagRenameHelpToControls = require(CorePackages.Workspace.Packages.SharedFlags).FFlagRenameHelpToControls
 local Constants = nil
 local Utils = nil
 
@@ -24,54 +27,51 @@ end
 local Root = nil
 local Signal, Signal2 = SignalsModule.createSignal(false)
 
+local function v24()
+	-- upvalues: SignalsReactModule (copy), Signal (copy), ReactModule (copy), FoundationProvider (copy), FoundationModule (copy), Utils (ref), LocalizationProvider (copy), NewResult (copy), HelpReactView (copy)
+	return if SignalsReactModule.useSignalState(Signal) then ReactModule.createElement(FoundationProvider, {
+		colorMode = FoundationModule.Enums.ColorMode.Dark,
+		device = Utils.getDeviceType()
+	}, {
+		Child = ReactModule.createElement(LocalizationProvider, { localization = NewResult }, { Root = ReactModule.createElement(HelpReactView) })
+	}) else nil
+end
+
+local function _(p1)
+	-- upvalues: Root (ref), ReactRobloxModule (copy), ReactModule (copy), v24 (copy)
+	if Root then return end
+	Root = ReactRobloxModule.createRoot(p1)
+	
+	if Root then
+		Root:render(ReactModule.createElement(v24))
+	end
+end
+
 local function createHelpPage()
-	-- upvalues: SettingsPageFactoryModule (copy), Constants (ref), Uiblox (copy), BuilderIconsModule (copy), NewResult (copy), Root (ref), SignalsReactModule (copy), Signal (copy), ReactModule (copy), FoundationProvider (copy), FoundationModule (copy), Utils (ref), LocalizationProvider (copy), HelpReactView (copy), ReactRobloxModule (copy), Signal2 (copy)
+	-- upvalues: SettingsPageFactoryModule (copy), Constants (ref), FFlagRenameHelpToControls (copy), IconName (copy), BuilderIconsModule (copy), IconVariant (copy), Uiblox (copy), NewResult (copy), Root (ref), ReactRobloxModule (copy), ReactModule (copy), v24 (copy), Signal2 (copy)
 	local NewPage = SettingsPageFactoryModule:CreateNewPage()
 	NewPage.TabHeader.Name = Constants.HELP_PAGE.TAB_HEADER.NAME
 	NewPage.Page.Name = "Help"
-	local UibloxEntry = Uiblox[Constants.HELP_PAGE.TAB_HEADER.ICON]
-	NewPage.TabHeader.TabLabel.Icon.Text = UibloxEntry.name
-	NewPage.TabHeader.TabLabel.Icon.FontFace = BuilderIconsModule.Font[UibloxEntry.variant]
+	
+	if FFlagRenameHelpToControls then
+		NewPage.TabHeader.TabLabel.Icon.Text = IconName.Controller
+		NewPage.TabHeader.TabLabel.Icon.FontFace = BuilderIconsModule.Font[IconVariant.Regular]
+	else
+		local UibloxEntry = Uiblox[Constants.HELP_PAGE.TAB_HEADER.ICON]
+		NewPage.TabHeader.TabLabel.Icon.Text = UibloxEntry.name
+		NewPage.TabHeader.TabLabel.Icon.FontFace = BuilderIconsModule.Font[UibloxEntry.variant]
+	end
 	NewPage.TabHeader.TabLabel.Title.Text = NewResult:Format(Constants.HELP_PAGE.TAB_HEADER.TEXT)
 	NewPage.Page:ClearAllChildren()
-	
-	local function _()
-		-- upvalues: Root (upval), SignalsReactModule (upval), Signal (upval), ReactModule (upval), FoundationProvider (upval), FoundationModule (upval), Utils (upval), LocalizationProvider (upval), NewResult (upval), HelpReactView (upval), ReactRobloxModule (upval), NewPage (copy)
-		if Root then return end
-		local function v25()
-			-- upvalues: SignalsReactModule (upval), Signal (upval), ReactModule (upval), FoundationProvider (upval), FoundationModule (upval), Utils (upval), LocalizationProvider (upval), NewResult (upval), HelpReactView (upval)
-			return if SignalsReactModule.useSignalState(Signal) then ReactModule.createElement(FoundationProvider, {
-				colorMode = FoundationModule.Enums.ColorMode.Dark,
-				device = Utils.getDeviceType()
-			}, {
-				Child = ReactModule.createElement(LocalizationProvider, { localization = NewResult }, { Root = ReactModule.createElement(HelpReactView) })
-			}) else nil
-		end
-		
-		Root = ReactRobloxModule.createRoot(NewPage.Page)
-		
-		if Root then
-			Root:render(ReactModule.createElement(v25))
-		end
-	end
-	
 	NewPage.Displayed.Event:Connect(function()
-		-- upvalues: Root (upval), SignalsReactModule (upval), Signal (upval), ReactModule (upval), FoundationProvider (upval), FoundationModule (upval), Utils (upval), LocalizationProvider (upval), NewResult (upval), HelpReactView (upval), ReactRobloxModule (upval), NewPage (copy), Signal2 (upval)
+		-- upvalues: NewPage (copy), Root (upval), ReactRobloxModule (upval), ReactModule (upval), v24 (upval), Signal2 (upval)
+		local Page = NewPage.Page
+		
 		if not Root then
-			local function v26()
-				-- upvalues: SignalsReactModule (upval), Signal (upval), ReactModule (upval), FoundationProvider (upval), FoundationModule (upval), Utils (upval), LocalizationProvider (upval), NewResult (upval), HelpReactView (upval)
-				return if SignalsReactModule.useSignalState(Signal) then ReactModule.createElement(FoundationProvider, {
-					colorMode = FoundationModule.Enums.ColorMode.Dark,
-					device = Utils.getDeviceType()
-				}, {
-					Child = ReactModule.createElement(LocalizationProvider, { localization = NewResult }, { Root = ReactModule.createElement(HelpReactView) })
-				}) else nil
-			end
-			
-			Root = ReactRobloxModule.createRoot(NewPage.Page)
+			Root = ReactRobloxModule.createRoot(Page)
 			
 			if Root then
-				Root:render(ReactModule.createElement(v26))
+				Root:render(ReactModule.createElement(v24))
 			end
 		end
 		Signal2(true)

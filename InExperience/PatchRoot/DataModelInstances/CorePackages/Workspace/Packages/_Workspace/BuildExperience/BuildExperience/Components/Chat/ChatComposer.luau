@@ -1,11 +1,14 @@
 ﻿local BuildExperience = script:FindFirstAncestor("BuildExperience")
 local Parent = BuildExperience.Parent
+local _ = require(BuildExperience.Components.ModelPicker.ModelPickerTypes)
+local FFlagBuildExperienceModelPickerModule = require(BuildExperience.Flags.FFlagBuildExperienceModelPicker)
 local FFlagBuildExperienceLibrary = require(Parent.SharedFlags).FFlagBuildExperienceLibrary
 local FoundationModule = require(Parent.Foundation)
 local ReactModule = require(Parent.React)
 local SignalsModule = require(Parent.Signals)
 local FFlagComposerControlAlignment = require(Parent.SharedFlags).FFlagComposerControlAlignment
 local _ = require(BuildExperience.Chat.chatTypes)
+local ModelPickerContainerModule = if FFlagBuildExperienceModelPickerModule then require(BuildExperience.Components.ModelPicker.ModelPickerContainer) else nil
 local ChatActionsRowModule = require(script.Parent.ChatActionsRow)
 local FFlagBuildExperienceFixChatComposerInitialSendStateModule = require(BuildExperience.Flags.FFlagBuildExperienceFixChatComposerInitialSendState)
 local Composer = if require(BuildExperience.Flags.FFlagBuildExperienceUseCommonTextArea) then require(Parent.AppBlox).Composer else require(BuildExperience.FoundationFork.TextArea)
@@ -22,7 +25,7 @@ local function _(Text: string): string
 end
 
 return function(Frame)
-	-- upvalues: UseTokensFunction (copy), ReactModule (copy), FFlagBuildExperienceFixChatComposerInitialSendStateModule (copy), SignalsModule (copy), FFlagBuildExperienceLibrary (copy), UseReleaseFocusOnDownSwipeModule (copy), Composer (copy), InputSize (copy), View (copy), IconButton (copy), IconName (copy), ButtonVariant (copy), FFlagComposerControlAlignment (copy), ChatActionsRowModule (copy)
+	-- upvalues: UseTokensFunction (copy), ReactModule (copy), FFlagBuildExperienceFixChatComposerInitialSendStateModule (copy), SignalsModule (copy), FFlagBuildExperienceLibrary (copy), FFlagBuildExperienceModelPickerModule (copy), UseReleaseFocusOnDownSwipeModule (copy), FFlagComposerControlAlignment (copy), View (copy), IconButton (copy), IconName (copy), InputSize (copy), ButtonVariant (copy), ModelPickerContainerModule (copy), ChatActionsRowModule (copy), Composer (copy)
 	local UseTokensResult = UseTokensFunction()
 	local UseRefResult = ReactModule.useRef(nil)
 	local UseMemoResult = ReactModule.useMemo(function()
@@ -41,6 +44,7 @@ return function(Frame)
 		v1 = IsNotCanSendWhileResponding
 		IsNotCanSendWhileResponding = false
 	end
+	local ModelPicker = if FFlagBuildExperienceModelPickerModule then Frame.modelPicker else nil
 	local IsIsReadOnly = Frame.isReadOnly == true
 	
 	if IsIsReadOnly then
@@ -88,6 +92,70 @@ return function(Frame)
 		end, { Frame.tracksExternalText, Frame.text, UseMemoResult })
 	end
 	UseReleaseFocusOnDownSwipeModule(UseRefResult, Frame.textBoxRef)
+	local Size100 = UseTokensResult.Size.Size_100
+	local Tag = "auto-xy"
+	local LayoutOrder: number? = nil
+	local LayoutOrder1: number? = nil
+	local FFlagComposerControlAlignment1: boolean = FFlagComposerControlAlignment
+	
+	if FFlagBuildExperienceModelPickerModule then
+		Size100 = UseTokensResult.Padding.Small - UseTokensResult.Stroke.Standard
+		Tag = "row align-y-center gap-small auto-xy"
+		LayoutOrder = 1
+		LayoutOrder1 = 3
+		FFlagComposerControlAlignment1 = true
+	end
+	local Element = if HasOnOpenCaptureGallery or ModelPicker ~= nil then ReactModule.createElement(View, {
+		padding = {
+			top = UDim.new(0, UseTokensResult.Size.Size_200),
+			bottom = UDim.new(0, UseTokensResult.Size.Size_200 - 1),
+			left = UDim.new(0, Size100)
+		},
+		tag = Tag
+	}, {
+		Attach = if HasOnOpenCaptureGallery then ReactModule.createElement(IconButton, {
+			isCircular = true,
+			testId = "ChatComposer.AttachImage",
+			LayoutOrder = LayoutOrder,
+			icon = IconName.PlusSmall,
+			isDisabled = Frame.isAssistantResponding or IsIsReadOnly,
+			onActivated = UseResult2,
+			size = InputSize.Small,
+			variant = ButtonVariant.Standard
+		}) else nil,
+		Picker = if ModelPicker == nil then nil else ReactModule.createElement(ModelPickerContainerModule, {
+			LayoutOrder = 2,
+			data = ModelPicker.data,
+			selectedId = ModelPicker.selectedId,
+			onSelect = ModelPicker.onSelect,
+			isDisabled = Frame.isAssistantResponding or IsIsReadOnly
+		})
+	}) else nil
+	local Element1 = ReactModule.createElement(View, {
+		LayoutOrder = LayoutOrder1,
+		padding = if FFlagComposerControlAlignment1 then {
+			top = UDim.new(0, UseTokensResult.Size.Size_200),
+			bottom = UDim.new(0, UseTokensResult.Size.Size_200 - 1),
+			left = UDim.new(0, 0),
+			right = UDim.new(0, Size100)
+		} else nil,
+		tag = {
+			["auto-xy"] = FFlagComposerControlAlignment1,
+			["auto-xy padding-x-xsmall padding-y-small"] = not FFlagComposerControlAlignment1
+		}
+	}, {
+		Actions = ReactModule.createElement(ChatActionsRowModule, {
+			isAssistantResponding = Frame.isAssistantResponding,
+			canStopAssistantResponse = Frame.canStopAssistantResponse,
+			canSendWhileResponding = Frame.canSendWhileResponding,
+			getIsComposerEmpty = UseMemoResult.getIsComposerEmpty,
+			hasAttachments = HasAttachments,
+			isSendDisabled = HasComposerErrorText or (Frame.isSendBlocked == true or IsIsReadOnly),
+			isStopDisabled = IsIsReadOnly,
+			onSend = UseResult1,
+			onStop = Frame.onStop
+		})
+	})
 	
 	return ReactModule.createElement(Composer, {
 		label = "",
@@ -105,48 +173,12 @@ return function(Frame)
 		ref = UseRefResult,
 		composerDebug = Frame.composerDebug,
 		LayoutOrder = Frame.LayoutOrder,
-		leadingElement = if HasOnOpenCaptureGallery then ReactModule.createElement(View, {
-			tag = "auto-xy",
-			padding = {
-				top = UDim.new(0, UseTokensResult.Size.Size_200),
-				bottom = UDim.new(0, UseTokensResult.Size.Size_200 - 1),
-				left = UDim.new(0, UseTokensResult.Size.Size_100),
-				right = UDim.new(0, 0)
-			}
-		}, {
-			Attach = ReactModule.createElement(IconButton, {
-				isCircular = true,
-				testId = "ChatComposer.AttachImage",
-				icon = IconName.PlusSmall,
-				isDisabled = Frame.isAssistantResponding or IsIsReadOnly,
-				onActivated = UseResult2,
-				size = InputSize.Small,
-				variant = ButtonVariant.Standard
-			})
-		}) else nil,
-		trailingElement = ReactModule.createElement(View, {
-			padding = if FFlagComposerControlAlignment then {
-				top = UDim.new(0, UseTokensResult.Size.Size_200),
-				bottom = UDim.new(0, UseTokensResult.Size.Size_200 - 1),
-				left = UDim.new(0, 0),
-				right = UDim.new(0, UseTokensResult.Size.Size_100)
-			} else nil,
-			tag = {
-				["auto-xy"] = FFlagComposerControlAlignment,
-				["auto-xy padding-x-xsmall padding-y-small"] = not FFlagComposerControlAlignment
-			}
-		}, {
-			Actions = ReactModule.createElement(ChatActionsRowModule, {
-				isAssistantResponding = Frame.isAssistantResponding,
-				canStopAssistantResponse = Frame.canStopAssistantResponse,
-				canSendWhileResponding = Frame.canSendWhileResponding,
-				getIsComposerEmpty = UseMemoResult.getIsComposerEmpty,
-				hasAttachments = HasAttachments,
-				isSendDisabled = HasComposerErrorText or (Frame.isSendBlocked == true or IsIsReadOnly),
-				isStopDisabled = IsIsReadOnly,
-				onSend = UseResult1,
-				onStop = Frame.onStop
-			})
-		})
+		leadingElement = if FFlagBuildExperienceModelPickerModule then nil else Element,
+		trailingElement = if FFlagBuildExperienceModelPickerModule then nil else Element1,
+		footerElement = if FFlagBuildExperienceModelPickerModule then ReactModule.createElement(View, { tag = "row align-y-center size-full-0 auto-y" }, {
+			Leading = Element,
+			Spacer = ReactModule.createElement(View, { LayoutOrder = 2, tag = "fill" }),
+			Trailing = Element1
+		}) else nil
 	})
 end

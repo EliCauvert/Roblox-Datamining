@@ -17,6 +17,7 @@ local FriendsOnlyShareDialogModule = require(BuildExperience.Components.ShareAud
 local ContentMaturityUtilsModule = require(BuildExperience.utils.ContentMaturityUtils)
 local GameConfigurationActionsModule = require(BuildExperience.utils.GameConfigurationActions)
 local GameConfigurationLabelsModule = require(BuildExperience.utils.GameConfigurationLabels)
+local GetGameDetailsNavigationModule = require(BuildExperience.utils.getGameDetailsNavigation)
 local RefreshPublishEligibilityModule = require(BuildExperience.utils.refreshPublishEligibility)
 local GetVersionInformationStoreModule = require(BuildExperience.Stores.GetVersionInformationStore)
 local UseGamePermissionsModule = require(BuildExperience.useGamePermissions)
@@ -64,23 +65,8 @@ local function buildPublicAudiences(Audiences)
 	return List
 end
 
-local _ = function(Tbl)
-	if typeof(Tbl.clearAppScreens) == "function" then
-		return Tbl
-	else
-		local Copy = table.clone(Tbl)
-		
-		function Copy.clearAppScreens(RouteNames)
-			-- upvalues: Tbl (copy)
-			Tbl.dispatch({ type = "ClearAppScreensAction", routeNames = RouteNames })
-		end
-		
-		return Copy
-	end
-end
-
 local function PreviewButton(p1)
-	-- upvalues: UseLocalizationFunction (copy), LocalizationStringsModule (copy), UseStoreFunction (copy), UseNavigationFunction (copy), ReactModule (copy), GetRootNavigationFunction (copy), OpenGameDetailsFunction (copy), Button (copy), InputSize (copy), ButtonVariant (copy), FillBehavior (copy)
+	-- upvalues: UseLocalizationFunction (copy), LocalizationStringsModule (copy), UseStoreFunction (copy), UseNavigationFunction (copy), ReactModule (copy), GetRootNavigationFunction (copy), OpenGameDetailsFunction (copy), GetGameDetailsNavigationModule (copy), Button (copy), InputSize (copy), ButtonVariant (copy), FillBehavior (copy)
 	local Preview = UseLocalizationFunction({
 		preview = LocalizationStringsModule.GAME_CONFIGURATION_PREVIEW
 	}).preview
@@ -95,24 +81,8 @@ local function PreviewButton(p1)
 		variant = ButtonVariant.Standard,
 		fillBehavior = FillBehavior.Fill,
 		onActivated = ReactModule.useCallback(function()
-			-- upvalues: GetRootNavigationFunction (upval), UseNavigationResult (copy), OpenGameDetailsFunction (upval), p1 (copy), UseStoreResult (copy), OnPreviewFunction (copy)
-			local RootNavigation = GetRootNavigationFunction(UseNavigationResult)
-			local Text = tostring(p1.target.universeId)
-			local RootNavigation1 = nil
-			
-			if typeof(RootNavigation.clearAppScreens) == "function" then
-				RootNavigation1 = RootNavigation
-			else
-				local Copy = table.clone(RootNavigation)
-				
-				function Copy.clearAppScreens(RouteNames)
-					-- upvalues: RootNavigation (copy)
-					RootNavigation.dispatch({ type = "ClearAppScreensAction", routeNames = RouteNames })
-				end
-				
-				RootNavigation1 = Copy
-			end
-			OpenGameDetailsFunction(Text, RootNavigation1, { source = "BuildExperiencePublish" })(UseStoreResult)
+			-- upvalues: GetRootNavigationFunction (upval), UseNavigationResult (copy), OpenGameDetailsFunction (upval), p1 (copy), GetGameDetailsNavigationModule (upval), UseStoreResult (copy), OnPreviewFunction (copy)
+			OpenGameDetailsFunction(tostring(p1.target.universeId), GetGameDetailsNavigationModule((GetRootNavigationFunction(UseNavigationResult))), { source = "BuildExperiencePublish" })(UseStoreResult)
 			
 			if OnPreviewFunction then
 				OnPreviewFunction()
@@ -271,7 +241,7 @@ return function(p1)
 		local function publish(p2)
 			-- upvalues: v1 (ref), UseSignalStateResult2 (upval), FFlagBuildAdUpsellModule (upval), Flag (ref), GameConfigurationActionsModule (upval), p1 (upval), PlaceId (copy), Title (ref), Description (ref), buildPublicAudiences (upval)
 			v1 = "save_and_publish"
-			local P7 = p2 or UseSignalStateResult2
+			local P6 = p2 or UseSignalStateResult2
 			
 			if FFlagBuildAdUpsellModule then
 				Flag = true
@@ -281,8 +251,8 @@ return function(p1)
 				placeId = PlaceId,
 				title = Title,
 				description = Description,
-				isActive = P7 ~= nil and P7.isActive == true,
-				audiences = buildPublicAudiences(if P7 then P7.audiences else nil)
+				isActive = P6 ~= nil and P6.isActive == true,
+				audiences = buildPublicAudiences(if P6 then P6.audiences else nil)
 			})
 		end
 		

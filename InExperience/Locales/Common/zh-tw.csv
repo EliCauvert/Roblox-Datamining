@@ -114,6 +114,7 @@ Authentication.SignUp.Button.OKCaptialized,確定
 Authentication.SignUp.Button.RetryLogIn,重試登入
 Authentication.SignUp.Description.AccountAlreadyLinked,你的 {platformAccountName} 帳號已與 Roblox 帳號綁定。請試著重新登入。
 Authentication.SignUp.Description.BirthdayHint,輸入日期
+Authentication.SignUp.Description.OptInMarketingEmailConsent,我想接收 Roblox 的最新消息和優惠電子郵件。
 Authentication.SignUp.Description.SignUpAgreement.CreateAnAccount,建立帳號，即表示您同意我們的{startTermsTag}《條款》{endTermsTag}（包括仲裁條款）並認可我們的{startPrivacyTag}《隱私權政策》{endPrivacyTag}。若未滿 18 歲，貴家長或監護人必須允許您建立帳號，並同意我們的《條款》。
 Authentication.SignUp.Description.Try,試用
 Authentication.SignUp.Description.UsernameChanged,大功告成！你的帳號已準備就緒並連結到 {platform}。立即重生，即可在遊戲中看到更新後的使用者名稱，或在下次重生時套用。
@@ -789,6 +790,7 @@ CoreScripts.InGameMenu.Controls.CameraMovementTitle,攝影機移動
 CoreScripts.InGameMenu.Controls.CameraZoomGamepad,攝影機縮放
 CoreScripts.InGameMenu.Controls.CharacterMovementTitle,虛擬人偶控制
 CoreScripts.InGameMenu.Controls.Chat,
+CoreScripts.InGameMenu.Controls.ControlsPage,控制
 CoreScripts.InGameMenu.Controls.DevConsole,開發主機
 CoreScripts.InGameMenu.Controls.DownArrow,向下箭號
 CoreScripts.InGameMenu.Controls.DropTool,放置工具
@@ -1536,8 +1538,11 @@ Feature.Avatar.Heading.SharePublicAvatar,分享您的虛擬人偶
 Feature.Avatar.Heading.SortBy,排序方式：
 Feature.Avatar.Heading.UsedName,名稱已使用
 Feature.Avatar.Heading.WearConfirmation,穿戴道具
+Feature.Avatar.HeroWidget.BundleHeadlessTitle,把握最後機會，獲得無頭騎士
 Feature.Avatar.HeroWidget.BundleTitle,Korblox Pactbreaker
 Feature.Avatar.HeroWidget.CapsuleDescription,Roblox 原創的三種全新演繹
+Feature.Avatar.HeroWidget.CapsuleHalloweenDescription,專為萬聖節推出的新道具
+Feature.Avatar.HeroWidget.CapsuleHalloweenTitle,專為萬聖節打造
 Feature.Avatar.HeroWidget.CapsulePoolDescription,三款全新道具，讓你盡情玩水
 Feature.Avatar.HeroWidget.CapsulePoolTitle,泳池派對
 Feature.Avatar.HeroWidget.CapsuleTitle,經典再現
@@ -2143,6 +2148,8 @@ Feature.Build.Description.GameConfiguration,變更販售物品的方式，並宣
 Feature.Build.Description.GameCreationDone,我已建立完成並發佈你的遊戲。你可以打開遊戲試玩。
 Feature.Build.Description.GameSavedPlaytest,我已建立遊戲並儲存了新版本。你可以打開遊戲試玩。
 Feature.Build.Description.HubSettings,在創作者中心管理所有設定
+Feature.Build.Description.InternalSpec,若要使用最新規格，請保持空白
+Feature.Build.Description.InternalTesting,試用全新模型規格
 Feature.Build.Description.InviteFriendLimit,在你創作時，邀請最多 {MAX_INVITES} 位好友一起遊玩。
 Feature.Build.Description.LongAdCampaign,有更多時間觸及新玩家，並讓他們持續回流。
 Feature.Build.Description.MakeAudienceAvail,發佈體驗，讓此受眾可以存取。
@@ -2237,6 +2244,7 @@ Feature.Build.Label.FreeBuildUsage,免費組建使用量
 Feature.Build.Label.Friends,
 Feature.Build.Label.FriendsOnly,僅限好友
 Feature.Build.Label.GamePlays,遊戲遊玩次數
+Feature.Build.Label.GamesTab,
 Feature.Build.Label.GetMoreBuildUsage,取得更多組建使用量
 Feature.Build.Label.GroupGames,群組遊戲
 Feature.Build.Label.Groups,群組
@@ -2245,6 +2253,8 @@ Feature.Build.Label.IconThumbnails,圖示和縮圖
 Feature.Build.Label.Images2D,2D 圖片
 Feature.Build.Label.InProgress,進行中
 Feature.Build.Label.InputNeeded,必須輸入內容
+Feature.Build.Label.InternalSpec,內部規格
+Feature.Build.Label.InternalTesting,內部測試
 Feature.Build.Label.InviteCount,{COUNT}/{MAX_INVITES}
 Feature.Build.Label.Limited,受限
 Feature.Build.Label.Live,已發佈
@@ -2265,6 +2275,7 @@ Feature.Build.Label.OnSale,販售中
 Feature.Build.Label.Pending,擱置
 Feature.Build.Label.PercentUsed,已使用 {PERCENT}%
 Feature.Build.Label.PlayTime,遊玩時間
+Feature.Build.Label.PreviewsTab,
 Feature.Build.Label.PreviouslyPublished,先前已發佈
 Feature.Build.Label.Price,價格
 Feature.Build.Label.PriceUnavailable,--
@@ -2475,6 +2486,7 @@ Feature.Build.Notification.Title.Finished,組建完成
 Feature.Build.Notification.Title.NeedInput,組建需要你的輸入
 Feature.Build.Placeholder.DescribeProduct,描述你想要銷售的產品
 Feature.Build.Placeholder.DescribeProductUpdate,描述一項更新
+Feature.Build.Placeholder.InternalSpec,internal_code
 Feature.Build.Prompt.CreateDeveloperProduct,協助我建立開發者產品、將其連接到遊戲中、驗證和發佈變更，並開放購買。
 Feature.Build.Title.AdActive,廣告活動已生效
 Feature.Build.Title.AdCampaignDuration,為期 {durationDays} 天的廣告活動
@@ -2641,6 +2653,7 @@ Feature.Catalog.AvatarWidgetTitle,
 Feature.Catalog.Checkout.Title.PurchasedFailedPlural,無法購買 {count} 件道具
 Feature.Catalog.Checkout.WearAfterPurchase,
 Feature.Catalog.Description.AttributionAlertBody,您將離開此區域並加入 {experienceName}.
+Feature.Catalog.Feature.Catalog.Label.AvatarBackgrounds,
 Feature.Catalog.Feature.Catalog.Label.ClassicShirt,
 Feature.Catalog.Feature.Catalog.Label.ClassicTShirt,
 Feature.Catalog.Feature.Catalog.Label.TotalItems,合計：{itemCount} 個道具
@@ -3639,6 +3652,7 @@ Feature.InExperienceIntervention.Label.TimeLeft.Day.Singular,
 Feature.InExperienceIntervention.Label.TimeLeft.Hours,剩下 {time}
 Feature.InExperienceShop.Description.RobuxPurchaseLegalDisclosure,購買 Robux 即表示您同意我們的{termsLinkStart}使用條款{termsLinkEnd}，包括仲裁條款和撤銷政策。
 Feature.InExperienceShop.GamePass,
+Feature.InExperienceShop.Label.Active,啟用中
 Feature.InExperienceShop.Label.BonusItem,額外獎勵物品
 Feature.InExperienceShop.Label.DescriptionWithTime,{description} {timeRemaining}
 Feature.InExperienceShop.Label.EndTime,{timeRemaining}後結束
@@ -3838,6 +3852,7 @@ Feature.Moments.Title.MomentRemoved,「美好時光」已移除
 Feature.Moments.Title.PostInsights,頁面標題
 Feature.Moments.Title.ReportPost,檢舉貼文
 Feature.Moments.Tooltip.Creation,參與體驗的所有人皆可檢視你的「美好時光」。
+Feature.Moments.Tooltip.PostInsightsBody,查看瀏覽次數、觀看時間，以及受眾對於「美好時光」的反響。
 Feature.Moments.Tooltip.PostInsightsTitle,在此查看「美好時光」深入分析
 Feature.Moments.Tooltip.ShareFirstMomentBody,從截圖建立美好時光
 Feature.Moments.Tooltip.ShareFirstMomentTitle,分享第一個美好時光

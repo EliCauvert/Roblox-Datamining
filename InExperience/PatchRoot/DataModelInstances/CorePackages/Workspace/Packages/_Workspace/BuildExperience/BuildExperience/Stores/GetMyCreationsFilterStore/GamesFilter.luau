@@ -4,6 +4,5 @@ return {
 	All = "All",
 	MyGames = "MyGames",
 	GroupGames = "GroupGames",
-	SharedGames = "SharedGames",
-	SharedWithMe = "SharedWithMe"
+	SharedGames = "SharedGames"
 }

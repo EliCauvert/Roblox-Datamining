@@ -139,6 +139,7 @@ return {
 	formatResultContent = function(p4)
 		-- upvalues: HttpService (copy)
 		local Action = if typeof(p4) == "table" and typeof(p4.action) == "string" then p4.action else "unknown"
+		local Kind = if typeof(p4) == "table" and typeof(p4.kind) == "string" then p4.kind else nil
 		local Success, Result = pcall(HttpService.JSONEncode, HttpService, p4)
 		
 		if Success and #Result <= 524288 then
@@ -147,6 +148,7 @@ return {
 			return {
 				text = HttpService:JSONEncode({
 					status = "error",
+					kind = Kind,
 					action = Action,
 					detailCode = if Success then "result_too_large" else "result_serialization_failed",
 					message = if Success then "The client tool result exceeded the response size limit." else "The client tool result could not be serialized."
@@ -154,13 +156,14 @@ return {
 			}, true
 		end
 	end,
-	formatRejectionContent = function(Action, FeedbackText)
+	formatRejectionContent = function(Action, FeedbackText, Kind)
 		-- upvalues: HttpService (copy)
 		return {
 			text = HttpService:JSONEncode({
 				status = "cancelled",
 				accepted = false,
 				message = "The creator declined the change.",
+				kind = Kind,
 				action = Action,
 				feedbackText = FeedbackText
 			})

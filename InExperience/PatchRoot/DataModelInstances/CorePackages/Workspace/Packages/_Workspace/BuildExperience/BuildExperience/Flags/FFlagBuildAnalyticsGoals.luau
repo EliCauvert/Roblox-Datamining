@@ -1,1 +1,1 @@
-﻿return game:DefineFastFlag("BuildAnalyticsGoals", false)
+﻿return game:DefineFastFlag("BuildAnalyticsGoals2", false)

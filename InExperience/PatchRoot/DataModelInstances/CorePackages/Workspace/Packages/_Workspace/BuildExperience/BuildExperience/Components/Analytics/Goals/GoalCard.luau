@@ -55,6 +55,8 @@ return function(p1)
 			Locked = ReactModule.createElement(GoalLockedContentModule, {
 				locked = Goal.locked,
 				actionHandlers = p1.lockedActions,
+				goalId = Goal.id,
+				universeId = p1.universeId,
 				testId = `{TestId}.Locked`
 			})
 		} else Elements)

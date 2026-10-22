@@ -98,6 +98,7 @@ Authentication.SignUp.Button.OKCaptialized,Oké
 Authentication.SignUp.Button.RetryLogIn,Opnieuw proberen inloggen
 Authentication.SignUp.Description.AccountAlreadyLinked,Je account op {platformAccountName} is al gekoppeld aan een Roblox-account. Probeer opnieuw in te loggen.
 Authentication.SignUp.Description.BirthdayHint,Datum invoeren
+Authentication.SignUp.Description.OptInMarketingEmailConsent,Ik wil graag e-mails van Roblox ontvangen over nieuws en aanbiedingen.
 Authentication.SignUp.Description.SignUpAgreement.CreateAnAccount,"Door een account aan te maken, ga je akkoord met onze {startTermsTag}Gebruiksvoorwaarden{endTermsTag}, inclusief arbitrage, en erken je ons {startPrivacyTag}Privacybeleid{endPrivacyTag}. Als je jonger bent dan 18, moet je ouder of voogd toestemming geven voor je account en akkoord gaan met onze Gebruiksvoorwaarden."
 Authentication.SignUp.Description.Try,Proberen
 Authentication.SignUp.Description.UsernameChanged,"Alles is geregeld! Je account is klaar en gekoppeld aan {platform}. Respawn nu om je bijgewerkte gebruikersnaam in het spel te zien, anders wordt deze de volgende keer toegepast."
@@ -774,6 +775,7 @@ CoreScripts.InGameMenu.Controls.CameraMovementTitle,Camerabeweging
 CoreScripts.InGameMenu.Controls.CameraZoomGamepad,Camera zoomen
 CoreScripts.InGameMenu.Controls.CharacterMovementTitle,Avatar-besturing
 CoreScripts.InGameMenu.Controls.Chat,
+CoreScripts.InGameMenu.Controls.ControlsPage,Spelbesturing
 CoreScripts.InGameMenu.Controls.DevConsole,Developer console
 CoreScripts.InGameMenu.Controls.DownArrow,Pijl naar beneden
 CoreScripts.InGameMenu.Controls.DropTool,Tool neerzetten
@@ -1519,8 +1521,11 @@ Feature.Avatar.Heading.SharePublicAvatar,Deel je avatar
 Feature.Avatar.Heading.SortBy,Sorteren op
 Feature.Avatar.Heading.UsedName,Gebruikte naam
 Feature.Avatar.Heading.WearConfirmation,Item dragen
+Feature.Avatar.HeroWidget.BundleHeadlessTitle,Laatste kans voor de Headless Horseman
 Feature.Avatar.HeroWidget.BundleTitle,Korblox Pactbreker
 Feature.Avatar.HeroWidget.CapsuleDescription,Drie nieuwe versies van Roblox-originals
+Feature.Avatar.HeroWidget.CapsuleHalloweenDescription,Nieuwe items speciaal voor het griezelseizoen
+Feature.Avatar.HeroWidget.CapsuleHalloweenTitle,Gemaakt voor Halloween
 Feature.Avatar.HeroWidget.CapsulePoolDescription,Drie nieuwe items om indruk te maken
 Feature.Avatar.HeroWidget.CapsulePoolTitle,Pool Party
 Feature.Avatar.HeroWidget.CapsuleTitle,"Klassiekers, opnieuw uitgevonden"
@@ -2126,6 +2131,8 @@ Feature.Build.Description.GameConfiguration,Wijzig hoe je items verkoopt en je s
 Feature.Build.Description.GameCreationDone,Ik heb je spel gemaakt en gepubliceerd. Je kunt het openen om een playtest uit te voeren.
 Feature.Build.Description.GameSavedPlaytest,Ik heb je spel gemaakt en een nieuwe versie opgeslagen. Je kunt het openen om een playtest uit te voeren.
 Feature.Build.Description.HubSettings,Alle instellingen in de Creator Hub beheren
+Feature.Build.Description.InternalSpec,Leeg laten voor de nieuwste specificatie
+Feature.Build.Description.InternalTesting,Nieuwe modelspecificaties uitproberen
 Feature.Build.Description.InviteFriendLimit,Nodig maximaal {MAX_INVITES} vrienden uit om te spelen terwijl jij content creëert.
 Feature.Build.Description.LongAdCampaign,Meer tijd om nieuwe spelers te bereiken en ervoor te zorgen dat ze blijven terugkomen.
 Feature.Build.Description.MakeAudienceAvail,Publiceer je ervaring om deze beschikbaar te maken voor deze doelgroep.
@@ -2220,6 +2227,7 @@ Feature.Build.Label.FreeBuildUsage,Gratis Build-tegoed
 Feature.Build.Label.Friends,
 Feature.Build.Label.FriendsOnly,
 Feature.Build.Label.GamePlays,Speelsessies van het spel
+Feature.Build.Label.GamesTab,Games
 Feature.Build.Label.GetMoreBuildUsage,Koop meer Build-tegoed
 Feature.Build.Label.GroupGames,Games van de groep
 Feature.Build.Label.Groups,Groepen
@@ -2228,6 +2236,8 @@ Feature.Build.Label.IconThumbnails,Pictogram en miniaturen
 Feature.Build.Label.Images2D,2D-afbeeldingen
 Feature.Build.Label.InProgress,In uitvoering
 Feature.Build.Label.InputNeeded,Input vereist
+Feature.Build.Label.InternalSpec,Interne specificatie
+Feature.Build.Label.InternalTesting,Intern testen
 Feature.Build.Label.InviteCount,{COUNT}/{MAX_INVITES}
 Feature.Build.Label.Limited,Beperkt
 Feature.Build.Label.Live,Gepubliceerd
@@ -2248,6 +2258,7 @@ Feature.Build.Label.OnSale,In de verkoop
 Feature.Build.Label.Pending,In behandeling
 Feature.Build.Label.PercentUsed,{PERCENT}% gebruikt
 Feature.Build.Label.PlayTime,Speeltijd
+Feature.Build.Label.PreviewsTab,Voorbeeldweergaven
 Feature.Build.Label.PreviouslyPublished,Eerder gepubliceerd
 Feature.Build.Label.Price,Prijs
 Feature.Build.Label.PriceUnavailable,--
@@ -2458,6 +2469,7 @@ Feature.Build.Notification.Title.Finished,Build voltooid
 Feature.Build.Notification.Title.NeedInput,Build heeft je input nodig
 Feature.Build.Placeholder.DescribeProduct,Beschrijf wat je wilt verkopen
 Feature.Build.Placeholder.DescribeProductUpdate,Beschrijf een update
+Feature.Build.Placeholder.InternalSpec,internal_code
 Feature.Build.Prompt.CreateDeveloperProduct,"Help me een ontwikkelaarsproduct te maken, het in de game te integreren, de wijzigingen te verifiëren en te publiceren en het te koop aan te bieden."
 Feature.Build.Title.AdActive,Advertentiecampagne is actief
 Feature.Build.Title.AdCampaignDuration,Advertentiecampagne van {durationDays} dagen
@@ -2624,6 +2636,7 @@ Feature.Catalog.AvatarWidgetTitle,
 Feature.Catalog.Checkout.Title.PurchasedFailedPlural,{count} items konden niet worden gekocht
 Feature.Catalog.Checkout.WearAfterPurchase,
 Feature.Catalog.Description.AttributionAlertBody,Je verlaat dit gebied en zult deelnemen aan {experienceName}.
+Feature.Catalog.Feature.Catalog.Label.AvatarBackgrounds,
 Feature.Catalog.Feature.Catalog.Label.ClassicShirt,
 Feature.Catalog.Feature.Catalog.Label.ClassicTShirt,
 Feature.Catalog.Feature.Catalog.Label.TotalItems,Totaal: {itemCount} items
@@ -3622,6 +3635,7 @@ Feature.InExperienceIntervention.Label.TimeLeft.Day.Singular,
 Feature.InExperienceIntervention.Label.TimeLeft.Hours,Nog {time}
 Feature.InExperienceShop.Description.RobuxPurchaseLegalDisclosure,"Door Robux te kopen, ga je akkoord met onze {termsLinkStart}Gebruiksvoorwaarden{termsLinkEnd}, inclusief de arbitrageclausule en het herroepingsbeleid."
 Feature.InExperienceShop.GamePass,
+Feature.InExperienceShop.Label.Active,
 Feature.InExperienceShop.Label.BonusItem,Bonusitem
 Feature.InExperienceShop.Label.DescriptionWithTime,{description} {timeRemaining}
 Feature.InExperienceShop.Label.EndTime,Eindigt over {timeRemaining}
@@ -3821,6 +3835,7 @@ Feature.Moments.Title.MomentRemoved,
 Feature.Moments.Title.PostInsights,Titel van paginakoptekst
 Feature.Moments.Title.ReportPost,Post melden
 Feature.Moments.Tooltip.Creation,Iedereen in de ervaring kan je momenten zien.
+Feature.Moments.Tooltip.PostInsightsBody,"Bekijk het aantal weergaven, de kijktijd en hoe het Moment bij je doelgroep is overgekomen."
 Feature.Moments.Tooltip.PostInsightsTitle,Je momentinzichten zijn hier
 Feature.Moments.Tooltip.ShareFirstMomentBody,Maak een moment van je opnames
 Feature.Moments.Tooltip.ShareFirstMomentTitle,Je eerste moment delen

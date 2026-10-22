@@ -4,7 +4,11 @@ return {
 	displayName = "ExpChat",
 	mockDataModel = false,
 	testMatch = { "**/*.test" },
-	testPathIgnorePatterns = { "GetChatModerationStore", "GetUserChatSettingsStore" },
+	testPathIgnorePatterns = {
+		"GetChatModerationStore",
+		"GetUserChatSettingsStore",
+		"useDictationAudioPipeline.test"
+	},
 	setupFilesAfterEnv = {
 		JestConfigsModule.setupFiles.ErrorLogHandler,
 		JestConfigsModule.setupFiles.UIBloxInitializer,

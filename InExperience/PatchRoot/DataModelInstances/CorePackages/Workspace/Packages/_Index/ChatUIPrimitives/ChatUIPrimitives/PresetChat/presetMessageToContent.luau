@@ -8,7 +8,8 @@ return {
 		return if p1.presetId == "" then nil else {
 			kind = "preset",
 			presetId = p1.presetId,
-			text = if EngineFeaturePresetChatUseExpressionTrayOptionsEndpoint then p1.text else p1.value
+			text = if EngineFeaturePresetChatUseExpressionTrayOptionsEndpoint then p1.text else p1.value,
+			presetVersion = p1.presetVersion
 		}
 	end,
 	presetMessageToExpressionItem = function(p1)
@@ -16,7 +17,8 @@ return {
 		local Config = if p1.presetId == "" then nil else {
 			kind = "preset",
 			presetId = p1.presetId,
-			text = if EngineFeaturePresetChatUseExpressionTrayOptionsEndpoint then p1.text else p1.value
+			text = if EngineFeaturePresetChatUseExpressionTrayOptionsEndpoint then p1.text else p1.value,
+			presetVersion = p1.presetVersion
 		}
 		
 		return if Config == nil then nil else { content = Config }

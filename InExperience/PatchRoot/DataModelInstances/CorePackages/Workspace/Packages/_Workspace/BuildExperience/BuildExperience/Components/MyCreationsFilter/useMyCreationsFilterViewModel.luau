@@ -119,8 +119,7 @@ return function(Frame)
 			[GamesFilterModule.All] = All,
 			[GamesFilterModule.MyGames] = MyGames,
 			[GamesFilterModule.GroupGames] = GroupGames,
-			[GamesFilterModule.SharedGames] = SharedGames,
-			[GamesFilterModule.SharedWithMe] = SharedGames
+			[GamesFilterModule.SharedGames] = SharedGames
 		}
 		local List1 = {}
 		
@@ -171,7 +170,7 @@ return function(Frame)
 	end
 	return {
 		LayoutOrder = Frame.LayoutOrder,
-		label = if Name == nil then if UseFilterResult.games == "MyGames" then MyGames elseif UseFilterResult.games == "GroupGames" then GroupGames elseif UseFilterResult.games == "SharedGames" then SharedGames elseif FFlagBuildExperiencePreviewsTabModule and UseFilterResult.games == GamesFilterModule.SharedWithMe then SharedGames else AllGames else Name,
+		label = if Name == nil then if UseFilterResult.games == "MyGames" then MyGames elseif UseFilterResult.games == "GroupGames" then GroupGames elseif UseFilterResult.games == "SharedGames" then SharedGames else AllGames else Name,
 		onOpenSheet = UseResult,
 		isSheetOpen = UseStateResult3,
 		onSheetClosed = UseResult1,

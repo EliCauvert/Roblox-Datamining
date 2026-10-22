@@ -139,15 +139,17 @@ local function useCreateAdAction(p1)
 			title = UseLocalizationResult.createSuccess
 		}) else nil
 	}) else nil
+	local IsNotReady = UseGetAdCampaignsModuleResult2 == "NotReady"
 	
 	return ReactModule.useMemo(function()
-		-- upvalues: UseResult (copy), Inverted (copy), Element (copy)
+		-- upvalues: UseResult (copy), Inverted (copy), IsNotReady (copy), Element (copy)
 		return {
 			onActivate = UseResult,
 			isEligible = Inverted,
+			isLoading = IsNotReady,
 			overlay = Element
 		}
-	end, { UseResult, Element, Inverted })
+	end, { UseResult, Element, Inverted, IsNotReady })
 end
 
 local function useSellItemsAction(UniverseId, UseNavigationResult, Target)
