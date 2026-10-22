@@ -289,5 +289,9 @@
     "isPioneerPlatform": false,
     "AmpV2VpcExcludedRequestTypes": [],
     "LearnPlaceEnabled": false,
-    "FlyoutSidePanelEnabled": false
+    "FlyoutSidePanelEnabled": false,
+    "ExcludeExternalIdentityLogin": true,
+    "ExcludeExternalIdentityOtherSignInOptions": true,
+    "ExternalIdentityAppleUsesBrowserSignIn": false,
+    "ShouldDeeplinkToReferral": false
 }

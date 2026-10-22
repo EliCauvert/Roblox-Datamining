@@ -13,7 +13,7 @@
 :isolate
 :personaIsolate
 16
-2.743.1136
+2.744.1081
 9.0.0
 action
 activity
@@ -74,6 +74,7 @@ android.permission.WAKE_LOCK
 android.permission.WRITE_EXTERNAL_STORAGE
 android.support.customtabs.action.CustomTabsService
 android.support.FILE_PROVIDER_PATHS
+android.window.PROPERTY_COMPAT_ALLOW_RESTRICTED_RESIZABILITY
 androidx.camera.camera2.Camera2Config$DefaultProvider
 androidx.camera.core.impl.MetadataHolderService
 androidx.camera.core.impl.MetadataHolderService.DEFAULT_CONFIG_PROVIDER
@@ -241,6 +242,7 @@ data
 dataExtractionRules
 directBootAware
 enabled
+enableOnBackInvokedCallback
 excludeFromRecents
 exported
 extractNativeLibs
