@@ -298,6 +298,7 @@ Authentication.CrossDevice.Label.Warning1,• 직접 요청한 코드만 입력�
 Authentication.CrossDevice.Label.Warning2,• 다른 사용자의 코드를 입력하지 말 것
 Authentication.CrossDevice.Response.InvalidCode,입력한 코드가 유효하지 않습니다. 정확하게 입력했는지 다시 확인해 보세요.
 Authentication.CrossDevice.Response.LoginFail,로그인 실패
+Authentication.CrossDevice.Response.LoginFailedTryAgain,로그인에 실패했습니다. 다시 시도해 보세요.
 Authentication.CrossDevice.Response.LoginSuccess,로그인 완료
 Authentication.Login.Action.Apple,Apple
 Authentication.Login.Action.ConnectionError.RetryReady,
@@ -362,6 +363,7 @@ Authentication.Login.Label.ConnectionError.RetryWait,"죄송합니다. 서버에
 
 잠시 기다렸다가 다시 시도하세요."
 Authentication.Login.Label.ConnectionError.Title,연결 오류
+Authentication.Login.Label.DontHaveAnAccountCreateOne,계정이 없으신가요? {startTag}계정 만들기{endTag}
 Authentication.Login.Label.Email,
 Authentication.Login.Label.EmailAddress,이메일 주소
 Authentication.Login.Label.EmailNeedsVerification,이메일 인증이 필요합니다
@@ -604,7 +606,7 @@ Authentication.SignUp.Response.PhoneNumberAlreadyLinked,이미 다른 계정에 
 Authentication.SignUp.Response.UsernameMustBeSetFirst,먼저 사용자 이름을 설정해야 합니다.
 Authentication.SignUp.Subtitle.AddYourBirthday,Roblox 계정을 만들려면 생년월일을 입력하세요.
 Authentication.SignUp.Subtitle.YourProgressCarriesOver,설정을 완료하면 진행 상황이 이전됩니다.
-Authentication.SignUp.Subtitle.YoureAlmostThere,이제 거의 다 되었습니다. 지금 닫으면 계정이 완전히 생성되지 않아 Roblox를 플레이할 수 없습니다.
+Authentication.SignUp.Subtitle.YoureAlmostThereClose,거의 다 됐습니다! 지금 취소하면 계정이 완전히 생성되지 않아 Roblox를 플레이할 수 없습니다.
 Authentication.SignUp.Title,
 Authentication.TwoStepVerification.Action.Approve,승인
 Authentication.TwoStepVerification.Action.ChangePassword,비밀번호 변경

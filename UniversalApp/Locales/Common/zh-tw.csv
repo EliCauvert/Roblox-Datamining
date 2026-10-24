@@ -296,6 +296,7 @@ Authentication.CrossDevice.Label.Warning1,• 只輸入您要求的驗證碼
 Authentication.CrossDevice.Label.Warning2,• 絕對不要輸入其他使用者的驗證碼
 Authentication.CrossDevice.Response.InvalidCode,輸入的驗證碼無效，請確認您的驗證碼正確。
 Authentication.CrossDevice.Response.LoginFail,登入失敗
+Authentication.CrossDevice.Response.LoginFailedTryAgain,登入失敗，請再試一次
 Authentication.CrossDevice.Response.LoginSuccess,登入成功
 Authentication.Login.Action.Apple,Apple
 Authentication.Login.Action.ConnectionError.RetryReady,
@@ -360,6 +361,7 @@ Authentication.Login.Label.ConnectionError.RetryWait,"對不起，連線到伺�
 
 請稍後再試。"
 Authentication.Login.Label.ConnectionError.Title,連線錯誤
+Authentication.Login.Label.DontHaveAnAccountCreateOne,沒有帳號嗎？{startTag}立即建立{endTag}
 Authentication.Login.Label.Email,
 Authentication.Login.Label.EmailAddress,
 Authentication.Login.Label.EmailNeedsVerification,您的電子郵件地址需要驗證
@@ -602,7 +604,7 @@ Authentication.SignUp.Response.PhoneNumberAlreadyLinked,已有帳號加入此手
 Authentication.SignUp.Response.UsernameMustBeSetFirst,請先設定使用者名稱。
 Authentication.SignUp.Subtitle.AddYourBirthday,請新增你的生日，以建立 Roblox 帳號。
 Authentication.SignUp.Subtitle.YourProgressCarriesOver,完成設定後，你的進度將會保留。
-Authentication.SignUp.Subtitle.YoureAlmostThere,快完成了。如果現在關閉，你的帳號將無法完全建立，你也將無法玩 Roblox。
+Authentication.SignUp.Subtitle.YoureAlmostThereClose,就快完成了。如果現在取消，你的帳號將無法完整建立，你也將無法玩 Roblox。
 Authentication.SignUp.Title,{username}，您好，請建立密碼
 Authentication.TwoStepVerification.Action.Approve,批准
 Authentication.TwoStepVerification.Action.ChangePassword,變更密碼

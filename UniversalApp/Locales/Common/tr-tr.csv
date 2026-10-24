@@ -297,6 +297,7 @@ Authentication.CrossDevice.Label.Warning1,• Yalnızca talep ettiğin kodları 
 Authentication.CrossDevice.Label.Warning2,• Asla başka bir kullanıcının kodunu girme
 Authentication.CrossDevice.Response.InvalidCode,Girdiğin kod geçersiz. Lütfen doğru girdiğinden emin ol.
 Authentication.CrossDevice.Response.LoginFail,Giriş Başarısız
+Authentication.CrossDevice.Response.LoginFailedTryAgain,Giriş yapılamadı. Tekrar dene
 Authentication.CrossDevice.Response.LoginSuccess,Giriş Başarılı
 Authentication.Login.Action.Apple,Apple
 Authentication.Login.Action.ConnectionError.RetryReady,
@@ -361,6 +362,7 @@ Authentication.Login.Label.ConnectionError.RetryWait,"Üzgünüz, sunucularımı
 
 Lütfen biraz bekleyip tekrar dene."
 Authentication.Login.Label.ConnectionError.Title,Bağlantı Hatası
+Authentication.Login.Label.DontHaveAnAccountCreateOne,Hesabın yok mu? {startTag}Bir hesap oluştur{endTag}
 Authentication.Login.Label.Email,
 Authentication.Login.Label.EmailAddress,E-posta adresi
 Authentication.Login.Label.EmailNeedsVerification,E-postanın doğrulanması gerekiyor
@@ -603,7 +605,7 @@ Authentication.SignUp.Response.PhoneNumberAlreadyLinked,Numara zaten başka bir 
 Authentication.SignUp.Response.UsernameMustBeSetFirst,Önce kullanıcı adı ayarlanmalı.
 Authentication.SignUp.Subtitle.AddYourBirthday,Roblox hesabını oluşturmak için doğum gününü ekle.
 Authentication.SignUp.Subtitle.YourProgressCarriesOver,Kurulumu tamamladığında ilerlemen aktarılır.
-Authentication.SignUp.Subtitle.YoureAlmostThere,Neredeyse bitti. Şimdi kapatırsan hesabın tam olarak oluşturulmaz ve Roblox oynayamazsın.
+Authentication.SignUp.Subtitle.YoureAlmostThereClose,Neredeyse bitti. Şimdi iptal edersen hesabın tam olarak oluşturulmaz ve Roblox oynayamazsın.
 Authentication.SignUp.Title,
 Authentication.TwoStepVerification.Action.Approve,
 Authentication.TwoStepVerification.Action.ChangePassword,Şifreyi Değiştir

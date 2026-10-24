@@ -280,6 +280,7 @@ Authentication.CrossDevice.Label.Warning1,• Alleen codes invoert die je zelf h
 Authentication.CrossDevice.Label.Warning2,• Nooit de code van een andere gebruiker invoert
 Authentication.CrossDevice.Response.InvalidCode,"De code die je hebt ingevoerd, was ongeldig. Zorg ervoor dat je deze correct invoert."
 Authentication.CrossDevice.Response.LoginFail,Inloggen mislukt
+Authentication.CrossDevice.Response.LoginFailedTryAgain,Inloggen is mislukt. Probeer het opnieuw.
 Authentication.CrossDevice.Response.LoginSuccess,Inloggen gelukt
 Authentication.Login.Action.Apple,Apple
 Authentication.Login.Action.ConnectionError.RetryReady,
@@ -344,6 +345,7 @@ Authentication.Login.Label.ConnectionError.RetryWait,"Sorry, er is een probleem 
 
 Wacht even en probeer het opnieuw."
 Authentication.Login.Label.ConnectionError.Title,Verbindingsfout
+Authentication.Login.Label.DontHaveAnAccountCreateOne,Heb je geen account? {startTag}Maak er een aan{endTag}
 Authentication.Login.Label.Email,
 Authentication.Login.Label.EmailAddress,E-mailadressen
 Authentication.Login.Label.EmailNeedsVerification,Je e-mailadres moet worden geverifieerd
@@ -586,7 +588,7 @@ Authentication.SignUp.Response.PhoneNumberAlreadyLinked,Het nummer is al gekoppe
 Authentication.SignUp.Response.UsernameMustBeSetFirst,Gebruikersnaam moet eerst worden ingesteld.
 Authentication.SignUp.Subtitle.AddYourBirthday,Voeg je verjaardag toe om je Roblox-account te maken.
 Authentication.SignUp.Subtitle.YourProgressCarriesOver,Je voortgang wordt overgenomen wanneer je de instelling voltooit.
-Authentication.SignUp.Subtitle.YoureAlmostThere,"Je bent er bijna. Als je nu afsluit, wordt je account niet volledig aangemaakt en kun je Roblox niet spelen."
+Authentication.SignUp.Subtitle.YoureAlmostThereClose,"Je bent bijna klaar. Als je nu annuleert, wordt je account niet volledig aangemaakt en kun je Roblox niet spelen."
 Authentication.SignUp.Title,"Hallo {username}, maak een wachtwoord aan"
 Authentication.TwoStepVerification.Action.Approve,Goedkeuren
 Authentication.TwoStepVerification.Action.ChangePassword,Wachtwoord wijzigen

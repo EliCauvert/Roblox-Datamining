@@ -289,6 +289,7 @@ Authentication.CrossDevice.Label.Warning1,• 只输入您请求的验证码
 Authentication.CrossDevice.Label.Warning2,• 切勿输入其他用户的验证码
 Authentication.CrossDevice.Response.InvalidCode,你输入的代码无效。请确保你的输入正确无误。
 Authentication.CrossDevice.Response.LoginFail,登录失败
+Authentication.CrossDevice.Response.LoginFailedTryAgain,登录失败。请重试
 Authentication.CrossDevice.Response.LoginSuccess,登录成功
 Authentication.Login.Action.Apple,Apple
 Authentication.Login.Action.ConnectionError.RetryReady,重试...
@@ -353,6 +354,7 @@ Authentication.Login.Label.ConnectionError.RetryWait,"抱歉，连接服务器�
 
 请稍候重试。"
 Authentication.Login.Label.ConnectionError.Title,连接错误
+Authentication.Login.Label.DontHaveAnAccountCreateOne,没有帐户？{startTag}创建一个{endTag}
 Authentication.Login.Label.Email,
 Authentication.Login.Label.EmailAddress,电子邮件地址
 Authentication.Login.Label.EmailNeedsVerification,你的电子邮件需要验证
@@ -595,7 +597,7 @@ Authentication.SignUp.Response.PhoneNumberAlreadyLinked,此号码已与另一帐
 Authentication.SignUp.Response.UsernameMustBeSetFirst,
 Authentication.SignUp.Subtitle.AddYourBirthday,添加你的生日，以创建 Roblox 帐户。
 Authentication.SignUp.Subtitle.YourProgressCarriesOver,完成设置后，你的进度会保留。
-Authentication.SignUp.Subtitle.YoureAlmostThere,马上就完成了。如果现在关闭页面，你的帐户将无法完整创建，你将无法玩 Roblox。
+Authentication.SignUp.Subtitle.YoureAlmostThereClose,马上就完成了。如果现在取消，你的帐户将无法完整创建，你也无法游玩 Roblox。
 Authentication.SignUp.Title,你好 {username}，请创建一个密码
 Authentication.TwoStepVerification.Action.Approve,批准
 Authentication.TwoStepVerification.Action.ChangePassword,更改密码
@@ -2750,6 +2752,7 @@ Feature.Build.Message.NoAssetsFound,未找到素材。
 Feature.Build.Message.NoCapturesAvailable,无可用截图
 Feature.Build.Message.NoDescriptionProvided,没有提供描述。
 Feature.Build.Message.NoFriendsToAdd,你还没有任何可邀请的好友。请先在 Roblox 上找到要建立联系的人。
+Feature.Build.Message.NoGamesYet,
 Feature.Build.Message.NoResults,
 Feature.Build.Message.NoSearchResultsFound,未找到搜索结果
 Feature.Build.Message.NoVersionHistory,暂无版本历史记录。
@@ -3444,6 +3447,7 @@ Feature.ContentFeed.Timestamp.HoursAgo,{numHours} 小时前
 Feature.ContentFeed.Timestamp.MinutesAgo,{numMinutes} 分钟前
 Feature.ContentFeed.Timestamp.Now,
 Feature.ContentFeed.Timestamp.WeeksAgo,{numWeeks} 周前
+Feature.CustomForms.Label.Percent,
 Feature.DevSubs.Action.CancelSubscription,取消订阅
 Feature.DevSubs.Action.RenewSubscription,更新订阅
 Feature.DevSubs.Label.ActiveSubscriptions,激活订阅
@@ -4312,6 +4316,7 @@ Feature.Moments.Title.LeaveMomentCreation,要离开“精彩瞬间”创建页�
 Feature.Moments.Title.MomentRemoved,精彩瞬间已移除
 Feature.Moments.Title.PostInsights,页面标题
 Feature.Moments.Title.ReportPost,举报帖子
+Feature.Moments.Title.UnfollowConfirmationDialog,
 Feature.Moments.Tooltip.PostInsightsBody,查看观看次数、观看时长以及精彩瞬间在受众中的反响。
 Feature.Moments.Tooltip.PostInsightsTitle,请查看你的精彩瞬间洞察报告
 Feature.Moments.Tooltip.ShareFirstMomentBody,从截图创建精彩瞬间

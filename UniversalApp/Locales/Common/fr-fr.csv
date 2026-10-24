@@ -297,6 +297,7 @@ Authentication.CrossDevice.Label.Warning1,• n'entres que les codes que tu as d
 Authentication.CrossDevice.Label.Warning2,• n'as jamais entré le code d'un autre utilisateur
 Authentication.CrossDevice.Response.InvalidCode,Le code que tu as rentré n'est pas valide. Vérifie si tu l'as saisi correctement.
 Authentication.CrossDevice.Response.LoginFail,Échec de la connection
+Authentication.CrossDevice.Response.LoginFailedTryAgain,Échec de la connexion. Réessaie.
 Authentication.CrossDevice.Response.LoginSuccess,Connexion réussie
 Authentication.Login.Action.Apple,Apple
 Authentication.Login.Action.ConnectionError.RetryReady,
@@ -361,6 +362,7 @@ Authentication.Login.Label.ConnectionError.RetryWait,"Désolé, il y a un probl�
 
 Patienter et réessayer."
 Authentication.Login.Label.ConnectionError.Title,Erreur de connexion
+Authentication.Login.Label.DontHaveAnAccountCreateOne,Tu n'as pas de compte ? {startTag}Créer un compte{endTag}
 Authentication.Login.Label.Email,
 Authentication.Login.Label.EmailAddress,
 Authentication.Login.Label.EmailNeedsVerification,Vous devez vérifier votre adresse e-mail
@@ -603,7 +605,7 @@ Authentication.SignUp.Response.PhoneNumberAlreadyLinked,Le numéro est déjà as
 Authentication.SignUp.Response.UsernameMustBeSetFirst,Le nom d'utilisateur doit être défini en premier.
 Authentication.SignUp.Subtitle.AddYourBirthday,Ajoute ta date de naissance pour créer ton compte Roblox.
 Authentication.SignUp.Subtitle.YourProgressCarriesOver,Ta progression sera enregistrée une fois la configuration terminée.
-Authentication.SignUp.Subtitle.YoureAlmostThere,"Tu y es presque. Si tu fermes maintenant, la création de ton compte ne sera pas finalisée et tu ne pourras pas jouer sur Roblox."
+Authentication.SignUp.Subtitle.YoureAlmostThereClose,"Tu y es presque. Si tu annules maintenant, la création de ton compte ne sera pas terminée et tu ne pourras pas jouer sur Roblox."
 Authentication.SignUp.Title,
 Authentication.TwoStepVerification.Action.Approve,Approuver
 Authentication.TwoStepVerification.Action.ChangePassword,Changer de mot de passe

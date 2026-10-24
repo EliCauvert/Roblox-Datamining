@@ -297,6 +297,7 @@ Authentication.CrossDevice.Label.Warning1,• あなたがリクエストした�
 Authentication.CrossDevice.Label.Warning2,• 他のユーザーのコードは絶対に入力しない
 Authentication.CrossDevice.Response.InvalidCode,入力したコードは無効です。正しく入力したかどうか、確認してください。
 Authentication.CrossDevice.Response.LoginFail,ログインできませんでした
+Authentication.CrossDevice.Response.LoginFailedTryAgain,ログインできませんでした。もう一度お試しください
 Authentication.CrossDevice.Response.LoginSuccess,ログインできました
 Authentication.Login.Action.Apple,Apple
 Authentication.Login.Action.ConnectionError.RetryReady,再試行する
@@ -361,6 +362,7 @@ Authentication.Login.Label.ConnectionError.RetryWait,"申し訳ありません�
 
 しばらくしてからもう一度お試しください。"
 Authentication.Login.Label.ConnectionError.Title,接続エラー
+Authentication.Login.Label.DontHaveAnAccountCreateOne,アカウントをお持ちではありませんか？{startTag}作成{endTag}
 Authentication.Login.Label.Email,
 Authentication.Login.Label.EmailAddress,
 Authentication.Login.Label.EmailNeedsVerification,メール確認の手続きが必要です
@@ -603,7 +605,7 @@ Authentication.SignUp.Response.PhoneNumberAlreadyLinked,すでに他のアカウ
 Authentication.SignUp.Response.UsernameMustBeSetFirst,最初にユーザーネームを設定する必要があります。
 Authentication.SignUp.Subtitle.AddYourBirthday,Robloxアカウントを作成するには、生年月日を入力してください。
 Authentication.SignUp.Subtitle.YourProgressCarriesOver,設定を完了すると、進行状況が引き継がれます。
-Authentication.SignUp.Subtitle.YoureAlmostThere,もう少しで完了です。今閉じるとアカウントが完全に作成されず、Robloxをプレイできません。
+Authentication.SignUp.Subtitle.YoureAlmostThereClose,もう少しで完了です。今キャンセルするとアカウントが完全に作成されず、Robloxをプレイできません。
 Authentication.SignUp.Title,{username} さん、こんにちは。パスワードを作成してください
 Authentication.TwoStepVerification.Action.Approve,承認する
 Authentication.TwoStepVerification.Action.ChangePassword,パスワードの変更
@@ -3445,6 +3447,7 @@ Feature.ContentFeed.Timestamp.HoursAgo,{numHours}時間前
 Feature.ContentFeed.Timestamp.MinutesAgo,{numMinutes}分前
 Feature.ContentFeed.Timestamp.Now,現在
 Feature.ContentFeed.Timestamp.WeeksAgo,{numWeeks}週間前
+Feature.CustomForms.Label.Percent,
 Feature.DevSubs.Action.CancelSubscription,定期購入をキャンセル
 Feature.DevSubs.Action.RenewSubscription,定期購入を更新する
 Feature.DevSubs.Label.ActiveSubscriptions,有効期間中の定期購入
@@ -4179,6 +4182,7 @@ Feature.Moments.Action.ShowDetails,
 Feature.Moments.Action.ShowMore,
 Feature.Moments.Action.TrimVideo,ビデオをトリミング
 Feature.Moments.Action.TryAgain,もう一度試す
+Feature.Moments.Body.EDPMomentIPReportInstructions,このモーメントにおける知的財産権の侵害を報告するには、ゲームの詳細ページに進んでください。
 Feature.Moments.Description.CommunityStandards,発言できることとできないことの詳細については、コミュニティ基準を確認してください。
 Feature.Moments.Description.EmptyCapturesLibrary,ここに切り抜きが表示されます。
 Feature.Moments.Description.GenerateTextFeedbackDisclosure,AIが生成したものです。投稿前にご確認ください。公開された内容に対する責任はご自身にあります。
@@ -4306,11 +4310,12 @@ Feature.Moments.Label.WriteComment,コメントを書く
 Feature.Moments.Title.Comments,コメント
 Feature.Moments.Title.CommentsWithCappedCount,{count}件以上のコメント
 Feature.Moments.Title.CommentsWithCount,{count}件のコメント
+Feature.Moments.Title.EDPMomentIPReportInstructions,ゲームの詳細ページで規約違反を報告する
 Feature.Moments.Title.GenerateTextFeedbackReason,何が問題でしたか？
 Feature.Moments.Title.GenerateTextOptions,
 Feature.Moments.Title.LeaveMomentCreation,モーメント作成を退出しますか？
 Feature.Moments.Title.MomentRemoved,
-Feature.Moments.Title.PostInsights,ページヘッダーのタイトル
+Feature.Moments.Title.PostInsights,投稿のインサイト
 Feature.Moments.Title.ReportPost,投稿の規約違反を報告
 Feature.Moments.Tooltip.PostInsightsBody,視聴回数、視聴時間、モーメントに対するオーディエンスの反応を確認できます。
 Feature.Moments.Tooltip.PostInsightsTitle,モーメントのインサイトはこちら

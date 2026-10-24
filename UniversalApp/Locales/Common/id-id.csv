@@ -297,6 +297,7 @@ Authentication.CrossDevice.Label.Warning1,• Hanya masukkan kode yang kamu mint
 Authentication.CrossDevice.Label.Warning2,• Jangan pernah masukkan kode pengguna lain
 Authentication.CrossDevice.Response.InvalidCode,Kode yang kamu masukkan tidak valid. Pastikan kode yang kamu masukkan benar.
 Authentication.CrossDevice.Response.LoginFail,Gagal Log In
+Authentication.CrossDevice.Response.LoginFailedTryAgain,Log in gagal. Coba lagi
 Authentication.CrossDevice.Response.LoginSuccess,Berhasil Log In
 Authentication.Login.Action.Apple,Apple
 Authentication.Login.Action.ConnectionError.RetryReady,
@@ -361,6 +362,7 @@ Authentication.Login.Label.ConnectionError.RetryWait,"Maaf, terjadi eror saat me
 
 Tunggu dan coba lagi."
 Authentication.Login.Label.ConnectionError.Title,Kesalahan koneksi
+Authentication.Login.Label.DontHaveAnAccountCreateOne,Tidak punya akun? {startTag}Buat akun{endTag}
 Authentication.Login.Label.Email,
 Authentication.Login.Label.EmailAddress,Alamat email
 Authentication.Login.Label.EmailNeedsVerification,Email kamu perlu diverifikasi
@@ -603,7 +605,7 @@ Authentication.SignUp.Response.PhoneNumberAlreadyLinked,Nomor ini sudah terhubun
 Authentication.SignUp.Response.UsernameMustBeSetFirst,Nama pengguna harus diatur terlebih dahulu.
 Authentication.SignUp.Subtitle.AddYourBirthday,Tambahkan tanggal lahirmu untuk membuat akun Roblox.
 Authentication.SignUp.Subtitle.YourProgressCarriesOver,Progresmu akan tetap tersimpan setelah kamu menyelesaikan penyiapan.
-Authentication.SignUp.Subtitle.YoureAlmostThere,"Sedikit lagi selesai. Jika kamu menutupnya sekarang, akunmu belum selesai dibuat dan kamu tidak akan bisa bermain Roblox."
+Authentication.SignUp.Subtitle.YoureAlmostThereClose,"Sedikit lagi selesai. Jika kamu membatalkannya sekarang, akunmu belum selesai dibuat dan kamu tidak akan bisa bermain Roblox."
 Authentication.SignUp.Title,
 Authentication.TwoStepVerification.Action.Approve,Setuju
 Authentication.TwoStepVerification.Action.ChangePassword,Ubah Password

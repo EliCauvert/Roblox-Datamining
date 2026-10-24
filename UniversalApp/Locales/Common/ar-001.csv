@@ -280,6 +280,7 @@ Authentication.CrossDevice.Label.Warning1,• فقط أدخل الرموز ال�
 Authentication.CrossDevice.Label.Warning2,• لا تدخل أبدًا رمز مستخدم آخر
 Authentication.CrossDevice.Response.InvalidCode,الرمز الذي أدخلته غير صالح. الرجاء التأكد من إدخاله بشكل صحيح.
 Authentication.CrossDevice.Response.LoginFail,تعذر تسجيل الدخول
+Authentication.CrossDevice.Response.LoginFailedTryAgain,تعذَّر تسجيل الدخول. حاول مرة أخرى
 Authentication.CrossDevice.Response.LoginSuccess,تم تسجيل الدخول بنجاح
 Authentication.Login.Action.Apple,Apple
 Authentication.Login.Action.ConnectionError.RetryReady,
@@ -343,6 +344,7 @@ Authentication.Login.Label.ConnectionError.RetryWait,"عذراً، حدثت مش
 
 الرجاء الانتظار والمحاولة مرة أخرى."
 Authentication.Login.Label.ConnectionError.Title,خطأ في الاتصال
+Authentication.Login.Label.DontHaveAnAccountCreateOne,أليس لديك حساب؟ {startTag}أنشئ حسابًا{endTag}
 Authentication.Login.Label.Email,
 Authentication.Login.Label.EmailAddress,عنوان البريد الإلكتروني
 Authentication.Login.Label.EmailNeedsVerification,نحتاج للتحقق من بريدك الإلكتروني
@@ -585,7 +587,7 @@ Authentication.SignUp.Response.PhoneNumberAlreadyLinked,رقم مرتبط بال
 Authentication.SignUp.Response.UsernameMustBeSetFirst,لا بد من تعيين اسم المستخدم أولاً.
 Authentication.SignUp.Subtitle.AddYourBirthday,أضِف تاريخ ميلادك لإنشاء حسابك على منصّة Roblox.
 Authentication.SignUp.Subtitle.YourProgressCarriesOver,سيتم حفظ تقدمك عند إكمال الإعداد.
-Authentication.SignUp.Subtitle.YoureAlmostThere,أنت على وشك الانتهاء. إذا أغلقت هذه النافذة الآن، فلن يتم إنشاء حسابك بالكامل ولن تتمكن من تشغيل منصّة Roblox.
+Authentication.SignUp.Subtitle.YoureAlmostThereClose,أنت على وشك الانتهاء. إذا ألغيت الآن، فلن يتم إنشاء حسابك بالكامل ولن تتمكن من تشغيل منصّة Roblox.
 Authentication.SignUp.Title,
 Authentication.TwoStepVerification.Action.Approve,موافقة
 Authentication.TwoStepVerification.Action.ChangePassword,تغيير كلمة المرور
@@ -737,6 +739,9 @@ Common.UGCValidation.ErrorLabel.DescendantIdAnimationVersionNotSupported,يثب�
 Common.UGCValidation.ErrorLabel.DescendantIdNotPublished,لم يتم نشر الأصل {AssetId} ({InstanceFullName}.{FieldName}). انشره وحاول مرة أخرى.
 Common.UGCValidation.ErrorLabel.DescendantIdVersionNotSupported,يستخدم {InstanceFullName}.{FieldName} الإصدار {Version} من الأصل {AssetId}، ولكن الإصدار 1 فقط هو المدعوم في الوقت الحالي. استخدِم الإصدار 1 وحاول مرة أخرى.
 Common.UGCValidation.ErrorLabel.DynamicHeadCageMisaligned,يجب أن تكون الرؤوس الديناميكية في المتجر محصورة بشكل صحيح بحيث تصطف قمم العينين والفم على القفص مع قمم الشبكة. يرجى تحسين القفص ومحاذاته مع الشبكة.
+Common.UGCValidation.ErrorLabel.DynamicHeadCageMisalignedLeftEye,معالم غلاف العين اليسرى للرأس الديناميكي غير محاذية للمجسم. قم بضبط غلاف العين بحيث يقع مجسم العين اليسرى ضمن منطقة الغلاف المسقطة.
+Common.UGCValidation.ErrorLabel.DynamicHeadCageMisalignedMouth,معالم غلاف الفم للرأس الديناميكي غير محاذية للمجسم. قم بضبط غلاف الفم بحيث يقع مجسم الفم ضمن منطقة الغلاف المسقطة.
+Common.UGCValidation.ErrorLabel.DynamicHeadCageMisalignedRightEye,معالم غلاف العين اليمنى للرأس الديناميكي غير محاذية للمجسم. قم بضبط غلاف العين بحيث يقع مجسم العين اليمنى ضمن منطقة الغلاف المسقطة.
 Common.UGCValidation.ErrorLabel.DynamicHeadHappyNotShown,تعذّر اكتشاف تعبير الابتسامة للرأس الديناميكي. يُرجى ضبط معالم القفص الخاصة بالفم لتتطابق مع موضع الفم على الرأس والتأكد من إمكانية إظهار تعبير الابتسامة.
 Common.UGCValidation.ErrorLabel.DynamicHeadLeftEyeNotClose,تعذّر اكتشاف تعبير إغلاق العين اليسرى للرأس الديناميكي. يُرجى ضبط معالم القفص الخاصة بالعين اليسرى لتتطابق مع موضع العين اليسرى على الرأس والتأكد من إمكانية إغلاقها.
 Common.UGCValidation.ErrorLabel.DynamicHeadMISSINGCAGE,لا تحتوي الرؤوس الديناميكية في المتجر على أقفاص للرأس. يرجى إنشاء قفص رأس للرأس الديناميكي.
@@ -756,6 +761,13 @@ Common.UGCValidation.ErrorLabel.EmoteAnimation_MaxPartTranslationCalcFailed,تع
 Common.UGCValidation.ErrorLabel.EmoteAnimation_MaxPartTranslationMismatch,تحدد الحركة المنشورة الحد الأقصى لإزاحة الجزء بمقدار {taggedTranslation} من الأزرار، لكن بيانات الحركة الخاصة بها تُحسب لتكون {calculatedTranslation} من الأزرار. يُرجى إعادة نشر الحركة.
 Common.UGCValidation.ErrorLabel.Extents_HeadBelowTorso,يجب وضع الرأس فوق UpperTorso. يقع مركز الرأس أسفل الجزء العلوي من الجسم، مما يشير إلى أن أصل Mesh للرأس منهار أو في غير موضعه الصحيح.
 Common.UGCValidation.ErrorLabel.FaceControlsOverrideFACSNotEmpty,يجب أن تكون خاصية InternalOverrideFACSData في FaceControls فارغة عند الرفع.
+Common.UGCValidation.ErrorLabel.FacialFeaturePresence_EyesMissing,يفتقر الوجه الأساسي إلى ملامح العين المطلوبة. يُرجى إضافة عينين إلى الوجه الأساسي والمحاولة مرة أخرى.
+Common.UGCValidation.ErrorLabel.FacialFeaturePresence_MouthMissing,يفتقر الوجه الأساسي إلى الفم المطلوب. يرجى إضافة فم إلى الوجه الأساسي والمحاولة مرة أخرى.
+Common.UGCValidation.ErrorLabel.FacsDeformation_HappyNotShown,تعذّر رصد تعبير السعادة. قم بضبط غلاف الفم أو نظام تعبير السعادة حتى يتشكل مجسم الفم المسقط كما هو متوقع.
+Common.UGCValidation.ErrorLabel.FacsDeformation_LeftEyeNotClose,تعذّر رصد تعبير إغلاق العين اليسرى. قم بضبط غلاف العين اليسرى أو نظام تعبير إغلاق العين اليسرى حتى يتشكل مجسم العين المسقط كما هو متوقع.
+Common.UGCValidation.ErrorLabel.FacsDeformation_MouthNotOpen,تعذّر رصد تعبير فتح الفم. قم بضبط غلاف الفم أو نظام تعبير فتح الفم حتى يتشكل مجسم الفم المسقط كما هو متوقع.
+Common.UGCValidation.ErrorLabel.FacsDeformation_RightEyeNotClose,تعذّر رصد تعبير إغلاق العين اليمنى. قم بضبط غلاف العين اليمنى أو نظام تعبير إغلاق العين اليمنى حتى يتشكل مجسم العين المسقط كما هو متوقع.
+Common.UGCValidation.ErrorLabel.FacsDeformation_SadNotShown,تعذّر رصد تعبير الحزن. قم بضبط غلاف الفم أو نظام تعبير الحزن حتى يتشكل مجسم الفم المسقط كما هو متوقع.
 Common.UGCValidation.ErrorLabel.FacsExpandsHead,تم اكتشاف أن نظام FACS قام بتوسيع حجم رأسك إلى {modPercent}%، لكن تعديل الرأس مخالف لسياسة المتجر المتعلقة بحركات الوجه.
 Common.UGCValidation.ErrorLabel.FacsJointCountBounded,يمكن أن تحتوي الرؤوس الديناميكية على {maxFacsJointCount} من مفاصل نظام FACS كحد أقصى، لكن هذا الرأس يحتوي على {actualJointCount}. يُرجى تقليل عدد مفاصل نظام FACS والمحاولة مرة أخرى.
 Common.UGCValidation.ErrorLabel.FacsShrinksHead,تم اكتشاف أن نظام FACS قام بتقليص حجم رأسك إلى {modPercent}%، لكن تغيير الرأس مخالف لسياسة المتجر المتعلقة بحركات الوجه.
@@ -802,6 +814,7 @@ Common.UGCValidation.ErrorLabel.MeshPartBounds_TooSmall,"حجم أصل mesh لل
 Common.UGCValidation.ErrorLabel.MissingRequiredAttachment,يجب أن توجد نقطة الاتصال {attName} مرة واحدة بالضبط ضمن العناصر الفرعية للجزء {partName}.
 Common.UGCValidation.ErrorLabel.NoAttributes,يحتوي '{RootInstanceName}' (أو العناصر الفرعية له) على سمات. يتعين عليك إزالة السمات مما يلي: {InstanceNameList}
 Common.UGCValidation.ErrorLabel.PropertiesNotSensible,"يحتوي {ClassName} ""{InstancePath}"" على خصائص غير صالحة: {ProblematicProperties}. لقد تم تجاوز حد البايت المحدد (الحد 0 يعني أن الخاصية يجب أن تكون فارغة)، أو أن إحدى الخصائص تحتوي على قيم NaN/Inf أو تجاوزت الحد الافتراضي للحجم."
+Common.UGCValidation.ErrorLabel.RenderedAnimation_RequiredExpressionsMissing,تفتقر الرسوم المتحركة التي تم تقديمها إلى تعبير واحد أو أكثر من تعابير الوجه المطلوبة (إغلاق العين، فتح الفم، السعادة، الحزن).
 Common.UGCValidation.ErrorLabel.RigAttachmentOutOfBounds,"يجب وضع نقطة اتصال rig ""{AttachmentName}"" في الجزء ""{PartName}"" بالقرب من حدود المفصل حيث يتصل جزء الجسد هذا بجزء مجاور. الموضع الحالي [{CurrentPosition}] بعيد جدًا عن مستوى الاتصال. انقله ليكون أقرب إلى [{ClosestValidPosition}]."
 Common.UGCValidation.ErrorLabel.SelectionCountNotOne,لرفع أصل على منصة Roblox، يجب عليك تحديد حالة واحدة بالضبط ونوع الرفع المرتبط بها.
 Common.UGCValidation.ErrorLabel.SerializedAssetTooLarge,هذا الأصل أكبر من الحد المسموح به للرفع (حجمه {sizeBytes} بايت متجاوزًا الحد الأقصى البالغ {maxSizeBytes} بايت). يرجى تقليل حجمه والمحاولة مرة أخرى.

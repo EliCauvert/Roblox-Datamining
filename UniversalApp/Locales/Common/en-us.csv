@@ -298,6 +298,7 @@ Authentication.CrossDevice.Label.Warning1,• Only enter codes that you requeste
 Authentication.CrossDevice.Label.Warning2,• Never enter another user's code
 Authentication.CrossDevice.Response.InvalidCode,The code you entered was invalid. Please make sure you entered it correctly.
 Authentication.CrossDevice.Response.LoginFail,Log in Failed
+Authentication.CrossDevice.Response.LoginFailedTryAgain,Log in failed. Try again
 Authentication.CrossDevice.Response.LoginSuccess,Log in Successful
 Authentication.Login.Action.Apple,Apple
 Authentication.Login.Action.ConnectionError.RetryReady,
@@ -362,6 +363,7 @@ Authentication.Login.Label.ConnectionError.RetryWait,"Sorry, there was a problem
 
 Please wait and try again."
 Authentication.Login.Label.ConnectionError.Title,Connection Error
+Authentication.Login.Label.DontHaveAnAccountCreateOne,Don't have an account? {startTag}Create one{endTag}
 Authentication.Login.Label.Email,
 Authentication.Login.Label.EmailAddress,Email address
 Authentication.Login.Label.EmailNeedsVerification,Your email needs verification
@@ -604,7 +606,7 @@ Authentication.SignUp.Response.PhoneNumberAlreadyLinked,Number is already associ
 Authentication.SignUp.Response.UsernameMustBeSetFirst,Username must be set first.
 Authentication.SignUp.Subtitle.AddYourBirthday,Add your birthday to create your Roblox account.
 Authentication.SignUp.Subtitle.YourProgressCarriesOver,Your progress carries over when you complete setup.
-Authentication.SignUp.Subtitle.YoureAlmostThere,"You're almost there. If you close now, your account won't be fully created and you won't be able to play Roblox."
+Authentication.SignUp.Subtitle.YoureAlmostThereClose,"You're almost done. If you cancel now, your account won’t be fully created and you won’t be able to play Roblox."
 Authentication.SignUp.Title,"Hi {username}, create a password"
 Authentication.TwoStepVerification.Action.Approve,Approve
 Authentication.TwoStepVerification.Action.ChangePassword,Change Password
@@ -2758,6 +2760,7 @@ Feature.Build.Message.NoAssetsFound,No assets found.
 Feature.Build.Message.NoCapturesAvailable,No captures available
 Feature.Build.Message.NoDescriptionProvided,No description provided.
 Feature.Build.Message.NoFriendsToAdd,You don't have any friends to invite yet. Find people to connect with on Roblox first.
+Feature.Build.Message.NoGamesYet,No games yet.
 Feature.Build.Message.NoResults,
 Feature.Build.Message.NoSearchResultsFound,No search results found
 Feature.Build.Message.NoVersionHistory,No version history yet.
@@ -3454,6 +3457,7 @@ Feature.ContentFeed.Timestamp.HoursAgo,{numHours}h ago
 Feature.ContentFeed.Timestamp.MinutesAgo,{numMinutes}m ago
 Feature.ContentFeed.Timestamp.Now,now
 Feature.ContentFeed.Timestamp.WeeksAgo,{numWeeks}w ago
+Feature.CustomForms.Label.Percent,
 Feature.DevSubs.Action.CancelSubscription,Cancel Subscription
 Feature.DevSubs.Action.RenewSubscription,Renew Subscription
 Feature.DevSubs.Label.ActiveSubscriptions,Active Subscriptions
@@ -4323,6 +4327,7 @@ Feature.Moments.Title.LeaveMomentCreation,Leave Moment creation?
 Feature.Moments.Title.MomentRemoved,Moment removed
 Feature.Moments.Title.PostInsights,Post insights
 Feature.Moments.Title.ReportPost,Report post
+Feature.Moments.Title.UnfollowConfirmationDialog,Unfollow @{username}?
 Feature.Moments.Tooltip.PostInsightsBody,"Check views, watch time, and how the Moment landed with your audience."
 Feature.Moments.Tooltip.PostInsightsTitle,Your Moment insights are here
 Feature.Moments.Tooltip.ShareFirstMomentBody,Create a Moment from your captures

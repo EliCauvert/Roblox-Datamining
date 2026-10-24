@@ -280,6 +280,7 @@ Authentication.CrossDevice.Label.Warning1,"• सिर्फ़ वही क�
 Authentication.CrossDevice.Label.Warning2,• कभी भी दूसरे यूज़र का कोड न डालें
 Authentication.CrossDevice.Response.InvalidCode,"आपने जो कोड डाला है, वह अमान्य है. सही कोड डालें."
 Authentication.CrossDevice.Response.LoginFail,लॉग इन नहीं हो सका
+Authentication.CrossDevice.Response.LoginFailedTryAgain,लॉग इन नहीं किया जा सका. फिर से कोशिश करें
 Authentication.CrossDevice.Response.LoginSuccess,लॉग इन हो गया
 Authentication.Login.Action.Apple,Apple
 Authentication.Login.Action.ConnectionError.RetryReady,
@@ -344,6 +345,7 @@ Authentication.Login.Label.ConnectionError.RetryWait,"माफ़ करें,
 
 इंतज़ार के बाद, फिर से कोशिश करें."
 Authentication.Login.Label.ConnectionError.Title,कनेक्ट करने में गड़बड़ी हुई
+Authentication.Login.Label.DontHaveAnAccountCreateOne,आपके पास अकाउंट नहीं है? {startTag}एक अकाउंट बनाएँ{endTag}
 Authentication.Login.Label.Email,
 Authentication.Login.Label.EmailAddress,ईमेल पता
 Authentication.Login.Label.EmailNeedsVerification,आपके ईमेल को वेरिफ़ाई करना ज़रूरी है
@@ -586,7 +588,7 @@ Authentication.SignUp.Response.PhoneNumberAlreadyLinked,नंबर पहल�
 Authentication.SignUp.Response.UsernameMustBeSetFirst,यूज़रनेम पहले सेट किया जाना चाहिए.
 Authentication.SignUp.Subtitle.AddYourBirthday,अपना Roblox अकाउंट बनाने के लिए अपना जन्मदिन जोड़ें.
 Authentication.SignUp.Subtitle.YourProgressCarriesOver,"सेटअप पूरा करने पर, आपकी प्रोग्रेस आगे के लिए सेव हो जाती है."
-Authentication.SignUp.Subtitle.YoureAlmostThere,"आपका अकाउंट लगभग तैयार हो चुका है. अगर आपने अभी बंद किया, तो आपका अकाउंट पूरी तरह से क्रिएट नहीं होगा और बिना अकाउंट के Roblox नहीं खेला जा सकेगा."
+Authentication.SignUp.Subtitle.YoureAlmostThereClose,"आपका काम लगभग पूरा हो चुका है. अगर आपने अभी कैंसिल किया, तो आपका अकाउंट पूरी तरह से क्रिएट नहीं होगा और Roblox गेम्स नहीं खेले जा सकेंगे."
 Authentication.SignUp.Title,"हैलो {username}, पासवर्ड क्रिएट करें"
 Authentication.TwoStepVerification.Action.Approve,मंज़ूरी दें
 Authentication.TwoStepVerification.Action.ChangePassword,पासवर्ड बदलें

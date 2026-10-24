@@ -280,6 +280,7 @@ Authentication.CrossDevice.Label.Warning1,• กรอกรหัสที่�
 Authentication.CrossDevice.Label.Warning2,• ห้ามกรอกรหัสของผู้ใช้อื่นๆ
 Authentication.CrossDevice.Response.InvalidCode,รหัสที่คุณกรอกไม่ถูกต้อง โปรดตรวจสอบว่าคุณได้กรอกรหัสอย่างถูกต้อง
 Authentication.CrossDevice.Response.LoginFail,ลงชื่อเข้าใช้ไม่สำเร็จ
+Authentication.CrossDevice.Response.LoginFailedTryAgain,ลงชื่อเข้าใช้ไม่สำเร็จ โปรดลองอีกครั้ง
 Authentication.CrossDevice.Response.LoginSuccess,ลงชื่อเข้าใช้สำเร็จแล้ว
 Authentication.Login.Action.Apple,Apple
 Authentication.Login.Action.ConnectionError.RetryReady,
@@ -344,6 +345,7 @@ Authentication.Login.Label.ConnectionError.RetryWait,"ขออภัย เก�
 
 โปรดรอสักครู่แล้วลองอีกครั้ง"
 Authentication.Login.Label.ConnectionError.Title,เกิดข้อผิดพลาดในการเชื่อมต่อ
+Authentication.Login.Label.DontHaveAnAccountCreateOne,ยังไม่มีบัญชีใช่ไหม? {startTag}สร้างบัญชี{endTag}
 Authentication.Login.Label.Email,
 Authentication.Login.Label.EmailAddress,ที่อยู่อีเมล
 Authentication.Login.Label.EmailNeedsVerification,อีเมลของคุณจำเป็นต้องได้รับการตรวจสอบยืนยัน
@@ -396,7 +398,7 @@ Authentication.Login.Response.Require2FA,คอนโซลไม่รองร
 Authentication.Login.Response.Require2FAGeneric,อุปกรณ์นี้ไม่รองรับการตรวจสอบยืนยันตัวตนเพิ่มเติม โปรดดำเนินการตามคำแนะนำด้านขวามือเพื่อลงชื่อเข้าใช้อย่างปลอดภัย
 Authentication.Login.Response.ServiceUnavailable,ไม่พร้อมให้บริการ โปรดลองอีกครั้งในภายหลัง
 Authentication.Login.Response.SomethingWentWrong,
-Authentication.Login.Response.TencentLoginFailurePleaseTryAgain,ลงชื่อเข้าใช้ไม่สำเร็จ โปรดลองอีกครั้ง
+Authentication.Login.Response.TencentLoginFailurePleaseTryAgain,
 Authentication.Login.Response.TooManyAttemptsPleaseWait,มีการดำเนินการซ้ำมากเกินไป โปรดรอสักครู่
 Authentication.Login.Response.UnableToSignIn,ไม่สามารถลงชื่อเข้าใช้ได้
 Authentication.Login.Response.UnknownError,
@@ -586,7 +588,7 @@ Authentication.SignUp.Response.PhoneNumberAlreadyLinked,หมายเลขโ
 Authentication.SignUp.Response.UsernameMustBeSetFirst,ต้องระบุชื่อผู้ใช้ก่อน
 Authentication.SignUp.Subtitle.AddYourBirthday,เพิ่มวันเกิดของคุณเพื่อสร้างบัญชี Roblox
 Authentication.SignUp.Subtitle.YourProgressCarriesOver,พอตั้งค่าเสร็จ ก็เล่นต่อจากเดิมได้เลย
-Authentication.SignUp.Subtitle.YoureAlmostThere,เกือบเสร็จแล้ว หากปิดตอนนี้ บัญชีของคุณจะไม่สมบูรณ์ และคุณจะไม่สามารถเล่น Roblox ได้
+Authentication.SignUp.Subtitle.YoureAlmostThereClose,เกือบเสร็จแล้ว หากยกเลิกตอนนี้ บัญชีของคุณจะไม่สมบูรณ์ และคุณจะไม่สามารถเล่น Roblox ได้
 Authentication.SignUp.Title,สวัสดี {username} โปรดสร้างรหัสผ่าน
 Authentication.TwoStepVerification.Action.Approve,อนุมัติ
 Authentication.TwoStepVerification.Action.ChangePassword,เปลี่ยนรหัสผ่าน

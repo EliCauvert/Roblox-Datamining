@@ -297,6 +297,7 @@ Authentication.CrossDevice.Label.Warning1,• Só insira códigos que você soli
 Authentication.CrossDevice.Label.Warning2,• Nunca insira um código de outro usuário
 Authentication.CrossDevice.Response.InvalidCode,O código que você inseriu não é válido. Verifique se você inseriu o código corretamente.
 Authentication.CrossDevice.Response.LoginFail,Falha ao entrar
+Authentication.CrossDevice.Response.LoginFailedTryAgain,Falha no login. Tente novamente
 Authentication.CrossDevice.Response.LoginSuccess,Sucesso ao entrar na conta
 Authentication.Login.Action.Apple,Apple
 Authentication.Login.Action.ConnectionError.RetryReady,Repetir
@@ -361,6 +362,7 @@ Authentication.Login.Label.ConnectionError.RetryWait,"Ocorreu um problema na com
 
 Aguarde e tente novamente."
 Authentication.Login.Label.ConnectionError.Title,Erro de conexão
+Authentication.Login.Label.DontHaveAnAccountCreateOne,Não tem uma conta? {startTag}Crie uma{endTag}
 Authentication.Login.Label.Email,
 Authentication.Login.Label.EmailAddress,Endereço de e-mail
 Authentication.Login.Label.EmailNeedsVerification,Seu e-mail precisa ser verificado
@@ -603,7 +605,7 @@ Authentication.SignUp.Response.PhoneNumberAlreadyLinked,Este número já está a
 Authentication.SignUp.Response.UsernameMustBeSetFirst,O nome de usuário deve ser definido primeiro.
 Authentication.SignUp.Subtitle.AddYourBirthday,Adicione sua data de nascimento para criar uma conta Roblox.
 Authentication.SignUp.Subtitle.YourProgressCarriesOver,Seu progresso é transferido quando você conclui a configuração.
-Authentication.SignUp.Subtitle.YoureAlmostThere,"Você está quase terminando. Se fechar agora, sua conta não será criada por completo e você não poderá jogar Roblox."
+Authentication.SignUp.Subtitle.YoureAlmostThereClose,"Você está quase terminando. Se cancelar agora, sua conta não será criada por completo e você não poderá jogar Roblox."
 Authentication.SignUp.Title,
 Authentication.TwoStepVerification.Action.Approve,Aprovar
 Authentication.TwoStepVerification.Action.ChangePassword,Alterar senha

@@ -297,6 +297,7 @@ Authentication.CrossDevice.Label.Warning1,"• Wprowadzaj tylko kody, które zos
 Authentication.CrossDevice.Label.Warning2,• Nigdy nie wprowadzaj kodów innego użytkownika
 Authentication.CrossDevice.Response.InvalidCode,Wprowadzono nieprawidłowy kod. Sprawdź poprawność przy wprowadzaniu.
 Authentication.CrossDevice.Response.LoginFail,Nie udało się zalogować
+Authentication.CrossDevice.Response.LoginFailedTryAgain,Nie udało się zalogować. Spróbuj ponownie.
 Authentication.CrossDevice.Response.LoginSuccess,Zalogowano
 Authentication.Login.Action.Apple,Apple
 Authentication.Login.Action.ConnectionError.RetryReady,
@@ -361,6 +362,7 @@ Authentication.Login.Label.ConnectionError.RetryWait,"Wystąpił problem z nawi�
 
 Zaczekaj i spróbuj ponownie."
 Authentication.Login.Label.ConnectionError.Title,Błąd połączenia
+Authentication.Login.Label.DontHaveAnAccountCreateOne,Nie masz konta? {startTag}Utwórz je{endTag}
 Authentication.Login.Label.Email,
 Authentication.Login.Label.EmailAddress,
 Authentication.Login.Label.EmailNeedsVerification,Adres e-mail wymaga weryfikacji
@@ -603,7 +605,7 @@ Authentication.SignUp.Response.PhoneNumberAlreadyLinked,Numer jest już powiąza
 Authentication.SignUp.Response.UsernameMustBeSetFirst,Najpierw należy ustawić nazwę użytkownika.
 Authentication.SignUp.Subtitle.AddYourBirthday,"Dodaj datę urodzenia, aby utworzyć konto Roblox."
 Authentication.SignUp.Subtitle.YourProgressCarriesOver,Twoje postępy zostaną przeniesione po zakończeniu konfiguracji.
-Authentication.SignUp.Subtitle.YoureAlmostThere,"Już prawie wszystko gotowe. Jeśli zamkniesz teraz, Twoje konto nie zostanie w pełni utworzone i nie będziesz mieć możliwości grania na Robloxie."
+Authentication.SignUp.Subtitle.YoureAlmostThereClose,"Już prawie wszystko gotowe. Jeśli anulujesz w tej chwili, Twoje konto nie zostanie w pełni utworzone i nie będziesz mieć możliwości grania na Robloxie."
 Authentication.SignUp.Title,
 Authentication.TwoStepVerification.Action.Approve,Zatwierdź
 Authentication.TwoStepVerification.Action.ChangePassword,Zmień hasło

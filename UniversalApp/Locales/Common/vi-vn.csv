@@ -297,6 +297,7 @@ Authentication.CrossDevice.Label.Warning1,• Chỉ nhập mã mà bạn yêu c�
 Authentication.CrossDevice.Label.Warning2,• Không bao giờ nhập mã của người chơi khác
 Authentication.CrossDevice.Response.InvalidCode,Mã bạn đã nhập không hợp lệ. Vui lòng đảm bảo bạn đã nhập đúng.
 Authentication.CrossDevice.Response.LoginFail,Đăng Nhập Thất Bại
+Authentication.CrossDevice.Response.LoginFailedTryAgain,Đăng nhập không thành công. Vui lòng thử lại
 Authentication.CrossDevice.Response.LoginSuccess,Đăng Nhập Thành Công
 Authentication.Login.Action.Apple,Apple
 Authentication.Login.Action.ConnectionError.RetryReady,
@@ -361,6 +362,7 @@ Authentication.Login.Label.ConnectionError.RetryWait,"Rất tiếc, tiến trìn
 
 Vui lòng chờ và thử lại."
 Authentication.Login.Label.ConnectionError.Title,Lỗi kết nối
+Authentication.Login.Label.DontHaveAnAccountCreateOne,Bạn chưa có tài khoản? {startTag}Tạo tài khoản{endTag}
 Authentication.Login.Label.Email,
 Authentication.Login.Label.EmailAddress,Địa chỉ email
 Authentication.Login.Label.EmailNeedsVerification,Email của bạn cần xác minh
@@ -603,7 +605,7 @@ Authentication.SignUp.Response.PhoneNumberAlreadyLinked,Số điện thoại đ�
 Authentication.SignUp.Response.UsernameMustBeSetFirst,Phải đặt tên người dùng trước.
 Authentication.SignUp.Subtitle.AddYourBirthday,Hãy bổ sung ngày sinh của bạn để tạo tài khoản Roblox.
 Authentication.SignUp.Subtitle.YourProgressCarriesOver,Tiến trình của bạn sẽ được giữ nguyên khi bạn thiết lập xong.
-Authentication.SignUp.Subtitle.YoureAlmostThere,"Bạn sắp nâng cấp xong rồi. Nếu đóng vào lúc này, quy trình tạo tài khoản sẽ chưa kịp hoàn tất và bạn sẽ chưa thể chơi Roblox."
+Authentication.SignUp.Subtitle.YoureAlmostThereClose,"Bạn sắp nâng cấp xong rồi. Nếu hủy vào lúc này, quy trình tạo tài khoản sẽ chưa kịp hoàn tất và bạn sẽ chưa thể chơi Roblox."
 Authentication.SignUp.Title,"Xin chào {username}, hãy tạo một mật khẩu"
 Authentication.TwoStepVerification.Action.Approve,Chấp nhận
 Authentication.TwoStepVerification.Action.ChangePassword,Đổi Mật Khẩu
