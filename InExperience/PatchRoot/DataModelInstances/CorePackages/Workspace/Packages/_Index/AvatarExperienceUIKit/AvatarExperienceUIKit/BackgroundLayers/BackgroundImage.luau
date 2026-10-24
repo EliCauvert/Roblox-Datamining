@@ -1,6 +1,8 @@
 ﻿local Parent = script:FindFirstAncestor("AvatarExperienceUIKit").Parent
 local ReactModule = require(Parent.React)
 local DashModule = require(Parent.Dash)
+local ConnectImageLoadedModule = require(script.Parent.connectImageLoaded)
+local FFlagAXBackgroundImageOnLoaded = require(Parent.AvatarExperienceFlags).FFlagAXBackgroundImageOnLoaded
 local config = {
 	resourceIdentifier = "",
 	anchorPoint = Vector2.new(0.5, 0.5),
@@ -10,9 +12,27 @@ local config = {
 }
 
 return function(p1)
-	-- upvalues: DashModule (copy), config (copy), ReactModule (copy)
+	-- upvalues: DashModule (copy), config (copy), FFlagAXBackgroundImageOnLoaded (copy), ReactModule (copy), ConnectImageLoadedModule (copy)
 	local JoinResult = DashModule.join(config, p1)
+	local UseResult = nil
 	
+	if FFlagAXBackgroundImageOnLoaded then
+		local OnLoaded = JoinResult.onLoaded
+		local ResourceIdentifier = JoinResult.resourceIdentifier
+		local UseRefResult = ReactModule.useRef(nil)
+		UseResult = ReactModule.useCallback(function(p2)
+			-- upvalues: UseRefResult (copy), OnLoaded (copy), ResourceIdentifier (copy), ConnectImageLoadedModule (upval)
+			if UseRefResult.current then
+				UseRefResult.current:Disconnect()
+				UseRefResult.current = nil
+			end
+			if p2 and OnLoaded and ResourceIdentifier ~= "" then
+				UseRefResult.current = ConnectImageLoadedModule(p2, OnLoaded)
+				
+				return
+			end
+		end, { OnLoaded, ResourceIdentifier })
+	end
 	return ReactModule.createElement("ImageLabel", {
 		AnchorPoint = JoinResult.anchorPoint,
 		Position = JoinResult.position,
@@ -24,7 +44,8 @@ return function(p1)
 		ScaleType = JoinResult.scaleType,
 		Size = UDim2.fromScale(1, 1),
 		ZIndex = JoinResult.ZIndex,
-		[ReactModule.Tag] = JoinResult.tag
+		[ReactModule.Tag] = JoinResult.tag,
+		ref = if FFlagAXBackgroundImageOnLoaded and JoinResult.onLoaded then UseResult else nil
 	}, {
 		CornerRadius = ReactModule.createElement("UICorner", { CornerRadius = JoinResult.cornerRadius })
 	})

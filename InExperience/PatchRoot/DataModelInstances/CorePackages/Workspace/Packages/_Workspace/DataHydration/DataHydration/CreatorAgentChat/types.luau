@@ -1,4 +1,5 @@
 ﻿local _ = require(script.Parent.Types.common)
+local _ = require(script.Parent.Types.model)
 local _ = require(script.Parent.Types.acpSession)
 local _ = require(script.Parent.Types.chatUi)
 local SubagentTasksModule = require(script.Parent.Types.subagentTasks)

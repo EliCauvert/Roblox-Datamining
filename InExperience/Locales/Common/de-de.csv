@@ -164,7 +164,7 @@ Authentication.SignUp.Response.PasswordComplexity,Bitte überlege dir ein schwie
 Authentication.SignUp.Response.UsernameMustBeSetFirst,Der Benutzername muss zuerst festgelegt werden.
 Authentication.SignUp.Subtitle.AddYourBirthday,"Gib deinen Geburtstag an, um dein Roblox-Konto zu erstellen."
 Authentication.SignUp.Subtitle.YourProgressCarriesOver,"Dein Fortschritt wird übertragen, wenn du die Einrichtung abschließt."
-Authentication.SignUp.Subtitle.YoureAlmostThere,"Du hast es fast geschafft. Wenn du jetzt schließt, wird dein Konto nicht vollständig erstellt und du kannst nicht auf Roblox spielen."
+Authentication.SignUp.Subtitle.YoureAlmostThereClose,"Du hast es fast geschafft. Wenn du jetzt abbrichst, wird dein Konto nicht vollständig erstellt und du kannst nicht auf Roblox spielen."
 Authentication.TwoStepVerification.Action.GoToSecurity,
 Authentication.TwoStepVerification.Label.TwoStepRequired,"Zweistufige Verifizierung ist erforderlich, um weitere Transaktionen zu tätigen. Gehe zu Einstellungen > Sicherheit, um die Einrichtung der zweistufigen Verifizierung abzuschließen."
 Authentication.TwoStepVerification.Response.TooManyAttempts,Zu viele Versuche. Bitte versuche es später erneut.
@@ -273,6 +273,9 @@ Common.UGCValidation.ErrorLabel.DescendantIdAnimationVersionNotSupported,"{Insta
 Common.UGCValidation.ErrorLabel.DescendantIdNotPublished,Das Objekt {AssetId} ({InstanceFullName}.{FieldName}) ist nicht veröffentlicht. Veröffentliche es und versuche es erneut.
 Common.UGCValidation.ErrorLabel.DescendantIdVersionNotSupported,"{InstanceFullName}.{FieldName} verwendet Version {Version} des Objekts {AssetId}, aber derzeit wird nur Version 1 unterstützt. Verwende Version 1 und versuche es erneut."
 Common.UGCValidation.ErrorLabel.DynamicHeadCageMisaligned,"Dynamische Köpfe auf dem Marktplatz müssen ordnungsgemäß gecaged sein, damit die Augen- und Mundscheitelpunkte auf dem Cage mit den Mesh-Scheitelpunkten übereinstimmen. Bitte verbessere deine Cages und deren Ausrichtung mit dem Netz."
+Common.UGCValidation.ErrorLabel.DynamicHeadCageMisalignedLeftEye,"Die Orientierungspunkte für das linken Auges des dynamischen Kopf-Cages sind nicht korrekt mit dem Mesh ausgerichtet. Passe den Augen-Cage so an, dass sich das Mesh des linken Auges innerhalb des projizierten Cage-Bereichs befindet."
+Common.UGCValidation.ErrorLabel.DynamicHeadCageMisalignedMouth,"Die Orientierungspunkte für den Mund des dynamischen Kopf-Cages sind nicht korrekt mit dem Mesh ausgerichtet. Passe den Mund-Cage so an, dass sich das Mund-Mesh innerhalb des projizierten Cage-Bereichs befindet."
+Common.UGCValidation.ErrorLabel.DynamicHeadCageMisalignedRightEye,"Die Orientierungspunkte für das rechte Auge des dynamischen Kopf-Cages sind nicht korrekt mit dem Mesh ausgerichtet. Passe den Augen-Cage so an, dass sich das Mesh des rechten Auges innerhalb des projizierten Cage-Bereichs befindet."
 Common.UGCValidation.ErrorLabel.DynamicHeadHappyNotShown,"Der Ausdruck ""Lächeln"" für den dynamischen Kopf kann nicht erkannt werden. Bitte passe die Cage-Orientierungspunkte für den Mund so an, dass sie mit der Position des Mundes auf dem Kopf übereinstimmen, und stelle sicher, dass er den Ausdruck ""Lächeln"" zeigen kann."
 Common.UGCValidation.ErrorLabel.DynamicHeadLeftEyeNotClose,"Der Ausdruck ""Linkes Auge geschlossen"" kann für den dynamischen Kopf nicht erkannt werden. Bitte passe die Cage-Orientierungspunkte für das linke Auge so an, dass sie mit der Position des linken Auges auf dem Kopf übereinstimmen, und stelle sicher, dass es geschlossen werden kann."
 Common.UGCValidation.ErrorLabel.DynamicHeadMISSINGCAGE,Für dynamische Köpfe auf dem Marktplatz sind keine Kopf-Cages angegeben. Bitte erstelle einen Kopf-Cage für den dynamischen Kopf.
@@ -292,6 +295,13 @@ Common.UGCValidation.ErrorLabel.EmoteAnimation_MaxPartTranslationCalcFailed,Die 
 Common.UGCValidation.ErrorLabel.EmoteAnimation_MaxPartTranslationMismatch,"Die veröffentlichte Animation gibt eine maximale Teilverschiebung von {taggedTranslation} Noppen an, aber ihre Animationsdaten ergeben {calculatedTranslation} Noppen. Bitte veröffentliche die Animation erneut."
 Common.UGCValidation.ErrorLabel.Extents_HeadBelowTorso,"Der Kopf muss über dem Oberkörper platziert werden. Die Kopfmitte befindet sich unterhalb der Oberseite des Oberkörpers, was darauf hinweist, dass das Kopf-Mesh eingeklappt oder falsch platziert ist."
 Common.UGCValidation.ErrorLabel.FaceControlsOverrideFACSNotEmpty,Die Eigenschaft InternalOverrideFACSData auf FaceControls muss beim Hochladen leer sein.
+Common.UGCValidation.ErrorLabel.FacialFeaturePresence_EyesMissing,Dem Basisgesicht fehlen die erforderlichen Augenmerkmale. Füge dem Basisgesicht Augen hinzu und versuche es erneut.
+Common.UGCValidation.ErrorLabel.FacialFeaturePresence_MouthMissing,Dem Basisgesicht fehlt ein erforderlicher Mund. Füge dem Basisgesicht einen Mund hinzu und versuche es erneut.
+Common.UGCValidation.ErrorLabel.FacsDeformation_HappyNotShown,"Der fröhliche Gesichtsausdruck kann nicht erkannt werden. Passe den Cage des Mundes oder das FACS für den fröhlichen Gesichtsausdruck an, damit sich das projizierte Mund-Mesh wie erwartet verformt."
+Common.UGCValidation.ErrorLabel.FacsDeformation_LeftEyeNotClose,"Der Gesichtsausdruck ""Linkes Auge geschlossen"" kann nicht erkannt werden. Passe den Cage des linken Auges oder das FACS für das Schließen des linken Auges an, damit sich das projizierte Augen-Mesh wie erwartet verformt."
+Common.UGCValidation.ErrorLabel.FacsDeformation_MouthNotOpen,"Der Ausdruck ""Mund geöffnet"" kann nicht erkannt werden. Passe den Cage des Mundes oder das FACS für den geöffneten Mund an, damit sich das projizierte Mund-Mesh wie erwartet verformt."
+Common.UGCValidation.ErrorLabel.FacsDeformation_RightEyeNotClose,"Der Gesichtsausdruck ""Rechtes Auge geschlossen"" kann nicht erkannt werden. Passe den Cage des rechten Auges oder das FACS für das Schließen des rechten Auges an, damit sich das projizierte Augen-Mesh wie erwartet verformt."
+Common.UGCValidation.ErrorLabel.FacsDeformation_SadNotShown,"Der traurige Gesichtsausdruck kann nicht erkannt werden. Passe den Cage des Mundes oder das FACS für den traurigen Gesichtsausdruck an, damit sich das projizierte Mund-Mesh wie erwartet verformt."
 Common.UGCValidation.ErrorLabel.FacsExpandsHead,"Wir haben festgestellt, dass FACS deinen Kopf auf {modPercent} % vergrößert hat. Die Änderung des Kopfes verstößt jedoch gegen die Marktplatzrichtlinien für Gesichtsanimationen."
 Common.UGCValidation.ErrorLabel.FacsJointCountBounded,"Dynamische Köpfe dürfen höchstens {maxFacsJointCount} FACS-Gelenke haben, aber dieser Kopf hat {actualJointCount}. Bitte reduziere die Anzahl der FACS-Gelenke und versuche es erneut."
 Common.UGCValidation.ErrorLabel.FacsShrinksHead,"Wir haben festgestellt, dass FACS deinen Kopf auf {modPercent} % verkleinert hat. Die Änderung des Kopfes verstößt jedoch gegen die Marktplatzrichtlinien für Gesichtsanimationen."
@@ -338,6 +348,7 @@ Common.UGCValidation.ErrorLabel.MeshPartBounds_TooSmall,Die {axis}-Achsen-Größ
 Common.UGCValidation.ErrorLabel.MissingRequiredAttachment,Der Anhang {attName} darf in Unterelemente von {partName} genau einmal vorhanden sein.
 Common.UGCValidation.ErrorLabel.NoAttributes,"""{RootInstanceName}"" (oder untergeordnete Instanzen) enthalten Attribute. Du musst Attribute aus den folgenden Instanzen entfernen: {InstanceNameList}"
 Common.UGCValidation.ErrorLabel.PropertiesNotSensible,"{ClassName} ""{InstancePath}"" hat ungültige Eigenschaften: {ProblematicProperties}. Ein angezeigtes Byte-Limit wurde überschritten (ein Limit von 0 bedeutet, dass die Eigenschaft leer sein muss). Eine andere Eigenschaft enthält NaN/Inf-Werte oder überschreitet ihr Standardgrößenlimit."
+Common.UGCValidation.ErrorLabel.RenderedAnimation_RequiredExpressionsMissing,"Der gerenderten Animation fehlen ein oder mehrere erforderliche Gesichtsausdrücke (Auge geschlossen, Mund geöffnet, fröhlich, traurig)."
 Common.UGCValidation.ErrorLabel.RigAttachmentOutOfBounds,"Der Rig-Anhang ""{AttachmentName}"" in ""{PartName}"" muss in der Nähe der Gelenkbegrenzung platziert werden, wo dieses Körperteil mit einem benachbarten Teil verbunden ist. Die aktuelle Position [{CurrentPosition}] ist zu weit von der Verbindungsebene entfernt. Bewege den Rig-Anhang ihn näher an [{ClosestValidPosition}]."
 Common.UGCValidation.ErrorLabel.SelectionCountNotOne,"Um ein Objekt auf Roblox hochzuladen, musst du genau 1 Instanz und die zugehörige Upload-Art auswählen."
 Common.UGCValidation.ErrorLabel.SerializedAssetTooLarge,"Dieses Objekt ist zu groß, um es hochzuladen ({sizeBytes} Bytes überschreiten das Maximum von {maxSizeBytes} Bytes). Bitte reduziere seine Größe und versuche es erneut."
@@ -3096,7 +3107,6 @@ Feature.Contacts.Message.ContactDiscoverable,"Um dir dabei zu helfen, Freundscha
 Feature.Contacts.Message.ContactsSyncWarning,"Deine Kontakte werden regelmäßig synchronisiert und Übereinstimmungen mit anderen Roblox-Benutzern werden gespeichert, um dir zu helfen, Freunde zu finden. Du kannst dies jederzeit in deinen Geräteeinstellungen verwalten."
 Feature.Contacts.Message.InviteToRoblox,"Füge mich auf Roblox als Freund hinzu, damit wir gemeinsam Experiences erkunden, erstellen und teilen können."
 Feature.Contacts.Message.NoResults,Keine Ergebnisse.
-Feature.DeveloperProducts.Heading.Products,Produkte
 Feature.DeveloperProducts.Label.Product,
 Feature.DisplayName.ErrorMessage.AgedUpNameContainPII,Name könnte private Informationen enthalten
 Feature.DisplayName.ErrorMessage.AgedUpNameHasChanged,Dein Name wurde innerhalb der letzten 7 Tage bereits geändert
@@ -3646,6 +3656,7 @@ Feature.Moments.Action.ShowDetails,Details anzeigen
 Feature.Moments.Action.ShowMore,
 Feature.Moments.Action.TrimVideo,Video zuschneiden
 Feature.Moments.Action.TryAgain,
+Feature.Moments.Body.EDPMomentIPReportInstructions,"Um einen Verstoß gegen das geistige Eigentum in diesem Moment zu melden, gehe weiter zur Detailseite des Spiels."
 Feature.Moments.Description.CommunityStandards,"In den Community-Regeln findest du weitere Informationen darüber, was du schreiben darfst und was nicht."
 Feature.Moments.Description.EmptyCapturesLibrary,Hier werden deine Aufnahmen angezeigt.
 Feature.Moments.Description.GenerateTextFeedbackDisclosure,"KI-generiert. Überprüfe den Inhalt vor der Veröffentlichung – du bist verantwortlich für das, was veröffentlicht wird."
@@ -3774,11 +3785,12 @@ Feature.Moments.Label.WriteComment,Verfasse einen Kommentar
 Feature.Moments.Title.Comments,Kommentare
 Feature.Moments.Title.CommentsWithCappedCount,Über {count} Kommentare
 Feature.Moments.Title.CommentsWithCount,{count} Kommentare
+Feature.Moments.Title.EDPMomentIPReportInstructions,Auf der Detailseite des Spiels melden
 Feature.Moments.Title.GenerateTextFeedbackReason,Was ist schiefgelaufen?
 Feature.Moments.Title.GenerateTextOptions,
 Feature.Moments.Title.LeaveMomentCreation,Moment-Kreation verlassen?
 Feature.Moments.Title.MomentRemoved,Moment entfernt
-Feature.Moments.Title.PostInsights,Titel der Seitenkopfzeile
+Feature.Moments.Title.PostInsights,Einblicke in Posts
 Feature.Moments.Title.ReportPost,Post melden
 Feature.Moments.Tooltip.Creation,Jeder in der Experience kann deine Moments sehen.
 Feature.Moments.Tooltip.PostInsightsBody,"Überprüfe die Aufrufe, die Wiedergabezeit und wie der Moment bei deiner Zielgruppe angekommen ist."

@@ -2,8 +2,8 @@
 local Parent = BuildExperience.Parent
 local FoundationModule = require(Parent.Foundation)
 local ReactModule = require(Parent.React)
+local BuildEmptyStateModule = require(BuildExperience.Components.BuildEmptyState.BuildEmptyState)
 local ExperienceResultsLoadingSkeletonModule = require(BuildExperience.Components.MyCreationsTab.ExperienceResultsLoadingSkeleton)
-local SearchEmptyStateModule = require(BuildExperience.Components.SearchEmptyState.SearchEmptyState)
 local List = FoundationModule.List
 local View = FoundationModule.View
 local RefreshScrollingFrame = require(Parent.LuaSocialLibrariesDeps).SocialLibraries.config({}).Components.RefreshScrollingFrame
@@ -11,7 +11,8 @@ local DataStatus = require(Parent.DataHydration).DataStatus
 local InputSize = FoundationModule.Enums.InputSize
 
 return function(Frame)
-	-- upvalues: ReactModule (copy), List (copy), DataStatus (copy), ExperienceResultsLoadingSkeletonModule (copy), SearchEmptyStateModule (copy), RefreshScrollingFrame (copy), View (copy), InputSize (copy)
+	-- upvalues: DataStatus (copy), ReactModule (copy), List (copy), ExperienceResultsLoadingSkeletonModule (copy), RefreshScrollingFrame (copy), View (copy), BuildEmptyStateModule (copy), InputSize (copy)
+	local IsListStatusMatch: boolean = #Frame.rows == 0 and Frame.listStatus == DataStatus.Ready
 	local Elements = {}
 	
 	if #Frame.rows > 0 then
@@ -29,8 +30,6 @@ return function(Frame)
 		for i = 1, 2 do
 			Elements[`Loading{i}`] = ReactModule.createElement(ExperienceResultsLoadingSkeletonModule, { testIdPrefix = "PreviewsTab", LayoutOrder = i, index = i })
 		end
-	elseif Frame.listStatus == DataStatus.Ready then
-		Elements.Empty = ReactModule.createElement(SearchEmptyStateModule, { testId = "PreviewsTab.Empty" })
 	end
 	if Frame.listStatus == DataStatus.Failed then
 		Elements.Error = ReactModule.createElement(List.Item, {
@@ -79,7 +78,16 @@ return function(Frame)
 				tag = "composition-layout-detail size-full-0 auto-y",
 				testId = "PreviewsTab.ContentLayout"
 			}, {
-				ContentBody = ReactModule.createElement(View, { tag = "composition-content-body col size-full-0 auto-y" }, {
+				ContentBody = ReactModule.createElement(View, { tag = "composition-content-body col size-full-0 auto-y" }, if IsListStatusMatch then {
+					EmptyContent = ReactModule.createElement(View, { tag = "col size-full" }, {
+						EmptyState = ReactModule.createElement(View, {
+							tag = "col align-x-center align-y-center fill size-full-0 padding-large",
+							testId = "PreviewsTab.Empty"
+						}, {
+							Content = ReactModule.createElement(BuildEmptyStateModule, { message = Frame.emptyText })
+						})
+					})
+				} else {
 					List = ReactModule.createElement(List.Root, {
 						hasDivider = false,
 						isContained = { isContained = false, hasMargin = false },

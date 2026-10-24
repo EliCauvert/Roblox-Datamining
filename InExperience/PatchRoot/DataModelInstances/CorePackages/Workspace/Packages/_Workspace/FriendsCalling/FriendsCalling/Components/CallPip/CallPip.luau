@@ -3,6 +3,7 @@ local Parent = FriendsCalling.Parent
 local FloatingWindowModule = require(Parent.FloatingWindow)
 local FoundationModule = require(Parent.Foundation)
 local ReactModule = require(Parent.React)
+local GetFriendsCallingStoreModule = require(FriendsCalling.Stores.GetFriendsCallingStore)
 local _ = require(FriendsCalling.Components.CallParticipant.CallParticipantCard)
 local CollapsedCallOverlayModule = require(script.Parent.CollapsedCallOverlay)
 local ExpandedCallOverlayModule = require(script.Parent.ExpandedCallOverlay)
@@ -13,6 +14,7 @@ local FoundationProvider = FoundationModule.FoundationProvider
 local UseSelectedThemeFunction = require(Parent.RoactUtils).Hooks.useSelectedTheme
 local UseDeviceInsetsFunction = require(Parent.Responsive).useDeviceInsets
 local UseDeviceOrientationFunction = require(Parent.RobloxAppHooks).useDeviceOrientation
+local UseSignalStateFunction = require(Parent.SignalsReact).useSignalState
 local UseTokensFunction = FoundationModule.Hooks.useTokens
 local _UDim2 = UDim2.fromOffset(120, 160)
 
@@ -20,7 +22,7 @@ local function noop() end
 
 local Frozen = table.freeze({ Compact = "Compact", Expanded = "Expanded" })
 
-local function CallPipWindow(p1)
+local function CallPipSession(p1)
 	-- upvalues: UseTokensFunction (copy), UseDeviceInsetsFunction (copy), UseDeviceOrientationFunction (copy), DeviceOrientationMode (copy), ReactModule (copy), Frozen (copy), ResolveGeometryModule (copy), ExpandedCallOverlayModule (copy), noop (copy), CollapsedCallOverlayModule (copy), FloatingWindowModule (copy), _UDim2 (copy)
 	local Host = p1.host
 	local UseTokensResult = UseTokensFunction()
@@ -72,11 +74,26 @@ local function CallPipWindow(p1)
 		}),
 		displayOrder = Host.displayOrder,
 		dragInputTarget = UseStateResult1,
+		enabled = p1.enabled,
 		draggable = not (IsUseStateResultMatch and IsNotUseDeviceOrientationResultMatch),
 		initialCenter = UDim2.fromScale(0.85, 0.2),
 		onActivated = if IsUseStateResultMatch then nil else UseResult1,
 		screenInsets = Host.screenInsets,
 		size = if IsUseStateResultMatch then ResolveGeometryModuleResult.expanded.size else _UDim2
+	})
+end
+
+local function CallPipWindow(p1)
+	-- upvalues: UseSignalStateFunction (copy), GetFriendsCallingStoreModule (copy), ReactModule (copy), CallPipSession (copy)
+	local UseSignalStateResult = UseSignalStateFunction(GetFriendsCallingStoreModule(false).getWindowView)
+	
+	return ReactModule.createElement(CallPipSession, {
+		key = tostring(UseSignalStateResult.session),
+		enabled = UseSignalStateResult.hasCall,
+		host = p1.host,
+		participant = p1.participant,
+		isMicrophoneMuted = p1.isMicrophoneMuted,
+		initialPresentation = p1.initialPresentation
 	})
 end
 

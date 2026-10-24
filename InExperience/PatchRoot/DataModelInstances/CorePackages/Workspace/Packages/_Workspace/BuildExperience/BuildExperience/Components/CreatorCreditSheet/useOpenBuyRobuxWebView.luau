@@ -6,15 +6,14 @@ local ReactModule = require(Parent.React)
 local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
 local UseOpenWebViewFunction = require(Parent.WebViewUtils).useOpenWebView
 local LocalizationStringsModule = require(BuildExperience.LocalizationStrings)
-local FFlagBuildExperienceBuyRobuxContextModule = require(BuildExperience.Flags.FFlagBuildExperienceBuyRobuxContext)
 
 local function _(): string
-	-- upvalues: ContentProvider (copy), FFlagBuildExperienceBuyRobuxContextModule (copy)
-	return `{string.gsub(string.gsub(ContentProvider.BaseUrl:lower(), "/m.", "/www."), "http:", "https:")}upgrades/robux?ctx={if FFlagBuildExperienceBuyRobuxContextModule then "build-uapp" else "navpopover"}`
+	-- upvalues: ContentProvider (copy)
+	return `{string.gsub(string.gsub(ContentProvider.BaseUrl:lower(), "/m.", "/www."), "http:", "https:")}upgrades/robux?ctx=build-uapp`
 end
 
 return function(Callback, p1)
-	-- upvalues: UseLocalizationFunction (copy), LocalizationStringsModule (copy), UseOpenWebViewFunction (copy), ReactModule (copy), AppLifecycleObserverService (copy), ContentProvider (copy), FFlagBuildExperienceBuyRobuxContextModule (copy)
+	-- upvalues: UseLocalizationFunction (copy), LocalizationStringsModule (copy), UseOpenWebViewFunction (copy), ReactModule (copy), AppLifecycleObserverService (copy), ContentProvider (copy)
 	local Title = UseLocalizationFunction({
 		title = LocalizationStringsModule.CREATOR_CREDIT_BUY_ROBUX_SHEET_TITLE
 	}).title
@@ -45,8 +44,8 @@ return function(Callback, p1)
 	end, { p1, UseResult, Callback })
 	
 	return ReactModule.useCallback(function()
-		-- upvalues: UseRefResult (copy), Callback (copy), UseOpenWebViewResult (copy), ContentProvider (upval), FFlagBuildExperienceBuyRobuxContextModule (upval), Title (copy), UseResult (copy)
+		-- upvalues: UseRefResult (copy), Callback (copy), UseOpenWebViewResult (copy), ContentProvider (upval), Title (copy), UseResult (copy)
 		UseRefResult.current = Callback ~= nil
-		UseOpenWebViewResult(`{string.gsub(string.gsub(ContentProvider.BaseUrl:lower(), "/m.", "/www."), "http:", "https:")}upgrades/robux?ctx={if FFlagBuildExperienceBuyRobuxContextModule then "build-uapp" else "navpopover"}`, Title, if Callback == nil then nil else UseResult)
+		UseOpenWebViewResult(`{string.gsub(string.gsub(ContentProvider.BaseUrl:lower(), "/m.", "/www."), "http:", "https:")}upgrades/robux?ctx=build-uapp`, Title, if Callback == nil then nil else UseResult)
 	end, { UseResult, Callback, UseOpenWebViewResult, Title })
 end

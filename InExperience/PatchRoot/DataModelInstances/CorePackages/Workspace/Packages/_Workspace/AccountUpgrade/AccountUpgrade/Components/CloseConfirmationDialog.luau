@@ -24,7 +24,7 @@ return function(p1)
 	})
 	local UseLocalizationResult = UseLocalizationFunction({
 		titleText = "Authentication.SignUp.Header.CancelAccountCreation",
-		bodyText = "Authentication.SignUp.Subtitle.YoureAlmostThere",
+		bodyText = "Authentication.SignUp.Subtitle.YoureAlmostThereClose",
 		continueSetupText = "Authentication.SignUp.Action.ContinueSetup",
 		cancelText = "Authentication.SignUp.Action.Cancel"
 	})

@@ -100,6 +100,7 @@ return {
 	ExpChatPresetChatAutocompleteLayer = "UniverseChat.PresetChatAutocomplete",
 	ExpChatPresetChatEmojiTabLayer = "UniverseChat.PresetChat.Emojis",
 	ExpChatPresetChatEmojiEffectLayer = "UniverseChat.PresetChat.Emojis.Experiment1",
+	ExpChatPresetChatBadgePresetFTUXLayer = "UniverseChat.PresetChat.BadgePresetFTUX",
 	ExperienceDetailsPageLayer = "PlayerApp.GameDetailsPage",
 	ExperienceDetailsPageExposureLayer = "PlayerApp.GameDetailsPage.Exposure",
 	ExperienceMenuLayer = "Experience.Menu",

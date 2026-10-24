@@ -1,18 +1,18 @@
 ﻿local Parent = script:FindFirstAncestor("AvatarExperienceProfilePictureEditor").Parent
-local SharedFlagsModule = require(Parent.SharedFlags)
+local DisplayModule = require(Parent.Display)
 local GuiService = game:GetService("GuiService")
 local UserInputService = game:GetService("UserInputService")
 local ReactModule = require(Parent.React)
 
 local function computeGuiInset()
-	-- upvalues: SharedFlagsModule (copy), GuiService (copy), UserInputService (copy)
-	local FFlagLuaAppSupportDeviceSafeInsets = SharedFlagsModule.FFlagLuaAppUseDeviceSafeInsetsForAppContainer and SharedFlagsModule.FFlagLuaAppSupportDeviceSafeInsets
+	-- upvalues: DisplayModule (copy), GuiService (copy), UserInputService (copy)
+	local ShouldUseDeviceSafeInsets = DisplayModule.shouldUseDeviceSafeInsets
 	local GuiInset, GuiInset2 = GuiService:GetGuiInset()
 	local Y = UserInputService.BottomBarSize.Y
 	local Bottom = GuiService:GetSafeZoneOffsets().bottom
 	
 	return {
-		top = if FFlagLuaAppSupportDeviceSafeInsets then 0 else UserInputService.StatusBarSize.Y,
+		top = if ShouldUseDeviceSafeInsets then 0 else UserInputService.StatusBarSize.Y,
 		left = GuiInset.X,
 		right = GuiInset2.X,
 		bottom = if Y == 0 then Bottom else Y

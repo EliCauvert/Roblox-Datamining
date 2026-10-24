@@ -1,41 +1,11 @@
 ﻿local Parent = script:FindFirstAncestor("DiscoveryAnalytics").Parent
 local LoggingProtocolModule = require(Parent.LoggingProtocol)
-local MutedErrorFunction = require(Parent.Loggers).mutedError
 local DiscoveryEventErrorLogger = require(Parent.DiscoveryUtils).DiscoveryEventErrorLogger
 local TModule = require(Parent.t)
 local GetVideoEventParamsValidatorModule = require(script.Parent.getVideoEventParamsValidator)
 local VideoEventInterfaceKeyModule = require(script.Parent.VideoEventInterfaceKey)
-local FFlagLuaAppBroadenVideoAnalytics = require(Parent.SharedFlags).FFlagLuaAppBroadenVideoAnalytics
 local FFlagLuaAppEnableHomepageOneByTwoTile = require(Parent.SharedFlags).FFlagLuaAppEnableHomepageOneByTwoTile
-local FFlagLuaAppDiscoveryMomentVideoTelemetry = require(Parent.SharedFlags).FFlagLuaAppDiscoveryMomentVideoTelemetry
-local StrictInterfaceResult = if FFlagLuaAppBroadenVideoAnalytics then nil else TModule.strictInterface({
-	videoAssetId = TModule.string,
-	videoPlaybackSessionId = TModule.string,
-	endReason = TModule.string,
-	playbackTime = TModule.number,
-	universeId = TModule.string,
-	rootPlaceId = TModule.string,
-	gameSetTypeId = TModule.optional(TModule.string),
-	sortPos = TModule.optional(TModule.number),
-	targetUniverseId = TModule.optional(TModule.string),
-	isMoment = if FFlagLuaAppDiscoveryMomentVideoTelemetry then TModule.optional(TModule.boolean) else nil
-})
-local StrictInterfaceResult1 = if FFlagLuaAppBroadenVideoAnalytics then TModule.strictInterface({
-	videoAssetId = TModule.string,
-	videoPlaybackSessionId = TModule.string,
-	endReason = TModule.string,
-	playbackTime = TModule.number,
-	universeId = TModule.string,
-	rootPlaceId = TModule.string,
-	gameSetTypeId = TModule.optional(TModule.string),
-	sortPos = TModule.optional(TModule.number),
-	targetUniverseId = TModule.optional(TModule.string),
-	nativeAdData = TModule.optional(TModule.string),
-	tileType = TModule.optional(TModule.string),
-	contentType = TModule.optional(TModule.string),
-	isMoment = if FFlagLuaAppDiscoveryMomentVideoTelemetry then TModule.optional(TModule.boolean) else nil
-}) else nil
-local StrictInterfaceResult2 = if FFlagLuaAppEnableHomepageOneByTwoTile then TModule.strictInterface({
+local StrictInterfaceResult = if FFlagLuaAppEnableHomepageOneByTwoTile then TModule.strictInterface({
 	videoAssetId = TModule.string,
 	videoPlaybackSessionId = TModule.string,
 	endReason = TModule.string,
@@ -47,7 +17,7 @@ local StrictInterfaceResult2 = if FFlagLuaAppEnableHomepageOneByTwoTile then TMo
 	tileType = TModule.string,
 	contentType = TModule.optional(TModule.string)
 }) else nil
-local StrictInterfaceResult3 = if FFlagLuaAppEnableHomepageOneByTwoTile then TModule.strictInterface({
+local StrictInterfaceResult1 = if FFlagLuaAppEnableHomepageOneByTwoTile then TModule.strictInterface({
 	videoAssetId = TModule.string,
 	videoPlaybackSessionId = TModule.string,
 	endReason = TModule.string,
@@ -61,12 +31,26 @@ local StrictInterfaceResult3 = if FFlagLuaAppEnableHomepageOneByTwoTile then TMo
 	tileType = TModule.string,
 	contentType = TModule.optional(TModule.string)
 }) else nil
-local Config = if FFlagLuaAppBroadenVideoAnalytics then {
-	[VideoEventInterfaceKeyModule.DefaultGameTile] = StrictInterfaceResult1,
-	[VideoEventInterfaceKeyModule.OneByTwoTileAdLink] = if FFlagLuaAppEnableHomepageOneByTwoTile then StrictInterfaceResult2 else nil,
-	[VideoEventInterfaceKeyModule.OneByTwoTileGame] = if FFlagLuaAppEnableHomepageOneByTwoTile then StrictInterfaceResult3 else nil
-} else nil
 local config = {
+	[VideoEventInterfaceKeyModule.DefaultGameTile] = TModule.strictInterface({
+		videoAssetId = TModule.string,
+		videoPlaybackSessionId = TModule.string,
+		endReason = TModule.string,
+		playbackTime = TModule.number,
+		universeId = TModule.string,
+		rootPlaceId = TModule.string,
+		gameSetTypeId = TModule.optional(TModule.string),
+		sortPos = TModule.optional(TModule.number),
+		targetUniverseId = TModule.optional(TModule.string),
+		nativeAdData = TModule.optional(TModule.string),
+		tileType = TModule.optional(TModule.string),
+		contentType = TModule.optional(TModule.string),
+		isMoment = if require(Parent.SharedFlags).FFlagLuaAppDiscoveryMomentVideoTelemetry then TModule.optional(TModule.boolean) else nil
+	}),
+	[VideoEventInterfaceKeyModule.OneByTwoTileAdLink] = if FFlagLuaAppEnableHomepageOneByTwoTile then StrictInterfaceResult else nil,
+	[VideoEventInterfaceKeyModule.OneByTwoTileGame] = if FFlagLuaAppEnableHomepageOneByTwoTile then StrictInterfaceResult1 else nil
+}
+local config1 = {
 	eventName = "discoveryVideoEnd",
 	description = "Fire when discovery video stops playing",
 	links = "",
@@ -79,28 +63,20 @@ local config = {
 }
 
 return function(p1, p2)
-	-- upvalues: FFlagLuaAppBroadenVideoAnalytics (copy), GetVideoEventParamsValidatorModule (copy), Config (copy), DiscoveryEventErrorLogger (copy), StrictInterfaceResult (copy), MutedErrorFunction (copy), LoggingProtocolModule (copy), config (copy)
-	if FFlagLuaAppBroadenVideoAnalytics then
-		local VideoEventParamsValidatorModule = GetVideoEventParamsValidatorModule(p2)
-		local Entry = Config and Config[VideoEventParamsValidatorModule]
-		
-		if Entry == nil then
-			DiscoveryEventErrorLogger.reportError("DiscoveryVideoEndEventMissingInterface", "No validator registered for video event interface key", { interfaceKey = VideoEventParamsValidatorModule })
-		else
-			local EntryResult, EntryResult2 = Entry(p2)
-			
-			if not EntryResult then
-				DiscoveryEventErrorLogger.reportError("DiscoveryVideoEndEventInvalidInterface", EntryResult2)
-			end
-		end
+	-- upvalues: GetVideoEventParamsValidatorModule (copy), config (copy), DiscoveryEventErrorLogger (copy), LoggingProtocolModule (copy), config1 (copy)
+	local VideoEventParamsValidatorModule = GetVideoEventParamsValidatorModule(p2)
+	local Entry = config[VideoEventParamsValidatorModule]
+	
+	if Entry == nil then
+		DiscoveryEventErrorLogger.reportError("DiscoveryVideoEndEventMissingInterface", "No validator registered for video event interface key", { interfaceKey = VideoEventParamsValidatorModule })
 	else
-		local StrictInterfaceResultResult, StrictInterfaceResultResult2 = StrictInterfaceResult(p2)
+		local EntryResult, EntryResult2 = Entry(p2)
 		
-		if not StrictInterfaceResultResult then
-			MutedErrorFunction(StrictInterfaceResultResult2)
+		if not EntryResult then
+			DiscoveryEventErrorLogger.reportError("DiscoveryVideoEndEventInvalidInterface", EntryResult2)
 		end
 	end
-	LoggingProtocolModule.default:logRobloxTelemetryEvent(config, {
+	LoggingProtocolModule.default:logRobloxTelemetryEvent(config1, {
 		"addSessionInfo",
 		LoggingProtocolModule.StandardizedFields.addOsInfo
 	}, p2, p1)

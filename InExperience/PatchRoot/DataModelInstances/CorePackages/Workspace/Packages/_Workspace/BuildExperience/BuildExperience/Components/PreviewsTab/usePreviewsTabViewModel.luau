@@ -18,6 +18,10 @@ return function(p1)
 	-- upvalues: UseNavigationFunction (copy), UseStoreFunction (copy), UseLocalizationFunction (copy), LocalizationStringsModule (copy), ReactModule (copy), SendBuildExperienceEventModule (copy), OpenGameDetailsFunction (copy), GetGameDetailsNavigationModule (copy), GetRootNavigationFunction (copy), DescriptionWithGroupIconModule (copy)
 	local UseNavigationResult = UseNavigationFunction()
 	local UseStoreResult = UseStoreFunction()
+	local UseLocalizationResult = UseLocalizationFunction({
+		loadError = LocalizationStringsModule.MY_CREATIONS_LOAD_ERROR,
+		noGames = LocalizationStringsModule.MY_CREATIONS_NO_GAMES
+	})
 	local Results = p1.results
 	local LoadMoreFunction = Results.loadMore
 	local UseResult = ReactModule.useCallback(function(UniverseId)
@@ -46,9 +50,7 @@ return function(p1)
 			return Buffer
 		end, { UseResult, Results.items }),
 		listStatus = Results.status,
-		loadError = UseLocalizationFunction({
-			loadError = LocalizationStringsModule.MY_CREATIONS_LOAD_ERROR
-		}).loadError,
+		loadError = UseLocalizationResult.loadError,
 		isLoadingMore = Results.isLoadingMore,
 		failedLoadMore = Results.failedLoadMore,
 		refresh = Results.refresh,
@@ -61,6 +63,7 @@ return function(p1)
 				LoadMoreFunction()
 			end
 		end, { LoadMoreFunction }),
-		retryLoadMore = LoadMoreFunction
+		retryLoadMore = LoadMoreFunction,
+		emptyText = UseLocalizationResult.noGames
 	}
 end

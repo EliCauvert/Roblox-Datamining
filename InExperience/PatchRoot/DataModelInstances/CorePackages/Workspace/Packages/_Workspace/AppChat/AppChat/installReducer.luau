@@ -2,22 +2,25 @@
 local Parent = AppChat.Parent
 local RoduxModule = require(Parent.Rodux)
 local FFlagAppChatPresenceStoreMigrationModule = require(AppChat.Flags.FFlagAppChatPresenceStoreMigration)
+local FFlagAppChatRemoveAliasesSliceModule = require(AppChat.Flags.FFlagAppChatRemoveAliasesSlice)
 local FFlagAppChatRemovePlaceInfosAsyncModule = require(AppChat.Flags.FFlagAppChatRemovePlaceInfosAsync)
+local FFlagAppChatUseSignalsForExternalNavigationRequestModule = require(AppChat.Flags.FFlagAppChatUseSignalsForExternalNavigationRequest)
+local FFlagAppChatUseSignalsForLastEntryPointModule = require(AppChat.Flags.FFlagAppChatUseSignalsForLastEntryPoint)
 
 return function()
-	-- upvalues: RoduxModule (copy), Parent (copy), FFlagAppChatRemovePlaceInfosAsyncModule (copy), AppChat (copy), FFlagAppChatPresenceStoreMigrationModule (copy)
+	-- upvalues: RoduxModule (copy), Parent (copy), FFlagAppChatRemovePlaceInfosAsyncModule (copy), FFlagAppChatRemoveAliasesSliceModule (copy), AppChat (copy), FFlagAppChatUseSignalsForExternalNavigationRequestModule (copy), FFlagAppChatUseSignalsForLastEntryPointModule (copy), FFlagAppChatPresenceStoreMigrationModule (copy)
 	return RoduxModule.combineReducers({
 		PlaceInfos = require(Parent.PlaceInfoRodux).Reducers.PlaceInfosReducer,
 		PlaceInfosAsync = if FFlagAppChatRemovePlaceInfosAsyncModule then nil else require(Parent.PlaceInfoRodux).Reducers.PlaceInfosAsyncReducer,
-		Aliases = require(script.Aliases),
+		Aliases = if FFlagAppChatRemoveAliasesSliceModule then nil else require(script.Aliases),
 		AppLoaded = require(AppChat.installReducer.AppLoaded),
 		ChatSettings = require(AppChat.installReducer.ChatSettings),
 		ChatTimeouts = require(AppChat.installReducer.ChatTimeouts),
 		Conversations = require(AppChat.installReducer.Conversations),
 		ConversationsAsync = require(AppChat.installReducer.ConversationsAsync),
 		Friends = require(script.Friends),
-		ExternalNavigationRequest = require(AppChat.installReducer.ExternalNavigationRequest),
-		LastEntryPoint = require(script.LastEntryPoint),
+		ExternalNavigationRequest = if FFlagAppChatUseSignalsForExternalNavigationRequestModule then nil else require(AppChat.installReducer.ExternalNavigationRequest),
+		LastEntryPoint = if FFlagAppChatUseSignalsForLastEntryPointModule then nil else require(script.LastEntryPoint),
 		Modals = require(script.Modals),
 		ParticipantMetadata = require(script.ParticipantMetadata),
 		Presence = if FFlagAppChatPresenceStoreMigrationModule then nil else require(script.Presence),

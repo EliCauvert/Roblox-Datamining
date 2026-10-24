@@ -1,12 +1,10 @@
 ﻿local PurchasePrompt = script:FindFirstAncestor("PurchasePrompt")
-local Parent = PurchasePrompt.Parent
-local DeriveCartPricingViewFunction = require(Parent.IAPExperience).deriveCartPricingView
+local DeriveCartPricingViewFunction = require(PurchasePrompt.Parent.IAPExperience).deriveCartPricingView
 local ProductTypeEnum = require(PurchasePrompt.types).ProductTypeEnum
 local RequestTypeModule = require(PurchasePrompt.Enums.RequestType)
-local FFlagEnableInExperienceOffersPurchaseFlow = require(Parent.SharedFlags).FFlagEnableInExperienceOffersPurchaseFlow
 
 local function _(p1, GamePass): boolean
-	-- upvalues: ProductTypeEnum (copy), FFlagEnableInExperienceOffersPurchaseFlow (copy), RequestTypeModule (copy)
+	-- upvalues: ProductTypeEnum (copy), RequestTypeModule (copy)
 	if type(p1) == "table" then
 		local Kind = p1.kind
 		
@@ -14,11 +12,11 @@ local function _(p1, GamePass): boolean
 			return true
 		end
 	end
-	return FFlagEnableInExperienceOffersPurchaseFlow and (GamePass == RequestTypeModule.GamePass or GamePass == RequestTypeModule.Product) or false
+	return GamePass == RequestTypeModule.GamePass or GamePass == RequestTypeModule.Product
 end
 
 return function(p1)
-	-- upvalues: ProductTypeEnum (copy), FFlagEnableInExperienceOffersPurchaseFlow (copy), RequestTypeModule (copy), DeriveCartPricingViewFunction (copy)
+	-- upvalues: ProductTypeEnum (copy), RequestTypeModule (copy), DeriveCartPricingViewFunction (copy)
 	if p1 == nil then
 		return nil
 	end
@@ -34,7 +32,7 @@ return function(p1)
 				break
 			end
 		end
-		IsRequestTypeMatch = FFlagEnableInExperienceOffersPurchaseFlow and (RequestType == RequestTypeModule.GamePass or RequestType == RequestTypeModule.Product) or false
+		IsRequestTypeMatch = RequestType == RequestTypeModule.GamePass or RequestType == RequestTypeModule.Product
 	until true
 	if not IsRequestTypeMatch then
 		return nil

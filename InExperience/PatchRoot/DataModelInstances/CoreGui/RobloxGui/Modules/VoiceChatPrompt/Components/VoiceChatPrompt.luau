@@ -7,7 +7,10 @@ local VoiceChatPrompt = RoactModule.PureComponent:extend("VoiceChatPrompt")
 VoiceChatPrompt.validateProps = TModule.strictInterface({
 	promptSignal = TModule.optional(TModule.RBXScriptSignal),
 	errorText = TModule.optional(TModule.string),
-	bannedUntil = TModule.optional(TModule.string),
+	bannedUntil = TModule.optional(if require(script.Parent.Parent.Parent.VoiceChat.Flags.FFlagVoiceChatBanDurationUseServerTime) then TModule.interface({
+		minutes = TModule.number,
+		absoluteSeconds = TModule.number
+	}) else TModule.string),
 	onContinueFunc = TModule.optional(TModule.callback),
 	onPrimaryActivated = TModule.optional(TModule.callback),
 	onSecondaryActivated = TModule.optional(TModule.callback),

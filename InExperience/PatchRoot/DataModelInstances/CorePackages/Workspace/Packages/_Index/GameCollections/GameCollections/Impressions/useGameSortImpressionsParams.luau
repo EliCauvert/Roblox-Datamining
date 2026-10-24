@@ -12,7 +12,6 @@ local DiscoveryEventErrorLogger = require(Parent.DiscoveryUtils).DiscoveryEventE
 local ApportioningDiagnosticTelemetry = require(Parent.DiscoveryUtils).ApportioningDiagnosticTelemetry
 local GameCollectionItemTypes = require(Parent.DiscoveryTypes).GameCollectionItemTypes
 local SendGameImpressionsModule = require(script.Parent.SendGameImpressions)
-local FFlagLuaAppFixSearchImpressions = require(Parent.SharedFlags).FFlagLuaAppFixSearchImpressions
 local FFlagLuaAppEnableNxMRoduxApportioning = require(Parent.SharedFlags).FFlagLuaAppEnableNxMRoduxApportioning
 local FFlagLuaAppEnableNxMApportioningExtraLogging = require(Parent.SharedFlags).FFlagLuaAppEnableNxMApportioningExtraLogging
 
@@ -29,7 +28,7 @@ local _ = function(p1, p2)
 end
 
 return function(p1, p2, SortIndexOnPage, PageContext, p3, p4, p5, GameSortId, p6, p7, p8, p9, p10)
-	-- upvalues: UseRoactServiceFunction (copy), AppEventIngestService (copy), RoactAnalytics (copy), AppPage (copy), GameSortLoadSource (copy), ReactModule (copy), DiscoveryEventErrorLogger (copy), FFlagLuaAppEnableNxMApportioningExtraLogging (copy), GameCollectionItemTypes (copy), ApportioningDiagnosticTelemetry (copy), FFlagLuaAppEnableNxMRoduxApportioning (copy), ReportWarningFunction (copy), LoggingProtocolModule (copy), SendGameImpressionsModule (copy), FFlagLuaAppFixSearchImpressions (copy), Signal (copy)
+	-- upvalues: UseRoactServiceFunction (copy), AppEventIngestService (copy), RoactAnalytics (copy), AppPage (copy), GameSortLoadSource (copy), ReactModule (copy), DiscoveryEventErrorLogger (copy), FFlagLuaAppEnableNxMApportioningExtraLogging (copy), GameCollectionItemTypes (copy), ApportioningDiagnosticTelemetry (copy), FFlagLuaAppEnableNxMRoduxApportioning (copy), ReportWarningFunction (copy), LoggingProtocolModule (copy), SendGameImpressionsModule (copy), Signal (copy)
 	local UseRoactServiceResult = UseRoactServiceFunction(AppEventIngestService)
 	local UseRoactServiceResult1 = UseRoactServiceFunction(RoactAnalytics)
 	local SortLoadSource = if PageContext == AppPage.Home and p1 and p1.topicId then GameSortLoadSource.getSortLoadSource(p1.topicId) else nil
@@ -99,8 +98,7 @@ return function(p1, p2, SortIndexOnPage, PageContext, p3, p4, p5, GameSortId, p6
 	end, {
 		UseRoactServiceResult, UseRoactServiceResult1, SortIndexOnPage, p3, p4, p2,
 		p1, PageContext, p7, p8, p5, p9, SortLoadSource, SortSubId, AnalyticsData,
-		if FFlagLuaAppFixSearchImpressions then p10 else nil,
-		if FFlagLuaAppFixSearchImpressions then GameSortId else nil
+		p10, GameSortId
 	})
 	local UseRefResult = ReactModule.useRef(nil)
 	

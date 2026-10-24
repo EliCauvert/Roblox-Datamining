@@ -58,6 +58,7 @@ local function getExistingHomepageClientAttributes()
 end
 
 return {
+	sessionClientAttribute = "homePageSessionOrdinal",
 	get = function()
 		-- upvalues: getExistingHomepageClientAttributes (copy)
 		local ExistingHomepageClientAttributes = getExistingHomepageClientAttributes()

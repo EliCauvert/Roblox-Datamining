@@ -39,14 +39,13 @@ local FFlagLuaAppLayoutParamsInContext = SharedFlagsModule.FFlagLuaAppLayoutPara
 local FFlagLuaAppRespectClipAncestorImpressions = SharedFlagsModule.FFlagLuaAppRespectClipAncestorImpressions
 local FFlagLuaAppCompositionAlways = SharedFlagsModule.FFlagLuaAppCompositionAlways
 local FFlagLuaAppUseFrameBoundsImpressions = SharedFlagsModule.FFlagLuaAppUseFrameBoundsImpressions
-local FFlagSduiCollectionCarouselOverrides = SharedFlagsModule.FFlagSduiCollectionCarouselOverrides
 local FFlagSduiCarouselUseNestedImpressionsFeedContext = SharedFlagsModule.FFlagSduiCarouselUseNestedImpressionsFeedContext
 local FFlagLuaAppSduiVideoThumbnail = SharedFlagsModule.FFlagLuaAppSduiVideoThumbnail
 local FFlagSduiPreferredTextSizeLineBudgets = SharedFlagsModule.FFlagSduiPreferredTextSizeLineBudgets
 local t = {}
 
 return ReactModule.memo(function(p1)
-	-- upvalues: FFlagLuaAppCompositionAlways (copy), FFlagLuaAppSduiVideoThumbnail (copy), ReactModule (copy), CryoModule (copy), FFlagLuaAppLayoutParamsInContext (copy), SignalsReactModule (copy), UseCollectionLayoutParamsFunction (copy), CollectionItemSize (copy), FindAnalyticsFieldFunction (copy), t (copy), SduiBuilder (copy), UseCollectionAnalyticsContextFunction (copy), UseCollectionImpressionsSignalFunction (copy), FFlagSduiCarouselUseNestedImpressionsFeedContext (copy), GetImpressionsTagModule (copy), SduiParseHelpers (copy), SduiErrors (copy), ReportUnifiedLoggingImpressionsFunction (copy), SendLegacyGameImpressionsForSduiModule (copy), UseTokensFunction (copy), FFlagSduiPreferredTextSizeLineBudgets (copy), UsePreferredTextSizeLineBudgetFunction (copy), ItemHeightModeModule (copy), UseUniformItemHeightModule (copy), SduiCollectionAnalyticsBuilder (copy), GetSduiComponentWrapperFunction (copy), SduiCollectionItemModule (copy), HoverTileCoordinator (copy), UseScrollTelemetryCallbackModule (copy), CollectionCarousel (copy), FFlagSduiCollectionCarouselOverrides (copy), SduiFeedContext (copy), WaitForPropWrapper (copy), FFlagLuaAppUseFrameBoundsImpressions (copy), FrameBoundsImpressionsTracker (copy), FFlagLuaAppRespectClipAncestorImpressions (copy), ScreenSizeImpressionsTracker (copy), ScrollDetector (copy)
+	-- upvalues: FFlagLuaAppCompositionAlways (copy), FFlagLuaAppSduiVideoThumbnail (copy), ReactModule (copy), CryoModule (copy), FFlagLuaAppLayoutParamsInContext (copy), SignalsReactModule (copy), UseCollectionLayoutParamsFunction (copy), CollectionItemSize (copy), FindAnalyticsFieldFunction (copy), t (copy), SduiBuilder (copy), UseCollectionAnalyticsContextFunction (copy), UseCollectionImpressionsSignalFunction (copy), FFlagSduiCarouselUseNestedImpressionsFeedContext (copy), GetImpressionsTagModule (copy), SduiParseHelpers (copy), SduiErrors (copy), ReportUnifiedLoggingImpressionsFunction (copy), SendLegacyGameImpressionsForSduiModule (copy), UseTokensFunction (copy), FFlagSduiPreferredTextSizeLineBudgets (copy), UsePreferredTextSizeLineBudgetFunction (copy), ItemHeightModeModule (copy), UseUniformItemHeightModule (copy), SduiCollectionAnalyticsBuilder (copy), GetSduiComponentWrapperFunction (copy), SduiCollectionItemModule (copy), HoverTileCoordinator (copy), UseScrollTelemetryCallbackModule (copy), CollectionCarousel (copy), SduiFeedContext (copy), WaitForPropWrapper (copy), FFlagLuaAppUseFrameBoundsImpressions (copy), FrameBoundsImpressionsTracker (copy), FFlagLuaAppRespectClipAncestorImpressions (copy), ScreenSizeImpressionsTracker (copy), ScrollDetector (copy)
 	local FFlagLuaAppCompositionAlways1 = FFlagLuaAppCompositionAlways or (p1.appCompositionEnabled or p1.sduiContext.appCompositionEnabled)
 	local LayoutOrder = p1.layoutOrder
 	local SduiContext = p1.sduiContext
@@ -256,7 +255,7 @@ return ReactModule.memo(function(p1)
 			p1.selectionOrderBase, IsItemHeightModeMatch, OnItemSizeChanged,
 			HasMeasuredMaxHeight, UseUniformItemHeightModuleResult.measuredMaxHeightBinding
 		}),
-		numColumns = if FFlagLuaAppCompositionAlways1 then if FFlagSduiCollectionCarouselOverrides then p1.numColumnsOverride else nil else UseSignalStateResult.numColumns,
+		numColumns = if FFlagLuaAppCompositionAlways1 then p1.numColumnsOverride else UseSignalStateResult.numColumns,
 		fractionalItemAmount = if FFlagLuaAppCompositionAlways1 then nil else UseSignalStateResult.fractionalItemAmount,
 		columnGap = if FFlagLuaAppCompositionAlways1 then nil else UseSignalStateResult.columnGap,
 		sideMargin = if FFlagLuaAppCompositionAlways1 then nil else UseSignalStateResult.sideMargin,

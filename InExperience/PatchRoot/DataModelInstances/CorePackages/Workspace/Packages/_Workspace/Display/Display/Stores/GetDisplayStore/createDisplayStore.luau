@@ -3,7 +3,7 @@ local Parent = script.Parent.Parent.Parent
 local Parent1 = Parent.Parent
 local SignalsModule = require(Parent1.Signals)
 local AppCommonLibModule = require(Parent1.AppCommonLib)
-local VrCompatibilityModule = require(Parent1.VrCompatibility)
+local VRConstantsModule = require(Parent1.VrCompatibility.VRConstants)
 local GetGlobalGuiInsetModule = require(Parent.getGlobalGuiInset)
 local FIntLuaAppSmallScreenDesignWidthModule = require(Parent.Flags.FIntLuaAppSmallScreenDesignWidth)
 local FFlagDisableLuaAppConsoleScaleModule = require(Parent.Flags.FFlagDisableLuaAppConsoleScale)
@@ -36,7 +36,7 @@ local function forceConsoleSafeInsets(Vector)
 end
 
 return function()
-	-- upvalues: SignalsModule (copy), AppCommonLibModule (copy), GuiService (copy), VrCompatibilityModule (copy), FFlagDebugForceConsoleSafeInsets (copy), forceConsoleSafeInsets (copy), EnableDisplaySizeEngineFeature (copy), GetGlobalGuiInsetModule (copy), DebugLuaAppEnableScale (copy), FIntLuaAppSmallScreenDesignWidthModule (copy), DebugLuaAppEnableScale1 (copy), IsTenFootInterface (copy), v1 (copy)
+	-- upvalues: SignalsModule (copy), AppCommonLibModule (copy), GuiService (copy), VRConstantsModule (copy), FFlagDebugForceConsoleSafeInsets (copy), forceConsoleSafeInsets (copy), EnableDisplaySizeEngineFeature (copy), GetGlobalGuiInsetModule (copy), DebugLuaAppEnableScale (copy), FIntLuaAppSmallScreenDesignWidthModule (copy), DebugLuaAppEnableScale1 (copy), IsTenFootInterface (copy), v1 (copy)
 	local Connection = nil
 	local Signal, Signal2 = SignalsModule.createSignal(workspace.CurrentCamera)
 	Connection = workspace:GetPropertyChangedSignal("CurrentCamera"):Connect(function()
@@ -73,7 +73,7 @@ return function()
 	local Signal4, Signal2_3 = SignalsModule.createSignal(_Vector2)
 	local Connection1 = nil
 	local Effect = SignalsModule.createEffect(function(p1)
-		-- upvalues: Signal (copy), Connection1 (ref), Signal1 (copy), Signal2_3 (copy), VrCompatibilityModule (upval), Signal2_2 (copy), calculateDeviceSafePadding (copy), FFlagDebugForceConsoleSafeInsets (upval), forceConsoleSafeInsets (upval), Signal4 (copy)
+		-- upvalues: Signal (copy), Connection1 (ref), Signal1 (copy), Signal2_3 (copy), VRConstantsModule (upval), Signal2_2 (copy), calculateDeviceSafePadding (copy), FFlagDebugForceConsoleSafeInsets (upval), forceConsoleSafeInsets (upval), Signal4 (copy)
 		local SignalResult = Signal(p1)
 		
 		if SignalResult then
@@ -82,7 +82,7 @@ return function()
 				Connection1 = nil
 			end
 			if Signal1(p1) then
-				Signal2_3(VrCompatibilityModule.VRConstants.MainScreenResolution)
+				Signal2_3(VRConstantsModule.MainScreenResolution)
 				
 				return
 			end

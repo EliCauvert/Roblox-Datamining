@@ -19,6 +19,8 @@ local FFlagPymkCarouselPresenceStoreMigrationModule = require(Parent.Flags.FFlag
 local FIntUserSeenCollectionBatchTimeMs = SharedFlagsModule.FIntUserSeenCollectionBatchTimeMs
 local FFlagLuaAppUserSeenCollectionUnifiedFields = SharedFlagsModule.FFlagLuaAppUserSeenCollectionUnifiedFields
 local FFlagLuaAppEnableSduiHomePage = SharedFlagsModule.FFlagLuaAppEnableSduiHomePage
+local FFlagPYMKCarouselStableSelectorsModule = require(Parent.Flags.FFlagPYMKCarouselStableSelectors)
+local Frozen = table.freeze({})
 local GetResult = if FFlagPymkCarouselPresenceStoreMigrationModule then DataHydrationModule.Presence.PresenceStore.get() else nil
 local GetResult1 = if FFlagMigrateFriendshipStatusesPYMKModule then DataHydrationModule.Friends.FriendsStore.get() else nil
 
@@ -30,18 +32,42 @@ local function _(p1)
 end
 
 return function(Callback, p1)
-	-- upvalues: FFlagMigrateFriendshipStatusesPYMKModule (copy), UseSelectorFunction (copy), GetDeepValueFunction (copy), ConstantsModule (copy), FFlagLuaAppEnableSduiHomePage (copy), FFlagPymkCarouselPresenceStoreMigrationModule (copy), React (copy), BuildUserSeenCollectionPayloadFunction (copy), EventNamesModule (copy), FFlagLuaAppUserSeenCollectionUnifiedFields (copy), HttpService (copy), RepeatValueFunction (copy), GetResult (copy), GetFriendStatusModule (copy), GetResult1 (copy), FormatRecommendationContextTypeFunction (copy), UseBatchedImpressionsFunction (copy), FIntUserSeenCollectionBatchTimeMs (copy)
+	-- upvalues: FFlagMigrateFriendshipStatusesPYMKModule (copy), UseSelectorFunction (copy), GetDeepValueFunction (copy), ConstantsModule (copy), FFlagPYMKCarouselStableSelectorsModule (copy), Frozen (copy), FFlagLuaAppEnableSduiHomePage (copy), FFlagPymkCarouselPresenceStoreMigrationModule (copy), React (copy), BuildUserSeenCollectionPayloadFunction (copy), EventNamesModule (copy), FFlagLuaAppUserSeenCollectionUnifiedFields (copy), HttpService (copy), RepeatValueFunction (copy), GetResult (copy), GetFriendStatusModule (copy), GetResult1 (copy), FormatRecommendationContextTypeFunction (copy), UseBatchedImpressionsFunction (copy), FIntUserSeenCollectionBatchTimeMs (copy)
 	local UseSelectorResult = if FFlagMigrateFriendshipStatusesPYMKModule then nil else UseSelectorFunction(function(p2)
-		-- upvalues: GetDeepValueFunction (upval), ConstantsModule (upval)
-		return GetDeepValueFunction(p2, string.format("%s.Friends.friendshipStatus", ConstantsModule.RODUX_KEY)) or {}
+		-- upvalues: GetDeepValueFunction (upval), ConstantsModule (upval), FFlagPYMKCarouselStableSelectorsModule (upval), Frozen (upval)
+		local DeepValue = GetDeepValueFunction(p2, string.format("%s.Friends.friendshipStatus", ConstantsModule.RODUX_KEY))
+		
+		if not DeepValue then
+			if FFlagPYMKCarouselStableSelectorsModule then
+				return Frozen
+			end
+			DeepValue = {}
+		end
+		return DeepValue
 	end)
 	local UseSelectorResult1 = if FFlagLuaAppEnableSduiHomePage then nil else UseSelectorFunction(function(p2)
-		-- upvalues: GetDeepValueFunction (upval), ConstantsModule (upval)
-		return GetDeepValueFunction(p2, string.format("%s.Friends.recommendations.hasIncomingFriendRequest", ConstantsModule.RODUX_KEY)) or {}
+		-- upvalues: GetDeepValueFunction (upval), ConstantsModule (upval), FFlagPYMKCarouselStableSelectorsModule (upval), Frozen (upval)
+		local DeepValue = GetDeepValueFunction(p2, string.format("%s.Friends.recommendations.hasIncomingFriendRequest", ConstantsModule.RODUX_KEY))
+		
+		if not DeepValue then
+			if FFlagPYMKCarouselStableSelectorsModule then
+				return Frozen
+			end
+			DeepValue = {}
+		end
+		return DeepValue
 	end)
 	local UseSelectorResult2 = if FFlagPymkCarouselPresenceStoreMigrationModule then nil else UseSelectorFunction(function(p2)
-		-- upvalues: GetDeepValueFunction (upval)
-		return GetDeepValueFunction(p2, "PYMKCarousel.Presence.byUserId") or {}
+		-- upvalues: GetDeepValueFunction (upval), FFlagPYMKCarouselStableSelectorsModule (upval), Frozen (upval)
+		local PYMKCarouselPresenceByUserId = GetDeepValueFunction(p2, "PYMKCarousel.Presence.byUserId")
+		
+		if not PYMKCarouselPresenceByUserId then
+			if FFlagPYMKCarouselStableSelectorsModule then
+				return Frozen
+			end
+			PYMKCarouselPresenceByUserId = {}
+		end
+		return PYMKCarouselPresenceByUserId
 	end)
 	local UseBatchedImpressionsResult = UseBatchedImpressionsFunction({
 		batchTimeMs = FIntUserSeenCollectionBatchTimeMs,

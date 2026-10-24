@@ -148,7 +148,7 @@ Authentication.SignUp.Response.PasswordComplexity,请创建一个更复杂的密
 Authentication.SignUp.Response.UsernameMustBeSetFirst,必须先设定用户名。
 Authentication.SignUp.Subtitle.AddYourBirthday,添加你的生日，以创建 Roblox 帐户。
 Authentication.SignUp.Subtitle.YourProgressCarriesOver,完成设置后，你的进度会保留。
-Authentication.SignUp.Subtitle.YoureAlmostThere,马上就完成了。如果现在关闭页面，你的帐户将无法完整创建，你将无法玩 Roblox。
+Authentication.SignUp.Subtitle.YoureAlmostThereClose,马上就完成了。如果现在取消，你的帐户将无法完整创建，你也无法游玩 Roblox。
 Authentication.TwoStepVerification.Action.GoToSecurity,设置
 Authentication.TwoStepVerification.Label.TwoStepRequired,若要继续交易需要进行两步验证。请前往设置 > 安全来完成两步验证。
 Authentication.TwoStepVerification.Response.TooManyAttempts,尝试次数过多。请稍后重试。
@@ -257,6 +257,9 @@ Common.UGCValidation.ErrorLabel.DescendantIdAnimationVersionNotSupported,{Instan
 Common.UGCValidation.ErrorLabel.DescendantIdNotPublished,素材 {AssetId} ({InstanceFullName}.{FieldName}) 未发布。请先发布，然后重试。
 Common.UGCValidation.ErrorLabel.DescendantIdVersionNotSupported,{InstanceFullName}.{FieldName} 使用了素材 {AssetId} 的版本 {Version}，但目前仅支持版本 1。请使用版本 1 并重试。
 Common.UGCValidation.ErrorLabel.DynamicHeadCageMisaligned,商城中的动态头部必须正确置入笼架，以便笼架上的眼睛和嘴巴顶点与网格顶点对齐。请调整笼架位置，使其与网格对齐。
+Common.UGCValidation.ErrorLabel.DynamicHeadCageMisalignedLeftEye,动态头部笼架左眼标记与网格未对齐。请调整眼睛笼架，使左眼网格位于投影的笼架区域内。
+Common.UGCValidation.ErrorLabel.DynamicHeadCageMisalignedMouth,动态头部笼架嘴部标记与网格未对齐。请调整嘴部笼架，使嘴部网格位于投影的笼架区域内。
+Common.UGCValidation.ErrorLabel.DynamicHeadCageMisalignedRightEye,动态头部笼架右眼标记与网格未对齐。请调整眼睛笼架，使右眼网格位于投影的笼架区域内。
 Common.UGCValidation.ErrorLabel.DynamicHeadHappyNotShown,无法检测到动态头部的微笑表情。请调整嘴巴的笼架标记，使其与头部的嘴巴位置相匹配，并确保它可以显示微笑表情。
 Common.UGCValidation.ErrorLabel.DynamicHeadLeftEyeNotClose,无法检测到动态头部的左眼闭合表情。请调整左眼的笼架标记，使其与头部的左眼位置相匹配，并确保其可以闭合。
 Common.UGCValidation.ErrorLabel.DynamicHeadMISSINGCAGE,商城中的动态头部没有头部笼架。请为动态头部创建头部笼架。
@@ -276,6 +279,13 @@ Common.UGCValidation.ErrorLabel.EmoteAnimation_MaxPartTranslationCalcFailed,无�
 Common.UGCValidation.ErrorLabel.EmoteAnimation_MaxPartTranslationMismatch,已发布的动画指定了部件的最大位移为 {taggedTranslation} 格，但根据动画数据计算出的位移为 {calculatedTranslation} 格。请重新发布该动画。
 Common.UGCValidation.ErrorLabel.Extents_HeadBelowTorso,头部必须位于上身躯干的上方。头部中心位于躯干顶部下方，表明头部网格塌陷或位置不当。
 Common.UGCValidation.ErrorLabel.FaceControlsOverrideFACSNotEmpty,上传时，FaceControls 上的 InternalOverrideFACSData 属性必须为空。
+Common.UGCValidation.ErrorLabel.FacialFeaturePresence_EyesMissing,基础面部缺少必需的眼睛特征。请为基础面部添加眼睛，然后重试。
+Common.UGCValidation.ErrorLabel.FacialFeaturePresence_MouthMissing,基础面部缺少必需的嘴部。请为基础面部添加嘴部，然后重试。
+Common.UGCValidation.ErrorLabel.FacsDeformation_HappyNotShown,无法检测到高兴表情。请调整嘴部笼或高兴表情 FACS，使投影的嘴部网格按预期变形。
+Common.UGCValidation.ErrorLabel.FacsDeformation_LeftEyeNotClose,无法检测到左眼闭合表情。请调整左眼笼架或左眼闭合 FACS，使投影的眼部网格按预期变形。
+Common.UGCValidation.ErrorLabel.FacsDeformation_MouthNotOpen,无法检测到张嘴表情。请调整嘴部笼架或张嘴 FACS，使投影的嘴部网格按预期变形。
+Common.UGCValidation.ErrorLabel.FacsDeformation_RightEyeNotClose,无法检测到右眼闭合表情。请调整右眼笼架或右眼闭合 FACS，使投影的眼部网格按预期变形。
+Common.UGCValidation.ErrorLabel.FacsDeformation_SadNotShown,无法检测到悲伤表情。请调整嘴部笼架或悲伤表情 FACS，使投影的嘴部网格按预期变形。
 Common.UGCValidation.ErrorLabel.FacsExpandsHead,检测到 FACS 将你的头部扩大到 {modPercent}%，但修改头部大小违反了脸部动画的商城政策。
 Common.UGCValidation.ErrorLabel.FacsJointCountBounded,动态头部最多可以有 {maxFacsJointCount} 个 FACS 关节，但此头部有 {actualJointCount} 个。请减少 FACS 关节的数量，然后重试。
 Common.UGCValidation.ErrorLabel.FacsShrinksHead,检测到 FACS 将你的头部缩小到 {modPercent}%，但修改头部大小违反了脸部动画的商城政策。
@@ -322,6 +332,7 @@ Common.UGCValidation.ErrorLabel.MeshPartBounds_TooSmall,“{partName}“网格�
 Common.UGCValidation.ErrorLabel.MissingRequiredAttachment,附件“{attName}”必须存在于“{partName}”的后代中，且只能存在一次。
 Common.UGCValidation.ErrorLabel.NoAttributes,“{RootInstanceName}”（或其后代）包含属性。你需要从以下实例中移除属性：{InstanceNameList}
 Common.UGCValidation.ErrorLabel.PropertiesNotSensible,{ClassName} '{InstancePath}' 有无效属性： {ProblematicProperties}。超出了显示的字节限制（限制为 0 表示属性必须为空）；任何其他属性包含 NaN/Inf 值或超出其默认大小限制。
+Common.UGCValidation.ErrorLabel.RenderedAnimation_RequiredExpressionsMissing,渲染的动画缺少一个或多个必要的面部表情（闭眼、张嘴、高兴、悲伤）。
 Common.UGCValidation.ErrorLabel.RigAttachmentOutOfBounds,“{PartName}”中的骨架附件“{AttachmentName}”必须放置在该身体部位与相邻部位连接的关节边界附近。当前位置 [{CurrentPosition}] 离连接平面过远。请将其移动到更靠近 [{ClosestValidPosition}] 的位置。
 Common.UGCValidation.ErrorLabel.SelectionCountNotOne,要将素材上传到 Roblox，你必须选择恰好 1 个实例及其关联的上传类型。
 Common.UGCValidation.ErrorLabel.SerializedAssetTooLarge,此素材过大，无法上传（{sizeBytes} 字节，超出 {maxSizeBytes} 字节的上限）。请缩小其大小，然后重试。
@@ -3147,7 +3158,6 @@ Feature.Contacts.Message.ContactDiscoverable,为了帮你找到好友，通讯�
 Feature.Contacts.Message.ContactsSyncWarning,我们会定期更新你的联系人并存储其他匹配的 Roblox 用户，以帮助你找到你的好友。你可以在设备设置中随时管理此选项。
 Feature.Contacts.Message.InviteToRoblox,在 Roblox 上将我添加为好友，和我一起创作、分享并探索体验！
 Feature.Contacts.Message.NoResults,无结果。
-Feature.DeveloperProducts.Heading.Products,
 Feature.DeveloperProducts.Label.Product,
 Feature.DisplayName.ErrorMessage.AgedUpNameContainPII,名称可能包含私人信息
 Feature.DisplayName.ErrorMessage.AgedUpNameHasChanged,过去 7 天内你已更改过你的名称

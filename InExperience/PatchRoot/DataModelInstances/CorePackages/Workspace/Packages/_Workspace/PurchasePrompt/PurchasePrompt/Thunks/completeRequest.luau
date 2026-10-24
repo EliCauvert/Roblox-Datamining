@@ -60,8 +60,6 @@ return function()
 					MarketplaceService:SignalAssetTypePurchased(Players.LocalPlayer, AssetTypeId)
 				end)
 			end
-		elseif RequestType == RequestTypeModule.Premium then
-			MarketplaceService:SignalPromptPremiumPurchaseFinished(HasCompletedPurchase or PurchaseError == PurchaseErrorModule.AlreadyPremium)
 		elseif RequestType == RequestTypeModule.Subscription then
 			MarketplaceService:SignalPromptSubscriptionPurchaseFinished(Id, HasCompletedPurchase or PurchaseError == PurchaseErrorModule.AlreadySubscribed)
 		elseif FFlagEnableUnifiedPurchaseFlowForDevSubs and RequestType == RequestTypeModule.DeveloperSubscription then

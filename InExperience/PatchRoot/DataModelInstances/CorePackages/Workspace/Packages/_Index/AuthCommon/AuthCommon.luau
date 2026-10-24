@@ -16,5 +16,8 @@
 	EventReceivers = require(script.EventReceivers),
 	Experiments = require(script.Experiments),
 	Stores = require(script.Stores),
-	DesignTokenMappers = require(script.DesignTokenMappers)
+	DesignTokenMappers = require(script.DesignTokenMappers),
+	Flags = {
+		FFlagEnableCrossDeviceApproverDialog = require(script.Flags.FFlagEnableCrossDeviceApproverDialog)
+	}
 }

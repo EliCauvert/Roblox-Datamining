@@ -31,6 +31,7 @@ local FFlagAppChatSquadJoinButtonU13OSAModule = require(AppChat.Flags.FFlagAppCh
 local FFlagDebugAppChatEnableDomLocatorsModule = require(AppChat.Flags.FFlagDebugAppChatEnableDomLocators)
 local FFlagAppChatTimestampInSubtitleModule = require(AppChat.Flags.FFlagAppChatTimestampInSubtitle)
 local FFlagAppChatUseActivationOnFocus = require(Parent.SharedFlags).FFlagAppChatUseActivationOnFocus
+local ConversationFocusActivationDelaySecondsModule = require(AppChat.Flags.conversationFocusActivationDelaySeconds)
 local UseTelemetryModule = require(AppChat.Telemetry.useTelemetry)
 local ChatLandingTelemetryLayerModule = require(AppChat.Telemetry.Layers.ChatLandingTelemetryLayer)
 local ConstantsModule = require(AppChat.Constants)
@@ -51,7 +52,7 @@ local config = {
 }
 
 return ReactModule.memo(function(p1)
-	-- upvalues: CryoModule (copy), config (copy), UseStyleFunction (copy), UseTokensFunction (copy), UseTextSizeOffsetFunction (copy), UseTelemetryModule (copy), ChatLandingTelemetryLayerModule (copy), UseIsUserPendingModule (copy), GetBoldTextThemeModule (copy), UseDispatchFunction (copy), UseChatPlacementContextFunction (copy), UseChatPagePaddingModule (copy), UseRelativeTimestampBindingModule (copy), UseMemoFunction (copy), FoundationFontFaceMigration (copy), GetTextSizeFunction (copy), Text (copy), FFlagAppChatTimestampInSubtitleModule (copy), ReactModule (copy), UseNavigationFunction (copy), GetOverlayStoreModule (copy), EnumScreensModule (copy), OverlayTypesModule (copy), ConversationModule (copy), RemovedConversationModule (copy), ShouldShowU13ChatOptInForConversationModule (copy), ConstantsModule (copy), ShouldShowOSAForConversationModule (copy), HttpService (copy), FFlagAppChatSquadJoinButtonU13OSAModule (copy), FFlagAppChatUseActivationOnFocus (copy), UseActivationOnFocusFunction (copy), ReactFocusNavigationModule (copy), UseCanAccessPartyModule (copy), SquadComponentAccessWrapperModule (copy), SquadJoinButtonModule (copy), SquadButtonSourceEnum (copy), FFlagDebugAppChatEnableDomLocatorsModule (copy), DomLocatorsModule (copy), ConversationCell (copy), GetFFlagDebugAppChatModule (copy), ConversationRelativeTimestampModule (copy), FoundationModule (copy)
+	-- upvalues: CryoModule (copy), config (copy), UseStyleFunction (copy), UseTokensFunction (copy), UseTextSizeOffsetFunction (copy), UseTelemetryModule (copy), ChatLandingTelemetryLayerModule (copy), UseIsUserPendingModule (copy), GetBoldTextThemeModule (copy), UseDispatchFunction (copy), UseChatPlacementContextFunction (copy), UseChatPagePaddingModule (copy), UseRelativeTimestampBindingModule (copy), UseMemoFunction (copy), FoundationFontFaceMigration (copy), GetTextSizeFunction (copy), Text (copy), FFlagAppChatTimestampInSubtitleModule (copy), ReactModule (copy), UseNavigationFunction (copy), GetOverlayStoreModule (copy), EnumScreensModule (copy), OverlayTypesModule (copy), ConversationModule (copy), RemovedConversationModule (copy), ShouldShowU13ChatOptInForConversationModule (copy), ConstantsModule (copy), ShouldShowOSAForConversationModule (copy), HttpService (copy), FFlagAppChatSquadJoinButtonU13OSAModule (copy), FFlagAppChatUseActivationOnFocus (copy), UseActivationOnFocusFunction (copy), ConversationFocusActivationDelaySecondsModule (copy), ReactFocusNavigationModule (copy), UseCanAccessPartyModule (copy), SquadComponentAccessWrapperModule (copy), SquadJoinButtonModule (copy), SquadButtonSourceEnum (copy), FFlagDebugAppChatEnableDomLocatorsModule (copy), DomLocatorsModule (copy), ConversationCell (copy), GetFFlagDebugAppChatModule (copy), ConversationRelativeTimestampModule (copy), FoundationModule (copy)
 	local JoinResult = CryoModule.Dictionary.join(config, p1)
 	local UseStyleResult = UseStyleFunction()
 	local UseTokensResult = UseTokensFunction()
@@ -184,7 +185,7 @@ return ReactModule.memo(function(p1)
 		end, function()
 			-- upvalues: Conversation (copy)
 			return Conversation and Conversation.id
-		end)
+		end, nil, ConversationFocusActivationDelaySecondsModule)
 	else
 		local UseContextResult = ReactModule.useContext(ReactFocusNavigationModule.FocusNavigationContext)
 		ReactModule.useEffect(function()

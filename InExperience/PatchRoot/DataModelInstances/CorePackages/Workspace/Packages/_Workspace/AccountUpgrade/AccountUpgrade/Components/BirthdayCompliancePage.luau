@@ -2,6 +2,8 @@
 local AccountUpgrade = script:FindFirstAncestor("AccountUpgrade")
 local Parent = AccountUpgrade.Parent
 local ReactModule = require(Parent.React)
+local FoundationModule = require(Parent.Foundation)
+local StyleModule = require(Parent.Style)
 local FullscreenPageWithSafeArea = require(Parent.AppBlox).FullscreenPageWithSafeArea
 local AuthCommonModule = require(Parent.AuthCommon)
 local AuthBackgroundContainer = AuthCommonModule.Components.AuthBackgroundContainer
@@ -13,12 +15,18 @@ local AuthLocalStorageKeys = AuthCommonModule.Enums.AuthLocalStorageKeys
 local LogoutReasonNames = AuthCommonModule.Enums.LogoutReasonNames
 local FFlagAccountUpgradeHideAccountOnSignOutModule = require(AccountUpgrade.Flags.FFlagAccountUpgradeHideAccountOnSignOut)
 local FFlagAccountUpgradeOAuthDialogFitsContentModule = require(AccountUpgrade.Flags.FFlagAccountUpgradeOAuthDialogFitsContent)
+local FFlagAccountUpgradeDialogDarkThemeModule = require(AccountUpgrade.Flags.FFlagAccountUpgradeDialogDarkTheme)
 local AccountUpgradeAppShellFlowModule = require(AccountUpgrade.AppShell.AccountUpgradeAppShellFlow)
 local AccountUpgradePageModule = require(AccountUpgrade.MobilePage.AccountUpgradePage)
 local FFlagAccountUpgradeFullPageOnPhoneModule = require(AccountUpgrade.MobilePage.FFlagAccountUpgradeFullPageOnPhone)
 local UseMobilePageModule = require(AccountUpgrade.MobilePage.useMobilePage)
 local _ = require(AccountUpgrade.Components.useAccountUpgradeViewModel)
 local OAuth = require(AccountUpgrade.AccountUpgradeFlow).OAuth
+local View = FoundationModule.View
+local Style = {
+	themeName = FoundationModule.Enums.ColorMode.Dark,
+	fontName = StyleModule.Constants.FontName.Gotham
+}
 local RoactUtilsModule = require(Parent.RoactUtils)
 local UseDispatchFunction = RoactUtilsModule.Hooks.RoactRodux.useDispatch
 local UseSelectorFunction = RoactUtilsModule.Hooks.RoactRodux.useSelector
@@ -32,7 +40,7 @@ local function renderLandingArt()
 end
 
 return function(p1)
-	-- upvalues: UseDispatchFunction (copy), UseRoactServiceFunction (copy), RoactServiceTagsModule (copy), UseSelectorFunction (copy), ReactModule (copy), UseStoreFunction (copy), FFlagAccountUpgradeHideAccountOnSignOutModule (copy), User (copy), LogoutReasonNames (copy), UpdateLoginEntryDataFunction (copy), AppStorageService (copy), AuthLocalStorageKeys (copy), FFlagAccountUpgradeOAuthDialogFitsContentModule (copy), UseOpenDisclaimerLinksFunction (copy), IsLoggedOutUserIdFunction (copy), FFlagAccountUpgradeFullPageOnPhoneModule (copy), UseMobilePageModule (copy), AccountUpgradePageModule (copy), OAuth (copy), FullscreenPageWithSafeArea (copy), renderLandingArt (copy), AccountUpgradeAppShellFlowModule (copy)
+	-- upvalues: UseDispatchFunction (copy), UseRoactServiceFunction (copy), RoactServiceTagsModule (copy), UseSelectorFunction (copy), ReactModule (copy), UseStoreFunction (copy), FFlagAccountUpgradeHideAccountOnSignOutModule (copy), User (copy), LogoutReasonNames (copy), UpdateLoginEntryDataFunction (copy), AppStorageService (copy), AuthLocalStorageKeys (copy), FFlagAccountUpgradeOAuthDialogFitsContentModule (copy), UseOpenDisclaimerLinksFunction (copy), IsLoggedOutUserIdFunction (copy), FFlagAccountUpgradeFullPageOnPhoneModule (copy), UseMobilePageModule (copy), AccountUpgradePageModule (copy), OAuth (copy), AccountUpgradeAppShellFlowModule (copy), FFlagAccountUpgradeDialogDarkThemeModule (copy), View (copy), StyleModule (copy), Style (copy), FullscreenPageWithSafeArea (copy), renderLandingArt (copy)
 	local UseDispatchResult = UseDispatchFunction()
 	local UseRoactServiceResult = UseRoactServiceFunction(RoactServiceTagsModule.RoactNetworking)
 	local UseRoactServiceResult1 = UseRoactServiceFunction(RoactServiceTagsModule.AppGuiService)
@@ -118,21 +126,9 @@ return function(p1)
 		SetDarkThemeOverrideFunction,
 		ClearThemeOverrideFunction
 	})
-	local UseMobilePageModuleResult = if FFlagAccountUpgradeFullPageOnPhoneModule then UseMobilePageModule() else nil
 	
-	return if UseMobilePageModuleResult then ReactModule.createElement(AccountUpgradePageModule, {
-		flow = OAuth,
-		currentUsername = UseSelectorResult,
-		onSignOut = UseMemoResult,
-		onLegalLinkSelected = OnLegalLinkSelected,
-		onComplete = UseResult1,
-		onUnrecoverableFailure = UseResult
-	}) else ReactModule.createElement(FullscreenPageWithSafeArea, {
-		includeStatusBar = true,
-		renderFullscreenBackground = renderLandingArt
-	}, {
-		Flow = ReactModule.createElement(AccountUpgradeAppShellFlowModule, {
-			hasBackdrop = true,
+	if if FFlagAccountUpgradeFullPageOnPhoneModule then UseMobilePageModule() else nil then
+		return ReactModule.createElement(AccountUpgradePageModule, {
 			flow = OAuth,
 			currentUsername = UseSelectorResult,
 			onSignOut = UseMemoResult,
@@ -140,5 +136,24 @@ return function(p1)
 			onComplete = UseResult1,
 			onUnrecoverableFailure = UseResult
 		})
+	end
+	local Element = ReactModule.createElement(AccountUpgradeAppShellFlowModule, {
+		hasBackdrop = true,
+		flow = OAuth,
+		currentUsername = UseSelectorResult,
+		onSignOut = UseMemoResult,
+		onLegalLinkSelected = OnLegalLinkSelected,
+		onComplete = UseResult1,
+		onUnrecoverableFailure = UseResult
 	})
+	
+	if FFlagAccountUpgradeDialogDarkThemeModule then
+		Element = ReactModule.createElement(View, { tag = "size-full" }, {
+			Theme = ReactModule.createElement(StyleModule.UiModeStyleProvider, { style = Style }, { Flow = Element })
+		})
+	end
+	return ReactModule.createElement(FullscreenPageWithSafeArea, {
+		includeStatusBar = true,
+		renderFullscreenBackground = renderLandingArt
+	}, { Flow = Element })
 end

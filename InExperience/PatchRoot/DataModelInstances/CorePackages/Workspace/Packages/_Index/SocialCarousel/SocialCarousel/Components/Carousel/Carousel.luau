@@ -31,12 +31,14 @@ local UseMarqueeActiveTilesFunction = nil
 local MarqueeTextMotionModule = nil
 local RobloxAppEnumsModule = nil
 local UseNavigationFocusFunction = nil
+local Callback = nil
 
 if FFlagSocialCarouselInGameTitleMarquee then
 	UseMarqueeActiveTilesFunction = require(SocialCarousel.Components.Carousel.useMarqueeActiveTiles).useMarqueeActiveTiles
 	MarqueeTextMotionModule = require(SocialCarousel.Components.MarqueeText.MarqueeTextMotion)
 	RobloxAppEnumsModule = require(Parent.RobloxAppEnums)
 	UseNavigationFocusFunction = require(Parent.Navigation).useNavigationFocus
+	Callback = require(SocialCarousel.Stores.MarqueeSession.createMarqueeSessionStore)
 end
 local function _(Enabled, p1): boolean
 	return Enabled ~= true or p1 ~= nil
@@ -69,7 +71,7 @@ end
 local t = {}
 
 return function(p1)
-	-- upvalues: FFlagLuaAppCompositionAlways (copy), FixCarouselTileSizeScaling (copy), UseTokensFunction (copy), UseSocialCarouselContextModule (copy), UseTilesSeenCollectionModule (copy), ReactModule (copy), FFlagSocialCarouselShowLoadingSkeletonModule (copy), ConstantsModule (copy), UseLocalizationFunction (copy), UsePageSideMarginFunction (copy), UseCollectionLayoutParamsFunction (copy), CollectionItemSize (copy), UseCollectionLayoutFunction (copy), FFlagSocialCarouselFixColdStartJitterModule (copy), RobloxAppHooksModule (copy), UseColdStartLayoutReadyModule (copy), FFlagSocialCarouselInGameTitleMarquee (copy), FoundationModule (copy), RobloxAppEnumsModule (ref), UseNavigationFocusFunction (ref), Tile (copy), MarqueeTextMotionModule (ref), CollectionViewsModule (copy), UseMarqueeActiveTilesFunction (ref), TileComponentsModule (copy), t (copy), CollectionCarousel (copy), FFlagLuaAppFriendsSortHeaderByPosition (copy), FFlagFlyoutHideFriendsHeaderModule (copy), FFlagEnableFlyoutFriendsHeaderFix (copy), FlyoutSidePanelIXP (copy)
+	-- upvalues: FFlagLuaAppCompositionAlways (copy), FixCarouselTileSizeScaling (copy), UseTokensFunction (copy), UseSocialCarouselContextModule (copy), UseTilesSeenCollectionModule (copy), ReactModule (copy), FFlagSocialCarouselShowLoadingSkeletonModule (copy), ConstantsModule (copy), UseLocalizationFunction (copy), UsePageSideMarginFunction (copy), UseCollectionLayoutParamsFunction (copy), CollectionItemSize (copy), UseCollectionLayoutFunction (copy), FFlagSocialCarouselFixColdStartJitterModule (copy), RobloxAppHooksModule (copy), UseColdStartLayoutReadyModule (copy), FFlagSocialCarouselInGameTitleMarquee (copy), FoundationModule (copy), RobloxAppEnumsModule (ref), UseNavigationFocusFunction (ref), Callback (ref), Tile (copy), MarqueeTextMotionModule (ref), CollectionViewsModule (copy), UseMarqueeActiveTilesFunction (ref), TileComponentsModule (copy), t (copy), CollectionCarousel (copy), FFlagLuaAppFriendsSortHeaderByPosition (copy), FFlagFlyoutHideFriendsHeaderModule (copy), FFlagEnableFlyoutFriendsHeaderFix (copy), FlyoutSidePanelIXP (copy)
 	local FFlagLuaAppCompositionAlways1 = FFlagLuaAppCompositionAlways or p1.appCompositionEnabled
 	local UseTokensResult = if FixCarouselTileSizeScaling then UseTokensFunction() else nil
 	local UseSocialCarouselContextModuleResult = UseSocialCarouselContextModule()
@@ -154,6 +156,16 @@ return function(p1)
 		local IsNotUseNavigationFocusResult: boolean = UseNavigationFocusResult ~= true or OpenGameJoinCardUserId ~= nil
 		local OpenGameJoinCardUserId1 = UseSocialCarouselContextModuleResult.openGameJoinCardUserId
 		local NoOpenGameJoinCardUserId: boolean = RobloxAppEnumsModule ~= nil and (UseDeviceTypeResult == RobloxAppEnumsModule.DeviceType.Desktop and UseNavigationFocusResult == true and OpenGameJoinCardUserId1 == nil)
+		local UseMemoResult = ReactModule.useMemo(function()
+			-- upvalues: Callback (upval)
+			return Callback()
+		end, {})
+		ReactModule.useEffect(function()
+			-- upvalues: UseNavigationFocusResult (copy), UseMemoResult (copy)
+			if UseNavigationFocusResult == true then
+				UseMemoResult.notifyHomeFocused()
+			end
+		end, { UseNavigationFocusResult, UseMemoResult })
 		local Tiles = UseSocialCarouselContextModuleResult.tiles
 		local X = if UseStateResult then UseStateResult.AbsoluteSize.X else 0
 		local Gutter = if FFlagLuaAppCompositionAlways1 then UseCollectionLayoutResult.gutter else UseCollectionLayoutParamsResult.columnGap
@@ -192,7 +204,8 @@ return function(p1)
 			direction = MarqueeTextMotionModule.textDirectionFromLocale(game:GetService("LocalizationService").RobloxLocaleId),
 			reducedMotion = ReducedMotion,
 			idleSequenceEnabled = IsUseDeviceTypeResultMatch,
-			hoverEnabled = NoOpenGameJoinCardUserId
+			hoverEnabled = NoOpenGameJoinCardUserId,
+			loopsRemainingStore = UseMemoResult
 		})
 		ActiveByIndex = UseMarqueeActiveTilesResult.activeByIndex
 		IsPaused = UseMarqueeActiveTilesResult.isPaused or IsNotUseNavigationFocusResult
@@ -236,7 +249,7 @@ return function(p1)
 		p1.onViewableItemsChanged, UseSocialCarouselContextModuleResult.tiles,
 		UseStateResult, UseRefResult, ItemsPerRow1, UseTilesSeenCollectionModuleResult
 	})
-	local UseMemoResult = ReactModule.useMemo(function()
+	local UseMemoResult1 = ReactModule.useMemo(function()
 		-- upvalues: FFlagSocialCarouselShowLoadingSkeletonModule (upval), ItemsPerRow1 (copy), Tile (upval)
 		local t = {}
 		
@@ -248,7 +261,7 @@ return function(p1)
 		end
 		return t
 	end, { ItemsPerRow1 })
-	local UseMemoResult1 = if IsLoading then UseMemoResult else UseSocialCarouselContextModuleResult.tiles
+	local UseMemoResult2 = if IsLoading then UseMemoResult1 else UseSocialCarouselContextModuleResult.tiles
 	
 	return ReactModule.createElement("Frame", { BackgroundTransparency = 1, Size = UDim2.new(1, 0, 1, 0) }, {
 		UIPadding = ReactModule.createElement("UIPadding", {
@@ -261,7 +274,7 @@ return function(p1)
 			scrollingFrameRef = UseRefResult,
 			onContainerSizeChanged = if FFlagSocialCarouselFixColdStartJitterModule then UseResult else nil,
 			title = UseLocalizationResult.friendsLabel,
-			items = if FFlagSocialCarouselFixColdStartJitterModule and not v1 then t else UseMemoResult1,
+			items = if FFlagSocialCarouselFixColdStartJitterModule and not v1 then t else UseMemoResult2,
 			renderItem = ReactModule.useCallback(function(p4, p5, p6)
 				-- upvalues: SelectionOrderBase (copy), FFlagSocialCarouselInGameTitleMarquee (upval), ActiveByIndex (ref), IsPaused (ref), MarqueeRunId (ref), OnMarqueeFinished (ref), OnMarqueeHover (ref), OnMarqueeHoverEnd (ref), v2 (ref), v3 (ref), Tile (upval), TileComponentsModule (upval), p1 (copy)
 				local NewSelectionOrderBase = if SelectionOrderBase then SelectionOrderBase + p5 else nil
@@ -280,8 +293,8 @@ return function(p1)
 					local OnMarqueeHoverEnd1 = OnMarqueeHoverEnd
 					local v11 = v2
 					local v12 = v3
-					local Paused = nil
 					local v13 = nil
+					local Paused = nil
 					local v14 = nil
 					local v15 = nil
 					local v16 = nil

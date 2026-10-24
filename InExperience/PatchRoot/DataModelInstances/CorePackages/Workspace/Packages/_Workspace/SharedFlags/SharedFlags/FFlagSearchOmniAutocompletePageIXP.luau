@@ -1,1 +1,0 @@
-﻿return game:DefineFastFlag("SearchOmniAutocompletePageIXP5", false)

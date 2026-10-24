@@ -12,10 +12,12 @@ local MessageWriterContextModule = require(script.Parent.MessageWriterContext)
 local RunVirtualChatCommandsModule = require(script.Parent.runVirtualChatCommands)
 local UseCanSendToChannelFunction = require(script.Parent.useCanSendToChannel).useCanSendToChannel
 local GetFFlagExpChatProtectedChatInternalAPIsFunction = require(Parent.SharedFlags).getFFlagExpChatProtectedChatInternalAPIs
+local SendTextToChannelModule = require(script.Parent.sendTextToChannel)
 local GetFFlagExpChatUseChatMuteStoreModule = require(script.Parent.getFFlagExpChatUseChatMuteStore)
 local FFlagExpChatTextChannelWindowThemeByBackgroundModule = require(script.Parent.Flags.FFlagExpChatTextChannelWindowThemeByBackground)
 local FFlagExpChatComposerFigmaParity = require(Parent.SharedFlags).FFlagExpChatComposerFigmaParity
 local FFlagExpChatTextChannelWindowExpressionTrayModule = require(script.Parent.Flags.FFlagExpChatTextChannelWindowExpressionTray)
+local FFlagExpChatTextChannelWindowExpressionTrayEmojiModule = require(script.Parent.Flags.FFlagExpChatTextChannelWindowExpressionTrayEmoji)
 local FFlagExpChatTextChannelWindowFocusNavModule = require(script.Parent.Flags.FFlagExpChatTextChannelWindowFocusNav)
 local GetDebugExpressionCatalogModule = require(script.Parent.TextChannelWindowExpressionTray.getDebugExpressionCatalog)
 local SendExpressionModule = require(script.Parent.TextChannelWindowExpressionTray.sendExpression)
@@ -24,7 +26,7 @@ local ChatInputBarView = ChatUIPrimitivesModule.ChatInputBarView
 local UseFocusInputBarFunction = ChatUIPrimitivesModule.Hooks.useFocusInputBar
 
 return ReactModule.memo(function(p1)
-	-- upvalues: FoundationModule (copy), GuiService (copy), UseCanSendToChannelFunction (copy), UseInExperienceLocalizationFunction (copy), ReactModule (copy), MessageWriterContextModule (copy), GetFFlagExpChatUseChatMuteStoreModule (copy), RunVirtualChatCommandsModule (copy), MessageModule (copy), GetFFlagExpChatProtectedChatInternalAPIsFunction (copy), TextChannelWindowAnalyticsModule (copy), LoggerModule (copy), UseFocusInputBarFunction (copy), SendExpressionModule (copy), FFlagExpChatTextChannelWindowExpressionTrayModule (copy), FFlagExpChatComposerFigmaParity (copy), FFlagExpChatTextChannelWindowFocusNavModule (copy), Static (copy), ChatInputBarView (copy), FFlagExpChatTextChannelWindowThemeByBackgroundModule (copy)
+	-- upvalues: FoundationModule (copy), GuiService (copy), UseCanSendToChannelFunction (copy), UseInExperienceLocalizationFunction (copy), ReactModule (copy), MessageWriterContextModule (copy), GetFFlagExpChatUseChatMuteStoreModule (copy), RunVirtualChatCommandsModule (copy), MessageModule (copy), FFlagExpChatTextChannelWindowExpressionTrayEmojiModule (copy), SendTextToChannelModule (copy), GetFFlagExpChatProtectedChatInternalAPIsFunction (copy), TextChannelWindowAnalyticsModule (copy), LoggerModule (copy), UseFocusInputBarFunction (copy), SendExpressionModule (copy), FFlagExpChatTextChannelWindowExpressionTrayModule (copy), FFlagExpChatComposerFigmaParity (copy), FFlagExpChatTextChannelWindowFocusNavModule (copy), Static (copy), ChatInputBarView (copy), FFlagExpChatTextChannelWindowThemeByBackgroundModule (copy)
 	local TargetChannel = p1.targetChannel
 	local UseTokensResult = FoundationModule.Hooks.useTokens()
 	local GuiService1 = p1.guiService or GuiService
@@ -45,7 +47,7 @@ return ReactModule.memo(function(p1)
 	local UseMessageWriterResult = MessageWriterContextModule.useMessageWriter()
 	local Name = if TargetChannel then TargetChannel.Name else nil
 	local UseResult = ReactModule.useCallback(function(Message)
-		-- upvalues: UseCanSendToChannelResult (copy), TargetChannel (copy), FocusNavEnabled (copy), TextBoxRef (copy), GuiService1 (copy), GetFFlagExpChatUseChatMuteStoreModule (upval), p1 (copy), RunVirtualChatCommandsModule (upval), UseMessageWriterResult (copy), MessageModule (upval), UseInExperienceLocalizationResult (copy), GetFFlagExpChatProtectedChatInternalAPIsFunction (upval), TextChannelWindowAnalyticsModule (upval), Name (copy), LoggerModule (upval)
+		-- upvalues: UseCanSendToChannelResult (copy), TargetChannel (copy), FocusNavEnabled (copy), TextBoxRef (copy), GuiService1 (copy), GetFFlagExpChatUseChatMuteStoreModule (upval), p1 (copy), RunVirtualChatCommandsModule (upval), UseMessageWriterResult (copy), MessageModule (upval), UseInExperienceLocalizationResult (copy), FFlagExpChatTextChannelWindowExpressionTrayEmojiModule (upval), SendTextToChannelModule (upval), GetFFlagExpChatProtectedChatInternalAPIsFunction (upval), TextChannelWindowAnalyticsModule (upval), Name (copy), LoggerModule (upval)
 		if not UseCanSendToChannelResult then return end
 		if TargetChannel and Message ~= "" then
 			if FocusNavEnabled then
@@ -64,6 +66,11 @@ return ReactModule.memo(function(p1)
 					end
 					return
 				end
+			end
+			if FFlagExpChatTextChannelWindowExpressionTrayEmojiModule then
+				task.spawn(SendTextToChannelModule, TargetChannel, Message)
+				
+				return
 			end
 			task.spawn(function()
 				-- upvalues: GetFFlagExpChatProtectedChatInternalAPIsFunction (upval), TargetChannel (upval), Message (copy), TextChannelWindowAnalyticsModule (upval), Name (upval), LoggerModule (upval)
@@ -108,9 +115,9 @@ return ReactModule.memo(function(p1)
 	end, {})
 	local UseFocusInputBarResult = UseFocusInputBarFunction(p1.textBoxRef)
 	local UseResult1 = ReactModule.useCallback(function(p2)
-		-- upvalues: SendExpressionModule (upval), TargetChannel (copy)
-		return SendExpressionModule(p2, TargetChannel)
-	end, { TargetChannel })
+		-- upvalues: SendExpressionModule (upval), TargetChannel (copy), NoCanLocalUserChat (copy)
+		return SendExpressionModule(p2, TargetChannel, NoCanLocalUserChat)
+	end, { TargetChannel, NoCanLocalUserChat })
 	
 	return ReactModule.createElement(ChatInputBarView, {
 		maximumCharacterLimit = 200,

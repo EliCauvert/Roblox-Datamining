@@ -14,6 +14,7 @@ local RegionName = AppCompositionModule.RegionName
 local SupportPaneMode = require(Parent.AppSplitView).Enums.SupportPaneMode
 local FFlagSplitPaneFixClassicThemeHeader = SharedFlagsModule.FFlagSplitPaneFixClassicThemeHeader
 local FFlagEnableSplitPaneTelemetry = SharedFlagsModule.FFlagEnableSplitPaneTelemetry
+local FFlagEnableSplitPaneStackFallbackFix = SharedFlagsModule.FFlagEnableSplitPaneStackFallbackFix
 
 local function _()
 	-- upvalues: GetRegionOverridesFunction (copy), RegionName (copy)
@@ -35,9 +36,10 @@ end
 
 local Effect = nil
 local v1 = nil
+local Effect1 = nil
 
 local function createSplitPaneStore()
-	-- upvalues: GetRegionOverridesFunction (copy), RegionName (copy), v1 (ref), CreateCurrentScreenOrientationSignalModule (copy), DisplayModule (copy), SupportPaneWidthRulesModule (copy), SignalsModule (copy), evaluateShouldDefaultToCollapsed (copy), SupportPaneMode (copy), FFlagEnableSplitPaneTelemetry (copy), Effect (ref), FFlagSplitPaneFixClassicThemeHeader (copy), SignalsUtilsModule (copy), SplitPaneTelemetryModule (copy), GetTelemetrySnapshotModule (copy)
+	-- upvalues: GetRegionOverridesFunction (copy), RegionName (copy), v1 (ref), CreateCurrentScreenOrientationSignalModule (copy), DisplayModule (copy), SupportPaneWidthRulesModule (copy), SignalsModule (copy), evaluateShouldDefaultToCollapsed (copy), SupportPaneMode (copy), FFlagEnableSplitPaneTelemetry (copy), Effect (ref), FFlagSplitPaneFixClassicThemeHeader (copy), SignalsUtilsModule (copy), FFlagEnableSplitPaneStackFallbackFix (copy), Effect1 (ref), SplitPaneTelemetryModule (copy), GetTelemetrySnapshotModule (copy)
 	local RegionOverrides = if GetRegionOverridesFunction and RegionName then GetRegionOverridesFunction(RegionName.SupportRegion) else nil
 	local WidthScale = if RegionOverrides and RegionOverrides.widthScale then RegionOverrides.widthScale else 0.33
 	local MinWidth = if RegionOverrides and RegionOverrides.minWidth then RegionOverrides.minWidth else 0
@@ -138,7 +140,7 @@ local function createSplitPaneStore()
 	local v3 = nil
 	
 	if FFlagSplitPaneFixClassicThemeHeader then
-		v2, v46 = SignalsModule.createSignal(nil)
+		v2, v48 = SignalsModule.createSignal(nil)
 	end
 	local Signal5, Signal2_4 = SignalsModule.createSignal(false)
 	local Callback1 = nil
@@ -147,6 +149,12 @@ local function createSplitPaneStore()
 	if FFlagEnableSplitPaneTelemetry then
 		Callback1, SetIsTelemetrySessionInitialized = SignalsUtilsModule.createSessionScopedSignal(false)
 	end
+	local function setSupportWidth(p1)
+		-- upvalues: DisplayModule (upval), Signal2 (copy), MinWidth (copy), MaxWidth (copy)
+		local PlatformScale: number = DisplayModule.GetDisplayStore(false).getPlatformScale(false)
+		Signal2((math.clamp(p1 / (if PlatformScale and PlatformScale > 0 then PlatformScale else 1), MinWidth, MaxWidth)))
+	end
+	
 	local Computed3 = SignalsModule.createComputed(function(p1)
 		-- upvalues: evaluateBreakpointEnabled (copy), Signal5 (copy)
 		return evaluateBreakpointEnabled(p1) and Signal5(p1)
@@ -161,6 +169,25 @@ local function createSplitPaneStore()
 		
 		return ComputedResult == nil or ComputedResult == SupportPaneMode.Collapsed
 	end)
+	
+	local function GetWasSplitPaneAvailable(): boolean
+		return false
+	end
+	
+	if FFlagEnableSplitPaneStackFallbackFix then
+		local Signal6, Signal2_5 = SignalsModule.createSignal(false)
+		
+		if evaluateBreakpointEnabled(false) then
+			Signal2_5(true)
+		end
+		Effect1 = SignalsModule.createEffect(function(p1)
+			-- upvalues: evaluateBreakpointEnabled (copy), Signal2_5 (copy)
+			if evaluateBreakpointEnabled(p1) then
+				Signal2_5(true)
+			end
+		end)
+		GetWasSplitPaneAvailable = Signal6
+	end
 	local v4 = nil
 	v4 = {
 		getCurrentScreenOrientation = Callback,
@@ -168,11 +195,7 @@ local function createSplitPaneStore()
 		setIsTelemetrySessionInitialized = SetIsTelemetrySessionInitialized,
 		getSupportWidth = Signal,
 		getSupportWidthFraction = Computed2,
-		setSupportWidth = function(p1)
-			-- upvalues: DisplayModule (upval), Signal2 (copy), MinWidth (copy), MaxWidth (copy)
-			local PlatformScale: number = DisplayModule.GetDisplayStore(false).getPlatformScale(false)
-			Signal2((math.clamp(p1 / (if PlatformScale and PlatformScale > 0 then PlatformScale else 1), MinWidth, MaxWidth)))
-		end,
+		setSupportWidth = setSupportWidth,
 		resetSupportWidth = function()
 			-- upvalues: Signal2 (copy)
 			Signal2(nil)
@@ -188,6 +211,7 @@ local function createSplitPaneStore()
 		getContentRegionRect = if FFlagSplitPaneFixClassicThemeHeader then v2 else nil,
 		setContentRegionRect = if FFlagSplitPaneFixClassicThemeHeader then v3 else nil,
 		getIsBreakpointEnabled = SignalsModule.createComputed(evaluateBreakpointEnabled),
+		getWasSplitPaneAvailable = GetWasSplitPaneAvailable,
 		getIsSplitPaneActive = Computed3,
 		getIsSplitEnabled = Computed3,
 		getSupportPaneModeIfActive = Computed4,

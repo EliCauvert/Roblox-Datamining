@@ -1,6 +1,7 @@
 ﻿local Parent = script:FindFirstAncestor("SplitPane").Parent
 local ReactModule = require(Parent.React)
 local FFlagEnableSplitPaneTelemetry = require(Parent.SharedFlags).FFlagEnableSplitPaneTelemetry
+local FFlagEnableSplitPaneStackFallbackFix = require(Parent.SharedFlags).FFlagEnableSplitPaneStackFallbackFix
 local RoactNavigationModule = require(Parent.RoactNavigation)
 local SignalsReactModule = require(Parent.SignalsReact)
 local AppSplitViewModule = require(Parent.AppSplitView)
@@ -15,10 +16,11 @@ local SplitPaneSlot = AppSplitViewModule.Enums.SplitPaneSlot
 local TempRnSwitchNavigatorName = require(Parent.NavigationRodux).Constants.TempRnSwitchNavigatorName
 
 return function(Entry, p1: number)
-	-- upvalues: SplitPaneStoreModule (copy), SignalsReactModule (copy), ComputeSplitEligibilityModule (copy), ReactModule (copy), SplitPaneContextModule (copy), TempRnSwitchNavigatorName (copy), SplitPaneVariantModule (copy), SupportPaneMode (copy), SplitPaneSlot (copy), ViewState (copy), RoactNavigationModule (copy), FFlagEnableSplitPaneTelemetry (copy), UseInitializeSplitPaneTelemetrySessionModule (copy)
+	-- upvalues: SplitPaneStoreModule (copy), SignalsReactModule (copy), FFlagEnableSplitPaneStackFallbackFix (copy), ComputeSplitEligibilityModule (copy), ReactModule (copy), SplitPaneContextModule (copy), TempRnSwitchNavigatorName (copy), SplitPaneVariantModule (copy), SupportPaneMode (copy), SplitPaneSlot (copy), ViewState (copy), RoactNavigationModule (copy), FFlagEnableSplitPaneTelemetry (copy), UseInitializeSplitPaneTelemetrySessionModule (copy)
 	local Store = SplitPaneStoreModule.getStore()
 	local UseSignalStateResult = SignalsReactModule.useSignalState(Store.getIsBreakpointEnabled)
-	local UseSignalStateResult1 = SignalsReactModule.useSignalState(Store.getSupportPaneMode)
+	local UseSignalStateResult1 = if FFlagEnableSplitPaneStackFallbackFix then SignalsReactModule.useSignalState(Store.getWasSplitPaneAvailable) else false
+	local UseSignalStateResult2 = SignalsReactModule.useSignalState(Store.getSupportPaneMode)
 	local SplitEligibilityModule = ComputeSplitEligibilityModule(Entry)
 	local SplitEligibilityModule1 = UseSignalStateResult and SplitEligibilityModule
 	local HasRenderSupportContent = ReactModule.useContext(SplitPaneContextModule).renderSupportContent ~= nil
@@ -26,7 +28,7 @@ return function(Entry, p1: number)
 	local PaneIndices = {}
 	local SplitPrimaryIndex: number? = nil
 	local Flag = false
-	local IsUseSignalStateResultMatch: boolean = SplitPaneVariantModule.isPaneCollapsedByDefault() and (not SplitPaneVariantModule.shouldAutoExpandOnSupportOpen() and UseSignalStateResult1 == SupportPaneMode.Collapsed)
+	local IsUseSignalStateResultMatch: boolean = SplitPaneVariantModule.isPaneCollapsedByDefault() and (not SplitPaneVariantModule.shouldAutoExpandOnSupportOpen() and UseSignalStateResult2 == SupportPaneMode.Collapsed)
 	repeat
 		if SplitEligibilityModule1 then
 			for i = #Entry, 1, -1 do
@@ -45,7 +47,7 @@ return function(Entry, p1: number)
 			end
 			break
 		end
-		if UseSignalStateResult then break end
+		if UseSignalStateResult or FFlagEnableSplitPaneStackFallbackFix and not UseSignalStateResult1 then break end
 		for _, value in Entry do
 			if value.descriptor.options.splitPaneEligibility == SplitPaneSlot.Support and value.viewState ~= ViewState.Closing then
 				Flag = true
@@ -107,17 +109,23 @@ return function(Entry, p1: number)
 		end
 	end, { IsRouteNameMatch, SplitEligibilityModule, Entry, Store })
 	ReactModule.useEffect(function()
-		-- upvalues: Flag1 (copy), IsRouteNameMatch (copy), Store (copy), Entry (copy), ViewState (upval), SplitPaneSlot (upval)
+		-- upvalues: Flag1 (copy), IsRouteNameMatch (copy), Store (copy), Entry (copy), ViewState (upval), FFlagEnableSplitPaneStackFallbackFix (upval), UseSignalStateResult1 (copy), SplitPaneSlot (upval)
 		if Flag1 then return end
 		if IsRouteNameMatch then
 			Store.setTemporarySupportPaneMode(nil)
 		end
 		for _, value in Entry do
-			if value.viewState == ViewState.Closing and value.descriptor.options.splitPaneEligibility == SplitPaneSlot.Support then
+			if value.viewState == ViewState.Closing and (not FFlagEnableSplitPaneStackFallbackFix or UseSignalStateResult1) and value.descriptor.options.splitPaneEligibility == SplitPaneSlot.Support then
 				value.setClosed()
 			end
 		end
-	end, { IsRouteNameMatch, Flag1, Entry, Store })
+	end, {
+		IsRouteNameMatch,
+		Flag1,
+		Entry,
+		Store,
+		UseSignalStateResult1
+	})
 	
 	if FFlagEnableSplitPaneTelemetry then
 		UseInitializeSplitPaneTelemetrySessionModule(IsRouteNameMatch)
@@ -128,8 +136,9 @@ return function(Entry, p1: number)
 		paneIndices = PaneIndices,
 		contentTopCandidate = ContentTopCandidate,
 		splitPrimaryIndex = SplitPrimaryIndex,
-		supportPaneMode = UseSignalStateResult1,
+		supportPaneMode = UseSignalStateResult2,
 		isRootAppStack = IsRouteNameMatch,
-		isSplitEnabled = SplitEligibilityModule1
+		isSplitEnabled = SplitEligibilityModule1,
+		wasSplitPaneAvailable = UseSignalStateResult1
 	}
 end

@@ -6,9 +6,11 @@ local CentralOverlayType = require(Parent.RobloxAppEnums).CentralOverlayType
 local SduiCoreSystemModule = require(Parent.SduiCoreSystem)
 local SduiActionType = SduiCoreSystemModule.SduiActionType
 local SduiErrorType = SduiCoreSystemModule.SduiErrors.SduiErrorType
+local SduiActionParams = SduiCoreSystemModule.SduiActionParams
+local FFlagLuaAppSduiOpenExternalLinkSkipLeaveConfirmation = require(Parent.SharedFlags).FFlagLuaAppSduiOpenExternalLinkSkipLeaveConfirmation
 
 return function(p1, _, p2, _)
-	-- upvalues: SduiErrorType (copy), SduiActionType (copy), CloseCentralOverlayFunction (copy), SetCentralOverlayFunction (copy), CentralOverlayType (copy)
+	-- upvalues: SduiErrorType (copy), SduiActionType (copy), FFlagLuaAppSduiOpenExternalLinkSkipLeaveConfirmation (copy), SduiActionParams (copy), CloseCentralOverlayFunction (copy), SetCentralOverlayFunction (copy), CentralOverlayType (copy)
 	local ActionParams = p1 and p1.actionParams or nil
 	
 	if ActionParams == nil then
@@ -22,9 +24,40 @@ return function(p1, _, p2, _)
 	assert(ActionParams, "actionParams must exist")
 	local Url = ActionParams.url
 	
-	if typeof(Url) == "string" and Url ~= "" then
-		local DispatchFunction: (any) -> () = p2.dependencies.dispatch
-		local LinkingProtocol = p2.dependencies.linkingProtocol
+	if typeof(Url) ~= "string" or Url == "" then
+		p2.dependencies.logger.reportError(SduiErrorType.InvalidActionParams, {
+			propName = "url",
+			name = SduiActionType.OpenExternalLink,
+			message = `Invalid or missing url: {Url}`
+		}, p2.appPage)
+		
+		return
+	end
+	local DispatchFunction: (any) -> () = p2.dependencies.dispatch
+	local LinkingProtocol = p2.dependencies.linkingProtocol
+	
+	local function _()
+		-- upvalues: LinkingProtocol (copy), Url (copy), p2 (copy), SduiErrorType (upval), SduiActionType (upval)
+		LinkingProtocol:openURL(Url):catch(function(Err)
+			-- upvalues: p2 (upval), SduiErrorType (upval), SduiActionType (upval)
+			p2.dependencies.logger.reportError(SduiErrorType.FailedToOpenLink, {
+				name = SduiActionType.OpenExternalLink,
+				message = if typeof(Err) == "string" then Err else "Unknown reason"
+			}, p2.appPage)
+		end)
+	end
+	
+	if FFlagLuaAppSduiOpenExternalLinkSkipLeaveConfirmation and SduiActionParams.getBooleanParam(ActionParams, "skipLeaveConfirmation", false) then
+		LinkingProtocol:openURL(Url):catch(function(Err)
+			-- upvalues: p2 (copy), SduiErrorType (upval), SduiActionType (upval)
+			p2.dependencies.logger.reportError(SduiErrorType.FailedToOpenLink, {
+				name = SduiActionType.OpenExternalLink,
+				message = if typeof(Err) == "string" then Err else "Unknown reason"
+			}, p2.appPage)
+		end)
+		
+		return
+	else
 		DispatchFunction(SetCentralOverlayFunction(CentralOverlayType.LeaveRobloxAlert, {
 			continueFunc = function()
 				-- upvalues: LinkingProtocol (copy), Url (copy), p2 (copy), SduiErrorType (upval), SduiActionType (upval), DispatchFunction (copy), CloseCentralOverlayFunction (upval)
@@ -38,13 +71,5 @@ return function(p1, _, p2, _)
 				DispatchFunction(CloseCentralOverlayFunction())
 			end
 		}))
-		
-		return
-	else
-		p2.dependencies.logger.reportError(SduiErrorType.InvalidActionParams, {
-			propName = "url",
-			name = SduiActionType.OpenExternalLink,
-			message = `Invalid or missing url: {Url}`
-		}, p2.appPage)
 	end
 end

@@ -1,4 +1,5 @@
 ﻿local RobloxSubscriptionPurchaseApp = script:FindFirstAncestor("RobloxSubscriptionPurchaseApp")
+local Parent = RobloxSubscriptionPurchaseApp.Parent
 local RobloxSubscriptionStoreModule = require(RobloxSubscriptionPurchaseApp.Store.RobloxSubscriptionStore)
 local _ = require(RobloxSubscriptionPurchaseApp.Models.GetRobloxSubscriptionProductsModel)
 local PromptStateModule = require(RobloxSubscriptionPurchaseApp.Enums.PromptState)
@@ -12,11 +13,12 @@ local LogRobloxSubscriptionUpsellCounterModule = require(RobloxSubscriptionPurch
 local RobloxSubscriptionUpsellTelemetryModule = require(RobloxSubscriptionPurchaseApp.Events.RobloxSubscriptionUpsellTelemetry)
 local LogSubscriptionPurchaseFlowEventModule = require(RobloxSubscriptionPurchaseApp.Utils.logSubscriptionPurchaseFlowEvent)
 local FFlagEnableSubscriptionPurchaseFlowEventIngestModule = require(RobloxSubscriptionPurchaseApp.Flags.FFlagEnableSubscriptionPurchaseFlowEventIngest)
-local GetAppFeaturePoliciesFunction = require(RobloxSubscriptionPurchaseApp.Parent.UniversalAppPolicy).getAppFeaturePolicies
+local FFlagEnableBuyRobuxSdui = require(Parent.SharedFlags).FFlagEnableBuyRobuxSdui
+local GetAppFeaturePoliciesFunction = require(Parent.UniversalAppPolicy).getAppFeaturePolicies
 local _ = require(RobloxSubscriptionPurchaseApp.Enums.RobloxSubscriptionFlowCompleteReason)
 
 return function(p1)
-	-- upvalues: RobloxSubscriptionStoreModule (copy), LogRobloxSubscriptionUpsellCounterModule (copy), RobloxSubscriptionUpsellTelemetryModule (copy), GetAppFeaturePoliciesFunction (copy), RobloxSubscriptionHeadlessOverlayControllerModule (copy), TransitionToErrorModule (copy), ErrorReasonModule (copy), PromptStateModule (copy), FFlagEnableSubscriptionPurchaseFlowEventIngestModule (copy), LogSubscriptionPurchaseFlowEventModule (copy), CreatePaymentSessionModule (copy), PerformRobloxSubscriptionPurchaseModule (copy)
+	-- upvalues: RobloxSubscriptionStoreModule (copy), LogRobloxSubscriptionUpsellCounterModule (copy), RobloxSubscriptionUpsellTelemetryModule (copy), GetAppFeaturePoliciesFunction (copy), RobloxSubscriptionHeadlessOverlayControllerModule (copy), TransitionToErrorModule (copy), ErrorReasonModule (copy), PromptStateModule (copy), FFlagEnableSubscriptionPurchaseFlowEventIngestModule (copy), LogSubscriptionPurchaseFlowEventModule (copy), FFlagEnableBuyRobuxSdui (copy), PerformRobloxSubscriptionPurchaseModule (copy), CreatePaymentSessionModule (copy)
 	local GetResult = RobloxSubscriptionStoreModule.get()
 	local EntryContext = p1.entryContext
 	GetResult.setRobloxSubscriptionProduct(p1.productDetails)
@@ -41,11 +43,18 @@ return function(p1)
 	if FFlagEnableSubscriptionPurchaseFlowEventIngestModule then
 		LogSubscriptionPurchaseFlowEventModule("SubscriptionUpsellModalOpen")
 	end
-	CreatePaymentSessionModule(EntryContext):andThen(function(Result)
-		-- upvalues: GetResult (copy), PerformRobloxSubscriptionPurchaseModule (upval)
-		GetResult.setPaymentSessionId(Result)
+	if FFlagEnableBuyRobuxSdui and p1.paymentSessionId ~= nil then
+		GetResult.setPaymentSessionId(p1.paymentSessionId)
 		PerformRobloxSubscriptionPurchaseModule()
-	end)
-	
-	return RenderResult
+		
+		return RenderResult
+	else
+		CreatePaymentSessionModule(EntryContext):andThen(function(Result)
+			-- upvalues: GetResult (copy), PerformRobloxSubscriptionPurchaseModule (upval)
+			GetResult.setPaymentSessionId(Result)
+			PerformRobloxSubscriptionPurchaseModule()
+		end)
+		
+		return RenderResult
+	end
 end

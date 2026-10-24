@@ -13,6 +13,7 @@ local ProtoVariableMapperModule = require(SduiCoreSystem.ClientBinding.ProtoVari
 local FFlagSduiMarketplaceCatalogCategorySupport = require(Parent.SharedFlags).FFlagSduiMarketplaceCatalogCategorySupport
 local FFlagSduiMarketplaceCatalogSortSupport = require(Parent.SharedFlags).FFlagSduiMarketplaceCatalogSortSupport
 local FFlagSduiCatalogItemCard = require(Parent.SharedFlags).FFlagSduiCatalogItemCard
+local FFlagSduiSheetComponent = require(Parent.SharedFlags).FFlagSduiSheetComponent
 local FFlagSduiSystemBannerComponent = require(Parent.SharedFlags).FFlagSduiSystemBannerComponent
 local FFlagSduiBannerContextComponent = require(Parent.SharedFlags).FFlagSduiBannerContextComponent
 local FFlagSduiListComponents = require(Parent.SharedFlags).FFlagSduiListComponents
@@ -28,14 +29,14 @@ end
 
 local _ = function(p1, p2)
 	-- upvalues: BuildDefaultPropModule (copy), SduiParsersModule (copy), ProtoVariableMapperModule (copy)
-	local function v80(p3)
+	local function v81(p3)
 		-- upvalues: SduiParsersModule (upval), p1 (copy), ProtoVariableMapperModule (upval), p2 (copy)
 		return ProtoVariableMapperModule.mapProtoEngineEnumToLua(p3, p2, (SduiParsersModule.getEngineEnumParser(p1)))
 	end
 	
 	return function(p3, p4, p5, p6, p7, p8)
-		-- upvalues: BuildDefaultPropModule (copy), v80 (copy)
-		local v1, v2 = BuildDefaultPropModule(p3, p4, p5, p6, p7, p8, v80)
+		-- upvalues: BuildDefaultPropModule (copy), v81 (copy)
+		local v1, v2 = BuildDefaultPropModule(p3, p4, p5, p6, p7, p8, v81)
 		
 		return v1, v2
 	end
@@ -164,7 +165,8 @@ local config = {
 		local v1, v2 = BuildDefaultPropModule(p1, p2, p3, p4, p5, p6, ParseArrayOfStruct)
 		
 		return v1, v2
-	end
+	end,
+	ArrayOfFloatProp = if FFlagSduiSheetComponent then BuildRepeatedPropModule else nil
 }
 
 if require(Parent.SharedFlags).FFlagLuaAppSduiHomePageSupport then
@@ -220,14 +222,14 @@ config.AnalyticsDataField = BuildDefaultPropModule
 local AutomaticSize = Enum.AutomaticSize
 local v1 = "AUTOMATIC_SIZE_"
 
-local function v46(p1)
+local function v47(p1)
 	-- upvalues: SduiParsersModule (copy), AutomaticSize (copy), ProtoVariableMapperModule (copy), v1 (copy)
 	return ProtoVariableMapperModule.mapProtoEngineEnumToLua(p1, v1, (SduiParsersModule.getEngineEnumParser(AutomaticSize)))
 end
 
 function config.AutomaticSizeProp(p1, p2, p3, p4, p5, p6)
-	-- upvalues: BuildDefaultPropModule (copy), v46 (copy)
-	local v2, v3 = BuildDefaultPropModule(p1, p2, p3, p4, p5, p6, v46)
+	-- upvalues: BuildDefaultPropModule (copy), v47 (copy)
+	local v2, v3 = BuildDefaultPropModule(p1, p2, p3, p4, p5, p6, v47)
 	
 	return v2, v3
 end
@@ -235,14 +237,14 @@ end
 local TextTruncate = Enum.TextTruncate
 local v2 = "TEXT_TRUNCATE_"
 
-local function v49(p1)
+local function v50(p1)
 	-- upvalues: SduiParsersModule (copy), TextTruncate (copy), ProtoVariableMapperModule (copy), v2 (copy)
 	return ProtoVariableMapperModule.mapProtoEngineEnumToLua(p1, v2, (SduiParsersModule.getEngineEnumParser(TextTruncate)))
 end
 
 function config.TextTruncateProp(p1, p2, p3, p4, p5, p6)
-	-- upvalues: BuildDefaultPropModule (copy), v49 (copy)
-	local v3, v4 = BuildDefaultPropModule(p1, p2, p3, p4, p5, p6, v49)
+	-- upvalues: BuildDefaultPropModule (copy), v50 (copy)
+	local v3, v4 = BuildDefaultPropModule(p1, p2, p3, p4, p5, p6, v50)
 	
 	return v3, v4
 end
@@ -250,14 +252,14 @@ end
 local TextXAlignment = Enum.TextXAlignment
 local v3 = "TEXT_X_ALIGNMENT_"
 
-local function v52(p1)
+local function v53(p1)
 	-- upvalues: SduiParsersModule (copy), TextXAlignment (copy), ProtoVariableMapperModule (copy), v3 (copy)
 	return ProtoVariableMapperModule.mapProtoEngineEnumToLua(p1, v3, (SduiParsersModule.getEngineEnumParser(TextXAlignment)))
 end
 
 function config.TextXAlignmentProp(p1, p2, p3, p4, p5, p6)
-	-- upvalues: BuildDefaultPropModule (copy), v52 (copy)
-	local v4, v5 = BuildDefaultPropModule(p1, p2, p3, p4, p5, p6, v52)
+	-- upvalues: BuildDefaultPropModule (copy), v53 (copy)
+	local v4, v5 = BuildDefaultPropModule(p1, p2, p3, p4, p5, p6, v53)
 	
 	return v4, v5
 end
@@ -265,14 +267,14 @@ end
 local TextYAlignment = Enum.TextYAlignment
 local v4 = "TEXT_Y_ALIGNMENT_"
 
-local function v55(p1)
+local function v56(p1)
 	-- upvalues: SduiParsersModule (copy), TextYAlignment (copy), ProtoVariableMapperModule (copy), v4 (copy)
 	return ProtoVariableMapperModule.mapProtoEngineEnumToLua(p1, v4, (SduiParsersModule.getEngineEnumParser(TextYAlignment)))
 end
 
 function config.TextYAlignmentProp(p1, p2, p3, p4, p5, p6)
-	-- upvalues: BuildDefaultPropModule (copy), v55 (copy)
-	local v5, v6 = BuildDefaultPropModule(p1, p2, p3, p4, p5, p6, v55)
+	-- upvalues: BuildDefaultPropModule (copy), v56 (copy)
+	local v5, v6 = BuildDefaultPropModule(p1, p2, p3, p4, p5, p6, v56)
 	
 	return v5, v6
 end
@@ -280,14 +282,14 @@ end
 local UIFlexMode = Enum.UIFlexMode
 local v5 = "UI_FLEX_MODE_"
 
-local function v58(p1)
+local function v59(p1)
 	-- upvalues: SduiParsersModule (copy), UIFlexMode (copy), ProtoVariableMapperModule (copy), v5 (copy)
 	return ProtoVariableMapperModule.mapProtoEngineEnumToLua(p1, v5, (SduiParsersModule.getEngineEnumParser(UIFlexMode)))
 end
 
 function config.UIFlexModeProp(p1, p2, p3, p4, p5, p6)
-	-- upvalues: BuildDefaultPropModule (copy), v58 (copy)
-	local v6, v7 = BuildDefaultPropModule(p1, p2, p3, p4, p5, p6, v58)
+	-- upvalues: BuildDefaultPropModule (copy), v59 (copy)
+	local v6, v7 = BuildDefaultPropModule(p1, p2, p3, p4, p5, p6, v59)
 	
 	return v6, v7
 end
@@ -295,14 +297,14 @@ end
 local ScaleType = Enum.ScaleType
 local v6 = "SCALE_TYPE_"
 
-local function v61(p1)
+local function v62(p1)
 	-- upvalues: SduiParsersModule (copy), ScaleType (copy), ProtoVariableMapperModule (copy), v6 (copy)
 	return ProtoVariableMapperModule.mapProtoEngineEnumToLua(p1, v6, (SduiParsersModule.getEngineEnumParser(ScaleType)))
 end
 
 function config.ScaleTypeProp(p1, p2, p3, p4, p5, p6)
-	-- upvalues: BuildDefaultPropModule (copy), v61 (copy)
-	local v7, v8 = BuildDefaultPropModule(p1, p2, p3, p4, p5, p6, v61)
+	-- upvalues: BuildDefaultPropModule (copy), v62 (copy)
+	local v7, v8 = BuildDefaultPropModule(p1, p2, p3, p4, p5, p6, v62)
 	
 	return v7, v8
 end
@@ -310,14 +312,14 @@ end
 local ResamplerMode = Enum.ResamplerMode
 local v7 = "RESAMPLER_MODE_"
 
-local function v64(p1)
+local function v65(p1)
 	-- upvalues: SduiParsersModule (copy), ResamplerMode (copy), ProtoVariableMapperModule (copy), v7 (copy)
 	return ProtoVariableMapperModule.mapProtoEngineEnumToLua(p1, v7, (SduiParsersModule.getEngineEnumParser(ResamplerMode)))
 end
 
 function config.ResamplerModeProp(p1, p2, p3, p4, p5, p6)
-	-- upvalues: BuildDefaultPropModule (copy), v64 (copy)
-	local v8, v9 = BuildDefaultPropModule(p1, p2, p3, p4, p5, p6, v64)
+	-- upvalues: BuildDefaultPropModule (copy), v65 (copy)
+	local v8, v9 = BuildDefaultPropModule(p1, p2, p3, p4, p5, p6, v65)
 	
 	return v8, v9
 end
@@ -325,14 +327,14 @@ end
 local SizeConstraint = Enum.SizeConstraint
 local v8 = "SIZE_CONSTRAINT_"
 
-local function v67(p1)
+local function v68(p1)
 	-- upvalues: SduiParsersModule (copy), SizeConstraint (copy), ProtoVariableMapperModule (copy), v8 (copy)
 	return ProtoVariableMapperModule.mapProtoEngineEnumToLua(p1, v8, (SduiParsersModule.getEngineEnumParser(SizeConstraint)))
 end
 
 function config.SizeConstraintProp(p1, p2, p3, p4, p5, p6)
-	-- upvalues: BuildDefaultPropModule (copy), v67 (copy)
-	local v9, v10 = BuildDefaultPropModule(p1, p2, p3, p4, p5, p6, v67)
+	-- upvalues: BuildDefaultPropModule (copy), v68 (copy)
+	local v9, v10 = BuildDefaultPropModule(p1, p2, p3, p4, p5, p6, v68)
 	
 	return v9, v10
 end
@@ -340,14 +342,14 @@ end
 local SelectionBehavior = Enum.SelectionBehavior
 local v9 = "SELECTION_BEHAVIOR_"
 
-local function v70(p1)
+local function v71(p1)
 	-- upvalues: SduiParsersModule (copy), SelectionBehavior (copy), ProtoVariableMapperModule (copy), v9 (copy)
 	return ProtoVariableMapperModule.mapProtoEngineEnumToLua(p1, v9, (SduiParsersModule.getEngineEnumParser(SelectionBehavior)))
 end
 
 function config.SelectionBehaviorProp(p1, p2, p3, p4, p5, p6)
-	-- upvalues: BuildDefaultPropModule (copy), v70 (copy)
-	local v10, v11 = BuildDefaultPropModule(p1, p2, p3, p4, p5, p6, v70)
+	-- upvalues: BuildDefaultPropModule (copy), v71 (copy)
+	local v10, v11 = BuildDefaultPropModule(p1, p2, p3, p4, p5, p6, v71)
 	
 	return v10, v11
 end
@@ -355,14 +357,14 @@ end
 local KeyCode = Enum.KeyCode
 local v10 = "KEY_CODE_"
 
-local function v73(p1)
+local function v74(p1)
 	-- upvalues: SduiParsersModule (copy), KeyCode (copy), ProtoVariableMapperModule (copy), v10 (copy)
 	return ProtoVariableMapperModule.mapProtoEngineEnumToLua(p1, v10, (SduiParsersModule.getEngineEnumParser(KeyCode)))
 end
 
 function config.KeyCodeProp(p1, p2, p3, p4, p5, p6)
-	-- upvalues: BuildDefaultPropModule (copy), v73 (copy)
-	local v11, v12 = BuildDefaultPropModule(p1, p2, p3, p4, p5, p6, v73)
+	-- upvalues: BuildDefaultPropModule (copy), v74 (copy)
+	local v11, v12 = BuildDefaultPropModule(p1, p2, p3, p4, p5, p6, v74)
 	
 	return v11, v12
 end

@@ -6,6 +6,7 @@ local RoactUtilsModule = require(Parent.RoactUtils)
 local MomentsCommonModule = require(Parent.MomentsCommon)
 local MomentsModule = require(Parent.Moments)
 local GenericAbuseReportingModule = require(Parent.GenericAbuseReporting)
+local OpenGameDetailsFunction = require(Parent.GameDetail).OpenGameDetails
 local UseOpenBlockingModalModule = require(Parent.MomentsCommon.useOpenBlockingModal)
 local SharedFlagsModule = require(Parent.SharedFlags)
 local FFlagMomentsOptimisticProfilePending = SharedFlagsModule.FFlagMomentsOptimisticProfilePending
@@ -37,7 +38,7 @@ local CreateUserMomentsFeedSourceModule = require(Parent.Moments.CreateUserMomen
 local ReportMomentFunction = MomentsModule.reportMoment
 
 local function MomentsFeedPageImmersive()
-	-- upvalues: UseNavigationFunction (copy), FFlagMomentsOptimisticProfilePending (copy), ReactModule (copy), FireAnalyticsEventFunction (copy), EventNames (copy), UseDispatchFunction (copy), FFlagMomentsServeEDPVideos (copy), OpenDynamicAbuseReportFunction (copy), AbuseVector (copy), FFlagAbuseReportAttributes (copy), CloseCentralOverlayFunction (copy), ReportEdpVideo (copy), ReportMomentFunction (copy), FFlagAbuseReportSubmissionTargetV4 (copy), FFlagEnableMomentsCommentReporting (copy), FFlagEnableMomentsCommentBlocking (copy), UseOpenBlockingModalModule (copy), UseScreenSizeFunction (copy), View (copy), MomentsImmersivePresentation (copy), ImmersiveFeedKind (copy)
+	-- upvalues: UseNavigationFunction (copy), FFlagMomentsOptimisticProfilePending (copy), ReactModule (copy), FireAnalyticsEventFunction (copy), EventNames (copy), UseDispatchFunction (copy), FFlagMomentsServeEDPVideos (copy), CloseCentralOverlayFunction (copy), OpenGameDetailsFunction (copy), OpenDynamicAbuseReportFunction (copy), AbuseVector (copy), FFlagAbuseReportAttributes (copy), ReportEdpVideo (copy), ReportMomentFunction (copy), FFlagAbuseReportSubmissionTargetV4 (copy), FFlagEnableMomentsCommentReporting (copy), FFlagEnableMomentsCommentBlocking (copy), UseOpenBlockingModalModule (copy), UseScreenSizeFunction (copy), View (copy), MomentsImmersivePresentation (copy), ImmersiveFeedKind (copy)
 	local UseNavigationResult = UseNavigationFunction()
 	local ExtraPropsParam = UseNavigationResult.getParam("extraProps")
 	local TargetUserId = if ExtraPropsParam and ExtraPropsParam.targetUserId then ExtraPropsParam.targetUserId else 0
@@ -48,20 +49,44 @@ local function MomentsFeedPageImmersive()
 	end, { UseNavigationResult.goBack, TargetUserId })
 	local UseDispatchResult = UseDispatchFunction()
 	local UseResult1 = ReactModule.useCallback(function(p1)
-		-- upvalues: FFlagMomentsServeEDPVideos (upval), UseDispatchResult (copy), OpenDynamicAbuseReportFunction (upval), AbuseVector (upval), FFlagAbuseReportAttributes (upval), CloseCentralOverlayFunction (upval), ReportEdpVideo (upval), ReportMomentFunction (upval), FFlagAbuseReportSubmissionTargetV4 (upval)
+		-- upvalues: FFlagMomentsServeEDPVideos (upval), UseDispatchResult (copy), CloseCentralOverlayFunction (upval), OpenGameDetailsFunction (upval), UseNavigationResult (copy), OpenDynamicAbuseReportFunction (upval), AbuseVector (upval), FFlagAbuseReportAttributes (upval), ReportEdpVideo (upval), ReportMomentFunction (upval), FFlagAbuseReportSubmissionTargetV4 (upval)
 		if FFlagMomentsServeEDPVideos and p1.isEdpVideo then
+			local Flag = false
 			UseDispatchResult(OpenDynamicAbuseReportFunction({
 				abuseVector = AbuseVector.MomentsFeed,
 				targetId = if FFlagAbuseReportAttributes then nil else p1.feedItemId,
 				attributes = if FFlagAbuseReportAttributes then { isEdpVideo = true, targetId = p1.feedItemId } else nil,
 				analyticsTargetId = if FFlagAbuseReportAttributes then p1.feedItemId else nil,
-				onSubmit = p1.onSubmit,
+				onSubmit = function()
+					-- upvalues: Flag (ref), p1 (copy)
+					if not Flag then
+						p1.onSubmit()
+						
+						return
+					end
+				end,
 				onClose = function()
 					-- upvalues: p1 (copy), UseDispatchResult (upval), CloseCentralOverlayFunction (upval)
 					p1.onClose()
 					UseDispatchResult(CloseCentralOverlayFunction())
 				end,
-				clientActionHandlers = { ["moments-edp-video"] = ReportEdpVideo }
+				clientActionHandlers = {
+					["moments-edp-video"] = ReportEdpVideo,
+					["moments-edp-video-ip"] = function(_)
+						-- upvalues: Flag (ref), p1 (copy), UseDispatchResult (upval), CloseCentralOverlayFunction (upval), OpenGameDetailsFunction (upval), UseNavigationResult (upval)
+						Flag = true
+						p1.onClose()
+						UseDispatchResult(CloseCentralOverlayFunction())
+						
+						if p1.onEdpVideoIpReport then
+							p1.onEdpVideoIpReport(function()
+								-- upvalues: UseDispatchResult (upval), OpenGameDetailsFunction (upval), p1 (upval), UseNavigationResult (upval)
+								UseDispatchResult(OpenGameDetailsFunction(p1.universeId, UseNavigationResult, { mountAsFullView = true, showBackButton = true }))
+							end)
+						end
+						return {}
+					end
+				}
 			}))
 			
 			return
@@ -126,7 +151,10 @@ local function MomentsFeedPageImmersive()
 				clientActionHandlers = if FFlagAbuseReportSubmissionTargetV4 then { ["moments-ip"] = submitMomentsIp } else nil
 			}))
 		end
-	end, { UseDispatchResult })
+	end, {
+		UseDispatchResult,
+		if FFlagMomentsServeEDPVideos then UseNavigationResult else false
+	})
 	local UseScreenSizeResult = UseScreenSizeFunction()
 	
 	return ReactModule.createElement(View, {

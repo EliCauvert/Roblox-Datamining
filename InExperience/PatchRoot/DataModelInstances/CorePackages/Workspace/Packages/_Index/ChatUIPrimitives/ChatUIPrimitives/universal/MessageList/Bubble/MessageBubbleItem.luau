@@ -13,7 +13,8 @@ local UseMessageBubbleViewModelModule = require(script.Parent.useMessageBubbleVi
 local WithMessageContentModule = require(script.Parent.Parent.Parent.ContentKinds.withMessageContent)
 local config = {
 	plainText = WithMessageContentModule(require(script.Parent.Parent.Parent.ContentKinds.PlainText.PlainTextBubble), require(script.Parent.Parent.Parent.ContentKinds.PlainText.PlainTextContentModel).getDetail),
-	preset = WithMessageContentModule(require(script.Parent.Parent.Parent.ContentKinds.Preset.PresetBubble), require(script.Parent.Parent.Parent.ContentKinds.Preset.PresetContentModel).getDetail)
+	preset = WithMessageContentModule(require(script.Parent.Parent.Parent.ContentKinds.Preset.PresetBubble), require(script.Parent.Parent.Parent.ContentKinds.Preset.PresetContentModel).getDetail),
+	emoji = WithMessageContentModule(require(script.Parent.Parent.Parent.ContentKinds.Emoji.EmojiBubble), require(script.Parent.Parent.Parent.ContentKinds.Emoji.EmojiContentModel).getDetail)
 }
 
 return function(p1)

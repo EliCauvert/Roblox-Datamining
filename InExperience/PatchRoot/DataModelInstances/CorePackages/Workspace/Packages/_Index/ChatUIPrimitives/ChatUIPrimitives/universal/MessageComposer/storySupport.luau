@@ -5,10 +5,11 @@ local _ = require(script.Parent.MessageComposer)
 local _ = require(script.Parent.Parent.Types)
 local PlainTextContentModelModule = require(script.Parent.Parent.ContentKinds.PlainText.PlainTextContentModel)
 local PresetContentModelModule = require(script.Parent.Parent.ContentKinds.Preset.PresetContentModel)
+local EmojiContentModelModule = require(script.Parent.Parent.ContentKinds.Emoji.EmojiContentModel)
 local StorySupportModule = {
 	noopDelivery = { sendMessageDraft = function(_) end },
 	draftLabel = function(p1): string
-		-- upvalues: PlainTextContentModelModule (copy), PresetContentModelModule (copy)
+		-- upvalues: PlainTextContentModelModule (copy), PresetContentModelModule (copy), EmojiContentModelModule (copy)
 		local List = {}
 		
 		for _, content in p1.contents do
@@ -21,6 +22,11 @@ local StorySupportModule = {
 			
 			if Draft1 then
 				table.insert(List, `preset "{Draft1.presetId}" "{Draft1.displayText}"`)
+			end
+			local Draft2 = EmojiContentModelModule.getDraft(content)
+			
+			if Draft2 then
+				table.insert(List, `emoji "{Draft2.emojiId}" {Draft2.unicode}`)
 			end
 		end
 		return if #List == 0 then "(no content)" else table.concat(List, ", ")

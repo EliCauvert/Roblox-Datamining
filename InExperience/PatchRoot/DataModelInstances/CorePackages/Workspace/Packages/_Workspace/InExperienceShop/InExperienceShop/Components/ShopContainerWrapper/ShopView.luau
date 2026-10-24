@@ -9,7 +9,6 @@ local Tabs = FoundationModule.Tabs
 local FillBehavior = FoundationModule.Enums.FillBehavior
 local UseTokensFunction = FoundationModule.Hooks.useTokens
 local SharedFlagsModule = require(Parent.SharedFlags)
-local FFlagEnableUserOffers = SharedFlagsModule.FFlagEnableUserOffers
 local IsSubjectToDesktopPoliciesFunction = SharedFlagsModule.isSubjectToDesktopPolicies
 local FFlagHideHeaderForBuyRobuxInExperienceShop = SharedFlagsModule.FFlagHideHeaderForBuyRobuxInExperienceShop
 local TopBarModule = require(InExperienceShop.Components.TopBar)
@@ -34,7 +33,7 @@ local FFlagShowLargerOfferBannerOnDesktop2Module = require(InExperienceShop.Flag
 local _ = require(InExperienceShop.Hooks.useShopReportOverflow)
 
 return function(p1)
-	-- upvalues: FFlagHideHeaderForBuyRobuxInExperienceShop (copy), FindSectionModule (copy), FFlagEnableUserOffers (copy), FFlagShowLargerOfferBannerOnDesktop2Module (copy), IsSubjectToDesktopPoliciesFunction (copy), ReactModule (copy), View (copy), SearchInputContainerModule (copy), TopBarModule (copy), DesktopOfferBannerModule (copy), FFlagRemoveBottomPaddingInExperienceShopModule (copy), FFlagShopBlockClickPassThroughModule (copy), UseTokensFunction (copy), FFlagEnableCreatorEarlyAccessBannerInShopModule (copy), CreatorEarlyAccessBannerModule (copy), Tabs (copy), FillBehavior (copy), SearchResultsContainerModule (copy), ShopHomePageContainerModule (copy), CategoryPageContainerModule (copy), ItemDetailsContainerModule (copy), FFlagShopRobuxPurchaseCompletionModalModule (copy), UnifiedPurchaseCompletionModal (copy), ShopAbuseReportOverlayModule (copy), OfferDialogStateModule (copy), OfferDetailsDialogModule (copy), OfferTermsDialogModule (copy)
+	-- upvalues: FFlagHideHeaderForBuyRobuxInExperienceShop (copy), FindSectionModule (copy), FFlagShowLargerOfferBannerOnDesktop2Module (copy), IsSubjectToDesktopPoliciesFunction (copy), ReactModule (copy), View (copy), SearchInputContainerModule (copy), TopBarModule (copy), DesktopOfferBannerModule (copy), FFlagRemoveBottomPaddingInExperienceShopModule (copy), FFlagShopBlockClickPassThroughModule (copy), UseTokensFunction (copy), FFlagEnableCreatorEarlyAccessBannerInShopModule (copy), CreatorEarlyAccessBannerModule (copy), Tabs (copy), FillBehavior (copy), SearchResultsContainerModule (copy), ShopHomePageContainerModule (copy), CategoryPageContainerModule (copy), ItemDetailsContainerModule (copy), FFlagShopRobuxPurchaseCompletionModalModule (copy), UnifiedPurchaseCompletionModal (copy), ShopAbuseReportOverlayModule (copy), OfferDialogStateModule (copy), OfferDetailsDialogModule (copy), OfferTermsDialogModule (copy)
 	local IsSearchOpen = p1.isSearchOpen
 	local NoHideTabs: boolean = not IsSearchOpen and #p1.tabs > 0
 	
@@ -43,8 +42,8 @@ return function(p1)
 	end
 	local SelectedItem = p1.selectedItem
 	local IsHome: boolean = p1.selectedCategoryId == "home" or FindSectionModule(p1.sections, p1.selectedCategoryId) == nil
-	local OfferModal = if FFlagEnableUserOffers then p1.offer.offerModal else nil
-	local IsSubjectToDesktopPolicies = FFlagEnableUserOffers and (FFlagShowLargerOfferBannerOnDesktop2Module and IsSubjectToDesktopPoliciesFunction())
+	local OfferModal = p1.offer.offerModal
+	local IsSubjectToDesktopPolicies = FFlagShowLargerOfferBannerOnDesktop2Module and IsSubjectToDesktopPoliciesFunction()
 	local HasOfferModal: boolean = IsSubjectToDesktopPolicies and (not IsSearchOpen and (IsHome and (p1.offer.showOfferChip and OfferModal ~= nil)))
 	local Element = ReactModule.createElement(View, {
 		tag = "row align-y-center size-full-1200",
@@ -64,10 +63,10 @@ return function(p1)
 			onOverflowActivated = p1.onOverflowActivated,
 			onOverflowMenuClosed = p1.onOverflowMenuClosed,
 			onMenuItemActivated = p1.onMenuItemActivated,
-			showOfferChip = if FFlagEnableUserOffers then p1.offer.showOfferChip and not IsSubjectToDesktopPolicies else false,
-			offerChipText = if FFlagEnableUserOffers then p1.offer.offerChipText else nil,
-			offerChipIcon = if FFlagEnableUserOffers then p1.offer.offerChipIcon else nil,
-			onOfferChipActivated = if FFlagEnableUserOffers then p1.offer.onOfferChipActivated else nil
+			showOfferChip = p1.offer.showOfferChip and not IsSubjectToDesktopPolicies,
+			offerChipText = p1.offer.offerChipText,
+			offerChipIcon = p1.offer.offerChipIcon,
+			onOfferChipActivated = p1.offer.onOfferChipActivated
 		})
 	})
 	local FFlagRemoveBottomPaddingInExperienceShopModuleResult = FFlagRemoveBottomPaddingInExperienceShopModule()
@@ -175,14 +174,14 @@ return function(p1)
 			targetId = p1.topBarReportSession.targetId,
 			onClose = p1.onTopBarReportClose
 		}) else nil,
-		OfferDetails = if FFlagEnableUserOffers and p1.offer.offerDialog == OfferDialogStateModule.Details and p1.offer.offerModal ~= nil then ReactModule.createElement(OfferDetailsDialogModule, {
+		OfferDetails = if p1.offer.offerDialog == OfferDialogStateModule.Details and p1.offer.offerModal ~= nil then ReactModule.createElement(OfferDetailsDialogModule, {
 			modal = p1.offer.offerModal,
 			expirationTimeInUTC = p1.offer.offerExpirationTimeInUTC,
 			onShopNow = p1.offer.onOfferShopNow,
 			onViewTerms = p1.offer.onOfferViewTerms,
 			onClose = p1.offer.onOfferDetailsClose
 		}) else nil,
-		OfferTerms = if FFlagEnableUserOffers and p1.offer.offerDialog == OfferDialogStateModule.Terms and p1.offer.offerModal ~= nil and p1.offer.offerModal.termsAndConditions ~= nil then ReactModule.createElement(OfferTermsDialogModule, {
+		OfferTerms = if p1.offer.offerDialog == OfferDialogStateModule.Terms and (p1.offer.offerModal ~= nil and p1.offer.offerModal.termsAndConditions ~= nil) then ReactModule.createElement(OfferTermsDialogModule, {
 			terms = p1.offer.offerModal.termsAndConditions,
 			onClose = p1.offer.onOfferTermsClose
 		}) else nil

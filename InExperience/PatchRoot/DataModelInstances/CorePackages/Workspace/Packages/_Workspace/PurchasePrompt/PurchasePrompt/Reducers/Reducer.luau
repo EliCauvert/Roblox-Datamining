@@ -8,7 +8,6 @@ return (require(Parent.PurchasePromptDeps).Rodux.combineReducers({
 	promptRequest = require(script.Parent.PromptRequestReducer),
 	purchaseFlow = require(script.Parent.PurchaseFlowReducer),
 	productInfo = require(script.Parent.ProductInfoReducer),
-	premiumProductInfo = require(script.Parent.PremiumProductsReducer),
 	robuxUpsellSuggestions = require(script.Parent.NativeUpsellSuggestionsReducer),
 	promptState = require(script.Parent.PromptStateReducer),
 	purchaseFlowUUID = require(script.Parent.PurchaseFlowUUIDReducer),

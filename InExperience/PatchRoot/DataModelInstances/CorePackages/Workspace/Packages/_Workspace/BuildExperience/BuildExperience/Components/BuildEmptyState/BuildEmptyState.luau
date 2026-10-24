@@ -23,6 +23,7 @@ return function(Frame)
 		}
 	})
 	local UseTokensResult = UseTokensFunction()
+	local Subline = UseLocalizationResult.subline
 	
 	return ReactModule.createElement(View, {
 		tag = "col align-x-center gap-small auto-xy",
@@ -42,13 +43,13 @@ return function(Frame)
 			Title = ReactModule.createElement(Text, {
 				LayoutOrder = 1,
 				tag = "auto-xy text-heading-small content-emphasis",
-				Text = UseLocalizationResult.title
+				Text = Frame.message or UseLocalizationResult.title
 			}),
-			Subline = ReactModule.createElement(Text, {
+			Subline = if Frame.message == nil then ReactModule.createElement(Text, {
 				LayoutOrder = 2,
 				tag = "auto-xy text-body-medium content-default",
-				Text = UseLocalizationResult.subline
-			})
+				Text = Subline
+			}) else nil
 		})
 	})
 end

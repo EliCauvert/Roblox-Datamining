@@ -86,6 +86,7 @@ return {
 			MarketplaceAsset = p1 and p1.MarketplaceAsset or nil,
 			MarketplaceBundle = p1 and p1.MarketplaceBundle or nil,
 			MarketplaceLook = p1 and p1.MarketplaceLook or nil,
+			MarketplaceItemFavorite = p1 and p1.MarketplaceItemFavorite or nil,
 			CollectibleItem = p1 and p1.CollectibleItem or nil,
 			MediaAsset = p1 and p1.MediaAsset or nil,
 			UserProfile = p1 and p1.UserProfile or nil,

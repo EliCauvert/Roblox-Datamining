@@ -4,41 +4,46 @@ local HistoryPageUtilsModule = require(script.Parent.historyPageUtils)
 local _ = require(script.Parent.sessionDeps)
 
 return {
-	createHistoryPolling = function(p1)
+	createHistoryPolling = function(p1, Callback)
 		-- upvalues: HistoryPageUtilsModule (copy), ConstantsModule (copy)
-		local function pollSessionHistory(CasSessionId, AfterSequenceId, Callback1: (any) -> (), Callback): boolean
-			-- upvalues: p1 (copy), HistoryPageUtilsModule (upval)
-			if Callback() then
+		local function pollSessionHistory(CasSessionId, AfterSequenceId, Callback2: (any) -> (), Callback1): boolean
+			-- upvalues: Callback (copy), p1 (copy), HistoryPageUtilsModule (upval)
+			if Callback1() then
 				return false
 			end
-			local SessionLoadResult = p1.deps.sessionLoad(CasSessionId, nil)
-			local AwaitRequestStateResult = HistoryPageUtilsModule.awaitRequestState(SessionLoadResult.state, os.clock() + p1.rpcTimeoutSeconds)
-			
-			if AwaitRequestStateResult.status == "pending" then
-				SessionLoadResult.dispose()
+			local CallbackResult = nil
+			if Callback == nil then
+				local SessionLoadResult = p1.deps.sessionLoad(CasSessionId, nil)
+				CallbackResult = HistoryPageUtilsModule.awaitRequestState(SessionLoadResult.state, os.clock() + p1.rpcTimeoutSeconds)
 				
+				if CallbackResult.status == "pending" then
+					SessionLoadResult.dispose()
+					
+					return false
+				end
+			else
+				CallbackResult = Callback(CasSessionId, nil, Callback1)
+			end
+			if Callback1() or CallbackResult.status ~= "succeeded" then
 				return false
 			end
-			if Callback() or AwaitRequestStateResult.status ~= "succeeded" then
-				return false
-			end
-			local SessionLoadHistory = HistoryPageUtilsModule.getSessionLoadHistory(AwaitRequestStateResult.result)
+			local SessionLoadHistory = HistoryPageUtilsModule.getSessionLoadHistory(CallbackResult.result)
 			
-			if #SessionLoadHistory == 0 or Callback() then
+			if #SessionLoadHistory == 0 or Callback1() then
 				return false
 			end
-			if Callback() then
+			if Callback1() then
 				return false
 			end
 			p1.mergeHistoryPage(SessionLoadHistory, p1.getNextHistoryPageToken())
 			local IngestSessionHistoryResult = p1.deps.ingestSessionHistory(CasSessionId, SessionLoadHistory, AfterSequenceId)
 			
-			if Callback1 ~= nil then
+			if Callback2 ~= nil then
 				for _, value in IngestSessionHistoryResult do
-					Callback1(value)
+					Callback2(value)
 				end
 			end
-			return not Callback() and #IngestSessionHistoryResult > 0
+			return not Callback1() and #IngestSessionHistoryResult > 0
 		end
 		
 		local function startPollingTurnFromHistory(CasSessionId, ActiveTurnHandle, p2)
@@ -53,6 +58,10 @@ return {
 				ResolvePositiveNumberResult1 = ResolvePositiveNumberResult
 			end
 			local AfterSequenceId = P5.afterSequenceId
+			
+			if AfterSequenceId ~= nil and ActiveTurnHandle.setHistoryBoundary ~= nil then
+				ActiveTurnHandle.setHistoryBoundary(AfterSequenceId)
+			end
 			local NoteProcessedSequenceNumberFunction: (any) -> () = ActiveTurnHandle.noteProcessedSequenceNumber
 			
 			if AfterSequenceId ~= nil and NoteProcessedSequenceNumberFunction ~= nil then
@@ -72,7 +81,7 @@ return {
 			
 			local function shouldStopPolling()
 				-- upvalues: Flag (ref), ActiveTurnHandle (copy), p1 (upval), CasSessionId (copy)
-				return Flag or (ActiveTurnHandle.state(false).isDone or p1.getCasSessionId() ~= CasSessionId)
+				return Flag or (ActiveTurnHandle.state(false).isDone or (p1.getCasSessionId() ~= CasSessionId or ActiveTurnHandle.isCurrentOwner ~= nil and not ActiveTurnHandle.isCurrentOwner()))
 			end
 			
 			local Callback = nil
@@ -90,7 +99,7 @@ return {
 			
 			local _ = function()
 				-- upvalues: Flag1 (ref), Flag (ref), ActiveTurnHandle (copy), p1 (upval), CasSessionId (copy), Smallest (ref), ResolvePositiveNumberResult (copy), Callback (ref)
-				if not Flag1 and (not Flag and (not ActiveTurnHandle.state(false).isDone and p1.getCasSessionId() == CasSessionId)) then
+				if not Flag1 and (not Flag and (not ActiveTurnHandle.state(false).isDone and (p1.getCasSessionId() == CasSessionId and (ActiveTurnHandle.isCurrentOwner == nil or ActiveTurnHandle.isCurrentOwner())))) then
 					Flag1 = true
 					Smallest = ResolvePositiveNumberResult
 					Callback(0)
@@ -101,7 +110,7 @@ return {
 			
 			local _ = function()
 				-- upvalues: Flag (ref), ActiveTurnHandle (copy), p1 (upval), CasSessionId (copy), Flag1 (ref), Smallest (ref), ResolvePositiveNumberResult (copy), Count2 (ref), Flag2 (ref), Flag3 (ref), Callback (ref)
-				if Flag or (ActiveTurnHandle.state(false).isDone or p1.getCasSessionId() ~= CasSessionId) then
+				if Flag or (ActiveTurnHandle.state(false).isDone or (p1.getCasSessionId() ~= CasSessionId or ActiveTurnHandle.isCurrentOwner ~= nil and not ActiveTurnHandle.isCurrentOwner())) then
 					if Flag1 then
 						Flag1 = false
 						Smallest = ResolvePositiveNumberResult
@@ -112,7 +121,7 @@ return {
 					return
 				elseif Flag2 or Flag3 then
 					if not Flag1 then
-						if not Flag and (not ActiveTurnHandle.state(false).isDone and p1.getCasSessionId() == CasSessionId) then
+						if not Flag and (not ActiveTurnHandle.state(false).isDone and (p1.getCasSessionId() == CasSessionId and (ActiveTurnHandle.isCurrentOwner == nil or ActiveTurnHandle.isCurrentOwner()))) then
 							Flag1 = true
 							Smallest = ResolvePositiveNumberResult
 							Callback(0)
@@ -141,10 +150,10 @@ return {
 				if HasSequenceGap then
 					task.delay(ResolveNonNegativeNumberResult1, function()
 						-- upvalues: Count (copy), Count1 (upval), Flag (upval), ActiveTurnHandle (upval), p1 (upval), CasSessionId (upval), v1 (upval), Flag3 (upval), Flag1 (upval), Smallest (upval), ResolvePositiveNumberResult (upval), Count2 (upval), Flag2 (upval), Callback (upval)
-						if Count ~= Count1 or (Flag or (ActiveTurnHandle.state(false).isDone or p1.getCasSessionId() ~= CasSessionId) or not v1) then return end
+						if Count ~= Count1 or (Flag or (ActiveTurnHandle.state(false).isDone or (p1.getCasSessionId() ~= CasSessionId or ActiveTurnHandle.isCurrentOwner ~= nil and not ActiveTurnHandle.isCurrentOwner())) or not v1) then return end
 						Flag3 = true
 						
-						if Flag or (ActiveTurnHandle.state(false).isDone or p1.getCasSessionId() ~= CasSessionId) then
+						if Flag or (ActiveTurnHandle.state(false).isDone or (p1.getCasSessionId() ~= CasSessionId or ActiveTurnHandle.isCurrentOwner ~= nil and not ActiveTurnHandle.isCurrentOwner())) then
 							if Flag1 then
 								Flag1 = false
 								Smallest = ResolvePositiveNumberResult
@@ -155,7 +164,7 @@ return {
 							return
 						elseif Flag2 or Flag3 then
 							if not Flag1 then
-								if not Flag and (not ActiveTurnHandle.state(false).isDone and p1.getCasSessionId() == CasSessionId) then
+								if not Flag and (not ActiveTurnHandle.state(false).isDone and (p1.getCasSessionId() == CasSessionId and (ActiveTurnHandle.isCurrentOwner == nil or ActiveTurnHandle.isCurrentOwner()))) then
 									Flag1 = true
 									Smallest = ResolvePositiveNumberResult
 									Callback(0)
@@ -170,7 +179,7 @@ return {
 						Count2 += 1
 					end)
 				end
-				if Flag or (ActiveTurnHandle.state(false).isDone or p1.getCasSessionId() ~= CasSessionId) then
+				if Flag or (ActiveTurnHandle.state(false).isDone or (p1.getCasSessionId() ~= CasSessionId or ActiveTurnHandle.isCurrentOwner ~= nil and not ActiveTurnHandle.isCurrentOwner())) then
 					if Flag1 then
 						Flag1 = false
 						Smallest = ResolvePositiveNumberResult
@@ -181,7 +190,7 @@ return {
 					return
 				elseif Flag2 or Flag3 then
 					if not Flag1 then
-						if not Flag and (not ActiveTurnHandle.state(false).isDone and p1.getCasSessionId() == CasSessionId) then
+						if not Flag and (not ActiveTurnHandle.state(false).isDone and (p1.getCasSessionId() == CasSessionId and (ActiveTurnHandle.isCurrentOwner == nil or ActiveTurnHandle.isCurrentOwner()))) then
 							Flag1 = true
 							Smallest = ResolvePositiveNumberResult
 							Callback(0)
@@ -207,7 +216,7 @@ return {
 						-- upvalues: Flag4 (upval), Count1 (copy), Count (upval), Flag (upval), ActiveTurnHandle (upval), p1 (upval), CasSessionId (upval), ResolveNonNegativeNumberResult (upval), ClockTime (upval), v33 (upval), Flag2 (upval), Flag1 (upval), Smallest (upval), ResolvePositiveNumberResult (upval), Count2 (upval), Flag3 (upval), Callback (upval)
 						Flag4 = false
 						
-						if Count1 ~= Count or (Flag or (ActiveTurnHandle.state(false).isDone or p1.getCasSessionId() ~= CasSessionId)) then return end
+						if Count1 ~= Count or (Flag or (ActiveTurnHandle.state(false).isDone or (p1.getCasSessionId() ~= CasSessionId or ActiveTurnHandle.isCurrentOwner ~= nil and not ActiveTurnHandle.isCurrentOwner()))) then return end
 						local ResolveNonNegativeNumberResultDelta = ResolveNonNegativeNumberResult - (os.clock() - ClockTime)
 						
 						if ResolveNonNegativeNumberResultDelta > 0 then
@@ -217,7 +226,7 @@ return {
 						end
 						Flag2 = true
 						
-						if Flag or (ActiveTurnHandle.state(false).isDone or p1.getCasSessionId() ~= CasSessionId) then
+						if Flag or (ActiveTurnHandle.state(false).isDone or (p1.getCasSessionId() ~= CasSessionId or ActiveTurnHandle.isCurrentOwner ~= nil and not ActiveTurnHandle.isCurrentOwner())) then
 							if Flag1 then
 								Flag1 = false
 								Smallest = ResolvePositiveNumberResult
@@ -228,7 +237,7 @@ return {
 							return
 						elseif Flag2 or Flag3 then
 							if not Flag1 then
-								if not Flag and (not ActiveTurnHandle.state(false).isDone and p1.getCasSessionId() == CasSessionId) then
+								if not Flag and (not ActiveTurnHandle.state(false).isDone and (p1.getCasSessionId() == CasSessionId and (ActiveTurnHandle.isCurrentOwner == nil or ActiveTurnHandle.isCurrentOwner()))) then
 									Flag1 = true
 									Smallest = ResolvePositiveNumberResult
 									Callback(0)
@@ -252,14 +261,14 @@ return {
 				ClockTime = os.clock()
 				Flag2 = false
 				
-				if Flag or (ActiveTurnHandle.state(false).isDone or p1.getCasSessionId() ~= CasSessionId) then
+				if Flag or (ActiveTurnHandle.state(false).isDone or (p1.getCasSessionId() ~= CasSessionId or ActiveTurnHandle.isCurrentOwner ~= nil and not ActiveTurnHandle.isCurrentOwner())) then
 					if Flag1 then
 						Flag1 = false
 						Smallest = ResolvePositiveNumberResult
 						Count2 += 1
 					end
 				elseif Flag2 or Flag3 then
-					if not Flag1 and (not Flag and (not ActiveTurnHandle.state(false).isDone and p1.getCasSessionId() == CasSessionId)) then
+					if not Flag1 and (not Flag and (not ActiveTurnHandle.state(false).isDone and (p1.getCasSessionId() == CasSessionId and (ActiveTurnHandle.isCurrentOwner == nil or ActiveTurnHandle.isCurrentOwner())))) then
 						Flag1 = true
 						Smallest = ResolvePositiveNumberResult
 						Callback(0)
@@ -278,20 +287,20 @@ return {
 				local Count: number = Count2
 				task.delay(Delay, function()
 					-- upvalues: Count (copy), Count2 (upval), Flag1 (upval), Flag (upval), ActiveTurnHandle (upval), p1 (upval), CasSessionId (upval), pollSessionHistory (upval), AfterSequenceId (upval), P5 (upval), shouldStopPolling (upval), Smallest (upval), ResolvePositiveNumberResult (upval), refreshSequenceGapState (upval), Flag2 (upval), Flag3 (upval), Callback (upval), ResolvePositiveNumberResult1 (upval), ConstantsModule (upval)
-					if Count ~= Count2 or not Flag1 or (Flag or (ActiveTurnHandle.state(false).isDone or p1.getCasSessionId() ~= CasSessionId)) then return end
+					if Count ~= Count2 or not Flag1 or (Flag or (ActiveTurnHandle.state(false).isDone or (p1.getCasSessionId() ~= CasSessionId or ActiveTurnHandle.isCurrentOwner ~= nil and not ActiveTurnHandle.isCurrentOwner()))) then return end
 					local PollSessionHistoryResult = pollSessionHistory(CasSessionId, AfterSequenceId, P5.onDroppedChatMessage, shouldStopPolling)
 					
-					if not Flag and (not ActiveTurnHandle.state(false).isDone and p1.getCasSessionId() == CasSessionId) then
+					if not Flag and (not ActiveTurnHandle.state(false).isDone and (p1.getCasSessionId() == CasSessionId and (ActiveTurnHandle.isCurrentOwner == nil or ActiveTurnHandle.isCurrentOwner()))) then
 						refreshSequenceGapState()
 						
-						if Flag or (ActiveTurnHandle.state(false).isDone or p1.getCasSessionId() ~= CasSessionId) then
+						if Flag or (ActiveTurnHandle.state(false).isDone or (p1.getCasSessionId() ~= CasSessionId or ActiveTurnHandle.isCurrentOwner ~= nil and not ActiveTurnHandle.isCurrentOwner())) then
 							if Flag1 then
 								Flag1 = false
 								Smallest = ResolvePositiveNumberResult
 								Count2 += 1
 							end
 						elseif Flag2 or Flag3 then
-							if not Flag1 and (not Flag and (not ActiveTurnHandle.state(false).isDone and p1.getCasSessionId() == CasSessionId)) then
+							if not Flag1 and (not Flag and (not ActiveTurnHandle.state(false).isDone and (p1.getCasSessionId() == CasSessionId and (ActiveTurnHandle.isCurrentOwner == nil or ActiveTurnHandle.isCurrentOwner())))) then
 								Flag1 = true
 								Smallest = ResolvePositiveNumberResult
 								Callback(0)
@@ -326,14 +335,14 @@ return {
 				ClockTime = os.clock()
 				Flag2 = false
 				
-				if Flag or (ActiveTurnHandle.state(false).isDone or p1.getCasSessionId() ~= CasSessionId) then
+				if Flag or (ActiveTurnHandle.state(false).isDone or (p1.getCasSessionId() ~= CasSessionId or ActiveTurnHandle.isCurrentOwner ~= nil and not ActiveTurnHandle.isCurrentOwner())) then
 					if Flag1 then
 						Flag1 = false
 						Smallest = ResolvePositiveNumberResult
 						Count2 += 1
 					end
 				elseif Flag2 or Flag3 then
-					if not Flag1 and (not Flag and (not ActiveTurnHandle.state(false).isDone and p1.getCasSessionId() == CasSessionId)) then
+					if not Flag1 and (not Flag and (not ActiveTurnHandle.state(false).isDone and (p1.getCasSessionId() == CasSessionId and (ActiveTurnHandle.isCurrentOwner == nil or ActiveTurnHandle.isCurrentOwner())))) then
 						Flag1 = true
 						Smallest = ResolvePositiveNumberResult
 						Callback(0)
@@ -350,14 +359,14 @@ return {
 			ClockTime = os.clock()
 			Flag2 = false
 			
-			if Flag or (ActiveTurnHandle.state(false).isDone or p1.getCasSessionId() ~= CasSessionId) then
+			if Flag or (ActiveTurnHandle.state(false).isDone or (p1.getCasSessionId() ~= CasSessionId or ActiveTurnHandle.isCurrentOwner ~= nil and not ActiveTurnHandle.isCurrentOwner())) then
 				if Flag1 then
 					Flag1 = false
 					Smallest = ResolvePositiveNumberResult
 					Count2 += 1
 				end
 			elseif Flag2 or Flag3 then
-				if not Flag1 and (not Flag and (not ActiveTurnHandle.state(false).isDone and p1.getCasSessionId() == CasSessionId)) then
+				if not Flag1 and (not Flag and (not ActiveTurnHandle.state(false).isDone and (p1.getCasSessionId() == CasSessionId and (ActiveTurnHandle.isCurrentOwner == nil or ActiveTurnHandle.isCurrentOwner())))) then
 					Flag1 = true
 					Smallest = ResolvePositiveNumberResult
 					Callback(0)

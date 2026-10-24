@@ -6,7 +6,6 @@ local _ = require(BuildExperience.Chat.chatTypes)
 local _ = require(BuildExperience.Stores.GetBuildOverflowMenuStore.createBuildOverflowMenuStore)
 local FFlagBuildExperienceMyCreationsLongPressMenuModule = require(BuildExperience.Flags.FFlagBuildExperienceMyCreationsLongPressMenu)
 local FFlagBuildExperienceMyCreationsUseUniverseListModule = require(BuildExperience.Flags.FFlagBuildExperienceMyCreationsUseUniverseList)
-local FFlagBuildExperienceStableMyCreationsListItemsModule = require(BuildExperience.Flags.FFlagBuildExperienceStableMyCreationsListItems)
 local DescriptionWithGroupIconModule = require(BuildExperience.utils.descriptionWithGroupIcon)
 local ExperienceResultsLoadingSkeletonModule = require(script.Parent.ExperienceResultsLoadingSkeleton)
 local ExperienceRowActionsMenuModule = require(script.Parent.ExperienceRowActionsMenu)
@@ -117,14 +116,14 @@ local MemoResult = ReactModule.memo(function(Frame)
 end)
 
 return ReactModule.memo(function(p1)
-	-- upvalues: FFlagBuildExperienceMyCreationsLongPressMenuModule (copy), FFlagBuildExperienceStableMyCreationsListItemsModule (copy), useRowActionsMenu (copy), FFlagBuildExperienceMyCreationsUseUniverseListModule (copy), ReactModule (copy), MemoResult (copy), List (copy), DescriptionWithGroupIconModule (copy), View (copy), Badge (copy), BadgeShape (copy), BadgeSize (copy), BadgeVariant (copy), ExperienceResultsLoadingSkeletonModule (copy), ExperienceRowActionsMenuModule (copy), InputSize (copy)
+	-- upvalues: FFlagBuildExperienceMyCreationsLongPressMenuModule (copy), useRowActionsMenu (copy), FFlagBuildExperienceMyCreationsUseUniverseListModule (copy), ReactModule (copy), MemoResult (copy), ExperienceResultsLoadingSkeletonModule (copy), List (copy), ExperienceRowActionsMenuModule (copy), InputSize (copy)
 	local TestIdPrefix = p1.testIdPrefix or "MyCreationsTab"
 	local FirstResultLayoutOrder = p1.firstResultLayoutOrder or 1
 	local Copy = table.clone(p1.leadingItems or {})
 	local OnOpenConfigurationPage = p1.onOpenConfigurationPage
 	local v1 = nil
 	
-	if FFlagBuildExperienceMyCreationsLongPressMenuModule and FFlagBuildExperienceStableMyCreationsListItemsModule then
+	if FFlagBuildExperienceMyCreationsLongPressMenuModule then
 		local UseRowActionsMenuResult = useRowActionsMenu()
 		
 		if OnOpenConfigurationPage ~= nil then
@@ -135,58 +134,21 @@ return ReactModule.memo(function(p1)
 	
 	if p1.hasDisplayedResult and p1.hasDisplayedItems then
 		for i, item in p1.items do
-			local Text: string = if FFlagBuildExperienceMyCreationsUseUniverseListModule then "U" .. item.universeId else "S" .. item.sessionId
-			local FirstResultLayoutOrderDelta = i + FirstResultLayoutOrder - 1
-			
-			if FFlagBuildExperienceStableMyCreationsListItemsModule then
-				Copy[Text] = ReactModule.createElement(MemoResult, {
-					LayoutOrder = FirstResultLayoutOrderDelta,
-					sessionId = item.sessionId,
-					universeId = item.universeId,
-					placeId = item.placeId,
-					experienceName = item.experienceName,
-					creatorName = item.creatorName,
-					description = item.description,
-					visibilityLabel = item.visibilityLabel,
-					gameIcon = item.gameIcon,
-					isGroupGame = item.isGroupGame,
-					onOpenChat = p1.onOpenChat,
-					onLongPress = if v1 == nil then nil else v1.open,
-					testIdPrefix = TestIdPrefix
-				})
-			else
-				local ExperienceName = item.experienceName
-				local GameIcon = item.gameIcon
-				local PlaceId = item.placeId
-				local VisibilityLabel = item.visibilityLabel
-				Copy[Text] = ReactModule.createElement(List.Item, {
-					LayoutOrder = FirstResultLayoutOrderDelta,
-					leading = { iconName = GameIcon },
-					title = ExperienceName,
-					description = DescriptionWithGroupIconModule(item.description, item.isGroupGame, item.creatorName),
-					testId = `{TestIdPrefix}.ExperienceRow.{item.universeId}`,
-					onActivated = function()
-						-- upvalues: p1 (copy), item (copy), PlaceId (copy), ExperienceName (copy), GameIcon (copy)
-						p1.onOpenChat({
-							universeId = item.universeId,
-							placeId = PlaceId,
-							sessionId = item.sessionId,
-							experienceName = ExperienceName,
-							creatorName = item.creatorName,
-							gameIcon = GameIcon
-						})
-					end,
-					trailing = if VisibilityLabel == nil then nil else ReactModule.createElement(View, { tag = "row align-y-center auto-xy" }, {
-						VisibilityBadge = ReactModule.createElement(Badge, {
-							text = VisibilityLabel,
-							shape = BadgeShape.Box,
-							size = BadgeSize.Small,
-							variant = BadgeVariant.Neutral,
-							testId = `{TestIdPrefix}.VisibilityBadge.{item.universeId}`
-						})
-					})
-				})
-			end
+			Copy[if FFlagBuildExperienceMyCreationsUseUniverseListModule then "U" .. item.universeId else "S" .. item.sessionId] = ReactModule.createElement(MemoResult, {
+				LayoutOrder = i + FirstResultLayoutOrder - 1,
+				sessionId = item.sessionId,
+				universeId = item.universeId,
+				placeId = item.placeId,
+				experienceName = item.experienceName,
+				creatorName = item.creatorName,
+				description = item.description,
+				visibilityLabel = item.visibilityLabel,
+				gameIcon = item.gameIcon,
+				isGroupGame = item.isGroupGame,
+				onOpenChat = p1.onOpenChat,
+				onLongPress = if v1 == nil then nil else v1.open,
+				testIdPrefix = TestIdPrefix
+			})
 		end
 	elseif p1.listStatus == "NotReady" or p1.hasPendingSummary then
 		for i1 = 1, 2 do

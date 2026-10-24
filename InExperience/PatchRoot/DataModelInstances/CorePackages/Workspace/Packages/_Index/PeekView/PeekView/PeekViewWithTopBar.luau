@@ -9,9 +9,12 @@ local PeekViewModule = require(script.Parent.PeekView)
 local PeekViewStateModule = require(script.Parent.PeekViewState)
 local PeekViewDismissedEventModule = require(script.Parent.analytics.peekViewDismissedEvent)
 local FFlagProfilePlatformNewProfileHeader = require(Parent.SharedFlags).FFlagProfilePlatformNewProfileHeader
+local FFlagFixOverlayTopInsetForDeviceSafeInsets = require(Parent.SharedFlags).FFlagFixOverlayTopInsetForDeviceSafeInsets
+local ShouldUseDeviceSafeInsets = require(Parent.Display).shouldUseDeviceSafeInsets
+local UseDeviceInsetsFunction = require(Parent.Responsive).useDeviceInsets
 
 return function(p1)
-	-- upvalues: UseRoactServiceFunction (copy), AppEventIngestService (copy), UseRouteNameFunction (copy), UseStyleFunction (copy), ReactModule (copy), PeekViewStateModule (copy), PeekViewDismissedEventModule (copy), CryoModule (copy), PeekViewModule (copy), FFlagProfilePlatformNewProfileHeader (copy)
+	-- upvalues: UseRoactServiceFunction (copy), AppEventIngestService (copy), UseRouteNameFunction (copy), UseStyleFunction (copy), ReactModule (copy), PeekViewStateModule (copy), PeekViewDismissedEventModule (copy), CryoModule (copy), FFlagFixOverlayTopInsetForDeviceSafeInsets (copy), ShouldUseDeviceSafeInsets (copy), UseDeviceInsetsFunction (copy), PeekViewModule (copy), FFlagProfilePlatformNewProfileHeader (copy)
 	local UseRoactServiceResult = UseRoactServiceFunction(AppEventIngestService)
 	local UseRouteNameResult = UseRouteNameFunction()
 	local UseStyleResult = UseStyleFunction()
@@ -37,6 +40,7 @@ return function(p1)
 		UseRoactServiceResult,
 		UseRouteNameResult
 	})
+	local Top = if FFlagFixOverlayTopInsetForDeviceSafeInsets and ShouldUseDeviceSafeInsets then UseDeviceInsetsFunction().top else 0
 	local UseBindingResult, UseBindingResult2 = ReactModule.useBinding(0)
 	
 	return ReactModule.createElement("Frame", {
@@ -50,14 +54,20 @@ return function(p1)
 			BackgroundTransparency = 0,
 			BorderSizePixel = 0,
 			ZIndex = 2,
-			Position = UDim2.new(0, 0, 0, 0),
-			Size = UDim2.new(1, 0, 0, p1.topBarHeight),
+			Position = UDim2.new(0, 0, 0, -Top),
+			Size = UDim2.new(1, 0, 0, p1.topBarHeight + Top),
 			BackgroundColor3 = UseStyleResult.Theme.BackgroundDefault.Color,
 			BorderColor3 = UseStyleResult.Tokens.Color.Common.Shimmer.Color3,
 			GroupTransparency = UseBindingResult:map(function(p2: number): number
 				return 1 - p2
 			end)
-		}, { PeekViewTopBarInner = p1.topBarSlot }),
+		}, {
+			PeekViewTopBarInner = if Top > 0 then ReactModule.createElement("Frame", {
+				BackgroundTransparency = 1,
+				Position = UDim2.new(0, 0, 0, Top),
+				Size = UDim2.new(1, 0, 0, p1.topBarHeight)
+			}, { TopBarSlot = p1.topBarSlot }) else p1.topBarSlot
+		}),
 		PeekViewContainer = ReactModule.createElement("Frame", {
 			BackgroundTransparency = 1,
 			ClipsDescendants = true,

@@ -3,7 +3,6 @@ local Parent = script:FindFirstAncestor("TopicContentsRodux").Parent
 local ParseBooleanStringFunction = require(Parent.DiscoveryUtils).parseBooleanString
 local OmniRecommendationsContentType = require(Parent.DiscoveryTypes).OmniRecommendationsContentType
 local ResultModule = require(Parent.Result)
-local FFlagSearchOmniAutocompletePage = require(Parent.SharedFlags).FFlagSearchOmniAutocompletePage
 local FFlagEnableTopSongsSort = require(Parent.SharedFlags).FFlagEnableTopSongsSort
 local FFlagLuaAppEnableHomepageOneByTwoTile = require(Parent.SharedFlags).FFlagLuaAppEnableHomepageOneByTwoTile
 local FFlagLuaAppEnableOneByTwoTileFunnelTelemetry = require(Parent.SharedFlags).FFlagLuaAppEnableOneByTwoTileFunnelTelemetry
@@ -88,28 +87,27 @@ function TopicContentsEntryModelModule.fromGamesApiData(p1)
 	return ResultModule.success(NewTopicContentsEntryModel)
 end
 
-if FFlagSearchOmniAutocompletePage then
-	function TopicContentsEntryModelModule.fromOmniAutocompleteApi(p1)
-		-- upvalues: ResultModule (copy), TopicContentsEntryModelModule (copy), OmniRecommendationsContentType (copy)
-		if type(p1.universeId) ~= "number" and type(p1.universeId) ~= "string" then
-			return ResultModule.error("TopicContentsEntryModel.fromOmniAutocomplete expects universeId to be a number or a string")
-		end
-		local NewTopicContentsEntryModel = TopicContentsEntryModelModule.new()
-		NewTopicContentsEntryModel.contentType = OmniRecommendationsContentType.Game
-		NewTopicContentsEntryModel.contentId = tostring(p1.universeId)
-		
-		if p1.contentMetadata then
-			local ContentMetadata = p1.contentMetadata
-			NewTopicContentsEntryModel.badgePosition = ContentMetadata.badgePosition
-			NewTopicContentsEntryModel.badgeAnalyticsId = ContentMetadata.badgeAnalyticsId
-			NewTopicContentsEntryModel.badgeType = ContentMetadata.badgeType
-			NewTopicContentsEntryModel.badgeText = ContentMetadata.badgeText
-			NewTopicContentsEntryModel.badgeIcon = ContentMetadata.badgeIcon
-			NewTopicContentsEntryModel.badgeComponentType = ContentMetadata.badgeComponentType
-		end
-		return ResultModule.success(NewTopicContentsEntryModel)
+function TopicContentsEntryModelModule.fromOmniAutocompleteApi(p1)
+	-- upvalues: ResultModule (copy), TopicContentsEntryModelModule (copy), OmniRecommendationsContentType (copy)
+	if type(p1.universeId) ~= "number" and type(p1.universeId) ~= "string" then
+		return ResultModule.error("TopicContentsEntryModel.fromOmniAutocomplete expects universeId to be a number or a string")
 	end
+	local NewTopicContentsEntryModel = TopicContentsEntryModelModule.new()
+	NewTopicContentsEntryModel.contentType = OmniRecommendationsContentType.Game
+	NewTopicContentsEntryModel.contentId = tostring(p1.universeId)
+	
+	if p1.contentMetadata then
+		local ContentMetadata = p1.contentMetadata
+		NewTopicContentsEntryModel.badgePosition = ContentMetadata.badgePosition
+		NewTopicContentsEntryModel.badgeAnalyticsId = ContentMetadata.badgeAnalyticsId
+		NewTopicContentsEntryModel.badgeType = ContentMetadata.badgeType
+		NewTopicContentsEntryModel.badgeText = ContentMetadata.badgeText
+		NewTopicContentsEntryModel.badgeIcon = ContentMetadata.badgeIcon
+		NewTopicContentsEntryModel.badgeComponentType = ContentMetadata.badgeComponentType
+	end
+	return ResultModule.success(NewTopicContentsEntryModel)
 end
+
 function TopicContentsEntryModelModule.fromExploreApiData(p1)
 	-- upvalues: ResultModule (copy), TopicContentsEntryModelModule (copy), OmniRecommendationsContentType (copy)
 	if type(p1.universeId) ~= "number" and type(p1.universeId) ~= "string" then

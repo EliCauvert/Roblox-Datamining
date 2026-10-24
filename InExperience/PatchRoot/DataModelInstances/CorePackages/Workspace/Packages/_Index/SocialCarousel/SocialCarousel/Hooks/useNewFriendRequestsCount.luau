@@ -5,16 +5,19 @@ local RoactAppExperimentModule = require(Parent.RoactAppExperiment)
 local GetDeepValueModule = require(SocialCarousel.Utils.getDeepValue)
 local UseSelectorFunction = require(Parent.RoactUtils).Hooks.RoactRodux.useSelector
 local UseSignalStateFunction = require(Parent.SignalsReact).useSignalState
-local FriendsRequestsStore = require(Parent.DataHydration.FriendsRequests).FriendsRequestsStore
+local FriendsRequestsModule = require(Parent.DataHydration.FriendsRequests)
+local FriendsRequestsStore = FriendsRequestsModule.FriendsRequestsStore
+local UnseenRequestsStore = FriendsRequestsModule.UnseenRequestsStore
 local FStringNewFriendRequestsBadgeLayer = require(Parent.SharedFlags).FStringNewFriendRequestsBadgeLayer
 local FFlagAddFriendsPageUseSections = require(Parent.SharedFlags).FFlagAddFriendsPageUseSections
+local FFlagAddFriendsPageHighlightUnseenTrustedRequests = require(Parent.SharedFlags).FFlagAddFriendsPageHighlightUnseenTrustedRequests
 local FFlagSocialCarouselEnableNewFriendRequestsBadgeForAllModule = require(SocialCarousel.Flags.FFlagSocialCarouselEnableNewFriendRequestsBadgeForAll)
 
 return function()
-	-- upvalues: FFlagSocialCarouselEnableNewFriendRequestsBadgeForAllModule (copy), RoactAppExperimentModule (copy), FStringNewFriendRequestsBadgeLayer (copy), FFlagAddFriendsPageUseSections (copy), ReactModule (copy), FriendsRequestsStore (copy), UseSignalStateFunction (copy), UseSelectorFunction (copy), GetDeepValueModule (copy)
+	-- upvalues: FFlagSocialCarouselEnableNewFriendRequestsBadgeForAllModule (copy), RoactAppExperimentModule (copy), FStringNewFriendRequestsBadgeLayer (copy), FFlagAddFriendsPageUseSections (copy), ReactModule (copy), FFlagAddFriendsPageHighlightUnseenTrustedRequests (copy), UnseenRequestsStore (copy), FriendsRequestsStore (copy), UseSignalStateFunction (copy), UseSelectorFunction (copy), GetDeepValueModule (copy)
 	local UseMemoResult = if FFlagAddFriendsPageUseSections then ReactModule.useMemo(function()
-		-- upvalues: FriendsRequestsStore (upval)
-		return FriendsRequestsStore.get().getNewFriendsRequestCount()
+		-- upvalues: FFlagAddFriendsPageHighlightUnseenTrustedRequests (upval), UnseenRequestsStore (upval), FriendsRequestsStore (upval)
+		return if FFlagAddFriendsPageHighlightUnseenTrustedRequests then UnseenRequestsStore.get().getUnseenRequestCount() else FriendsRequestsStore.get().getNewFriendsRequestCount()
 	end, {}) else nil
 	local UseSignalStateResult = if FFlagAddFriendsPageUseSections then UseSignalStateFunction(UseMemoResult.data) or 0 else UseSelectorFunction(function(p1)
 		-- upvalues: GetDeepValueModule (upval)

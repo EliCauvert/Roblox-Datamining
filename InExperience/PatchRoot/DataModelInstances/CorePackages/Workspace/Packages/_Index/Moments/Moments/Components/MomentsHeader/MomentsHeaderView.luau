@@ -18,6 +18,8 @@ local FlyoutSidePanelIXP = require(Parent.SharedExperimentDefinition).FlyoutSide
 local NavigationMenuModule = require(Moments.Components.NavigationMenu)
 local ConstantsModule = require(Moments.Constants)
 local FFlagMomentsFtuxTooltipCreateCopyModule = require(Moments.Flags.FFlagMomentsFtuxTooltipCreateCopy)
+local FFlagMomentsFixFeedForDeviceSafeInsetsModule = require(Moments.Flags.FFlagMomentsFixFeedForDeviceSafeInsets)
+local ShouldUseDeviceSafeInsets = require(Parent.Display).shouldUseDeviceSafeInsets
 local FFlagMomentsCreationFeatureGate = require(Parent.SharedFlags).FFlagMomentsCreationFeatureGate
 
 local function renderAction(p1, Icon, OnActivated, LayoutOrder)
@@ -35,7 +37,7 @@ local function renderAction(p1, Icon, OnActivated, LayoutOrder)
 end
 
 return function(p1)
-	-- upvalues: renderAction (copy), ChevronLargeLeft (copy), PlusLarge (copy), ReactModule (copy), IconButton (copy), ButtonVariant (copy), InputSize (copy), NavigationMenuModule (copy), View (copy), FlyoutSidePanelIXP (copy), FlyoutLeftHeader (copy), Text (copy), FFlagMomentsCreationFeatureGate (copy), FoundationModule (copy), FFlagMomentsFtuxTooltipCreateCopyModule (copy), Coachmark (copy), HeaderBar (copy), GradientBackdrop (copy), ConstantsModule (copy)
+	-- upvalues: renderAction (copy), ChevronLargeLeft (copy), PlusLarge (copy), ReactModule (copy), IconButton (copy), ButtonVariant (copy), InputSize (copy), NavigationMenuModule (copy), View (copy), FlyoutSidePanelIXP (copy), FlyoutLeftHeader (copy), Text (copy), FFlagMomentsCreationFeatureGate (copy), FoundationModule (copy), FFlagMomentsFtuxTooltipCreateCopyModule (copy), Coachmark (copy), HeaderBar (copy), GradientBackdrop (copy), FFlagMomentsFixFeedForDeviceSafeInsetsModule (copy), ShouldUseDeviceSafeInsets (copy), ConstantsModule (copy)
 	local RenderLeft: (() -> any)? = nil
 	local RenderRight: (() -> any)? = nil
 	
@@ -181,7 +183,7 @@ return function(p1)
 			rotation = 90,
 			zIndex = 1,
 			color3 = Color3.new(0, 0, 0),
-			position = UDim2.fromScale(0, 0),
+			position = if FFlagMomentsFixFeedForDeviceSafeInsetsModule and ShouldUseDeviceSafeInsets then UDim2.fromOffset(0, p1.scrimTopOffset or 0) else UDim2.fromScale(0, 0),
 			size = UDim2.new(1, 0, 0, p1.scrimHeight)
 		})
 	end

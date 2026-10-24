@@ -5,7 +5,6 @@ local Players = game:GetService("Players")
 local FFlagBuildExperienceMyCreationsCreateGameButtonModule = require(BuildExperience.Flags.FFlagBuildExperienceMyCreationsCreateGameButton)
 local FFlagBuildExperienceMyCreationsLongPressMenuModule = require(BuildExperience.Flags.FFlagBuildExperienceMyCreationsLongPressMenu)
 local FFlagBuildExperienceMyCreationsUseUniverseListModule = require(BuildExperience.Flags.FFlagBuildExperienceMyCreationsUseUniverseList)
-local FFlagBuildExperienceStableMyCreationsListItemsModule = require(BuildExperience.Flags.FFlagBuildExperienceStableMyCreationsListItems)
 local FFlagBuildWithGroupsModule = require(BuildExperience.Flags.FFlagBuildWithGroups)
 local FoundationModule = require(Parent.Foundation)
 local ReactModule = require(Parent.React)
@@ -23,8 +22,8 @@ local IconName = FoundationModule.Enums.IconName
 local InputSize = FoundationModule.Enums.InputSize
 local ListItemInputType = FoundationModule.Enums.ListItemInputType
 local MyCreationsTabNewGameRow = if FFlagBuildExperienceMyCreationsLongPressMenuModule then "MyCreationsTab.NewGameRow" else nil
+local BuildEmptyStateModule = require(BuildExperience.Components.BuildEmptyState.BuildEmptyState)
 local SearchEmptyStateModule = require(BuildExperience.Components.SearchEmptyState.SearchEmptyState)
-local BuildEmptyStateModule = require(script.Parent.Parent.BuildEmptyState.BuildEmptyState)
 local ChatConstantsModule = require(script.Parent.Parent.Parent.Chat.chatConstants)
 local _ = require(script.Parent.Parent.Parent.Chat.chatTypes)
 local GetMyCreationsFilterStoreModule = require(script.Parent.Parent.Parent.Stores.GetMyCreationsFilterStore)
@@ -37,7 +36,7 @@ local MyCreationsFilterContainerModule = require(BuildExperience.Components.MyCr
 local UseMyCreationsResultsModule = require(script.Parent.useMyCreationsResults)
 
 return function(Frame: Frame)
-	-- upvalues: UseLocalizationFunction (copy), LocalizationStringsModule (copy), FFlagBuildExperienceMyCreationsCreateGameButtonModule (copy), GetSearchQueryStoreModule (copy), ReactModule (copy), UseScrollPerformanceTrackerModule (copy), FFlagBuildWithGroupsModule (copy), FFlagBuildExperienceMyCreationsUseUniverseListModule (copy), GetMyCreationsFilterStoreModule (copy), UseMyCreationsResultsModule (copy), ChatConstantsModule (copy), Players (copy), FFlagBuildExperienceMyCreationsLongPressMenuModule (copy), FFlagBuildExperienceStableMyCreationsListItemsModule (copy), ListItemInputType (copy), ExperienceResultsLoadingSkeletonModule (copy), List (copy), IconName (copy), MyCreationsTabNewGameRow (copy), SearchEmptyStateModule (copy), View (copy), InputSize (copy), BuildEmptyStateModule (copy), ExperienceResultsListModule (copy), RefreshScrollingFrame (copy), MyCreationsFilterContainerModule (copy), Button (copy), ButtonVariant (copy)
+	-- upvalues: UseLocalizationFunction (copy), LocalizationStringsModule (copy), FFlagBuildExperienceMyCreationsCreateGameButtonModule (copy), GetSearchQueryStoreModule (copy), ReactModule (copy), UseScrollPerformanceTrackerModule (copy), FFlagBuildWithGroupsModule (copy), FFlagBuildExperienceMyCreationsUseUniverseListModule (copy), GetMyCreationsFilterStoreModule (copy), UseMyCreationsResultsModule (copy), ChatConstantsModule (copy), Players (copy), FFlagBuildExperienceMyCreationsLongPressMenuModule (copy), ListItemInputType (copy), ExperienceResultsLoadingSkeletonModule (copy), List (copy), IconName (copy), MyCreationsTabNewGameRow (copy), SearchEmptyStateModule (copy), View (copy), InputSize (copy), BuildEmptyStateModule (copy), ExperienceResultsListModule (copy), RefreshScrollingFrame (copy), MyCreationsFilterContainerModule (copy), Button (copy), ButtonVariant (copy)
 	local UseLocalizationResult = UseLocalizationFunction({
 		building = LocalizationStringsModule.MY_CREATIONS_BUILDING,
 		buildWithAI = LocalizationStringsModule.MY_CREATIONS_BUILD_WITH_AI,
@@ -45,6 +44,7 @@ return function(Frame: Frame)
 		inputNeeded = LocalizationStringsModule.MY_CREATIONS_INPUT_NEEDED,
 		loadError = LocalizationStringsModule.MY_CREATIONS_LOAD_ERROR,
 		newGame = LocalizationStringsModule.MY_CREATIONS_NEW_GAME,
+		noGames = LocalizationStringsModule.MY_CREATIONS_NO_GAMES,
 		private = LocalizationStringsModule.MY_CREATIONS_PRIVATE,
 		public = LocalizationStringsModule.MY_CREATIONS_PUBLIC,
 		publiclyUnavailable = LocalizationStringsModule.MY_CREATIONS_PUBLICLY_UNAVAILABLE,
@@ -55,6 +55,7 @@ return function(Frame: Frame)
 	local CreateNewGame = UseLocalizationResult.createNewGame
 	local LoadError = UseLocalizationResult.loadError
 	local NewGame = UseLocalizationResult.newGame
+	local NoGames = UseLocalizationResult.noGames
 	local SearchQueryStore = Frame.searchQueryStore or GetSearchQueryStoreModule()
 	local IsIsFocused = Frame.isFocused ~= false
 	local UseRefResult = ReactModule.useRef(nil)
@@ -108,7 +109,7 @@ return function(Frame: Frame)
 		IsIsFocused,
 		Frame.autoOpenNewGame
 	})
-	local None = if FFlagBuildExperienceMyCreationsLongPressMenuModule and FFlagBuildExperienceStableMyCreationsListItemsModule and Frame.onOpenConfigurationPage ~= nil then ListItemInputType.None else nil
+	local None = if FFlagBuildExperienceMyCreationsLongPressMenuModule and Frame.onOpenConfigurationPage ~= nil then ListItemInputType.None else nil
 	local UseMemoResult = if FFlagBuildExperienceMyCreationsCreateGameButtonModule then nil else ReactModule.useMemo(function()
 		-- upvalues: ReactModule (upval), List (upval), IconName (upval), NewGame (copy), BuildWithAI (copy), MyCreationsTabNewGameRow (upval), UseResult (copy), None (copy)
 		return {
@@ -184,7 +185,9 @@ return function(Frame: Frame)
 						tag = "col align-x-center align-y-center fill size-full-0 padding-large",
 						testId = "MyCreationsTab.Empty"
 					}, {
-						Content = ReactModule.createElement(BuildEmptyStateModule)
+						Content = ReactModule.createElement(BuildEmptyStateModule, {
+							message = if FFlagBuildWithGroupsModule then NoGames else nil
+						})
 					})
 				})
 			} else {

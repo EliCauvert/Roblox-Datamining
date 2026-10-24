@@ -165,7 +165,7 @@ Authentication.SignUp.Response.PasswordComplexity,Crie uma senha mais complexa.
 Authentication.SignUp.Response.UsernameMustBeSetFirst,O nome de usuário deve ser definido primeiro.
 Authentication.SignUp.Subtitle.AddYourBirthday,Adicione sua data de nascimento para criar uma conta Roblox.
 Authentication.SignUp.Subtitle.YourProgressCarriesOver,Seu progresso é transferido quando você conclui a configuração.
-Authentication.SignUp.Subtitle.YoureAlmostThere,"Você está quase terminando. Se fechar agora, sua conta não será criada por completo e você não poderá jogar Roblox."
+Authentication.SignUp.Subtitle.YoureAlmostThereClose,"Você está quase terminando. Se cancelar agora, sua conta não será criada por completo e você não poderá jogar Roblox."
 Authentication.TwoStepVerification.Action.GoToSecurity,
 Authentication.TwoStepVerification.Label.TwoStepRequired,A verificação em duas etapas é obrigatória para fazer mais transações. Vá em Configurações > Segurança para completar a verificação em duas etapas.
 Authentication.TwoStepVerification.Response.TooManyAttempts,Tentativas excessivas. Tente novamente mais tarde.
@@ -274,6 +274,9 @@ Common.UGCValidation.ErrorLabel.DescendantIdAnimationVersionNotSupported,"{Insta
 Common.UGCValidation.ErrorLabel.DescendantIdNotPublished,O elemento {AssetId} ({InstanceFullName}.{FieldName}) não foi publicado. Publique-o e tente novamente.
 Common.UGCValidation.ErrorLabel.DescendantIdVersionNotSupported,"{InstanceFullName}.{FieldName} usa a versão {Version} do ativo {AssetId}, mas apenas a versão 1 é compatível no momento. Use a versão 1 e tente novamente."
 Common.UGCValidation.ErrorLabel.DynamicHeadCageMisaligned,As cabeças dinâmicas disponíveis no mercado devem ser devidamente organizadas em gaiolas para que os vértices dos olhos e da boca na gaiola estejam alinhados com os vértices da malha. Aprimore a organização em gaiolas e seu alinhamento com a malha.
+Common.UGCValidation.ErrorLabel.DynamicHeadCageMisalignedLeftEye,Os pontos de referência do olho esquerdo na malha de deformação da cabeça dinâmica estão desalinhados em relação à malha. Ajuste a malha de deformação do olho esquerdo para que fique dentro da área projetada.
+Common.UGCValidation.ErrorLabel.DynamicHeadCageMisalignedMouth,Os pontos de referência da boca na malha de deformação da cabeça dinâmica estão desalinhados em relação à malha. Ajuste a malha de deformação da boca para que fique dentro da área projetada.
+Common.UGCValidation.ErrorLabel.DynamicHeadCageMisalignedRightEye,Os pontos de referência do olho direito na malha de deformação da cabeça dinâmica estão desalinhados em relação à malha. Ajuste a malha de deformação do olho direito para que fique dentro da área projetada.
 Common.UGCValidation.ErrorLabel.DynamicHeadHappyNotShown,Não é possível identificar a expressão de sorriso para a cabeça dinâmica. Ajuste os pontos de referência da gaiola para que a boca corresponda ao local da boca na cabeça e confira se ela pode mostrar a expressão de sorriso.
 Common.UGCValidation.ErrorLabel.DynamicHeadLeftEyeNotClose,Não é possível identificar a expressão de olho esquerdo fechado para a cabeça dinâmica. Ajuste os pontos de referência da gaiola para que o olho esquerdo corresponda ao local do olho esquerdo na cabeça e confira se ele pode se fechar.
 Common.UGCValidation.ErrorLabel.DynamicHeadMISSINGCAGE,As cabeças dinâmicas disponíveis no mercado não têm gaiolas de cabeça. Crie uma gaiola de cabeça para a cabeça dinâmica.
@@ -293,6 +296,13 @@ Common.UGCValidation.ErrorLabel.EmoteAnimation_MaxPartTranslationCalcFailed,Não
 Common.UGCValidation.ErrorLabel.EmoteAnimation_MaxPartTranslationMismatch,"A animação publicada indica uma translação máxima da parte de {taggedTranslation} rebites, mas seus dados de animação resultam em {calculatedTranslation} rebites. Publique a animação novamente."
 Common.UGCValidation.ErrorLabel.Extents_HeadBelowTorso,"A cabeça deve ser posicionada acima do tronco superior. O centro da cabeça está abaixo da parte superior do tronco, o que indica que a malha da cabeça está colapsada ou mal posicionada."
 Common.UGCValidation.ErrorLabel.FaceControlsOverrideFACSNotEmpty,A propriedade InternalOverrideFACSData em FaceControls deve estar vazia no envio.
+Common.UGCValidation.ErrorLabel.FacialFeaturePresence_EyesMissing,O rosto base não tem as características oculares obrigatórias. Adicione olhos ao rosto base e tente novamente.
+Common.UGCValidation.ErrorLabel.FacialFeaturePresence_MouthMissing,"O rosto base não tem uma boca, que é obrigatória. Adicione uma boca ao rosto base e tente novamente."
+Common.UGCValidation.ErrorLabel.FacsDeformation_HappyNotShown,Não é possível detectar a expressão de felicidade. Ajuste a malha de deformação da boca ou o SCAF de expressão de felicidade para que a malha projetada da boca se deforme como esperado.
+Common.UGCValidation.ErrorLabel.FacsDeformation_LeftEyeNotClose,Não foi possível detectar a expressão de olho esquerdo fechado. Ajuste a malha de deformação do olho esquerdo ou o SCAF de olho esquerdo fechado para que a malha projetada do olho se deforme como esperado.
+Common.UGCValidation.ErrorLabel.FacsDeformation_MouthNotOpen,Não é possível detectar a expressão de boca aberta. Ajuste a malha de deformação da boca ou o SCAF de boca aberta para que a malha projetada da boca se deforme como esperado.
+Common.UGCValidation.ErrorLabel.FacsDeformation_RightEyeNotClose,Não foi possível detectar a expressão de olho direito fechado. Ajuste a malha de deformação do olho direito ou o SCAF de olho direito fechado para que a malha projetada do olho se deforme como esperado.
+Common.UGCValidation.ErrorLabel.FacsDeformation_SadNotShown,Não é possível detectar a expressão de tristeza. Ajuste a malha de deformação da boca ou o SCAF de expressão de tristeza para que a malha projetada da boca se deforme como esperado.
 Common.UGCValidation.ErrorLabel.FacsExpandsHead,"Foi detectado que o SCAF - Sistema de Codificação de Ações Faciais expandiu sua cabeça para {modPercent}%, mas alterar a cabeça é contra a política do mercado para animações faciais."
 Common.UGCValidation.ErrorLabel.FacsJointCountBounded,"As cabeças dinâmicas podem ter no máximo {maxFacsJointCount} articulações do Sistema de Codificação de Ações Faciais (SCAF), mas esta cabeça tem {actualJointCount}. Reduza o número de articulações do SCAF e tente novamente."
 Common.UGCValidation.ErrorLabel.FacsShrinksHead,"Foi detectado que o SCAF - Sistema de Codificação de Ações Faciais encolheu sua cabeça para {modPercent}%, mas alterar a cabeça é contra a política do mercado para animações faciais."
@@ -339,6 +349,7 @@ Common.UGCValidation.ErrorLabel.MeshPartBounds_TooSmall,"A dimensão da malha de
 Common.UGCValidation.ErrorLabel.MissingRequiredAttachment,O anexo {attName} deve existir exatamente uma vez dentro dos descendentes de {partName}.
 Common.UGCValidation.ErrorLabel.NoAttributes,"""{RootInstanceName}"" (ou seus descendentes) contêm Atributos. Você precisa remover os Atributos do seguinte: {InstanceNameList}"
 Common.UGCValidation.ErrorLabel.PropertiesNotSensible,{ClassName} '{InstancePath}' tem propriedades inválidas: {ProblematicProperties}. Um limite de bytes mostrado foi excedido (um limite de 0 significa que a propriedade deve estar vazia); qualquer outra propriedade contém valores NaN/Inf ou excede o limite de tamanho padrão.
+Common.UGCValidation.ErrorLabel.RenderedAnimation_RequiredExpressionsMissing,"A animação renderizada não tem uma ou mais expressões faciais obrigatórias (olho fechado, boca aberta, feliz, triste)."
 Common.UGCValidation.ErrorLabel.RigAttachmentOutOfBounds,"O anexo de rig '{AttachmentName}' em '{PartName}' deve ser posicionado próximo ao limite da articulação, onde essa parte do corpo se conecta a uma parte adjacente. A posição atual [{CurrentPosition}] está longe demais do plano de conexão. Mova-o para mais perto de [{ClosestValidPosition}]."
 Common.UGCValidation.ErrorLabel.SelectionCountNotOne,"Para fazer upload de um ativo no Roblox, você deve selecionar exatamente 1 instância e o tipo de upload associado."
 Common.UGCValidation.ErrorLabel.SerializedAssetTooLarge,Este ativo é muito grande para ser carregado ({sizeBytes} bytes excedem o máximo de {maxSizeBytes} bytes). Reduza seu tamanho e tente novamente.
@@ -3168,7 +3179,6 @@ Feature.Contacts.Message.ContactDiscoverable,"Para ajudar você a fazer amizades
 Feature.Contacts.Message.ContactsSyncWarning,Seus contatos serão sincronizados regularmente e suas partidas com outros usuários Roblox serão armazenadas para ajudar você a encontrar amigos. Você pode gerenciar isto a qualquer momento nas configurações do dispositivo.
 Feature.Contacts.Message.InviteToRoblox,"Me adicione aos seus amigos na Roblox para que possamos criar, compartilhar e explorar experiências juntos."
 Feature.Contacts.Message.NoResults,Nenhum resultado.
-Feature.DeveloperProducts.Heading.Products,Produtos
 Feature.DeveloperProducts.Label.Product,
 Feature.DisplayName.ErrorMessage.AgedUpNameContainPII,O nome de usuário pode conter informações privadas
 Feature.DisplayName.ErrorMessage.AgedUpNameHasChanged,Seu nome já foi trocado nos últimos 7 dias

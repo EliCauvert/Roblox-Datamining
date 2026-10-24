@@ -1,0 +1,3 @@
+﻿local FFlagBuyRobuxLatencyIxpEnabledModule = require(script.Parent.FFlagBuyRobuxLatencyIxpEnabled)
+
+return game:DefineFastFlag("EnableBuyRobuxNewRouting2", false) and FFlagBuyRobuxLatencyIxpEnabledModule

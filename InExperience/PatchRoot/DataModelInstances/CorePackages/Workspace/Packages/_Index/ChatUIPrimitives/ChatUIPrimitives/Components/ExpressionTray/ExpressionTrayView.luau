@@ -11,6 +11,7 @@ local ExpressionPillViewModule = require(script.Parent.ExpressionPillView)
 local ExpressionKeyFunction = require(script.Parent.expressionKey).expressionKey
 local _ = require(ChatUIPrimitives.UniversalMessage.Types)
 local _ = require(ChatUIPrimitives.Hooks.useLayoutMode)
+local GetDefaultCooldownKeyModule = require(ChatUIPrimitives.getDefaultCooldownKey)
 local CreateNextOrderFunction = require(Parent.ReactUtils).createNextOrder
 
 local function _(p1)
@@ -28,7 +29,7 @@ local function buildEntryButton(p1, ButtonRef)
 end
 
 local function buildContent(p1, DefaultFocusRef)
-	-- upvalues: CreateNextOrderFunction (copy), ExpressionKeyFunction (copy), ReactModule (copy), ExpressionPillViewModule (copy), FoundationModule (copy), ExpressionTabBarModule (copy)
+	-- upvalues: CreateNextOrderFunction (copy), GetDefaultCooldownKeyModule (copy), ExpressionKeyFunction (copy), ReactModule (copy), ExpressionPillViewModule (copy), FoundationModule (copy), ExpressionTabBarModule (copy)
 	local v1 = nil
 	
 	for _, categoryGroup in p1.categoryGroups do
@@ -55,8 +56,8 @@ local function buildContent(p1, DefaultFocusRef)
 			
 			for LayoutOrder, item in category.items do
 				local Content = item.content
-				local Kind = if p1.cooldownKeyForContent == nil then Content.kind else p1.cooldownKeyForContent(Content)
-				local CooldownEndsAtByKeyEntry = if Kind == nil or p1.cooldownEndsAtByKey == nil then nil else p1.cooldownEndsAtByKey[Kind]
+				local DefaultCooldownKeyModule = GetDefaultCooldownKeyModule(Content)
+				local CooldownEndsAtByKeyEntry = if DefaultCooldownKeyModule == nil or p1.cooldownEndsAtByKey == nil then nil else p1.cooldownEndsAtByKey[DefaultCooldownKeyModule]
 				local NoFlag: boolean = DefaultFocusRef ~= nil and not Flag
 				
 				if NoFlag then

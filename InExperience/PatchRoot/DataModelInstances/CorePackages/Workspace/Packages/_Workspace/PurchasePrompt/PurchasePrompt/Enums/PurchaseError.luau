@@ -1,7 +1,6 @@
 ﻿return (require(script.Parent.createEnum)("PurchaseError", {
-	"CannotGetBalance", "CannotGetItemPrice", "AlreadyPremium",
-	"PremiumUnavailable", "PremiumUnavailablePlatform", "NotForSale",
-	"NotForSaleHere", "AlreadyOwn", "PremiumOnly", "Under13", "Limited", "Guest",
+	"CannotGetBalance", "CannotGetItemPrice", "NotForSale", "NotForSaleHere",
+	"AlreadyOwn", "PremiumOnly", "Under13", "Limited", "Guest",
 	"ThirdPartyDisabled", "NotEnoughRobux", "NotEnoughRobuxXbox",
 	"NotEnoughRobuxNoUpsell", "TwoFactorNeeded", "TwoFactorNeededSettings",
 	"UnknownFailure", "UnknownFailureNoItemName", "PriceChanged",

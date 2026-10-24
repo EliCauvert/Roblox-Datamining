@@ -27,9 +27,7 @@ return function(Frame)
 			end,
 			testId = `{TestId}.Tab.{Id}`
 		}, {
-			Text = ReactModule.createElement(View, {
-				tag = "size-full-full padding-x-medium padding-bottom-medium padding-top-xsmall"
-			}, {
+			Text = ReactModule.createElement(View, { tag = "size-full-full padding-x-medium padding-y-small" }, {
 				Label = ReactModule.createElement(Text, {
 					tag = "position-center-center anchor-center-center auto-xy text-label-medium content-emphasis",
 					Text = tab.text

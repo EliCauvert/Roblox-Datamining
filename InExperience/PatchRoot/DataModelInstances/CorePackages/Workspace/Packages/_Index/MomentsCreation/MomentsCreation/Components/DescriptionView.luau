@@ -27,6 +27,7 @@ local SessionManager = MomentsCommonModule.Analytics.SessionManager
 local FunnelEventNames = MomentsCommonModule.Analytics.FunnelEventNames
 local FFlagMomentTextGenerationFilteredSignal = MomentsCommonModule.Flags.FFlagMomentTextGenerationFilteredSignal
 local GetFFlagMomentsUseUploadPostAsyncFunction = MomentsCommonModule.Flags.GetFFlagMomentsUseUploadPostAsync
+local FFlagMomentsRenderCreatePostStatus = require(Parent.SharedFlags).FFlagMomentsRenderCreatePostStatus
 local FFlagMomentsCommentsCreatorControlModule = require(MomentsCreation.Flags.FFlagMomentsCommentsCreatorControl)
 
 local function AllowCommentsToggle(p1)
@@ -53,7 +54,7 @@ local function AllowCommentsToggle(p1)
 end
 
 return function(p1)
-	-- upvalues: UseDeviceInsetsFunction (copy), UseTokensFunction (copy), UseCreationFlowStringsModule (copy), GetCreationFlowStoreModule (copy), ReactModule (copy), UseSignalStateFunction (copy), FFlagMomentsCommentsCreatorControlModule (copy), GetFFlagMomentsUseUploadPostAsyncFunction (copy), UseCallbackFunction (copy), SessionManager (copy), FunnelEventNames (copy), FireAnalyticsEventModule (copy), EventNames (copy), CryoModule (copy), MakeCreationEventFieldsModule (copy), View (copy), ConstantsModule (copy), AllowCommentsToggle (copy), FFlagMomentTextGenerationFilteredSignal (copy), GeneratedTextFeedbackContainerModule (copy), Button (copy), FoundationModule (copy), InputSize (copy), ButtonVariant (copy), Text (copy)
+	-- upvalues: UseDeviceInsetsFunction (copy), UseTokensFunction (copy), UseCreationFlowStringsModule (copy), GetCreationFlowStoreModule (copy), ReactModule (copy), UseSignalStateFunction (copy), FFlagMomentsCommentsCreatorControlModule (copy), GetFFlagMomentsUseUploadPostAsyncFunction (copy), UseCallbackFunction (copy), SessionManager (copy), FunnelEventNames (copy), FireAnalyticsEventModule (copy), EventNames (copy), CryoModule (copy), MakeCreationEventFieldsModule (copy), View (copy), ConstantsModule (copy), AllowCommentsToggle (copy), FFlagMomentTextGenerationFilteredSignal (copy), GeneratedTextFeedbackContainerModule (copy), Button (copy), FoundationModule (copy), FFlagMomentsRenderCreatePostStatus (copy), InputSize (copy), ButtonVariant (copy), Text (copy)
 	local UseDeviceInsetsResult = UseDeviceInsetsFunction()
 	local UseTokensResult = UseTokensFunction()
 	local UseCreationFlowStringsModuleResult = UseCreationFlowStringsModule()
@@ -134,7 +135,10 @@ return function(p1)
 			}, {
 				PostButton = ReactModule.createElement(Button, {
 					LayoutOrder = 1,
+					testId = "moments-publish-button",
 					fillBehavior = FoundationModule.Enums.FillBehavior.Fill,
+					isDisabled = if FFlagMomentsRenderCreatePostStatus then p1.isPublishing else nil,
+					isLoading = if FFlagMomentsRenderCreatePostStatus then p1.isPublishing else nil,
 					onActivated = p1.onPublish,
 					size = InputSize.Medium,
 					text = UseCreationFlowStringsModuleResult.PublishingCtaPrimary,

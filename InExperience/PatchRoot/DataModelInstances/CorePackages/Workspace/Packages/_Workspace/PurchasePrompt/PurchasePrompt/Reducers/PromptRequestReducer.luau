@@ -85,16 +85,9 @@ return (require(Parent.PurchasePromptDeps).Rodux.createReducer(config, {
 			expectedPrice = p1.expectedPrice or 0
 		}
 	end,
-	[require(PurchasePrompt.Actions.RequestPremiumPurchase).name] = function(_, _)
-		-- upvalues: RequestTypeModule (copy)
-		return { requestType = RequestTypeModule.Premium }
-	end,
 	[require(PurchasePrompt.Actions.RequestSubscriptionPurchase).name] = function(_, p1)
 		-- upvalues: RequestTypeModule (copy)
-		return {
-			id = p1.id,
-			requestType = RequestTypeModule.Subscription
-		}
+		return { id = p1.id, requestType = RequestTypeModule.Subscription }
 	end,
 	[require(PurchasePrompt.Actions.RequestAvatarCreationFeePurchase).name] = function(_, p1)
 		-- upvalues: RequestTypeModule (copy)

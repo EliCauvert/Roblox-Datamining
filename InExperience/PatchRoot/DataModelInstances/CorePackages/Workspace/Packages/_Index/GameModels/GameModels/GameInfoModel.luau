@@ -2,7 +2,6 @@
 local ResultModule = require(Parent.Result)
 local TrimFunction = require(Parent.LuauPolyfill).String.trim
 local _ = require(Parent.DiscoveryTypes)
-local FFlagSearchOmniAutocompletePage = require(Parent.SharedFlags).FFlagSearchOmniAutocompletePage
 local FFlagEnableTopSongsSort = require(Parent.SharedFlags).FFlagEnableTopSongsSort
 local GameInfoModelModule = {
 	new = function(UniverseId, PlaceId, Name)
@@ -100,21 +99,20 @@ function GameInfoModelModule.fromOmniApi(p1)
 	end
 end
 
-if FFlagSearchOmniAutocompletePage then
-	function GameInfoModelModule.fromOmniAutocompleteApi(p1)
-		-- upvalues: ResultModule (copy), GameInfoModelModule (copy)
-		if type(p1.universeId) ~= "number" and type(p1.universeId) ~= "string" then
-			return ResultModule.error("GameInfoModel.fromOmniAutocompleteApi expects universeId to be a number or a string")
-		elseif type(p1.rootPlaceId) == "number" or type(p1.rootPlaceId) == "string" then
-			local NewGameInfoModel = GameInfoModelModule.new(tostring(p1.universeId), tostring(p1.rootPlaceId), p1.name)
-			GameInfoModelModule._fromSharedJson(NewGameInfoModel, p1)
-			
-			return ResultModule.success(NewGameInfoModel)
-		else
-			return ResultModule.error("GameInfoModel.fromOmniAutocompleteApi expects placeId to be a number or a string")
-		end
+function GameInfoModelModule.fromOmniAutocompleteApi(p1)
+	-- upvalues: ResultModule (copy), GameInfoModelModule (copy)
+	if type(p1.universeId) ~= "number" and type(p1.universeId) ~= "string" then
+		return ResultModule.error("GameInfoModel.fromOmniAutocompleteApi expects universeId to be a number or a string")
+	elseif type(p1.rootPlaceId) == "number" or type(p1.rootPlaceId) == "string" then
+		local NewGameInfoModel = GameInfoModelModule.new(tostring(p1.universeId), tostring(p1.rootPlaceId), p1.name)
+		GameInfoModelModule._fromSharedJson(NewGameInfoModel, p1)
+		
+		return ResultModule.success(NewGameInfoModel)
+	else
+		return ResultModule.error("GameInfoModel.fromOmniAutocompleteApi expects placeId to be a number or a string")
 	end
 end
+
 function GameInfoModelModule.fromSearchApi(p1)
 	-- upvalues: ResultModule (copy), GameInfoModelModule (copy)
 	if type(p1.universeId) ~= "number" and type(p1.universeId) ~= "string" then

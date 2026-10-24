@@ -12,6 +12,8 @@ local UseSetDrawerVisibleFunction = require(Parent.Drawer).Hooks.useSetDrawerVis
 local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
 local GetFFlagMomentsAndroidTvEnabledModule = require(Moments.Flags.GetFFlagMomentsAndroidTvEnabled)
 local FFlagMomentsFtuxTooltipCreateCopyModule = require(Moments.Flags.FFlagMomentsFtuxTooltipCreateCopy)
+local FFlagMomentsFixFeedForDeviceSafeInsetsModule = require(Moments.Flags.FFlagMomentsFixFeedForDeviceSafeInsets)
+local ShouldUseDeviceSafeInsets = require(Parent.Display).shouldUseDeviceSafeInsets
 local _ = require(script.Parent.MomentsHeaderView)
 local Analytics = MomentsCommonModule.Analytics
 local EventNames = Analytics.EventNames
@@ -33,7 +35,7 @@ local function _()
 end
 
 return function(p1, p2, ShowHamburger)
-	-- upvalues: UseTokensFunction (copy), UseDeviceInsetsFunction (copy), UseSetDrawerVisibleFunction (copy), UseIsTvRemoteDeviceFunction (copy), UseCompositionLayoutFunction (copy), UseStatusBarHeightFunction (copy), FFlagMomentsFtuxTooltipCreateCopyModule (copy), UseLocalizationFunction (copy), config (copy), noop (copy), ReactModule (copy), FireAnalyticsEventFunction (copy), EventNames (copy), Players (copy), GetFFlagMomentsAndroidTvEnabledModule (copy)
+	-- upvalues: UseTokensFunction (copy), UseDeviceInsetsFunction (copy), UseSetDrawerVisibleFunction (copy), UseIsTvRemoteDeviceFunction (copy), UseCompositionLayoutFunction (copy), UseStatusBarHeightFunction (copy), FFlagMomentsFtuxTooltipCreateCopyModule (copy), UseLocalizationFunction (copy), config (copy), noop (copy), ReactModule (copy), FireAnalyticsEventFunction (copy), EventNames (copy), Players (copy), FFlagMomentsFixFeedForDeviceSafeInsetsModule (copy), ShouldUseDeviceSafeInsets (copy), GetFFlagMomentsAndroidTvEnabledModule (copy)
 	local UseTokensResult = UseTokensFunction()
 	local UseDeviceInsetsResult = UseDeviceInsetsFunction()
 	local UseSetDrawerVisibleResult = UseSetDrawerVisibleFunction()
@@ -108,6 +110,7 @@ return function(p1, p2, ShowHamburger)
 			top = UDim.new(0, UseStatusBarHeightResult)
 		},
 		titleTextStyle = UseTokensResult.Color.Content.Emphasis,
-		scrimHeight = UseDeviceInsetsResult.top + UseTokensResult.Size.Size_2000 + UseTokensResult.Size.Size_1600
+		scrimHeight = UseDeviceInsetsResult.top + UseTokensResult.Size.Size_2000 + UseTokensResult.Size.Size_1600,
+		scrimTopOffset = if FFlagMomentsFixFeedForDeviceSafeInsetsModule and ShouldUseDeviceSafeInsets then -UseDeviceInsetsResult.top else nil
 	}
 end

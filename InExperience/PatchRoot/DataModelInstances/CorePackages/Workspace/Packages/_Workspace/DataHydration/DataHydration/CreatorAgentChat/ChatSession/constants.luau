@@ -1,4 +1,5 @@
 ﻿game:DefineFastInt("CreatorAgentChatRpcTimeoutSeconds", 30)
+game:DefineFastInt("CreatorAgentChatUnconfirmedSendSeconds", 30)
 game:DefineFastInt("CreatorAgentChatRtnIdleFallbackSeconds", 10)
 game:DefineFastInt("CreatorAgentChatRtnSequenceGapFallbackSeconds", 10)
 game:DefineFastInt("CreatorAgentChatPollMinIntervalSeconds", 2)
@@ -11,6 +12,9 @@ game:DefineFastInt("CreatorAgentChatPrefetchHistoryPagesOnRefresh", 1)
 return {
 	getRpcTimeoutSeconds = function()
 		return game:GetFastInt("CreatorAgentChatRpcTimeoutSeconds")
+	end,
+	getUnconfirmedSendSeconds = function()
+		return game:GetFastInt("CreatorAgentChatUnconfirmedSendSeconds")
 	end,
 	getRtnIdleFallbackSeconds = function()
 		return game:GetFastInt("CreatorAgentChatRtnIdleFallbackSeconds")

@@ -29,6 +29,7 @@ return {
 	requestBuildSuggestions = require(script.BuildSuggestions.requestBuildSuggestions),
 	debug = require(script.debug),
 	experimentOverride = require(script.experimentOverride),
+	captureSendConfiguration = require(script.sendConfiguration).capture,
 	PreviewSpecs = require(script.PreviewSpecs),
 	ErrorCodes = require(script.Acp.AcpProtocol).ErrorCodes,
 	resolveCreatorAgentAcp = require(script.Env.resolveAcpUrl).resolveCreatorAgentAcp

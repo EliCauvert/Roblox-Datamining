@@ -16,6 +16,7 @@ local GetFFlagIntegratePhoneUpsellJoinVoiceFunction = require(CorePackages.Works
 local GetFFlagEnableVoiceUxUpdatesFunction = require(CorePackages.Workspace.Packages.SharedFlags).GetFFlagEnableVoiceUxUpdates
 local FFlagVoiceRewarmTelemetry = require(CorePackages.Workspace.Packages.SharedFlags).FFlagVoiceRewarmTelemetry
 local FFlagProactiveVoiceRestrictionsUFR = require(CorePackages.Workspace.Packages.SharedFlags).FFlagProactiveVoiceRestrictionsUFR
+local FFlagVoiceRewarmGrafanaMetricsModule = require(RobloxGui.Modules.VoiceChat.Flags.FFlagVoiceRewarmGrafanaMetrics)
 
 local function _(Callback)
 	local Flag = false
@@ -32,26 +33,26 @@ local function _(Callback)
 	end
 end
 
-local function v14()
+local function v15()
 	-- upvalues: Default (copy), FFlagVoiceRewarmTelemetry (copy)
 	Default:reportJoinVoiceUpsellEvent("Shown", if FFlagVoiceRewarmTelemetry then Default.joinVoiceButtonContext else nil)
 end
 
 local v1 = false
 
-local function v16(...)
-	-- upvalues: v1 (ref), v14 (copy)
+local function v17(...)
+	-- upvalues: v1 (ref), v15 (copy)
 	if v1 then
 		return nil
 	else
 		v1 = true
 		
-		return v14(...)
+		return v15(...)
 	end
 end
 
 return function()
-	-- upvalues: UseIsVoiceFocusedFunction (copy), UseIsVoiceConnectingFunction (copy), ReactModule (copy), ServiceModule (copy), FFlagProactiveVoiceRestrictionsUFR (copy), Default (copy), v16 (copy), GetFFlagIntegratePhoneUpsellJoinVoiceFunction (copy), IsVoiceFocusedFunction (copy), VOICEJOINPROGRESS (copy), GetFFlagEnableVoiceUxUpdatesFunction (copy), ConstantsModule (copy), PromptTypeModule (copy), SignalsModule (copy)
+	-- upvalues: UseIsVoiceFocusedFunction (copy), UseIsVoiceConnectingFunction (copy), ReactModule (copy), ServiceModule (copy), FFlagProactiveVoiceRestrictionsUFR (copy), Default (copy), v17 (copy), FFlagVoiceRewarmGrafanaMetricsModule (copy), GetFFlagIntegratePhoneUpsellJoinVoiceFunction (copy), IsVoiceFocusedFunction (copy), VOICEJOINPROGRESS (copy), GetFFlagEnableVoiceUxUpdatesFunction (copy), ConstantsModule (copy), PromptTypeModule (copy), SignalsModule (copy)
 	local UseIsVoiceFocusedResult = UseIsVoiceFocusedFunction()
 	local UseIsVoiceConnectingResult = UseIsVoiceConnectingFunction()
 	local UseMemoResult = ReactModule.useMemo(function()
@@ -63,7 +64,7 @@ return function()
 		return if ServiceModule then ServiceModule:integrations().join_voice else nil
 	end, {})
 	local UseResult = ReactModule.useCallback(function(Available)
-		-- upvalues: UseMemoResult1 (copy), ServiceModule (upval), FFlagProactiveVoiceRestrictionsUFR (upval), Default (upval), UseIsVoiceFocusedResult (copy), v16 (upval)
+		-- upvalues: UseMemoResult1 (copy), ServiceModule (upval), FFlagProactiveVoiceRestrictionsUFR (upval), Default (upval), UseIsVoiceFocusedResult (copy), v17 (upval), FFlagVoiceRewarmGrafanaMetricsModule (upval)
 		if not UseMemoResult1 or not ServiceModule then return end
 		if FFlagProactiveVoiceRestrictionsUFR and Default:GetVoiceRestrictionState(false) ~= "normal" then
 			UseMemoResult1.availability:unavailable()
@@ -72,12 +73,15 @@ return function()
 		end
 		if not UseIsVoiceFocusedResult then
 			if Available == ServiceModule.AvailabilitySignal.Available then
-				v16()
+				v17()
+				
+				if FFlagVoiceRewarmGrafanaMetricsModule then
+					Default:reportVoiceRewarmShown()
+				end
 				UseMemoResult1.availability:available()
 				
 				return
-			end
-			if Available == ServiceModule.AvailabilitySignal.Unavailable then
+			elseif Available == ServiceModule.AvailabilitySignal.Unavailable then
 				UseMemoResult1.availability:unavailable()
 			end
 		end

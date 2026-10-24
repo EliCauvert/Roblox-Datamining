@@ -31,6 +31,7 @@ local FFlagSduiCapabilityBindings = SharedFlagsModule.FFlagSduiCapabilityBinding
 local FFlagMigrateGameInfoToStore = SharedFlagsModule.FFlagMigrateGameInfoToStore
 local FFlagSduiSupportRatingNoPercent = SharedFlagsModule.FFlagSduiSupportRatingNoPercent
 local FFlagSduiNotificationBadgeHydration = SharedFlagsModule.FFlagSduiNotificationBadgeHydration
+local FFlagSduiAddMarketplaceItemFavoriteHydrationModule = require(SduiCoreSystem.FFlagSduiAddMarketplaceItemFavoriteHydration)
 local FFlagSduiBuyRobuxHydration = SharedFlagsModule.FFlagSduiBuyRobuxHydration
 local DataStatus = DataHydrationModule.DataHydrationTypes.DataStatus
 local ProtobufTimestampToLocalTimeStringFunction = require(SduiCoreSystem.ClientBinding.SduiDataBinderTransformUtils).protobufTimestampToLocalTimeString
@@ -99,6 +100,16 @@ end
 local _ = function(p1)
 	-- upvalues: DataHydrationModule (copy)
 	DataHydrationModule.MarketplaceLook.getMarketplaceLookStore(false).updateMarketplaceLookInfos(p1)
+end
+
+local _ = function(p1)
+	-- upvalues: DataHydrationModule (copy)
+	DataHydrationModule.MarketplaceItemFavorite.getMarketplaceAssetFavoriteStore(false).updateItems(p1)
+end
+
+local _ = function(p1)
+	-- upvalues: DataHydrationModule (copy)
+	DataHydrationModule.MarketplaceItemFavorite.getMarketplaceBundleFavoriteStore(false).updateItems(p1)
 end
 
 local _ = function(p1)
@@ -271,7 +282,7 @@ local function calculateAgeRecommendationDerivedField(p1, p2, _)
 end
 
 local function getDataObjectSignal(Community, _, p3, p4)
-	-- upvalues: DataHydrationModule (copy), SduiDataBindingContentTypeModule (copy), FFlagSduiCommunitySectionSupport (copy), FFlagSduiMarketplaceCatalogCategorySupport (copy), FFlagSduiMarketplaceCatalogSortSupport (copy), FFlagSduiAddMarketplaceEntityDataHydration (copy), FFlagSduiAddCollectibleItemDataHydration (copy), FFlagSduiLeaderboardComponent (copy), FFlagSduiDevStoreSeeAllSupport (copy), FFlagSduiNotificationBadgeHydration (copy), FFlagSduiBuyRobuxHydration (copy)
+	-- upvalues: DataHydrationModule (copy), SduiDataBindingContentTypeModule (copy), FFlagSduiCommunitySectionSupport (copy), FFlagSduiMarketplaceCatalogCategorySupport (copy), FFlagSduiMarketplaceCatalogSortSupport (copy), FFlagSduiAddMarketplaceEntityDataHydration (copy), FFlagSduiAddMarketplaceItemFavoriteHydrationModule (copy), FFlagSduiAddCollectibleItemDataHydration (copy), FFlagSduiLeaderboardComponent (copy), FFlagSduiDevStoreSeeAllSupport (copy), FFlagSduiNotificationBadgeHydration (copy), FFlagSduiBuyRobuxHydration (copy)
 	if Community == "badge" then
 		return DataHydrationModule.Badges.getBadgeInfoStore(false).getBadgeInfo((tostring(p3)))
 	elseif Community == "creator" then
@@ -318,6 +329,17 @@ local function getDataObjectSignal(Community, _, p3, p4)
 			return DataHydrationModule.MarketplaceBundle.getMarketplaceBundleStore(false).getMarketplaceBundleInfo(p3)
 		elseif Community == "marketplaceLook" then
 			return DataHydrationModule.MarketplaceLook.getMarketplaceLookStore(false).getMarketplaceLookInfo(p3)
+		end
+	end
+	if FFlagSduiAddMarketplaceItemFavoriteHydrationModule then
+		if Community == SduiDataBindingContentTypeModule.marketplaceAssetUserFavorite then
+			local MarketplaceAssetFavoriteStore = DataHydrationModule.MarketplaceItemFavorite.getMarketplaceAssetFavoriteStore(false)
+			
+			return if p4 then MarketplaceAssetFavoriteStore.getAndFetchFavorite((tostring(p3))) else MarketplaceAssetFavoriteStore.getFavorite((tostring(p3)))
+		elseif Community == SduiDataBindingContentTypeModule.marketplaceBundleUserFavorite then
+			local MarketplaceBundleFavoriteStore = DataHydrationModule.MarketplaceItemFavorite.getMarketplaceBundleFavoriteStore(false)
+			
+			return if p4 then MarketplaceBundleFavoriteStore.getAndFetchFavorite((tostring(p3))) else MarketplaceBundleFavoriteStore.getFavorite((tostring(p3)))
 		end
 	end
 	if FFlagSduiAddCollectibleItemDataHydration and Community == "collectibleItem" then
@@ -507,6 +529,8 @@ local config1 = {
 	marketplaceAsset = if FFlagSduiAddMarketplaceEntityDataHydration then getDataHydrationField else nil,
 	marketplaceBundle = if FFlagSduiAddMarketplaceEntityDataHydration then getDataHydrationField else nil,
 	marketplaceLook = if FFlagSduiAddMarketplaceEntityDataHydration then getDataHydrationField else nil,
+	marketplaceAssetUserFavorite = if FFlagSduiAddMarketplaceItemFavoriteHydrationModule then getDataHydrationField else nil,
+	marketplaceBundleUserFavorite = if FFlagSduiAddMarketplaceItemFavoriteHydrationModule then getDataHydrationField else nil,
 	collectibleItem = if FFlagSduiAddCollectibleItemDataHydration then getDataHydrationField else nil,
 	leaderboardStats = if FFlagSduiLeaderboardComponent then getDataHydrationField else nil,
 	song = getDataHydrationField,
@@ -530,7 +554,7 @@ local config1 = {
 
 return {
 	updateDataStores = function(p7)
-		-- upvalues: DataHydrationModule (copy), FFlagMigrateGameInfoToStore (copy), updateVoteCountsFromUniverses (copy), FFlagSduiCommunitySectionSupport (copy), FFlagSduiMarketplaceCatalogCategorySupport (copy), FFlagSduiMarketplaceCatalogSortSupport (copy), FFlagSduiAddMarketplaceEntityDataHydration (copy), FFlagSduiAddCollectibleItemDataHydration (copy), FFlagSduiLeaderboardComponent (copy), FFlagSduiDevStoreSeeAllSupport (copy), FFlagSduiNotificationBadgeHydration (copy), FFlagSduiBuyRobuxHydration (copy), updateBuyRobuxStores (copy)
+		-- upvalues: DataHydrationModule (copy), FFlagMigrateGameInfoToStore (copy), updateVoteCountsFromUniverses (copy), FFlagSduiCommunitySectionSupport (copy), FFlagSduiMarketplaceCatalogCategorySupport (copy), FFlagSduiMarketplaceCatalogSortSupport (copy), FFlagSduiAddMarketplaceEntityDataHydration (copy), FFlagSduiAddMarketplaceItemFavoriteHydrationModule (copy), FFlagSduiAddCollectibleItemDataHydration (copy), FFlagSduiLeaderboardComponent (copy), FFlagSduiDevStoreSeeAllSupport (copy), FFlagSduiNotificationBadgeHydration (copy), FFlagSduiBuyRobuxHydration (copy), updateBuyRobuxStores (copy)
 		if p7.badge then
 			DataHydrationModule.Badges.getBadgeInfoStore(false).updateBadges(p7.badge)
 		end
@@ -602,6 +626,14 @@ return {
 			end
 			if p7.marketplaceLook then
 				DataHydrationModule.MarketplaceLook.getMarketplaceLookStore(false).updateMarketplaceLookInfos(p7.marketplaceLook)
+			end
+		end
+		if FFlagSduiAddMarketplaceItemFavoriteHydrationModule then
+			if p7.marketplaceAssetUserFavorite then
+				DataHydrationModule.MarketplaceItemFavorite.getMarketplaceAssetFavoriteStore(false).updateItems(p7.marketplaceAssetUserFavorite)
+			end
+			if p7.marketplaceBundleUserFavorite then
+				DataHydrationModule.MarketplaceItemFavorite.getMarketplaceBundleFavoriteStore(false).updateItems(p7.marketplaceBundleUserFavorite)
 			end
 		end
 		if FFlagSduiAddCollectibleItemDataHydration and p7.collectibleItem then

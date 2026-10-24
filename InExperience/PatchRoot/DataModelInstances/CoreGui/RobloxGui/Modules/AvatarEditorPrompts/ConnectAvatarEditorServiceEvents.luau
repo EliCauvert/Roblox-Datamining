@@ -1,4 +1,5 @@
 ﻿local AvatarEditorService = game:GetService("AvatarEditorService")
+local CorePackages = game:GetService("CorePackages")
 local Parent = script.Parent
 local OpenPromptModule = require(Parent.Actions.OpenPrompt)
 local PromptTypeModule = require(Parent.PromptType)
@@ -7,21 +8,28 @@ local OpenSaveAvatarPromptModule = require(Parent.Thunks.OpenSaveAvatarPrompt)
 local OpenDeleteOutfitPromptModule = require(Parent.Thunks.OpenDeleteOutfitPrompt)
 local OpenRenameOutfitPromptModule = require(Parent.Thunks.OpenRenameOutfitPrompt)
 local OpenUpdateOutfitPromptModule = require(Parent.Thunks.OpenUpdateOutfitPrompt)
-local AvatarExperienceCommonModule = require(game:GetService("CorePackages").Workspace.Packages.AvatarExperienceCommon)
+local AvatarExperienceCommonModule = require(CorePackages.Workspace.Packages.AvatarExperienceCommon)
+local ShowSaveAvatarTimeoutFeatureRestrictionModule = require(Parent.showSaveAvatarTimeoutFeatureRestriction)
+local FFlagAXUseUFRForTimeoutPromptInExperience = require(CorePackages.Workspace.Packages.AvatarExperienceFlags).FFlagAXUseUFRForTimeoutPromptInExperience
 
 return function(p1)
-	-- upvalues: AvatarEditorService (copy), AvatarExperienceCommonModule (copy), OpenPromptModule (copy), PromptTypeModule (copy), OpenSaveAvatarPromptModule (copy), OpenSetFavoritePromptModule (copy), OpenDeleteOutfitPromptModule (copy), OpenRenameOutfitPromptModule (copy), OpenUpdateOutfitPromptModule (copy)
+	-- upvalues: AvatarEditorService (copy), AvatarExperienceCommonModule (copy), FFlagAXUseUFRForTimeoutPromptInExperience (copy), ShowSaveAvatarTimeoutFeatureRestrictionModule (copy), OpenPromptModule (copy), PromptTypeModule (copy), OpenSaveAvatarPromptModule (copy), OpenSetFavoritePromptModule (copy), OpenDeleteOutfitPromptModule (copy), OpenRenameOutfitPromptModule (copy), OpenUpdateOutfitPromptModule (copy)
 	local List = {}
 	table.insert(List, AvatarEditorService.OpenPromptSaveAvatar:Connect(function(HumanoidDescription, RigType)
-		-- upvalues: AvatarExperienceCommonModule (upval), p1 (copy), OpenPromptModule (upval), PromptTypeModule (upval), OpenSaveAvatarPromptModule (upval)
+		-- upvalues: AvatarExperienceCommonModule (upval), FFlagAXUseUFRForTimeoutPromptInExperience (upval), ShowSaveAvatarTimeoutFeatureRestrictionModule (upval), p1 (copy), OpenPromptModule (upval), PromptTypeModule (upval), OpenSaveAvatarPromptModule (upval)
 		AvatarExperienceCommonModule.Stores.getTimeoutStatusStore().fetchStatusAsync():andThen(function(Result)
-			-- upvalues: p1 (upval), OpenPromptModule (upval), PromptTypeModule (upval), OpenSaveAvatarPromptModule (upval), HumanoidDescription (copy), RigType (copy)
-			if Result.isTimedOut then
-				p1:dispatch(OpenPromptModule(PromptTypeModule.SaveAvatarTimeout, {}))
+			-- upvalues: FFlagAXUseUFRForTimeoutPromptInExperience (upval), ShowSaveAvatarTimeoutFeatureRestrictionModule (upval), p1 (upval), OpenPromptModule (upval), PromptTypeModule (upval), OpenSaveAvatarPromptModule (upval), HumanoidDescription (copy), RigType (copy)
+			if not Result.isTimedOut then
+				p1:dispatch(OpenSaveAvatarPromptModule(HumanoidDescription, RigType))
+				
+				return
+			end
+			if FFlagAXUseUFRForTimeoutPromptInExperience then
+				ShowSaveAvatarTimeoutFeatureRestrictionModule()
 				
 				return
 			else
-				p1:dispatch(OpenSaveAvatarPromptModule(HumanoidDescription, RigType))
+				p1:dispatch(OpenPromptModule(PromptTypeModule.SaveAvatarTimeout, {}))
 			end
 		end)
 	end))

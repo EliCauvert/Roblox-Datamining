@@ -1,14 +1,14 @@
 ﻿local _ = require(script.Parent.Parent.types)
 
 return {
-	awaitRequestState = function(Callback, p1)
-		while Callback(false).status == "pending" do
-			if p1 <= os.clock() then
-				return Callback(false)
+	awaitRequestState = function(Callback1, p1, Callback)
+		while Callback1(false).status == "pending" do
+			if p1 <= os.clock() or Callback ~= nil and Callback() then
+				return Callback1(false)
 			end
 			task.wait()
 		end
-		return Callback(false)
+		return Callback1(false)
 	end,
 	awaitRequestStateCancelled = function(Callback, p2)
 		while Callback(false).status == "pending" and not p2() do

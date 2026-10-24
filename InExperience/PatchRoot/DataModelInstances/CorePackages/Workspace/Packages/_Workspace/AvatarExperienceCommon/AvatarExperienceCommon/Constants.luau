@@ -4,6 +4,14 @@ local _ = require(script.Parent.Types.CategoryTypes.CategoryTypes)
 local OutfitTypesModule = require(script.Parent.Enums.OutfitTypes)
 local InventoryOutfitType = require(Parent.AvatarExperienceModel).Enums.InventoryOutfitType
 local FFlagAXCatalogMakeupSupport = require(Parent.AvatarExperienceFlags).FFlagAXCatalogMakeupSupport
+local Frozen = table.freeze({
+	height = 1,
+	width = 1,
+	depth = 1,
+	head = 1,
+	bodyType = 0,
+	proportion = 0
+})
 local config = {
 	["1"] = "Body",
 	["2"] = "AvatarAnimations",
@@ -190,6 +198,7 @@ return {
 	AVATAR_ANIMATIONS_BUNDLE_TYPE_ID = "2",
 	SHOES_BUNDLE_TYPE_ID = "3",
 	DYNAMIC_HEAD_BUNDLE_TYPE_ID = "4",
+	DEFAULT_AVATAR_SCALES = Frozen,
 	BUNDLE_TYPE_ID_STRING_TO_NAME_FOR_BACKEND = config,
 	ASSET_TYPE_TO_ACCESSORY_TYPE = config1,
 	ACCESSORY_TYPE_TO_ASSET_TYPE = t,

@@ -17,6 +17,7 @@
 	LoginByUsernameSSOErrorsTelemetry = require(script.LoginByUsernameSSOErrorsTelemetry),
 	LoginByEmailSSOErrorsTelemetry = require(script.LoginByEmailSSOErrorsTelemetry),
 	LoginByPhoneSSOErrorsTelemetry = require(script.LoginByPhoneSSOErrorsTelemetry),
+	LoginByOtpSSOErrorsTelemetry = require(script.LoginByOtpSSOErrorsTelemetry),
 	getSignedOutAccounts = require(script.getSignedOutAccounts),
 	recordLogin = require(script.recordLogin),
 	recordSignOut = require(script.recordSignOut),

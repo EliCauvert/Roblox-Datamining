@@ -24,6 +24,7 @@ return function(p1)
 	local OnFocusChangedFunction = p1.onFocusChanged
 	local ExpressionTray = p1.expressionTray
 	local DestinationSubtitle = p1.destinationSubtitle
+	local NoIsNotNone1: boolean = (if ExpressionTray and ExpressionTray.canSend ~= nil then ExpressionTray.canSend else p1.chatAvailability.canSend) and not IsNotNone
 	local UseResult = ReactModule.useCallback(function(p2)
 		-- upvalues: SendMessageDraftFunction (copy), MessageDraftModelModule (upval)
 		SendMessageDraftFunction(MessageDraftModelModule.fromPlainText(p2))
@@ -74,20 +75,22 @@ return function(p1)
 	local CatalogResource = if ExpressionTray then ExpressionTray.catalogResource else nil
 	local OnKeyboardActivated = if ExpressionTray then ExpressionTray.onKeyboardActivated else nil
 	local CooldownDurationSeconds = if ExpressionTray then ExpressionTray.cooldownDurationSeconds else nil
+	local CooldownScope = if ExpressionTray then ExpressionTray.cooldownScope else nil
 	local HasExpressionTray = ExpressionTray ~= nil
 	local UseMemoResult1 = ReactModule.useMemo(function()
-		-- upvalues: HasExpressionTray (copy), UseResult1 (copy), NoIsNotNone (copy), CatalogResource (copy), OnKeyboardActivated (copy), CooldownDurationSeconds (copy)
+		-- upvalues: HasExpressionTray (copy), UseResult1 (copy), NoIsNotNone (copy), NoIsNotNone1 (copy), CatalogResource (copy), OnKeyboardActivated (copy), CooldownDurationSeconds (copy), CooldownScope (copy)
 		return if HasExpressionTray then {
 			sendExpression = UseResult1,
 			canLocalUserChat = NoIsNotNone,
-			canSend = NoIsNotNone,
+			canSend = NoIsNotNone1,
 			catalogResource = CatalogResource,
 			onKeyboardActivated = OnKeyboardActivated,
-			cooldownDurationSeconds = CooldownDurationSeconds
+			cooldownDurationSeconds = CooldownDurationSeconds,
+			cooldownScope = CooldownScope
 		} else nil
 	end, {
-		HasExpressionTray, UseResult1, NoIsNotNone, CatalogResource,
-		OnKeyboardActivated, CooldownDurationSeconds
+		HasExpressionTray, UseResult1, NoIsNotNone, NoIsNotNone1, CatalogResource,
+		OnKeyboardActivated, CooldownDurationSeconds, CooldownScope
 	})
 	local UseMemoResult2 = ReactModule.useMemo(function()
 		-- upvalues: IsNotNone (copy), ReactModule (upval), ModerationTimeoutModule (upval), ModerationTimeout (copy), Transparency (copy)

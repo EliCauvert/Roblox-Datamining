@@ -1,4 +1,5 @@
 ﻿return {
+	FFlagSharedMakeupThumbnailCamera = game:DefineFastFlag("SharedMakeupThumbnailCamera", false),
 	CameraPresetsUtility = require(script.CameraPresetsUtility),
 	CameraUtility = require(script.CameraUtility),
 	CFrameUtility = require(script.CFrameUtility),
@@ -8,5 +9,6 @@
 	VectorUtility = require(script.VectorUtility),
 	CharacterUtility = require(script.CharacterUtility),
 	ParticleUtility = require(script.ParticleUtility),
-	MannequinUtility = require(script.MannequinUtility)
+	MannequinUtility = require(script.MannequinUtility),
+	MakeupCameraUtility = require(script.MakeupCameraUtility)
 }

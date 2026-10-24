@@ -1,8 +1,20 @@
-﻿local SignalsModule = require(script:FindFirstAncestor("DataHydration").Parent.Signals)
+﻿local Parent = script:FindFirstAncestor("DataHydration").Parent
+local SignalsModule = require(Parent.Signals)
+local _ = require(script.Parent.Parent.Types.model)
+local FFlagBuildExperienceModelPickerData = require(Parent.SharedFlags).FFlagBuildExperienceModelPickerData
 
 return {
 	createSessionScalarState = function(p1)
-		-- upvalues: SignalsModule (copy)
+		-- upvalues: FFlagBuildExperienceModelPickerData (copy), SignalsModule (copy)
+		local GetModels = nil
+		local SetModels = nil
+		local HasObservedModels = nil
+		local SetHasObservedModels = nil
+		
+		if FFlagBuildExperienceModelPickerData then
+			GetModels, SetModels = SignalsModule.createSignal(nil)
+			HasObservedModels, SetHasObservedModels = SignalsModule.createSignal(false)
+		end
 		local Signal, Signal2 = SignalsModule.createSignal(p1)
 		local Signal1, Signal2_1 = SignalsModule.createSignal(false)
 		local Signal3, Signal2_2 = SignalsModule.createSignal(nil)
@@ -12,6 +24,10 @@ return {
 		local Signal7, Signal2_6 = SignalsModule.createSignal(nil)
 		
 		return {
+			getModels = GetModels,
+			hasObservedModels = HasObservedModels,
+			setHasObservedModels = SetHasObservedModels,
+			setModels = SetModels,
 			getCasSessionId = Signal,
 			setCasSessionId = Signal2,
 			getHasLoadedHistory = Signal1,

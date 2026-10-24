@@ -64,6 +64,9 @@ local NavigateWithOsaGateModule = require(AppChat.Utils.navigateWithOsaGate)
 local FFlagAppChatShowOSAOnPageEntry = SharedFlagsModule.FFlagAppChatShowOSAOnPageEntry
 local FFlagEnableHeaderBarButtonsUpdate = SharedFlagsModule.FFlagEnableHeaderBarButtonsUpdate
 local FFlagLuaAppCompositionAppChat = SharedFlagsModule.FFlagLuaAppCompositionAppChat
+local FFlagAppChatUseSignalsForLastEntryPointModule = require(AppChat.Flags.FFlagAppChatUseSignalsForLastEntryPoint)
+local UseSignalStateFunction = require(Parent.SignalsReact).useSignalState
+local GetLastEntryPointStoreModule = if FFlagAppChatUseSignalsForLastEntryPointModule then require(AppChat.Stores.GetLastEntryPointStore) else nil
 local NAVBARWITHFACEPILESIZE = require(AppChat.Constants).NAV_BAR_WITH_FACEPILE_SIZE
 local config = {
 	navigateToLuaAppPages = nil,
@@ -110,7 +113,7 @@ local function useReactivePaneRestore(JoinResult)
 end
 
 function AppChatEntryPoint(p1)
-	-- upvalues: CryoModule (copy), config (copy), ChatPlacementContextModule (copy), FFlagAppChatReactiveFeatureRestrictions (copy), UsePartyChatReactiveFeatureRestrictionModule (copy), UseTokensFunction (copy), Inverted (copy), RootNavigatorModule (ref), AppChat (copy), RootNavigatorModule1 (ref), UseSelectorFunction (copy), UseCallbackFunction (copy), UseDispatchFunction (copy), UseEffectFunction (copy), AppChatNetworkingModule (copy), LoggerModule (copy), UseChatIsVisibleModule (copy), FFlagAppChatReactivePaneLayoutOnRotation (copy), useReactivePaneRestore (copy), ReactModule (copy), RoactNavigationModule (copy), GetRoactChatStackNavigatorModule (copy), UseRefFunction (copy), FFlagSupportViewingUserProfileOnOSAModule (copy), GetOverlayStoreModule (copy), EnumScreensModule (copy), CreateConversationModule (copy), FetchLatestConversationDetailsModule (copy), GetFFlagIsSquadEnabledFunction (copy), FFlagAppChatShowOSAOnPageEntry (copy), NavigateWithOsaGateModule (copy), GetFFlagAppChatRequestedRouteModule (copy), RootedChatDetailsNavigationModule (copy), FFlagAppChatPerfTrackingModule (copy), AppChatPerfTrackerModule (copy), EnteredChatFromEntryPointModule (copy), NavigateIntoChatModule (copy), UseCurrentSquadParentChannelIdFunction (copy), GetFFlagEnableCrossExpVoiceFunction (copy), UseIsVoiceConnectedFunction (copy), UsePageSideMarginFunction (copy), FFlagLuaAppCompositionAppChat (copy), UseStyleFunction (copy), SetTabBarVisibleFunction (copy), UserInputService (copy), NAVBARWITHFACEPILESIZE (copy), FFlagEnableHeaderBarButtonsUpdate (copy), LuaAppNavigationContextProviderModule (copy), FFlagAppChatSignalsReplyStoreModule (copy), ReplyingToMessageProviderModule (copy), InteractionFeedbackModule (copy), HapticFeedbackConfig (copy), LayerCollectorProvider (copy), UseRobloxLocaleModule (copy), RbxAnalyticsService (copy), AnalyticsProviderModule (copy), AppTelemetryLayerModule (copy), GetFFlagFixChatsBottomInsetBackgroundColorModule (copy), RoactChatAnalyticsProviderModule (copy)
+	-- upvalues: CryoModule (copy), config (copy), ChatPlacementContextModule (copy), FFlagAppChatReactiveFeatureRestrictions (copy), UsePartyChatReactiveFeatureRestrictionModule (copy), UseTokensFunction (copy), Inverted (copy), RootNavigatorModule (ref), AppChat (copy), RootNavigatorModule1 (ref), UseSelectorFunction (copy), UseCallbackFunction (copy), FFlagAppChatUseSignalsForLastEntryPointModule (copy), UseSignalStateFunction (copy), GetLastEntryPointStoreModule (copy), UseDispatchFunction (copy), UseEffectFunction (copy), AppChatNetworkingModule (copy), LoggerModule (copy), UseChatIsVisibleModule (copy), FFlagAppChatReactivePaneLayoutOnRotation (copy), useReactivePaneRestore (copy), ReactModule (copy), RoactNavigationModule (copy), GetRoactChatStackNavigatorModule (copy), UseRefFunction (copy), FFlagSupportViewingUserProfileOnOSAModule (copy), GetOverlayStoreModule (copy), EnumScreensModule (copy), CreateConversationModule (copy), FetchLatestConversationDetailsModule (copy), GetFFlagIsSquadEnabledFunction (copy), FFlagAppChatShowOSAOnPageEntry (copy), NavigateWithOsaGateModule (copy), GetFFlagAppChatRequestedRouteModule (copy), RootedChatDetailsNavigationModule (copy), FFlagAppChatPerfTrackingModule (copy), AppChatPerfTrackerModule (copy), EnteredChatFromEntryPointModule (copy), NavigateIntoChatModule (copy), UseCurrentSquadParentChannelIdFunction (copy), GetFFlagEnableCrossExpVoiceFunction (copy), UseIsVoiceConnectedFunction (copy), UsePageSideMarginFunction (copy), FFlagLuaAppCompositionAppChat (copy), UseStyleFunction (copy), SetTabBarVisibleFunction (copy), UserInputService (copy), NAVBARWITHFACEPILESIZE (copy), FFlagEnableHeaderBarButtonsUpdate (copy), LuaAppNavigationContextProviderModule (copy), FFlagAppChatSignalsReplyStoreModule (copy), ReplyingToMessageProviderModule (copy), InteractionFeedbackModule (copy), HapticFeedbackConfig (copy), LayerCollectorProvider (copy), UseRobloxLocaleModule (copy), RbxAnalyticsService (copy), AnalyticsProviderModule (copy), AppTelemetryLayerModule (copy), GetFFlagFixChatsBottomInsetBackgroundColorModule (copy), RoactChatAnalyticsProviderModule (copy)
 	local JoinResult = CryoModule.Dictionary.join(config, p1)
 	local IsPlacementInExperience = ChatPlacementContextModule.isPlacementInExperience(JoinResult.chatPlacement)
 	
@@ -129,9 +132,10 @@ function AppChatEntryPoint(p1)
 	local UseSelectorResult1 = UseSelectorFunction(UseCallbackFunction(function(p2)
 		return p2.GlobalGuiInset
 	end, {})) or { bottom = 0 }
-	local UseSelectorResult2 = UseSelectorFunction((UseCallbackFunction(function(p2)
+	local UseCallbackResult = UseCallbackFunction(function(p2)
 		return p2.ChatAppReducer.LastEntryPoint
-	end, {})))
+	end, {})
+	local UseSignalStateResult = if FFlagAppChatUseSignalsForLastEntryPointModule then UseSignalStateFunction(GetLastEntryPointStoreModule(false).getLastEntryPoint) else UseSelectorFunction(UseCallbackResult)
 	local UseDispatchResult = UseDispatchFunction()
 	UseEffectFunction(function()
 		-- upvalues: UseDispatchResult (copy), AppChatNetworkingModule (upval), IsPlacementInExperience (copy), LoggerModule (upval)
@@ -181,7 +185,7 @@ function AppChatEntryPoint(p1)
 			LoggerModule:setParent(JoinResult.logger)
 		end
 	end, { JoinResult.logger })
-	local UseCallbackResult = UseCallbackFunction(function(p2)
+	local UseCallbackResult1 = UseCallbackFunction(function(p2)
 		-- upvalues: UseRefResult1 (copy), UseRefResult3 (copy)
 		if not UseRefResult1.current then return end
 		if UseRefResult3.current then
@@ -198,7 +202,7 @@ function AppChatEntryPoint(p1)
 			})
 		end, { NavigateToLuaAppPages })
 	end
-	local UseCallbackResult1 = UseCallbackFunction(function(ConversationId)
+	local UseCallbackResult11 = UseCallbackFunction(function(ConversationId)
 		-- upvalues: RoactNavigationModule (upval), EnumScreensModule (upval)
 		return RoactNavigationModule.Actions.navigate({
 			routeName = EnumScreensModule.ChatConversation,
@@ -246,7 +250,7 @@ function AppChatEntryPoint(p1)
 		return UseDispatchResult(FetchLatestConversationDetailsModule(p2))
 	end, { UseDispatchResult })
 	local UseCallbackResult5 = UseCallbackFunction(function(Callback)
-		-- upvalues: UseRefResult3 (copy), JoinResult (copy), GetFFlagIsSquadEnabledFunction (upval), CryoModule (upval), FFlagAppChatShowOSAOnPageEntry (upval), NavigateWithOsaGateModule (upval), UseDispatchResult (copy), UseCallbackResult2 (copy), EnumScreensModule (upval), GetFFlagAppChatRequestedRouteModule (upval), RootedChatDetailsNavigationModule (upval), UseCallbackResult4 (copy), RoactNavigationModule (upval), FFlagAppChatPerfTrackingModule (upval), AppChatPerfTrackerModule (upval), LoggerModule (upval), UseCallbackResult1 (copy), UseCallbackResult3 (copy)
+		-- upvalues: UseRefResult3 (copy), JoinResult (copy), GetFFlagIsSquadEnabledFunction (upval), CryoModule (upval), FFlagAppChatShowOSAOnPageEntry (upval), NavigateWithOsaGateModule (upval), UseDispatchResult (copy), UseCallbackResult2 (copy), EnumScreensModule (upval), GetFFlagAppChatRequestedRouteModule (upval), RootedChatDetailsNavigationModule (upval), UseCallbackResult4 (copy), RoactNavigationModule (upval), FFlagAppChatPerfTrackingModule (upval), AppChatPerfTrackerModule (upval), LoggerModule (upval), UseCallbackResult11 (copy), UseCallbackResult3 (copy)
 		UseRefResult3.current = Callback
 		
 		if not JoinResult.updateExternalNavigationForScreen then
@@ -299,7 +303,7 @@ function AppChatEntryPoint(p1)
 			end, EnumScreensModule.ChatDetails)
 		end
 		UpdateExternalNavigationForScreenFunction(function(p2)
-			-- upvalues: FFlagAppChatShowOSAOnPageEntry (upval), NavigateWithOsaGateModule (upval), UseDispatchResult (upval), FFlagAppChatPerfTrackingModule (upval), AppChatPerfTrackerModule (upval), UseCallbackResult4 (upval), LoggerModule (upval), Callback (copy), UseCallbackResult1 (upval), UseCallbackResult3 (upval)
+			-- upvalues: FFlagAppChatShowOSAOnPageEntry (upval), NavigateWithOsaGateModule (upval), UseDispatchResult (upval), FFlagAppChatPerfTrackingModule (upval), AppChatPerfTrackerModule (upval), UseCallbackResult4 (upval), LoggerModule (upval), Callback (copy), UseCallbackResult11 (upval), UseCallbackResult3 (upval)
 			local ConversationId = p2 and p2.conversationId
 			
 			if ConversationId then
@@ -308,14 +312,14 @@ function AppChatEntryPoint(p1)
 						conversationId = ConversationId,
 						dispatch = UseDispatchResult,
 						onAccepted = function()
-							-- upvalues: FFlagAppChatPerfTrackingModule (upval), AppChatPerfTrackerModule (upval), ConversationId (copy), UseCallbackResult4 (upval), LoggerModule (upval), Callback (upval), UseCallbackResult1 (upval)
+							-- upvalues: FFlagAppChatPerfTrackingModule (upval), AppChatPerfTrackerModule (upval), ConversationId (copy), UseCallbackResult4 (upval), LoggerModule (upval), Callback (upval), UseCallbackResult11 (upval)
 							if FFlagAppChatPerfTrackingModule then
 								AppChatPerfTrackerModule.start(AppChatPerfTrackerModule.Events.ChatConversationTTI, { conversationId = ConversationId })
 							end
 							UseCallbackResult4(ConversationId):andThen(function()
-								-- upvalues: LoggerModule (upval), ConversationId (upval), Callback (upval), UseCallbackResult1 (upval)
+								-- upvalues: LoggerModule (upval), ConversationId (upval), Callback (upval), UseCallbackResult11 (upval)
 								LoggerModule:info("Successfully fetched conversation details for conversationId {} for external navigation", ConversationId)
-								Callback(UseCallbackResult1(ConversationId))
+								Callback(UseCallbackResult11(ConversationId))
 							end):catch(function(Err)
 								-- upvalues: LoggerModule (upval), FFlagAppChatPerfTrackingModule (upval), AppChatPerfTrackerModule (upval), ConversationId (upval)
 								LoggerModule:warning("Error in fetchLatestConversationDetails request before navigate to conversation. error: {}", (tostring(Err)))
@@ -331,9 +335,9 @@ function AppChatEntryPoint(p1)
 						AppChatPerfTrackerModule.start(AppChatPerfTrackerModule.Events.ChatConversationTTI, { conversationId = ConversationId })
 					end
 					UseCallbackResult4(ConversationId):andThen(function()
-						-- upvalues: LoggerModule (upval), ConversationId (copy), Callback (upval), UseCallbackResult1 (upval)
+						-- upvalues: LoggerModule (upval), ConversationId (copy), Callback (upval), UseCallbackResult11 (upval)
 						LoggerModule:info("Successfully fetched conversation details for conversationId {} for external navigation", ConversationId)
-						Callback(UseCallbackResult1(ConversationId))
+						Callback(UseCallbackResult11(ConversationId))
 					end):catch(function(Err)
 						-- upvalues: LoggerModule (upval), FFlagAppChatPerfTrackingModule (upval), AppChatPerfTrackerModule (upval), ConversationId (copy)
 						LoggerModule:warning("Error in fetchLatestConversationDetails request before navigate to conversation. error: {}", (tostring(Err)))
@@ -350,9 +354,9 @@ function AppChatEntryPoint(p1)
 			
 			if UserId then
 				spawn(function()
-					-- upvalues: UseCallbackResult3 (upval), UserId (copy), FFlagAppChatPerfTrackingModule (upval), AppChatPerfTrackerModule (upval), LoggerModule (upval), FFlagAppChatShowOSAOnPageEntry (upval), NavigateWithOsaGateModule (upval), UseDispatchResult (upval), Callback (upval), UseCallbackResult1 (upval)
+					-- upvalues: UseCallbackResult3 (upval), UserId (copy), FFlagAppChatPerfTrackingModule (upval), AppChatPerfTrackerModule (upval), LoggerModule (upval), FFlagAppChatShowOSAOnPageEntry (upval), NavigateWithOsaGateModule (upval), UseDispatchResult (upval), Callback (upval), UseCallbackResult11 (upval)
 					UseCallbackResult3(UserId):andThen(function(Result)
-						-- upvalues: FFlagAppChatPerfTrackingModule (upval), AppChatPerfTrackerModule (upval), LoggerModule (upval), UserId (upval), FFlagAppChatShowOSAOnPageEntry (upval), NavigateWithOsaGateModule (upval), UseDispatchResult (upval), Callback (upval), UseCallbackResult1 (upval)
+						-- upvalues: FFlagAppChatPerfTrackingModule (upval), AppChatPerfTrackerModule (upval), LoggerModule (upval), UserId (upval), FFlagAppChatShowOSAOnPageEntry (upval), NavigateWithOsaGateModule (upval), UseDispatchResult (upval), Callback (upval), UseCallbackResult11 (upval)
 						if FFlagAppChatPerfTrackingModule then
 							AppChatPerfTrackerModule.start(AppChatPerfTrackerModule.Events.ChatConversationTTI, { conversationId = Result.id })
 						end
@@ -363,14 +367,14 @@ function AppChatEntryPoint(p1)
 								conversationId = Result.id,
 								dispatch = UseDispatchResult,
 								onAccepted = function()
-									-- upvalues: Callback (upval), UseCallbackResult1 (upval), Result (copy)
-									Callback(UseCallbackResult1(Result.id))
+									-- upvalues: Callback (upval), UseCallbackResult11 (upval), Result (copy)
+									Callback(UseCallbackResult11(Result.id))
 								end
 							})
 							
 							return
 						else
-							Callback(UseCallbackResult1(Result.id))
+							Callback(UseCallbackResult11(Result.id))
 						end
 					end):catch(function(Err)
 						-- upvalues: LoggerModule (upval)
@@ -409,19 +413,19 @@ function AppChatEntryPoint(p1)
 		end
 	end, {
 		UseRefResult3, UseCallbackResult3, UseDispatchResult, UseCallbackResult4,
-		UseCallbackResult1, UseCallbackResult2,
+		UseCallbackResult11, UseCallbackResult2,
 		JoinResult.updateExternalNavigationForScreen, JoinResult.wideMode
 	})
 	local UseCallbackResult6 = UseCallbackFunction(function(p2)
-		-- upvalues: UseRefResult2 (copy), UseCallbackResult (copy)
+		-- upvalues: UseRefResult2 (copy), UseCallbackResult1 (copy)
 		if UseRefResult2.current then
 			UseRefResult2.current:disconnect()
 			UseRefResult2.current = nil
 		end
 		if p2 then
-			UseRefResult2.current = p2:connect(UseCallbackResult)
+			UseRefResult2.current = p2:connect(UseCallbackResult1)
 		end
-	end, { UseRefResult2, UseCallbackResult })
+	end, { UseRefResult2, UseCallbackResult1 })
 	UseEffectFunction(function()
 		-- upvalues: UseRefResult1 (copy), UseCallbackResult6 (copy), JoinResult (copy), UseDispatchResult (copy), EnteredChatFromEntryPointModule (upval)
 		UseRefResult1.current = true
@@ -568,30 +572,30 @@ function AppChatEntryPoint(p1)
 	end
 	local UseRobloxLocaleModuleResult = UseRobloxLocaleModule()
 	local PlaySessionId = RbxAnalyticsService:GetPlaySessionId()
-	local UseSelectorResult3 = if GetFFlagIsSquadEnabledFunction() then UseSelectorFunction(function(p2)
+	local UseSelectorResult2 = if GetFFlagIsSquadEnabledFunction() then UseSelectorFunction(function(p2)
 		local CurrentSquad = p2.Squad and (p2.Squad.Squad and p2.Squad.Squad.currentSquad)
 		
 		return if CurrentSquad and CurrentSquad.squadId then CurrentSquad.squadId else nil
 	end) else nil
 	local Element2 = ReactModule.createElement(AnalyticsProviderModule, {
 		localUserId = UseSelectorResult,
-		entryPoint = UseSelectorResult2
+		entryPoint = UseSignalStateResult
 	}, {
 		telemetry = ReactModule.createElement(AppTelemetryLayerModule.Provider, {
 			value = ReactModule.useMemo(function()
-				-- upvalues: UseRobloxLocaleModuleResult (copy), UseSelectorResult2 (copy), UseSelectorResult (copy), PlaySessionId (copy), UseSelectorResult3 (copy), JoinResult (copy)
+				-- upvalues: UseRobloxLocaleModuleResult (copy), UseSignalStateResult (copy), UseSelectorResult (copy), PlaySessionId (copy), UseSelectorResult2 (copy), JoinResult (copy)
 				return {
 					context = "platformChat",
 					locale = UseRobloxLocaleModuleResult,
-					entryPoint = UseSelectorResult2 or "unknown",
+					entryPoint = UseSignalStateResult or "unknown",
 					userId = UseSelectorResult,
 					playSessionId = PlaySessionId,
-					currentSquadId = UseSelectorResult3,
+					currentSquadId = UseSelectorResult2,
 					placement = JoinResult.chatPlacement
 				}
 			end, {
-				UseRobloxLocaleModuleResult, UseSelectorResult2, UseSelectorResult,
-				PlaySessionId, UseSelectorResult3, JoinResult.chatPlacement
+				UseRobloxLocaleModuleResult, UseSignalStateResult, UseSelectorResult,
+				PlaySessionId, UseSelectorResult2, JoinResult.chatPlacement
 			})
 		}, {
 			navigation = Element1,
@@ -608,19 +612,19 @@ function AppChatEntryPoint(p1)
 	
 	if FFlagAppChatPerfTrackingModule then
 		UseEffectFunction(function()
-			-- upvalues: AppChatPerfTrackerModule (upval), JoinResult (copy), UseSelectorResult2 (copy), UseSelectorResult3 (copy)
+			-- upvalues: AppChatPerfTrackerModule (upval), JoinResult (copy), UseSignalStateResult (copy), UseSelectorResult2 (copy)
 			AppChatPerfTrackerModule.setSharedContext({
 				placement = JoinResult.chatPlacement,
-				entryPoint = UseSelectorResult2,
-				hasActiveParty = UseSelectorResult3 ~= nil
+				entryPoint = UseSignalStateResult,
+				hasActiveParty = UseSelectorResult2 ~= nil
 			})
 		end, {
 			JoinResult.chatPlacement,
-			UseSelectorResult2,
-			UseSelectorResult3
+			UseSignalStateResult,
+			UseSelectorResult2
 		})
 	end
-	return ReactModule.createElement(RoactChatAnalyticsProviderModule, { entryPoint = UseSelectorResult2 }, { Element2 })
+	return ReactModule.createElement(RoactChatAnalyticsProviderModule, { entryPoint = UseSignalStateResult }, { Element2 })
 end
 
 return MemoFunction(AppChatEntryPoint)

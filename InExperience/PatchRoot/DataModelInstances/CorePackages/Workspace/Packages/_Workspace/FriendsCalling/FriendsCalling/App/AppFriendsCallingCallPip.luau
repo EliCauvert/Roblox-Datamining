@@ -22,6 +22,7 @@ return function()
 	-- upvalues: ReactModule (copy), CallPipModule (copy), Host (copy), Participant (copy)
 	return ReactModule.createElement(CallPipModule, {
 		isMicrophoneMuted = false,
+		initialPresentation = "Expanded",
 		host = Host,
 		participant = Participant
 	})

@@ -11,6 +11,8 @@
 		ids = "signal_remove_reaction_item_ids",
 		values = "signal_remove_reaction_values"
 	},
+	AddFollow = { ids = "signal_add_follow_item_ids", values = nil },
+	RemoveFollow = { ids = "signal_remove_follow_item_ids", values = nil },
 	Share = { ids = "signal_share_item_ids", values = nil },
 	Report = { ids = "signal_report_item_ids", values = nil },
 	Join = { ids = "signal_join_item_ids", values = nil }

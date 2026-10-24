@@ -165,7 +165,7 @@ Authentication.SignUp.Response.PasswordComplexity,Please create a more complex p
 Authentication.SignUp.Response.UsernameMustBeSetFirst,Username must be set first.
 Authentication.SignUp.Subtitle.AddYourBirthday,Add your birthday to create your Roblox account.
 Authentication.SignUp.Subtitle.YourProgressCarriesOver,Your progress carries over when you complete setup.
-Authentication.SignUp.Subtitle.YoureAlmostThere,"You're almost there. If you close now, your account won't be fully created and you won't be able to play Roblox."
+Authentication.SignUp.Subtitle.YoureAlmostThereClose,"You're almost done. If you cancel now, your account won’t be fully created and you won’t be able to play Roblox."
 Authentication.TwoStepVerification.Action.GoToSecurity,
 Authentication.TwoStepVerification.Label.TwoStepRequired,2-Step Verification is required to make further transactions. Go to Settings > Security to complete 2-Step Verification.
 Authentication.TwoStepVerification.Response.TooManyAttempts,Too many attempts. Please try again later.
@@ -2247,6 +2247,7 @@ Feature.Build.Label.DeveloperProductDescription,Description: {DESCRIPTION}
 Feature.Build.Label.DeveloperProductName,"Name: ""{NAME}"""
 Feature.Build.Label.DeveloperProductPrice,Price: {PRICE} Robux
 Feature.Build.Label.DeveloperProductPriceUnavailable,?
+Feature.Build.Label.DeveloperProducts,Developer Products
 Feature.Build.Label.Done,
 Feature.Build.Label.EasyPerformanceReport,Easy performance report
 Feature.Build.Label.Error,
@@ -2457,6 +2458,7 @@ Feature.Build.Message.NoAssetsFound,No assets found.
 Feature.Build.Message.NoCapturesAvailable,No captures available
 Feature.Build.Message.NoDescriptionProvided,No description provided.
 Feature.Build.Message.NoFriendsToAdd,You don't have any friends to invite yet. Find people to connect with on Roblox first.
+Feature.Build.Message.NoGamesYet,No games yet.
 Feature.Build.Message.NoResults,
 Feature.Build.Message.NoSearchResultsFound,No search results found
 Feature.Build.Message.NoVersionHistory,No version history yet.
@@ -2533,6 +2535,7 @@ Feature.Build.Title.GamePass,Game Pass
 Feature.Build.Title.GenericError,
 Feature.Build.Title.GetUsers,Get users
 Feature.Build.Title.ManagedPricingAcknowledgement,Turn on Managed Pricing?
+Feature.Build.Title.Monetization,Monetization
 Feature.Build.Title.NoMonetizationProducts,Start earning in your game
 Feature.Build.Title.NoRobuxForUsage,No Robux left for Build usage
 Feature.Build.Title.PickCampaign,Pick a length
@@ -3180,7 +3183,6 @@ Feature.Contacts.Message.ContactDiscoverable,"To help you make friends, Roblox u
 Feature.Contacts.Message.ContactsSyncWarning,Your contacts will be regularly synced and matches with other Roblox users will be stored to help you find friends. Manage this any time in device settings.
 Feature.Contacts.Message.InviteToRoblox,"Add me as a friend on Roblox so we can create, share, and explore experiences together."
 Feature.Contacts.Message.NoResults,No results.
-Feature.DeveloperProducts.Heading.Products,Products
 Feature.DeveloperProducts.Label.Product,
 Feature.DisplayName.ErrorMessage.AgedUpNameContainPII,Name might contain private information
 Feature.DisplayName.ErrorMessage.AgedUpNameHasChanged,Your Name has already been changed in the past 7 days
@@ -3730,6 +3732,7 @@ Feature.Moments.Action.ShowDetails,Show details
 Feature.Moments.Action.ShowMore,
 Feature.Moments.Action.TrimVideo,Trim Video
 Feature.Moments.Action.TryAgain,Try again
+Feature.Moments.Body.EDPMomentIPReportInstructions,"To report an IP violation in this Moment, continue to the game details page."
 Feature.Moments.Description.CommunityStandards,Check the Community Standards for more info on what you can and can't say.
 Feature.Moments.Description.EmptyCapturesLibrary,This is where your Captures will appear.
 Feature.Moments.Description.GenerateTextFeedbackDisclosure,AI-generated. Review before posting — you're responsible for what's published.
@@ -3858,12 +3861,14 @@ Feature.Moments.Label.WriteComment,Write a comment
 Feature.Moments.Title.Comments,Comments
 Feature.Moments.Title.CommentsWithCappedCount,{count}+ comments
 Feature.Moments.Title.CommentsWithCount,{count} comments
+Feature.Moments.Title.EDPMomentIPReportInstructions,Report on the game details page
 Feature.Moments.Title.GenerateTextFeedbackReason,What went wrong?
 Feature.Moments.Title.GenerateTextOptions,
 Feature.Moments.Title.LeaveMomentCreation,Leave Moment creation?
 Feature.Moments.Title.MomentRemoved,Moment removed
 Feature.Moments.Title.PostInsights,Post insights
 Feature.Moments.Title.ReportPost,Report post
+Feature.Moments.Title.UnfollowConfirmationDialog,Unfollow @{username}?
 Feature.Moments.Tooltip.Creation,Everyone in the experience can view your Moments.
 Feature.Moments.Tooltip.PostInsightsBody,"Check views, watch time, and how the Moment landed with your audience."
 Feature.Moments.Tooltip.PostInsightsTitle,Your Moment insights are here

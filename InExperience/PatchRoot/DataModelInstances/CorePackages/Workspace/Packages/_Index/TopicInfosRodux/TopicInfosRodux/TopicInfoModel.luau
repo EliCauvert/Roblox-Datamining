@@ -1,6 +1,5 @@
 ﻿local Parent = script:FindFirstAncestor("TopicInfosRodux").Parent
 local DiscoveryTypesModule = require(Parent.DiscoveryTypes)
-local FFlagSearchOmniAutocompletePage = require(Parent.SharedFlags).FFlagSearchOmniAutocompletePage
 local FFlagEnableTopSongsSort = require(Parent.SharedFlags).FFlagEnableTopSongsSort
 local config = {
 	default = "LuaApp/category/filter_default",
@@ -88,21 +87,20 @@ function TopicInfoModelModule:fromOmniApi()
 	return NewTopicInfoModel
 end
 
-if FFlagSearchOmniAutocompletePage then
-	function TopicInfoModelModule:fromOmniAutocompleteApi()
-		-- upvalues: TopicInfoModelModule (copy), DiscoveryTypesModule (copy)
-		local NewTopicInfoModel = TopicInfoModelModule.new()
-		NewTopicInfoModel.dataSource = DiscoveryTypesModule.DataSourceType.OmniAutocompleteApi
-		NewTopicInfoModel.displayName = self.sortDisplayName
-		NewTopicInfoModel.name = self.sortId
-		NewTopicInfoModel.topicLayoutData = self.topicLayoutData or {}
-		NewTopicInfoModel.uniqueKey = NewTopicInfoModel.name
-		NewTopicInfoModel.analyticsTypeId = NewTopicInfoModel.name
-		NewTopicInfoModel.gameSetTypeId = NewTopicInfoModel.name
-		
-		return NewTopicInfoModel
-	end
+function TopicInfoModelModule:fromOmniAutocompleteApi()
+	-- upvalues: TopicInfoModelModule (copy), DiscoveryTypesModule (copy)
+	local NewTopicInfoModel = TopicInfoModelModule.new()
+	NewTopicInfoModel.dataSource = DiscoveryTypesModule.DataSourceType.OmniAutocompleteApi
+	NewTopicInfoModel.displayName = self.sortDisplayName
+	NewTopicInfoModel.name = self.sortId
+	NewTopicInfoModel.topicLayoutData = self.topicLayoutData or {}
+	NewTopicInfoModel.uniqueKey = NewTopicInfoModel.name
+	NewTopicInfoModel.analyticsTypeId = NewTopicInfoModel.name
+	NewTopicInfoModel.gameSetTypeId = NewTopicInfoModel.name
+	
+	return NewTopicInfoModel
 end
+
 function TopicInfoModelModule.makeTopSearchTopicKey(SearchUuid, TopicId): string
 	return `{SearchUuid}_{TopicId}`
 end

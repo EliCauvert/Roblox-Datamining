@@ -2,6 +2,8 @@
 	View = "View",
 	AddReaction = "AddReaction",
 	RemoveReaction = "RemoveReaction",
+	AddFollow = "AddFollow",
+	RemoveFollow = "RemoveFollow",
 	Share = "Share",
 	Report = "Report",
 	Join = "Join",

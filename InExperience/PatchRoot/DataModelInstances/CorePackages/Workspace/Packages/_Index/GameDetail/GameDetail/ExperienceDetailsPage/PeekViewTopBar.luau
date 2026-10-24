@@ -20,6 +20,8 @@ local SharedFlagsModule = require(Parent.SharedFlags)
 local FFlagUseNavigationSelectors = SharedFlagsModule.FFlagUseNavigationSelectors
 local FFlagSignalsNavP3fGameDetails = SharedFlagsModule.FFlagSignalsNavP3fGameDetails
 local FFlagSignalsNavP3Dispatch = SharedFlagsModule.FFlagSignalsNavP3Dispatch
+local FFlagFixOverlayTopInsetForDeviceSafeInsets = SharedFlagsModule.FFlagFixOverlayTopInsetForDeviceSafeInsets
+local ShouldUseDeviceSafeInsets = require(Parent.Display).shouldUseDeviceSafeInsets
 local NavigationCommands = if FFlagSignalsNavP3Dispatch then require(Parent.RobloxAppNavigation).NavigationCommands else nil
 local UseSignalStateFunction = require(Parent.SignalsReact).useSignalState
 local CreateComputedFunction = require(Parent.Signals).createComputed
@@ -27,7 +29,7 @@ local GetLegacyNavigationStoreFunction = require(Parent.NavigationRodux).GetLega
 local ExperienceDetailsPageUtilsModule = require(script.Parent.ExperienceDetailsPageUtils)
 
 return ReactModule.memo(function(p1)
-	-- upvalues: UseDispatchFunction (copy), UseDeviceInsetsFunction (copy), UseTokensFunction (copy), FFlagSignalsNavP3fGameDetails (copy), ReactModule (copy), GetLegacyNavigationStoreFunction (copy), CreateComputedFunction (copy), AppPage (copy), UseSignalStateFunction (copy), UseSelectorFunction (copy), FFlagUseNavigationSelectors (copy), Selectors (copy), PeekViewState (copy), ExperienceDetailsPageUtilsModule (copy), FFlagSignalsNavP3Dispatch (copy), NavigationCommands (copy), NavigateBackFunction (copy), View (copy), IconButton (copy), IconName (copy), ButtonVariant (copy), ButtonSize (copy)
+	-- upvalues: UseDispatchFunction (copy), UseDeviceInsetsFunction (copy), UseTokensFunction (copy), FFlagSignalsNavP3fGameDetails (copy), ReactModule (copy), GetLegacyNavigationStoreFunction (copy), CreateComputedFunction (copy), AppPage (copy), UseSignalStateFunction (copy), UseSelectorFunction (copy), FFlagUseNavigationSelectors (copy), Selectors (copy), PeekViewState (copy), ExperienceDetailsPageUtilsModule (copy), FFlagSignalsNavP3Dispatch (copy), NavigationCommands (copy), NavigateBackFunction (copy), View (copy), FFlagFixOverlayTopInsetForDeviceSafeInsets (copy), ShouldUseDeviceSafeInsets (copy), IconButton (copy), IconName (copy), ButtonVariant (copy), ButtonSize (copy)
 	local PageProps = p1.pageProps
 	local OnCloseFunction = p1.onClose
 	local UseDispatchResult = UseDispatchFunction()
@@ -93,7 +95,7 @@ return ReactModule.memo(function(p1)
 	return ReactModule.createElement(View, {
 		tag = "row align-y-center size-full",
 		padding = {
-			top = UDim.new(0, UseDeviceInsetsResult.top),
+			top = UDim.new(0, if FFlagFixOverlayTopInsetForDeviceSafeInsets and ShouldUseDeviceSafeInsets then 0 else UseDeviceInsetsResult.top),
 			left = UDim.new(0, UseTokensResult.Padding.Large)
 		}
 	}, {

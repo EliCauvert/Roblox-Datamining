@@ -2,10 +2,12 @@
 local ReactModule = require(Parent.React)
 local _ = require(script.Parent.Parent.Stores.getSplitPaneEducationalTourStore)
 local _ = require(script.Parent.Parent.Stores.SplitPaneStore)
+local FFlagSplitPaneEducationalTourTelemetryModule = require(script.Parent.Parent.Flags.FFlagSplitPaneEducationalTourTelemetry)
+local SplitPaneEducationalTourTelemetryModule = if FFlagSplitPaneEducationalTourTelemetryModule then require(script.Parent.Parent.Telemetry.SplitPaneEducationalTourTelemetry) else nil
 local SupportPaneMode = require(Parent.AppSplitView).Enums.SupportPaneMode
 
 return function(p1)
-	-- upvalues: ReactModule (copy), SupportPaneMode (copy)
+	-- upvalues: ReactModule (copy), SupportPaneMode (copy), FFlagSplitPaneEducationalTourTelemetryModule (copy), SplitPaneEducationalTourTelemetryModule (copy)
 	local UseRefResult = ReactModule.useRef(nil)
 	local UseRefResult1 = ReactModule.useRef(false)
 	local UseResult = ReactModule.useCallback(function(Current)
@@ -43,14 +45,19 @@ return function(p1)
 		end
 	end, { UseResult, UseResult1 })
 	ReactModule.useEffect(function()
-		-- upvalues: p1 (copy), UseResult1 (copy)
-		if not p1.isSupportSurfaceEligible then
-			UseResult1()
-			p1.tourStore.reset()
-			
-			return
+		-- upvalues: p1 (copy), FFlagSplitPaneEducationalTourTelemetryModule (upval), SplitPaneEducationalTourTelemetryModule (upval), UseResult1 (copy)
+		if p1.isSupportSurfaceEligible then return end
+		if FFlagSplitPaneEducationalTourTelemetryModule then
+			SplitPaneEducationalTourTelemetryModule.logInterrupted(p1.tourStore.getStepIndex(false), p1.totalSteps)
 		end
-	end, { p1.isSupportSurfaceEligible, UseResult1, p1.tourStore })
+		UseResult1()
+		p1.tourStore.reset()
+	end, {
+		p1.isSupportSurfaceEligible,
+		UseResult1,
+		p1.tourStore,
+		p1.totalSteps
+	})
 	local UseRefResult3 = ReactModule.useRef(p1.shouldDefaultToCollapsed)
 	ReactModule.useEffect(function()
 		-- upvalues: UseRefResult3 (copy), p1 (copy), UseResult2 (copy)

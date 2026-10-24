@@ -18,7 +18,6 @@ local ShopItemSelectionModule = require(InExperienceShop.Utils.shopItemSelection
 local ResolveItemForSelectionFunction = ShopItemSelectionModule.resolveItemForSelection
 local UseShopOfferChipModule = require(InExperienceShop.Hooks.useShopOfferChip)
 local InExperienceOffersModule = require(Parent.InExperienceOffers)
-local FFlagEnableUserOffers = SharedFlagsModule.FFlagEnableUserOffers
 local FFlagHideHeaderForBuyRobuxInExperienceShop = SharedFlagsModule.FFlagHideHeaderForBuyRobuxInExperienceShop
 local config = { homeLabel = "CommonUI.Features.Label.Home" }
 local _ = require(script.Parent.ShopView)
@@ -33,7 +32,7 @@ end
 local Callback = nil
 
 local function useShopViewModel(p1)
-	-- upvalues: UseTokensFunction (copy), UseLocalizationFunction (copy), config (copy), GetFixRobuxTileClickInShopModule (copy), SignalsReactModule (copy), GetInExperienceShopStoreModule (copy), FFlagShopRobuxPurchaseCompletionModalModule (copy), ReactModule (copy), FormatPriceModule (copy), Callback (ref), IsSideSheetEnabledModule (copy), FFlagHideHeaderForBuyRobuxInExperienceShop (copy), ResolveItemForSelectionFunction (copy), ShopItemSelectionModule (copy), ConstantsModule (copy), FFlagEnableUserOffers (copy), SharedFlagsModule (copy), AbuseVectorModule (copy), UseShopReportOverflowModule (copy), UseShopOfferChipModule (copy), InExperienceOffersModule (copy)
+	-- upvalues: UseTokensFunction (copy), UseLocalizationFunction (copy), config (copy), GetFixRobuxTileClickInShopModule (copy), SignalsReactModule (copy), GetInExperienceShopStoreModule (copy), FFlagShopRobuxPurchaseCompletionModalModule (copy), ReactModule (copy), FormatPriceModule (copy), Callback (ref), IsSideSheetEnabledModule (copy), FFlagHideHeaderForBuyRobuxInExperienceShop (copy), ResolveItemForSelectionFunction (copy), ShopItemSelectionModule (copy), ConstantsModule (copy), SharedFlagsModule (copy), AbuseVectorModule (copy), UseShopReportOverflowModule (copy), UseShopOfferChipModule (copy), InExperienceOffersModule (copy)
 	local UseTokensResult = UseTokensFunction()
 	local UseLocalizationResult = UseLocalizationFunction(config)
 	local FixRobuxTileClickInShopModule = GetFixRobuxTileClickInShopModule()
@@ -284,16 +283,7 @@ local function useShopViewModel(p1)
 		UseStateResult2_4("")
 	end, {})
 	local SetItemsPerRowFunction = UseSignalStateResult.setItemsPerRow
-	local UseStateResult2_6 = nil
-	local UseStateResult7 = nil
-	
-	if FFlagEnableUserOffers then
-		UseStateResult7, UseStateResult2_6 = ReactModule.useState(false)
-	else
-		UseStateResult7 = false
-		
-		UseStateResult2_6 = function(_) end
-	end
+	local UseStateResult7, UseStateResult2_6 = ReactModule.useState(false)
 	local UseShopReportOverflowResult = UseShopReportOverflowModule.useShopReportOverflow({
 		isReportingEnabled = SharedFlagsModule.FFlagEnableReportingFlowForExperienceShop,
 		buildReportSession = ReactModule.useCallback(function()
@@ -304,7 +294,6 @@ local function useShopViewModel(p1)
 			}
 		end, {})
 	})
-	local UseShopOfferChipModuleResult = if FFlagEnableUserOffers then UseShopOfferChipModule(InExperienceOffersModule.FeatureKeys.RobloxShop, UseStateResult7) else nil
 	
 	return {
 		fullScreen = p1.fullScreen,
@@ -330,19 +319,16 @@ local function useShopViewModel(p1)
 		onDetailsClose = UseResult5,
 		itemsPerRow = UseSignalStateResult3,
 		onAbsoluteSizeChanged = ReactModule.useCallback(function(Frame)
-			-- upvalues: ConstantsModule (upval), SetItemsPerRowFunction (copy), FFlagEnableUserOffers (upval), UseStateResult2_6 (ref)
+			-- upvalues: ConstantsModule (upval), SetItemsPerRowFunction (copy), UseStateResult2_6 (copy)
 			local X = Frame.AbsoluteSize.X
 			
-			if X == 0 then return end
-			SetItemsPerRowFunction((math.max(ConstantsModule.MIN_COLUMNS, (math.min(ConstantsModule.ITEMS_PER_SECTION, (math.floor(X / ConstantsModule.MIN_TILE_WIDTH)))))))
-			
-			if FFlagEnableUserOffers then
+			if X ~= 0 then
+				SetItemsPerRowFunction((math.max(ConstantsModule.MIN_COLUMNS, (math.min(ConstantsModule.ITEMS_PER_SECTION, (math.floor(X / ConstantsModule.MIN_TILE_WIDTH)))))))
 				UseStateResult2_6(X < ConstantsModule.COMPACT_BREAKPOINT_WIDTH)
+				
+				return
 			end
-		end, {
-			SetItemsPerRowFunction,
-			if FFlagEnableUserOffers then UseStateResult2_6 else nil
-		}),
+		end, { SetItemsPerRowFunction, UseStateResult2_6 }),
 		isReportingEnabled = UseShopReportOverflowResult.isReportingEnabled,
 		isOverflowMenuOpen = UseShopReportOverflowResult.isOverflowMenuOpen,
 		topBarReportSession = UseShopReportOverflowResult.reportSession,
@@ -350,7 +336,7 @@ local function useShopViewModel(p1)
 		onOverflowMenuClosed = UseShopReportOverflowResult.onOverflowMenuClosed,
 		onMenuItemActivated = UseShopReportOverflowResult.onMenuItemActivated,
 		onTopBarReportClose = UseShopReportOverflowResult.onReportClose,
-		offer = if FFlagEnableUserOffers then UseShopOfferChipModuleResult else nil
+		offer = UseShopOfferChipModule(InExperienceOffersModule.FeatureKeys.RobloxShop, UseStateResult7)
 	}
 end
 

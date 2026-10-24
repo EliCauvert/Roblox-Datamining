@@ -1,3 +1,0 @@
-﻿local FFlagAXAddSectionsToItemInfoRowPromptModule = require(script.Parent.FFlagAXAddSectionsToItemInfoRowPrompt)
-
-return game:DefineFastFlag("AXMigrateMaterialsToAttributes", false) and FFlagAXAddSectionsToItemInfoRowPromptModule

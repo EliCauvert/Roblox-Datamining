@@ -10,7 +10,6 @@ local FFlagComposerControlAlignment = require(Parent.SharedFlags).FFlagComposerC
 local _ = require(BuildExperience.Chat.chatTypes)
 local ModelPickerContainerModule = if FFlagBuildExperienceModelPickerModule then require(BuildExperience.Components.ModelPicker.ModelPickerContainer) else nil
 local ChatActionsRowModule = require(script.Parent.ChatActionsRow)
-local FFlagBuildExperienceFixChatComposerInitialSendStateModule = require(BuildExperience.Flags.FFlagBuildExperienceFixChatComposerInitialSendState)
 local Composer = if require(BuildExperience.Flags.FFlagBuildExperienceUseCommonTextArea) then require(Parent.AppBlox).Composer else require(BuildExperience.FoundationFork.TextArea)
 local UseReleaseFocusOnDownSwipeModule = require(script.Parent.useReleaseFocusOnDownSwipe)
 local IconButton = FoundationModule.IconButton
@@ -25,12 +24,12 @@ local function _(Text: string): string
 end
 
 return function(Frame)
-	-- upvalues: UseTokensFunction (copy), ReactModule (copy), FFlagBuildExperienceFixChatComposerInitialSendStateModule (copy), SignalsModule (copy), FFlagBuildExperienceLibrary (copy), FFlagBuildExperienceModelPickerModule (copy), UseReleaseFocusOnDownSwipeModule (copy), FFlagComposerControlAlignment (copy), View (copy), IconButton (copy), IconName (copy), InputSize (copy), ButtonVariant (copy), ModelPickerContainerModule (copy), ChatActionsRowModule (copy), Composer (copy)
+	-- upvalues: UseTokensFunction (copy), ReactModule (copy), SignalsModule (copy), FFlagBuildExperienceLibrary (copy), FFlagBuildExperienceModelPickerModule (copy), UseReleaseFocusOnDownSwipeModule (copy), FFlagComposerControlAlignment (copy), View (copy), IconButton (copy), IconName (copy), InputSize (copy), ButtonVariant (copy), ModelPickerContainerModule (copy), ChatActionsRowModule (copy), Composer (copy)
 	local UseTokensResult = UseTokensFunction()
 	local UseRefResult = ReactModule.useRef(nil)
 	local UseMemoResult = ReactModule.useMemo(function()
-		-- upvalues: FFlagBuildExperienceFixChatComposerInitialSendStateModule (upval), Frame (copy), SignalsModule (upval)
-		local Signal, Signal2 = SignalsModule.createSignal(not FFlagBuildExperienceFixChatComposerInitialSendStateModule or string.gsub(Frame.text:getValue(), "^%s*(.-)%s*$", "%1") == "")
+		-- upvalues: Frame (copy), SignalsModule (upval)
+		local Signal, Signal2 = SignalsModule.createSignal(string.gsub(Frame.text:getValue(), "^%s*(.-)%s*$", "%1") == "")
 		
 		return {
 			getIsComposerEmpty = Signal,
@@ -59,12 +58,17 @@ return function(Frame)
 		Frame.onChanged(Text)
 	end, { Frame.onChanged, UseMemoResult })
 	local UseResult1 = ReactModule.useCallback(function()
-		-- upvalues: v1 (ref), Frame (copy), UseMemoResult (copy)
+		-- upvalues: v1 (ref), Frame (copy), UseMemoResult (copy), FFlagBuildExperienceModelPickerModule (upval)
 		if v1 then return end
 		if Frame.onSend() then
-			UseMemoResult.setIsComposerEmpty(true)
+			UseMemoResult.setIsComposerEmpty(not FFlagBuildExperienceModelPickerModule or string.gsub(Frame.text:getValue(), "^%s*(.-)%s*$", "%1") == "")
 		end
-	end, { Frame.onSend, UseMemoResult, v1 })
+	end, {
+		Frame.onSend,
+		UseMemoResult,
+		v1,
+		if FFlagBuildExperienceModelPickerModule then Frame.text else nil
+	})
 	local UseResult2 = ReactModule.useCallback(function()
 		-- upvalues: Frame (copy)
 		if Frame.textBoxRef ~= nil and Frame.textBoxRef.current ~= nil then
@@ -75,7 +79,18 @@ return function(Frame)
 		end
 	end, { Frame.textBoxRef, Frame.onOpenCaptureGallery })
 	
-	if FFlagBuildExperienceLibrary then
+	if FFlagBuildExperienceModelPickerModule then
+		ReactModule.useEffect(function()
+			-- upvalues: UseMemoResult (copy), ReactModule (upval), Frame (copy)
+			local SubscribeToBindingResult = ReactModule.__subscribeToBinding(Frame.text, function(Text: string)
+				-- upvalues: UseMemoResult (upval)
+				UseMemoResult.setIsComposerEmpty(string.gsub(Text, "^%s*(.-)%s*$", "%1") == "")
+			end)
+			UseMemoResult.setIsComposerEmpty(string.gsub(Frame.text:getValue(), "^%s*(.-)%s*$", "%1") == "")
+			
+			return SubscribeToBindingResult
+		end, { Frame.text, UseMemoResult })
+	elseif FFlagBuildExperienceLibrary then
 		ReactModule.useEffect(function()
 			-- upvalues: Frame (copy), UseMemoResult (copy), ReactModule (upval)
 			if Frame.tracksExternalText then
@@ -125,10 +140,11 @@ return function(Frame)
 		}) else nil,
 		Picker = if ModelPicker == nil then nil else ReactModule.createElement(ModelPickerContainerModule, {
 			LayoutOrder = 2,
+			internalTesting = ModelPicker.internalTesting,
 			data = ModelPicker.data,
 			selectedId = ModelPicker.selectedId,
 			onSelect = ModelPicker.onSelect,
-			isDisabled = Frame.isAssistantResponding or IsIsReadOnly
+			isDisabled = Frame.isAssistantResponding or (IsIsReadOnly or ModelPicker.isDisabled == true)
 		})
 	}) else nil
 	local Element1 = ReactModule.createElement(View, {
@@ -150,7 +166,7 @@ return function(Frame)
 			canSendWhileResponding = Frame.canSendWhileResponding,
 			getIsComposerEmpty = UseMemoResult.getIsComposerEmpty,
 			hasAttachments = HasAttachments,
-			isSendDisabled = HasComposerErrorText or (Frame.isSendBlocked == true or IsIsReadOnly),
+			isSendDisabled = (if FFlagBuildExperienceModelPickerModule then Frame.isSendBlocked == true else HasComposerErrorText or Frame.isSendBlocked == true) or IsIsReadOnly,
 			isStopDisabled = IsIsReadOnly,
 			onSend = UseResult1,
 			onStop = Frame.onStop

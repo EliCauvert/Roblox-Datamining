@@ -5,7 +5,6 @@ local SharedFlagsModule = require(Parent1.SharedFlags)
 local FoundationModule = require(Parent1.Foundation)
 local View = FoundationModule.View
 local Text = FoundationModule.Text
-local Image = FoundationModule.Image
 local Checkbox = FoundationModule.Checkbox
 local ButtonVariant = FoundationModule.Enums.ButtonVariant
 local ButtonGroup = FoundationModule.ButtonGroup
@@ -38,7 +37,6 @@ local FFlagEnableRobuxUpsellPlusButtonExperimentModule = require(Parent.Flags.FF
 local FFlagUnifiedPurchaseFlowMarketplaceUIImprovements = require(Parent.Parent.SharedFlags).FFlagUnifiedPurchaseFlowMarketplaceUIImprovements
 local CompactUpsellModalBreakpoint = game:DefineFastInt("CompactUpsellModalBreakpoint", 400)
 local FFlagEnableUnifiedPurchaseFlowForDevSubs = require(Parent.Parent.SharedFlags).FFlagEnableUnifiedPurchaseFlowForDevSubs
-local FFlagShouldApplyDevSubsUpsellFixModule = require(Parent.Flags.FFlagShouldApplyDevSubsUpsellFix)
 local FFlagShouldFixDevSubsFlashingTitleModule = require(Parent.Flags.FFlagShouldFixDevSubsFlashingTitle)
 local GetFFlagIAPExperienceEnableMultiDisplayUpsellModule = require(Parent.Flags.GetFFlagIAPExperienceEnableMultiDisplayUpsell)
 local GetFFlagIAPExperienceUseUpsellBadgeHelperModule = require(Parent.Flags.GetFFlagIAPExperienceUseUpsellBadgeHelper)
@@ -160,7 +158,7 @@ local function UpsellProductDetails(p1)
 end
 
 local function UnifiedRobuxUpsellModalV2(p1)
-	-- upvalues: FFlagEnableRobuxUpsellPlusButtonExperimentModule (copy), UseCartPricingModule (copy), ReactModule (copy), UseLocalizationFunction (copy), FFlagEnableUnifiedPurchaseFlowForDevSubs (copy), FFlagAXMISWithBlackbird (copy), FFlagUnifiedPurchaseFlowMarketplaceUIImprovements (copy), UnifiedPurchaseModalTypeEnumModule (copy), CompactUpsellModalBreakpoint (copy), FFlagShouldFixDevSubsFlashingTitleModule (copy), UseFocusNavigationRefsModule (copy), BuildCartPricingOfferCheckboxesModule (copy), ButtonVariant (copy), Checkbox (copy), View (copy), FFlagShouldApplyDevSubsUpsellFixModule (copy), Image (copy), Text (copy), FFlagAXFixMISUpsellDiscountSummary (copy), ProductDetailsContainerModule (copy), Dialog (copy), DialogSize (copy), PriceSummaryModule (copy), UnifiedProductDetailsModule (copy), CartPricingLoadingModule (copy), GetFFlagIAPExperienceEnableMultiDisplayUpsellModule (copy), UpsellProductDetails (copy), ButtonGroup (copy), Orientation (copy), Enums (copy)
+	-- upvalues: FFlagEnableRobuxUpsellPlusButtonExperimentModule (copy), UseCartPricingModule (copy), ReactModule (copy), UseLocalizationFunction (copy), FFlagEnableUnifiedPurchaseFlowForDevSubs (copy), FFlagAXMISWithBlackbird (copy), FFlagUnifiedPurchaseFlowMarketplaceUIImprovements (copy), UnifiedPurchaseModalTypeEnumModule (copy), CompactUpsellModalBreakpoint (copy), FFlagShouldFixDevSubsFlashingTitleModule (copy), UseFocusNavigationRefsModule (copy), BuildCartPricingOfferCheckboxesModule (copy), ButtonVariant (copy), Checkbox (copy), View (copy), FFlagAXFixMISUpsellDiscountSummary (copy), ProductDetailsContainerModule (copy), Dialog (copy), DialogSize (copy), PriceSummaryModule (copy), UnifiedProductDetailsModule (copy), CartPricingLoadingModule (copy), GetFFlagIAPExperienceEnableMultiDisplayUpsellModule (copy), UpsellProductDetails (copy), ButtonGroup (copy), Orientation (copy), Enums (copy), Text (copy)
 	local RobloxPlusDiscountPercentage = if FFlagEnableRobuxUpsellPlusButtonExperimentModule and type(p1.robloxPlusDiscountPercentage) == "number" then p1.robloxPlusDiscountPercentage else nil
 	local OnRobloxPlusButtonActivated = if RobloxPlusDiscountPercentage == nil then nil else p1.onRobloxPlusButtonActivated
 	local UseCartPricingModuleResult = UseCartPricingModule({
@@ -320,56 +318,17 @@ local function UnifiedRobuxUpsellModalV2(p1)
 	}))) do
 		Copy[i] = value
 	end
-	local Element = if next(Copy) then ReactModule.createElement(View, {
-		tag = "col gap-medium size-full-0 auto-y",
-		LayoutOrder = 3
-	}, Copy) else nil
-	local Element1 = nil
-	
-	if IsPurchaseModalTypeMatch and FFlagShouldApplyDevSubsUpsellFixModule then
-		Element1 = ReactModule.createElement(View, {
-			LayoutOrder = 1,
-			tag = "row align-y-center gap-medium size-full-0 auto-y"
-		}, {
-			ItemIcon = ReactModule.createElement(Image, {
-				LayoutOrder = 1,
-				Size = UDim2.fromOffset(72, 72),
-				ScaleType = Enum.ScaleType.Fit,
-				Image = UseMemoResult.itemIcon
-			}),
-			ItemInfo = ReactModule.createElement(View, {
-				LayoutOrder = 2,
-				tag = "col gap-xxsmall auto-y",
-				Size = UDim2.new(1, -84, 0, 0)
-			}, {
-				ItemName = ReactModule.createElement(Text, {
-					LayoutOrder = 1,
-					tag = "auto-y text-title-medium text-wrap text-align-x-left content-emphasis",
-					Size = UDim2.new(1, 0, 0, 0),
-					Text = UseMemoResult.itemName or ""
-				}),
-				ItemPrice = ReactModule.createElement(Text, {
-					LayoutOrder = 2,
-					tag = "auto-y text-title-medium text-align-x-left content-emphasis",
-					RichText = true,
-					Size = UDim2.new(1, 0, 0, 0),
-					Text = utf8.char(57346) .. " " .. tostring(UseMemoResult.itemRobuxCost or 0) .. (PerMonth or "")
-				})
-			})
-		})
-	else
-		local SavingsSummaryOverride = if FFlagAXFixMISUpsellDiscountSummary then if FFlagAXFixMISUpsellDiscountSummary and p1.product.itemPrice and p1.product.itemPrice.savingsSummaryOverride then p1.product.itemPrice.savingsSummaryOverride else UseCartPricingModuleResult.cartPricingSavingsSummary elseif FFlagAXFixMISUpsellDiscountSummary and p1.product.itemPrice and p1.product.itemPrice.savingsSummaryOverride then p1.product.itemPrice.savingsSummaryOverride else nil
-		Element1 = ReactModule.createElement(ProductDetailsContainerModule, {
-			purchaseModalType = p1.purchaseModalType,
-			product = UseMemoResult,
-			isCompact = IsYBelow,
-			model = UseMemoResult.model,
-			priceSuffix = PerMonth,
-			hideProductDetails = p1.purchaseModalType == UnifiedPurchaseModalTypeEnumModule.MultiItem,
-			hideDiscountSummary = p1.isCartPricingLoading,
-			savingsSummary = if FFlagAXFixMISUpsellDiscountSummary then SavingsSummaryOverride else UseCartPricingModuleResult.cartPricingSavingsSummary
-		})
-	end
+	local SavingsSummaryOverride = if FFlagAXFixMISUpsellDiscountSummary then if FFlagAXFixMISUpsellDiscountSummary and p1.product.itemPrice and p1.product.itemPrice.savingsSummaryOverride then p1.product.itemPrice.savingsSummaryOverride else UseCartPricingModuleResult.cartPricingSavingsSummary elseif FFlagAXFixMISUpsellDiscountSummary and p1.product.itemPrice and p1.product.itemPrice.savingsSummaryOverride then p1.product.itemPrice.savingsSummaryOverride else nil
+	local Element = ReactModule.createElement(ProductDetailsContainerModule, {
+		purchaseModalType = p1.purchaseModalType,
+		product = UseMemoResult,
+		isCompact = IsYBelow,
+		model = UseMemoResult.model,
+		priceSuffix = PerMonth,
+		hideProductDetails = p1.purchaseModalType == UnifiedPurchaseModalTypeEnumModule.MultiItem,
+		hideDiscountSummary = p1.isCartPricingLoading,
+		savingsSummary = if FFlagAXFixMISUpsellDiscountSummary then SavingsSummaryOverride else UseCartPricingModuleResult.cartPricingSavingsSummary
+	})
 	local CreateElementFunction3 = ReactModule.createElement
 	local Root = Dialog.Root
 	local config1 = {
@@ -390,7 +349,7 @@ local function UnifiedRobuxUpsellModalV2(p1)
 		tag = "col align-x-center align-y-top gap-medium size-full-0 auto-y"
 	}
 	local config4 = {
-		ProductDetailsContainer = if Element1 then Element1 else ReactModule.createElement(View, {
+		ProductDetailsContainer = if Element then Element else ReactModule.createElement(View, {
 			tag = "col align-x-center align-y-center gap-medium size-full-0",
 			LayoutOrder = 1
 		}, {
@@ -409,14 +368,17 @@ local function UnifiedRobuxUpsellModalV2(p1)
 			})
 		}),
 		CartPricingLoading = ReactModule.createElement(CartPricingLoadingModule, { isLoading = p1.isCartPricingLoading }),
-		PostPurchaseActions = Element
+		PostPurchaseActions = if next(Copy) then ReactModule.createElement(View, {
+			tag = "col gap-medium size-full-0 auto-y",
+			LayoutOrder = 3
+		}, Copy) else nil
 	}
 	local CreateElementFunction = ReactModule.createElement
 	local config5 = {
 		LayoutOrder = 3,
 		tag = "col align-x-center align-y-center gap-medium size-full-0 auto-y padding-x-xsmall padding-bottom-xxlarge padding-top-small"
 	}
-	local config11 = nil
+	local config6 = nil
 	
 	if GetFFlagIAPExperienceEnableMultiDisplayUpsellModule() then
 		local Elements = {}
@@ -434,9 +396,9 @@ local function UnifiedRobuxUpsellModalV2(p1)
 				badgeType = upsellSuggestion.badgeType
 			})
 		end
-		config11 = Elements
+		config6 = Elements
 	else
-		config11 = {
+		config6 = {
 			UpsellPackage1 = ReactModule.createElement(UpsellProductDetails, {
 				layoutOrder = 1,
 				product = p1.upsellSuggestions[1],
@@ -460,7 +422,7 @@ local function UnifiedRobuxUpsellModalV2(p1)
 			}) else nil
 		}
 	end
-	config4.UpsellSuggestions = CreateElementFunction(View, config5, config11)
+	config4.UpsellSuggestions = CreateElementFunction(View, config5, config6)
 	t.ContentView = CreateElementFunction1(View, config3, config4)
 	config2.DialogContent = CreateElementFunction2(Content, v1, t)
 	config2.DialogActions = if OnRobloxPlusButtonActivated then ReactModule.createElement(ButtonGroup, {

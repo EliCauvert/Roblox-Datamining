@@ -59,7 +59,7 @@ return function(Frame)
 					Visible = Frame.activeTab == BUILDHOMETAB.Games or IsSliding
 				}, { Content = Frame.gamesContent })
 			}),
-			PreviewsPage = if Frame.showTabs then ReactModule.createElement(View, {
+			PreviewsPage = ReactModule.createElement(View, {
 				tag = "size-full",
 				testId = "BuildHomeTabs.PreviewsPage",
 				LayoutOrder = TabOrder[BUILDHOMETAB.Previews]
@@ -69,7 +69,7 @@ return function(Frame)
 					testId = "BuildHomeTabs.PreviewsContent",
 					Visible = Frame.activeTab == BUILDHOMETAB.Previews or IsSliding
 				}, { Content = Frame.previewsContent })
-			}) else nil
+			})
 		})
 	})
 end

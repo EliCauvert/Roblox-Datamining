@@ -1,1 +1,1 @@
-﻿return game:DefineFastFlag("HideOfferNotificationsWhenShopEmpty", false) and require(script.Parent.FFlagEnableUserOffers)
+﻿return game:DefineFastFlag("HideOfferNotificationsWhenShopEmpty", false)

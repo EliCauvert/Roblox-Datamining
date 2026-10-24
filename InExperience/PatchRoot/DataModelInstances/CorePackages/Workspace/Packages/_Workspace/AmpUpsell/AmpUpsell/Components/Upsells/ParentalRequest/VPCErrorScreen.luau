@@ -117,7 +117,7 @@ return function(p1)
 	end
 	return if ShouldUseFoundationUIVPCUpsellModule then ReactModule.createElement(Dialog.Root, {
 		size = DialogSize.Small,
-		onClose = OnCancel,
+		onClose = p1.onClose or OnCancel,
 		disablePortal = DisablePortal,
 		hasBackdrop = if GetFFlagEnableVPCUpsellFoundationDialogHardeningModule() then true else false
 	}, {

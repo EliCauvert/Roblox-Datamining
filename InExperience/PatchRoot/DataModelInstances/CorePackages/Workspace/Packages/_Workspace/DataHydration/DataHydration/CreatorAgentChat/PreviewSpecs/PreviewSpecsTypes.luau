@@ -1,4 +1,6 @@
-﻿local _ = require(script:FindFirstAncestor("DataHydration").DataHydrationTypes)
+﻿local DataHydration = script:FindFirstAncestor("DataHydration")
+local _ = require(DataHydration.DataHydrationTypes)
+local _ = require(DataHydration.Parent.Signals)
 
 return {
 	PreviewSpecStatus = {

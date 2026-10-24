@@ -1,4 +1,7 @@
 ﻿local HttpService = game:GetService("HttpService")
+local RealtimeDelivery = script:FindFirstAncestor("RealtimeDelivery")
+local HttpClientModule = require(RealtimeDelivery.Parent.HttpClient)
+local UrlBase = require(RealtimeDelivery.Parent.UrlBuilder).UrlBase
 local _ = require(script.Parent.RealtimeTypes)
 local TopicSourceModule = require(script.Parent.TopicSource)
 local TopicEventReceiverModule = {}
@@ -26,6 +29,20 @@ local _ = function(p1)
 	end
 end
 
+local function requestExchange(Token, Network)
+	-- upvalues: HttpClientModule (copy), UrlBase (copy)
+	return HttpClientModule.asPromise(HttpClientModule.fetch({
+		method = "POST",
+		analyticsKey = "RealtimeDelivery.TopicTokenExchange",
+		url = UrlBase.APIS .. "/topic-token-exchange-service/v1/exchange",
+		body = { token = Token },
+		network = Network,
+		decode = function(p1)
+			return p1
+		end
+	}))
+end
+
 local _ = function(p1, p2, p3)
 	local Success, Result = pcall(p2.callback, p3)
 	
@@ -45,9 +62,13 @@ local _ = function(p4, p5, p6)
 	end
 end
 
-function TopicEventReceiverModule.new(p7)
+function TopicEventReceiverModule.new(p7, p8)
 	-- upvalues: TopicSourceModule (copy), TopicEventReceiverModule (copy)
-	return (setmetatable({ _source = TopicSourceModule.new(p7), _topics = {} }, TopicEventReceiverModule))
+	return (setmetatable({
+		_source = TopicSourceModule.new(p7),
+		_topics = {},
+		_network = if p8 then p8.network else nil
+	}, TopicEventReceiverModule))
 end
 
 function TopicEventReceiverModule:observeTopic(Text: string, Callback, p7)
@@ -75,7 +96,7 @@ function TopicEventReceiverModule:observeTopic(Text: string, Callback, p7)
 		onError = if p7 then p7.onError else nil
 	}
 	table.insert(TrackTokenResult.observers, config1)
-	self._source:subscribe(Text, TrackTokenResult2)
+	self._source:subscribe(TrackTokenResult.token, TrackTokenResult2)
 	
 	return {
 		disconnect = function()
@@ -95,9 +116,9 @@ function TopicEventReceiverModule:_startListening()
 			-- upvalues: self (copy)
 			self:_resubscribeAll()
 		end,
-		onTokenExpiry = function(p7, ShouldExchange, p8)
+		onTokenExpiry = function(p7, ShouldExchange, p8, p9)
 			-- upvalues: self (copy)
-			self:_onTokenExpiry(p7, ShouldExchange, p8)
+			self:_onTokenExpiry(p7, ShouldExchange, p8, p9)
 		end,
 		onSubscriptionError = function(p7, ErrorCode, ShouldRetry)
 			-- upvalues: self (copy)
@@ -192,7 +213,7 @@ function TopicEventReceiverModule._findCurrentTopic(p9, Text: string)
 	end
 end
 
-function TopicEventReceiverModule:_onTokenExpiry(p9, ShouldExchange, p10)
+function TopicEventReceiverModule:_onTokenExpiry(p9, ShouldExchange, p10, p11)
 	local CurrentTopic, CurrentTopic2 = self:_findCurrentTopic(p9)
 	
 	if CurrentTopic == nil or CurrentTopic2 == nil then return end
@@ -202,13 +223,40 @@ function TopicEventReceiverModule:_onTokenExpiry(p9, ShouldExchange, p10)
 		self._source:subscribe(p9)
 		
 		return
-	else
+	end
+	if not p11 then
 		self:_endTopic(CurrentTopic, CurrentTopic2, { type = "expired", shouldExchange = ShouldExchange })
+		
+		return
+	end
+	if ShouldExchange then
+		self:_exchange(CurrentTopic, CurrentTopic2)
 	end
 end
 
-function TopicEventReceiverModule:_onSubscriptionError(p9, ErrorCode, ShouldRetry)
-	local CurrentTopic, CurrentTopic2 = self:_findCurrentTopic(p9)
+function TopicEventReceiverModule:_exchange(p9, Topic)
+	-- upvalues: requestExchange (copy)
+	local Token = Topic.token
+	requestExchange(Token, self._network):andThen(function(Result)
+		-- upvalues: self (copy), p9 (copy), Topic (copy), Token (copy)
+		local Token1 = Result.token
+		
+		if self._topics[p9] ~= Topic or Topic.token ~= Token then return end
+		if type(Token1) == "string" and Token1 ~= Token then
+			Topic.token = Token1
+			Topic.previousToken = Token
+			self._source:subscribe(Token1, Token)
+			
+			return
+		end
+	end):catch(function(Err)
+		-- upvalues: p9 (copy)
+		warn(`TopicEventReceiver: token exchange for {p9} failed: {if type(Err) == "table" then Err.errorMessage else Err}`)
+	end)
+end
+
+function TopicEventReceiverModule:_onSubscriptionError(p10, ErrorCode, ShouldRetry)
+	local CurrentTopic, CurrentTopic2 = self:_findCurrentTopic(p10)
 	
 	if CurrentTopic == nil or CurrentTopic2 == nil then return end
 	if CurrentTopic2.previousToken then
@@ -225,25 +273,25 @@ function TopicEventReceiverModule:_onSubscriptionError(p9, ErrorCode, ShouldRetr
 	end
 end
 
-function TopicEventReceiverModule:_endTopic(p9, p10, p11)
-	self._topics[p9] = nil
+function TopicEventReceiverModule:_endTopic(p10, p11, p12)
+	self._topics[p10] = nil
 	
 	if next(self._topics) == nil then
 		self._source:stopListening()
 	end
-	for _, value in table.clone(p10.observers) do
-		if table.find(p10.observers, value) then
+	for _, value in table.clone(p11.observers) do
+		if table.find(p11.observers, value) then
 			local OnError = value.onError
 			local NoOnError = OnError == nil
 			local Result = nil
 			
 			if not NoOnError then
 				local Success
-				Success, Result = pcall(OnError, p11)
+				Success, Result = pcall(OnError, p12)
 				NoOnError = Success
 			end
 			if not NoOnError then
-				warn(`TopicEventReceiver: an error handler for {p9} failed: {Result}`)
+				warn(`TopicEventReceiver: an error handler for {p10} failed: {Result}`)
 			end
 		end
 	end

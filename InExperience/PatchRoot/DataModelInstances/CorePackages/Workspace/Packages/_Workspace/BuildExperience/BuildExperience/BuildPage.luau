@@ -1,5 +1,8 @@
 ﻿local BuildExperience = script:FindFirstAncestor("BuildExperience")
 local Parent = BuildExperience.Parent
+local FFlagBuildExperienceModelPickerModule = require(BuildExperience.Flags.FFlagBuildExperienceModelPicker)
+local PrepareBuildModelSelectionTargetModule = require(BuildExperience.Chat.prepareBuildModelSelectionTarget)
+local GetBuildModelSelectionStoreModule = require(BuildExperience.Stores.GetBuildModelSelectionStore)
 local FoundationModule = require(Parent.Foundation)
 local ReactModule = require(Parent.React)
 local RoactNavigationModule = require(Parent.RoactNavigation)
@@ -19,6 +22,7 @@ local ButtonVariant = FoundationModule.Enums.ButtonVariant
 local FillBehavior = FoundationModule.Enums.FillBehavior
 local InputSize = FoundationModule.Enums.InputSize
 local SignalsReactModule = require(Parent.SignalsReact)
+local LocalUserIdStore = require(Parent.LocalUserIdStore).LocalUserIdStore
 local BuildPageHeaderModule = require(script.Parent.Components.BuildPageHeader.BuildPageHeader)
 local BuildChatPageModule = require(script.Parent.Components.BuildChatPage.BuildChatPage)
 local ChatSheetModule = require(script.Parent.Components.ChatSheet.ChatSheet)
@@ -44,7 +48,6 @@ local AdCampaignCreatedToastModule = require(script.Parent.Components.Ads.AdCamp
 local _ = require(script.Parent.Chat.chatTypes)
 local UseSessionSummaryModule = require(script.Parent.Chat.useSessionSummary)
 local UseScrollPerformanceTrackerModule = require(script.Parent.Telemetry.useScrollPerformanceTracker)
-local FFlagBuildBackButtonChevronModule = require(script.Parent.Flags.FFlagBuildBackButtonChevron)
 local FFlagBuildExperienceChatSheetReversedContentModule = require(script.Parent.Flags.FFlagBuildExperienceChatSheetReversedContent)
 local list = { 0.5, 1 }
 local FFlagBuildAdUpsellModule = require(script.Parent.Flags.FFlagBuildAdUpsell)
@@ -62,6 +65,7 @@ local FFlagBuildPublishNavigationSheetModule = require(script.Parent.Flags.FFlag
 local FFlagBuildExperiencePrivateInvitesModule = require(script.Parent.Flags.FFlagBuildExperiencePrivateInvites)
 local FFlagBuildExperienceMyCreationsLongPressMenuModule = require(script.Parent.Flags.FFlagBuildExperienceMyCreationsLongPressMenu)
 local FFlagBuildExperiencePreviewsTabModule = require(script.Parent.Flags.FFlagBuildExperiencePreviewsTab)
+local FFlagBuildWithGroupsModule = require(script.Parent.Flags.FFlagBuildWithGroups)
 local BuildHomeTabsContainerModule = if FFlagBuildExperiencePreviewsTabModule then require(script.Parent.Components.BuildHomeTabs.BuildHomeTabsContainer) else nil
 local FFlagBuildExperienceAnalytics = SharedFlagsModule.FFlagBuildExperienceAnalytics
 local FFlagBuildExperienceHideNavBarOnSubPages = SharedFlagsModule.FFlagBuildExperienceHideNavBarOnSubPages
@@ -100,7 +104,7 @@ local _ = function(p1, Name)
 end
 
 local function useLiveSubagentTaskState(Navigation)
-	-- upvalues: BuildNavigationParamsModule (copy), CreatorAgentChatModule (copy), ReactModule (copy), UseSessionSummaryModule (copy)
+	-- upvalues: BuildNavigationParamsModule (copy), CreatorAgentChatModule (copy), FFlagBuildExperienceModelPickerModule (copy), SignalsReactModule (copy), LocalUserIdStore (copy), ReactModule (copy), UseSessionSummaryModule (copy)
 	local Target = BuildNavigationParamsModule.getTarget(Navigation)
 	assert(Target ~= nil, "Agent pages require a build target")
 	local CreatorAgentChatStore = CreatorAgentChatModule.getCreatorAgentChatStore()
@@ -112,14 +116,18 @@ local function useLiveSubagentTaskState(Navigation)
 		CreatorAgentChatStore,
 		Target.universeId,
 		Target.placeId,
-		Target.sessionId
+		Target.sessionId,
+		if FFlagBuildExperienceModelPickerModule then SignalsReactModule.useSignalState(LocalUserIdStore.getCurrentUserId) else nil
 	}))).subagentTaskState or BuildNavigationParamsModule.getSubagentTaskState(Navigation)
 end
 
 local _ = function(p2)
-	-- upvalues: ReactModule (copy), config (copy)
+	-- upvalues: ReactModule (copy), FFlagBuildExperienceModelPickerModule (copy), PrepareBuildModelSelectionTargetModule (copy), config (copy)
 	return ReactModule.useCallback(function(Target)
-		-- upvalues: p2 (copy), config (upval)
+		-- upvalues: FFlagBuildExperienceModelPickerModule (upval), PrepareBuildModelSelectionTargetModule (upval), p2 (copy), config (upval)
+		if FFlagBuildExperienceModelPickerModule then
+			Target = PrepareBuildModelSelectionTargetModule(Target)
+		end
 		p2.navigate(config.BuildChat, { target = Target })
 	end, { p2 })
 end
@@ -223,7 +231,7 @@ local function BuildSearchResults(p2)
 end
 
 local function BuildSearchScreen(p2)
-	-- upvalues: UseBuildPageLayoutModule (copy), UseNavigationFocusFunction (copy), UseOnScreenKeyboardVisibleModule (copy), GetSearchQueryStoreModule (copy), SignalsReactModule (copy), UseLocalizationFunction (copy), ReactModule (copy), config (copy), UseMyCreationsResultsModule (copy), UseScrollPerformanceTrackerModule (copy), ExperienceResultsLoadingSkeletonModule (copy), FullscreenPageWithSafeArea (copy), SearchPageContainerModule (copy), BuildSearchResults (copy)
+	-- upvalues: UseBuildPageLayoutModule (copy), UseNavigationFocusFunction (copy), UseOnScreenKeyboardVisibleModule (copy), GetSearchQueryStoreModule (copy), SignalsReactModule (copy), UseLocalizationFunction (copy), ReactModule (copy), FFlagBuildExperienceModelPickerModule (copy), PrepareBuildModelSelectionTargetModule (copy), config (copy), UseMyCreationsResultsModule (copy), UseScrollPerformanceTrackerModule (copy), ExperienceResultsLoadingSkeletonModule (copy), FullscreenPageWithSafeArea (copy), SearchPageContainerModule (copy), BuildSearchResults (copy)
 	local ScreenProps = p2.screenProps or {}
 	local Navigation = p2.navigation
 	local UseBuildPageLayoutModuleResult = UseBuildPageLayoutModule()
@@ -233,7 +241,10 @@ local function BuildSearchScreen(p2)
 	local UseSignalBindingResult = SignalsReactModule.useSignalBinding(SearchQueryStoreParam.getDraftQuery)
 	local UseLocalizationResult = UseLocalizationFunction({ searchbarPlaceholder = "Feature.Build.Label.SearchGames" })
 	local UseResult = ReactModule.useCallback(function(Target)
-		-- upvalues: Navigation (copy), config (upval)
+		-- upvalues: FFlagBuildExperienceModelPickerModule (upval), PrepareBuildModelSelectionTargetModule (upval), Navigation (copy), config (upval)
+		if FFlagBuildExperienceModelPickerModule then
+			Target = PrepareBuildModelSelectionTargetModule(Target)
+		end
 		Navigation.navigate(config.BuildChat, { target = Target })
 	end, { Navigation })
 	local UseMyCreationsResultsModuleResult = UseMyCreationsResultsModule({
@@ -315,7 +326,7 @@ local function BuildSearchScreen(p2)
 end
 
 local function BuildGetUsersScreen(p2)
-	-- upvalues: UseBuildPageLayoutModule (copy), BuildNavigationParamsModule (copy), UseLocalizationFunction (copy), LocalizationStringsModule (copy), ReactModule (copy), UseAdsStatsPageViewModelModule (copy), AdsStatsViewModule (copy), View (copy), Button (copy), IconName (copy), InputSize (copy), ButtonVariant (copy), FillBehavior (copy), FullscreenPageWithSafeArea (copy), OverflowMenuPageShellModule (copy), AdsManagerMenuButtonModule (copy), FFlagBuildBackButtonChevronModule (copy), OverlayProvider (copy), AdCampaignCreatedToastModule (copy)
+	-- upvalues: UseBuildPageLayoutModule (copy), BuildNavigationParamsModule (copy), UseLocalizationFunction (copy), LocalizationStringsModule (copy), ReactModule (copy), UseAdsStatsPageViewModelModule (copy), AdsStatsViewModule (copy), View (copy), Button (copy), IconName (copy), InputSize (copy), ButtonVariant (copy), FillBehavior (copy), FullscreenPageWithSafeArea (copy), OverflowMenuPageShellModule (copy), AdsManagerMenuButtonModule (copy), OverlayProvider (copy), AdCampaignCreatedToastModule (copy)
 	local Navigation = p2.navigation
 	local UseBuildPageLayoutModuleResult = UseBuildPageLayoutModule()
 	local Target = BuildNavigationParamsModule.getTarget(Navigation)
@@ -375,8 +386,7 @@ local function BuildGetUsersScreen(p2)
 			headerTrailing = ReactModule.createElement(AdsManagerMenuButtonModule, {
 				testId = "BuildPage.GetUsersPage.AdsManagerMenu",
 				universeId = UniverseId
-			}),
-			closeIcon = if FFlagBuildBackButtonChevronModule then nil else IconName.ChevronLargeLeft
+			})
 		}),
 		SuccessToast = if UseAdsStatsPageViewModelModuleResult.showCreateSuccessToast and UseStateResult ~= nil then ReactModule.createElement(OverlayProvider, { gui = UseStateResult }, {
 			Toast = ReactModule.createElement(AdCampaignCreatedToastModule, {
@@ -392,7 +402,7 @@ local List = {
 	{
 		[config.BuildHome] = {
 			screen = function(p2)
-				-- upvalues: UseBuildPageLayoutModule (copy), UseNavigationFocusFunction (copy), UseLocalizationFunction (copy), LocalizationStringsModule (copy), ReactModule (copy), config (copy), FFlagBuildExperienceMyCreationsLongPressMenuModule (copy), useHomeConfigurationPages (copy), FFlagBuildAdUpsellModule (copy), GetAdsCampaignDeepLinkStoreModule (copy), SendBuildExperienceEventModule (copy), ResumeBuildChatModule (copy), GetSearchQueryStoreModule (copy), MyCreationsTabModule (copy), FullscreenPageWithSafeArea (copy), View (copy), BuildPageHeaderModule (copy), FFlagBuildExperiencePreviewsTabModule (copy), BuildHomeTabsContainerModule (copy), FFlagBuildPublishNavigationSheetModule (copy), PublishSheetControllerModule (copy)
+				-- upvalues: UseBuildPageLayoutModule (copy), UseNavigationFocusFunction (copy), UseLocalizationFunction (copy), LocalizationStringsModule (copy), ReactModule (copy), FFlagBuildExperienceModelPickerModule (copy), PrepareBuildModelSelectionTargetModule (copy), config (copy), FFlagBuildExperienceMyCreationsLongPressMenuModule (copy), useHomeConfigurationPages (copy), FFlagBuildAdUpsellModule (copy), GetAdsCampaignDeepLinkStoreModule (copy), SendBuildExperienceEventModule (copy), ResumeBuildChatModule (copy), GetSearchQueryStoreModule (copy), MyCreationsTabModule (copy), FullscreenPageWithSafeArea (copy), View (copy), BuildPageHeaderModule (copy), FFlagBuildExperiencePreviewsTabModule (copy), BuildHomeTabsContainerModule (copy), FFlagBuildPublishNavigationSheetModule (copy), PublishSheetControllerModule (copy)
 				local ScreenProps = p2.screenProps or {}
 				local Navigation = p2.navigation
 				local UseBuildPageLayoutModuleResult = UseBuildPageLayoutModule()
@@ -402,7 +412,10 @@ local List = {
 					fallbackExperienceName = LocalizationStringsModule.BUILD_ASSISTANT_FALLBACK_NAME
 				}).fallbackExperienceName
 				local UseResult = ReactModule.useCallback(function(Target)
-					-- upvalues: Navigation (copy), config (upval)
+					-- upvalues: FFlagBuildExperienceModelPickerModule (upval), PrepareBuildModelSelectionTargetModule (upval), Navigation (copy), config (upval)
+					if FFlagBuildExperienceModelPickerModule then
+						Target = PrepareBuildModelSelectionTargetModule(Target)
+					end
 					Navigation.navigate(config.BuildChat, { target = Target })
 				end, { Navigation })
 				local UseHomeConfigurationPagesResult = if FFlagBuildExperienceMyCreationsLongPressMenuModule then useHomeConfigurationPages(Navigation) else nil
@@ -481,7 +494,8 @@ local List = {
 								LayoutOrder = 3,
 								gamesContent = Element,
 								isFocused = UseNavigationFocusResult,
-								searchStore = ScreenProps.searchStore
+								searchStore = ScreenProps.searchStore,
+								searchQueryStore = SearchQueryStore
 							}) else Element
 						})
 					}),
@@ -498,7 +512,7 @@ local List = {
 	{
 		[config.BuildChat] = {
 			screen = function(p2)
-				-- upvalues: BuildNavigationParamsModule (copy), FFlagBuildExperienceAnalytics (copy), GetBuildExperienceRefreshStoreModule (copy), UseBuildPageLayoutModule (copy), FFlagBuildAdUpsellModule1 (copy), UseNavigationFocusFunction (copy), UseOnScreenKeyboardVisibleModule (copy), ReactModule (copy), FFlagBuildPublishNavigationSheetModule (copy), BuildOverflowMenuScreensModule (copy), FFlagBuildExperienceLibrary (copy), OpenLibraryModule (copy), FFlagBuildExperiencePrivateInvitesModule (copy), config (copy), FFlagEnableBuildAdPromotionModule (copy), BuildChatPageModule (copy), FullscreenPageWithSafeArea (copy), PrivateInvitesPickerHostModule (copy), PublishSheetControllerModule (copy)
+				-- upvalues: BuildNavigationParamsModule (copy), FFlagBuildExperienceAnalytics (copy), GetBuildExperienceRefreshStoreModule (copy), UseBuildPageLayoutModule (copy), FFlagBuildAdUpsellModule1 (copy), UseNavigationFocusFunction (copy), UseOnScreenKeyboardVisibleModule (copy), ReactModule (copy), FFlagBuildExperienceModelPickerModule (copy), SignalsReactModule (copy), LocalUserIdStore (copy), PrepareBuildModelSelectionTargetModule (copy), GetBuildModelSelectionStoreModule (copy), FFlagBuildWithGroupsModule (copy), FFlagBuildExperiencePreviewsTabModule (copy), FFlagBuildPublishNavigationSheetModule (copy), BuildOverflowMenuScreensModule (copy), FFlagBuildExperienceLibrary (copy), OpenLibraryModule (copy), FFlagBuildExperiencePrivateInvitesModule (copy), config (copy), FFlagEnableBuildAdPromotionModule (copy), BuildChatPageModule (copy), FullscreenPageWithSafeArea (copy), PrivateInvitesPickerHostModule (copy), PublishSheetControllerModule (copy)
 				local Navigation = p2.navigation
 				local Target = BuildNavigationParamsModule.getTarget(Navigation)
 				local InitialPrompt = if FFlagBuildExperienceAnalytics then BuildNavigationParamsModule.getInitialPrompt(Navigation) else nil
@@ -508,10 +522,41 @@ local List = {
 				local UseOnScreenKeyboardVisibleModuleResult = UseOnScreenKeyboardVisibleModule()
 				local UseStateResult, UseStateResult2 = ReactModule.useState(false)
 				local UseStateResult1, UseStateResult2_1 = ReactModule.useState(false)
+				
+				if FFlagBuildExperienceModelPickerModule then
+					local UseSignalStateResult = SignalsReactModule.useSignalState(LocalUserIdStore.getCurrentUserId)
+					ReactModule.useLayoutEffect(function()
+						-- upvalues: Target (copy), UseSignalStateResult (copy), PrepareBuildModelSelectionTargetModule (upval), Navigation (copy)
+						if Target ~= nil and (tonumber(UseSignalStateResult) or 0) > 0 then
+							local PrepareBuildModelSelectionTargetModuleResult = PrepareBuildModelSelectionTargetModule(Target)
+							
+							if PrepareBuildModelSelectionTargetModuleResult ~= Target then
+								Navigation.setParams({ target = PrepareBuildModelSelectionTargetModuleResult })
+							end
+						end
+					end, { UseSignalStateResult, Target, Navigation })
+					local ModelSelectionDraftId = if Target == nil then nil else Target.modelSelectionDraftId
+					ReactModule.useEffect(function()
+						-- upvalues: ModelSelectionDraftId (copy), GetBuildModelSelectionStoreModule (upval)
+						return function()
+							-- upvalues: ModelSelectionDraftId (upval), GetBuildModelSelectionStoreModule (upval)
+							if ModelSelectionDraftId ~= nil then
+								GetBuildModelSelectionStoreModule(false).discardDraft(ModelSelectionDraftId)
+							end
+						end
+					end, { ModelSelectionDraftId })
+				end
 				local UseResult = ReactModule.useCallback(function()
-					-- upvalues: Navigation (copy)
+					-- upvalues: FFlagBuildWithGroupsModule (upval), Target (copy), FFlagBuildExperiencePreviewsTabModule (upval), Navigation (copy)
+					if FFlagBuildWithGroupsModule and Target ~= nil and Target.isNewGameTarget == true and Target.universeId ~= nil then
+						require(script.Parent.Stores.GetMyCreationsFilterStore)().setFilter({ games = "MyGames" })
+						
+						if FFlagBuildExperiencePreviewsTabModule then
+							require(script.Parent.Stores.GetBuildHomeTabStore)().setTab("Games")
+						end
+					end
 					Navigation.goBack()
-				end, { Navigation })
+				end, { Navigation, Target })
 				local UseResult1 = ReactModule.useCallback(function()
 					-- upvalues: UseStateResult2_1 (copy)
 					UseStateResult2_1(false)
@@ -609,7 +654,7 @@ local List = {
 						onClose = UseResult4,
 						onInvitesSent = UseResult7
 					}) else nil,
-					PublishSheet = if FFlagBuildPublishNavigationSheetModule and (Target ~= nil and Target.universeId ~= nil) then ReactModule.createElement(PublishSheetControllerModule, {
+					PublishSheet = if FFlagBuildPublishNavigationSheetModule and Target ~= nil and Target.universeId ~= nil then ReactModule.createElement(PublishSheetControllerModule, {
 						isOpen = UseStateResult1,
 						target = Target,
 						onClose = UseResult1,
@@ -657,7 +702,7 @@ local List = {
 	{
 		[config.BuildAgents] = {
 			screen = function(p2)
-				-- upvalues: UseBuildPageLayoutModule (copy), useLiveSubagentTaskState (copy), UseLocalizationFunction (copy), LocalizationStringsModule (copy), ReactModule (copy), config (copy), BuildNavigationParamsModule (copy), SubagentStatusModule (copy), FullscreenPageWithSafeArea (copy), OverflowMenuPageShellModule (copy), FFlagBuildBackButtonChevronModule (copy), IconName (copy)
+				-- upvalues: UseBuildPageLayoutModule (copy), useLiveSubagentTaskState (copy), UseLocalizationFunction (copy), LocalizationStringsModule (copy), ReactModule (copy), config (copy), BuildNavigationParamsModule (copy), SubagentStatusModule (copy), FullscreenPageWithSafeArea (copy), OverflowMenuPageShellModule (copy)
 				local Navigation = p2.navigation
 				local UseBuildPageLayoutModuleResult = UseBuildPageLayoutModule()
 				local UseLiveSubagentTaskStateResult = useLiveSubagentTaskState(Navigation)
@@ -688,8 +733,7 @@ local List = {
 									subagentTaskGroupName = p3.name
 								})
 							end, { Navigation })
-						}),
-						closeIcon = if FFlagBuildBackButtonChevronModule then nil else IconName.ChevronLargeLeft
+						})
 					})
 				})
 			end
@@ -698,7 +742,7 @@ local List = {
 	{
 		[config.BuildAgentDetails] = {
 			screen = function(p2)
-				-- upvalues: UseBuildPageLayoutModule (copy), useLiveSubagentTaskState (copy), BuildNavigationParamsModule (copy), UseLocalizationFunction (copy), LocalizationStringsModule (copy), ReactModule (copy), SubagentStatusModule (copy), View (copy), FullscreenPageWithSafeArea (copy), OverflowMenuPageShellModule (copy), FFlagBuildBackButtonChevronModule (copy), IconName (copy)
+				-- upvalues: UseBuildPageLayoutModule (copy), useLiveSubagentTaskState (copy), BuildNavigationParamsModule (copy), UseLocalizationFunction (copy), LocalizationStringsModule (copy), ReactModule (copy), SubagentStatusModule (copy), View (copy), FullscreenPageWithSafeArea (copy), OverflowMenuPageShellModule (copy)
 				local Navigation = p2.navigation
 				local UseBuildPageLayoutModuleResult = UseBuildPageLayoutModule()
 				local UseLiveSubagentTaskStateResult = useLiveSubagentTaskState(Navigation)
@@ -735,8 +779,7 @@ local List = {
 							-- upvalues: Navigation (copy)
 							Navigation.goBack()
 						end, { Navigation }),
-						content = if Group == nil then ReactModule.createElement(View, { tag = "size-full" }) else ReactModule.createElement(SubagentStatusModule.AgentDetailsList, { testId = "BuildPage.AgentDetailsList", group = Group }),
-						closeIcon = if FFlagBuildBackButtonChevronModule then nil else IconName.ChevronLargeLeft
+						content = if Group == nil then ReactModule.createElement(View, { tag = "size-full" }) else ReactModule.createElement(SubagentStatusModule.AgentDetailsList, { testId = "BuildPage.AgentDetailsList", group = Group })
 					})
 				})
 			end
@@ -745,7 +788,7 @@ local List = {
 	{
 		[config.BuildCreatorCredit] = {
 			screen = function(p3)
-				-- upvalues: UseBuildPageLayoutModule (copy), UseLocalizationFunction (copy), LocalizationStringsModule (copy), ReactModule (copy), CreatorCreditPageContainerModule (copy), FullscreenPageWithSafeArea (copy), OverflowMenuPageShellModule (copy), CreatorCreditBalanceChipContainerModule (copy), FFlagBuildBackButtonChevronModule (copy), IconName (copy)
+				-- upvalues: UseBuildPageLayoutModule (copy), UseLocalizationFunction (copy), LocalizationStringsModule (copy), ReactModule (copy), CreatorCreditPageContainerModule (copy), FullscreenPageWithSafeArea (copy), OverflowMenuPageShellModule (copy), CreatorCreditBalanceChipContainerModule (copy)
 				local Navigation = p3.navigation
 				local UseBuildPageLayoutModuleResult = UseBuildPageLayoutModule()
 				
@@ -766,8 +809,7 @@ local List = {
 							Navigation.goBack()
 						end, { Navigation }),
 						content = ReactModule.createElement(CreatorCreditPageContainerModule, nil),
-						headerTrailing = ReactModule.createElement(CreatorCreditBalanceChipContainerModule),
-						closeIcon = if FFlagBuildBackButtonChevronModule then nil else IconName.ChevronLargeLeft
+						headerTrailing = ReactModule.createElement(CreatorCreditBalanceChipContainerModule)
 					})
 				})
 			end

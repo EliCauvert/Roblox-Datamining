@@ -20,6 +20,7 @@ local FFlagUserSearchAddFocusActionsSupport = require(Parent.SharedFlags).FFlagU
 local FFlagSduiUserSearchTile = require(Parent.SharedFlags).FFlagSduiUserSearchTile
 local FFlagFixUserSearchAddFriendFocusActionModule = require(UserSearch.Flags.FFlagFixUserSearchAddFriendFocusAction)
 local FFlagUserSearchHideFriendActionsForBlockedUsersModule = require(UserSearch.Flags.FFlagUserSearchHideFriendActionsForBlockedUsers)
+local FFlagUserSearchJoinPassStorePresenceModule = require(UserSearch.Flags.FFlagUserSearchJoinPassStorePresence)
 local UseIsUserBlockedModule = if FFlagUserSearchHideFriendActionsForBlockedUsersModule then require(script.Parent.useIsUserBlocked) else nil
 local FriendsStoreChallengeNetworkModule = require(UserSearch.Networking.friendsStoreChallengeNetwork)
 local FFlagEnableFriendsStoreChallengeInterceptor = require(Parent.SharedFlags).FFlagEnableFriendsStoreChallengeInterceptor
@@ -28,14 +29,15 @@ local Enums1 = require(Parent.DataHydration).Friends.Enums
 local FFlagMigrateFriendshipStatusesUserSearchModule = require(UserSearch.Flags.FFlagMigrateFriendshipStatusesUserSearch) or FFlagSduiUserSearchTile
 
 return function(p1, Callback)
-	-- upvalues: UseLocalUserIdFunction (copy), UseDispatchFunction (copy), UseRelationshipSelectorModule (copy), UseStyleFunction (copy), FFlagUserSearchHideFriendActionsForBlockedUsersModule (copy), UseIsUserBlockedModule (copy), UseJoinUserInExperienceFunction (copy), Contexts (copy), Images (copy), PresenceHelpersModule (copy), FFlagUserSearchAddFocusActionsSupport (copy), FocusNavigationEventNameEnum (copy), FFlagMigrateFriendshipStatusesUserSearchModule (copy), GetResult (copy), FriendsNetworkingModule (copy), SetCurrentToastMessageFunction (copy), EventNamesModule (copy), DashModule (copy), FFlagFixUserSearchAddFriendFocusActionModule (copy), Enums1 (copy), FFlagEnableFriendsStoreChallengeInterceptor (copy), FriendsStoreChallengeNetworkModule (copy), Enums (copy)
+	-- upvalues: UseLocalUserIdFunction (copy), UseDispatchFunction (copy), UseRelationshipSelectorModule (copy), UseStyleFunction (copy), FFlagUserSearchHideFriendActionsForBlockedUsersModule (copy), UseIsUserBlockedModule (copy), UseJoinUserInExperienceFunction (copy), Contexts (copy), FFlagUserSearchJoinPassStorePresenceModule (copy), Images (copy), PresenceHelpersModule (copy), FFlagUserSearchAddFocusActionsSupport (copy), FocusNavigationEventNameEnum (copy), FFlagMigrateFriendshipStatusesUserSearchModule (copy), GetResult (copy), FriendsNetworkingModule (copy), SetCurrentToastMessageFunction (copy), EventNamesModule (copy), DashModule (copy), FFlagFixUserSearchAddFriendFocusActionModule (copy), Enums1 (copy), FFlagEnableFriendsStoreChallengeInterceptor (copy), FriendsStoreChallengeNetworkModule (copy), Enums (copy)
 	local UseLocalUserIdResult = UseLocalUserIdFunction()
 	local UseDispatchResult = UseDispatchFunction()
 	local UseRelationshipSelectorModuleResult = UseRelationshipSelectorModule(p1.userId)
 	local UseStyleResult = UseStyleFunction()
 	local UseIsUserBlockedModuleResult = if FFlagUserSearchHideFriendActionsForBlockedUsersModule then UseIsUserBlockedModule(p1.userId) else false
 	local UseJoinUserInExperienceResult = UseJoinUserInExperienceFunction(p1.userId, {
-		analyticProps = { context = Contexts.PlayerSearch, subpage = p1.subpage }
+		analyticProps = { context = Contexts.PlayerSearch, subpage = p1.subpage },
+		presence = if FFlagUserSearchJoinPassStorePresenceModule then p1.userPresence else nil
 	})
 	local IconsCommonPlusSmall = if p1.shouldUseCompactTiles then Images["icons/common/plus_small"] else Images["icons/actions/friends/friendAdd"]
 	local IconsCommonPlusSmall1 = if p1.shouldUseCompactTiles then Images["icons/common/plus_small"] else Images["icons/actions/friends/friendpending"]

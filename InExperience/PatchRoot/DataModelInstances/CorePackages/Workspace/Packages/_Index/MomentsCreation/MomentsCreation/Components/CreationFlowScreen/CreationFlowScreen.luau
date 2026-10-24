@@ -24,6 +24,7 @@ local SessionManager = MomentsCommonModule.Analytics.SessionManager
 local FunnelEventNames = MomentsCommonModule.Analytics.FunnelEventNames
 local FireAnalyticsEventModule = require(MomentsCreation.Analytics.fireAnalyticsEvent)
 local MakeCreationEventFieldsModule = require(MomentsCreation.Analytics.makeCreationEventFields)
+local IsAvatarMomentModule = require(MomentsCreation.Utils.isAvatarMoment)
 local GetFFlagEnableMomentTextGenerationFunction = MomentsCommonModule.Flags.GetFFlagEnableMomentTextGeneration
 local GetFFlagMomentsCreationSaveDraftFunction = MomentsCommonModule.Flags.GetFFlagMomentsCreationSaveDraft
 local UseSignalStateFunction = require(Parent.SignalsReact).useSignalState
@@ -50,6 +51,8 @@ local FStringMomentsCreationToolsIxpLayer2Module = require(MomentsCreation.Flags
 local FFlagMomentsCreationToolsIxpEnabled3Module = require(MomentsCreation.Flags.FFlagMomentsCreationToolsIxpEnabled3)
 local FStringMomentsCreationToolsIxpLayer3Module = require(MomentsCreation.Flags.FStringMomentsCreationToolsIxpLayer3)
 local FFlagMomentsTextOverlayDragToDeleteRefinementModule = require(MomentsCreation.Flags.FFlagMomentsTextOverlayDragToDeleteRefinement)
+local FFlagMomentsCreateAvatarPosts = require(Parent.SharedFlags).FFlagMomentsCreateAvatarPosts
+local FFlagMomentsRenderCreatePostStatus = require(Parent.SharedFlags).FFlagMomentsRenderCreatePostStatus
 local LogMomentsLayerExposureFunction = MomentsCommonModule.Utils.logMomentsLayerExposure
 local StepStubModule = require(script.Parent.StepStub)
 local CreationFlowStateModule = require(MomentsCreation.Enums.CreationFlowState)
@@ -99,7 +102,7 @@ local function GallerySourceView(p1)
 end
 
 local function CreationFlowContent(p1)
-	-- upvalues: UseCreationControllerFunction (copy), GetFFlagMomentsCreationSaveDraftFunction (copy), UseDraftRestoreEffectModule (copy), UseDraftSaveEffectModule (copy), FFlagMomentsTTSDraftRestoreModule (copy), UseRestoredVoiceoverCheckModule (copy), UseDeviceInsetsFunction (copy), UseTokensFunction (copy), UseFormFactorFunction (copy), UseToggleStateFunction (copy), UseAutoDismissStateModule (copy), UseSignalStateFunction (copy), UseDescriptionKeyboardInsetModule (copy), CreationFlowStateModule (copy), GetFFlagMomentsTTSAudioOverlayModule (copy), FFlagMomentsCreationMusicEditorRedesignModule (copy), ReactModule (copy), UseMemoFunction (copy), UseCallbackFunction (copy), SessionManager (copy), FunnelEventNames (copy), CryoModule (copy), MakeCreationEventFieldsModule (copy), FireAnalyticsEventModule (copy), EventNames (copy), DialogTypeModule (copy), UseRefFunction (copy), UseEffectFunction (copy), GetFFlagMomentsStickerButtonFunction (copy), FFlagMomentsCreationToolsIxpEnabledModule (copy), LogMomentsLayerExposureFunction (copy), FStringMomentsCreationToolsIxpLayerModule (copy), FFlagMomentsCreationToolsIxpEnabled2Module (copy), FStringMomentsCreationToolsIxpLayer2Module (copy), FFlagMomentsCreationToolsIxpEnabled3Module (copy), FStringMomentsCreationToolsIxpLayer3Module (copy), ExitConfirmationDialogModule (copy), TextFilteredDialogModule (copy), GenerateTextOptionsDialogModule (copy), VoiceoverErrorDialogModule (copy), VoiceoverDeleteConfirmDialogModule (copy), VoiceSelectorDialogModule (copy), StepStubModule (copy), SignalsModule (copy), FFlagMomentsTextOverlayDragToDeleteRefinementModule (copy), View (copy), StateLayer (copy), FormFactor (copy), noopActivated (copy), VoiceBackControlsModule (copy), FFlagMomentsTextOverlayTopNavModule (copy), GetFFlagMomentsCreationCloseButtonZIndexFixModule (copy), Icon (copy), FoundationModule (copy), CaptureViewModule (copy), GradientBackdrop (copy), MusicChipModule (copy), FFlagMomentsCreationMusicChipRemoveButtonModule (copy), PlaybackControlsModule (copy), EditCTABarModule (copy), GetFFlagEnableMomentTextGenerationFunction (copy), GetFFlagMomentsTTSCoachmarkModule (copy), GallerySourceView (copy), GalleryViewModule (copy), SampleCapturesModule1 (copy), PreviewViewModule (copy), DescriptionViewModule (copy), DockedEditorContextModule (copy), CreationMediaProviderModule (copy)
+	-- upvalues: UseCreationControllerFunction (copy), GetFFlagMomentsCreationSaveDraftFunction (copy), UseDraftRestoreEffectModule (copy), UseDraftSaveEffectModule (copy), FFlagMomentsTTSDraftRestoreModule (copy), UseRestoredVoiceoverCheckModule (copy), UseDeviceInsetsFunction (copy), UseTokensFunction (copy), UseFormFactorFunction (copy), UseToggleStateFunction (copy), UseAutoDismissStateModule (copy), UseSignalStateFunction (copy), FFlagMomentsCreateAvatarPosts (copy), IsAvatarMomentModule (copy), FFlagMomentsRenderCreatePostStatus (copy), UseDescriptionKeyboardInsetModule (copy), CreationFlowStateModule (copy), GetFFlagMomentsTTSAudioOverlayModule (copy), FFlagMomentsCreationMusicEditorRedesignModule (copy), ReactModule (copy), UseMemoFunction (copy), UseCallbackFunction (copy), SessionManager (copy), FunnelEventNames (copy), CryoModule (copy), MakeCreationEventFieldsModule (copy), FireAnalyticsEventModule (copy), EventNames (copy), DialogTypeModule (copy), UseRefFunction (copy), UseEffectFunction (copy), GetFFlagMomentsStickerButtonFunction (copy), FFlagMomentsCreationToolsIxpEnabledModule (copy), LogMomentsLayerExposureFunction (copy), FStringMomentsCreationToolsIxpLayerModule (copy), FFlagMomentsCreationToolsIxpEnabled2Module (copy), FStringMomentsCreationToolsIxpLayer2Module (copy), FFlagMomentsCreationToolsIxpEnabled3Module (copy), FStringMomentsCreationToolsIxpLayer3Module (copy), ExitConfirmationDialogModule (copy), TextFilteredDialogModule (copy), GenerateTextOptionsDialogModule (copy), VoiceoverErrorDialogModule (copy), VoiceoverDeleteConfirmDialogModule (copy), VoiceSelectorDialogModule (copy), StepStubModule (copy), SignalsModule (copy), FFlagMomentsTextOverlayDragToDeleteRefinementModule (copy), MomentsCreation (copy), View (copy), StateLayer (copy), FormFactor (copy), noopActivated (copy), VoiceBackControlsModule (copy), FFlagMomentsTextOverlayTopNavModule (copy), GetFFlagMomentsCreationCloseButtonZIndexFixModule (copy), Icon (copy), FoundationModule (copy), CaptureViewModule (copy), GradientBackdrop (copy), MusicChipModule (copy), FFlagMomentsCreationMusicChipRemoveButtonModule (copy), PlaybackControlsModule (copy), EditCTABarModule (copy), GetFFlagEnableMomentTextGenerationFunction (copy), GetFFlagMomentsTTSCoachmarkModule (copy), GallerySourceView (copy), GalleryViewModule (copy), SampleCapturesModule1 (copy), PreviewViewModule (copy), DescriptionViewModule (copy), DockedEditorContextModule (copy), CreationMediaProviderModule (copy)
 	local UseCreationControllerResult = UseCreationControllerFunction()
 	
 	if GetFFlagMomentsCreationSaveDraftFunction() then
@@ -117,12 +120,14 @@ local function CreationFlowContent(p1)
 	local UseAutoDismissStateModuleResult, UseAutoDismissStateModuleResult2 = UseAutoDismissStateModule()
 	local UseSignalStateResult = UseSignalStateFunction(UseCreationControllerResult.getStep)
 	local UseSignalStateResult1 = UseSignalStateFunction(UseCreationControllerResult.getSelectedCapture)
-	local UseSignalStateResult2 = UseSignalStateFunction(UseCreationControllerResult.getComposedEdits)
-	local UseSignalStateResult3 = UseSignalStateFunction(UseCreationControllerResult.getAvailableTools)
-	local UseSignalStateResult4 = UseSignalStateFunction(UseCreationControllerResult.getActiveTool)
-	local UseSignalStateResult5 = UseSignalStateFunction(UseCreationControllerResult.getActiveModal)
-	local UseSignalStateResult6 = UseSignalStateFunction(UseCreationControllerResult.getIsGenerating)
-	local Music = UseSignalStateResult2.music
+	local UseSignalStateResult2 = if FFlagMomentsCreateAvatarPosts and IsAvatarMomentModule(UseSignalStateResult1) then UseSignalStateResult1 else nil
+	local UseSignalStateResult3 = UseSignalStateFunction(UseCreationControllerResult.getComposedEdits)
+	local UseSignalStateResult4 = UseSignalStateFunction(UseCreationControllerResult.getAvailableTools)
+	local UseSignalStateResult5 = UseSignalStateFunction(UseCreationControllerResult.getActiveTool)
+	local UseSignalStateResult6 = UseSignalStateFunction(UseCreationControllerResult.getActiveModal)
+	local UseSignalStateResult7 = UseSignalStateFunction(UseCreationControllerResult.getIsGenerating)
+	local UseSignalStateResult8 = if FFlagMomentsRenderCreatePostStatus then UseSignalStateFunction(UseCreationControllerResult.getIsPublishing) else nil
+	local Music = UseSignalStateResult3.music
 	local UseDescriptionKeyboardInsetModuleResult, UseDescriptionKeyboardInsetModuleResult2 = UseDescriptionKeyboardInsetModule(UseSignalStateResult == CreationFlowStateModule.Description or GetFFlagMomentsTTSAudioOverlayModule and UseSignalStateResult == CreationFlowStateModule.Voice)
 	local v2 = 0
 	local Value = nil
@@ -269,24 +274,24 @@ local function CreationFlowContent(p1)
 		end
 	end, { UseSignalStateResult, UseToggleStateResult.disable })
 	local UseCallbackResult10 = UseCallbackFunction(function()
-		-- upvalues: UseSignalStateResult5 (copy), DialogTypeModule (upval), ReactModule (upval), ExitConfirmationDialogModule (upval), TextFilteredDialogModule (upval), GenerateTextOptionsDialogModule (upval), VoiceoverErrorDialogModule (upval), VoiceoverDeleteConfirmDialogModule (upval), VoiceSelectorDialogModule (upval)
-		return if UseSignalStateResult5 and UseSignalStateResult5.modalType then if UseSignalStateResult5.modalType == DialogTypeModule.ExitCreationConfirmation then ReactModule.createElement(ExitConfirmationDialogModule, UseSignalStateResult5.modalProps) elseif UseSignalStateResult5.modalType == DialogTypeModule.TextFiltered then ReactModule.createElement(TextFilteredDialogModule, UseSignalStateResult5.modalProps) elseif UseSignalStateResult5.modalType == DialogTypeModule.GenerateTextOptions then ReactModule.createElement(GenerateTextOptionsDialogModule, UseSignalStateResult5.modalProps) elseif UseSignalStateResult5.modalType == DialogTypeModule.VoiceoverError then ReactModule.createElement(VoiceoverErrorDialogModule, UseSignalStateResult5.modalProps) elseif UseSignalStateResult5.modalType == DialogTypeModule.VoiceoverDelete then ReactModule.createElement(VoiceoverDeleteConfirmDialogModule, UseSignalStateResult5.modalProps) elseif UseSignalStateResult5.modalType == DialogTypeModule.VoiceSelector then ReactModule.createElement(VoiceSelectorDialogModule, UseSignalStateResult5.modalProps) else nil else nil
-	end, { UseSignalStateResult5 })
+		-- upvalues: UseSignalStateResult6 (copy), DialogTypeModule (upval), ReactModule (upval), ExitConfirmationDialogModule (upval), TextFilteredDialogModule (upval), GenerateTextOptionsDialogModule (upval), VoiceoverErrorDialogModule (upval), VoiceoverDeleteConfirmDialogModule (upval), VoiceSelectorDialogModule (upval)
+		return if UseSignalStateResult6 and UseSignalStateResult6.modalType then if UseSignalStateResult6.modalType == DialogTypeModule.ExitCreationConfirmation then ReactModule.createElement(ExitConfirmationDialogModule, UseSignalStateResult6.modalProps) elseif UseSignalStateResult6.modalType == DialogTypeModule.TextFiltered then ReactModule.createElement(TextFilteredDialogModule, UseSignalStateResult6.modalProps) elseif UseSignalStateResult6.modalType == DialogTypeModule.GenerateTextOptions then ReactModule.createElement(GenerateTextOptionsDialogModule, UseSignalStateResult6.modalProps) elseif UseSignalStateResult6.modalType == DialogTypeModule.VoiceoverError then ReactModule.createElement(VoiceoverErrorDialogModule, UseSignalStateResult6.modalProps) elseif UseSignalStateResult6.modalType == DialogTypeModule.VoiceoverDelete then ReactModule.createElement(VoiceoverDeleteConfirmDialogModule, UseSignalStateResult6.modalProps) elseif UseSignalStateResult6.modalType == DialogTypeModule.VoiceSelector then ReactModule.createElement(VoiceSelectorDialogModule, UseSignalStateResult6.modalProps) else nil else nil
+	end, { UseSignalStateResult6 })
 	local UseCallbackResult11 = UseCallbackFunction(function(Presentation)
-		-- upvalues: UseSignalStateResult4 (copy), UseSignalStateResult (copy), UseCreationControllerResult (copy), ReactModule (upval), StepStubModule (upval)
-		if UseSignalStateResult4 == nil or UseSignalStateResult4.presentation ~= Presentation or UseSignalStateResult ~= UseSignalStateResult4.step then
+		-- upvalues: UseSignalStateResult5 (copy), UseSignalStateResult (copy), UseCreationControllerResult (copy), ReactModule (upval), StepStubModule (upval)
+		if UseSignalStateResult5 == nil or UseSignalStateResult5.presentation ~= Presentation or UseSignalStateResult ~= UseSignalStateResult5.step then
 			return nil
 		end
-		if UseSignalStateResult4.renderEditor ~= nil then
-			local RenderEditorResult = UseSignalStateResult4.renderEditor(UseCreationControllerResult)
+		if UseSignalStateResult5.renderEditor ~= nil then
+			local RenderEditorResult = UseSignalStateResult5.renderEditor(UseCreationControllerResult)
 			
 			if RenderEditorResult ~= nil then
 				return RenderEditorResult
 			end
 		end
-		return ReactModule.createElement(StepStubModule(UseSignalStateResult4.kind), {})
+		return ReactModule.createElement(StepStubModule(UseSignalStateResult5.kind), {})
 	end, {
-		UseSignalStateResult4,
+		UseSignalStateResult5,
 		UseSignalStateResult,
 		UseCreationControllerResult
 	})
@@ -308,7 +313,7 @@ local function CreationFlowContent(p1)
 		
 		return { get = Signal, set = Signal2 }
 	end, {})
-	local UseSignalStateResult7 = UseSignalStateFunction(UseMemoResult2.get)
+	local UseSignalStateResult9 = UseSignalStateFunction(UseMemoResult2.get)
 	
 	if FFlagMomentsTextOverlayDragToDeleteRefinementModule then
 		UseEffectFunction(function()
@@ -324,6 +329,31 @@ local function CreationFlowContent(p1)
 			setIsOverlayDragging = UseMemoResult2.set
 		}
 	end, { UseMemoResult, UseMemoResult1, UseMemoResult2 })
+	local UseCallbackResult12 = UseCallbackFunction(function(Frame)
+		-- upvalues: UseMemoResult (copy)
+		UseMemoResult.setItemSize(Frame.AbsoluteSize)
+	end, { UseMemoResult })
+	local UseCallbackResult13 = UseCallbackFunction(function(p2)
+		-- upvalues: UseMemoResult1 (copy)
+		UseMemoResult1.setItemResolution(p2)
+	end, { UseMemoResult1 })
+	local UseMemoResult4 = UseMemoFunction(function()
+		-- upvalues: UseSignalStateResult4 (copy), UseCreationControllerResult (copy), UseMemoResult3 (copy)
+		local RenderPreviewLayerResults = {}
+		
+		for _, value in UseSignalStateResult4 do
+			if value.renderPreviewLayer ~= nil then
+				RenderPreviewLayerResults[value.kind .. "PreviewLayer"] = value.renderPreviewLayer(UseCreationControllerResult, UseMemoResult3)
+			end
+		end
+		return RenderPreviewLayerResults
+	end, {
+		UseSignalStateResult4,
+		UseCreationControllerResult,
+		UseMemoResult3
+	})
+	local Fit = if UseToggleStateResult.enabled then Enum.ScaleType.Fit else Enum.ScaleType.Crop
+	local AvatarMomentContainerModule = require(MomentsCreation.Components.AvatarMomentContainer)
 	
 	return ReactModule.createElement(CreationMediaProviderModule, {
 		preview = UseCreationControllerResult.preview,
@@ -345,7 +375,7 @@ local function CreationFlowContent(p1)
 			stateLayer = StateLayer
 		}, {
 			VoiceBackControls = if GetFFlagMomentsTTSAudioOverlayModule and UseSignalStateResult == CreationFlowStateModule.Voice then ReactModule.createElement(VoiceBackControlsModule) else nil,
-			CloseButtonContainer = if GetFFlagMomentsTTSAudioOverlayModule and UseSignalStateResult == CreationFlowStateModule.Voice then nil elseif v2 > 0 then nil elseif FFlagMomentsTextOverlayDragToDeleteRefinementModule and UseSignalStateResult7 then nil elseif FFlagMomentsTextOverlayTopNavModule and UseSignalStateResult == CreationFlowStateModule.TextOverlay then nil else ReactModule.createElement(View, {
+			CloseButtonContainer = if GetFFlagMomentsTTSAudioOverlayModule and UseSignalStateResult == CreationFlowStateModule.Voice then nil elseif v2 > 0 then nil elseif FFlagMomentsTextOverlayDragToDeleteRefinementModule and UseSignalStateResult9 then nil elseif FFlagMomentsTextOverlayTopNavModule and UseSignalStateResult == CreationFlowStateModule.TextOverlay then nil else ReactModule.createElement(View, {
 				tag = "position-top-right anchor-top-right auto-xy",
 				padding = {
 					top = UDim.new(0, UseDeviceInsetsResult.top + UseTokensResult.Padding.Medium),
@@ -398,33 +428,20 @@ local function CreationFlowContent(p1)
 								affordance = FoundationModule.Enums.StateLayerAffordance.None
 							}
 						}),
-						CaptureView = ReactModule.createElement(CaptureViewModule, {
+						CaptureView = if UseSignalStateResult2 == nil then ReactModule.createElement(CaptureViewModule, {
 							preview = UseCreationControllerResult.preview,
-							scaleType = if UseToggleStateResult.enabled then Enum.ScaleType.Fit else Enum.ScaleType.Crop,
-							onAbsoluteSizeChanged = UseCallbackFunction(function(Frame)
-								-- upvalues: UseMemoResult (copy)
-								UseMemoResult.setItemSize(Frame.AbsoluteSize)
-							end, { UseMemoResult }),
-							onResolutionChanged = UseCallbackFunction(function(p2)
-								-- upvalues: UseMemoResult1 (copy)
-								UseMemoResult1.setItemResolution(p2)
-							end, { UseMemoResult1 }),
+							scaleType = Fit,
+							onAbsoluteSizeChanged = UseCallbackResult12,
+							onResolutionChanged = UseCallbackResult13,
 							ttsAudio = UseCreationControllerResult.ttsAudio
-						}, (UseMemoFunction(function()
-							-- upvalues: UseSignalStateResult3 (copy), UseCreationControllerResult (copy), UseMemoResult3 (copy)
-							local RenderPreviewLayerResults = {}
-							
-							for _, value in UseSignalStateResult3 do
-								if value.renderPreviewLayer ~= nil then
-									RenderPreviewLayerResults[value.kind .. "PreviewLayer"] = value.renderPreviewLayer(UseCreationControllerResult, UseMemoResult3)
-								end
-							end
-							return RenderPreviewLayerResults
-						end, {
-							UseSignalStateResult3,
-							UseCreationControllerResult,
-							UseMemoResult3
-						}))),
+						}, UseMemoResult4) else nil,
+						AvatarMomentView = if UseSignalStateResult2 == nil then nil else ReactModule.createElement(AvatarMomentContainerModule, {
+							preview = UseCreationControllerResult.preview,
+							avatarMoment = UseSignalStateResult2,
+							onAbsoluteSizeChanged = UseCallbackResult12,
+							onResolutionChanged = UseCallbackResult13,
+							ttsAudio = UseCreationControllerResult.ttsAudio
+						}, UseMemoResult4),
 						VoiceTopScrim = if GetFFlagMomentsTTSAudioOverlayModule and UseSignalStateResult == CreationFlowStateModule.Voice then ReactModule.createElement(GradientBackdrop, {
 							rotation = 90,
 							zIndex = 2,
@@ -444,7 +461,7 @@ local function CreationFlowContent(p1)
 									right = UDim.new(0, (math.max(UseDeviceInsetsResult.right, UseTokensResult.Padding.Large)))
 								}
 							}, {
-								MusicIndicator = if Music and (UseSignalStateResult == CreationFlowStateModule.Preview or UseSignalStateResult == CreationFlowStateModule.Description) then if FFlagMomentsTextOverlayDragToDeleteRefinementModule and UseSignalStateResult7 then nil else ReactModule.createElement(View, { tag = "position-bottom-left anchor-bottom-left auto-xy" }, {
+								MusicIndicator = if Music and (UseSignalStateResult == CreationFlowStateModule.Preview or UseSignalStateResult == CreationFlowStateModule.Description) then if FFlagMomentsTextOverlayDragToDeleteRefinementModule and UseSignalStateResult9 then nil else ReactModule.createElement(View, { tag = "position-bottom-left anchor-bottom-left auto-xy" }, {
 									MusicChip = ReactModule.createElement(MusicChipModule, {
 										musicAssetId = Music.assetId,
 										onActivated = UseCallbackResult5,
@@ -452,7 +469,7 @@ local function CreationFlowContent(p1)
 									})
 								}) else nil
 							}),
-							PlaybackControls = if UseSignalStateResult1 and UseSignalStateResult1.CaptureType == Enum.CaptureType.Video and (UseSignalStateResult == CreationFlowStateModule.Gallery or UseSignalStateResult == CreationFlowStateModule.Preview or GetFFlagMomentsTTSAudioOverlayModule and UseSignalStateResult == CreationFlowStateModule.Voice) and (UseAutoDismissStateModuleResult or GetFFlagMomentsTTSAudioOverlayModule and UseSignalStateResult == CreationFlowStateModule.Voice) then if UseSignalStateResult7 then nil else ReactModule.createElement(PlaybackControlsModule, {
+							PlaybackControls = if UseSignalStateResult1 and UseSignalStateResult1.CaptureType == Enum.CaptureType.Video and (UseSignalStateResult == CreationFlowStateModule.Gallery or UseSignalStateResult == CreationFlowStateModule.Preview or GetFFlagMomentsTTSAudioOverlayModule and UseSignalStateResult == CreationFlowStateModule.Voice) and (UseAutoDismissStateModuleResult or GetFFlagMomentsTTSAudioOverlayModule and UseSignalStateResult == CreationFlowStateModule.Voice) then if UseSignalStateResult9 then nil else ReactModule.createElement(PlaybackControlsModule, {
 								layoutOrder = 2,
 								preview = UseCreationControllerResult.preview,
 								toggleFitMode = UseToggleStateResult.toggle,
@@ -472,13 +489,13 @@ local function CreationFlowContent(p1)
 						}),
 						EditCTABar = if UseSignalStateResult == CreationFlowStateModule.Preview then ReactModule.createElement(EditCTABarModule, {
 							zIndex = 4,
-							tools = UseSignalStateResult3,
+							tools = UseSignalStateResult4,
 							onToolSelected = UseCallbackResult4,
 							showText = UseAutoDismissStateModuleResult,
-							isLoadingMap = if UseSignalStateResult6 then { generateText = true } else nil,
-							isDisabledMap = if GetFFlagEnableMomentTextGenerationFunction() and UseSignalStateResult6 then { text = true } else nil,
+							isLoadingMap = if UseSignalStateResult7 then { generateText = true } else nil,
+							isDisabledMap = if GetFFlagEnableMomentTextGenerationFunction() and UseSignalStateResult7 then { text = true } else nil,
 							onDisabledToolActivated = UseCreationControllerResult.onDisabledToolActivated,
-							hidden = if FFlagMomentsTextOverlayDragToDeleteRefinementModule then UseSignalStateResult7 else nil,
+							hidden = if FFlagMomentsTextOverlayDragToDeleteRefinementModule then UseSignalStateResult9 else nil,
 							coachmark = if GetFFlagMomentsTTSAudioOverlayModule and GetFFlagMomentsTTSCoachmarkModule() then require(script.Parent.makeVoiceCoachmarkConfig)(GetFFlagMomentsTTSAudioOverlayModule, GetFFlagMomentsTTSCoachmarkModule()) else nil
 						}) else nil
 					}),
@@ -505,6 +522,7 @@ local function CreationFlowContent(p1)
 					ActiveStepEditor = UseCallbackResult11("Step"),
 					DescriptionView = if UseSignalStateResult == CreationFlowStateModule.Description then ReactModule.createElement(DescriptionViewModule, {
 						layoutOrder = 2,
+						isPublishing = if FFlagMomentsRenderCreatePostStatus then UseSignalStateResult8 else nil,
 						onPublish = UseCallbackResult8,
 						onReturnToEditing = UseCallbackResult3
 					}) else nil
@@ -517,18 +535,32 @@ local function CreationFlowContent(p1)
 end
 
 return function(p2)
-	-- upvalues: ReactModule (copy), IsTextFilteredModule (copy), v1 (copy), PublishMomentModule (copy), FoundationProvider (copy), ColorMode (copy), CreationControllerProvider (copy), CreationFlowContent (copy)
+	-- upvalues: FFlagMomentsRenderCreatePostStatus (copy), ReactModule (copy), IsTextFilteredModule (copy), v1 (copy), PublishMomentModule (copy), FoundationProvider (copy), ColorMode (copy), CreationControllerProvider (copy), FFlagMomentsCreateAvatarPosts (copy), CreationFlowContent (copy)
 	local OnExit = p2.onExit
 	local Host = p2.host
 	local CaptureSource = p2.captureSource
+	local UseRefResult = nil
+	
+	if FFlagMomentsRenderCreatePostStatus then
+		UseRefResult = ReactModule.useRef(p2.onPublishFinished)
+		UseRefResult.current = p2.onPublishFinished
+	end
 	local UseMemoResult = ReactModule.useMemo(function()
-		-- upvalues: Host (copy), OnExit (copy), CaptureSource (copy), IsTextFilteredModule (upval), v1 (upval), PublishMomentModule (upval)
+		-- upvalues: Host (copy), OnExit (copy), FFlagMomentsRenderCreatePostStatus (upval), UseRefResult (ref), CaptureSource (copy), IsTextFilteredModule (upval), v1 (upval), PublishMomentModule (upval)
 		return if Host == nil then {
 			exitCreationFlow = OnExit,
+			onPublishFinished = if FFlagMomentsRenderCreatePostStatus then function(p3)
+				-- upvalues: UseRefResult (upval)
+				local CurrentFunction: (any) -> () = UseRefResult.current
+				
+				if CurrentFunction ~= nil then
+					CurrentFunction(p3)
+				end
+			end else nil,
 			captureSource = CaptureSource,
 			isTextFiltered = IsTextFilteredModule,
 			createMoment = if v1 then function(_, _, p3)
-				print(`[moments-creation] dev publish (not uploaded): "{p13}"`)
+				print(`[moments-creation] dev publish (not uploaded): "{p14}"`)
 			end else PublishMomentModule
 		} else Host
 	end, { Host, OnExit, CaptureSource })
@@ -536,7 +568,8 @@ return function(p2)
 	return ReactModule.createElement(FoundationProvider, { colorMode = ColorMode.Dark }, {
 		Root = ReactModule.createElement(CreationControllerProvider, {
 			host = UseMemoResult,
-			excludeGallery = p2.excludeGallery
+			excludeGallery = p2.excludeGallery,
+			initialAvatarMoment = if FFlagMomentsCreateAvatarPosts then p2.initialAvatarMoment else nil
 		}, {
 			Content = ReactModule.createElement(CreationFlowContent, {
 				excludeGallery = p2.excludeGallery,

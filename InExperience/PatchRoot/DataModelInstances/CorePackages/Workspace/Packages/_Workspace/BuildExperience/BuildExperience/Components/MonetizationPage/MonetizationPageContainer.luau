@@ -223,7 +223,7 @@ local function getProductLocalizationKeys()
 	return {
 		priceUnavailable = LocalizationStringsModule.MONETIZATION_PRICE_UNAVAILABLE,
 		productType = LocalizationStringsModule.AGENT_DEV_PRODUCT_TITLE,
-		productSection = if FFlagBuildExperienceMonetizationMultiKindModule then LocalizationStringsModule.MONETIZATION_PRODUCTS else nil,
+		productSection = if FFlagBuildExperienceMonetizationMultiKindModule then LocalizationStringsModule.MONETIZATION_DEVELOPER_PRODUCTS else nil,
 		gamePassType = if FFlagBuildExperienceMonetizationMultiKindModule then LocalizationStringsModule.MONETIZATION_GAME_PASS else nil,
 		gamePassSection = if FFlagBuildExperienceMonetizationMultiKindModule then LocalizationStringsModule.MONETIZATION_PASSES else nil,
 		subscriptionType = if FFlagBuildExperienceMonetizationMultiKindModule then LocalizationStringsModule.AGENT_SUBSCRIPTION_TITLE else nil,

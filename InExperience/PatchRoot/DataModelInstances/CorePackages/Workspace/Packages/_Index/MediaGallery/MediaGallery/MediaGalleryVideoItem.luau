@@ -14,9 +14,11 @@ local FFlagMediaGalleryVideoVisiblePercent = require(Parent.SharedFlags).FFlagMe
 local FFlagLuaAppEdpMomentVideo = require(Parent.SharedFlags).FFlagLuaAppEdpMomentVideo
 local GetImageUriModule = require(MediaGallery.getImageUri)
 local MediaGalleryConstantsModule = require(MediaGallery.MediaGalleryConstants)
+local FFlagLuaAppVideoLoadFailureFallback = require(Parent.SharedFlags).FFlagLuaAppVideoLoadFailureFallback
+local FFlagFixNonVisibleEdpVideoPlayback = require(Parent.SharedFlags).FFlagFixNonVisibleEdpVideoPlayback
 
 return ReactModule.memo(function(p1)
-	-- upvalues: UseTokensFunction (copy), GetImageUriModule (copy), VideoPlaybackCoordinator (copy), MediaGalleryConstantsModule (copy), FFlagMediaGalleryVideoVisiblePercent (copy), FFlagLuaAppMediaGalleryGamepadSupport (copy), ReactModule (copy), VideoPlayer (copy), FFlagLuaAppEdpMomentVideo (copy), VideoPlaybackDetector (copy), FFlagLuaAppGameTileSelectionVideoPlayback (copy), VideoPlaybackDetectionMethod (copy)
+	-- upvalues: UseTokensFunction (copy), GetImageUriModule (copy), VideoPlaybackCoordinator (copy), MediaGalleryConstantsModule (copy), FFlagMediaGalleryVideoVisiblePercent (copy), FFlagLuaAppMediaGalleryGamepadSupport (copy), ReactModule (copy), VideoPlayer (copy), FFlagLuaAppEdpMomentVideo (copy), FFlagFixNonVisibleEdpVideoPlayback (copy), FFlagLuaAppVideoLoadFailureFallback (copy), VideoPlaybackDetector (copy), FFlagLuaAppGameTileSelectionVideoPlayback (copy), VideoPlaybackDetectionMethod (copy)
 	local UseTokensResult = UseTokensFunction()
 	local AssetId: string = `rbxassetid://{p1.videoId}`
 	local ImageUriModule = GetImageUriModule(p1.thumbnail or "")
@@ -64,7 +66,7 @@ return ReactModule.memo(function(p1)
 			video = AssetId,
 			accessContext = if FFlagLuaAppEdpMomentVideo then p1.videoAccessContext else nil,
 			thumbnail = ImageUriModule,
-			shouldStartPlayback = UseStateResult,
+			shouldStartPlayback = if FFlagFixNonVisibleEdpVideoPlayback then UseStateResult and (NoCurrentIndex and not p1.isMediaGalleryOccluded) else UseStateResult,
 			muted = p1.muted == nil or p1.muted,
 			looped = p1.looped ~= nil and p1.looped,
 			Size = UDim2.fromScale(1, 1),
@@ -98,6 +100,7 @@ return ReactModule.memo(function(p1)
 			}),
 			onVideoProgressChanged = OnVideoProgressChanged,
 			onVideoEnded = OnVideoEnded,
+			onVideoLoadFailed = if FFlagLuaAppVideoLoadFailureFallback and NoCurrentIndex and not p1.isMediaGalleryOccluded then p1.onVideoLoadFailed else nil,
 			toggleVideoPlaybackSignal = ToggleVideoPlaybackSignal,
 			toggleMuteSignal = ToggleMuteSignal,
 			onMutedChanged = OnMutedChanged,

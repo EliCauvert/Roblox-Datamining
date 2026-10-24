@@ -3,6 +3,7 @@ local Parent = DataHydration.Parent
 local HttpClientModule = require(Parent.HttpClient)
 local SignalsModule = require(Parent.Signals)
 local SharedFlagsModule = require(Parent.SharedFlags)
+local SignalsUtilsModule = require(Parent.SignalsUtils)
 local FFlagBuildAgentAdCampaignCardModule = require(script.Parent.FFlagBuildAgentAdCampaignCard)
 local FFlagBuildAgentAdCampaignToolCallStatusFallback = require(Parent.SharedFlags).FFlagBuildAgentAdCampaignToolCallStatusFallback
 local DecodeAdCampaignToolCallStatusResultModule = if FFlagBuildAgentAdCampaignToolCallStatusFallback then require(script.Parent.decodeAdCampaignToolCallStatusResult) else nil
@@ -16,12 +17,18 @@ local CreateTurnHandleModule = require(script.Parent.createTurnHandle)
 local ExperimentOverrideModule = require(script.Parent.experimentOverride)
 local OnTerminalModule = require(script.Parent.onTerminal)
 local RpcDecoderModule = require(script.Parent.rpcDecoder)
+local GetFundingErrorModule = require(script.Parent.getFundingError)
 local _ = require(script.Parent.types)
 local WithCsrfRetryModule = require(DataHydration.withCsrfRetry)
+local FFlagBuildExperienceModelPickerData = SharedFlagsModule.FFlagBuildExperienceModelPickerData
 local FFlagBuildExperiencePromptFailureTelemetry = SharedFlagsModule.FFlagBuildExperiencePromptFailureTelemetry
 local FFlagBuildExperienceLibrary = SharedFlagsModule.FFlagBuildExperienceLibrary
 
 local function _(p1)
+	assert(p1 == nil or (p1 == "default" or p1 == "advanced"), "invalid model tier")
+end
+
+local _ = function(p1)
 	return if typeof(p1) == "string" and p1 ~= "" then p1 else nil
 end
 
@@ -60,23 +67,23 @@ local config = {
 }
 
 return function(p1)
-	-- upvalues: WithCsrfRetryModule (copy), HttpClientModule (copy), AcpProtocolModule (copy), config (copy), RpcDecoderModule (copy), SignalsModule (copy), OnTerminalModule (copy), appendSessionListEntries (copy), FFlagBuildAgentAdCampaignCardModule (copy), DecodeAdCampaignToolCallStatusResultModule (copy), CreateTurnHandleModule (copy), ExperimentOverrideModule (copy), FFlagBuildExperienceLibrary (copy), FFlagBuildExperiencePromptFailureTelemetry (copy), ClassifyRequestFailureModule (copy), HistoryIngestModule (copy), SessionRegistryModule (copy), ConstantsModule (copy), IngestFrameHandlerModule (copy), FFlagBuildAgentAdCampaignToolCallStatusFallback (copy)
-	local P4 = p1 or {}
-	local Network = P4.network or WithCsrfRetryModule(HttpClientModule.createRequestInternalNetwork())
-	local BaseUrl = P4.baseUrl or AcpProtocolModule.acpUrl()
-	local Logger = P4.logger or config
+	-- upvalues: WithCsrfRetryModule (copy), HttpClientModule (copy), AcpProtocolModule (copy), config (copy), FFlagBuildExperienceModelPickerData (copy), SignalsUtilsModule (copy), RpcDecoderModule (copy), SignalsModule (copy), OnTerminalModule (copy), appendSessionListEntries (copy), FFlagBuildAgentAdCampaignCardModule (copy), DecodeAdCampaignToolCallStatusResultModule (copy), CreateTurnHandleModule (copy), ExperimentOverrideModule (copy), FFlagBuildExperienceLibrary (copy), FFlagBuildExperiencePromptFailureTelemetry (copy), ClassifyRequestFailureModule (copy), GetFundingErrorModule (copy), HistoryIngestModule (copy), SessionRegistryModule (copy), ConstantsModule (copy), IngestFrameHandlerModule (copy), FFlagBuildAgentAdCampaignToolCallStatusFallback (copy)
+	local P5 = p1 or {}
+	local Network = P5.network or WithCsrfRetryModule(HttpClientModule.createRequestInternalNetwork())
+	local BaseUrl = P5.baseUrl or AcpProtocolModule.acpUrl()
+	local Logger = P5.logger or config
 	
 	local function _()
-		-- upvalues: P4 (copy)
-		return if P4.getAuthHeaders then P4.getAuthHeaders() else {}
+		-- upvalues: P5 (copy)
+		return if P5.getAuthHeaders then P5.getAuthHeaders() else {}
 	end
 	
 	local Count = 0
 	
 	local _ = function()
-		-- upvalues: P4 (copy), Count (ref)
-		if P4.generateRequestId then
-			return P4.generateRequestId()
+		-- upvalues: P5 (copy), Count (ref)
+		if P5.generateRequestId then
+			return P5.generateRequestId()
 		else
 			Count += 1
 			
@@ -84,56 +91,67 @@ return function(p1)
 		end
 	end
 	
-	local t = {}
-	local t1 = {}
-	local t2 = {}
+	local function createActiveTurns()
+		return {
+			activeBySession = {},
+			activeByRequestId = {},
+			publicBySession = {},
+			pendingCancels = {}
+		}
+	end
+	
+	local ActiveTurns = createActiveTurns()
+	local SessionScopedSignal = if FFlagBuildExperienceModelPickerData then SignalsUtilsModule.createSessionScopedSignal(createActiveTurns) else function(_)
+		-- upvalues: ActiveTurns (copy)
+		return ActiveTurns
+	end
 	
 	local _ = function(p2)
 		return if p2 == nil then nil else tostring(p2)
 	end
 	
-	local function unregisterHandle(p2)
-		-- upvalues: t (copy), t2 (copy), t1 (copy)
-		for i, value in t do
-			if value == p2 then
-				t[i] = nil
-				t2[i] = nil
+	local function unregisterHandle(ActiveBySessionEntry)
+		-- upvalues: SessionScopedSignal (copy)
+		for i, value in SessionScopedSignal(false).activeBySession do
+			if value == ActiveBySessionEntry then
+				SessionScopedSignal(false).activeBySession[i] = nil
+				SessionScopedSignal(false).publicBySession[i] = nil
 				break
 			end
 		end
-		local RequestId = p2.requestId
+		local RequestId = ActiveBySessionEntry.requestId
 		local Text = if RequestId == nil then nil else tostring(RequestId)
 		
-		if Text and t1[Text] == p2 then
-			t1[Text] = nil
+		if Text and SessionScopedSignal(false).activeByRequestId[Text] == ActiveBySessionEntry then
+			SessionScopedSignal(false).activeByRequestId[Text] = nil
 		end
 	end
 	
-	local function rpcCall(RequestId, SessionCancel: string, SessionPromptWireParams, p3)
-		-- upvalues: Logger (copy), HttpClientModule (upval), Network (copy), BaseUrl (copy), P4 (copy), RpcDecoderModule (upval)
-		Logger:debug(`[CAS] -> {SessionCancel} id={tostring(RequestId)}`)
+	local function rpcCall(RequestId, SessionList: string, SessionPromptWireParams, p2)
+		-- upvalues: Logger (copy), HttpClientModule (upval), Network (copy), BaseUrl (copy), P5 (copy), RpcDecoderModule (upval)
+		Logger:debug(`[CAS] -> {SessionList} id={tostring(RequestId)}`)
 		
 		return HttpClientModule.createRequest({
 			method = "POST",
 			networkImpl = Network,
 			url = BaseUrl,
-			headers = if P4.getAuthHeaders then P4.getAuthHeaders() else {},
+			headers = if P5.getAuthHeaders then P5.getAuthHeaders() else {},
 			body = {
 				jsonrpc = "2.0",
 				id = RequestId,
-				method = SessionCancel,
+				method = SessionList,
 				params = SessionPromptWireParams or {}
 			},
-			analyticsKey = "cas." .. SessionCancel:gsub("/", "-"):lower(),
-			decode = RpcDecoderModule(p3)
+			analyticsKey = "cas." .. SessionList:gsub("/", "-"):lower(),
+			decode = RpcDecoderModule(p2)
 		})
 	end
 	
 	local function rpcCallSync(AdCampaignCreate, SessionNewWireParams, DecodeAdCampaignCheckFundsResultModule)
-		-- upvalues: rpcCall (copy), P4 (copy), Count (ref)
+		-- upvalues: rpcCall (copy), P5 (copy), Count (ref)
 		local RequestId = nil
-		if P4.generateRequestId then
-			RequestId = P4.generateRequestId()
+		if P5.generateRequestId then
+			RequestId = P5.generateRequestId()
 		else
 			Count += 1
 			RequestId = Count
@@ -141,72 +159,77 @@ return function(p1)
 		return rpcCall(RequestId, AdCampaignCreate, SessionNewWireParams, DecodeAdCampaignCheckFundsResultModule)
 	end
 	
-	local function submitToolResult(p3)
-		-- upvalues: P4 (copy), Count (ref), AcpProtocolModule (upval), HttpClientModule (upval), Network (copy), BaseUrl (copy), RpcDecoderModule (upval)
-		assert(typeof(p3.sessionId) == "string" and p3.sessionId ~= "", "sessionId is required")
-		assert(typeof(p3.content) == "table" and typeof(p3.content.text) == "string", "content.text is required")
+	local function submitToolResult(p2)
+		-- upvalues: P5 (copy), Count (ref), AcpProtocolModule (upval), HttpClientModule (upval), Network (copy), BaseUrl (copy), RpcDecoderModule (upval)
+		assert(typeof(p2.sessionId) == "string" and p2.sessionId ~= "", "sessionId is required")
+		assert(typeof(p2.content) == "table" and typeof(p2.content.text) == "string", "content.text is required")
 		
-		if p3.turnId ~= nil then
-			assert(typeof(p3.turnId) == "number" and p3.turnId > 0, "turnId must be a positive number")
+		if p2.turnId ~= nil then
+			assert(typeof(p2.turnId) == "number" and p2.turnId > 0, "turnId must be a positive number")
 		end
-		if p3.referenceId ~= nil then
-			assert(typeof(p3.referenceId) == "string" and p3.referenceId ~= "", "referenceId must be a string")
+		if p2.referenceId ~= nil then
+			assert(typeof(p2.referenceId) == "string" and p2.referenceId ~= "", "referenceId must be a string")
 		end
 		local RequestId = nil
-		if P4.generateRequestId then
-			RequestId = P4.generateRequestId()
+		if P5.generateRequestId then
+			RequestId = P5.generateRequestId()
 		else
 			Count += 1
 			RequestId = Count
 		end
 		local Result = {
-			sessionId = p3.sessionId,
+			sessionId = p2.sessionId,
 			tool_name = AcpProtocolModule.AskTool.Name,
-			content = p3.content,
-			isError = p3.isError ~= nil and p3.isError
+			content = p2.content,
+			isError = p2.isError ~= nil and p2.isError
 		}
 		
-		if p3.turnId ~= nil then
-			Result.turnId = p3.turnId
+		if p2.turnId ~= nil then
+			Result.turnId = p2.turnId
 		end
-		if p3.referenceId ~= nil then
-			Result.referenceId = p3.referenceId
+		if p2.referenceId ~= nil then
+			Result.referenceId = p2.referenceId
 		end
-		return HttpClientModule.createRequest({
+		return (HttpClientModule.createRequest({
 			method = "POST",
 			analyticsKey = "cas.ask-tool-result",
 			networkImpl = Network,
 			url = BaseUrl,
-			headers = if P4.getAuthHeaders then P4.getAuthHeaders() else {},
+			headers = if P5.getAuthHeaders then P5.getAuthHeaders() else {},
 			body = { jsonrpc = "2.0", id = RequestId, result = Result },
 			decode = RpcDecoderModule()
-		})
-	end
-	
-	local function initialize(p3)
-		-- upvalues: rpcCallSync (copy), AcpProtocolModule (upval)
-		return rpcCallSync(AcpProtocolModule.Methods.Initialize, p3 or { protocolVersion = AcpProtocolModule.ProtocolVersion })
-	end
-	
-	local function sessionNew(p3)
-		-- upvalues: rpcCallSync (copy), AcpProtocolModule (upval)
-		assert(p3 ~= nil, "sessionNew requires params")
-		assert(typeof(p3.project) == "table", "sessionNew requires params.project")
-		assert(typeof(p3.project.universeId) == "number", "sessionNew requires params.project.universeId")
-		assert(typeof(p3.project.placeId) == "number", "sessionNew requires params.project.placeId")
-		
-		return rpcCallSync(AcpProtocolModule.Methods.SessionNew, AcpProtocolModule.buildSessionNewWireParams({
-			cwd = p3.cwd or "/",
-			mcpServers = p3.mcpServers,
-			project = p3.project,
-			experiment = p3.experiment,
-			application = p3.application
 		}))
 	end
 	
-	local function sessionList(p3)
+	local function initialize(p2)
 		-- upvalues: rpcCallSync (copy), AcpProtocolModule (upval)
-		return rpcCallSync(AcpProtocolModule.Methods.SessionList, p3 or {})
+		return rpcCallSync(AcpProtocolModule.Methods.Initialize, p2 or { protocolVersion = AcpProtocolModule.ProtocolVersion })
+	end
+	
+	local function sessionNew(p2)
+		-- upvalues: FFlagBuildExperienceModelPickerData (upval), rpcCallSync (copy), AcpProtocolModule (upval)
+		assert(p2 ~= nil, "sessionNew requires params")
+		assert(typeof(p2.project) == "table", "sessionNew requires params.project")
+		assert(typeof(p2.project.universeId) == "number", "sessionNew requires params.project.universeId")
+		assert(typeof(p2.project.placeId) == "number", "sessionNew requires params.project.placeId")
+		
+		if FFlagBuildExperienceModelPickerData then
+			local Model = p2.model
+			assert(Model == nil or (Model == "default" or Model == "advanced"), "invalid model tier")
+		end
+		return rpcCallSync(AcpProtocolModule.Methods.SessionNew, AcpProtocolModule.buildSessionNewWireParams({
+			cwd = p2.cwd or "/",
+			mcpServers = p2.mcpServers,
+			project = p2.project,
+			model = if FFlagBuildExperienceModelPickerData then p2.model else nil,
+			experiment = p2.experiment,
+			application = p2.application
+		}))
+	end
+	
+	local function sessionList(p2)
+		-- upvalues: rpcCallSync (copy), AcpProtocolModule (upval)
+		return rpcCallSync(AcpProtocolModule.Methods.SessionList, p2 or {})
 	end
 	
 	local Signal, Signal2 = SignalsModule.createSignal({})
@@ -222,7 +245,7 @@ return function(p1)
 		getStatus = Pending,
 		getLoadMoreStatus = Signal3,
 		refresh = function()
-			-- upvalues: v1 (ref), Count1 (ref), v2 (ref), Pending2 (copy), Signal2_2 (copy), AcpProtocolModule (upval), rpcCall (copy), P4 (copy), Count (ref), OnTerminalModule (upval), Signal2 (copy), Signal2_1 (copy)
+			-- upvalues: v1 (ref), Count1 (ref), v2 (ref), Pending2 (copy), Signal2_2 (copy), AcpProtocolModule (upval), rpcCall (copy), P5 (copy), Count (ref), OnTerminalModule (upval), Signal2 (copy), Signal2_1 (copy)
 			if v1 ~= nil then
 				if v1.state(false).status == "pending" then
 					return v1
@@ -238,21 +261,21 @@ return function(p1)
 			local t = {}
 			local RequestId = nil
 			
-			if P4.generateRequestId then
-				RequestId = P4.generateRequestId()
+			if P5.generateRequestId then
+				RequestId = P5.generateRequestId()
 			else
 				Count += 1
 				RequestId = Count
 			end
 			local RpcCallResult = rpcCall(RequestId, SessionList, t, nil)
 			v1 = RpcCallResult
-			OnTerminalModule(RpcCallResult.state, function(p3)
+			OnTerminalModule(RpcCallResult.state, function(p2)
 				-- upvalues: Count2 (copy), Count1 (upval), v1 (upval), Signal2 (upval), Signal2_1 (upval), Pending2 (upval)
 				if Count2 == Count1 then
 					v1 = nil
-					local NextPageToken = p3.nextPageToken
+					local NextPageToken = p2.nextPageToken
 					local NextPageToken1 = if typeof(NextPageToken) == "string" and NextPageToken ~= "" then NextPageToken else nil
-					Signal2(p3.sessions or {})
+					Signal2(p2.sessions or {})
 					Signal2_1(NextPageToken1)
 					Pending2("succeeded")
 					
@@ -271,7 +294,7 @@ return function(p1)
 			return RpcCallResult
 		end,
 		loadMore = function()
-			-- upvalues: Signal1 (copy), v1 (ref), v2 (ref), Pending (copy), Count1 (ref), Signal2_2 (copy), AcpProtocolModule (upval), rpcCall (copy), P4 (copy), Count (ref), OnTerminalModule (upval), appendSessionListEntries (upval), Signal (copy), Signal2 (copy), Signal2_1 (copy)
+			-- upvalues: Signal1 (copy), v1 (ref), v2 (ref), Pending (copy), Count1 (ref), Signal2_2 (copy), AcpProtocolModule (upval), rpcCall (copy), P5 (copy), Count (ref), OnTerminalModule (upval), appendSessionListEntries (upval), Signal (copy), Signal2 (copy), Signal2_1 (copy)
 			local SignalResult = Signal1(false)
 			
 			if SignalResult == nil then
@@ -292,21 +315,21 @@ return function(p1)
 			local Config = { pageToken = SignalResult } or {}
 			local RequestId = nil
 			
-			if P4.generateRequestId then
-				RequestId = P4.generateRequestId()
+			if P5.generateRequestId then
+				RequestId = P5.generateRequestId()
 			else
 				Count += 1
 				RequestId = Count
 			end
 			local RpcCallResult = rpcCall(RequestId, SessionList, Config, nil)
 			v2 = RpcCallResult
-			OnTerminalModule(RpcCallResult.state, function(p3)
+			OnTerminalModule(RpcCallResult.state, function(p2)
 				-- upvalues: Count2 (copy), Count1 (upval), v2 (upval), appendSessionListEntries (upval), Signal (upval), Signal2 (upval), Signal2_1 (upval), Signal2_2 (upval)
 				if Count2 == Count1 then
 					v2 = nil
-					local NextPageToken = p3.nextPageToken
+					local NextPageToken = p2.nextPageToken
 					local NextPageToken1 = if typeof(NextPageToken) == "string" and NextPageToken ~= "" then NextPageToken else nil
-					Signal2((appendSessionListEntries(Signal(false), p3.sessions or {})))
+					Signal2((appendSessionListEntries(Signal(false), p2.sessions or {})))
 					Signal2_1(NextPageToken1)
 					Signal2_2("succeeded")
 					
@@ -326,15 +349,15 @@ return function(p1)
 		end
 	}
 	
-	local function sessionLoad(SessionId, p3)
+	local function sessionLoad(SessionId, p2)
 		-- upvalues: rpcCallSync (copy), AcpProtocolModule (upval)
 		assert(typeof(SessionId) == "string" and SessionId ~= "", "sessionId is required")
 		
 		return rpcCallSync(AcpProtocolModule.Methods.SessionLoad, {
 			sessionId = SessionId,
-			cwd = p3 and p3.cwd or "/",
-			mcpServers = p3 and p3.mcpServers,
-			historyPageToken = p3 and p3.historyPageToken
+			cwd = p2 and p2.cwd or "/",
+			mcpServers = p2 and p2.mcpServers,
+			historyPageToken = p2 and p2.historyPageToken
 		})
 	end
 	
@@ -343,165 +366,152 @@ return function(p1)
 		return rpcCallSync(AcpProtocolModule.Methods.SessionCancel, { sessionId = SessionId })
 	end
 	
-	local function adCampaignToolCallStatus(p3)
-		-- upvalues: rpcCallSync (copy), AcpProtocolModule (upval), DecodeAdCampaignToolCallStatusResultModule (upval)
-		assert(typeof(p3) == "table", "adCampaignToolCallStatus requires params")
-		assert(typeof(p3.toolCallId) == "string" and p3.toolCallId ~= "", "toolCallId is required")
+	local function sessionCancel(SessionId)
+		-- upvalues: SessionScopedSignal (copy), FFlagBuildExperienceModelPickerData (upval), AcpProtocolModule (upval), rpcCall (copy), P5 (copy), Count (ref), OnTerminalModule (upval), unregisterHandle (copy)
+		assert(typeof(SessionId) == "string" and SessionId ~= "", "sessionId is required")
+		local SessionScopedSignalResult = SessionScopedSignal(false)
+		local ActiveBySessionEntry = SessionScopedSignalResult.activeBySession[SessionId]
+		local PendingCancel = SessionScopedSignalResult.pendingCancels[SessionId]
 		
-		return rpcCallSync(AcpProtocolModule.Methods.AdCampaignToolCallStatus, p3, DecodeAdCampaignToolCallStatusResultModule)
-	end
-	
-	local _ = function(Key, p3, p4, p5)
-		-- upvalues: CreateTurnHandleModule (upval), AcpProtocolModule (upval), rpcCall (copy), P4 (copy), Count (ref), OnTerminalModule (upval), t (copy), t2 (copy), t1 (copy)
-		local TurnHandleModule, TurnHandleModule2 = CreateTurnHandleModule(Key, p3, function()
-			-- upvalues: Key (copy), AcpProtocolModule (upval), rpcCall (upval), P4 (upval), Count (upval), OnTerminalModule (upval), t (upval), t2 (upval), t1 (upval)
-			assert(typeof(Key) == "string" and Key ~= "", "sessionId is required")
-			local SessionCancel = AcpProtocolModule.Methods.SessionCancel
-			local config = { sessionId = Key }
-			local RequestId = nil
-			
-			if P4.generateRequestId then
-				RequestId = P4.generateRequestId()
-			else
-				Count += 1
-				RequestId = Count
-			end
-			OnTerminalModule(rpcCall(RequestId, SessionCancel, config, nil).state, function()
-				-- upvalues: t (upval), Key (copy), t2 (upval), t1 (upval)
-				local v3 = t[Key]
-				
-				if v3 then
-					v3.markCancelled()
-					
-					for i, value in t do
-						if value == v3 then
-							t[i] = nil
-							t2[i] = nil
-							break
-						end
-					end
-					local RequestId = v3.requestId
-					local Text = if RequestId == nil then nil else tostring(RequestId)
-					
-					if Text and t1[Text] == v3 then
-						t1[Text] = nil
-					end
-				end
-			end)
-		end, p4, p5)
-		t[Key] = TurnHandleModule2
-		t2[Key] = TurnHandleModule
-		
-		if p3 ~= nil then
-			t1[tostring(p3)] = TurnHandleModule2
+		if FFlagBuildExperienceModelPickerData and PendingCancel ~= nil and PendingCancel.turn == ActiveBySessionEntry then
+			return PendingCancel.handle
 		end
-		return TurnHandleModule
-	end
-	
-	local function sessionPrompt(p6)
-		-- upvalues: P4 (copy), Count (ref), CreateTurnHandleModule (upval), AcpProtocolModule (upval), rpcCall (copy), OnTerminalModule (upval), t (copy), t2 (copy), t1 (copy), ExperimentOverrideModule (upval), FFlagBuildExperienceLibrary (upval), FFlagBuildExperiencePromptFailureTelemetry (upval), ClassifyRequestFailureModule (upval)
-		assert(p6 and (typeof(p6.sessionId) == "string" and p6.sessionId ~= ""), "sessionId is required")
-		assert(p6.prompt, "prompt is required")
-		local SessionId = p6.sessionId
+		local SessionCancel = AcpProtocolModule.Methods.SessionCancel
+		local config = { sessionId = SessionId }
 		local RequestId = nil
 		
-		if P4.generateRequestId then
-			RequestId = P4.generateRequestId()
+		if P5.generateRequestId then
+			RequestId = P5.generateRequestId()
 		else
 			Count += 1
 			RequestId = Count
 		end
-		local TurnHandleModule, TurnHandleModule2 = CreateTurnHandleModule(SessionId, RequestId, function()
-			-- upvalues: SessionId (copy), AcpProtocolModule (upval), rpcCall (upval), P4 (upval), Count (upval), OnTerminalModule (upval), t (upval), t2 (upval), t1 (upval)
-			assert(typeof(SessionId) == "string" and SessionId ~= "", "sessionId is required")
-			local SessionCancel = AcpProtocolModule.Methods.SessionCancel
-			local config = { sessionId = SessionId }
-			local RequestId = nil
-			
-			if P4.generateRequestId then
-				RequestId = P4.generateRequestId()
-			else
-				Count += 1
-				RequestId = Count
+		local RpcCallResult = rpcCall(RequestId, SessionCancel, config, nil)
+		local PendingCancel1 = { handle = RpcCallResult, turn = ActiveBySessionEntry }
+		
+		if FFlagBuildExperienceModelPickerData then
+			SessionScopedSignalResult.pendingCancels[SessionId] = PendingCancel1
+		end
+		OnTerminalModule(RpcCallResult.state, function()
+			-- upvalues: SessionScopedSignalResult (copy), SessionId (copy), PendingCancel1 (copy), FFlagBuildExperienceModelPickerData (upval), ActiveBySessionEntry (copy), SessionScopedSignal (upval), unregisterHandle (upval)
+			if SessionScopedSignalResult.pendingCancels[SessionId] == PendingCancel1 then
+				SessionScopedSignalResult.pendingCancels[SessionId] = nil
 			end
-			OnTerminalModule(rpcCall(RequestId, SessionCancel, config, nil).state, function()
-				-- upvalues: t (upval), SessionId (copy), t2 (upval), t1 (upval)
-				local v3 = t[SessionId]
-				
-				if v3 then
-					v3.markCancelled()
-					
-					for i, value in t do
-						if value == v3 then
-							t[i] = nil
-							t2[i] = nil
-							break
-						end
-					end
-					local RequestId = v3.requestId
-					local Text = if RequestId == nil then nil else tostring(RequestId)
-					
-					if Text and t1[Text] == v3 then
-						t1[Text] = nil
-					end
-				end
-			end)
-		end, nil, nil)
-		t[SessionId] = TurnHandleModule2
-		t2[SessionId] = TurnHandleModule
+			local ActiveBySessionEntry1 = if FFlagBuildExperienceModelPickerData then ActiveBySessionEntry else SessionScopedSignal(false).activeBySession[SessionId]
+			
+			if ActiveBySessionEntry1 then
+				ActiveBySessionEntry1.markCancelled()
+				unregisterHandle(ActiveBySessionEntry1)
+			end
+		end, function()
+			-- upvalues: SessionScopedSignalResult (copy), SessionId (copy), PendingCancel1 (copy)
+			if SessionScopedSignalResult.pendingCancels[SessionId] == PendingCancel1 then
+				SessionScopedSignalResult.pendingCancels[SessionId] = nil
+			end
+		end)
+		
+		return RpcCallResult
+	end
+	
+	local function adCampaignToolCallStatus(p2)
+		-- upvalues: rpcCallSync (copy), AcpProtocolModule (upval), DecodeAdCampaignToolCallStatusResultModule (upval)
+		assert(typeof(p2) == "table", "adCampaignToolCallStatus requires params")
+		assert(typeof(p2.toolCallId) == "string" and p2.toolCallId ~= "", "toolCallId is required")
+		
+		return rpcCallSync(AcpProtocolModule.Methods.AdCampaignToolCallStatus, p2, DecodeAdCampaignToolCallStatusResultModule)
+	end
+	
+	local function registerTurnHandle(SessionId, RequestId, p2, p3)
+		-- upvalues: SessionScopedSignal (copy), CreateTurnHandleModule (upval), FFlagBuildExperienceModelPickerData (upval), sessionCancel (copy)
+		local SessionScopedSignalResult = SessionScopedSignal(false)
+		local TurnHandleModule, TurnHandleModule2 = CreateTurnHandleModule(SessionId, RequestId, function()
+			-- upvalues: FFlagBuildExperienceModelPickerData (upval), SessionScopedSignal (upval), SessionScopedSignalResult (copy), sessionCancel (upval), SessionId (copy)
+			if not FFlagBuildExperienceModelPickerData or SessionScopedSignal(false) == SessionScopedSignalResult then
+				sessionCancel(SessionId)
+			end
+		end, p2, p3)
+		SessionScopedSignal(false).activeBySession[SessionId] = TurnHandleModule2
+		SessionScopedSignal(false).publicBySession[SessionId] = TurnHandleModule
 		
 		if RequestId ~= nil then
-			t1[tostring(RequestId)] = TurnHandleModule2
+			SessionScopedSignal(false).activeByRequestId[tostring(RequestId)] = TurnHandleModule2
 		end
-		local Entry = t[SessionId]
-		local Prompt = p6.prompt
+		if FFlagBuildExperienceModelPickerData then
+			function TurnHandleModule.isCurrentOwner(): boolean
+				-- upvalues: SessionScopedSignal (upval), SessionScopedSignalResult (copy)
+				return SessionScopedSignal(false) == SessionScopedSignalResult
+			end
+		end
+		return TurnHandleModule
+	end
+	
+	local function sessionPrompt(p2)
+		-- upvalues: FFlagBuildExperienceModelPickerData (upval), P5 (copy), Count (ref), registerTurnHandle (copy), SessionScopedSignal (copy), AcpProtocolModule (upval), ExperimentOverrideModule (upval), rpcCall (copy), FFlagBuildExperienceLibrary (upval), OnTerminalModule (upval), FFlagBuildExperiencePromptFailureTelemetry (upval), ClassifyRequestFailureModule (upval), GetFundingErrorModule (upval), unregisterHandle (copy)
+		assert(p2 and (typeof(p2.sessionId) == "string" and p2.sessionId ~= ""), "sessionId is required")
+		assert(p2.prompt, "prompt is required")
+		
+		if FFlagBuildExperienceModelPickerData then
+			local Model = p2.model
+			assert(Model == nil or (Model == "default" or Model == "advanced"), "invalid model tier")
+			local Model1 = p2._meta and (p2._meta._roblox and p2._meta._roblox.model)
+			assert(p2.model == nil or (Model1 == nil or Model1 == p2.model), "conflicting model tiers")
+		end
+		local SessionId = p2.sessionId
+		local RequestId = nil
+		
+		if P5.generateRequestId then
+			RequestId = P5.generateRequestId()
+		else
+			Count += 1
+			RequestId = Count
+		end
+		local RegisterTurnHandleResult = registerTurnHandle(SessionId, RequestId, nil, nil)
+		local ActiveBySessionEntry = SessionScopedSignal(false).activeBySession[SessionId]
+		local Prompt = p2.prompt
 		local RpcCallResult = rpcCall(RequestId, AcpProtocolModule.Methods.SessionPrompt, (AcpProtocolModule.buildSessionPromptWireParams({
 			sessionId = SessionId,
 			prompt = if typeof(Prompt) == "string" then { { type = "text", text = Prompt } } else Prompt,
-			meta = p6._meta,
-			experiment = if ExperimentOverrideModule.isEnabled() then p6.experiment else nil
+			meta = p2._meta,
+			model = if FFlagBuildExperienceModelPickerData then p2.model else nil,
+			experiment = if FFlagBuildExperienceModelPickerData or ExperimentOverrideModule.isEnabled() then p2.experiment else nil
 		})))
-		OnTerminalModule(RpcCallResult.state, if FFlagBuildExperienceLibrary then Entry.markAccepted else nil, function(p7, p8)
-			-- upvalues: FFlagBuildExperiencePromptFailureTelemetry (upval), ClassifyRequestFailureModule (upval), RpcCallResult (copy), Entry (copy), t (upval), t2 (upval), t1 (upval)
-			local ClassifyRequestFailureModuleResult = if FFlagBuildExperiencePromptFailureTelemetry then ClassifyRequestFailureModule(RpcCallResult.state(false)) else nil
+		OnTerminalModule(RpcCallResult.state, if FFlagBuildExperienceLibrary then ActiveBySessionEntry.markAccepted else nil, function(p3, p4)
+			-- upvalues: FFlagBuildExperiencePromptFailureTelemetry (upval), FFlagBuildExperienceModelPickerData (upval), ClassifyRequestFailureModule (upval), RpcCallResult (copy), ActiveBySessionEntry (copy), GetFundingErrorModule (upval), unregisterHandle (upval)
+			local ClassifyRequestFailureModuleResult = if FFlagBuildExperiencePromptFailureTelemetry or FFlagBuildExperienceModelPickerData then ClassifyRequestFailureModule(RpcCallResult.state(false)) else nil
 			task.defer(function()
-				-- upvalues: Entry (upval), p7 (copy), p8 (copy), ClassifyRequestFailureModuleResult (copy), t (upval), t2 (upval), t1 (upval)
-				if Entry.isDone() then return end
-				Entry.fail(p7, p8, ClassifyRequestFailureModuleResult)
+				-- upvalues: ActiveBySessionEntry (upval), FFlagBuildExperienceModelPickerData (upval), GetFundingErrorModule (upval), RpcCallResult (upval), p3 (copy), p4 (copy), ClassifyRequestFailureModuleResult (copy), unregisterHandle (upval)
+				if ActiveBySessionEntry.isDone() then return end
+				local v3 = nil
+				local v4 = nil
 				
-				for i, value in t do
-					if value == Entry then
-						t[i] = nil
-						t2[i] = nil
-						break
-					end
+				if FFlagBuildExperienceModelPickerData then
+					v3, v124 = GetFundingErrorModule(RpcCallResult.state(false))
 				end
-				local RequestId = Entry.requestId
-				local Text = if RequestId == nil then nil else tostring(RequestId)
+				ActiveBySessionEntry.fail(p3, p4, ClassifyRequestFailureModuleResult, v3, v4)
 				
-				if Text and t1[Text] == Entry then
-					t1[Text] = nil
+				if ActiveBySessionEntry.isDone() then
+					unregisterHandle(ActiveBySessionEntry)
 				end
 			end)
 		end)
 		
-		return TurnHandleModule
+		return RegisterTurnHandleResult
 	end
 	
-	local function getActiveTurnHandle(p7)
-		-- upvalues: t2 (copy)
-		return t2[p7]
+	local function getActiveTurnHandle(p2)
+		-- upvalues: SessionScopedSignal (copy)
+		return SessionScopedSignal(false).publicBySession[p2]
 	end
 	
-	local function ingestSessionHistory(p7, p8, p9)
-		-- upvalues: HistoryIngestModule (upval), t (copy), unregisterHandle (copy)
+	local function ingestSessionHistory(p2, p3, p4)
+		-- upvalues: HistoryIngestModule (upval), SessionScopedSignal (copy), unregisterHandle (copy)
 		return HistoryIngestModule.ingestSessionHistory({
-			getActiveTurnInternals = function(p10)
-				-- upvalues: t (upval)
-				return t[p10]
+			getActiveTurnInternals = function(p5)
+				-- upvalues: SessionScopedSignal (upval)
+				return SessionScopedSignal(false).activeBySession[p5]
 			end,
 			onTurnDone = unregisterHandle
-		}, p7, p8, p9)
+		}, p2, p3, p4)
 	end
 	
 	local SessionRegistry = SessionRegistryModule.createSessionRegistry({
@@ -524,12 +534,12 @@ return function(p1)
 			-- upvalues: config1 (copy)
 			return config1
 		end,
-		sessionFindByUniverse = function(p7)
+		sessionFindByUniverse = function(p2)
 			-- upvalues: rpcCallSync (copy), AcpProtocolModule (upval)
-			assert(typeof(p7) == "table", "sessionFindByUniverse requires params")
-			assert(typeof(p7.universeId) == "number" and p7.universeId ~= 0, "universeId is required")
+			assert(typeof(p2) == "table", "sessionFindByUniverse requires params")
+			assert(typeof(p2.universeId) == "number" and p2.universeId ~= 0, "universeId is required")
 			
-			return rpcCallSync(AcpProtocolModule.Methods.SessionFindByUniverse, p7)
+			return rpcCallSync(AcpProtocolModule.Methods.SessionFindByUniverse, p2)
 		end,
 		sessionLoad = sessionLoad,
 		sessionReadTasks = function(SessionId)
@@ -540,79 +550,28 @@ return function(p1)
 		end,
 		sessionPrompt = sessionPrompt,
 		submitToolResult = submitToolResult,
-		sessionCancel = function(SessionId)
-			-- upvalues: AcpProtocolModule (upval), rpcCall (copy), P4 (copy), Count (ref), OnTerminalModule (upval), t (copy), t2 (copy), t1 (copy)
-			assert(typeof(SessionId) == "string" and SessionId ~= "", "sessionId is required")
-			local SessionCancel = AcpProtocolModule.Methods.SessionCancel
-			local config = { sessionId = SessionId }
-			local RequestId = nil
-			
-			if P4.generateRequestId then
-				RequestId = P4.generateRequestId()
-			else
-				Count += 1
-				RequestId = Count
-			end
-			local RpcCallResult = rpcCall(RequestId, SessionCancel, config, nil)
-			OnTerminalModule(RpcCallResult.state, function()
-				-- upvalues: t (upval), SessionId (copy), t2 (upval), t1 (upval)
-				local v3 = t[SessionId]
-				
-				if v3 then
-					v3.markCancelled()
-					
-					for i, value in t do
-						if value == v3 then
-							t[i] = nil
-							t2[i] = nil
-							break
-						end
-					end
-					local RequestId = v3.requestId
-					local Text = if RequestId == nil then nil else tostring(RequestId)
-					
-					if Text and t1[Text] == v3 then
-						t1[Text] = nil
-					end
-				end
-			end)
-			
-			return RpcCallResult
-		end,
+		sessionCancel = sessionCancel,
 		sessionDelete = function(SessionId)
-			-- upvalues: AcpProtocolModule (upval), rpcCall (copy), P4 (copy), Count (ref), OnTerminalModule (upval), t (copy), t2 (copy), t1 (copy)
+			-- upvalues: AcpProtocolModule (upval), rpcCall (copy), P5 (copy), Count (ref), OnTerminalModule (upval), SessionScopedSignal (copy), unregisterHandle (copy)
 			assert(typeof(SessionId) == "string" and SessionId ~= "", "sessionId is required")
 			local SessionDelete = AcpProtocolModule.Methods.SessionDelete
 			local config = { sessionId = SessionId }
 			local RequestId = nil
 			
-			if P4.generateRequestId then
-				RequestId = P4.generateRequestId()
+			if P5.generateRequestId then
+				RequestId = P5.generateRequestId()
 			else
 				Count += 1
 				RequestId = Count
 			end
 			local RpcCallResult = rpcCall(RequestId, SessionDelete, config, nil)
 			OnTerminalModule(RpcCallResult.state, function()
-				-- upvalues: t (upval), SessionId (copy), AcpProtocolModule (upval), t2 (upval), t1 (upval)
-				local Entry = t[SessionId]
+				-- upvalues: SessionScopedSignal (upval), SessionId (copy), AcpProtocolModule (upval), unregisterHandle (upval)
+				local ActiveBySessionEntry = SessionScopedSignal(false).activeBySession[SessionId]
 				
-				if Entry then
-					Entry.fail("Session deleted before prompt response", AcpProtocolModule.ErrorCodes.Gone)
-					
-					for i, value in t do
-						if value == Entry then
-							t[i] = nil
-							t2[i] = nil
-							break
-						end
-					end
-					local RequestId = Entry.requestId
-					local Text = if RequestId == nil then nil else tostring(RequestId)
-					
-					if Text and t1[Text] == Entry then
-						t1[Text] = nil
-					end
+				if ActiveBySessionEntry then
+					ActiveBySessionEntry.fail("Session deleted before prompt response", AcpProtocolModule.ErrorCodes.Gone)
+					unregisterHandle(ActiveBySessionEntry)
 				end
 			end)
 			
@@ -624,124 +583,82 @@ return function(p1)
 			
 			return rpcCallSync(AcpProtocolModule.Methods.SessionUpdateInfo, { sessionId = SessionId, title = Title })
 		end,
-		sessionSaveAndPublish = function(p7)
+		sessionSaveAndPublish = function(p2)
 			-- upvalues: rpcCallSync (copy), AcpProtocolModule (upval)
-			assert(typeof(p7) == "table", "sessionSaveAndPublish requires params")
-			assert(typeof(p7.placeId) == "number" and p7.placeId > 0, "placeId must be a positive number")
-			assert(p7.title == nil or typeof(p7.title) == "string", "title must be a string")
-			assert(p7.description == nil or typeof(p7.description) == "string", "description must be a string")
+			assert(typeof(p2) == "table", "sessionSaveAndPublish requires params")
+			assert(typeof(p2.placeId) == "number" and p2.placeId > 0, "placeId must be a positive number")
+			assert(p2.title == nil or typeof(p2.title) == "string", "title must be a string")
+			assert(p2.description == nil or typeof(p2.description) == "string", "description must be a string")
 			
-			return rpcCallSync(AcpProtocolModule.Methods.SessionSaveAndPublish, p7)
+			return rpcCallSync(AcpProtocolModule.Methods.SessionSaveAndPublish, p2)
 		end,
-		adCampaignEligibility = function(p7)
+		adCampaignEligibility = function(p2)
 			-- upvalues: rpcCallSync (copy), AcpProtocolModule (upval)
-			assert(typeof(p7) == "table", "adCampaignEligibility requires params")
-			assert(typeof(p7.universeId) == "number" and p7.universeId > 0, "universeId must be a positive number")
+			assert(typeof(p2) == "table", "adCampaignEligibility requires params")
+			assert(typeof(p2.universeId) == "number" and p2.universeId > 0, "universeId must be a positive number")
 			
-			return rpcCallSync(AcpProtocolModule.Methods.AdCampaignEligibility, p7, (require(script.Parent.decodeAdCampaignEligibilityResult)))
+			return rpcCallSync(AcpProtocolModule.Methods.AdCampaignEligibility, p2, (require(script.Parent.decodeAdCampaignEligibilityResult)))
 		end,
-		adCampaignCheckFunds = function(p7)
+		adCampaignCheckFunds = function(p2)
 			-- upvalues: rpcCallSync (copy), AcpProtocolModule (upval)
-			assert(typeof(p7) == "table", "adCampaignCheckFunds requires params")
-			assert(p7.campaignOption == "feedback" or p7.campaignOption == "plays", "campaignOption must be feedback or plays")
+			assert(typeof(p2) == "table", "adCampaignCheckFunds requires params")
+			assert(p2.campaignOption == "feedback" or p2.campaignOption == "plays", "campaignOption must be feedback or plays")
 			
-			return rpcCallSync(AcpProtocolModule.Methods.AdCampaignCheckFunds, p7, (require(script.Parent.decodeAdCampaignCheckFundsResult)))
+			return rpcCallSync(AcpProtocolModule.Methods.AdCampaignCheckFunds, p2, (require(script.Parent.decodeAdCampaignCheckFundsResult)))
 		end,
-		adCampaignCreate = function(p7)
+		adCampaignCreate = function(p2)
 			-- upvalues: FFlagBuildAgentAdCampaignCardModule (upval), rpcCallSync (copy), AcpProtocolModule (upval)
-			assert(typeof(p7) == "table", "adCampaignCreate requires params")
-			assert(typeof(p7.universeId) == "number" and p7.universeId > 0, "universeId must be a positive number")
-			assert(typeof(p7.idempotencyKey) == "string" and p7.idempotencyKey ~= "", "idempotencyKey is required")
+			assert(typeof(p2) == "table", "adCampaignCreate requires params")
+			assert(typeof(p2.universeId) == "number" and p2.universeId > 0, "universeId must be a positive number")
+			assert(typeof(p2.idempotencyKey) == "string" and p2.idempotencyKey ~= "", "idempotencyKey is required")
 			local DecodeAdCampaignCreateResultModule = require(script.Parent.decodeAdCampaignCreateResult)
 			
-			if FFlagBuildAgentAdCampaignCardModule and p7.toolCallId ~= nil then
-				assert(typeof(p7.toolCallId) == "string" and p7.toolCallId ~= "", "toolCallId is required")
+			if FFlagBuildAgentAdCampaignCardModule and p2.toolCallId ~= nil then
+				assert(typeof(p2.toolCallId) == "string" and p2.toolCallId ~= "", "toolCallId is required")
 				
-				return rpcCallSync(AcpProtocolModule.Methods.AdCampaignCreate, p7, function(p8)
-					-- upvalues: DecodeAdCampaignCreateResultModule (copy), p7 (copy)
-					local DecodeAdCampaignCreateResultModuleResult, DecodeAdCampaignCreateResultModuleResult2 = DecodeAdCampaignCreateResultModule(p8)
+				return rpcCallSync(AcpProtocolModule.Methods.AdCampaignCreate, p2, function(p3)
+					-- upvalues: DecodeAdCampaignCreateResultModule (copy), p2 (copy)
+					local DecodeAdCampaignCreateResultModuleResult, DecodeAdCampaignCreateResultModuleResult2 = DecodeAdCampaignCreateResultModule(p3)
 					
-					if DecodeAdCampaignCreateResultModuleResult == nil or DecodeAdCampaignCreateResultModuleResult.toolCallId == nil or DecodeAdCampaignCreateResultModuleResult.toolCallId == p7.toolCallId then
+					if DecodeAdCampaignCreateResultModuleResult == nil or DecodeAdCampaignCreateResultModuleResult.toolCallId == nil or DecodeAdCampaignCreateResultModuleResult.toolCallId == p2.toolCallId then
 						return DecodeAdCampaignCreateResultModuleResult, DecodeAdCampaignCreateResultModuleResult2
 					else
 						return nil, "Ad campaign create response does not match the requested tool call"
 					end
 				end)
 			else
-				return rpcCallSync(AcpProtocolModule.Methods.AdCampaignCreate, p7, DecodeAdCampaignCreateResultModule)
+				return rpcCallSync(AcpProtocolModule.Methods.AdCampaignCreate, p2, DecodeAdCampaignCreateResultModule)
 			end
 		end,
 		adCampaignToolCallStatus = if FFlagBuildAgentAdCampaignToolCallStatusFallback then adCampaignToolCallStatus else nil,
 		ingestSessionHistory = ingestSessionHistory,
-		ingestFrame = function(p7, p8)
-			-- upvalues: IngestFrameHandlerModule (upval), Logger (copy), SessionRegistry (copy), t (copy), t1 (copy), unregisterHandle (copy)
+		ingestFrame = function(p2, p3)
+			-- upvalues: IngestFrameHandlerModule (upval), Logger (copy), SessionRegistry (copy), SessionScopedSignal (copy), unregisterHandle (copy)
 			IngestFrameHandlerModule.ingestFrame({
 				logger = Logger,
 				getSessionByCasSessionId = SessionRegistry.getSessionByCasSessionId,
 				getSessionForProject = SessionRegistry.getSessionForProject,
-				getActiveTurnBySession = function(p9)
-					-- upvalues: t (upval)
-					return t[p9]
+				getActiveTurnBySession = function(p4)
+					-- upvalues: SessionScopedSignal (upval)
+					return SessionScopedSignal(false).activeBySession[p4]
 				end,
-				getActiveTurnByRequestId = function(p9)
-					-- upvalues: t1 (upval)
-					return t1[p9]
+				getActiveTurnByRequestId = function(p4)
+					-- upvalues: SessionScopedSignal (upval)
+					return SessionScopedSignal(false).activeByRequestId[p4]
 				end,
 				onTurnDone = unregisterHandle
-			}, p7, p8)
+			}, p2, p3)
 		end,
-		resumeTurnFromHistory = function(Key, p7, p8)
-			-- upvalues: t2 (copy), CreateTurnHandleModule (upval), AcpProtocolModule (upval), rpcCall (copy), P4 (copy), Count (ref), OnTerminalModule (upval), t (copy), t1 (copy)
-			assert(typeof(Key) == "string" and Key ~= "", "sessionId is required")
+		resumeTurnFromHistory = function(p2, p3, p4)
+			-- upvalues: SessionScopedSignal (copy), registerTurnHandle (copy)
+			assert(typeof(p2) == "string" and p2 ~= "", "sessionId is required")
 			
-			if p7.isDone then
+			if p3.isDone then
 				return nil
-			end
-			local Entry = t2[Key]
-			
-			if Entry == nil then
-				local TurnHandleModule, TurnHandleModule2 = CreateTurnHandleModule(Key, nil, function()
-					-- upvalues: Key (copy), AcpProtocolModule (upval), rpcCall (upval), P4 (upval), Count (upval), OnTerminalModule (upval), t (upval), t2 (upval), t1 (upval)
-					assert(typeof(Key) == "string" and Key ~= "", "sessionId is required")
-					local SessionCancel = AcpProtocolModule.Methods.SessionCancel
-					local config = { sessionId = Key }
-					local RequestId = nil
-					
-					if P4.generateRequestId then
-						RequestId = P4.generateRequestId()
-					else
-						Count += 1
-						RequestId = Count
-					end
-					OnTerminalModule(rpcCall(RequestId, SessionCancel, config, nil).state, function()
-						-- upvalues: t (upval), Key (copy), t2 (upval), t1 (upval)
-						local v3 = t[Key]
-						
-						if v3 then
-							v3.markCancelled()
-							
-							for i, value in t do
-								if value == v3 then
-									t[i] = nil
-									t2[i] = nil
-									break
-								end
-							end
-							local RequestId = v3.requestId
-							local Text = if RequestId == nil then nil else tostring(RequestId)
-							
-							if Text and t1[Text] == v3 then
-								t1[Text] = nil
-							end
-						end
-					end)
-				end, p7, p8)
-				t[Key] = TurnHandleModule2
-				t2[Key] = TurnHandleModule
-				
-				return TurnHandleModule
 			else
-				return Entry
+				local PublicBySessionEntry = SessionScopedSignal(false).publicBySession[p2]
+				
+				return if PublicBySessionEntry == nil then registerTurnHandle(p2, nil, p3, p4) else PublicBySessionEntry
 			end
 		end,
 		getActiveTurnHandle = getActiveTurnHandle,

@@ -6,9 +6,16 @@ local MarketingConsentOptInMethodModule = require(AccountUpgrade.MarketingConsen
 local FStringAccountUpgradeAmpNameSpaceModule = require(AccountUpgrade.Flags.FStringAccountUpgradeAmpNameSpace)
 local FStringAccountUpgradeMarketingConsentAmpFeatureNameModule = require(AccountUpgrade.Flags.FStringAccountUpgradeMarketingConsentAmpFeatureName)
 local FStringAccountUpgradeMarketingConsentGateAmpFeatureNameModule = require(AccountUpgrade.Flags.FStringAccountUpgradeMarketingConsentGateAmpFeatureName)
+local FStringDebugAccountUpgradeMarketingConsentOverrideModule = require(AccountUpgrade.Flags.FStringDebugAccountUpgradeMarketingConsentOverride)
 
 return function()
-	-- upvalues: FStringAccountUpgradeMarketingConsentGateAmpFeatureNameModule (copy), FStringAccountUpgradeMarketingConsentAmpFeatureNameModule (copy), MarketingConsentOptInMethodModule (copy), AmpApiProvider (copy), FStringAccountUpgradeAmpNameSpaceModule (copy), AccessResponseEnum (copy)
+	-- upvalues: FStringDebugAccountUpgradeMarketingConsentOverrideModule (copy), MarketingConsentOptInMethodModule (copy), FStringAccountUpgradeMarketingConsentGateAmpFeatureNameModule (copy), FStringAccountUpgradeMarketingConsentAmpFeatureNameModule (copy), AmpApiProvider (copy), FStringAccountUpgradeAmpNameSpaceModule (copy), AccessResponseEnum (copy)
+	if FStringDebugAccountUpgradeMarketingConsentOverrideModule == "AutoOptIn" then
+		return MarketingConsentOptInMethodModule.AutoOptIn
+	end
+	if FStringDebugAccountUpgradeMarketingConsentOverrideModule == "Checkbox" then
+		return MarketingConsentOptInMethodModule.Checkbox
+	end
 	if FStringAccountUpgradeMarketingConsentGateAmpFeatureNameModule == "" or FStringAccountUpgradeMarketingConsentAmpFeatureNameModule == "" then
 		return MarketingConsentOptInMethodModule.None
 	end

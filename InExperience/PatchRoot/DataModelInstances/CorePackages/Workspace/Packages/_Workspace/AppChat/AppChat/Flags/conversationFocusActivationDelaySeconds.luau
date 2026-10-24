@@ -1,0 +1,3 @@
+﻿local FIntAppChatConversationFocusActivationDelayMsModule: number = require(script.Parent.FIntAppChatConversationFocusActivationDelayMs)
+
+return if require(script.Parent.FFlagAppChatDebounceConversationFocusActivation) then FIntAppChatConversationFocusActivationDelayMsModule / 1000 else nil

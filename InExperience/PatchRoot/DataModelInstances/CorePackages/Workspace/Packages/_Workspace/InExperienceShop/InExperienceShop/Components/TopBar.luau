@@ -3,7 +3,6 @@ local Parent = InExperienceShop.Parent
 local ReactModule = require(Parent.React)
 local FoundationModule = require(Parent.Foundation)
 local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
-local FFlagEnableUserOffers = require(Parent.SharedFlags).FFlagEnableUserOffers
 local ShopOverflowConstantsModule = require(InExperienceShop.Components.Shared.shopOverflowConstants)
 local View = FoundationModule.View
 local Text = FoundationModule.Text
@@ -27,7 +26,7 @@ local config = {
 }
 
 return function(p1)
-	-- upvalues: UseLocalizationFunction (copy), config (copy), REPORTMENUITEMID (copy), REPORTICON (copy), ReactModule (copy), Menu (copy), InputSize (copy), PopoverSide (copy), PopoverAlign (copy), FFlagEnableUserOffers (copy), IconButton (copy), OVERFLOWICON (copy), ButtonVariant (copy), View (copy), IconName (copy), Text (copy), Chip (copy), IconName (copy), IconVariant (copy), ChipSize (copy), ChipVariant (copy)
+	-- upvalues: UseLocalizationFunction (copy), config (copy), REPORTMENUITEMID (copy), REPORTICON (copy), ReactModule (copy), Menu (copy), InputSize (copy), PopoverSide (copy), PopoverAlign (copy), IconButton (copy), OVERFLOWICON (copy), ButtonVariant (copy), View (copy), IconName (copy), Text (copy), Chip (copy), IconName (copy), IconVariant (copy), ChipSize (copy), ChipVariant (copy)
 	local UseLocalizationResult = UseLocalizationFunction(config)
 	local Items = {}
 	
@@ -62,9 +61,9 @@ return function(p1)
 		}),
 		Trailing = ReactModule.createElement(View, {
 			tag = "row align-y-center gap-small auto-xy",
-			LayoutOrder = if FFlagEnableUserOffers then 3 else 2
+			LayoutOrder = 3
 		}, {
-			OfferChip = if FFlagEnableUserOffers and p1.showOfferChip then ReactModule.createElement(Chip, {
+			OfferChip = if p1.showOfferChip then ReactModule.createElement(Chip, {
 				LayoutOrder = 1,
 				testId = "OfferChip",
 				text = p1.offerChipText,
@@ -77,6 +76,7 @@ return function(p1)
 				onActivated = p1.onOfferChipActivated
 			}) else nil,
 			Overflow = if p1.isReportingEnabled then ReactModule.createElement(Menu, {
+				LayoutOrder = 2,
 				testId = "TopBar_OverflowMenu",
 				isOpen = p1.isOverflowMenuOpen,
 				items = Items,
@@ -84,8 +84,7 @@ return function(p1)
 				side = PopoverSide.Top,
 				align = PopoverAlign.End,
 				onPressedOutside = p1.onOverflowMenuClosed,
-				onActivated = p1.onMenuItemActivated,
-				LayoutOrder = if FFlagEnableUserOffers then 2 else 1
+				onActivated = p1.onMenuItemActivated
 			}, {
 				Trigger = ReactModule.createElement(IconButton, {
 					isCircular = false,
@@ -98,12 +97,12 @@ return function(p1)
 			}) else nil,
 			SearchButton = ReactModule.createElement(IconButton, {
 				isCircular = false,
+				LayoutOrder = 3,
 				testId = "SearchButton",
 				icon = IconName.MagnifyingGlass,
 				size = InputSize.Medium,
 				variant = ButtonVariant.Utility,
-				onActivated = p1.onSearchOpen,
-				LayoutOrder = if FFlagEnableUserOffers then 3 else 2
+				onActivated = p1.onSearchOpen
 			})
 		})
 	})

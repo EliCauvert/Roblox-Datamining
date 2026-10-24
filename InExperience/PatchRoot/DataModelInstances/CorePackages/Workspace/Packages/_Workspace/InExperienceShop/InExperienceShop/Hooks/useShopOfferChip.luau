@@ -2,9 +2,7 @@
 local Parent = InExperienceShop.Parent
 local ReactModule = require(Parent.React)
 local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
-local SharedFlagsModule = require(Parent.SharedFlags)
-local FFlagEnableUserOffers = SharedFlagsModule.FFlagEnableUserOffers
-local FFlagHideOfferNotificationsWhenShopEmpty = SharedFlagsModule.FFlagHideOfferNotificationsWhenShopEmpty
+local FFlagHideOfferNotificationsWhenShopEmpty = require(Parent.SharedFlags).FFlagHideOfferNotificationsWhenShopEmpty
 local InExperienceOffersModule = require(Parent.InExperienceOffers)
 local UseOffersForKeyFunction = InExperienceOffersModule.Hooks.useOffersForKey
 local SelectActiveOfferFunction = InExperienceOffersModule.Utils.selectActiveOffer
@@ -17,7 +15,7 @@ local FFlagShopCloseOfferDialogOnCoreMenuModule = require(InExperienceShop.Flags
 local FFlagShowLargerOfferBannerOnDesktop2Module = require(InExperienceShop.Flags.FFlagShowLargerOfferBannerOnDesktop2)
 
 return function(p1, p2)
-	-- upvalues: UseOffersForKeyFunction (copy), ReactModule (copy), SelectActiveOfferFunction (copy), UseRemainingTimeTextFunction (copy), FFlagHideOfferNotificationsWhenShopEmpty (copy), UseShopHasItemsFunction (copy), FFlagEnableUserOffers (copy), UseLocalizationFunction (copy), FFlagShowLargerOfferBannerOnDesktop2Module (copy), UseOfferModalTextModule (copy), OfferDialogStateModule (copy), FFlagShopCloseOfferDialogOnCoreMenuModule (copy), UseCloseOnCoreMenuModule (copy)
+	-- upvalues: UseOffersForKeyFunction (copy), ReactModule (copy), SelectActiveOfferFunction (copy), UseRemainingTimeTextFunction (copy), FFlagHideOfferNotificationsWhenShopEmpty (copy), UseShopHasItemsFunction (copy), UseLocalizationFunction (copy), FFlagShowLargerOfferBannerOnDesktop2Module (copy), UseOfferModalTextModule (copy), OfferDialogStateModule (copy), FFlagShopCloseOfferDialogOnCoreMenuModule (copy), UseCloseOnCoreMenuModule (copy)
 	local UseOffersForKeyResult = UseOffersForKeyFunction(p1)
 	local UseMemoResult = ReactModule.useMemo(function()
 		-- upvalues: SelectActiveOfferFunction (upval), UseOffersForKeyResult (copy)
@@ -26,7 +24,7 @@ return function(p1, p2)
 	local Banner = if UseMemoResult == nil then nil else UseMemoResult.presentationData.banner
 	local UseRemainingTimeTextResult = UseRemainingTimeTextFunction(UseMemoResult and UseMemoResult.expirationTimeInUTC or nil)
 	local Inverted: boolean = FFlagHideOfferNotificationsWhenShopEmpty and not UseShopHasItemsFunction()
-	local HasUseRemainingTimeTextResult = if FFlagEnableUserOffers then not Inverted and (UseMemoResult ~= nil and UseRemainingTimeTextResult ~= nil) else not Inverted and FFlagEnableUserOffers
+	local HasUseRemainingTimeTextResult: boolean = if UseMemoResult == nil then not Inverted and false else not Inverted and UseRemainingTimeTextResult ~= nil
 	local UseLocalizationResult = UseLocalizationFunction({
 		offerEndTime = {
 			"Feature.InExperienceShop.Label.OfferEndTime",

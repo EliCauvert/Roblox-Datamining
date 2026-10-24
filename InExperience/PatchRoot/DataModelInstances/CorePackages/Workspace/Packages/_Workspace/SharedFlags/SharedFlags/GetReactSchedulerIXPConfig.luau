@@ -3,13 +3,9 @@ local HttpService = game:GetService("HttpService")
 local AppStorageJsonCacheUtils = require(script:FindFirstAncestor("SharedFlags").Parent.AppCommonLib).Utils.AppStorageJsonCacheUtils
 local GetFFlagEnableAppStorageJsonCacheInABTestModule = require(script.Parent.GetFFlagEnableAppStorageJsonCacheInABTest)
 local ExperienceReactDeferredSchedulerLayerName = game:DefineFastString("ExperienceReactDeferredScheduler_LayerName", "UIEcosystem.User")
-local EnableReactSchedulerIXP = game:DefineFastFlag("EnableReactSchedulerIXP", false)
 
 return function()
-	-- upvalues: EnableReactSchedulerIXP (copy), GetFFlagEnableAppStorageJsonCacheInABTestModule (copy), AppStorageJsonCacheUtils (copy), ExperienceReactDeferredSchedulerLayerName (copy), AppStorageService (copy), HttpService (copy)
-	if not EnableReactSchedulerIXP then
-		return nil
-	end
+	-- upvalues: GetFFlagEnableAppStorageJsonCacheInABTestModule (copy), AppStorageJsonCacheUtils (copy), ExperienceReactDeferredSchedulerLayerName (copy), AppStorageService (copy), HttpService (copy)
 	if GetFFlagEnableAppStorageJsonCacheInABTestModule() then
 		local ExperimentCacheCachedJsonForKey = AppStorageJsonCacheUtils.default:getCachedJsonForKey("ExperimentCache")
 		

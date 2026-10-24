@@ -1,12 +1,11 @@
 ﻿local UserInputService = game:GetService("UserInputService")
 local Parent = script:FindFirstAncestor("MomentsCommon").Parent
 local ReactModule = require(Parent.React)
-local SharedFlagsModule = require(Parent.SharedFlags)
-local FFlagLuaAppSupportDeviceSafeInsets = SharedFlagsModule.FFlagLuaAppUseDeviceSafeInsetsForAppContainer and SharedFlagsModule.FFlagLuaAppSupportDeviceSafeInsets
+local ShouldUseDeviceSafeInsets = require(Parent.Display).shouldUseDeviceSafeInsets
 
 local function _()
-	-- upvalues: FFlagLuaAppSupportDeviceSafeInsets (copy), UserInputService (copy)
-	if FFlagLuaAppSupportDeviceSafeInsets then
+	-- upvalues: ShouldUseDeviceSafeInsets (copy), UserInputService (copy)
+	if ShouldUseDeviceSafeInsets then
 		return 0
 	else
 		local StatusBarSize = UserInputService.StatusBarSize
@@ -16,10 +15,10 @@ local function _()
 end
 
 return function()
-	-- upvalues: ReactModule (copy), FFlagLuaAppSupportDeviceSafeInsets (copy), UserInputService (copy)
+	-- upvalues: ReactModule (copy), ShouldUseDeviceSafeInsets (copy), UserInputService (copy)
 	local UseStateResult, UseStateResult2 = ReactModule.useState(function()
-		-- upvalues: FFlagLuaAppSupportDeviceSafeInsets (upval), UserInputService (upval)
-		if FFlagLuaAppSupportDeviceSafeInsets then
+		-- upvalues: ShouldUseDeviceSafeInsets (upval), UserInputService (upval)
+		if ShouldUseDeviceSafeInsets then
 			return 0
 		else
 			local StatusBarSize = UserInputService.StatusBarSize
@@ -28,9 +27,9 @@ return function()
 		end
 	end)
 	ReactModule.useEffect(function()
-		-- upvalues: UseStateResult2 (copy), FFlagLuaAppSupportDeviceSafeInsets (upval), UserInputService (upval)
+		-- upvalues: UseStateResult2 (copy), ShouldUseDeviceSafeInsets (upval), UserInputService (upval)
 		local Y = nil
-		if FFlagLuaAppSupportDeviceSafeInsets then
+		if ShouldUseDeviceSafeInsets then
 			Y = 0
 		else
 			local StatusBarSize = UserInputService.StatusBarSize
@@ -38,9 +37,9 @@ return function()
 		end
 		UseStateResult2(Y)
 		local Connection = UserInputService:GetPropertyChangedSignal("StatusBarSize"):Connect(function()
-			-- upvalues: UseStateResult2 (upval), FFlagLuaAppSupportDeviceSafeInsets (upval), UserInputService (upval)
+			-- upvalues: UseStateResult2 (upval), ShouldUseDeviceSafeInsets (upval), UserInputService (upval)
 			local Y = nil
-			if FFlagLuaAppSupportDeviceSafeInsets then
+			if ShouldUseDeviceSafeInsets then
 				Y = 0
 			else
 				local StatusBarSize = UserInputService.StatusBarSize

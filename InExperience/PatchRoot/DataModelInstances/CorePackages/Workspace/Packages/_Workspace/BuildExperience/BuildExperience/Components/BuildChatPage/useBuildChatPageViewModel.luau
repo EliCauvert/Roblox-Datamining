@@ -1,5 +1,9 @@
 ﻿local BuildExperience = script:FindFirstAncestor("BuildExperience")
 local Parent = BuildExperience.Parent
+local _ = require(BuildExperience.Components.ModelPicker.ModelPickerTypes)
+local FFlagBuildExperienceModelPickerModule = require(BuildExperience.Flags.FFlagBuildExperienceModelPicker)
+local UseBuildModelSelectionModule = require(BuildExperience.Chat.useBuildModelSelection)
+local GetBuildModelSelectionStoreModule = require(BuildExperience.Stores.GetBuildModelSelectionStore)
 local GuiService = game:GetService("GuiService")
 local MessageBusService = game:GetService("MessageBusService")
 local UserInputService = game:GetService("UserInputService")
@@ -29,7 +33,6 @@ local FFlagEnableBuildAdPromotionModule = require(BuildExperience.Flags.FFlagEna
 local GetAdUpsellEventStoreModule = if FFlagBuildAdUpsellModule then require(BuildExperience.Stores.GetAdUpsellEventStore) else nil
 local GameConfigurationLabelsModule = if FFlagBuildAdUpsellModule or FFlagEnableBuildAdPromotionModule then require(BuildExperience.utils.GameConfigurationLabels) else nil
 local UseAdUpsellChatViewModelModule = if FFlagBuildAdUpsellModule then require(script.Parent.useAdUpsellChatViewModel) else nil
-local FFlagBuildExperienceFocusNewGameComposerModule = require(BuildExperience.Flags.FFlagBuildExperienceFocusNewGameComposer)
 local FFlagBuildCheckGamePermissionsModule = require(BuildExperience.Flags.FFlagBuildCheckGamePermissions)
 local UseGamePermissionsModule = require(BuildExperience.useGamePermissions)
 local FFlagBuildEventsUpdate1Module = require(BuildExperience.Flags.FFlagBuildEventsUpdate1)
@@ -131,7 +134,7 @@ local _ = function(p1, p2)
 end
 
 return function(p1)
-	-- upvalues: UseTokensFunction (copy), useUniverseSummary (copy), GetBuildOverflowMenuStoreModule (copy), GetCreatorAgentResumeStoreModule (copy), ReactModule (copy), FFlagBuildExperienceDontAskAgainPushUpsellModule (copy), BuildAppStorageKeyEngineFeature (copy), BuildAppStorageModule (copy), UserInputService (copy), GuiService (copy), PermissionsProtocol (copy), MessageBusService (copy), RealtimeMessageId (copy), Default (copy), FFlagBuildCheckGamePermissionsModule (copy), UseGamePermissionsModule (copy), CreatorAgentChatModule (copy), FFlagBuildAdUpsellModule (copy), GetAdUpsellEventStoreModule (copy), UseChatSessionCoreModule (copy), FFlagBuildExperienceFocusNewGameComposerModule (copy), FFlagBuildExperienceAnalytics (copy), FFlagBuildExperienceMonetizationNativeUIModule (copy), UseBuildPromptDraftModule (copy), FFlagBuildExperienceDeveloperProductContextModule (copy), FFlagBuildExperienceManageDevProductModule (copy), UseChatPlaytestFooterModule (copy), UniverseConfigurationModule (copy), FFlagEnableBuildAdPromotionModule (copy), UseCreatorCreditChatUpsellViewModelModule (copy), GameConfigurationLabelsModule (copy), FFlagBuildExperienceLibrary (copy), getResolvedSessionId (copy), UseAdUpsellChatViewModelModule (copy), config1 (copy), FFlagBuildAgentAdCampaignCardModule (copy), UseAgentAdCampaignChatViewModelModule (copy), config2 (copy), FFlagBuildExperiencePlaytestCardPublishCtaModule (copy), SendBuildExperienceEventModule (copy), FFlagBuildEventsUpdate1Module (copy), config (copy), FFlagBuildExperienceAnswerFormModule (copy)
+	-- upvalues: UseTokensFunction (copy), useUniverseSummary (copy), GetBuildOverflowMenuStoreModule (copy), GetCreatorAgentResumeStoreModule (copy), ReactModule (copy), FFlagBuildExperienceDontAskAgainPushUpsellModule (copy), BuildAppStorageKeyEngineFeature (copy), BuildAppStorageModule (copy), UserInputService (copy), GuiService (copy), PermissionsProtocol (copy), MessageBusService (copy), RealtimeMessageId (copy), Default (copy), FFlagBuildCheckGamePermissionsModule (copy), UseGamePermissionsModule (copy), FFlagBuildExperienceModelPickerModule (copy), GetBuildModelSelectionStoreModule (copy), CreatorAgentChatModule (copy), FFlagBuildAdUpsellModule (copy), GetAdUpsellEventStoreModule (copy), UseChatSessionCoreModule (copy), UseBuildModelSelectionModule (copy), FFlagBuildExperienceAnalytics (copy), FFlagBuildExperienceMonetizationNativeUIModule (copy), UseBuildPromptDraftModule (copy), FFlagBuildExperienceDeveloperProductContextModule (copy), FFlagBuildExperienceManageDevProductModule (copy), UseChatPlaytestFooterModule (copy), UniverseConfigurationModule (copy), FFlagEnableBuildAdPromotionModule (copy), UseCreatorCreditChatUpsellViewModelModule (copy), GameConfigurationLabelsModule (copy), FFlagBuildExperienceLibrary (copy), getResolvedSessionId (copy), UseAdUpsellChatViewModelModule (copy), config1 (copy), FFlagBuildAgentAdCampaignCardModule (copy), UseAgentAdCampaignChatViewModelModule (copy), config2 (copy), FFlagBuildExperiencePlaytestCardPublishCtaModule (copy), SendBuildExperienceEventModule (copy), FFlagBuildEventsUpdate1Module (copy), config (copy), FFlagBuildExperienceAnswerFormModule (copy)
 	local UseTokensResult = UseTokensFunction()
 	local UseUniverseSummaryResult = useUniverseSummary(p1.target.universeId)
 	local BuildOverflowMenuStoreModule = GetBuildOverflowMenuStoreModule()
@@ -261,7 +264,7 @@ return function(p1)
 		NoCanAdvertise = not UseGamePermissionsModuleResult.canAdvertise
 	end
 	local UseMemoResult = ReactModule.useMemo(function()
-		-- upvalues: p1 (copy), UseUniverseSummaryResult (copy)
+		-- upvalues: p1 (copy), UseUniverseSummaryResult (copy), FFlagBuildExperienceModelPickerModule (upval)
 		local ExperienceName = p1.target.experienceName
 		local Name = if UseUniverseSummaryResult == nil then nil else UseUniverseSummaryResult.name
 		
@@ -271,16 +274,21 @@ return function(p1)
 			sessionId = p1.target.sessionId,
 			experienceName = if typeof(Name) == "string" and Name ~= "" then Name else ExperienceName,
 			isNewGameTarget = p1.target.isNewGameTarget,
+			modelSelectionDraftId = if FFlagBuildExperienceModelPickerModule then p1.target.modelSelectionDraftId else nil,
 			creatorName = p1.target.creatorName,
 			gameIcon = p1.target.gameIcon
 		}
 	end, {
 		p1.target.universeId, p1.target.placeId, p1.target.sessionId,
-		p1.target.experienceName, p1.target.isNewGameTarget, p1.target.creatorName,
-		p1.target.gameIcon, UseUniverseSummaryResult
+		p1.target.experienceName, p1.target.isNewGameTarget,
+		p1.target.modelSelectionDraftId, p1.target.creatorName, p1.target.gameIcon,
+		UseUniverseSummaryResult
 	})
 	local UseResult7 = ReactModule.useCallback(function(p2)
-		-- upvalues: p1 (copy), UseMemoResult (copy)
+		-- upvalues: FFlagBuildExperienceModelPickerModule (upval), UseMemoResult (copy), GetBuildModelSelectionStoreModule (upval), p1 (copy)
+		if FFlagBuildExperienceModelPickerModule and UseMemoResult.modelSelectionDraftId ~= nil then
+			GetBuildModelSelectionStoreModule(false).promoteDraft(UseMemoResult.modelSelectionDraftId, p2.universeId)
+		end
 		if p1.onNavigateToResolvedTarget ~= nil then
 			p1.onNavigateToResolvedTarget({
 				universeId = p2.universeId,
@@ -288,11 +296,12 @@ return function(p1)
 				sessionId = p2.sessionId,
 				experienceName = UseMemoResult.experienceName,
 				isNewGameTarget = UseMemoResult.isNewGameTarget,
+				modelSelectionDraftId = if FFlagBuildExperienceModelPickerModule then UseMemoResult.modelSelectionDraftId else nil,
 				creatorName = UseMemoResult.creatorName,
 				gameIcon = UseMemoResult.gameIcon
 			})
 		end
-	end, {
+	end, if FFlagBuildExperienceModelPickerModule then { p1.onNavigateToResolvedTarget, UseMemoResult } else {
 		p1.onNavigateToResolvedTarget,
 		UseMemoResult.experienceName,
 		UseMemoResult.isNewGameTarget,
@@ -300,23 +309,25 @@ return function(p1)
 		UseMemoResult.gameIcon
 	})
 	local UseStateResult11, UseStateResult2_10 = ReactModule.useState({ count = 0, reason = nil })
+	local UseResult8 = ReactModule.useCallback(function(OutOfCredits, Reason)
+		-- upvalues: CreatorAgentChatModule (upval), UseStateResult2_10 (copy)
+		if OutOfCredits == CreatorAgentChatModule.ErrorCodes.OutOfCredits then
+			UseStateResult2_10(function(p2)
+				-- upvalues: Reason (copy)
+				return { count = p2.count + 1, reason = Reason }
+			end)
+		end
+	end, {})
 	local AdUpsellEventStoreModule = if FFlagBuildAdUpsellModule then GetAdUpsellEventStoreModule(false) else nil
 	local UseChatSessionCoreModuleResult = UseChatSessionCoreModule({
 		universeId = p1.target.universeId,
 		placeId = p1.target.placeId,
 		sessionId = p1.target.sessionId,
-		autoFocusComposer = FFlagBuildExperienceFocusNewGameComposerModule and IsIsNewGameTarget,
+		autoFocusComposer = IsIsNewGameTarget,
 		createUniverseOnFirstPrompt = IsIsNewGameTarget,
+		modelSelectionDraftId = if FFlagBuildExperienceModelPickerModule then UseMemoResult.modelSelectionDraftId else nil,
 		onProjectResolved = UseResult7,
-		onPromptFailure = ReactModule.useCallback(function(OutOfCredits, Reason)
-			-- upvalues: CreatorAgentChatModule (upval), UseStateResult2_10 (copy)
-			if OutOfCredits == CreatorAgentChatModule.ErrorCodes.OutOfCredits then
-				UseStateResult2_10(function(p2)
-					-- upvalues: Reason (copy)
-					return { count = p2.count + 1, reason = Reason }
-				end)
-			end
-		end, {}),
+		onPromptFailure = if FFlagBuildExperienceModelPickerModule then nil else UseResult8,
 		trackAdUpsellTurns = FFlagBuildAdUpsellModule,
 		onAssistantTurnCompleted = if FFlagBuildAdUpsellModule then ReactModule.useCallback(function(p2)
 			-- upvalues: AdUpsellEventStoreModule (copy)
@@ -326,6 +337,7 @@ return function(p1)
 		end, { AdUpsellEventStoreModule }) else nil,
 		sendMessageWhen = not NoCanEditOnBuild
 	})
+	local UseBuildModelSelectionModuleResult = if FFlagBuildExperienceModelPickerModule then UseBuildModelSelectionModule(p1.target.universeId, p1.target.modelSelectionDraftId, p1.modelPicker, UseChatSessionCoreModuleResult.modelSessionModels, UseChatSessionCoreModuleResult.hasPreparedModelSession, UseChatSessionCoreModuleResult.internalTesting) else nil
 	
 	if FFlagBuildExperienceAnalytics then
 		local UseRefResult1 = ReactModule.useRef(false)
@@ -440,34 +452,35 @@ return function(p1)
 		p1.target.universeId,
 		p1.target.sessionId
 	})
-	local UseResult8 = ReactModule.useCallback(function()
+	local UseResult9 = ReactModule.useCallback(function()
 		-- upvalues: UseChatSessionCoreModuleResult (copy)
 		if UseChatSessionCoreModuleResult.textBoxRef.current then
 			UseChatSessionCoreModuleResult.textBoxRef.current.releaseFocus()
 		end
 	end, { UseChatSessionCoreModuleResult.textBoxRef })
-	local UseResult9 = ReactModule.useCallback(function()
-		-- upvalues: UseResult8 (copy), p1 (copy)
-		UseResult8()
+	local UseResult10 = ReactModule.useCallback(function()
+		-- upvalues: UseResult9 (copy), p1 (copy)
+		UseResult9()
 		
 		if p1.onOpenCreatorCreditPage ~= nil then
 			p1.onOpenCreatorCreditPage()
 		end
-	end, { UseResult8, p1.onOpenCreatorCreditPage })
-	local UseResult10 = if p1.onOpenCreatorCreditPage == nil then nil else UseResult9
-	local UseResult11 = if FFlagEnableBuildAdPromotionModule then ReactModule.useCallback(function()
-		-- upvalues: UseResult8 (copy), p1 (copy)
-		UseResult8()
+	end, { UseResult9, p1.onOpenCreatorCreditPage })
+	local UseResult11 = if p1.onOpenCreatorCreditPage == nil then nil else UseResult10
+	local UseResult12 = if FFlagEnableBuildAdPromotionModule then ReactModule.useCallback(function()
+		-- upvalues: UseResult9 (copy), p1 (copy)
+		UseResult9()
 		
 		if p1.onOpenGetUsersPage ~= nil then
 			p1.onOpenGetUsersPage()
 		end
-	end, { UseResult8, p1.onOpenGetUsersPage }) else nil
-	local UseResult12 = if p1.onOpenGetUsersPage == nil then nil else UseResult11
+	end, { UseResult9, p1.onOpenGetUsersPage }) else nil
+	local UseResult13 = if p1.onOpenGetUsersPage == nil then nil else UseResult12
 	local UseCreatorCreditChatUpsellViewModelModuleResult = UseCreatorCreditChatUpsellViewModelModule({
-		onOpenCreatorCreditPage = UseResult10,
-		outOfCreditsPromptFailureCount = UseStateResult11.count,
-		outOfCreditsPromptFailureReason = UseStateResult11.reason,
+		namedTier = if FFlagBuildExperienceModelPickerModule and (UseBuildModelSelectionModuleResult and UseBuildModelSelectionModuleResult.selectedId == "advanced" and (not UseBuildModelSelectionModuleResult.internalTesting or not UseBuildModelSelectionModuleResult.internalTesting.isSelected)) then "advanced" else nil,
+		onOpenCreatorCreditPage = UseResult11,
+		outOfCreditsPromptFailureCount = if FFlagBuildExperienceModelPickerModule then if UseChatSessionCoreModuleResult.fundingFailure then UseChatSessionCoreModuleResult.fundingFailure.count else nil else UseStateResult11.count,
+		outOfCreditsPromptFailureReason = if FFlagBuildExperienceModelPickerModule then if UseChatSessionCoreModuleResult.fundingFailure then UseChatSessionCoreModuleResult.fundingFailure.reason else nil else UseStateResult11.reason,
 		isAssistantResponding = UseChatSessionCoreModuleResult.isAssistantResponding
 	})
 	local IsAudienceMatch: boolean = if FFlagBuildAdUpsellModule then GameConfigurationLabelsModule.getAudience(UseUniverseSummaryResult) == UniverseConfigurationModule.PrivacyType.Public else FFlagEnableBuildAdPromotionModule and GameConfigurationLabelsModule.getAudience(UseUniverseSummaryResult) == UniverseConfigurationModule.PrivacyType.Public
@@ -485,10 +498,10 @@ return function(p1)
 		sessionId = ResolvedSessionId,
 		isPageVisible = p1.isFocused ~= false
 	}) else config2
-	local UseResult13 = ReactModule.useCallback(function(p2)
-		-- upvalues: UseResult8 (copy), p1 (copy)
+	local UseResult14 = ReactModule.useCallback(function(p2)
+		-- upvalues: UseResult9 (copy), p1 (copy)
 		if p2.type == "openPage" then
-			UseResult8()
+			UseResult9()
 			
 			if p1.onOpenConfigurationPage then
 				p1.onOpenConfigurationPage(p2.page)
@@ -496,7 +509,7 @@ return function(p1)
 				return
 			end
 		elseif p2.type == "openInvitePicker" then
-			UseResult8()
+			UseResult9()
 			
 			if p1.onOpenInvitePicker then
 				p1.onOpenInvitePicker()
@@ -504,22 +517,22 @@ return function(p1)
 				return
 			end
 		elseif p2.type == "openInviteManagement" then
-			UseResult8()
+			UseResult9()
 			
 			if p1.onOpenInviteManagement then
 				p1.onOpenInviteManagement()
 			end
 		end
 	end, {
-		UseResult8,
+		UseResult9,
 		p1.onOpenConfigurationPage,
 		p1.onOpenInvitePicker,
 		p1.onOpenInviteManagement
 	})
-	local UseResult14 = if FFlagBuildExperiencePlaytestCardPublishCtaModule then ReactModule.useCallback(function()
-		-- upvalues: UseResult13 (copy)
-		UseResult13({ type = "openPage", page = "publish" })
-	end, { UseResult13 }) else nil
+	local UseResult15 = if FFlagBuildExperiencePlaytestCardPublishCtaModule then ReactModule.useCallback(function()
+		-- upvalues: UseResult14 (copy)
+		UseResult14({ type = "openPage", page = "publish" })
+	end, { UseResult14 }) else nil
 	
 	return {
 		target = UseMemoResult,
@@ -529,29 +542,29 @@ return function(p1)
 		onPageMetricsChanged = UseResult5,
 		selectedChipGroupName = UseStateResult,
 		onChipActivated = ReactModule.useCallback(function(p2)
-			-- upvalues: UseResult8 (copy), UseStateResult2 (copy)
-			UseResult8()
+			-- upvalues: UseResult9 (copy), UseStateResult2 (copy)
+			UseResult9()
 			UseStateResult2(p2)
-		end, { UseResult8 }),
+		end, { UseResult9 }),
 		onChipBottomSheetClose = function()
 			-- upvalues: UseStateResult2 (copy)
 			UseStateResult2(nil)
 		end,
 		onClose = ReactModule.useCallback(function()
-			-- upvalues: UseResult8 (copy), p1 (copy)
-			UseResult8()
+			-- upvalues: UseResult9 (copy), p1 (copy)
+			UseResult9()
 			p1.onClose()
-		end, { UseResult8, p1.onClose }),
+		end, { UseResult9, p1.onClose }),
 		onOpenLibrary = ReactModule.useCallback(function()
-			-- upvalues: UseResult8 (copy), p1 (copy), ResolvedSessionId (copy)
-			UseResult8()
+			-- upvalues: UseResult9 (copy), p1 (copy), ResolvedSessionId (copy)
+			UseResult9()
 			
 			if p1.onOpenLibrary ~= nil then
 				p1.onOpenLibrary(ResolvedSessionId)
 			end
-		end, { UseResult8, p1.onOpenLibrary, ResolvedSessionId }),
+		end, { UseResult9, p1.onOpenLibrary, ResolvedSessionId }),
 		isLibraryDisabled = FFlagBuildExperienceLibrary and (p1.target.universeId == nil or NoCanEdit),
-		onOverflowMenuAction = UseResult13,
+		onOverflowMenuAction = UseResult14,
 		onPlayActivated = ReactModule.useCallback(function()
 			-- upvalues: SendBuildExperienceEventModule (upval), FFlagBuildEventsUpdate1Module (upval), p1 (copy), UseChatSessionCoreModuleResult (copy)
 			SendBuildExperienceEventModule(if FFlagBuildEventsUpdate1Module then "PLAYTEST_CLICK" else "PLAY_CLICK", {
@@ -568,12 +581,12 @@ return function(p1)
 			p1.target.universeId
 		}),
 		onOpenAgentsPage = ReactModule.useCallback(function()
-			-- upvalues: UseResult8 (copy), p1 (copy), SubagentTaskState (copy), config (upval)
-			UseResult8()
+			-- upvalues: UseResult9 (copy), p1 (copy), SubagentTaskState (copy), config (upval)
+			UseResult9()
 			p1.onOpenAgentsPage(SubagentTaskState or config)
-		end, { UseResult8, p1.onOpenAgentsPage, SubagentTaskState }),
-		onOpenCreatorCreditPage = UseResult10,
-		onOpenGetUsersPage = UseResult12,
+		end, { UseResult9, p1.onOpenAgentsPage, SubagentTaskState }),
+		onOpenCreatorCreditPage = UseResult11,
+		onOpenGetUsersPage = UseResult13,
 		isUniversePublic = IsAudienceMatch,
 		buildOverflowMenuStore = BuildOverflowMenuStoreModule,
 		messages = UseChatSessionCoreModuleResult.messages,
@@ -582,7 +595,7 @@ return function(p1)
 		onSubmitAnswerText = if FFlagBuildExperienceAnswerFormModule then UseChatSessionCoreModuleResult.submitAnswerText else nil,
 		clockBinding = UseChatSessionCoreModuleResult.clockBinding,
 		onPlaytest = BuildChatPlaytestCta.onPlaytest,
-		onPublish = if p1.onOpenConfigurationPage == nil then nil else UseResult14,
+		onPublish = if p1.onOpenConfigurationPage == nil then nil else UseResult15,
 		isPlaytestLoading = BuildChatPlaytestCta.isPlaytestLoading,
 		isPlaytestDisabled = NoCanPreview,
 		showPushNotificationsUpsell = if BuildAppStorageKeyEngineFeature then UseStateResult8 and NoUseStateResult7 else NoUseStateResult7,
@@ -628,7 +641,7 @@ return function(p1)
 		getAgentAdCampaignCardState = UseAgentAdCampaignChatViewModelModuleResult.getCardState,
 		isAgentAdCampaignCreateDisabled = if NoCanAdvertise then config2.isCreateDisabled else UseAgentAdCampaignChatViewModelModuleResult.isCreateDisabled,
 		agentAdCampaignAttemptedOption = UseAgentAdCampaignChatViewModelModuleResult.attemptedOption,
-		onAgentAdCampaignActive = if NoCanAdvertise then nil else UseResult12,
+		onAgentAdCampaignActive = if NoCanAdvertise then nil else UseResult13,
 		onAgentAdCampaignSheetClose = UseAgentAdCampaignChatViewModelModuleResult.onSheetClose,
 		onAgentAdCampaignSheetCreate = UseAgentAdCampaignChatViewModelModuleResult.onSheetCreate,
 		isAdUpsellVisible = p1.isFocused ~= false,
@@ -643,6 +656,7 @@ return function(p1)
 		anchorScrollToInstance = UseChatSessionCoreModuleResult.anchorScrollToInstance,
 		onChatViewportChanged = UseResult6,
 		isChatScrollable = UseStateResult1,
+		modelPicker = UseBuildModelSelectionModuleResult,
 		composerText = UseChatSessionCoreModuleResult.composerText,
 		composerErrorText = UseChatSessionCoreModuleResult.composerErrorText,
 		onComposerChanged = UseChatSessionCoreModuleResult.setComposerText,

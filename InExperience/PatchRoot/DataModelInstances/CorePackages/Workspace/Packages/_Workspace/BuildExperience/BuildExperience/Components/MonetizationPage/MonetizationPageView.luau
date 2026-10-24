@@ -110,15 +110,15 @@ local function ProductCard(Frame)
 		LayoutOrder = Frame.LayoutOrder,
 		onActivated = Frame.onActivated,
 		selection = { Selectable = true },
-		Size = _UDim2,
+		Size = if Frame.tileWidth == nil then _UDim2 else UDim2.new(0, Frame.tileWidth, 0, 0),
 		stateLayer = { affordance = StateLayerAffordance.None },
 		testId = `monetization-product-{Identity}`
 	}, {
 		Media = ReactModule.createElement(View, {
 			LayoutOrder = 1,
 			aspectRatio = 1,
-			tag = "radius-medium clip bg-surface-200",
-			Size = if FFlagBuildExperienceMonetizationNativeUIModule and not FFlagBuildExperienceMonetizationMultiKindModule then UDim2.fromOffset(UseTokensResult.Size.Size_2800, UseTokensResult.Size.Size_2800) elseif FFlagBuildExperienceMonetizationMultiKindModule then UDim2.fromScale(1, 0) else UDim2.new(1, 0, 0, 109)
+			Size = if Frame.tileWidth == nil then if FFlagBuildExperienceMonetizationNativeUIModule and not FFlagBuildExperienceMonetizationMultiKindModule then UDim2.fromOffset(UseTokensResult.Size.Size_2800, UseTokensResult.Size.Size_2800) elseif FFlagBuildExperienceMonetizationMultiKindModule then UDim2.fromScale(1, 0) else UDim2.new(1, 0, 0, 109) else UDim2.fromOffset(Frame.tileWidth, Frame.tileWidth),
+			tag = if Frame.tileWidth == nil then "radius-medium clip bg-surface-200" else "radius-medium clip bg-shift-200"
 		}, {
 			SaleStatus = if Product.saleStatus == nil or not FFlagBuildExperienceMonetizationMultiKindModule and FFlagBuildExperienceMonetizationNativeUIModule and Product.isForSale ~= true then nil else ReactModule.createElement(Badge, {
 				ZIndex = 2,
@@ -149,7 +149,7 @@ local function ProductCard(Frame)
 			},
 			testId = if FFlagBuildExperienceMonetizationNativeUIModule then `monetization-product-title-{Identity}` else nil
 		}),
-		Kind = if FFlagBuildExperienceMonetizationMultiKindModule and Product.kind ~= nil then ReactModule.createElement(Text, {
+		Kind = if FFlagBuildExperienceMonetizationMultiKindModule and (Product.kind ~= nil and Frame.tileWidth == nil) then ReactModule.createElement(Text, {
 			LayoutOrder = 3,
 			tag = "size-full-0 auto-y padding-top-xsmall text-body-small text-wrap text-align-x-left content-muted",
 			Text = Product.kind,
@@ -406,8 +406,42 @@ local function OptionsContent(p1)
 	end
 end
 
+local function ProductCarousel(Frame)
+	-- upvalues: UseTokensFunction (copy), ReactModule (copy), ProductCard (copy), ScrollView (copy), FoundationModule (copy), View (copy)
+	local Size2800 = UseTokensFunction().Size.Size_2800
+	local Elements = {}
+	
+	for LayoutOrder, product in Frame.products do
+		local Identity = product.identity or product.id
+		Elements[Identity] = ReactModule.createElement(ProductCard, {
+			LayoutOrder = LayoutOrder,
+			product = product,
+			tileWidth = Size2800,
+			onActivated = function()
+				-- upvalues: Frame (copy), Identity (copy)
+				Frame.onProductActivated(Identity)
+			end
+		})
+	end
+	return ReactModule.createElement(ScrollView, {
+		LayoutOrder = Frame.LayoutOrder,
+		Size = UDim2.fromScale(1, 0),
+		AutomaticSize = Enum.AutomaticSize.Y,
+		testId = Frame.testId,
+		scroll = {
+			AutomaticSize = Enum.AutomaticSize.Y,
+			AutomaticCanvasSize = Enum.AutomaticSize.XY,
+			CanvasSize = UDim2.new(),
+			ScrollingDirection = Enum.ScrollingDirection.X,
+			scrollBarVisibility = FoundationModule.Enums.Visibility.None
+		}
+	}, {
+		Row = ReactModule.createElement(View, { tag = "row gap-medium auto-xy" }, Elements)
+	})
+end
+
 local function GroupedCatalogContent(p1)
-	-- upvalues: ReactModule (copy), Text (copy), ProductRow (copy), View (copy)
+	-- upvalues: ReactModule (copy), Text (copy), ProductCarousel (copy), View (copy)
 	local Elements = {}
 	local LayoutOrder = 0
 	
@@ -423,28 +457,24 @@ local function GroupedCatalogContent(p1)
 			end
 			if #Products ~= 0 then
 				LayoutOrder += 1
-				local config = {
-					Title = ReactModule.createElement(Text, {
-						LayoutOrder = 1,
-						tag = "size-full-0 auto-y text-title-medium content-emphasis",
-						Text = catalogSource.label,
-						testId = `monetization-section-title-{Kind}`
-					})
-				}
-				
-				for i = 1, #Products, 3 do
-					config[`row-{i}`] = ReactModule.createElement(ProductRow, {
-						LayoutOrder = i + 1,
-						onProductActivated = p1.onProductActivated,
-						products = Products,
-						startIndex = i
-					})
-				end
 				Elements[`section-{Kind}`] = ReactModule.createElement(View, {
 					tag = "col gap-medium size-full-0 auto-y",
 					LayoutOrder = LayoutOrder,
 					testId = `monetization-section-{Kind}`
-				}, config)
+				}, {
+					Title = ReactModule.createElement(Text, {
+						LayoutOrder = 1,
+						tag = "size-full-0 auto-y text-title-large text-align-x-left content-emphasis",
+						Text = catalogSource.label,
+						testId = `monetization-section-title-{Kind}`
+					}),
+					Products = ReactModule.createElement(ProductCarousel, {
+						LayoutOrder = 2,
+						onProductActivated = p1.onProductActivated,
+						products = Products,
+						testId = `monetization-section-products-{Kind}`
+					})
+				})
 			end
 		end
 	end
@@ -830,9 +860,9 @@ return function(p4)
 			end
 		end
 	end
-	local NoV83: boolean = not IsDetail and (not IsEdit and (not IsOptions and (if HasCatalogSources then not Flag and not v1 else p4.catalogStatus ~= "Ready" and not (p4.catalogStatus == "Failed" and v1))))
-	local NoNoV83: boolean = p4.mode == "empty" and not NoV83
-	local V83: boolean = not HasCatalogSources and (not IsDetail and (not IsEdit and (not IsOptions and (p4.catalogStatus == "Failed" and v1))))
+	local NoV86: boolean = not IsDetail and (not IsEdit and (not IsOptions and (if HasCatalogSources then not Flag and not v1 else p4.catalogStatus ~= "Ready" and not (p4.catalogStatus == "Failed" and v1))))
+	local NoNoV86: boolean = p4.mode == "empty" and not NoV86
+	local V86: boolean = not HasCatalogSources and (not IsDetail and (not IsEdit and (not IsOptions and (p4.catalogStatus == "Failed" and v1))))
 	local Element = if IsDetail and p4.canManageProduct then if FFlagBuildExperienceMonetizationNativeUIModule then ReactModule.createElement(ProductActionsMenu, {
 		isDisabled = p4.isProductDisabled or (p4.isProductSaleStatusPending or p4.isProductManagedPricingPending),
 		editLabel = p4.labels.edit,
@@ -844,7 +874,7 @@ return function(p4)
 		size = InputSize.Medium,
 		text = p4.labels.edit,
 		variant = ButtonVariant.Standard
-	}) elseif IsDetail or IsEdit or IsOptions or NoV83 or not p4.showOptions then nil else ReactModule.createElement(IconButton, {
+	}) elseif IsDetail or IsEdit or IsOptions or NoV86 or not p4.showOptions then nil else ReactModule.createElement(IconButton, {
 		isCircular = true,
 		testId = "monetization-open-options",
 		icon = if FFlagBuildExperienceMonetizationNativeUIModule then IconName.TwoSwitchesHorizontal else IconName.ThreeSlidersHorizontal,
@@ -859,7 +889,7 @@ return function(p4)
 		GroupTransparency = 0.55,
 		Size = UDim2.new(1, 0, 0, 0)
 	}, { Content = ReactModule.createElement(DetailContent, p4) }) else ReactModule.createElement(DetailContent, p4)
-	local Element1 = if NoV83 then if HasCatalogSources then ReactModule.createElement(CatalogSourcesStatus, p4) else ReactModule.createElement(CatalogStatusContent, p4) elseif IsDetail then CanvasGroup elseif IsEdit then ReactModule.createElement(EditContent, p4) elseif IsOptions then ReactModule.createElement(OptionsContent, p4) elseif p4.mode == "empty" then ReactModule.createElement(EmptyContent, p4) else ReactModule.createElement(CatalogContent, p4)
+	local Element1 = if NoV86 then if HasCatalogSources then ReactModule.createElement(CatalogSourcesStatus, p4) else ReactModule.createElement(CatalogStatusContent, p4) elseif IsDetail then CanvasGroup elseif IsEdit then ReactModule.createElement(EditContent, p4) elseif IsOptions then ReactModule.createElement(OptionsContent, p4) elseif p4.mode == "empty" then ReactModule.createElement(EmptyContent, p4) else ReactModule.createElement(CatalogContent, p4)
 	
 	if HasCatalogSources and not Flag and v1 and not IsDetail and not IsEdit and not IsOptions then
 		Element1 = ReactModule.createElement(View, { tag = "col gap-large size-full-0 auto-y" }, {
@@ -867,7 +897,7 @@ return function(p4)
 			Content = Element1
 		})
 	end
-	if V83 then
+	if V86 then
 		Element1 = ReactModule.createElement(View, { tag = "col gap-medium size-full-0 auto-y" }, {
 			Warning = ReactModule.createElement(CatalogRefreshWarning, p4),
 			Content = Element1
@@ -916,7 +946,7 @@ return function(p4)
 			testId = "monetization-detail-composer"
 		}, {
 			Composer = ReactModule.createElement(ChatActionsModule, p4.chatActions)
-		}) elseif NoV83 or p4.mode ~= "empty" and p4.mode ~= "catalog" then nil else ReactModule.createElement(View, {
+		}) elseif NoV86 or p4.mode ~= "empty" and p4.mode ~= "catalog" then nil else ReactModule.createElement(View, {
 			tag = {
 				["row align-x-center size-full-0 auto-y"] = true,
 				["padding-y-medium"] = FFlagBuildExperienceMonetizationNativeUIModule
@@ -932,7 +962,7 @@ return function(p4)
 				width = if FFlagBuildExperienceMonetizationNativeUIModule then UDim.new(1, 0) else UDim.new(0, 240)
 			})
 		}),
-		disableScrolling = FFlagBuildExperienceMonetizationNativeUIModule and NoNoV83,
+		disableScrolling = FFlagBuildExperienceMonetizationNativeUIModule and NoNoV86,
 		headerTrailing = Element,
 		onClose = p4.onClose,
 		title = if IsDetail then if p4.selectedProduct == nil then p4.labels.title else p4.selectedProduct.name elseif IsEdit then p4.labels.editProduct elseif IsOptions then p4.labels.options else p4.labels.title

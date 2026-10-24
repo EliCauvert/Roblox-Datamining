@@ -45,7 +45,6 @@ local UpsellSuggestionsAPIMaxPackages = require(Parent.SharedFlags).UpsellSugges
 local RobuxUpsellOverlayModule = require(script.Parent.RobuxUpsellOverlay)
 local AppPage = require(Parent.RobloxAppEnums).AppPage
 local SharedFlagsModule = require(Parent.SharedFlags)
-local FFlagEnableInExperienceOffersPurchaseFlow = SharedFlagsModule.FFlagEnableInExperienceOffersPurchaseFlow
 local FFlagLuaAppsEnablePromptVIPServerPurchase = SharedFlagsModule.FFlagLuaAppsEnablePromptVIPServerPurchase
 local FFlagEnableRobuxUpsellPlusButtonExperiment = IAPExperienceModule.Flags.FFlagEnableRobuxUpsellPlusButtonExperiment
 local FFlagAddOnRobloxSubscriptionUpsellSuccessCallbackToUnifiedPurchaseModal = SharedFlagsModule.FFlagAddOnRobloxSubscriptionUpsellSuccessCallbackToUnifiedPurchaseModal
@@ -55,7 +54,7 @@ local StartRobuxUpsellPlusPurchaseModule = require(PurchasePrompt.Utils.startRob
 local ExtendResult = Roact.Component:extend(script.Name)
 
 function ExtendResult.init(p1)
-	-- upvalues: FFlagEnableInExperienceOffersPurchaseFlow (copy), RequestTypeModule (copy), AppPage (copy), StartRobuxUpsellPlusPurchaseModule (copy)
+	-- upvalues: RequestTypeModule (copy), AppPage (copy), StartRobuxUpsellPlusPurchaseModule (copy)
 	p1.state = { screenSize = Vector2.new(0, 0) }
 	p1.isRobloxPlusUpsellStarting = false
 	
@@ -67,13 +66,13 @@ function ExtendResult.init(p1)
 	end
 	
 	function p1:fetchCartPricingForPurchasePrompt(p2)
-		-- upvalues: p1 (copy), FFlagEnableInExperienceOffersPurchaseFlow (upval), RequestTypeModule (upval)
+		-- upvalues: p1 (copy), RequestTypeModule (upval)
 		if p2 == nil then
 			return nil
 		else
 			local RequestType = p1.props.requestType
 			
-			return if FFlagEnableInExperienceOffersPurchaseFlow and (RequestType == RequestTypeModule.GamePass or RequestType == RequestTypeModule.Product) then p1.props.fetchInGameItemCartPricing(p2) else p1.props.fetchCartPricing(p2)
+			return if RequestType == RequestTypeModule.GamePass or RequestType == RequestTypeModule.Product then p1.props.fetchInGameItemCartPricing(p2) else p1.props.fetchCartPricing(p2)
 		end
 	end
 	
@@ -284,7 +283,7 @@ return (ConnectToStoreModule(function(p1)
 		onRobloxSubscriptionUpsellSuccess = if FFlagAddOnRobloxSubscriptionUpsellSuccessCallbackToUnifiedPurchaseModal and p1.purchaseCallbacks then p1.purchaseCallbacks.onRobloxSubscriptionUpsellSuccess else nil
 	}
 end, function(Callback)
-	-- upvalues: PurchaseItemModule (copy), FetchCartPricingModule (copy), FFlagEnableInExperienceOffersPurchaseFlow (copy), FetchInGameItemCartPricingModule (copy), LaunchRobuxUpsellModule (copy), OpenRobuxStoreModule (copy), OpenSecuritySettingsModule (copy), OpenTermsOfUseModule (copy), InitiateUserPurchaseSettingsPrecheckModule (copy), GuiService (copy), CompleteRequestModule (copy), RetryPurchaseAfterUpsellModule (copy), SetPromptStateModule (copy), SetWindowStateModule (copy), PromptNativeUpsellSuggestionsModule (copy), SendEventModule (copy), SetPostPurchaseActionsModule (copy)
+	-- upvalues: PurchaseItemModule (copy), FetchCartPricingModule (copy), FetchInGameItemCartPricingModule (copy), LaunchRobuxUpsellModule (copy), OpenRobuxStoreModule (copy), OpenSecuritySettingsModule (copy), OpenTermsOfUseModule (copy), InitiateUserPurchaseSettingsPrecheckModule (copy), GuiService (copy), CompleteRequestModule (copy), RetryPurchaseAfterUpsellModule (copy), SetPromptStateModule (copy), SetWindowStateModule (copy), PromptNativeUpsellSuggestionsModule (copy), SendEventModule (copy), SetPostPurchaseActionsModule (copy)
 	return {
 		purchaseItem = function()
 			-- upvalues: Callback (copy), PurchaseItemModule (upval)
@@ -294,10 +293,10 @@ end, function(Callback)
 			-- upvalues: Callback (copy), FetchCartPricingModule (upval)
 			return Callback(FetchCartPricingModule(p1))
 		end,
-		fetchInGameItemCartPricing = if FFlagEnableInExperienceOffersPurchaseFlow then function(p1)
+		fetchInGameItemCartPricing = function(p1)
 			-- upvalues: Callback (copy), FetchInGameItemCartPricingModule (upval)
 			return Callback(FetchInGameItemCartPricingModule(p1))
-		end else nil,
+		end,
 		promptRobuxPurchase = function()
 			-- upvalues: Callback (copy), LaunchRobuxUpsellModule (upval)
 			return Callback(LaunchRobuxUpsellModule())

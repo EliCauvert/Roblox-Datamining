@@ -6,15 +6,13 @@ local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalizati
 local Default = require(Parent.ExternalContentSharingProtocol).ExternalContentSharingProtocol.default
 local _ = require(BuildExperience.Chat.chatTypes)
 local FFlagBuildExperienceCopyChatMessagesModule = require(BuildExperience.Flags.FFlagBuildExperienceCopyChatMessages)
-local FFlagBuildExperienceRichTextUserMessagesModule = require(BuildExperience.Flags.FFlagBuildExperienceRichTextUserMessages)
-local FFlagBuildExperienceUserMessageHapticFeedbackModule = require(BuildExperience.Flags.FFlagBuildExperienceUserMessageHapticFeedback)
 local FFlagBuildExperienceChatImageAttachmentsModule = require(BuildExperience.Flags.FFlagBuildExperienceChatImageAttachments)
 local FFlagBuildExperienceChatResourceAttachments = require(Parent.SharedFlags).FFlagBuildExperienceChatResourceAttachments
 local LocalizationStringsModule = require(BuildExperience.LocalizationStrings)
 local EscapeRichTextModule = require(BuildExperience.utils.escapeRichText)
 local ChatImagePreviewListModule = if FFlagBuildExperienceChatImageAttachmentsModule then require(script.Parent.ChatImagePreviewList) else nil
 local ChatResourceAttachmentListModule = if FFlagBuildExperienceChatResourceAttachments then require(script.Parent.ChatResourceAttachmentList) else nil
-local UseTriggerFeedback = if FFlagBuildExperienceUserMessageHapticFeedbackModule then require(Parent.InteractionFeedback).useTriggerFeedback else nil
+local UseTriggerFeedbackFunction = require(Parent.InteractionFeedback).useTriggerFeedback
 local Menu = FoundationModule.Menu
 local Text = FoundationModule.Text
 local View = FoundationModule.View
@@ -35,48 +33,30 @@ local function _(p1)
 	end, { p1 })
 end
 
-local function UserMessageBubble(Frame: Frame)
-	-- upvalues: UseTokensFunction (copy), FFlagBuildExperienceRichTextUserMessagesModule (copy), ReactModule (copy), EscapeRichTextModule (copy), Text (copy), config (copy), View (copy)
-	local UseTokensResult = UseTokensFunction()
+local function UserMessageBubble(Frame)
+	-- upvalues: UseTokensFunction (copy), ReactModule (copy), EscapeRichTextModule (copy), Text (copy), config (copy)
+	local MessageText = Frame.messageText
 	
-	if FFlagBuildExperienceRichTextUserMessagesModule then
-		local MessageText = Frame.messageText
-		
-		return ReactModule.createElement(Text, {
-			RichText = true,
-			tag = "auto-xy padding-medium text-body-medium text-wrap text-align-x-left bg-shift-200 content-emphasis",
-			LayoutOrder = Frame.LayoutOrder,
-			cornerRadius = UDim.new(0, UseTokensResult.Size.Size_500),
-			onSecondaryActivated = Frame.onSecondaryActivated,
-			stateLayer = if Frame.onSecondaryActivated == nil then nil else config,
-			Text = ReactModule.useMemo(function()
-				-- upvalues: EscapeRichTextModule (upval), MessageText (copy)
-				return EscapeRichTextModule(MessageText)
-			end, { MessageText }),
-			testId = Frame.testId
-		})
-	else
-		return ReactModule.createElement(View, {
-			tag = "auto-xy padding-medium bg-shift-200",
-			LayoutOrder = Frame.LayoutOrder,
-			cornerRadius = UDim.new(0, UseTokensResult.Size.Size_500),
-			onSecondaryActivated = Frame.onSecondaryActivated,
-			stateLayer = if Frame.onSecondaryActivated == nil then nil else config,
-			testId = Frame.testId
-		}, {
-			Text = ReactModule.createElement(Text, {
-				tag = "size-full-0 auto-y text-body-medium text-wrap text-align-x-left content-emphasis",
-				Text = Frame.messageText
-			})
-		})
-	end
+	return ReactModule.createElement(Text, {
+		RichText = true,
+		tag = "auto-xy padding-medium text-body-medium text-wrap text-align-x-left bg-shift-200 content-emphasis",
+		LayoutOrder = Frame.LayoutOrder,
+		cornerRadius = UDim.new(0, UseTokensFunction().Size.Size_500),
+		onSecondaryActivated = Frame.onSecondaryActivated,
+		stateLayer = if Frame.onSecondaryActivated == nil then nil else config,
+		Text = ReactModule.useMemo(function()
+			-- upvalues: EscapeRichTextModule (upval), MessageText (copy)
+			return EscapeRichTextModule(MessageText)
+		end, { MessageText }),
+		testId = Frame.testId
+	})
 end
 
 local function CopyableUserMessageBubble(Frame)
-	-- upvalues: UseLocalizationFunction (copy), LocalizationStringsModule (copy), ReactModule (copy), FFlagBuildExperienceUserMessageHapticFeedbackModule (copy), UseTriggerFeedback (copy), IconName (copy), Menu (copy), PopoverAlign (copy), Default (copy), PopoverSide (copy), InputSize (copy), UserMessageBubble (copy)
+	-- upvalues: UseLocalizationFunction (copy), LocalizationStringsModule (copy), ReactModule (copy), UseTriggerFeedbackFunction (copy), IconName (copy), Menu (copy), PopoverAlign (copy), Default (copy), PopoverSide (copy), InputSize (copy), UserMessageBubble (copy)
 	local UseLocalizationResult = UseLocalizationFunction({ copyText = LocalizationStringsModule.CHAT_COPY_TEXT })
 	local UseStateResult, UseStateResult2 = ReactModule.useState(false)
-	local UseTriggerFeedbackResult = if FFlagBuildExperienceUserMessageHapticFeedbackModule then UseTriggerFeedback() else nil
+	local UseTriggerFeedbackResult = UseTriggerFeedbackFunction()
 	
 	return ReactModule.createElement(Menu, {
 		LayoutOrder = Frame.LayoutOrder,
@@ -108,10 +88,8 @@ local function CopyableUserMessageBubble(Frame)
 			testId = "ChatUserMessage.Bubble",
 			messageText = Frame.messageText,
 			onSecondaryActivated = function()
-				-- upvalues: FFlagBuildExperienceUserMessageHapticFeedbackModule (upval), UseTriggerFeedbackResult (copy), UseStateResult2 (copy)
-				if FFlagBuildExperienceUserMessageHapticFeedbackModule then
-					UseTriggerFeedbackResult("Default", "SecondaryActivated")
-				end
+				-- upvalues: UseTriggerFeedbackResult (copy), UseStateResult2 (copy)
+				UseTriggerFeedbackResult("Default", "SecondaryActivated")
 				UseStateResult2(true)
 			end
 		})

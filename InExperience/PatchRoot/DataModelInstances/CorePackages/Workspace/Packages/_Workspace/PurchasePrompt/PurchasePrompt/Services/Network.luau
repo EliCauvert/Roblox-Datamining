@@ -3,12 +3,10 @@ local Parent = PurchasePrompt.Parent
 local HttpService = game:GetService("HttpService")
 local MarketplaceService = game:GetService("MarketplaceService")
 local InsertService = game:GetService("InsertService")
-local UserInputService = game:GetService("UserInputService")
 local Players = game:GetService("Players")
 local CreatorStoreService = game:GetService("CreatorStoreService")
 local UrlBuilder = require(Parent.PurchasePromptDeps).UrlBuilder.UrlBuilder
 local PromiseModule = require(PurchasePrompt.Promise)
-local PremiumProductModule = require(PurchasePrompt.Models.PremiumProduct)
 local _ = require(PurchasePrompt.types)
 local DebugLogModule = require(PurchasePrompt.Utils.debugLog)
 local SerializeTableModule = require(PurchasePrompt.Utils.serializeTable)
@@ -28,7 +26,6 @@ local FFlagAXSupportRentalPurchaseInUnifiedProductPurchaseFlow = SharedFlagsModu
 local FFlagEnablePurchasePayloadInExperienceShop = SharedFlagsModule.FFlagEnablePurchasePayloadInExperienceShop
 local FFlagEnableMarketplacePurchaseDeepLinkAttribution = SharedFlagsModule.FFlagEnableMarketplacePurchaseDeepLinkAttribution
 local FFlagRefreshPriceOnRetryAfterUpsellModule = require(PurchasePrompt.Flags.FFlagRefreshPriceOnRetryAfterUpsell)
-local FFlagEnableInExperienceOffersPurchaseFlow = SharedFlagsModule.FFlagEnableInExperienceOffersPurchaseFlow
 local FFlagPurchasePromptFetchCartPricingForLooks = SharedFlagsModule.FFlagPurchasePromptFetchCartPricingForLooks
 local Replaced = string.gsub(string.gsub(game:GetService("ContentProvider").BaseUrl:lower(), "/m.", "/www."), "http:", "https:")
 local _ = string.gsub(Replaced, "https://www", "https://api")
@@ -37,11 +34,9 @@ local Replaced2 = string.gsub(Replaced, "https://www", "https://games")
 local Replaced3 = string.gsub(Replaced, "https://www", "https://abtesting")
 local Replaced4 = string.gsub(Replaced, "https://www.", "https://catalog.")
 local Replaced5 = string.gsub(Replaced, "https://www.", "https://economy.")
-local Replaced6 = string.gsub(Replaced, "https://www.", "https://premiumfeatures.")
-local Replaced7 = string.gsub(Replaced, "https://www.", "https://economycreatorstats.")
-local Replaced8 = string.gsub(Replaced, "https://www", "https://users")
+local Replaced6 = string.gsub(Replaced, "https://www", "https://users")
 
-local function request(Options, Callback1, Callback)
+local function request(Options, Callback, Callback1)
 	-- upvalues: DebugLogModule (copy), SerializeTableModule (copy), HttpService (copy)
 	DebugLogModule(function(): string
 		-- upvalues: Options (copy), SerializeTableModule (upval)
@@ -49,25 +44,25 @@ local function request(Options, Callback1, Callback)
 	end)
 	
 	return HttpService:RequestInternal(Options):Start(function(p1, p2)
-		-- upvalues: DebugLogModule (upval), Options (copy), SerializeTableModule (upval), HttpService (upval), Callback1 (copy), Callback (copy)
+		-- upvalues: DebugLogModule (upval), Options (copy), SerializeTableModule (upval), HttpService (upval), Callback (copy), Callback1 (copy)
 		DebugLogModule(function(): string
 			-- upvalues: Options (upval), SerializeTableModule (upval), p2 (copy)
 			return "Response " .. Options.Url .. "\n" .. SerializeTableModule(p2)
 		end)
 		
 		if not p1 then
-			Callback((tostring(p2.StatusMessage)))
+			Callback1((tostring(p2.StatusMessage)))
 			
 			return
 		end
 		local Success, Result = pcall(HttpService.JSONDecode, HttpService, p2.Body)
 		
 		if Success then
-			Callback1(Result)
+			Callback(Result)
 			
 			return
 		else
-			Callback("Could not parse JSON.")
+			Callback1("Could not parse JSON.")
 		end
 	end)
 end
@@ -104,32 +99,6 @@ end
 local function getSubscriptionProductInfo(SubscriptionId)
 	-- upvalues: MarketplaceService (copy)
 	return MarketplaceService:GetSubscriptionProductInfoAsync(SubscriptionId)
-end
-
-local function getPremiumProductInfo()
-	-- upvalues: PromiseModule (copy), request (copy), Replaced6 (copy), PremiumProductModule (copy), UserInputService (copy)
-	return PromiseModule.new(function(Callback, p1)
-		-- upvalues: request (upval), Replaced6 (upval), PremiumProductModule (upval), UserInputService (upval)
-		request({
-			Method = "GET",
-			Url = Replaced6 .. "v1/products?typeName=Subscription"
-		}, function(p2)
-			-- upvalues: PremiumProductModule (upval), UserInputService (upval), Callback (copy)
-			local v1 = nil
-			
-			for _, product in ipairs(p2.products) do
-				local PremiumProductModuleResult = PremiumProductModule(product)
-				
-				if PremiumProductModuleResult ~= nil and (v1 == nil or PremiumProductModuleResult.robuxAmount < v1.robuxAmount) then
-					v1 = PremiumProductModuleResult
-				end
-			end
-			if UserInputService:GetPlatform() == Enum.Platform.Android and v1 ~= nil and v1.mobileProductId ~= nil then
-				v1.mobileProductId = v1.mobileProductId:lower()
-			end
-			Callback(v1)
-		end, p1)
-	end)
 end
 
 local function getPlayerOwns(Player, GamePassId, InfoType)
@@ -230,12 +199,12 @@ local function loadAssetForEquip(AssetId)
 end
 
 local function getAccountInfo()
-	-- upvalues: PromiseModule (copy), request (copy), Replaced8 (copy)
+	-- upvalues: PromiseModule (copy), request (copy), Replaced6 (copy)
 	return PromiseModule.new(function(p1, p2)
-		-- upvalues: request (upval), Replaced8 (upval)
+		-- upvalues: request (upval), Replaced6 (upval)
 		request({
 			Method = "GET",
-			Url = Replaced8 .. "v1/users/authenticated/app-launch-info"
+			Url = Replaced6 .. "v1/users/authenticated/app-launch-info"
 		}, p1, p2)
 	end)
 end
@@ -354,52 +323,6 @@ local function postInGameItemCartPricing(Input)
 	return PromiseModule.new(function(p1, p2)
 		-- upvalues: request (upval), config (copy)
 		request(config, p1, p2)
-	end)
-end
-
-local function postPremiumImpression()
-	-- upvalues: Replaced7 (copy), HttpService (copy), PromiseModule (copy)
-	local config = {
-		Method = "POST",
-		Url = Replaced7 .. "v1/universes/" .. tostring(game.GameId) .. "/premium-impressions/increment",
-		Body = HttpService:JSONEncode("{}"),
-		Headers = {
-			["Content-Type"] = "application/json",
-			Accept = "application/json"
-		}
-	}
-	
-	return PromiseModule.new(function(_, _)
-		-- upvalues: HttpService (upval), config (copy)
-		spawn(function()
-			-- upvalues: HttpService (upval), config (upval)
-			return HttpService:RequestInternal(config):Start(function(_, _) end)
-		end)
-	end)
-end
-
-local function getPremiumUpsellPrecheck()
-	-- upvalues: Replaced6 (copy), Players (copy), PromiseModule (copy), HttpService (copy)
-	local config = {
-		Method = "GET",
-		Url = string.format("%sv1/users/%d/premium-upsell-precheck?universeId=%d&placeId=%d", Replaced6, Players.LocalPlayer.UserId, game.GameId, game.PlaceId)
-	}
-	
-	return PromiseModule.new(function(Callback1, Callback)
-		-- upvalues: HttpService (upval), config (copy)
-		spawn(function()
-			-- upvalues: HttpService (upval), config (upval), Callback1 (copy), Callback (copy)
-			return HttpService:RequestInternal(config):Start(function(p1, p2)
-				-- upvalues: Callback1 (upval), Callback (upval)
-				if p1 and p2.StatusCode == 200 then
-					Callback1()
-					
-					return
-				else
-					Callback()
-				end
-			end)
-		end)
 	end)
 end
 
@@ -669,7 +592,7 @@ end
 
 return {
 	new = function()
-		-- upvalues: PromiseModule (copy), getABTestGroup (copy), getProductInfo (copy), getPlayerOwns (copy), performPurchase (copy), performPurchaseV2 (copy), GetFFlagEnableCreatorStorePurchasingCutoverModule (copy), performCreatorStorePurchase (copy), loadAssetForEquip (copy), getAccountInfo (copy), getAssetInfo (copy), getBalanceInfo (copy), getBundleDetails (copy), getProductPurchasableDetails (copy), FFlagRefreshPriceOnRetryAfterUpsellModule (copy), getCatalogItemDetails (copy), getResellers (copy), getCreatorStoreProductInfo (copy), getPremiumProductInfo (copy), postPremiumImpression (copy), getPremiumUpsellPrecheck (copy), getSubscriptionPurchaseInfo (copy), performSubscriptionPurchase (copy), getPurchaseWarning (copy), postPurchaseWarningAcknowledge (copy), checkUserPurchaseSettings (copy), getVngShopUrl (copy), performDevProductEdpPurchase (copy), getExperienceProductInfo (copy), performExperiencePurchase (copy), getUniversePrivateServerSettings (copy), performLookPurchase (copy), getUnifiedPurchaseFlowUserEligibility (copy), FFlagPurchasePromptFetchCartPricingForLooks (copy), performLookPurchaseBulkPurchase (copy), FFlagEnableUnifiedPurchaseFlowForDevSubs (copy), performDeveloperSubscriptionRobuxPurchase (copy), getSubscriptionProductInfo (copy), FFlagUnifiedPurchaseSupportRefetchingLooksAfterUpsellModule (copy), GetLookDetailsV2ProductInfo (copy), postCartPricing (copy), FFlagEnableInExperienceOffersPurchaseFlow (copy), postInGameItemCartPricing (copy)
+		-- upvalues: PromiseModule (copy), getABTestGroup (copy), getProductInfo (copy), getPlayerOwns (copy), performPurchase (copy), performPurchaseV2 (copy), GetFFlagEnableCreatorStorePurchasingCutoverModule (copy), performCreatorStorePurchase (copy), loadAssetForEquip (copy), getAccountInfo (copy), getAssetInfo (copy), getBalanceInfo (copy), getBundleDetails (copy), getProductPurchasableDetails (copy), FFlagRefreshPriceOnRetryAfterUpsellModule (copy), getCatalogItemDetails (copy), getResellers (copy), getCreatorStoreProductInfo (copy), getSubscriptionPurchaseInfo (copy), performSubscriptionPurchase (copy), getPurchaseWarning (copy), postPurchaseWarningAcknowledge (copy), checkUserPurchaseSettings (copy), getVngShopUrl (copy), performDevProductEdpPurchase (copy), getExperienceProductInfo (copy), performExperiencePurchase (copy), getUniversePrivateServerSettings (copy), performLookPurchase (copy), getUnifiedPurchaseFlowUserEligibility (copy), FFlagPurchasePromptFetchCartPricingForLooks (copy), performLookPurchaseBulkPurchase (copy), FFlagEnableUnifiedPurchaseFlowForDevSubs (copy), performDeveloperSubscriptionRobuxPurchase (copy), getSubscriptionProductInfo (copy), FFlagUnifiedPurchaseSupportRefetchingLooksAfterUpsellModule (copy), GetLookDetailsV2ProductInfo (copy), postCartPricing (copy), postInGameItemCartPricing (copy)
 		local config = {
 			getABTestGroup = PromiseModule.promisify(getABTestGroup),
 			getProductInfo = PromiseModule.promisify(getProductInfo),
@@ -686,9 +609,6 @@ return {
 			getCatalogItemDetails = if FFlagRefreshPriceOnRetryAfterUpsellModule then getCatalogItemDetails else nil,
 			getResellers = if FFlagRefreshPriceOnRetryAfterUpsellModule then getResellers else nil,
 			getCreatorStoreProductInfo = if GetFFlagEnableCreatorStorePurchasingCutoverModule() then PromiseModule.promisify(getCreatorStoreProductInfo) else nil,
-			getPremiumProductInfo = PromiseModule.promisify(getPremiumProductInfo),
-			postPremiumImpression = PromiseModule.promisify(postPremiumImpression),
-			getPremiumUpsellPrecheck = PromiseModule.promisify(getPremiumUpsellPrecheck),
 			getSubscriptionPurchaseInfo = PromiseModule.promisify(getSubscriptionPurchaseInfo),
 			performSubscriptionPurchase = PromiseModule.promisify(performSubscriptionPurchase),
 			getPurchaseWarning = PromiseModule.promisify(getPurchaseWarning),
@@ -706,7 +626,7 @@ return {
 			getSubscriptionProductInfo = if FFlagEnableUnifiedPurchaseFlowForDevSubs then PromiseModule.promisify(getSubscriptionProductInfo) else nil,
 			GetLookDetailsV2ProductInfo = if FFlagUnifiedPurchaseSupportRefetchingLooksAfterUpsellModule then PromiseModule.promisify(GetLookDetailsV2ProductInfo) else nil,
 			postCartPricing = postCartPricing,
-			postInGameItemCartPricing = if FFlagEnableInExperienceOffersPurchaseFlow then postInGameItemCartPricing else nil
+			postInGameItemCartPricing = postInGameItemCartPricing
 		}
 		setmetatable(config, {
 			__tostring = function(): string

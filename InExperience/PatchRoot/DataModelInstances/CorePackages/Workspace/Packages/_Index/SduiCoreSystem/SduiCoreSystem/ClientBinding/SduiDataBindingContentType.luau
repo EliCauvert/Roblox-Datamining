@@ -13,6 +13,8 @@
 	marketplaceAsset = "marketplaceAsset",
 	marketplaceBundle = "marketplaceBundle",
 	marketplaceLook = "marketplaceLook",
+	marketplaceAssetUserFavorite = "marketplaceAssetUserFavorite",
+	marketplaceBundleUserFavorite = "marketplaceBundleUserFavorite",
 	collectibleItem = "collectibleItem",
 	song = "song",
 	gamePass = "gamePass",

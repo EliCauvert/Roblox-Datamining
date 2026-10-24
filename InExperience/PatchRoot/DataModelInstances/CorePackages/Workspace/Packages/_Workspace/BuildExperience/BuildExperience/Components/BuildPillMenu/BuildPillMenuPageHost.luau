@@ -4,6 +4,8 @@ local CreatorAgentChatModule = require(Parent.DataHydration.CreatorAgentChat)
 local FoundationModule = require(Parent.Foundation)
 local ReactModule = require(Parent.React)
 local ReactRobloxModule = require(Parent.ReactRoblox)
+local SignalsReactModule = require(Parent.SignalsReact)
+local LocalUserIdStore = require(Parent.LocalUserIdStore).LocalUserIdStore
 local RoactNavigationModule = require(Parent.RoactNavigation)
 local SharedFlagsModule = require(Parent.SharedFlags)
 local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
@@ -13,15 +15,14 @@ local FFlagMyStatsMediaSelector = SharedFlagsModule.FFlagMyStatsMediaSelector
 local View = FoundationModule.View
 local OverlayProvider = FoundationModule.OverlayProvider
 local UseOverlayFunction = FoundationModule.Hooks.useOverlay
-local IconName = FoundationModule.Enums.IconName
 local BuildOverflowMenuScreensModule = require(script.Parent.BuildOverflowMenuScreens)
+local FFlagBuildExperienceModelPickerModule = require(BuildExperience.Flags.FFlagBuildExperienceModelPicker)
 local PrivateInvitesPickerContainerModule = require(BuildExperience.Components.PrivateInvitesPicker.PrivateInvitesPickerContainer)
 local PrivateInvitesManagementContainerModule = require(BuildExperience.Components.GameConfigurations.PrivateInvitesManagement.PrivateInvitesManagementContainer)
 local OverflowMenuPageShellModule = require(script.Parent.OverflowMenuPageShell)
 local BuildExperienceCompositionStyleSheetModule = require(BuildExperience.Components.BuildExperienceCompositionStyleSheet)
 local CreatorCreditPageContainerModule = require(BuildExperience.Components.CreatorCreditSheet.CreatorCreditPageContainer)
 local SubagentStatusModule = require(BuildExperience.Components.SubagentStatus)
-local FFlagBuildBackButtonChevronModule = require(BuildExperience.Flags.FFlagBuildBackButtonChevron)
 local _ = require(BuildExperience.Stores.GetBuildOverflowMenuStore.createBuildOverflowMenuStore)
 local BuildNavigationParamsModule = require(BuildExperience.utils.BuildNavigationParams)
 local UseSessionSummaryModule = require(BuildExperience.Chat.useSessionSummary)
@@ -145,7 +146,7 @@ local List = {
 	{
 		BuildPillMenuAgentDetails = {
 			screen = function(p2)
-				-- upvalues: BuildNavigationParamsModule (copy), UseLocalizationFunction (copy), LocalizationStringsModule (copy), ReactModule (copy), SubagentStatusModule (copy), View (copy), OverflowMenuPageShellModule (copy), FFlagBuildBackButtonChevronModule (copy), IconName (copy)
+				-- upvalues: BuildNavigationParamsModule (copy), UseLocalizationFunction (copy), LocalizationStringsModule (copy), ReactModule (copy), SubagentStatusModule (copy), View (copy), OverflowMenuPageShellModule (copy)
 				local Navigation = p2.navigation
 				local ScreenProps = p2.screenProps
 				local SubagentTaskState = BuildNavigationParamsModule.getSubagentTaskState(Navigation) or ScreenProps.subagentTaskState
@@ -176,8 +177,7 @@ local List = {
 						-- upvalues: Navigation (copy)
 						Navigation.goBack()
 					end, { Navigation }),
-					content = if Group == nil then ReactModule.createElement(View, { tag = "size-full" }) else ReactModule.createElement(SubagentStatusModule.AgentDetailsList, { testId = "BuildPillMenu.AgentDetailsList", group = Group }),
-					closeIcon = if FFlagBuildBackButtonChevronModule then nil else IconName.ChevronLargeLeft
+					content = if Group == nil then ReactModule.createElement(View, { tag = "size-full" }) else ReactModule.createElement(SubagentStatusModule.AgentDetailsList, { testId = "BuildPillMenu.AgentDetailsList", group = Group })
 				})
 			end
 		}
@@ -245,7 +245,7 @@ local _ = function(p3)
 end
 
 return ReactModule.memo(function(p3)
-	-- upvalues: UseLocalizationFunction (copy), LocalizationStringsModule (copy), UseOverlayFunction (copy), ReactModule (copy), config (copy), BuildOverflowMenuScreensModule (copy), CreatorAgentChatModule (copy), UseSessionSummaryModule (copy), PrivateInvitesPickerContainerModule (copy), View (copy), OverflowMenuPageShellModule (copy), FFlagBuildBackButtonChevronModule (copy), IconName (copy), PrivateInvitesManagementContainerModule (copy), AppContainer (copy), ReactRobloxModule (copy), BuildExperienceCompositionStyleSheetModule (copy), OverlayProvider (copy)
+	-- upvalues: UseLocalizationFunction (copy), LocalizationStringsModule (copy), UseOverlayFunction (copy), ReactModule (copy), config (copy), BuildOverflowMenuScreensModule (copy), FFlagBuildExperienceModelPickerModule (copy), SignalsReactModule (copy), LocalUserIdStore (copy), CreatorAgentChatModule (copy), UseSessionSummaryModule (copy), PrivateInvitesPickerContainerModule (copy), View (copy), OverflowMenuPageShellModule (copy), PrivateInvitesManagementContainerModule (copy), AppContainer (copy), ReactRobloxModule (copy), BuildExperienceCompositionStyleSheetModule (copy), OverlayProvider (copy)
 	local PrivateInvitesPageTitle = UseLocalizationFunction({
 		privateInvitesPageTitle = LocalizationStringsModule.PRIVATE_INVITES_PAGE_TITLE
 	}).privateInvitesPageTitle
@@ -263,7 +263,8 @@ return ReactModule.memo(function(p3)
 	end, {
 		p3.target.universeId,
 		p3.target.placeId,
-		p3.target.sessionId
+		p3.target.sessionId,
+		if FFlagBuildExperienceModelPickerModule then SignalsReactModule.useSignalState(LocalUserIdStore.getCurrentUserId) else nil
 	}))).subagentTaskState
 	local UseOverlayResult1 = if UseOverlayResult == nil then nil elseif UseOverlayResult:IsA("ScreenGui") then UseOverlayResult else UseOverlayResult:FindFirstAncestorOfClass("ScreenGui")
 	local UseOverlayResult2 = if UseOverlayResult1 == nil or UseOverlayResult1.Parent == nil then UseOverlayResult else UseOverlayResult1.Parent
@@ -291,7 +292,6 @@ return ReactModule.memo(function(p3)
 				Management = ReactModule.createElement(OverflowMenuPageShellModule, {
 					testId = "BuildPillMenu.playtestInviteManagement.Page",
 					title = PrivateInvitesPageTitle,
-					closeIcon = if FFlagBuildBackButtonChevronModule then nil else IconName.ChevronLargeLeft,
 					onClose = p3.onClose,
 					content = ReactModule.createElement(PrivateInvitesManagementContainerModule, {
 						universeId = p3.target.universeId,

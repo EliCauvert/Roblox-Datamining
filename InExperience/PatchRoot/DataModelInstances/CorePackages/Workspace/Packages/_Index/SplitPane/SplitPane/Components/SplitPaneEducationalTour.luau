@@ -20,6 +20,8 @@ local FFlagSplitPaneEducationalTourPreloadVideosModule = require(script.Parent.P
 local UseSplitPaneEducationalTourVideoPreloadModule = if FFlagSplitPaneEducationalTourPreloadVideosModule then require(script.Parent.useSplitPaneEducationalTourVideoPreload) else nil
 local FFlagSplitPaneEducationalTourSkipOnDeepLinkModule = require(script.Parent.Parent.Flags.FFlagSplitPaneEducationalTourSkipOnDeepLink)
 local DeepLinkLuaReceiverStatusStore = if FFlagSplitPaneEducationalTourSkipOnDeepLinkModule then require(Parent.DeepLink).DeepLinkLuaReceiverStatusStore else nil
+local FFlagSplitPaneEducationalTourTelemetryModule = require(script.Parent.Parent.Flags.FFlagSplitPaneEducationalTourTelemetry)
+local SplitPaneEducationalTourTelemetryModule = if FFlagSplitPaneEducationalTourTelemetryModule then require(script.Parent.Parent.Telemetry.SplitPaneEducationalTourTelemetry) else nil
 local IsSplitPaneEducationalTourGuiObjectVisibleModule = require(script.Parent.isSplitPaneEducationalTourGuiObjectVisible)
 local GetSplitPaneEducationalTourStoreModule = require(script.Parent.Parent.Stores.getSplitPaneEducationalTourStore)
 local SplitPaneStoreModule = require(script.Parent.Parent.Stores.SplitPaneStore)
@@ -55,7 +57,7 @@ local function _(Current)
 end
 
 local function SplitPaneEducationalTourBody(p1)
-	-- upvalues: SupportPaneMode (copy), SplitPaneStoreModule (copy), UseSignalStateFunction (copy), ReactModule (copy), UseSelectorFunction (copy), selectStatusBarHeight (copy), UseTrackedRectModule (copy), UseOverlayFunction (copy), UseTokensFunction (copy), UseLocalizationFunction (copy), UseScaledValueFunction (copy), Flags (copy), UseFocusRootFunction (copy), FocusNavigableSurfaceIdentifierEnum (copy), UseDefaultFocusBehaviorFunction (copy), ReactFocusNavigationModule (copy), UsePreferredInputFunction (copy), Input (copy), UseFocusOnMountFunction (copy), IsSplitPaneEducationalTourGuiObjectVisibleModule (copy), GetSplitPaneEducationalTourPresentationModule (copy), UseSplitPaneEducationalTourLifecycleModule (copy), CountSplitPaneEducationalTourStepsModule (copy), IsSmallestAbove (copy), Smallest (copy), GuiService (copy), SplitPaneEducationalTourStepsModule (copy), GetSplitPaneEducationalTourTooltipModelModule (copy), SplitPaneEducationalTourViewModule (copy)
+	-- upvalues: SupportPaneMode (copy), SplitPaneStoreModule (copy), UseSignalStateFunction (copy), ReactModule (copy), UseSelectorFunction (copy), selectStatusBarHeight (copy), UseTrackedRectModule (copy), UseOverlayFunction (copy), UseTokensFunction (copy), UseLocalizationFunction (copy), UseScaledValueFunction (copy), Flags (copy), UseFocusRootFunction (copy), FocusNavigableSurfaceIdentifierEnum (copy), UseDefaultFocusBehaviorFunction (copy), ReactFocusNavigationModule (copy), UsePreferredInputFunction (copy), Input (copy), UseFocusOnMountFunction (copy), IsSplitPaneEducationalTourGuiObjectVisibleModule (copy), GetSplitPaneEducationalTourPresentationModule (copy), UseSplitPaneEducationalTourLifecycleModule (copy), CountSplitPaneEducationalTourStepsModule (copy), IsSmallestAbove (copy), Smallest (copy), FFlagSplitPaneEducationalTourTelemetryModule (copy), SplitPaneEducationalTourTelemetryModule (copy), GuiService (copy), SplitPaneEducationalTourStepsModule (copy), GetSplitPaneEducationalTourTooltipModelModule (copy), SplitPaneEducationalTourViewModule (copy)
 	local SupportPaneRef = p1.supportPaneRef
 	local SupportPaneMode1 = p1.supportPaneMode
 	local IsSupportPaneModeMatch = SupportPaneMode1 == SupportPaneMode.Collapsed
@@ -241,12 +243,15 @@ local function SplitPaneEducationalTourBody(p1)
 		end
 	end, {})
 	ReactModule.useEffect(function()
-		-- upvalues: UseStateResult8 (copy), UseStateResult9 (copy), UseSplitPaneEducationalTourLifecycleModuleResult (copy)
+		-- upvalues: UseStateResult8 (copy), UseStateResult9 (copy), FFlagSplitPaneEducationalTourTelemetryModule (upval), SplitPaneEducationalTourTelemetryModule (upval), TourStore (copy), CountSplitPaneEducationalTourStepsModule (upval), Store (copy), SupportPaneMode (upval), UseSplitPaneEducationalTourLifecycleModuleResult (copy)
 		if UseStateResult8 or not UseStateResult9 then return end
 		local Flag = false
 		task.delay(5, function()
-			-- upvalues: Flag (ref), UseSplitPaneEducationalTourLifecycleModuleResult (upval)
+			-- upvalues: Flag (ref), FFlagSplitPaneEducationalTourTelemetryModule (upval), SplitPaneEducationalTourTelemetryModule (upval), TourStore (upval), CountSplitPaneEducationalTourStepsModule (upval), Store (upval), SupportPaneMode (upval), UseSplitPaneEducationalTourLifecycleModuleResult (upval)
 			if not Flag then
+				if FFlagSplitPaneEducationalTourTelemetryModule then
+					SplitPaneEducationalTourTelemetryModule.logAbandoned(SplitPaneEducationalTourTelemetryModule.EndReason.TooltipHiddenTimeout, TourStore.getStepIndex(false), CountSplitPaneEducationalTourStepsModule, Store.getSupportPaneMode(false) == SupportPaneMode.Collapsed)
+				end
 				UseSplitPaneEducationalTourLifecycleModuleResult.endTour()
 			end
 		end)
@@ -258,7 +263,9 @@ local function SplitPaneEducationalTourBody(p1)
 	end, {
 		UseStateResult8,
 		UseStateResult9,
-		UseSplitPaneEducationalTourLifecycleModuleResult.endTour
+		UseSplitPaneEducationalTourLifecycleModuleResult.endTour,
+		TourStore,
+		Store
 	})
 	ReactModule.useEffect(function()
 		-- upvalues: UseRefResult (copy), UsePreferredInputResult (copy), Input (upval), GuiService (upval), UseFocusGuiObjectResult (copy)
@@ -300,6 +307,43 @@ local function SplitPaneEducationalTourBody(p1)
 		UseStateResult8,
 		TourStore.notifyTourVisible
 	})
+	local UseRefResult2 = ReactModule.useRef(0)
+	ReactModule.useEffect(function()
+		-- upvalues: FFlagSplitPaneEducationalTourTelemetryModule (upval), UseRefResult2 (copy), StepIndex (copy), UseStateResult8 (copy), UseStateResult7 (copy), IsSplitPaneEducationalTourGuiObjectVisibleModule (upval), SplitPaneEducationalTourTelemetryModule (upval), CountSplitPaneEducationalTourStepsModule (upval), IsSupportPaneModeMatch (copy)
+		if FFlagSplitPaneEducationalTourTelemetryModule and UseRefResult2.current ~= StepIndex and UseStateResult8 and UseStateResult7 ~= nil and IsSplitPaneEducationalTourGuiObjectVisibleModule(UseStateResult7) then
+			UseRefResult2.current = StepIndex
+			SplitPaneEducationalTourTelemetryModule.logStepShown(StepIndex, CountSplitPaneEducationalTourStepsModule, IsSupportPaneModeMatch)
+		end
+	end, {
+		UseStateResult8,
+		UseStateResult7,
+		StepIndex,
+		IsSupportPaneModeMatch
+	})
+	local UseResult3 = ReactModule.useCallback(function()
+		-- upvalues: FFlagSplitPaneEducationalTourTelemetryModule (upval), SplitPaneEducationalTourTelemetryModule (upval), StepIndex (copy), CountSplitPaneEducationalTourStepsModule (upval), IsSupportPaneModeMatch (copy), UseSplitPaneEducationalTourLifecycleModuleResult (copy)
+		if FFlagSplitPaneEducationalTourTelemetryModule then
+			SplitPaneEducationalTourTelemetryModule.logStepAdvanced(StepIndex, CountSplitPaneEducationalTourStepsModule, StepIndex == 1 and IsSupportPaneModeMatch)
+		end
+		UseSplitPaneEducationalTourLifecycleModuleResult.handleNext()
+	end, {
+		UseSplitPaneEducationalTourLifecycleModuleResult.handleNext,
+		StepIndex,
+		IsSupportPaneModeMatch
+	})
+	local IsFinal = SplitPaneEducationalTourTooltipModelModule ~= nil and SplitPaneEducationalTourTooltipModelModule.isFinal
+	local UseResult4 = ReactModule.useCallback(function()
+		-- upvalues: FFlagSplitPaneEducationalTourTelemetryModule (upval), SplitPaneEducationalTourTelemetryModule (upval), IsFinal (copy), StepIndex (copy), CountSplitPaneEducationalTourStepsModule (upval), Store (copy), SupportPaneMode (upval), UseSplitPaneEducationalTourLifecycleModuleResult (copy)
+		if FFlagSplitPaneEducationalTourTelemetryModule then
+			SplitPaneEducationalTourTelemetryModule.logUserEnded(IsFinal, StepIndex, CountSplitPaneEducationalTourStepsModule, Store.getSupportPaneMode(false) == SupportPaneMode.Collapsed)
+		end
+		UseSplitPaneEducationalTourLifecycleModuleResult.endTour()
+	end, {
+		UseSplitPaneEducationalTourLifecycleModuleResult.endTour,
+		IsFinal,
+		StepIndex,
+		Store
+	})
 	
 	return ReactModule.createElement(SplitPaneEducationalTourViewModule, {
 		videoAspectRatio = 1.5,
@@ -322,8 +366,8 @@ local function SplitPaneEducationalTourBody(p1)
 		setGamepadStepTwoTooltipAnchorInstance = UseStateResult2_2,
 		setGamepadFinalTooltipAnchorInstance = UseStateResult2_3,
 		setTopRightControlInstance = UseStateResult2_4,
-		onNext = UseSplitPaneEducationalTourLifecycleModuleResult.handleNext,
-		onEnd = UseSplitPaneEducationalTourLifecycleModuleResult.endTour
+		onNext = if FFlagSplitPaneEducationalTourTelemetryModule then UseResult3 else UseSplitPaneEducationalTourLifecycleModuleResult.handleNext,
+		onEnd = if FFlagSplitPaneEducationalTourTelemetryModule then UseResult4 else UseSplitPaneEducationalTourLifecycleModuleResult.endTour
 	})
 end
 
@@ -351,7 +395,7 @@ local function isKeepOnDeepLink(Text: string): boolean
 end
 
 return function(p2)
-	-- upvalues: GetSplitPaneEducationalTourStoreModule (copy), UseSignalStateFunction (copy), LocalUserIdStore (copy), UseSelectorFunction (copy), selectIsCentralOverlayOpen (copy), FFlagSplitPaneEducationalTourPreloadVideosModule (copy), UseSplitPaneEducationalTourVideoPreloadModule (copy), FFlagDebugSplitPaneEducationalTourAutoStartModule (copy), FFlagSplitPaneEducationalTourSkipOnDeepLinkModule (copy), DeepLinkLuaReceiverStatusStore (copy), isKeepOnDeepLink (copy), ReactModule (copy), SplitPaneEducationalTourBody (copy)
+	-- upvalues: GetSplitPaneEducationalTourStoreModule (copy), UseSignalStateFunction (copy), LocalUserIdStore (copy), UseSelectorFunction (copy), selectIsCentralOverlayOpen (copy), FFlagSplitPaneEducationalTourPreloadVideosModule (copy), UseSplitPaneEducationalTourVideoPreloadModule (copy), FFlagDebugSplitPaneEducationalTourAutoStartModule (copy), FFlagSplitPaneEducationalTourSkipOnDeepLinkModule (copy), DeepLinkLuaReceiverStatusStore (copy), isKeepOnDeepLink (copy), ReactModule (copy), FFlagSplitPaneEducationalTourTelemetryModule (copy), SplitPaneEducationalTourTelemetryModule (copy), CountSplitPaneEducationalTourStepsModule (copy), SplitPaneStoreModule (copy), SupportPaneMode (copy), SplitPaneEducationalTourBody (copy)
 	local SplitPaneEducationalTourStoreModule = GetSplitPaneEducationalTourStoreModule(false)
 	local UseSignalStateResult = UseSignalStateFunction(SplitPaneEducationalTourStoreModule.getStepIndex)
 	local UseSignalStateResult1 = UseSignalStateFunction(SplitPaneEducationalTourStoreModule.getIsOpen)
@@ -365,28 +409,44 @@ return function(p2)
 	end
 	local UseSignalStateResult4 = if FFlagSplitPaneEducationalTourSkipOnDeepLinkModule then UseSignalStateFunction(DeepLinkLuaReceiverStatusStore(false).getLastDetectedPostAuthUrl) else nil
 	local Inverted: boolean = UseSignalStateResult4 ~= nil and (UseSignalStateResult4 ~= "" and not isKeepOnDeepLink(UseSignalStateResult4))
+	ReactModule.useEffect(function()
+		-- upvalues: FFlagSplitPaneEducationalTourTelemetryModule (upval), UseSignalStateResult1 (copy), UseSignalStateResult2 (copy), UseSignalStateResult3 (copy), SplitPaneEducationalTourTelemetryModule (upval), CountSplitPaneEducationalTourStepsModule (upval)
+		if FFlagSplitPaneEducationalTourTelemetryModule and UseSignalStateResult1 and UseSignalStateResult2 == UseSignalStateResult3 then
+			SplitPaneEducationalTourTelemetryModule.logDelivered(CountSplitPaneEducationalTourStepsModule)
+		end
+	end, {
+		UseSignalStateResult1,
+		UseSignalStateResult2,
+		UseSignalStateResult3
+	})
 	local UseRefResult = ReactModule.useRef(false)
 	ReactModule.useEffect(function()
-		-- upvalues: UseSignalStateResult1 (copy), UseSignalStateResult2 (copy), UseSignalStateResult3 (copy), SplitPaneEducationalTourStoreModule (copy), Inverted (copy), UseSignalStateResult (copy), UseRefResult (copy), NoUseSelectorResult (copy)
+		-- upvalues: UseSignalStateResult1 (copy), UseSignalStateResult2 (copy), UseSignalStateResult3 (copy), FFlagSplitPaneEducationalTourTelemetryModule (upval), SplitPaneEducationalTourTelemetryModule (upval), UseSignalStateResult (copy), CountSplitPaneEducationalTourStepsModule (upval), SplitPaneStoreModule (upval), SupportPaneMode (upval), SplitPaneEducationalTourStoreModule (copy), Inverted (copy), UseRefResult (copy), NoUseSelectorResult (copy)
 		if UseSignalStateResult1 and UseSignalStateResult2 ~= UseSignalStateResult3 then
+			if FFlagSplitPaneEducationalTourTelemetryModule then
+				SplitPaneEducationalTourTelemetryModule.logAbandoned(if UseSignalStateResult3 == "" then SplitPaneEducationalTourTelemetryModule.EndReason.HostUnmounted else SplitPaneEducationalTourTelemetryModule.EndReason.UserChanged, UseSignalStateResult, CountSplitPaneEducationalTourStepsModule, SplitPaneStoreModule.getStore().getSupportPaneMode(false) == SupportPaneMode.Collapsed)
+			end
 			SplitPaneEducationalTourStoreModule.discardPendingTour()
 			
 			return
-		end
-		if Inverted and not SplitPaneEducationalTourStoreModule.getHasShownTour(false) and (UseSignalStateResult1 or UseSignalStateResult > 0) then
+		elseif Inverted and not SplitPaneEducationalTourStoreModule.getHasShownTour(false) and (UseSignalStateResult1 or UseSignalStateResult > 0) then
+			if FFlagSplitPaneEducationalTourTelemetryModule then
+				SplitPaneEducationalTourTelemetryModule.logAbandoned(SplitPaneEducationalTourTelemetryModule.EndReason.DeepLink, UseSignalStateResult, CountSplitPaneEducationalTourStepsModule, SplitPaneStoreModule.getStore().getSupportPaneMode(false) == SupportPaneMode.Collapsed)
+			end
 			SplitPaneEducationalTourStoreModule.discardPendingTour()
 			
 			return
-		end
-		if UseSignalStateResult1 and UseSignalStateResult == 0 then
-			UseRefResult.current = false
-		end
-		if UseSignalStateResult1 and NoUseSelectorResult and not UseRefResult.current then
-			UseRefResult.current = true
-			SplitPaneEducationalTourStoreModule.setStepIndex(1)
-		end
-		if not UseSignalStateResult1 then
-			UseRefResult.current = false
+		else
+			if UseSignalStateResult1 and UseSignalStateResult == 0 then
+				UseRefResult.current = false
+			end
+			if UseSignalStateResult1 and NoUseSelectorResult and not UseRefResult.current then
+				UseRefResult.current = true
+				SplitPaneEducationalTourStoreModule.setStepIndex(1)
+			end
+			if not UseSignalStateResult1 then
+				UseRefResult.current = false
+			end
 		end
 	end, {
 		UseSignalStateResult1, UseSignalStateResult2, UseSignalStateResult3,
@@ -408,12 +468,19 @@ return function(p2)
 		SplitPaneEducationalTourStoreModule.setStepIndex
 	})
 	ReactModule.useEffect(function()
-		-- upvalues: SplitPaneEducationalTourStoreModule (copy)
+		-- upvalues: FFlagSplitPaneEducationalTourTelemetryModule (upval), SplitPaneStoreModule (upval), SplitPaneEducationalTourTelemetryModule (upval), SplitPaneEducationalTourStoreModule (copy), CountSplitPaneEducationalTourStepsModule (upval), SupportPaneMode (upval)
 		return function()
-			-- upvalues: SplitPaneEducationalTourStoreModule (upval)
+			-- upvalues: FFlagSplitPaneEducationalTourTelemetryModule (upval), SplitPaneStoreModule (upval), SplitPaneEducationalTourTelemetryModule (upval), SplitPaneEducationalTourStoreModule (upval), CountSplitPaneEducationalTourStepsModule (upval), SupportPaneMode (upval)
+			if FFlagSplitPaneEducationalTourTelemetryModule then
+				local Store = SplitPaneStoreModule.getStore()
+				SplitPaneEducationalTourTelemetryModule.logAbandoned(if Store.getIsBreakpointEnabled(false) then SplitPaneEducationalTourTelemetryModule.EndReason.HostUnmounted else SplitPaneEducationalTourTelemetryModule.EndReason.BreakpointLost, SplitPaneEducationalTourStoreModule.getStepIndex(false), CountSplitPaneEducationalTourStepsModule, Store.getSupportPaneMode(false) == SupportPaneMode.Collapsed)
+			end
 			SplitPaneEducationalTourStoreModule.discardPendingTour()
 		end
-	end, { SplitPaneEducationalTourStoreModule.discardPendingTour })
+	end, {
+		SplitPaneEducationalTourStoreModule.discardPendingTour,
+		SplitPaneEducationalTourStoreModule.getStepIndex
+	})
 	
 	return if UseSignalStateResult == 0 then nil else ReactModule.createElement(SplitPaneEducationalTourBody, {
 		supportPaneRef = p2.supportPaneRef,

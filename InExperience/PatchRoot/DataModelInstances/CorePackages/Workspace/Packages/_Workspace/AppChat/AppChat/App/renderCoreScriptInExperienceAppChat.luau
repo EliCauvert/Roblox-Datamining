@@ -18,12 +18,13 @@ local ChatModerationStatusHydrationMiddlewareModule = require(AppChat.Middleware
 local SignalsConversationMiddlewareModule = require(AppChat.Middleware.SignalsConversationMiddleware)
 local SignalsMessageIngestionMiddlewareModule = require(AppChat.Middleware.SignalsMessageIngestionMiddleware)
 local SignalsUnreadMessageCountMiddlewareModule = require(AppChat.Middleware.SignalsUnreadMessageCountMiddleware)
+local FFlagAppChatSignalsActionHandlersModule = require(AppChat.Flags.FFlagAppChatSignalsActionHandlers)
 local FFlagAppChatPerfTrackingModule = require(AppChat.Flags.FFlagAppChatPerfTracking)
 local AppChatPerfTrackerModule = require(AppChat.Telemetry.AppChatPerfTracker)
 local ChatPlacementContextModule = require(AppChat.Contexts.ChatPlacementContext)
 
 return function(ApolloClient, ParentContainerContext, UpdateAppChatUnreadMessagesCount)
-	-- upvalues: CoreGui (copy), FFlagAppChatPerfTrackingModule (copy), AppChatPerfTrackerModule (copy), ChatPlacementContextModule (copy), ReactRobloxModule (copy), RoduxModule (copy), FFlagAppChatSignalsMessageStoreModule (copy), SignalsMessageIngestionMiddlewareModule (copy), FFlagAppChatConversationStoreModule (copy), SignalsConversationMiddlewareModule (copy), FFlagAppChatFriendsTabIxpEnabledModule (copy), FFlagExpChatEnableFriendsTab (copy), AppChat (copy), ChatModerationStatusHydrationMiddlewareModule (copy), SignalsUnreadMessageCountMiddlewareModule (copy), FFlagUseSignalsForSquadExperienceInvite (copy), Parent (copy), AppChatReducerModule (copy), ReactFocusNavigationModule (copy), ReactModule (copy), Provider (copy), InExperienceAppChatProvidersModule (copy), InExperienceAppChatModule (copy)
+	-- upvalues: CoreGui (copy), FFlagAppChatPerfTrackingModule (copy), AppChatPerfTrackerModule (copy), ChatPlacementContextModule (copy), ReactRobloxModule (copy), RoduxModule (copy), FFlagAppChatSignalsMessageStoreModule (copy), SignalsMessageIngestionMiddlewareModule (copy), FFlagAppChatConversationStoreModule (copy), SignalsConversationMiddlewareModule (copy), FFlagAppChatFriendsTabIxpEnabledModule (copy), FFlagExpChatEnableFriendsTab (copy), AppChat (copy), ChatModerationStatusHydrationMiddlewareModule (copy), SignalsUnreadMessageCountMiddlewareModule (copy), FFlagUseSignalsForSquadExperienceInvite (copy), Parent (copy), FFlagAppChatSignalsActionHandlersModule (copy), AppChatReducerModule (copy), ReactFocusNavigationModule (copy), ReactModule (copy), Provider (copy), InExperienceAppChatProvidersModule (copy), InExperienceAppChatModule (copy)
 	local AppChat1 = Instance.new("Folder")
 	AppChat1.Name = "AppChat"
 	AppChat1.Parent = CoreGui
@@ -52,6 +53,12 @@ return function(ApolloClient, ParentContainerContext, UpdateAppChatUnreadMessage
 	
 	if FFlagUseSignalsForSquadExperienceInvite then
 		table.insert(List, require(Parent.SquadsCore.Middleware).SignalsSquadMiddleware)
+	end
+	if FFlagAppChatSignalsActionHandlersModule then
+		local SignalsMiddlewareModule = require(Parent.SignalsMiddleware)
+		local CreateResult = SignalsMiddlewareModule.ActionHandlers.create()
+		require(AppChat.Handlers.registerAppChatSignalsActionHandlers)(CreateResult)
+		table.insert(List, SignalsMiddlewareModule.createSignalsMiddleware(CreateResult))
 	end
 	local NewResult = RoduxModule.Store.new(AppChatReducerModule, nil, List)
 	local NewResult1 = ReactFocusNavigationModule.FocusNavigationService.new(ReactFocusNavigationModule.EngineInterface.CoreGui)

@@ -8,8 +8,9 @@ local _ = require(BuildExperience.Stores.GetLibraryStore.createLibraryStore)
 local LibraryTypesModule = require(script.Parent.LibraryTypes)
 local _ = require(BuildExperience.Chat.chatTypes)
 local FFlagBuildExperienceAnswerFormModule = require(BuildExperience.Flags.FFlagBuildExperienceAnswerForm)
+local _ = require(BuildExperience.Components.ModelPicker.ModelPickerTypes)
 
-return function(Current, p1, IsReadOnly)
+return function(Current, p1, IsReadOnly, ModelPicker)
 	-- upvalues: GetLibraryStoreModule (copy), SignalsReactModule (copy), ReactModule (copy), LibraryTypesModule (copy), FFlagBuildExperienceAnswerFormModule (copy)
 	local LibraryStoreModule = GetLibraryStoreModule()
 	local UseSignalStateResult = SignalsReactModule.useSignalState(LibraryStoreModule.getChatResourceRequest)
@@ -72,9 +73,10 @@ return function(Current, p1, IsReadOnly)
 		UseResult1, Current.textBoxRef
 	})
 	ReactModule.useLayoutEffect(function()
-		-- upvalues: AnswerForm (copy), LocalToolActions (copy), SubmitAnswerText (copy), Current (copy), UseResult (copy), UseResult1 (copy), IsComposerSendBlocked (copy), IsReadOnly (copy), UseRefResult1 (copy), LibraryStoreModule (copy)
+		-- upvalues: ModelPicker (copy), AnswerForm (copy), LocalToolActions (copy), SubmitAnswerText (copy), Current (copy), UseResult (copy), UseResult1 (copy), IsComposerSendBlocked (copy), IsReadOnly (copy), UseRefResult1 (copy), LibraryStoreModule (copy)
 		local Current1 = {
 			tracksExternalText = true,
+			modelPicker = ModelPicker,
 			answerForm = AnswerForm,
 			localToolActions = LocalToolActions,
 			onSubmitAnswerText = SubmitAnswerText,
@@ -100,10 +102,10 @@ return function(Current, p1, IsReadOnly)
 		UseRefResult1.current = Current1
 		LibraryStoreModule.setChatComposerState(Current1)
 	end, {
-		LibraryStoreModule, Current.composerText, AnswerForm, LocalToolActions,
-		SubmitAnswerText, Current.composerErrorText, Current.setComposerText,
-		Current.composerImages, Current.setComposerImages, Current.retryComposerImage,
-		Current.composerResourceAttachments, UseResult,
+		LibraryStoreModule, ModelPicker, Current.composerText, AnswerForm,
+		LocalToolActions, SubmitAnswerText, Current.composerErrorText,
+		Current.setComposerText, Current.composerImages, Current.setComposerImages,
+		Current.retryComposerImage, Current.composerResourceAttachments, UseResult,
 		Current.removeComposerResourceAttachmentAtIndex, UseResult1,
 		IsComposerSendBlocked, IsReadOnly, Current.textBoxRef,
 		Current.isAssistantResponding, Current.canStopAssistantResponse,

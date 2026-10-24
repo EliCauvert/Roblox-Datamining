@@ -27,6 +27,9 @@ local GetUploadStoreModule = require(Moments.Stores.GetUploadStore)
 local SignalsReactModule = require(Parent.SignalsReact)
 local MomentOverlayInsetContextModule = require(Moments.Components.Feed.Items.Moment.MomentOverlayInsetContext)
 local FFlagMomentsFeedAboveNavBarModule = require(Moments.Flags.FFlagMomentsFeedAboveNavBar)
+local FFlagMomentsFixFeedForDeviceSafeInsetsModule = require(Moments.Flags.FFlagMomentsFixFeedForDeviceSafeInsets)
+local ShouldUseDeviceSafeInsets = require(Parent.Display).shouldUseDeviceSafeInsets
+local ShouldUseDeviceSafeInsets1 = FFlagMomentsFixFeedForDeviceSafeInsetsModule and ShouldUseDeviceSafeInsets
 local GetImmersiveChromeStoreModule = require(Moments.Stores.GetImmersiveChromeStore)
 local MomentsLocalStorageModule = require(Parent.MomentsCommon.MomentsLocalStorage)
 local MomentsLocalStorageKeysModule = require(Parent.MomentsCommon.MomentsLocalStorageKeys)
@@ -62,7 +65,7 @@ local function _()
 end
 
 return function(p1)
-	-- upvalues: ReactModule (copy), MomentsLocalStorageModule (copy), MomentsLocalStorageKeysModule (copy), UseScreenBottomInsetModule (copy), UseFeedPlaybackActiveModule (copy), FFlagMomentsNavigationEventModule (copy), UseMomentsTabIsVisibleModule (copy), SignalsReactModule (copy), GetMomentsPreferencesStoreModule (copy), UseMomentsSessionFunction (copy), UseMomentsHostFunction (copy), UseMomentsGatingFunction (copy), FFlagMomentsCreationFeatureGate (copy), UseCreationEntryModule (copy), UseUploadHostModule (copy), SessionManager (copy), FunnelEventNames (copy), FireFunnelAnalyticsEventFunction (copy), IsStudioModule (copy), GetFFlagArgusStudioMockFeedModule (copy), CreateMockFeedSourceFunction (copy), CreateMomentsFeedSourceModule (copy), SignalTracker (copy), FFlagEnableArgus (copy), CreateRecommendationTelemetryFunction (copy), GetImmersiveChromeStoreModule (copy), ReportModalCovering (copy), FFlagMomentsFixRecommendationImpressionLifecycleModule (copy), NavigationDestinationTypeModule (copy), FFlagMomentsFlushDwellBeforeNavigationModule (copy), RoactNavigationModule (copy), RobloxAppEventsModule (copy), AppPage (copy), GetUploadStoreModule (copy), MomentsUpload (ref), Parent (copy), LogCreateIntentModule (copy), FireAnalyticsEventFunction (copy), EventNames (copy), TopBarModule (copy), MomentOverlayInsetContextModule (copy), FFlagMomentsFeedAboveNavBarModule (copy), View (copy), ConstantsModule (copy), MomentsFeedSurfaceModule (copy), MomentUnavailableDialogModule (copy), CreationFlowScreen (copy), FTUXEducationScreenModule (copy)
+	-- upvalues: ReactModule (copy), MomentsLocalStorageModule (copy), MomentsLocalStorageKeysModule (copy), UseScreenBottomInsetModule (copy), UseFeedPlaybackActiveModule (copy), FFlagMomentsNavigationEventModule (copy), UseMomentsTabIsVisibleModule (copy), SignalsReactModule (copy), GetMomentsPreferencesStoreModule (copy), UseMomentsSessionFunction (copy), UseMomentsHostFunction (copy), UseMomentsGatingFunction (copy), FFlagMomentsCreationFeatureGate (copy), UseCreationEntryModule (copy), UseUploadHostModule (copy), SessionManager (copy), FunnelEventNames (copy), FireFunnelAnalyticsEventFunction (copy), IsStudioModule (copy), GetFFlagArgusStudioMockFeedModule (copy), CreateMockFeedSourceFunction (copy), CreateMomentsFeedSourceModule (copy), SignalTracker (copy), FFlagEnableArgus (copy), CreateRecommendationTelemetryFunction (copy), GetImmersiveChromeStoreModule (copy), ReportModalCovering (copy), FFlagMomentsFixRecommendationImpressionLifecycleModule (copy), NavigationDestinationTypeModule (copy), FFlagMomentsFlushDwellBeforeNavigationModule (copy), RoactNavigationModule (copy), RobloxAppEventsModule (copy), AppPage (copy), GetUploadStoreModule (copy), MomentsUpload (ref), Parent (copy), LogCreateIntentModule (copy), FireAnalyticsEventFunction (copy), EventNames (copy), TopBarModule (copy), FFlagMomentsFixFeedForDeviceSafeInsetsModule (copy), MomentsCommonModule (copy), ShouldUseDeviceSafeInsets (copy), MomentOverlayInsetContextModule (copy), FFlagMomentsFeedAboveNavBarModule (copy), View (copy), ShouldUseDeviceSafeInsets1 (copy), ConstantsModule (copy), MomentsFeedSurfaceModule (copy), MomentUnavailableDialogModule (copy), CreationFlowScreen (copy), FTUXEducationScreenModule (copy)
 	local UseStateResult, UseStateResult2 = ReactModule.useState(function(): boolean
 		-- upvalues: MomentsLocalStorageModule (upval), MomentsLocalStorageKeysModule (upval)
 		return not MomentsLocalStorageModule.getField(MomentsLocalStorageKeysModule.CreateTooltipSeen)
@@ -227,7 +230,29 @@ return function(p1)
 			OpenOwnMomentsFunction()
 		end
 	end, { OpenOwnMomentsFunction, UseResult2 })
+	local UseMemoResult2 = ReactModule.useMemo(function()
+		-- upvalues: ReactModule (upval), TopBarModule (upval), UseStateResult (copy), UseFeedPlaybackActiveModuleResult (copy), FFlagMomentsCreationFeatureGate (upval), IsCreationEnabled (copy), PlatformIntegrationEnabled (copy), UseResult3 (copy), UseResult4 (copy), UseResult5 (copy), UseResult6 (copy)
+		return ReactModule.createElement(TopBarModule, {
+			isBaseScreen = true,
+			showTopScrim = true,
+			showFtuxTooltip = UseStateResult and (UseFeedPlaybackActiveModuleResult and (not FFlagMomentsCreationFeatureGate or IsCreationEnabled)),
+			showHamburger = PlatformIntegrationEnabled,
+			onFtuxTooltipDismissed = UseResult3,
+			onCreatePressed = if FFlagMomentsCreationFeatureGate and not IsCreationEnabled then nil else UseResult4,
+			onNavigateToTrending = UseResult5,
+			onNavigateToMyMoments = UseResult6
+		})
+	end, {
+		UseStateResult, UseFeedPlaybackActiveModuleResult,
+		if FFlagMomentsCreationFeatureGate then IsCreationEnabled else false,
+		PlatformIntegrationEnabled, UseResult3, UseResult4, UseResult5, UseResult6
+	})
+	local YOffset = 0
 	
+	if FFlagMomentsFixFeedForDeviceSafeInsetsModule then
+		local UseDeviceInsetsResult = MomentsCommonModule.Hooks.useDeviceInsets()
+		YOffset = if ShouldUseDeviceSafeInsets then UseDeviceInsetsResult.top else 0
+	end
 	return ReactModule.createElement(View, { tag = "size-full bg-surface-0" }, {
 		Surface = ReactModule.createElement(MomentsFeedSurfaceModule, {
 			trackSurfaceLoad = true,
@@ -237,34 +262,20 @@ return function(p1)
 			telemetry = UseMemoResult1,
 			inactiveDestination = ExperienceJoin,
 			controllerRef = UseRefResult,
-			header = ReactModule.useMemo(function()
-				-- upvalues: ReactModule (upval), TopBarModule (upval), UseStateResult (copy), UseFeedPlaybackActiveModuleResult (copy), FFlagMomentsCreationFeatureGate (upval), IsCreationEnabled (copy), PlatformIntegrationEnabled (copy), UseResult3 (copy), UseResult4 (copy), UseResult5 (copy), UseResult6 (copy)
-				return ReactModule.createElement(TopBarModule, {
-					isBaseScreen = true,
-					showTopScrim = true,
-					showFtuxTooltip = UseStateResult and (UseFeedPlaybackActiveModuleResult and (not FFlagMomentsCreationFeatureGate or IsCreationEnabled)),
-					showHamburger = PlatformIntegrationEnabled,
-					onFtuxTooltipDismissed = UseResult3,
-					onCreatePressed = if FFlagMomentsCreationFeatureGate and not IsCreationEnabled then nil else UseResult4,
-					onNavigateToTrending = UseResult5,
-					onNavigateToMyMoments = UseResult6
-				})
-			end, {
-				UseStateResult, UseFeedPlaybackActiveModuleResult,
-				if FFlagMomentsCreationFeatureGate then IsCreationEnabled else false,
-				PlatformIntegrationEnabled, UseResult3, UseResult4, UseResult5, UseResult6
-			}),
+			header = UseMemoResult2,
 			renderFeedContainer = ReactModule.useCallback(function(Feed)
-				-- upvalues: ReactModule (upval), MomentOverlayInsetContextModule (upval), UseScreenBottomInsetModuleResult (copy), FFlagMomentsFeedAboveNavBarModule (upval), View (upval), ConstantsModule (upval)
+				-- upvalues: ReactModule (upval), MomentOverlayInsetContextModule (upval), UseScreenBottomInsetModuleResult (copy), FFlagMomentsFeedAboveNavBarModule (upval), View (upval), ShouldUseDeviceSafeInsets1 (upval), YOffset (ref), ConstantsModule (upval)
 				return ReactModule.createElement(View, {
-					tag = "size-full",
 					testId = "--moments-feed-container-full-bleed",
+					tag = { ["size-full"] = not ShouldUseDeviceSafeInsets1 },
+					Position = if ShouldUseDeviceSafeInsets1 then UDim2.fromOffset(0, -YOffset) else nil,
+					Size = if ShouldUseDeviceSafeInsets1 then UDim2.new(1, 0, 1, YOffset) else nil,
 					padding = if FFlagMomentsFeedAboveNavBarModule then { bottom = UDim.new(0, UseScreenBottomInsetModuleResult) } else nil,
 					ZIndex = ConstantsModule.DisplayOrder.Feed
 				}, {
 					Feed = ReactModule.createElement(MomentOverlayInsetContextModule.Context.Provider, { value = UseScreenBottomInsetModuleResult }, { Feed = Feed })
 				})
-			end, { UseScreenBottomInsetModuleResult })
+			end, { UseScreenBottomInsetModuleResult, YOffset })
 		}),
 		MomentUnavailableDialog = if UseFeedPlaybackActiveModuleResult and UseStateResult1 then ReactModule.createElement(MomentUnavailableDialogModule, {
 			onDismiss = function()

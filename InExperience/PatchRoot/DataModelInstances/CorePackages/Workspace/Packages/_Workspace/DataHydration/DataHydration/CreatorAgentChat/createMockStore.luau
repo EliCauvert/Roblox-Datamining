@@ -1,6 +1,7 @@
 ﻿local HttpService = game:GetService("HttpService")
 local AcpProtocolModule = require(script.Parent.Acp.AcpProtocol)
 local _ = require(script.Parent.types)
+local FFlagBuildExperienceModelPickerData = require(script:FindFirstAncestor("DataHydration").Parent.SharedFlags).FFlagBuildExperienceModelPickerData
 local CreateCreatorAgentChatStoreModule = require(script.Parent.createCreatorAgentChatStore)
 
 local function _()
@@ -48,7 +49,7 @@ local function httpStatusForCode(Code): number
 end
 
 return function(p1)
-	-- upvalues: AcpProtocolModule (copy), streamWords (copy), jsonError (copy), httpStatusForCode (copy), jsonOk (copy), HttpService (copy), CreateCreatorAgentChatStoreModule (copy)
+	-- upvalues: AcpProtocolModule (copy), streamWords (copy), FFlagBuildExperienceModelPickerData (copy), jsonError (copy), httpStatusForCode (copy), jsonOk (copy), HttpService (copy), CreateCreatorAgentChatStoreModule (copy)
 	local P8 = p1 or {}
 	local ChunkDelay = P8.chunkDelay or 0.04
 	local t = {}
@@ -383,7 +384,7 @@ return function(p1)
 			}, nil
 		end,
 		[AcpProtocolModule.Methods.SessionNew] = function(p4)
-			-- upvalues: AcpProtocolModule (upval), Count (ref), t (copy)
+			-- upvalues: AcpProtocolModule (upval), Count (ref), t (copy), FFlagBuildExperienceModelPickerData (upval), P8 (copy)
 			local ExtractSessionNewProjectResult = AcpProtocolModule.extractSessionNewProject(p4)
 			
 			if ExtractSessionNewProjectResult == nil then
@@ -391,19 +392,25 @@ return function(p1)
 					message = "_meta._roblox universeId/placeId is required on session/new",
 					code = AcpProtocolModule.ErrorCodes.InvalidParams
 				}
-			else
-				Count += 1
-				local MockName: string = ("mock_%08d"):format(Count)
-				local IsoDate = DateTime.now():ToIsoDate()
-				t[MockName] = {
-					title = nil,
-					closedUtc = nil,
+			end
+			Count += 1
+			local MockName: string = ("mock_%08d"):format(Count)
+			local IsoDate = DateTime.now():ToIsoDate()
+			t[MockName] = {
+				title = nil,
+				closedUtc = nil,
+				sessionId = MockName,
+				createdUtc = IsoDate,
+				updatedUtc = IsoDate,
+				project = ExtractSessionNewProjectResult
+			}
+			
+			if FFlagBuildExperienceModelPickerData and P8.models ~= nil then
+				return {
 					sessionId = MockName,
-					createdUtc = IsoDate,
-					updatedUtc = IsoDate,
-					project = ExtractSessionNewProjectResult
-				}
-				
+					_meta = { _roblox = { models = P8.models } }
+				}, nil
+			else
 				return { sessionId = MockName }, nil
 			end
 		end,
@@ -444,10 +451,10 @@ return function(p1)
 			return { sessions = List }, nil
 		end,
 		[AcpProtocolModule.Methods.SessionLoad] = function(p5)
-			-- upvalues: t (copy), AcpProtocolModule (upval)
+			-- upvalues: t (copy), AcpProtocolModule (upval), FFlagBuildExperienceModelPickerData (upval), P8 (copy)
 			local Entry = t[p5.sessionId]
-			local v2 = nil
 			local config = nil
+			local v2 = nil
 			
 			if Entry == nil or Entry.closedUtc ~= nil then
 				v2 = nil
@@ -465,6 +472,7 @@ return function(p1)
 				return {
 					_meta = {
 						_roblox = {
+							models = if FFlagBuildExperienceModelPickerData then P8.models else nil,
 							universeId = if v2.project == nil then nil else v2.project.universeId
 						}
 					}
@@ -609,7 +617,7 @@ return function(p1)
 	}
 	
 	local function dispatch(p5)
-		-- upvalues: AcpProtocolModule (upval), t (copy), jsonError (upval), httpStatusForCode (upval), runResponder (copy), jsonOk (upval), config (copy)
+		-- upvalues: AcpProtocolModule (upval), t (copy), jsonError (upval), httpStatusForCode (upval), runResponder (copy), FFlagBuildExperienceModelPickerData (upval), jsonOk (upval), config (copy)
 		if p5.method == AcpProtocolModule.Methods.SessionPrompt then
 			local Entry = t[p5.params.sessionId]
 			local v2 = nil
@@ -631,7 +639,7 @@ return function(p1)
 				v2.updatedUtc = DateTime.now():ToIsoDate()
 				runResponder(p5.id, p5.params.sessionId, p5.params.prompt or {})
 				
-				return (jsonOk(p5.id, {}))
+				return if FFlagBuildExperienceModelPickerData then { statusCode = 202, responseBody = "" } else jsonOk(p5.id, {})
 			end
 		else
 			local Entry1 = config[p5.method]

@@ -23,15 +23,18 @@ local FlyoutProfileCardModule = require(script.Parent.FlyoutProfileCard)
 local UseDismissFlyoutOnPartyTopBannerModule = require(script.Parent.Parent.Hooks.useDismissFlyoutOnPartyTopBanner)
 local UseSetDrawerVisibleFunction = require(Parent.Drawer).Hooks.useSetDrawerVisible
 local FFlagFlyoutTradesEntryExposureLoggingModule = require(script.Parent.Parent.Flags.FFlagFlyoutTradesEntryExposureLogging)
+local FFlagFlyoutProfileEntryExposureLoggingModule = require(script.Parent.Parent.Flags.FFlagFlyoutProfileEntryExposureLogging)
 local FFlagFlyoutTradesEntryImpressionLoggingModule = require(script.Parent.Parent.Flags.FFlagFlyoutTradesEntryImpressionLogging)
 local FFlagFlyoutSidePanelUseSharedProfileCardModule = require(script.Parent.Parent.Flags.FFlagFlyoutSidePanelUseSharedProfileCard)
 local ProfileCard = if FFlagFlyoutSidePanelUseSharedProfileCardModule then require(Parent.ProfileCard).ProfileCard else nil
 local UseFlyoutTradesEntryExposureLoggingModule = require(script.Parent.Parent.Hooks.useFlyoutTradesEntryExposureLogging)
+local UseFlyoutProfileEntryExposureLoggingModule = require(script.Parent.Parent.Hooks.useFlyoutProfileEntryExposureLogging)
 local UseCTAChangeMorePageFlyoutButtonTextExposureLoggingModule = require(script.Parent.Parent.Hooks.useCTAChangeMorePageFlyoutButtonTextExposureLogging)
 local UseFlyoutTradesEntryImpressionLoggingModule = require(script.Parent.Parent.Hooks.useFlyoutTradesEntryImpressionLogging)
 local FlyoutAnalyticsModule = require(script.Parent.Parent.Analytics.FlyoutAnalytics)
 local TermsPrivacyFooterModule = require(script.Parent.TermsPrivacyFooter)
 local SharedFlagsModule = require(Parent.SharedFlags)
+local FFlagEnableMeTabProfile = SharedFlagsModule.FFlagEnableMeTabProfile
 local FFlagEnableBlackbird = SharedFlagsModule.FFlagEnableBlackbird
 local FFlagEnableBlackbirdOnFlyoutMenu = SharedFlagsModule.FFlagEnableBlackbirdOnFlyoutMenu
 local EnableBlackbirdUpsellOnFlyoutMenu = game:DefineFastFlag("EnableBlackbirdUpsellOnFlyoutMenu", false)
@@ -66,7 +69,7 @@ local function _(p1, p2): number
 end
 
 return ReactModule.memo(function(p1, _)
-	-- upvalues: UseTokensFunction (copy), UseLocalRobuxBalanceFunction (copy), UseSelectorFunction (copy), selectStatusBarHeight (copy), selectGlobalGuiInset (copy), FFlagFixOverlayTopInsetForDeviceSafeInsets (copy), UseDeviceInsetsFunction (copy), ShouldUseDeviceSafeInsets (copy), FFlagEnableFlyoutOnNavRail (copy), UseScreenSizeFunction (copy), FlyoutScaleMenuWidth (copy), ConstantsModule (copy), UseAppPolicyFunction (copy), FFlagEnableBlackbirdCheck (copy), UseHasRobloxSubscriptionModule (copy), FFlagEnablePlusReferralRecipientFlyoutEntry (copy), UsePlusReferralFlyoutBannerBlindnessModule (copy), PlusReferralRecipientFlyoutBannerMaxImpressions (copy), FFlagEnableBlackbird (copy), BlackbirdUpsellBannerModule (copy), FFlagEnablePlusReferralFlyoutEntry (copy), UseFlyoutNavigationItemsModule (copy), CreateNextOrderFunction (copy), UseSetDrawerVisibleFunction (copy), FFlagFlyoutSidePanelUseSharedProfileCardModule (copy), UseRoactServiceFunction (copy), AppEventIngestService (copy), FFlagFlyoutTradesEntryExposureLoggingModule (copy), UseFlyoutTradesEntryExposureLoggingModule (copy), FFlagCTAChangeMorePageFlyoutButtonTextIxpEnabled (copy), UseCTAChangeMorePageFlyoutButtonTextExposureLoggingModule (copy), FFlagFlyoutTradesEntryImpressionLoggingModule (copy), UseFlyoutTradesEntryImpressionLoggingModule (copy), ReactModule (copy), FlyoutAnalyticsModule (copy), ProfileCard (copy), FFlagFlyoutSidePanelUseProfileFrameThumbnail (copy), FlyoutProfileCardModule (copy), FFlagEnableFlyoutMenuRobuxCardRefactor (copy), RobuxPillModule (copy), FoundationModule (copy), Divider (copy), PlusReferralBannerModule (copy), PlusReferralRecipientBannerModule (copy), FlyoutNavigationListModule (copy), FlyoutSwitchAccountButtonModule (copy), FlyoutQuickSigninButtonModule (copy), FlyoutReportLogsModule (copy), TermsPrivacyFooterModule (copy), UseDismissFlyoutOnPartyTopBannerModule (copy), DrawerContainer (copy)
+	-- upvalues: UseTokensFunction (copy), UseLocalRobuxBalanceFunction (copy), UseSelectorFunction (copy), selectStatusBarHeight (copy), selectGlobalGuiInset (copy), FFlagFixOverlayTopInsetForDeviceSafeInsets (copy), UseDeviceInsetsFunction (copy), ShouldUseDeviceSafeInsets (copy), FFlagEnableFlyoutOnNavRail (copy), UseScreenSizeFunction (copy), FlyoutScaleMenuWidth (copy), ConstantsModule (copy), UseAppPolicyFunction (copy), FFlagEnableBlackbirdCheck (copy), UseHasRobloxSubscriptionModule (copy), FFlagEnablePlusReferralRecipientFlyoutEntry (copy), UsePlusReferralFlyoutBannerBlindnessModule (copy), PlusReferralRecipientFlyoutBannerMaxImpressions (copy), FFlagEnableBlackbird (copy), BlackbirdUpsellBannerModule (copy), FFlagEnablePlusReferralFlyoutEntry (copy), UseFlyoutNavigationItemsModule (copy), CreateNextOrderFunction (copy), UseSetDrawerVisibleFunction (copy), FFlagFlyoutSidePanelUseSharedProfileCardModule (copy), UseRoactServiceFunction (copy), AppEventIngestService (copy), FFlagFlyoutTradesEntryExposureLoggingModule (copy), UseFlyoutTradesEntryExposureLoggingModule (copy), FFlagFlyoutProfileEntryExposureLoggingModule (copy), FFlagEnableMeTabProfile (copy), UseFlyoutProfileEntryExposureLoggingModule (copy), FFlagCTAChangeMorePageFlyoutButtonTextIxpEnabled (copy), UseCTAChangeMorePageFlyoutButtonTextExposureLoggingModule (copy), FFlagFlyoutTradesEntryImpressionLoggingModule (copy), UseFlyoutTradesEntryImpressionLoggingModule (copy), ReactModule (copy), FlyoutAnalyticsModule (copy), ProfileCard (copy), FFlagFlyoutSidePanelUseProfileFrameThumbnail (copy), FlyoutProfileCardModule (copy), FFlagEnableFlyoutMenuRobuxCardRefactor (copy), RobuxPillModule (copy), FoundationModule (copy), Divider (copy), PlusReferralBannerModule (copy), PlusReferralRecipientBannerModule (copy), FlyoutNavigationListModule (copy), FlyoutSwitchAccountButtonModule (copy), FlyoutQuickSigninButtonModule (copy), FlyoutReportLogsModule (copy), TermsPrivacyFooterModule (copy), UseDismissFlyoutOnPartyTopBannerModule (copy), DrawerContainer (copy)
 	local UseTokensResult = UseTokensFunction()
 	local UseLocalRobuxBalanceResult: number = UseLocalRobuxBalanceFunction()
 	local UseSelectorResult = UseSelectorFunction(selectStatusBarHeight)
@@ -126,6 +129,9 @@ return ReactModule.memo(function(p1, _)
 	
 	if FFlagFlyoutTradesEntryExposureLoggingModule then
 		UseFlyoutTradesEntryExposureLoggingModule()
+	end
+	if FFlagFlyoutProfileEntryExposureLoggingModule and FFlagEnableMeTabProfile then
+		UseFlyoutProfileEntryExposureLoggingModule()
 	end
 	if FFlagCTAChangeMorePageFlyoutButtonTextIxpEnabled then
 		UseCTAChangeMorePageFlyoutButtonTextExposureLoggingModule()

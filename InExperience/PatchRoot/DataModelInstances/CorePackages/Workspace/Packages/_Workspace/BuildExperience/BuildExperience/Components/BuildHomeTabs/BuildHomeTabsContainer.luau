@@ -1,8 +1,7 @@
 ﻿local BuildExperience = script:FindFirstAncestor("BuildExperience")
-local Parent = BuildExperience.Parent
-local DataHydrationModule = require(Parent.DataHydration)
-local ReactModule = require(Parent.React)
+local ReactModule = require(BuildExperience.Parent.React)
 local BuildHomeTabsViewModule = require(script.Parent.BuildHomeTabsView)
+local _ = require(BuildExperience.Stores.GetSearchQueryStore.createSearchQueryStore)
 local GamesFilterModule = require(BuildExperience.Stores.GetMyCreationsFilterStore.GamesFilter)
 local GetPreviewsFilterStoreModule = require(BuildExperience.Stores.GetPreviewsFilterStore)
 local MyCreationsFilterContainerModule = require(BuildExperience.Components.MyCreationsFilter.MyCreationsFilterContainer)
@@ -15,24 +14,21 @@ local Options = {
 	GamesFilterModule.GroupGames,
 	GamesFilterModule.SharedGames
 }
-local DefaultFilter = { games = GamesFilterModule.All }
+local DefaultFilter = { games = GamesFilterModule.SharedGames }
 
 return function(Frame)
-	-- upvalues: GetPreviewsFilterStoreModule (copy), UsePreviewResultsModule (copy), UseBuildHomeTabsViewModelModule (copy), DefaultFilter (copy), DataHydrationModule (copy), UsePreviewsTabViewModelModule (copy), ReactModule (copy), BuildHomeTabsViewModule (copy), PreviewsTabViewModule (copy), MyCreationsFilterContainerModule (copy), Options (copy)
+	-- upvalues: GetPreviewsFilterStoreModule (copy), UsePreviewResultsModule (copy), UseBuildHomeTabsViewModelModule (copy), UsePreviewsTabViewModelModule (copy), ReactModule (copy), BuildHomeTabsViewModule (copy), PreviewsTabViewModule (copy), MyCreationsFilterContainerModule (copy), DefaultFilter (copy), Options (copy)
 	local CreatorGroupsStore = Frame.creatorGroupsStore
 	local PreviewsFilterStore = Frame.previewsFilterStore or GetPreviewsFilterStoreModule()
-	local UseFilterResult = PreviewsFilterStore.useFilter()
 	local UsePreviewResultsModuleResult = UsePreviewResultsModule({
 		searchStore = Frame.searchStore,
 		creatorGroupsStore = CreatorGroupsStore,
-		filter = UseFilterResult,
+		filter = PreviewsFilterStore.useFilter(),
 		isFocused = Frame.isFocused
 	})
 	local UseBuildHomeTabsViewModelModuleResult = UseBuildHomeTabsViewModelModule({
-		hasPreviews = UsePreviewResultsModuleResult.hasPreviews,
-		isPreviewsFiltered = UseFilterResult.games ~= DefaultFilter.games,
-		isPreviewsLoading = UsePreviewResultsModuleResult.status == DataHydrationModule.DataStatus.NotReady,
-		tabStore = Frame.tabStore
+		tabStore = Frame.tabStore,
+		searchQueryStore = Frame.searchQueryStore
 	})
 	local UsePreviewsTabViewModelModuleResult = UsePreviewsTabViewModelModule({ results = UsePreviewResultsModuleResult })
 	
@@ -56,6 +52,7 @@ return function(Frame)
 			refresh = UsePreviewsTabViewModelModuleResult.refresh,
 			loadMoreIfNeeded = UsePreviewsTabViewModelModuleResult.loadMoreIfNeeded,
 			retryLoadMore = UsePreviewsTabViewModelModuleResult.retryLoadMore,
+			emptyText = UsePreviewsTabViewModelModuleResult.emptyText,
 			filterHeader = ReactModule.createElement(MyCreationsFilterContainerModule, {
 				LayoutOrder = 0,
 				testId = "PreviewsFilterView",

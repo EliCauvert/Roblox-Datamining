@@ -35,6 +35,7 @@ local PYMKUserModule = require(PYMKCarousel.Components.PYMKUser)
 local _ = require(PYMKCarousel.Common.DirectRecommendationTypes)
 local FFlagLuaAppUseFrameBoundsImpressions = require(Parent.SharedFlags).FFlagLuaAppUseFrameBoundsImpressions
 local FFlagPymkCarouselPresenceStoreMigrationModule = require(PYMKCarousel.Flags.FFlagPymkCarouselPresenceStoreMigration)
+local FFlagPYMKCarouselStableSelectorsModule = require(PYMKCarousel.Flags.FFlagPYMKCarouselStableSelectors)
 local FFlagLuaAppPYMKSendUserSeenCollection = require(Parent.SharedFlags).FFlagLuaAppPYMKSendUserSeenCollection
 local FFlagLuaAppUserSeenCollectionUnifiedFields = require(Parent.SharedFlags).FFlagLuaAppUserSeenCollectionUnifiedFields
 local FFlagLuaAppEnableSduiHomePage = require(Parent.SharedFlags).FFlagLuaAppEnableSduiHomePage
@@ -73,7 +74,7 @@ local function buildDirectRecommendationOverrides(Recommendations)
 end
 
 return ReactModule.memo(function(p1)
-	-- upvalues: ReactModule (copy), UseCollectionImpressionsSignalFunction (copy), FFlagLuaAppEnableSduiHomePage (copy), buildDirectRecommendationOverrides (copy), UseSelectorFunction (copy), GetPYMKSortedRecommendationIdsModule (copy), TutilsModule (copy), UsePYMKCarouselItemListModule (copy), FFlagLuaAppPYMKSendUserSeenCollection (copy), DashModule (copy), SocialStopwatchModule (copy), FFlagPymkCarouselPresenceStoreMigrationModule (copy), UseDispatchFunction (copy), RecommendationContextType (copy), NetworkingPresence (copy), EventNames (copy), UseThrottledCallbackFunction (copy), HomePagePYMKPresenceFetchThrottleInterval (copy), UseCallbackWhenVisibleModule (copy), RefreshCount (ref), BtnValues (copy), UseUserSeenEventFunction (copy), FFlagLuaAppUserSeenCollectionUnifiedFields (copy), UseUserSeenCollectionEventFunction (copy), FocusNavigationEventNameEnum (copy), InputHandlersModule (copy), ReactFocusNavigationModule (copy), config (copy), UsePYMKCarouselUserEntitiesListModule (copy), UseContactsContextModule (copy), PYMKUserModule (copy), ContactsContext (copy), HorizontalUserList (copy), FFlagLuaAppUseFrameBoundsImpressions (copy), FrameBoundsImpressionsTracker (copy), ScreenSizeImpressionsTracker (copy)
+	-- upvalues: ReactModule (copy), UseCollectionImpressionsSignalFunction (copy), FFlagLuaAppEnableSduiHomePage (copy), buildDirectRecommendationOverrides (copy), UseSelectorFunction (copy), GetPYMKSortedRecommendationIdsModule (copy), FFlagPYMKCarouselStableSelectorsModule (copy), TutilsModule (copy), UsePYMKCarouselItemListModule (copy), FFlagLuaAppPYMKSendUserSeenCollection (copy), DashModule (copy), SocialStopwatchModule (copy), FFlagPymkCarouselPresenceStoreMigrationModule (copy), UseDispatchFunction (copy), RecommendationContextType (copy), NetworkingPresence (copy), EventNames (copy), UseThrottledCallbackFunction (copy), HomePagePYMKPresenceFetchThrottleInterval (copy), UseCallbackWhenVisibleModule (copy), RefreshCount (ref), BtnValues (copy), UseUserSeenEventFunction (copy), FFlagLuaAppUserSeenCollectionUnifiedFields (copy), UseUserSeenCollectionEventFunction (copy), FocusNavigationEventNameEnum (copy), InputHandlersModule (copy), ReactFocusNavigationModule (copy), config (copy), UsePYMKCarouselUserEntitiesListModule (copy), UseContactsContextModule (copy), PYMKUserModule (copy), ContactsContext (copy), HorizontalUserList (copy), FFlagLuaAppUseFrameBoundsImpressions (copy), FrameBoundsImpressionsTracker (copy), ScreenSizeImpressionsTracker (copy)
 	local UseRefResult = ReactModule.useRef(nil)
 	local UseCollectionImpressionsSignalResult, UseCollectionImpressionsSignalResult2 = UseCollectionImpressionsSignalFunction(p1.scrollViewPositionChangedSignal)
 	local RecommendationIds = nil
@@ -90,7 +91,7 @@ return ReactModule.memo(function(p1)
 		RecommendationIds = UseSelectorFunction(function(p2)
 			-- upvalues: GetPYMKSortedRecommendationIdsModule (upval)
 			return GetPYMKSortedRecommendationIdsModule(p2.LocalUserId)(p2)
-		end, TutilsModule.shallowEqual)
+		end, if FFlagPYMKCarouselStableSelectorsModule then TutilsModule.deepEqual else TutilsModule.shallowEqual)
 	end
 	local CountRecommendationIds: number = RecommendationIds and #RecommendationIds or 0
 	local RecommendationSessionId = p1.recommendationSessionId

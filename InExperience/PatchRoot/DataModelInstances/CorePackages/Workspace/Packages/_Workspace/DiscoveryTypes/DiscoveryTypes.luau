@@ -2,7 +2,6 @@
 local _ = require(script.EnumGameDetailErrorTypes)
 local FFlagEnableTopSongsSort = require(script.Parent.SharedFlags).FFlagEnableTopSongsSort
 local GetFFlagUIBloxUseFoundationButtonFunction = require(script.Parent.SharedFlags).UIBlox.GetFFlagUIBloxUseFoundationButton
-local FFlagSearchOmniAutocompletePage = require(script.Parent.SharedFlags).FFlagSearchOmniAutocompletePage
 
 return {
 	OmniFeedPropsKey = require(script.Parent.AppCommonLib).Symbol.named("OmniFeedProps"),
@@ -25,9 +24,9 @@ return {
 		ExploreApi = "ExploreApi",
 		GamesApi = "GamesApi",
 		Local = "Local",
+		OmniAutocompleteApi = "OmniAutocompleteApi",
 		SearchApi = "SearchApi",
-		Unknown = "Unknown",
-		OmniAutocompleteApi = if FFlagSearchOmniAutocompletePage then "OmniAutocompleteApi" else nil
+		Unknown = "Unknown"
 	},
 	ExperienceDetailsNoticeType = { InExperiencePurchase = "InExperiencePurchase" },
 	ExploreContentType = require(script.ExploreContentType),

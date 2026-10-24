@@ -12,7 +12,6 @@ local FindAnalyticsFieldInAncestorsFunction = require(Parent.SduiCoreSystem).fin
 local VideoUtilsModule = require(Parent.VideoUtils)
 local VideoActions = VideoUtilsModule.AnalyticsEnums.VideoActions
 local VideoLogger = VideoUtilsModule.VideoLogger
-local FFlagLuaAppBroadenVideoAnalytics = require(Parent.SharedFlags).FFlagLuaAppBroadenVideoAnalytics
 local FFlagLuaAppDiscoveryMomentVideoTelemetry = require(Parent.SharedFlags).FFlagLuaAppDiscoveryMomentVideoTelemetry
 
 local function _(p1)
@@ -35,9 +34,9 @@ local _ = function(ActionType, PageContext, UniverseId, PlaceId)
 end
 
 return function(p1, PageContext, p2)
-	-- upvalues: ReactModule (copy), FindAnalyticsFieldInAncestorsFunction (copy), FFlagLuaAppBroadenVideoAnalytics (copy), FFlagLuaAppDiscoveryMomentVideoTelemetry (copy), ParseBooleanStringFunction (copy), DiscoveryEventErrorLogger (copy), DiscoveryVideoPlayEventFunction (copy), DiscoveryVideoLoadEventFunction (copy), VideoLogger (copy), VideoActions (copy), DiscoveryVideoLoopEventFunction (copy), DiscoveryVideoEndEventFunction (copy)
+	-- upvalues: ReactModule (copy), FindAnalyticsFieldInAncestorsFunction (copy), FFlagLuaAppDiscoveryMomentVideoTelemetry (copy), ParseBooleanStringFunction (copy), DiscoveryEventErrorLogger (copy), DiscoveryVideoPlayEventFunction (copy), DiscoveryVideoLoadEventFunction (copy), VideoLogger (copy), VideoActions (copy), DiscoveryVideoLoopEventFunction (copy), DiscoveryVideoEndEventFunction (copy)
 	local UseResult = ReactModule.useCallback(function(p3)
-		-- upvalues: p1 (copy), FindAnalyticsFieldInAncestorsFunction (upval), p2 (copy), FFlagLuaAppBroadenVideoAnalytics (upval), FFlagLuaAppDiscoveryMomentVideoTelemetry (upval), ParseBooleanStringFunction (upval)
+		-- upvalues: p1 (copy), FindAnalyticsFieldInAncestorsFunction (upval), p2 (copy), FFlagLuaAppDiscoveryMomentVideoTelemetry (upval), ParseBooleanStringFunction (upval)
 		local CollectionData = if p1.getCollectionData then p1.getCollectionData() else nil
 		local VideoAssetId = FindAnalyticsFieldInAncestorsFunction("videoAssetId", p1)
 		local Text = if VideoAssetId == nil then nil else tostring(VideoAssetId)
@@ -58,25 +57,11 @@ return function(p1, PageContext, p2)
 		end
 		config.gameSetTypeId = Text1
 		config.sortPos = if CollectionData then CollectionData.collectionPosition else nil
-		config.nativeAdData = if FFlagLuaAppBroadenVideoAnalytics then if NativeAdData == nil then nil else tostring(NativeAdData) else nil
-		local Text2 = nil
-		
-		if FFlagLuaAppBroadenVideoAnalytics then
-			local TileType = FindAnalyticsFieldInAncestorsFunction("tileType", p1)
-			Text2 = if TileType == nil then nil else tostring(TileType)
-		else
-			Text2 = nil
-		end
-		config.tileType = Text2
-		local Text3 = nil
-		
-		if FFlagLuaAppBroadenVideoAnalytics then
-			local ContentType = FindAnalyticsFieldInAncestorsFunction("contentType", p1)
-			Text3 = if ContentType == nil then nil else tostring(ContentType)
-		else
-			Text3 = nil
-		end
-		config.contentType = Text3
+		config.nativeAdData = if NativeAdData == nil then nil else tostring(NativeAdData)
+		local TileType = FindAnalyticsFieldInAncestorsFunction("tileType", p1)
+		config.tileType = if TileType == nil then nil else tostring(TileType)
+		local ContentType = FindAnalyticsFieldInAncestorsFunction("contentType", p1)
+		config.contentType = if ContentType == nil then nil else tostring(ContentType)
 		local IsMoment1 = nil
 		
 		if FFlagLuaAppDiscoveryMomentVideoTelemetry then

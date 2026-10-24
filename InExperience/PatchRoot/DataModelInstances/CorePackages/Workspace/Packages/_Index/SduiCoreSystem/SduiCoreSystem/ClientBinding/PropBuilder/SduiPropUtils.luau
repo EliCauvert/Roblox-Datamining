@@ -20,7 +20,6 @@ local PropResultCategory = require(SduiCoreSystem.ClientBinding.SduiClientBindin
 local ApplyFormatArgFormatterFunction = require(SduiCoreSystem.ClientBinding.PropBuilder.applyFormatArgFormatter).applyFormatArgFormatter
 local DataStatus = require(Parent.DataHydration).DataHydrationTypes.DataStatus
 local FFlagSduiDismissPromptPageScope = require(Parent.SharedFlags).FFlagSduiDismissPromptPageScope
-local FFlagSduiFormatStringPercentSafeGsubModule = require(SduiCoreSystem.FFlagSduiFormatStringPercentSafeGsub)
 local Frozen = table.freeze({ status = DataStatus.Failed })
 local Frozen1 = table.freeze({})
 
@@ -146,7 +145,7 @@ local function _(Text: string, Text1, p4): string
 end
 
 local function generateFormatStringPropValue(p4, p5, p6, p7, Callback)
-	-- upvalues: ApplyFormatArgFormatterFunction (copy), Frozen (copy), FFlagSduiFormatStringPercentSafeGsubModule (copy), generateDynamicBindingPropValue (copy), SignalsModule (copy), SduiLoggerModule (copy), SduiErrorsModule (copy), TutilsModule (copy)
+	-- upvalues: ApplyFormatArgFormatterFunction (copy), Frozen (copy), generateDynamicBindingPropValue (copy), SignalsModule (copy), SduiLoggerModule (copy), SduiErrorsModule (copy), TutilsModule (copy)
 	local CurrentComponentType = p6.currentComponentType
 	local CurrentParserName = p6.currentParserName
 	
@@ -181,22 +180,16 @@ local function generateFormatStringPropValue(p4, p5, p6, p7, Callback)
 						return Frozen
 					end
 				end
-				if FFlagSduiFormatStringPercentSafeGsubModule then
-					Str = Str:gsub("{" .. i .. "}", function()
-						-- upvalues: ApplyFormatArgFormatterResult (copy)
-						return ApplyFormatArgFormatterResult
-					end)
-				else
-					Str = Str:gsub("{" .. i .. "}", ApplyFormatArgFormatterResult)
-				end
-			elseif FFlagSduiFormatStringPercentSafeGsubModule then
+				Str = Str:gsub("{" .. i .. "}", function()
+					-- upvalues: ApplyFormatArgFormatterResult (copy)
+					return ApplyFormatArgFormatterResult
+				end)
+			else
 				local Text = tostring(Value)
 				Str = Str:gsub("{" .. i .. "}", function()
 					-- upvalues: Text (copy)
 					return Text
 				end)
-			else
-				Str = Str:gsub("{" .. i .. "}", (tostring(Value)))
 			end
 		elseif Type == "binding_path" then
 			t[i] = generateDynamicBindingPropValue(Value, p5, p6, p7)
@@ -209,7 +202,7 @@ local function generateFormatStringPropValue(p4, p5, p6, p7, Callback)
 		end
 	end
 	return SignalsModule.createComputed(function(p8)
-		-- upvalues: Str (ref), t (copy), Formatters (copy), ApplyFormatArgFormatterFunction (upval), p6 (copy), Frozen (upval), FFlagSduiFormatStringPercentSafeGsubModule (upval), Callback (copy), SduiLoggerModule (upval), SduiErrorsModule (upval), CurrentComponentType (copy), CurrentParserName (copy)
+		-- upvalues: Str (ref), t (copy), Formatters (copy), ApplyFormatArgFormatterFunction (upval), p6 (copy), Frozen (upval), Callback (copy), SduiLoggerModule (upval), SduiErrorsModule (upval), CurrentComponentType (copy), CurrentParserName (copy)
 		local Text = Str
 		local Status = nil
 		
@@ -229,21 +222,11 @@ local function generateFormatStringPropValue(p4, p5, p6, p7, Callback)
 				if ApplyFormatArgFormatterResult == nil then
 					return Frozen
 				end
-				if not FFlagSduiFormatStringPercentSafeGsubModule then
-					Text = Text and Text:gsub("{" .. i .. "}", ApplyFormatArgFormatterResult)
-					continue
-				else
-					Text = Text and Text:gsub("{" .. i .. "}", function()
-						-- upvalues: ApplyFormatArgFormatterResult (copy)
-						return ApplyFormatArgFormatterResult
-					end)
-					continue
-				end
+				Text = Text and Text:gsub("{" .. i .. "}", function()
+					-- upvalues: ApplyFormatArgFormatterResult (copy)
+					return ApplyFormatArgFormatterResult
+				end)
 			else
-				if not FFlagSduiFormatStringPercentSafeGsubModule then
-					Text = Text and Text:gsub("{" .. i .. "}", (tostring(Data)))
-					continue
-				end
 				local Replaced: string = Text
 				
 				if Replaced then
@@ -254,7 +237,6 @@ local function generateFormatStringPropValue(p4, p5, p6, p7, Callback)
 					end)
 				end
 				Text = Replaced
-				continue
 			end
 		end
 		if not Callback then
@@ -405,8 +387,8 @@ local function evaluateCondition(p9, Condition, p10, p11, p12)
 			-- upvalues: resolveBindingPathValue (upval), p9 (copy), SplitDottedPathModuleResult (copy), p10 (copy), p12 (copy), p11 (copy)
 			return resolveBindingPathValue(p9, SplitDottedPathModuleResult, p10, p12, nil, true, p11)
 		end)
-		local Number = nil
 		local Ready = nil
+		local Number = nil
 		
 		if Success then
 			Number = Result
@@ -517,8 +499,8 @@ local function evaluateCondition(p9, Condition, p10, p11, p12)
 			-- upvalues: resolveBindingPathValue (upval), p9 (copy), SplitDottedPathModuleResult4 (copy), p10 (copy), p12 (copy), p11 (copy)
 			return resolveBindingPathValue(p9, SplitDottedPathModuleResult4, p10, p12, nil, true, p11)
 		end)
-		local Result9 = nil
 		local Ready = nil
+		local Result9 = nil
 		
 		if Success4 then
 			Result9 = Result8
@@ -721,18 +703,18 @@ return {
 		for _, value in List do
 			local DataBindingSourcesForTemplateModule = BuildDataBindingSourcesForTemplateModule(value, p20)
 			
-			local function v163()
+			local function v162()
 				-- upvalues: DataBindingSourcesForTemplateModule (copy)
 				return DataBindingSourcesForTemplateModule
 			end
 			
-			local function v164()
+			local function v163()
 				-- upvalues: value (copy)
 				return value
 			end
 			
-			local CallbackResult, CallbackResult2 = Callback(p21, v163, v164, p22, p23)
-			table.insert(List1, (resolveTablePropValue(p24, CallbackResult, CallbackResult2, nil, v163, p22, p23, v164, nil)))
+			local CallbackResult, CallbackResult2 = Callback(p21, v162, v163, p22, p23)
+			table.insert(List1, (resolveTablePropValue(p24, CallbackResult, CallbackResult2, nil, v162, p22, p23, v163, nil)))
 		end
 		return List1
 	end,

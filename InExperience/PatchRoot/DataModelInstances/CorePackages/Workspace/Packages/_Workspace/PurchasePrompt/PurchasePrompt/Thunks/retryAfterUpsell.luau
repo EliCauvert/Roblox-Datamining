@@ -56,7 +56,7 @@ else
 			
 			if RequestType == RequestTypeModule.None then return end
 			if PromptState ~= PromptStateModule.UpsellInProgress and PromptState ~= PromptStateModule.PollingBalance then return end
-			if RequestType ~= RequestTypeModule.Premium and RequestType ~= RequestTypeModule.Subscription and (not FFlagAXMISWithBlackbird or RequestType ~= RequestTypeModule.RobuxUpsell) then
+			if RequestType ~= RequestTypeModule.Subscription and (not FFlagAXMISWithBlackbird or RequestType ~= RequestTypeModule.RobuxUpsell) then
 				if PurchaseFlow == PurchaseFlowModule.RobuxUpsellV2 or PurchaseFlow == PurchaseFlowModule.LargeRobuxUpsell then
 					p2:dispatch(SetPromptStateModule(PromptStateModule.PollingBalance))
 				end

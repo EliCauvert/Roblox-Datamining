@@ -5,6 +5,7 @@ local SignalsReactModule = require(Parent.SignalsReact)
 local _ = require(Parent.React)
 local _ = require(BuildExperience.Chat.chatTypes)
 local GetPlayButtonStoreModule = require(BuildExperience.Stores.GetPlayButtonStore)
+local _ = require(BuildExperience.Components.ModelPicker.ModelPickerTypes)
 
 return function()
 	-- upvalues: SignalsModule (copy), SignalsReactModule (copy), GetPlayButtonStoreModule (copy)

@@ -1,8 +1,10 @@
 ﻿local BuildExperience = script:FindFirstAncestor("BuildExperience")
 local Parent = BuildExperience.Parent
+local FocusNavigationUtilsModule = require(Parent.FocusNavigationUtils)
 local FoundationModule = require(Parent.Foundation)
 local NavigationModule = require(Parent.Navigation)
 local ReactModule = require(Parent.React)
+local ResponsiveModule = require(Parent.Responsive)
 local SharedFlagsModule = require(Parent.SharedFlags)
 local SignalsReactModule = require(Parent.SignalsReact)
 local UseOpenWebViewFunction = require(Parent.WebViewUtils).useOpenWebView
@@ -13,21 +15,26 @@ local UniverseConfigurationModule = require(Parent.DataHydration.UniverseConfigu
 local UniverseActivationModule = require(Parent.DataHydration.UniverseActivation)
 local LocalizationStringsModule = require(BuildExperience.LocalizationStrings)
 local FFlagBuildPostPublishShareDismissibleModule = require(BuildExperience.Flags.FFlagBuildPostPublishShareDismissible)
+local FIntBuildPostPublishSnackbarAutoDismissSecondsModule = require(BuildExperience.Flags.FIntBuildPostPublishSnackbarAutoDismissSeconds)
 local FriendsOnlyShareDialogModule = require(BuildExperience.Components.ShareAudience.FriendsOnlyShareDialog)
 local ContentMaturityUtilsModule = require(BuildExperience.utils.ContentMaturityUtils)
 local GameConfigurationActionsModule = require(BuildExperience.utils.GameConfigurationActions)
 local GameConfigurationLabelsModule = require(BuildExperience.utils.GameConfigurationLabels)
 local GetGameDetailsNavigationModule = require(BuildExperience.utils.getGameDetailsNavigation)
 local RefreshPublishEligibilityModule = require(BuildExperience.utils.refreshPublishEligibility)
+local UseClosableFocusRootModule = require(BuildExperience.utils.useClosableFocusRoot)
 local GetVersionInformationStoreModule = require(BuildExperience.Stores.GetVersionInformationStore)
 local UseGamePermissionsModule = require(BuildExperience.useGamePermissions)
 local FFlagBuildCheckGamePermissionsModule = require(BuildExperience.Flags.FFlagBuildCheckGamePermissions)
 local Button = FoundationModule.Button
+local Popover = FoundationModule.Popover
 local Snackbar = FoundationModule.Snackbar
 local View = FoundationModule.View
 local ButtonVariant = FoundationModule.Enums.ButtonVariant
 local FillBehavior = FoundationModule.Enums.FillBehavior
 local InputSize = FoundationModule.Enums.InputSize
+local PopoverAlign = FoundationModule.Enums.PopoverAlign
+local PopoverSide = FoundationModule.Enums.PopoverSide
 local PrivacyType = UniverseConfigurationModule.PrivacyType
 local FFlagEnableShareSheet = SharedFlagsModule.FFlagEnableShareSheet
 local FFlagShareSheetFriendsSort = SharedFlagsModule.FFlagShareSheetFriendsSort
@@ -99,7 +106,7 @@ local function PreviewButton(p1)
 end
 
 return function(p1)
-	-- upvalues: UseLocalizationFunction (copy), LocalizationStringsModule (copy), UseSharePublishedExperienceFunction (copy), SignalsReactModule (copy), PlaceVersionHistoryModule (copy), UniverseConfigurationModule (copy), ReactModule (copy), GameConfigurationLabelsModule (copy), UniverseActivationModule (copy), ContentMaturityUtilsModule (copy), UseOpenWebViewFunction (copy), PrivacyType (copy), FFlagEnableShareSheet (copy), FFlagShareSheetFriendsSort (copy), UniversalShareSheet (copy), SharePublishedExperienceFunction (copy), GameConfigurationActionsModule (copy), RefreshPublishEligibilityModule (copy), GetVersionInformationStoreModule (copy), SendBuildExperienceEventModule (copy), GetAdUpsellEventStoreModule (copy), FFlagBuildAdUpsellModule (copy), buildPublicAudiences (copy), ExperienceGuidelinesModule (copy), t (copy), Debug (copy), FFlagBuildExperiencePlaytestCardPublishCtaModule (copy), FFlagBuildCheckGamePermissionsModule (copy), UseGamePermissionsModule (copy), Snackbar (copy), FFlagBuildPostPublishShareDismissibleModule (copy), View (copy), FFlagBuildPublishNavigationSheetModule (copy), Button (copy), InputSize (copy), ButtonVariant (copy), FillBehavior (copy), PreviewButton (copy), FriendsOnlyShareDialogModule (copy)
+	-- upvalues: UseLocalizationFunction (copy), LocalizationStringsModule (copy), UseSharePublishedExperienceFunction (copy), SignalsReactModule (copy), PlaceVersionHistoryModule (copy), UniverseConfigurationModule (copy), ReactModule (copy), GameConfigurationLabelsModule (copy), UniverseActivationModule (copy), ContentMaturityUtilsModule (copy), UseOpenWebViewFunction (copy), PrivacyType (copy), FFlagBuildPostPublishShareDismissibleModule (copy), FIntBuildPostPublishSnackbarAutoDismissSecondsModule (copy), FFlagEnableShareSheet (copy), FFlagShareSheetFriendsSort (copy), UniversalShareSheet (copy), SharePublishedExperienceFunction (copy), GameConfigurationActionsModule (copy), RefreshPublishEligibilityModule (copy), GetVersionInformationStoreModule (copy), SendBuildExperienceEventModule (copy), GetAdUpsellEventStoreModule (copy), FFlagBuildAdUpsellModule (copy), buildPublicAudiences (copy), ExperienceGuidelinesModule (copy), t (copy), Debug (copy), FFlagBuildExperiencePlaytestCardPublishCtaModule (copy), FFlagBuildCheckGamePermissionsModule (copy), UseGamePermissionsModule (copy), FoundationModule (copy), UseClosableFocusRootModule (copy), FocusNavigationUtilsModule (copy), ResponsiveModule (copy), Snackbar (copy), View (copy), FFlagBuildPublishNavigationSheetModule (copy), Popover (copy), PopoverAlign (copy), PopoverSide (copy), Button (copy), InputSize (copy), ButtonVariant (copy), FillBehavior (copy), PreviewButton (copy), FriendsOnlyShareDialogModule (copy)
 	local UseLocalizationResult = UseLocalizationFunction({
 		accountTooNewError = LocalizationStringsModule.GAME_CONFIGURATION_PUBLISH_ACCOUNT_TOO_NEW_ERROR,
 		creatorHub = LocalizationStringsModule.GAME_CONFIGURATION_CREATOR_HUB,
@@ -151,6 +158,22 @@ return function(p1)
 		UseStateResult2_1("")
 		UseStateResult2_2(nil)
 	end, {})
+	
+	if FFlagBuildPostPublishShareDismissibleModule then
+		ReactModule.useEffect(function()
+			-- upvalues: UseStateResult1 (copy), FIntBuildPostPublishSnackbarAutoDismissSecondsModule (upval), UseStateResult2_1 (copy)
+			if UseStateResult1 == "" then
+				return nil
+			else
+				local DelayedThread = task.delay(FIntBuildPostPublishSnackbarAutoDismissSecondsModule, UseStateResult2_1, "")
+				
+				return function()
+					-- upvalues: DelayedThread (copy)
+					task.cancel(DelayedThread)
+				end
+			end
+		end, { UseStateResult1 })
+	end
 	local UseResult1 = ReactModule.useCallback(function()
 		-- upvalues: p1 (copy), UseStateResult2_2 (copy), FFlagEnableShareSheet (upval), UseSharePublishedExperienceResult (copy), FFlagShareSheetFriendsSort (upval), UniversalShareSheet (upval), SharePublishedExperienceFunction (upval), LinkCopied (copy), UseStateResult2_1 (copy)
 		if p1.target.placeId == nil then return end
@@ -172,7 +195,10 @@ return function(p1)
 		UseSharePublishedExperienceResult
 	})
 	local UseResult2 = ReactModule.useCallback(function()
-		-- upvalues: Audience (copy), PrivacyType (upval), UseStateResult2_2 (copy), UseResult1 (copy)
+		-- upvalues: FFlagBuildPostPublishShareDismissibleModule (upval), UseStateResult2_1 (copy), Audience (copy), PrivacyType (upval), UseStateResult2_2 (copy), UseResult1 (copy)
+		if FFlagBuildPostPublishShareDismissibleModule then
+			UseStateResult2_1("")
+		end
 		if Audience == PrivacyType.FriendsOnly then
 			UseStateResult2_2("friends")
 			
@@ -406,11 +432,20 @@ return function(p1)
 		isNewGame = p1.target.isNewGameTarget
 	}) else nil
 	local NoFFlagBuildCheckGamePermissionsModule = not FFlagBuildCheckGamePermissionsModule or UseGamePermissionsModuleResult.canPublish
+	local UseRefResult = if FFlagBuildPostPublishShareDismissibleModule then ReactModule.useRef(nil) else nil
+	local UseTokensResult = if FFlagBuildPostPublishShareDismissibleModule then FoundationModule.Hooks.useTokens() else nil
+	local UseClosableFocusRootModuleResult = if FFlagBuildPostPublishShareDismissibleModule then UseClosableFocusRootModule({
+		surfaceIdentifier = FocusNavigationUtilsModule.FocusNavigableSurfaceIdentifierEnum.PopUp,
+		isOpen = UseStateResult1 ~= "",
+		onClose = UseResult
+	}) else nil
+	local IsUsePreferredInputResultMatch = if FFlagBuildPostPublishShareDismissibleModule then ResponsiveModule.usePreferredInput() == ResponsiveModule.Input.Directional else nil
 	local Element = ReactModule.createElement(Snackbar, {
 		LayoutOrder = 1,
+		ref = if FFlagBuildPostPublishShareDismissibleModule then UseClosableFocusRootModuleResult else nil,
 		title = UseStateResult1,
 		action = if IsNotAudienceMatch then { text = Share, onActivated = UseResult2 } else nil,
-		onClose = if FFlagBuildPostPublishShareDismissibleModule then UseResult elseif IsNotAudienceMatch then nil else UseResult,
+		onClose = if FFlagBuildPostPublishShareDismissibleModule then if IsUsePreferredInputResultMatch then nil else UseResult elseif IsNotAudienceMatch then nil else UseResult,
 		testId = `{p1.testId}.publish-snackbar`
 	})
 	
@@ -421,13 +456,27 @@ return function(p1)
 			["bg-surface-0"] = not FFlagBuildPublishNavigationSheetModule
 		}
 	}, {
-		PublishSnackbarWrapper = if UseStateResult1 == "" then nil else ReactModule.createElement(View, {
+		PublishSnackbar = if FFlagBuildPostPublishShareDismissibleModule then ReactModule.createElement(Popover.Root, {
+			isOpen = UseStateResult1 ~= "",
+			testId = `{p1.testId}.publish-snackbar-popover`
+		}, {
+			Anchor = ReactModule.createElement(Popover.Anchor, { anchorRef = UseRefResult }),
+			Content = ReactModule.createElement(Popover.Content, {
+				hasArrow = false,
+				selectionGroup = false,
+				align = PopoverAlign.Center,
+				backgroundStyle = UseTokensResult.Color.None,
+				side = PopoverSide.Top
+			}, { Snackbar = Element })
+		}) else nil,
+		PublishSnackbarWrapper = if FFlagBuildPostPublishShareDismissibleModule then nil elseif UseStateResult1 == "" then nil else ReactModule.createElement(View, {
 			LayoutOrder = 1,
 			tag = "row align-x-center size-full-0 auto-y padding-x-large"
 		}, { PublishSnackbar = Element }),
 		Actions = ReactModule.createElement(View, {
 			LayoutOrder = 2,
 			tag = "row gap-small size-full-0 auto-y padding-y-medium",
+			ref = if FFlagBuildPostPublishShareDismissibleModule then UseRefResult else nil,
 			testId = ActionsName
 		}, {
 			Publish = ReactModule.createElement(Button, {

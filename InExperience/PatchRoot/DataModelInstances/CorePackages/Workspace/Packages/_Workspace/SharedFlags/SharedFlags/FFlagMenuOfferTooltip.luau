@@ -1,1 +1,1 @@
-﻿return game:DefineFastFlag("MenuOfferTooltip", false) and require(script.Parent.FFlagEnableUserOffers)
+﻿return game:DefineFastFlag("MenuOfferTooltip", false)

@@ -165,7 +165,7 @@ Authentication.SignUp.Response.PasswordComplexity,Buat password yang lebih kompl
 Authentication.SignUp.Response.UsernameMustBeSetFirst,Nama pengguna harus diatur terlebih dahulu.
 Authentication.SignUp.Subtitle.AddYourBirthday,Tambahkan tanggal lahirmu untuk membuat akun Roblox.
 Authentication.SignUp.Subtitle.YourProgressCarriesOver,Progresmu akan tetap tersimpan setelah kamu menyelesaikan penyiapan.
-Authentication.SignUp.Subtitle.YoureAlmostThere,"Sedikit lagi selesai. Jika kamu menutupnya sekarang, akunmu belum selesai dibuat dan kamu tidak akan bisa bermain Roblox."
+Authentication.SignUp.Subtitle.YoureAlmostThereClose,"Sedikit lagi selesai. Jika kamu membatalkannya sekarang, akunmu belum selesai dibuat dan kamu tidak akan bisa bermain Roblox."
 Authentication.TwoStepVerification.Action.GoToSecurity,
 Authentication.TwoStepVerification.Label.TwoStepRequired,Verifikasi 2 Langkah diperlukan untuk melakukan transaksi lebih lanjut. Buka Pengaturan > Keamanan untuk menyelesaikan Verifikasi 2 Langkah.
 Authentication.TwoStepVerification.Response.TooManyAttempts,Terlalu banyak percobaan. Coba lagi nanti.
@@ -3177,7 +3177,6 @@ Feature.Contacts.Message.ContactDiscoverable,"Untuk membantu kamu menjalin perte
 Feature.Contacts.Message.ContactsSyncWarning,"Kontak kamu akan disinkronisasi secara berkala. Jika saat sinkronisasi kontak kamu ditemukan sebagai pengguna Roblox, kontak tersebut akan disimpan untuk mempermudah kamu menemukan teman. Kelola ini kapan saja di pengaturan perangkat."
 Feature.Contacts.Message.InviteToRoblox,"Tambahkan saya sebagai teman di Roblox supaya kita bisa berkreasi, berbagi, dan menjelajahi berbagai pengalaman virtual bersama."
 Feature.Contacts.Message.NoResults,Tidak ada hasil.
-Feature.DeveloperProducts.Heading.Products,
 Feature.DeveloperProducts.Label.Product,
 Feature.DisplayName.ErrorMessage.AgedUpNameContainPII,Nama mungkin mengandung informasi pribadi
 Feature.DisplayName.ErrorMessage.AgedUpNameHasChanged,Nama kamu sudah diubah dalam 7 hari terakhir

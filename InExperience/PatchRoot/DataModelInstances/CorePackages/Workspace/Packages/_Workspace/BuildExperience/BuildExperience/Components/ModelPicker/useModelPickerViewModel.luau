@@ -1,5 +1,6 @@
 ﻿local BuildExperience = script:FindFirstAncestor("BuildExperience")
 local Parent = BuildExperience.Parent
+local UserInputService = game:GetService("UserInputService")
 local FocusNavigationUtilsModule = require(Parent.FocusNavigationUtils)
 local LocalizationModule = require(Parent.Localization)
 local ReactModule = require(Parent.React)
@@ -7,13 +8,14 @@ local ResponsiveModule = require(Parent.Responsive)
 local FFlagBuildExperienceModelPickerModule = require(BuildExperience.Flags.FFlagBuildExperienceModelPicker)
 local CreatorAgentChatModule = if FFlagBuildExperienceModelPickerModule then require(Parent.DataHydration.CreatorAgentChat) else nil
 local IsEnabled = FFlagBuildExperienceModelPickerModule and CreatorAgentChatModule.experimentOverride.isEnabled()
+local SignalsModule = if IsEnabled then require(Parent.Signals) else nil
 local LocalizationStringsModule = require(BuildExperience.LocalizationStrings)
 local UseClosableFocusRootModule = require(BuildExperience.utils.useClosableFocusRoot)
 local _ = require(script.Parent.ModelPickerTypes)
 local _ = require(script.Parent.ModelPickerView)
 
 return function(Frame)
-	-- upvalues: IsEnabled (copy), LocalizationModule (copy), LocalizationStringsModule (copy), ReactModule (copy), FFlagBuildExperienceModelPickerModule (copy), UseClosableFocusRootModule (copy), FocusNavigationUtilsModule (copy), ResponsiveModule (copy)
+	-- upvalues: IsEnabled (copy), LocalizationModule (copy), LocalizationStringsModule (copy), ReactModule (copy), SignalsModule (copy), CreatorAgentChatModule (copy), FFlagBuildExperienceModelPickerModule (copy), UserInputService (copy), UseClosableFocusRootModule (copy), FocusNavigationUtilsModule (copy), ResponsiveModule (copy)
 	local InternalTesting = if IsEnabled then Frame.internalTesting else nil
 	local UseLocalizationResult = LocalizationModule.Hooks.useLocalization({
 		title = LocalizationStringsModule.MODEL_PICKER_TITLE,
@@ -33,6 +35,15 @@ return function(Frame)
 	local IsPicker = UseStateResult == "picker"
 	local IsSelected1 = UseStateResult == "spec" and IsSelected
 	
+	if IsEnabled then
+		ReactModule.useEffect(function()
+			-- upvalues: IsPicker (copy), SignalsModule (upval), CreatorAgentChatModule (upval)
+			return if IsPicker then SignalsModule.createEffect(function(p1)
+				-- upvalues: CreatorAgentChatModule (upval)
+				CreatorAgentChatModule.PreviewSpecs.getPreviewSpecsStore(false).getAndFetchPreviewSpecs(p1)
+			end) else nil
+		end, { IsPicker })
+	end
 	if FFlagBuildExperienceModelPickerModule then
 		ReactModule.useEffect(function()
 			-- upvalues: UseStateResult (copy), Frame (copy), IsSelected (copy), UseStateResult2 (copy)
@@ -70,8 +81,15 @@ return function(Frame)
 		UseStateResult2("picker")
 	end, {})
 	local UseResult5 = ReactModule.useCallback(function()
-		-- upvalues: Frame (copy), UseStateResult2 (copy)
+		-- upvalues: Frame (copy), FFlagBuildExperienceModelPickerModule (upval), UserInputService (upval), UseStateResult2 (copy)
 		if not Frame.isDisabled then
+			if FFlagBuildExperienceModelPickerModule then
+				local FocusedTextBox = UserInputService:GetFocusedTextBox()
+				
+				if FocusedTextBox then
+					FocusedTextBox:ReleaseFocus()
+				end
+			end
 			UseStateResult2("picker")
 		end
 	end, { Frame.isDisabled })
@@ -99,38 +117,38 @@ return function(Frame)
 	local Options = {}
 	
 	for _, option in Frame.data.options do
-		local Unavailable1 = UseLocalizationResult.unavailable
+		local AdvancedLabel = UseLocalizationResult.unavailable
 		local AdvancedDescription = nil
 		
 		if option.model == "Default" then
-			Unavailable1 = UseLocalizationResult.defaultLabel
+			AdvancedLabel = UseLocalizationResult.defaultLabel
 			AdvancedDescription = UseLocalizationResult.defaultDescription
 		elseif option.model == "Advanced" then
-			Unavailable1 = UseLocalizationResult.advancedLabel
+			AdvancedLabel = UseLocalizationResult.advancedLabel
 			AdvancedDescription = UseLocalizationResult.advancedDescription
 		end
 		table.insert(Options, {
 			id = option.id,
 			model = option.model,
 			isAvailable = option.isAvailable,
-			label = Unavailable1,
+			label = AdvancedLabel,
 			description = AdvancedDescription
 		})
 	end
-	local Unavailable = UseLocalizationResult.title
+	local Title = UseLocalizationResult.title
 	
 	if Frame.selectedId ~= nil then
-		Unavailable = UseLocalizationResult.unavailable
+		Title = UseLocalizationResult.unavailable
 		
 		for _, option1 in Options do
 			if option1.id == Frame.selectedId then
-				Unavailable = option1.label
+				Title = option1.label
 				break
 			end
 		end
 	end
 	if IsSelected then
-		Unavailable = UseLocalizationResult.internalLabel
+		Title = UseLocalizationResult.internalLabel
 	end
 	return {
 		internalTesting = if InternalTesting then {
@@ -152,7 +170,7 @@ return function(Frame)
 		selectedId = Frame.selectedId,
 		isDisabled = Frame.isDisabled,
 		LayoutOrder = Frame.LayoutOrder,
-		label = Unavailable,
+		label = Title,
 		title = UseLocalizationResult.title,
 		unavailableText = UseLocalizationResult.unavailable,
 		isOpen = IsPicker,

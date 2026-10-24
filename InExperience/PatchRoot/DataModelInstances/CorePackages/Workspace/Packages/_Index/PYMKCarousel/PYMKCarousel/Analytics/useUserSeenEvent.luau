@@ -12,6 +12,8 @@ local RecommendationContextType = DependenciesModule.RoduxFriends.Enums.Recommen
 local GetFFlagPYMKAddFriendsEntryFunction = DependenciesModule.getFFlagPYMKAddFriendsEntry
 local FFlagMigrateFriendshipStatusesPYMKModule = require(Parent.Flags.FFlagMigrateFriendshipStatusesPYMK)
 local FFlagLuaAppEnableSduiHomePage = require(Parent1.SharedFlags).FFlagLuaAppEnableSduiHomePage
+local FFlagPYMKCarouselStableSelectorsModule = require(Parent.Flags.FFlagPYMKCarouselStableSelectors)
+local Frozen = table.freeze({})
 local GetResult = if FFlagMigrateFriendshipStatusesPYMKModule then require(Parent1.DataHydration).Friends.FriendsStore.get() else nil
 
 local function _(p1)
@@ -22,19 +24,35 @@ local function _(p1)
 end
 
 return function(Callback)
-	-- upvalues: React (copy), FFlagMigrateFriendshipStatusesPYMKModule (copy), UseSelectorFunction (copy), GetDeepValueFunction (copy), ConstantsModule (copy), FFlagLuaAppEnableSduiHomePage (copy), GetFFlagPYMKAddFriendsEntryFunction (copy), EventNamesModule (copy), RecommendationContextType (copy), GetFriendStatusModule (copy), GetResult (copy), Llama (copy)
+	-- upvalues: React (copy), FFlagMigrateFriendshipStatusesPYMKModule (copy), UseSelectorFunction (copy), GetDeepValueFunction (copy), ConstantsModule (copy), FFlagPYMKCarouselStableSelectorsModule (copy), Frozen (copy), FFlagLuaAppEnableSduiHomePage (copy), GetFFlagPYMKAddFriendsEntryFunction (copy), EventNamesModule (copy), RecommendationContextType (copy), GetFriendStatusModule (copy), GetResult (copy), Llama (copy)
 	local UseRefResult = React.useRef({})
 	local UseSelectorResult = if FFlagMigrateFriendshipStatusesPYMKModule then nil else UseSelectorFunction(function(p1)
-		-- upvalues: GetDeepValueFunction (upval), ConstantsModule (upval)
-		return GetDeepValueFunction(p1, string.format("%s.Friends.friendshipStatus", ConstantsModule.RODUX_KEY)) or {}
+		-- upvalues: GetDeepValueFunction (upval), ConstantsModule (upval), FFlagPYMKCarouselStableSelectorsModule (upval), Frozen (upval)
+		local DeepValue = GetDeepValueFunction(p1, string.format("%s.Friends.friendshipStatus", ConstantsModule.RODUX_KEY))
+		
+		if not DeepValue then
+			if FFlagPYMKCarouselStableSelectorsModule then
+				return Frozen
+			end
+			DeepValue = {}
+		end
+		return DeepValue
 	end)
 	local UseSelectorResult1 = if FFlagLuaAppEnableSduiHomePage then nil else UseSelectorFunction(function(p1)
 		-- upvalues: GetDeepValueFunction (upval), ConstantsModule (upval)
 		return GetDeepValueFunction(p1, string.format("%s.Friends.recommendations.hasIncomingFriendRequest", ConstantsModule.RODUX_KEY))
-	end) or {}
+	end) or (if FFlagPYMKCarouselStableSelectorsModule then Frozen else {})
 	local UseSelectorResult2 = UseSelectorFunction(function(p1)
-		-- upvalues: GetDeepValueFunction (upval)
-		return GetDeepValueFunction(p1, "PYMKCarousel.Presence.byUserId") or {}
+		-- upvalues: GetDeepValueFunction (upval), FFlagPYMKCarouselStableSelectorsModule (upval), Frozen (upval)
+		local PYMKCarouselPresenceByUserId = GetDeepValueFunction(p1, "PYMKCarousel.Presence.byUserId")
+		
+		if not PYMKCarouselPresenceByUserId then
+			if FFlagPYMKCarouselStableSelectorsModule then
+				return Frozen
+			end
+			PYMKCarouselPresenceByUserId = {}
+		end
+		return PYMKCarouselPresenceByUserId
 	end)
 	
 	return React.useMemo(function()
@@ -77,5 +95,10 @@ return function(Callback)
 				end
 			}
 		}
-	end, { UseSelectorResult2 })
+	end, if FFlagPYMKCarouselStableSelectorsModule then {
+		UseSelectorResult2,
+		UseSelectorResult,
+		UseSelectorResult1,
+		Callback
+	} else { UseSelectorResult2 })
 end

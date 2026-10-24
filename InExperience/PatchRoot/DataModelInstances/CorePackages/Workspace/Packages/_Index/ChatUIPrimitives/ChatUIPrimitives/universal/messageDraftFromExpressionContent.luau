@@ -13,9 +13,15 @@ return function(p1)
 		local Text = p1.text
 		
 		return if PresetId == "" or Text == nil or Text == "" then nil else MessageDraftModelModule.fromPreset(PresetId, Text)
-	else
-		local Text = if p1.altText == nil then if p1.kind == "plain-text" and p1.text ~= "" then p1.text else nil elseif p1.altText == "" then nil else p1.altText
-		
-		return if Text == nil then nil else MessageDraftModelModule.fromPlainText(Text)
 	end
+	if p1.kind == "emoji" then
+		local Unicode = p1.unicode
+		
+		if p1.emojiId ~= "" and Unicode ~= nil and Unicode ~= "" then
+			return MessageDraftModelModule.fromEmoji(p1.emojiId, Unicode)
+		end
+	end
+	local Text = if p1.altText == nil then if p1.kind == "plain-text" and p1.text ~= "" then p1.text else nil elseif p1.altText == "" then nil else p1.altText
+	
+	return if Text == nil then nil else MessageDraftModelModule.fromPlainText(Text)
 end

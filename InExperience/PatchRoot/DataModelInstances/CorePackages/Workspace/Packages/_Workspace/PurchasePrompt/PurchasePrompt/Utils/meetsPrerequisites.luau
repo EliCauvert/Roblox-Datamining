@@ -6,9 +6,10 @@ local PurchaseErrorModule = require(Parent.Enums.PurchaseError)
 local ProductTypeEnum = require(Parent.types).ProductTypeEnum
 local FFlagEnableUnifiedPurchaseFlowForDevSubs = require(Parent.Parent.SharedFlags).FFlagEnableUnifiedPurchaseFlowForDevSubs
 local GetFFlagEnableCreatorStorePurchasingCutoverModule = require(Parent.Flags.GetFFlagEnableCreatorStorePurchasingCutover)
+local FFlagPurchasePromptSkipThirdPartyCheckForMissingCreatorModule = require(Parent.Flags.FFlagPurchasePromptSkipThirdPartyCheckForMissingCreator)
 
 return function(p1, p2, p3, p4, p5)
-	-- upvalues: ConstantsModule (copy), PurchaseErrorModule (copy), GetFFlagEnableCreatorStorePurchasingCutoverModule (copy), Players (copy), Workspace (copy), FFlagEnableUnifiedPurchaseFlowForDevSubs (copy), ProductTypeEnum (copy)
+	-- upvalues: ConstantsModule (copy), PurchaseErrorModule (copy), GetFFlagEnableCreatorStorePurchasingCutoverModule (copy), Players (copy), Workspace (copy), FFlagEnableUnifiedPurchaseFlowForDevSubs (copy), ProductTypeEnum (copy), FFlagPurchasePromptSkipThirdPartyCheckForMissingCreatorModule (copy)
 	local IsProductTypeMatch = p1.ProductType == ConstantsModule.ProductType.CollectibleItem
 	local IsLimited = if p1.CollectiblesItemDetails then p1.CollectiblesItemDetails.IsLimited else nil
 	
@@ -39,8 +40,9 @@ return function(p1, p2, p3, p4, p5)
 	end
 	local IsThirdPartyPurchaseAllowed = if p4.getLuaUseThirdPartyPermissions() then p4.isThirdPartyPurchaseAllowed() else Workspace.AllowThirdPartySales
 	local IsProductTypeMatch1: boolean = FFlagEnableUnifiedPurchaseFlowForDevSubs and p1.ProductType == ProductTypeEnum.DeveloperSubscription
+	local NoCreator: boolean = FFlagPurchasePromptSkipThirdPartyCheckForMissingCreatorModule and p1.Creator == nil
 	
-	if p1.ProductType ~= ConstantsModule.ProductType.DeveloperProduct and not IsProductTypeMatch1 and p3 and not IsThirdPartyPurchaseAllowed then
+	if p1.ProductType ~= ConstantsModule.ProductType.DeveloperProduct and not IsProductTypeMatch1 and not NoCreator and p3 and not IsThirdPartyPurchaseAllowed then
 		local IsCreatorTypeMatch = game.CreatorType == Enum.CreatorType.Group
 		local IsGroup = p1.Creator.CreatorType == "Group"
 		local Number: number? = tonumber(p1.Creator.CreatorTargetId)

@@ -8,7 +8,6 @@ local PurchaseErrorModule = require(PurchasePrompt.Enums.PurchaseError)
 local CompletePurchaseModule = require(PurchasePrompt.Thunks.completePurchase)
 local InitiatePurchaseModule = require(PurchasePrompt.Thunks.initiatePurchase)
 local InitiateBundlePurchaseModule = require(PurchasePrompt.Thunks.initiateBundlePurchase)
-local InitiatePremiumPurchaseModule = require(PurchasePrompt.Thunks.initiatePremiumPurchase)
 local InitiateSubscriptionPurchaseModule = require(PurchasePrompt.Thunks.initiateSubscriptionPurchase)
 local ExternalEventConnectionModule = require(script.Parent.ExternalEventConnection)
 local GetFFlagEnablePromptPurchaseRequestedV2Module = require(PurchasePrompt.Flags.GetFFlagEnablePromptPurchaseRequestedV2)
@@ -17,13 +16,12 @@ local FFlagEnableUnifiedPurchaseFlowForDevSubs = require(Parent.SharedFlags).FFl
 local ProductTypeEnum = require(PurchasePrompt.types).ProductTypeEnum
 local FFlagEnablePromptRobloxSubscriptionPurchaseBindingModule = require(PurchasePrompt.Flags.FFlagEnablePromptRobloxSubscriptionPurchaseBinding)
 local FFlagLuaAppsEnablePromptVIPServerPurchase = require(PurchasePrompt.Parent.SharedFlags).FFlagLuaAppsEnablePromptVIPServerPurchase
-local RoutePremiumToBlackbirdUpsell = game:DefineFastFlag("RoutePremiumToBlackbirdUpsell", false)
 local RobloxSubscriptionPurchaseAppModule = require(Parent.RobloxSubscriptionPurchaseApp)
 local SurfaceContext = RobloxSubscriptionPurchaseAppModule.SurfaceContext
 local SurfaceName = RobloxSubscriptionPurchaseAppModule.SurfaceName
 
 return (require(PurchasePrompt.connectToStore)(nil, function(Callback)
-	-- upvalues: Players (copy), InitiatePurchaseModule (copy), ErrorOccurredModule (copy), PurchaseErrorModule (copy), CompletePurchaseModule (copy), InitiateBundlePurchaseModule (copy), RoutePremiumToBlackbirdUpsell (copy), RobloxSubscriptionPurchaseAppModule (copy), SurfaceName (copy), SurfaceContext (copy), InitiatePremiumPurchaseModule (copy), FFlagEnableUnifiedPurchaseFlowForDevSubs (copy), ProductTypeEnum (copy), InitiateSubscriptionPurchaseModule (copy), FFlagEnablePromptRobloxSubscriptionPurchaseBindingModule (copy)
+	-- upvalues: Players (copy), InitiatePurchaseModule (copy), ErrorOccurredModule (copy), PurchaseErrorModule (copy), CompletePurchaseModule (copy), InitiateBundlePurchaseModule (copy), RobloxSubscriptionPurchaseAppModule (copy), SurfaceName (copy), SurfaceContext (copy), FFlagEnableUnifiedPurchaseFlowForDevSubs (copy), ProductTypeEnum (copy), InitiateSubscriptionPurchaseModule (copy), FFlagEnablePromptRobloxSubscriptionPurchaseBindingModule (copy)
 	return {
 		onPurchaseRequest = function(LocalPlayer, p1, p2, _)
 			-- upvalues: Players (upval), Callback (copy), InitiatePurchaseModule (upval)
@@ -76,14 +74,9 @@ return (require(PurchasePrompt.connectToStore)(nil, function(Callback)
 			end
 		end,
 		onPremiumPurchaseRequest = function(LocalPlayer)
-			-- upvalues: Players (upval), RoutePremiumToBlackbirdUpsell (upval), RobloxSubscriptionPurchaseAppModule (upval), SurfaceName (upval), SurfaceContext (upval), Callback (copy), InitiatePremiumPurchaseModule (upval)
+			-- upvalues: Players (upval), RobloxSubscriptionPurchaseAppModule (upval), SurfaceName (upval), SurfaceContext (upval)
 			if LocalPlayer == Players.LocalPlayer then
-				if RoutePremiumToBlackbirdUpsell then
-					RobloxSubscriptionPurchaseAppModule.initiateRobloxSubscriptionPurchase({}, nil, nil, SurfaceName.PromptSubscriptionPurchase, SurfaceContext.InGame, { skipWaitingForPurchaseResult = true })
-					
-					return
-				end
-				Callback(InitiatePremiumPurchaseModule())
+				RobloxSubscriptionPurchaseAppModule.initiateRobloxSubscriptionPurchase({}, nil, nil, SurfaceName.PromptSubscriptionPurchase, SurfaceContext.InGame, { skipWaitingForPurchaseResult = true })
 			end
 		end,
 		onPromptCollectiblesPurchaseRequest = function(LocalPlayer, p1, p2, p3, p4, p5, p6, p7)

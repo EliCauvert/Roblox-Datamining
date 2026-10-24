@@ -17,14 +17,12 @@ local OverflowMenuPageShellModule = require(script.Parent.OverflowMenuPageShell)
 local TitleDescriptionPageModule = require(BuildExperience.Components.TitleDescriptionPage.TitleDescriptionPage)
 local MediaSelectionPageModule = require(BuildExperience.Components.MediaSelectionPage.MediaSelectionPage)
 local MonetizationPageContainerModule = require(BuildExperience.Components.MonetizationPage.MonetizationPageContainer)
-local FFlagBuildBackButtonChevronModule = require(BuildExperience.Flags.FFlagBuildBackButtonChevron)
 local FFlagBuildPublishNavigationSheetModule = require(BuildExperience.Flags.FFlagBuildPublishNavigationSheet)
 local BuildNavigationParamsModule = require(BuildExperience.utils.BuildNavigationParams)
 local GameInfoUtilsModule = require(BuildExperience.utils.GameInfoUtils)
 local _ = require(BuildExperience.Stores.GetBuildOverflowMenuStore.createBuildOverflowMenuStore)
 local UseBuildPageLayoutModule = require(BuildExperience.utils.useBuildPageLayout)
 local UseOnScreenKeyboardVisibleModule = require(BuildExperience.utils.useOnScreenKeyboardVisible)
-local IconName = FoundationModule.Enums.IconName
 local UseTokensFunction = FoundationModule.Hooks.useTokens
 local FFlagBuildExperienceMonetizationNativeUIModule = require(BuildExperience.Flags.FFlagBuildExperienceMonetizationNativeUI)
 local Screens = {
@@ -330,7 +328,7 @@ return {
 		return if ScreenProps.onClose then ReactModule.createElement(BuildSheetPage, { pageContent = Element }) else ReactModule.createElement(BuildFullscreenPage, { pageContent = Element })
 	end,
 	BuildStatsScreen = function(p1)
-		-- upvalues: UseLocalizationFunction (copy), LocalizationStringsModule (copy), BuildNavigationParamsModule (copy), ReactModule (copy), BuildExperience (copy), OverflowMenuPageShellModule (copy), FFlagBuildBackButtonChevronModule (copy), IconName (copy), BuildSheetPage (copy), BuildFullscreenPage (copy)
+		-- upvalues: UseLocalizationFunction (copy), LocalizationStringsModule (copy), BuildNavigationParamsModule (copy), ReactModule (copy), BuildExperience (copy), OverflowMenuPageShellModule (copy), BuildSheetPage (copy), BuildFullscreenPage (copy)
 		local Stats = UseLocalizationFunction({ stats = LocalizationStringsModule.BUILD_MENU_STATS }).stats
 		local Navigation = p1.navigation
 		local ScreenProps = p1.screenProps or {}
@@ -368,7 +366,6 @@ return {
 			testId = "BuildPage.stats.Page",
 			scrollPerformanceIntervalName = "LuaApp_Build_Stats_Scroll",
 			title = Stats,
-			closeIcon = if FFlagBuildBackButtonChevronModule then nil else IconName.ChevronLargeLeft,
 			onClose = UseResult,
 			content = ReactModule.createElement(AnalyticsOverviewModule, { universeId = Config.universeId, onOpenChat = UseResult1 })
 		})
@@ -376,7 +373,7 @@ return {
 		return if ScreenProps.onClose then ReactModule.createElement(BuildSheetPage, { pageContent = Element }) else ReactModule.createElement(BuildFullscreenPage, { pageContent = Element })
 	end,
 	BuildAudienceScreen = function(p1)
-		-- upvalues: UseLocalizationFunction (copy), LocalizationStringsModule (copy), BuildNavigationParamsModule (copy), ReactModule (copy), OverflowMenuPageShellModule (copy), FFlagBuildBackButtonChevronModule (copy), IconName (copy), AudienceConfigurationContentModule (copy), BuildSheetPage (copy), BuildFullscreenPage (copy)
+		-- upvalues: UseLocalizationFunction (copy), LocalizationStringsModule (copy), BuildNavigationParamsModule (copy), ReactModule (copy), OverflowMenuPageShellModule (copy), AudienceConfigurationContentModule (copy), BuildSheetPage (copy), BuildFullscreenPage (copy)
 		local UseLocalizationResult = UseLocalizationFunction({ audience = LocalizationStringsModule.BUILD_MENU_AUDIENCE })
 		local Navigation = p1.navigation
 		local ScreenProps = p1.screenProps or {}
@@ -397,7 +394,6 @@ return {
 			testId = "BuildPage.audience.Page",
 			scrollPerformanceIntervalName = "LuaApp_Build_Audience_Scroll",
 			title = UseLocalizationResult.audience,
-			closeIcon = if FFlagBuildBackButtonChevronModule then nil else IconName.ChevronLargeLeft,
 			onClose = UseResult,
 			content = ReactModule.createElement(AudienceConfigurationContentModule, { universeId = Config.universeId })
 		})
@@ -435,7 +431,7 @@ return {
 		})
 	end,
 	BuildPlaytestInviteManagementScreen = function(p1)
-		-- upvalues: UseLocalizationFunction (copy), LocalizationStringsModule (copy), BuildNavigationParamsModule (copy), ReactModule (copy), OverflowMenuPageShellModule (copy), FFlagBuildBackButtonChevronModule (copy), IconName (copy), PrivateInvitesManagementContainerModule (copy), BuildSheetPage (copy), BuildFullscreenPage (copy), PrivateInvitesPickerHostModule (copy)
+		-- upvalues: UseLocalizationFunction (copy), LocalizationStringsModule (copy), BuildNavigationParamsModule (copy), ReactModule (copy), OverflowMenuPageShellModule (copy), PrivateInvitesManagementContainerModule (copy), BuildSheetPage (copy), BuildFullscreenPage (copy), PrivateInvitesPickerHostModule (copy)
 		local PageTitle = UseLocalizationFunction({
 			pageTitle = LocalizationStringsModule.PRIVATE_INVITES_PAGE_TITLE
 		}).pageTitle
@@ -466,7 +462,6 @@ return {
 		local Element = if Config == nil then nil else ReactModule.createElement(OverflowMenuPageShellModule, {
 			testId = "BuildPage.playtestInviteManagement.Page",
 			title = PageTitle,
-			closeIcon = if FFlagBuildBackButtonChevronModule then nil else IconName.ChevronLargeLeft,
 			onClose = UseResult,
 			content = ReactModule.createElement(PrivateInvitesManagementContainerModule, {
 				universeId = Config.universeId,

@@ -1,11 +1,9 @@
 ﻿local Parent = script:FindFirstAncestor("ServerDrivenUi").Parent
 local GetSduiTelemetryHandlerNameRegistryFunction = require(Parent.SduiCoreSystem).getSduiTelemetryHandlerNameRegistry
-local SharedFlagsModule = require(Parent.SharedFlags)
-local FFlagLuaAppSduiQuerySuggestionClickedTelemetry = SharedFlagsModule.FFlagLuaAppSduiQuerySuggestionClickedTelemetry
-local FFlagLuaAppSduiGameTileFeedback = SharedFlagsModule.FFlagLuaAppSduiGameTileFeedback
+local FFlagLuaAppSduiGameTileFeedback = require(Parent.SharedFlags).FFlagLuaAppSduiGameTileFeedback
 
 return function()
-	-- upvalues: GetSduiTelemetryHandlerNameRegistryFunction (copy), FFlagLuaAppSduiGameTileFeedback (copy), FFlagLuaAppSduiQuerySuggestionClickedTelemetry (copy)
+	-- upvalues: GetSduiTelemetryHandlerNameRegistryFunction (copy), FFlagLuaAppSduiGameTileFeedback (copy)
 	GetSduiTelemetryHandlerNameRegistryFunction().registerTelemetryHandlers({
 		LeavingRoblox = {
 			lazyHandler = function()
@@ -67,10 +65,10 @@ return function()
 				return require(script.Parent.SduiOpenSearchResultsWithQueryEdpTelemetryHandler)
 			end
 		},
-		QuerySuggestionClicked = if FFlagLuaAppSduiQuerySuggestionClickedTelemetry then {
+		QuerySuggestionClicked = {
 			lazyHandler = function()
 				return require(script.Parent.SduiQuerySuggestionClickedTelemetryHandler)
 			end
-		} else nil
+		}
 	})
 end

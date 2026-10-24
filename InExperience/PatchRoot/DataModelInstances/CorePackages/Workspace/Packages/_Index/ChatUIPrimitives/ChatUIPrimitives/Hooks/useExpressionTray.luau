@@ -6,7 +6,8 @@ local SignalsReactModule = require(Parent.SignalsReact)
 local _ = require(ChatUIPrimitives.Components.ExpressionTray.ExpressionTrayView)
 local UseExpressionTrayControllerModule = require(ChatUIPrimitives.Hooks.useExpressionTrayController)
 local UseLayoutModeModule = require(ChatUIPrimitives.Hooks.useLayoutMode)
-local ExpressionCooldownStoreModule = require(ChatUIPrimitives.expressionCooldownStore)
+local GetExpressionCooldownStoreFunction = require(ChatUIPrimitives.getExpressionCooldownStore).getExpressionCooldownStore
+local GetDefaultCooldownKeyModule = require(ChatUIPrimitives.getDefaultCooldownKey)
 local ExpressionCatalogStoreModule = require(ChatUIPrimitives.expressionCatalogStore)
 local _ = require(ChatUIPrimitives.createExpressionCatalogResource)
 local _ = require(ChatUIPrimitives.UniversalMessage.Types)
@@ -17,7 +18,7 @@ local Signal1 = SignalsModule.createSignal(nil)
 local t = {}
 
 return function(p1)
-	-- upvalues: UseLayoutModeModule (copy), ExpressionCatalogStoreModule (copy), SignalsReactModule (copy), Disabled (copy), Signal (copy), Signal1 (copy), t (copy), ExpressionCooldownStoreModule (copy), UseExpressionTrayControllerModule (copy), ReactModule (copy), PresetChatCooldownLuaMsRatio (copy)
+	-- upvalues: UseLayoutModeModule (copy), ExpressionCatalogStoreModule (copy), SignalsReactModule (copy), Disabled (copy), Signal (copy), Signal1 (copy), t (copy), GetExpressionCooldownStoreFunction (copy), UseExpressionTrayControllerModule (copy), ReactModule (copy), PresetChatCooldownLuaMsRatio (copy), GetDefaultCooldownKeyModule (copy)
 	local UseLayoutModeModuleResult = UseLayoutModeModule()
 	local CatalogResource = if p1 then p1.catalogResource else nil
 	local ExpressionCatalogStoreModule1 = if p1 == nil or CatalogResource ~= nil then nil else ExpressionCatalogStoreModule
@@ -35,7 +36,8 @@ return function(p1)
 		local CategoryGroups = if UseSignalStateResult2 == nil then nil else UseSignalStateResult2.categoryGroups
 		T = if CategoryGroups == nil then t else CategoryGroups
 	end
-	local UseSignalStateResult3 = SignalsReactModule.useSignalState(ExpressionCooldownStoreModule.getCooldownEndsAtByKey)
+	local ExpressionCooldownStore = GetExpressionCooldownStoreFunction(if p1 then p1.cooldownScope else nil)
+	local UseSignalStateResult3 = SignalsReactModule.useSignalState(ExpressionCooldownStore.getCooldownEndsAtByKey)
 	local UseExpressionTrayControllerModuleResult = UseExpressionTrayControllerModule({ categoryGroups = T })
 	local CloseFunction = UseExpressionTrayControllerModuleResult.close
 	local UseRefResult = ReactModule.useRef(false)
@@ -82,38 +84,37 @@ return function(p1)
 		end
 	end, { CloseFunction, OnKeyboardActivated })
 	local SendExpression = if p1 then p1.sendExpression else nil
-	local CooldownKeyForContent = if p1 then p1.cooldownKeyForContent else nil
 	local CooldownDurationSeconds = if p1 and p1.cooldownDurationSeconds ~= nil then p1.cooldownDurationSeconds else PresetChatCooldownLuaMsRatio
 	local UseResult1 = ReactModule.useCallback(function(p2)
-		-- upvalues: SendExpression (copy), CooldownKeyForContent (copy), ExpressionCooldownStoreModule (upval), UseRefResult (copy), CooldownDurationSeconds (copy), CloseFunction (copy)
+		-- upvalues: SendExpression (copy), GetDefaultCooldownKeyModule (upval), ExpressionCooldownStore (copy), UseRefResult (copy), CooldownDurationSeconds (copy), CloseFunction (copy)
 		if SendExpression == nil then return end
-		local Kind = if CooldownKeyForContent == nil then p2.kind else CooldownKeyForContent(p2)
+		local DefaultCooldownKeyModule = GetDefaultCooldownKeyModule(p2)
 		
-		if Kind ~= nil then
-			local CooldownEndsAt = ExpressionCooldownStoreModule.getCooldownEndsAt(Kind)
+		if DefaultCooldownKeyModule ~= nil then
+			local CooldownEndsAt = ExpressionCooldownStore.getCooldownEndsAt(DefaultCooldownKeyModule)
 			
 			if CooldownEndsAt ~= nil and os.clock() < CooldownEndsAt then return end
 		end
 		if UseRefResult.current then return end
 		UseRefResult.current = true
 		
-		if Kind ~= nil then
-			ExpressionCooldownStoreModule.startCooldown(Kind, os.clock() + CooldownDurationSeconds)
+		if DefaultCooldownKeyModule ~= nil then
+			ExpressionCooldownStore.startCooldown(DefaultCooldownKeyModule, os.clock() + CooldownDurationSeconds)
 		end
 		CloseFunction()
 		task.spawn(function()
-			-- upvalues: SendExpression (upval), p2 (copy), UseRefResult (upval), Kind (copy), ExpressionCooldownStoreModule (upval)
+			-- upvalues: SendExpression (upval), p2 (copy), UseRefResult (upval), DefaultCooldownKeyModule (copy), ExpressionCooldownStore (upval)
 			UseRefResult.current = false
 			
-			if not SendExpression(p2) and Kind ~= nil then
-				ExpressionCooldownStoreModule.clearCooldown(Kind)
+			if not SendExpression(p2) and DefaultCooldownKeyModule ~= nil then
+				ExpressionCooldownStore.clearCooldown(DefaultCooldownKeyModule)
 			end
 		end)
 	end, {
 		SendExpression,
-		CooldownKeyForContent,
 		CooldownDurationSeconds,
-		CloseFunction
+		CloseFunction,
+		ExpressionCooldownStore
 	})
 	local OnOpenChanged = if p1 then p1.onOpenChanged else nil
 	local IsVisible: boolean = CanSend and (Disabled1 == "enabled" and #T > 0)
@@ -136,7 +137,6 @@ return function(p1)
 		activeGroupId = UseExpressionTrayControllerModuleResult.activeGroupId,
 		cooldownDurationSeconds = CooldownDurationSeconds,
 		cooldownEndsAtByKey = UseSignalStateResult3,
-		cooldownKeyForContent = CooldownKeyForContent,
 		onEntryActivated = UseExpressionTrayControllerModuleResult.onEntryActivated,
 		onPressedOutside = CloseFunction,
 		onGroupActivated = UseExpressionTrayControllerModuleResult.onGroupActivated,

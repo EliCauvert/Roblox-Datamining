@@ -3,6 +3,8 @@ local PlainTextContentModelModule = require(script.Parent.ContentKinds.PlainText
 local PlainTextTypesModule = require(script.Parent.ContentKinds.PlainText.PlainTextTypes)
 local PresetContentModelModule = require(script.Parent.ContentKinds.Preset.PresetContentModel)
 local PresetTypesModule = require(script.Parent.ContentKinds.Preset.PresetTypes)
+local EmojiTypesModule = require(script.Parent.ContentKinds.Emoji.EmojiTypes)
+local EmojiContentModelModule = require(script.Parent.ContentKinds.Emoji.EmojiContentModel)
 
 local function _(p1)
 	if typeof(p1) ~= "table" then
@@ -41,6 +43,11 @@ end
 local _ = function(p2): boolean
 	-- upvalues: PresetTypesModule (copy)
 	return PresetTypesModule.isValidDraft(p2) == true
+end
+
+local _ = function(p2): boolean
+	-- upvalues: EmojiTypesModule (copy)
+	return EmojiTypesModule.isValidDraft(p2) == true
 end
 
 return {
@@ -125,5 +132,46 @@ return {
 			v4 = Preset
 		end
 		return if PresetTypesModule.isValidDraft(v4) == true then v4 else nil
+	end,
+	fromEmoji = function(p4, p5)
+		-- upvalues: EmojiContentModelModule (copy)
+		return {
+			contents = { EmojiContentModelModule.draftFromEmoji(p4, p5) }
+		}
+	end,
+	toEmoji = function(p4)
+		-- upvalues: EmojiTypesModule (copy)
+		local v5 = nil
+		if typeof(p4) == "table" then
+			local Contents = p4.contents
+			
+			if typeof(Contents) == "table" and #Contents == 1 then
+				local Content = Contents[1]
+				v5 = if typeof(Content) == "table" then Content else nil
+			else
+				v5 = nil
+			end
+		else
+			v5 = nil
+		end
+		if v5 == nil then
+			return nil
+		end
+		local Emoji = v5.emoji
+		local v6 = nil
+		
+		if Emoji == nil then
+			v6 = nil
+		else
+			for i in v5 do
+				if i ~= "emoji" then
+					v6 = nil
+				else
+					continue
+				end
+			end
+			v6 = Emoji
+		end
+		return if EmojiTypesModule.isValidDraft(v6) == true then v6 else nil
 	end
 }

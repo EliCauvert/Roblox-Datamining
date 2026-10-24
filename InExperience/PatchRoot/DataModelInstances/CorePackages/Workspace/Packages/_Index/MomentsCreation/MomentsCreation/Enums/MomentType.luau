@@ -1,0 +1,1 @@
+﻿return { Avatar = "Avatar", Capture = "Capture" }

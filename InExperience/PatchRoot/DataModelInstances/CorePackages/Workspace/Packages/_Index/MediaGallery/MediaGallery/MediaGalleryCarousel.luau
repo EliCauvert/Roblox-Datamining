@@ -34,6 +34,7 @@ local UseAutoAdvanceModule = require(MediaGallery.Hooks.useAutoAdvance)
 local UseTouchDragScrollModule = require(MediaGallery.Hooks.useTouchDragScroll)
 local UseCarouselGamepadInputModule = require(MediaGallery.Hooks.useCarouselGamepadInput)
 local IsAudioPlaybackAllowedForDeviceModule = require(MediaGallery.isAudioPlaybackAllowedForDevice)
+local FFlagLuaAppVideoLoadFailureFallback = require(Parent.SharedFlags).FFlagLuaAppVideoLoadFailureFallback
 local SLIDINGWINDOWSIZE = MediaGalleryConstantsModule.SLIDING_WINDOW_SIZE
 
 local function getVisibleIndices(CountItems, CurrentIndex: number)
@@ -51,7 +52,7 @@ local function getVisibleIndices(CountItems, CurrentIndex: number)
 end
 
 return ReactModule.memo(function(Frame)
-	-- upvalues: UseTokensFunction (copy), MediaGalleryConstantsModule (copy), ReactModule (copy), IsValidIdentifierModule (copy), IsYouTubeVideoModule (copy), IsAudioPlaybackAllowedForDeviceModule (copy), EnableAudioPlaybackInApp (copy), UseSnapScrollModule (copy), getVisibleIndices (copy), Signal (copy), VideoPlaybackCoordinator (copy), FFlagLuaAppMediaGalleryGamepadSupport (copy), UseAutoAdvanceModule (copy), UseBreakpointXOrSmallerFunction (copy), ResponsiveModule (copy), UseLastInputFunction (copy), AppCommonLibModule (copy), LuaAppMediaGalleryGamepadSupportsPagingIcons (copy), UseGamepadSupportsFunction (copy), List (copy), list (copy), UseCursorFunction (copy), CursorType (copy), UseCarouselGamepadInputModule (copy), UseTouchDragScrollModule (copy), FFlagLuaAppEdpMomentVideo (copy), MediaGalleryVideoItemModule (copy), MediaGalleryImageItemModule (copy), UserInputService (copy), MediaGalleryPageIndicatorsModule (copy), CarouselScrollButtons (copy), RoundIconButton (copy)
+	-- upvalues: UseTokensFunction (copy), MediaGalleryConstantsModule (copy), ReactModule (copy), IsValidIdentifierModule (copy), IsYouTubeVideoModule (copy), IsAudioPlaybackAllowedForDeviceModule (copy), EnableAudioPlaybackInApp (copy), UseSnapScrollModule (copy), getVisibleIndices (copy), Signal (copy), VideoPlaybackCoordinator (copy), FFlagLuaAppMediaGalleryGamepadSupport (copy), UseAutoAdvanceModule (copy), FFlagLuaAppVideoLoadFailureFallback (copy), UseBreakpointXOrSmallerFunction (copy), ResponsiveModule (copy), UseLastInputFunction (copy), AppCommonLibModule (copy), LuaAppMediaGalleryGamepadSupportsPagingIcons (copy), UseGamepadSupportsFunction (copy), List (copy), list (copy), UseCursorFunction (copy), CursorType (copy), UseCarouselGamepadInputModule (copy), UseTouchDragScrollModule (copy), FFlagLuaAppEdpMomentVideo (copy), MediaGalleryVideoItemModule (copy), MediaGalleryImageItemModule (copy), UserInputService (copy), MediaGalleryPageIndicatorsModule (copy), CarouselScrollButtons (copy), RoundIconButton (copy)
 	local UseTokensResult = UseTokensFunction()
 	local ItemPadding = Frame.itemPadding or UseTokensResult.Padding.Medium
 	local AspectRatio = Frame.aspectRatio or MediaGalleryConstantsModule.ITEM_ASPECT_RATIO
@@ -145,6 +146,10 @@ return ReactModule.memo(function(Frame)
 		UseAutoAdvanceModuleResult.resetProgress,
 		UseSnapScrollModuleResult.scrollInDirection
 	})
+	local UseResult3 = if FFlagLuaAppVideoLoadFailureFallback then ReactModule.useCallback(function()
+		-- upvalues: UseResult2 (copy)
+		UseResult2("Right", true)
+	end, { UseResult2 }) else nil
 	local Size200 = UseTokensResult.Size.Size_200
 	local Size400 = if UseBreakpointXOrSmallerFunction(ResponsiveModule.Keys.Small) then UseTokensResult.Size.Size_400 else UseTokensResult.Size.Size_700
 	local GradientOverlayHeight = Frame.gradientOverlayHeight or Size200 + Size400 + UseTokensResult.Size.Size_1000
@@ -166,7 +171,7 @@ return ReactModule.memo(function(Frame)
 		VideoPlaybackCoordinator1
 	})
 	local OnFullscreenToggle = if Frame.fullscreenEnabled == false then nil else Frame.onFullscreenToggle
-	local UseResult3 = ReactModule.useCallback(function()
+	local UseResult4 = ReactModule.useCallback(function()
 		-- upvalues: OnFullscreenToggle (copy), UseSnapScrollModuleResult (copy)
 		if OnFullscreenToggle then
 			OnFullscreenToggle(UseSnapScrollModuleResult.currentIndex)
@@ -188,16 +193,16 @@ return ReactModule.memo(function(Frame)
 		local UseGamepadSupportsResult2 = UseGamepadSupportsFunction(list, UseLastInputResult)
 		v3 = IsPointerMatch and UseGamepadSupportsResult2
 	end
-	local UseResult4 = ReactModule.useCallback(function()
+	local UseResult5 = ReactModule.useCallback(function()
 		-- upvalues: UseResult2 (copy)
 		UseResult2("Left")
 	end, { UseResult2 })
-	local UseResult5 = ReactModule.useCallback(function()
+	local UseResult6 = ReactModule.useCallback(function()
 		-- upvalues: UseResult2 (copy)
 		UseResult2("Right")
 	end, { UseResult2 })
 	local UseCursorResult = UseCursorFunction(CursorType.Invisible)
-	local UseResult6 = ReactModule.useCallback(function()
+	local UseResult7 = ReactModule.useCallback(function()
 		-- upvalues: UseStateResult1 (copy), UseMemoResult1 (copy)
 		if UseStateResult1 then
 			UseMemoResult1:fire()
@@ -210,9 +215,9 @@ return ReactModule.memo(function(Frame)
 		isVideoReady = if FFlagLuaAppMediaGalleryGamepadSupport then v2 else nil,
 		isMuted = UseStateResult,
 		toggleMuteSignal = UseMemoResult2,
-		onFullscreenToggle = UseResult3,
-		scrollLeft = UseResult4,
-		scrollRight = UseResult5
+		onFullscreenToggle = UseResult4,
+		scrollLeft = UseResult5,
+		scrollRight = UseResult6
 	})
 	UseTouchDragScrollModule(UseSnapScrollModuleResult.scrollingFrameRef, UseSnapScrollModuleResult.scrollInDirection)
 	local config = {
@@ -242,6 +247,7 @@ return ReactModule.memo(function(Frame)
 					toggleVideoPlaybackSignal = UseMemoResult1,
 					toggleMuteSignal = UseMemoResult2,
 					onVideoEnded = UseAutoAdvanceModuleResult.onVideoEnded,
+					onVideoLoadFailed = if FFlagLuaAppVideoLoadFailureFallback then UseResult3 else nil,
 					onVideoProgressChanged = UseAutoAdvanceModuleResult.onVideoProgressChanged,
 					onMutedChanged = UseStateResult2,
 					onPlayingChanged = if FFlagLuaAppMediaGalleryGamepadSupport then UseResult else nil,
@@ -314,7 +320,7 @@ return ReactModule.memo(function(Frame)
 			ref = UseCarouselGamepadInputModuleResult,
 			AutoButtonColor = false,
 			Text = "",
-			[ReactModule.Event.Activated] = UseResult6,
+			[ReactModule.Event.Activated] = UseResult7,
 			SelectionBehaviorRight = Enum.SelectionBehavior.Stop,
 			SelectionImageObject = if Frame.isFullscreen then UseCursorResult else nil,
 			SelectionGroup = true
@@ -339,7 +345,7 @@ return ReactModule.memo(function(Frame)
 				[ReactModule.Change.AbsoluteSize] = UseSnapScrollModuleResult.onAbsoluteSizeChanged,
 				ref = UseSnapScrollModuleResult.scrollingFrameRef
 			}, config),
-			PageIndicators = if CountItems > 1 and (Frame.showPageIndicators ~= false and not Frame.isFullscreen) then ReactModule.createElement("Frame", {
+			PageIndicators = if CountItems > 1 and Frame.showPageIndicators ~= false and not Frame.isFullscreen then ReactModule.createElement("Frame", {
 				BackgroundTransparency = 1,
 				ZIndex = 2,
 				AnchorPoint = Vector2.new(0.5, 1),
@@ -384,14 +390,14 @@ return ReactModule.memo(function(Frame)
 				buttonOffsetFromEdge = if Frame.isFullscreen then UseTokensResult.Size.Size_500 else nil,
 				leftScrollingEnabled = UseSnapScrollModuleResult.currentIndex > 1,
 				rightScrollingEnabled = UseSnapScrollModuleResult.currentIndex < CountItems,
-				handleScrollLeft = UseResult4,
-				handleScrollRight = UseResult5
+				handleScrollLeft = UseResult5,
+				handleScrollRight = UseResult6
 			}) else nil,
 			FullscreenButton = if OnFullscreenToggle and (not FFlagLuaAppMediaGalleryGamepadSupport or not v3) then ReactModule.createElement(RoundIconButton, {
 				ZIndex = 4,
 				Selectable = false,
 				icon = if Frame.isFullscreen then "two-arrows-to-center" else "two-arrows-from-center",
-				onActivated = UseResult3,
+				onActivated = UseResult4,
 				AnchorPoint = Vector2.new(1, 0),
 				Position = UDim2.new(1, -UseTokensResult.Size.Size_500, 0, UseTokensResult.Size.Size_500)
 			}) else nil,

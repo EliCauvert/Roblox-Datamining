@@ -5,7 +5,7 @@ local GamesFilterModule = require(BuildExperience.Stores.GetMyCreationsFilterSto
 return require(BuildExperience.Parent.Signals).createComputed(function()
 	-- upvalues: CreateMyCreationsFilterStoreModule (copy), GamesFilterModule (copy)
 	local MyCreationsFilterStoreModule = CreateMyCreationsFilterStoreModule()
-	MyCreationsFilterStoreModule.setFilter({ games = GamesFilterModule.All })
+	MyCreationsFilterStoreModule.setFilter({ games = GamesFilterModule.SharedGames })
 	
 	return MyCreationsFilterStoreModule
 end)

@@ -91,7 +91,7 @@ return ReactModule.memo(function(p1)
 			TitleCreator = ReactModule.createElement(View, {
 				tag = "col align-x-center gap-xsmall auto-y padding-y-xsmall",
 				LayoutOrder = 2,
-				Size = UDim2.new(0.8, 0, 0, 0)
+				Size = UDim2.new(p1.textWidthScale or 0.8, 0, 0, 0)
 			}, {
 				TitleWrap = ReactModule.createElement(View, {
 					LayoutOrder = 1,

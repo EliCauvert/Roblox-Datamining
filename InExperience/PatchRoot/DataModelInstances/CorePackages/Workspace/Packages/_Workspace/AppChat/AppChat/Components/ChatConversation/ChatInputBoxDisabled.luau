@@ -25,7 +25,8 @@ return function(p1)
 	return ReactModule.createElement(Interactable, {
 		BackgroundTransparency = 1,
 		Size = UDim2.new(1, 0, 1, 0),
-		[ReactModule.Event.Activated] = UnionResult.onActivated
+		[ReactModule.Event.Activated] = UnionResult.onActivated,
+		ref = UnionResult.navigationTargetRef
 	}, {
 		uiListLayout = ReactModule.createElement("UIListLayout", {
 			Padding = UDim.new(0, UseTokensResult.Gap.Small),

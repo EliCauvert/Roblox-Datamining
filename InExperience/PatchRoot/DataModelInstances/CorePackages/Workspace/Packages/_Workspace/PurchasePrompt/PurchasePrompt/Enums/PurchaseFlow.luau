@@ -4,8 +4,7 @@ local config = {
 	Product = "Product",
 	RobuxUpsell = "RobuxUpsell",
 	RobuxUpsellV2 = "RobuxUpsellV2",
-	LargeRobuxUpsell = "LargeRobuxUpsell",
-	PremiumUpsell = "PremiumUpsell"
+	LargeRobuxUpsell = "LargeRobuxUpsell"
 }
 local EnumerateResult = require(PurchasePrompt.Parent.PurchasePromptDeps).enumerate(script.Name, config)
 require(PurchasePrompt.Utils.addRawValueMethodToEnum)(EnumerateResult, config)

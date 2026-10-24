@@ -148,7 +148,7 @@ Authentication.SignUp.Response.PasswordComplexity,Maak een complexer wachtwoord 
 Authentication.SignUp.Response.UsernameMustBeSetFirst,Gebruikersnaam moet eerst worden ingesteld.
 Authentication.SignUp.Subtitle.AddYourBirthday,Voeg je verjaardag toe om je Roblox-account te maken.
 Authentication.SignUp.Subtitle.YourProgressCarriesOver,Je voortgang wordt overgenomen wanneer je de instelling voltooit.
-Authentication.SignUp.Subtitle.YoureAlmostThere,"Je bent er bijna. Als je nu afsluit, wordt je account niet volledig aangemaakt en kun je Roblox niet spelen."
+Authentication.SignUp.Subtitle.YoureAlmostThereClose,"Je bent bijna klaar. Als je nu annuleert, wordt je account niet volledig aangemaakt en kun je Roblox niet spelen."
 Authentication.TwoStepVerification.Action.GoToSecurity,Instellingen
 Authentication.TwoStepVerification.Label.TwoStepRequired,Voor deze transactie is tweestapsverificatie vereist. Ga naar Instellingen > Beveiliging om de transactie met tweestapsverificatie uit te voeren.
 Authentication.TwoStepVerification.Response.TooManyAttempts,Te veel pogingen. Probeer het later opnieuw.
@@ -257,6 +257,9 @@ Common.UGCValidation.ErrorLabel.DescendantIdAnimationVersionNotSupported,"{Insta
 Common.UGCValidation.ErrorLabel.DescendantIdNotPublished,Asset {AssetId} ({InstanceFullName}.{FieldName}) is niet gepubliceerd. Publiceer de asset en probeer het opnieuw.
 Common.UGCValidation.ErrorLabel.DescendantIdVersionNotSupported,"{InstanceFullName}.{FieldName} gebruikt versie {Version} van asset {AssetId}, maar alleen versie 1 wordt momenteel ondersteund. Gebruik versie 1 en probeer het opnieuw."
 Common.UGCValidation.ErrorLabel.DynamicHeadCageMisaligned,"Dynamische hoofden op de marktplaats moeten de juiste cage hebben, zodat de oog- en mondhoekpunten op de cage overeenkomen met de mesh-hoekpunten. Verbeter je cage en de uitlijning ervan met de mesh."
+Common.UGCValidation.ErrorLabel.DynamicHeadCageMisalignedLeftEye,De landmarks van het linkeroog in de cage voor het dynamische hoofd zijn niet goed uitgelijnd met de mesh. Pas de oogcage aan zodat de mesh van het linkeroog binnen het geprojecteerde gebied van de cage valt.
+Common.UGCValidation.ErrorLabel.DynamicHeadCageMisalignedMouth,De landmarks van de mond in de cage voor het dynamische hoofd zijn niet goed uitgelijnd met de mesh. Pas de mondcage aan zodat de mondmesh binnen het geprojecteerde cagegebied valt.
+Common.UGCValidation.ErrorLabel.DynamicHeadCageMisalignedRightEye,"De landmarks van het rechteroog in de cage voor het dynamische hoofd zijn niet goed uitgelijnd met de mesh. Pas de oogcage aan, zodat de mesh van het rechteroog binnen het geprojecteerde cagegebied valt."
 Common.UGCValidation.ErrorLabel.DynamicHeadHappyNotShown,Kan de glimlachuitdrukking van het Dynamische hoofd niet detecteren. Pas de cage-landmarks voor de mond aan zodat ze overeenkomen met de positie van de mond op het hoofd en zorg dat deze een glimlachuitdrukking kan weergeven.
 Common.UGCValidation.ErrorLabel.DynamicHeadLeftEyeNotClose,Kan de uitdrukking voor het sluiten van het linkeroog van het Dynamische hoofd niet detecteren. Pas de cage-landmarks voor het linkeroog aan zodat ze overeenkomen met de positie van het linkeroog op het hoofd en zorg dat het oog kan worden gesloten.
 Common.UGCValidation.ErrorLabel.DynamicHeadMISSINGCAGE,Dynamische hoofden op de marktplaats hebben geen hoofdcages. Maak een hoofdcage voor het dynamische hoofd.
@@ -276,6 +279,13 @@ Common.UGCValidation.ErrorLabel.EmoteAnimation_MaxPartTranslationCalcFailed,De m
 Common.UGCValidation.ErrorLabel.EmoteAnimation_MaxPartTranslationMismatch,"De gepubliceerde animatie geeft een maximale translatie van het onderdeel van {taggedTranslation} studs aan, maar de animatiegegevens berekenen {calculatedTranslation} studs. Publiceer de animatie opnieuw."
 Common.UGCValidation.ErrorLabel.Extents_HeadBelowTorso,"Het hoofd moet boven UpperTorso worden geplaatst. Het middelpunt van het hoofd bevindt zich onder de bovenkant van de romp, wat aangeeft dat de hoofdmesh is ingeklapt of verkeerd is geplaatst."
 Common.UGCValidation.ErrorLabel.FaceControlsOverrideFACSNotEmpty,De eigenschap InternalOverrideFACSData op FaceControls moet leeg zijn bij het uploaden.
+Common.UGCValidation.ErrorLabel.FacialFeaturePresence_EyesMissing,Op het basisgezicht ontbreken de vereiste oogkenmerken. Voeg ogen toe aan het basisgezicht en probeer het opnieuw.
+Common.UGCValidation.ErrorLabel.FacialFeaturePresence_MouthMissing,Op het basisgezicht ontbreekt een vereiste mond. Voeg een mond toe aan het basisgezicht en probeer het opnieuw.
+Common.UGCValidation.ErrorLabel.FacsDeformation_HappyNotShown,"Kan geen blije expressie detecteren. Pas de mondcage of de FACS voor een blije uitdrukking aan, zodat het geprojecteerde mondmesh vervormt zoals verwacht."
+Common.UGCValidation.ErrorLabel.FacsDeformation_LeftEyeNotClose,"Kan de uitdrukking voor het sluiten van het linkeroog niet detecteren. Pas de cage van het linkeroog of de FACS voor het sluiten van het linkeroog aan, zodat het geprojecteerde oogmesh vervormt zoals verwacht."
+Common.UGCValidation.ErrorLabel.FacsDeformation_MouthNotOpen,"Kan de uitdrukking voor het openen van de mond niet detecteren. Pas de mondcage of de FACS voor een open mond aan, zodat het geprojecteerde mondmesh vervormt zoals verwacht."
+Common.UGCValidation.ErrorLabel.FacsDeformation_RightEyeNotClose,"Kan de uitdrukking voor het sluiten van het rechteroog niet detecteren. Pas de cage van het rechteroog of de FACS voor het sluiten van het rechteroog aan, zodat het geprojecteerde oogmesh vervormt zoals verwacht."
+Common.UGCValidation.ErrorLabel.FacsDeformation_SadNotShown,"Kan geen verdrietige expressie detecteren. Pas de mondcage of de FACS voor een verdrietige uitdrukking aan, zodat het geprojecteerde mondmesh vervormt zoals verwacht."
 Common.UGCValidation.ErrorLabel.FacsExpandsHead,"Er is gedetecteerd dat FACS je hoofd vergroot tot {modPercent}%, maar het wijzigen van het hoofd is in strijd met het marktplaatsbeleid voor gezichtsanimaties."
 Common.UGCValidation.ErrorLabel.FacsJointCountBounded,"Dynamische hoofden mogen maximaal {maxFacsJointCount} FACS-joints hebben, maar dit hoofd heeft er {actualJointCount}. Verminder het aantal FACS-joints en probeer het opnieuw."
 Common.UGCValidation.ErrorLabel.FacsShrinksHead,"Er is gedetecteerd dat FACS je hoofd verkleint tot {modPercent}%, maar het wijzigen van het hoofd is in strijd met het marktplaatsbeleid voor gezichtsanimaties."
@@ -323,6 +333,7 @@ Common.UGCValidation.ErrorLabel.MeshPartBounds_TooSmall,{partName}-mesh {axis} a
 Common.UGCValidation.ErrorLabel.MissingRequiredAttachment,Bijlage {attName} moet precies één keer bestaan binnen {partName}-descendants.
 Common.UGCValidation.ErrorLabel.NoAttributes,'{RootInstanceName}' (of de descendants ervan) bevatten attributen. Je moet attributen verwijderen uit het volgende: {InstanceNameList}
 Common.UGCValidation.ErrorLabel.PropertiesNotSensible,{ClassName} '{InstancePath}' heeft ongeldige eigenschappen: {ProblematicProperties}. Een weergegeven bytelimiet is overschreden (een limiet van 0 betekent dat de eigenschap leeg moet zijn); elke andere eigenschap bevat NaN/Inf-waarden of overschrijdt de standaardafmetingslimiet.
+Common.UGCValidation.ErrorLabel.RenderedAnimation_RequiredExpressionsMissing,"Er ontbreken een of meer vereiste gezichtsuitdrukkingen (oog gesloten, mond open, blij, verdrietig) in de weergegeven animatie."
 Common.UGCValidation.ErrorLabel.RigAttachmentOutOfBounds,Rig-bevestiging '{AttachmentName}' in '{PartName}' moet worden geplaatst nabij de gewrichtsgrens waar dit lichaamsdeel verbonden is met een aangrenzend deel. De huidige positie [{CurrentPosition}] bevindt zich te ver van het verbindingsvlak. Verplaats het dichter bij [{ClosestValidPosition}].
 Common.UGCValidation.ErrorLabel.SelectionCountNotOne,"Om een asset naar Roblox te uploaden, moet je precies 1 instantie en het bijbehorende uploadtype selecteren."
 Common.UGCValidation.ErrorLabel.SerializedAssetTooLarge,Dit asset is te groot om te uploaden ({sizeBytes} bytes overschrijdt het maximum van {maxSizeBytes} bytes). Verklein deze en probeer het opnieuw.
@@ -3150,7 +3161,6 @@ Feature.Contacts.Message.ContactDiscoverable,"Om je te helpen vrienden te maken,
 Feature.Contacts.Message.ContactsSyncWarning,Je contactpersonen worden regelmatig gesynchroniseerd en matches met andere Roblox-gebruikers worden opgeslagen om je te helpen vrienden te vinden. Je kunt dit op elk moment beheren in de apparaatinstellingen.
 Feature.Contacts.Message.InviteToRoblox,"Voeg me als vriend toe op Roblox, zodat we samen ervaringen kunnen creëren, delen en verkennen."
 Feature.Contacts.Message.NoResults,Geen resultaten.
-Feature.DeveloperProducts.Heading.Products,Producten
 Feature.DeveloperProducts.Label.Product,
 Feature.DisplayName.ErrorMessage.AgedUpNameContainPII,Naam kan persoonlijke gegevens bevatten
 Feature.DisplayName.ErrorMessage.AgedUpNameHasChanged,Je naam is in de afgelopen zeven dagen al gewijzigd

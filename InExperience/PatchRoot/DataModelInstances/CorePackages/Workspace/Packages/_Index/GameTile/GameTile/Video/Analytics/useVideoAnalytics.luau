@@ -14,7 +14,6 @@ local DiscoveryVideoLoadEventFunction = DiscoveryAnalyticsModule.Events.discover
 local DiscoveryVideoLoopEventFunction = DiscoveryAnalyticsModule.Events.discoveryVideoLoopEvent
 local DiscoveryVideoPlayEventFunction = DiscoveryAnalyticsModule.Events.discoveryVideoPlayEvent
 local FFlagLuaAppEnableHomepageOneByTwoTile = require(Parent.SharedFlags).FFlagLuaAppEnableHomepageOneByTwoTile
-local FFlagLuaAppBroadenVideoAnalytics = require(Parent.SharedFlags).FFlagLuaAppBroadenVideoAnalytics
 local FFlagLuaAppHomeMomentVideoFallback = require(Parent.SharedFlags).FFlagLuaAppHomeMomentVideoFallback
 local FFlagLuaAppDiscoveryMomentVideoTelemetry = require(Parent.SharedFlags).FFlagLuaAppDiscoveryMomentVideoTelemetry
 local OmniRecommendationsContentType = require(Parent.DiscoveryTypes).OmniRecommendationsContentType
@@ -54,10 +53,10 @@ local _ = function(p1, p2)
 end
 
 return function(p1, p2, PageContext, SortPos, p3)
-	-- upvalues: ReactModule (copy), MutedErrorFunction (copy), FFlagLuaAppDiscoveryMomentVideoTelemetry (copy), FFlagLuaAppEnableHomepageOneByTwoTile (copy), GetGameTileLayoutDataModule (copy), GetLayoutDataVideoModule (copy), FFlagLuaAppHomeMomentVideoFallback (copy), DiscoveryVideoPlayEventFunction (copy), FFlagLuaAppBroadenVideoAnalytics (copy), OmniRecommendationsContentType (copy), DiscoveryEventErrorLogger (copy), DiscoveryVideoLoadEventFunction (copy), VideoLogger (copy), VideoActions (copy), DiscoveryVideoLoopEventFunction (copy), DiscoveryVideoEndEventFunction (copy)
+	-- upvalues: ReactModule (copy), MutedErrorFunction (copy), FFlagLuaAppDiscoveryMomentVideoTelemetry (copy), FFlagLuaAppEnableHomepageOneByTwoTile (copy), GetGameTileLayoutDataModule (copy), GetLayoutDataVideoModule (copy), FFlagLuaAppHomeMomentVideoFallback (copy), DiscoveryVideoPlayEventFunction (copy), OmniRecommendationsContentType (copy), DiscoveryEventErrorLogger (copy), DiscoveryVideoLoadEventFunction (copy), VideoLogger (copy), VideoActions (copy), DiscoveryVideoLoopEventFunction (copy), DiscoveryVideoEndEventFunction (copy)
 	local TopicId = if p1 == nil then nil elseif p2 then p1.topicId else p1.gameSetTypeId
 	local UseResult = ReactModule.useCallback(function(p4, p5)
-		-- upvalues: p3 (copy), MutedErrorFunction (upval), FFlagLuaAppDiscoveryMomentVideoTelemetry (upval), TopicId (copy), FFlagLuaAppEnableHomepageOneByTwoTile (upval), GetGameTileLayoutDataModule (upval), GetLayoutDataVideoModule (upval), FFlagLuaAppHomeMomentVideoFallback (upval), DiscoveryVideoPlayEventFunction (upval), PageContext (copy), SortPos (copy), FFlagLuaAppBroadenVideoAnalytics (upval)
+		-- upvalues: p3 (copy), MutedErrorFunction (upval), FFlagLuaAppDiscoveryMomentVideoTelemetry (upval), TopicId (copy), FFlagLuaAppEnableHomepageOneByTwoTile (upval), GetGameTileLayoutDataModule (upval), GetLayoutDataVideoModule (upval), FFlagLuaAppHomeMomentVideoFallback (upval), DiscoveryVideoPlayEventFunction (upval), PageContext (copy), SortPos (copy)
 		if p4 ~= nil and p3 ~= nil then
 			local v1 = p3[p4]
 			
@@ -104,15 +103,15 @@ return function(p1, p2, PageContext, SortPos, p3)
 				rootPlaceId = v1.placeId,
 				gameSetTypeId = TopicId,
 				sortPos = SortPos,
-				nativeAdData = if FFlagLuaAppBroadenVideoAnalytics then v1.adId else nil,
-				tileType = if FFlagLuaAppBroadenVideoAnalytics then v1.componentType else nil,
-				contentType = if FFlagLuaAppBroadenVideoAnalytics then v1.contentType else nil,
+				nativeAdData = v1.adId,
+				tileType = v1.componentType,
+				contentType = v1.contentType,
 				isMoment = if FFlagLuaAppDiscoveryMomentVideoTelemetry then v2 else nil
 			})
 		end
 	end, { PageContext, p3, TopicId, SortPos })
 	local UseResult1 = ReactModule.useCallback(function(Index, p4, TotalDuration, LoadTime)
-		-- upvalues: p3 (copy), MutedErrorFunction (upval), FFlagLuaAppDiscoveryMomentVideoTelemetry (upval), TopicId (copy), FFlagLuaAppEnableHomepageOneByTwoTile (upval), GetGameTileLayoutDataModule (upval), GetLayoutDataVideoModule (upval), FFlagLuaAppHomeMomentVideoFallback (upval), OmniRecommendationsContentType (upval), DiscoveryEventErrorLogger (upval), PageContext (copy), DiscoveryVideoLoadEventFunction (upval), SortPos (copy), FFlagLuaAppBroadenVideoAnalytics (upval), VideoLogger (upval), VideoActions (upval)
+		-- upvalues: p3 (copy), MutedErrorFunction (upval), FFlagLuaAppDiscoveryMomentVideoTelemetry (upval), TopicId (copy), FFlagLuaAppEnableHomepageOneByTwoTile (upval), GetGameTileLayoutDataModule (upval), GetLayoutDataVideoModule (upval), FFlagLuaAppHomeMomentVideoFallback (upval), OmniRecommendationsContentType (upval), DiscoveryEventErrorLogger (upval), PageContext (copy), DiscoveryVideoLoadEventFunction (upval), SortPos (copy), VideoLogger (upval), VideoActions (upval)
 		if Index ~= nil and p3 ~= nil then
 			local v1 = p3[Index]
 			
@@ -172,9 +171,9 @@ return function(p1, p2, PageContext, SortPos, p3)
 				rootPlaceId = v1.placeId,
 				gameSetTypeId = TopicId,
 				sortPos = SortPos,
-				nativeAdData = if FFlagLuaAppBroadenVideoAnalytics then v1.adId else nil,
-				tileType = if FFlagLuaAppBroadenVideoAnalytics then v1.componentType else nil,
-				contentType = if FFlagLuaAppBroadenVideoAnalytics then v1.contentType else nil,
+				nativeAdData = v1.adId,
+				tileType = v1.componentType,
+				contentType = v1.contentType,
 				isMoment = if FFlagLuaAppDiscoveryMomentVideoTelemetry then v2 else nil
 			})
 			
@@ -200,7 +199,7 @@ return function(p1, p2, PageContext, SortPos, p3)
 		end
 	end, { PageContext, p3, TopicId, SortPos })
 	local UseResult2 = ReactModule.useCallback(function(p5, p6)
-		-- upvalues: p3 (copy), MutedErrorFunction (upval), FFlagLuaAppDiscoveryMomentVideoTelemetry (upval), TopicId (copy), FFlagLuaAppEnableHomepageOneByTwoTile (upval), GetGameTileLayoutDataModule (upval), GetLayoutDataVideoModule (upval), FFlagLuaAppHomeMomentVideoFallback (upval), DiscoveryVideoLoopEventFunction (upval), PageContext (copy), SortPos (copy), FFlagLuaAppBroadenVideoAnalytics (upval)
+		-- upvalues: p3 (copy), MutedErrorFunction (upval), FFlagLuaAppDiscoveryMomentVideoTelemetry (upval), TopicId (copy), FFlagLuaAppEnableHomepageOneByTwoTile (upval), GetGameTileLayoutDataModule (upval), GetLayoutDataVideoModule (upval), FFlagLuaAppHomeMomentVideoFallback (upval), DiscoveryVideoLoopEventFunction (upval), PageContext (copy), SortPos (copy)
 		if p5 ~= nil and p3 ~= nil then
 			local v3 = p3[p5]
 			
@@ -247,15 +246,15 @@ return function(p1, p2, PageContext, SortPos, p3)
 				rootPlaceId = v3.placeId,
 				gameSetTypeId = TopicId,
 				sortPos = SortPos,
-				nativeAdData = if FFlagLuaAppBroadenVideoAnalytics then v3.adId else nil,
-				tileType = if FFlagLuaAppBroadenVideoAnalytics then v3.componentType else nil,
-				contentType = if FFlagLuaAppBroadenVideoAnalytics then v3.contentType else nil,
+				nativeAdData = v3.adId,
+				tileType = v3.componentType,
+				contentType = v3.contentType,
 				isMoment = if FFlagLuaAppDiscoveryMomentVideoTelemetry then v4 else nil
 			})
 		end
 	end, { PageContext, p3, TopicId, SortPos })
 	local UseResult3 = ReactModule.useCallback(function(p5, EndReason, p6, PlaybackTime, TargetUniverseId)
-		-- upvalues: p3 (copy), MutedErrorFunction (upval), FFlagLuaAppDiscoveryMomentVideoTelemetry (upval), TopicId (copy), FFlagLuaAppEnableHomepageOneByTwoTile (upval), GetGameTileLayoutDataModule (upval), GetLayoutDataVideoModule (upval), FFlagLuaAppHomeMomentVideoFallback (upval), DiscoveryVideoEndEventFunction (upval), PageContext (copy), SortPos (copy), FFlagLuaAppBroadenVideoAnalytics (upval)
+		-- upvalues: p3 (copy), MutedErrorFunction (upval), FFlagLuaAppDiscoveryMomentVideoTelemetry (upval), TopicId (copy), FFlagLuaAppEnableHomepageOneByTwoTile (upval), GetGameTileLayoutDataModule (upval), GetLayoutDataVideoModule (upval), FFlagLuaAppHomeMomentVideoFallback (upval), DiscoveryVideoEndEventFunction (upval), PageContext (copy), SortPos (copy)
 		if p5 ~= nil and p3 ~= nil then
 			local v3 = p3[p5]
 			
@@ -305,9 +304,9 @@ return function(p1, p2, PageContext, SortPos, p3)
 				gameSetTypeId = TopicId,
 				sortPos = SortPos,
 				targetUniverseId = TargetUniverseId,
-				nativeAdData = if FFlagLuaAppBroadenVideoAnalytics then v3.adId else nil,
-				tileType = if FFlagLuaAppBroadenVideoAnalytics then v3.componentType else nil,
-				contentType = if FFlagLuaAppBroadenVideoAnalytics then v3.contentType else nil,
+				nativeAdData = v3.adId,
+				tileType = v3.componentType,
+				contentType = v3.contentType,
 				isMoment = if FFlagLuaAppDiscoveryMomentVideoTelemetry then v4 else nil
 			})
 		end

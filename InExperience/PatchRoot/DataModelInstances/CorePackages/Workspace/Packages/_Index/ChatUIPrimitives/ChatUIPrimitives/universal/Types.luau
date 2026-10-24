@@ -1,16 +1,17 @@
 ﻿local TModule = require(script:FindFirstAncestor("ChatUIPrimitives").Parent.t)
 local PlainTextTypesModule = require(script.Parent.ContentKinds.PlainText.PlainTextTypes)
 local PresetTypesModule = require(script.Parent.ContentKinds.Preset.PresetTypes)
+local EmojiTypesModule = require(script.Parent.ContentKinds.Emoji.EmojiTypes)
 local InterfaceResult = TModule.interface({ userId = TModule.string, displayName = TModule.string })
 local InterfaceResult1 = TModule.interface({
-	contents = TModule.array(TModule.union(TModule.strictInterface({ plainText = PlainTextTypesModule.isValidDraft }), TModule.strictInterface({ preset = PresetTypesModule.isValidDraft }))),
+	contents = TModule.array(TModule.union(TModule.strictInterface({ plainText = PlainTextTypesModule.isValidDraft }), TModule.strictInterface({ preset = PresetTypesModule.isValidDraft }), TModule.strictInterface({ emoji = EmojiTypesModule.isValidDraft }))),
 	repliesToIds = TModule.optional(TModule.array(TModule.string))
 })
 local InterfaceResult2 = TModule.interface({
 	id = TModule.string,
 	sentAtUnixMilliseconds = TModule.number,
 	author = TModule.optional(InterfaceResult),
-	contents = TModule.array(TModule.union(TModule.strictInterface({ plainText = PlainTextTypesModule.isValid }), TModule.strictInterface({ preset = PresetTypesModule.isValid }))),
+	contents = TModule.array(TModule.union(TModule.strictInterface({ plainText = PlainTextTypesModule.isValid }), TModule.strictInterface({ preset = PresetTypesModule.isValid }), TModule.strictInterface({ emoji = EmojiTypesModule.isValid }))),
 	repliesTo = TModule.optional(TModule.array(TModule.interface({
 		id = TModule.string,
 		preview = TModule.optional(TModule.interface({

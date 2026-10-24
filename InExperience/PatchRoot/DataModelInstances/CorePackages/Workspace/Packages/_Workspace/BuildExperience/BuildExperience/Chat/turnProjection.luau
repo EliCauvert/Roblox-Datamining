@@ -8,7 +8,6 @@ local FFlagBuildExperienceSinglePlaytestCardModule = require(BuildExperience.Fla
 local FFlagBuildExperienceManageDevProductModule = require(BuildExperience.Flags.FFlagBuildExperienceManageDevProduct)
 local FFlagBuildAgentAdCampaignCardModule = require(BuildExperience.Flags.FFlagBuildAgentAdCampaignCard)
 local FFlagBuildExperienceShowThinkingAfterAskUserSubmitModule = require(BuildExperience.Flags.FFlagBuildExperienceShowThinkingAfterAskUserSubmit)
-local FFlagBuildExperienceExcludeUserWaitFromTurnDurationModule = require(BuildExperience.Flags.FFlagBuildExperienceExcludeUserWaitFromTurnDuration)
 local PublishToolUtils = CreatorAgentChatModule.PublishToolUtils
 local AdCampaignEligibilityToolModule = if FFlagBuildAgentAdCampaignCardModule then require(BuildExperience.Chat.adCampaignEligibilityTool) else nil
 local StudioAskUserTool = CreatorAgentChatModule.StudioAskUserTool
@@ -643,7 +642,7 @@ local function addAgentAdCampaignCardSegments(List, p12, TurnKey)
 end
 
 local function projectTurnSegments(p13, p14, OptimisticLocalTools)
-	-- upvalues: projectWorkSegments (copy), FFlagBuildExperienceExcludeUserWaitFromTurnDurationModule (copy), GetLocalToolWaitSecondsFunction (copy), makeTurnWorkSegment (copy), addTerminalAssistantMessageSegments (copy), FFlagBuildAgentAdCampaignCardModule (copy), addAgentAdCampaignCardSegments (copy), LocalizationStringsModule (copy), makeSegmentKey (copy), ASSISTANTSTOPPEDTEXT (copy), PublishToolUtils (copy), FFlagBuildExperienceSinglePlaytestCardModule (copy)
+	-- upvalues: projectWorkSegments (copy), GetLocalToolWaitSecondsFunction (copy), makeTurnWorkSegment (copy), addTerminalAssistantMessageSegments (copy), FFlagBuildAgentAdCampaignCardModule (copy), addAgentAdCampaignCardSegments (copy), LocalizationStringsModule (copy), makeSegmentKey (copy), ASSISTANTSTOPPEDTEXT (copy), PublishToolUtils (copy), FFlagBuildExperienceSinglePlaytestCardModule (copy)
 	local TurnKey = nil
 	if p14.turnKey == nil then
 		local SessionId = p14.sessionId or (if p13 == nil then "pending-session" else p13.sessionId)
@@ -653,7 +652,7 @@ local function projectTurnSegments(p13, p14, OptimisticLocalTools)
 		TurnKey = p14.turnKey
 	end
 	local List = {}
-	local TurnWorkSegment = makeTurnWorkSegment(TurnKey, projectWorkSegments(p13, TurnKey, OptimisticLocalTools, not p13.isDone), p13.eventMetaBySequenceId, p14.startSequenceId, p14.endSequenceId, if FFlagBuildExperienceExcludeUserWaitFromTurnDurationModule then GetLocalToolWaitSecondsFunction(p13) else nil)
+	local TurnWorkSegment = makeTurnWorkSegment(TurnKey, projectWorkSegments(p13, TurnKey, OptimisticLocalTools, not p13.isDone), p13.eventMetaBySequenceId, p14.startSequenceId, p14.endSequenceId, (GetLocalToolWaitSecondsFunction(p13)))
 	
 	if TurnWorkSegment ~= nil then
 		table.insert(List, TurnWorkSegment)

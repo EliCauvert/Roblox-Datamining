@@ -168,6 +168,7 @@
 	BadgesSeeAll = "BadgesSeeAll",
 	BadgeDetails = "BadgeDetails",
 	DevStoreSeeAll = "DevStoreSeeAll",
+	ExperienceLeaderboardSeeAll = "ExperienceLeaderboardSeeAll",
 	VideoServer = "VideoServer",
 	GameJoinCard = "GameJoinCard",
 	UserRecentActivity = "UserRecentActivity",

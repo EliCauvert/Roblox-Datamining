@@ -165,7 +165,7 @@ Authentication.SignUp.Response.PasswordComplexity,Utwórz bardziej złożone has
 Authentication.SignUp.Response.UsernameMustBeSetFirst,Najpierw należy ustawić nazwę użytkownika.
 Authentication.SignUp.Subtitle.AddYourBirthday,"Dodaj datę urodzenia, aby utworzyć konto Roblox."
 Authentication.SignUp.Subtitle.YourProgressCarriesOver,Twoje postępy zostaną przeniesione po zakończeniu konfiguracji.
-Authentication.SignUp.Subtitle.YoureAlmostThere,"Już prawie wszystko gotowe. Jeśli zamkniesz teraz, Twoje konto nie zostanie w pełni utworzone i nie będziesz mieć możliwości grania na Robloxie."
+Authentication.SignUp.Subtitle.YoureAlmostThereClose,"Już prawie wszystko gotowe. Jeśli anulujesz w tej chwili, Twoje konto nie zostanie w pełni utworzone i nie będziesz mieć możliwości grania na Robloxie."
 Authentication.TwoStepVerification.Action.GoToSecurity,
 Authentication.TwoStepVerification.Label.TwoStepRequired,"Do kolejnych transakcji wymagana jest weryfikacja dwuetapowa. Wybierz kolejno Ustawienia > Zabezpieczenia, aby przeprowadzić weryfikację dwuetapową."
 Authentication.TwoStepVerification.Response.TooManyAttempts,Zbyt wiele prób. Spróbuj ponownie później.
@@ -274,6 +274,9 @@ Common.UGCValidation.ErrorLabel.DescendantIdAnimationVersionNotSupported,"{Insta
 Common.UGCValidation.ErrorLabel.DescendantIdNotPublished,Zasób {AssetId} ({InstanceFullName}.{FieldName}) nie został opublikowany. Opublikuj go i spróbuj ponownie.
 Common.UGCValidation.ErrorLabel.DescendantIdVersionNotSupported,"{InstanceFullName}.{FieldName} używa wersji {Version} zasobu {AssetId}, ale obecnie obsługiwana jest tylko wersja 1. Użyj wersji 1 i spróbuj ponownie."
 Common.UGCValidation.ErrorLabel.DynamicHeadCageMisaligned,"Dynamiczne głowy na rynku muszą być prawidłowo umieszczone w klatce, tak aby wierzchołki oczu i ust na klatce pokrywały się z wierzchołkami siatki. Popraw klatkę i jej wyrównanie z siatką."
+Common.UGCValidation.ErrorLabel.DynamicHeadCageMisalignedLeftEye,"Punkty orientacyjne lewego oka na obramowaniu dynamicznej głowy nie są wyrównane z siatką. Dostosuj obramowanie oka tak, aby siatka lewego oka znajdowała się w obrębie rzutowanego obszaru obramowania."
+Common.UGCValidation.ErrorLabel.DynamicHeadCageMisalignedMouth,"Punkty orientacyjne ust na obramowaniu dynamicznej głowy nie są wyrównane z siatką. Dostosuj obramowanie ust tak, aby siatka ust znajdowała się w obrębie rzutowanego obszaru obramowania."
+Common.UGCValidation.ErrorLabel.DynamicHeadCageMisalignedRightEye,"Punkty orientacyjne prawego oka na obramowaniu dynamicznej głowy nie są wyrównane z siatką. Dostosuj obramowanie oka tak, aby siatka prawego oka znajdowała się w obrębie rzutowanego obszaru obramowania."
 Common.UGCValidation.ErrorLabel.DynamicHeadHappyNotShown,"Nie można wykryć mimiki obejmującej uśmiech przeznaczonej dla dynamicznej głowy. Dostosuj punkty orientacyjne obramowania dla ust, aby pasowały do miejsca, w którym usta znajdują się na głowie, i upewnij się, że mogą one wyrażać mimikę uśmiechu."
 Common.UGCValidation.ErrorLabel.DynamicHeadLeftEyeNotClose,"Nie można wykryć mimiki obejmującej zamknięcie lewego oka przeznaczonej dla dynamicznej głowy. Dostosuj punkty orientacyjne obramowania dla lewego oka, aby pasowały do miejsca, w którym lewe oko znajduje się na głowie, i upewnij się, że można je zamknąć."
 Common.UGCValidation.ErrorLabel.DynamicHeadMISSINGCAGE,Dynamiczne głowy na rynku nie mają obramowania. Utwórz obramowanie dla dynamicznej głowy.
@@ -293,6 +296,13 @@ Common.UGCValidation.ErrorLabel.EmoteAnimation_MaxPartTranslationCalcFailed,Nie 
 Common.UGCValidation.ErrorLabel.EmoteAnimation_MaxPartTranslationMismatch,"Opublikowana animacja określa maksymalną translację części wynoszącą {taggedTranslation} studów, ale jej dane animacji dają w obliczeniach {calculatedTranslation} studów. Opublikuj animację ponownie."
 Common.UGCValidation.ErrorLabel.Extents_HeadBelowTorso,"Głowa musi być umieszczona powyżej UpperTorso. Środek głowy znajduje się poniżej górnej części tułowia, co wskazuje, że siatka głowy jest zapadnięta lub umieszczona w niewłaściwym miejscu."
 Common.UGCValidation.ErrorLabel.FaceControlsOverrideFACSNotEmpty,Właściwość InternalOverrideFACSData w FaceControls musi być pusta podczas przesyłania.
+Common.UGCValidation.ErrorLabel.FacialFeaturePresence_EyesMissing,W twarzy podstawowej brakuje wymaganych cech oczu. Dodaj oczy do twarzy podstawowej i spróbuj ponownie.
+Common.UGCValidation.ErrorLabel.FacialFeaturePresence_MouthMissing,W twarzy podstawowej brakuje wymaganych ust. Dodaj usta do twarzy podstawowej i spróbuj ponownie.
+Common.UGCValidation.ErrorLabel.FacsDeformation_HappyNotShown,"Nie można wykryć mimiki radości. Dostosuj obramowanie ust lub FACS mimiki radości, aby rzutowana siatka ust odkształcała się zgodnie z oczekiwaniami."
+Common.UGCValidation.ErrorLabel.FacsDeformation_LeftEyeNotClose,"Nie można wykryć mimiki zamknięcia lewego oka. Dostosuj obramowanie lewego oka lub FACS zamknięcia lewego oka, aby rzutowana siatka oka odkształcała się zgodnie z oczekiwaniami."
+Common.UGCValidation.ErrorLabel.FacsDeformation_MouthNotOpen,"Nie można wykryć mimiki otwarcia ust. Dostosuj obramowanie ust lub FACS otwarcia ust, aby rzutowana siatka ust odkształcała się zgodnie z oczekiwaniami."
+Common.UGCValidation.ErrorLabel.FacsDeformation_RightEyeNotClose,"Nie można wykryć mimiki zamknięcia prawego oka. Dostosuj obramowanie prawego oka lub FACS zamknięcia prawego oka, aby rzutowana siatka oka odkształcała się zgodnie z oczekiwaniami."
+Common.UGCValidation.ErrorLabel.FacsDeformation_SadNotShown,"Nie można wykryć mimiki smutku. Dostosuj obramowanie ust lub FACS mimiki smutku, aby rzutowana siatka ust odkształcała się zgodnie z oczekiwaniami."
 Common.UGCValidation.ErrorLabel.FacsExpandsHead,"Wykryto, że FACS spowodował powiększenie Twojej głowy do {modPercent}%, ale zmienianie głowy jest niezgodne z polityką rynku w zakresie animacji twarzy."
 Common.UGCValidation.ErrorLabel.FacsJointCountBounded,"Liczba stawów FACS w dynamicznych głowach nie może przekroczyć {maxFacsJointCount}, ale ta głowa ma ich {actualJointCount}. Zmniejsz liczbę stawów FACS i spróbuj ponownie."
 Common.UGCValidation.ErrorLabel.FacsShrinksHead,"Wykryto, że FACS spowodował zmniejszenie Twojej głowy do {modPercent}%, ale zmienianie głowy jest niezgodne z polityką rynku w zakresie animacji twarzy."
@@ -339,6 +349,7 @@ Common.UGCValidation.ErrorLabel.MeshPartBounds_TooSmall,"Rozmiar osi {axis} siat
 Common.UGCValidation.ErrorLabel.MissingRequiredAttachment,Zaczepienie {attName} musi występować dokładnie raz w ramach elementów podrzędnych {partName}.
 Common.UGCValidation.ErrorLabel.NoAttributes,„{RootInstanceName}” (lub jego elementy podrzędne) zawierają atrybuty. Musisz usunąć atrybuty z następujących elementów: {InstanceNameList}
 Common.UGCValidation.ErrorLabel.PropertiesNotSensible,"{ClassName} „{InstancePath}” ma nieprawidłowe właściwości: {ProblematicProperties}. Przekroczono wskazany limit bajtów (limit 0 oznacza, że właściwość musi być pusta); każda inna właściwość zawiera wartości NaN/Inf lub przekracza swój domyślny limit rozmiaru."
+Common.UGCValidation.ErrorLabel.RenderedAnimation_RequiredExpressionsMissing,"W wyrenderowanej animacji brakuje co najmniej jednego z wymaganych wyrazów twarzy (zamknięcie oka, otwarcie ust, radość, smutek)."
 Common.UGCValidation.ErrorLabel.RigAttachmentOutOfBounds,"Punkt zaczepienia szkieletu „{AttachmentName}” w „{PartName}” musi być umieszczony w pobliżu granicy stawu, gdzie ta część ciała łączy się z sąsiednią częścią. Bieżąca pozycja [{CurrentPosition}] znajduje się zbyt daleko od płaszczyzny połączenia. Przybliż ją do [{ClosestValidPosition}]."
 Common.UGCValidation.ErrorLabel.SelectionCountNotOne,"Aby przesłać zasób do Robloxa, musisz wybrać dokładnie 1 instancję i skojarzony typ przesyłania."
 Common.UGCValidation.ErrorLabel.SerializedAssetTooLarge,"Ten zasób jest zbyt duży, aby go przesłać ({sizeBytes} B przekracza maksymalny rozmiar {maxSizeBytes} B). Zmniejsz jego rozmiar i spróbuj ponownie."
@@ -3168,7 +3179,6 @@ Feature.Contacts.Message.ContactDiscoverable,"Aby łatwiej było ci odnaleźć z
 Feature.Contacts.Message.ContactsSyncWarning,"Aby pomóc Ci odnaleźć znajomych, regularnie synchronizowane będą Twoje kontakty i przechowywane będą dopasowania do innych użytkowników Robloxa. Możesz to zmienić w dowolnym momencie w ustawieniach urządzenia."
 Feature.Contacts.Message.InviteToRoblox,"Dodaj mnie do znajomych na Robloxie, abyśmy mogli wspólnie tworzyć, udostępniać i poznawać projekty."
 Feature.Contacts.Message.NoResults,Brak wyników.
-Feature.DeveloperProducts.Heading.Products,Produkty
 Feature.DeveloperProducts.Label.Product,
 Feature.DisplayName.ErrorMessage.AgedUpNameContainPII,"Możliwe, że nazwa zawiera dane osobowe"
 Feature.DisplayName.ErrorMessage.AgedUpNameHasChanged,Twoja nazwa została już zmieniona w ciągu ostatnich 7 dni

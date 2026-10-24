@@ -1,5 +1,8 @@
 ﻿local BuildExperience = script:FindFirstAncestor("BuildExperience")
 local Parent = BuildExperience.Parent
+local _ = require(BuildExperience.Components.ModelPicker.ModelPickerTypes)
+local FFlagBuildExperienceModelPickerModule = require(BuildExperience.Flags.FFlagBuildExperienceModelPicker)
+local UseBuildModelSelectionModule = require(BuildExperience.Chat.useBuildModelSelection)
 local ReactModule = require(Parent.React)
 local SignalsReactModule = require(Parent.SignalsReact)
 local ChatTypesModule = require(BuildExperience.Chat.chatTypes)
@@ -22,11 +25,12 @@ local FFlagBuildExperienceChatImageAttachmentsModule = require(BuildExperience.F
 local FFlagBuildExperienceChatImageAttachmentsModule1 = SharedFlagsModule.FFlagBuildExperienceInGameCaptureToChat and FFlagBuildExperienceChatImageAttachmentsModule
 local FFlagBuildCheckGamePermissionsModule = require(BuildExperience.Flags.FFlagBuildCheckGamePermissions)
 local UseGamePermissionsModule = require(BuildExperience.useGamePermissions)
+local UseChatSheetFundingRecoveryModule = require(BuildExperience.Components.ChatSheet.useChatSheetFundingRecovery)
 
 local function noop() end
 
 return function(p1)
-	-- upvalues: noop (copy), GetAssistantBuildStoreModule (copy), SignalsReactModule (copy), GetCreatorAgentResumeStoreModule (copy), GetCurrentExperienceProjectModule (copy), FFlagBuildCheckGamePermissionsModule (copy), UseGamePermissionsModule (copy), UseChatSessionCoreModule (copy), FFlagBuildExperienceMonetizationNativeUIModule (copy), UseBuildPromptDraftModule (copy), FFlagBuildExperienceDeveloperProductContextModule (copy), UseChatPlaytestFooterModule (copy), FFlagBuildExperienceChatResourceAttachments (copy), GetPlayButtonStoreModule (copy), ReactModule (copy), ChatTypesModule (copy), FFlagBuildExperienceChatImageAttachmentsModule1 (copy), FFlagBuildExperienceAnalytics (copy), FFlagBuildExperienceAnswerFormModule (copy)
+	-- upvalues: noop (copy), GetAssistantBuildStoreModule (copy), SignalsReactModule (copy), GetCreatorAgentResumeStoreModule (copy), GetCurrentExperienceProjectModule (copy), FFlagBuildCheckGamePermissionsModule (copy), UseGamePermissionsModule (copy), UseChatSessionCoreModule (copy), FFlagBuildExperienceModelPickerModule (copy), UseBuildModelSelectionModule (copy), FFlagBuildExperienceMonetizationNativeUIModule (copy), UseBuildPromptDraftModule (copy), FFlagBuildExperienceDeveloperProductContextModule (copy), UseChatPlaytestFooterModule (copy), FFlagBuildExperienceChatResourceAttachments (copy), GetPlayButtonStoreModule (copy), ReactModule (copy), ChatTypesModule (copy), FFlagBuildExperienceChatImageAttachmentsModule1 (copy), FFlagBuildExperienceAnalytics (copy), UseChatSheetFundingRecoveryModule (copy), FFlagBuildExperienceAnswerFormModule (copy)
 	local OnClose = p1.onClose or noop
 	local NoIsOpen = p1.isOpen == nil or p1.isOpen
 	local UseSignalStateResult = SignalsReactModule.useSignalState(GetAssistantBuildStoreModule().getIsDisabled)
@@ -53,6 +57,7 @@ return function(p1)
 		hydrateHistoryWhen = NoIsOpen,
 		sendMessageWhen = not NoCanEditOnBuild
 	})
+	local UseBuildModelSelectionModuleResult = if FFlagBuildExperienceModelPickerModule then UseBuildModelSelectionModule(UniverseId, p1.modelSelectionDraftId, p1.modelPicker, UseChatSessionCoreModuleResult.modelSessionModels, UseChatSessionCoreModuleResult.hasPreparedModelSession, UseChatSessionCoreModuleResult.internalTesting) else nil
 	
 	if FFlagBuildExperienceMonetizationNativeUIModule then
 		UseBuildPromptDraftModule(UniverseId, p1.sessionId, UseChatSessionCoreModuleResult.setPrefilledComposerText, UseChatSessionCoreModuleResult.sendMessage, NoIsOpen and not UseSignalStateResult, if FFlagBuildExperienceDeveloperProductContextModule then UseChatSessionCoreModuleResult else nil)
@@ -150,6 +155,7 @@ return function(p1)
 	
 	return {
 		isOpen = NoIsOpen,
+		creatorCreditRecovery = if FFlagBuildExperienceModelPickerModule then UseChatSheetFundingRecoveryModule(UseChatSessionCoreModuleResult, UseBuildModelSelectionModuleResult, UniverseId, PlaceId, p1.sessionId) else nil,
 		onClose = OnClose,
 		snapPoints = p1.snapPoints,
 		defaultSnapPointIndex = p1.defaultSnapPointIndex,
@@ -163,6 +169,7 @@ return function(p1)
 		isHistoryLoading = UseChatSessionCoreModuleResult.isHistoryLoading or v1,
 		scrollingFrameRef = UseChatSessionCoreModuleResult.setScrollingFrame,
 		anchorScrollToInstance = UseChatSessionCoreModuleResult.anchorScrollToInstance,
+		modelPicker = UseBuildModelSelectionModuleResult,
 		composerText = UseChatSessionCoreModuleResult.composerText,
 		composerErrorText = UseChatSessionCoreModuleResult.composerErrorText,
 		onComposerChanged = UseChatSessionCoreModuleResult.setComposerText,

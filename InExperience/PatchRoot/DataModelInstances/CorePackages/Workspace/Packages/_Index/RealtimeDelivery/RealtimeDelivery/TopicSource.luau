@@ -82,7 +82,7 @@ function TopicSourceModule:startListening(p1)
 		local function Callback(p2)
 			-- upvalues: pcallOrWarn (upval), OnTokenExpiry (copy)
 			if type(p2) == "table" and (type(p2.token) == "string" and (type(p2.shouldExchange) == "boolean" and type(p2.isSubscribable) == "boolean")) then
-				pcallOrWarn("onTokenExpiry", OnTokenExpiry, p2.token, p2.shouldExchange, p2.isSubscribable)
+				pcallOrWarn("onTokenExpiry", OnTokenExpiry, p2.token, p2.shouldExchange, p2.isSubscribable, p2.subscriptionActive == true)
 			end
 		end
 		

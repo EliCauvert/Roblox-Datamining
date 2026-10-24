@@ -98,6 +98,7 @@ Authentication.SignUp.Button.OKCaptialized,OK
 Authentication.SignUp.Button.RetryLogIn,Riprova ad accedere
 Authentication.SignUp.Description.AccountAlreadyLinked,Il tuo account per {platformAccountName} è già collegato a un account Roblox. Prova ad accedere di nuovo.
 Authentication.SignUp.Description.BirthdayHint,Inserisci la data
+Authentication.SignUp.Description.OptInMarketingEmailConsent,Vorrei ricevere email da Roblox su notizie e offerte.
 Authentication.SignUp.Description.SignUpAgreement.CreateAnAccount,"Creando un account, accetti le nostre {startTermsTag}Condizioni{endTermsTag}, incluso l'arbitrato, e dichiari di accettare la nostra {startPrivacyTag}Politica sulla riservatezza{endPrivacyTag}. Se hai meno di 18 anni, il tuo genitore o tutore deve autorizzare il tuo account e accettare le nostre Condizioni."
 Authentication.SignUp.Description.Try,Prova
 Authentication.SignUp.Description.UsernameChanged,"Tutto in ordine! Il tuo account è pronto e collegato alla piattaforma {platform}. Ricarica per visualizzare il tuo nome utente aggiornato nel gioco. In caso contrario, la modifica verrà applicata alla prossima sessione."
@@ -147,7 +148,7 @@ Authentication.SignUp.Response.PasswordComplexity,Crea una password più comples
 Authentication.SignUp.Response.UsernameMustBeSetFirst,Occorre prima impostare il nome utente.
 Authentication.SignUp.Subtitle.AddYourBirthday,Aggiungi la tua data di nascita per creare il tuo account Roblox.
 Authentication.SignUp.Subtitle.YourProgressCarriesOver,I tuoi progressi verranno trasferiti quando completerai la configurazione.
-Authentication.SignUp.Subtitle.YoureAlmostThere,"Ci sei quasi. Se chiudi ora, la creazione del tuo account resterà incompleta e non potrai giocare a Roblox."
+Authentication.SignUp.Subtitle.YoureAlmostThereClose,"Ci sei quasi. Se annulli ora, la creazione del tuo account resterà incompleta e non potrai giocare a Roblox."
 Authentication.TwoStepVerification.Action.GoToSecurity,Impostazioni
 Authentication.TwoStepVerification.Label.TwoStepRequired,La verifica in due passaggi è necessaria per effettuare ulteriori transazioni. Vai su Impostazioni> Sicurezza per completare la verifica in due passaggi.
 Authentication.TwoStepVerification.Response.TooManyAttempts,Troppi tentativi. Riprova più tardi.
@@ -256,6 +257,9 @@ Common.UGCValidation.ErrorLabel.DescendantIdAnimationVersionNotSupported,"{Insta
 Common.UGCValidation.ErrorLabel.DescendantIdNotPublished,La risorsa {AssetId} ({InstanceFullName}.{FieldName}) non è pubblicata. Pubblicala e riprova.
 Common.UGCValidation.ErrorLabel.DescendantIdVersionNotSupported,"{InstanceFullName}.{FieldName} utilizza la versione {Version} della risorsa {AssetId}, ma al momento è supportata solo la versione 1. Utilizza quest'ultima e riprova."
 Common.UGCValidation.ErrorLabel.DynamicHeadCageMisaligned,Le teste dinamiche nel marketplace devono essere adeguatamente incorniciate in modo che i vertici degli occhi e della bocca all'interno della gabbia siano allineati con quelli della mesh. Migliora l'incorniciatura e il suo allineamento con la mesh.
+Common.UGCValidation.ErrorLabel.DynamicHeadCageMisalignedLeftEye,I punti di riferimento dell'occhio sinistro della gabbia della testa dinamica non sono allineati con la mesh. Regola la gabbia dell'occhio in modo che la mesh dell'occhio sinistro rientri nell'area della gabbia proiettata.
+Common.UGCValidation.ErrorLabel.DynamicHeadCageMisalignedMouth,I punti di riferimento della bocca della gabbia della testa dinamica non sono allineati con la mesh. Regola la gabbia della bocca in modo che la mesh della bocca rientri nell'area della gabbia proiettata.
+Common.UGCValidation.ErrorLabel.DynamicHeadCageMisalignedRightEye,I punti di riferimento dell'occhio destro della gabbia della testa dinamica non sono allineati con la mesh. Regola la gabbia dell'occhio in modo che la mesh dell'occhio destro rientri nell'area della gabbia proiettata.
 Common.UGCValidation.ErrorLabel.DynamicHeadHappyNotShown,Impossibile rilevare il sorriso della testa dinamica. Regola i punti di riferimento della gabbia per la bocca in modo che corrispondano a dove si trova la bocca sulla testa e assicurati che possa mostrare il sorriso.
 Common.UGCValidation.ErrorLabel.DynamicHeadLeftEyeNotClose,Impossibile rilevare se l'occhio sinistro della testa dinamica sia chiuso o meno. Regola i punti di riferimento della gabbia per l'occhio sinistro in modo che corrispondano a dove si trova l'occhio sinistro sulla testa e assicurati che possa essere chiuso.
 Common.UGCValidation.ErrorLabel.DynamicHeadMISSINGCAGE,Le teste dinamiche sul marketplace sono prive di gabbie. Crea una gabbia per la testa dinamica.
@@ -275,6 +279,13 @@ Common.UGCValidation.ErrorLabel.EmoteAnimation_MaxPartTranslationCalcFailed,Non 
 Common.UGCValidation.ErrorLabel.EmoteAnimation_MaxPartTranslationMismatch,"L'animazione pubblicata indica una traslazione massima della parte di {taggedTranslation} stud, ma i suoi dati di animazione calcolano {calculatedTranslation} stud. Ripubblica l'animazione."
 Common.UGCValidation.ErrorLabel.Extents_HeadBelowTorso,"La testa deve essere posizionata sopra UpperTorso. Il centro della testa si trova al di sotto della parte superiore del busto, il che indica che la mesh della testa è collassata o posizionata in modo errato."
 Common.UGCValidation.ErrorLabel.FaceControlsOverrideFACSNotEmpty,La proprietà InternalOverrideFACSData su FaceControls deve essere vuota al momento del caricamento.
+Common.UGCValidation.ErrorLabel.FacialFeaturePresence_EyesMissing,Al viso di base mancano gli elementi obbligatori degli occhi. Aggiungi gli occhi al viso di base e riprova.
+Common.UGCValidation.ErrorLabel.FacialFeaturePresence_MouthMissing,Al viso di base manca una bocca obbligatoria. Aggiungila e riprova.
+Common.UGCValidation.ErrorLabel.FacsDeformation_HappyNotShown,Impossibile rilevare l'espressione di felicità. Regola la gabbia della bocca o il FACS dell'espressione di felicità in modo che la mesh della bocca proiettata si deformi come previsto.
+Common.UGCValidation.ErrorLabel.FacsDeformation_LeftEyeNotClose,Impossibile rilevare l'espressione con l'occhio sinistro chiuso. Regola la gabbia dell'occhio sinistro o il FACS di chiusura in modo che la mesh dell'occhio proiettata si deformi come previsto.
+Common.UGCValidation.ErrorLabel.FacsDeformation_MouthNotOpen,Impossibile rilevare l'espressione di bocca aperta. Regola la gabbia della bocca o il FACS della bocca aperta in modo che la mesh della bocca proiettata si deformi come previsto.
+Common.UGCValidation.ErrorLabel.FacsDeformation_RightEyeNotClose,Impossibile rilevare l'espressione con l'occhio destro chiuso. Regola la gabbia dell'occhio destro o il FACS di chiusura in modo che la mesh dell'occhio proiettata si deformi come previsto.
+Common.UGCValidation.ErrorLabel.FacsDeformation_SadNotShown,Impossibile rilevare l'espressione di tristezza. Regola la gabbia della bocca o il FACS dell'espressione di tristezza in modo che la mesh della bocca proiettata si deformi come previsto.
 Common.UGCValidation.ErrorLabel.FacsExpandsHead,"È stato rilevato che FACs ha espanso la testa del {modPercent}%, ma l'alterazione della testa è contraria alle norme del marketplace per le animazioni facciali."
 Common.UGCValidation.ErrorLabel.FacsJointCountBounded,"Le teste dinamiche possono avere al massimo {maxFacsJointCount} articolazioni del sistema di codifica facciale, ma questa testa ne ha {actualJointCount}. Riduci il numero di articolazioni del sistema di codifica facciale e riprova."
 Common.UGCValidation.ErrorLabel.FacsShrinksHead,"È stato rilevato che FACs ha ridotto la testa del {modPercent}%, ma l'alterazione della testa è contraria alle norme del marketplace per le animazioni facciali."
@@ -321,6 +332,7 @@ Common.UGCValidation.ErrorLabel.MeshPartBounds_TooSmall,"La dimensione dell'asse
 Common.UGCValidation.ErrorLabel.MissingRequiredAttachment,L'allegato {attName} deve esistere esattamente una volta all'interno dei discendenti di {partName}.
 Common.UGCValidation.ErrorLabel.NoAttributes,"""{RootInstanceName}"" (o i suoi discendenti) contengono attributi. È necessario rimuovere questi ultimi da quanto segue: {InstanceNameList}"
 Common.UGCValidation.ErrorLabel.PropertiesNotSensible,{ClassName} '{InstancePath}' ha proprietà non valide: {ProblematicProperties}. È stato superato un limite di byte mostrato (un limite di 0 significa che la proprietà deve essere vuota); qualsiasi altra proprietà contiene valori NaN/Inf o supera il suo limite di dimensione predefinito.
+Common.UGCValidation.ErrorLabel.RenderedAnimation_RequiredExpressionsMissing,"Nell'animazione renderizzata mancano una o più espressioni facciali richieste (occhio chiuso, bocca aperta, felice, triste)."
 Common.UGCValidation.ErrorLabel.RigAttachmentOutOfBounds,"L'allegato del rig ""{AttachmentName}"" in ""{PartName}"" dovrebbe essere posizionato vicino al punto di articolazione dove questa parte del corpo si unisce a quella adiacente. La posizione corrente [{CurrentPosition}] è troppo lontana dal piano di connessione. Spostalo più vicino a [{ClosestValidPosition}]."
 Common.UGCValidation.ErrorLabel.SelectionCountNotOne,"Per caricare una risorsa su Roblox, devi selezionare esattamente 1 istanza e il tipo di caricamento associato."
 Common.UGCValidation.ErrorLabel.SerializedAssetTooLarge,Questa risorsa è troppo grande per essere caricata ({sizeBytes} byte superano il massimo di {maxSizeBytes} byte). Riduci le sue dimensioni e riprova.
@@ -1519,8 +1531,11 @@ Feature.Avatar.Heading.SharePublicAvatar,Condividi il tuo avatar
 Feature.Avatar.Heading.SortBy,Ordina per
 Feature.Avatar.Heading.UsedName,Nome utilizzato
 Feature.Avatar.Heading.WearConfirmation,Indossa oggetto
+Feature.Avatar.HeroWidget.BundleHeadlessTitle,Ultima occasione per il Cavaliere senza testa
 Feature.Avatar.HeroWidget.BundleTitle,Korblox Pactbreaker
 Feature.Avatar.HeroWidget.CapsuleDescription,Tre nuove interpretazioni degli originali di Roblox
+Feature.Avatar.HeroWidget.CapsuleHalloweenDescription,Nuovi articoli pensati appositamente per Halloween
+Feature.Avatar.HeroWidget.CapsuleHalloweenTitle,Creato per Halloween
 Feature.Avatar.HeroWidget.CapsulePoolDescription,Tre nuovi articoli che faranno splash
 Feature.Avatar.HeroWidget.CapsulePoolTitle,Festa in piscina
 Feature.Avatar.HeroWidget.CapsuleTitle,I classici reinventati
@@ -3145,7 +3160,6 @@ Feature.Contacts.Message.ContactDiscoverable,"Per aiutarti a fare amicizie, Gli 
 Feature.Contacts.Message.ContactsSyncWarning,I tuoi contatti verranno sincronizzati regolarmente e le partite con altri utenti Roblox memorizzate per aiutarti a trovare gli amici. Puoi gestire questa opzione in qualsiasi momento nelle impostazioni del dispositivo.
 Feature.Contacts.Message.InviteToRoblox,"Aggiungimi agli amici su Roblox per creare, condividere e scoprire nuove esperienze insieme."
 Feature.Contacts.Message.NoResults,Nessun risultato.
-Feature.DeveloperProducts.Heading.Products,Prodotti
 Feature.DeveloperProducts.Label.Product,
 Feature.DisplayName.ErrorMessage.AgedUpNameContainPII,Il nome potrebbe contenere informazioni private
 Feature.DisplayName.ErrorMessage.AgedUpNameHasChanged,Il tuo nome è già stato cambiato negli ultimi 7 giorni
@@ -3695,6 +3709,7 @@ Feature.Moments.Action.ShowDetails,Mostra dettagli
 Feature.Moments.Action.ShowMore,
 Feature.Moments.Action.TrimVideo,Ritaglia video
 Feature.Moments.Action.TryAgain,
+Feature.Moments.Body.EDPMomentIPReportInstructions,"Per segnalare una violazione della proprietà intellettuale in questo Momento, vai alla pagina dei dettagli del gioco."
 Feature.Moments.Description.CommunityStandards,Consulta le norme della community per saperne di più su ciò che ti è permesso dire.
 Feature.Moments.Description.EmptyCapturesLibrary,Qui è dove appariranno le tue acquisizioni.
 Feature.Moments.Description.GenerateTextFeedbackDisclosure,Generato dall'IA. Ricontrollalo prima di utilizzarlo: sei responsabile di ciò che viene pubblicato.
@@ -3823,11 +3838,12 @@ Feature.Moments.Label.WriteComment,Scrivi un commento
 Feature.Moments.Title.Comments,Commenti
 Feature.Moments.Title.CommentsWithCappedCount,Più di {count} commenti
 Feature.Moments.Title.CommentsWithCount,{count} commenti
+Feature.Moments.Title.EDPMomentIPReportInstructions,Invia una segnalazione nella pagina dei dettagli del gioco
 Feature.Moments.Title.GenerateTextFeedbackReason,Cosa è andato storto?
 Feature.Moments.Title.GenerateTextOptions,
 Feature.Moments.Title.LeaveMomentCreation,Vuoi interrompere la creazione del Momento?
 Feature.Moments.Title.MomentRemoved,Momento rimosso
-Feature.Moments.Title.PostInsights,Titolo dell'intestazione della pagina
+Feature.Moments.Title.PostInsights,Approfondimenti sui post
 Feature.Moments.Title.ReportPost,Segnala post
 Feature.Moments.Tooltip.Creation,Tutti i partecipanti all'esperienza possono visualizzare i tuoi Momenti.
 Feature.Moments.Tooltip.PostInsightsBody,"Controlla le visualizzazioni, il tempo di visione e l'accoglienza del Momento da parte del tuo pubblico."

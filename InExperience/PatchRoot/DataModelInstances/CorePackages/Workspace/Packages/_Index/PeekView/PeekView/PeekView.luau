@@ -28,7 +28,6 @@ local GetFFlagEnablePeekViewStateOnMountParamFunction = require(Parent.SharedFla
 local FFlagProfilePlatformNewProfileHeader = require(Parent.SharedFlags).FFlagProfilePlatformNewProfileHeader
 local FFlagProfilePlatformPeekDraggerContrast = require(Parent.SharedFlags).FFlagProfilePlatformPeekDraggerContrast
 local EnableFastScrollingFixTest = game:DefineFastFlag("EnableFastScrollingFixTest", false)
-local FFlagEnablePeekViewFocusNav = require(Parent.SharedFlags).FFlagEnablePeekViewFocusNav
 local GetFFlagPreventSuperBriefPeekViewCloseFunction = require(Parent.SharedFlags).GetFFlagPreventSuperBriefPeekViewClose
 local AXMigratePeekViewToFocusNavigation = game:DefineFastFlag("AXMigratePeekViewToFocusNavigation", false)
 local FixPeekViewAnimationJitter = game:DefineFastFlag("FixPeekViewAnimationJitter", false)
@@ -766,7 +765,7 @@ function PeekView.handleThumbstickInput(p1, p2, p3)
 end
 
 function PeekView.renderWithStyle(p1, p2)
-	-- upvalues: RoactModule (copy), FFlagProfilePlatformNewProfileHeader (copy), FFlagProfilePlatformPeekDraggerContrast (copy), AXMigratePeekViewToFocusNavigation (copy), SuperBrief (copy), ImageSetLabel (copy), IconsNavigationSwipe (copy), Focusable (copy), RoactGamepadModule (copy), FFlagEnablePeekViewFocusNav (copy), FFlagPeekViewFixBriefHeightLayoutRace (copy), _Rect (copy), Brief (copy), Full (copy), FocusNavigableSurfaceWrapper (copy), FocusNavigationUtilsModule (copy), ExternalEventConnection (copy), UserInputService (copy)
+	-- upvalues: RoactModule (copy), FFlagProfilePlatformNewProfileHeader (copy), FFlagProfilePlatformPeekDraggerContrast (copy), AXMigratePeekViewToFocusNavigation (copy), SuperBrief (copy), ImageSetLabel (copy), IconsNavigationSwipe (copy), Focusable (copy), RoactGamepadModule (copy), FFlagPeekViewFixBriefHeightLayoutRace (copy), _Rect (copy), Brief (copy), Full (copy), FocusNavigableSurfaceWrapper (copy), FocusNavigationUtilsModule (copy), ExternalEventConnection (copy), UserInputService (copy)
 	local Prop = p1.props[RoactModule.Children]
 	local BottomDockedContainerHeight: number = p1.props.bottomDockedContainerHeight
 	local BottomDockedContainerContent = p1.props.bottomDockedContainerContent
@@ -832,7 +831,7 @@ function PeekView.renderWithStyle(p1, p2)
 	}, {
 		SwipeScrollingFrame = RoactModule.createElement("ScrollingFrame", {
 			AutomaticCanvasSize = Enum.AutomaticSize.Y,
-			Selectable = not FFlagEnablePeekViewFocusNav and nil,
+			Selectable = false,
 			CanvasSize = UDim2.fromScale(1, 0),
 			Active = true,
 			BackgroundTransparency = 1,
@@ -936,11 +935,11 @@ function PeekView.renderWithStyle(p1, p2)
 				})
 			})
 		}),
-		ClipFrameContainer = if p1.props.shouldCaptureFocus and FFlagEnablePeekViewFocusNav then RoactModule.createElement(FocusNavigableSurfaceWrapper, {
+		ClipFrameContainer = if p1.props.shouldCaptureFocus then RoactModule.createElement(FocusNavigableSurfaceWrapper, {
 			isIsolated = true,
 			surfaceIdentifier = FocusNavigationUtilsModule.FocusNavigableSurfaceIdentifierEnum.PeekView
 		}, { ClipFrame = Element }) else nil,
-		ClipFrame = if p1.props.shouldCaptureFocus and FFlagEnablePeekViewFocusNav then nil else Element,
+		ClipFrame = if p1.props.shouldCaptureFocus then nil else Element,
 		InputBegan = RoactModule.createElement(ExternalEventConnection, {
 			event = UserInputService.InputBegan,
 			callback = p1.inputBeganCallback

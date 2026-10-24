@@ -184,16 +184,6 @@ local function getRobuxUpsellProductWithUniverseItemInfo(_, _, _, _, _, _)
 	})
 end
 
-local function postPremiumImpression()
-	-- upvalues: PromiseModule (copy)
-	return PromiseModule.resolve()
-end
-
-local function getPremiumUpsellPrecheck()
-	-- upvalues: PromiseModule (copy)
-	return PromiseModule.resolve(true)
-end
-
 local function getPurchaseWarning(_)
 	-- upvalues: PromiseModule (copy), PurchaseWarningModule (copy)
 	return PromiseModule.resolve({ action = PurchaseWarningModule.NoAction })
@@ -245,7 +235,7 @@ local MockNetworkModule = {}
 MockNetworkModule.__index = MockNetworkModule
 
 function MockNetworkModule.new(p1, p2)
-	-- upvalues: PromiseModule (copy), FFlagRefreshPriceOnRetryAfterUpsellModule (copy), getABTestGroup (copy), getProductInfo (copy), getPlayerOwns (copy), performPurchase (copy), loadAssetForEquip (copy), getAccountInfo (copy), getBalanceInfo (copy), getBundleDetails (copy), getProductPurchasableDetails (copy), getCatalogItemDetails (copy), getResellers (copy), getRobuxUpsellProductWithUniverseItemInfo (copy), postPremiumImpression (copy), getPremiumUpsellPrecheck (copy), getPurchaseWarning (copy), postPurchaseWarningAcknowledge (copy), checkUserPurchaseSettings (copy), getUnifiedPurchaseFlowUserEligibility (copy), getSubscriptionProductInfo (copy), GetLookDetailsV2ProductInfo (copy)
+	-- upvalues: PromiseModule (copy), FFlagRefreshPriceOnRetryAfterUpsellModule (copy), getABTestGroup (copy), getProductInfo (copy), getPlayerOwns (copy), performPurchase (copy), loadAssetForEquip (copy), getAccountInfo (copy), getBalanceInfo (copy), getBundleDetails (copy), getProductPurchasableDetails (copy), getCatalogItemDetails (copy), getResellers (copy), getRobuxUpsellProductWithUniverseItemInfo (copy), getPurchaseWarning (copy), postPurchaseWarningAcknowledge (copy), checkUserPurchaseSettings (copy), getUnifiedPurchaseFlowUserEligibility (copy), getSubscriptionProductInfo (copy), GetLookDetailsV2ProductInfo (copy)
 	local config = nil
 	if p2 or p1 then
 		local function CheckUserPurchaseSettings()
@@ -266,8 +256,6 @@ function MockNetworkModule.new(p1, p2)
 			getCatalogItemDetails = if FFlagRefreshPriceOnRetryAfterUpsellModule then CheckUserPurchaseSettings else nil,
 			getResellers = if FFlagRefreshPriceOnRetryAfterUpsellModule then CheckUserPurchaseSettings else nil,
 			getRobuxUpsellProductWithUniverseItemInfo = CheckUserPurchaseSettings,
-			postPremiumImpression = CheckUserPurchaseSettings,
-			getPremiumUpsellPrecheck = CheckUserPurchaseSettings,
 			getPurchaseWarning = CheckUserPurchaseSettings,
 			postPurchaseWarningAcknowledge = CheckUserPurchaseSettings,
 			checkUserPurchaseSettings = CheckUserPurchaseSettings,
@@ -288,8 +276,6 @@ function MockNetworkModule.new(p1, p2)
 			getCatalogItemDetails = if FFlagRefreshPriceOnRetryAfterUpsellModule then getCatalogItemDetails else nil,
 			getResellers = if FFlagRefreshPriceOnRetryAfterUpsellModule then getResellers else nil,
 			getRobuxUpsellProductWithUniverseItemInfo = getRobuxUpsellProductWithUniverseItemInfo,
-			postPremiumImpression = postPremiumImpression,
-			getPremiumUpsellPrecheck = getPremiumUpsellPrecheck,
 			getPurchaseWarning = getPurchaseWarning,
 			postPurchaseWarningAcknowledge = postPurchaseWarningAcknowledge,
 			checkUserPurchaseSettings = checkUserPurchaseSettings,

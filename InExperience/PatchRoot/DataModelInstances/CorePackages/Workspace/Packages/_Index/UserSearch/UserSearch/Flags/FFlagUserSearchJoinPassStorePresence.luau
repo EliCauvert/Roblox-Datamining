@@ -1,0 +1,3 @@
+﻿local FFlagUserSearchPresenceStoreMigrationModule = require(script:FindFirstAncestor("UserSearch").Flags.FFlagUserSearchPresenceStoreMigration)
+
+return game:DefineFastFlag("UserSearchJoinPassStorePresence", false) and FFlagUserSearchPresenceStoreMigrationModule

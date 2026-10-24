@@ -105,34 +105,39 @@ return function(Frame)
 		UseStateResult2(DefaultFilter)
 		UseStateResult2_1("")
 	end, { DefaultFilter })
+	local NoGroups: boolean = Groups == nil or #Groups == 0
 	local UseMemoResult = ReactModule.useMemo(function()
-		-- upvalues: FFlagBuildExperiencePreviewsTabModule (upval), GamesFilterModule (upval), All (copy), MyGames (copy), GroupGames (copy), SharedGames (copy), List (ref)
-		if not FFlagBuildExperiencePreviewsTabModule then
-			return {
-				{ value = "All", label = All },
-				{ value = "MyGames", label = MyGames },
-				{ value = "GroupGames", label = GroupGames },
-				{ value = "SharedGames", label = SharedGames }
+		-- upvalues: FFlagBuildExperiencePreviewsTabModule (upval), GamesFilterModule (upval), All (copy), MyGames (copy), GroupGames (copy), SharedGames (copy), List (ref), NoGroups (copy)
+		if FFlagBuildExperiencePreviewsTabModule then
+			local config = {
+				[GamesFilterModule.All] = All,
+				[GamesFilterModule.MyGames] = MyGames,
+				[GamesFilterModule.GroupGames] = GroupGames,
+				[GamesFilterModule.SharedGames] = SharedGames
 			}
+			local List1 = {}
+			
+			for _, Value in List do
+				if not NoGroups or Value ~= GamesFilterModule.GroupGames then
+					table.insert(List1, { value = Value, label = config[Value] })
+				end
+			end
+			return List1
+		else
+			local List2 = {
+				{ value = "All", label = All },
+				{ value = "MyGames", label = MyGames }
+			}
+			
+			if not NoGroups then
+				table.insert(List2, { value = "GroupGames", label = GroupGames })
+			end
+			table.insert(List2, { value = "SharedGames", label = SharedGames })
+			
+			return List2
 		end
-		local config = {
-			[GamesFilterModule.All] = All,
-			[GamesFilterModule.MyGames] = MyGames,
-			[GamesFilterModule.GroupGames] = GroupGames,
-			[GamesFilterModule.SharedGames] = SharedGames
-		}
-		local List1 = {}
-		
-		for _, Value in List do
-			table.insert(List1, { value = Value, label = config[Value] })
-		end
-		return List1
 	end, {
-		All,
-		GroupGames,
-		MyGames,
-		SharedGames,
-		List
+		All, GroupGames, NoGroups, MyGames, SharedGames, List
 	})
 	local GroupId = UseStateResult.groupId
 	local UseMemoResult1 = ReactModule.useMemo(function()
@@ -160,7 +165,7 @@ return function(Frame)
 	end, { UseStateResult1, Groups, UseResult3, GroupId })
 	local Name = nil
 	
-	if UseFilterResult.games == "GroupGames" and UseFilterResult.groupId ~= nil and Groups ~= nil then
+	if UseFilterResult.games == "GroupGames" and (UseFilterResult.groupId ~= nil and Groups ~= nil) then
 		for _, group in Groups do
 			if group.id == UseFilterResult.groupId then
 				Name = group.name

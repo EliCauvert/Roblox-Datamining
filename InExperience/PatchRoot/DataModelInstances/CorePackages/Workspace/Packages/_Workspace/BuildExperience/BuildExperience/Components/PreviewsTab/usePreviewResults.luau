@@ -47,7 +47,7 @@ end
 local function ignorePromiseRejection() end
 
 local function usePreviewSources(CreatorGroupsStore, CreatorTargetId, Filter)
-	-- upvalues: ReactModule (copy), UseSignalStateFunction (copy), PreviewGroups (copy), DataStatus (copy), GamesFilterModule (copy), createSource (copy)
+	-- upvalues: ReactModule (copy), UseSignalStateFunction (copy), GamesFilterModule (copy), PreviewGroups (copy), DataStatus (copy), createSource (copy)
 	local UseMemoResult = ReactModule.useMemo(function()
 		-- upvalues: CreatorGroupsStore (copy)
 		return (CreatorGroupsStore.getAndFetchGroups("BuildPreview"))
@@ -58,28 +58,28 @@ local function usePreviewSources(CreatorGroupsStore, CreatorTargetId, Filter)
 	local GroupId = Filter.groupId
 	
 	return (ReactModule.useMemo(function()
-		-- upvalues: UseSignalStateResult (copy), PreviewGroups (upval), UseSignalStateResult1 (copy), DataStatus (upval), GroupId (copy), Games (copy), GamesFilterModule (upval), createSource (upval), CreatorTargetId (copy)
-		if UseSignalStateResult == nil then
+		-- upvalues: UseSignalStateResult (copy), Games (copy), GamesFilterModule (upval), PreviewGroups (upval), UseSignalStateResult1 (copy), DataStatus (upval), GroupId (copy), createSource (upval), CreatorTargetId (copy)
+		if UseSignalStateResult == nil and Games ~= GamesFilterModule.SharedGames then
 			return {
 				sources = nil,
 				previewGroups = PreviewGroups,
 				status = if UseSignalStateResult1 == DataStatus.Failed then DataStatus.Failed else DataStatus.NotReady
 			}
 		end
-		local Groups = UseSignalStateResult.groups
+		local PreviewGroups1 = if UseSignalStateResult == nil then PreviewGroups else UseSignalStateResult.groups
 		local v1 = false
 		
-		for _, group in Groups do
-			v1 = v1 or group.id == GroupId
+		for _, value in PreviewGroups1 do
+			v1 = v1 or value.id == GroupId
 		end
 		local List = {}
 		
 		if Games ~= GamesFilterModule.SharedGames then
 			local Creators = {}
 			
-			for _, group1 in Groups do
-				if not v1 or Games ~= GamesFilterModule.GroupGames or group1.id == GroupId then
-					table.insert(Creators, { creatorType = "Group", creatorTargetId = group1.id })
+			for _, value1 in PreviewGroups1 do
+				if not v1 or Games ~= GamesFilterModule.GroupGames or value1.id == GroupId then
+					table.insert(Creators, { creatorType = "Group", creatorTargetId = value1.id })
 				end
 			end
 			if #Creators > 0 then
@@ -93,7 +93,7 @@ local function usePreviewSources(CreatorGroupsStore, CreatorTargetId, Filter)
 		end
 		return {
 			sources = List,
-			previewGroups = Groups,
+			previewGroups = PreviewGroups1,
 			status = DataStatus.Ready
 		}
 	end, {
@@ -106,22 +106,25 @@ local function usePreviewSources(CreatorGroupsStore, CreatorTargetId, Filter)
 end
 
 return function(p1)
-	-- upvalues: UniverseSearchModule (copy), CreatorGroupsModule (copy), Players (copy), usePreviewSources (copy), config (copy), UseCursorSearchPagesModule (copy), ReactModule (copy), ignorePromiseRejection (copy), t (copy), toPreviewItem (copy)
+	-- upvalues: UniverseSearchModule (copy), CreatorGroupsModule (copy), Players (copy), config (copy), usePreviewSources (copy), UseCursorSearchPagesModule (copy), ReactModule (copy), GamesFilterModule (copy), ignorePromiseRejection (copy), t (copy), toPreviewItem (copy)
 	local SearchStore = p1.searchStore or UniverseSearchModule.getUniverseSearchStore()
 	local CreatorGroupsStore = p1.creatorGroupsStore or CreatorGroupsModule.getCreatorGroupsStore()
 	local IsIsFocused = p1.isFocused ~= false
-	local UsePreviewSourcesResult = usePreviewSources(CreatorGroupsStore, p1.userId or (if Players.LocalPlayer then Players.LocalPlayer.UserId else 0), p1.filter or config)
+	local Filter = p1.filter or config
+	local UsePreviewSourcesResult = usePreviewSources(CreatorGroupsStore, p1.userId or (if Players.LocalPlayer then Players.LocalPlayer.UserId else 0), Filter)
 	local UseCursorSearchPagesModuleResult = UseCursorSearchPagesModule({
 		searchStore = SearchStore,
 		sources = UsePreviewSourcesResult.sources
 	})
 	local RefreshFunction = UseCursorSearchPagesModuleResult.refresh
+	local Games = Filter.games
 	local UseResult = ReactModule.useCallback(function()
-		-- upvalues: CreatorGroupsStore (copy), RefreshFunction (copy)
-		CreatorGroupsStore.fetchGroups("BuildPreview")
-		
+		-- upvalues: Games (copy), GamesFilterModule (upval), CreatorGroupsStore (copy), RefreshFunction (copy)
+		if Games ~= GamesFilterModule.SharedGames then
+			CreatorGroupsStore.fetchGroups("BuildPreview")
+		end
 		return RefreshFunction()
-	end, { CreatorGroupsStore, RefreshFunction })
+	end, { CreatorGroupsStore, Games, RefreshFunction })
 	local UseRefResult = ReactModule.useRef(false)
 	ReactModule.useEffect(function()
 		-- upvalues: UseRefResult (copy), IsIsFocused (copy), UseResult (copy), ignorePromiseRejection (upval)

@@ -1,4 +1,7 @@
-﻿local UrlBase = require(script:FindFirstAncestor("DataHydration").Parent.UrlBuilder).UrlBase
+﻿local Parent = script:FindFirstAncestor("DataHydration").Parent
+local UrlBase = require(Parent.UrlBuilder).UrlBase
+local FFlagBuildExperienceModelPickerData = require(Parent.SharedFlags).FFlagBuildExperienceModelPickerData
+local _ = require(script.Parent.Parent.Types.model)
 local MyStatsExperienceStatsPath = game:DefineFastString("MyStatsExperienceStatsPath", "/my-stats-service/v1")
 
 return {
@@ -54,28 +57,47 @@ return {
 			return nil
 		end
 	end,
-	buildSessionNewWireParams = function(p1)
+	buildSessionNewWireParams = function(_roblox)
+		-- upvalues: FFlagBuildExperienceModelPickerData (copy)
 		local config = {
-			universeId = p1.project.universeId,
-			placeId = p1.project.placeId
+			universeId = _roblox.project.universeId,
+			placeId = _roblox.project.placeId
 		}
 		
-		if p1.experiment ~= nil then
-			config.experiment = p1.experiment
+		if _roblox.experiment ~= nil then
+			config.experiment = _roblox.experiment
 		end
-		if p1.application ~= nil then
-			config.application = p1.application
+		if FFlagBuildExperienceModelPickerData and _roblox.model ~= nil then
+			config.model = _roblox.model
+		end
+		if _roblox.application ~= nil then
+			config.application = _roblox.application
 		end
 		return {
-			cwd = p1.cwd,
-			mcpServers = p1.mcpServers,
+			cwd = _roblox.cwd,
+			mcpServers = _roblox.mcpServers,
 			_meta = { _roblox = config }
 		}
 	end,
 	buildSessionPromptWireParams = function(p1)
+		-- upvalues: FFlagBuildExperienceModelPickerData (copy)
 		local config = { sessionId = p1.sessionId, prompt = p1.prompt }
 		
-		if p1.experiment == nil then
+		if FFlagBuildExperienceModelPickerData and (p1.model ~= nil or p1.experiment ~= nil) then
+			local T = if p1.meta == nil then {} else table.clone(p1.meta)
+			local T1 = if T._roblox == nil then {} else table.clone(T._roblox)
+			
+			if p1.model ~= nil then
+				T1.model = p1.model
+			end
+			if p1.experiment ~= nil then
+				T1.experiment = p1.experiment
+			end
+			T._roblox = T1
+			config._meta = T
+			
+			return config
+		elseif p1.experiment == nil then
 			if p1.meta ~= nil then
 				config._meta = p1.meta
 			end

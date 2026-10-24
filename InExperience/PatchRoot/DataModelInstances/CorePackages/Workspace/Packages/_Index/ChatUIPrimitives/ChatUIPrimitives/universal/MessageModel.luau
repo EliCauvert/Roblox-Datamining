@@ -2,6 +2,7 @@
 local _ = require(script.Parent.Types)
 local PlainTextContentModelModule = require(script.Parent.ContentKinds.PlainText.PlainTextContentModel)
 local PresetContentModelModule = require(script.Parent.ContentKinds.Preset.PresetContentModel)
+local EmojiContentModelModule = require(script.Parent.ContentKinds.Emoji.EmojiContentModel)
 
 return {
 	fromPlainText = function(p1, p2)
@@ -21,6 +22,17 @@ return {
 			author = if PresetVersion then PresetVersion.author else nil,
 			contents = {
 				PresetContentModelModule.fromPreset(p1, p2, if PresetVersion then PresetVersion.presetVersion else nil)
+			}
+		}
+	end,
+	fromEmoji = function(p1, p2, Name)
+		-- upvalues: HttpService (copy), EmojiContentModelModule (copy)
+		return {
+			id = HttpService:GenerateGUID(false),
+			sentAtUnixMilliseconds = Name and Name.sentAtUnixMilliseconds or DateTime.now().UnixTimestampMillis,
+			author = if Name then Name.author else nil,
+			contents = {
+				EmojiContentModelModule.fromEmoji(p1, p2, if Name then Name.name else nil)
 			}
 		}
 	end

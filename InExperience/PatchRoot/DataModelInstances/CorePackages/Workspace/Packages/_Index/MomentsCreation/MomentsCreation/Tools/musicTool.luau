@@ -1,6 +1,7 @@
 ﻿local MomentsCreation = script:FindFirstAncestor("MomentsCreation")
 local Parent = MomentsCreation.Parent
 local ReactModule = require(Parent.React)
+local MomentTypeModule = require(MomentsCreation.Enums.MomentType)
 local _ = require(MomentsCreation.Types.CreationFlowTypes)
 local CreateEditSessionModule = require(MomentsCreation.Stores.createEditSession)
 local MusicOverlayModule = require(MomentsCreation.Components.MusicOverlay)
@@ -22,6 +23,7 @@ return {
 		cancelAnalyticsEvent = EventNames.EditingFlowMusicBackButtonPressed
 	},
 	supportedCaptureTypes = { Enum.CaptureType.Video, Enum.CaptureType.Screenshot },
+	supportedMomentTypes = if require(Parent.SharedFlags).FFlagMomentsCreateAvatarPosts then { MomentTypeModule.Avatar } else nil,
 	createSession = function()
 		-- upvalues: CreateEditSessionModule (copy)
 		return CreateEditSessionModule()

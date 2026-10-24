@@ -9,15 +9,17 @@ return function(p1)
 	-- upvalues: ReactModule (copy), CreateCreationControllerModule (copy), GetCreationFlowStoreModule (copy), CreationControllerContextModule (copy)
 	local Host = p1.host
 	local ExcludeGallery = p1.excludeGallery
+	local InitialAvatarMoment = p1.initialAvatarMoment
 	
 	return ReactModule.createElement(CreationControllerContextModule.Provider, {
 		value = ReactModule.useMemo(function()
-			-- upvalues: CreateCreationControllerModule (upval), GetCreationFlowStoreModule (upval), Host (copy), ExcludeGallery (copy)
+			-- upvalues: CreateCreationControllerModule (upval), GetCreationFlowStoreModule (upval), Host (copy), ExcludeGallery (copy), InitialAvatarMoment (copy)
 			return CreateCreationControllerModule({
 				store = GetCreationFlowStoreModule(false),
 				host = Host,
-				excludeGallery = ExcludeGallery
+				excludeGallery = ExcludeGallery,
+				initialAvatarMoment = InitialAvatarMoment
 			})
-		end, { Host, ExcludeGallery })
+		end, { Host, ExcludeGallery, InitialAvatarMoment })
 	}, p1.children)
 end

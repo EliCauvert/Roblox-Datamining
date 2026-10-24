@@ -9,10 +9,12 @@ local _ = require(script.Parent.DailyLimitBottomSheet)
 local GetHoursUntilResetModule = require(script.Parent.getHoursUntilReset)
 local UseOpenBuyRobuxWebViewModule = require(script.Parent.useOpenBuyRobuxWebView)
 local UseRefreshCreatorCreditOnUnhideModule = require(script.Parent.useRefreshCreatorCreditOnUnhide)
+local FFlagBuildExperienceModelPickerModule = require(BuildExperience.Flags.FFlagBuildExperienceModelPicker)
+local GetBuildCreatorCreditRefreshStoreModule = require(BuildExperience.Stores.GetBuildCreatorCreditRefreshStore)
 local DataStatus = require(Parent.DataHydration).DataStatus
 
 return function()
-	-- upvalues: CreatorCreditModule (copy), ReactModule (copy), SignalsReactModule (copy), DataStatus (copy), UseOpenBuyRobuxWebViewModule (copy), UseRefreshCreatorCreditOnUnhideModule (copy), GetHoursUntilResetModule (copy), CreatorCreditConfigModule (copy)
+	-- upvalues: CreatorCreditModule (copy), ReactModule (copy), SignalsReactModule (copy), DataStatus (copy), FFlagBuildExperienceModelPickerModule (copy), GetBuildCreatorCreditRefreshStoreModule (copy), UseOpenBuyRobuxWebViewModule (copy), UseRefreshCreatorCreditOnUnhideModule (copy), GetHoursUntilResetModule (copy), CreatorCreditConfigModule (copy)
 	local CreatorCreditStore = CreatorCreditModule.getCreatorCreditStore(false)
 	local UseMemoResult = ReactModule.useMemo(function()
 		-- upvalues: CreatorCreditStore (copy)
@@ -111,12 +113,25 @@ return function()
 		UseStateResult2(false)
 	end, {})
 	local UseResult6 = ReactModule.useCallback(function()
-		-- upvalues: CreatorCreditStore (copy)
-		CreatorCreditStore.refreshQuotaSummary():catch(function() end)
+		-- upvalues: FFlagBuildExperienceModelPickerModule (upval), GetBuildCreatorCreditRefreshStoreModule (upval), CreatorCreditStore (copy)
+		if FFlagBuildExperienceModelPickerModule then
+			GetBuildCreatorCreditRefreshStoreModule(false).refresh()
+			
+			return
+		else
+			CreatorCreditStore.refreshQuotaSummary():catch(function() end)
+		end
 	end, { CreatorCreditStore })
 	local UseOpenBuyRobuxWebViewModuleResult = UseOpenBuyRobuxWebViewModule(UseResult6)
-	UseRefreshCreatorCreditOnUnhideModule(UseResult6)
 	
+	if FFlagBuildExperienceModelPickerModule then
+		ReactModule.useEffect(function()
+			-- upvalues: GetBuildCreatorCreditRefreshStoreModule (upval)
+			return GetBuildCreatorCreditRefreshStoreModule(false).acquire()
+		end, {})
+	else
+		UseRefreshCreatorCreditOnUnhideModule(UseResult6)
+	end
 	return {
 		pageProps = {
 			dailyPctUsed = if UseSignalStateResult then UseSignalStateResult.freeTrialPctUsed else 0,

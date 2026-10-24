@@ -96,6 +96,8 @@ local ExpChatPerfTracker = require(Parent.ChatUIPrimitives).Telemetry.ExpChatPer
 local ConnectHistoryReplayModule = require(ExpChat.connectHistoryReplay)
 local IsHistoricalMessageModule = require(ExpChat.isHistoricalMessage)
 local WhenFirstTrueModule = require(ExpChat.whenFirstTrue)
+local WhenPresetAccessKnownModule = require(script.helpers.whenPresetAccessKnown)
+local PrefixWithPresetIconModule = require(script.helpers.prefixWithPresetIcon)
 local GetChannelsWithKeptHistoryModule = require(ExpChat.getChannelsWithKeptHistory)
 local FFlagExpChatPerfTrackerTabName = require(Parent.ChatUIPrimitives).Flags.FFlagExpChatPerfTrackerTabName
 local SelectSelectedTabNameModule = require(ExpChat.selectSelectedTabName)
@@ -134,6 +136,7 @@ local FFlagEnableGlobalChat3pSummaryLuaAppsModule = require(Flags.FFlagEnableGlo
 local FFlagExpChatEnableGlobalChatSummarySystemMessageModule = require(Flags.FFlagExpChatEnableGlobalChatSummarySystemMessage)
 local ExpChatSuppressGlobalSummaryTabUnread = game:DefineFastFlag("ExpChatSuppressGlobalSummaryTabUnread", false)
 local FFlagExpChatRefactorEnabledMessageLogicModule = require(Flags.FFlagExpChatRefactorEnabledMessageLogic)
+local FFlagExpChatMEUpdatedSystemMessageModule = require(Flags.FFlagExpChatMEUpdatedSystemMessage)
 local FFlagExpChatVirtualizeSystemMessagesModule = require(Flags.FFlagExpChatVirtualizeSystemMessages)
 local FStringExpChatChatWithTFAmpFeatureNameModule = require(Flags.FStringExpChatChatWithTFAmpFeatureName)
 local FStringExpChatChatWithTFAmpNameSpaceModule = require(Flags.FStringExpChatChatWithTFAmpNameSpace)
@@ -388,7 +391,7 @@ local function OnIncomingMessage(TextChatMessage)
 end
 
 return function(p1)
-	-- upvalues: NewResult (copy), Dictionary (copy), config1 (copy), CreateStoreModule (copy), CreateDispatchBindableEventModule (copy), BindableEventQueueModule (copy), WatchForErrorsFunction (copy), Context (copy), FFlagExpChatUseAdorneeStore (copy), GetAdorneeStoreModule (copy), FFlagExpChatUseProximityStore (copy), GetProximityStoreModule (copy), GetMessagesStoreModule (copy), FFlagExpChatUseChannelTabsStore (copy), GetChannelTabsStoreModule (copy), FFlagExpChatVirtualizeSystemMessagesModule (copy), GetFFlagExpChatSuppressWelcomeMessageTabUnreadFunction (copy), ExpChatOnlyWakeTextForSelectedTab (copy), IsMessageForOpenChannelModule (copy), GetTransparencyStoreModule (copy), DisplaySystemMessageModule (copy), WriteVirtualSystemMessageModule (copy), FFlagExpChatUseChatConfigStore (copy), GetChatConfigurationStoreModule (copy), GetChatStatusStoreModule (copy), GetGlobalMutedUsersStoreModule (copy), GetFFlagUseCharacterStoreFunction (copy), GetCharacterStoreModule (copy), Analytics (copy), GetFFlagUnreduxLastInputTypeChangedModule (copy), UserInputService (copy), LastInputTypeChangedModule (copy), OnIncomingMessage (copy), Chat (copy), TextChatService (copy), SetUpConfigurationObjectsModule (copy), SetUpClientSettingsModule (copy), FFlagExpChatInitializeWindowFromGameSettings (copy), ChatTopBarButtonActivatedModule (copy), Players (copy), FFlagExpChatRenderHistoricalMessages (copy), IsHistoricalMessageModule (copy), ShouldSkipHistoricalMessageModule (copy), GetFFlagExpChatProtectedChatInternalAPIsFunction (copy), ExpChatPerfTracker (copy), FFlagExpChatPerfTrackerTabName (copy), SelectSelectedTabNameModule (copy), ReportMessageReceivedModule (copy), HandleChannelWelcomeMessageModule (copy), FFlagExpChatUnreadTabIndicatorV2WindowModule (copy), MarkChannelUnreadForIncomingMessageModule (copy), ShouldSuppressUnreadForTabMetadataModule (copy), MarkChannelUnreadForSystemMessageModule (copy), ShouldSendHighFrequencyTelemetryModule (copy), ExpChatMessageResponseUserSamplePermyriad (copy), config (copy), TextChannelCreatedFunction (copy), GetNameColorModule (copy), ExpChatRemoveSpaceFromTeamPrefix (copy), GetOtherDisplayNameInWhisperChannelModule (copy), FFlagExpChatDictationContinuousSafetyReminder (copy), DictationSafetyReminderModule (copy), GetFFlagTextChatEnableUniverseChatTabsFunction (copy), ExpChatNewSystemMessagesExperimentation (copy), SummaryMessageRichTextModule (copy), FFlagExpChatEnableGlobalChatSummarySystemMessageModule (copy), ExpChatSuppressGlobalSummaryTabUnread (copy), FFlagEnableInExpChatSummaryOnLuaModule (copy), FFlagEnableClientSummarySystemMessageOnLua (copy), TextChannelRemovedFunction (copy), TextChatMessageChatActionTypeModule (copy), FFlagEnableGlobalChat3pSummaryLuaAppsModule (copy), FFlagAIRephraseSettingEnabled (copy), FFlagChatSummariesSettingEnabled (copy), RobloxReplicatedStorage (copy), GetUserChatSettingsStoreModule (copy), GetChannelsWithKeptHistoryModule (copy), WhenFirstTrueModule (copy), ConnectHistoryReplayModule (copy), FFlagExpChatHistoricalMessagesUnibarUnread (copy), CountParticipantsInTextChannelFunction (copy), FFlagExpChatGlobalTabDefaultModule (copy), FFlagExpChatFixOutgoingUniverseChatBubbleModule (copy), LocalTextChannelParticipantAddedModule (copy), LocalTextChannelParticipantRemovedFunction (copy), FFlagExpChatUseUnifiedTooltipStore (copy), GetChatTooltipStoreModule (copy), ExpChatGlobalTabDefaultExperimentation (copy), UniverseChatChannelAddedModule (copy), IsGlobalTabFirstModule (copy), HasUserSelectedTabModule (copy), UniverseChatChannelSelectedFunction (copy), GetFFlagEnableExpChatUniverseChatTabNamesFunction (copy), GetGlobalWelcomeMessageKeyModule (copy), ShouldFilterGlobalMessageModule (copy), HttpService (copy), LegacyBubbleChatEnabledChangedModule (copy), LegacyBubbleChatSettingsChangedModule (copy), GetEngineFeatureFlagEnableDisplayBubbleModule (copy), Commands (copy), CommandAliasChangedFunction (copy), PromiseModule (copy), watchPlayersService (copy), UIBloxModule (copy), ColorMode (copy), RoactModule (copy), AppModule (copy), GetFFlagExpChatTelemetryEventTriggerModule (copy), ClientAppLoadedFunction (copy), StarterGui (copy), FFlagLuaSupportMicroGamepadPreferredInput (copy), ReportVersionLoadedModule (copy), Version (copy), ChatEnabledSystemMessageModule (copy), IsChatRegionLockedModule (copy), CanPlatformEnableChatModule (copy), FFlagExpChatRefactorEnabledMessageLogicModule (copy), FStringExpChatChatWithTFAmpFeatureNameModule (copy), FStringExpChatChatWithTFAmpNameSpaceModule (copy), AmpApiProvider (copy), AccessResponseEnum (copy), CanOnlyChatInRegionModule (copy), ExpChatHiddenMessagesPromptThresholdLowerBound (copy), ExpChatHiddenMessagesPromptThresholdUpperBound (copy), IsUserChatEnabledModule (copy), FFlagExpChatEnableFOMOUpsellModule (copy), ShouldShowFOMOUpsellModule (copy), FFlagExpChatEnableCrossAgeChatActivityModule (copy), ShouldShowCrossAgeChatActivityModule (copy), FFlagEnableModerateChatRemoteEvent (copy), GetExperienceChatVisualConfigModule (copy), GetChatModerationStoreModule (copy), SignalsModule (copy), NotificationModalsManagerModule (copy), FFlagExpChatPresetChatEnabled (copy), FFlagExpChatPresetChatLoadTestEnabled (copy), InitializePresetChatModule (copy), GetPresetChatStoreModule (copy), FFlagExpChatClearHiddenMessagesPostAgeCheckModule (copy)
+	-- upvalues: NewResult (copy), Dictionary (copy), config1 (copy), CreateStoreModule (copy), CreateDispatchBindableEventModule (copy), BindableEventQueueModule (copy), WatchForErrorsFunction (copy), Context (copy), FFlagExpChatUseAdorneeStore (copy), GetAdorneeStoreModule (copy), FFlagExpChatUseProximityStore (copy), GetProximityStoreModule (copy), GetMessagesStoreModule (copy), FFlagExpChatUseChannelTabsStore (copy), GetChannelTabsStoreModule (copy), FFlagExpChatVirtualizeSystemMessagesModule (copy), GetFFlagExpChatSuppressWelcomeMessageTabUnreadFunction (copy), ExpChatOnlyWakeTextForSelectedTab (copy), IsMessageForOpenChannelModule (copy), GetTransparencyStoreModule (copy), DisplaySystemMessageModule (copy), WriteVirtualSystemMessageModule (copy), FFlagExpChatUseChatConfigStore (copy), GetChatConfigurationStoreModule (copy), GetChatStatusStoreModule (copy), GetGlobalMutedUsersStoreModule (copy), GetFFlagUseCharacterStoreFunction (copy), GetCharacterStoreModule (copy), Analytics (copy), GetFFlagUnreduxLastInputTypeChangedModule (copy), UserInputService (copy), LastInputTypeChangedModule (copy), OnIncomingMessage (copy), Chat (copy), TextChatService (copy), SetUpConfigurationObjectsModule (copy), SetUpClientSettingsModule (copy), FFlagExpChatInitializeWindowFromGameSettings (copy), ChatTopBarButtonActivatedModule (copy), Players (copy), FFlagExpChatRenderHistoricalMessages (copy), IsHistoricalMessageModule (copy), ShouldSkipHistoricalMessageModule (copy), GetFFlagExpChatProtectedChatInternalAPIsFunction (copy), ExpChatPerfTracker (copy), FFlagExpChatPerfTrackerTabName (copy), SelectSelectedTabNameModule (copy), ReportMessageReceivedModule (copy), HandleChannelWelcomeMessageModule (copy), FFlagExpChatUnreadTabIndicatorV2WindowModule (copy), MarkChannelUnreadForIncomingMessageModule (copy), ShouldSuppressUnreadForTabMetadataModule (copy), MarkChannelUnreadForSystemMessageModule (copy), ShouldSendHighFrequencyTelemetryModule (copy), ExpChatMessageResponseUserSamplePermyriad (copy), config (copy), TextChannelCreatedFunction (copy), GetNameColorModule (copy), ExpChatRemoveSpaceFromTeamPrefix (copy), GetOtherDisplayNameInWhisperChannelModule (copy), FFlagExpChatDictationContinuousSafetyReminder (copy), DictationSafetyReminderModule (copy), GetFFlagTextChatEnableUniverseChatTabsFunction (copy), ExpChatNewSystemMessagesExperimentation (copy), SummaryMessageRichTextModule (copy), FFlagExpChatEnableGlobalChatSummarySystemMessageModule (copy), ExpChatSuppressGlobalSummaryTabUnread (copy), FFlagEnableInExpChatSummaryOnLuaModule (copy), FFlagEnableClientSummarySystemMessageOnLua (copy), TextChannelRemovedFunction (copy), TextChatMessageChatActionTypeModule (copy), FFlagEnableGlobalChat3pSummaryLuaAppsModule (copy), FFlagAIRephraseSettingEnabled (copy), FFlagChatSummariesSettingEnabled (copy), RobloxReplicatedStorage (copy), GetUserChatSettingsStoreModule (copy), GetChannelsWithKeptHistoryModule (copy), WhenFirstTrueModule (copy), ConnectHistoryReplayModule (copy), FFlagExpChatHistoricalMessagesUnibarUnread (copy), CountParticipantsInTextChannelFunction (copy), FFlagExpChatGlobalTabDefaultModule (copy), FFlagExpChatFixOutgoingUniverseChatBubbleModule (copy), LocalTextChannelParticipantAddedModule (copy), LocalTextChannelParticipantRemovedFunction (copy), FFlagExpChatUseUnifiedTooltipStore (copy), GetChatTooltipStoreModule (copy), ExpChatGlobalTabDefaultExperimentation (copy), UniverseChatChannelAddedModule (copy), IsGlobalTabFirstModule (copy), HasUserSelectedTabModule (copy), UniverseChatChannelSelectedFunction (copy), GetFFlagEnableExpChatUniverseChatTabNamesFunction (copy), GetGlobalWelcomeMessageKeyModule (copy), ShouldFilterGlobalMessageModule (copy), HttpService (copy), LegacyBubbleChatEnabledChangedModule (copy), LegacyBubbleChatSettingsChangedModule (copy), GetEngineFeatureFlagEnableDisplayBubbleModule (copy), Commands (copy), CommandAliasChangedFunction (copy), PromiseModule (copy), watchPlayersService (copy), UIBloxModule (copy), ColorMode (copy), RoactModule (copy), AppModule (copy), GetFFlagExpChatTelemetryEventTriggerModule (copy), ClientAppLoadedFunction (copy), StarterGui (copy), FFlagLuaSupportMicroGamepadPreferredInput (copy), ReportVersionLoadedModule (copy), Version (copy), ChatEnabledSystemMessageModule (copy), FFlagExpChatMEUpdatedSystemMessageModule (copy), FFlagExpChatPresetChatEnabled (copy), WhenPresetAccessKnownModule (copy), GetPresetChatStoreModule (copy), PrefixWithPresetIconModule (copy), IsChatRegionLockedModule (copy), CanPlatformEnableChatModule (copy), FFlagExpChatRefactorEnabledMessageLogicModule (copy), FStringExpChatChatWithTFAmpFeatureNameModule (copy), FStringExpChatChatWithTFAmpNameSpaceModule (copy), AmpApiProvider (copy), AccessResponseEnum (copy), CanOnlyChatInRegionModule (copy), ExpChatHiddenMessagesPromptThresholdLowerBound (copy), ExpChatHiddenMessagesPromptThresholdUpperBound (copy), IsUserChatEnabledModule (copy), FFlagExpChatEnableFOMOUpsellModule (copy), ShouldShowFOMOUpsellModule (copy), FFlagExpChatEnableCrossAgeChatActivityModule (copy), ShouldShowCrossAgeChatActivityModule (copy), FFlagEnableModerateChatRemoteEvent (copy), GetExperienceChatVisualConfigModule (copy), GetChatModerationStoreModule (copy), SignalsModule (copy), NotificationModalsManagerModule (copy), FFlagExpChatPresetChatLoadTestEnabled (copy), InitializePresetChatModule (copy), FFlagExpChatClearHiddenMessagesPostAgeCheckModule (copy)
 	NewResult:trace("mountClientApp started")
 	local JoinResult = Dictionary.join(config1, p1)
 	local StoreModule = CreateStoreModule()
@@ -1362,12 +1365,11 @@ return function(p1)
 			expChatLoadStartTime = if GetFFlagExpChatTelemetryEventTriggerModule() then os.clock() else nil
 		})
 	})
-	local RandomValue: boolean = UserInputService.PreferredInput == Enum.PreferredInput.Gamepad or FFlagLuaSupportMicroGamepadPreferredInput and UserInputService.PreferredInput == Enum.PreferredInput.MicroGamepad
 	StoreModule:dispatch(ClientAppLoadedFunction({
 		team = Players.LocalPlayer and Players.LocalPlayer.Team,
 		isChatCoreGuiEnabled = StarterGui:GetCoreGuiEnabled(Enum.CoreGuiType.Chat),
 		isTouchEnabled = UserInputService.TouchEnabled,
-		isGamepadEnabled = RandomValue
+		isGamepadEnabled = UserInputService.PreferredInput == Enum.PreferredInput.Gamepad or FFlagLuaSupportMicroGamepadPreferredInput and UserInputService.PreferredInput == Enum.PreferredInput.MicroGamepad
 	}))
 	ReportVersionLoadedModule(Analytics, Version[1])
 	NewResult:trace("Roact.mount to {}", (tostring(JoinResult.parent)))
@@ -1379,10 +1381,47 @@ return function(p1)
 		displayVirtualSystemMessage = if HasMessagesStoreModule then showVirtualChatEnabledSystemMessage else nil
 	})
 	
+	local function displayRegionUnavailableMessage()
+		-- upvalues: DisplaySystemMessageModule (upval), JoinResult (ref)
+		DisplaySystemMessageModule("CoreScripts.TextChat.ChatWindow.ChatDisabled.RegionUnavailable", nil, "Roblox.ChatDisabled.Info", JoinResult.translator, JoinResult.defaultSystemTextChannel, "You can only view system messages here. Chat is not available in your region.")
+	end
+	
+	local FFlagEnableClientSummarySystemMessageOnLua1 = FFlagExpChatMEUpdatedSystemMessageModule and (FFlagExpChatPresetChatEnabled and FFlagEnableClientSummarySystemMessageOnLua)
+	
+	local _ = function(p3, p4, p5)
+		-- upvalues: WhenPresetAccessKnownModule (upval), GetPresetChatStoreModule (upval), DisplaySystemMessageModule (upval), JoinResult (ref), PrefixWithPresetIconModule (upval)
+		WhenPresetAccessKnownModule(GetPresetChatStoreModule(false), function(p6)
+			-- upvalues: DisplaySystemMessageModule (upval), p3 (copy), JoinResult (upval), p4 (copy), PrefixWithPresetIconModule (upval), p5 (copy)
+			if p6 then
+				DisplaySystemMessageModule(p3, nil, "Roblox.ChatDisabled.Info", JoinResult.translator, JoinResult.defaultSystemTextChannel, p4, PrefixWithPresetIconModule)
+				
+				return
+			else
+				p5()
+			end
+		end)
+	end
+	
 	local function updateChatStatus(ChatAvailabilityStatus)
-		-- upvalues: ChatStatusStoreModule (copy), IsChatRegionLockedModule (upval), DisplaySystemMessageModule (upval), JoinResult (ref), ExpChatNewSystemMessagesExperimentation (upval), Flag1 (ref), CanPlatformEnableChatModule (upval), FFlagExpChatRefactorEnabledMessageLogicModule (upval), FStringExpChatChatWithTFAmpFeatureNameModule (upval), FStringExpChatChatWithTFAmpNameSpaceModule (upval), NewResult (upval), AmpApiProvider (upval), LocalPlayer (copy), AccessResponseEnum (upval), HasMessagesStoreModule (copy), showVirtualChatEnabledSystemMessage (copy), CanOnlyChatInRegionModule (upval), ChatEnabledSystemMessageModuleResult (copy)
+		-- upvalues: ChatStatusStoreModule (copy), FFlagEnableClientSummarySystemMessageOnLua1 (copy), displayRegionUnavailableMessage (copy), WhenPresetAccessKnownModule (upval), GetPresetChatStoreModule (upval), DisplaySystemMessageModule (upval), JoinResult (ref), PrefixWithPresetIconModule (upval), IsChatRegionLockedModule (upval), ExpChatNewSystemMessagesExperimentation (upval), Flag1 (ref), CanPlatformEnableChatModule (upval), FFlagExpChatRefactorEnabledMessageLogicModule (upval), FStringExpChatChatWithTFAmpFeatureNameModule (upval), FStringExpChatChatWithTFAmpNameSpaceModule (upval), NewResult (upval), AmpApiProvider (upval), LocalPlayer (copy), AccessResponseEnum (upval), HasMessagesStoreModule (copy), showVirtualChatEnabledSystemMessage (copy), CanOnlyChatInRegionModule (upval), ChatEnabledSystemMessageModuleResult (copy)
 		ChatStatusStoreModule.setChatStatus(ChatAvailabilityStatus)
 		
+		if FFlagEnableClientSummarySystemMessageOnLua1 and ChatAvailabilityStatus == "GeoBlocked" then
+			local v1 = "CoreScripts.TextChat.Description.UseQuickWordsChatIsntAvailableInYourRegion"
+			local v2 = "Use Quick Words to coordinate gameplay. Chat isn’t available in your region."
+			WhenPresetAccessKnownModule(GetPresetChatStoreModule(false), function(p3)
+				-- upvalues: DisplaySystemMessageModule (upval), v1 (copy), JoinResult (upval), v2 (copy), PrefixWithPresetIconModule (upval), displayRegionUnavailableMessage (copy)
+				if p3 then
+					DisplaySystemMessageModule(v1, nil, "Roblox.ChatDisabled.Info", JoinResult.translator, JoinResult.defaultSystemTextChannel, v2, PrefixWithPresetIconModule)
+					
+					return
+				else
+					displayRegionUnavailableMessage()
+				end
+			end)
+			
+			return
+		end
 		if ChatAvailabilityStatus == "GeoBlocked" or ChatAvailabilityStatus ~= "Unknown" and IsChatRegionLockedModule() then
 			DisplaySystemMessageModule("CoreScripts.TextChat.ChatWindow.ChatDisabled.RegionUnavailable", nil, "Roblox.ChatDisabled.Info", JoinResult.translator, JoinResult.defaultSystemTextChannel, "You can only view system messages here. Chat is not available in your region.")
 			
@@ -1508,7 +1547,7 @@ return function(p1)
 	end
 	
 	local Count = 0
-	RandomValue = math.random(ExpChatHiddenMessagesPromptThresholdLowerBound, ExpChatHiddenMessagesPromptThresholdUpperBound)
+	local RandomValue = math.random(ExpChatHiddenMessagesPromptThresholdLowerBound, ExpChatHiddenMessagesPromptThresholdUpperBound)
 	
 	local function handleUserMessageIntentSent(UserIntentMessage)
 		-- upvalues: NewResult (upval), MessagesStoreModule (copy), IsUserChatEnabledModule (upval), LocalPlayer (copy), Count (ref), RandomValue (ref), ExpChatHiddenMessagesPromptThresholdLowerBound (upval), ExpChatHiddenMessagesPromptThresholdUpperBound (upval), DisplaySystemMessageModule (upval), JoinResult (ref), GetTransparencyStoreModule (upval)

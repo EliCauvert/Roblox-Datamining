@@ -1,5 +1,7 @@
 ﻿local BuildExperience = script:FindFirstAncestor("BuildExperience")
 local Parent = BuildExperience.Parent
+local _ = require(BuildExperience.Components.ModelPicker.ModelPickerTypes)
+local FFlagBuildExperienceModelPickerModule = require(BuildExperience.Flags.FFlagBuildExperienceModelPicker)
 local FFlagBuildExperienceLibrary = require(Parent.SharedFlags).FFlagBuildExperienceLibrary
 local FoundationModule = require(Parent.Foundation)
 local FocusNavigationUtilsModule = require(Parent.FocusNavigationUtils)
@@ -11,6 +13,9 @@ local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalizati
 local LocalizationStringsModule = require(BuildExperience.LocalizationStrings)
 local BuildEmptyStateModule = require(BuildExperience.Components.BuildEmptyState.BuildEmptyState)
 local BuildPillMenuPortalModule = require(BuildExperience.Components.BuildPillMenu.BuildPillMenuPortal)
+local BuyMoreRobuxCardModule = require(BuildExperience.Components.Chat.BuyMoreRobuxCard)
+local _ = require(script.Parent.useChatSheetFundingRecovery)
+local BuildPillMenuPageHostModule = require(BuildExperience.Components.BuildPillMenu.BuildPillMenuPageHost)
 local ChatActionsModule = require(BuildExperience.Components.Chat.ChatActions)
 local ChatCardEmphasisProviderModule = require(BuildExperience.Components.Chat.ChatCardEmphasis.ChatCardEmphasisProvider)
 local ChatMessageListModule = require(BuildExperience.Components.Chat.ChatMessageList)
@@ -78,7 +83,7 @@ local function ChatSheetContent(p1)
 end
 
 return function(p1)
-	-- upvalues: FFlagBuildExperienceAnswerFormModule (copy), Sheet (copy), UseLocalizationFunction (copy), LocalizationStringsModule (copy), UseTokensFunction (copy), ReactModule (copy), FFlagBuildExperienceMonetizationNativeUIModule (copy), FocusNavigationEventNameEnum (copy), InputHandlersModule (copy), UseFocusRootFunction (copy), FocusNavigableSurfaceIdentifierEnum (copy), EventMap (copy), ReactUtilsModule (copy), ChatMessageListModule (copy), BuildEmptyStateModule (copy), AnswerFormContainerModule (copy), ChatConstantsModule (copy), FFlagBuildExperienceChatAccordionScrollAnchorModule (copy), ChatScrollAnchorContextModule (copy), FFlagBuildCheckGamePermissionsModule (copy), ChatPermissionsContextModule (copy), View (copy), FFlagBuildExperienceLibrary (copy), DialogSize (copy), ChatSheetContent (copy), ChatActionsModule (copy), FFlagBuildExperienceChatImageAttachmentsModule (copy), FFlagBuildExperienceChatResourceAttachments (copy), FFlagBuildExperienceInGameShell (copy), BuildPillMenuPortalModule (copy), FFlagBuildExperienceChatCardEmphasisModule (copy), ChatCardEmphasisProviderModule (copy)
+	-- upvalues: FFlagBuildExperienceAnswerFormModule (copy), Sheet (copy), UseLocalizationFunction (copy), LocalizationStringsModule (copy), UseTokensFunction (copy), ReactModule (copy), FFlagBuildExperienceMonetizationNativeUIModule (copy), FocusNavigationEventNameEnum (copy), InputHandlersModule (copy), UseFocusRootFunction (copy), FocusNavigableSurfaceIdentifierEnum (copy), EventMap (copy), ReactUtilsModule (copy), ChatMessageListModule (copy), BuildEmptyStateModule (copy), FFlagBuildExperienceModelPickerModule (copy), BuyMoreRobuxCardModule (copy), AnswerFormContainerModule (copy), ChatConstantsModule (copy), FFlagBuildExperienceChatAccordionScrollAnchorModule (copy), ChatScrollAnchorContextModule (copy), FFlagBuildCheckGamePermissionsModule (copy), ChatPermissionsContextModule (copy), View (copy), FFlagBuildExperienceLibrary (copy), ChatActionsModule (copy), FFlagBuildExperienceChatImageAttachmentsModule (copy), FFlagBuildExperienceChatResourceAttachments (copy), DialogSize (copy), ChatSheetContent (copy), BuildPillMenuPageHostModule (copy), FFlagBuildExperienceInGameShell (copy), BuildPillMenuPortalModule (copy), FFlagBuildExperienceChatCardEmphasisModule (copy), ChatCardEmphasisProviderModule (copy)
 	local HasAnswerForm: boolean = FFlagBuildExperienceAnswerFormModule and p1.answerForm ~= nil
 	local SheetComponent = p1.sheetComponent or Sheet
 	local UseLocalizationResult = UseLocalizationFunction({
@@ -118,7 +123,21 @@ return function(p1)
 		onPlaytest = p1.onPlaytest,
 		isPlaytestLoading = p1.isPlaytestLoading
 	})
+	local CreatorCreditRecovery = if FFlagBuildExperienceModelPickerModule then p1.creatorCreditRecovery else nil
+	local Element = nil
 	
+	if CreatorCreditRecovery ~= nil and CreatorCreditRecovery.card.showBuyMoreRobuxCard then
+		local Card = CreatorCreditRecovery.card
+		Element = ReactModule.createElement(BuyMoreRobuxCardModule, {
+			LayoutOrder = 1,
+			title = Card.buyMoreRobuxCardTitle,
+			description = Card.buyMoreRobuxCardDescription,
+			primaryActionText = Card.buyMoreRobuxCardPrimaryActionText,
+			onPrimaryAction = Card.onBuyMoreRobuxCardPrimaryAction,
+			secondaryActionText = Card.buyMoreRobuxCardSecondaryActionText,
+			onSecondaryAction = Card.onBuyMoreRobuxCardSecondaryAction
+		})
+	end
 	if HasAnswerForm then
 		ChatMessageListModuleResult.AnswerForm = ReactModule.createElement(AnswerFormContainerModule, {
 			LayoutOrder = (#p1.messages + 2) * ChatConstantsModule.MESSAGE_LAYOUT_ORDER_STRIDE,
@@ -140,7 +159,31 @@ return function(p1)
 			Permissions = ReactModule.createElement(ChatPermissionsContextModule.Provider, { value = p1.chatPermissions }, ChatMessageListModuleResult)
 		}
 	end
-	local Element = ReactModule.createElement(SheetComponent.Root, {
+	local Element1 = ReactModule.createElement(ChatActionsModule, {
+		LayoutOrder = if Element == nil then nil else 2,
+		modelPicker = if FFlagBuildExperienceModelPickerModule then p1.modelPicker else nil,
+		composerText = p1.composerText,
+		composerErrorText = p1.composerErrorText,
+		onComposerChanged = p1.onComposerChanged,
+		images = if FFlagBuildExperienceChatImageAttachmentsModule then p1.composerImages else nil,
+		onImagesChanged = if FFlagBuildExperienceChatImageAttachmentsModule then p1.onComposerImagesChanged else nil,
+		onRetryImage = if FFlagBuildExperienceChatImageAttachmentsModule then p1.onRetryComposerImage else nil,
+		isSendBlocked = p1.isComposerSendBlocked,
+		tracksExternalText = p1.tracksExternalComposerText,
+		resourceAttachments = if FFlagBuildExperienceChatResourceAttachments then p1.composerResourceAttachments else nil,
+		onRemoveResourceAttachment = if FFlagBuildExperienceChatResourceAttachments then p1.onRemoveComposerResourceAttachment else nil,
+		onActivateResourceAttachment = p1.onActivateComposerResourceAttachment,
+		placeholder = UseLocalizationResult.composerPlaceholder,
+		textBoxRef = p1.textBoxRef,
+		isAssistantResponding = p1.isAssistantResponding,
+		canStopAssistantResponse = p1.canStopAssistantResponse,
+		canSendWhileResponding = p1.canSendWhileResponding,
+		allowsTypingWhileResponding = p1.allowsComposerTypingWhileResponding,
+		isReadOnly = p1.isChatReadOnly,
+		onSend = p1.onSend,
+		onStop = p1.onStop
+	})
+	local Element2 = ReactModule.createElement(SheetComponent.Root, {
 		ref = UseComposedRefResult,
 		isOpen = p1.isOpen,
 		snapPoints = p1.snapPoints,
@@ -169,29 +212,9 @@ return function(p1)
 			}, ChatMessageListModuleResult)
 		}),
 		Actions = if HasAnswerForm then nil else ReactModule.createElement(SheetComponent.Actions, nil, {
-			Footer = ReactModule.createElement(ChatActionsModule, {
-				composerText = p1.composerText,
-				composerErrorText = p1.composerErrorText,
-				onComposerChanged = p1.onComposerChanged,
-				images = if FFlagBuildExperienceChatImageAttachmentsModule then p1.composerImages else nil,
-				onImagesChanged = if FFlagBuildExperienceChatImageAttachmentsModule then p1.onComposerImagesChanged else nil,
-				onRetryImage = if FFlagBuildExperienceChatImageAttachmentsModule then p1.onRetryComposerImage else nil,
-				isSendBlocked = p1.isComposerSendBlocked,
-				tracksExternalText = p1.tracksExternalComposerText,
-				resourceAttachments = if FFlagBuildExperienceChatResourceAttachments then p1.composerResourceAttachments else nil,
-				onRemoveResourceAttachment = if FFlagBuildExperienceChatResourceAttachments then p1.onRemoveComposerResourceAttachment else nil,
-				onActivateResourceAttachment = p1.onActivateComposerResourceAttachment,
-				placeholder = UseLocalizationResult.composerPlaceholder,
-				textBoxRef = p1.textBoxRef,
-				isAssistantResponding = p1.isAssistantResponding,
-				canStopAssistantResponse = p1.canStopAssistantResponse,
-				canSendWhileResponding = p1.canSendWhileResponding,
-				allowsTypingWhileResponding = p1.allowsComposerTypingWhileResponding,
-				isReadOnly = p1.isChatReadOnly,
-				onSend = p1.onSend,
-				onStop = p1.onStop
-			})
+			Footer = if Element == nil then Element1 else ReactModule.createElement(View, { tag = "col gap-medium size-full-0 auto-y" }, { FundingRecovery = Element, Composer = Element1 })
 		}),
+		CreatorCreditPage = if CreatorCreditRecovery == nil or CreatorCreditRecovery.page == nil then nil else ReactModule.createElement(BuildPillMenuPageHostModule, CreatorCreditRecovery.page),
 		TopBarPillMenu = if FFlagBuildExperienceInGameShell or p1.topBarPillMenuTarget == nil then nil else ReactModule.createElement(BuildPillMenuPortalModule, {
 			testId = "build-pill-menu",
 			sheet = UseStateResult,
@@ -200,5 +223,5 @@ return function(p1)
 		})
 	})
 	
-	return if FFlagBuildExperienceChatCardEmphasisModule then ReactModule.createElement(ChatCardEmphasisProviderModule, nil, Element) else Element
+	return if FFlagBuildExperienceChatCardEmphasisModule then ReactModule.createElement(ChatCardEmphasisProviderModule, nil, Element2) else Element2
 end

@@ -27,11 +27,14 @@ local FFlagGateContactAutoSyncByPolicyModule = require(Parent.Flags.FFlagGateCon
 local FIntFriendsCarouselInitialFetchSize = require(Parent1.SharedFlags).FIntFriendsCarouselInitialFetchSize
 local FFlagFriendsCountDataHydrationMigrationEnabled = require(Parent1.SharedFlags).FFlagFriendsCountDataHydrationMigrationEnabled
 local FFlagAddFriendsPageUseSections = require(Parent1.SharedFlags).FFlagAddFriendsPageUseSections
+local FFlagAddFriendsPageHighlightUnseenTrustedRequests = require(Parent1.SharedFlags).FFlagAddFriendsPageHighlightUnseenTrustedRequests
 local FFlagSocialCarouselMigrateRecommendations = require(Parent1.SharedFlags).FFlagSocialCarouselMigrateRecommendations
 local FFlagFriendSortedByPresenceSignalsImplementation = require(Parent1.SharedFlags).FFlagFriendSortedByPresenceSignalsImplementation
 local UseSignalStateFunction = require(Parent1.SignalsReact).useSignalState
 local GetResult = require(Parent1.DataHydration).Friends.FriendsStore.get()
-local FriendsRequestsStore = require(Parent1.DataHydration.FriendsRequests).FriendsRequestsStore
+local FriendsRequestsModule = require(Parent1.DataHydration.FriendsRequests)
+local FriendsRequestsStore = FriendsRequestsModule.FriendsRequestsStore
+local UnseenRequestsStore = FriendsRequestsModule.UnseenRequestsStore
 local FriendsRecommendationsModule = require(Parent1.DataHydration.FriendsRecommendations)
 local FriendsRecommendationsStore = FriendsRecommendationsModule.FriendsRecommendationsStore
 local DataSource = FriendsRecommendationsModule.Enums.DataSource
@@ -53,7 +56,7 @@ return DependenciesModule.UniversalAppPolicy.connect(function(p1)
 		isContactImporterPolicyEnabled = p1.getContactImporterEnabled()
 	}
 end)(function(p1)
-	-- upvalues: UseDispatchFunction (copy), UseLocalUserIdFunction (copy), GetAppFeaturePoliciesFunction (copy), UseFetchContactImporterInfoOnceFunction (copy), EarlierFetchTimeForFriendsCarouselV1 (copy), PaginatedFriendsCarouselIXPModule (copy), ApolloFriendsModule (copy), FFlagFriendSortedByPresenceSignalsImplementation (copy), ReactModule (copy), GetResult (copy), UseSignalStateFunction (copy), UseQueryFunction (copy), Queries (copy), UserIdExistsFunction (copy), CryoModule (copy), FIntFriendsCarouselInitialFetchSize (copy), PrefetchProfileNamesOnStartupV2 (copy), GetResult1 (copy), FFlagSocialCarouselMigrateRecommendations (copy), FriendsRecommendationsStore (copy), DataSource (copy), FFlagGateContactAutoSyncByPolicyModule (copy), UseAutoSyncContactsFunction (copy), FFlagFriendsCountDataHydrationMigrationEnabled (copy), NetworkingFriends (copy), FFlagAddFriendsPageUseSections (copy), FriendsRequestsStore (copy), MessageBusService (copy), RealtimeMessageId (copy), AnalyticsFactory (copy), EventStream (copy), DefaultAnalyticsService (copy), AppStorageService (copy), ProfileQrCodeCameraSettingsModalSeen (copy), PermissionsProtocol (copy)
+	-- upvalues: UseDispatchFunction (copy), UseLocalUserIdFunction (copy), GetAppFeaturePoliciesFunction (copy), UseFetchContactImporterInfoOnceFunction (copy), EarlierFetchTimeForFriendsCarouselV1 (copy), PaginatedFriendsCarouselIXPModule (copy), ApolloFriendsModule (copy), FFlagFriendSortedByPresenceSignalsImplementation (copy), ReactModule (copy), GetResult (copy), UseSignalStateFunction (copy), UseQueryFunction (copy), Queries (copy), UserIdExistsFunction (copy), CryoModule (copy), FIntFriendsCarouselInitialFetchSize (copy), PrefetchProfileNamesOnStartupV2 (copy), GetResult1 (copy), FFlagSocialCarouselMigrateRecommendations (copy), FriendsRecommendationsStore (copy), DataSource (copy), FFlagGateContactAutoSyncByPolicyModule (copy), UseAutoSyncContactsFunction (copy), FFlagFriendsCountDataHydrationMigrationEnabled (copy), NetworkingFriends (copy), FFlagAddFriendsPageUseSections (copy), FFlagAddFriendsPageHighlightUnseenTrustedRequests (copy), UnseenRequestsStore (copy), FriendsRequestsStore (copy), MessageBusService (copy), RealtimeMessageId (copy), AnalyticsFactory (copy), EventStream (copy), DefaultAnalyticsService (copy), AppStorageService (copy), ProfileQrCodeCameraSettingsModalSeen (copy), PermissionsProtocol (copy)
 	local UseDispatchResult = UseDispatchFunction()
 	local UseLocalUserIdResult = UseLocalUserIdFunction()
 	local IsContactImporterPolicyEnabled = p1.isContactImporterPolicyEnabled or GetAppFeaturePoliciesFunction().getContactImporterEnabled()
@@ -138,23 +141,32 @@ end)(function(p1)
 		end
 	end, { UseLocalUserIdResult })
 	ReactModule.useEffect(function()
-		-- upvalues: UserIdExistsFunction (upval), UseLocalUserIdResult (copy), FFlagAddFriendsPageUseSections (upval), FriendsRequestsStore (upval), UseDispatchResult (copy), NetworkingFriends (upval), MessageBusService (upval), RealtimeMessageId (upval)
+		-- upvalues: UserIdExistsFunction (upval), UseLocalUserIdResult (copy), FFlagAddFriendsPageUseSections (upval), FFlagAddFriendsPageHighlightUnseenTrustedRequests (upval), UnseenRequestsStore (upval), FriendsRequestsStore (upval), UseDispatchResult (copy), NetworkingFriends (upval), MessageBusService (upval), RealtimeMessageId (upval)
 		if not UserIdExistsFunction(UseLocalUserIdResult) then
 			return function() end
 		end
 		if FFlagAddFriendsPageUseSections then
-			FriendsRequestsStore.get().getNewFriendsRequestCount()
+			if FFlagAddFriendsPageHighlightUnseenTrustedRequests then
+				UnseenRequestsStore.get().getUnseenRequestCount()
+			else
+				FriendsRequestsStore.get().getNewFriendsRequestCount()
+			end
 		else
 			UseDispatchResult(NetworkingFriends.GetNewFriendRequestsCount.API({ currentUserId = UseLocalUserIdResult }))
 		end
 		local SubscribeResult = MessageBusService:Subscribe(RealtimeMessageId, function()
-			-- upvalues: FFlagAddFriendsPageUseSections (upval), FriendsRequestsStore (upval), UseDispatchResult (upval), NetworkingFriends (upval), UseLocalUserIdResult (upval)
-			if FFlagAddFriendsPageUseSections then
-				FriendsRequestsStore.get().refetchNewFriendRequestCount()
+			-- upvalues: FFlagAddFriendsPageUseSections (upval), FFlagAddFriendsPageHighlightUnseenTrustedRequests (upval), UnseenRequestsStore (upval), FriendsRequestsStore (upval), UseDispatchResult (upval), NetworkingFriends (upval), UseLocalUserIdResult (upval)
+			if not FFlagAddFriendsPageUseSections then
+				UseDispatchResult(NetworkingFriends.GetNewFriendRequestsCount.API({ currentUserId = UseLocalUserIdResult }))
+				
+				return
+			end
+			if FFlagAddFriendsPageHighlightUnseenTrustedRequests then
+				UnseenRequestsStore.get().refetchUnseenRequestCount()
 				
 				return
 			else
-				UseDispatchResult(NetworkingFriends.GetNewFriendRequestsCount.API({ currentUserId = UseLocalUserIdResult }))
+				FriendsRequestsStore.get().refetchNewFriendRequestCount()
 			end
 		end, false, true)
 		

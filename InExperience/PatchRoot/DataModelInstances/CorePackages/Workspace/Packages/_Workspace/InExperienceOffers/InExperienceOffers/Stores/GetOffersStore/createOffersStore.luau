@@ -1,7 +1,6 @@
 ﻿local InExperienceOffers = script:FindFirstAncestor("InExperienceOffers")
 local Parent = InExperienceOffers.Parent
 local _ = require(Parent.Promise)
-local SharedFlagsModule = require(Parent.SharedFlags)
 local SignalsModule = require(Parent.Signals)
 local CreateSessionScopedSignalFunction = require(Parent.SignalsUtils).createSessionScopedSignal
 local GetAllUserOffersModule = require(InExperienceOffers.Api.getAllUserOffers)
@@ -13,8 +12,7 @@ local GetSecondsUntilAnyKeyEmptiesModule = require(InExperienceOffers.Utils.getS
 local IsNotificationEligibleModule = require(InExperienceOffers.Utils.isNotificationEligible)
 local FeatureKeyModule = require(InExperienceOffers.Enums.FeatureKey)
 local NotificationLocationModule = require(InExperienceOffers.Enums.NotificationLocation)
-local FFlagEnableUserOffers = SharedFlagsModule.FFlagEnableUserOffers
-local FFlagHideOfferNotificationsWhenShopEmpty = SharedFlagsModule.FFlagHideOfferNotificationsWhenShopEmpty
+local FFlagHideOfferNotificationsWhenShopEmpty = require(Parent.SharedFlags).FFlagHideOfferNotificationsWhenShopEmpty
 local FFlagOffersRespectExpirationModule = require(InExperienceOffers.Flags.FFlagOffersRespectExpiration)
 local FFlagOffersMergeStoreResultsModule = require(InExperienceOffers.Flags.FFlagOffersMergeStoreResults)
 local FFlagUseMockUserOffersModule = require(InExperienceOffers.Flags.FFlagUseMockUserOffers)
@@ -99,7 +97,7 @@ local _ = function(List)
 end
 
 return function()
-	-- upvalues: CreateSessionScopedSignalFunction (copy), SignalsModule (copy), FFlagHideOfferNotificationsWhenShopEmpty (copy), FFlagOffersShopScopedNotificationModule (copy), FeatureKeyModule (copy), IsNotificationEligibleModule (copy), NotificationLocationModule (copy), FFlagUseMockUserOffersModule (copy), MockGetAllUserOffersModule (copy), GetAllUserOffersModule (copy), normalizePresentationData (copy), FFlagOffersRespectExpirationModule (copy), bucketResponse (copy), mergeRequestedKeys (copy), FFlagEnableUserOffers (copy), FFlagOffersMergeStoreResultsModule (copy), OffersDebugLoggerModule (copy), FIntOfferExpirationRefetchMaxCountModule (copy), FIntOfferExpirationRefetchBufferSecondsModule (copy), FIntOfferExpirationRefetchJitterSecondsModule (copy), GetSecondsUntilAnyKeyEmptiesModule (copy), FFlagOffersPerKeyExpiryRefetchModule (copy), GetSecondsUntilNextExpirationModule (copy)
+	-- upvalues: CreateSessionScopedSignalFunction (copy), SignalsModule (copy), FFlagHideOfferNotificationsWhenShopEmpty (copy), FFlagOffersShopScopedNotificationModule (copy), FeatureKeyModule (copy), IsNotificationEligibleModule (copy), NotificationLocationModule (copy), FFlagUseMockUserOffersModule (copy), MockGetAllUserOffersModule (copy), GetAllUserOffersModule (copy), normalizePresentationData (copy), FFlagOffersRespectExpirationModule (copy), bucketResponse (copy), mergeRequestedKeys (copy), FFlagOffersMergeStoreResultsModule (copy), OffersDebugLoggerModule (copy), FIntOfferExpirationRefetchMaxCountModule (copy), FIntOfferExpirationRefetchBufferSecondsModule (copy), FIntOfferExpirationRefetchJitterSecondsModule (copy), GetSecondsUntilAnyKeyEmptiesModule (copy), FFlagOffersPerKeyExpiryRefetchModule (copy), GetSecondsUntilNextExpirationModule (copy)
 	local SessionScopedSignal, SessionScopedSignal2 = CreateSessionScopedSignalFunction(nil)
 	local SessionScopedSignal1, SessionScopedSignal2_1 = CreateSessionScopedSignalFunction(nil)
 	local SessionScopedSignal3, SessionScopedSignal2_2 = CreateSessionScopedSignalFunction(false)
@@ -197,8 +195,7 @@ return function()
 	end
 	
 	local function fetchOffers(p4)
-		-- upvalues: FFlagEnableUserOffers (upval), FFlagOffersRespectExpirationModule (upval), v1 (ref), DelayedThread (ref), Count1 (ref), MockGetAllUserOffersModule1 (copy), FFlagOffersMergeStoreResultsModule (upval), bucketResponse (upval), mergeRequestedKeys (upval), SessionScopedSignal (copy), SessionScopedSignal2 (copy), Callback (ref), commitOffers (copy), OffersDebugLoggerModule (upval)
-		if not FFlagEnableUserOffers then return end
+		-- upvalues: FFlagOffersRespectExpirationModule (upval), v1 (ref), DelayedThread (ref), Count1 (ref), MockGetAllUserOffersModule1 (copy), FFlagOffersMergeStoreResultsModule (upval), bucketResponse (upval), mergeRequestedKeys (upval), SessionScopedSignal (copy), SessionScopedSignal2 (copy), Callback (ref), commitOffers (copy), OffersDebugLoggerModule (upval)
 		if not FFlagOffersRespectExpirationModule then
 			MockGetAllUserOffersModule1(p4):andThen(function(Result)
 				-- upvalues: FFlagOffersMergeStoreResultsModule (upval), p4 (copy), bucketResponse (upval), mergeRequestedKeys (upval), SessionScopedSignal (upval), SessionScopedSignal2 (upval), FFlagOffersRespectExpirationModule (upval), Callback (upval), commitOffers (upval)

@@ -68,6 +68,7 @@
 	OpenMarketplaceCatalogSeeAll = "OpenMarketplaceCatalogSeeAll",
 	OpenCatalogItemDetails = "OpenCatalogItemDetails",
 	OpenItemInfoRowPrompt = "OpenItemInfoRowPrompt",
+	ToggleCatalogItemFavorite = "ToggleCatalogItemFavorite",
 	OpenCatalogItemExperiences = "OpenCatalogItemExperiences",
 	OpenCatalogItemCreatorProfile = "OpenCatalogItemCreatorProfile",
 	PlayCatalogItemAttributionExperience = "PlayCatalogItemAttributionExperience",
@@ -93,5 +94,7 @@
 	PlayWithRewardAd = "PlayWithRewardAd",
 	ShowToast = "ShowToast",
 	JoinCommunity = "JoinCommunity",
-	ActionSequence = "ActionSequence"
+	ActionSequence = "ActionSequence",
+	SubmitCustomFormResponse = "SubmitCustomFormResponse",
+	RefreshCustomFormResults = "RefreshCustomFormResults"
 }

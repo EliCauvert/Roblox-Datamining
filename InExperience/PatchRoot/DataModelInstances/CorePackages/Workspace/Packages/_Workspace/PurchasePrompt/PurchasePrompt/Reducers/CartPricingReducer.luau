@@ -29,7 +29,6 @@ return (require(Parent.PurchasePromptDeps).Rodux.createReducer(config, {
 	[require(PurchasePrompt.Actions.RequestBundlePurchase).name] = clear,
 	[require(PurchasePrompt.Actions.RequestGamepassPurchase).name] = clear,
 	[require(PurchasePrompt.Actions.RequestProductPurchase).name] = clear,
-	[require(PurchasePrompt.Actions.RequestPremiumPurchase).name] = clear,
 	[require(PurchasePrompt.Actions.RequestSubscriptionPurchase).name] = clear,
 	[require(PurchasePrompt.Actions.RequestAvatarCreationFeePurchase).name] = clear,
 	[require(PurchasePrompt.Actions.RequestExperiencePurchase).name] = clear,

@@ -15,6 +15,22 @@ AnalyticsModule.__index = AnalyticsModule
 AnalyticsModule.INFO = "info"
 AnalyticsModule.WARNING = "warning"
 AnalyticsModule.ERROR = "error"
+local config = {
+	Shown = {
+		eventName = "VoiceRewarmShown",
+		description = "The voice rewarm join-voice icon became available in the Chrome top bar, at most once per session. Rewarm clicks from VR or the settings menu have no matching Shown. customFields: rearmed (true when the user had already consumed a rewarm and FIntVoiceRewarmReArmCount re-armed it).",
+		links = "",
+		backends = { "RobloxTelemetryCounter" },
+		lastUpdated = { 2026, 10, 22 }
+	},
+	Clicked = {
+		eventName = "VoiceRewarmClicked",
+		description = "The user clicked the voice rewarm join-voice icon, consuming the rewarm. customFields: rearmed, consequence (what JoinVoice did, e.g. FirstJoinSession, FaeUpsell, ConsentModal, or none).",
+		links = "",
+		backends = { "RobloxTelemetryCounter" },
+		lastUpdated = { 2026, 10, 22 }
+	}
+}
 
 function AnalyticsModule.new(_impl)
 	-- upvalues: RbxAnalyticsService (copy), AnalyticsModule (copy)
@@ -298,6 +314,18 @@ function AnalyticsModule:reportVoiceVolumeImpressions(p1)
 		},
 		standardizedFields = { "addPlaceId", "addUniverseId" }
 	})
+end
+
+function AnalyticsModule:reportVoiceRewarmShown(p1)
+	-- upvalues: TelemetryService (copy), config (copy)
+	TelemetryService:LogCounter(config.Shown, { customFields = { rearmed = tostring(p1) } }, 1)
+end
+
+function AnalyticsModule:reportVoiceRewarmClicked(p1, p2)
+	-- upvalues: TelemetryService (copy), config (copy)
+	TelemetryService:LogCounter(config.Clicked, {
+		customFields = { rearmed = tostring(p1), consequence = p2 or "none" }
+	}, 1)
 end
 
 return AnalyticsModule

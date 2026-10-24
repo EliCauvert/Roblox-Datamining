@@ -2,5 +2,6 @@
 	CreationFlowLocalization = require(script.CreationFlowLocalization),
 	CreationFlowState = require(script.CreationFlowState),
 	DialogType = require(script.DialogType),
-	DragHandle = require(script.DragHandle)
+	DragHandle = require(script.DragHandle),
+	MomentType = require(script.MomentType)
 }

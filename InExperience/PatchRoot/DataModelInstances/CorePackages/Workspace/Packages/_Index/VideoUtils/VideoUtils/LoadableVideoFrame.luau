@@ -1,4 +1,5 @@
-﻿local VideoUtils = script:FindFirstAncestor("VideoUtils")
+﻿local ContentProvider = game:GetService("ContentProvider")
+local VideoUtils = script:FindFirstAncestor("VideoUtils")
 local Parent = VideoUtils.Parent
 local VideoFrameWrapperModule = require(VideoUtils.VideoFrameWrapper)
 local GetAuthorizedVideoUriModule = require(VideoUtils.getAuthorizedVideoUri)
@@ -15,19 +16,81 @@ local FFlagLuaAppEnableHomepageOneByTwoTile = require(Parent.SharedFlags).FFlagL
 local FFlagLuaAppHomePageFirstImageLoadObserver = require(Parent.SharedFlags).FFlagLuaAppHomePageFirstImageLoadObserver
 local FFlagLuaAppSduiVideoThumbnail = require(Parent.SharedFlags).FFlagLuaAppSduiVideoThumbnail
 local FFlagLuaAppHomeMomentVideoFallback = require(Parent.SharedFlags).FFlagLuaAppHomeMomentVideoFallback
+local FFlagLuaAppVideoLoadFailureFallback = require(Parent.SharedFlags).FFlagLuaAppVideoLoadFailureFallback
 
 local function LoadableVideoFrame(Image, p1)
-	-- upvalues: ReactModule (copy), FFlagLuaAppEdpMediaGalleryAutoAdvance (copy), FFlagLuaAppEdpMediaGalleryFullScreen (copy), FFlagLuaAppEdpConsoleMediaGalleryVideo (copy), FFlagLuaAppEnableHomepageOneByTwoTile (copy), ArgCheckModule (copy), FFlagLuaAppHomePageFirstImageLoadObserver (copy), VideoFrameWrapperModule (copy), FFlagLuaAppHomeMomentVideoFallback (copy), GetAuthorizedVideoUriModule (copy), FFlagLuaAppSduiVideoThumbnail (copy), LoadableImage (copy), Skeleton (copy), Radius (copy)
+	-- upvalues: ReactModule (copy), FFlagLuaAppVideoLoadFailureFallback (copy), FFlagLuaAppEdpMediaGalleryAutoAdvance (copy), FFlagLuaAppEdpMediaGalleryFullScreen (copy), FFlagLuaAppEdpConsoleMediaGalleryVideo (copy), FFlagLuaAppEnableHomepageOneByTwoTile (copy), FFlagLuaAppHomeMomentVideoFallback (copy), GetAuthorizedVideoUriModule (copy), ContentProvider (copy), ArgCheckModule (copy), FFlagLuaAppHomePageFirstImageLoadObserver (copy), VideoFrameWrapperModule (copy), FFlagLuaAppSduiVideoThumbnail (copy), LoadableImage (copy), Skeleton (copy), Radius (copy)
 	local UseStateResult, UseStateResult2 = ReactModule.useState(false)
-	local UseRefResult = if FFlagLuaAppEdpMediaGalleryAutoAdvance or FFlagLuaAppEdpMediaGalleryFullScreen or FFlagLuaAppEdpConsoleMediaGalleryVideo or FFlagLuaAppEnableHomepageOneByTwoTile then nil else ReactModule.useRef(nil)
-	local UseRefResult1 = ReactModule.useRef(nil)
+	local v1 = nil
+	local Callback = nil
+	local UseRefResult = nil
+	local UseRefResult1 = nil
 	
-	if Image.shouldStartPlayback and UseRefResult1.current == nil then
-		UseRefResult1.current = tick()
+	if FFlagLuaAppVideoLoadFailureFallback then
+		v1, Callback = ReactModule.useState(false)
+		UseRefResult = ReactModule.useRef(nil)
+		UseRefResult1 = ReactModule.useRef(Image.onVideoLoadFailed)
+		UseRefResult1.current = Image.onVideoLoadFailed
+	end
+	local UseRefResult2 = if FFlagLuaAppEdpMediaGalleryAutoAdvance or FFlagLuaAppEdpMediaGalleryFullScreen or FFlagLuaAppEdpConsoleMediaGalleryVideo or FFlagLuaAppEnableHomepageOneByTwoTile then nil else ReactModule.useRef(nil)
+	local UseRefResult3 = ReactModule.useRef(nil)
+	
+	if Image.shouldStartPlayback and UseRefResult3.current == nil then
+		UseRefResult3.current = tick()
 	elseif not Image.shouldStartPlayback then
-		UseRefResult1.current = nil
+		UseRefResult3.current = nil
 	end
 	local IsNotThumbnailMatch: boolean = Image.thumbnail ~= nil and Image.thumbnail ~= ""
+	local Video = nil
+	
+	if FFlagLuaAppVideoLoadFailureFallback then
+		Video = if FFlagLuaAppHomeMomentVideoFallback then GetAuthorizedVideoUriModule(Image.video, Image.accessContext) else Image.video
+		ReactModule.useEffect(function()
+			-- upvalues: Callback (ref), Image (copy), Video (ref), UseRefResult (ref), UseRefResult1 (ref), ContentProvider (upval)
+			Callback(false)
+			
+			if Image.shouldStartPlayback and Video ~= "" then
+				local Current = { finished = false, failed = false, connection = nil }
+				UseRefResult.current = Current
+				
+				local function onFetchStatus(AssetFetchStatus)
+					-- upvalues: Current (copy), Callback (upval), UseRefResult1 (upval)
+					if Current.finished or AssetFetchStatus ~= Enum.AssetFetchStatus.Failure and AssetFetchStatus ~= Enum.AssetFetchStatus.TimedOut then return end
+					Current.finished = true
+					Current.failed = true
+					
+					if Current.connection then
+						Current.connection:Disconnect()
+					end
+					Callback(true)
+					
+					if UseRefResult1.current then
+						UseRefResult1.current(AssetFetchStatus.Name)
+					end
+				end
+				
+				Current.connection = ContentProvider:GetAssetFetchStatusChangedSignal(Video):Connect(onFetchStatus)
+				onFetchStatus(ContentProvider:GetAssetFetchStatus(Video))
+				
+				return function()
+					-- upvalues: Current (copy), UseRefResult (upval)
+					Current.finished = true
+					UseRefResult.current = nil
+					
+					if Current.connection then
+						Current.connection:Disconnect()
+					end
+				end
+			else
+				return nil
+			end
+		end, {
+			Video,
+			Image.shouldStartPlayback,
+			UseRefResult,
+			UseRefResult1
+		})
+	end
 	local UseResult = if FFlagLuaAppEdpMediaGalleryAutoAdvance then ReactModule.useCallback(function()
 		-- upvalues: Image (copy)
 		if Image.onVideoEnded then
@@ -44,13 +107,23 @@ local function LoadableVideoFrame(Image, p1)
 	}, {
 		VideoFrame = ReactModule.createElement(VideoFrameWrapperModule, {
 			zIndex = 4,
-			videoFrameRef = if FFlagLuaAppEdpMediaGalleryAutoAdvance or FFlagLuaAppEdpMediaGalleryFullScreen or FFlagLuaAppEdpConsoleMediaGalleryVideo or FFlagLuaAppEnableHomepageOneByTwoTile then p1 else UseRefResult,
-			video = if FFlagLuaAppHomeMomentVideoFallback then GetAuthorizedVideoUriModule(Image.video, Image.accessContext) else Image.video,
-			isPlaying = Image.shouldStartPlayback,
+			videoFrameRef = if FFlagLuaAppEdpMediaGalleryAutoAdvance or FFlagLuaAppEdpMediaGalleryFullScreen or FFlagLuaAppEdpConsoleMediaGalleryVideo or FFlagLuaAppEnableHomepageOneByTwoTile then p1 else UseRefResult2,
+			video = if FFlagLuaAppVideoLoadFailureFallback then Video elseif FFlagLuaAppHomeMomentVideoFallback then GetAuthorizedVideoUriModule(Image.video, Image.accessContext) else Image.video,
+			isPlaying = Image.shouldStartPlayback and (not FFlagLuaAppVideoLoadFailureFallback or not v1),
 			looped = Image.looped,
 			volume = if Image.muted then 0 else nil,
 			onLoaded = ReactModule.useCallback(function()
-				-- upvalues: FFlagLuaAppEdpMediaGalleryAutoAdvance (upval), FFlagLuaAppEdpMediaGalleryFullScreen (upval), FFlagLuaAppEdpConsoleMediaGalleryVideo (upval), FFlagLuaAppEnableHomepageOneByTwoTile (upval), p1 (copy), UseRefResult (copy), ArgCheckModule (upval), UseRefResult1 (copy), Image (copy), UseStateResult2 (copy)
+				-- upvalues: FFlagLuaAppVideoLoadFailureFallback (upval), UseRefResult (ref), FFlagLuaAppEdpMediaGalleryAutoAdvance (upval), FFlagLuaAppEdpMediaGalleryFullScreen (upval), FFlagLuaAppEdpConsoleMediaGalleryVideo (upval), FFlagLuaAppEnableHomepageOneByTwoTile (upval), p1 (copy), UseRefResult2 (copy), ArgCheckModule (upval), UseRefResult3 (copy), Image (copy), UseStateResult2 (copy)
+				if FFlagLuaAppVideoLoadFailureFallback and UseRefResult.current then
+					local Current1 = UseRefResult.current
+					
+					if Current1.failed then return end
+					Current1.finished = true
+					
+					if Current1.connection then
+						Current1.connection:Disconnect()
+					end
+				end
 				local Current = nil
 				
 				if FFlagLuaAppEdpMediaGalleryAutoAdvance or FFlagLuaAppEdpMediaGalleryFullScreen or FFlagLuaAppEdpConsoleMediaGalleryVideo or FFlagLuaAppEnableHomepageOneByTwoTile then
@@ -60,12 +133,12 @@ local function LoadableVideoFrame(Image, p1)
 						warn(`unsupported ref type: {typeof(p1)}`)
 					end
 				else
-					Current = UseRefResult.current
+					Current = UseRefResult2.current
 				end
 				if Current ~= nil then
 					local CurrentTime = tick()
-					ArgCheckModule.assert(UseRefResult1.current and UseRefResult1.current <= CurrentTime)
-					local CurrentTimeDelta: number = if UseRefResult1.current and UseRefResult1.current <= CurrentTime then CurrentTime - UseRefResult1.current else -1
+					ArgCheckModule.assert(UseRefResult3.current and UseRefResult3.current <= CurrentTime)
+					local CurrentTimeDelta: number = if UseRefResult3.current and UseRefResult3.current <= CurrentTime then CurrentTime - UseRefResult3.current else -1
 					
 					if Image.onVideoLoaded then
 						Image.onVideoLoaded(Current.TimeLength, CurrentTimeDelta)
@@ -74,8 +147,9 @@ local function LoadableVideoFrame(Image, p1)
 				end
 			end, {
 				Image.onVideoLoaded,
-				if FFlagLuaAppEdpMediaGalleryAutoAdvance or FFlagLuaAppEdpMediaGalleryFullScreen or FFlagLuaAppEdpConsoleMediaGalleryVideo or FFlagLuaAppEnableHomepageOneByTwoTile then p1 else UseRefResult,
-				UseRefResult1
+				if FFlagLuaAppEdpMediaGalleryAutoAdvance or FFlagLuaAppEdpMediaGalleryFullScreen or FFlagLuaAppEdpConsoleMediaGalleryVideo or FFlagLuaAppEnableHomepageOneByTwoTile then p1 else UseRefResult2,
+				UseRefResult3,
+				if FFlagLuaAppVideoLoadFailureFallback then UseRefResult else nil
 			}),
 			onLooped = ReactModule.useCallback(function()
 				-- upvalues: Image (copy)
@@ -102,7 +176,7 @@ local function LoadableVideoFrame(Image, p1)
 			ScaleType = Image.ScaleType,
 			TileSize = if Image.ScaleType == Enum.ScaleType.Tile and Image.cornerRadius then UDim2.new(1, 0, 1, -Image.cornerRadius) else nil
 		}) else nil,
-		Skeleton = if Image.shouldStartPlayback and not UseStateResult then ReactModule.createElement(Skeleton, {
+		Skeleton = if Image.shouldStartPlayback and not UseStateResult and (not FFlagLuaAppVideoLoadFailureFallback or not v1) then ReactModule.createElement(Skeleton, {
 			ZIndex = 3,
 			Size = UDim2.fromScale(1, 1),
 			radius = if Image.cornerRadius then Radius.Medium else nil

@@ -16,6 +16,8 @@ local UseNavigationFunction = require(Parent.Navigation).useNavigation
 local EnumsModule = require(AmpUpsell.Common.Enums)
 local ActionTypeEnum = EnumsModule.ActionTypeEnum
 local VPCStepEnum = EnumsModule.VPCStepEnum
+local VPCRetryBehaviorEnum = EnumsModule.VPCRetryBehaviorEnum
+local GetRetryBehaviorFromErrorCodeAndRetryNumFunction = require(AmpUpsell.Common.VPCErrorUtils).getRetryBehaviorFromErrorCodeAndRetryNum
 local AccessResponseEnum = EnumsModule.AccessResponseEnum
 local AuthAnalyticsModule = require(Parent.AuthAnalytics)
 local AuthMsgShownFunction = AuthAnalyticsModule.Events.authMsgShown
@@ -29,9 +31,10 @@ local AppLinking = require(Parent.RoactServiceTags).AppLinking
 local GetFFlagEnableExternalBrowserForVPCPrivacyPolicyModule = require(AmpUpsell.Flags.GetFFlagEnableExternalBrowserForVPCPrivacyPolicy)
 local RoactNetworking = require(Parent.RoactServiceTags).RoactNetworking
 local FFlagLuaAppOdpRequestSentToast = require(Parent.SharedFlags).FFlagLuaAppOdpRequestSentToast
+local FFlagLuaAppAmpWizardSendAnalyticsSessionId = require(Parent.SharedFlags).FFlagLuaAppAmpWizardSendAnalyticsSessionId
 
 return function(p1)
-	-- upvalues: VPCApiProviderModule (copy), AmpApiProviderModule (copy), UseRoactServiceFunction (copy), RoactNetworking (copy), GetFFlagEnableExternalBrowserForVPCPrivacyPolicyModule (copy), UseAppPolicyFunction (copy), AppLinking (copy), ReactModule (copy), ActionTypeEnum (copy), VPCStepEnum (copy), UseLocalizationFunction (copy), VpcUpsellGatherEmailStrings (copy), UseNavigationFunction (copy), ArgCheckModule (copy), GetFStringPrivacyPolicyLinkModule (copy), AppScreensModule (copy), IsStringEmailFunction (copy), FFlagLuaAppOdpRequestSentToast (copy), AccessResponseEnum (copy), AuthMsgShownFunction (copy), VpcEventConstants (copy), VPCConfirmationScreenModule (copy), VpcConfirmationScreenStrings (copy), AuthButtonClickFunction (copy), VPCNewParentUpsellModule (copy), AuthFormInteractionFunction (copy), VPCErrorScreenModule (copy)
+	-- upvalues: VPCApiProviderModule (copy), AmpApiProviderModule (copy), UseRoactServiceFunction (copy), RoactNetworking (copy), GetFFlagEnableExternalBrowserForVPCPrivacyPolicyModule (copy), UseAppPolicyFunction (copy), AppLinking (copy), ReactModule (copy), ActionTypeEnum (copy), VPCStepEnum (copy), UseLocalizationFunction (copy), VpcUpsellGatherEmailStrings (copy), UseNavigationFunction (copy), ArgCheckModule (copy), GetFStringPrivacyPolicyLinkModule (copy), AppScreensModule (copy), IsStringEmailFunction (copy), FFlagLuaAppOdpRequestSentToast (copy), AccessResponseEnum (copy), FFlagLuaAppAmpWizardSendAnalyticsSessionId (copy), GetRetryBehaviorFromErrorCodeAndRetryNumFunction (copy), VPCRetryBehaviorEnum (copy), AuthMsgShownFunction (copy), VpcEventConstants (copy), VPCConfirmationScreenModule (copy), VpcConfirmationScreenStrings (copy), AuthButtonClickFunction (copy), VPCNewParentUpsellModule (copy), AuthFormInteractionFunction (copy), VPCErrorScreenModule (copy)
 	local OnCancelFunction = p1.onCancel
 	local OnSuccessFunction = p1.onSuccess
 	local VpcApiProvider = if p1.vpcApiProvider then p1.vpcApiProvider else VPCApiProviderModule
@@ -44,6 +47,7 @@ return function(p1)
 	local IsInExperienceEntry = if p1.isInExperienceEntry then p1.isInExperienceEntry else false
 	local OnRequestSent = p1.onRequestSent
 	local AnalyticsSessionId = p1.analyticsSessionId
+	local VpcEntryAnalytics = p1.vpcEntryAnalytics
 	local UseRoactServiceResult = UseRoactServiceFunction(RoactNetworking)
 	local v1 = false
 	local v2 = nil
@@ -182,7 +186,43 @@ return function(p1)
 			getIsChildSubjectToParentalControls()
 		end
 	end, { UseStateResult7 })
+	local UseRefResult = if FFlagLuaAppAmpWizardSendAnalyticsSessionId then ReactModule.useRef(nil) else nil
+	local UseRefResult1 = if FFlagLuaAppAmpWizardSendAnalyticsSessionId then ReactModule.useRef(false) else nil
 	
+	if FFlagLuaAppAmpWizardSendAnalyticsSessionId then
+		ReactModule.useEffect(function()
+			-- upvalues: VpcEntryAnalytics (copy), UseRefResult (copy), UseStateResult (copy), VPCStepEnum (upval), UseRefResult1 (copy), GetRetryBehaviorFromErrorCodeAndRetryNumFunction (upval), Unknown (copy), UseStateResult7 (copy), VPCRetryBehaviorEnum (upval)
+			if VpcEntryAnalytics == nil or UseRefResult == nil or UseRefResult.current == UseStateResult then return end
+			UseRefResult.current = UseStateResult
+			
+			if UseStateResult == VPCStepEnum.NewParentCollectEmail then
+				if UseRefResult1 then
+					UseRefResult1.current = false
+				end
+				VpcEntryAnalytics.remoteEmailShown()
+				
+				return
+			elseif UseStateResult == VPCStepEnum.RequestSent then
+				VpcEntryAnalytics.remoteRequestSent()
+				
+				return
+			else
+				if UseStateResult == VPCStepEnum.Error then
+					if GetRetryBehaviorFromErrorCodeAndRetryNumFunction(Unknown, UseStateResult7) == VPCRetryBehaviorEnum.Success then
+						VpcEntryAnalytics.remoteRequestSent()
+						
+						return
+					end
+					VpcEntryAnalytics.remoteRequestError(Unknown)
+				end
+			end
+		end, {
+			UseStateResult,
+			Unknown,
+			UseStateResult7,
+			VpcEntryAnalytics
+		})
+	end
 	if UseStateResult == VPCStepEnum.RequestSent then
 		AuthMsgShownFunction(EntryPointEventCtx, "", VpcEventConstants.confirmationPageLoadField, "")
 		
@@ -190,10 +230,20 @@ return function(p1)
 			messageStrings = VpcConfirmationScreenStrings,
 			parentEmails = UseStateResult1,
 			onAck = function()
-				-- upvalues: AuthButtonClickFunction (upval), EntryPointEventCtx (copy), VpcEventConstants (upval), OnSuccessFunction (copy)
+				-- upvalues: AuthButtonClickFunction (upval), EntryPointEventCtx (copy), VpcEventConstants (upval), VpcEntryAnalytics (copy), OnSuccessFunction (copy)
 				AuthButtonClickFunction(EntryPointEventCtx, VpcEventConstants.confirmationPageButton)
+				
+				if VpcEntryAnalytics then
+					VpcEntryAnalytics.remoteRequestOk()
+				end
 				OnSuccessFunction()
 			end,
+			onClose = if VpcEntryAnalytics then function()
+				-- upvalues: VpcEntryAnalytics (copy), AuthButtonClickFunction (upval), EntryPointEventCtx (copy), VpcEventConstants (upval), OnSuccessFunction (copy)
+				VpcEntryAnalytics.remoteRequestClose()
+				AuthButtonClickFunction(EntryPointEventCtx, VpcEventConstants.confirmationPageButton)
+				OnSuccessFunction()
+			end else nil,
 			disablePortal = DisablePortal,
 			isInExperienceEntry = IsInExperienceEntry
 		})
@@ -201,17 +251,32 @@ return function(p1)
 		AuthMsgShownFunction(EntryPointEventCtx, "", VpcEventConstants.collectEmailPageLoadField, "")
 		
 		return ReactModule.createElement(VPCNewParentUpsellModule, {
-			onCancel = OnCancelFunction,
+			onCancel = function()
+				-- upvalues: VpcEntryAnalytics (copy), OnCancelFunction (copy)
+				if VpcEntryAnalytics then
+					VpcEntryAnalytics.remoteRequestClose()
+				end
+				OnCancelFunction()
+			end,
 			onCollectEmailAndSendRequest = function(p2)
-				-- upvalues: AuthButtonClickFunction (upval), EntryPointEventCtx (copy), VpcEventConstants (upval), UseStateResult2_1 (copy), UseStateResult2 (copy), VPCStepEnum (upval), sendRequestToNewParent (copy)
+				-- upvalues: AuthButtonClickFunction (upval), EntryPointEventCtx (copy), VpcEventConstants (upval), VpcEntryAnalytics (copy), UseStateResult2_1 (copy), UseStateResult2 (copy), VPCStepEnum (upval), sendRequestToNewParent (copy)
 				AuthButtonClickFunction(EntryPointEventCtx, VpcEventConstants.collectEmailPageSubmitButton)
+				
+				if VpcEntryAnalytics then
+					VpcEntryAnalytics.remoteEmailSubmit()
+				end
 				UseStateResult2_1({ p2 })
 				UseStateResult2(VPCStepEnum.NewParentSendRequest)
 				sendRequestToNewParent(p2)
 			end,
 			onTextChange = function(p2)
-				-- upvalues: AuthFormInteractionFunction (upval), EntryPointEventCtx (copy), VpcEventConstants (upval), handleEmailInput (copy)
+				-- upvalues: AuthFormInteractionFunction (upval), EntryPointEventCtx (copy), VpcEventConstants (upval), VpcEntryAnalytics (copy), UseRefResult1 (copy), handleEmailInput (copy)
 				AuthFormInteractionFunction(EntryPointEventCtx, VpcEventConstants.collectEmailPageInteractFormField)
+				
+				if VpcEntryAnalytics and UseRefResult1 and not UseRefResult1.current and p2 ~= "" then
+					UseRefResult1.current = true
+					VpcEntryAnalytics.remoteEmailEntered()
+				end
 				handleEmailInput(p2)
 			end,
 			canSendRequest = UseStateResult4,
@@ -235,23 +300,45 @@ return function(p1)
 		return ReactModule.createElement(VPCErrorScreenModule, {
 			errorCode = Unknown,
 			onRetryAmp = function()
-				-- upvalues: AuthButtonClickFunction (upval), EntryPointEventCtx (copy), VpcEventConstants (upval), OnRetryAmpFunction (copy)
+				-- upvalues: AuthButtonClickFunction (upval), EntryPointEventCtx (copy), VpcEventConstants (upval), VpcEntryAnalytics (copy), OnRetryAmpFunction (copy)
 				AuthButtonClickFunction(EntryPointEventCtx, VpcEventConstants.errorPageRetryButton)
+				
+				if VpcEntryAnalytics then
+					VpcEntryAnalytics.remoteRequestRetry()
+				end
 				OnRetryAmpFunction()
 			end,
 			onRetryVPC = function()
-				-- upvalues: AuthButtonClickFunction (upval), EntryPointEventCtx (copy), VpcEventConstants (upval), onRetryVPC (copy)
+				-- upvalues: AuthButtonClickFunction (upval), EntryPointEventCtx (copy), VpcEventConstants (upval), VpcEntryAnalytics (copy), onRetryVPC (copy)
 				AuthButtonClickFunction(EntryPointEventCtx, VpcEventConstants.errorPageRetryButton)
+				
+				if VpcEntryAnalytics then
+					VpcEntryAnalytics.remoteRequestRetry()
+				end
 				onRetryVPC()
 			end,
 			onCancel = function()
-				-- upvalues: AuthButtonClickFunction (upval), EntryPointEventCtx (copy), VpcEventConstants (upval), OnCancelFunction (copy)
+				-- upvalues: AuthButtonClickFunction (upval), EntryPointEventCtx (copy), VpcEventConstants (upval), VpcEntryAnalytics (copy), OnCancelFunction (copy)
 				AuthButtonClickFunction(EntryPointEventCtx, VpcEventConstants.errorPageCancelButton)
+				
+				if VpcEntryAnalytics then
+					VpcEntryAnalytics.remoteRequestCancel()
+				end
 				OnCancelFunction()
 			end,
+			onClose = if VpcEntryAnalytics then function()
+				-- upvalues: VpcEntryAnalytics (copy), AuthButtonClickFunction (upval), EntryPointEventCtx (copy), VpcEventConstants (upval), OnCancelFunction (copy)
+				VpcEntryAnalytics.remoteRequestClose()
+				AuthButtonClickFunction(EntryPointEventCtx, VpcEventConstants.errorPageCancelButton)
+				OnCancelFunction()
+			end else nil,
 			onSuccess = function()
-				-- upvalues: AuthButtonClickFunction (upval), EntryPointEventCtx (copy), VpcEventConstants (upval), OnSuccessFunction (copy)
+				-- upvalues: AuthButtonClickFunction (upval), EntryPointEventCtx (copy), VpcEventConstants (upval), VpcEntryAnalytics (copy), OnSuccessFunction (copy)
 				AuthButtonClickFunction(EntryPointEventCtx, VpcEventConstants.confirmationPageButton)
+				
+				if VpcEntryAnalytics then
+					VpcEntryAnalytics.remoteRequestOk()
+				end
 				OnSuccessFunction()
 			end,
 			retryNum = UseStateResult7,

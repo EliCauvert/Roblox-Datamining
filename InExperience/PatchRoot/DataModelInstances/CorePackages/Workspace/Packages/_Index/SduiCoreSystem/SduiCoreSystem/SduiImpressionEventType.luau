@@ -8,5 +8,6 @@
 	devStoreSeeAllImpressions = "devStoreSeeAllImpressions",
 	queryImpressions = "queryImpressions",
 	playerTileImpressions = "playerTileImpressions",
-	promptImpressions = "promptImpressions"
+	promptImpressions = "promptImpressions",
+	buyRobuxImpressions = "buyRobuxImpressions"
 }

@@ -14,6 +14,7 @@ local GetConversationStoreModule = require(AppChat.Stores.GetConversationStore)
 local GetConversationViewModelStoreModule = require(AppChat.Stores.GetConversationViewModelStore)
 local FFlagEnableBlackbirdCheck = require(Parent.SharedFlags).FFlagEnableBlackbirdCheck
 local FFlagAppChatUseActivationOnFocus = require(Parent.SharedFlags).FFlagAppChatUseActivationOnFocus
+local ConversationFocusActivationDelaySecondsModule = require(AppChat.Flags.conversationFocusActivationDelaySeconds)
 local UseIsRobloxSubscriberFunction = require(Parent.UserProfiles).Hooks.useIsRobloxSubscriber
 local UseGetOneToOneFriendIdFromConversationIdModule = require(AppChat.Hooks.useGetOneToOneFriendIdFromConversationId)
 local UseActivationOnFocusFunction = require(Parent.FocusNavigationUtils).useActivationOnFocus
@@ -25,7 +26,7 @@ local function _(p1, p2, Enabled)
 end
 
 return function(p1)
-	-- upvalues: GetConversationStoreModule (copy), GetConversationViewModelStoreModule (copy), ReactModule (copy), SignalsModule (copy), SignalsReactModule (copy), UseChatPagePaddingModule (copy), ChatPlacementContextModule (copy), UseTelemetryModule (copy), ChatLandingTelemetryLayerModule (copy), UseRelativeTimestampBindingModule (copy), UseLocalizationFunction (copy), UseGetOneToOneFriendIdFromConversationIdModule (copy), UseIsRobloxSubscriberFunction (copy), FFlagEnableBlackbirdCheck (copy), UseConversationRowActivationModule (copy), FFlagAppChatUseActivationOnFocus (copy), UseActivationOnFocusFunction (copy), ReactFocusNavigationModule (copy), NormalizeConversationForTelemetryModule (copy)
+	-- upvalues: GetConversationStoreModule (copy), GetConversationViewModelStoreModule (copy), ReactModule (copy), SignalsModule (copy), SignalsReactModule (copy), UseChatPagePaddingModule (copy), ChatPlacementContextModule (copy), UseTelemetryModule (copy), ChatLandingTelemetryLayerModule (copy), UseRelativeTimestampBindingModule (copy), UseLocalizationFunction (copy), UseGetOneToOneFriendIdFromConversationIdModule (copy), UseIsRobloxSubscriberFunction (copy), FFlagEnableBlackbirdCheck (copy), UseConversationRowActivationModule (copy), FFlagAppChatUseActivationOnFocus (copy), UseActivationOnFocusFunction (copy), ConversationFocusActivationDelaySecondsModule (copy), ReactFocusNavigationModule (copy), NormalizeConversationForTelemetryModule (copy)
 	local ConversationStoreModule = GetConversationStoreModule(false)
 	local ConversationViewModelStoreModule = GetConversationViewModelStoreModule(false)
 	local UseMemoResult = ReactModule.useMemo(function()
@@ -95,10 +96,10 @@ return function(p1)
 	local IsIsWideMode = p1.isWideMode == true
 	
 	if FFlagAppChatUseActivationOnFocus then
-		UseActivationOnFocusFunction(IsIsWideMode, UseRefResult, UseResult, nil, (ReactModule.useCallback(function()
+		UseActivationOnFocusFunction(IsIsWideMode, UseRefResult, UseResult, nil, ReactModule.useCallback(function()
 			-- upvalues: p1 (copy)
 			return p1.conversationId
-		end, { p1.conversationId })))
+		end, { p1.conversationId }), nil, ConversationFocusActivationDelaySecondsModule)
 	else
 		local UseContextResult = ReactModule.useContext(ReactFocusNavigationModule.FocusNavigationContext)
 		ReactModule.useEffect(function()

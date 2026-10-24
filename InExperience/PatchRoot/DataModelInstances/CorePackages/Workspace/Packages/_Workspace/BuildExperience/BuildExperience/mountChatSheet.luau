@@ -29,10 +29,9 @@ local TeamCreateUtilsModule = require(Parent.BuildExperiencePlaytestLaunch.teamC
 local TrackBuildOpenSafetyServiceModule = require(BuildExperience.utils.trackBuildOpenSafetyService)
 local FFlagReportBuildUIVisibilityModule = require(BuildExperience.Flags.FFlagReportBuildUIVisibility)
 local ClientLogsCollectorModule = require(BuildExperience.Chat.clientLogsCollector)
-local FFlagBuildExperienceUserMessageHapticFeedbackModule = require(BuildExperience.Flags.FFlagBuildExperienceUserMessageHapticFeedback)
 local FFlagBuildExperienceChatSheetReversedContentModule = require(BuildExperience.Flags.FFlagBuildExperienceChatSheetReversedContent)
 local LocalizationProvider = require(Parent.Localization).LocalizationProvider
-local AppInteractionFeedbackProvider = if FFlagBuildExperienceUserMessageHapticFeedbackModule then require(Parent.RobloxAppInteractionFeedbackConfig).AppInteractionFeedbackProvider else nil
+local AppInteractionFeedbackProvider = require(Parent.RobloxAppInteractionFeedbackConfig).AppInteractionFeedbackProvider
 
 local function _(p1)
 	-- upvalues: Parent (copy)
@@ -139,7 +138,7 @@ local LazyComponent = require(Parent.RoactUtils).Components.createLazyComponent(
 end)
 
 return function(p1)
-	-- upvalues: ClientLogsCollectorModule (copy), FFlagBuildExperienceInGameShell (copy), CoreGui (copy), ReactRobloxModule (copy), LocalizationService (copy), Parent (copy), ReactModule (copy), BuildExperienceCompositionStyleSheetModule (copy), LazyComponent (copy), TeamCreateUtilsModule (copy), LibraryThemeProviderModule (copy), FoundationModule (copy), FFlagBuildExperienceUserMessageHapticFeedbackModule (copy), AppInteractionFeedbackProvider (copy), LocalizationProvider (copy)
+	-- upvalues: ClientLogsCollectorModule (copy), FFlagBuildExperienceInGameShell (copy), CoreGui (copy), ReactRobloxModule (copy), LocalizationService (copy), Parent (copy), ReactModule (copy), BuildExperienceCompositionStyleSheetModule (copy), LazyComponent (copy), TeamCreateUtilsModule (copy), LibraryThemeProviderModule (copy), FoundationModule (copy), AppInteractionFeedbackProvider (copy), LocalizationProvider (copy)
 	ClientLogsCollectorModule.startServerLogCollection()
 	local BuildExperienceChatSheet = Instance.new("ScreenGui")
 	BuildExperienceChatSheet.Name = "BuildExperienceChatSheet"
@@ -155,20 +154,20 @@ return function(p1)
 	BuildExperienceChatSheet.Parent = CoreGui
 	BuildExperienceChatSheet.DisplayOrder = 9
 	local Root = ReactRobloxModule.createRoot(BuildExperienceChatSheet)
-	local NewResult = require(Parent.InExperienceLocales).Localization.new(LocalizationService.RobloxLocaleId)
 	local config = {
 		CompositionStyleSheet = ReactModule.createElement(BuildExperienceCompositionStyleSheetModule),
 		Sheet = ReactModule.createElement(LazyComponent, p1)
 	}
-	local Element = if TeamCreateUtilsModule.isViewer() then ReactModule.createElement(LibraryThemeProviderModule, { displayOrder = 9 }, config) else ReactModule.createElement(FoundationModule.FoundationProvider, {
-		colorMode = FoundationModule.Enums.ColorMode.Dark,
-		overlayGui = { DisplayOrder = 9 }
-	}, config)
-	
-	if FFlagBuildExperienceUserMessageHapticFeedbackModule then
-		Element = ReactModule.createElement(AppInteractionFeedbackProvider, nil, { FoundationProvider = Element })
-	end
-	Root:render(ReactModule.createElement(LocalizationProvider, { localization = NewResult }, { ChatSheet = Element }))
+	Root:render(ReactModule.createElement(LocalizationProvider, {
+		localization = require(Parent.InExperienceLocales).Localization.new(LocalizationService.RobloxLocaleId)
+	}, {
+		ChatSheet = ReactModule.createElement(AppInteractionFeedbackProvider, nil, {
+			FoundationProvider = if TeamCreateUtilsModule.isViewer() then ReactModule.createElement(LibraryThemeProviderModule, { displayOrder = 9 }, config) else ReactModule.createElement(FoundationModule.FoundationProvider, {
+				colorMode = FoundationModule.Enums.ColorMode.Dark,
+				overlayGui = { DisplayOrder = 9 }
+			}, config)
+		})
+	}))
 	
 	return Root
 end

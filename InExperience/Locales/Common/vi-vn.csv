@@ -165,7 +165,7 @@ Authentication.SignUp.Response.PasswordComplexity,Vui lòng tạo mật khẩu k
 Authentication.SignUp.Response.UsernameMustBeSetFirst,Phải đặt tên người dùng trước.
 Authentication.SignUp.Subtitle.AddYourBirthday,Hãy bổ sung ngày sinh của bạn để tạo tài khoản Roblox.
 Authentication.SignUp.Subtitle.YourProgressCarriesOver,Tiến trình của bạn sẽ được giữ nguyên khi bạn thiết lập xong.
-Authentication.SignUp.Subtitle.YoureAlmostThere,"Bạn sắp nâng cấp xong rồi. Nếu đóng vào lúc này, quy trình tạo tài khoản sẽ chưa kịp hoàn tất và bạn sẽ chưa thể chơi Roblox."
+Authentication.SignUp.Subtitle.YoureAlmostThereClose,"Bạn sắp nâng cấp xong rồi. Nếu hủy vào lúc này, quy trình tạo tài khoản sẽ chưa kịp hoàn tất và bạn sẽ chưa thể chơi Roblox."
 Authentication.TwoStepVerification.Action.GoToSecurity,Cài đặt
 Authentication.TwoStepVerification.Label.TwoStepRequired,Yêu cầu Xác minh 2 bước để thực hiện các giao dịch tiếp theo. Đến Cài đặt > Bảo mật để hoàn thành Xác minh 2 bước.
 Authentication.TwoStepVerification.Response.TooManyAttempts,Quá nhiều lần thử. Vui lòng thử lại sau.
@@ -274,6 +274,9 @@ Common.UGCValidation.ErrorLabel.DescendantIdAnimationVersionNotSupported,"{Insta
 Common.UGCValidation.ErrorLabel.DescendantIdNotPublished,Tài sản {AssetId} ({InstanceFullName}.{FieldName}) chưa được đăng. Hãy đăng tài sản này rồi thử lại.
 Common.UGCValidation.ErrorLabel.DescendantIdVersionNotSupported,"{InstanceFullName}.{FieldName} sử dụng phiên bản {Version} của tài sản {AssetId}, nhưng hiện tại hệ thống chỉ hỗ trợ phiên bản 1. Hãy sử dụng phiên bản 1 rồi thử lại."
 Common.UGCValidation.ErrorLabel.DynamicHeadCageMisaligned,Đầu hiệu ứng động trên chợ phải được căn khung bao đúng chuẩn sao cho các đỉnh của mắt và miệng trên khung bao khớp với các đỉnh của lưới bề mặt. Vui lòng căn khung bao chính xác hơn sao cho khớp với lưới bề mặt.
+Common.UGCValidation.ErrorLabel.DynamicHeadCageMisalignedLeftEye,Các điểm mốc của mắt trái trên khung bao của Đầu hiệu ứng động không khớp với lưới. Hãy điều chỉnh khung bao mắt để lưới mắt trái nằm trong vùng khung bao mô phỏng.
+Common.UGCValidation.ErrorLabel.DynamicHeadCageMisalignedMouth,Các điểm mốc của miệng trên khung bao của Đầu hiệu ứng động không khớp với lưới. Hãy điều chỉnh khung bao miệng để lưới miệng nằm trong vùng khung bao mô phỏng.
+Common.UGCValidation.ErrorLabel.DynamicHeadCageMisalignedRightEye,Các điểm mốc của mắt phải trên khung bao của Đầu hiệu ứng động không khớp với lưới. Hãy điều chỉnh khung bao mắt để lưới mắt phải nằm trong vùng khung bao mô phỏng.
 Common.UGCValidation.ErrorLabel.DynamicHeadHappyNotShown,Không phát hiện được biểu cảm mỉm cười cho Đầu hiệu ứng động. Hãy điều chỉnh các điểm mốc của khung bao cho miệng để khớp với vị trí miệng trên đầu và đảm bảo miệng thể hiện được biểu cảm mỉm cười.
 Common.UGCValidation.ErrorLabel.DynamicHeadLeftEyeNotClose,Không phát hiện được biểu cảm nhắm mắt trái cho Đầu hiệu ứng động. Vui lòng điều chỉnh các điểm mốc của khung bao cho mắt trái để khớp với vị trí mắt trái trên đầu và đảm bảo mắt có thể nhắm lại.
 Common.UGCValidation.ErrorLabel.DynamicHeadMISSINGCAGE,Đầu hiệu ứng động trên chợ không có Khung bao cho đầu. Vui lòng tạo Khung bao cho đầu đối với Đầu hiệu ứng động.
@@ -293,6 +296,13 @@ Common.UGCValidation.ErrorLabel.EmoteAnimation_MaxPartTranslationCalcFailed,Khô
 Common.UGCValidation.ErrorLabel.EmoteAnimation_MaxPartTranslationMismatch,"Hiệu ứng động đã đăng cho biết độ dịch chuyển tối đa của bộ phận là {taggedTranslation} stud, nhưng kết quả tính toán dựa trên dữ liệu của hiệu ứng động này cho kết quả là {calculatedTranslation} stud. Vui lòng đăng lại hiệu ứng động này."
 Common.UGCValidation.ErrorLabel.Extents_HeadBelowTorso,Đầu phải được đặt phía trên Thân trên. Tâm của đầu đang nằm dưới đỉnh của thân – điều này cho thấy lưới của đầu đang bị xẹp hoặc đặt sai vị trí.
 Common.UGCValidation.ErrorLabel.FaceControlsOverrideFACSNotEmpty,Thuộc tính InternalOverrideFACSData trên FaceControls phải để trống khi tải lên.
+Common.UGCValidation.ErrorLabel.FacialFeaturePresence_EyesMissing,Khuôn mặt gốc còn thiếu các đặc điểm bắt buộc của mắt. Hãy thêm mắt vào khuôn mặt gốc và thử lại.
+Common.UGCValidation.ErrorLabel.FacialFeaturePresence_MouthMissing,Khuôn mặt gốc còn thiếu phần bắt buộc là miệng. Hãy thêm miệng vào khuôn mặt gốc rồi thử lại.
+Common.UGCValidation.ErrorLabel.FacsDeformation_HappyNotShown,Không phát hiện được biểu cảm vui. Hãy điều chỉnh khung bao miệng hoặc FACS biểu cảm vui để lưới miệng mô phỏng biến đổi hình dạng như dự kiến.
+Common.UGCValidation.ErrorLabel.FacsDeformation_LeftEyeNotClose,Không phát hiện được biểu cảm nhắm mắt trái. Hãy điều chỉnh khung bao mắt trái hoặc FACS nhắm mắt trái để lưới mắt mô phỏng biến đổi hình dạng như dự kiến.
+Common.UGCValidation.ErrorLabel.FacsDeformation_MouthNotOpen,Không phát hiện được biểu cảm mở miệng. Hãy điều chỉnh khung bao miệng hoặc FACS miệng mở để lưới miệng mô phỏng biến đổi hình dạng như dự kiến.
+Common.UGCValidation.ErrorLabel.FacsDeformation_RightEyeNotClose,Không phát hiện được biểu cảm nhắm mắt phải. Hãy điều chỉnh khung bao mắt phải hoặc FACS nhắm mắt phải để lưới mắt mô phỏng biến đổi hình dạng như dự kiến.
+Common.UGCValidation.ErrorLabel.FacsDeformation_SadNotShown,Không phát hiện được biểu cảm buồn. Hãy điều chỉnh khung bao miệng hoặc FACS biểu cảm buồn để lưới miệng mô phỏng biến đổi hình dạng như dự kiến.
 Common.UGCValidation.ErrorLabel.FacsExpandsHead,"FACS phát hiện đầu của bạn bị phóng to lên {modPercent}%, tuy nhiên việc thay đổi kích thước đầu là vi phạm chính sách về chợ đối với hiệu ứng khuôn mặt."
 Common.UGCValidation.ErrorLabel.FacsJointCountBounded,"Đầu hiệu ứng động có thể có tối đa {maxFacsJointCount} khớp FACS, nhưng đầu này có {actualJointCount}. Vui lòng giảm số lượng khớp FACS rồi thử lại."
 Common.UGCValidation.ErrorLabel.FacsShrinksHead,"FACS phát hiện đầu của bạn bị thu nhỏ còn {modPercent}%, tuy nhiên việc thay đổi kích thước đầu là vi phạm chính sách về chợ đối với hiệu ứng khuôn mặt."
@@ -339,6 +349,7 @@ Common.UGCValidation.ErrorLabel.MeshPartBounds_TooSmall,"Lưới bề mặt {par
 Common.UGCValidation.ErrorLabel.MissingRequiredAttachment,Chỗ đính {attName} phải tồn tại duy nhất một lần trong các mục con của {partName}.
 Common.UGCValidation.ErrorLabel.NoAttributes,"""{RootInstanceName}"" (hoặc các mục con) có chứa Thuộc tính. Bạn cần xóa Thuộc tính khỏi các mục sau: {InstanceNameList}"
 Common.UGCValidation.ErrorLabel.PropertiesNotSensible,"{ClassName} ""{InstancePath}"" có các thuộc tính không hợp lệ: {ProblematicProperties}. Đã vượt quá giới hạn số byte được hiển thị (giới hạn 0 có nghĩa là thuộc tính phải trống). Bất kỳ thuộc tính nào khác đều có thể chứa các giá trị NaN/Inf hoặc vượt quá giới hạn kích thước mặc định của nó."
+Common.UGCValidation.ErrorLabel.RenderedAnimation_RequiredExpressionsMissing,"Hiệu ứng động đã kết xuất bị thiếu một hoặc nhiều biểu cảm khuôn mặt bắt buộc (nhắm mắt, mở miệng, vui, buồn)."
 Common.UGCValidation.ErrorLabel.RigAttachmentOutOfBounds,"Chỗ đính ""{AttachmentName}"" của bộ khung trong ""{PartName}"" phải đặt gần vùng tiếp giáp của khớp kết nối bộ phận cơ thể này với bộ phận liền kề. Vị trí hiện tại [{CurrentPosition}] quá xa mặt phẳng kết nối. Hãy di chuyển đến gần [{ClosestValidPosition}] hơn."
 Common.UGCValidation.ErrorLabel.SelectionCountNotOne,"Để tải một tài sản lên Roblox, bạn phải chọn chính xác 1 trường hợp và loại tải lên tương ứng."
 Common.UGCValidation.ErrorLabel.SerializedAssetTooLarge,"Tài sản này quá lớn để tải lên ({sizeBytes} byte, vượt mức tối đa là {maxSizeBytes} byte). Vui lòng giảm kích thước rồi thử lại."
@@ -3168,7 +3179,6 @@ Feature.Contacts.Message.ContactDiscoverable,"Để giúp bạn kết bạn, ng�
 Feature.Contacts.Message.ContactsSyncWarning,Danh bạ của bạn sẽ được đồng bộ hóa thường xuyên và các kết quả trùng khớp với người dùng Roblox khác sẽ được lưu trữ để giúp bạn tìm bạn bè. Quản lý tùy chọn này bất cứ lúc nào trong cài đặt thiết bị.
 Feature.Contacts.Message.InviteToRoblox,"Kết bạn với mình trên Roblox để chúng ta cùng nhau sáng tạo, chia sẻ và khám phá các trải nghiệm nhé."
 Feature.Contacts.Message.NoResults,Không có kết quả.
-Feature.DeveloperProducts.Heading.Products,
 Feature.DeveloperProducts.Label.Product,Sản phẩm
 Feature.DisplayName.ErrorMessage.AgedUpNameContainPII,Tên có thể chứa thông tin cá nhân
 Feature.DisplayName.ErrorMessage.AgedUpNameHasChanged,Tên của bạn đã được thay đổi trong 7 ngày qua

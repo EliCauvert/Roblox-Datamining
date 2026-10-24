@@ -1,9 +1,11 @@
-﻿local ReactModule = require(script:FindFirstAncestor("AvatarExperienceUIKit").Parent.React)
+﻿local Parent = script:FindFirstAncestor("AvatarExperienceUIKit").Parent
+local ReactModule = require(Parent.React)
 local BackgroundGradientModule = require(script.Parent.BackgroundGradient)
 local BackgroundImageModule = require(script.Parent.BackgroundImage)
+local FFlagAXBackgroundImageOnLoaded = require(Parent.AvatarExperienceFlags).FFlagAXBackgroundImageOnLoaded
 
 return function(p1)
-	-- upvalues: ReactModule (copy), BackgroundGradientModule (copy), BackgroundImageModule (copy)
+	-- upvalues: ReactModule (copy), BackgroundGradientModule (copy), BackgroundImageModule (copy), FFlagAXBackgroundImageOnLoaded (copy)
 	local Elements = {}
 	
 	for i, backgroundLayer in p1.backgroundLayers do
@@ -29,7 +31,8 @@ return function(p1)
 				transparency = backgroundLayer.transparency,
 				ZIndex = ZIndex,
 				tag = backgroundLayer.tag,
-				scaleType = p1.imageScaleType
+				scaleType = p1.imageScaleType,
+				onLoaded = if FFlagAXBackgroundImageOnLoaded then p1.onImageLoaded else nil
 			})
 		end
 	end

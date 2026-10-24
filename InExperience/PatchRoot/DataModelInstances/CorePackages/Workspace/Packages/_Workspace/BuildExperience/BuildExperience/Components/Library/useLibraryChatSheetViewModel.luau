@@ -16,11 +16,15 @@ local ChatTypesModule = require(BuildExperience.Chat.chatTypes)
 local FFlagBuildExperienceAnswerFormModule = require(BuildExperience.Flags.FFlagBuildExperienceAnswerForm)
 local FFlagBuildCheckGamePermissionsModule = require(BuildExperience.Flags.FFlagBuildCheckGamePermissions)
 local UseGamePermissionsModule = require(BuildExperience.useGamePermissions)
+local FFlagBuildExperienceModelPickerModule = require(BuildExperience.Flags.FFlagBuildExperienceModelPicker)
+local UseBuildModelSelectionModule = require(BuildExperience.Chat.useBuildModelSelection)
+local _ = require(BuildExperience.Components.ModelPicker.ModelPickerTypes)
+local UseChatSheetFundingRecoveryModule = require(BuildExperience.Components.ChatSheet.useChatSheetFundingRecovery)
 
 local function noop() end
 
 return function(p1)
-	-- upvalues: noop (copy), SignalsReactModule (copy), GetAssistantBuildStoreModule (copy), GetCreatorAgentResumeStoreModule (copy), GetCurrentExperienceProjectModule (copy), FFlagBuildCheckGamePermissionsModule (copy), UseGamePermissionsModule (copy), UseChatSessionCoreModule (copy), GetLibraryStoreModule (copy), UseChatPlaytestFooterModule (copy), UseLibraryChatComposerModule (copy), ReactModule (copy), ChatTypesModule (copy), FoundationModule (copy), FFlagBuildExperienceAnswerFormModule (copy)
+	-- upvalues: noop (copy), SignalsReactModule (copy), GetAssistantBuildStoreModule (copy), GetCreatorAgentResumeStoreModule (copy), GetCurrentExperienceProjectModule (copy), FFlagBuildCheckGamePermissionsModule (copy), UseGamePermissionsModule (copy), UseChatSessionCoreModule (copy), GetLibraryStoreModule (copy), UseChatPlaytestFooterModule (copy), FFlagBuildExperienceModelPickerModule (copy), UseBuildModelSelectionModule (copy), UseLibraryChatComposerModule (copy), ReactModule (copy), ChatTypesModule (copy), UseChatSheetFundingRecoveryModule (copy), FoundationModule (copy), FFlagBuildExperienceAnswerFormModule (copy)
 	local OnClose = p1.onClose or noop
 	local NoIsOpen = p1.isOpen == nil or p1.isOpen
 	local UseSignalStateResult = SignalsReactModule.useSignalState(GetAssistantBuildStoreModule().getIsDisabled)
@@ -48,7 +52,8 @@ return function(p1)
 		onPromptFailure = GetLibraryStoreModule().reportPromptFailure
 	})
 	local ChatSheetPlaytestCta = UseChatPlaytestFooterModule(UseChatSessionCoreModuleResult, "ChatSheetPlaytestCta")
-	local UseLibraryChatComposerModuleResult = UseLibraryChatComposerModule(UseChatSessionCoreModuleResult, NoIsOpen, NoCanEditOnBuild)
+	local UseBuildModelSelectionModuleResult = if FFlagBuildExperienceModelPickerModule then UseBuildModelSelectionModule(UniverseId, p1.modelSelectionDraftId, p1.modelPicker, UseChatSessionCoreModuleResult.modelSessionModels, UseChatSessionCoreModuleResult.hasPreparedModelSession, UseChatSessionCoreModuleResult.internalTesting) else nil
+	local UseLibraryChatComposerModuleResult = UseLibraryChatComposerModule(UseChatSessionCoreModuleResult, NoIsOpen, NoCanEditOnBuild, UseBuildModelSelectionModuleResult)
 	ReactModule.useEffect(function()
 		-- upvalues: NoIsOpen (copy), UseSignalStateResult (copy), OnClose (copy)
 		if NoIsOpen and UseSignalStateResult then
@@ -80,6 +85,7 @@ return function(p1)
 	
 	return {
 		isOpen = NoIsOpen,
+		creatorCreditRecovery = if FFlagBuildExperienceModelPickerModule then UseChatSheetFundingRecoveryModule(UseChatSessionCoreModuleResult, UseBuildModelSelectionModuleResult, UniverseId, p1.placeId or CurrentExperienceProjectModule.placeId, p1.sessionId) else nil,
 		onClose = OnClose,
 		sheetComponent = FoundationModule.Sheet,
 		snapPoints = p1.snapPoints,
@@ -94,6 +100,7 @@ return function(p1)
 		isHistoryLoading = UseChatSessionCoreModuleResult.isHistoryLoading or v1,
 		scrollingFrameRef = UseChatSessionCoreModuleResult.setScrollingFrame,
 		anchorScrollToInstance = UseChatSessionCoreModuleResult.anchorScrollToInstance,
+		modelPicker = UseBuildModelSelectionModuleResult,
 		composerText = UseChatSessionCoreModuleResult.composerText,
 		composerErrorText = UseChatSessionCoreModuleResult.composerErrorText,
 		onComposerChanged = UseChatSessionCoreModuleResult.setComposerText,

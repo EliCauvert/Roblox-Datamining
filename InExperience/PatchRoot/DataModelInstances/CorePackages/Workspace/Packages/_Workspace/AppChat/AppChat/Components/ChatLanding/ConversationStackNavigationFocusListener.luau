@@ -8,7 +8,9 @@ local ReactFocusNavigationModule = require(Parent.ReactFocusNavigation)
 local MutedErrorFunction = require(Parent.Loggers).mutedError
 local FocusNavigationEventNameEnum = FocusNavigationUtilsModule.FocusNavigationEventNameEnum
 local GetFirstFocusableDescendantFunction = FocusNavigationUtilsModule.getFirstFocusableDescendant
+local FlushPendingActivationOnFocusFunction = FocusNavigationUtilsModule.flushPendingActivationOnFocus
 local FFlagAppChatConsoleFocusFixesModule = require(AppChat.Flags.FFlagAppChatConsoleFocusFixes)
+local FFlagAppChatDebounceConversationFocusActivationModule = require(AppChat.Flags.FFlagAppChatDebounceConversationFocusActivation)
 local SquadExternalContractContext = require(Parent.SquadsCore.SquadExternalContractProvider).SquadExternalContractContext
 local SquadPromptType = require(Parent.SquadsCore.Enums).SquadPromptType
 local LeaveSquadFunction = require(Parent.SquadsCore.Thunks).leaveSquad
@@ -21,7 +23,7 @@ local config = {
 }
 
 return function(p1)
-	-- upvalues: UseDispatchFunction (copy), ReactModule (copy), ReactFocusNavigationModule (copy), SquadExternalContractContext (copy), UseCurrentSquadParentChannelIdFunction (copy), FFlagAppChatConsoleFocusFixesModule (copy), GetFirstFocusableDescendantFunction (copy), EnumScreensModule (copy), LeaveSquadFunction (copy), SquadPromptType (copy), MutedErrorFunction (copy), FocusNavigationEventNameEnum (copy), InputHandlersModule (copy), config (copy)
+	-- upvalues: UseDispatchFunction (copy), ReactModule (copy), ReactFocusNavigationModule (copy), SquadExternalContractContext (copy), UseCurrentSquadParentChannelIdFunction (copy), FFlagAppChatConsoleFocusFixesModule (copy), GetFirstFocusableDescendantFunction (copy), EnumScreensModule (copy), LeaveSquadFunction (copy), SquadPromptType (copy), FFlagAppChatDebounceConversationFocusActivationModule (copy), FlushPendingActivationOnFocusFunction (copy), MutedErrorFunction (copy), FocusNavigationEventNameEnum (copy), InputHandlersModule (copy), config (copy)
 	local UseDispatchResult = UseDispatchFunction()
 	local UseContextResult = ReactModule.useContext(ReactFocusNavigationModule.FocusNavigationContext)
 	local UseContextResult1 = ReactModule.useContext(SquadExternalContractContext)
@@ -53,31 +55,49 @@ return function(p1)
 		p1.conversationTopBarRef, p1.conversationPanelRef, UseContextResult
 	})
 	local UseResult1 = ReactModule.useCallback(function(p2)
-		-- upvalues: p1 (copy), EnumScreensModule (upval), UseCurrentSquadParentChannelIdResult (copy), UseDispatchResult (copy), LeaveSquadFunction (upval), SquadPromptType (upval), UseContextResult1 (copy), MutedErrorFunction (upval)
+		-- upvalues: UseCurrentSquadParentChannelIdResult (copy), p1 (copy), EnumScreensModule (upval), UseDispatchResult (copy), LeaveSquadFunction (upval), SquadPromptType (upval), UseContextResult1 (copy), FFlagAppChatDebounceConversationFocusActivationModule (upval), FlushPendingActivationOnFocusFunction (upval), MutedErrorFunction (upval)
+		local function joinConversationSquad(ConversationId)
+			-- upvalues: UseCurrentSquadParentChannelIdResult (upval), p1 (upval), EnumScreensModule (upval), UseDispatchResult (upval), LeaveSquadFunction (upval), SquadPromptType (upval), UseContextResult1 (upval)
+			if UseCurrentSquadParentChannelIdResult == nil or UseCurrentSquadParentChannelIdResult == ConversationId then
+				p1.navigation.navigate(EnumScreensModule.SquadLobby, { conversationId = ConversationId })
+				
+				return
+			else
+				UseDispatchResult(LeaveSquadFunction(SquadPromptType.JoinAnotherSquad, UseContextResult1.setSquadPrompt, function()
+					-- upvalues: p1 (upval), EnumScreensModule (upval), ConversationId (copy)
+					p1.navigation.navigate(EnumScreensModule.SquadLobby, { conversationId = ConversationId })
+				end, UseContextResult1.squadLocation, true))
+			end
+		end
+		
 		local ConversationStackNavigatorChildNavigation = p1.navigation.getChildNavigation("ConversationStackNavigator")
 		
 		if ConversationStackNavigatorChildNavigation and ConversationStackNavigatorChildNavigation.state.index == 1 then
+			if FFlagAppChatDebounceConversationFocusActivationModule then
+				local FlushPendingActivationOnFocusResult = FlushPendingActivationOnFocusFunction()
+				
+				if FlushPendingActivationOnFocusResult ~= nil then
+					joinConversationSquad(FlushPendingActivationOnFocusResult)
+					p2:cancel()
+					
+					return
+				end
+			end
 			local Route = ConversationStackNavigatorChildNavigation.state.routes[1]
 			
 			if Route.routeName == EnumScreensModule.ChatConversation and Route.params then
 				local ConversationId = Route.params.conversationId
 				
-				if not ConversationId then
+				if ConversationId then
+					joinConversationSquad(ConversationId)
+					p2:cancel()
+					
+					return
+				else
 					MutedErrorFunction("ConversationStackNavigationFocusListener: Missing conversationId for ChatConversation.")
 					
 					return
 				end
-				if UseCurrentSquadParentChannelIdResult == nil or UseCurrentSquadParentChannelIdResult == ConversationId then
-					p1.navigation.navigate(EnumScreensModule.SquadLobby, { conversationId = ConversationId })
-				else
-					UseDispatchResult(LeaveSquadFunction(SquadPromptType.JoinAnotherSquad, UseContextResult1.setSquadPrompt, function()
-						-- upvalues: p1 (upval), EnumScreensModule (upval), ConversationId (copy)
-						p1.navigation.navigate(EnumScreensModule.SquadLobby, { conversationId = ConversationId })
-					end, UseContextResult1.squadLocation, true))
-				end
-				p2:cancel()
-				
-				return
 			else
 				MutedErrorFunction("ConversationStackNavigationFocusListener: Found" .. tostring(Route.routeName) .. " at root.")
 			end

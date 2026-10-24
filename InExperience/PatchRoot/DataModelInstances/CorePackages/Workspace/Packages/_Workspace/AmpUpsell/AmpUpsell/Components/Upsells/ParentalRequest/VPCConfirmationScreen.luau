@@ -34,7 +34,7 @@ return function(p1)
 	
 	return if GetShouldUseFoundationUIVPCUpsellModule(if p1.isInExperienceEntry then p1.isInExperienceEntry else false) then ReactModule.createElement(Dialog.Root, {
 		size = DialogSize.Small,
-		onClose = OnAck,
+		onClose = p1.onClose or OnAck,
 		disablePortal = DisablePortal,
 		hasBackdrop = if GetFFlagEnableVPCUpsellFoundationDialogHardeningModule() then true else false
 	}, {

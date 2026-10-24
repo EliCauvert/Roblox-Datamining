@@ -9,12 +9,14 @@ local GetConversationMessageViewModelStoreModule = require(AppChat.Stores.GetCon
 local ListItemsModule = require(script.Parent.ListItems)
 local _ = require(script.Parent.MessageListContext)
 local MessageRowTypesModule = require(script.Parent.MessageRowTypes)
+local UseInitialScrollAlignmentModule = require(script.Parent.useInitialScrollAlignment)
 local UseMessageListLayoutModule = require(script.Parent.useMessageListLayout)
 local AppChatPerfTrackerModule = require(AppChat.Telemetry.AppChatPerfTracker)
 local CreateScrollIntervalTrackerModule = require(AppChat.Telemetry.createScrollIntervalTracker)
 local FFlagAppChatConversationLoadingSkeletonModule = require(AppChat.Flags.FFlagAppChatConversationLoadingSkeleton)
 local FFlagAppChatPerfTrackingModule = require(AppChat.Flags.FFlagAppChatPerfTracking)
 local FIntAppChatInitialMessageFetchLimitModule = require(AppChat.Flags.FIntAppChatInitialMessageFetchLimit)
+local FFlagAppChatMessageListV2ScrollToStartOnOpenModule = require(AppChat.Flags.FFlagAppChatMessageListV2ScrollToStartOnOpen)
 local FIntAppChatMessageListV2OverscanRowsModule = require(AppChat.Flags.FIntAppChatMessageListV2OverscanRows)
 local FIntAppChatMessageInitialFetchMinMessagesModule = require(AppChat.Flags.FIntAppChatMessageInitialFetchMinMessages)
 local StartReachedThreshold = {
@@ -41,7 +43,7 @@ local _ = function(p1)
 end
 
 return function(Current)
-	-- upvalues: ReactModule (copy), ListItemsModule (copy), EnumMessageTypesModule (copy), FFlagAppChatPerfTrackingModule (copy), AppChatPerfTrackerModule (copy), SignalsModule (copy), GetConversationMessageViewModelStoreModule (copy), SignalsReactModule (copy), FIntAppChatMessageInitialFetchMinMessagesModule (copy), FIntAppChatInitialMessageFetchLimitModule (copy), CreateScrollIntervalTrackerModule (copy), ViewRecyclerModule (copy), UseMessageListLayoutModule (copy), StartReachedThreshold (copy), MessageRowTypesModule (copy), FIntAppChatMessageListV2OverscanRowsModule (copy), noop (copy), FFlagAppChatConversationLoadingSkeletonModule (copy)
+	-- upvalues: ReactModule (copy), ListItemsModule (copy), EnumMessageTypesModule (copy), FFlagAppChatPerfTrackingModule (copy), AppChatPerfTrackerModule (copy), SignalsModule (copy), GetConversationMessageViewModelStoreModule (copy), SignalsReactModule (copy), FIntAppChatMessageInitialFetchMinMessagesModule (copy), FIntAppChatInitialMessageFetchLimitModule (copy), CreateScrollIntervalTrackerModule (copy), ViewRecyclerModule (copy), FFlagAppChatMessageListV2ScrollToStartOnOpenModule (copy), UseInitialScrollAlignmentModule (copy), UseMessageListLayoutModule (copy), StartReachedThreshold (copy), MessageRowTypesModule (copy), FIntAppChatMessageListV2OverscanRowsModule (copy), noop (copy), FFlagAppChatConversationLoadingSkeletonModule (copy)
 	local UseRefResult = ReactModule.useRef(Current)
 	UseRefResult.current = Current
 	local ConversationId = Current.conversationId
@@ -256,6 +258,10 @@ return function(Current)
 			Current2.scrollToEnd()
 		end
 	end, { UseMemoResult, IsIsInitialMessageLoading })
+	
+	if FFlagAppChatMessageListV2ScrollToStartOnOpenModule then
+		Current2 = UseInitialScrollAlignmentModule(IsOpenAtStart, IsIsInitialMessageLoading, UseRefResult10, UseStateResult1)
+	end
 	local UseStateResult4, UseStateResult2_3 = ReactModule.useState(false)
 	local UseMessageListLayoutModuleResult = UseMessageListLayoutModule((ReactModule.useCallback(function()
 		-- upvalues: UseStateResult2_3 (copy)
@@ -299,7 +305,7 @@ return function(Current)
 			Current.messageHiddenNoticeText, Current.unknownUserText
 		}),
 		listProps = ReactModule.useMemo(function()
-			-- upvalues: ViewRecyclerModule (upval), StartReachedThreshold (upval), Current2 (copy), Items (copy), ListItemsModule (upval), UseMessageListLayoutModuleResult (copy), MessageRowTypesModule (upval), UseRefResult10 (copy), FIntAppChatMessageListV2OverscanRowsModule (upval), HasLoadNext (copy), UseResult (copy), UseResult1 (copy), UseResult2 (copy), UseResult3 (copy), Current3 (copy)
+			-- upvalues: ViewRecyclerModule (upval), StartReachedThreshold (upval), Current2 (ref), Items (copy), ListItemsModule (upval), UseMessageListLayoutModuleResult (copy), MessageRowTypesModule (upval), UseRefResult10 (copy), FIntAppChatMessageListV2OverscanRowsModule (upval), HasLoadNext (copy), UseResult (copy), UseResult1 (copy), UseResult2 (copy), UseResult3 (copy), Current3 (copy)
 			local Copy = table.clone(ViewRecyclerModule.ChatPreset.create({ startReachedThreshold = StartReachedThreshold }))
 			Copy.initialScrollAlignment = Current2 or Copy.initialScrollAlignment
 			Copy.data = { items = Items, getItemKey = ListItemsModule.getKey }

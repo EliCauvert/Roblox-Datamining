@@ -24,9 +24,17 @@ function LinkingProtocolModule.new(p1)
 	}, LinkingProtocolModule))
 end
 
-function LinkingProtocolModule:registerURL(Url)
+function LinkingProtocolModule:registerURL(Url, p1)
 	-- upvalues: LinkingService (copy)
-	LinkingService:RegisterLuaUrl(Url)
+	local EngineHandlingPolicy = if p1 then p1.engineHandlingPolicy else nil
+	
+	if EngineHandlingPolicy and self._getEngineFeature("ExternalOriginOnlyUrlRegistration") then
+		LinkingService:RegisterLuaUrlWithPolicy(Url, EngineHandlingPolicy)
+		
+		return
+	else
+		LinkingService:RegisterLuaUrl(Url)
+	end
 end
 
 function LinkingProtocolModule:getUID()

@@ -13,26 +13,33 @@ pcall(function()
 	-- upvalues: PlatformService (ref)
 	PlatformService = game:GetService("PlatformService")
 end)
-local GetFStringVNGWebshopUrlFunction = require(Parent.SharedFlags).GetFStringVNGWebshopUrl
+local SharedFlagsModule = require(Parent.SharedFlags)
+local GetFStringVNGWebshopUrlFunction = SharedFlagsModule.GetFStringVNGWebshopUrl
+
+local function _()
+	-- upvalues: SharedFlagsModule (copy)
+	return SharedFlagsModule.FFlagEnableBuyRobuxNewRouting and SharedFlagsModule.FFlagEnableBuyRobuxNewRoutingInExperience
+end
+
 local UrlBuilder = require(Parent.PurchasePromptDeps).UrlBuilder.UrlBuilder
 local Replaced = string.gsub(ContentProvider.BaseUrl:lower(), "/m.", "/www.")
 
-local function addContextToUrl(PaymentmethodsName: string, List): string
+local function addContextToUrl(Text: string, List): string
 	for i, value in List do
 		if value then
-			if PaymentmethodsName:find("?") then
-				PaymentmethodsName ..= ("&%s=%s"):format(i, value)
+			if Text:find("?") then
+				Text ..= ("&%s=%s"):format(i, value)
 			else
-				PaymentmethodsName ..= ("?%s=%s"):format(i, value)
+				Text ..= ("?%s=%s"):format(i, value)
 			end
 		end
 	end
-	return PaymentmethodsName
+	return Text
 end
 
 return {
 	new = function()
-		-- upvalues: MarketplaceService (copy), Replaced (copy), GuiService (copy), addContextToUrl (copy), PurchaseFlowModule (copy), Base64Module (copy), UrlBuilder (copy), HttpService (copy), ConstantsModule (copy), BrowserService (copy), PlatformService (ref), GetFStringVNGWebshopUrlFunction (copy)
+		-- upvalues: PurchaseFlowModule (copy), GuiService (copy), Replaced (copy), SharedFlagsModule (copy), Parent (copy), addContextToUrl (copy), Base64Module (copy), UrlBuilder (copy), HttpService (copy), ConstantsModule (copy), BrowserService (copy), MarketplaceService (copy), PlatformService (ref), GetFStringVNGWebshopUrlFunction (copy)
 		local t = {}
 		setmetatable(t, {
 			__tostring = function(): string
@@ -40,36 +47,39 @@ return {
 			end
 		})
 		
-		function t.signalMockPurchasePremium()
-			-- upvalues: MarketplaceService (upval)
-			MarketplaceService:SignalMockPurchasePremium()
-		end
-		
-		function t.startPremiumUpsell(p1)
-			-- upvalues: Replaced (upval), GuiService (upval)
-			GuiService:OpenBrowserWindow((("%supgrades/paymentmethods?ap=%d"):format(Replaced, p1)))
-		end
-		
-		function t.startPremiumUpsellWithContext(p1, p2)
-			-- upvalues: Replaced (upval), addContextToUrl (upval), GuiService (upval)
-			GuiService:OpenBrowserWindow((addContextToUrl(("%supgrades/paymentmethods?ap=%d"):format(Replaced, p2), p1)))
-		end
-		
-		function t.startRobuxUpsellWebByFlow(LargeRobuxUpsell, p1)
-			-- upvalues: PurchaseFlowModule (upval), GuiService (upval), Replaced (upval)
+		function t.startRobuxUpsellWebByFlow(LargeRobuxUpsell, ProductId)
+			-- upvalues: PurchaseFlowModule (upval), GuiService (upval), Replaced (upval), SharedFlagsModule (upval), Parent (upval)
 			if LargeRobuxUpsell == PurchaseFlowModule.RobuxUpsellV2 or LargeRobuxUpsell == PurchaseFlowModule.LargeRobuxUpsell then
-				GuiService:OpenBrowserWindow(("%supgrades/paymentmethods?ap=%s"):format(Replaced, p1))
+				GuiService:OpenBrowserWindow(("%supgrades/paymentmethods?ap=%s"):format(Replaced, ProductId))
+				
+				return
+			end
+			if SharedFlagsModule.FFlagEnableBuyRobuxNewRouting and SharedFlagsModule.FFlagEnableBuyRobuxNewRoutingInExperience then
+				require(Parent.BuyRobuxInExperience).openBuyRobux({ productId = ProductId }, function(Url)
+					-- upvalues: GuiService (upval)
+					GuiService:OpenBrowserWindow(Url)
+				end, "PurchasePrompt.startRobuxUpsellWebByFlow")
 				
 				return
 			else
-				GuiService:OpenBrowserWindow(("%sUpgrades/Robux.aspx?product_id=%s"):format(Replaced, p1))
+				GuiService:OpenBrowserWindow(("%sUpgrades/Robux.aspx?product_id=%s"):format(Replaced, ProductId))
 			end
 		end
 		
-		function t.startRobuxUpsellWebByFlowWithContext(p1, LargeRobuxUpsell, p2)
-			-- upvalues: PurchaseFlowModule (upval), Replaced (upval), addContextToUrl (upval), GuiService (upval)
+		function t.startRobuxUpsellWebByFlowWithContext(p1, LargeRobuxUpsell, ProductId)
+			-- upvalues: PurchaseFlowModule (upval), SharedFlagsModule (upval), Parent (upval), GuiService (upval), Replaced (upval), addContextToUrl (upval)
 			local IsLargeRobuxUpsellMatch: boolean = LargeRobuxUpsell == PurchaseFlowModule.RobuxUpsellV2 or LargeRobuxUpsell == PurchaseFlowModule.LargeRobuxUpsell
-			GuiService:OpenBrowserWindow((addContextToUrl(if IsLargeRobuxUpsellMatch then ("%supgrades/paymentmethods?ap=%s"):format(Replaced, p2) else ("%sUpgrades/Robux.aspx?product_id=%s"):format(Replaced, p2), p1)))
+			
+			if SharedFlagsModule.FFlagEnableBuyRobuxNewRouting and SharedFlagsModule.FFlagEnableBuyRobuxNewRoutingInExperience and not IsLargeRobuxUpsellMatch then
+				require(Parent.BuyRobuxInExperience).openBuyRobux({ productId = ProductId, analyticId = p1.analyticId }, function(Url)
+					-- upvalues: GuiService (upval)
+					GuiService:OpenBrowserWindow(Url)
+				end, "PurchasePrompt.startRobuxUpsellWebByFlowWithContext")
+				
+				return
+			else
+				GuiService:OpenBrowserWindow((addContextToUrl(if IsLargeRobuxUpsellMatch then ("%supgrades/paymentmethods?ap=%s"):format(Replaced, ProductId) else ("%sUpgrades/Robux.aspx?product_id=%s"):format(Replaced, ProductId), p1)))
+			end
 		end
 		
 		function t.openSecuritySettings(p1)
@@ -97,16 +107,33 @@ return {
 		end
 		
 		function t.openRobuxStore()
-			-- upvalues: GuiService (upval), Replaced (upval)
-			GuiService:OpenBrowserWindow(("%sUpgrades/Robux.aspx"):format(Replaced))
+			-- upvalues: SharedFlagsModule (upval), Parent (upval), GuiService (upval), Replaced (upval)
+			if SharedFlagsModule.FFlagEnableBuyRobuxNewRouting and SharedFlagsModule.FFlagEnableBuyRobuxNewRoutingInExperience then
+				require(Parent.BuyRobuxInExperience).openBuyRobux({}, function(Url)
+					-- upvalues: GuiService (upval)
+					GuiService:OpenBrowserWindow(Url)
+				end, "PurchasePrompt.openRobuxStore")
+				
+				return
+			else
+				GuiService:OpenBrowserWindow(("%sUpgrades/Robux.aspx"):format(Replaced))
+			end
 		end
 		
-		function t.openRobuxStoreWithContext(p1, p2)
-			-- upvalues: Replaced (upval), addContextToUrl (upval), GuiService (upval)
+		function t.openRobuxStoreWithContext(p1, ProductId)
+			-- upvalues: SharedFlagsModule (upval), Parent (upval), GuiService (upval), Replaced (upval), addContextToUrl (upval)
+			if SharedFlagsModule.FFlagEnableBuyRobuxNewRouting and SharedFlagsModule.FFlagEnableBuyRobuxNewRoutingInExperience then
+				require(Parent.BuyRobuxInExperience).openBuyRobux({ productId = ProductId, analyticId = p1.analyticId }, function(Url)
+					-- upvalues: GuiService (upval)
+					GuiService:OpenBrowserWindow(Url)
+				end, "PurchasePrompt.openRobuxStoreWithContext")
+				
+				return
+			end
 			local SUpgradesName: string = ("%sUpgrades/Robux.aspx"):format(Replaced)
 			
-			if p2 then
-				SUpgradesName ..= ("?product_id=%s"):format(p2)
+			if ProductId then
+				SUpgradesName ..= ("?product_id=%s"):format(ProductId)
 			end
 			GuiService:OpenBrowserWindow((addContextToUrl(SUpgradesName, p1)))
 		end

@@ -2,6 +2,7 @@
 local SignalsModule = require(script:FindFirstAncestor("ChatUIPrimitives").Parent.Signals)
 local PlainTextContentModelModule = require(script.Parent.Parent.ContentKinds.PlainText.PlainTextContentModel)
 local PresetContentModelModule = require(script.Parent.Parent.ContentKinds.Preset.PresetContentModel)
+local EmojiContentModelModule = require(script.Parent.Parent.ContentKinds.Emoji.EmojiContentModel)
 local MessageEnvelopeModelModule = require(script.Parent.Parent.MessageEnvelopeModel)
 local MessageModelModule = require(script.Parent.Parent.MessageModel)
 local _ = require(script.Parent.Parent.Types)
@@ -20,6 +21,10 @@ local _ = function(PresetId, DisplayText)
 		presetId = PresetId,
 		displayText = DisplayText
 	}
+end
+
+local _ = function(EmojiId, Unicode)
+	return { kind = "emoji", emojiId = EmojiId, unicode = Unicode }
 end
 
 local Frozen1 = table.freeze({
@@ -50,11 +55,16 @@ local Frozen2 = table.freeze({
 		presetId = "hello",
 		displayText = "Hello"
 	},
-	{ kind = "preset", presetId = "gg", displayText = "gg" }
+	{ kind = "preset", presetId = "gg", displayText = "gg" },
+	{
+		kind = "emoji",
+		emojiId = "party-popper",
+		unicode = "🎉"
+	}
 })
 
 local function acceptedSendOf(p1)
-	-- upvalues: PlainTextContentModelModule (copy), PresetContentModelModule (copy)
+	-- upvalues: PlainTextContentModelModule (copy), PresetContentModelModule (copy), EmojiContentModelModule (copy)
 	local Content = p1.contents[1]
 	
 	if Content == nil then
@@ -62,16 +72,25 @@ local function acceptedSendOf(p1)
 	end
 	local Draft = PlainTextContentModelModule.getDraft(Content)
 	
-	if Draft == nil then
-		local Draft1 = PresetContentModelModule.getDraft(Content)
+	if Draft ~= nil then
+		return if Draft.text == "" then nil else { kind = "plainText", text = Draft.text }
+	end
+	local Draft1 = PresetContentModelModule.getDraft(Content)
+	
+	if Draft1 == nil then
+		local Draft2 = EmojiContentModelModule.getDraft(Content)
 		
-		return if Draft1 == nil then nil elseif Draft1.presetId == "" or Draft1.displayText == "" then nil else {
+		return if Draft2 == nil then nil elseif Draft2.emojiId == "" or Draft2.unicode == "" then nil else {
+			kind = "emoji",
+			emojiId = Draft2.emojiId,
+			unicode = Draft2.unicode
+		}
+	else
+		return if Draft1.presetId == "" or Draft1.displayText == "" then nil else {
 			kind = "preset",
 			presetId = Draft1.presetId,
 			displayText = Draft1.displayText
 		}
-	else
-		return if Draft.text == "" then nil else { kind = "plainText", text = Draft.text }
 	end
 end
 
@@ -92,10 +111,10 @@ return {
 		
 		local _ = function(p2)
 			-- upvalues: p1 (copy), _Random (copy)
-			local CountP8 = #p2
+			local CountP10 = #p2
 			local _Random1 = if p1 then p1.random else nil
 			
-			return p2[if _Random1 then _Random1:NextInteger(1, CountP8) else _Random:NextInteger(1, CountP8)]
+			return p2[if _Random1 then _Random1:NextInteger(1, CountP10) else _Random:NextInteger(1, CountP10)]
 		end
 		
 		local Signal, Signal2 = SignalsModule.createSignal({})
@@ -154,7 +173,7 @@ return {
 			t.sentAtUnixMilliseconds = SentAtUnixMilliseconds
 			t.author = Author
 			
-			return if p3.kind == "preset" then MessageModelModule.fromPreset(p3.presetId, p3.displayText, t) else MessageModelModule.fromPlainText(p3.text, t)
+			return if p3.kind == "preset" then MessageModelModule.fromPreset(p3.presetId, p3.displayText, t) elseif p3.kind == "emoji" then MessageModelModule.fromEmoji(p3.emojiId, p3.unicode, t) else MessageModelModule.fromPlainText(p3.text, t)
 		end
 		
 		local _ = function(p3)

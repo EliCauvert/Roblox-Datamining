@@ -1,0 +1,3 @@
+﻿local FFlagAppChatSignalsActionHandlersModule = require(script:FindFirstAncestor("AppChat").Flags.FFlagAppChatSignalsActionHandlers)
+
+return game:DefineFastFlag("AppChatUseSignalsForLastEntryPoint", false) and FFlagAppChatSignalsActionHandlersModule

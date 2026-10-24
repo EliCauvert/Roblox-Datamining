@@ -4,5 +4,6 @@ local _ = require(Parent.React)
 local _ = require(Parent.Signals)
 local _ = require(Parent.MomentsTypes)
 local _ = require(MomentsCreation.Enums.CreationFlowState)
+local _ = require(MomentsCreation.Enums.MomentType)
 
 return {}

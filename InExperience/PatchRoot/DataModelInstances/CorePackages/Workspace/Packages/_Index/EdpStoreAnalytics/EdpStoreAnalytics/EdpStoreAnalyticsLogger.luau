@@ -3,6 +3,8 @@ local IXPService = game:GetService("IXPService")
 local EdpStoreAnalytics = script:FindFirstAncestor("EdpStoreAnalytics")
 local AppUserLayers = require(EdpStoreAnalytics.Parent.ExperimentLayers).AppUserLayers
 local ConstantsModule = require(EdpStoreAnalytics.Constants)
+local FFlagEnableDynamicEdpStorePreviewExposureLoggingModule = require(EdpStoreAnalytics.Flags.FFlagEnableDynamicEdpStorePreviewExposureLogging)
+local FStringEdpStorePreviewIXPLayersCommaSeparatedModule = require(EdpStoreAnalytics.Flags.FStringEdpStorePreviewIXPLayersCommaSeparated)
 local EdpStoreClicksDetectorThrottlingHundredthsPercent = game:DefineFastInt("EdpStoreClicksDetectorThrottlingHundredthsPercent", 0)
 local EdpStoreImpressionsDetectorThrottlingHundredthsPercent = game:DefineFastInt("EdpStoreImpressionsDetectorThrottlingHundredthsPercent", 0)
 
@@ -45,7 +47,18 @@ return {
 		sendImpressionLogEvent(CustomFields)
 	end,
 	logExperienceStoreExposure = function()
-		-- upvalues: IXPService (copy), AppUserLayers (copy)
-		IXPService:LogUserLayerExposure(AppUserLayers.EconomyDeveloperMonetizationEdpVirtualProductsRanking)
+		-- upvalues: FFlagEnableDynamicEdpStorePreviewExposureLoggingModule (copy), FStringEdpStorePreviewIXPLayersCommaSeparatedModule (copy), IXPService (copy), AppUserLayers (copy)
+		if not FFlagEnableDynamicEdpStorePreviewExposureLoggingModule then
+			IXPService:LogUserLayerExposure(AppUserLayers.EconomyDeveloperMonetizationEdpVirtualProductsRanking)
+			
+			return
+		end
+		for _, value in string.split(FStringEdpStorePreviewIXPLayersCommaSeparatedModule, ",") do
+			local Match: string? = string.match(value, "^%s*(.-)%s*$")
+			
+			if Match ~= nil and Match ~= "" then
+				IXPService:LogUserLayerExposure(Match)
+			end
+		end
 	end
 }

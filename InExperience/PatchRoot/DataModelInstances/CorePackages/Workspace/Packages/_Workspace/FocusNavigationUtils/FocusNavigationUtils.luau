@@ -9,6 +9,7 @@
 	useFocusedTextBox = require(script.useFocusedTextBox),
 	useFocusOnMount = require(script.useFocusOnMount),
 	useActivationOnFocus = require(script.useActivationOnFocus),
+	flushPendingActivationOnFocus = require(script.PendingActivationOnFocus).flush,
 	useFocusRoot = require(script.useFocusRoot),
 	useDefaultAppEventHandlers = require(script.useDefaultAppEventHandlers),
 	useDefaultFocusNavigationBindings = require(script.useDefaultFocusNavigationBindings),

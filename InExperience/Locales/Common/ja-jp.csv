@@ -165,7 +165,7 @@ Authentication.SignUp.Response.PasswordComplexity,もっと複雑なパスワー
 Authentication.SignUp.Response.UsernameMustBeSetFirst,最初にユーザーネームを設定する必要があります。
 Authentication.SignUp.Subtitle.AddYourBirthday,Robloxアカウントを作成するには、生年月日を入力してください。
 Authentication.SignUp.Subtitle.YourProgressCarriesOver,設定を完了すると、進行状況が引き継がれます。
-Authentication.SignUp.Subtitle.YoureAlmostThere,もう少しで完了です。今閉じるとアカウントが完全に作成されず、Robloxをプレイできません。
+Authentication.SignUp.Subtitle.YoureAlmostThereClose,もう少しで完了です。今キャンセルするとアカウントが完全に作成されず、Robloxをプレイできません。
 Authentication.TwoStepVerification.Action.GoToSecurity,
 Authentication.TwoStepVerification.Label.TwoStepRequired,取引を進めるには、2段階認証が必要です。 設定 > セキュリティ に行って、2段階認証を完了してください。
 Authentication.TwoStepVerification.Response.TooManyAttempts,試行回数が多すぎます。後でもう一度お試しください。
@@ -3179,7 +3179,6 @@ Feature.Contacts.Message.ContactDiscoverable,友達作りのために、あな�
 Feature.Contacts.Message.ContactsSyncWarning,連絡先は定期的に同期され、他のRobloxユーザーと一致すると保存されるため、友達を見つけるのに役立ちます。これはいつでもデバイス設定で管理できます。
 Feature.Contacts.Message.InviteToRoblox,一緒にバーチャル空間制作したり、シェアしたり、探検したりできるように、Robloxでつながりとして追加してください。
 Feature.Contacts.Message.NoResults,結果はありません。
-Feature.DeveloperProducts.Heading.Products,
 Feature.DeveloperProducts.Label.Product,
 Feature.DisplayName.ErrorMessage.AgedUpNameContainPII,名前に個人情報が含まれている可能性があります。
 Feature.DisplayName.ErrorMessage.AgedUpNameHasChanged,過去7日間で名前がすでに変更されています
@@ -3729,6 +3728,7 @@ Feature.Moments.Action.ShowDetails,
 Feature.Moments.Action.ShowMore,
 Feature.Moments.Action.TrimVideo,ビデオをトリミング
 Feature.Moments.Action.TryAgain,もう一度試す
+Feature.Moments.Body.EDPMomentIPReportInstructions,このモーメントにおける知的財産権の侵害を報告するには、ゲームの詳細ページに進んでください。
 Feature.Moments.Description.CommunityStandards,発言できることとできないことの詳細については、コミュニティ基準を確認してください。
 Feature.Moments.Description.EmptyCapturesLibrary,ここに切り抜きが表示されます。
 Feature.Moments.Description.GenerateTextFeedbackDisclosure,AIが生成したものです。投稿前にご確認ください。公開された内容に対する責任はご自身にあります。
@@ -3857,11 +3857,12 @@ Feature.Moments.Label.WriteComment,コメントを書く
 Feature.Moments.Title.Comments,コメント
 Feature.Moments.Title.CommentsWithCappedCount,{count}件以上のコメント
 Feature.Moments.Title.CommentsWithCount,{count}件のコメント
+Feature.Moments.Title.EDPMomentIPReportInstructions,ゲームの詳細ページで規約違反を報告する
 Feature.Moments.Title.GenerateTextFeedbackReason,何が問題でしたか？
 Feature.Moments.Title.GenerateTextOptions,
 Feature.Moments.Title.LeaveMomentCreation,モーメント作成を退出しますか？
 Feature.Moments.Title.MomentRemoved,
-Feature.Moments.Title.PostInsights,ページヘッダーのタイトル
+Feature.Moments.Title.PostInsights,投稿のインサイト
 Feature.Moments.Title.ReportPost,投稿の規約違反を報告
 Feature.Moments.Tooltip.Creation,バーチャル空間内の全員があなたのモーメントを見ることができます。
 Feature.Moments.Tooltip.PostInsightsBody,視聴回数、視聴時間、モーメントに対するオーディエンスの反応を確認できます。
