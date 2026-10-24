@@ -2,10 +2,10 @@
     try {
         var e = "u" > typeof window ? window : "u" > typeof global ? global : "u" > typeof globalThis ? globalThis : "u" > typeof self ? self : {};
         e.SENTRY_RELEASE = {
-            id: "35ca145c9511776a6c2820caf6ef4f23a6c01467"
+            id: "92eb3e5044298d23ed77c2027291cf35096030ba"
         };
         var t = (new e.Error).stack;
-        t && (e._sentryDebugIds = e._sentryDebugIds || {}, e._sentryDebugIds[t] = "4ccfde31-1205-40aa-9522-893df0890424", e._sentryDebugIdIdentifier = "sentry-dbid-4ccfde31-1205-40aa-9522-893df0890424")
+        t && (e._sentryDebugIds = e._sentryDebugIds || {}, e._sentryDebugIds[t] = "92b8812f-4a68-4f6d-ada6-729ffe7db745", e._sentryDebugIdIdentifier = "sentry-dbid-92b8812f-4a68-4f6d-ada6-729ffe7db745")
     } catch (e) {}
 }(),
 function() {
@@ -3137,7 +3137,7 @@ function() {
                     }
                 }
             }
-            var eu = (S0 = en, function(e, t, r, n) {
+            var eu = (S4 = en, function(e, t, r, n) {
                     var o = r ? Object.assign(r, {
                             async: !1
                         }) : {
@@ -3149,14 +3149,14 @@ function() {
                         }, o);
                     if (ea(i, Promise)) throw new U;
                     if (i.issues.length) {
-                        var a, l = new(null != (a = null == n ? void 0 : n.Err) ? a : S0)(i.issues.map(function(e) {
+                        var a, l = new(null != (a = null == n ? void 0 : n.Err) ? a : S4)(i.issues.map(function(e) {
                             return ee(e, o, F())
                         }));
                         throw q(l, null == n ? void 0 : n.callee), l
                     }
                     return i.value
                 }),
-                ec = (S1 = en, function(e, t, r, n) {
+                ec = (S3 = en, function(e, t, r, n) {
                     return ei(function() {
                         var o, i, a, l;
                         return el(this, function(u) {
@@ -3174,7 +3174,7 @@ function() {
                                 case 1:
                                     i = u.sent(), u.label = 2;
                                 case 2:
-                                    if (i.issues.length) throw q(l = new(null != (a = null == n ? void 0 : n.Err) ? a : S1)(i.issues.map(function(e) {
+                                    if (i.issues.length) throw q(l = new(null != (a = null == n ? void 0 : n.Err) ? a : S3)(i.issues.map(function(e) {
                                         return ee(e, o, F())
                                     })), null == n ? void 0 : n.callee), l;
                                     return [2, i.value]
@@ -3182,7 +3182,7 @@ function() {
                         })
                     })()
                 }),
-                es = (S2 = en, function(e, t, r) {
+                es = (S5 = en, function(e, t, r) {
                     var n, o, i = r ? (n = function(e) {
                             for (var t = 1; t < arguments.length; t++) {
                                 var r = null != arguments[t] ? arguments[t] : {},
@@ -3221,7 +3221,7 @@ function() {
                     if (ea(a, Promise)) throw new U;
                     return a.issues.length ? {
                         success: !1,
-                        error: new(null != S2 ? S2 : er)(a.issues.map(function(e) {
+                        error: new(null != S5 ? S5 : er)(a.issues.map(function(e) {
                             return ee(e, i, F())
                         }))
                     } : {
@@ -3229,7 +3229,7 @@ function() {
                         data: a.value
                     }
                 }),
-                ef = (S4 = en, function(e, t, r) {
+                ef = (S6 = en, function(e, t, r) {
                     return ei(function() {
                         var n, o;
                         return el(this, function(i) {
@@ -3249,7 +3249,7 @@ function() {
                                 case 2:
                                     return [2, o.issues.length ? {
                                         success: !1,
-                                        error: new S4(o.issues.map(function(e) {
+                                        error: new S6(o.issues.map(function(e) {
                                             return ee(e, n, F())
                                         }))
                                     } : {
@@ -4169,7 +4169,7 @@ function() {
             }
 
             function e5() {
-                return null != x1 || (x1 = "".concat(A().apiGatewayUrl.replace(/\/$/, ""), "/experience-signals-ingest/public")), x1
+                return null != x3 || (x3 = "".concat(A().apiGatewayUrl.replace(/\/$/, ""), "/experience-signals-ingest/public")), x3
             }
             var e6 = function() {};
 
@@ -5166,7 +5166,7 @@ function() {
                     PurchaseNotEnabled: "PurchaseNotEnabled",
                     SpendLimitExceeded: "SpendLimitExceeded"
                 },
-                rl = (S6 = function(e) {
+                rl = (S9 = function(e) {
                     for (var t = 1; t < arguments.length; t++) {
                         var r = null != arguments[t] ? arguments[t] : {},
                             n = Object.keys(r);
@@ -5189,7 +5189,7 @@ function() {
                     U13MonthlyThreshold2Modal: "U13MonthlyThreshold2Modal",
                     ParentalConsentWarningPaymentModal13To17: "ParentalConsentWarningPaymentModal13To17",
                     RequireEmailVerification: "RequireEmailVerification"
-                }, ra), S8 = S8 = {
+                }, ra), xe = xe = {
                     SUBMIT_ORDER: "Submit Order",
                     REDEEM: "Redeem",
                     BUY_ROBUX: "Buy Robux",
@@ -5273,16 +5273,16 @@ function() {
                     GET_ROBUX_CLICKED: "GetRobuxClicked",
                     TIER_SELECTED: "TierSelected",
                     SUBSCRIBE_CLICKED: "SubscribeClicked"
-                }, Object.getOwnPropertyDescriptors ? Object.defineProperties(S6, Object.getOwnPropertyDescriptors(S8)) : (function(e) {
+                }, Object.getOwnPropertyDescriptors ? Object.defineProperties(S9, Object.getOwnPropertyDescriptors(xe)) : (function(e) {
                     var t = Object.keys(e);
                     if (Object.getOwnPropertySymbols) {
                         var r = Object.getOwnPropertySymbols(e);
                         t.push.apply(t, r)
                     }
                     return t
-                })(Object(S8)).forEach(function(e) {
-                    Object.defineProperty(S6, e, Object.getOwnPropertyDescriptor(S8, e))
-                }), S6),
+                })(Object(xe)).forEach(function(e) {
+                    Object.defineProperty(S9, e, Object.getOwnPropertyDescriptor(xe, e))
+                }), S9),
                 ru = {
                     ABANDONED: "Abandoned",
                     FAILED_PREPARE_PAYMENT_REQUEST: "FailedPreparePaymentRequest",
@@ -5926,12 +5926,12 @@ function() {
                         }
                     }], e && rD(r.prototype, e), t && rD(r, t), r
                 }());
-            if (null != O && (null == w || !0 !== Reflect.get(w, rM) && (Object.assign(w, (rM in (S3 = {}) ? Object.defineProperty(S3, rM, {
+            if (null != O && (null == w || !0 !== Reflect.get(w, rM) && (Object.assign(w, (rM in (S8 = {}) ? Object.defineProperty(S8, rM, {
                     value: !0,
                     enumerable: !0,
                     configurable: !0,
                     writable: !0
-                }) : S3[rM] = !0, S3)), 1))) {
+                }) : S8[rM] = !0, S8)), 1))) {
                 var rV = function() {
                     rR(rG), (null == O ? void 0 : O.getElementById("display-price-container")) == null && r_(rG)
                 };
@@ -6086,7 +6086,7 @@ function() {
                         }
                     }), e && r1(t, e), t
                 }(r2(Error)),
-                r5 = ((S7 = r5 || {}).MISSING_MESSAGE = "MISSING_MESSAGE", S7.MISSING_FORMAT = "MISSING_FORMAT", S7.ENVIRONMENT_FALLBACK = "ENVIRONMENT_FALLBACK", S7.INSUFFICIENT_PATH = "INSUFFICIENT_PATH", S7.INVALID_MESSAGE = "INVALID_MESSAGE", S7.INVALID_KEY = "INVALID_KEY", S7.FORMATTING_ERROR = "FORMATTING_ERROR", S7);
+                r5 = ((xt = r5 || {}).MISSING_MESSAGE = "MISSING_MESSAGE", xt.MISSING_FORMAT = "MISSING_FORMAT", xt.ENVIRONMENT_FALLBACK = "ENVIRONMENT_FALLBACK", xt.INSUFFICIENT_PATH = "INSUFFICIENT_PATH", xt.INVALID_MESSAGE = "INVALID_MESSAGE", xt.INVALID_KEY = "INVALID_KEY", xt.FORMATTING_ERROR = "FORMATTING_ERROR", xt);
 
             function r6() {
                 return {
@@ -6281,7 +6281,7 @@ function() {
                     if ("Arguments" === r || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(r)) return nd(e, t)
                 }
             }
-            var nh = ((S9 = {})[S9.EXPECT_ARGUMENT_CLOSING_BRACE = 1] = "EXPECT_ARGUMENT_CLOSING_BRACE", S9[S9.EMPTY_ARGUMENT = 2] = "EMPTY_ARGUMENT", S9[S9.MALFORMED_ARGUMENT = 3] = "MALFORMED_ARGUMENT", S9[S9.EXPECT_ARGUMENT_TYPE = 4] = "EXPECT_ARGUMENT_TYPE", S9[S9.INVALID_ARGUMENT_TYPE = 5] = "INVALID_ARGUMENT_TYPE", S9[S9.EXPECT_ARGUMENT_STYLE = 6] = "EXPECT_ARGUMENT_STYLE", S9[S9.INVALID_NUMBER_SKELETON = 7] = "INVALID_NUMBER_SKELETON", S9[S9.INVALID_DATE_TIME_SKELETON = 8] = "INVALID_DATE_TIME_SKELETON", S9[S9.EXPECT_NUMBER_SKELETON = 9] = "EXPECT_NUMBER_SKELETON", S9[S9.EXPECT_DATE_TIME_SKELETON = 10] = "EXPECT_DATE_TIME_SKELETON", S9[S9.UNCLOSED_QUOTE_IN_ARGUMENT_STYLE = 11] = "UNCLOSED_QUOTE_IN_ARGUMENT_STYLE", S9[S9.EXPECT_SELECT_ARGUMENT_OPTIONS = 12] = "EXPECT_SELECT_ARGUMENT_OPTIONS", S9[S9.EXPECT_PLURAL_ARGUMENT_OFFSET_VALUE = 13] = "EXPECT_PLURAL_ARGUMENT_OFFSET_VALUE", S9[S9.INVALID_PLURAL_ARGUMENT_OFFSET_VALUE = 14] = "INVALID_PLURAL_ARGUMENT_OFFSET_VALUE", S9[S9.EXPECT_SELECT_ARGUMENT_SELECTOR = 15] = "EXPECT_SELECT_ARGUMENT_SELECTOR", S9[S9.EXPECT_PLURAL_ARGUMENT_SELECTOR = 16] = "EXPECT_PLURAL_ARGUMENT_SELECTOR", S9[S9.EXPECT_SELECT_ARGUMENT_SELECTOR_FRAGMENT = 17] = "EXPECT_SELECT_ARGUMENT_SELECTOR_FRAGMENT", S9[S9.EXPECT_PLURAL_ARGUMENT_SELECTOR_FRAGMENT = 18] = "EXPECT_PLURAL_ARGUMENT_SELECTOR_FRAGMENT", S9[S9.INVALID_PLURAL_ARGUMENT_SELECTOR = 19] = "INVALID_PLURAL_ARGUMENT_SELECTOR", S9[S9.DUPLICATE_PLURAL_ARGUMENT_SELECTOR = 20] = "DUPLICATE_PLURAL_ARGUMENT_SELECTOR", S9[S9.DUPLICATE_SELECT_ARGUMENT_SELECTOR = 21] = "DUPLICATE_SELECT_ARGUMENT_SELECTOR", S9[S9.MISSING_OTHER_CLAUSE = 22] = "MISSING_OTHER_CLAUSE", S9[S9.INVALID_TAG = 23] = "INVALID_TAG", S9[S9.INVALID_TAG_NAME = 25] = "INVALID_TAG_NAME", S9[S9.UNMATCHED_CLOSING_TAG = 26] = "UNMATCHED_CLOSING_TAG", S9[S9.UNCLOSED_TAG = 27] = "UNCLOSED_TAG", S9);
+            var nh = ((xr = {})[xr.EXPECT_ARGUMENT_CLOSING_BRACE = 1] = "EXPECT_ARGUMENT_CLOSING_BRACE", xr[xr.EMPTY_ARGUMENT = 2] = "EMPTY_ARGUMENT", xr[xr.MALFORMED_ARGUMENT = 3] = "MALFORMED_ARGUMENT", xr[xr.EXPECT_ARGUMENT_TYPE = 4] = "EXPECT_ARGUMENT_TYPE", xr[xr.INVALID_ARGUMENT_TYPE = 5] = "INVALID_ARGUMENT_TYPE", xr[xr.EXPECT_ARGUMENT_STYLE = 6] = "EXPECT_ARGUMENT_STYLE", xr[xr.INVALID_NUMBER_SKELETON = 7] = "INVALID_NUMBER_SKELETON", xr[xr.INVALID_DATE_TIME_SKELETON = 8] = "INVALID_DATE_TIME_SKELETON", xr[xr.EXPECT_NUMBER_SKELETON = 9] = "EXPECT_NUMBER_SKELETON", xr[xr.EXPECT_DATE_TIME_SKELETON = 10] = "EXPECT_DATE_TIME_SKELETON", xr[xr.UNCLOSED_QUOTE_IN_ARGUMENT_STYLE = 11] = "UNCLOSED_QUOTE_IN_ARGUMENT_STYLE", xr[xr.EXPECT_SELECT_ARGUMENT_OPTIONS = 12] = "EXPECT_SELECT_ARGUMENT_OPTIONS", xr[xr.EXPECT_PLURAL_ARGUMENT_OFFSET_VALUE = 13] = "EXPECT_PLURAL_ARGUMENT_OFFSET_VALUE", xr[xr.INVALID_PLURAL_ARGUMENT_OFFSET_VALUE = 14] = "INVALID_PLURAL_ARGUMENT_OFFSET_VALUE", xr[xr.EXPECT_SELECT_ARGUMENT_SELECTOR = 15] = "EXPECT_SELECT_ARGUMENT_SELECTOR", xr[xr.EXPECT_PLURAL_ARGUMENT_SELECTOR = 16] = "EXPECT_PLURAL_ARGUMENT_SELECTOR", xr[xr.EXPECT_SELECT_ARGUMENT_SELECTOR_FRAGMENT = 17] = "EXPECT_SELECT_ARGUMENT_SELECTOR_FRAGMENT", xr[xr.EXPECT_PLURAL_ARGUMENT_SELECTOR_FRAGMENT = 18] = "EXPECT_PLURAL_ARGUMENT_SELECTOR_FRAGMENT", xr[xr.INVALID_PLURAL_ARGUMENT_SELECTOR = 19] = "INVALID_PLURAL_ARGUMENT_SELECTOR", xr[xr.DUPLICATE_PLURAL_ARGUMENT_SELECTOR = 20] = "DUPLICATE_PLURAL_ARGUMENT_SELECTOR", xr[xr.DUPLICATE_SELECT_ARGUMENT_SELECTOR = 21] = "DUPLICATE_SELECT_ARGUMENT_SELECTOR", xr[xr.MISSING_OTHER_CLAUSE = 22] = "MISSING_OTHER_CLAUSE", xr[xr.INVALID_TAG = 23] = "INVALID_TAG", xr[xr.INVALID_TAG_NAME = 25] = "INVALID_TAG_NAME", xr[xr.UNMATCHED_CLOSING_TAG = 26] = "UNMATCHED_CLOSING_TAG", xr[xr.UNCLOSED_TAG = 27] = "UNCLOSED_TAG", xr);
 
             function nb(e) {
                 return !!(e && (void 0 === e ? "undefined" : ny(e)) === "object" && 0 === e.type)
@@ -7716,7 +7716,7 @@ function() {
                     }
                 }
             }
-            var nJ = ((x2 = function() {
+            var nJ = ((x5 = function() {
                 function e(t) {
                     var r, n = this,
                         o = arguments.length > 1 && void 0 !== arguments[1] ? arguments[1] : e.defaultLocale,
@@ -7923,12 +7923,12 @@ function() {
                         return e.memoizedDefaultLocale || (e.memoizedDefaultLocale = new Intl.NumberFormat().resolvedOptions().locale), e.memoizedDefaultLocale
                     }
                 }]), e
-            }()).memoizedDefaultLocale = null, x2.resolveLocale = function(e) {
+            }()).memoizedDefaultLocale = null, x5.resolveLocale = function(e) {
                 if (void 0 !== Intl.Locale) {
                     var t = Intl.NumberFormat.supportedLocalesOf(e);
                     return new Intl.Locale(t.length > 0 ? t[0] : "string" == typeof e ? e : e[0])
                 }
-            }, x2.__parse = function(e) {
+            }, x5.__parse = function(e) {
                 var t = arguments.length > 1 && void 0 !== arguments[1] ? arguments[1] : {},
                     r = new nN(e, t = np({
                         shouldParseSkeletons: !0,
@@ -7945,7 +7945,7 @@ function() {
                         else 2 === t.type && nb(t.style) || (3 === t.type || 4 === t.type) && nv(t.style) ? delete t.style.location : 8 === t.type && e(t.children)
                     })
                 }(r.val), r.val
-            }, x2.formats = {
+            }, x5.formats = {
                 number: {
                     integer: {
                         maximumFractionDigits: 0
@@ -8003,7 +8003,7 @@ function() {
                         timeZoneName: "short"
                     }
                 }
-            }, x2);
+            }, x5);
 
             function n0(e, t) {
                 (null == t || t > e.length) && (t = e.length);
@@ -9335,7 +9335,7 @@ function() {
                 var t;
                 return null != e && (void 0 === e ? "undefined" : it(e)) === "object" && "$$typeof" in e && e.$$typeof === ir && "_payload" in e && (void 0 === (t = e._payload) ? "undefined" : it(t)) === "object" && null !== t && "then" in t
             }
-            var ia = ((S5 = e1.forwardRef(function(e, t) {
+            var ia = ((S7 = e1.forwardRef(function(e, t) {
                     var r = e.children,
                         n = o9(e, ["children"]);
                     if (ii(r) && "function" == typeof io && (r = io(r._payload)), e1.isValidElement(r)) {
@@ -9356,7 +9356,7 @@ function() {
                         return r.type !== e1.Fragment && (s.ref = t ? o3(t, c) : c), e1.cloneElement(r, s)
                     }
                     return e1.Children.count(r) > 1 ? e1.Children.only(null) : null
-                })).displayName = "".concat("Slot", ".SlotClone"), xe = S5, (xt = e1.forwardRef(function(e, t) {
+                })).displayName = "".concat("Slot", ".SlotClone"), xn = S7, (xo = e1.forwardRef(function(e, t) {
                     var r = e.children,
                         n = o9(e, ["children"]);
                     ii(r) && "function" == typeof io && (r = io(r._payload));
@@ -9367,16 +9367,16 @@ function() {
                             l = o.map(function(e) {
                                 return e !== i ? e : e1.Children.count(a) > 1 ? e1.Children.only(null) : e1.isValidElement(a) ? a.props.children : null
                             });
-                        return (0, p.jsx)(xe, o7(o8({}, n), {
+                        return (0, p.jsx)(xn, o7(o8({}, n), {
                             ref: t,
                             children: e1.isValidElement(a) ? e1.cloneElement(a, void 0, l) : null
                         }))
                     }
-                    return (0, p.jsx)(xe, o7(o8({}, n), {
+                    return (0, p.jsx)(xn, o7(o8({}, n), {
                         ref: t,
                         children: r
                     }))
-                })).displayName = "".concat("Slot", ".Slot"), xt),
+                })).displayName = "".concat("Slot", ".Slot"), xo),
                 il = Symbol("radix.slottable");
 
             function iu(e) {
@@ -10495,7 +10495,7 @@ function() {
                         }
                     }]), e
                 }();
-            (x4 || (x4 = {})).all = function(e) {
+            (x6 || (x6 = {})).all = function(e) {
                 var t = e.findIndex(function(e) {
                     return e.isErr()
                 });
@@ -10685,7 +10685,7 @@ function() {
                     }, {
                         key: "all",
                         value: function(t) {
-                            return new e(Promise.all(t).then(x4.all))
+                            return new e(Promise.all(t).then(x6.all))
                         }
                     }]), e
                 }(),
@@ -11708,22 +11708,22 @@ function() {
                 ln = lt.trackError,
                 lo = lt.trackCriticalError,
                 li = a7(le, rj),
-                la = (xn = "function" == typeof(xr = {
+                la = (xa = "function" == typeof(xi = {
                     publishCounter: le
-                }) ? xr : xr.publishCounter, xo = !1, xi = !1, {
+                }) ? xi : xi.publishCounter, xl = !1, xu = !1, {
                     reportPageLoad: function() {
-                        if (!xo) {
-                            xo = !0;
+                        if (!xl) {
+                            xl = !0;
                             try {
-                                xn("PageLoad")
+                                xa("PageLoad")
                             } catch (e) {}
                         }
                     },
                     reportPageView: function() {
-                        if (!xi) {
-                            xi = !0;
+                        if (!xu) {
+                            xu = !0;
                             try {
-                                xn("PageView")
+                                xa("PageView")
                             } catch (e) {}
                         }
                     }
@@ -11746,8 +11746,8 @@ function() {
                 }
                 l.done ? t(u) : Promise.resolve(u).then(n, o)
             }
-            var lf = ((xa = {}).GET = "GET", xa.POST = "POST", xa),
-                ld = ((xl = {}).ACKNOWLEDGE_PURCHASE_WARNING = "AcknowledgePurchaseWarning", xl.CHECK_USER_PURCHASE_SETTING = "CheckUserPurchaseSetting", xl.GET_ENABLE_PURCHASES_SETTING = "GetEnablePurchaseSetting", xl.GET_PAYMENT_PROFILES = "GetPaymentProfiles", xl.GET_PENDING_ENABLE_PURCHASE_CONSENT_REQUESTS = "GetPendingEnablePurchaseConsentRequests", xl.GET_PURCHASE_WARNING = "GetPurchaseWarning", xl.GET_QUICK_PAY_METADATA = "GetQuickPayMetadata", xl.GET_ROBUX_BALANCE = "GetRobuxBalance", xl.GET_THUMBNAILS = "GetThumbnails", xl.PREPARE_PAYMENT = "PreparePayment", xl.PROCESS_PAYMENT = "ProcessPayment", xl.GET_CLIENT_ASSERTION_V2 = "GetClientAssertionV2", xl.GET_AUTH_TICKET_V2 = "GetAuthTicketV2", xl.GET_MY_FRIENDS = "GetMyFriends", xl.USER_SEARCH = "UserSearch", xl);
+            var lf = ((xc = {}).GET = "GET", xc.POST = "POST", xc),
+                ld = ((xs = {}).ACKNOWLEDGE_PURCHASE_WARNING = "AcknowledgePurchaseWarning", xs.CHECK_USER_PURCHASE_SETTING = "CheckUserPurchaseSetting", xs.GET_ENABLE_PURCHASES_SETTING = "GetEnablePurchaseSetting", xs.GET_PAYMENT_PROFILES = "GetPaymentProfiles", xs.GET_PENDING_ENABLE_PURCHASE_CONSENT_REQUESTS = "GetPendingEnablePurchaseConsentRequests", xs.GET_PURCHASE_WARNING = "GetPurchaseWarning", xs.GET_QUICK_PAY_METADATA = "GetQuickPayMetadata", xs.GET_ROBUX_BALANCE = "GetRobuxBalance", xs.GET_THUMBNAILS = "GetThumbnails", xs.PREPARE_PAYMENT = "PreparePayment", xs.PROCESS_PAYMENT = "ProcessPayment", xs.GET_CLIENT_ASSERTION_V2 = "GetClientAssertionV2", xs.GET_AUTH_TICKET_V2 = "GetAuthTicketV2", xs.GET_MY_FRIENDS = "GetMyFriends", xs.USER_SEARCH = "UserSearch", xs);
 
             function lp(e, t, r, n, o, i) {
                 var a;
@@ -12062,7 +12062,7 @@ function() {
                 }
                 l.done ? t(u) : Promise.resolve(u).then(n, o)
             }
-            var lg = ((xu = {}).Completed = "Completed", xu.Pending = "Pending", xu),
+            var lg = ((xf = {}).Completed = "Completed", xf.Pending = "Pending", xf),
                 lw = function(e) {
                     var t;
                     return (t = function() {
@@ -12259,7 +12259,7 @@ function() {
             null == lE || lE.isPcGdkApp;
             var lC = !!lE && (lE.isDesktop && !lE.isUWPApp && !lE.isPcGdkApp || !lE.isAmazonApp && !lE.isUWPApp && !lE.isIosApp && !lE.isAndroidApp && !lE.isPcGdkApp),
                 lT = !!lE && (lE.isAmazonApp || lE.isUWPApp || lE.isIosApp || lE.isAndroidApp || lE.isPcGdkApp),
-                lN = null == (x3 = (0, t2.getDeviceMeta)()) ? void 0 : x3.isDesktop,
+                lN = null == (x8 = (0, t2.getDeviceMeta)()) ? void 0 : x8.isDesktop,
                 lM = rG.ENUM_TRIGGERING_CONTEXT,
                 lk = lM.MOBILE_WEB_PREMIUM_PURCHASE,
                 lR = lM.MOBILE_WEB_ROBUX_PURCHASE,
@@ -12929,9 +12929,9 @@ function() {
             var ug = "u" < typeof __SENTRY_DEBUG__ || __SENTRY_DEBUG__;
 
             function uw(e) {
-                if (void 0 !== x5) return x5 ? x5(e) : e();
+                if (void 0 !== x7) return x7 ? x7(e) : e();
                 var t = Symbol.for("__SENTRY_SAFE_RANDOM_ID_WRAPPER__");
-                return t in um && "function" == typeof um[t] ? (x5 = um[t])(e) : (x5 = null, e())
+                return t in um && "function" == typeof um[t] ? (x7 = um[t])(e) : (x7 = null, e())
             }
 
             function uO() {
@@ -12947,7 +12947,7 @@ function() {
                         return e.randomUUID()
                     }).replace(/-/g, "")
                 } catch (e) {}
-                return x6 || (x6 = "10000000100040008000100000000000"), x6.replace(/[018]/g, function(e) {
+                return x9 || (x9 = "10000000100040008000100000000000"), x9.replace(/[018]/g, function(e) {
                     return (e ^ (15 & 16 * uO()) >> e / 4).toString(16)
                 })
             }
@@ -13157,7 +13157,7 @@ function() {
                                     username: void 0
                                 }, this._session && function(e) {
                                     var t = arguments.length > 1 && void 0 !== arguments[1] ? arguments[1] : {};
-                                    if (t.user && (!e.ipAddress && t.user.ip_address && (e.ipAddress = t.user.ip_address), e.did || t.did || (e.did = t.user.id || t.user.email || t.user.username)), e.timestamp = t.timestamp || (null != x8 ? x8 : x8 = function() {
+                                    if (t.user && (!e.ipAddress && t.user.ip_address && (e.ipAddress = t.user.ip_address), e.did || t.did || (e.did = t.user.id || t.user.email || t.user.username)), e.timestamp = t.timestamp || (null != Pe ? Pe : Pe = function() {
                                             var e = um.performance;
                                             if (!(null == e ? void 0 : e.now) || !e.timeOrigin) return ux;
                                             var t = e.timeOrigin;
@@ -14158,7 +14158,7 @@ function() {
                 };
                 return o.scopeName = n.scopeName, o
             }
-            var cy = (null == (x7 = globalThis) ? void 0 : x7.document) ? e1.useLayoutEffect : function() {};
+            var cy = (null == (Pt = globalThis) ? void 0 : Pt.document) ? e1.useLayoutEffect : function() {};
 
             function cm(e, t) {
                 (null == t || t > e.length) && (t = e.length);
@@ -14717,42 +14717,42 @@ function() {
             }
             var cQ = "u" > typeof window ? e1.useLayoutEffect : e1.useEffect,
                 c$ = new WeakMap,
-                cZ = (void 0 === xc && (xc = {}), (void 0 === xs && (xs = function(e) {
+                cZ = (void 0 === xd && (xd = {}), (void 0 === xp && (xp = function(e) {
                     return e
-                }), xf = [], xd = !1, xp = {
+                }), xy = [], xm = !1, xh = {
                     read: function() {
-                        if (xd) throw Error("Sidecar: could not `read` from an `assigned` medium. `read` could be used only with `useMedium`.");
-                        return xf.length ? xf[xf.length - 1] : null
+                        if (xm) throw Error("Sidecar: could not `read` from an `assigned` medium. `read` could be used only with `useMedium`.");
+                        return xy.length ? xy[xy.length - 1] : null
                     },
                     useMedium: function(e) {
-                        var t = xs(e, xd);
-                        return xf.push(t),
+                        var t = xp(e, xm);
+                        return xy.push(t),
                             function() {
-                                xf = xf.filter(function(e) {
+                                xy = xy.filter(function(e) {
                                     return e !== t
                                 })
                             }
                     },
                     assignSyncMedium: function(e) {
-                        for (xd = !0; xf.length;) {
-                            var t = xf;
-                            xf = [], t.forEach(e)
+                        for (xm = !0; xy.length;) {
+                            var t = xy;
+                            xy = [], t.forEach(e)
                         }
-                        xf = {
+                        xy = {
                             push: function(t) {
                                 return e(t)
                             },
                             filter: function() {
-                                return xf
+                                return xy
                             }
                         }
                     },
                     assignMedium: function(e) {
-                        xd = !0;
+                        xm = !0;
                         var t = [];
-                        if (xf.length) {
-                            var r = xf;
-                            xf = [], r.forEach(e), t = xf
+                        if (xy.length) {
+                            var r = xy;
+                            xy = [], r.forEach(e), t = xy
                         }
                         var n = function() {
                                 var r = t;
@@ -14761,19 +14761,19 @@ function() {
                             o = function() {
                                 return Promise.resolve().then(n)
                             };
-                        o(), xf = {
+                        o(), xy = {
                             push: function(e) {
                                 t.push(e), o()
                             },
                             filter: function(e) {
-                                return t = t.filter(e), xf
+                                return t = t.filter(e), xy
                             }
                         }
                     }
                 }).options = cW({
                     async: !0,
                     ssr: !1
-                }, xc), xp),
+                }, xd), xh),
                 cJ = function() {},
                 c0 = e1.forwardRef(function(e, t) {
                     var r, n, o, i, a = e1.useRef(null),
@@ -14875,7 +14875,7 @@ function() {
                                     if (!document) return null;
                                     var e = document.createElement("style");
                                     e.type = "text/css";
-                                    var t = x9 || r.nc;
+                                    var t = Pr || r.nc;
                                     return t && e.setAttribute("nonce", t), e
                                 }())) {
                                 var o, i;
@@ -15040,7 +15040,7 @@ function() {
                 },
                 sb = 0,
                 sv = [],
-                sg = (xy = function(e) {
+                sg = (xb = function(e) {
                     var t = e1.useRef([]),
                         r = e1.useRef([0, 0]),
                         n = e1.useRef(),
@@ -15148,7 +15148,7 @@ function() {
                         noRelative: e.noRelative,
                         gapMode: e.gapMode
                     }) : null)
-                }, cZ.useMedium(xy), c1),
+                }, cZ.useMedium(xb), c1),
                 sw = e1.forwardRef(function(e, t) {
                     return e1.createElement(c0, cW({}, e, {
                         ref: t,
@@ -15564,24 +15564,24 @@ function() {
             }
             s5.displayName = s3;
             var s8 = "DialogTitleWarning",
-                s7 = sM((xm = {
+                s7 = sM((xv = {
                     contentName: sQ,
                     titleName: s1,
                     docsSlug: "dialog"
-                }, xh = e1.createContext(xm), (xb = function(e) {
+                }, xg = e1.createContext(xv), (xw = function(e) {
                     var t = e.children,
                         r = cs(e, ["children"]),
                         n = e1.useMemo(function() {
                             return r
                         }, Object.values(r));
-                    return (0, p.jsx)(xh.Provider, {
+                    return (0, p.jsx)(xg.Provider, {
                         value: n,
                         children: t
                     })
-                }).displayName = s8 + "Provider", [xb, function(e) {
-                    var t = e1.useContext(xh);
+                }).displayName = s8 + "Provider", [xw, function(e) {
+                    var t = e1.useContext(xg);
                     if (t) return t;
-                    if (void 0 !== xm) return xm;
+                    if (void 0 !== xv) return xv;
                     throw Error("`".concat(e, "` must be used within `").concat(s8, "`"))
                 }]), 2),
                 s9 = (s7[0], s7[1]),
@@ -17032,7 +17032,7 @@ function() {
                     }
                 }
             }
-            var dy = ((xv = {}).U13PaymentModal = "U13PaymentModal", xv.U13MonthlyThreshold1Modal = "U13MonthlyThreshold1Modal", xv.U13MonthlyThreshold2Modal = "U13MonthlyThreshold2Modal", xv.ParentalConsentWarningPaymentModal13To17 = "ParentalConsentWarningPaymentModal13To17", xv.RequireEmailVerification = "RequireEmailVerification", xv),
+            var dy = ((xO = {}).U13PaymentModal = "U13PaymentModal", xO.U13MonthlyThreshold1Modal = "U13MonthlyThreshold1Modal", xO.U13MonthlyThreshold2Modal = "U13MonthlyThreshold2Modal", xO.ParentalConsentWarningPaymentModal13To17 = "ParentalConsentWarningPaymentModal13To17", xO.RequireEmailVerification = "RequireEmailVerification", xO),
                 dm = "<br /><br />";
 
             function dh() {
@@ -17436,7 +17436,7 @@ function() {
                 };
                 return o.scopeName = n.scopeName, o
             }
-            var dN = (null == (Pe = globalThis) ? void 0 : Pe.document) ? e1.useLayoutEffect : function() {};
+            var dN = (null == (Pn = globalThis) ? void 0 : Pn.document) ? e1.useLayoutEffect : function() {};
 
             function dM(e, t) {
                 (null == t || t > e.length) && (t = e.length);
@@ -23736,31 +23736,31 @@ function() {
             var vj = [" ", "Enter", "ArrowUp", "ArrowDown"],
                 vI = [" ", "Enter"],
                 vA = "Select",
-                vC = vP((xO = (xw = vp(cd(xg = vA + "CollectionProvider"), 2))[0], xS = xw[1], xP = (xx = vp(xO(xg, {
+                vC = vP((xP = (xx = vp(cd(xS = vA + "CollectionProvider"), 2))[0], xE = xx[1], xI = (xj = vp(xP(xS, {
                     collectionRef: {
                         current: null
                     },
                     itemMap: new Map
-                }), 2))[0], xE = xx[1], (xj = function(e) {
+                }), 2))[0], xA = xj[1], (xC = function(e) {
                     var t = e.scope,
                         r = e.children,
                         n = e2().useRef(null),
                         o = e2().useRef(new Map).current;
-                    return (0, p.jsx)(xP, {
+                    return (0, p.jsx)(xI, {
                         scope: t,
                         itemMap: o,
                         collectionRef: n,
                         children: r
                     })
-                }).displayName = xg, xA = cN(xI = vA + "CollectionSlot"), (xC = e2().forwardRef(function(e, t) {
+                }).displayName = xS, xN = cN(xT = vA + "CollectionSlot"), (xM = e2().forwardRef(function(e, t) {
                     var r = e.scope,
                         n = e.children,
-                        o = o5(t, xE(xI, r).collectionRef);
-                    return (0, p.jsx)(xA, {
+                        o = o5(t, xA(xT, r).collectionRef);
+                    return (0, p.jsx)(xN, {
                         ref: o,
                         children: n
                     })
-                })).displayName = xI, xN = "data-radix-collection-item", xM = cN(xT = vA + "CollectionItemSlot"), (xk = e2().forwardRef(function(e, t) {
+                })).displayName = xT, xR = "data-radix-collection-item", x_ = cN(xk = vA + "CollectionItemSlot"), (xD = e2().forwardRef(function(e, t) {
                     var r, n, o = e.scope,
                         i = e.children,
                         a = function(e, t) {
@@ -23782,7 +23782,7 @@ function() {
                         }(e, ["scope", "children"]),
                         l = e2().useRef(null),
                         u = o5(t, l),
-                        c = xE(xT, o);
+                        c = xA(xk, o);
                     return e2().useEffect(function() {
                         return c.itemMap.set(l, vd({
                                 ref: l
@@ -23790,7 +23790,7 @@ function() {
                             function() {
                                 c.itemMap.delete(l)
                             }
-                    }), (0, p.jsx)(xM, (r = vd({}, vf({}, xN, "")), n = n = {
+                    }), (0, p.jsx)(x_, (r = vd({}, vf({}, xR, "")), n = n = {
                         ref: u,
                         children: i
                     }, Object.getOwnPropertyDescriptors ? Object.defineProperties(r, Object.getOwnPropertyDescriptors(n)) : (function(e) {
@@ -23803,21 +23803,21 @@ function() {
                     })(Object(n)).forEach(function(e) {
                         Object.defineProperty(r, e, Object.getOwnPropertyDescriptor(n, e))
                     }), r))
-                })).displayName = xT, [{
-                    Provider: xj,
-                    Slot: xC,
-                    ItemSlot: xk
+                })).displayName = xk, [{
+                    Provider: xC,
+                    Slot: xM,
+                    ItemSlot: xD
                 }, function(e) {
-                    var t = xE(vA + "CollectionConsumer", e);
+                    var t = xA(vA + "CollectionConsumer", e);
                     return e2().useCallback(function() {
                         var e = t.collectionRef.current;
                         if (!e) return [];
-                        var r = Array.from(e.querySelectorAll("[".concat(xN, "]")));
+                        var r = Array.from(e.querySelectorAll("[".concat(xR, "]")));
                         return Array.from(t.itemMap.values()).sort(function(e, t) {
                             return r.indexOf(e.ref.current) - r.indexOf(t.ref.current)
                         })
                     }, [t.collectionRef, t.itemMap])
-                }, xS]), 3),
+                }, xE]), 3),
                 vT = vC[0],
                 vN = vC[1],
                 vM = vP(cd(vA, [vC[2], h4]), 2),
@@ -25168,31 +25168,31 @@ function() {
                     cancelable: !0
                 },
                 gW = "RovingFocusGroup",
-                gK = gz((xD = (x_ = gR(cd(xR = gW + "CollectionProvider"), 2))[0], xL = x_[1], xB = (xU = gR(xD(xR, {
+                gK = gz((xB = (xU = gR(cd(xL = gW + "CollectionProvider"), 2))[0], xF = xU[1], xH = (xz = gR(xB(xL, {
                     collectionRef: {
                         current: null
                     },
                     itemMap: new Map
-                }), 2))[0], xF = xU[1], (xz = function(e) {
+                }), 2))[0], xG = xz[1], (xV = function(e) {
                     var t = e.scope,
                         r = e.children,
                         n = e2().useRef(null),
                         o = e2().useRef(new Map).current;
-                    return (0, p.jsx)(xB, {
+                    return (0, p.jsx)(xH, {
                         scope: t,
                         itemMap: o,
                         collectionRef: n,
                         children: r
                     })
-                }).displayName = xR, xG = fl(xH = gW + "CollectionSlot"), (xV = e2().forwardRef(function(e, t) {
+                }).displayName = xL, xK = fl(xW = gW + "CollectionSlot"), (xY = e2().forwardRef(function(e, t) {
                     var r = e.scope,
                         n = e.children,
-                        o = o5(t, xF(xH, r).collectionRef);
-                    return (0, p.jsx)(xG, {
+                        o = o5(t, xG(xW, r).collectionRef);
+                    return (0, p.jsx)(xK, {
                         ref: o,
                         children: n
                     })
-                })).displayName = xH, xK = "data-radix-collection-item", xY = fl(xW = gW + "CollectionItemSlot"), (xX = e2().forwardRef(function(e, t) {
+                })).displayName = xW, xq = "data-radix-collection-item", xQ = fl(xX = gW + "CollectionItemSlot"), (x$ = e2().forwardRef(function(e, t) {
                     var r, n, o = e.scope,
                         i = e.children,
                         a = function(e, t) {
@@ -25214,7 +25214,7 @@ function() {
                         }(e, ["scope", "children"]),
                         l = e2().useRef(null),
                         u = o5(t, l),
-                        c = xF(xW, o);
+                        c = xG(xX, o);
                     return e2().useEffect(function() {
                         return c.itemMap.set(l, gM({
                                 ref: l
@@ -25222,7 +25222,7 @@ function() {
                             function() {
                                 c.itemMap.delete(l)
                             }
-                    }), (0, p.jsx)(xY, (r = gM({}, gT({}, xK, "")), n = n = {
+                    }), (0, p.jsx)(xQ, (r = gM({}, gT({}, xq, "")), n = n = {
                         ref: u,
                         children: i
                     }, Object.getOwnPropertyDescriptors ? Object.defineProperties(r, Object.getOwnPropertyDescriptors(n)) : (function(e) {
@@ -25235,21 +25235,21 @@ function() {
                     })(Object(n)).forEach(function(e) {
                         Object.defineProperty(r, e, Object.getOwnPropertyDescriptor(n, e))
                     }), r))
-                })).displayName = xW, [{
-                    Provider: xz,
-                    Slot: xV,
-                    ItemSlot: xX
+                })).displayName = xX, [{
+                    Provider: xV,
+                    Slot: xY,
+                    ItemSlot: x$
                 }, function(e) {
-                    var t = xF(gW + "CollectionConsumer", e);
+                    var t = xG(gW + "CollectionConsumer", e);
                     return e2().useCallback(function() {
                         var e = t.collectionRef.current;
                         if (!e) return [];
-                        var r = Array.from(e.querySelectorAll("[".concat(xK, "]")));
+                        var r = Array.from(e.querySelectorAll("[".concat(xq, "]")));
                         return Array.from(t.itemMap.values()).sort(function(e, t) {
                             return r.indexOf(e.ref.current) - r.indexOf(t.ref.current)
                         })
                     }, [t.collectionRef, t.itemMap])
-                }, xL]), 3),
+                }, xF]), 3),
                 gY = gK[0],
                 gX = gK[1],
                 gq = gz(cd(gW, [gK[2]]), 2),
@@ -26017,11 +26017,14 @@ function() {
                     })
                 })
             }
+            var wM = function(e) {
+                return "string" == typeof e ? e : e.src
+            };
 
-            function wM(e) {
+            function wk(e) {
                 var t = e.size;
                 return (0, p.jsx)("img", {
-                    src: "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMiIgaGVpZ2h0PSIxMiIgZmlsbD0ibm9uZSIgdmlld0JveD0iMCAwIDEyIDEyIj48ZyBjbGlwLXBhdGg9InVybCgjYSkiPjxwYXRoIGZpbGw9IiMwNmYiIGQ9Im0yLjUyMyAwIDkuNDc2IDIuNTM5LTIuNTQgOS40NzYtOS40NzUtMi41NHoiLz48cGF0aCBmaWxsPSIjZjdmN2Y4IiBmaWxsLXJ1bGU9ImV2ZW5vZGQiIGQ9Im04LjgwNCAzLjc1LjAwMy4wMDNhLjY2LjY2IDAgMCAxIDAgLjkzMkw1LjA2NCA4LjQyOCAzLjE5MyA2LjU1NmEuNjYuNjYgMCAwIDEgMC0uOTMybC4wMDMtLjAwM2EuNjYuNjYgMCAwIDEgLjkzMiAwbC45MzYuOTM2TDcuODcyIDMuNzVhLjY2LjY2IDAgMCAxIC45MzIgMCIgY2xpcC1ydWxlPSJldmVub2RkIi8+PC9nPjxkZWZzPjxjbGlwUGF0aCBpZD0iYSI+PHBhdGggZmlsbD0iI2ZmZiIgZD0iTTAgMGgxMnYxMkgweiIvPjwvY2xpcFBhdGg+PC9kZWZzPjwvc3ZnPg==",
+                    src: wM("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMiIgaGVpZ2h0PSIxMiIgZmlsbD0ibm9uZSIgdmlld0JveD0iMCAwIDEyIDEyIj48ZyBjbGlwLXBhdGg9InVybCgjYSkiPjxwYXRoIGZpbGw9IiMwNmYiIGQ9Im0yLjUyMyAwIDkuNDc2IDIuNTM5LTIuNTQgOS40NzYtOS40NzUtMi41NHoiLz48cGF0aCBmaWxsPSIjZjdmN2Y4IiBmaWxsLXJ1bGU9ImV2ZW5vZGQiIGQ9Im04LjgwNCAzLjc1LjAwMy4wMDNhLjY2LjY2IDAgMCAxIDAgLjkzMkw1LjA2NCA4LjQyOCAzLjE5MyA2LjU1NmEuNjYuNjYgMCAwIDEgMC0uOTMybC4wMDMtLjAwM2EuNjYuNjYgMCAwIDEgLjkzMiAwbC45MzYuOTM2TDcuODcyIDMuNzVhLjY2LjY2IDAgMCAxIC45MzIgMCIgY2xpcC1ydWxlPSJldmVub2RkIi8+PC9nPjxkZWZzPjxjbGlwUGF0aCBpZD0iYSI+PHBhdGggZmlsbD0iI2ZmZiIgZD0iTTAgMGgxMnYxMkgweiIvPjwvY2xpcFBhdGg+PC9kZWZzPjwvc3ZnPg=="),
                     alt: "blue check icon",
                     style: {
                         width: t,
@@ -26030,13 +26033,13 @@ function() {
                 })
             }
 
-            function wk(e, t) {
+            function wR(e, t) {
                 (null == t || t > e.length) && (t = e.length);
                 for (var r = 0, n = Array(t); r < t; r++) n[r] = e[r];
                 return n
             }
 
-            function wR(e, t, r, n, o, i, a) {
+            function w_(e, t, r, n, o, i, a) {
                 try {
                     var l = e[i](a),
                         u = l.value
@@ -26047,7 +26050,7 @@ function() {
                 l.done ? t(u) : Promise.resolve(u).then(n, o)
             }
 
-            function w_(e) {
+            function wD(e) {
                 return function() {
                     var t = this,
                         r = arguments;
@@ -26055,18 +26058,18 @@ function() {
                         var i = e.apply(t, r);
 
                         function a(e) {
-                            wR(i, n, o, a, l, "next", e)
+                            w_(i, n, o, a, l, "next", e)
                         }
 
                         function l(e) {
-                            wR(i, n, o, a, l, "throw", e)
+                            w_(i, n, o, a, l, "throw", e)
                         }
                         a(void 0)
                     })
                 }
             }
 
-            function wD(e, t) {
+            function wL(e, t) {
                 return function(e) {
                     if (Array.isArray(e)) return e
                 }(e) || function(e, t) {
@@ -26090,17 +26093,17 @@ function() {
                     }
                 }(e, t) || function(e, t) {
                     if (e) {
-                        if ("string" == typeof e) return wk(e, t);
+                        if ("string" == typeof e) return wR(e, t);
                         var r = Object.prototype.toString.call(e).slice(8, -1);
                         if ("Object" === r && e.constructor && (r = e.constructor.name), "Map" === r || "Set" === r) return Array.from(r);
-                        if ("Arguments" === r || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(r)) return wk(e, t)
+                        if ("Arguments" === r || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(r)) return wR(e, t)
                     }
                 }(e, t) || function() {
                     throw TypeError("Invalid attempt to destructure non-iterable instance.\\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.")
                 }()
             }
 
-            function wL(e, t) {
+            function wU(e, t) {
                 var r, n, o, i = {
                         label: 0,
                         sent: function() {
@@ -26181,7 +26184,7 @@ function() {
                 }
             }
 
-            function wU(e) {
+            function wB(e) {
                 var t, r, n, o = e.isBonusItem,
                     i = e.legalDisclosureTranslationKey,
                     a = e.paymentProfiles,
@@ -26247,19 +26250,19 @@ function() {
                     V = null != (r = null == y ? void 0 : y.price.amount) ? r : {
                         currencyCode: "USD"
                     },
-                    W = wD((0, e1.useState)(!1), 2),
+                    W = wL((0, e1.useState)(!1), 2),
                     K = W[0],
                     Y = W[1],
-                    X = wD((0, e1.useState)(!1), 2),
+                    X = wL((0, e1.useState)(!1), 2),
                     q = X[0],
                     Q = X[1],
-                    $ = wD((0, e1.useState)(""), 2),
+                    $ = wL((0, e1.useState)(""), 2),
                     Z = $[0],
                     J = $[1],
                     ee = (0, e1.useCallback)(function(e) {
-                        return w_(function() {
+                        return wD(function() {
                             var t, r, n;
-                            return wL(this, function(o) {
+                            return wU(this, function(o) {
                                 switch (o.label) {
                                     case 0:
                                         return J(""), Y(!0), [4, u(e)];
@@ -26282,15 +26285,15 @@ function() {
                     en = (0, e1.useCallback)(function() {
                         R(), s(), T()
                     }, [R, s, T]),
-                    eo = wD((0, e1.useMemo)(function() {
+                    eo = wL((0, e1.useMemo)(function() {
                         return l ? [vl(l.amountTotal), vl(l.taxAmountExclusive)] : []
                     }, [l]), 2),
                     ei = eo[0],
                     ea = eo[1],
                     el = (0, e1.useCallback)(function(e) {
-                        w_(function() {
+                        wD(function() {
                             var t;
-                            return wL(this, function(r) {
+                            return wU(this, function(r) {
                                 switch (r.label) {
                                     case 0:
                                         return [4, c(e)];
@@ -26406,7 +26409,7 @@ function() {
                                                     children: [(0, p.jsx)("div", {
                                                         className: "text-label-small medium:text-label-medium content-default",
                                                         children: F.creatorDisplayName
-                                                    }), F.creatorIsVerified && (0, p.jsx)(wM, {
+                                                    }), F.creatorIsVerified && (0, p.jsx)(wk, {
                                                         size: 12
                                                     })]
                                                 }) : E ? _("Message.OneClickPay.BonusVirtualItem") : j ? (0, p.jsxs)("div", {
@@ -26414,7 +26417,7 @@ function() {
                                                     children: [(0, p.jsx)("div", {
                                                         className: "text-label-small medium:text-label-medium content-default",
                                                         children: L("Label.ByRoblox")
-                                                    }), (0, p.jsx)(wM, {
+                                                    }), (0, p.jsx)(wk, {
                                                         size: 12
                                                     })]
                                                 }) : null
@@ -26544,12 +26547,12 @@ function() {
                     })
                 })
             }
-            var wB = function(e) {
+            var wF = function(e) {
                 var t = oA("Feature.BuyRobux");
                 return (0, p.jsxs)("div", {
                     children: [e.isQuickPayLoading && (0, p.jsx)(b2, {
                         ariaLabel: t("Label.Loading")
-                    }), (0, p.jsx)(wU, function(e) {
+                    }), (0, p.jsx)(wB, function(e) {
                         for (var t = 1; t < arguments.length; t++) {
                             var r = null != arguments[t] ? arguments[t] : {},
                                 n = Object.keys(r);
@@ -26570,7 +26573,7 @@ function() {
                 })
             };
 
-            function wF() {
+            function wz() {
                 var e = (0, e1.useContext)(ds).quickPay3DS,
                     t = e.closeModal,
                     r = e.isOpen,
@@ -26604,7 +26607,7 @@ function() {
                     })
                 })
             }
-            var wz = function(e) {
+            var wH = function(e) {
                 var t = e.onClick,
                     r = e.title,
                     n = e.iconComponent;
@@ -26619,7 +26622,7 @@ function() {
                 })
             };
 
-            function wH(e) {
+            function wG(e) {
                 var t = e.handleClose,
                     r = e.handleRedeemCreditClick,
                     n = e.handleSamsungPayClick,
@@ -26642,13 +26645,13 @@ function() {
                                 })
                             }), (0, p.jsxs)("div", {
                                 className: "flex flex-col gap-medium",
-                                children: [(0, p.jsx)(wz, {
+                                children: [(0, p.jsx)(wH, {
                                     onClick: n,
                                     title: i("Message.MobilePaymentMethod.MilkyWayCheckout"),
                                     iconComponent: (0, p.jsx)("div", {
                                         className: "icon-samsung-pay width-[34px] height-[34px]"
                                     })
-                                }), (0, p.jsx)(wz, {
+                                }), (0, p.jsx)(wH, {
                                     onClick: r,
                                     title: i("Message.MobilePaymentMethod.RobloxCredit"),
                                     iconComponent: (0, p.jsx)("div", {
@@ -26660,14 +26663,14 @@ function() {
                     })
                 })
             }
-            var wG = tY("BuyRobuxRedesign"),
-                wV = function(e) {
+            var wV = tY("BuyRobuxRedesign"),
+                wW = function(e) {
                     return a3(function() {
                         var t, r, n, o, i, a, l, u, c;
                         return a6(this, function(s) {
                             switch (s.label) {
                                 case 0:
-                                    t = e.eventCounterProps.call, wG(r = "".concat(t, "_API"), {
+                                    t = e.eventCounterProps.call, wV(r = "".concat(t, "_API"), {
                                         statusCode: "Throughput"
                                     }), s.label = 1;
                                 case 1:
@@ -26679,11 +26682,11 @@ function() {
                                         fullError: !0
                                     }, e.config), e.data)];
                                 case 2:
-                                    return o = s.sent().data, wG(r, {
+                                    return o = s.sent().data, wV(r, {
                                         statusCode: "200"
                                     }), [2, o];
                                 case 3:
-                                    return a8(i = s.sent()) ? a = null != (l = null != (u = i.code) ? u : null == i || null == (c = i.response) ? void 0 : c.status.toString()) ? l : "UnknownAxiosError" : (a = "UnknownError", console.error(i)), wG(r, {
+                                    return a8(i = s.sent()) ? a = null != (l = null != (u = i.code) ? u : null == i || null == (c = i.response) ? void 0 : c.status.toString()) ? l : "UnknownAxiosError" : (a = "UnknownError", console.error(i)), wV(r, {
                                         statusCode: a
                                     }), [2, void 0];
                                 case 4:
@@ -26693,7 +26696,7 @@ function() {
                     })()
                 };
 
-            function wW() {
+            function wK() {
                 var e = oA("CommonUI.Controls"),
                     t = oA("Feature.Premium"),
                     r = (0, e1.useContext)(ds).redirectError,
@@ -26718,20 +26721,32 @@ function() {
                     })
                 })
             }
-            var wK = function(e) {
+            var wY = function() {
+                    if (void 0 === S) return null;
+                    var e = /RobloxApp\/\d+\.(\d+)/.exec(S.userAgent);
+                    if ((null == e ? void 0 : e[1]) == null) return null;
+                    var t = Number.parseInt(e[1], 10);
+                    return Number.isNaN(t) ? null : t
+                },
+                wX = function() {
+                    if (!lA) return !1;
+                    var e = wY();
+                    return null !== e && e >= 743
+                },
+                wq = function(e) {
                     var t = w ? new URL(e, w.location.href).href : e;
                     return "".concat("roblox://open-external", "?url=").concat(encodeURIComponent(t))
                 },
-                wY = function(e) {
-                    return lA ? {
-                        href: wK(e)
+                wQ = function(e) {
+                    return wX() ? {
+                        href: wq(e)
                     } : {
                         href: e,
                         target: "_blank"
                     }
                 };
 
-            function wX(e) {
+            function w$(e) {
                 for (var t = 1; t < arguments.length; t++) {
                     var r = null != arguments[t] ? arguments[t] : {},
                         n = Object.keys(r);
@@ -26750,7 +26765,7 @@ function() {
                 return e
             }
 
-            function wq(e, t) {
+            function wZ(e, t) {
                 return t = null != t ? t : {}, Object.getOwnPropertyDescriptors ? Object.defineProperties(e, Object.getOwnPropertyDescriptors(t)) : (function(e) {
                     var t = Object.keys(e);
                     if (Object.getOwnPropertySymbols) {
@@ -26762,7 +26777,7 @@ function() {
                     Object.defineProperty(e, r, Object.getOwnPropertyDescriptor(t, r))
                 }), e
             }
-            var wQ = function(e) {
+            var wJ = function(e) {
                     var t = e.children,
                         r = e.modals,
                         n = e.quickPay,
@@ -26781,19 +26796,19 @@ function() {
                         }, [r.firstTimePurchaseConsent]);
                     return (0, p.jsxs)(ds.Provider, {
                         value: r,
-                        children: [t, (0, p.jsx)(wH, wX({}, o)), (0, p.jsx)(dh, {}), (0, p.jsx)(dv, {}), (0, p.jsx)(hm, {}), n.stripe && (0, p.jsx)(ci, {
+                        children: [t, (0, p.jsx)(wG, w$({}, o)), (0, p.jsx)(dh, {}), (0, p.jsx)(dv, {}), (0, p.jsx)(hm, {}), n.stripe && (0, p.jsx)(ci, {
                             onError: l,
                             children: (0, p.jsxs)(up.Elements, {
                                 stripe: n.stripe,
-                                children: [(0, p.jsx)(wB, wX({}, n)), (0, p.jsx)(wF, {})]
+                                children: [(0, p.jsx)(wF, w$({}, n)), (0, p.jsx)(wz, {})]
                             })
-                        }), (0, p.jsx)(wW, {}), (0, p.jsx)(dc, {
+                        }), (0, p.jsx)(wK, {}), (0, p.jsx)(dc, {
                             title: i("Label.AskParentFirst"),
                             description: i.html("Description.ParentalApprovalRequired", [{
                                 opening: "learnLinkStart",
                                 closing: "learnLinkEnd",
                                 render: function(e) {
-                                    return (0, p.jsx)("a", wq(wX({}, wY("https://en.help.roblox.com/hc/en-us/articles/4409558125460-Monthly-Spending-Limits-and-Notifications-FAQ")), {
+                                    return (0, p.jsx)("a", wZ(w$({}, wQ("https://en.help.roblox.com/hc/en-us/articles/4409558125460-Monthly-Spending-Limits-and-Notifications-FAQ")), {
                                         className: "color-content-default [text-decoration:underline] [text-underline-position:from-font]",
                                         rel: "noreferrer",
                                         children: e
@@ -26804,7 +26819,7 @@ function() {
                                 opening: "termsLinkStart",
                                 closing: "termsLinkEnd",
                                 render: function(e) {
-                                    return (0, p.jsx)("a", wq(wX({}, wY("https://en.help.roblox.com/hc/en-us/articles/115004647846-Roblox-Terms-of-Use")), {
+                                    return (0, p.jsx)("a", wZ(w$({}, wQ("https://en.help.roblox.com/hc/en-us/articles/115004647846-Roblox-Terms-of-Use")), {
                                         className: "color-content-emphasis [text-decoration:underline] [text-underline-position:from-font]",
                                         rel: "noreferrer",
                                         children: e
@@ -26816,28 +26831,28 @@ function() {
                             isOpen: r.firstTimePurchaseConsent.isOpen,
                             onConfirm: u,
                             onCancel: c,
-                            publishMetric: wG,
+                            publishMetric: wV,
                             triggerContext: lB()
                         })]
                     })
                 },
-                w$ = (0, e1.createContext)({
+                w0 = (0, e1.createContext)({
                     selectedProduct: void 0,
                     purchaseProduct: function() {},
                     purchaseNonRedirectProduct: function() {
                         return Promise.resolve()
                     }
                 }),
-                wZ = window.Roblox;
+                w1 = window.Roblox;
 
-            function wJ(e, t) {
+            function w2(e, t) {
                 (null == t || t > e.length) && (t = e.length);
                 for (var r = 0, n = Array(t); r < t; r++) n[r] = e[r];
                 return n
             }
-            var w0 = ((xq = {}).None = "None", xq.ParentalConsent = "ParentalConsent", xq.SelfUpdateSetting = "SelfUpdateSetting", xq.ContentAgeRestrictionVerification = "ContentAgeRestrictionVerification", xq.FacialAgeEstimation = "FacialAgeEstimation", xq.IdVerification = "IdVerification", xq.VpcForFae = "VpcForFae", xq.AgeCheckPending = "AgeCheckPending", xq.ParentConsentInherited = "ParentConsentInherited", xq.Inherited = "Inherited", xq.ReadableButNotActionable = "ReadableButNotActionable", xq);
+            var w4 = ((xZ = {}).None = "None", xZ.ParentalConsent = "ParentalConsent", xZ.SelfUpdateSetting = "SelfUpdateSetting", xZ.ContentAgeRestrictionVerification = "ContentAgeRestrictionVerification", xZ.FacialAgeEstimation = "FacialAgeEstimation", xZ.IdVerification = "IdVerification", xZ.VpcForFae = "VpcForFae", xZ.AgeCheckPending = "AgeCheckPending", xZ.ParentConsentInherited = "ParentConsentInherited", xZ.Inherited = "Inherited", xZ.ReadableButNotActionable = "ReadableButNotActionable", xZ);
 
-            function w1(e, t, r, n, o, i, a) {
+            function w3(e, t, r, n, o, i, a) {
                 try {
                     var l = e[i](a),
                         u = l.value
@@ -26848,7 +26863,7 @@ function() {
                 l.done ? t(u) : Promise.resolve(u).then(n, o)
             }
 
-            function w2(e) {
+            function w5(e) {
                 return function() {
                     var t = this,
                         r = arguments;
@@ -26856,18 +26871,18 @@ function() {
                         var i = e.apply(t, r);
 
                         function a(e) {
-                            w1(i, n, o, a, l, "next", e)
+                            w3(i, n, o, a, l, "next", e)
                         }
 
                         function l(e) {
-                            w1(i, n, o, a, l, "throw", e)
+                            w3(i, n, o, a, l, "throw", e)
                         }
                         a(void 0)
                     })
                 }
             }
 
-            function w4(e, t) {
+            function w6(e, t) {
                 var r, n, o, i = {
                         label: 0,
                         sent: function() {
@@ -26947,15 +26962,15 @@ function() {
                     }
                 }
             }
-            var w3 = ((xQ = {}).FraudPaymentAuthorizationAttempt = "FraudPaymentAuthorizationAttempt", xQ.FraudVirtualEconomyAbuse = "FraudVirtualEconomyAbuse", xQ.FraudAbuseOfAffiliateSystem = "FraudAbuseOfAffiliateSystem", xQ.FraudAttemptedUnauthorizedPaymentMethodUse = "FraudAttemptedUnauthorizedPaymentMethodUse", xQ.FraudRepeatedRefundRequests = "FraudRepeatedRefundRequests", xQ.FraudSuspiciousRefundRequests = "FraudSuspiciousRefundRequests", xQ.FraudUnauthorizedPurchase = "FraudUnauthorizedPurchase", xQ.FraudUseOfUnauthorizedOffPlatformTransactions = "FraudUseOfUnauthorizedOffPlatformTransactions", xQ.FraudUseOfUnauthorizedPaymentMethod = "FraudUseOfUnauthorizedPaymentMethod", xQ.FraudSuspiciousAccountPatterns = "FraudSuspiciousAccountPatterns", xQ.FraudChargeback = "FraudChargeback", xQ.None = "None", xQ.PurchaseNotEnabled = "PurchaseNotEnabled", xQ.SpendLimitExceeded = "SpendLimitExceeded", xQ),
-                w5 = ((x$ = {}).BuyRobuxPage = "BuyRobuxPage", x$.BuyRobuxPagePreselectedProduct = "BuyRobuxPagePreselectedProduct", x$),
-                w6 = ((xZ = {}).INVALID = "Invalid", xZ.AMUSEMENT_TAX = "AmusementTax", xZ.COMMUNICATIONS_TAX = "CommunicationsTax", xZ.GST = "Gst", xZ.HST = "Hst", xZ.IGST = "Igst", xZ.JCT = "Jct", xZ.LEASE_TAX = "LeaseTax", xZ.PST = "Pst", xZ.QST = "Qst", xZ.RST = "Rst", xZ.SALES_TAX = "SalesTax", xZ.VAT = "Vat", xZ.SUMMED = "Summed", xZ.SERVICE_TAX = "ServiceTax", xZ.UNKNOWN = "Unknown", xZ),
-                w8 = ((xJ = {}).INCORRECT_CVC = "incorrect_cvc", xJ.CARD_DECLINED = "card_declined", xJ.EXPIRED_CARD = "expired_card", xJ.INSUFFICIENT_FUNDS = "insufficient_funds", xJ.BALANCE_INSUFFICIENT = "balance_insufficient", xJ),
-                w7 = function(e) {
+            var w8 = ((xJ = {}).FraudPaymentAuthorizationAttempt = "FraudPaymentAuthorizationAttempt", xJ.FraudVirtualEconomyAbuse = "FraudVirtualEconomyAbuse", xJ.FraudAbuseOfAffiliateSystem = "FraudAbuseOfAffiliateSystem", xJ.FraudAttemptedUnauthorizedPaymentMethodUse = "FraudAttemptedUnauthorizedPaymentMethodUse", xJ.FraudRepeatedRefundRequests = "FraudRepeatedRefundRequests", xJ.FraudSuspiciousRefundRequests = "FraudSuspiciousRefundRequests", xJ.FraudUnauthorizedPurchase = "FraudUnauthorizedPurchase", xJ.FraudUseOfUnauthorizedOffPlatformTransactions = "FraudUseOfUnauthorizedOffPlatformTransactions", xJ.FraudUseOfUnauthorizedPaymentMethod = "FraudUseOfUnauthorizedPaymentMethod", xJ.FraudSuspiciousAccountPatterns = "FraudSuspiciousAccountPatterns", xJ.FraudChargeback = "FraudChargeback", xJ.None = "None", xJ.PurchaseNotEnabled = "PurchaseNotEnabled", xJ.SpendLimitExceeded = "SpendLimitExceeded", xJ),
+                w7 = ((x0 = {}).BuyRobuxPage = "BuyRobuxPage", x0.BuyRobuxPagePreselectedProduct = "BuyRobuxPagePreselectedProduct", x0),
+                w9 = ((x1 = {}).INVALID = "Invalid", x1.AMUSEMENT_TAX = "AmusementTax", x1.COMMUNICATIONS_TAX = "CommunicationsTax", x1.GST = "Gst", x1.HST = "Hst", x1.IGST = "Igst", x1.JCT = "Jct", x1.LEASE_TAX = "LeaseTax", x1.PST = "Pst", x1.QST = "Qst", x1.RST = "Rst", x1.SALES_TAX = "SalesTax", x1.VAT = "Vat", x1.SUMMED = "Summed", x1.SERVICE_TAX = "ServiceTax", x1.UNKNOWN = "Unknown", x1),
+                Oe = ((x2 = {}).INCORRECT_CVC = "incorrect_cvc", x2.CARD_DECLINED = "card_declined", x2.EXPIRED_CARD = "expired_card", x2.INSUFFICIENT_FUNDS = "insufficient_funds", x2.BALANCE_INSUFFICIENT = "balance_insufficient", x2),
+                Ot = function(e) {
                     var t = arguments.length > 1 && void 0 !== arguments[1] ? arguments[1] : [];
-                    return w2(function() {
+                    return w5(function() {
                         var r;
-                        return w4(this, function(n) {
+                        return w6(this, function(n) {
                             return r = new URLSearchParams({
                                 quickPayFlowType: e
                             }), t.forEach(function(e) {
@@ -26968,13 +26983,13 @@ function() {
                     })()
                 };
 
-            function w9(e, t) {
+            function Or(e, t) {
                 (null == t || t > e.length) && (t = e.length);
                 for (var r = 0, n = Array(t); r < t; r++) n[r] = e[r];
                 return n
             }
 
-            function Oe(e, t, r, n, o, i, a) {
+            function On(e, t, r, n, o, i, a) {
                 try {
                     var l = e[i](a),
                         u = l.value
@@ -26985,7 +27000,7 @@ function() {
                 l.done ? t(u) : Promise.resolve(u).then(n, o)
             }
 
-            function Ot(e) {
+            function Oo(e) {
                 return function() {
                     var t = this,
                         r = arguments;
@@ -26993,35 +27008,35 @@ function() {
                         var i = e.apply(t, r);
 
                         function a(e) {
-                            Oe(i, n, o, a, l, "next", e)
+                            On(i, n, o, a, l, "next", e)
                         }
 
                         function l(e) {
-                            Oe(i, n, o, a, l, "throw", e)
+                            On(i, n, o, a, l, "throw", e)
                         }
                         a(void 0)
                     })
                 }
             }
 
-            function Or(e) {
+            function Oi(e) {
                 return function(e) {
-                    if (Array.isArray(e)) return w9(e)
+                    if (Array.isArray(e)) return Or(e)
                 }(e) || function(e) {
                     if ("u" > typeof Symbol && null != e[Symbol.iterator] || null != e["@@iterator"]) return Array.from(e)
                 }(e) || function(e) {
                     if (e) {
-                        if ("string" == typeof e) return w9(e, void 0);
+                        if ("string" == typeof e) return Or(e, void 0);
                         var t = Object.prototype.toString.call(e).slice(8, -1);
                         if ("Object" === t && e.constructor && (t = e.constructor.name), "Map" === t || "Set" === t) return Array.from(t);
-                        if ("Arguments" === t || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(t)) return w9(e, void 0)
+                        if ("Arguments" === t || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(t)) return Or(e, void 0)
                     }
                 }(e) || function() {
                     throw TypeError("Invalid attempt to spread non-iterable instance.\\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.")
                 }()
             }
 
-            function On(e, t) {
+            function Oa(e, t) {
                 var r, n, o, i = {
                         label: 0,
                         sent: function() {
@@ -27102,7 +27117,7 @@ function() {
                 }
             }
 
-            function Oo(e, t, r, n, o, i, a) {
+            function Ol(e, t, r, n, o, i, a) {
                 try {
                     var l = e[i](a),
                         u = l.value
@@ -27112,7 +27127,7 @@ function() {
                 }
                 l.done ? t(u) : Promise.resolve(u).then(n, o)
             }
-            var Oi = function() {
+            var Ou = function() {
                     var e;
                     return (e = function() {
                         return function(e, t) {
@@ -27207,19 +27222,19 @@ function() {
                             var i = e.apply(t, r);
 
                             function a(e) {
-                                Oo(i, n, o, a, l, "next", e)
+                                Ol(i, n, o, a, l, "next", e)
                             }
 
                             function l(e) {
-                                Oo(i, n, o, a, l, "throw", e)
+                                Ol(i, n, o, a, l, "throw", e)
                             }
                             a(void 0)
                         })
                     })()
                 },
-                Oa = window.Roblox["core-scripts"].guac;
+                Oc = window.Roblox["core-scripts"].guac;
 
-            function Ol(e, t, r, n, o, i, a) {
+            function Os(e, t, r, n, o, i, a) {
                 try {
                     var l = e[i](a),
                         u = l.value
@@ -27230,7 +27245,7 @@ function() {
                 l.done ? t(u) : Promise.resolve(u).then(n, o)
             }
 
-            function Ou(e) {
+            function Of(e) {
                 return function() {
                     var t = this,
                         r = arguments;
@@ -27238,18 +27253,18 @@ function() {
                         var i = e.apply(t, r);
 
                         function a(e) {
-                            Ol(i, n, o, a, l, "next", e)
+                            Os(i, n, o, a, l, "next", e)
                         }
 
                         function l(e) {
-                            Ol(i, n, o, a, l, "throw", e)
+                            Os(i, n, o, a, l, "throw", e)
                         }
                         a(void 0)
                     })
                 }
             }
 
-            function Oc(e, t) {
+            function Od(e, t) {
                 var r, n, o, i = {
                         label: 0,
                         sent: function() {
@@ -27329,12 +27344,12 @@ function() {
                     }
                 }
             }
-            var Os = function() {
-                return Ou(function() {
-                    return Oc(this, function(e) {
+            var Op = function() {
+                return Of(function() {
+                    return Od(this, function(e) {
                         switch (e.label) {
                             case 0:
-                                return e.trys.push([0, 2, , 3]), [4, (0, Oa.callBehaviour)("app-policy")];
+                                return e.trys.push([0, 2, , 3]), [4, (0, Oc.callBehaviour)("app-policy")];
                             case 1:
                                 return [2, e.sent()];
                             case 2:
@@ -27346,13 +27361,13 @@ function() {
                 })()
             };
 
-            function Of(e, t) {
+            function Oy(e, t) {
                 (null == t || t > e.length) && (t = e.length);
                 for (var r = 0, n = Array(t); r < t; r++) n[r] = e[r];
                 return n
             }
 
-            function Od(e, t, r, n, o, i, a) {
+            function Om(e, t, r, n, o, i, a) {
                 try {
                     var l = e[i](a),
                         u = l.value
@@ -27363,7 +27378,7 @@ function() {
                 l.done ? t(u) : Promise.resolve(u).then(n, o)
             }
 
-            function Op(e) {
+            function Oh(e) {
                 return function() {
                     var t = this,
                         r = arguments;
@@ -27371,18 +27386,18 @@ function() {
                         var i = e.apply(t, r);
 
                         function a(e) {
-                            Od(i, n, o, a, l, "next", e)
+                            Om(i, n, o, a, l, "next", e)
                         }
 
                         function l(e) {
-                            Od(i, n, o, a, l, "throw", e)
+                            Om(i, n, o, a, l, "throw", e)
                         }
                         a(void 0)
                     })
                 }
             }
 
-            function Oy(e, t) {
+            function Ob(e, t) {
                 var r, n, o, i = {
                         label: 0,
                         sent: function() {
@@ -27463,13 +27478,13 @@ function() {
                 }
             }
 
-            function Om(e, t) {
+            function Ov(e, t) {
                 (null == t || t > e.length) && (t = e.length);
                 for (var r = 0, n = Array(t); r < t; r++) n[r] = e[r];
                 return n
             }
 
-            function Oh(e, t, r, n, o, i, a) {
+            function Og(e, t, r, n, o, i, a) {
                 try {
                     var l = e[i](a),
                         u = l.value
@@ -27479,7 +27494,7 @@ function() {
                 }
                 l.done ? t(u) : Promise.resolve(u).then(n, o)
             }
-            var Ob = function() {
+            var Ow = function() {
                 if (void 0 === S) return null;
                 var e = /(?:iPhone OS|CPU OS) (\d+)[._]/.exec(S.userAgent);
                 if ((null == e ? void 0 : e[1]) == null) return null;
@@ -27487,7 +27502,7 @@ function() {
                 return Number.isNaN(t) ? null : t
             };
 
-            function Ov(e, t, r, n, o, i, a) {
+            function OO(e, t, r, n, o, i, a) {
                 try {
                     var l = e[i](a),
                         u = l.value
@@ -27497,7 +27512,7 @@ function() {
                 }
                 l.done ? t(u) : Promise.resolve(u).then(n, o)
             }
-            var Og = function() {
+            var OS = function() {
                 var e;
                 return (e = function() {
                     var e, t;
@@ -27604,18 +27619,18 @@ function() {
                         var i = e.apply(t, r);
 
                         function a(e) {
-                            Ov(i, n, o, a, l, "next", e)
+                            OO(i, n, o, a, l, "next", e)
                         }
 
                         function l(e) {
-                            Ov(i, n, o, a, l, "throw", e)
+                            OO(i, n, o, a, l, "throw", e)
                         }
                         a(void 0)
                     })
                 })()
             };
 
-            function Ow(e, t, r, n, o, i, a) {
+            function Ox(e, t, r, n, o, i, a) {
                 try {
                     var l = e[i](a),
                         u = l.value
@@ -27626,7 +27641,7 @@ function() {
                 l.done ? t(u) : Promise.resolve(u).then(n, o)
             }
 
-            function OO(e) {
+            function OP(e) {
                 return function() {
                     var t = this,
                         r = arguments;
@@ -27634,18 +27649,18 @@ function() {
                         var i = e.apply(t, r);
 
                         function a(e) {
-                            Ow(i, n, o, a, l, "next", e)
+                            Ox(i, n, o, a, l, "next", e)
                         }
 
                         function l(e) {
-                            Ow(i, n, o, a, l, "throw", e)
+                            Ox(i, n, o, a, l, "throw", e)
                         }
                         a(void 0)
                     })
                 }
             }
 
-            function OS(e, t) {
+            function OE(e, t) {
                 var r, n, o, i = {
                         label: 0,
                         sent: function() {
@@ -27725,9 +27740,9 @@ function() {
                     }
                 }
             }
-            var Ox = "/login-redirect",
-                OP = "Payments.LoginRedirect.ExposureBased",
-                OE = new(function() {
+            var Oj = "/login-redirect",
+                OI = "Payments.LoginRedirect.ExposureBased",
+                OA = new(function() {
                     var e;
 
                     function t() {
@@ -27743,38 +27758,38 @@ function() {
                     return e = [{
                             key: "getExperimentBasedPathname",
                             value: function() {
-                                return OO(function() {
+                                return OP(function() {
                                     var e, t, r, n, o, i;
-                                    return OS(this, function(a) {
+                                    return OE(this, function(a) {
                                         switch (a.label) {
                                             case 0:
                                                 if (!(null == (t = az()) ? void 0 : t.id)) return [2, {
-                                                    pathname: Ox,
+                                                    pathname: Oj,
                                                     isInExperiment: !1
                                                 }];
-                                                if (n = (null != (e = null == (r = (0, t2.getDeviceMeta)()) ? void 0 : r.appType) ? e : "unknown").trim().replace(/\s+/g, "_"), null !== (o = Ob()) && o < 18) return lr("LoginRedirectUnsupportedIos", {
+                                                if (n = (null != (e = null == (r = (0, t2.getDeviceMeta)()) ? void 0 : r.appType) ? e : "unknown").trim().replace(/\s+/g, "_"), null !== (o = Ow()) && o < 18) return lr("LoginRedirectUnsupportedIos", {
                                                     iosMajorVersion: o.toString(),
                                                     appType: n
                                                 }), [2, {
-                                                    pathname: Ox,
+                                                    pathname: Oj,
                                                     isInExperiment: !1
                                                 }];
-                                                return [4, Og()];
+                                                return [4, OS()];
                                             case 1:
-                                                return [4, a.sent().getAllValuesForLayer(OP)];
+                                                return [4, a.sent().getAllValuesForLayer(OI)];
                                             case 2:
                                                 if ("number" == typeof(i = a.sent().variant)) return this.isExperimentAccessed = !0, lr("LoginRedirectExperimentEvaluated", {
                                                     variant: i.toString(),
                                                     appType: n
                                                 }), [2, {
-                                                    pathname: 1 === i ? "/login-redirect/v2" : Ox,
+                                                    pathname: 1 === i ? "/login-redirect/v2" : Oj,
                                                     isInExperiment: !0
                                                 }];
                                                 return lr("LoginRedirectExperimentEvaluated", {
                                                     variant: "unknown",
                                                     appType: n
                                                 }), [2, {
-                                                    pathname: Ox,
+                                                    pathname: Oj,
                                                     isInExperiment: !1
                                                 }]
                                         }
@@ -27784,14 +27799,14 @@ function() {
                         }, {
                             key: "logLayerExposure",
                             value: function() {
-                                return OO(function() {
-                                    return OS(this, function(e) {
+                                return OP(function() {
+                                    return OE(this, function(e) {
                                         switch (e.label) {
                                             case 0:
                                                 if (!this.isExperimentAccessed) return lr("LoginRedirectLoggingExposureWithoutExperimentAccess"), [2];
-                                                return lr("LoginRedirectExperimentExposed"), [4, Og()];
+                                                return lr("LoginRedirectExperimentExposed"), [4, OS()];
                                             case 1:
-                                                return e.sent().logLayerExposure(OP), [2]
+                                                return e.sent().logLayerExposure(OI), [2]
                                         }
                                     })
                                 }).call(this)
@@ -27804,7 +27819,7 @@ function() {
                             }
                         }(t.prototype, e), t
                 }()),
-                Oj = [{
+                OC = [{
                     maxMs: 12e4,
                     label: "0-2"
                 }, {
@@ -27821,7 +27836,7 @@ function() {
                     label: "8-10"
                 }];
 
-            function OI(e) {
+            function OT(e) {
                 if (void 0 !== w) try {
                     var t, r = e.currentTarget;
                     if (t = w.HTMLAnchorElement, (null != t && "u" > typeof Symbol && t[Symbol.hasInstance] ? !t[Symbol.hasInstance](r) : !(r instanceof t)) || !r.getAttribute("href")) return;
@@ -27836,13 +27851,13 @@ function() {
                 }
             }
 
-            function OA(e, t) {
+            function ON(e, t) {
                 (null == t || t > e.length) && (t = e.length);
                 for (var r = 0, n = Array(t); r < t; r++) n[r] = e[r];
                 return n
             }
 
-            function OC(e, t, r, n, o, i, a) {
+            function OM(e, t, r, n, o, i, a) {
                 try {
                     var l = e[i](a),
                         u = l.value
@@ -27853,7 +27868,7 @@ function() {
                 l.done ? t(u) : Promise.resolve(u).then(n, o)
             }
 
-            function OT(e) {
+            function Ok(e) {
                 return function() {
                     var t = this,
                         r = arguments;
@@ -27861,18 +27876,18 @@ function() {
                         var i = e.apply(t, r);
 
                         function a(e) {
-                            OC(i, n, o, a, l, "next", e)
+                            OM(i, n, o, a, l, "next", e)
                         }
 
                         function l(e) {
-                            OC(i, n, o, a, l, "throw", e)
+                            OM(i, n, o, a, l, "throw", e)
                         }
                         a(void 0)
                     })
                 }
             }
 
-            function ON(e, t) {
+            function OR(e, t) {
                 return function(e) {
                     if (Array.isArray(e)) return e
                 }(e) || function(e, t) {
@@ -27896,17 +27911,17 @@ function() {
                     }
                 }(e, t) || function(e, t) {
                     if (e) {
-                        if ("string" == typeof e) return OA(e, t);
+                        if ("string" == typeof e) return ON(e, t);
                         var r = Object.prototype.toString.call(e).slice(8, -1);
                         if ("Object" === r && e.constructor && (r = e.constructor.name), "Map" === r || "Set" === r) return Array.from(r);
-                        if ("Arguments" === r || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(r)) return OA(e, t)
+                        if ("Arguments" === r || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(r)) return ON(e, t)
                     }
                 }(e, t) || function() {
                     throw TypeError("Invalid attempt to destructure non-iterable instance.\\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.")
                 }()
             }
 
-            function OM(e, t) {
+            function O_(e, t) {
                 var r, n, o, i = {
                         label: 0,
                         sent: function() {
@@ -27987,11 +28002,11 @@ function() {
                 }
             }
 
-            function Ok(e) {
+            function OD(e) {
                 var t, r, n, o, i, a, l, u, c, s, f, d, y, m, h, b, v, g, S, x, P, E, j, A, C, T, N, M, k, R, _, D, L, U, B, F, z, H, G, V, W, K, Y, X, q, Q, $, Z, J, ee, et, er, en, eo, ei, ea, el, eu, ec, es, ef, ed, ep, ey, em, eh, eb, ev, eg, ew, eO, eS, ex, eP, eE, ej, eI = e.children,
                     eA = e.quickPay,
                     eC = e.samsungPaymentMethods;
-                return (0, p.jsx)(w$.Provider, {
+                return (0, p.jsx)(w0.Provider, {
                     value: (t = eA.isQuickPay, r = eA.paymentProfiles, n = eA.markRedirectHandled, o = eA.preparePaymentForQuickPay, i = eA.shouldRedirectToPurchase, a = eC.markRedirectHandled, l = eC.shouldRedirectToPurchase, c = (u = (0, e1.useContext)(aK)).getPurchaseUrl, s = u.upsellProduct, f = u.redirect, d = u.shouldShowFirstTimePurchaseConsent, m = (y = (0, e1.useContext)(ds)).quickPay.openModal, h = y.samsungPaymentMethods.openModal, b = y.redirectError.openModal, v = y.firstTimePurchaseConsent.openModal, S = (g = (0, e1.useContext)(lP)).trackPurchase, x = g.trackRedirectClick, M = (P = (0, e1.useContext)(aK).isSubscriber, E = (0, e1.useContext)(ds).purchaseWarning.openModal, j = (0, e1.useContext)(lP).trackPurchaseWarningShown, T = (C = function(e) {
                         if (Array.isArray(e)) return e
                     }(A = (0, e1.useState)(!1)) || function(e) {
@@ -28015,10 +28030,10 @@ function() {
                         }
                     }(A) || function(e) {
                         if (e) {
-                            if ("string" == typeof e) return Om(e, 2);
+                            if ("string" == typeof e) return Ov(e, 2);
                             var t = Object.prototype.toString.call(e).slice(8, -1);
                             if ("Object" === t && e.constructor && (t = e.constructor.name), "Map" === t || "Set" === t) return Array.from(t);
-                            if ("Arguments" === t || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(t)) return Om(e, 2)
+                            if ("Arguments" === t || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(t)) return Ov(e, 2)
                         }
                     }(A) || function() {
                         throw TypeError("Invalid attempt to destructure non-iterable instance.\\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.")
@@ -28135,7 +28150,7 @@ function() {
                                             if (i !== dy.RequireEmailVerification) return [2, !1];
                                             j(i);
                                             try {
-                                                wZ.EmailVerificationService.handleUserEmailVerificationRequiredByPurchaseWarning()
+                                                w1.EmailVerificationService.handleUserEmailVerificationRequiredByPurchaseWarning()
                                             } catch (e) {
                                                 ln("PurchaseWarningEmailVerificationException", null, e)
                                             }
@@ -28151,11 +28166,11 @@ function() {
                                     var i = o.apply(e, t);
 
                                     function a(e) {
-                                        Oh(i, r, n, a, l, "next", e)
+                                        Og(i, r, n, a, l, "next", e)
                                     }
 
                                     function l(e) {
-                                        Oh(i, r, n, a, l, "throw", e)
+                                        Og(i, r, n, a, l, "throw", e)
                                     }
                                     a(void 0)
                                 })
@@ -28184,30 +28199,30 @@ function() {
                         }
                     }(B) || function(e) {
                         if (e) {
-                            if ("string" == typeof e) return Of(e, 2);
+                            if ("string" == typeof e) return Oy(e, 2);
                             var t = Object.prototype.toString.call(e).slice(8, -1);
                             if ("Object" === t && e.constructor && (t = e.constructor.name), "Map" === t || "Set" === t) return Array.from(t);
-                            if ("Arguments" === t || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(t)) return Of(e, 2)
+                            if ("Arguments" === t || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(t)) return Oy(e, 2)
                         }
                     }(B) || function() {
                         throw TypeError("Invalid attempt to destructure non-iterable instance.\\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.")
                     }())[0], H = F[1], G = (0, e1.useCallback)(function() {
-                        return Op(function() {
+                        return Oh(function() {
                             var e, t;
-                            return Oy(this, function(r) {
+                            return Ob(this, function(r) {
                                 switch (r.label) {
                                     case 0:
                                         if (void 0 === (t = null == (e = az()) ? void 0 : e.id)) return [2, !1];
-                                        return [4, Ot(function() {
+                                        return [4, Oo(function() {
                                             var e, r, n;
-                                            return On(this, function(o) {
+                                            return Oa(this, function(o) {
                                                 switch (o.label) {
                                                     case 0:
                                                         e = void 0, r = [], o.label = 1;
                                                     case 1:
                                                         var i;
-                                                        return [4, (i = e, Ot(function() {
-                                                            return On(this, function(e) {
+                                                        return [4, (i = e, Oo(function() {
+                                                            return Oa(this, function(e) {
                                                                 return [2, lp(lf.GET, ld.GET_PENDING_ENABLE_PURCHASE_CONSENT_REQUESTS, {
                                                                     url: "".concat(I.EnvironmentUrls.apiGatewayUrl, "/parental-controls-api/v1/parental-controls/consents"),
                                                                     withCredentials: !0
@@ -28220,7 +28235,7 @@ function() {
                                                             })
                                                         })())];
                                                     case 2:
-                                                        (n = o.sent()) ? (r = Or(r).concat(Or(n.consents)), e = n.nextCursor) : e = void 0, o.label = 3;
+                                                        (n = o.sent()) ? (r = Oi(r).concat(Oi(n.consents)), e = n.nextCursor) : e = void 0, o.label = 3;
                                                     case 3:
                                                         if (e) return [3, 1];
                                                         o.label = 4;
@@ -28238,33 +28253,33 @@ function() {
                             })
                         })()
                     }, []), V = (0, e1.useCallback)(function() {
-                        return Op(function() {
+                        return Oh(function() {
                             var e, t, r, n, o;
-                            return Oy(this, function(i) {
+                            return Ob(this, function(i) {
                                 switch (i.label) {
                                     case 0:
-                                        return [4, Oi()];
+                                        return [4, Ou()];
                                     case 1:
                                         if (!(null == (t = i.sent()) ? void 0 : t.enablePurchases)) return [2, !1];
                                         return n = (r = t.enablePurchases).currentValue, [2, null != (e = null == (o = r.options) ? void 0 : o.some(function(e) {
                                             var t = e.option.optionValue,
                                                 r = e.requirement;
-                                            return t !== n && r === w0.SelfUpdateSetting
+                                            return t !== n && r === w4.SelfUpdateSetting
                                         })) && e]
                                 }
                             })
                         })()
                     }, []), W = (0, e1.useCallback)(function() {
-                        return Op(function() {
+                        return Oh(function() {
                             var e, t, r;
-                            return Oy(this, function(n) {
+                            return Ob(this, function(n) {
                                 switch (n.label) {
                                     case 0:
-                                        return [4, Ou(function() {
-                                            return Oc(this, function(e) {
+                                        return [4, Of(function() {
+                                            return Od(this, function(e) {
                                                 switch (e.label) {
                                                     case 0:
-                                                        return [4, (0, Oa.callBehaviour)("texas-u18-vpc-optimization")];
+                                                        return [4, (0, Oc.callBehaviour)("texas-u18-vpc-optimization")];
                                                     case 1:
                                                         return [2, e.sent()]
                                                 }
@@ -28276,9 +28291,9 @@ function() {
                             })
                         })()
                     }, []), K = (0, e1.useCallback)(function() {
-                        return Op(function() {
+                        return Oh(function() {
                             var e;
-                            return Oy(this, function(t) {
+                            return Ob(this, function(t) {
                                 switch (t.label) {
                                     case 0:
                                         return t.trys.push([0, 2, , 3]), [4, null == w || null == (e = w.Roblox.AccessManagementUpsellV2Service) ? void 0 : e.startAccessManagementUpsell({
@@ -28300,14 +28315,14 @@ function() {
                             })
                         })()
                     }, []), Y = (0, e1.useCallback)(function() {
-                        return Op(function() {
+                        return Oh(function() {
                             var e, t, r, n, o, i;
-                            return Oy(this, function(a) {
+                            return Ob(this, function(a) {
                                 switch (a.label) {
                                     case 0:
                                         if (lC || !lT) return [2, !0];
-                                        return [4, w2(function() {
-                                            return w4(this, function(e) {
+                                        return [4, w5(function() {
+                                            return w6(this, function(e) {
                                                 return [2, lp(lf.POST, ld.CHECK_USER_PURCHASE_SETTING, {
                                                     url: "".concat(I.EnvironmentUrls.apiGatewayUrl, "/payments-gateway/v1/check-user-purchase-settings"),
                                                     withCredentials: !0
@@ -28318,31 +28333,31 @@ function() {
                                         if (!(e = a.sent())) return lr("PurchaseEligibilityFailedToFetch"), k.warning(D("Heading.GeneralError")), [2, !1];
                                         if (e.expirationTimeInMinutes) return _(), t = Math.ceil(e.expirationTimeInMinutes / 60), r = function(e) {
                                             switch (e) {
-                                                case w3.FraudPaymentAuthorizationAttempt:
+                                                case w8.FraudPaymentAuthorizationAttempt:
                                                     return "Label.Sublabel.FraudPaymentAbuse";
-                                                case w3.FraudVirtualEconomyAbuse:
+                                                case w8.FraudVirtualEconomyAbuse:
                                                     return "Label.Sublabel.FraudVirtualEconomyAbuse";
-                                                case w3.FraudAbuseOfAffiliateSystem:
+                                                case w8.FraudAbuseOfAffiliateSystem:
                                                     return "Label.Sublabel.FraudAbuseOfTheAffiliateSystem";
-                                                case w3.FraudAttemptedUnauthorizedPaymentMethodUse:
+                                                case w8.FraudAttemptedUnauthorizedPaymentMethodUse:
                                                     return "Label.Sublabel.FraudAttemptedUnauthorizedPaymentMethodUse";
-                                                case w3.FraudRepeatedRefundRequests:
+                                                case w8.FraudRepeatedRefundRequests:
                                                     return "Label.Sublabel.FraudRepeatedRefundRequests";
-                                                case w3.FraudSuspiciousRefundRequests:
+                                                case w8.FraudSuspiciousRefundRequests:
                                                     return "Label.Sublabel.FraudSuspiciousRefundRequests";
-                                                case w3.FraudUnauthorizedPurchase:
+                                                case w8.FraudUnauthorizedPurchase:
                                                     return "Label.Sublabel.FraudUnauthorizedPurchase";
-                                                case w3.FraudUseOfUnauthorizedOffPlatformTransactions:
+                                                case w8.FraudUseOfUnauthorizedOffPlatformTransactions:
                                                     return "Label.Sublabel.FraudUseOfUnauthorizedOffPlatformTransactions";
-                                                case w3.FraudUseOfUnauthorizedPaymentMethod:
+                                                case w8.FraudUseOfUnauthorizedPaymentMethod:
                                                     return "Label.Sublabel.FraudUseOfUnauthorizedPaymentMethod";
-                                                case w3.FraudSuspiciousAccountPatterns:
+                                                case w8.FraudSuspiciousAccountPatterns:
                                                     return "Label.Sublabel.FraudSuspiciousAccountPatterns";
-                                                case w3.FraudChargeback:
+                                                case w8.FraudChargeback:
                                                     return "Label.AbuseType.Chargeback";
-                                                case w3.None:
-                                                case w3.PurchaseNotEnabled:
-                                                case w3.SpendLimitExceeded:
+                                                case w8.None:
+                                                case w8.PurchaseNotEnabled:
+                                                case w8.SpendLimitExceeded:
                                                     return "";
                                                 default:
                                                     return "Label.Sublabel.FraudPaymentAbuse"
@@ -28359,13 +28374,13 @@ function() {
                                     case 2:
                                         return o = a.sent(), [4, V()];
                                     case 3:
-                                        if (i = a.sent(), !(z && !o && !i && e.failureReason === w3.PurchaseNotEnabled)) return [3, 5];
+                                        if (i = a.sent(), !(z && !o && !i && e.failureReason === w8.PurchaseNotEnabled)) return [3, 5];
                                         return lr("AccessManagementUpsellModalShown"), [4, K()];
                                     case 4:
                                         return a.sent(), [2, !1];
                                     case 5:
-                                        if (z && i && e.failureReason === w3.PurchaseNotEnabled) return lr("PurchaseDisabledModalShownDisabledBySelf"), R(z, i), [2, !1];
-                                        if (o || e.failureReason === w3.PurchaseNotEnabled) return lr("PurchaseDisabledModalShownParentalConsent"), R(!!z, i), [2, !1];
+                                        if (z && i && e.failureReason === w8.PurchaseNotEnabled) return lr("PurchaseDisabledModalShownDisabledBySelf"), R(z, i), [2, !1];
+                                        if (o || e.failureReason === w8.PurchaseNotEnabled) return lr("PurchaseDisabledModalShownParentalConsent"), R(!!z, i), [2, !1];
                                         return lr("PurchaseEligibility", {
                                             failureReason: e.failureReason
                                         }), k.warning(D("Heading.GeneralError")), [2, !1]
@@ -28399,10 +28414,10 @@ function() {
                         }
                     }(q) || function(e) {
                         if (e) {
-                            if ("string" == typeof e) return wJ(e, 2);
+                            if ("string" == typeof e) return w2(e, 2);
                             var t = Object.prototype.toString.call(e).slice(8, -1);
                             if ("Object" === t && e.constructor && (t = e.constructor.name), "Map" === t || "Set" === t) return Array.from(t);
-                            if ("Arguments" === t || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(t)) return wJ(e, 2)
+                            if ("Arguments" === t || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(t)) return w2(e, 2)
                         }
                     }(q) || function() {
                         throw TypeError("Invalid attempt to destructure non-iterable instance.\\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.")
@@ -28412,9 +28427,9 @@ function() {
                     }, []), J = {
                         isVerificationUpsellEnabled: $,
                         verifyEmail: (0, e1.useCallback)(function(e) {
-                            return e ? null === wZ.EmailVerificationService || void 0 === wZ.EmailVerificationService ? void 0 : wZ.EmailVerificationService.handleUserEmailUpsellAtPremiumSubscription : null === wZ.EmailVerificationService || void 0 === wZ.EmailVerificationService ? void 0 : wZ.EmailVerificationService.handleUserEmailUpsellAtBuyRobux
+                            return e ? null === w1.EmailVerificationService || void 0 === w1.EmailVerificationService ? void 0 : w1.EmailVerificationService.handleUserEmailUpsellAtPremiumSubscription : null === w1.EmailVerificationService || void 0 === w1.EmailVerificationService ? void 0 : w1.EmailVerificationService.handleUserEmailUpsellAtBuyRobux
                         }, [])
-                    }).isVerificationUpsellEnabled, et = J.verifyEmail, en = (er = ON((0, e1.useState)(), 2))[0], eo = er[1], ea = (ei = ON((0, e1.useState)(), 2))[0], el = ei[1], ec = (eu = ON((0, e1.useState)(!1), 2))[0], es = eu[1], ed = (ef = ON((0, e1.useState)(!1), 2))[0], ep = ef[1], em = (ey = ON((0, e1.useState)(""), 2))[0], eh = ey[1], ev = (eb = ON((0, e1.useState)(), 2))[0], eg = eb[1], ew = (0, e1.useCallback)(function(e, t, r) {
+                    }).isVerificationUpsellEnabled, et = J.verifyEmail, en = (er = OR((0, e1.useState)(), 2))[0], eo = er[1], ea = (ei = OR((0, e1.useState)(), 2))[0], el = ei[1], ec = (eu = OR((0, e1.useState)(!1), 2))[0], es = eu[1], ed = (ef = OR((0, e1.useState)(!1), 2))[0], ep = ef[1], em = (ey = OR((0, e1.useState)(""), 2))[0], eh = ey[1], ev = (eb = OR((0, e1.useState)(), 2))[0], eg = eb[1], ew = (0, e1.useCallback)(function(e, t, r) {
                         if (void 0 !== w) {
                             if (lC) {
                                 lr("DesktopPurchaseRedirect"), w.location.href = r;
@@ -28424,8 +28439,8 @@ function() {
                             lr("MobilePurchaseRedirect"), w.location.href = r
                         }
                     }, []), eO = (0, e1.useCallback)(function(e, r, n, i) {
-                        return OT(function() {
-                            return OM(this, function(a) {
+                        return Ok(function() {
+                            return O_(this, function(a) {
                                 switch (a.label) {
                                     case 0:
                                         if (!(t && !n)) return [3, 2];
@@ -28443,9 +28458,9 @@ function() {
                             })
                         })()
                     }, [t, o, M, ew]), eS = (0, e1.useCallback)(function(e, r, n, o) {
-                        return OT(function() {
+                        return Ok(function() {
                             var i, a;
-                            return OM(this, function(l) {
+                            return O_(this, function(l) {
                                 switch (l.label) {
                                     case 0:
                                         return lr("StartPurchase", {
@@ -28457,8 +28472,8 @@ function() {
                                         l.label = 2;
                                     case 2:
                                         return l.trys.push([2, 4, , 5]), [4, et(r)(function() {
-                                            OT(function() {
-                                                return OM(this, function(t) {
+                                            Ok(function() {
+                                                return O_(this, function(t) {
                                                     switch (t.label) {
                                                         case 0:
                                                             return lr("EmailVerificationComplete"), [4, eO(e, n, r, i)];
@@ -28491,7 +28506,7 @@ function() {
                             a = e.isSubscription;
                         try {
                             lr("RedirectClickTime", {
-                                bucket: (t = performance.now(), null != (r = null == (n = Oj.find(function(e) {
+                                bucket: (t = performance.now(), null != (r = null == (n = OC.find(function(e) {
                                     return t <= e.maxMs
                                 })) ? void 0 : n.label) ? r : "10+")
                             })
@@ -28504,7 +28519,7 @@ function() {
                             i.preventDefault(), lr("PurchaseRedirectUrlEmpty"), f.refreshAuthTicket(), b();
                             return
                         }
-                        OI(i), x({
+                        OT(i), x({
                             isSubscriptionRedirect: a,
                             loginRedirectVersion: f.isInExperiment ? f.url.includes("/v2") ? "v2" : "v1" : void 0,
                             product: o
@@ -28513,8 +28528,8 @@ function() {
                         var t = arguments.length > 1 && void 0 !== arguments[1] && arguments[1],
                             r = arguments.length > 2 && void 0 !== arguments[2] && arguments[2],
                             n = arguments.length > 3 ? arguments[3] : void 0;
-                        return OT(function() {
-                            return OM(this, function(o) {
+                        return Ok(function() {
+                            return O_(this, function(o) {
                                 switch (o.label) {
                                     case 0:
                                         if (eo(e), el(n), es(t), ep(r), lI) return h(e, t, r), [2];
@@ -28528,8 +28543,8 @@ function() {
                         var t = arguments.length > 1 && void 0 !== arguments[1] && arguments[1],
                             r = arguments.length > 2 && void 0 !== arguments[2] && arguments[2],
                             n = arguments.length > 3 ? arguments[3] : void 0;
-                        return OT(function() {
-                            return OM(this, function(o) {
+                        return Ok(function() {
+                            return O_(this, function(o) {
                                 switch (o.label) {
                                     case 0:
                                         if (!1 !== d) return [3, 2];
@@ -28555,7 +28570,7 @@ function() {
                             n = e.isSubscription,
                             o = e.isBonus,
                             i = e.sectionType;
-                        r ? (OE.logLayerExposure().catch(function(e) {
+                        r ? (OA.logLayerExposure().catch(function(e) {
                             ln("LoginRedirectLayerExposureError", null, e)
                         }), ex(e)) : eE(t, n, o, i)
                     }, [ex, eE]), (0, e1.useEffect)(function() {
@@ -28586,18 +28601,18 @@ function() {
                     children: eI
                 })
             }
-            var OR = r(3696),
-                O_ = window.Roblox["core-scripts"].intl.intl,
-                OD = r.n(O_),
-                OL = ((x0 = {}).CardDeclined = "Message.QuickPay.CardDeclinedError", x0.CardExpired = "Message.QuickPay.ExpiredCardError", x0.GenericError = "Message.QuickPay.GenericError", x0.InsufficientFunds = "Message.QuickPay.InsufficientFundsError", x0);
+            var OL = r(3696),
+                OU = window.Roblox["core-scripts"].intl.intl,
+                OB = r.n(OU),
+                OF = ((x4 = {}).CardDeclined = "Message.QuickPay.CardDeclinedError", x4.CardExpired = "Message.QuickPay.ExpiredCardError", x4.GenericError = "Message.QuickPay.GenericError", x4.InsufficientFunds = "Message.QuickPay.InsufficientFundsError", x4);
 
-            function OU(e, t) {
+            function Oz(e, t) {
                 (null == t || t > e.length) && (t = e.length);
                 for (var r = 0, n = Array(t); r < t; r++) n[r] = e[r];
                 return n
             }
 
-            function OB(e, t, r, n, o, i, a) {
+            function OH(e, t, r, n, o, i, a) {
                 try {
                     var l = e[i](a),
                         u = l.value
@@ -28608,7 +28623,7 @@ function() {
                 l.done ? t(u) : Promise.resolve(u).then(n, o)
             }
 
-            function OF(e) {
+            function OG(e) {
                 return function() {
                     var t = this,
                         r = arguments;
@@ -28616,18 +28631,18 @@ function() {
                         var i = e.apply(t, r);
 
                         function a(e) {
-                            OB(i, n, o, a, l, "next", e)
+                            OH(i, n, o, a, l, "next", e)
                         }
 
                         function l(e) {
-                            OB(i, n, o, a, l, "throw", e)
+                            OH(i, n, o, a, l, "throw", e)
                         }
                         a(void 0)
                     })
                 }
             }
 
-            function Oz(e, t) {
+            function OV(e, t) {
                 return function(e) {
                     if (Array.isArray(e)) return e
                 }(e) || function(e, t) {
@@ -28651,21 +28666,21 @@ function() {
                     }
                 }(e, t) || function(e, t) {
                     if (e) {
-                        if ("string" == typeof e) return OU(e, t);
+                        if ("string" == typeof e) return Oz(e, t);
                         var r = Object.prototype.toString.call(e).slice(8, -1);
                         if ("Object" === r && e.constructor && (r = e.constructor.name), "Map" === r || "Set" === r) return Array.from(r);
-                        if ("Arguments" === r || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(r)) return OU(e, t)
+                        if ("Arguments" === r || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(r)) return Oz(e, t)
                     }
                 }(e, t) || function() {
                     throw TypeError("Invalid attempt to destructure non-iterable instance.\\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.")
                 }()
             }
 
-            function OH(e) {
+            function OW(e) {
                 return e && "u" > typeof Symbol && e.constructor === Symbol ? "symbol" : typeof e
             }
 
-            function OG(e, t) {
+            function OK(e, t) {
                 var r, n, o, i = {
                         label: 0,
                         sent: function() {
@@ -28745,23 +28760,23 @@ function() {
                     }
                 }
             }
-            var OV = function(e, t) {
+            var OY = function(e, t) {
                     ln("QuickPay3DSFlow", {
                         step: e
                     }, t), ln("QuickPayPaymentFlow", {
                         step: "3dsError"
                     })
                 },
-                OW = function(e) {
+                OX = function(e) {
                     if ((void 0 === e ? "undefined" : e && "u" > typeof Symbol && e.constructor === Symbol ? "symbol" : typeof e) == "object" && null !== e && "config" in e) {
                         var t, r = null == (t = e.response) ? void 0 : t.data;
-                        if ((void 0 === r ? "undefined" : OH(r)) === "object" && null !== r && "failureReason" in r) {
+                        if ((void 0 === r ? "undefined" : OW(r)) === "object" && null !== r && "failureReason" in r) {
                             var n = r.failureReason;
                             return "string" == typeof n ? n : void 0
                         }
                     }
                 },
-                OK = function(e) {
+                Oq = function(e) {
                     try {
                         var t = new URL(e);
                         return "http:" === t.protocol || "https:" === t.protocol
@@ -28770,13 +28785,13 @@ function() {
                     }
                 };
 
-            function OY(e, t) {
+            function OQ(e, t) {
                 (null == t || t > e.length) && (t = e.length);
                 for (var r = 0, n = Array(t); r < t; r++) n[r] = e[r];
                 return n
             }
 
-            function OX(e, t) {
+            function O$(e, t) {
                 return function(e) {
                     if (Array.isArray(e)) return e
                 }(e) || function(e, t) {
@@ -28800,25 +28815,25 @@ function() {
                     }
                 }(e, t) || function(e, t) {
                     if (e) {
-                        if ("string" == typeof e) return OY(e, t);
+                        if ("string" == typeof e) return OQ(e, t);
                         var r = Object.prototype.toString.call(e).slice(8, -1);
                         if ("Object" === r && e.constructor && (r = e.constructor.name), "Map" === r || "Set" === r) return Array.from(r);
-                        if ("Arguments" === r || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(r)) return OY(e, t)
+                        if ("Arguments" === r || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(r)) return OQ(e, t)
                     }
                 }(e, t) || function() {
                     throw TypeError("Invalid attempt to destructure non-iterable instance.\\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.")
                 }()
             }
 
-            function Oq(e, t) {
+            function OZ(e, t) {
                 (null == t || t > e.length) && (t = e.length);
                 for (var r = 0, n = Array(t); r < t; r++) n[r] = e[r];
                 return n
             }
 
-            function OQ(e) {
+            function OJ(e) {
                 var t, r, n, o, i, a, l, u, c, s, f, d, y, m, h, b, v, g, O, S, x, P, E, A, C, T, N, M, k, R, _, D, L, U, B, F, z, H, G, V, W, K, Y, X, q, Q, $, Z, J, ee, et, er, en, eo, ei, ea, el, eu, ec, es, ef, ed, ep, ey, em, eh, eb, ev, eg, ew, eO, eS, ex, eP, eE, ej, eI, eA, eC, eT, eN, eM, ek, eR, e_, eD, eL, eU, eB, eF, ez, eH, eG, eV, eW, eK, eY, eX, eq, eQ, e$, eZ, eJ, e0, e2, e4, e3, e5, e6, e8, e7, e9, te, tt, tr, tn, to, ti, ta, tl, tu, tc, ts, tf, td, tp, ty, tm, th, tb, tv, tg, tw, tO, tS, tx, tP, tE, tj, tI, tA, tC, tT, tN, tM, tk, tR, t_, tD, tL, tU, tB, tF, tz, tH, tG, tV = e.children,
-                    tW = (r = (t = (0, e1.useContext)(lP)).trackPurchaseDisabledShown, n = t.trackPurchaseWarningShown, o = t.trackQuickPayShown, i = t.trackQuickPay3DSShown, a = t.trackRobuxGiftShown, l = t.trackSamsungPaymentMethodsShown, c = (u = OX((0, e1.useState)(!1), 2))[0], s = u[1], d = (f = OX((0, e1.useState)(!1), 2))[0], y = f[1], h = (m = OX((0, e1.useState)(!1), 2))[0], b = m[1], g = (v = OX((0, e1.useState)(!1), 2))[0], O = v[1], x = (S = OX((0, e1.useState)(!1), 2))[0], P = S[1], A = (E = OX((0, e1.useState)(!1), 2))[0], C = E[1], N = (T = OX((0, e1.useState)(!1), 2))[0], M = T[1], R = (k = OX((0, e1.useState)(), 2))[0], _ = k[1], L = (D = OX((0, e1.useState)(), 2))[0], U = D[1], F = (B = OX((0, e1.useState)(!1), 2))[0], z = B[1], G = (H = OX((0, e1.useState)(!1), 2))[0], V = H[1], K = (W = OX((0, e1.useState)(), 2))[0], Y = W[1], q = (X = OX((0, e1.useState)(!1), 2))[0], Q = X[1], Z = ($ = OX((0, e1.useState)(!1), 2))[0], J = $[1], et = (ee = OX((0, e1.useState)(""), 2))[0], er = ee[1], eo = (en = OX((0, e1.useState)(!1), 2))[0], ei = en[1], el = (ea = OX((0, e1.useState)(), 2))[0], eu = ea[1], ec = (0, e1.useCallback)(function(e, t) {
+                    tW = (r = (t = (0, e1.useContext)(lP)).trackPurchaseDisabledShown, n = t.trackPurchaseWarningShown, o = t.trackQuickPayShown, i = t.trackQuickPay3DSShown, a = t.trackRobuxGiftShown, l = t.trackSamsungPaymentMethodsShown, c = (u = O$((0, e1.useState)(!1), 2))[0], s = u[1], d = (f = O$((0, e1.useState)(!1), 2))[0], y = f[1], h = (m = O$((0, e1.useState)(!1), 2))[0], b = m[1], g = (v = O$((0, e1.useState)(!1), 2))[0], O = v[1], x = (S = O$((0, e1.useState)(!1), 2))[0], P = S[1], A = (E = O$((0, e1.useState)(!1), 2))[0], C = E[1], N = (T = O$((0, e1.useState)(!1), 2))[0], M = T[1], R = (k = O$((0, e1.useState)(), 2))[0], _ = k[1], L = (D = O$((0, e1.useState)(), 2))[0], U = D[1], F = (B = O$((0, e1.useState)(!1), 2))[0], z = B[1], G = (H = O$((0, e1.useState)(!1), 2))[0], V = H[1], K = (W = O$((0, e1.useState)(), 2))[0], Y = W[1], q = (X = O$((0, e1.useState)(!1), 2))[0], Q = X[1], Z = ($ = O$((0, e1.useState)(!1), 2))[0], J = $[1], et = (ee = O$((0, e1.useState)(""), 2))[0], er = ee[1], eo = (en = O$((0, e1.useState)(!1), 2))[0], ei = en[1], el = (ea = O$((0, e1.useState)(), 2))[0], eu = ea[1], ec = (0, e1.useCallback)(function(e, t) {
                         r(e), J(e), Q(t), y(!0)
                     }, [r]), es = (0, e1.useCallback)(function(e, t) {
                         n(e), _(e), U(function() {
@@ -28907,7 +28922,7 @@ function() {
                             }
                         }
                     }, [eS, F, N, G, ey, K, em, q, d, ec, Z, R, eh, L, c, es, eb, h, ef, ev, g, ed, et, eg, x, ep, ew, A, eO, eP, el, eo, ex])),
-                    tK = (eE = tW.quickPay.openModal, eI = (ej = tW.quickPay3DS).closeModal, eA = ej.openModal, eC = ej.url, eN = (eT = (0, e1.useContext)(aK)).getPurchaseUrl, eM = eT.paymentSession, ek = eT.productIds, eR = eT.purchaseFlowId, e_ = eT.urlParams, eL = (eD = (0, e1.useContext)(lP)).trackQuickPayClick, eU = eD.trackQuickPayPurchase, eF = (eB = Oz((0, e1.useState)(), 2))[0], ez = eB[1], eG = (eH = Oz((0, e1.useState)(!1), 2))[0], eV = eH[1], eK = (eW = Oz((0, e1.useState)(!1), 2))[0], eY = eW[1], eq = (eX = Oz((0, e1.useState)(!1), 2))[0], eQ = eX[1], eZ = (e$ = Oz((0, e1.useState)(""), 2))[0], eJ = e$[1], e2 = (e0 = Oz((0, e1.useState)([]), 2))[0], e4 = e0[1], e5 = (e3 = Oz((0, e1.useState)(), 2))[0], e6 = e3[1], e7 = (e8 = Oz((0, e1.useState)(!1), 2))[0], e9 = e8[1], tt = (te = Oz((0, e1.useState)(), 2))[0], tr = te[1], to = (tn = Oz((0, e1.useState)(), 2))[0], ti = tn[1], tl = (ta = Oz((0, e1.useState)(null), 2))[0], tu = ta[1], ts = (tc = Oz((0, e1.useState)(!1), 2))[0], tf = tc[1], tp = (td = Oz((0, e1.useState)([]), 2))[0], ty = td[1], th = (tm = Oz((0, e1.useState)(!1), 2))[0], tb = tm[1], tv = (0, e1.useRef)(0), tg = (0, e1.useCallback)(function(e) {
+                    tK = (eE = tW.quickPay.openModal, eI = (ej = tW.quickPay3DS).closeModal, eA = ej.openModal, eC = ej.url, eN = (eT = (0, e1.useContext)(aK)).getPurchaseUrl, eM = eT.paymentSession, ek = eT.productIds, eR = eT.purchaseFlowId, e_ = eT.urlParams, eL = (eD = (0, e1.useContext)(lP)).trackQuickPayClick, eU = eD.trackQuickPayPurchase, eF = (eB = OV((0, e1.useState)(), 2))[0], ez = eB[1], eG = (eH = OV((0, e1.useState)(!1), 2))[0], eV = eH[1], eK = (eW = OV((0, e1.useState)(!1), 2))[0], eY = eW[1], eq = (eX = OV((0, e1.useState)(!1), 2))[0], eQ = eX[1], eZ = (e$ = OV((0, e1.useState)(""), 2))[0], eJ = e$[1], e2 = (e0 = OV((0, e1.useState)([]), 2))[0], e4 = e0[1], e5 = (e3 = OV((0, e1.useState)(), 2))[0], e6 = e3[1], e7 = (e8 = OV((0, e1.useState)(!1), 2))[0], e9 = e8[1], tt = (te = OV((0, e1.useState)(), 2))[0], tr = te[1], to = (tn = OV((0, e1.useState)(), 2))[0], ti = tn[1], tl = (ta = OV((0, e1.useState)(null), 2))[0], tu = ta[1], ts = (tc = OV((0, e1.useState)(!1), 2))[0], tf = tc[1], tp = (td = OV((0, e1.useState)([]), 2))[0], ty = td[1], th = (tm = OV((0, e1.useState)(!1), 2))[0], tb = tm[1], tv = (0, e1.useRef)(0), tg = (0, e1.useCallback)(function(e) {
                         if (e) {
                             var t, r = "unknown";
                             (null == (t = e.providerPayload) ? void 0 : t.paymentProfileType) === "card" ? r = "card": wd(e.providerPayload) && (r = "paypal"), lr("QuickPayPaymentMethodSelected", {
@@ -28915,14 +28930,14 @@ function() {
                             })
                         }
                     }, []), tw = (0, e1.useCallback)(function() {
-                        return OF(function() {
+                        return OG(function() {
                             var e, t, r, n, o, i;
-                            return OG(this, function(a) {
+                            return OK(this, function(a) {
                                 switch (a.label) {
                                     case 0:
-                                        return t = w5.BuyRobuxPage, e_.product_id && lj && (t = w5.BuyRobuxPagePreselectedProduct), lr("QuickPayGetMetadataFlow", {
+                                        return t = w7.BuyRobuxPage, e_.product_id && lj && (t = w7.BuyRobuxPagePreselectedProduct), lr("QuickPayGetMetadataFlow", {
                                             step: "start"
-                                        }), [4, w7(t, ek)];
+                                        }), [4, Ot(t, ek)];
                                     case 1:
                                         if (!(r = a.sent())) return ln("QuickPayGetMetadataFlow", {
                                             step: "noData"
@@ -28930,8 +28945,8 @@ function() {
                                         if (n = null != (e = r.subscribedRobuxProductOffers) ? e : [], eJ(r.legalDisclosureTranslationKey), ty(n), !r.isUserEligible) return lr("QuickPayGetMetadataFlow", {
                                             step: "ineligible"
                                         }), [2];
-                                        return [4, w2(function() {
-                                            return w4(this, function(e) {
+                                        return [4, w5(function() {
+                                            return w6(this, function(e) {
                                                 return [2, lp(lf.GET, ld.GET_PAYMENT_PROFILES, {
                                                     url: "".concat(I.EnvironmentUrls.apiGatewayUrl, "/payments-gateway/v1/payment-profiles"),
                                                     withCredentials: !0
@@ -28956,9 +28971,9 @@ function() {
                             })
                         })()
                     }, [e_.product_id, tg, ek]), tO = (0, e1.useCallback)(function() {
-                        return OF(function() {
+                        return OG(function() {
                             var e;
-                            return OG(this, function(t) {
+                            return OK(this, function(t) {
                                 switch (t.label) {
                                     case 0:
                                         if (void 0 === w) return [2];
@@ -28967,7 +28982,7 @@ function() {
                                         return t.trys.push([1, 3, , 4]), e = function() {
                                             if (void 0 === w) throw Error("Stripe public API key selection requires a browser environment");
                                             return w.location.href.includes("sitetest1") ? "pk_test_51LNM0XG5RADBkfjhYJlpADA2ArzWIh7gTWTodYNbpEzSiT55dul3VJhaBIVHL0CNyO0gECOz1vPnWArAkjwQ8NBO00Cdf2PxED" : w.location.href.includes("sitetest3") ? "pk_test_51LNOeQHDRNiW7vlLcKH8TGCpJ7zhaidLdSegE22GCuvQbVUX2xDiGJY6WYaldYyo6qgVxmy1SnSVpSdaqyjfqclU00NQwWntIe" : "pk_live_51LKpO9C8tJWGhK4HEHtny9Dg7xXiQJ1i349cq6KBDusbl8bRHO7QmCKKhX18LPjSirMNTvj3tesq6mhIQuPioeAd0062ZCgoF3"
-                                        }(), [4, (0, OR.loadStripe)(e)];
+                                        }(), [4, (0, OL.loadStripe)(e)];
                                     case 2:
                                         return tu(t.sent()), [3, 4];
                                     case 3:
@@ -28981,9 +28996,9 @@ function() {
                         var t;
                         return null != (t = e.redirectToUrl) ? t : e.RedirectionUrl
                     }, tx = (0, e1.useCallback)(function(e, t, r, n) {
-                        return OF(function() {
+                        return OG(function() {
                             var o, i, a, l, u, c, s, f;
-                            return OG(this, function(d) {
+                            return OK(this, function(d) {
                                 switch (d.label) {
                                     case 0:
                                         var p, y, m;
@@ -28992,8 +29007,8 @@ function() {
                                         if (!eR || !eM) return [2];
                                         return tv.current += 1, a = tv.current, l = wd(i.providerPayload) ? "BraintreePaypal" : "StripeCard", lr("QuickPayPreparePaymentFlow", {
                                             step: "start"
-                                        }), [4, (p = eM.id, y = e.productId, m = i.id, w2(function() {
-                                            return w4(this, function(e) {
+                                        }), [4, (p = eM.id, y = e.productId, m = i.id, w5(function() {
+                                            return w6(this, function(e) {
                                                 return [2, lp(lf.POST, ld.PREPARE_PAYMENT, {
                                                     url: "".concat(I.EnvironmentUrls.apiGatewayUrl, "/payments-gateway/v1/prepare-payment"),
                                                     withCredentials: !0
@@ -29012,9 +29027,9 @@ function() {
                                                 isError: !1
                                             }
                                         }).catch(function(t) {
-                                            (tf(!1), e6(null), ez(null), (void 0 === t ? "undefined" : OH(t)) === "object" && null !== t && "parameters" in t && "object" === OH(t.parameters) && null !== t.parameters && "kind" in t.parameters && "abandoned" === t.parameters.kind) ? ln("QuickPayPreparePaymentFlow", {
+                                            (tf(!1), e6(null), ez(null), (void 0 === t ? "undefined" : OW(t)) === "object" && null !== t && "parameters" in t && "object" === OW(t.parameters) && null !== t.parameters && "kind" in t.parameters && "abandoned" === t.parameters.kind) ? ln("QuickPayPreparePaymentFlow", {
                                                 step: "genericChallengeAbandoned"
-                                            }): "RemovedPaymentProfile" === OW(t) ? ln("QuickPayPreparePaymentFlow", {
+                                            }): "RemovedPaymentProfile" === OX(t) ? ln("QuickPayPreparePaymentFlow", {
                                                 step: "profileRemovedByFraud"
                                             }) : ln("QuickPayPreparePaymentFlow", {
                                                 step: "error"
@@ -29040,9 +29055,9 @@ function() {
                             })
                         })()
                     }, [eE, tt, eR, eM, eN, e2.length]), tP = (0, e1.useCallback)(function(e) {
-                        return OF(function() {
+                        return OG(function() {
                             var t, r, n, o, i, a, l;
-                            return OG(this, function(u) {
+                            return OK(this, function(u) {
                                 switch (u.label) {
                                     case 0:
                                         var c;
@@ -29057,8 +29072,8 @@ function() {
                                             paymentSessionId: eM.id,
                                             providerPayload: e,
                                             quickPaySelectedPaymentProfileId: null == tt ? void 0 : tt.id
-                                        }, w2(function() {
-                                            return w4(this, function(e) {
+                                        }, w5(function() {
+                                            return w6(this, function(e) {
                                                 return [2, lp(lf.POST, ld.PROCESS_PAYMENT, {
                                                     url: "".concat(I.EnvironmentUrls.apiGatewayUrl, "/payments-gateway/v1/process-payment"),
                                                     withCredentials: !0
@@ -29075,7 +29090,7 @@ function() {
                                         u.sent(), u.label = 3;
                                     case 3:
                                         return [2, {
-                                            error: OL.GenericError,
+                                            error: OF.GenericError,
                                             isLoading: !1
                                         }];
                                     case 4:
@@ -29085,19 +29100,19 @@ function() {
                                                 }), ln("QuickPayPaymentFlow", {
                                                     step: "error"
                                                 }), i) {
-                                                case w8.CARD_DECLINED:
-                                                    a = OL.CardDeclined;
+                                                case Oe.CARD_DECLINED:
+                                                    a = OF.CardDeclined;
                                                     break;
-                                                case w8.EXPIRED_CARD:
-                                                    a = OL.CardExpired;
+                                                case Oe.EXPIRED_CARD:
+                                                    a = OF.CardExpired;
                                                     break;
-                                                case w8.INSUFFICIENT_FUNDS:
-                                                case w8.BALANCE_INSUFFICIENT:
-                                                    a = OL.InsufficientFunds;
+                                                case Oe.INSUFFICIENT_FUNDS:
+                                                case Oe.BALANCE_INSUFFICIENT:
+                                                    a = OF.InsufficientFunds;
                                                     break;
-                                                case w8.INCORRECT_CVC:
+                                                case Oe.INCORRECT_CVC:
                                                 default:
-                                                    a = OL.GenericError
+                                                    a = OF.GenericError
                                             }
                                             return [2, {
                                                 error: a,
@@ -29134,17 +29149,17 @@ function() {
                         if (0 === r.Units && 0 === r.Nanos || !t) return "Message.QuickPay.Tax";
                         var i = "";
                         try {
-                            var a = new(OD()),
+                            var a = new(OB()),
                                 l = parseFloat(o);
                             l > 0 && (i = a.n(l))
                         } catch (e) {
                             ln("QuickPayPercentStringException", null, e)
                         }
                         switch (t) {
-                            case w6.GST:
+                            case w9.GST:
                                 e = "Message.QuickPay.GST";
                                 break;
-                            case w6.VAT:
+                            case w9.VAT:
                                 if (["AE", "CO", "ID", "IS", "TR", "UA", "VN", "ZA"].includes(n.toUpperCase())) {
                                     e = "Message.QuickPay.Tax";
                                     break
@@ -29159,36 +29174,36 @@ function() {
                                 }
                                 e = "Message.QuickPay.VAT";
                                 break;
-                            case w6.JCT:
+                            case w9.JCT:
                                 e = "Message.QuickPay.JCT";
                                 break;
-                            case w6.HST:
+                            case w9.HST:
                                 e = "Message.QuickPay.HST";
                                 break;
-                            case w6.SALES_TAX:
+                            case w9.SALES_TAX:
                                 e = "Message.QuickPay.SalesTax";
                                 break;
-                            case w6.SERVICE_TAX:
+                            case w9.SERVICE_TAX:
                                 e = "Message.QuickPay.ServiceTax";
                                 break;
-                            case w6.SUMMED:
-                            case w6.UNKNOWN:
-                            case w6.INVALID:
-                            case w6.AMUSEMENT_TAX:
-                            case w6.COMMUNICATIONS_TAX:
-                            case w6.IGST:
-                            case w6.LEASE_TAX:
-                            case w6.PST:
-                            case w6.QST:
-                            case w6.RST:
+                            case w9.SUMMED:
+                            case w9.UNKNOWN:
+                            case w9.INVALID:
+                            case w9.AMUSEMENT_TAX:
+                            case w9.COMMUNICATIONS_TAX:
+                            case w9.IGST:
+                            case w9.LEASE_TAX:
+                            case w9.PST:
+                            case w9.QST:
+                            case w9.RST:
                             default:
                                 e = "Message.QuickPay.Tax"
                         }
                         return e + (i.length > 0 ? " (".concat(i, "%)") : "")
                     }, [e5]), tj = (0, e1.useCallback)(function(e) {
-                        return OF(function() {
+                        return OG(function() {
                             var t, r, n, o;
-                            return OG(this, function(i) {
+                            return OK(this, function(i) {
                                 switch (i.label) {
                                     case 0:
                                         if (void 0 === w || "3DS-authentication-complete" !== e.data.type || !e.data.url || !tl) return [2];
@@ -29196,17 +29211,17 @@ function() {
                                             step: "messageReceived"
                                         }), i.label = 1;
                                     case 1:
-                                        if (i.trys.push([1, 3, 4, 5]), !eC || !OK(eC)) return OV("urlNotSet"), [2, OL.GenericError];
-                                        if (!(t = new URL(eC).searchParams.get("payment_intent_client_secret"))) return OV("clientSecretNotSet"), [2, OL.GenericError];
+                                        if (i.trys.push([1, 3, 4, 5]), !eC || !Oq(eC)) return OY("urlNotSet"), [2, OF.GenericError];
+                                        if (!(t = new URL(eC).searchParams.get("payment_intent_client_secret"))) return OY("clientSecretNotSet"), [2, OF.GenericError];
                                         return [4, tl.retrievePaymentIntent(t)];
                                     case 2:
-                                        if (n = (r = i.sent()).error, o = r.paymentIntent, n) return OV("stripeError", n), [2, OL.GenericError];
-                                        if ("succeeded" !== o.status) return OV("unsuccessful"), [2, OL.GenericError];
+                                        if (n = (r = i.sent()).error, o = r.paymentIntent, n) return OY("stripeError", n), [2, OF.GenericError];
+                                        if ("succeeded" !== o.status) return OY("unsuccessful"), [2, OF.GenericError];
                                         return lr("QuickPay3DSFlow", {
                                             step: "success"
                                         }), w.location.href = "/upgrades/checkout/success?checkoutSessionId=".concat(eF), [2, void 0];
                                     case 3:
-                                        return OV("error", i.sent()), [2, OL.GenericError];
+                                        return OY("error", i.sent()), [2, OF.GenericError];
                                     case 4:
                                         return eI(), [7];
                                     case 5:
@@ -29276,10 +29291,10 @@ function() {
                         }
                     }(tU) || function(e) {
                         if (e) {
-                            if ("string" == typeof e) return Oq(e, 2);
+                            if ("string" == typeof e) return OZ(e, 2);
                             var t = Object.prototype.toString.call(e).slice(8, -1);
                             if ("Object" === t && e.constructor && (t = e.constructor.name), "Map" === t || "Set" === t) return Array.from(t);
-                            if ("Arguments" === t || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(t)) return Oq(e, 2)
+                            if ("Arguments" === t || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(t)) return OZ(e, 2)
                         }
                     }(tU) || function() {
                         throw TypeError("Invalid attempt to destructure non-iterable instance.\\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.")
@@ -29302,11 +29317,11 @@ function() {
                         }, []),
                         shouldRedirectToPurchase: tF
                     });
-                return (0, p.jsx)(wQ, {
+                return (0, p.jsx)(wJ, {
                     modals: tW,
                     quickPay: tK,
                     samsungPaymentMethods: tY,
-                    children: (0, p.jsx)(Ok, {
+                    children: (0, p.jsx)(OD, {
                         quickPay: tK,
                         samsungPaymentMethods: tY,
                         children: tV
@@ -29314,7 +29329,7 @@ function() {
                 })
             }
 
-            function O$(e) {
+            function O0(e) {
                 for (var t = 1; t < arguments.length; t++) {
                     var r = null != arguments[t] ? arguments[t] : {},
                         n = Object.keys(r);
@@ -29332,11 +29347,11 @@ function() {
                 }
                 return e
             }
-            var OZ = "/mobile-app-upgrades/buy",
-                OJ = ["header-height", "rbx-navbar-display", "navigation-top", "container-main-margin-top", "content-padding-top"];
+            var O1 = "/mobile-app-upgrades/buy",
+                O2 = ["header-height", "rbx-navbar-display", "navigation-top", "container-main-margin-top", "content-padding-top"];
 
-            function O0() {
-                return (O0 = Object.assign || function(e) {
+            function O4() {
+                return (O4 = Object.assign || function(e) {
                     for (var t = 1; t < arguments.length; t++) {
                         var r = arguments[t];
                         for (var n in r) Object.prototype.hasOwnProperty.call(r, n) && (e[n] = r[n])
@@ -29345,12 +29360,12 @@ function() {
                 }).apply(this, arguments)
             }
 
-            function O1(e) {
+            function O3(e) {
                 if (null == e) throw TypeError("Cannot destructure " + e);
                 return e
             }
 
-            function O2(e) {
+            function O5(e) {
                 for (var t = 1; t < arguments.length; t++) {
                     var r = null != arguments[t] ? arguments[t] : {},
                         n = Object.keys(r);
@@ -29369,7 +29384,7 @@ function() {
                 return e
             }
 
-            function O4(e, t) {
+            function O6(e, t) {
                 return t = null != t ? t : {}, Object.getOwnPropertyDescriptors ? Object.defineProperties(e, Object.getOwnPropertyDescriptors(t)) : (function(e) {
                     var t = Object.keys(e);
                     if (Object.getOwnPropertySymbols) {
@@ -29382,7 +29397,7 @@ function() {
                 }), e
             }
 
-            function O3(e, t) {
+            function O8(e, t) {
                 if (null == e) return {};
                 var r, n, o, i = {};
                 if ("u" > typeof Reflect && Reflect.ownKeys) {
@@ -29400,48 +29415,48 @@ function() {
                 return i
             }
 
-            function O5(e) {
-                O1(e);
-                var t = O0({}, e);
-                return (0, p.jsx)("div", O2({
+            function O7(e) {
+                O3(e);
+                var t = O4({}, e);
+                return (0, p.jsx)("div", O5({
                     "data-slot": "card",
                     className: "self-stretch flex flex-col items-start gap-medium"
                 }, t))
             }
 
-            function O6(e) {
+            function O9(e) {
                 var t = e.className,
-                    r = O3(e, ["className"]);
-                return (0, p.jsx)("div", O2({
+                    r = O8(e, ["className"]);
+                return (0, p.jsx)("div", O5({
                     className: b6()("buy-robux-section-header self-stretch flex flex-row items-start text-heading-small medium:text-heading-large", t)
                 }, r))
             }
 
-            function O8(e) {
-                O1(e);
-                var t = O0({}, e);
-                return (0, p.jsx)("div", O2({
+            function Se(e) {
+                O3(e);
+                var t = O4({}, e);
+                return (0, p.jsx)("div", O5({
                     className: b6()("self-stretch flex flex-row items-start content-emphasis text-body-medium", t.className)
                 }, t))
             }
 
-            function O7(e) {
+            function St(e) {
                 var t = e.banner,
                     r = e.children,
                     n = e.isPrimary,
-                    o = O3(e, ["banner", "children", "isPrimary"]);
+                    o = O8(e, ["banner", "children", "isPrimary"]);
                 return t ? (0, p.jsxs)("div", {
                     className: b6()("radius-large flex flex-col items-start self-stretch", {
                         "bg-surface-100": n,
                         "stroke-standard": !n,
                         "stroke-default": !n
                     }),
-                    children: [t, (0, p.jsx)("div", O4(O2({
+                    children: [t, (0, p.jsx)("div", O6(O5({
                         className: "flex flex-col items-start self-stretch gap-xlarge robux-section"
                     }, o), {
                         children: r
                     }))]
-                }) : (0, p.jsx)("div", O4(O2({
+                }) : (0, p.jsx)("div", O6(O5({
                     className: b6()("radius-large flex flex-col items-start self-stretch gap-xlarge robux-section", {
                         "bg-surface-100": n,
                         "stroke-standard": !n,
@@ -29452,12 +29467,12 @@ function() {
                 }))
             }
 
-            function O9(e, t) {
+            function Sr(e, t) {
                 (null == t || t > e.length) && (t = e.length);
                 for (var r = 0, n = Array(t); r < t; r++) n[r] = e[r];
                 return n
             }
-            var Se = {
+            var Sn = {
                     xsmall: 0,
                     small: 361,
                     medium: 601,
@@ -29465,20 +29480,20 @@ function() {
                     xlarge: 1521,
                     xxlarge: 1921
                 },
-                St = ["xsmall", "small", "medium", "large", "xlarge", "xxlarge"];
+                So = ["xsmall", "small", "medium", "large", "xlarge", "xxlarge"];
 
-            function Sr() {
-                var e, t = null != (e = null == w ? void 0 : w.innerWidth) ? e : Se.xlarge;
-                return t >= Se.xxlarge ? "xxlarge" : t >= Se.xlarge ? "xlarge" : t >= Se.large ? "large" : t >= Se.medium ? "medium" : t >= Se.small ? "small" : "xsmall"
+            function Si() {
+                var e, t = null != (e = null == w ? void 0 : w.innerWidth) ? e : Sn.xlarge;
+                return t >= Sn.xxlarge ? "xxlarge" : t >= Sn.xlarge ? "xlarge" : t >= Sn.large ? "large" : t >= Sn.medium ? "medium" : t >= Sn.small ? "small" : "xsmall"
             }
 
-            function Sn(e, t) {
+            function Sa(e, t) {
                 (null == t || t > e.length) && (t = e.length);
                 for (var r = 0, n = Array(t); r < t; r++) n[r] = e[r];
                 return n
             }
 
-            function So(e, t) {
+            function Sl(e, t) {
                 return function(e) {
                     if (Array.isArray(e)) return e
                 }(e) || function(e, t) {
@@ -29502,46 +29517,51 @@ function() {
                     }
                 }(e, t) || function(e, t) {
                     if (e) {
-                        if ("string" == typeof e) return Sn(e, t);
+                        if ("string" == typeof e) return Sa(e, t);
                         var r = Object.prototype.toString.call(e).slice(8, -1);
                         if ("Object" === r && e.constructor && (r = e.constructor.name), "Map" === r || "Set" === r) return Array.from(r);
-                        if ("Arguments" === r || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(r)) return Sn(e, t)
+                        if ("Arguments" === r || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(r)) return Sa(e, t)
                     }
                 }(e, t) || function() {
                     throw TypeError("Invalid attempt to destructure non-iterable instance.\\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.")
                 }()
             }
 
-            function Si(e, t) {
-                var r, n = So((0, e1.useState)(null != (r = null == w ? void 0 : w.innerWidth) ? r : 0), 2),
+            function Su(e, t) {
+                var r, n = Sl((0, e1.useState)(null != (r = null == w ? void 0 : w.innerWidth) ? r : 0), 2),
                     o = n[0],
-                    i = n[1];
-                (0, e1.useEffect)(function() {
-                    var e = function() {
-                        var e;
-                        return i(null != (e = null == w ? void 0 : w.innerWidth) ? e : 0)
-                    };
-                    return null == w || w.addEventListener("resize", e),
-                        function() {
-                            return null == w ? void 0 : w.removeEventListener("resize", e)
-                        }
-                }, []);
-                var a = Object.entries(t).map(function(e) {
-                    var t, r = So(e, 2),
-                        n = r[0],
-                        o = r[1];
-                    return {
-                        px: null != (t = Se[n]) ? t : Number(n),
-                        value: o
-                    }
-                }).sort(function(e, t) {
-                    return t.px - e.px
-                }).find(function(e) {
-                    return o >= e.px
+                    i = n[1],
+                    a = Sl((0, e1.useState)(null), 2),
+                    l = a[0],
+                    u = a[1],
+                    c = (0, e1.useRef)(t);
+                if (c.current = t, (0, e1.useEffect)(function() {
+                        var e = function() {
+                            var e;
+                            return i(null != (e = null == w ? void 0 : w.innerWidth) ? e : 0)
+                        };
+                        return null == w || w.addEventListener("resize", e),
+                            function() {
+                                return null == w ? void 0 : w.removeEventListener("resize", e)
+                            }
+                    }, []), (0, e1.useEffect)(function() {
+                        var e = Object.keys(c.current).map(function(e) {
+                            var t;
+                            return null != (t = Sn[e]) ? t : Number(e)
+                        }).sort(function(e, t) {
+                            return t - e
+                        }).find(function(e) {
+                            return o >= e
+                        });
+                        u(null != e ? e : null)
+                    }, [o]), null == l) return e;
+                var s = Object.entries(t).find(function(e) {
+                    var t, r = Sl(e, 1)[0];
+                    return (null != (t = Sn[r]) ? t : Number(r)) === l
                 });
-                return a ? a.value : e
+                return s ? s[1] : e
             }
-            var Sa = function(e) {
+            var Sc = function(e) {
                 var t = e.icon,
                     r = e.label,
                     n = t && vi(t);
@@ -29553,7 +29573,7 @@ function() {
                 })
             };
 
-            function Sl(e) {
+            function Ss(e) {
                 var t = e.amount,
                     r = e.nonPromotionalAmount,
                     n = e.inlineBadgeIcon,
@@ -29564,7 +29584,7 @@ function() {
                     u = (0, e1.useContext)(aK).productBadgeSlotCount,
                     c = oA("Feature.Premium"),
                     s = oC().translateFullKey,
-                    f = Si({
+                    f = Su({
                         robuxIcon: "Small",
                         robuxTextSize: "text-title-large",
                         strikeThroughRobuxIcon: "XSmall",
@@ -29627,7 +29647,7 @@ function() {
                         })
                     }), (null != i ? i : o) && (0, p.jsxs)("div", {
                         className: "flex flex-row gap-small",
-                        children: [i && (a ? (0, p.jsx)(Sa, {
+                        children: [i && (a ? (0, p.jsx)(Sc, {
                             icon: a,
                             label: l ? s(l, {
                                 amount: null != d ? d : ""
@@ -29635,10 +29655,10 @@ function() {
                         }) : (0, p.jsx)("div", {
                             className: b6()(lT ? "block" : "hidden", "large:block"),
                             "data-testid": "bonus-pill",
-                            children: (0, p.jsx)(Sa, {
+                            children: (0, p.jsx)(Sc, {
                                 label: y
                             })
-                        })), o && (0, p.jsx)(Sa, {
+                        })), o && (0, p.jsx)(Sc, {
                             icon: n,
                             label: s(o)
                         })]
@@ -29646,7 +29666,7 @@ function() {
                 })
             }
 
-            function Su(e) {
+            function Sf(e) {
                 for (var t = 1; t < arguments.length; t++) {
                     var r = null != arguments[t] ? arguments[t] : {},
                         n = Object.keys(r);
@@ -29665,7 +29685,7 @@ function() {
                 return e
             }
 
-            function Sc(e, t) {
+            function Sd(e, t) {
                 return t = null != t ? t : {}, Object.getOwnPropertyDescriptors ? Object.defineProperties(e, Object.getOwnPropertyDescriptors(t)) : (function(e) {
                     var t = Object.keys(e);
                     if (Object.getOwnPropertySymbols) {
@@ -29677,7 +29697,7 @@ function() {
                     Object.defineProperty(e, r, Object.getOwnPropertyDescriptor(t, r))
                 }), e
             }
-            var Ss = function(e) {
+            var Sp = function(e) {
                 var t = e.product,
                     r = e.isExpanded,
                     n = e.onProductClick,
@@ -29701,14 +29721,14 @@ function() {
                             for (o = 0, r = Object.getOwnPropertySymbols(e); o < r.length; o++) n = r[o], !(t.indexOf(n) >= 0) && Object.prototype.propertyIsEnumerable.call(e, n) && (i[n] = e[n]);
                         return i
                     }(i, ["className"]),
-                    u = Si("Small", {
+                    u = Su("Small", {
                         small: "Medium"
                     });
-                return (0, p.jsxs)("div", Sc(Su({}, l0(t.productId)), {
+                return (0, p.jsxs)("div", Sd(Sf({}, l0(t.productId)), {
                     className: b6()("self-stretch flex flex-row justify-between items-center gap-small", {
                         hidden: t.isCollapsible && !r
                     }),
-                    children: [(0, p.jsx)(Sl, {
+                    children: [(0, p.jsx)(Ss, {
                         amount: t.robuxAmount,
                         nonPromotionalAmount: t.nonPromotionalPlatformRobuxAmount,
                         bonusRobuxAmount: t.bonusRobuxAmount,
@@ -29716,7 +29736,7 @@ function() {
                         bonusRobuxTagTranslationKey: t.bonusRobuxTagTranslationKey,
                         inlineBadgeIcon: t.inlineBadgeIcon,
                         inlineBadgeTranslationKey: t.inlineBadgeTranslationKey
-                    }), (0, p.jsx)(iO, Sc(Su({
+                    }), (0, p.jsx)(iO, Sd(Sf({
                         variant: t.isCallToAction ? "Emphasis" : "Standard",
                         size: u,
                         className: b6()(a, "text-label-medium shrink-0"),
@@ -29734,13 +29754,13 @@ function() {
                 }), t.productId)
             };
 
-            function Sf(e, t) {
+            function Sy(e, t) {
                 (null == t || t > e.length) && (t = e.length);
                 for (var r = 0, n = Array(t); r < t; r++) n[r] = e[r];
                 return n
             }
 
-            function Sd(e) {
+            function Sm(e) {
                 var t, r = e.onProductClick,
                     n = e.products,
                     o = e.OverrideProductItemComponent,
@@ -29768,10 +29788,10 @@ function() {
                         }
                     }(t) || function(e) {
                         if (e) {
-                            if ("string" == typeof e) return Sf(e, 2);
+                            if ("string" == typeof e) return Sy(e, 2);
                             var t = Object.prototype.toString.call(e).slice(8, -1);
                             if ("Object" === t && e.constructor && (t = e.constructor.name), "Map" === t || "Set" === t) return Array.from(t);
-                            if ("Arguments" === t || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(t)) return Sf(e, 2)
+                            if ("Arguments" === t || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(t)) return Sy(e, 2)
                         }
                     }(t) || function() {
                         throw TypeError("Invalid attempt to destructure non-iterable instance.\\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.")
@@ -29788,7 +29808,7 @@ function() {
                             return !e
                         })
                     }, []),
-                    f = null != o ? o : Ss;
+                    f = null != o ? o : Sp;
                 return (0, p.jsxs)(e1.Fragment, {
                     children: [n.map(function(e) {
                         return (0, p.jsx)(f, {
@@ -29815,10 +29835,10 @@ function() {
                     })]
                 })
             }
-            var Sp = function(e) {
+            var Sh = function(e) {
                 return function(t) {
                     var r, n, o;
-                    return (0, p.jsx)(Ss, (n = function(e) {
+                    return (0, p.jsx)(Sp, (n = function(e) {
                         for (var t = 1; t < arguments.length; t++) {
                             var r = null != arguments[t] ? arguments[t] : {},
                                 n = Object.keys(r);
@@ -29857,7 +29877,7 @@ function() {
                 }
             };
 
-            function Sy(e) {
+            function Sb(e) {
                 var t = e.metadata,
                     r = oA("Feature.PersonalizedBonus"),
                     n = (0, e1.useContext)(aK),
@@ -29938,21 +29958,21 @@ function() {
                     })]
                 })
             }
-            var Sm = new Intl.DateTimeFormat("en-US", {
+            var Sv = new Intl.DateTimeFormat("en-US", {
                     timeZone: "America/Los_Angeles",
                     year: "numeric",
                     month: "numeric",
                     day: "numeric"
                 }),
-                Sh = Date.UTC(2026, 3, 1);
+                Sg = Date.UTC(2026, 3, 1);
 
-            function Sb(e) {
+            function Sw(e) {
                 var t = e.metadata,
                     r = oC().translateFullKey,
                     n = oA("Feature.PersonalizedBonus"),
                     o = (0, e1.useMemo)(function() {
                         var e, t, r, n;
-                        return Math.max(Math.ceil((Sh - Date.UTC(Number(null == (e = (n = Sm.formatToParts(new Date)).find(function(e) {
+                        return Math.max(Math.ceil((Sg - Date.UTC(Number(null == (e = (n = Sv.formatToParts(new Date)).find(function(e) {
                             return "year" === e.type
                         })) ? void 0 : e.value), Number(null == (t = n.find(function(e) {
                             return "month" === e.type
@@ -29982,7 +30002,7 @@ function() {
                                 children: [(0, p.jsx)("div", {
                                     className: "text-label-small medium:text-label-medium content-default",
                                     children: n("Label.ByRoblox")
-                                }), (0, p.jsx)(wM, {
+                                }), (0, p.jsx)(wk, {
                                     size: 12
                                 })]
                             }), (0, p.jsx)(hU, {
@@ -29998,12 +30018,12 @@ function() {
                 })
             }
 
-            function Sv(e, t) {
+            function SO(e, t) {
                 (null == t || t > e.length) && (t = e.length);
                 for (var r = 0, n = Array(t); r < t; r++) n[r] = e[r];
                 return n
             }
-            var Sg = function(e) {
+            var SS = function(e) {
                 var t, r = (function(e) {
                     if (Array.isArray(e)) return e
                 }(t = e.personalizedBonus.bonuses) || function(e) {
@@ -30027,10 +30047,10 @@ function() {
                     }
                 }(t) || function(e) {
                     if (e) {
-                        if ("string" == typeof e) return Sv(e, 1);
+                        if ("string" == typeof e) return SO(e, 1);
                         var t = Object.prototype.toString.call(e).slice(8, -1);
                         if ("Object" === t && e.constructor && (t = e.constructor.name), "Map" === t || "Set" === t) return Array.from(t);
-                        if ("Arguments" === t || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(t)) return Sv(e, 1)
+                        if ("Arguments" === t || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(t)) return SO(e, 1)
                     }
                 }(t) || function() {
                     throw TypeError("Invalid attempt to destructure non-iterable instance.\\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.")
@@ -30039,11 +30059,11 @@ function() {
                 var n = r.collectibleItemMetadata,
                     o = r.gamePassMetadata,
                     i = r.virtualPurchasingProductType.toString();
-                return "PRODUCT_TYPE_COLLECTIBLE_ITEM" === i ? n ? (0, p.jsx)(Sb, {
+                return "PRODUCT_TYPE_COLLECTIBLE_ITEM" === i ? n ? (0, p.jsx)(Sw, {
                     metadata: n
                 }) : (lr("BonusItemMissingMetadata", {
                     productType: i
-                }), null) : "PRODUCT_TYPE_GAME_PASS_PRODUCT" === i ? o ? (0, p.jsx)(Sy, {
+                }), null) : "PRODUCT_TYPE_GAME_PASS_PRODUCT" === i ? o ? (0, p.jsx)(Sb, {
                     metadata: o
                 }) : (lr("BonusItemMissingMetadata", {
                     productType: i
@@ -30052,11 +30072,11 @@ function() {
                 }), null)
             };
 
-            function Sw(e) {
+            function Sx(e) {
                 var t, r, n, o = e.isPrimary,
                     i = e.sectionBase,
                     a = e.personalizedBonus,
-                    l = (0, e1.useContext)(w$).purchaseProduct,
+                    l = (0, e1.useContext)(w0).purchaseProduct,
                     u = (0, e1.useContext)(aK).redirect,
                     c = oC().translateFullKey,
                     s = (0, e1.useCallback)(function(e, t) {
@@ -30070,9 +30090,9 @@ function() {
                         })
                     }, [l, a.isRedirect, u]),
                     f = (0, e1.useMemo)(function() {
-                        return a.isRedirect && (null == u ? void 0 : u.url) ? Sp(u.url) : Ss
+                        return a.isRedirect && (null == u ? void 0 : u.url) ? Sh(u.url) : Sp
                     }, [a.isRedirect, null == u ? void 0 : u.url]);
-                return (0, p.jsxs)(O5, (t = function(e) {
+                return (0, p.jsxs)(O7, (t = function(e) {
                     for (var t = 1; t < arguments.length; t++) {
                         var r = null != arguments[t] ? arguments[t] : {},
                             n = Object.keys(r);
@@ -30091,17 +30111,17 @@ function() {
                     return e
                 }({}, lJ(i)), r = r = {
                     children: [(0, p.jsxs)("div", {
-                        children: [(0, p.jsx)(O6, {
+                        children: [(0, p.jsx)(O9, {
                             children: c(i.sectionHeaderTranslationKey)
-                        }), a.bodyTranslationKey && (0, p.jsx)(O8, {
+                        }), a.bodyTranslationKey && (0, p.jsx)(Se, {
                             children: c(a.bodyTranslationKey)
                         })]
-                    }), (0, p.jsx)(O7, {
+                    }), (0, p.jsx)(St, {
                         isPrimary: o,
-                        banner: (0, p.jsx)(Sg, {
+                        banner: (0, p.jsx)(SS, {
                             personalizedBonus: a
                         }),
-                        children: (0, p.jsx)(Sd, {
+                        children: (0, p.jsx)(Sm, {
                             onProductClick: s,
                             products: null != (n = i.products) ? n : [],
                             OverrideProductItemComponent: f
@@ -30119,7 +30139,7 @@ function() {
                 }), t))
             }
 
-            function SO(e) {
+            function SP(e) {
                 var t = e.daysLeft,
                     r = oA("Feature.PersonalizedBonus");
                 return (0, p.jsx)(hU, {
@@ -30133,7 +30153,7 @@ function() {
                 })
             }
 
-            function SS(e) {
+            function SE(e) {
                 if (void 0 === e) return {
                     success: !1,
                     error: "ABSENT"
@@ -30153,7 +30173,7 @@ function() {
                 }
             }
 
-            function Sx(e) {
+            function Sj(e) {
                 for (var t = 1; t < arguments.length; t++) {
                     var r = null != arguments[t] ? arguments[t] : {},
                         n = Object.keys(r);
@@ -30172,7 +30192,7 @@ function() {
                 return e
             }
 
-            function SP(e, t) {
+            function SI(e, t) {
                 return t = null != t ? t : {}, Object.getOwnPropertyDescriptors ? Object.defineProperties(e, Object.getOwnPropertyDescriptors(t)) : (function(e) {
                     var t = Object.keys(e);
                     if (Object.getOwnPropertySymbols) {
@@ -30185,19 +30205,19 @@ function() {
                 }), e
             }
 
-            function SE(e) {
+            function SA(e) {
                 var t, r, n, o = e.isPrimary,
                     i = e.sectionBase,
-                    a = (0, e1.useContext)(w$).purchaseNonRedirectProduct,
+                    a = (0, e1.useContext)(w0).purchaseNonRedirectProduct,
                     l = (0, e1.useContext)(aK).atLeastOneProductHasBonusAmount,
                     u = oC().translateFullKey,
                     c = null == (r = i.productsList) ? void 0 : r.bodyTranslationKey,
-                    s = SS(null == (n = i.productsList) ? void 0 : n.promotionExpirationTimestampMs),
+                    s = SE(null == (n = i.productsList) ? void 0 : n.promotionExpirationTimestampMs),
                     f = c ? u.html(c, [{
                         opening: "termsLinkStart",
                         closing: "termsLinkEnd",
                         render: function(e) {
-                            return (0, p.jsx)("a", SP(Sx({}, wY("/info/terms")), {
+                            return (0, p.jsx)("a", SI(Sj({}, wQ("/info/terms")), {
                                 className: "text-link",
                                 children: e
                             }))
@@ -30206,17 +30226,17 @@ function() {
                     d = (0, e1.useCallback)(function(e) {
                         a(e, !1, !1, "ProductsList")
                     }, [a]);
-                return (0, p.jsxs)(O5, SP(Sx({}, lJ(i)), {
+                return (0, p.jsxs)(O7, SI(Sj({}, lJ(i)), {
                     children: [(0, p.jsxs)("div", {
                         className: "flex flex-col gap-xsmall self-stretch",
                         children: [(0, p.jsxs)("div", {
                             className: "flex flex-row justify-between items-center self-stretch",
-                            children: [(0, p.jsx)(O6, {
+                            children: [(0, p.jsx)(O9, {
                                 children: u(i.sectionHeaderTranslationKey)
-                            }), s.success && (0, p.jsx)(SO, {
+                            }), s.success && (0, p.jsx)(SP, {
                                 daysLeft: s.value
                             })]
-                        }), c && (0, p.jsx)(O8, {
+                        }), c && (0, p.jsx)(Se, {
                             className: b6()({
                                 "text-body-small": !l
                             }),
@@ -30224,9 +30244,9 @@ function() {
                                 children: null != f ? f : u(c)
                             })
                         })]
-                    }), (0, p.jsx)(O7, {
+                    }), (0, p.jsx)(St, {
                         isPrimary: o,
-                        children: (0, p.jsx)(Sd, {
+                        children: (0, p.jsx)(Sm, {
                             onProductClick: d,
                             products: null != (t = i.products) ? t : []
                         })
@@ -30234,13 +30254,13 @@ function() {
                 }))
             }
 
-            function Sj(e, t) {
+            function SC(e, t) {
                 (null == t || t > e.length) && (t = e.length);
                 for (var r = 0, n = Array(t); r < t; r++) n[r] = e[r];
                 return n
             }
 
-            function SI(e) {
+            function ST(e) {
                 for (var t = 1; t < arguments.length; t++) {
                     var r = null != arguments[t] ? arguments[t] : {},
                         n = Object.keys(r);
@@ -30259,7 +30279,7 @@ function() {
                 return e
             }
 
-            function SA(e, t) {
+            function SN(e, t) {
                 return t = null != t ? t : {}, Object.getOwnPropertyDescriptors ? Object.defineProperties(e, Object.getOwnPropertyDescriptors(t)) : (function(e) {
                     var t = Object.keys(e);
                     if (Object.getOwnPropertySymbols) {
@@ -30272,10 +30292,10 @@ function() {
                 }), e
             }
 
-            function SC(e) {
+            function SM(e) {
                 var t, r, n = e.isPrimary,
                     o = e.sectionBase,
-                    i = (0, e1.useContext)(w$).purchaseNonRedirectProduct,
+                    i = (0, e1.useContext)(w0).purchaseNonRedirectProduct,
                     a = (0, e1.useContext)(aK).breakpoint,
                     l = oC().translateFullKey,
                     u = (0, e1.useCallback)(function(e) {
@@ -30304,28 +30324,28 @@ function() {
                         }
                     }(t) || function(e) {
                         if (e) {
-                            if ("string" == typeof e) return Sj(e, 1);
+                            if ("string" == typeof e) return SC(e, 1);
                             var t = Object.prototype.toString.call(e).slice(8, -1);
                             if ("Object" === t && e.constructor && (t = e.constructor.name), "Map" === t || "Set" === t) return Array.from(t);
-                            if ("Arguments" === t || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(t)) return Sj(e, 1)
+                            if ("Arguments" === t || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(t)) return SC(e, 1)
                         }
                     }(t) || function() {
                         throw TypeError("Invalid attempt to destructure non-iterable instance.\\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.")
                     }())[0];
-                return c ? (0, p.jsxs)(O5, SA(SI({}, lJ(o)), {
-                    children: [(0, p.jsx)(O6, {
+                return c ? (0, p.jsxs)(O7, SN(ST({}, lJ(o)), {
+                    children: [(0, p.jsx)(O9, {
                         children: l(o.sectionHeaderTranslationKey)
-                    }), (0, p.jsx)(O7, {
+                    }), (0, p.jsx)(St, {
                         isPrimary: n,
                         children: (0, p.jsxs)("div", {
                             className: "flex flex-col self-stretch medium:flex-row medium:justify-between medium:items-center",
                             children: [(0, p.jsx)("div", {
                                 className: "flex flex-col self-stretch gap-small padding-bottom-large medium:padding-bottom-none medium:self-auto",
-                                children: (0, p.jsx)(Sl, {
+                                children: (0, p.jsx)(Ss, {
                                     amount: c.robuxAmount,
                                     nonPromotionalAmount: c.nonPromotionalPlatformRobuxAmount
                                 })
-                            }), (0, p.jsx)(iO, SA(SI({
+                            }), (0, p.jsx)(iO, SN(ST({
                                 onClick: function() {
                                     u(c)
                                 }
@@ -30344,7 +30364,7 @@ function() {
                 })) : null
             }
 
-            function ST(e) {
+            function Sk(e) {
                 var t = e.isPrimary,
                     r = e.title,
                     n = e.body,
@@ -30372,7 +30392,7 @@ function() {
                 })
             }
 
-            function SN(e) {
+            function SR(e) {
                 var t, r, n = e.isPrimary,
                     o = e.sectionBase,
                     i = e.giftCard,
@@ -30380,9 +30400,9 @@ function() {
                     l = oC().translateFullKey,
                     u = oA("Feature.Premium"),
                     c = (0, e1.useCallback)(function() {
-                        a(), null == w || w.location.assign(lA ? wK(i.redirectUrl) : i.redirectUrl)
+                        a(), null == w || w.location.assign(wX() ? wq(i.redirectUrl) : i.redirectUrl)
                     }, [a, i.redirectUrl]);
-                return (0, p.jsxs)(O5, (t = function(e) {
+                return (0, p.jsxs)(O7, (t = function(e) {
                     for (var t = 1; t < arguments.length; t++) {
                         var r = null != arguments[t] ? arguments[t] : {},
                             n = Object.keys(r);
@@ -30400,11 +30420,11 @@ function() {
                     }
                     return e
                 }({}, lJ(o)), r = r = {
-                    children: [(0, p.jsx)(O6, {
+                    children: [(0, p.jsx)(O9, {
                         children: l(o.sectionHeaderTranslationKey)
-                    }), (0, p.jsx)(O7, {
+                    }), (0, p.jsx)(St, {
                         isPrimary: n,
-                        children: (0, p.jsx)(ST, {
+                        children: (0, p.jsx)(Sk, {
                             title: l(i.titleTranslationKey, void 0, u("Description.GiftCard")),
                             body: l(i.bodyTranslationKey),
                             buttonText: l(i.buttonTextTranslationKey),
@@ -30423,7 +30443,7 @@ function() {
                 }), t))
             }
 
-            function SM(e) {
+            function S_(e) {
                 var t, r, n = e.isPrimary,
                     o = e.robuxGift,
                     i = e.sectionBase,
@@ -30433,7 +30453,7 @@ function() {
                     c = (0, e1.useCallback)(function() {
                         l(), a()
                     }, [l, a]);
-                return (0, p.jsxs)(O5, (t = function(e) {
+                return (0, p.jsxs)(O7, (t = function(e) {
                     for (var t = 1; t < arguments.length; t++) {
                         var r = null != arguments[t] ? arguments[t] : {},
                             n = Object.keys(r);
@@ -30451,11 +30471,11 @@ function() {
                     }
                     return e
                 }({}, lJ(i)), r = r = {
-                    children: [(0, p.jsx)(O6, {
+                    children: [(0, p.jsx)(O9, {
                         children: u(i.sectionHeaderTranslationKey)
-                    }), (0, p.jsx)(O7, {
+                    }), (0, p.jsx)(St, {
                         isPrimary: n,
-                        children: (0, p.jsx)(ST, {
+                        children: (0, p.jsx)(Sk, {
                             title: u(o.titleTranslationKey),
                             body: u(o.bodyTranslationKey),
                             buttonText: u(o.buttonTextTranslationKey),
@@ -30474,11 +30494,11 @@ function() {
                 }), t))
             }
 
-            function Sk(e, t) {
+            function SD(e, t) {
                 return null != t && "u" > typeof Symbol && t[Symbol.hasInstance] ? !!t[Symbol.hasInstance](e) : e instanceof t
             }
-            var SR = function(e, t) {
-                return (SR = Object.setPrototypeOf || Sk({
+            var SL = function(e, t) {
+                return (SL = Object.setPrototypeOf || SD({
                     __proto__: []
                 }, Array) && function(e, t) {
                     e.__proto__ = t
@@ -30487,23 +30507,23 @@ function() {
                 })(e, t)
             };
 
-            function S_(e, t) {
+            function SU(e, t) {
                 if ("function" != typeof t && null !== t) throw TypeError("Class extends value " + String(t) + " is not a constructor or null");
 
                 function r() {
                     this.constructor = e
                 }
-                SR(e, t), e.prototype = null === t ? Object.create(t) : (r.prototype = t.prototype, new r)
+                SL(e, t), e.prototype = null === t ? Object.create(t) : (r.prototype = t.prototype, new r)
             }
-            var SD = function() {
-                return (SD = Object.assign || function(e) {
+            var SB = function() {
+                return (SB = Object.assign || function(e) {
                     for (var t, r = 1, n = arguments.length; r < n; r++)
                         for (var o in t = arguments[r]) Object.prototype.hasOwnProperty.call(t, o) && (e[o] = t[o]);
                     return e
                 }).apply(this, arguments)
             };
 
-            function SL(e, t, r, n) {
+            function SF(e, t, r, n) {
                 return new(r || (r = Promise))(function(o, i) {
                     function a(e) {
                         try {
@@ -30523,7 +30543,7 @@ function() {
 
                     function u(e) {
                         var t;
-                        e.done ? o(e.value) : (Sk(t = e.value, r) ? t : new r(function(e) {
+                        e.done ? o(e.value) : (SD(t = e.value, r) ? t : new r(function(e) {
                             e(t)
                         })).then(a, l)
                     }
@@ -30531,7 +30551,7 @@ function() {
                 })
             }
 
-            function SU(e, t) {
+            function Sz(e, t) {
                 var r, n, o, i = {
                         label: 0,
                         sent: function() {
@@ -30603,131 +30623,131 @@ function() {
                 }
             }
 
-            function SB(e, t, r) {
+            function SH(e, t, r) {
                 if (r || 2 == arguments.length)
                     for (var n, o = 0, i = t.length; o < i; o++) !n && o in t || (n || (n = Array.prototype.slice.call(t, 0, o)), n[o] = t[o]);
                 return e.concat(n || Array.prototype.slice.call(t))
             }
             "function" == typeof SuppressedError && SuppressedError;
-            var SF = {
+            var SG = {
                     envName: ""
                 },
-                Sz = !1,
-                SH = function() {
+                SV = !1,
+                SW = function() {
                     try {
-                        if ("u" < typeof window) return SD({}, SF);
+                        if ("u" < typeof window) return SB({}, SG);
                         var e = localStorage.getItem("Roblox.MrRouterConfig");
-                        if (null == e) return SD({}, SF);
+                        if (null == e) return SB({}, SG);
                         var t = JSON.parse(e);
-                        if ("object" != (void 0 === t ? "undefined" : t && "u" > typeof Symbol && t.constructor === Symbol ? "symbol" : typeof t) || null === t) return SD({}, SF);
-                        var r = SD(SD({}, SF), "envName" in t && "string" == typeof t.envName && {
+                        if ("object" != (void 0 === t ? "undefined" : t && "u" > typeof Symbol && t.constructor === Symbol ? "symbol" : typeof t) || null === t) return SB({}, SG);
+                        var r = SB(SB({}, SG), "envName" in t && "string" == typeof t.envName && {
                             envName: t.envName
                         });
-                        return r.envName && !Sz && (Sz = !0, console.warn('[MrRouter] Routing to non-production environment: "'.concat(r.envName, '"'))), r
+                        return r.envName && !SV && (SV = !0, console.warn('[MrRouter] Routing to non-production environment: "'.concat(r.envName, '"'))), r
                     } catch (e) {
-                        return SD({}, SF)
+                        return SB({}, SG)
                     }
                 },
-                SG = "mrrouter-env",
-                SV = "tracestate",
-                SW = "traceparent",
-                SK = function(e) {
+                SK = "mrrouter-env",
+                SY = "tracestate",
+                SX = "traceparent",
+                Sq = function(e) {
                     var t = e.indexOf("=");
                     return (-1 === t ? e : e.slice(0, t)).trim()
                 },
-                SY = function(e, t) {
-                    var r = "".concat(SG, "=").concat(encodeURIComponent(t)),
+                SQ = function(e, t) {
+                    var r = "".concat(SK, "=").concat(encodeURIComponent(t)),
                         n = null == e ? void 0 : e.trim(),
                         o = n ? n.split(",") : [],
                         i = o.findIndex(function(e) {
-                            return SK(e) === SG
+                            return Sq(e) === SK
                         });
-                    if (-1 === i) return SB(SB([], o.map(function(e) {
+                    if (-1 === i) return SH(SH([], o.map(function(e) {
                         return e.trim()
                     }), !0), [r], !1).join(",");
                     var a = o.filter(function(e) {
-                        return SK(e) !== SG
+                        return Sq(e) !== SK
                     }).map(function(e) {
                         return e.trim()
                     });
                     return a.splice(i, 0, r), a.join(",")
                 },
-                SX = function(e) {
+                S$ = function(e) {
                     var t = new Uint8Array(e);
                     return crypto.getRandomValues(t), Array.from(t, function(e) {
                         return e.toString(16).padStart(2, "0")
                     }).join("")
                 },
-                Sq = "u" > typeof crypto && "function" == typeof crypto.randomUUID,
-                SQ = function() {
-                    return Sq ? crypto.randomUUID().replaceAll("-", "").slice(0, 32) : SX(16)
+                SZ = "u" > typeof crypto && "function" == typeof crypto.randomUUID,
+                SJ = function() {
+                    return SZ ? crypto.randomUUID().replaceAll("-", "").slice(0, 32) : S$(16)
                 },
-                S$ = function() {
-                    return Sq ? crypto.randomUUID().replaceAll("-", "").slice(0, 16) : SX(8)
+                S0 = function() {
+                    return SZ ? crypto.randomUUID().replaceAll("-", "").slice(0, 16) : S$(8)
                 },
-                SZ = function(e) {
-                    var t = SH().envName;
-                    if (t.length > 0 && (e[SV] = SY(e[SV], t), !e[SW])) {
-                        var r = SQ(),
-                            n = S$();
-                        e[SW] = "00-".concat(r, "-").concat(n, "-01")
+                S1 = function(e) {
+                    var t = SW().envName;
+                    if (t.length > 0 && (e[SY] = SQ(e[SY], t), !e[SX])) {
+                        var r = SJ(),
+                            n = S0();
+                        e[SX] = "00-".concat(r, "-").concat(n, "-01")
                     }
                 };
 
-            function SJ(e, t) {
+            function S2(e, t) {
                 return null != t && "u" > typeof Symbol && t[Symbol.hasInstance] ? !!t[Symbol.hasInstance](e) : e instanceof t
             }
             r(6773);
-            var S0, S1, S2, S4, S3, S5, S6, S8, S7, S9, xe, xt, xr, xn, xo, xi, xa, xl, xu, xc, xs, xf, xd, xp, xy, xm, xh, xb, xv, xg, xw, xO, xS, xx, xP, xE, xj, xI, xA, xC, xT, xN, xM, xk, xR, x_, xD, xL, xU, xB, xF, xz, xH, xG, xV, xW, xK, xY, xX, xq, xQ, x$, xZ, xJ, x0, x1, x2, x4, x3, x5, x6, x8, x7, x9, Pe, Pt, Pr = function(e) {
+            var S4, S3, S5, S6, S8, S7, S9, xe, xt, xr, xn, xo, xi, xa, xl, xu, xc, xs, xf, xd, xp, xy, xm, xh, xb, xv, xg, xw, xO, xS, xx, xP, xE, xj, xI, xA, xC, xT, xN, xM, xk, xR, x_, xD, xL, xU, xB, xF, xz, xH, xG, xV, xW, xK, xY, xX, xq, xQ, x$, xZ, xJ, x0, x1, x2, x4, x3, x5, x6, x8, x7, x9, Pe, Pt, Pr, Pn, Po, Pi = function(e) {
                     return e.replace(/#.*$/, "").replace(/\?.*$/, "").replace(/\/\d+/, "/number")
                 },
-                Pn = function(e, t) {
+                Pa = function(e, t) {
                     return !1 === t.ok && !1 === [401, 403, 404].includes(t.status) && e(Error("Network error"), {
                         tags: {
-                            apiUrl: Pr(t.url),
+                            apiUrl: Pi(t.url),
                             apiStatus: null == t ? void 0 : t.status,
                             cors: !1
                         }
                     }), t
                 },
-                Po = function(e, t) {
+                Pl = function(e, t) {
                     e(Error("Network error"), {
                         tags: {
-                            apiUrl: Pr(t),
+                            apiUrl: Pi(t),
                             cors: !0
                         }
                     })
                 },
-                Pi = function() {
+                Pu = function() {
                     function e(e) {
                         this.captureException = e
                     }
                     return e.prototype.post = function(e) {
-                        return SL(this, void 0, void 0, function() {
-                            return SU(this, function(t) {
-                                return [2, Pn(this.captureException, e.response)]
+                        return SF(this, void 0, void 0, function() {
+                            return Sz(this, function(t) {
+                                return [2, Pa(this.captureException, e.response)]
                             })
                         })
                     }, e.prototype.onError = function(e) {
-                        return SL(this, void 0, void 0, function() {
-                            return SU(this, function(t) {
-                                return Po(this.captureException, e.url), [2]
+                        return SF(this, void 0, void 0, function() {
+                            return Sz(this, function(t) {
+                                return Pl(this.captureException, e.url), [2]
                             })
                         })
                     }, e
                 }(),
-                Pa = function(e) {
+                Pc = function(e) {
                     if (document) {
                         var t, r, n = document.getElementById("hba-frame");
                         return null === n && ((t = document.createElement("iframe")).id = "hba-frame", t.style.cssText = "position: fixed; top: 0; left: 0; width: 0%; height: 0%; z-index: -1", t.src = "https://www.".concat(e, "/hba/iframe"), r = t, n = (null == document ? void 0 : document.body) ? document.body.appendChild(r) : null), n
                     }
                     return null
                 },
-                Pl = function() {
+                Ps = function() {
                     var e = window.location.hostname.split(".").slice(0, -2).join(".");
                     return e.includes("create") ? "creator_hub" : e.includes("advertise") ? "ads_manager" : "creator_hub"
                 },
-                Pu = function(e, t) {
+                Pf = function(e, t) {
                     try {
                         fetch("https://apis.".concat(e, "/account-security-service/v1/metrics/record"), {
                             method: "POST",
@@ -30735,13 +30755,13 @@ function() {
                                 name: "load_time_hba_frame",
                                 value: t,
                                 labelValues: {
-                                    origin_site: Pl()
+                                    origin_site: Ps()
                                 }
                             })
                         })
                     } catch (e) {}
                 },
-                Pc = function(e, t) {
+                Pd = function(e, t) {
                     try {
                         fetch("https://apis.".concat(e, "/account-security-service/v1/metrics/record"), {
                             method: "POST",
@@ -30749,17 +30769,17 @@ function() {
                                 name: "response_time_hba_frame",
                                 value: t,
                                 labelValues: {
-                                    origin_site: Pl()
+                                    origin_site: Ps()
                                 }
                             })
                         })
                     } catch (e) {}
                 },
-                Ps = function(e, t, r) {
+                Pp = function(e, t, r) {
                     return void 0 === r && (r = 1500), new Promise(function(n, o) {
                         var i, a, l = performance.now(),
                             u = window.setTimeout(function() {
-                                Pu(e, performance.now() - l),
+                                Pf(e, performance.now() - l),
                                     function(e) {
                                         try {
                                             fetch("https://apis.".concat(e, "/account-security-service/v1/metrics/record"), {
@@ -30769,7 +30789,7 @@ function() {
                                                     value: 1,
                                                     labelValues: {
                                                         event_type: "FrameLoadTimedOut",
-                                                        origin_site: Pl()
+                                                        origin_site: Ps()
                                                     }
                                                 })
                                             })
@@ -30778,19 +30798,19 @@ function() {
                             }, r),
                             c = i = function(t) {
                                 var r = t.data;
-                                t.origin === "https://www.".concat(e) && "dataFromHbaFrame" === r.msg && "loaded" === r.data.type && (window.removeEventListener("message", i, !1), window.clearTimeout(u), Pu(e, performance.now() - l), n())
+                                t.origin === "https://www.".concat(e) && "dataFromHbaFrame" === r.msg && "loaded" === r.data.type && (window.removeEventListener("message", i, !1), window.clearTimeout(u), Pf(e, performance.now() - l), n())
                             };
                         window.addEventListener("message", c, !1), null == (a = t.contentWindow) || a.postMessage({
                             msg: "checkLoadedRequest"
                         }, "https://www.".concat(e))
                     })
                 },
-                Pf = function(e, t, r, n, o, i, a) {
+                Py = function(e, t, r, n, o, i, a) {
                     var l;
                     if (void 0 === a && (a = 100), window) {
                         var u, c = performance.now(),
                             s = window.setTimeout(function() {
-                                Pc(r, performance.now() - c),
+                                Pd(r, performance.now() - c),
                                     function(e) {
                                         try {
                                             fetch("https://apis.".concat(e, "/account-security-service/v1/metrics/record"), {
@@ -30800,7 +30820,7 @@ function() {
                                                     value: 1,
                                                     labelValues: {
                                                         event_type: "FrameResponseTimedOut",
-                                                        origin_site: Pl()
+                                                        origin_site: Ps()
                                                     }
                                                 })
                                             })
@@ -30816,17 +30836,17 @@ function() {
                                     l = o.init;
                                 if (t.origin === "https://www.".concat(r) && "dataFromHbaFrame" === n.msg && "batHeader" === n.data.type && (!n.data.identifier || n.data.identifier === i))
                                     if (!n.data.isError && n.data.batHeader) {
-                                        window.clearTimeout(s), window.removeEventListener("message", u, !1), Pc(r, performance.now() - c);
+                                        window.clearTimeout(s), window.removeEventListener("message", u, !1), Pd(r, performance.now() - c);
                                         var f = n.data.batHeader;
                                         e({
                                             url: a,
-                                            init: SD(SD({}, l), {
-                                                headers: SD(SD({}, l.headers), {
+                                            init: SB(SB({}, l), {
+                                                headers: SB(SB({}, l.headers), {
                                                     "x-bound-auth-token": f["x-bound-auth-token"]
                                                 })
                                             })
                                         })
-                                    } else window.clearTimeout(s), window.removeEventListener("message", u, !1), Pc(r, performance.now() - c), e({
+                                    } else window.clearTimeout(s), window.removeEventListener("message", u, !1), Pd(r, performance.now() - c), e({
                                         url: a,
                                         init: l
                                     })
@@ -30841,27 +30861,27 @@ function() {
                         }, "https://www.".concat(r))
                     }
                 },
-                Pd = function() {
+                Pm = function() {
                     return crypto.randomUUID()
                 },
-                Pp = function() {
+                Ph = function() {
                     function e(e, t, r) {
                         void 0 === t && (t = 1500), void 0 === r && (r = 100), this.robloxSiteDomain = e, this.hbaFrameAlreadyLoaded = !1, this.hbaFrameLoadFailed = !1, this.hbaFrame = null, this.loadTimeOut = t, this.dataTimeOut = r
                     }
                     return e.prototype.getOrCreateHbaFrame = function() {
-                        return Pa(this.robloxSiteDomain)
+                        return Pc(this.robloxSiteDomain)
                     }, e.prototype.pre = function(e) {
                         var t = this;
                         return new Promise(function(r, n) {
                             var o = e.url,
                                 i = e.init;
                             if (t.hbaFrame = t.getOrCreateHbaFrame(), null !== t.hbaFrame) {
-                                var a = Pd();
-                                t.hbaFrameAlreadyLoaded ? Pf(r, 0, t.robloxSiteDomain, t.hbaFrame, e, a, t.dataTimeOut) : t.hbaFrameLoadFailed ? r({
+                                var a = Pm();
+                                t.hbaFrameAlreadyLoaded ? Py(r, 0, t.robloxSiteDomain, t.hbaFrame, e, a, t.dataTimeOut) : t.hbaFrameLoadFailed ? r({
                                     url: o,
                                     init: i
-                                }) : Ps(t.robloxSiteDomain, t.hbaFrame, t.loadTimeOut).then(function() {
-                                    t.hbaFrame ? (t.hbaFrameAlreadyLoaded = !0, Pf(r, 0, t.robloxSiteDomain, t.hbaFrame, e, a, t.dataTimeOut)) : r({
+                                }) : Pp(t.robloxSiteDomain, t.hbaFrame, t.loadTimeOut).then(function() {
+                                    t.hbaFrame ? (t.hbaFrameAlreadyLoaded = !0, Py(r, 0, t.robloxSiteDomain, t.hbaFrame, e, a, t.dataTimeOut)) : r({
                                         url: o,
                                         init: i
                                     })
@@ -30878,25 +30898,25 @@ function() {
                         })
                     }, e
                 }();
-            (e = Pt || (Pt = {})).UNKNOWN = "unknown", e.INVALIDATED = "invalidated", e.ABANDONED = "abandoned", e.LOADFAILED = "loadfailed";
-            var Py = function(e) {
+            (e = Po || (Po = {})).UNKNOWN = "unknown", e.INVALIDATED = "invalidated", e.ABANDONED = "abandoned", e.LOADFAILED = "loadfailed";
+            var Pb = function(e) {
                     function t(t) {
                         var r = e.call(this, "challenge error for challenge kind ".concat(t.kind)) || this;
                         return r.parameters = t, r
                     }
-                    return S_(t, e), t.prototype.match = function(e) {
+                    return SU(t, e), t.prototype.match = function(e) {
                         return this.parameters.kind === e.parameters.kind && JSON.stringify(this.parameters.data) === JSON.stringify(e.parameters.data)
                     }, t.prototype.matchAbandoned = function(e) {
-                        return this.match(e) && e.parameters.kind === Pt.ABANDONED
+                        return this.match(e) && e.parameters.kind === Po.ABANDONED
                     }, t
                 }(Error),
-                Pm = "rblx-challenge-id",
-                Ph = "rblx-challenge-type",
-                Pb = "rblx-challenge-metadata",
-                Pv = function(e, t) {
-                    return 403 === e.status && e.headers.has(Pm) && e.headers.has(Ph) && e.headers.has(Pb) && "iframe" === t
+                Pv = "rblx-challenge-id",
+                Pg = "rblx-challenge-type",
+                Pw = "rblx-challenge-metadata",
+                PO = function(e, t) {
+                    return 403 === e.status && e.headers.has(Pv) && e.headers.has(Pg) && e.headers.has(Pw) && "iframe" === t
                 },
-                Pg = function(e) {
+                PS = function(e) {
                     var t, r, n, o, i, a, l, u, c, s = e.url,
                         f = e.request,
                         d = e.response,
@@ -30905,9 +30925,9 @@ function() {
                             ["challenge-type", "generic"],
                             ["dark-mode", "true"],
                             ["barista-mode", "true"],
-                            ["generic-challenge-type", null != (t = d.headers.get(Ph)) ? t : ""],
-                            ["generic-challenge-id", null != (r = d.headers.get(Pm)) ? r : ""],
-                            ["challenge-metadata-json", null != (n = d.headers.get(Pb)) ? n : ""],
+                            ["generic-challenge-type", null != (t = d.headers.get(Pg)) ? t : ""],
+                            ["generic-challenge-id", null != (r = d.headers.get(Pv)) ? r : ""],
+                            ["challenge-metadata-json", null != (n = d.headers.get(Pw)) ? n : ""],
                             ["origin", null != (o = window.location.hostname.split(".").slice(0, -2).join(".")) ? o : ""]
                         ]), a = new URL("https://www.".concat(p, "/challenge/cdn/hybrid?").concat(i.toString())), (l = document.createElement("iframe")).id = "challenge-frame", l.allowFullscreen = !0, l.setAttribute("allowtransparency", "true"), l.setAttribute("allow", "publickey-credentials-get;publickey-credentials-create"), l.style.cssText = "position: fixed; top: 0; left: 0; width: 100%; height: 100%; visibility: hidden; color-scheme: normal; border: none; z-index: 2147483647;", l.src = a.toString(), l.onload = function() {
                             l.style.visibility = "visible"
@@ -30917,57 +30937,57 @@ function() {
                             var n, o, i, a, l, u, c, p, y, m, h;
                             if (r.data && r.data.genericChallengeResponse) switch (r.data.genericChallengeResponse.type) {
                                 case "challengeAbandoned":
-                                    t(new Py({
-                                        kind: Pt.ABANDONED,
+                                    t(new Pb({
+                                        kind: Po.ABANDONED,
                                         data: {
-                                            challengeType: null != (n = d.headers.get(Ph)) ? n : ""
+                                            challengeType: null != (n = d.headers.get(Pg)) ? n : ""
                                         }
                                     }));
                                     break;
                                 case "challengeDisplayed":
                                     break;
                                 case "challengeCompleted":
-                                    (c = r.data.genericChallengeResponse.data).challengeType && c.metadata ? e((p = c.metadata, fetch(s, SD(SD({}, f), {
-                                        headers: SD(SD({}, f.headers), ((y = {})[Pm] = null != (m = d.headers.get(Pm)) ? m : "", y[Pb] = btoa(JSON.stringify(p)), y[Ph] = null != (h = d.headers.get(Ph)) ? h : "", y))
-                                    })))) : t(new Py({
-                                        kind: Pt.UNKNOWN,
+                                    (c = r.data.genericChallengeResponse.data).challengeType && c.metadata ? e((p = c.metadata, fetch(s, SB(SB({}, f), {
+                                        headers: SB(SB({}, f.headers), ((y = {})[Pv] = null != (m = d.headers.get(Pv)) ? m : "", y[Pw] = btoa(JSON.stringify(p)), y[Pg] = null != (h = d.headers.get(Pg)) ? h : "", y))
+                                    })))) : t(new Pb({
+                                        kind: Po.UNKNOWN,
                                         data: {
-                                            challengeType: null != (o = d.headers.get(Ph)) ? o : ""
+                                            challengeType: null != (o = d.headers.get(Pg)) ? o : ""
                                         }
                                     }));
                                     break;
                                 case "challengeInvalidated":
-                                    t((c = r.data.genericChallengeResponse.data) && c.challengeType && c.metadata ? new Py({
-                                        kind: Pt.INVALIDATED,
+                                    t((c = r.data.genericChallengeResponse.data) && c.challengeType && c.metadata ? new Pb({
+                                        kind: Po.INVALIDATED,
                                         data: c
-                                    }) : new Py({
-                                        kind: Pt.INVALIDATED,
+                                    }) : new Pb({
+                                        kind: Po.INVALIDATED,
                                         data: {
-                                            challengeType: null != (i = d.headers.get(Ph)) ? i : ""
+                                            challengeType: null != (i = d.headers.get(Pg)) ? i : ""
                                         }
                                     }));
                                     break;
                                 case "challengeParsed":
-                                    !1 === (c = r.data.genericChallengeResponse.data).parsed && t(new Py({
-                                        kind: Pt.UNKNOWN,
+                                    !1 === (c = r.data.genericChallengeResponse.data).parsed && t(new Pb({
+                                        kind: Po.UNKNOWN,
                                         data: {
-                                            challengeType: null != (a = d.headers.get(Ph)) ? a : ""
+                                            challengeType: null != (a = d.headers.get(Pg)) ? a : ""
                                         }
                                     }));
                                     break;
                                 case "challengeInitialized":
-                                    !1 === (c = r.data.genericChallengeResponse.data).initialized && t(new Py({
-                                        kind: Pt.UNKNOWN,
+                                    !1 === (c = r.data.genericChallengeResponse.data).initialized && t(new Pb({
+                                        kind: Po.UNKNOWN,
                                         data: {
-                                            challengeType: null != (l = d.headers.get(Ph)) ? l : ""
+                                            challengeType: null != (l = d.headers.get(Pg)) ? l : ""
                                         }
                                     }));
                                     break;
                                 case "challengePageLoaded":
-                                    !1 === (c = r.data.genericChallengeResponse.data).pageLoaded && t(new Py({
-                                        kind: Pt.LOADFAILED,
+                                    !1 === (c = r.data.genericChallengeResponse.data).pageLoaded && t(new Pb({
+                                        kind: Po.LOADFAILED,
                                         data: {
-                                            challengeType: null != (u = d.headers.get(Ph)) ? u : ""
+                                            challengeType: null != (u = d.headers.get(Pg)) ? u : ""
                                         }
                                     }))
                             }
@@ -30976,7 +30996,7 @@ function() {
                         null == y || y.remove(), c && window.removeEventListener("message", c, !1)
                     })
                 },
-                Pw = function() {
+                Px = function() {
                     function e(e, t) {
                         void 0 === t && (t = "iframe"), this.robloxSiteDomain = e, this.genericChallengeMiddlewareType = t
                     }
@@ -30984,7 +31004,7 @@ function() {
                         var t = e.url,
                             r = e.init,
                             n = e.response;
-                        return Pv(n, this.genericChallengeMiddlewareType) ? Pg({
+                        return PO(n, this.genericChallengeMiddlewareType) ? PS({
                             url: t,
                             request: r,
                             response: n,
@@ -30992,7 +31012,7 @@ function() {
                         }) : Promise.resolve(n)
                     }, e
                 }(),
-                PO = function(e) {
+                PP = function(e) {
                     var t = e.elapsedTime,
                         r = e.url,
                         n = e.status,
@@ -31007,12 +31027,12 @@ function() {
                         }
                     }
                 },
-                PS = function() {
+                PE = function() {
                     function e(e) {
                         this.unifiedLogger = e
                     }
                     return e.prototype.post = function(e) {
-                        return this.unifiedLogger.logApiVitalsEvent(PO({
+                        return this.unifiedLogger.logApiVitalsEvent(PP({
                             elapsedTime: e.elapsedTime,
                             url: e.url,
                             status: e.response.status,
@@ -31020,34 +31040,34 @@ function() {
                         })), Promise.resolve(e.response)
                     }, e
                 }(),
-                Px = "x-csrf-token",
-                PP = ["POST", "PATCH", "DELETE", "PUT"],
-                PE = function() {
+                Pj = "x-csrf-token",
+                PI = ["POST", "PATCH", "DELETE", "PUT"],
+                PA = function() {
                     var e, t = "";
                     try {
-                        "u" > typeof window && (t = null != (e = localStorage.getItem(Px)) ? e : "")
+                        "u" > typeof window && (t = null != (e = localStorage.getItem(Pj)) ? e : "")
                     } catch (e) {
-                        console.warn("Error reading localStorage key “".concat(Px, "”:"), e)
+                        console.warn("Error reading localStorage key “".concat(Pj, "”:"), e)
                     }
                     return t
                 },
-                Pj = PE(),
-                PI = function(e) {
+                PC = PA(),
+                PT = function(e) {
                     try {
-                        Pj = e, "u" > typeof window && localStorage.setItem(Px, e)
+                        PC = e, "u" > typeof window && localStorage.setItem(Pj, e)
                     } catch (e) {
-                        console.warn("Error setting localStorage key “".concat(Px, "”:"), e)
+                        console.warn("Error setting localStorage key “".concat(Pj, "”:"), e)
                     }
                 },
-                PA = function() {
+                PN = function() {
                     function e() {
-                        this.currentToken = PE()
+                        this.currentToken = PA()
                     }
                     return e.prototype.pre = function(e) {
                         var t, r = e.url,
                             n = e.init,
                             o = this.currentToken;
-                        return n.headers && "object" == ((t = n.headers) && "u" > typeof Symbol && t.constructor === Symbol ? "symbol" : typeof t) && Px in n.headers && (o = n.headers[Px]) && (this.currentToken = o, PI(o)), n.method && PP.includes(n.method) ? Promise.resolve({
+                        return n.headers && "object" == ((t = n.headers) && "u" > typeof Symbol && t.constructor === Symbol ? "symbol" : typeof t) && Pj in n.headers && (o = n.headers[Pj]) && (this.currentToken = o, PT(o)), n.method && PI.includes(n.method) ? Promise.resolve({
                             url: r,
                             init: this.prepareRequestInit(n)
                         }) : Promise.resolve({
@@ -31059,77 +31079,77 @@ function() {
                             r = e.url,
                             n = e.init,
                             o = e.response,
-                            i = o.headers.get(Px);
-                        return 403 === o.status && o.headers.has(Px) && null !== i ? (this.currentToken = i, PI(i), t(r, this.prepareRequestInit(n))) : Promise.resolve(o)
+                            i = o.headers.get(Pj);
+                        return 403 === o.status && o.headers.has(Pj) && null !== i ? (this.currentToken = i, PT(i), t(r, this.prepareRequestInit(n))) : Promise.resolve(o)
                     }, e.prototype.prepareRequestInit = function(e) {
                         var t;
-                        return SD(SD({}, e), {
-                            headers: SD(SD({}, e.headers), ((t = {})[Px] = this.currentToken, t))
+                        return SB(SB({}, e), {
+                            headers: SB(SB({}, e.headers), ((t = {})[Pj] = this.currentToken, t))
                         })
                     }, e
                 }(),
-                PC = [],
-                PT = function(e) {
-                    PC = PC.filter(function(t) {
+                PM = [],
+                Pk = function(e) {
+                    PM = PM.filter(function(t) {
                         return t !== e
                     })
                 },
-                PN = function(e) {
+                PR = function(e) {
                     var t = e.url;
-                    503 === e.status && PC.forEach(function(e) {
+                    503 === e.status && PM.forEach(function(e) {
                         return e(t)
                     })
                 },
-                PM = function() {
+                P_ = function() {
                     function e() {}
                     return e.prototype.subscribe = function(e) {
-                        return PC.push(e),
+                        return PM.push(e),
                             function() {
-                                return PT(e)
+                                return Pk(e)
                             }
                     }, e.prototype.unsubscribe = function(e) {
-                        return PT(e)
+                        return Pk(e)
                     }, e.prototype.post = function(e) {
                         var t = e.response;
-                        return PN(t), Promise.resolve(t)
+                        return PR(t), Promise.resolve(t)
                     }, e
                 }(),
-                Pk = function() {
+                PD = function() {
                     function e() {}
                     return e.prototype.pre = function(e) {
                         var t = e.url,
                             r = e.init;
-                        if (!SH().envName) return Promise.resolve({
+                        if (!SW().envName) return Promise.resolve({
                             url: t,
                             init: r
                         });
-                        var n = SD({}, r.headers);
-                        return SZ(n), Promise.resolve({
+                        var n = SB({}, r.headers);
+                        return S1(n), Promise.resolve({
                             url: t,
-                            init: SD(SD({}, r), {
+                            init: SB(SB({}, r), {
                                 headers: n
                             })
                         })
                     }, e
                 }(),
-                PR = new PA,
-                P_ = new PM,
-                PD = [function(e) {
-                    return e.captureException ? new Pi(e.captureException) : void 0
+                PL = new PN,
+                PU = new P_,
+                PB = [function(e) {
+                    return e.captureException ? new Pu(e.captureException) : void 0
                 }, function(e) {
-                    return e.robloxSiteDomain && e.enableBoundAuthToken ? new Pp(e.robloxSiteDomain, e.boundAuthTokenLoadTimeout, e.boundAuthTokenDataTimeout) : void 0
+                    return e.robloxSiteDomain && e.enableBoundAuthToken ? new Ph(e.robloxSiteDomain, e.boundAuthTokenLoadTimeout, e.boundAuthTokenDataTimeout) : void 0
                 }, function(e) {
-                    return e.robloxSiteDomain ? new Pw(e.robloxSiteDomain, e.genericChallengeMiddlewareType) : void 0
+                    return e.robloxSiteDomain ? new Px(e.robloxSiteDomain, e.genericChallengeMiddlewareType) : void 0
                 }, function(e) {
-                    return e.unifiedLogger ? new PS(e.unifiedLogger) : void 0
+                    return e.unifiedLogger ? new PE(e.unifiedLogger) : void 0
                 }, function() {
-                    return PR
+                    return PL
                 }, function() {
-                    return P_
+                    return PU
                 }, function(e) {
-                    return e.enableMrRouter ? new Pk : void 0
+                    return e.enableMrRouter ? new PD : void 0
                 }],
-                PL = function() {
+                PF = function() {
                     function e(e) {
                         void 0 === e && (e = {}), this.configuration = e
                     }
@@ -31164,13 +31184,13 @@ function() {
                                     return function t(r, n, o) {
                                         void 0 === o && (o = "");
                                         var i = o + (o.length ? "[".concat(r, "]") : r);
-                                        if (SJ(n, Array)) {
+                                        if (S2(n, Array)) {
                                             var a = n.map(function(e) {
                                                 return encodeURIComponent(String(e))
                                             }).join("&".concat(encodeURIComponent(i), "="));
                                             return "".concat(encodeURIComponent(i), "=").concat(a)
                                         }
-                                        return SJ(n, Set) ? t(r, Array.from(n), o) : SJ(n, Date) ? "".concat(encodeURIComponent(i), "=").concat(encodeURIComponent(n.toISOString())) : SJ(n, Object) ? e(n, i) : "".concat(encodeURIComponent(i), "=").concat(encodeURIComponent(String(n)))
+                                        return S2(n, Set) ? t(r, Array.from(n), o) : S2(n, Date) ? "".concat(encodeURIComponent(i), "=").concat(encodeURIComponent(n.toISOString())) : S2(n, Object) ? e(n, i) : "".concat(encodeURIComponent(i), "=").concat(encodeURIComponent(String(n)))
                                     }(n, t[n], r)
                                 }).filter(function(e) {
                                     return e.length > 0
@@ -31205,8 +31225,8 @@ function() {
                             var e = this,
                                 t = this.configuration.accessToken;
                             if (t) return "function" == typeof t ? t : function() {
-                                return SL(e, void 0, void 0, function() {
-                                    return SU(this, function(e) {
+                                return SF(e, void 0, void 0, function() {
+                                    return Sz(this, function(e) {
                                         return [2, t]
                                     })
                                 })
@@ -31228,15 +31248,15 @@ function() {
                         configurable: !0
                     }), e
                 }(),
-                PU = new PL,
-                PB = function() {
+                Pz = new PF,
+                PH = function() {
                     function e(e) {
-                        void 0 === e && (e = PU);
+                        void 0 === e && (e = Pz);
                         var t = this;
                         this.configuration = e, this.fetchApi = function(e, r, n) {
-                            return SL(t, void 0, void 0, function() {
+                            return SF(t, void 0, void 0, function() {
                                 var t, o, i, a, l, u, c, s, f, d, p, y, m, h = this;
-                                return SU(this, function(b) {
+                                return Sz(this, function(b) {
                                     switch (b.label) {
                                         case 0:
                                             t = function(e, t) {
@@ -31246,7 +31266,7 @@ function() {
                                                 init: r
                                             }, i = 0, a = this.middleware, b.label = 1;
                                         case 1:
-                                            return i < a.length ? (m = a[i]).pre ? [4, m.pre(SD({
+                                            return i < a.length ? (m = a[i]).pre ? [4, m.pre(SB({
                                                 fetch: t
                                             }, o))] : [3, 3] : [3, 4];
                                         case 2:
@@ -31274,7 +31294,7 @@ function() {
                                         case 10:
                                             return f++, [3, 8];
                                         case 11:
-                                            if (void 0 === l) throw SJ(s, Error) ? new Pz(s, "The request failed and the interceptors did not return an alternative response") : s;
+                                            if (void 0 === l) throw S2(s, Error) ? new PV(s, "The request failed and the interceptors did not return an alternative response") : s;
                                             return [3, 12];
                                         case 12:
                                             p = 0, y = this.middleware, b.label = 13;
@@ -31321,9 +31341,9 @@ function() {
                     }, e.prototype.isJsonMime = function(t) {
                         return !!t && e.jsonRegex.test(t)
                     }, e.prototype.request = function(e, t) {
-                        return SL(this, void 0, void 0, function() {
+                        return SF(this, void 0, void 0, function() {
                             var r, n, o, i;
-                            return SU(this, function(a) {
+                            return Sz(this, function(a) {
                                 switch (a.label) {
                                     case 0:
                                         return [4, this.createFetchParams(e, t)];
@@ -31331,22 +31351,22 @@ function() {
                                         return n = (r = a.sent()).url, o = r.init, [4, this.fetchApi(n, o, e.schemaPath)];
                                     case 2:
                                         if ((i = a.sent()) && i.status >= 200 && i.status < 300) return [2, i];
-                                        throw new PF(i, "Response from ".concat(i.url, " returned an error code ").concat(i.status))
+                                        throw new PG(i, "Response from ".concat(i.url, " returned an error code ").concat(i.status))
                                 }
                             })
                         })
                     }, e.prototype.createFetchParams = function(e, t) {
-                        return SL(this, void 0, void 0, function() {
+                        return SF(this, void 0, void 0, function() {
                             var r, n, o, i, a, l, u, c = this;
-                            return SU(this, function(s) {
+                            return Sz(this, function(s) {
                                 var f, d;
                                 switch (s.label) {
                                     case 0:
                                         return r = this.configuration.basePath + e.path, void 0 !== e.query && 0 !== Object.keys(e.query).length && (r += "?" + this.configuration.queryParamsStringify(e.query)), Object.keys(n = Object.assign({}, this.configuration.headers, e.headers)).forEach(function(e) {
                                             return void 0 === n[e] ? delete n[e] : {}
                                         }), o = "function" == typeof t ? t : function() {
-                                            return SL(c, void 0, void 0, function() {
-                                                return SU(this, function(e) {
+                                            return SF(c, void 0, void 0, function() {
+                                                return Sz(this, function(e) {
                                                     return [2, t]
                                                 })
                                             })
@@ -31355,13 +31375,13 @@ function() {
                                             headers: n,
                                             body: e.body,
                                             credentials: this.configuration.credentials
-                                        }, l = [SD({}, i)], [4, o({
+                                        }, l = [SB({}, i)], [4, o({
                                             init: i,
                                             context: e
                                         })];
                                     case 1:
-                                        return a = SD.apply(void 0, l.concat([s.sent()])), u = SD(SD({}, a), {
-                                            body: (f = a.body, "u" > typeof FormData && SJ(f, FormData) || SJ(a.body, URLSearchParams) || (d = a.body, "u" > typeof Blob && SJ(d, Blob)) ? a.body : JSON.stringify(a.body))
+                                        return a = SB.apply(void 0, l.concat([s.sent()])), u = SB(SB({}, a), {
+                                            body: (f = a.body, "u" > typeof FormData && S2(f, FormData) || S2(a.body, URLSearchParams) || (d = a.body, "u" > typeof Blob && S2(d, Blob)) ? a.body : JSON.stringify(a.body))
                                         }), [2, {
                                             url: r,
                                             init: u
@@ -31374,41 +31394,41 @@ function() {
                         return e.middleware = this.middleware.slice(), e
                     }, e.jsonRegex = RegExp("^(:?application/json|[^;/ 	]+/[^;/ 	]+[+]json)[ 	]*(:?;.*)?$", "i"), e
                 }(),
-                PF = function(e) {
+                PG = function(e) {
                     function t(t, r) {
                         var n = e.call(this, r) || this;
                         return n.response = t, n.name = "ResponseError", n
                     }
-                    return S_(t, e), t
+                    return SU(t, e), t
                 }(Error),
-                Pz = function(e) {
+                PV = function(e) {
                     function t(t, r) {
                         var n = e.call(this, r) || this;
                         return n.cause = t, n.name = "FetchError", n
                     }
-                    return S_(t, e), t
+                    return SU(t, e), t
                 }(Error),
-                PH = function(e) {
+                PW = function(e) {
                     function t(t, r) {
                         var n = e.call(this, r) || this;
                         return n.field = t, n.name = "RequiredError", n
                     }
-                    return S_(t, e), t
+                    return SU(t, e), t
                 }(Error);
 
-            function PG(e, t) {
+            function PK(e, t) {
                 return null != e[t]
             }
-            var PV = function() {
+            var PY = function() {
                     function e(e, t) {
                         void 0 === t && (t = function(e) {
                             return e
                         }), this.raw = e, this.transformer = t
                     }
                     return e.prototype.value = function() {
-                        return SL(this, void 0, void 0, function() {
+                        return SF(this, void 0, void 0, function() {
                             var e;
-                            return SU(this, function(t) {
+                            return Sz(this, function(t) {
                                 switch (t.label) {
                                     case 0:
                                         return e = this.transformer, [4, this.raw.json()];
@@ -31419,23 +31439,23 @@ function() {
                         })
                     }, e
                 }(),
-                PW = function() {
+                PX = function() {
                     function e(e) {
                         this.raw = e
                     }
                     return e.prototype.value = function() {
-                        return SL(this, void 0, void 0, function() {
-                            return SU(this, function(e) {
+                        return SF(this, void 0, void 0, function() {
+                            return Sz(this, function(e) {
                                 return [2, void 0]
                             })
                         })
                     }, e
                 }(),
-                PK = ((function(e) {
+                Pq = ((function(e) {
                     this.raw = e
                 }).prototype.value = function() {
-                    return SL(this, void 0, void 0, function() {
-                        return SU(this, function(e) {
+                    return SF(this, void 0, void 0, function() {
+                        return Sz(this, function(e) {
                             switch (e.label) {
                                 case 0:
                                     return [4, this.raw.blob()];
@@ -31447,8 +31467,8 @@ function() {
                 }, (function(e) {
                     this.raw = e
                 }).prototype.value = function() {
-                    return SL(this, void 0, void 0, function() {
-                        return SU(this, function(e) {
+                    return SF(this, void 0, void 0, function() {
+                        return Sz(this, function(e) {
                             switch (e.label) {
                                 case 0:
                                     return [4, this.raw.text()];
@@ -31460,22 +31480,22 @@ function() {
                 }, function(e) {
                     function t(t) {
                         void 0 === t && (t = {});
-                        var r, n = SD({}, t),
+                        var r, n = SB({}, t),
                             o = n.middleware || [];
-                        return o.unshift.apply(o, (r = t, PD.map(function(e) {
+                        return o.unshift.apply(o, (r = t, PB.map(function(e) {
                             return e(r)
                         }).filter(function(e) {
                             return e
                         }))), n.middleware = o, e.call(this, n) || this
                     }
-                    return S_(t, e), t
-                }(PL));
+                    return SU(t, e), t
+                }(PF));
 
-            function PY(e, t) {
+            function PQ(e, t) {
                 return null != t && "u" > typeof Symbol && t[Symbol.hasInstance] ? !!t[Symbol.hasInstance](e) : e instanceof t
             }
-            var PX = function(e, t) {
-                return (PX = Object.setPrototypeOf || PY({
+            var P$ = function(e, t) {
+                return (P$ = Object.setPrototypeOf || PQ({
                     __proto__: []
                 }, Array) && function(e, t) {
                     e.__proto__ = t
@@ -31484,7 +31504,7 @@ function() {
                 })(e, t)
             };
 
-            function Pq(e, t, r, n) {
+            function PZ(e, t, r, n) {
                 return new(r || (r = Promise))(function(o, i) {
                     function a(e) {
                         try {
@@ -31504,7 +31524,7 @@ function() {
 
                     function u(e) {
                         var t;
-                        e.done ? o(e.value) : (PY(t = e.value, r) ? t : new r(function(e) {
+                        e.done ? o(e.value) : (PQ(t = e.value, r) ? t : new r(function(e) {
                             e(t)
                         })).then(a, l)
                     }
@@ -31512,7 +31532,7 @@ function() {
                 })
             }
 
-            function PQ(e, t) {
+            function PJ(e, t) {
                 var r, n, o, i = {
                         label: 0,
                         sent: function() {
@@ -31584,45 +31604,45 @@ function() {
                 }
             }
             "function" == typeof SuppressedError && SuppressedError;
-            var P$ = "CreditAndDebitCard",
-                PZ = "Paypal",
-                PJ = "Venmo";
+            var P0 = "CreditAndDebitCard",
+                P1 = "Paypal",
+                P2 = "Venmo";
 
-            function P0(e) {
+            function P4(e) {
                 return e
             }
-            var P1 = "Week",
-                P2 = "Month",
-                P4 = "Year";
+            var P3 = "Week",
+                P5 = "Month",
+                P6 = "Year";
 
-            function P3(e, t) {
+            function P8(e, t) {
                 return null == e ? e : {
                     currencyCode: e.currencyCode,
                     units: e.units,
                     nanos: e.nanos
                 }
             }
-            var P5 = "Braintree";
+            var P7 = "Braintree";
 
-            function P6(e) {
+            function P9(e) {
                 return e
             }
 
-            function P8(e) {
+            function Ee(e) {
                 var t, r;
                 return null == (t = e) ? t : {
-                    offerType: PG(t, "offerType") ? t.offerType : void 0,
-                    freeTrialOffer: PG(t, "freeTrialOffer") ? null == (r = t.freeTrialOffer) ? r : {
+                    offerType: PK(t, "offerType") ? t.offerType : void 0,
+                    freeTrialOffer: PK(t, "freeTrialOffer") ? null == (r = t.freeTrialOffer) ? r : {
                         periodType: r.periodType,
                         duration: r.duration,
-                        estimatedTrialEndDate: PG(r, "estimatedTrialEndDate") ? null === r.estimatedTrialEndDate ? null : new Date(r.estimatedTrialEndDate) : void 0
+                        estimatedTrialEndDate: PK(r, "estimatedTrialEndDate") ? null === r.estimatedTrialEndDate ? null : new Date(r.estimatedTrialEndDate) : void 0
                     } : void 0
                 }
             }
-            var P7 = "CurrencySubscription",
-                P9 = "Blackbird";
+            var Et = "CurrencySubscription",
+                Er = "Blackbird";
 
-            function Ee(e) {
+            function En(e) {
                 var t;
                 return null == (t = e) ? t : {
                     type: t.type,
@@ -31630,7 +31650,7 @@ function() {
                 }
             }
 
-            function Et(e) {
+            function Eo(e) {
                 var t;
                 return null == (t = e) ? t : {
                     tierId: t.tierId,
@@ -31639,34 +31659,34 @@ function() {
                 }
             }
 
-            function Er(e) {
+            function Ei(e) {
                 var t, r, n, o, i, a, l, u, c;
                 return null == (t = e) ? t : {
-                    productKey: Ee(t.productKey),
+                    productKey: En(t.productKey),
                     periodType: t.periodType,
                     periodCount: t.periodCount,
-                    localizedPrice: P3(t.localizedPrice),
+                    localizedPrice: P8(t.localizedPrice),
                     localizedPriceDisplayString: t.localizedPriceDisplayString,
-                    localizedStrikethroughPrice: P3(t.localizedStrikethroughPrice),
+                    localizedStrikethroughPrice: P8(t.localizedStrikethroughPrice),
                     localizedStrikethroughPriceDisplayString: t.localizedStrikethroughPriceDisplayString,
                     productTypeDetails: null == (r = t.productTypeDetails) ? r : {
-                        currencySubscriptionProductDetails: PG(r, "currencySubscriptionProductDetails") ? null == (n = r.currencySubscriptionProductDetails) ? n : {
+                        currencySubscriptionProductDetails: PK(r, "currencySubscriptionProductDetails") ? null == (n = r.currencySubscriptionProductDetails) ? n : {
                             currencyType: n.currencyType,
                             entitledAmountMicros: n.entitledAmountMicros
                         } : void 0,
-                        developerSubscriptionProductDetails: PG(r, "developerSubscriptionProductDetails") ? null == (o = r.developerSubscriptionProductDetails) ? o : {
+                        developerSubscriptionProductDetails: PK(r, "developerSubscriptionProductDetails") ? null == (o = r.developerSubscriptionProductDetails) ? o : {
                             universeId: o.universeId,
                             imageAssetId: o.imageAssetId,
                             localizedName: o.localizedName,
                             localizedDescription: o.localizedDescription
                         } : void 0,
-                        robloxSubscriptionProductDetails: PG(r, "robloxSubscriptionProductDetails") ? null == (i = r.robloxSubscriptionProductDetails) ? i : {
+                        robloxSubscriptionProductDetails: PK(r, "robloxSubscriptionProductDetails") ? null == (i = r.robloxSubscriptionProductDetails) ? i : {
                             featureConfig: null == (a = i.featureConfig) ? a : {
-                                virtualTransactionDiscounts: null === a.virtualTransactionDiscounts ? null : a.virtualTransactionDiscounts.map(Et),
+                                virtualTransactionDiscounts: null === a.virtualTransactionDiscounts ? null : a.virtualTransactionDiscounts.map(Eo),
                                 isRobuxTransferEnabled: a.isRobuxTransferEnabled,
                                 isTradingEnabled: a.isTradingEnabled,
                                 isUgcPublishingEnabled: a.isUgcPublishingEnabled,
-                                privateServerDiscounts: null === a.privateServerDiscounts ? null : a.privateServerDiscounts.map(Et),
+                                privateServerDiscounts: null === a.privateServerDiscounts ? null : a.privateServerDiscounts.map(Eo),
                                 currencySubscriptionConfig: null == (l = a.currencySubscriptionConfig) ? l : {
                                     currencyType: l.currencyType,
                                     entitledAmountMicros: l.entitledAmountMicros
@@ -31684,16 +31704,16 @@ function() {
                             }
                         } : void 0
                     },
-                    eligibleOffers: t.eligibleOffers.map(P8)
+                    eligibleOffers: t.eligibleOffers.map(Ee)
                 }
             }
 
-            function En(e) {
+            function Ea(e) {
                 var t;
                 return null == (t = e) ? t : {
                     planChangeId: t.planChangeId,
-                    currentSubscriptionProductKey: Ee(t.currentSubscriptionProductKey),
-                    targetSubscriptionProductKey: Ee(t.targetSubscriptionProductKey),
+                    currentSubscriptionProductKey: En(t.currentSubscriptionProductKey),
+                    targetSubscriptionProductKey: En(t.targetSubscriptionProductKey),
                     status: t.status,
                     scheduledTimestampMs: t.scheduledTimestampMs,
                     createdTimestampMs: t.createdTimestampMs,
@@ -31701,7 +31721,7 @@ function() {
                 }
             }
 
-            function Eo(e) {
+            function El(e) {
                 var t;
                 return null == (t = e) ? t : {
                     referralId: t.referralId,
@@ -31711,19 +31731,19 @@ function() {
                 }
             }
 
-            function Ei(e) {
+            function Eu(e) {
                 var t, r, n, o, i, a, l;
                 return null == (t = e) ? t : {
                     subscriptionId: t.subscriptionId,
-                    productKey: Ee(t.productKey),
+                    productKey: En(t.productKey),
                     periodType: t.periodType,
-                    displayPrice: P3(t.displayPrice),
-                    recurringDisplayPrice: PG(t, "recurringDisplayPrice") ? P3(t.recurringDisplayPrice) : void 0,
+                    displayPrice: P8(t.displayPrice),
+                    recurringDisplayPrice: PK(t, "recurringDisplayPrice") ? P8(t.recurringDisplayPrice) : void 0,
                     activationTimestampMs: t.activationTimestampMs,
-                    paidTenureStartTimestampMs: PG(t, "paidTenureStartTimestampMs") ? t.paidTenureStartTimestampMs : void 0,
+                    paidTenureStartTimestampMs: PK(t, "paidTenureStartTimestampMs") ? t.paidTenureStartTimestampMs : void 0,
                     expirationTimestampMs: t.expirationTimestampMs,
                     nextRenewalTimestampMs: t.nextRenewalTimestampMs,
-                    paymentProvider: P6(t.paymentProvider),
+                    paymentProvider: P9(t.paymentProvider),
                     purchasePlatform: t.purchasePlatform,
                     paymentProfile: null == (r = t.paymentProfile) ? r : {
                         id: r.id,
@@ -31734,9 +31754,9 @@ function() {
                             expirationYear: n.expirationYear
                         }
                     },
-                    activeOffers: t.activeOffers.map(P8),
+                    activeOffers: t.activeOffers.map(Ee),
                     productTypeMembershipDetails: null == (o = t.productTypeMembershipDetails) ? o : {
-                        robloxSubscriptionMembershipDetails: PG(o, "robloxSubscriptionMembershipDetails") ? null == (i = o.robloxSubscriptionMembershipDetails) ? i : {
+                        robloxSubscriptionMembershipDetails: PK(o, "robloxSubscriptionMembershipDetails") ? null == (i = o.robloxSubscriptionMembershipDetails) ? i : {
                             features: null == (a = i.features) ? a : {
                                 productType: a.productType,
                                 virtualTransactionDiscountTierId: a.virtualTransactionDiscountTierId,
@@ -31757,10 +31777,10 @@ function() {
                             }
                         } : void 0
                     },
-                    productInfo: Er(t.productInfo)
+                    productInfo: Ei(t.productInfo)
                 }
             }
-            var Ea = function(e) {
+            var Ec = function(e) {
                 function t() {
                     return null !== e && e.apply(this, arguments) || this
                 }
@@ -31770,14 +31790,14 @@ function() {
                     function r() {
                         this.constructor = e
                     }
-                    PX(e, t), e.prototype = null === t ? Object.create(t) : (r.prototype = t.prototype, new r)
+                    P$(e, t), e.prototype = null === t ? Object.create(t) : (r.prototype = t.prototype, new r)
                 }(t, e), t.prototype.subscriptionsV2CancelSubscriptionPlanChangeRaw = function(e, t) {
-                    return Pq(this, void 0, void 0, function() {
+                    return PZ(this, void 0, void 0, function() {
                         var r, n;
-                        return PQ(this, function(o) {
+                        return PJ(this, function(o) {
                             switch (o.label) {
                                 case 0:
-                                    if (null === e.subscriptionId || void 0 === e.subscriptionId) throw new PH("subscriptionId", "Required parameter requestParameters.subscriptionId was null or undefined when calling subscriptionsV2CancelSubscriptionPlanChange.");
+                                    if (null === e.subscriptionId || void 0 === e.subscriptionId) throw new PW("subscriptionId", "Required parameter requestParameters.subscriptionId was null or undefined when calling subscriptionsV2CancelSubscriptionPlanChange.");
                                     return r = {}, (n = {})["Content-Type"] = "application/json-patch+json", [4, this.request({
                                         path: "/v2/subscriptions/{subscriptionId}/cancel-plan-change".replace("{".concat("subscriptionId", "}"), encodeURIComponent(String(e.subscriptionId))),
                                         schemaPath: "/v2/subscriptions/{subscriptionId}/cancel-plan-change",
@@ -31791,13 +31811,13 @@ function() {
                                         }(e.cancelSubscriptionPlanChangeRequest)
                                     }, t)];
                                 case 1:
-                                    return [2, new PW(o.sent())]
+                                    return [2, new PX(o.sent())]
                             }
                         })
                     })
                 }, t.prototype.subscriptionsV2CancelSubscriptionPlanChange = function(e, t) {
-                    return Pq(this, void 0, void 0, function() {
-                        return PQ(this, function(r) {
+                    return PZ(this, void 0, void 0, function() {
+                        return PJ(this, function(r) {
                             switch (r.label) {
                                 case 0:
                                     return [4, this.subscriptionsV2CancelSubscriptionPlanChangeRaw(e, t)];
@@ -31807,9 +31827,9 @@ function() {
                         })
                     })
                 }, t.prototype.subscriptionsV2CheckSubscriptionReferralEligibilityRaw = function(e, t) {
-                    return Pq(this, void 0, void 0, function() {
+                    return PZ(this, void 0, void 0, function() {
                         var r, n;
-                        return PQ(this, function(o) {
+                        return PJ(this, function(o) {
                             switch (o.label) {
                                 case 0:
                                     return r = {}, void 0 !== e.referrerId && (r.referrerId = e.referrerId), n = {}, [4, this.request({
@@ -31820,18 +31840,18 @@ function() {
                                         query: r
                                     }, t)];
                                 case 1:
-                                    return [2, new PV(o.sent(), function(e) {
+                                    return [2, new PY(o.sent(), function(e) {
                                         return null == e ? e : {
                                             eligibility: e.eligibility,
-                                            ineligibilityReason: PG(e, "ineligibilityReason") ? e.ineligibilityReason : void 0
+                                            ineligibilityReason: PK(e, "ineligibilityReason") ? e.ineligibilityReason : void 0
                                         }
                                     })]
                             }
                         })
                     })
                 }, t.prototype.subscriptionsV2CheckSubscriptionReferralEligibility = function() {
-                    return Pq(this, arguments, void 0, function(e, t) {
-                        return void 0 === e && (e = {}), PQ(this, function(r) {
+                    return PZ(this, arguments, void 0, function(e, t) {
+                        return void 0 === e && (e = {}), PJ(this, function(r) {
                             switch (r.label) {
                                 case 0:
                                     return [4, this.subscriptionsV2CheckSubscriptionReferralEligibilityRaw(e, t)];
@@ -31843,13 +31863,13 @@ function() {
                         })
                     })
                 }, t.prototype.subscriptionsV2ClaimSubscriptionProductRaw = function(e, t) {
-                    return Pq(this, void 0, void 0, function() {
+                    return PZ(this, void 0, void 0, function() {
                         var r, n;
-                        return PQ(this, function(o) {
+                        return PJ(this, function(o) {
                             switch (o.label) {
                                 case 0:
-                                    if (null === e.subscriptionProductType || void 0 === e.subscriptionProductType) throw new PH("subscriptionProductType", "Required parameter requestParameters.subscriptionProductType was null or undefined when calling subscriptionsV2ClaimSubscriptionProduct.");
-                                    if (null === e.subscriptionProductId || void 0 === e.subscriptionProductId) throw new PH("subscriptionProductId", "Required parameter requestParameters.subscriptionProductId was null or undefined when calling subscriptionsV2ClaimSubscriptionProduct.");
+                                    if (null === e.subscriptionProductType || void 0 === e.subscriptionProductType) throw new PW("subscriptionProductType", "Required parameter requestParameters.subscriptionProductType was null or undefined when calling subscriptionsV2ClaimSubscriptionProduct.");
+                                    if (null === e.subscriptionProductId || void 0 === e.subscriptionProductId) throw new PW("subscriptionProductId", "Required parameter requestParameters.subscriptionProductId was null or undefined when calling subscriptionsV2ClaimSubscriptionProduct.");
                                     return r = {}, void 0 !== e.grantType && (r.grantType = e.grantType), n = {}, [4, this.request({
                                         path: "/v2/products/{subscriptionProductType}/{subscriptionProductId}/claim".replace("{".concat("subscriptionProductType", "}"), encodeURIComponent(String(e.subscriptionProductType))).replace("{".concat("subscriptionProductId", "}"), encodeURIComponent(String(e.subscriptionProductId))),
                                         schemaPath: "/v2/products/{subscriptionProductType}/{subscriptionProductId}/claim",
@@ -31858,13 +31878,13 @@ function() {
                                         query: r
                                     }, t)];
                                 case 1:
-                                    return [2, new PV(o.sent())]
+                                    return [2, new PY(o.sent())]
                             }
                         })
                     })
                 }, t.prototype.subscriptionsV2ClaimSubscriptionProduct = function(e, t) {
-                    return Pq(this, void 0, void 0, function() {
-                        return PQ(this, function(r) {
+                    return PZ(this, void 0, void 0, function() {
+                        return PJ(this, function(r) {
                             switch (r.label) {
                                 case 0:
                                     return [4, this.subscriptionsV2ClaimSubscriptionProductRaw(e, t)];
@@ -31876,9 +31896,9 @@ function() {
                         })
                     })
                 }, t.prototype.subscriptionsV2CreateSubscriptionReferralRaw = function(e, t) {
-                    return Pq(this, void 0, void 0, function() {
+                    return PZ(this, void 0, void 0, function() {
                         var r, n;
-                        return PQ(this, function(o) {
+                        return PJ(this, function(o) {
                             switch (o.label) {
                                 case 0:
                                     return r = {}, void 0 !== e.referrerId && (r.referrerId = e.referrerId), n = {}, [4, this.request({
@@ -31889,7 +31909,7 @@ function() {
                                         query: r
                                     }, t)];
                                 case 1:
-                                    return [2, new PV(o.sent(), function(e) {
+                                    return [2, new PY(o.sent(), function(e) {
                                         return null == e ? e : {
                                             referralId: e.referralId
                                         }
@@ -31898,8 +31918,8 @@ function() {
                         })
                     })
                 }, t.prototype.subscriptionsV2CreateSubscriptionReferral = function() {
-                    return Pq(this, arguments, void 0, function(e, t) {
-                        return void 0 === e && (e = {}), PQ(this, function(r) {
+                    return PZ(this, arguments, void 0, function(e, t) {
+                        return void 0 === e && (e = {}), PJ(this, function(r) {
                             switch (r.label) {
                                 case 0:
                                     return [4, this.subscriptionsV2CreateSubscriptionReferralRaw(e, t)];
@@ -31911,9 +31931,9 @@ function() {
                         })
                     })
                 }, t.prototype.subscriptionsV2CreateSubscriptionReferralLinkRaw = function(e) {
-                    return Pq(this, void 0, void 0, function() {
+                    return PZ(this, void 0, void 0, function() {
                         var t, r;
-                        return PQ(this, function(n) {
+                        return PJ(this, function(n) {
                             switch (n.label) {
                                 case 0:
                                     return t = {}, r = {}, [4, this.request({
@@ -31924,7 +31944,7 @@ function() {
                                         query: t
                                     }, e)];
                                 case 1:
-                                    return [2, new PV(n.sent(), function(e) {
+                                    return [2, new PY(n.sent(), function(e) {
                                         return null == e ? e : {
                                             deepLinkUrl: e.deepLinkUrl
                                         }
@@ -31933,8 +31953,8 @@ function() {
                         })
                     })
                 }, t.prototype.subscriptionsV2CreateSubscriptionReferralLink = function(e) {
-                    return Pq(this, void 0, void 0, function() {
-                        return PQ(this, function(t) {
+                    return PZ(this, void 0, void 0, function() {
+                        return PJ(this, function(t) {
                             switch (t.label) {
                                 case 0:
                                     return [4, this.subscriptionsV2CreateSubscriptionReferralLinkRaw(e)];
@@ -31946,13 +31966,13 @@ function() {
                         })
                     })
                 }, t.prototype.subscriptionsV2GetProductDisplayPriceRaw = function(e, t) {
-                    return Pq(this, void 0, void 0, function() {
+                    return PZ(this, void 0, void 0, function() {
                         var r, n;
-                        return PQ(this, function(o) {
+                        return PJ(this, function(o) {
                             switch (o.label) {
                                 case 0:
-                                    if (null === e.subscriptionProductType || void 0 === e.subscriptionProductType) throw new PH("subscriptionProductType", "Required parameter requestParameters.subscriptionProductType was null or undefined when calling subscriptionsV2GetProductDisplayPrice.");
-                                    if (null === e.subscriptionProductId || void 0 === e.subscriptionProductId) throw new PH("subscriptionProductId", "Required parameter requestParameters.subscriptionProductId was null or undefined when calling subscriptionsV2GetProductDisplayPrice.");
+                                    if (null === e.subscriptionProductType || void 0 === e.subscriptionProductType) throw new PW("subscriptionProductType", "Required parameter requestParameters.subscriptionProductType was null or undefined when calling subscriptionsV2GetProductDisplayPrice.");
+                                    if (null === e.subscriptionProductId || void 0 === e.subscriptionProductId) throw new PW("subscriptionProductId", "Required parameter requestParameters.subscriptionProductId was null or undefined when calling subscriptionsV2GetProductDisplayPrice.");
                                     return r = {}, n = {}, void 0 !== e.robloxPlaceId && null !== e.robloxPlaceId && (n["Roblox-Place-Id"] = String(e.robloxPlaceId)), [4, this.request({
                                         path: "/v2/products/{subscriptionProductType}/{subscriptionProductId}/display-price".replace("{".concat("subscriptionProductType", "}"), encodeURIComponent(String(e.subscriptionProductType))).replace("{".concat("subscriptionProductId", "}"), encodeURIComponent(String(e.subscriptionProductId))),
                                         schemaPath: "/v2/products/{subscriptionProductType}/{subscriptionProductId}/display-price",
@@ -31961,17 +31981,17 @@ function() {
                                         query: r
                                     }, t)];
                                 case 1:
-                                    return [2, new PV(o.sent(), function(e) {
+                                    return [2, new PY(o.sent(), function(e) {
                                         return null == e ? e : {
-                                            displayPrice: P3(e.displayPrice)
+                                            displayPrice: P8(e.displayPrice)
                                         }
                                     })]
                             }
                         })
                     })
                 }, t.prototype.subscriptionsV2GetProductDisplayPrice = function(e, t) {
-                    return Pq(this, void 0, void 0, function() {
-                        return PQ(this, function(r) {
+                    return PZ(this, void 0, void 0, function() {
+                        return PJ(this, function(r) {
                             switch (r.label) {
                                 case 0:
                                     return [4, this.subscriptionsV2GetProductDisplayPriceRaw(e, t)];
@@ -31983,13 +32003,13 @@ function() {
                         })
                     })
                 }, t.prototype.subscriptionsV2GetProductPaymentMetadataRaw = function(e, t) {
-                    return Pq(this, void 0, void 0, function() {
+                    return PZ(this, void 0, void 0, function() {
                         var r, n;
-                        return PQ(this, function(o) {
+                        return PJ(this, function(o) {
                             switch (o.label) {
                                 case 0:
-                                    if (null === e.subscriptionProductType || void 0 === e.subscriptionProductType) throw new PH("subscriptionProductType", "Required parameter requestParameters.subscriptionProductType was null or undefined when calling subscriptionsV2GetProductPaymentMetadata.");
-                                    if (null === e.subscriptionProductId || void 0 === e.subscriptionProductId) throw new PH("subscriptionProductId", "Required parameter requestParameters.subscriptionProductId was null or undefined when calling subscriptionsV2GetProductPaymentMetadata.");
+                                    if (null === e.subscriptionProductType || void 0 === e.subscriptionProductType) throw new PW("subscriptionProductType", "Required parameter requestParameters.subscriptionProductType was null or undefined when calling subscriptionsV2GetProductPaymentMetadata.");
+                                    if (null === e.subscriptionProductId || void 0 === e.subscriptionProductId) throw new PW("subscriptionProductId", "Required parameter requestParameters.subscriptionProductId was null or undefined when calling subscriptionsV2GetProductPaymentMetadata.");
                                     return r = {}, n = {}, [4, this.request({
                                         path: "/v2/products/{subscriptionProductType}/{subscriptionProductId}/payment-metadata".replace("{".concat("subscriptionProductType", "}"), encodeURIComponent(String(e.subscriptionProductType))).replace("{".concat("subscriptionProductId", "}"), encodeURIComponent(String(e.subscriptionProductId))),
                                         schemaPath: "/v2/products/{subscriptionProductType}/{subscriptionProductId}/payment-metadata",
@@ -31998,18 +32018,18 @@ function() {
                                         query: r
                                     }, t)];
                                 case 1:
-                                    return [2, new PV(o.sent(), function(e) {
+                                    return [2, new PY(o.sent(), function(e) {
                                         return null == e ? e : {
-                                            paymentMethods: e.paymentMethods.map(P0),
-                                            paymentProviders: e.paymentProviders.map(P6)
+                                            paymentMethods: e.paymentMethods.map(P4),
+                                            paymentProviders: e.paymentProviders.map(P9)
                                         }
                                     })]
                             }
                         })
                     })
                 }, t.prototype.subscriptionsV2GetProductPaymentMetadata = function(e, t) {
-                    return Pq(this, void 0, void 0, function() {
-                        return PQ(this, function(r) {
+                    return PZ(this, void 0, void 0, function() {
+                        return PJ(this, function(r) {
                             switch (r.label) {
                                 case 0:
                                     return [4, this.subscriptionsV2GetProductPaymentMetadataRaw(e, t)];
@@ -32021,13 +32041,13 @@ function() {
                         })
                     })
                 }, t.prototype.subscriptionsV2GetSubscriptionProductInfoRaw = function(e, t) {
-                    return Pq(this, void 0, void 0, function() {
+                    return PZ(this, void 0, void 0, function() {
                         var r, n;
-                        return PQ(this, function(o) {
+                        return PJ(this, function(o) {
                             switch (o.label) {
                                 case 0:
-                                    if (null === e.subscriptionProductType || void 0 === e.subscriptionProductType) throw new PH("subscriptionProductType", "Required parameter requestParameters.subscriptionProductType was null or undefined when calling subscriptionsV2GetSubscriptionProductInfo.");
-                                    if (null === e.subscriptionProductId || void 0 === e.subscriptionProductId) throw new PH("subscriptionProductId", "Required parameter requestParameters.subscriptionProductId was null or undefined when calling subscriptionsV2GetSubscriptionProductInfo.");
+                                    if (null === e.subscriptionProductType || void 0 === e.subscriptionProductType) throw new PW("subscriptionProductType", "Required parameter requestParameters.subscriptionProductType was null or undefined when calling subscriptionsV2GetSubscriptionProductInfo.");
+                                    if (null === e.subscriptionProductId || void 0 === e.subscriptionProductId) throw new PW("subscriptionProductId", "Required parameter requestParameters.subscriptionProductId was null or undefined when calling subscriptionsV2GetSubscriptionProductInfo.");
                                     return r = {}, void 0 !== e.referrerId && (r.referrerId = e.referrerId), n = {}, [4, this.request({
                                         path: "/v2/products/{subscriptionProductType}/{subscriptionProductId}".replace("{".concat("subscriptionProductType", "}"), encodeURIComponent(String(e.subscriptionProductType))).replace("{".concat("subscriptionProductId", "}"), encodeURIComponent(String(e.subscriptionProductId))),
                                         schemaPath: "/v2/products/{subscriptionProductType}/{subscriptionProductId}",
@@ -32036,17 +32056,17 @@ function() {
                                         query: r
                                     }, t)];
                                 case 1:
-                                    return [2, new PV(o.sent(), function(e) {
+                                    return [2, new PY(o.sent(), function(e) {
                                         return null == e ? e : {
-                                            subscriptionProductInfo: Er(e.subscriptionProductInfo)
+                                            subscriptionProductInfo: Ei(e.subscriptionProductInfo)
                                         }
                                     })]
                             }
                         })
                     })
                 }, t.prototype.subscriptionsV2GetSubscriptionProductInfo = function(e, t) {
-                    return Pq(this, void 0, void 0, function() {
-                        return PQ(this, function(r) {
+                    return PZ(this, void 0, void 0, function() {
+                        return PJ(this, function(r) {
                             switch (r.label) {
                                 case 0:
                                     return [4, this.subscriptionsV2GetSubscriptionProductInfoRaw(e, t)];
@@ -32058,9 +32078,9 @@ function() {
                         })
                     })
                 }, t.prototype.subscriptionsV2ListAvailableSubscriptionProductsRaw = function(e, t) {
-                    return Pq(this, void 0, void 0, function() {
+                    return PZ(this, void 0, void 0, function() {
                         var r, n;
-                        return PQ(this, function(o) {
+                        return PJ(this, function(o) {
                             switch (o.label) {
                                 case 0:
                                     return r = {}, void 0 !== e.productType && (r.ProductType = e.productType), void 0 !== e.includePurchased && (r.IncludePurchased = e.includePurchased), void 0 !== e.includeBundles && (r.IncludeBundles = e.includeBundles), void 0 !== e.purchasePlatform && (r.PurchasePlatform = e.purchasePlatform), void 0 !== e.skipEligibilityCheck && (r.SkipEligibilityCheck = e.skipEligibilityCheck), void 0 !== e.grantType && (r.GrantType = e.grantType), void 0 !== e.paymentProvider && (r.PaymentProvider = e.paymentProvider), void 0 !== e.includeExtendedTermProducts && (r.IncludeExtendedTermProducts = e.includeExtendedTermProducts), void 0 !== e.referrerId && (r.ReferrerId = e.referrerId), void 0 !== e.includePlanChanges && (r.IncludePlanChanges = e.includePlanChanges), n = {}, [4, this.request({
@@ -32071,18 +32091,18 @@ function() {
                                         query: r
                                     }, t)];
                                 case 1:
-                                    return [2, new PV(o.sent(), function(e) {
+                                    return [2, new PY(o.sent(), function(e) {
                                         return null == e ? e : {
-                                            productKeys: e.productKeys.map(Ee),
-                                            products: e.products.map(Er)
+                                            productKeys: e.productKeys.map(En),
+                                            products: e.products.map(Ei)
                                         }
                                     })]
                             }
                         })
                     })
                 }, t.prototype.subscriptionsV2ListAvailableSubscriptionProducts = function() {
-                    return Pq(this, arguments, void 0, function(e, t) {
-                        return void 0 === e && (e = {}), PQ(this, function(r) {
+                    return PZ(this, arguments, void 0, function(e, t) {
+                        return void 0 === e && (e = {}), PJ(this, function(r) {
                             switch (r.label) {
                                 case 0:
                                     return [4, this.subscriptionsV2ListAvailableSubscriptionProductsRaw(e, t)];
@@ -32094,12 +32114,12 @@ function() {
                         })
                     })
                 }, t.prototype.subscriptionsV2ListSubscriptionPlanChangesRaw = function(e, t) {
-                    return Pq(this, void 0, void 0, function() {
+                    return PZ(this, void 0, void 0, function() {
                         var r, n;
-                        return PQ(this, function(o) {
+                        return PJ(this, function(o) {
                             switch (o.label) {
                                 case 0:
-                                    if (null === e.subscriptionId || void 0 === e.subscriptionId) throw new PH("subscriptionId", "Required parameter requestParameters.subscriptionId was null or undefined when calling subscriptionsV2ListSubscriptionPlanChanges.");
+                                    if (null === e.subscriptionId || void 0 === e.subscriptionId) throw new PW("subscriptionId", "Required parameter requestParameters.subscriptionId was null or undefined when calling subscriptionsV2ListSubscriptionPlanChanges.");
                                     return r = {}, void 0 !== e.status && (r.status = e.status), void 0 !== e.pageSize && (r.pageSize = e.pageSize), void 0 !== e.cursor && (r.cursor = e.cursor), n = {}, [4, this.request({
                                         path: "/v2/subscriptions/{subscriptionId}/plan-changes".replace("{".concat("subscriptionId", "}"), encodeURIComponent(String(e.subscriptionId))),
                                         schemaPath: "/v2/subscriptions/{subscriptionId}/plan-changes",
@@ -32108,9 +32128,9 @@ function() {
                                         query: r
                                     }, t)];
                                 case 1:
-                                    return [2, new PV(o.sent(), function(e) {
+                                    return [2, new PY(o.sent(), function(e) {
                                         return null == e ? e : {
-                                            planChanges: e.planChanges.map(En),
+                                            planChanges: e.planChanges.map(Ea),
                                             nextCursor: e.nextCursor,
                                             hasMore: e.hasMore
                                         }
@@ -32119,8 +32139,8 @@ function() {
                         })
                     })
                 }, t.prototype.subscriptionsV2ListSubscriptionPlanChanges = function(e, t) {
-                    return Pq(this, void 0, void 0, function() {
-                        return PQ(this, function(r) {
+                    return PZ(this, void 0, void 0, function() {
+                        return PJ(this, function(r) {
                             switch (r.label) {
                                 case 0:
                                     return [4, this.subscriptionsV2ListSubscriptionPlanChangesRaw(e, t)];
@@ -32132,9 +32152,9 @@ function() {
                         })
                     })
                 }, t.prototype.subscriptionsV2ListSubscriptionReferralsRaw = function(e, t) {
-                    return Pq(this, void 0, void 0, function() {
+                    return PZ(this, void 0, void 0, function() {
                         var r, n;
-                        return PQ(this, function(o) {
+                        return PJ(this, function(o) {
                             switch (o.label) {
                                 case 0:
                                     return r = {}, void 0 !== e.status && (r.Status = e.status), void 0 !== e.earliestCreatedTimestampMs && (r.EarliestCreatedTimestampMs = e.earliestCreatedTimestampMs), void 0 !== e.pageSize && (r.PageSize = e.pageSize), void 0 !== e.cursor && (r.Cursor = e.cursor), n = {}, [4, this.request({
@@ -32145,9 +32165,9 @@ function() {
                                         query: r
                                     }, t)];
                                 case 1:
-                                    return [2, new PV(o.sent(), function(e) {
+                                    return [2, new PY(o.sent(), function(e) {
                                         return null == e ? e : {
-                                            referrals: e.referrals.map(Eo),
+                                            referrals: e.referrals.map(El),
                                             nextCursor: e.nextCursor,
                                             hasMore: e.hasMore
                                         }
@@ -32156,8 +32176,8 @@ function() {
                         })
                     })
                 }, t.prototype.subscriptionsV2ListSubscriptionReferrals = function() {
-                    return Pq(this, arguments, void 0, function(e, t) {
-                        return void 0 === e && (e = {}), PQ(this, function(r) {
+                    return PZ(this, arguments, void 0, function(e, t) {
+                        return void 0 === e && (e = {}), PJ(this, function(r) {
                             switch (r.label) {
                                 case 0:
                                     return [4, this.subscriptionsV2ListSubscriptionReferralsRaw(e, t)];
@@ -32169,9 +32189,9 @@ function() {
                         })
                     })
                 }, t.prototype.subscriptionsV2ListSubscriptionsRaw = function(e, t) {
-                    return Pq(this, void 0, void 0, function() {
+                    return PZ(this, void 0, void 0, function() {
                         var r, n;
-                        return PQ(this, function(o) {
+                        return PJ(this, function(o) {
                             switch (o.label) {
                                 case 0:
                                     return r = {}, void 0 !== e.productType && (r.ProductType = e.productType), void 0 !== e.expirationTimestampMsStart && (r.ExpirationTimestampMsStart = e.expirationTimestampMsStart), void 0 !== e.expirationTimestampMsEnd && (r.ExpirationTimestampMsEnd = e.expirationTimestampMsEnd), void 0 !== e.cursor && (r.Cursor = e.cursor), void 0 !== e.resultsPerPage && (r.ResultsPerPage = e.resultsPerPage), n = {}, [4, this.request({
@@ -32182,9 +32202,9 @@ function() {
                                         query: r
                                     }, t)];
                                 case 1:
-                                    return [2, new PV(o.sent(), function(e) {
+                                    return [2, new PY(o.sent(), function(e) {
                                         return null == e ? e : {
-                                            subscriptions: e.subscriptions.map(Ei),
+                                            subscriptions: e.subscriptions.map(Eu),
                                             hasMore: e.hasMore,
                                             cursor: e.cursor
                                         }
@@ -32193,8 +32213,8 @@ function() {
                         })
                     })
                 }, t.prototype.subscriptionsV2ListSubscriptions = function() {
-                    return Pq(this, arguments, void 0, function(e, t) {
-                        return void 0 === e && (e = {}), PQ(this, function(r) {
+                    return PZ(this, arguments, void 0, function(e, t) {
+                        return void 0 === e && (e = {}), PJ(this, function(r) {
                             switch (r.label) {
                                 case 0:
                                     return [4, this.subscriptionsV2ListSubscriptionsRaw(e, t)];
@@ -32206,13 +32226,13 @@ function() {
                         })
                     })
                 }, t.prototype.subscriptionsV2PreparePurchaseV2Raw = function(e, t) {
-                    return Pq(this, void 0, void 0, function() {
+                    return PZ(this, void 0, void 0, function() {
                         var r, n;
-                        return PQ(this, function(o) {
+                        return PJ(this, function(o) {
                             switch (o.label) {
                                 case 0:
-                                    if (null === e.subscriptionProductType || void 0 === e.subscriptionProductType) throw new PH("subscriptionProductType", "Required parameter requestParameters.subscriptionProductType was null or undefined when calling subscriptionsV2PreparePurchaseV2.");
-                                    if (null === e.subscriptionProductId || void 0 === e.subscriptionProductId) throw new PH("subscriptionProductId", "Required parameter requestParameters.subscriptionProductId was null or undefined when calling subscriptionsV2PreparePurchaseV2.");
+                                    if (null === e.subscriptionProductType || void 0 === e.subscriptionProductType) throw new PW("subscriptionProductType", "Required parameter requestParameters.subscriptionProductType was null or undefined when calling subscriptionsV2PreparePurchaseV2.");
+                                    if (null === e.subscriptionProductId || void 0 === e.subscriptionProductId) throw new PW("subscriptionProductId", "Required parameter requestParameters.subscriptionProductId was null or undefined when calling subscriptionsV2PreparePurchaseV2.");
                                     return r = {}, (n = {})["Content-Type"] = "application/json-patch+json", void 0 !== e.robloxUniverseId && null !== e.robloxUniverseId && (n["Roblox-Universe-Id"] = String(e.robloxUniverseId)), [4, this.request({
                                         path: "/v2/products/{subscriptionProductType}/{subscriptionProductId}/prepare-purchase".replace("{".concat("subscriptionProductType", "}"), encodeURIComponent(String(e.subscriptionProductType))).replace("{".concat("subscriptionProductId", "}"), encodeURIComponent(String(e.subscriptionProductId))),
                                         schemaPath: "/v2/products/{subscriptionProductType}/{subscriptionProductId}/prepare-purchase",
@@ -32251,39 +32271,39 @@ function() {
                                         }(e.preparePurchaseV2Request)
                                     }, t)];
                                 case 1:
-                                    return [2, new PV(o.sent(), function(e) {
+                                    return [2, new PY(o.sent(), function(e) {
                                         var t, r, n, o, i, a;
                                         return null == e ? e : {
-                                            paymentProvider: P6(e.paymentProvider),
+                                            paymentProvider: P9(e.paymentProvider),
                                             providerPurchasePayload: null == (t = e.providerPurchasePayload) ? t : {
-                                                stripePurchasePayload: PG(t, "stripePurchasePayload") ? null == (r = t.stripePurchasePayload) ? r : {
-                                                    checkoutUrl: PG(r, "checkoutUrl") ? r.checkoutUrl : void 0,
-                                                    clientSecret: PG(r, "clientSecret") ? r.clientSecret : void 0,
-                                                    allowSavePaymentMethod: PG(r, "allowSavePaymentMethod") ? r.allowSavePaymentMethod : void 0
+                                                stripePurchasePayload: PK(t, "stripePurchasePayload") ? null == (r = t.stripePurchasePayload) ? r : {
+                                                    checkoutUrl: PK(r, "checkoutUrl") ? r.checkoutUrl : void 0,
+                                                    clientSecret: PK(r, "clientSecret") ? r.clientSecret : void 0,
+                                                    allowSavePaymentMethod: PK(r, "allowSavePaymentMethod") ? r.allowSavePaymentMethod : void 0
                                                 } : void 0,
-                                                appleAppStorePurchasePayload: PG(t, "appleAppStorePurchasePayload") ? null == (n = t.appleAppStorePurchasePayload) ? n : {
+                                                appleAppStorePurchasePayload: PK(t, "appleAppStorePurchasePayload") ? null == (n = t.appleAppStorePurchasePayload) ? n : {
                                                     appAccountToken: n.appAccountToken,
                                                     partnerBillingJwtToken: n.partnerBillingJwtToken,
                                                     partnerBillingGenericProductId: n.partnerBillingGenericProductId
                                                 } : void 0,
-                                                googlePlayStorePurchasePayload: PG(t, "googlePlayStorePurchasePayload") ? null == (o = t.googlePlayStorePurchasePayload) ? o : {
+                                                googlePlayStorePurchasePayload: PK(t, "googlePlayStorePurchasePayload") ? null == (o = t.googlePlayStorePurchasePayload) ? o : {
                                                     providerProductId: o.providerProductId,
                                                     providerProductType: o.providerProductType,
                                                     chargeRequestId: o.chargeRequestId,
-                                                    offerId: PG(o, "offerId") ? o.offerId : void 0
+                                                    offerId: PK(o, "offerId") ? o.offerId : void 0
                                                 } : void 0,
-                                                creditBalancePurchasePayload: PG(t, "creditBalancePurchasePayload") ? null == (i = t.creditBalancePurchasePayload) ? i : {
+                                                creditBalancePurchasePayload: PK(t, "creditBalancePurchasePayload") ? null == (i = t.creditBalancePurchasePayload) ? i : {
                                                     checkoutUrl: i.checkoutUrl,
-                                                    checkoutToken: PG(i, "checkoutToken") ? i.checkoutToken : void 0,
-                                                    robloxManagedTax: PG(i, "robloxManagedTax") ? i.robloxManagedTax : void 0,
-                                                    requiresBillingAddress: PG(i, "requiresBillingAddress") ? i.requiresBillingAddress : void 0,
-                                                    chargeRequestId: PG(i, "chargeRequestId") ? i.chargeRequestId : void 0,
-                                                    baseAmount: PG(i, "baseAmount") ? i.baseAmount : void 0,
-                                                    taxAmount: PG(i, "taxAmount") ? i.taxAmount : void 0,
-                                                    totalAmount: PG(i, "totalAmount") ? i.totalAmount : void 0,
-                                                    currencyCode: PG(i, "currencyCode") ? i.currencyCode : void 0
+                                                    checkoutToken: PK(i, "checkoutToken") ? i.checkoutToken : void 0,
+                                                    robloxManagedTax: PK(i, "robloxManagedTax") ? i.robloxManagedTax : void 0,
+                                                    requiresBillingAddress: PK(i, "requiresBillingAddress") ? i.requiresBillingAddress : void 0,
+                                                    chargeRequestId: PK(i, "chargeRequestId") ? i.chargeRequestId : void 0,
+                                                    baseAmount: PK(i, "baseAmount") ? i.baseAmount : void 0,
+                                                    taxAmount: PK(i, "taxAmount") ? i.taxAmount : void 0,
+                                                    totalAmount: PK(i, "totalAmount") ? i.totalAmount : void 0,
+                                                    currencyCode: PK(i, "currencyCode") ? i.currencyCode : void 0
                                                 } : void 0,
-                                                braintreePurchasePayload: PG(t, "braintreePurchasePayload") ? null == (a = t.braintreePurchasePayload) ? a : {
+                                                braintreePurchasePayload: PK(t, "braintreePurchasePayload") ? null == (a = t.braintreePurchasePayload) ? a : {
                                                     productToken: a.productToken,
                                                     price: a.price,
                                                     currencyCode: a.currencyCode,
@@ -32297,8 +32317,8 @@ function() {
                         })
                     })
                 }, t.prototype.subscriptionsV2PreparePurchaseV2 = function(e, t) {
-                    return Pq(this, void 0, void 0, function() {
-                        return PQ(this, function(r) {
+                    return PZ(this, void 0, void 0, function() {
+                        return PJ(this, function(r) {
                             switch (r.label) {
                                 case 0:
                                     return [4, this.subscriptionsV2PreparePurchaseV2Raw(e, t)];
@@ -32310,12 +32330,12 @@ function() {
                         })
                     })
                 }, t.prototype.subscriptionsV2PrepareSubscriptionPlanChangeRaw = function(e, t) {
-                    return Pq(this, void 0, void 0, function() {
+                    return PZ(this, void 0, void 0, function() {
                         var r, n;
-                        return PQ(this, function(o) {
+                        return PJ(this, function(o) {
                             switch (o.label) {
                                 case 0:
-                                    if (null === e.subscriptionId || void 0 === e.subscriptionId) throw new PH("subscriptionId", "Required parameter requestParameters.subscriptionId was null or undefined when calling subscriptionsV2PrepareSubscriptionPlanChange.");
+                                    if (null === e.subscriptionId || void 0 === e.subscriptionId) throw new PW("subscriptionId", "Required parameter requestParameters.subscriptionId was null or undefined when calling subscriptionsV2PrepareSubscriptionPlanChange.");
                                     return r = {}, (n = {})["Content-Type"] = "application/json-patch+json", [4, this.request({
                                         path: "/v2/subscriptions/{subscriptionId}/prepare-plan-change".replace("{".concat("subscriptionId", "}"), encodeURIComponent(String(e.subscriptionId))),
                                         schemaPath: "/v2/subscriptions/{subscriptionId}/prepare-plan-change",
@@ -32334,7 +32354,7 @@ function() {
                                         }(e.prepareSubscriptionPlanChangeRequest)
                                     }, t)];
                                 case 1:
-                                    return [2, new PV(o.sent(), function(e) {
+                                    return [2, new PY(o.sent(), function(e) {
                                         return null == e ? e : {
                                             planChangeId: e.planChangeId
                                         }
@@ -32343,8 +32363,8 @@ function() {
                         })
                     })
                 }, t.prototype.subscriptionsV2PrepareSubscriptionPlanChange = function(e, t) {
-                    return Pq(this, void 0, void 0, function() {
-                        return PQ(this, function(r) {
+                    return PZ(this, void 0, void 0, function() {
+                        return PJ(this, function(r) {
                             switch (r.label) {
                                 case 0:
                                     return [4, this.subscriptionsV2PrepareSubscriptionPlanChangeRaw(e, t)];
@@ -32356,12 +32376,12 @@ function() {
                         })
                     })
                 }, t.prototype.subscriptionsV2ReserveSubscriptionPlanChangeRaw = function(e, t) {
-                    return Pq(this, void 0, void 0, function() {
+                    return PZ(this, void 0, void 0, function() {
                         var r, n;
-                        return PQ(this, function(o) {
+                        return PJ(this, function(o) {
                             switch (o.label) {
                                 case 0:
-                                    if (null === e.subscriptionId || void 0 === e.subscriptionId) throw new PH("subscriptionId", "Required parameter requestParameters.subscriptionId was null or undefined when calling subscriptionsV2ReserveSubscriptionPlanChange.");
+                                    if (null === e.subscriptionId || void 0 === e.subscriptionId) throw new PW("subscriptionId", "Required parameter requestParameters.subscriptionId was null or undefined when calling subscriptionsV2ReserveSubscriptionPlanChange.");
                                     return r = {}, (n = {})["Content-Type"] = "application/json-patch+json", [4, this.request({
                                         path: "/v2/subscriptions/{subscriptionId}/reserve-plan-change".replace("{".concat("subscriptionId", "}"), encodeURIComponent(String(e.subscriptionId))),
                                         schemaPath: "/v2/subscriptions/{subscriptionId}/reserve-plan-change",
@@ -32375,13 +32395,13 @@ function() {
                                         }(e.reserveSubscriptionPlanChangeRequest)
                                     }, t)];
                                 case 1:
-                                    return [2, new PW(o.sent())]
+                                    return [2, new PX(o.sent())]
                             }
                         })
                     })
                 }, t.prototype.subscriptionsV2ReserveSubscriptionPlanChange = function(e, t) {
-                    return Pq(this, void 0, void 0, function() {
-                        return PQ(this, function(r) {
+                    return PZ(this, void 0, void 0, function() {
+                        return PJ(this, function(r) {
                             switch (r.label) {
                                 case 0:
                                     return [4, this.subscriptionsV2ReserveSubscriptionPlanChangeRaw(e, t)];
@@ -32391,31 +32411,31 @@ function() {
                         })
                     })
                 }, t
-            }(PB);
+            }(PH);
 
-            function El(e, t) {
+            function Es(e, t) {
                 (null == t || t > e.length) && (t = e.length);
                 for (var r = 0, n = Array(t); r < t; r++) n[r] = e[r];
                 return n
             }
 
-            function Eu(e) {
+            function Ef(e) {
                 if (Array.isArray(e)) return e
             }
 
-            function Ec() {
+            function Ed() {
                 throw TypeError("Invalid attempt to destructure non-iterable instance.\\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.")
             }
 
-            function Es(e, t) {
+            function Ep(e, t) {
                 if (e) {
-                    if ("string" == typeof e) return El(e, t);
+                    if ("string" == typeof e) return Es(e, t);
                     var r = Object.prototype.toString.call(e).slice(8, -1);
                     if ("Object" === r && e.constructor && (r = e.constructor.name), "Map" === r || "Set" === r) return Array.from(r);
-                    if ("Arguments" === r || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(r)) return El(e, t)
+                    if ("Arguments" === r || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(r)) return Es(e, t)
                 }
             }
-            var Ef = {
+            var Ey = {
                     XSmall: "size-[var(--icon-size-xsmall)]",
                     Small: "size-[var(--icon-size-small)]",
                     Medium: "size-[var(--icon-size-medium)]",
@@ -32423,10 +32443,10 @@ function() {
                     XLarge: "size-[var(--icon-size-xlarge)]",
                     XXLarge: "size-[var(--icon-size-xxlarge)]"
                 },
-                Ed = e2().forwardRef(function(e, t) {
-                    var r, n = Eu(r = [e, t]) || function(e) {
+                Em = e2().forwardRef(function(e, t) {
+                    var r, n = Ef(r = [e, t]) || function(e) {
                             if ("u" > typeof Symbol && null != e[Symbol.iterator] || null != e["@@iterator"]) return Array.from(e)
-                        }(r) || Es(r) || Ec(),
+                        }(r) || Ep(r) || Ed(),
                         o = n[0],
                         i = n.slice(1),
                         a = o.name,
@@ -32449,7 +32469,7 @@ function() {
                                 for (o = 0, r = Object.getOwnPropertySymbols(e); o < r.length; o++) n = r[o], !(t.indexOf(n) >= 0) && Object.prototype.propertyIsEnumerable.call(e, n) && (i[n] = e[n]);
                             return i
                         }(o, ["name", "size", "className", "children"])),
-                        s = (Eu(i) || function(e) {
+                        s = (Ef(i) || function(e) {
                             var t, r, n = null == e ? null : "u" > typeof Symbol && e[Symbol.iterator] || e["@@iterator"];
                             if (null != n) {
                                 var o = [],
@@ -32468,7 +32488,7 @@ function() {
                                 }
                                 return o
                             }
-                        }(i) || Es(i, 1) || Ec())[0];
+                        }(i) || Ep(i, 1) || Ed())[0];
                     return e2().createElement("span", function(e) {
                         for (var t = 1; t < arguments.length; t++) {
                             var r = null != arguments[t] ? arguments[t] : {},
@@ -32490,12 +32510,12 @@ function() {
                         ref: s,
                         "aria-hidden": !0,
                         "data-testid": "foundation-web-icon",
-                        className: oW("grow-0 shrink-0 basis-auto icon", a, Ef[void 0 === l ? "Medium" : l], u)
+                        className: oW("grow-0 shrink-0 basis-auto icon", a, Ey[void 0 === l ? "Medium" : l], u)
                     }, c))
                 });
-            Ed.displayName = "Icon";
-            var Ep = "relative clip group/interactable focus-visible:outline-focus disabled:outline-none",
-                Ey = function(e) {
+            Em.displayName = "Icon";
+            var Eh = "relative clip group/interactable focus-visible:outline-focus disabled:outline-none",
+                Eb = function(e) {
                     var t = e.className;
                     return e2().createElement("div", {
                         "aria-hidden": !0,
@@ -32503,8 +32523,8 @@ function() {
                         className: oW("absolute inset-[0] transition-colors group-hover/interactable:bg-[var(--color-state-hover)] group-active/interactable:bg-[var(--color-state-press)] group-disabled/interactable:bg-none", t)
                     })
                 },
-                Em = "opacity-[0.5]",
-                Eh = function(e) {
+                Ev = "opacity-[0.5]",
+                Eg = function(e) {
                     var t = e.width,
                         r = e.height;
                     return e2().createElement("svg", {
@@ -32522,21 +32542,21 @@ function() {
                     }))
                 };
 
-            function Eb(e, t) {
+            function Ew(e, t) {
                 (null == t || t > e.length) && (t = e.length);
                 for (var r = 0, n = Array(t); r < t; r++) n[r] = e[r];
                 return n
             }
 
-            function Ev(e) {
+            function EO(e) {
                 if (Array.isArray(e)) return e
             }
 
-            function Eg() {
+            function ES() {
                 throw TypeError("Invalid attempt to destructure non-iterable instance.\\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.")
             }
 
-            function Ew(e) {
+            function Ex(e) {
                 for (var t = 1; t < arguments.length; t++) {
                     var r = null != arguments[t] ? arguments[t] : {},
                         n = Object.keys(r);
@@ -32555,7 +32575,7 @@ function() {
                 return e
             }
 
-            function EO(e, t) {
+            function EP(e, t) {
                 return t = null != t ? t : {}, Object.getOwnPropertyDescriptors ? Object.defineProperties(e, Object.getOwnPropertyDescriptors(t)) : (function(e) {
                     var t = Object.keys(e);
                     if (Object.getOwnPropertySymbols) {
@@ -32568,7 +32588,7 @@ function() {
                 }), e
             }
 
-            function ES(e, t) {
+            function EE(e, t) {
                 if (null == e) return {};
                 var r, n, o, i = {};
                 if ("u" > typeof Reflect && Reflect.ownKeys) {
@@ -32586,27 +32606,27 @@ function() {
                 return i
             }
 
-            function Ex(e, t) {
+            function Ej(e, t) {
                 if (e) {
-                    if ("string" == typeof e) return Eb(e, t);
+                    if ("string" == typeof e) return Ew(e, t);
                     var r = Object.prototype.toString.call(e).slice(8, -1);
                     if ("Object" === r && e.constructor && (r = e.constructor.name), "Map" === r || "Set" === r) return Array.from(r);
-                    if ("Arguments" === r || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(r)) return Eb(e, t)
+                    if ("Arguments" === r || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(r)) return Ew(e, t)
                 }
             }
-            var EP = {
+            var EI = {
                     Large: 24,
                     Medium: 20,
                     Small: 16,
                     XSmall: 12
                 },
-                EE = {
+                EA = {
                     Large: ["radius-medium", "text-label-large", "height-1200", "padding-x-medium"],
                     Medium: ["radius-medium", "text-label-medium", "height-1000", "padding-x-medium"],
                     Small: ["radius-medium", "text-label-small", "height-800", "padding-x-small"],
                     XSmall: ["radius-small", "text-label-small", "height-600", "padding-x-small"]
                 },
-                Ej = {
+                EC = {
                     Emphasis: ["bg-action-emphasis", "content-action-emphasis"],
                     Standard: ["bg-action-standard", "content-action-standard"],
                     SoftEmphasis: ["bg-action-soft-emphasis", "content-action-soft-emphasis"],
@@ -32615,7 +32635,7 @@ function() {
                     Alert: ["bg-action-alert", "content-action-alert"],
                     ActionUtility: ["bg-action-subtle", "content-action-standard"]
                 },
-                EI = {
+                ET = {
                     Emphasis: ["bg-action-standard", "content-action-standard"],
                     Standard: ["bg-action-standard", "content-action-standard"],
                     SoftEmphasis: ["bg-action-standard", "content-action-standard"],
@@ -32624,10 +32644,10 @@ function() {
                     Alert: ["bg-action-standard", "content-action-standard"],
                     ActionUtility: ["bg-action-subtle", "content-action-standard"]
                 },
-                EA = (0, e1.forwardRef)(function(e, t) {
-                    var r, n = Ev(r = [e, t]) || function(e) {
+                EN = (0, e1.forwardRef)(function(e, t) {
+                    var r, n = EO(r = [e, t]) || function(e) {
                             if ("u" > typeof Symbol && null != e[Symbol.iterator] || null != e["@@iterator"]) return Array.from(e)
-                        }(r) || Ex(r) || Eg(),
+                        }(r) || Ej(r) || ES(),
                         o = n[0],
                         i = n.slice(1),
                         a = o.children,
@@ -32643,8 +32663,8 @@ function() {
                         h = o.variant,
                         b = void 0 === h ? "Emphasis" : h,
                         v = o.asChild,
-                        g = ES(o, ["children", "className", "style", "isDisabled", "isLoading", "icon", "size", "variant", "asChild"]),
-                        w = (Ev(i) || function(e) {
+                        g = EE(o, ["children", "className", "style", "isDisabled", "isLoading", "icon", "size", "variant", "asChild"]),
+                        w = (EO(i) || function(e) {
                             var t, r, n = null == e ? null : "u" > typeof Symbol && e[Symbol.iterator] || e["@@iterator"];
                             if (null != n) {
                                 var o = [],
@@ -32663,21 +32683,21 @@ function() {
                                 }
                                 return o
                             }
-                        }(i) || Ex(i, 1) || Eg())[0],
-                        O = oW("foundation-web-button", s ? Em : [Ep, "cursor-pointer"], "relative flex items-center justify-center stroke-none padding-y-none select-none", EE[m], s ? EI[b] : Ej[b], l),
-                        S = Ew({
+                        }(i) || Ej(i, 1) || ES())[0],
+                        O = oW("foundation-web-button", s ? Ev : [Eh, "cursor-pointer"], "relative flex items-center justify-center stroke-none padding-y-none select-none", EA[m], s ? ET[b] : EC[b], l),
+                        S = Ex({
                             textDecoration: "none"
                         }, u),
                         x = function(e) {
-                            return e2().createElement(e2().Fragment, null, e2().createElement(Ey, null), d && e2().createElement("div", {
+                            return e2().createElement(e2().Fragment, null, e2().createElement(Eb, null), d && e2().createElement("div", {
                                 "aria-hidden": "true",
                                 className: "absolute flex"
-                            }, e2().createElement(Eh, {
-                                width: EP[m],
-                                height: EP[m]
+                            }, e2().createElement(Eg, {
+                                width: EI[m],
+                                height: EI[m]
                             })), e2().createElement("span", {
                                 className: oW("flex items-center min-width-0", "Large" === m || "Medium" === m ? "gap-small" : "gap-xsmall", d && "invisible")
-                            }, p && e2().createElement(Ed, {
+                            }, p && e2().createElement(Em, {
                                 name: p,
                                 size: m
                             }), e2().createElement("span", {
@@ -32686,9 +32706,9 @@ function() {
                         };
                     if (v) {
                         g.as;
-                        var P = ES(g, ["as"]),
+                        var P = EE(g, ["as"]),
                             E = e2().Children.only(a);
-                        return e2().createElement(ia, EO(Ew({
+                        return e2().createElement(ia, EP(Ex({
                             ref: w
                         }, P), {
                             className: O,
@@ -32699,8 +32719,8 @@ function() {
                     if ("a" === g.as) {
                         g.as;
                         var j = g.href,
-                            I = ES(g, ["as", "href"]);
-                        return e2().createElement("a", EO(Ew({
+                            I = EE(g, ["as", "href"]);
+                        return e2().createElement("a", EP(Ex({
                             ref: w
                         }, I), {
                             "aria-disabled": s,
@@ -32710,8 +32730,8 @@ function() {
                         }), x(a))
                     }
                     g.as;
-                    var A = ES(g, ["as"]);
-                    return e2().createElement("button", EO(Ew({
+                    var A = EE(g, ["as"]);
+                    return e2().createElement("button", EP(Ex({
                         ref: w,
                         type: "button"
                     }, A), {
@@ -32720,13 +32740,13 @@ function() {
                         style: S
                     }), x(a))
                 }),
-                EC = "https://www.roblox.com/info/terms",
-                ET = function(e) {
+                EM = "https://www.roblox.com/info/terms",
+                Ek = function(e) {
                     var t = e.iconName,
                         r = e.label;
                     return (0, p.jsxs)("div", {
                         className: "gap-x-medium align-items-center flex flex-row",
-                        children: [(0, p.jsx)(Ed, {
+                        children: [(0, p.jsx)(Em, {
                             name: t,
                             size: "Large"
                         }), (0, p.jsx)("span", {
@@ -32735,13 +32755,13 @@ function() {
                         })]
                     })
                 },
-                EN = function(e) {
+                ER = function(e) {
                     var t, r = e.featureConfig,
                         n = e.currencySubscriptionBenefit,
                         o = e.freeTrialOffer,
                         i = (0, e4.useTranslation)().translate,
                         a = oB(),
-                        l = (null == o || null == (t = o.freeTrialOffer) ? void 0 : t.periodType) === P1 ? 60 + 7 * o.freeTrialOffer.duration : 60,
+                        l = (null == o || null == (t = o.freeTrialOffer) ? void 0 : t.periodType) === P3 ? 60 + 7 * o.freeTrialOffer.duration : 60,
                         u = (0, e1.useMemo)(function() {
                             var e;
                             return null == (e = r.virtualTransactionDiscounts) ? void 0 : e.find(function(e) {
@@ -32758,50 +32778,50 @@ function() {
                         }, [r]);
                     return (0, p.jsxs)("div", {
                         className: "gap-y-xlarge flex flex-col",
-                        children: [u && (c ? (0, p.jsx)(ET, {
+                        children: [u && (c ? (0, p.jsx)(Ek, {
                             iconName: "icon-regular-tag",
                             label: i("Description.Benefit.DiscountV3", {
                                 trialUnlockDays: a.number(l)
                             })
-                        }) : (0, p.jsx)(ET, {
+                        }) : (0, p.jsx)(Ek, {
                             iconName: "icon-regular-tag",
                             label: i("Description.Benefit.DiscountBase", {
                                 discountPercent: a.number(.01 * u.discountPercent, {
                                     style: "percent"
                                 })
                             })
-                        })), (0, p.jsx)(ET, {
+                        })), (0, p.jsx)(Ek, {
                             iconName: "icon-regular-paint-brush",
                             label: i("Description.Benefit.Customize")
-                        }), (0, p.jsx)(ET, {
+                        }), (0, p.jsx)(Ek, {
                             iconName: "icon-regular-controller",
                             label: i("Label.BlackbirdPSDiscount")
-                        }), n && n.entitledAmountMicrosPerGrantingPeriod > 0 && (0, p.jsx)(ET, {
+                        }), n && n.entitledAmountMicrosPerGrantingPeriod > 0 && (0, p.jsx)(Ek, {
                             iconName: "icon-regular-robux",
                             label: i("Description.Benefit.RobuxStipend", {
                                 amount: a.number(Math.round(n.entitledAmountMicrosPerGrantingPeriod / 1e6)),
                                 periodType: n.grantingPeriodType
                             })
-                        }), r.isRobuxTransferEnabled && (0, p.jsx)(ET, {
+                        }), r.isRobuxTransferEnabled && (0, p.jsx)(Ek, {
                             iconName: "icon-regular-robux",
                             label: i("Description.Benefit.RobuxTransfers")
-                        }), r.isTradingEnabled && (0, p.jsx)(ET, {
+                        }), r.isTradingEnabled && (0, p.jsx)(Ek, {
                             iconName: "icon-regular-hand-two-arrows-horizontal",
                             label: i("Description.Benefit.TradeResellItems")
-                        }), r.isUgcPublishingEnabled && (0, p.jsx)(ET, {
+                        }), r.isUgcPublishingEnabled && (0, p.jsx)(Ek, {
                             iconName: "icon-regular-arrow-up-from-landscape-rectangle",
                             label: i("Description.Benefit.PublishItems")
                         })]
                     })
                 };
 
-            function EM(e, t) {
+            function E_(e, t) {
                 (null == t || t > e.length) && (t = e.length);
                 for (var r = 0, n = Array(t); r < t; r++) n[r] = e[r];
                 return n
             }
 
-            function Ek(e, t) {
+            function ED(e, t) {
                 return function(e) {
                     if (Array.isArray(e)) return e
                 }(e) || function(e, t) {
@@ -32825,52 +32845,52 @@ function() {
                     }
                 }(e, t) || function(e, t) {
                     if (e) {
-                        if ("string" == typeof e) return EM(e, t);
+                        if ("string" == typeof e) return E_(e, t);
                         var r = Object.prototype.toString.call(e).slice(8, -1);
                         if ("Object" === r && e.constructor && (r = e.constructor.name), "Map" === r || "Set" === r) return Array.from(r);
-                        if ("Arguments" === r || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(r)) return EM(e, t)
+                        if ("Arguments" === r || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(r)) return E_(e, t)
                     }
                 }(e, t) || function() {
                     throw TypeError("Invalid attempt to destructure non-iterable instance.\\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.")
                 }()
             }
-            var ER = ["icon-regular-tag", "icon-regular-controller", "icon-regular-robux"],
-                E_ = ["icon-regular-tag", "icon-regular-tag-arrow-up", "icon-regular-controller", "icon-regular-robux", "icon-regular-hand-two-arrows-horizontal", "icon-regular-arrow-up-from-landscape-rectangle"];
+            var EL = ["icon-regular-tag", "icon-regular-controller", "icon-regular-robux"],
+                EU = ["icon-regular-tag", "icon-regular-tag-arrow-up", "icon-regular-controller", "icon-regular-robux", "icon-regular-hand-two-arrows-horizontal", "icon-regular-arrow-up-from-landscape-rectangle"];
 
-            function ED(e) {
-                var t = E_.indexOf(e);
+            function EB(e) {
+                var t = EU.indexOf(e);
                 return -1 === t ? Number.MAX_SAFE_INTEGER : t
             }
 
-            function EL(e) {
-                var t = ER.indexOf(e);
+            function EF(e) {
+                var t = EL.indexOf(e);
                 return -1 === t ? Number.MAX_SAFE_INTEGER : t
             }
-            var EU = {
+            var Ez = {
                     PERIOD_TYPE_WEEK: "weeks",
                     PERIOD_TYPE_MONTH: "months",
                     PERIOD_TYPE_YEAR: "years"
                 },
-                EB = {
+                EH = {
                     discountPercentage: {
                         rename: "discountPercent"
                     },
                     periodType: {
                         mapValue: function(e) {
                             var t;
-                            return null != (t = EU[String(e)]) ? t : String(e)
+                            return null != (t = Ez[String(e)]) ? t : String(e)
                         }
                     }
                 };
 
-            function EF(e) {
+            function EG(e) {
                 var t = {},
                     r = !0,
                     n = !1,
                     o = void 0;
                 try {
                     for (var i, a = Object.entries(e)[Symbol.iterator](); !(r = (i = a.next()).done); r = !0) {
-                        var l = Ek(i.value, 2),
+                        var l = ED(i.value, 2),
                             u = l[0],
                             c = l[1];
                         if ("iconName" !== u && "benefitTranslationKey" !== u && (void 0 === c ? "undefined" : c && "u" > typeof Symbol && c.constructor === Symbol ? "symbol" : typeof c) == "object") {
@@ -32879,10 +32899,10 @@ function() {
                                 d = void 0;
                             try {
                                 for (var p, y = Object.entries(c)[Symbol.iterator](); !(s = (p = y.next()).done); s = !0) {
-                                    var m, h = Ek(p.value, 2),
+                                    var m, h = ED(p.value, 2),
                                         b = h[0],
                                         v = h[1],
-                                        g = EB[b],
+                                        g = EH[b],
                                         w = null != (m = null == g ? void 0 : g.rename) ? m : b,
                                         O = (null == g ? void 0 : g.mapValue) ? g.mapValue(v) : v;
                                     t[w] = O
@@ -32910,31 +32930,31 @@ function() {
                 return Object.keys(t).length > 0 ? t : void 0
             }
 
-            function Ez(e) {
+            function EV(e) {
                 var t = e.benefits,
                     r = e.translate,
                     n = t.filter(function(e) {
                         var t;
-                        return t = e.iconName, ER.includes(t)
+                        return t = e.iconName, EL.includes(t)
                     }).sort(function(e, t) {
-                        return EL(e.iconName) - EL(t.iconName)
+                        return EF(e.iconName) - EF(t.iconName)
                     });
                 return (0, p.jsx)(e1.Fragment, {
                     children: n.map(function(e, t) {
-                        return (0, p.jsx)(ET, {
+                        return (0, p.jsx)(Ek, {
                             iconName: e.iconName,
-                            label: r(e.benefitTranslationKey, EF(e))
+                            label: r(e.benefitTranslationKey, EG(e))
                         }, "compact-".concat(e.benefitTranslationKey, "-").concat(String(t)))
                     })
                 })
             }
 
-            function EH(e) {
+            function EW(e) {
                 var t = e.benefits,
                     r = e.translate;
                 if (0 === t.length) return null;
                 var n = t.toSorted(function(e, t) {
-                        return ED(e.iconName) - ED(t.iconName)
+                        return EB(e.iconName) - EB(t.iconName)
                     }),
                     o = Math.ceil(n.length / 2),
                     i = n.slice(0, o),
@@ -32944,23 +32964,23 @@ function() {
                     children: [(0, p.jsx)("div", {
                         className: "gap-y-large min-width-0 flex flex-col",
                         children: i.map(function(e, t) {
-                            return (0, p.jsx)(ET, {
+                            return (0, p.jsx)(Ek, {
                                 iconName: e.iconName,
-                                label: r(e.benefitTranslationKey, EF(e))
+                                label: r(e.benefitTranslationKey, EG(e))
                             }, "lg-left-".concat(e.benefitTranslationKey, "-").concat(String(t)))
                         })
                     }), (0, p.jsx)("div", {
                         className: "gap-y-large min-width-0 flex flex-col",
                         children: a.map(function(e, t) {
-                            return (0, p.jsx)(ET, {
+                            return (0, p.jsx)(Ek, {
                                 iconName: e.iconName,
-                                label: r(e.benefitTranslationKey, EF(e))
+                                label: r(e.benefitTranslationKey, EG(e))
                             }, "lg-right-".concat(e.benefitTranslationKey, "-").concat(String(t)))
                         })
                     })]
                 })
             }
-            var EG = function(e, t) {
+            var EK = function(e, t) {
                     var r = oB();
                     return (0, e1.useMemo)(function() {
                         var n = e.units + 1e-9 * e.nanos;
@@ -32987,14 +33007,14 @@ function() {
                         }, t))
                     }, [r, e, t])
                 },
-                EV = tY("SubscriptionsCommon");
+                EY = tY("SubscriptionsCommon");
 
-            function EW(e, t) {
+            function EX(e, t) {
                 (null == t || t > e.length) && (t = e.length);
                 for (var r = 0, n = Array(t); r < t; r++) n[r] = e[r];
                 return n
             }
-            var EK = function(e) {
+            var Eq = function(e) {
                     var t, r = e.productType,
                         n = e.productId,
                         o = e.deviceMeta,
@@ -33035,10 +33055,10 @@ function() {
                             }
                         }(t) || function(e) {
                             if (e) {
-                                if ("string" == typeof e) return EW(e, 2);
+                                if ("string" == typeof e) return EX(e, 2);
                                 var t = Object.prototype.toString.call(e).slice(8, -1);
                                 if ("Object" === t && e.constructor && (t = e.constructor.name), "Map" === t || "Set" === t) return Array.from(t);
-                                if ("Arguments" === t || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(t)) return EW(e, 2)
+                                if ("Arguments" === t || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(t)) return EX(e, 2)
                             }
                         }(t) || function() {
                             throw TypeError("Invalid attempt to destructure non-iterable instance.\\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.")
@@ -33046,7 +33066,7 @@ function() {
                         S = O[0],
                         x = O[1],
                         P = o.isAndroidApp || o.isIosApp,
-                        E = r === P9 ? "RobloxPlus" : r,
+                        E = r === Er ? "RobloxPlus" : r,
                         j = (0, e1.useMemo)(function() {
                             if (w) {
                                 var e = new URL(P ? "/mobile-app-upgrades/buy" : "/upgrades/paymentmethods", w.location.origin);
@@ -33070,7 +33090,7 @@ function() {
                                 x(!0)
                             }
                         }, [c, j, v, s, y, P, m]);
-                    return (0, p.jsx)(EA, {
+                    return (0, p.jsx)(EN, {
                         as: "a",
                         className: l,
                         href: j,
@@ -33082,15 +33102,15 @@ function() {
                         children: b
                     })
                 },
-                EY = {
-                    PRODUCT_TYPE_ROBLOX_PLUS: P9
+                EQ = {
+                    PRODUCT_TYPE_ROBLOX_PLUS: Er
                 },
-                EX = {
-                    PERIOD_TYPE_MONTH: P2,
-                    PERIOD_TYPE_YEAR: P4,
-                    PERIOD_TYPE_WEEK: P1
+                E$ = {
+                    PERIOD_TYPE_MONTH: P5,
+                    PERIOD_TYPE_YEAR: P6,
+                    PERIOD_TYPE_WEEK: P3
                 },
-                Eq = function(e) {
+                EZ = function(e) {
                     var t, r = e.subscriptionV2,
                         n = e.deviceMeta,
                         o = e.isPrimary,
@@ -33102,15 +33122,15 @@ function() {
                         s = e.onSubscribeOverride,
                         f = (0, e4.useTranslation)().translate,
                         d = r.products[0],
-                        y = d ? EY[d.subscriptionProductType] : void 0,
-                        m = d ? EX[d.periodType] : void 0,
+                        y = d ? EQ[d.subscriptionProductType] : void 0,
+                        m = d ? E$[d.periodType] : void 0,
                         h = null != d && void 0 !== y;
                     (0, e1.useEffect)(function() {
                         h && i()
                     }, [h, i]), (0, e1.useEffect)(function() {
-                        d ? y || EV("Error_RobloxSubscriptionWidget_InvalidSubscriptionProductType", void 0) : EV("Error_RobloxSubscriptionWidget_NoPrimaryProduct", void 0)
+                        d ? y || EY("Error_RobloxSubscriptionWidget_InvalidSubscriptionProductType", void 0) : EY("Error_RobloxSubscriptionWidget_NoPrimaryProduct", void 0)
                     }, [d, y]);
-                    var b = EG(null != d ? {
+                    var b = EK(null != d ? {
                         currencyCode: d.price.currencyCode,
                         units: function(e) {
                             if (null == e) return 0;
@@ -33131,7 +33151,7 @@ function() {
                         g = Array.isArray(d.benefits) ? d.benefits : [],
                         w = v ? f("Action.TryItForFree") : f("Action.PricePerMonth", {
                             price: b,
-                            periodType: null != m ? m : P2
+                            periodType: null != m ? m : P5
                         }),
                         O = f("Label.Learnmore"),
                         S = "width-full text-label-medium height-1000 [display:none] medium:[display:flex]";
@@ -33141,7 +33161,7 @@ function() {
                             className: "gap-x-small min-width-0 flex flex-row flex-wrap justify-between",
                             children: [(0, p.jsxs)("div", {
                                 className: "gap-x-medium flex items-center",
-                                children: [(0, p.jsx)(Ed, {
+                                children: [(0, p.jsx)(Em, {
                                     name: "icon-regular-roblox-plus",
                                     size: "Large"
                                 }), (0, p.jsx)("span", {
@@ -33164,25 +33184,25 @@ function() {
                         }), (0, p.jsx)("div", {
                             className: "gap-x-large gap-y-small medium:hidden flex flex-col",
                             "data-testid": "subscription-compact-benefits",
-                            children: (0, p.jsx)(Ez, {
+                            children: (0, p.jsx)(EV, {
                                 benefits: g,
                                 translate: f
                             })
                         }), (0, p.jsx)("div", {
                             className: "medium:block hidden",
-                            children: (0, p.jsx)(EH, {
+                            children: (0, p.jsx)(EW, {
                                 benefits: g,
                                 translate: f
                             })
                         }), (0, p.jsxs)("div", {
                             className: "gap-x-small medium:gap-x-xlarge width-full flex flex-row",
-                            children: [s ? (0, p.jsx)(EA, {
+                            children: [s ? (0, p.jsx)(EN, {
                                 className: "width-full text-label-medium",
                                 size: "Medium",
                                 variant: o ? "Emphasis" : "Standard",
                                 onClick: s,
                                 children: w
-                            }) : (0, p.jsx)(EK, {
+                            }) : (0, p.jsx)(Eq, {
                                 className: "width-full text-label-medium",
                                 deviceMeta: n,
                                 loadingStateDisabled: !0,
@@ -33193,7 +33213,7 @@ function() {
                                 trackSubscriptionButtonClick: a,
                                 variant: o ? "Emphasis" : "Standard",
                                 children: w
-                            }), null != u ? (0, p.jsx)(EA, {
+                            }), null != u ? (0, p.jsx)(EN, {
                                 as: "a",
                                 className: S,
                                 href: u,
@@ -33201,7 +33221,7 @@ function() {
                                 variant: "Standard",
                                 onClick: l,
                                 children: O
-                            }) : (0, p.jsx)(EA, {
+                            }) : (0, p.jsx)(EN, {
                                 className: S,
                                 size: "Medium",
                                 variant: "Standard",
@@ -33212,21 +33232,21 @@ function() {
                     })
                 };
 
-            function EQ(e, t) {
+            function EJ(e, t) {
                 (null == t || t > e.length) && (t = e.length);
                 for (var r = 0, n = Array(t); r < t; r++) n[r] = e[r];
                 return n
             }
 
-            function E$(e) {
+            function E0(e) {
                 if (Array.isArray(e)) return e
             }
 
-            function EZ() {
+            function E1() {
                 throw TypeError("Invalid attempt to destructure non-iterable instance.\\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.")
             }
 
-            function EJ(e) {
+            function E2(e) {
                 for (var t = 1; t < arguments.length; t++) {
                     var r = null != arguments[t] ? arguments[t] : {},
                         n = Object.keys(r);
@@ -33245,7 +33265,7 @@ function() {
                 return e
             }
 
-            function E0(e, t) {
+            function E4(e, t) {
                 return t = null != t ? t : {}, Object.getOwnPropertyDescriptors ? Object.defineProperties(e, Object.getOwnPropertyDescriptors(t)) : (function(e) {
                     var t = Object.keys(e);
                     if (Object.getOwnPropertySymbols) {
@@ -33258,7 +33278,7 @@ function() {
                 }), e
             }
 
-            function E1(e, t) {
+            function E3(e, t) {
                 if (null == e) return {};
                 var r, n, o, i = {};
                 if ("u" > typeof Reflect && Reflect.ownKeys) {
@@ -33276,27 +33296,27 @@ function() {
                 return i
             }
 
-            function E2(e, t) {
+            function E5(e, t) {
                 if (e) {
-                    if ("string" == typeof e) return EQ(e, t);
+                    if ("string" == typeof e) return EJ(e, t);
                     var r = Object.prototype.toString.call(e).slice(8, -1);
                     if ("Object" === r && e.constructor && (r = e.constructor.name), "Map" === r || "Set" === r) return Array.from(r);
-                    if ("Arguments" === r || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(r)) return EQ(e, t)
+                    if ("Arguments" === r || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(r)) return EJ(e, t)
                 }
             }
-            var E4 = {
+            var E6 = {
                     Large: "size-1200",
                     Medium: "size-1000",
                     Small: "size-800",
                     XSmall: "size-600"
                 },
-                E3 = {
+                E8 = {
                     XSmall: "size-400",
                     Small: "size-500",
                     Medium: "size-600",
                     Large: "size-700"
                 },
-                E5 = {
+                E7 = {
                     Large: {
                         circular: "radius-circle",
                         square: "radius-medium"
@@ -33314,28 +33334,28 @@ function() {
                         square: "radius-small"
                     }
                 },
-                E6 = {
+                E9 = {
                     Emphasis: "bg-action-emphasis",
                     Standard: "bg-action-standard",
                     Alert: "bg-action-alert",
                     Utility: "bg-action-link",
                     OverMedia: "bg-over-media-0"
                 },
-                E8 = {
+                je = {
                     Emphasis: "bg-action-standard",
                     Standard: "bg-action-standard",
                     Alert: "bg-action-standard",
                     Utility: "bg-action-link",
                     OverMedia: "bg-over-media-0"
                 },
-                E7 = {
+                jt = {
                     Emphasis: "bg-action-emphasis",
                     Standard: "bg-action-standard",
                     Alert: "bg-action-standard",
                     Utility: "bg-shift-300",
                     OverMedia: "bg-over-media-0"
                 },
-                E9 = {
+                jr = {
                     Default: {
                         Emphasis: "content-action-emphasis",
                         Standard: "content-action-standard",
@@ -33351,7 +33371,7 @@ function() {
                         OverMedia: "content-inverse-emphasis"
                     }
                 },
-                je = {
+                jn = {
                     Default: {
                         Emphasis: "content-action-standard",
                         Standard: "content-action-standard",
@@ -33367,10 +33387,10 @@ function() {
                         OverMedia: "content-inverse-emphasis"
                     }
                 },
-                jt = (0, e1.forwardRef)(function(e, t) {
-                    var r, n, o = E$(r = [e, t]) || function(e) {
+                jo = (0, e1.forwardRef)(function(e, t) {
+                    var r, n, o = E0(r = [e, t]) || function(e) {
                             if ("u" > typeof Symbol && null != e[Symbol.iterator] || null != e["@@iterator"]) return Array.from(e)
-                        }(r) || E2(r) || EZ(),
+                        }(r) || E5(r) || E1(),
                         i = o[0],
                         a = o.slice(1),
                         l = i.className,
@@ -33388,8 +33408,8 @@ function() {
                         g = void 0 === v ? "Default" : v,
                         w = i.asChild,
                         O = i.children,
-                        S = E1(i, ["className", "icon", "ariaLabel", "isDisabled", "isCircular", "isSelected", "size", "variant", "iconColor", "asChild", "children"]),
-                        x = (E$(a) || function(e) {
+                        S = E3(i, ["className", "icon", "ariaLabel", "isDisabled", "isCircular", "isSelected", "size", "variant", "iconColor", "asChild", "children"]),
+                        x = (E0(a) || function(e) {
                             var t, r, n = null == e ? null : "u" > typeof Symbol && e[Symbol.iterator] || e["@@iterator"];
                             if (null != n) {
                                 var o = [],
@@ -33408,17 +33428,17 @@ function() {
                                 }
                                 return o
                             }
-                        }(a) || E2(a, 1) || EZ())[0];
-                    n = f ? E8[b] : void 0 !== p && p ? E7[b] : E6[b];
-                    var P = oW("foundation-web-icon-button", f ? Em : [Ep, "cursor-pointer"], "relative flex items-center justify-center padding-none stroke-none select-none", E4[m], E5[m][void 0 !== d && d ? "circular" : "square"], n, l),
-                        E = e2().createElement(e2().Fragment, null, e2().createElement(Ey, null), e2().createElement("span", {
-                            className: oW("icon", u, E3[m], f ? je[g][b] : E9[g][b])
+                        }(a) || E5(a, 1) || E1())[0];
+                    n = f ? je[b] : void 0 !== p && p ? jt[b] : E9[b];
+                    var P = oW("foundation-web-icon-button", f ? Ev : [Eh, "cursor-pointer"], "relative flex items-center justify-center padding-none stroke-none select-none", E6[m], E7[m][void 0 !== d && d ? "circular" : "square"], n, l),
+                        E = e2().createElement(e2().Fragment, null, e2().createElement(Eb, null), e2().createElement("span", {
+                            className: oW("icon", u, E8[m], f ? jn[g][b] : jr[g][b])
                         }));
                     if (w) {
                         S.as;
-                        var j = E1(S, ["as"]),
+                        var j = E3(S, ["as"]),
                             I = e2().Children.only(O);
-                        return e2().createElement(ia, E0(EJ({
+                        return e2().createElement(ia, E4(E2({
                             ref: x
                         }, j), {
                             className: P,
@@ -33429,8 +33449,8 @@ function() {
                     if ("a" === S.as) {
                         S.as;
                         var A = S.href,
-                            C = E1(S, ["as", "href"]);
-                        return e2().createElement("a", E0(EJ({
+                            C = E3(S, ["as", "href"]);
+                        return e2().createElement("a", E4(E2({
                             ref: x
                         }, C), {
                             "aria-label": c,
@@ -33440,8 +33460,8 @@ function() {
                         }), E)
                     }
                     S.as;
-                    var T = E1(S, ["as"]);
-                    return e2().createElement("button", E0(EJ({
+                    var T = E3(S, ["as"]);
+                    return e2().createElement("button", E4(E2({
                         ref: x,
                         type: "button"
                     }, T), {
@@ -33451,21 +33471,21 @@ function() {
                     }), E)
                 });
 
-            function jr(e, t) {
+            function ji(e, t) {
                 (null == t || t > e.length) && (t = e.length);
                 for (var r = 0, n = Array(t); r < t; r++) n[r] = e[r];
                 return n
             }
 
-            function jn(e) {
+            function ja(e) {
                 if (Array.isArray(e)) return e
             }
 
-            function jo() {
+            function jl() {
                 throw TypeError("Invalid attempt to destructure non-iterable instance.\\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.")
             }
 
-            function ji(e) {
+            function ju(e) {
                 for (var t = 1; t < arguments.length; t++) {
                     var r = null != arguments[t] ? arguments[t] : {},
                         n = Object.keys(r);
@@ -33484,18 +33504,18 @@ function() {
                 return e
             }
 
-            function ja(e, t) {
+            function jc(e, t) {
                 if (e) {
-                    if ("string" == typeof e) return jr(e, t);
+                    if ("string" == typeof e) return ji(e, t);
                     var r = Object.prototype.toString.call(e).slice(8, -1);
                     if ("Object" === r && e.constructor && (r = e.constructor.name), "Map" === r || "Set" === r) return Array.from(r);
-                    if ("Arguments" === r || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(r)) return jr(e, t)
+                    if ("Arguments" === r || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(r)) return ji(e, t)
                 }
             }
-            var jl = (0, e1.forwardRef)(function(e, t) {
-                var r, n, o, i = jn(o = [e, t]) || function(e) {
+            var js = (0, e1.forwardRef)(function(e, t) {
+                var r, n, o, i = ja(o = [e, t]) || function(e) {
                         if ("u" > typeof Symbol && null != e[Symbol.iterator] || null != e["@@iterator"]) return Array.from(e)
-                    }(o) || ja(o) || jo(),
+                    }(o) || jc(o) || jl(),
                     a = i[0],
                     l = i.slice(1),
                     u = a.className,
@@ -33521,7 +33541,7 @@ function() {
                             for (o = 0, r = Object.getOwnPropertySymbols(e); o < r.length; o++) n = r[o], !(t.indexOf(n) >= 0) && Object.prototype.propertyIsEnumerable.call(e, n) && (i[n] = e[n]);
                         return i
                     }(a, ["className", "style", "orientation", "variant"]),
-                    m = (jn(l) || function(e) {
+                    m = (ja(l) || function(e) {
                         var t, r, n = null == e ? null : "u" > typeof Symbol && e[Symbol.iterator] || e["@@iterator"];
                         if (null != n) {
                             var o = [],
@@ -33540,7 +33560,7 @@ function() {
                             }
                             return o
                         }
-                    }(l) || ja(l, 1) || jo())[0],
+                    }(l) || jc(l, 1) || jl())[0],
                     h = "vertical" === f,
                     b = {};
                 return h || "Inset" !== p ? h || "InsetLeft" !== p ? h || "InsetRight" !== p || (b = {
@@ -33550,13 +33570,13 @@ function() {
                 } : b = {
                     marginLeft: "var(--padding-xlarge)",
                     marginRight: "var(--padding-xlarge)"
-                }, e2().createElement("div", (r = ji({
+                }, e2().createElement("div", (r = ju({
                     ref: m
                 }, y), n = n = {
                     role: "separator",
                     "data-orientation": f,
                     "aria-orientation": f,
-                    style: ji({
+                    style: ju({
                         borderRightWidth: 0,
                         borderBottomWidth: 0,
                         boxSizing: "border-box",
@@ -33588,8 +33608,8 @@ function() {
                     Object.defineProperty(r, e, Object.getOwnPropertyDescriptor(n, e))
                 }), r))
             });
-            jl.displayName = "Divider";
-            var ju = function(e) {
+            js.displayName = "Divider";
+            var jf = function(e) {
                 var t = e.type,
                     r = e.sideSheetSide,
                     n = e.isSideSheetFlush,
@@ -33620,16 +33640,16 @@ function() {
                 }, i)))
             };
 
-            function jc(e, t) {
+            function jd(e, t) {
                 return null != t && "u" > typeof Symbol && t[Symbol.hasInstance] ? !!t[Symbol.hasInstance](e) : e instanceof t
             }
-            var js = function(e) {
+            var jp = function(e) {
                     return ("function" != typeof e.checkVisibility || e.checkVisibility()) && !("disabled" in e && e.disabled || "true" === e.getAttribute("aria-disabled"))
                 },
-                jf = function(e) {
-                    jc(e, HTMLInputElement) && "function" == typeof e.select && e.select()
+                jy = function(e) {
+                    jd(e, HTMLInputElement) && "function" == typeof e.select && e.select()
                 },
-                jd = function(e) {
+                jm = function(e) {
                     var t = e.currentTarget;
                     if (t) {
                         var r = t.querySelectorAll("[data-autofocus-priority]");
@@ -33637,7 +33657,7 @@ function() {
                             var n = [];
                             r.forEach(function(e) {
                                 var t = parseInt(e.getAttribute("data-autofocus-priority") || "", 10);
-                                !Number.isNaN(t) && jc(e, HTMLElement) && n.push({
+                                !Number.isNaN(t) && jd(e, HTMLElement) && n.push({
                                     element: e,
                                     priority: t
                                 })
@@ -33645,32 +33665,32 @@ function() {
                                 return e.priority - t.priority
                             });
                             var o = n.find(function(e) {
-                                return js(e.element)
+                                return jp(e.element)
                             });
                             if (o) {
                                 e.preventDefault();
                                 var i = document.activeElement === o.element;
-                                o.element.focus(), i || jf(o.element)
+                                o.element.focus(), i || jy(o.element)
                             }
                         }
                     }
                 };
 
-            function jp(e, t) {
+            function jh(e, t) {
                 (null == t || t > e.length) && (t = e.length);
                 for (var r = 0, n = Array(t); r < t; r++) n[r] = e[r];
                 return n
             }
 
-            function jy(e) {
+            function jb(e) {
                 if (Array.isArray(e)) return e
             }
 
-            function jm() {
+            function jv() {
                 throw TypeError("Invalid attempt to destructure non-iterable instance.\\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.")
             }
 
-            function jh(e) {
+            function jg(e) {
                 for (var t = 1; t < arguments.length; t++) {
                     var r = null != arguments[t] ? arguments[t] : {},
                         n = Object.keys(r);
@@ -33689,7 +33709,7 @@ function() {
                 return e
             }
 
-            function jb(e, t) {
+            function jw(e, t) {
                 if (null == e) return {};
                 var r, n, o, i = {};
                 if ("u" > typeof Reflect && Reflect.ownKeys) {
@@ -33707,22 +33727,22 @@ function() {
                 return i
             }
 
-            function jv(e, t) {
+            function jO(e, t) {
                 if (e) {
-                    if ("string" == typeof e) return jp(e, t);
+                    if ("string" == typeof e) return jh(e, t);
                     var r = Object.prototype.toString.call(e).slice(8, -1);
                     if ("Object" === r && e.constructor && (r = e.constructor.name), "Map" === r || "Set" === r) return Array.from(r);
-                    if ("Arguments" === r || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(r)) return jp(e, t)
+                    if ("Arguments" === r || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(r)) return jh(e, t)
                 }
             }
-            var jg = (0, e1.createContext)(null),
-                jw = function() {
-                    var e = (0, e1.useContext)(jg);
+            var jS = (0, e1.createContext)(null),
+                jx = function() {
+                    var e = (0, e1.useContext)(jS);
                     if (!e) throw Error("Sheet components must be used within a Sheet");
                     return e
                 },
-                jO = "padding-x-xlarge",
-                jS = function(e) {
+                jP = "padding-x-xlarge",
+                jE = function(e) {
                     var t = e.open,
                         r = e.onOpenChange,
                         n = e.defaultOpen,
@@ -33734,7 +33754,7 @@ function() {
                         modal: !0
                     }, o)
                 },
-                jx = function(e) {
+                jj = function(e) {
                     var t, r = e.children,
                         n = e.centerSheetSize,
                         o = void 0 === n ? "Medium" : n,
@@ -33764,32 +33784,32 @@ function() {
                             }
                         }, [o, a, l, b, v, t]),
                         w = oW(u, b && c, v && s, !b && !v && f);
-                    return e2().createElement(jg.Provider, {
+                    return e2().createElement(jS.Provider, {
                         value: g
-                    }, e2().createElement(ju, {
+                    }, e2().createElement(jf, {
                         type: t,
                         sideSheetSide: "right",
                         isSideSheetFlush: v,
                         centerSheetSize: o,
                         contentClassName: w,
-                        onOpenAutoFocus: null != d ? d : jd,
+                        onOpenAutoFocus: null != d ? d : jm,
                         onCloseAutoFocus: p,
                         onPointerDownOutside: y,
                         onEscapeKeyDown: m,
                         onInteractOutside: h
                     }, r))
                 },
-                jP = (0, e1.forwardRef)(function(e, t) {
-                    var r, n = jy(r = [e, t]) || function(e) {
+                jI = (0, e1.forwardRef)(function(e, t) {
+                    var r, n = jb(r = [e, t]) || function(e) {
                             if ("u" > typeof Symbol && null != e[Symbol.iterator] || null != e["@@iterator"]) return Array.from(e)
-                        }(r) || jv(r) || jm(),
+                        }(r) || jO(r) || jv(),
                         o = n[0],
                         i = n.slice(1),
                         a = o.children,
                         l = o.className,
                         u = o.hasPaddingX,
-                        c = jb(o, ["children", "className", "hasPaddingX"]),
-                        s = (jy(i) || function(e) {
+                        c = jw(o, ["children", "className", "hasPaddingX"]),
+                        s = (jb(i) || function(e) {
                             var t, r, n = null == e ? null : "u" > typeof Symbol && e[Symbol.iterator] || e["@@iterator"];
                             if (null != n) {
                                 var o = [],
@@ -33808,21 +33828,21 @@ function() {
                                 }
                                 return o
                             }
-                        }(i) || jv(i, 1) || jm())[0],
-                        f = jw().type;
-                    return e2().createElement("div", jh({
+                        }(i) || jO(i, 1) || jv())[0],
+                        f = jx().type;
+                    return e2().createElement("div", jg({
                         ref: s,
-                        className: oW("scroll-y", (void 0 === u || u) && jO, "sideSheet" === f ? "grow-1" : "", l)
+                        className: oW("scroll-y", (void 0 === u || u) && jP, "sideSheet" === f ? "grow-1" : "", l)
                     }, c), a)
                 });
-            jP.displayName = "SheetBody";
-            var jE = function(e) {
+            jI.displayName = "SheetBody";
+            var jA = function(e) {
                     var t = e.className,
                         r = e.children,
                         n = e.navigation,
                         o = e.utilities,
                         i = e.visuallyHideTitleText,
-                        a = jw().closeLabel,
+                        a = jx().closeLabel,
                         l = e2().createElement(s2, {
                             className: "text-heading-small margin-none"
                         }, r);
@@ -33836,7 +33856,7 @@ function() {
                         className: "fui-sheet-close-affordance-container"
                     }, e2().createElement(s5, {
                         asChild: !0
-                    }, e2().createElement(jt, {
+                    }, e2().createElement(jo, {
                         variant: "Utility",
                         size: "Medium",
                         icon: "icon-regular-x",
@@ -33844,26 +33864,26 @@ function() {
                         "data-autofocus-priority": "1000"
                     })))))
                 },
-                jj = function(e) {
+                jC = function(e) {
                     var t = e.children,
                         r = e.className,
-                        n = jb(e, ["children", "className"]);
-                    return e2().createElement(e2().Fragment, null, e2().createElement(jl, null), e2().createElement("div", jh({
-                        className: oW(jO, "margin-y-small shrink-0", r)
+                        n = jw(e, ["children", "className"]);
+                    return e2().createElement(e2().Fragment, null, e2().createElement(js, null), e2().createElement("div", jg({
+                        className: oW(jP, "margin-y-small shrink-0", r)
                     }, n), t))
                 },
-                jI = function() {
+                jT = function() {
                     var e = (0, e4.useTranslation)().translate,
                         t = e("Label.Learnmore");
-                    return (0, p.jsxs)(jx, {
+                    return (0, p.jsxs)(jj, {
                         centerSheetSize: "Large",
                         closeLabel: e("Action.Close"),
                         largeScreenVariant: "center",
                         mobilePortraitClassName: "![height:97vh] ![max-height:97vh]",
-                        children: [(0, p.jsx)(jE, {
+                        children: [(0, p.jsx)(jA, {
                             visuallyHideTitleText: !0,
                             children: t
-                        }), (0, p.jsx)(jP, {
+                        }), (0, p.jsx)(jI, {
                             hasPaddingX: !1,
                             children: (0, p.jsx)("iframe", {
                                 className: "width-full medium:[height:88vh] [height:95vh]",
@@ -33880,7 +33900,7 @@ function() {
                     })
                 };
 
-            function jA(e, t, r) {
+            function jN(e, t, r) {
                 return t in e ? Object.defineProperty(e, t, {
                     value: r,
                     enumerable: !0,
@@ -33888,73 +33908,73 @@ function() {
                     writable: !0
                 }) : e[t] = r, e
             }
-            jA(o = {}, P9.toLowerCase(), P9), jA(o, "robloxplus", P9), jA(o, P7.toLowerCase(), P7), jA(i = {}, P1, "Weekly"), jA(i, P2, "Monthly"), jA(i, P4, "Yearly"), jA(a = {}, P1, "Label.DurationTitleWeekly"), jA(a, P2, "Label.DurationTitle"), jA(a, P4, "Label.DurationTitleYearly");
-            var jC = (jA(l = {}, P1, {
+            jN(o = {}, Er.toLowerCase(), Er), jN(o, "robloxplus", Er), jN(o, Et.toLowerCase(), Et), jN(i = {}, P3, "Weekly"), jN(i, P5, "Monthly"), jN(i, P6, "Yearly"), jN(a = {}, P3, "Label.DurationTitleWeekly"), jN(a, P5, "Label.DurationTitle"), jN(a, P6, "Label.DurationTitleYearly");
+            var jM = (jN(l = {}, P3, {
                     singular: "Label.SubscriptionPeriodWeek",
                     plural: "Label.SubscriptionPeriodWeeks"
-                }), jA(l, P2, {
+                }), jN(l, P5, {
                     singular: "Label.SubscriptionPeriodMonth",
                     plural: "Label.SubscriptionPeriodMonths"
-                }), jA(l, P4, {
+                }), jN(l, P6, {
                     singular: "Label.SubscriptionPeriodYear",
                     plural: "Label.SubscriptionPeriodYears"
                 }), l),
-                jT = (jA(u = {}, P1, {
+                jk = (jN(u = {}, P3, {
                     singular: "label.week",
                     plural: "label.weeks"
-                }), jA(u, P2, {
+                }), jN(u, P5, {
                     singular: "Label.month",
                     plural: "Label.months"
-                }), jA(u, P4, {
+                }), jN(u, P6, {
                     singular: "label.year",
                     plural: "label.years"
                 }), u);
-            jA(c = {}, P$.toLowerCase(), P$), jA(c, PZ.toLowerCase(), PZ), jA(c, PJ.toLowerCase(), PJ), jA(s = {}, P$, "Stripe"), jA(s, PZ, P5), jA(s, PJ, P5), jA(s, "RobloxCredit", "CreditBalance");
-            var jN = function(e, t) {
+            jN(c = {}, P0.toLowerCase(), P0), jN(c, P1.toLowerCase(), P1), jN(c, P2.toLowerCase(), P2), jN(s = {}, P0, "Stripe"), jN(s, P1, P7), jN(s, P2, P7), jN(s, "RobloxCredit", "CreditBalance");
+            var jR = function(e, t) {
                     return new Date(Date.UTC(e, t + 1, 0)).getUTCDate()
                 },
-                jM = function(e, t) {
+                j_ = function(e, t) {
                     var r = e.getUTCMonth() + t,
                         n = e.getUTCFullYear() + Math.floor(r / 12),
                         o = (r % 12 + 12) % 12,
-                        i = Math.min(e.getUTCDate(), jN(n, o));
+                        i = Math.min(e.getUTCDate(), jR(n, o));
                     return new Date(Date.UTC(n, o, i, e.getUTCHours(), e.getUTCMinutes(), e.getUTCSeconds(), e.getUTCMilliseconds()))
                 },
-                jk = function(e, t) {
+                jD = function(e, t) {
                     var r = e.getUTCFullYear() + t,
                         n = e.getUTCMonth(),
-                        o = Math.min(e.getUTCDate(), jN(r, n));
+                        o = Math.min(e.getUTCDate(), jR(r, n));
                     return new Date(Date.UTC(r, n, o, e.getUTCHours(), e.getUTCMinutes(), e.getUTCSeconds(), e.getUTCMilliseconds()))
                 };
 
-            function jR(e, t) {
-                var r, n = null != (r = jT[e]) ? r : jT.Month;
+            function jL(e, t) {
+                var r, n = null != (r = jk[e]) ? r : jk.Month;
                 return 1 === t ? n.singular : n.plural
             }
 
-            function j_(e, t) {
+            function jU(e, t) {
                 (null == t || t > e.length) && (t = e.length);
                 for (var r = 0, n = Array(t); r < t; r++) n[r] = e[r];
                 return n
             }
 
-            function jD(e) {
+            function jB(e) {
                 if (Array.isArray(e)) return e
             }
 
-            function jL() {
+            function jF() {
                 throw TypeError("Invalid attempt to destructure non-iterable instance.\\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.")
             }
 
-            function jU(e, t) {
+            function jz(e, t) {
                 if (e) {
-                    if ("string" == typeof e) return j_(e, t);
+                    if ("string" == typeof e) return jU(e, t);
                     var r = Object.prototype.toString.call(e).slice(8, -1);
                     if ("Object" === r && e.constructor && (r = e.constructor.name), "Map" === r || "Set" === r) return Array.from(r);
-                    if ("Arguments" === r || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(r)) return j_(e, t)
+                    if ("Arguments" === r || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(r)) return jU(e, t)
                 }
             }
-            var jB = {
+            var jH = {
                     Neutral: "bg-shift-200",
                     Standard: "bg-shift-200",
                     Contrast: "bg-system-contrast",
@@ -33965,7 +33985,7 @@ function() {
                     OverMediaLight: "bg-[var(--light-mode-over-media-0)]",
                     OverMedia: "bg-over-media-0"
                 },
-                jF = {
+                jG = {
                     Neutral: "content-emphasis",
                     Standard: "content-emphasis",
                     Contrast: "content-inverse-emphasis",
@@ -33976,7 +33996,7 @@ function() {
                     OverMediaLight: "content-[var(--light-mode-content-emphasis)]",
                     OverMedia: "content-emphasis"
                 },
-                jz = {
+                jV = {
                     Neutral: "content-emphasis",
                     Standard: "content-emphasis",
                     Contrast: "content-inverse-emphasis",
@@ -33987,7 +34007,7 @@ function() {
                     OverMediaLight: "content-[var(--light-mode-content-emphasis)]",
                     OverMedia: "content-emphasis"
                 },
-                jH = {
+                jW = {
                     Neutral: "stroke-none",
                     Standard: "stroke-none",
                     Contrast: "stroke-none",
@@ -33998,38 +34018,38 @@ function() {
                     OverMediaLight: "stroke-none",
                     OverMedia: "stroke-none"
                 },
-                jG = {
+                jK = {
                     Small: "height-600",
                     XSmall: "height-400"
                 },
-                jV = {
+                jY = {
                     Small: "padding-x-small",
                     XSmall: "padding-x-xsmall"
                 },
-                jW = {
+                jX = {
                     Small: "width-600",
                     XSmall: "width-400"
                 },
-                jK = {
+                jq = {
                     Small: "text-label-small",
                     XSmall: "text-caption-small"
                 },
-                jY = {
+                jQ = {
                     Small: "padding-y-xsmall",
                     XSmall: "padding-y-none"
                 },
-                jX = {
+                j$ = {
                     Small: "XSmall",
                     XSmall: "XSmall"
                 },
-                jq = {
+                jZ = {
                     Pill: "radius-circle",
                     Box: "radius-small"
                 },
-                jQ = e2().forwardRef(function(e, t) {
-                    var r, n, o, i = jD(r = [e, t]) || function(e) {
+                jJ = e2().forwardRef(function(e, t) {
+                    var r, n, o, i = jB(r = [e, t]) || function(e) {
                             if ("u" > typeof Symbol && null != e[Symbol.iterator] || null != e["@@iterator"]) return Array.from(e)
-                        }(r) || jU(r) || jL(),
+                        }(r) || jz(r) || jF(),
                         a = i[0],
                         l = i.slice(1),
                         u = a.className,
@@ -34059,7 +34079,7 @@ function() {
                                 for (o = 0, r = Object.getOwnPropertySymbols(e); o < r.length; o++) n = r[o], !(t.indexOf(n) >= 0) && Object.prototype.propertyIsEnumerable.call(e, n) && (i[n] = e[n]);
                             return i
                         }(a, ["className", "label", "variant", "icon", "iconPosition", "size", "shape"]),
-                        g = (jD(l) || function(e) {
+                        g = (jB(l) || function(e) {
                             var t, r, n = null == e ? null : "u" > typeof Symbol && e[Symbol.iterator] || e["@@iterator"];
                             if (null != n) {
                                 var o = [],
@@ -34078,14 +34098,14 @@ function() {
                                 }
                                 return o
                             }
-                        }(l) || jU(l, 1) || jL())[0],
+                        }(l) || jz(l, 1) || jF())[0],
                         w = d && !c,
                         O = "padding-x-xxsmall";
                     d && (O = "Leading" === y ? "padding-right-xxsmall" : "padding-left-xxsmall");
-                    var S = d && e2().createElement(Ed, {
+                    var S = d && e2().createElement(Em, {
                         name: d,
-                        size: jX[h],
-                        className: jz[f]
+                        size: j$[h],
+                        className: jV[f]
                     });
                     return e2().createElement("div", (n = function(e) {
                         for (var t = 1; t < arguments.length; t++) {
@@ -34107,7 +34127,7 @@ function() {
                     }({
                         ref: g
                     }, v), o = o = {
-                        className: oW("foundation-web-badge flex items-center select-none gap-[var(--size-150)]", jq[void 0 === b ? "Pill" : b], jG[h], w ? [jW[h], "justify-center"] : ["width-[fit-content]", jV[h]], jB[f], jF[f], jH[f], u)
+                        className: oW("foundation-web-badge flex items-center select-none gap-[var(--size-150)]", jZ[void 0 === b ? "Pill" : b], jK[h], w ? [jX[h], "justify-center"] : ["width-[fit-content]", jY[h]], jH[f], jG[f], jW[f], u)
                     }, Object.getOwnPropertyDescriptors ? Object.defineProperties(n, Object.getOwnPropertyDescriptors(o)) : (function(e) {
                         var t = Object.keys(e);
                         if (Object.getOwnPropertySymbols) {
@@ -34118,51 +34138,51 @@ function() {
                     })(Object(o)).forEach(function(e) {
                         Object.defineProperty(n, e, Object.getOwnPropertyDescriptor(o, e))
                     }), n), "Leading" === y && S, c && e2().createElement("span", {
-                        className: oW("text-no-wrap text-truncate-split", jK[h], jY[h], O, jF[f])
+                        className: oW("text-no-wrap text-truncate-split", jq[h], jQ[h], O, jG[f])
                     }, c), "Trailing" === y && S)
                 });
-            jQ.displayName = "Badge";
-            var j$ = {
+            jJ.displayName = "Badge";
+            var j0 = {
                     XSmall: "size-400",
                     Small: "size-500",
                     Medium: "size-600"
                 },
-                jZ = {
+                j1 = {
                     XSmall: "size-150",
                     Small: "size-200",
                     Medium: "size-250"
                 },
-                jJ = {
+                j2 = {
                     XSmall: "size-1200",
                     Small: "size-1400",
                     Medium: "size-1600"
                 },
-                j0 = {
+                j4 = {
                     XSmall: "text-title-small",
                     Small: "text-title-small",
                     Medium: "text-title-medium"
                 },
-                j1 = {
+                j3 = {
                     XSmall: void 0,
                     Small: "padding-top-xxsmall",
                     Medium: "padding-y-xxsmall"
                 },
-                j2 = {
+                j5 = {
                     XSmall: "text-body-small",
                     Small: "text-body-small",
                     Medium: "text-body-medium"
                 },
-                j4 = {
+                j6 = {
                     XSmall: "padding-medium",
                     Small: "padding-large",
                     Medium: "padding-xlarge"
                 },
-                j3 = {
+                j8 = {
                     XSmall: "Small",
                     Small: "Medium",
                     Medium: "Large"
                 },
-                j5 = (0, e1.forwardRef)(function(e, t) {
+                j7 = (0, e1.forwardRef)(function(e, t) {
                     var r = e.layout,
                         n = e.size,
                         o = e.type,
@@ -34178,7 +34198,7 @@ function() {
                         y = void 0 !== p && p,
                         m = (0, e1.useMemo)(function() {
                             return a && e2().createElement("div", {
-                                className: oW(j0[n], j1[n], "content-emphasis text-align-x-start", "clip [display:-webkit-box] [-webkit-line-clamp:3] [-webkit-box-orient:vertical]")
+                                className: oW(j4[n], j3[n], "content-emphasis text-align-x-start", "clip [display:-webkit-box] [-webkit-line-clamp:3] [-webkit-box-orient:vertical]")
                             }, a)
                         }, [a, n]),
                         h = (0, e1.useMemo)(function() {
@@ -34188,33 +34208,33 @@ function() {
                         }, [s]),
                         b = (0, e1.useMemo)(function() {
                             return l && e2().createElement("div", {
-                                className: oW(j2[n], "content-default text-align-x-start")
+                                className: oW(j5[n], "content-default text-align-x-start")
                             }, l)
                         }, [l, n]),
                         v = (0, e1.useMemo)(function() {
-                            return c && e2().createElement(Ed, {
+                            return c && e2().createElement(Em, {
                                 name: c,
-                                size: j3[n]
+                                size: j8[n]
                             })
                         }, [c, n]),
                         g = (0, e1.useMemo)(function() {
                             switch (o) {
                                 case "Checkmark":
-                                    return f && e2().createElement(Ed, {
+                                    return f && e2().createElement(Em, {
                                         name: "icon-filled-check",
-                                        size: j3[n]
+                                        size: j8[n]
                                     });
                                 case "Checkbox":
                                     return e2().createElement("div", {
-                                        className: oW(j$[n], "flex items-center justify-center radius-small padding-none content-default", f ? "stroke-none" : "stroke-standard stroke-emphasis", f ? "bg-system-contrast" : "bg-none")
+                                        className: oW(j0[n], "flex items-center justify-center radius-small padding-none content-default", f ? "stroke-none" : "stroke-standard stroke-emphasis", f ? "bg-system-contrast" : "bg-none")
                                     }, f && e2().createElement("div", {
-                                        className: oW(j$[n], "content-inverse-emphasis icon icon-filled-check")
+                                        className: oW(j0[n], "content-inverse-emphasis icon icon-filled-check")
                                     }));
                                 case "Radio":
                                     return e2().createElement("div", {
-                                        className: oW(j$[n], "radius-circle flex items-center justify-center stroke-emphasis stroke-standard", f ? "bg-system-contrast" : "bg-none")
+                                        className: oW(j0[n], "radius-circle flex items-center justify-center stroke-emphasis stroke-standard", f ? "bg-system-contrast" : "bg-none")
                                     }, f && e2().createElement("div", {
-                                        className: oW("radius-circle bg-inverse-action-sub-emphasis", jZ[n])
+                                        className: oW("radius-circle bg-inverse-action-sub-emphasis", j1[n])
                                     }));
                                 default:
                                     return console.error("Invalid OptionSelector type ".concat(o)), null
@@ -34222,12 +34242,12 @@ function() {
                         }, [o, n, f]),
                         w = (0, e1.useMemo)(function() {
                             return u && e2().createElement("div", {
-                                className: oW(jJ[n], "flex items-center justify-center clip shrink-0")
+                                className: oW(j2[n], "flex items-center justify-center clip shrink-0")
                             }, u)
                         }, [u, n]),
                         O = (0, e1.useMemo)(function() {
                             var e = !y && e2().createElement("div", {
-                                className: j$[n]
+                                className: j0[n]
                             }, g);
                             switch (r) {
                                 case "Horizontal":
@@ -34258,16 +34278,16 @@ function() {
                         }, [r, w, v, m, b, g, n, h, y]);
                     return e2().createElement("button", {
                         type: "button",
-                        className: oW("bg-none width-full radius-medium stroke-standard", Ep, f ? "stroke-system-contrast" : "stroke-emphasis", j4[n], i ? Em : "cursor-pointer"),
+                        className: oW("bg-none width-full radius-medium stroke-standard", Eh, f ? "stroke-system-contrast" : "stroke-emphasis", j6[n], i ? Ev : "cursor-pointer"),
                         disabled: i,
                         ref: t,
                         onClick: function() {
                             return d()
                         }
-                    }, e2().createElement(Ey, null), O)
+                    }, e2().createElement(Eb, null), O)
                 });
 
-            function j6(e) {
+            function j9(e) {
                 var t = e.price,
                     r = e.strikethroughPrice;
                 if (r && r.currencyCode === t.currencyCode && !(r.amount <= t.amount)) {
@@ -34275,8 +34295,8 @@ function() {
                     return n > 0 ? n : void 0
                 }
             }
-            j5.displayName = "OptionSelector";
-            var j8 = function(e, t) {
+            j7.displayName = "OptionSelector";
+            var Ie = function(e, t) {
                     switch (e) {
                         case 1:
                             return t("Label.BillingPeriodMonthly");
@@ -34288,12 +34308,12 @@ function() {
                             return t("Label.BillingPeriodYearly");
                         default:
                             var r, n;
-                            return t((n = null != (r = jC[P2]) ? r : jC.Month, 1 === e ? n.singular : n.plural), {
+                            return t((n = null != (r = jM[P5]) ? r : jM.Month, 1 === e ? n.singular : n.plural), {
                                 periodCount: e
                             })
                     }
                 },
-                j7 = function(e) {
+                It = function(e) {
                     var t, r = e.option,
                         n = e.isSelected,
                         o = e.isBestValue,
@@ -34308,14 +34328,14 @@ function() {
                                 currency: r
                             })
                         },
-                        c = j6(r),
+                        c = j9(r),
                         s = u({
                             amount: r.price.amount / r.months,
                             currencyCode: r.price.currencyCode
                         });
                     r.months > 1 && (t = void 0 === c ? a("Action.PricePerMonth", {
                         price: s,
-                        periodType: P2
+                        periodType: P5
                     }) : a("Label.BillingPeriodSavings", {
                         pricePerMonth: s,
                         savingsPercent: l.number(c / 100, {
@@ -34330,8 +34350,8 @@ function() {
                                 className: "gap-xsmall flex flex-row items-center",
                                 children: [(0, p.jsx)("span", {
                                     className: "text-title-medium content-emphasis",
-                                    children: j8(r.months, a)
-                                }), o && (0, p.jsx)(jQ, {
+                                    children: Ie(r.months, a)
+                                }), o && (0, p.jsx)(jJ, {
                                     label: a("Label.BestValue"),
                                     size: "XSmall",
                                     variant: "Neutral"
@@ -34353,7 +34373,7 @@ function() {
                     });
                     return (0, p.jsx)("div", {
                         "data-testid": "billing-period-option-".concat(r.productId),
-                        children: (0, p.jsx)(j5, {
+                        children: (0, p.jsx)(j7, {
                             hideSelectedIndicator: !0,
                             isSelected: n,
                             label: void 0,
@@ -34366,21 +34386,21 @@ function() {
                     })
                 };
 
-            function j9(e, t) {
+            function Ir(e, t) {
                 (null == t || t > e.length) && (t = e.length);
                 for (var r = 0, n = Array(t); r < t; r++) n[r] = e[r];
                 return n
             }
-            var Ie = [],
-                It = !1,
-                Ir = !1;
+            var In = [],
+                Io = !1,
+                Ii = !1;
 
-            function In() {
+            function Ia() {
                 var e = !0,
                     t = !1,
                     r = void 0;
                 try {
-                    for (var n, o = Ie[Symbol.iterator](); !(e = (n = o.next()).done); e = !0)(0, n.value)()
+                    for (var n, o = In[Symbol.iterator](); !(e = (n = o.next()).done); e = !0)(0, n.value)()
                 } catch (e) {
                     t = !0, r = e
                 } finally {
@@ -34391,7 +34411,7 @@ function() {
                     }
                 }
             }
-            var Io = {
+            var Il = {
                     featureName: "SubscriptionsCommon",
                     team: "Economy > Payments & Fraud > Subscriptions",
                     features: {
@@ -34415,8 +34435,8 @@ function() {
                         }
                     }
                 },
-                Ii = tY(Io.featureName),
-                Ia = function(e, t) {
+                Iu = tY(Il.featureName),
+                Ic = function(e, t) {
                     var r, n, o = null != (r = t.flushIntervalMs) ? r : 5e3;
 
                     function i(e, r) {
@@ -34465,10 +34485,10 @@ function() {
                                                             }
                                                         }(u) || function(e) {
                                                             if (e) {
-                                                                if ("string" == typeof e) return j9(e, 2);
+                                                                if ("string" == typeof e) return Ir(e, 2);
                                                                 var t = Object.prototype.toString.call(e).slice(8, -1);
                                                                 if ("Object" === t && e.constructor && (t = e.constructor.name), "Map" === t || "Set" === t) return Array.from(t);
-                                                                if ("Arguments" === t || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(t)) return j9(e, 2)
+                                                                if ("Arguments" === t || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(t)) return Ir(e, 2)
                                                             }
                                                         }(u) || function() {
                                                             throw TypeError("Invalid attempt to destructure non-iterable instance.\\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.")
@@ -34505,14 +34525,14 @@ function() {
                                 }),
                                 n = BigInt(1),
                                 o = "u" > typeof crypto && "function" == typeof crypto.randomUUID ? crypto.randomUUID() : "web-telemetry-".concat(Date.now(), "-").concat(Math.random().toString(16).slice(2));
-                            Ir || "u" > typeof document && "hidden" === document.visibilityState ? e8("/v1/events/optimized", tB([tL([], r.map(t_), t, n, o)]).buffer) : e7("/v1/events/optimized", tB([tL([], r.map(t_), t, n, o)]))
+                            Ii || "u" > typeof document && "hidden" === document.visibilityState ? e8("/v1/events/optimized", tB([tL([], r.map(t_), t, n, o)]).buffer) : e7("/v1/events/optimized", tB([tL([], r.map(t_), t, n, o)]))
                         }
                     }
-                    return Ie.push(l), It || ("u" > typeof document && document.addEventListener("visibilitychange", function() {
-                            "hidden" === document.visibilityState && In()
+                    return In.push(l), Io || ("u" > typeof document && document.addEventListener("visibilitychange", function() {
+                            "hidden" === document.visibilityState && Ia()
                         }), "u" > typeof window && window.addEventListener("beforeunload", function() {
-                            Ir = !0, In()
-                        }), It = !0),
+                            Ii = !0, Ia()
+                        }), Io = !0),
                         function(t, r, u) {
                             var c, s = "".concat(e, "_").concat(t);
                             if (! function(e, t) {
@@ -34575,12 +34595,12 @@ function() {
                                     }, o))
                                 }()
                         }
-                }(Io.featureName, {}),
-                Il = rE(Io, {
-                    publish: Ii
+                }(Il.featureName, {}),
+                Is = rE(Il, {
+                    publish: Iu
                 }).trackCounter;
 
-            function Iu(e) {
+            function If(e) {
                 for (var t = 1; t < arguments.length; t++) {
                     var r = null != arguments[t] ? arguments[t] : {},
                         n = Object.keys(r);
@@ -34599,7 +34619,7 @@ function() {
                 return e
             }
 
-            function Ic(e, t) {
+            function Id(e, t) {
                 return t = null != t ? t : {}, Object.getOwnPropertyDescriptors ? Object.defineProperties(e, Object.getOwnPropertyDescriptors(t)) : (function(e) {
                     var t = Object.keys(e);
                     if (Object.getOwnPropertySymbols) {
@@ -34611,9 +34631,9 @@ function() {
                     Object.defineProperty(e, r, Object.getOwnPropertyDescriptor(t, r))
                 }), e
             }
-            var Is = rG.ENUM_PURCHASE_EVENT_TYPE,
-                If = rG.ENUM_VIEW_MESSAGE,
-                Id = function(e, t, r, n) {
+            var Ip = rG.ENUM_PURCHASE_EVENT_TYPE,
+                Iy = rG.ENUM_VIEW_MESSAGE,
+                Im = function(e, t, r, n) {
                     var o = e.analyticsContext,
                         i = e.paymentSessionId;
                     rG.sendUserPurchaseFlowEvent({
@@ -34622,72 +34642,72 @@ function() {
                         viewName: o.viewName,
                         purchaseEventType: t,
                         viewMessage: r,
-                        eventMetadata: i ? Ic(Iu({}, n), {
+                        eventMetadata: i ? Id(If({}, n), {
                             paymentSessionId: i
                         }) : n
                     })
                 },
-                Ip = function(e) {
+                Ih = function(e) {
                     return {
                         productId: e.productId,
                         months: String(e.months)
                     }
                 },
-                Iy = function(e, t) {
+                Ib = function(e, t) {
                     var r = t.map(function(e) {
                         return e.months
                     }).sort(function(e, t) {
                         return e - t
                     }).join(",");
-                    Id(e, Is.VIEW_SHOWN, If.ROBLOX_PLUS_BILLING_PERIOD_SHEET_OPENED, {
+                    Im(e, Ip.VIEW_SHOWN, Iy.ROBLOX_PLUS_BILLING_PERIOD_SHEET_OPENED, {
                         termMonths: r
-                    }), Il("BillingPeriodSheetShown", {
+                    }), Is("BillingPeriodSheetShown", {
                         viewName: e.analyticsContext.viewName,
                         termMonths: r
                     })
                 },
-                Im = function(e, t) {
-                    Id(e, Is.USER_INPUT, If.ROBLOX_PLUS_BILLING_PERIOD_SELECTED, Ip(t)), Il("BillingPeriodOptionSelected", {
+                Iv = function(e, t) {
+                    Im(e, Ip.USER_INPUT, Iy.ROBLOX_PLUS_BILLING_PERIOD_SELECTED, Ih(t)), Is("BillingPeriodOptionSelected", {
                         viewName: e.analyticsContext.viewName,
                         months: String(t.months)
                     })
                 },
-                Ih = function(e, t) {
+                Ig = function(e, t) {
                     var r = void 0 !== t.freeTrialEndDate;
-                    Id(e, Is.USER_INPUT, r ? If.ROBLOX_PLUS_FREE_TRIAL : If.ROBLOX_PLUS_SUBSCRIBE, Ic(Iu({}, Ip(t)), {
+                    Im(e, Ip.USER_INPUT, r ? Iy.ROBLOX_PLUS_FREE_TRIAL : Iy.ROBLOX_PLUS_SUBSCRIBE, Id(If({}, Ih(t)), {
                         isFreeTrial: String(r)
-                    })), Il("BillingPeriodSubscribeClick", {
+                    })), Is("BillingPeriodSubscribeClick", {
                         viewName: e.analyticsContext.viewName,
                         months: String(t.months),
                         isFreeTrial: String(r)
                     })
                 },
-                Ib = function(e, t) {
-                    Id(e, Is.USER_INPUT, If.ROBLOX_PLUS_BILLING_PERIOD_SHEET_DISMISSED, Ip(t)), Il("BillingPeriodSheetDismissed", {
+                Iw = function(e, t) {
+                    Im(e, Ip.USER_INPUT, Iy.ROBLOX_PLUS_BILLING_PERIOD_SHEET_DISMISSED, Ih(t)), Is("BillingPeriodSheetDismissed", {
                         viewName: e.analyticsContext.viewName,
                         months: String(t.months)
                     })
                 };
 
-            function Iv(e, t) {
+            function IO(e, t) {
                 (null == t || t > e.length) && (t = e.length);
                 for (var r = 0, n = Array(t); r < t; r++) n[r] = e[r];
                 return n
             }
-            var Ig = [{
+            var IS = [{
                     opening: "linkStart",
                     closing: "linkEnd",
                     render: function(e) {
                         return (0, p.jsx)("a", {
                             className: "underline",
-                            href: EC,
+                            href: EM,
                             rel: "noopener noreferrer",
                             target: "_blank",
                             children: e
                         })
                     }
                 }],
-                Iw = function(e) {
+                Ix = function(e) {
                     var t, r, n = e.isOpen,
                         o = e.onOpenChange,
                         i = e.options,
@@ -34723,10 +34743,10 @@ function() {
                             }
                         }(t) || function(e) {
                             if (e) {
-                                if ("string" == typeof e) return Iv(e, 2);
+                                if ("string" == typeof e) return IO(e, 2);
                                 var t = Object.prototype.toString.call(e).slice(8, -1);
                                 if ("Object" === t && e.constructor && (t = e.constructor.name), "Map" === t || "Set" === t) return Array.from(t);
-                                if ("Arguments" === t || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(t)) return Iv(e, 2)
+                                if ("Arguments" === t || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(t)) return IO(e, 2)
                             }
                         }(t) || function() {
                             throw TypeError("Invalid attempt to destructure non-iterable instance.\\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.")
@@ -34737,7 +34757,7 @@ function() {
                         w = (0, e1.useMemo)(function() {
                             var e;
                             return i.forEach(function(t) {
-                                var r = j6(t);
+                                var r = j9(t);
                                 void 0 !== r && (!e || r > e.savings || r === e.savings && t.months > e.months) && (e = {
                                     productId: t.productId,
                                     savings: r,
@@ -34749,7 +34769,7 @@ function() {
                         if (!n) {
                             g.current = !1;
                             return
-                        }!g.current && 0 !== i.length && u && (g.current = !0, Iy({
+                        }!g.current && 0 !== i.length && u && (g.current = !0, Ib({
                             analyticsContext: a,
                             paymentSessionId: u
                         }, i))
@@ -34770,19 +34790,19 @@ function() {
                             if (!r) return null;
                             var n = r.duration,
                                 o = r.periodType;
-                            return o !== P1 && o !== P2 && o !== P4 || !Number.isFinite(n) || n <= 0 ? null : {
+                            return o !== P3 && o !== P5 && o !== P6 || !Number.isFinite(n) || n <= 0 ? null : {
                                 trialDuration: n,
                                 trialPeriodType: o,
-                                trialPeriodKey: jR(o, n),
-                                billingPeriodKey: jR(t, 1)
+                                trialPeriodKey: jL(o, n),
+                                billingPeriodKey: jL(t, 1)
                             }
                         }({
                             freeTrialOffer: {
                                 duration: P,
                                 periodType: E
                             }
-                        }, P2) : null,
-                        I = void 0 === x ? wC(m, "Description.SubscriptionLegalBillingCycle", Ig) : j ? wC(m, "Description.SubscriptionFreeTrialLegalV2", Ig, {
+                        }, P5) : null,
+                        I = void 0 === x ? wC(m, "Description.SubscriptionLegalBillingCycle", IS) : j ? wC(m, "Description.SubscriptionFreeTrialLegalV2", IS, {
                             date: x.toLocaleDateString(void 0, {
                                 year: "numeric",
                                 month: "long",
@@ -34791,25 +34811,25 @@ function() {
                             trialDuration: String(j.trialDuration),
                             trialPeriodLabel: m(j.trialPeriodKey),
                             billingPeriodLabel: m(j.billingPeriodKey)
-                        }) : wC(m, "Description.SubscriptionFreeTrialLegal", Ig, {
+                        }) : wC(m, "Description.SubscriptionFreeTrialLegal", IS, {
                             date: x.toLocaleDateString(void 0, {
                                 year: "numeric",
                                 month: "long",
                                 day: "numeric"
                             })
                         });
-                    return (0, p.jsx)(jS, {
+                    return (0, p.jsx)(jE, {
                         open: n,
                         onOpenChange: function(e) {
-                            e || Ib(S, O), o(e)
+                            e || Iw(S, O), o(e)
                         },
-                        children: (0, p.jsxs)(jx, {
+                        children: (0, p.jsxs)(jj, {
                             centerSheetSize: "Medium",
                             closeLabel: m("Action.Close"),
                             largeScreenVariant: "center",
-                            children: [(0, p.jsx)(jE, {
+                            children: [(0, p.jsx)(jA, {
                                 children: m("Heading.ChooseBillingPeriod")
-                            }), (0, p.jsxs)(jP, {
+                            }), (0, p.jsxs)(jI, {
                                 className: "gap-y-xxlarge padding-bottom-medium flex flex-col",
                                 "data-testid": "billing-period-sheet-body",
                                 children: [(0, p.jsx)("p", {
@@ -34818,20 +34838,20 @@ function() {
                                 }), (0, p.jsx)("div", {
                                     className: "gap-y-medium flex flex-col",
                                     children: i.map(function(e) {
-                                        return (0, p.jsx)(j7, {
+                                        return (0, p.jsx)(It, {
                                             isBestValue: e.productId === w,
                                             isSelected: e.productId === O.productId,
                                             option: e,
                                             onSelect: function() {
-                                                e.productId !== O.productId && Im(S, e), v(e.productId), null == f || f(e)
+                                                e.productId !== O.productId && Iv(S, e), v(e.productId), null == f || f(e)
                                             }
                                         }, e.productId)
                                     })
                                 })]
-                            }), (0, p.jsx)(jj, {
+                            }), (0, p.jsx)(jC, {
                                 children: (0, p.jsxs)("div", {
                                     className: "gap-y-medium flex flex-col",
-                                    children: [(0, p.jsx)(EK, {
+                                    children: [(0, p.jsx)(Eq, {
                                         className: "width-full",
                                         deviceMeta: l,
                                         isDisabled: void 0 !== s && s,
@@ -34841,7 +34861,7 @@ function() {
                                         referrerId: c,
                                         size: "Medium",
                                         trackSubscriptionButtonClick: function() {
-                                            Ih(S, O), null == d || d(O)
+                                            Ig(S, O), null == d || d(O)
                                         },
                                         onMobilePurchaseInitiated: y,
                                         children: m(void 0 === x ? "Action.Subscribe" : "Action.TryItForFree")
@@ -34855,7 +34875,7 @@ function() {
                         })
                     })
                 },
-                IO = function(e) {
+                IP = function(e) {
                     var t = e.type,
                         r = e.sideSheetSide,
                         n = e.isSideSheetFlush,
@@ -34886,16 +34906,16 @@ function() {
                     }, i)))
                 };
 
-            function IS(e, t) {
+            function IE(e, t) {
                 return null != t && "u" > typeof Symbol && t[Symbol.hasInstance] ? !!t[Symbol.hasInstance](e) : e instanceof t
             }
-            var Ix = function(e) {
+            var Ij = function(e) {
                     return ("function" != typeof e.checkVisibility || e.checkVisibility()) && !("disabled" in e && e.disabled || "true" === e.getAttribute("aria-disabled"))
                 },
-                IP = function(e) {
-                    IS(e, HTMLInputElement) && "function" == typeof e.select && e.select()
+                II = function(e) {
+                    IE(e, HTMLInputElement) && "function" == typeof e.select && e.select()
                 },
-                IE = function(e) {
+                IA = function(e) {
                     var t = e.currentTarget;
                     if (t) {
                         var r = t.querySelectorAll("[data-autofocus-priority]");
@@ -34903,7 +34923,7 @@ function() {
                             var n = [];
                             r.forEach(function(e) {
                                 var t = parseInt(e.getAttribute("data-autofocus-priority") || "", 10);
-                                !Number.isNaN(t) && IS(e, HTMLElement) && n.push({
+                                !Number.isNaN(t) && IE(e, HTMLElement) && n.push({
                                     element: e,
                                     priority: t
                                 })
@@ -34911,46 +34931,46 @@ function() {
                                 return e.priority - t.priority
                             });
                             var o = n.find(function(e) {
-                                return Ix(e.element)
+                                return Ij(e.element)
                             });
                             if (o) {
                                 e.preventDefault();
                                 var i = document.activeElement === o.element;
-                                o.element.focus(), i || IP(o.element)
+                                o.element.focus(), i || II(o.element)
                             }
                         }
                     }
                 };
 
-            function Ij(e, t) {
+            function IC(e, t) {
                 (null == t || t > e.length) && (t = e.length);
                 for (var r = 0, n = Array(t); r < t; r++) n[r] = e[r];
                 return n
             }
 
-            function II(e) {
+            function IT(e) {
                 if (Array.isArray(e)) return e
             }
 
-            function IA() {
+            function IN() {
                 throw TypeError("Invalid attempt to destructure non-iterable instance.\\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.")
             }
 
-            function IC(e, t) {
+            function IM(e, t) {
                 if (e) {
-                    if ("string" == typeof e) return Ij(e, t);
+                    if ("string" == typeof e) return IC(e, t);
                     var r = Object.prototype.toString.call(e).slice(8, -1);
                     if ("Object" === r && e.constructor && (r = e.constructor.name), "Map" === r || "Set" === r) return Array.from(r);
-                    if ("Arguments" === r || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(r)) return Ij(e, t)
+                    if ("Arguments" === r || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(r)) return IC(e, t)
                 }
             }
-            var IT = (0, e1.createContext)(null),
-                IN = function() {
-                    var e = (0, e1.useContext)(IT);
+            var Ik = (0, e1.createContext)(null),
+                IR = function() {
+                    var e = (0, e1.useContext)(Ik);
                     if (!e) throw Error("Sheet components must be used within a Sheet");
                     return e
                 },
-                IM = function(e) {
+                I_ = function(e) {
                     var t = e.open,
                         r = e.onOpenChange,
                         n = e.defaultOpen,
@@ -34962,7 +34982,7 @@ function() {
                         modal: !0
                     }, o)
                 },
-                Ik = function(e) {
+                ID = function(e) {
                     var t, r = e.children,
                         n = e.centerSheetSize,
                         o = void 0 === n ? "Medium" : n,
@@ -34992,25 +35012,25 @@ function() {
                             }
                         }, [o, a, l, b, v, t]),
                         w = oW(u, b && c, v && s, !b && !v && f);
-                    return e2().createElement(IT.Provider, {
+                    return e2().createElement(Ik.Provider, {
                         value: g
-                    }, e2().createElement(IO, {
+                    }, e2().createElement(IP, {
                         type: t,
                         sideSheetSide: "right",
                         isSideSheetFlush: v,
                         centerSheetSize: o,
                         contentClassName: w,
-                        onOpenAutoFocus: null != d ? d : IE,
+                        onOpenAutoFocus: null != d ? d : IA,
                         onCloseAutoFocus: p,
                         onPointerDownOutside: y,
                         onEscapeKeyDown: m,
                         onInteractOutside: h
                     }, r))
                 },
-                IR = (0, e1.forwardRef)(function(e, t) {
-                    var r, n = II(r = [e, t]) || function(e) {
+                IL = (0, e1.forwardRef)(function(e, t) {
+                    var r, n = IT(r = [e, t]) || function(e) {
                             if ("u" > typeof Symbol && null != e[Symbol.iterator] || null != e["@@iterator"]) return Array.from(e)
-                        }(r) || IC(r) || IA(),
+                        }(r) || IM(r) || IN(),
                         o = n[0],
                         i = n.slice(1),
                         a = o.children,
@@ -35033,7 +35053,7 @@ function() {
                                 for (o = 0, r = Object.getOwnPropertySymbols(e); o < r.length; o++) n = r[o], !(t.indexOf(n) >= 0) && Object.prototype.propertyIsEnumerable.call(e, n) && (i[n] = e[n]);
                             return i
                         }(o, ["children", "className", "hasPaddingX"]),
-                        s = (II(i) || function(e) {
+                        s = (IT(i) || function(e) {
                             var t, r, n = null == e ? null : "u" > typeof Symbol && e[Symbol.iterator] || e["@@iterator"];
                             if (null != n) {
                                 var o = [],
@@ -35052,8 +35072,8 @@ function() {
                                 }
                                 return o
                             }
-                        }(i) || IC(i, 1) || IA())[0],
-                        f = IN().type;
+                        }(i) || IM(i, 1) || IN())[0],
+                        f = IR().type;
                     return e2().createElement("div", function(e) {
                         for (var t = 1; t < arguments.length; t++) {
                             var r = null != arguments[t] ? arguments[t] : {},
@@ -35076,14 +35096,14 @@ function() {
                         className: oW("scroll-y", (void 0 === u || u) && "padding-x-xlarge", "sideSheet" === f ? "grow-1" : "", l)
                     }, c), a)
                 });
-            IR.displayName = "SheetBody";
-            var I_ = function(e) {
+            IL.displayName = "SheetBody";
+            var IU = function(e) {
                 var t = e.className,
                     r = e.children,
                     n = e.navigation,
                     o = e.utilities,
                     i = e.visuallyHideTitleText,
-                    a = IN().closeLabel,
+                    a = IR().closeLabel,
                     l = e2().createElement(s2, {
                         className: "text-heading-small margin-none"
                     }, r);
@@ -35106,7 +35126,7 @@ function() {
                 })))))
             };
 
-            function ID(e, t, r, n, o, i, a) {
+            function IB(e, t, r, n, o, i, a) {
                 try {
                     var l = e[i](a),
                         u = l.value
@@ -35117,7 +35137,7 @@ function() {
                 l.done ? t(u) : Promise.resolve(u).then(n, o)
             }
 
-            function IL(e) {
+            function IF(e) {
                 return function() {
                     var t = this,
                         r = arguments;
@@ -35125,18 +35145,18 @@ function() {
                         var i = e.apply(t, r);
 
                         function a(e) {
-                            ID(i, n, o, a, l, "next", e)
+                            IB(i, n, o, a, l, "next", e)
                         }
 
                         function l(e) {
-                            ID(i, n, o, a, l, "throw", e)
+                            IB(i, n, o, a, l, "throw", e)
                         }
                         a(void 0)
                     })
                 }
             }
 
-            function IU(e, t, r) {
+            function Iz(e, t, r) {
                 return t in e ? Object.defineProperty(e, t, {
                     value: r,
                     enumerable: !0,
@@ -35145,7 +35165,7 @@ function() {
                 }) : e[t] = r, e
             }
 
-            function IB(e, t) {
+            function IH(e, t) {
                 var r, n, o, i = {
                         label: 0,
                         sent: function() {
@@ -35225,13 +35245,13 @@ function() {
                     }
                 }
             }
-            var IF = "Payments.BuyRobux.PlusBillingPeriodSelection",
-                Iz = new(function() {
+            var IG = "Payments.BuyRobux.PlusBillingPeriodSelection",
+                IV = new(function() {
                     var e;
 
                     function t() {
                         if (!(this instanceof t)) throw TypeError("Cannot call a class as a function");
-                        IU(this, "isEnrolled", !1), IU(this, "isResolved", !1), IU(this, "hasLoggedExposure", !1), IU(this, "assignment", void 0)
+                        Iz(this, "isEnrolled", !1), Iz(this, "isResolved", !1), Iz(this, "hasLoggedExposure", !1), Iz(this, "assignment", void 0)
                     }
                     return e = [{
                             key: "isTreatment",
@@ -35244,17 +35264,17 @@ function() {
                         }, {
                             key: "fetchIsTreatment",
                             value: function() {
-                                return IL(function() {
+                                return IF(function() {
                                     var e, t;
-                                    return IB(this, function(r) {
+                                    return IH(this, function(r) {
                                         switch (r.label) {
                                             case 0:
                                                 if (!(null == (e = az()) ? void 0 : e.id)) return [2, !1];
                                                 r.label = 1;
                                             case 1:
-                                                return r.trys.push([1, 4, , 5]), [4, Og()];
+                                                return r.trys.push([1, 4, , 5]), [4, OS()];
                                             case 2:
-                                                return [4, r.sent().getAllValuesForLayer(IF)];
+                                                return [4, r.sent().getAllValuesForLayer(IG)];
                                             case 3:
                                                 if (0 !== (t = r.sent().plusBillingPeriodSelectionVariant) && 1 !== t) return lr("PlusBillingPeriodSelectionExperimentEvaluated", {
                                                     variant: "unknown"
@@ -35273,18 +35293,18 @@ function() {
                         }, {
                             key: "logLayerExposure",
                             value: function() {
-                                return IL(function() {
+                                return IF(function() {
                                     var e;
-                                    return IB(this, function(t) {
+                                    return IH(this, function(t) {
                                         switch (t.label) {
                                             case 0:
                                                 if (!this.isResolved) return lr("PlusBillingPeriodSelectionExposureBeforeAssignment"), [2];
                                                 if (!this.isEnrolled || this.hasLoggedExposure) return [2];
                                                 this.hasLoggedExposure = !0, t.label = 1;
                                             case 1:
-                                                return t.trys.push([1, 3, , 4]), [4, Og()];
+                                                return t.trys.push([1, 3, , 4]), [4, OS()];
                                             case 2:
-                                                return t.sent().logLayerExposure(IF), lr("PlusBillingPeriodSelectionExperimentExposed"), [3, 4];
+                                                return t.sent().logLayerExposure(IG), lr("PlusBillingPeriodSelectionExperimentExposed"), [3, 4];
                                             case 3:
                                                 throw e = t.sent(), this.hasLoggedExposure = !1, e;
                                             case 4:
@@ -35302,13 +35322,13 @@ function() {
                         }(t.prototype, e), t
                 }());
 
-            function IH(e, t) {
+            function IW(e, t) {
                 (null == t || t > e.length) && (t = e.length);
                 for (var r = 0, n = Array(t); r < t; r++) n[r] = e[r];
                 return n
             }
 
-            function IG(e, t, r, n, o, i, a) {
+            function IK(e, t, r, n, o, i, a) {
                 try {
                     var l = e[i](a),
                         u = l.value
@@ -35319,52 +35339,52 @@ function() {
                 l.done ? t(u) : Promise.resolve(u).then(n, o)
             }
 
-            function IV() {}
-            var IW = (0, e1.createContext)({
+            function IY() {}
+            var IX = (0, e1.createContext)({
                 itemCount: 0,
                 currentPage: -1,
                 canNext: !1,
                 canPrev: !1,
                 allVisible: !0,
-                goTo: IV,
-                next: IV,
-                prev: IV,
+                goTo: IY,
+                next: IY,
+                prev: IY,
                 registerItem: function() {
-                    return IV
+                    return IY
                 }
             });
 
-            function IK(e, t) {
+            function Iq(e, t) {
                 (null == t || t > e.length) && (t = e.length);
                 for (var r = 0, n = Array(t); r < t; r++) n[r] = e[r];
                 return n
             }
 
-            function IY(e, t) {
+            function IQ(e, t) {
                 if (e) {
-                    if ("string" == typeof e) return IK(e, t);
+                    if ("string" == typeof e) return Iq(e, t);
                     var r = Object.prototype.toString.call(e).slice(8, -1);
                     if ("Object" === r && e.constructor && (r = e.constructor.name), "Map" === r || "Set" === r) return Array.from(r);
-                    if ("Arguments" === r || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(r)) return IK(e, t)
+                    if ("Arguments" === r || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(r)) return Iq(e, t)
                 }
             }
-            var IX = (0, e1.createContext)(null),
-                Iq = 0,
-                IQ = {
+            var I$ = (0, e1.createContext)(null),
+                IZ = 0,
+                IJ = {
                     position: "absolute",
                     top: "50%",
                     left: 0,
                     transform: "translateY(-50%)",
                     zIndex: 10
                 },
-                I$ = {
+                I0 = {
                     position: "absolute",
                     top: "50%",
                     right: 0,
                     transform: "translateY(-50%)",
                     zIndex: 10
                 },
-                IZ = {
+                I1 = {
                     borderRadius: "9999px",
                     border: "none",
                     padding: 0,
@@ -35372,10 +35392,10 @@ function() {
                     transition: "opacity var(--time-100) var(--ease-linear)"
                 };
 
-            function IJ(e, t) {
+            function I2(e, t) {
                 return "Page ".concat(String(e + 1), " of ").concat(String(t))
             }
-            var I0 = Object.assign(function(e) {
+            var I4 = Object.assign(function(e) {
                     var t, r, n, o = e.children,
                         i = e.className,
                         a = e.ariaLabel,
@@ -35403,7 +35423,7 @@ function() {
                                 }
                                 return o
                             }
-                        }(t) || IY(t, 2) || function() {
+                        }(t) || IQ(t, 2) || function() {
                             throw TypeError("Invalid attempt to destructure non-iterable instance.\\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.")
                         }())[1],
                         f = (0, e1.useCallback)(function() {
@@ -35425,10 +35445,10 @@ function() {
                         S = m > 0 && h === m,
                         x = (0, e1.useCallback)(function(e) {
                             var t, r = (function(e) {
-                                if (Array.isArray(e)) return IK(e)
+                                if (Array.isArray(e)) return Iq(e)
                             }(t = u.current.values()) || function(e) {
                                 if ("u" > typeof Symbol && null != e[Symbol.iterator] || null != e["@@iterator"]) return Array.from(e)
-                            }(t) || IY(t) || function() {
+                            }(t) || IQ(t) || function() {
                                 throw TypeError("Invalid attempt to spread non-iterable instance.\\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.")
                             }())[e];
                             null != r && null != l.current && l.current.scrollTo({
@@ -35497,9 +35517,9 @@ function() {
                             registerItem: j
                         }
                     }, [S, O, g, b, x, m, P, E, j]);
-                    return (0, p.jsx)(IW.Provider, {
+                    return (0, p.jsx)(IX.Provider, {
                         value: I,
-                        children: (0, p.jsx)(IX.Provider, {
+                        children: (0, p.jsx)(I$.Provider, {
                             value: l,
                             children: (0, p.jsx)("div", {
                                 "aria-label": a,
@@ -35532,7 +35552,7 @@ function() {
                                     for (o = 0, r = Object.getOwnPropertySymbols(e); o < r.length; o++) n = r[o], !(t.indexOf(n) >= 0) && Object.prototype.propertyIsEnumerable.call(e, n) && (i[n] = e[n]);
                                 return i
                             }(e, ["className", "children", "gap"]),
-                            l = (0, e1.useContext)(IX),
+                            l = (0, e1.useContext)(I$),
                             u = (0, e1.useCallback)(function(e) {
                                 null != l && (l.current = e)
                             }, [l]);
@@ -35595,10 +35615,10 @@ function() {
                                     for (o = 0, r = Object.getOwnPropertySymbols(e); o < r.length; o++) n = r[o], !(t.indexOf(n) >= 0) && Object.prototype.propertyIsEnumerable.call(e, n) && (i[n] = e[n]);
                                 return i
                             }(e, ["className", "children"]),
-                            a = (0, e1.useContext)(IW).registerItem,
+                            a = (0, e1.useContext)(IX).registerItem,
                             l = (0, e1.useRef)(null),
                             u = (0, e1.useRef)("");
-                        return "" === u.current && (Iq += 1, u.current = "carousel-item-".concat(String(Iq))), (0, e1.useEffect)(function() {
+                        return "" === u.current && (IZ += 1, u.current = "carousel-item-".concat(String(IZ))), (0, e1.useEffect)(function() {
                             var e = l.current;
                             if (null != e) return a(u.current, e)
                         }, [a]), (0, p.jsx)("div", (t = function(e) {
@@ -35640,7 +35660,7 @@ function() {
                     PrevButton: function(e) {
                         var t = e.ariaLabel,
                             r = e.className,
-                            n = (0, e1.useContext)(IW),
+                            n = (0, e1.useContext)(IX),
                             o = n.canPrev,
                             i = n.prev;
                         return o ? (0, p.jsx)(hs, {
@@ -35651,14 +35671,14 @@ function() {
                             isCircular: !0,
                             onClick: i,
                             size: "Medium",
-                            style: IQ,
+                            style: IJ,
                             variant: "OverMedia"
                         }) : null
                     },
                     NextButton: function(e) {
                         var t = e.ariaLabel,
                             r = e.className,
-                            n = (0, e1.useContext)(IW),
+                            n = (0, e1.useContext)(IX),
                             o = n.canNext,
                             i = n.next;
                         return o ? (0, p.jsx)(hs, {
@@ -35669,15 +35689,15 @@ function() {
                             isCircular: !0,
                             onClick: i,
                             size: "Medium",
-                            style: I$,
+                            style: I0,
                             variant: "OverMedia"
                         }) : null
                     },
                     Indicator: function(e) {
                         var t = e.className,
                             r = e.formatDotLabel,
-                            n = void 0 === r ? IJ : r,
-                            o = (0, e1.useContext)(IW),
+                            n = void 0 === r ? I2 : r,
+                            o = (0, e1.useContext)(IX),
                             i = o.itemCount,
                             a = o.currentPage,
                             l = o.allVisible,
@@ -35716,7 +35736,7 @@ function() {
                                             })
                                         }
                                         return e
-                                    }({}, IZ), o = o = {
+                                    }({}, I1), o = o = {
                                         opacity: l ? 1 : .22
                                     }, Object.getOwnPropertyDescriptors ? Object.defineProperties(r, Object.getOwnPropertyDescriptors(o)) : (function(e) {
                                         var t = Object.keys(e);
@@ -35734,7 +35754,7 @@ function() {
                         })
                     }
                 }),
-                I1 = [{
+                I3 = [{
                     iconName: "icon-regular-tag",
                     translationKey: "Description.Benefit.DiscountBuyRobux",
                     getParams: function(e) {
@@ -35752,7 +35772,7 @@ function() {
                     iconName: "icon-regular-paint-brush",
                     translationKey: "Description.Benefit.ProfileFrameAppTheme"
                 }],
-                I2 = [{
+                I5 = [{
                     iconName: "icon-regular-roblox-plus",
                     translationKey: "Description.Benefit.AllPlus.V2"
                 }, {
@@ -35776,7 +35796,7 @@ function() {
                         }
                     }
                 }],
-                I4 = function(e) {
+                I6 = function(e) {
                     var t = e.iconName,
                         r = e.benefit;
                     return (0, p.jsxs)("li", {
@@ -35792,13 +35812,13 @@ function() {
                     })
                 };
 
-            function I3(e) {
+            function I8(e) {
                 if (null == e) return 0;
                 if ("number" == typeof e) return Number.isFinite(e) ? e : 0;
                 var t = Number(e);
                 return Number.isFinite(t) ? t : 0
             }
-            var I5 = function(e) {
+            var I7 = function(e) {
                     var t, r, n, o = e.product,
                         i = e.robuxAllowance,
                         a = oA("Feature.RobloxSubscription"),
@@ -35811,16 +35831,16 @@ function() {
                             style: "percent",
                             maximumFractionDigits: 0
                         }),
-                        s = l.number(I3(o.price.units) + (null != (r = o.price.nanos) ? r : 0) * 1e-9, {
+                        s = l.number(I8(o.price.units) + (null != (r = o.price.nanos) ? r : 0) * 1e-9, {
                             style: "currency",
                             currency: o.price.currencyCode
                         }),
-                        f = o.strikethroughPrice ? l.number(I3(o.strikethroughPrice.units) + (null != (n = o.strikethroughPrice.nanos) ? n : 0) * 1e-9, {
+                        f = o.strikethroughPrice ? l.number(I8(o.strikethroughPrice.units) + (null != (n = o.strikethroughPrice.nanos) ? n : 0) * 1e-9, {
                             style: "currency",
                             currency: o.strikethroughPrice.currencyCode
                         }) : null,
                         d = l.number(i),
-                        y = i > 0 ? I2 : I1,
+                        y = i > 0 ? I5 : I3,
                         m = {
                             discountPercent: c,
                             robuxAmount: d,
@@ -35841,24 +35861,24 @@ function() {
                             var r = e.iconName,
                                 n = e.translationKey,
                                 o = e.getParams;
-                            return (0, p.jsx)(I4, {
+                            return (0, p.jsx)(I6, {
                                 benefit: a(n, null == o ? void 0 : o(m)),
                                 iconName: r
                             }, "".concat(r, "-").concat(String(t)))
                         })
                     })
                 },
-                I6 = {
+                I9 = {
                     PRODUCT_TYPE_ROBLOX_PLUS: "Blackbird"
                 };
 
-            function I8(e) {
+            function Ae(e) {
                 if (null == e) return 0;
                 var t = Number.parseInt(e, 10);
                 return Number.isFinite(t) && t > 0 ? t : 0
             }
 
-            function I7(e) {
+            function At(e) {
                 var t;
                 return function(e) {
                     if (null == e) return 0;
@@ -35868,7 +35888,7 @@ function() {
                 }(e.units) + (null != (t = e.nanos) ? t : 0) * 1e-9
             }
 
-            function I9(e) {
+            function Ar(e) {
                 switch (e) {
                     case "PERIOD_TYPE_WEEK":
                         return "Week";
@@ -35878,7 +35898,7 @@ function() {
                         return "Year"
                 }
             }
-            var Ae = function(e) {
+            var An = function(e) {
                     var t = e.href,
                         r = e.onClick,
                         n = e.isEmphasized,
@@ -35897,7 +35917,7 @@ function() {
                         children: o
                     })
                 },
-                At = function(e) {
+                Ao = function(e) {
                     var t, r, n, o, i, a = e.product,
                         l = e.deviceMeta,
                         u = e.isEmphasized,
@@ -35913,25 +35933,25 @@ function() {
                             var e = new URL(y.url, w.location.origin);
                             return e.searchParams.set("ctx", "subscription"), e.searchParams.set("type", "RobloxPlus"), e.searchParams.set("id", a.subscriptionProductId), "".concat(e.pathname).concat(e.search)
                         }, [null == y ? void 0 : y.url, a.subscriptionProductId]),
-                        v = I6[a.subscriptionProductType];
+                        v = I9[a.subscriptionProductType];
                     if (null == v) return null;
-                    var g = I8(a.robuxAmount),
+                    var g = Ae(a.robuxAmount),
                         O = g > 0 ? "Plus ".concat(String(g)) : "Roblox Plus",
                         S = (Array.isArray(a.offers) ? a.offers : []).some(function(e) {
                             return e.freeTrial
                         }),
                         x = !!a.isRedirect,
-                        P = h.number(I7(a.price), {
+                        P = h.number(At(a.price), {
                             style: "currency",
                             currency: a.price.currencyCode
                         }),
-                        E = a.strikethroughPrice ? h.number(I7(a.strikethroughPrice), {
+                        E = a.strikethroughPrice ? h.number(At(a.strikethroughPrice), {
                             style: "currency",
                             currency: a.strikethroughPrice.currencyCode
                         }) : null,
                         j = S ? m("Action.TryItForFree") : m("Action.PricePerMonth", {
                             price: P,
-                            periodType: I9(a.periodType)
+                            periodType: Ar(a.periodType)
                         });
                     return (0, p.jsxs)("div", (o = function(e) {
                         for (var t = 1; t < arguments.length; t++) {
@@ -35973,13 +35993,13 @@ function() {
                                     children: P
                                 })]
                             })]
-                        }), (0, p.jsx)(I5, {
+                        }), (0, p.jsx)(I7, {
                             product: a,
                             robuxAllowance: g
-                        }), x ? (0, p.jsx)(Ae, {
+                        }), x ? (0, p.jsx)(An, {
                             href: b,
                             onClick: function(e) {
-                                OI(e), null == s || s({
+                                OT(e), null == s || s({
                                     isFreeTrial: !1,
                                     productId: a.subscriptionProductId,
                                     isRedirect: !0
@@ -35993,7 +36013,7 @@ function() {
                             size: "Medium",
                             variant: u ? "Emphasis" : "Standard",
                             children: j
-                        }) : (0, p.jsx)(EK, {
+                        }) : (0, p.jsx)(Eq, {
                             className: "width-full",
                             deviceMeta: l,
                             paymentSessionId: d,
@@ -36022,7 +36042,7 @@ function() {
                     }), o))
                 };
 
-            function Ar(e) {
+            function Ai(e) {
                 var t = e.subscriptionV2,
                     r = e.deviceMeta,
                     n = e.isPrimary,
@@ -36036,21 +36056,21 @@ function() {
                     f = "dark" === hW() ? "color-mode-light light-theme" : "color-mode-dark dark-theme";
                 return ((0, e1.useEffect)(function() {
                     s.length > 0 && o()
-                }, []), 0 === s.length) ? null : (0, p.jsxs)(I0, {
+                }, []), 0 === s.length) ? null : (0, p.jsxs)(I4, {
                     ariaLabel: "Roblox Plus subscription tiers",
                     className: "self-stretch bleed-section-padding",
                     children: [(0, p.jsx)("div", {
                         className: f,
-                        children: (0, p.jsx)(I0.PrevButton, {
+                        children: (0, p.jsx)(I4.PrevButton, {
                             ariaLabel: "Previous tier",
                             className: "hidden medium:flex"
                         })
-                    }), (0, p.jsx)(I0.Track, {
+                    }), (0, p.jsx)(I4.Track, {
                         className: "bleed-section-padding-track bundle-carousel-track-cap",
                         children: s.map(function(e, t) {
-                            return (0, p.jsx)(I0.Item, {
+                            return (0, p.jsx)(I4.Item, {
                                 className: "flex flex-col width-[313px] medium:width-[242px]",
-                                children: (0, p.jsx)(At, {
+                                children: (0, p.jsx)(Ao, {
                                     deviceMeta: r,
                                     isEmphasized: n && 0 === t,
                                     isPrimary: n,
@@ -36064,63 +36084,63 @@ function() {
                         })
                     }), (0, p.jsx)("div", {
                         className: f,
-                        children: (0, p.jsx)(I0.NextButton, {
+                        children: (0, p.jsx)(I4.NextButton, {
                             ariaLabel: "Next tier",
                             className: "hidden medium:flex"
                         })
-                    }), (0, p.jsx)(I0.Indicator, {
+                    }), (0, p.jsx)(I4.Indicator, {
                         className: "padding-top-medium medium:hidden"
                     })]
                 })
             }
-            var An = function(e) {
+            var Aa = function(e) {
                     return function(e, t) {
                         var r = null != t && t > 0 ? t : 1;
                         switch (e) {
-                            case P2:
+                            case P5:
                                 return r;
-                            case P4:
+                            case P6:
                                 return 12 * r;
-                            case P1:
+                            case P3:
                                 return
                         }
-                    }(I9(e.periodType), e.periodCount)
+                    }(Ar(e.periodType), e.periodCount)
                 },
-                Ao = function(e) {
-                    return void 0 !== I6[e.subscriptionProductType] && 0 === I8(e.robuxAmount) && void 0 !== An(e)
+                Al = function(e) {
+                    return void 0 !== I9[e.subscriptionProductType] && 0 === Ae(e.robuxAmount) && void 0 !== Aa(e)
                 },
-                Ai = function(e) {
+                Au = function(e) {
                     var t, r, n, o = null == (n = e.offers) || null == (r = n.find(function(e) {
                         return e.freeTrial
                     })) ? void 0 : r.freeTrial;
                     if (o && ("PERIOD_TYPE_WEEK" === (t = o.periodType) || "PERIOD_TYPE_MONTH" === t || "PERIOD_TYPE_YEAR" === t)) return {
                         duration: o.duration,
-                        periodType: I9(o.periodType)
+                        periodType: Ar(o.periodType)
                     }
                 },
-                Aa = function(e) {
-                    var t, r, n = Ai(e);
+                Ac = function(e) {
+                    var t, r, n = Au(e);
                     return {
                         productId: e.subscriptionProductId,
-                        productType: null != (t = I6[e.subscriptionProductType]) ? t : "",
-                        months: null != (r = An(e)) ? r : 1,
+                        productType: null != (t = I9[e.subscriptionProductType]) ? t : "",
+                        months: null != (r = Aa(e)) ? r : 1,
                         price: {
-                            amount: I7(e.price),
+                            amount: At(e.price),
                             currencyCode: e.price.currencyCode
                         },
                         strikethroughPrice: e.strikethroughPrice && {
-                            amount: I7(e.strikethroughPrice),
+                            amount: At(e.strikethroughPrice),
                             currencyCode: e.strikethroughPrice.currencyCode
                         },
                         freeTrialEndDate: n ? function(e, t, r) {
                             var n = new Date(e);
                             switch (r) {
-                                case P1:
+                                case P3:
                                     return n.setUTCDate(n.getUTCDate() + 7 * t), n;
-                                case P2:
-                                    return jM(n, t);
-                                case P4:
-                                    return jk(n, t);
+                                case P5:
+                                    return j_(n, t);
+                                case P6:
+                                    return jD(n, t);
                                 default:
                                     throw Error("Unsupported period type: ".concat(r))
                             }
@@ -36130,13 +36150,13 @@ function() {
                     }
                 };
 
-            function Al(e, t) {
+            function As(e, t) {
                 (null == t || t > e.length) && (t = e.length);
                 for (var r = 0, n = Array(t); r < t; r++) n[r] = e[r];
                 return n
             }
 
-            function Au(e) {
+            function Af(e) {
                 for (var t = 1; t < arguments.length; t++) {
                     var r = null != arguments[t] ? arguments[t] : {},
                         n = Object.keys(r);
@@ -36155,7 +36175,7 @@ function() {
                 return e
             }
 
-            function Ac(e, t) {
+            function Ad(e, t) {
                 return t = null != t ? t : {}, Object.getOwnPropertyDescriptors ? Object.defineProperties(e, Object.getOwnPropertyDescriptors(t)) : (function(e) {
                     var t = Object.keys(e);
                     if (Object.getOwnPropertySymbols) {
@@ -36168,7 +36188,7 @@ function() {
                 }), e
             }
 
-            function As(e, t) {
+            function Ap(e, t) {
                 return function(e) {
                     if (Array.isArray(e)) return e
                 }(e) || function(e, t) {
@@ -36192,19 +36212,19 @@ function() {
                     }
                 }(e, t) || function(e, t) {
                     if (e) {
-                        if ("string" == typeof e) return Al(e, t);
+                        if ("string" == typeof e) return As(e, t);
                         var r = Object.prototype.toString.call(e).slice(8, -1);
                         if ("Object" === r && e.constructor && (r = e.constructor.name), "Map" === r || "Set" === r) return Array.from(r);
-                        if ("Arguments" === r || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(r)) return Al(e, t)
+                        if ("Arguments" === r || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(r)) return As(e, t)
                     }
                 }(e, t) || function() {
                     throw TypeError("Invalid attempt to destructure non-iterable instance.\\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.")
                 }()
             }
-            var Af = "/plus",
-                Ad = "text-label-medium text-default [text-decoration:underline] [text-underline-position:from-font]";
+            var Ay = "/plus",
+                Am = "text-label-medium text-default [text-decoration:underline] [text-underline-position:from-font]";
 
-            function Ap(e) {
+            function Ah(e) {
                 var t, r, n, o, i, a, l, u, c = e.isPrimary,
                     s = e.sectionBase,
                     f = e.subscriptionV2,
@@ -36225,7 +36245,7 @@ function() {
                     x = (0, e1.useMemo)(function() {
                         return (0, t2.getDeviceMeta)()
                     }, []),
-                    P = As((0, e1.useState)(!1), 2),
+                    P = Ap((0, e1.useState)(!1), 2),
                     E = P[0],
                     j = P[1],
                     I = !!(null == x ? void 0 : x.isInApp),
@@ -36240,16 +36260,16 @@ function() {
                     }, [A]),
                     N = (0, e1.useMemo)(function() {
                         var e, t, r, n;
-                        return r = (t = (e = f.products).filter(Ao)).some(function(e) {
-                            return 1 === An(e)
+                        return r = (t = (e = f.products).filter(Al)).some(function(e) {
+                            return 1 === Aa(e)
                         }), n = t.some(function(e) {
                             var t;
-                            return (null != (t = An(e)) ? t : 0) > 1
+                            return (null != (t = Aa(e)) ? t : 0) > 1
                         }), r && n ? {
                             tileProducts: e.filter(function(e) {
-                                return !Ao(e) || 1 === An(e)
+                                return !Al(e) || 1 === Aa(e)
                             }),
-                            billingPeriodOptions: t.map(Aa)
+                            billingPeriodOptions: t.map(Ac)
                         } : {
                             tileProducts: e,
                             billingPeriodOptions: []
@@ -36258,7 +36278,7 @@ function() {
                     M = N.tileProducts,
                     k = N.billingPeriodOptions,
                     R = (0, e1.useMemo)(function() {
-                        return Ac(Au({}, f), {
+                        return Ad(Af({}, f), {
                             products: M
                         })
                     }, [f, M]),
@@ -36291,10 +36311,10 @@ function() {
                         }
                     }(n) || function(e) {
                         if (e) {
-                            if ("string" == typeof e) return IH(e, 2);
+                            if ("string" == typeof e) return IW(e, 2);
                             var t = Object.prototype.toString.call(e).slice(8, -1);
                             if ("Object" === t && e.constructor && (t = e.constructor.name), "Map" === t || "Set" === t) return Array.from(t);
-                            if ("Arguments" === t || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(t)) return IH(e, 2)
+                            if ("Arguments" === t || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(t)) return IW(e, 2)
                         }
                     }(n) || function() {
                         throw TypeError("Invalid attempt to destructure non-iterable instance.\\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.")
@@ -36384,7 +36404,7 @@ function() {
                                 }(this, function(e) {
                                     switch (e.label) {
                                         case 0:
-                                            return [4, Iz.isTreatment()];
+                                            return [4, IV.isTreatment()];
                                         case 1:
                                             return a.apply(void 0, [e.sent()]), [2]
                                     }
@@ -36396,18 +36416,18 @@ function() {
                                     var i = e.apply(t, r);
 
                                     function a(e) {
-                                        IG(i, n, o, a, l, "next", e)
+                                        IK(i, n, o, a, l, "next", e)
                                     }
 
                                     function l(e) {
-                                        IG(i, n, o, a, l, "throw", e)
+                                        IK(i, n, o, a, l, "throw", e)
                                     }
                                     a(void 0)
                                 })
                             })()
                         }
                     }, [r]), l = (0, e1.useCallback)(function() {
-                        r && Iz.logLayerExposure().catch(function(e) {
+                        r && IV.logLayerExposure().catch(function(e) {
                             ln("PlusBillingPeriodSelectionLayerExposureError", null, e)
                         })
                     }, [r]), {
@@ -36416,7 +36436,7 @@ function() {
                     }),
                     U = L.isTreatment,
                     B = L.logExposure,
-                    F = As((0, e1.useState)(!1), 2),
+                    F = Ap((0, e1.useState)(!1), 2),
                     z = F[0],
                     H = F[1],
                     G = (0, e1.useMemo)(function() {
@@ -36472,10 +36492,10 @@ function() {
                 if (!x) return lr("SubscriptionV2NoDeviceMeta"), null;
                 var Z = d("Label.Learnmore"),
                     J = M.length > 1;
-                return (0, p.jsxs)(O5, Ac(Au({
+                return (0, p.jsxs)(O7, Ad(Af({
                     "data-testid": "section-subscription-v2"
                 }, lJ(s)), {
-                    children: [(0, p.jsx)(O6, {
+                    children: [(0, p.jsx)(O9, {
                         children: (0, p.jsxs)("div", {
                             className: "flex flex-row width-full justify-between items-center",
                             children: [(0, p.jsxs)("div", {
@@ -36485,7 +36505,7 @@ function() {
                                     size: b.isAboveInclusive("medium") ? "XLarge" : "Large"
                                 }), y(s.sectionHeaderTranslationKey)]
                             }), I ? (0, p.jsx)("span", {
-                                className: b6()(Ad, "cursor-pointer", {
+                                className: b6()(Am, "cursor-pointer", {
                                     "medium:[display:none]": !J
                                 }),
                                 "data-testid": "header-learn-more-trigger",
@@ -36495,16 +36515,16 @@ function() {
                                 tabIndex: 0,
                                 children: Z
                             }) : (0, p.jsx)("a", {
-                                className: b6()(Ad, {
+                                className: b6()(Am, {
                                     "medium:[display:none]": !J
                                 }),
                                 "data-testid": "header-learn-more-link",
-                                href: Af,
+                                href: Ay,
                                 onClick: S,
                                 children: Z
                             })]
                         })
-                    }), J ? (0, p.jsx)(Ar, {
+                    }), J ? (0, p.jsx)(Ai, {
                         baseProductId: D,
                         deviceMeta: x,
                         isPrimary: !!c,
@@ -36514,27 +36534,27 @@ function() {
                         paymentSessionId: null == h ? void 0 : h.id,
                         redirect: v,
                         subscriptionV2: R
-                    }) : (0, p.jsx)(O7, {
+                    }) : (0, p.jsx)(St, {
                         isPrimary: c,
                         children: (0, p.jsx)("div", {
                             className: "self-stretch medium:flex-row medium:justify-between",
-                            children: (0, p.jsx)(Eq, {
+                            children: (0, p.jsx)(EZ, {
                                 deviceMeta: x,
                                 isPrimary: !!c,
                                 onSubscriptionSectionViewShown: Q,
                                 onSubscriptionSubscribeClick: $,
                                 subscriptionV2: R,
                                 onLearnMoreClick: A,
-                                learnMoreHref: I ? void 0 : Af,
+                                learnMoreHref: I ? void 0 : Ay,
                                 paymentSessionId: null == h ? void 0 : h.id,
                                 onSubscribeOverride: U ? V : void 0
                             })
                         })
-                    }), I && (0, p.jsx)(IM, {
+                    }), I && (0, p.jsx)(I_, {
                         open: E,
                         onOpenChange: C,
-                        children: (0, p.jsx)(jI, {})
-                    }), U && (0, p.jsx)(Iw, {
+                        children: (0, p.jsx)(jT, {})
+                    }), U && (0, p.jsx)(Ix, {
                         analyticsContext: G,
                         deviceMeta: x,
                         isOpen: z,
@@ -36546,7 +36566,7 @@ function() {
                     })]
                 }))
             }
-            var Ay = function() {
+            var Ab = function() {
                 var e = (0, e1.useContext)(aK).robuxBalance;
                 return "number" != typeof e ? null : (0, p.jsxs)(e1.Fragment, {
                     children: [(0, p.jsx)(o$, {
@@ -36558,7 +36578,7 @@ function() {
                 })
             };
 
-            function Am(e) {
+            function Av(e) {
                 var t = e.transfers,
                     r = (0, e1.useContext)(aK),
                     n = r.breakpoint,
@@ -36577,7 +36597,7 @@ function() {
                         },
                         children: (0, p.jsx)("div", {
                             className: "flex flex-row justify-center items-center gap-small height-1000 padding-left-medium padding-right-large radius-circle bg-surface-0 margin-left-auto",
-                            children: (0, p.jsx)(Ay, {})
+                            children: (0, p.jsx)(Ab, {})
                         })
                     }) : null;
                 if (!o) return c;
@@ -36623,19 +36643,19 @@ function() {
                         className: "self-stretch flex flex-row justify-end items-center large:hidden",
                         children: (0, p.jsx)("div", {
                             className: "flex flex-row justify-center items-center gap-small height-1000 padding-left-medium padding-right-large radius-circle bg-surface-0",
-                            children: (0, p.jsx)(Ay, {})
+                            children: (0, p.jsx)(Ab, {})
                         })
                     }), v]
                 })
             }
 
-            function Ah(e, t) {
+            function Ag(e, t) {
                 (null == t || t > e.length) && (t = e.length);
                 for (var r = 0, n = Array(t); r < t; r++) n[r] = e[r];
                 return n
             }
 
-            function Ab(e, t) {
+            function Aw(e, t) {
                 return function(e) {
                     if (Array.isArray(e)) return e
                 }(e) || function(e, t) {
@@ -36657,50 +36677,50 @@ function() {
                         }
                         return i
                     }
-                }(e, t) || Av(e, t) || function() {
+                }(e, t) || AO(e, t) || function() {
                     throw TypeError("Invalid attempt to destructure non-iterable instance.\\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.")
                 }()
             }
 
-            function Av(e, t) {
+            function AO(e, t) {
                 if (e) {
-                    if ("string" == typeof e) return Ah(e, t);
+                    if ("string" == typeof e) return Ag(e, t);
                     var r = Object.prototype.toString.call(e).slice(8, -1);
                     if ("Object" === r && e.constructor && (r = e.constructor.name), "Map" === r || "Set" === r) return Array.from(r);
-                    if ("Arguments" === r || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(r)) return Ah(e, t)
+                    if ("Arguments" === r || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(r)) return Ag(e, t)
                 }
             }
-            var Ag = ["Action.WhatAreRobux", "Action.WhereAreMyRobux", "Action.DoRobuxExpire"],
-                Aw = "Action.HowToRedeemGiftCard";
+            var AS = ["Action.WhatAreRobux", "Action.WhereAreMyRobux", "Action.DoRobuxExpire"],
+                Ax = "Action.HowToRedeemGiftCard";
 
-            function AO() {
+            function AP() {
                 var e = oA("Feature.BuyRobux"),
-                    t = Ab((0, e1.useState)(function() {
+                    t = Aw((0, e1.useState)(function() {
                         return new Set
                     }), 2),
                     r = t[0],
                     n = t[1],
-                    o = Ab((0, e1.useState)(!1), 2),
+                    o = Aw((0, e1.useState)(!1), 2),
                     i = o[0],
                     a = o[1];
                 (0, e1.useEffect)(function() {
                     a(lC)
                 }, []);
                 var l = i ? ((function(e) {
-                        if (Array.isArray(e)) return Ah(e)
-                    })(Ag) || function(e) {
+                        if (Array.isArray(e)) return Ag(e)
+                    })(AS) || function(e) {
                         if ("u" > typeof Symbol && null != e[Symbol.iterator] || null != e["@@iterator"]) return Array.from(e)
-                    }(Ag) || Av(Ag) || function() {
+                    }(AS) || AO(AS) || function() {
                         throw TypeError("Invalid attempt to spread non-iterable instance.\\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.")
-                    }()).concat([Aw]) : Ag,
+                    }()).concat([Ax]) : AS,
                     u = (0, e1.useCallback)(function(e) {
                         n(function(t) {
                             var r = new Set(t);
                             return r.has(e) ? r.delete(e) : r.add(e), r
                         })
                     }, []);
-                return (0, p.jsxs)(O5, {
-                    children: [(0, p.jsx)(O6, {
+                return (0, p.jsxs)(O7, {
+                    children: [(0, p.jsx)(O9, {
                         children: e("Heading.FAQ")
                     }), (0, p.jsx)("div", {
                         className: "self-stretch flex flex-col items-stretch gap-medium large:gap-large",
@@ -36721,7 +36741,7 @@ function() {
                                         children: e
                                     })
                                 }
-                            }] : t === Aw && (l = [{
+                            }] : t === Ax && (l = [{
                                 opening: "redeemLinkStart",
                                 closing: "redeemLinkEnd",
                                 render: function(e) {
@@ -36771,22 +36791,22 @@ function() {
                     })]
                 })
             }
-            var AS = function() {
+            var AE = function() {
                     if ("u" < typeof document) return null;
                     var e, t = document.querySelector('meta[name="subscription-referral-data"]');
                     return null != (e = null == t ? void 0 : t.dataset) ? e : null
                 },
-                Ax = function() {
+                Aj = function() {
                     var e;
-                    return (null == (e = AS()) ? void 0 : e.isEnabled) === "true"
+                    return (null == (e = AE()) ? void 0 : e.isEnabled) === "true"
                 },
-                AP = I.EnvironmentUrls.apiGatewayUrl,
-                AE = new Ea(new PK({
+                AI = I.EnvironmentUrls.apiGatewayUrl,
+                AA = new Ec(new Pq({
                     robloxSiteDomain: I.EnvironmentUrls.domain,
-                    basePath: "".concat(AP, "/subscriptions"),
+                    basePath: "".concat(AI, "/subscriptions"),
                     credentials: "include"
                 })),
-                Aj = function() {
+                AC = function() {
                     if (w) {
                         var e = new URLSearchParams(w.location.search).get("referrerId");
                         if (e) {
@@ -36795,12 +36815,12 @@ function() {
                         }
                     }
                 },
-                AI = function(e) {
-                    var t = void 0 !== e ? e : Aj();
+                AT = function(e) {
+                    var t = void 0 !== e ? e : AC();
                     return null != t ? t : void 0
                 };
 
-            function AA(e, t, r, n, o, i, a) {
+            function AN(e, t, r, n, o, i, a) {
                 try {
                     var l = e[i](a),
                         u = l.value
@@ -36810,7 +36830,7 @@ function() {
                 }
                 l.done ? t(u) : Promise.resolve(u).then(n, o)
             }
-            var AC = function(e) {
+            var AM = function(e) {
                     if (null == e) return "NetworkError";
                     if ((void 0 === e ? "undefined" : e && "u" > typeof Symbol && e.constructor === Symbol ? "symbol" : typeof e) == "object") {
                         var t = e.status,
@@ -36824,7 +36844,7 @@ function() {
                     }
                     return "UnknownError"
                 },
-                AT = function(e, t) {
+                Ak = function(e, t) {
                     var r;
                     return (r = function() {
                         var r, n, o, i;
@@ -36910,21 +36930,21 @@ function() {
                         }(this, function(a) {
                             switch (a.label) {
                                 case 0:
-                                    r = "".concat(e, "_API"), n = performance.now(), Ii(r, {
+                                    r = "".concat(e, "_API"), n = performance.now(), Iu(r, {
                                         statusCode: "Throughput"
                                     }), a.label = 1;
                                 case 1:
                                     return a.trys.push([1, 3, 4, 5]), [4, t()];
                                 case 2:
-                                    return o = a.sent(), Ii(r, {
+                                    return o = a.sent(), Iu(r, {
                                         statusCode: "200"
                                     }), [2, o];
                                 case 3:
-                                    throw i = a.sent(), Ii(r, {
-                                        statusCode: AC(i)
+                                    throw i = a.sent(), Iu(r, {
+                                        statusCode: AM(i)
                                     }), i;
                                 case 4:
-                                    return Ia("".concat(r, "_LatencyMs"), void 0, performance.now() - n), [7];
+                                    return Ic("".concat(r, "_LatencyMs"), void 0, performance.now() - n), [7];
                                 case 5:
                                     return [2]
                             }
@@ -36936,18 +36956,18 @@ function() {
                             var i = r.apply(e, t);
 
                             function a(e) {
-                                AA(i, n, o, a, l, "next", e)
+                                AN(i, n, o, a, l, "next", e)
                             }
 
                             function l(e) {
-                                AA(i, n, o, a, l, "throw", e)
+                                AN(i, n, o, a, l, "throw", e)
                             }
                             a(void 0)
                         })
                     })()
                 };
 
-            function AN(e, t, r, n, o, i, a) {
+            function AR(e, t, r, n, o, i, a) {
                 try {
                     var l = e[i](a),
                         u = l.value
@@ -36957,9 +36977,9 @@ function() {
                 }
                 l.done ? t(u) : Promise.resolve(u).then(n, o)
             }
-            var AM = [],
-                Ak = function() {
-                    var e = Ax() && null !== (0, iJ.userId)() && !(0, iJ.isBlackbirdUser)(),
+            var A_ = [],
+                AD = function() {
+                    var e = Aj() && null !== (0, iJ.userId)() && !(0, iJ.isBlackbirdUser)(),
                         t = (0, y.useQuery)({
                             queryKey: ["plus-referrals", "pending"],
                             enabled: e,
@@ -37048,8 +37068,8 @@ function() {
                                     }(this, function(e) {
                                         switch (e.label) {
                                             case 0:
-                                                return [4, AT("PendingPlusReferrals", function() {
-                                                    return AE.subscriptionsV2ListSubscriptionReferrals({
+                                                return [4, Ak("PendingPlusReferrals", function() {
+                                                    return AA.subscriptionsV2ListSubscriptionReferrals({
                                                         status: 1,
                                                         pageSize: 5
                                                     })
@@ -37065,11 +37085,11 @@ function() {
                                         var i = e.apply(t, r);
 
                                         function a(e) {
-                                            AN(i, n, o, a, l, "next", e)
+                                            AR(i, n, o, a, l, "next", e)
                                         }
 
                                         function l(e) {
-                                            AN(i, n, o, a, l, "throw", e)
+                                            AR(i, n, o, a, l, "throw", e)
                                         }
                                         a(void 0)
                                     })
@@ -37078,14 +37098,14 @@ function() {
                         }),
                         r = t.data,
                         n = t.isLoading,
-                        o = null != r ? r : AM;
+                        o = null != r ? r : A_;
                     return {
                         pendingReferrals: o,
                         latestPendingReferral: o.at(0),
                         isLoading: e && n
                     }
                 },
-                AR = function(e) {
+                AL = function(e) {
                     var t = Number.parseInt(null != e ? e : "", 10),
                         r = Number.isFinite(t) && t > 0,
                         n = (0, y.useQuery)({
@@ -37103,9 +37123,9 @@ function() {
                         isLoading: r && i
                     }
                 },
-                A_ = window.Roblox["core-scripts"].eventStream;
+                AU = window.Roblox["core-scripts"].eventStream;
 
-            function AD(e) {
+            function AB(e) {
                 for (var t = 1; t < arguments.length; t++) {
                     var r = null != arguments[t] ? arguments[t] : {},
                         n = Object.keys(r);
@@ -37123,24 +37143,24 @@ function() {
                 }
                 return e
             }
-            var AL = ((t = {}).BuyRobuxPage = "buyRobuxPage", t.Flyout = "flyout", t.DirectUrl = "directUrl", t),
-                AU = "plus_referral_sheet_shown",
-                AB = "plus_referral_subscribe_click",
-                AF = "plus_referral_sheet_dismissed",
-                Az = "plus_referral_buy_robux_shown",
-                AH = "plus_referral_buy_robux_review_click",
-                AG = "plusReferral",
-                AV = function(e) {
-                    (0, A_.sendEventWithTarget)(e.type, e.context, e.params)
+            var AF = ((t = {}).BuyRobuxPage = "buyRobuxPage", t.Flyout = "flyout", t.DirectUrl = "directUrl", t),
+                Az = "plus_referral_sheet_shown",
+                AH = "plus_referral_subscribe_click",
+                AG = "plus_referral_sheet_dismissed",
+                AV = "plus_referral_buy_robux_shown",
+                AW = "plus_referral_buy_robux_review_click",
+                AK = "plusReferral",
+                AY = function(e) {
+                    (0, AU.sendEventWithTarget)(e.type, e.context, e.params)
                 },
-                AW = function(e, t, r, n, o) {
+                AX = function(e, t, r, n, o) {
                     try {
                         var i, a, l, u, c;
-                        AV((i = e, a = t, l = r, u = n, c = o, {
-                            name: AU,
-                            type: AU,
-                            context: AG,
-                            params: AD({
+                        AY((i = e, a = t, l = r, u = n, c = o, {
+                            name: Az,
+                            type: Az,
+                            context: AK,
+                            params: AB({
                                 face: i,
                                 hasReferrerId: String(a)
                             }, l ? {
@@ -37153,80 +37173,80 @@ function() {
                         }))
                     } catch (e) {}
                 },
-                AK = function(e, t, r, n) {
+                Aq = function(e, t, r, n) {
                     try {
                         var o, i, a, l;
-                        AV((o = e, i = t, a = r, l = n, {
-                            name: AB,
-                            type: AB,
-                            context: AG,
-                            params: AD({
-                                face: o
-                            }, i ? {
-                                referrerId: i
-                            } : {}, a ? {
-                                referralCode: a
-                            } : {}, l ? {
-                                surface: l
-                            } : {})
-                        }))
-                    } catch (e) {}
-                },
-                AY = function(e, t, r, n) {
-                    try {
-                        var o, i, a, l;
-                        AV((o = e, i = t, a = r, l = n, {
-                            name: AF,
-                            type: AF,
-                            context: AG,
-                            params: AD({
-                                face: o
-                            }, i ? {
-                                referrerId: i
-                            } : {}, a ? {
-                                referralCode: a
-                            } : {}, l ? {
-                                surface: l
-                            } : {})
-                        }))
-                    } catch (e) {}
-                },
-                AX = function(e, t) {
-                    try {
-                        var r, n, o;
-                        AV((n = e, o = t, {
-                            name: Az,
-                            type: Az,
-                            context: AG,
-                            params: AD({}, n ? {
-                                referrerId: n
-                            } : {}, void 0 !== o ? {
-                                referralId: String(o)
-                            } : {})
-                        })), r = {
-                            hasReferrerId: String(!!e)
-                        }, EV("BuyRobuxReferralShown", r)
-                    } catch (e) {}
-                },
-                Aq = function(e, t) {
-                    try {
-                        var r, n, o;
-                        AV((n = e, o = t, {
+                        AY((o = e, i = t, a = r, l = n, {
                             name: AH,
                             type: AH,
-                            context: AG,
-                            params: AD({}, n ? {
+                            context: AK,
+                            params: AB({
+                                face: o
+                            }, i ? {
+                                referrerId: i
+                            } : {}, a ? {
+                                referralCode: a
+                            } : {}, l ? {
+                                surface: l
+                            } : {})
+                        }))
+                    } catch (e) {}
+                },
+                AQ = function(e, t, r, n) {
+                    try {
+                        var o, i, a, l;
+                        AY((o = e, i = t, a = r, l = n, {
+                            name: AG,
+                            type: AG,
+                            context: AK,
+                            params: AB({
+                                face: o
+                            }, i ? {
+                                referrerId: i
+                            } : {}, a ? {
+                                referralCode: a
+                            } : {}, l ? {
+                                surface: l
+                            } : {})
+                        }))
+                    } catch (e) {}
+                },
+                A$ = function(e, t) {
+                    try {
+                        var r, n, o;
+                        AY((n = e, o = t, {
+                            name: AV,
+                            type: AV,
+                            context: AK,
+                            params: AB({}, n ? {
                                 referrerId: n
                             } : {}, void 0 !== o ? {
                                 referralId: String(o)
                             } : {})
                         })), r = {
                             hasReferrerId: String(!!e)
-                        }, EV("BuyRobuxReferralReviewClick", r)
+                        }, EY("BuyRobuxReferralShown", r)
+                    } catch (e) {}
+                },
+                AZ = function(e, t) {
+                    try {
+                        var r, n, o;
+                        AY((n = e, o = t, {
+                            name: AW,
+                            type: AW,
+                            context: AK,
+                            params: AB({}, n ? {
+                                referrerId: n
+                            } : {}, void 0 !== o ? {
+                                referralId: String(o)
+                            } : {})
+                        })), r = {
+                            hasReferrerId: String(!!e)
+                        }, EY("BuyRobuxReferralReviewClick", r)
                     } catch (e) {}
                 };
 
-            function AQ(e) {
+            function AJ(e) {
                 var t = e.surface,
                     r = e.entrypoint,
                     n = e.referrerId,
@@ -37237,11 +37257,8 @@ function() {
                     };
                 return void 0 !== n && (i.referrer_id = String(n)), o.search = new URLSearchParams(i).toString(), o.toString()
             }
-            var A$ = function(e) {
-                return "string" == typeof e ? e : e.src
-            };
 
-            function AZ(e, t, r, n, o, i, a) {
+            function A0(e, t, r, n, o, i, a) {
                 try {
                     var l = e[i](a),
                         u = l.value
@@ -37251,7 +37268,7 @@ function() {
                 }
                 l.done ? t(u) : Promise.resolve(u).then(n, o)
             }
-            var AJ = function() {
+            var A1 = function() {
                     var e = arguments.length > 0 && void 0 !== arguments[0] ? arguments[0] : {},
                         t = e.referrerId,
                         r = e.enabled,
@@ -37348,7 +37365,7 @@ function() {
                                         switch (e.label) {
                                             case 0:
                                                 if (!o) return [2, void 0];
-                                                return [4, AE.subscriptionsV2CreateSubscriptionReferral({
+                                                return [4, AA.subscriptionsV2CreateSubscriptionReferral({
                                                     referrerId: n
                                                 })];
                                             case 1:
@@ -37362,11 +37379,11 @@ function() {
                                         var i = e.apply(t, r);
 
                                         function a(e) {
-                                            AZ(i, n, o, a, l, "next", e)
+                                            A0(i, n, o, a, l, "next", e)
                                         }
 
                                         function l(e) {
-                                            AZ(i, n, o, a, l, "throw", e)
+                                            A0(i, n, o, a, l, "throw", e)
                                         }
                                         a(void 0)
                                     })
@@ -37380,12 +37397,12 @@ function() {
                         isLoading: i && u
                     }
                 },
-                A0 = function(e) {
+                A2 = function(e) {
                     var t, r, n;
                     return Math.floor((null != (t = null == (n = e.productTypeDetails.robloxSubscriptionProductDetails) || null == (r = n.featureConfig.currencySubscriptionConfig) ? void 0 : r.entitledAmountMicros) ? t : 0) / 1e6)
                 };
 
-            function A1(e, t, r, n, o, i, a) {
+            function A4(e, t, r, n, o, i, a) {
                 try {
                     var l = e[i](a),
                         u = l.value
@@ -37395,11 +37412,11 @@ function() {
                 }
                 l.done ? t(u) : Promise.resolve(u).then(n, o)
             }
-            var A2 = function() {
+            var A3 = function() {
                 var e, t = arguments.length > 0 && void 0 !== arguments[0] ? arguments[0] : {},
                     r = t.enabled,
                     n = void 0 === r || r,
-                    o = AI(),
+                    o = AT(),
                     i = (0, y.useQuery)({
                         queryKey: ["plus-referrals", "subscribe-product", null != o ? o : null],
                         enabled: n,
@@ -37490,8 +37507,8 @@ function() {
                                 }(this, function(t) {
                                     switch (t.label) {
                                         case 0:
-                                            return [4, AE.subscriptionsV2ListAvailableSubscriptionProducts({
-                                                productType: P9,
+                                            return [4, AA.subscriptionsV2ListAvailableSubscriptionProducts({
+                                                productType: Er,
                                                 includePurchased: !0,
                                                 includeBundles: !0,
                                                 skipEligibilityCheck: !0,
@@ -37499,7 +37516,7 @@ function() {
                                             })];
                                         case 1:
                                             return [2, null != (e = t.sent().products.toSorted(function(e, t) {
-                                                return A0(e) - A0(t)
+                                                return A2(e) - A2(t)
                                             }).at(0)) ? e : null]
                                     }
                                 })
@@ -37510,11 +37527,11 @@ function() {
                                     var i = e.apply(t, r);
 
                                     function a(e) {
-                                        A1(i, n, o, a, l, "next", e)
+                                        A4(i, n, o, a, l, "next", e)
                                     }
 
                                     function l(e) {
-                                        A1(i, n, o, a, l, "throw", e)
+                                        A4(i, n, o, a, l, "throw", e)
                                     }
                                     a(void 0)
                                 })
@@ -37540,7 +37557,7 @@ function() {
                 }
             };
 
-            function A4(e, t, r, n, o, i, a) {
+            function A5(e, t, r, n, o, i, a) {
                 try {
                     var l = e[i](a),
                         u = l.value
@@ -37550,7 +37567,7 @@ function() {
                 }
                 l.done ? t(u) : Promise.resolve(u).then(n, o)
             }
-            var A3 = new Map([
+            var A6 = new Map([
                     ["Invalid", "Invalid"],
                     ["Eligible", "Eligible"],
                     ["Ineligible", "Ineligible"],
@@ -37558,7 +37575,7 @@ function() {
                     [1, "Eligible"],
                     [2, "Ineligible"]
                 ]),
-                A5 = function() {
+                A8 = function() {
                     var e = arguments.length > 0 && void 0 !== arguments[0] ? arguments[0] : {},
                         t = e.referrerId,
                         r = e.enabled,
@@ -37655,11 +37672,11 @@ function() {
                                         switch (t.label) {
                                             case 0:
                                                 if (!o) return [2, void 0];
-                                                return [4, AE.subscriptionsV2CheckSubscriptionReferralEligibility({
+                                                return [4, AA.subscriptionsV2CheckSubscriptionReferralEligibility({
                                                     referrerId: n
                                                 })];
                                             case 1:
-                                                return e = t.sent().eligibility, [2, A3.get(e)]
+                                                return e = t.sent().eligibility, [2, A6.get(e)]
                                         }
                                     })
                                 }, function() {
@@ -37669,11 +37686,11 @@ function() {
                                         var i = e.apply(t, r);
 
                                         function a(e) {
-                                            A4(i, n, o, a, l, "next", e)
+                                            A5(i, n, o, a, l, "next", e)
                                         }
 
                                         function l(e) {
-                                            A4(i, n, o, a, l, "throw", e)
+                                            A5(i, n, o, a, l, "throw", e)
                                         }
                                         a(void 0)
                                     })
@@ -37688,7 +37705,7 @@ function() {
                     }
                 };
 
-            function A6(e) {
+            function A7(e) {
                 for (var t = 1; t < arguments.length; t++) {
                     var r = null != arguments[t] ? arguments[t] : {},
                         n = Object.keys(r);
@@ -37707,7 +37724,7 @@ function() {
                 return e
             }
 
-            function A8(e, t) {
+            function A9(e, t) {
                 return t = null != t ? t : {}, Object.getOwnPropertyDescriptors ? Object.defineProperties(e, Object.getOwnPropertyDescriptors(t)) : (function(e) {
                     var t = Object.keys(e);
                     if (Object.getOwnPropertySymbols) {
@@ -37719,14 +37736,14 @@ function() {
                     Object.defineProperty(e, r, Object.getOwnPropertyDescriptor(t, r))
                 }), e
             }
-            var A7 = "margin-x-auto width-full max-width-[200px] medium:max-width-[320px]",
-                A9 = "margin-bottom-[-8px]",
-                Ce = {
+            var Ce = "margin-x-auto width-full max-width-[200px] medium:max-width-[320px]",
+                Ct = "margin-bottom-[-8px]",
+                Cr = {
                     currencyCode: "USD",
                     units: 0,
                     nanos: 0
                 },
-                Ct = {
+                Cn = {
                     invalid: {
                         key: "Description.ReferralInvalid",
                         fallback: "This referral link is no longer valid. You can still join Roblox Plus without the referral reward."
@@ -37736,14 +37753,14 @@ function() {
                         fallback: "This referral reward is not available on your account. You can still join Roblox Plus."
                     }
                 },
-                Cr = function(e, t) {
+                Co = function(e, t) {
                     var r = new URLSearchParams({
                         ctx: "plus_referral",
                         referralCode: e
                     });
                     return t && r.set("referrerId", t), "/plus?".concat(r.toString())
                 },
-                Cn = function(e) {
+                Ci = function(e) {
                     var t = e.face,
                         r = e.open,
                         n = e.onOpenChange,
@@ -37761,16 +37778,16 @@ function() {
                         },
                         y = "pitch" === t,
                         m = oc().number(100),
-                        h = EG(null != u ? u : Ce),
-                        b = AR(y ? i : void 0),
+                        h = EK(null != u ? u : Cr),
+                        b = AL(y ? i : void 0),
                         v = b.handle,
                         g = b.isLoading,
                         w = d("Heading.ReferralRecipientJoin", void 0, "Join Plus, get"),
                         O = d("Action.ReferralJoinPlus", void 0, "Join Roblox Plus"),
                         S = d("Action.Subscribe", void 0, "Subscribe"),
                         x = (0, e1.useMemo)(function() {
-                            var e, t, r = void 0 !== o ? Cr(o, i) : void 0;
-                            return A8(A6({}, l), {
+                            var e, t, r = void 0 !== o ? Co(o, i) : void 0;
+                            return A9(A7({}, l), {
                                 redirectUrl: null != (e = l.redirectUrl) ? e : r,
                                 referrerId: null != (t = l.referrerId) ? t : i
                             })
@@ -37793,7 +37810,7 @@ function() {
                             render: function(e) {
                                 return (0, p.jsx)("a", {
                                     className: "content-link underline",
-                                    href: EC,
+                                    href: EM,
                                     rel: "noopener noreferrer",
                                     target: "_blank",
                                     children: e
@@ -37805,40 +37822,40 @@ function() {
                         r && (E.current = !1)
                     }, [r]);
                     var j = (0, e1.useCallback)(function() {
-                            E.current = !0, AK(t, i, o, a), EV("ReferralSubscribeClick", A6({
+                            E.current = !0, Aq(t, i, o, a), EY("ReferralSubscribeClick", A7({
                                 face: t
                             }, a ? {
                                 surface: a
                             } : {}))
                         }, [t, i, o, a]),
                         I = (0, e1.useCallback)(function(e) {
-                            e || E.current || (AY(t, i, o, a), EV("ReferralDismissed", A6({
+                            e || E.current || (AQ(t, i, o, a), EY("ReferralDismissed", A7({
                                 face: t
                             }, a ? {
                                 surface: a
                             } : {}))), n(e)
                         }, [t, n, i, o, a]);
-                    return (0, p.jsx)(jS, {
+                    return (0, p.jsx)(jE, {
                         open: r,
                         onOpenChange: I,
-                        children: (0, p.jsxs)(jx, {
+                        children: (0, p.jsxs)(jj, {
                             centerSheetSize: "Medium",
                             className: y ? "[&>[role=separator]]:[display:none]" : void 0,
                             closeLabel: d("Action.Close"),
                             largeScreenVariant: "center",
-                            children: [(0, p.jsx)(jE, {
+                            children: [(0, p.jsx)(jA, {
                                 visuallyHideTitleText: !0,
                                 children: y ? "".concat(w, " ").concat(m) : O
-                            }), "pitch" === t ? (0, p.jsxs)(jP, {
+                            }), "pitch" === t ? (0, p.jsxs)(jI, {
                                 className: "gap-y-medium padding-top-small padding-bottom-small medium:padding-top-medium medium:padding-bottom-medium flex flex-col",
                                 children: [(0, p.jsx)("img", {
                                     alt: "",
-                                    className: "".concat(A7, " ").concat(A9, " dark:hidden"),
-                                    src: A$("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIzMjAiIGhlaWdodD0iMTgwIiBmaWxsPSJub25lIiB2aWV3Qm94PSIwIDAgMzIwIDE4MCI+PHBhdGggZmlsbD0iIzFiMjU0YiIgZmlsbC1vcGFjaXR5PSIuMTYiIGQ9Ik0yNTYuNDg2IDM2LjkwNWE0IDQgMCAwIDEgMi42MzEgNC44NGwtMjMuODExIDg4Ljg2Ni0uMDU5LjE5OGE0IDQgMCAwIDEtNC42NCAyLjY3OWwtLjItLjA0OS02NS4xMzMtMTcuNDUyLS40NDgtMS42NzMgNjUuOTY5IDE3LjY3NmEyLjUgMi41IDAgMCAwIDMuMDYyLTEuNzY3bDIzLjgxMS04OC44NjZhMi41IDIuNSAwIDAgMC0xLjc2OC0zLjA2MmwtODguODY1LTIzLjgxYTIuNSAyLjUgMCAwIDAtMy4wNjIgMS43NjdMMTUxLjI2MiA2My42OWwtLjc3Ni0yLjg5OCAxMi4wMzgtNDQuOTI4YTQgNCAwIDAgMSA0Ljg5OS0yLjgyOWw4OC44NjUgMjMuODEyeiIvPjxwYXRoIGZpbGw9IiMyMDIyMjciIGQ9Ik0yMDIuMjMzIDQyLjc4YTkuODYgOS44NiAwIDAgMSA5LjMyMiAyLjQ5OGwxNi4wNzQgMTUuNzM5YzIuNDQ4IDIuMzk3IDMuNDIxIDUuODc2IDIuNTUgOS4xMjVsLTUuNzE2IDIxLjMzMi0uMDg2LjMwMmMtLjk0NiAzLjEwMy0zLjQ2OSA1LjUtNi42ODUgNi4zMjVsLTIxLjc5IDUuNTkzLS4zMTIuMDc1YTkuODYgOS44NiAwIDAgMS05LjAwOS0yLjU3M2wtMTYuMDc0LTE1LjczOGMtMi4zNzItMi4zMjMtMy4zNTktNS42Ni0yLjYyNy04LjgybC4wNzctLjMwNUwxNzMuNjcyIDU1Yy44NDQtMy4xNDggMy4yOTMtNS42MTggNi40NjMtNi41NDNsLjMwOS0uMDg0em02LjE3MyA1LjcxNGE1LjM2IDUuMzYgMCAwIDAtNS4wNTQtMS4zNTRsLTIxLjc4OSA1LjU5MmMtMS43ODIuNDU3LTMuMTAzIDEuNzktMy41NDQgMy40MzRsLTUuNzE2IDIxLjMzMWMtLjQ0IDEuNjQ0LjAzNyAzLjQ2IDEuMzUyIDQuNzQ2bDE2LjA3NCAxNS43MzhhNS4zNiA1LjM2IDAgMCAwIDUuMDU0IDEuMzU0bDIxLjc5LTUuNTkyYzEuNzgyLS40NTcgMy4xMDMtMS43OSAzLjU0NC0zLjQzNGw1LjcxNS0yMS4zMzJjLjQ0MS0xLjY0NC0uMDM3LTMuNDU4LTEuMzUyLTQuNzQ2em0tNi4yNzcgNS4yODhhNC4xNiA0LjE2IDAgMCAxIDQuMDE1IDEuMDc2bDExLjMwNCAxMS4zMDNhNC4xNiA0LjE2IDAgMCAxIDEuMDc1IDQuMDE0bC00LjEzNyAxNS40NDFhNC4xNiA0LjE2IDAgMCAxLTIuOTM5IDIuOTRsLTE1LjQ0MSA0LjEzNmE0LjE2IDQuMTYgMCAwIDEtNC4wMTQtMS4wNzZsLTExLjMwNC0xMS4zMDNhNC4xNiA0LjE2IDAgMCAxLTEuMDc1LTQuMDE0bDQuMTM3LTE1LjQ0MWE0LjE2IDQuMTYgMCAwIDEgMi45MzktMi45NHptLTcuMjUyIDkuMDE1YTIuMjUgMi4yNSAwIDAgMC0yLjc1NSAxLjU5MWwtMy40OTUgMTMuMDRhMi4yNSAyLjI1IDAgMCAwIDEuNTkxIDIuNzU2bDEzLjA0IDMuNDk0YTIuMjUgMi4yNSAwIDAgMCAyLjc1Ni0xLjU5MWwzLjQ5NC0xMy4wNGEyLjI1IDIuMjUgMCAwIDAtMS41OTEtMi43NTZ6Ii8+PHBhdGggZmlsbD0iIzFiMjU0YiIgZmlsbC1vcGFjaXR5PSIuMTYiIGQ9Im0xNjYuOTg1IDEzNy44MDMuMzg4IDEuNDQ5LTg4Ljg2NSAyMy44MTEtLjM4OC0xLjQ0OXptMS43NjgtMy4wNjItMjMuODExLTg4Ljg2NWEyLjUgMi41IDAgMCAwLTMuMDYyLTEuNzY4TDUzLjAxNSA2Ny45MmEyLjUgMi41IDAgMCAwLTEuNzY4IDMuMDYxbDIzLjgxMSA4OC44NjZhMi41IDIuNSAwIDAgMCAzLjA2MiAxLjc2N2wuMzg4IDEuNDQ5LS4yLjA0OWE0IDQgMCAwIDEtNC42NC0yLjY3OWwtLjA1OS0uMTk4TDQ5Ljc5OCA3MS4zN2E0IDQgMCAwIDEgMi44MjgtNC45bDg4Ljg2Ni0yMy44MS4yLS4wNWE0IDQgMCAwIDEgNC42OTkgMi44NzhsMjMuODExIDg4Ljg2NS4wNDkuMmE0IDQgMCAwIDEtMi42OCA0LjY0MWwtLjE5OC4wNTgtLjM4OC0xLjQ0OWEyLjUgMi41IDAgMCAwIDEuNzY4LTMuMDYyIi8+PHBhdGggZmlsbD0iIzIwMjIyNyIgZD0iTTk3LjUxMyA3NC45MDJhOS44NiA5Ljg2IDAgMCAxIDkuMzIxLTIuNDk4bDIxLjc5IDUuNTkzYzMuMzE5Ljg1MiA1LjkwMSAzLjM3OCA2Ljc3MSA2LjYyOGw1LjcxNiAyMS4zMzEuMDc3LjMwNWMuNzMyIDMuMTYxLS4yNTUgNi40OTgtMi42MjcgOC44MmwtMTYuMDc0IDE1LjczOS0uMjMzLjIyMWE5Ljg2IDkuODYgMCAwIDEtOS4wODkgMi4yNzdsLTcuMzg5LTEuODk3YTMgMyAwIDAgMS0yLjE1Mi0yLjEzbC03LjUwNy0yOC4wMTYtMS4wMDMtMy43NGE0IDQgMCAwIDEgMi44MjgtNC45bDE3LjM4Ny00LjY2YTQgNCAwIDAgMSA0Ljg5OCAyLjgyOGw0LjA3NyAxNS4yMTNhNCA0IDAgMCAxLTIuODI5IDQuODk5bC04LjY5MyAyLjMzYTEuNzUgMS43NSAwIDAgMS0uOTA2LTMuMzgxbDguNjk0LTIuMzNhLjUuNSAwIDAgMCAuMzUzLS42MTJsLTQuMDc2LTE1LjIxM2EuNS41IDAgMCAwLS42MTMtLjM1NGwtMTcuMzg2IDQuNjZhLjUuNSAwIDAgMC0uMzUzLjYxM2w4LjQzNCAzMS40NzYgNy4xMDYgMS44MjRhNi4zNiA2LjM2IDAgMCAwIDYuMDA0LTEuNjA4bDE2LjA3My0xNS43MzljMS41NjctMS41MzQgMi4xNTQtMy43MTggMS42MTgtNS43MTlsLTUuNzE1LTIxLjMzMWMtLjUzNy0yLjAwMS0yLjEzNy0zLjYtNC4yNjEtNC4xNDRsLTIxLjc5LTUuNTkzYTYuMzYgNi4zNiAwIDAgMC02LjAwMyAxLjYwOEw4My44ODcgOTMuMTQxYy0xLjU2NiAxLjUzNC0yLjE1NCAzLjcxOC0xLjYxOCA1LjcxOWw1LjcxNiAyMS4zMzFjLjUzNiAyLjAwMSAyLjEzNyAzLjU5OSA0LjI2IDQuMTQ0bDMuMTMxLjgwM2ExLjc1IDEuNzUgMCAwIDEtLjg3IDMuMzlsLTMuMTMtLjgwM2MtMy4yMTYtLjgyNi01Ljc0LTMuMjIyLTYuNjg2LTYuMzI1bC0uMDg2LS4zMDMtNS43MTUtMjEuMzMxYy0uODQ0LTMuMTQ4LjA0Mi02LjUxMiAyLjMyNS04Ljg5OGwuMjI1LS4yMjh6Ii8+PC9zdmc+")
+                                    className: "".concat(Ce, " ").concat(Ct, " dark:hidden"),
+                                    src: wM("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIzMjAiIGhlaWdodD0iMTgwIiBmaWxsPSJub25lIiB2aWV3Qm94PSIwIDAgMzIwIDE4MCI+PHBhdGggZmlsbD0iIzFiMjU0YiIgZmlsbC1vcGFjaXR5PSIuMTYiIGQ9Ik0yNTYuNDg2IDM2LjkwNWE0IDQgMCAwIDEgMi42MzEgNC44NGwtMjMuODExIDg4Ljg2Ni0uMDU5LjE5OGE0IDQgMCAwIDEtNC42NCAyLjY3OWwtLjItLjA0OS02NS4xMzMtMTcuNDUyLS40NDgtMS42NzMgNjUuOTY5IDE3LjY3NmEyLjUgMi41IDAgMCAwIDMuMDYyLTEuNzY3bDIzLjgxMS04OC44NjZhMi41IDIuNSAwIDAgMC0xLjc2OC0zLjA2MmwtODguODY1LTIzLjgxYTIuNSAyLjUgMCAwIDAtMy4wNjIgMS43NjdMMTUxLjI2MiA2My42OWwtLjc3Ni0yLjg5OCAxMi4wMzgtNDQuOTI4YTQgNCAwIDAgMSA0Ljg5OS0yLjgyOWw4OC44NjUgMjMuODEyeiIvPjxwYXRoIGZpbGw9IiMyMDIyMjciIGQ9Ik0yMDIuMjMzIDQyLjc4YTkuODYgOS44NiAwIDAgMSA5LjMyMiAyLjQ5OGwxNi4wNzQgMTUuNzM5YzIuNDQ4IDIuMzk3IDMuNDIxIDUuODc2IDIuNTUgOS4xMjVsLTUuNzE2IDIxLjMzMi0uMDg2LjMwMmMtLjk0NiAzLjEwMy0zLjQ2OSA1LjUtNi42ODUgNi4zMjVsLTIxLjc5IDUuNTkzLS4zMTIuMDc1YTkuODYgOS44NiAwIDAgMS05LjAwOS0yLjU3M2wtMTYuMDc0LTE1LjczOGMtMi4zNzItMi4zMjMtMy4zNTktNS42Ni0yLjYyNy04LjgybC4wNzctLjMwNUwxNzMuNjcyIDU1Yy44NDQtMy4xNDggMy4yOTMtNS42MTggNi40NjMtNi41NDNsLjMwOS0uMDg0em02LjE3MyA1LjcxNGE1LjM2IDUuMzYgMCAwIDAtNS4wNTQtMS4zNTRsLTIxLjc4OSA1LjU5MmMtMS43ODIuNDU3LTMuMTAzIDEuNzktMy41NDQgMy40MzRsLTUuNzE2IDIxLjMzMWMtLjQ0IDEuNjQ0LjAzNyAzLjQ2IDEuMzUyIDQuNzQ2bDE2LjA3NCAxNS43MzhhNS4zNiA1LjM2IDAgMCAwIDUuMDU0IDEuMzU0bDIxLjc5LTUuNTkyYzEuNzgyLS40NTcgMy4xMDMtMS43OSAzLjU0NC0zLjQzNGw1LjcxNS0yMS4zMzJjLjQ0MS0xLjY0NC0uMDM3LTMuNDU4LTEuMzUyLTQuNzQ2em0tNi4yNzcgNS4yODhhNC4xNiA0LjE2IDAgMCAxIDQuMDE1IDEuMDc2bDExLjMwNCAxMS4zMDNhNC4xNiA0LjE2IDAgMCAxIDEuMDc1IDQuMDE0bC00LjEzNyAxNS40NDFhNC4xNiA0LjE2IDAgMCAxLTIuOTM5IDIuOTRsLTE1LjQ0MSA0LjEzNmE0LjE2IDQuMTYgMCAwIDEtNC4wMTQtMS4wNzZsLTExLjMwNC0xMS4zMDNhNC4xNiA0LjE2IDAgMCAxLTEuMDc1LTQuMDE0bDQuMTM3LTE1LjQ0MWE0LjE2IDQuMTYgMCAwIDEgMi45MzktMi45NHptLTcuMjUyIDkuMDE1YTIuMjUgMi4yNSAwIDAgMC0yLjc1NSAxLjU5MWwtMy40OTUgMTMuMDRhMi4yNSAyLjI1IDAgMCAwIDEuNTkxIDIuNzU2bDEzLjA0IDMuNDk0YTIuMjUgMi4yNSAwIDAgMCAyLjc1Ni0xLjU5MWwzLjQ5NC0xMy4wNGEyLjI1IDIuMjUgMCAwIDAtMS41OTEtMi43NTZ6Ii8+PHBhdGggZmlsbD0iIzFiMjU0YiIgZmlsbC1vcGFjaXR5PSIuMTYiIGQ9Im0xNjYuOTg1IDEzNy44MDMuMzg4IDEuNDQ5LTg4Ljg2NSAyMy44MTEtLjM4OC0xLjQ0OXptMS43NjgtMy4wNjItMjMuODExLTg4Ljg2NWEyLjUgMi41IDAgMCAwLTMuMDYyLTEuNzY4TDUzLjAxNSA2Ny45MmEyLjUgMi41IDAgMCAwLTEuNzY4IDMuMDYxbDIzLjgxMSA4OC44NjZhMi41IDIuNSAwIDAgMCAzLjA2MiAxLjc2N2wuMzg4IDEuNDQ5LS4yLjA0OWE0IDQgMCAwIDEtNC42NC0yLjY3OWwtLjA1OS0uMTk4TDQ5Ljc5OCA3MS4zN2E0IDQgMCAwIDEgMi44MjgtNC45bDg4Ljg2Ni0yMy44MS4yLS4wNWE0IDQgMCAwIDEgNC42OTkgMi44NzhsMjMuODExIDg4Ljg2NS4wNDkuMmE0IDQgMCAwIDEtMi42OCA0LjY0MWwtLjE5OC4wNTgtLjM4OC0xLjQ0OWEyLjUgMi41IDAgMCAwIDEuNzY4LTMuMDYyIi8+PHBhdGggZmlsbD0iIzIwMjIyNyIgZD0iTTk3LjUxMyA3NC45MDJhOS44NiA5Ljg2IDAgMCAxIDkuMzIxLTIuNDk4bDIxLjc5IDUuNTkzYzMuMzE5Ljg1MiA1LjkwMSAzLjM3OCA2Ljc3MSA2LjYyOGw1LjcxNiAyMS4zMzEuMDc3LjMwNWMuNzMyIDMuMTYxLS4yNTUgNi40OTgtMi42MjcgOC44MmwtMTYuMDc0IDE1LjczOS0uMjMzLjIyMWE5Ljg2IDkuODYgMCAwIDEtOS4wODkgMi4yNzdsLTcuMzg5LTEuODk3YTMgMyAwIDAgMS0yLjE1Mi0yLjEzbC03LjUwNy0yOC4wMTYtMS4wMDMtMy43NGE0IDQgMCAwIDEgMi44MjgtNC45bDE3LjM4Ny00LjY2YTQgNCAwIDAgMSA0Ljg5OCAyLjgyOGw0LjA3NyAxNS4yMTNhNCA0IDAgMCAxLTIuODI5IDQuODk5bC04LjY5MyAyLjMzYTEuNzUgMS43NSAwIDAgMS0uOTA2LTMuMzgxbDguNjk0LTIuMzNhLjUuNSAwIDAgMCAuMzUzLS42MTJsLTQuMDc2LTE1LjIxM2EuNS41IDAgMCAwLS42MTMtLjM1NGwtMTcuMzg2IDQuNjZhLjUuNSAwIDAgMC0uMzUzLjYxM2w4LjQzNCAzMS40NzYgNy4xMDYgMS44MjRhNi4zNiA2LjM2IDAgMCAwIDYuMDA0LTEuNjA4bDE2LjA3My0xNS43MzljMS41NjctMS41MzQgMi4xNTQtMy43MTggMS42MTgtNS43MTlsLTUuNzE1LTIxLjMzMWMtLjUzNy0yLjAwMS0yLjEzNy0zLjYtNC4yNjEtNC4xNDRsLTIxLjc5LTUuNTkzYTYuMzYgNi4zNiAwIDAgMC02LjAwMyAxLjYwOEw4My44ODcgOTMuMTQxYy0xLjU2NiAxLjUzNC0yLjE1NCAzLjcxOC0xLjYxOCA1LjcxOWw1LjcxNiAyMS4zMzFjLjUzNiAyLjAwMSAyLjEzNyAzLjU5OSA0LjI2IDQuMTQ0bDMuMTMxLjgwM2ExLjc1IDEuNzUgMCAwIDEtLjg3IDMuMzlsLTMuMTMtLjgwM2MtMy4yMTYtLjgyNi01Ljc0LTMuMjIyLTYuNjg2LTYuMzI1bC0uMDg2LS4zMDMtNS43MTUtMjEuMzMxYy0uODQ0LTMuMTQ4LjA0Mi02LjUxMiAyLjMyNS04Ljg5OGwuMjI1LS4yMjh6Ii8+PC9zdmc+")
                                 }), (0, p.jsx)("img", {
                                     alt: "",
-                                    className: "".concat(A7, " ").concat(A9, " hidden dark:block"),
-                                    src: A$("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIzMjAiIGhlaWdodD0iMTgwIiBmaWxsPSJub25lIiB2aWV3Qm94PSIwIDAgMzIwIDE4MCI+PHBhdGggZmlsbD0iI2QwZDlmYiIgZmlsbC1vcGFjaXR5PSIuMTYiIGQ9Ik0yNTYuNDg2IDM2LjkwNWE0IDQgMCAwIDEgMi42MzEgNC44NGwtMjMuODExIDg4Ljg2Ni0uMDU5LjE5OGE0IDQgMCAwIDEtNC42NCAyLjY3OWwtLjItLjA0OS02NS4xMzMtMTcuNDUyLS40NDgtMS42NzMgNjUuOTY5IDE3LjY3NmEyLjUgMi41IDAgMCAwIDMuMDYyLTEuNzY3bDIzLjgxMS04OC44NjZhMi41IDIuNSAwIDAgMC0xLjc2OC0zLjA2MmwtODguODY1LTIzLjgxYTIuNSAyLjUgMCAwIDAtMy4wNjIgMS43NjdMMTUxLjI2MiA2My42OWwtLjc3Ni0yLjg5OCAxMi4wMzgtNDQuOTI4YTQgNCAwIDAgMSA0Ljg5OS0yLjgyOWw4OC44NjUgMjMuODEyeiIvPjxwYXRoIGZpbGw9IiNmN2Y3ZjgiIGQ9Ik0yMDIuMjMzIDQyLjc4YTkuODYgOS44NiAwIDAgMSA5LjMyMiAyLjQ5OGwxNi4wNzQgMTUuNzM5YzIuNDQ4IDIuMzk3IDMuNDIxIDUuODc2IDIuNTUgOS4xMjVsLTUuNzE2IDIxLjMzMi0uMDg2LjMwMmMtLjk0NiAzLjEwMy0zLjQ2OSA1LjUtNi42ODUgNi4zMjVsLTIxLjc5IDUuNTkzLS4zMTIuMDc1YTkuODYgOS44NiAwIDAgMS05LjAwOS0yLjU3M2wtMTYuMDc0LTE1LjczOGMtMi4zNzItMi4zMjMtMy4zNTktNS42Ni0yLjYyNy04LjgybC4wNzctLjMwNUwxNzMuNjcyIDU1Yy44NDQtMy4xNDggMy4yOTMtNS42MTggNi40NjMtNi41NDNsLjMwOS0uMDg0em02LjUyMyA1LjM1NmE1Ljg2IDUuODYgMCAwIDAtNS41MjgtMS40ODJsLTIxLjc5IDUuNTkzYy0xLjk1My41MDItMy40MTQgMS45NjctMy45MDIgMy43OWwtNS43MTYgMjEuMzNjLS40ODggMS44MjMuMDQ0IDMuODIzIDEuNDg1IDUuMjMzbDE2LjA3NSAxNS43NGE1Ljg2IDUuODYgMCAwIDAgNS41MjcgMS40OGwyMS43OTEtNS41OTJjMS45NTMtLjUwMiAzLjQxMy0xLjk2NyAzLjkwMi0zLjc5bDUuNzE1LTIxLjMzMWMuNDg5LTEuODIzLS4wNDMtMy44MjItMS40ODQtNS4yMzN6bS02LjYyNyA1LjY0NmE0LjE2IDQuMTYgMCAwIDEgNC4wMTUgMS4wNzZsMTEuMzA0IDExLjMwM2E0LjE2IDQuMTYgMCAwIDEgMS4wNzUgNC4wMTRsLTQuMTM3IDE1LjQ0MWE0LjE2IDQuMTYgMCAwIDEtMi45MzkgMi45NGwtMTUuNDQxIDQuMTM2YTQuMTYgNC4xNiAwIDAgMS00LjAxNC0xLjA3NmwtMTEuMzA0LTExLjMwM2E0LjE2IDQuMTYgMCAwIDEtMS4wNzUtNC4wMTRsNC4xMzctMTUuNDQxYTQuMTYgNC4xNiAwIDAgMSAyLjkzOS0yLjk0em0tNy4yNTIgOS4wMTVhMi4yNSAyLjI1IDAgMCAwLTIuNzU1IDEuNTkxbC0zLjQ5NSAxMy4wNGEyLjI1IDIuMjUgMCAwIDAgMS41OTEgMi43NTZsMTMuMDQgMy40OTRhMi4yNSAyLjI1IDAgMCAwIDIuNzU2LTEuNTkxbDMuNDk0LTEzLjA0YTIuMjUgMi4yNSAwIDAgMC0xLjU5MS0yLjc1NnoiLz48cGF0aCBmaWxsPSIjZDBkOWZiIiBmaWxsLW9wYWNpdHk9Ii4xNiIgZD0ibTE2Ni45ODUgMTM3LjgwMy4zODggMS40NDktODguODY1IDIzLjgxMS0uMzg4LTEuNDQ5em0xLjc2OC0zLjA2Mi0yMy44MTEtODguODY1YTIuNSAyLjUgMCAwIDAtMy4wNjItMS43NjhMNTMuMDE1IDY3LjkyYTIuNSAyLjUgMCAwIDAtMS43NjggMy4wNjFsMjMuODExIDg4Ljg2NmEyLjUgMi41IDAgMCAwIDMuMDYyIDEuNzY3bC4zODggMS40NDktLjIuMDQ5YTQgNCAwIDAgMS00LjY0LTIuNjc5bC0uMDU5LS4xOThMNDkuNzk4IDcxLjM3YTQgNCAwIDAgMSAyLjgyOC00LjlsODguODY2LTIzLjgxLjItLjA1YTQgNCAwIDAgMSA0LjY5OSAyLjg3OGwyMy44MTEgODguODY1LjA0OS4yYTQgNCAwIDAgMS0yLjY4IDQuNjQxbC0uMTk4LjA1OC0uMzg4LTEuNDQ5YTIuNSAyLjUgMCAwIDAgMS43NjgtMy4wNjIiLz48cGF0aCBmaWxsPSIjZjdmN2Y4IiBkPSJNOTcuNDA1IDc0LjQ5OEE5Ljg2IDkuODYgMCAwIDEgMTA2LjcyNiA3MmwyMS43OSA1LjU5M2MzLjMxOS44NTIgNS45MDEgMy4zNzggNi43NzEgNi42MjhsNS43MTYgMjEuMzMxLjA3Ny4zMDVjLjczMiAzLjE2MS0uMjU1IDYuNDk4LTIuNjI3IDguODJsLTE2LjA3NCAxNS43MzktLjIzMy4yMjFhOS44NiA5Ljg2IDAgMCAxLTkuMDg5IDIuMjc3bC03LjUzMS0xLjkzNGEyLjI1IDIuMjUgMCAwIDEtMS42MTQtMS41OTdsLTcuNjU3LTI4LjU3OC0uMDA1LjAwMS0xLjAwMi0zLjc0YTMuNzUgMy43NSAwIDAgMSAyLjY1MS00LjU5NGwxNy4zODYtNC42NmEzLjc1IDMuNzUgMCAwIDEgNC41OTMgMi42NTJsNC4wNzYgMTUuMjEzYTMuNzUgMy43NSAwIDAgMS0yLjY1MSA0LjU5M2wtOC42OTMgMi4zMjlhMS41IDEuNSAwIDAgMS0uNzc3LTIuODk4bDguNjkzLTIuMzI5YS43NS43NSAwIDAgMCAuNTMxLS45MTlMMTE2Ljk4IDkxLjI0YS43NS43NSAwIDAgMC0uOTE4LS41M2wtMTcuMzg2IDQuNjZhLjc1Ljc1IDAgMCAwLS41My45MTlsOC41NDUgMzEuODkzIDcuMTEyIDEuODI2YTYuODYgNi44NiAwIDAgMCA2LjQ3Ny0xLjczNWwxNi4wNzQtMTUuNzM5YzEuNjkzLTEuNjU3IDIuMzM1LTQuMDI2IDEuNzUxLTYuMjA1bC01LjcxNS0yMS4zMzJjLS41ODQtMi4xNzktMi4zMjUtMy45MS00LjYyLTQuNDk5bC0yMS43OS01LjU5M2E2Ljg2IDYuODYgMCAwIDAtNi40NzYgMS43MzZMODMuNDMgOTIuMzc5Yy0xLjY5MyAxLjY1OC0yLjMzNSA0LjAyNy0xLjc1MiA2LjIwNmw1LjcxNiAyMS4zMzJjLjU4NCAyLjE3OSAyLjMyNSAzLjkwOSA0LjYyIDQuNDk4bDIuNDA0LjYxN2ExLjUgMS41IDAgMCAxLS43NDUgMi45MDZsLTIuNDA1LS42MTdjLTMuMjE2LS44MjYtNS43NC0zLjIyMi02LjY4NS02LjMyNmwtLjA4Ny0uMzAyLTUuNzE1LTIxLjMzMWMtLjg0NC0zLjE0OC4wNDItNi41MTIgMi4zMjUtOC44OTlsLjIyNS0uMjI3eiIvPjwvc3ZnPg==")
+                                    className: "".concat(Ce, " ").concat(Ct, " hidden dark:block"),
+                                    src: wM("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIzMjAiIGhlaWdodD0iMTgwIiBmaWxsPSJub25lIiB2aWV3Qm94PSIwIDAgMzIwIDE4MCI+PHBhdGggZmlsbD0iI2QwZDlmYiIgZmlsbC1vcGFjaXR5PSIuMTYiIGQ9Ik0yNTYuNDg2IDM2LjkwNWE0IDQgMCAwIDEgMi42MzEgNC44NGwtMjMuODExIDg4Ljg2Ni0uMDU5LjE5OGE0IDQgMCAwIDEtNC42NCAyLjY3OWwtLjItLjA0OS02NS4xMzMtMTcuNDUyLS40NDgtMS42NzMgNjUuOTY5IDE3LjY3NmEyLjUgMi41IDAgMCAwIDMuMDYyLTEuNzY3bDIzLjgxMS04OC44NjZhMi41IDIuNSAwIDAgMC0xLjc2OC0zLjA2MmwtODguODY1LTIzLjgxYTIuNSAyLjUgMCAwIDAtMy4wNjIgMS43NjdMMTUxLjI2MiA2My42OWwtLjc3Ni0yLjg5OCAxMi4wMzgtNDQuOTI4YTQgNCAwIDAgMSA0Ljg5OS0yLjgyOWw4OC44NjUgMjMuODEyeiIvPjxwYXRoIGZpbGw9IiNmN2Y3ZjgiIGQ9Ik0yMDIuMjMzIDQyLjc4YTkuODYgOS44NiAwIDAgMSA5LjMyMiAyLjQ5OGwxNi4wNzQgMTUuNzM5YzIuNDQ4IDIuMzk3IDMuNDIxIDUuODc2IDIuNTUgOS4xMjVsLTUuNzE2IDIxLjMzMi0uMDg2LjMwMmMtLjk0NiAzLjEwMy0zLjQ2OSA1LjUtNi42ODUgNi4zMjVsLTIxLjc5IDUuNTkzLS4zMTIuMDc1YTkuODYgOS44NiAwIDAgMS05LjAwOS0yLjU3M2wtMTYuMDc0LTE1LjczOGMtMi4zNzItMi4zMjMtMy4zNTktNS42Ni0yLjYyNy04LjgybC4wNzctLjMwNUwxNzMuNjcyIDU1Yy44NDQtMy4xNDggMy4yOTMtNS42MTggNi40NjMtNi41NDNsLjMwOS0uMDg0em02LjUyMyA1LjM1NmE1Ljg2IDUuODYgMCAwIDAtNS41MjgtMS40ODJsLTIxLjc5IDUuNTkzYy0xLjk1My41MDItMy40MTQgMS45NjctMy45MDIgMy43OWwtNS43MTYgMjEuMzNjLS40ODggMS44MjMuMDQ0IDMuODIzIDEuNDg1IDUuMjMzbDE2LjA3NSAxNS43NGE1Ljg2IDUuODYgMCAwIDAgNS41MjcgMS40OGwyMS43OTEtNS41OTJjMS45NTMtLjUwMiAzLjQxMy0xLjk2NyAzLjkwMi0zLjc5bDUuNzE1LTIxLjMzMWMuNDg5LTEuODIzLS4wNDMtMy44MjItMS40ODQtNS4yMzN6bS02LjYyNyA1LjY0NmE0LjE2IDQuMTYgMCAwIDEgNC4wMTUgMS4wNzZsMTEuMzA0IDExLjMwM2E0LjE2IDQuMTYgMCAwIDEgMS4wNzUgNC4wMTRsLTQuMTM3IDE1LjQ0MWE0LjE2IDQuMTYgMCAwIDEtMi45MzkgMi45NGwtMTUuNDQxIDQuMTM2YTQuMTYgNC4xNiAwIDAgMS00LjAxNC0xLjA3NmwtMTEuMzA0LTExLjMwM2E0LjE2IDQuMTYgMCAwIDEtMS4wNzUtNC4wMTRsNC4xMzctMTUuNDQxYTQuMTYgNC4xNiAwIDAgMSAyLjkzOS0yLjk0em0tNy4yNTIgOS4wMTVhMi4yNSAyLjI1IDAgMCAwLTIuNzU1IDEuNTkxbC0zLjQ5NSAxMy4wNGEyLjI1IDIuMjUgMCAwIDAgMS41OTEgMi43NTZsMTMuMDQgMy40OTRhMi4yNSAyLjI1IDAgMCAwIDIuNzU2LTEuNTkxbDMuNDk0LTEzLjA0YTIuMjUgMi4yNSAwIDAgMC0xLjU5MS0yLjc1NnoiLz48cGF0aCBmaWxsPSIjZDBkOWZiIiBmaWxsLW9wYWNpdHk9Ii4xNiIgZD0ibTE2Ni45ODUgMTM3LjgwMy4zODggMS40NDktODguODY1IDIzLjgxMS0uMzg4LTEuNDQ5em0xLjc2OC0zLjA2Mi0yMy44MTEtODguODY1YTIuNSAyLjUgMCAwIDAtMy4wNjItMS43NjhMNTMuMDE1IDY3LjkyYTIuNSAyLjUgMCAwIDAtMS43NjggMy4wNjFsMjMuODExIDg4Ljg2NmEyLjUgMi41IDAgMCAwIDMuMDYyIDEuNzY3bC4zODggMS40NDktLjIuMDQ5YTQgNCAwIDAgMS00LjY0LTIuNjc5bC0uMDU5LS4xOThMNDkuNzk4IDcxLjM3YTQgNCAwIDAgMSAyLjgyOC00LjlsODguODY2LTIzLjgxLjItLjA1YTQgNCAwIDAgMSA0LjY5OSAyLjg3OGwyMy44MTEgODguODY1LjA0OS4yYTQgNCAwIDAgMS0yLjY4IDQuNjQxbC0uMTk4LjA1OC0uMzg4LTEuNDQ5YTIuNSAyLjUgMCAwIDAgMS43NjgtMy4wNjIiLz48cGF0aCBmaWxsPSIjZjdmN2Y4IiBkPSJNOTcuNDA1IDc0LjQ5OEE5Ljg2IDkuODYgMCAwIDEgMTA2LjcyNiA3MmwyMS43OSA1LjU5M2MzLjMxOS44NTIgNS45MDEgMy4zNzggNi43NzEgNi42MjhsNS43MTYgMjEuMzMxLjA3Ny4zMDVjLjczMiAzLjE2MS0uMjU1IDYuNDk4LTIuNjI3IDguODJsLTE2LjA3NCAxNS43MzktLjIzMy4yMjFhOS44NiA5Ljg2IDAgMCAxLTkuMDg5IDIuMjc3bC03LjUzMS0xLjkzNGEyLjI1IDIuMjUgMCAwIDEtMS42MTQtMS41OTdsLTcuNjU3LTI4LjU3OC0uMDA1LjAwMS0xLjAwMi0zLjc0YTMuNzUgMy43NSAwIDAgMSAyLjY1MS00LjU5NGwxNy4zODYtNC42NmEzLjc1IDMuNzUgMCAwIDEgNC41OTMgMi42NTJsNC4wNzYgMTUuMjEzYTMuNzUgMy43NSAwIDAgMS0yLjY1MSA0LjU5M2wtOC42OTMgMi4zMjlhMS41IDEuNSAwIDAgMS0uNzc3LTIuODk4bDguNjkzLTIuMzI5YS43NS43NSAwIDAgMCAuNTMxLS45MTlMMTE2Ljk4IDkxLjI0YS43NS43NSAwIDAgMC0uOTE4LS41M2wtMTcuMzg2IDQuNjZhLjc1Ljc1IDAgMCAwLS41My45MTlsOC41NDUgMzEuODkzIDcuMTEyIDEuODI2YTYuODYgNi44NiAwIDAgMCA2LjQ3Ny0xLjczNWwxNi4wNzQtMTUuNzM5YzEuNjkzLTEuNjU3IDIuMzM1LTQuMDI2IDEuNzUxLTYuMjA1bC01LjcxNS0yMS4zMzJjLS41ODQtMi4xNzktMi4zMjUtMy45MS00LjYyLTQuNDk5bC0yMS43OS01LjU5M2E2Ljg2IDYuODYgMCAwIDAtNi40NzYgMS43MzZMODMuNDMgOTIuMzc5Yy0xLjY5MyAxLjY1OC0yLjMzNSA0LjAyNy0xLjc1MiA2LjIwNmw1LjcxNiAyMS4zMzJjLjU4NCAyLjE3OSAyLjMyNSAzLjkwOSA0LjYyIDQuNDk4bDIuNDA0LjYxN2ExLjUgMS41IDAgMCAxLS43NDUgMi45MDZsLTIuNDA1LS42MTdjLTMuMjE2LS44MjYtNS43NC0zLjIyMi02LjY4NS02LjMyNmwtLjA4Ny0uMzAyLTUuNzE1LTIxLjMzMWMtLjg0NC0zLjE0OC4wNDItNi41MTIgMi4zMjUtOC44OTlsLjIyNS0uMjI3eiIvPjwvc3ZnPg==")
                                 }), (0, p.jsxs)("div", {
                                     className: "gap-y-medium text-align-x-left flex flex-col items-start",
                                     children: [(0, p.jsxs)("div", {
@@ -37848,7 +37865,7 @@ function() {
                                         },
                                         children: [w, (0, p.jsxs)("span", {
                                             className: "gap-x-xsmall inline-flex items-center",
-                                            children: [(0, p.jsx)(Ed, {
+                                            children: [(0, p.jsx)(Em, {
                                                 name: "icon-regular-robux",
                                                 size: "Large"
                                             }), m]
@@ -37866,29 +37883,29 @@ function() {
                                     className: "text-title-medium content-emphasis margin-none",
                                     children: d("Action.PricePerMonth", {
                                         price: h,
-                                        periodType: null != c ? c : P2
+                                        periodType: null != c ? c : P5
                                     })
-                                }), s && (0, p.jsx)(EN, {
-                                    featureConfig: A8(A6({}, s), {
+                                }), s && (0, p.jsx)(ER, {
+                                    featureConfig: A9(A7({}, s), {
                                         isTradingEnabled: !1,
                                         isUgcPublishingEnabled: !1
                                     }),
-                                    periodType: null != c ? c : P2
+                                    periodType: null != c ? c : P5
                                 })]
-                            }) : (0, p.jsxs)(jP, {
+                            }) : (0, p.jsxs)(jI, {
                                 className: "gap-y-large padding-top-large padding-bottom-medium medium:padding-top-xlarge medium:padding-bottom-large flex flex-col items-center text-center",
-                                children: [(0, p.jsx)(Ed, {
+                                children: [(0, p.jsx)(Em, {
                                     className: "content-emphasis !size-1800 medium:!size-2200",
                                     name: "icon-regular-triangle-exclamation",
                                     size: "XLarge"
                                 }), (0, p.jsx)("p", {
                                     className: "text-body-small medium:text-body-medium content-emphasis margin-none",
-                                    children: d(Ct[t].key, void 0, Ct[t].fallback)
+                                    children: d(Cn[t].key, void 0, Cn[t].fallback)
                                 })]
-                            }), y ? (0, p.jsx)(jj, {
+                            }), y ? (0, p.jsx)(jC, {
                                 children: (0, p.jsxs)("div", {
                                     className: "gap-y-medium width-full flex flex-col",
-                                    children: [(0, p.jsx)(EK, A8(A6({}, x), {
+                                    children: [(0, p.jsx)(Eq, A9(A7({}, x), {
                                         className: "width-full",
                                         size: "Large",
                                         trackSubscriptionButtonClick: j,
@@ -37899,15 +37916,15 @@ function() {
                                         children: wC(d, "Description.ReferralRecipientLegalDisclosure", P)
                                     })]
                                 })
-                            }) : (0, p.jsxs)(jj, {
+                            }) : (0, p.jsxs)(jC, {
                                 className: "gap-y-small flex flex-col",
-                                children: [(0, p.jsx)(EK, A8(A6({}, l), {
+                                children: [(0, p.jsx)(Eq, A9(A7({}, l), {
                                     className: "width-full",
                                     size: "Large",
                                     trackSubscriptionButtonClick: j,
                                     variant: "Emphasis",
                                     children: O
-                                })), (0, p.jsx)(EA, {
+                                })), (0, p.jsx)(EN, {
                                     className: "width-full",
                                     size: "Large",
                                     variant: "Standard",
@@ -37920,7 +37937,7 @@ function() {
                         })
                     })
                 },
-                Co = function(e) {
+                Ca = function(e) {
                     var t = e.face,
                         r = e.hasReferrerId,
                         n = e.referrerId,
@@ -37929,34 +37946,34 @@ function() {
                         a = e.open,
                         l = (0, e1.useRef)(!1);
                     return (0, e1.useEffect)(function() {
-                        !l.current && a && (l.current = !0, EV("PlusReferralSheetShown", A6({
+                        !l.current && a && (l.current = !0, EY("PlusReferralSheetShown", A7({
                             face: t,
                             hasReferrerId: String(r)
                         }, i ? {
                             surface: i
-                        } : {})), AW(t, r, n, o, i))
+                        } : {})), AX(t, r, n, o, i))
                     }, [t, r, n, o, i, a]), null
                 },
-                Ci = function(e) {
+                Cl = function(e) {
                     var t = e.open,
                         r = e.onOpenChange,
                         n = e.invite,
                         o = e.surface,
                         i = e.isReferralRolloutEnabled,
-                        a = void 0 === i ? Ax() : i,
+                        a = void 0 === i ? Aj() : i,
                         l = e.subscribeButtonProps,
                         u = e.subscribePrice,
                         c = e.subscribePeriodType,
                         s = e.subscribeFeatureConfig,
                         f = e.subscribeEligibleOffers,
                         d = void 0 !== n && a,
-                        y = A5({
+                        y = A8({
                             referrerId: null == n ? void 0 : n.referrerId,
                             enabled: d
                         }),
                         m = y.eligibility,
                         h = y.isLoading,
-                        b = A2({
+                        b = A3({
                             enabled: void 0 === l || void 0 === u || void 0 === s || void 0 === f
                         }),
                         v = b.subscribeButtonProps,
@@ -37965,20 +37982,20 @@ function() {
                         O = b.subscribeFeatureConfig,
                         S = b.isLoading,
                         x = null != l ? l : v;
-                    if (AJ({
+                    if (A1({
                             referrerId: null == n ? void 0 : n.referrerId,
                             enabled: d && void 0 !== n.code && "Eligible" === m
                         }), h) return null;
                     var P = d && "Eligible" === m ? "pitch" : "Ineligible" === m ? "ineligible" : "invalid";
                     return "pitch" === P && S || void 0 === x ? null : (0, p.jsxs)(e2().Fragment, {
-                        children: [(0, p.jsx)(Co, {
+                        children: [(0, p.jsx)(Ca, {
                             face: P,
                             hasReferrerId: (null == n ? void 0 : n.referrerId) !== void 0,
                             open: t,
                             referralCode: null == n ? void 0 : n.code,
                             referrerId: null == n ? void 0 : n.referrerId,
                             surface: o
-                        }), (0, p.jsx)(Cn, {
+                        }), (0, p.jsx)(Ci, {
                             face: P,
                             featureConfig: null != s ? s : O,
                             open: t,
@@ -37992,7 +38009,7 @@ function() {
                         })]
                     })
                 },
-                Ca = {
+                Cu = {
                     XSmall: {
                         containerSize: "height-600 width-600",
                         iconSize: "Small"
@@ -38003,12 +38020,12 @@ function() {
                     }
                 };
 
-            function Cl(e) {
+            function Cc(e) {
                 var t = e.thumbnailUrl,
                     r = e.displayName,
                     n = e.size,
                     o = e.className,
-                    i = Ca[n],
+                    i = Cu[n],
                     a = i.containerSize,
                     l = i.iconSize;
                 return (0, p.jsx)("div", {
@@ -38023,9 +38040,9 @@ function() {
                     })
                 })
             }
-            var Cu = "radial-gradient(circle at -10px 12px, transparent 14px, black 14px)";
+            var Cs = "radial-gradient(circle at -10px 12px, transparent 14px, black 14px)";
 
-            function Cc(e) {
+            function Cf(e) {
                 var t = e.pendingTransfers;
                 if (0 === t.length) return null;
                 var r = t.length > 3,
@@ -38054,8 +38071,8 @@ function() {
                             marginLeft: 0 === e ? 0 : -2,
                             zIndex: o - e
                         }, e > 0 && {
-                            maskImage: Cu,
-                            WebkitMaskImage: Cu
+                            maskImage: Cs,
+                            WebkitMaskImage: Cs
                         })
                     };
                 return (0, p.jsxs)("div", {
@@ -38063,7 +38080,7 @@ function() {
                     children: [n.map(function(e, t) {
                         return (0, p.jsx)("div", {
                             style: i(t),
-                            children: (0, p.jsx)(Cl, {
+                            children: (0, p.jsx)(Cc, {
                                 thumbnailUrl: e.sender.thumbnailUrl,
                                 displayName: e.sender.displayName,
                                 size: "XSmall",
@@ -38084,21 +38101,21 @@ function() {
                 })
             }
 
-            function Cs(e, t) {
+            function Cd(e, t) {
                 (null == t || t > e.length) && (t = e.length);
                 for (var r = 0, n = Array(t); r < t; r++) n[r] = e[r];
                 return n
             }
 
-            function Cf(e) {
+            function Cp(e) {
                 if (Array.isArray(e)) return e
             }
 
-            function Cd() {
+            function Cy() {
                 throw TypeError("Invalid attempt to destructure non-iterable instance.\\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.")
             }
 
-            function Cp(e) {
+            function Cm(e) {
                 for (var t = 1; t < arguments.length; t++) {
                     var r = null != arguments[t] ? arguments[t] : {},
                         n = Object.keys(r);
@@ -38117,39 +38134,39 @@ function() {
                 return e
             }
 
-            function Cy(e, t) {
+            function Ch(e, t) {
                 if (e) {
-                    if ("string" == typeof e) return Cs(e, t);
+                    if ("string" == typeof e) return Cd(e, t);
                     var r = Object.prototype.toString.call(e).slice(8, -1);
                     if ("Object" === r && e.constructor && (r = e.constructor.name), "Map" === r || "Set" === r) return Array.from(r);
-                    if ("Arguments" === r || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(r)) return Cs(e, t)
+                    if ("Arguments" === r || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(r)) return Cd(e, t)
                 }
             }
-            var Cm = (0, e1.createContext)(null),
-                Ch = function() {
-                    var e = (0, e1.useContext)(Cm);
+            var Cb = (0, e1.createContext)(null),
+                Cv = function() {
+                    var e = (0, e1.useContext)(Cb);
                     if (!e) throw Error("useListItemProvider must be used within a ListItem");
                     return e
                 },
-                Cb = {
+                Cg = {
                     XSmall: "text-body-small",
                     Small: "text-body-small",
                     Medium: "text-body-medium",
                     Large: "text-body-medium"
                 },
-                Cv = {
+                Cw = {
                     XSmall: "text-title-small",
                     Small: "text-title-medium",
                     Medium: "text-title-medium",
                     Large: "text-title-large"
                 },
-                Cg = {
+                CO = {
                     XSmall: "text-body-small",
                     Small: "text-body-medium",
                     Medium: "text-body-medium",
                     Large: "text-body-large"
                 },
-                Cw = (0, e1.forwardRef)(function(e, t) {
+                CS = (0, e1.forwardRef)(function(e, t) {
                     var r = e.isContained,
                         n = e.size,
                         o = e.divider,
@@ -38172,7 +38189,7 @@ function() {
                         w = !!h && c,
                         O = "Top" === i ? "justify-start" : "justify-center";
                     w && (O = "justify-start");
-                    var S = e2().createElement(g, Cp({
+                    var S = e2().createElement(g, Cm({
                             className: oW("bg-none width-full flex gap-medium stroke-none foundation-web-list-item padding-y-none", r ? "padding-x-medium" : "padding-x-xlarge", "Full" === o && "foundation-web-list-item-bottom-divider", v && "relative clip group/interactable focus-visible:outline-focus disabled:outline-none", v && "cursor-pointer", m)
                         }, v && {
                             onClick: function() {
@@ -38185,13 +38202,13 @@ function() {
                         }, e2().createElement("div", {
                             className: oW("flex flex-col fill clip-x justify-center", w && "gap-xsmall")
                         }, a && e2().createElement("div", {
-                            className: oW("content-emphasis text-align-x-start", void 0 === l || l ? Cv[b] : Cg[b])
+                            className: oW("content-emphasis text-align-x-start", void 0 === l || l ? Cw[b] : CO[b])
                         }, a), h && u && e2().createElement("div", {
-                            className: oW("content-default text-align-x-start", Cb[b], !c && "text-truncate-split text-no-wrap")
+                            className: oW("content-default text-align-x-start", Cg[b], !c && "text-truncate-split text-no-wrap")
                         }, u), !h && s && e2().createElement("div", {
-                            className: oW("content-default text-align-x-start text-truncate-split text-no-wrap", Cb[b])
+                            className: oW("content-default text-align-x-start text-truncate-split text-no-wrap", Cg[b])
                         }, s), !h && f && e2().createElement("div", {
-                            className: oW("content-default text-align-x-start padding-top-xsmall", Cb[b])
+                            className: oW("content-default text-align-x-start padding-top-xsmall", Cg[b])
                         }, f)), p && e2().createElement("div", {
                             className: oW("flex flex-col", O)
                         }, p), "Inset" === o && e2().createElement("div", {
@@ -38207,13 +38224,13 @@ function() {
                         style: {
                             listStyle: "none"
                         }
-                    }, e2().createElement(Cm.Provider, {
+                    }, e2().createElement(Cb.Provider, {
                         value: x
                     }, S))
                 });
 
-            function CO() {
-                return (CO = Object.assign || function(e) {
+            function Cx() {
+                return (Cx = Object.assign || function(e) {
                     for (var t = 1; t < arguments.length; t++) {
                         var r = arguments[t];
                         for (var n in r) Object.prototype.hasOwnProperty.call(r, n) && (e[n] = r[n])
@@ -38221,10 +38238,10 @@ function() {
                     return e
                 }).apply(this, arguments)
             }
-            Cw.displayName = "ListItem", (0, e1.forwardRef)(function(e, t) {
-                var r, n = Cf(r = [e, t]) || function(e) {
+            CS.displayName = "ListItem", (0, e1.forwardRef)(function(e, t) {
+                var r, n = Cp(r = [e, t]) || function(e) {
                         if ("u" > typeof Symbol && null != e[Symbol.iterator] || null != e["@@iterator"]) return Array.from(e)
-                    }(r) || Cy(r) || Cd(),
+                    }(r) || Ch(r) || Cy(),
                     o = n[0],
                     i = n.slice(1),
                     a = o.children,
@@ -38247,7 +38264,7 @@ function() {
                             for (o = 0, r = Object.getOwnPropertySymbols(e); o < r.length; o++) n = r[o], !(t.indexOf(n) >= 0) && Object.prototype.propertyIsEnumerable.call(e, n) && (i[n] = e[n]);
                         return i
                     }(o, ["children", "className", "as"]),
-                    s = (Cf(i) || function(e) {
+                    s = (Cp(i) || function(e) {
                         var t, r, n = null == e ? null : "u" > typeof Symbol && e[Symbol.iterator] || e["@@iterator"];
                         if (null != n) {
                             var o = [],
@@ -38266,23 +38283,23 @@ function() {
                             }
                             return o
                         }
-                    }(i) || Cy(i, 1) || Cd())[0];
-                return e2().createElement(void 0 === u ? "ul" : u, Cp({
+                    }(i) || Ch(i, 1) || Cy())[0];
+                return e2().createElement(void 0 === u ? "ul" : u, Cm({
                     ref: s,
                     className: oW("foundation-web-list", l)
                 }, c), a)
             }).displayName = "List";
-            var CS = {
+            var CP = {
                     XSmall: "Small",
                     Small: "Medium",
                     Medium: "Medium",
                     Large: "Large"
                 },
-                Cx = function(e) {
+                CE = function(e) {
                     var t = e;
                     if (null == t) throw TypeError("Cannot destructure " + t);
-                    var r, n, o = CO({}, e),
-                        i = Ch().size;
+                    var r, n, o = Cx({}, e),
+                        i = Cv().size;
                     return e2().createElement(o$, (r = function(e) {
                         for (var t = 1; t < arguments.length; t++) {
                             var r = null != arguments[t] ? arguments[t] : {},
@@ -38301,7 +38318,7 @@ function() {
                         }
                         return e
                     }({}, o), n = n = {
-                        size: CS[i]
+                        size: CP[i]
                     }, Object.getOwnPropertyDescriptors ? Object.defineProperties(r, Object.getOwnPropertyDescriptors(n)) : (function(e) {
                         var t = Object.keys(e);
                         if (Object.getOwnPropertySymbols) {
@@ -38313,18 +38330,18 @@ function() {
                         Object.defineProperty(r, e, Object.getOwnPropertyDescriptor(n, e))
                     }), r))
                 },
-                CP = function() {
-                    return e2().createElement(Cx, {
+                Cj = function() {
+                    return e2().createElement(CE, {
                         name: "icon-filled-chevron-large-right"
                     })
                 };
 
-            function CE(e) {
+            function CI(e) {
                 var t = e.iconName,
                     r = e.title,
                     n = e.metadata,
                     o = e.onSelect;
-                return (0, p.jsx)(Cw, {
+                return (0, p.jsx)(CS, {
                     className: "padding-x-none [&>div]:padding-y-small",
                     divider: "None",
                     isContained: !0,
@@ -38338,12 +38355,12 @@ function() {
                     metadata: n,
                     size: "Medium",
                     title: r,
-                    trailing: (0, p.jsx)(CP, {}),
+                    trailing: (0, p.jsx)(Cj, {}),
                     onSelect: o
                 })
             }
 
-            function Cj(e) {
+            function CA(e) {
                 if (void 0 !== w) {
                     var t, r, n = (0, t2.getDeviceMeta)();
                     lT ? w.location.href = e : (null == n ? void 0 : n.isIosDevice) || (null == n ? void 0 : n.isAndroidDevice) || (0, t2.isIos13Ipad)() || (null == n ? void 0 : n.isChromeOs) ? w.location.href = ((t = new URL("https://ro.blox.com/Ebh5")).search = new URLSearchParams({
@@ -38354,12 +38371,12 @@ function() {
                 }
             }
 
-            function CI(e) {
+            function CC(e) {
                 var t = new URL("roblox://navigation/currency_transfer");
                 return t.search = new URLSearchParams(e).toString(), t.toString()
             }
 
-            function CA(e) {
+            function CT(e) {
                 var t = e.transfer,
                     r = e.acceptTranslationKey,
                     n = oC().translateFullKey,
@@ -38368,7 +38385,7 @@ function() {
                     className: "flex flex-row items-center justify-between gap-small padding-medium radius-medium stroke-standard stroke-default",
                     children: [(0, p.jsxs)("div", {
                         className: "flex flex-row items-center gap-small",
-                        children: [(0, p.jsx)(Cl, {
+                        children: [(0, p.jsx)(Cc, {
                             thumbnailUrl: t.sender.thumbnailUrl,
                             displayName: t.sender.displayName,
                             size: "Small",
@@ -38403,7 +38420,7 @@ function() {
                             variant: "Standard",
                             onClick: function() {
                                 var e;
-                                o(), e = t.transferRequestId, lr("PendingTransferDeepLink"), Cj(CI({
+                                o(), e = t.transferRequestId, lr("PendingTransferDeepLink"), CA(CC({
                                     direction: "receive",
                                     transferrequestid: "RXT-".concat(e)
                                 }))
@@ -38414,24 +38431,24 @@ function() {
                 })
             }
 
-            function CC(e) {
+            function CN(e) {
                 var t = e.pendingTransfers,
                     r = e.acceptTransfersTranslationKey,
                     n = oA("Feature.BuyRobux");
-                return (0, p.jsxs)(Ik, {
+                return (0, p.jsxs)(ID, {
                     centerSheetSize: "Medium",
                     closeLabel: "Close",
                     largeScreenVariant: "center",
-                    children: [(0, p.jsx)(I_, {
+                    children: [(0, p.jsx)(IU, {
                         children: n("Heading.PendingTransfers")
-                    }), (0, p.jsx)(IR, {
+                    }), (0, p.jsx)(IL, {
                         children: (0, p.jsx)("div", {
                             className: "flex flex-col gap-medium padding-bottom-xlarge overflow-y-auto",
                             style: {
                                 maxHeight: "60vh"
                             },
                             children: t.map(function(e) {
-                                return (0, p.jsx)(CA, {
+                                return (0, p.jsx)(CT, {
                                     transfer: e,
                                     acceptTranslationKey: r
                                 }, e.transferRequestId)
@@ -38441,13 +38458,13 @@ function() {
                 })
             }
 
-            function CT(e, t) {
+            function CM(e, t) {
                 (null == t || t > e.length) && (t = e.length);
                 for (var r = 0, n = Array(t); r < t; r++) n[r] = e[r];
                 return n
             }
 
-            function CN(e, t) {
+            function Ck(e, t) {
                 return function(e) {
                     if (Array.isArray(e)) return e
                 }(e) || function(e, t) {
@@ -38471,21 +38488,21 @@ function() {
                     }
                 }(e, t) || function(e, t) {
                     if (e) {
-                        if ("string" == typeof e) return CT(e, t);
+                        if ("string" == typeof e) return CM(e, t);
                         var r = Object.prototype.toString.call(e).slice(8, -1);
                         if ("Object" === r && e.constructor && (r = e.constructor.name), "Map" === r || "Set" === r) return Array.from(r);
-                        if ("Arguments" === r || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(r)) return CT(e, t)
+                        if ("Arguments" === r || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(r)) return CM(e, t)
                     }
                 }(e, t) || function() {
                     throw TypeError("Invalid attempt to destructure non-iterable instance.\\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.")
                 }()
             }
 
-            function CM(e) {
+            function CR(e) {
                 var t = e.pendingTransfers,
                     r = e.acceptTransfersTranslationKey,
                     n = oA("Feature.BuyRobux"),
-                    o = CN((0, e1.useState)(!1), 2),
+                    o = Ck((0, e1.useState)(!1), 2),
                     i = o[0],
                     a = o[1],
                     l = (0, e1.useMemo)(function() {
@@ -38497,7 +38514,7 @@ function() {
                     c = (0, hh.formatNumber)(l),
                     s = 1 === t.length;
                 return (0, p.jsxs)(e1.Fragment, {
-                    children: [(0, p.jsx)(CE, {
+                    children: [(0, p.jsx)(CI, {
                         iconName: "icon-regular-robux",
                         metadata: n("Label.AcceptTheseRobux", void 0, "Accept these Robux"),
                         title: n(s ? "Label.PendingTransfersSummary.Singular" : "Label.PendingTransfersSummary.Plural", {
@@ -38507,10 +38524,10 @@ function() {
                         onSelect: function() {
                             a(!0)
                         }
-                    }), (0, p.jsx)(IM, {
+                    }), (0, p.jsx)(I_, {
                         open: i,
                         onOpenChange: a,
-                        children: (0, p.jsx)(CC, {
+                        children: (0, p.jsx)(CN, {
                             acceptTransfersTranslationKey: r,
                             pendingTransfers: t
                         })
@@ -38518,22 +38535,22 @@ function() {
                 })
             }
 
-            function Ck(e) {
+            function C_(e) {
                 var t = e.referral,
                     r = e.shouldDeeplinkToReferral,
                     n = oA("Feature.RobloxSubscription"),
                     o = oc(),
-                    i = AR(String(t.senderUserId)),
+                    i = AL(String(t.senderUserId)),
                     a = i.handle,
                     l = i.isLoading,
-                    u = CN((0, e1.useState)(!1), 2),
+                    u = Ck((0, e1.useState)(!1), 2),
                     c = u[0],
                     s = u[1],
                     f = n("Heading.ReferralRecipientEntry", {
                         amount: o.number(100)
                     }, "Join Plus to get ".concat(o.number(100), " Robux"));
                 return l ? null : (0, p.jsxs)(e1.Fragment, {
-                    children: [(0, p.jsx)(CE, {
+                    children: [(0, p.jsx)(CI, {
                         iconName: "icon-regular-roblox-plus",
                         metadata: a ? f : void 0,
                         title: a ? n("Description.ReferralPendingRequest", {
@@ -38541,7 +38558,7 @@ function() {
                         }, "".concat(a, " referred you to Plus")) : f,
                         onSelect: function() {
                             if (r) {
-                                Aq(String(t.senderUserId), t.referralId), Cj(AQ({
+                                AZ(String(t.senderUserId), t.referralId), CA(AJ({
                                     surface: "PlusReferralLandingSheet",
                                     entrypoint: "BuyRobuxPage",
                                     referrerId: t.senderUserId
@@ -38550,40 +38567,40 @@ function() {
                             }
                             s(!0)
                         }
-                    }), (0, p.jsx)(Ci, {
+                    }), (0, p.jsx)(Cl, {
                         invite: {
                             referrerId: String(t.senderUserId)
                         },
                         open: c,
-                        surface: AL.BuyRobuxPage,
+                        surface: AF.BuyRobuxPage,
                         onOpenChange: s
                     })]
                 })
             }
 
-            function CR(e) {
+            function CD(e) {
                 var t = e.pendingTransfers,
                     r = e.acceptTransfersTranslationKey,
                     n = e.pendingReferrals,
                     o = e.shouldDeeplinkToReferral,
                     i = oA("Feature.BuyRobux");
-                return (0, p.jsxs)(Ik, {
+                return (0, p.jsxs)(ID, {
                     centerSheetSize: "Medium",
                     closeLabel: "Close",
                     largeScreenVariant: "center",
-                    children: [(0, p.jsx)(I_, {
+                    children: [(0, p.jsx)(IU, {
                         children: i("Heading.ReviewPendingRequests", void 0, "Review pending requests")
-                    }), (0, p.jsx)(IR, {
+                    }), (0, p.jsx)(IL, {
                         children: (0, p.jsxs)("div", {
                             className: "flex flex-col gap-xsmall padding-bottom-xlarge overflow-y-auto",
                             style: {
                                 maxHeight: "60vh"
                             },
-                            children: [r && t.length > 0 ? (0, p.jsx)(CM, {
+                            children: [r && t.length > 0 ? (0, p.jsx)(CR, {
                                 acceptTransfersTranslationKey: r,
                                 pendingTransfers: t
                             }) : null, n.map(function(e) {
-                                return (0, p.jsx)(Ck, {
+                                return (0, p.jsx)(C_, {
                                     referral: e,
                                     shouldDeeplinkToReferral: o
                                 }, e.referralId)
@@ -38593,13 +38610,13 @@ function() {
                 })
             }
 
-            function C_(e, t) {
+            function CL(e, t) {
                 (null == t || t > e.length) && (t = e.length);
                 for (var r = 0, n = Array(t); r < t; r++) n[r] = e[r];
                 return n
             }
 
-            function CD(e, t, r, n, o, i, a) {
+            function CU(e, t, r, n, o, i, a) {
                 try {
                     var l = e[i](a),
                         u = l.value
@@ -38610,7 +38627,7 @@ function() {
                 l.done ? t(u) : Promise.resolve(u).then(n, o)
             }
 
-            function CL(e) {
+            function CB(e) {
                 var t, r = function(e) {
                         if (Array.isArray(e)) return e
                     }(t = (0, e1.useState)({})) || function(e) {
@@ -38634,10 +38651,10 @@ function() {
                         }
                     }(t) || function(e) {
                         if (e) {
-                            if ("string" == typeof e) return C_(e, 2);
+                            if ("string" == typeof e) return CL(e, 2);
                             var t = Object.prototype.toString.call(e).slice(8, -1);
                             if ("Object" === t && e.constructor && (t = e.constructor.name), "Map" === t || "Set" === t) return Array.from(t);
-                            if ("Arguments" === t || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(t)) return C_(e, 2)
+                            if ("Arguments" === t || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(t)) return CL(e, 2)
                         }
                     }(t) || function() {
                         throw TypeError("Invalid attempt to destructure non-iterable instance.\\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.")
@@ -38790,11 +38807,11 @@ function() {
                                 var i = r.apply(e, t);
 
                                 function a(e) {
-                                    CD(i, n, o, a, l, "next", e)
+                                    CU(i, n, o, a, l, "next", e)
                                 }
 
                                 function l(e) {
-                                    CD(i, n, o, a, l, "throw", e)
+                                    CU(i, n, o, a, l, "throw", e)
                                 }
                                 a(void 0)
                             })
@@ -38803,13 +38820,13 @@ function() {
                 }, [e]), n
             }
 
-            function CU(e, t) {
+            function CF(e, t) {
                 (null == t || t > e.length) && (t = e.length);
                 for (var r = 0, n = Array(t); r < t; r++) n[r] = e[r];
                 return n
             }
 
-            function CB(e, t) {
+            function Cz(e, t) {
                 return function(e) {
                     if (Array.isArray(e)) return e
                 }(e) || function(e, t) {
@@ -38833,17 +38850,17 @@ function() {
                     }
                 }(e, t) || function(e, t) {
                     if (e) {
-                        if ("string" == typeof e) return CU(e, t);
+                        if ("string" == typeof e) return CF(e, t);
                         var r = Object.prototype.toString.call(e).slice(8, -1);
                         if ("Object" === r && e.constructor && (r = e.constructor.name), "Map" === r || "Set" === r) return Array.from(r);
-                        if ("Arguments" === r || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(r)) return CU(e, t)
+                        if ("Arguments" === r || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(r)) return CF(e, t)
                     }
                 }(e, t) || function() {
                     throw TypeError("Invalid attempt to destructure non-iterable instance.\\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.")
                 }()
             }
 
-            function CF(e) {
+            function CH(e) {
                 var t = e.countLabel;
                 return (0, p.jsxs)(e1.Fragment, {
                     children: [(0, p.jsxs)("span", {
@@ -38863,17 +38880,17 @@ function() {
                 })
             }
 
-            function Cz(e) {
+            function CG(e) {
                 var t = e.referral,
                     r = e.handle,
                     n = oA("Feature.RobloxSubscription"),
-                    o = CL((0, e1.useMemo)(function() {
+                    o = CB((0, e1.useMemo)(function() {
                         return [{
                             id: t.senderUserId
                         }]
                     }, [t.senderUserId]));
                 return (0, p.jsxs)(e1.Fragment, {
-                    children: [(0, p.jsx)(Cl, {
+                    children: [(0, p.jsx)(Cc, {
                         className: "bg-shift-200",
                         displayName: r,
                         size: "XSmall",
@@ -38887,13 +38904,13 @@ function() {
                 })
             }
 
-            function CH(e) {
+            function CV(e) {
                 var t = e.pendingTransfers,
                     r = e.totalRobux,
                     n = oA("Feature.BuyRobux"),
                     o = 1 === t.length ? "Label.PendingTransfersSummary.Singular" : "Label.PendingTransfersSummary.Plural";
                 return (0, p.jsxs)(e1.Fragment, {
-                    children: [(0, p.jsx)(Cc, {
+                    children: [(0, p.jsx)(Cf, {
                         pendingTransfers: t
                     }), (0, p.jsx)("span", {
                         className: "text-label-medium content-emphasis",
@@ -38905,7 +38922,7 @@ function() {
                 })
             }
 
-            function CG(e) {
+            function CW(e) {
                 var t = e.transfers,
                     r = e.pendingReferrals,
                     n = e.shouldDeeplinkToReferral,
@@ -38915,10 +38932,10 @@ function() {
                     l = (0, e1.useContext)(lP),
                     u = l.trackPendingTransfersImpression,
                     c = l.trackPendingTransfersSheetView,
-                    s = CB((0, e1.useState)(!1), 2),
+                    s = Cz((0, e1.useState)(!1), 2),
                     f = s[0],
                     d = s[1],
-                    y = CB((0, e1.useState)(!1), 2),
+                    y = Cz((0, e1.useState)(!1), 2),
                     m = y[0],
                     h = y[1],
                     b = (0, e1.useMemo)(function() {
@@ -38926,14 +38943,14 @@ function() {
                         return null != (e = null == t ? void 0 : t.pendingTransfers) ? e : []
                     }, [t]),
                     v = 0 === b.length ? r.at(0) : void 0,
-                    g = AR(v ? String(v.senderUserId) : void 0),
+                    g = AL(v ? String(v.senderUserId) : void 0),
                     w = g.handle,
                     O = g.isLoading;
                 (0, e1.useEffect)(function() {
                     b.length > 0 && u()
                 }, [b, u]), (0, e1.useEffect)(function() {
                     var e = r.at(0);
-                    void 0 !== e && AX(String(e.senderUserId), e.referralId)
+                    void 0 !== e && A$(String(e.senderUserId), e.referralId)
                 }, [r]);
                 var S = function(e) {
                         e && b.length > 0 && c(), d(e)
@@ -38955,7 +38972,7 @@ function() {
                         if (n && 0 === b.length) {
                             var e = r.at(0);
                             if (void 0 !== e) {
-                                Aq(String(e.senderUserId), e.referralId), Cj(AQ({
+                                AZ(String(e.senderUserId), e.referralId), CA(AJ({
                                     surface: "PlusReferralLandingSheet",
                                     entrypoint: "BuyRobuxPage",
                                     referrerId: e.senderUserId
@@ -38964,23 +38981,23 @@ function() {
                             }
                         }
                         if (void 0 !== E) {
-                            Aq(String(E.senderUserId), E.referralId), h(!0);
+                            AZ(String(E.senderUserId), E.referralId), h(!0);
                             return
                         }
                         var t = r.at(0);
-                        void 0 !== t && Aq(String(t.senderUserId), t.referralId), S(!0)
+                        void 0 !== t && AZ(String(t.senderUserId), t.referralId), S(!0)
                     };
                 return (0, p.jsxs)(e1.Fragment, {
                     children: [(0, p.jsxs)("div", {
                         className: "flex flex-row items-center justify-between gap-small width-full".concat(j ? " medium:justify-end" : ""),
                         children: [(0, p.jsx)("div", {
                             className: "flex flex-row items-center gap-small min-width-0",
-                            children: j ? (0, p.jsx)(CH, {
+                            children: j ? (0, p.jsx)(CV, {
                                 pendingTransfers: b,
                                 totalRobux: x
-                            }) : void 0 === E ? (0, p.jsx)(CF, {
+                            }) : void 0 === E ? (0, p.jsx)(CH, {
                                 countLabel: A
-                            }) : (0, p.jsx)(Cz, {
+                            }) : (0, p.jsx)(CG, {
                                 handle: null != w ? w : "",
                                 referral: E
                             })
@@ -38997,34 +39014,34 @@ function() {
                             tabIndex: 0,
                             children: j && t ? a(t.acceptTransfersTranslationKey) : i("Action.Review", void 0, "Review")
                         })]
-                    }), j && t ? (0, p.jsx)(IM, {
+                    }), j && t ? (0, p.jsx)(I_, {
                         open: f,
                         onOpenChange: S,
-                        children: (0, p.jsx)(CC, {
+                        children: (0, p.jsx)(CN, {
                             pendingTransfers: b,
                             acceptTransfersTranslationKey: t.acceptTransfersTranslationKey
                         })
-                    }) : void 0 === E ? (0, p.jsx)(IM, {
+                    }) : void 0 === E ? (0, p.jsx)(I_, {
                         open: f,
                         onOpenChange: S,
-                        children: (0, p.jsx)(CR, {
+                        children: (0, p.jsx)(CD, {
                             pendingTransfers: b,
                             acceptTransfersTranslationKey: null == t ? void 0 : t.acceptTransfersTranslationKey,
                             pendingReferrals: r,
                             shouldDeeplinkToReferral: n
                         })
-                    }) : (0, p.jsx)(Ci, {
+                    }) : (0, p.jsx)(Cl, {
                         invite: {
                             referrerId: String(E.senderUserId)
                         },
                         open: m,
-                        surface: AL.BuyRobuxPage,
+                        surface: AF.BuyRobuxPage,
                         onOpenChange: h
                     })]
                 })
             }
 
-            function CV(e) {
+            function CK(e) {
                 var t = e.iconSize,
                     r = e.textClassName,
                     n = (0, e1.useContext)(aK).robuxBalance;
@@ -39039,7 +39056,7 @@ function() {
                 })
             }
 
-            function CW(e, t, r, n, o, i, a) {
+            function CY(e, t, r, n, o, i, a) {
                 try {
                     var l = e[i](a),
                         u = l.value
@@ -39049,7 +39066,7 @@ function() {
                 }
                 l.done ? t(u) : Promise.resolve(u).then(n, o)
             }
-            var CK = function(e, t) {
+            var CX = function(e, t) {
                 var r;
                 return (r = function() {
                     return function(e, t) {
@@ -39149,24 +39166,24 @@ function() {
                         var i = r.apply(e, t);
 
                         function a(e) {
-                            CW(i, n, o, a, l, "next", e)
+                            CY(i, n, o, a, l, "next", e)
                         }
 
                         function l(e) {
-                            CW(i, n, o, a, l, "throw", e)
+                            CY(i, n, o, a, l, "throw", e)
                         }
                         a(void 0)
                     })
                 })()
             };
 
-            function CY(e, t) {
+            function Cq(e, t) {
                 (null == t || t > e.length) && (t = e.length);
                 for (var r = 0, n = Array(t); r < t; r++) n[r] = e[r];
                 return n
             }
 
-            function CX(e, t, r, n, o, i, a) {
+            function CQ(e, t, r, n, o, i, a) {
                 try {
                     var l = e[i](a),
                         u = l.value
@@ -39177,7 +39194,7 @@ function() {
                 l.done ? t(u) : Promise.resolve(u).then(n, o)
             }
 
-            function Cq(e, t) {
+            function C$(e, t) {
                 return function(e) {
                     if (Array.isArray(e)) return e
                 }(e) || function(e, t) {
@@ -39201,28 +39218,28 @@ function() {
                     }
                 }(e, t) || function(e, t) {
                     if (e) {
-                        if ("string" == typeof e) return CY(e, t);
+                        if ("string" == typeof e) return Cq(e, t);
                         var r = Object.prototype.toString.call(e).slice(8, -1);
                         if ("Object" === r && e.constructor && (r = e.constructor.name), "Map" === r || "Set" === r) return Array.from(r);
-                        if ("Arguments" === r || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(r)) return CY(e, t)
+                        if ("Arguments" === r || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(r)) return Cq(e, t)
                     }
                 }(e, t) || function() {
                     throw TypeError("Invalid attempt to destructure non-iterable instance.\\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.")
                 }()
             }
-            var CQ = [];
+            var CZ = [];
 
-            function C$(e, t) {
+            function CJ(e, t) {
                 (null == t || t > e.length) && (t = e.length);
                 for (var r = 0, n = Array(t); r < t; r++) n[r] = e[r];
                 return n
             }
 
-            function CZ(e) {
+            function C0(e) {
                 if (Array.isArray(e)) return e
             }
 
-            function CJ(e, t, r) {
+            function C1(e, t, r) {
                 return t in e ? Object.defineProperty(e, t, {
                     value: r,
                     enumerable: !0,
@@ -39231,37 +39248,37 @@ function() {
                 }) : e[t] = r, e
             }
 
-            function C0() {
+            function C2() {
                 throw TypeError("Invalid attempt to destructure non-iterable instance.\\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.")
             }
 
-            function C1(e, t) {
+            function C4(e, t) {
                 if (e) {
-                    if ("string" == typeof e) return C$(e, t);
+                    if ("string" == typeof e) return CJ(e, t);
                     var r = Object.prototype.toString.call(e).slice(8, -1);
                     if ("Object" === r && e.constructor && (r = e.constructor.name), "Map" === r || "Set" === r) return Array.from(r);
-                    if ("Arguments" === r || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(r)) return C$(e, t)
+                    if ("Arguments" === r || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(r)) return CJ(e, t)
                 }
             }
-            var C2 = {
+            var C3 = {
                     XSmall: "padding-x-small",
                     Small: "padding-x-medium",
                     Medium: "padding-x-medium",
                     Large: "padding-x-medium"
                 },
-                C4 = {
+                C5 = {
                     XSmall: "gap-x-xsmall",
                     Small: "gap-x-small",
                     Medium: "gap-x-small",
                     Large: "gap-x-small"
                 },
-                C3 = {
+                C6 = {
                     XSmall: "height-600",
                     Small: "height-800",
                     Medium: "height-1000",
                     Large: "height-1200"
                 },
-                C5 = {
+                C8 = {
                     Rounded: {
                         XSmall: "radius-small",
                         Small: "radius-medium",
@@ -39281,17 +39298,17 @@ function() {
                         Large: "radius-none"
                     }
                 },
-                C6 = {
+                C7 = {
                     XSmall: ["text-body-small", "placeholder:text-body-small"],
                     Small: ["text-body-small", "placeholder:text-body-small"],
                     Medium: ["text-body-medium", "placeholder:text-body-medium"],
                     Large: ["text-body-large", "placeholder:text-body-large"]
                 },
-                C8 = "Large",
-                C7 = (0, e1.forwardRef)(function(e, t) {
-                    var r, n = CZ(r = [e, t]) || function(e) {
+                C9 = "Large",
+                Te = (0, e1.forwardRef)(function(e, t) {
+                    var r, n = C0(r = [e, t]) || function(e) {
                             if ("u" > typeof Symbol && null != e[Symbol.iterator] || null != e["@@iterator"]) return Array.from(e)
-                        }(r) || C1(r) || C0(),
+                        }(r) || C4(r) || C2(),
                         o = n[0],
                         i = n.slice(1),
                         a = o.label,
@@ -39303,7 +39320,7 @@ function() {
                         d = o.error,
                         p = o.helperText,
                         y = o.size,
-                        m = void 0 === y ? C8 : y,
+                        m = void 0 === y ? C9 : y,
                         h = o.variant,
                         b = void 0 === h ? "Standard" : h,
                         v = o.shape,
@@ -39332,7 +39349,7 @@ function() {
                                 for (o = 0, r = Object.getOwnPropertySymbols(e); o < r.length; o++) n = r[o], !(t.indexOf(n) >= 0) && Object.prototype.propertyIsEnumerable.call(e, n) && (i[n] = e[n]);
                             return i
                         }(o, ["label", "leadingIconName", "trailingIconName", "leadingIconNode", "trailingIconNode", "hasError", "error", "helperText", "size", "variant", "shape", "isRequired", "isDisabled", "className", "style", "inputContainerClassName", "inputContainerStyle", "id", "placeholder"]),
-                        A = (CZ(i) || function(e) {
+                        A = (C0(i) || function(e) {
                             var t, r, n = null == e ? null : "u" > typeof Symbol && e[Symbol.iterator] || e["@@iterator"];
                             if (null != n) {
                                 var o = [],
@@ -39351,11 +39368,11 @@ function() {
                                 }
                                 return o
                             }
-                        }(i) || C1(i, 1) || C0())[0],
+                        }(i) || C4(i, 1) || C2())[0],
                         C = ix(),
                         T = E || C,
                         N = "".concat(T, "-description"),
-                        M = null != m ? m : C8,
+                        M = null != m ? m : C9,
                         k = f || !!d,
                         R = d || p,
                         _ = null != l ? l : void 0 === c ? "icon-regular-magnifying-glass" : void 0,
@@ -39377,7 +39394,7 @@ function() {
                         }, [M, u, s]);
                     return e2().createElement("div", {
                         "data-testid": "search-input-wrapper",
-                        className: oW("flex width-full flex-col gap-small", O, CJ({}, o0, w)),
+                        className: oW("flex width-full flex-col gap-small", O, C1({}, o0, w)),
                         style: S
                     }, a && e2().createElement("label", {
                         htmlFor: T,
@@ -39386,7 +39403,7 @@ function() {
                         className: "content-default"
                     }, "*"))), e2().createElement("div", {
                         "data-testid": "search-input-container",
-                        className: oW("foundation-web-input flex items-center width-full", !w && "relative clip group/interactable focus-visible:outline-focus disabled:outline-none", mK[b], mW[b], x, C3[M], C5[void 0 === v ? "Rounded" : v][M], C2[M], C4[M], k ? "stroke-system-alert focus-within:stroke-system-alert" : "stroke-contrast-alpha focus-within:stroke-system-emphasis"),
+                        className: oW("foundation-web-input flex items-center width-full", !w && "relative clip group/interactable focus-visible:outline-focus disabled:outline-none", mK[b], mW[b], x, C6[M], C8[void 0 === v ? "Rounded" : v][M], C3[M], C5[M], k ? "stroke-system-alert focus-within:stroke-system-alert" : "stroke-contrast-alpha focus-within:stroke-system-emphasis"),
                         style: P
                     }, e2().createElement(oJ, {
                         className: "pointer-events-none"
@@ -39399,7 +39416,7 @@ function() {
                             "function" == typeof Object.getOwnPropertySymbols && (n = n.concat(Object.getOwnPropertySymbols(r).filter(function(e) {
                                 return Object.getOwnPropertyDescriptor(r, e).enumerable
                             }))), n.forEach(function(t) {
-                                CJ(e, t, r[t])
+                                C1(e, t, r[t])
                             })
                         }
                         return e
@@ -39408,7 +39425,7 @@ function() {
                         id: T,
                         ref: A,
                         placeholder: void 0 === j ? "Search" : j,
-                        className: oW("width-full min-width-0 padding-none bg-none stroke-none outline-none content-emphasis placeholder:content-muted [appearance:none]", C6[M], "[&::-webkit-search-cancel-button]:hidden [&::-webkit-search-decoration]:hidden [&::-webkit-search-results-button]:hidden [&::-webkit-search-results-decoration]:hidden"),
+                        className: oW("width-full min-width-0 padding-none bg-none stroke-none outline-none content-emphasis placeholder:content-muted [appearance:none]", C7[M], "[&::-webkit-search-cancel-button]:hidden [&::-webkit-search-decoration]:hidden [&::-webkit-search-results-button]:hidden [&::-webkit-search-results-decoration]:hidden"),
                         "aria-invalid": k,
                         "aria-describedby": R ? N : void 0,
                         required: g,
@@ -39425,12 +39442,12 @@ function() {
                     }, R))
                 });
 
-            function C9(e) {
+            function Tt(e) {
                 var t = e.searchText,
                     r = e.setSearchText,
                     n = e.clearSearch,
                     o = oA("Feature.BuyRobux")("Label.Search");
-                return (0, p.jsx)(C7, {
+                return (0, p.jsx)(Te, {
                     size: "Medium",
                     shape: "Pill",
                     className: "send-robux-search-input",
@@ -39455,22 +39472,22 @@ function() {
                     "aria-label": o
                 })
             }
-            C7.displayName = "SearchInput";
-            var Te = "web-plus-identity-badge",
-                Tt = function(e) {
+            Te.displayName = "SearchInput";
+            var Tr = "web-plus-identity-badge",
+                Tn = function(e) {
                     return (void 0 === e ? "undefined" : e && "u" > typeof Symbol && e.constructor === Symbol ? "symbol" : typeof e) == "object" && null !== e
                 },
-                Tr = function() {
+                To = function() {
                     var e = (0, y.useQuery)({
-                        queryKey: ["guac/".concat(Te)],
+                        queryKey: ["guac/".concat(Tr)],
                         queryFn: function() {
-                            return (0, Oa.callBehaviour)(Te)
+                            return (0, Oc.callBehaviour)(Tr)
                         },
                         staleTime: 1 / 0
                     }).data;
-                    return Tt(e) && !0 === e.plusIdentityBadgeEnabled
+                    return Tn(e) && !0 === e.plusIdentityBadgeEnabled
                 },
-                Tn = function(e) {
+                Ti = function(e) {
                     var t = e.isVerified,
                         r = e.isRobloxPlus,
                         n = e.isPremium,
@@ -39486,11 +39503,11 @@ function() {
                         className: "items-center gap-xxsmall inline-flex shrink-0 [--icon-size-small:1em]",
                         children: [s && (0, p.jsxs)("span", {
                             className: "relative flex items-center justify-center",
-                            children: [(0, p.jsx)(Ed, {
+                            children: [(0, p.jsx)(Em, {
                                 name: "icon-filled-verified-backplate",
                                 className: "content-system-emphasis",
                                 size: a
-                            }), (0, p.jsx)(Ed, {
+                            }), (0, p.jsx)(Em, {
                                 name: "icon-filled-verified-check",
                                 className: "absolute",
                                 style: {
@@ -39498,26 +39515,26 @@ function() {
                                 },
                                 size: a
                             })]
-                        }), u && (0, p.jsx)(Ed, {
+                        }), u && (0, p.jsx)(Em, {
                             name: "icon-regular-roblox-plus",
                             className: "content-system-contrast",
                             size: a,
                             "aria-label": l
-                        }), c && (0, p.jsx)(Ed, {
+                        }), c && (0, p.jsx)(Em, {
                             name: "icon-filled-premium",
                             className: "content-system-contrast",
                             size: a
-                        }), f && (0, p.jsx)(Ed, {
+                        }), f && (0, p.jsx)(Em, {
                             name: "icon-filled-tilt",
                             className: "content-system-contrast",
                             size: a
                         })]
                     }) : null
                 },
-                To = "Roblox Plus subscriber",
-                Ti = "Label.RobloxPlusSubscriber";
+                Ta = "Roblox Plus subscriber",
+                Tl = "Label.RobloxPlusSubscriber";
 
-            function Ta(e) {
+            function Tu(e) {
                 var t, r, n = e.friend,
                     o = e.thumbnailUrl,
                     i = e.onSelectUser,
@@ -39529,7 +39546,7 @@ function() {
                             id: n.id
                         })
                     },
-                    s = Tr() && !0 === n.isRobloxPlus;
+                    s = To() && !0 === n.isRobloxPlus;
                 return (0, p.jsxs)("div", {
                     className: b6()("flex flex-row items-center gap-small padding-small width-full cursor-pointer shrink-0", l ? "bg-surface-300" : "bg-none"),
                     style: {
@@ -39558,32 +39575,32 @@ function() {
                         children: [(0, p.jsx)("span", {
                             className: "text-body-medium content-emphasis",
                             children: n.combinedName
-                        }), n.hasVerifiedBadge && (0, p.jsx)(wM, {
+                        }), n.hasVerifiedBadge && (0, p.jsx)(wk, {
                             size: 12
-                        }), s && (0, p.jsx)(Tn, {
+                        }), s && (0, p.jsx)(Ti, {
                             isRobloxPlus: !0,
                             size: "Small",
-                            plusBadgeAriaLabel: u(Ti, void 0, To)
+                            plusBadgeAriaLabel: u(Tl, void 0, Ta)
                         })]
                     })]
                 })
             }
 
-            function Tl(e, t) {
+            function Tc(e, t) {
                 (null == t || t > e.length) && (t = e.length);
                 for (var r = 0, n = Array(t); r < t; r++) n[r] = e[r];
                 return n
             }
 
-            function Tu(e) {
+            function Ts(e) {
                 if (Array.isArray(e)) return e
             }
 
-            function Tc() {
+            function Tf() {
                 throw TypeError("Invalid attempt to destructure non-iterable instance.\\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.")
             }
 
-            function Ts(e) {
+            function Td(e) {
                 for (var t = 1; t < arguments.length; t++) {
                     var r = null != arguments[t] ? arguments[t] : {},
                         n = Object.keys(r);
@@ -39602,8 +39619,8 @@ function() {
                 return e
             }
 
-            function Tf(e, t) {
-                return Tu(e) || function(e, t) {
+            function Tp(e, t) {
+                return Ts(e) || function(e, t) {
                     var r, n, o = null == e ? null : "u" > typeof Symbol && e[Symbol.iterator] || e["@@iterator"];
                     if (null != o) {
                         var i = [],
@@ -39622,18 +39639,18 @@ function() {
                         }
                         return i
                     }
-                }(e, t) || Td(e, t) || Tc()
+                }(e, t) || Ty(e, t) || Tf()
             }
 
-            function Td(e, t) {
+            function Ty(e, t) {
                 if (e) {
-                    if ("string" == typeof e) return Tl(e, t);
+                    if ("string" == typeof e) return Tc(e, t);
                     var r = Object.prototype.toString.call(e).slice(8, -1);
                     if ("Object" === r && e.constructor && (r = e.constructor.name), "Map" === r || "Set" === r) return Array.from(r);
-                    if ("Arguments" === r || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(r)) return Tl(e, t)
+                    if ("Arguments" === r || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(r)) return Tc(e, t)
                 }
             }
-            var Tp = {
+            var Tm = {
                     XSmall: "size-600",
                     Small: "size-800",
                     Medium: "size-1000",
@@ -39641,7 +39658,7 @@ function() {
                     XLarge: "size-1400",
                     Pictogram: "size-2400"
                 },
-                Ty = {
+                Th = {
                     XSmall: "text-caption-small",
                     Small: "text-label-small",
                     Medium: "text-label-medium",
@@ -39649,7 +39666,7 @@ function() {
                     XLarge: "text-title-medium",
                     Pictogram: "text-display-small"
                 },
-                Tm = {
+                Tb = {
                     XSmall: "var(--icon-size-small)",
                     Small: "var(--icon-size-medium)",
                     Medium: "var(--icon-size-large)",
@@ -39657,7 +39674,7 @@ function() {
                     XLarge: "var(--size-900)",
                     Pictogram: "var(--size-1600)"
                 },
-                Th = {
+                Tv = {
                     XSmall: "var(--size-150)",
                     Small: "var(--size-150)",
                     Medium: "var(--size-200)",
@@ -39665,7 +39682,7 @@ function() {
                     XLarge: "var(--size-250)",
                     Pictogram: "var(--size-500)"
                 },
-                Tb = {
+                Tg = {
                     XSmall: "1.5px",
                     Small: "1.5px",
                     Medium: "2px",
@@ -39673,7 +39690,7 @@ function() {
                     XLarge: "2.5px",
                     Pictogram: "5px"
                 },
-                Tv = {
+                Tw = {
                     XSmall: {
                         right: 0,
                         bottom: 0
@@ -39699,7 +39716,7 @@ function() {
                         bottom: 4
                     }
                 },
-                Tg = {
+                TO = {
                     XSmall: 10,
                     Small: 12,
                     Medium: 14,
@@ -39707,7 +39724,7 @@ function() {
                     XLarge: 16,
                     Pictogram: 26
                 },
-                Tw = {
+                TS = {
                     XSmall: 24,
                     Small: 32,
                     Medium: 40,
@@ -39715,7 +39732,7 @@ function() {
                     XLarge: 56,
                     Pictogram: 96
                 },
-                TO = {
+                Tx = {
                     XSmall: "var(--size-50)",
                     Small: "var(--size-50)",
                     Medium: "var(--size-50)",
@@ -39723,12 +39740,12 @@ function() {
                     XLarge: "var(--size-50)",
                     Pictogram: "var(--size-100)"
                 },
-                TS = function(e) {
+                TP = function(e) {
                     var t = e.status,
                         r = e.size;
                     if ("InExperience" === t) return null;
-                    var n = Th[r],
-                        o = Tv[r];
+                    var n = Tv[r],
+                        o = Tw[r];
                     return e2().createElement("span", {
                         "aria-hidden": "true",
                         "data-testid": "avatar-status",
@@ -39742,14 +39759,14 @@ function() {
                             boxSizing: "border-box",
                             boxShadow: "0 0 0 var(--size-50) var(--avatar-surrounding-background, var(--color-surface-100))",
                             backgroundColor: "Active" === t ? "var(--color-system-success)" : "transparent",
-                            border: "Away" === t ? "".concat(Tb[r], " solid var(--color-content-default)") : void 0
+                            border: "Away" === t ? "".concat(Tg[r], " solid var(--color-content-default)") : void 0
                         }
                     })
                 },
-                Tx = (0, e1.forwardRef)(function(e, t) {
-                    var r, n, o, i = Tu(r = [e, t]) || function(e) {
+                TE = (0, e1.forwardRef)(function(e, t) {
+                    var r, n, o, i = Ts(r = [e, t]) || function(e) {
                             if ("u" > typeof Symbol && null != e[Symbol.iterator] || null != e["@@iterator"]) return Array.from(e)
-                        }(r) || Td(r) || Tc(),
+                        }(r) || Ty(r) || Tf(),
                         a = i[0],
                         l = i.slice(1),
                         u = a.className,
@@ -39779,8 +39796,8 @@ function() {
                                 for (o = 0, r = Object.getOwnPropertySymbols(e); o < r.length; o++) n = r[o], !(t.indexOf(n) >= 0) && Object.prototype.propertyIsEnumerable.call(e, n) && (i[n] = e[n]);
                             return i
                         }(a, ["className", "style", "src", "alt", "size", "status", "initials", "icon", "hasBorder"]),
-                        g = Tf(l, 1)[0],
-                        w = Tf((0, e1.useState)(!1), 2),
+                        g = Tp(l, 1)[0],
+                        w = Tp((0, e1.useState)(!1), 2),
                         O = w[0],
                         S = w[1];
                     (0, e1.useEffect)(function() {
@@ -39792,9 +39809,9 @@ function() {
                         j = "Active" === y || "Away" === y,
                         I = (0, e1.useMemo)(function() {
                             if (j) {
-                                var e = Tw[p],
-                                    t = Tg[p] / 2,
-                                    r = Tv[p],
+                                var e = TS[p],
+                                    t = TO[p] / 2,
+                                    r = Tw[p],
                                     n = {
                                         XSmall: 6,
                                         Small: 6,
@@ -39817,11 +39834,11 @@ function() {
                         "aria-label": f
                     } : f || (A = {
                         "aria-hidden": !0
-                    }), e2().createElement("span", (n = Ts({
+                    }), e2().createElement("span", (n = Td({
                         ref: g,
                         "data-testid": "avatar-root"
                     }, A, v), o = o = {
-                        className: oW("foundation-web-avatar relative inline-flex items-center justify-center shrink-0 select-none radius-circle", Tp[p], !x && "content-emphasis", u),
+                        className: oW("foundation-web-avatar relative inline-flex items-center justify-center shrink-0 select-none radius-circle", Tm[p], !x && "content-emphasis", u),
                         style: c
                     }, Object.getOwnPropertyDescriptors ? Object.defineProperties(n, Object.getOwnPropertyDescriptors(o)) : (function(e) {
                         var t = Object.keys(e);
@@ -39838,7 +39855,7 @@ function() {
                     }, e2().createElement("span", {
                         "data-testid": "avatar-content",
                         className: oW("relative radius-circle flex items-center justify-center", !x && "bg-shift-200"),
-                        style: Ts({
+                        style: Td({
                             width: "100%",
                             height: "100%",
                             overflow: "hidden"
@@ -39858,15 +39875,15 @@ function() {
                         }
                     }), P && e2().createElement("span", {
                         "aria-hidden": "true",
-                        className: oW("foundation-web-avatar-initials text-no-wrap", Ty[p])
+                        className: oW("foundation-web-avatar-initials text-no-wrap", Th[p])
                     }, m), !x && !P && e2().createElement(o$, {
                         name: void 0 === h ? "icon-filled-person" : h,
                         "aria-hidden": "true",
                         "data-testid": "avatar-fallback-icon",
                         className: "grow-0 shrink-0 basis-auto content-emphasis",
                         style: {
-                            width: Tm[p],
-                            height: Tm[p]
+                            width: Tb[p],
+                            height: Tb[p]
                         }
                     })), (E || void 0 !== b && b) && e2().createElement("span", {
                         "aria-hidden": "true",
@@ -39875,16 +39892,16 @@ function() {
                         style: {
                             inset: 0,
                             borderStyle: "solid",
-                            borderWidth: TO[p],
+                            borderWidth: Tx[p],
                             borderColor: E ? "var(--color-system-emphasis)" : "var(--color-stroke-default)"
                         }
-                    })), y && e2().createElement(TS, {
+                    })), y && e2().createElement(TP, {
                         status: y,
                         size: p
                     }))
                 });
 
-            function TP(e) {
+            function Tj(e) {
                 var t = e.displayName,
                     r = e.username,
                     n = e.thumbnailUrl,
@@ -39903,7 +39920,7 @@ function() {
                     tabIndex: 0,
                     "aria-selected": a,
                     "aria-label": u ? "".concat(t, " ").concat(u) : t,
-                    children: [(0, p.jsx)(Tx, {
+                    children: [(0, p.jsx)(TE, {
                         src: n,
                         alt: t,
                         size: "Large",
@@ -39926,20 +39943,20 @@ function() {
                 })
             }
 
-            function TE(e) {
+            function TI(e) {
                 var t, r = e.friend,
                     n = e.thumbnailUrl,
                     o = e.onSelectUser,
                     i = oA("Feature.RobloxSubscription"),
-                    a = Tr() && !0 === r.isRobloxPlus,
-                    l = [r.hasVerifiedBadge ? (0, p.jsx)(wM, {
+                    a = To() && !0 === r.isRobloxPlus,
+                    l = [r.hasVerifiedBadge ? (0, p.jsx)(wk, {
                         size: 12
-                    }, "verified") : null, a ? (0, p.jsx)(Tn, {
+                    }, "verified") : null, a ? (0, p.jsx)(Ti, {
                         isRobloxPlus: !0,
                         size: "Small",
-                        plusBadgeAriaLabel: i(Ti, void 0, To)
+                        plusBadgeAriaLabel: i(Tl, void 0, Ta)
                     }, "roblox-plus") : null];
-                return (0, p.jsx)(TP, {
+                return (0, p.jsx)(Tj, {
                     displayName: null != (t = r.combinedName) ? t : "",
                     thumbnailUrl: n,
                     badges: l,
@@ -39951,7 +39968,7 @@ function() {
                 })
             }
 
-            function Tj(e) {
+            function TA(e) {
                 var t = e.friends,
                     r = e.isLoading,
                     n = e.error,
@@ -39962,7 +39979,7 @@ function() {
                     u = void 0 === l ? "Dropdown" : l,
                     c = e.useInternalScroll,
                     s = oA("Feature.BuyRobux"),
-                    f = CL(t),
+                    f = CB(t),
                     d = b6()("flex flex-col", (void 0 === c || c) && "overflow-y-auto hide-scrollbar friends-listbox-cap");
                 return (void 0 === a || a) && (n || !r && 0 === t.length) ? (0, p.jsx)("div", {
                     className: "flex items-center justify-center padding-medium",
@@ -39988,11 +40005,11 @@ function() {
                     role: "listbox",
                     "aria-label": o,
                     children: t.map(function(e) {
-                        return "InlineFilter" === u ? (0, p.jsx)(TE, {
+                        return "InlineFilter" === u ? (0, p.jsx)(TI, {
                             friend: e,
                             thumbnailUrl: f[e.id],
                             onSelectUser: i
-                        }, e.id) : (0, p.jsx)(Ta, {
+                        }, e.id) : (0, p.jsx)(Tu, {
                             friend: e,
                             thumbnailUrl: f[e.id],
                             onSelectUser: i
@@ -40001,13 +40018,13 @@ function() {
                 }) : null
             }
 
-            function TI(e, t) {
+            function TC(e, t) {
                 (null == t || t > e.length) && (t = e.length);
                 for (var r = 0, n = Array(t); r < t; r++) n[r] = e[r];
                 return n
             }
 
-            function TA(e, t, r, n, o, i, a) {
+            function TT(e, t, r, n, o, i, a) {
                 try {
                     var l = e[i](a),
                         u = l.value
@@ -40017,8 +40034,8 @@ function() {
                 }
                 l.done ? t(u) : Promise.resolve(u).then(n, o)
             }
-            Tx.displayName = "Avatar";
-            var TC = eq({
+            TE.displayName = "Avatar";
+            var TN = eq({
                     profileDetails: eZ((n = new eX(eU({
                         type: "object",
                         shape: {
@@ -40036,7 +40053,7 @@ function() {
                         element: n
                     }, Q(void 0)))))
                 }),
-                TT = function(e) {
+                TM = function(e) {
                     var t;
                     return (t = function() {
                         var t, r, n, o, i, a, l, u, c, s, f;
@@ -40124,15 +40141,15 @@ function() {
                                 case 0:
                                     var p;
                                     if (0 === (r = function(e) {
-                                            if (Array.isArray(e)) return TI(e)
+                                            if (Array.isArray(e)) return TC(e)
                                         }(p = new Set(e)) || function(e) {
                                             if ("u" > typeof Symbol && null != e[Symbol.iterator] || null != e["@@iterator"]) return Array.from(e)
                                         }(p) || function(e) {
                                             if (e) {
-                                                if ("string" == typeof e) return TI(e, void 0);
+                                                if ("string" == typeof e) return TC(e, void 0);
                                                 var t = Object.prototype.toString.call(e).slice(8, -1);
                                                 if ("Object" === t && e.constructor && (t = e.constructor.name), "Map" === t || "Set" === t) return Array.from(t);
-                                                if ("Arguments" === t || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(t)) return TI(e, void 0)
+                                                if ("Arguments" === t || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(t)) return TC(e, void 0)
                                             }
                                         }(p) || function() {
                                             throw TypeError("Invalid attempt to spread non-iterable instance.\\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.")
@@ -40140,7 +40157,7 @@ function() {
                                     return n = j.Url.parse(A().apiGatewayUrl).getOrThrow().withPath("/user-profile-api/v1/user/profiles/get-profiles"), [4, E.post(n, {
                                         userIds: r,
                                         fields: ["hasRobloxSubscription"]
-                                    }, TC, {
+                                    }, TN, {
                                         credentials: "include",
                                         headers: {
                                             Accept: "application/json"
@@ -40170,24 +40187,24 @@ function() {
                             var i = t.apply(e, r);
 
                             function a(e) {
-                                TA(i, n, o, a, l, "next", e)
+                                TT(i, n, o, a, l, "next", e)
                             }
 
                             function l(e) {
-                                TA(i, n, o, a, l, "throw", e)
+                                TT(i, n, o, a, l, "throw", e)
                             }
                             a(void 0)
                         })
                     })()
                 };
 
-            function TN(e, t) {
+            function Tk(e, t) {
                 (null == t || t > e.length) && (t = e.length);
                 for (var r = 0, n = Array(t); r < t; r++) n[r] = e[r];
                 return n
             }
 
-            function TM(e, t, r, n, o, i, a) {
+            function TR(e, t, r, n, o, i, a) {
                 try {
                     var l = e[i](a),
                         u = l.value
@@ -40197,9 +40214,9 @@ function() {
                 }
                 l.done ? t(u) : Promise.resolve(u).then(n, o)
             }
-            var Tk = new Map,
-                TR = !1,
-                T_ = function() {
+            var T_ = new Map,
+                TD = !1,
+                TL = function() {
                     var e;
                     return (e = function() {
                         var e, t, r, n, o, i, a, l, u, c, s, f, d, p, y, m, h, b, v, g, w, O, S, x, P, E, j, I, A, C;
@@ -40286,23 +40303,23 @@ function() {
                             switch (T.label) {
                                 case 0:
                                     var N;
-                                    if (e = Tk, Tk = new Map, TR = !1, 0 === e.size) return [2];
+                                    if (e = T_, T_ = new Map, TD = !1, 0 === e.size) return [2];
                                     t = function(e) {
-                                        if (Array.isArray(e)) return TN(e)
+                                        if (Array.isArray(e)) return Tk(e)
                                     }(N = e.keys()) || function(e) {
                                         if ("u" > typeof Symbol && null != e[Symbol.iterator] || null != e["@@iterator"]) return Array.from(e)
                                     }(N) || function(e) {
                                         if (e) {
-                                            if ("string" == typeof e) return TN(e, void 0);
+                                            if ("string" == typeof e) return Tk(e, void 0);
                                             var t = Object.prototype.toString.call(e).slice(8, -1);
                                             if ("Object" === t && e.constructor && (t = e.constructor.name), "Map" === t || "Set" === t) return Array.from(t);
-                                            if ("Arguments" === t || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(t)) return TN(e, void 0)
+                                            if ("Arguments" === t || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(t)) return Tk(e, void 0)
                                         }
                                     }(N) || function() {
                                         throw TypeError("Invalid attempt to spread non-iterable instance.\\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.")
                                     }(), T.label = 1;
                                 case 1:
-                                    return T.trys.push([1, 3, , 4]), [4, TT(t)];
+                                    return T.trys.push([1, 3, , 4]), [4, TM(t)];
                                 case 2:
                                     r = T.sent(), n = !0, o = !1, i = void 0;
                                     try {
@@ -40368,36 +40385,36 @@ function() {
                             var i = e.apply(t, r);
 
                             function a(e) {
-                                TM(i, n, o, a, l, "next", e)
+                                TR(i, n, o, a, l, "next", e)
                             }
 
                             function l(e) {
-                                TM(i, n, o, a, l, "throw", e)
+                                TR(i, n, o, a, l, "throw", e)
                             }
                             a(void 0)
                         })
                     })()
                 };
 
-            function TD(e, t) {
+            function TU(e, t) {
                 (null == t || t > e.length) && (t = e.length);
                 for (var r = 0, n = Array(t); r < t; r++) n[r] = e[r];
                 return n
             }
-            var TL = function(e) {
-                var t = Tr(),
+            var TB = function(e) {
+                var t = To(),
                     r = (0, e1.useMemo)(function() {
                         var t;
                         return ((function(e) {
-                            if (Array.isArray(e)) return TD(e)
+                            if (Array.isArray(e)) return TU(e)
                         })(t = new Set(e)) || function(e) {
                             if ("u" > typeof Symbol && null != e[Symbol.iterator] || null != e["@@iterator"]) return Array.from(e)
                         }(t) || function(e) {
                             if (e) {
-                                if ("string" == typeof e) return TD(e, void 0);
+                                if ("string" == typeof e) return TU(e, void 0);
                                 var t = Object.prototype.toString.call(e).slice(8, -1);
                                 if ("Object" === t && e.constructor && (t = e.constructor.name), "Map" === t || "Set" === t) return Array.from(t);
-                                if ("Arguments" === t || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(t)) return TD(e, void 0)
+                                if ("Arguments" === t || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(t)) return TU(e, void 0)
                             }
                         }(t) || function() {
                             throw TypeError("Invalid attempt to spread non-iterable instance.\\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.")
@@ -40411,12 +40428,12 @@ function() {
                                 queryKey: ["identity-badges/plusStatus/byUser", e],
                                 queryFn: function() {
                                     return new Promise(function(t, r) {
-                                        var n, o = null != (n = Tk.get(e)) ? n : [];
+                                        var n, o = null != (n = T_.get(e)) ? n : [];
                                         o.push({
                                             resolve: t,
                                             reject: r
-                                        }), Tk.set(e, o), TR || (TR = !0, queueMicrotask(function() {
-                                            T_().catch(function() {})
+                                        }), T_.set(e, o), TD || (TD = !0, queueMicrotask(function() {
+                                            TL().catch(function() {})
                                         }))
                                     })
                                 },
@@ -40436,15 +40453,15 @@ function() {
                 }
             };
 
-            function TU(e) {
+            function TF(e) {
                 var t = e.users,
                     r = e.onSelectUser,
                     n = e.hasSectionAbove,
                     o = oA("Feature.RobloxSubscription"),
                     i = oA("Feature.BuyRobux"),
-                    a = o(Ti),
-                    l = CL(t),
-                    u = TL((0, e1.useMemo)(function() {
+                    a = o(Tl),
+                    l = CB(t),
+                    u = TB((0, e1.useMemo)(function() {
                         return t.map(function(e) {
                             return e.contentId
                         })
@@ -40471,14 +40488,14 @@ function() {
                         role: "listbox",
                         "aria-label": s,
                         children: t.map(function(e) {
-                            var t = [e.hasVerifiedBadge ? (0, p.jsx)(wM, {
+                            var t = [e.hasVerifiedBadge ? (0, p.jsx)(wk, {
                                 size: 12
-                            }, "verified") : null, !0 === u[e.contentId] ? (0, p.jsx)(Tn, {
+                            }, "verified") : null, !0 === u[e.contentId] ? (0, p.jsx)(Ti, {
                                 isRobloxPlus: !0,
                                 size: "Small",
                                 plusBadgeAriaLabel: a
                             }, "roblox-plus") : null];
-                            return (0, p.jsx)(TP, {
+                            return (0, p.jsx)(Tj, {
                                 displayName: e.displayName,
                                 username: e.username,
                                 thumbnailUrl: l[e.contentId],
@@ -40491,11 +40508,11 @@ function() {
                     })]
                 })
             }
-            var TB = function(e) {
+            var Tz = function(e) {
                 return e.trim().toLowerCase().replace(/\s+/g, "")
             };
 
-            function TF(e) {
+            function TH(e) {
                 var t = e.friends,
                     r = e.isLoading,
                     n = e.error,
@@ -40509,17 +40526,17 @@ function() {
                             t = e.maxResults,
                             r = void 0 === t ? 3 : t,
                             n = e.excludedUserIds,
-                            o = void 0 === n ? CQ : n,
+                            o = void 0 === n ? CZ : n,
                             i = e.invalidateRequestOnClear,
                             a = void 0 !== i && i,
-                            l = Cq((0, e1.useState)(""), 2),
+                            l = C$((0, e1.useState)(""), 2),
                             u = l[0],
                             c = l[1],
                             s = (0, e4.useDebounce)(u, 500),
-                            f = Cq((0, e1.useState)([]), 2),
+                            f = C$((0, e1.useState)([]), 2),
                             d = f[0],
                             p = f[1],
-                            y = Cq((0, e1.useState)(!1), 2),
+                            y = C$((0, e1.useState)(!1), 2),
                             m = y[0],
                             h = y[1],
                             b = (0, e1.useRef)(""),
@@ -40621,7 +40638,7 @@ function() {
                                                 if ((t = e.trim()).length < 3) return a && (b.current = ""), p([]), h(!1), [2];
                                                 b.current = n = t1(), s.label = 1;
                                             case 1:
-                                                return s.trys.push([1, , 3, 4]), h(!0), lr("UserSearchStarted"), [4, CK(t, v)];
+                                                return s.trys.push([1, , 3, 4]), h(!0), lr("UserSearchStarted"), [4, CX(t, v)];
                                             case 2:
                                                 if (u = s.sent(), b.current !== n) return [2];
                                                 return p(c = null != (i = null == u || null == (l = u.searchResults[0]) ? void 0 : l.contents.filter(function(e) {
@@ -40640,11 +40657,11 @@ function() {
                                         var i = t.apply(e, r);
 
                                         function a(e) {
-                                            CX(i, n, o, a, l, "next", e)
+                                            CQ(i, n, o, a, l, "next", e)
                                         }
 
                                         function l(e) {
-                                            CX(i, n, o, a, l, "throw", e)
+                                            CQ(i, n, o, a, l, "throw", e)
                                         }
                                         a(void 0)
                                     })
@@ -40671,7 +40688,7 @@ function() {
                     d = c.users,
                     y = c.isSearching,
                     m = c.clearSearch,
-                    h = TB(s),
+                    h = Tz(s),
                     b = h.length > 0,
                     v = (0, e1.useMemo)(function() {
                         return new Set(y ? [] : d.map(function(e) {
@@ -40681,7 +40698,7 @@ function() {
                     g = (0, e1.useMemo)(function() {
                         return b ? t.filter(function(e) {
                             var t;
-                            return TB(null != (t = e.combinedName) ? t : "").includes(h) || v.has(e.id)
+                            return Tz(null != (t = e.combinedName) ? t : "").includes(h) || v.has(e.id)
                         }) : t
                     }, [t, b, h, v]),
                     w = (0, e1.useMemo)(function() {
@@ -40710,12 +40727,12 @@ function() {
                     children: [(0, p.jsx)("div", {
                         className: "send-robux-search-row shrink-0 bg-surface-100 padding-x-xlarge padding-top-xsmall padding-bottom-large",
                         "data-testid": "send-robux-search-row",
-                        children: (0, p.jsx)(C9, {
+                        children: (0, p.jsx)(Tt, {
                             searchText: s,
                             setSearchText: f,
                             clearSearch: m
                         })
-                    }), (0, p.jsx)(IR, {
+                    }), (0, p.jsx)(IL, {
                         className: "hide-scrollbar clip-x send-robux-sheet-body-inset",
                         children: (0, p.jsxs)("div", {
                             className: "flex flex-col padding-bottom-large",
@@ -40730,7 +40747,7 @@ function() {
                                         zIndex: 1
                                     },
                                     children: P
-                                }), (0, p.jsx)(Tj, {
+                                }), (0, p.jsx)(TA, {
                                     friends: g,
                                     isLoading: r,
                                     error: n,
@@ -40745,7 +40762,7 @@ function() {
                                         })
                                     }
                                 })]
-                            }), !y && b && (0, p.jsx)(TU, {
+                            }), !y && b && (0, p.jsx)(TF, {
                                 users: O,
                                 onSelectUser: S,
                                 hasSectionAbove: E
@@ -40763,13 +40780,13 @@ function() {
                 })
             }
 
-            function Tz(e, t) {
+            function TG(e, t) {
                 (null == t || t > e.length) && (t = e.length);
                 for (var r = 0, n = Array(t); r < t; r++) n[r] = e[r];
                 return n
             }
 
-            function TH(e, t, r, n, o, i, a) {
+            function TV(e, t, r, n, o, i, a) {
                 try {
                     var l = e[i](a),
                         u = l.value
@@ -40780,7 +40797,7 @@ function() {
                 l.done ? t(u) : Promise.resolve(u).then(n, o)
             }
 
-            function TG(e) {
+            function TW(e) {
                 return function() {
                     var t = this,
                         r = arguments;
@@ -40788,18 +40805,18 @@ function() {
                         var i = e.apply(t, r);
 
                         function a(e) {
-                            TH(i, n, o, a, l, "next", e)
+                            TV(i, n, o, a, l, "next", e)
                         }
 
                         function l(e) {
-                            TH(i, n, o, a, l, "throw", e)
+                            TV(i, n, o, a, l, "throw", e)
                         }
                         a(void 0)
                     })
                 }
             }
 
-            function TV(e, t) {
+            function TK(e, t) {
                 return function(e) {
                     if (Array.isArray(e)) return e
                 }(e) || function(e, t) {
@@ -40821,31 +40838,31 @@ function() {
                         }
                         return i
                     }
-                }(e, t) || TK(e, t) || function() {
+                }(e, t) || TX(e, t) || function() {
                     throw TypeError("Invalid attempt to destructure non-iterable instance.\\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.")
                 }()
             }
 
-            function TW(e) {
+            function TY(e) {
                 return function(e) {
-                    if (Array.isArray(e)) return Tz(e)
+                    if (Array.isArray(e)) return TG(e)
                 }(e) || function(e) {
                     if ("u" > typeof Symbol && null != e[Symbol.iterator] || null != e["@@iterator"]) return Array.from(e)
-                }(e) || TK(e) || function() {
+                }(e) || TX(e) || function() {
                     throw TypeError("Invalid attempt to spread non-iterable instance.\\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.")
                 }()
             }
 
-            function TK(e, t) {
+            function TX(e, t) {
                 if (e) {
-                    if ("string" == typeof e) return Tz(e, t);
+                    if ("string" == typeof e) return TG(e, t);
                     var r = Object.prototype.toString.call(e).slice(8, -1);
                     if ("Object" === r && e.constructor && (r = e.constructor.name), "Map" === r || "Set" === r) return Array.from(r);
-                    if ("Arguments" === r || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(r)) return Tz(e, t)
+                    if ("Arguments" === r || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(r)) return TG(e, t)
                 }
             }
 
-            function TY(e, t) {
+            function Tq(e, t) {
                 var r, n, o, i = {
                         label: 0,
                         sent: function() {
@@ -40926,13 +40943,13 @@ function() {
                 }
             }
 
-            function TX(e, t) {
+            function TQ(e, t) {
                 (null == t || t > e.length) && (t = e.length);
                 for (var r = 0, n = Array(t); r < t; r++) n[r] = e[r];
                 return n
             }
 
-            function Tq(e, t, r, n, o, i, a) {
+            function T$(e, t, r, n, o, i, a) {
                 try {
                     var l = e[i](a),
                         u = l.value
@@ -40943,7 +40960,7 @@ function() {
                 l.done ? t(u) : Promise.resolve(u).then(n, o)
             }
 
-            function TQ(e, t) {
+            function TZ(e, t) {
                 return function(e) {
                     if (Array.isArray(e)) return e
                 }(e) || function(e, t) {
@@ -40967,17 +40984,17 @@ function() {
                     }
                 }(e, t) || function(e, t) {
                     if (e) {
-                        if ("string" == typeof e) return TX(e, t);
+                        if ("string" == typeof e) return TQ(e, t);
                         var r = Object.prototype.toString.call(e).slice(8, -1);
                         if ("Object" === r && e.constructor && (r = e.constructor.name), "Map" === r || "Set" === r) return Array.from(r);
-                        if ("Arguments" === r || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(r)) return TX(e, t)
+                        if ("Arguments" === r || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(r)) return TQ(e, t)
                     }
                 }(e, t) || function() {
                     throw TypeError("Invalid attempt to destructure non-iterable instance.\\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.")
                 }()
             }
 
-            function T$() {
+            function TJ() {
                 var e = (0, e1.useContext)(aK).robuxBalance;
                 return null == e ? null : (0, p.jsxs)("div", {
                     className: "flex flex-row items-center gap-xsmall",
@@ -40991,10 +41008,10 @@ function() {
                 })
             }
 
-            function TZ() {
+            function T0() {
                 var e, t, r, n, o, i, a, l, u, c, s, f, d = oA("Feature.BuyRobux"),
                     y = (0, e1.useContext)(lP).trackTransferSendUserSelected,
-                    m = (r = (t = TQ((0, e1.useState)([]), 2))[0], n = t[1], i = (o = TQ((0, e1.useState)(!0), 2))[0], a = o[1], u = (l = TQ((0, e1.useState)(null), 2))[0], c = l[1], f = void 0 !== (s = null == (e = az()) ? void 0 : e.id), (0, e1.useEffect)(function() {
+                    m = (r = (t = TZ((0, e1.useState)([]), 2))[0], n = t[1], i = (o = TZ((0, e1.useState)(!0), 2))[0], a = o[1], u = (l = TZ((0, e1.useState)(null), 2))[0], c = l[1], f = void 0 !== (s = null == (e = az()) ? void 0 : e.id), (0, e1.useEffect)(function() {
                         if (void 0 === s) return void a(!1);
                         var e, t = {
                             cancelled: !1
@@ -41088,22 +41105,22 @@ function() {
                                                 status: "Throughput"
                                             }), d.label = 1;
                                         case 1:
-                                            return d.trys.push([1, 3, 4, 5]), [4, (p = aD(s), TG(function() {
+                                            return d.trys.push([1, 3, 4, 5]), [4, (p = aD(s), TW(function() {
                                                 var e, t, r, n, o, i, a, l, u, c, s, f, d, y, m;
-                                                return TY(this, function(h) {
+                                                return Tq(this, function(h) {
                                                     var b;
                                                     switch (h.label) {
                                                         case 0:
-                                                            return [4, Promise.all([TG(function() {
-                                                                return TY(this, function(e) {
+                                                            return [4, Promise.all([TW(function() {
+                                                                return Tq(this, function(e) {
                                                                     switch (e.label) {
                                                                         case 0:
                                                                             0;
                                                                             e.label = 1;
                                                                         case 1:
-                                                                            return e.trys.push([1, 3, , 4]), [4, TG(function() {
+                                                                            return e.trys.push([1, 3, , 4]), [4, TW(function() {
                                                                                 var e;
-                                                                                return TY(this, function(t) {
+                                                                                return Tq(this, function(t) {
                                                                                     switch (t.label) {
                                                                                         case 0:
                                                                                             return e = {
@@ -41124,13 +41141,13 @@ function() {
                                                                             return [2]
                                                                     }
                                                                 })
-                                                            })(), TG(function() {
-                                                                return TY(this, function(e) {
+                                                            })(), TW(function() {
+                                                                return Tq(this, function(e) {
                                                                     switch (e.label) {
                                                                         case 0:
-                                                                            return e.trys.push([0, 2, , 3]), [4, TG(function() {
+                                                                            return e.trys.push([0, 2, , 3]), [4, TW(function() {
                                                                                 var e, t;
-                                                                                return TY(this, function(r) {
+                                                                                return Tq(this, function(r) {
                                                                                     switch (r.label) {
                                                                                         case 0:
                                                                                             return e = "".concat(A().friendsApi, "/v1/users/").concat(p, "/friends/find"), t = {
@@ -41153,7 +41170,7 @@ function() {
                                                                 })
                                                             })()])];
                                                         case 1:
-                                                            t = (e = TV.apply(void 0, [h.sent(), 2]))[0], r = e[1], t.sort(function(e, t) {
+                                                            t = (e = TK.apply(void 0, [h.sent(), 2]))[0], r = e[1], t.sort(function(e, t) {
                                                                 return t.sortScore - e.sortScore
                                                             }), n = new Map, o = !0, i = !1, a = void 0;
                                                             try {
@@ -41173,10 +41190,10 @@ function() {
                                                                     return !s.includes(e.id)
                                                                 }).map(function(e) {
                                                                     return e.id
-                                                                }), 0 === (d = TW(s).concat(TW(f))).length) return [2, []];
-                                                            return [4, (b = d, TG(function() {
+                                                                }), 0 === (d = TY(s).concat(TY(f))).length) return [2, []];
+                                                            return [4, (b = d, TW(function() {
                                                                 var e, t;
-                                                                return TY(this, function(r) {
+                                                                return Tq(this, function(r) {
                                                                     switch (r.label) {
                                                                         case 0:
                                                                             return e = {
@@ -41240,11 +41257,11 @@ function() {
                                     var i = e.apply(t, r);
 
                                     function a(e) {
-                                        Tq(i, n, o, a, l, "next", e)
+                                        T$(i, n, o, a, l, "next", e)
                                     }
 
                                     function l(e) {
-                                        Tq(i, n, o, a, l, "throw", e)
+                                        T$(i, n, o, a, l, "throw", e)
                                     }
                                     a(void 0)
                                 })
@@ -41264,20 +41281,20 @@ function() {
                     g = m.isLoggedIn,
                     w = (0, e1.useCallback)(function(e) {
                         var t = e.userId;
-                        y(e.context), lr("SendTransferDeepLink"), Cj(CI({
+                        y(e.context), lr("SendTransferDeepLink"), CA(CC({
                             direction: "send",
                             userid: String(t),
                             transferorigination: "buyRobux"
                         }))
                     }, [y]);
-                return (0, p.jsxs)(Ik, {
+                return (0, p.jsxs)(ID, {
                     centerSheetSize: "Medium",
                     closeLabel: "Close",
                     largeScreenVariant: "center",
                     mobilePortraitClassName: "![height:92vh] ![max-height:92vh] ![padding-bottom:env(safe-area-inset-bottom)]",
-                    children: [(0, p.jsx)(I_, {
+                    children: [(0, p.jsx)(IU, {
                         className: "relative bg-surface-100 shrink-0 [z-index:6] ![padding-top:11px]",
-                        utilities: (0, p.jsx)(T$, {}),
+                        utilities: (0, p.jsx)(TJ, {}),
                         children: (0, p.jsxs)("div", {
                             className: "flex flex-row items-center gap-xsmall",
                             children: [(0, p.jsx)(o$, {
@@ -41285,7 +41302,7 @@ function() {
                                 size: "Large"
                             }), d("Heading.SendRobux")]
                         })
-                    }), (0, p.jsx)(TF, {
+                    }), (0, p.jsx)(TH, {
                         friends: h,
                         isLoading: b,
                         error: v,
@@ -41295,13 +41312,13 @@ function() {
                 })
             }
 
-            function TJ(e, t) {
+            function T1(e, t) {
                 (null == t || t > e.length) && (t = e.length);
                 for (var r = 0, n = Array(t); r < t; r++) n[r] = e[r];
                 return n
             }
 
-            function T0(e) {
+            function T2(e) {
                 var t, r, n = e.translationKey,
                     o = e.className,
                     i = e.size,
@@ -41329,10 +41346,10 @@ function() {
                         }
                     }(t) || function(e) {
                         if (e) {
-                            if ("string" == typeof e) return TJ(e, 2);
+                            if ("string" == typeof e) return T1(e, 2);
                             var t = Object.prototype.toString.call(e).slice(8, -1);
                             if ("Object" === t && e.constructor && (t = e.constructor.name), "Map" === t || "Set" === t) return Array.from(t);
-                            if ("Arguments" === t || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(t)) return TJ(e, 2)
+                            if ("Arguments" === t || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(t)) return T1(e, 2)
                         }
                     }(t) || function() {
                         throw TypeError("Invalid attempt to destructure non-iterable instance.\\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.")
@@ -41370,15 +41387,15 @@ function() {
                         variant: "Standard",
                         onClick: b,
                         children: a(n)
-                    }), (0, p.jsx)(IM, {
+                    }), (0, p.jsx)(I_, {
                         open: u,
                         onOpenChange: m,
-                        children: (0, p.jsx)(TZ, {})
+                        children: (0, p.jsx)(T0, {})
                     })]
                 })
             }
 
-            function T1(e) {
+            function T4(e) {
                 for (var t = 1; t < arguments.length; t++) {
                     var r = null != arguments[t] ? arguments[t] : {},
                         n = Object.keys(r);
@@ -41397,7 +41414,7 @@ function() {
                 return e
             }
 
-            function T2(e, t) {
+            function T3(e, t) {
                 return t = null != t ? t : {}, Object.getOwnPropertyDescriptors ? Object.defineProperties(e, Object.getOwnPropertyDescriptors(t)) : (function(e) {
                     var t = Object.keys(e);
                     if (Object.getOwnPropertySymbols) {
@@ -41409,20 +41426,20 @@ function() {
                     Object.defineProperty(e, r, Object.getOwnPropertyDescriptor(t, r))
                 }), e
             }
-            var T4 = "flex flex-col self-stretch medium:self-end medium:margin-top-[16px] medium:margin-right-[16px]",
-                T3 = "flex flex-col gap-large bg-surface-100 padding-y-medium padding-x-large small:padding-x-xlarge self-stretch";
+            var T5 = "flex flex-col self-stretch medium:self-end medium:margin-top-[16px] medium:margin-right-[16px]",
+                T6 = "flex flex-col gap-large bg-surface-100 padding-y-medium padding-x-large small:padding-x-xlarge self-stretch";
 
-            function T5(e) {
+            function T8(e) {
                 var t, r, n = e.transfersSection,
                     o = e.robuxGiftSection,
                     i = (0, e1.useContext)(ds).robuxGifting.openModal,
                     a = (0, e1.useContext)(aK).breakpoint,
                     l = (0, e1.useContext)(lP).trackRobuxGiftClick,
                     u = oC().translateFullKey,
-                    c = Ak().pendingReferrals,
+                    c = AD().pendingReferrals,
                     s = (0, y.useQuery)({
                         queryKey: ["guac/app-policy"],
-                        queryFn: Os,
+                        queryFn: Op,
                         staleTime: 1 / 0,
                         enabled: lT
                     }),
@@ -41434,14 +41451,14 @@ function() {
                     v = !a.isAboveInclusive("medium"),
                     g = b ? (0, p.jsx)("div", {
                         className: "flex padding-y-medium padding-x-medium medium:padding-x-large self-stretch radius-medium justify-center bg-shift-100 stroke-standard stroke-default",
-                        children: (0, p.jsx)(CG, {
+                        children: (0, p.jsx)(CW, {
                             transfers: m,
                             pendingReferrals: d,
                             shouldDeeplinkToReferral: f
                         })
                     }) : null;
-                return m ? (0, p.jsx)("div", T2(T1({}, lJ(n)), {
-                    className: T4,
+                return m ? (0, p.jsx)("div", T3(T4({}, lJ(n)), {
+                    className: T5,
                     style: v ? {
                         position: "sticky",
                         top: "env(safe-area-inset-top)",
@@ -41451,7 +41468,7 @@ function() {
                         zIndex: 10
                     },
                     children: (0, p.jsxs)("div", {
-                        className: b6()(T3, {
+                        className: b6()(T6, {
                             "medium:radius-medium": b,
                             "medium:radius-circle": !b
                         }),
@@ -41461,17 +41478,17 @@ function() {
                             }),
                             children: [(0, p.jsx)("div", {
                                 className: "flex flex-row justify-center items-center gap-xsmall medium:padding-left-none",
-                                children: (0, p.jsx)(CV, {
+                                children: (0, p.jsx)(CK, {
                                     iconSize: "Large",
                                     textClassName: "text-title-large [font-size:var(--font-size-500)] medium:[font-size:var(--font-size-600)]"
                                 })
                             }), (0, p.jsxs)("div", {
                                 className: "flex flex-row gap-small",
-                                children: [(0, p.jsx)(T0, {
+                                children: [(0, p.jsx)(T2, {
                                     translationKey: m.sendButtonTextTranslationKey,
                                     className: "text-label-medium content-action-standard shrink-0 [padding-right:12px]",
                                     size: "Small"
-                                }), h && (0, p.jsx)(iO, T2(T1({}, lJ(o)), {
+                                }), h && (0, p.jsx)(iO, T3(T4({}, lJ(o)), {
                                     className: "text-label-medium content-action-standard shrink-0 [padding-right:12px]",
                                     icon: "icon-regular-arrow-down-to-line",
                                     size: "Small",
@@ -41485,7 +41502,7 @@ function() {
                         }), g]
                     })
                 })) : g ? (0, p.jsx)("div", {
-                    className: T4,
+                    className: T5,
                     style: v ? {
                         position: "sticky",
                         top: "env(safe-area-inset-top)",
@@ -41495,27 +41512,27 @@ function() {
                         zIndex: 10
                     },
                     children: (0, p.jsx)("div", {
-                        className: b6()(T3, "medium:radius-medium"),
+                        className: b6()(T6, "medium:radius-medium"),
                         children: g
                     })
                 }) : null
             }
 
-            function T6(e) {
+            function T7(e) {
                 var t, r, n, o = e.isPrimary,
                     i = e.sectionBase,
                     a = e.redirectOptions,
                     l = oC().translateFullKey,
-                    u = (0, e1.useContext)(w$).purchaseProduct,
+                    u = (0, e1.useContext)(w0).purchaseProduct,
                     c = (0, e1.useContext)(aK),
                     s = c.atLeastOneProductHasBonusAmount,
                     f = c.redirect,
-                    d = SS(a.promotionExpirationTimestampMs),
+                    d = SE(a.promotionExpirationTimestampMs),
                     y = (0, e1.useMemo)(function() {
                         var e;
-                        return Sp(null != (e = null == f ? void 0 : f.url) ? e : "")
+                        return Sh(null != (e = null == f ? void 0 : f.url) ? e : "")
                     }, [null == f ? void 0 : f.url]);
-                return (0, p.jsxs)(O5, (t = function(e) {
+                return (0, p.jsxs)(O7, (t = function(e) {
                     for (var t = 1; t < arguments.length; t++) {
                         var r = null != arguments[t] ? arguments[t] : {},
                             n = Object.keys(r);
@@ -41537,17 +41554,17 @@ function() {
                         className: "flex flex-col gap-xsmall self-stretch",
                         children: [(0, p.jsxs)("div", {
                             className: "flex flex-row justify-between items-center self-stretch",
-                            children: [(0, p.jsx)(O6, {
+                            children: [(0, p.jsx)(O9, {
                                 children: l(s ? i.sectionHeaderTranslationKey : a.titleTranslationKey)
-                            }), d.success && (0, p.jsx)(SO, {
+                            }), d.success && (0, p.jsx)(SP, {
                                 daysLeft: d.value
                             })]
-                        }), a.bodyTranslationKey && (0, p.jsx)(O8, {
+                        }), a.bodyTranslationKey && (0, p.jsx)(Se, {
                             children: l(a.bodyTranslationKey)
                         })]
-                    }), (0, p.jsx)(O7, {
+                    }), (0, p.jsx)(St, {
                         isPrimary: o,
-                        children: (0, p.jsx)(Sd, {
+                        children: (0, p.jsx)(Sm, {
                             onProductClick: function(e, t) {
                                 u({
                                     product: e,
@@ -41574,29 +41591,29 @@ function() {
                 }), t))
             }
 
-            function T8(e, t) {
+            function T9(e, t) {
                 (null == t || t > e.length) && (t = e.length);
                 for (var r = 0, n = Array(t); r < t; r++) n[r] = e[r];
                 return n
             }
 
-            function T7(e) {
+            function Ne(e) {
                 if (Array.isArray(e)) return e
             }
 
-            function T9() {
+            function Nt() {
                 throw TypeError("Invalid attempt to destructure non-iterable instance.\\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.")
             }
 
-            function Ne(e, t) {
+            function Nr(e, t) {
                 if (e) {
-                    if ("string" == typeof e) return T8(e, t);
+                    if ("string" == typeof e) return T9(e, t);
                     var r = Object.prototype.toString.call(e).slice(8, -1);
                     if ("Object" === r && e.constructor && (r = e.constructor.name), "Map" === r || "Set" === r) return Array.from(r);
-                    if ("Arguments" === r || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(r)) return T8(e, t)
+                    if ("Arguments" === r || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(r)) return T9(e, t)
                 }
             }
-            var Nt = {
+            var Nn = {
                     "1:1": "aspect-1-1",
                     "5:4": "aspect-5-4",
                     "4:5": "aspect-4-5",
@@ -41604,10 +41621,10 @@ function() {
                     "16:9": "aspect-16-9",
                     "2:1": "aspect-2-1"
                 },
-                Nr = (0, e1.forwardRef)(function(e, t) {
-                    var r, n = T7(r = [e, t]) || function(e) {
+                No = (0, e1.forwardRef)(function(e, t) {
+                    var r, n = Ne(r = [e, t]) || function(e) {
                             if ("u" > typeof Symbol && null != e[Symbol.iterator] || null != e["@@iterator"]) return Array.from(e)
-                        }(r) || Ne(r) || T9(),
+                        }(r) || Nr(r) || Nt(),
                         o = n[0],
                         i = n.slice(1),
                         a = o.className,
@@ -41631,7 +41648,7 @@ function() {
                                 for (o = 0, r = Object.getOwnPropertySymbols(e); o < r.length; o++) n = r[o], !(t.indexOf(n) >= 0) && Object.prototype.propertyIsEnumerable.call(e, n) && (i[n] = e[n]);
                             return i
                         }(o, ["className", "aspectRatio", "alt", "containerClassName"]),
-                        f = (T7(i) || function(e) {
+                        f = (Ne(i) || function(e) {
                             var t, r, n = null == e ? null : "u" > typeof Symbol && e[Symbol.iterator] || e["@@iterator"];
                             if (null != n) {
                                 var o = [],
@@ -41650,9 +41667,9 @@ function() {
                                 }
                                 return o
                             }
-                        }(i) || Ne(i, 1) || T9())[0];
+                        }(i) || Nr(i, 1) || Nt())[0];
                     return e2().createElement("div", {
-                        className: oW("foundation-web-media clip", Nt[void 0 === l ? "1:1" : l], c)
+                        className: oW("foundation-web-media clip", Nn[void 0 === l ? "1:1" : l], c)
                     }, e2().createElement("img", function(e) {
                         for (var t = 1; t < arguments.length; t++) {
                             var r = null != arguments[t] ? arguments[t] : {},
@@ -41677,7 +41694,7 @@ function() {
                     }, s)))
                 });
 
-            function Nn(e) {
+            function Ni(e) {
                 for (var t = 1; t < arguments.length; t++) {
                     var r = null != arguments[t] ? arguments[t] : {},
                         n = Object.keys(r);
@@ -41696,7 +41713,7 @@ function() {
                 return e
             }
 
-            function No(e, t) {
+            function Na(e, t) {
                 return t = null != t ? t : {}, Object.getOwnPropertyDescriptors ? Object.defineProperties(e, Object.getOwnPropertyDescriptors(t)) : (function(e) {
                     var t = Object.keys(e);
                     if (Object.getOwnPropertySymbols) {
@@ -41709,11 +41726,11 @@ function() {
                 }), e
             }
 
-            function Ni(e) {
+            function Nl(e) {
                 var t = e.product,
                     r = e.redirectUrl,
                     n = e.onPurchaseClick,
-                    o = Si("Small", {
+                    o = Su("Small", {
                         small: "Medium"
                     }),
                     i = r ? {
@@ -41723,12 +41740,12 @@ function() {
                         role: "button",
                         target: "_blank"
                     } : {};
-                return (0, p.jsxs)("div", No(Nn({
+                return (0, p.jsxs)("div", Na(Ni({
                     className: "self-stretch flex flex-row justify-between items-center gap-small"
                 }, l0(t.productId)), {
                     children: [(0, p.jsx)("div", {
                         className: "min-width-0 flex-1",
-                        children: (0, p.jsx)(Sl, {
+                        children: (0, p.jsx)(Ss, {
                             amount: t.robuxAmount,
                             nonPromotionalAmount: t.nonPromotionalPlatformRobuxAmount,
                             bonusRobuxAmount: t.bonusRobuxAmount,
@@ -41737,7 +41754,7 @@ function() {
                             inlineBadgeIcon: t.inlineBadgeIcon,
                             inlineBadgeTranslationKey: t.inlineBadgeTranslationKey
                         })
-                    }), (0, p.jsx)(iO, No(Nn({
+                    }), (0, p.jsx)(iO, Na(Ni({
                         variant: t.isCallToAction ? "Emphasis" : "Standard",
                         size: o,
                         className: "min-width-[90px] small:min-width-[120px] medium:min-width-[200px] text-label-medium shrink-0",
@@ -41755,7 +41772,7 @@ function() {
                 }))
             }
 
-            function Na(e) {
+            function Nu(e) {
                 var t, r, n = e.item,
                     o = e.products,
                     i = e.totalCards,
@@ -41771,7 +41788,7 @@ function() {
                     },
                     children: [(0, p.jsxs)("div", {
                         className: "relative bg-shift-200 ".concat(i > 1 ? "min-height-[120px]" : "min-height-[186px] medium:min-height-[204px]"),
-                        children: [(null == c ? void 0 : c.backgroundImage2dUrl) && (0, p.jsx)(Nr, {
+                        children: [(null == c ? void 0 : c.backgroundImage2dUrl) && (0, p.jsx)(No, {
                             aspectRatio: "16:9",
                             src: c.backgroundImage2dUrl,
                             alt: "",
@@ -41798,7 +41815,7 @@ function() {
                                     children: s
                                 }), (null == c ? void 0 : c.creatorDisplayName) && (0, p.jsxs)("span", {
                                     className: "text-body-medium content-emphasis flex items-center gap-xsmall",
-                                    children: [c.creatorDisplayName, c.creatorIsVerified && (0, p.jsx)(wM, {
+                                    children: [c.creatorDisplayName, c.creatorIsVerified && (0, p.jsx)(wk, {
                                         size: 16
                                     })]
                                 })]
@@ -41808,7 +41825,7 @@ function() {
                         className: "self-stretch flex flex-col gap-xlarge padding-medium medium:padding-xlarge bg-shift-400",
                         "data-testid": "ltb-robux-packages",
                         children: o.map(function(e) {
-                            return (0, p.jsx)(Ni, {
+                            return (0, p.jsx)(Nl, {
                                 product: e,
                                 redirectUrl: a,
                                 onPurchaseClick: l
@@ -41818,11 +41835,11 @@ function() {
                 })
             }
 
-            function Nl(e) {
+            function Nc(e) {
                 e.isPrimary;
                 var t = e.sectionBase,
                     r = e.limitedTimeBonus,
-                    n = (0, e1.useContext)(w$).purchaseProduct,
+                    n = (0, e1.useContext)(w0).purchaseProduct,
                     o = (0, e1.useContext)(aK).redirect,
                     i = oC().translateFullKey,
                     a = (0, e1.useMemo)(function() {
@@ -41856,25 +41873,25 @@ function() {
                         })
                     }, [n, r.isRedirect, o]);
                 if (0 === a.length) return null;
-                var u = SS(r.expirationTimestampMs);
-                return (0, p.jsxs)(O5, No(Nn({}, lJ(t)), {
+                var u = SE(r.expirationTimestampMs);
+                return (0, p.jsxs)(O7, Na(Ni({}, lJ(t)), {
                     children: [(0, p.jsxs)("div", {
                         className: "self-stretch flex flex-row items-center justify-between gap-medium",
                         "data-testid": "ltb-section-header-row",
-                        children: [(0, p.jsx)(O6, {
+                        children: [(0, p.jsx)(O9, {
                             className: "self-auto min-width-0 flex-1 medium:self-stretch medium:flex-none",
                             children: i(t.sectionHeaderTranslationKey, void 0, "Limited-time avatar items")
-                        }), u.success && (0, p.jsx)(SO, {
+                        }), u.success && (0, p.jsx)(SP, {
                             daysLeft: u.value
                         })]
-                    }), r.bodyTranslationKey && (0, p.jsx)(O8, {
+                    }), r.bodyTranslationKey && (0, p.jsx)(Se, {
                         children: i(r.bodyTranslationKey)
                     }), (0, p.jsx)("div", {
                         className: "self-stretch flex flex-col gap-xlarge medium:gap-xxlarge",
                         children: a.map(function(e) {
                             var t = e.item,
                                 n = e.products;
-                            return (0, p.jsx)(Na, {
+                            return (0, p.jsx)(Nu, {
                                 item: t,
                                 products: n,
                                 totalCards: a.length,
@@ -41886,13 +41903,13 @@ function() {
                 }))
             }
 
-            function Nu(e, t) {
+            function Ns(e, t) {
                 (null == t || t > e.length) && (t = e.length);
                 for (var r = 0, n = Array(t); r < t; r++) n[r] = e[r];
                 return n
             }
 
-            function Nc(e) {
+            function Nf(e) {
                 for (var t = 1; t < arguments.length; t++) {
                     var r = null != arguments[t] ? arguments[t] : {},
                         n = Object.keys(r);
@@ -41911,7 +41928,7 @@ function() {
                 return e
             }
 
-            function Ns(e, t) {
+            function Nd(e, t) {
                 return t = null != t ? t : {}, Object.getOwnPropertyDescriptors ? Object.defineProperties(e, Object.getOwnPropertyDescriptors(t)) : (function(e) {
                     var t = Object.keys(e);
                     if (Object.getOwnPropertySymbols) {
@@ -41924,7 +41941,7 @@ function() {
                 }), e
             }
 
-            function Nf() {
+            function Np() {
                 var e = (0, e1.useContext)(aK).buyRobuxPageData,
                     t = (0, e1.useMemo)(function() {
                         return e.sections.find(function(e) {
@@ -41955,17 +41972,17 @@ function() {
                             d = t.sectionHeaderTranslationKey,
                             y = t.subscriptionV2,
                             m = t.redirect;
-                        if (m) n = (0, p.jsx)(T6, Ns(Nc({}, i), {
+                        if (m) n = (0, p.jsx)(T7, Nd(Nf({}, i), {
                             redirectOptions: m
                         }));
-                        else if (c) n = (0, p.jsx)(SE, Nc({}, i));
-                        else if (s) n = (0, p.jsx)(SC, Ns(Nc({}, i), {
+                        else if (c) n = (0, p.jsx)(SA, Nf({}, i));
+                        else if (s) n = (0, p.jsx)(SM, Nd(Nf({}, i), {
                             recommended: s
                         }));
-                        else if (u) n = (0, p.jsx)(Sw, Ns(Nc({}, i), {
+                        else if (u) n = (0, p.jsx)(Sx, Nd(Nf({}, i), {
                             personalizedBonus: u
                         }));
-                        else if (f) n = (0, p.jsx)(SM, Ns(Nc({}, i), {
+                        else if (f) n = (0, p.jsx)(S_, Nd(Nf({}, i), {
                             robuxGift: f
                         }));
                         else if (y) y.products.forEach(function(e) {
@@ -41973,28 +41990,28 @@ function() {
                             null == (t = e.benefits) || t.forEach(function(t) {
                                 t.plusDiscountSubscriptionBenefits && (t.plusDiscountSubscriptionBenefits.periodType = e.periodType)
                             })
-                        }), n = (0, p.jsx)(Ap, Ns(Nc({}, i), {
+                        }), n = (0, p.jsx)(Ah, Nd(Nf({}, i), {
                             subscriptionV2: y
                         }));
-                        else if (a) n = (0, p.jsx)(SN, Ns(Nc({}, i), {
+                        else if (a) n = (0, p.jsx)(SR, Nd(Nf({}, i), {
                             giftCard: a
                         }));
                         else {
                             if (!l) return console.error("Unknown section type: ".concat(d)), e;
-                            n = (0, p.jsx)(Nl, Ns(Nc({}, i), {
+                            n = (0, p.jsx)(Nc, Nd(Nf({}, i), {
                                 limitedTimeBonus: l
                             }))
                         }
                         return ((function(e) {
-                            if (Array.isArray(e)) return Nu(e)
+                            if (Array.isArray(e)) return Ns(e)
                         })(e) || function(e) {
                             if ("u" > typeof Symbol && null != e[Symbol.iterator] || null != e["@@iterator"]) return Array.from(e)
                         }(e) || function(e) {
                             if (e) {
-                                if ("string" == typeof e) return Nu(e, void 0);
+                                if ("string" == typeof e) return Ns(e, void 0);
                                 var t = Object.prototype.toString.call(e).slice(8, -1);
                                 if ("Object" === t && e.constructor && (t = e.constructor.name), "Map" === t || "Set" === t) return Array.from(t);
-                                if ("Arguments" === t || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(t)) return Nu(e, void 0)
+                                if ("Arguments" === t || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(t)) return Ns(e, void 0)
                             }
                         }(e) || function() {
                             throw TypeError("Invalid attempt to spread non-iterable instance.\\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.")
@@ -42010,24 +42027,24 @@ function() {
                     className: "flex flex-col items-center",
                     children: [(0, p.jsx)("div", {
                         className: "buy-robux-background"
-                    }), (0, p.jsx)(T5, {
+                    }), (0, p.jsx)(T8, {
                         transfersSection: t,
                         robuxGiftSection: n
                     }), (0, p.jsxs)("div", {
                         className: b6()("buy-robux-content padding-x-large small:padding-x-xlarge", {
                             "is-in-app": lT
                         }),
-                        children: [(0, p.jsx)(Am, {
+                        children: [(0, p.jsx)(Av, {
                             transfers: r
-                        }), a, (0, p.jsx)(AO, {})]
+                        }), a, (0, p.jsx)(AP, {})]
                     })]
                 })
             }
-            Nr.displayName = "Media";
-            var Nd = function() {
+            No.displayName = "Media";
+            var Ny = function() {
                 var e, t = function(e) {
                         if (Array.isArray(e)) return e
-                    }(e = (0, e1.useState)(Sr())) || function(e) {
+                    }(e = (0, e1.useState)(Si())) || function(e) {
                         var t, r, n = null == e ? null : "u" > typeof Symbol && e[Symbol.iterator] || e["@@iterator"];
                         if (null != n) {
                             var o = [],
@@ -42048,10 +42065,10 @@ function() {
                         }
                     }(e) || function(e) {
                         if (e) {
-                            if ("string" == typeof e) return O9(e, 2);
+                            if ("string" == typeof e) return Sr(e, 2);
                             var t = Object.prototype.toString.call(e).slice(8, -1);
                             if ("Object" === t && e.constructor && (t = e.constructor.name), "Map" === t || "Set" === t) return Array.from(t);
-                            if ("Arguments" === t || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(t)) return O9(e, 2)
+                            if ("Arguments" === t || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(t)) return Sr(e, 2)
                         }
                     }(e) || function() {
                         throw TypeError("Invalid attempt to destructure non-iterable instance.\\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.")
@@ -42059,10 +42076,10 @@ function() {
                     r = t[0],
                     n = t[1],
                     o = (0, e1.useCallback)(function(e) {
-                        return St.indexOf(r) >= St.indexOf(e)
+                        return So.indexOf(r) >= So.indexOf(e)
                     }, [r]),
                     i = (0, e1.useCallback)(function() {
-                        n(Sr())
+                        n(Si())
                     }, []);
                 return (0, e1.useEffect)(function() {
                     return null == w || w.addEventListener("resize", i), i(),
@@ -42075,7 +42092,7 @@ function() {
                 }
             };
 
-            function Np(e, t, r, n, o, i, a) {
+            function Nm(e, t, r, n, o, i, a) {
                 try {
                     var l = e[i](a),
                         u = l.value
@@ -42086,7 +42103,7 @@ function() {
                 l.done ? t(u) : Promise.resolve(u).then(n, o)
             }
 
-            function Ny(e) {
+            function Nh(e) {
                 return function() {
                     var t = this,
                         r = arguments;
@@ -42094,18 +42111,18 @@ function() {
                         var i = e.apply(t, r);
 
                         function a(e) {
-                            Np(i, n, o, a, l, "next", e)
+                            Nm(i, n, o, a, l, "next", e)
                         }
 
                         function l(e) {
-                            Np(i, n, o, a, l, "throw", e)
+                            Nm(i, n, o, a, l, "throw", e)
                         }
                         a(void 0)
                     })
                 }
             }
 
-            function Nm(e, t) {
+            function Nb(e, t) {
                 var r, n, o, i = {
                         label: 0,
                         sent: function() {
@@ -42186,7 +42203,7 @@ function() {
                 }
             }
 
-            function Nh(e, t, r, n, o, i, a) {
+            function Nv(e, t, r, n, o, i, a) {
                 try {
                     var l = e[i](a),
                         u = l.value
@@ -42196,7 +42213,7 @@ function() {
                 }
                 l.done ? t(u) : Promise.resolve(u).then(n, o)
             }
-            var Nb = function() {
+            var Ng = function() {
                 var e;
                 return (e = function() {
                     var e;
@@ -42282,13 +42299,13 @@ function() {
                     }(this, function(t) {
                         switch (t.label) {
                             case 0:
-                                return [4, Ny(function() {
+                                return [4, Nh(function() {
                                     var e;
-                                    return Nm(this, function(t) {
+                                    return Nb(this, function(t) {
                                         switch (t.label) {
                                             case 0:
-                                                return [4, Ny(function() {
-                                                    return Nm(this, function(e) {
+                                                return [4, Nh(function() {
+                                                    return Nb(this, function(e) {
                                                         return [2, lp(lf.GET, ld.GET_CLIENT_ASSERTION_V2, {
                                                             url: "".concat(I.EnvironmentUrls.authApi, "/v1/client-assertion/"),
                                                             withCredentials: !0
@@ -42297,8 +42314,8 @@ function() {
                                                 })()];
                                             case 1:
                                                 var r;
-                                                return [2, (r = null == (e = t.sent()) ? void 0 : e.clientAssertion, Ny(function() {
-                                                    return Nm(this, function(e) {
+                                                return [2, (r = null == (e = t.sent()) ? void 0 : e.clientAssertion, Nh(function() {
+                                                    return Nb(this, function(e) {
                                                         return [2, lp(lf.POST, ld.GET_AUTH_TICKET_V2, {
                                                             url: "".concat(I.EnvironmentUrls.authApi, "/v1/authentication-ticket/"),
                                                             withCredentials: !0
@@ -42323,24 +42340,24 @@ function() {
                         var i = e.apply(t, r);
 
                         function a(e) {
-                            Nh(i, n, o, a, l, "next", e)
+                            Nv(i, n, o, a, l, "next", e)
                         }
 
                         function l(e) {
-                            Nh(i, n, o, a, l, "throw", e)
+                            Nv(i, n, o, a, l, "throw", e)
                         }
                         a(void 0)
                     })
                 })()
             };
 
-            function Nv(e, t) {
+            function Nw(e, t) {
                 (null == t || t > e.length) && (t = e.length);
                 for (var r = 0, n = Array(t); r < t; r++) n[r] = e[r];
                 return n
             }
 
-            function Ng(e, t, r) {
+            function NO(e, t, r) {
                 return t in e ? Object.defineProperty(e, t, {
                     value: r,
                     enumerable: !0,
@@ -42349,7 +42366,7 @@ function() {
                 }) : e[t] = r, e
             }
 
-            function Nw(e, t) {
+            function NS(e, t) {
                 return function(e) {
                     if (Array.isArray(e)) return e
                 }(e) || function(e, t) {
@@ -42373,16 +42390,16 @@ function() {
                     }
                 }(e, t) || function(e, t) {
                     if (e) {
-                        if ("string" == typeof e) return Nv(e, t);
+                        if ("string" == typeof e) return Nw(e, t);
                         var r = Object.prototype.toString.call(e).slice(8, -1);
                         if ("Object" === r && e.constructor && (r = e.constructor.name), "Map" === r || "Set" === r) return Array.from(r);
-                        if ("Arguments" === r || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(r)) return Nv(e, t)
+                        if ("Arguments" === r || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(r)) return Nw(e, t)
                     }
                 }(e, t) || function() {
                     throw TypeError("Invalid attempt to destructure non-iterable instance.\\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.")
                 }()
             }
-            var NO = function(e) {
+            var Nx = function(e) {
                     var t, r, n = e.authTicket,
                         o = e.paymentSessionId,
                         i = e.returnUrl,
@@ -42396,7 +42413,7 @@ function() {
                                 "function" == typeof Object.getOwnPropertySymbols && (n = n.concat(Object.getOwnPropertySymbols(r).filter(function(e) {
                                     return Object.getOwnPropertyDescriptor(r, e).enumerable
                                 }))), n.forEach(function(t) {
-                                    Ng(e, t, r[t])
+                                    NO(e, t, r[t])
                                 })
                             }
                             return e
@@ -42404,7 +42421,7 @@ function() {
                             analyticId: rG.purchaseFlowUuid,
                             at: n,
                             ctx: "redirect"
-                        }, l && Ng({}, "expFlow", "1")), r = r = {
+                        }, l && NO({}, "expFlow", "1")), r = r = {
                             paymentSessionId: o,
                             returnUrl: i,
                             tuid: u
@@ -42420,18 +42437,18 @@ function() {
                         }), t)).toString();
                     return "".concat(a, "?").concat(c)
                 },
-                NS = function() {
+                NP = function() {
                     var e = (0, t2.getDeviceMeta)();
                     return !!e && (e.isIosApp || e.isAndroidApp)
                 },
-                Nx = "paymentSession-".concat(null != (f = null == (d = az()) ? void 0 : d.id) ? f : "loggedout"),
-                NP = function(e) {
-                    ak(Nx, e)
+                NE = "paymentSession-".concat(null != (f = null == (d = az()) ? void 0 : d.id) ? f : "loggedout"),
+                Nj = function(e) {
+                    ak(NE, e)
                 },
-                NE = function(e) {
+                NI = function(e) {
                     var t, r, n, o, i, a, l, u, c, s, f, d, y, m, h, b, v, g, w, S, x, P, E, A, C, T, N, M, k = e.enhancedBuyRobuxPageData,
                         R = e.urlParams,
-                        _ = Nd();
+                        _ = Ny();
                     t = (0, e1.useContext)(aK).urlParams, o = (n = function(e) {
                         if (Array.isArray(e)) return e
                     }(r = (0, e1.useMemo)(function() {
@@ -42470,7 +42487,7 @@ function() {
                         i ? ak(aq, i) : aI(aq)
                     }, [i]), a = R.ctx, (0, e1.useEffect)(function() {
                         var e;
-                        (null == (e = (0, t2.getDeviceMeta)()) ? void 0 : e.isInApp) ? null == O || O.documentElement.style.setProperty("--container-main-margin-top", "var(--container-main-margin-top-mobile-var"): "redirect" === a && OJ.forEach(function(e) {
+                        (null == (e = (0, t2.getDeviceMeta)()) ? void 0 : e.isInApp) ? null == O || O.documentElement.style.setProperty("--container-main-margin-top", "var(--container-main-margin-top-mobile-var"): "redirect" === a && O2.forEach(function(e) {
                             null == O || O.documentElement.style.setProperty("--".concat(e), "var(--".concat(e, "-var"))
                         })
                     }, [a]);
@@ -42492,14 +42509,14 @@ function() {
                         $ = Q.paymentSession,
                         Z = Q.purchaseFlowId;
                     (0, e1.useEffect)(function() {
-                        $ && NP($)
+                        $ && Nj($)
                     }, [$]);
                     var J = (l = null == $ ? void 0 : $.id, u = (0, e1.useMemo)(function() {
                             return (0, t2.getDeviceMeta)()
                         }, []), (0, e1.useCallback)(function(e, t) {
                             var r, n, o = e.productId,
                                 i = e.providerProductId;
-                            return (null == u ? void 0 : u.isAndroidApp) && i ? "".concat(OZ, "?").concat(j.UrlSearchParams.new((r = O$({
+                            return (null == u ? void 0 : u.isAndroidApp) && i ? "".concat(O1, "?").concat(j.UrlSearchParams.new((r = O0({
                                 id: i.toLowerCase()
                             }, void 0 !== l ? {
                                 paymentSessionId: l
@@ -42514,13 +42531,13 @@ function() {
                                 return t
                             })(Object(n)).forEach(function(e) {
                                 Object.defineProperty(r, e, Object.getOwnPropertyDescriptor(n, e))
-                            }), r)).toString()) : ((null == u ? void 0 : u.isAmazonApp) || (null == u ? void 0 : u.isUWPApp)) && i ? "".concat(OZ, "?").concat(j.UrlSearchParams.new({
+                            }), r)).toString()) : ((null == u ? void 0 : u.isAmazonApp) || (null == u ? void 0 : u.isUWPApp)) && i ? "".concat(O1, "?").concat(j.UrlSearchParams.new({
                                 id: i.toLowerCase()
-                            }).toString()) : (null == u ? void 0 : u.isIosApp) && i ? "".concat(OZ, "?").concat(j.UrlSearchParams.new(O$({
+                            }).toString()) : (null == u ? void 0 : u.isIosApp) && i ? "".concat(O1, "?").concat(j.UrlSearchParams.new(O0({
                                 id: i
                             }, void 0 !== l ? {
                                 paymentSessionId: l
-                            } : {})).toString()) : "".concat("/upgrades/paymentmethods", "?").concat(j.UrlSearchParams.new(O$({
+                            } : {})).toString()) : "".concat("/upgrades/paymentmethods", "?").concat(j.UrlSearchParams.new(O0({
                                 ap: o,
                                 page: "RobuxRedesign"
                             }, void 0 !== l ? {
@@ -42870,7 +42887,7 @@ function() {
                                                         }
                                                     }
                                                 }(this, function(e) {
-                                                    return [2, wV({
+                                                    return [2, wW({
                                                         method: "GET",
                                                         url: "".concat(I.EnvironmentUrls.apiGatewayUrl, "/payments-gateway/v1/feature/metadata"),
                                                         config: {
@@ -42922,7 +42939,7 @@ function() {
                             })(), function() {
                                 r = !0
                             }) : void y(!1)
-                        }, [c, wV]), {
+                        }, [c, wW]), {
                             shouldShowFirstTimePurchaseConsent: d,
                             markConsentAcknowledged: (0, e1.useCallback)(function() {
                                 c && ak(aW(c), "true")
@@ -42933,23 +42950,23 @@ function() {
                         eo = function(e) {
                             var t = e.paymentSession,
                                 r = e.isEnabled,
-                                n = Nw((0, e1.useState)(), 2),
+                                n = NS((0, e1.useState)(), 2),
                                 o = n[0],
                                 i = n[1],
-                                a = Nw((0, e1.useState)(Ox), 2),
+                                a = NS((0, e1.useState)(Oj), 2),
                                 l = a[0],
                                 u = a[1],
-                                c = Nw((0, e1.useState)(!1), 2),
+                                c = NS((0, e1.useState)(!1), 2),
                                 s = c[0],
                                 f = c[1],
                                 d = null == t ? void 0 : t.id,
                                 p = (0, e1.useCallback)(function() {
-                                    lr("MobileRedirectUrlGenerationStarted"), Nb().then(i).catch(function(e) {
+                                    lr("MobileRedirectUrlGenerationStarted"), Ng().then(i).catch(function(e) {
                                         ln("MobileRedirectUrlGenerationFailed", null, e)
                                     })
                                 }, []);
                             (0, e1.useEffect)(function() {
-                                r && d && (p(), OE.getExperimentBasedPathname().then(function(e) {
+                                r && d && (p(), OA.getExperimentBasedPathname().then(function(e) {
                                     var t = e.pathname,
                                         r = e.isInExperiment;
                                     u(t), f(r)
@@ -42960,7 +42977,7 @@ function() {
                             var y = (0, e1.useMemo)(function() {
                                 if (!o || !d) return "";
                                 var e = az();
-                                return NO({
+                                return Nx({
                                     authTicket: o,
                                     paymentSessionId: d,
                                     returnUrl: "/upgrades/paymentmethods",
@@ -42976,7 +42993,7 @@ function() {
                             }
                         }({
                             paymentSession: $,
-                            isEnabled: NS() && q.sections.some(function(e) {
+                            isEnabled: NP() && q.sections.some(function(e) {
                                 var t, r, n, o, i, a;
                                 return null != (t = null != (r = null != (n = e.redirect) ? n : null == (o = e.personalizedBonus) ? void 0 : o.isRedirect) ? r : null == (i = e.limitedTimeBonus) ? void 0 : i.isRedirect) ? t : null == (a = e.subscriptionV2) ? void 0 : a.products.some(function(e) {
                                     return e.isRedirect
@@ -43165,20 +43182,20 @@ function() {
                             id: "generic-challenge-container",
                             "data-testid": "generic-challenge-container"
                         }), (0, p.jsx)(ud, {
-                            children: (0, p.jsx)(OQ, {
-                                children: (0, p.jsx)(Nf, {})
+                            children: (0, p.jsx)(OJ, {
+                                children: (0, p.jsx)(Np, {})
                             })
                         })]
                     })
                 };
 
-            function Nj(e, t) {
+            function NA(e, t) {
                 (null == t || t > e.length) && (t = e.length);
                 for (var r = 0, n = Array(t); r < t; r++) n[r] = e[r];
                 return n
             }
 
-            function NI(e, t) {
+            function NC(e, t) {
                 return function(e) {
                     if (Array.isArray(e)) return e
                 }(e) || function(e, t) {
@@ -43200,30 +43217,30 @@ function() {
                         }
                         return i
                     }
-                }(e, t) || NC(e, t) || function() {
+                }(e, t) || NN(e, t) || function() {
                     throw TypeError("Invalid attempt to destructure non-iterable instance.\\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.")
                 }()
             }
 
-            function NA(e) {
+            function NT(e) {
                 return function(e) {
-                    if (Array.isArray(e)) return Nj(e)
+                    if (Array.isArray(e)) return NA(e)
                 }(e) || function(e) {
                     if ("u" > typeof Symbol && null != e[Symbol.iterator] || null != e["@@iterator"]) return Array.from(e)
-                }(e) || NC(e) || function() {
+                }(e) || NN(e) || function() {
                     throw TypeError("Invalid attempt to spread non-iterable instance.\\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.")
                 }()
             }
 
-            function NC(e, t) {
+            function NN(e, t) {
                 if (e) {
-                    if ("string" == typeof e) return Nj(e, t);
+                    if ("string" == typeof e) return NA(e, t);
                     var r = Object.prototype.toString.call(e).slice(8, -1);
                     if ("Object" === r && e.constructor && (r = e.constructor.name), "Map" === r || "Set" === r) return Array.from(r);
-                    if ("Arguments" === r || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(r)) return Nj(e, t)
+                    if ("Arguments" === r || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(r)) return NA(e, t)
                 }
             }
-            var NT = function(e) {
+            var NM = function(e) {
                     var t, r, n = null == (r = e.find(function(e) {
                         return e.personalizedBonus
                     })) || null == (t = r.personalizedBonus) ? void 0 : t.bonuses[0];
@@ -43238,17 +43255,17 @@ function() {
                         virtualPurchasingProductTargetId: i
                     }
                 },
-                NN = function(e) {
+                Nk = function(e) {
                     var t, r, n = null == (r = e.find(function(e) {
                         return e.personalizedBonus
                     })) || null == (t = r.personalizedBonus) ? void 0 : t.bonuses[0];
                     if (n) return n.collectibleItemMetadata
                 },
-                NM = function(e) {
+                NR = function(e) {
                     var t, r, n, o, i = e.buyRobuxPageData,
                         a = e.isSubscriber,
                         l = e.urlProductId,
-                        u = NT(i.sections),
+                        u = NM(i.sections),
                         c = i.sections.reduce(function(e, t) {
                             var r = !0,
                                 n = !1,
@@ -43277,15 +43294,15 @@ function() {
                             ids: [],
                             imageUrls: []
                         }),
-                        s = NN(i.sections),
-                        f = NI((t = i.sections, t.reduce(function(e, t) {
-                            var r, n = NI(e, 2),
+                        s = Nk(i.sections),
+                        f = NC((t = i.sections, t.reduce(function(e, t) {
+                            var r, n = NC(e, 2),
                                 o = n[0],
                                 i = n[1],
                                 a = null == (r = t.products) ? void 0 : r.map(function(e) {
                                     return e.productId === l && (i = e), e.productId
                                 });
-                            return a ? [NA(o).concat(NA(a)), i] : [o, i]
+                            return a ? [NT(o).concat(NT(a)), i] : [o, i]
                         }, [
                             [], void 0
                         ])), 2),
@@ -43335,8 +43352,8 @@ function() {
             e0 = function(e) {
                 return P().userDataStore.getUser(e)
             };
-            var Nk = i0.P,
-                NR = function(e) {
+            var N_ = i0.P,
+                ND = function(e) {
                     var t = e.children,
                         r = oA("CommonUI.Controls");
                     return (0, p.jsx)(i$, {
@@ -43344,7 +43361,7 @@ function() {
                         children: t
                     })
                 },
-                N_ = function() {
+                NL = function() {
                     if (void 0 === w) return {};
                     var e, t, r, n = new URLSearchParams(w.location.search);
                     return {
@@ -43357,7 +43374,7 @@ function() {
                 if (void 0 !== O) {
                     ll();
                     var e = (0, iJ.isPremiumUser)(),
-                        t = N_(),
+                        t = NL(),
                         r = function() {
                             if (void 0 !== O) {
                                 var e, t, r = O.getElementById(i1);
@@ -43373,7 +43390,7 @@ function() {
                             }
                         }();
                     if (r) {
-                        var n = NM({
+                        var n = NR({
                             buyRobuxPageData: r,
                             isSubscriber: e,
                             urlProductId: t.product_id
@@ -43383,12 +43400,12 @@ function() {
                             children: (0, p.jsx)(y.QueryClientProvider, {
                                 client: e4.queryClient,
                                 children: (0, p.jsx)(oV, {
-                                    namespaces: Nk,
+                                    namespaces: N_,
                                     children: (0, p.jsx)(tQ, {
                                         config: i0.P,
                                         context: "RobuxRedesign",
-                                        children: (0, p.jsx)(NR, {
-                                            children: (0, p.jsx)(NE, {
+                                        children: (0, p.jsx)(ND, {
+                                            children: (0, p.jsx)(NI, {
                                                 enhancedBuyRobuxPageData: n,
                                                 urlParams: t
                                             })
@@ -43401,5 +43418,5 @@ function() {
                 }
             })
         }()
-}(), window.Roblox && window.Roblox.BundleDetector && window.Roblox.BundleDetector.bundleDetected("RobuxRedesign");
-//# sourceMappingURL=https://sourcemaps.rbxcdn.com/robuxRedesign-67f573f0c76d61fd.js.map
+}(), window.Roblox && window.Roblox.BundleDetector && window.Roblox.BundleDetector.bundleDetected(document.currentScript && document.currentScript.getAttribute("data-bundlename") || "RobuxRedesign");
+//# sourceMappingURL=https://sourcemaps.rbxcdn.com/robuxRedesign-850648427bdc93fe.js.map

@@ -84,6 +84,7 @@ Roblox.LangDynamic["Feature.NotificationSettings"] = {
     "Label.RecommendedOffers": "Recommended Offers",
     "Label.FriendPresence": "Friend Presence",
     "Label.RecommendedExperienceEvents": "Recommended Game Events",
-    "Label.RecommendedMoments": "Recommended Moments"
+    "Label.RecommendedMoments": "Recommended Moments",
+    "Label.ReadonlyChannelNotifications": "This notification is disabled."
 };
 window.Roblox && window.Roblox.BundleDetector && window.Roblox.BundleDetector.bundleDetected("DynamicLocalizationResourceScript_Feature.NotificationSettings");

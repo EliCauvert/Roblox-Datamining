@@ -3,7 +3,7 @@
     try {
         var e = "undefined" != typeof globalThis ? globalThis : "undefined" != typeof global ? global : "undefined" != typeof window ? window : "undefined" != typeof self ? self : {},
             n = (new e.Error).stack;
-        n && ((e._debugIds || (e._debugIds = {}))[n] = "2ccad1b3-0674-fb6f-c731-2577eb2090ed")
+        n && ((e._debugIds || (e._debugIds = {}))[n] = "424aebf7-ca86-7cac-d45b-2e83f35f3d02")
     } catch (e) {}
 }();
 (globalThis.TURBOPACK || (globalThis.TURBOPACK = [])).push(["object" == typeof document ? document.currentScript : void 0, 736570, t => {
@@ -1286,7 +1286,7 @@
                 })
             })
         }
-    })(n.BaseAPI), t.s(["CreatorHomeContentApi", 0, p, "GroupListSurface", 0, {
+    })(n.BaseAPI), t.s(["BannerConfigurationFromJSON", 0, l, "CreatorHomeContentApi", 0, p, "GroupListSurface", 0, {
         CreatorHub: "CreatorHub",
         StudioAssetImporter: "StudioAssetImporter",
         StudioConvertToPackage: "StudioConvertToPackage",
@@ -16097,7 +16097,13 @@
             let [p, h] = (0, r.useReducer)(nz, (t => {
                 let {
                     screenSize: n
-                } = t, r = "large" === n ? "persistent" : "temporary", o = "true" === localStorage.getItem(t_);
+                } = t, r = "large" === n ? "persistent" : "temporary", o = (() => {
+                    try {
+                        return "true" === localStorage.getItem(t_)
+                    } catch (t) {
+                        return !1
+                    }
+                })();
                 return {
                     primaryRailOpen: "large" === n,
                     primaryRailCompact: "persistent" === r && o,
@@ -17696,7 +17702,10 @@
                         eventType: "clickNavPrimaryRailCollapse",
                         context: "click",
                         eventValue: t ? "collapse" : "expand"
-                    }), x(t), localStorage.setItem(t_, String(t))
+                    }), x(t);
+                    try {
+                        localStorage.setItem(t_, String(t))
+                    } catch (t) {}
                 }
             }))
         },
@@ -21544,7 +21553,10 @@
             }, [b, d, p, f, E]), x = (0, r.useCallback)(() => {
                 b(nR), u(!0)
             }, [b, u]), A = (0, r.useCallback)(async () => {
-                b(nN), c(!0), localStorage.removeItem(t_);
+                b(nN), c(!0);
+                try {
+                    localStorage.removeItem(t_)
+                } catch (t) {}
                 try {
                     await C()
                 } catch (t) {}
@@ -26952,10 +26964,10 @@
         }
         static async getDataset(t) {
             let r;
-            if ("titles" === n.default.env.recommendedSearchType) r = nx("https://assets.create.roblox.com/e6ff6e34e83a1037af860448b9799edcfaf78eb6", "data", "searchRecommendations", "titles", "".concat(t.toLocaleLowerCase(), ".json"));
+            if ("titles" === n.default.env.recommendedSearchType) r = nx("https://assets.create.roblox.com/9bdd3fab861fa4cb33220923767045e56edce031", "data", "searchRecommendations", "titles", "".concat(t.toLocaleLowerCase(), ".json"));
             else {
                 if (!nT()) return [];
-                r = nx("https://assets.create.roblox.com/e6ff6e34e83a1037af860448b9799edcfaf78eb6", "data", "searchRecommendations", "scoredTitles", "".concat(t.toLocaleLowerCase(), ".json"))
+                r = nx("https://assets.create.roblox.com/9bdd3fab861fa4cb33220923767045e56edce031", "data", "searchRecommendations", "scoredTitles", "".concat(t.toLocaleLowerCase(), ".json"))
             }
             let o = await fetch(r),
                 a = await o.json();
@@ -32774,5 +32786,5 @@
     }])
 }]);
 
-//# debugId=2ccad1b3-0674-fb6f-c731-2577eb2090ed
-//# sourceMappingURL=3fsbw11486urm.js.map
+//# debugId=424aebf7-ca86-7cac-d45b-2e83f35f3d02
+//# sourceMappingURL=3b8kd1c4_kfa7.js.map

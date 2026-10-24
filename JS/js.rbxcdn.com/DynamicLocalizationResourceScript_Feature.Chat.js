@@ -161,6 +161,7 @@ Roblox.LangDynamic["Feature.Chat"] = {
     "Message.MakeConnectionsToChatNPlay": "Make friends to start chatting and partying!",
     "Message.ConnectionsChatPrivacySetting": "To chat with friends, turn on chat in your {frontLink}Privacy Settings{endLink}",
     "Label.SearchConnections": "Search for Friends",
+    "Label.ContentLoadingFailed": "We couldn't load this content",
     "Heading.FirstInteractionWith": "First interaction with {displayName}",
     "Heading.FirstInteractionWithThisPerson": "First interaction with this person",
     "Label.MessageNotAvailable": "This message is not available",

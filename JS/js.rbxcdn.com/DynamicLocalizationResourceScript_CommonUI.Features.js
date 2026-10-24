@@ -2,6 +2,7 @@ var Roblox = Roblox || {};
 Roblox.LangDynamic = Roblox.LangDynamic || {};
 Roblox.LangDynamic["CommonUI.Features"] = {
     "Label.Avatar": "Avatar",
+    "Label.Chat": "Chat",
     "Label.Friends": "Friends",
     "Label.Help": "Help",
     "Action.Ok": "Ok",

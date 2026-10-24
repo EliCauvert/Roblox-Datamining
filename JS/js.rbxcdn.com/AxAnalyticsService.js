@@ -1,11 +1,11 @@
 ! function() {
     try {
-        var e = "undefined" != typeof window ? window : "undefined" != typeof global ? global : "undefined" != typeof globalThis ? globalThis : "undefined" != typeof self ? self : {};
+        var e = "u" > typeof window ? window : "u" > typeof global ? global : "u" > typeof globalThis ? globalThis : "u" > typeof self ? self : {};
         e.SENTRY_RELEASE = {
-            id: "8a492c91f2f3b77789ca8d2e75575286e9ebafe5"
+            id: "295008fd57261faf205456a2a7660a91ec194e16"
         };
         var t = (new e.Error).stack;
-        t && (e._sentryDebugIds = e._sentryDebugIds || {}, e._sentryDebugIds[t] = "c1830be2-bb2b-48f0-845f-91a47b91a310", e._sentryDebugIdIdentifier = "sentry-dbid-c1830be2-bb2b-48f0-845f-91a47b91a310")
+        t && (e._sentryDebugIds = e._sentryDebugIds || {}, e._sentryDebugIds[t] = "7d2cfad0-32e6-46e0-9e27-2ec0cf5575e0", e._sentryDebugIdIdentifier = "sentry-dbid-7d2cfad0-32e6-46e0-9e27-2ec0cf5575e0")
     } catch (e) {}
 }(),
 function() {
@@ -38,19 +38,20 @@ function() {
     }, i.o = function(e, t) {
         return Object.prototype.hasOwnProperty.call(e, t)
     }, i.rv = function() {
-        return "1.5.7"
-    }, i.ruid = "bundler=rspack@1.5.7";
+        return "1.7.12"
+    }, i.ruid = "bundler=rspack@1.7.12";
     var o = window.Roblox,
         n = i.n(o),
-        c = window.CoreRobloxUtilities,
-        l = window.HeaderScripts,
+        c = window.Roblox["core-scripts"].eventStream,
+        l = window.Roblox["core-scripts"].meta.device,
         u = window.EventTracker,
         d = ((e = {})[e.View = 0] = "View", e[e.Click = 1] = "Click", e[e.Error = 2] = "Error", e),
         s = ((t = {})[t.Web = 0] = "Web", t[t.MobileWeb = 1] = "MobileWeb", t),
-        C = l.deviceMeta.getDeviceMeta(),
-        f = (null == C ? void 0 : C.isPhone) || (null == C ? void 0 : C.isTablet) || (null == C ? void 0 : C.deviceType) === "phone",
-        v = "AXTracking_".concat(f ? "Mweb" : "Web"),
-        p = function(e) {
+        C = function() {
+            var e = (0, l.getDeviceMeta)();
+            return !!(null == e ? void 0 : e.isPhone) || !!(null == e ? void 0 : e.isTablet) || (null == e ? void 0 : e.deviceType) === "phone"
+        },
+        f = function(e) {
             var t = e.itemName,
                 r = e.counterName,
                 a = e.metaData,
@@ -58,10 +59,12 @@ function() {
                 o = void 0 === i ? d.View : i,
                 n = e.excludeCounter,
                 l = e.excludeTelemetry,
-                C = sessionStorage.getItem("AXAnalyticsDebugLogging");
+                f = sessionStorage.getItem("AXAnalyticsDebugLogging"),
+                p = C(),
+                v = "AXTracking_".concat(p ? "Mweb" : "Web");
             if (!(void 0 !== n && n)) {
-                var p = r ? "".concat(v, "_").concat(r) : "".concat(v, "_").concat(t);
-                (0, u.fireEvent)(p), C && console.log("AXAnalyticsService.sendCounter", p)
+                var g = r ? "".concat(v, "_").concat(r) : "".concat(v, "_").concat(t);
+                (0, u.fireEvent)(g), f && console.log("AXAnalyticsService.sendCounter", g)
             }
             if (!(void 0 !== l && l)) {
                 var b = function(e) {
@@ -84,12 +87,12 @@ function() {
                 }({
                     item_name: t,
                     action_type: o,
-                    platform: f ? s.MobileWeb : s.Web
+                    platform: p ? s.MobileWeb : s.Web
                 }, a);
-                c.eventStreamService.sendEventWithTarget("userJourneyAction", "RobloxWWW", b), C && console.log("AXAnalyticsService.sendEvent", b)
+                (0, c.sendEventWithTarget)("userJourneyAction", "RobloxWWW", b), f && console.log("AXAnalyticsService.sendEvent", b)
             }
         },
-        b = function(e) {
+        p = function(e) {
             for (var t = 1; t < arguments.length; t++) {
                 var r = null != arguments[t] ? arguments[t] : {},
                     a = Object.keys(r);
@@ -173,19 +176,19 @@ function() {
             TradeBannerDismiss: "tradeBannerDismiss",
             TradeProfileClick: "tradeProfileClick"
         }),
-        g = window.React;
+        v = window.React;
 
-    function h(e, t) {
+    function g(e, t) {
         (null == t || t > e.length) && (t = e.length);
         for (var r = 0, a = Array(t); r < t; r++) a[r] = e[r];
         return a
     }
 
-    function A(e, t) {
+    function b(e, t) {
         return function(e) {
             if (Array.isArray(e)) return e
         }(e) || function(e, t) {
-            var r, a, i = null == e ? null : "undefined" != typeof Symbol && e[Symbol.iterator] || e["@@iterator"];
+            var r, a, i = null == e ? null : "u" > typeof Symbol && e[Symbol.iterator] || e["@@iterator"];
             if (null != i) {
                 var o = [],
                     n = !0,
@@ -205,23 +208,23 @@ function() {
             }
         }(e, t) || function(e, t) {
             if (e) {
-                if ("string" == typeof e) return h(e, t);
+                if ("string" == typeof e) return g(e, t);
                 var r = Object.prototype.toString.call(e).slice(8, -1);
                 if ("Object" === r && e.constructor && (r = e.constructor.name), "Map" === r || "Set" === r) return Array.from(r);
-                if ("Arguments" === r || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(r)) return h(e, t)
+                if ("Arguments" === r || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(r)) return g(e, t)
             }
         }(e, t) || function() {
             throw TypeError("Invalid attempt to destructure non-iterable instance.\\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.")
         }()
     }
-    var y = function() {
-        var e = A((0, g.useState)(!1), 2),
+    var h = function() {
+        var e = b((0, v.useState)(!1), 2),
             t = e[0],
             r = e[1],
-            a = (0, g.useRef)(null);
-        return (0, g.useEffect)(function() {
+            a = (0, v.useRef)(null);
+        return (0, v.useEffect)(function() {
             var e = new IntersectionObserver(function(e) {
-                    var t = A(e, 1)[0];
+                    var t = b(e, 1)[0];
                     t && r(t.isIntersecting)
                 }, {
                     threshold: .1
@@ -234,58 +237,58 @@ function() {
         }, []), [a, t]
     };
 
-    function E(e, t) {
+    function A(e, t) {
         (null == t || t > e.length) && (t = e.length);
         for (var r = 0, a = Array(t); r < t; r++) a[r] = e[r];
         return a
     }
     n().AXAnalyticsService = {
-        sendAXTracking: p,
+        sendAXTracking: f,
         useAXTrackView: function(e) {
-            var t, r = (t = y(), function(e) {
+            var t, r = function(e) {
                     if (Array.isArray(e)) return e
-                }(t) || function(e, t) {
-                    var r, a, i = null == e ? null : "undefined" != typeof Symbol && e[Symbol.iterator] || e["@@iterator"];
-                    if (null != i) {
-                        var o = [],
-                            n = !0,
-                            c = !1;
+                }(t = h()) || function(e) {
+                    var t, r, a = null == e ? null : "u" > typeof Symbol && e[Symbol.iterator] || e["@@iterator"];
+                    if (null != a) {
+                        var i = [],
+                            o = !0,
+                            n = !1;
                         try {
-                            for (i = i.call(e); !(n = (r = i.next()).done) && (o.push(r.value), o.length !== t); n = !0);
+                            for (a = a.call(e); !(o = (t = a.next()).done) && (i.push(t.value), 2 !== i.length); o = !0);
                         } catch (e) {
-                            c = !0, a = e
+                            n = !0, r = e
                         } finally {
                             try {
-                                n || null == i.return || i.return()
+                                o || null == a.return || a.return()
                             } finally {
-                                if (c) throw a
+                                if (n) throw r
                             }
                         }
-                        return o
+                        return i
                     }
-                }(t, 2) || function(e, t) {
+                }(t) || function(e) {
                     if (e) {
-                        if ("string" == typeof e) return E(e, 2);
-                        var r = Object.prototype.toString.call(e).slice(8, -1);
-                        if ("Object" === r && e.constructor && (r = e.constructor.name), "Map" === r || "Set" === r) return Array.from(r);
-                        if ("Arguments" === r || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(r)) return E(e, t)
+                        if ("string" == typeof e) return A(e, 2);
+                        var t = Object.prototype.toString.call(e).slice(8, -1);
+                        if ("Object" === t && e.constructor && (t = e.constructor.name), "Map" === t || "Set" === t) return Array.from(t);
+                        if ("Arguments" === t || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(t)) return A(e, 2)
                     }
-                }(t, 2) || function() {
+                }(t) || function() {
                     throw TypeError("Invalid attempt to destructure non-iterable instance.\\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.")
-                }()),
+                }(),
                 a = r[0],
                 i = r[1];
-            return (0, g.useEffect)(function() {
-                i && p(e)
+            return (0, v.useEffect)(function() {
+                i && f(e)
             }, [e, i]), [a]
         },
-        useIsElementVisible: y,
-        AXAnalyticsConstants: b,
+        useIsElementVisible: h,
+        AXAnalyticsConstants: p,
         reportAXError: function(e) {
             var t = e.log,
                 r = e.itemName,
                 a = e.counterName;
-            p({
+            f({
                 itemName: "AXError_".concat(r),
                 counterName: a,
                 metaData: {
@@ -295,5 +298,5 @@ function() {
             })
         }
     }, n().AXSendTrackingActionType = d
-}(), window.Roblox && window.Roblox.BundleDetector && window.Roblox.BundleDetector.bundleDetected("AxAnalyticsService");
-//# sourceMappingURL=https://sourcemaps.rbxcdn.com/axAnalyticsService-7b5bb97918ff7906.js.map
+}(), window.Roblox && window.Roblox.BundleDetector && window.Roblox.BundleDetector.bundleDetected(document.currentScript && document.currentScript.getAttribute("data-bundlename") || "AxAnalyticsService");
+//# sourceMappingURL=https://sourcemaps.rbxcdn.com/axAnalyticsService-983bbcadfad37d75.js.map

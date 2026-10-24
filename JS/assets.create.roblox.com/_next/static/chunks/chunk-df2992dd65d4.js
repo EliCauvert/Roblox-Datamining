@@ -3,7 +3,7 @@
     try {
         var e = "undefined" != typeof globalThis ? globalThis : "undefined" != typeof global ? global : "undefined" != typeof window ? window : "undefined" != typeof self ? self : {},
             n = (new e.Error).stack;
-        n && ((e._debugIds || (e._debugIds = {}))[n] = "7bf0385c-6d9b-991d-66b2-d001a067582e")
+        n && ((e._debugIds || (e._debugIds = {}))[n] = "a390226b-7455-e942-dba1-74fdb6e5c8d3")
     } catch (e) {}
 }();
 (globalThis.TURBOPACK || (globalThis.TURBOPACK = [])).push(["object" == typeof document ? document.currentScript : void 0, 962059, e => {
@@ -14,7 +14,7 @@
         o = e.i(384621),
         r = e.i(138726),
         l = e.i(589624),
-        u = e.i(692734),
+        u = e.i(629450),
         d = e.i(79187),
         c = e.i(134731),
         m = e.i(671376),
@@ -104,8 +104,8 @@
         })
     };
     var E = e.i(562991),
-        k = e.i(489098),
-        P = e.i(36482),
+        P = e.i(489098),
+        k = e.i(36482),
         N = e.i(197649);
     let L = () => a.default.createElement("div", {
             className: "flex items-center justify-center shrink-0 width-600"
@@ -130,7 +130,7 @@
                 className: "content-emphasis"
             }), r && a.default.createElement("div", {
                 className: "shrink-0 size-500"
-            }, a.default.createElement(P.Media, {
+            }, a.default.createElement(k.Media, {
                 src: r,
                 alt: i,
                 aspectRatio: "1:1",
@@ -186,7 +186,7 @@
                 let n = t === c.length - 1;
                 return a.default.createElement(a.default.Fragment, {
                     key: e.href || "".concat(e.label, "-").concat(t)
-                }, m && 1 === t && a.default.createElement(a.default.Fragment, null, a.default.createElement("li", null, a.default.createElement(k.IconButton, {
+                }, m && 1 === t && a.default.createElement(a.default.Fragment, null, a.default.createElement("li", null, a.default.createElement(P.IconButton, {
                     icon: "icon-filled-three-dots-horizontal",
                     ariaLabel: s,
                     size: "XSmall",
@@ -385,7 +385,7 @@
                     updatedAt: new Date().toISOString()
                 };
             eM(e, t), await eS(e, "readwrite", e => e.put(a))
-        }, eE = new Set(["QuotaExceededError", "NS_ERROR_DOM_QUOTA_REACHED"]), ek = e => !!(e instanceof DOMException && eE.has(e.name)) || e instanceof Error && e.message.toLowerCase().includes("quota"), eP = async (e, t, n, i) => {
+        }, eE = new Set(["QuotaExceededError", "NS_ERROR_DOM_QUOTA_REACHED"]), eP = e => !!(e instanceof DOMException && eE.has(e.name)) || e instanceof Error && e.message.toLowerCase().includes("quota"), ek = async (e, t, n, i) => {
             let a = [],
                 s = async () => {
                     await ej(e, t, n)
@@ -395,7 +395,7 @@
                     evictedMediaDraftIds: a
                 }
             } catch (e) {
-                if (!ek(e)) throw e
+                if (!eP(e)) throw e
             }
             for (let n of [...i.filter(e => e.draftId !== t && !1 !== e.hasLocalVideo)].sort((e, t) => eb(e) - eb(t))) {
                 await eR(e, [n.draftId]), a.includes(n.draftId) || a.push(n.draftId);
@@ -404,7 +404,7 @@
                         evictedMediaDraftIds: a
                     }
                 } catch (e) {
-                    if (!ek(e)) throw e
+                    if (!eP(e)) throw e
                 }
             }
             throw Error("Failed to store moment video locally")
@@ -761,14 +761,14 @@
     }
     "function" == typeof SuppressedError && SuppressedError;
 
-    function e7(e, t) {
+    function e9(e, t) {
         return null == e ? e : {
             assetId: (0, eQ.exists)(e, "assetId") ? e.assetId : void 0,
             startTime: (0, eQ.exists)(e, "startTime") ? e.startTime : void 0
         }
     }
 
-    function e9(e) {
+    function e7(e) {
         var t;
         return null == (t = e) ? t : {
             position: (0, eQ.exists)(t, "position") ? t.position : void 0,
@@ -881,13 +881,13 @@
                     startTime: (0, eQ.exists)(i, "startTime") ? i.startTime : void 0,
                     endTime: (0, eQ.exists)(i, "endTime") ? i.endTime : void 0
                 } : void 0,
-                music: (0, eQ.exists)(n, "music") ? e7(n.music) : void 0,
+                music: (0, eQ.exists)(n, "music") ? e9(n.music) : void 0,
                 textOverlays: (0, eQ.exists)(n, "textOverlays") ? null === n.textOverlays ? null : n.textOverlays.map(tt) : void 0,
-                stickerOverlays: (0, eQ.exists)(n, "stickerOverlays") ? null === n.stickerOverlays ? null : n.stickerOverlays.map(e9) : void 0,
+                stickerOverlays: (0, eQ.exists)(n, "stickerOverlays") ? null === n.stickerOverlays ? null : n.stickerOverlays.map(e7) : void 0,
                 ttsAudios: (0, eQ.exists)(n, "ttsAudios") ? null === n.ttsAudios ? null : n.ttsAudios.map(ti) : void 0
             } : void 0,
             screenshotCaptureEdits: (0, eQ.exists)(e, "screenshotCaptureEdits") ? null == (a = e.screenshotCaptureEdits) ? a : {
-                music: (0, eQ.exists)(a, "music") ? e7(a.music) : void 0,
+                music: (0, eQ.exists)(a, "music") ? e9(a.music) : void 0,
                 textOverlays: (0, eQ.exists)(a, "textOverlays") ? null === a.textOverlays ? null : a.textOverlays.map(tt) : void 0,
                 ttsAudios: (0, eQ.exists)(a, "ttsAudios") ? null === a.ttsAudios ? null : a.ttsAudios.map(ti) : void 0
             } : void 0
@@ -2508,11 +2508,11 @@
         })
     };
     var tE = e.i(272593);
-    let tk = (0, tE.createClientConfiguration)("content-captures-api", "bedev2"),
-        tP = new tw(tk),
-        tN = new tS(tk),
-        tL = new tA(tk),
-        tR = Object.assign(tP, {
+    let tP = (0, tE.createClientConfiguration)("content-captures-api", "bedev2"),
+        tk = new tw(tP),
+        tN = new tS(tP),
+        tL = new tA(tP),
+        tR = Object.assign(tk, {
             momentsGetUsersMoments: e => tN.momentsGetUsersMoments(e),
             momentsDeleteMoment: e => tN.momentsDeleteMoment(e),
             momentsDeleteMomentByFeedItem: e => tN.momentsDeleteMomentByFeedItem(e),
@@ -2695,7 +2695,7 @@
                 moments: l,
                 paginationContext: null != (i = o.paginationContext) ? i : void 0
             }
-        }, t7 = async e => {
+        }, t9 = async e => {
             let {
                 experienceId: t,
                 experienceName: n,
@@ -2719,7 +2719,7 @@
                 } : {}
             }
         };
-    async function t9(e) {
+    async function t7(e) {
         let {
             feedItemId: t,
             momentId: n,
@@ -3041,26 +3041,45 @@
             if (!nd(e)) return !1;
             let n = null != (t = nm(e, "evidence")) ? t : {},
                 i = nm(n, "display_meta", "displayMeta");
-            return null != i && ("Label.Type.Video" === nc(i, "capitalized_key", "capitalizedKey") || "Label.TypeLower.Video" === nc(i, "lowercase_key", "lowercaseKey"))
+            return null != i && ("Label.Type.Post" === nc(i, "capitalized_key", "capitalizedKey") || "Label.TypeLower.Post" === nc(i, "lowercase_key", "lowercaseKey"))
         },
         nh = e => {
-            var t;
+            var t, n;
             if (!nd(e)) return null;
-            let n = nc(e, "uid");
-            if (null == n) return null;
-            let i = (e => {
-                var t;
-                let n = null == (t = nm(e, "evidence")) ? void 0 : t.elements;
-                if (Array.isArray(n)) {
-                    for (let e of n)
-                        if (nd(e) && "Label.UploadTime" === e.labelKey && "number" == typeof e.unix && Number.isFinite(e.unix) && e.unix > 0) return new Date(1e3 * e.unix).toISOString()
-                }
-            })(e);
+            let i = nc(e, "uid");
+            if (null == i) return null;
+            let a = null != (t = (e => {
+                    let t = nc(e, "create_time", "createTime");
+                    if (null == t) return;
+                    let n = new Date(t).getTime();
+                    return Number.isNaN(n) ? void 0 : new Date(n).toISOString()
+                })(e)) ? t : (e => {
+                    var t;
+                    let n = null == (t = nm(e, "evidence")) ? void 0 : t.elements;
+                    if (Array.isArray(n)) {
+                        for (let e of n)
+                            if (nd(e) && "Label.UploadTime" === e.labelKey && "number" == typeof e.unix && Number.isFinite(e.unix) && e.unix > 0) return new Date(1e3 * e.unix).toISOString()
+                    }
+                })(e),
+                s = (e => {
+                    var t, n, i;
+                    let a = null == (t = nm(e, "evidence")) ? void 0 : t.elements;
+                    if (Array.isArray(a)) {
+                        for (let e of a)
+                            if (nd(e) && "Label.MomentDescription" === e.labelKey) {
+                                let t = null != (n = null == (i = nc(e, "text")) ? void 0 : i.trim()) ? n : "";
+                                return t.length > 0 ? t : void 0
+                            }
+                    }
+                })(e);
             return {
-                uid: n,
-                abuseTypeLabelKeys: Object.values(null != (t = nm(e, "abuse_type_keys", "abuseTypeKeys")) ? t : {}).filter(e => "string" == typeof e && "" !== e),
-                ...null != i ? {
-                    uploadedAt: i
+                uid: i,
+                abuseTypeLabelKeys: Object.values(null != (n = nm(e, "abuse_type_keys", "abuseTypeKeys")) ? n : {}).filter(e => "string" == typeof e && "" !== e),
+                ...null != a ? {
+                    uploadedAt: a
+                } : {},
+                ...null != s ? {
+                    description: s
                 } : {}
             }
         },
@@ -3289,14 +3308,14 @@
             } = (0, u.useFlag)(T.isMomentsUploadLanguageSelectEnabled);
             return e && null != t && t
         },
-        nk = e => {
+        nP = e => {
             var t, n;
             return e.status === ef ? e.draftId : null != (t = null != (n = e.feedItemId) ? n : e.momentId) ? t : ""
         },
-        nP = e => ["momentsCreations", e],
+        nk = e => ["momentsCreations", e],
         nN = function(e) {
             let t = arguments.length > 1 && void 0 !== arguments[1] && arguments[1];
-            return [...nP(e), t]
+            return [...nk(e), t]
         },
         nL = () => {
             let {
@@ -3321,7 +3340,7 @@
                     i({
                         momentStatus: e
                     }), e === eh && s.invalidateQueries({
-                        queryKey: nP(null == o ? void 0 : o.id)
+                        queryKey: nk(null == o ? void 0 : o.id)
                     })
                 }, [s, i, null == o ? void 0 : o.id])
             }
@@ -3336,7 +3355,7 @@
             try {
                 let s, o, {
                     evictedMediaDraftIds: r
-                } = await eP(e, t, n, (s = eq(window.localStorage.getItem(em(e))), o = new Set(i.map(e => e.draftId)), [...i, ...s.filter(e => !o.has(e.draftId))]));
+                } = await ek(e, t, n, (s = eq(window.localStorage.getItem(em(e))), o = new Set(i.map(e => e.draftId)), [...i, ...s.filter(e => !o.has(e.draftId))]));
                 return tY(tB.PersistLocalVideo, a), {
                     hasLocalVideo: !0,
                     storageEvictedMediaDraftIds: r
@@ -3772,7 +3791,7 @@
                         n(!0), s(0);
                         try {
                             var l;
-                            let e = await t7({
+                            let e = await t9({
                                     experienceId: i.id,
                                     experienceName: null != (l = i.name) ? l : "",
                                     rootPlaceId: i.rootPlaceId,
@@ -3810,7 +3829,7 @@
                                 t = [];
                             for (let n of o) {
                                 var l;
-                                let o = await t7({
+                                let o = await t9({
                                         experienceId: i.id,
                                         experienceName: null != (l = i.name) ? l : "",
                                         rootPlaceId: i.rootPlaceId,
@@ -3850,9 +3869,9 @@
                 f(e)
             }, []), E = (0, a.useCallback)(() => {
                 T.current += 1, y([]), I([]), h(void 0)
-            }, []), k = (0, a.useCallback)(e => {
+            }, []), P = (0, a.useCallback)(e => {
                 !w && (n(e), e || S())
-            }, [w, n, S]), P = (0, a.useCallback)(e => {
+            }, [w, n, S]), k = (0, a.useCallback)(e => {
                 I(e)
             }, []), N = (0, a.useCallback)(() => {
                 I([])
@@ -3910,7 +3929,7 @@
             }, [o, A, l, w, s, p, x, r, C]), R = u("CreateMomentModal.Title"), O = b[0], D = b.length > 1 ? b.slice(1).join(" ") : void 0;
             return (0, i.jsx)(eu.Dialog, {
                 open: t,
-                onOpenChange: k,
+                onOpenChange: P,
                 size: "Large",
                 isModal: !0,
                 hasCloseAffordance: !0,
@@ -3959,7 +3978,7 @@
                             selectedFiles: g,
                             isUploading: w,
                             onFilesChange: L,
-                            onValidationErrorsChange: P
+                            onValidationErrorsChange: k
                         })]
                     })
                 })
@@ -3977,7 +3996,7 @@
         })
     }
     let n6 = () => n3(),
-        n7 = () => {
+        n9 = () => {
             let {
                 translate: e
             } = (0, d.useTranslation)();
@@ -3992,7 +4011,7 @@
                 })
             })
         };
-    var n9 = e.i(591012);
+    var n7 = e.i(591012);
     let ie = e => {
             let {
                 tabs: t = eg,
@@ -4006,7 +4025,7 @@
                 "data-testid": "moments-status-filter-pills",
                 role: "radiogroup",
                 "aria-label": o,
-                children: t.map(e => (0, i.jsx)(n9.Chip, {
+                children: t.map(e => (0, i.jsx)(n7.Chip, {
                     "data-testid": "moments-status-pill-".concat(e),
                     isChecked: n === e,
                     size: "Medium",
@@ -4098,7 +4117,7 @@
         return 0 !== s.length || r ? (0, i.jsxs)("fieldset", {
             className: "flex wrap items-center gap-small stroke-none margin-none padding-none [min-inline-size:auto]",
             "aria-label": p,
-            children: [(0, i.jsx)(n9.Chip, {
+            children: [(0, i.jsx)(n7.Chip, {
                 text: e("Label.Avatars"),
                 size: "Medium",
                 variant: "Standard",
@@ -4106,14 +4125,14 @@
                 onCheckedChange: m
             }), s.map(t => {
                 var n;
-                return (0, i.jsx)(n9.Chip, {
+                return (0, i.jsx)(n7.Chip, {
                     text: (0, ip.taxonomyOptionLabel)(t, e),
                     size: "Medium",
                     variant: "Standard",
                     isChecked: t.taxonomyKey === o,
                     onCheckedChange: () => u(t.taxonomyKey)
                 }, null != (n = t.taxonomyKey) ? n : t.nameKey)
-            }), (0, i.jsx)(n9.Chip, {
+            }), (0, i.jsx)(n7.Chip, {
                 text: e("Label.AllAssetTypes"),
                 size: "Medium",
                 variant: "Standard",
@@ -4273,8 +4292,8 @@
         iM = e.i(348148),
         ij = e.i(79238),
         iE = e.i(249259),
-        ik = e.i(481458),
-        iP = e.i(918324),
+        iP = e.i(481458),
+        ik = e.i(918324),
         iN = e.i(610873),
         iL = e.i(623983),
         iR = e.i(239328),
@@ -4361,7 +4380,7 @@
     function i6(e, t, n) {
         return e && t && "all" === n ? 1 : e && t && "specific" === n ? 4 : e && !t ? 3 : !e && t ? 2 : 0
     }
-    let i7 = e => {
+    let i9 = e => {
         var t;
         let {
             open: n,
@@ -4374,7 +4393,7 @@
             user: l
         } = (0, q.useAuthentication)(), u = (0, f.useCurrentGroup)(), c = null == u ? void 0 : u.id, {
             data: m
-        } = (0, i5.default)(i$.default), p = null != (t = null == m ? void 0 : m.maxCollectiblePrice) ? t : iz.DefaultMaxCollectiblePrice, [h, v] = (0, a.useState)(!0), [x, g] = (0, a.useState)(!1), [y, b] = (0, a.useState)(!1), [I, T] = (0, a.useState)(""), [C, w] = (0, a.useState)(""), [S, A] = (0, a.useState)(!0), [M, j] = (0, a.useState)(!0), [E, k] = (0, a.useState)(!0), [P, N] = (0, a.useState)("all"), [L, R] = (0, a.useState)(""), [O, D] = (0, a.useState)(!1);
+        } = (0, i5.default)(i$.default), p = null != (t = null == m ? void 0 : m.maxCollectiblePrice) ? t : iz.DefaultMaxCollectiblePrice, [h, v] = (0, a.useState)(!0), [x, g] = (0, a.useState)(!1), [y, b] = (0, a.useState)(!1), [I, T] = (0, a.useState)(""), [C, w] = (0, a.useState)(""), [S, A] = (0, a.useState)(!0), [M, j] = (0, a.useState)(!0), [E, P] = (0, a.useState)(!0), [k, N] = (0, a.useState)("all"), [L, R] = (0, a.useState)(""), [O, D] = (0, a.useState)(!1);
         (0, a.useEffect)(() => {
             n && i2(c).then(e => {
                 T(String(e.priceOffset)), w(e.priceInRobux > 0 ? String(e.priceInRobux) : ""), A(e.enableRegionalPricing), b(e.isRentalOptIn);
@@ -4398,7 +4417,7 @@
                             }
                     }
                 }(e.saleLocationType);
-                j(t.sellInMarketplace), k(t.sellInExperiences), N(t.experienceLocationMode), e.places.length > 0 && R(e.places.join(","))
+                j(t.sellInMarketplace), P(t.sellInExperiences), N(t.experienceLocationMode), e.places.length > 0 && R(e.places.join(","))
             }).catch(e => {
                 var t;
                 (null == (t = (0, i0.default)(e)) ? void 0 : t.status) !== 404 && (D(!0), r({
@@ -4416,7 +4435,7 @@
                 if (null == l ? void 0 : l.id) {
                     g(!0);
                     try {
-                        let e = i6(M, E, P),
+                        let e = i6(M, E, k),
                             t = i3(e) ? L.split(",").filter(Boolean).map(e => Number(e)) : [];
                         await i4({
                             creatorUserId: l.id,
@@ -4454,7 +4473,7 @@
                         g(!1)
                     }
                 }
-            }, [l, c, M, E, P, L, C, I, S, y, r, s, o]),
+            }, [l, c, M, E, k, L, C, I, S, y, r, s, o]),
             U = (0, a.useCallback)(() => {
                 _()
             }, [_]),
@@ -4474,7 +4493,7 @@
                     R(t)
                 }
             }, []),
-            V = h || x || O || !M && !E || "" === I || "" === C || 0 >= Number(C) || i3(i6(M, E, P)) && 0 === L.split(",").filter(Boolean).length;
+            V = h || x || O || !M && !E || "" === I || "" === C || 0 >= Number(C) || i3(i6(M, E, k)) && 0 === L.split(",").filter(Boolean).length;
         return (0, i.jsxs)(iV.Dialog, {
             open: n,
             onClose: s,
@@ -4584,7 +4603,7 @@
                     label: o("Label.SellInExperiences"),
                     children: (0, i.jsx)(iN.Switch, {
                         checked: E,
-                        onChange: () => k(e => !e),
+                        onChange: () => P(e => !e),
                         "aria-label": "Sell in experiences"
                     })
                 }), E && (0, i.jsxs)(i.Fragment, {
@@ -4597,7 +4616,7 @@
                                 children: o("Label.ExperienceLocations")
                             }), (0, i.jsxs)(iJ.RadioGroup, {
                                 row: !0,
-                                value: P,
+                                value: k,
                                 onChange: e => {
                                     let t = e.target.value;
                                     ("all" === t || "specific" === t) && N(t)
@@ -4621,7 +4640,7 @@
                                     label: o("Label.SpecificExperiences")
                                 })]
                             })]
-                        }), "specific" === P && (0, i.jsxs)("div", {
+                        }), "specific" === k && (0, i.jsxs)("div", {
                             className: "[margin-left:187px] [margin-top:10px]",
                             children: [(0, i.jsx)(iQ.TextField, {
                                 id: "place-ids",
@@ -4661,7 +4680,7 @@
             })]
         })
     };
-    var i9 = e.i(59973),
+    var i7 = e.i(59973),
         ae = e.i(759283);
     let at = (e, t) => {
         switch (null == e ? void 0 : e.code) {
@@ -4898,10 +4917,10 @@
                 }), S(!1), M(null)
             }
         }, [n, r]);
-        let k = (0, a.useCallback)(() => {
+        let P = (0, a.useCallback)(() => {
                 s()
             }, [s]),
-            P = (0, a.useCallback)(() => {
+            k = (0, a.useCallback)(() => {
                 M("enable"), S(!0)
             }, []),
             N = (0, a.useCallback)(() => {
@@ -4950,7 +4969,7 @@
             }).filter(e => null !== e), [b, j, E, v, l, x]),
             D = (0, a.useMemo)(() => x.some(e => E[e] && j[e].some(e => b[e])), [b, j, E, x]),
             _ = (0, i.jsxs)(i.Fragment, {
-                children: [(0, i.jsx)(i9.DialogContentText, {
+                children: [(0, i.jsx)(i7.DialogContentText, {
                     className: u.descriptionText,
                     children: l("Description.BulkUpdateAllTimedOptions")
                 }), (0, i.jsx)(iO.default, {
@@ -5036,7 +5055,7 @@
                     children: [(0, i.jsx)(iS.Button, {
                         variant: "contained",
                         color: "secondary",
-                        onClick: P,
+                        onClick: k,
                         size: "medium",
                         className: u.actionButton,
                         disabled: !D,
@@ -5053,7 +5072,7 @@
                 })]
             });
         return w && (t = "enable" === A ? "Description.ThisWillEnableTimedOptionsFor" : "Description.ThisWillDisableTimedOptionsFor", _ = (0, i.jsxs)(i.Fragment, {
-            children: [(0, i.jsx)(i9.DialogContentText, {
+            children: [(0, i.jsx)(i7.DialogContentText, {
                 className: u.descriptionText,
                 children: l(t)
             }), O.length > 0 && (0, i.jsx)("ul", {
@@ -5061,7 +5080,7 @@
                 children: O.map(e => (0, i.jsx)("li", {
                     children: e
                 }, e))
-            }), (0, i.jsx)(i9.DialogContentText, {
+            }), (0, i.jsx)(i7.DialogContentText, {
                 className: u.descriptionText,
                 children: l("Description.ThisWillAlsoReplaceAnyItemLevelSettings")
             }), (0, i.jsxs)(iO.default, {
@@ -5087,7 +5106,7 @@
             })]
         })), (0, i.jsxs)(iV.Dialog, {
             open: n,
-            onClose: k,
+            onClose: P,
             maxWidth: "Small",
             color: "primaryBrand",
             classes: {
@@ -5100,7 +5119,7 @@
                     children: w ? l("Title.ConfirmOption") : l("Action.TimedOptions")
                 }), !w && (0, i.jsx)(ir.IconButton, {
                     "aria-label": "Close",
-                    onClick: k,
+                    onClick: P,
                     size: "small",
                     className: u.closeButton,
                     color: "inherit",
@@ -5249,7 +5268,7 @@
                 }), (0, i.jsx)(iG.DialogContent, {
                     className: p.dialogContent,
                     children: null === g ? (0, i.jsxs)(i.Fragment, {
-                        children: [(0, i.jsx)(i9.DialogContentText, {
+                        children: [(0, i.jsx)(i7.DialogContentText, {
                             className: p.descriptionText,
                             children: u("Description.BulkUpdateTimedOptions")
                         }), (0, i.jsxs)(iO.default, {
@@ -5278,7 +5297,7 @@
                             })]
                         })]
                     }) : (0, i.jsxs)(i.Fragment, {
-                        children: [(0, i.jsx)(i9.DialogContentText, {
+                        children: [(0, i.jsx)(i7.DialogContentText, {
                             className: p.descriptionText,
                             children: g ? c("Description.BulkUpdateOnConfirmation", [{
                                 opening: "boldStart",
@@ -5341,10 +5360,10 @@
                     timedOptionsButton: v,
                     timedOptionsButtonDivider: g
                 }
-            } = iq(), [y, T] = (0, a.useState)(!1), [C, w] = (0, a.useState)(!1), [S, A] = (0, a.useState)(0), [M, j] = (0, a.useState)(!1), [E, k] = (0, a.useState)(!1), [P, N] = (0, a.useState)(null);
+            } = iq(), [y, T] = (0, a.useState)(!1), [C, w] = (0, a.useState)(!1), [S, A] = (0, a.useState)(0), [M, j] = (0, a.useState)(!1), [E, P] = (0, a.useState)(!1), [k, N] = (0, a.useState)(null);
             (0, a.useEffect)(() => {
                 (0, iz.getValidTimedOptionsTypes)().then(() => {
-                    k(!0)
+                    P(!0)
                 })
             }, []);
             let {
@@ -5536,10 +5555,10 @@
                             size: "medium",
                             color: "secondary",
                             onClick: e => N(e.currentTarget),
-                            children: (0, i.jsx)(iP.SettingsIcon, {})
+                            children: (0, i.jsx)(ik.SettingsIcon, {})
                         }), (0, i.jsxs)(ij.Menu, {
-                            anchorEl: P,
-                            open: null != P,
+                            anchorEl: k,
+                            open: null != k,
                             onClose: () => N(null),
                             anchorOrigin: {
                                 vertical: "bottom",
@@ -5583,7 +5602,7 @@
                     },
                     alignItems: "center",
                     flexWrap: "nowrap",
-                    children: [(0, i.jsx)(ik.Select, {
+                    children: [(0, i.jsx)(iP.Select, {
                         variant: "outlined",
                         margin: "dense",
                         size: "small",
@@ -5610,7 +5629,7 @@
                 }), (0, i.jsx)(am, {
                     open: y,
                     onClose: () => T(!1)
-                }), (0, i.jsx)(i7, {
+                }), (0, i.jsx)(i9, {
                     open: C || ei,
                     onClose: ea
                 }, S)]
@@ -5630,7 +5649,7 @@
                 }), !r && (0, i.jsx)("div", {
                     className: "flex width-full padding-bottom-large [align-content:flex-start] [row-gap:12px] justify-between flex-row items-start wrap",
                     children: t.menuItem.type === m.Asset.Moments ? (0, i.jsxs)(i.Fragment, {
-                        children: [(0, i.jsx)(it, {}), (0, i.jsx)(n7, {})]
+                        children: [(0, i.jsx)(it, {}), (0, i.jsx)(n9, {})]
                     }) : (0, i.jsxs)(i.Fragment, {
                         children: [t.submenuItem && (0, i.jsx)(iI, {
                             menuState: t,
@@ -5652,12 +5671,12 @@
         aw = new Date(0).toISOString(),
         aS = e => e.startsWith("Label.AbuseType."),
         aA = e => {
-            var t;
+            var t, n;
             return {
                 momentId: e.uid,
-                description: "",
+                description: null != (t = e.description) ? t : "",
                 experienceName: "",
-                modifiedAt: null != (t = e.uploadedAt) ? t : aw,
+                modifiedAt: null != (n = e.uploadedAt) ? n : aw,
                 status: ex,
                 moderation: {
                     violationUid: e.uid,
@@ -5674,7 +5693,7 @@
     }
     var aj = e.i(130058),
         aE = e.i(921378);
-    let ak = (e, t) => {
+    let aP = (e, t) => {
             let {
                 user: n
             } = (0, q.useAuthentication)(), {
@@ -5707,7 +5726,7 @@
                 }
             }, [e, i, l, r]), l) ? l : i ? u : null
         },
-        aP = "block width-full height-full max-w-full max-h-full object-contain",
+        ak = "block width-full height-full max-w-full max-h-full object-contain",
         aN = e => {
             let {
                 children: t
@@ -5726,7 +5745,7 @@
             return n ? (0, i.jsx)(aN, {
                 children: (0, i.jsx)("video", {
                     "aria-label": "Moment video preview",
-                    className: "radius-medium ".concat(aP),
+                    className: "radius-medium ".concat(ak),
                     controls: !0,
                     playsInline: !0,
                     poster: t,
@@ -5738,7 +5757,7 @@
             }) : t ? (0, i.jsx)(aN, {
                 children: (0, i.jsx)("img", {
                     alt: "Moment thumbnail preview",
-                    className: "radius-medium ".concat(aP),
+                    className: "radius-medium ".concat(ak),
                     src: t
                 })
             }) : (0, i.jsx)(aN, {})
@@ -5769,15 +5788,15 @@
             }), [T, C] = (0, a.useState)(() => {
                 var e;
                 return null != (e = null == o ? void 0 : o.description) ? e : ""
-            }), [w, S] = (0, a.useState)(), A = null != (t = null != w ? w : null == o ? void 0 : o.locale) ? t : y, M = (null == o ? void 0 : o.status) === ef && !0 === o.hasLocalVideo, j = ak((null == o ? void 0 : o.status) === ef ? o.draftId : null, {
+            }), [w, S] = (0, a.useState)(), A = null != (t = null != w ? w : null == o ? void 0 : o.locale) ? t : y, M = (null == o ? void 0 : o.status) === ef && !0 === o.hasLocalVideo, j = aP((null == o ? void 0 : o.status) === ef ? o.draftId : null, {
                 enabled: r && M,
                 thumbnailUrl: null == o ? void 0 : o.thumbnailUrl,
                 videoUrl: null == o ? void 0 : o.videoUrl
             }), E = (0, a.useCallback)(() => {
                 o && !v && null == p && (null == c || c(o))
-            }, [v, o, c, p]), k = (0, a.useCallback)(() => {
-                o && h !== nk(o) && (null == m || m(o))
-            }, [h, o, m]), P = (0, a.useCallback)(e => {
+            }, [v, o, c, p]), P = (0, a.useCallback)(() => {
+                o && h !== nP(o) && (null == m || m(o))
+            }, [h, o, m]), k = (0, a.useCallback)(e => {
                 o && e.id && e.name && (I(e), null == u || u(o, {
                     experienceId: e.id,
                     rootPlaceId: e.rootPlaceId,
@@ -5799,7 +5818,7 @@
                 e || R(), l(e)
             }, [R, l]);
             if (!o) return null;
-            let _ = nk(o),
+            let _ = nP(o),
                 U = null != p && p === _,
                 B = null != p,
                 z = null != h && h === _,
@@ -5827,7 +5846,7 @@
                                 experience: b,
                                 onChangeExperience: () => I(void 0)
                             }) : (0, i.jsx)(nK, {
-                                onExperienceResolved: P
+                                onExperienceResolved: k
                             })
                         }) : b ? (0, i.jsxs)("div", {
                             className: "flex flex-col gap-y-xsmall width-full margin-top-small",
@@ -5902,7 +5921,7 @@
                                 className: "grow-1 basis-0 min-width-0",
                                 isDisabled: z,
                                 isLoading: z,
-                                onClick: k,
+                                onClick: P,
                                 children: (0, i.jsx)("span", {
                                     className: "content-action-alert",
                                     children: f("Action.Delete")
@@ -6016,7 +6035,7 @@
                 title: c,
                 children: (0, i.jsx)(az.TooltipTrigger, {
                     asChild: !0,
-                    children: (0, i.jsx)(k.IconButton, {
+                    children: (0, i.jsx)(P.IconButton, {
                         ariaLabel: c,
                         icon: "icon-regular-chain-link",
                         isDisabled: r,
@@ -6064,7 +6083,7 @@
                 } = (0, aJ.useRobloxAuthentication)(),
                 r = n.status === ef,
                 l = r && !0 === n.hasLocalVideo,
-                u = ak(r ? n.draftId : null, {
+                u = aP(r ? n.draftId : null, {
                     enabled: l,
                     thumbnailUrl: n.thumbnailUrl,
                     videoUrl: n.videoUrl
@@ -6163,7 +6182,7 @@
                 onBlur: s
             } = e, {
                 translate: o
-            } = (0, d.useTranslation)(), r = nk(t), [l, u] = (0, a.useState)(t.description), c = l.length >= 140, m = (0, a.useCallback)(e => {
+            } = (0, d.useTranslation)(), r = nP(t), [l, u] = (0, a.useState)(t.description), c = l.length >= 140, m = (0, a.useCallback)(e => {
                 u(e.target.value)
             }, []), p = (0, a.useCallback)(e => {
                 s(t, e)
@@ -6211,7 +6230,7 @@
                 {
                     locale: b
                 } = (0, d.useLocalization)(),
-                I = nk(n),
+                I = nP(n),
                 T = n.status === ef,
                 C = n.status === ex ? n.moderation : void 0,
                 w = (0, a.useCallback)(() => {
@@ -6261,6 +6280,11 @@
                 }) : null, c ? (0, i.jsxs)(i.Fragment, {
                     children: [(0, i.jsx)(aB.TableCell, {
                         children: (0, i.jsx)("span", {
+                            "data-testid": "moment-description-".concat(I),
+                            children: n.description || "-"
+                        })
+                    }), (0, i.jsx)(aB.TableCell, {
+                        children: (0, i.jsx)("span", {
                             "data-testid": "moment-upload-time-".concat(I),
                             children: (null == C ? void 0 : C.uploadedAt) != null && ((e, t) => {
                                 let n = new Date(e),
@@ -6296,7 +6320,7 @@
                             title: m,
                             children: (0, i.jsx)(az.TooltipTrigger, {
                                 asChild: !0,
-                                children: (0, i.jsx)(k.IconButton, {
+                                children: (0, i.jsx)(P.IconButton, {
                                     as: "a",
                                     href: M,
                                     target: "_blank",
@@ -6322,7 +6346,7 @@
                                 title: s,
                                 children: (0, i.jsx)(az.TooltipTrigger, {
                                     asChild: !0,
-                                    children: (0, i.jsx)(k.IconButton, {
+                                    children: (0, i.jsx)(P.IconButton, {
                                         ariaLabel: s,
                                         icon: "icon-regular-pencil",
                                         size: "Small",
@@ -6395,16 +6419,16 @@
                 hasNextPage: !!b && u,
                 fetchNextPage: b ? c : void 0,
                 fetchLimit: m
-            }), k = (0, a.useCallback)((e, t) => {
+            }), P = (0, a.useCallback)((e, t) => {
                 let n = t.target.value;
                 n !== e.description && s(e, {
                     description: n
                 })
-            }, [s]), P = (0, a.useCallback)(e => {
+            }, [s]), k = (0, a.useCallback)(e => {
                 M(void 0, e)
             }, [M]), L = p("Action.Edit"), R = h(ei.TranslationNamespace.OAuth, "Label.OAuthMoreDetails"), O = (0, aU.resolveUrl)("reportAppealsUrl", "production", "global"), D = (0, i.jsx)(aB.TableHeaderCell, {
                 children: p("MomentsTable.Header.Status")
-            }), _ = 3 + 2 * !!T + +!!C + 2 * !!I;
+            }), _ = 3 + 2 * !!T + +!!C + 3 * !!I;
             return (0, i.jsx)("div", {
                 className: v,
                 children: (0, i.jsx)("div", {
@@ -6428,6 +6452,8 @@
                                         children: p("CreateMomentModal.LanguageInput.Label")
                                     }) : null, I ? (0, i.jsxs)(i.Fragment, {
                                         children: [(0, i.jsx)(aB.TableHeaderCell, {
+                                            children: p("MomentsTable.Header.Description")
+                                        }), (0, i.jsx)(aB.TableHeaderCell, {
                                             children: h(ei.TranslationNamespace.AppealsPortal, "Label.UploadTime")
                                         }), (0, i.jsx)(aB.TableHeaderCell, {
                                             children: p("TableHeader.Reason")
@@ -6466,9 +6492,9 @@
                                     reportAppealsUrl: O,
                                     statusLabel: y(e.status),
                                     onEditMoment: n,
-                                    onDescriptionBlur: k,
+                                    onDescriptionBlur: P,
                                     onPublishMoment: o
-                                }, nk(e)))
+                                }, nP(e)))
                             })]
                         }), w.length > 0 ? (0, i.jsx)(aB.TablePagination, {
                             paginationAriaLabel: "Pagination",
@@ -6476,7 +6502,7 @@
                             rowsPerPage: A,
                             totalRows: w.length,
                             rowsPerPageOptions: a0,
-                            onPageChange: P,
+                            onPageChange: k,
                             onRowsPerPageChange: j
                         }) : null]
                     })
@@ -6513,7 +6539,7 @@
     let a6 = () => {
             window.open(a3.idVerificationActionUrl, "_blank", "noopener,noreferrer")
         },
-        a7 = (0, d.withTranslation)(() => {
+        a9 = (0, d.withTranslation)(() => {
             let {
                 translate: e
             } = (0, d.useTranslation)();
@@ -6537,7 +6563,7 @@
                 })
             })
         }, [ei.TranslationNamespace.Creations]),
-        a9 = () => {
+        a7 = () => {
             var e;
             (() => {
                 let {
@@ -6616,8 +6642,8 @@
                     isPublishing: c
                 }
             }(), E = (0, a.useRef)(!1), {
-                deleteMoment: k,
-                deletingMomentKey: P
+                deleteMoment: P,
+                deletingMomentKey: k
             } = function() {
                 let {
                     user: e
@@ -6630,7 +6656,7 @@
                         let {
                             moment: t
                         } = e;
-                        return t9({
+                        return t7({
                             momentId: t.momentId,
                             feedItemId: t.feedItemId,
                             useFeedItemId: i
@@ -6646,17 +6672,17 @@
                                 ...e,
                                 pages: e.pages.map(e => ({
                                     ...e,
-                                    moments: e.moments.filter(e => nk(e) !== n)
+                                    moments: e.moments.filter(e => nP(e) !== n)
                                 }))
                             } : e)
-                        }(t, n, nk(s), i)
+                        }(t, n, nP(s), i)
                     }
                 });
                 return {
                     deleteMoment: (0, a.useCallback)(e => s({
                         moment: e
                     }), [s]),
-                    deletingMomentKey: o && null != r ? nk(r.moment) : null,
+                    deletingMomentKey: o && null != r ? nP(r.moment) : null,
                     isDeleting: o
                 }
             }(), {
@@ -6712,7 +6738,7 @@
                     m = (0, a.useMemo)(() => n ? function(e) {
                         let t = new Map;
                         for (let n of e)
-                            for (let e of n.moments) t.set(nk(e), e);
+                            for (let e of n.moments) t.set(nP(e), e);
                         return [...t.values()]
                     }(n.pages) : aC, [n]),
                     p = null != (e = null == n ? void 0 : n.pages.length) ? e : 0,
@@ -6771,7 +6797,7 @@
                 })
             }, [s, Q]);
             let et = (0, a.useMemo)(() => [...R, ...C].map(e => {
-                    let t = b[nk(e)];
+                    let t = b[nP(e)];
                     return t ? {
                         ...e,
                         ...t
@@ -6803,8 +6829,8 @@
             let eo = (0, a.useMemo)(() => {
                     var e;
                     if (!g) return null;
-                    let t = nk(g);
-                    return null != (e = et.find(e => nk(e) === t)) ? e : g
+                    let t = nP(g);
+                    return null != (e = et.find(e => nP(e) === t)) ? e : g
                 }, [g, et]),
                 er = (0, a.useCallback)(e => {
                     y(e), x(!0)
@@ -6837,7 +6863,7 @@
                 }, [t]),
                 eh = (0, a.useCallback)(async e => {
                     let t = e.status === ef,
-                        n = nk(e),
+                        n = nP(e),
                         i = {
                             ...t ? {
                                 draftId: e.draftId
@@ -6851,7 +6877,7 @@
                         };
                     tW(tB.DeleteMoment, i);
                     try {
-                        e.status === ef ? S(e.draftId) : await k(e), I(e => {
+                        e.status === ef ? S(e.draftId) : await P(e), I(e => {
                             if (!(n in e)) return e;
                             let {
                                 [n]: t, ...i
@@ -6861,10 +6887,10 @@
                     } catch (e) {
                         tG(tB.DeleteMoment, e, i), ep()
                     }
-                }, [k, S, ep, s]),
+                }, [P, S, ep, s]),
                 ev = (0, a.useCallback)((e, t) => {
                     if (e.status === ef) return void w(e.draftId, t);
-                    let n = nk(e),
+                    let n = nP(e),
                         i = new Date().toISOString();
                     I(e => ({
                         ...e,
@@ -6919,7 +6945,7 @@
                 className: "flex grow-1 flex-col gap-medium self-stretch width-full",
                 children: [l ? (0, i.jsx)(a8, {
                     onRetry: v
-                }) : null, h ? (0, i.jsx)(a7, {}) : null, ei || W ? (0, i.jsx)(a5, {
+                }) : null, h ? (0, i.jsx)(a9, {}) : null, ei || W ? (0, i.jsx)(a5, {
                     moments: en,
                     hasNextPage: D,
                     fetchNextPage: _,
@@ -6942,9 +6968,9 @@
                     onDelete: eo ? eh : void 0,
                     onPublish: (null == eo ? void 0 : eo.status) === ef ? ey : void 0,
                     publishingDraftId: M,
-                    deletingMomentKey: P,
+                    deletingMomentKey: k,
                     isPublishDisabled: p
-                }, eo ? nk(eo) : void 0)]
+                }, eo ? nP(eo) : void 0)]
             }) : (0, i.jsx)("div", {
                 className: "flex grow-1 flex-col items-center justify-center self-stretch width-full",
                 children: (0, i.jsx)(Z.ProgressCircle, {
@@ -7077,10 +7103,10 @@
             } = (0, a.useContext)(F), h = C(), v = (0, ix.default)(), T = (0, ig.default)(), {
                 translate: w,
                 ready: S
-            } = (0, d.useTranslation)(), A = (0, y.default)(), M = (0, a.useRef)(void 0), j = (0, a.useMemo)(() => [], []), E = (0, x.isTaxonomyActiveTab)(r.activeTab), k = E || (0, x.isRecentsActiveTab)(r.activeTab), P = (0, a.useMemo)(() => {
+            } = (0, d.useTranslation)(), A = (0, y.default)(), M = (0, a.useRef)(void 0), j = (0, a.useMemo)(() => [], []), E = (0, x.isTaxonomyActiveTab)(r.activeTab), P = E || (0, x.isRecentsActiveTab)(r.activeTab), k = (0, a.useMemo)(() => {
                 let e = (0, x.isAllAssetTypesActiveTab)(r.activeTab) ? m.Asset.AllCatalogAsset : x.TAXONOMY_HOST_ASSET;
-                return I.default.getMenuState(k ? e : sv(r.activeTab), j)
-            }, [r.activeTab, j, k]);
+                return I.default.getMenuState(P ? e : sv(r.activeTab), j)
+            }, [r.activeTab, j, P]);
             (0, a.useEffect)(() => {
                 (0, x.isRecentsActiveTab)(r.activeTab) && l({
                     activeTab: E ? (0, x.buildTaxonomyActiveTab)(x.ALL_ASSET_TYPES_L1_KEY) : m.Asset.AllCatalogAsset,
@@ -7095,10 +7121,10 @@
                     }
                 } = st(),
                 O = (0, a.useCallback)(e => {
-                    if (P.menuItem === e.menuItem && P.submenuItem === e.submenuItem) return;
+                    if (k.menuItem === e.menuItem && k.submenuItem === e.submenuItem) return;
                     if ((0, x.shouldOpenTaxonomyView)({
                             isTaxonomyEnabled: A,
-                            isChangingSection: P.menuItem !== e.menuItem,
+                            isChangingSection: k.menuItem !== e.menuItem,
                             nextAssetType: I.default.getAssetType(e)
                         })) return void l({
                         activeTab: x.AVATAR_ITEMS_ACTIVE_TAB,
@@ -7109,14 +7135,14 @@
                         activeTab: I.default.getAssetType(e),
                         filterIndex: t
                     })
-                }, [P.menuItem, P.submenuItem, l, A]),
+                }, [k.menuItem, k.submenuItem, l, A]),
                 D = (0, a.useMemo)(() => {
                     let e = sv(r.activeTab);
-                    if (void 0 === h && e === m.Asset.Moments || void 0 === T && e === m.Asset.Showcase) return P;
+                    if (void 0 === h && e === m.Asset.Moments || void 0 === T && e === m.Asset.Showcase) return k;
                     let t = sv(r.activeTab) === m.Asset.TextDocument;
-                    if (void 0 === v && t) return P;
-                    let i = I.default.getValidMenuState(N, P, n, void 0, void 0, h, T, v);
-                    if (i !== P) {
+                    if (void 0 === v && t) return k;
+                    let i = I.default.getValidMenuState(N, k, n, void 0, void 0, h, T, v);
+                    if (i !== k) {
                         if (!E) {
                             let e = (0, es.isOnItemTab)(i.menuItem.type) ? 0 : void 0;
                             l({
@@ -7126,8 +7152,8 @@
                         }
                         return i
                     }
-                    return P
-                }, [N, P, E, r.activeTab, n, h, v, T, l]),
+                    return k
+                }, [N, k, E, r.activeTab, n, h, v, T, l]),
                 _ = (0, a.useMemo)(() => I.default.getAssetType(D), [D]);
             (0, a.useEffect)(() => {
                 if (void 0 === M.current) {
@@ -7166,7 +7192,7 @@
                             size: "Large",
                             variant: "Indeterminate"
                         })
-                    }) : _ === m.Asset.ShareLink ? (0, i.jsx)(sc, {}) : _ === m.Asset.Moments ? (0, i.jsx)(a9, {}) : _ === m.Asset.AssetPermissionRequests ? (0, i.jsx)(sh, {}) : _ === m.Asset.Showcase ? (0, i.jsx)(su, {
+                    }) : _ === m.Asset.ShareLink ? (0, i.jsx)(sc, {}) : _ === m.Asset.Moments ? (0, i.jsx)(a7, {}) : _ === m.Asset.AssetPermissionRequests ? (0, i.jsx)(sh, {}) : _ === m.Asset.Showcase ? (0, i.jsx)(su, {
                         groupId: null == n ? void 0 : n.id
                     }) : _ === m.Asset.AllCatalogAsset || _ === m.Asset.AvatarLooks || _ === m.Asset.AvatarBackground ? (0, i.jsx)(sn, {
                         assetType: _,
@@ -7275,5 +7301,5 @@
     })
 }]);
 
-//# debugId=7bf0385c-6d9b-991d-66b2-d001a067582e
-//# sourceMappingURL=0iyp6qxk7gfqn.js.map
+//# debugId=a390226b-7455-e942-dba1-74fdb6e5c8d3
+//# sourceMappingURL=10r3d06tx3ym8.js.map

@@ -61,8 +61,8 @@
     height: 200px
 }
 
-.max-width-\[730px\] {
-    max-width: 730px
+.max-width-\[480px\] {
+    max-width: 480px
 }
 
 .max-width-\[calc\(var\(--size-100\)\*50\)\] {
@@ -733,11 +733,6 @@
 
 .hover\:\[opacity\:0\.8\]:hover {
     opacity: .8
-}
-
-.focus\:outline-focus:focus {
-    outline: var(--stroke-thicker)solid var(--color-selection-start);
-    outline-offset: var(--stroke-thicker)
 }
 
 .focus-visible\:outline-focus:focus-visible {
