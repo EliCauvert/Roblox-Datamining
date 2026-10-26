@@ -3,7 +3,7 @@
     try {
         var e = "undefined" != typeof globalThis ? globalThis : "undefined" != typeof global ? global : "undefined" != typeof window ? window : "undefined" != typeof self ? self : {},
             n = (new e.Error).stack;
-        n && ((e._debugIds || (e._debugIds = {}))[n] = "3a9ffd9a-4dc3-608f-62c7-f6ce47e0e17f")
+        n && ((e._debugIds || (e._debugIds = {}))[n] = "7c2c5e9a-da94-2aca-87b9-b8ceb2e37604")
     } catch (e) {}
 }();
 (globalThis.TURBOPACK || (globalThis.TURBOPACK = [])).push(["object" == typeof document ? document.currentScript : void 0, 721281, t => {
@@ -4606,27 +4606,35 @@
         ia = rW(rm(), rm().nullable().catch(null)),
         iu = /{(.+?)}/,
         is = /{(.+?)}/g,
-        il = /({.+?})/g,
-        ic = t => void 0 !== t ? Object.entries(t).reduce((t, n) => {
-            let [r, i] = n;
-            return "string" == typeof i ? Object.assign(t.stringArgs, {
-                [r]: i
-            }) : Object.assign(t.htmlArgs, {
-                [r]: i
-            }), t
-        }, {
-            stringArgs: {},
-            htmlArgs: {}
-        }) : {};
+        il = /({.+?})/g;
 
-    function id(t, n) {
+    function ic(t) {
+        return (0, _.createElement)(_.Fragment, null, ...t.map(t => "string" == typeof t || "number" == typeof t ? (0, _.createElement)("span", {
+            style: {
+                display: "contents"
+            }
+        }, t) : t))
+    }
+    let id = t => void 0 !== t ? Object.entries(t).reduce((t, n) => {
+        let [r, i] = n;
+        return "string" == typeof i ? Object.assign(t.stringArgs, {
+            [r]: i
+        }) : Object.assign(t.htmlArgs, {
+            [r]: i
+        }), t
+    }, {
+        stringArgs: {},
+        htmlArgs: {}
+    }) : {};
+
+    function ip(t, n) {
         return void 0 !== n && 0 !== Object.keys(n).length ? t.replace(is, (t, r) => {
             var i;
             return null != (i = n[r]) ? i : "{".concat(r, "}")
         }) : t
     }
 
-    function ip(t, n, r, i, o, a) {
+    function ih(t, n, r, i, o, a) {
         let u, s = t.split(il);
         if (1 === s.length) return t;
         if (s = s.filter(t => !!t), void 0 !== a && 0 !== Object.keys(a).length) {
@@ -4651,7 +4659,7 @@
                     for (let n of t[r]) s[n] = i
             })
         }
-        if (!Array.isArray(o) || 0 === o.length) return (0, _.createElement)(_.Fragment, null, ...s);
+        if (!Array.isArray(o) || 0 === o.length) return ic(s);
         let l = o.reduce((t, n) => {
                 let {
                     opening: r,
@@ -4683,8 +4691,8 @@
                             for (; o = f.pop();)
                                 if (o !== t) u.unshift(o);
                                 else {
-                                    let t = null;
-                                    t = a(u.every(t => "string" == typeof t) ? u : (0, _.createElement)(_.Fragment, null, ...u)), 0 === f.length ? c.push(t) : f.push(t);
+                                    let t = a(ic(u));
+                                    0 === f.length ? c.push(t) : f.push(t);
                                     break
                                 } if (void 0 === o) {
                                 console.warn("[From context - ".concat(r, "] Unexpected condition encountered inside translateHTML for key ").concat(n, " of locale ").concat(i, "!"));
@@ -4700,10 +4708,10 @@
                     }
                 }
         else 0 === f.length ? c.push(u) : f.push(u);
-        return (0, _.createElement)(_.Fragment, null, ...c)
+        return ic(c)
     }
 
-    function ih() {
+    function im() {
         let t = (0, _.useContext)(z),
             {
                 key: n = "Unknown",
@@ -4719,7 +4727,7 @@
                     let t;
                     for (let n of Object.values(r)) Object.hasOwn(n, i) && (t = n[i]);
                     if (void 0 !== t) {
-                        if (null != t) return id(t, o);
+                        if (null != t) return ip(t, o);
                         console.warn("[From context - ".concat(n, "] The translation of key '").concat(i, "' for locale '").concat(a.locale, "' does not exist!"))
                     } else console.warn("[From context - ".concat(n, "] The translation key '").concat(i, "' doesn't exist for locale '").concat(a.locale, "'!"))
                 }
@@ -4734,7 +4742,7 @@
                     let t = r[i];
                     if (void 0 !== t && Object.hasOwn(t, o)) {
                         let r = t[o];
-                        if (null != r) return id(r, a);
+                        if (null != r) return ip(r, a);
                         console.warn("[From context - ".concat(n, "] The translation of key '").concat(i, "::").concat(o, "' for locale '").concat(u.locale, "' does not exist!"))
                     } else console.warn("[From context - ".concat(n, "] The translation key '").concat(i, "::").concat(o, "' doesn't exist for locale '").concat(u.locale, "'!"))
                 }
@@ -4749,8 +4757,8 @@
                 let {
                     stringArgs: s,
                     htmlArgs: l
-                } = ic(a), c = o(r, s);
-                return c ? ip(c, r, n, u.locale, i, l) : c
+                } = id(a), c = o(r, s);
+                return c ? ih(c, r, n, u.locale, i, l) : c
             }, [t, n, o]),
             s = (0, _.useCallback)((r, i, o, u) => {
                 if (void 0 === t) return console.warn("Localization context is missing, useTranslation cannot work outside of the LocalizationProvider"), "";
@@ -4761,8 +4769,8 @@
                 let {
                     stringArgs: l,
                     htmlArgs: c
-                } = ic(u), d = a(r, i, l);
-                return d ? ip(d, i, n, s.locale, o, c) : d
+                } = id(u), d = a(r, i, l);
+                return d ? ih(d, i, n, s.locale, o, c) : d
             }, [t, n, a]);
         return (0, _.useMemo)(() => ({
             ready: i,
@@ -4772,7 +4780,7 @@
             translateWithNamespaceHTML: s
         }), [i, o, a, u, s])
     }
-    let im = t => {
+    let iv = t => {
         let {
             namespace: n,
             translationKey: r,
@@ -4781,7 +4789,7 @@
         } = t, {
             translateWithNamespace: a,
             ready: u
-        } = ih(), s = (u ? a(n, r, i) : "") || o;
+        } = im(), s = (u ? a(n, r, i) : "") || o;
         return "string" == typeof s || "number" == typeof s || "bigint" == typeof s ? "" === s ? null : _.default.createElement("span", null, s) : s
     };
     t.s(["CdnTranslationResourceProvider", 0, class extends E {
@@ -4880,14 +4888,14 @@
             resources: s,
             ready: null !== s
         }), [n, s]);
-        return null === a ? _.default.createElement(im, {
+        return null === a ? _.default.createElement(iv, {
             namespace: n,
             translationKey: r,
             args: i,
             fallback: o
         }) : _.default.createElement(O.Provider, {
             value: c
-        }, _.default.createElement(im, {
+        }, _.default.createElement(iv, {
             namespace: n,
             translationKey: r,
             args: i,
@@ -4917,12 +4925,12 @@
                 }
             }, [t]);
         return void 0 === t && console.warn("Localization context is missing, useLocalization cannot work outside of the LocalizationProvider"), n
-    }, "useTranslation", 0, ih, "useTranslationWithNamespace", 0, function(t) {
+    }, "useTranslation", 0, im, "useTranslationWithNamespace", 0, function(t) {
         let {
             ready: n,
             translateWithNamespace: r,
             translateWithNamespaceHTML: i
-        } = ih(), o = (0, _.useCallback)((n, i) => r(t, n, i), [t, r]), a = (0, _.useCallback)((n, r, o) => i(t, n, r, o), [t, i]);
+        } = im(), o = (0, _.useCallback)((n, i) => r(t, n, i), [t, r]), a = (0, _.useCallback)((n, r, o) => i(t, n, r, o), [t, i]);
         return (0, _.useMemo)(() => ({
             ready: n,
             translate: o,
@@ -4972,5 +4980,5 @@
     }])
 }]);
 
-//# debugId=3a9ffd9a-4dc3-608f-62c7-f6ce47e0e17f
-//# sourceMappingURL=1n-uzwrdgueo9.js.map
+//# debugId=7c2c5e9a-da94-2aca-87b9-b8ceb2e37604
+//# sourceMappingURL=0374u_eyxo-kd.js.map

@@ -3,7 +3,7 @@
     try {
         var e = "undefined" != typeof globalThis ? globalThis : "undefined" != typeof global ? global : "undefined" != typeof window ? window : "undefined" != typeof self ? self : {},
             n = (new e.Error).stack;
-        n && ((e._debugIds || (e._debugIds = {}))[n] = "aa076782-a193-e7de-4e73-7fd5cfc31eb8")
+        n && ((e._debugIds || (e._debugIds = {}))[n] = "280cd8f8-cbcf-cee0-a483-77bdebbd348d")
     } catch (e) {}
 }();
 (globalThis.TURBOPACK || (globalThis.TURBOPACK = [])).push(["object" == typeof document ? document.currentScript : void 0, 239328, e => {
@@ -122,17 +122,17 @@
             name: "isMomentsShareLinkEnabled",
             defaultValue: !1
         }),
-        c = (0, t.defineFlag)({
+        d = (0, t.defineFlag)({
             namespace: "creator-creations",
             name: "isMomentsPostCreationEnabled",
             defaultValue: !1
         }),
-        d = (0, t.defineFlag)({
+        c = (0, t.defineFlag)({
             namespace: "creator-creations",
             name: "isMomentsModeratedTabEnabled",
             defaultValue: !1
         });
-    e.s(["isBadgeDefaultIconEnabled", 0, a, "isMomentsFeedIdEnabled", 0, l, "isMomentsModeratedTabEnabled", 0, d, "isMomentsPostCreationEnabled", 0, c, "isMomentsShareLinkEnabled", 0, o, "isMomentsSitetestUrlParsingEnabled", 0, r, "isMomentsUploadEnabled", 0, s, "isMomentsUploadLanguageSelectEnabled", 0, i, "isTextDocumentEnabled", 0, n])
+    e.s(["isBadgeDefaultIconEnabled", 0, a, "isMomentsFeedIdEnabled", 0, l, "isMomentsModeratedTabEnabled", 0, c, "isMomentsPostCreationEnabled", 0, d, "isMomentsShareLinkEnabled", 0, o, "isMomentsSitetestUrlParsingEnabled", 0, r, "isMomentsUploadEnabled", 0, s, "isMomentsUploadLanguageSelectEnabled", 0, i, "isTextDocumentEnabled", 0, n])
 }, 203450, e => {
     "use strict";
     var t = e.i(221628),
@@ -143,8 +143,8 @@
         i = e.i(156071),
         l = e.i(881670),
         o = e.i(745873),
-        c = e.i(338653);
-    let d = (0, a.createContext)({
+        d = e.i(338653);
+    let c = (0, a.createContext)({
         isAffiliateProgramLoading: !1,
         requiresActionToJoinProgram: void 0,
         compliantWithAllUserRequirements: void 0,
@@ -152,24 +152,24 @@
         isCurrentUserGroupOwner: void 0,
         isGroupEligible: void 0
     });
-    d.displayName = "AffiliateProgram";
+    c.displayName = "AffiliateProgram";
     let u = (0, r.withTranslation)(e => {
         let {
             children: r
         } = e, {
             user: l
-        } = (0, n.useAuthentication)(), u = (0, o.useCurrentGroup)(), [m, p] = (0, a.useState)(void 0), [h, g] = (0, a.useState)(), [f, v] = (0, a.useState)(), [b, y] = (0, a.useState)(), [A, T] = (0, a.useState)(), x = (0, a.useMemo)(() => {
+        } = (0, n.useAuthentication)(), u = (0, o.useCurrentGroup)(), [m, p] = (0, a.useState)(void 0), [h, g] = (0, a.useState)(), [f, v] = (0, a.useState)(), [y, b] = (0, a.useState)(), [A, T] = (0, a.useState)(), x = (0, a.useMemo)(() => {
             var e;
             return (null != (e = null == u ? void 0 : u.id) ? e : 0) !== 0
         }, [u]), [I, S] = (0, a.useState)(void 0), C = void 0 === m || void 0 === h || void 0 === f && x, w = (0, a.useCallback)(async () => {
             try {
                 if (x && (null == u ? void 0 : u.id)) {
-                    let e = await (0, c.getGroupCreatorMetadata)(u.id);
+                    let e = await (0, d.getGroupCreatorMetadata)(u.id);
                     p(e);
                     return
                 }
                 if (!x && (null == l ? void 0 : l.id)) {
-                    let e = await (0, c.getUserCreatorMetadata)();
+                    let e = await (0, d.getUserCreatorMetadata)();
                     p(e);
                     return
                 }
@@ -179,7 +179,7 @@
             p(null)
         }, [null == u ? void 0 : u.id, x, null == l ? void 0 : l.id]), E = (0, a.useCallback)(async () => {
             if (x && I || !x) try {
-                let e = await (0, c.getRequirements)();
+                let e = await (0, d.getRequirements)();
                 g(e.requirements);
                 return
             } catch (e) {
@@ -188,15 +188,15 @@
             g(null)
         }, [I, x]), _ = (0, a.useCallback)(async () => {
             if (x && (null == u ? void 0 : u.id)) try {
-                let e = await (0, c.getGroupEligibility)(u.id);
+                let e = await (0, d.getGroupEligibility)(u.id);
                 v(e.isEligible)
             } catch (e) {
                 v(!1)
             }
         }, [u, x]);
         (0, a.useEffect)(() => {
-            C ? T(void 0) : x && !I ? T(!1) : T(!1 === b)
-        }, [x, I, b, C]), (0, a.useEffect)(() => {
+            C ? T(void 0) : x && !I ? T(!1) : T(!1 === y)
+        }, [x, I, y, C]), (0, a.useEffect)(() => {
             (async () => {
                 if (x && (null == u ? void 0 : u.id)) {
                     var e;
@@ -206,7 +206,7 @@
                 e && l && S(e === l.id)
             })
         }, [null == u ? void 0 : u.id, x, l]), (0, a.useEffect)(() => {
-            C || !h || x && !I ? y(void 0) : y((null == h ? void 0 : h.length) === 0 || (null == h ? void 0 : h.length) === 1 && h[0] === s.Requirements.Payable)
+            C || !h || x && !I ? b(void 0) : b((null == h ? void 0 : h.length) === 0 || (null == h ? void 0 : h.length) === 1 && h[0] === s.Requirements.Payable)
         }, [I, x, C, h]), (0, a.useEffect)(() => {
             w()
         }, [w]), (0, a.useEffect)(() => {
@@ -217,19 +217,19 @@
         let k = (0, a.useMemo)(() => ({
             isAffiliateProgramLoading: C,
             requiresActionToJoinProgram: A,
-            compliantWithAllUserRequirements: b,
+            compliantWithAllUserRequirements: y,
             creatorMetadata: null != m ? m : void 0,
             requirements: null != h ? h : void 0,
             isCurrentUserGroupOwner: I,
             isGroupEligible: null != f ? f : void 0
-        }), [C, A, b, m, h, I, f]);
-        return (0, t.jsx)(d.Provider, {
+        }), [C, A, y, m, h, I, f]);
+        return (0, t.jsx)(c.Provider, {
             value: k,
             children: r
         })
     }, [l.TranslationNamespace.Organization]);
     e.s(["default", 0, u, "useAffiliateProgram", 0, function() {
-        return (0, a.useContext)(d)
+        return (0, a.useContext)(c)
     }])
 }, 814984, e => {
     "use strict";
@@ -259,8 +259,8 @@
         i = e.i(367808),
         l = e.i(686762),
         o = e.i(623983),
-        c = e.i(748893),
-        d = e.i(649114),
+        d = e.i(748893),
+        c = e.i(649114),
         u = e.i(15645),
         m = e.i(358763),
         p = e.i(889311),
@@ -268,7 +268,7 @@
         g = e.i(881670),
         f = e.i(904969),
         v = e.i(906791);
-    let b = (0, e.i(697973).makeStyles)()(e => ({
+    let y = (0, e.i(697973).makeStyles)()(e => ({
         alertContainer: {
             marginBottom: "16px",
             [e.breakpoints.down("Medium")]: {
@@ -304,10 +304,10 @@
             backgroundColor: "rgba(255, 255, 255, 0.1)"
         }
     }));
-    e.s(["default", 0, b], 540082);
-    var y = ((t = {}).Home = "home", t.Creations = "creations", t);
+    e.s(["default", 0, y], 540082);
+    var b = ((t = {}).Home = "home", t.Creations = "creations", t);
     let A = (0, r.withTranslation)(e => {
-        let t, g, y, A, {
+        let t, g, b, A, {
                 trackingPage: T,
                 alertRedesignVariant: x
             } = e,
@@ -319,7 +319,7 @@
             } = (0, v.useAgeVerificationUpsellContext)(),
             {
                 classes: E
-            } = b(),
+            } = y(),
             _ = (0, s.useRef)(null),
             {
                 unifiedLogger: k
@@ -379,20 +379,20 @@
                     }
                 }), w()
             }, [k, w, T, C, x]);
-        return ("establishTrust" === C ? (t = "Title.EstablishTrustBanner", g = "Label.EstablishTrustBanner2", y = f.ESTABLISH_TRUST_UPSELL_GET_STARTED_URL, A = f.ESTABLISH_TRUST_UPSELL_VIEW_DETAILS_URL) : (t = "Title.AgeVerificationBanner", g = "Label.AgeVerificationBanner", y = f.AGE_VERIFICATION_UPSELL_GET_STARTED_URL, A = f.AGE_VERIFICATION_UPSELL_VIEW_DETAILS_URL), I) ? (0, a.jsx)("div", {
+        return ("establishTrust" === C ? (t = "Title.EstablishTrustBanner", g = "Label.EstablishTrustBanner2", b = f.ESTABLISH_TRUST_UPSELL_GET_STARTED_URL, A = f.ESTABLISH_TRUST_UPSELL_VIEW_DETAILS_URL) : (t = "Title.AgeVerificationBanner", g = "Label.AgeVerificationBanner", b = f.AGE_VERIFICATION_UPSELL_GET_STARTED_URL, A = f.AGE_VERIFICATION_UPSELL_VIEW_DETAILS_URL), I) ? (0, a.jsx)("div", {
             ref: _,
             children: (0, a.jsxs)(n.Alert, {
                 className: E.alertContainer,
                 severity: "ageVerification" === C && S ? "warning" : "info",
                 variant: "filled",
-                action: [(0, a.jsx)(c.Button, {
-                    href: y,
+                action: [(0, a.jsx)(d.Button, {
+                    href: b,
                     onClick: P,
                     className: E.getStarted,
                     color: "inherit",
                     size: "small",
                     children: D("Label.AgeVerificationBannerGetStarted")
-                }, "getStarted"), (0, a.jsx)(d.IconButton, {
+                }, "getStarted"), (0, a.jsx)(c.IconButton, {
                     color: "inherit",
                     size: "medium",
                     "aria-label": "dismiss",
@@ -415,7 +415,7 @@
             })
         }) : null
     }, [g.TranslationNamespace.Home]);
-    e.s(["AgeVerificationUpsellBanner", 0, A, "AgeVerificationUpsellPage", () => y], 714039)
+    e.s(["AgeVerificationUpsellBanner", 0, A, "AgeVerificationUpsellPage", () => b], 714039)
 }, 904969, e => {
     "use strict";
     e.s(["AGE_VERIFICATION_UPSELL_BANNER_END_DATE", 0, "2030-01-01T00:00:00.000Z", "AGE_VERIFICATION_UPSELL_BANNER_HIGH_PRIORITY_DATE", 0, "2026-01-21T00:00:00.000Z", "AGE_VERIFICATION_UPSELL_BANNER_START_DATE", 0, "2025-12-03T00:00:00.000Z", "AGE_VERIFICATION_UPSELL_GET_STARTED_URL", 0, "https://www.roblox.com/my/account?creatorCollaboration", "AGE_VERIFICATION_UPSELL_VIEW_DETAILS_URL", 0, "https://devforum.roblox.com/t/age-check-notifications-in-studio-and-creator-hub/4117693", "ESTABLISH_TRUST_UPSELL_GET_STARTED_URL", 0, "https://www.roblox.com/my/account?creatorCollaboration", "ESTABLISH_TRUST_UPSELL_VIEW_DETAILS_URL", 0, "https://devforum.roblox.com/t/age-check-notifications-in-studio-and-creator-hub/4117693"])
@@ -429,9 +429,9 @@
         i = e.i(814984),
         l = e.i(904969);
     let o = "CreatorHub.AgeVerificationBannerSettings",
-        c = async () => {
+        d = async () => {
             localStorage.removeItem(o)
-        }, d = async () => {
+        }, c = async () => {
             let e, t = localStorage.getItem(o);
             if (!t) return !1;
             try {
@@ -449,7 +449,7 @@
                 })(t);
                 e = a
             } catch (e) {
-                return c(), !1
+                return d(), !1
             }
             let a = new Date;
             return e.getFullYear() === a.getFullYear() && e.getMonth() === a.getMonth() && e.getDate() === a.getDate()
@@ -470,11 +470,11 @@
     e.s(["AgeVerificationUpsellProvider", 0, e => {
         let {
             children: i
-        } = e, [o, c] = (0, a.useState)(!0), [g, f] = (0, a.useState)("doNotShow"), {
+        } = e, [o, d] = (0, a.useState)(!0), [g, f] = (0, a.useState)("doNotShow"), {
             isFetched: v,
-            user: b
+            user: y
         } = (0, s.useRobloxAuthentication)(), {
-            unifiedLogger: y
+            unifiedLogger: b
         } = (0, n.useUnifiedLoggerProvider)(), {
             isHighPriority: A,
             isEnabled: T
@@ -488,15 +488,15 @@
                 isEnabled: e <= s && s < t
             }
         }, []), x = (0, a.useCallback)(async () => {
-            await u(), c(!0)
-        }, [c]);
+            await u(), d(!0)
+        }, [d]);
         (0, a.useEffect)(() => {
-            T && v && (null == b ? void 0 : b.id) && (async () => {
+            T && v && (null == y ? void 0 : y.id) && (async () => {
                 let e = !1;
                 try {
-                    e = await d()
+                    e = await c()
                 } catch (e) {
-                    y.logErrorEvent({
+                    b.logErrorEvent({
                         eventName: r.default.AgeVerificationUpsellBannerError,
                         parameters: {
                             branch: "isDismissedToday",
@@ -504,12 +504,12 @@
                         }
                     })
                 }
-                c(e);
+                d(e);
                 let t = "doNotShow";
                 try {
                     t = await h()
                 } catch (e) {
-                    y.logErrorEvent({
+                    b.logErrorEvent({
                         eventName: r.default.AgeVerificationUpsellBannerError,
                         parameters: {
                             branch: "getEligibility",
@@ -519,7 +519,7 @@
                 }
                 f(t)
             })().catch(e => {
-                y.logErrorEvent({
+                b.logErrorEvent({
                     eventName: r.default.AgeVerificationUpsellBannerError,
                     parameters: {
                         branch: "runAsync",
@@ -527,7 +527,7 @@
                     }
                 })
             })
-        }, [T, v, b, y]);
+        }, [T, v, y, b]);
         let I = (0, a.useMemo)(() => {
             let e = T && "doNotShow" !== g;
             return {
@@ -683,8 +683,8 @@
         i = e.i(197649),
         l = e.i(79187),
         o = e.i(345886),
-        c = e.i(29929),
-        d = e.i(889311),
+        d = e.i(29929),
+        c = e.i(889311),
         u = e.i(215955),
         m = e.i(227700),
         p = e.i(881670),
@@ -692,8 +692,8 @@
         g = e.i(373736),
         f = e.i(917852),
         v = e.i(576069),
-        b = e.i(663563);
-    let y = "".concat("https://assets.create.roblox.com/9bdd3fab861fa4cb33220923767045e56edce031/assets", "/home/publish_eligibility_banner.webp"),
+        y = e.i(663563);
+    let b = "".concat("https://assets.create.roblox.com/1053825d254d01d07d62657678fd4cea0c05af2b/assets", "/home/publish_eligibility_banner.webp"),
         A = (0, l.withTranslation)(e => {
             var A;
             let {
@@ -704,7 +704,7 @@
             } = (0, l.useTranslation)(), {
                 params: C,
                 isFetched: w
-            } = (0, m.useIXPParameters)(c.IXPLayers.CreatorHubCreationsPermission), E = C[c.CreatorHubCreationsPermissionParameters.EnableAudienceReachGrowthOpportunitiesBanner], {
+            } = (0, m.useIXPParameters)(d.IXPLayers.CreatorHubCreationsPermission), E = C[d.CreatorHubCreationsPermissionParameters.EnableAudienceReachGrowthOpportunitiesBanner], {
                 gameDetails: _
             } = (0, h.useCurrentGame)(), k = null == _ ? void 0 : _.id, D = null != T ? T : k && k > 0 ? k : void 0, {
                 data: N,
@@ -713,7 +713,7 @@
             } = (0, v.useCreatorEligibility)(), M = (0, a.useRef)(!1), [U, F] = (0, a.useState)(!1), B = (null == N ? void 0 : N.ageBracket) === r.AgeBracketEnum.Over18, R = (null == N ? void 0 : N.ageBracket) === r.AgeBracketEnum.Between13And18, V = null != (A = null == N ? void 0 : N.creatorEligibility.includes(r.CreatorEligibilityEnum.IdVerified)) && A, j = B || R, q = w && E && !(L || P) && !!N && !V;
             (0, a.useEffect)(() => {
                 q && !M.current && (M.current = !0, u.default.logImpressionEvent({
-                    eventName: d.default.AudienceReachGrowthOpportunitiesBannerImpression,
+                    eventName: c.default.AudienceReachGrowthOpportunitiesBannerImpression,
                     parameters: {
                         page: "audienceReach",
                         ctaType: j ? "start" : "viewDetails",
@@ -728,7 +728,7 @@
                 if (!q) return;
                 let e = j ? "start" : "viewDetails";
                 (u.default.logClickEvent({
-                    eventName: d.default.AudienceReachGrowthOpportunitiesBannerClick,
+                    eventName: c.default.AudienceReachGrowthOpportunitiesBannerClick,
                     parameters: {
                         page: "audienceReach",
                         action: e,
@@ -744,9 +744,9 @@
                 direction: "row",
                 paddingBottom: 4,
                 children: [(0, t.jsxs)("div", {
-                    className: (0, i.clsx)(b.default.heroBanner, "relative width-full flex items-center bg-surface-200 radius-large"),
+                    className: (0, i.clsx)(y.default.heroBanner, "relative width-full flex items-center bg-surface-200 radius-large"),
                     children: [(0, t.jsx)("img", {
-                        src: y,
+                        src: b,
                         alt: "",
                         "aria-hidden": !0,
                         className: (0, i.clsx)("block absolute width-full height-full"),
@@ -758,7 +758,7 @@
                             e.currentTarget.style.display = "none"
                         }
                     }), (0, t.jsxs)("div", {
-                        className: (0, i.clsx)(b.default.heroTextContent, "color-mode-dark relative flex flex-col gap-medium padding-[32px]"),
+                        className: (0, i.clsx)(y.default.heroTextContent, "color-mode-dark relative flex flex-col gap-medium padding-[32px]"),
                         children: [(0, t.jsxs)("div", {
                             children: [(0, t.jsxs)("div", {
                                 className: "text-heading-medium content-emphasis",
@@ -768,7 +768,7 @@
                                 children: S(p.TranslationNamespace.AudienceReach, "Description.ExpandGrowthOpportunities")
                             })]
                         }), (0, t.jsx)("div", {
-                            className: (0, i.clsx)(b.default.buttonRow, "flex gap-small"),
+                            className: (0, i.clsx)(y.default.buttonRow, "flex gap-small"),
                             children: x ? B ? (0, t.jsx)(n.Button, {
                                 as: "a",
                                 href: f.idVerificationActionUrl,
@@ -954,8 +954,8 @@
         i = e.i(157310),
         l = e.i(913893),
         o = e.i(275574),
-        c = e.i(671376),
-        d = e.i(117236);
+        d = e.i(671376),
+        c = e.i(117236);
     let u = function() {
         let e = !(arguments.length > 0) || void 0 === arguments[0] || arguments[0],
             a = (0, i.useQuery)({
@@ -966,7 +966,7 @@
             }),
             s = (0, i.useQuery)({
                 queryKey: ["getAvatarItemsEntryPointAssetTypes"],
-                queryFn: d.getAvatarItemsEntryPointAssetTypes,
+                queryFn: c.getAvatarItemsEntryPointAssetTypes,
                 enabled: e,
                 staleTime: 3e5
             }),
@@ -974,8 +974,8 @@
             u = (0, t.useMemo)(() => {
                 var e, t;
                 return {
-                    enableMakeupAssets: null != (e = null == n ? void 0 : n.has(c.Asset.EyeMakeup)) && e,
-                    enableAvatarBackgrounds: null != (t = null == n ? void 0 : n.has(c.Asset.AvatarBackground)) && t
+                    enableMakeupAssets: null != (e = null == n ? void 0 : n.has(d.Asset.EyeMakeup)) && e,
+                    enableAvatarBackgrounds: null != (t = null == n ? void 0 : n.has(d.Asset.AvatarBackground)) && t
                 }
             }, [n]),
             m = (0, t.useMemo)(() => (0, r.transformCreatorDashboardTree)(a.data, u), [a.data, u]),
@@ -991,21 +991,21 @@
     e.s(["default", 0, e => {
         var i, l, o;
         let [{
-            activeTab: c,
-            filterIndex: d
+            activeTab: d,
+            filterIndex: c
         }] = (0, a.useQueryParams)(["activeTab", "filterIndex"]), {
             l1Options: m,
             categories: p,
             isLoading: h
-        } = u(e), g = (0, n.isAllAssetTypesActiveTab)(c) || (0, n.isRecentsActiveTab)(c) || (0, n.isAvatarLooksActiveTab)(c) ? void 0 : null != (i = (0, n.parseTaxonomyActiveTab)(c)) ? i : null == (o = m[0]) ? void 0 : o.taxonomyKey, f = (0, t.useMemo)(() => (0, r.findL1Category)(p, g), [p, g]), v = (0, t.useMemo)(() => (0, r.buildTaxonomyL2Options)(f), [f]), b = parseInt(null != (l = null == d ? void 0 : d.toString()) ? l : "", 10), y = (0, s.isValidIndex)(b, v) ? b : 0, A = (0, t.useMemo)(() => {
-            if (f) return v.length > 0 ? v[y] : f.webStableId ? (0, r.categoryToDropdown)(f) : void 0
-        }, [f, v, y]);
+        } = u(e), g = (0, n.isAllAssetTypesActiveTab)(d) || (0, n.isRecentsActiveTab)(d) || (0, n.isAvatarLooksActiveTab)(d) ? void 0 : null != (i = (0, n.parseTaxonomyActiveTab)(d)) ? i : null == (o = m[0]) ? void 0 : o.taxonomyKey, f = (0, t.useMemo)(() => (0, r.findL1Category)(p, g), [p, g]), v = (0, t.useMemo)(() => (0, r.buildTaxonomyL2Options)(f), [f]), y = parseInt(null != (l = null == c ? void 0 : c.toString()) ? l : "", 10), b = (0, s.isValidIndex)(y, v) ? y : 0, A = (0, t.useMemo)(() => {
+            if (f) return v.length > 0 ? v[b] : f.webStableId ? (0, r.categoryToDropdown)(f) : void 0
+        }, [f, v, b]);
         return {
             l1Options: m,
             activeL1Key: g,
             activeL1Node: f,
             l2Options: v,
-            filterIndex: y,
+            filterIndex: b,
             selection: A,
             isLoading: h
         }
@@ -1046,14 +1046,14 @@
         l = new Set([92]),
         o = new Set([4]);
 
-    function c(e, t) {
+    function d(e, t) {
         var a;
         return (null != (a = e.assetTypeIds) ? a : []).some(e => t.has(e))
     }
 
-    function d(e) {
+    function c(e) {
         var t;
-        return !0 === e.isPublishable || !!c(e, l) || (null != (t = e.bundleTypeIds) ? t : []).some(e => o.has(e))
+        return !0 === e.isPublishable || !!d(e, l) || (null != (t = e.bundleTypeIds) ? t : []).some(e => o.has(e))
     }
 
     function u(e) {
@@ -1100,7 +1100,7 @@
             var a, s, u;
             let m = null != (a = e.children) ? a : [];
             if (0 === m.length) {
-                if (!d(e) || c(e, l) && !t.enableAvatarBackgrounds || !e.webStableId) return;
+                if (!c(e) || d(e, l) && !t.enableAvatarBackgrounds || !e.webStableId) return;
                 o.push({
                     key: e.webStableId,
                     name: null != (u = e.name) ? u : "",
@@ -1113,12 +1113,12 @@
             let p = [],
                 h = !1;
             m.forEach(e => {
-                if (c(e, i)) {
+                if (d(e, i)) {
                     t.enableMakeupAssets && (h = !0, p.push(e));
                     return
                 }
-                if (d(e)) {
-                    if (c(e, n)) return void r.push(e);
+                if (c(e)) {
+                    if (d(e, n)) return void r.push(e);
                     p.push(e)
                 }
             }), 0 !== p.length && e.webStableId && o.push({
@@ -1143,9 +1143,9 @@
         i = e.i(117236);
     let l = "AvatarItems",
         o = "".concat(l, "-"),
-        c = r.Asset.HairAccessory;
+        d = r.Asset.HairAccessory;
 
-    function d(e) {
+    function c(e) {
         let t = (0, n.readQueryValue)(e);
         if (void 0 === t || !t.startsWith(o)) return;
         let a = t.slice(o.length);
@@ -1157,19 +1157,19 @@
     function p(e) {
         return m.has(e)
     }
-    e.s(["ALL_ASSET_TYPES_L1_KEY", 0, "all", "AVATAR_ITEMS_ACTIVE_TAB", 0, l, "AVATAR_LOOKS_L1_KEY", 0, u, "TAXONOMY_HOST_ASSET", 0, c, "buildTaxonomyActiveTab", 0, function(e) {
+    e.s(["ALL_ASSET_TYPES_L1_KEY", 0, "all", "AVATAR_ITEMS_ACTIVE_TAB", 0, l, "AVATAR_LOOKS_L1_KEY", 0, u, "TAXONOMY_HOST_ASSET", 0, d, "buildTaxonomyActiveTab", 0, function(e) {
         return e ? "".concat(o).concat(e) : l
     }, "isAllAssetTypesActiveTab", 0, function(e) {
-        return "all" === d(e)
+        return "all" === c(e)
     }, "isAvatarLooksActiveTab", 0, function(e) {
-        return d(e) === u
+        return c(e) === u
     }, "isRecentsActiveTab", 0, function(e) {
-        return "Recents" === (0, n.readQueryValue)(e) || "recents" === d(e)
+        return "Recents" === (0, n.readQueryValue)(e) || "recents" === c(e)
     }, "isTaxonomyActiveTab", 0, function(e) {
         var t;
         let a = (0, n.readQueryValue)(e);
         return a === l || null != (t = null == a ? void 0 : a.startsWith(o)) && t
-    }, "isTaxonomyEligibleAssetTab", 0, p, "parseTaxonomyActiveTab", 0, d, "shouldOpenTaxonomyView", 0, function(e) {
+    }, "isTaxonomyEligibleAssetTab", 0, p, "parseTaxonomyActiveTab", 0, c, "shouldOpenTaxonomyView", 0, function(e) {
         let {
             isTaxonomyEnabled: t,
             isChangingSection: a,
@@ -1255,8 +1255,8 @@
         i = e.i(361738),
         l = e.i(671376),
         o = ((t = {}).All = "All", t),
-        c = ((a = {}).All = "All", a),
-        d = ((s = {}).CreatedNewest = "created_desc", s.CreatedOldest = "created_asc", s.UpdatedNewest = "updated_desc", s.UpdatedOldest = "updated_asc", s);
+        d = ((a = {}).All = "All", a),
+        c = ((s = {}).CreatedNewest = "created_desc", s.CreatedOldest = "created_asc", s.UpdatedNewest = "updated_desc", s.UpdatedOldest = "updated_asc", s);
     let u = ["updated_desc", "updated_asc", "created_desc", "created_asc"],
         m = {
             created_desc: "createTime desc",
@@ -1278,8 +1278,8 @@
         g = [...h, n.CreatorInventoryAssetType.TextDocument],
         f = new Set([n.CreatorInventoryAssetType.Audio, n.CreatorInventoryAssetType.Decal, n.CreatorInventoryAssetType.MeshPart, n.CreatorInventoryAssetType.TextDocument, n.CreatorInventoryAssetType.Video]),
         v = new Set([...f, n.CreatorInventoryAssetType.Image]),
-        b = new Set(g),
-        y = new Set([n.CreatorInventoryAssetType.TextDocument]),
+        y = new Set(g),
+        b = new Set([n.CreatorInventoryAssetType.TextDocument]),
         A = new Set(["All", i.CreatorInventorySourceType.Created, i.CreatorInventorySourceType.Purchased, i.CreatorInventorySourceType.Shared]),
         T = new Set([l.Asset.Animation, l.Asset.Audio, l.Asset.Decal, l.Asset.Image, l.Asset.Mesh, l.Asset.MeshPart, l.Asset.Model, l.Asset.Plugin, l.Asset.Video]),
         x = {
@@ -1352,7 +1352,7 @@
             let t = e instanceof Date ? e : new Date(e);
             return Number.isNaN(t.getTime()) ? void 0 : t
         };
-    e.s(["DEFAULT_DEVELOPMENT_ITEMS_SORT", 0, "updated_desc", "DevelopmentItemsAssetTypeFilter", () => c, "DevelopmentItemsSort", () => d, "DevelopmentItemsSourceFilter", () => o, "buildCreatorInventoryScope", 0, (e, t) => null != t ? {
+    e.s(["DEFAULT_DEVELOPMENT_ITEMS_SORT", 0, "updated_desc", "DevelopmentItemsAssetTypeFilter", () => d, "DevelopmentItemsSort", () => c, "DevelopmentItemsSourceFilter", () => o, "buildCreatorInventoryScope", 0, (e, t) => null != t ? {
         type: n.CreatorInventoryScopeType.Group,
         id: t
     } : null != e ? {
@@ -1377,22 +1377,22 @@
             source: s
         } = e;
         return t.trim().length > 0 || a || s !== i.CreatorInventorySourceType.Created
-    }, "hasDevelopmentItemCreatorStorePage", 0, e => e !== n.CreatorInventoryAssetType.TextDocument, "hasDevelopmentItemThumbnail", 0, e => e !== n.CreatorInventoryAssetType.TextDocument, "isDevelopmentItemArchivedViewAvailable", 0, _, "isDevelopmentItemAsset", 0, (e, t) => e === l.Asset.TextDocument ? !0 === t : T.has(e), "isDevelopmentItemDirectlyArchivable", 0, e => null != e && f.has(e), "isDevelopmentItemsAllAssetTypes", 0, e => "All" === e, "isDevelopmentItemsArchivedViewAvailable", 0, (e, t) => t || _(1 === e.length ? e[0] : void 0), "isDevelopmentItemsAssetType", 0, (e, t) => null != e && !!b.has(e) && (!y.has(e) || !0 === t), "isDevelopmentItemsSort", 0, e => u.some(t => t === e), "isDevelopmentItemsSourceSelection", 0, e => null != e && A.has(e), "isDevelopmentItemsView", 0, e => "grid" === e || "list" === e, "mapCreatorInventoryItem", 0, e => {
+    }, "hasDevelopmentItemCreatorStorePage", 0, e => e !== n.CreatorInventoryAssetType.TextDocument, "hasDevelopmentItemThumbnail", 0, e => e !== n.CreatorInventoryAssetType.TextDocument, "isDevelopmentItemArchivedViewAvailable", 0, _, "isDevelopmentItemAsset", 0, (e, t) => e === l.Asset.TextDocument ? !0 === t : T.has(e), "isDevelopmentItemDirectlyArchivable", 0, e => null != e && f.has(e), "isDevelopmentItemsAllAssetTypes", 0, e => "All" === e, "isDevelopmentItemsArchivedViewAvailable", 0, (e, t) => t || _(1 === e.length ? e[0] : void 0), "isDevelopmentItemsAssetType", 0, (e, t) => null != e && !!y.has(e) && (!b.has(e) || !0 === t), "isDevelopmentItemsSort", 0, e => u.some(t => t === e), "isDevelopmentItemsSourceSelection", 0, e => null != e && A.has(e), "isDevelopmentItemsView", 0, e => "grid" === e || "list" === e, "mapCreatorInventoryItem", 0, e => {
         var t, a, s, r, n, i, l;
-        let o, c = null == (s = e.assetItem) ? void 0 : s.asset;
-        if (null == c) return;
-        let d = "number" == typeof c.assetId ? c.assetId : Number.parseInt(null != (t = c.assetId) ? t : "", 10);
-        if (Number.isNaN(d)) return;
-        let u = null == (r = c.displayName) ? void 0 : r.trim();
+        let o, d = null == (s = e.assetItem) ? void 0 : s.asset;
+        if (null == d) return;
+        let c = "number" == typeof d.assetId ? d.assetId : Number.parseInt(null != (t = d.assetId) ? t : "", 10);
+        if (Number.isNaN(c)) return;
+        let u = null == (r = d.displayName) ? void 0 : r.trim();
         return {
-            id: null != (a = e.path) ? a : d.toString(),
-            assetId: d,
+            id: null != (a = e.path) ? a : c.toString(),
+            assetId: c,
             assetType: (e => {
                 if (null != e) return S[e.toString().toUpperCase()]
-            })(c.assetType),
-            created: k(c.createTime),
+            })(d.assetType),
+            created: k(d.createTime),
             isPackage: (null == (n = e.assetItem) ? void 0 : n.isPackage) === !0,
-            name: null == u || 0 === u.length ? d.toString() : u,
+            name: null == u || 0 === u.length ? c.toString() : u,
             sources: (l = null == (i = e.assetItem) ? void 0 : i.sources, o = new Set, null == l || l.forEach(e => {
                 Object.entries(e).forEach(e => {
                     let [t, a] = e;
@@ -1401,8 +1401,8 @@
                     null != s && o.add(s)
                 })
             }), [...o]),
-            state: null == c.state ? void 0 : w[c.state],
-            updated: k(c.updateTime)
+            state: null == d.state ? void 0 : w[d.state],
+            updated: k(d.updateTime)
         }
     }, "mergeOptimisticArchivedDevelopmentItems", 0, (e, t, a) => {
         let s = new Set(e.map(e => e.assetId));
@@ -1442,7 +1442,7 @@
             o = (0, D.useCallback)(e => s("{count} types", "Asset type filter text when the creator selects more than one Development Items asset type.", (0, M.translationKey)("Label.DevelopmentItems.AssetTypeCount", U.TranslationNamespace.Creations), {
                 count: e.toString()
             }), [s]),
-            c = (0, D.useCallback)((e, t) => s("{query} in {assetType}", "Scoped-search suggestion that searches for a query within a Development Items asset type.", (0, M.translationKey)("Label.DevelopmentItems.SearchSuggestion", U.TranslationNamespace.Creations), {
+            d = (0, D.useCallback)((e, t) => s("{query} in {assetType}", "Scoped-search suggestion that searches for a query within a Development Items asset type.", (0, M.translationKey)("Label.DevelopmentItems.SearchSuggestion", U.TranslationNamespace.Creations), {
                 assetType: t,
                 query: e
             }), [s]);
@@ -1482,7 +1482,7 @@
             retry: t("Action.Retry"),
             rowsPerPage: t("Label.RowsPerPage"),
             search: t("Label.Search"),
-            searchSuggestion: c,
+            searchSuggestion: d,
             searchWithinAssetType: s("Search within asset type", "Accessible label for Development Items scoped-search suggestions.", (0, M.translationKey)("Label.DevelopmentItems.SearchWithinAssetType", U.TranslationNamespace.Creations)),
             sortBestMatch: s("Sort by: Best match", "Development Items sort shown while a search query ranks results by relevance.", (0, M.translationKey)("Label.DevelopmentItems.SortByBestMatch", U.TranslationNamespace.Creations)),
             sortBy: s("Sort by", "Accessible label for the Development Items sort selector.", (0, M.translationKey)("Label.DevelopmentItems.SortBy", U.TranslationNamespace.Creations)),
@@ -1569,20 +1569,20 @@
         o = {
             menuItem: i.default[0]
         },
-        c = a.Asset.EyeMakeup,
-        d = a.Asset.AvatarLooks,
+        d = a.Asset.EyeMakeup,
+        c = a.Asset.AvatarLooks,
         u = a.Asset.AvatarBackground,
         m = a.Asset.Showcase;
     e.s(["default", 0, {
         isMenuItemEnabled(e, s, n, i, l, o, p) {
             var h, g;
-            return ((null == e ? void 0 : e.type) !== a.Asset.TextDocument || !!p) && ((null == e ? void 0 : e.type) === a.Asset.AllCatalogAsset || ((null == e ? void 0 : e.type) === a.Asset.SharedExperiences ? null == s : (null == e ? void 0 : e.type) === a.Asset.Moments ? null != l && l : (null == e ? void 0 : e.itemType) === r.Item.Bundle || (null == e ? void 0 : e.type) === d || ((null == e ? void 0 : e.type) === u ? null != (h = null == i ? void 0 : i.has(e.type)) && h : (null == e ? void 0 : e.type) === m ? null != o && o : (null == e ? void 0 : e.type) === c ? null != (g = null == i ? void 0 : i.has(null == e ? void 0 : e.type)) && g : (null == e ? void 0 : e.type) === void 0 || !!(0, t.is2DAsset)(null == e ? void 0 : e.type) || (null == e ? void 0 : e.type) !== void 0 && void 0 === n || null != n && n)))
+            return ((null == e ? void 0 : e.type) !== a.Asset.TextDocument || !!p) && ((null == e ? void 0 : e.type) === a.Asset.AllCatalogAsset || ((null == e ? void 0 : e.type) === a.Asset.SharedExperiences ? null == s : (null == e ? void 0 : e.type) === a.Asset.Moments ? null != l && l : (null == e ? void 0 : e.itemType) === r.Item.Bundle || (null == e ? void 0 : e.type) === c || ((null == e ? void 0 : e.type) === u ? null != (h = null == i ? void 0 : i.has(e.type)) && h : (null == e ? void 0 : e.type) === m ? null != o && o : (null == e ? void 0 : e.type) === d ? null != (g = null == i ? void 0 : i.has(null == e ? void 0 : e.type)) && g : (null == e ? void 0 : e.type) === void 0 || !!(0, t.is2DAsset)(null == e ? void 0 : e.type) || (null == e ? void 0 : e.type) !== void 0 && void 0 === n || null != n && n)))
         },
         getValidMenuState(e, t, a, s, r, n, i, l) {
-            var o, d, m, p, h, g;
-            let f, v, b = (null == (o = t.submenuItem) ? void 0 : o.type) !== c && (null == (d = t.submenuItem) ? void 0 : d.type) !== u || void 0 !== r;
+            var o, c, m, p, h, g;
+            let f, v, y = (null == (o = t.submenuItem) ? void 0 : o.type) !== d && (null == (c = t.submenuItem) ? void 0 : c.type) !== u || void 0 !== r;
             if (void 0 === t.menuItem || this.isMenuItemEnabled(t.menuItem, a, s, r, n, i, l)) {
-                if (void 0 !== t.submenuItem && b && !this.isMenuItemEnabled(t.submenuItem, a, s, r, n, i, l))
+                if (void 0 !== t.submenuItem && y && !this.isMenuItemEnabled(t.submenuItem, a, s, r, n, i, l))
                     if (void 0 !== t.menuItem.submenuItems) {
                         let e = 0,
                             o = 0;
@@ -1654,8 +1654,8 @@
             alertTitle: a,
             alertDescription: l,
             severity: o,
-            externalLink: c,
-            linkLabel: d,
+            externalLink: d,
+            linkLabel: c,
             allowCloseDialog: u,
             onDismiss: m
         } = e, {
@@ -1674,8 +1674,8 @@
             severity: i[o],
             variant: "Feedback",
             className: "width-full",
-            primaryActionLabel: d,
-            primaryActionHref: c,
+            primaryActionLabel: c,
+            primaryActionHref: d,
             ...f,
             children: (0, s.jsxs)("div", {
                 className: "flex flex-col gap-xsmall",
@@ -1722,8 +1722,8 @@
         i = e.i(343885),
         l = e.i(609794),
         o = e.i(57561),
-        c = e.i(509747),
-        d = e.i(475555),
+        d = e.i(509747),
+        c = e.i(475555),
         u = e.i(538302),
         m = e.i(387707),
         p = e.i(262135),
@@ -1731,8 +1731,8 @@
         g = e.i(956923),
         f = e.i(84362),
         v = e.i(214665),
-        b = e.i(455506),
-        y = e.i(918290),
+        y = e.i(455506),
+        b = e.i(918290),
         A = e.i(716933),
         T = e.i(347319),
         x = e.i(543657),
@@ -1776,8 +1776,8 @@
         ei = e.i(756885),
         el = e.i(260123),
         eo = e.i(507792),
-        ec = e.i(850994);
-    let ed = {
+        ed = e.i(850994);
+    let ec = {
         secrets: {
             light: U.default,
             dark: M.default
@@ -1804,7 +1804,7 @@
         },
         avatarItem: {
             light: u.default,
-            dark: d.default
+            dark: c.default
         },
         models: {
             light: G.default,
@@ -1815,19 +1815,19 @@
             dark: K.default
         },
         audio: {
-            light: c.default,
+            light: d.default,
             dark: o.default
         },
         decals: {
-            light: y.default,
-            dark: b.default
+            light: b.default,
+            dark: y.default
         },
         images: {
             light: E.default,
             dark: w.default
         },
         videos: {
-            light: ec.default,
+            light: ed.default,
             dark: ei.default
         },
         meshes: {
@@ -1899,8 +1899,8 @@
             dark: R.default
         }
     };
-    e.s(["default", 0, ed], 938429);
-    let eu = "".concat("https://assets.create.roblox.com/9bdd3fab861fa4cb33220923767045e56edce031/assets", "/spot_illustrations"),
+    e.s(["default", 0, ec], 938429);
+    let eu = "".concat("https://assets.create.roblox.com/1053825d254d01d07d62657678fd4cea0c05af2b/assets", "/spot_illustrations"),
         em = {
             small: {
                 analytics: "".concat(eu, "/small/analytics.svg"),
@@ -1970,7 +1970,7 @@
             let {
                 illustration: a,
                 size: s = "large"
-            } = e, r = a && ed[a];
+            } = e, r = a && ec[a];
             if (r) return (0, t.jsx)(n.default, {
                 lightSrc: r.light,
                 darkSrc: r.dark,
@@ -1993,8 +1993,8 @@
                 illustration: o
             } = e, {
                 classes: {
-                    smallContainer: c,
-                    largeContainer: d,
+                    smallContainer: d,
+                    largeContainer: c,
                     smallText: u,
                     largeText: m
                 },
@@ -2003,8 +2003,8 @@
             return (0, t.jsxs)(r.default, {
                 classes: {
                     root: p({
-                        [c]: "small" === l,
-                        [d]: "large" === l
+                        [d]: "small" === l,
+                        [c]: "large" === l
                     })
                 },
                 flexDirection: "column",
@@ -2047,14 +2047,14 @@
             onDragLeaveHandler: i,
             size: l,
             multiple: o,
-            children: c,
-            accept: d,
+            children: d,
+            accept: c,
             ...u
         } = e, m = (0, a.useRef)(null), p = () => {
             m.current && m.current.click()
         }, h = e => {
             ((e instanceof Event ? e instanceof KeyboardEvent : e.nativeEvent && e.nativeEvent instanceof KeyboardEvent) ? ["Spacebar", " ", "Enter"].includes(e.key) : (console.info("The event passed in is not a keyboard event, are you using the handler in the wrong place?"), !1)) && (e.preventDefault(), p())
-        }, g = c ? c(p, h, e => {
+        }, g = d ? d(p, h, e => {
             e.preventDefault();
             let {
                 dataTransfer: {
@@ -2071,7 +2071,7 @@
             className: s,
             children: [g, (0, t.jsx)("input", {
                 ...u,
-                accept: d,
+                accept: c,
                 multiple: o,
                 ref: m,
                 type: "file",
@@ -2102,8 +2102,8 @@
         i = e.i(345886),
         l = e.i(697973),
         o = e.i(361965),
-        c = e.i(686762),
-        d = e.i(589418),
+        d = e.i(686762),
+        c = e.i(589418),
         u = e.i(699848),
         m = e.i(257256),
         p = e.i(17829),
@@ -2123,12 +2123,12 @@
             medium: 48,
             large: 64
         },
-        b = {
+        y = {
             compact: 4,
             medium: 6,
             large: 8
         },
-        y = (0, l.makeStyles)()((e, t) => {
+        b = (0, l.makeStyles)()((e, t) => {
             let {
                 variant: a
             } = t;
@@ -2146,7 +2146,7 @@
                     borderRadius: v[a]
                 },
                 nonUserBorderRadius: {
-                    borderRadius: b[a]
+                    borderRadius: y[a]
                 },
                 thumbnailItemContainer: {
                     display: "flex",
@@ -2185,7 +2185,7 @@
         let l, {
                 target: f,
                 targetType: v,
-                displayNameOverride: b,
+                displayNameOverride: y,
                 adornment: A,
                 label: T,
                 disabled: x,
@@ -2212,7 +2212,7 @@
                     textContainer: j
                 },
                 cx: q
-            } = y({
+            } = b({
                 variant: I
             }),
             {
@@ -2230,8 +2230,8 @@
                     if ("Ugc" === v) return h.www.getCatalogUrl(f.id)
                 }
             }, [S, f, C, v]);
-        b ? l = b : v === p.default.User ? l = "displayName" in f ? f.displayName : void 0 : "Ugc" !== v && (l = "name" in f ? f.name : void 0);
-        let z = !b && (v === p.default.User && !("displayName" in f && f.displayName) || "Ugc" === v),
+        y ? l = y : v === p.default.User ? l = "displayName" in f ? f.displayName : void 0 : "Ugc" !== v && (l = "name" in f ? f.name : void 0);
+        let z = !y && (v === p.default.User && !("displayName" in f && f.displayName) || "Ugc" === v),
             H = (0, a.useMemo)(() => {
                 let e;
                 return (0, t.jsxs)(i.Grid, {
@@ -2239,7 +2239,7 @@
                     direction: "row",
                     alignItems: "center",
                     wrap: "wrap",
-                    children: [z ? (0, t.jsx)(d.Skeleton, {
+                    children: [z ? (0, t.jsx)(c.Skeleton, {
                         animate: !0,
                         variant: "text",
                         width: 192,
@@ -2270,7 +2270,7 @@
                         })]
                     }), !E && (0, t.jsxs)(t.Fragment, {
                         children: [v === p.default.User && (0, t.jsx)(t.Fragment, {
-                            children: "name" in f && !f.name ? (0, t.jsx)(d.Skeleton, {
+                            children: "name" in f && !f.name ? (0, t.jsx)(c.Skeleton, {
                                 animate: !0,
                                 variant: "text",
                                 width: 192,
@@ -2307,7 +2307,7 @@
             wrap: "nowrap",
             justifyContent: "space-between",
             className: N,
-            children: (null == f ? void 0 : f.id) === void 0 ? (0, t.jsx)(d.Skeleton, {
+            children: (null == f ? void 0 : f.id) === void 0 ? (0, t.jsx)(c.Skeleton, {
                 animate: !0,
                 variant: "rectangular",
                 width: "100%",
@@ -2342,7 +2342,7 @@
                         className: N,
                         children: (0, t.jsx)(i.Grid, {
                             item: !0,
-                            children: S || C ? H : (0, t.jsx)(c.Link, {
+                            children: S || C ? H : (0, t.jsx)(d.Link, {
                                 href: K,
                                 className: B,
                                 color: "inherit",
@@ -2498,10 +2498,10 @@
         } = a, o = (0, t.useMemo)(() => {
             let t = s * r;
             return e.slice(t, t + r)
-        }, [e, s, r]), c = (s + 1) * l >= e.length;
+        }, [e, s, r]), d = (s + 1) * l >= e.length;
         return (0, t.useEffect)(() => {
-            c && n && (null == i || i())
-        }, [c, n, i]), {
+            d && n && (null == i || i())
+        }, [d, n, i]), {
             currentPage: o
         }
     }], 125677), e.s(["useTablePagination", 0, function(e) {
@@ -2509,8 +2509,8 @@
             count: a,
             initialRowsPerPage: s = 50,
             resetKey: r
-        } = e, [n, i] = (0, t.useState)(0), [l, o] = (0, t.useState)(s), [c, d] = (0, t.useState)(r);
-        r !== c && (d(r), i(0));
+        } = e, [n, i] = (0, t.useState)(0), [l, o] = (0, t.useState)(s), [d, c] = (0, t.useState)(r);
+        r !== d && (c(r), i(0));
         let u = Math.max(0, Math.ceil(a / l) - 1),
             m = Math.min(n, u);
         return {
@@ -2618,8 +2618,8 @@
     e.s(["default", 0, e => {
         let {
             header: i,
-            items: c,
-            icon: d,
+            items: d,
+            icon: c,
             activeKey: u,
             defaultExpanded: m,
             headerAction: p
@@ -2637,11 +2637,11 @@
                     classes: {
                         root: h.headerContainer
                     },
-                    children: [d && (0, t.jsx)(n.Grid, {
+                    children: [c && (0, t.jsx)(n.Grid, {
                         classes: {
                             root: h.icon
                         },
-                        children: d
+                        children: c
                     }), (0, t.jsx)(r.Typography, {
                         variant: "largeLabel2",
                         classes: {
@@ -2662,10 +2662,10 @@
                         root: h.divider
                     }
                 })]
-            }), c.length > 0 && (0, t.jsx)(a.NavigationTree, {
+            }), d.length > 0 && (0, t.jsx)(a.NavigationTree, {
                 selected: u,
                 defaultExpanded: m,
-                children: c.map(e => {
+                children: d.map(e => {
                     var s;
                     return (0, t.jsx)(a.NavigationTreeItem, {
                         label: e.label,
@@ -2698,9 +2698,9 @@
             open: i,
             onOpenChange: l,
             onContinueWithId: o,
-            onAddParent: c
+            onAddParent: d
         } = e, {
-            translate: d
+            translate: c
         } = (0, r.useTranslation)();
         return (0, t.jsx)(s.Dialog, {
             open: i,
@@ -2708,19 +2708,19 @@
             size: "Small",
             isModal: !0,
             hasCloseAffordance: !0,
-            closeLabel: d("Action.Close"),
+            closeLabel: c("Action.Close"),
             children: (0, t.jsxs)(s.DialogContent, {
                 children: [(0, t.jsxs)(s.DialogBody, {
                     className: "flex flex-col gap-medium",
                     children: [(0, t.jsx)(s.DialogTitle, {
                         className: "text-heading-medium margin-y-none",
-                        children: d("Label.IdVerification")
+                        children: c("Label.IdVerification")
                     }), (0, t.jsx)(n.Typography, {
                         className: "text-body-medium",
-                        children: d("Description.IdVerifiedDialog")
+                        children: c("Description.IdVerifiedDialog")
                     }), (0, t.jsx)(n.Typography, {
                         className: "text-body-medium",
-                        children: d("Description.IdVerifiedDialogReverify")
+                        children: c("Description.IdVerifiedDialogReverify")
                     })]
                 }), (0, t.jsxs)(s.DialogFooter, {
                     className: "flex flex-col gap-xsmall",
@@ -2728,12 +2728,12 @@
                         variant: "Emphasis",
                         className: "fill",
                         onClick: o,
-                        children: d("Action.ContinueWithId")
+                        children: c("Action.ContinueWithId")
                     }), (0, t.jsx)(a.Button, {
                         variant: "Standard",
                         className: "fill",
-                        onClick: c,
-                        children: d("Action.AddAParent")
+                        onClick: d,
+                        children: c("Action.AddAParent")
                     })]
                 })]
             })
@@ -2755,13 +2755,13 @@
             refetchInterval: i = !1
         } = arguments.length > 0 && void 0 !== arguments[0] ? arguments[0] : {}, {
             user: l
-        } = (0, a.useAuthentication)(), o = null == l ? void 0 : l.id, c = null != e ? e : o;
+        } = (0, a.useAuthentication)(), o = null == l ? void 0 : l.id, d = null != e ? e : o;
         return (0, t.useQuery)({
-            queryKey: [...r, null != c ? c : null],
+            queryKey: [...r, null != d ? d : null],
             queryFn: async () => s.default.coreContentGetCreatorEligibility({
-                userId: c
+                userId: d
             }),
-            enabled: n && !!c,
+            enabled: n && !!d,
             refetchInterval: i,
             refetchIntervalInBackground: !0
         })
@@ -2784,7 +2784,7 @@
     e.s(["default", 0, e => {
         let {
             children: t
-        } = e, [n, c] = (0, s.useState)(l), [d, u] = (0, s.useState)(!1), m = (0, s.useCallback)(async e => {
+        } = e, [n, d] = (0, s.useState)(l), [c, u] = (0, s.useState)(!1), m = (0, s.useCallback)(async e => {
             try {
                 let t = await r.default.getFrontendFlagsValues(e),
                     a = Object.assign({}, ...i.map(e => {
@@ -2793,7 +2793,7 @@
                             [e]: null != (a = null == t || null == (s = t.data) ? void 0 : s[e]) && a
                         }
                     }));
-                c(a)
+                d(a)
             } catch (e) {}
         }, []);
         (0, s.useEffect)(() => {
@@ -2810,8 +2810,8 @@
         let p = (0, s.useMemo)(() => ({
             frontendFlags: n,
             getFrontendFlags: m,
-            loadingFrontendFlags: d
-        }), [n, m, d]);
+            loadingFrontendFlags: c
+        }), [n, m, c]);
         return (0, a.jsx)(o.Provider, {
             value: p,
             children: t
@@ -2840,8 +2840,8 @@
                 currentGroup: l,
                 setCurrentGroup: o
             } = (0, s.useGroups)(),
-            c = (0, t.useRef)(!1),
             d = (0, t.useRef)(!1),
+            c = (0, t.useRef)(!1),
             u = (0, t.useMemo)(() => {
                 if (!e.isReady) return null;
                 let t = r(e.query.groupId),
@@ -2860,12 +2860,12 @@
                 return t === u.id
             });
         (0, t.useEffect)(() => {
-            !c.current && null !== u && i && (c.current = !0, "user" === u.kind ? null !== l && o(null) : m && (null == l ? void 0 : l.id) !== u.id && o(u.id))
+            !d.current && null !== u && i && (d.current = !0, "user" === u.kind ? null !== l && o(null) : m && (null == l ? void 0 : l.id) !== u.id && o(u.id))
         }, [u, i, m, l, o]);
         let p = !e.isReady;
         return p || null === u || (p = "group" === u.kind ? !i || m && (null == l ? void 0 : l.id) !== u.id : !i || null !== l), (0, t.useEffect)(() => {
-            if (d.current || !e.isReady || p || void 0 === e.query.groupId && void 0 === e.query.userId) return;
-            d.current = !0;
+            if (c.current || !e.isReady || p || void 0 === e.query.groupId && void 0 === e.query.userId) return;
+            c.current = !0;
             let t = {
                 ...e.query
             };
@@ -2883,125 +2883,125 @@
     var t = e.i(155743);
     e.s(["CategoryDomain", () => t.V1ItemsCategoriesGetCategoryDomainEnum])
 }, 127792, e => {
-    e.q("https://assets.create.roblox.com/9bdd3fab861fa4cb33220923767045e56edce031/_next/static/media/alert_dark.1spa8ixzmujxs.svg")
+    e.q("https://assets.create.roblox.com/1053825d254d01d07d62657678fd4cea0c05af2b/_next/static/media/alert_dark.1spa8ixzmujxs.svg")
 }, 858517, e => {
-    e.q("https://assets.create.roblox.com/9bdd3fab861fa4cb33220923767045e56edce031/_next/static/media/alert_light.3o6_fob3g_8zu.svg")
+    e.q("https://assets.create.roblox.com/1053825d254d01d07d62657678fd4cea0c05af2b/_next/static/media/alert_light.3o6_fob3g_8zu.svg")
 }, 343885, e => {
-    e.q("https://assets.create.roblox.com/9bdd3fab861fa4cb33220923767045e56edce031/_next/static/media/api_key_dark.1k1v6y4zm3j28.svg")
+    e.q("https://assets.create.roblox.com/1053825d254d01d07d62657678fd4cea0c05af2b/_next/static/media/api_key_dark.1k1v6y4zm3j28.svg")
 }, 609794, e => {
-    e.q("https://assets.create.roblox.com/9bdd3fab861fa4cb33220923767045e56edce031/_next/static/media/api_key_light.06t4q4202-77s.svg")
+    e.q("https://assets.create.roblox.com/1053825d254d01d07d62657678fd4cea0c05af2b/_next/static/media/api_key_light.06t4q4202-77s.svg")
 }, 57561, e => {
-    e.q("https://assets.create.roblox.com/9bdd3fab861fa4cb33220923767045e56edce031/_next/static/media/audio_dark.16razgllw2ska.svg")
+    e.q("https://assets.create.roblox.com/1053825d254d01d07d62657678fd4cea0c05af2b/_next/static/media/audio_dark.16razgllw2ska.svg")
 }, 509747, e => {
-    e.q("https://assets.create.roblox.com/9bdd3fab861fa4cb33220923767045e56edce031/_next/static/media/audio_light.3ra073_18pbj-.svg")
+    e.q("https://assets.create.roblox.com/1053825d254d01d07d62657678fd4cea0c05af2b/_next/static/media/audio_light.3ra073_18pbj-.svg")
 }, 475555, e => {
-    e.q("https://assets.create.roblox.com/9bdd3fab861fa4cb33220923767045e56edce031/_next/static/media/avatar_setup_dark.0orjsl7i089hc.svg")
+    e.q("https://assets.create.roblox.com/1053825d254d01d07d62657678fd4cea0c05af2b/_next/static/media/avatar_setup_dark.0orjsl7i089hc.svg")
 }, 538302, e => {
-    e.q("https://assets.create.roblox.com/9bdd3fab861fa4cb33220923767045e56edce031/_next/static/media/avatar_setup_light.32r86q54d7kuh.svg")
+    e.q("https://assets.create.roblox.com/1053825d254d01d07d62657678fd4cea0c05af2b/_next/static/media/avatar_setup_light.32r86q54d7kuh.svg")
 }, 387707, e => {
-    e.q("https://assets.create.roblox.com/9bdd3fab861fa4cb33220923767045e56edce031/_next/static/media/badge_dark.3m45r-3favo3f.svg")
+    e.q("https://assets.create.roblox.com/1053825d254d01d07d62657678fd4cea0c05af2b/_next/static/media/badge_dark.3m45r-3favo3f.svg")
 }, 262135, e => {
-    e.q("https://assets.create.roblox.com/9bdd3fab861fa4cb33220923767045e56edce031/_next/static/media/badge_light.3fxfvj8ub7utb.svg")
+    e.q("https://assets.create.roblox.com/1053825d254d01d07d62657678fd4cea0c05af2b/_next/static/media/badge_light.3fxfvj8ub7utb.svg")
 }, 240731, e => {
-    e.q("https://assets.create.roblox.com/9bdd3fab861fa4cb33220923767045e56edce031/_next/static/media/bar_graph_dark.01vf9sty52re2.svg")
+    e.q("https://assets.create.roblox.com/1053825d254d01d07d62657678fd4cea0c05af2b/_next/static/media/bar_graph_dark.01vf9sty52re2.svg")
 }, 956923, e => {
-    e.q("https://assets.create.roblox.com/9bdd3fab861fa4cb33220923767045e56edce031/_next/static/media/bar_graph_light.1iiixo_d8ur81.svg")
+    e.q("https://assets.create.roblox.com/1053825d254d01d07d62657678fd4cea0c05af2b/_next/static/media/bar_graph_light.1iiixo_d8ur81.svg")
 }, 84362, e => {
-    e.q("https://assets.create.roblox.com/9bdd3fab861fa4cb33220923767045e56edce031/_next/static/media/collaborators_dark.30gxkwssilacj.svg")
+    e.q("https://assets.create.roblox.com/1053825d254d01d07d62657678fd4cea0c05af2b/_next/static/media/collaborators_dark.30gxkwssilacj.svg")
 }, 214665, e => {
-    e.q("https://assets.create.roblox.com/9bdd3fab861fa4cb33220923767045e56edce031/_next/static/media/collaborators_light.3x7fovqhay1x5.svg")
+    e.q("https://assets.create.roblox.com/1053825d254d01d07d62657678fd4cea0c05af2b/_next/static/media/collaborators_light.3x7fovqhay1x5.svg")
 }, 455506, e => {
-    e.q("https://assets.create.roblox.com/9bdd3fab861fa4cb33220923767045e56edce031/_next/static/media/decals_dark.2jpntsljojhzc.svg")
+    e.q("https://assets.create.roblox.com/1053825d254d01d07d62657678fd4cea0c05af2b/_next/static/media/decals_dark.2jpntsljojhzc.svg")
 }, 918290, e => {
-    e.q("https://assets.create.roblox.com/9bdd3fab861fa4cb33220923767045e56edce031/_next/static/media/decals_light.16_gp3tnuc5p_.svg")
+    e.q("https://assets.create.roblox.com/1053825d254d01d07d62657678fd4cea0c05af2b/_next/static/media/decals_light.16_gp3tnuc5p_.svg")
 }, 716933, e => {
-    e.q("https://assets.create.roblox.com/9bdd3fab861fa4cb33220923767045e56edce031/_next/static/media/envelope_dark.2-ouf9shuihi4.svg")
+    e.q("https://assets.create.roblox.com/1053825d254d01d07d62657678fd4cea0c05af2b/_next/static/media/envelope_dark.2-ouf9shuihi4.svg")
 }, 347319, e => {
-    e.q("https://assets.create.roblox.com/9bdd3fab861fa4cb33220923767045e56edce031/_next/static/media/envelope_light.1me9hqye66z7w.svg")
+    e.q("https://assets.create.roblox.com/1053825d254d01d07d62657678fd4cea0c05af2b/_next/static/media/envelope_light.1me9hqye66z7w.svg")
 }, 543657, e => {
-    e.q("https://assets.create.roblox.com/9bdd3fab861fa4cb33220923767045e56edce031/_next/static/media/event_calendar_dark.3lx4_kse68by8.svg")
+    e.q("https://assets.create.roblox.com/1053825d254d01d07d62657678fd4cea0c05af2b/_next/static/media/event_calendar_dark.3lx4_kse68by8.svg")
 }, 850412, e => {
-    e.q("https://assets.create.roblox.com/9bdd3fab861fa4cb33220923767045e56edce031/_next/static/media/event_calendar_light.1pq-t84d90ty1.svg")
+    e.q("https://assets.create.roblox.com/1053825d254d01d07d62657678fd4cea0c05af2b/_next/static/media/event_calendar_light.1pq-t84d90ty1.svg")
 }, 103329, e => {
-    e.q("https://assets.create.roblox.com/9bdd3fab861fa4cb33220923767045e56edce031/_next/static/media/find_people_dark.220q6_cs04hcq.svg")
+    e.q("https://assets.create.roblox.com/1053825d254d01d07d62657678fd4cea0c05af2b/_next/static/media/find_people_dark.220q6_cs04hcq.svg")
 }, 692706, e => {
-    e.q("https://assets.create.roblox.com/9bdd3fab861fa4cb33220923767045e56edce031/_next/static/media/find_people_light.1gkb3pmwc8s2n.svg")
+    e.q("https://assets.create.roblox.com/1053825d254d01d07d62657678fd4cea0c05af2b/_next/static/media/find_people_light.1gkb3pmwc8s2n.svg")
 }, 405654, e => {
-    e.q("https://assets.create.roblox.com/9bdd3fab861fa4cb33220923767045e56edce031/_next/static/media/image_dark.2giew28wx4z86.svg")
+    e.q("https://assets.create.roblox.com/1053825d254d01d07d62657678fd4cea0c05af2b/_next/static/media/image_dark.2giew28wx4z86.svg")
 }, 891409, e => {
-    e.q("https://assets.create.roblox.com/9bdd3fab861fa4cb33220923767045e56edce031/_next/static/media/image_light.0ouq8tcgpznz7.svg")
+    e.q("https://assets.create.roblox.com/1053825d254d01d07d62657678fd4cea0c05af2b/_next/static/media/image_light.0ouq8tcgpznz7.svg")
 }, 758060, e => {
-    e.q("https://assets.create.roblox.com/9bdd3fab861fa4cb33220923767045e56edce031/_next/static/media/leaderboard_dark.301ypg94lbxpv.svg")
+    e.q("https://assets.create.roblox.com/1053825d254d01d07d62657678fd4cea0c05af2b/_next/static/media/leaderboard_dark.301ypg94lbxpv.svg")
 }, 710005, e => {
-    e.q("https://assets.create.roblox.com/9bdd3fab861fa4cb33220923767045e56edce031/_next/static/media/leaderboard_light.43sjz_ibwkiq_.svg")
+    e.q("https://assets.create.roblox.com/1053825d254d01d07d62657678fd4cea0c05af2b/_next/static/media/leaderboard_light.43sjz_ibwkiq_.svg")
 }, 495550, e => {
-    e.q("https://assets.create.roblox.com/9bdd3fab861fa4cb33220923767045e56edce031/_next/static/media/line_chart_dark.0k7qf3mhepo6s.svg")
+    e.q("https://assets.create.roblox.com/1053825d254d01d07d62657678fd4cea0c05af2b/_next/static/media/line_chart_dark.0k7qf3mhepo6s.svg")
 }, 320429, e => {
-    e.q("https://assets.create.roblox.com/9bdd3fab861fa4cb33220923767045e56edce031/_next/static/media/line_chart_light.049gcvvmai0ax.svg")
+    e.q("https://assets.create.roblox.com/1053825d254d01d07d62657678fd4cea0c05af2b/_next/static/media/line_chart_light.049gcvvmai0ax.svg")
 }, 106017, e => {
-    e.q("https://assets.create.roblox.com/9bdd3fab861fa4cb33220923767045e56edce031/_next/static/media/localization_dark.1ia7wat2mwyfi.svg")
+    e.q("https://assets.create.roblox.com/1053825d254d01d07d62657678fd4cea0c05af2b/_next/static/media/localization_dark.1ia7wat2mwyfi.svg")
 }, 821978, e => {
-    e.q("https://assets.create.roblox.com/9bdd3fab861fa4cb33220923767045e56edce031/_next/static/media/localization_light.2jss_xvx2fuq0.svg")
+    e.q("https://assets.create.roblox.com/1053825d254d01d07d62657678fd4cea0c05af2b/_next/static/media/localization_light.2jss_xvx2fuq0.svg")
 }, 766389, e => {
-    e.q("https://assets.create.roblox.com/9bdd3fab861fa4cb33220923767045e56edce031/_next/static/media/lockSecrets_dark.0na6naigcbnkj.svg")
+    e.q("https://assets.create.roblox.com/1053825d254d01d07d62657678fd4cea0c05af2b/_next/static/media/lockSecrets_dark.0na6naigcbnkj.svg")
 }, 374717, e => {
-    e.q("https://assets.create.roblox.com/9bdd3fab861fa4cb33220923767045e56edce031/_next/static/media/lockSecrets_light.0rzix2i1i13lt.svg")
+    e.q("https://assets.create.roblox.com/1053825d254d01d07d62657678fd4cea0c05af2b/_next/static/media/lockSecrets_light.0rzix2i1i13lt.svg")
 }, 756733, e => {
-    e.q("https://assets.create.roblox.com/9bdd3fab861fa4cb33220923767045e56edce031/_next/static/media/makeup_look_dark.26-5-yn8598c9.svg")
+    e.q("https://assets.create.roblox.com/1053825d254d01d07d62657678fd4cea0c05af2b/_next/static/media/makeup_look_dark.26-5-yn8598c9.svg")
 }, 251697, e => {
-    e.q("https://assets.create.roblox.com/9bdd3fab861fa4cb33220923767045e56edce031/_next/static/media/makeup_look_light.0rc05t5n5al4m.svg")
+    e.q("https://assets.create.roblox.com/1053825d254d01d07d62657678fd4cea0c05af2b/_next/static/media/makeup_look_light.0rc05t5n5al4m.svg")
 }, 411118, e => {
-    e.q("https://assets.create.roblox.com/9bdd3fab861fa4cb33220923767045e56edce031/_next/static/media/managed_pricing_dark.2zdkf2-ctboa2.svg")
+    e.q("https://assets.create.roblox.com/1053825d254d01d07d62657678fd4cea0c05af2b/_next/static/media/managed_pricing_dark.2zdkf2-ctboa2.svg")
 }, 839596, e => {
-    e.q("https://assets.create.roblox.com/9bdd3fab861fa4cb33220923767045e56edce031/_next/static/media/managed_pricing_light.0sioq_hruq1qp.svg")
+    e.q("https://assets.create.roblox.com/1053825d254d01d07d62657678fd4cea0c05af2b/_next/static/media/managed_pricing_light.0sioq_hruq1qp.svg")
 }, 729733, e => {
-    e.q("https://assets.create.roblox.com/9bdd3fab861fa4cb33220923767045e56edce031/_next/static/media/meshes_dark.2tlm50ns1pq5o.svg")
+    e.q("https://assets.create.roblox.com/1053825d254d01d07d62657678fd4cea0c05af2b/_next/static/media/meshes_dark.2tlm50ns1pq5o.svg")
 }, 66217, e => {
-    e.q("https://assets.create.roblox.com/9bdd3fab861fa4cb33220923767045e56edce031/_next/static/media/meshes_light.36wh96flp2o3r.svg")
+    e.q("https://assets.create.roblox.com/1053825d254d01d07d62657678fd4cea0c05af2b/_next/static/media/meshes_light.36wh96flp2o3r.svg")
 }, 148865, e => {
-    e.q("https://assets.create.roblox.com/9bdd3fab861fa4cb33220923767045e56edce031/_next/static/media/models_dark.30suu5lj5-ua5.svg")
+    e.q("https://assets.create.roblox.com/1053825d254d01d07d62657678fd4cea0c05af2b/_next/static/media/models_dark.30suu5lj5-ua5.svg")
 }, 45512, e => {
-    e.q("https://assets.create.roblox.com/9bdd3fab861fa4cb33220923767045e56edce031/_next/static/media/models_light.0kiw6k3ejw-rn.svg")
+    e.q("https://assets.create.roblox.com/1053825d254d01d07d62657678fd4cea0c05af2b/_next/static/media/models_light.0kiw6k3ejw-rn.svg")
 }, 706478, e => {
-    e.q("https://assets.create.roblox.com/9bdd3fab861fa4cb33220923767045e56edce031/_next/static/media/models_plugins_parts_dark.3jp6jislnsqf8.svg")
+    e.q("https://assets.create.roblox.com/1053825d254d01d07d62657678fd4cea0c05af2b/_next/static/media/models_plugins_parts_dark.3jp6jislnsqf8.svg")
 }, 166181, e => {
-    e.q("https://assets.create.roblox.com/9bdd3fab861fa4cb33220923767045e56edce031/_next/static/media/models_plugins_parts_light.2nj1xhv0bfg_u.svg")
+    e.q("https://assets.create.roblox.com/1053825d254d01d07d62657678fd4cea0c05af2b/_next/static/media/models_plugins_parts_light.2nj1xhv0bfg_u.svg")
 }, 37474, e => {
-    e.q("https://assets.create.roblox.com/9bdd3fab861fa4cb33220923767045e56edce031/_next/static/media/notifications_dark.2l_rf34_xo6o8.svg")
+    e.q("https://assets.create.roblox.com/1053825d254d01d07d62657678fd4cea0c05af2b/_next/static/media/notifications_dark.2l_rf34_xo6o8.svg")
 }, 147189, e => {
-    e.q("https://assets.create.roblox.com/9bdd3fab861fa4cb33220923767045e56edce031/_next/static/media/notifications_light.3p-b4rzvwwfmj.svg")
+    e.q("https://assets.create.roblox.com/1053825d254d01d07d62657678fd4cea0c05af2b/_next/static/media/notifications_light.3p-b4rzvwwfmj.svg")
 }, 105897, e => {
-    e.q("https://assets.create.roblox.com/9bdd3fab861fa4cb33220923767045e56edce031/_next/static/media/oauth_dark.42jv8--11_1i0.svg")
+    e.q("https://assets.create.roblox.com/1053825d254d01d07d62657678fd4cea0c05af2b/_next/static/media/oauth_dark.42jv8--11_1i0.svg")
 }, 123524, e => {
-    e.q("https://assets.create.roblox.com/9bdd3fab861fa4cb33220923767045e56edce031/_next/static/media/oauth_light.17vwiebwrn8ox.svg")
+    e.q("https://assets.create.roblox.com/1053825d254d01d07d62657678fd4cea0c05af2b/_next/static/media/oauth_light.17vwiebwrn8ox.svg")
 }, 752739, e => {
-    e.q("https://assets.create.roblox.com/9bdd3fab861fa4cb33220923767045e56edce031/_next/static/media/rights_manager_dark.0m7ca17sdbgim.svg")
+    e.q("https://assets.create.roblox.com/1053825d254d01d07d62657678fd4cea0c05af2b/_next/static/media/rights_manager_dark.0m7ca17sdbgim.svg")
 }, 331105, e => {
-    e.q("https://assets.create.roblox.com/9bdd3fab861fa4cb33220923767045e56edce031/_next/static/media/rights_manager_light.1moaenz1cbft0.svg")
+    e.q("https://assets.create.roblox.com/1053825d254d01d07d62657678fd4cea0c05af2b/_next/static/media/rights_manager_light.1moaenz1cbft0.svg")
 }, 564908, e => {
-    e.q("https://assets.create.roblox.com/9bdd3fab861fa4cb33220923767045e56edce031/_next/static/media/run_dark.1sun4tvxh_arh.svg")
+    e.q("https://assets.create.roblox.com/1053825d254d01d07d62657678fd4cea0c05af2b/_next/static/media/run_dark.1sun4tvxh_arh.svg")
 }, 663412, e => {
-    e.q("https://assets.create.roblox.com/9bdd3fab861fa4cb33220923767045e56edce031/_next/static/media/run_light.29f-3jyw910_v.svg")
+    e.q("https://assets.create.roblox.com/1053825d254d01d07d62657678fd4cea0c05af2b/_next/static/media/run_light.29f-3jyw910_v.svg")
 }, 215887, e => {
-    e.q("https://assets.create.roblox.com/9bdd3fab861fa4cb33220923767045e56edce031/_next/static/media/shareLinks_dark.1l5fwuv6cgzmy.svg")
+    e.q("https://assets.create.roblox.com/1053825d254d01d07d62657678fd4cea0c05af2b/_next/static/media/shareLinks_dark.1l5fwuv6cgzmy.svg")
 }, 962803, e => {
-    e.q("https://assets.create.roblox.com/9bdd3fab861fa4cb33220923767045e56edce031/_next/static/media/shareLinks_light.116igf-ldibmu.svg")
+    e.q("https://assets.create.roblox.com/1053825d254d01d07d62657678fd4cea0c05af2b/_next/static/media/shareLinks_light.116igf-ldibmu.svg")
 }, 914865, e => {
-    e.q("https://assets.create.roblox.com/9bdd3fab861fa4cb33220923767045e56edce031/_next/static/media/signin_dark.1k_gzn1-5q0ca.svg")
+    e.q("https://assets.create.roblox.com/1053825d254d01d07d62657678fd4cea0c05af2b/_next/static/media/signin_dark.1k_gzn1-5q0ca.svg")
 }, 818392, e => {
-    e.q("https://assets.create.roblox.com/9bdd3fab861fa4cb33220923767045e56edce031/_next/static/media/signin_light.1o1-jng_ct0y2.svg")
+    e.q("https://assets.create.roblox.com/1053825d254d01d07d62657678fd4cea0c05af2b/_next/static/media/signin_light.1o1-jng_ct0y2.svg")
 }, 173034, e => {
-    e.q("https://assets.create.roblox.com/9bdd3fab861fa4cb33220923767045e56edce031/_next/static/media/token_dark.2qy4jy9ffjhax.svg")
+    e.q("https://assets.create.roblox.com/1053825d254d01d07d62657678fd4cea0c05af2b/_next/static/media/token_dark.2qy4jy9ffjhax.svg")
 }, 780078, e => {
-    e.q("https://assets.create.roblox.com/9bdd3fab861fa4cb33220923767045e56edce031/_next/static/media/token_light.2xc00j5zp1q8_.svg")
+    e.q("https://assets.create.roblox.com/1053825d254d01d07d62657678fd4cea0c05af2b/_next/static/media/token_light.2xc00j5zp1q8_.svg")
 }, 756885, e => {
-    e.q("https://assets.create.roblox.com/9bdd3fab861fa4cb33220923767045e56edce031/_next/static/media/video_dark.2-gdpodjtsjj3.svg")
+    e.q("https://assets.create.roblox.com/1053825d254d01d07d62657678fd4cea0c05af2b/_next/static/media/video_dark.2-gdpodjtsjj3.svg")
 }, 260123, e => {
-    e.q("https://assets.create.roblox.com/9bdd3fab861fa4cb33220923767045e56edce031/_next/static/media/video_game_dark.0tuxtkttj8gcu.svg")
+    e.q("https://assets.create.roblox.com/1053825d254d01d07d62657678fd4cea0c05af2b/_next/static/media/video_game_dark.0tuxtkttj8gcu.svg")
 }, 507792, e => {
-    e.q("https://assets.create.roblox.com/9bdd3fab861fa4cb33220923767045e56edce031/_next/static/media/video_game_light.3l155817mjupj.svg")
+    e.q("https://assets.create.roblox.com/1053825d254d01d07d62657678fd4cea0c05af2b/_next/static/media/video_game_light.3l155817mjupj.svg")
 }, 850994, e => {
-    e.q("https://assets.create.roblox.com/9bdd3fab861fa4cb33220923767045e56edce031/_next/static/media/video_light.1fum3vlxctp7w.svg")
+    e.q("https://assets.create.roblox.com/1053825d254d01d07d62657678fd4cea0c05af2b/_next/static/media/video_light.1fum3vlxctp7w.svg")
 }, 711950, e => {
     "use strict";
     var t = e.i(562991),
@@ -3017,13 +3017,13 @@
             Success: "icon-filled-circle-check",
             Error: "icon-filled-circle-x"
         },
-        c = {
+        d = {
             Info: "var(--color-system-emphasis)",
             Warning: "var(--color-system-warning)",
             Success: "var(--color-extended-green-700, var(--color-system-success))",
             Error: "var(--color-action-alert-foreground)"
         },
-        d = {
+        c = {
             Info: "stroke-emphasis",
             Warning: "stroke-system-warning",
             Success: "stroke-emphasis",
@@ -3094,8 +3094,8 @@
                 severity: g = "Info",
                 primaryActionLabel: f,
                 primaryActionHref: v,
-                primaryActionLinkTarget: b,
-                onPrimaryAction: y,
+                primaryActionLinkTarget: y,
+                onPrimaryAction: b,
                 secondaryActionLabel: A,
                 secondaryActionHref: T,
                 secondaryActionLinkTarget: x,
@@ -3110,14 +3110,14 @@
             N && (F = L ? l.default.createElement(m, {
                 label: f || "",
                 href: v,
-                linkTarget: b,
-                onAction: y,
+                linkTarget: y,
+                onAction: b,
                 variant: "Standard"
             }) : l.default.createElement(p, {
                 label: f || "",
                 href: v,
-                linkTarget: b,
-                onAction: y
+                linkTarget: y,
+                onAction: b
             }));
             let B = L ? l.default.createElement(m, {
                 label: A || "",
@@ -3130,7 +3130,7 @@
                 ref: a,
                 role: M ? "region" : U,
                 "aria-labelledby": M ? D : void 0,
-                className: (0, i.default)("foundation-web-alert relative width-full stroke-standard", "System" === h ? "[border-left-width:0] [border-right-width:0]" : "radius-medium", d[g], E),
+                className: (0, i.default)("foundation-web-alert relative width-full stroke-standard", "System" === h ? "[border-left-width:0] [border-right-width:0]" : "radius-medium", c[g], E),
                 ...k
             }, l.default.createElement("div", {
                 "aria-hidden": "true",
@@ -3158,7 +3158,7 @@
                 size: "Medium",
                 className: "relative",
                 style: {
-                    color: c[g]
+                    color: d[g]
                 }
             }))), l.default.createElement("div", {
                 className: (0, i.default)("flex grow-1 basis-0 min-width-0 items-start gap-x-medium gap-y-small", L ? "flex-col" : "wrap")
@@ -3196,7 +3196,7 @@
                 aspectRatio: i = "1:1",
                 alt: l,
                 containerClassName: o,
-                ...c
+                ...d
             } = e;
             return a.default.createElement("div", {
                 className: (0, t.default)("foundation-web-media clip", s[i], o)
@@ -3204,7 +3204,7 @@
                 ref: r,
                 className: (0, t.default)("foundation-web-media-image", n),
                 alt: l,
-                ...c
+                ...d
             }))
         });
     r.displayName = "Media", e.s(["Media", 0, r])
@@ -3222,8 +3222,8 @@
                 isSideSheetFlush: i = !1,
                 centerSheetSize: l = "Medium",
                 children: o,
-                overlayClassName: c,
-                contentClassName: d,
+                overlayClassName: d,
+                contentClassName: c,
                 onOpenAutoFocus: u,
                 onCloseAutoFocus: m,
                 onPointerDownOutside: p,
@@ -3236,10 +3236,10 @@
                 "data-side": "sideSheet" === t ? a : void 0,
                 "data-flush": "sideSheet" === t ? i : void 0,
                 "data-size": "centerSheet" === t ? l : void 0,
-                className: (0, s.default)("fui-base-sheet-overlay", "foundation-web-portal-zindex fixed inset-[0] flex", c)
+                className: (0, s.default)("fui-base-sheet-overlay", "foundation-web-portal-zindex fixed inset-[0] flex", d)
             }, r.default.createElement(n.Content, {
                 "data-testid": "fui-base-sheet-content",
-                className: (0, s.default)("fui-base-sheet-content relative bg-surface-100 stroke-muted stroke-standard shadow-transient-high", "flex flex-col clip", d),
+                className: (0, s.default)("fui-base-sheet-content relative bg-surface-100 stroke-muted stroke-standard shadow-transient-high", "flex flex-col clip", c),
                 onOpenAutoFocus: u,
                 onCloseAutoFocus: m,
                 onPointerDownOutside: p,
@@ -3272,10 +3272,10 @@
             }
         };
     var o = e.i(167878),
-        c = e.i(199512);
-    let d = (0, r.createContext)(null),
+        d = e.i(199512);
+    let c = (0, r.createContext)(null),
         u = () => {
-            let e = (0, r.useContext)(d);
+            let e = (0, r.useContext)(c);
             if (!e) throw Error("Sheet components must be used within a Sheet");
             return e
         },
@@ -3309,7 +3309,7 @@
         let t, {
                 children: a,
                 centerSheetSize: n = "Medium",
-                largeScreenVariant: c = "center",
+                largeScreenVariant: d = "center",
                 closeLabel: u,
                 className: m,
                 mobilePortraitClassName: p,
@@ -3317,23 +3317,23 @@
                 largeScreenClassName: g,
                 onOpenAutoFocus: f,
                 onCloseAutoFocus: v,
-                onPointerDownOutside: b,
-                onEscapeKeyDown: y,
+                onPointerDownOutside: y,
+                onEscapeKeyDown: b,
                 onInteractOutside: A
             } = e,
             T = (0, o.useMediaQuery)("(orientation: portrait) and (max-width: 600px)"),
             x = (0, o.useMediaQuery)("(orientation: landscape) and (max-height: 600px)");
-        t = T ? "bottomSheet" : x || "side" === c ? "sideSheet" : "centerSheet";
+        t = T ? "bottomSheet" : x || "side" === d ? "sideSheet" : "centerSheet";
         let I = (0, r.useMemo)(() => ({
                 centerSheetSize: n,
-                largeScreenVariant: c,
+                largeScreenVariant: d,
                 closeLabel: u,
                 isPortraitMobile: T,
                 isLandscapeMobile: x,
                 type: t
-            }), [n, c, u, T, x, t]),
+            }), [n, d, u, T, x, t]),
             S = (0, s.default)(m, T && p, x && h, !T && !x && g);
-        return r.default.createElement(d.Provider, {
+        return r.default.createElement(c.Provider, {
             value: I
         }, r.default.createElement(i, {
             type: t,
@@ -3343,8 +3343,8 @@
             contentClassName: S,
             onOpenAutoFocus: null != f ? f : l,
             onCloseAutoFocus: v,
-            onPointerDownOutside: b,
-            onEscapeKeyDown: y,
+            onPointerDownOutside: y,
+            onEscapeKeyDown: b,
             onInteractOutside: A
         }, a))
     }, "SheetDescription", 0, e => r.default.createElement(n.Description, {
@@ -3369,7 +3369,7 @@
             children: i,
             navigation: l,
             utilities: o,
-            visuallyHideTitleText: d
+            visuallyHideTitleText: c
         } = e, {
             closeLabel: m
         } = u(), p = r.default.createElement(n.Title, {
@@ -3379,7 +3379,7 @@
             className: (0, s.default)(a, l ? "padding-left-medium" : "padding-left-xlarge", "padding-right-small padding-y-small", "flex items-center justify-between")
         }, r.default.createElement("div", {
             className: (0, s.default)("flex items-center", l && "gap-xsmall")
-        }, l, d ? r.default.createElement(c.VisuallyHidden, null, p) : p), r.default.createElement("div", {
+        }, l, c ? r.default.createElement(d.VisuallyHidden, null, p) : p), r.default.createElement("div", {
             className: (0, s.default)("flex items-center", o && "gap-xxsmall")
         }, o, r.default.createElement("div", {
             className: "fui-sheet-close-affordance-container"
@@ -3421,13 +3421,13 @@
             Medium: "text-title-medium",
             Large: "text-title-large"
         },
-        c = {
+        d = {
             XSmall: ["text-body-small", "placeholder:text-body-small"],
             Small: ["text-body-small", "placeholder:text-body-small"],
             Medium: ["text-body-medium", "placeholder:text-body-medium"],
             Large: ["text-body-large", "placeholder:text-body-large"]
         },
-        d = n.default.forwardRef((e, d) => {
+        c = n.default.forwardRef((e, c) => {
             let {
                 size: u,
                 variant: m = "Standard",
@@ -3436,8 +3436,8 @@
                 defaultValue: g,
                 isDisabled: f,
                 hasError: v,
-                helperText: b,
-                className: y,
+                helperText: y,
+                className: b,
                 style: A,
                 textareaClassName: T,
                 textareaStyle: x,
@@ -3447,31 +3447,31 @@
             return n.default.createElement("div", {
                 className: (0, r.default)("flex fill flex-col width-full gap-small", {
                     [t.disabledOpacity]: f
-                }, y),
+                }, b),
                 style: A
             }, p && n.default.createElement("label", {
                 htmlFor: w,
                 className: (0, r.default)(o[_], "content-emphasis")
             }, p), n.default.createElement("textarea", {
-                ref: d,
+                ref: c,
                 id: w,
                 "data-testid": "text-area-container",
                 style: x,
-                className: (0, r.default)("foundation-web-text-area foundation-web-input outline-none", "radius-medium content-emphasis placeholder:content-muted", s.INPUT_BACKGROUND_BY_VARIANT[m], s.INPUT_STROKE_BY_VARIANT[m], v ? "stroke-system-alert focus-within:stroke-system-alert" : "stroke-contrast-alpha focus-within:stroke-system-emphasis", c[_], i[_], l[_], T),
+                className: (0, r.default)("foundation-web-text-area foundation-web-input outline-none", "radius-medium content-emphasis placeholder:content-muted", s.INPUT_BACKGROUND_BY_VARIANT[m], s.INPUT_STROKE_BY_VARIANT[m], v ? "stroke-system-alert focus-within:stroke-system-alert" : "stroke-contrast-alpha focus-within:stroke-system-emphasis", d[_], i[_], l[_], T),
                 value: h,
                 defaultValue: null == h ? g : void 0,
                 disabled: f,
-                "aria-describedby": b ? E : void 0,
+                "aria-describedby": y ? E : void 0,
                 ...S
-            }), b && n.default.createElement("span", {
+            }), y && n.default.createElement("span", {
                 id: E,
                 className: (0, r.default)("text-caption-small", {
                     "content-system-alert": v,
                     "content-default": !v
                 })
-            }, b))
+            }, y))
         });
-    d.displayName = "TextArea", e.s(["TextArea", 0, d])
+    c.displayName = "TextArea", e.s(["TextArea", 0, c])
 }, 367808, e => {
     "use strict";
     var t = e.i(194250),
@@ -3482,15 +3482,15 @@
         i = e.i(690569),
         l = e.i(251635),
         o = e.i(787802),
-        c = e.i(221628),
-        d = e.i(396249),
+        d = e.i(221628),
+        c = e.i(396249),
         u = e.i(121880);
 
     function m(e) {
         return (0, i.g)("MuiAlertTitle", e)
     }(0, o.g)("MuiAlertTitle", ["root"]);
     let p = ["className"],
-        h = (0, l.s)(d.T, {
+        h = (0, l.s)(c.T, {
             name: "MuiAlertTitle",
             slot: "Root",
             overridesResolver: (e, t) => t.root
@@ -3520,7 +3520,7 @@
                         root: ["root"]
                     }, m, t)
                 })(a);
-            return (0, c.jsx)(h, (0, n._)({
+            return (0, d.jsx)(h, (0, n._)({
                 gutterBottom: !0,
                 component: "div",
                 ownerState: a,
@@ -3566,17 +3566,17 @@
         i = e.i(690569),
         l = e.i(945146),
         o = e.i(251635),
-        c = e.i(51928),
-        d = e.i(634034),
+        d = e.i(51928),
+        c = e.i(634034),
         u = e.i(221628),
         m = e.i(176595),
         p = e.i(121880),
         h = e.i(105006);
     e.i(465957);
-    var g = (0, d.c)((0, u.jsx)("path", {
+    var g = (0, c.c)((0, u.jsx)("path", {
             d: "M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8z"
         }), "RadioButtonUnchecked"),
-        f = (0, d.c)((0, u.jsx)("path", {
+        f = (0, c.c)((0, u.jsx)("path", {
             d: "M8.465 8.465C9.37 7.56 10.62 7 12 7C14.76 7 17 9.24 17 12C17 13.38 16.44 14.63 15.535 15.535C14.63 16.44 13.38 17 12 17C9.24 17 7 14.76 7 12C7 10.62 7.56 9.37 8.465 8.465Z"
         }), "RadioButtonChecked");
     let v = (0, o.s)("span", {
@@ -3586,12 +3586,12 @@
             position: "relative",
             display: "flex"
         }),
-        b = (0, o.s)(g, {
+        y = (0, o.s)(g, {
             name: "MuiRadioButtonIcon"
         })({
             transform: "scale(1)"
         }),
-        y = (0, o.s)(f, {
+        b = (0, o.s)(f, {
             name: "MuiRadioButtonIcon"
         })(e => {
             let {
@@ -3626,11 +3626,11 @@
         return (0, u.jsxs)(v, {
             className: a.root,
             ownerState: r,
-            children: [(0, u.jsx)(b, {
+            children: [(0, u.jsx)(y, {
                 fontSize: s,
                 className: a.background,
                 ownerState: r
-            }), (0, u.jsx)(y, {
+            }), (0, u.jsx)(b, {
                 fontSize: s,
                 className: a.dot,
                 ownerState: r
@@ -3643,7 +3643,7 @@
     }
     var x = (0, n.g)("MuiRadio", ["root", "checked", "disabled", "colorPrimary", "colorSecondary", "sizeSmall"]);
     let I = ["checked", "checkedIcon", "color", "icon", "name", "onChange", "size", "className"],
-        S = (0, o.s)(c.S, {
+        S = (0, o.s)(d.S, {
             shouldForwardProp: e => (0, o.r)(e) || "classes" === e,
             name: "MuiRadio",
             slot: "Root",
@@ -3682,8 +3682,8 @@
         }),
         w = (0, u.jsx)(A, {}),
         E = a.forwardRef(function(e, t) {
-            var s, r, n, c;
-            let d = (0, p.u)({
+            var s, r, n, d;
+            let c = (0, p.u)({
                     props: e,
                     name: "MuiRadio"
                 }),
@@ -3691,14 +3691,14 @@
                     checked: g,
                     checkedIcon: f = C,
                     color: v = "primary",
-                    icon: b = w,
-                    name: y,
+                    icon: y = w,
+                    name: b,
                     onChange: A,
                     size: x = "medium",
                     className: E
-                } = d,
-                _ = (0, i._)(d, I),
-                k = (0, l._)({}, d, {
+                } = c,
+                _ = (0, i._)(c, I),
+                k = (0, l._)({}, c, {
                     color: v,
                     size: x
                 }),
@@ -3715,10 +3715,10 @@
                 N = a.useContext(m.R),
                 L = g,
                 P = (0, h.c)(A, N && N.onChange),
-                M = y;
-            return N && (void 0 === L && (n = N.value, L = "object" == typeof(c = d.value) && null !== c ? n === c : String(n) === String(c)), void 0 === M && (M = N.name)), (0, u.jsx)(S, (0, l._)({
+                M = b;
+            return N && (void 0 === L && (n = N.value, L = "object" == typeof(d = c.value) && null !== d ? n === d : String(n) === String(d)), void 0 === M && (M = N.name)), (0, u.jsx)(S, (0, l._)({
                 type: "radio",
-                icon: a.cloneElement(b, {
+                icon: a.cloneElement(y, {
                     fontSize: null != (s = w.props.fontSize) ? s : x
                 }),
                 checkedIcon: a.cloneElement(f, {
@@ -3761,14 +3761,14 @@
                 i = e.color,
                 l = e.inputProps,
                 o = e["aria-label"],
-                c = e.className,
-                d = (0, t.a)(e, ["classes", "color", "inputProps", "aria-label", "className"]),
+                d = e.className,
+                c = (0, t.a)(e, ["classes", "color", "inputProps", "aria-label", "className"]),
                 u = _(void 0, {
                     props: {
-                        classes: (0, r.default)(n, c)
+                        classes: (0, r.default)(n, d)
                     }
                 });
-            return a.default.createElement(E, (0, t._)({}, d, {
+            return a.default.createElement(E, (0, t._)({}, c, {
                 classes: u.classes,
                 color: void 0 === i ? "primary" : i,
                 ref: s,
@@ -3809,5 +3809,5 @@
     }])
 }]);
 
-//# debugId=aa076782-a193-e7de-4e73-7fd5cfc31eb8
-//# sourceMappingURL=1a3yu_je7m_mr.js.map
+//# debugId=280cd8f8-cbcf-cee0-a483-77bdebbd348d
+//# sourceMappingURL=0j-jkfqd03uc5.js.map

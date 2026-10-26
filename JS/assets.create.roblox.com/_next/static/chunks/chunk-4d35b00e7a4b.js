@@ -3,7 +3,7 @@
     try {
         var e = "undefined" != typeof globalThis ? globalThis : "undefined" != typeof global ? global : "undefined" != typeof window ? window : "undefined" != typeof self ? self : {},
             n = (new e.Error).stack;
-        n && ((e._debugIds || (e._debugIds = {}))[n] = "fe00a5e9-a710-d81e-1cb1-2662a95b0930")
+        n && ((e._debugIds || (e._debugIds = {}))[n] = "f73d5dad-8089-335c-0192-bd342a602a59")
     } catch (e) {}
 }();
 (globalThis.TURBOPACK || (globalThis.TURBOPACK = [])).push(["object" == typeof document ? document.currentScript : void 0, 531007, e => {
@@ -24,42 +24,42 @@
         u = e.i(881670),
         c = e.i(927868),
         y = e.i(577038);
-    let p = [y.default.QuotaPercentageUsage];
+    let d = [y.default.QuotaPercentageUsage];
     y.default.TopBreakdown;
-    let d = e => (0, c.isValidArrayEnumValue)(p, e.type),
+    let p = e => (0, c.isValidArrayEnumValue)(d, e.type),
         m = y.default,
         T = y.default;
-    e.s(["RAQIV2SummaryType", 0, m, "default", 0, T, "isRAQIV2DoubleMetricSummaryType", 0, d, "isRAQIV2SingleMetricSummaryType", 0, e => !d(e)], 510785);
+    e.s(["RAQIV2SummaryType", 0, m, "default", 0, T, "isRAQIV2DoubleMetricSummaryType", 0, p, "isRAQIV2SingleMetricSummaryType", 0, e => !p(e)], 510785);
     var f = ((t = f || {}).InExperienceCurrency = "inExperienceCurrency", t);
     e.s(["default", 0, f], 548152);
     var R = ((i = {}).PercentageOfFirstPoint = "PercentageOfFirstPoint", i.ScaleBackBy100 = "ScaleBackBy100", i.ScaleBackBy60 = "ScaleBackBy60", i.ScaleBackBy3600 = "ScaleBackBy3600", i.ScaleBackBy1000 = "ScaleBackBy1000", i.ScaleBackBy1000000000 = "ScaleBackBy1000000000", i);
 
-    function A(e) {
+    function v(e) {
         return (t, i) => {
             let [a, n, r] = i[t];
             return [a, null === n ? null : n * e, r]
         }
     }
-    let g = {
+    let A = {
         PercentageOfFirstPoint: (e, t) => {
             let [, i] = t[0], [a, n, r] = t[e], o = null;
             return i && null !== n && (o = n / i), [a, o, r]
         },
-        ScaleBackBy100: A(.01),
-        ScaleBackBy60: A(1 / 60),
-        ScaleBackBy3600: A(1 / 3600),
-        ScaleBackBy1000: A(.001),
-        ScaleBackBy1000000000: A(1e-9)
+        ScaleBackBy100: v(.01),
+        ScaleBackBy60: v(1 / 60),
+        ScaleBackBy3600: v(1 / 3600),
+        ScaleBackBy1000: v(.001),
+        ScaleBackBy1000000000: v(1e-9)
     };
-    e.s(["NumericDataPointTransformerType", () => R, "default", 0, g], 875907);
-    let v = {
+    e.s(["NumericDataPointTransformerType", () => R, "default", 0, A], 875907);
+    let g = {
         defaultTotalSummaryTypes: [{
             type: T.Average
         }]
     };
     n.RAQIV2Metric.ThumbnailWinningSegments;
     let I = e => (0, c.isValidEnumValue)(n.RAQIV2Metric, e) || (0, c.isValidEnumValue)(n.RAQIV2UIMetric, e),
-        D = {
+        M = {
             [n.RAQIV2Metric.VideoServiceExclusivePlaybackSeconds]: {
                 unit: n.RAQIV2MetricUnit.Hours,
                 decimalPrecision: 1
@@ -73,11 +73,11 @@
                 decimalPrecision: 1
             }
         };
-    var M = ((a = {}).WinningSegments = "WinningSegments", a);
-    let C = [{
+    var S = ((a = {}).WinningSegments = "WinningSegments", a);
+    let D = [{
             type: T.Total
         }],
-        S = [{
+        C = [{
             type: T.LastValue
         }],
         h = [10, 50],
@@ -88,50 +88,50 @@
                 }
             },
             [n.RAQIV2Metric.CreatorRewardsLifetimeEstimatedAffiliatePayoutRobux]: {
-                defaultTotalSummaryTypes: C,
+                defaultTotalSummaryTypes: D,
                 columnDisplayConfigOverrides: {
                     tooltipKey: (0, r.translationKey)("Description.CreatorRewardsLifetimeEstimatedAffiliatePayoutRobux", u.TranslationNamespace.Analytics)
                 }
             },
             [n.RAQIV2Metric.CreatorRewardsLifetimeQualifiedReactivations]: {
-                defaultTotalSummaryTypes: C,
+                defaultTotalSummaryTypes: D,
                 columnDisplayConfigOverrides: {
                     tooltipKey: (0, r.translationKey)("Description.CreatorRewardsLifetimeQualifiedReactivations", u.TranslationNamespace.Analytics)
                 }
             },
             [n.RAQIV2Metric.CreatorRewardsLifetimeQualifiedSignups]: {
-                defaultTotalSummaryTypes: C,
+                defaultTotalSummaryTypes: D,
                 columnDisplayConfigOverrides: {
                     tooltipKey: (0, r.translationKey)("Description.CreatorRewardsLifetimeQualifiedSignups", u.TranslationNamespace.Analytics)
                 }
             },
             [n.RAQIV2Metric.CreatorRewardsLifetimeQualifiedSpenders]: {
-                defaultTotalSummaryTypes: C,
+                defaultTotalSummaryTypes: D,
                 columnDisplayConfigOverrides: {
                     tooltipKey: (0, r.translationKey)("Description.CreatorRewardsLifetimeQualifiedSpenders", u.TranslationNamespace.Analytics)
                 }
             },
             [n.RAQIV2Metric.CommunityAnnouncementEventCount]: {
-                defaultTotalSummaryTypes: C
+                defaultTotalSummaryTypes: D
             },
             [n.RAQIV2Metric.CommunityAnnouncementUniqueUsers]: {
-                defaultTotalSummaryTypes: C
+                defaultTotalSummaryTypes: D
             },
             [n.RAQIV2Metric.CommunityAnnouncementNotificationCTR]: {
-                defaultTotalSummaryTypes: S
+                defaultTotalSummaryTypes: C
             },
             [n.RAQIV2Metric.EconomyTransactionAmount]: {
-                defaultTotalSummaryTypes: C,
+                defaultTotalSummaryTypes: D,
                 exploreModeChartType: o.ChartType.Column,
                 specialNumberFormatting: f.InExperienceCurrency
             },
             [n.RAQIV2Metric.EconomyTransactionAmountSinks]: {
-                defaultTotalSummaryTypes: C,
+                defaultTotalSummaryTypes: D,
                 exploreModeChartType: o.ChartType.Column,
                 specialNumberFormatting: f.InExperienceCurrency
             },
             [n.RAQIV2Metric.EconomyTransactionCount]: {
-                defaultTotalSummaryTypes: C,
+                defaultTotalSummaryTypes: D,
                 exploreModeChartType: o.ChartType.Column
             },
             [n.RAQIV2Metric.EconomyAverageWalletBalance]: {
@@ -171,7 +171,7 @@
                 }
             },
             [n.RAQIV2Metric.FunnelStepOverallCompletionRate]: {
-                defaultTotalSummaryTypes: C,
+                defaultTotalSummaryTypes: D,
                 columnDisplayConfigOverrides: {
                     cellBackground: {
                         type: s.CellBackgroundType.ValuePercentageWidthFill,
@@ -181,7 +181,7 @@
                 }
             },
             [n.RAQIV2Metric.FunnelUserOverallCompletionRate]: {
-                defaultTotalSummaryTypes: C,
+                defaultTotalSummaryTypes: D,
                 columnDisplayConfigOverrides: {
                     cellBackground: {
                         type: s.CellBackgroundType.ValuePercentageWidthFill,
@@ -191,37 +191,37 @@
                 }
             },
             [n.RAQIV2Metric.FunnelUserTotalCount]: {
-                defaultTotalSummaryTypes: C
+                defaultTotalSummaryTypes: D
             },
             [n.RAQIV2Metric.FunnelStepTotalCount]: {
-                defaultTotalSummaryTypes: C
+                defaultTotalSummaryTypes: D
             },
             [n.RAQIV2Metric.JourneyTotalUsers]: {
-                defaultTotalSummaryTypes: C
+                defaultTotalSummaryTypes: D
             },
             [n.RAQIV2Metric.JourneyCompletionUsers]: {
-                defaultTotalSummaryTypes: C
+                defaultTotalSummaryTypes: D
             },
             [n.RAQIV2Metric.JourneyEntryTransitions]: {
-                defaultTotalSummaryTypes: C
+                defaultTotalSummaryTypes: D
             },
             [n.RAQIV2Metric.JourneyLastStageTransitions]: {
-                defaultTotalSummaryTypes: C
+                defaultTotalSummaryTypes: D
             },
             [n.RAQIV2Metric.JourneyStageUserCount]: {
-                defaultTotalSummaryTypes: C
+                defaultTotalSummaryTypes: D
             },
             [n.RAQIV2Metric.JourneyStageTransitionCount]: {
-                defaultTotalSummaryTypes: C
+                defaultTotalSummaryTypes: D
             },
             [n.RAQIV2Metric.JourneyNodeUserCount]: {
-                defaultTotalSummaryTypes: C,
+                defaultTotalSummaryTypes: D,
                 columnDisplayConfigOverrides: {
                     tooltipKey: (0, r.translationKey)("Description.JourneyNodeUserCount", u.TranslationNamespace.Analytics)
                 }
             },
             [n.RAQIV2Metric.JourneyNodeUserChurnCount]: {
-                defaultTotalSummaryTypes: C,
+                defaultTotalSummaryTypes: D,
                 columnDisplayConfigOverrides: {
                     tooltipKey: (0, r.translationKey)("Description.JourneyNodeUserChurnCount", u.TranslationNamespace.Analytics)
                 }
@@ -232,13 +232,13 @@
                 }
             },
             [n.RAQIV2Metric.JourneyNodeTransitionCount]: {
-                defaultTotalSummaryTypes: C,
+                defaultTotalSummaryTypes: D,
                 columnDisplayConfigOverrides: {
                     tooltipKey: (0, r.translationKey)("Description.JourneyNodeTransitionCount", u.TranslationNamespace.Analytics)
                 }
             },
             [n.RAQIV2Metric.JourneyNodeTransitionChurnCount]: {
-                defaultTotalSummaryTypes: C,
+                defaultTotalSummaryTypes: D,
                 columnDisplayConfigOverrides: {
                     tooltipKey: (0, r.translationKey)("Description.JourneyNodeTransitionChurnCount", u.TranslationNamespace.Analytics)
                 }
@@ -312,53 +312,9 @@
                     tooltipKey: (0, r.translationKeyWithoutNamespace)("Description.Table.QualifiedPTR")
                 }
             },
-            [n.RAQIV2Metric.UniqueUsersWithPlaySessionsMigration]: {
-                defaultTotalSummaryTypes: [{
-                    type: T.Average
-                }, {
-                    type: T.Total
-                }],
-                columnDisplayConfigOverrides: {
-                    titleKey: (0, r.translationKey)("Title.Table.UsersWithPlays", u.TranslationNamespace.Analytics)
-                }
-            },
-            [n.RAQIV2Metric.UniqueUsersWithImpressionsMigration]: {
-                defaultTotalSummaryTypes: [{
-                    type: T.Average
-                }, {
-                    type: T.Total
-                }],
-                columnDisplayConfigOverrides: {
-                    titleKey: (0, r.translationKey)("Title.Table.UsersWithImpressions", u.TranslationNamespace.Analytics),
-                    tooltipKey: (0, r.translationKeyWithoutNamespace)("Description.Table.UsersWithImpressions")
-                }
-            },
-            [n.RAQIV2Metric.EndToEndCVRMigration]: {
-                columnDisplayConfigOverrides: {
-                    titleKey: (0, r.translationKey)("Title.Table.ConversionRate", u.TranslationNamespace.Analytics),
-                    tooltipKey: (0, r.translationKeyWithoutNamespace)("Description.Table.ConversionRate")
-                }
-            },
             [n.RAQIV2Metric.ErrorCount]: {
                 columnDisplayConfigOverrides: {
                     columnAlignment: "left"
-                }
-            },
-            [n.RAQIV2Metric.QualifiedUniqueUsersWithPlaySessionsMigration]: {
-                defaultTotalSummaryTypes: [{
-                    type: T.Average
-                }, {
-                    type: T.Total
-                }],
-                columnDisplayConfigOverrides: {
-                    titleKey: (0, r.translationKey)("Title.Table.QualifiedUsersWithPlays", u.TranslationNamespace.Analytics),
-                    tooltipKey: (0, r.translationKeyWithoutNamespace)("Description.Table.QualifiedUsersWithPlays")
-                }
-            },
-            [n.RAQIV2Metric.QualifiedEndToEndCVRMigration]: {
-                columnDisplayConfigOverrides: {
-                    titleKey: (0, r.translationKey)("Title.Table.QualifiedPTR", u.TranslationNamespace.Analytics),
-                    tooltipKey: (0, r.translationKeyWithoutNamespace)("Description.Table.QualifiedPTR")
                 }
             },
             [n.RAQIV2Metric.ComputeEfficiency]: {
@@ -454,96 +410,6 @@
                     tooltipKey: (0, r.translationKeyWithoutNamespace)("Description.Table.UsersDetailPageCTR")
                 }
             },
-            [n.RAQIV2Metric.Attribution1DPayerConversionRatioMigration]: {
-                columnDisplayConfigOverrides: {
-                    titleKey: (0, r.translationKey)("Title.Table.PayerConversion1D", u.TranslationNamespace.Analytics),
-                    tooltipKey: (0, r.translationKeyWithoutNamespace)("Description.Table.PayerConversion1D")
-                }
-            },
-            [n.RAQIV2Metric.Attribution1DPlaytimePerUserInMinutesMigration]: {
-                columnDisplayConfigOverrides: {
-                    titleKey: (0, r.translationKey)("Title.Table.PlaytimePerUser1D", u.TranslationNamespace.Analytics),
-                    tooltipKey: (0, r.translationKeyWithoutNamespace)("Description.Table.PlaytimePerUser1D")
-                }
-            },
-            [n.RAQIV2Metric.Attribution1DRobuxPerUserMigration]: {
-                columnDisplayConfigOverrides: {
-                    titleKey: (0, r.translationKey)("Title.Table.RevenuePerUser1D", u.TranslationNamespace.Analytics),
-                    tooltipKey: (0, r.translationKeyWithoutNamespace)("Description.Table.RevenuePerUser1D")
-                }
-            },
-            [n.RAQIV2Metric.Attribution30DPayerConversionRatioMigration]: {
-                columnDisplayConfigOverrides: {
-                    titleKey: (0, r.translationKey)("Title.Table.PayerConversion30D", u.TranslationNamespace.Analytics),
-                    tooltipKey: (0, r.translationKeyWithoutNamespace)("Description.Table.PayerConversion30D")
-                }
-            },
-            [n.RAQIV2Metric.Attribution30DPlaytimePerUserInMinutesMigration]: {
-                columnDisplayConfigOverrides: {
-                    titleKey: (0, r.translationKey)("Title.Table.PlaytimePerUser30D", u.TranslationNamespace.Analytics),
-                    tooltipKey: (0, r.translationKeyWithoutNamespace)("Description.Table.PlaytimePerUser30D")
-                }
-            },
-            [n.RAQIV2Metric.Attribution30DRobuxPerUserMigration]: {
-                columnDisplayConfigOverrides: {
-                    titleKey: (0, r.translationKey)("Title.Table.RevenuePerUser30D", u.TranslationNamespace.Analytics),
-                    tooltipKey: (0, r.translationKeyWithoutNamespace)("Description.Table.RevenuePerUser30D")
-                }
-            },
-            [n.RAQIV2Metric.Attribution7DPayerConversionRatioMigration]: {
-                columnDisplayConfigOverrides: {
-                    titleKey: (0, r.translationKey)("Title.Table.PayerConversion7D", u.TranslationNamespace.Analytics),
-                    tooltipKey: (0, r.translationKeyWithoutNamespace)("Description.Table.PayerConversion7D")
-                }
-            },
-            [n.RAQIV2Metric.Attribution7DPlaytimePerUserInMinutesMigration]: {
-                columnDisplayConfigOverrides: {
-                    titleKey: (0, r.translationKey)("Title.Table.PlaytimePerUser7D", u.TranslationNamespace.Analytics),
-                    tooltipKey: (0, r.translationKeyWithoutNamespace)("Description.Table.PlaytimePerUser7D")
-                }
-            },
-            [n.RAQIV2Metric.Attribution7DRobuxPerUserMigration]: {
-                columnDisplayConfigOverrides: {
-                    titleKey: (0, r.translationKey)("Title.Table.RevenuePerUser7D", u.TranslationNamespace.Analytics),
-                    tooltipKey: (0, r.translationKeyWithoutNamespace)("Description.Table.RevenuePerUser7D")
-                }
-            },
-            [n.RAQIV2Metric.AttributionD1RetentionRatioMigration]: {
-                columnDisplayConfigOverrides: {
-                    titleKey: (0, r.translationKey)("Title.Table.D1Retention", u.TranslationNamespace.Analytics),
-                    tooltipKey: (0, r.translationKeyWithoutNamespace)("Description.Table.D1Retention")
-                }
-            },
-            [n.RAQIV2Metric.AttributionD30RetentionRatioMigration]: {
-                columnDisplayConfigOverrides: {
-                    titleKey: (0, r.translationKey)("Title.Table.D30Retention", u.TranslationNamespace.Analytics),
-                    tooltipKey: (0, r.translationKeyWithoutNamespace)("Description.Table.D30Retention")
-                }
-            },
-            [n.RAQIV2Metric.AttributionD7RetentionRatioMigration]: {
-                columnDisplayConfigOverrides: {
-                    titleKey: (0, r.translationKey)("Title.Table.D7Retention", u.TranslationNamespace.Analytics),
-                    tooltipKey: (0, r.translationKeyWithoutNamespace)("Description.Table.D7Retention")
-                }
-            },
-            [n.RAQIV2Metric.UniqueUsersWithClicksMigration]: {
-                columnDisplayConfigOverrides: {
-                    titleKey: (0, r.translationKey)("Title.Table.UsersWithDetailPageVisits", u.TranslationNamespace.Analytics),
-                    tooltipKey: (0, r.translationKeyWithoutNamespace)("Description.Table.UsersWithDetailPageVisits")
-                }
-            },
-            [n.RAQIV2Metric.ImpressionCVRMigration]: {
-                columnDisplayConfigOverrides: {
-                    titleKey: (0, r.translationKey)("Title.Table.UsersImpressionCTR", u.TranslationNamespace.Analytics),
-                    tooltipKey: (0, r.translationKeyWithoutNamespace)("Description.Table.UsersImpressionCTR")
-                }
-            },
-            [n.RAQIV2Metric.ClickCVRMigration]: {
-                columnDisplayConfigOverrides: {
-                    titleKey: (0, r.translationKey)("Title.Table.UsersDetailPageCTR", u.TranslationNamespace.Analytics),
-                    tooltipKey: (0, r.translationKeyWithoutNamespace)("Description.Table.UsersDetailPageCTR")
-                }
-            },
             [n.RAQIV2Metric.DailyRevenue]: {
                 defaultTotalSummaryTypes: [{
                     type: T.Average
@@ -553,10 +419,10 @@
                 loggingMetricOverride: "Robux"
             },
             [n.RAQIV2Metric.ItemMonetizationRevenue]: {
-                defaultTotalSummaryTypes: C
+                defaultTotalSummaryTypes: D
             },
             [n.RAQIV2Metric.ItemMonetizationSales]: {
-                defaultTotalSummaryTypes: C
+                defaultTotalSummaryTypes: D
             },
             [n.RAQIV2Metric.AverageSessionLengthMinutes]: {
                 loggingMetricOverride: "AveragePlayTime"
@@ -565,10 +431,10 @@
                 loggingMetricOverride: "AveragePlayTime"
             },
             [n.RAQIV2Metric.ThumbnailImpressions]: {
-                defaultTotalSummaryTypes: C
+                defaultTotalSummaryTypes: D
             },
             [n.RAQIV2Metric.ThumbnailQualifiedPlays]: {
-                defaultTotalSummaryTypes: C
+                defaultTotalSummaryTypes: D
             },
             [n.RAQIV2Metric.TotalSessionsEndedInBucket]: {
                 defaultTotalSummaryTypes: [{
@@ -637,97 +503,97 @@
                 }
             },
             [n.RAQIV2Metric.ItemAvatar3dLimitedAvailableQuantity]: {
-                defaultTotalSummaryTypes: C
+                defaultTotalSummaryTypes: D
             },
             [n.RAQIV2Metric.ItemAvatar3dLimitedTotalQuantity]: {
-                defaultTotalSummaryTypes: C
+                defaultTotalSummaryTypes: D
             },
             [n.RAQIV2Metric.ItemLifetimeCreatorEarning]: {
-                defaultTotalSummaryTypes: C
+                defaultTotalSummaryTypes: D
             },
             [n.RAQIV2Metric.ItemLifetimeRebateAmount]: {
-                defaultTotalSummaryTypes: C
+                defaultTotalSummaryTypes: D
             },
             [n.RAQIV2Metric.ItemLifetimeRobuxSpent]: {
-                defaultTotalSummaryTypes: C
+                defaultTotalSummaryTypes: D
             },
             [n.RAQIV2Metric.ItemLifetimeTransactionCount]: {
-                defaultTotalSummaryTypes: C
+                defaultTotalSummaryTypes: D
             },
             [n.RAQIV2Metric.ItemLimitedSoldPercentage]: {
-                defaultTotalSummaryTypes: C
+                defaultTotalSummaryTypes: D
             },
             [n.RAQIV2Metric.ItemPublishAdvance]: {
-                defaultTotalSummaryTypes: C
+                defaultTotalSummaryTypes: D
             },
             [n.RAQIV2Metric.ItemTotalCreatorEarning]: {
-                defaultTotalSummaryTypes: C,
+                defaultTotalSummaryTypes: D,
                 columnDisplayConfigOverrides: {
                     titleKey: (0, r.translationKey)("Label.Revenue", u.TranslationNamespace.AvatarAnalytics)
                 }
             },
             [n.RAQIV2Metric.ItemTotalRobuxSpent]: {
-                defaultTotalSummaryTypes: C
+                defaultTotalSummaryTypes: D
             },
             [n.RAQIV2Metric.ItemTotalTransactionCount]: {
-                defaultTotalSummaryTypes: C,
+                defaultTotalSummaryTypes: D,
                 columnDisplayConfigOverrides: {
                     titleKey: (0, r.translationKey)("Title.Table.ItemTotalTransactionCount", u.TranslationNamespace.Analytics)
                 }
             },
             [n.RAQIV2Metric.StoreTransactions]: {
-                defaultTotalSummaryTypes: C
+                defaultTotalSummaryTypes: D
             },
             [n.RAQIV2Metric.StoreRevenue]: {
-                defaultTotalSummaryTypes: C
+                defaultTotalSummaryTypes: D
             },
             [n.RAQIV2Metric.ShareLinkAttribution1DPayerConversionRatio]: {
-                defaultTotalSummaryTypes: C
+                defaultTotalSummaryTypes: D
             },
             [n.RAQIV2Metric.ShareLinkAttribution1DPlaytimePerUserInMinutes]: {
-                defaultTotalSummaryTypes: C
+                defaultTotalSummaryTypes: D
             },
             [n.RAQIV2Metric.ShareLinkAttribution1DRobuxPerUser]: {
-                defaultTotalSummaryTypes: C
+                defaultTotalSummaryTypes: D
             },
             [n.RAQIV2Metric.ShareLinkAttribution30DPayerConversionRatio]: {
-                defaultTotalSummaryTypes: C,
+                defaultTotalSummaryTypes: D,
                 columnDisplayConfigOverrides: {
                     titleKey: (0, r.translationKey)("Title.Table.PayerConversion30D", u.TranslationNamespace.Analytics),
                     tooltipKey: (0, r.translationKeyWithoutNamespace)("Description.Table.PayerConversion30D")
                 }
             },
             [n.RAQIV2Metric.ShareLinkAttribution30DPlaytimePerUserInMinutes]: {
-                defaultTotalSummaryTypes: C
+                defaultTotalSummaryTypes: D
             },
             [n.RAQIV2Metric.ShareLinkAttribution30DRobuxPerUser]: {
-                defaultTotalSummaryTypes: C,
+                defaultTotalSummaryTypes: D,
                 columnDisplayConfigOverrides: {
                     titleKey: (0, r.translationKey)("Title.Table.RevenuePerUser30D", u.TranslationNamespace.Analytics),
                     tooltipKey: (0, r.translationKeyWithoutNamespace)("Description.Table.RevenuePerUser30D")
                 }
             },
             [n.RAQIV2Metric.ShareLinkAttribution7DPayerConversionRatio]: {
-                defaultTotalSummaryTypes: C
+                defaultTotalSummaryTypes: D
             },
             [n.RAQIV2Metric.ShareLinkAttribution7DPlaytimePerUserInMinutes]: {
-                defaultTotalSummaryTypes: C,
+                defaultTotalSummaryTypes: D,
                 columnDisplayConfigOverrides: {
                     titleKey: (0, r.translationKey)("Title.Table.PlaytimePerUser7D", u.TranslationNamespace.Analytics),
                     tooltipKey: (0, r.translationKeyWithoutNamespace)("Description.Table.PlaytimePerUser7D")
                 }
             },
             [n.RAQIV2Metric.ShareLinkAttribution7DRobuxPerUser]: {
-                defaultTotalSummaryTypes: C
+                defaultTotalSummaryTypes: D
             },
             [n.RAQIV2Metric.ShareLinkAttributionD1RetentionRatio]: {
-                defaultTotalSummaryTypes: C
+                defaultTotalSummaryTypes: D
             },
             [n.RAQIV2Metric.ShareLinkAttributionD30RetentionRatio]: {
-                defaultTotalSummaryTypes: C
+                defaultTotalSummaryTypes: D
             },
             [n.RAQIV2Metric.ShareLinkAttributionD7RetentionRatio]: {
-                defaultTotalSummaryTypes: C,
+                defaultTotalSummaryTypes: D,
                 columnDisplayConfigOverrides: {
                     tooltipKey: (0, r.translationKeyWithoutNamespace)("Description.Table.D7Retention")
                 }
@@ -738,19 +604,19 @@
                 }
             },
             [n.RAQIV2Metric.ShareLinkQualifiedUniqueUsersWithPlaySessions]: {
-                defaultTotalSummaryTypes: C,
+                defaultTotalSummaryTypes: D,
                 columnDisplayConfigOverrides: {
                     tooltipKey: (0, r.translationKeyWithoutNamespace)("Description.Table.QualifiedUsersWithPlays")
                 }
             },
             [n.RAQIV2Metric.ShareLinkUniqueUsersWithClicks]: {
-                defaultTotalSummaryTypes: C,
+                defaultTotalSummaryTypes: D,
                 columnDisplayConfigOverrides: {
                     tooltipKey: (0, r.translationKeyWithoutNamespace)("Description.Table.UsersWithDetailPageVisits")
                 }
             },
             [n.RAQIV2Metric.ShareLinkUniqueUsersWithPlaySessions]: {
-                defaultTotalSummaryTypes: C
+                defaultTotalSummaryTypes: D
             },
             [n.RAQIV2Metric.AffiliateLinkDailyAverageRobuxBookingsPerReactivationSpender]: {
                 columnDisplayConfigOverrides: {
@@ -899,19 +765,19 @@
                 }
             },
             [n.RAQIV2Metric.FriendReferralAverageRobuxBookingsPerSpender]: {
-                defaultTotalSummaryTypes: C
+                defaultTotalSummaryTypes: D
             },
             [n.RAQIV2Metric.FriendReferralLifetimeEstimatedAffiliatePayoutRobux]: {
-                defaultTotalSummaryTypes: C
+                defaultTotalSummaryTypes: D
             },
             [n.RAQIV2Metric.FriendReferralLifetimeQualifiedSignups]: {
-                defaultTotalSummaryTypes: C
+                defaultTotalSummaryTypes: D
             },
             [n.RAQIV2Metric.FriendReferralLifetimeQualifiedSpenders]: {
-                defaultTotalSummaryTypes: C
+                defaultTotalSummaryTypes: D
             },
             [n.RAQIV2Metric.FriendReferralLifetimeVisits]: {
-                defaultTotalSummaryTypes: C
+                defaultTotalSummaryTypes: D
             },
             [n.RAQIV2Metric.PlayerFeedbackVotesCount]: {
                 defaultTotalSummaryTypes: [],
@@ -1084,70 +950,70 @@
                 exploreModeChartType: o.ChartType.Spline
             },
             [n.RAQIV2Metric.CommerceGMV]: {
-                defaultTotalSummaryTypes: C
+                defaultTotalSummaryTypes: D
             },
             [n.RAQIV2Metric.CommerceQuantitySold]: {
-                defaultTotalSummaryTypes: C
+                defaultTotalSummaryTypes: D
             },
             [n.RAQIV2Metric.CommerceClicks]: {
-                defaultTotalSummaryTypes: C
+                defaultTotalSummaryTypes: D
             },
             [n.RAQIV2Metric.CommerceImpressions]: {
-                defaultTotalSummaryTypes: C
+                defaultTotalSummaryTypes: D
             },
             [n.RAQIV2Metric.CommerceOrders]: {
-                defaultTotalSummaryTypes: C
+                defaultTotalSummaryTypes: D
             },
             [n.RAQIV2Metric.CommerceCheckouts]: {
-                defaultTotalSummaryTypes: C
+                defaultTotalSummaryTypes: D
             },
             [n.RAQIV2Metric.CommerceUniqueClicks]: {
-                defaultTotalSummaryTypes: C
+                defaultTotalSummaryTypes: D
             },
             [n.RAQIV2Metric.CommerceUniqueImpressions]: {
-                defaultTotalSummaryTypes: C
+                defaultTotalSummaryTypes: D
             },
             [n.RAQIV2Metric.CommerceUniqueCheckouts]: {
-                defaultTotalSummaryTypes: C
+                defaultTotalSummaryTypes: D
             },
             [n.RAQIV2Metric.CommerceUniqueOrders]: {
-                defaultTotalSummaryTypes: C
+                defaultTotalSummaryTypes: D
             },
             [n.RAQIV2Metric.AdsPublisherReportingTotalRevenueRobux]: {
-                defaultTotalSummaryTypes: C
+                defaultTotalSummaryTypes: D
             },
             [n.RAQIV2Metric.AdsPublisherReportingTotalImpressions]: {
-                defaultTotalSummaryTypes: C
+                defaultTotalSummaryTypes: D
             },
             [n.RAQIV2Metric.AdsPublisherReportingVideo2DRevenueRobux]: {
-                defaultTotalSummaryTypes: C
+                defaultTotalSummaryTypes: D
             },
             [n.RAQIV2Metric.AdsPublisherReportingVideo2DImpressions]: {
-                defaultTotalSummaryTypes: C
+                defaultTotalSummaryTypes: D
             },
             [n.RAQIV2Metric.AdsPublisherReportingVideo2DDailyUniqueViewer]: {
-                defaultTotalSummaryTypes: C
+                defaultTotalSummaryTypes: D
             },
             [n.RAQIV2Metric.CommunityGroupPageViews]: {
-                defaultTotalSummaryTypes: C
+                defaultTotalSummaryTypes: D
             },
             [n.RAQIV2Metric.CommunityGroupPageUniqueVisitors]: {
-                defaultTotalSummaryTypes: C
+                defaultTotalSummaryTypes: D
             },
             [n.RAQIV2Metric.CommunityMembershipChangeEvents]: {
-                defaultTotalSummaryTypes: C
+                defaultTotalSummaryTypes: D
             },
             [n.RAQIV2Metric.CommunityForumContentEventCount]: {
-                defaultTotalSummaryTypes: C
+                defaultTotalSummaryTypes: D
             },
             [n.RAQIV2Metric.CommunityForumContentUniqueUsers]: {
-                defaultTotalSummaryTypes: C
+                defaultTotalSummaryTypes: D
             },
             [n.RAQIV2Metric.CommunityMembershipCount]: {
-                defaultTotalSummaryTypes: S
+                defaultTotalSummaryTypes: C
             },
             [n.RAQIV2Metric.VideoServiceExclusivePlaybackSeconds]: {
-                defaultTotalSummaryTypes: C,
+                defaultTotalSummaryTypes: D,
                 dataPointTransformerType: R.ScaleBackBy3600
             },
             [n.RAQIV2Metric.BandwidthTotalRecvMaxBytes]: {
@@ -1186,14 +1052,14 @@
             let t = n.RAQIV2MetricDisplayConfig[e],
                 i = t.valueType === n.RAQIV2MetricValueType.Numeric ? V[e] : P[e],
                 a = {
-                    ...v,
+                    ...g,
                     ...t,
                     ...i
                 },
-                r = D[e];
+                r = M[e];
             return null != r && (a.unit = r.unit, a.decimalPrecision = r.decimalPrecision), a
         };
-    e.s(["RAQIV2MetricValueRendererType", () => M, "default", 0, K, "getPreferredChartType", 0, e => {
+    e.s(["RAQIV2MetricValueRendererType", () => S, "default", 0, K, "getPreferredChartType", 0, e => {
         var t;
         return e && null != (t = K(e).exploreModeChartType) ? t : o.ChartType.Spline
     }, "isNumericUIMetric", 0, e => {
@@ -1493,7 +1359,7 @@
         }
     }
 
-    function p(e) {
+    function d(e) {
         var i;
         return null == (i = e) ? i : {
             nodeId: (0, t.exists)(i, "nodeId") ? i.nodeId : void 0,
@@ -1508,7 +1374,7 @@
         }
     }
 
-    function d(e) {
+    function p(e) {
         if (void 0 !== e) return null === e ? null : {
             input: e.input,
             dimension: e.dimension,
@@ -1552,7 +1418,7 @@
                     }(e.topN),
                     pseudoDimensionValues: e.pseudoDimensionValues,
                     breakdownSpecs: void 0 === e.breakdownSpecs ? void 0 : e.breakdownSpecs.map(l),
-                    dynamicFilterBindings: void 0 === e.dynamicFilterBindings ? void 0 : e.dynamicFilterBindings.map(d),
+                    dynamicFilterBindings: void 0 === e.dynamicFilterBindings ? void 0 : e.dynamicFilterBindings.map(p),
                     limit: e.limit
                 }
             }(e.queryConfig),
@@ -1614,7 +1480,7 @@
         }
     }
 
-    function A(e) {
+    function v(e) {
         var i, a;
         return null == (i = e) ? i : {
             nodeId: (0, t.exists)(i, "nodeId") ? i.nodeId : void 0,
@@ -1632,7 +1498,7 @@
         }
     }
 
-    function g(e) {
+    function A(e) {
         if (void 0 !== e) return null === e ? null : {
             namespace: e.namespace,
             name: e.name,
@@ -1640,7 +1506,7 @@
         }
     }
 
-    function v(e) {
+    function g(e) {
         var i, a;
         return null == (i = e) ? i : {
             dimension: (0, t.exists)(i, "dimension") ? null == (a = i.dimension) ? a : {
@@ -1661,7 +1527,7 @@
         }
     }
 
-    function D(e, i) {
+    function M(e, i) {
         var a, n, r, o, s, l;
         return null == e ? e : {
             path: (0, t.exists)(e, "path") ? e.path : void 0,
@@ -1683,14 +1549,14 @@
                 truncated: (0, t.exists)(o, "truncated") ? o.truncated : void 0
             } : void 0,
             dimensionValuesResult: (0, t.exists)(e, "dimensionValuesResult") ? null == (s = e.dimensionValuesResult) ? s : {
-                values: (0, t.exists)(s, "values") ? s.values.map(v) : void 0
+                values: (0, t.exists)(s, "values") ? s.values.map(g) : void 0
             } : void 0,
             metricMetadataResult: (0, t.exists)(e, "metricMetadataResult") ? null == (l = e.metricMetadataResult) ? l : {
                 metadata: (0, t.exists)(l, "metadata") ? l.metadata.map(I) : void 0
             } : void 0
         }
     }
-    var M = function(e) {
+    var S = function(e) {
         function l() {
             return null !== e && e.apply(this, arguments) || this
         }
@@ -1742,7 +1608,7 @@
                                 return null == e ? e : {
                                     result: (0, t.exists)(e, "result") ? null == (i = e.result) ? i : {
                                         success: (0, t.exists)(i, "success") ? i.success : void 0,
-                                        outputs: (0, t.exists)(i, "outputs") ? i.outputs.map(A) : void 0,
+                                        outputs: (0, t.exists)(i, "outputs") ? i.outputs.map(v) : void 0,
                                         metadata: (0, t.exists)(i, "metadata") ? null == (a = i.metadata) ? a : {
                                             totalExecutionTimeMs: (0, t.exists)(a, "totalExecutionTimeMs") ? a.totalExecutionTimeMs : void 0,
                                             traceId: (0, t.exists)(a, "traceId") ? a.traceId : void 0,
@@ -1756,7 +1622,7 @@
                                                 maxFanOut: (0, t.exists)(n, "maxFanOut") ? n.maxFanOut : void 0,
                                                 rootCount: (0, t.exists)(n, "rootCount") ? n.rootCount : void 0
                                             } : void 0,
-                                            nodeTimings: (0, t.exists)(a, "nodeTimings") ? a.nodeTimings.map(p) : void 0
+                                            nodeTimings: (0, t.exists)(a, "nodeTimings") ? a.nodeTimings.map(d) : void 0
                                         } : void 0,
                                         errors: (0, t.exists)(i, "errors") ? i.errors.map(y) : void 0,
                                         warnings: (0, t.exists)(i, "warnings") ? i.warnings : void 0,
@@ -1862,7 +1728,7 @@
                                             if (void 0 !== e) return null === e ? null : {
                                                 resourceType: e.resourceType,
                                                 resourceId: e.resourceId,
-                                                dimensions: void 0 === e.dimensions ? void 0 : e.dimensions.map(g),
+                                                dimensions: void 0 === e.dimensions ? void 0 : e.dimensions.map(A),
                                                 startTime: e.startTime,
                                                 endTime: e.endTime,
                                                 limit: e.limit,
@@ -1876,7 +1742,7 @@
                         case 1:
                             return o = n.sent(), [2, new t.JSONApiResponse(o, function(e) {
                                 return null == e ? e : {
-                                    operation: (0, t.exists)(e, "operation") ? D(e.operation) : void 0
+                                    operation: (0, t.exists)(e, "operation") ? M(e.operation) : void 0
                                 }
                             })]
                     }
@@ -1920,7 +1786,7 @@
                         case 1:
                             return o = n.sent(), [2, new t.JSONApiResponse(o, function(e) {
                                 return null == e ? e : {
-                                    operation: (0, t.exists)(e, "operation") ? D(e.operation) : void 0
+                                    operation: (0, t.exists)(e, "operation") ? M(e.operation) : void 0
                                 }
                             })]
                     }
@@ -1977,7 +1843,7 @@
                         case 1:
                             return o = n.sent(), [2, new t.JSONApiResponse(o, function(e) {
                                 return null == e ? e : {
-                                    operation: (0, t.exists)(e, "operation") ? D(e.operation) : void 0
+                                    operation: (0, t.exists)(e, "operation") ? M(e.operation) : void 0
                                 }
                             })]
                     }
@@ -2013,7 +1879,7 @@
                         case 1:
                             return o = n.sent(), [2, new t.JSONApiResponse(o, function(e) {
                                 return null == e ? e : {
-                                    operation: (0, t.exists)(e, "operation") ? D(e.operation) : void 0
+                                    operation: (0, t.exists)(e, "operation") ? M(e.operation) : void 0
                                 }
                             })]
                     }
@@ -2071,7 +1937,7 @@
             })
         }, l
     }(t.BaseAPI);
-    e.s(["AnalyticsQueryGatewayAPIApi", 0, M, "DataStatus", 0, {
+    e.s(["AnalyticsQueryGatewayAPIApi", 0, S, "DataStatus", 0, {
         Invalid: "DATA_STATUS_INVALID",
         Valid: "DATA_STATUS_VALID",
         InProgress: "DATA_STATUS_IN_PROGRESS",
@@ -2139,5 +2005,5 @@
     }])
 }]);
 
-//# debugId=fe00a5e9-a710-d81e-1cb1-2662a95b0930
-//# sourceMappingURL=1iewseuzt50c1.js.map
+//# debugId=f73d5dad-8089-335c-0192-bd342a602a59
+//# sourceMappingURL=191lfclg-kqdi.js.map

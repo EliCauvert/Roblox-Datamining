@@ -3,7 +3,7 @@
     try {
         var e = "undefined" != typeof globalThis ? globalThis : "undefined" != typeof global ? global : "undefined" != typeof window ? window : "undefined" != typeof self ? self : {},
             n = (new e.Error).stack;
-        n && ((e._debugIds || (e._debugIds = {}))[n] = "233c1bba-4f6e-fd39-324c-40b2ef87eb87")
+        n && ((e._debugIds || (e._debugIds = {}))[n] = "8dced25c-084d-d5c6-7b3a-b9e3672248ac")
     } catch (e) {}
 }();
 (globalThis.TURBOPACK || (globalThis.TURBOPACK = [])).push(["object" == typeof document ? document.currentScript : void 0, 805386, e => {
@@ -80,11 +80,11 @@
             for (var t = e[0], r = 1; r < e.length; ++r) e[r] > t && (t = e[r]);
             return t
         },
-        M = function(e, t, r) {
+        U = function(e, t, r) {
             var n = t / 8 | 0;
             return (e[n] | e[n + 1] << 8) >> (7 & t) & r
         },
-        U = function(e, t) {
+        M = function(e, t) {
             var r = t / 8 | 0;
             return (e[r] | e[r + 1] << 8 | e[r + 2] << 16) >> (7 & t)
         },
@@ -125,26 +125,26 @@
                 w = 8 * a;
             do {
                 if (!v) {
-                    d = M(e, f, 1);
-                    var T = M(e, f + 1, 3);
+                    d = U(e, f, 1);
+                    var T = U(e, f + 1, 3);
                     if (f += 3, T)
                         if (1 == T) v = _, b = O, D = 9, C = 5;
                         else if (2 == T) {
-                        var E = M(e, f, 31) + 257,
-                            I = M(e, f + 10, 15) + 4,
-                            R = E + M(e, f + 5, 31) + 1;
+                        var E = U(e, f, 31) + 257,
+                            I = U(e, f + 10, 15) + 4,
+                            R = E + U(e, f + 5, 31) + 1;
                         f += 14;
-                        for (var V = new u(R), x = new u(19), L = 0; L < I; ++L) x[p[L]] = M(e, f + 3 * L, 7);
+                        for (var V = new u(R), x = new u(19), L = 0; L < I; ++L) x[p[L]] = U(e, f + 3 * L, 7);
                         f += 3 * I;
                         for (var Q = N(x), G = (1 << Q) - 1, H = S(x, Q, 1), L = 0; L < R;) {
-                            var F = H[M(e, f, G)];
-                            f += 15 & F;
-                            var K = F >> 4;
-                            if (K < 16) V[L++] = K;
+                            var K = H[U(e, f, G)];
+                            f += 15 & K;
+                            var F = K >> 4;
+                            if (F < 16) V[L++] = F;
                             else {
                                 var j = 0,
                                     z = 0;
-                                for (16 == K ? (z = 3 + M(e, f, 3), f += 2, j = V[L - 1]) : 17 == K ? (z = 3 + M(e, f, 7), f += 3) : 18 == K && (z = 11 + M(e, f, 127), f += 7); z--;) V[L++] = j
+                                for (16 == F ? (z = 3 + U(e, f, 3), f += 2, j = V[L - 1]) : 17 == F ? (z = 3 + U(e, f, 7), f += 3) : 18 == F && (z = 11 + U(e, f, 127), f += 7); z--;) V[L++] = j
                             }
                         }
                         var q = V.subarray(0, E),
@@ -152,14 +152,14 @@
                         D = N(q), C = N(Y), v = S(q, D, 1), b = S(Y, C, 1)
                     } else B(1);
                     else {
-                        var K = P(f) + 4,
-                            W = e[K - 4] | e[K - 3] << 8,
-                            X = K + W;
+                        var F = P(f) + 4,
+                            W = e[F - 4] | e[F - 3] << 8,
+                            X = F + W;
                         if (X > a) {
                             c && B(0);
                             break
                         }
-                        s && l(y + W), r.set(e.subarray(K, X), y), t.b = y += W, t.p = f = 8 * X, t.f = d;
+                        s && l(y + W), r.set(e.subarray(F, X), y), t.b = y += W, t.p = f = 8 * X, t.f = d;
                         continue
                     }
                     if (f > w) {
@@ -169,7 +169,7 @@
                 }
                 s && l(y + 131072);
                 for (var $ = (1 << D) - 1, J = (1 << C) - 1, Z = f;; Z = f) {
-                    var j = v[U(e, f) & $],
+                    var j = v[M(e, f) & $],
                         ee = j >> 4;
                     if ((f += 15 & j) > w) {
                         c && B(0);
@@ -184,15 +184,15 @@
                         if (ee > 264) {
                             var L = ee - 257,
                                 er = h[L];
-                            et = M(e, f, (1 << er) - 1) + g[L], f += er
+                            et = U(e, f, (1 << er) - 1) + g[L], f += er
                         }
-                        var en = b[U(e, f) & J],
+                        var en = b[M(e, f) & J],
                             ea = en >> 4;
                         en || B(3), f += 15 & en;
                         var Y = A[ea];
                         if (ea > 3) {
                             var er = m[ea];
-                            Y += U(e, f) & (1 << er) - 1, f += er
+                            Y += M(e, f) & (1 << er) - 1, f += er
                         }
                         if (f > w) {
                             c && B(0);
@@ -263,7 +263,7 @@
             };
             for (var p = i[0].s, n = 1; n < a; ++n) i[n].s > p && (p = i[n].s);
             var f = new l(p + 1),
-                y = F(r[h - 1], f, 0);
+                y = K(r[h - 1], f, 0);
             if (y > t) {
                 var n = 0,
                     g = 0,
@@ -291,10 +291,10 @@
                 l: y
             }
         },
-        F = function(e, t, r) {
-            return -1 == e.s ? Math.max(F(e.l, t, r + 1), F(e.r, t, r + 1)) : t[e.s] = r
+        K = function(e, t, r) {
+            return -1 == e.s ? Math.max(K(e.l, t, r + 1), K(e.r, t, r + 1)) : t[e.s] = r
         },
-        K = function(e) {
+        F = function(e) {
             for (var t = e.length; t && !e[--t];);
             for (var r = new l(++t), n = 0, a = e[0], i = 1, o = function(e) {
                     r[n++] = e
@@ -328,20 +328,20 @@
         },
         q = function(e, t, r, n, a, i, o, s, c, u, d) {
             Q(t, d++, r), ++a[256];
-            for (var f, y, g, v, b = H(a, 15), A = b.t, D = b.l, C = H(i, 15), w = C.t, T = C.l, _ = K(A), O = _.c, N = _.n, M = K(w), U = M.c, P = M.n, k = new l(19), x = 0; x < O.length; ++x) ++k[31 & O[x]];
-            for (var x = 0; x < U.length; ++x) ++k[31 & U[x]];
-            for (var B = H(k, 7), L = B.t, F = B.l, q = 19; q > 4 && !L[p[q - 1]]; --q);
+            for (var f, y, g, v, b = H(a, 15), A = b.t, D = b.l, C = H(i, 15), w = C.t, T = C.l, _ = F(A), O = _.c, N = _.n, U = F(w), M = U.c, P = U.n, k = new l(19), x = 0; x < O.length; ++x) ++k[31 & O[x]];
+            for (var x = 0; x < M.length; ++x) ++k[31 & M[x]];
+            for (var B = H(k, 7), L = B.t, K = B.l, q = 19; q > 4 && !L[p[q - 1]]; --q);
             var Y = u + 5 << 3,
                 W = j(a, E) + j(i, I) + o,
                 X = j(a, A) + j(i, w) + o + 14 + 3 * q + j(k, L) + 2 * k[16] + 3 * k[17] + 7 * k[18];
             if (c >= 0 && Y <= W && Y <= X) return z(t, d, e.subarray(c, c + u));
             if (Q(t, d, 1 + (X < W)), d += 2, X < W) {
                 f = S(A, D, 0), y = A, g = S(w, T, 0), v = w;
-                var $ = S(L, F, 0);
+                var $ = S(L, K, 0);
                 Q(t, d, N - 257), Q(t, d + 5, P - 1), Q(t, d + 10, q - 4), d += 14;
                 for (var x = 0; x < q; ++x) Q(t, d + 3 * x, L[p[x]]);
                 d += 3 * q;
-                for (var J = [O, U], Z = 0; Z < 2; ++Z)
+                for (var J = [O, M], Z = 0; Z < 2; ++Z)
                     for (var ee = J[Z], x = 0; x < ee.length; ++x) {
                         var et = 31 & ee[x];
                         Q(t, d, $[et]), d += L[et], et > 15 && (Q(t, d, ee[x] >> 5 & 127), d += ee[x] >> 12)
@@ -370,27 +370,27 @@
                 f && (c[0] = i.r >> 3);
                 for (var y = Y[t - 1], g = y >> 13, b = 8191 & y, A = (1 << r) - 1, C = i.p || new l(32768), w = i.h || new l(A + 1), T = Math.ceil(r / 3), S = 2 * T, E = function(t) {
                         return (e[t] ^ e[t + 1] << T ^ e[t + 2] << S) & A
-                    }, I = new d(25e3), R = new l(288), _ = new l(32), V = 0, O = 0, N = i.i || 0, M = 0, U = i.w || 0, x = 0; N + 2 < o; ++N) {
+                    }, I = new d(25e3), R = new l(288), _ = new l(32), V = 0, O = 0, N = i.i || 0, U = 0, M = i.w || 0, x = 0; N + 2 < o; ++N) {
                     var B = E(N),
                         L = 32767 & N,
                         Q = w[B];
-                    if (C[L] = Q, w[B] = L, U <= N) {
+                    if (C[L] = Q, w[B] = L, M <= N) {
                         var G = o - N;
-                        if ((V > 7e3 || M > 24576) && (G > 423 || !p)) {
-                            f = q(e, c, 0, I, R, _, O, M, x, N - x, f), M = V = O = 0, x = N;
+                        if ((V > 7e3 || U > 24576) && (G > 423 || !p)) {
+                            f = q(e, c, 0, I, R, _, O, U, x, N - x, f), U = V = O = 0, x = N;
                             for (var H = 0; H < 286; ++H) R[H] = 0;
                             for (var H = 0; H < 30; ++H) _[H] = 0
                         }
-                        var F = 2,
-                            K = 0,
+                        var K = 2,
+                            F = 0,
                             j = b,
                             W = L - Q & 32767;
                         if (G > 2 && B == E(N - W))
                             for (var X = Math.min(g, G) - 1, $ = Math.min(32767, N), J = Math.min(258, G); W <= $ && --j && L != Q;) {
-                                if (e[N + F] == e[N + F - W]) {
+                                if (e[N + K] == e[N + K - W]) {
                                     for (var Z = 0; Z < J && e[N + Z] == e[N + Z - W]; ++Z);
-                                    if (Z > F) {
-                                        if (F = Z, K = W, Z > X) break;
+                                    if (Z > K) {
+                                        if (K = Z, F = W, Z > X) break;
                                         for (var ee = Math.min(W, Z - 2), et = 0, H = 0; H < ee; ++H) {
                                             var er = N - W + H & 32767,
                                                 en = C[er],
@@ -401,16 +401,16 @@
                                 }
                                 Q = C[L = Q], W += L - Q & 32767
                             }
-                        if (K) {
-                            I[M++] = 0x10000000 | v[F] << 18 | D[K];
-                            var ei = 31 & v[F],
-                                eo = 31 & D[K];
-                            O += h[ei] + m[eo], ++R[257 + ei], ++_[eo], U = N + F, ++V
-                        } else I[M++] = e[N], ++R[e[N]]
+                        if (F) {
+                            I[U++] = 0x10000000 | v[K] << 18 | D[F];
+                            var ei = 31 & v[K],
+                                eo = 31 & D[F];
+                            O += h[ei] + m[eo], ++R[257 + ei], ++_[eo], M = N + K, ++V
+                        } else I[U++] = e[N], ++R[e[N]]
                     }
                 }
-                for (N = Math.max(N, U); N < o; ++N) I[M++] = e[N], ++R[e[N]];
-                f = q(e, c, p, I, R, _, O, M, x, N - x, f), p || (i.r = 7 & f | c[f / 8 | 0] << 3, f -= 7, i.h = w, i.p = C, i.i = N, i.w = U)
+                for (N = Math.max(N, M); N < o; ++N) I[U++] = e[N], ++R[e[N]];
+                f = q(e, c, p, I, R, _, O, U, x, N - x, f), p || (i.r = 7 & f | c[f / 8 | 0] << 3, f -= 7, i.h = w, i.p = C, i.i = N, i.w = M)
             } else {
                 for (var N = i.w || 0; N < o + p; N += 65535) {
                     var es = N + 65535;
@@ -507,10 +507,10 @@
             return c(en[r].c + ";onmessage=function(e){for(var k in e.data)self[k]=e.data[k];onmessage=" + t.toString() + "}", r, u, ea(u), n)
         },
         eo = function() {
-            return [u, l, d, h, m, p, g, A, _, O, C, x, S, N, M, U, P, k, B, L, eV, el, ed]
+            return [u, l, d, h, m, p, g, A, _, O, C, x, S, N, U, M, P, k, B, L, eV, el, ed]
         },
         es = function() {
-            return [u, l, d, h, m, p, v, D, R, E, V, I, C, Y, W, S, Q, G, H, F, K, j, z, q, P, k, X, ee, eI, el]
+            return [u, l, d, h, m, p, v, D, R, E, V, I, C, Y, W, S, Q, G, H, K, F, j, z, q, P, k, X, ee, eI, el]
         },
         ec = function() {
             return [eb, eA]
@@ -722,7 +722,7 @@
                 return r.onmember && r.onmember(e)
             })
         },
-        eM = (function() {
+        eU = (function() {
             function e(e, t) {
                 this.c = Z(), this.v = 1, eS.call(this, e, t)
             }
@@ -746,16 +746,16 @@
                 t && (this.p.length < 4 && B(6, "invalid zlib data"), this.p = this.p.subarray(0, -4)), eR.prototype.c.call(this, t)
             }, e
         }()),
-        eU = function(e, t) {
+        eM = function(e, t) {
             em([eo, eu, function() {
-                return [eh, eR, eM]
+                return [eh, eR, eU]
             }], this, eT.call(this, e, t), function(e) {
-                onmessage = eh(new eM(e.data))
+                onmessage = eh(new eU(e.data))
             }, 11, 0)
         },
         eP = function() {
             function e(e, t) {
-                this.o = eT.call(this, e, t) || {}, this.G = eO, this.I = eR, this.Z = eM
+                this.o = eT.call(this, e, t) || {}, this.G = eO, this.I = eR, this.Z = eU
             }
             return e.prototype.i = function() {
                 var e = this;
@@ -775,7 +775,7 @@
         }();
 
     function ek(e, t) {
-        eP.call(this, e, t), this.queuedSize = 0, this.G = eN, this.I = e_, this.Z = eU
+        eP.call(this, e, t), this.queuedSize = 0, this.G = eN, this.I = e_, this.Z = eM
     }
     ek.prototype.i = function() {
         var e = this;
@@ -857,10 +857,10 @@
     }).prototype.push = function(e, t) {
         this.ondata || B(5), this.d && B(4), this.ondata(eG(e), this.d = t || !1)
     };
-    var eF = function(e) {
+    var eK = function(e) {
             return 1 == e ? 3 : e < 6 ? 2 : +(9 == e)
         },
-        eK = function(e, t, r, n, a, i, o) {
+        eF = function(e, t, r, n, a, i, o) {
             var s = 0xffffffff == a,
                 c = 0xffffffff == i,
                 u = 0xffffffff == o,
@@ -915,14 +915,14 @@
         var r = this;
         t || (t = {}), eY.call(this, e), this.d = new eS(t, function(e, t) {
             r.ondata(null, e, t)
-        }), this.compression = 8, this.flag = eF(t.level)
+        }), this.compression = 8, this.flag = eK(t.level)
     }
 
     function eX(e, t) {
         var r = this;
         t || (t = {}), eY.call(this, e), this.d = new eE(t, function(e, t, n) {
             r.ondata(e, t, n)
-        }), this.compression = 8, this.flag = eF(t.level), this.terminate = this.d.terminate
+        }), this.compression = 8, this.flag = eK(t.level), this.terminate = this.d.terminate
     }
 
     function e$(e) {
@@ -1072,7 +1072,7 @@
                             var f = ef(c, o + 18),
                                 y = ef(c, o + 22),
                                 g = eH(c.subarray(o + 30, o += 30 + a), !(2048 & t)),
-                                v = eK(c, o, u, 2, f, y, 0),
+                                v = eF(c, o, u, 2, f, y, 0),
                                 b = v[0],
                                 A = v[1],
                                 D = v[3];
@@ -1372,189 +1372,190 @@
     var t = e.i(31611),
         r = e.i(531007),
         n = e.i(11517),
-        a = e.i(302610),
-        i = e.i(283561),
-        o = e.i(379843),
-        s = e.i(787202),
-        c = e.i(36826),
-        u = e.i(908374),
-        l = e.i(545154),
-        d = e.i(731197),
-        h = e.i(102716),
-        m = e.i(377396),
-        p = e.i(841383);
-    let f = t.RAQIV2MetricGranularity.OneDay;
+        a = e.i(405005),
+        i = e.i(302610),
+        o = e.i(283561),
+        s = e.i(379843),
+        c = e.i(787202),
+        u = e.i(36826),
+        l = e.i(908374),
+        d = e.i(545154),
+        h = e.i(731197),
+        m = e.i(102716),
+        p = e.i(377396),
+        f = e.i(841383);
+    let y = t.RAQIV2MetricGranularity.OneDay;
 
-    function y(e, r) {
-        return (0, p.isGranularitySelectableForMetric)(e, r === o.CustomDashboardSummaryCardAggregation.Cumulative ? t.RAQIV2MetricGranularity.None : f)
+    function g(e, r) {
+        return (0, f.isGranularitySelectableForMetric)(e, r === s.CustomDashboardSummaryCardAggregation.Cumulative ? t.RAQIV2MetricGranularity.None : y)
     }
 
-    function g(e, t) {
-        return y(e, t) ? t : y(e, o.CustomDashboardSummaryCardAggregation.AverageOverTimePeriod) ? o.CustomDashboardSummaryCardAggregation.AverageOverTimePeriod : y(e, o.CustomDashboardSummaryCardAggregation.Cumulative) ? o.CustomDashboardSummaryCardAggregation.Cumulative : null
+    function v(e, t) {
+        return g(e, t) ? t : g(e, s.CustomDashboardSummaryCardAggregation.AverageOverTimePeriod) ? s.CustomDashboardSummaryCardAggregation.AverageOverTimePeriod : g(e, s.CustomDashboardSummaryCardAggregation.Cumulative) ? s.CustomDashboardSummaryCardAggregation.Cumulative : null
     }
-    e.s(["SUMMARY_CARD_TIME_SERIES_GRANULARITY", 0, f, "isSummaryCardAggregationSupported", 0, y, "resolveSupportedSummaryCardAggregation", 0, g], 98949);
-    var v = e.i(956154);
-    let b = /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(?:\.\d{3})?Z$/;
+    e.s(["SUMMARY_CARD_TIME_SERIES_GRANULARITY", 0, y, "isSummaryCardAggregationSupported", 0, g, "resolveSupportedSummaryCardAggregation", 0, v], 98949);
+    var b = e.i(956154);
+    let A = /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(?:\.\d{3})?Z$/;
 
-    function A(e) {
+    function D(e) {
         return "object" == typeof e && null !== e && !Array.isArray(e)
     }
 
-    function D(e, t) {
-        if (!A(e)) throw new i.CustomDashboardValidationError(t, "".concat(t, " must be an object."));
-        return e
-    }
-
     function C(e, t) {
-        if ("string" != typeof e) throw new i.CustomDashboardValidationError(t, "".concat(t, " must be a string."));
+        if (!D(e)) throw new o.CustomDashboardValidationError(t, "".concat(t, " must be an object."));
         return e
     }
 
     function w(e, t) {
-        let r = C(e, t);
-        if (0 === r.length) throw new i.CustomDashboardValidationError(t, "".concat(t, " must be non-empty."));
-        return r
-    }
-
-    function T(e, t) {
-        if ("number" != typeof e || !Number.isFinite(e)) throw new i.CustomDashboardValidationError(t, "".concat(t, " must be a finite number."));
+        if ("string" != typeof e) throw new o.CustomDashboardValidationError(t, "".concat(t, " must be a string."));
         return e
     }
 
+    function T(e, t) {
+        let r = w(e, t);
+        if (0 === r.length) throw new o.CustomDashboardValidationError(t, "".concat(t, " must be non-empty."));
+        return r
+    }
+
     function S(e, t) {
+        if ("number" != typeof e || !Number.isFinite(e)) throw new o.CustomDashboardValidationError(t, "".concat(t, " must be a finite number."));
+        return e
+    }
+
+    function E(e, t) {
         if ("boolean" == typeof e) return e;
         if (void 0 === e) return;
-        let r = D(e, t);
+        let r = C(e, t);
         return {
             relativeOffset: function(e, t) {
                 if (void 0 !== e) {
-                    if ("string" == typeof e && v.ComparisonOffset.some(t => t === e)) return e;
-                    throw new i.CustomDashboardValidationError(t, "".concat(t, " must be a valid comparison offset."))
+                    if ("string" == typeof e && b.ComparisonOffset.some(t => t === e)) return e;
+                    throw new o.CustomDashboardValidationError(t, "".concat(t, " must be a valid comparison offset."))
                 }
             }(r.relativeOffset, "".concat(t, ".relativeOffset")),
             customStartTimeMs: function(e, t) {
-                if (void 0 !== e) return T(e, t)
+                if (void 0 !== e) return S(e, t)
             }(r.customStartTimeMs, "".concat(t, ".customStartTimeMs"))
         }
     }
 
-    function E(e, t) {
-        if ("boolean" != typeof e) throw new i.CustomDashboardValidationError(t, "".concat(t, " must be a boolean."));
+    function I(e, t) {
+        if ("boolean" != typeof e) throw new o.CustomDashboardValidationError(t, "".concat(t, " must be a boolean."));
         return e
     }
 
-    function I(e, t) {
-        let r = C(e, t),
+    function R(e, t) {
+        let r = w(e, t),
             n = Date.parse(r);
-        if (!b.test(r) || !Number.isFinite(n)) throw new i.CustomDashboardValidationError(t, "".concat(t, " must be an ISO-8601 timestamp."));
+        if (!A.test(r) || !Number.isFinite(n)) throw new o.CustomDashboardValidationError(t, "".concat(t, " must be an ISO-8601 timestamp."));
         return r
     }
 
-    function R(e) {
+    function _(e) {
         return (t, r) => {
             let n;
             return null != t && (n = e(t, r)), n
         }
     }
-    let _ = R(I),
-        V = R(w),
-        O = R(E);
+    let V = _(R),
+        O = _(T),
+        N = _(I);
 
-    function N(e) {
+    function U(e) {
         return e.trim()
     }
-    e.s(["asBoolean", 0, E, "asIsoTimestamp", 0, I, "asNonEmptyString", 0, w, "asNumber", 0, T, "asOptionalIsoTimestamp", 0, _, "asOptionalNonEmptyString", 0, V, "asRecord", 0, D, "asString", 0, C, "isRecord", 0, A, "optional", 0, R, "trimmed", 0, N, "validateOptionalBoolean", 0, O, "validatePreviousPeriodOverlay", 0, S], 115232);
-    let M = new Set([o.CustomDashboardSummaryCardAggregation.AverageOverTimePeriod, o.CustomDashboardSummaryCardAggregation.MostRecentDataPoint, o.CustomDashboardSummaryCardAggregation.Total, t.RAQIV2AggregationType.Average, t.RAQIV2AggregationType.AveragePerUser, t.RAQIV2AggregationType.Count, t.RAQIV2AggregationType.CountUser, t.RAQIV2AggregationType.Max, t.RAQIV2AggregationType.Min, t.RAQIV2AggregationType.Sum, o.CustomDashboardSummaryCardAggregation.Median, o.CustomDashboardSummaryCardAggregation.Cumulative, t.RAQIV2PercentileType.AVG, t.RAQIV2PercentileType.P10, t.RAQIV2PercentileType.P50, t.RAQIV2PercentileType.P90]),
-        U = new Set([t.RAQIV2AggregationType.Average, t.RAQIV2AggregationType.AveragePerUser, t.RAQIV2AggregationType.Count, t.RAQIV2AggregationType.CountUser, t.RAQIV2AggregationType.Max, t.RAQIV2AggregationType.Min, t.RAQIV2AggregationType.Sum, t.RAQIV2PercentileType.AVG, t.RAQIV2PercentileType.P10, t.RAQIV2PercentileType.P50, t.RAQIV2PercentileType.P90]),
-        P = new Set(["Cumulative", "Day", "Week", "Hour", "HalfHour", "Minute"]),
-        k = new Set(o.CUSTOM_DASHBOARD_CHART_TYPES),
-        x = new Set(["draft", "published"]),
-        B = /^Percentile\d+$/,
-        L = new Set(Object.values(t.RAQIV2DateRangeType)),
-        Q = Object.values(t.RAQIV2Dimension),
-        G = Object.values(t.RAQIV2UIPseudoDimension),
-        H = Object.values(t.RAQIV2MetricGranularity),
-        F = Object.values(c.AnnotationType),
-        K = t.RAQIV2UIPseudoDimension.PercentileType,
-        j = t.RAQIV2UIPseudoDimension.AggregationType,
-        z = t.RAQIV2UIPseudoDimension.LatestPlaceVersion,
-        q = new Set(Object.values(t.RAQIV2AggregationType)),
-        Y = new Set(Object.values(t.RAQIV2PercentileType));
+    e.s(["asBoolean", 0, I, "asIsoTimestamp", 0, R, "asNonEmptyString", 0, T, "asNumber", 0, S, "asOptionalIsoTimestamp", 0, V, "asOptionalNonEmptyString", 0, O, "asRecord", 0, C, "asString", 0, w, "isRecord", 0, D, "optional", 0, _, "trimmed", 0, U, "validateOptionalBoolean", 0, N, "validatePreviousPeriodOverlay", 0, E], 115232);
+    let M = new Set([s.CustomDashboardSummaryCardAggregation.AverageOverTimePeriod, s.CustomDashboardSummaryCardAggregation.MostRecentDataPoint, s.CustomDashboardSummaryCardAggregation.Total, t.RAQIV2AggregationType.Average, t.RAQIV2AggregationType.AveragePerUser, t.RAQIV2AggregationType.Count, t.RAQIV2AggregationType.CountUser, t.RAQIV2AggregationType.Max, t.RAQIV2AggregationType.Min, t.RAQIV2AggregationType.Sum, s.CustomDashboardSummaryCardAggregation.Median, s.CustomDashboardSummaryCardAggregation.Cumulative, t.RAQIV2PercentileType.AVG, t.RAQIV2PercentileType.P10, t.RAQIV2PercentileType.P50, t.RAQIV2PercentileType.P90]),
+        P = new Set([t.RAQIV2AggregationType.Average, t.RAQIV2AggregationType.AveragePerUser, t.RAQIV2AggregationType.Count, t.RAQIV2AggregationType.CountUser, t.RAQIV2AggregationType.Max, t.RAQIV2AggregationType.Min, t.RAQIV2AggregationType.Sum, t.RAQIV2PercentileType.AVG, t.RAQIV2PercentileType.P10, t.RAQIV2PercentileType.P50, t.RAQIV2PercentileType.P90]),
+        k = new Set(["Cumulative", "Day", "Week", "Hour", "HalfHour", "Minute"]),
+        x = new Set(s.CUSTOM_DASHBOARD_CHART_TYPES),
+        B = new Set(["draft", "published"]),
+        L = /^Percentile\d+$/,
+        Q = new Set(Object.values(t.RAQIV2DateRangeType)),
+        G = Object.values(t.RAQIV2Dimension),
+        H = Object.values(t.RAQIV2UIPseudoDimension),
+        K = Object.values(t.RAQIV2MetricGranularity),
+        F = Object.values(u.AnnotationType),
+        j = t.RAQIV2UIPseudoDimension.PercentileType,
+        z = t.RAQIV2UIPseudoDimension.AggregationType,
+        q = t.RAQIV2UIPseudoDimension.LatestPlaceVersion,
+        Y = new Set(Object.values(t.RAQIV2AggregationType)),
+        W = new Set(Object.values(t.RAQIV2PercentileType));
 
-    function W(e, t) {
+    function X(e, t) {
         for (let r of e)
             if (r === t) return !0;
         return !1
     }
 
-    function X(e) {
-        return Q.includes(e) || G.includes(e)
-    }
-
     function $(e) {
-        return Q.includes(e)
+        return G.includes(e) || H.includes(e)
     }
 
     function J(e) {
-        return $(e) || e === z || e === K || e === j
+        return G.includes(e)
     }
 
     function Z(e) {
-        return F.includes(e)
+        return J(e) || e === q || e === j || e === z
     }
 
     function ee(e) {
-        return W(U, e) || B.test(e)
+        return F.includes(e)
     }
 
     function et(e) {
-        return "string" == typeof e && L.has(e)
+        return X(P, e) || L.test(e)
     }
 
     function er(e) {
-        return "string" == typeof e && W(q, e)
+        return "string" == typeof e && Q.has(e)
     }
 
     function en(e) {
-        return "string" == typeof e && W(Y, e)
+        return "string" == typeof e && X(Y, e)
     }
 
     function ea(e) {
-        return (0, u.isNumericUIMetric)(e)
+        return "string" == typeof e && X(W, e)
     }
 
     function ei(e) {
+        return (0, l.isNumericUIMetric)(e)
+    }
+
+    function eo(e) {
         return "string" == typeof e && e.length > 0
     }
-    let eo = R(function(e, t) {
-            let r = C(e, t);
-            if (!ee(r)) throw new i.CustomDashboardValidationError(t, "".concat(t, ' "').concat(r, '" is not a known chart aggregation.'));
+    let es = _(function(e, t) {
+            let r = w(e, t);
+            if (!et(r)) throw new o.CustomDashboardValidationError(t, "".concat(t, ' "').concat(r, '" is not a known chart aggregation.'));
             return r
         }),
-        es = R(function(e, t) {
-            if ("none" !== e && "weekly" !== e) throw new i.CustomDashboardValidationError(t, "".concat(t, ' must be "none" or "weekly".'));
+        ec = _(function(e, t) {
+            if ("none" !== e && "weekly" !== e) throw new o.CustomDashboardValidationError(t, "".concat(t, ' must be "none" or "weekly".'));
             return e
         }),
-        ec = R(function(e, t) {
-            let r = C(e, t);
-            if (r !== o.SummaryCardTitleSource.Auto && r !== o.SummaryCardTitleSource.Custom) throw new i.CustomDashboardValidationError(t, "".concat(t, ' must be "Auto" or "Custom".'));
+        eu = _(function(e, t) {
+            let r = w(e, t);
+            if (r !== s.SummaryCardTitleSource.Auto && r !== s.SummaryCardTitleSource.Custom) throw new o.CustomDashboardValidationError(t, "".concat(t, ' must be "Auto" or "Custom".'));
             return r
         });
 
-    function eu(e, t) {
-        let r = D(e, t),
-            n = w(r.pseudoDimensionKey, "".concat(t, ".pseudoDimensionKey"));
-        if (n !== K && n !== j) throw new i.CustomDashboardValidationError("".concat(t, ".pseudoDimensionKey"), "".concat(t, ".pseudoDimensionKey must be a supported pseudo-dimension key."));
-        let a = w(r.variantKey, "".concat(t, ".variantKey"));
-        if (n === K && !en(a)) throw new i.CustomDashboardValidationError("".concat(t, ".variantKey"), "".concat(t, ".variantKey must be a known RAQI percentile for PercentileType."));
-        if (n === j && !er(a)) throw new i.CustomDashboardValidationError("".concat(t, ".variantKey"), "".concat(t, ".variantKey must be a known RAQI aggregation for AggregationType."));
+    function el(e, t) {
+        let r = C(e, t),
+            n = T(r.pseudoDimensionKey, "".concat(t, ".pseudoDimensionKey"));
+        if (n !== j && n !== z) throw new o.CustomDashboardValidationError("".concat(t, ".pseudoDimensionKey"), "".concat(t, ".pseudoDimensionKey must be a supported pseudo-dimension key."));
+        let a = T(r.variantKey, "".concat(t, ".variantKey"));
+        if (n === j && !ea(a)) throw new o.CustomDashboardValidationError("".concat(t, ".variantKey"), "".concat(t, ".variantKey must be a known RAQI percentile for PercentileType."));
+        if (n === z && !en(a)) throw new o.CustomDashboardValidationError("".concat(t, ".variantKey"), "".concat(t, ".variantKey must be a known RAQI aggregation for AggregationType."));
         return {
             pseudoDimensionKey: n,
             variantKey: a
         }
     }
 
-    function el(e, t) {
+    function ed(e, t) {
         if (function(e) {
                 for (let t of e) {
                     let e = t.codePointAt(0);
@@ -1564,191 +1565,191 @@
                     if (r || n) return !0
                 }
                 return !1
-            }(e)) throw new i.CustomDashboardValidationError(t, "".concat(t, " contains unsupported control characters."));
+            }(e)) throw new o.CustomDashboardValidationError(t, "".concat(t, " contains unsupported control characters."));
         return e
     }
 
-    function ed(e) {
-        let t = arguments.length > 1 && void 0 !== arguments[1] ? arguments[1] : d.CONSERVATIVE_DASHBOARD_LIMITS,
-            r = el(N(e), "name");
-        if (0 === r.length) throw new i.CustomDashboardValidationError("name", "Dashboard name is required.");
-        if (t && r.length > t.maxDashboardNameLength) throw new i.CustomDashboardValidationError("name", "Dashboard name cannot exceed ".concat(t.maxDashboardNameLength, " characters."));
+    function eh(e) {
+        let t = arguments.length > 1 && void 0 !== arguments[1] ? arguments[1] : h.CONSERVATIVE_DASHBOARD_LIMITS,
+            r = ed(U(e), "name");
+        if (0 === r.length) throw new o.CustomDashboardValidationError("name", "Dashboard name is required.");
+        if (t && r.length > t.maxDashboardNameLength) throw new o.CustomDashboardValidationError("name", "Dashboard name cannot exceed ".concat(t.maxDashboardNameLength, " characters."));
         return r
     }
 
-    function eh(e) {
-        let t = arguments.length > 1 && void 0 !== arguments[1] ? arguments[1] : d.CONSERVATIVE_DASHBOARD_LIMITS;
+    function em(e) {
+        let t = arguments.length > 1 && void 0 !== arguments[1] ? arguments[1] : h.CONSERVATIVE_DASHBOARD_LIMITS;
         if (void 0 === e) return;
-        let r = el(N(e), "description");
-        if (t && r.length > t.maxDashboardDescriptionLength) throw new i.CustomDashboardValidationError("description", "Description cannot exceed ".concat(t.maxDashboardDescriptionLength, " characters."));
+        let r = ed(U(e), "description");
+        if (t && r.length > t.maxDashboardDescriptionLength) throw new o.CustomDashboardValidationError("description", "Description cannot exceed ".concat(t.maxDashboardDescriptionLength, " characters."));
         return 0 === r.length ? void 0 : r
     }
 
-    function em(e, t) {
+    function ep(e, t) {
         if (null == e) return [];
-        if (!Array.isArray(e)) throw new i.CustomDashboardValidationError(t, "".concat(t, " must be an array."));
+        if (!Array.isArray(e)) throw new o.CustomDashboardValidationError(t, "".concat(t, " must be an array."));
         return e.map((e, r) => {
-            let n = D(e, "".concat(t, "[").concat(r, "]")),
-                a = el(w(n.dimension, "".concat(t, "[").concat(r, "].dimension")), "".concat(t, "[").concat(r, "].dimension")),
+            let n = C(e, "".concat(t, "[").concat(r, "]")),
+                a = ed(T(n.dimension, "".concat(t, "[").concat(r, "].dimension")), "".concat(t, "[").concat(r, "].dimension")),
                 {
-                    values: o
+                    values: i
                 } = n;
-            if (!Array.isArray(o) || 0 === o.length || !o.every(ei)) throw new i.CustomDashboardValidationError("".concat(t, "[").concat(r, "].values"), "".concat(t, "[").concat(r, "].values must be a non-empty array of non-empty strings."));
+            if (!Array.isArray(i) || 0 === i.length || !i.every(eo)) throw new o.CustomDashboardValidationError("".concat(t, "[").concat(r, "].values"), "".concat(t, "[").concat(r, "].values must be a non-empty array of non-empty strings."));
             return {
                 dimension: a,
-                values: o.map((e, n) => el(e, "".concat(t, "[").concat(r, "].values[").concat(n, "]")))
+                values: i.map((e, n) => ed(e, "".concat(t, "[").concat(r, "].values[").concat(n, "]")))
             }
         })
     }
 
-    function ep(e, t) {
-        if (null == e) throw new i.CustomDashboardValidationError(t, "".concat(t, " must be an array."));
-        return em(e, t)
+    function ef(e, t) {
+        if (null == e) throw new o.CustomDashboardValidationError(t, "".concat(t, " must be an array."));
+        return ep(e, t)
     }
 
-    function ef(e, t, r) {
+    function ey(e, t, r) {
         if (null == e) return;
-        let n = el(N(C(e, t)), t);
-        if (r && n.length > r.maxTileTitleLength) throw new i.CustomDashboardValidationError(t, "Tile title cannot exceed ".concat(r.maxTileTitleLength, " characters."));
+        let n = ed(U(w(e, t)), t);
+        if (r && n.length > r.maxTileTitleLength) throw new o.CustomDashboardValidationError(t, "Tile title cannot exceed ".concat(r.maxTileTitleLength, " characters."));
         return 0 === n.length ? void 0 : n
-    }
-
-    function ey(e, t) {
-        if (null == e) return;
-        if (!Array.isArray(e)) throw new i.CustomDashboardValidationError(t, "".concat(t, " must be an array."));
-        let r = e.map((e, r) => {
-            let n = w(e, "".concat(t, "[").concat(r, "]"));
-            if (!$(n)) throw new i.CustomDashboardValidationError("".concat(t, "[").concat(r, "]"), "".concat(t, "[").concat(r, "] must be a canonical RAQI dimension."));
-            return n
-        });
-        return r.length > 0 ? r : void 0
     }
 
     function eg(e, t) {
         if (null == e) return;
-        if (!Array.isArray(e)) throw new i.CustomDashboardValidationError(t, "".concat(t, " must be an array."));
+        if (!Array.isArray(e)) throw new o.CustomDashboardValidationError(t, "".concat(t, " must be an array."));
         let r = e.map((e, r) => {
-            let n = w(e, "".concat(t, "[").concat(r, "]"));
-            if (!Z(n)) throw new i.CustomDashboardValidationError("".concat(t, "[").concat(r, "]"), "".concat(t, "[").concat(r, "] must be a known annotation type."));
+            let n = T(e, "".concat(t, "[").concat(r, "]"));
+            if (!J(n)) throw new o.CustomDashboardValidationError("".concat(t, "[").concat(r, "]"), "".concat(t, "[").concat(r, "] must be a canonical RAQI dimension."));
             return n
         });
         return r.length > 0 ? r : void 0
     }
 
     function ev(e, t) {
-        let r, n = D(e, t),
-            a = (r = eA(n.variantSelections, "".concat(t, ".variantSelections"), eu)).length > 0 ? r : void 0;
-        if (void 0 !== n.metricKey && null !== n.metricKey && void 0 !== n.computedMetric && null !== n.computedMetric) throw new i.CustomDashboardValidationError(t, "".concat(t, " must not include both metricKey and computedMetric."));
+        if (null == e) return;
+        if (!Array.isArray(e)) throw new o.CustomDashboardValidationError(t, "".concat(t, " must be an array."));
+        let r = e.map((e, r) => {
+            let n = T(e, "".concat(t, "[").concat(r, "]"));
+            if (!ee(n)) throw new o.CustomDashboardValidationError("".concat(t, "[").concat(r, "]"), "".concat(t, "[").concat(r, "] must be a known annotation type."));
+            return n
+        });
+        return r.length > 0 ? r : void 0
+    }
+
+    function eb(e, t) {
+        let r, n = C(e, t),
+            a = (r = eD(n.variantSelections, "".concat(t, ".variantSelections"), el)).length > 0 ? r : void 0;
+        if (void 0 !== n.metricKey && null !== n.metricKey && void 0 !== n.computedMetric && null !== n.computedMetric) throw new o.CustomDashboardValidationError(t, "".concat(t, " must not include both metricKey and computedMetric."));
         return void 0 !== n.computedMetric && null !== n.computedMetric ? {
             computedMetric: function(e, t) {
                 if (! function(e) {
-                        if (!A(e)) return !1;
+                        if (!D(e)) return !1;
                         let {
                             sources: t,
                             formula: r,
                             name: n,
                             l7Smoothing: a
                         } = e;
-                        return !!Array.isArray(t) && 0 !== t.length && "string" == typeof r && 0 !== r.trim().length && (void 0 === n || "string" == typeof n) && (void 0 === a || "boolean" == typeof a) && t.every(e => A(e) && "string" == typeof e.key && e.key.length > 0 && void 0 !== e.metric)
-                    }(e)) throw new i.CustomDashboardValidationError(t, "".concat(t, " must be a computed metric object."));
-                let r = (0, l.serializeComputedMetricToQueryParam)(e),
-                    n = (0, l.deserializeComputedMetricFromQueryParam)(r);
-                if (!r || !n) throw new i.CustomDashboardValidationError(t, "".concat(t, " is not a supported computed metric."));
+                        return !!Array.isArray(t) && 0 !== t.length && "string" == typeof r && 0 !== r.trim().length && (void 0 === n || "string" == typeof n) && (void 0 === a || "boolean" == typeof a) && t.every(e => D(e) && "string" == typeof e.key && e.key.length > 0 && void 0 !== e.metric)
+                    }(e)) throw new o.CustomDashboardValidationError(t, "".concat(t, " must be a computed metric object."));
+                let r = (0, d.serializeComputedMetricToQueryParam)(e),
+                    n = (0, d.deserializeComputedMetricFromQueryParam)(r);
+                if (!r || !n) throw new o.CustomDashboardValidationError(t, "".concat(t, " is not a supported computed metric."));
                 return n
             }(n.computedMetric, "".concat(t, ".computedMetric")),
             variantSelections: a
         } : {
             metricKey: function(e, t) {
-                let r = C(e, t);
-                if (!ea(r)) throw new i.CustomDashboardValidationError(t, "".concat(t, ' "').concat(r, '" is not a known RAQI metric.'));
+                let r = w(e, t);
+                if (!ei(r)) throw new o.CustomDashboardValidationError(t, "".concat(t, ' "').concat(r, '" is not a known RAQI metric.'));
                 return r
             }(n.metricKey, "".concat(t, ".metricKey")),
             variantSelections: a
         }
     }
 
-    function eb(e, t) {
-        let r = D(e, t);
+    function eA(e, t) {
+        let r = C(e, t);
         return {
-            metric: ev(r.metric, "".concat(t, ".metric")),
-            seriesKey: el(w(r.seriesKey, "".concat(t, ".seriesKey")), "".concat(t, ".seriesKey")),
-            displayName: void 0 !== r.displayName && null !== r.displayName ? el(N(C(r.displayName, "".concat(t, ".displayName"))), "".concat(t, ".displayName")) : void 0,
-            aggregation: eo(r.aggregation, "".concat(t, ".aggregation")),
-            filters: void 0 === r.filters ? void 0 : ep(r.filters, "".concat(t, ".filters"))
+            metric: eb(r.metric, "".concat(t, ".metric")),
+            seriesKey: ed(T(r.seriesKey, "".concat(t, ".seriesKey")), "".concat(t, ".seriesKey")),
+            displayName: void 0 !== r.displayName && null !== r.displayName ? ed(U(w(r.displayName, "".concat(t, ".displayName"))), "".concat(t, ".displayName")) : void 0,
+            aggregation: es(r.aggregation, "".concat(t, ".aggregation")),
+            filters: void 0 === r.filters ? void 0 : ef(r.filters, "".concat(t, ".filters"))
         }
     }
 
-    function eA(e, t, r) {
+    function eD(e, t, r) {
         if (null == e) return [];
-        if (!Array.isArray(e)) throw new i.CustomDashboardValidationError(t, "".concat(t, " must be an array."));
+        if (!Array.isArray(e)) throw new o.CustomDashboardValidationError(t, "".concat(t, " must be an array."));
         return e.map((e, n) => r(e, "".concat(t, "[").concat(n, "]")))
     }
 
-    function eD(e) {
+    function eC(e) {
         let n = arguments.length > 1 && void 0 !== arguments[1] ? arguments[1] : {},
             {
-                limits: a = d.CONSERVATIVE_DASHBOARD_LIMITS
+                limits: a = h.CONSERVATIVE_DASHBOARD_LIMITS
             } = n,
-            s = D(e, "config"),
-            c = D(s.page, "config.page");
-        if (c.mode !== o.DashboardPageMode.Untabbed) throw new i.CustomDashboardValidationError("config.page.mode", 'config.page.mode must be "Untabbed" in v1.');
-        let u = D(c.surface, "config.page.surface"),
-            l = eA(u.bodyNodes, "config.page.surface.bodyNodes", (e, t) => (function e(t, n, a) {
-                let o = D(t, n),
+            i = C(e, "config"),
+            c = C(i.page, "config.page");
+        if (c.mode !== s.DashboardPageMode.Untabbed) throw new o.CustomDashboardValidationError("config.page.mode", 'config.page.mode must be "Untabbed" in v1.');
+        let u = C(c.surface, "config.page.surface"),
+            l = eD(u.bodyNodes, "config.page.surface.bodyNodes", (e, t) => (function e(t, n, a) {
+                let i = C(t, n),
                     s = (t, r) => e(t, r, a);
-                if ("Component" === o.type) {
-                    let e = D(o.component, "".concat(n, ".component"));
+                if ("Component" === i.type) {
+                    let e = C(i.component, "".concat(n, ".component"));
                     if ("Chart" === e.type) return {
                         type: "Component",
                         component: {
                             type: "Chart",
                             chart: function(e, t, n) {
-                                let a = D(e, t);
-                                if ("Chart" !== a.type) throw new i.CustomDashboardValidationError("".concat(t, ".type"), "".concat(t, '.type must be "Chart".'));
+                                let a = C(e, t);
+                                if ("Chart" !== a.type) throw new o.CustomDashboardValidationError("".concat(t, ".type"), "".concat(t, '.type must be "Chart".'));
                                 return function(e, t, n) {
-                                    let a = D(e.dataSpec, "".concat(t, ".dataSpec")),
-                                        o = D(e.chartSpec, "".concat(t, ".chartSpec")),
-                                        s = C(o.chartType, "".concat(t, ".chartSpec.chartType"));
-                                    if (!W(k, s)) throw new i.CustomDashboardValidationError("".concat(t, ".chartSpec.chartType"), "".concat(t, '.chartSpec.chartType "').concat(s, '" is not supported.'));
-                                    let c = A(o.overlays) ? o.overlays : void 0,
+                                    let a = C(e.dataSpec, "".concat(t, ".dataSpec")),
+                                        i = C(e.chartSpec, "".concat(t, ".chartSpec")),
+                                        s = w(i.chartType, "".concat(t, ".chartSpec.chartType"));
+                                    if (!X(x, s)) throw new o.CustomDashboardValidationError("".concat(t, ".chartSpec.chartType"), "".concat(t, '.chartSpec.chartType "').concat(s, '" is not supported.'));
+                                    let c = D(i.overlays) ? i.overlays : void 0,
                                         u = c ? {
-                                            genreBenchmark: O(c.genreBenchmark, "".concat(t, ".chartSpec.overlays.genreBenchmark")),
-                                            similarExperienceBenchmark: O(c.similarExperienceBenchmark, "".concat(t, ".chartSpec.overlays.similarExperienceBenchmark")),
-                                            topExperienceBenchmark: O(c.topExperienceBenchmark, "".concat(t, ".chartSpec.overlays.topExperienceBenchmark")),
-                                            previousPeriod: S(c.previousPeriod, "".concat(t, ".chartSpec.overlays.previousPeriod")),
-                                            quota: O(c.quota, "".concat(t, ".chartSpec.overlays.quota"))
+                                            genreBenchmark: N(c.genreBenchmark, "".concat(t, ".chartSpec.overlays.genreBenchmark")),
+                                            similarExperienceBenchmark: N(c.similarExperienceBenchmark, "".concat(t, ".chartSpec.overlays.similarExperienceBenchmark")),
+                                            topExperienceBenchmark: N(c.topExperienceBenchmark, "".concat(t, ".chartSpec.overlays.topExperienceBenchmark")),
+                                            previousPeriod: E(c.previousPeriod, "".concat(t, ".chartSpec.overlays.previousPeriod")),
+                                            quota: N(c.quota, "".concat(t, ".chartSpec.overlays.quota"))
                                         } : void 0,
-                                        l = eA(a.metrics, "".concat(t, ".dataSpec.metrics"), eb),
+                                        l = eD(a.metrics, "".concat(t, ".dataSpec.metrics"), eA),
                                         d = s === r.ChartType.Table;
-                                    if (!d && 1 !== l.length) throw new i.CustomDashboardValidationError("".concat(t, ".dataSpec.metrics"), "".concat(t, ".dataSpec.metrics must contain exactly one metric."));
-                                    if (d && l.length < 1) throw new i.CustomDashboardValidationError("".concat(t, ".dataSpec.metrics"), "".concat(t, ".dataSpec.metrics must contain at least 1 metric for table charts."));
-                                    if (d && n && l.length > n.maxTableMetricColumns) throw new i.CustomDashboardValidationError("".concat(t, ".dataSpec.metrics"), "".concat(t, ".dataSpec.metrics must contain between 1 and ").concat(n.maxTableMetricColumns, " metrics for table charts."));
+                                    if (!d && 1 !== l.length) throw new o.CustomDashboardValidationError("".concat(t, ".dataSpec.metrics"), "".concat(t, ".dataSpec.metrics must contain exactly one metric."));
+                                    if (d && l.length < 1) throw new o.CustomDashboardValidationError("".concat(t, ".dataSpec.metrics"), "".concat(t, ".dataSpec.metrics must contain at least 1 metric for table charts."));
+                                    if (d && n && l.length > n.maxTableMetricColumns) throw new o.CustomDashboardValidationError("".concat(t, ".dataSpec.metrics"), "".concat(t, ".dataSpec.metrics must contain between 1 and ").concat(n.maxTableMetricColumns, " metrics for table charts."));
                                     let h = a.breakdownDimensions,
-                                        m = null == h ? void 0 : eA(h, "".concat(t, ".dataSpec.breakdownDimensions"), (e, t) => {
+                                        m = null == h ? void 0 : eD(h, "".concat(t, ".dataSpec.breakdownDimensions"), (e, t) => {
                                             var r;
-                                            let n = null != (r = V(e, t)) ? r : "";
-                                            if (n.length > 0 && !J(n)) throw new i.CustomDashboardValidationError(t, "".concat(t, " must be a persistable breakdown dimension."));
+                                            let n = null != (r = O(e, t)) ? r : "";
+                                            if (n.length > 0 && !Z(n)) throw new o.CustomDashboardValidationError(t, "".concat(t, " must be a persistable breakdown dimension."));
                                             return n
                                         }).filter(e => e.length > 0);
                                     return {
                                         type: "Chart",
-                                        tileId: w(e.tileId, "".concat(t, ".tileId")),
-                                        title: ef(e.title, "".concat(t, ".title"), n),
+                                        tileId: T(e.tileId, "".concat(t, ".tileId")),
+                                        title: ey(e.title, "".concat(t, ".title"), n),
                                         dataSpec: {
                                             metrics: l,
-                                            aggregation: eo(a.aggregation, "".concat(t, ".dataSpec.aggregation")),
+                                            aggregation: es(a.aggregation, "".concat(t, ".dataSpec.aggregation")),
                                             breakdownDimensions: m,
                                             granularity: function(e, t) {
-                                                let r = C(e, t);
-                                                if (!W(P, r)) throw new i.CustomDashboardValidationError(t, "".concat(t, ' "').concat(r, '" is not a known time interval.'));
+                                                let r = w(e, t);
+                                                if (!X(k, r)) throw new o.CustomDashboardValidationError(t, "".concat(t, ' "').concat(r, '" is not a known time interval.'));
                                                 return r
                                             }(a.granularity, "".concat(t, ".dataSpec.granularity")),
-                                            filters: ep(a.filters, "".concat(t, ".dataSpec.filters"))
+                                            filters: ef(a.filters, "".concat(t, ".dataSpec.filters"))
                                         },
                                         chartSpec: {
                                             chartType: s,
                                             overlays: u,
-                                            smoothing: es(o.smoothing, "".concat(t, ".chartSpec.smoothing"))
+                                            smoothing: ec(i.smoothing, "".concat(t, ".chartSpec.smoothing"))
                                         }
                                     }
                                 }(a, t, n)
@@ -1760,135 +1761,135 @@
                         component: {
                             type: "SummaryCard",
                             summaryCard: function(e, t, r) {
-                                let n = D(e, t);
-                                if ("SummaryCard" !== n.type) throw new i.CustomDashboardValidationError("".concat(t, ".type"), "".concat(t, '.type must be "SummaryCard".'));
-                                let a = A(n.overlays) ? n.overlays : void 0,
-                                    o = ev(n.metric, "".concat(t, ".metric")),
+                                let n = C(e, t);
+                                if ("SummaryCard" !== n.type) throw new o.CustomDashboardValidationError("".concat(t, ".type"), "".concat(t, '.type must be "SummaryCard".'));
+                                let a = D(n.overlays) ? n.overlays : void 0,
+                                    i = eb(n.metric, "".concat(t, ".metric")),
                                     s = function(e, t) {
-                                        let r = C(e, t);
-                                        if (!(W(M, r) || B.test(r))) throw new i.CustomDashboardValidationError(t, "".concat(t, ' "').concat(r, '" is not a known summary-card aggregation.'));
+                                        let r = w(e, t);
+                                        if (!(X(M, r) || L.test(r))) throw new o.CustomDashboardValidationError(t, "".concat(t, ' "').concat(r, '" is not a known summary-card aggregation.'));
                                         return r
                                     }(n.aggregation, "".concat(t, ".aggregation")),
-                                    c = o.metricKey ? g(o.metricKey, s) : s;
-                                if (!c) throw new i.CustomDashboardValidationError("".concat(t, ".aggregation"), "".concat(t, ".aggregation is not supported by the selected metric."));
+                                    c = i.metricKey ? v(i.metricKey, s) : s;
+                                if (!c) throw new o.CustomDashboardValidationError("".concat(t, ".aggregation"), "".concat(t, ".aggregation is not supported by the selected metric."));
                                 return {
                                     type: "SummaryCard",
-                                    tileId: w(n.tileId, "".concat(t, ".tileId")),
-                                    title: ef(n.title, "".concat(t, ".title"), r),
-                                    titleSource: ec(n.titleSource, "".concat(t, ".titleSource")),
-                                    metric: o,
+                                    tileId: T(n.tileId, "".concat(t, ".tileId")),
+                                    title: ey(n.title, "".concat(t, ".title"), r),
+                                    titleSource: eu(n.titleSource, "".concat(t, ".titleSource")),
+                                    metric: i,
                                     aggregation: c,
                                     overlays: a ? {
-                                        periodOverPeriod: O(a.periodOverPeriod, "".concat(t, ".overlays.periodOverPeriod"))
+                                        periodOverPeriod: N(a.periodOverPeriod, "".concat(t, ".overlays.periodOverPeriod"))
                                     } : void 0,
-                                    filters: ep(n.filters, "".concat(t, ".filters"))
+                                    filters: ef(n.filters, "".concat(t, ".filters"))
                                 }
                             }(e.summaryCard, "".concat(n, ".component.summaryCard"), a)
                         }
                     };
-                    throw new i.CustomDashboardValidationError("".concat(n, ".component.type"), "".concat(n, '.component.type must be "Chart" or "SummaryCard".'))
+                    throw new o.CustomDashboardValidationError("".concat(n, ".component.type"), "".concat(n, '.component.type must be "Chart" or "SummaryCard".'))
                 }
-                if ("Grid" === o.type) {
-                    let e = o.columnCount;
-                    if (1 !== e && 2 !== e) throw new i.CustomDashboardValidationError("".concat(n, ".columnCount"), "".concat(n, ".columnCount must be 1 or 2."));
-                    let t = eA(o.children, "".concat(n, ".children"), s);
-                    if (0 === t.length || t.length > e && !t.every(h.isSummaryCardLayoutNode)) throw new i.CustomDashboardValidationError("".concat(n, ".children"), "".concat(n, ".children must contain between 1 and ").concat(e, " child node(s)."));
+                if ("Grid" === i.type) {
+                    let e = i.columnCount;
+                    if (1 !== e && 2 !== e) throw new o.CustomDashboardValidationError("".concat(n, ".columnCount"), "".concat(n, ".columnCount must be 1 or 2."));
+                    let t = eD(i.children, "".concat(n, ".children"), s);
+                    if (0 === t.length || t.length > e && !t.every(m.isSummaryCardLayoutNode)) throw new o.CustomDashboardValidationError("".concat(n, ".children"), "".concat(n, ".children must contain between 1 and ").concat(e, " child node(s)."));
                     return {
                         type: "Grid",
                         columnCount: e,
                         children: t
                     }
                 }
-                if ("Flex" === o.type || "Stack" === o.type) return {
-                    type: o.type,
-                    children: eA(o.children, "".concat(n, ".children"), s)
+                if ("Flex" === i.type || "Stack" === i.type) return {
+                    type: i.type,
+                    children: eD(i.children, "".concat(n, ".children"), s)
                 };
-                throw new i.CustomDashboardValidationError("".concat(n, ".type"), "".concat(n, '.type must be "Component", "Grid", "Flex", or "Stack".'))
+                throw new o.CustomDashboardValidationError("".concat(n, ".type"), "".concat(n, '.type must be "Component", "Grid", "Flex", or "Stack".'))
             })(e, t, a)),
-            p = new Set,
+            d = new Set,
             f = 0,
             y = 0,
-            v = (e, t, r) => {
-                if (p.has(e)) throw new i.CustomDashboardValidationError(r, 'Duplicate tileId "'.concat(e, '".'));
-                p.add(e), "Chart" === t ? y += 1 : f += 1
+            g = (e, t, r) => {
+                if (d.has(e)) throw new o.CustomDashboardValidationError(r, 'Duplicate tileId "'.concat(e, '".'));
+                d.add(e), "Chart" === t ? y += 1 : f += 1
             };
         if (l.forEach((e, t) => (function e(t, r, n) {
                 "Component" === t.type ? r("Chart" === t.component.type ? t.component.chart.tileId : t.component.summaryCard.tileId, t.component.type, "".concat(n, ".component.").concat("Chart" === t.component.type ? "chart" : "summaryCard", ".tileId")) : t.children.forEach((t, a) => e(t, r, "".concat(n, ".children[").concat(a, "]")))
-            })(e, v, "config.page.surface.bodyNodes[".concat(t, "]"))), a) {
-            if (f > a.maxSummaryCardsPerDashboard) throw new i.CustomDashboardValidationError("config.page.surface.bodyNodes", "A dashboard may have at most ".concat(a.maxSummaryCardsPerDashboard, " summary cards."));
-            if (y > a.maxChartTilesPerDashboard) throw new i.CustomDashboardValidationError("config.page.surface.bodyNodes", "A dashboard may have at most ".concat(a.maxChartTilesPerDashboard, " chart tiles."))
+            })(e, g, "config.page.surface.bodyNodes[".concat(t, "]"))), a) {
+            if (f > a.maxSummaryCardsPerDashboard) throw new o.CustomDashboardValidationError("config.page.surface.bodyNodes", "A dashboard may have at most ".concat(a.maxSummaryCardsPerDashboard, " summary cards."));
+            if (y > a.maxChartTilesPerDashboard) throw new o.CustomDashboardValidationError("config.page.surface.bodyNodes", "A dashboard may have at most ".concat(a.maxChartTilesPerDashboard, " chart tiles."))
         }
         return {
             page: {
-                mode: o.DashboardPageMode.Untabbed,
+                mode: s.DashboardPageMode.Untabbed,
                 surface: {
                     controls: function(e, r) {
                         let n;
                         if (null == e) return {};
-                        let a = D(e, r);
+                        let a = C(e, r);
                         return {
                             timeRangeOptions: function(e, r) {
                                 if (null == e) return;
-                                let n = D(e, r);
+                                let n = C(e, r);
                                 if ("None" === n.type) return {
                                     type: "None"
                                 };
-                                if ("DateRange" !== n.type) throw new i.CustomDashboardValidationError("".concat(r, ".type"), "".concat(r, '.type must be "None" or "DateRange".'));
+                                if ("DateRange" !== n.type) throw new o.CustomDashboardValidationError("".concat(r, ".type"), "".concat(r, '.type must be "None" or "DateRange".'));
                                 return {
                                     type: "DateRange",
                                     defaultSelection: function(e, r) {
                                         if (null == e) return;
-                                        let n = D(e, r);
+                                        let n = C(e, r);
                                         if ("Relative" === n.type) {
-                                            if (!et(n.rangeType) || n.rangeType === t.RAQIV2DateRangeType.Custom) throw new i.CustomDashboardValidationError("".concat(r, ".rangeType"), "".concat(r, ".rangeType must be a preset date range."));
-                                            if (!(0, m.isSupportedCustomDashboardSavedDateRangeType)(n.rangeType)) throw new i.CustomDashboardValidationError("".concat(r, ".rangeType"), "".concat(r, ".rangeType must span less than ").concat(m.CUSTOM_DASHBOARD_SAVED_DATE_RANGE_LIMIT_DAYS, " days."));
+                                            if (!er(n.rangeType) || n.rangeType === t.RAQIV2DateRangeType.Custom) throw new o.CustomDashboardValidationError("".concat(r, ".rangeType"), "".concat(r, ".rangeType must be a preset date range."));
+                                            if (!(0, p.isSupportedCustomDashboardSavedDateRangeType)(n.rangeType)) throw new o.CustomDashboardValidationError("".concat(r, ".rangeType"), "".concat(r, ".rangeType must span less than ").concat(p.CUSTOM_DASHBOARD_SAVED_DATE_RANGE_LIMIT_DAYS, " days."));
                                             return {
                                                 type: "Relative",
                                                 rangeType: n.rangeType
                                             }
                                         }
                                         if ("Custom" === n.type) {
-                                            let e = T(n.startTimeMs, "".concat(r, ".startTimeMs")),
-                                                t = T(n.endTimeMs, "".concat(r, ".endTimeMs"));
-                                            if (e > t) throw new i.CustomDashboardValidationError(r, "".concat(r, " custom startTimeMs must be before endTimeMs."));
-                                            if (!(0, m.isCustomDashboardSavedDateRangeDurationValid)(e, t)) throw new i.CustomDashboardValidationError(r, "".concat(r, " custom date range must span less than ").concat(m.CUSTOM_DASHBOARD_SAVED_DATE_RANGE_LIMIT_DAYS, " days."));
+                                            let e = S(n.startTimeMs, "".concat(r, ".startTimeMs")),
+                                                t = S(n.endTimeMs, "".concat(r, ".endTimeMs"));
+                                            if (e > t) throw new o.CustomDashboardValidationError(r, "".concat(r, " custom startTimeMs must be before endTimeMs."));
+                                            if (!(0, p.isCustomDashboardSavedDateRangeDurationValid)(e, t)) throw new o.CustomDashboardValidationError(r, "".concat(r, " custom date range must span less than ").concat(p.CUSTOM_DASHBOARD_SAVED_DATE_RANGE_LIMIT_DAYS, " days."));
                                             return {
                                                 type: "Custom",
                                                 startTimeMs: e,
                                                 endTimeMs: t
                                             }
                                         }
-                                        throw new i.CustomDashboardValidationError("".concat(r, ".type"), "".concat(r, '.type must be "Relative" or "Custom".'))
+                                        throw new o.CustomDashboardValidationError("".concat(r, ".type"), "".concat(r, '.type must be "Relative" or "Custom".'))
                                     }(n.defaultSelection, "".concat(r, ".defaultSelection"))
                                 }
                             }(a.timeRangeOptions, "".concat(r, ".timeRangeOptions")),
-                            filterDimensions: ey(a.filterDimensions, "".concat(r, ".filterDimensions")),
-                            defaultFilters: (n = em(a.defaultFilters, "".concat(r, ".defaultFilters"))).length > 0 ? n : void 0,
-                            breakdownDimensions: ey(a.breakdownDimensions, "".concat(r, ".breakdownDimensions")),
+                            filterDimensions: eg(a.filterDimensions, "".concat(r, ".filterDimensions")),
+                            defaultFilters: (n = ep(a.defaultFilters, "".concat(r, ".defaultFilters"))).length > 0 ? n : void 0,
+                            breakdownDimensions: eg(a.breakdownDimensions, "".concat(r, ".breakdownDimensions")),
                             defaultBreakdown: function(e, t) {
                                 if (null == e) return;
-                                if (!Array.isArray(e)) throw new i.CustomDashboardValidationError(t, "".concat(t, " must be an array."));
+                                if (!Array.isArray(e)) throw new o.CustomDashboardValidationError(t, "".concat(t, " must be an array."));
                                 let r = e.map((e, r) => {
-                                    let n = w(e, "".concat(t, "[").concat(r, "]"));
-                                    if (!X(n)) throw new i.CustomDashboardValidationError("".concat(t, "[").concat(r, "]"), "".concat(t, "[").concat(r, "] must be a known RAQI dimension."));
+                                    let n = T(e, "".concat(t, "[").concat(r, "]"));
+                                    if (!$(n)) throw new o.CustomDashboardValidationError("".concat(t, "[").concat(r, "]"), "".concat(t, "[").concat(r, "] must be a known RAQI dimension."));
                                     return n
                                 });
                                 return r.length > 0 ? r : void 0
                             }(a.defaultBreakdown, "".concat(r, ".defaultBreakdown")),
                             defaultGranularity: function(e, t) {
                                 if (null == e) return;
-                                let r = w(e, t);
-                                if (!H.includes(r)) throw new i.CustomDashboardValidationError(t, "".concat(t, " must be a known granularity."));
+                                let r = T(e, t);
+                                if (!K.includes(r)) throw new o.CustomDashboardValidationError(t, "".concat(t, " must be a known granularity."));
                                 return r
                             }(a.defaultGranularity, "".concat(r, ".defaultGranularity")),
                             annotationOptions: function(e, t) {
                                 var r, n;
                                 if (null == e) return;
-                                let a = D(e, t);
+                                let a = C(e, t);
                                 return {
-                                    supportedAnnotationTypes: null != (r = eg(a.supportedAnnotationTypes, "".concat(t, ".supportedAnnotationTypes"))) ? r : [],
-                                    defaultAnnotationTypes: null != (n = eg(a.defaultAnnotationTypes, "".concat(t, ".defaultAnnotationTypes"))) ? n : [],
-                                    showAnnotationsControl: void 0 === a.showAnnotationsControl || null === a.showAnnotationsControl || E(a.showAnnotationsControl, "".concat(t, ".showAnnotationsControl"))
+                                    supportedAnnotationTypes: null != (r = ev(a.supportedAnnotationTypes, "".concat(t, ".supportedAnnotationTypes"))) ? r : [],
+                                    defaultAnnotationTypes: null != (n = ev(a.defaultAnnotationTypes, "".concat(t, ".defaultAnnotationTypes"))) ? n : [],
+                                    showAnnotationsControl: void 0 === a.showAnnotationsControl || null === a.showAnnotationsControl || I(a.showAnnotationsControl, "".concat(t, ".showAnnotationsControl"))
                                 }
                             }(a.annotationOptions, "".concat(r, ".annotationOptions"))
                         }
@@ -1898,42 +1899,42 @@
             }
         }
     }
-    e.s(["isCanonicalRAQIV2Dimension", 0, $, "isChartAggregation", 0, ee, "isDateRangeType", 0, et, "isDefaultAnnotationType", 0, Z, "isDefaultBreakdownDimension", 0, X, "isMetricKey", 0, ea, "isPersistableBreakdownDimension", 0, J, "isRAQIV2AggregationType", 0, er, "isRAQIV2PercentileType", 0, en, "validateCustomDashboardConfig", 0, eD, "validateCustomDashboardDocument", 0, function(e) {
+    e.s(["isCanonicalRAQIV2Dimension", 0, J, "isChartAggregation", 0, et, "isDateRangeType", 0, er, "isDefaultAnnotationType", 0, ee, "isDefaultBreakdownDimension", 0, $, "isMetricKey", 0, ei, "isPersistableBreakdownDimension", 0, Z, "isRAQIV2AggregationType", 0, en, "isRAQIV2PercentileType", 0, ea, "validateCustomDashboardConfig", 0, eC, "validateCustomDashboardDocument", 0, function(e) {
         var t;
-        let r, n = D(e, "document");
-        if (n.schemaVersion !== o.LOCAL_STORAGE_DOCUMENT_SCHEMA_VERSION) throw new i.CustomDashboardValidationError("schemaVersion", "schemaVersion must equal ".concat(o.LOCAL_STORAGE_DOCUMENT_SCHEMA_VERSION, " (got ").concat(String(n.schemaVersion), "). Run applyMigrations first."));
+        let r, n = C(e, "document");
+        if (n.schemaVersion !== s.LOCAL_STORAGE_DOCUMENT_SCHEMA_VERSION) throw new o.CustomDashboardValidationError("schemaVersion", "schemaVersion must equal ".concat(s.LOCAL_STORAGE_DOCUMENT_SCHEMA_VERSION, " (got ").concat(String(n.schemaVersion), "). Run applyMigrations first."));
         let {
             status: a
         } = n;
-        if (!("string" == typeof a && W(x, a))) throw new i.CustomDashboardValidationError("status", 'status must be "draft" or "published".');
-        void 0 !== n.description && null !== n.description && (r = eh(C(n.description, "description"), null));
-        let s = E(n.isPinned, "isPinned"),
-            c = s ? _(n.pinnedAt, "pinnedAt") : void 0;
-        if (void 0 === n.config || null === n.config) throw new i.CustomDashboardValidationError("config", "config is required. Service-layer create() must substitute EMPTY_DASHBOARD_CONFIG before validation.");
+        if (!("string" == typeof a && X(B, a))) throw new o.CustomDashboardValidationError("status", 'status must be "draft" or "published".');
+        void 0 !== n.description && null !== n.description && (r = em(w(n.description, "description"), null));
+        let i = I(n.isPinned, "isPinned"),
+            c = i ? V(n.pinnedAt, "pinnedAt") : void 0;
+        if (void 0 === n.config || null === n.config) throw new o.CustomDashboardValidationError("config", "config is required. Service-layer create() must substitute EMPTY_DASHBOARD_CONFIG before validation.");
         return {
             ...n,
-            id: w(n.id, "id"),
-            schemaVersion: o.LOCAL_STORAGE_DOCUMENT_SCHEMA_VERSION,
-            universeId: T(n.universeId, "universeId"),
-            name: ed(C(n.name, "name"), null),
+            id: T(n.id, "id"),
+            schemaVersion: s.LOCAL_STORAGE_DOCUMENT_SCHEMA_VERSION,
+            universeId: S(n.universeId, "universeId"),
+            name: eh(w(n.name, "name"), null),
             description: r,
             status: a,
-            isPinned: s,
+            isPinned: i,
             pinnedAt: c,
-            createdAt: I(n.createdAt, "createdAt"),
-            updatedAt: I(n.updatedAt, "updatedAt"),
-            publishedAt: _(n.publishedAt, "publishedAt"),
-            createdByUserId: T(n.createdByUserId, "createdByUserId"),
-            createdByUsername: C(null != (t = n.createdByUsername) ? t : "", "createdByUsername"),
-            updatedByUserId: R(T)(n.updatedByUserId, "updatedByUserId"),
-            updatedByUsername: R(w)(n.updatedByUsername, "updatedByUsername"),
-            config: eD(n.config, {
+            createdAt: R(n.createdAt, "createdAt"),
+            updatedAt: R(n.updatedAt, "updatedAt"),
+            publishedAt: V(n.publishedAt, "publishedAt"),
+            createdByUserId: S(n.createdByUserId, "createdByUserId"),
+            createdByUsername: w(null != (t = n.createdByUsername) ? t : "", "createdByUsername"),
+            updatedByUserId: _(S)(n.updatedByUserId, "updatedByUserId"),
+            updatedByUsername: _(T)(n.updatedByUsername, "updatedByUsername"),
+            config: eC(n.config, {
                 limits: null
             })
         }
-    }, "validateDashboardDescription", 0, eh, "validateDashboardName", 0, ed], 646877);
-    let eC = o.READABLE_BACKEND_DOCUMENT_SCHEMA_VERSIONS,
-        ew = {
+    }, "validateDashboardDescription", 0, em, "validateDashboardName", 0, eh], 646877);
+    let ew = s.READABLE_BACKEND_DOCUMENT_SCHEMA_VERSIONS,
+        eT = {
             [r.ChartType.Spline]: 1,
             [r.ChartType.Area]: 2,
             [r.ChartType.DurationSpline]: 7,
@@ -1943,7 +1944,7 @@
             [r.ChartType.Pie]: 5,
             [r.ChartType.Table]: 6
         },
-        eT = {
+        eS = {
             DASHBOARD_CHART_TYPE_SPLINE: r.ChartType.Spline,
             DASHBOARD_CHART_TYPE_AREA: r.ChartType.Area,
             DASHBOARD_CHART_TYPE_DURATION_SPLINE: r.ChartType.DurationSpline,
@@ -1961,7 +1962,7 @@
             5: r.ChartType.Pie,
             6: r.ChartType.Table
         },
-        eS = {
+        eE = {
             Cumulative: 1,
             Minute: 2,
             HalfHour: 3,
@@ -1969,7 +1970,7 @@
             Day: 5,
             Week: 6
         },
-        eE = {
+        eI = {
             DASHBOARD_GRANULARITY_CUMULATIVE: "Cumulative",
             DASHBOARD_GRANULARITY_MINUTE: "Minute",
             DASHBOARD_GRANULARITY_HALF_HOUR: "HalfHour",
@@ -1983,7 +1984,7 @@
             5: "Day",
             6: "Week"
         },
-        eI = {
+        eR = {
             [t.RAQIV2MetricGranularity.None]: 1,
             [t.RAQIV2MetricGranularity.OneMinute]: 2,
             [t.RAQIV2MetricGranularity.HalfHour]: 3,
@@ -1991,7 +1992,7 @@
             [t.RAQIV2MetricGranularity.OneDay]: 5,
             [t.RAQIV2MetricGranularity.OneWeek]: 6
         },
-        eR = {
+        e_ = {
             DASHBOARD_GRANULARITY_CUMULATIVE: t.RAQIV2MetricGranularity.None,
             DASHBOARD_GRANULARITY_MINUTE: t.RAQIV2MetricGranularity.OneMinute,
             DASHBOARD_GRANULARITY_HALF_HOUR: t.RAQIV2MetricGranularity.HalfHour,
@@ -2005,7 +2006,7 @@
             5: t.RAQIV2MetricGranularity.OneDay,
             6: t.RAQIV2MetricGranularity.OneWeek
         },
-        e_ = {
+        eV = {
             [t.RAQIV2AggregationType.Sum]: 1,
             [t.RAQIV2AggregationType.Count]: 2,
             [t.RAQIV2AggregationType.Average]: 3,
@@ -2017,14 +2018,14 @@
             [t.RAQIV2PercentileType.P10]: 11,
             [t.RAQIV2PercentileType.P50]: 12,
             [t.RAQIV2PercentileType.P90]: 13,
-            [o.CustomDashboardSummaryCardAggregation.Total]: 20,
-            [o.CustomDashboardSummaryCardAggregation.AverageOverTimePeriod]: 21,
-            [o.CustomDashboardSummaryCardAggregation.MostRecentDataPoint]: 22,
-            [o.CustomDashboardSummaryCardAggregation.Median]: 23,
-            [o.CustomDashboardSummaryCardAggregation.Cumulative]: 24,
-            [o.CustomDashboardSummaryCardAggregation.AveragePerUniqueUser]: 25
+            [s.CustomDashboardSummaryCardAggregation.Total]: 20,
+            [s.CustomDashboardSummaryCardAggregation.AverageOverTimePeriod]: 21,
+            [s.CustomDashboardSummaryCardAggregation.MostRecentDataPoint]: 22,
+            [s.CustomDashboardSummaryCardAggregation.Median]: 23,
+            [s.CustomDashboardSummaryCardAggregation.Cumulative]: 24,
+            [s.CustomDashboardSummaryCardAggregation.AveragePerUniqueUser]: 25
         },
-        eV = {
+        eO = {
             DASHBOARD_AGGREGATION_SUM: t.RAQIV2AggregationType.Sum,
             DASHBOARD_AGGREGATION_COUNT: t.RAQIV2AggregationType.Count,
             DASHBOARD_AGGREGATION_AVERAGE: t.RAQIV2AggregationType.Average,
@@ -2036,11 +2037,11 @@
             DASHBOARD_AGGREGATION_PERCENTILE_P10: t.RAQIV2PercentileType.P10,
             DASHBOARD_AGGREGATION_PERCENTILE_P50: t.RAQIV2PercentileType.P50,
             DASHBOARD_AGGREGATION_PERCENTILE_P90: t.RAQIV2PercentileType.P90,
-            DASHBOARD_AGGREGATION_TOTAL: o.CustomDashboardSummaryCardAggregation.Total,
-            DASHBOARD_AGGREGATION_AVERAGE_OVER_TIME_PERIOD: o.CustomDashboardSummaryCardAggregation.AverageOverTimePeriod,
-            DASHBOARD_AGGREGATION_MOST_RECENT_DATA_POINT: o.CustomDashboardSummaryCardAggregation.MostRecentDataPoint,
-            DASHBOARD_AGGREGATION_MEDIAN: o.CustomDashboardSummaryCardAggregation.Median,
-            DASHBOARD_AGGREGATION_CUMULATIVE: o.CustomDashboardSummaryCardAggregation.Cumulative,
+            DASHBOARD_AGGREGATION_TOTAL: s.CustomDashboardSummaryCardAggregation.Total,
+            DASHBOARD_AGGREGATION_AVERAGE_OVER_TIME_PERIOD: s.CustomDashboardSummaryCardAggregation.AverageOverTimePeriod,
+            DASHBOARD_AGGREGATION_MOST_RECENT_DATA_POINT: s.CustomDashboardSummaryCardAggregation.MostRecentDataPoint,
+            DASHBOARD_AGGREGATION_MEDIAN: s.CustomDashboardSummaryCardAggregation.Median,
+            DASHBOARD_AGGREGATION_CUMULATIVE: s.CustomDashboardSummaryCardAggregation.Cumulative,
             DASHBOARD_AGGREGATION_AVERAGE_PER_UNIQUE_USER: t.RAQIV2AggregationType.AveragePerUser,
             1: t.RAQIV2AggregationType.Sum,
             2: t.RAQIV2AggregationType.Count,
@@ -2053,76 +2054,76 @@
             11: t.RAQIV2PercentileType.P10,
             12: t.RAQIV2PercentileType.P50,
             13: t.RAQIV2PercentileType.P90,
-            20: o.CustomDashboardSummaryCardAggregation.Total,
-            21: o.CustomDashboardSummaryCardAggregation.AverageOverTimePeriod,
-            22: o.CustomDashboardSummaryCardAggregation.MostRecentDataPoint,
-            23: o.CustomDashboardSummaryCardAggregation.Median,
-            24: o.CustomDashboardSummaryCardAggregation.Cumulative,
+            20: s.CustomDashboardSummaryCardAggregation.Total,
+            21: s.CustomDashboardSummaryCardAggregation.AverageOverTimePeriod,
+            22: s.CustomDashboardSummaryCardAggregation.MostRecentDataPoint,
+            23: s.CustomDashboardSummaryCardAggregation.Median,
+            24: s.CustomDashboardSummaryCardAggregation.Cumulative,
             25: t.RAQIV2AggregationType.AveragePerUser
         },
-        eO = {
-            [o.SummaryCardTitleSource.Auto]: 1,
-            [o.SummaryCardTitleSource.Custom]: 2
-        },
         eN = {
-            DASHBOARD_TITLE_SOURCE_AUTO: o.SummaryCardTitleSource.Auto,
-            DASHBOARD_TITLE_SOURCE_CUSTOM: o.SummaryCardTitleSource.Custom,
-            1: o.SummaryCardTitleSource.Auto,
-            2: o.SummaryCardTitleSource.Custom
+            [s.SummaryCardTitleSource.Auto]: 1,
+            [s.SummaryCardTitleSource.Custom]: 2
+        },
+        eU = {
+            DASHBOARD_TITLE_SOURCE_AUTO: s.SummaryCardTitleSource.Auto,
+            DASHBOARD_TITLE_SOURCE_CUSTOM: s.SummaryCardTitleSource.Custom,
+            1: s.SummaryCardTitleSource.Auto,
+            2: s.SummaryCardTitleSource.Custom
         },
         eM = {
             none: 1,
             weekly: 2
         },
-        eU = {
+        eP = {
             DASHBOARD_CHART_SMOOTHING_NONE: "none",
             DASHBOARD_CHART_SMOOTHING_WEEKLY: "weekly",
             1: "none",
             2: "weekly"
         };
 
-    function eP(e) {
+    function ek(e) {
         return "object" == typeof e && null !== e && !Array.isArray(e)
     }
 
-    function ek(e) {
+    function ex(e) {
         return String(e)
     }
 
-    function ex(e) {
-        throw new i.CustomDashboardValidationError("backendContract", e)
-    }
-
-    function eB(e, t, r) {
-        let n = t[ek(e)];
-        return void 0 === n && ex("Unsupported ".concat(r, " value ").concat(String(e), ".")), n
+    function eB(e) {
+        throw new o.CustomDashboardValidationError("backendContract", e)
     }
 
     function eL(e, t, r) {
-        let n = t[ek(e)];
-        return void 0 === n && ex("Unsupported backend ".concat(r, " value ").concat(String(e), ".")), n
+        let n = t[ex(e)];
+        return void 0 === n && eB("Unsupported ".concat(r, " value ").concat(String(e), ".")), n
     }
 
-    function eQ(e) {
+    function eQ(e, t, r) {
+        let n = t[ex(e)];
+        return void 0 === n && eB("Unsupported backend ".concat(r, " value ").concat(String(e), ".")), n
+    }
+
+    function eG(e) {
         let t = new Date(e).toISOString();
-        return Number.isNaN(Date.parse(t)) && ex("Timestamp is outside the supported RFC3339 range."), t
+        return Number.isNaN(Date.parse(t)) && eB("Timestamp is outside the supported RFC3339 range."), t
     }
 
-    function eG(e, t) {
+    function eH(e, t) {
         if ("string" == typeof e) {
             let r = Date.parse(e);
-            return Number.isFinite(r) || ex("".concat(t, " is not a valid timestamp.")), r
+            return Number.isFinite(r) || eB("".concat(t, " is not a valid timestamp.")), r
         }
-        if (eP(e)) {
+        if (ek(e)) {
             var r, n;
             let a = Number(null != (r = e.seconds) ? r : 0),
                 i = Number(null != (n = e.nanos) ? n : 0);
-            return Number.isFinite(a) && Number.isFinite(i) || ex("".concat(t, " is not a valid timestamp.")), 1e3 * a + Math.floor(i / 1e6)
+            return Number.isFinite(a) && Number.isFinite(i) || eB("".concat(t, " is not a valid timestamp.")), 1e3 * a + Math.floor(i / 1e6)
         }
-        return ex("".concat(t, " is not a valid timestamp."))
+        return eB("".concat(t, " is not a valid timestamp."))
     }
 
-    function eH(e) {
+    function eK(e) {
         return e.map(e => ({
             dimensionKey: e.dimension,
             values: [...e.values]
@@ -2130,40 +2131,40 @@
     }
 
     function eF(e, t) {
-        return null == e ? [] : (Array.isArray(e) || ex("".concat(t, " must be an array.")), e.map((e, r) => {
+        return null == e ? [] : (Array.isArray(e) || eB("".concat(t, " must be an array.")), e.map((e, r) => {
             var n, a;
-            eP(e) || ex("".concat(t, "[").concat(r, "] must be an object."));
+            ek(e) || eB("".concat(t, "[").concat(r, "] must be an object."));
             let i = null != (n = null != (a = e.dimensionKey) ? a : e.dimension_key) ? n : e.dimension;
-            ("string" != typeof i || 0 === i.length) && ex("".concat(t, "[").concat(r, "].dimensionKey must be a non-empty string."));
+            ("string" != typeof i || 0 === i.length) && eB("".concat(t, "[").concat(r, "].dimensionKey must be a non-empty string."));
             let {
                 values: o
             } = e;
-            return Array.isArray(o) && o.every(e => "string" == typeof e) || ex("".concat(t, "[").concat(r, "].values must be an array of strings.")), {
+            return Array.isArray(o) && o.every(e => "string" == typeof e) || eB("".concat(t, "[").concat(r, "].values must be an array of strings.")), {
                 dimension: i,
                 values: o
             }
         }))
     }
 
-    function eK(e, t, r) {
-        if (null != e) return Array.isArray(e) && e.every(e => "string" == typeof e) || ex("".concat(t, " must be an array of strings.")), e.map((e, n) => r(e) ? e : ex("".concat(t, "[").concat(n, "] is unsupported.")))
+    function ej(e, t, r) {
+        if (null != e) return Array.isArray(e) && e.every(e => "string" == typeof e) || eB("".concat(t, " must be an array of strings.")), e.map((e, n) => r(e) ? e : eB("".concat(t, "[").concat(n, "] is unsupported.")))
     }
 
-    function ej(e, r) {
+    function ez(e, r) {
         var n;
-        return (n = e.dimension) !== t.RAQIV2Dimension.CustomEventName && $(n) ? {
+        return (n = e.dimension) !== t.RAQIV2Dimension.CustomEventName && J(n) ? {
             dimension: e.dimension,
             values: [...e.values]
-        } : ex("".concat(r, " contains an unsupported dimension."))
+        } : eB("".concat(r, " contains an unsupported dimension."))
     }
 
-    function ez(e) {
+    function eq(e) {
         if (e && 0 !== e.length) return e.map(e => ({
             pseudoDimensionKey: e.pseudoDimensionKey,
             variantKey: e.variantKey
         }))
     }
-    let eq = {
+    let eY = {
         SUM: t.RAQIV2AggregationType.Sum,
         COUNT: t.RAQIV2AggregationType.Count,
         AVERAGE: t.RAQIV2AggregationType.Average,
@@ -2173,50 +2174,64 @@
         AVERAGE_PER_USER: t.RAQIV2AggregationType.AveragePerUser
     };
 
-    function eY(e) {
-        return Object.hasOwn(eq, e) ? eq[e] : void 0
+    function eW(e) {
+        return Object.hasOwn(eY, e) ? eY[e] : void 0
     }
 
-    function eW(e) {
-        if (Array.isArray(e) && 0 !== e.length) return e.map((e, r) => {
-            var n, a;
-            let i, o, {
-                    pseudoDimensionKey: s,
-                    variantKey: c
-                } = (eP(e) || ex("variantSelections[".concat(r, "] must be an object.")), i = null != (n = e.pseudoDimensionKey) ? n : e.pseudo_dimension_key, o = null != (a = e.variantKey) ? a : e.variant_key, ("string" != typeof i || "string" != typeof o) && ex("variantSelections[".concat(r, "] is missing keys.")), {
-                    pseudoDimensionKey: i,
-                    variantKey: o
-                }),
-                u = s === t.RAQIV2UIPseudoDimension.AggregationType ? eY(c) : void 0;
-            return {
+    function eX(e, r) {
+        if (Array.isArray(e) && 0 !== e.length) return e.map((e, n) => {
+            var i, o;
+            let s, c, {
+                pseudoDimensionKey: u,
+                variantKey: l
+            } = (ek(e) || eB("variantSelections[".concat(n, "] must be an object.")), s = null != (i = e.pseudoDimensionKey) ? i : e.pseudo_dimension_key, c = null != (o = e.variantKey) ? o : e.variant_key, ("string" != typeof s || "string" != typeof c) && eB("variantSelections[".concat(n, "] is missing keys.")), {
                 pseudoDimensionKey: s,
-                variantKey: null != u ? u : c
+                variantKey: c
+            });
+            if (3 === r && u === t.RAQIV2UIPseudoDimension.AggregationType) {
+                let e = Object.values(t.RAQIV2AggregationType).find(e => (0, a.getStableVariantKey)(t.RAQIV2UIPseudoDimension.AggregationType, e) === l);
+                return e || eB("Unsupported aggregation variant ".concat(l, ".")), {
+                    pseudoDimensionKey: u,
+                    variantKey: e
+                }
+            }
+            if (3 === r && u === t.RAQIV2UIPseudoDimension.PercentileType) {
+                let e = Object.values(t.RAQIV2PercentileType).find(e => (0, a.getStableVariantKey)(t.RAQIV2UIPseudoDimension.PercentileType, e) === l);
+                return e || eB("Unsupported percentile variant ".concat(l, ".")), {
+                    pseudoDimensionKey: u,
+                    variantKey: e
+                }
+            }
+            let d = u === t.RAQIV2UIPseudoDimension.AggregationType ? eW(l) : void 0;
+            return {
+                pseudoDimensionKey: u,
+                variantKey: null != d ? d : l
             }
         })
     }
 
-    function eX(e) {
+    function e$(e) {
         if (!e || 0 === e.length) return;
         let r = null,
             n = null,
             a = t.RAQIV2UIPseudoDimension.AggregationType,
             i = t.RAQIV2UIPseudoDimension.PercentileType;
-        for (let t of e) t.pseudoDimensionKey === a && (er(t.variantKey) || ex("Unsupported aggregation variant ".concat(t.variantKey, ".")), r = t.variantKey), t.pseudoDimensionKey === i && (en(t.variantKey) || ex("Unsupported percentile variant ".concat(t.variantKey, ".")), n = t.variantKey);
+        for (let t of e) t.pseudoDimensionKey === a && (en(t.variantKey) || eB("Unsupported aggregation variant ".concat(t.variantKey, ".")), r = t.variantKey), t.pseudoDimensionKey === i && (ea(t.variantKey) || eB("Unsupported percentile variant ".concat(t.variantKey, ".")), n = t.variantKey);
         if (null !== r || null !== n) return {
             aggregationType: r,
             percentile: n
         }
     }
 
-    function e$(e) {
-        let r = ez(e.variantSelections);
+    function eJ(e) {
+        let r = eq(e.variantSelections);
         if (e.computedMetric) {
             var a;
             return {
                 computedMetric: {
                     sources: (a = e.computedMetric).sources.map(e => {
                         let r = e.metric,
-                            a = ez(function(e) {
+                            a = eq(function(e) {
                                 if (!e) return;
                                 let r = [];
                                 return e.aggregationType && r.push({
@@ -2227,7 +2242,7 @@
                                     variantKey: e.percentile
                                 }), r.length > 0 ? r : void 0
                             }(e.pseudoDimensionValues)),
-                            i = e.filters ? eH(e.filters) : void 0;
+                            i = e.filters ? eK(e.filters) : void 0;
                         return (0, n.isCustomEventsAtomicMetricLike)(r) ? {
                             sourceKey: e.key,
                             metric: {
@@ -2235,7 +2250,7 @@
                                     metricKey: r.metric,
                                     customEventName: r.customEventName,
                                     ...r.aggregationType ? {
-                                        aggregation: eB(r.aggregationType, e_, "aggregation")
+                                        aggregation: eL(r.aggregationType, eV, "aggregation")
                                     } : {}
                                 }
                             },
@@ -2279,141 +2294,141 @@
         }
     }
 
-    function eJ(e, r) {
-        var n, a, i;
-        eP(e) || ex("".concat(r, " must be an object."));
-        let o = eW(null != (n = e.variantSelections) ? n : e.variant_selections),
-            s = null != (a = e.computedMetric) ? a : e.computed_metric;
-        if (void 0 !== s) return {
-            computedMetric: function(e, r) {
-                eP(e) || ex("".concat(r, " must be an object."));
+    function eZ(e, r, n) {
+        var a, i, o;
+        ek(e) || eB("".concat(r, " must be an object."));
+        let s = eX(null != (a = e.variantSelections) ? a : e.variant_selections, n),
+            c = null != (i = e.computedMetric) ? i : e.computed_metric;
+        if (void 0 !== c) return {
+            computedMetric: function(e, r, n) {
+                ek(e) || eB("".concat(r, " must be an object."));
                 let {
-                    sources: n,
-                    formula: a,
-                    displayName: i,
-                    l7Smoothing: o
+                    sources: a,
+                    formula: i,
+                    displayName: o,
+                    l7Smoothing: s
                 } = e;
-                Array.isArray(n) && 0 !== n.length && "string" == typeof a || ex("".concat(r, " is not a valid computed metric."));
-                let [s, ...c] = n.map((e, n) => {
-                    var a, i, o, s, c, u, l, d, h;
-                    let m, p, f;
-                    eP(e) || ex("".concat(r, ".sources[").concat(n, "] must be an object."));
-                    let y = null != (a = null != (i = e.sourceKey) ? i : e.source_key) ? a : e.key;
-                    ("string" != typeof y || 0 === y.length) && ex("".concat(r, ".sources[").concat(n, "].sourceKey must be set."));
-                    let g = void 0 === e.filters ? void 0 : eF(e.filters, "".concat(r, ".sources[").concat(n, "].filters")),
-                        v = eW(null != (o = e.variantSelections) ? o : e.variant_selections),
-                        b = e.metric,
-                        A = null != (s = e.metricKey) ? s : e.metric_key;
-                    if (void 0 !== b && void 0 !== A && ex("".concat(r, ".sources[").concat(n, "] must not contain both metric and metricKey representations.")), void 0 !== A)
-                        if ("string" != typeof A && ex("".concat(r, ".sources[").concat(n, "].metricKey must be a string.")), A === t.RAQIV2UIMetric.CustomEventsV2) {
-                            let e = null != (c = null == g ? void 0 : g.filter(e => e.dimension === t.RAQIV2Dimension.CustomEventName)) ? c : [],
-                                a = e[0],
-                                i = null == a ? void 0 : a.values[0];
-                            (1 !== e.length || (null == a ? void 0 : a.values.length) !== 1 || "string" != typeof i || 0 === i.trim().length) && ex("".concat(r, ".sources[").concat(n, "] must contain exactly one non-empty ") + "".concat(t.RAQIV2Dimension.CustomEventName, " filter for a canonical custom event."));
-                            let o = null != (u = null == v ? void 0 : v.filter(e => e.pseudoDimensionKey === t.RAQIV2UIPseudoDimension.AggregationType)) ? u : [];
-                            o.length > 1 && ex("".concat(r, ".sources[").concat(n, "] must not contain multiple ") + "".concat(t.RAQIV2UIPseudoDimension.AggregationType, " selections for a canonical custom event."));
+                Array.isArray(a) && 0 !== a.length && "string" == typeof i || eB("".concat(r, " is not a valid computed metric."));
+                let [c, ...u] = a.map((e, a) => {
+                    var i, o, s, c, u, l, d, h, m;
+                    let p, f, y;
+                    ek(e) || eB("".concat(r, ".sources[").concat(a, "] must be an object."));
+                    let g = null != (i = null != (o = e.sourceKey) ? o : e.source_key) ? i : e.key;
+                    ("string" != typeof g || 0 === g.length) && eB("".concat(r, ".sources[").concat(a, "].sourceKey must be set."));
+                    let v = void 0 === e.filters ? void 0 : eF(e.filters, "".concat(r, ".sources[").concat(a, "].filters")),
+                        b = eX(null != (s = e.variantSelections) ? s : e.variant_selections, n),
+                        A = e.metric,
+                        D = null != (c = e.metricKey) ? c : e.metric_key;
+                    if (void 0 !== A && void 0 !== D && eB("".concat(r, ".sources[").concat(a, "] must not contain both metric and metricKey representations.")), void 0 !== D)
+                        if ("string" != typeof D && eB("".concat(r, ".sources[").concat(a, "].metricKey must be a string.")), D === t.RAQIV2UIMetric.CustomEventsV2) {
+                            let e = null != (u = null == v ? void 0 : v.filter(e => e.dimension === t.RAQIV2Dimension.CustomEventName)) ? u : [],
+                                n = e[0],
+                                i = null == n ? void 0 : n.values[0];
+                            (1 !== e.length || (null == n ? void 0 : n.values.length) !== 1 || "string" != typeof i || 0 === i.trim().length) && eB("".concat(r, ".sources[").concat(a, "] must contain exactly one non-empty ") + "".concat(t.RAQIV2Dimension.CustomEventName, " filter for a canonical custom event."));
+                            let o = null != (l = null == b ? void 0 : b.filter(e => e.pseudoDimensionKey === t.RAQIV2UIPseudoDimension.AggregationType)) ? l : [];
+                            o.length > 1 && eB("".concat(r, ".sources[").concat(a, "] must not contain multiple ") + "".concat(t.RAQIV2UIPseudoDimension.AggregationType, " selections for a canonical custom event."));
                             let s = o[0],
-                                l = null == s ? void 0 : s.variantKey;
-                            void 0 === l || er(l) || ex("".concat(r, ".sources[").concat(n, "] has an invalid custom-event aggregation.")), m = {
+                                c = null == s ? void 0 : s.variantKey;
+                            void 0 === c || en(c) || eB("".concat(r, ".sources[").concat(a, "] has an invalid custom-event aggregation.")), p = {
                                 metric: t.RAQIV2UIMetric.CustomEventsV2,
                                 customEventName: i,
-                                ...void 0 !== l ? {
-                                    aggregationType: l
+                                ...void 0 !== c ? {
+                                    aggregationType: c
                                 } : {}
-                            }, p = null == g ? void 0 : g.filter(e => e.dimension !== t.RAQIV2Dimension.CustomEventName).map(e => ej(e, "".concat(r, ".sources[").concat(n, "].filters"))), f = eX(null == v ? void 0 : v.filter(e => e.pseudoDimensionKey !== t.RAQIV2UIPseudoDimension.AggregationType))
-                        } else ea(A) || ex("".concat(r, ".sources[").concat(n, "].metricKey is unsupported.")), m = A, p = null == g ? void 0 : g.map(e => ej(e, "".concat(r, ".sources[").concat(n, "].filters"))), f = eX(v);
+                            }, f = null == v ? void 0 : v.filter(e => e.dimension !== t.RAQIV2Dimension.CustomEventName).map(e => ez(e, "".concat(r, ".sources[").concat(a, "].filters"))), y = e$(null == b ? void 0 : b.filter(e => e.pseudoDimensionKey !== t.RAQIV2UIPseudoDimension.AggregationType))
+                        } else ei(D) || eB("".concat(r, ".sources[").concat(a, "].metricKey is unsupported.")), p = D, f = null == v ? void 0 : v.map(e => ez(e, "".concat(r, ".sources[").concat(a, "].filters"))), y = e$(b);
                     else {
-                        eP(b) || ex("".concat(r, ".sources[").concat(n, "] must contain either metric or metricKey."));
-                        let e = null != (l = b.customEventMetric) ? l : b.custom_event_metric;
-                        if (eP(e)) {
-                            let a, i = null != (d = e.customEventName) ? d : e.custom_event_name;
-                            ("string" != typeof i || 0 === i.trim().length) && ex("".concat(r, ".sources[").concat(n, "].metric.customEventMetric is invalid.")), m = {
+                        ek(A) || eB("".concat(r, ".sources[").concat(a, "] must contain either metric or metricKey."));
+                        let e = null != (d = A.customEventMetric) ? d : A.custom_event_metric;
+                        if (ek(e)) {
+                            let n, i = null != (h = e.customEventName) ? h : e.custom_event_name;
+                            ("string" != typeof i || 0 === i.trim().length) && eB("".concat(r, ".sources[").concat(a, "].metric.customEventMetric is invalid.")), p = {
                                 metric: t.RAQIV2UIMetric.CustomEventsV2,
                                 customEventName: i,
                                 ...void 0 !== e.aggregation ? {
-                                    aggregationType: er(a = eL(e.aggregation, eV, "aggregation")) ? a : ex("Unsupported custom-event aggregation ".concat(a, "."))
+                                    aggregationType: en(n = eQ(e.aggregation, eO, "aggregation")) ? n : eB("Unsupported custom-event aggregation ".concat(n, "."))
                                 } : {}
                             }
                         } else {
-                            let e = null != (h = b.metricKey) ? h : b.metric_key;
-                            "string" != typeof e && ex("".concat(r, ".sources[").concat(n, "].metric.metricKey must be set.")), ea(e) || ex("".concat(r, ".sources[").concat(n, "].metric.metricKey is unsupported.")), m = e
+                            let e = null != (m = A.metricKey) ? m : A.metric_key;
+                            "string" != typeof e && eB("".concat(r, ".sources[").concat(a, "].metric.metricKey must be set.")), ei(e) || eB("".concat(r, ".sources[").concat(a, "].metric.metricKey is unsupported.")), p = e
                         }
-                        p = null == g ? void 0 : g.map(e => ej(e, "".concat(r, ".sources[").concat(n, "].filters"))), f = eX(eP(e) ? null == v ? void 0 : v.filter(e => e.pseudoDimensionKey !== t.RAQIV2UIPseudoDimension.AggregationType) : v)
+                        f = null == v ? void 0 : v.map(e => ez(e, "".concat(r, ".sources[").concat(a, "].filters"))), y = e$(ek(e) ? null == b ? void 0 : b.filter(e => e.pseudoDimensionKey !== t.RAQIV2UIPseudoDimension.AggregationType) : b)
                     }
                     return {
-                        key: y,
-                        metric: m,
-                        ...void 0 !== p ? {
-                            filters: p
-                        } : {},
+                        key: g,
+                        metric: p,
                         ...void 0 !== f ? {
-                            pseudoDimensionValues: f
+                            filters: f
+                        } : {},
+                        ...void 0 !== y ? {
+                            pseudoDimensionValues: y
                         } : {}
                     }
                 });
-                return s || ex("".concat(r, ".sources must be non-empty.")), {
-                    sources: [s, ...c],
-                    formula: a,
-                    ..."string" == typeof i ? {
-                        name: i
+                return c || eB("".concat(r, ".sources must be non-empty.")), {
+                    sources: [c, ...u],
+                    formula: i,
+                    ..."string" == typeof o ? {
+                        name: o
                     } : {},
-                    ..."boolean" == typeof o ? {
-                        l7Smoothing: o
+                    ..."boolean" == typeof s ? {
+                        l7Smoothing: s
                     } : {}
                 }
-            }(s, "".concat(r, ".computedMetric")),
-            variantSelections: o
+            }(c, "".concat(r, ".computedMetric"), n),
+            variantSelections: s
         };
-        let c = null != (i = e.metricKey) ? i : e.metric_key;
-        return ("string" != typeof c || 0 === c.length) && ex("".concat(r, ".metricKey must be set.")), {
-            metricKey: ea(c) ? c : ex("".concat(r, ".metricKey is not a supported numeric metric.")),
-            variantSelections: o
+        let u = null != (o = e.metricKey) ? o : e.metric_key;
+        return ("string" != typeof u || 0 === u.length) && eB("".concat(r, ".metricKey must be set.")), {
+            metricKey: ei(u) ? u : eB("".concat(r, ".metricKey is not a supported numeric metric.")),
+            variantSelections: s
         }
     }
 
-    function eZ(e, t) {
-        var r, n, i, o, s, c, u, l, d;
+    function e0(e, t) {
+        var r, n, a, o, s, c, u, l, d;
         let h;
         if (null == e) return {};
-        eP(e) || ex("".concat(t, " must be an object."));
-        let m = eP(e.granularity) ? null != (r = e.granularity.fixed) ? r : e.granularity : void 0,
-            p = eP(m) ? m.granularity : void 0,
-            f = void 0 === p ? void 0 : eR[ek(p)],
+        ek(e) || eB("".concat(t, " must be an object."));
+        let m = ek(e.granularity) ? null != (r = e.granularity.fixed) ? r : e.granularity : void 0,
+            p = ek(m) ? m.granularity : void 0,
+            f = void 0 === p ? void 0 : e_[ex(p)],
             y = null != (n = e.annotationOptions) ? n : e.annotation_options,
-            g = eP(y) ? (h = null != (l = eK(null != (d = y.defaultAnnotationTypeKeys) ? d : y.default_annotation_type_keys, "".concat(t, ".annotationOptions.defaultAnnotationTypeKeys"), Z)) ? l : [], {
-                supportedAnnotationTypes: (0, a.resolveCustomDashboardSupportedAnnotationTypes)(h),
+            g = ek(y) ? (h = null != (l = ej(null != (d = y.defaultAnnotationTypeKeys) ? d : y.default_annotation_type_keys, "".concat(t, ".annotationOptions.defaultAnnotationTypeKeys"), ee)) ? l : [], {
+                supportedAnnotationTypes: (0, i.resolveCustomDashboardSupportedAnnotationTypes)(h),
                 defaultAnnotationTypes: h,
                 showAnnotationsControl: "boolean" == typeof y.showAnnotationsControl ? y.showAnnotationsControl : "boolean" != typeof y.show_annotations_control || y.show_annotations_control
             }) : void 0,
-            v = null != (i = e.defaultFilters) ? i : e.default_filters,
+            v = null != (a = e.defaultFilters) ? a : e.default_filters,
             b = void 0 === v ? void 0 : eF(v, "".concat(t, ".defaultFilters")),
-            A = eK(null != (o = e.filterDimensionKeys) ? o : e.filter_dimension_keys, "".concat(t, ".filterDimensionKeys"), $),
-            D = eK(null != (s = e.breakdownDimensionKeys) ? s : e.breakdown_dimension_keys, "".concat(t, ".breakdownDimensionKeys"), $),
-            C = eK(null != (c = e.defaultBreakdownDimensionKeys) ? c : e.default_breakdown_dimension_keys, "".concat(t, ".defaultBreakdownDimensionKeys"), X);
+            A = ej(null != (o = e.filterDimensionKeys) ? o : e.filter_dimension_keys, "".concat(t, ".filterDimensionKeys"), J),
+            D = ej(null != (s = e.breakdownDimensionKeys) ? s : e.breakdown_dimension_keys, "".concat(t, ".breakdownDimensionKeys"), J),
+            C = ej(null != (c = e.defaultBreakdownDimensionKeys) ? c : e.default_breakdown_dimension_keys, "".concat(t, ".defaultBreakdownDimensionKeys"), $);
         return {
             timeRangeOptions: function(e, t) {
                 var r, n;
                 if (null == e) return;
-                if (eP(e) || ex("".concat(t, " must be an object.")), void 0 !== e.none) return {
+                if (ek(e) || eB("".concat(t, " must be an object.")), void 0 !== e.none) return {
                     type: "None"
                 };
                 let a = null != (r = e.dateRange) ? r : e.date_range;
-                if (void 0 !== a) return eP(a) || ex("".concat(t, ".dateRange must be an object.")), {
+                if (void 0 !== a) return ek(a) || eB("".concat(t, ".dateRange must be an object.")), {
                     type: "DateRange",
                     defaultSelection: function(e, t) {
                         var r, n, a, i;
                         if (null == e) return;
-                        eP(e) || ex("".concat(t, " must be an object."));
+                        ek(e) || eB("".concat(t, " must be an object."));
                         let o = null != (r = e.relativeRangeKey) ? r : e.relative_range_key;
-                        if ("string" == typeof o) return et(o) || ex("".concat(t, ".relativeRangeKey is unsupported.")), {
+                        if ("string" == typeof o) return er(o) || eB("".concat(t, ".relativeRangeKey is unsupported.")), {
                             type: "Relative",
                             rangeType: o
                         };
                         let s = null != (n = e.customRange) ? n : e.custom_range;
-                        if (eP(s)) return {
+                        if (ek(s)) return {
                             type: "Custom",
-                            startTimeMs: eG(null != (a = s.startTime) ? a : s.start_time, "".concat(t, ".customRange.startTime")),
-                            endTimeMs: eG(null != (i = s.endTime) ? i : s.end_time, "".concat(t, ".customRange.endTime"))
+                            startTimeMs: eH(null != (a = s.startTime) ? a : s.start_time, "".concat(t, ".customRange.startTime")),
+                            endTimeMs: eH(null != (i = s.endTime) ? i : s.end_time, "".concat(t, ".customRange.endTime"))
                         }
                     }(null != (n = a.defaultSelection) ? n : a.default_selection, "".concat(t, ".dateRange.defaultSelection"))
                 }
@@ -2427,104 +2442,104 @@
         }
     }
 
-    function e0(e) {
+    function e1(e) {
         return {
-            metric: e$(e.metric),
+            metric: eJ(e.metric),
             seriesKey: e.seriesKey,
             ...e.filters ? {
-                filters: eH(e.filters)
+                filters: eK(e.filters)
             } : {},
             ...e.aggregation ? {
-                aggregation: eB(e.aggregation, e_, "aggregation")
+                aggregation: eL(e.aggregation, eV, "aggregation")
             } : {}
         }
     }
 
-    function e1(e, t) {
-        var r, n, a, i;
-        eP(e) || ex("".concat(t, " must be an object."));
-        let s = null != (r = e.summaryCard) ? r : e.summary_card;
-        if (void 0 !== s) {
-            let e, r;
+    function e2(e, t, r) {
+        var n, a, i, o;
+        ek(e) || eB("".concat(t, " must be an object."));
+        let c = null != (n = e.summaryCard) ? n : e.summary_card;
+        if (void 0 !== c) {
+            let e, n;
             return {
                 type: "Component",
                 component: {
                     type: "SummaryCard",
-                    summaryCard: (n = "".concat(t, ".summaryCard"), eP(s) || ex("".concat(n, " must be an object.")), ("string" != typeof(e = null != (a = s.tileId) ? a : s.tile_id) || 0 === e.length) && ex("".concat(n, ".tileId must be set.")), r = null != (i = s.titleSource) ? i : s.title_source, {
+                    summaryCard: (a = "".concat(t, ".summaryCard"), ek(c) || eB("".concat(a, " must be an object.")), ("string" != typeof(e = null != (i = c.tileId) ? i : c.tile_id) || 0 === e.length) && eB("".concat(a, ".tileId must be set.")), n = null != (o = c.titleSource) ? o : c.title_source, {
                         type: "SummaryCard",
                         tileId: e,
-                        ..."string" == typeof s.title ? {
-                            title: s.title
+                        ..."string" == typeof c.title ? {
+                            title: c.title
                         } : {},
-                        metric: eJ(s.metric, "".concat(n, ".metric")),
-                        aggregation: eL(s.aggregation, eV, "aggregation"),
-                        filters: eF(s.filters, "".concat(n, ".filters")),
-                        ...void 0 !== r ? {
-                            titleSource: eL(r, eN, "titleSource")
+                        metric: eZ(c.metric, "".concat(a, ".metric"), r),
+                        aggregation: eQ(c.aggregation, eO, "aggregation"),
+                        filters: eF(c.filters, "".concat(a, ".filters")),
+                        ...void 0 !== n ? {
+                            titleSource: eQ(n, eU, "titleSource")
                         } : {}
                     })
                 }
             }
         }
-        let c = e.chart;
-        return void 0 !== c ? {
+        let u = e.chart;
+        return void 0 !== u ? {
             type: "Component",
             component: {
                 type: "Chart",
-                chart: function(e, t) {
-                    var r, n, a, i, s;
-                    let c, u;
-                    eP(e) || ex("".concat(t, " must be an object."));
-                    let l = null != (r = e.tileId) ? r : e.tile_id;
-                    ("string" != typeof l || 0 === l.length) && ex("".concat(t, ".tileId must be set."));
-                    let d = null != (n = e.dataSpec) ? n : e.data_spec,
-                        h = null != (a = e.chartSpec) ? a : e.chart_spec;
-                    eP(d) && eP(h) || ex("".concat(t, " must include dataSpec and chartSpec.")), Array.isArray(d.metrics) || ex("".concat(t, ".dataSpec.metrics must be an array."));
-                    let m = eL(null != (i = h.chartType) ? i : h.chart_type, eT, "chartType"),
-                        p = d.granularity,
-                        f = h.smoothing;
-                    if (void 0 !== d.aggregation) {
-                        let e = eL(d.aggregation, eV, "aggregation");
-                        ee(e) || ex("Unsupported chart aggregation ".concat(e, ".")), c = e
+                chart: function(e, t, r) {
+                    var n, a, i, o, c;
+                    let u, l;
+                    ek(e) || eB("".concat(t, " must be an object."));
+                    let d = null != (n = e.tileId) ? n : e.tile_id;
+                    ("string" != typeof d || 0 === d.length) && eB("".concat(t, ".tileId must be set."));
+                    let h = null != (a = e.dataSpec) ? a : e.data_spec,
+                        m = null != (i = e.chartSpec) ? i : e.chart_spec;
+                    ek(h) && ek(m) || eB("".concat(t, " must include dataSpec and chartSpec.")), Array.isArray(h.metrics) || eB("".concat(t, ".dataSpec.metrics must be an array."));
+                    let p = eQ(null != (o = m.chartType) ? o : m.chart_type, eS, "chartType"),
+                        f = h.granularity,
+                        y = m.smoothing;
+                    if (void 0 !== h.aggregation) {
+                        let e = eQ(h.aggregation, eO, "aggregation");
+                        et(e) || eB("Unsupported chart aggregation ".concat(e, ".")), u = e
                     }
-                    let y = null != (s = d.breakdownDimensionKeys) ? s : d.breakdown_dimension_keys;
-                    Array.isArray(y) && (y.every(e => "string" == typeof e) || ex("".concat(t, ".dataSpec.breakdownDimensionKeys must contain strings.")), u = y);
-                    let g = void 0 !== p ? eL(p, eE, "granularity") : o.DEFAULT_CHART_GRANULARITY;
+                    let g = null != (c = h.breakdownDimensionKeys) ? c : h.breakdown_dimension_keys;
+                    Array.isArray(g) && (g.every(e => "string" == typeof e) || eB("".concat(t, ".dataSpec.breakdownDimensionKeys must contain strings.")), l = g);
+                    let v = void 0 !== f ? eQ(f, eI, "granularity") : s.DEFAULT_CHART_GRANULARITY;
                     return {
                         type: "Chart",
-                        tileId: l,
+                        tileId: d,
                         ..."string" == typeof e.title ? {
                             title: e.title
                         } : {},
                         dataSpec: {
-                            metrics: d.metrics.map((e, r) => {
-                                var n, a;
-                                let i, o;
-                                return n = "".concat(t, ".dataSpec.metrics[").concat(r, "]"), eP(e) || ex("".concat(n, " must be an object.")), ("string" != typeof(i = null != (a = e.seriesKey) ? a : e.series_key) || 0 === i.length) && ex("".concat(n, ".seriesKey must be set.")), {
-                                    metric: eJ(e.metric, "".concat(n, ".metric")),
-                                    seriesKey: i,
+                            metrics: h.metrics.map((e, n) => {
+                                var a, i;
+                                let o, s;
+                                return a = "".concat(t, ".dataSpec.metrics[").concat(n, "]"), ek(e) || eB("".concat(a, " must be an object.")), ("string" != typeof(o = null != (i = e.seriesKey) ? i : e.series_key) || 0 === o.length) && eB("".concat(a, ".seriesKey must be set.")), {
+                                    metric: eZ(e.metric, "".concat(a, ".metric"), r),
+                                    seriesKey: o,
                                     ...void 0 === e.filters ? {} : {
-                                        filters: eF(e.filters, "".concat(n, ".filters"))
+                                        filters: eF(e.filters, "".concat(a, ".filters"))
                                     },
                                     ...void 0 !== e.aggregation ? {
-                                        aggregation: ee(o = eL(e.aggregation, eV, "aggregation")) ? o : ex("Unsupported chart aggregation ".concat(o, "."))
+                                        aggregation: et(s = eQ(e.aggregation, eO, "aggregation")) ? s : eB("Unsupported chart aggregation ".concat(s, "."))
                                     } : {}
                                 }
                             }),
-                            ...void 0 !== c ? {
-                                aggregation: c
-                            } : {},
                             ...void 0 !== u ? {
-                                breakdownDimensions: u
+                                aggregation: u
                             } : {},
-                            granularity: g,
-                            filters: eF(d.filters, "".concat(t, ".dataSpec.filters"))
+                            ...void 0 !== l ? {
+                                breakdownDimensions: l
+                            } : {},
+                            granularity: v,
+                            filters: eF(h.filters, "".concat(t, ".dataSpec.filters"))
                         },
                         chartSpec: {
-                            chartType: m,
+                            chartType: p,
                             overlays: function(e) {
                                 var t, r, n, a;
-                                if (!eP(e)) return;
+                                if (!ek(e)) return;
                                 let i = {
                                     ..."boolean" == typeof e.genreBenchmark || "boolean" == typeof e.genre_benchmark ? {
                                         genreBenchmark: !!(null != (t = e.genreBenchmark) ? t : e.genre_benchmark)
@@ -2543,21 +2558,21 @@
                                     } : {}
                                 };
                                 return Object.keys(i).length > 0 ? i : void 0
-                            }(h.overlays),
-                            ...void 0 !== f ? {
-                                smoothing: eL(f, eU, "smoothing")
+                            }(m.overlays),
+                            ...void 0 !== y ? {
+                                smoothing: eQ(y, eP, "smoothing")
                             } : {}
                         }
                     }
-                }(c, "".concat(t, ".chart"))
+                }(u, "".concat(t, ".chart"), r)
             }
-        } : ex("".concat(t, " must set chart or summaryCard."))
+        } : eB("".concat(t, " must set chart or summaryCard."))
     }
 
-    function e2(e) {
+    function e3(e) {
         switch (e.type) {
             case "Component":
-                var r, n, a, i, c, u;
+                var r, n, a, i, o, u;
                 let l, d, h;
                 return {
                     component: "SummaryCard" === (r = e.component).type ? {
@@ -2566,37 +2581,37 @@
                             ...void 0 !== n.title ? {
                                 title: n.title
                             } : {},
-                            metric: e$(n.metric),
-                            aggregation: eB(n.aggregation, e_, "aggregation"),
-                            filters: eH(n.filters),
-                            titleSource: eB(null != (a = n.titleSource) ? a : o.SummaryCardTitleSource.Auto, eO, "titleSource")
+                            metric: eJ(n.metric),
+                            aggregation: eL(n.aggregation, eV, "aggregation"),
+                            filters: eK(n.filters),
+                            titleSource: eL(null != (a = n.titleSource) ? a : s.SummaryCardTitleSource.Auto, eN, "titleSource")
                         }
                     } : {
                         chart: (l = function(e) {
                             if (!e) return;
                             let t = {};
-                            return void 0 !== e.genreBenchmark && (t.genreBenchmark = e.genreBenchmark), void 0 !== e.similarExperienceBenchmark && (t.similarExperienceBenchmark = e.similarExperienceBenchmark), void 0 !== e.topExperienceBenchmark && (t.topExperienceBenchmark = e.topExperienceBenchmark), void 0 !== e.previousPeriod && ("boolean" != typeof e.previousPeriod && ex("Backend v1 cannot persist configured previous-period comparison offsets."), t.previousPeriod = e.previousPeriod), void 0 !== e.quota && (t.quota = e.quota), Object.keys(t).length > 0 ? t : void 0
-                        }((i = r.chart).chartSpec.overlays), d = null == (u = i.dataSpec.metrics[0]) ? void 0 : u.metric, h = null != (c = i.dataSpec.aggregation) ? c : void 0 !== d ? (0, s.resolveDefaultChartAggregation)(d) : t.RAQIV2AggregationType.Average, {
+                            return void 0 !== e.genreBenchmark && (t.genreBenchmark = e.genreBenchmark), void 0 !== e.similarExperienceBenchmark && (t.similarExperienceBenchmark = e.similarExperienceBenchmark), void 0 !== e.topExperienceBenchmark && (t.topExperienceBenchmark = e.topExperienceBenchmark), void 0 !== e.previousPeriod && ("boolean" != typeof e.previousPeriod && eB("Backend v1 cannot persist configured previous-period comparison offsets."), t.previousPeriod = e.previousPeriod), void 0 !== e.quota && (t.quota = e.quota), Object.keys(t).length > 0 ? t : void 0
+                        }((i = r.chart).chartSpec.overlays), d = null == (u = i.dataSpec.metrics[0]) ? void 0 : u.metric, h = null != (o = i.dataSpec.aggregation) ? o : void 0 !== d ? (0, c.resolveDefaultChartAggregation)(d) : t.RAQIV2AggregationType.Average, {
                             tileId: i.tileId,
                             ...void 0 !== i.title ? {
                                 title: i.title
                             } : {},
                             dataSpec: {
-                                metrics: i.dataSpec.metrics.map(e0),
-                                aggregation: eB(h, e_, "aggregation"),
+                                metrics: i.dataSpec.metrics.map(e1),
+                                aggregation: eL(h, eV, "aggregation"),
                                 ...i.dataSpec.breakdownDimensions ? {
                                     breakdownDimensionKeys: [...i.dataSpec.breakdownDimensions]
                                 } : {},
-                                granularity: eB(i.dataSpec.granularity, eS, "granularity"),
-                                filters: eH(i.dataSpec.filters)
+                                granularity: eL(i.dataSpec.granularity, eE, "granularity"),
+                                filters: eK(i.dataSpec.filters)
                             },
                             chartSpec: {
-                                chartType: eB(i.chartSpec.chartType, ew, "chartType"),
+                                chartType: eL(i.chartSpec.chartType, eT, "chartType"),
                                 ...l ? {
                                     overlays: l
                                 } : {},
                                 ...i.chartSpec.smoothing ? {
-                                    smoothing: eB(i.chartSpec.smoothing, eM, "smoothing")
+                                    smoothing: eL(i.chartSpec.smoothing, eM, "smoothing")
                                 } : {}
                             }
                         })
@@ -2605,106 +2620,110 @@
             case "Stack":
                 return {
                     stack: {
-                        children: e.children.map(e2)
+                        children: e.children.map(e3)
                     }
                 };
             case "Flex":
                 return {
                     flex: {
-                        children: e.children.map(e2)
+                        children: e.children.map(e3)
                     }
                 };
             case "Grid":
                 return {
                     grid: {
                         columnCount: e.columnCount,
-                        children: e.children.map(e2)
+                        children: e.children.map(e3)
                     }
                 };
             default:
-                return ex("Unsupported layout node ".concat(JSON.stringify(e), "."))
+                return eB("Unsupported layout node ".concat(JSON.stringify(e), "."))
         }
     }
 
-    function e3(e, t) {
-        var r, n;
-        if (eP(e) || ex("".concat(t, " must be an object.")), "string" == typeof e.type) {
-            if ("Component" === e.type) return e1(e.component, "".concat(t, ".component"));
-            if ("Stack" === e.type || "Flex" === e.type) return Array.isArray(e.children) || ex("".concat(t, ".children must be an array.")), {
+    function e5(e, t, r) {
+        var n, a;
+        if (ek(e) || eB("".concat(t, " must be an object.")), "string" == typeof e.type) {
+            if ("Component" === e.type) return e2(e.component, "".concat(t, ".component"), r);
+            if ("Stack" === e.type || "Flex" === e.type) return Array.isArray(e.children) || eB("".concat(t, ".children must be an array.")), {
                 type: e.type,
-                children: e.children.map((e, r) => e3(e, "".concat(t, ".children[").concat(r, "]")))
+                children: e.children.map((e, n) => e5(e, "".concat(t, ".children[").concat(n, "]"), r))
             };
             if ("Grid" === e.type) {
-                Array.isArray(e.children) || ex("".concat(t, ".children must be an array."));
-                let n = null != (r = e.columnCount) ? r : e.column_count;
-                return 1 !== n && 2 !== n && ex("".concat(t, ".columnCount must be 1 or 2.")), {
+                Array.isArray(e.children) || eB("".concat(t, ".children must be an array."));
+                let a = null != (n = e.columnCount) ? n : e.column_count;
+                return 1 !== a && 2 !== a && eB("".concat(t, ".columnCount must be 1 or 2.")), {
                     type: "Grid",
-                    columnCount: n,
-                    children: e.children.map((e, r) => e3(e, "".concat(t, ".children[").concat(r, "]")))
+                    columnCount: a,
+                    children: e.children.map((e, n) => e5(e, "".concat(t, ".children[").concat(n, "]"), r))
                 }
             }
         }
-        if (void 0 !== e.component) return e1(e.component, "".concat(t, ".component"));
-        if (void 0 !== e.stack) return eP(e.stack) && Array.isArray(e.stack.children) || ex("".concat(t, ".stack.children must be an array.")), {
+        if (void 0 !== e.component) return e2(e.component, "".concat(t, ".component"), r);
+        if (void 0 !== e.stack) return ek(e.stack) && Array.isArray(e.stack.children) || eB("".concat(t, ".stack.children must be an array.")), {
             type: "Stack",
-            children: e.stack.children.map((e, r) => e3(e, "".concat(t, ".stack.children[").concat(r, "]")))
+            children: e.stack.children.map((e, n) => e5(e, "".concat(t, ".stack.children[").concat(n, "]"), r))
         };
-        if (void 0 !== e.flex) return eP(e.flex) && Array.isArray(e.flex.children) || ex("".concat(t, ".flex.children must be an array.")), {
+        if (void 0 !== e.flex) return ek(e.flex) && Array.isArray(e.flex.children) || eB("".concat(t, ".flex.children must be an array.")), {
             type: "Flex",
-            children: e.flex.children.map((e, r) => e3(e, "".concat(t, ".flex.children[").concat(r, "]")))
+            children: e.flex.children.map((e, n) => e5(e, "".concat(t, ".flex.children[").concat(n, "]"), r))
         };
         if (void 0 !== e.grid) {
-            eP(e.grid) && Array.isArray(e.grid.children) || ex("".concat(t, ".grid.children must be an array."));
-            let r = null != (n = e.grid.columnCount) ? n : e.grid.column_count;
-            return 1 !== r && 2 !== r && ex("".concat(t, ".grid.columnCount must be 1 or 2.")), {
+            ek(e.grid) && Array.isArray(e.grid.children) || eB("".concat(t, ".grid.children must be an array."));
+            let n = null != (a = e.grid.columnCount) ? a : e.grid.column_count;
+            return 1 !== n && 2 !== n && eB("".concat(t, ".grid.columnCount must be 1 or 2.")), {
                 type: "Grid",
-                columnCount: r,
-                children: e.grid.children.map((e, r) => e3(e, "".concat(t, ".grid.children[").concat(r, "]")))
+                columnCount: n,
+                children: e.grid.children.map((e, n) => e5(e, "".concat(t, ".grid.children[").concat(n, "]"), r))
             }
         }
-        return ex("".concat(t, " must set component, stack, flex, or grid."))
+        return eB("".concat(t, " must set component, stack, flex, or grid."))
+    }
+
+    function e8(e) {
+        var t;
+        return ek(e) ? null != (t = e.schemaVersion) ? t : e.schema_version : void 0
     }
     e.s(["backendDocumentHasUpperSnakeAggregationVariants", 0, function(e) {
         return function e(r) {
             var n, a;
             if (Array.isArray(r)) return r.some(e);
-            if (!eP(r)) return !1;
+            if (!ek(r)) return !1;
             let i = null != (n = r.pseudoDimensionKey) ? n : r.pseudo_dimension_key,
                 o = null != (a = r.variantKey) ? a : r.variant_key;
-            return "string" == typeof i && "string" == typeof o && i === t.RAQIV2UIPseudoDimension.AggregationType && void 0 !== eY(o) || Object.values(r).some(e)
+            return "string" == typeof i && "string" == typeof o && i === t.RAQIV2UIPseudoDimension.AggregationType && void 0 !== eW(o) || Object.values(r).some(e)
         }(e)
     }, "backendDocumentToCustomDashboardConfig", 0, function(e) {
-        var t;
-        eP(e) || ex("Backend custom dashboard document is missing config.");
-        let r = null != (t = e.schemaVersion) ? t : e.schema_version;
-        return "number" == typeof r && eC.includes(r) || ex("Unsupported backend custom dashboard schema version ".concat(String(r), ".")), eP(e.config) || ex("Backend custom dashboard document is missing config."), eP(e.config.page) || ex("config.page must be an object."), eD({
-            page: function(e, t) {
-                var r, n, a;
-                if (eP(e) || ex("".concat(t, " must be an object.")), e.mode === o.DashboardPageMode.Untabbed) {
-                    let r = e.surface;
-                    eP(r) || ex("".concat(t, ".surface must be an object."));
-                    let n = null != (a = r.bodyNodes) ? a : r.body_nodes;
-                    return Array.isArray(n) || ex("".concat(t, ".surface.bodyNodes must be an array.")), {
-                        mode: o.DashboardPageMode.Untabbed,
+        ek(e) || eB("Backend custom dashboard document is missing config.");
+        let t = e8(e);
+        return "number" == typeof t && ew.includes(t) || eB("Unsupported backend custom dashboard schema version ".concat(String(t), ".")), ek(e.config) || eB("Backend custom dashboard document is missing config."), ek(e.config.page) || eB("config.page must be an object."), eC({
+            page: function(e, t, r) {
+                var n, a, i;
+                if (ek(e) || eB("".concat(t, " must be an object.")), e.mode === s.DashboardPageMode.Untabbed) {
+                    let n = e.surface;
+                    ek(n) || eB("".concat(t, ".surface must be an object."));
+                    let a = null != (i = n.bodyNodes) ? i : n.body_nodes;
+                    return Array.isArray(a) || eB("".concat(t, ".surface.bodyNodes must be an array.")), {
+                        mode: s.DashboardPageMode.Untabbed,
                         surface: {
-                            controls: eZ(r.controls, "".concat(t, ".surface.controls")),
-                            bodyNodes: n.map((e, r) => e3(e, "".concat(t, ".surface.bodyNodes[").concat(r, "]")))
+                            controls: e0(n.controls, "".concat(t, ".surface.controls")),
+                            bodyNodes: a.map((e, n) => e5(e, "".concat(t, ".surface.bodyNodes[").concat(n, "]"), r))
                         }
                     }
                 }
-                let i = e.untabbed;
-                eP(i) || ex("".concat(t, ".untabbed must be an object."));
-                let s = i.surface;
-                eP(s) || ex("".concat(t, ".untabbed.surface must be an object."));
-                let c = null != (r = null != (n = s.bodyNodes) ? n : s.body_nodes) ? r : [];
-                return Array.isArray(c) || ex("".concat(t, ".untabbed.surface.bodyNodes must be an array.")), {
-                    mode: o.DashboardPageMode.Untabbed,
+                let o = e.untabbed;
+                ek(o) || eB("".concat(t, ".untabbed must be an object."));
+                let c = o.surface;
+                ek(c) || eB("".concat(t, ".untabbed.surface must be an object."));
+                let u = null != (n = null != (a = c.bodyNodes) ? a : c.body_nodes) ? n : [];
+                return Array.isArray(u) || eB("".concat(t, ".untabbed.surface.bodyNodes must be an array.")), {
+                    mode: s.DashboardPageMode.Untabbed,
                     surface: {
-                        controls: eZ(s.controls, "".concat(t, ".untabbed.surface.controls")),
-                        bodyNodes: c.map((e, r) => e3(e, "".concat(t, ".untabbed.surface.bodyNodes[").concat(r, "]")))
+                        controls: e0(c.controls, "".concat(t, ".untabbed.surface.controls")),
+                        bodyNodes: u.map((e, n) => e5(e, "".concat(t, ".untabbed.surface.bodyNodes[").concat(n, "]"), r))
                     }
                 }
-            }(e.config.page, "config.page")
+            }(e.config.page, "config.page", t)
         }, {
             limits: null
         })
@@ -2712,13 +2731,13 @@
         var t, r;
         let n;
         return {
-            schemaVersion: o.BACKEND_DOCUMENT_WRITE_SCHEMA_VERSION,
+            schemaVersion: s.BACKEND_DOCUMENT_WRITE_SCHEMA_VERSION,
             config: {
-                page: ((t = e.page).mode !== o.DashboardPageMode.Untabbed && ex("Only untabbed dashboard pages can be serialized to the backend."), {
+                page: ((t = e.page).mode !== s.DashboardPageMode.Untabbed && eB("Only untabbed dashboard pages can be serialized to the backend."), {
                     untabbed: {
                         surface: {
                             resourceTypeKeys: [1],
-                            controls: (n = (r = t.surface.controls).defaultGranularity ? eI[r.defaultGranularity] : void 0, {
+                            controls: (n = (r = t.surface.controls).defaultGranularity ? eR[r.defaultGranularity] : void 0, {
                                 ...r.timeRangeOptions ? {
                                     timeRangeOptions: function(e) {
                                         if ("None" === e.type) return {
@@ -2732,8 +2751,8 @@
                                                         relativeRangeKey: t.rangeType
                                                     } : {
                                                         customRange: {
-                                                            startTime: eQ(t.startTimeMs),
-                                                            endTime: eQ(t.endTimeMs)
+                                                            startTime: eG(t.startTimeMs),
+                                                            endTime: eG(t.endTimeMs)
                                                         }
                                                     }
                                                 }
@@ -2748,7 +2767,7 @@
                                     filterDimensionKeys: [...r.filterDimensions]
                                 } : {},
                                 ...r.defaultFilters ? {
-                                    defaultFilters: eH(r.defaultFilters)
+                                    defaultFilters: eK(r.defaultFilters)
                                 } : {},
                                 ...r.breakdownDimensions ? {
                                     breakdownDimensionKeys: [...r.breakdownDimensions]
@@ -2770,13 +2789,13 @@
                                     }
                                 } : {}
                             }),
-                            bodyNodes: t.surface.bodyNodes.map(e2)
+                            bodyNodes: t.surface.bodyNodes.map(e3)
                         }
                     }
                 })
             }
         }
-    }], 509434)
+    }, "getBackendDocumentSchemaVersion", 0, e8], 509434)
 }, 257969, e => {
     "use strict";
     let t = {
@@ -3223,12 +3242,12 @@
         }
     }
 
-    function M(e) {
+    function U(e) {
         let t = {};
         return void 0 !== e.name && (t.name = e.name), void 0 !== e.description && (t.description = e.description), void 0 !== e.isPinned && (t.isPinned = e.isPinned), t
     }
 
-    function U(e) {
+    function M(e) {
         return "object" == typeof e && null !== e && !Array.isArray(e)
     }
 
@@ -3236,14 +3255,14 @@
         var r, n, a, i;
         let o = null != (r = null == e ? void 0 : e.status) ? r : 0,
             s = function(e) {
-                if (!U(e)) return;
+                if (!M(e)) return;
                 let {
                     code: t,
                     message: r,
                     error: n,
                     details: a
                 } = e, i = function(e) {
-                    if (!U(e)) return;
+                    if (!M(e)) return;
                     let {
                         code: t,
                         message: r,
@@ -3397,7 +3416,7 @@
                         universeId: n,
                         dashboardId: a,
                         expectedHeadEtag: i,
-                        patch: M(o)
+                        patch: U(o)
                     }
                 });
                 return (c || !s) && P(u, c), null != (r = s.metadata) ? r : {}
@@ -3410,7 +3429,7 @@
                     expectedHeadEtag: i,
                     document: o,
                     metadataPatch: s
-                } = t, c = void 0 === s ? void 0 : M(s), u = {
+                } = t, c = void 0 === s ? void 0 : U(s), u = {
                     universeId: n,
                     dashboardId: a,
                     expectedHeadEtag: i,
@@ -3575,13 +3594,13 @@
         })
     }
 
-    function F(e) {
+    function K(e) {
         var t;
         if (!e.metadata) throw Error("Custom dashboard API response is missing metadata.");
         return H(e.metadata, (t = e.document) ? (0, f.backendDocumentToCustomDashboardConfig)(t) : g.EMPTY_DASHBOARD_CONFIG)
     }
 
-    function K(e, t) {
+    function F(e, t) {
         return "".concat(e, ":").concat(t)
     }
     let j = class {
@@ -3622,7 +3641,7 @@
                         dashboardId: t
                     }),
                     n = this.rememberMetadata(e, r.metadata),
-                    a = F(r);
+                    a = K(r);
                 if (this.shouldRepairStoredDocument(e, a, r)) {
                     var i;
                     return null != (i = await this.repairStoredDocument(e, a, n)) ? i : a
@@ -3635,13 +3654,13 @@
                 universeId: e,
                 dashboardId: t
             });
-            return this.rememberMetadata(e, r.metadata), F(r)
+            return this.rememberMetadata(e, r.metadata), K(r)
         }
         shouldRepairStoredDocument(e, t, r) {
-            return this.repairLegacyDocumentsOnRead && !this.legacyDocumentRepairUnavailable && !this.legacyDocumentRepairAttempted.has(K(e, t.id)) && "published" === t.status && (0, f.backendDocumentHasUpperSnakeAggregationVariants)(r.document)
+            return this.repairLegacyDocumentsOnRead && 3 !== (0, f.getBackendDocumentSchemaVersion)(r.document) && !this.legacyDocumentRepairUnavailable && !this.legacyDocumentRepairAttempted.has(F(e, t.id)) && "published" === t.status && (0, f.backendDocumentHasUpperSnakeAggregationVariants)(r.document)
         }
         async repairStoredDocument(e, t, r) {
-            this.legacyDocumentRepairAttempted.add(K(e, t.id));
+            this.legacyDocumentRepairAttempted.add(F(e, t.id));
             let {
                 headEtag: n
             } = r, a = G(t.config);
@@ -3656,7 +3675,7 @@
                     universeId: e,
                     dashboardId: t.id,
                     eventType: "update"
-                }), F(r)
+                }), K(r)
             } catch (e) {
                 console.warn("ApiCustomDashboardService: could not repair stored dashboard document", {
                     dashboardId: t.id,
@@ -3669,8 +3688,8 @@
             return this.withApiErrors(e, t, async () => {
                 var r, n;
                 this.ensureAvailable();
-                let a = this.tokens.get(K(e, t));
-                return a ? a.revision : (await this.read(e, t), null != (r = null == (n = this.tokens.get(K(e, t))) ? void 0 : n.revision) ? r : null)
+                let a = this.tokens.get(F(e, t));
+                return a ? a.revision : (await this.read(e, t), null != (r = null == (n = this.tokens.get(F(e, t))) ? void 0 : n.revision) ? r : null)
             })
         }
         async create(e) {
@@ -3685,7 +3704,7 @@
                         document: G(r)
                     });
                 this.rememberMetadata(e.universeId, n.metadata);
-                let a = F(n);
+                let a = K(n);
                 return this.emit({
                     universeId: e.universeId,
                     dashboardId: a.id,
@@ -3715,7 +3734,7 @@
                             metadataPatch: i
                         } : {}
                     });
-                    this.rememberMetadata(e, r.metadata), a = F(r)
+                    this.rememberMetadata(e, r.metadata), a = K(r)
                 } else if (s) {
                     let r = await this.client.updateDashboardMetadata({
                         universeId: e,
@@ -3772,7 +3791,7 @@
                         document: G(i)
                     });
                 this.rememberMetadata(e, c.metadata);
-                let u = F(c);
+                let u = K(c);
                 return this.emit({
                     universeId: e,
                     dashboardId: t,
@@ -3788,7 +3807,7 @@
                 this.ensureAvailable(), await this.client.deleteDashboard({
                     universeId: e,
                     dashboardId: t
-                }), this.tokens.delete(K(e, t)), this.emit({
+                }), this.tokens.delete(F(e, t)), this.emit({
                     universeId: e,
                     dashboardId: t,
                     eventType: "delete"
@@ -3807,7 +3826,7 @@
                     name: s
                 });
                 this.rememberMetadata(e, c.metadata);
-                let u = F(c),
+                let u = K(c),
                     l = (r = u.config, n = (0, y.getSummaryCards)(r).map(e => D(e)), a = (0, y.getChartRows)(r).map(e => ({
                         ...e,
                         tiles: e.tiles.map(e => D(e))
@@ -3831,7 +3850,7 @@
                         document: G(l)
                     });
                 this.rememberMetadata(e, h.metadata);
-                let m = F(h);
+                let m = K(h);
                 return this.emit({
                     universeId: e,
                     dashboardId: m.id,
@@ -3851,7 +3870,7 @@
                         document: G(n.config)
                     });
                 this.rememberMetadata(e, i.metadata);
-                let o = F(i);
+                let o = K(i);
                 return this.emit({
                     universeId: e,
                     dashboardId: t,
@@ -3908,17 +3927,17 @@
             throw n
         }
         async ensureTokens(e, t) {
-            let r = this.tokens.get(K(e, t));
+            let r = this.tokens.get(F(e, t));
             if (r) return r;
             await this.read(e, t);
-            let n = this.tokens.get(K(e, t));
+            let n = this.tokens.get(F(e, t));
             if (!n) throw new l.CustomDashboardVersionConflictError(t);
             return n
         }
         rememberMetadata(e, t) {
             var r, n;
             let a = t ? Q(t) : "",
-                i = K(e, a),
+                i = F(e, a),
                 o = this.tokens.get(i),
                 s = t && null != (n = t.headEtag) ? n : void 0,
                 c = o && o.headEtag === s ? o.revision : (null != (r = null == o ? void 0 : o.revision) ? r : 0) + 1,
@@ -5454,7 +5473,7 @@
         Total: "Total",
         Median: "Median",
         Cumulative: "Cumulative"
-    }, "DEFAULT_CHART_GRANULARITY", 0, "Day", "DashboardPageMode", 0, n, "EMPTY_DASHBOARD_CONFIG", 0, a, "LOCAL_STORAGE_DOCUMENT_SCHEMA_VERSION", 0, 1, "READABLE_BACKEND_DOCUMENT_SCHEMA_VERSIONS", 0, [1, 2], "SummaryCardTitleSource", 0, {
+    }, "DEFAULT_CHART_GRANULARITY", 0, "Day", "DashboardPageMode", 0, n, "EMPTY_DASHBOARD_CONFIG", 0, a, "LOCAL_STORAGE_DOCUMENT_SCHEMA_VERSION", 0, 1, "READABLE_BACKEND_DOCUMENT_SCHEMA_VERSIONS", 0, [1, 2, 3], "SummaryCardTitleSource", 0, {
         Auto: "Auto",
         Custom: "Custom"
     }])
@@ -5551,5 +5570,5 @@
     }])
 }]);
 
-//# debugId=233c1bba-4f6e-fd39-324c-40b2ef87eb87
-//# sourceMappingURL=3dugh9q_uuxf7.js.map
+//# debugId=8dced25c-084d-d5c6-7b3a-b9e3672248ac
+//# sourceMappingURL=0tv3e37oxcj82.js.map

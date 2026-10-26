@@ -3,7 +3,7 @@
     try {
         var e = "undefined" != typeof globalThis ? globalThis : "undefined" != typeof global ? global : "undefined" != typeof window ? window : "undefined" != typeof self ? self : {},
             n = (new e.Error).stack;
-        n && ((e._debugIds || (e._debugIds = {}))[n] = "5230cd4a-dd35-6544-f9eb-a0c8aae56511")
+        n && ((e._debugIds || (e._debugIds = {}))[n] = "aa9a8191-f21b-8d85-a049-32c52c713859")
     } catch (e) {}
 }();
 (globalThis.TURBOPACK || (globalThis.TURBOPACK = [])).push(["object" == typeof document ? document.currentScript : void 0, 118413, e => {
@@ -24,12 +24,12 @@
             name: "visibleAssetIdInPersonalizationEnabled",
             defaultValue: !1
         }),
-        r = (0, a.defineFlag)({
+        o = (0, a.defineFlag)({
             namespace: "creator-analytics",
             name: "isExperimentationTemplatesEnabled",
             defaultValue: !1
         }),
-        o = (0, a.defineFlag)({
+        r = (0, a.defineFlag)({
             namespace: "creator-analytics",
             name: "isCustomMetricsBackendEnabled",
             defaultValue: !1
@@ -41,140 +41,135 @@
         }),
         c = (0, a.defineFlag)({
             namespace: "creator-analytics",
-            name: "acquisitionMigrationMetricsEnabled",
-            defaultValue: !1
-        }),
-        l = (0, a.defineFlag)({
-            namespace: "creator-analytics",
             name: "isTargetingConfigsEnabled",
             defaultValue: !0
         }),
-        d = (0, a.defineFlag)({
+        l = (0, a.defineFlag)({
             namespace: "creator-analytics",
             name: "isExperimentNullControlValueEnabled",
             defaultValue: !0
         }),
-        g = (0, a.defineFlag)({
+        d = (0, a.defineFlag)({
             namespace: "creator-analytics",
             name: "isExperimentRolloutEnabled",
             defaultValue: !0
         }),
-        p = (0, a.defineFlag)({
+        g = (0, a.defineFlag)({
             namespace: "creator-analytics",
             name: "IsGeneralBreakGlassBannerEnabled",
             defaultValue: !1
         }),
-        m = (0, a.defineFlag)({
+        p = (0, a.defineFlag)({
             namespace: "creator-analytics",
             name: "IsMonetizationBreakGlassBannerEnabled",
             defaultValue: !1
         }),
-        u = (0, a.defineFlag)({
+        m = (0, a.defineFlag)({
             namespace: "creator-analytics",
             name: "isPlayerFeedbackExampleCommentsEnabled",
             defaultValue: !1
         }),
-        y = (0, a.defineFlag)({
+        u = (0, a.defineFlag)({
             namespace: "creator-analytics",
             name: "isAnalyticsAssistantChatEnabled",
             defaultValue: !1
         }),
-        h = (0, a.defineFlag)({
+        y = (0, a.defineFlag)({
             namespace: "creator-analytics",
             name: "isAnalyticsAssistantStreamSilenceRecoveryEnabled",
             defaultValue: !1
         }),
-        v = (0, a.defineFlag)({
+        h = (0, a.defineFlag)({
             namespace: "creator-analytics",
             name: "isAnalyticsAssistantIssueBannerEnabled",
             defaultValue: !1
         }),
-        b = (0, a.defineFlag)({
+        v = (0, a.defineFlag)({
             namespace: "creator-analytics",
             name: "showCreatorRewardsReportingDisclaimer",
             defaultValue: !1
         }),
-        f = (0, a.defineFlag)({
+        b = (0, a.defineFlag)({
             namespace: "creator-analytics",
             name: "isRotraceMetricEnabled",
             defaultValue: !1
         }),
-        U = (0, a.defineFlag)({
+        f = (0, a.defineFlag)({
             namespace: "creator-analytics",
             name: "isTelemetryMigrationEnabled",
             defaultValue: !1
         }),
-        A = (0, a.defineFlag)({
+        U = (0, a.defineFlag)({
             namespace: "creator-analytics",
             name: "showVideoServiceDashboard",
             defaultValue: !1
         }),
-        x = (0, a.defineFlag)({
+        A = (0, a.defineFlag)({
             namespace: "creator-analytics",
             name: "isTreemapColorBySiblingProportionEnabled",
             defaultValue: !1
         }),
-        E = (0, a.defineFlag)({
+        x = (0, a.defineFlag)({
             namespace: "creator-analytics",
             name: "isAssistantChartOverflowMenuEnabled",
             defaultValue: !1
         }),
-        P = (0, a.defineFlag)({
+        E = (0, a.defineFlag)({
             namespace: "creator-analytics",
             name: "isAnalyticsMetricAwareYAxisFormatterEnabled",
             defaultValue: !1
         }),
-        C = (0, a.defineFlag)({
+        P = (0, a.defineFlag)({
             namespace: "creator-analytics",
             name: "isCustomDashboardsLocalStorageEnabled",
             defaultValue: !1
         }),
-        N = (0, a.defineFlag)({
+        C = (0, a.defineFlag)({
             namespace: "creator-analytics",
             name: "isJourneyEventsEnabled",
             defaultValue: !1
         }),
-        S = (0, a.defineFlag)({
+        N = (0, a.defineFlag)({
             namespace: "creator-analytics",
             name: "isClientSessionsEnabled",
             defaultValue: !1
         }),
-        M = (0, a.defineFlag)({
+        S = (0, a.defineFlag)({
             namespace: "creator-analytics",
             name: "isEhdResultsEnabled",
             defaultValue: !1
         }),
-        T = (0, a.defineFlag)({
+        M = (0, a.defineFlag)({
             namespace: "creator-analytics",
             name: "isEhdResultsAlwaysFetched",
             defaultValue: !1
         }),
-        z = (0, a.defineFlag)({
+        T = (0, a.defineFlag)({
             namespace: "creator-analytics",
             name: "isMetricVariantChartStateEnabled",
             defaultValue: !1
         }),
-        I = (0, a.defineFlag)({
+        z = (0, a.defineFlag)({
             namespace: "creator-analytics",
             name: "isPeriodSummaryBridgeEnabled",
             defaultValue: !1
         }),
-        k = (0, a.defineFlag)({
+        I = (0, a.defineFlag)({
             namespace: "creator-analytics",
             name: "isExperimentSegmentationEnabled",
             defaultValue: !1
         }),
-        w = (0, a.defineFlag)({
+        k = (0, a.defineFlag)({
             namespace: "creator-analytics",
             name: "isExperimentMetricsV2Enabled",
             defaultValue: !1
         }),
-        R = (0, a.defineFlag)({
+        w = (0, a.defineFlag)({
             namespace: "creator-analytics",
             name: "isClientSessionDetailsV2Enabled",
             defaultValue: !1
         });
-    e.s(["acquisitionMigrationMetricsEnabled", 0, c, "analyticsChartLoadEventstreamEnabled", 0, t, "isAnalyticsAssistantChatEnabled", 0, y, "isAnalyticsAssistantIssueBannerEnabled", 0, v, "isAnalyticsAssistantStreamSilenceRecoveryEnabled", 0, h, "isAnalyticsMetricAwareYAxisFormatterEnabled", 0, P, "isAssistantChartOverflowMenuEnabled", 0, E, "isClientSessionDetailsV2Enabled", 0, R, "isClientSessionsEnabled", 0, S, "isCustomDashboardsLocalStorageEnabled", 0, C, "isCustomMetricsBackendEnabled", 0, o, "isEhdResultsAlwaysFetched", 0, T, "isEhdResultsEnabled", 0, M, "isExperimentMetricsV2Enabled", 0, w, "isExperimentNullControlValueEnabled", 0, d, "isExperimentRolloutEnabled", 0, g, "isExperimentSegmentationEnabled", 0, k, "isExperimentTargetingEnabled", 0, s, "isExperimentationTemplatesEnabled", 0, r, "isGeneralBreakGlassBannerEnabled", 0, p, "isJourneyEventsEnabled", 0, N, "isLimitedAnalyticsAdminMonitoringNavigationEnabled", 0, n, "isMetricVariantChartStateEnabled", 0, z, "isMonetizationBreakGlassBannerEnabled", 0, m, "isPeriodSummaryBridgeEnabled", 0, I, "isPlayerFeedbackExampleCommentsEnabled", 0, u, "isRotraceMetricEnabled", 0, f, "isTargetingConfigsEnabled", 0, l, "isTelemetryMigrationEnabled", 0, U, "isTreemapColorBySiblingProportionEnabled", 0, x, "showCreatorRewardsReportingDisclaimer", 0, b, "showVideoServiceDashboard", 0, A, "visibleAssetIdInPersonalizationEnabled", 0, i])
+    e.s(["analyticsChartLoadEventstreamEnabled", 0, t, "isAnalyticsAssistantChatEnabled", 0, u, "isAnalyticsAssistantIssueBannerEnabled", 0, h, "isAnalyticsAssistantStreamSilenceRecoveryEnabled", 0, y, "isAnalyticsMetricAwareYAxisFormatterEnabled", 0, E, "isAssistantChartOverflowMenuEnabled", 0, x, "isClientSessionDetailsV2Enabled", 0, w, "isClientSessionsEnabled", 0, N, "isCustomDashboardsLocalStorageEnabled", 0, P, "isCustomMetricsBackendEnabled", 0, r, "isEhdResultsAlwaysFetched", 0, M, "isEhdResultsEnabled", 0, S, "isExperimentMetricsV2Enabled", 0, k, "isExperimentNullControlValueEnabled", 0, l, "isExperimentRolloutEnabled", 0, d, "isExperimentSegmentationEnabled", 0, I, "isExperimentTargetingEnabled", 0, s, "isExperimentationTemplatesEnabled", 0, o, "isGeneralBreakGlassBannerEnabled", 0, g, "isJourneyEventsEnabled", 0, C, "isLimitedAnalyticsAdminMonitoringNavigationEnabled", 0, n, "isMetricVariantChartStateEnabled", 0, T, "isMonetizationBreakGlassBannerEnabled", 0, p, "isPeriodSummaryBridgeEnabled", 0, z, "isPlayerFeedbackExampleCommentsEnabled", 0, m, "isRotraceMetricEnabled", 0, b, "isTargetingConfigsEnabled", 0, c, "isTelemetryMigrationEnabled", 0, f, "isTreemapColorBySiblingProportionEnabled", 0, A, "showCreatorRewardsReportingDisclaimer", 0, v, "showVideoServiceDashboard", 0, U, "visibleAssetIdInPersonalizationEnabled", 0, i])
 }, 97782, e => {
     "use strict";
     var a = e.i(730530),
@@ -189,12 +184,12 @@
             pathPattern: /\/dashboard\/analytics/,
             title: (0, a.translationKey)("Heading.Analytics", t.TranslationNamespace.Navigation)
         },
-        r = {
+        o = {
             path: "/experiments",
             pathPattern: /\/experiments(?!\/)/,
             title: (0, a.translationKey)("Heading.Experiments", t.TranslationNamespace.Navigation)
         },
-        o = {
+        r = {
             path: "/monetization/developer-products",
             pathPattern: /\/monetization\/developer-products/,
             title: (0, a.translationKey)("Label.DeveloperProducts", t.TranslationNamespace.Navigation),
@@ -430,7 +425,7 @@
             pathPattern: /\/experiments\/experiment-create/,
             title: (0, a.translationKey)("Heading.ExperimentsCreate", t.TranslationNamespace.Navigation),
             titleOverrideForIAM2: (0, a.translationKeyWithoutNamespace)("Heading.Experimentation"),
-            group: r
+            group: o
         },
         Q = {
             path: "/recommendation-service",
@@ -476,9 +471,9 @@
             titleOverrideForIAM2: (0, a.translationKey)("Heading.AvatarCreationTokens", t.TranslationNamespace.Navigation),
             group: n
         },
-        er = [k, I, z, T, n, o, s, c, l, d, g, p, m, u, y, h, v, b, en, f, U, A, x, E, P, C, N, R, D, H, F, S, M, w, _, W, Y, K, V, G, B, q, J, X, Z, i, r, $, Q, ee, ea, et, O, j, L, ei];
-    e.s(["analyticsAgentNavigationItem", 0, W, "analyticsAiChatNavigationItem", 0, Y, "analyticsAlertConfifurationNavigationItem", 0, j, "analyticsAlertCreationNavigationItem", 0, O, "analyticsAlertsNavigationItem", 0, L, "analyticsAnalyticsHomeNavigationItem", 0, i, "analyticsAssistantNavigationItem", 0, _, "analyticsAudienceNavigationItem", 0, P, "analyticsAvatarCreationTokensNavigationItem", 0, ei, "analyticsBountyPayoutsNavigationItem", 0, U, "analyticsCommerceNavigationItem", 0, J, "analyticsConfigsHistoryNavigationItem", 0, V, "analyticsConfigsNavigationItem", 0, G, "analyticsCrashesNavigationItem", 0, x, "analyticsCreationOverviewNavigationItem", 0, Z, "analyticsCustomDashboardsManageNavigationItem", 0, M, "analyticsCustomEventsNavigationItem", 0, w, "analyticsDataStoresNavigationItem", 0, m, "analyticsEngagementNavigationItem", 0, z, "analyticsErrorReportNavigationItem", 0, E, "analyticsExperienceCreatorRewardsNavigationItem", 0, f, "analyticsExperienceSubscriptionsNavigationItem", 0, et, "analyticsExperimentsCreateNavigationItem", 0, $, "analyticsExperimentsNavigationItem", 0, r, "analyticsExploreNavigationItem", 0, S, "analyticsFeedbackNavigationItem", 0, K, "analyticsGenerativeAINavigationItem", 0, en, "analyticsHttpServiceNavigationItem", 0, u, "analyticsImmersiveAdsNavigationItem", 0, d, "analyticsItemMonetizationAvatarItemsNavigationItem", 0, c, "analyticsItemMonetizationDeveloperProductsNavigationItem", 0, o, "analyticsItemMonetizationPassesNavigationItem", 0, s, "analyticsMatchmakingNavigationItem", 0, q, "analyticsMemoryStoresNavigationItem", 0, p, "analyticsMessagingServiceNavigationItem", 0, y, "analyticsMonetizationNavigationItem", 0, n, "analyticsNotificationsNavigationItem", 0, ea, "analyticsPerformanceNavigationItem", 0, A, "analyticsRecommendationServiceNavigationItem", 0, Q, "analyticsRecommendedEventsEconomyNavigationItem", 0, C, "analyticsRecommendedEventsFunnelsNavigationItem", 0, N, "analyticsRecommendedEventsJourneyCreateNavigationItem", 0, D, "analyticsRecommendedEventsJourneyEditNavigationItem", 0, H, "analyticsRecommendedEventsJourneyNavigationItem", 0, R, "analyticsRecommendedEventsJourneyViewNavigationItem", 0, F, "analyticsRetentionNavigationItem", 0, T, "analyticsSafetyNavigationItem", 0, X, "analyticsSpeechToTextNavigationItem", 0, h, "analyticsSubscriptionsNavigationItem", 0, g, "analyticsTextToSpeechNavigationItem", 0, v, "analyticsUserAcquisitionNavigationItem", 0, I, "analyticsUserAcquisitionRFYNavigationItem", 0, k, "analyticsVideoServiceNavigationItem", 0, b, "getAnalyticsNavigationItemFromPath", 0, function(e) {
-        return er.find(a => a.pathPattern.test(e))
+        eo = [k, I, z, T, n, r, s, c, l, d, g, p, m, u, y, h, v, b, en, f, U, A, x, E, P, C, N, R, D, H, F, S, M, w, _, W, Y, K, V, G, B, q, J, X, Z, i, o, $, Q, ee, ea, et, O, j, L, ei];
+    e.s(["analyticsAgentNavigationItem", 0, W, "analyticsAiChatNavigationItem", 0, Y, "analyticsAlertConfifurationNavigationItem", 0, j, "analyticsAlertCreationNavigationItem", 0, O, "analyticsAlertsNavigationItem", 0, L, "analyticsAnalyticsHomeNavigationItem", 0, i, "analyticsAssistantNavigationItem", 0, _, "analyticsAudienceNavigationItem", 0, P, "analyticsAvatarCreationTokensNavigationItem", 0, ei, "analyticsBountyPayoutsNavigationItem", 0, U, "analyticsCommerceNavigationItem", 0, J, "analyticsConfigsHistoryNavigationItem", 0, V, "analyticsConfigsNavigationItem", 0, G, "analyticsCrashesNavigationItem", 0, x, "analyticsCreationOverviewNavigationItem", 0, Z, "analyticsCustomDashboardsManageNavigationItem", 0, M, "analyticsCustomEventsNavigationItem", 0, w, "analyticsDataStoresNavigationItem", 0, m, "analyticsEngagementNavigationItem", 0, z, "analyticsErrorReportNavigationItem", 0, E, "analyticsExperienceCreatorRewardsNavigationItem", 0, f, "analyticsExperienceSubscriptionsNavigationItem", 0, et, "analyticsExperimentsCreateNavigationItem", 0, $, "analyticsExperimentsNavigationItem", 0, o, "analyticsExploreNavigationItem", 0, S, "analyticsFeedbackNavigationItem", 0, K, "analyticsGenerativeAINavigationItem", 0, en, "analyticsHttpServiceNavigationItem", 0, u, "analyticsImmersiveAdsNavigationItem", 0, d, "analyticsItemMonetizationAvatarItemsNavigationItem", 0, c, "analyticsItemMonetizationDeveloperProductsNavigationItem", 0, r, "analyticsItemMonetizationPassesNavigationItem", 0, s, "analyticsMatchmakingNavigationItem", 0, q, "analyticsMemoryStoresNavigationItem", 0, p, "analyticsMessagingServiceNavigationItem", 0, y, "analyticsMonetizationNavigationItem", 0, n, "analyticsNotificationsNavigationItem", 0, ea, "analyticsPerformanceNavigationItem", 0, A, "analyticsRecommendationServiceNavigationItem", 0, Q, "analyticsRecommendedEventsEconomyNavigationItem", 0, C, "analyticsRecommendedEventsFunnelsNavigationItem", 0, N, "analyticsRecommendedEventsJourneyCreateNavigationItem", 0, D, "analyticsRecommendedEventsJourneyEditNavigationItem", 0, H, "analyticsRecommendedEventsJourneyNavigationItem", 0, R, "analyticsRecommendedEventsJourneyViewNavigationItem", 0, F, "analyticsRetentionNavigationItem", 0, T, "analyticsSafetyNavigationItem", 0, X, "analyticsSpeechToTextNavigationItem", 0, h, "analyticsSubscriptionsNavigationItem", 0, g, "analyticsTextToSpeechNavigationItem", 0, v, "analyticsUserAcquisitionNavigationItem", 0, I, "analyticsUserAcquisitionRFYNavigationItem", 0, k, "analyticsVideoServiceNavigationItem", 0, b, "getAnalyticsNavigationItemFromPath", 0, function(e) {
+        return eo.find(a => a.pathPattern.test(e))
     }])
 }, 307529, e => {
     "use strict";
@@ -495,8 +490,8 @@
         t = e.i(307529),
         n = e.i(251622);
     let i = "".concat("https://create.roblox.com", "/store"),
-        r = "".concat("https://create.roblox.com", "/docs"),
-        o = {
+        o = "".concat("https://create.roblox.com", "/docs"),
+        r = {
             [a.CategoryType.Model]: "models",
             [a.CategoryType.Plugin]: "plugins",
             [a.CategoryType.Audio]: "audio",
@@ -663,13 +658,16 @@
             getServerManagementDetailsUrl: function(e, a, t) {
                 let n = arguments.length > 3 && void 0 !== arguments[3] && arguments[3],
                     i = arguments.length > 4 ? arguments[4] : void 0,
-                    r = arguments.length > 5 ? arguments[5] : void 0,
-                    o = new URLSearchParams;
-                (null != i || null != r) && o.set("logRange", "custom"), null != i && o.set("logStart", String(i)), null != r && o.set("logEnd", String(r));
-                let c = o.toString();
+                    o = arguments.length > 5 ? arguments[5] : void 0,
+                    r = new URLSearchParams;
+                (null != i || null != o) && r.set("logRange", "custom"), null != i && r.set("logStart", String(i)), null != o && r.set("logEnd", String(o));
+                let c = r.toString();
                 return "".concat(s(e, n), "/").concat(a, "/servers/").concat(t, "/details").concat(c ? "?".concat(c) : "")
             },
-            getClientSessionsUrl: e => "/dashboard/creations/experiences/".concat(e, "/observability/client-sessions"),
+            getClientSessionsUrl: (e, a) => {
+                let t = "/dashboard/creations/experiences/".concat(e, "/observability/client-sessions");
+                return void 0 === a ? t : "".concat(t, "?filter_ExitReason=").concat(encodeURIComponent(a))
+            },
             getClientSessionDetailsUrl: (e, a) => "/dashboard/creations/experiences/".concat(e, "/observability/client-sessions/").concat(a),
             getPlayerSupportUrl: (e, a) => "/dashboard/creations/experiences/".concat(e, "/player-support").concat(a ? "/".concat(a) : "")
         };
@@ -677,7 +675,7 @@
         getUrl: () => i,
         getAssetUrl: e => "".concat(i, "/asset/").concat(e),
         getSearchUrl: (e, a) => {
-            if ("" !== o[e]) return "".concat(i, "/").concat(o[e], "?keyword=").concat(encodeURIComponent(a));
+            if ("" !== r[e]) return "".concat(i, "/").concat(r[e], "?keyword=").concat(encodeURIComponent(a));
             throw Error("Unsupported search asset type ".concat(e))
         }
     }, "dashboard", 0, c, "developerForum", 0, {
@@ -687,96 +685,96 @@
         getAnnouncementsPath: () => "/c/updates/announcements/36",
         getPublicSfxAnnouncementPath: () => "/t/public-sound-effects-upload-are-now-available-for-creators/2980704"
     }, "docs", 0, {
-        getUrl: () => r,
-        getAiDataSharingUrl: () => "".concat(r, "/ai-data-sharing"),
-        getBadgesPublishingUrl: () => "".concat(r, "/production/publishing/badges"),
-        getExperiencesPublishingUrl: () => "".concat(r, "/production/publishing/publishing-experiences-and-places"),
-        getCrossServerChatUrl: () => "".concat(r, "/chat/cross-server-chat"),
-        getStrongLanguageUrl: () => "".concat(r, "/projects/configure-games#allow-strong-language"),
-        getSellingOnCreatorStoreUrl: () => "".concat(r, "/production/creator-store#distribute-and-sell-assets"),
-        getPassesMonetizationUrl: () => "".concat(r, "/production/monetization/game-passes"),
-        getDeveloperProductsMonetizationUrl: () => "".concat(r, "/production/monetization/developer-products"),
-        getDeveloperProductsExternalPurchaseSettingsMonetizationUrl: () => "".concat(r, "/production/monetization/developer-products#outside-your-experience"),
-        getExternalEligibilityReferenceUrl: () => "".concat(r, "/reference/engine/classes/MarketplaceService#ProcessReceipt"),
-        getSubscriptionsMonetizationUrl: () => "".concat(r, "/production/monetization/subscriptions"),
-        getSubscriptionsMonetizationAnalyticsUrl: () => "".concat(r, "/production/monetization/subscriptions#subscription-analytics"),
-        getPriceOptimizationMonetizationUrl: () => "".concat(r, "/production/monetization/price-optimization"),
-        getDynamicPriceCheckMonetizationUrl: () => "".concat(r, "/production/monetization/price-optimization#using-the-dynamic-price-check-tool"),
-        getRegionalPricingMonetizationUrl: () => "".concat(r, "/production/monetization/regional-pricing"),
-        getPriceLevelsApiMonetizationUrl: () => "".concat(r, "/production/monetization/regional-pricing#protect-your-trades-and-gifts"),
-        getManagedPricingMonetizationUrl: () => "".concat(r, "/production/monetization/managed-pricing"),
-        getPersonalizedShopsMonetizationUrl: () => "".concat(r, "/production/monetization/shop"),
-        getImmersiveAdsMonetizationUrl: () => "".concat(r, "/production/monetization/immersive-ads"),
-        getRewardedVideoUrl: () => "".concat(r, "/production/promotion/rewarded-video-ads"),
-        getKidsAndSelectPublishingUrl: () => "".concat(r, "/production/publishing/kids-and-select"),
-        getExperienceDetailsPageRewardedAdsUrl: () => "".concat(r, "/production/monetization/immersive-ads"),
-        getCreatorStorePublishingUrl: () => "".concat(r, "/production/creator-store#distribute-and-sell-assets"),
-        getDecalReferenceUrl: () => "".concat(r, "/reference/engine/classes/Decal"),
-        getIntegrityServiceReferenceUrl: () => "".concat(r, "/reference/engine/classes/IntegrityService"),
-        getOpenCloudReferenceUrl: () => "".concat(r, "/reference/cloud"),
-        getAudioAssetsUrl: () => "".concat(r, "/building-and-visuals/audio/audio-assets"),
-        getAssetsUrl: () => "".concat(r, "/projects/assets"),
-        getClassicClothingUrl: () => "".concat(r, "/avatar/accessories/classic-clothing"),
-        getEarningOnRobloxUrl: () => "".concat(r, "/production/earning-on-roblox"),
-        getSettingUpStudioUrl: () => "".concat(r, "/studio/setup"),
-        getStudioUrl: () => "".concat(r, "/studio"),
-        getPlatformUrl: () => "".concat(r, "/platform"),
-        getAnalyticsUrl: () => "".concat(r, "/production/analytics"),
-        getAnalyticsErrorReportUrl: () => "".concat(r, "/production/analytics/error-report"),
-        getAnalyticsJourneyEventsUrl: () => "".concat(r, "/production/analytics/journey-events"),
-        getUnityGuideUrl: () => "".concat(r, "/unity"),
-        getUnrealGuideUrl: () => "".concat(r, "/unreal"),
-        getEventsPlatformUrl: () => "".concat(r, "/production/promotion/events-platform"),
-        getAvatarItemsUrl: () => "".concat(r, "/avatar"),
-        getClassicAccessoriesUrl: () => "".concat(r, "/art/accessories/classic-clothing"),
-        getModelsUrl: () => "".concat(r, "/parts/models"),
-        getMakeupLooksUrl: () => "".concat(r, "/avatar/makeup-looks"),
-        getPluginsReferenceUrl: () => "".concat(r, "/reference/engine/classes/Plugin"),
-        getVideoFrameReferenceUrl: () => "".concat(r, "/reference/engine/classes/VideoFrame#Video"),
-        getMeshPartReferenceUrl: () => "".concat(r, "/reference/engine/classes/MeshPart"),
-        getAnimationReferenceUrl: () => "".concat(r, "/reference/engine/classes/Animation"),
-        getLocalizationGuideUrl: () => "".concat(r, "/production/localization"),
-        getAssistantUrl: () => "".concat(r, "/assistant"),
-        getAnalyticsRetentionGuideUrl: () => "".concat(r, "/production/analytics/retention#improve-day-1-retention"),
-        getMonetizationNewUserExperienceGuideUrl: () => "".concat(r, "/production/monetization/improve-new-user-experience"),
-        getAnalyticsEngagementGuideUrl: () => "".concat(r, "/production/analytics/engagement#improving-average-session-time"),
-        getAnalyticsRetentionD7GuideUrl: () => "".concat(r, "/production/analytics/retention#improve-day-7-retention"),
-        getAnalyticsRetentionD30GuideUrl: () => "".concat(r, "/production/analytics/retention#improve-day-30-retention"),
-        getAnalyticsMonetizationPayerConversionRateGuideUrl: () => "".concat(r, "/production/analytics/monetization#improving-payer-conversion-rate"),
-        getAnalyticsMonetizationARPPUGuideUrl: () => "".concat(r, "/production/analytics/monetization#improving-average-revenue-per-paying-user-arppu"),
-        getAnalyticsFilterByMetricsGuideUrl: () => "".concat(r, "/production/analytics/analytics-dashboard#filter-by-metrics"),
-        getAnalyticsEventTypesUrl: () => "".concat(r, "/production/analytics/event-types"),
-        getDiscoveryUrl: () => "".concat(r, "/discovery"),
-        getDiscoveryBestPracticesUrl: () => "".concat(r, "/discovery#best-practices-for-discovery"),
-        getDiscoveryRecommendationUrl: () => "".concat(r, "/discovery#how-recommendation-works"),
-        getDiscoveryKeySignalsUrl: () => "".concat(r, "/discovery#key-signals"),
-        getDiscoveryGetDiscoveredUrl: () => "".concat(r, "/discovery#how-you-can-get-discovered-via-recommendations"),
-        getCreatorStoreAssetModerationUrl: () => "".concat(r, "/production/creator-store#asset-requirements"),
-        getCreatorStoreAccountRequirementsUrl: () => "".concat(r, "/production/creator-store#account-requirements"),
-        getPerformanceOptimizationUrl: () => "".concat(r, "/performance-optimization"),
-        getPromotionalThumbnailsUrl: () => "".concat(r, "/production/promotion/promotional-thumbnails"),
-        getExperienceGenresUrl: () => "".concat(r, "/production/publishing/experience-genres"),
-        getGenreDefinitionsUrl: () => "".concat(r, "/production/publishing/experience-genres#genre-and-subgenre-descriptions"),
-        getExperienceGenresAppealUrl: () => "".concat(r, "/production/publishing/experience-genres#genre-accuracy"),
-        getMakeExperiencePublicUrl: () => "".concat(r, "/production/publishing/publish-experiences-and-places#make-experience-public"),
-        getOwnershipTransferUrl: () => "".concat(r, "/projects/experience-ownership-transfer"),
-        getStreamingUrl: () => "".concat(r, "/workspace/streaming"),
-        getAnimationTransferUrl: () => "".concat(r, "/projects/transferring-animations"),
-        getGameDesignMissionsUrl: () => "".concat(r, "/production/game-design/introduction-to-quest-design"),
-        getGameDesignStarterPackUrl: () => "".concat(r, "/production/game-design/starter-pack-design"),
-        getGameDesignBundlesUrl: () => "".concat(r, "/production/game-design/monetization-foundations#bundles"),
-        getGameDesignSeasonPassUrl: () => "".concat(r, "/production/game-design/season-pass-design"),
-        getGameDesignEngagementRewardsUrl: () => "".concat(r, "/production/game-design/analytics-essentials#engagement-metrics\n"),
-        getCloudServicesMemoryStoresAPIRequestsUrl: () => "".concat(r, "/cloud-services/memory-stores/observability#api-request-alerts"),
-        getCloudServicesMemoryStoresMemoryUsageUrl: () => "".concat(r, "/cloud-services/memory-stores/observability#memory-usage-alerts"),
-        getExperimentationUrl: () => "".concat(r, "/production/experiments"),
-        getExperimentationBestPracticesUrl: () => "".concat(r, "/production/experiments#best-practices-for-experiments"),
-        getExperimentationDailyResultsUrl: () => "".concat(r, "/production/experiments#daily-results"),
-        getExperimentationEarlyHarmMetricsUrl: () => "".concat(r, "/production/experiments#early-harm-metrics"),
-        getExperimentationEarlyHarmThresholdsUrl: () => "".concat(r, "/production/experiments#early-harm-thresholds"),
-        getExperimentationSrmUrl: () => "".concat(r, "/production/experiments#sample-ratio-mismatch"),
-        getReleaseNotesUrl: e => "".concat(r, "/release-notes/release-notes-").concat(e),
-        getProductIntelligenceApisUrl: () => "".concat(r, "/production/monetization/developer-products#personalize-your-in-experience-store")
+        getUrl: () => o,
+        getAiDataSharingUrl: () => "".concat(o, "/ai-data-sharing"),
+        getBadgesPublishingUrl: () => "".concat(o, "/production/publishing/badges"),
+        getExperiencesPublishingUrl: () => "".concat(o, "/production/publishing/publishing-experiences-and-places"),
+        getCrossServerChatUrl: () => "".concat(o, "/chat/cross-server-chat"),
+        getStrongLanguageUrl: () => "".concat(o, "/projects/configure-games#allow-strong-language"),
+        getSellingOnCreatorStoreUrl: () => "".concat(o, "/production/creator-store#distribute-and-sell-assets"),
+        getPassesMonetizationUrl: () => "".concat(o, "/production/monetization/game-passes"),
+        getDeveloperProductsMonetizationUrl: () => "".concat(o, "/production/monetization/developer-products"),
+        getDeveloperProductsExternalPurchaseSettingsMonetizationUrl: () => "".concat(o, "/production/monetization/developer-products#outside-your-experience"),
+        getExternalEligibilityReferenceUrl: () => "".concat(o, "/reference/engine/classes/MarketplaceService#ProcessReceipt"),
+        getSubscriptionsMonetizationUrl: () => "".concat(o, "/production/monetization/subscriptions"),
+        getSubscriptionsMonetizationAnalyticsUrl: () => "".concat(o, "/production/monetization/subscriptions#subscription-analytics"),
+        getPriceOptimizationMonetizationUrl: () => "".concat(o, "/production/monetization/price-optimization"),
+        getDynamicPriceCheckMonetizationUrl: () => "".concat(o, "/production/monetization/price-optimization#using-the-dynamic-price-check-tool"),
+        getRegionalPricingMonetizationUrl: () => "".concat(o, "/production/monetization/regional-pricing"),
+        getPriceLevelsApiMonetizationUrl: () => "".concat(o, "/production/monetization/regional-pricing#protect-your-trades-and-gifts"),
+        getManagedPricingMonetizationUrl: () => "".concat(o, "/production/monetization/managed-pricing"),
+        getPersonalizedShopsMonetizationUrl: () => "".concat(o, "/production/monetization/shop"),
+        getImmersiveAdsMonetizationUrl: () => "".concat(o, "/production/monetization/immersive-ads"),
+        getRewardedVideoUrl: () => "".concat(o, "/production/promotion/rewarded-video-ads"),
+        getKidsAndSelectPublishingUrl: () => "".concat(o, "/production/publishing/kids-and-select"),
+        getExperienceDetailsPageRewardedAdsUrl: () => "".concat(o, "/production/monetization/immersive-ads"),
+        getCreatorStorePublishingUrl: () => "".concat(o, "/production/creator-store#distribute-and-sell-assets"),
+        getDecalReferenceUrl: () => "".concat(o, "/reference/engine/classes/Decal"),
+        getIntegrityServiceReferenceUrl: () => "".concat(o, "/reference/engine/classes/IntegrityService"),
+        getOpenCloudReferenceUrl: () => "".concat(o, "/reference/cloud"),
+        getAudioAssetsUrl: () => "".concat(o, "/building-and-visuals/audio/audio-assets"),
+        getAssetsUrl: () => "".concat(o, "/projects/assets"),
+        getClassicClothingUrl: () => "".concat(o, "/avatar/accessories/classic-clothing"),
+        getEarningOnRobloxUrl: () => "".concat(o, "/production/earning-on-roblox"),
+        getSettingUpStudioUrl: () => "".concat(o, "/studio/setup"),
+        getStudioUrl: () => "".concat(o, "/studio"),
+        getPlatformUrl: () => "".concat(o, "/platform"),
+        getAnalyticsUrl: () => "".concat(o, "/production/analytics"),
+        getAnalyticsErrorReportUrl: () => "".concat(o, "/production/analytics/error-report"),
+        getAnalyticsJourneyEventsUrl: () => "".concat(o, "/production/analytics/journey-events"),
+        getUnityGuideUrl: () => "".concat(o, "/unity"),
+        getUnrealGuideUrl: () => "".concat(o, "/unreal"),
+        getEventsPlatformUrl: () => "".concat(o, "/production/promotion/events-platform"),
+        getAvatarItemsUrl: () => "".concat(o, "/avatar"),
+        getClassicAccessoriesUrl: () => "".concat(o, "/art/accessories/classic-clothing"),
+        getModelsUrl: () => "".concat(o, "/parts/models"),
+        getMakeupLooksUrl: () => "".concat(o, "/avatar/makeup-looks"),
+        getPluginsReferenceUrl: () => "".concat(o, "/reference/engine/classes/Plugin"),
+        getVideoFrameReferenceUrl: () => "".concat(o, "/reference/engine/classes/VideoFrame#Video"),
+        getMeshPartReferenceUrl: () => "".concat(o, "/reference/engine/classes/MeshPart"),
+        getAnimationReferenceUrl: () => "".concat(o, "/reference/engine/classes/Animation"),
+        getLocalizationGuideUrl: () => "".concat(o, "/production/localization"),
+        getAssistantUrl: () => "".concat(o, "/assistant"),
+        getAnalyticsRetentionGuideUrl: () => "".concat(o, "/production/analytics/retention#improve-day-1-retention"),
+        getMonetizationNewUserExperienceGuideUrl: () => "".concat(o, "/production/monetization/improve-new-user-experience"),
+        getAnalyticsEngagementGuideUrl: () => "".concat(o, "/production/analytics/engagement#improving-average-session-time"),
+        getAnalyticsRetentionD7GuideUrl: () => "".concat(o, "/production/analytics/retention#improve-day-7-retention"),
+        getAnalyticsRetentionD30GuideUrl: () => "".concat(o, "/production/analytics/retention#improve-day-30-retention"),
+        getAnalyticsMonetizationPayerConversionRateGuideUrl: () => "".concat(o, "/production/analytics/monetization#improving-payer-conversion-rate"),
+        getAnalyticsMonetizationARPPUGuideUrl: () => "".concat(o, "/production/analytics/monetization#improving-average-revenue-per-paying-user-arppu"),
+        getAnalyticsFilterByMetricsGuideUrl: () => "".concat(o, "/production/analytics/analytics-dashboard#filter-by-metrics"),
+        getAnalyticsEventTypesUrl: () => "".concat(o, "/production/analytics/event-types"),
+        getDiscoveryUrl: () => "".concat(o, "/discovery"),
+        getDiscoveryBestPracticesUrl: () => "".concat(o, "/discovery#best-practices-for-discovery"),
+        getDiscoveryRecommendationUrl: () => "".concat(o, "/discovery#how-recommendation-works"),
+        getDiscoveryKeySignalsUrl: () => "".concat(o, "/discovery#key-signals"),
+        getDiscoveryGetDiscoveredUrl: () => "".concat(o, "/discovery#how-you-can-get-discovered-via-recommendations"),
+        getCreatorStoreAssetModerationUrl: () => "".concat(o, "/production/creator-store#asset-requirements"),
+        getCreatorStoreAccountRequirementsUrl: () => "".concat(o, "/production/creator-store#account-requirements"),
+        getPerformanceOptimizationUrl: () => "".concat(o, "/performance-optimization"),
+        getPromotionalThumbnailsUrl: () => "".concat(o, "/production/promotion/promotional-thumbnails"),
+        getExperienceGenresUrl: () => "".concat(o, "/production/publishing/experience-genres"),
+        getGenreDefinitionsUrl: () => "".concat(o, "/production/publishing/experience-genres#genre-and-subgenre-descriptions"),
+        getExperienceGenresAppealUrl: () => "".concat(o, "/production/publishing/experience-genres#genre-accuracy"),
+        getMakeExperiencePublicUrl: () => "".concat(o, "/production/publishing/publish-experiences-and-places#make-experience-public"),
+        getOwnershipTransferUrl: () => "".concat(o, "/projects/experience-ownership-transfer"),
+        getStreamingUrl: () => "".concat(o, "/workspace/streaming"),
+        getAnimationTransferUrl: () => "".concat(o, "/projects/transferring-animations"),
+        getGameDesignMissionsUrl: () => "".concat(o, "/production/game-design/introduction-to-quest-design"),
+        getGameDesignStarterPackUrl: () => "".concat(o, "/production/game-design/starter-pack-design"),
+        getGameDesignBundlesUrl: () => "".concat(o, "/production/game-design/monetization-foundations#bundles"),
+        getGameDesignSeasonPassUrl: () => "".concat(o, "/production/game-design/season-pass-design"),
+        getGameDesignEngagementRewardsUrl: () => "".concat(o, "/production/game-design/analytics-essentials#engagement-metrics\n"),
+        getCloudServicesMemoryStoresAPIRequestsUrl: () => "".concat(o, "/cloud-services/memory-stores/observability#api-request-alerts"),
+        getCloudServicesMemoryStoresMemoryUsageUrl: () => "".concat(o, "/cloud-services/memory-stores/observability#memory-usage-alerts"),
+        getExperimentationUrl: () => "".concat(o, "/production/experiments"),
+        getExperimentationBestPracticesUrl: () => "".concat(o, "/production/experiments#best-practices-for-experiments"),
+        getExperimentationDailyResultsUrl: () => "".concat(o, "/production/experiments#daily-results"),
+        getExperimentationEarlyHarmMetricsUrl: () => "".concat(o, "/production/experiments#early-harm-metrics"),
+        getExperimentationEarlyHarmThresholdsUrl: () => "".concat(o, "/production/experiments#early-harm-thresholds"),
+        getExperimentationSrmUrl: () => "".concat(o, "/production/experiments#sample-ratio-mismatch"),
+        getReleaseNotesUrl: e => "".concat(o, "/release-notes/release-notes-").concat(e),
+        getProductIntelligenceApisUrl: () => "".concat(o, "/production/monetization/developer-products#personalize-your-in-experience-store")
     }, "getDataCollectionSettingsUrl", 0, function(e, a) {
         let t = arguments.length > 2 && void 0 !== arguments[2] ? arguments[2] : "",
             n = new URLSearchParams({
@@ -802,8 +800,8 @@
         t = e.i(416340),
         n = e.i(589624),
         i = e.i(773057),
-        r = e.i(392782);
-    let o = (0, t.createContext)({
+        o = e.i(392782);
+    let r = (0, t.createContext)({
         isLoadingGame: !1,
         isErrorLoadingGame: !1,
         canConfigure: !1,
@@ -812,7 +810,7 @@
             throw Error("Not implemented")
         }
     });
-    o.displayName = "Game", e.s(["default", 0, o], 559227);
+    r.displayName = "Game", e.s(["default", 0, r], 559227);
     var s = e.i(721281),
         c = e.i(252842),
         l = e.i(533968);
@@ -845,18 +843,18 @@
         constructor(e, a) {
             (0, s._)(this, "gamesClient", void 0), (0, s._)(this, "developClient", void 0), (0, s._)(this, "gameDetailsMap", void 0), (0, s._)(this, "gameConfigurationMap", void 0), this.gamesClient = e, this.developClient = a, this.gameDetailsMap = new Map, this.gameConfigurationMap = new Map
         }
-    }(r.default, i.default);
+    }(o.default, i.default);
     e.s(["default", 0, e => {
         let {
             requestedGameId: i,
-            children: r
+            children: o
         } = e, s = (0, n.useRouter)(), [c, l] = (0, t.useState)(!0), [g, p] = (0, t.useState)(null), [m, u] = (0, t.useState)(null), [y, h] = (0, t.useState)(!1), [v, b] = (0, t.useState)(), f = (0, t.useRef)(0), U = (0, t.useCallback)(async function(e) {
             let a = arguments.length > 1 && void 0 !== arguments[1] && arguments[1],
                 t = f.current += 1,
                 n = d.getConfiguration(e),
                 i = d.getGameDetail(e, a),
-                [r, o] = await Promise.allSettled([n, i]);
-            t === f.current && ("fulfilled" === r.status ? p(r.value) : p(null), "fulfilled" === o.status ? (h(!1), u(o.value)) : ("rejected" === o.status ? h(!0) : h(!1), u(null)), b(e), l(!1))
+                [o, r] = await Promise.allSettled([n, i]);
+            t === f.current && ("fulfilled" === o.status ? p(o.value) : p(null), "fulfilled" === r.status ? (h(!1), u(r.value)) : ("rejected" === r.status ? h(!0) : h(!1), u(null)), b(e), l(!1))
         }, []), A = (0, t.useMemo)(() => {
             let {
                 id: e
@@ -879,16 +877,16 @@
                 isErrorLoadingGame: y,
                 refreshGameDetails: x
             }), [E, g, m, y, x]);
-        return (0, a.jsx)(o.Provider, {
+        return (0, a.jsx)(r.Provider, {
             value: P,
-            children: r
+            children: o
         })
     }, "useCurrentGame", 0, function() {
-        let e = (0, t.useContext)(o);
+        let e = (0, t.useContext)(r);
         if (null === e) throw Error("useCurrentGame must be used within a GameProvider");
         return e
     }], 114209)
 }]);
 
-//# debugId=5230cd4a-dd35-6544-f9eb-a0c8aae56511
-//# sourceMappingURL=0-7glzsnwjqbw.js.map
+//# debugId=aa9a8191-f21b-8d85-a049-32c52c713859
+//# sourceMappingURL=26y9ioor82a0a.js.map

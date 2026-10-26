@@ -425,20 +425,36 @@
     margin: 24px 0
 }
 
-.dark-theme .parent-email-image {
-    background-image: url(https://images.rbxcdn.com/18fc22df4975f378.png)
-}
-
+.parent-email-image,
 .light-theme .parent-email-image {
     background-image: url(https://images.rbxcdn.com/af45aa0a7fb8a029.png)
 }
 
-.dark-theme .ask-your-parent-lock {
+.dark-theme .parent-email-image,
+.color-mode-dark .parent-email-image {
+    background-image: url(https://images.rbxcdn.com/18fc22df4975f378.png)
+}
+
+@media (prefers-color-scheme:dark) {
+    .color-mode-system .parent-email-image {
+        background-image: url(https://images.rbxcdn.com/18fc22df4975f378.png)
+    }
+}
+
+.ask-your-parent-lock,
+.light-theme .ask-your-parent-lock {
+    background-image: url(https://images.rbxcdn.com/08838c2d801193f2.png)
+}
+
+.dark-theme .ask-your-parent-lock,
+.color-mode-dark .ask-your-parent-lock {
     background-image: url(https://images.rbxcdn.com/e507e138a7bacd4d.png)
 }
 
-.light-theme .ask-your-parent-lock {
-    background-image: url(https://images.rbxcdn.com/08838c2d801193f2.png)
+@media (prefers-color-scheme:dark) {
+    .color-mode-system .ask-your-parent-lock {
+        background-image: url(https://images.rbxcdn.com/e507e138a7bacd4d.png)
+    }
 }
 
 .user-settings-modal .consent-form {
@@ -476,7 +492,8 @@
 }
 
 .light-theme .fae-qr-code-heading,
-.dark-theme .fae-qr-code-heading {
+.dark-theme .fae-qr-code-heading,
+.fae-qr-code-heading {
     color: var(--color-content-emphasis)
 }
 
@@ -488,7 +505,8 @@
 }
 
 .light-theme .fae-qr-code-subheading,
-.dark-theme .fae-qr-code-subheading {
+.dark-theme .fae-qr-code-subheading,
+.fae-qr-code-subheading {
     color: var(--color-content-default)
 }
 
@@ -504,7 +522,8 @@
 }
 
 .light-theme .fae-qr-code-card,
-.dark-theme .fae-qr-code-card {
+.dark-theme .fae-qr-code-card,
+.fae-qr-code-card {
     background-color: var(--color-surface-200)
 }
 
@@ -537,7 +556,8 @@
 }
 
 .light-theme .fae-qr-code-scan-instruction,
-.dark-theme .fae-qr-code-scan-instruction {
+.dark-theme .fae-qr-code-scan-instruction,
+.fae-qr-code-scan-instruction {
     color: var(--color-content-emphasis)
 }
 
@@ -550,7 +570,8 @@
 }
 
 .light-theme .fae-qr-code-divider,
-.dark-theme .fae-qr-code-divider {
+.dark-theme .fae-qr-code-divider,
+.fae-qr-code-divider {
     background-color: var(--color-stroke-default)
 }
 
@@ -562,7 +583,8 @@
 }
 
 .light-theme .fae-qr-code-fallback,
-.dark-theme .fae-qr-code-fallback {
+.dark-theme .fae-qr-code-fallback,
+.fae-qr-code-fallback {
     color: var(--color-content-muted)
 }
 
@@ -599,7 +621,8 @@
 }
 
 .light-theme .access-management-upsell-modal .modal-dialog .modal-content .modal-body.verification-link-page-content-no-padding .new-verification-link-page-content-header .verification-close-button .icon-close,
-.dark-theme .access-management-upsell-modal .modal-dialog .modal-content .modal-body.verification-link-page-content-no-padding .new-verification-link-page-content-header .verification-close-button .icon-close {
+.dark-theme .access-management-upsell-modal .modal-dialog .modal-content .modal-body.verification-link-page-content-no-padding .new-verification-link-page-content-header .verification-close-button .icon-close,
+.access-management-upsell-modal .modal-dialog .modal-content .modal-body.verification-link-page-content-no-padding .new-verification-link-page-content-header .verification-close-button .icon-close {
     color: var(--color-content-emphasis)
 }
 
@@ -610,7 +633,8 @@
 }
 
 .light-theme .access-management-upsell-modal .modal-dialog .modal-content .modal-body.verification-link-page-content-no-padding .new-verification-link-page-content-header .new-verification-link-upsell .new-age-verification-title,
-.dark-theme .access-management-upsell-modal .modal-dialog .modal-content .modal-body.verification-link-page-content-no-padding .new-verification-link-page-content-header .new-verification-link-upsell .new-age-verification-title {
+.dark-theme .access-management-upsell-modal .modal-dialog .modal-content .modal-body.verification-link-page-content-no-padding .new-verification-link-page-content-header .new-verification-link-upsell .new-age-verification-title,
+.access-management-upsell-modal .modal-dialog .modal-content .modal-body.verification-link-page-content-no-padding .new-verification-link-page-content-header .new-verification-link-upsell .new-age-verification-title {
     color: var(--color-content-emphasis)
 }
 
@@ -620,7 +644,8 @@
 }
 
 .light-theme .access-management-upsell-modal .modal-dialog .modal-content .modal-body.verification-link-page-content-no-padding .new-verification-link-page-content-header .new-verification-link-description,
-.dark-theme .access-management-upsell-modal .modal-dialog .modal-content .modal-body.verification-link-page-content-no-padding .new-verification-link-page-content-header .new-verification-link-description {
+.dark-theme .access-management-upsell-modal .modal-dialog .modal-content .modal-body.verification-link-page-content-no-padding .new-verification-link-page-content-header .new-verification-link-description,
+.access-management-upsell-modal .modal-dialog .modal-content .modal-body.verification-link-page-content-no-padding .new-verification-link-page-content-header .new-verification-link-description {
     color: var(--color-content-emphasis)
 }
 
@@ -635,7 +660,8 @@
 }
 
 .light-theme .access-management-upsell-modal .modal-dialog .modal-content .modal-body.verification-link-page-content-no-padding .new-verification-link-page-content-body .new-verification-link-legal,
-.dark-theme .access-management-upsell-modal .modal-dialog .modal-content .modal-body.verification-link-page-content-no-padding .new-verification-link-page-content-body .new-verification-link-legal {
+.dark-theme .access-management-upsell-modal .modal-dialog .modal-content .modal-body.verification-link-page-content-no-padding .new-verification-link-page-content-body .new-verification-link-legal,
+.access-management-upsell-modal .modal-dialog .modal-content .modal-body.verification-link-page-content-no-padding .new-verification-link-page-content-body .new-verification-link-legal {
     color: var(--color-content-emphasis)
 }
 
