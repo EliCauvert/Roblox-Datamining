@@ -3447,6 +3447,7 @@ Feature.ContentFeed.Timestamp.HoursAgo,{numHours} godz. temu
 Feature.ContentFeed.Timestamp.MinutesAgo,{numMinutes} min temu
 Feature.ContentFeed.Timestamp.Now,teraz
 Feature.ContentFeed.Timestamp.WeeksAgo,{numWeeks} tyg. temu
+Feature.CustomForms.Label.Percent,
 Feature.DevSubs.Action.CancelSubscription,Anuluj subskrypcję
 Feature.DevSubs.Action.RenewSubscription,Odnów subskrypcję
 Feature.DevSubs.Label.ActiveSubscriptions,Aktywne subskrypcje
@@ -4181,6 +4182,7 @@ Feature.Moments.Action.ShowDetails,Pokaż szczegóły
 Feature.Moments.Action.ShowMore,
 Feature.Moments.Action.TrimVideo,Przytnij film
 Feature.Moments.Action.TryAgain,
+Feature.Moments.Body.EDPMomentIPReportInstructions,"Aby zgłosić naruszenie praw własności intelektualnej w tym momencie, przejdź do strony szczegółów gry."
 Feature.Moments.Description.CommunityStandards,"Zapoznaj się ze Standardami społeczności, aby uzyskać więcej informacji na temat tego, co można, a czego nie można mówić."
 Feature.Moments.Description.EmptyCapturesLibrary,Tutaj będą pojawiać się Twoje przechwycone elementy.
 Feature.Moments.Description.GenerateTextFeedbackDisclosure,Wygenerowane przez sztuczną inteligencję. Sprawdź przed opublikowaniem – ponosisz odpowiedzialność za publikowane treści.
@@ -4308,11 +4310,12 @@ Feature.Moments.Label.WriteComment,Napisz komentarz
 Feature.Moments.Title.Comments,Komentarze
 Feature.Moments.Title.CommentsWithCappedCount,Liczba komentarzy: ponad {count}
 Feature.Moments.Title.CommentsWithCount,Liczba komentarzy: {count}
+Feature.Moments.Title.EDPMomentIPReportInstructions,Zgłoś na stronie szczegółów gry
 Feature.Moments.Title.GenerateTextFeedbackReason,Co poszło nie tak?
 Feature.Moments.Title.GenerateTextOptions,
 Feature.Moments.Title.LeaveMomentCreation,Wyjść z tworzenia momentu?
 Feature.Moments.Title.MomentRemoved,
-Feature.Moments.Title.PostInsights,Tytuł nagłówka strony
+Feature.Moments.Title.PostInsights,Dane analityczne dotyczące postów
 Feature.Moments.Title.ReportPost,Zgłoś posta
 Feature.Moments.Tooltip.PostInsightsBody,"Sprawdź liczbę wyświetleń, czas oglądania i to, jak moment został odebrany przez Twoich odbiorców."
 Feature.Moments.Tooltip.PostInsightsTitle,Tutaj znajdziesz statystyki dotyczące Twojego momentu

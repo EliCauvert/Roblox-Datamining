@@ -2484,6 +2484,8 @@ Feature.Build.Description.PromoteGamePaid,Create an ad to get your game in front
 Feature.Build.Description.PromoteGameWithAdCampaign,Boost your audience with a {durationDays}-day ad campaign and get your game discovered.
 Feature.Build.Description.RaiseLimitOrWait,"Increase your daily Robux limit to keep creating, or wait for it to reset tomorrow."
 Feature.Build.Description.RatingAgreement,"By publishing, you agree that this content rating is accurate."
+Feature.Build.Description.RequiredRobuxForAdvanced,You need at least {ROBUX} Robux to keep creating with the Advanced model. You can also switch back to Default or wait for your free usage to reset.
+Feature.Build.Description.RequiredRobuxForDefault,"You need at least {ROBUX} Robux to keep creating, or wait for your free usage to reset."
 Feature.Build.Description.RestoreLatest,This version will become your latest published version.
 Feature.Build.Description.RevertToVersion,Confirm to revert the latest change and go back to {VERSION}.
 Feature.Build.Description.ShareLatest,Share what’s changed in your latest version.
@@ -2731,6 +2733,7 @@ Feature.Build.Message.BuildBusy,Build is busy. Wait a minute and try again.
 Feature.Build.Message.BuildConnectFailed,Build couldn't connect. Try again.
 Feature.Build.Message.BuildInternalError,Build ran into a problem. Try again.
 Feature.Build.Message.BuildResponseFailed,Build couldn't respond. Try again.
+Feature.Build.Message.BuildSendUnconfirmed,Build couldn't confirm your message was sent.
 Feature.Build.Message.BuildStillWorking,"Working on it. You can leave the app, play Roblox, or start another project while you wait."
 Feature.Build.Message.BuildStopped,You stopped Build.
 Feature.Build.Message.BuildTakingLonger,This is taking longer than expected. You can keep waiting or start something else.
@@ -2836,6 +2839,7 @@ Feature.Build.Title.GameCreationDone,Completed game creation
 Feature.Build.Title.GamePass,Game Pass
 Feature.Build.Title.GenericError,
 Feature.Build.Title.GetUsers,Get users
+Feature.Build.Title.InsufficientRobuxForModel,You don't have enough Robux
 Feature.Build.Title.ManagedPricingAcknowledgement,Turn on Managed Pricing?
 Feature.Build.Title.Monetization,Monetization
 Feature.Build.Title.NoMonetizationProducts,Start earning in your game

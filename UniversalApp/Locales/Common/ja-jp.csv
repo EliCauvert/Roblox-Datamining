@@ -2542,6 +2542,7 @@ Feature.Build.Label.DeveloperProductDescription,説明：{DESCRIPTION}
 Feature.Build.Label.DeveloperProductName,名前：「{NAME}」
 Feature.Build.Label.DeveloperProductPrice,価格：{PRICE} Robux
 Feature.Build.Label.DeveloperProductPriceUnavailable,?
+Feature.Build.Label.DeveloperProducts,
 Feature.Build.Label.Done,
 Feature.Build.Label.EasyPerformanceReport,わかりやすいパフォーマンスレポート
 Feature.Build.Label.Error,
@@ -2752,6 +2753,7 @@ Feature.Build.Message.NoAssetsFound,アセットが見つかりません。
 Feature.Build.Message.NoCapturesAvailable,添付できる切り抜きはありません
 Feature.Build.Message.NoDescriptionProvided,詳細がありません。
 Feature.Build.Message.NoFriendsToAdd,まだ招待できる友達がいません。まずはRobloxでつながる相手を見つけましょう。
+Feature.Build.Message.NoGamesYet,関連するゲームはまだありません。
 Feature.Build.Message.NoResults,
 Feature.Build.Message.NoSearchResultsFound,検索結果が見つかりませんでした
 Feature.Build.Message.NoVersionHistory,まだバージョン履歴はありません。
@@ -2827,7 +2829,9 @@ Feature.Build.Title.GameCreationDone,ゲームの作成が完了しました
 Feature.Build.Title.GamePass,ゲームパス
 Feature.Build.Title.GenericError,
 Feature.Build.Title.GetUsers,ユーザーを獲得
+Feature.Build.Title.InsufficientRobuxForModel,Robuxが不足しています
 Feature.Build.Title.ManagedPricingAcknowledgement,管理価格設定をオンにしますか？
+Feature.Build.Title.Monetization,収益化
 Feature.Build.Title.NoMonetizationProducts,ゲーム内で収益を獲得
 Feature.Build.Title.NoRobuxForUsage,ビルド使用量に使えるRobuxが残っていません
 Feature.Build.Title.PickCampaign,期間を選択
@@ -2913,7 +2917,7 @@ Feature.Catalog.Heading.FreeItemConfirmation,アイテムをゲット
 Feature.Catalog.Heading.GoToExperience,バーチャル空間に参加しますか？
 Feature.Catalog.Heading.HoldingPolicy,保留ポリシー
 Feature.Catalog.Heading.InExperienceOnly,バーチャル空間内で入手可
-Feature.Catalog.Heading.InsufficientFunds,Robuxが不足しています
+Feature.Catalog.Heading.InsufficientFunds,
 Feature.Catalog.Heading.ItemInfo,アイテム情報
 Feature.Catalog.Heading.ItemRemoved,アイテム削除済み
 Feature.Catalog.Heading.ItemsOnSale,販売中のアイテム

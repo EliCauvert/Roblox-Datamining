@@ -2478,6 +2478,7 @@ Feature.Build.Label.DeveloperProductDescription,الوصف: {DESCRIPTION}
 Feature.Build.Label.DeveloperProductName,"الاسم: ""{NAME}"""
 Feature.Build.Label.DeveloperProductPrice,السعر: {PRICE} من عملات Robux
 Feature.Build.Label.DeveloperProductPriceUnavailable,?
+Feature.Build.Label.DeveloperProducts,منتجات المطور
 Feature.Build.Label.Done,
 Feature.Build.Label.EasyPerformanceReport,تقرير أداء مبسط
 Feature.Build.Label.Error,
@@ -2688,6 +2689,7 @@ Feature.Build.Message.NoAssetsFound,لم يتم العثور على أي أصو�
 Feature.Build.Message.NoCapturesAvailable,لا توجد أي لقطات متاحة
 Feature.Build.Message.NoDescriptionProvided,لم يتم تقديم وصف.
 Feature.Build.Message.NoFriendsToAdd,ليس لديك أي أصدقاء لدعوتهم حتى الآن. ابحث عن أشخاص للتواصل معهم على منصّة Roblox أولًا.
+Feature.Build.Message.NoGamesYet,لا توجد ألعاب حتى الآن.
 Feature.Build.Message.NoResults,
 Feature.Build.Message.NoSearchResultsFound,لم يتم العثور على أي نتائج بحث
 Feature.Build.Message.NoVersionHistory,لا يوجد سجل إصدارات حتى الآن.
@@ -2764,6 +2766,7 @@ Feature.Build.Title.GamePass,تذكرة اللعبة
 Feature.Build.Title.GenericError,
 Feature.Build.Title.GetUsers,الحصول على المستخدمين
 Feature.Build.Title.ManagedPricingAcknowledgement,هل تريد تشغيل التسعير المُدار؟
+Feature.Build.Title.Monetization,التحويل إلى مصدر ربح
 Feature.Build.Title.NoMonetizationProducts,ابدأ الكسب في لعبتك
 Feature.Build.Title.NoRobuxForUsage,لم يتبقَ أي عملات Robux لاستخدام ميزة Build
 Feature.Build.Title.PickCampaign,اختَر مدة
@@ -3383,6 +3386,7 @@ Feature.ContentFeed.Timestamp.HoursAgo,منذ {numHours} من الساعات
 Feature.ContentFeed.Timestamp.MinutesAgo,منذ {numMinutes} من الدقائق
 Feature.ContentFeed.Timestamp.Now,
 Feature.ContentFeed.Timestamp.WeeksAgo,منذ {numWeeks} من الأسابيع
+Feature.CustomForms.Label.Percent,
 Feature.DevSubs.Action.CancelSubscription,إلغاء الاشتراك
 Feature.DevSubs.Action.RenewSubscription,تجديد الاشتراك
 Feature.DevSubs.Label.ActiveSubscriptions,الاشتراكات النشطة
@@ -4117,6 +4121,7 @@ Feature.Moments.Action.ShowDetails,
 Feature.Moments.Action.ShowMore,اعرض المزيد
 Feature.Moments.Action.TrimVideo,قص الفيديو
 Feature.Moments.Action.TryAgain,
+Feature.Moments.Body.EDPMomentIPReportInstructions,للإبلاغ عن انتهاك للملكية الفكرية في هذه اللحظة، تابع إلى صفحة تفاصيل اللعبة.
 Feature.Moments.Description.CommunityStandards,تحقَّق من معايير المجتمع للحصول على مزيد من المعلومات حول ما يمكنك وما لا يمكنك قوله.
 Feature.Moments.Description.EmptyCapturesLibrary,هذا هو المكان الذي ستظهر فيه لقطاتك.
 Feature.Moments.Description.GenerateTextFeedbackDisclosure,نص من إنشاء الذكاء الاصطناعي. راجع قبل النشر، فأنت مسؤول عما يتم نشره.
@@ -4244,6 +4249,7 @@ Feature.Moments.Label.WriteComment,اكتب تعليقًا
 Feature.Moments.Title.Comments,التعليقات
 Feature.Moments.Title.CommentsWithCappedCount,{count} فأكثر من التعليقات
 Feature.Moments.Title.CommentsWithCount,{count} من التعليقات
+Feature.Moments.Title.EDPMomentIPReportInstructions,الإبلاغ في صفحة تفاصيل اللعبة
 Feature.Moments.Title.GenerateTextFeedbackReason,ما الخطأ الذي حدث؟
 Feature.Moments.Title.GenerateTextOptions,
 Feature.Moments.Title.LeaveMomentCreation,هل تريد الخروج من إنشاء اللحظة؟

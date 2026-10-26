@@ -2542,6 +2542,7 @@ Feature.Build.Label.DeveloperProductDescription,Deskripsi: {DESCRIPTION}
 Feature.Build.Label.DeveloperProductName,"Nama: ""{NAME}"""
 Feature.Build.Label.DeveloperProductPrice,Harga: {PRICE} Robux
 Feature.Build.Label.DeveloperProductPriceUnavailable,?
+Feature.Build.Label.DeveloperProducts,Produk Developer
 Feature.Build.Label.Done,
 Feature.Build.Label.EasyPerformanceReport,Laporan performa mudah
 Feature.Build.Label.Error,Kesalahan
@@ -2752,6 +2753,7 @@ Feature.Build.Message.NoAssetsFound,Tidak ada aset yang ditemukan.
 Feature.Build.Message.NoCapturesAvailable,Tidak ada media yang tersedia
 Feature.Build.Message.NoDescriptionProvided,Tidak ada deskripsi yang diberikan.
 Feature.Build.Message.NoFriendsToAdd,Kamu belum memiliki teman untuk diundang. Temukan pengguna untuk terhubung di Roblox dulu.
+Feature.Build.Message.NoGamesYet,Belum ada game.
 Feature.Build.Message.NoResults,
 Feature.Build.Message.NoSearchResultsFound,Tidak ada hasil pencarian
 Feature.Build.Message.NoVersionHistory,Belum ada riwayat versi.
@@ -2828,6 +2830,7 @@ Feature.Build.Title.GamePass,Pas Game
 Feature.Build.Title.GenericError,Terjadi kesalahan
 Feature.Build.Title.GetUsers,Dapatkan pengguna
 Feature.Build.Title.ManagedPricingAcknowledgement,Aktifkan Harga Terkelola?
+Feature.Build.Title.Monetization,Monetisasi
 Feature.Build.Title.NoMonetizationProducts,Mulai hasilkan pendapatan di game-mu
 Feature.Build.Title.NoRobuxForUsage,Tidak ada Robux yang tersisa untuk penggunaan Build
 Feature.Build.Title.PickCampaign,Pilih durasi
@@ -3445,6 +3448,7 @@ Feature.ContentFeed.Timestamp.HoursAgo,{numHours} jam lalu
 Feature.ContentFeed.Timestamp.MinutesAgo,{numMinutes} menit lalu
 Feature.ContentFeed.Timestamp.Now,sekarang
 Feature.ContentFeed.Timestamp.WeeksAgo,{numWeeks} minggu lalu
+Feature.CustomForms.Label.Percent,
 Feature.DevSubs.Action.CancelSubscription,Batalkan Subscription
 Feature.DevSubs.Action.RenewSubscription,Perpanjang Subscription
 Feature.DevSubs.Label.ActiveSubscriptions,Subscription Aktif
@@ -4179,6 +4183,7 @@ Feature.Moments.Action.ShowDetails,Tampilkan detail
 Feature.Moments.Action.ShowMore,
 Feature.Moments.Action.TrimVideo,Potong Video
 Feature.Moments.Action.TryAgain,
+Feature.Moments.Body.EDPMomentIPReportInstructions,"Untuk melaporkan pelanggaran IP di Momen ini, lanjutkan ke halaman detail game."
 Feature.Moments.Description.CommunityStandards,Periksa Standar Komunitas untuk melihat informasi selengkapnya tentang hal yang boleh dan tidak boleh kamu katakan.
 Feature.Moments.Description.EmptyCapturesLibrary,Mediamu akan muncul di sini.
 Feature.Moments.Description.GenerateTextFeedbackDisclosure,Buatan AI. Review sebelum memosting. Kamu bertanggung jawab atas apa yang dipublikasikan.
@@ -4306,11 +4311,12 @@ Feature.Moments.Label.WriteComment,Tulis komentar
 Feature.Moments.Title.Comments,Komentar
 Feature.Moments.Title.CommentsWithCappedCount,{count}+ komentar
 Feature.Moments.Title.CommentsWithCount,{count} komentar
+Feature.Moments.Title.EDPMomentIPReportInstructions,Laporkan di halaman detail game
 Feature.Moments.Title.GenerateTextFeedbackReason,Apa masalahnya?
 Feature.Moments.Title.GenerateTextOptions,
 Feature.Moments.Title.LeaveMomentCreation,Keluar dari kreasi Moment?
 Feature.Moments.Title.MomentRemoved,
-Feature.Moments.Title.PostInsights,Judul header halaman
+Feature.Moments.Title.PostInsights,Insight postingan
 Feature.Moments.Title.ReportPost,Laporkan postingan
 Feature.Moments.Tooltip.PostInsightsBody,"Periksa jumlah tayangan, waktu tonton, dan respons audiens terhadap Momen tersebut."
 Feature.Moments.Tooltip.PostInsightsTitle,Insight Moment-mu ada di sini

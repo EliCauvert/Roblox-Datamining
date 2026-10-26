@@ -2498,6 +2498,7 @@ Feature.Build.Label.DeveloperProductDescription,Açıklama: {DESCRIPTION}
 Feature.Build.Label.DeveloperProductName,"Ad: ""{NAME}"""
 Feature.Build.Label.DeveloperProductPrice,Fiyat: {PRICE} Robux
 Feature.Build.Label.DeveloperProductPriceUnavailable,?
+Feature.Build.Label.DeveloperProducts,Geliştirici Ürünleri
 Feature.Build.Label.Done,
 Feature.Build.Label.EasyPerformanceReport,Kolay performans raporu
 Feature.Build.Label.Error,Sorun
@@ -2708,6 +2709,7 @@ Feature.Build.Message.NoAssetsFound,Varlık bulunamadı.
 Feature.Build.Message.NoCapturesAvailable,Hiç yakalanan yok
 Feature.Build.Message.NoDescriptionProvided,Açıklama sağlanmadı.
 Feature.Build.Message.NoFriendsToAdd,Henüz davet edecek arkadaşın yok. Önce Roblox'ta bağlantı kurabileceğin insanlar bul.
+Feature.Build.Message.NoGamesYet,Henüz oyun yok.
 Feature.Build.Message.NoResults,
 Feature.Build.Message.NoSearchResultsFound,Hiçbir arama sonucu bulunamadı
 Feature.Build.Message.NoVersionHistory,Henüz sürüm geçmişi yok.
@@ -2784,6 +2786,7 @@ Feature.Build.Title.GamePass,Oyun Bileti
 Feature.Build.Title.GenericError,Bir şeyler ters gitti
 Feature.Build.Title.GetUsers,Kullanıcıları al
 Feature.Build.Title.ManagedPricingAcknowledgement,Yönetilen Fiyatlandırma açılsın mı?
+Feature.Build.Title.Monetization,Gelir Elde Etme
 Feature.Build.Title.NoMonetizationProducts,Oyununda kazanmaya başla
 Feature.Build.Title.NoRobuxForUsage,İnşa Et kullanım hakkı için Robux kalmadı
 Feature.Build.Title.PickCampaign,Süre seç
@@ -3403,6 +3406,7 @@ Feature.ContentFeed.Timestamp.HoursAgo,{numHours} saat önce
 Feature.ContentFeed.Timestamp.MinutesAgo,{numMinutes} dakika önce
 Feature.ContentFeed.Timestamp.Now,şimdi
 Feature.ContentFeed.Timestamp.WeeksAgo,{numWeeks} hafta önce
+Feature.CustomForms.Label.Percent,% {number}
 Feature.DevSubs.Action.CancelSubscription,Aboneliği İptal Et
 Feature.DevSubs.Action.RenewSubscription,Aboneliği Yenile
 Feature.DevSubs.Label.ActiveSubscriptions,Etkin Abonelikler
@@ -4137,6 +4141,7 @@ Feature.Moments.Action.ShowDetails,Ayrıntıları göster
 Feature.Moments.Action.ShowMore,
 Feature.Moments.Action.TrimVideo,Videoyu Kırp
 Feature.Moments.Action.TryAgain,
+Feature.Moments.Body.EDPMomentIPReportInstructions,Bu Anda bir fikrî mülkiyet ihlalini raporlamak için oyun detayları sayfasına devam et.
 Feature.Moments.Description.CommunityStandards,Ne söyleyip söyleyemeyeceğin hakkında daha fazla bilgi için Topluluk Standartlarını kontrol et.
 Feature.Moments.Description.EmptyCapturesLibrary,Yakalamaların burada görünecektir.
 Feature.Moments.Description.GenerateTextFeedbackDisclosure,Yapay zekâ tarafından oluşturuldu. Yayınlamadan önce gözden geçir; yayınlananlardan sen sorumlusun.
@@ -4264,11 +4269,12 @@ Feature.Moments.Label.WriteComment,Yorum yaz
 Feature.Moments.Title.Comments,Yorumlar
 Feature.Moments.Title.CommentsWithCappedCount,En az {count} yorum
 Feature.Moments.Title.CommentsWithCount,{count} yorum
+Feature.Moments.Title.EDPMomentIPReportInstructions,Oyun detayları sayfasında raporla
 Feature.Moments.Title.GenerateTextFeedbackReason,Ne yanlış gitti?
 Feature.Moments.Title.GenerateTextOptions,
 Feature.Moments.Title.LeaveMomentCreation,An yaratmadan çıkılsın mı?
 Feature.Moments.Title.MomentRemoved,An kaldırıldı
-Feature.Moments.Title.PostInsights,Sayfa başlığı
+Feature.Moments.Title.PostInsights,Paylaşım bilgileri
 Feature.Moments.Title.ReportPost,Paylaşımı raporla
 Feature.Moments.Tooltip.PostInsightsBody,"Görüntüleme sayılarını, izleme süresini ve An'ın kitlen tarafından nasıl karşılandığını kontrol et."
 Feature.Moments.Tooltip.PostInsightsTitle,An analizlerin burada

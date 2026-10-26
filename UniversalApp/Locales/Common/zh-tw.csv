@@ -2541,6 +2541,7 @@ Feature.Build.Label.DeveloperProductDescription,說明：{DESCRIPTION}
 Feature.Build.Label.DeveloperProductName,名稱：「{NAME}」
 Feature.Build.Label.DeveloperProductPrice,價格：{PRICE} Robux
 Feature.Build.Label.DeveloperProductPriceUnavailable,?
+Feature.Build.Label.DeveloperProducts,
 Feature.Build.Label.Done,
 Feature.Build.Label.EasyPerformanceReport,簡單的成效報告
 Feature.Build.Label.Error,
@@ -2751,6 +2752,7 @@ Feature.Build.Message.NoAssetsFound,找不到素材。
 Feature.Build.Message.NoCapturesAvailable,沒有可用的截圖
 Feature.Build.Message.NoDescriptionProvided,未提供說明。
 Feature.Build.Message.NoFriendsToAdd,你沒有可邀請的好友。請先在 Roblox 上尋找可交流的對象。
+Feature.Build.Message.NoGamesYet,尚無遊戲。
 Feature.Build.Message.NoResults,
 Feature.Build.Message.NoSearchResultsFound,找不到搜尋結果
 Feature.Build.Message.NoVersionHistory,尚無版本紀錄。
@@ -2827,6 +2829,7 @@ Feature.Build.Title.GamePass,遊戲通行證
 Feature.Build.Title.GenericError,
 Feature.Build.Title.GetUsers,取得使用者
 Feature.Build.Title.ManagedPricingAcknowledgement,是否開啟管理定價功能？
+Feature.Build.Title.Monetization,營利化
 Feature.Build.Title.NoMonetizationProducts,開始在遊戲中賺取收入
 Feature.Build.Title.NoRobuxForUsage,沒有剩餘的 Robux 可用於購買組建使用量
 Feature.Build.Title.PickCampaign,選擇長度
@@ -3446,6 +3449,7 @@ Feature.ContentFeed.Timestamp.HoursAgo,{numHours} 小時前
 Feature.ContentFeed.Timestamp.MinutesAgo,{numMinutes} 分鐘前
 Feature.ContentFeed.Timestamp.Now,剛剛
 Feature.ContentFeed.Timestamp.WeeksAgo,{numWeeks} 週前
+Feature.CustomForms.Label.Percent,
 Feature.DevSubs.Action.CancelSubscription,取消訂閱
 Feature.DevSubs.Action.RenewSubscription,續訂
 Feature.DevSubs.Label.ActiveSubscriptions,啟用中訂閱
@@ -4180,6 +4184,7 @@ Feature.Moments.Action.ShowDetails,顯示詳細資訊
 Feature.Moments.Action.ShowMore,
 Feature.Moments.Action.TrimVideo,裁剪影片
 Feature.Moments.Action.TryAgain,再試一次
+Feature.Moments.Body.EDPMomentIPReportInstructions,若要檢舉此「美好時光」中的智慧財產權違規行為，請繼續前往遊戲詳細資訊頁面。
 Feature.Moments.Description.CommunityStandards,查看社群標準，瞭解哪些內容可以或不能發佈。
 Feature.Moments.Description.EmptyCapturesLibrary,這裡會顯示你的截圖。
 Feature.Moments.Description.GenerateTextFeedbackDisclosure,AI 生成內容。你必須對發佈的內容負責，張貼前請先審核。
@@ -4307,11 +4312,12 @@ Feature.Moments.Label.WriteComment,撰寫留言
 Feature.Moments.Title.Comments,留言
 Feature.Moments.Title.CommentsWithCappedCount,超過 {count} 則留言
 Feature.Moments.Title.CommentsWithCount,{count} 則留言
+Feature.Moments.Title.EDPMomentIPReportInstructions,在遊戲詳細資訊頁面上檢舉
 Feature.Moments.Title.GenerateTextFeedbackReason,發生什麼問題了嗎？
 Feature.Moments.Title.GenerateTextOptions,
 Feature.Moments.Title.LeaveMomentCreation,要離開「美好時光」建立程序嗎？
 Feature.Moments.Title.MomentRemoved,「美好時光」已移除
-Feature.Moments.Title.PostInsights,頁面標題
+Feature.Moments.Title.PostInsights,貼文洞察分析
 Feature.Moments.Title.ReportPost,檢舉貼文
 Feature.Moments.Tooltip.PostInsightsBody,查看瀏覽次數、觀看時間，以及受眾對於「美好時光」的反響。
 Feature.Moments.Tooltip.PostInsightsTitle,在此查看「美好時光」深入分析

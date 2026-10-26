@@ -2542,6 +2542,7 @@ Feature.Build.Label.DeveloperProductDescription,Description : {DESCRIPTION}
 Feature.Build.Label.DeveloperProductName,Nom : « {NAME} »
 Feature.Build.Label.DeveloperProductPrice,Prix : {PRICE} Robux
 Feature.Build.Label.DeveloperProductPriceUnavailable,?
+Feature.Build.Label.DeveloperProducts,Produits développeur
 Feature.Build.Label.Done,
 Feature.Build.Label.EasyPerformanceReport,Rapport de performances accessible
 Feature.Build.Label.Error,
@@ -2752,6 +2753,7 @@ Feature.Build.Message.NoAssetsFound,Aucun contenu trouvé.
 Feature.Build.Message.NoCapturesAvailable,Aucune capture disponible
 Feature.Build.Message.NoDescriptionProvided,Aucune description fournie.
 Feature.Build.Message.NoFriendsToAdd,Tu n'as aucun ami à inviter. Trouve d'abord des personnes avec qui te connecter sur Roblox.
+Feature.Build.Message.NoGamesYet,Aucun jeu pour le moment.
 Feature.Build.Message.NoResults,
 Feature.Build.Message.NoSearchResultsFound,Aucun résultat de recherche
 Feature.Build.Message.NoVersionHistory,Aucun historique des versions pour le moment.
@@ -2827,7 +2829,9 @@ Feature.Build.Title.GameCreationDone,Création de jeu terminée
 Feature.Build.Title.GamePass,Passe de jeu
 Feature.Build.Title.GenericError,Une erreur s'est produite
 Feature.Build.Title.GetUsers,Obtenir des utilisateurs
+Feature.Build.Title.InsufficientRobuxForModel,Robux insuffisants
 Feature.Build.Title.ManagedPricingAcknowledgement,Activer la tarification gérée ?
+Feature.Build.Title.Monetization,Monétisation
 Feature.Build.Title.NoMonetizationProducts,Gagne de l'argent dans ton expérience
 Feature.Build.Title.NoRobuxForUsage,Il ne reste plus de Robux pour utiliser Construire
 Feature.Build.Title.PickCampaign,Choisis une durée
@@ -3447,6 +3451,7 @@ Feature.ContentFeed.Timestamp.HoursAgo,Il y a {numHours}h
 Feature.ContentFeed.Timestamp.MinutesAgo,Il y a {numMinutes} m
 Feature.ContentFeed.Timestamp.Now,maintenant
 Feature.ContentFeed.Timestamp.WeeksAgo,Il y a {numWeeks} sem
+Feature.CustomForms.Label.Percent,
 Feature.DevSubs.Action.CancelSubscription,Annuler l'abonnement
 Feature.DevSubs.Action.RenewSubscription,Renouveler l'abonnement
 Feature.DevSubs.Label.ActiveSubscriptions,Abonnements actifs
@@ -4181,6 +4186,7 @@ Feature.Moments.Action.ShowDetails,
 Feature.Moments.Action.ShowMore,
 Feature.Moments.Action.TrimVideo,Rogner la vidéo
 Feature.Moments.Action.TryAgain,
+Feature.Moments.Body.EDPMomentIPReportInstructions,"Pour signaler une violation de propriété intellectuelle dans ce Moment, rends-toi sur la page Infos du jeu."
 Feature.Moments.Description.CommunityStandards,Consulte les Normes de la communauté pour en savoir plus sur ce que tu peux dire ou non.
 Feature.Moments.Description.EmptyCapturesLibrary,C'est ici que tes captures apparaîtront.
 Feature.Moments.Description.GenerateTextFeedbackDisclosure,Texte généré par l'IA. Relis-le avant de le publier : tu es responsable de ce que tu publies.
@@ -4308,11 +4314,12 @@ Feature.Moments.Label.WriteComment,Écrire un commentaire
 Feature.Moments.Title.Comments,Commentaires
 Feature.Moments.Title.CommentsWithCappedCount,+{count} commentaires
 Feature.Moments.Title.CommentsWithCount,{count} commentaires
+Feature.Moments.Title.EDPMomentIPReportInstructions,Signaler depuis la page Infos du jeu
 Feature.Moments.Title.GenerateTextFeedbackReason,Que s'est-il passé ?
 Feature.Moments.Title.GenerateTextOptions,
 Feature.Moments.Title.LeaveMomentCreation,Quitter la création de Moment ?
 Feature.Moments.Title.MomentRemoved,
-Feature.Moments.Title.PostInsights,Titre de la page
+Feature.Moments.Title.PostInsights,Statistiques des posts
 Feature.Moments.Title.ReportPost,Signaler un post
 Feature.Moments.Tooltip.PostInsightsBody,"Consulte le nombre de vues, la durée de visionnage et l'accueil réservé au Moment par ton audience."
 Feature.Moments.Tooltip.PostInsightsTitle,Retrouve ici les statistiques de ton Moment

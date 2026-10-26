@@ -2525,6 +2525,7 @@ Feature.Build.Label.DeveloperProductDescription,คำอธิบาย: {DESCR
 Feature.Build.Label.DeveloperProductName,"ชื่อ: ""{NAME}"""
 Feature.Build.Label.DeveloperProductPrice,ราคา: {PRICE} Robux
 Feature.Build.Label.DeveloperProductPriceUnavailable,?
+Feature.Build.Label.DeveloperProducts,
 Feature.Build.Label.Done,เสร็จ
 Feature.Build.Label.EasyPerformanceReport,รายงานประสิทธิภาพที่ใช้งานง่าย
 Feature.Build.Label.Error,
@@ -2735,6 +2736,7 @@ Feature.Build.Message.NoAssetsFound,ไม่พบทรัพยากร
 Feature.Build.Message.NoCapturesAvailable,ไม่มีภาพที่จับ
 Feature.Build.Message.NoDescriptionProvided,ไม่มีคำอธิบาย
 Feature.Build.Message.NoFriendsToAdd,คุณยังไม่มีเพื่อนให้เชิญ ลองหาผู้ใช้ที่จะเชื่อมต่อกันใน Roblox ก่อน
+Feature.Build.Message.NoGamesYet,ยังไม่มีเกม
 Feature.Build.Message.NoResults,
 Feature.Build.Message.NoSearchResultsFound,
 Feature.Build.Message.NoVersionHistory,ยังไม่มีประวัติเวอร์ชัน
@@ -2811,6 +2813,7 @@ Feature.Build.Title.GamePass,บัตรผ่านเกม
 Feature.Build.Title.GenericError,มีบางอย่างผิดปกติ
 Feature.Build.Title.GetUsers,ดึงดูดผู้ใช้
 Feature.Build.Title.ManagedPricingAcknowledgement,เปิดการตั้งราคาแบบมีการจัดการใช่ไหม?
+Feature.Build.Title.Monetization,การสร้างรายได้
 Feature.Build.Title.NoMonetizationProducts,เริ่มสร้างรายได้ในเกมของคุณ
 Feature.Build.Title.NoRobuxForUsage,ไม่มี Robux เหลือสำหรับโควต้าการใช้งาน Build
 Feature.Build.Title.PickCampaign,เลือกระยะเวลา
@@ -3430,6 +3433,7 @@ Feature.ContentFeed.Timestamp.HoursAgo,{numHours} ชั่วโมงที่
 Feature.ContentFeed.Timestamp.MinutesAgo,{numMinutes} นาทีที่แล้ว
 Feature.ContentFeed.Timestamp.Now,
 Feature.ContentFeed.Timestamp.WeeksAgo,{numWeeks} สัปดาห์ที่แล้ว
+Feature.CustomForms.Label.Percent,
 Feature.DevSubs.Action.CancelSubscription,ยกเลิกการเป็นสมาชิก
 Feature.DevSubs.Action.RenewSubscription,ต่ออายุการเป็นสมาชิก
 Feature.DevSubs.Label.ActiveSubscriptions,การเป็นสมาชิกที่ใช้งานอยู่
@@ -4164,6 +4168,7 @@ Feature.Moments.Action.ShowDetails,แสดงรายละเอียด
 Feature.Moments.Action.ShowMore,
 Feature.Moments.Action.TrimVideo,ตัดวิดีโอ
 Feature.Moments.Action.TryAgain,
+Feature.Moments.Body.EDPMomentIPReportInstructions,หากต้องการรายงานเรื่องการละเมิดทรัพย์สินทางปัญญาในโมเมนต์นี้ โปรดดำเนินการต่อที่หน้ารายละเอียดเกม
 Feature.Moments.Description.CommunityStandards,ดูข้อมูลเพิ่มเติมเกี่ยวกับสิ่งที่คุณพูดได้และพูดไม่ได้ในมาตรฐานชุมชน
 Feature.Moments.Description.EmptyCapturesLibrary,ภาพที่คุณจับไว้จะปรากฏที่นี่
 Feature.Moments.Description.GenerateTextFeedbackDisclosure,ข้อความนี้สร้างโดย AI โปรดตรวจสอบก่อนโพสต์ เพราะคุณจะเป็นผู้รับผิดชอบต่อข้อความที่เผยแพร่
@@ -4291,11 +4296,12 @@ Feature.Moments.Label.WriteComment,เขียนความคิดเห็
 Feature.Moments.Title.Comments,ความคิดเห็น
 Feature.Moments.Title.CommentsWithCappedCount,{count}+ ความคิดเห็น
 Feature.Moments.Title.CommentsWithCount,{count} ความคิดเห็น
+Feature.Moments.Title.EDPMomentIPReportInstructions,รายงานบนหน้ารายละเอียดเกม
 Feature.Moments.Title.GenerateTextFeedbackReason,มีอะไรผิดพลาด?
 Feature.Moments.Title.GenerateTextOptions,
 Feature.Moments.Title.LeaveMomentCreation,ต้องการออกจากการสร้างสรรค์โมเมนต์ใช่ไหม?
 Feature.Moments.Title.MomentRemoved,
-Feature.Moments.Title.PostInsights,ชื่อส่วนหัวของหน้า
+Feature.Moments.Title.PostInsights,ข้อมูลเชิงลึกของโพสต์
 Feature.Moments.Title.ReportPost,รายงานโพสต์
 Feature.Moments.Tooltip.PostInsightsBody,ตรวจสอบยอดวิว ระยะเวลารับชม และผลตอบรับจากผู้ชมที่มีต่อโมเมนต์ของคุณ
 Feature.Moments.Tooltip.PostInsightsTitle,ข้อมูลเชิงลึกเกี่ยวกับโมเมนต์ของคุณพร้อมแล้ว

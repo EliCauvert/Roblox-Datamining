@@ -2543,6 +2543,7 @@ Feature.Build.Label.DeveloperProductDescription,Descripción: {DESCRIPTION}
 Feature.Build.Label.DeveloperProductName,"Nombre: ""{NAME}"""
 Feature.Build.Label.DeveloperProductPrice,Precio: {PRICE} Robux
 Feature.Build.Label.DeveloperProductPriceUnavailable,?
+Feature.Build.Label.DeveloperProducts,Productos del desarrollador
 Feature.Build.Label.Done,Listo
 Feature.Build.Label.EasyPerformanceReport,Informe de rendimiento sencillo
 Feature.Build.Label.Error,
@@ -2753,6 +2754,7 @@ Feature.Build.Message.NoAssetsFound,No se encontraron recursos.
 Feature.Build.Message.NoCapturesAvailable,No hay capturas disponibles
 Feature.Build.Message.NoDescriptionProvided,No se proporcionó la descripción.
 Feature.Build.Message.NoFriendsToAdd,"Aún no tienes amistades. Primero, busca personas para añadir a Roblox."
+Feature.Build.Message.NoGamesYet,Aún no hay juegos.
 Feature.Build.Message.NoResults,
 Feature.Build.Message.NoSearchResultsFound,No se encontraron resultados de búsqueda
 Feature.Build.Message.NoVersionHistory,Aún no hay historial de versiones.
@@ -2828,7 +2830,9 @@ Feature.Build.Title.GameCreationDone,Se completó la creación del juego
 Feature.Build.Title.GamePass,Pase del juego
 Feature.Build.Title.GenericError,
 Feature.Build.Title.GetUsers,Obtener usuarios
+Feature.Build.Title.InsufficientRobuxForModel,No tienes suficientes Robux
 Feature.Build.Title.ManagedPricingAcknowledgement,¿Quieres activar Precios gestionados?
+Feature.Build.Title.Monetization,Monetización
 Feature.Build.Title.NoMonetizationProducts,Comienza a ganar en tu juego
 Feature.Build.Title.NoRobuxForUsage,No quedan Robux para el uso de la compilación
 Feature.Build.Title.PickCampaign,Elige una duración
@@ -3448,6 +3452,7 @@ Feature.ContentFeed.Timestamp.HoursAgo,Hace {numHours} h
 Feature.ContentFeed.Timestamp.MinutesAgo,Hace {numMinutes} min
 Feature.ContentFeed.Timestamp.Now,ahora
 Feature.ContentFeed.Timestamp.WeeksAgo,Hace {numWeeks} semana(s)
+Feature.CustomForms.Label.Percent,
 Feature.DevSubs.Action.CancelSubscription,Cancelar suscripción
 Feature.DevSubs.Action.RenewSubscription,Renovar suscripción
 Feature.DevSubs.Label.ActiveSubscriptions,Suscripciones activas
@@ -4182,6 +4187,7 @@ Feature.Moments.Action.ShowDetails,Mostrar detalles
 Feature.Moments.Action.ShowMore,
 Feature.Moments.Action.TrimVideo,Recortar video
 Feature.Moments.Action.TryAgain,Inténtalo de nuevo
+Feature.Moments.Body.EDPMomentIPReportInstructions,"Para denunciar una infracción de la PI en este Momento, continúa a la página de detalles del juego."
 Feature.Moments.Description.CommunityStandards,Consulta las Normas de la comunidad para obtener más información sobre lo que puedes y no puedes decir.
 Feature.Moments.Description.EmptyCapturesLibrary,Aquí es donde aparecerán tus Capturas.
 Feature.Moments.Description.GenerateTextFeedbackDisclosure,Generado con IA. Revísalo antes de publicarlo: tú eres responsable de que publicas.
@@ -4309,11 +4315,12 @@ Feature.Moments.Label.WriteComment,Escribe un comentario
 Feature.Moments.Title.Comments,Comentarios
 Feature.Moments.Title.CommentsWithCappedCount,{count}+ comentarios
 Feature.Moments.Title.CommentsWithCount,{count} comentarios
+Feature.Moments.Title.EDPMomentIPReportInstructions,Denunciar en la página de detalles del juego
 Feature.Moments.Title.GenerateTextFeedbackReason,¿Qué salió mal?
 Feature.Moments.Title.GenerateTextOptions,
 Feature.Moments.Title.LeaveMomentCreation,¿Salir de la creación de Momento?
 Feature.Moments.Title.MomentRemoved,
-Feature.Moments.Title.PostInsights,Título del encabezado de la página
+Feature.Moments.Title.PostInsights,Información de las publicaciones
 Feature.Moments.Title.ReportPost,Reportar publicación
 Feature.Moments.Tooltip.PostInsightsBody,"Consulta las visualizaciones, el tiempo de visualización y cómo le fue al Momento con tu audiencia."
 Feature.Moments.Tooltip.PostInsightsTitle,Aquí está la información de tu Momento
