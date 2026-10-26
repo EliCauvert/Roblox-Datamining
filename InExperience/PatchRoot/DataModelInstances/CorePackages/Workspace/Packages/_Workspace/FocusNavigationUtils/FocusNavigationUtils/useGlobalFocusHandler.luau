@@ -26,7 +26,6 @@ local AutoFocusFailsafeThreshold = game:DefineFastInt("AutoFocusFailsafeThreshol
 local SharedFlagsModule = require(Parent.SharedFlags)
 local FFlagAppIaHomeSubTab = SharedFlagsModule.FFlagAppIaHomeSubTab
 local FFlagLuaAppResponsiveEnginePreferredInput = SharedFlagsModule.FFlagLuaAppResponsiveEnginePreferredInput
-local FFlagLuaAppsDefaultSelection = SharedFlagsModule.FFlagLuaAppsDefaultSelection
 local FFlagEnableDrawerFocusNav = SharedFlagsModule.FFlagEnableDrawerFocusNav
 local FFlagSearchAllRegistryEntriesForAutoFocus = SharedFlagsModule.FFlagSearchAllRegistryEntriesForAutoFocus
 local FFlagFixGlobalFocusPriorityModule = require(script.Parent.FFlagFixGlobalFocusPriority)
@@ -88,7 +87,7 @@ local function createGameLeaveSubscription(Callback)
 end
 
 return function(p1)
-	-- upvalues: UseLastInputMethodModule (copy), UseFocusGuiObjectFunction (copy), UseFocusedGuiObjectFunction (copy), ReactModule (copy), UseLastInputModeModule (copy), FFlagLuaAppResponsiveEnginePreferredInput (copy), ResponsiveModule (copy), SessionService (copy), SessionType (copy), GlobalFocusTelemetryModule (copy), UserInputService (copy), config (copy), NavigationModule (copy), UseRegistryEntryFunction (copy), FocusNavigableSurfaceIdentifierEnumModule (copy), FFlagAppIaHomeSubTab (copy), FFlagEnableDrawerFocusNav (copy), UseSelectorFunction (copy), FFlagGamepadDisconnectAutoFocusSuppressionModule (copy), CentralOverlayType (copy), UseAutoFocusModule (copy), UseDescendantHasFocusModule (copy), FFlagSearchAllRegistryEntriesForAutoFocus (copy), UseRegistryEntriesFunction (copy), UseAnyDescendantHasFocusModule (copy), FFlagLuaAppsDefaultSelection (copy), FFlagFixGlobalFocusPriorityModule (copy), RunService (copy), AutoFocusFailsafeThreshold (copy), createGameLeaveSubscription (copy)
+	-- upvalues: UseLastInputMethodModule (copy), UseFocusGuiObjectFunction (copy), UseFocusedGuiObjectFunction (copy), ReactModule (copy), UseLastInputModeModule (copy), FFlagLuaAppResponsiveEnginePreferredInput (copy), ResponsiveModule (copy), SessionService (copy), SessionType (copy), GlobalFocusTelemetryModule (copy), UserInputService (copy), config (copy), NavigationModule (copy), UseRegistryEntryFunction (copy), FocusNavigableSurfaceIdentifierEnumModule (copy), FFlagAppIaHomeSubTab (copy), FFlagEnableDrawerFocusNav (copy), UseSelectorFunction (copy), FFlagGamepadDisconnectAutoFocusSuppressionModule (copy), CentralOverlayType (copy), UseAutoFocusModule (copy), UseDescendantHasFocusModule (copy), FFlagSearchAllRegistryEntriesForAutoFocus (copy), UseRegistryEntriesFunction (copy), UseAnyDescendantHasFocusModule (copy), FFlagFixGlobalFocusPriorityModule (copy), RunService (copy), AutoFocusFailsafeThreshold (copy), createGameLeaveSubscription (copy)
 	local UseLastInputMethodModuleResult = UseLastInputMethodModule()
 	local UseFocusGuiObjectResult = UseFocusGuiObjectFunction()
 	local UseFocusedGuiObjectResult = UseFocusedGuiObjectFunction()
@@ -243,28 +242,24 @@ return function(p1)
 	local UseDescendantHasFocusModuleResult10 = if FFlagAppIaHomeSubTab then UseDescendantHasFocusModule(UseRegistryEntryResult10) else false
 	local UseDescendantHasFocusModuleResult11 = if FFlagEnableDrawerFocusNav then UseDescendantHasFocusModule(UseRegistryEntryResult11) else false
 	local UseDescendantHasFocusModuleResult12 = if UseRegistryEntryResult3 then UseDescendantHasFocusModuleResult3 elseif UseRegistryEntryResult2 then UseDescendantHasFocusModuleResult2 elseif UseRegistryEntryResult5 then UseDescendantHasFocusModuleResult4 elseif UseRegistryEntryResult4 then UseDescendantHasFocusModuleResult5 elseif UseRegistryEntryResult7 then UseDescendantHasFocusModuleResult9 elseif FFlagEnableDrawerFocusNav and UseRegistryEntryResult11 then UseDescendantHasFocusModuleResult11 else UseDescendantHasFocusModuleResult or ((if FFlagSearchAllRegistryEntriesForAutoFocus then UseAnyDescendantHasFocusModuleResult else UseDescendantHasFocusModuleResult1) or (UseDescendantHasFocusModuleResult6 or (UseDescendantHasFocusModuleResult7 or (UseDescendantHasFocusModuleResult8 or FFlagAppIaHomeSubTab and UseDescendantHasFocusModuleResult10))))
-	local UseRefResult5 = nil
-	
-	if FFlagLuaAppsDefaultSelection then
-		UseRefResult5 = ReactModule.useRef(UseMemoResult)
-		local NoFFlagFixGlobalFocusPriorityModule: boolean = if UseRegistryEntryResult3 and not UseDescendantHasFocusModuleResult3 then not FFlagFixGlobalFocusPriorityModule or (if UseRegistryEntryResult3 then not UseDescendantHasFocusModuleResult3 elseif UseRegistryEntryResult2 then not UseDescendantHasFocusModuleResult2 elseif UseRegistryEntryResult5 then not UseDescendantHasFocusModuleResult4 elseif UseRegistryEntryResult4 then not UseDescendantHasFocusModuleResult5 elseif UseRegistryEntryResult7 then not UseDescendantHasFocusModuleResult9 elseif FFlagEnableDrawerFocusNav and UseRegistryEntryResult11 then not UseDescendantHasFocusModuleResult11 elseif UseRegistryEntryResult1 then not UseDescendantHasFocusModuleResult1 elseif UseRegistryEntryResult8 then not UseDescendantHasFocusModuleResult7 elseif UseRegistryEntryResult then not UseDescendantHasFocusModuleResult elseif UseRegistryEntryResult6 then not UseDescendantHasFocusModuleResult6 elseif UseRegistryEntryResult9 then not UseDescendantHasFocusModuleResult8 elseif FFlagAppIaHomeSubTab and UseRegistryEntryResult10 then not UseDescendantHasFocusModuleResult10 else false) elseif FFlagFixGlobalFocusPriorityModule then if UseRegistryEntryResult3 then not UseDescendantHasFocusModuleResult3 elseif UseRegistryEntryResult2 then not UseDescendantHasFocusModuleResult2 elseif UseRegistryEntryResult5 then not UseDescendantHasFocusModuleResult4 elseif UseRegistryEntryResult4 then not UseDescendantHasFocusModuleResult5 elseif UseRegistryEntryResult7 then not UseDescendantHasFocusModuleResult9 elseif FFlagEnableDrawerFocusNav and UseRegistryEntryResult11 then not UseDescendantHasFocusModuleResult11 elseif UseRegistryEntryResult1 then not UseDescendantHasFocusModuleResult1 elseif UseRegistryEntryResult8 then not UseDescendantHasFocusModuleResult7 elseif UseRegistryEntryResult then not UseDescendantHasFocusModuleResult elseif UseRegistryEntryResult6 then not UseDescendantHasFocusModuleResult6 elseif UseRegistryEntryResult9 then not UseDescendantHasFocusModuleResult8 elseif FFlagAppIaHomeSubTab and UseRegistryEntryResult10 then not UseDescendantHasFocusModuleResult10 else false else UseRegistryEntryResult2 and not UseDescendantHasFocusModuleResult2 or (UseRegistryEntryResult5 and not UseDescendantHasFocusModuleResult4 or (UseRegistryEntryResult4 and not UseDescendantHasFocusModuleResult5 or (UseRegistryEntryResult7 and not UseDescendantHasFocusModuleResult9 or (FFlagEnableDrawerFocusNav and UseRegistryEntryResult11 and not UseDescendantHasFocusModuleResult11 or (UseRegistryEntryResult1 and not UseDescendantHasFocusModuleResult1 or (UseRegistryEntryResult8 and not UseDescendantHasFocusModuleResult7 or (UseRegistryEntryResult and not UseDescendantHasFocusModuleResult or (UseRegistryEntryResult6 and not UseDescendantHasFocusModuleResult6 or (UseRegistryEntryResult9 and not UseDescendantHasFocusModuleResult8 or (FFlagAppIaHomeSubTab and UseRegistryEntryResult10 and not UseDescendantHasFocusModuleResult10 or false))))))))))
-		ReactModule.useEffect(function()
-			-- upvalues: UsePreferredInputResult (copy), ResponsiveModule (upval), UseRefResult5 (ref), UseMemoResult (copy), p1 (copy), NoFFlagFixGlobalFocusPriorityModule (ref), UseFocusGuiObjectResult (copy)
-			if UsePreferredInputResult == ResponsiveModule.Input.Directional and UseRefResult5.current ~= UseMemoResult and not p1 and NoFFlagFixGlobalFocusPriorityModule then
-				UseFocusGuiObjectResult(nil)
-			end
-			UseRefResult5.current = UseMemoResult
-		end, {
-			UseMemoResult,
-			UsePreferredInputResult,
-			p1,
-			NoFFlagFixGlobalFocusPriorityModule,
-			UseFocusGuiObjectResult
-		})
-	end
+	local UseRefResult5 = ReactModule.useRef(UseMemoResult)
+	local NoFFlagFixGlobalFocusPriorityModule: boolean = if UseRegistryEntryResult3 and not UseDescendantHasFocusModuleResult3 then not FFlagFixGlobalFocusPriorityModule or (if UseRegistryEntryResult3 then not UseDescendantHasFocusModuleResult3 elseif UseRegistryEntryResult2 then not UseDescendantHasFocusModuleResult2 elseif UseRegistryEntryResult5 then not UseDescendantHasFocusModuleResult4 elseif UseRegistryEntryResult4 then not UseDescendantHasFocusModuleResult5 elseif UseRegistryEntryResult7 then not UseDescendantHasFocusModuleResult9 elseif FFlagEnableDrawerFocusNav and UseRegistryEntryResult11 then not UseDescendantHasFocusModuleResult11 elseif UseRegistryEntryResult1 then not UseDescendantHasFocusModuleResult1 elseif UseRegistryEntryResult8 then not UseDescendantHasFocusModuleResult7 elseif UseRegistryEntryResult then not UseDescendantHasFocusModuleResult elseif UseRegistryEntryResult6 then not UseDescendantHasFocusModuleResult6 elseif UseRegistryEntryResult9 then not UseDescendantHasFocusModuleResult8 elseif FFlagAppIaHomeSubTab and UseRegistryEntryResult10 then not UseDescendantHasFocusModuleResult10 else false) elseif FFlagFixGlobalFocusPriorityModule then if UseRegistryEntryResult3 then not UseDescendantHasFocusModuleResult3 elseif UseRegistryEntryResult2 then not UseDescendantHasFocusModuleResult2 elseif UseRegistryEntryResult5 then not UseDescendantHasFocusModuleResult4 elseif UseRegistryEntryResult4 then not UseDescendantHasFocusModuleResult5 elseif UseRegistryEntryResult7 then not UseDescendantHasFocusModuleResult9 elseif FFlagEnableDrawerFocusNav and UseRegistryEntryResult11 then not UseDescendantHasFocusModuleResult11 elseif UseRegistryEntryResult1 then not UseDescendantHasFocusModuleResult1 elseif UseRegistryEntryResult8 then not UseDescendantHasFocusModuleResult7 elseif UseRegistryEntryResult then not UseDescendantHasFocusModuleResult elseif UseRegistryEntryResult6 then not UseDescendantHasFocusModuleResult6 elseif UseRegistryEntryResult9 then not UseDescendantHasFocusModuleResult8 elseif FFlagAppIaHomeSubTab and UseRegistryEntryResult10 then not UseDescendantHasFocusModuleResult10 else false else UseRegistryEntryResult2 and not UseDescendantHasFocusModuleResult2 or (UseRegistryEntryResult5 and not UseDescendantHasFocusModuleResult4 or (UseRegistryEntryResult4 and not UseDescendantHasFocusModuleResult5 or (UseRegistryEntryResult7 and not UseDescendantHasFocusModuleResult9 or (FFlagEnableDrawerFocusNav and UseRegistryEntryResult11 and not UseDescendantHasFocusModuleResult11 or (UseRegistryEntryResult1 and not UseDescendantHasFocusModuleResult1 or (UseRegistryEntryResult8 and not UseDescendantHasFocusModuleResult7 or (UseRegistryEntryResult and not UseDescendantHasFocusModuleResult or (UseRegistryEntryResult6 and not UseDescendantHasFocusModuleResult6 or (UseRegistryEntryResult9 and not UseDescendantHasFocusModuleResult8 or (FFlagAppIaHomeSubTab and UseRegistryEntryResult10 and not UseDescendantHasFocusModuleResult10 or false))))))))))
+	ReactModule.useEffect(function()
+		-- upvalues: UsePreferredInputResult (copy), ResponsiveModule (upval), UseRefResult5 (copy), UseMemoResult (copy), p1 (copy), NoFFlagFixGlobalFocusPriorityModule (ref), UseFocusGuiObjectResult (copy)
+		if UsePreferredInputResult == ResponsiveModule.Input.Directional and UseRefResult5.current ~= UseMemoResult and not p1 and NoFFlagFixGlobalFocusPriorityModule then
+			UseFocusGuiObjectResult(nil)
+		end
+		UseRefResult5.current = UseMemoResult
+	end, {
+		UseMemoResult,
+		UsePreferredInputResult,
+		p1,
+		NoFFlagFixGlobalFocusPriorityModule,
+		UseFocusGuiObjectResult
+	})
 	local NoNoUseRegistryEntryResult: boolean = if FFlagLuaAppResponsiveEnginePreferredInput then (UsePreferredInputResult == ResponsiveModule.Input.Directional or IsFocus) and (not UseDescendantHasFocusModuleResult12 and (not p1 and not NoUseRegistryEntryResult)) else IsFocus and (not UseDescendantHasFocusModuleResult12 and (not p1 and not NoUseRegistryEntryResult))
 	ReactModule.useEffect(function()
-		-- upvalues: UseAutoFocusModuleResult (copy), NoNoUseRegistryEntryResult (copy), GlobalFocusTelemetryModule (upval), UseMemoResult (copy), UseFocusedGuiObjectResult (copy), UseRefResult5 (ref), UseRegistryEntryResult3 (copy), UseRegistryEntryResult2 (copy), UseRegistryEntryResult5 (copy), UseRegistryEntryResult4 (copy), UseRegistryEntryResult7 (copy), UseRegistryEntryResult1 (copy), UseRegistryEntryResult8 (copy), UseRegistryEntryResult (copy), UseRegistryEntryResult6 (copy), UseRegistryEntryResult9 (copy), UseRegistryEntryResult10 (copy), UseRefResult4 (copy), UseRefResult3 (copy), UseSelectorResult (copy), UseRefResult1 (copy), RunService (upval), AutoFocusFailsafeThreshold (upval), createGameLeaveSubscription (upval)
+		-- upvalues: UseAutoFocusModuleResult (copy), NoNoUseRegistryEntryResult (copy), GlobalFocusTelemetryModule (upval), UseMemoResult (copy), UseFocusedGuiObjectResult (copy), UseRefResult5 (copy), UseRegistryEntryResult3 (copy), UseRegistryEntryResult2 (copy), UseRegistryEntryResult5 (copy), UseRegistryEntryResult4 (copy), UseRegistryEntryResult7 (copy), UseRegistryEntryResult1 (copy), UseRegistryEntryResult8 (copy), UseRegistryEntryResult (copy), UseRegistryEntryResult6 (copy), UseRegistryEntryResult9 (copy), UseRegistryEntryResult10 (copy), UseRefResult4 (copy), UseRefResult3 (copy), UseSelectorResult (copy), UseRefResult1 (copy), RunService (upval), AutoFocusFailsafeThreshold (upval), createGameLeaveSubscription (upval)
 		local v1 = nil
 		local Connection = nil
 		
@@ -282,10 +277,10 @@ return function(p1)
 			end
 			v1 = UseAutoFocusModuleResult()
 			
-			local function v91()
+			local function v90()
 				-- upvalues: GlobalFocusTelemetryModule (upval), UseMemoResult (upval), UseFocusedGuiObjectResult (upval), UseRefResult5 (upval), UseRegistryEntryResult3 (upval), UseRegistryEntryResult2 (upval), UseRegistryEntryResult5 (upval), UseRegistryEntryResult4 (upval), UseRegistryEntryResult7 (upval), UseRegistryEntryResult1 (upval), UseRegistryEntryResult8 (upval), UseRegistryEntryResult (upval), UseRegistryEntryResult6 (upval), UseRegistryEntryResult9 (upval), UseRegistryEntryResult10 (upval), UseRefResult4 (upval), UseRefResult3 (upval), UseSelectorResult (upval), UseRefResult1 (upval), v1 (ref), UseAutoFocusModuleResult (upval)
 				GlobalFocusTelemetryModule.sendAutoFocusFailureCounter(UseMemoResult)
-				GlobalFocusTelemetryModule.sendAutoFocusFailureEvent(UseFocusedGuiObjectResult, if UseRefResult5 then UseRefResult5.current else {}, UseMemoResult, {
+				GlobalFocusTelemetryModule.sendAutoFocusFailureEvent(UseFocusedGuiObjectResult, UseRefResult5.current, UseMemoResult, {
 					moderationOverlay = UseRegistryEntryResult3,
 					centralOverlay = UseRegistryEntryResult2,
 					contextualMenu = UseRegistryEntryResult5,
@@ -309,11 +304,11 @@ return function(p1)
 			local v2 = false
 			local v3 = 0
 			Connection = RunService.Heartbeat:Connect(function(DeltaTime: number)
-				-- upvalues: v3 (ref), AutoFocusFailsafeThreshold (upval), v2 (ref), v91 (copy)
+				-- upvalues: v3 (ref), AutoFocusFailsafeThreshold (upval), v2 (ref), v90 (copy)
 				v3 += DeltaTime
 				
 				if AutoFocusFailsafeThreshold < v3 and not v2 then
-					v91()
+					v90()
 					v2 = true
 					v3 = 0
 				end
@@ -337,6 +332,6 @@ return function(p1)
 		NoNoUseRegistryEntryResult,
 		UseAutoFocusModuleResult,
 		UseMemoResult,
-		if FFlagLuaAppsDefaultSelection then UseFocusedGuiObjectResult else nil
+		UseFocusedGuiObjectResult
 	})
 end

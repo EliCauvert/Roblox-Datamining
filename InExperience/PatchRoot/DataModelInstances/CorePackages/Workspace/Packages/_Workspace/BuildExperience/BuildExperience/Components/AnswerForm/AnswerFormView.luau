@@ -11,7 +11,7 @@ local Divider = FoundationModule.Divider
 local IconButton = FoundationModule.IconButton
 
 return function(Frame)
-	-- upvalues: FFlagBuildExperienceAnswerFormModule (copy), FoundationModule (copy), ReactModule (copy), List (copy), View (copy), Divider (copy), Composer (copy), Text (copy), IconButton (copy)
+	-- upvalues: FFlagBuildExperienceAnswerFormModule (copy), FoundationModule (copy), ReactModule (copy), List (copy), View (copy), Divider (copy), IconButton (copy), Composer (copy), Text (copy)
 	local UseTokensResult = if FFlagBuildExperienceAnswerFormModule then FoundationModule.Hooks.useTokens() else nil
 	local IsIsReadOnly = Frame.isReadOnly == true
 	local IsSubmitting = Frame.isSubmitting or IsIsReadOnly
@@ -51,7 +51,16 @@ return function(Frame)
 			}) else nil
 		})
 	end
-	local Element = ReactModule.createElement(Composer, {
+	local Element = ReactModule.createElement(IconButton, {
+		LayoutOrder = 2,
+		testId = "AnswerForm.Close",
+		icon = FoundationModule.Enums.IconName.X,
+		size = FoundationModule.Enums.InputSize.Small,
+		variant = FoundationModule.Enums.ButtonVariant.Utility,
+		isDisabled = IsIsReadOnly,
+		onActivated = Frame.onStop
+	})
+	local Element1 = ReactModule.createElement(Composer, {
 		label = "",
 		placeholder = "",
 		testId = "AnswerForm.CustomInput",
@@ -72,7 +81,7 @@ return function(Frame)
 			top = UDim.new(0, UseTokensResult.Size.Size_150),
 			bottom = UDim.new(0, UseTokensResult.Size.Size_150)
 		}
-	}, { Input = Element }) else Element else ReactModule.createElement(View, {
+	}, { Input = Element1 }) else Element1 else ReactModule.createElement(View, {
 		tag = "size-full-0 auto-y padding-large",
 		testId = "AnswerForm.Custom",
 		LayoutOrder = #Frame.options + 1,
@@ -104,15 +113,16 @@ return function(Frame)
 				tag = "fill auto-y text-title-medium text-wrap text-align-x-left content-emphasis",
 				Text = Frame.title
 			}),
-			Close = ReactModule.createElement(IconButton, {
+			Close = if FFlagBuildExperienceAnswerFormModule then ReactModule.createElement(View, {
 				LayoutOrder = 2,
-				testId = "AnswerForm.Close",
-				icon = FoundationModule.Enums.IconName.X,
-				size = FoundationModule.Enums.InputSize.Small,
-				variant = FoundationModule.Enums.ButtonVariant.Utility,
-				isDisabled = IsIsReadOnly,
-				onActivated = Frame.onStop
-			})
+				testId = "AnswerForm.CloseSlot",
+				Size = UDim2.fromOffset(UseTokensResult.Size.Size_600, UseTokensResult.Size.Size_800)
+			}, {
+				Button = ReactModule.createElement(View, {
+					tag = "position-center-center anchor-center-center",
+					Size = UDim2.fromOffset(UseTokensResult.Size.Size_800, UseTokensResult.Size.Size_800)
+				}, { Button = Element })
+			}) else Element
 		}),
 		HeaderDivider = ReactModule.createElement(Divider, { LayoutOrder = 2 }),
 		Body = ReactModule.createElement(View, {

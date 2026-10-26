@@ -5,5 +5,6 @@
 	BulkPurchaseRefreshFailedCounter = "BulkPurchaseRefreshFailedCounter",
 	BulkPurchasePlusUpsellInitatedCounter = "BulkPurchasePlusUpsellInitatedCounter",
 	BulkPurchasePlusUpsellSucceededCounter = "BulkPurchasePlusUpsellSucceededCounter",
-	BulkPurchasePlusUpsellFailedCounter = "BulkPurchasePlusUpsellFailedCounter"
+	BulkPurchasePlusUpsellFailedCounter = "BulkPurchasePlusUpsellFailedCounter",
+	BulkPurchasePartialSuccessCounter = "BulkPurchasePartialSuccessCounter"
 }

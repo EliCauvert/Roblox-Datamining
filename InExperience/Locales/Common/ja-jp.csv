@@ -2247,6 +2247,7 @@ Feature.Build.Label.DeveloperProductDescription,説明：{DESCRIPTION}
 Feature.Build.Label.DeveloperProductName,名前：「{NAME}」
 Feature.Build.Label.DeveloperProductPrice,価格：{PRICE} Robux
 Feature.Build.Label.DeveloperProductPriceUnavailable,?
+Feature.Build.Label.DeveloperProducts,
 Feature.Build.Label.Done,
 Feature.Build.Label.EasyPerformanceReport,わかりやすいパフォーマンスレポート
 Feature.Build.Label.Error,
@@ -2457,6 +2458,7 @@ Feature.Build.Message.NoAssetsFound,アセットが見つかりません。
 Feature.Build.Message.NoCapturesAvailable,添付できる切り抜きはありません
 Feature.Build.Message.NoDescriptionProvided,詳細がありません。
 Feature.Build.Message.NoFriendsToAdd,まだ招待できる友達がいません。まずはRobloxでつながる相手を見つけましょう。
+Feature.Build.Message.NoGamesYet,関連するゲームはまだありません。
 Feature.Build.Message.NoResults,
 Feature.Build.Message.NoSearchResultsFound,検索結果が見つかりませんでした
 Feature.Build.Message.NoVersionHistory,まだバージョン履歴はありません。
@@ -2532,7 +2534,9 @@ Feature.Build.Title.GameCreationDone,ゲームの作成が完了しました
 Feature.Build.Title.GamePass,ゲームパス
 Feature.Build.Title.GenericError,
 Feature.Build.Title.GetUsers,ユーザーを獲得
+Feature.Build.Title.InsufficientRobuxForModel,
 Feature.Build.Title.ManagedPricingAcknowledgement,管理価格設定をオンにしますか？
+Feature.Build.Title.Monetization,収益化
 Feature.Build.Title.NoMonetizationProducts,ゲーム内で収益を獲得
 Feature.Build.Title.NoRobuxForUsage,ビルド使用量に使えるRobuxが残っていません
 Feature.Build.Title.PickCampaign,期間を選択
@@ -3179,6 +3183,7 @@ Feature.Contacts.Message.ContactDiscoverable,友達作りのために、あな�
 Feature.Contacts.Message.ContactsSyncWarning,連絡先は定期的に同期され、他のRobloxユーザーと一致すると保存されるため、友達を見つけるのに役立ちます。これはいつでもデバイス設定で管理できます。
 Feature.Contacts.Message.InviteToRoblox,一緒にバーチャル空間制作したり、シェアしたり、探検したりできるように、Robloxでつながりとして追加してください。
 Feature.Contacts.Message.NoResults,結果はありません。
+Feature.CustomForms.Label.Percent,
 Feature.DeveloperProducts.Label.Product,
 Feature.DisplayName.ErrorMessage.AgedUpNameContainPII,名前に個人情報が含まれている可能性があります。
 Feature.DisplayName.ErrorMessage.AgedUpNameHasChanged,過去7日間で名前がすでに変更されています

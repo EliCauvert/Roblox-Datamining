@@ -3,10 +3,9 @@ local GuiService = game:GetService("GuiService")
 local Parent = script:FindFirstAncestor("FocusNavigationUtils").Parent
 local ReactModule = require(Parent.React)
 local FocusNavigationContext = require(Parent.ReactFocusNavigation).FocusNavigationContext
-local FFlagLuaAppsDefaultSelection = require(Parent.SharedFlags).FFlagLuaAppsDefaultSelection
 
-local function v6(Delay, Ancestors, UseContextResult)
-	-- upvalues: FFlagLuaAppsDefaultSelection (copy), GuiService (copy), CoreGui (copy)
+local function v5(Delay, Ancestors, UseContextResult)
+	-- upvalues: GuiService (copy), CoreGui (copy)
 	local Flag = #Ancestors == 0
 	local Connections = {}
 	local List = {}
@@ -34,25 +33,23 @@ local function v6(Delay, Ancestors, UseContextResult)
 	end
 	
 	local function focus(p2)
-		-- upvalues: Delay (copy), Flag (ref), FFlagLuaAppsDefaultSelection (upval), GuiService (upval), Ancestors (copy), Connections (copy), CoreGui (upval), UseContextResult (copy), focus (copy), List (copy)
+		-- upvalues: Delay (copy), Flag (ref), GuiService (upval), Ancestors (copy), Connections (copy), CoreGui (upval), UseContextResult (copy), focus (copy), List (copy)
 		table.insert(List, (task.delay(Delay, function()
-			-- upvalues: Flag (upval), FFlagLuaAppsDefaultSelection (upval), GuiService (upval), Ancestors (upval), Connections (upval), p2 (copy), CoreGui (upval), UseContextResult (upval), focus (upval)
+			-- upvalues: Flag (upval), GuiService (upval), Ancestors (upval), Connections (upval), p2 (copy), CoreGui (upval), UseContextResult (upval), focus (upval)
 			if not Flag then
-				if FFlagLuaAppsDefaultSelection then
-					local SelectedCoreObject = GuiService.SelectedCoreObject
-					
-					if SelectedCoreObject then
-						for _, ancestor in Ancestors do
-							if SelectedCoreObject == ancestor or SelectedCoreObject:IsDescendantOf(ancestor) then
-								if not Flag then
-									Flag = true
-									
-									for _, connection in Connections do
-										connection:Disconnect()
-									end
+				local SelectedCoreObject = GuiService.SelectedCoreObject
+				
+				if SelectedCoreObject then
+					for _, ancestor in Ancestors do
+						if SelectedCoreObject == ancestor or SelectedCoreObject:IsDescendantOf(ancestor) then
+							if not Flag then
+								Flag = true
+								
+								for _, connection in Connections do
+									connection:Disconnect()
 								end
-								return
 							end
+							return
 						end
 					end
 				end
@@ -71,23 +68,21 @@ local function v6(Delay, Ancestors, UseContextResult)
 	end
 	local v1 = 1
 	table.insert(List, (task.delay(Delay, function()
-		-- upvalues: Flag (ref), FFlagLuaAppsDefaultSelection (upval), GuiService (upval), Ancestors (copy), Connections (copy), v1 (copy), CoreGui (upval), UseContextResult (copy), focus (copy)
+		-- upvalues: Flag (ref), GuiService (upval), Ancestors (copy), Connections (copy), v1 (copy), CoreGui (upval), UseContextResult (copy), focus (copy)
 		if not Flag then
-			if FFlagLuaAppsDefaultSelection then
-				local SelectedCoreObject = GuiService.SelectedCoreObject
-				
-				if SelectedCoreObject then
-					for _, ancestor in Ancestors do
-						if SelectedCoreObject == ancestor or SelectedCoreObject:IsDescendantOf(ancestor) then
-							if not Flag then
-								Flag = true
-								
-								for _, connection in Connections do
-									connection:Disconnect()
-								end
+			local SelectedCoreObject = GuiService.SelectedCoreObject
+			
+			if SelectedCoreObject then
+				for _, ancestor in Ancestors do
+					if SelectedCoreObject == ancestor or SelectedCoreObject:IsDescendantOf(ancestor) then
+						if not Flag then
+							Flag = true
+							
+							for _, connection in Connections do
+								connection:Disconnect()
 							end
-							return
 						end
+						return
 					end
 				end
 			end
@@ -120,11 +115,11 @@ local function v6(Delay, Ancestors, UseContextResult)
 end
 
 return function(p3, Delay)
-	-- upvalues: ReactModule (copy), FocusNavigationContext (copy), v6 (copy)
+	-- upvalues: ReactModule (copy), FocusNavigationContext (copy), v5 (copy)
 	local UseContextResult = ReactModule.useContext(FocusNavigationContext)
 	
 	return ReactModule.useCallback(function()
-		-- upvalues: UseContextResult (copy), v6 (upval), Delay (copy), p3 (copy)
-		return if UseContextResult then v6(Delay, p3, UseContextResult) else nil
+		-- upvalues: UseContextResult (copy), v5 (upval), Delay (copy), p3 (copy)
+		return if UseContextResult then v5(Delay, p3, UseContextResult) else nil
 	end, { UseContextResult, p3, Delay })
 end

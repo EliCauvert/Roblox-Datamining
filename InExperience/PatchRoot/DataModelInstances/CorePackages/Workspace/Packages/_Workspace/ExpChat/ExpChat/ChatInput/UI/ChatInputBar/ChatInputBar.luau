@@ -53,6 +53,7 @@ local FFlagExpChatEmojiDropdownDismissAnalyticsModule = require(ExpChat.Flags.FF
 local FFlagExpChatUniverseChatPresetEnabledModule = require(ExpChat.Flags.FFlagExpChatUniverseChatPresetEnabled)
 local FFlagExpChatUseUnifiedTooltipStore = ExpChatSharedModule.Flags.FFlagExpChatUseUnifiedTooltipStore
 local FFlagExpChatNewInputBarModule = require(ExpChat.Flags.FFlagExpChatNewInputBar)
+local FFlagExpChatAutocompleteDropdownRedesignModule = require(ExpChat.Flags.FFlagExpChatAutocompleteDropdownRedesign)
 local FFlagExpChatNewInputBarDictationModule = require(ExpChat.Flags.FFlagExpChatNewInputBarDictation)
 local FFlagExpChatPresetChatGamepadEnabledModule = require(ExpChat.Flags.FFlagExpChatPresetChatGamepadEnabled)
 local ExpChatPresetChatIXPExposure = game:DefineFastFlag("ExpChatPresetChatIXPExposure", false)
@@ -254,7 +255,7 @@ return ReactModule.memo((LocalizationModule.connect(function(p1)
 		targetTextChannelDisplayName = TargetTextChannelDisplayName
 	}
 end)(function(Frame)
-	-- upvalues: ReactModule (copy), FFlagExpChatUseUnifiedTooltipStore (copy), GetChatTooltipStoreModule (copy), ExpChatMainInputBarClickAnalytics (copy), FFlagExpChatDictation1 (copy), UseSendTelemetryModule (copy), FFlagExpChatEmojiDropdownDismissAnalyticsModule (copy), ReactFocusNavigationModule (copy), SignalsReactModule (copy), v1 (copy), GetMessagesStoreModule (copy), FFlagExpChatPresetChatEnabled (copy), GetPresetChatStoreModule (copy), FFlagExpChatTabShortcutNav (copy), UseFocusInputBarFunction (copy), UseInputBarTabNavigationFunction (copy), SignalsModule (copy), TextChatService (copy), NewResult2 (ref), AutocompleteTextModule (copy), InitializeCommandsModule (copy), GetEnableChatInputBarConfigurationAutocompleteEnabledModule (copy), NewResult1 (ref), InitializeEmojisModule (copy), GetFFlagTextChatEnableUniverseChatTabsFunction (copy), NewResult3 (ref), InitializeGlobalCommandsModule (copy), InitialCommandsModule (copy), NewResult (copy), FFlagExpChatDictation (copy), FFlagExpChatPresetChatGamepadEnabledModule (copy), GuiService (copy), FFlagExpChatPresetChatAutocompleteAnalyticsEnabledModule (copy), UsePresetAutocompleteAnalyticsModule (copy), PresetSearchModule (copy), FIntPresetChatCooldownLuaMsRatio (copy), SendPresetModule (copy), ExpChatSharedModule (copy), ConstantsModule (copy), FFlagExpChatPresetChatAutocompleteEnabledModule (copy), PresetEntryTextModule (copy), ExpChatDoNotSetCursorPosition (copy), ExpChatPresetChatIXPExposure (copy), IXPServiceWrapper (copy), ExpChatPresetChatIXPLayerName (copy), FFlagExpChatBackspaceExitsTargetChannelInGlobalTabsModule (copy), FFlagExpChatFixBackspaceNilTargetChannel (copy), ConfigModule (copy), Players (copy), FFlagEnableConsoleExpControls (copy), FFlagChromeChatGamepadSupportFix (copy), onChatInputBarFocusLost (copy), ActionBindableEvent (copy), useEffectChatInputBarFocus (copy), FFlagExpChatUniverseChatPresetEnabledModule (copy), ExpChatPresetAutocompleteSearchVariants (copy), ExpChatPresetChatAutocompleteExperimentation (copy), SortCommandResultsCallbackModule (copy), SortEmojiResultsCallbackModule (copy), List (copy), Name (ref), RBXTeamCommand (copy), Name1 (ref), RBXWhisperCommand (copy), ChatOptimizeCommandProcessing (copy), AutoCastCommandFunction (copy), PromiseModule (copy), UseCursorFunction (copy), ExpChatDictationIXPExposure (copy), ExpChatDictationIXPLayerName (copy), ExpChatPresetAutocompleteIxpEnabled (copy), ExpChatPresetAutocompleteIxpLayer (copy), FFlagExpChatPresetChatSendEnabled (copy), UseInterpolatedClientSettingsModule (copy), FFlagExpChatNewInputBarModule (copy), AutocompleteDropdownModule (copy), setTransparency (copy), FFlagExpChatEmojiDropdownShowAnalyticsModule (copy), FFlagExpChatNewInputBarDictationModule (copy), ChatInputBarV2DictationModule (copy), ChatInputBarV2Module (copy), DictationInputBarModule (copy), ChannelChipModule (copy), ImageSetLabel (copy), Images (copy)
+	-- upvalues: ReactModule (copy), FFlagExpChatUseUnifiedTooltipStore (copy), GetChatTooltipStoreModule (copy), ExpChatMainInputBarClickAnalytics (copy), FFlagExpChatDictation1 (copy), UseSendTelemetryModule (copy), FFlagExpChatEmojiDropdownDismissAnalyticsModule (copy), ReactFocusNavigationModule (copy), SignalsReactModule (copy), v1 (copy), GetMessagesStoreModule (copy), FFlagExpChatPresetChatEnabled (copy), GetPresetChatStoreModule (copy), FFlagExpChatTabShortcutNav (copy), UseFocusInputBarFunction (copy), UseInputBarTabNavigationFunction (copy), SignalsModule (copy), TextChatService (copy), NewResult2 (ref), AutocompleteTextModule (copy), InitializeCommandsModule (copy), GetEnableChatInputBarConfigurationAutocompleteEnabledModule (copy), NewResult1 (ref), InitializeEmojisModule (copy), GetFFlagTextChatEnableUniverseChatTabsFunction (copy), NewResult3 (ref), InitializeGlobalCommandsModule (copy), InitialCommandsModule (copy), NewResult (copy), FFlagExpChatDictation (copy), FFlagExpChatPresetChatGamepadEnabledModule (copy), GuiService (copy), FFlagExpChatPresetChatAutocompleteAnalyticsEnabledModule (copy), UsePresetAutocompleteAnalyticsModule (copy), PresetSearchModule (copy), FIntPresetChatCooldownLuaMsRatio (copy), SendPresetModule (copy), ExpChatSharedModule (copy), ConstantsModule (copy), FFlagExpChatAutocompleteDropdownRedesignModule (copy), FFlagExpChatPresetChatAutocompleteEnabledModule (copy), PresetEntryTextModule (copy), ExpChatDoNotSetCursorPosition (copy), ExpChatPresetChatIXPExposure (copy), IXPServiceWrapper (copy), ExpChatPresetChatIXPLayerName (copy), FFlagExpChatBackspaceExitsTargetChannelInGlobalTabsModule (copy), FFlagExpChatFixBackspaceNilTargetChannel (copy), ConfigModule (copy), Players (copy), FFlagEnableConsoleExpControls (copy), FFlagChromeChatGamepadSupportFix (copy), onChatInputBarFocusLost (copy), ActionBindableEvent (copy), useEffectChatInputBarFocus (copy), FFlagExpChatUniverseChatPresetEnabledModule (copy), ExpChatPresetAutocompleteSearchVariants (copy), ExpChatPresetChatAutocompleteExperimentation (copy), SortCommandResultsCallbackModule (copy), SortEmojiResultsCallbackModule (copy), List (copy), Name (ref), RBXTeamCommand (copy), Name1 (ref), RBXWhisperCommand (copy), ChatOptimizeCommandProcessing (copy), AutoCastCommandFunction (copy), PromiseModule (copy), UseCursorFunction (copy), ExpChatDictationIXPExposure (copy), ExpChatDictationIXPLayerName (copy), ExpChatPresetAutocompleteIxpEnabled (copy), ExpChatPresetAutocompleteIxpLayer (copy), FFlagExpChatPresetChatSendEnabled (copy), UseInterpolatedClientSettingsModule (copy), FFlagExpChatNewInputBarModule (copy), AutocompleteDropdownModule (copy), setTransparency (copy), FFlagExpChatEmojiDropdownShowAnalyticsModule (copy), FFlagExpChatNewInputBarDictationModule (copy), ChatInputBarV2DictationModule (copy), ChatInputBarV2Module (copy), DictationInputBarModule (copy), ChannelChipModule (copy), ImageSetLabel (copy), Images (copy)
 	local UseRefResult = ReactModule.useRef("")
 	
 	if FFlagExpChatUseUnifiedTooltipStore then
@@ -506,14 +507,15 @@ end)(function(Frame)
 	end
 	
 	local UseResult2 = ReactModule.useCallback(function(p2)
-		-- upvalues: FFlagExpChatPresetChatAutocompleteEnabledModule (upval), Frame (copy), PresetEntryTextModule (upval), FFlagExpChatPresetChatAutocompleteAnalyticsEnabledModule (upval), RecordPresetChosen (ref), FFlagExpChatEmojiDropdownDismissAnalyticsModule (upval), UseRefResult7 (ref), UseRefResult4 (copy), UseRefResult3 (copy), UseStateResult1 (ref), UseStateResult2 (copy), UseRefResult2 (copy), ExpChatMainInputBarClickAnalytics (upval), UseRefResult1 (copy), UseSignalStateResult (copy), UseFocusGuiObjectResult (copy), ExpChatDoNotSetCursorPosition (upval), sendSelectedPreset (copy), NewResult (upval)
-		local UndecorateResult = if FFlagExpChatPresetChatAutocompleteEnabledModule and Frame.autocompleteDropdownReducer.autocompleteType == "presets" then PresetEntryTextModule.undecorate(p2.TextLabel.Text, Frame.chatInputBarSettings.TextSize) else nil
+		-- upvalues: FFlagExpChatAutocompleteDropdownRedesignModule (upval), Frame (copy), FFlagExpChatPresetChatAutocompleteEnabledModule (upval), PresetEntryTextModule (upval), FFlagExpChatPresetChatAutocompleteAnalyticsEnabledModule (upval), RecordPresetChosen (ref), FFlagExpChatEmojiDropdownDismissAnalyticsModule (upval), UseRefResult7 (ref), UseRefResult4 (copy), UseRefResult3 (copy), UseStateResult1 (ref), UseStateResult2 (copy), UseRefResult2 (copy), ExpChatMainInputBarClickAnalytics (upval), UseRefResult1 (copy), UseSignalStateResult (copy), UseFocusGuiObjectResult (copy), ExpChatDoNotSetCursorPosition (upval), sendSelectedPreset (copy), NewResult (upval)
+		local Result = if FFlagExpChatAutocompleteDropdownRedesignModule then Frame.autocompleteDropdownReducer.results[p2.Parent.LayoutOrder] else nil
+		local Result1 = if FFlagExpChatPresetChatAutocompleteEnabledModule and Frame.autocompleteDropdownReducer.autocompleteType == "presets" then if FFlagExpChatAutocompleteDropdownRedesignModule then Result else PresetEntryTextModule.undecorate(p2.TextLabel.Text, Frame.chatInputBarSettings.TextSize) else nil
 		
-		if FFlagExpChatPresetChatAutocompleteAnalyticsEnabledModule and RecordPresetChosen ~= nil and UndecorateResult ~= nil then
-			RecordPresetChosen(UndecorateResult)
+		if FFlagExpChatPresetChatAutocompleteAnalyticsEnabledModule and RecordPresetChosen ~= nil and Result1 ~= nil then
+			RecordPresetChosen(Result1)
 		end
 		if FFlagExpChatEmojiDropdownDismissAnalyticsModule and UseRefResult7 and Frame.autocompleteDropdownReducer.autocompleteType == "emojis" then
-			UseRefResult7.current = p2.TextLabel.Text
+			UseRefResult7.current = if FFlagExpChatAutocompleteDropdownRedesignModule then Result else p2.TextLabel.Text
 		end
 		Frame.autocompleteDropdownActivated(false)
 		Frame.autocompleteDropdownResultsChanged({})
@@ -522,13 +524,13 @@ end)(function(Frame)
 		if Current then
 			local Text: string = Current.Text
 			local Segment = string.sub(Text, 1, UseStateResult1 - 1)
-			local Segment1: string = if FFlagExpChatPresetChatAutocompleteEnabledModule and UndecorateResult ~= nil then "" else string.sub(Text, UseStateResult1, #Text)
+			local Segment1: string = if FFlagExpChatPresetChatAutocompleteEnabledModule and Result1 ~= nil then "" else string.sub(Text, UseStateResult1, #Text)
 			local Replaced = ""
 			
 			if Frame.autocompleteDropdownReducer.autocompleteType == "emojis" then
 				Replaced = string.gsub(Segment, ":[^:]*$", p2.EmojiLabel.Text)
 			elseif Frame.autocompleteDropdownReducer.autocompleteType == "commands" then
-				Replaced = string.gsub(Segment, "(/.*)", p2.TextLabel.Text)
+				Replaced = string.gsub(Segment, "(/.*)", if FFlagExpChatAutocompleteDropdownRedesignModule then Result else p2.TextLabel.Text)
 			end
 			if Segment1 ~= "" then
 				Replaced ..= Segment1
@@ -551,8 +553,8 @@ end)(function(Frame)
 			end
 			Frame.autocompleteDropdownDeactivated()
 			
-			if FFlagExpChatPresetChatAutocompleteEnabledModule and UndecorateResult ~= nil then
-				sendSelectedPreset(UndecorateResult)
+			if FFlagExpChatPresetChatAutocompleteEnabledModule and Result1 ~= nil then
+				sendSelectedPreset(Result1)
 				
 				return
 			end
@@ -568,7 +570,8 @@ end)(function(Frame)
 		if FFlagExpChatPresetChatAutocompleteEnabledModule then Frame.targetTextChannel or false else nil,
 		if FFlagExpChatPresetChatAutocompleteEnabledModule then Frame.chatInputBarSettings.TextSize else nil,
 		if FFlagExpChatPresetChatAutocompleteAnalyticsEnabledModule then RecordPresetChosen else nil,
-		if FFlagExpChatEmojiDropdownDismissAnalyticsModule then UseRefResult7 else nil
+		if FFlagExpChatEmojiDropdownDismissAnalyticsModule then UseRefResult7 else nil,
+		if FFlagExpChatAutocompleteDropdownRedesignModule then Frame.autocompleteDropdownReducer.results else nil
 	})
 	ReactModule.useEffect(function()
 		-- upvalues: UseRefResult2 (copy), UseRefResult4 (copy), UseRefResult3 (copy), NewResult (upval)
@@ -895,14 +898,15 @@ end)(function(Frame)
 	useEffectChatInputBarFocus(UseRefResult3, UseRefResult4, UseRefResult5, UseResult3, UseResult4)
 	
 	local function handlePresetAutocomplete(Text: string, CursorPosition: number)
-		-- upvalues: Frame (copy), FFlagExpChatUniverseChatPresetEnabledModule (upval), PresetSearchModule (upval), GetPresetChatStoreModule (upval), ExpChatPresetAutocompleteSearchVariants (upval), ExpChatPresetChatAutocompleteExperimentation (upval)
+		-- upvalues: Frame (copy), FFlagExpChatUniverseChatPresetEnabledModule (upval), PresetSearchModule (upval), GetPresetChatStoreModule (upval), ExpChatPresetAutocompleteSearchVariants (upval), ExpChatPresetChatAutocompleteExperimentation (upval), FFlagExpChatAutocompleteDropdownRedesignModule (upval)
 		if CursorPosition < 1 then return end
-		local MatchingPresets = if Frame.targetTextChannel ~= nil or FFlagExpChatUniverseChatPresetEnabledModule then PresetSearchModule.findMatchingPresets(GetPresetChatStoreModule(false), string.sub(Text, 1, CursorPosition - 1), if ExpChatPresetAutocompleteSearchVariants then ExpChatPresetChatAutocompleteExperimentation.getSearchVariant() else nil) else {}
+		local Segment = string.sub(Text, 1, CursorPosition - 1)
+		local MatchingPresets = if Frame.targetTextChannel ~= nil or FFlagExpChatUniverseChatPresetEnabledModule then PresetSearchModule.findMatchingPresets(GetPresetChatStoreModule(false), Segment, if ExpChatPresetAutocompleteSearchVariants then ExpChatPresetChatAutocompleteExperimentation.getSearchVariant() else nil) else {}
 		
 		if #MatchingPresets ~= 0 then
 			Frame.autocompleteDropdownTypeChanged("presets")
 			Frame.autocompleteDropdownActivated(true)
-			Frame.autocompleteDropdownResultsChanged(MatchingPresets)
+			Frame.autocompleteDropdownResultsChanged(MatchingPresets, if FFlagExpChatAutocompleteDropdownRedesignModule then Segment else nil)
 			Frame.autocompleteDropdownSelectionChanged(0)
 			
 			return
@@ -912,7 +916,7 @@ end)(function(Frame)
 	end
 	
 	local function handleAutocomplete(TextBox, Text: string, Segment)
-		-- upvalues: Frame (copy), NewResult3 (upval), NewResult2 (upval), SortCommandResultsCallbackModule (upval), NewResult1 (upval), SortEmojiResultsCallbackModule (upval), UseStateResult3 (ref), List (upval), UseStateResult2 (copy), ExpChatDoNotSetCursorPosition (upval), UseRefResult6 (copy), UseResult2 (copy), UseStateResult2_2 (ref), FFlagExpChatPresetChatAutocompleteEnabledModule (upval), handlePresetAutocomplete (copy)
+		-- upvalues: Frame (copy), NewResult3 (upval), NewResult2 (upval), SortCommandResultsCallbackModule (upval), FFlagExpChatAutocompleteDropdownRedesignModule (upval), NewResult1 (upval), SortEmojiResultsCallbackModule (upval), UseStateResult3 (ref), List (upval), UseStateResult2 (copy), ExpChatDoNotSetCursorPosition (upval), UseRefResult6 (copy), UseResult2 (copy), UseStateResult2_2 (ref), FFlagExpChatPresetChatAutocompleteEnabledModule (upval), handlePresetAutocomplete (copy)
 		if Segment == "/" and TextBox.CursorPosition == 2 or Frame.autocompleteDropdownReducer.autocompleteType == "commands" and Segment ~= ":" then
 			Frame.autocompleteDropdownTypeChanged("commands")
 			Frame.autocompleteDropdownActivated(true)
@@ -922,7 +926,7 @@ end)(function(Frame)
 			else
 				local Lowered = string.sub(Text, 1, TextBox.CursorPosition - 1):lower()
 				local Results = (if Frame.isGlobalChatTabActive and NewResult3 then NewResult3 else NewResult2):getResults(Lowered, SortCommandResultsCallbackModule)
-				Frame.autocompleteDropdownResultsChanged(Results)
+				Frame.autocompleteDropdownResultsChanged(Results, if FFlagExpChatAutocompleteDropdownRedesignModule then Lowered else nil)
 				
 				if Lowered == Results[1] then
 					Frame.autocompleteDropdownActivated(false)
@@ -938,7 +942,7 @@ end)(function(Frame)
 			
 			if Segment ~= "" and Segment ~= ":" and Segment ~= " " and FoundAt1 then
 				local Lowered: string = string.sub(Text, FoundAt1 + 1, TextBox.CursorPosition - 1):lower()
-				Frame.autocompleteDropdownResultsChanged(if Lowered and string.len(Lowered) > 1 then NewResult1:getResults(Lowered, SortEmojiResultsCallbackModule) else {})
+				Frame.autocompleteDropdownResultsChanged(if Lowered and string.len(Lowered) > 1 then NewResult1:getResults(Lowered, SortEmojiResultsCallbackModule) else {}, if FFlagExpChatAutocompleteDropdownRedesignModule then Lowered else nil)
 				
 				return
 			end
@@ -962,15 +966,25 @@ end)(function(Frame)
 					
 					if Current then
 						local TextLabelButton = nil
+						local TextLabelButton1 = nil
 						for _, Frame1 in ipairs(Current.ScrollBarFrame.ScrollViewFrame.ScrollView.OffsetFrame:GetChildren()) do
-							if Frame1.ClassName == "Frame" then
-								TextLabelButton = Frame1:FindFirstChild("TextLabelButton")
+							if FFlagExpChatAutocompleteDropdownRedesignModule then
+								if Frame1.ClassName == "Frame" and Frame.autocompleteDropdownReducer.results[Frame1.LayoutOrder] == Lowered then
+									TextLabelButton = Frame1:FindFirstChild("TextLabelButton")
+									
+									if TextLabelButton then
+										UseResult2(TextLabelButton)
+										break
+									end
+								end
+							elseif Frame1.ClassName == "Frame" then
+								TextLabelButton1 = Frame1:FindFirstChild("TextLabelButton")
 								
-								if TextLabelButton then
-									local TextLabel = TextLabelButton:FindFirstChild("TextLabel")
+								if TextLabelButton1 then
+									local TextLabel = TextLabelButton1:FindFirstChild("TextLabel")
 									
 									if TextLabel and TextLabel.Text and TextLabel.Text == Lowered then
-										UseResult2(TextLabelButton)
+										UseResult2(TextLabelButton1)
 										break
 									end
 								end
@@ -1170,7 +1184,7 @@ end)(function(Frame)
 	local BackgroundTransparency = UseInterpolatedClientSettingsModule(ChatInputBarSettings).BackgroundTransparency
 	local BackgroundTransparency1 = UseInterpolatedClientSettingsModule(ChatWindowSettings).BackgroundTransparency
 	local IsSpatialUIEnabled = Frame.isSpatialUIEnabled
-	local CreateElementFunction1 = ReactModule.createElement
+	local CreateElementFunction = ReactModule.createElement
 	local v2 = "Frame"
 	local config5 = {
 		AutomaticSize = Enum.AutomaticSize.Y,
@@ -1213,6 +1227,7 @@ end)(function(Frame)
 			isChatInputBarVisible = if FFlagExpChatEmojiDropdownShowAnalyticsModule then Frame.visible else nil,
 			chosenEmojiForAnalyticsRef = if FFlagExpChatEmojiDropdownDismissAnalyticsModule then UseRefResult7 else nil,
 			results = Frame.autocompleteDropdownReducer.results,
+			query = if FFlagExpChatAutocompleteDropdownRedesignModule then Frame.autocompleteDropdownReducer.query else nil,
 			selectedIndex = Frame.autocompleteDropdownReducer.selectedIndex,
 			autocompleteType = Frame.autocompleteDropdownReducer.autocompleteType,
 			onAutocompleteDropdownHover = UseResult8,
@@ -1229,7 +1244,7 @@ end)(function(Frame)
 			PaddingTop = Frame.addTopPadding and UDim.new(0, 8) or UDim.new(0, 0),
 			PaddingBottom = UDim.new(0, 1)
 		}),
-		ChatInputBarV2 = if FFlagExpChatNewInputBarModule then if FFlagExpChatNewInputBarDictationModule and FFlagExpChatDictation1 and CanLocalUserChat then ReactModule.createElement(ChatInputBarV2DictationModule, {
+		ChatInputBarV2 = if FFlagExpChatNewInputBarModule then if FFlagExpChatNewInputBarDictationModule and (FFlagExpChatDictation1 and CanLocalUserChat) then ReactModule.createElement(ChatInputBarV2DictationModule, {
 			transparencyValue = Frame.transparencyValue,
 			sendButtonContainerWidth = Frame.sendButtonContainerWidth,
 			resetTargetChannel = Frame.resetTargetChannel,
@@ -1342,7 +1357,7 @@ end)(function(Frame)
 			placeholderSelectionImageObject = UseCursorResult
 		})
 	else
-		local CreateElementFunction3 = ReactModule.createElement
+		local CreateElementFunction2 = ReactModule.createElement
 		local v3 = "Frame"
 		local config = {
 			AutomaticSize = Enum.AutomaticSize.XY,
@@ -1365,7 +1380,7 @@ end)(function(Frame)
 			}),
 			Corner = ReactModule.createElement("UICorner", { CornerRadius = UDim.new(0, 3) })
 		}
-		local CreateElementFunction2 = ReactModule.createElement
+		local CreateElementFunction3 = ReactModule.createElement
 		local v4 = "Frame"
 		local config2 = {
 			BackgroundTransparency = 1,
@@ -1373,7 +1388,7 @@ end)(function(Frame)
 			Size = UDim2.fromScale(1, 0)
 		}
 		local t = {}
-		local CreateElementFunction = ReactModule.createElement
+		local CreateElementFunction1 = ReactModule.createElement
 		local v5 = "Frame"
 		local config3 = {
 			BackgroundTransparency = 1,
@@ -1490,7 +1505,7 @@ end)(function(Frame)
 			PaddingRight = UDim.new(0, 10),
 			PaddingTop = UDim.new(0, 10)
 		})
-		t.TextContainer = CreateElementFunction(v5, config3, config4)
+		t.TextContainer = CreateElementFunction1(v5, config3, config4)
 		local v10: number = if IsUseStateResultMatch then 0.5 else 0
 		t.SendButton = ReactModule.createElement("TextButton", {
 			AnchorPoint = Vector2.new(1, 0),
@@ -1518,10 +1533,10 @@ end)(function(Frame)
 				Size = UDim2.new(0, 30, 0, 30)
 			})
 		})
-		config1.Container = CreateElementFunction2(v4, config2, t)
-		Element = CreateElementFunction3(v3, config, config1)
+		config1.Container = CreateElementFunction3(v4, config2, t)
+		Element = CreateElementFunction2(v3, config, config1)
 	end
 	config6.Background = Element
 	
-	return CreateElementFunction1(v2, config5, config6)
+	return CreateElementFunction(v2, config5, config6)
 end)))

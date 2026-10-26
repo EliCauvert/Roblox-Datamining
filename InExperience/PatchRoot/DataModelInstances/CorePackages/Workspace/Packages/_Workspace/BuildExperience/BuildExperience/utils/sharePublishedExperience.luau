@@ -7,6 +7,7 @@ local UniversalShareSheet = require(Parent.ShareSheet).UniversalShareSheet
 local SharedFlagsModule = require(Parent.SharedFlags)
 local LocalizationStringsModule = require(BuildExperience.LocalizationStrings)
 local CreateExperienceShareLinkModule = require(BuildExperience.utils.createExperienceShareLink)
+local FFlagBuildShareSheetFriendsSortAllModule = require(BuildExperience.Flags.FFlagBuildShareSheetFriendsSortAll)
 local FFlagEnableShareSheet = SharedFlagsModule.FFlagEnableShareSheet
 local IsSubjectToDesktopPoliciesFunction = SharedFlagsModule.isSubjectToDesktopPolicies
 local DataHydrationModule = if FFlagEnableShareSheet then require(Parent.DataHydration) else nil
@@ -51,7 +52,7 @@ return {
 	end,
 	sharePublishedExperience = sharePublishedExperience,
 	useSharePublishedExperience = if FFlagEnableShareSheet then function(p1)
-		-- upvalues: ReactModule (copy), SignalsModule (copy), DataHydrationModule (copy), SignalsReactModule (copy), LocalizationModule (copy), LocalizationStringsModule (copy), UniversalShareSheet (copy), CreateExperienceShareLinkModule (copy)
+		-- upvalues: ReactModule (copy), SignalsModule (copy), DataHydrationModule (copy), SignalsReactModule (copy), LocalizationModule (copy), LocalizationStringsModule (copy), UniversalShareSheet (copy), FFlagBuildShareSheetFriendsSortAllModule (copy), CreateExperienceShareLinkModule (copy)
 		local Text = if p1 then tostring(p1) else nil
 		local UseSignalStateResult = SignalsReactModule.useSignalState((ReactModule.useMemo(function()
 			-- upvalues: SignalsModule (upval), Text (copy), DataHydrationModule (upval)
@@ -77,13 +78,13 @@ return {
 		end, { UseLocalizationResult.gameShared, UseContextResult })
 		local MessagePlaceholder = UseLocalizationResult.messagePlaceholder
 		
-		return ReactModule.useCallback(function(p2, RecipientSource)
-			-- upvalues: UniversalShareSheet (upval), UseResult (copy), MessagePlaceholder (copy), p1 (copy), CreateExperienceShareLinkModule (upval)
+		return ReactModule.useCallback(function(p2, p3)
+			-- upvalues: UniversalShareSheet (upval), FFlagBuildShareSheetFriendsSortAllModule (upval), UseResult (copy), MessagePlaceholder (copy), p1 (copy), CreateExperienceShareLinkModule (upval)
 			local function showShareSheet(Result)
-				-- upvalues: UniversalShareSheet (upval), RecipientSource (copy), p2 (copy), UseResult (upval), MessagePlaceholder (upval)
+				-- upvalues: UniversalShareSheet (upval), FFlagBuildShareSheetFriendsSortAllModule (upval), p3 (copy), p2 (copy), UseResult (upval), MessagePlaceholder (upval)
 				UniversalShareSheet.show({
 					context = "BuildExperienceGameShare",
-					recipientSource = RecipientSource,
+					recipientSource = if FFlagBuildShareSheetFriendsSortAllModule then UniversalShareSheet.RecipientSource.OneToOneFriends else p3,
 					telemetryId = tostring(p2),
 					formatSuccessSnackbarText = UseResult,
 					messagePlaceholder = MessagePlaceholder,
@@ -92,27 +93,13 @@ return {
 			end
 			
 			if p1 == nil then
-				UniversalShareSheet.show({
-					context = "BuildExperienceGameShare",
-					recipientSource = RecipientSource,
-					telemetryId = tostring(p2),
-					formatSuccessSnackbarText = UseResult,
-					messagePlaceholder = MessagePlaceholder,
-					url = `https://www.roblox.com/games/{p2}`
-				})
+				showShareSheet(nil)
 				
 				return
 			else
 				CreateExperienceShareLinkModule(p1, false):andThen(showShareSheet, function()
-					-- upvalues: UniversalShareSheet (upval), RecipientSource (copy), p2 (copy), UseResult (upval), MessagePlaceholder (upval)
-					UniversalShareSheet.show({
-						context = "BuildExperienceGameShare",
-						recipientSource = RecipientSource,
-						telemetryId = tostring(p2),
-						formatSuccessSnackbarText = UseResult,
-						messagePlaceholder = MessagePlaceholder,
-						url = `https://www.roblox.com/games/{p2}`
-					})
+					-- upvalues: showShareSheet (copy)
+					showShareSheet(nil)
 				end)
 			end
 		end, { UseResult, MessagePlaceholder, p1 })

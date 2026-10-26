@@ -1316,6 +1316,21 @@ function config1:StartModerationSignal()
 	end
 end
 
+function config1:LeaveVoiceForRestriction()
+	-- upvalues: VoiceChatService (copy), GetFFlagVoiceChatClientRewriteMasterLuaFunction (copy)
+	if not self.service then return end
+	self.previousSessionId = self.service:GetSessionId()
+	VoiceChatService:notifyServerACSCleanup()
+	
+	if GetFFlagVoiceChatClientRewriteMasterLuaFunction() then
+		VoiceChatService:leaveVoice()
+		
+		return
+	else
+		self.service:Leave()
+	end
+end
+
 function config1:StopModerationSignal()
 	if self.playerModeratedConnection then
 		self.playerModeratedConnection:Disconnect()

@@ -18,6 +18,7 @@ return function(Group_id, p1)
 	
 	return GetSduiApiStoreFunction().fetchIfNeeded({
 		enableTemplateCache = true,
+		staleTimeSec = 30,
 		responseType = SduiResponseType.ProtobufJson,
 		url = GetGroupPeekPageUrlModule(Group_id),
 		surfaceKey = AppPage,

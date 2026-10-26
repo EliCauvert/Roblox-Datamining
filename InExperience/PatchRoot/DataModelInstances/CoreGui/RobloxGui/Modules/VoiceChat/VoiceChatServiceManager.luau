@@ -22,9 +22,15 @@ local IXPServiceWrapper = require(CorePackages.Workspace.Packages.IxpServiceWrap
 local VoiceChatCoreModule = require(CorePackages.Workspace.Packages.VoiceChatCore)
 local Default1 = require(CorePackages.Workspace.Packages.VoiceChat).GlobalVoiceManager.default
 local CreateVoiceRestrictionControllerModule = require(CorePackages.Workspace.Packages.VoiceChat.createVoiceRestrictionController)
+local CreateVoiceRestrictionControllerDEPRECATEDModule = require(CorePackages.Workspace.Packages.VoiceChat.createVoiceRestrictionController_DEPRECATED)
 local ShowLegacyVoiceRestrictionModule = require(script.Parent.Helpers.showLegacyVoiceRestriction)
+local ShowUFRVoiceRestrictionModule = require(script.Parent.Helpers.showUFRVoiceRestriction)
+local GetActiveInterventionTimeoutEndModule = require(script.Parent.Helpers.getActiveInterventionTimeoutEnd)
+local VoiceInterventionReceivedSignal = require(CorePackages.Workspace.Packages.InterventionShared).Signals.voiceInterventionReceivedSignal
+local Constants = require(CorePackages.Workspace.Packages.InterventionShared).Utils.Constants
 local FFlagVoiceChatBanDurationUseServerTimeModule = require(script.Parent.Flags.FFlagVoiceChatBanDurationUseServerTime)
 local FFlagProactiveVoiceRestrictionsUFR = require(CorePackages.Workspace.Packages.SharedFlags).FFlagProactiveVoiceRestrictionsUFR
+local FFlagReactiveVoiceRestrictionsUFR = require(CorePackages.Workspace.Packages.SharedFlags).FFlagReactiveVoiceRestrictionsUFR
 local FFlagProactiveVoiceRestrictionsUFRIXPExposureModule = require(script.Parent.Flags.FFlagProactiveVoiceRestrictionsUFRIXPExposure)
 local GetFFlagDisableConsentModalForExistingUsersModule = require(script.Parent.Flags.GetFFlagDisableConsentModalForExistingUsers)
 local GetFFlagOnlyEnableJoinVoiceInVoiceEnabledUniversesModule = require(script.Parent.Flags.GetFFlagOnlyEnableJoinVoiceInVoiceEnabledUniverses)
@@ -55,7 +61,6 @@ local SendUserConnectionStatus = game:DefineFastFlag("SendUserConnectionStatus",
 local DebugConnectDisconnectInterval = game:DefineFastInt("DebugConnectDisconnectInterval", 15)
 local SeamlessVoiceV2JoinVoiceToast = game:DefineFastFlag("SeamlessVoiceV2JoinVoiceToast", false)
 local DisablePermissionPromptDeeplink = game:DefineFastFlag("DisablePermissionPromptDeeplink", false)
-local VoiceChatPermissionPromptUseMicrophoneRoute = game:DefineFastFlag("VoiceChatPermissionPromptUseMicrophoneRoute", false)
 local VoiceEndedCheckDisregardIdleState = game:DefineFastFlag("VoiceEndedCheckDisregardIdleState", false)
 local DisableLeaveToastInStudio = game:DefineFastFlag("DisableLeaveToastInStudio", false)
 local EnableVerifiedCheckViaOverlay = game:DefineFastFlag("EnableVerifiedCheckViaOverlay", false)
@@ -82,7 +87,7 @@ local GetFFlagCheckUniversePlaceBeforeSuspendingFunction = require(CorePackages.
 local FIntLinkingProtocolFetchRetries = require(CorePackages.Workspace.Packages.SharedFlags).FIntLinkingProtocolFetchRetries
 local FIntLinkingProtocolFetchTimeoutMS = require(CorePackages.Workspace.Packages.SharedFlags).FIntLinkingProtocolFetchTimeoutMS
 local VoiceChatModule = require(CorePackages.Workspace.Packages.VoiceChat)
-local Constants = VoiceChatModule.Constants
+local Constants1 = VoiceChatModule.Constants
 local PostRecordUserSeenGeneralModalFunction = VoiceChatModule.AgeVerificationOverlay.PostRecordUserSeenGeneralModal
 local ConstantsModule = require(RobloxGui.Modules.VoiceChat.Constants)
 local VoiceChatPromptModule = require(RobloxGui.Modules.VoiceChatPrompt.Components.VoiceChatPrompt)
@@ -118,12 +123,12 @@ local DeviceMeetsRequirementsForFAEFunction = SocialExperimentsModule.deviceMeet
 local EnableMutedByLocalUserEngineFeature = game:GetEngineFeature("EnableMutedByLocalUser")
 local FFlagEnablePartyVoiceChangersInLua = require(CorePackages.Workspace.Packages.SharedFlags).FFlagEnablePartyVoiceChangersInLua
 local VoiceVolumeControlsEligibility = VoiceChatCoreModule.VoiceVolumeControlsEligibility
-local VOICESTATE = Constants.VOICE_STATE
-local VOICECHATDEVICETYPE = Constants.VOICE_CHAT_DEVICE_TYPE
-local VOICECHATAVAILABILITY = Constants.VOICE_CHAT_AVAILABILITY
-local MINVOICECHATAPIVERSION = Constants.MIN_VOICE_CHAT_API_VERSION
-local WATCHEDMESSAGETYPES = Constants.WATCHED_MESSAGE_TYPES
-local PERMISSIONSTATE = Constants.PERMISSION_STATE
+local VOICESTATE = Constants1.VOICE_STATE
+local VOICECHATDEVICETYPE = Constants1.VOICE_CHAT_DEVICE_TYPE
+local VOICECHATAVAILABILITY = Constants1.VOICE_CHAT_AVAILABILITY
+local MINVOICECHATAPIVERSION = Constants1.MIN_VOICE_CHAT_API_VERSION
+local WATCHEDMESSAGETYPES = Constants1.WATCHED_MESSAGE_TYPES
+local PERMISSIONSTATE = Constants1.PERMISSION_STATE
 local VOICEJOINPROGRESS = VoiceChatCoreModule.Constants.VOICE_JOIN_PROGRESS
 local VoiceChatServiceManager = {
 	available = nil,
@@ -258,7 +263,7 @@ local function _(p1, p2)
 end
 
 function VoiceChatServiceManager.new(CoreVoiceManager, Service, HttpRbxApiService, PermissionsService, BlockStatusChanged, CoreVoiceManager1, NotificationService, p1, AvatarChatService, CaptureService)
-	-- upvalues: Analytics (copy), GetCamMicPermissionsModule (copy), VoiceChatServiceManager (copy), FFlagProactiveVoiceRestrictionsUFR (copy), CreateVoiceRestrictionControllerModule (copy), GetUserSettingsFunction (copy), GetInformedOfBanFunction (copy), ShowLegacyVoiceRestrictionModule (copy), WATCHEDMESSAGETYPES (copy), GetFIntThrottleParticipantsUpdateMsFunction (copy), IXPServiceWrapper (copy), VoiceUIImprovementsIXPLayerName (copy), ThrottleParticipantsUpdateIXPLayerValue (copy), GetFFlagExpChatUseVoiceParticipantsStoreFunction (copy), ExpChatModule (copy), GetFFlagEnableUniveralVoiceToastsModule (copy), FFlagVoiceVolumeControlsEnableNotAudibleVoiceChatVolumeToastModule (copy), FFlagVoiceVolumeControlsEnableVoiceChatVolumeSliderModule (copy), DebugSkipVoicePermissionCheck (copy), GetFFlagMicConsumerRegistryFunction (copy), FFlagDebugShowAudioDeviceInputDebugger (copy), FFlagEnablePartyVoiceChangersInLua (copy), MicrophoneDevicePermissionsLoggingModule (copy), VoiceVolumeControlsGlobalVoiceVolumeSliderIxpExposure (copy), VoiceVolumeControlsEligibility (copy), VoiceVolumeControlsGlobalVoiceVolumeSliderIxpLayer (copy), ShowJoinVoiceWhenDisconnectedV3 (copy), EnableVoiceRewarmReArmV2 (copy), VOICEJOINPROGRESS (copy), ConstantsModule (copy), DisableLeaveToastInStudio (copy), PromptTypeModule (copy), DebugSimulateConnectDisconnect (copy), NewResult (copy), AppStorageService (copy), FFlagProactiveVoiceRestrictionsUFRIXPExposureModule (copy), AppUserLayers (copy), GetFFlagVoiceChatDisruptiveVoiceNudgeEnableVariant2Module (copy), VoiceNudgeUseNewDACopyModule (copy), GetFFlagShowDevicePermissionsModalFunction (copy), GetFFlagEnableSeamlessVoiceDataConsentToastModule (copy), GetFFlagNonVoiceFTUXFunction (copy), GetFFlagEnableVoiceChatMuteForVideoCapturesFunction (copy), GetFFlagEnableCrossExperienceVoiceCaptureMuteFunction (copy), Default1 (copy)
+	-- upvalues: Analytics (copy), GetCamMicPermissionsModule (copy), VoiceChatServiceManager (copy), FFlagProactiveVoiceRestrictionsUFR (copy), FFlagReactiveVoiceRestrictionsUFR (copy), CreateVoiceRestrictionControllerModule (copy), CreateVoiceRestrictionControllerDEPRECATEDModule (copy), GetUserSettingsFunction (copy), GetInformedOfBanFunction (copy), ShowLegacyVoiceRestrictionModule (copy), ShowUFRVoiceRestrictionModule (copy), VoiceInterventionReceivedSignal (copy), WATCHEDMESSAGETYPES (copy), GetFIntThrottleParticipantsUpdateMsFunction (copy), IXPServiceWrapper (copy), VoiceUIImprovementsIXPLayerName (copy), ThrottleParticipantsUpdateIXPLayerValue (copy), GetFFlagExpChatUseVoiceParticipantsStoreFunction (copy), ExpChatModule (copy), GetFFlagEnableUniveralVoiceToastsModule (copy), FFlagVoiceVolumeControlsEnableNotAudibleVoiceChatVolumeToastModule (copy), FFlagVoiceVolumeControlsEnableVoiceChatVolumeSliderModule (copy), DebugSkipVoicePermissionCheck (copy), GetFFlagMicConsumerRegistryFunction (copy), FFlagDebugShowAudioDeviceInputDebugger (copy), FFlagEnablePartyVoiceChangersInLua (copy), MicrophoneDevicePermissionsLoggingModule (copy), VoiceVolumeControlsGlobalVoiceVolumeSliderIxpExposure (copy), VoiceVolumeControlsEligibility (copy), VoiceVolumeControlsGlobalVoiceVolumeSliderIxpLayer (copy), ShowJoinVoiceWhenDisconnectedV3 (copy), EnableVoiceRewarmReArmV2 (copy), VOICEJOINPROGRESS (copy), ConstantsModule (copy), DisableLeaveToastInStudio (copy), PromptTypeModule (copy), DebugSimulateConnectDisconnect (copy), NewResult (copy), AppStorageService (copy), FFlagProactiveVoiceRestrictionsUFRIXPExposureModule (copy), AppUserLayers (copy), GetFFlagVoiceChatDisruptiveVoiceNudgeEnableVariant2Module (copy), VoiceNudgeUseNewDACopyModule (copy), GetFFlagShowDevicePermissionsModalFunction (copy), GetFFlagEnableSeamlessVoiceDataConsentToastModule (copy), GetFFlagNonVoiceFTUXFunction (copy), GetFFlagEnableVoiceChatMuteForVideoCapturesFunction (copy), GetFFlagEnableCrossExperienceVoiceCaptureMuteFunction (copy), Default1 (copy)
 	local self = setmetatable({
 		_mutedAnyone = false,
 		voiceConnectEventReportedForActiveSession = false,
@@ -277,7 +282,7 @@ function VoiceChatServiceManager.new(CoreVoiceManager, Service, HttpRbxApiServic
 	}, VoiceChatServiceManager)
 	
 	if FFlagProactiveVoiceRestrictionsUFR then
-		rawset(self, "voiceRestrictionController", CreateVoiceRestrictionControllerModule({
+		rawset(self, "voiceRestrictionController", (if FFlagReactiveVoiceRestrictionsUFR then CreateVoiceRestrictionControllerModule else CreateVoiceRestrictionControllerDEPRECATEDModule)({
 			getSettings = function()
 				-- upvalues: GetUserSettingsFunction (upval), self (copy)
 				local v1 = "GetRequest"
@@ -311,8 +316,22 @@ function VoiceChatServiceManager.new(CoreVoiceManager, Service, HttpRbxApiServic
 			onError = function(p2)
 				-- upvalues: self (copy), Analytics (upval)
 				self:_reportJoinFailed(p2, Analytics.ERROR)
+			end,
+			showUFRRestriction = function(Settings, _, OnAcknowledgementSuccess)
+				-- upvalues: ShowUFRVoiceRestrictionModule (upval), self (copy)
+				ShowUFRVoiceRestrictionModule({
+					manager = self,
+					settings = Settings,
+					onAcknowledgementSuccess = OnAcknowledgementSuccess
+				})
 			end
 		}))
+	end
+	if FFlagProactiveVoiceRestrictionsUFR and FFlagReactiveVoiceRestrictionsUFR then
+		rawset(self, "voiceInterventionConnection", VoiceInterventionReceivedSignal:connect(function(p2)
+			-- upvalues: self (copy)
+			self:_onUFRInterventionReceived(p2)
+		end))
 	end
 	for _, wATCHEDMESSAGETYPE in WATCHEDMESSAGETYPES do
 		self.SignalREventTable[wATCHEDMESSAGETYPE] = Instance.new("BindableEvent")
@@ -1137,6 +1156,20 @@ function VoiceChatServiceManager:ShowVoiceRestriction()
 	self.voiceRestrictionController.check("micTap")
 end
 
+function VoiceChatServiceManager:_onUFRInterventionReceived(p3)
+	-- upvalues: Constants (copy), GetActiveInterventionTimeoutEndModule (copy), ConstantsModule (copy)
+	if p3.type ~= Constants.NotificationDialogType.ChatTimeout then return end
+	local ActiveInterventionTimeoutEndModule, ActiveInterventionTimeoutEndModule2 = GetActiveInterventionTimeoutEndModule(p3, DateTime.now().UnixTimestamp)
+	
+	if ActiveInterventionTimeoutEndModule then
+		self.pendingDisconnectReason = ConstantsModule.VOICE_DISCONNECT_REASON.MODERATED
+		self.voiceRestrictionController.applyUFRTimeout(ActiveInterventionTimeoutEndModule2)
+		self.coreVoiceManager:LeaveVoiceForRestriction()
+		
+		return
+	end
+end
+
 function VoiceChatServiceManager:CheckCallState()
 	return self.coreVoiceManager:CheckCallState()
 end
@@ -1221,7 +1254,7 @@ function VoiceChatServiceManager:HideVoiceUI()
 end
 
 function VoiceChatServiceManager:createPromptInstance(OnReadyForSignal, DevicePermissionsModal)
-	-- upvalues: GetFFlagEnableVoicePromptReasonTextModule (copy), PromptTypeModule (copy), GetFFlagVoiceChatDisruptiveVoiceNudgeEnableVariant2Module (copy), FFlagVoiceChatBanDurationUseServerTimeModule (copy), Workspace (copy), LocalizationService (copy), GetFFlagShowDevicePermissionsModalFunction (copy), FFlagEnableRetryForLinkingProtocolFetch (copy), FIntLinkingProtocolFetchRetries (copy), Default2 (copy), SettingsRoute (copy), FIntLinkingProtocolFetchTimeoutMS (copy), RoactModule (copy), VoiceChatPromptModule (copy), Analytics (copy), PostInformedOfBanFunction (copy), ConstantsModule (copy), DisablePermissionPromptDeeplink (copy), GetFFlagJoinWithoutMicPermissionsFunction (copy), VoiceChatPermissionPromptUseMicrophoneRoute (copy), NewResult (copy), CoreGui (copy)
+	-- upvalues: GetFFlagEnableVoicePromptReasonTextModule (copy), PromptTypeModule (copy), GetFFlagVoiceChatDisruptiveVoiceNudgeEnableVariant2Module (copy), FFlagVoiceChatBanDurationUseServerTimeModule (copy), Workspace (copy), LocalizationService (copy), GetFFlagShowDevicePermissionsModalFunction (copy), FFlagEnableRetryForLinkingProtocolFetch (copy), FIntLinkingProtocolFetchRetries (copy), Default2 (copy), SettingsRoute (copy), FIntLinkingProtocolFetchTimeoutMS (copy), RoactModule (copy), VoiceChatPromptModule (copy), Analytics (copy), PostInformedOfBanFunction (copy), ConstantsModule (copy), DisablePermissionPromptDeeplink (copy), GetFFlagJoinWithoutMicPermissionsFunction (copy), NewResult (copy), CoreGui (copy)
 	if self.promptSignal then
 		self.promptSignal:Destroy()
 		self.promptSignal = nil
@@ -1244,7 +1277,7 @@ function VoiceChatServiceManager:createPromptInstance(OnReadyForSignal, DevicePe
 			for _ = 0, FIntLinkingProtocolFetchRetries do
 				local SpawnedThread = task.spawn(function()
 					-- upvalues: v1 (ref), v2 (ref), Default2 (upval), SettingsRoute (upval)
-					v1, v148 = Default2:supportsSwitchToSettingsApp(SettingsRoute.Microphone):await()
+					v1, v155 = Default2:supportsSwitchToSettingsApp(SettingsRoute.Microphone):await()
 				end)
 				task.wait(FIntLinkingProtocolFetchTimeoutMS / 1000)
 				task.cancel(SpawnedThread)
@@ -1252,7 +1285,7 @@ function VoiceChatServiceManager:createPromptInstance(OnReadyForSignal, DevicePe
 				if v2 ~= nil then break end
 			end
 		else
-			v1, v148 = Default2:supportsSwitchToSettingsApp(SettingsRoute.Microphone):await()
+			v1, v155 = Default2:supportsSwitchToSettingsApp(SettingsRoute.Microphone):await()
 		end
 		self.settingsAppAvailable = v1 and v2
 	end
@@ -1314,8 +1347,8 @@ function VoiceChatServiceManager:createPromptInstance(OnReadyForSignal, DevicePe
 			end
 			self:EnableVoice()
 		end else nil else function()
-			-- upvalues: VoiceChatPermissionPromptUseMicrophoneRoute (upval), SettingsRoute (upval), Default2 (upval), NewResult (upval)
-			local Microphone = if VoiceChatPermissionPromptUseMicrophoneRoute then SettingsRoute.Microphone else nil
+			-- upvalues: SettingsRoute (upval), Default2 (upval), NewResult (upval)
+			local Microphone = SettingsRoute.Microphone
 			local v3 = Default2:supportsSwitchToSettingsApp(Microphone):await()
 			NewResult:debug("Settings app available: {}", v3)
 			
@@ -1944,9 +1977,12 @@ function VoiceChatServiceManager:SetupParticipantListeners()
 end
 
 function VoiceChatServiceManager:Disconnect()
-	-- upvalues: FFlagProactiveVoiceRestrictionsUFR (copy)
+	-- upvalues: FFlagProactiveVoiceRestrictionsUFR (copy), FFlagReactiveVoiceRestrictionsUFR (copy)
 	if FFlagProactiveVoiceRestrictionsUFR then
 		self.voiceRestrictionController.dispose()
+	end
+	if FFlagProactiveVoiceRestrictionsUFR and FFlagReactiveVoiceRestrictionsUFR then
+		self.voiceInterventionConnection:disconnect()
 	end
 	self.coreVoiceManager:Disconnect()
 	self.coreVoiceManager:unsubscribeAll()

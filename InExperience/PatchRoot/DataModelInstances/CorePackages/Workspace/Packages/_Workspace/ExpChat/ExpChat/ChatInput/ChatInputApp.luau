@@ -188,9 +188,9 @@ end, function(Callback)
 			-- upvalues: Callback (copy), AutocompleteDropdownActivatedModule (upval)
 			return Callback(AutocompleteDropdownActivatedModule(p1))
 		end,
-		autocompleteDropdownResultsChanged = function(p1)
+		autocompleteDropdownResultsChanged = function(p1, p2)
 			-- upvalues: Callback (copy), AutocompleteDropdownResultsChangedModule (upval)
-			return Callback(AutocompleteDropdownResultsChangedModule(p1))
+			return Callback(AutocompleteDropdownResultsChangedModule(p1, p2))
 		end,
 		autocompleteDropdownSelectionChanged = function(p1)
 			-- upvalues: Callback (copy), AutocompleteDropdownSelectionChangedModule (upval)

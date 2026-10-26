@@ -3160,6 +3160,7 @@ Feature.Contacts.Message.ContactDiscoverable,"आप फ़्रेंड्स
 Feature.Contacts.Message.ContactsSyncWarning,"आपके कॉन्टैक्ट्स को समय-समय पर सिंक किया जाएगा. साथ ही, अन्य Roblox यूज़र्स के साथ मैच होने वाले कॉन्टैक्ट्स को स्टोर किया जाएगा, ताकि फ़्रेंड्स ढूँढने में आपकी मदद की जा सके. इस डेटा को किसी भी समय डिवाइस सेटिंग में मैनेज किया जा सकता है."
 Feature.Contacts.Message.InviteToRoblox,"Roblox पर मुझे फ़्रेंड के तौर पर जोड़ें, ताकि हम साथ मिलकर एक्सपीरिएंस क्रिएट, शेयर और एक्सप्लोर कर सकें."
 Feature.Contacts.Message.NoResults,
+Feature.CustomForms.Label.Percent,
 Feature.DeveloperProducts.Label.Product,
 Feature.DisplayName.ErrorMessage.AgedUpNameContainPII,नाम में निजी जानकारी हो सकती है
 Feature.DisplayName.ErrorMessage.AgedUpNameHasChanged,पिछले 7 दिनों में आपका नाम पहले ही बदला जा चुका है
@@ -3709,6 +3710,7 @@ Feature.Moments.Action.ShowDetails,जानकारी दिखाएँ
 Feature.Moments.Action.ShowMore,
 Feature.Moments.Action.TrimVideo,वीडियो ट्रिम करें
 Feature.Moments.Action.TryAgain,
+Feature.Moments.Body.EDPMomentIPReportInstructions,"इस Moment में IP (बौद्धिक संपदा) उल्लंघन की रिपोर्ट करने के लिए, गेम की जानकारी वाले पेज पर जाएँ."
 Feature.Moments.Description.CommunityStandards,"क्या कहें और क्या न कहें, इस बारे में ज़्यादा जानकारी के लिए कम्यूनिटी स्टैंडर्ड देखें."
 Feature.Moments.Description.EmptyCapturesLibrary,आपके कैप्चर यहाँ दिखेंगे.
 Feature.Moments.Description.GenerateTextFeedbackDisclosure,AI से जेनरेट किया गया टेक्स्ट. पोस्ट करने से पहले रिव्यू करें — पब्लिश की गई किसी भी चीज़ के लिए आप ज़िम्मेदार हैं.
@@ -3837,11 +3839,12 @@ Feature.Moments.Label.WriteComment,कमेंट लिखें
 Feature.Moments.Title.Comments,कमेंट्स
 Feature.Moments.Title.CommentsWithCappedCount,{count}+ कमेंट्स
 Feature.Moments.Title.CommentsWithCount,{count} कमेंट्स
+Feature.Moments.Title.EDPMomentIPReportInstructions,गेम की जानकारी वाले पेज पर रिपोर्ट करें
 Feature.Moments.Title.GenerateTextFeedbackReason,क्या गड़बड़ी हुई?
 Feature.Moments.Title.GenerateTextOptions,
 Feature.Moments.Title.LeaveMomentCreation,क्या आपको ‘Moment’ क्रिएशन छोड़ना है?
 Feature.Moments.Title.MomentRemoved,Moment हटा दिया गया
-Feature.Moments.Title.PostInsights,पेज हेडर का टाइटल
+Feature.Moments.Title.PostInsights,पोस्ट के बारे में इनसाइट
 Feature.Moments.Title.ReportPost,पोस्ट की रिपोर्ट करें
 Feature.Moments.Tooltip.Creation,एक्सपीरिएंस में मौजूद हर कोई आपके मोमेंट देख सकता है.
 Feature.Moments.Tooltip.PostInsightsBody,"व्यूज़, देखने में बिताया गया समय और यह देखें कि आपकी ऑडियंस को Moment कैसा लगा."

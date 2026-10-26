@@ -21,5 +21,10 @@ return {
 		local SearchType = if ActionParams then ActionParams.searchType else nil
 		
 		return if SearchType == nil or SearchType == "" then SearchTypes.TopResults elseif typeof(SearchType) == "string" and SearchTypes[SearchType] ~= nil and IsSearchTypeInOmniSearchFunction(SearchType) then SearchType else nil
+	end,
+	resolveIsAutocompleteSuggestion = function(p1): boolean
+		local ActionParams = if p1 then p1.actionParams else nil
+		
+		return (if ActionParams then ActionParams.isAutocompleteSuggestion else nil) == true
 	end
 }

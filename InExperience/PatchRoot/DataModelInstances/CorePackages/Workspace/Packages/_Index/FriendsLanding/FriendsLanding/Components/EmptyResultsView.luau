@@ -18,7 +18,6 @@ local FoundationCloudAssetsModule = require(Parent.FoundationCloudAssets)
 local Assets = FoundationCloudAssetsModule.Assets
 local PreloadAssetFunction = FoundationCloudAssetsModule.preloadAsset
 local MigrateEmptyResultsViewToFoundation = game:DefineFastFlag("MigrateEmptyResultsViewToFoundation", false)
-local FFlagFriendsEmptyStateIllustrationThemingModule = require(FriendsLanding.Flags.FFlagFriendsEmptyStateIllustrationTheming)
 local EmptyResultsView = Roact.PureComponent:extend("EmptyResultsView")
 EmptyResultsView.defaultProps = { layoutOrder = 0, pageLoadingTimeReport = nil }
 
@@ -31,14 +30,14 @@ local function _(p1)
 end
 
 function EmptyResultsView.render(p1)
-	-- upvalues: WithStyleFunction (copy), WithLocalizationFunction (copy), TextKeysModule (copy), Roact (copy), ConstantsModule (copy), MigrateEmptyResultsViewToFoundation (copy), Image (copy), FFlagFriendsEmptyStateIllustrationThemingModule (copy), ImageSetLabel (copy), Images (copy), AppFonts (copy)
+	-- upvalues: WithStyleFunction (copy), WithLocalizationFunction (copy), TextKeysModule (copy), Roact (copy), ConstantsModule (copy), MigrateEmptyResultsViewToFoundation (copy), Image (copy), ImageSetLabel (copy), Images (copy), AppFonts (copy)
 	return WithStyleFunction(function(p2)
-		-- upvalues: WithLocalizationFunction (upval), TextKeysModule (upval), Roact (upval), ConstantsModule (upval), p1 (copy), MigrateEmptyResultsViewToFoundation (upval), Image (upval), FFlagFriendsEmptyStateIllustrationThemingModule (upval), ImageSetLabel (upval), Images (upval), AppFonts (upval)
+		-- upvalues: WithLocalizationFunction (upval), TextKeysModule (upval), Roact (upval), ConstantsModule (upval), p1 (copy), MigrateEmptyResultsViewToFoundation (upval), Image (upval), ImageSetLabel (upval), Images (upval), AppFonts (upval)
 		return WithLocalizationFunction({
 			noResultsText = "CommonUI.Messages.Response.NoResults",
 			addFriendsBtn = TextKeysModule.ADD_FRIENDS_BTN
 		})(function(p3)
-			-- upvalues: Roact (upval), ConstantsModule (upval), p1 (upval), MigrateEmptyResultsViewToFoundation (upval), Image (upval), FFlagFriendsEmptyStateIllustrationThemingModule (upval), ImageSetLabel (upval), Images (upval), p2 (copy), AppFonts (upval)
+			-- upvalues: Roact (upval), ConstantsModule (upval), p1 (upval), MigrateEmptyResultsViewToFoundation (upval), Image (upval), ImageSetLabel (upval), Images (upval), p2 (copy), AppFonts (upval)
 			return Roact.createElement("Frame", {
 				BackgroundTransparency = 1,
 				Size = UDim2.new(1, 0, 1, -(ConstantsModule.TOP_BAR_HEIGHT + 45)),
@@ -61,7 +60,7 @@ function EmptyResultsView.render(p1)
 					Imagelabel = if MigrateEmptyResultsViewToFoundation then Roact.createElement(Image, {
 						LayoutOrder = 1,
 						Image = p1.props.assetId,
-						imageStyle = if FFlagFriendsEmptyStateIllustrationThemingModule then p1.props.tokens.Color.Content.Emphasis else nil,
+						imageStyle = p1.props.tokens.Color.Content.Emphasis,
 						Size = UDim2.fromOffset(p1.props.assetSize.X, p1.props.assetSize.Y)
 					}) else Roact.createElement(ImageSetLabel, {
 						BackgroundTransparency = 1,

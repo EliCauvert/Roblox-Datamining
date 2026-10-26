@@ -1,9 +1,12 @@
-﻿local BuildExperience = script:FindFirstAncestor("BuildExperience")
+﻿local LocalizationService = game:GetService("LocalizationService")
+local BuildExperience = script:FindFirstAncestor("BuildExperience")
 local Parent = BuildExperience.Parent
 local CreatorCreditModule = require(Parent.DataHydration.CreatorCredit)
 local ReactModule = require(Parent.React)
 local SignalsReactModule = require(Parent.SignalsReact)
-local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
+local LocalizationModule = require(Parent.Localization)
+local UseLocalizationFunction = LocalizationModule.Hooks.useLocalization
+local NumberLocalization = LocalizationModule.NumberLocalization
 local CreatorCreditConfigModule = require(BuildExperience.CreatorCreditConfig)
 local UseOpenBuyRobuxWebViewModule = require(BuildExperience.Components.CreatorCreditSheet.useOpenBuyRobuxWebView)
 local UseRefreshCreatorCreditOnUnhideModule = require(BuildExperience.Components.CreatorCreditSheet.useRefreshCreatorCreditOnUnhide)
@@ -13,26 +16,18 @@ local FFlagBuildExperienceModelPickerModule = require(BuildExperience.Flags.FFla
 local GetBuildCreatorCreditRefreshStoreModule = require(BuildExperience.Stores.GetBuildCreatorCreditRefreshStore)
 local LocalUserIdStore = require(Parent.LocalUserIdStore).LocalUserIdStore
 
+local function _(Value: number)
+	-- upvalues: NumberLocalization (copy), LocalizationService (copy)
+	return NumberLocalization.localize(string.format("%.0f", (math.floor(Value))), LocalizationService.RobloxLocaleId)
+end
+
 local function getQuotaBlockReason(UseSignalStateResult)
 	-- upvalues: FFlagBuildExperienceModelPickerModule (copy), CreatorCreditConfigModule (copy)
 	return if UseSignalStateResult == nil then nil elseif FFlagBuildExperienceModelPickerModule then if UseSignalStateResult.allowed == false then UseSignalStateResult.reason else nil elseif UseSignalStateResult.allowed == nil then if UseSignalStateResult.freeTrialRemaining > 0 then nil elseif UseSignalStateResult.limitSettings.additionalUsageEnabled then if UseSignalStateResult.robuxBalance < CreatorCreditConfigModule.FIntMinimumUsableRobuxBalance then "InsufficientRobuxBalance" elseif UseSignalStateResult.limitSettings.dailyLimitSet and UseSignalStateResult.limitRemaining < CreatorCreditConfigModule.FIntMinimumUsableRobuxBalance then "DailyLimitReached" else nil else "FreeTrialExhausted" elseif UseSignalStateResult.allowed then nil else UseSignalStateResult.reason
 end
 
 return function(p1)
-	-- upvalues: UseLocalizationFunction (copy), LocalizationStringsModule (copy), FFlagBuildExperienceFreeLimitCardModule (copy), CreatorCreditModule (copy), FFlagBuildExperienceModelPickerModule (copy), SignalsReactModule (copy), LocalUserIdStore (copy), ReactModule (copy), GetBuildCreatorCreditRefreshStoreModule (copy), getQuotaBlockReason (copy), CreatorCreditConfigModule (copy), UseOpenBuyRobuxWebViewModule (copy), UseRefreshCreatorCreditOnUnhideModule (copy)
-	local UseLocalizationResult = UseLocalizationFunction({
-		adjustLimit = LocalizationStringsModule.CREATOR_CREDIT_ADJUST_LIMIT_BUTTON,
-		buyMoreDescription = LocalizationStringsModule.CREATOR_CREDIT_BUY_MORE_ROBUX_DESCRIPTION,
-		buyMoreTitle = LocalizationStringsModule.CREATOR_CREDIT_BUY_MORE_ROBUX_TITLE,
-		buyRobux = LocalizationStringsModule.CREATOR_CREDIT_BUY_ROBUX_SHEET_CONFIRM,
-		dailyLimitDescription = LocalizationStringsModule.CREATOR_CREDIT_DAILY_LIMIT_REACHED_DESCRIPTION,
-		dailyLimitTitle = LocalizationStringsModule.CREATOR_CREDIT_DAILY_LIMIT_REACHED_TITLE,
-		freeTrialDescription = if FFlagBuildExperienceFreeLimitCardModule then LocalizationStringsModule.CREATOR_CREDIT_FREE_LIMIT_REACHED_DESCRIPTION else LocalizationStringsModule.CREATOR_CREDIT_FREE_TRIAL_EXHAUSTED_DESCRIPTION,
-		freeTrialTitle = if FFlagBuildExperienceFreeLimitCardModule then LocalizationStringsModule.CREATOR_CREDIT_FREE_LIMIT_REACHED_TITLE else LocalizationStringsModule.CREATOR_CREDIT_FREE_TRIAL_EXHAUSTED_TITLE,
-		freeTrialAction = if FFlagBuildExperienceFreeLimitCardModule then LocalizationStringsModule.CREATOR_CREDIT_MANAGE_USAGE_BUTTON else LocalizationStringsModule.CREATOR_CREDIT_VIEW_USAGE_BUTTON,
-		notNow = LocalizationStringsModule.CREATOR_CREDIT_NOT_NOW_BUTTON,
-		viewUsage = LocalizationStringsModule.CREATOR_CREDIT_VIEW_USAGE_BUTTON
-	})
+	-- upvalues: CreatorCreditModule (copy), FFlagBuildExperienceModelPickerModule (copy), SignalsReactModule (copy), LocalUserIdStore (copy), ReactModule (copy), UseLocalizationFunction (copy), LocalizationStringsModule (copy), NumberLocalization (copy), LocalizationService (copy), FFlagBuildExperienceFreeLimitCardModule (copy), GetBuildCreatorCreditRefreshStoreModule (copy), getQuotaBlockReason (copy), CreatorCreditConfigModule (copy), UseOpenBuyRobuxWebViewModule (copy), UseRefreshCreatorCreditOnUnhideModule (copy)
 	local CreatorCreditStore = CreatorCreditModule.getCreatorCreditStore(false)
 	local UseSignalStateResult = if FFlagBuildExperienceModelPickerModule then SignalsReactModule.useSignalState(LocalUserIdStore.getCurrentUserId) else nil
 	local UseMemoResult = ReactModule.useMemo(function()
@@ -45,6 +40,34 @@ return function(p1)
 	})
 	local UseSignalStateResult1 = SignalsReactModule.useSignalState(UseMemoResult.data)
 	local NextResetEligibleTime = if UseSignalStateResult1 == nil then nil else UseSignalStateResult1.nextResetEligibleTime
+	local Value: number? = nil
+	
+	if FFlagBuildExperienceModelPickerModule and UseSignalStateResult1 ~= nil and UseSignalStateResult1.blockDetails ~= nil then
+		local RequiredRobux: number = UseSignalStateResult1.blockDetails.requiredRobux
+		
+		if RequiredRobux ~= nil and RequiredRobux > 0 then
+			Value = RequiredRobux
+		end
+	end
+	local UseLocalizationResult = UseLocalizationFunction({
+		adjustLimit = LocalizationStringsModule.CREATOR_CREDIT_ADJUST_LIMIT_BUTTON,
+		buyMoreDescription = LocalizationStringsModule.CREATOR_CREDIT_BUY_MORE_ROBUX_DESCRIPTION,
+		buyMoreTitle = LocalizationStringsModule.CREATOR_CREDIT_BUY_MORE_ROBUX_TITLE,
+		buyRobux = LocalizationStringsModule.CREATOR_CREDIT_BUY_ROBUX_SHEET_CONFIRM,
+		modelBuyRobux = if Value == nil then nil else LocalizationStringsModule.CREATOR_CREDIT_BUY_ROBUX_BUTTON,
+		insufficientTitle = if Value == nil then nil else LocalizationStringsModule.CREATOR_CREDIT_INSUFFICIENT_ROBUX_TITLE,
+		insufficientDescription = if Value == nil then nil else {
+			if p1.namedTier == "advanced" then LocalizationStringsModule.CREATOR_CREDIT_INSUFFICIENT_ROBUX_ADVANCED_AMOUNT_DESCRIPTION else LocalizationStringsModule.CREATOR_CREDIT_INSUFFICIENT_ROBUX_DEFAULT_AMOUNT_DESCRIPTION,
+			ROBUX = NumberLocalization.localize(string.format("%.0f", (math.floor(Value))), LocalizationService.RobloxLocaleId)
+		},
+		dailyLimitDescription = LocalizationStringsModule.CREATOR_CREDIT_DAILY_LIMIT_REACHED_DESCRIPTION,
+		dailyLimitTitle = LocalizationStringsModule.CREATOR_CREDIT_DAILY_LIMIT_REACHED_TITLE,
+		freeTrialDescription = if FFlagBuildExperienceFreeLimitCardModule then LocalizationStringsModule.CREATOR_CREDIT_FREE_LIMIT_REACHED_DESCRIPTION else LocalizationStringsModule.CREATOR_CREDIT_FREE_TRIAL_EXHAUSTED_DESCRIPTION,
+		freeTrialTitle = if FFlagBuildExperienceFreeLimitCardModule then LocalizationStringsModule.CREATOR_CREDIT_FREE_LIMIT_REACHED_TITLE else LocalizationStringsModule.CREATOR_CREDIT_FREE_TRIAL_EXHAUSTED_TITLE,
+		freeTrialAction = if FFlagBuildExperienceFreeLimitCardModule then LocalizationStringsModule.CREATOR_CREDIT_MANAGE_USAGE_BUTTON else LocalizationStringsModule.CREATOR_CREDIT_VIEW_USAGE_BUTTON,
+		notNow = LocalizationStringsModule.CREATOR_CREDIT_NOT_NOW_BUTTON,
+		viewUsage = LocalizationStringsModule.CREATOR_CREDIT_VIEW_USAGE_BUTTON
+	})
 	local UseStateResult, UseStateResult2 = ReactModule.useState(false)
 	local OutOfCreditsPromptFailureCount = p1.outOfCreditsPromptFailureCount or 0
 	local UseRefResult = ReactModule.useRef(OutOfCreditsPromptFailureCount)
@@ -162,35 +185,41 @@ return function(p1)
 		UseStateResult2(true)
 	end, {})
 	local UseStateResult1_1 = UseStateResult1 or getQuotaBlockReason(UseSignalStateResult1)
-	local BuyMoreTitle = UseLocalizationResult.buyMoreTitle
-	local BuyMoreDescription = UseLocalizationResult.buyMoreDescription
-	local BuyRobux = UseLocalizationResult.buyRobux
-	local ViewUsage = UseLocalizationResult.viewUsage
+	local DailyLimitTitle = UseLocalizationResult.buyMoreTitle
+	local DailyLimitDescription = UseLocalizationResult.buyMoreDescription
+	local AdjustLimit = UseLocalizationResult.buyRobux
+	local NotNow = UseLocalizationResult.viewUsage
 	local OnBuyMoreRobuxCardPrimaryAction = UseOpenBuyRobuxWebViewModuleResult
 	local OnBuyMoreRobuxCardSecondaryAction = UseResult1
 	
 	if UseStateResult1_1 == "FreeTrialExhausted" then
-		BuyMoreTitle = UseLocalizationResult.freeTrialTitle
-		BuyMoreDescription = UseLocalizationResult.freeTrialDescription
-		BuyRobux = UseLocalizationResult.freeTrialAction
-		ViewUsage = UseLocalizationResult.notNow
+		DailyLimitTitle = UseLocalizationResult.freeTrialTitle
+		DailyLimitDescription = UseLocalizationResult.freeTrialDescription
+		AdjustLimit = UseLocalizationResult.freeTrialAction
+		NotNow = UseLocalizationResult.notNow
 		OnBuyMoreRobuxCardPrimaryAction = UseResult1
 		OnBuyMoreRobuxCardSecondaryAction = UseResult2
 	elseif UseStateResult1_1 == "DailyLimitReached" then
-		BuyMoreTitle = UseLocalizationResult.dailyLimitTitle
-		BuyMoreDescription = UseLocalizationResult.dailyLimitDescription
-		BuyRobux = UseLocalizationResult.adjustLimit
-		ViewUsage = UseLocalizationResult.notNow
+		DailyLimitTitle = UseLocalizationResult.dailyLimitTitle
+		DailyLimitDescription = UseLocalizationResult.dailyLimitDescription
+		AdjustLimit = UseLocalizationResult.adjustLimit
+		NotNow = UseLocalizationResult.notNow
 		OnBuyMoreRobuxCardPrimaryAction = UseResult1
+		OnBuyMoreRobuxCardSecondaryAction = UseResult2
+	elseif UseStateResult1_1 == "InsufficientRobuxBalance" and Value ~= nil then
+		DailyLimitTitle = UseLocalizationResult.insufficientTitle
+		DailyLimitDescription = UseLocalizationResult.insufficientDescription
+		AdjustLimit = UseLocalizationResult.modelBuyRobux
+		NotNow = UseLocalizationResult.notNow
 		OnBuyMoreRobuxCardSecondaryAction = UseResult2
 	end
 	return {
 		showBuyMoreRobuxCard = UseStateResult1_1 ~= nil and (not UseStateResult and p1.onOpenCreatorCreditPage ~= nil),
-		buyMoreRobuxCardTitle = BuyMoreTitle,
-		buyMoreRobuxCardDescription = BuyMoreDescription,
-		buyMoreRobuxCardPrimaryActionText = BuyRobux,
+		buyMoreRobuxCardTitle = DailyLimitTitle,
+		buyMoreRobuxCardDescription = DailyLimitDescription,
+		buyMoreRobuxCardPrimaryActionText = AdjustLimit,
 		onBuyMoreRobuxCardPrimaryAction = OnBuyMoreRobuxCardPrimaryAction,
-		buyMoreRobuxCardSecondaryActionText = ViewUsage,
+		buyMoreRobuxCardSecondaryActionText = NotNow,
 		onBuyMoreRobuxCardSecondaryAction = OnBuyMoreRobuxCardSecondaryAction
 	}
 end

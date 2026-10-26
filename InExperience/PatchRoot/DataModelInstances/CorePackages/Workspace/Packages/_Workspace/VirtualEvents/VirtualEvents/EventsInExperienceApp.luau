@@ -8,32 +8,26 @@ local RoactServices = require(Parent1.RoactServices).RoactServices
 local RequestInternalWrapperFunction = require(Parent1.Http).NetworkLayers.requestInternalWrapper
 local CoreScriptsRootProvider = require(Parent1.CoreScriptsRoactCommon).CoreScriptsRootProvider
 local EventInExperiencePromptsModule = require(Parent.Components.CoreUI.EventInExperiencePrompts)
-local EventsInExperienceAppFixStyleLink = game:DefineFastFlag("EventsInExperienceAppFixStyleLink", false)
 
-local function v10(p1, p2)
-	-- upvalues: ReactModule (copy), CoreScriptsRootProvider (copy), RoactServices (copy), RoactNetworking (copy), RequestInternalWrapperFunction (copy), HttpService (copy), EventsInExperienceAppFixStyleLink (copy), RoactCompatModule (copy)
-	local Element = ReactModule.createElement(CoreScriptsRootProvider, {}, {
+local function v9(p1, p2)
+	-- upvalues: ReactModule (copy), CoreScriptsRootProvider (copy), RoactServices (copy), RoactNetworking (copy), RequestInternalWrapperFunction (copy), HttpService (copy), RoactCompatModule (copy)
+	return RoactCompatModule.mount(ReactModule.createElement("Folder", nil, (ReactModule.createElement(CoreScriptsRootProvider, {}, {
 		RoactServicesProvider = ReactModule.createElement(RoactServices.ServiceProvider, {
 			services = {
 				[RoactNetworking] = RequestInternalWrapperFunction(HttpService)
 			}
 		}, p2)
-	})
-	
-	if EventsInExperienceAppFixStyleLink then
-		Element = ReactModule.createElement("Folder", nil, Element)
-	end
-	return RoactCompatModule.mount(Element, p1, "EventsInExperienceRoot")
+	}))), p1, "EventsInExperienceRoot")
 end
 
 return {
 	createApp = function()
-		-- upvalues: v10 (copy), ReactModule (copy), EventInExperiencePromptsModule (copy), RoactCompatModule (copy)
+		-- upvalues: v9 (copy), ReactModule (copy), EventInExperiencePromptsModule (copy), RoactCompatModule (copy)
 		local config = { _coreUiHandle = nil }
 		
 		function config.mountCoreUI(p1)
-			-- upvalues: config (copy), v10 (upval), ReactModule (upval), EventInExperiencePromptsModule (upval)
-			config._coreUiHandle = v10(p1, {
+			-- upvalues: config (copy), v9 (upval), ReactModule (upval), EventInExperiencePromptsModule (upval)
+			config._coreUiHandle = v9(p1, {
 				EventInExperiencePrompts = ReactModule.createElement(EventInExperiencePromptsModule)
 			})
 		end

@@ -2181,6 +2181,8 @@ Feature.Build.Description.PromoteGamePaid,광고를 만들어 수백만 명의 �
 Feature.Build.Description.PromoteGameWithAdCampaign,{durationDays}일 광고 캠페인으로 오디언스를 확대하고 게임을 홍보하세요.
 Feature.Build.Description.RaiseLimitOrWait,"계속 제작하려면 일일 Robux 한도를 늘리거나, 내일 초기화될 때까지 기다리세요."
 Feature.Build.Description.RatingAgreement,게시하면 이 콘텐츠 등급이 정확하다는 데 동의하는 것으로 간주됩니다.
+Feature.Build.Description.RequiredRobuxForAdvanced,고급 모델로 계속 제작하려면 최소 {ROBUX} Robux가 필요합니다. 기본 모드로 다시 전환하거나 무료 사용량이 재설정될 때까지 기다릴 수도 있습니다.
+Feature.Build.Description.RequiredRobuxForDefault,계속 제작하려면 최소 {ROBUX} Robux가 필요합니다. Robux를 충전하거나 무료 사용량이 재설정될 때까지 기다리세요.
 Feature.Build.Description.RestoreLatest,이 버전이 최신 게시 버전이 됩니다.
 Feature.Build.Description.RevertToVersion,확인을 눌러 최신 변경 사항을 복구하고 {VERSION} 버전으로 돌아가세요.
 Feature.Build.Description.ShareLatest,최신 버전에서 변경된 사항을 공유하세요.
@@ -2246,6 +2248,7 @@ Feature.Build.Label.DeveloperProductDescription,설명: {DESCRIPTION}
 Feature.Build.Label.DeveloperProductName,"이름: ""{NAME}"""
 Feature.Build.Label.DeveloperProductPrice,가격: {PRICE} Robux
 Feature.Build.Label.DeveloperProductPriceUnavailable,?
+Feature.Build.Label.DeveloperProducts,
 Feature.Build.Label.Done,
 Feature.Build.Label.EasyPerformanceReport,간편한 성과 보고서
 Feature.Build.Label.Error,
@@ -2427,6 +2430,7 @@ Feature.Build.Message.BuildBusy,Build 사용량이 많습니다. 잠시 후 다�
 Feature.Build.Message.BuildConnectFailed,Build에 연결되지 않았습니다. 다시 시도해 보세요.
 Feature.Build.Message.BuildInternalError,Build에 문제가 발생했습니다. 다시 시도해 보세요.
 Feature.Build.Message.BuildResponseFailed,Build가 응답하지 않았습니다. 다시 시도해 보세요.
+Feature.Build.Message.BuildSendUnconfirmed,Build에서 메시지가 전송되었는지 확인할 수 없습니다.
 Feature.Build.Message.BuildStillWorking,"작업 진행 중입니다. 기다리는 동안 앱을 종료하거나, Roblox를 플레이하거나, 다른 프로젝트를 시작할 수 있습니다."
 Feature.Build.Message.BuildStopped,Build를 중단했습니다.
 Feature.Build.Message.BuildTakingLonger,예상보다 시간이 오래 걸리고 있습니다. 계속 기다리거나 다른 작업을 시작하실 수 있습니다.
@@ -2456,6 +2460,7 @@ Feature.Build.Message.NoAssetsFound,애셋을 찾을 수 없습니다.
 Feature.Build.Message.NoCapturesAvailable,
 Feature.Build.Message.NoDescriptionProvided,설명을 입력하지 않았습니다.
 Feature.Build.Message.NoFriendsToAdd,아직 초대할 친구가 없습니다. 먼저 Roblox에서 친구를 찾아보세요.
+Feature.Build.Message.NoGamesYet,아직 게임이 없습니다.
 Feature.Build.Message.NoResults,
 Feature.Build.Message.NoSearchResultsFound,검색 결과가 없습니다
 Feature.Build.Message.NoVersionHistory,아직 버전 기록이 없습니다.
@@ -2531,7 +2536,9 @@ Feature.Build.Title.GameCreationDone,게임 제작 완료
 Feature.Build.Title.GamePass,게임패스
 Feature.Build.Title.GenericError,오류 발생
 Feature.Build.Title.GetUsers,사용자 가져오기
+Feature.Build.Title.InsufficientRobuxForModel,Robux가 부족합니다
 Feature.Build.Title.ManagedPricingAcknowledgement,관리형 가격 책정을 켜시겠습니까?
+Feature.Build.Title.Monetization,수익 창출
 Feature.Build.Title.NoMonetizationProducts,게임 내에서 수익을 올리세요
 Feature.Build.Title.NoRobuxForUsage,Build 사용량을 위한 Robux가 남아 있지 않음
 Feature.Build.Title.PickCampaign,기간을 선택하세요.
@@ -3179,6 +3186,7 @@ Feature.Contacts.Message.ContactDiscoverable,"더 쉽게 친구를 만날 수 �
 Feature.Contacts.Message.ContactsSyncWarning,"연락처는 정기적으로 동기화되며, 다른 Roblox 사용자와 일치하는 항목이 저장되어 친구를 찾는 데 도움이 됩니다. 본 기능은 기기 설정 메뉴에서 언제든지 변경할 수 있습니다."
 Feature.Contacts.Message.InviteToRoblox,저와 Roblox 친구가 되어 함께 체험을 만들고 공유하고 탐험해요.
 Feature.Contacts.Message.NoResults,결과가 없습니다.
+Feature.CustomForms.Label.Percent,
 Feature.DeveloperProducts.Label.Product,
 Feature.DisplayName.ErrorMessage.AgedUpNameContainPII,이름에 개인정보가 포함되어 있을 수 있습니다
 Feature.DisplayName.ErrorMessage.AgedUpNameHasChanged,지난 7일 동안 이름을 변경한 적이 있습니다
@@ -3729,6 +3737,7 @@ Feature.Moments.Action.ShowDetails,세부 정보 표시
 Feature.Moments.Action.ShowMore,
 Feature.Moments.Action.TrimVideo,동영상 잘라내기
 Feature.Moments.Action.TryAgain,
+Feature.Moments.Body.EDPMomentIPReportInstructions,이 모멘트에서 지식재산권 위반을 신고하려면 게임 세부 정보 페이지로 이동하세요.
 Feature.Moments.Description.CommunityStandards,허용되는 표현과 금지되는 표현에 대한 자세한 내용은 커뮤니티 규정을 확인하세요.
 Feature.Moments.Description.EmptyCapturesLibrary,내 캡처가 표시되는 곳입니다.
 Feature.Moments.Description.GenerateTextFeedbackDisclosure,AI가 생성했습니다. 게시하기 전에 검토하세요. 게시된 내용에 대한 책임은 사용자에게 있습니다.
@@ -3857,12 +3866,14 @@ Feature.Moments.Label.WriteComment,코멘트를 남기세요
 Feature.Moments.Title.Comments,코멘트
 Feature.Moments.Title.CommentsWithCappedCount,코멘트 {count}개 이상
 Feature.Moments.Title.CommentsWithCount,코멘트 {count}개
+Feature.Moments.Title.EDPMomentIPReportInstructions,게임 세부 정보 페이지에서 신고하기
 Feature.Moments.Title.GenerateTextFeedbackReason,어떤 문제가 생겼나요?
 Feature.Moments.Title.GenerateTextOptions,
 Feature.Moments.Title.LeaveMomentCreation,모멘트 만들기를 종료할까요?
 Feature.Moments.Title.MomentRemoved,
-Feature.Moments.Title.PostInsights,페이지 헤더 제목
+Feature.Moments.Title.PostInsights,게시물 인사이트
 Feature.Moments.Title.ReportPost,게시물 신고
+Feature.Moments.Title.UnfollowConfirmationDialog,@{username} 님을 언팔로우하시겠어요?
 Feature.Moments.Tooltip.Creation,체험에 참여하는 모든 사람이 내 모멘트를 볼 수 있습니다.
 Feature.Moments.Tooltip.PostInsightsBody,"조회수, 시청 시간, 그리고 모멘트에 대한 오디언스의 반응을 확인해 보세요."
 Feature.Moments.Tooltip.PostInsightsTitle,모멘트 인사이트를 확인하세요
@@ -4832,7 +4843,7 @@ IAPExperience.InsufficientRobux.Text.CurrentBalance,
 IAPExperience.InsufficientRobux.Text.DontHaveEnough,Robux가 부족해 이 아이템을 구매할 수 없습니다.
 IAPExperience.InsufficientRobux.Text.MissingRobux,
 IAPExperience.InsufficientRobux.Text.YouNeed,{robux}가 더 필요합니다. Robux 패키지를 추가로 구매한 후 체험으로 돌아오세요.
-IAPExperience.InsufficientRobux.Title.InsufficientRobux,Robux가 부족합니다
+IAPExperience.InsufficientRobux.Title.InsufficientRobux,
 IAPExperience.LeaveRoblox.Action.Cancel,
 IAPExperience.LeaveRoblox.Action.Continue,
 IAPExperience.LeaveRoblox.Text.ExternalWebsiteWarning,'계속'을 클릭하면 Roblox가 소유하거나 운영하는 웹사이트가 아닌 다른 페이지로 이동하게 됩니다. 해당 웹사이트에서는 다른 개인정보 처리방침이 적용될 수 있습니다.

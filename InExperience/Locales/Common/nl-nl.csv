@@ -2229,6 +2229,7 @@ Feature.Build.Label.DeveloperProductDescription,Beschrijving: {DESCRIPTION}
 Feature.Build.Label.DeveloperProductName,Naam: '{NAME}'
 Feature.Build.Label.DeveloperProductPrice,Prijs: {PRICE} Robux
 Feature.Build.Label.DeveloperProductPriceUnavailable,?
+Feature.Build.Label.DeveloperProducts,Ontwikkelaarsproducten
 Feature.Build.Label.Done,
 Feature.Build.Label.EasyPerformanceReport,Eenvoudig prestatierapport
 Feature.Build.Label.Error,
@@ -2439,6 +2440,7 @@ Feature.Build.Message.NoAssetsFound,Geen assets gevonden.
 Feature.Build.Message.NoCapturesAvailable,
 Feature.Build.Message.NoDescriptionProvided,Geen beschrijving verstrekt.
 Feature.Build.Message.NoFriendsToAdd,Je hebt nog geen vrienden die je kunt uitnodigen. Leg eerst contact met mensen op Roblox.
+Feature.Build.Message.NoGamesYet,Nog geen games.
 Feature.Build.Message.NoResults,
 Feature.Build.Message.NoSearchResultsFound,Geen zoekresultaten gevonden
 Feature.Build.Message.NoVersionHistory,Nog geen versiegeschiedenis.
@@ -2514,7 +2516,9 @@ Feature.Build.Title.GameCreationDone,Spel gecreëerd
 Feature.Build.Title.GamePass,Game Pass
 Feature.Build.Title.GenericError,
 Feature.Build.Title.GetUsers,Gebruikers ophalen
+Feature.Build.Title.InsufficientRobuxForModel,Je hebt niet genoeg Robux
 Feature.Build.Title.ManagedPricingAcknowledgement,Beheerde prijzen inschakelen?
+Feature.Build.Title.Monetization,Monetisatie
 Feature.Build.Title.NoMonetizationProducts,Begin met verdienen in je spel
 Feature.Build.Title.NoRobuxForUsage,Geen Robux meer over voor Build-tegoed
 Feature.Build.Title.PickCampaign,Kies een lengte
@@ -3161,6 +3165,7 @@ Feature.Contacts.Message.ContactDiscoverable,"Om je te helpen vrienden te maken,
 Feature.Contacts.Message.ContactsSyncWarning,Je contactpersonen worden regelmatig gesynchroniseerd en matches met andere Roblox-gebruikers worden opgeslagen om je te helpen vrienden te vinden. Je kunt dit op elk moment beheren in de apparaatinstellingen.
 Feature.Contacts.Message.InviteToRoblox,"Voeg me als vriend toe op Roblox, zodat we samen ervaringen kunnen creëren, delen en verkennen."
 Feature.Contacts.Message.NoResults,Geen resultaten.
+Feature.CustomForms.Label.Percent,
 Feature.DeveloperProducts.Label.Product,
 Feature.DisplayName.ErrorMessage.AgedUpNameContainPII,Naam kan persoonlijke gegevens bevatten
 Feature.DisplayName.ErrorMessage.AgedUpNameHasChanged,Je naam is in de afgelopen zeven dagen al gewijzigd
@@ -3710,6 +3715,7 @@ Feature.Moments.Action.ShowDetails,Details weergeven
 Feature.Moments.Action.ShowMore,
 Feature.Moments.Action.TrimVideo,Video inkorten
 Feature.Moments.Action.TryAgain,Nog een keer proberen
+Feature.Moments.Body.EDPMomentIPReportInstructions,Ga naar de detailpagina van de game om een IP-overtreding in dit Moment te melden.
 Feature.Moments.Description.CommunityStandards,Lees de Communityrichtlijnen voor meer informatie over wat je wel en niet mag zeggen.
 Feature.Moments.Description.EmptyCapturesLibrary,Hier komen je opnames te staan.
 Feature.Moments.Description.GenerateTextFeedbackDisclosure,Door AI gegenereerd. Controleer voordat je plaatst — jij bent verantwoordelijk voor wat er wordt gepubliceerd.
@@ -3838,11 +3844,12 @@ Feature.Moments.Label.WriteComment,Schrijf een reactie
 Feature.Moments.Title.Comments,
 Feature.Moments.Title.CommentsWithCappedCount,{count}+ reacties
 Feature.Moments.Title.CommentsWithCount,{count} reacties
+Feature.Moments.Title.EDPMomentIPReportInstructions,Melden op de detailpagina van de game
 Feature.Moments.Title.GenerateTextFeedbackReason,Wat is er misgegaan?
 Feature.Moments.Title.GenerateTextOptions,
 Feature.Moments.Title.LeaveMomentCreation,Moment maken afsluiten?
 Feature.Moments.Title.MomentRemoved,
-Feature.Moments.Title.PostInsights,Titel van paginakoptekst
+Feature.Moments.Title.PostInsights,Postinzichten
 Feature.Moments.Title.ReportPost,Post melden
 Feature.Moments.Tooltip.Creation,Iedereen in de ervaring kan je momenten zien.
 Feature.Moments.Tooltip.PostInsightsBody,"Bekijk het aantal weergaven, de kijktijd en hoe het Moment bij je doelgroep is overgekomen."

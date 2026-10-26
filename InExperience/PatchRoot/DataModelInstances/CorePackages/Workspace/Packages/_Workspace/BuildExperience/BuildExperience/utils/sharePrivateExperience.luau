@@ -4,20 +4,22 @@ local Default = require(Parent.ExternalContentSharingProtocol).ExternalContentSh
 local UniversalShareSheet = require(Parent.ShareSheet).UniversalShareSheet
 local SharedFlagsModule = require(Parent.SharedFlags)
 local CreateExperienceShareLinkModule = require(BuildExperience.utils.createExperienceShareLink)
+local FFlagBuildShareSheetFriendsSortAllModule = require(BuildExperience.Flags.FFlagBuildShareSheetFriendsSortAll)
 local FFlagEnableShareSheet = SharedFlagsModule.FFlagEnableShareSheet
 local IsSubjectToDesktopPoliciesFunction = SharedFlagsModule.isSubjectToDesktopPolicies
 
 return function(p1)
-	-- upvalues: CreateExperienceShareLinkModule (copy), FFlagEnableShareSheet (copy), UniversalShareSheet (copy), IsSubjectToDesktopPoliciesFunction (copy), Default (copy)
+	-- upvalues: CreateExperienceShareLinkModule (copy), FFlagEnableShareSheet (copy), UniversalShareSheet (copy), FFlagBuildShareSheetFriendsSortAllModule (copy), IsSubjectToDesktopPoliciesFunction (copy), Default (copy)
 	return CreateExperienceShareLinkModule(p1):andThen(function(Result)
-		-- upvalues: FFlagEnableShareSheet (upval), UniversalShareSheet (upval), IsSubjectToDesktopPoliciesFunction (upval), Default (upval)
+		-- upvalues: FFlagEnableShareSheet (upval), UniversalShareSheet (upval), FFlagBuildShareSheetFriendsSortAllModule (upval), IsSubjectToDesktopPoliciesFunction (upval), Default (upval)
 		if Result == nil then
 			error("sharePrivateExperience: no share link returned")
 		end
 		if FFlagEnableShareSheet then
 			UniversalShareSheet.show({
 				context = "BuildExperiencePrivateInvitesShareLink",
-				url = Result
+				url = Result,
+				recipientSource = if FFlagBuildShareSheetFriendsSortAllModule then UniversalShareSheet.RecipientSource.OneToOneFriends else nil
 			})
 			
 			return nil

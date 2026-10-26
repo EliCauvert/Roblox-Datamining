@@ -12,29 +12,26 @@ local DisclosureButtonListenerComponentModule = require(Parent.DisclosureButtonL
 local AdsInteractivityControlsModule = require(Parent.AdsInteractivityControls)
 local LocalizationProvider = require(Parent1.Localization).LocalizationProvider
 local FoundationProvider = FoundationModule.FoundationProvider
-local AdsInteractivityControlsFixStyleLink = game:DefineFastFlag("AdsInteractivityControlsFixStyleLink", false)
 
 local function initializeImmersiveAds()
-	-- upvalues: CoreGui (copy), AdService (copy), RoactModule (copy), AdsInteractivityControlsModule (copy), AdsInteractivityControlsFixStyleLink (copy)
+	-- upvalues: CoreGui (copy), AdService (copy), RoactModule (copy), AdsInteractivityControlsModule (copy)
 	local AdGuiInteractivityControls = Instance.new("Folder")
 	AdGuiInteractivityControls.Name = "AdGuiInteractivityControls"
 	AdGuiInteractivityControls.Parent = CoreGui
 	local t = {}
 	AdService.adGuiRegisterUI:Connect(function(AdGui)
-		-- upvalues: t (copy), RoactModule (upval), AdsInteractivityControlsModule (upval), AdsInteractivityControlsFixStyleLink (upval), AdGuiInteractivityControls (copy)
+		-- upvalues: t (copy), RoactModule (upval), AdsInteractivityControlsModule (upval), AdGuiInteractivityControls (copy)
 		if not AdGui:IsA("AdGui") then return end
-		if t[AdGui] then return end
-		local Element = RoactModule.createElement(AdsInteractivityControlsModule, { adGui = AdGui })
-		
-		if AdsInteractivityControlsFixStyleLink then
-			Element = RoactModule.createElement("Folder", nil, Element)
+		if not t[AdGui] then
+			t[AdGui] = RoactModule.mount(RoactModule.createElement("Folder", nil, (RoactModule.createElement(AdsInteractivityControlsModule, { adGui = AdGui }))), AdGuiInteractivityControls, "AdsInteractivityControls")
+			AdGui.Destroying:Connect(function()
+				-- upvalues: RoactModule (upval), t (upval), AdGui (copy)
+				RoactModule.unmount(t[AdGui])
+				t[AdGui] = nil
+			end)
+			
+			return
 		end
-		t[AdGui] = RoactModule.mount(Element, AdGuiInteractivityControls, "AdsInteractivityControls")
-		AdGui.Destroying:Connect(function()
-			-- upvalues: RoactModule (upval), t (upval), AdGui (copy)
-			RoactModule.unmount(t[AdGui])
-			t[AdGui] = nil
-		end)
 	end)
 	AdService:SetAdGuiInteractivityHandlerInitialized()
 end

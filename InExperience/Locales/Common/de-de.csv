@@ -3107,6 +3107,7 @@ Feature.Contacts.Message.ContactDiscoverable,"Um dir dabei zu helfen, Freundscha
 Feature.Contacts.Message.ContactsSyncWarning,"Deine Kontakte werden regelmäßig synchronisiert und Übereinstimmungen mit anderen Roblox-Benutzern werden gespeichert, um dir zu helfen, Freunde zu finden. Du kannst dies jederzeit in deinen Geräteeinstellungen verwalten."
 Feature.Contacts.Message.InviteToRoblox,"Füge mich auf Roblox als Freund hinzu, damit wir gemeinsam Experiences erkunden, erstellen und teilen können."
 Feature.Contacts.Message.NoResults,Keine Ergebnisse.
+Feature.CustomForms.Label.Percent,
 Feature.DeveloperProducts.Label.Product,
 Feature.DisplayName.ErrorMessage.AgedUpNameContainPII,Name könnte private Informationen enthalten
 Feature.DisplayName.ErrorMessage.AgedUpNameHasChanged,Dein Name wurde innerhalb der letzten 7 Tage bereits geändert

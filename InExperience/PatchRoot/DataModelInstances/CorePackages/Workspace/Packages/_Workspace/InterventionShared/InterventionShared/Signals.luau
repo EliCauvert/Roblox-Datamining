@@ -3,5 +3,6 @@
 	dictationSafetyReminderSignal = require(script.dictationSafetyReminderSignal),
 	experienceChatInterventionShownSignal = require(script.experienceChatInterventionShownSignal),
 	interventionTreatmentShownSignal = require(script.interventionTreatmentShownSignal),
-	partyChatTimeoutReceivedSignal = require(script.partyChatTimeoutReceivedSignal)
+	partyChatTimeoutReceivedSignal = require(script.partyChatTimeoutReceivedSignal),
+	voiceInterventionReceivedSignal = require(script.voiceInterventionReceivedSignal)
 }

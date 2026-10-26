@@ -17,7 +17,6 @@ local Game1 = require(Parent.MockableProxyServices).game
 local WaitProxyFunction = require(Parent.MockableProxyServices).waitProxy
 local SettingsProxyFunction = require(Parent.MockableProxyServices).settingsProxy
 game:DefineFastInt("FPSAwareSplashScreenTimeout", 30)
-local ExperienceLoadingScreenFixStyleLink = game:DefineFastFlag("ExperienceLoadingScreenFixStyleLink", false)
 local UIBloxModule = require(Parent.UIBlox)
 UIBloxModule.init(require(Parent.CoreScriptsInitializer).UIBloxInGameConfig)
 local Constants = UIBloxModule.App.Style.Constants
@@ -98,8 +97,8 @@ end
 
 local _ = nil
 
-local function v25(PlaceId, p1)
-	-- upvalues: GenerateDevGUIBlackoutCurtain (copy), Parent (copy), LoadingScreenReducerModule (copy), LoadingScreenModule (copy), UiModeStyleProvider (copy), ColorMode (copy), Constants (copy), ExperienceLoadingScreenFixStyleLink (copy), CoreGui (copy), RunService (copy), WaitProxyFunction (copy), SplashScreenManager (copy), ExperienceLoadingScript (copy), Players (copy), Game1 (copy), VRService (copy), IsVRAppBuildFunction (copy), FFlagEnableTiltLoadingScreen (copy), ReplicatedFirst (copy), LoggingProtocolModule (copy), FFlagLoadingScreenMilestones (copy), LoadingScreenMilestonesModule (copy), FFlagTiltLoadingScreenEnterExitHold (copy), mountTiltLoadingScreen (copy), AbortReason (copy), v25 (ref), SettingsProxyFunction (copy)
+local function v24(PlaceId, p1)
+	-- upvalues: GenerateDevGUIBlackoutCurtain (copy), Parent (copy), LoadingScreenReducerModule (copy), LoadingScreenModule (copy), UiModeStyleProvider (copy), ColorMode (copy), Constants (copy), CoreGui (copy), RunService (copy), WaitProxyFunction (copy), SplashScreenManager (copy), ExperienceLoadingScript (copy), Players (copy), Game1 (copy), VRService (copy), IsVRAppBuildFunction (copy), FFlagEnableTiltLoadingScreen (copy), ReplicatedFirst (copy), LoggingProtocolModule (copy), FFlagLoadingScreenMilestones (copy), LoadingScreenMilestonesModule (copy), FFlagTiltLoadingScreenEnterExitHold (copy), mountTiltLoadingScreen (copy), AbortReason (copy), v24 (ref), SettingsProxyFunction (copy)
 	local Flag = true
 	local Flag1 = false
 	local Flag2 = false
@@ -117,11 +116,11 @@ local function v25(PlaceId, p1)
 		end
 	end
 	
-	local function v38(PlaceId)
-		-- upvalues: RoactModule (ref), Parent (upval), LoadingScreenReducerModule (upval), LoadingScreenModule (upval), UiModeStyleProvider (upval), ColorMode (upval), Constants (upval), ExperienceLoadingScreenFixStyleLink (upval), CoreGui (upval), RunService (upval), DevGUIBlackoutCurtain (ref)
+	local function v37(PlaceId)
+		-- upvalues: RoactModule (ref), Parent (upval), LoadingScreenReducerModule (upval), LoadingScreenModule (upval), UiModeStyleProvider (upval), ColorMode (upval), Constants (upval), CoreGui (upval), RunService (upval), DevGUIBlackoutCurtain (ref)
 		RoactModule = require(Parent.Roact)
 		local RoduxModule = require(Parent.Rodux)
-		local Element = RoactModule.createElement(require(Parent.RoactRodux).StoreProvider, {
+		local RobloxLoadingGUI = RoactModule.mount(RoactModule.createElement("Folder", nil, (RoactModule.createElement(require(Parent.RoactRodux).StoreProvider, {
 			store = RoduxModule.Store.new(LoadingScreenReducerModule, {}, { RoduxModule.thunkMiddleware })
 		}, {
 			RoactModule.createElement(UiModeStyleProvider, {
@@ -132,12 +131,7 @@ local function v25(PlaceId, p1)
 			}, {
 				loadingScreenUI = RoactModule.createElement(LoadingScreenModule, { placeId = PlaceId })
 			})
-		})
-		
-		if ExperienceLoadingScreenFixStyleLink then
-			Element = RoactModule.createElement("Folder", nil, Element)
-		end
-		local RobloxLoadingGUI = RoactModule.mount(Element, CoreGui, "RobloxLoadingGUI")
+		}))), CoreGui, "RobloxLoadingGUI")
 		RunService.Heartbeat:Wait()
 		DevGUIBlackoutCurtain.Enabled = false
 		
@@ -156,7 +150,7 @@ local function v25(PlaceId, p1)
 		end
 	end
 	
-	local function v40(p2: number)
+	local function v39(p2: number)
 		-- upvalues: Flag (ref), RoactModule (ref), WaitProxyFunction (upval), v1 (ref), SplashScreenManager (upval), Callback3 (ref), DevGUIBlackoutCurtain (ref), ExperienceLoadingScript (upval)
 		Flag = false
 		
@@ -245,7 +239,7 @@ local function v25(PlaceId, p1)
 	end
 	
 	if VRService.VREnabled or IsVRAppBuildFunction() then
-		v40(p1)
+		v39(p1)
 	elseif FFlagEnableTiltLoadingScreen then
 		if ReplicatedFirst:IsDefaultLoadingGuiRemoved() then
 			if DevGUIBlackoutCurtain then
@@ -280,7 +274,7 @@ local function v25(PlaceId, p1)
 			end, StartResult)
 			
 			local _ = function()
-				-- upvalues: Flag4 (ref), FFlagLoadingScreenMilestones (upval), StartResult (ref), AbortReason (upval), Connection (ref), DevGUIBlackoutCurtain (ref), MountTiltLoadingScreenResult (copy), v25 (upval), PlaceId (copy), p1 (copy)
+				-- upvalues: Flag4 (ref), FFlagLoadingScreenMilestones (upval), StartResult (ref), AbortReason (upval), Connection (ref), DevGUIBlackoutCurtain (ref), MountTiltLoadingScreenResult (copy), v24 (upval), PlaceId (copy), p1 (copy)
 				if not Flag4 then return end
 				if FFlagLoadingScreenMilestones and StartResult then
 					StartResult.abort(AbortReason.VRHandoff)
@@ -297,11 +291,11 @@ local function v25(PlaceId, p1)
 					DevGUIBlackoutCurtain = nil
 				end
 				MountTiltLoadingScreenResult()
-				v25(PlaceId, p1)
+				v24(PlaceId, p1)
 			end
 			
 			Connection = VRService:GetPropertyChangedSignal("VREnabled"):Connect(function()
-				-- upvalues: VRService (upval), Flag4 (ref), FFlagLoadingScreenMilestones (upval), StartResult (ref), AbortReason (upval), Connection (ref), DevGUIBlackoutCurtain (ref), MountTiltLoadingScreenResult (copy), v25 (upval), PlaceId (copy), p1 (copy)
+				-- upvalues: VRService (upval), Flag4 (ref), FFlagLoadingScreenMilestones (upval), StartResult (ref), AbortReason (upval), Connection (ref), DevGUIBlackoutCurtain (ref), MountTiltLoadingScreenResult (copy), v24 (upval), PlaceId (copy), p1 (copy)
 				if VRService.VREnabled then
 					if not Flag4 then return end
 					if FFlagLoadingScreenMilestones and StartResult then
@@ -319,7 +313,7 @@ local function v25(PlaceId, p1)
 						DevGUIBlackoutCurtain = nil
 					end
 					MountTiltLoadingScreenResult()
-					v25(PlaceId, p1)
+					v24(PlaceId, p1)
 				end
 			end)
 			
@@ -339,7 +333,7 @@ local function v25(PlaceId, p1)
 					DevGUIBlackoutCurtain = nil
 				end
 				MountTiltLoadingScreenResult()
-				v25(PlaceId, p1)
+				v24(PlaceId, p1)
 			end
 			if Flag4 then
 				RunService.Heartbeat:Wait()
@@ -354,12 +348,12 @@ local function v25(PlaceId, p1)
 		local Connection = VRService
 		Connection = Connection:GetPropertyChangedSignal("VREnabled")
 		Connection:Connect(function()
-			-- upvalues: VRService (upval), v40 (copy), p1 (copy)
+			-- upvalues: VRService (upval), v39 (copy), p1 (copy)
 			if VRService.VREnabled then
-				v40(p1)
+				v39(p1)
 			end
 		end)
-		Connection = v38
+		Connection = v37
 		local Flag4 = PlaceId
 		Connection = Connection(Flag4)
 		v1 = Connection
@@ -430,4 +424,4 @@ local function v25(PlaceId, p1)
 	end
 end
 
-return v25
+return v24

@@ -2174,6 +2174,8 @@ Feature.Build.Description.PromoteGamePaid,创建广告，让你的游戏面向�
 Feature.Build.Description.PromoteGameWithAdCampaign,通过为期 {durationDays} 天的广告活动扩大受众群体，让你的游戏被他人发现。
 Feature.Build.Description.RaiseLimitOrWait,提高你的每日 Robux 限额以继续创建，或等待限额在明天重置。
 Feature.Build.Description.RatingAgreement,发布即表示你同意此内容评级准确无误。
+Feature.Build.Description.RequiredRobuxForAdvanced,
+Feature.Build.Description.RequiredRobuxForDefault,
 Feature.Build.Description.RestoreLatest,此版本将成为你的最新发布版本。
 Feature.Build.Description.RevertToVersion,确认以还原上次更改并返回到 {VERSION}。
 Feature.Build.Description.ShareLatest,分享最新版本的变化。
@@ -2421,6 +2423,7 @@ Feature.Build.Message.BuildBusy,Build 忙碌中。请稍后重试。
 Feature.Build.Message.BuildConnectFailed,Build 无法连接。请重试。
 Feature.Build.Message.BuildInternalError,Build 遇到问题。请重试。
 Feature.Build.Message.BuildResponseFailed,Build 无法响应。请重试。
+Feature.Build.Message.BuildSendUnconfirmed,
 Feature.Build.Message.BuildStillWorking,正在处理。在等待期间，你可以离开 App、在 Roblox 中游玩或开始另一个项目。
 Feature.Build.Message.BuildStopped,你已停止 Build。
 Feature.Build.Message.BuildTakingLonger,处理时间过长。你可以继续等待，也可以开始处理其他事项。
@@ -2450,7 +2453,7 @@ Feature.Build.Message.NoAssetsFound,未找到素材。
 Feature.Build.Message.NoCapturesAvailable,无可用截图
 Feature.Build.Message.NoDescriptionProvided,没有提供描述。
 Feature.Build.Message.NoFriendsToAdd,你还没有任何可邀请的好友。请先在 Roblox 上找到要建立联系的人。
-Feature.Build.Message.NoGamesYet,
+Feature.Build.Message.NoGamesYet,暂无游戏。
 Feature.Build.Message.NoResults,
 Feature.Build.Message.NoSearchResultsFound,未找到搜索结果
 Feature.Build.Message.NoVersionHistory,暂无版本历史记录。
@@ -2526,8 +2529,9 @@ Feature.Build.Title.GameCreationDone,游戏创建已完成
 Feature.Build.Title.GamePass,游戏通行证
 Feature.Build.Title.GenericError,出错了
 Feature.Build.Title.GetUsers,获取用户
+Feature.Build.Title.InsufficientRobuxForModel,你的 Robux 不足
 Feature.Build.Title.ManagedPricingAcknowledgement,是否开启托管定价？
-Feature.Build.Title.Monetization,
+Feature.Build.Title.Monetization,收益化
 Feature.Build.Title.NoMonetizationProducts,开始在你的游戏中赚取收入
 Feature.Build.Title.NoRobuxForUsage,没有剩余的 Robux 可用于购买 Build 使用额度
 Feature.Build.Title.PickCampaign,选择时长
@@ -3173,6 +3177,7 @@ Feature.Contacts.Message.ContactDiscoverable,为了帮你找到好友，通讯�
 Feature.Contacts.Message.ContactsSyncWarning,我们会定期更新你的联系人并存储其他匹配的 Roblox 用户，以帮助你找到你的好友。你可以在设备设置中随时管理此选项。
 Feature.Contacts.Message.InviteToRoblox,在 Roblox 上将我添加为好友，和我一起创作、分享并探索体验！
 Feature.Contacts.Message.NoResults,无结果。
+Feature.CustomForms.Label.Percent,
 Feature.DeveloperProducts.Label.Product,
 Feature.DisplayName.ErrorMessage.AgedUpNameContainPII,名称可能包含私人信息
 Feature.DisplayName.ErrorMessage.AgedUpNameHasChanged,过去 7 天内你已更改过你的名称
@@ -3721,7 +3726,7 @@ Feature.Moments.Action.ShowDetails,显示详情
 Feature.Moments.Action.ShowMore,
 Feature.Moments.Action.TrimVideo,裁剪视频
 Feature.Moments.Action.TryAgain,
-Feature.Moments.Body.EDPMomentIPReportInstructions,
+Feature.Moments.Body.EDPMomentIPReportInstructions,要举报此“精彩瞬间”中的知识产权违规行为，请继续前往游戏详情页面。
 Feature.Moments.Description.CommunityStandards,请查看《社区准则》，进一步了解关于言论的规范。
 Feature.Moments.Description.EmptyCapturesLibrary,你的截图将显示在此处。
 Feature.Moments.Description.GenerateTextFeedbackDisclosure,AI 生成的内容。发布前请自行审核，你需要对发布的内容承担责任。
@@ -3850,12 +3855,12 @@ Feature.Moments.Label.WriteComment,留下评论
 Feature.Moments.Title.Comments,评论
 Feature.Moments.Title.CommentsWithCappedCount,超过 {count} 条评论
 Feature.Moments.Title.CommentsWithCount,{count} 条评论
-Feature.Moments.Title.EDPMomentIPReportInstructions,
+Feature.Moments.Title.EDPMomentIPReportInstructions,在游戏详情页面上举报
 Feature.Moments.Title.GenerateTextFeedbackReason,内容有什么问题？
 Feature.Moments.Title.GenerateTextOptions,
 Feature.Moments.Title.LeaveMomentCreation,要离开“精彩瞬间”创建页面吗？
 Feature.Moments.Title.MomentRemoved,精彩瞬间已移除
-Feature.Moments.Title.PostInsights,页面标题
+Feature.Moments.Title.PostInsights,发布洞见
 Feature.Moments.Title.ReportPost,举报帖子
 Feature.Moments.Title.UnfollowConfirmationDialog,
 Feature.Moments.Tooltip.Creation,体验中的每个人都可以查看你的“精彩瞬间”。

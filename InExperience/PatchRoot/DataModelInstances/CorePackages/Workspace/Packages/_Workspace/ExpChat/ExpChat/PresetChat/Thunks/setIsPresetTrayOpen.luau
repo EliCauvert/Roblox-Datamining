@@ -3,8 +3,10 @@ local ExpChat = script:FindFirstAncestor("ExpChat")
 local Parent = ExpChat.Parent
 local ExpChatSharedModule = require(Parent.ExpChatShared)
 local EngineFeaturePresetChatUseExpressionTrayOptionsEndpoint = require(Parent.SharedFlags).EngineFeaturePresetChatUseExpressionTrayOptionsEndpoint
+local ExpChatOpenExpressionTrayExperimentation = require(Parent.SocialExperiments).ExpChatOpenExpressionTrayExperimentation
 local ConstantsModule = require(ExpChat.PresetChat.Constants)
 local _ = require(ExpChat.Stores.GetPresetChatStore.createPresetChatStore)
+local FFlagExpChatOpenExpressionTrayExposureModule = require(ExpChat.Flags.FFlagExpChatOpenExpressionTrayExposure)
 local FFlagExpChatPresetTrayDismissAnalyticsModule = require(ExpChat.Flags.FFlagExpChatPresetTrayDismissAnalytics)
 local EmojiUnicodeToIdModule = require(ExpChat.PresetChat.emojiUnicodeToId)
 
@@ -51,7 +53,7 @@ local function buildPresetTrayItems(CategoryGroups, PresetClickCounts, ViewedGro
 end
 
 return function(p1, IsTrayOpen)
-	-- upvalues: FFlagExpChatPresetTrayDismissAnalyticsModule (copy), ExpChatSharedModule (copy), ConstantsModule (copy), HttpService (copy), buildPresetTrayItems (copy)
+	-- upvalues: FFlagExpChatPresetTrayDismissAnalyticsModule (copy), FFlagExpChatOpenExpressionTrayExposureModule (copy), ExpChatOpenExpressionTrayExperimentation (copy), ExpChatSharedModule (copy), ConstantsModule (copy), HttpService (copy), buildPresetTrayItems (copy)
 	if IsTrayOpen == p1.getIsTrayOpen(false) then return end
 	if FFlagExpChatPresetTrayDismissAnalyticsModule and IsTrayOpen then
 		p1.setPresetClickCounts({})
@@ -59,6 +61,9 @@ return function(p1, IsTrayOpen)
 	end
 	p1.setIsTrayOpen(IsTrayOpen)
 	
+	if FFlagExpChatOpenExpressionTrayExposureModule and IsTrayOpen then
+		ExpChatOpenExpressionTrayExperimentation.logExposure()
+	end
 	if IsTrayOpen then
 		ExpChatSharedModule.Analytics:TelemetryLogEvent(ExpChatSharedModule.Analytics.ExpChatPresetActionConfig, {
 			event_type = ConstantsModule.Analytics.EventTypes.Show,

@@ -5,6 +5,7 @@ local Actions = ExpChat.Actions
 
 return require(Parent.Rodux).createReducer({
 	activated = false,
+	query = "",
 	selectedIndex = 1,
 	autocompleteType = "none",
 	results = {}
@@ -15,7 +16,11 @@ return require(Parent.Rodux).createReducer({
 	end,
 	[require(Actions.AutocompleteDropdownResultsChanged).name] = function(p1, p2)
 		-- upvalues: Dictionary (copy)
-		return Dictionary.join(p1, { selectedIndex = 1, results = p2.results })
+		return Dictionary.join(p1, {
+			selectedIndex = 1,
+			results = p2.results,
+			query = p2.query or ""
+		})
 	end,
 	[require(Actions.AutocompleteDropdownSelectionChanged).name] = function(p1, p2)
 		-- upvalues: Dictionary (copy)
@@ -25,6 +30,7 @@ return require(Parent.Rodux).createReducer({
 		-- upvalues: Dictionary (copy)
 		return if p2.autocompleteType == p1.autocompleteType then p1 else Dictionary.join(p1, {
 			activated = false,
+			query = "",
 			selectedIndex = 1,
 			autocompleteType = p2.autocompleteType,
 			results = {}
@@ -35,6 +41,7 @@ return require(Parent.Rodux).createReducer({
 		return Dictionary.join(p1, {
 			autocompleteType = "none",
 			activated = false,
+			query = "",
 			selectedIndex = 1,
 			results = {}
 		})

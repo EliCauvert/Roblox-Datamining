@@ -3179,6 +3179,7 @@ Feature.Contacts.Message.ContactDiscoverable,"Aby łatwiej było ci odnaleźć z
 Feature.Contacts.Message.ContactsSyncWarning,"Aby pomóc Ci odnaleźć znajomych, regularnie synchronizowane będą Twoje kontakty i przechowywane będą dopasowania do innych użytkowników Robloxa. Możesz to zmienić w dowolnym momencie w ustawieniach urządzenia."
 Feature.Contacts.Message.InviteToRoblox,"Dodaj mnie do znajomych na Robloxie, abyśmy mogli wspólnie tworzyć, udostępniać i poznawać projekty."
 Feature.Contacts.Message.NoResults,Brak wyników.
+Feature.CustomForms.Label.Percent,
 Feature.DeveloperProducts.Label.Product,
 Feature.DisplayName.ErrorMessage.AgedUpNameContainPII,"Możliwe, że nazwa zawiera dane osobowe"
 Feature.DisplayName.ErrorMessage.AgedUpNameHasChanged,Twoja nazwa została już zmieniona w ciągu ostatnich 7 dni
@@ -3728,6 +3729,7 @@ Feature.Moments.Action.ShowDetails,Pokaż szczegóły
 Feature.Moments.Action.ShowMore,
 Feature.Moments.Action.TrimVideo,Przytnij film
 Feature.Moments.Action.TryAgain,
+Feature.Moments.Body.EDPMomentIPReportInstructions,"Aby zgłosić naruszenie praw własności intelektualnej w tym momencie, przejdź do strony szczegółów gry."
 Feature.Moments.Description.CommunityStandards,"Zapoznaj się ze Standardami społeczności, aby uzyskać więcej informacji na temat tego, co można, a czego nie można mówić."
 Feature.Moments.Description.EmptyCapturesLibrary,Tutaj będą pojawiać się Twoje przechwycone elementy.
 Feature.Moments.Description.GenerateTextFeedbackDisclosure,Wygenerowane przez sztuczną inteligencję. Sprawdź przed opublikowaniem – ponosisz odpowiedzialność za publikowane treści.
@@ -3856,11 +3858,12 @@ Feature.Moments.Label.WriteComment,Napisz komentarz
 Feature.Moments.Title.Comments,Komentarze
 Feature.Moments.Title.CommentsWithCappedCount,Liczba komentarzy: ponad {count}
 Feature.Moments.Title.CommentsWithCount,Liczba komentarzy: {count}
+Feature.Moments.Title.EDPMomentIPReportInstructions,Zgłoś na stronie szczegółów gry
 Feature.Moments.Title.GenerateTextFeedbackReason,Co poszło nie tak?
 Feature.Moments.Title.GenerateTextOptions,
 Feature.Moments.Title.LeaveMomentCreation,Wyjść z tworzenia momentu?
 Feature.Moments.Title.MomentRemoved,
-Feature.Moments.Title.PostInsights,Tytuł nagłówka strony
+Feature.Moments.Title.PostInsights,Dane analityczne dotyczące postów
 Feature.Moments.Title.ReportPost,Zgłoś posta
 Feature.Moments.Tooltip.Creation,Wszystkie osoby w tym projekcie mogą wyświetlić Twoje momenty.
 Feature.Moments.Tooltip.PostInsightsBody,"Sprawdź liczbę wyświetleń, czas oglądania i to, jak moment został odebrany przez Twoich odbiorców."

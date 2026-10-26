@@ -1,11 +1,18 @@
 ﻿local InExperienceIntervention = script:FindFirstAncestor("InExperienceIntervention")
 local PartyChatDialogTimeoutConfigModule = require(InExperienceIntervention.InterventionTreatmentConfigs.PartyChatDialogTimeoutConfig)
-local InterventionTreatmentConfigListModule = {
+local VoiceInterventionConfigModule = require(InExperienceIntervention.InterventionTreatmentConfigs.VoiceInterventionConfig)
+local SharedFlagsModule = require(InExperienceIntervention.Parent.SharedFlags)
+local FFlagProactiveVoiceRestrictionsUFR = SharedFlagsModule.FFlagProactiveVoiceRestrictionsUFR
+local FFlagReactiveVoiceRestrictionsUFR = SharedFlagsModule.FFlagReactiveVoiceRestrictionsUFR
+local List = {
 	require(InExperienceIntervention.InterventionTreatmentConfigs.ChatToastNudgeConfig),
 	require(InExperienceIntervention.InterventionTreatmentConfigs.ChatDialogNudgeConfig),
 	(require(InExperienceIntervention.InterventionTreatmentConfigs.ChatTimeoutConfig))
 }
-table.insert(InterventionTreatmentConfigListModule, (require(InExperienceIntervention.InterventionTreatmentConfigs.PartyChatDialogNudgeConfig)))
-table.insert(InterventionTreatmentConfigListModule, PartyChatDialogTimeoutConfigModule)
+table.insert(List, (require(InExperienceIntervention.InterventionTreatmentConfigs.PartyChatDialogNudgeConfig)))
+table.insert(List, PartyChatDialogTimeoutConfigModule)
 
-return InterventionTreatmentConfigListModule
+if FFlagProactiveVoiceRestrictionsUFR and FFlagReactiveVoiceRestrictionsUFR then
+	table.insert(List, VoiceInterventionConfigModule)
+end
+return List

@@ -11,6 +11,8 @@ local Constants = UIBloxModule.App.Style.Constants
 local AppSessionService = require(Parent.RoactServiceTags).AppSessionService
 local RoactServices = require(Parent.RoactServices).RoactServices
 local SetAppLoadedModule = require(AppChat.Actions.SetAppLoaded)
+local GetAppLoadedStoreModule = require(AppChat.Stores.GetAppLoadedStore)
+local FFlagAppChatUseSignalsForAppLoadedModule = require(AppChat.Flags.FFlagAppChatUseSignalsForAppLoaded)
 local EnteredChatFromEntryPointModule = require(AppChat.Actions.EnteredChatFromEntryPoint)
 local InExperienceAppChatContainerModule = require(AppChat.App.InExperienceAppChatContainer)
 local GetAllFriendsAsyncModule = require(AppChat.Conversations.Thunks.getAllFriendsAsync)
@@ -73,7 +75,7 @@ function wrapWithFocusRoot(p1, EventHandlers, p2)
 end
 
 function InExperienceAppChat()
-	-- upvalues: ReactModule (copy), UseDispatchFunction (copy), UseIsAppChatVisibleModule (copy), DebugAppChatDisplayOnJoin (copy), ParentContainerContextModule (copy), GetFFlagAppChatRequestedRouteModule (copy), IsSideSheetEnabledModule (copy), FFlagSideSheetFocusNav (copy), FFlagEnableDrawerAnimatingHook (copy), UseDrawerVisibleFunction (copy), UseDrawerAnimatingFunction (copy), UseParentContainerVisibilitySignalModule (copy), UseAppChatUpdateSessionModule (copy), UsePreventExperienceControlsModule (copy), FFlagAppChatReactiveFeatureRestrictions (copy), UsePartyChatReactiveFeatureRestrictionModule (copy), SetAppLoadedModule (copy), GetAllFriendsAsyncModule (copy), PartyPageCarouselExperimentation (copy), GetLocalUserFriendsCountModule (copy), GetLocalUserFunction (copy), GetFFlagIsSquadEnabledFunction (copy), UseSelectorFunction (copy), FocusNavigationEventNameEnum (copy), InputHandlersModule (copy), UseAppPolicyFunction (copy), FFlagEnableAppChatSnoozeMenuFocus (copy), NotificationSnoozeMenuVisibleSignal (copy), EnteredChatFromEntryPointModule (copy), SocialCommonModule (copy), FFlagExpChatEnableFriendsTab (copy), SquadEventReceiverModule (copy), AppChatPersistentEventReceiversModule (copy), AppChatToastManagerInExpModule (copy), GetFFlagAppChatInExpToastSnoozeMenuDismissFixFunction (copy), UiModeStyleProvider (copy), ColorMode (copy), Constants (copy), DesignTokenProvider (copy), AppChatInExperienceDisplayOrder (copy), SquadOverlayModule (copy), LayerCollectorProvider (copy), ResponsiveModule (copy), RoactServices (copy), AppSessionService (copy), SessionService (copy), InExperienceAppChatContainerModule (copy), OverlayHostModule (copy), FoundationModule (copy)
+	-- upvalues: ReactModule (copy), UseDispatchFunction (copy), UseIsAppChatVisibleModule (copy), DebugAppChatDisplayOnJoin (copy), ParentContainerContextModule (copy), GetFFlagAppChatRequestedRouteModule (copy), IsSideSheetEnabledModule (copy), FFlagSideSheetFocusNav (copy), FFlagEnableDrawerAnimatingHook (copy), UseDrawerVisibleFunction (copy), UseDrawerAnimatingFunction (copy), UseParentContainerVisibilitySignalModule (copy), UseAppChatUpdateSessionModule (copy), UsePreventExperienceControlsModule (copy), FFlagAppChatReactiveFeatureRestrictions (copy), UsePartyChatReactiveFeatureRestrictionModule (copy), FFlagAppChatUseSignalsForAppLoadedModule (copy), GetAppLoadedStoreModule (copy), SetAppLoadedModule (copy), GetAllFriendsAsyncModule (copy), PartyPageCarouselExperimentation (copy), GetLocalUserFriendsCountModule (copy), GetLocalUserFunction (copy), GetFFlagIsSquadEnabledFunction (copy), UseSelectorFunction (copy), FocusNavigationEventNameEnum (copy), InputHandlersModule (copy), UseAppPolicyFunction (copy), FFlagEnableAppChatSnoozeMenuFocus (copy), NotificationSnoozeMenuVisibleSignal (copy), EnteredChatFromEntryPointModule (copy), SocialCommonModule (copy), FFlagExpChatEnableFriendsTab (copy), SquadEventReceiverModule (copy), AppChatPersistentEventReceiversModule (copy), AppChatToastManagerInExpModule (copy), GetFFlagAppChatInExpToastSnoozeMenuDismissFixFunction (copy), UiModeStyleProvider (copy), ColorMode (copy), Constants (copy), DesignTokenProvider (copy), AppChatInExperienceDisplayOrder (copy), SquadOverlayModule (copy), LayerCollectorProvider (copy), ResponsiveModule (copy), RoactServices (copy), AppSessionService (copy), SessionService (copy), InExperienceAppChatContainerModule (copy), OverlayHostModule (copy), FoundationModule (copy)
 	local UseRefResult = ReactModule.useRef(nil)
 	local UseDispatchResult = UseDispatchFunction()
 	local UseIsAppChatVisibleModuleResult, UseIsAppChatVisibleModuleResult2 = UseIsAppChatVisibleModule(DebugAppChatDisplayOnJoin)
@@ -109,9 +111,13 @@ function InExperienceAppChat()
 		UsePartyChatReactiveFeatureRestrictionModule(UseIsAppChatVisibleModuleResult)
 	end
 	ReactModule.useEffect(function()
-		-- upvalues: UseIsAppChatVisibleModuleResult (copy), UseDispatchResult (copy), SetAppLoadedModule (upval), GetAllFriendsAsyncModule (upval), PartyPageCarouselExperimentation (upval), GetLocalUserFriendsCountModule (upval)
+		-- upvalues: UseIsAppChatVisibleModuleResult (copy), FFlagAppChatUseSignalsForAppLoadedModule (upval), GetAppLoadedStoreModule (upval), UseDispatchResult (copy), SetAppLoadedModule (upval), GetAllFriendsAsyncModule (upval), PartyPageCarouselExperimentation (upval), GetLocalUserFriendsCountModule (upval)
 		if UseIsAppChatVisibleModuleResult then
-			UseDispatchResult(SetAppLoadedModule(true))
+			if FFlagAppChatUseSignalsForAppLoadedModule then
+				GetAppLoadedStoreModule(false).setAppLoaded(true)
+			else
+				UseDispatchResult(SetAppLoadedModule(true))
+			end
 			UseDispatchResult(GetAllFriendsAsyncModule(true))
 			
 			if PartyPageCarouselExperimentation.getPartyPageCarouselEnabled() then

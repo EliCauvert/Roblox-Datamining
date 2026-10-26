@@ -2247,6 +2247,7 @@ Feature.Build.Label.DeveloperProductDescription,Mô tả: {DESCRIPTION}
 Feature.Build.Label.DeveloperProductName,"Tên: ""{NAME}"""
 Feature.Build.Label.DeveloperProductPrice,Giá: {PRICE} Robux
 Feature.Build.Label.DeveloperProductPriceUnavailable,?
+Feature.Build.Label.DeveloperProducts,Sản phẩm của nhà phát triển
 Feature.Build.Label.Done,Hoàn tất
 Feature.Build.Label.EasyPerformanceReport,Báo cáo hiệu suất dễ dàng
 Feature.Build.Label.Error,
@@ -2457,6 +2458,7 @@ Feature.Build.Message.NoAssetsFound,Không tìm thấy tài sản nào.
 Feature.Build.Message.NoCapturesAvailable,Không có ảnh chụp nào
 Feature.Build.Message.NoDescriptionProvided,Không có mô tả nào được cung cấp.
 Feature.Build.Message.NoFriendsToAdd,Bạn chưa có bạn bè để mời. Trước tiên bạn cần tìm người để kết bạn trên Roblox.
+Feature.Build.Message.NoGamesYet,Chưa có trò chơi nào.
 Feature.Build.Message.NoResults,
 Feature.Build.Message.NoSearchResultsFound,Không tìm thấy kết quả tìm kiếm
 Feature.Build.Message.NoVersionHistory,Chưa có lịch sử phiên bản.
@@ -2522,7 +2524,7 @@ Feature.Build.Title.ChooseModel,Chọn trợ lý Tạo dựng
 Feature.Build.Title.Content,Nội dung
 Feature.Build.Title.CreateYourAd,Tạo quảng cáo của bạn
 Feature.Build.Title.DailyRobuxReached,Đã dùng hết hạn mức Robux hằng ngày
-Feature.Build.Title.DeveloperProduct,Sản phẩm của nhà phát triển
+Feature.Build.Title.DeveloperProduct,
 Feature.Build.Title.EditDeveloperProduct,Chỉnh sửa sản phẩm
 Feature.Build.Title.ExperienceAudience,Đối tượng của trải nghiệm
 Feature.Build.Title.FreeLimitReached,Bạn đã đạt đến giới hạn sử dụng miễn phí
@@ -2533,6 +2535,7 @@ Feature.Build.Title.GamePass,Vé trò chơi
 Feature.Build.Title.GenericError,Đã xảy ra lỗi
 Feature.Build.Title.GetUsers,Thu hút người dùng
 Feature.Build.Title.ManagedPricingAcknowledgement,Mở chế độ Giá được quản lý?
+Feature.Build.Title.Monetization,Kiếm tiền
 Feature.Build.Title.NoMonetizationProducts,Bắt đầu kiếm tiền trong trò chơi của bạn
 Feature.Build.Title.NoRobuxForUsage,Không còn Robux để sử dụng Build
 Feature.Build.Title.PickCampaign,Chọn thời lượng
@@ -3179,6 +3182,7 @@ Feature.Contacts.Message.ContactDiscoverable,"Để giúp bạn kết bạn, ng�
 Feature.Contacts.Message.ContactsSyncWarning,Danh bạ của bạn sẽ được đồng bộ hóa thường xuyên và các kết quả trùng khớp với người dùng Roblox khác sẽ được lưu trữ để giúp bạn tìm bạn bè. Quản lý tùy chọn này bất cứ lúc nào trong cài đặt thiết bị.
 Feature.Contacts.Message.InviteToRoblox,"Kết bạn với mình trên Roblox để chúng ta cùng nhau sáng tạo, chia sẻ và khám phá các trải nghiệm nhé."
 Feature.Contacts.Message.NoResults,Không có kết quả.
+Feature.CustomForms.Label.Percent,
 Feature.DeveloperProducts.Label.Product,Sản phẩm
 Feature.DisplayName.ErrorMessage.AgedUpNameContainPII,Tên có thể chứa thông tin cá nhân
 Feature.DisplayName.ErrorMessage.AgedUpNameHasChanged,Tên của bạn đã được thay đổi trong 7 ngày qua
@@ -3728,6 +3732,7 @@ Feature.Moments.Action.ShowDetails,Hiển thị chi tiết
 Feature.Moments.Action.ShowMore,
 Feature.Moments.Action.TrimVideo,Cắt video
 Feature.Moments.Action.TryAgain,
+Feature.Moments.Body.EDPMomentIPReportInstructions,"Để báo cáo trường hợp vi phạm về tài sản trí tuệ trong Khoảnh khắc này, hãy chuyển đến trang chi tiết của trò chơi."
 Feature.Moments.Description.CommunityStandards,Xem Tiêu chuẩn cộng đồng để biết thêm thông tin về những điều bạn được phép và không được phép nói.
 Feature.Moments.Description.EmptyCapturesLibrary,Ảnh chụp/video quay màn hình của bạn sẽ xuất hiện ở đây.
 Feature.Moments.Description.GenerateTextFeedbackDisclosure,Do AI tạo. Vui lòng duyệt lại trước khi đăng. Bạn là người chịu trách nhiệm về nội dung đăng tải.
@@ -3856,11 +3861,12 @@ Feature.Moments.Label.WriteComment,Viết bình luận
 Feature.Moments.Title.Comments,Bình luận
 Feature.Moments.Title.CommentsWithCappedCount,{count}+ bình luận
 Feature.Moments.Title.CommentsWithCount,{count} bình luận
+Feature.Moments.Title.EDPMomentIPReportInstructions,Báo cáo trên trang chi tiết của trò chơi
 Feature.Moments.Title.GenerateTextFeedbackReason,Đã xảy ra vấn đề gì?
 Feature.Moments.Title.GenerateTextOptions,
 Feature.Moments.Title.LeaveMomentCreation,Rời khỏi quá trình tạo Khoảnh khắc?
 Feature.Moments.Title.MomentRemoved,Đã xóa Khoảnh khắc
-Feature.Moments.Title.PostInsights,Tiêu đề ở đầu trang
+Feature.Moments.Title.PostInsights,Thông tin chuyên sâu về bài đăng
 Feature.Moments.Title.ReportPost,Báo cáo bài đăng
 Feature.Moments.Tooltip.Creation,Ai trong trải nghiệm cũng có thể xem Khoảnh khắc của bạn.
 Feature.Moments.Tooltip.PostInsightsBody,"Kiểm tra lượt xem, thời lượng xem và mức độ tương tác của khán giả với Khoảnh khắc của bạn."

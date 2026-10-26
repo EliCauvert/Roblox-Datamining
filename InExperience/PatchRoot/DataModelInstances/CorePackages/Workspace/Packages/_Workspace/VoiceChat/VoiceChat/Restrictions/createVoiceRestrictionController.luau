@@ -1,16 +1,24 @@
 ﻿local Parent = script:FindFirstAncestor("VoiceChat").Parent
 local PromiseModule = require(Parent.Promise)
 local SignalsModule = require(Parent.Signals)
+local config = { UNACKNOWLEDGED = 8, ACKNOWLEDGED = 9 }
+
+local function _(p1): boolean
+	return p1 == 8 or p1 == 9
+end
+
+local _ = function(p1): boolean
+	return p1 == "gameJoin" or (p1 == "expiry" or p1 == "acknowledgement")
+end
 
 return function(p1)
-	-- upvalues: SignalsModule (copy), PromiseModule (copy)
+	-- upvalues: SignalsModule (copy), config (copy), PromiseModule (copy)
 	local Normal, Normal2 = SignalsModule.createSignal("normal")
-	local Count = 0
 	local Flag = false
-	local Promise = nil
 	local v1 = nil
-	local Flag1 = false
 	local DelayedThread = nil
+	local Flag1 = false
+	local Callback = nil
 	
 	local function _()
 		-- upvalues: DelayedThread (ref)
@@ -21,80 +29,130 @@ return function(p1)
 	end
 	
 	local _ = function()
-		-- upvalues: Flag (ref), DelayedThread (ref), Count (ref), Normal2 (copy)
-		if Flag then return end
+		-- upvalues: DelayedThread (ref), Flag1 (ref), Normal2 (copy)
 		if DelayedThread then
 			task.cancel(DelayedThread)
 			DelayedThread = nil
 		end
-		Count += 1
+		Flag1 = false
 		Normal2("hiddenUntilRejoin")
 	end
 	
-	local function scheduleExpiry(Settings)
-		-- upvalues: DelayedThread (ref), Flag (ref), Count (ref), Normal2 (copy)
+	local function scheduleExpiry(Seconds)
+		-- upvalues: DelayedThread (ref), Callback (ref)
 		if DelayedThread then
 			task.cancel(DelayedThread)
 			DelayedThread = nil
 		end
-		local BannedUntil = Settings.bannedUntil
+		local Delay = if Seconds then Seconds - DateTime.now().UnixTimestamp else 0
 		
-		if not BannedUntil then return end
-		local SecondsDelta = BannedUntil.Seconds - DateTime.now().UnixTimestamp
-		
-		if SecondsDelta > 0 then
-			DelayedThread = task.delay(SecondsDelta, function()
-				-- upvalues: DelayedThread (upval), Flag (upval), Count (upval), Normal2 (upval)
+		if Delay > 0 then
+			DelayedThread = task.delay(Delay, function()
+				-- upvalues: DelayedThread (upval), Callback (upval)
 				DelayedThread = nil
-				
-				if Flag then return end
-				if DelayedThread then
-					task.cancel(DelayedThread)
-					DelayedThread = nil
-				end
-				Count += 1
-				Normal2("hiddenUntilRejoin")
+				Callback("expiry")
 			end)
-			
-			return
 		end
 	end
 	
-	local function runCheck(p2, Settings, Callback)
-		-- upvalues: p1 (copy), DelayedThread (ref), Normal2 (copy), scheduleExpiry (copy), Flag1 (ref)
-		local Settings1 = Settings
-		
-		if not Settings1 or Settings1.banReason == nil then
-			Settings1 = p1.getSettings()
+	local _ = function(p2)
+		-- upvalues: Callback (ref)
+		return function()
+			-- upvalues: p2 (copy), Callback (upval)
+			local BannedUntil = p2.bannedUntil
+			
+			if not BannedUntil or BannedUntil.Seconds <= DateTime.now().UnixTimestamp then
+				Callback("acknowledgement")
+			end
 		end
-		if not Callback() then return end
-		if not Settings1 then
-			p1.onError("SettingsUnavailable")
+	end
+	
+	local _ = function(p2, p3)
+		-- upvalues: DelayedThread (ref), Flag1 (ref), Normal2 (copy), p1 (copy)
+		if p2 ~= "expiry" and p2 ~= "acknowledgement" then
+			p1.onError(p3)
 			
 			return
 		end
-		if Settings1.isBanned then
-			Normal2("restricted")
-			scheduleExpiry(Settings1)
-			local InformedOfBan = p2 == "gameJoin" and p1.getInformedOfBan()
-			
-			if not Callback() then return end
-			if InformedOfBan == false then
-				p1.showLegacyRestriction(Settings1, p2, Callback)
+		if DelayedThread then
+			task.cancel(DelayedThread)
+			DelayedThread = nil
+		end
+		Flag1 = false
+		Normal2("hiddenUntilRejoin")
+	end
+	
+	local function showDialogIfUnseen(p2, Settings, Callback1)
+		-- upvalues: config (upval), p1 (copy), Callback (ref)
+		local Trigger = p2.trigger
+		local BanReason = Settings.banReason
+		local IsBanReasonMatch: boolean = BanReason == config.UNACKNOWLEDGED or BanReason == config.ACKNOWLEDGED
+		local Enabled = nil
+		
+		if IsBanReasonMatch and Trigger == "removedFromVoice" then
+			Enabled = true
+		elseif Trigger == "gameJoin" or (Trigger == "expiry" or Trigger == "acknowledgement") then
+			if IsBanReasonMatch then
+				Enabled = Settings.banReason == 9
+			else
+				Enabled = p1.getInformedOfBan()
 				
-				return
+				if not Callback1() then return end
 			end
-			if Flag1 then
-				p1.showLegacyRestriction(Settings1, "micTap", Callback)
-				
-				return
-			end
-			if InformedOfBan == nil then
+		else
+			Enabled = false
+		end
+		local v2: string? = nil
+		
+		if Enabled == false then
+			v2 = Trigger
+		elseif p2.micTapped then
+			v2 = "micTap"
+		else
+			if Enabled == nil then
 				p1.onError("InformedOfBanUnavailable")
+				
+				return
 			end
+			return
+		end
+		if IsBanReasonMatch then
+			p1.showUFRRestriction(Settings, v2, if v2 == "gameJoin" then function()
+				-- upvalues: Settings (copy), Callback (upval)
+				local BannedUntil = Settings.bannedUntil
+				
+				if not BannedUntil or BannedUntil.Seconds <= DateTime.now().UnixTimestamp then
+					Callback("acknowledgement")
+				end
+			end else nil)
+			
 			return
 		else
-			if p2 ~= "micTap" then
+			p1.showLegacyRestriction(Settings, v2, Callback1)
+		end
+	end
+	
+	local function runCheck(p2, p3)
+		-- upvalues: v1 (ref), p1 (copy), DelayedThread (ref), Flag1 (ref), Normal2 (copy), scheduleExpiry (copy), showDialogIfUnseen (copy)
+		local function isCurrent(): boolean
+			-- upvalues: v1 (upval), p2 (copy)
+			return v1 == p2
+		end
+		
+		local Trigger = p2.trigger
+		local Settings = if p3 and p3.banReason ~= nil then p3 else p1.getSettings()
+		
+		if v1 ~= p2 then return end
+		if Settings then
+			if Settings.isBanned then
+				Normal2("restricted")
+				scheduleExpiry(if Settings.bannedUntil then Settings.bannedUntil.Seconds else nil)
+				showDialogIfUnseen(p2, Settings, isCurrent)
+				
+				return
+			end
+			if Flag1 then return end
+			if Trigger == "gameJoin" or Trigger == "removedFromVoice" then
 				p1.onError("PlayerModeratedBadState")
 				
 				return
@@ -103,84 +161,103 @@ return function(p1)
 				task.cancel(DelayedThread)
 				DelayedThread = nil
 			end
+			Flag1 = false
+			Normal2("hiddenUntilRejoin")
+			
+			return
+		else
+			if Trigger ~= "expiry" and Trigger ~= "acknowledgement" then
+				p1.onError("SettingsUnavailable")
+				
+				return
+			end
+			if DelayedThread then
+				task.cancel(DelayedThread)
+				DelayedThread = nil
+			end
+			Flag1 = false
 			Normal2("hiddenUntilRejoin")
 		end
 	end
 	
-	return {
-		getPresentationState = Normal,
-		check = function(p2, p3)
-			-- upvalues: Flag (ref), PromiseModule (upval), DelayedThread (ref), Count (ref), Normal2 (copy), Promise (ref), v1 (ref), Flag1 (ref), runCheck (copy), p1 (copy)
-			if Flag then
-				return PromiseModule.resolve()
-			end
-			if p2 == "expiry" then
-				if not Flag then
+	Callback = function(Trigger, p2)
+		-- upvalues: Flag (ref), PromiseModule (upval), v1 (ref), Flag1 (ref), DelayedThread (ref), Normal2 (copy), runCheck (copy), p1 (copy)
+		if Flag then
+			return PromiseModule.resolve()
+		end
+		local v2 = v1
+		
+		if Trigger == "micTap" and v2 and v2.promise then
+			v2.micTapped = true
+			
+			return v2.promise
+		end
+		if (Trigger == "gameJoin" or Trigger == "removedFromVoice" and not Flag1) and DelayedThread then
+			task.cancel(DelayedThread)
+			DelayedThread = nil
+		end
+		if Trigger == "gameJoin" or Trigger == "expiry" then
+			Flag1 = false
+		end
+		local config = { micTapped = false, trigger = Trigger }
+		v1 = config
+		
+		if Trigger ~= "micTap" then
+			Normal2("restricted")
+		end
+		local Promise = PromiseModule.defer(function(Callback: () -> ())
+			-- upvalues: runCheck (upval), config (copy), p2 (copy)
+			runCheck(config, p2)
+			Callback()
+		end):catch(function()
+			-- upvalues: v1 (upval), config (copy), Trigger (copy), DelayedThread (upval), Flag1 (upval), Normal2 (upval), p1 (upval)
+			if v1 == config then
+				if Trigger == "expiry" or Trigger == "acknowledgement" then
 					if DelayedThread then
 						task.cancel(DelayedThread)
 						DelayedThread = nil
 					end
-					Count += 1
+					Flag1 = false
 					Normal2("hiddenUntilRejoin")
+					
+					return
+				else
+					p1.onError("RestrictionRequestFailed")
 				end
-				return PromiseModule.resolve()
-			elseif p2 == "micTap" and Promise then
-				if v1 == "gameJoin" then
-					Flag1 = true
-				end
-				return Promise
-			else
-				if (p2 == "gameJoin" or p2 == "removedFromVoice") and DelayedThread then
-					task.cancel(DelayedThread)
-					DelayedThread = nil
-				end
-				Flag1 = false
-				Count += 1
-				local Count1: number = Count
+			end
+		end)
+		config.promise = Promise
+		Promise:finally(function()
+			-- upvalues: config (copy)
+			config.promise = nil
+		end)
+		
+		return Promise
+	end
+	
+	return {
+		getPresentationState = Normal,
+		check = Callback,
+		applyUFRTimeout = function(p2)
+			-- upvalues: Flag (ref), v1 (ref), Flag1 (ref), Normal2 (copy), scheduleExpiry (copy)
+			if not Flag then
+				v1 = nil
+				Flag1 = true
+				Normal2("restricted")
+				scheduleExpiry(p2)
 				
-				local function isCurrent(): boolean
-					-- upvalues: Flag (upval), Count (upval), Count1 (copy)
-					return not Flag and Count == Count1
-				end
-				
-				if p2 ~= "micTap" then
-					Normal2("restricted")
-				end
-				local Promise1 = PromiseModule.defer(function(Callback: () -> ())
-					-- upvalues: runCheck (upval), p2 (copy), p3 (copy), isCurrent (copy)
-					runCheck(p2, p3, isCurrent)
-					Callback()
-				end):catch(function()
-					-- upvalues: Flag (upval), Count (upval), Count1 (copy), p1 (upval)
-					if not Flag and Count == Count1 then
-						p1.onError("RestrictionRequestFailed")
-					end
-				end)
-				Promise = Promise1
-				v1 = p2
-				Promise1:finally(function()
-					-- upvalues: Promise (upval), Promise1 (copy), v1 (upval), Flag1 (upval)
-					if Promise == Promise1 then
-						Promise = nil
-						v1 = nil
-						Flag1 = false
-					end
-				end)
-				
-				return Promise1
+				return
 			end
 		end,
 		dispose = function()
-			-- upvalues: Flag (ref), Count (ref), Promise (ref), v1 (ref), Flag1 (ref), DelayedThread (ref), Normal2 (copy)
+			-- upvalues: Flag (ref), v1 (ref), DelayedThread (ref), Normal2 (copy)
 			Flag = true
-			Count += 1
 			
-			if Promise then
-				Promise:cancel()
-				Promise = nil
-				v1 = nil
-				Flag1 = false
+			if v1 and v1.promise then
+				v1.promise:cancel()
 			end
+			v1 = nil
+			
 			if DelayedThread then
 				task.cancel(DelayedThread)
 				DelayedThread = nil

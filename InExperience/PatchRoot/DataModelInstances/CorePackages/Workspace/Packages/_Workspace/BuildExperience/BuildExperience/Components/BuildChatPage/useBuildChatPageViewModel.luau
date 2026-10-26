@@ -16,9 +16,12 @@ local _ = require(BuildExperience.Chat.chatTypes)
 local UseChatPlaytestFooterModule = require(BuildExperience.Chat.useChatPlaytestFooter)
 local FFlagBuildExperienceMonetizationNativeUIModule = require(BuildExperience.Flags.FFlagBuildExperienceMonetizationNativeUI)
 local FFlagBuildExperienceDeveloperProductContextModule = require(BuildExperience.Flags.FFlagBuildExperienceDeveloperProductContext)
+local FFlagBuildRequestPromptChipsOnEditModule = require(BuildExperience.Flags.FFlagBuildRequestPromptChipsOnEdit)
+local UseBuildPromptChipRequestsModule = require(BuildExperience.Chat.useBuildPromptChipRequests)
 local UseBuildPromptDraftModule = require(BuildExperience.Chat.useBuildPromptDraft)
 local UseChatSessionCoreModule = require(BuildExperience.Chat.useChatSessionCore)
 local SendBuildExperienceEventModule = require(BuildExperience.Telemetry.sendBuildExperienceEvent)
+local GetBuildPromptChipsStoreModule = require(BuildExperience.Stores.GetBuildPromptChipsStore)
 local GetBuildOverflowMenuStoreModule = require(BuildExperience.Stores.GetBuildOverflowMenuStore)
 local GetCreatorAgentResumeStoreModule = require(BuildExperience.Stores.GetCreatorAgentResumeStore)
 local _ = require(script.Parent.BuildChatPageView)
@@ -134,7 +137,7 @@ local _ = function(p1, p2)
 end
 
 return function(p1)
-	-- upvalues: UseTokensFunction (copy), useUniverseSummary (copy), GetBuildOverflowMenuStoreModule (copy), GetCreatorAgentResumeStoreModule (copy), ReactModule (copy), FFlagBuildExperienceDontAskAgainPushUpsellModule (copy), BuildAppStorageKeyEngineFeature (copy), BuildAppStorageModule (copy), UserInputService (copy), GuiService (copy), PermissionsProtocol (copy), MessageBusService (copy), RealtimeMessageId (copy), Default (copy), FFlagBuildCheckGamePermissionsModule (copy), UseGamePermissionsModule (copy), FFlagBuildExperienceModelPickerModule (copy), GetBuildModelSelectionStoreModule (copy), CreatorAgentChatModule (copy), FFlagBuildAdUpsellModule (copy), GetAdUpsellEventStoreModule (copy), UseChatSessionCoreModule (copy), UseBuildModelSelectionModule (copy), FFlagBuildExperienceAnalytics (copy), FFlagBuildExperienceMonetizationNativeUIModule (copy), UseBuildPromptDraftModule (copy), FFlagBuildExperienceDeveloperProductContextModule (copy), FFlagBuildExperienceManageDevProductModule (copy), UseChatPlaytestFooterModule (copy), UniverseConfigurationModule (copy), FFlagEnableBuildAdPromotionModule (copy), UseCreatorCreditChatUpsellViewModelModule (copy), GameConfigurationLabelsModule (copy), FFlagBuildExperienceLibrary (copy), getResolvedSessionId (copy), UseAdUpsellChatViewModelModule (copy), config1 (copy), FFlagBuildAgentAdCampaignCardModule (copy), UseAgentAdCampaignChatViewModelModule (copy), config2 (copy), FFlagBuildExperiencePlaytestCardPublishCtaModule (copy), SendBuildExperienceEventModule (copy), FFlagBuildEventsUpdate1Module (copy), config (copy), FFlagBuildExperienceAnswerFormModule (copy)
+	-- upvalues: UseTokensFunction (copy), useUniverseSummary (copy), GetBuildOverflowMenuStoreModule (copy), GetCreatorAgentResumeStoreModule (copy), ReactModule (copy), FFlagBuildExperienceDontAskAgainPushUpsellModule (copy), BuildAppStorageKeyEngineFeature (copy), BuildAppStorageModule (copy), UserInputService (copy), GuiService (copy), PermissionsProtocol (copy), MessageBusService (copy), RealtimeMessageId (copy), Default (copy), FFlagBuildCheckGamePermissionsModule (copy), UseGamePermissionsModule (copy), FFlagBuildExperienceModelPickerModule (copy), GetBuildModelSelectionStoreModule (copy), CreatorAgentChatModule (copy), FFlagBuildAdUpsellModule (copy), GetAdUpsellEventStoreModule (copy), UseChatSessionCoreModule (copy), UseBuildModelSelectionModule (copy), FFlagBuildExperienceAnalytics (copy), FFlagBuildExperienceMonetizationNativeUIModule (copy), UseBuildPromptDraftModule (copy), FFlagBuildExperienceDeveloperProductContextModule (copy), FFlagBuildExperienceManageDevProductModule (copy), UseChatPlaytestFooterModule (copy), FFlagBuildRequestPromptChipsOnEditModule (copy), UseBuildPromptChipRequestsModule (copy), GetBuildPromptChipsStoreModule (copy), UniverseConfigurationModule (copy), FFlagEnableBuildAdPromotionModule (copy), UseCreatorCreditChatUpsellViewModelModule (copy), GameConfigurationLabelsModule (copy), FFlagBuildExperienceLibrary (copy), getResolvedSessionId (copy), UseAdUpsellChatViewModelModule (copy), config1 (copy), FFlagBuildAgentAdCampaignCardModule (copy), UseAgentAdCampaignChatViewModelModule (copy), config2 (copy), FFlagBuildExperiencePlaytestCardPublishCtaModule (copy), SendBuildExperienceEventModule (copy), FFlagBuildEventsUpdate1Module (copy), config (copy), FFlagBuildExperienceAnswerFormModule (copy)
 	local UseTokensResult = UseTokensFunction()
 	local UseUniverseSummaryResult = useUniverseSummary(p1.target.universeId)
 	local BuildOverflowMenuStoreModule = GetBuildOverflowMenuStoreModule()
@@ -366,6 +369,19 @@ return function(p1)
 	local SubagentTaskState = UseChatSessionCoreModuleResult.subagentTaskState
 	local HasTaskGroups: boolean = SubagentTaskState ~= nil and #SubagentTaskState.groups > 0
 	local IsChatEmpty = #UseChatSessionCoreModuleResult.messages == 0
+	local SetComposerText = UseChatSessionCoreModuleResult.setComposerText
+	
+	if FFlagBuildRequestPromptChipsOnEditModule then
+		local UseBuildPromptChipRequestsModuleResult = UseBuildPromptChipRequestsModule(GetBuildPromptChipsStoreModule(), IsChatEmpty)
+		SetComposerText = ReactModule.useCallback(function(p2)
+			-- upvalues: UseChatSessionCoreModuleResult (copy), UseBuildPromptChipRequestsModuleResult (copy)
+			UseChatSessionCoreModuleResult.setComposerText(p2)
+			UseBuildPromptChipRequestsModuleResult(p2)
+		end, {
+			UseChatSessionCoreModuleResult.setComposerText,
+			UseBuildPromptChipRequestsModuleResult
+		})
+	end
 	local Flag = false
 	
 	for _, message in UseChatSessionCoreModuleResult.messages do
@@ -477,7 +493,7 @@ return function(p1)
 	end, { UseResult9, p1.onOpenGetUsersPage }) else nil
 	local UseResult13 = if p1.onOpenGetUsersPage == nil then nil else UseResult12
 	local UseCreatorCreditChatUpsellViewModelModuleResult = UseCreatorCreditChatUpsellViewModelModule({
-		namedTier = if FFlagBuildExperienceModelPickerModule and (UseBuildModelSelectionModuleResult and UseBuildModelSelectionModuleResult.selectedId == "advanced" and (not UseBuildModelSelectionModuleResult.internalTesting or not UseBuildModelSelectionModuleResult.internalTesting.isSelected)) then "advanced" else nil,
+		namedTier = if FFlagBuildExperienceModelPickerModule and UseBuildModelSelectionModuleResult and UseBuildModelSelectionModuleResult.selectedId == "advanced" and (not UseBuildModelSelectionModuleResult.internalTesting or not UseBuildModelSelectionModuleResult.internalTesting.isSelected) then "advanced" else nil,
 		onOpenCreatorCreditPage = UseResult11,
 		outOfCreditsPromptFailureCount = if FFlagBuildExperienceModelPickerModule then if UseChatSessionCoreModuleResult.fundingFailure then UseChatSessionCoreModuleResult.fundingFailure.count else nil else UseStateResult11.count,
 		outOfCreditsPromptFailureReason = if FFlagBuildExperienceModelPickerModule then if UseChatSessionCoreModuleResult.fundingFailure then UseChatSessionCoreModuleResult.fundingFailure.reason else nil else UseStateResult11.reason,
@@ -659,7 +675,7 @@ return function(p1)
 		modelPicker = UseBuildModelSelectionModuleResult,
 		composerText = UseChatSessionCoreModuleResult.composerText,
 		composerErrorText = UseChatSessionCoreModuleResult.composerErrorText,
-		onComposerChanged = UseChatSessionCoreModuleResult.setComposerText,
+		onComposerChanged = SetComposerText,
 		composerImages = UseChatSessionCoreModuleResult.composerImages,
 		onComposerImagesChanged = UseChatSessionCoreModuleResult.setComposerImages,
 		onRetryComposerImage = UseChatSessionCoreModuleResult.retryComposerImage,

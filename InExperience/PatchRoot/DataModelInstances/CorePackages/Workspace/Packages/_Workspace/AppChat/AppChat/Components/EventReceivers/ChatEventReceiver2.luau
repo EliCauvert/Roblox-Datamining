@@ -47,6 +47,9 @@ local UseChatTrustedConnectionsEventsModule = require(AppChat.Components.EventRe
 local GetFFlagDebugUnfilteredThreadsFunction = require(Parent.SharedFlags).getFFlagDebugUnfilteredThreads
 local FFlagAppChatEnableDoubleOptIn = require(Parent.SharedFlags).FFlagAppChatEnableDoubleOptIn
 local FFlagAppChatPresenceStoreMigrationModule = require(AppChat.Flags.FFlagAppChatPresenceStoreMigration)
+local FFlagAppChatUseSignalsForAppLoadedModule = require(AppChat.Flags.FFlagAppChatUseSignalsForAppLoaded)
+local GetAppLoadedStoreModule = require(AppChat.Stores.GetAppLoadedStore)
+local UseSignalStateFunction = require(Parent.SignalsReact).useSignalState
 
 local function chunkAndLogString(Message: string)
 	-- upvalues: AppChatRealtimeChatEventReceiver2 (copy)
@@ -63,7 +66,7 @@ end
 local config = { handlesAppShellNotifications = true }
 
 function ChatEventReceiver2(p1)
-	-- upvalues: UseEffectFunction (copy), AppChatRealtimeChatEventReceiver2 (copy), UseSelectorFunction (copy), CryoModule (copy), UseLocalUserIdFunction (copy), UseIsChatEnabledModule (copy), UseIsGroupChatEnabledModule (copy), UseIsInExperienceModule (copy), UseDispatchFunction (copy), ChangedParticipantsModule (copy), FetchChatMetadataModule (copy), FetchLatestConversationDetailsModule (copy), GetAllFriendsAsyncModule (copy), FFlagAppChatPresenceStoreMigrationModule (copy), GetAllUserPresencesModule (copy), GetNewMessagesFunction (copy), FFlagAppChatPerfTrackingModule (copy), FFlagAppChatMessageTTIMilestonesModule (copy), AppChatPerfTrackerModule (copy), RoduxAliasesModule (copy), ReceivedUserTypingModule (copy), PaginateAndRefreshConversationsModule (copy), RemovedConversationModule (copy), RenamedGroupConversationModule (copy), config (copy), UseRefFunction (copy), UseLocalizationFunction (copy), UseCallbackFunction (copy), RoactNavigationModule (copy), EnumScreensModule (copy), FormFactor (copy), RealtimeDeliveryModule (copy), DependencyArrayFunction (copy), FriendshipDestroyedModule (copy), ConversationModule (copy), CommunicationChannelsTypesModule (copy), ConversationChannelsModule (copy), FriendConversationCreatedModule (copy), UseMemoFunction (copy), GetFFlagDebugUnfilteredThreadsFunction (copy), chunkAndLogString (copy), MultiGetConversationDetailsModule (copy), AppChatNetworkingModule (copy), FFlagAppChatEnableDoubleOptIn (copy), RefreshConversationUnfilteredThreadsDetailsModule (copy), UseChatTrustedConnectionsEventsModule (copy)
+	-- upvalues: UseEffectFunction (copy), AppChatRealtimeChatEventReceiver2 (copy), FFlagAppChatUseSignalsForAppLoadedModule (copy), UseSignalStateFunction (copy), GetAppLoadedStoreModule (copy), UseSelectorFunction (copy), CryoModule (copy), UseLocalUserIdFunction (copy), UseIsChatEnabledModule (copy), UseIsGroupChatEnabledModule (copy), UseIsInExperienceModule (copy), UseDispatchFunction (copy), ChangedParticipantsModule (copy), FetchChatMetadataModule (copy), FetchLatestConversationDetailsModule (copy), GetAllFriendsAsyncModule (copy), FFlagAppChatPresenceStoreMigrationModule (copy), GetAllUserPresencesModule (copy), GetNewMessagesFunction (copy), FFlagAppChatPerfTrackingModule (copy), FFlagAppChatMessageTTIMilestonesModule (copy), AppChatPerfTrackerModule (copy), RoduxAliasesModule (copy), ReceivedUserTypingModule (copy), PaginateAndRefreshConversationsModule (copy), RemovedConversationModule (copy), RenamedGroupConversationModule (copy), config (copy), UseRefFunction (copy), UseLocalizationFunction (copy), UseCallbackFunction (copy), RoactNavigationModule (copy), EnumScreensModule (copy), FormFactor (copy), RealtimeDeliveryModule (copy), DependencyArrayFunction (copy), FriendshipDestroyedModule (copy), ConversationModule (copy), CommunicationChannelsTypesModule (copy), ConversationChannelsModule (copy), FriendConversationCreatedModule (copy), UseMemoFunction (copy), GetFFlagDebugUnfilteredThreadsFunction (copy), chunkAndLogString (copy), MultiGetConversationDetailsModule (copy), AppChatNetworkingModule (copy), FFlagAppChatEnableDoubleOptIn (copy), RefreshConversationUnfilteredThreadsDetailsModule (copy), UseChatTrustedConnectionsEventsModule (copy)
 	UseEffectFunction(function()
 		-- upvalues: AppChatRealtimeChatEventReceiver2 (upval)
 		AppChatRealtimeChatEventReceiver2:info("ChatEventReceiver2 mounted")
@@ -73,38 +76,38 @@ function ChatEventReceiver2(p1)
 			AppChatRealtimeChatEventReceiver2:info("ChatEventReceiver2 unmounted")
 		end
 	end, {})
-	local UseSelectorResult = UseSelectorFunction(function(p2)
+	local UseSignalStateResult = if FFlagAppChatUseSignalsForAppLoadedModule then UseSignalStateFunction(GetAppLoadedStoreModule(false).getAppLoaded) else UseSelectorFunction(function(p2)
 		return p2.ChatAppReducer.AppLoaded
 	end)
-	local UseSelectorResult1 = UseSelectorFunction(function(p2)
+	local UseSelectorResult = UseSelectorFunction(function(p2)
 		return p2.ChatAppReducer.Conversations
 	end)
-	local UseSelectorResult2 = UseSelectorFunction(function(p2)
+	local UseSelectorResult1 = UseSelectorFunction(function(p2)
 		return p2.FormFactor
 	end)
-	local IsEmpty = CryoModule.isEmpty(UseSelectorResult1)
+	local IsEmpty = CryoModule.isEmpty(UseSelectorResult)
 	local UseLocalUserIdResult = UseLocalUserIdFunction()
 	local UseIsChatEnabledModuleResult = UseIsChatEnabledModule()
 	local UseIsGroupChatEnabledModuleResult = UseIsGroupChatEnabledModule()
 	local UseIsInExperienceModuleResult = UseIsInExperienceModule()
 	local UseDispatchResult = UseDispatchFunction()
 	
-	local function v50(p2, p3, p4, p5)
+	local function v52(p2, p3, p4, p5)
 		-- upvalues: UseDispatchResult (copy), ChangedParticipantsModule (upval)
 		UseDispatchResult(ChangedParticipantsModule(p2, p3, p4, p5))
 	end
 	
-	local function v51()
+	local function v53()
 		-- upvalues: UseDispatchResult (copy), FetchChatMetadataModule (upval)
 		return UseDispatchResult(FetchChatMetadataModule())
 	end
 	
-	local function v52(p2)
+	local function v54(p2)
 		-- upvalues: UseDispatchResult (copy), FetchLatestConversationDetailsModule (upval)
 		return UseDispatchResult(FetchLatestConversationDetailsModule(p2))
 	end
 	
-	local function v53()
+	local function v55()
 		-- upvalues: UseDispatchResult (copy), GetAllFriendsAsyncModule (upval)
 		UseDispatchResult(GetAllFriendsAsyncModule())
 	end
@@ -117,7 +120,7 @@ function ChatEventReceiver2(p1)
 		end)
 	end
 	
-	local function v54(p2, p3, p4)
+	local function v56(p2, p3, p4)
 		-- upvalues: UseDispatchResult (copy), GetNewMessagesFunction (upval)
 		return UseDispatchResult(GetNewMessagesFunction(p2, p3, p4))
 	end
@@ -138,27 +141,27 @@ function ChatEventReceiver2(p1)
 		end
 	end
 	
-	local function v56(p2, p3)
+	local function v58(p2, p3)
 		-- upvalues: UseDispatchResult (copy), RoduxAliasesModule (upval)
 		UseDispatchResult(RoduxAliasesModule.Actions.AliasUpdated(p2, p3))
 	end
 	
-	local function v57(p2, p3)
+	local function v59(p2, p3)
 		-- upvalues: UseDispatchResult (copy), ReceivedUserTypingModule (upval)
 		UseDispatchResult(ReceivedUserTypingModule(p2, p3))
 	end
 	
-	local function v58()
+	local function v60()
 		-- upvalues: UseDispatchResult (copy), PaginateAndRefreshConversationsModule (upval)
 		UseDispatchResult(PaginateAndRefreshConversationsModule())
 	end
 	
-	local function v59(p2)
+	local function v61(p2)
 		-- upvalues: UseDispatchResult (copy), RemovedConversationModule (upval)
 		UseDispatchResult(RemovedConversationModule(p2))
 	end
 	
-	local function v60(p2, p3, p4, p5)
+	local function v62(p2, p3, p4, p5)
 		-- upvalues: UseDispatchResult (copy), RenamedGroupConversationModule (upval)
 		UseDispatchResult(RenamedGroupConversationModule(p2, p3, p4, p5))
 	end
@@ -188,32 +191,32 @@ function ChatEventReceiver2(p1)
 		end
 	end, { JoinResult.rnBypassActionSignal, NetworkErrorText })
 	UseEffectFunction(function()
-		-- upvalues: UseIsChatEnabledModuleResult (copy), JoinResult (copy), AppChatRealtimeChatEventReceiver2 (upval), RoactNavigationModule (upval), UseSelectorResult2 (copy), FormFactor (upval), EnumScreensModule (upval)
+		-- upvalues: UseIsChatEnabledModuleResult (copy), JoinResult (copy), AppChatRealtimeChatEventReceiver2 (upval), RoactNavigationModule (upval), UseSelectorResult1 (copy), FormFactor (upval), EnumScreensModule (upval)
 		if not UseIsChatEnabledModuleResult and JoinResult.activeConversationId and JoinResult.rnBypassActionSignal then
 			AppChatRealtimeChatEventReceiver2:debug("Chat is disabled for our user, navigating away from active conversation")
 			JoinResult.rnBypassActionSignal:fire(RoactNavigationModule.Actions.navigate({
-				routeName = UseSelectorResult2 == FormFactor.WIDE and EnumScreensModule.EmptyConversation or EnumScreensModule.ChatLanding
+				routeName = UseSelectorResult1 == FormFactor.WIDE and EnumScreensModule.EmptyConversation or EnumScreensModule.ChatLanding
 			}))
 		end
 	end, {
 		UseIsChatEnabledModuleResult,
-		UseSelectorResult2,
+		UseSelectorResult1,
 		JoinResult.activeConversationId,
 		JoinResult.rnBypassActionSignal
 	})
-	local UseSelectorResultEntry = if JoinResult.activeConversationId then UseSelectorResult1[JoinResult.activeConversationId] else nil
+	local UseSelectorResultEntry = if JoinResult.activeConversationId then UseSelectorResult[JoinResult.activeConversationId] else nil
 	UseEffectFunction(function()
-		-- upvalues: UseIsGroupChatEnabledModuleResult (copy), UseSelectorResultEntry (copy), JoinResult (copy), AppChatRealtimeChatEventReceiver2 (upval), RoactNavigationModule (upval), UseSelectorResult2 (copy), FormFactor (upval), EnumScreensModule (upval)
+		-- upvalues: UseIsGroupChatEnabledModuleResult (copy), UseSelectorResultEntry (copy), JoinResult (copy), AppChatRealtimeChatEventReceiver2 (upval), RoactNavigationModule (upval), UseSelectorResult1 (copy), FormFactor (upval), EnumScreensModule (upval)
 		if not UseIsGroupChatEnabledModuleResult and UseSelectorResultEntry and JoinResult.rnBypassActionSignal and UseSelectorResultEntry.type == "group" then
 			AppChatRealtimeChatEventReceiver2:debug("Group chats are disabled and we are navigated to a group chat. Navigating to ChatLanding")
 			JoinResult.rnBypassActionSignal:fire(RoactNavigationModule.Actions.navigate({
-				routeName = UseSelectorResult2 == FormFactor.WIDE and EnumScreensModule.EmptyConversation or EnumScreensModule.ChatLanding
+				routeName = UseSelectorResult1 == FormFactor.WIDE and EnumScreensModule.EmptyConversation or EnumScreensModule.ChatLanding
 			}))
 		end
 	end, {
 		UseIsGroupChatEnabledModuleResult,
 		UseSelectorResultEntry,
-		UseSelectorResult2,
+		UseSelectorResult1,
 		JoinResult.rnBypassActionSignal
 	})
 	RealtimeDeliveryModule.useRealtimeNamespace("UserTagChangeNotification", function(Player)
@@ -223,9 +226,9 @@ function ChatEventReceiver2(p1)
 		if Player.Type == "UserTagUpdate" then
 			UseDispatchResult(RoduxAliasesModule.Actions.AliasUpdated(tostring(Player.UserId), Player.NewAlias))
 		end
-	end, DependencyArrayFunction(v56))
+	end, DependencyArrayFunction(v58))
 	RealtimeDeliveryModule.useRealtimeNamespace("FriendshipNotifications", function(p2)
-		-- upvalues: AppChatRealtimeChatEventReceiver2 (upval), UseDispatchResult (copy), PaginateAndRefreshConversationsModule (upval), UseLocalUserIdResult (copy), FriendshipDestroyedModule (upval), UseSelectorResultEntry (copy), ConversationModule (upval), CryoModule (upval), UseSelectorResult2 (copy), FormFactor (upval), EnumScreensModule (upval), JoinResult (copy), RoactNavigationModule (upval)
+		-- upvalues: AppChatRealtimeChatEventReceiver2 (upval), UseDispatchResult (copy), PaginateAndRefreshConversationsModule (upval), UseLocalUserIdResult (copy), FriendshipDestroyedModule (upval), UseSelectorResultEntry (copy), ConversationModule (upval), CryoModule (upval), UseSelectorResult1 (copy), FormFactor (upval), EnumScreensModule (upval), JoinResult (copy), RoactNavigationModule (upval)
 		local Type = p2.Type
 		AppChatRealtimeChatEventReceiver2:info("Received FriendshipNotifications notification: {}", Type)
 		
@@ -256,14 +259,14 @@ function ChatEventReceiver2(p1)
 				return p3 == v1
 			end) then
 				JoinResult.rnBypassActionSignal:fire(RoactNavigationModule.Actions.navigate({
-					routeName = if UseSelectorResult2 == FormFactor.WIDE then EnumScreensModule.EmptyConversation else EnumScreensModule.ChatLanding
+					routeName = if UseSelectorResult1 == FormFactor.WIDE then EnumScreensModule.EmptyConversation else EnumScreensModule.ChatLanding
 				}))
 			end
 		end
-	end, DependencyArrayFunction(UseDispatchResult, v58, UseLocalUserIdResult, UseSelectorResult2, UseSelectorResultEntry, JoinResult.rnBypassActionSignal))
+	end, DependencyArrayFunction(UseDispatchResult, v60, UseLocalUserIdResult, UseSelectorResult1, UseSelectorResultEntry, JoinResult.rnBypassActionSignal))
 	local UseCallbackResult2 = UseCallbackFunction(function()
-		-- upvalues: UseSelectorResult (copy), UseDispatchResult (copy), FetchChatMetadataModule (upval), AppChatRealtimeChatEventReceiver2 (upval), PaginateAndRefreshConversationsModule (upval), GetAllFriendsAsyncModule (upval), FFlagAppChatPresenceStoreMigrationModule (upval), Callback (copy)
-		if UseSelectorResult then
+		-- upvalues: UseSignalStateResult (copy), UseDispatchResult (copy), FetchChatMetadataModule (upval), AppChatRealtimeChatEventReceiver2 (upval), PaginateAndRefreshConversationsModule (upval), GetAllFriendsAsyncModule (upval), FFlagAppChatPresenceStoreMigrationModule (upval), Callback (copy)
+		if UseSignalStateResult then
 			UseDispatchResult(FetchChatMetadataModule()):andThen(function(Result)
 				-- upvalues: AppChatRealtimeChatEventReceiver2 (upval), UseDispatchResult (upval), PaginateAndRefreshConversationsModule (upval), GetAllFriendsAsyncModule (upval), FFlagAppChatPresenceStoreMigrationModule (upval), Callback (upval)
 				if Result then
@@ -285,14 +288,14 @@ function ChatEventReceiver2(p1)
 			end)
 		end
 	end, {
-		UseSelectorResult,
-		v58,
-		v53,
+		UseSignalStateResult,
+		v60,
+		v55,
 		Callback,
-		v51
+		v53
 	})
 	RealtimeDeliveryModule.useRealtimeConnectionStateChanged("CommunicationChannels", function(ConnectionState, p2)
-		-- upvalues: AppChatRealtimeChatEventReceiver2 (upval), UseCallbackResult1 (copy), UseSelectorResult (copy), UseCallbackResult2 (copy)
+		-- upvalues: AppChatRealtimeChatEventReceiver2 (upval), UseCallbackResult1 (copy), UseSignalStateResult (copy), UseCallbackResult2 (copy)
 		AppChatRealtimeChatEventReceiver2:info("CommunicationChannels connection state transitioned to {}", (tostring(ConnectionState)))
 		
 		if ConnectionState == Enum.ConnectionState.Disconnected then
@@ -302,12 +305,12 @@ function ChatEventReceiver2(p1)
 			return
 		end
 		if ConnectionState == Enum.ConnectionState.Connected and p2 then
-			AppChatRealtimeChatEventReceiver2:trace("We missed some messages while we were disconnected. The chat app was previously {}", if UseSelectorResult then "loaded" else "unloaded")
+			AppChatRealtimeChatEventReceiver2:trace("We missed some messages while we were disconnected. The chat app was previously {}", if UseSignalStateResult then "loaded" else "unloaded")
 			UseCallbackResult2()
 		end
-	end, DependencyArrayFunction(UseCallbackResult2, UseSelectorResult, UseCallbackResult1))
+	end, DependencyArrayFunction(UseCallbackResult2, UseSignalStateResult, UseCallbackResult1))
 	RealtimeDeliveryModule.useRealtimeNamespace("CommunicationChannels", function(p2)
-		-- upvalues: CommunicationChannelsTypesModule (upval), AppChatRealtimeChatEventReceiver2 (upval), UseCallbackResult (copy), UseDispatchResult (copy), RemovedConversationModule (upval), JoinResult (copy), UseSelectorResult2 (copy), FormFactor (upval), EnumScreensModule (upval), RoactNavigationModule (upval), UseLocalUserIdResult (copy), RemovedFromConversationToastTitle (copy), FetchLatestConversationDetailsModule (upval), RenamedGroupConversationModule (upval), ChangedParticipantsModule (upval), IsEmpty (copy), ConversationChannelsModule (upval), FriendConversationCreatedModule (upval), FFlagAppChatPerfTrackingModule (upval), restartMessageReceiveTracking (copy), GetNewMessagesFunction (upval), ReceivedUserTypingModule (upval)
+		-- upvalues: CommunicationChannelsTypesModule (upval), AppChatRealtimeChatEventReceiver2 (upval), UseCallbackResult (copy), UseDispatchResult (copy), RemovedConversationModule (upval), JoinResult (copy), UseSelectorResult1 (copy), FormFactor (upval), EnumScreensModule (upval), RoactNavigationModule (upval), UseLocalUserIdResult (copy), RemovedFromConversationToastTitle (copy), FetchLatestConversationDetailsModule (upval), RenamedGroupConversationModule (upval), ChangedParticipantsModule (upval), IsEmpty (copy), ConversationChannelsModule (upval), FriendConversationCreatedModule (upval), FFlagAppChatPerfTrackingModule (upval), restartMessageReceiveTracking (copy), GetNewMessagesFunction (upval), ReceivedUserTypingModule (upval)
 		if p2.ChannelVertical ~= "PlatformChat" then return end
 		if not table.find(CommunicationChannelsTypesModule.ChannelTypeAllowlist, p2.ChannelType) then return end
 		AppChatRealtimeChatEventReceiver2:info("Received CommunicationChannels notification: {}", p2.Type)
@@ -320,7 +323,7 @@ function ChatEventReceiver2(p1)
 			
 			if ActiveConversationId ~= nil and tostring(ActiveConversationId) == p2.ChannelId and JoinResult.rnBypassActionSignal then
 				JoinResult.rnBypassActionSignal:fire(RoactNavigationModule.Actions.navigate({
-					routeName = if UseSelectorResult2 == FormFactor.WIDE then EnumScreensModule.EmptyConversation else EnumScreensModule.ChatLanding
+					routeName = if UseSelectorResult1 == FormFactor.WIDE then EnumScreensModule.EmptyConversation else EnumScreensModule.ChatLanding
 				}))
 			end
 			if p2.Actor.Id ~= tostring(UseLocalUserIdResult) then
@@ -412,13 +415,13 @@ function ChatEventReceiver2(p1)
 				return
 			end
 		end
-	end, DependencyArrayFunction(UseLocalUserIdResult, UseCallbackResult, v59, JoinResult.activeConversationId, JoinResult.rnBypassActionSignal, RemovedFromConversationToastTitle, v52, v60, v50, IsEmpty, v54, v57))
+	end, DependencyArrayFunction(UseLocalUserIdResult, UseCallbackResult, v61, JoinResult.activeConversationId, JoinResult.rnBypassActionSignal, RemovedFromConversationToastTitle, v54, v62, v52, IsEmpty, v56, v59))
 	local UseMemoResult = UseMemoFunction(function()
-		-- upvalues: UseSelectorResult1 (copy), CryoModule (upval)
-		return if UseSelectorResult1 then CryoModule.List.filterMap(CryoModule.Dictionary.values(UseSelectorResult1), function(p2)
+		-- upvalues: UseSelectorResult (copy), CryoModule (upval)
+		return if UseSelectorResult then CryoModule.List.filterMap(CryoModule.Dictionary.values(UseSelectorResult), function(p2)
 			return if p2 and p2.id and p2.source ~= "friends" then p2.id else nil
 		end) else {}
-	end, { UseSelectorResult1 })
+	end, { UseSelectorResult })
 	RealtimeDeliveryModule.useRealtimeNamespace("ChatModerationTypeEligibility", function(p2)
 		-- upvalues: AppChatRealtimeChatEventReceiver2 (upval), GetFFlagDebugUnfilteredThreadsFunction (upval), chunkAndLogString (upval), CryoModule (upval), UseMemoResult (copy), UseDispatchResult (copy), MultiGetConversationDetailsModule (upval), JoinResult (copy), AppChatNetworkingModule (upval), FFlagAppChatEnableDoubleOptIn (upval), RefreshConversationUnfilteredThreadsDetailsModule (upval), UseIsInExperienceModuleResult (copy)
 		AppChatRealtimeChatEventReceiver2:debug("Received ChatModerationTypeEligibility notification")

@@ -3160,6 +3160,7 @@ Feature.Contacts.Message.ContactDiscoverable,"Per aiutarti a fare amicizie, Gli 
 Feature.Contacts.Message.ContactsSyncWarning,I tuoi contatti verranno sincronizzati regolarmente e le partite con altri utenti Roblox memorizzate per aiutarti a trovare gli amici. Puoi gestire questa opzione in qualsiasi momento nelle impostazioni del dispositivo.
 Feature.Contacts.Message.InviteToRoblox,"Aggiungimi agli amici su Roblox per creare, condividere e scoprire nuove esperienze insieme."
 Feature.Contacts.Message.NoResults,Nessun risultato.
+Feature.CustomForms.Label.Percent,
 Feature.DeveloperProducts.Label.Product,
 Feature.DisplayName.ErrorMessage.AgedUpNameContainPII,Il nome potrebbe contenere informazioni private
 Feature.DisplayName.ErrorMessage.AgedUpNameHasChanged,Il tuo nome è già stato cambiato negli ultimi 7 giorni

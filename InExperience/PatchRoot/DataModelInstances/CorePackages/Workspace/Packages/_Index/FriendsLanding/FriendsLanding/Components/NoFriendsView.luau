@@ -24,7 +24,6 @@ local FoundationCloudAssetsModule = require(Parent.FoundationCloudAssets)
 local Assets = FoundationCloudAssetsModule.Assets
 local PreloadAssetFunction = FoundationCloudAssetsModule.preloadAsset
 local MigrateNoFriendsViewToFoundation = game:DefineFastFlag("MigrateNoFriendsViewToFoundation", false)
-local FFlagFriendsEmptyStateIllustrationThemingModule = require(FriendsLanding.Flags.FFlagFriendsEmptyStateIllustrationTheming)
 local config = {
 	layoutOrder = 0,
 	pageLoadingTimeReport = nil,
@@ -44,7 +43,7 @@ local function _(p1)
 end
 
 return function(p1)
-	-- upvalues: Dash (copy), config (copy), MigrateNoFriendsViewToFoundation (copy), PreloadAssetFunction (copy), Assets (copy), React (copy), UseLocalizationFunction (copy), UseStyleFunction (copy), FFlagFriendsEmptyStateIllustrationThemingModule (copy), UseTokensFunction (copy), Image (copy), ImageSetLabel (copy), Images (copy), Colors (copy), StyledTextLabel (copy), FoundationFontFaceMigration (copy), AppFonts (copy), NormalizeFontFaceFunction (copy), Button (copy), ButtonType (copy), StandardButtonSize (copy)
+	-- upvalues: Dash (copy), config (copy), MigrateNoFriendsViewToFoundation (copy), PreloadAssetFunction (copy), Assets (copy), React (copy), UseLocalizationFunction (copy), UseStyleFunction (copy), UseTokensFunction (copy), Image (copy), ImageSetLabel (copy), Images (copy), Colors (copy), StyledTextLabel (copy), FoundationFontFaceMigration (copy), AppFonts (copy), NormalizeFontFaceFunction (copy), Button (copy), ButtonType (copy), StandardButtonSize (copy)
 	local JoinResult = Dash.join(config, p1 or {})
 	local Collaborators = if MigrateNoFriendsViewToFoundation then "pictograms/collaborators" else nil
 	local AssetId = nil
@@ -72,7 +71,7 @@ return function(p1)
 		noFriendsHeader = JoinResult.noFriendsHeaderKey
 	})
 	local UseStyleResult = UseStyleFunction()
-	local UseTokensResult = if FFlagFriendsEmptyStateIllustrationThemingModule then UseTokensFunction() else nil
+	local UseTokensResult = UseTokensFunction()
 	
 	return React.createElement("Frame", {
 		BackgroundTransparency = 1,
@@ -94,7 +93,7 @@ return function(p1)
 			Imagelabel = if MigrateNoFriendsViewToFoundation then React.createElement(Image, {
 				LayoutOrder = 1,
 				Image = AssetId,
-				imageStyle = if FFlagFriendsEmptyStateIllustrationThemingModule then UseTokensResult.Color.Content.Emphasis else nil,
+				imageStyle = UseTokensResult.Color.Content.Emphasis,
 				Size = UDim2.fromOffset(SizeRatio.X, SizeRatio.Y)
 			}) else React.createElement(ImageSetLabel, {
 				BackgroundTransparency = 1,
