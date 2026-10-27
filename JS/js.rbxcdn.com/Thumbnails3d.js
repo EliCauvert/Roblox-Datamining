@@ -2,10 +2,10 @@
     try {
         var e = "u" > typeof window ? window : "u" > typeof global ? global : "u" > typeof globalThis ? globalThis : "u" > typeof self ? self : {};
         e.SENTRY_RELEASE = {
-            id: "789bd80378fb449920d428f109fc028de1aed82a"
+            id: "16524db731f24edc43a8295dcec58713e9bf9a5f"
         };
         var n = (new e.Error).stack;
-        n && (e._sentryDebugIds = e._sentryDebugIds || {}, e._sentryDebugIds[n] = "182c42b5-ac2a-4f31-a09d-197806778a8f", e._sentryDebugIdIdentifier = "sentry-dbid-182c42b5-ac2a-4f31-a09d-197806778a8f")
+        n && (e._sentryDebugIds = e._sentryDebugIds || {}, e._sentryDebugIds[n] = "24a4a164-1455-491a-8f99-729d240fa882", e._sentryDebugIdIdentifier = "sentry-dbid-24a4a164-1455-491a-8f99-729d240fa882")
     } catch (e) {}
 }(),
 function() {
@@ -113,14 +113,14 @@ function() {
             767: function(e) {
                 e.exports = '<span id="thumbnail-3d-container" canvas-container> <div ng-if="isLoading" class="thumbnail-loader"> <span class="spinner spinner-default"></span> </div> </span> '
             },
-            546: function(e, n, r) {
+            448: function(e, n, r) {
                 "use strict";
                 r.d(n, {
                     b7: function() {
                         return sK
                     },
                     jw: function() {
-                        return ur
+                        return uo
                     },
                     yy: function() {
                         return s0
@@ -178989,31 +178989,45 @@ function() {
                             }
                         }]), e
                     }(),
-                    s2 = {},
-                    s3 = function(e) {
+                    s2 = function(e) {
+                        e.traverse(function(e) {
+                            if (e.isMesh) {
+                                var n, r, i;
+                                null == (n = e.geometry) || n.dispose(), Array.isArray(e.material) ? e.material.forEach(function(e) {
+                                    var n;
+                                    return null == (n = e.dispose) ? void 0 : n.call(e)
+                                }) : null == (i = e.material) || null == (r = i.dispose) || r.call(i)
+                            }
+                        }), e.clear()
+                    },
+                    s3 = function(e, n) {
+                        var r, i;
+                        s2(e), n.dispose(), null == (r = n.forceContextLoss) || r.call(n), null == (i = n.domElement) || i.remove()
+                    },
+                    s4 = function(e) {
                         var n, r;
                         if ((null == (n = e.parentElement) ? void 0 : n.offsetWidth) === void 0) throw Error("Container element not found");
                         return null == (r = e.parentElement) ? void 0 : r.offsetWidth
                     },
-                    s4 = function(e) {
+                    s5 = function(e) {
                         var n, r;
                         if ((null == (n = e.parentElement) ? void 0 : n.offsetHeight) === void 0) throw Error("Container element not found");
                         return null == (r = e.parentElement) ? void 0 : r.offsetHeight
                     },
-                    s5 = function(e, n, r) {
+                    s6 = function(e, n, r) {
                         e.render(n, r)
                     },
-                    s6 = function(e, n, r, i, o) {
+                    s8 = function(e, n, r, i, o) {
                         var s = new sw(n, r, i, "animated");
                         return s.addEventListener("change", o), [s, function() {
                             s.removeEventListener("change", o), s.dispose()
                         }]
                     },
-                    s8 = function(e, n, r) {
+                    s9 = function(e, n, r) {
                         var i = function() {
-                            r.aspect = s3(n) / s4(n), r.updateProjectionMatrix(), e.setSize(s3(n), s4(n))
+                            r.aspect = s4(n) / s5(n), r.updateProjectionMatrix(), e.setSize(s4(n), s5(n))
                         };
-                        e.setSize(s3(n), s4(n));
+                        e.setSize(s4(n), s5(n));
                         var o = e.domElement,
                             s = 0,
                             u = function() {
@@ -179026,16 +179040,19 @@ function() {
                             window.removeEventListener("resize", u), window.removeEventListener("beforeunload", l)
                         }]
                     },
-                    s9 = function(e, n, r, i, o, s, u, l) {
+                    s7 = function(e, n, r, i, o, s, u, l) {
                         n.update();
                         for (var c = s[o], h = 0; h < l.length; ++h) {
                             var d = c[l[h]],
                                 f = u[l[h]];
                             (void 0 === d ? "undefined" : P(d)) < "u" && (void 0 === f ? "undefined" : P(f)) < "u" && (f.children[0].position.set(d.Position.x, d.Position.y, d.Position.z), f.children[0].quaternion.set(d.Rotation.x, d.Rotation.y, d.Rotation.z, d.Rotation.w), f.updateMatrix())
                         }
-                        i.updateMatrixWorld(!0), n.enabled && n.update(), Q(), s5(e, i, r)
+                        i.updateMatrixWorld(!0), n.enabled && n.update(), Q(), s6(e, i, r)
                     },
-                    s7 = function(e) {
+                    ue = function(e, n) {
+                        return !!e && (null == n || n(), !0)
+                    },
+                    ut = function(e) {
                         var n = e.targetId,
                             r = e.getThumbnailJson,
                             o = e.onFailure,
@@ -179078,7 +179095,7 @@ function() {
                             error: d
                         }
                     },
-                    ue = function(e) {
+                    un = function(e) {
                         var n = e.webGLData,
                             r = e.targetId,
                             o = e.onAnimationLoopFinish,
@@ -179099,54 +179116,52 @@ function() {
                                 }
                             };
                         return (0, i.useEffect)(function() {
-                            var e = null;
+                            var e = null,
+                                r = !1;
                             if (!n || !h.current) return n || (p(!1), g(void 0)),
                                 function() {
-                                    e && (e(), e = null), v()
+                                    r = !0, e && (e(), e = null), v()
                                 };
                             var i = n.json,
                                 d = n.performance;
                             return c(function() {
-                                    var n, c, f;
-                                    return R(this, function(m) {
-                                        switch (m.label) {
+                                    var n, c, f, m, _;
+                                    return R(this, function(v) {
+                                        switch (v.label) {
                                             case 0:
-                                                p(!0), g(void 0), m.label = 1;
+                                                p(!0), g(void 0), v.label = 1;
                                             case 1:
-                                                var _;
-                                                if (m.trys.push([1, 3, 4, 5]), !h.current) throw Error("Canvas container ref not available");
-                                                return [4, (_ = h.current, new Promise(function(e, n) {
-                                                    var s, u = (p = "THREE_renderer_targetId_".concat(r), s2[p] || (s2[p] = {
-                                                            container: _,
-                                                            renderer: new iG({
-                                                                antialias: !0,
-                                                                alpha: !0
-                                                            })
-                                                        }), s2[p].renderer),
-                                                        c = i.aabb.max,
-                                                        h = Math.max(4 * new eI(c.x, c.y, c.z).length(), 1e3),
-                                                        d = new nc("u" > P(i.camera.fov) ? i.camera.fov : 70, s3(_) / s4(_), .1, h),
-                                                        f = new ik;
-                                                    f.add(d);
-                                                    var p, m, g = {},
-                                                        v = i.frames,
-                                                        y = 0,
-                                                        b = 0,
-                                                        T = new s1,
-                                                        S = Object.keys(i.partobjs);
-                                                    (s = i.partobjs, Promise.all(S.map(function(e) {
-                                                        var n = s[e],
-                                                            r = n.files["scene.obj"].content,
-                                                            i = n.files["scene.mtl"].content;
-                                                        return new Promise(function(n, o) {
-                                                            T.load(r, i, function(r, i) {
+                                                var y;
+                                                if (v.trys.push([1, 3, 4, 5]), !h.current) throw Error("Canvas container ref not available");
+                                                return [4, (y = h.current, new Promise(function(e, n) {
+                                                    var r, s = new iG({
+                                                            antialias: !0,
+                                                            alpha: !0
+                                                        }),
+                                                        u = i.aabb.max,
+                                                        c = Math.max(4 * new eI(u.x, u.y, u.z).length(), 1e3),
+                                                        h = new nc("u" > P(i.camera.fov) ? i.camera.fov : 70, s4(y) / s5(y), .1, c),
+                                                        d = new ik;
+                                                    d.add(h);
+                                                    var f, p = {},
+                                                        m = i.frames,
+                                                        _ = 0,
+                                                        g = 0,
+                                                        v = new s1,
+                                                        b = Object.keys(i.partobjs);
+                                                    (r = i.partobjs, Promise.all(b.map(function(e) {
+                                                        var n = r[e],
+                                                            i = n.files["scene.obj"].content,
+                                                            o = n.files["scene.mtl"].content;
+                                                        return new Promise(function(n, r) {
+                                                            v.load(i, o, function(i, o) {
                                                                 try {
-                                                                    i.preload(), new sh().setMaterials(i), r.children[0].geometry.computeBoundingBox();
-                                                                    var s = r.children[0].geometry.boundingBox,
+                                                                    o.preload(), new sh().setMaterials(o), i.children[0].geometry.computeBoundingBox();
+                                                                    var s = i.children[0].geometry.boundingBox,
                                                                         u = new eI;
-                                                                    u.subVectors(s.max, s.min), u.multiplyScalar(.5), u.add(s.min), u.applyMatrix4(r.children[0].matrixWorld), r.children[0].geometry.applyMatrix4(new e6().makeTranslation(-u.x, -u.y, -u.z)), r.children[0].geometry.verticesNeedUpdate = !0, r.children[0].position.x = u.x, r.children[0].position.y = u.y, r.children[0].position.z = u.z, r.matrixAutoUpdate = !1, n([e, r])
+                                                                    u.subVectors(s.max, s.min), u.multiplyScalar(.5), u.add(s.min), u.applyMatrix4(i.children[0].matrixWorld), i.children[0].geometry.applyMatrix4(new e6().makeTranslation(-u.x, -u.y, -u.z)), i.children[0].geometry.verticesNeedUpdate = !0, i.children[0].position.x = u.x, i.children[0].position.y = u.y, i.children[0].position.z = u.z, i.matrixAutoUpdate = !1, n([e, i])
                                                                 } catch (e) {
-                                                                    o(e)
+                                                                    r(e)
                                                                 }
                                                             })
                                                         })
@@ -179155,36 +179170,38 @@ function() {
                                                             var n = E(e, 2),
                                                                 r = n[0],
                                                                 i = n[1];
-                                                            g[r] = i, i.matrixAutoUpdate = !1, f.add(i)
-                                                        }), sF(f, d, !1), f.add(d);
-                                                        var r = E(s8(u, _, d), 2),
-                                                            s = r[0],
+                                                            p[r] = i, i.matrixAutoUpdate = !1, d.add(i)
+                                                        }), sF(d, h, !1), d.add(h);
+                                                        var r = E(s9(s, y, h), 2),
+                                                            u = r[0],
                                                             c = r[1],
-                                                            h = E(s6(f, d, _, i, function() {
-                                                                s5(u, f, d)
+                                                            v = E(s8(d, h, y, i, function() {
+                                                                s6(s, d, h)
                                                             }), 2),
-                                                            p = h[0],
-                                                            T = h[1];
-                                                        m = p, s5(u, f, d);
+                                                            T = v[0],
+                                                            S = v[1];
+                                                        f = T, s6(s, d, h);
                                                         var x = null;
-                                                        l && (x = sH(s, d, f, l));
+                                                        l && (x = sH(u, h, d, l));
                                                         var P = 0;
                                                         (function e() {
-                                                            y === v.length && (y = 0, b += 1, o && o(b)), s9(u, m, d, f, y, v, g, S), x && x.update(), y += 1, P = requestAnimationFrame(e)
+                                                            _ === m.length && (_ = 0, g += 1, o && o(g)), s7(s, f, h, d, _, m, p, b), x && x.update(), _ += 1, P = requestAnimationFrame(e)
                                                         })(), e({
-                                                            canvas: s,
+                                                            canvas: u,
                                                             stopAnimationFrame: function() {
-                                                                T(), c(), null == x || x.dispose(), cancelAnimationFrame(P)
+                                                                cancelAnimationFrame(P), S(), c(), null == x || x.dispose(), s3(d, s)
                                                             }
                                                         })
                                                     }).catch(function(e) {
-                                                        console.error("Error loading parts:", e), n(e)
+                                                        console.error("Error loading parts:", e), s3(d, s), n(e)
                                                     })
                                                 }))];
                                             case 2:
-                                                return c = (n = m.sent()).canvas, e = n.stopAnimationFrame, h.current.append(c), null == s || s(d), [3, 5];
+                                                if (f = (c = v.sent()).canvas, m = c.stopAnimationFrame, ue(r, m)) return [2];
+                                                return e = m, null == (n = h.current) || n.append(f), null == s || s(d), [3, 5];
                                             case 3:
-                                                return console.error("Error loading animation canvas (Canvas load)", f = m.sent()), g(f), null == u || u(f), [3, 5];
+                                                if (_ = v.sent(), ue(r)) return [2];
+                                                return console.error("Error loading animation canvas (Canvas load)", _), g(_), null == u || u(_), [3, 5];
                                             case 4:
                                                 return p(!1), [7];
                                             case 5:
@@ -179193,7 +179210,7 @@ function() {
                                     })
                                 })(),
                                 function() {
-                                    "function" == typeof e && e(), v()
+                                    r = !0, "function" == typeof e && e(), v()
                                 }
                         }, [n, r]), {
                             containerRef: h,
@@ -179201,21 +179218,21 @@ function() {
                             canvasError: _
                         }
                     },
-                    ut = function(e) {
+                    ur = function(e) {
                         return e.loadingComponent || o().createElement("div", {
                             className: "thumbnail-loader "
                         }, o().createElement("span", {
                             className: "spinner spinner-default"
                         }))
                     },
-                    un = function(e) {
+                    ui = function(e) {
                         var n = e.error,
                             r = e.errorComponent;
                         return r ? o().createElement(r, {
                             error: n
                         }) : null
                     },
-                    ur = function(e) {
+                    uo = function(e) {
                         var n = e.targetId,
                             r = e.getThumbnailJson,
                             i = e.onSuccess,
@@ -179223,7 +179240,7 @@ function() {
                             u = e.onAnimationLoopFinish,
                             l = e.slots,
                             c = e.partsConfig,
-                            h = s7({
+                            h = ut({
                                 targetId: n,
                                 getThumbnailJson: r,
                                 onFailure: s
@@ -179231,7 +179248,7 @@ function() {
                             d = h.data,
                             f = h.isLoading,
                             p = h.error,
-                            m = ue({
+                            m = un({
                                 webGLData: d,
                                 targetId: n,
                                 onAnimationLoopFinish: u,
@@ -179247,9 +179264,9 @@ function() {
                         return o().createElement("span", {
                             ref: _,
                             className: "thumbnail-animation-container"
-                        }, y && o().createElement(ut, {
+                        }, y && o().createElement(ur, {
                             loadingComponent: null == l ? void 0 : l.loading
-                        }), !y && !!b && o().createElement(un, {
+                        }), !y && !!b && o().createElement(ui, {
                             error: b,
                             errorComponent: null == l ? void 0 : l.error
                         }))
@@ -179323,7 +179340,7 @@ function() {
             775: function(e, n, r) {
                 "use strict";
                 r.r(n);
-                var i = r(546),
+                var i = r(448),
                     o = r(472),
                     s = r(836);
 
@@ -180444,16 +180461,16 @@ function() {
                 "use strict";
                 r.r(n), r.d(n, {
                     getThumbnail3dJson: function() {
-                        return q
+                        return j
                     },
                     get3DJson: function() {
-                        return X
+                        return Y
                     },
                     getJsonUrlByThumbnailType: function() {
-                        return W
+                        return H
                     },
                     getJsonUrl: function() {
-                        return Y
+                        return W
                     }
                 });
                 var i, o = window.Roblox["core-scripts"].http.http,
@@ -181085,8 +181102,7 @@ function() {
                     for (var r = 0, i = Array(n); r < n; r++) i[r] = e[r];
                     return i
                 }
-                var D = c.Url.parse("".concat(u().beaconApi, "/v1/measurements")).getOrThrow(),
-                    N = function() {
+                var D = function() {
                         if ("u" < typeof document) return {
                             batchSize: 100,
                             waitMs: 1e3
@@ -181133,34 +181149,34 @@ function() {
                             waitMs: 0 === m ? 1e3 : m
                         }
                     },
-                    L = [],
-                    w = !1,
-                    F = function() {
-                        if (w = !1, 0 !== L.length) {
-                            var e = L;
-                            L = [], l.postUntyped(D, e, {
+                    N = [],
+                    L = !1,
+                    w = function() {
+                        if (L = !1, 0 !== N.length) {
+                            var e = N;
+                            N = [], l.postUntyped(c.Url.parse("".concat(u().beaconApi, "/v1/measurements")).getOrThrow(), e, {
                                 credentials: "include",
                                 keepalive: !0,
                                 signal: AbortSignal.timeout(3e3)
                             })
                         }
                     },
-                    B = function(e, n) {
+                    F = function(e, n) {
                         var r = M(n);
-                        L.push({
+                        N.push({
                             metricName: e,
                             jsonData: r.isOk() ? r.value : "{}"
                         });
-                        var i = N(),
+                        var i = D(),
                             o = i.batchSize,
                             s = i.waitMs;
-                        L.length >= o ? F() : w || (w = !0, setTimeout(F, s))
+                        N.length >= o ? w() : L || (L = !0, setTimeout(w, s))
                     },
-                    V = r(412),
-                    G = window.Roblox["core-scripts"].endpoints,
-                    k = u().thumbnailsApi;
+                    B = r(412),
+                    V = window.Roblox["core-scripts"].endpoints,
+                    G = u().thumbnailsApi;
 
-                function z(e, n, r, i, o, s, u) {
+                function k(e, n, r, i, o, s, u) {
                     try {
                         var l = e[s](u),
                             c = l.value
@@ -181170,7 +181186,7 @@ function() {
                     }
                     l.done ? n(c) : Promise.resolve(c).then(i, o)
                 }
-                var H = function(e, n, r, i) {
+                var z = function(e, n, r, i) {
                         var s = {
                             url: e.data.imageUrl
                         };
@@ -181180,16 +181196,16 @@ function() {
                             r("3D Thumbnail failed to load")
                         })
                     },
-                    W = function(e, n) {
-                        if (e === V.uS.Animation) return (0, G.getAbsoluteUrl)("".concat(k, "/v1/asset-thumbnail-animated?assetId=").concat(n));
-                        if (e === V.uS.Asset) return (0, G.getAbsoluteUrl)("".concat(k, "/v1/assets-thumbnail-3d?assetId=").concat(n));
-                        if (e === V.uS.UserOutfit) return (0, G.getAbsoluteUrl)("".concat(k, "/v1/users/outfit-3d?outfitId=").concat(n));
-                        if (e === V.uS.Avatar) return (0, G.getAbsoluteUrl)("".concat(k, "/v1/users/avatar-3d?userId=").concat(n));
+                    H = function(e, n) {
+                        if (e === B.uS.Animation) return (0, V.getAbsoluteUrl)("".concat(G, "/v1/asset-thumbnail-animated?assetId=").concat(n));
+                        if (e === B.uS.Asset) return (0, V.getAbsoluteUrl)("".concat(G, "/v1/assets-thumbnail-3d?assetId=").concat(n));
+                        if (e === B.uS.UserOutfit) return (0, V.getAbsoluteUrl)("".concat(G, "/v1/users/outfit-3d?outfitId=").concat(n));
+                        if (e === B.uS.Avatar) return (0, V.getAbsoluteUrl)("".concat(G, "/v1/users/avatar-3d?userId=").concat(n));
                         throw Error("Invalid thumbnail type: ".concat(e))
                     },
-                    Y = function(e, n, r) {
-                        var i, s = arguments.length > 3 && void 0 !== arguments[3] ? arguments[3] : V.oS,
-                            u = arguments.length > 4 && void 0 !== arguments[4] ? arguments[4] : V.Du;
+                    W = function(e, n, r) {
+                        var i, s = arguments.length > 3 && void 0 !== arguments[3] ? arguments[3] : B.oS,
+                            u = arguments.length > 4 && void 0 !== arguments[4] ? arguments[4] : B.Du;
                         return (i = function() {
                             var i, l, c, h;
                             return function(e, n) {
@@ -181281,7 +181297,7 @@ function() {
                                             version: "TN2"
                                         }, d.label = 1;
                                     case 1:
-                                        if (!(l.retriesDone < s && (null == i ? void 0 : i.data.state) !== V.xc.complete)) return [3, 11];
+                                        if (!(l.retriesDone < s && (null == i ? void 0 : i.data.state) !== B.xc.complete)) return [3, 11];
                                         d.label = 2;
                                     case 2:
                                         if (d.trys.push([2, 7, , 8]), !r) return [3, 4];
@@ -181290,7 +181306,7 @@ function() {
                                         return i = d.sent(), [3, 6];
                                     case 4:
                                         return c = {
-                                            url: W(e, n),
+                                            url: H(e, n),
                                             withCredentials: !0
                                         }, [4, o.get(c)];
                                     case 5:
@@ -181300,7 +181316,7 @@ function() {
                                     case 7:
                                         throw console.error("error construct get json request, exception: ", h = d.sent()), h;
                                     case 8:
-                                        if (i.data.state === V.xc.complete) return [3, 10];
+                                        if (i.data.state === B.xc.complete) return [3, 10];
                                         return [4, new Promise(function(e) {
                                             setTimeout(e, u)
                                         })];
@@ -181309,7 +181325,7 @@ function() {
                                     case 10:
                                         return [3, 1];
                                     case 11:
-                                        if ((null == i ? void 0 : i.data.state) === V.xc.complete) return l.version = i.data.version, [2, i.data];
+                                        if ((null == i ? void 0 : i.data.state) === B.xc.complete) return l.version = i.data.version, [2, i.data];
                                         throw Error("3D Thumbnail failed to load")
                                 }
                             })
@@ -181320,22 +181336,22 @@ function() {
                                 var s = i.apply(e, n);
 
                                 function u(e) {
-                                    z(s, r, o, u, l, "next", e)
+                                    k(s, r, o, u, l, "next", e)
                                 }
 
                                 function l(e) {
-                                    z(s, r, o, u, l, "throw", e)
+                                    k(s, r, o, u, l, "throw", e)
                                 }
                                 u(void 0)
                             })
                         })()
                     },
-                    X = function(e, n, r, i, s, u, l, c) {
+                    Y = function(e, n, r, i, s, u, l, c) {
                         var h;
                         try {
                             if (null == r) {
                                 var d = {
-                                    url: W(n, e),
+                                    url: H(n, e),
                                     withCredentials: !0
                                 };
                                 h = o.get(d)
@@ -181346,39 +181362,39 @@ function() {
                         h.then(function(o) {
                             console.log({
                                 jsonRes: o
-                            }), o.data && o.data.state === V.xc.complete ? (c.version = o.data.version, H(o, i, s, c)) : (c.realRegeneration = !1, u-- > 0 ? (c.retriesDone++, setTimeout(function() {
-                                X(e, n, r, i, s, u, l, c)
+                            }), o.data && o.data.state === B.xc.complete ? (c.version = o.data.version, z(o, i, s, c)) : (c.realRegeneration = !1, u-- > 0 ? (c.retriesDone++, setTimeout(function() {
+                                Y(e, n, r, i, s, u, l, c)
                             }, l)) : s("3D Thumbnail failed to load"))
                         }).catch(function() {
                             s("3D Thumbnail failed to load")
                         })
                     },
-                    j = function(e, n, r, i, o, s, u) {
-                        X(e, n, r, i, o, s, u, {
+                    X = function(e, n, r, i, o, s, u) {
+                        Y(e, n, r, i, o, s, u, {
                             realRegeneration: !1,
                             startTime: new Date,
                             retriesDone: 0,
                             version: "TN2"
                         })
                     },
-                    q = function() {
+                    j = function() {
                         var e = arguments.length > 0 && void 0 !== arguments[0] ? arguments[0] : 0,
                             n = arguments.length > 1 ? arguments[1] : void 0,
-                            r = arguments.length > 2 && void 0 !== arguments[2] ? arguments[2] : V.uS.Avatar,
-                            i = arguments.length > 3 && void 0 !== arguments[3] ? arguments[3] : V.oS,
-                            o = arguments.length > 4 && void 0 !== arguments[4] ? arguments[4] : V.Du;
+                            r = arguments.length > 2 && void 0 !== arguments[2] ? arguments[2] : B.uS.Avatar,
+                            i = arguments.length > 3 && void 0 !== arguments[3] ? arguments[3] : B.oS,
+                            o = arguments.length > 4 && void 0 !== arguments[4] ? arguments[4] : B.Du;
                         return new Promise(e || null == n ? function(s, u) {
-                            j(e, r, n, function(e, n) {
+                            X(e, r, n, function(e, n) {
                                 var i, o = new Date().getTime() - n.startTime.getTime();
-                                null == (i = window.Roblox.ThumbnailMetrics) || i.logFinalThumbnailTime(o), B("ThumbnailLoadDurationWebapp", {
+                                null == (i = window.Roblox.ThumbnailMetrics) || i.logFinalThumbnailTime(o), F("ThumbnailLoadDurationWebapp", {
                                     Status: "Success",
                                     ThumbnailType: "".concat(r, "_3d"),
                                     Version: n.version,
                                     Value: o.toString()
-                                }), 0 === n.retriesDone ? B("ThumbnailNoRetrySuccessWebapp", {
+                                }), 0 === n.retriesDone ? F("ThumbnailNoRetrySuccessWebapp", {
                                     ThumbnailType: "".concat(r, "_3d"),
                                     Version: n.version
-                                }) : B("ThumbnailRetryWebapp", {
+                                }) : F("ThumbnailRetryWebapp", {
                                     ThumbnailType: "".concat(r, "_3d"),
                                     Version: n.version,
                                     Value: n.retriesDone.toString()
@@ -181390,7 +181406,7 @@ function() {
                                 })
                             }, function(e) {
                                 var n;
-                                null == (n = window.Roblox.ThumbnailMetrics) || n.logThumbnailTimeout(), B("ThumbnailTimeoutWebapp", {
+                                null == (n = window.Roblox.ThumbnailMetrics) || n.logThumbnailTimeout(), F("ThumbnailTimeoutWebapp", {
                                     ThumbnailType: "".concat(r, "_3d"),
                                     Version: "TN3"
                                 }), u(e)
@@ -181523,7 +181539,7 @@ function() {
                 f = r(609),
                 p = window.PropTypes,
                 m = r.n(p),
-                _ = r(546);
+                _ = r(448);
 
             function g(e, n) {
                 (null == n || n > e.length) && (n = e.length);
@@ -181877,5 +181893,5 @@ function() {
                 })
             }])
         }()
-}(), window.Roblox && window.Roblox.BundleDetector && window.Roblox.BundleDetector.bundleDetected("Thumbnails3d");
-//# sourceMappingURL=https://sourcemaps.rbxcdn.com/thumbnails3d-d9cd802f8b362048.js.map
+}(), window.Roblox && window.Roblox.BundleDetector && window.Roblox.BundleDetector.bundleDetected(document.currentScript && document.currentScript.getAttribute("data-bundlename") || "Thumbnails3d");
+//# sourceMappingURL=https://sourcemaps.rbxcdn.com/thumbnails3d-a7e9f7ecb554a0db.js.map

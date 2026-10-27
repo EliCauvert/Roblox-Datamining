@@ -3,7 +3,7 @@
     try {
         var e = "undefined" != typeof globalThis ? globalThis : "undefined" != typeof global ? global : "undefined" != typeof window ? window : "undefined" != typeof self ? self : {},
             n = (new e.Error).stack;
-        n && ((e._debugIds || (e._debugIds = {}))[n] = "7f816484-c6a1-db80-e365-5689697fa45b")
+        n && ((e._debugIds || (e._debugIds = {}))[n] = "8a989541-4c4d-88a7-55f8-68852f1a4888")
     } catch (e) {}
 }();
 (globalThis.TURBOPACK || (globalThis.TURBOPACK = [])).push(["object" == typeof document ? document.currentScript : void 0, 644746, 35701, 160312, 987047, e => {
@@ -2407,31 +2407,35 @@
         let {
             children: f
         } = e, {
-            user: v
-        } = (0, s.useAuthentication)(), {
-            data: h
-        } = (0, n.useQuery)({
-            queryKey: ["creations", "creationAccess"],
-            queryFn: () => a.default.checkCreationAccess()
-        }), {
-            data: m
-        } = (0, n.useQuery)({
-            queryKey: ["creations", "verifiedAge"],
-            queryFn: () => o.default.isUserAgeVerified()
-        }), {
+            status: v,
+            user: h
+        } = (0, s.useAuthentication)(), m = "success" === v ? null == h ? void 0 : h.id : void 0, {
             data: b
         } = (0, n.useQuery)({
-            queryKey: ["creations", "ageBracket"],
-            queryFn: () => d.default.getAgeBracket()
+            queryKey: ["creations", "creationAccess", m],
+            queryFn: () => a.default.checkCreationAccess(),
+            enabled: null != m
         }), {
             data: I
         } = (0, n.useQuery)({
-            queryKey: ["creations", "userSubscription", null == v ? void 0 : v.id],
-            queryFn: (null == v ? void 0 : v.id) != null ? () => u.default.getUserSubscription(v.id) : i.skipToken
+            queryKey: ["creations", "verifiedAge", m],
+            queryFn: () => o.default.isUserAgeVerified(),
+            enabled: null != m
         }), {
             data: P
         } = (0, n.useQuery)({
-            queryKey: ["creations", "blackbirdSubscription"],
+            queryKey: ["creations", "ageBracket", m],
+            queryFn: () => d.default.getAgeBracket(),
+            enabled: null != m
+        }), {
+            data: y
+        } = (0, n.useQuery)({
+            queryKey: ["creations", "userSubscription", m],
+            queryFn: null != m ? () => u.default.getUserSubscription(m) : i.skipToken
+        }), {
+            data: w
+        } = (0, n.useQuery)({
+            queryKey: ["creations", "blackbirdSubscription", m],
             queryFn: async () => {
                 var e, t;
                 let r = await c.default.listSubscriptions({
@@ -2440,20 +2444,21 @@
                     resultsPerPage: 1
                 });
                 return null != (e = null == r || null == (t = r.subscriptions) ? void 0 : t[0]) ? e : void 0
-            }
-        }), y = (0, r.useMemo)(() => ({
-            ageBracket: b,
-            verifiedAgeData: m,
-            creationAccessMetadata: h,
-            userSubscription: I,
-            blackbirdSubscription: P
-        }), [b, m, h, I, P]);
+            },
+            enabled: null != m
+        }), S = (0, r.useMemo)(() => ({
+            ageBracket: P,
+            verifiedAgeData: I,
+            creationAccessMetadata: b,
+            userSubscription: y,
+            blackbirdSubscription: w
+        }), [P, I, b, y, w]);
         return (0, t.jsx)(p.default.Provider, {
-            value: y,
+            value: S,
             children: f
         })
     }])
 }]);
 
-//# debugId=7f816484-c6a1-db80-e365-5689697fa45b
-//# sourceMappingURL=25jvmei65elol.js.map
+//# debugId=8a989541-4c4d-88a7-55f8-68852f1a4888
+//# sourceMappingURL=22q87b_i87d01.js.map

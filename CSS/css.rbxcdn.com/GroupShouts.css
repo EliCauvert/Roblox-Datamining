@@ -653,14 +653,6 @@
     flex-wrap: wrap
 }
 
-.\[flex\:1_1_0\%\] {
-    flex: 1 1 0%
-}
-
-.\[flex\:2_1_0\%\] {
-    flex: 2 1 0%
-}
-
 .\[font\:inherit\] {
     font: inherit
 }
@@ -675,10 +667,6 @@
 
 .\!\[height\:auto\] {
     height: auto !important
-}
-
-.\[height\:auto\] {
-    height: auto
 }
 
 .\[inset\:0\] {
@@ -699,6 +687,10 @@
 
 .\[max-height\:14lh\] {
     max-height: 14lh
+}
+
+.\[opacity\:0\.5\] {
+    opacity: .5
 }
 
 .\[opacity\:0\] {
@@ -1037,14 +1029,6 @@
 }
 
 @media (min-width:601px) {
-    .medium\:margin-left-small {
-        margin-left: var(--margin-small)
-    }
-
-    .medium\:margin-top-none {
-        margin-top: var(--margin-none)
-    }
-
     .medium\:flex-row {
         flex-direction: row
     }
@@ -1154,6 +1138,15 @@
     width: auto !important
 }
 
+.\[\&\>span\:nth-child\(2\)\>span\:nth-child\(1\)\]\:text-wrap>span:nth-child(2)>span:first-child {
+    white-space: normal
+}
+
+.\[\&\>span\:nth-child\(2\)\>span\:nth-child\(1\)\]\:text-truncate-none>span:nth-child(2)>span:first-child {
+    overflow: visible;
+    text-overflow: clip
+}
+
 .\[\&\>span\:nth-child\(2\)\>span\:nth-child\(1\)\]\:width-full>span:nth-child(2)>span:first-child {
     width: 100%
 }
@@ -1177,6 +1170,11 @@
 .\[\&_\.padding-y-large\]\:padding-y-medium .padding-y-large {
     padding-top: var(--padding-medium);
     padding-bottom: var(--padding-medium)
+}
+
+.\[\&_\.text-body-small\]\:\[opacity\:0\.5\] .text-body-small,
+.\[\&_\.text-title-medium\]\:\[opacity\:0\.5\] .text-title-medium {
+    opacity: .5
 }
 
 .announcements-upsell {

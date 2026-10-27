@@ -1232,18 +1232,16 @@ div.MuiDialog-root:not(:first-of-type) .MuiDialog-container {
 }
 
 @media (min-width:1141px) {
-
-    .no-gutter-ads.logged-in.left-nav-new-width,
-    body.left-nav-new-width {
+    .no-gutter-ads.logged-in {
         --left-nav-reserved-width: 289px
     }
 }
 
-.no-gutter-ads.left-nav-new-width main.container-main {
+.no-gutter-ads main.container-main {
     margin-left: var(--left-nav-reserved-width)
 }
 
-.no-gutter-ads.left-nav-new-width footer.container-footer {
+.no-gutter-ads footer.container-footer {
     margin-left: var(--left-nav-reserved-width);
     width: calc(100% - var(--left-nav-reserved-width))
 }
@@ -4659,12 +4657,11 @@ a.btn-uiblox-common-common-notification-bell-md .btn-text {
     background-color: var(--color-navigation-background) !important
 }
 
-.theme-classic .left-nav,
-.theme-classic .rbx-left-col {
+.theme-classic .left-nav {
     background-color: var(--color-navigation-background)
 }
 
-@media (min-width:1688px) {
+@media (min-width:1141px) {
     .rbx-header .rbx-nav-collapse .menu-button {
         display: none
     }
@@ -4683,29 +4680,6 @@ a.btn-uiblox-common-common-notification-bell-md .btn-text {
     .rbx-header .icon-logo-r,
     .rbx-header .nav-logo-glyph,
     .rbx-header .nav-container .nav-icon {
-        display: none
-    }
-}
-
-@media (min-width:1141px) {
-    .left-nav-new-width .rbx-header .rbx-nav-collapse .menu-button {
-        display: none
-    }
-
-    .left-nav-new-width .rbx-header .rbx-navbar-header {
-        width: 175px;
-        max-width: 175px;
-        margin: 0;
-        padding: 0 12px
-    }
-
-    .left-nav-new-width .rbx-header .icon-logo {
-        display: block
-    }
-
-    .left-nav-new-width .rbx-header .icon-logo-r,
-    .left-nav-new-width .rbx-header .nav-logo-glyph,
-    .left-nav-new-width .rbx-header .nav-container .nav-icon {
         display: none
     }
 }
@@ -4877,6 +4851,14 @@ a.btn-uiblox-common-common-notification-bell-md .btn-text {
     margin-left: auto
 }
 
+.logged-out .rbx-header .rbx-nav-collapse .menu-button {
+    display: none
+}
+
+.rbx-header .navbar-search {
+    width: 40%
+}
+
 @media (min-width:992px) {
     .rbx-header .navbar-search.col-md-2 {
         width: 16.6667cqw
@@ -4889,191 +4871,39 @@ a.btn-uiblox-common-common-notification-bell-md .btn-text {
     }
 }
 
-.logged-out .rbx-header .rbx-nav-collapse .menu-button {
-    display: none
-}
-
-.left-nav-new-width .rbx-header .navbar-search {
-    width: 40%
-}
-
 @media (min-width:601px) {
-    .left-nav-new-width .rbx-header .navbar-search {
+    .logged-in .rbx-header .navbar-search {
         width: 30%
     }
 }
 
 @media (max-width:600px) {
-    .left-nav-new-width .rbx-header .navbar-search {
+    .logged-in .rbx-header .navbar-search {
         width: calc(100% - 24px)
     }
 }
 
 @media (min-width:651px) {
-    .left-nav-new-width .rbx-header .navbar-search {
+    .logged-in .rbx-header .navbar-search {
         width: 40%
     }
 }
 
 @media (min-width:991px) {
-    .left-nav-new-width .rbx-header .navbar-search {
+    .logged-in .rbx-header .navbar-search {
         width: 15%
     }
 }
 
 @media (min-width:992px) {
-    .left-nav-new-width .rbx-header .navbar-search {
+    .logged-in .rbx-header .navbar-search {
         width: 15cqw
     }
 }
 
 @media (min-width:1521px) {
-    .left-nav-new-width .rbx-header .navbar-search {
+    .logged-in .rbx-header .navbar-search {
         width: 25cqw
-    }
-}
-
-.rbx-left-col.nav-show {
-    visibility: visible;
-    display: block
-}
-
-.rbx-left-col.nav-show .rbx-scrollbar {
-    height: calc(100% - 45px)
-}
-
-.rbx-left-col.nav-show .rbx-scrollbar li {
-    width: 155px
-}
-
-.rbx-left-col {
-    z-index: 1001;
-    visibility: hidden;
-    transform: translate(0, 0);
-    width: 175px;
-    font-size: 16px;
-    display: none;
-    position: fixed;
-    top: 82px;
-    left: 0;
-    overflow: hidden;
-    -ms-transform: none;
-    box-shadow: 0 0 3px rgba(25, 25, 25, .3)
-}
-
-.rbx-left-col li {
-    line-height: 1.42857
-}
-
-.rbx-left-col li .text-nav {
-    -ms-flex-align: center;
-    align-items: center
-}
-
-.rbx-left-col li .text-nav:visited {
-    outline: 0
-}
-
-.rbx-left-col li .text-nav .avatar-headshot-xs {
-    -ms-flex-negative: 0;
-    flex-shrink: 0;
-    width: 24px;
-    height: 24px;
-    margin: 2px
-}
-
-.rbx-left-col li .text-nav .font-header-2 {
-    margin: 3px;
-    display: inline-block
-}
-
-.rbx-left-col li .text-nav .verified-badge-left-nav {
-    -ms-flex-positive: 0;
-    flex-grow: 0
-}
-
-.rbx-left-col li button.text-nav {
-    background-color: transparent;
-    border: none;
-    width: 155px;
-    padding: 0
-}
-
-.rbx-left-col li button.text-nav:not(:-webkit-any(:lang(ae), :lang(ar), :lang(arc), :lang(bcc), :lang(bqi), :lang(ckb), :lang(dv), :lang(fa), :lang(glk), :lang(he), :lang(ku), :lang(mzn), :lang(nqo), :lang(pnb), :lang(ps), :lang(sd), :lang(ug), :lang(ur), :lang(yi))) {
-    text-align: left
-}
-
-.rbx-left-col li button.text-nav:not(:-moz-any(:lang(ae), :lang(ar), :lang(arc), :lang(bcc), :lang(bqi), :lang(ckb), :lang(dv), :lang(fa), :lang(glk), :lang(he), :lang(ku), :lang(mzn), :lang(nqo), :lang(pnb), :lang(ps), :lang(sd), :lang(ug), :lang(ur), :lang(yi))) {
-    text-align: left
-}
-
-.rbx-left-col li button.text-nav:not(:-webkit-any(:lang(ae), :lang(ar), :lang(arc), :lang(bcc), :lang(bqi), :lang(ckb), :lang(dv), :lang(fa), :lang(glk), :lang(he), :lang(ku), :lang(mzn), :lang(nqo), :lang(pnb), :lang(ps), :lang(sd), :lang(ug), :lang(ur), :lang(yi))) {
-    text-align: left
-}
-
-.rbx-left-col li button.text-nav:not(:-moz-any(:lang(ae), :lang(ar), :lang(arc), :lang(bcc), :lang(bqi), :lang(ckb), :lang(dv), :lang(fa), :lang(glk), :lang(he), :lang(ku), :lang(mzn), :lang(nqo), :lang(pnb), :lang(ps), :lang(sd), :lang(ug), :lang(ur), :lang(yi))) {
-    text-align: left
-}
-
-.rbx-left-col li button.text-nav:not(:is(:lang(ae), :lang(ar), :lang(arc), :lang(bcc), :lang(bqi), :lang(ckb), :lang(dv), :lang(fa), :lang(glk), :lang(he), :lang(ku), :lang(mzn), :lang(nqo), :lang(pnb), :lang(ps), :lang(sd), :lang(ug), :lang(ur), :lang(yi))) {
-    text-align: left
-}
-
-.rbx-left-col li button.text-nav:-webkit-any(:lang(ae), :lang(ar), :lang(arc), :lang(bcc), :lang(bqi), :lang(ckb), :lang(dv), :lang(fa), :lang(glk), :lang(he), :lang(ku), :lang(mzn), :lang(nqo), :lang(pnb), :lang(ps), :lang(sd), :lang(ug), :lang(ur), :lang(yi)) {
-    text-align: right
-}
-
-.rbx-left-col li button.text-nav:-moz-any(:lang(ae), :lang(ar), :lang(arc), :lang(bcc), :lang(bqi), :lang(ckb), :lang(dv), :lang(fa), :lang(glk), :lang(he), :lang(ku), :lang(mzn), :lang(nqo), :lang(pnb), :lang(ps), :lang(sd), :lang(ug), :lang(ur), :lang(yi)) {
-    text-align: right
-}
-
-.rbx-left-col li button.text-nav:is(:lang(ae), :lang(ar), :lang(arc), :lang(bcc), :lang(bqi), :lang(ckb), :lang(dv), :lang(fa), :lang(glk), :lang(he), :lang(ku), :lang(mzn), :lang(nqo), :lang(pnb), :lang(ps), :lang(sd), :lang(ug), :lang(ur), :lang(yi)) {
-    text-align: right
-}
-
-.rbx-left-col li span[class^=icon] {
-    vertical-align: middle;
-    margin: 0
-}
-
-.rbx-left-col li a:not(.dynamic-overflow-container) {
-    display: block
-}
-
-.rbx-left-col li a.btn-secondary-xs,
-.rbx-left-col li a.btn-secondary-xs:hover,
-.rbx-left-col li a.btn-secondary-xs:focus {
-    color: #fff
-}
-
-.rbx-left-col .rbx-scrollbar {
-    width: 175px
-}
-
-.rbx-left-col .rbx-scrollbar a,
-.rbx-left-col .rbx-scrollbar a:hover,
-.rbx-left-col .rbx-scrollbar a:focus {
-    font-weight: var(--font-weight-500)
-}
-
-@media (min-width:1688px) {
-
-    .no-gutter-ads .rbx-left-col,
-    .rbx-left-col {
-        visibility: visible;
-        display: block
-    }
-}
-
-@media (min-width:992px) {
-    .rbx-left-col {
-        top: 40px
-    }
-}
-
-@media (max-width:600px) {
-    .rbx-left-col {
-        top: 74px
     }
 }
 
@@ -5183,14 +5013,6 @@ a.btn-uiblox-common-common-notification-bell-md .btn-text {
     color: #272930;
     background-color: #fff;
     border-color: #fff
-}
-
-.rbx-left-col .rbx-scrollbar {
-    height: 100%
-}
-
-.rbx-left-col .rbx-scrollbar .rbx-upgrade-now {
-    margin: 12px 0
 }
 
 .modal-body .shop-description {
@@ -5791,50 +5613,6 @@ a.btn-uiblox-common-common-notification-bell-md .btn-text {
 #nav-home:hover,
 #nav-inventory:hover,
 #nav-my-feed:hover {
-    color: var(--color-content-emphasis)
-}
-
-.rbx-left-col.light-theme {
-    background-color: var(--color-surface-100);
-    box-shadow: 0 0 8px rgba(0, 0, 0, .1)
-}
-
-.rbx-left-col.light-theme li .text-nav:link,
-.rbx-left-col.light-theme li .text-nav:visited,
-.rbx-left-col.light-theme li .text-nav:active {
-    color: var(--color-content-emphasis)
-}
-
-.light-theme .rbx-left-col {
-    background-color: var(--color-surface-100);
-    box-shadow: 0 0 8px rgba(0, 0, 0, .1)
-}
-
-.light-theme .rbx-left-col li .text-nav:link,
-.light-theme .rbx-left-col li .text-nav:visited,
-.light-theme .rbx-left-col li .text-nav:active {
-    color: var(--color-content-emphasis)
-}
-
-.rbx-left-col.dark-theme {
-    background-color: var(--color-surface-100);
-    box-shadow: 0 0 8px rgba(0, 0, 0, .3)
-}
-
-.rbx-left-col.dark-theme li .text-nav:link,
-.rbx-left-col.dark-theme li .text-nav:visited,
-.rbx-left-col.dark-theme li .text-nav:active {
-    color: var(--color-content-emphasis)
-}
-
-.dark-theme .rbx-left-col {
-    background-color: var(--color-surface-100);
-    box-shadow: 0 0 8px rgba(0, 0, 0, .3)
-}
-
-.dark-theme .rbx-left-col li .text-nav:link,
-.dark-theme .rbx-left-col li .text-nav:visited,
-.dark-theme .rbx-left-col li .text-nav:active {
     color: var(--color-content-emphasis)
 }
 

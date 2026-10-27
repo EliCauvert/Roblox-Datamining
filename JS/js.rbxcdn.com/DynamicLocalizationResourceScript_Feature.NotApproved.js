@@ -425,6 +425,7 @@ Roblox.LangDynamic["Feature.NotApproved"] = {
     "Description.BannedDescription.Kids": "You can’t use this account any more.",
     "Action.Pending": "Pending",
     "Action.ViewAppealGuidelines": "View appeal guidelines and disclosures",
-    "Label.AbuseType.ChildEndangerment.V4": "Child Safety"
+    "Label.AbuseType.ChildEndangerment.V4": "Child Safety",
+    "Label.AbuseType.AgeInappropriateMetadata": "Age Inappropriate Metadata"
 };
 window.Roblox && window.Roblox.BundleDetector && window.Roblox.BundleDetector.bundleDetected("DynamicLocalizationResourceScript_Feature.NotApproved");

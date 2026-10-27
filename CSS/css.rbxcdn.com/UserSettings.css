@@ -4886,6 +4886,26 @@ input[type=button].btn-block {
     margin: 12px 0
 }
 
+.profile-visibility-settings {
+    border-radius: 6px
+}
+
+.profile-visibility-settings .profile-visibility-heading {
+    margin: 0
+}
+
+.profile-visibility-settings .profile-visibility-setting {
+    padding: 15px 12px
+}
+
+.profile-visibility-settings .profile-visibility-setting .radio-buttons-header {
+    font-size: 16px
+}
+
+.profile-visibility-settings .profile-visibility-divider {
+    margin: 0 12px
+}
+
 @media (max-width:767px) {
     .bottom-centered-button {
         width: 100%;

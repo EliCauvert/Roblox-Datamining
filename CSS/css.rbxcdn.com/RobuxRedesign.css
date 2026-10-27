@@ -758,6 +758,10 @@
     top: 5px
 }
 
+.top-\[env\(safe-area-inset-top\)\] {
+    top: env(safe-area-inset-top)
+}
+
 .top-\[var\(--size-50\)\] {
     top: var(--size-50)
 }
@@ -776,6 +780,10 @@
 
 .margin-top-\[8px\] {
     margin-top: 8px
+}
+
+.margin-top-\[env\(safe-area-inset-top\)\] {
+    margin-top: env(safe-area-inset-top)
 }
 
 .gap-\[var\(--size-150\)\] {
@@ -1313,6 +1321,10 @@
     text-underline-position: from-font
 }
 
+.\[z-index\:10\] {
+    z-index: 10
+}
+
 .\[z-index\:6\] {
     z-index: 6
 }
@@ -1832,6 +1844,14 @@ h5 {
 }
 
 @media (min-width:601px) {
+    .medium\:static {
+        position: static
+    }
+
+    .medium\:top-\[auto\] {
+        top: auto
+    }
+
     .medium\:self-auto {
         -ms-flex-item-align: auto;
         align-self: auto
@@ -2048,6 +2068,11 @@ h5 {
 }
 
 @media (min-width:1141px) {
+    .large\:margin-x-\[120px\] {
+        margin-left: 120px;
+        margin-right: 120px
+    }
+
     .large\:block {
         display: block
     }

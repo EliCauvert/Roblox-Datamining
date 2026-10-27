@@ -1955,6 +1955,7 @@ Roblox.LangDynamic["Feature.AccountSettings"] = {
     "Description.ProfileVisibilityFriendList": "Who can see your friend list",
     "Description.ProfileVisibilityPreviousUsernames": "Who can see your previous usernames",
     "Description.ProfileVisibilityAbout": "Who can see the About section on your profile",
-    "Heading.ProfileVisibility": "Profile visibility"
+    "Heading.ProfileVisibility": "Profile visibility",
+    "Feature.AccountSettings.Heading.ContentPersonalization": "Content Personalization"
 };
 window.Roblox && window.Roblox.BundleDetector && window.Roblox.BundleDetector.bundleDetected("DynamicLocalizationResourceScript_Feature.AccountSettings");
