@@ -1,7 +1,7 @@
 ﻿return require(script:FindFirstAncestor("Groups").Parent.React).createContext({
 	userId = "",
 	groupId = nil,
-	groupDetailPaneSource = nil,
+	groupOverviewPaneSource = nil,
 	navigateTo = {
 		previousView = nil,
 		webView = function() end,

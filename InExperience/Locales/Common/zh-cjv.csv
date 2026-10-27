@@ -2163,7 +2163,10 @@ Feature.Build.Description.ManagedPricingAcknowledgement,托管定价会根据地
 Feature.Build.Description.ManagedPricingCurrentProducts,对当前所有商品使用托管定价
 Feature.Build.Description.ManagedPricingUnavailable,此体验无法使用托管定价。
 Feature.Build.Description.NoEligibleManagedPricingProducts,没有符合条件的商品
+Feature.Build.Description.NoMonetizationDeveloperProducts,
+Feature.Build.Description.NoMonetizationPasses,
 Feature.Build.Description.NoMonetizationProducts,描述你想创作的道具，以便开始在你的游戏中赚取 Robux
+Feature.Build.Description.NoMonetizationSubscriptions,
 Feature.Build.Description.PlayAfterPublish,选择谁可以在此体验发布后游玩。
 Feature.Build.Description.PlaytestLatest,你正在对最新版本进行游戏测试。准备好分享后即可发布。
 Feature.Build.Description.PlaytestLocked,创建你的第一款游戏后，你就可以开始游戏测试。
@@ -2197,9 +2200,18 @@ Feature.Build.Error.DeveloperProductPriceInvalid,"价格必须为 1 到 1,000,00
 Feature.Build.Error.DeveloperProductPriceRequiredForSale,在发布待售产品之前，请选择“编辑”并添加价格。
 Feature.Build.Error.DeveloperProductTextModerated,Roblox 审核团队更改了此产品的文本。请尝试使用其他措辞。
 Feature.Build.Error.ManagedPricingPartialUpdate,无法更新某些商品。
+Feature.Build.Error.MonetizationImageFailed,
+Feature.Build.Error.MonetizationImageInReview,
+Feature.Build.Error.MonetizationImagePreparing,
+Feature.Build.Error.MonetizationImageTimedOut,
+Feature.Build.Error.MonetizationImageTooLarge,
+Feature.Build.Error.MonetizationNoUniverse,
 Feature.Build.Error.MonetizationOptionUpdate,无法更新选项。请重试。
 Feature.Build.Error.MonetizationOptionsLoad,无法加载选项。请重试。
 Feature.Build.Error.MonetizationPermissionDenied,你没有更改收益化选项的权限。
+Feature.Build.Error.MonetizationPriceRequiredForRegionalPricing,
+Feature.Build.Error.MonetizationPriceRequiredForSale,
+Feature.Build.Error.MonetizationRateLimited,
 Feature.Build.Header.AccessSharing,访问权限和共享
 Feature.Build.Header.AllVersions,所有版本
 Feature.Build.Header.Answers,回答
@@ -2423,7 +2435,7 @@ Feature.Build.Message.BuildBusy,Build 忙碌中。请稍后重试。
 Feature.Build.Message.BuildConnectFailed,Build 无法连接。请重试。
 Feature.Build.Message.BuildInternalError,Build 遇到问题。请重试。
 Feature.Build.Message.BuildResponseFailed,Build 无法响应。请重试。
-Feature.Build.Message.BuildSendUnconfirmed,
+Feature.Build.Message.BuildSendUnconfirmed,Build 无法确认你的消息已发送。
 Feature.Build.Message.BuildStillWorking,正在处理。在等待期间，你可以离开 App、在 Roblox 中游玩或开始另一个项目。
 Feature.Build.Message.BuildStopped,你已停止 Build。
 Feature.Build.Message.BuildTakingLonger,处理时间过长。你可以继续等待，也可以开始处理其他事项。
@@ -2532,7 +2544,10 @@ Feature.Build.Title.GetUsers,获取用户
 Feature.Build.Title.InsufficientRobuxForModel,你的 Robux 不足
 Feature.Build.Title.ManagedPricingAcknowledgement,是否开启托管定价？
 Feature.Build.Title.Monetization,收益化
+Feature.Build.Title.NoMonetizationDeveloperProducts,
+Feature.Build.Title.NoMonetizationPasses,
 Feature.Build.Title.NoMonetizationProducts,开始在你的游戏中赚取收入
+Feature.Build.Title.NoMonetizationSubscriptions,
 Feature.Build.Title.NoRobuxForUsage,没有剩余的 Robux 可用于购买 Build 使用额度
 Feature.Build.Title.PickCampaign,选择时长
 Feature.Build.Title.Playtesters,
@@ -3090,7 +3105,6 @@ Feature.Chat.Label.ReplyChatInputPlaceholder,回复{DISPLAY_NAME}
 Feature.Chat.Label.ReplyToYourselfChatInputPlaceholder,回复自己
 Feature.Chat.Label.ReplyingToOthers,{DISPLAY_NAME} 表示...
 Feature.Chat.Label.ReplyingToYourself,你表示...
-Feature.Chat.Label.RobloxChat,
 Feature.Chat.Label.SearchFriends,搜索好友
 Feature.Chat.Label.SearchWord,
 Feature.Chat.Label.SnoozeChatNotifications,将体验内聊天通知静音：
@@ -3334,6 +3348,7 @@ Feature.Friends.Description.TrustedFriendsExpiredLink,请让你的好友重新�
 Feature.Friends.Description.TrustedFriendsInvalidLink,请确保你使用了正确的帐户登录，然后重试。
 Feature.Friends.Description.TrustedFriendsRequestModalBody,请仅添加你认识并信任的人。你可以随时通过对方的个人资料管理该好友。
 Feature.Friends.Description.TrustedFriendsUnavailable,“信赖的好友”功能在你所在的国家/地区尚不可用。
+Feature.Friends.Description.TrustedFriendsWrongAccount,
 Feature.Friends.Description.YouCanDoMoreWithTrustedFriends,在 Roblox 上，你可以与可信好友通过更多方式沟通，并随时通过对方的个人资料管理该好友。
 Feature.Friends.Error.AlreadyFriendError,此用户已经是你的好友。
 Feature.Friends.Error.DefaultFriendingError,无法发送好友邀请。请稍后重试。
@@ -3862,7 +3877,7 @@ Feature.Moments.Title.LeaveMomentCreation,要离开“精彩瞬间”创建页�
 Feature.Moments.Title.MomentRemoved,精彩瞬间已移除
 Feature.Moments.Title.PostInsights,发布洞见
 Feature.Moments.Title.ReportPost,举报帖子
-Feature.Moments.Title.UnfollowConfirmationDialog,
+Feature.Moments.Title.UnfollowConfirmationDialog,要取消关注 @{username} 吗？
 Feature.Moments.Tooltip.Creation,体验中的每个人都可以查看你的“精彩瞬间”。
 Feature.Moments.Tooltip.PostInsightsBody,查看观看次数、观看时长以及精彩瞬间在受众中的反响。
 Feature.Moments.Tooltip.PostInsightsTitle,请查看你的精彩瞬间洞察报告
@@ -4673,6 +4688,7 @@ Feature.UniversalShareSheet.Response.SharedCustomMessage,{CUSTOM_MESSAGE}和另�
 Feature.UniversalShareSheet.Response.SharedMessage,信息已发送
 Feature.UniversalShareSheet.Response.SharedMultipleMessages,
 Feature.UniversalShareSheet.SharedCustomMultipleMessages,{CUSTOM_MESSAGE}和另外 {N} 人
+Feature.UserLibrary.Label.MyLibrary,我的资源库
 Feature.VerificationUpsell.Action.AddPhone,添加手机
 Feature.VerificationUpsell.Action.AddPhoneNumber,添加手机号码
 Feature.VerificationUpsell.Action.AddPhoneVoice,添加手机号码，以使用语音聊天

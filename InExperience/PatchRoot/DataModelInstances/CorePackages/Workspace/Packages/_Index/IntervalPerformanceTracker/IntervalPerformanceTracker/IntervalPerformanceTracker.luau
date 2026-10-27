@@ -12,7 +12,15 @@ local AXFixAverageFPSCasing = game:DefineFastFlag("AXFixAverageFPSCasing", false
 local AXIntervalPerformanceTrackerScrollFrameCounters = game:DefineFastFlag("AXIntervalPerformanceTrackerScrollFrameCounters", false)
 local IntervalPerformanceTrackerScrollPositionSamples = game:DefineFastFlag("IntervalPerformanceTrackerScrollPositionSamples", false)
 local IntervalPerformanceTrackerCancelOnAppHide = game:DefineFastFlag("IntervalPerformanceTrackerCancelOnAppHide", false)
-local IsRandomValueBelow = math.random(0, 1000) < require(Parent.SharedFlags).GetFIntIntervalPerformanceTrackerEventStream()
+local RandomValue = math.random(0, 1000)
+local FIntIntervalPerformanceTrackerEventStream = require(Parent.SharedFlags).GetFIntIntervalPerformanceTrackerEventStream()
+local IsRandomValueBelow = RandomValue < FIntIntervalPerformanceTrackerEventStream
+
+local function _(p1: number): boolean
+	-- upvalues: RandomValue (copy), FIntIntervalPerformanceTrackerEventStream (copy)
+	return p1 >= 1000 or RandomValue < math.max(p1, FIntIntervalPerformanceTrackerEventStream)
+end
+
 local config = {
 	averageFPS = {
 		reducer = function(p1)
@@ -104,18 +112,18 @@ local FRAMEBUCKETKEYS = if AXIntervalPerformanceTrackerScrollFrameCounters then 
 }
 local list = { "rawFrameTimesMs", "rawScrollPositionSamplesCsv" }
 
-local function _(p1: number): string
+local _ = function(p1: number): string
 	return if p1 < 16 then "under_16" elseif p1 < 16.666666666666668 then "16_to_16_7" elseif p1 < 17.5 then "16_7_to_17_5" elseif p1 < 18 then "17_5_to_18" elseif p1 < 21 then "18_to_21" elseif p1 < 25 then "21_to_25" else "over_25"
 end
 
 local _ = function(p1, p2: number)
-	local CountP11 = #p1
-	local Ceiled = math.ceil(p2 / 100 * CountP11)
+	local CountP12 = #p1
+	local Ceiled = math.ceil(p2 / 100 * CountP12)
 	
 	if Ceiled < 1 then
 		Ceiled = 1
-	elseif CountP11 < Ceiled then
-		Ceiled = CountP11
+	elseif CountP12 < Ceiled then
+		Ceiled = CountP12
 	end
 	return p1[Ceiled]
 end
@@ -427,9 +435,11 @@ function Module1:_updateIntervals()
 	end
 end
 
-function Module1:startTracking(p3, Timeout, MetricsToTrack, CountersEnabled, EventStreamEnabled, ExtraFields, ScrollFrame)
-	-- upvalues: IsRandomValueBelow (copy), Module (copy), RunService (copy)
-	if not IsRandomValueBelow then return end
+function Module1:startTracking(p3, Timeout, MetricsToTrack, CountersEnabled, EventStreamEnabled, ExtraFields, ScrollFrame, p4: number)
+	-- upvalues: RandomValue (copy), FIntIntervalPerformanceTrackerEventStream (copy), IsRandomValueBelow (copy), Module (copy), RunService (copy)
+	if p4 == nil then
+		if not IsRandomValueBelow then return end
+	elseif p4 < 1000 and RandomValue >= math.max(p4, FIntIntervalPerformanceTrackerEventStream) then return end
 	if not self._intervals[p3] then
 		local NewModule = Module.new(Timeout, MetricsToTrack, CountersEnabled, EventStreamEnabled, ExtraFields, ScrollFrame)
 		self._intervals[p3] = NewModule
@@ -556,7 +566,7 @@ end
 
 function Module1:stopAndLogTracking(IntervalName)
 	-- upvalues: IsRandomValueBelow (copy), Default (copy), IntervalPerformanceTrackerTelemetryConfigModule (copy)
-	if not IsRandomValueBelow then return end
+	if not IsRandomValueBelow and not self._intervals[IntervalName] then return end
 	local Interval = self._intervals[IntervalName]
 	
 	if Interval then
@@ -595,7 +605,7 @@ end
 
 function Module1:cancelTracking(p3)
 	-- upvalues: IsRandomValueBelow (copy)
-	if IsRandomValueBelow then
+	if IsRandomValueBelow or self._intervals[p3] then
 		self._intervals[p3] = nil
 		self:disconnectUnusedRenderStepped()
 		

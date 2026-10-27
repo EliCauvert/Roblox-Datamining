@@ -19,9 +19,10 @@ local FFlagAXMarketplaceBreakpointMismatchCounter = AvatarExperienceFlagsModule.
 local FFlagAXSduiFeedMaintainScrollOnSeeAll = AvatarExperienceFlagsModule.FFlagAXSduiFeedMaintainScrollOnSeeAll
 local FFlagAXSduiPageVariantRequestId = AvatarExperienceFlagsModule.FFlagAXSduiPageVariantRequestId
 local FFlagAXSduiPublishRequestIdWithResponse = AvatarExperienceFlagsModule.FFlagAXSduiPublishRequestIdWithResponse
+local FFlagAXScrollTelemetryIntegration2 = require(Parent.SharedFlags).FFlagAXScrollTelemetryIntegration2
 
 return ReactModule.forwardRef(function(Frame, Ref)
-	-- upvalues: UseComponentBreakpointSizeModule (copy), FFlagAXSduiFeedPublishesBreakpoint (copy), FFlagAXMarketplaceBreakpointMismatchCounter (copy), ReactModule (copy), SduiLoadTimer (copy), AvatarScreen (copy), GetCatalogPageRequestIdStoreModule (copy), UseSignalStateFunction (copy), FFlagAXSduiCatalogScrollImpressions (copy), FFlagAXSduiFeedMaintainScrollOnSeeAll (copy), FFlagAXSduiPublishRequestIdWithResponse (copy), FFlagAXSduiPageVariantRequestId (copy), FetchCatalogPageModule (copy), CatalogSduiPageContextModule (copy), SduiFeatureEntryPoint (copy), GetCatalogConfigKeyModule (copy)
+	-- upvalues: UseComponentBreakpointSizeModule (copy), FFlagAXSduiFeedPublishesBreakpoint (copy), FFlagAXMarketplaceBreakpointMismatchCounter (copy), ReactModule (copy), SduiLoadTimer (copy), AvatarScreen (copy), GetCatalogPageRequestIdStoreModule (copy), UseSignalStateFunction (copy), FFlagAXSduiCatalogScrollImpressions (copy), FFlagAXScrollTelemetryIntegration2 (copy), FFlagAXSduiFeedMaintainScrollOnSeeAll (copy), FFlagAXSduiPublishRequestIdWithResponse (copy), FFlagAXSduiPageVariantRequestId (copy), FetchCatalogPageModule (copy), CatalogSduiPageContextModule (copy), SduiFeatureEntryPoint (copy), GetCatalogConfigKeyModule (copy)
 	local UseComponentBreakpointSizeModuleResult, UseComponentBreakpointSizeModuleResult2 = UseComponentBreakpointSizeModule(nil, if FFlagAXSduiFeedPublishesBreakpoint or FFlagAXMarketplaceBreakpointMismatchCounter then Frame.breakpointOptions else nil)
 	local UseMemoResult = ReactModule.useMemo(function()
 		-- upvalues: SduiLoadTimer (upval), AvatarScreen (upval)
@@ -31,26 +32,29 @@ return ReactModule.forwardRef(function(Frame, Ref)
 	local AppPage = if Frame.appPage then Frame.appPage else AvatarScreen.Catalog
 	local CatalogPageRequestIdStoreModule = GetCatalogPageRequestIdStoreModule(false)
 	local UseMemoResult1 = ReactModule.useMemo(function()
-		-- upvalues: FFlagAXSduiCatalogScrollImpressions (upval), Frame (copy), FFlagAXSduiFeedMaintainScrollOnSeeAll (upval)
+		-- upvalues: FFlagAXSduiCatalogScrollImpressions (upval), Frame (copy), FFlagAXScrollTelemetryIntegration2 (upval), FFlagAXSduiFeedMaintainScrollOnSeeAll (upval)
 		return if FFlagAXSduiCatalogScrollImpressions then {
 			identifier = Frame.identifier,
+			scrollPerformanceIntervalName = if FFlagAXScrollTelemetryIntegration2 then Frame.scrollPerformanceIntervalName else nil,
 			onScroll = Frame.onScroll,
 			requestImpressionsSignal = Frame.requestImpressionsSignal,
 			scrollPositionRef = if FFlagAXSduiFeedMaintainScrollOnSeeAll then Frame.scrollPositionRef else nil,
 			scrollRestoreRef = if FFlagAXSduiFeedMaintainScrollOnSeeAll then Frame.scrollRestoreRef else nil
 		} else {
 			identifier = Frame.identifier,
+			scrollPerformanceIntervalName = if FFlagAXScrollTelemetryIntegration2 then Frame.scrollPerformanceIntervalName else nil,
 			scrollPositionRef = if FFlagAXSduiFeedMaintainScrollOnSeeAll then Frame.scrollPositionRef else nil,
 			scrollRestoreRef = if FFlagAXSduiFeedMaintainScrollOnSeeAll then Frame.scrollRestoreRef else nil
 		}
 	end, if FFlagAXSduiCatalogScrollImpressions then {
 		Frame.identifier,
-		Frame.onScroll,
-		Frame.requestImpressionsSignal,
+		if FFlagAXScrollTelemetryIntegration2 then Frame.scrollPerformanceIntervalName else nil,
+		Frame.onScroll, Frame.requestImpressionsSignal,
 		if FFlagAXSduiFeedMaintainScrollOnSeeAll then Frame.scrollPositionRef else nil,
 		if FFlagAXSduiFeedMaintainScrollOnSeeAll then Frame.scrollRestoreRef else nil
 	} else {
 		Frame.identifier,
+		if FFlagAXScrollTelemetryIntegration2 then Frame.scrollPerformanceIntervalName else nil,
 		if FFlagAXSduiFeedMaintainScrollOnSeeAll then Frame.scrollPositionRef else nil,
 		if FFlagAXSduiFeedMaintainScrollOnSeeAll then Frame.scrollRestoreRef else nil
 	})

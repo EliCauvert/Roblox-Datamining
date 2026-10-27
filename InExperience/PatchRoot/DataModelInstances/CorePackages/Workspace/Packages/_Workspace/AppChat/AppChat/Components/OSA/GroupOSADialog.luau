@@ -54,9 +54,7 @@ local SquadPromptType = require(Parent.SquadsCore.Enums).SquadPromptType
 local ShouldShowU13ChatOptInForConversationModule = require(AppChat.Utils.shouldShowU13ChatOptInForConversation)
 local FFlagAppChatEnableU13ChatOptIn = require(Parent.SharedFlags).FFlagAppChatEnableU13ChatOptIn
 local FFlagFriendsChatEnableConversationConsent = require(Parent.SharedFlags).FFlagFriendsChatEnableConversationConsent
-local FFlagSupportViewingUserProfileOnOSAModule = require(AppChat.Flags.FFlagSupportViewingUserProfileOnOSA)
 local AppChatGroupOsaViewDetailsUrl = game:DefineFastString("AppChatGroupOsaViewDetailsUrl", "https://en.help.roblox.com/hc/en-us/articles/360000432483-Party-chat-In-App")
-local AddFocusNavigationToGroupOSADialog = game:DefineFastFlag("AddFocusNavigationToGroupOSADialog", false)
 local InlineRichTextModule = require(Parent.InlineRichText)
 local Renderer = InlineRichTextModule.Renderer
 local LinkBehavior = InlineRichTextModule.Enums.LinkBehavior
@@ -81,7 +79,7 @@ local function _(p1, p2)
 end
 
 return function(p1)
-	-- upvalues: CryoModule (copy), config1 (copy), FFlagAppChatEnableU13ChatOptIn (copy), OsaContextCard (copy), UseDispatchFunction (copy), UseStoreFunction (copy), UseLocalUserIdFunction (copy), UseTokensFunction (copy), UseAppPolicyModule (copy), ReactModule (copy), IsPlaceIdAbove (copy), LinkBehavior (copy), UseEffectFunction (copy), UseTelemetryModule (copy), AppTelemetryLayerModule (copy), ConversationListOverlayTelemetryModule (copy), SquadExternalContractContext (copy), UseGetConversationFromIdModule (copy), config (copy), ShouldShowU13ChatOptInForConversationModule (copy), ConstantsModule (copy), FFlagFriendsChatEnableConversationConsent (copy), APIFunction (copy), NewResult (copy), GetConversationStoreModule (copy), ReceivedConversationModule (copy), ConversationRoduxSeedModule (copy), UseSelectorFunction (copy), GetDeepValue2Module (copy), AppChatNetworkingModule (copy), UseUserProfilesFetchFunction (copy), UserProfilesModule (copy), _DateTime (copy), GetCombinedNameFromIdFunction (copy), ConversationModule (copy), UseLocalizationFunction (copy), AppChatGroupOsaViewDetailsUrl (copy), UserRow (copy), FoundationModule (copy), BadgeVariant (copy), FFlagSupportViewingUserProfileOnOSAModule (copy), ModalTelemetryModule (copy), AddFocusNavigationToGroupOSADialog (copy), FocusNavigationEventNameEnum (copy), InputHandlersModule (copy), UseFocusRootFunction (copy), FocusNavigableSurfaceIdentifierEnum (copy), EventMap (copy), UseDefaultFocusBehaviorFunction (copy), UseLastInputFunction (copy), ResponsiveModule (copy), SquadPromptType (copy), UseRecordModalSequenceResponseForConversationModule (copy), Accept (copy), ConversationListOverlay (copy), APIFunction1 (copy), Skeleton (copy), Radius (copy), Dialog (copy), Renderer (copy), Orientation (copy), ButtonVariant (copy)
+	-- upvalues: CryoModule (copy), config1 (copy), FFlagAppChatEnableU13ChatOptIn (copy), OsaContextCard (copy), UseDispatchFunction (copy), UseStoreFunction (copy), UseLocalUserIdFunction (copy), UseTokensFunction (copy), UseAppPolicyModule (copy), ReactModule (copy), IsPlaceIdAbove (copy), LinkBehavior (copy), UseEffectFunction (copy), UseTelemetryModule (copy), AppTelemetryLayerModule (copy), ConversationListOverlayTelemetryModule (copy), SquadExternalContractContext (copy), UseGetConversationFromIdModule (copy), config (copy), ShouldShowU13ChatOptInForConversationModule (copy), ConstantsModule (copy), FFlagFriendsChatEnableConversationConsent (copy), APIFunction (copy), NewResult (copy), GetConversationStoreModule (copy), ReceivedConversationModule (copy), ConversationRoduxSeedModule (copy), UseSelectorFunction (copy), GetDeepValue2Module (copy), AppChatNetworkingModule (copy), UseUserProfilesFetchFunction (copy), UserProfilesModule (copy), _DateTime (copy), GetCombinedNameFromIdFunction (copy), ConversationModule (copy), UseLocalizationFunction (copy), AppChatGroupOsaViewDetailsUrl (copy), UserRow (copy), FoundationModule (copy), BadgeVariant (copy), ModalTelemetryModule (copy), FocusNavigationEventNameEnum (copy), InputHandlersModule (copy), UseFocusRootFunction (copy), FocusNavigableSurfaceIdentifierEnum (copy), EventMap (copy), UseDefaultFocusBehaviorFunction (copy), UseLastInputFunction (copy), ResponsiveModule (copy), SquadPromptType (copy), UseRecordModalSequenceResponseForConversationModule (copy), Accept (copy), ConversationListOverlay (copy), APIFunction1 (copy), Skeleton (copy), Radius (copy), Dialog (copy), Renderer (copy), Orientation (copy), ButtonVariant (copy)
 	local UnionResult = CryoModule.Dictionary.union(config1, p1)
 	local ModalVariant = if FFlagAppChatEnableU13ChatOptIn then UnionResult.modalVariant else OsaContextCard
 	local UseDispatchResult = UseDispatchFunction()
@@ -293,8 +291,8 @@ return function(p1)
 		UseMemoResult2,
 		UseSelectorResult,
 		UseLocalizationResult.blockedText,
-		if FFlagSupportViewingUserProfileOnOSAModule then UnionResult.onViewUserProfile else nil,
-		if FFlagSupportViewingUserProfileOnOSAModule then UnionResult.onClose else nil
+		UnionResult.onViewUserProfile,
+		UnionResult.onClose
 	})
 	local UseResult = ReactModule.useCallback(function()
 		-- upvalues: UseTelemetryModuleResult (copy), ConversationListOverlayTelemetryModule (upval), ModalVariant (ref), ModalTelemetryModule (upval), UnionResult (copy)
@@ -312,33 +310,25 @@ return function(p1)
 		UnionResult.conversationId,
 		ModalVariant
 	})
-	local UseMemoResult5 = if AddFocusNavigationToGroupOSADialog then ReactModule.useMemo(function()
-		-- upvalues: FocusNavigationEventNameEnum (upval), InputHandlersModule (upval), UseResult (copy)
-		return {
-			[FocusNavigationEventNameEnum.NavigateBack] = {
-				handler = InputHandlersModule.onRelease(function(p2)
-					-- upvalues: UseResult (upval)
-					UseResult()
-					p2:cancel()
-				end)
-			}
-		}
-	end, { UseResult }) else nil
-	local UseFocusRootResult = if AddFocusNavigationToGroupOSADialog then UseFocusRootFunction({
+	local UseDefaultFocusBehaviorResult, UseDefaultFocusBehaviorResult2 = UseDefaultFocusBehaviorFunction((UseFocusRootFunction({
 		isAutoFocusRoot = true,
 		shouldRestoreFocus = false,
 		surfaceIdentifier = FocusNavigableSurfaceIdentifierEnum.PopUp,
-		eventHandlers = UseMemoResult5,
+		eventHandlers = ReactModule.useMemo(function()
+			-- upvalues: FocusNavigationEventNameEnum (upval), InputHandlersModule (upval), UseResult (copy)
+			return {
+				[FocusNavigationEventNameEnum.NavigateBack] = {
+					handler = InputHandlersModule.onRelease(function(p2)
+						-- upvalues: UseResult (upval)
+						UseResult()
+						p2:cancel()
+					end)
+				}
+			}
+		end, { UseResult }),
 		eventMap = EventMap
-	}) else nil
-	local v1 = nil
-	local v2 = nil
-	
-	if AddFocusNavigationToGroupOSADialog then
-		v1, v84 = UseDefaultFocusBehaviorFunction(UseFocusRootResult)
-	end
-	local UseLastInputResult = if AddFocusNavigationToGroupOSADialog then UseLastInputFunction() else nil
-	local IsUseLastInputResultMatch: boolean = AddFocusNavigationToGroupOSADialog and UseLastInputResult == ResponsiveModule.Input.Directional
+	})))
+	local IsUseLastInputResultMatch = UseLastInputFunction() == ResponsiveModule.Input.Directional
 	local UseResult1 = ReactModule.useCallback(function()
 		-- upvalues: UseContextResult (copy), UseStoreResult (copy), SquadPromptType (upval)
 		UseContextResult.setSquadPrompt(UseStoreResult, {
@@ -429,7 +419,7 @@ return function(p1)
 	local NoUseSelectorResult: boolean = UseGetConversationFromIdModuleResult1.source == "channels" and UseSelectorResult == nil
 	local NoUseGetConversationFromIdModuleResult = not UseGetConversationFromIdModuleResult or (NoUseSelectorResult or UseMemoResult1 ~= nil and Loading)
 	local InviterTitleText = if UseMemoResult3 then if IsConversationTypeMatch then UseLocalizationResult.inviterTitleText else UseLocalizationResult.inviterTitleTextOneToOne else UseLocalizationResult.titleText
-	local UseMemoResult6 = ReactModule.useMemo(function()
+	local UseMemoResult5 = ReactModule.useMemo(function()
 		-- upvalues: ReactModule (upval), FoundationModule (upval), Skeleton (upval), UseTokensResult (copy), Radius (upval)
 		return ReactModule.createElement(FoundationModule.View, {
 			tag = "col gap-medium size-full-0 auto-y margin-top-small"
@@ -461,7 +451,7 @@ return function(p1)
 			})
 		})
 	end, { UseTokensResult })
-	local UseMemoResult7 = ReactModule.useMemo(function()
+	local UseMemoResult6 = ReactModule.useMemo(function()
 		-- upvalues: ReactModule (upval), FoundationModule (upval), Dialog (upval), UseLocalizationResult (copy), UseMemoResult4 (copy), Renderer (upval), UseTokensResult (copy), UseMemoResult (copy)
 		return ReactModule.createElement(FoundationModule.View, { tag = "col gap-medium size-full-0 auto-y" }, {
 			DialogContentHeader = ReactModule.createElement(Dialog.Text, {
@@ -484,14 +474,14 @@ return function(p1)
 	})
 	
 	return ReactModule.createElement(Dialog.Root, {
-		ref = if AddFocusNavigationToGroupOSADialog then v2 else nil,
+		ref = UseDefaultFocusBehaviorResult2,
 		size = UnionResult.dialogSize,
-		onClose = if AddFocusNavigationToGroupOSADialog and IsUseLastInputResultMatch then nil else UseResult,
+		onClose = if IsUseLastInputResultMatch then nil else UseResult,
 		hasBackdrop = UnionResult.hasBackdrop,
 		disablePortal = UnionResult.disablePortal
 	}, {
 		DialogTitle = not NoUseGetConversationFromIdModuleResult and ReactModule.createElement(Dialog.Title, { LayoutOrder = 1, text = InviterTitleText }),
-		DialogContent = ReactModule.createElement(Dialog.Content, { LayoutOrder = 2 }, if NoUseGetConversationFromIdModuleResult then UseMemoResult6 else UseMemoResult7),
+		DialogContent = ReactModule.createElement(Dialog.Content, { LayoutOrder = 2 }, if NoUseGetConversationFromIdModuleResult then UseMemoResult5 else UseMemoResult6),
 		DialogActions = not NoUseGetConversationFromIdModuleResult and ReactModule.createElement(Dialog.Actions, {
 			LayoutOrder = 3,
 			orientation = Orientation.Vertical,
@@ -499,7 +489,7 @@ return function(p1)
 				{
 					text = UseLocalizationResult.joinButtonText,
 					variant = ButtonVariant.Emphasis,
-					ref = if AddFocusNavigationToGroupOSADialog then v1 else nil,
+					ref = UseDefaultFocusBehaviorResult,
 					onActivated = UseResult2,
 					isDisabled = UseStateResult
 				},

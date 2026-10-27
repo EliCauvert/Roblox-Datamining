@@ -2410,6 +2410,7 @@ Feature.Build.Message.BuildBusy,Build 忙碌中。请稍后重试。
 Feature.Build.Message.BuildConnectFailed,Build 无法连接。请重试。
 Feature.Build.Message.BuildInternalError,Build 遇到问题。请重试。
 Feature.Build.Message.BuildResponseFailed,Build 无法响应。请重试。
+Feature.Build.Message.BuildSendUnconfirmed,Build 无法确认你的消息已发送。
 Feature.Build.Message.BuildStillWorking,正在处理。在等待期间，你可以离开 App、在 Roblox 中游玩或开始另一个项目。
 Feature.Build.Message.BuildStopped,你已停止 Build。
 Feature.Build.Message.BuildTakingLonger,处理时间过长。你可以继续等待，也可以开始处理其他事项。
@@ -3847,6 +3848,7 @@ Feature.Moments.Title.LeaveMomentCreation,要离开“精彩瞬间”创建页�
 Feature.Moments.Title.MomentRemoved,精彩瞬间已移除
 Feature.Moments.Title.PostInsights,发布洞见
 Feature.Moments.Title.ReportPost,举报帖子
+Feature.Moments.Title.UnfollowConfirmationDialog,要取消关注 @{username} 吗？
 Feature.Moments.Tooltip.Creation,体验中的每个人都可以查看你的“精彩瞬间”。
 Feature.Moments.Tooltip.PostInsightsBody,查看观看次数、观看时长以及精彩瞬间在受众中的反响。
 Feature.Moments.Tooltip.PostInsightsTitle,请查看你的精彩瞬间洞察报告
@@ -4651,6 +4653,7 @@ Feature.UniversalShareSheet.Response.SharedCustomMessage,{CUSTOM_MESSAGE}和另�
 Feature.UniversalShareSheet.Response.SharedMessage,信息已发送
 Feature.UniversalShareSheet.Response.SharedMultipleMessages,
 Feature.UniversalShareSheet.SharedCustomMultipleMessages,{CUSTOM_MESSAGE}和另外 {N} 人
+Feature.UserLibrary.Label.MyLibrary,我的资源库
 Feature.VerificationUpsell.Action.AddPhone,添加手机
 Feature.VerificationUpsell.Action.AddPhoneNumber,添加手机号码
 Feature.VerificationUpsell.Action.AddPhoneVoice,添加手机号码，以使用语音聊天

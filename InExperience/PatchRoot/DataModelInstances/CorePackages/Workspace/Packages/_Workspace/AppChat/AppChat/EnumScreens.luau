@@ -16,7 +16,6 @@
 	SquadVoiceReportAbuse = "SquadVoiceReportAbuse",
 	AddFriends = "AddFriends",
 	AppChatReportAbuse = "AppChatReportAbuse",
-	AppChatTrustedContactsModal = "AppChatTrustedContactsModal",
 	BlockingModal = "BlockingModal",
 	CreateUnfilteredChatPartialModal = "CreateUnfilteredChatPartialModal",
 	LearnMorePartialModal = "LearnMorePartialModal",

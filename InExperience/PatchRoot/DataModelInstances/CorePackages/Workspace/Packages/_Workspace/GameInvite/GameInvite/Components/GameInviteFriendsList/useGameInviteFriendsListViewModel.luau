@@ -10,6 +10,7 @@ local GameDetailsContextModule = require(GameInvite.Context.GameDetailsContext)
 local GameInviteFriendRowModule = require(script.Parent.GameInviteFriendRow)
 local _ = require(script.Parent.GameInviteFriendsListView)
 local CanShareGameInviteLinkModule = require(script.Parent.canShareGameInviteLink)
+local UseGameInviteJoinCardModule = require(script.Parent.useGameInviteJoinCard)
 local IsInThisServerModule = require(GameInvite.utils.isInThisServer)
 local IsJoinExpectedModule = require(GameInvite.utils.isJoinExpected)
 local ShouldShowJoinCtaModule = require(GameInvite.utils.shouldShowJoinCta)
@@ -18,21 +19,19 @@ local User = require(Parent.UserList).Enums.EntityType.User
 
 local function ignoreRowSelection() end
 
-local function onJoinActivated(_) end
-
 local function isJoinVisible(p1): boolean
 	-- upvalues: IsInThisServerModule (copy)
 	return not IsInThisServerModule(p1, game.JobId)
 end
 
-local function createJoinCtaConfig(p1)
-	-- upvalues: GameInviteConstantsModule (copy), onJoinActivated (copy), isJoinVisible (copy), IsJoinExpectedModule (copy)
+local function createJoinCtaConfig(p1, OnActivated)
+	-- upvalues: GameInviteConstantsModule (copy), isJoinVisible (copy), IsJoinExpectedModule (copy)
 	return {
 		supportedActions = { "JoinExperience" },
 		primaryCtaMinWidth = GameInviteConstantsModule.Layout.JoinCtaMinWidth,
 		primaryCtaMaxWidth = GameInviteConstantsModule.Layout.JoinCtaMaxWidth,
 		join = {
-			onActivated = onJoinActivated,
+			onActivated = OnActivated,
 			isVisible = isJoinVisible,
 			isJoinExpected = function(p2, p3)
 				-- upvalues: IsJoinExpectedModule (upval), p1 (copy)
@@ -42,18 +41,18 @@ local function createJoinCtaConfig(p1)
 	}
 end
 
-local function useJoinCtaConfig(FriendsById, UseContextResult)
+local function useJoinCtaConfig(FriendsById, UseContextResult, OnActivated)
 	-- upvalues: ShouldShowJoinCtaModule (copy), ReactModule (copy), createJoinCtaConfig (copy)
 	local ShouldShowJoinCtaModule1 = ShouldShowJoinCtaModule(UseContextResult)
 	
 	return ReactModule.useMemo(function()
-		-- upvalues: ShouldShowJoinCtaModule1 (copy), createJoinCtaConfig (upval), FriendsById (copy)
-		return if ShouldShowJoinCtaModule1 then createJoinCtaConfig(FriendsById) else nil
-	end, { ShouldShowJoinCtaModule1, FriendsById })
+		-- upvalues: ShouldShowJoinCtaModule1 (copy), createJoinCtaConfig (upval), FriendsById (copy), OnActivated (copy)
+		return if ShouldShowJoinCtaModule1 then createJoinCtaConfig(FriendsById, OnActivated) else nil
+	end, { ShouldShowJoinCtaModule1, FriendsById, OnActivated })
 end
 
 return function(p1)
-	-- upvalues: ReactModule (copy), FriendsMenuModule (copy), GameDetailsContextModule (copy), UseAppPolicyFunction (copy), User (copy), FFlagGameInviteInExpJoinCtaModule (copy), useJoinCtaConfig (copy), GameInviteFriendRowModule (copy), ignoreRowSelection (copy), CanShareGameInviteLinkModule (copy)
+	-- upvalues: ReactModule (copy), FriendsMenuModule (copy), GameDetailsContextModule (copy), UseAppPolicyFunction (copy), User (copy), FFlagGameInviteInExpJoinCtaModule (copy), UseGameInviteJoinCardModule (copy), useJoinCtaConfig (copy), GameInviteFriendRowModule (copy), ignoreRowSelection (copy), CanShareGameInviteLinkModule (copy)
 	local Friends = ReactModule.useContext(FriendsMenuModule.FriendsListContext).friends
 	local UseContextResult = ReactModule.useContext(GameDetailsContextModule)
 	local UseMemoResult = ReactModule.useMemo(function()
@@ -70,7 +69,8 @@ return function(p1)
 		return { entities = Entities, friendsById = FriendsById }
 	end, { Friends })
 	local FriendsById = UseMemoResult.friendsById
-	local UseJoinCtaConfigResult = if FFlagGameInviteInExpJoinCtaModule then useJoinCtaConfig(FriendsById, UseContextResult) else nil
+	local UseGameInviteJoinCardModuleResult = if FFlagGameInviteInExpJoinCtaModule then UseGameInviteJoinCardModule() else nil
+	local UseJoinCtaConfigResult = if FFlagGameInviteInExpJoinCtaModule then useJoinCtaConfig(FriendsById, UseContextResult, UseGameInviteJoinCardModuleResult.open) else nil
 	
 	return {
 		layoutOrder = p1.layoutOrder,
@@ -90,6 +90,7 @@ return function(p1)
 		showShareGameInviteLink = CanShareGameInviteLinkModule(game.GameId, UseContextResult, (UseAppPolicyFunction(function(p2)
 			return p2.getExperienceInviteShareLinkEnabled()
 		end))),
-		ctaConfig = if FFlagGameInviteInExpJoinCtaModule then UseJoinCtaConfigResult else nil
+		ctaConfig = if FFlagGameInviteInExpJoinCtaModule then UseJoinCtaConfigResult else nil,
+		joinCard = if FFlagGameInviteInExpJoinCtaModule and UseJoinCtaConfigResult ~= nil then UseGameInviteJoinCardModuleResult else nil
 	}
 end

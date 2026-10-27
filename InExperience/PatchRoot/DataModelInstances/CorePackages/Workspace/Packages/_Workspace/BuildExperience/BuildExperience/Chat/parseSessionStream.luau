@@ -5,7 +5,6 @@ local ChatTypesModule = require(script.Parent.chatTypes)
 local FFlagBuildAdUpsellModule = require(BuildExperience.Flags.FFlagBuildAdUpsell)
 local FFlagBuildExperienceChatImageAttachmentsModule = require(BuildExperience.Flags.FFlagBuildExperienceChatImageAttachments)
 local FFlagBuildExperienceChatResourceAttachments = require(Parent.SharedFlags).FFlagBuildExperienceChatResourceAttachments
-local FFlagBuildExperienceSinglePlaytestCardModule = require(BuildExperience.Flags.FFlagBuildExperienceSinglePlaytestCard)
 local PublishToolUtils = CreatorAgentChatModule.PublishToolUtils
 local TurnStateReducer = CreatorAgentChatModule.TurnStateReducer
 local SubagentTasks = CreatorAgentChatModule.SubagentTasks
@@ -311,7 +310,7 @@ local function buildTurnFeedbackIds(p3, TurnFeedbackIds)
 end
 
 return function(Tbl, p3)
-	-- upvalues: parseChatItems (copy), buildUserMessageItem (copy), TurnStateReducer (copy), PublishToolUtils (copy), SubagentTasks (copy), FFlagBuildAdUpsellModule (copy), buildTurnFeedbackIds (copy), FFlagBuildExperienceSinglePlaytestCardModule (copy), FFlagBuildExperienceChatResourceAttachments (copy), ChatTypesModule (copy), FFlagBuildExperienceChatImageAttachmentsModule (copy)
+	-- upvalues: parseChatItems (copy), buildUserMessageItem (copy), TurnStateReducer (copy), PublishToolUtils (copy), SubagentTasks (copy), FFlagBuildAdUpsellModule (copy), buildTurnFeedbackIds (copy), FFlagBuildExperienceChatResourceAttachments (copy), ChatTypesModule (copy), FFlagBuildExperienceChatImageAttachmentsModule (copy)
 	local SessionId = p3.sessionId
 	local Copy = table.clone(Tbl)
 	table.sort(Copy, function(A, B): boolean
@@ -392,7 +391,7 @@ return function(Tbl, p3)
 			SequenceIds = value1.sequenceIds
 		end
 	end
-	if FFlagBuildExperienceSinglePlaytestCardModule and Count1 ~= nil then
+	if Count1 ~= nil then
 		List[Count1].isLatestPublishTurn = true
 	end
 	local IsAwaitingUserMessageEcho = false
@@ -427,13 +426,13 @@ return function(Tbl, p3)
 	end
 	local LiveAssistantMessage = p3.liveAssistantMessage
 	local Entry = List[#List]
-	local NoStartSequenceId: boolean = Entry ~= nil and Entry.kind == "assistant_turn"
+	local IsAssistantTurn: boolean = Entry ~= nil and Entry.kind == "assistant_turn"
 	
-	if NoStartSequenceId then
+	if IsAssistantTurn then
 		local StartSequenceId1 = Entry.startSequenceId
-		NoStartSequenceId = StartSequenceId1 == nil or (p3.pendingUserMessageAfterSequenceId or -1) < StartSequenceId1
+		IsAssistantTurn = StartSequenceId1 == nil or (p3.pendingUserMessageAfterSequenceId or -1) < StartSequenceId1
 	end
-	if LiveAssistantMessage ~= nil and not NoStartSequenceId then
+	if LiveAssistantMessage ~= nil and not IsAssistantTurn then
 		local LiveName = if SessionId == nil then nil else `{SessionId}:live`
 		table.insert(List, {
 			kind = "assistant_turn",

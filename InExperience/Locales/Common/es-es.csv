@@ -2183,6 +2183,7 @@ Feature.Build.Description.PromoteGamePaid,Crea un anuncio para mostrar tu juego 
 Feature.Build.Description.PromoteGameWithAdCampaign,Aumenta tu público con una campaña publicitaria de {durationDays} días y haz que descubran tu juego.
 Feature.Build.Description.RaiseLimitOrWait,Aumenta tu límite diario de Robux para seguir creando o espera a que se restablezca mañana.
 Feature.Build.Description.RatingAgreement,"Al publicar, aceptas que esta valoración de contenido es precisa."
+Feature.Build.Description.RequiredRobuxForAdvanced,Necesitas al menos {ROBUX} Robux para seguir creando con el modelo Avanzado. También puedes volver al modelo Predeterminado o esperar a que se restablezca tu uso gratuito.
 Feature.Build.Description.RestoreLatest,Esta versión se convertirá en su última versión publicada.
 Feature.Build.Description.RevertToVersion,Confirma para revertir el último cambio y volver a {VERSION}.
 Feature.Build.Description.ShareLatest,Comparte lo que ha cambiado en tu última versión.
@@ -2430,6 +2431,7 @@ Feature.Build.Message.BuildBusy,La compilación se está procesando. Espera un m
 Feature.Build.Message.BuildConnectFailed,No se pudo conectar la compilación. Inténtalo de nuevo.
 Feature.Build.Message.BuildInternalError,La compilación encontró un problema. Inténtalo de nuevo.
 Feature.Build.Message.BuildResponseFailed,La compilación no pudo responder. Inténtalo de nuevo.
+Feature.Build.Message.BuildSendUnconfirmed,La compilación no pudo confirmar que tu mensaje se haya enviado.
 Feature.Build.Message.BuildStillWorking,"Estamos trabajando en ello. Puedes salir de la aplicación, jugar Roblox o comenzar otro proyecto mientras esperas."
 Feature.Build.Message.BuildStopped,Detuviste la compilación.
 Feature.Build.Message.BuildTakingLonger,Esto está tardando más de lo esperado. Puedes seguir esperando o comenzar con otra cosa.
@@ -3870,6 +3872,7 @@ Feature.Moments.Title.LeaveMomentCreation,¿Salir de la creación de Momento?
 Feature.Moments.Title.MomentRemoved,
 Feature.Moments.Title.PostInsights,Información de las publicaciones
 Feature.Moments.Title.ReportPost,Reportar publicación
+Feature.Moments.Title.UnfollowConfirmationDialog,¿Dejar de seguir a @{username}?
 Feature.Moments.Tooltip.Creation,Todas las personas que participan en la experiencia pueden ver tus Momentos.
 Feature.Moments.Tooltip.PostInsightsBody,"Consulta las visualizaciones, el tiempo de visualización y cómo le fue al Momento con tu audiencia."
 Feature.Moments.Tooltip.PostInsightsTitle,Aquí está la información de tu Momento
@@ -4675,6 +4678,7 @@ Feature.UniversalShareSheet.Response.SharedCustomMessage,{CUSTOM_MESSAGE} + 1 m
 Feature.UniversalShareSheet.Response.SharedMessage,El mensaje se envió
 Feature.UniversalShareSheet.Response.SharedMultipleMessages,Los mensajes se enviaron
 Feature.UniversalShareSheet.SharedCustomMultipleMessages,{CUSTOM_MESSAGE} + {N} más
+Feature.UserLibrary.Label.MyLibrary,Mi biblioteca
 Feature.VerificationUpsell.Action.AddPhone,Añadir teléfono
 Feature.VerificationUpsell.Action.AddPhoneNumber,Añadir número de teléfono
 Feature.VerificationUpsell.Action.AddPhoneVoice,

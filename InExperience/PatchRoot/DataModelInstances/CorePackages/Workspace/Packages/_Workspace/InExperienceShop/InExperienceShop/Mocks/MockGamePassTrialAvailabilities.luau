@@ -7,7 +7,7 @@ local t1 = {}
 return {
 	fetchGamePassTrialAvailabilities = function(_)
 		-- upvalues: t (copy), t1 (copy), PromiseModule (copy)
-		local config = { available = {}, active = {} }
+		local config = { available = {}, active = {}, redeemed = {} }
 		
 		for _, value in t do
 			config.available[value] = true

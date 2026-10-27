@@ -6,6 +6,7 @@ local _ = require(Parent.MomentsTypes)
 local MomentContextModule = require(script.Parent.Parent.Parent.MomentContext)
 local FFlagMomentsEngagementMetricsFeature = MomentsCommonModule.Flags.FFlagMomentsEngagementMetricsFeature
 local FFlagMomentsServeEDPVideos = require(Parent.SharedFlags).FFlagMomentsServeEDPVideos
+local FFlagMomentsRenderAvatarPostsInFeed = require(Parent.SharedFlags).FFlagMomentsRenderAvatarPostsInFeed
 local CreatorAttributionModule = require(script.Parent.CreatorAttribution)
 local DebugInfoModule = require(script.Parent.DebugInfo)
 local DescriptionModule = require(script.Parent.Description)
@@ -17,8 +18,9 @@ local GetMomentsCapabilitiesFunction = MomentsCommonModule.Stores.GetMomentsCapa
 local UseSignalStateFunction = require(Parent.SignalsReact).useSignalState
 
 return ReactModule.memo(function(Frame)
-	-- upvalues: MomentContextModule (copy), UseSignalStateFunction (copy), FFlagMomentsServeEDPVideos (copy), FFlagMomentsEngagementMetricsFeature (copy), GetMomentsCapabilitiesFunction (copy), UseMomentsSessionFunction (copy), ReactModule (copy), DebugInfoModule (copy), CreatorAttributionModule (copy), DescriptionModule (copy), ReactionsModule (copy), StatusChipModule (copy), View (copy)
-	local IsExperience = UseSignalStateFunction(MomentContextModule.useMoment().store.getData).kind == "experience"
+	-- upvalues: MomentContextModule (copy), UseSignalStateFunction (copy), FFlagMomentsRenderAvatarPostsInFeed (copy), FFlagMomentsServeEDPVideos (copy), FFlagMomentsEngagementMetricsFeature (copy), GetMomentsCapabilitiesFunction (copy), UseMomentsSessionFunction (copy), ReactModule (copy), DebugInfoModule (copy), CreatorAttributionModule (copy), DescriptionModule (copy), ReactionsModule (copy), StatusChipModule (copy), View (copy)
+	local Kind = UseSignalStateFunction(MomentContextModule.useMoment().store.getData).kind
+	local IsExperience: boolean = Kind == "experience" or FFlagMomentsRenderAvatarPostsInFeed and Kind == "avatar"
 	local IsEdpVideo = if FFlagMomentsServeEDPVideos then Frame.moment ~= nil and Frame.moment.entityType == "edpVideo" else nil
 	local UseSignalStateResult = if FFlagMomentsEngagementMetricsFeature then UseSignalStateFunction(GetMomentsCapabilitiesFunction(false).getIsEngagementMetricsEnabled) else nil
 	local t = {}

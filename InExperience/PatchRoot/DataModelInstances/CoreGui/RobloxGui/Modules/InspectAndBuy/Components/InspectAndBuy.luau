@@ -55,9 +55,11 @@ local CloseOverlayModule = require(Parent.Actions.CloseOverlay)
 local AvatarExperienceInspectAndBuyModule = require(CorePackages.Workspace.Packages.AvatarExperienceInspectAndBuy)
 local GetViewTypeFunction = AvatarExperienceInspectAndBuyModule.Utils.getViewType
 local InspectAndBuyVersion = AvatarExperienceInspectAndBuyModule.Enums.InspectAndBuyVersion
+local AvatarExperienceFlagsModule = require(CorePackages.Workspace.Packages.AvatarExperienceFlags)
 local FFlagEnableInspectAndBuyV2RootFlag = require(CorePackages.Workspace.Packages.SharedFlags).FFlagEnableInspectAndBuyV2RootFlag
 local FFlagAXEnableInspectAndBuyVersionAnalyticsModule = require(Parent.Flags.FFlagAXEnableInspectAndBuyVersionAnalytics)
-local FFlagAXEnableInspectAndBuyFocusNavigation = require(CorePackages.Workspace.Packages.AvatarExperienceFlags).FFlagAXEnableInspectAndBuyFocusNavigation
+local FFlagAXEnableInspectAndBuyFocusNavigation = AvatarExperienceFlagsModule.FFlagAXEnableInspectAndBuyFocusNavigation
+local FFlagAXInspectAndBuyAvatarBackground = AvatarExperienceFlagsModule.FFlagAXInspectAndBuyAvatarBackground
 local CachedPolicyServiceModule = require(CorePackages.Workspace.Packages.CachedPolicyService)
 local FFlagAXEnableNewInspectAndBuyContainerModule = require(Parent.Flags.FFlagAXEnableNewInspectAndBuyContainer)
 local OverrideCursorInspectMenu = require(CorePackages.Workspace.Packages.AppCommonLib).Symbol.named("OverrideCursorInspectMenu")
@@ -162,7 +164,7 @@ function InspectAndBuy.init(p1)
 end
 
 function InspectAndBuy.didMount(p1)
-	-- upvalues: AXEnableInspectAndBuyExposureLogging (copy), IxpUtilsModule (copy), AXInspectAndBuyLayerName (copy), FFlagEnableConsoleExpControls (copy), EnabledFunction (copy), ServiceModule (copy), UserInputService (copy), LocalizationService (copy), SetLocaleModule (copy), GuiService (copy), CachedPolicyServiceModule (copy), SetIsSubjectToChinaPoliciesModule (copy), MarketplaceService (copy), Players (copy), GetCharacterModelFromUserIdModule (copy), GetAssetsFromHumanoidDescriptionV2Module (copy), GetPlayerNameModule (copy)
+	-- upvalues: AXEnableInspectAndBuyExposureLogging (copy), IxpUtilsModule (copy), AXInspectAndBuyLayerName (copy), FFlagEnableConsoleExpControls (copy), EnabledFunction (copy), ServiceModule (copy), UserInputService (copy), LocalizationService (copy), SetLocaleModule (copy), GuiService (copy), CachedPolicyServiceModule (copy), SetIsSubjectToChinaPoliciesModule (copy), MarketplaceService (copy), Players (copy), GetCharacterModelFromUserIdModule (copy), GetAssetsFromHumanoidDescriptionV2Module (copy), FFlagAXInspectAndBuyAvatarBackground (copy), GetPlayerNameModule (copy)
 	local PlayerId = p1.props.playerId
 	p1.isMounted = true
 	p1:updateView()
@@ -230,13 +232,16 @@ function InspectAndBuy.didMount(p1)
 	
 	if PlayerId then
 		p1.state.store:dispatch(GetCharacterModelFromUserIdModule(PlayerId, false, function(PlayerModel)
-			-- upvalues: p1 (copy), GetAssetsFromHumanoidDescriptionV2Module (upval)
+			-- upvalues: p1 (copy), FFlagAXInspectAndBuyAvatarBackground (upval), GetAssetsFromHumanoidDescriptionV2Module (upval)
 			if p1 and p1.isMounted then
 				p1.playerModel = PlayerModel
 				local HumanoidDescription = p1.playerModel.Humanoid.HumanoidDescription
 				
 				if HumanoidDescription then
-					p1.state.store:dispatch(GetAssetsFromHumanoidDescriptionV2Module(HumanoidDescription, false))
+					p1.state.store:dispatch(GetAssetsFromHumanoidDescriptionV2Module(HumanoidDescription, false, if FFlagAXInspectAndBuyAvatarBackground then function()
+						-- upvalues: p1 (upval)
+						return p1.isMounted
+					end else nil))
 				end
 				p1:setState({ obtainedPlayerModel = true })
 			end
@@ -273,7 +278,7 @@ function InspectAndBuy.willUnmount(p1)
 end
 
 function InspectAndBuy.render(p2)
-	-- upvalues: FFlagAXEnableNewInspectAndBuyContainerModule (copy), RoactModule (copy), CoreScriptsRootProvider (copy), FFlagAXEnableInspectAndBuyFocusNavigation (copy), RoactRoduxModule (copy), InspectAndBuyBaseContainerModule (copy), FocusRoot (copy), FocusNavigableSurfaceIdentifierEnum (copy), InspectAndBuyContextModule (copy), RenderWithCoreScriptsStyleProviderModule (copy), SelectionCursorProvider (copy), ContainerModule (copy)
+	-- upvalues: FFlagAXEnableNewInspectAndBuyContainerModule (copy), RoactModule (copy), CoreScriptsRootProvider (copy), FFlagAXEnableInspectAndBuyFocusNavigation (copy), RoactRoduxModule (copy), InspectAndBuyBaseContainerModule (copy), FFlagAXInspectAndBuyAvatarBackground (copy), FocusRoot (copy), FocusNavigableSurfaceIdentifierEnum (copy), InspectAndBuyContextModule (copy), RenderWithCoreScriptsStyleProviderModule (copy), SelectionCursorProvider (copy), ContainerModule (copy)
 	local LocalPlayerModel = p2.localPlayerModel
 	
 	return if FFlagAXEnableNewInspectAndBuyContainerModule then RoactModule.createElement("Folder", { Name = "InspectAndBuyApp" }, {
@@ -281,7 +286,8 @@ function InspectAndBuy.render(p2)
 			StoreProvider = RoactModule.createElement(RoactRoduxModule.StoreProvider, { store = p2.state.store }, {
 				Container = RoactModule.createElement(InspectAndBuyBaseContainerModule, {
 					localPlayerModel = LocalPlayerModel,
-					analytics = p2.analytics
+					analytics = p2.analytics,
+					playerId = if FFlagAXInspectAndBuyAvatarBackground then p2.props.playerId else nil
 				})
 			})
 		} else {
@@ -291,7 +297,8 @@ function InspectAndBuy.render(p2)
 				StoreProvider = RoactModule.createElement(RoactRoduxModule.StoreProvider, { store = p2.state.store }, {
 					Container = RoactModule.createElement(InspectAndBuyBaseContainerModule, {
 						localPlayerModel = LocalPlayerModel,
-						analytics = p2.analytics
+						analytics = p2.analytics,
+						playerId = if FFlagAXInspectAndBuyAvatarBackground then p2.props.playerId else nil
 					})
 				})
 			})

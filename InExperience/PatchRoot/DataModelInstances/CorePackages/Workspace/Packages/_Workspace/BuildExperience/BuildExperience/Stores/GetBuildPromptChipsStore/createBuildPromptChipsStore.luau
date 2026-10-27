@@ -26,7 +26,7 @@ return function(p1)
 	return {
 		getChips = Signal,
 		getStatus = Signal1,
-		requestChips = function(p2, Callback1)
+		requestChips = function(p2, Callback1, Callback2)
 			-- upvalues: Count (ref), Callback (ref), Signal2_1 (copy), PROMPTCHIPSSTATUS (upval), RequestBuildSuggestions (copy), SignalsModule (upval), Signal2 (copy)
 			Count += 1
 			
@@ -42,7 +42,7 @@ return function(p1)
 			})
 			local Flag = false
 			local Effect: () -> () = SignalsModule.createEffect(function(p3)
-				-- upvalues: RequestBuildSuggestionsResult (copy), Flag (ref), Signal2 (upval), Signal2_1 (upval), PROMPTCHIPSSTATUS (upval), Callback1 (copy)
+				-- upvalues: RequestBuildSuggestionsResult (copy), Flag (ref), Signal2 (upval), Signal2_1 (upval), PROMPTCHIPSSTATUS (upval), Callback1 (copy), Callback2 (copy)
 				local StateResult = RequestBuildSuggestionsResult.state(p3)
 				
 				if Flag or StateResult.status == "pending" then return end
@@ -55,12 +55,19 @@ return function(p1)
 					
 					if Result.prompt ~= nil and Callback1 ~= nil then
 						Callback1(Result.prompt)
+					end
+					if Callback2 ~= nil then
+						Callback2(true)
 						
 						return
 					end
 				else
 					Signal2({})
 					Signal2_1(PROMPTCHIPSSTATUS.Failed)
+					
+					if Callback2 ~= nil then
+						Callback2(false)
+					end
 				end
 			end)
 			

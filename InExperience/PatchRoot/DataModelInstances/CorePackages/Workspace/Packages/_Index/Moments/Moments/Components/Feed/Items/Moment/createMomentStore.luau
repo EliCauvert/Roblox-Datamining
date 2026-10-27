@@ -5,6 +5,7 @@ local _ = require(Parent.DataHydration.MomentsStoreTypes)
 local _ = require(Parent.MomentsTypes)
 local SharedFlagsModule = require(Parent.SharedFlags)
 local FFlagMomentsOptimisticProfilePending = SharedFlagsModule.FFlagMomentsOptimisticProfilePending
+local FFlagMomentsRenderAvatarPostsInFeed = SharedFlagsModule.FFlagMomentsRenderAvatarPostsInFeed
 local SignalsModule = require(Parent.Signals)
 local GetReactionsStoreModule = require(Moments.Stores.GetReactionsStore)
 local GetShareCountsStoreModule = require(Moments.Stores.GetShareCountsStore)
@@ -18,17 +19,18 @@ local CreateSignalFunction = SignalsModule.createSignal
 local CreateComputedFunction = SignalsModule.createComputed
 
 return function(p1, p2)
-	-- upvalues: CreateSignalFunction (copy), GetReactionsStoreModule (copy), GetShareCountsStoreModule (copy), MomentsGetMomentsCommentsStoreModule (copy), CreateComputedFunction (copy), FFlagMomentsHideZeroCommentCountModule (copy), FFlagMomentsOptimisticProfilePending (copy), FFlagMomentsReactToFeedItemV2Module (copy), ReactionActionModule (copy)
+	-- upvalues: CreateSignalFunction (copy), GetReactionsStoreModule (copy), GetShareCountsStoreModule (copy), FFlagMomentsRenderAvatarPostsInFeed (copy), MomentsGetMomentsCommentsStoreModule (copy), CreateComputedFunction (copy), FFlagMomentsHideZeroCommentCountModule (copy), FFlagMomentsOptimisticProfilePending (copy), FFlagMomentsReactToFeedItemV2Module (copy), ReactionActionModule (copy)
 	local Signal = CreateSignalFunction(p1)
 	local MomentId = p1.momentId
 	local P1 = p2 or {}
 	local ReactionsStoreModule = if P1.reactionsStore == nil then GetReactionsStoreModule(false) else P1.reactionsStore
 	local ShareCountsStoreModule = if P1.shareCountsStore == nil then GetShareCountsStoreModule(false) else P1.shareCountsStore
-	local Signal1, Signal2 = CreateSignalFunction(if p1.kind == "experience" then p1.commentCount else nil)
+	local IsExperience: boolean = p1.kind == "experience" or FFlagMomentsRenderAvatarPostsInFeed and p1.kind == "avatar"
+	local Signal1, Signal2 = CreateSignalFunction(if p1.kind == "experience" then p1.commentCount elseif FFlagMomentsRenderAvatarPostsInFeed and p1.kind == "avatar" then p1.commentCount else nil)
 	local MomentsGetMomentsCommentsStoreModuleResult = if P1.commentsStore == nil then if MomentsGetMomentsCommentsStoreModule == nil then nil else MomentsGetMomentsCommentsStoreModule(false) else P1.commentsStore
 	local FeedItemId = p1.feedItemId
 	
-	if MomentsGetMomentsCommentsStoreModuleResult ~= nil and p1.kind == "experience" and FeedItemId ~= nil and FeedItemId ~= "" then
+	if MomentsGetMomentsCommentsStoreModuleResult ~= nil and IsExperience and FeedItemId ~= nil and FeedItemId ~= "" then
 		local DataFunction = MomentsGetMomentsCommentsStoreModuleResult.getCachedMomentComments(FeedItemId).data
 		Signal1 = CreateComputedFunction(function(p3)
 			-- upvalues: DataFunction (copy), Signal1 (copy)

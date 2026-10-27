@@ -3,23 +3,21 @@ local Parent = AvatarExperienceCatalog.Parent
 local Players = game:GetService("Players")
 local ReactModule = require(Parent.React)
 local UseAvatarRouteFunction = require(Parent.AvatarExperienceNavigation).AvatarRoute.Hooks.useAvatarRoute
-local AvatarExperienceFlagsModule = require(Parent.AvatarExperienceFlags)
-local FFlagAXCatalogOffersClearOnLogout = AvatarExperienceFlagsModule.FFlagAXCatalogOffersClearOnLogout
-local FFlagAXOfferBannerImpressionOnlyOnStartup = AvatarExperienceFlagsModule.FFlagAXOfferBannerImpressionOnlyOnStartup
+local FFlagAXCatalogOffersClearOnLogout = require(Parent.AvatarExperienceFlags).FFlagAXCatalogOffersClearOnLogout
 local _ = require(AvatarExperienceCatalog.Stores.createCatalogOffersBannerStore)
 local CatalogOffersBannerImpressionsStoreModule = require(AvatarExperienceCatalog.Stores.catalogOffersBannerImpressionsStore)
 local GetLocalUserIdModule = require(AvatarExperienceCatalog.Utils.getLocalUserId)
 
 return function(p1, p2)
-	-- upvalues: FFlagAXCatalogOffersClearOnLogout (copy), ReactModule (copy), GetLocalUserIdModule (copy), Players (copy), FFlagAXOfferBannerImpressionOnlyOnStartup (copy), CatalogOffersBannerImpressionsStoreModule (copy), UseAvatarRouteFunction (copy)
+	-- upvalues: FFlagAXCatalogOffersClearOnLogout (copy), ReactModule (copy), GetLocalUserIdModule (copy), Players (copy), CatalogOffersBannerImpressionsStoreModule (copy), UseAvatarRouteFunction (copy)
 	if FFlagAXCatalogOffersClearOnLogout then
 		ReactModule.useEffect(function()
-			-- upvalues: p1 (copy), p2 (copy), GetLocalUserIdModule (upval), Players (upval), FFlagAXOfferBannerImpressionOnlyOnStartup (upval), CatalogOffersBannerImpressionsStoreModule (upval)
+			-- upvalues: p1 (copy), p2 (copy), GetLocalUserIdModule (upval), Players (upval), CatalogOffersBannerImpressionsStoreModule (upval)
 			local Offers: (() -> ())? = if p1.getHasCompletedOffersFetch(false) or p1.getOffersFetchInProgress(false) then nil else p1.fetchOffers(p2)
 			local LocalUserIdModule = GetLocalUserIdModule(Players)
 			
 			local function handle()
-				-- upvalues: GetLocalUserIdModule (upval), Players (upval), LocalUserIdModule (ref), Offers (ref), p1 (upval), FFlagAXOfferBannerImpressionOnlyOnStartup (upval), CatalogOffersBannerImpressionsStoreModule (upval), p2 (upval)
+				-- upvalues: GetLocalUserIdModule (upval), Players (upval), LocalUserIdModule (ref), Offers (ref), p1 (upval), CatalogOffersBannerImpressionsStoreModule (upval), p2 (upval)
 				local LocalUserIdModule1 = GetLocalUserIdModule(Players)
 				
 				if LocalUserIdModule1 == LocalUserIdModule then return end
@@ -31,10 +29,8 @@ return function(p1, p2)
 				end
 				p1.setPayload(nil)
 				p1.setDismissed(false)
+				CatalogOffersBannerImpressionsStoreModule.clearOfferIds()
 				
-				if FFlagAXOfferBannerImpressionOnlyOnStartup then
-					CatalogOffersBannerImpressionsStoreModule.clearOfferIds()
-				end
 				if LocalUserIdModule1 ~= nil and LocalUserIdModule1 ~= "-1" then
 					Offers = p1.fetchOffers(p2)
 				end

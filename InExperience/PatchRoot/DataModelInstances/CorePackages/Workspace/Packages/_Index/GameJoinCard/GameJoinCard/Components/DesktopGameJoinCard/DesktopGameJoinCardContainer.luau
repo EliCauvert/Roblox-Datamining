@@ -46,6 +46,7 @@ local UseAppFocusRootFunction = FocusNavigationUtilsModule.useAppFocusRoot
 local FocusNavigableSurfaceIdentifierEnum = FocusNavigationUtilsModule.FocusNavigableSurfaceIdentifierEnum
 local SharedFlagsModule = require(Parent.SharedFlags)
 local FFlagDesktopGameJoinCardGamepadSupport = SharedFlagsModule.FFlagDesktopGameJoinCardGamepadSupport
+local FFlagConsoleOpenGameJoinCard = SharedFlagsModule.FFlagConsoleOpenGameJoinCard
 local FFlagEnableSplitPane = SharedFlagsModule.FFlagEnableSplitPane
 local FFlagEnableOnScreenAPIIntegration = SharedFlagsModule.FFlagEnableOnScreenAPIIntegration
 local FFlagGameJoinCardAnalyticsCardId = SharedFlagsModule.FFlagGameJoinCardAnalyticsCardId
@@ -72,7 +73,7 @@ local UseLogActionsResolveTimeModule = require(GameJoinCard.Telemetry.useLogActi
 local DataStatus = DataHydrationModule.DataStatus
 
 return function(p1)
-	-- upvalues: UseDispatchFunction (copy), UseNavigationFunction (copy), FFlagEnableOnScreenAPIIntegration (copy), UseIsRouteOnScreen (copy), UseNavigationFocusFunction (copy), FFlagGameJoinCardAnalyticsCardId (copy), ReactModule (copy), GetRbxThumbFunction (copy), ThumbnailType (copy), ThumbnailSize (copy), ContentProvider (copy), UseAgeCheckCompletionLoggerFunction (copy), UseJoinUserInExperienceFunction (copy), UseAgeCheckPressLoggerFunction (copy), FFlagJoinabilityCTARefactor (copy), UseJoinUserActionsModule (copy), UseLocalizationFunction (copy), ActionsModule (copy), UseLogActionsResolveTimeModule (copy), GameJoinCardSurface (copy), DataStatus (copy), ContainsActionModule (copy), UserCtaAction (copy), HttpService (copy), FFlagJoinUserCTAsIxpEnabled (copy), IXPServiceWrapper (copy), FStringJoinUserCTAsIxpLayer (copy), UseGameJoinCardAnalyticsModule (copy), DependencyArrayFunction (copy), UsePreferredInputFunction (copy), FFlagDesktopGameJoinCardGamepadSupport (copy), UseDeviceTypeFunction (copy), ResponsiveModule (copy), RobloxAppEnumsModule (copy), GetPlatformFriendsServiceModule (copy), UseAppFocusRootFunction (copy), FocusNavigableSurfaceIdentifierEnum (copy), UseRoactServiceFunction (copy), AppEventIngestService (copy), AppSessionService (copy), AppGuiService (copy), UseAppPolicyFunction (copy), GamePlayIntentFunction (copy), PeopleListInHomePage (copy), SetGamePlaySessionFunction (copy), SessionType (copy), GameDetailReferralFunction (copy), OpenGameDetailsFunction (copy), ViewEDPsourceValues (copy), GameJoinCardButtonAction (copy), ViewProfileSourceValues (copy), FFlagEnableSplitPane (copy), AppPage (copy), FFlagGameJoinCardChatEntryPointModule (copy), EnteredChatFromEntryPointFunction (copy), ChatEntryPointNames (copy), NotificationType (copy), DesktopGameJoinCardModule (copy), GamepadJoinFocusBehaviorModule (copy)
+	-- upvalues: UseDispatchFunction (copy), UseNavigationFunction (copy), FFlagEnableOnScreenAPIIntegration (copy), UseIsRouteOnScreen (copy), UseNavigationFocusFunction (copy), FFlagGameJoinCardAnalyticsCardId (copy), ReactModule (copy), GetRbxThumbFunction (copy), ThumbnailType (copy), ThumbnailSize (copy), ContentProvider (copy), UseAgeCheckCompletionLoggerFunction (copy), UseJoinUserInExperienceFunction (copy), UseAgeCheckPressLoggerFunction (copy), FFlagJoinabilityCTARefactor (copy), UseJoinUserActionsModule (copy), UseLocalizationFunction (copy), ActionsModule (copy), UseLogActionsResolveTimeModule (copy), GameJoinCardSurface (copy), DataStatus (copy), ContainsActionModule (copy), UserCtaAction (copy), HttpService (copy), FFlagJoinUserCTAsIxpEnabled (copy), IXPServiceWrapper (copy), FStringJoinUserCTAsIxpLayer (copy), UseGameJoinCardAnalyticsModule (copy), DependencyArrayFunction (copy), UsePreferredInputFunction (copy), FFlagDesktopGameJoinCardGamepadSupport (copy), UseDeviceTypeFunction (copy), ResponsiveModule (copy), RobloxAppEnumsModule (copy), GetPlatformFriendsServiceModule (copy), UseAppFocusRootFunction (copy), FocusNavigableSurfaceIdentifierEnum (copy), FFlagConsoleOpenGameJoinCard (copy), UseRoactServiceFunction (copy), AppEventIngestService (copy), AppSessionService (copy), AppGuiService (copy), UseAppPolicyFunction (copy), GamePlayIntentFunction (copy), PeopleListInHomePage (copy), SetGamePlaySessionFunction (copy), SessionType (copy), GameDetailReferralFunction (copy), OpenGameDetailsFunction (copy), ViewEDPsourceValues (copy), GameJoinCardButtonAction (copy), ViewProfileSourceValues (copy), FFlagEnableSplitPane (copy), AppPage (copy), FFlagGameJoinCardChatEntryPointModule (copy), EnteredChatFromEntryPointFunction (copy), ChatEntryPointNames (copy), NotificationType (copy), DesktopGameJoinCardModule (copy), GamepadJoinFocusBehaviorModule (copy)
 	local UseDispatchResult = UseDispatchFunction()
 	local UseNavigationResult = UseNavigationFunction()
 	local UseIsRouteOnScreenResult = if FFlagEnableOnScreenAPIIntegration then UseIsRouteOnScreen() else UseNavigationFocusFunction() ~= false
@@ -170,6 +171,7 @@ return function(p1)
 	local IsTextMatch: boolean = Text == "" or (LastLocation == nil or (LastLocation == "" or UseStateResult == Enum.AssetFetchStatus.Loading))
 	local UseDeviceTypeResult = if FFlagDesktopGameJoinCardGamepadSupport then UseDeviceTypeFunction() else nil
 	local Inverted: boolean = UsePreferredInputFunction() == ResponsiveModule.Input.Directional and not (FFlagDesktopGameJoinCardGamepadSupport and UseDeviceTypeResult == RobloxAppEnumsModule.DeviceType.Desktop)
+	local Inverted1 = if p1.isConsole == nil then Inverted else p1.isConsole
 	local PlatformProfileId = p1.platformProfileId
 	local UseResult = ReactModule.useCallback(function()
 		-- upvalues: GetPlatformFriendsServiceModule (upval), PlatformProfileId (copy)
@@ -185,12 +187,12 @@ return function(p1)
 		isFocusable = p1.isFocused == true and UseIsRouteOnScreenResult
 	})
 	local UseRefResult1 = ReactModule.useRef(nil)
-	local Inverted1 = not (FFlagDesktopGameJoinCardGamepadSupport and not Inverted)
+	local Inverted2: boolean = not (FFlagDesktopGameJoinCardGamepadSupport and not Inverted1) and not (FFlagConsoleOpenGameJoinCard and Inverted1)
 	local UseResult1 = ReactModule.useCallback(function(Current)
-		-- upvalues: UseRefResult1 (copy), UseAppFocusRootResult (copy), Inverted1 (copy), p1 (copy)
+		-- upvalues: UseRefResult1 (copy), UseAppFocusRootResult (copy), Inverted2 (copy), p1 (copy)
 		UseRefResult1.current = Current
 		
-		if UseAppFocusRootResult and Inverted1 then
+		if UseAppFocusRootResult and Inverted2 then
 			UseAppFocusRootResult(Current)
 		end
 		if p1.onCardGuiObjectChanged then
@@ -199,7 +201,7 @@ return function(p1)
 	end, {
 		UseAppFocusRootResult,
 		p1.onCardGuiObjectChanged,
-		Inverted1
+		Inverted2
 	})
 	local UseRoactServiceResult = UseRoactServiceFunction(AppEventIngestService)
 	local UseRoactServiceResult1 = UseRoactServiceFunction(AppSessionService)
@@ -367,14 +369,14 @@ return function(p1)
 		anchorRef = p1.anchorRef,
 		isOpen = p1.isOpen and UseIsRouteOnScreenResult,
 		onClose = p1.onClose,
-		isConsole = Inverted,
+		isConsole = Inverted1,
 		consolePlatformLabel = PlatformName,
 		focusRootRef = UseResult1,
 		ageCheckRequired = UseJoinUserInExperienceResult.ageCheckRequired,
 		onAgeCheckPressed = UseAgeCheckPressLoggerResult,
-		onPlatformProfilePressed = if Inverted then UseResult else nil,
-		onChat = if Inverted or not UseAppPolicyResult then nil else UseResult7,
-		onViewProfile = if Inverted then nil else UseResult6,
+		onPlatformProfilePressed = if Inverted1 then UseResult else nil,
+		onChat = if Inverted1 or not UseAppPolicyResult then nil else UseResult7,
+		onViewProfile = if Inverted1 then nil else UseResult6,
 		actions = if FFlagJoinabilityCTARefactor then v3 else {},
 		areActionsLoading = if FFlagJoinabilityCTARefactor then IsNotReadyMatch else nil
 	})

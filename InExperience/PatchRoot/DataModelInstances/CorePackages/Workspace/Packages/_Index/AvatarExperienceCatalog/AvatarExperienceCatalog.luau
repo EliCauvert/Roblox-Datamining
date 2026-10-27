@@ -58,9 +58,6 @@ return {
 	},
 	Constants = require(script.Constants),
 	WidgetConstants = require(script.WidgetConstants),
-	Enums = {
-		WearTimeFTUXStatusSessionEnum = require(script.Enums.WearTimeFTUXStatusSessionEnum)
-	},
 	Hooks = {
 		useMultiItemShoppingFtux = require(script.Hooks.useMultiItemShoppingFtux),
 		useTimedOptionsFtux = require(script.Hooks.useTimedOptionsFtux),

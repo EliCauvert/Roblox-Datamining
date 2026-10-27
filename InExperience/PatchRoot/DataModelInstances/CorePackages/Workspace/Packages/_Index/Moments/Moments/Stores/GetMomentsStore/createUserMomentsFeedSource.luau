@@ -7,8 +7,10 @@ local _ = require(Moments.Components.Feed)
 local Analytics = MomentsCommonModule.Analytics
 local RecommendationSource = MomentsCommonModule.Analytics.RecommendationSource
 local MomentsGetMomentsUserStoreModule = require(Parent.DataHydration.MomentsGetMomentsUserStore)
+local MomentsGetPostAssetStoreModule = require(Parent.DataHydration.MomentsGetPostAssetStore)
 local _ = require(Parent.DataHydration.MomentsStoreTypes)
 local CreatePendingFeedGetterModule = require(script.Parent.createPendingFeedGetter)
+local HydrateAvatarMomentFeedItemsModule = require(script.Parent.hydrateAvatarMomentFeedItems)
 local ShouldShowMomentInFeedModule = require(script.Parent.shouldShowMomentInFeed)
 local ReportUnavailableFeedItemModule = require(script.Parent.reportUnavailableFeedItem)
 local GetReactionsStoreModule = require(Moments.Stores.GetReactionsStore)
@@ -17,10 +19,11 @@ local GetDeletedMomentsStoreModule = require(Moments.Stores.GetDeletedMomentsSto
 local FFlagMomentsOptimisticProfilePending = SharedFlagsModule.FFlagMomentsOptimisticProfilePending
 local FFlagMomentsRemoveDeletedFromProfile = SharedFlagsModule.FFlagMomentsRemoveDeletedFromProfile
 local FFlagMomentsComments = SharedFlagsModule.FFlagMomentsComments
+local FFlagProfileRenderAvatarMoments = SharedFlagsModule.FFlagProfileRenderAvatarMoments
 local MomentsGetMomentsCommentsStoreModule = if FFlagMomentsComments then require(Parent.DataHydration.MomentsGetMomentsCommentsStore) else nil
 
 return function(p1, p2)
-	-- upvalues: MomentsGetMomentsUserStoreModule (copy), FFlagMomentsComments (copy), MomentsGetMomentsCommentsStoreModule (copy), FFlagMomentsOptimisticProfilePending (copy), CreatePendingFeedGetterModule (copy), RecommendationSource (copy), GetReactionsStoreModule (copy), GetShareCountsStoreModule (copy), FFlagMomentsRemoveDeletedFromProfile (copy), GetDeletedMomentsStoreModule (copy), Analytics (copy), ShouldShowMomentInFeedModule (copy), ReportUnavailableFeedItemModule (copy)
+	-- upvalues: MomentsGetMomentsUserStoreModule (copy), FFlagMomentsComments (copy), MomentsGetMomentsCommentsStoreModule (copy), FFlagMomentsOptimisticProfilePending (copy), CreatePendingFeedGetterModule (copy), RecommendationSource (copy), GetReactionsStoreModule (copy), GetShareCountsStoreModule (copy), FFlagMomentsRemoveDeletedFromProfile (copy), GetDeletedMomentsStoreModule (copy), Analytics (copy), ShouldShowMomentInFeedModule (copy), ReportUnavailableFeedItemModule (copy), FFlagProfileRenderAvatarMoments (copy), HydrateAvatarMomentFeedItemsModule (copy), MomentsGetPostAssetStoreModule (copy)
 	local P1 = p2 or {}
 	local MomentsGetMomentsUserStoreModuleResult = if P1.userStore == nil then MomentsGetMomentsUserStoreModule(false) else P1.userStore
 	local CommentsStore = nil
@@ -40,7 +43,7 @@ return function(p1, p2)
 		getPendingItems = if FFlagMomentsOptimisticProfilePending then CreatePendingFeedGetterModule(p1, MomentsGetMomentsUserStoreModuleResult) else nil,
 		recommendationSource = RecommendationSource.Profile,
 		fetchAsync = function(NextCursor)
-			-- upvalues: CommentsStore (ref), MomentsGetMomentsUserStoreModuleResult (copy), p1 (copy), GetReactionsStoreModule (upval), GetShareCountsStoreModule (upval), FFlagMomentsRemoveDeletedFromProfile (upval), FFlagMomentsOptimisticProfilePending (upval), GetDeletedMomentsStoreModule (upval), Analytics (upval), RecommendationSource (upval), ShouldShowMomentInFeedModule (upval), ReportUnavailableFeedItemModule (upval), InitialIndex (copy), FFlagMomentsComments (upval)
+			-- upvalues: CommentsStore (ref), MomentsGetMomentsUserStoreModuleResult (copy), p1 (copy), GetReactionsStoreModule (upval), GetShareCountsStoreModule (upval), FFlagMomentsRemoveDeletedFromProfile (upval), FFlagMomentsOptimisticProfilePending (upval), GetDeletedMomentsStoreModule (upval), Analytics (upval), RecommendationSource (upval), ShouldShowMomentInFeedModule (upval), ReportUnavailableFeedItemModule (upval), InitialIndex (copy), FFlagProfileRenderAvatarMoments (upval), HydrateAvatarMomentFeedItemsModule (upval), P1 (copy), MomentsGetPostAssetStoreModule (upval), FFlagMomentsComments (upval)
 			local OwnerGeneration = if CommentsStore == nil then nil else CommentsStore.getOwnerGeneration(false)
 			local v1 = nil
 			local Items = {}
@@ -78,6 +81,9 @@ return function(p1, p2)
 				end
 				NextCursor1 = v3.nextCursor
 			until not NoNextCursor or (InitialIndex == nil or (#Items >= InitialIndex or NextCursor1 == nil))
+			if FFlagProfileRenderAvatarMoments then
+				Items = HydrateAvatarMomentFeedItemsModule(Items, P1.postAssetStore or MomentsGetPostAssetStoreModule(false))
+			end
 			local OnAccepted: (() -> ())? = nil
 			
 			if FFlagMomentsComments and CommentsStore ~= nil and OwnerGeneration ~= nil and v1 ~= nil then

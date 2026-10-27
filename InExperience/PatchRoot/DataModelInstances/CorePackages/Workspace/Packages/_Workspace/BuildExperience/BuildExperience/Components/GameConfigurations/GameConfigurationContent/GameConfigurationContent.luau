@@ -9,6 +9,7 @@ local SignalsReactModule = require(Parent.SignalsReact)
 local UseOpenWebViewFunction = require(Parent.WebViewUtils).useOpenWebView
 local UseLocalizationFunction = LocalizationModule.Hooks.useLocalization
 local LocalizationStringsModule = require(BuildExperience.LocalizationStrings)
+local _ = require(Parent.DataHydration)
 local ExperienceGuidelinesModule = require(Parent.DataHydration.ExperienceGuidelines)
 local UniverseConfigurationModule = require(Parent.DataHydration.UniverseConfiguration)
 local UniverseActivationModule = require(Parent.DataHydration.UniverseActivation)
@@ -32,9 +33,10 @@ local View = FoundationModule.View
 local IconName = FoundationModule.Enums.IconName
 local CaptureServiceStartUploadCoreScriptBypassEngineFeature = require(Parent.SharedFlags).FFlagMyStatsMediaSelector and (CaptureService.PromptCaptureGalleryPermissionAsync and game:GetEngineFeature("CaptureServiceStartUploadCoreScriptBypass"))
 local PrivacyType = UniverseConfigurationModule.PrivacyType
+local Signal = SignalsModule.createSignal(nil)
 
 return function(p1)
-	-- upvalues: UseLocalizationFunction (copy), LocalizationStringsModule (copy), ReactModule (copy), LocalizationModule (copy), FFlagBuildCheckGamePermissionsModule (copy), UseGamePermissionsModule (copy), UseOpenWebViewFunction (copy), UseArchiveGameFlowModule (copy), FFlagBuildExperiencePrivateInvitesModule (copy), UseExperienceShareFlowModule (copy), UniverseConfigurationModule (copy), ExperienceGuidelinesModule (copy), SignalsReactModule (copy), GameConfigurationLabelsModule (copy), PrivacyType (copy), UniverseActivationModule (copy), ContentMaturityUtilsModule (copy), GameConfigurationActionsModule (copy), RefreshPublishEligibilityModule (copy), CaptureServiceStartUploadCoreScriptBypassEngineFeature (copy), IconName (copy), GetPrivatePlaytestersStoreFunction (copy), SignalsModule (copy), FFlagBuildExperienceMonetizationNativeUIModule (copy), View (copy), GameConfigurationListModule (copy), BuildMaturityBannerModule (copy), Text (copy), ArchiveGameDialogModule (copy), ExperienceShareOverlaysModule (copy)
+	-- upvalues: UseLocalizationFunction (copy), LocalizationStringsModule (copy), ReactModule (copy), LocalizationModule (copy), FFlagBuildCheckGamePermissionsModule (copy), UseGamePermissionsModule (copy), UseOpenWebViewFunction (copy), UseArchiveGameFlowModule (copy), FFlagBuildExperiencePrivateInvitesModule (copy), UseExperienceShareFlowModule (copy), UniverseConfigurationModule (copy), ExperienceGuidelinesModule (copy), SignalsReactModule (copy), Signal (copy), GameConfigurationLabelsModule (copy), PrivacyType (copy), UniverseActivationModule (copy), ContentMaturityUtilsModule (copy), GameConfigurationActionsModule (copy), RefreshPublishEligibilityModule (copy), CaptureServiceStartUploadCoreScriptBypassEngineFeature (copy), IconName (copy), GetPrivatePlaytestersStoreFunction (copy), SignalsModule (copy), FFlagBuildExperienceMonetizationNativeUIModule (copy), View (copy), GameConfigurationListModule (copy), BuildMaturityBannerModule (copy), Text (copy), ArchiveGameDialogModule (copy), ExperienceShareOverlaysModule (copy)
 	local TestId = p1.testId or "game-configuration-content"
 	local UseLocalizationResult = UseLocalizationFunction({
 		access = LocalizationStringsModule.GAME_CONFIGURATION_ACCESS,
@@ -96,37 +98,43 @@ return function(p1)
 	local UseArchiveGameFlowModuleResult = UseArchiveGameFlowModule()
 	local UseExperienceShareFlowModuleResult = if FFlagBuildExperiencePrivateInvitesModule then UseExperienceShareFlowModule(p1.universeId, p1.placeId) else nil
 	local OnShare = if UseExperienceShareFlowModuleResult == nil then nil else UseExperienceShareFlowModuleResult.onShare
+	local UseMemoResult = ReactModule.useMemo(function()
+		-- upvalues: FFlagBuildExperiencePrivateInvitesModule (upval), UniverseConfigurationModule (upval), p1 (copy)
+		return if FFlagBuildExperiencePrivateInvitesModule then UniverseConfigurationModule.getUniverseConfigurationStore().getAndFetchSummary(p1.universeId) else nil
+	end, { p1.universeId })
 	local UseSignalStateResult = SignalsReactModule.useSignalState(ReactModule.useMemo(function()
 		-- upvalues: UniverseConfigurationModule (upval), p1 (copy)
 		return UniverseConfigurationModule.getUniverseConfigurationStore().getAndFetchConfiguration(p1.universeId)
 	end, { p1.universeId }).data)
-	local UseSignalStateResult1 = SignalsReactModule.useSignalState(ReactModule.useMemo(function()
+	local UseSignalStateResult1 = SignalsReactModule.useSignalState(if UseMemoResult == nil then Signal else UseMemoResult.data)
+	local UseSignalStateResult2 = SignalsReactModule.useSignalState(ReactModule.useMemo(function()
 		-- upvalues: ExperienceGuidelinesModule (upval), p1 (copy)
 		return ExperienceGuidelinesModule.getExperienceGuidelinesStore().getAndFetchDetailedGuidelines(p1.universeId)
 	end, { p1.universeId }).data)
+	local IsGroup: boolean = UseSignalStateResult1 ~= nil and UseSignalStateResult1.creatorType == "Group"
 	local Audience1 = if UseSignalStateResult then GameConfigurationLabelsModule.getAudience(UseSignalStateResult) else nil
 	local Loading1 = nil
 	Loading1 = if UseSignalStateResult == nil then Loading elseif Audience1 == PrivacyType.Private then PrivateAudience elseif Audience1 == PrivacyType.Public then PublicAudience elseif Audience1 == PrivacyType.FriendsOnly then FriendsOnlyAudience else GameConfigurationLabelsModule.getAudienceText(UseSignalStateResult) or UnknownAudience
 	local Text1 = nil
-	local UseSignalStateResult2 = SignalsReactModule.useSignalState(ReactModule.useMemo(function()
+	local UseSignalStateResult3 = SignalsReactModule.useSignalState(ReactModule.useMemo(function()
 		-- upvalues: UniverseActivationModule (upval), p1 (copy)
 		return UniverseActivationModule.getUniverseActivationStore().getAndFetchEligibility(p1.universeId)
 	end, { p1.universeId }).data)
-	local UseMemoResult = ReactModule.useMemo(function()
-		-- upvalues: ContentMaturityUtilsModule (upval), p1 (copy)
-		return ContentMaturityUtilsModule.isSealBroken(p1.universeId)
-	end, { UseSignalStateResult2, p1.universeId })
 	local UseMemoResult1 = ReactModule.useMemo(function()
 		-- upvalues: ContentMaturityUtilsModule (upval), p1 (copy)
+		return ContentMaturityUtilsModule.isSealBroken(p1.universeId)
+	end, { UseSignalStateResult3, p1.universeId })
+	local UseMemoResult11 = ReactModule.useMemo(function()
+		-- upvalues: ContentMaturityUtilsModule (upval), p1 (copy)
 		return ContentMaturityUtilsModule.isContentUnrated(p1.universeId)
-	end, { UseSignalStateResult2, p1.universeId })
-	local ProvisionalRating = if UseSignalStateResult2 then UseSignalStateResult2.provisionalRating else nil
-	local NoUseMemoResult: boolean = UseMemoResult1 and not UseMemoResult
+	end, { UseSignalStateResult3, p1.universeId })
+	local ProvisionalRating = if UseSignalStateResult3 then UseSignalStateResult3.provisionalRating else nil
+	local NoUseMemoResult: boolean = UseMemoResult11 and not UseMemoResult1
 	
-	if UseMemoResult and UseMemoResult1 then
+	if UseMemoResult1 and UseMemoResult11 then
 		Text1 = QuestionnaireRequiredBanner
 	end
-	local ContentMaturityText = GameConfigurationLabelsModule.getContentMaturityText(UseSignalStateResult1, ProvisionalRating, NoUseMemoResult) or Loading
+	local ContentMaturityText = GameConfigurationLabelsModule.getContentMaturityText(UseSignalStateResult2, ProvisionalRating, NoUseMemoResult) or Loading
 	local UseResult = ReactModule.useCallback(function()
 		-- upvalues: UseOpenWebViewResult (copy), GameConfigurationActionsModule (upval), p1 (copy), CreatorHub (copy)
 		UseOpenWebViewResult(GameConfigurationActionsModule.getCreatorHubConfigureUrl(p1.universeId), CreatorHub)
@@ -163,19 +171,19 @@ return function(p1)
 	})
 	local OnOpenPlaytestPicker = p1.onOpenPlaytestPicker
 	local OnOpenPlaytestManagement = p1.onOpenPlaytestManagement
-	local HasOnOpenPlaytestManagement: boolean = FFlagBuildExperiencePrivateInvitesModule and (OnOpenPlaytestPicker ~= nil and OnOpenPlaytestManagement ~= nil)
+	local NoIsGroup: boolean = FFlagBuildExperiencePrivateInvitesModule and (OnOpenPlaytestPicker ~= nil and (OnOpenPlaytestManagement ~= nil and not IsGroup))
 	local UseMemoResult21 = ReactModule.useMemo(function()
-		-- upvalues: HasOnOpenPlaytestManagement (copy), GetPrivatePlaytestersStoreFunction (upval), p1 (copy)
-		return if HasOnOpenPlaytestManagement then GetPrivatePlaytestersStoreFunction(false).getAndFetchInvitedPlayers(p1.universeId) else nil
-	end, { HasOnOpenPlaytestManagement, p1.universeId })
-	local UseSignalStateResult3: number = SignalsReactModule.useSignalState((ReactModule.useMemo(function()
+		-- upvalues: NoIsGroup (copy), GetPrivatePlaytestersStoreFunction (upval), p1 (copy)
+		return if NoIsGroup then GetPrivatePlaytestersStoreFunction(false).getAndFetchInvitedPlayers(p1.universeId) else nil
+	end, { NoIsGroup, p1.universeId })
+	local UseSignalStateResult4: number = SignalsReactModule.useSignalState((ReactModule.useMemo(function()
 		-- upvalues: SignalsModule (upval), UseMemoResult21 (copy)
 		return SignalsModule.createComputed(function(p2): number
 			-- upvalues: UseMemoResult21 (upval)
 			return if UseMemoResult21 == nil then 0 else #UseMemoResult21.players(p2)
 		end)
 	end, { UseMemoResult21 })))
-	local UseSignalStateResult21 = SignalsReactModule.useSignalState((ReactModule.useMemo(function()
+	local UseSignalStateResult31 = SignalsReactModule.useSignalState((ReactModule.useMemo(function()
 		-- upvalues: SignalsModule (upval), UseMemoResult21 (copy)
 		return SignalsModule.createComputed(function(p2)
 			-- upvalues: UseMemoResult21 (upval)
@@ -185,13 +193,13 @@ return function(p1)
 	local MAXINVITES = GetPrivatePlaytestersStoreFunction(false).MAX_INVITES
 	local Config = nil
 	
-	if HasOnOpenPlaytestManagement then
-		if UseSignalStateResult21 == "Ready" then
-			local FormatResult = if UseSignalStateResult3 > 0 then UseContextResult:Format(LocalizationStringsModule.PRIVATE_INVITES_SENT, {
-				INVITED_COUNT = UseSignalStateResult3,
+	if NoIsGroup then
+		if UseSignalStateResult31 == "Ready" then
+			local FormatResult = if UseSignalStateResult4 > 0 then UseContextResult:Format(LocalizationStringsModule.PRIVATE_INVITES_SENT, {
+				INVITED_COUNT = UseSignalStateResult4,
 				MAX_INVITES = MAXINVITES
 			}) else nil
-			Config = if UseSignalStateResult3 > 0 then {
+			Config = if UseSignalStateResult4 > 0 then {
 				id = "playtest",
 				trailingIcon = nil,
 				title = PrivateInvitesRowTitle,
@@ -210,7 +218,7 @@ return function(p1)
 				trailingIcon = nil,
 				onActivated = nil,
 				title = PrivateInvitesRowTitle,
-				description = if UseSignalStateResult21 == "Failed" then PrivateInvitesRowLoadError else Loading
+				description = if UseSignalStateResult31 == "Failed" then PrivateInvitesRowLoadError else Loading
 			}
 		end
 	end
@@ -296,7 +304,7 @@ return function(p1)
 		}, {
 			Configuration = ReactModule.createElement(GameConfigurationListModule, {
 				layoutOrder = 1,
-				title = if HasOnOpenPlaytestManagement then AccessAndSharing else Access,
+				title = if NoIsGroup then AccessAndSharing else Access,
 				body = AccessBody,
 				rows = UseMemoResult3,
 				testId = `{TestId}-access`

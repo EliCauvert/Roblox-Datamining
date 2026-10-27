@@ -1,14 +1,13 @@
 ﻿local AvatarExperienceAnalytics = script:FindFirstAncestor("AvatarExperienceAnalytics")
 local CartIdServiceModule = require(AvatarExperienceAnalytics.Lib.CartIdService)
 local UnifiedEventLogEnumsModule = require(AvatarExperienceAnalytics.UnifiedEventLogEnums)
-local AXAddAttributionToCheckoutCartPurchases = game:DefineFastFlag("AXAddAttributionToCheckoutCartPurchases", false)
 
 local function _(Text): string
 	return "MIS_" .. Text
 end
 
 return function(List, List1, p1, p2, Action)
-	-- upvalues: AXAddAttributionToCheckoutCartPurchases (copy), CartIdServiceModule (copy), UnifiedEventLogEnumsModule (copy)
+	-- upvalues: CartIdServiceModule (copy), UnifiedEventLogEnumsModule (copy)
 	local NewPriceInRobux = 0
 	local List2 = {}
 	local List3 = {}
@@ -30,7 +29,7 @@ return function(List, List1, p1, p2, Action)
 					end
 				end
 				table.insert(List6, {
-					cartId = if AXAddAttributionToCheckoutCartPurchases then "MIS_" .. CartIdServiceModule.getCartId() else CartIdServiceModule.getCartId(),
+					cartId = "MIS_" .. CartIdServiceModule.getCartId(),
 					action = Action,
 					itemId = value.itemId,
 					itemType = if value.itemType == "Asset" then UnifiedEventLogEnumsModule.MarketplaceUnifiedItemType.ASSET else UnifiedEventLogEnumsModule.MarketplaceUnifiedItemType.BUNDLE,
@@ -62,7 +61,7 @@ return function(List, List1, p1, p2, Action)
 		local Joined2: string = if #List2 > 0 then table.concat(List2, ",") else ""
 		local Joined3: string = if #List3 > 0 then table.concat(List3, ",") else ""
 		local config1 = {
-			cartId = if AXAddAttributionToCheckoutCartPurchases then "MIS_" .. CartIdServiceModule.getCartId() else CartIdServiceModule.getCartId(),
+			cartId = "MIS_" .. CartIdServiceModule.getCartId(),
 			action = Action,
 			itemId = p1.itemId,
 			itemType = UnifiedEventLogEnumsModule.MarketplaceUnifiedItemType.LOOK
@@ -83,7 +82,7 @@ return function(List, List1, p1, p2, Action)
 		local Joined: string = if #List4 > 0 then table.concat(List4, ",") else ""
 		local Joined1: string = if #List5 > 0 then table.concat(List5, ",") else ""
 		local config = {
-			cartId = if AXAddAttributionToCheckoutCartPurchases then "MIS_" .. CartIdServiceModule.getCartId() else CartIdServiceModule.getCartId(),
+			cartId = "MIS_" .. CartIdServiceModule.getCartId(),
 			action = Action,
 			itemId = p2.itemId,
 			itemType = UnifiedEventLogEnumsModule.MarketplaceUnifiedItemType.LOOK

@@ -6,6 +6,7 @@ local ReactModule = require(Parent.React)
 local UseEventConnectionFunction = require(Parent.ReactUtils).useEventConnection
 local UseSelectorFunction = require(Parent.RoactUtils).Hooks.RoactRodux.useSelector
 local VerifiedBadgesModule = require(Parent.VerifiedBadges)
+local FFlagAXInspectAndBuyAvatarBackground = require(Parent.AvatarExperienceFlags).FFlagAXInspectAndBuyAvatarBackground
 local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
 local UseItemSelectionStoreFunction = require(AvatarExperienceInspectAndBuy.Contexts.ItemSelectionStoreContext).useItemSelectionStore
 local _ = require(AvatarExperienceInspectAndBuy.Components.Common.ResponsivePanelLayout)
@@ -66,7 +67,7 @@ local config = {
 }
 
 return function(p1)
-	-- upvalues: UseSelectorFunction (copy), selectView (copy), TutilsModule (copy), ViewTypeModule (copy), ReactModule (copy), selectInspectPreviewDetails (copy), UseRemoteBulkPurchaseEventModule (copy), UseInspectPlayerModule (copy), FormatNumberModule (copy), UseTokensFunction (copy), UseItemSelectionStoreFunction (copy), UseLocalizationFunction (copy), VerifiedBadgesModule (copy), UsePurchaseButtonPropsModule (copy), UseEventConnectionFunction (copy), MarketplaceService (copy), ItemDetailsLayoutModule (copy), AvatarItemsViewLayoutModule (copy), ViewportLayoutModule (copy), GetItemThumbnailUrlModule (copy), config (copy)
+	-- upvalues: UseSelectorFunction (copy), selectView (copy), TutilsModule (copy), ViewTypeModule (copy), ReactModule (copy), selectInspectPreviewDetails (copy), UseRemoteBulkPurchaseEventModule (copy), UseInspectPlayerModule (copy), FormatNumberModule (copy), UseTokensFunction (copy), UseItemSelectionStoreFunction (copy), UseLocalizationFunction (copy), VerifiedBadgesModule (copy), UsePurchaseButtonPropsModule (copy), UseEventConnectionFunction (copy), MarketplaceService (copy), ItemDetailsLayoutModule (copy), AvatarItemsViewLayoutModule (copy), FFlagAXInspectAndBuyAvatarBackground (copy), ViewportLayoutModule (copy), GetItemThumbnailUrlModule (copy), config (copy)
 	local UseSelectorResult = UseSelectorFunction(selectView, TutilsModule.deepEqual)
 	local IsUseSelectorResultMatch = UseSelectorResult == ViewTypeModule.WideLandscape
 	local UseStateResult, UseStateResult2 = ReactModule.useState(nil)
@@ -141,9 +142,10 @@ return function(p1)
 		UseItemSelectionStoreResult.clearAll()
 		p1.onInspectMenuClosed()
 	end, { UseItemSelectionStoreResult, p1.onInspectMenuClosed })
+	local AvatarBackgroundImageUrl = if FFlagAXInspectAndBuyAvatarBackground and not UseStateResult then p1.avatarBackgroundImageUrl else nil
 	
-	local function v42()
-		-- upvalues: ReactModule (upval), ViewportLayoutModule (upval), UseSelectorResult (copy), UseStateResult (copy), GetItemThumbnailUrlModule (upval), UseInspectPlayerModuleResult (copy), UseStateResult2 (copy), p1 (copy), IsUseSelectorResultMatch (copy), UsePurchaseButtonPropsModuleResult (copy), UseStateResult1 (copy), UseTokensResult (copy)
+	local function v44()
+		-- upvalues: ReactModule (upval), ViewportLayoutModule (upval), UseSelectorResult (copy), UseStateResult (copy), GetItemThumbnailUrlModule (upval), UseInspectPlayerModuleResult (copy), UseStateResult2 (copy), p1 (copy), IsUseSelectorResultMatch (copy), UsePurchaseButtonPropsModuleResult (copy), UseStateResult1 (copy), AvatarBackgroundImageUrl (copy), UseTokensResult (copy)
 		return ReactModule.createElement(ViewportLayoutModule, {
 			view = UseSelectorResult,
 			thumbnailUrl = if UseStateResult then GetItemThumbnailUrlModule(UseStateResult) or "" else "rbxthumb://type=Avatar&id=" .. tostring(UseInspectPlayerModuleResult.playerId) .. "&w=420&h=420",
@@ -162,12 +164,13 @@ return function(p1)
 			Size = UDim2.new(1, 0, 1, 0),
 			renderTryOnViewport = p1.renderTryOnViewport,
 			tryOnState = UseStateResult1,
+			backgroundImageUrl = AvatarBackgroundImageUrl,
 			thumbnailPadding = if UseStateResult then {
 				left = UDim.new(0, UseTokensResult.Padding.XXLarge),
 				right = UDim.new(0, UseTokensResult.Padding.XXLarge),
 				top = UDim.new(0, UseTokensResult.Padding.XXLarge),
 				bottom = UDim.new(0, UseTokensResult.Padding.XXLarge)
-			} else nil
+			} elseif AvatarBackgroundImageUrl then { top = UDim.new(0, UseTokensResult.Padding.Medium) } else nil
 		})
 	end
 	
@@ -217,7 +220,7 @@ return function(p1)
 				ref = UseRefResult
 			})
 		end,
-		renderSecondPanel = if IsUseSelectorResultMatch1 then v42 else nil,
+		renderSecondPanel = if IsUseSelectorResultMatch1 then v44 else nil,
 		panelConfig = config[UseSelectorResult] or config[ViewTypeModule.Wide]
 	}
 end

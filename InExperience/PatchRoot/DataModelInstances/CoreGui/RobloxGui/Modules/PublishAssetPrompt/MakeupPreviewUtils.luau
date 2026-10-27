@@ -1,5 +1,7 @@
 ﻿local AssetService = game:GetService("AssetService")
 local Players = game:GetService("Players")
+local ThumbnailingModule = require(game:GetService("CorePackages").Packages.Thumbnailing)
+local FFlagSharedMakeupThumbnailCamera = ThumbnailingModule.FFlagSharedMakeupThumbnailCamera
 local ConstantsModule = require(script.Parent.Constants)
 local _BrickColor = BrickColor.new(194)
 
@@ -80,11 +82,16 @@ local MakeupPreviewUtils = {
 		end
 	end,
 	setupMakeupThumbnailCamera = function(Object, Camera, p1): boolean
-		-- upvalues: _CFrame (copy), config (copy)
+		-- upvalues: FFlagSharedMakeupThumbnailCamera (copy), ThumbnailingModule (copy), _CFrame (copy), config (copy)
 		local Head = Object:FindFirstChild("Head")
 		
 		if not Head or not Head:IsA("MeshPart") then
 			return false
+		end
+		if FFlagSharedMakeupThumbnailCamera then
+			ThumbnailingModule.MakeupCameraUtility.SetupCamera(Camera, Head.CFrame, if p1 then p1.Value else nil)
+			
+			return true
 		end
 		local _CFrame1 = _CFrame
 		

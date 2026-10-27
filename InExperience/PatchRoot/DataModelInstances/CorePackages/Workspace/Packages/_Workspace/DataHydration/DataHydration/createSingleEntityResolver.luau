@@ -34,6 +34,10 @@ return function(Callback, p1)
 			-- upvalues: DataResolverModule (copy)
 			return DataResolverModule.fetchItem((tostring(p2)))
 		end,
+		refetch = function(p2)
+			-- upvalues: DataResolverModule (copy)
+			return DataResolverModule.refetchItem((tostring(p2)))
+		end,
 		getAndFetch = function(p2)
 			-- upvalues: DataResolverModule (copy)
 			return DataResolverModule.getAndFetchItem((tostring(p2)))

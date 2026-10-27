@@ -4679,6 +4679,7 @@ Feature.UniversalShareSheet.Response.SharedCustomMessage,{CUSTOM_MESSAGE} 외 1�
 Feature.UniversalShareSheet.Response.SharedMessage,메시지가 전송되었습니다.
 Feature.UniversalShareSheet.Response.SharedMultipleMessages,
 Feature.UniversalShareSheet.SharedCustomMultipleMessages,{CUSTOM_MESSAGE} 외 {N}명
+Feature.UserLibrary.Label.MyLibrary,내 라이브러리
 Feature.VerificationUpsell.Action.AddPhone,휴대폰 번호 추가
 Feature.VerificationUpsell.Action.AddPhoneNumber,
 Feature.VerificationUpsell.Action.AddPhoneVoice,음성 채팅을 위해 휴대폰 번호 추가

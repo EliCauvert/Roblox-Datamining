@@ -5,6 +5,7 @@ local MomentsCommonModule = require(Parent.MomentsCommon)
 local _ = require(Parent.MomentsTypes)
 local ReactModule = require(Parent.React)
 local ReactUtilsModule = require(Parent.ReactUtils)
+local SharedFlagsModule = require(Parent.SharedFlags)
 local SignalsModule = require(Parent.Signals)
 local SignalsReactModule = require(Parent.SignalsReact)
 local Text = FoundationModule.Text
@@ -31,6 +32,7 @@ local ReactionExplosionLayerModule = require(script.Parent.Reactions.ReactionExp
 local FFlagMomentsFeedAboveNavBarModule = require(Moments.Flags.FFlagMomentsFeedAboveNavBar)
 local GetFFlagMomentsRenderPostAssetsModule = require(Parent.MomentsCommon.GetFFlagMomentsRenderPostAssets)
 local FFlagMomentsAvatarLookTryOn = require(Parent.SharedFlags).FFlagMomentsAvatarLookTryOn
+local FFlagMomentsRenderAvatarPostsInFeed = SharedFlagsModule.FFlagMomentsRenderAvatarPostsInFeed
 local GetFFlagMomentsDisplayWakeLockModule = require(Moments.Flags.GetFFlagMomentsDisplayWakeLock)
 local FFlagMomentsFixOverlayRemountImpressionsModule = require(Moments.Flags.FFlagMomentsFixOverlayRemountImpressions)
 local UseDisplayWakeLockModule = require(Moments.Hooks.useDisplayWakeLock)
@@ -38,7 +40,7 @@ local UseIsPlayingModule = require(Moments.Hooks.useIsPlaying)
 local UseMomentsSessionFunction = require(Moments.Stores.GetMomentsStore.MomentsSessionContext).useMomentsSession
 local DeriveMomentFromPostModule = require(Moments.Utils.deriveMomentFromPost)
 local MomentsGetPostAssetStoreModule = require(Parent.DataHydration.MomentsGetPostAssetStore)
-local FFlagMomentsComments = require(Parent.SharedFlags).FFlagMomentsComments
+local FFlagMomentsComments = SharedFlagsModule.FFlagMomentsComments
 local VideoLiftContainerModule = if FFlagMomentsComments then require(script.Parent.VideoLift.VideoLiftContainer) else nil
 local UseCommentsChromeTransparencyModule = if FFlagMomentsComments then require(script.Parent.useCommentsChromeTransparency) else nil
 local UseCommentsEventsModule = if FFlagMomentsComments then require(Moments.Components.Comments.useCommentsEvents) else nil
@@ -76,7 +78,7 @@ local function OverlayInfoFrame(p1)
 end
 
 return function(p1)
-	-- upvalues: UseTokensFunction (copy), UseCompositionLayoutFunction (copy), UseDeviceInsetsFunction (copy), ReactUtilsModule (copy), MomentPushedFeedSafeAreaContextModule (copy), GetFFlagMomentsRenderPostAssetsModule (copy), ReactModule (copy), SignalsModule (copy), MomentsGetPostAssetStoreModule (copy), SignalsReactModule (copy), DeriveMomentFromPostModule (copy), FFlagMomentsAvatarLookTryOn (copy), UseMomentsHostFunction (copy), FFlagMomentsComments (copy), VideoLiftContainerModule (copy), UseCommentsChromeTransparencyModule (copy), UseCommentsEventsModule (copy), UseMomentsSessionFunction (copy), TopContentModule (copy), ScrubberModule (copy), AvatarActionBarModule (copy), CallToActionModule (copy), MomentLayoutModule (copy), OverlayInfoFrame (copy), MomentContextModule (copy), View (copy), Text (copy), VideoScrimModule (copy), MomentGestureLayerModule (copy), GradientBackdrop (copy), PlaybackToggleIndicatorModule (copy), ReactionExplosionLayerModule (copy), GetFFlagMomentsDisplayWakeLockModule (copy), DisplayWakeLockEffect (copy), FFlagMomentsFixOverlayRemountImpressionsModule (copy), MomentImpressionMemoryModule (copy), ReactionEffectsContextModule (copy)
+	-- upvalues: UseTokensFunction (copy), UseCompositionLayoutFunction (copy), UseDeviceInsetsFunction (copy), ReactUtilsModule (copy), MomentPushedFeedSafeAreaContextModule (copy), FFlagMomentsRenderAvatarPostsInFeed (copy), GetFFlagMomentsRenderPostAssetsModule (copy), ReactModule (copy), SignalsModule (copy), MomentsGetPostAssetStoreModule (copy), SignalsReactModule (copy), DeriveMomentFromPostModule (copy), FFlagMomentsAvatarLookTryOn (copy), UseMomentsHostFunction (copy), FFlagMomentsComments (copy), VideoLiftContainerModule (copy), UseCommentsChromeTransparencyModule (copy), UseCommentsEventsModule (copy), UseMomentsSessionFunction (copy), TopContentModule (copy), ScrubberModule (copy), AvatarActionBarModule (copy), CallToActionModule (copy), MomentLayoutModule (copy), OverlayInfoFrame (copy), MomentContextModule (copy), View (copy), Text (copy), VideoScrimModule (copy), MomentGestureLayerModule (copy), GradientBackdrop (copy), PlaybackToggleIndicatorModule (copy), ReactionExplosionLayerModule (copy), GetFFlagMomentsDisplayWakeLockModule (copy), DisplayWakeLockEffect (copy), FFlagMomentsFixOverlayRemountImpressionsModule (copy), MomentImpressionMemoryModule (copy), ReactionEffectsContextModule (copy)
 	local UseTokensResult = UseTokensFunction()
 	local UseCompositionLayoutResult = UseCompositionLayoutFunction()
 	local UseDeviceInsetsResult = UseDeviceInsetsFunction()
@@ -88,6 +90,8 @@ return function(p1)
 	local Data = p1.data
 	local PostName = nil
 	local MediaSurface = p1.mediaSurface
+	local IsIsStaticMedia: boolean = FFlagMomentsRenderAvatarPostsInFeed and p1.isStaticMedia == true
+	local IsIsWorkspaceRendered: boolean = FFlagMomentsRenderAvatarPostsInFeed and p1.isWorkspaceRendered == true
 	
 	if GetFFlagMomentsRenderPostAssetsModule() then
 		local PostAssetId = if p1.moment == nil or p1.moment.postAsset == nil then nil else p1.moment.postAsset.postAssetId
@@ -135,8 +139,10 @@ return function(p1)
 	local v1 = false
 	
 	if FFlagMomentsAvatarLookTryOn then
-		local OutfitId = if Data.kind == "experience" then Data.outfitId else nil
-		v1 = UseMomentsHostFunction().openAvatarLookTryOn ~= nil and (OutfitId ~= nil and OutfitId > 0)
+		local OpenAvatarLookTryOn = UseMomentsHostFunction().openAvatarLookTryOn
+		local OutfitId = if Data.kind == "experience" then Data.outfitId elseif FFlagMomentsRenderAvatarPostsInFeed and Data.kind == "avatar" and Data.outfit.source.type == "outfit" then Data.outfit.source.id else nil
+		local Id = if FFlagMomentsRenderAvatarPostsInFeed and Data.kind == "avatar" and Data.outfit.source.type == "look" then Data.outfit.source.id else nil
+		v1 = OpenAvatarLookTryOn ~= nil and (OutfitId ~= nil and OutfitId > 0) or OpenAvatarLookTryOn ~= nil and Id ~= nil
 	end
 	if FFlagMomentsComments and VideoLiftContainerModule ~= nil and MediaSurface ~= nil then
 		MediaSurface = ReactModule.createElement(VideoLiftContainerModule, { feedItemId = Data.feedItemId }, MediaSurface)
@@ -147,9 +153,13 @@ return function(p1)
 	local ScaledXLarge = 2 * UseTokensResult.Padding.XLarge
 	local Element = ReactModule.createElement(MomentContextModule.Provider, { data = Data, dataVersion = PostName }, {
 		Root = ReactModule.createElement(View, {
-			tag = "size-full clip bg-surface-0",
 			testId = "--moments-item-root",
-			LayoutOrder = p1.layoutOrder
+			LayoutOrder = p1.layoutOrder,
+			backgroundStyle = if IsIsWorkspaceRendered then { Transparency = 1 } else nil,
+			tag = {
+				["size-full clip"] = true,
+				["bg-surface-0"] = not IsIsWorkspaceRendered
+			}
 		}, {
 			Video = ReactModule.createElement(View, {
 				tag = "size-full",
@@ -191,14 +201,14 @@ return function(p1)
 						moment = Moment,
 						onOpenComments = UseCommentsEventsModuleResult
 					}),
-					Scrubber = ReactModule.createElement(ScrubberModule, { LayoutOrder = NextOrder() }),
-					CallToAction = ReactModule.createElement(if v1 then AvatarActionBarModule else CallToActionModule, { LayoutOrder = NextOrder() })
+					Scrubber = if IsIsStaticMedia then nil else ReactModule.createElement(ScrubberModule, { LayoutOrder = NextOrder() }),
+					CallToAction = if FFlagMomentsRenderAvatarPostsInFeed and Data.kind == "avatar" and not v1 then nil else ReactModule.createElement(if v1 then AvatarActionBarModule else CallToActionModule, { LayoutOrder = NextOrder() })
 				})
 			}),
-			PlaybackIndicator = ReactModule.createElement(PlaybackToggleIndicatorModule),
+			PlaybackIndicator = if IsIsStaticMedia then nil else ReactModule.createElement(PlaybackToggleIndicatorModule),
 			ReactionExplosionLayer = ReactModule.createElement(ReactionExplosionLayerModule)
 		}),
-		DisplayWakeLock = if GetFFlagMomentsDisplayWakeLockModule() then ReactModule.createElement(DisplayWakeLockEffect) else nil
+		DisplayWakeLock = if GetFFlagMomentsDisplayWakeLockModule() and not IsIsStaticMedia then ReactModule.createElement(DisplayWakeLockEffect) else nil
 	})
 	
 	if FFlagMomentsFixOverlayRemountImpressionsModule then

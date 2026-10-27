@@ -17,6 +17,7 @@
 	FeedLoadMoreFailed = "FeedLoadMoreFailed",
 	FeedMediaLoadAttempted = "FeedMediaLoadAttempted",
 	FeedMediaLoadFailed = "FeedMediaLoadFailed",
+	AvatarMomentLoadFailed = "AvatarMomentLoadFailed",
 	FeedEndStateReached = "FeedEndStateReached",
 	FeedEmptyCreationStarted = "FeedEmptyCreationStarted",
 	FeedDraftUploaded = "FeedDraftUploaded",

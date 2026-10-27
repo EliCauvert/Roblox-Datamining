@@ -4,13 +4,17 @@ local _ = require(Parent.Signals)
 local _ = require(Parent.MomentsCommon)
 local _ = require(Moments.Components.Feed.FeedTypes)
 local FFlagMomentsModeratedMomentPageModule = require(Moments.Flags.FFlagMomentsModeratedMomentPage)
+local FFlagMomentsRenderAvatarPostsInFeed = require(Parent.SharedFlags).FFlagMomentsRenderAvatarPostsInFeed
 local FFlagMomentsServeEDPVideos = require(Parent.SharedFlags).FFlagMomentsServeEDPVideos
 local GameGetPlayabilityStoreModule = if FFlagMomentsServeEDPVideos then require(Parent.DataHydration.GameGetPlayabilityStore) else nil
 local IsVideoEligibleForPlayability = if FFlagMomentsServeEDPVideos then require(Parent.VideoUtils).isVideoEligibleForPlayability else nil
 local ToMediaItemModule = require(script.Parent.toMediaItem)
 
 local function _(p1): boolean
-	if p1.kind == "moment" then
+	-- upvalues: FFlagMomentsRenderAvatarPostsInFeed (copy)
+	if FFlagMomentsRenderAvatarPostsInFeed and p1.kind == "avatarMoment" then
+		return p1.moment.metadata ~= nil
+	elseif p1.kind == "moment" then
 		local Moment = p1.moment
 		
 		return Moment ~= nil and Moment.metadata ~= nil
@@ -20,12 +24,14 @@ local function _(p1): boolean
 end
 
 return function(p1, GetPlaybackActive, GetCanAutoPlay)
-	-- upvalues: FFlagMomentsServeEDPVideos (copy), GameGetPlayabilityStoreModule (copy), IsVideoEligibleForPlayability (copy), ToMediaItemModule (copy), FFlagMomentsModeratedMomentPageModule (copy)
+	-- upvalues: FFlagMomentsServeEDPVideos (copy), FFlagMomentsRenderAvatarPostsInFeed (copy), GameGetPlayabilityStoreModule (copy), IsVideoEligibleForPlayability (copy), ToMediaItemModule (copy), FFlagMomentsModeratedMomentPageModule (copy)
 	local T = if FFlagMomentsServeEDPVideos then {} else nil
 	local Callback = if FFlagMomentsServeEDPVideos then function(p2, p3)
-		-- upvalues: T (copy), GameGetPlayabilityStoreModule (upval), IsVideoEligibleForPlayability (upval)
+		-- upvalues: FFlagMomentsRenderAvatarPostsInFeed (upval), T (copy), GameGetPlayabilityStoreModule (upval), IsVideoEligibleForPlayability (upval)
 		local HasMetadata = nil
-		if p2.kind == "moment" then
+		if FFlagMomentsRenderAvatarPostsInFeed and p2.kind == "avatarMoment" then
+			HasMetadata = p2.moment.metadata ~= nil
+		elseif p2.kind == "moment" then
 			local Moment = p2.moment
 			HasMetadata = Moment ~= nil and Moment.metadata ~= nil
 		else
@@ -54,8 +60,8 @@ return function(p1, GetPlaybackActive, GetCanAutoPlay)
 		return IsVideoEligibleForPlayability(Entry.status(p3) == "Ready", Entry.data(p3))
 	end else nil
 	
-	local function v13(p2): number
-		-- upvalues: p1 (copy), FFlagMomentsServeEDPVideos (upval), Callback (copy)
+	local function v14(p2): number
+		-- upvalues: p1 (copy), FFlagMomentsServeEDPVideos (upval), Callback (copy), FFlagMomentsRenderAvatarPostsInFeed (upval)
 		local Items = p1.getItems(p2)
 		local CurrentIndex: number = p1.getCurrentIndex(p2)
 		local Count = 0
@@ -67,7 +73,9 @@ return function(p1, GetPlaybackActive, GetCanAutoPlay)
 			else
 				local Item1 = Items[i]
 				
-				if Item1.kind == "moment" then
+				if FFlagMomentsRenderAvatarPostsInFeed and Item1.kind == "avatarMoment" then
+					CallbackResult = Item1.moment.metadata ~= nil
+				elseif Item1.kind == "moment" then
 					local Moment = Item1.moment
 					CallbackResult = Moment ~= nil and Moment.metadata ~= nil
 				else
@@ -84,6 +92,8 @@ return function(p1, GetPlaybackActive, GetCanAutoPlay)
 			local CallbackResult = nil
 			if FFlagMomentsServeEDPVideos then
 				CallbackResult = Callback(Item, p2)
+			elseif FFlagMomentsRenderAvatarPostsInFeed and Item.kind == "avatarMoment" then
+				CallbackResult = Item.moment.metadata ~= nil
 			elseif Item.kind == "moment" then
 				local Moment = Item.moment
 				CallbackResult = Moment ~= nil and Moment.metadata ~= nil
@@ -98,7 +108,7 @@ return function(p1, GetPlaybackActive, GetCanAutoPlay)
 	end
 	
 	return {
-		getActiveIndex = if FFlagMomentsModeratedMomentPageModule or FFlagMomentsServeEDPVideos then v13 else p1.getCurrentIndex,
+		getActiveIndex = if FFlagMomentsModeratedMomentPageModule or FFlagMomentsServeEDPVideos then v14 else p1.getCurrentIndex,
 		getItems = function(p3)
 			-- upvalues: p1 (copy), FFlagMomentsServeEDPVideos (upval), Callback (copy), ToMediaItemModule (upval)
 			local List = {}

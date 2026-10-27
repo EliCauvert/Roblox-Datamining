@@ -12,10 +12,10 @@ local InputSize = FoundationModule.Enums.InputSize
 local AppHeaderBarModule = require(Parent.AppHeaderBar)
 local TextKeysModule = require(Groups.Common.TextKeys)
 local UseGroupsWrapperContextModule = require(Groups.Contexts.useGroupsWrapperContext)
-local FFlagEnableGroupDetailPane = require(Parent.SharedFlags).FFlagEnableGroupDetailPane
+local FFlagEnableGroupOverviewPane = require(Parent.SharedFlags).FFlagEnableGroupOverviewPane
 
 return function(p1)
-	-- upvalues: UseGroupsWrapperContextModule (copy), UseNavigationFunction (copy), UseLocalizationFunction (copy), TextKeysModule (copy), ReactModule (copy), FFlagEnableGroupDetailPane (copy), AppHeaderBarModule (copy), View (copy), Text (copy), Button (copy), ButtonVariant (copy), InputSize (copy)
+	-- upvalues: UseGroupsWrapperContextModule (copy), UseNavigationFunction (copy), UseLocalizationFunction (copy), TextKeysModule (copy), ReactModule (copy), FFlagEnableGroupOverviewPane (copy), AppHeaderBarModule (copy), View (copy), Text (copy), Button (copy), ButtonVariant (copy), InputSize (copy)
 	local UseGroupsWrapperContextModuleResult = UseGroupsWrapperContextModule()
 	local UseNavigationResult = UseNavigationFunction()
 	local UseLocalizationResult = UseLocalizationFunction({
@@ -23,8 +23,8 @@ return function(p1)
 		seeAll = TextKeysModule.ActionSeeAll
 	})
 	local UseResult = ReactModule.useCallback(function()
-		-- upvalues: FFlagEnableGroupDetailPane (upval), UseGroupsWrapperContextModuleResult (copy), UseNavigationResult (copy)
-		if FFlagEnableGroupDetailPane and UseGroupsWrapperContextModuleResult.navigateTo.previousView then
+		-- upvalues: FFlagEnableGroupOverviewPane (upval), UseGroupsWrapperContextModuleResult (copy), UseNavigationResult (copy)
+		if FFlagEnableGroupOverviewPane and UseGroupsWrapperContextModuleResult.navigateTo.previousView then
 			UseGroupsWrapperContextModuleResult.navigateTo.previousView()
 			
 			return
@@ -32,7 +32,7 @@ return function(p1)
 			UseNavigationResult.goBack()
 		end
 	end, {
-		if FFlagEnableGroupDetailPane then UseGroupsWrapperContextModuleResult.navigateTo.previousView else nil,
+		if FFlagEnableGroupOverviewPane then UseGroupsWrapperContextModuleResult.navigateTo.previousView else nil,
 		UseNavigationResult
 	})
 	local UseMemoResult = ReactModule.useMemo(function()

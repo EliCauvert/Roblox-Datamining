@@ -1,5 +1,4 @@
 ﻿local HttpService = game:GetService("HttpService")
-local FFlagCreatorAgentChatFilterTerminalClientToolsModule = require(script.Parent.FFlagCreatorAgentChatFilterTerminalClientTools)
 local _ = require(script.Parent.types)
 local config = { present_plan = true, propose_plan = true }
 
@@ -169,24 +168,24 @@ return {
 		end
 	end,
 	findPlanInTurnState = function(p2, p3)
-		-- upvalues: FFlagCreatorAgentChatFilterTerminalClientToolsModule (copy), getPersistedToolResultText (copy), config (copy), getRawInputContent (copy)
+		-- upvalues: getPersistedToolResultText (copy), config (copy), getRawInputContent (copy)
 		local List = {}
 		
 		for toolCall in p2.toolCalls do
 			table.insert(List, toolCall)
 		end
 		table.sort(List)
-		local ToolCall = nil
 		local v1 = nil
+		local ToolCall = nil
 		
 		for _, value in List do
 			local IsCompleted = p3 and p3[value]
 			
 			if not IsCompleted then
 				ToolCall = p2.toolCalls[value]
-				IsCompleted = FFlagCreatorAgentChatFilterTerminalClientToolsModule and (ToolCall.status == "completed" or ToolCall.status == "failed" or ToolCall.status == "cancelled")
+				IsCompleted = ToolCall.status == "completed" or ToolCall.status == "failed" or ToolCall.status == "cancelled" or getPersistedToolResultText(ToolCall) ~= nil
 			end
-			if not IsCompleted and getPersistedToolResultText(ToolCall) == nil then
+			if not IsCompleted then
 				local Kind: string = ToolCall.kind
 				local IsEntry: boolean = typeof(Kind) == "string" and config[string.lower(Kind)] == true
 				

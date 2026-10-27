@@ -4,7 +4,6 @@ local LogService = game:GetService("LogService")
 local MemStorageService = game:GetService("MemStorageService")
 local Players = game:GetService("Players")
 local FFlagBuildExperienceAskForLogsSeverityRetentionModule = require(BuildExperience.Flags.FFlagBuildExperienceAskForLogsSeverityRetention)
-local FFlagBuildExperiencePersistPlaytestLogsModule = require(BuildExperience.Flags.FFlagBuildExperiencePersistPlaytestLogs)
 local StudioClientLogsTool = require(BuildExperience.Parent.DataHydration.CreatorAgentChat).StudioClientLogsTool
 game:DefineFastInt("MyStatsExperienceAskForLogsMaxEntries", 100)
 
@@ -199,7 +198,7 @@ local function trimServerLogs(Largest)
 end
 
 local function startServerLogCollection(p1): boolean
-	-- upvalues: Flag (ref), LogService (copy), Largest (ref), trimServerLogs (copy), ServerMessageOutConnection (ref), List (ref), toLogEntry (copy), FFlagBuildExperienceAskForLogsSeverityRetentionModule (copy), trimToCapBySeverity (copy), Callback1 (ref), ServerContextOutConnection (ref), FFlagBuildExperiencePersistPlaytestLogsModule (copy), Callback (ref)
+	-- upvalues: Flag (ref), LogService (copy), Largest (ref), trimServerLogs (copy), ServerMessageOutConnection (ref), List (ref), toLogEntry (copy), FFlagBuildExperienceAskForLogsSeverityRetentionModule (copy), trimToCapBySeverity (copy), Callback1 (ref), ServerContextOutConnection (ref), Callback (ref)
 	local P16 = p1 or {}
 	
 	if (P16.dataModel or game).GameId == 0 then
@@ -257,7 +256,7 @@ local function startServerLogCollection(p1): boolean
 	LogService1:RequestServerOutput()
 	Flag = true
 	
-	if FFlagBuildExperiencePersistPlaytestLogsModule and Callback ~= nil then
+	if Callback ~= nil then
 		Callback(P16)
 	end
 	return true
@@ -425,36 +424,34 @@ return {
 		end
 	end,
 	collectToolResultContent = function(p1)
-		-- upvalues: FFlagBuildExperiencePersistPlaytestLogsModule (copy), readLogSnapshot (copy), StudioClientLogsTool (copy), startServerLogCollection (copy), collectClientLogs (copy), getCollectedServerLogs (copy)
+		-- upvalues: readLogSnapshot (copy), StudioClientLogsTool (copy), startServerLogCollection (copy), collectClientLogs (copy), getCollectedServerLogs (copy)
 		local P32 = p1 or {}
 		local DataModel = P32.dataModel or game
 		
 		if DataModel.GameId == 0 then
-			if FFlagBuildExperiencePersistPlaytestLogsModule then
-				local LogSnapshot = readLogSnapshot(P32)
-				
-				if LogSnapshot ~= nil then
-					local PlaceVersion = LogSnapshot.placeVersion
-					local MinimumPlaceVersion = P32.minimumPlaceVersion
-					local IsNotNumber: boolean = MinimumPlaceVersion ~= nil and (typeof(PlaceVersion) ~= "number" or PlaceVersion < MinimumPlaceVersion)
-					
-					return if IsNotNumber then StudioClientLogsTool.formatStaleLogsContent() else StudioClientLogsTool.formatLogsContent(LogSnapshot.clientLogs, LogSnapshot.serverLogs)
-				end
-			end
-			return StudioClientLogsTool.formatNotInGameContent()
-		else
-			if FFlagBuildExperiencePersistPlaytestLogsModule then
-				local PlaceVersion = DataModel.PlaceVersion
-				local MinimumPlaceVersion = P32.minimumPlaceVersion
-				
-				if MinimumPlaceVersion ~= nil and (typeof(PlaceVersion) ~= "number" or PlaceVersion < MinimumPlaceVersion) then
-					return StudioClientLogsTool.formatStaleLogsContent()
-				end
-			end
-			local MaxEntriesPerSource = P32.maxEntriesPerSource or math.max(0, game:GetFastInt("MyStatsExperienceAskForLogsMaxEntries"))
-			startServerLogCollection(P32)
+			local LogSnapshot = readLogSnapshot(P32)
 			
-			return StudioClientLogsTool.formatLogsContent(collectClientLogs(P32.logService, MaxEntriesPerSource), (getCollectedServerLogs(MaxEntriesPerSource)))
+			if LogSnapshot == nil then
+				return StudioClientLogsTool.formatNotInGameContent()
+			else
+				local PlaceVersion = LogSnapshot.placeVersion
+				local MinimumPlaceVersion = P32.minimumPlaceVersion
+				local IsNotNumber: boolean = MinimumPlaceVersion ~= nil and (typeof(PlaceVersion) ~= "number" or PlaceVersion < MinimumPlaceVersion)
+				
+				return if IsNotNumber then StudioClientLogsTool.formatStaleLogsContent() else StudioClientLogsTool.formatLogsContent(LogSnapshot.clientLogs, LogSnapshot.serverLogs)
+			end
+		else
+			local PlaceVersion = DataModel.PlaceVersion
+			local MinimumPlaceVersion = P32.minimumPlaceVersion
+			
+			if MinimumPlaceVersion ~= nil and (typeof(PlaceVersion) ~= "number" or PlaceVersion < MinimumPlaceVersion) then
+				return StudioClientLogsTool.formatStaleLogsContent()
+			else
+				local MaxEntriesPerSource = P32.maxEntriesPerSource or math.max(0, game:GetFastInt("MyStatsExperienceAskForLogsMaxEntries"))
+				startServerLogCollection(P32)
+				
+				return StudioClientLogsTool.formatLogsContent(collectClientLogs(P32.logService, MaxEntriesPerSource), (getCollectedServerLogs(MaxEntriesPerSource)))
+			end
 		end
 	end
 }

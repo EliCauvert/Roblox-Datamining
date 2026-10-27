@@ -2,6 +2,7 @@
 local ReactModule = require(Parent.React)
 local BuilderIconsModule = require(Parent.BuilderIcons)
 local FoundationModule = require(Parent.Foundation)
+local FFlagMomentsRenderAvatarPostsInFeed = require(Parent.SharedFlags).FFlagMomentsRenderAvatarPostsInFeed
 local Badge = FoundationModule.Badge
 local Chip = FoundationModule.Chip
 local View = FoundationModule.View
@@ -19,7 +20,7 @@ local config = {
 local function noop() end
 
 return ReactModule.memo(function(Frame: Frame)
-	-- upvalues: UseLocalizationFunction (copy), config (copy), MomentContextModule (copy), ReactModule (copy), View (copy), Chip (copy), ChipSize (copy), ChipVariant (copy), BuilderIconsModule (copy), noop (copy), Badge (copy), BadgeVariant (copy), BadgeSize (copy), BadgeShape (copy)
+	-- upvalues: UseLocalizationFunction (copy), config (copy), MomentContextModule (copy), ReactModule (copy), View (copy), Chip (copy), ChipSize (copy), ChipVariant (copy), BuilderIconsModule (copy), noop (copy), FFlagMomentsRenderAvatarPostsInFeed (copy), Badge (copy), BadgeVariant (copy), BadgeSize (copy), BadgeShape (copy)
 	local UseLocalizationResult = UseLocalizationFunction(config)
 	local Data = MomentContextModule.useMoment().store.getData(false)
 	
@@ -39,7 +40,9 @@ return ReactModule.memo(function(Frame: Frame)
 				onActivated = noop
 			})
 		})
-	elseif Data.isSponsored then
+	elseif Data.kind == "experience" and Data.isOfficialContent then
+		return nil
+	elseif if FFlagMomentsRenderAvatarPostsInFeed then Data.kind == "experience" and Data.isSponsored else Data.isSponsored == true then
 		local PartnerContent = UseLocalizationResult.partnerContent
 		
 		return ReactModule.createElement(View, {

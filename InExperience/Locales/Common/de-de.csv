@@ -2110,6 +2110,8 @@ Feature.Build.Description.PromoteGamePaid,"Erstelle eine Werbeanzeige, um dein S
 Feature.Build.Description.PromoteGameWithAdCampaign,"Vergrößere deine Zielgruppe mit einer {durationDays}-tägigen Werbekampagne und sorge dafür, dass dein Spiel besser entdeckt wird."
 Feature.Build.Description.RaiseLimitOrWait,"Erhöhe dein tägliches Robux-Limit, um weiter zu erstellen, oder warte, bis es morgen zurückgesetzt wird."
 Feature.Build.Description.RatingAgreement,"Durch die Veröffentlichung erklärst du dich damit einverstanden, dass diese Inhaltseinstufung korrekt ist."
+Feature.Build.Description.RequiredRobuxForAdvanced,"Du benötigst mindestens {ROBUX} Robux, um mit dem erweiterten Modell weiter zu erstellen. Du kannst auch wieder auf das Standardmodell wechseln oder warten, bis dein kostenloses Kontingent zurückgesetzt wird."
+Feature.Build.Description.RequiredRobuxForDefault,"Du benötigst mindestens {ROBUX} Robux, um weiter zu erstellen, oder du wartest, bis dein kostenloses Kontingent zurückgesetzt wird."
 Feature.Build.Description.RestoreLatest,Diese Version wird zu Ihrer neuesten veröffentlichten Version.
 Feature.Build.Description.RevertToVersion,"Bestätige, dass du die letzte Änderung rückgängig machen und zu {VERSION} zurückzukehren möchtest."
 Feature.Build.Description.ShareLatest,"Beschreibe, was sich alles in der neuesten Version geändert hat."
@@ -2175,6 +2177,7 @@ Feature.Build.Label.DeveloperProductDescription,Beschreibung: {DESCRIPTION}
 Feature.Build.Label.DeveloperProductName,"Name: ""{NAME}"""
 Feature.Build.Label.DeveloperProductPrice,Preis: {PRICE} Robux
 Feature.Build.Label.DeveloperProductPriceUnavailable,?
+Feature.Build.Label.DeveloperProducts,Entwicklerprodukte
 Feature.Build.Label.Done,
 Feature.Build.Label.EasyPerformanceReport,Einfacher Leistungsbericht
 Feature.Build.Label.Error,
@@ -2356,6 +2359,7 @@ Feature.Build.Message.BuildBusy,Build ist ausgelastet. Warte eine Minute und ver
 Feature.Build.Message.BuildConnectFailed,Build konnte keine Verbindung herstellen. Bitte versuche es erneut.
 Feature.Build.Message.BuildInternalError,Bei Build ist ein Problem aufgetreten. Bitte versuche es erneut.
 Feature.Build.Message.BuildResponseFailed,Build konnte nicht antworten. Bitte versuche es erneut.
+Feature.Build.Message.BuildSendUnconfirmed,"Build konnte nicht bestätigen, dass deine Nachricht gesendet wurde."
 Feature.Build.Message.BuildStillWorking,"Wir arbeiten daran. Du kannst die App verlassen, auf Roblox spielen oder ein anderes Projekt starten, während du wartest."
 Feature.Build.Message.BuildStopped,Du hast Build gestoppt.
 Feature.Build.Message.BuildTakingLonger,Dies dauert länger als erwartet. Du kannst entweder warten oder etwas anderes beginnen.
@@ -2385,6 +2389,7 @@ Feature.Build.Message.NoAssetsFound,Keine Objekte gefunden.
 Feature.Build.Message.NoCapturesAvailable,Keine Aufnahmen verfügbar
 Feature.Build.Message.NoDescriptionProvided,Keine Beschreibung vorhanden.
 Feature.Build.Message.NoFriendsToAdd,"Du hast noch keine Freunde, die du einladen kannst. Finde zuerst Personen, mit denen du dich auf Roblox verbinden kannst."
+Feature.Build.Message.NoGamesYet,Noch keine Spiele.
 Feature.Build.Message.NoResults,
 Feature.Build.Message.NoSearchResultsFound,Keine Suchergebnisse gefunden
 Feature.Build.Message.NoVersionHistory,Noch kein Versionsverlauf.
@@ -2460,7 +2465,9 @@ Feature.Build.Title.GameCreationDone,Spielerstellung abgeschlossen
 Feature.Build.Title.GamePass,Spielpass
 Feature.Build.Title.GenericError,Etwas ist schiefgelaufen
 Feature.Build.Title.GetUsers,Benutzer gewinnen
+Feature.Build.Title.InsufficientRobuxForModel,Du hast nicht genügend Robux
 Feature.Build.Title.ManagedPricingAcknowledgement,Verwaltete Preisgestaltung aktivieren?
+Feature.Build.Title.Monetization,Monetarisierung
 Feature.Build.Title.NoMonetizationProducts,"Beginne, in deinem Spiel Einnahmen zu erzielen"
 Feature.Build.Title.NoRobuxForUsage,Keine Robux mehr für das Build-Kontingent übrig
 Feature.Build.Title.PickCampaign,Dauer auswählen
@@ -3793,6 +3800,7 @@ Feature.Moments.Title.LeaveMomentCreation,Moment-Kreation verlassen?
 Feature.Moments.Title.MomentRemoved,Moment entfernt
 Feature.Moments.Title.PostInsights,Einblicke in Posts
 Feature.Moments.Title.ReportPost,Post melden
+Feature.Moments.Title.UnfollowConfirmationDialog,@{username} entfolgen?
 Feature.Moments.Tooltip.Creation,Jeder in der Experience kann deine Moments sehen.
 Feature.Moments.Tooltip.PostInsightsBody,"Überprüfe die Aufrufe, die Wiedergabezeit und wie der Moment bei deiner Zielgruppe angekommen ist."
 Feature.Moments.Tooltip.PostInsightsTitle,Die Einblicke für deinen Moment sind da
@@ -4595,6 +4603,7 @@ Feature.UniversalShareSheet.Response.SharedCustomMessage,{CUSTOM_MESSAGE} + 1 we
 Feature.UniversalShareSheet.Response.SharedMessage,Nachricht wurde gesendet
 Feature.UniversalShareSheet.Response.SharedMultipleMessages,Nachrichten wurden gesendet
 Feature.UniversalShareSheet.SharedCustomMultipleMessages,{CUSTOM_MESSAGE} + {N} weitere
+Feature.UserLibrary.Label.MyLibrary,Meine Bibliothek
 Feature.VerificationUpsell.Action.AddPhone,Handy hinzufügen
 Feature.VerificationUpsell.Action.AddPhoneNumber,Handynummer hinzufügen
 Feature.VerificationUpsell.Action.AddPhoneVoice,Telefon für Sprachchat hinzufügen

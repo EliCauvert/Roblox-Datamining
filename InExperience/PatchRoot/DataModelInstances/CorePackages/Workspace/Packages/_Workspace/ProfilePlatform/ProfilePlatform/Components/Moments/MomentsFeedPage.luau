@@ -15,6 +15,7 @@ local FFlagEnableMomentsCommentBlocking = SharedFlagsModule.FFlagEnableMomentsCo
 local FFlagAbuseReportSubmissionTargetV4 = SharedFlagsModule.FFlagAbuseReportSubmissionTargetV4
 local FFlagMomentsServeEDPVideos = SharedFlagsModule.FFlagMomentsServeEDPVideos
 local FFlagAbuseReportAttributes = SharedFlagsModule.FFlagAbuseReportAttributes
+local FFlagProfileRenderAvatarMoments = SharedFlagsModule.FFlagProfileRenderAvatarMoments
 local View = FoundationModule.View
 local IconButton = FoundationModule.IconButton
 local ButtonSize = FoundationModule.Enums.ButtonSize
@@ -38,7 +39,7 @@ local CreateUserMomentsFeedSourceModule = require(Parent.Moments.CreateUserMomen
 local ReportMomentFunction = MomentsModule.reportMoment
 
 local function MomentsFeedPageImmersive()
-	-- upvalues: UseNavigationFunction (copy), FFlagMomentsOptimisticProfilePending (copy), ReactModule (copy), FireAnalyticsEventFunction (copy), EventNames (copy), UseDispatchFunction (copy), FFlagMomentsServeEDPVideos (copy), CloseCentralOverlayFunction (copy), OpenGameDetailsFunction (copy), OpenDynamicAbuseReportFunction (copy), AbuseVector (copy), FFlagAbuseReportAttributes (copy), ReportEdpVideo (copy), ReportMomentFunction (copy), FFlagAbuseReportSubmissionTargetV4 (copy), FFlagEnableMomentsCommentReporting (copy), FFlagEnableMomentsCommentBlocking (copy), UseOpenBlockingModalModule (copy), UseScreenSizeFunction (copy), View (copy), MomentsImmersivePresentation (copy), ImmersiveFeedKind (copy)
+	-- upvalues: UseNavigationFunction (copy), FFlagMomentsOptimisticProfilePending (copy), ReactModule (copy), FireAnalyticsEventFunction (copy), EventNames (copy), UseDispatchFunction (copy), FFlagMomentsServeEDPVideos (copy), CloseCentralOverlayFunction (copy), OpenGameDetailsFunction (copy), OpenDynamicAbuseReportFunction (copy), AbuseVector (copy), FFlagAbuseReportAttributes (copy), ReportEdpVideo (copy), ReportMomentFunction (copy), FFlagAbuseReportSubmissionTargetV4 (copy), FFlagEnableMomentsCommentReporting (copy), FFlagEnableMomentsCommentBlocking (copy), UseOpenBlockingModalModule (copy), UseScreenSizeFunction (copy), View (copy), FFlagProfileRenderAvatarMoments (copy), MomentsImmersivePresentation (copy), ImmersiveFeedKind (copy)
 	local UseNavigationResult = UseNavigationFunction()
 	local ExtraPropsParam = UseNavigationResult.getParam("extraProps")
 	local TargetUserId = if ExtraPropsParam and ExtraPropsParam.targetUserId then ExtraPropsParam.targetUserId else 0
@@ -158,8 +159,9 @@ local function MomentsFeedPageImmersive()
 	local UseScreenSizeResult = UseScreenSizeFunction()
 	
 	return ReactModule.createElement(View, {
-		tag = "bg-surface-0",
-		Size = UDim2.fromOffset(UseScreenSizeResult.X, UseScreenSizeResult.Y)
+		Size = UDim2.fromOffset(UseScreenSizeResult.X, UseScreenSizeResult.Y),
+		backgroundStyle = if FFlagProfileRenderAvatarMoments then { Transparency = 1 } else nil,
+		tag = { ["bg-surface-0"] = not FFlagProfileRenderAvatarMoments }
 	}, {
 		Presentation = ReactModule.createElement(MomentsImmersivePresentation, {
 			sessionSource = "profile",
@@ -191,7 +193,7 @@ local function MomentsFeedPageImmersive()
 end
 
 local function MomentsFeedPageLegacy()
-	-- upvalues: UseNavigationFunction (copy), FFlagMomentsOptimisticProfilePending (copy), ReactModule (copy), CreateUserMomentsFeedSourceModule (copy), FireAnalyticsEventFunction (copy), EventNames (copy), UseScreenSizeFunction (copy), UseSelectorFunction (copy), UseStatusBarHeightFunction (copy), View (copy), FoundationProvider (copy), ColorMode (copy), Feed (copy), IconButton (copy), ButtonSize (copy)
+	-- upvalues: UseNavigationFunction (copy), FFlagMomentsOptimisticProfilePending (copy), ReactModule (copy), CreateUserMomentsFeedSourceModule (copy), FireAnalyticsEventFunction (copy), EventNames (copy), UseScreenSizeFunction (copy), UseSelectorFunction (copy), UseStatusBarHeightFunction (copy), View (copy), FFlagProfileRenderAvatarMoments (copy), FoundationProvider (copy), ColorMode (copy), Feed (copy), IconButton (copy), ButtonSize (copy)
 	local UseNavigationResult = UseNavigationFunction()
 	local ExtraPropsParam = UseNavigationResult.getParam("extraProps")
 	local TargetUserId = if ExtraPropsParam and ExtraPropsParam.targetUserId then ExtraPropsParam.targetUserId else 0
@@ -215,14 +217,15 @@ local function MomentsFeedPageLegacy()
 	end)
 	
 	return ReactModule.createElement(View, {
-		tag = "bg-surface-0",
 		Size = UDim2.fromOffset(UseScreenSizeResult.X, UseScreenSizeResult.Y),
 		padding = {
 			top = UDim.new(0, UseSelectorResult.top + UseStatusBarHeightFunction()),
 			bottom = UDim.new(0, UseSelectorResult.bottom),
 			left = UDim.new(0, UseSelectorResult.left),
 			right = UDim.new(0, UseSelectorResult.right)
-		}
+		},
+		backgroundStyle = if FFlagProfileRenderAvatarMoments then { Transparency = 1 } else nil,
+		tag = { ["bg-surface-0"] = not FFlagProfileRenderAvatarMoments }
 	}, {
 		OnVideoUI = ReactModule.createElement(FoundationProvider, { colorMode = ColorMode.Dark }, {
 			Feed = ReactModule.createElement(Feed, {

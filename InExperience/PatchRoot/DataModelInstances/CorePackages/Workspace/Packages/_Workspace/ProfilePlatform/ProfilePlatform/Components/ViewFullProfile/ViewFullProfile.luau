@@ -22,12 +22,12 @@ local EventNamesModule = require(ProfilePlatform.Analytics.EventNames)
 local TextKeysModule = require(ProfilePlatform.Common.TextKeys)
 local MakeViewGroupPageModule = require(ProfilePlatform.Utils.makeViewGroupPage)
 local SharedFlagsModule = require(Parent.SharedFlags)
-local FFlagEnableGroupDetailPane = SharedFlagsModule.FFlagEnableGroupDetailPane
+local FFlagEnableGroupOverviewPane = SharedFlagsModule.FFlagEnableGroupOverviewPane
 local FFlagSignalsNavP3Dispatch = SharedFlagsModule.FFlagSignalsNavP3Dispatch
 local NavigationCommands = if FFlagSignalsNavP3Dispatch then require(Parent.RobloxAppNavigation).NavigationCommands else nil
 
 function ViewFullProfile(p1)
-	-- upvalues: UseProfileJsonComponentModule (copy), EnumsModule (copy), UseProfileWrapperContextModule (copy), UseProfileAnalyticsContextModule (copy), UseDispatchFunction (copy), UseLocalizationFunction (copy), TextKeysModule (copy), ReactModule (copy), FFlagEnableGroupDetailPane (copy), EventNamesModule (copy), NavigateDownToViewUserProfileFunction (copy), AppPage (copy), UrlBuilder (copy), UrlBase (copy), MakeViewGroupPageModule (copy), FFlagSignalsNavP3Dispatch (copy), NavigationCommands (copy), NavigateDownFunction (copy), HorizontalPageMargin (copy), ConstantsModule (copy), Button (copy), ButtonType (copy)
+	-- upvalues: UseProfileJsonComponentModule (copy), EnumsModule (copy), UseProfileWrapperContextModule (copy), UseProfileAnalyticsContextModule (copy), UseDispatchFunction (copy), UseLocalizationFunction (copy), TextKeysModule (copy), ReactModule (copy), FFlagEnableGroupOverviewPane (copy), EventNamesModule (copy), NavigateDownToViewUserProfileFunction (copy), AppPage (copy), UrlBuilder (copy), UrlBase (copy), MakeViewGroupPageModule (copy), FFlagSignalsNavP3Dispatch (copy), NavigationCommands (copy), NavigateDownFunction (copy), HorizontalPageMargin (copy), ConstantsModule (copy), Button (copy), ButtonType (copy)
 	local UseProfileJsonComponentModuleResult = UseProfileJsonComponentModule(EnumsModule.Components.ViewFullProfile) or {}
 	local UseProfileWrapperContextModuleResult = UseProfileWrapperContextModule()
 	local ProfileId = UseProfileWrapperContextModuleResult.profileId
@@ -91,8 +91,8 @@ function ViewFullProfile(p1)
 				end, {
 					UseDispatchResult, ProfileId, UseProfileAnalyticsContextModuleResult,
 					UseProfileWrapperContextModuleResult,
-					if FFlagEnableGroupDetailPane then ProfileType else nil,
-					if FFlagEnableGroupDetailPane then UseProfileJsonComponentModuleResult.type else nil
+					if FFlagEnableGroupOverviewPane then ProfileType else nil,
+					if FFlagEnableGroupOverviewPane then UseProfileJsonComponentModuleResult.type else nil
 				}),
 				text = ReactModule.useMemo(function()
 					-- upvalues: ProfileType (copy), EnumsModule (upval), UseLocalizationResult (copy), UseProfileJsonComponentModuleResult (copy)
@@ -108,8 +108,8 @@ function ViewFullProfile(p1)
 					return UseLocalizationResult.viewFullProfileLabel
 				end, {
 					UseLocalizationResult,
-					if FFlagEnableGroupDetailPane then ProfileType else nil,
-					if FFlagEnableGroupDetailPane then UseProfileJsonComponentModuleResult.type else nil
+					if FFlagEnableGroupOverviewPane then ProfileType else nil,
+					if FFlagEnableGroupOverviewPane then UseProfileJsonComponentModuleResult.type else nil
 				})
 			})
 		})

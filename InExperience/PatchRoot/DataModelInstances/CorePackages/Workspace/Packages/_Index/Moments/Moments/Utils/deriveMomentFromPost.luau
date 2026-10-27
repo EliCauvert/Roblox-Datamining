@@ -1,6 +1,8 @@
 ﻿local Parent = script:FindFirstAncestor("Moments").Parent
 local _ = require(Parent.MomentsTypes)
-local FFlagMomentsAvatarLookTryOn = require(Parent.SharedFlags).FFlagMomentsAvatarLookTryOn
+local SharedFlagsModule = require(Parent.SharedFlags)
+local FFlagMomentsAvatarLookTryOn = SharedFlagsModule.FFlagMomentsAvatarLookTryOn
+local FFlagMomentsRenderAvatarPostsInFeed = SharedFlagsModule.FFlagMomentsRenderAvatarPostsInFeed
 local config = {
 	TEXT_X_ALIGNMENT_LEFT = Enum.TextXAlignment.Left,
 	TEXT_X_ALIGNMENT_CENTER = Enum.TextXAlignment.Center,
@@ -67,6 +69,18 @@ local function toTextOverlay(p1, p2, TextOverlayStyleFont)
 	}
 end
 
+local _ = function(p1, p2)
+	local TimeRange = if p2.source_trim == nil then p1.time_range else p2.source_trim
+	
+	if TimeRange == nil then
+		return 0
+	else
+		local OffsetDuration = TimeRange.offset_duration
+		
+		return if OffsetDuration == nil then 0 else (OffsetDuration.seconds or 0) + (OffsetDuration.nanos or 0) / 1000000000
+	end
+end
+
 local _ = function(p1, AssetId)
 	if p1 == nil or p1.ttsAudios == nil then
 		return nil
@@ -79,8 +93,23 @@ local _ = function(p1, AssetId)
 	return nil
 end
 
+local function applyPostMetadata(Metadata, Metadata1)
+	if Metadata1 == nil then return end
+	if Metadata1.caption ~= nil and Metadata1.caption ~= "" then
+		Metadata.description = Metadata1.caption
+	end
+	if Metadata1.total_duration ~= nil then
+		local TotalDuration = Metadata1.total_duration
+		Metadata.assetTotalDuration = if TotalDuration == nil then 0 else (TotalDuration.seconds or 0) + (TotalDuration.nanos or 0) / 1000000000
+	end
+	if Metadata1.origin ~= nil and Metadata1.origin ~= 0 and Metadata1.origin ~= "POST_ORIGIN_INVALID" then
+		Metadata.hasAuthoritativePartnerUploadType = true
+		Metadata.partnerUploadType = if Metadata1.origin == "POST_ORIGIN_INFLUENCER_UPLOAD" then "influencer" else nil
+	end
+end
+
 return function(Tbl, p2)
-	-- upvalues: toTextOverlay (copy), FFlagMomentsAvatarLookTryOn (copy)
+	-- upvalues: FFlagMomentsRenderAvatarPostsInFeed (copy), toTextOverlay (copy), FFlagMomentsAvatarLookTryOn (copy), applyPostMetadata (copy)
 	local Copy = table.clone(Tbl.metadata)
 	local Edits = Copy.edits
 	local Edits1 = {
@@ -90,6 +119,7 @@ return function(Tbl, p2)
 	local TtsAudios = {}
 	local AssetId = nil
 	local Screenshot = nil
+	local Flag = false
 	local Tracks = p2.tracks or {}
 	local AssetAccessContext = nil
 	for _, track in Tracks do
@@ -122,6 +152,8 @@ return function(Tbl, p2)
 						elseif Content1.type == "image" and AssetId == nil and Content1.value.asset_id > 0 then
 							AssetId = Content1.value.asset_id
 							Screenshot = Enum.CaptureType.Screenshot
+						elseif FFlagMomentsRenderAvatarPostsInFeed and Content1.type == "scene" then
+							Flag = true
 						elseif Content1.type == "text_label" then
 							local v2 = #TextOverlays + 1
 							local TextOverlay = if Edits == nil or Edits.textOverlays == nil then nil else Edits.textOverlays[v2]
@@ -133,15 +165,16 @@ return function(Tbl, p2)
 					
 					if Value.audio_type == "AUDIO_TYPE_MUSIC" and Edits1.music == nil and Value.asset_id > 0 then
 						local Music = { assetId = Value.asset_id }
-						local StartTime1 = nil
+						local TimeRange = if Value.source_trim == nil then slot.time_range else Value.source_trim
+						local StartTime = nil
 						
-						if slot.time_range == nil then
-							StartTime1 = 0
+						if TimeRange == nil then
+							StartTime = 0
 						else
-							local OffsetDuration = slot.time_range.offset_duration
-							StartTime1 = if OffsetDuration == nil then 0 else (OffsetDuration.seconds or 0) + (OffsetDuration.nanos or 0) / 1000000000
+							local OffsetDuration = TimeRange.offset_duration
+							StartTime = if OffsetDuration == nil then 0 else (OffsetDuration.seconds or 0) + (OffsetDuration.nanos or 0) / 1000000000
 						end
-						Music.startTime = StartTime1
+						Music.startTime = StartTime
 						Edits1.music = Music
 					elseif Value.audio_type == "AUDIO_TYPE_TTS" and Value.context ~= nil and Value.context.type == "tts" and Value.asset_id > 0 then
 						local Value1 = Value.context.value
@@ -186,7 +219,7 @@ return function(Tbl, p2)
 			end
 		end
 	end
-	if AssetId == nil or Screenshot == nil then
+	if (AssetId == nil or Screenshot == nil) and (not FFlagMomentsRenderAvatarPostsInFeed or not Flag) then
 		return nil
 	end
 	if #TextOverlays > 0 then
@@ -195,25 +228,11 @@ return function(Tbl, p2)
 	if #TtsAudios > 0 then
 		Edits1.ttsAudios = TtsAudios
 	end
-	local Metadata = p2.metadata
-	
-	if Metadata ~= nil then
-		if Metadata.caption ~= nil and Metadata.caption ~= "" then
-			Copy.description = Metadata.caption
-		end
-		if Metadata.total_duration ~= nil then
-			local TotalDuration = Metadata.total_duration
-			Copy.assetTotalDuration = if TotalDuration == nil then 0 else (TotalDuration.seconds or 0) + (TotalDuration.nanos or 0) / 1000000000
-		end
-		if Metadata.origin ~= nil and Metadata.origin ~= 0 and Metadata.origin ~= "POST_ORIGIN_INVALID" then
-			Copy.hasAuthoritativePartnerUploadType = true
-			Copy.partnerUploadType = if Metadata.origin == "POST_ORIGIN_INFLUENCER_UPLOAD" then "influencer" else nil
-		end
-	end
-	Copy.captureType = Screenshot
+	applyPostMetadata(Copy, p2.metadata)
+	Copy.captureType = if FFlagMomentsRenderAvatarPostsInFeed and Screenshot == nil then Copy.captureType else Screenshot
 	Copy.edits = Edits1
 	local Copy1 = table.clone(Tbl)
-	Copy1.assetId = AssetId
+	Copy1.assetId = if FFlagMomentsRenderAvatarPostsInFeed and AssetId == nil then Tbl.assetId else AssetId
 	Copy1.metadata = Copy
 	
 	return Copy1

@@ -53,6 +53,7 @@ return {
 		Events = "Events",
 		CurrentlyPlaying = "CurrentlyPlaying",
 		Announcements = "Announcements",
+		GroupForumsDiscovery = "ForumsDiscovery",
 		ProfileCompletion = if FFlagEnableProfileCompletion then "ProfileCompletion" else "",
 		Moments = if FFlagProfilePlatformEnableMomentsModule then "UserMoments" else ""
 	},

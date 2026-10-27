@@ -1,0 +1,3 @@
+﻿local FFlagBuildExperienceManageDevProductModule = require(script.Parent.FFlagBuildExperienceManageDevProduct)
+
+return game:DefineFastFlag("BuildExperienceMonetizationNativeUI2", false) and FFlagBuildExperienceManageDevProductModule

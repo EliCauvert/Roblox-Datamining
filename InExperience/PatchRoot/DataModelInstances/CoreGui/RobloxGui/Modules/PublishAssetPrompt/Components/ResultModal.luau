@@ -11,7 +11,6 @@ local TModule = require(CorePackages.Packages.t)
 local InputTypeModule = require(CorePackages.Workspace.Packages.InputType)
 local GetInputGroupFunction = require(CorePackages.Workspace.Packages.InputType).getInputGroup
 local CloseResultModalModule = require(script.Parent.Parent.Thunks.CloseResultModal)
-local GetFFlagValidateDescriptionModule = require(script.Parent.Parent.GetFFlagValidateDescription)
 local PromptCreatePlatformContentResult = if game:GetEngineFeature("EnableImagePublish") then Enum.PromptCreatePlatformContentResult else Enum.PromptPublishAssetResult
 local ResultModal = RoactModule.PureComponent:extend("ResultModal")
 ResultModal.validateProps = TModule.strictInterface({
@@ -43,7 +42,7 @@ function ResultModal:getLocalizedTitleForResultPrompt(ResultModalType)
 end
 
 function ResultModal.render(p1)
-	-- upvalues: RoactModule (copy), InteractiveAlert (copy), ButtonType (copy), GetFFlagValidateDescriptionModule (copy), RobloxTranslatorModule (copy), IconsControlsKeysXboxA (copy)
+	-- upvalues: RoactModule (copy), InteractiveAlert (copy), ButtonType (copy), RobloxTranslatorModule (copy), IconsControlsKeysXboxA (copy)
 	return RoactModule.createElement(InteractiveAlert, {
 		title = p1:getLocalizedTitleForResultPrompt(p1.props.resultModalType),
 		bodyText = p1:getLocalizedStringForResultPrompt(p1.props.resultModalType),
@@ -54,7 +53,7 @@ function ResultModal.render(p1)
 					buttonType = ButtonType.PrimarySystem,
 					props = {
 						onActivated = p1.props.closeResultModal,
-						text = if GetFFlagValidateDescriptionModule() then RobloxTranslatorModule:FormatByKey("CoreScripts.PublishAssetPrompt.ResultModalOk") else RobloxTranslatorModule:FormatByKey("InGame.CommonUI.Button.Ok"),
+						text = RobloxTranslatorModule:FormatByKey("CoreScripts.PublishAssetPrompt.ResultModalOk"),
 						inputIcon = p1.state.isGamepad and IconsControlsKeysXboxA or nil
 					}
 				}

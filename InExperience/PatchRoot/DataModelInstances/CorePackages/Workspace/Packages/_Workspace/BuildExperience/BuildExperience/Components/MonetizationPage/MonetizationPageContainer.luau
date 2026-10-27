@@ -14,6 +14,7 @@ local SignalsReactModule = require(Parent.SignalsReact)
 local CreateManageDevProductStoreModule = require(BuildExperience.Chat.createManageDevProductStore)
 local CreateManageMonetizationOptionsStoreModule = require(BuildExperience.Chat.createManageMonetizationOptionsStore)
 local MonetizationPageViewModule = require(script.Parent.MonetizationPageView)
+local GetProductKindCapabilitiesModule = require(script.Parent.getProductKindCapabilities)
 local MapDeveloperProductsToMonetizationProductsModule = require(script.Parent.mapDeveloperProductsToMonetizationProducts)
 local MapMonetizationCatalogModule = require(script.Parent.mapMonetizationCatalog)
 local UseMonetizationPageViewModelModule = require(script.Parent.useMonetizationPageViewModel)
@@ -24,6 +25,8 @@ local FFlagBuildCheckGamePermissionsModule = require(BuildExperience.Flags.FFlag
 local FFlagBuildExperienceMonetizationNativeUIModule = require(BuildExperience.Flags.FFlagBuildExperienceMonetizationNativeUI)
 local FFlagBuildExperienceMonetizationMultiKindModule = require(BuildExperience.Flags.FFlagBuildExperienceMonetizationMultiKind)
 local FFlagBuildExperienceMonetizationProductEditingModule = require(BuildExperience.Flags.FFlagBuildExperienceMonetizationProductEditing)
+local FFlagBuildExperienceMonetizationManageKindsModule = require(BuildExperience.Flags.FFlagBuildExperienceMonetizationManageKinds)
+local FFlagBuildExperienceMonetizationKindRegionalPricingModule = require(BuildExperience.Flags.FFlagBuildExperienceMonetizationKindRegionalPricing)
 local FFlagBuildExperienceDevProductModerationReadbackModule = require(BuildExperience.Flags.FFlagBuildExperienceDevProductModerationReadback)
 local FFlagBuildExperienceManageDevProductModule = require(BuildExperience.Flags.FFlagBuildExperienceManageDevProduct) or FFlagBuildExperienceMonetizationNativeUIModule
 
@@ -62,8 +65,8 @@ local _ = function(List): string
 	return v1
 end
 
-local function useMixedCatalog(p1, p2, UseSignalStateResult, UseSignalStateResult1, ProductLocalizationKeys)
-	-- upvalues: SignalsReactModule (copy), GamePassConfigModule (copy), DeveloperSubscriptionModule (copy), ReactModule (copy), Signal1 (copy), Ready (copy), Signal2 (copy), SendBuildExperienceEventModule (copy)
+local function useMixedCatalog(p1, p2, UseSignalStateResult, UseSignalStateResult1, ProductLocalizationKeys, p3)
+	-- upvalues: SignalsReactModule (copy), GamePassConfigModule (copy), DeveloperSubscriptionModule (copy), ReactModule (copy), Signal1 (copy), Ready (copy), Signal2 (copy), SendBuildExperienceEventModule (copy), GetProductKindCapabilitiesModule (copy), PromiseModule (copy), FFlagBuildExperienceMonetizationManageKindsModule (copy), FFlagBuildExperienceMonetizationKindRegionalPricingModule (copy)
 	local UseSignalStateResult2 = SignalsReactModule.useSignalState(GamePassConfigModule.getGamePassConfigStore)
 	local UseSignalStateResult3 = SignalsReactModule.useSignalState(DeveloperSubscriptionModule.getDeveloperSubscriptionStore)
 	local UseMemoResult = ReactModule.useMemo(function()
@@ -168,20 +171,20 @@ local function useMixedCatalog(p1, p2, UseSignalStateResult, UseSignalStateResul
 		p1.universeId,
 		UseSignalStateResult3
 	})
-	local UseResult1 = ReactModule.useCallback(function(p3)
+	local UseResult1 = ReactModule.useCallback(function(p4)
 		-- upvalues: p1 (copy), p2 (copy), UseSignalStateResult2 (copy), UseSignalStateResult3 (copy)
 		if p1.products ~= nil or p1.universeId == nil then return end
-		if p3 == "DeveloperProduct" then
+		if p4 == "DeveloperProduct" then
 			p2.fetchProducts(p1.universeId)
 			
 			return
 		end
-		if p3 == "GamePass" then
+		if p4 == "GamePass" then
 			UseSignalStateResult2.fetchGamePasses(p1.universeId)
 			
 			return
 		end
-		if p3 == "Subscription" then
+		if p4 == "Subscription" then
 			UseSignalStateResult3.fetchSubscriptions(p1.universeId)
 		end
 	end, {
@@ -191,6 +194,81 @@ local function useMixedCatalog(p1, p2, UseSignalStateResult, UseSignalStateResul
 		p1.universeId,
 		UseSignalStateResult3
 	})
+	local UseResult2 = ReactModule.useCallback(function(p4, p5, p6)
+		-- upvalues: p1 (copy), GetProductKindCapabilitiesModule (upval), PromiseModule (upval), UseSignalStateResult2 (copy), p3 (copy), UseSignalStateResult3 (copy)
+		local UniverseId = p1.universeId
+		local ProductKindCapabilitiesModule = GetProductKindCapabilitiesModule(p4)
+		
+		if UniverseId == nil or ProductKindCapabilitiesModule == nil then
+			return PromiseModule.reject("This product cannot be changed from here")
+		elseif p4 ~= "GamePass" then
+			return if p6.isForSale == nil then PromiseModule.reject("This product cannot be changed from here") elseif p6.isForSale then UseSignalStateResult3.activate(UniverseId, p5) else UseSignalStateResult3.deactivate(UniverseId, p5, false)
+		else
+			local Number: number? = tonumber(p5)
+			
+			if Number == nil then
+				return PromiseModule.reject("This product cannot be changed from here")
+			elseif p6.isForSale == nil then
+				local function write()
+					-- upvalues: UseSignalStateResult2 (upval), UniverseId (copy), Number (copy), p6 (copy)
+					return UseSignalStateResult2.update(UniverseId, Number, { isManagedPricingEnabled = p6.isManagedPricingEnabled })
+				end
+				
+				return if p6.isManagedPricingEnabled == true then p3.ensureManagedPricingAccepted(UniverseId):andThen(write) else UseSignalStateResult2.update(UniverseId, Number, { isManagedPricingEnabled = p6.isManagedPricingEnabled })
+			else
+				return if p6.isForSale then UseSignalStateResult2.activate(UniverseId, Number) else UseSignalStateResult2.deactivate(UniverseId, Number)
+			end
+		end
+	end, {
+		UseSignalStateResult2,
+		p3,
+		p1.universeId or 0,
+		UseSignalStateResult3
+	})
+	local UseResult3 = if FFlagBuildExperienceMonetizationManageKindsModule then ReactModule.useCallback(function(p4, p5, p6)
+		-- upvalues: p1 (copy), PromiseModule (upval), UseSignalStateResult2 (copy), UseSignalStateResult3 (copy), DeveloperSubscriptionModule (upval)
+		local UniverseId = p1.universeId
+		
+		if UniverseId == nil then
+			return PromiseModule.reject("This product cannot be changed from here")
+		elseif p4 == "GamePass" then
+			local Number: number? = tonumber(p5)
+			
+			return if Number == nil then PromiseModule.reject("This product cannot be changed from here") else UseSignalStateResult2.update(UniverseId, Number, {
+				name = p6.name,
+				description = p6.description,
+				priceInRobux = p6.priceInRobux
+			}, { acceptModeratedText = true })
+		else
+			return if p4 == "Subscription" then UseSignalStateResult3.update(UniverseId, p5, { description = p6.description }, { acceptModeratedText = true }):andThen(function(Result)
+				-- upvalues: DeveloperSubscriptionModule (upval)
+				return {
+					name = Result.name,
+					description = Result.description,
+					priceInformation = if Result.currencyType == DeveloperSubscriptionModule.CurrencyType.Robux then { defaultPriceInRobux = Result.priceInRobux } else nil
+				}
+			end) else PromiseModule.reject("This product cannot be changed from here")
+		end
+	end, {
+		UseSignalStateResult2,
+		p1.universeId or 0,
+		UseSignalStateResult3
+	}) else nil
+	local UseResult4 = nil
+	local UseResult5 = nil
+	
+	if FFlagBuildExperienceMonetizationManageKindsModule then
+		UseResult4 = ReactModule.useCallback(function(p4, p5, IsForSale)
+			-- upvalues: UseResult2 (copy)
+			return UseResult2(p4, p5, { isForSale = IsForSale })
+		end, { UseResult2 })
+	end
+	if FFlagBuildExperienceMonetizationKindRegionalPricingModule then
+		UseResult5 = ReactModule.useCallback(function(p4, p5, IsManagedPricingEnabled)
+			-- upvalues: UseResult2 (copy)
+			return UseResult2(p4, p5, { isManagedPricingEnabled = IsManagedPricingEnabled })
+		end, { UseResult2 })
+	end
 	local config = {
 		gamePassCatalog = UseSignalStateResult4,
 		subscriptionCatalog = UseSignalStateResult6,
@@ -212,6 +290,9 @@ local function useMixedCatalog(p1, p2, UseSignalStateResult, UseSignalStateResul
 		config.status = Status
 		config.onRetryAll = UseResult
 		config.onRetrySource = UseResult1
+		config.onUpdateSaleStatus = UseResult4
+		config.onUpdateManagedPricing = UseResult5
+		config.onUpdateProductDetails = UseResult3
 		
 		return config
 	end
@@ -233,8 +314,13 @@ local function getProductLocalizationKeys()
 	}
 end
 
+local _ = function(p4, p5)
+	-- upvalues: SignalsReactModule (copy), NotReady (copy)
+	return SignalsReactModule.useSignalState(if p4 == nil then p5 else p4.data), (SignalsReactModule.useSignalState(if p4 == nil then NotReady else p4.status))
+end
+
 return function(Tbl)
-	-- upvalues: ReactModule (copy), LocalizationModule (copy), getProductLocalizationKeys (copy), Computed (copy), FFlagBuildExperienceMonetizationNativeUIModule (copy), Computed1 (copy), SignalsReactModule (copy), UniverseConfigurationModule (copy), Signal3 (copy), NotReady (copy), FFlagBuildCheckGamePermissionsModule (copy), GamePermissionsModule (copy), SignalsModule (copy), Signal4 (copy), Signal5 (copy), Signal6 (copy), SendBuildExperienceEventModule (copy), FFlagBuildExperienceMonetizationMultiKindModule (copy), FFlagBuildExperienceManageDevProductModule (copy), Signal (copy), Ready (copy), useMixedCatalog (copy), LocalizationStringsModule (copy), MapMonetizationCatalogModule (copy), MapDeveloperProductsToMonetizationProductsModule (copy), FFlagBuildExperienceDevProductModerationReadbackModule (copy), PromiseModule (copy), UseGamePermissionsModule (copy), FFlagBuildExperienceMonetizationProductEditingModule (copy), UseMonetizationPageViewModelModule (copy), MonetizationPageViewModule (copy)
+	-- upvalues: ReactModule (copy), LocalizationModule (copy), getProductLocalizationKeys (copy), Computed (copy), FFlagBuildExperienceMonetizationNativeUIModule (copy), Computed1 (copy), SignalsReactModule (copy), UniverseConfigurationModule (copy), Signal3 (copy), NotReady (copy), FFlagBuildCheckGamePermissionsModule (copy), GamePermissionsModule (copy), SignalsModule (copy), Signal4 (copy), Signal5 (copy), Signal6 (copy), SendBuildExperienceEventModule (copy), FFlagBuildExperienceMonetizationMultiKindModule (copy), FFlagBuildExperienceManageDevProductModule (copy), Signal (copy), Ready (copy), useMixedCatalog (copy), LocalizationStringsModule (copy), MapMonetizationCatalogModule (copy), MapDeveloperProductsToMonetizationProductsModule (copy), FFlagBuildExperienceDevProductModerationReadbackModule (copy), PromiseModule (copy), UseGamePermissionsModule (copy), FFlagBuildExperienceMonetizationProductEditingModule (copy), FFlagBuildExperienceMonetizationManageKindsModule (copy), FFlagBuildExperienceMonetizationKindRegionalPricingModule (copy), UseMonetizationPageViewModelModule (copy), MonetizationPageViewModule (copy)
 	local UseContextResult = ReactModule.useContext(LocalizationModule.LocalizationRoactContext)
 	local UseLocalizationResult = LocalizationModule.Hooks.useLocalization((getProductLocalizationKeys()))
 	local ComputedResult = Computed()
@@ -253,7 +339,8 @@ return function(Tbl)
 	local UseSignalStateResult2 = "NotReady"
 	
 	if FFlagBuildExperienceMonetizationNativeUIModule then
-		UseSignalStateResult1 = SignalsReactModule.useSignalState(if UseMemoResult == nil then Signal3 else UseMemoResult.data)
+		local Signal1 = Signal3
+		UseSignalStateResult1 = SignalsReactModule.useSignalState(if UseMemoResult == nil then Signal1 else UseMemoResult.data)
 		UseSignalStateResult2 = SignalsReactModule.useSignalState(if UseMemoResult == nil then NotReady else UseMemoResult.status)
 	end
 	local UseMemoResult1 = if FFlagBuildExperienceMonetizationNativeUIModule then ReactModule.useMemo(function()
@@ -264,9 +351,9 @@ return function(Tbl)
 			local AndFetchUniversePermissions = GamePermissionsModule.getGamePermissionsStore().getAndFetchUniversePermissions(Tbl.universeId)
 			
 			return {
-				data = SignalsModule.createComputed(function(p3)
+				data = SignalsModule.createComputed(function(p4)
 					-- upvalues: AndFetchUniversePermissions (copy)
-					local DataResult = AndFetchUniversePermissions.data(p3)
+					local DataResult = AndFetchUniversePermissions.data(p4)
 					
 					return if DataResult == nil then nil else { canMonetize = DataResult.canMonetize }
 				end),
@@ -349,15 +436,15 @@ return function(Tbl)
 		productSection = UseLocalizationResult.productSection,
 		gamePassSection = UseLocalizationResult.gamePassSection,
 		subscriptionSection = UseLocalizationResult.subscriptionSection
-	}) else nil
+	}, v3) else nil
 	local GamePassCatalog = if UseMixedCatalogResult == nil then nil else UseMixedCatalogResult.gamePassCatalog
 	local SubscriptionCatalog = if UseMixedCatalogResult == nil then nil else UseMixedCatalogResult.subscriptionCatalog
 	local UseMemoResult21 = ReactModule.useMemo(function()
 		-- upvalues: Tbl (copy), UseContextResult (copy), LocalizationStringsModule (upval), FFlagBuildExperienceMonetizationMultiKindModule (upval), MapMonetizationCatalogModule (upval), UseSignalStateResult10 (copy), GamePassCatalog (copy), SubscriptionCatalog (copy), UseLocalizationResult (copy), MapDeveloperProductsToMonetizationProductsModule (upval)
 		if Tbl.products == nil then
-			local function FormatDefaultProductName(p3)
+			local function FormatDefaultProductName(p4)
 				-- upvalues: UseContextResult (upval), LocalizationStringsModule (upval)
-				return UseContextResult:Format(LocalizationStringsModule.MONETIZATION_DEFAULT_PRODUCT_NAME, { PRODUCT_ID = p3 })
+				return UseContextResult:Format(LocalizationStringsModule.MONETIZATION_DEFAULT_PRODUCT_NAME, { PRODUCT_ID = p4 })
 			end
 			
 			return if FFlagBuildExperienceMonetizationMultiKindModule then MapMonetizationCatalogModule({
@@ -420,22 +507,22 @@ return function(Tbl)
 	end, { ComputedResult, Tbl.products, Tbl.universeId })
 	local UseResult1 = if UseMixedCatalogResult == nil then UseResult else UseMixedCatalogResult.onRetryAll
 	local OnRetrySource = if UseMixedCatalogResult == nil then nil else UseMixedCatalogResult.onRetrySource
-	local UseResult2 = ReactModule.useCallback(function(p3, IsManagedPricingEnabled)
+	local UseResult2 = ReactModule.useCallback(function(p4, IsManagedPricingEnabled)
 		-- upvalues: ComputedResult (copy), Tbl (copy), FFlagBuildExperienceMonetizationNativeUIModule (upval), v3 (ref)
-		local function v110()
-			-- upvalues: ComputedResult (upval), Tbl (upval), p3 (copy), IsManagedPricingEnabled (copy)
-			return ComputedResult.update(Tbl.universeId, p3, { isManagedPricingEnabled = IsManagedPricingEnabled })
+		local function v125()
+			-- upvalues: ComputedResult (upval), Tbl (upval), p4 (copy), IsManagedPricingEnabled (copy)
+			return ComputedResult.update(Tbl.universeId, p4, { isManagedPricingEnabled = IsManagedPricingEnabled })
 		end
 		
-		return if FFlagBuildExperienceMonetizationNativeUIModule and IsManagedPricingEnabled then v3.ensureManagedPricingAccepted(Tbl.universeId):andThen(v110) else v110()
+		return if FFlagBuildExperienceMonetizationNativeUIModule and IsManagedPricingEnabled then v3.ensureManagedPricingAccepted(Tbl.universeId):andThen(v125) else v125()
 	end, { ComputedResult, v3, Tbl.universeId })
-	local UseResult21 = ReactModule.useCallback(function(p3, IsForSale)
+	local UseResult21 = ReactModule.useCallback(function(p4, IsForSale)
 		-- upvalues: ComputedResult (copy), Tbl (copy)
-		return ComputedResult.update(Tbl.universeId, p3, { isForSale = IsForSale })
+		return ComputedResult.update(Tbl.universeId, p4, { isForSale = IsForSale })
 	end, { ComputedResult, Tbl.universeId })
-	local UseResult3 = ReactModule.useCallback(function(p3, p4)
+	local UseResult3 = ReactModule.useCallback(function(p4, p5)
 		-- upvalues: ComputedResult (copy), Tbl (copy), FFlagBuildExperienceDevProductModerationReadbackModule (upval)
-		return ComputedResult.update(Tbl.universeId, p3, p4, FFlagBuildExperienceDevProductModerationReadbackModule)
+		return ComputedResult.update(Tbl.universeId, p4, p5, FFlagBuildExperienceDevProductModerationReadbackModule)
 	end, { ComputedResult, Tbl.universeId })
 	local UseResult4 = nil
 	local UseResult5 = nil
@@ -447,7 +534,7 @@ return function(Tbl)
 			-- upvalues: v3 (ref), Tbl (copy)
 			return v3.acceptManagedPricing(Tbl.universeId)
 		end, { v3, Tbl.universeId })
-		UseResult5 = ReactModule.useCallback(function(p3, p4)
+		UseResult5 = ReactModule.useCallback(function(p4, p5)
 			-- upvalues: ComputedResult (copy), Tbl (copy), v3 (ref), PromiseModule (upval)
 			local function _()
 				-- upvalues: ComputedResult (upval), Tbl (upval)
@@ -456,7 +543,7 @@ return function(Tbl)
 				end)
 			end
 			
-			return v3.updateDeveloperProductsManagedPricing(Tbl.universeId, p3, p4):andThen(function(Result)
+			return v3.updateDeveloperProductsManagedPricing(Tbl.universeId, p4, p5):andThen(function(Result)
 				-- upvalues: ComputedResult (upval), Tbl (upval)
 				return ComputedResult.list(Tbl.universeId):catch(function()
 					return nil
@@ -464,19 +551,19 @@ return function(Tbl)
 					-- upvalues: Result (copy)
 					return Result
 				end)
-			end, function(p5)
+			end, function(p6)
 				-- upvalues: ComputedResult (upval), Tbl (upval), PromiseModule (upval)
 				return ComputedResult.list(Tbl.universeId):catch(function()
 					return nil
 				end):andThen(function()
-					-- upvalues: PromiseModule (upval), p5 (copy)
-					return PromiseModule.reject(p5)
+					-- upvalues: PromiseModule (upval), p6 (copy)
+					return PromiseModule.reject(p6)
 				end)
 			end)
 		end, { ComputedResult, v3, Tbl.universeId })
-		UseResult6 = ReactModule.useCallback(function(p3)
+		UseResult6 = ReactModule.useCallback(function(p4)
 			-- upvalues: v3 (ref), Tbl (copy)
-			return v3.setShopGlobalIcon(Tbl.universeId, p3)
+			return v3.setShopGlobalIcon(Tbl.universeId, p4)
 		end, { v3, Tbl.universeId })
 		UseResult7 = ReactModule.useCallback(function()
 			-- upvalues: v3 (ref), Tbl (copy), FFlagBuildCheckGamePermissionsModule (upval), GamePermissionsModule (upval), UseSignalStateResult1 (ref), UseSignalStateResult2 (ref), UseSignalStateResult (ref)
@@ -541,6 +628,14 @@ return function(Tbl)
 	if FFlagBuildExperienceMonetizationProductEditingModule and Tbl.universeId ~= nil and IsCanMonetize then
 		Copy.onUpdateProductSaleStatus = UseResult21
 		Copy.onUpdateProduct = UseResult3
+		
+		if FFlagBuildExperienceMonetizationManageKindsModule then
+			Copy.onUpdateProductKindSaleStatus = UseMixedCatalogResult.onUpdateSaleStatus
+			Copy.onUpdateProductKind = UseMixedCatalogResult.onUpdateProductDetails
+		end
+		if FFlagBuildExperienceMonetizationKindRegionalPricingModule then
+			Copy.onUpdateProductKindManagedPricing = UseMixedCatalogResult.onUpdateManagedPricing
+		end
 	end
 	return ReactModule.createElement(MonetizationPageViewModule, (UseMonetizationPageViewModelModule(Copy)))
 end

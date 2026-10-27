@@ -3,7 +3,6 @@ local ReactModule = require(BuildExperience.Parent.React)
 local ChatTypesModule = require(BuildExperience.Chat.chatTypes)
 local AdCampaignEligibilityToolModule = require(BuildExperience.Chat.adCampaignEligibilityTool)
 local FFlagBuildAgentAdCampaignCardModule = require(BuildExperience.Flags.FFlagBuildAgentAdCampaignCard)
-local FFlagBuildExperienceSinglePlaytestCardModule = require(BuildExperience.Flags.FFlagBuildExperienceSinglePlaytestCard)
 local ChatTurnBlockModule = require(script.Parent.ChatTurnBlock)
 local ChatUserMessageModule = require(script.Parent.ChatUserMessage)
 
@@ -76,7 +75,7 @@ return ReactModule.memo(function(Frame: Frame)
 		onAgentAdCampaignActive = if FFlagBuildAgentAdCampaignCardModule then Frame.onAgentAdCampaignActive else nil
 	})
 end, function(Frame, Frame1)
-	-- upvalues: areUserImagesEqual (copy), areResourceAttachmentsEqual (copy), FFlagBuildAgentAdCampaignCardModule (copy), hasCampaignCard (copy), FFlagBuildExperienceSinglePlaytestCardModule (copy)
+	-- upvalues: areUserImagesEqual (copy), areResourceAttachmentsEqual (copy), FFlagBuildAgentAdCampaignCardModule (copy), hasCampaignCard (copy)
 	local Message = Frame.message
 	local Message1 = Frame1.message
 	
@@ -92,11 +91,11 @@ end, function(Frame, Frame1)
 		return false
 	elseif FFlagBuildAgentAdCampaignCardModule and (hasCampaignCard(Message) or hasCampaignCard(Message1)) and (Frame.onAgentAdCampaignOfferSelected ~= Frame1.onAgentAdCampaignOfferSelected or Frame.getAgentAdCampaignCardState ~= Frame1.getAgentAdCampaignCardState or Frame.onAgentAdCampaignActive ~= Frame1.onAgentAdCampaignActive or Frame.isPageVisible ~= Frame1.isPageVisible or Frame.scrollingFrameRef ~= Frame1.scrollingFrameRef or Frame.isAgentAdCampaignCreateDisabled ~= Frame1.isAgentAdCampaignCreateDisabled) then
 		return false
-	elseif FFlagBuildExperienceSinglePlaytestCardModule and Message.isLatestPublishTurn ~= Message1.isLatestPublishTurn then
-		return false
-	else
+	elseif Message.isLatestPublishTurn == Message1.isLatestPublishTurn then
 		local IsIsDone = Message1.isDone == true
 		
 		return Message.isDone == true and IsIsDone
+	else
+		return false
 	end
 end)

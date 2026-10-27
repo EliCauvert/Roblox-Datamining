@@ -22,18 +22,18 @@ local function Option(Frame)
 		tag = {
 			["col gap-xxsmall size-full-0 auto-y padding-medium stroke-standard radius-medium"] = true,
 			["stroke-system-contrast"] = Frame.isSelected,
-			["stroke-default"] = not Frame.isSelected
+			["stroke-emphasis"] = not Frame.isSelected
 		},
 		testId = Frame.testId
 	}, {
 		Label = ReactModule.createElement(Text, {
 			LayoutOrder = 1,
-			tag = "size-full-0 auto-y text-label-small text-wrap text-align-x-left content-emphasis",
+			tag = "size-full-0 auto-y text-title-medium text-wrap text-align-x-left content-emphasis",
 			Text = Frame.label
 		}),
 		Description = if Frame.description then ReactModule.createElement(Text, {
 			LayoutOrder = 2,
-			tag = "size-full-0 auto-y text-body-small text-wrap text-align-x-left content-default",
+			tag = "size-full-0 auto-y text-body-medium text-wrap text-align-x-left content-default",
 			Text = Frame.description
 		}) else nil
 	})
@@ -188,9 +188,11 @@ return function(Frame)
 			onClose = Frame.onClose,
 			ref = Frame.focusRootRef
 		}, {
-			Header = ReactModule.createElement(Sheet.Header, { hasCloseAffordance = Frame.hasCloseAffordance }, {
+			Header = ReactModule.createElement(Sheet.Header, {
+				hasCloseAffordance = if Frame.hasCloseAffordance then nil else false
+			}, {
 				Title = ReactModule.createElement(Text, {
-					tag = "shrink auto-xy text-title-large text-wrap text-align-x-left content-emphasis",
+					tag = "shrink auto-xy text-heading-small text-wrap text-align-x-left content-emphasis",
 					Text = Frame.title
 				})
 			}),

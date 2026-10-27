@@ -98,6 +98,13 @@ return function(p1)
 	end
 	local Avatar = AvatarRigModule.createAvatar(ResolveSnapshotResult.humanoidDescription, ResolveSnapshotResult.rigType)
 	Avatar.Name = "Avatar"
+	local Humanoid = Avatar:FindFirstChildOfClass("Humanoid")
+	
+	if Humanoid ~= nil then
+		Humanoid.NameOcclusion = Enum.NameOcclusion.OccludeAll
+		Humanoid.DisplayDistanceType = Enum.HumanoidDisplayDistanceType.None
+		Humanoid.NameDisplayDistance = 0
+	end
 	AvatarFloorPositionModule.positionOnFloor(Avatar, 0, CFrame.new())
 	Avatar.Parent = Live3DScene
 	local SceneCamera = Instance.new("Camera")
@@ -111,7 +118,6 @@ return function(p1)
 	SceneCamera.Focus = CFrame.new(X)
 	local PlayEmoteResult = AvatarRigModule.playEmote(Avatar, (resolveEmoteId(P7, ResolveSnapshotResult.rigType)))
 	local T = if PlayEmoteResult == nil then {} else { PlayEmoteResult }
-	local Humanoid = Avatar:FindFirstChildOfClass("Humanoid")
 	local PlayheadModule = CreatePlayheadModule({
 		root = Live3DScene,
 		tracks = T,

@@ -2118,6 +2118,8 @@ Feature.Build.Description.PromoteGamePaid,أنشئ إعلانًا لعرض لع�
 Feature.Build.Description.PromoteGameWithAdCampaign,زوِّد أعداد جمهورك من خلال حملة إعلانية لمدة {durationDays} من الأيام واجعل لعبتك متاحة للاكتشاف.
 Feature.Build.Description.RaiseLimitOrWait,قم بزيادة الحد اليومي لديك من عملات Robux لمواصلة الإنشاء، أو انتظر حتى تتم إعادة تعيينه غدًا.
 Feature.Build.Description.RatingAgreement,من خلال النشر، فإنك توافق على دقة تصنيف هذا المحتوى.
+Feature.Build.Description.RequiredRobuxForAdvanced,تحتاج إلى {ROBUX} من عملات Robux على الأقل لمواصلة الإنشاء باستخدام النموذج المتقدم. يمكنك أيضًا الرجوع إلى الوضع الافتراضي أو الانتظار حتى تتم إعادة تعيين استخدامك المجاني.
+Feature.Build.Description.RequiredRobuxForDefault,تحتاج إلى {ROBUX} من عملات Robux على الأقل لمواصلة الإنشاء، أو الانتظار حتى إعادة تعيين استخدامك المجاني.
 Feature.Build.Description.RestoreLatest,سيصبح هذا الإصدار أحدث إصدار منشور لك.
 Feature.Build.Description.RevertToVersion,تأكيد التراجع عن التغيير الأخير والرجوع إلى {VERSION}.
 Feature.Build.Description.ShareLatest,شارك التغييرات التي أُجريت على أحدث إصدار لديك.
@@ -2365,6 +2367,7 @@ Feature.Build.Message.BuildBusy,ميزة Build مشغولة حاليًا. انت
 Feature.Build.Message.BuildConnectFailed,تعذر الاتصال بميزة Build. يُرجى المحاولة مرة أخرى.
 Feature.Build.Message.BuildInternalError,واجهت ميزة Build مشكلة. حاول مرة أخرى.
 Feature.Build.Message.BuildResponseFailed,تعذَّر على ميزة Build الاستجابة. حاول مرة أخرى.
+Feature.Build.Message.BuildSendUnconfirmed,تعذَّر على ميزة Build تأكيد إرسال رسالتك.
 Feature.Build.Message.BuildStillWorking,جارٍ العمل على ذلك. يمكنك مغادرة التطبيق أو تشغيل منصّة Roblox أو بدء مشروع آخر أثناء الانتظار.
 Feature.Build.Message.BuildStopped,لقد أوقفت ميزة Build.
 Feature.Build.Message.BuildTakingLonger,يستغرق هذا وقتًا أطول من المتوقع. يمكنك الاستمرار في الانتظار أو بدء شيء آخر.
@@ -2470,6 +2473,7 @@ Feature.Build.Title.GameCreationDone,اكتمل إنشاء اللعبة
 Feature.Build.Title.GamePass,تذكرة اللعبة
 Feature.Build.Title.GenericError,
 Feature.Build.Title.GetUsers,الحصول على المستخدمين
+Feature.Build.Title.InsufficientRobuxForModel,ليس لديك ما يكفي من عملات Robux
 Feature.Build.Title.ManagedPricingAcknowledgement,هل تريد تشغيل التسعير المُدار؟
 Feature.Build.Title.Monetization,التحويل إلى مصدر ربح
 Feature.Build.Title.NoMonetizationProducts,ابدأ الكسب في لعبتك
@@ -3804,6 +3808,7 @@ Feature.Moments.Title.LeaveMomentCreation,هل تريد الخروج من إنش
 Feature.Moments.Title.MomentRemoved,تمت إزالة اللحظة
 Feature.Moments.Title.PostInsights,المعلومات التفصيلية للمنشور
 Feature.Moments.Title.ReportPost,الإبلاغ عن المنشور
+Feature.Moments.Title.UnfollowConfirmationDialog,هل تريد إلغاء متابعة @{username}؟
 Feature.Moments.Tooltip.Creation,يمكن للجميع في التجربة عرض لحظاتك.
 Feature.Moments.Tooltip.PostInsightsBody,تحقق من المشاهدات وزمن المشاهدة ومدى تفاعل جمهورك مع اللحظة.
 Feature.Moments.Tooltip.PostInsightsTitle,المعلومات التفصيلية عن لحظتك أصبحت متاحة هنا
@@ -4609,6 +4614,7 @@ Feature.UniversalShareSheet.Response.SharedCustomMessage,{CUSTOM_MESSAGE} + شخ
 Feature.UniversalShareSheet.Response.SharedMessage,تم إرسال الرسالة
 Feature.UniversalShareSheet.Response.SharedMultipleMessages,تم إرسال الرسائل
 Feature.UniversalShareSheet.SharedCustomMultipleMessages,{CUSTOM_MESSAGE} + {N} من الأشخاص الآخرين
+Feature.UserLibrary.Label.MyLibrary,مكتبتي
 Feature.VerificationUpsell.Action.AddPhone,إضافة هاتف
 Feature.VerificationUpsell.Action.AddPhoneNumber,إضافة رقم هاتف
 Feature.VerificationUpsell.Action.AddPhoneVoice,إضافة هاتف للمحادثة الصوتية

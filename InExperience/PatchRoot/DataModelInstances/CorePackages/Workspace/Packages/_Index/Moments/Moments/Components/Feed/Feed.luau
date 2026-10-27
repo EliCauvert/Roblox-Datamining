@@ -13,6 +13,7 @@ local FireAnalyticsEventFunction = Analytics.fireAnalyticsEvent
 local MomentsSurfaceLoadManager = MomentsCommonModule.Performance.MomentsSurfaceLoadManager
 local FFlagMomentsRemoveDeletedFromProfile = SharedFlagsModule.FFlagMomentsRemoveDeletedFromProfile
 local FFlagMomentsOptimisticProfilePending = SharedFlagsModule.FFlagMomentsOptimisticProfilePending
+local FFlagMomentsRenderAvatarPostsInFeed = SharedFlagsModule.FFlagMomentsRenderAvatarPostsInFeed
 local FFlagMomentsFeedMediaLoadAttemptedEvent = MomentsCommonModule.Flags.FFlagMomentsFeedMediaLoadAttemptedEvent
 local FFlagMomentsComments = SharedFlagsModule.FFlagMomentsComments
 local GetCommentsSheetStoreModule = if FFlagMomentsComments then require(Moments.Components.Comments.Sheet.getCommentsSheetStore) else nil
@@ -120,7 +121,7 @@ local _ = function()
 end
 
 return function(Frame: Frame)
-	-- upvalues: NoopTelemetry (copy), FFlagMomentsComments (copy), GetCommentsSheetStoreModule (copy), SignalsReactModule (copy), FFlagMomentsCreatorAnalyticsModule (copy), GetPostInsightsPageStoreModule (copy), GetImmersiveChromeStoreModule (copy), UseLocalizationFunction (copy), config (copy), UseMomentsSessionFunction (copy), GetToastStoreModule (copy), ReactModule (copy), GetFeedScrollLimitModule (copy), FFlagMomentsNonInfiniteScrollEndStateFixesModule (copy), GetFFlagMomentsNonInfiniteScrollFunction (copy), GetMomentsCapabilitiesFunction (copy), CreateFeedStoreModule (copy), feedItemDedupeKey (copy), FFlagMomentsCommentsCloseOnFeedJumpModule (copy), SignalsModule (copy), FFlagMomentsNavigationEventModule (copy), UseMomentsHostFunction (copy), LogMomentViewBeganModule (copy), FFlagMomentsImpressionPrimaryEntityModule (copy), Moments (copy), FireAnalyticsEventFunction (copy), EventNames (copy), LogFeedEndStateReachedModule (copy), UseFeedTelemetryModule (copy), feedItemAttribution (copy), FFlagMomentsOptimisticProfilePending (copy), MomentsSurfaceLoadManager (copy), FeedItemRegistryModule (copy), DeleteMomentModule (copy), MomentsFeed (ref), Parent (copy), FFlagMomentsRemoveDeletedFromProfile (copy), GetDeletedMomentsStoreModule (copy), MakeFeedActionFieldsModule (copy), FFlagMomentsDeleteSnackbarModule (copy), FFlagMomentsFixDeleteToastCopyModule (copy), makeMediaLoadEventFields (copy), Analytics (copy), FFlagMomentsFeedMediaLoadAttemptedEvent (copy), FeedContext (copy), VerticalPager (copy), renderFeedItem (copy), feedItemKey (copy), FeedStateViewModule (copy), FeedNavigationBarModule (copy), ImmersiveChromeControllerModule (copy), SwipeLatencyTrackerModule (copy), DeletionConfirmationDialogModule (copy), MomentMediaCoordinatorProviderModule (copy), SurfaceReadyTrackerModule (copy)
+	-- upvalues: NoopTelemetry (copy), FFlagMomentsComments (copy), GetCommentsSheetStoreModule (copy), SignalsReactModule (copy), FFlagMomentsCreatorAnalyticsModule (copy), GetPostInsightsPageStoreModule (copy), GetImmersiveChromeStoreModule (copy), UseLocalizationFunction (copy), config (copy), UseMomentsSessionFunction (copy), GetToastStoreModule (copy), ReactModule (copy), GetFeedScrollLimitModule (copy), FFlagMomentsNonInfiniteScrollEndStateFixesModule (copy), GetFFlagMomentsNonInfiniteScrollFunction (copy), GetMomentsCapabilitiesFunction (copy), CreateFeedStoreModule (copy), feedItemDedupeKey (copy), FFlagMomentsCommentsCloseOnFeedJumpModule (copy), FFlagMomentsRenderAvatarPostsInFeed (copy), SignalsModule (copy), FFlagMomentsNavigationEventModule (copy), UseMomentsHostFunction (copy), LogMomentViewBeganModule (copy), FFlagMomentsImpressionPrimaryEntityModule (copy), Moments (copy), FireAnalyticsEventFunction (copy), EventNames (copy), LogFeedEndStateReachedModule (copy), UseFeedTelemetryModule (copy), feedItemAttribution (copy), FFlagMomentsOptimisticProfilePending (copy), MomentsSurfaceLoadManager (copy), FeedItemRegistryModule (copy), DeleteMomentModule (copy), MomentsFeed (ref), Parent (copy), FFlagMomentsRemoveDeletedFromProfile (copy), GetDeletedMomentsStoreModule (copy), MakeFeedActionFieldsModule (copy), FFlagMomentsDeleteSnackbarModule (copy), FFlagMomentsFixDeleteToastCopyModule (copy), makeMediaLoadEventFields (copy), Analytics (copy), FFlagMomentsFeedMediaLoadAttemptedEvent (copy), FeedContext (copy), VerticalPager (copy), renderFeedItem (copy), feedItemKey (copy), FeedStateViewModule (copy), FeedNavigationBarModule (copy), ImmersiveChromeControllerModule (copy), SwipeLatencyTrackerModule (copy), DeletionConfirmationDialogModule (copy), MomentMediaCoordinatorProviderModule (copy), SurfaceReadyTrackerModule (copy)
 	local Source = Frame.source
 	local NoActive = Frame.active == nil or Frame.active
 	local NoActive1 = if Frame.playbackActive == nil then NoActive else Frame.playbackActive
@@ -169,17 +170,17 @@ return function(Frame: Frame)
 	
 	if FFlagMomentsCommentsCloseOnFeedJumpModule and GetCommentsSheetStoreModule ~= nil then
 		ReactModule.useEffect(function()
-			-- upvalues: NoActive (copy), GetCommentsSheetStoreModule (upval), UseMemoResult (copy), SignalsModule (upval)
+			-- upvalues: NoActive (copy), GetCommentsSheetStoreModule (upval), UseMemoResult (copy), FFlagMomentsRenderAvatarPostsInFeed (upval), SignalsModule (upval)
 			if not NoActive then return end
 			local CommentsSheetStoreModule = GetCommentsSheetStoreModule(false)
 			
-			local function _(p1)
-				-- upvalues: UseMemoResult (upval)
+			local function getCurrentPosition(p1)
+				-- upvalues: UseMemoResult (upval), FFlagMomentsRenderAvatarPostsInFeed (upval)
 				local CurrentItem = UseMemoResult.pager.getCurrentItem(p1)
 				
 				if CurrentItem == nil or CurrentItem.kind == "skeleton" then
 					return nil
-				elseif CurrentItem.kind == "moment" then
+				elseif CurrentItem.kind == "moment" or FFlagMomentsRenderAvatarPostsInFeed and CurrentItem.kind == "avatarMoment" then
 					local Moment = CurrentItem.moment
 					
 					return Moment.recommendationMetadata.feedItemId or `moment:{Moment.momentId}`
@@ -188,35 +189,17 @@ return function(Frame: Frame)
 				end
 			end
 			
-			local CurrentItem = UseMemoResult.pager.getCurrentItem(false)
-			local FeedItemId = nil
+			local CurrentPosition = getCurrentPosition(false)
 			
-			if CurrentItem == nil or CurrentItem.kind == "skeleton" then
-				FeedItemId = nil
-			elseif CurrentItem.kind == "moment" then
-				local Moment = CurrentItem.moment
-				FeedItemId = Moment.recommendationMetadata.feedItemId or `moment:{Moment.momentId}`
-			else
-				FeedItemId = `kind:{CurrentItem.kind}`
-			end
 			return SignalsModule.createEffect(function(p1)
-				-- upvalues: UseMemoResult (upval), FeedItemId (ref), CommentsSheetStoreModule (copy)
-				local CurrentItem = UseMemoResult.pager.getCurrentItem(p1)
-				local FeedItemId1 = nil
+				-- upvalues: getCurrentPosition (copy), CurrentPosition (ref), CommentsSheetStoreModule (copy)
+				local CurrentPosition1 = getCurrentPosition(p1)
 				
-				if CurrentItem == nil or CurrentItem.kind == "skeleton" then
-					FeedItemId1 = nil
-				elseif CurrentItem.kind == "moment" then
-					local Moment = CurrentItem.moment
-					FeedItemId1 = Moment.recommendationMetadata.feedItemId or `moment:{Moment.momentId}`
-				else
-					FeedItemId1 = `kind:{CurrentItem.kind}`
-				end
-				if FeedItemId1 == nil or FeedItemId1 == FeedItemId then return end
-				local FeedItemId2: string = FeedItemId
-				FeedItemId = FeedItemId1
+				if CurrentPosition1 == nil or CurrentPosition1 == CurrentPosition then return end
+				local FeedItemId = CurrentPosition
+				CurrentPosition = CurrentPosition1
 				
-				if FeedItemId2 ~= nil and CommentsSheetStoreModule.getIsOpen(false) and CommentsSheetStoreModule.getFeedItemId(false) == FeedItemId2 then
+				if FeedItemId ~= nil and CommentsSheetStoreModule.getIsOpen(false) and CommentsSheetStoreModule.getFeedItemId(false) == FeedItemId then
 					CommentsSheetStoreModule.close()
 				end
 			end)
@@ -296,8 +279,8 @@ return function(Frame: Frame)
 	local UseRefResult7 = ReactModule.useRef(nil)
 	local HasOpenAvatarLookTryOn = UseMomentsHostFunction().openAvatarLookTryOn ~= nil
 	local UseResult2 = ReactModule.useCallback(function(p2)
-		-- upvalues: UseRefResult7 (copy), LogMomentViewBeganModule (upval), UseMomentsSessionResult (copy), FFlagMomentsNavigationEventModule (upval), FFlagMomentsImpressionPrimaryEntityModule (upval), HasOpenAvatarLookTryOn (copy)
-		if p2.kind == "moment" then
+		-- upvalues: FFlagMomentsRenderAvatarPostsInFeed (upval), UseRefResult7 (copy), LogMomentViewBeganModule (upval), UseMomentsSessionResult (copy), FFlagMomentsNavigationEventModule (upval), FFlagMomentsImpressionPrimaryEntityModule (upval), HasOpenAvatarLookTryOn (copy)
+		if p2.kind == "moment" or FFlagMomentsRenderAvatarPostsInFeed and p2.kind == "avatarMoment" then
 			local CurrentFunction = UseRefResult7.current
 			LogMomentViewBeganModule(p2.moment, UseMomentsSessionResult.getSessionSource(false), if FFlagMomentsNavigationEventModule and CurrentFunction ~= nil then CurrentFunction() else nil, if FFlagMomentsImpressionPrimaryEntityModule then HasOpenAvatarLookTryOn else nil)
 			
@@ -549,10 +532,10 @@ return function(Frame: Frame)
 		FireAnalyticsEventFunction(EventNames.FeedMediaLoadFailed, MediaLoadEventFields1)
 	end, { Source })
 	local UseResult11 = ReactModule.useCallback(function(MomentId, p2)
-		-- upvalues: UseRefResult9 (copy), UseMemoResult (copy), UseResult10 (copy), UseRefResult (copy)
+		-- upvalues: UseRefResult9 (copy), UseMemoResult (copy), FFlagMomentsRenderAvatarPostsInFeed (upval), UseResult10 (copy), UseRefResult (copy)
 		if UseRefResult9.current[MomentId] then return end
 		for i, value in UseMemoResult.pager.getItems(false) do
-			if value.kind == "moment" and value.moment.momentId == MomentId then
+			if (value.kind == "moment" or FFlagMomentsRenderAvatarPostsInFeed and value.kind == "avatarMoment") and value.moment.momentId == MomentId then
 				UseRefResult9.current[MomentId] = true
 				UseResult10(value.moment, p2)
 				local Current = UseRefResult.current
@@ -570,11 +553,12 @@ return function(Frame: Frame)
 	local IsLoaded: boolean = NoShowNavigationBar and (UseSignalStateResult4 == "Loaded" or UseSignalStateResult4 == "LoadingMore")
 	local Element = ReactModule.createElement(FeedContext.Provider, {
 		value = ReactModule.useMemo(function()
-			-- upvalues: UseMemoResult (copy), NoActive (copy), NoActive1 (copy), Source (copy), Telemetry (copy), UseFeedTelemetryModuleResult (copy), ImmersiveChromeStoreModule (copy), UseResult7 (copy), UseResult5 (copy), FFlagMomentsNonInfiniteScrollEndStateFixesModule (upval), GetFFlagMomentsNonInfiniteScrollFunction (upval)
+			-- upvalues: UseMemoResult (copy), NoActive (copy), NoActive1 (copy), FFlagMomentsRenderAvatarPostsInFeed (upval), Source (copy), Telemetry (copy), UseFeedTelemetryModuleResult (copy), ImmersiveChromeStoreModule (copy), UseResult7 (copy), UseResult5 (copy), FFlagMomentsNonInfiniteScrollEndStateFixesModule (upval), GetFFlagMomentsNonInfiniteScrollFunction (upval)
 			return {
 				getStatus = UseMemoResult.getStatus,
 				isActiveFeed = NoActive,
 				isPlaybackActive = NoActive1,
+				getCurrentIndex = if FFlagMomentsRenderAvatarPostsInFeed then UseMemoResult.pager.getCurrentIndex else nil,
 				recommendationSource = Source.recommendationSource,
 				logAction = function(p3, p4, p5)
 					-- upvalues: Telemetry (upval)

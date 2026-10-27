@@ -1,5 +1,0 @@
-﻿return {
-	DURABILITY_DAYS = "durabilityDays",
-	TOOLTIP_FTUX_APP_STORAGE_KEY = "AXWearTimeFTUXTooltip",
-	TOOLTIP_FTUX_SESSION_TRACKER_KEY = "AXWearTimeFTUXTooltipSession"
-}

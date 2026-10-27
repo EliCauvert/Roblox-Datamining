@@ -1,3 +1,1 @@
-﻿local FFlagBuildExperienceMyCreationsUseUniverseListModule = require(script.Parent.FFlagBuildExperienceMyCreationsUseUniverseList)
-
-return require(script:FindFirstAncestor("BuildExperience").Parent.SharedFlags).FFlagBuildWithGroups and FFlagBuildExperienceMyCreationsUseUniverseListModule
+﻿return require(script:FindFirstAncestor("BuildExperience").Parent.SharedFlags).FFlagBuildWithGroups

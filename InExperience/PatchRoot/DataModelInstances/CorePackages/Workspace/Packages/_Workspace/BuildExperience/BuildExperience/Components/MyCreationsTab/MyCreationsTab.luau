@@ -4,7 +4,6 @@ local _ = game:GetService("AppLifecycleObserverService")
 local Players = game:GetService("Players")
 local FFlagBuildExperienceMyCreationsCreateGameButtonModule = require(BuildExperience.Flags.FFlagBuildExperienceMyCreationsCreateGameButton)
 local FFlagBuildExperienceMyCreationsLongPressMenuModule = require(BuildExperience.Flags.FFlagBuildExperienceMyCreationsLongPressMenu)
-local FFlagBuildExperienceMyCreationsUseUniverseListModule = require(BuildExperience.Flags.FFlagBuildExperienceMyCreationsUseUniverseList)
 local FFlagBuildWithGroupsModule = require(BuildExperience.Flags.FFlagBuildWithGroups)
 local FoundationModule = require(Parent.Foundation)
 local ReactModule = require(Parent.React)
@@ -36,7 +35,7 @@ local MyCreationsFilterContainerModule = require(BuildExperience.Components.MyCr
 local UseMyCreationsResultsModule = require(script.Parent.useMyCreationsResults)
 
 return function(Frame: Frame)
-	-- upvalues: UseLocalizationFunction (copy), LocalizationStringsModule (copy), FFlagBuildExperienceMyCreationsCreateGameButtonModule (copy), GetSearchQueryStoreModule (copy), ReactModule (copy), UseScrollPerformanceTrackerModule (copy), FFlagBuildWithGroupsModule (copy), FFlagBuildExperienceMyCreationsUseUniverseListModule (copy), GetMyCreationsFilterStoreModule (copy), UseMyCreationsResultsModule (copy), ChatConstantsModule (copy), Players (copy), FFlagBuildExperienceMyCreationsLongPressMenuModule (copy), ListItemInputType (copy), ExperienceResultsLoadingSkeletonModule (copy), List (copy), IconName (copy), MyCreationsTabNewGameRow (copy), SearchEmptyStateModule (copy), View (copy), InputSize (copy), BuildEmptyStateModule (copy), ExperienceResultsListModule (copy), RefreshScrollingFrame (copy), MyCreationsFilterContainerModule (copy), Button (copy), ButtonVariant (copy)
+	-- upvalues: UseLocalizationFunction (copy), LocalizationStringsModule (copy), FFlagBuildExperienceMyCreationsCreateGameButtonModule (copy), GetSearchQueryStoreModule (copy), ReactModule (copy), UseScrollPerformanceTrackerModule (copy), FFlagBuildWithGroupsModule (copy), GetMyCreationsFilterStoreModule (copy), UseMyCreationsResultsModule (copy), ChatConstantsModule (copy), Players (copy), FFlagBuildExperienceMyCreationsLongPressMenuModule (copy), ListItemInputType (copy), ExperienceResultsLoadingSkeletonModule (copy), List (copy), IconName (copy), MyCreationsTabNewGameRow (copy), SearchEmptyStateModule (copy), View (copy), InputSize (copy), BuildEmptyStateModule (copy), ExperienceResultsListModule (copy), RefreshScrollingFrame (copy), MyCreationsFilterContainerModule (copy), Button (copy), ButtonVariant (copy)
 	local UseLocalizationResult = UseLocalizationFunction({
 		building = LocalizationStringsModule.MY_CREATIONS_BUILDING,
 		buildWithAI = LocalizationStringsModule.MY_CREATIONS_BUILD_WITH_AI,
@@ -63,7 +62,7 @@ return function(Frame: Frame)
 	UseScrollPerformanceTrackerModule("LuaApp_Build_Home_Scroll", UseRefResult)
 	local UseShowEmptyStateResult = SearchQueryStore.useShowEmptyState()
 	local UseIsSearchActiveResult = if FFlagBuildWithGroupsModule or FFlagBuildExperienceMyCreationsCreateGameButtonModule then SearchQueryStore.useIsSearchActive() else false
-	local UseDraftQueryResult = if FFlagBuildExperienceMyCreationsUseUniverseListModule then SearchQueryStore.useDraftQuery() else nil
+	local UseDraftQueryResult = SearchQueryStore.useDraftQuery()
 	local FilterStore = if FFlagBuildWithGroupsModule then Frame.filterStore or GetMyCreationsFilterStoreModule() else nil
 	local UseFilterResult = if FFlagBuildWithGroupsModule then FilterStore.useFilter() else nil
 	local UseMyCreationsResultsModuleResult = UseMyCreationsResultsModule({
@@ -82,7 +81,6 @@ return function(Frame: Frame)
 	local Items = UseMyCreationsResultsModuleResult.items
 	local HasPendingSummary = UseMyCreationsResultsModuleResult.hasPendingSummary
 	local ListStatus = UseMyCreationsResultsModuleResult.listStatus
-	local SourceItemCount = UseMyCreationsResultsModuleResult.sourceItemCount
 	local HasDisplayedResult = UseMyCreationsResultsModuleResult.hasDisplayedResult
 	local FailedLoadMore = UseMyCreationsResultsModuleResult.failedLoadMore
 	local RetryLoadMore = UseMyCreationsResultsModuleResult.retryLoadMore
@@ -97,7 +95,7 @@ return function(Frame: Frame)
 			creatorName = if Players.LocalPlayer then Players.LocalPlayer.Name else nil
 		})
 	end, { Frame.onOpenChat })
-	local IsUseDraftQueryResultMatch: boolean = if FFlagBuildExperienceMyCreationsUseUniverseListModule then UseMyCreationsResultsModuleResult.hasCompletedFocusedRefresh and (UseMyCreationsResultsModuleResult.sessionListStatus == "Ready" and UseMyCreationsResultsModuleResult.sessionCount == 0 and UseDraftQueryResult == "") else UseMyCreationsResultsModuleResult.hasCompletedFocusedRefresh and (ListStatus == "Ready" and SourceItemCount == 0)
+	local IsUseDraftQueryResultMatch: boolean = UseMyCreationsResultsModuleResult.hasCompletedFocusedRefresh and (UseMyCreationsResultsModuleResult.sessionListStatus == "Ready" and UseMyCreationsResultsModuleResult.sessionCount == 0 and UseDraftQueryResult == "")
 	ReactModule.useEffect(function()
 		-- upvalues: Frame (copy), IsIsFocused (copy), IsUseDraftQueryResultMatch (copy), UseRefResult1 (copy), UseResult (copy)
 		if Frame.autoOpenNewGame ~= false and IsIsFocused and IsUseDraftQueryResultMatch and not UseRefResult1.current then

@@ -4,18 +4,16 @@ local FoundationModule = require(Parent.Foundation)
 local ReactModule = require(Parent.React)
 local View = FoundationModule.View
 local IconName = FoundationModule.Enums.IconName
-local AgentDetailMenuModule = require(script.Parent.AgentDetailMenu)
 local BuildOverflowMenuButtonModule = require(script.Parent.BuildOverflowMenuButton)
 local StopPlaytestButtonModule = require(script.Parent.StopPlaytestButton)
 local GetBuildOverflowMenuStoreModule = require(BuildExperience.Stores.GetBuildOverflowMenuStore)
 local _ = require(BuildExperience.Stores.GetBuildOverflowMenuStore.createBuildOverflowMenuStore)
 local PublishStatusModule = require(BuildExperience.Chat.PublishStatus)
 local LeaveExperienceModule = require(BuildExperience.utils.leaveExperience)
-local FFlagBuildExperienceRemoveAgentTaskUiModule = require(BuildExperience.Flags.FFlagBuildExperienceRemoveAgentTaskUi)
 local FFlagBuildExperienceMenuImprovementsModule = require(BuildExperience.Flags.FFlagBuildExperienceMenuImprovements)
 
 return function(p1)
-	-- upvalues: GetBuildOverflowMenuStoreModule (copy), PublishStatusModule (copy), ReactModule (copy), View (copy), FFlagBuildExperienceMenuImprovementsModule (copy), StopPlaytestButtonModule (copy), LeaveExperienceModule (copy), FFlagBuildExperienceRemoveAgentTaskUiModule (copy), AgentDetailMenuModule (copy), BuildOverflowMenuButtonModule (copy), IconName (copy)
+	-- upvalues: GetBuildOverflowMenuStoreModule (copy), PublishStatusModule (copy), ReactModule (copy), View (copy), FFlagBuildExperienceMenuImprovementsModule (copy), StopPlaytestButtonModule (copy), LeaveExperienceModule (copy), BuildOverflowMenuButtonModule (copy), IconName (copy)
 	local UsePublishStatusResult = PublishStatusModule.usePublishStatus(p1.target)
 	
 	return ReactModule.createElement(ReactModule.Fragment, nil, {
@@ -33,10 +31,6 @@ return function(p1)
 					LeaveExperienceModule()
 				end
 			}) else nil,
-			AgentDetail = if FFlagBuildExperienceRemoveAgentTaskUiModule then nil else ReactModule.createElement(AgentDetailMenuModule, {
-				layoutOrder = 1,
-				onActivated = p1.onOpenAgentsPage or function() end
-			}),
 			Overflow = ReactModule.createElement(BuildOverflowMenuButtonModule, {
 				layoutOrder = 3,
 				icon = IconName.ThreeDotsHorizontal,

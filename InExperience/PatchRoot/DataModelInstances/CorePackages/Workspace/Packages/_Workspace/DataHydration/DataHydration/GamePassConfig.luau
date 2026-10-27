@@ -2,5 +2,6 @@
 	createGamePassConfigStore = require(script.createGamePassConfigStore),
 	getGamePassConfigStore = require(script.getGamePassConfigStore),
 	GamePassConfigTypes = require(script.GamePassConfigTypes),
-	INCOMPLETE_LIST_CODE = require(script.incompleteListCode)
+	INCOMPLETE_LIST_CODE = require(script.incompleteListCode),
+	isManagedPricingEnabled = require(script.isManagedPricingEnabled)
 }

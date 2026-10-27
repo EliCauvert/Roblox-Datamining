@@ -25,7 +25,6 @@ local UseTokensFunction = require(Parent.Foundation).Hooks.useTokens
 local UseSignalStateFunction = require(Parent.SignalsReact).useSignalState
 local AvatarExperienceFlagsModule = require(Parent.AvatarExperienceFlags)
 local FFlagAXCatalogOffersAutoOpenFTUXSheet = AvatarExperienceFlagsModule.FFlagAXCatalogOffersAutoOpenFTUXSheet
-local FFlagAXOfferBannerImpressionOnlyOnStartup = AvatarExperienceFlagsModule.FFlagAXOfferBannerImpressionOnlyOnStartup
 local FFlagAXUpdateOffersEndsUIWithBadge = AvatarExperienceFlagsModule.FFlagAXUpdateOffersEndsUIWithBadge
 
 local function blendShiftFillForOpaqueGuiObject(Shift, SurfaceColor): Color3
@@ -35,7 +34,7 @@ local function blendShiftFillForOpaqueGuiObject(Shift, SurfaceColor): Color3
 end
 
 return function(p1)
-	-- upvalues: UseAXCatalogStoreContextModule (copy), UseNetworkingFunction (copy), UseTokensFunction (copy), ReactModule (copy), UseLocalizationFunction (copy), CatalogOffersBannerAppStorageModule (copy), GetMarketplaceOffersBannerOfferDisplayIdFunction (copy), UseSignalStateFunction (copy), FFlagAXCatalogOffersAutoOpenFTUXSheet (copy), UseCatalogOffersBannerDismissHydrationModule (copy), UseCatalogOffersBannerOffersFetchModule (copy), GetMarketplaceOffersBannerOfferDisplayTitleFunction (copy), FFlagAXOfferBannerImpressionOnlyOnStartup (copy), CatalogOffersBannerImpressionsStoreModule (copy), SendUnifiedEventLogFunction (copy), UnifiedEventLogEnums (copy), UnifiedLoggingSurface (copy), UnifiedLoggingElementNameEnums (copy), HttpService (copy), CatalogOffersBannerOfferModalsModule (copy), FFlagAXUpdateOffersEndsUIWithBadge (copy), blendShiftFillForOpaqueGuiObject (copy)
+	-- upvalues: UseAXCatalogStoreContextModule (copy), UseNetworkingFunction (copy), UseTokensFunction (copy), ReactModule (copy), UseLocalizationFunction (copy), CatalogOffersBannerAppStorageModule (copy), GetMarketplaceOffersBannerOfferDisplayIdFunction (copy), UseSignalStateFunction (copy), FFlagAXCatalogOffersAutoOpenFTUXSheet (copy), UseCatalogOffersBannerDismissHydrationModule (copy), UseCatalogOffersBannerOffersFetchModule (copy), GetMarketplaceOffersBannerOfferDisplayTitleFunction (copy), CatalogOffersBannerImpressionsStoreModule (copy), SendUnifiedEventLogFunction (copy), UnifiedEventLogEnums (copy), UnifiedLoggingSurface (copy), UnifiedLoggingElementNameEnums (copy), HttpService (copy), CatalogOffersBannerOfferModalsModule (copy), FFlagAXUpdateOffersEndsUIWithBadge (copy), blendShiftFillForOpaqueGuiObject (copy)
 	local CatalogOffersBannerStore = UseAXCatalogStoreContextModule().catalogOffersBannerStore
 	local UseNetworkingResult = UseNetworkingFunction()
 	local UseTokensResult = UseTokensFunction()
@@ -104,8 +103,8 @@ return function(p1)
 		p1.onBannerVisibleChanged
 	})
 	ReactModule.useEffect(function()
-		-- upvalues: UseSignalStateResult1 (copy), UseStateResult (copy), MarketplaceOffersBannerOfferDisplayTitle (copy), FFlagAXOfferBannerImpressionOnlyOnStartup (upval), CatalogOffersBannerImpressionsStoreModule (upval), SendUnifiedEventLogFunction (upval), UnifiedEventLogEnums (upval), UnifiedLoggingSurface (upval), UnifiedLoggingElementNameEnums (upval), HttpService (upval)
-		if not UseSignalStateResult1 and UseStateResult and MarketplaceOffersBannerOfferDisplayTitle and (not FFlagAXOfferBannerImpressionOnlyOnStartup or UseStateResult.offerId and not CatalogOffersBannerImpressionsStoreModule.hasSeenOfferId(UseStateResult.offerId)) then
+		-- upvalues: UseSignalStateResult1 (copy), UseStateResult (copy), MarketplaceOffersBannerOfferDisplayTitle (copy), CatalogOffersBannerImpressionsStoreModule (upval), SendUnifiedEventLogFunction (upval), UnifiedEventLogEnums (upval), UnifiedLoggingSurface (upval), UnifiedLoggingElementNameEnums (upval), HttpService (upval)
+		if not UseSignalStateResult1 and UseStateResult and MarketplaceOffersBannerOfferDisplayTitle and UseStateResult.offerId and not CatalogOffersBannerImpressionsStoreModule.hasSeenOfferId(UseStateResult.offerId) then
 			CatalogOffersBannerImpressionsStoreModule.addOfferId(UseStateResult.offerId)
 			SendUnifiedEventLogFunction({
 				action = UnifiedEventLogEnums.MarketplaceUnifiedAction.UI_ELEMENT_IMPRESSION,

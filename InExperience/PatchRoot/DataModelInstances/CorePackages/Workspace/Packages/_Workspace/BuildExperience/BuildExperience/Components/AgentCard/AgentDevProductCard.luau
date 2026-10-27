@@ -18,6 +18,7 @@ local AgentCardActionsModule = require(script.Parent.AgentCardActions)
 local ChatCardPriorityModule = require(BuildExperience.Components.Chat.ChatCardEmphasis.ChatCardPriority)
 local UseChatCardEmphasisModule = require(BuildExperience.Components.Chat.ChatCardEmphasis.useChatCardEmphasis)
 local FFlagBuildExperienceChatCardEmphasisModule = require(BuildExperience.Flags.FFlagBuildExperienceChatCardEmphasis)
+local FFlagBuildExperienceMonetizationFailureCausesModule = require(BuildExperience.Flags.FFlagBuildExperienceMonetizationFailureCauses)
 local Button = FoundationModule.Button
 local Image = FoundationModule.Image
 local Sheet = FoundationModule.Sheet
@@ -197,7 +198,7 @@ local _ = function(p1, p2, p3, p4)
 end
 
 return function(p1)
-	-- upvalues: ReactModule (copy), LocalizationRoactContext (copy), UseLocalizationFunction (copy), config1 (copy), config (copy), LocalizationStringsModule (copy), FFlagBuildExperienceMonetizationNativeUIModule (copy), FFlagBuildExperienceDevProductRecoveryModule (copy), FFlagBuildExperienceChatCardEmphasisModule (copy), UseChatCardEmphasisModule (copy), ChatCardPriorityModule (copy), Sheet (copy), Text (copy), View (copy), Image (copy), AssetId (ref), FFlagCreatorAgentChatMonetizationToolHelpersModule (copy), devProductSummaryText (copy), itemSummaryText (copy), Button (copy), InputSize (copy), ButtonVariant (copy), FillBehavior (copy), AgentCardActionsModule (copy), AgentCardModule (copy)
+	-- upvalues: ReactModule (copy), LocalizationRoactContext (copy), UseLocalizationFunction (copy), config1 (copy), config (copy), LocalizationStringsModule (copy), FFlagBuildExperienceMonetizationNativeUIModule (copy), FFlagBuildExperienceDevProductRecoveryModule (copy), FFlagBuildExperienceMonetizationFailureCausesModule (copy), FFlagBuildExperienceChatCardEmphasisModule (copy), UseChatCardEmphasisModule (copy), ChatCardPriorityModule (copy), Sheet (copy), Text (copy), View (copy), Image (copy), AssetId (ref), FFlagCreatorAgentChatMonetizationToolHelpersModule (copy), devProductSummaryText (copy), itemSummaryText (copy), Button (copy), InputSize (copy), ButtonVariant (copy), FillBehavior (copy), AgentCardActionsModule (copy), AgentCardModule (copy)
 	local UseContextResult = ReactModule.useContext(LocalizationRoactContext)
 	local UseLocalizationResult = UseLocalizationFunction({
 		title = (if p1.itemKind == nil then config else config1[p1.itemKind] or config).title,
@@ -208,7 +209,15 @@ return function(p1)
 		preview = if FFlagBuildExperienceMonetizationNativeUIModule then LocalizationStringsModule.GAME_CONFIGURATION_PREVIEW else nil,
 		create = if FFlagBuildExperienceMonetizationNativeUIModule then LocalizationStringsModule.MONETIZATION_EMPTY_CREATE_PRODUCT else nil,
 		error = if FFlagBuildExperienceDevProductRecoveryModule then LocalizationStringsModule.BUILD_ELIGIBILITY_ERROR_TITLE else nil,
-		retry = if FFlagBuildExperienceDevProductRecoveryModule then LocalizationStringsModule.MONETIZATION_RETRY else nil
+		retry = if FFlagBuildExperienceDevProductRecoveryModule then LocalizationStringsModule.MONETIZATION_RETRY else nil,
+		imageInReview = if FFlagBuildExperienceMonetizationFailureCausesModule then LocalizationStringsModule.MONETIZATION_CAUSE_IMAGE_IN_REVIEW else nil,
+		imagePreparing = if FFlagBuildExperienceMonetizationFailureCausesModule then LocalizationStringsModule.MONETIZATION_CAUSE_IMAGE_PREPARING else nil,
+		imageTooLarge = if FFlagBuildExperienceMonetizationFailureCausesModule then LocalizationStringsModule.MONETIZATION_CAUSE_IMAGE_TOO_LARGE else nil,
+		imageTimedOut = if FFlagBuildExperienceMonetizationFailureCausesModule then LocalizationStringsModule.MONETIZATION_CAUSE_IMAGE_TIMED_OUT else nil,
+		imageFailed = if FFlagBuildExperienceMonetizationFailureCausesModule then LocalizationStringsModule.MONETIZATION_CAUSE_IMAGE_FAILED else nil,
+		moderated = if FFlagBuildExperienceMonetizationFailureCausesModule then LocalizationStringsModule.MONETIZATION_MODERATION_ERROR else nil,
+		noUniverse = if FFlagBuildExperienceMonetizationFailureCausesModule then LocalizationStringsModule.MONETIZATION_CAUSE_NO_UNIVERSE else nil,
+		rateLimited = if FFlagBuildExperienceMonetizationFailureCausesModule then LocalizationStringsModule.MONETIZATION_CAUSE_RATE_LIMITED else nil
 	})
 	local TestId = p1.testId or "agent-dev-product-card"
 	local IsIsPending: boolean = FFlagBuildExperienceDevProductRecoveryModule and p1.isPending == true
@@ -369,7 +378,7 @@ return function(p1)
 		Error = if FFlagBuildExperienceDevProductRecoveryModule and (p1.hasError and not IsIsPending) then ReactModule.createElement(Text, {
 			LayoutOrder = 4,
 			tag = "size-full-0 auto-y text-body-medium text-wrap text-align-x-left content-alert",
-			Text = UseLocalizationResult.error,
+			Text = (if p1.errorCause == nil then nil else UseLocalizationResult[p1.errorCause]) or UseLocalizationResult.error,
 			testId = `{TestId}-error`
 		}) else nil,
 		Actions = if FFlagBuildExperienceDevProductRecoveryModule then nil else Element1

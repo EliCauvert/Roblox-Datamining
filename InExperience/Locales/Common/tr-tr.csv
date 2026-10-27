@@ -2138,6 +2138,8 @@ Feature.Build.Description.PromoteGamePaid,Oyununu milyonlarca oyuncunun karşıs
 Feature.Build.Description.PromoteGameWithAdCampaign,{durationDays} günlük bir reklam kampanyasıyla kitleni genişlet ve oyununun keşfedilmesini sağla.
 Feature.Build.Description.RaiseLimitOrWait,Bir şeyler oluşturmaya devam etmek için günlük Robux sınırını artır veya yarın sıfırlanmasını bekle.
 Feature.Build.Description.RatingAgreement,Yayınlayarak bu içerik derecelendirmesinin doğru olduğunu kabul etmiş olursun.
+Feature.Build.Description.RequiredRobuxForAdvanced,Gelişmiş modelle bir şeyler oluşturmaya devam etmek için en az {ROBUX} Robux'a ihtiyacın var. Ayrıca Varsayılana geri dönebilir veya ücretsiz kullanım hakkının sıfırlanmasını bekleyebilirsin.
+Feature.Build.Description.RequiredRobuxForDefault,Bir şeyler oluşturmaya devam etmek için en az {ROBUX} Robux'a ihtiyacın var veya ücretsiz kullanım hakkının sıfırlanmasını beklemen gerekiyor.
 Feature.Build.Description.RestoreLatest,"Bu versiyon, en son yayınlanan versiyonun olacak."
 Feature.Build.Description.RevertToVersion,En son değişikliği geri döndürmek ve {VERSION} versiyonuna geri dönmek için onayla.
 Feature.Build.Description.ShareLatest,En son versiyonunda nelerin değiştiğini paylaş.
@@ -2385,6 +2387,7 @@ Feature.Build.Message.BuildBusy,İnşa Et meşgul. Bir dakika bekle ve tekrar de
 Feature.Build.Message.BuildConnectFailed,İnşa Et bağlanamadı. Tekrar dene.
 Feature.Build.Message.BuildInternalError,İnşa Et bir sorunla karşılaştı. Tekrar dene.
 Feature.Build.Message.BuildResponseFailed,İnşa Et yanıt veremedi. Tekrar dene.
+Feature.Build.Message.BuildSendUnconfirmed,"İnşa Et, mesajının gönderildiğini doğrulayamadı."
 Feature.Build.Message.BuildStillWorking,"Üzerinde çalışıyor. Beklerken uygulamadan çıkabilir, Roblox oynayabilir veya başka bir projeye başlayabilirsin."
 Feature.Build.Message.BuildStopped,İnşa Et'i durdurdun.
 Feature.Build.Message.BuildTakingLonger,Bu işlem beklenenden daha uzun sürüyor. Beklemeye devam edebilir veya başka bir şeye başlayabilirsin.
@@ -2490,6 +2493,7 @@ Feature.Build.Title.GameCreationDone,Oyun oluşturma tamamlandı
 Feature.Build.Title.GamePass,Oyun Bileti
 Feature.Build.Title.GenericError,Bir şeyler ters gitti
 Feature.Build.Title.GetUsers,Kullanıcıları al
+Feature.Build.Title.InsufficientRobuxForModel,Yeterli Robux'un yok
 Feature.Build.Title.ManagedPricingAcknowledgement,Yönetilen Fiyatlandırma açılsın mı?
 Feature.Build.Title.Monetization,Gelir Elde Etme
 Feature.Build.Title.NoMonetizationProducts,Oyununda kazanmaya başla
@@ -3824,6 +3828,7 @@ Feature.Moments.Title.LeaveMomentCreation,An yaratmadan çıkılsın mı?
 Feature.Moments.Title.MomentRemoved,An kaldırıldı
 Feature.Moments.Title.PostInsights,Paylaşım bilgileri
 Feature.Moments.Title.ReportPost,Paylaşımı raporla
+Feature.Moments.Title.UnfollowConfirmationDialog,@{username} takipten çıkılsın mı?
 Feature.Moments.Tooltip.Creation,"Deneyimdeki herkes, Anlarını görüntüleyebilir."
 Feature.Moments.Tooltip.PostInsightsBody,"Görüntüleme sayılarını, izleme süresini ve An'ın kitlen tarafından nasıl karşılandığını kontrol et."
 Feature.Moments.Tooltip.PostInsightsTitle,An analizlerin burada
@@ -4629,6 +4634,7 @@ Feature.UniversalShareSheet.Response.SharedCustomMessage,{CUSTOM_MESSAGE}: 1 ki�
 Feature.UniversalShareSheet.Response.SharedMessage,Mesaj gönderildi
 Feature.UniversalShareSheet.Response.SharedMultipleMessages,Mesajlar gönderildi
 Feature.UniversalShareSheet.SharedCustomMultipleMessages,{CUSTOM_MESSAGE}: {N} kişiyle daha
+Feature.UserLibrary.Label.MyLibrary,Kütüphanem
 Feature.VerificationUpsell.Action.AddPhone,Telefon Ekle
 Feature.VerificationUpsell.Action.AddPhoneNumber,Telefon Numarası Ekle
 Feature.VerificationUpsell.Action.AddPhoneVoice,Sesli Sohbet için Telefon ekle

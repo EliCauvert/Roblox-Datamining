@@ -9,6 +9,7 @@
 	GamePass = "game_pass",
 	GameTile = "game_tile",
 	Group = "group",
+	GroupAnnouncement = "group_announcement",
 	InExperience = "in_experience",
 	InExperienceShop = "in_experience_shop",
 	Invalid = "invalid",

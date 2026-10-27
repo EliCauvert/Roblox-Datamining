@@ -1,3 +1,1 @@
-﻿local FFlagBuildExperienceManageDevProductModule = require(script.Parent.FFlagBuildExperienceManageDevProduct)
-
-return game:DefineFastFlag("BuildExperienceMonetizationNativeUI2", false) and FFlagBuildExperienceManageDevProductModule
+﻿return require(script:FindFirstAncestor("BuildExperience").Parent.DataHydration.FFlagBuildExperienceMonetizationNativeUI)

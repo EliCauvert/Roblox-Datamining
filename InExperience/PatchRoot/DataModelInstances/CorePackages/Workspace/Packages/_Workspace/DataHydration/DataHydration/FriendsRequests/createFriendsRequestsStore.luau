@@ -7,8 +7,6 @@ local GetLocalPlayerUserIdFunction = require(DataHydration.DataHydrationUtils).g
 local MergeListsWithoutDuplicatesFunction = require(DataHydration.DataHydrationUtils).mergeListsWithoutDuplicates
 local _ = require(Parent.Signals)
 local LocalUserIdStore = require(Parent.LocalUserIdStore).LocalUserIdStore
-local FFlagAddFriendsPageTrustedFriendRequestSection = require(Parent.SharedFlags).FFlagAddFriendsPageTrustedFriendRequestSection
-local FFlagFriendsRequestsMergeListsWithoutDuplicates = require(Parent.SharedFlags).FFlagFriendsRequestsMergeListsWithoutDuplicates
 local FFlagEnableGetFriendshipStatus = require(Parent.SharedFlags).FFlagEnableGetFriendshipStatus
 local RequestsModule = require(script.Parent.Requests)
 local _ = require(script.Parent.FriendsRequestsStoreTypes)
@@ -78,14 +76,6 @@ local function normalizeGetFriendRequestsResponse(p2)
 	}
 end
 
-local _ = function(p3, p4)
-	-- upvalues: FFlagAddFriendsPageTrustedFriendRequestSection (copy), FFlagFriendsRequestsMergeListsWithoutDuplicates (copy), MergeListsWithoutDuplicatesFunction (copy)
-	if not FFlagAddFriendsPageTrustedFriendRequestSection and not FFlagFriendsRequestsMergeListsWithoutDuplicates then
-		error("mergeRequestsWithoutDuplicates requires FFlagAddFriendsPageTrustedFriendRequestSection or FFlagFriendsRequestsMergeListsWithoutDuplicates to be enabled")
-	end
-	return MergeListsWithoutDuplicatesFunction(p3, p4, "id")
-end
-
 local function updateFriendshipStatusesForPage(p3)
 	-- upvalues: FFlagEnableGetFriendshipStatus (copy), FriendsStoreModule (copy)
 	if not FFlagEnableGetFriendshipStatus then return end
@@ -97,29 +87,16 @@ local function updateFriendshipStatusesForPage(p3)
 end
 
 local function mergeFriendsRequestsPage(DataResult, p4, NextPageCursor)
-	-- upvalues: FFlagAddFriendsPageTrustedFriendRequestSection (copy), FFlagFriendsRequestsMergeListsWithoutDuplicates (copy), MergeListsWithoutDuplicatesFunction (copy)
-	if not DataResult then
-		return {
-			requests = p4.requests,
-			nextPageCursor = p4.nextPageCursor,
-			hasMore = p4.hasMore
-		}
-	end
-	if DataResult.nextPageCursor ~= NextPageCursor then
-		return DataResult
-	end
-	local t = {}
-	local Requests = DataResult.requests
-	local Requests1 = p4.requests
-	
-	if not FFlagAddFriendsPageTrustedFriendRequestSection and not FFlagFriendsRequestsMergeListsWithoutDuplicates then
-		error("mergeRequestsWithoutDuplicates requires FFlagAddFriendsPageTrustedFriendRequestSection or FFlagFriendsRequestsMergeListsWithoutDuplicates to be enabled")
-	end
-	t.requests = MergeListsWithoutDuplicatesFunction(Requests, Requests1, "id")
-	t.nextPageCursor = p4.nextPageCursor
-	t.hasMore = p4.hasMore
-	
-	return t
+	-- upvalues: MergeListsWithoutDuplicatesFunction (copy)
+	return if DataResult then if DataResult.nextPageCursor == NextPageCursor then {
+		requests = MergeListsWithoutDuplicatesFunction(DataResult.requests, p4.requests, "id"),
+		nextPageCursor = p4.nextPageCursor,
+		hasMore = p4.hasMore
+	} else DataResult else {
+		requests = p4.requests,
+		nextPageCursor = p4.nextPageCursor,
+		hasMore = p4.hasMore
+	}
 end
 
 local _ = function(p4)

@@ -3,11 +3,10 @@ local Parent = ExpChat.Parent
 local ReactModule = require(Parent.React)
 local FoundationModule = require(Parent.Foundation)
 local RenderFunction = require(Parent.Dev.ReactTestingLibrary).render
-local BenchmarkFunction = require(Parent.Dev.JestBenchmark).benchmark
 local BenchmarkUtilsModule = require(Parent.Dev.BenchmarkUtils)
 local BenchFileFunction: (any, any) -> () = BenchmarkUtilsModule.benchFile
-local MountComponentTimesFunction = BenchmarkUtilsModule.mountComponentTimes
-local ScrollComponentTimesFunction = BenchmarkUtilsModule.scrollComponentTimes
+local BenchmarkWarmFunction = BenchmarkUtilsModule.benchmarkWarm
+local BenchmarkInstanceCountFunction = BenchmarkUtilsModule.benchmarkInstanceCount
 local ConfigModule = require(ExpChat.Config)
 local Helpers = ExpChat.ChatWindow.Helpers
 local GetMessageSettingsModule = require(Helpers.getMessageSettings)
@@ -78,29 +77,34 @@ local function createMessageElement(List)
 	})
 end
 
-local function _(p1)
-	-- upvalues: ReactModule (copy), FoundationModule (copy)
-	return ReactModule.createElement(FoundationModule.FoundationProvider, { device = "Desktop", colorMode = "Dark" }, p1)
+local function messageList(p1)
+	-- upvalues: createMessageElement (copy), ReactModule (copy), FoundationModule (copy)
+	local t = {}
+	
+	for i = 1, 50 do
+		t[i] = createMessageElement(p1)
+	end
+	return ReactModule.createElement(FoundationModule.FoundationProvider, { device = "Desktop", colorMode = "Dark" }, {
+		List = ReactModule.createElement("Frame", { Size = UDim2.fromScale(1, 1) }, t)
+	})
 end
 
-local Element = ReactModule.createElement(FoundationModule.FoundationProvider, { device = "Desktop", colorMode = "Dark" }, (createMessageElement()))
-local Element1 = ReactModule.createElement(FoundationModule.FoundationProvider, { device = "Desktop", colorMode = "Dark" }, (createMessageElement({ useTranslation = true })))
-local Element2 = ReactModule.createElement(FoundationModule.FoundationProvider, { device = "Desktop", colorMode = "Dark" }, (createMessageElement({ isUserVerified = true })))
+local MessageListResult = messageList()
+local MessageListResult1 = messageList({ useTranslation = true })
+local MessageListResult2 = messageList({ isUserVerified = true })
 BenchFileFunction(script, function()
-	-- upvalues: BenchmarkFunction (copy), RenderFunction (copy), Element (copy), Element1 (copy), Element2 (copy), MountComponentTimesFunction (copy), ScrollComponentTimesFunction (copy)
-	BenchmarkFunction("Render TranslatedTextMessage", function()
-		-- upvalues: RenderFunction (upval), Element (upval)
-		RenderFunction(Element):unmount()
+	-- upvalues: BenchmarkWarmFunction (copy), RenderFunction (copy), MessageListResult (copy), MessageListResult1 (copy), MessageListResult2 (copy), BenchmarkInstanceCountFunction (copy)
+	BenchmarkWarmFunction(`Render {50} TranslatedTextMessages`, function()
+		-- upvalues: RenderFunction (upval), MessageListResult (upval)
+		RenderFunction(MessageListResult):unmount()
 	end)
-	BenchmarkFunction("Render TranslatedTextMessage with translation", function()
-		-- upvalues: RenderFunction (upval), Element1 (upval)
-		RenderFunction(Element1):unmount()
+	BenchmarkWarmFunction(`Render {50} TranslatedTextMessages with translation`, function()
+		-- upvalues: RenderFunction (upval), MessageListResult1 (upval)
+		RenderFunction(MessageListResult1):unmount()
 	end)
-	BenchmarkFunction("Render TranslatedTextMessage (verified user)", function()
-		-- upvalues: RenderFunction (upval), Element2 (upval)
-		RenderFunction(Element2):unmount()
+	BenchmarkWarmFunction(`Render {50} TranslatedTextMessages (verified user)`, function()
+		-- upvalues: RenderFunction (upval), MessageListResult2 (upval)
+		RenderFunction(MessageListResult2):unmount()
 	end)
-	MountComponentTimesFunction(Element, "TranslatedTextMessage", 50)
-	MountComponentTimesFunction(Element, "TranslatedTextMessage", 100)
-	ScrollComponentTimesFunction(Element, "TranslatedTextMessage", 50)
+	BenchmarkInstanceCountFunction(`Mount {50} TranslatedTextMessages`, MessageListResult)
 end)

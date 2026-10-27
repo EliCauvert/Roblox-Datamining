@@ -4,10 +4,8 @@ local LocalizationStringsModule = require(BuildExperience.LocalizationStrings)
 local _ = require(script.Parent.chatTypes)
 local FFlagBuildExperienceAnswerFormModule = require(BuildExperience.Flags.FFlagBuildExperienceAnswerForm)
 local TurnDisplayModule = require(script.Parent.turnDisplay)
-local FFlagBuildExperienceSinglePlaytestCardModule = require(BuildExperience.Flags.FFlagBuildExperienceSinglePlaytestCard)
 local FFlagBuildExperienceManageDevProductModule = require(BuildExperience.Flags.FFlagBuildExperienceManageDevProduct)
 local FFlagBuildAgentAdCampaignCardModule = require(BuildExperience.Flags.FFlagBuildAgentAdCampaignCard)
-local FFlagBuildExperienceShowThinkingAfterAskUserSubmitModule = require(BuildExperience.Flags.FFlagBuildExperienceShowThinkingAfterAskUserSubmit)
 local PublishToolUtils = CreatorAgentChatModule.PublishToolUtils
 local AdCampaignEligibilityToolModule = if FFlagBuildAgentAdCampaignCardModule then require(BuildExperience.Chat.adCampaignEligibilityTool) else nil
 local StudioAskUserTool = CreatorAgentChatModule.StudioAskUserTool
@@ -415,13 +413,13 @@ local function projectLocalToolSegments(p9, p10, ToolCallId, p11, p12, p13)
 end
 
 local function getActiveAskUserActivityLabel(p9, ToolCallId, p10)
-	-- upvalues: FFlagBuildExperienceShowThinkingAfterAskUserSubmitModule (copy), LocalizationStringsModule (copy), StudioAskUserTool (copy), GetAskUserActivityLabelFunction (copy)
+	-- upvalues: LocalizationStringsModule (copy), StudioAskUserTool (copy), GetAskUserActivityLabelFunction (copy)
 	local AskUserByToolCallIdEntry = p10.askUserByToolCallId[ToolCallId]
 	local ToolCall = p9.toolCalls[ToolCallId]
 	
 	if AskUserByToolCallIdEntry == nil or ToolCall == nil then
 		return nil
-	elseif FFlagBuildExperienceShowThinkingAfterAskUserSubmitModule and p10.submittedToolCallIds[ToolCallId] then
+	elseif p10.submittedToolCallIds[ToolCallId] then
 		return LocalizationStringsModule.CHAT_ASSISTANT_LOADING
 	else
 		local ExtractQuestionsFromToolCallResult = StudioAskUserTool.extractQuestionsFromToolCall(ToolCall)
@@ -642,7 +640,7 @@ local function addAgentAdCampaignCardSegments(List, p12, TurnKey)
 end
 
 local function projectTurnSegments(p13, p14, OptimisticLocalTools)
-	-- upvalues: projectWorkSegments (copy), GetLocalToolWaitSecondsFunction (copy), makeTurnWorkSegment (copy), addTerminalAssistantMessageSegments (copy), FFlagBuildAgentAdCampaignCardModule (copy), addAgentAdCampaignCardSegments (copy), LocalizationStringsModule (copy), makeSegmentKey (copy), ASSISTANTSTOPPEDTEXT (copy), PublishToolUtils (copy), FFlagBuildExperienceSinglePlaytestCardModule (copy)
+	-- upvalues: projectWorkSegments (copy), GetLocalToolWaitSecondsFunction (copy), makeTurnWorkSegment (copy), addTerminalAssistantMessageSegments (copy), FFlagBuildAgentAdCampaignCardModule (copy), addAgentAdCampaignCardSegments (copy), LocalizationStringsModule (copy), makeSegmentKey (copy), ASSISTANTSTOPPEDTEXT (copy), PublishToolUtils (copy)
 	local TurnKey = nil
 	if p14.turnKey == nil then
 		local SessionId = p14.sessionId or (if p13 == nil then "pending-session" else p13.sessionId)
@@ -691,7 +689,7 @@ local function projectTurnSegments(p13, p14, OptimisticLocalTools)
 			table.insert(List, Config)
 		end
 	end
-	if p13.isDone and PublishToolUtils.includesPublishPlaceTool(p13) and (not FFlagBuildExperienceSinglePlaytestCardModule or p14.showPlaytestCta == true) then
+	if p13.isDone and PublishToolUtils.includesPublishPlaceTool(p13) and p14.showPlaytestCta == true then
 		table.insert(List, {
 			kind = "playtest_cta",
 			key = makeSegmentKey(TurnKey, "playtest-cta")

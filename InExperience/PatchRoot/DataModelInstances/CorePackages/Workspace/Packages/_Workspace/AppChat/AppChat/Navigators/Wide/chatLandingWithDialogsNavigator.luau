@@ -12,7 +12,6 @@ local ParticipantDialogScreenDeprecatedModule = require(ChatDetails.ParticipantD
 local RemoveUserDialogScreenModule = require(ChatDetails.RemoveUserDialog.RemoveUserDialogScreen)
 local AbuseReportScreenModule = require(AppChat.Components.ChatAbuseReport.AbuseReportScreen)
 local FFlagAppChatDisableAbsorbInputSelectableModule = require(AppChat.Flags.FFlagAppChatDisableAbsorbInputSelectable)
-local TrustedContactsModalScreenModule = require(AppChat.Components.TrustedContactsModal.TrustedContactsModalScreen)
 local MessageContextMenuScreenModule = require(AppChat.Components.ChatConversation.MessageInteraction.MessageContextMenuScreen)
 local SquadVoiceChangerOverlayModule = require(Parent.Squads.SquadVoiceChangerOverlay)
 local FocusNavigableSurfaceIdentifierEnum = require(Parent.FocusNavigationUtils).FocusNavigableSurfaceIdentifierEnum
@@ -21,7 +20,6 @@ local CreateUnfilteredChatPartialModalScreenModule = require(ChatConversation.Pa
 local LearnMorePartialModalScreenModule = require(ChatConversation.PartialModal.LearnMorePartialModalScreen)
 local SquadVoiceAbuseReportScreenModule = require(Parent.Squads.SquadVoiceAbuseReportScreen)
 local ConversationOverlayScreenModule = require(ChatConversation.PartialModal.ConversationOverlayScreen)
-local TrustedConnectionsUpsellScreenModule = require(AppChat.Components.TrustedConnectionsUpsell.TrustedConnectionsUpsellScreen)
 local TrustedFriendsUpsellScreenModule = require(AppChat.Components.TrustedFriendsUpsell.TrustedFriendsUpsellScreen)
 local GroupOSADialogScreenModule = require(AppChat.Components.OSA.GroupOSADialogScreen)
 local MakeDialogScreenTelemetryWrapperModule = require(AppChat.Navigators.makeDialogScreenTelemetryWrapper)
@@ -30,8 +28,6 @@ local BlockingModal = require(Parent.SocialBlockingModal).BlockingModal
 local GetFFlagEnableCrossExpVoiceFunction = SharedFlagsModule.GetFFlagEnableCrossExpVoice
 local GetFFlagIsSquadEnabledFunction = SharedFlagsModule.GetFFlagIsSquadEnabled
 local FFlagEnablePartyVoiceChangersInLua = SharedFlagsModule.FFlagEnablePartyVoiceChangersInLua
-local FFlagAppChatEnableDoubleOptIn = require(Parent.SharedFlags).FFlagAppChatEnableDoubleOptIn
-local FFlagAppChatConsolidateTrustedFriendsModalModule = require(AppChat.Flags.FFlagAppChatConsolidateTrustedFriendsModal)
 local ChatLandingStackNavigatorModule = require(script.Parent.chatLandingStackNavigator)
 local FFlagAppChatConsoleFocusFixesModule = require(AppChat.Flags.FFlagAppChatConsoleFocusFixes)
 local ChatLandingStackNavigatorConnector = RoactModule.Component:extend("ChatLandingStackNavigatorConnector")
@@ -97,12 +93,6 @@ table.insert(List, {
 	}
 })
 table.insert(List, {
-	[EnumScreensModule.AppChatTrustedContactsModal] = {
-		screen = IsolatedAutoFocusNavigationModule(TrustedContactsModalScreenModule, FocusNavigableSurfaceIdentifierEnum.PopUp),
-		navigationOptions = { backButtonEnabled = true, overlayEnabled = true }
-	}
-})
-table.insert(List, {
 	[EnumScreensModule.BlockingModal] = {
 		screen = IsolatedAutoFocusNavigationModule(BlockingModal, FocusNavigableSurfaceIdentifierEnum.PopUp),
 		navigationOptions = { backButtonEnabled = true, overlayEnabled = true }
@@ -133,19 +123,16 @@ table.insert(List, {
 		}
 	}
 })
-
-if FFlagAppChatEnableDoubleOptIn or FFlagAppChatConsolidateTrustedFriendsModalModule then
-	table.insert(List, {
-		[EnumScreensModule.TrustedConnectionsUpsell] = {
-			screen = if FFlagAppChatConsolidateTrustedFriendsModalModule then IsolatedAutoFocusNavigationModule(TrustedFriendsUpsellScreenModule, FocusNavigableSurfaceIdentifierEnum.PopUp) else TrustedConnectionsUpsellScreenModule,
-			navigationOptions = {
-				transparent = true,
-				overlayTransparency = 0.5,
-				overlayEnabled = true
-			}
+table.insert(List, {
+	[EnumScreensModule.TrustedConnectionsUpsell] = {
+		screen = IsolatedAutoFocusNavigationModule(TrustedFriendsUpsellScreenModule, FocusNavigableSurfaceIdentifierEnum.PopUp),
+		navigationOptions = {
+			transparent = true,
+			overlayTransparency = 0.5,
+			overlayEnabled = true
 		}
-	})
-end
+	}
+})
 table.insert(List, {
 	[EnumScreensModule.GroupOSADialog] = {
 		screen = GroupOSADialogScreenModule,

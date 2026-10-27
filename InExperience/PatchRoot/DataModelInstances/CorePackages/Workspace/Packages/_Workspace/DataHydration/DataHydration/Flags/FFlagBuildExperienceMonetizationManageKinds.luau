@@ -1,0 +1,5 @@
+﻿local FFlagBuildExperienceMonetizationMultiKindModule = require(script.Parent.FFlagBuildExperienceMonetizationMultiKind)
+local FFlagBuildExperienceMonetizationNativeUIModule = require(script.Parent.FFlagBuildExperienceMonetizationNativeUI)
+local FFlagBuildExperienceMonetizationProductEditingModule = require(script.Parent.FFlagBuildExperienceMonetizationProductEditing)
+
+return game:DefineFastFlag("BuildExperienceMonetizationManageKinds", false) and (FFlagBuildExperienceMonetizationMultiKindModule and (FFlagBuildExperienceMonetizationNativeUIModule and FFlagBuildExperienceMonetizationProductEditingModule))

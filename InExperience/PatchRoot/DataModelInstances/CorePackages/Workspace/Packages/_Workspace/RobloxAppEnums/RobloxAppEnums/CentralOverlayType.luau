@@ -75,7 +75,6 @@
 	CheckboxFeedbackFormModal = "CheckboxFeedbackFormModal",
 	TextFeedbackFormModal = "TextFeedbackFormModal",
 	ProvideFeedbackToast = "ProvideFeedbackToast",
-	WearTimeInfoModal = "WearTimeInfoModal",
 	EconomicRestrictionPrompt = "EconomicRestrictionPrompt",
 	UnifiedProductPurchaseModal = "UnifiedProductPurchaseModal",
 	AccountLockModal = "AccountLockModal",

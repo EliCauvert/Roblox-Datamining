@@ -2182,6 +2182,8 @@ Feature.Build.Description.PromoteGamePaid,Buat iklan untuk menampilkan game-mu k
 Feature.Build.Description.PromoteGameWithAdCampaign,Jangkau lebih banyak audiens dengan kampanye iklan {durationDays} hari agar game-mu lebih mudah ditemukan.
 Feature.Build.Description.RaiseLimitOrWait,"Tingkatkan batas harian Robux-mu untuk terus berkreasi, atau tunggu hingga direset besok."
 Feature.Build.Description.RatingAgreement,"Dengan memublikasikan, kamu menyetujui bahwa rating konten ini akurat."
+Feature.Build.Description.RequiredRobuxForAdvanced,Kamu membutuhkan setidaknya {ROBUX} Robux untuk terus berkreasi dengan model Lanjutan. Kamu juga bisa kembali ke model Default atau menunggu hingga kuota penggunaan gratismu direset.
+Feature.Build.Description.RequiredRobuxForDefault,"Kamu membutuhkan setidaknya {ROBUX} Robux untuk terus berkreasi, atau tunggu hingga kuota penggunaan gratismu direset."
 Feature.Build.Description.RestoreLatest,Versi ini akan menjadi versi publikasi terbarumu.
 Feature.Build.Description.RevertToVersion,Konfirmasi untuk membatalkan perubahan terakhir dan kembali ke {VERSION}.
 Feature.Build.Description.ShareLatest,Bagikan apa yang berubah di versi terbarumu.
@@ -2429,6 +2431,7 @@ Feature.Build.Message.BuildBusy,"Build sibuk. Tunggu sebentar, lalu coba lagi."
 Feature.Build.Message.BuildConnectFailed,Build tidak dapat terhubung. Coba lagi.
 Feature.Build.Message.BuildInternalError,Build mengalami masalah. Coba lagi.
 Feature.Build.Message.BuildResponseFailed,Build tidak dapat merespons. Coba lagi.
+Feature.Build.Message.BuildSendUnconfirmed,Build tidak dapat mengonfirmasi bahwa pesanmu sudah terkirim.
 Feature.Build.Message.BuildStillWorking,"Sedang diproses. Kamu dapat keluar dari aplikasi, bermain Roblox, atau memulai proyek lain sambil menunggu."
 Feature.Build.Message.BuildStopped,Kamu menghentikan Build.
 Feature.Build.Message.BuildTakingLonger,Ini membutuhkan waktu lebih lama dari yang diperkirakan. Kamu bisa terus menunggu atau memulai hal lain.
@@ -2534,6 +2537,7 @@ Feature.Build.Title.GameCreationDone,Pembuatan game selesai
 Feature.Build.Title.GamePass,Pas Game
 Feature.Build.Title.GenericError,Terjadi kesalahan
 Feature.Build.Title.GetUsers,Dapatkan pengguna
+Feature.Build.Title.InsufficientRobuxForModel,Kamu tidak memiliki cukup Robux
 Feature.Build.Title.ManagedPricingAcknowledgement,Aktifkan Harga Terkelola?
 Feature.Build.Title.Monetization,Monetisasi
 Feature.Build.Title.NoMonetizationProducts,Mulai hasilkan pendapatan di game-mu
@@ -3866,6 +3870,7 @@ Feature.Moments.Title.LeaveMomentCreation,Keluar dari kreasi Moment?
 Feature.Moments.Title.MomentRemoved,
 Feature.Moments.Title.PostInsights,Insight postingan
 Feature.Moments.Title.ReportPost,Laporkan postingan
+Feature.Moments.Title.UnfollowConfirmationDialog,Berhenti mengikuti @{username}?
 Feature.Moments.Tooltip.Creation,Semua orang di pengalaman virtual dapat melihat Moment-mu.
 Feature.Moments.Tooltip.PostInsightsBody,"Periksa jumlah tayangan, waktu tonton, dan respons audiens terhadap Momen tersebut."
 Feature.Moments.Tooltip.PostInsightsTitle,Insight Moment-mu ada di sini
@@ -4671,6 +4676,7 @@ Feature.UniversalShareSheet.Response.SharedCustomMessage,{CUSTOM_MESSAGE} + 1 la
 Feature.UniversalShareSheet.Response.SharedMessage,Pesan terkirim
 Feature.UniversalShareSheet.Response.SharedMultipleMessages,Beberapa pesan terkirim
 Feature.UniversalShareSheet.SharedCustomMultipleMessages,{CUSTOM_MESSAGE} + {N} lainnya
+Feature.UserLibrary.Label.MyLibrary,Perpustakaan Saya
 Feature.VerificationUpsell.Action.AddPhone,Tambahkan Nomor Ponsel
 Feature.VerificationUpsell.Action.AddPhoneNumber,
 Feature.VerificationUpsell.Action.AddPhoneVoice,Tambahkan Ponsel untuk Chat Suara

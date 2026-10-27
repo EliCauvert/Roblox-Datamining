@@ -6,6 +6,7 @@ local _ = require(script.Parent.chatTypes)
 local _ = require(script.Parent.localToolOverlay)
 local CreateManageSubscriptionStoreModule = require(script.Parent.createManageSubscriptionStore)
 local CreateMonetizationToolControllerModule = require(script.Parent.createMonetizationToolController)
+local ToolControllerUtilsModule = require(script.Parent.toolControllerUtils)
 local ProductStatusType = DeveloperSubscriptionModule.ProductStatusType
 local config = {
 	consumable = DeveloperSubscriptionModule.DeveloperSubscriptionProductType.Consumable,
@@ -60,34 +61,42 @@ local config1 = {
 		end)
 	end,
 	mutate = function(p1, p2)
-		-- upvalues: v1 (ref), CreateManageSubscriptionStoreModule (copy), config (copy), DeveloperSubscriptionModule (copy), deletionResult (copy), PromiseModule (copy)
+		-- upvalues: ToolControllerUtilsModule (copy), v1 (ref), CreateManageSubscriptionStoreModule (copy), config (copy), DeveloperSubscriptionModule (copy), deletionResult (copy), PromiseModule (copy)
 		local SubscriptionId = p2.subscriptionId
 		
 		if p2.action == "create" then
-			if v1 == nil then
-				v1 = CreateManageSubscriptionStoreModule()
-			end
-			return v1.create(p1, {
-				isRegionalPricingEnabled = true,
-				name = p2.name,
-				description = p2.description,
-				productType = config[p2.productType],
-				currencyType = DeveloperSubscriptionModule.CurrencyType.Robux,
-				priceInRobux = p2.priceInRobux,
-				imageAssetId = p2.imageAssetId
-			})
-		elseif p2.action == "update" then
-			if v1 == nil then
-				v1 = CreateManageSubscriptionStoreModule()
-			end
-			return v1.update(p1, SubscriptionId, {
-				description = p2.description,
-				currencyType = if p2.priceInRobux == nil then nil else DeveloperSubscriptionModule.CurrencyType.Robux,
-				priceInRobux = p2.priceInRobux,
-				isRegionalPricingEnabled = p2.priceInRobux ~= nil or nil,
-				imageAssetId = p2.imageAssetId
-			})
-		elseif p2.action == "activate" then
+			return ToolControllerUtilsModule.withGeneratedImage(p2.imageAssetId, "The subscription image could not be loaded. No subscription was created.", function(ImageFile)
+				-- upvalues: v1 (upval), CreateManageSubscriptionStoreModule (upval), p1 (copy), p2 (copy), config (upval), DeveloperSubscriptionModule (upval)
+				if v1 == nil then
+					v1 = CreateManageSubscriptionStoreModule()
+				end
+				return v1.create(p1, {
+					isRegionalPricingEnabled = true,
+					name = p2.name,
+					description = p2.description,
+					productType = config[p2.productType],
+					currencyType = DeveloperSubscriptionModule.CurrencyType.Robux,
+					priceInRobux = p2.priceInRobux,
+					imageFile = ImageFile
+				})
+			end)
+		end
+		if p2.action == "update" then
+			return ToolControllerUtilsModule.withGeneratedImage(p2.imageAssetId, "The subscription image could not be loaded. No changes were made.", function(ImageFile)
+				-- upvalues: v1 (upval), CreateManageSubscriptionStoreModule (upval), p1 (copy), SubscriptionId (copy), p2 (copy), DeveloperSubscriptionModule (upval)
+				if v1 == nil then
+					v1 = CreateManageSubscriptionStoreModule()
+				end
+				return v1.update(p1, SubscriptionId, {
+					description = p2.description,
+					currencyType = if p2.priceInRobux == nil then nil else DeveloperSubscriptionModule.CurrencyType.Robux,
+					priceInRobux = p2.priceInRobux,
+					isRegionalPricingEnabled = p2.priceInRobux ~= nil or nil,
+					imageFile = ImageFile
+				})
+			end)
+		end
+		if p2.action == "activate" then
 			if v1 == nil then
 				v1 = CreateManageSubscriptionStoreModule()
 			end

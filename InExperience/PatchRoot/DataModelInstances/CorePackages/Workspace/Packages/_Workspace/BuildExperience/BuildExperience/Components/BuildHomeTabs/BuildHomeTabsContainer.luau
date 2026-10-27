@@ -38,10 +38,8 @@ return function(Frame)
 		activeTab = UseBuildHomeTabsViewModelModuleResult.activeTab,
 		tabs = UseBuildHomeTabsViewModelModuleResult.tabs,
 		onTabActivated = UseBuildHomeTabsViewModelModuleResult.onTabActivated,
-		layoutRef = UseBuildHomeTabsViewModelModuleResult.layoutRef,
-		isSliding = UseBuildHomeTabsViewModelModuleResult.isSliding,
+		pageOffset = UseBuildHomeTabsViewModelModuleResult.pageOffset,
 		tabOrder = UseBuildHomeTabsViewModelModuleResult.tabOrder,
-		onStopped = UseBuildHomeTabsViewModelModuleResult.onStopped,
 		gamesContent = Frame.gamesContent,
 		previewsContent = ReactModule.createElement(PreviewsTabViewModule, {
 			rows = UsePreviewsTabViewModelModuleResult.rows,

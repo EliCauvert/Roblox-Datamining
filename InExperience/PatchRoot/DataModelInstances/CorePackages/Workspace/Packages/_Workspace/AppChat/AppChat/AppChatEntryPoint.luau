@@ -58,7 +58,6 @@ local EnteredChatFromEntryPointModule = require(AppChat.Actions.EnteredChatFromE
 local NavigateIntoChatModule = require(AppChat.Actions.NavigateIntoChat)
 local GetFFlagFixChatsBottomInsetBackgroundColorModule = require(AppChat.Flags.getFFlagFixChatsBottomInsetBackgroundColor)
 local GetFFlagAppChatRequestedRouteModule = require(AppChat.Flags.getFFlagAppChatRequestedRoute)
-local FFlagSupportViewingUserProfileOnOSAModule = require(AppChat.Flags.FFlagSupportViewingUserProfileOnOSA)
 local GetOverlayStoreModule = require(AppChat.Stores.GetOverlayStore)
 local NavigateWithOsaGateModule = require(AppChat.Utils.navigateWithOsaGate)
 local FFlagAppChatShowOSAOnPageEntry = SharedFlagsModule.FFlagAppChatShowOSAOnPageEntry
@@ -113,7 +112,7 @@ local function useReactivePaneRestore(JoinResult)
 end
 
 function AppChatEntryPoint(p1)
-	-- upvalues: CryoModule (copy), config (copy), ChatPlacementContextModule (copy), FFlagAppChatReactiveFeatureRestrictions (copy), UsePartyChatReactiveFeatureRestrictionModule (copy), UseTokensFunction (copy), Inverted (copy), RootNavigatorModule (ref), AppChat (copy), RootNavigatorModule1 (ref), UseSelectorFunction (copy), UseCallbackFunction (copy), FFlagAppChatUseSignalsForLastEntryPointModule (copy), UseSignalStateFunction (copy), GetLastEntryPointStoreModule (copy), UseDispatchFunction (copy), UseEffectFunction (copy), AppChatNetworkingModule (copy), LoggerModule (copy), UseChatIsVisibleModule (copy), FFlagAppChatReactivePaneLayoutOnRotation (copy), useReactivePaneRestore (copy), ReactModule (copy), RoactNavigationModule (copy), GetRoactChatStackNavigatorModule (copy), UseRefFunction (copy), FFlagSupportViewingUserProfileOnOSAModule (copy), GetOverlayStoreModule (copy), EnumScreensModule (copy), CreateConversationModule (copy), FetchLatestConversationDetailsModule (copy), GetFFlagIsSquadEnabledFunction (copy), FFlagAppChatShowOSAOnPageEntry (copy), NavigateWithOsaGateModule (copy), GetFFlagAppChatRequestedRouteModule (copy), RootedChatDetailsNavigationModule (copy), FFlagAppChatPerfTrackingModule (copy), AppChatPerfTrackerModule (copy), EnteredChatFromEntryPointModule (copy), NavigateIntoChatModule (copy), UseCurrentSquadParentChannelIdFunction (copy), GetFFlagEnableCrossExpVoiceFunction (copy), UseIsVoiceConnectedFunction (copy), UsePageSideMarginFunction (copy), FFlagLuaAppCompositionAppChat (copy), UseStyleFunction (copy), SetTabBarVisibleFunction (copy), UserInputService (copy), NAVBARWITHFACEPILESIZE (copy), FFlagEnableHeaderBarButtonsUpdate (copy), LuaAppNavigationContextProviderModule (copy), FFlagAppChatSignalsReplyStoreModule (copy), ReplyingToMessageProviderModule (copy), InteractionFeedbackModule (copy), HapticFeedbackConfig (copy), LayerCollectorProvider (copy), UseRobloxLocaleModule (copy), RbxAnalyticsService (copy), AnalyticsProviderModule (copy), AppTelemetryLayerModule (copy), GetFFlagFixChatsBottomInsetBackgroundColorModule (copy), RoactChatAnalyticsProviderModule (copy)
+	-- upvalues: CryoModule (copy), config (copy), ChatPlacementContextModule (copy), FFlagAppChatReactiveFeatureRestrictions (copy), UsePartyChatReactiveFeatureRestrictionModule (copy), UseTokensFunction (copy), Inverted (copy), RootNavigatorModule (ref), AppChat (copy), RootNavigatorModule1 (ref), UseSelectorFunction (copy), UseCallbackFunction (copy), FFlagAppChatUseSignalsForLastEntryPointModule (copy), UseSignalStateFunction (copy), GetLastEntryPointStoreModule (copy), UseDispatchFunction (copy), UseEffectFunction (copy), AppChatNetworkingModule (copy), LoggerModule (copy), UseChatIsVisibleModule (copy), FFlagAppChatReactivePaneLayoutOnRotation (copy), useReactivePaneRestore (copy), ReactModule (copy), RoactNavigationModule (copy), GetRoactChatStackNavigatorModule (copy), UseRefFunction (copy), GetOverlayStoreModule (copy), EnumScreensModule (copy), CreateConversationModule (copy), FetchLatestConversationDetailsModule (copy), GetFFlagIsSquadEnabledFunction (copy), FFlagAppChatShowOSAOnPageEntry (copy), NavigateWithOsaGateModule (copy), GetFFlagAppChatRequestedRouteModule (copy), RootedChatDetailsNavigationModule (copy), FFlagAppChatPerfTrackingModule (copy), AppChatPerfTrackerModule (copy), EnteredChatFromEntryPointModule (copy), NavigateIntoChatModule (copy), UseCurrentSquadParentChannelIdFunction (copy), GetFFlagEnableCrossExpVoiceFunction (copy), UseIsVoiceConnectedFunction (copy), UsePageSideMarginFunction (copy), FFlagLuaAppCompositionAppChat (copy), UseStyleFunction (copy), SetTabBarVisibleFunction (copy), UserInputService (copy), NAVBARWITHFACEPILESIZE (copy), FFlagEnableHeaderBarButtonsUpdate (copy), LuaAppNavigationContextProviderModule (copy), FFlagAppChatSignalsReplyStoreModule (copy), ReplyingToMessageProviderModule (copy), InteractionFeedbackModule (copy), HapticFeedbackConfig (copy), LayerCollectorProvider (copy), UseRobloxLocaleModule (copy), RbxAnalyticsService (copy), AnalyticsProviderModule (copy), AppTelemetryLayerModule (copy), GetFFlagFixChatsBottomInsetBackgroundColorModule (copy), RoactChatAnalyticsProviderModule (copy)
 	local JoinResult = CryoModule.Dictionary.join(config, p1)
 	local IsPlacementInExperience = ChatPlacementContextModule.isPlacementInExperience(JoinResult.chatPlacement)
 	
@@ -192,16 +191,13 @@ function AppChatEntryPoint(p1)
 			UseRefResult3.current(p2)
 		end
 	end, { UseRefResult1, UseRefResult3 })
-	
-	if FFlagSupportViewingUserProfileOnOSAModule then
-		local NavigateToLuaAppPages = JoinResult.navigateToLuaAppPages
-		UseEffectFunction(function()
-			-- upvalues: GetOverlayStoreModule (upval), NavigateToLuaAppPages (copy), EnumScreensModule (upval)
-			GetOverlayStoreModule(false).setOverlayDefaultProps({
-				onViewUserProfile = if NavigateToLuaAppPages then NavigateToLuaAppPages[EnumScreensModule.ViewUserProfile] else nil
-			})
-		end, { NavigateToLuaAppPages })
-	end
+	local NavigateToLuaAppPages = JoinResult.navigateToLuaAppPages
+	UseEffectFunction(function()
+		-- upvalues: GetOverlayStoreModule (upval), NavigateToLuaAppPages (copy), EnumScreensModule (upval)
+		GetOverlayStoreModule(false).setOverlayDefaultProps({
+			onViewUserProfile = if NavigateToLuaAppPages then NavigateToLuaAppPages[EnumScreensModule.ViewUserProfile] else nil
+		})
+	end, { NavigateToLuaAppPages })
 	local UseCallbackResult11 = UseCallbackFunction(function(ConversationId)
 		-- upvalues: RoactNavigationModule (upval), EnumScreensModule (upval)
 		return RoactNavigationModule.Actions.navigate({

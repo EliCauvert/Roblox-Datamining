@@ -13,7 +13,7 @@ local OverlayTypesModule = require(AppChat.Stores.GetOverlayStore.OverlayTypes)
 local RemovedConversationModule = require(AppChat.Conversations.Actions.RemovedConversation)
 local GetConversationStoreModule = require(AppChat.Stores.GetConversationStore)
 local GetConversationConsentUpdateModule = require(script.Parent.getConversationConsentUpdate)
-local FFlagAppChatSquadJoinButtonU13OSAModule = require(AppChat.Flags.FFlagAppChatSquadJoinButtonU13OSA)
+local FFlagAppChatEnableU13ChatOptIn = require(Parent.SharedFlags).FFlagAppChatEnableU13ChatOptIn
 local FFlagFriendsChatEnableConversationConsent = require(Parent.SharedFlags).FFlagFriendsChatEnableConversationConsent
 local NormalizeConversationForTelemetryModule = require(script.Parent.normalizeConversationForTelemetry)
 
@@ -23,8 +23,8 @@ local function _(p1, p2)
 end
 
 local _ = function(p1, p2, MULTIUSERCONVERSATION)
-	-- upvalues: ConstantsModule (copy), FFlagAppChatSquadJoinButtonU13OSAModule (copy), ConversationModule (copy)
-	return if p1 then ConstantsModule.OptInVariant.OsaContextCard elseif FFlagAppChatSquadJoinButtonU13OSAModule and p2 and MULTIUSERCONVERSATION == ConversationModule.Type.MULTI_USER_CONVERSATION then ConstantsModule.OptInVariant.ChatOptInInfoCard else nil
+	-- upvalues: ConstantsModule (copy), FFlagAppChatEnableU13ChatOptIn (copy), ConversationModule (copy)
+	return if p1 then ConstantsModule.OptInVariant.OsaContextCard elseif FFlagAppChatEnableU13ChatOptIn and p2 and MULTIUSERCONVERSATION == ConversationModule.Type.MULTI_USER_CONVERSATION then ConstantsModule.OptInVariant.ChatOptInInfoCard else nil
 end
 
 local function showOsaOverlay(ConversationId, ImpressionId, ModalVariant, ConversationType, Callback1, Callback, p1)
@@ -103,13 +103,13 @@ local function activateConversation(p1, p2, p3, p4, Current)
 end
 
 local function activateSquad(p1, p2, p3, p4, p5)
-	-- upvalues: ConstantsModule (copy), FFlagAppChatSquadJoinButtonU13OSAModule (copy), ConversationModule (copy), HttpService (copy), showOsaOverlay (copy)
+	-- upvalues: ConstantsModule (copy), FFlagAppChatEnableU13ChatOptIn (copy), ConversationModule (copy), HttpService (copy), showOsaOverlay (copy)
 	local ConversationId = if p3 then p1.conversationId else p2
 	
 	if p1.hasConversation then
 		local ShouldShowU13ChatOptIn = p1.shouldShowU13ChatOptIn
 		local ConversationType = p1.conversationType
-		local OsaContextCard = if p1.shouldShowOSA then ConstantsModule.OptInVariant.OsaContextCard elseif FFlagAppChatSquadJoinButtonU13OSAModule and ShouldShowU13ChatOptIn and ConversationType == ConversationModule.Type.MULTI_USER_CONVERSATION then ConstantsModule.OptInVariant.ChatOptInInfoCard else nil
+		local OsaContextCard = if p1.shouldShowOSA then ConstantsModule.OptInVariant.OsaContextCard elseif FFlagAppChatEnableU13ChatOptIn and ShouldShowU13ChatOptIn and ConversationType == ConversationModule.Type.MULTI_USER_CONVERSATION then ConstantsModule.OptInVariant.ChatOptInInfoCard else nil
 		
 		if OsaContextCard then
 			showOsaOverlay(ConversationId, HttpService:GenerateGUID(false), OsaContextCard, p1.conversationType, p1.onSquadJoinButtonActivated, p4, p5)

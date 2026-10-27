@@ -23,7 +23,7 @@ return function(Frame)
 	local PromptChips = Frame.promptChips or {}
 	local v1: boolean = FFlagBuildExperienceChatImageAttachmentsModule and #Images > 0
 	local v2: boolean = FFlagBuildExperienceChatResourceAttachments and #ResourceAttachments > 0
-	local v3: boolean = FFlagBuildEnableFTUXChipsModule and #PromptChips > 0
+	local v3: boolean = FFlagBuildEnableFTUXChipsModule and (#PromptChips > 0 or Frame.isPromptChipsLoading == true)
 	local LayoutOrder: number = if v2 then if v1 then 3 else 2 elseif v1 then 2 else 1
 	local v4 = "unmounted"
 	local Callback = nil
@@ -153,9 +153,10 @@ return function(Frame)
 		PromptChips = if v3 then ReactModule.createElement(PromptChipGroupModule, {
 			LayoutOrder = LayoutOrder + 1,
 			promptChips = PromptChips,
+			isLoading = Frame.isPromptChipsLoading,
 			onActivated = Frame.onPromptChipActivated
 		}) else nil,
-		Gallery = if FFlagBuildExperienceChatImageAttachmentsModule and v4 ~= "unmounted" and UseRefResult ~= nil and UseRefResult.current ~= nil then ReactModule.createElement(ChatCaptureGalleryContainerModule, {
+		Gallery = if FFlagBuildExperienceChatImageAttachmentsModule and (v4 ~= "unmounted" and UseRefResult ~= nil and UseRefResult.current ~= nil) then ReactModule.createElement(ChatCaptureGalleryContainerModule, {
 			maxSelections = 2,
 			captureSource = UseRefResult.current,
 			initialCaptures = InitialCaptures,

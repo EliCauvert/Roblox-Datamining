@@ -440,22 +440,92 @@ local function ProductCarousel(Frame)
 	})
 end
 
+local config = {
+	GamePass = {
+		icon = IconName.Tag,
+		title = LocalizationStringsModule.MONETIZATION_EMPTY_PASSES_TITLE,
+		description = LocalizationStringsModule.MONETIZATION_EMPTY_PASSES_DESCRIPTION
+	},
+	DeveloperProduct = {
+		icon = IconName.ShoppingCart,
+		title = LocalizationStringsModule.MONETIZATION_EMPTY_DEVELOPER_PRODUCTS_TITLE,
+		description = LocalizationStringsModule.MONETIZATION_EMPTY_DEVELOPER_PRODUCTS_DESCRIPTION
+	},
+	Subscription = {
+		icon = IconName.CircleStar,
+		title = LocalizationStringsModule.MONETIZATION_EMPTY_SUBSCRIPTIONS_TITLE,
+		description = LocalizationStringsModule.MONETIZATION_EMPTY_SUBSCRIPTIONS_DESCRIPTION
+	}
+}
+
+local function EmptyKindCard(Frame)
+	-- upvalues: config (copy), UseLocalizationFunction (copy), ReactModule (copy), View (copy), Icon (copy), IconSize (copy), Text (copy)
+	local Entry = config[Frame.kind]
+	local UseLocalizationResult = UseLocalizationFunction({ title = Entry.title, description = Entry.description })
+	
+	return ReactModule.createElement(View, {
+		tag = "col align-x-center gap-small size-full-0 auto-y padding-large bg-surface-0 stroke-standard stroke-default radius-large",
+		LayoutOrder = Frame.LayoutOrder,
+		testId = `monetization-empty-{Frame.kind}`
+	}, {
+		Icon = ReactModule.createElement(Icon, {
+			LayoutOrder = 1,
+			name = Entry.icon,
+			size = IconSize.XLarge
+		}),
+		Title = ReactModule.createElement(Text, {
+			LayoutOrder = 2,
+			tag = "size-full-0 auto-y text-title-small text-wrap text-align-x-center content-emphasis",
+			Text = UseLocalizationResult.title
+		}),
+		Description = ReactModule.createElement(Text, {
+			LayoutOrder = 3,
+			tag = "size-full-0 auto-y text-body-small text-wrap text-align-x-center content-default",
+			Text = UseLocalizationResult.description
+		})
+	})
+end
+
+local function getKindProducts(Products, Kind)
+	local List = {}
+	
+	for _, product in Products do
+		if product.productKind == Kind then
+			table.insert(List, product)
+		end
+	end
+	return List
+end
+
+local function EmptyKindSection(Frame)
+	-- upvalues: ReactModule (copy), View (copy), Text (copy), EmptyKindCard (copy)
+	return ReactModule.createElement(View, {
+		tag = "col gap-medium size-full-0 auto-y",
+		LayoutOrder = Frame.LayoutOrder,
+		testId = `monetization-empty-section-{Frame.kind}`
+	}, {
+		Title = ReactModule.createElement(Text, {
+			LayoutOrder = 1,
+			tag = "size-full-0 auto-y text-title-large text-align-x-left content-emphasis",
+			Text = Frame.label,
+			testId = `monetization-section-title-{Frame.kind}`
+		}),
+		Card = ReactModule.createElement(EmptyKindCard, { LayoutOrder = 2, kind = Frame.kind })
+	})
+end
+
 local function GroupedCatalogContent(p1)
-	-- upvalues: ReactModule (copy), Text (copy), ProductCarousel (copy), View (copy)
+	-- upvalues: getKindProducts (copy), ReactModule (copy), Text (copy), ProductCarousel (copy), View (copy), EmptyKindSection (copy)
 	local Elements = {}
 	local LayoutOrder = 0
+	local List = {}
 	
 	if p1.catalogSources ~= nil then
 		for _, catalogSource in p1.catalogSources do
 			local Kind = catalogSource.kind
-			local Products = {}
+			local KindProducts = getKindProducts(p1.products, Kind)
 			
-			for _, product in p1.products do
-				if product.productKind == Kind then
-					table.insert(Products, product)
-				end
-			end
-			if #Products ~= 0 then
+			if #KindProducts ~= 0 then
 				LayoutOrder += 1
 				Elements[`section-{Kind}`] = ReactModule.createElement(View, {
 					tag = "col gap-medium size-full-0 auto-y",
@@ -471,11 +541,21 @@ local function GroupedCatalogContent(p1)
 					Products = ReactModule.createElement(ProductCarousel, {
 						LayoutOrder = 2,
 						onProductActivated = p1.onProductActivated,
-						products = Products,
+						products = KindProducts,
 						testId = `monetization-section-products-{Kind}`
 					})
 				})
+			elseif catalogSource.status == "Ready" and not catalogSource.isIncomplete then
+				table.insert(List, catalogSource)
 			end
+		end
+		for _, value in List do
+			LayoutOrder += 1
+			Elements[`empty-section-{value.kind}`] = ReactModule.createElement(EmptyKindSection, {
+				kind = value.kind,
+				label = value.label,
+				LayoutOrder = LayoutOrder
+			})
 		end
 	end
 	return ReactModule.createElement(View, {
@@ -706,7 +786,7 @@ local function DetailContent(p4)
 						Text = SelectedProduct.price
 					})
 				}),
-				Status = if SelectedProduct.canManage == false and SelectedProduct.saleStatus ~= nil then ReactModule.createElement(Text, {
+				Status = if SelectedProduct.canManage == false and SelectedProduct.saleStatus ~= nil and p4.canChangeSaleStatus ~= true then ReactModule.createElement(Text, {
 					LayoutOrder = 4,
 					tag = "size-full-0 auto-y padding-top-xsmall text-body-medium text-wrap text-align-x-left content-muted",
 					testId = "monetization-detail-sale-status",
@@ -718,7 +798,7 @@ local function DetailContent(p4)
 				tag = "size-full-0 auto-y text-body-medium text-wrap text-align-x-left content-default",
 				Text = SelectedProduct.description
 			}),
-			SaleStatus = if p4.canManageProduct then ReactModule.createElement(View, {
+			SaleStatus = if p4.canManageProduct or p4.canChangeSaleStatus == true then ReactModule.createElement(View, {
 				LayoutOrder = 3,
 				tag = "col gap-small size-full-0 auto-y"
 			}, {
@@ -736,7 +816,7 @@ local function DetailContent(p4)
 						label = "",
 						testId = "monetization-detail-sale-status",
 						isChecked = SelectedProduct.isForSale == true,
-						isDisabled = p4.isProductDisabled or (p4.isProductSaleStatusPending or (p4.isProductManagedPricingPending or not p4.canManageProduct)),
+						isDisabled = p4.isProductDisabled or (p4.isProductSaleStatusPending or p4.isProductManagedPricingPending),
 						onActivated = p4.onProductSaleStatusChanged,
 						size = InputSize.Medium
 					})
@@ -745,10 +825,10 @@ local function DetailContent(p4)
 					LayoutOrder = 2,
 					tag = "size-full-0 auto-y text-body-small content-alert",
 					testId = "monetization-sale-status-error",
-					Text = if SelectedProduct.priceInRobux == nil then p4.labels.priceRequiredForSale else p4.labels.updateError
+					Text = p4.productSaleStatusErrorLabel or (if SelectedProduct.priceInRobux == nil then p4.labels.priceRequiredForSale else p4.labels.updateError)
 				}) else nil
 			}) else nil,
-			Pricing = if SelectedProduct.productKind == nil or SelectedProduct.productKind == "DeveloperProduct" then ReactModule.createElement(View, { LayoutOrder = 4, tag = "col size-full-0 auto-y" }, {
+			Pricing = if SelectedProduct.productKind == nil or SelectedProduct.productKind == "DeveloperProduct" or p4.canChangeKindManagedPricing == true then ReactModule.createElement(View, { LayoutOrder = 4, tag = "col size-full-0 auto-y" }, {
 				Title = ReactModule.createElement(Text, {
 					LayoutOrder = 1,
 					tag = "size-full-0 auto-y padding-bottom-small text-heading-small text-align-x-left content-emphasis",
@@ -777,7 +857,7 @@ local function DetailContent(p4)
 					LayoutOrder = 3,
 					tag = "size-full-0 auto-y text-body-small content-alert",
 					testId = "monetization-managed-pricing-error",
-					Text = if SelectedProduct.priceInRobux == nil then p4.labels.priceRequiredForSale else p4.labels.updateError
+					Text = p4.productManagedPricingErrorLabel or (if SelectedProduct.priceInRobux == nil then p4.labels.priceRequiredForSale else p4.labels.updateError)
 				}) else nil
 			}) else nil
 		})
@@ -805,7 +885,7 @@ local function EditContent(p4)
 				Size = UDim2.fromOffset(UseTokensResult.Size.Size_3000, UseTokensResult.Size.Size_3000)
 			})
 		}) else nil,
-		Name = ReactModule.createElement(TextInput, {
+		Name = if p4.canEditName == false then nil else ReactModule.createElement(TextInput, {
 			LayoutOrder = 1,
 			testId = "monetization-edit-name",
 			isDisabled = p4.isProductEditPending,
@@ -824,7 +904,7 @@ local function EditContent(p4)
 			text = p4.editDescription,
 			width = UDim.new(1, 0)
 		}),
-		Price = ReactModule.createElement(TextInput, {
+		Price = if p4.canEditPrice == false then nil else ReactModule.createElement(TextInput, {
 			LayoutOrder = 3,
 			testId = "monetization-edit-price",
 			isDisabled = p4.isProductEditPending,
@@ -860,10 +940,10 @@ return function(p4)
 			end
 		end
 	end
-	local NoV86: boolean = not IsDetail and (not IsEdit and (not IsOptions and (if HasCatalogSources then not Flag and not v1 else p4.catalogStatus ~= "Ready" and not (p4.catalogStatus == "Failed" and v1))))
-	local NoNoV86: boolean = p4.mode == "empty" and not NoV86
-	local V86: boolean = not HasCatalogSources and (not IsDetail and (not IsEdit and (not IsOptions and (p4.catalogStatus == "Failed" and v1))))
-	local Element = if IsDetail and p4.canManageProduct then if FFlagBuildExperienceMonetizationNativeUIModule then ReactModule.createElement(ProductActionsMenu, {
+	local NoV94: boolean = not IsDetail and (not IsEdit and (not IsOptions and (if HasCatalogSources then not Flag and not v1 else p4.catalogStatus ~= "Ready" and not (p4.catalogStatus == "Failed" and v1))))
+	local NoNoV94: boolean = p4.mode == "empty" and not NoV94
+	local V94: boolean = not HasCatalogSources and (not IsDetail and (not IsEdit and (not IsOptions and (p4.catalogStatus == "Failed" and v1))))
+	local Element = if IsDetail and (p4.canManageProduct or p4.canEditKindProduct == true) then if FFlagBuildExperienceMonetizationNativeUIModule then ReactModule.createElement(ProductActionsMenu, {
 		isDisabled = p4.isProductDisabled or (p4.isProductSaleStatusPending or p4.isProductManagedPricingPending),
 		editLabel = p4.labels.edit,
 		onEdit = p4.onOpenProductEdit
@@ -874,7 +954,7 @@ return function(p4)
 		size = InputSize.Medium,
 		text = p4.labels.edit,
 		variant = ButtonVariant.Standard
-	}) elseif IsDetail or IsEdit or IsOptions or NoV86 or not p4.showOptions then nil else ReactModule.createElement(IconButton, {
+	}) elseif IsDetail or IsEdit or IsOptions or NoV94 or not p4.showOptions then nil else ReactModule.createElement(IconButton, {
 		isCircular = true,
 		testId = "monetization-open-options",
 		icon = if FFlagBuildExperienceMonetizationNativeUIModule then IconName.TwoSwitchesHorizontal else IconName.ThreeSlidersHorizontal,
@@ -889,7 +969,7 @@ return function(p4)
 		GroupTransparency = 0.55,
 		Size = UDim2.new(1, 0, 0, 0)
 	}, { Content = ReactModule.createElement(DetailContent, p4) }) else ReactModule.createElement(DetailContent, p4)
-	local Element1 = if NoV86 then if HasCatalogSources then ReactModule.createElement(CatalogSourcesStatus, p4) else ReactModule.createElement(CatalogStatusContent, p4) elseif IsDetail then CanvasGroup elseif IsEdit then ReactModule.createElement(EditContent, p4) elseif IsOptions then ReactModule.createElement(OptionsContent, p4) elseif p4.mode == "empty" then ReactModule.createElement(EmptyContent, p4) else ReactModule.createElement(CatalogContent, p4)
+	local Element1 = if NoV94 then if HasCatalogSources then ReactModule.createElement(CatalogSourcesStatus, p4) else ReactModule.createElement(CatalogStatusContent, p4) elseif IsDetail then CanvasGroup elseif IsEdit then ReactModule.createElement(EditContent, p4) elseif IsOptions then ReactModule.createElement(OptionsContent, p4) elseif p4.mode == "empty" then ReactModule.createElement(EmptyContent, p4) else ReactModule.createElement(CatalogContent, p4)
 	
 	if HasCatalogSources and not Flag and v1 and not IsDetail and not IsEdit and not IsOptions then
 		Element1 = ReactModule.createElement(View, { tag = "col gap-large size-full-0 auto-y" }, {
@@ -897,7 +977,7 @@ return function(p4)
 			Content = Element1
 		})
 	end
-	if V86 then
+	if V94 then
 		Element1 = ReactModule.createElement(View, { tag = "col gap-medium size-full-0 auto-y" }, {
 			Warning = ReactModule.createElement(CatalogRefreshWarning, p4),
 			Content = Element1
@@ -946,7 +1026,7 @@ return function(p4)
 			testId = "monetization-detail-composer"
 		}, {
 			Composer = ReactModule.createElement(ChatActionsModule, p4.chatActions)
-		}) elseif NoV86 or p4.mode ~= "empty" and p4.mode ~= "catalog" then nil else ReactModule.createElement(View, {
+		}) elseif NoV94 or p4.mode ~= "empty" and p4.mode ~= "catalog" then nil else ReactModule.createElement(View, {
 			tag = {
 				["row align-x-center size-full-0 auto-y"] = true,
 				["padding-y-medium"] = FFlagBuildExperienceMonetizationNativeUIModule
@@ -962,7 +1042,7 @@ return function(p4)
 				width = if FFlagBuildExperienceMonetizationNativeUIModule then UDim.new(1, 0) else UDim.new(0, 240)
 			})
 		}),
-		disableScrolling = FFlagBuildExperienceMonetizationNativeUIModule and NoNoV86,
+		disableScrolling = FFlagBuildExperienceMonetizationNativeUIModule and NoNoV94,
 		headerTrailing = Element,
 		onClose = p4.onClose,
 		title = if IsDetail then if p4.selectedProduct == nil then p4.labels.title else p4.selectedProduct.name elseif IsEdit then p4.labels.editProduct elseif IsOptions then p4.labels.options else p4.labels.title

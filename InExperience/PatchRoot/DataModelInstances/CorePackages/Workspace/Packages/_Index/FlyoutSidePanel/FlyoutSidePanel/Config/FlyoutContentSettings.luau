@@ -14,6 +14,7 @@ local FFlagEnableBlackbirdOnFlyoutMenu = SharedFlagsModule.FFlagEnableBlackbirdO
 local FFlagFlyoutSidePanelTradesEntryModule = require(script.Parent.Parent.Flags.FFlagFlyoutSidePanelTradesEntry)
 local FFlagFlyoutFilterWebViewsAndBrowserLinks = SharedFlagsModule.FFlagFlyoutFilterWebViewsAndBrowserLinks
 local FFlagFlyoutResolveItemContextOnActivationModule = require(FlyoutSidePanel.Flags.FFlagFlyoutResolveItemContextOnActivation)
+local FFlagUserLibrary = SharedFlagsModule.FFlagUserLibrary
 local CommunityListRouting = require(Parent.Groups).CommunityListRouting
 local ItemType = {
 	Favorites = "Favorites",
@@ -26,6 +27,7 @@ local ItemType = {
 	HelpAndSafety = "HelpAndSafety",
 	Moments = "Moments",
 	Charts = "Charts",
+	UserLibrary = "UserLibrary",
 	Learn = "Learn",
 	CreateGames = "CreateGames",
 	Premium = "Premium",
@@ -60,6 +62,7 @@ local ItemTextKey = {
 	[ItemType.HelpAndSafety] = "CommonUI.Features.Label.HelpAndSafety",
 	[ItemType.Moments] = "CommonUI.Features.Label.RM",
 	[ItemType.Charts] = "CommonUI.Features.Label.Charts",
+	[ItemType.UserLibrary] = "Feature.UserLibrary.Label.MyLibrary",
 	[ItemType.Learn] = "CommonUI.Features.Label.Learn",
 	[ItemType.CreateGames] = "CommonUI.Features.Label.CreateGames",
 	[ItemType.Premium] = "CommonUI.Features.Label.Premium",
@@ -212,6 +215,15 @@ local ItemInfo = {
 		icon = BuilderIconsModule.Icon.ChartThreeVerticalBars,
 		context = {
 			appPage = if SharedFlagsModule.FFlagEnableChartsInFlyout and FlyoutSidePanelIXP.isChartsInFlyoutEnabled() then AppPage.Games else nil,
+			destinationType = DestinationType.AppPage
+		}
+	},
+	[ItemType.UserLibrary] = {
+		itemType = ItemType.UserLibrary,
+		textKey = ItemTextKey[ItemType.UserLibrary],
+		icon = BuilderIconsModule.Icon.Bookmark,
+		context = {
+			appPage = if FFlagUserLibrary then AppPage.UserLibrary else nil,
 			destinationType = DestinationType.AppPage
 		}
 	},

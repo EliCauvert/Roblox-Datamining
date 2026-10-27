@@ -1049,7 +1049,7 @@ CoreScripts.PublishAssetPrompt.Cancel,
 CoreScripts.PublishAssetPrompt.Description,
 CoreScripts.PublishAssetPrompt.DisclaimerAvatar,このバーチャル空間が私のアバターアイテムを内容規制に送信し、自分の作品ページにアップロードすることに同意します。
 CoreScripts.PublishAssetPrompt.DisclaimerEmote,このバーチャル空間が私のリアクションを内容規制に送信、自分の作品ページにアップロードすることに同意します。
-CoreScripts.PublishAssetPrompt.DisclaimerImage,私は、このバーチャル空間が私の画像を内容審査に送信し、自分の作品ページにアップロードすることに同意します。
+CoreScripts.PublishAssetPrompt.DisclaimerImage,私は、このバーチャル空間が私の画像を内容審査に送信し、「自分の作品」ページにアップロードすることに同意します。画像のプライバシーは「使用を開放」に設定されます。すべてのクリエーターおよびゲームがこの画像を使用できます。
 CoreScripts.PublishAssetPrompt.DisclaimerModel,作成されたアイテムは内容審査を受けます。コミュニティ基準に準拠していないため承認されなかったアイテムの払い戻しは受けられない場合があります。
 CoreScripts.PublishAssetPrompt.InvalidDescription,概要が無効です
 CoreScripts.PublishAssetPrompt.InvalidName,名前が無効です
@@ -2182,6 +2182,8 @@ Feature.Build.Description.PromoteGamePaid,広告を作成して、数百万人�
 Feature.Build.Description.PromoteGameWithAdCampaign,{durationDays}日間の広告キャンペーンでオーディエンスを拡大し、ゲームを見つけてもらいましょう。
 Feature.Build.Description.RaiseLimitOrWait,作成を続けるには、1日あたりのRobux限度額を増やすか、明日になってリセットされるのをお待ちください。
 Feature.Build.Description.RatingAgreement,公開することで、このコンテンツレーティングが正確であることに同意したものとみなされます。
+Feature.Build.Description.RequiredRobuxForAdvanced,Advanced（アドバンスド）モデルで作成を続けるには、少なくとも{ROBUX} Robuxが必要です。デフォルトに戻すか、無料使用量がリセットされるまでお待ちください。
+Feature.Build.Description.RequiredRobuxForDefault,作成を続けるには、少なくとも{ROBUX} Robuxが必要です。または、無料使用量がリセットされるまでお待ちください。
 Feature.Build.Description.RestoreLatest,このバージョンが、公開済みの最新バージョンになります。
 Feature.Build.Description.RevertToVersion,確認して最後の変更を元に戻し、{VERSION}に戻ります。
 Feature.Build.Description.ShareLatest,最新バージョンの変更内容を共有しましょう。
@@ -2206,6 +2208,8 @@ Feature.Build.Error.ManagedPricingPartialUpdate,一部の製品を更新でき�
 Feature.Build.Error.MonetizationOptionUpdate,オプションを更新できませんでした。もう一度お試しください。
 Feature.Build.Error.MonetizationOptionsLoad,オプションを読み込めませんでした。もう一度お試しください。
 Feature.Build.Error.MonetizationPermissionDenied,収益化オプションを変更する権限がありません。
+Feature.Build.Error.MonetizationPriceRequiredForRegionalPricing,地域別価格設定をオンにするには、価格を追加してください。
+Feature.Build.Error.MonetizationPriceRequiredForSale,販売を開始する前に価格を追加してください。
 Feature.Build.Header.AccessSharing,アクセスとシェア
 Feature.Build.Header.AllVersions,すべてのバージョン
 Feature.Build.Header.Answers,回答
@@ -2429,6 +2433,7 @@ Feature.Build.Message.BuildBusy,ビルドがビジー状態です。しばらく
 Feature.Build.Message.BuildConnectFailed,ビルドに接続できませんでした。もう一度お試しください。
 Feature.Build.Message.BuildInternalError,ビルドで問題が発生しました。もう一度お試しください。
 Feature.Build.Message.BuildResponseFailed,ビルドが応答しませんでした。もう一度お試しください。
+Feature.Build.Message.BuildSendUnconfirmed,ビルドがメッセージの送信を確認できませんでした。
 Feature.Build.Message.BuildStillWorking,処理中です。待機中でもアプリを終了したり、Robloxをプレイしたり、別のプロジェクトを開始したりできます。
 Feature.Build.Message.BuildStopped,ビルドを停止しました。
 Feature.Build.Message.BuildTakingLonger,予想よりも時間がかかっています。そのままお待ちいただくか、別の作業を開始してください。
@@ -3340,6 +3345,7 @@ Feature.Friends.Description.TrustedFriendsExpiredLink,友達に再度リンク�
 Feature.Friends.Description.TrustedFriendsInvalidLink,正しいアカウントでログインしていることを確認してから、もう一度お試しください。
 Feature.Friends.Description.TrustedFriendsRequestModalBody,信頼できる知り合いのみを追加してください。友達はプロフィールからいつでも管理できます。
 Feature.Friends.Description.TrustedFriendsUnavailable,お住まいの地域では、信頼する友達機能はまだ利用できません。
+Feature.Friends.Description.TrustedFriendsWrongAccount,@{username}としてログインしていることを確認してから、もう一度お試しください。
 Feature.Friends.Description.YouCanDoMoreWithTrustedFriends,「信頼できる友達」となら、Robloxをもっと楽しめます。この「友達」は、相手のプロフィールからいつでも管理できます。
 Feature.Friends.Error.AlreadyFriendError,このユーザーはすでに友達になっています。
 Feature.Friends.Error.DefaultFriendingError,リクエストを送信できません。後でもう一度お試しください。
@@ -3869,6 +3875,7 @@ Feature.Moments.Title.LeaveMomentCreation,モーメント作成を退出しま�
 Feature.Moments.Title.MomentRemoved,
 Feature.Moments.Title.PostInsights,投稿のインサイト
 Feature.Moments.Title.ReportPost,投稿の規約違反を報告
+Feature.Moments.Title.UnfollowConfirmationDialog,@{username}さんのフォローを解除しますか？
 Feature.Moments.Tooltip.Creation,バーチャル空間内の全員があなたのモーメントを見ることができます。
 Feature.Moments.Tooltip.PostInsightsBody,視聴回数、視聴時間、モーメントに対するオーディエンスの反応を確認できます。
 Feature.Moments.Tooltip.PostInsightsTitle,モーメントのインサイトはこちら
@@ -4673,6 +4680,7 @@ Feature.UniversalShareSheet.Response.SharedCustomMessage,{CUSTOM_MESSAGE} + そ�
 Feature.UniversalShareSheet.Response.SharedMessage,メッセージが送信されました
 Feature.UniversalShareSheet.Response.SharedMultipleMessages,
 Feature.UniversalShareSheet.SharedCustomMultipleMessages,{CUSTOM_MESSAGE} + その他{N}件
+Feature.UserLibrary.Label.MyLibrary,マイライブラリ
 Feature.VerificationUpsell.Action.AddPhone,電話番号を追加
 Feature.VerificationUpsell.Action.AddPhoneNumber,
 Feature.VerificationUpsell.Action.AddPhoneVoice,ボイスチャット用の電話番号を追加

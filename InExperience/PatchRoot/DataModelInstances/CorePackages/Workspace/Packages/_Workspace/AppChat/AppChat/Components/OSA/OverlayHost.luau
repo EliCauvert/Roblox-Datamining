@@ -5,17 +5,16 @@ local ReactModule = require(Parent.React)
 local SignalsReactModule = require(Parent.SignalsReact)
 local ProviderContainer = require(Parent.RoactUtils).Components.ProviderContainer
 local GetOverlayStoreModule = require(AppChat.Stores.GetOverlayStore)
-local FFlagSupportViewingUserProfileOnOSAModule = require(AppChat.Flags.FFlagSupportViewingUserProfileOnOSA)
 local FFlagAppChatShowOSAOnPageEntry = require(Parent.SharedFlags).FFlagAppChatShowOSAOnPageEntry
 local config = {
 	GroupOSADialog = require(AppChat.Components.OSA.GroupOSADialog)
 }
 
 return function(p1)
-	-- upvalues: GetOverlayStoreModule (copy), SignalsReactModule (copy), FFlagSupportViewingUserProfileOnOSAModule (copy), ReactModule (copy), config (copy), CryoModule (copy), FFlagAppChatShowOSAOnPageEntry (copy), ProviderContainer (copy)
+	-- upvalues: GetOverlayStoreModule (copy), SignalsReactModule (copy), ReactModule (copy), config (copy), CryoModule (copy), FFlagAppChatShowOSAOnPageEntry (copy), ProviderContainer (copy)
 	local OverlayStoreModule = GetOverlayStoreModule(false)
 	local UseSignalStateResult = SignalsReactModule.useSignalState(OverlayStoreModule.getCurrentOverlay)
-	local UseSignalStateResult1 = if FFlagSupportViewingUserProfileOnOSAModule then SignalsReactModule.useSignalState(OverlayStoreModule.getOverlayDefaultProps) else nil
+	local UseSignalStateResult1 = SignalsReactModule.useSignalState(OverlayStoreModule.getOverlayDefaultProps)
 	local UseResult = ReactModule.useCallback(function()
 		-- upvalues: OverlayStoreModule (copy)
 		OverlayStoreModule.dismissOverlay()
@@ -26,7 +25,7 @@ return function(p1)
 	if not Entry then
 		return nil
 	end
-	local UnionResult = if FFlagSupportViewingUserProfileOnOSAModule then CryoModule.Dictionary.union(UseSignalStateResult1 or {}, UseSignalStateResult.overlayProps or {}) else table.clone(UseSignalStateResult.overlayProps or {})
+	local UnionResult = CryoModule.Dictionary.union(UseSignalStateResult1 or {}, UseSignalStateResult.overlayProps or {})
 	
 	if FFlagAppChatShowOSAOnPageEntry then
 		local OnCloseFunction = UnionResult.onClose

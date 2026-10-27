@@ -13,14 +13,12 @@ local FFlagShowSwitchServerButton = SharedFlagsModule.FFlagShowSwitchServerButto
 local IsPioneerLaunchFunction = require(CorePackages.Workspace.Packages.PioneerUtils).isPioneerLaunch
 local FFlagEnableSideSheetRobuxWidgetModule = require(script.Parent.Flags.FFlagEnableSideSheetRobuxWidget)
 local FFlagAddTraversalHistory = require(CorePackages.Workspace.Packages.CoreScriptsRoactCommon).Traversal.Flags.FFlagAddTraversalHistory
-local ArgoPartyExperimentation = require(CorePackages.Workspace.Packages.SocialExperiments).ArgoPartyExperimentation
 
 return {
 	OverflowMenu = require(script.OverflowMenu),
 	AssistantBuild = if SharedFlagsModule.FFlagAppNavMyStatsTab then require(script.AssistantBuild) else nil,
 	Chat = require(script.ExpChat.ChatChromeIntegration),
-	ConnectUnibar = if ArgoPartyExperimentation.getIsRenameEnabled() then nil else require(script.Connect.ConnectIconUnibar),
-	ConnectDropdown = if SharedFlagsModule.FFlagRemoveFriendsChatUnibarEntrypoints and FFlagExpChatCanShowFriendsTab and ArgoPartyExperimentation.getIsRenameEnabled() then nil else require(script.Connect.ConnectIconDropdown),
+	ConnectDropdown = if SharedFlagsModule.FFlagRemoveFriendsChatUnibarEntrypoints and FFlagExpChatCanShowFriendsTab then nil else require(script.Connect.ConnectIconDropdown),
 	TrustAndSafety = require(script.TrustAndSafety),
 	DummyWindow = require(script.DummyWindow),
 	DummyWindow2 = require(script.DummyWindow2),
@@ -30,7 +28,7 @@ return {
 	CapturesEntrypoint = require(script.Captures.CapturesEntrypoint),
 	AvatarSwitcherEntryPoint = if FFlagEnableInExperienceAvatarSwitcher then require(script.AvatarSwitcher.AvatarSwitcherEntrypoint) else nil,
 	MusicEntrypoint = require(script.MusicUtility.MusicEntrypoint),
-	PartyEntrypoint = if ArgoPartyExperimentation.getIsRenameEnabled() then require(script.Party.PartyEntrypoint) else nil,
+	PartyEntrypoint = require(script.Party.PartyEntrypoint),
 	PartyMic = require(script.Party.PartyMic),
 	VRToggleButton = if IsInExperienceUIVREnabled and IsSpatialFunction() then require(script.VRToggleButton) else nil,
 	VRSafeBubble = if IsInExperienceUIVREnabled and IsSpatialFunction() then require(script.VRSafeBubble) else nil,

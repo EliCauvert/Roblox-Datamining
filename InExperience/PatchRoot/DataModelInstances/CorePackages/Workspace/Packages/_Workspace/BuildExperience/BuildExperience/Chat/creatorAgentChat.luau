@@ -334,7 +334,7 @@ local function createLocalToolControllers(p2, p3, p4)
 end
 
 return {
-	createLiveAssistantTurn = function(p7, Prompt, Callback, p8, p9, Callback1, Callback2, SendConfiguration, ExpectedSessionId, IsCancelled)
+	createLiveAssistantTurn = function(p7, Prompt, Callback1, p8, p9, Callback2, Callback, SendConfiguration, ExpectedSessionId, IsCancelled)
 		-- upvalues: createLocalToolControllers (copy), StudioAskUserTool (copy), StudioProposePlanTool (copy), StudioClientLogsTool (copy), FFlagBuildExperienceClientDataModelTools (copy), StudioClientDataModelTools (copy), UnifiedMonetizationToolModule (copy), FFlagBuildExperienceManageDevProductModule (copy), StudioManageDevProductTool (copy), FFlagBuildExperienceManageDevProductModule1 (copy), StudioManageGamePassTool (copy), FFlagBuildExperienceManageDevProductModule2 (copy), StudioManageSubscriptionTool (copy), FFlagBuildExperiencePromptFailureTelemetry (copy), CreatePromptLifecycleTelemetryModule (copy), SendBuildExperienceEventModule (copy), FFlagBuildEventsUpdate1Module (copy), FFlagBuildExperienceLibrary (copy), resolvePromptFailure (copy), Debug (copy), getPromptFailureTelemetryParameters (copy), LocalizationStringsModule (copy), config1 (copy), FFlagBuildExperienceModelPickerModule (copy), trackPromptActivity (copy)
 		local LocalToolControllers = createLocalToolControllers(p7, p8, p9)
 		local UniverseId = p7.universeId
@@ -372,7 +372,7 @@ return {
 		local Flag = false
 		
 		local function handleReceived(TurnId)
-			-- upvalues: FFlagBuildEventsUpdate1Module (upval), Flag (ref), SendBuildExperienceEventModule (upval), UniverseId (copy), p7 (copy), Callback1 (copy)
+			-- upvalues: FFlagBuildEventsUpdate1Module (upval), Flag (ref), SendBuildExperienceEventModule (upval), UniverseId (copy), p7 (copy), Callback2 (copy)
 			if FFlagBuildEventsUpdate1Module and not Flag then
 				SendBuildExperienceEventModule("SEND_PROMPT_RECIEVED", {
 					universeId = UniverseId,
@@ -381,8 +381,8 @@ return {
 					turnId = TurnId
 				})
 			end
-			if Callback1 ~= nil then
-				Callback1(TurnId)
+			if Callback2 ~= nil then
+				Callback2(TurnId)
 			end
 		end
 		
@@ -416,9 +416,9 @@ return {
 					messageId = MessageId
 				})
 			end,
-			onReceived = if FFlagBuildEventsUpdate1Module or Callback1 ~= nil then handleReceived else nil,
-			onAccepted = if FFlagBuildExperienceLibrary and Callback2 ~= nil then function()
-				-- upvalues: FFlagBuildEventsUpdate1Module (upval), Flag (ref), SendBuildExperienceEventModule (upval), UniverseId (copy), p7 (copy), Callback2 (copy)
+			onReceived = if FFlagBuildEventsUpdate1Module or Callback2 ~= nil then handleReceived else nil,
+			onAccepted = if FFlagBuildExperienceLibrary and Callback ~= nil then function()
+				-- upvalues: FFlagBuildEventsUpdate1Module (upval), Flag (ref), SendBuildExperienceEventModule (upval), UniverseId (copy), p7 (copy), Callback (copy)
 				if FFlagBuildEventsUpdate1Module then
 					Flag = true
 					SendBuildExperienceEventModule("SEND_PROMPT_RECIEVED", {
@@ -427,10 +427,10 @@ return {
 						conversationId = p7.getCasSessionId()
 					})
 				end
-				Callback2()
+				Callback()
 			end else nil,
 			onCompleted = function(p10)
-				-- upvalues: resolvePromptFailure (upval), SendPromptResult (ref), Debug (upval), UniverseId (copy), p7 (copy), getPromptFailureTelemetryParameters (upval), FFlagBuildExperiencePromptFailureTelemetry (upval), PromptLifecycleTelemetryModule (copy), LocalizationStringsModule (upval), config1 (upval), SendBuildExperienceEventModule (upval), Callback3 (ref), Callback (copy)
+				-- upvalues: resolvePromptFailure (upval), SendPromptResult (ref), Debug (upval), UniverseId (copy), p7 (copy), getPromptFailureTelemetryParameters (upval), FFlagBuildExperiencePromptFailureTelemetry (upval), PromptLifecycleTelemetryModule (copy), LocalizationStringsModule (upval), config1 (upval), SendBuildExperienceEventModule (upval), Callback3 (ref), Callback1 (copy)
 				local ResolvePromptFailureResult = resolvePromptFailure(p10, SendPromptResult.getSetupError(false))
 				
 				if ResolvePromptFailureResult == nil then
@@ -511,7 +511,7 @@ return {
 					end
 					PromptLifecycleTelemetryModule.finish()
 				end
-				Callback(ResolvePromptFailureResult)
+				Callback1(ResolvePromptFailureResult)
 			end
 		}
 		
@@ -526,17 +526,9 @@ return {
 			getOptimisticLocalTools = LocalToolControllers.getOptimisticLocalTools,
 			getLocalToolActions = LocalToolControllers.getLocalToolActions,
 			getSetupErrorText = function(p11)
-				-- upvalues: SendPromptResult (ref), FFlagBuildExperienceModelPickerModule (upval), LocalizationStringsModule (upval), config1 (upval)
+				-- upvalues: SendPromptResult (ref), LocalizationStringsModule (upval), config1 (upval)
 				local SetupError = SendPromptResult.getSetupError(p11)
 				
-				if FFlagBuildExperienceModelPickerModule then
-					local TurnHandle = SendPromptResult.getTurnHandle(p11)
-					local StateResult = if TurnHandle == nil then nil else TurnHandle.state(p11)
-					
-					if StateResult ~= nil and StateResult.requestFailure ~= nil and not StateResult.isDone then
-						return if StateResult.isUnconfirmed == true then LocalizationStringsModule.CHAT_SEND_UNCONFIRMED else LocalizationStringsModule.CHAT_DEFAULT_FAILURE
-					end
-				end
 				if SetupError == nil then
 					return nil
 				end
@@ -594,7 +586,7 @@ return {
 		}
 	end,
 	createResumedAssistantTurn = function(p11, p12, Callback, AfterSequenceId, p13, p14)
-		-- upvalues: createLocalToolControllers (copy), SignalsModule (copy), FFlagBuildExperienceModelPickerModule (copy), LocalizationStringsModule (copy), FFlagBuildExperiencePromptFailureTelemetry (copy), SendBuildExperienceEventModule (copy), ErrorCodes (copy), config (copy), Forbidden (copy)
+		-- upvalues: createLocalToolControllers (copy), SignalsModule (copy), FFlagBuildExperiencePromptFailureTelemetry (copy), SendBuildExperienceEventModule (copy), FFlagBuildExperienceModelPickerModule (copy), ErrorCodes (copy), config (copy), Forbidden (copy)
 		local LocalToolControllers = createLocalToolControllers(p11, p13, p14)
 		local Signal = SignalsModule.createSignal(nil)
 		local Flag = false
@@ -685,14 +677,7 @@ return {
 			getOptimisticLocalTools = LocalToolControllers.getOptimisticLocalTools,
 			getLocalToolActions = LocalToolControllers.getLocalToolActions,
 			getSetupErrorText = function(p15)
-				-- upvalues: FFlagBuildExperienceModelPickerModule (upval), p12 (copy), LocalizationStringsModule (upval), Signal (copy)
-				if FFlagBuildExperienceModelPickerModule then
-					local StateResult = p12.state(p15)
-					
-					if StateResult.requestFailure ~= nil and not StateResult.isDone then
-						return if StateResult.isUnconfirmed == true then LocalizationStringsModule.CHAT_SEND_UNCONFIRMED else LocalizationStringsModule.CHAT_DEFAULT_FAILURE
-					end
-				end
+				-- upvalues: Signal (copy)
 				return Signal(p15)
 			end,
 			start = function()

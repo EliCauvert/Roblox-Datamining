@@ -15,11 +15,10 @@ local GradientBackdrop = MomentsCommonModule.Components.GradientBackdrop
 local MomentLayoutModule = require(script.Parent.momentLayout)
 local MomentOverlayInsetContextModule = require(script.Parent.MomentOverlayInsetContext)
 local MomentPushedFeedSafeAreaContextModule = require(script.Parent.MomentPushedFeedSafeAreaContext)
-local MomentsFixSkeletonNavBarInset = game:DefineFastFlag("MomentsFixSkeletonNavBarInset", false)
 local FFlagMomentsFeedAboveNavBarModule = require(Moments.Flags.FFlagMomentsFeedAboveNavBar)
 
 return function(p1)
-	-- upvalues: UseTokensFunction (copy), UseFormFactorFunction (copy), UseCompositionLayoutFunction (copy), UseDeviceInsetsFunction (copy), FormFactor (copy), ReactModule (copy), MomentPushedFeedSafeAreaContextModule (copy), MomentOverlayInsetContextModule (copy), MomentsFixSkeletonNavBarInset (copy), FFlagMomentsFeedAboveNavBarModule (copy), View (copy), Skeleton (copy), Radius (copy), MomentLayoutModule (copy), GradientBackdrop (copy)
+	-- upvalues: UseTokensFunction (copy), UseFormFactorFunction (copy), UseCompositionLayoutFunction (copy), UseDeviceInsetsFunction (copy), FormFactor (copy), ReactModule (copy), MomentPushedFeedSafeAreaContextModule (copy), MomentOverlayInsetContextModule (copy), FFlagMomentsFeedAboveNavBarModule (copy), View (copy), Skeleton (copy), Radius (copy), MomentLayoutModule (copy), GradientBackdrop (copy)
 	local UseTokensResult = UseTokensFunction()
 	local UseFormFactorResult = UseFormFactorFunction()
 	local UseCompositionLayoutResult = UseCompositionLayoutFunction()
@@ -35,7 +34,7 @@ return function(p1)
 	local UseMomentPushedFeedSafeAreaResult = MomentPushedFeedSafeAreaContextModule.useMomentPushedFeedSafeArea()
 	local UseDeviceInsetsResult1 = if UseMomentPushedFeedSafeAreaResult == nil then UseDeviceInsetsResult else UseMomentPushedFeedSafeAreaResult
 	local UseMomentOverlayInsetResult: number = MomentOverlayInsetContextModule.useMomentOverlayInset()
-	local UseMomentOverlayInsetResult1 = if MomentsFixSkeletonNavBarInset then UseMomentOverlayInsetResult else 0
+	local UseMomentOverlayInsetResult1: number = UseMomentOverlayInsetResult
 	local IsUseMomentOverlayInsetResultAbove = UseMomentOverlayInsetResult1 > 0
 	
 	if FFlagMomentsFeedAboveNavBarModule then

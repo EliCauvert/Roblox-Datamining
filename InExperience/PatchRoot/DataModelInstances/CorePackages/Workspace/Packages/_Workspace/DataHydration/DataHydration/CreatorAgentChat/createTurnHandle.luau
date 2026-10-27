@@ -2,32 +2,14 @@
 local CreateSignalFunction = require(Parent.Signals).createSignal
 local AcpProtocolModule = require(script.Parent.Acp.AcpProtocol)
 local TurnStateModule = require(script.Parent.turnState)
-local ConstantsModule = require(script.Parent.ChatSession.constants)
 local _ = require(script.Parent.types)
 local DecodeFundingErrorModule = require(script.Parent.decodeFundingError)
 local FFlagBuildExperienceModelPickerData = require(Parent.SharedFlags).FFlagBuildExperienceModelPickerData
 local FFlagBuildExperiencePromptFailureTelemetry = require(Parent.SharedFlags).FFlagBuildExperiencePromptFailureTelemetry
 local FFlagBuildExperienceLibrary = require(Parent.SharedFlags).FFlagBuildExperienceLibrary
 
-local function _(Forbidden): boolean
-	-- upvalues: AcpProtocolModule (copy)
-	local ErrorCodes = AcpProtocolModule.ErrorCodes
-	
-	return Forbidden == ErrorCodes.InvalidRequest or (Forbidden == ErrorCodes.MethodNotFound or (Forbidden == ErrorCodes.InvalidParams or (Forbidden == ErrorCodes.PayloadTooLarge or (Forbidden == ErrorCodes.Unauthorized or (Forbidden == ErrorCodes.Forbidden or (Forbidden == ErrorCodes.NotFound or (Forbidden == ErrorCodes.Gone or Forbidden == ErrorCodes.OutOfCredits)))))))
-end
-
-local _ = function(p1): boolean
-	if p1 == nil or p1.kind ~= "http" then
-		return false
-	else
-		local HttpStatusCode: number = p1.httpStatusCode
-		
-		return HttpStatusCode ~= nil and (HttpStatusCode >= 400 and HttpStatusCode < 500 and (HttpStatusCode ~= 408 and (HttpStatusCode ~= 409 and HttpStatusCode ~= 429)))
-	end
-end
-
 return function(p1, RequestId, Cancel, p2, List)
-	-- upvalues: CreateSignalFunction (copy), TurnStateModule (copy), ConstantsModule (copy), FFlagBuildExperienceModelPickerData (copy), DecodeFundingErrorModule (copy), AcpProtocolModule (copy), FFlagBuildExperiencePromptFailureTelemetry (copy), FFlagBuildExperienceLibrary (copy)
+	-- upvalues: CreateSignalFunction (copy), TurnStateModule (copy), FFlagBuildExperienceModelPickerData (copy), DecodeFundingErrorModule (copy), FFlagBuildExperiencePromptFailureTelemetry (copy), AcpProtocolModule (copy), FFlagBuildExperienceLibrary (copy)
 	local Signal, Signal2 = CreateSignalFunction(p2 or TurnStateModule.createEmptyTurnState(p1, RequestId))
 	local ExtractTurnIdResult = nil
 	local t = {}
@@ -38,8 +20,6 @@ return function(p1, RequestId, Cancel, p2, List)
 	local v2 = nil
 	local Total = 0
 	local v3 = nil
-	local Count1 = 0
-	local Flag = false
 	
 	local function noteProcessedSequenceNumber(Key): boolean
 		-- upvalues: t2 (copy), v1 (ref), v2 (ref), Total (ref)
@@ -141,48 +121,6 @@ return function(p1, RequestId, Cancel, p2, List)
 		end)
 	end
 	
-	local _ = function()
-		-- upvalues: Count1 (ref), Flag (ref)
-		Count1 += 1
-		Flag = false
-	end
-	
-	local function armAmbiguityTimerIfNeeded()
-		-- upvalues: Signal (copy), Flag (ref), Count1 (ref), ConstantsModule (upval), Signal2 (copy)
-		local SignalResult = Signal(false)
-		
-		if not SignalResult.isDone and SignalResult.requestFailure ~= nil and not Flag then
-			Flag = true
-			local Count = Count1
-			task.delay(ConstantsModule.getUnconfirmedSendSeconds(), function()
-				-- upvalues: Count (copy), Count1 (upval), Signal2 (upval)
-				if Count == Count1 then
-					local function v52(p3)
-						if p3.requestFailure ~= nil then
-							p3.isUnconfirmed = true
-						end
-					end
-					
-					Signal2(function(Tbl)
-						-- upvalues: v52 (copy)
-						if Tbl.isDone then
-							return Tbl
-						else
-							local Copy = table.clone(Tbl)
-							v52(Copy)
-							
-							return Copy
-						end
-					end)
-					
-					return
-				end
-			end)
-			
-			return
-		end
-	end
-	
 	local function fireHandlers(Notification)
 		-- upvalues: t (copy)
 		for _, value in t do
@@ -198,45 +136,36 @@ return function(p1, RequestId, Cancel, p2, List)
 	end
 	
 	local _ = function(p3)
-		-- upvalues: FFlagBuildExperienceModelPickerData (upval), DecodeFundingErrorModule (upval), AcpProtocolModule (upval), Signal2 (copy), armAmbiguityTimerIfNeeded (copy)
+		-- upvalues: FFlagBuildExperienceModelPickerData (upval), DecodeFundingErrorModule (upval), FFlagBuildExperiencePromptFailureTelemetry (upval), Signal2 (copy)
 		if p3.error then
 			local Error = p3.error
 			
-			local function v56(p4)
-				-- upvalues: Error (copy), FFlagBuildExperienceModelPickerData (upval), DecodeFundingErrorModule (upval), AcpProtocolModule (upval)
+			local function v44(p4)
+				-- upvalues: Error (copy), FFlagBuildExperienceModelPickerData (upval), DecodeFundingErrorModule (upval), FFlagBuildExperiencePromptFailureTelemetry (upval)
 				p4.error = tostring(Error.message or "JSON-RPC error")
 				p4.errorCode = tonumber(Error.code)
 				
 				if FFlagBuildExperienceModelPickerData then
 					p4.fundingReason, p4.fundingDetails = DecodeFundingErrorModule(Error)
-					local Number: number? = tonumber(Error.code)
-					local ErrorCodes = AcpProtocolModule.ErrorCodes
-					
-					if Number ~= ErrorCodes.InvalidRequest and (Number ~= ErrorCodes.MethodNotFound and (Number ~= ErrorCodes.InvalidParams and (Number ~= ErrorCodes.PayloadTooLarge and (Number ~= ErrorCodes.Unauthorized and (Number ~= ErrorCodes.Forbidden and (Number ~= ErrorCodes.NotFound and (Number ~= ErrorCodes.Gone and Number ~= ErrorCodes.OutOfCredits))))))) then
-						p4.requestFailure = { kind = "rpc_error" }
-						
-						return
-					end
+				end
+				if FFlagBuildExperiencePromptFailureTelemetry then
+					p4.requestFailure = { kind = "rpc_error" }
 				end
 				p4.status = "failed"
 				p4.isDone = true
 			end
 			
 			Signal2(function(Tbl)
-				-- upvalues: v56 (copy)
+				-- upvalues: v44 (copy)
 				if Tbl.isDone then
 					return Tbl
 				else
 					local Copy = table.clone(Tbl)
-					v56(Copy)
+					v44(Copy)
 					
 					return Copy
 				end
 			end)
-			
-			if FFlagBuildExperienceModelPickerData then
-				armAmbiguityTimerIfNeeded()
-			end
 		end
 	end
 	
@@ -252,50 +181,42 @@ return function(p1, RequestId, Cancel, p2, List)
 		end
 	end
 	
-	local function applyTerminalUpdate(Update)
-		-- upvalues: Signal (copy), FFlagBuildExperienceModelPickerData (upval), Signal2 (copy), Count1 (ref), Flag (ref)
-		local IsIdle: boolean = Update.sessionUpdate == "state_change" and Update.state == "idle"
+	local _ = function(p3)
+		-- upvalues: Signal (copy), Signal2 (copy)
+		local IsIdle: boolean = p3.sessionUpdate == "state_change" and p3.state == "idle"
 		
-		if not IsIdle and Signal(false).status ~= "queued" and (not FFlagBuildExperienceModelPickerData or Signal(false).requestFailure == nil) then return end
-		local function v62(p3)
-			-- upvalues: FFlagBuildExperienceModelPickerData (upval), IsIdle (copy), Update (copy)
-			if FFlagBuildExperienceModelPickerData then
-				p3.requestFailure = nil
-				p3.isUnconfirmed = nil
-				p3.error = nil
-				p3.errorCode = nil
+		if IsIdle or Signal(false).status == "queued" then
+			local function v48(p4)
+				-- upvalues: IsIdle (copy), p3 (copy)
+				if p4.status == "queued" then
+					p4.status = "streaming"
+				end
+				if IsIdle then
+					local StopReason = if typeof(p3.stop_reason) == "string" then p3.stop_reason else "end_turn"
+					p4.stopReason = StopReason
+					p4.status = if StopReason == "cancelled" then "cancelled" else "succeeded"
+					p4.isDone = true
+				end
 			end
-			if p3.status == "queued" then
-				p3.status = "streaming"
-			end
-			if IsIdle then
-				local StopReason = if typeof(Update.stop_reason) == "string" then Update.stop_reason else "end_turn"
-				p3.stopReason = StopReason
-				p3.status = if StopReason == "cancelled" then "cancelled" else "succeeded"
-				p3.isDone = true
-			end
-		end
-		
-		Signal2(function(Tbl)
-			-- upvalues: v62 (copy)
-			if Tbl.isDone then
-				return Tbl
-			else
-				local Copy = table.clone(Tbl)
-				v62(Copy)
-				
-				return Copy
-			end
-		end)
-		
-		if FFlagBuildExperienceModelPickerData then
-			Count1 += 1
-			Flag = false
+			
+			Signal2(function(Tbl)
+				-- upvalues: v48 (copy)
+				if Tbl.isDone then
+					return Tbl
+				else
+					local Copy = table.clone(Tbl)
+					v48(Copy)
+					
+					return Copy
+				end
+			end)
+			
+			return
 		end
 	end
 	
 	local function dispatchFrame(p3, p4, Enabled): boolean
-		-- upvalues: Signal (copy), AcpProtocolModule (upval), FFlagBuildExperienceModelPickerData (upval), v3 (ref), t2 (copy), v1 (ref), v2 (ref), Total (ref), ExtractTurnIdResult (ref), TurnStateModule (upval), applyTerminalUpdate (copy), FFlagBuildExperiencePromptFailureTelemetry (upval), fireUpdateHandlers (copy), fireHandlers (copy), DecodeFundingErrorModule (upval), Signal2 (copy), armAmbiguityTimerIfNeeded (copy)
+		-- upvalues: Signal (copy), AcpProtocolModule (upval), FFlagBuildExperienceModelPickerData (upval), v3 (ref), t2 (copy), v1 (ref), v2 (ref), Total (ref), ExtractTurnIdResult (ref), TurnStateModule (upval), Signal2 (copy), FFlagBuildExperiencePromptFailureTelemetry (upval), fireUpdateHandlers (copy), fireHandlers (copy), DecodeFundingErrorModule (upval)
 		if Signal(false).isDone then
 			return false
 		end
@@ -347,7 +268,34 @@ return function(p1, RequestId, Cancel, p2, List)
 					if ExtractTurnIdResult == nil then
 						ExtractTurnIdResult = TurnStateModule.extractTurnId(Update)
 					end
-					applyTerminalUpdate(Update)
+					local IsIdle: boolean = Update.sessionUpdate == "state_change" and Update.state == "idle"
+					
+					if IsIdle or Signal(false).status == "queued" then
+						local function v57(p5)
+							-- upvalues: IsIdle (copy), Update (copy)
+							if p5.status == "queued" then
+								p5.status = "streaming"
+							end
+							if IsIdle then
+								local StopReason = if typeof(Update.stop_reason) == "string" then Update.stop_reason else "end_turn"
+								p5.stopReason = StopReason
+								p5.status = if StopReason == "cancelled" then "cancelled" else "succeeded"
+								p5.isDone = true
+							end
+						end
+						
+						Signal2(function(Tbl)
+							-- upvalues: v57 (copy)
+							if Tbl.isDone then
+								return Tbl
+							else
+								local Copy = table.clone(Tbl)
+								v57(Copy)
+								
+								return Copy
+							end
+						end)
+					end
 					HasError = Flag
 					
 					if FFlagBuildExperiencePromptFailureTelemetry and Flag then
@@ -366,41 +314,32 @@ return function(p1, RequestId, Cancel, p2, List)
 			if Response.error then
 				local Error = Response.error
 				
-				local function v72(p5)
-					-- upvalues: Error (copy), FFlagBuildExperienceModelPickerData (upval), DecodeFundingErrorModule (upval), AcpProtocolModule (upval)
+				local function v60(p5)
+					-- upvalues: Error (copy), FFlagBuildExperienceModelPickerData (upval), DecodeFundingErrorModule (upval), FFlagBuildExperiencePromptFailureTelemetry (upval)
 					p5.error = tostring(Error.message or "JSON-RPC error")
 					p5.errorCode = tonumber(Error.code)
 					
 					if FFlagBuildExperienceModelPickerData then
 						p5.fundingReason, p5.fundingDetails = DecodeFundingErrorModule(Error)
-						local Number: number? = tonumber(Error.code)
-						local ErrorCodes = AcpProtocolModule.ErrorCodes
-						
-						if Number ~= ErrorCodes.InvalidRequest and (Number ~= ErrorCodes.MethodNotFound and (Number ~= ErrorCodes.InvalidParams and (Number ~= ErrorCodes.PayloadTooLarge and (Number ~= ErrorCodes.Unauthorized and (Number ~= ErrorCodes.Forbidden and (Number ~= ErrorCodes.NotFound and (Number ~= ErrorCodes.Gone and Number ~= ErrorCodes.OutOfCredits))))))) then
-							p5.requestFailure = { kind = "rpc_error" }
-							
-							return
-						end
+					end
+					if FFlagBuildExperiencePromptFailureTelemetry then
+						p5.requestFailure = { kind = "rpc_error" }
 					end
 					p5.status = "failed"
 					p5.isDone = true
 				end
 				
 				Signal2(function(Tbl)
-					-- upvalues: v72 (copy)
+					-- upvalues: v60 (copy)
 					if Tbl.isDone then
 						return Tbl
 					else
 						local Copy = table.clone(Tbl)
-						v72(Copy)
+						v60(Copy)
 						
 						return Copy
 					end
 				end)
-				
-				if FFlagBuildExperienceModelPickerData then
-					armAmbiguityTimerIfNeeded()
-				end
 			end
 			HasError = p3.response.error ~= nil
 		end
@@ -408,9 +347,9 @@ return function(p1, RequestId, Cancel, p2, List)
 	end
 	
 	local function fail(p3, ErrorCode, RequestFailure, FundingReason, FundingDetails)
-		-- upvalues: FFlagBuildExperienceModelPickerData (upval), FFlagBuildExperiencePromptFailureTelemetry (upval), AcpProtocolModule (upval), Signal2 (copy), armAmbiguityTimerIfNeeded (copy)
-		local function v73(p4)
-			-- upvalues: p3 (copy), ErrorCode (copy), FFlagBuildExperienceModelPickerData (upval), FundingReason (copy), FundingDetails (copy), FFlagBuildExperiencePromptFailureTelemetry (upval), RequestFailure (copy), AcpProtocolModule (upval)
+		-- upvalues: FFlagBuildExperienceModelPickerData (upval), FFlagBuildExperiencePromptFailureTelemetry (upval), Signal2 (copy)
+		local function v61(p4)
+			-- upvalues: p3 (copy), ErrorCode (copy), FFlagBuildExperienceModelPickerData (upval), FundingReason (copy), FundingDetails (copy), FFlagBuildExperiencePromptFailureTelemetry (upval), RequestFailure (copy)
 			p4.error = p3
 			p4.errorCode = ErrorCode
 			
@@ -418,63 +357,41 @@ return function(p1, RequestId, Cancel, p2, List)
 				p4.fundingReason = FundingReason
 				p4.fundingDetails = FundingDetails
 			end
-			if FFlagBuildExperiencePromptFailureTelemetry or FFlagBuildExperienceModelPickerData then
+			if FFlagBuildExperiencePromptFailureTelemetry then
 				p4.requestFailure = RequestFailure
-			end
-			if FFlagBuildExperienceModelPickerData then
-				local ErrorCodes = AcpProtocolModule.ErrorCodes
-				
-				if ErrorCode ~= ErrorCodes.InvalidRequest and (ErrorCode ~= ErrorCodes.MethodNotFound and (ErrorCode ~= ErrorCodes.InvalidParams and (ErrorCode ~= ErrorCodes.PayloadTooLarge and (ErrorCode ~= ErrorCodes.Unauthorized and (ErrorCode ~= ErrorCodes.Forbidden and (ErrorCode ~= ErrorCodes.NotFound and (ErrorCode ~= ErrorCodes.Gone and ErrorCode ~= ErrorCodes.OutOfCredits))))))) then
-					local v4 = nil
-					if RequestFailure == nil or RequestFailure.kind ~= "http" then
-						v4 = false
-					else
-						local HttpStatusCode: number = RequestFailure.httpStatusCode
-						v4 = HttpStatusCode ~= nil and (HttpStatusCode >= 400 and (HttpStatusCode < 500 and (HttpStatusCode ~= 408 and (HttpStatusCode ~= 409 and HttpStatusCode ~= 429))))
-					end
-					if not v4 then
-						p4.requestFailure = RequestFailure or { kind = "unknown" }
-						
-						return
-					end
-				end
 			end
 			p4.status = "failed"
 			p4.isDone = true
 		end
 		
 		Signal2(function(Tbl)
-			-- upvalues: v73 (copy)
+			-- upvalues: v61 (copy)
 			if Tbl.isDone then
 				return Tbl
 			else
 				local Copy = table.clone(Tbl)
-				v73(Copy)
+				v61(Copy)
 				
 				return Copy
 			end
 		end)
-		
-		if FFlagBuildExperienceModelPickerData then
-			armAmbiguityTimerIfNeeded()
-		end
 	end
 	
 	local function markCancelled()
 		-- upvalues: Signal2 (copy)
-		local function v77(p3)
+		local function v62(p3)
 			p3.status = "cancelled"
 			p3.stopReason = "cancelled"
 			p3.isDone = true
 		end
 		
 		Signal2(function(Tbl)
-			-- upvalues: v77 (copy)
+			-- upvalues: v62 (copy)
 			if Tbl.isDone then
 				return Tbl
 			else
 				local Copy = table.clone(Tbl)
-				v77(Copy)
+				v62(Copy)
 				
 				return Copy
 			end

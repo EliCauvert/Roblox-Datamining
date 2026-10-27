@@ -5,16 +5,18 @@ local StatusCodes = require(Parent.Http).StatusCodes
 local PromiseModule = require(Parent.Promise)
 local CreateSingleEntityResolverModule = require(DataHydration.createSingleEntityResolver)
 local FFlagDataHydrationPreserveIncompleteCatalogResultsModule = require(DataHydration.Flags.FFlagDataHydrationPreserveIncompleteCatalogResults)
+local FFlagBuildExperienceMonetizationManageKindsModule = require(DataHydration.Flags.FFlagBuildExperienceMonetizationManageKinds)
 local DataHydrationUtilsModule = require(DataHydration.DataHydrationUtils)
 local IncompleteListCodeModule = require(script.Parent.incompleteListCode)
 local FetchGamePassConfigModule = require(script.Parent.fetchGamePassConfig)
+local IsManagedPricingEnabledModule = require(script.Parent.isManagedPricingEnabled)
 local _ = require(script.Parent.GamePassConfigTypes)
 local Frozen = table.freeze({
 	errorMessage = "The local user changed while the Game Pass request was running"
 })
 
 return function(p1)
-	-- upvalues: DataHydrationUtilsModule (copy), FetchGamePassConfigModule (copy), FFlagDataHydrationPreserveIncompleteCatalogResultsModule (copy), IncompleteListCodeModule (copy), PromiseModule (copy), CreateSingleEntityResolverModule (copy), Frozen (copy), StatusCodes (copy)
+	-- upvalues: DataHydrationUtilsModule (copy), FetchGamePassConfigModule (copy), FFlagDataHydrationPreserveIncompleteCatalogResultsModule (copy), IncompleteListCodeModule (copy), PromiseModule (copy), CreateSingleEntityResolverModule (copy), Frozen (copy), FFlagBuildExperienceMonetizationManageKindsModule (copy), StatusCodes (copy), IsManagedPricingEnabledModule (copy)
 	local P0 = p1 or {}
 	local config = { network = P0.network, baseUrl = P0.baseUrl }
 	local GetLocalPlayerUserId = P0.getLocalPlayerUserId or DataHydrationUtilsModule.getLocalPlayerUserId
@@ -86,8 +88,13 @@ return function(p1)
 	end
 	
 	local _ = function(p2)
-		-- upvalues: Flag (ref), SingleEntityResolverModule (copy)
+		-- upvalues: Flag (ref), FFlagBuildExperienceMonetizationManageKindsModule (upval), SingleEntityResolverModule (copy)
 		if not Flag then
+			if FFlagBuildExperienceMonetizationManageKindsModule then
+				SingleEntityResolverModule.refetch(p2)
+				
+				return
+			end
 			SingleEntityResolverModule.clear()
 			SingleEntityResolverModule.fetch(p2)
 		end
@@ -162,28 +169,37 @@ return function(p1)
 	end
 	
 	local function reconcileMutation(p2, Promise)
-		-- upvalues: Flag (ref), SingleEntityResolverModule (copy), PromiseModule (upval)
+		-- upvalues: Flag (ref), FFlagBuildExperienceMonetizationManageKindsModule (upval), SingleEntityResolverModule (copy), PromiseModule (upval)
 		return Promise:andThen(function(Result)
-			-- upvalues: p2 (copy), Flag (upval), SingleEntityResolverModule (upval)
+			-- upvalues: p2 (copy), Flag (upval), FFlagBuildExperienceMonetizationManageKindsModule (upval), SingleEntityResolverModule (upval)
 			if not Flag then
+				if FFlagBuildExperienceMonetizationManageKindsModule then
+					SingleEntityResolverModule.refetch(p2)
+					
+					return Result
+				end
 				SingleEntityResolverModule.clear()
 				SingleEntityResolverModule.fetch(p2)
 			end
 			return Result
 		end, function(p3)
-			-- upvalues: p2 (copy), Flag (upval), SingleEntityResolverModule (upval), PromiseModule (upval)
+			-- upvalues: p2 (copy), Flag (upval), FFlagBuildExperienceMonetizationManageKindsModule (upval), SingleEntityResolverModule (upval), PromiseModule (upval)
 			if typeof(p3) == "table" and p3.outcome == "unverified" and not Flag then
-				SingleEntityResolverModule.clear()
-				SingleEntityResolverModule.fetch(p2)
+				if FFlagBuildExperienceMonetizationManageKindsModule then
+					SingleEntityResolverModule.refetch(p2)
+				else
+					SingleEntityResolverModule.clear()
+					SingleEntityResolverModule.fetch(p2)
+				end
 			end
 			return PromiseModule.reject(p3)
 		end)
 	end
 	
-	local function readBackMutation(p2, p3, GamePassId, IconAssetId, IconAssetId1, IsForSale, p4)
-		-- upvalues: tokenBoundGet (copy), PromiseModule (upval), Frozen (upval), Flag (ref), Generation (ref), GetLocalPlayerUserId (copy)
+	local function readBackMutation(p2, p3, GamePassId, IconAssetId, IconAssetId1, IsForSale, p4, IsAcceptModeratedText)
+		-- upvalues: tokenBoundGet (copy), PromiseModule (upval), IsManagedPricingEnabledModule (upval), Frozen (upval), Flag (ref), Generation (ref), GetLocalPlayerUserId (copy)
 		return tokenBoundGet(p2, p3, GamePassId):andThen(function(Result)
-			-- upvalues: IconAssetId (copy), PromiseModule (upval), IconAssetId1 (copy), IsForSale (copy), p4 (copy)
+			-- upvalues: IconAssetId (copy), PromiseModule (upval), IconAssetId1 (copy), IsForSale (copy), p4 (copy), IsAcceptModeratedText (copy), IsManagedPricingEnabledModule (upval)
 			if IconAssetId ~= nil and Result.iconAssetId ~= IconAssetId then
 				return PromiseModule.reject({
 					outcome = "unverified",
@@ -209,8 +225,8 @@ return function(p1)
 				})
 			end
 			if p4 ~= nil then
-				for _, value in { "name", "description", "isManagedPricingEnabled" } do
-					if p4[value] ~= nil and Result[value] ~= p4[value] then
+				for _, value in { "name", "description" } do
+					if not IsAcceptModeratedText and p4[value] ~= nil and Result[value] ~= p4[value] then
 						local Message: string = `the stored {value} does not match the request`
 						
 						return PromiseModule.reject({
@@ -220,6 +236,14 @@ return function(p1)
 							gamePass = Result
 						})
 					end
+				end
+				if p4.isManagedPricingEnabled ~= nil and IsManagedPricingEnabledModule(Result) ~= p4.isManagedPricingEnabled then
+					return PromiseModule.reject({
+						outcome = "unverified",
+						cause = nil,
+						errorMessage = (if Result == nil then "The Game Pass request could not be verified: the stored isManagedPricingEnabled does not match the request. " else `Game pass {Result.gamePassId} could not be verified: the stored isManagedPricingEnabled does not match the request. `) .. "Inspect the existing game pass before retrying. Do not create another game pass.",
+						gamePass = Result
+					})
 				end
 				local PriceInformation = Result.priceInformation
 				
@@ -257,7 +281,7 @@ return function(p1)
 		end)
 	end
 	
-	local function update(p5, GamePassId, p6)
+	local function update(p5, GamePassId, p6, p7)
 		-- upvalues: GetLocalPlayerUserId (copy), Generation (ref), PromiseModule (upval), runMutation (copy), FetchGamePassConfigModule (upval), config (copy), readBackMutation (copy), tokenBoundGet (copy), Frozen (upval), Flag (ref), failedError (copy), reconcileMutation (copy)
 		local LocalPlayerUserId = GetLocalPlayerUserId()
 		local v1 = nil
@@ -279,13 +303,13 @@ return function(p1)
 			return PromiseModule.reject(config1)
 		else
 			local function mutate(IconAssetId)
-				-- upvalues: runMutation (upval), v1 (copy), GamePassId (copy), FetchGamePassConfigModule (upval), p5 (copy), p6 (copy), config (upval), readBackMutation (upval)
+				-- upvalues: runMutation (upval), v1 (copy), GamePassId (copy), FetchGamePassConfigModule (upval), p5 (copy), p6 (copy), config (upval), readBackMutation (upval), p7 (copy)
 				return runMutation(v1, GamePassId, function()
 					-- upvalues: FetchGamePassConfigModule (upval), p5 (upval), GamePassId (upval), p6 (upval), config (upval)
 					return FetchGamePassConfigModule.update(p5, GamePassId, p6, config)
 				end):andThen(function()
-					-- upvalues: readBackMutation (upval), v1 (upval), p5 (upval), GamePassId (upval), IconAssetId (copy), p6 (upval)
-					return readBackMutation(v1, p5, GamePassId, nil, IconAssetId, p6.isForSale, p6)
+					-- upvalues: readBackMutation (upval), v1 (upval), p5 (upval), GamePassId (upval), IconAssetId (copy), p6 (upval), p7 (upval)
+					return readBackMutation(v1, p5, GamePassId, nil, IconAssetId, p6.isForSale, p6, p7 ~= nil and p7.acceptModeratedText == true)
 				end)
 			end
 			
@@ -310,6 +334,7 @@ return function(p1)
 	return {
 		getGamePasses = SingleEntityResolverModule.get,
 		fetchGamePasses = SingleEntityResolverModule.fetch,
+		refetchGamePasses = SingleEntityResolverModule.refetch,
 		getAndFetchGamePasses = SingleEntityResolverModule.getAndFetch,
 		getAccountResetGeneration = SingleEntityResolverModule.getAccountResetGeneration,
 		list = function(p5)

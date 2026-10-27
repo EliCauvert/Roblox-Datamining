@@ -20,6 +20,7 @@ local UseRefFunction = ReactModule.useRef
 local UseIsGuiInChatVisibleModule = require(AppChat.Hooks.useIsGuiInChatVisible)
 local UseRecordModalSeenWithDelayModule = require(AppChat.Hooks.useRecordModalSeenWithDelay)
 local ChatLandingModalTelemetryModule = require(script.Parent.ChatLandingModalTelemetry)
+local ChatLandingTelemetryEventsModule = require(AppChat.Components.ChatLanding.ChatLandingTelemetryEvents)
 local ChatLandingTelemetryLayerModule = require(AppChat.Telemetry.Layers.ChatLandingTelemetryLayer)
 local ModalTelemetryModule = require(AppChat.Components.ModalTelemetry)
 local UseTelemetryModule = require(AppChat.Telemetry.useTelemetry)
@@ -38,6 +39,7 @@ local OpenTcLearnMoreLinkModule = require(AppChat.Conversations.Thunks.OpenTcLea
 local ModalConfigurationModule = require(AppChat.Models.ModalConfiguration)
 local AppChatFAEBannerModule = require(AppChat.Components.FaeBanner.AppChatFAEBanner)
 local FIntAppChatModalSeenImpressionDelayMsModule = require(AppChat.Flags.FIntAppChatModalSeenImpressionDelayMs)
+local FFlagAppChatLandingModalTelemetryModule = require(AppChat.Flags.FFlagAppChatLandingModalTelemetry)
 local FFlagDebugAppChatFaeModule = require(AppChat.Flags.FFlagDebugAppChatFae)
 local FStringCanAccessTrustedContactsAmpFeature = require(Parent.SharedFlags).FStringCanAccessTrustedContactsAmpFeature
 local FStringCanAccessTrustedContactsAmpNameSpace = require(Parent.SharedFlags).FStringCanAccessTrustedContactsAmpNameSpace
@@ -58,7 +60,7 @@ local config1 = {
 }
 
 return ReactModule.memo(function(_)
-	-- upvalues: UseDispatchFunction (copy), UseAnalyticsModule (copy), UseContextFunction (copy), LuaAppNavigationContextModule (copy), UseNavigationFunction (copy), UseStateFunction (copy), UseIsInExperienceModule (copy), UseSelectorFunction (copy), ModalConfigurationModule (copy), GetDeepValue2Module (copy), config1 (copy), config (copy), ChatLandingModalVariant (copy), UseTelemetryModule (copy), ChatLandingTelemetryLayerModule (copy), UseEffectOnMountFunction (copy), UseEffectFunction (copy), ChatLandingModalTelemetryModule (copy), UseCallbackFunction (copy), AppPage (copy), UnfilteredThreadsAMPFeatureNameModule (copy), FFlagSignalsNavP3Dispatch (copy), NavigationCommands (copy), NavigateBackFunction (copy), AccessResponseEnum (copy), RefreshAllUnfilteredThreadsDetailsModule (copy), NavigateDownFunction (copy), HttpService (copy), FStringCanAccessTrustedContactsAmpFeature (copy), FStringCanAccessTrustedContactsAmpNameSpace (copy), ModalTelemetryModule (copy), FFlagDebugAppChatFaeModule (copy), FFlagDebugAEGIS1AppChatBannerModule (copy), OpenTcLearnMoreLinkModule (copy), AppChatNetworkingModule (copy), CryoModule (copy), ReactModule (copy), UseRefFunction (copy), UseIsGuiInChatVisibleModule (copy), UseRecordModalSeenWithDelayModule (copy), FIntAppChatModalSeenImpressionDelayMsModule (copy), FFlagTestDeviceForFAEUpsell (copy), DeviceMeetsRequirementsForFAEFunction (copy), AppChatFAEBannerModule (copy), ChatLandingModalModule (copy), ButtonEnum (copy), GetAgeVerifiedChangedSignalFunction (copy)
+	-- upvalues: UseDispatchFunction (copy), UseAnalyticsModule (copy), UseContextFunction (copy), LuaAppNavigationContextModule (copy), UseNavigationFunction (copy), UseStateFunction (copy), UseIsInExperienceModule (copy), UseSelectorFunction (copy), ModalConfigurationModule (copy), GetDeepValue2Module (copy), config1 (copy), config (copy), ChatLandingModalVariant (copy), UseTelemetryModule (copy), ChatLandingTelemetryLayerModule (copy), UseEffectOnMountFunction (copy), FFlagAppChatLandingModalTelemetryModule (copy), ChatLandingTelemetryEventsModule (copy), UseEffectFunction (copy), ChatLandingModalTelemetryModule (copy), UseCallbackFunction (copy), AppPage (copy), UnfilteredThreadsAMPFeatureNameModule (copy), FFlagSignalsNavP3Dispatch (copy), NavigationCommands (copy), NavigateBackFunction (copy), AccessResponseEnum (copy), RefreshAllUnfilteredThreadsDetailsModule (copy), NavigateDownFunction (copy), HttpService (copy), FStringCanAccessTrustedContactsAmpFeature (copy), FStringCanAccessTrustedContactsAmpNameSpace (copy), ModalTelemetryModule (copy), FFlagDebugAppChatFaeModule (copy), FFlagDebugAEGIS1AppChatBannerModule (copy), OpenTcLearnMoreLinkModule (copy), AppChatNetworkingModule (copy), CryoModule (copy), ReactModule (copy), UseRefFunction (copy), UseIsGuiInChatVisibleModule (copy), UseRecordModalSeenWithDelayModule (copy), FIntAppChatModalSeenImpressionDelayMsModule (copy), FFlagTestDeviceForFAEUpsell (copy), DeviceMeetsRequirementsForFAEFunction (copy), AppChatFAEBannerModule (copy), ChatLandingModalModule (copy), ButtonEnum (copy), GetAgeVerifiedChangedSignalFunction (copy)
 	local UseDispatchResult = UseDispatchFunction()
 	local UseAnalyticsModuleResult = UseAnalyticsModule()
 	local UseContextResult = UseContextFunction(LuaAppNavigationContextModule)
@@ -81,9 +83,12 @@ return ReactModule.memo(function(_)
 	local Inverted: boolean = if config[ModalVariant] then not UseStateResult[ModalVariant] else ModalVariant == ChatLandingModalVariant.ChatLandingAgeVerifiedCommsUpsellModal and not UseStateResult[ModalVariant]
 	local UseTelemetryModuleResult = UseTelemetryModule(ChatLandingTelemetryLayerModule.Context)
 	UseEffectOnMountFunction(function()
-		-- upvalues: UseAnalyticsModuleResult (copy), Entry (copy), Inverted (copy)
+		-- upvalues: UseAnalyticsModuleResult (copy), Entry (copy), Inverted (copy), FFlagAppChatLandingModalTelemetryModule (upval), UseTelemetryModuleResult (copy), ChatLandingTelemetryEventsModule (upval)
 		if UseAnalyticsModuleResult and Entry and Inverted then
 			UseAnalyticsModuleResult.fireAnalyticsEvent(`{Entry}Rendered`)
+		end
+		if FFlagAppChatLandingModalTelemetryModule and Entry and Inverted then
+			UseTelemetryModuleResult.emit(ChatLandingTelemetryEventsModule[`{Entry}Rendered`], {})
 		end
 	end)
 	UseEffectFunction(function()
@@ -96,16 +101,19 @@ return ReactModule.memo(function(_)
 		end
 	end, { ModalVariant, Inverted })
 	local UseCallbackResult = UseCallbackFunction(function()
-		-- upvalues: UseAnalyticsModuleResult (copy), Entry (copy), AppPage (upval), UnfilteredThreadsAMPFeatureNameModule (upval), FFlagSignalsNavP3Dispatch (upval), NavigationCommands (upval), UseDispatchResult (copy), NavigateBackFunction (upval), AccessResponseEnum (upval), RefreshAllUnfilteredThreadsDetailsModule (upval), UseIsInExperienceModuleResult (copy), NavigateDownFunction (upval)
+		-- upvalues: UseAnalyticsModuleResult (copy), Entry (copy), FFlagAppChatLandingModalTelemetryModule (upval), UseTelemetryModuleResult (copy), ChatLandingTelemetryEventsModule (upval), AppPage (upval), UnfilteredThreadsAMPFeatureNameModule (upval), FFlagSignalsNavP3Dispatch (upval), NavigationCommands (upval), UseDispatchResult (copy), NavigateBackFunction (upval), AccessResponseEnum (upval), RefreshAllUnfilteredThreadsDetailsModule (upval), UseIsInExperienceModuleResult (copy), NavigateDownFunction (upval)
 		if UseAnalyticsModuleResult and Entry then
 			UseAnalyticsModuleResult.fireAnalyticsEvent(`{Entry}ContinueClicked`)
+		end
+		if FFlagAppChatLandingModalTelemetryModule and Entry then
+			UseTelemetryModuleResult.emit(ChatLandingTelemetryEventsModule[`{Entry}ContinueClicked`], {})
 		end
 		local config = {
 			name = AppPage.AmpWizardContainer,
 			extraProps = {
 				featureName = UnfilteredThreadsAMPFeatureNameModule,
 				completionCallback = function(Granted, _)
-					-- upvalues: FFlagSignalsNavP3Dispatch (upval), NavigationCommands (upval), UseDispatchResult (upval), NavigateBackFunction (upval), AccessResponseEnum (upval), UseAnalyticsModuleResult (upval), Entry (upval), RefreshAllUnfilteredThreadsDetailsModule (upval), UseIsInExperienceModuleResult (upval)
+					-- upvalues: FFlagSignalsNavP3Dispatch (upval), NavigationCommands (upval), UseDispatchResult (upval), NavigateBackFunction (upval), AccessResponseEnum (upval), UseAnalyticsModuleResult (upval), Entry (upval), FFlagAppChatLandingModalTelemetryModule (upval), UseTelemetryModuleResult (upval), ChatLandingTelemetryEventsModule (upval), RefreshAllUnfilteredThreadsDetailsModule (upval), UseIsInExperienceModuleResult (upval)
 					if FFlagSignalsNavP3Dispatch then
 						NavigationCommands.back(true)
 					else
@@ -115,11 +123,19 @@ return ReactModule.memo(function(_)
 						if UseAnalyticsModuleResult and Entry then
 							UseAnalyticsModuleResult.fireAnalyticsEvent(`{Entry}Succeeded`)
 						end
+						if FFlagAppChatLandingModalTelemetryModule and Entry then
+							UseTelemetryModuleResult.emit(ChatLandingTelemetryEventsModule[`{Entry}Succeeded`], {})
+						end
 						UseDispatchResult(RefreshAllUnfilteredThreadsDetailsModule(nil, UseIsInExperienceModuleResult))
 						
 						return
-					elseif UseAnalyticsModuleResult and Entry then
-						UseAnalyticsModuleResult.fireAnalyticsEvent(`{Entry}Failed`)
+					else
+						if UseAnalyticsModuleResult and Entry then
+							UseAnalyticsModuleResult.fireAnalyticsEvent(`{Entry}Failed`)
+						end
+						if FFlagAppChatLandingModalTelemetryModule and Entry then
+							UseTelemetryModuleResult.emit(ChatLandingTelemetryEventsModule[`{Entry}Failed`], {})
+						end
 					end
 				end
 			}
@@ -132,7 +148,13 @@ return ReactModule.memo(function(_)
 		else
 			UseDispatchResult(NavigateDownFunction(config))
 		end
-	end, { UseDispatchResult, UseAnalyticsModuleResult, Entry })
+	end, {
+		UseDispatchResult,
+		UseIsInExperienceModuleResult,
+		UseAnalyticsModuleResult,
+		Entry,
+		if FFlagAppChatLandingModalTelemetryModule then UseTelemetryModuleResult else false
+	})
 	local UseCallbackResult1 = UseCallbackFunction(function()
 		-- upvalues: HttpService (upval), UseTelemetryModuleResult (copy), ChatLandingModalTelemetryModule (upval), AppPage (upval), FStringCanAccessTrustedContactsAmpFeature (upval), FStringCanAccessTrustedContactsAmpNameSpace (upval), FFlagSignalsNavP3Dispatch (upval), NavigationCommands (upval), UseDispatchResult (copy), NavigateBackFunction (upval), AccessResponseEnum (upval), ModalVariant (copy), ModalTelemetryModule (upval), RefreshAllUnfilteredThreadsDetailsModule (upval), UseIsInExperienceModuleResult (copy), FFlagDebugAppChatFaeModule (upval), FFlagDebugAEGIS1AppChatBannerModule (upval), NavigateDownFunction (upval)
 		local Guid = HttpService:GenerateGUID(false)
@@ -189,25 +211,32 @@ return ReactModule.memo(function(_)
 		ModalVariant
 	})
 	local UseCallbackResult2 = UseCallbackFunction(function()
-		-- upvalues: UseAnalyticsModuleResult (copy), Entry (copy), UseNavigationResult (copy), UseContextResult (copy)
+		-- upvalues: UseAnalyticsModuleResult (copy), Entry (copy), FFlagAppChatLandingModalTelemetryModule (upval), UseTelemetryModuleResult (copy), ChatLandingTelemetryEventsModule (upval), UseNavigationResult (copy), UseContextResult (copy)
 		if UseAnalyticsModuleResult and Entry then
 			UseAnalyticsModuleResult.fireAnalyticsEvent(`{Entry}LearnMoreClicked`)
+		end
+		if FFlagAppChatLandingModalTelemetryModule and Entry then
+			UseTelemetryModuleResult.emit(ChatLandingTelemetryEventsModule[`{Entry}LearnMoreClicked`], {})
 		end
 		UseContextResult.navigateToUnfilteredThreadsLearnMore(if UseNavigationResult then UseNavigationResult.navigate else nil)
 	end, {
 		UseContextResult,
 		UseAnalyticsModuleResult,
 		UseNavigationResult,
-		Entry
+		Entry,
+		if FFlagAppChatLandingModalTelemetryModule then UseTelemetryModuleResult else false
 	})
 	local UseCallbackResult3 = UseCallbackFunction(function()
 		-- upvalues: UseDispatchResult (copy), OpenTcLearnMoreLinkModule (upval)
 		UseDispatchResult(OpenTcLearnMoreLinkModule())
 	end, { UseDispatchResult })
 	local UseCallbackResult4 = UseCallbackFunction(function()
-		-- upvalues: UseAnalyticsModuleResult (copy), Entry (copy), ModalVariant (copy), ChatLandingModalVariant (upval), UseTelemetryModuleResult (copy), ChatLandingModalTelemetryModule (upval), HttpService (upval), ModalTelemetryModule (upval), UseDispatchResult (copy), AppChatNetworkingModule (upval), ModalLayoutDismissedRecordAction (copy), ModalLayoutId (copy), FFlagDebugAppChatFaeModule (upval), FFlagDebugAEGIS1AppChatBannerModule (upval), UseStateResult2 (copy), CryoModule (upval), UseStateResult (copy)
+		-- upvalues: UseAnalyticsModuleResult (copy), Entry (copy), FFlagAppChatLandingModalTelemetryModule (upval), UseTelemetryModuleResult (copy), ChatLandingTelemetryEventsModule (upval), ModalVariant (copy), ChatLandingModalVariant (upval), ChatLandingModalTelemetryModule (upval), HttpService (upval), ModalTelemetryModule (upval), UseDispatchResult (copy), AppChatNetworkingModule (upval), ModalLayoutDismissedRecordAction (copy), ModalLayoutId (copy), FFlagDebugAppChatFaeModule (upval), FFlagDebugAEGIS1AppChatBannerModule (upval), UseStateResult2 (copy), CryoModule (upval), UseStateResult (copy)
 		if UseAnalyticsModuleResult and Entry then
 			UseAnalyticsModuleResult.fireAnalyticsEvent(`{Entry}Dismissed`)
+		end
+		if FFlagAppChatLandingModalTelemetryModule and Entry then
+			UseTelemetryModuleResult.emit(ChatLandingTelemetryEventsModule[`{Entry}Dismissed`], {})
 		end
 		if ModalVariant == ChatLandingModalVariant.AgeAssuranceUpsell then
 			UseTelemetryModuleResult.emit(ChatLandingModalTelemetryModule.Events.TelemetryFaeButtonClick, {

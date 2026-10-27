@@ -2182,6 +2182,8 @@ Feature.Build.Description.PromoteGamePaid,"Stwórz reklamę, aby zaprezentować 
 Feature.Build.Description.PromoteGameWithAdCampaign,"Zwiększ liczbę odbiorców dzięki {durationDays}-dniowej kampanii reklamowej i spraw, aby Twoja gra została zauważona."
 Feature.Build.Description.RaiseLimitOrWait,"Zwiększ swój dzienny limit Robuxów, aby kontynuować tworzenie, lub poczekaj, aż jutro się zresetuje."
 Feature.Build.Description.RatingAgreement,"Publikując, potwierdzasz, że ta ocena treści jest prawidłowa."
+Feature.Build.Description.RequiredRobuxForAdvanced,"Potrzebujesz co najmniej {ROBUX} Robuxów, aby dalej tworzyć przy użyciu modelu zaawansowanego. Możesz też wrócić do ustawienia domyślnego lub poczekać, aż zresetują się bezpłatne użycia."
+Feature.Build.Description.RequiredRobuxForDefault,"Potrzebujesz co najmniej {ROBUX} Robuxów, aby kontynuować tworzenie, lub możesz zaczekać, aż zresetują się bezpłatne użycia."
 Feature.Build.Description.RestoreLatest,Ta wersja stanie się Twoją najnowszą opublikowaną wersją.
 Feature.Build.Description.RevertToVersion,"Potwierdź, aby cofnąć ostatnią zmianę i wrócić do wersji {VERSION}."
 Feature.Build.Description.ShareLatest,Udostępnij informacje dotyczące zmian w najnowszej wersji.
@@ -2247,6 +2249,7 @@ Feature.Build.Label.DeveloperProductDescription,Opis: {DESCRIPTION}
 Feature.Build.Label.DeveloperProductName,Nazwa: „{NAME}”
 Feature.Build.Label.DeveloperProductPrice,Cena w Robuxach: {PRICE}
 Feature.Build.Label.DeveloperProductPriceUnavailable,?
+Feature.Build.Label.DeveloperProducts,Produkty deweloperskie
 Feature.Build.Label.Done,
 Feature.Build.Label.EasyPerformanceReport,Prosty i zrozumiały raport dotyczący skuteczności
 Feature.Build.Label.Error,
@@ -2428,6 +2431,7 @@ Feature.Build.Message.BuildBusy,Funkcja Buduj jest zajęta. Odczekaj chwilę i s
 Feature.Build.Message.BuildConnectFailed,Nie udało się połączyć z funkcją Buduj. Spróbuj ponownie.
 Feature.Build.Message.BuildInternalError,Wystąpił problem z funkcją Buduj. Spróbuj ponownie.
 Feature.Build.Message.BuildResponseFailed,Funkcja Buduj nie odpowiada. Spróbuj ponownie.
+Feature.Build.Message.BuildSendUnconfirmed,Funkcji Buduj nie udało się potwierdzić wysłania Twojej wiadomości.
 Feature.Build.Message.BuildStillWorking,"Pracujemy nad tym. W międzyczasie możesz opuścić aplikację, grać na platformie Roblox lub rozpocząć inny projekt."
 Feature.Build.Message.BuildStopped,Zatrzymano funkcję Buduj.
 Feature.Build.Message.BuildTakingLonger,To trwa dłużej niż zwykle. Możesz poczekać lub zacząć robić coś innego.
@@ -2457,6 +2461,7 @@ Feature.Build.Message.NoAssetsFound,Nie znaleziono zasobów.
 Feature.Build.Message.NoCapturesAvailable,Brak przechwyconych elementów
 Feature.Build.Message.NoDescriptionProvided,Brak opisu.
 Feature.Build.Message.NoFriendsToAdd,"Nie masz jeszcze żadnych znajomych, których możesz zaprosić. Najpierw znajdź osoby, z którymi możesz się połączyć na Robloxie."
+Feature.Build.Message.NoGamesYet,Nie ma jeszcze gier.
 Feature.Build.Message.NoResults,
 Feature.Build.Message.NoSearchResultsFound,Nie znaleziono wyników wyszukiwania
 Feature.Build.Message.NoVersionHistory,Nie ma jeszcze historii wersji.
@@ -2532,7 +2537,9 @@ Feature.Build.Title.GameCreationDone,Ukończono tworzenie gry
 Feature.Build.Title.GamePass,Przepustka
 Feature.Build.Title.GenericError,
 Feature.Build.Title.GetUsers,Pozyskaj użytkowników
+Feature.Build.Title.InsufficientRobuxForModel,Masz za mało Robuxów
 Feature.Build.Title.ManagedPricingAcknowledgement,Włączyć zarządzane ceny?
+Feature.Build.Title.Monetization,Monetyzacja
 Feature.Build.Title.NoMonetizationProducts,Zacznij zarabiać w swojej grze
 Feature.Build.Title.NoRobuxForUsage,Nie masz już Robuxów na użycia funkcji Buduj
 Feature.Build.Title.PickCampaign,Wybierz czas trwania
@@ -3865,6 +3872,7 @@ Feature.Moments.Title.LeaveMomentCreation,Wyjść z tworzenia momentu?
 Feature.Moments.Title.MomentRemoved,
 Feature.Moments.Title.PostInsights,Dane analityczne dotyczące postów
 Feature.Moments.Title.ReportPost,Zgłoś posta
+Feature.Moments.Title.UnfollowConfirmationDialog,Przestać obserwować @{username}?
 Feature.Moments.Tooltip.Creation,Wszystkie osoby w tym projekcie mogą wyświetlić Twoje momenty.
 Feature.Moments.Tooltip.PostInsightsBody,"Sprawdź liczbę wyświetleń, czas oglądania i to, jak moment został odebrany przez Twoich odbiorców."
 Feature.Moments.Tooltip.PostInsightsTitle,Tutaj znajdziesz statystyki dotyczące Twojego momentu
@@ -4670,6 +4678,7 @@ Feature.UniversalShareSheet.Response.SharedCustomMessage,{CUSTOM_MESSAGE} i jesz
 Feature.UniversalShareSheet.Response.SharedMessage,Wiadomość została wysłana
 Feature.UniversalShareSheet.Response.SharedMultipleMessages,Wiadomości zostały wysłane
 Feature.UniversalShareSheet.SharedCustomMultipleMessages,{CUSTOM_MESSAGE} i jeszcze {N} osobom
+Feature.UserLibrary.Label.MyLibrary,Moja biblioteka
 Feature.VerificationUpsell.Action.AddPhone,Dodaj numer telefonu
 Feature.VerificationUpsell.Action.AddPhoneNumber,
 Feature.VerificationUpsell.Action.AddPhoneVoice,Dodaj telefon do czatu głosowego

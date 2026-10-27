@@ -5,7 +5,6 @@ local ReactModule = require(Parent.React)
 local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
 local Default = require(Parent.ExternalContentSharingProtocol).ExternalContentSharingProtocol.default
 local _ = require(BuildExperience.Chat.chatTypes)
-local FFlagBuildExperienceCopyChatMessagesModule = require(BuildExperience.Flags.FFlagBuildExperienceCopyChatMessages)
 local FFlagBuildExperienceChatImageAttachmentsModule = require(BuildExperience.Flags.FFlagBuildExperienceChatImageAttachments)
 local FFlagBuildExperienceChatResourceAttachments = require(Parent.SharedFlags).FFlagBuildExperienceChatResourceAttachments
 local LocalizationStringsModule = require(BuildExperience.LocalizationStrings)
@@ -97,7 +96,7 @@ local function CopyableUserMessageBubble(Frame)
 end
 
 return ReactModule.memo(function(Frame)
-	-- upvalues: FFlagBuildExperienceChatImageAttachmentsModule (copy), FFlagBuildExperienceChatResourceAttachments (copy), ReactModule (copy), View (copy), ChatResourceAttachmentListModule (copy), ChatImagePreviewListModule (copy), FFlagBuildExperienceCopyChatMessagesModule (copy), CopyableUserMessageBubble (copy), UserMessageBubble (copy)
+	-- upvalues: FFlagBuildExperienceChatImageAttachmentsModule (copy), FFlagBuildExperienceChatResourceAttachments (copy), ReactModule (copy), View (copy), ChatResourceAttachmentListModule (copy), ChatImagePreviewListModule (copy), CopyableUserMessageBubble (copy)
 	local Text = Frame.message.text
 	local ResourceAttachments = Frame.message.resourceAttachments or {}
 	local v1: boolean = FFlagBuildExperienceChatImageAttachmentsModule and (Frame.message.images ~= nil and #Frame.message.images > 0)
@@ -125,10 +124,7 @@ return ReactModule.memo(function(Frame)
 				LayoutOrder = if v2 then 2 else 1,
 				images = Frame.message.images
 			}) else nil,
-			Bubble = if Text == "" then nil elseif FFlagBuildExperienceCopyChatMessagesModule then ReactModule.createElement(CopyableUserMessageBubble, {
-				LayoutOrder = if v2 and v1 then 3 else 2,
-				messageText = Text
-			}) else ReactModule.createElement(UserMessageBubble, {
+			Bubble = if Text == "" then nil else ReactModule.createElement(CopyableUserMessageBubble, {
 				LayoutOrder = if v2 and v1 then 3 else 2,
 				messageText = Text
 			})

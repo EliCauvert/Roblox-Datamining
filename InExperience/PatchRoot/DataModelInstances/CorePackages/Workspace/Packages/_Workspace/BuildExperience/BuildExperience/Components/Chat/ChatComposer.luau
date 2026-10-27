@@ -6,7 +6,6 @@ local FFlagBuildExperienceLibrary = require(Parent.SharedFlags).FFlagBuildExperi
 local FoundationModule = require(Parent.Foundation)
 local ReactModule = require(Parent.React)
 local SignalsModule = require(Parent.Signals)
-local FFlagComposerControlAlignment = require(Parent.SharedFlags).FFlagComposerControlAlignment
 local _ = require(BuildExperience.Chat.chatTypes)
 local ModelPickerContainerModule = if FFlagBuildExperienceModelPickerModule then require(BuildExperience.Components.ModelPicker.ModelPickerContainer) else nil
 local ChatActionsRowModule = require(script.Parent.ChatActionsRow)
@@ -24,7 +23,7 @@ local function _(Text: string): string
 end
 
 return function(Frame)
-	-- upvalues: UseTokensFunction (copy), ReactModule (copy), SignalsModule (copy), FFlagBuildExperienceLibrary (copy), FFlagBuildExperienceModelPickerModule (copy), UseReleaseFocusOnDownSwipeModule (copy), FFlagComposerControlAlignment (copy), View (copy), IconButton (copy), IconName (copy), InputSize (copy), ButtonVariant (copy), ModelPickerContainerModule (copy), ChatActionsRowModule (copy), Composer (copy)
+	-- upvalues: UseTokensFunction (copy), ReactModule (copy), SignalsModule (copy), FFlagBuildExperienceLibrary (copy), FFlagBuildExperienceModelPickerModule (copy), UseReleaseFocusOnDownSwipeModule (copy), View (copy), IconButton (copy), IconName (copy), InputSize (copy), ButtonVariant (copy), ModelPickerContainerModule (copy), ChatActionsRowModule (copy), Composer (copy)
 	local UseTokensResult = UseTokensFunction()
 	local UseRefResult = ReactModule.useRef(nil)
 	local UseMemoResult = ReactModule.useMemo(function()
@@ -111,14 +110,12 @@ return function(Frame)
 	local Tag = "auto-xy"
 	local LayoutOrder: number? = nil
 	local LayoutOrder1: number? = nil
-	local FFlagComposerControlAlignment1: boolean = FFlagComposerControlAlignment
 	
 	if FFlagBuildExperienceModelPickerModule then
 		Size100 = UseTokensResult.Padding.Small - UseTokensResult.Stroke.Standard
 		Tag = "row align-y-center gap-small auto-xy"
 		LayoutOrder = 1
 		LayoutOrder1 = 3
-		FFlagComposerControlAlignment1 = true
 	end
 	local Element = if HasOnOpenCaptureGallery or ModelPicker ~= nil then ReactModule.createElement(View, {
 		padding = {
@@ -149,16 +146,13 @@ return function(Frame)
 	}) else nil
 	local Element1 = ReactModule.createElement(View, {
 		LayoutOrder = LayoutOrder1,
-		padding = if FFlagComposerControlAlignment1 then {
+		padding = {
 			top = UDim.new(0, UseTokensResult.Size.Size_200),
 			bottom = UDim.new(0, UseTokensResult.Size.Size_200 - 1),
 			left = UDim.new(0, 0),
 			right = UDim.new(0, Size100)
-		} else nil,
-		tag = {
-			["auto-xy"] = FFlagComposerControlAlignment1,
-			["auto-xy padding-x-xsmall padding-y-small"] = not FFlagComposerControlAlignment1
-		}
+		},
+		tag = { ["auto-xy"] = true }
 	}, {
 		Actions = ReactModule.createElement(ChatActionsRowModule, {
 			isAssistantResponding = Frame.isAssistantResponding,

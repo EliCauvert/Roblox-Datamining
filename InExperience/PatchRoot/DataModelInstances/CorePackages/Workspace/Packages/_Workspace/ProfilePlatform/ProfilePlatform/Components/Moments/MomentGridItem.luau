@@ -5,8 +5,11 @@ local FoundationModule = require(Parent.Foundation)
 local MomentsCommonModule = require(Parent.MomentsCommon)
 local _ = require(Parent.DataHydration.MomentsStoreTypes)
 local ToMediaItemModule = require(Parent.Moments.ToMediaItem)
+local UseSceneOutfitMediaItemModule = require(script.Parent.useSceneOutfitMediaItem)
+local SceneOutfitPosterModule = require(script.Parent.SceneOutfitPoster)
 local MomentEngagementCountModule = require(script.Parent.MomentEngagementCount)
 local FFlagMomentsEngagementMetricsFeature = MomentsCommonModule.Flags.FFlagMomentsEngagementMetricsFeature
+local FFlagProfileMomentSceneOutfitPoster = require(Parent.SharedFlags).FFlagProfileMomentSceneOutfitPoster
 local View = FoundationModule.View
 local ControlState = FoundationModule.Enums.ControlState
 local StateLayerAffordance = FoundationModule.Enums.StateLayerAffordance
@@ -22,7 +25,7 @@ local GradientBackdrop = MomentsCommonModule.Components.GradientBackdrop
 local ThumbUp = require(Parent.BuilderIcons).Icon.ThumbUp
 
 return function(p1)
-	-- upvalues: UseTokensFunction (copy), FFlagMomentsEngagementMetricsFeature (copy), UseSignalStateFunction (copy), GetMomentsCapabilitiesFunction (copy), ReactModule (copy), MakeProfileTileFieldsModule (copy), FireAnalyticsEventFunction (copy), EventNames (copy), ToMediaItemModule (copy), ControlState (copy), View (copy), StateLayerAffordance (copy), MomentMediaTile (copy), GradientBackdrop (copy), MomentEngagementCountModule (copy), ThumbUp (copy)
+	-- upvalues: UseTokensFunction (copy), FFlagMomentsEngagementMetricsFeature (copy), UseSignalStateFunction (copy), GetMomentsCapabilitiesFunction (copy), ReactModule (copy), MakeProfileTileFieldsModule (copy), FireAnalyticsEventFunction (copy), EventNames (copy), ToMediaItemModule (copy), FFlagProfileMomentSceneOutfitPoster (copy), UseSceneOutfitMediaItemModule (copy), ControlState (copy), View (copy), StateLayerAffordance (copy), MomentMediaTile (copy), SceneOutfitPosterModule (copy), GradientBackdrop (copy), MomentEngagementCountModule (copy), ThumbUp (copy)
 	local Moment = p1.moment
 	local OnHoverChangedFunction = p1.onHoverChanged
 	local UseTokensResult = UseTokensFunction()
@@ -37,6 +40,11 @@ return function(p1)
 			end
 		end
 	end, {})
+	local UseMemoResult = ReactModule.useMemo(function()
+		-- upvalues: ToMediaItemModule (upval), Moment (copy)
+		return (ToMediaItemModule({ kind = "moment", moment = Moment }))
+	end, { Moment.momentId })
+	local UseSceneOutfitMediaItemModuleResult = if FFlagProfileMomentSceneOutfitPoster then UseSceneOutfitMediaItemModule(Moment, UseMemoResult) else nil
 	local IsLikeCountAbove: boolean = if FFlagMomentsEngagementMetricsFeature then UseSignalStateResult and (Moment.metadata.likeCount ~= nil and Moment.metadata.likeCount > 0) else Moment.metadata.likeCount ~= nil and Moment.metadata.likeCount > 0
 	
 	return ReactModule.createElement(View, {
@@ -50,24 +58,25 @@ return function(p1)
 		stateLayer = { affordance = StateLayerAffordance.None }
 	}, {
 		Media = ReactModule.createElement(MomentMediaTile, {
-			mediaItem = ReactModule.useMemo(function()
-				-- upvalues: ToMediaItemModule (upval), Moment (copy)
-				return (ToMediaItemModule({ kind = "moment", moment = Moment }))
-			end, { Moment.momentId }),
+			mediaItem = if UseSceneOutfitMediaItemModuleResult == nil then UseMemoResult else UseSceneOutfitMediaItemModuleResult.mediaItem,
 			isActive = p1.isActive
+		}),
+		ScenePoster = if UseSceneOutfitMediaItemModuleResult == nil or UseSceneOutfitMediaItemModuleResult.scenePoster == nil then nil else ReactModule.createElement(SceneOutfitPosterModule, {
+			zIndex = 2,
+			content = UseSceneOutfitMediaItemModuleResult.scenePoster
 		}),
 		BottomGradient = if IsLikeCountAbove then ReactModule.createElement(GradientBackdrop, {
 			rotation = -90,
 			startingTransparency = 0,
-			zIndex = 2,
 			anchorPoint = Vector2.new(0, 1),
 			color3 = UseTokensResult.Color.Common.Scrim.Color3,
 			position = UDim2.fromScale(0, 1),
-			size = UDim2.fromScale(1, 0.5)
+			size = UDim2.fromScale(1, 0.5),
+			zIndex = if FFlagProfileMomentSceneOutfitPoster then 3 else 2
 		}) else nil,
 		Engagement = if IsLikeCountAbove then ReactModule.createElement(View, {
 			tag = "row align-x-right align-y-center gap-small position-bottom-right anchor-bottom-right auto-xy padding-small",
-			ZIndex = 3
+			ZIndex = if FFlagProfileMomentSceneOutfitPoster then 4 else 3
 		}, {
 			Reactions = ReactModule.createElement(MomentEngagementCountModule, {
 				layoutOrder = 1,

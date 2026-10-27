@@ -14,7 +14,6 @@ local SharedFlagsModule = require(CorePackages.Workspace.Packages.SharedFlags)
 local GetFFlagDebugEnableUnibarDummyIntegrationsFunction = SharedFlagsModule.GetFFlagDebugEnableUnibarDummyIntegrations
 local FFlagEnableConsoleExpControls = SharedFlagsModule.FFlagEnableConsoleExpControls
 local FFlagAppNavMyStatsTab = SharedFlagsModule.FFlagAppNavMyStatsTab
-local ArgoPartyExperimentation = require(CorePackages.Workspace.Packages.SocialExperiments).ArgoPartyExperimentation
 local IsSpatialFunction = require(CorePackages.Workspace.Packages.AppCommonLib).isSpatial
 
 local function _()
@@ -28,7 +27,7 @@ local _ = function()
 end
 
 local function configureUnibar()
-	-- upvalues: BuildMenuOrderModule (copy), GetFFlagDebugEnableUnibarDummyIntegrationsFunction (copy), IsConnectUnibarEnabledModule (copy), ArgoPartyExperimentation (copy), ConstantsModule (copy), FFlagAppNavMyStatsTab (copy), IsInExperienceUIVREnabled (copy), IsSpatialFunction (copy), ServiceModule (copy)
+	-- upvalues: BuildMenuOrderModule (copy), GetFFlagDebugEnableUnibarDummyIntegrationsFunction (copy), IsConnectUnibarEnabledModule (copy), ConstantsModule (copy), FFlagAppNavMyStatsTab (copy), IsInExperienceUIVREnabled (copy), IsSpatialFunction (copy), ServiceModule (copy)
 	local MenuOrderModule = BuildMenuOrderModule()
 	local List = { "nine_dot", "chat", "toggle_mic_mute" }
 	table.insert(List, 3, "join_voice")
@@ -38,7 +37,7 @@ local function configureUnibar()
 		table.insert(List, "dummy_window_2")
 	end
 	if IsConnectUnibarEnabledModule() then
-		table.insert(List, if ArgoPartyExperimentation.getIsRenameEnabled() then "party_entrypoint" else "connect_unibar")
+		table.insert(List, "party_entrypoint")
 	end
 	local FoundIndex: number? = table.find(List, "toggle_mic_mute")
 	

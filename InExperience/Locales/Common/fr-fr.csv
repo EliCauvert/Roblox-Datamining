@@ -2429,6 +2429,7 @@ Feature.Build.Message.BuildBusy,Construire est occupé. Patiente une minute et r
 Feature.Build.Message.BuildConnectFailed,Construire n'a pas pu se connecter. Réessaye.
 Feature.Build.Message.BuildInternalError,Construire a rencontré un problème. Réessaye.
 Feature.Build.Message.BuildResponseFailed,Construire n'a pas pu répondre. Réessaye.
+Feature.Build.Message.BuildSendUnconfirmed,Construire n'a pas pu confirmer l'envoi de ton message.
 Feature.Build.Message.BuildStillWorking,"C'est en cours. Tu peux quitter l'application, jouer sur Roblox ou commencer un autre projet en attendant."
 Feature.Build.Message.BuildStopped,Tu as arrêté Construire.
 Feature.Build.Message.BuildTakingLonger,Cela prend plus de temps que prévu. Tu peux continuer à attendre ou passer à autre chose.
@@ -3869,6 +3870,7 @@ Feature.Moments.Title.LeaveMomentCreation,Quitter la création de Moment ?
 Feature.Moments.Title.MomentRemoved,
 Feature.Moments.Title.PostInsights,Statistiques des posts
 Feature.Moments.Title.ReportPost,Signaler un post
+Feature.Moments.Title.UnfollowConfirmationDialog,Ne plus suivre @{username} ?
 Feature.Moments.Tooltip.Creation,Tous les participants à l'expérience peuvent voir tes Moments.
 Feature.Moments.Tooltip.PostInsightsBody,"Consulte le nombre de vues, la durée de visionnage et l'accueil réservé au Moment par ton audience."
 Feature.Moments.Tooltip.PostInsightsTitle,Retrouve ici les statistiques de ton Moment
@@ -4674,6 +4676,7 @@ Feature.UniversalShareSheet.Response.SharedCustomMessage,{CUSTOM_MESSAGE} + 1 
 Feature.UniversalShareSheet.Response.SharedMessage,Le message a bien été envoyé
 Feature.UniversalShareSheet.Response.SharedMultipleMessages,Les messages ont bien été envoyés
 Feature.UniversalShareSheet.SharedCustomMultipleMessages,{CUSTOM_MESSAGE} + {N} autres
+Feature.UserLibrary.Label.MyLibrary,Ma bibliothèque
 Feature.VerificationUpsell.Action.AddPhone,Ajouter Téléphone
 Feature.VerificationUpsell.Action.AddPhoneNumber,Ajouter un numéro de téléphone
 Feature.VerificationUpsell.Action.AddPhoneVoice,Ajouter un téléphone pour le chat vocal

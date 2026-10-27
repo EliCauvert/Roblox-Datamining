@@ -17,7 +17,6 @@ local FFlagBuildExperienceAnswerFormModule = require(BuildExperience.Flags.FFlag
 local AnswersCardContainerModule = if FFlagBuildExperienceAnswerFormModule then require(script.Parent.AnswersCardContainer) else nil
 local TurnProjectionModule = require(BuildExperience.Chat.turnProjection)
 local FFlagBuildExperienceChatAccordionScrollAnchorModule = require(BuildExperience.Flags.FFlagBuildExperienceChatAccordionScrollAnchor)
-local FFlagBuildExperienceCopyChatMessagesModule = require(BuildExperience.Flags.FFlagBuildExperienceCopyChatMessages)
 local FFlagBuildExperienceManageDevProductModule = require(BuildExperience.Flags.FFlagBuildExperienceManageDevProduct)
 local FFlagBuildAgentAdCampaignCardModule = require(BuildExperience.Flags.FFlagBuildAgentAdCampaignCard)
 local FFlagBuildAgentAdCampaignRefreshEligibilityModule = require(BuildExperience.Flags.FFlagBuildAgentAdCampaignRefreshEligibility)
@@ -299,6 +298,7 @@ local function DevProductProposalSection(Frame)
 			isReadOnly = NoCanEditOnBuild,
 			isPending = DevProductProposal.isPending,
 			hasError = DevProductProposal.hasError,
+			errorCause = DevProductProposal.errorCause,
 			canRetry = DevProductProposal.canRetry
 		})
 	})
@@ -436,7 +436,7 @@ local function TurnWorkSegment(Frame)
 end
 
 return ReactModule.memo(function(Frame: Frame)
-	-- upvalues: ReactModule (copy), TurnProjectionModule (copy), ReportTurnActivityGapModule (copy), useReactiveValue (copy), t (copy), FFlagBuildAgentAdCampaignCardModule (copy), UseAgentAdCampaignTurnCardsModule (copy), config (copy), FoundationModule (copy), FFlagBuildExperienceCopyChatMessagesModule (copy), FFlagBuildCheckGamePermissionsModule (copy), ChatPermissionsContextModule (copy), SendBuildExperienceEventModule (copy), FFlagBuildEventsUpdate1Module (copy), renderWorkSegment (copy), TurnWorkSegment (copy), FFlagBuildExperiencePlaytestCardPublishCtaModule (copy), PlaytestCardSection (copy), PlaytestCompletedCardModule (copy), FFlagBuildAgentAdCampaignRefreshEligibilityModule (copy), AdCampaignIsActiveCardModule (copy), AdUpsellCardModule (copy), FFlagBuildExperienceChatCardEmphasisModule (copy), ChatCardEmphasisPositionProviderModule (copy), View (copy), AgentTurnFeedbackModule (copy)
+	-- upvalues: ReactModule (copy), TurnProjectionModule (copy), ReportTurnActivityGapModule (copy), useReactiveValue (copy), t (copy), FFlagBuildAgentAdCampaignCardModule (copy), UseAgentAdCampaignTurnCardsModule (copy), config (copy), FoundationModule (copy), FFlagBuildCheckGamePermissionsModule (copy), ChatPermissionsContextModule (copy), SendBuildExperienceEventModule (copy), FFlagBuildEventsUpdate1Module (copy), renderWorkSegment (copy), TurnWorkSegment (copy), FFlagBuildExperiencePlaytestCardPublishCtaModule (copy), PlaytestCardSection (copy), PlaytestCompletedCardModule (copy), FFlagBuildAgentAdCampaignRefreshEligibilityModule (copy), AdCampaignIsActiveCardModule (copy), AdUpsellCardModule (copy), FFlagBuildExperienceChatCardEmphasisModule (copy), ChatCardEmphasisPositionProviderModule (copy), View (copy), AgentTurnFeedbackModule (copy)
 	local Turn = Frame.turn
 	local TurnState = Turn.turnState
 	local TurnKey = Turn.turnKey
@@ -489,9 +489,9 @@ return ReactModule.memo(function(Frame: Frame)
 	}) else {}
 	local LocalToolActions = Frame.localToolActions or config
 	local Emphasis = FoundationModule.Hooks.useTokens().Color.Content.Emphasis
-	local FinalAssistantMessageText = if FFlagBuildExperienceCopyChatMessagesModule and TurnState ~= nil then TurnProjectionModule.getFinalAssistantMessageText(TurnState) else nil
+	local FinalAssistantMessageText = if TurnState == nil then nil else TurnProjectionModule.getFinalAssistantMessageText(TurnState)
 	local UseContextResult = if FFlagBuildCheckGamePermissionsModule then ReactModule.useContext(ChatPermissionsContextModule) else nil
-	local NoCanPreview: boolean = UseContextResult ~= nil and not UseContextResult.canPreview
+	local NoCanEdit: boolean = UseContextResult ~= nil and not UseContextResult.canEdit
 	local NoCanPublish: boolean = UseContextResult ~= nil and not UseContextResult.canPublish
 	local OnPlaytestFunction = Frame.onPlaytest
 	local UseResult = ReactModule.useCallback(function()
@@ -558,7 +558,7 @@ return ReactModule.memo(function(Frame: Frame)
 				onPlaytest = UseResult,
 				onPublish = Frame.onPublish,
 				isLoading = Frame.isPlaytestLoading,
-				isPlaytestDisabled = NoCanPreview,
+				isPlaytestDisabled = NoCanEdit,
 				isPublishDisabled = NoCanPublish,
 				placeId = UseReactiveValueResult.placeId,
 				publishedVersionNumber = UseReactiveValueResult.publishedVersionNumber
@@ -566,7 +566,7 @@ return ReactModule.memo(function(Frame: Frame)
 				LayoutOrder = LayoutOrder,
 				onPlaytest = UseResult,
 				isLoading = Frame.isPlaytestLoading,
-				isPlaytestDisabled = NoCanPreview
+				isPlaytestDisabled = NoCanEdit
 			})
 		elseif Segment.kind == "agent_ad_campaign_card" and FFlagBuildAgentAdCampaignCardModule then
 			local UseAgentAdCampaignTurnCardsModuleResultEntry = UseAgentAdCampaignTurnCardsModuleResult[Segment.toolCallId]
@@ -633,7 +633,7 @@ return ReactModule.memo(function(Frame: Frame)
 			Feedback = if IsDone then ReactModule.createElement(AgentTurnFeedbackModule, {
 				LayoutOrder = 2,
 				testId = "ChatTurnBlock.UserFeedback",
-				messageText = if FFlagBuildExperienceCopyChatMessagesModule then FinalAssistantMessageText else nil,
+				messageText = FinalAssistantMessageText,
 				turnFeedbackIds = UseReactiveValueResult
 			}) else nil
 		})

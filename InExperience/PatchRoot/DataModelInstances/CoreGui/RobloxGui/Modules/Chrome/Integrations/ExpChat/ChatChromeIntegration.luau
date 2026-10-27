@@ -51,7 +51,6 @@ local ExpChatUnibarAvailabilityRefactor = game:DefineFastFlag("ExpChatUnibarAvai
 local IsInExperienceUIVREnabled = require(CorePackages.Workspace.Packages.SharedExperimentDefinition).isInExperienceUIVREnabled
 local InExperienceUIVRIXP = require(CorePackages.Workspace.Packages.SharedExperimentDefinition).InExperienceUIVRIXP
 local ExpChatPerfTracker = ExpChatModule.ExpChatPerfTracker
-local ArgoPartyExperimentation = require(CorePackages.Workspace.Packages.SocialExperiments).ArgoPartyExperimentation
 local Count = 0
 local ChatVisible = nil
 
@@ -287,7 +286,7 @@ end
 RegisterResult = ServiceModule:register({
 	id = "chat",
 	label = "CoreScripts.TopBar.Chat",
-	sideSheetPlacement = if ArgoPartyExperimentation.getIsRenameEnabled() and (not FFlagRemoveFriendsChatUnibarEntrypoints or not FFlagExpChatCanShowFriendsTab) then SideSheetPlacement.None else SideSheetPlacement.Unibar,
+	sideSheetPlacement = if FFlagRemoveFriendsChatUnibarEntrypoints and FFlagExpChatCanShowFriendsTab then SideSheetPlacement.Unibar else SideSheetPlacement.None,
 	activated = function(_)
 		-- upvalues: ChatVisible (ref), ChatSelectorModule (copy), ExpChatPerfTracker (copy), IsInExperienceUIVREnabled (copy), IsSpatialFunction (copy), InExperienceUIVRIXP (copy), ChromeIntegrationUtilsModule (copy), InExperienceAppChatModalModule (copy), FFlagEnableConsoleExpControls (copy), FocusSelectExpChatModule (copy), RegisterResult (ref)
 		if ChatVisible then

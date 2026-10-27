@@ -5,15 +5,17 @@ local _ = require(Parent.DataHydration.MomentsStoreTypes)
 local MomentTileModule = require(script.Parent.MomentTile)
 local MomentsCarouselMediaProviderModule = require(script.Parent.MomentsCarouselMediaProvider)
 local GetVisibleTileRangeModule = require(script.Parent.getVisibleTileRange)
+local IsPlayableVideoMomentModule = require(script.Parent.isPlayableVideoMoment)
 local UseDynamicSizeMarginModule = require(ProfilePlatform.Hooks.useDynamicSizeMargin)
 local UseProfileFormFactorModule = require(ProfilePlatform.Hooks.useProfileFormFactor)
 local EnumsModule = require(ProfilePlatform.Common.Enums)
+local FFlagProfileMomentSceneOutfitPoster = require(Parent.SharedFlags).FFlagProfileMomentSceneOutfitPoster
 local CollectionCarousel = require(Parent.CollectionViews).CollectionCarousel
 local UseNavigationFocusFunction = require(Parent.Navigation).useNavigationFocus
 local UseTokensFunction = require(Parent.Foundation).Hooks.useTokens
 
 return function(p1)
-	-- upvalues: UseTokensFunction (copy), UseProfileFormFactorModule (copy), EnumsModule (copy), UseNavigationFocusFunction (copy), UseDynamicSizeMarginModule (copy), ReactModule (copy), GetVisibleTileRangeModule (copy), MomentTileModule (copy), CollectionCarousel (copy), MomentsCarouselMediaProviderModule (copy)
+	-- upvalues: UseTokensFunction (copy), UseProfileFormFactorModule (copy), EnumsModule (copy), UseNavigationFocusFunction (copy), UseDynamicSizeMarginModule (copy), ReactModule (copy), FFlagProfileMomentSceneOutfitPoster (copy), IsPlayableVideoMomentModule (copy), GetVisibleTileRangeModule (copy), MomentTileModule (copy), CollectionCarousel (copy), MomentsCarouselMediaProviderModule (copy)
 	local Moments = p1.moments
 	local UseTokensResult = UseTokensFunction()
 	local IsFormFactorMatch = UseProfileFormFactorModule().formFactor == EnumsModule.ProfileFormFactor.Wide
@@ -30,16 +32,16 @@ return function(p1)
 	local UseRefResult3 = ReactModule.useRef({})
 	local UseRefResult4 = ReactModule.useRef(nil)
 	local UseMemoResult = ReactModule.useMemo(function(): boolean
-		-- upvalues: Moments (copy)
+		-- upvalues: Moments (copy), FFlagProfileMomentSceneOutfitPoster (upval), IsPlayableVideoMomentModule (upval)
 		for _, moment in Moments do
-			if moment.metadata.captureType == Enum.CaptureType.Video then
+			if if FFlagProfileMomentSceneOutfitPoster then IsPlayableVideoMomentModule(moment) else moment.metadata.captureType == Enum.CaptureType.Video then
 				return true
 			end
 		end
 		return false
 	end, { Moments })
 	local Moment = Moments[UseStateResult1]
-	local IsCaptureTypeMatch: boolean = Moment ~= nil and Moment.metadata.captureType == Enum.CaptureType.Video
+	local IsPlayableVideoMomentModule1 = if FFlagProfileMomentSceneOutfitPoster then Moment ~= nil and IsPlayableVideoMomentModule(Moment) else Moment ~= nil and Moment.metadata.captureType == Enum.CaptureType.Video
 	local UseResult = ReactModule.useCallback(function(p2: number): number
 		-- upvalues: UseStateResult2 (copy)
 		UseStateResult2(p2)
@@ -149,7 +151,7 @@ return function(p1)
 	return if UseNavigationFocusResult and UseMemoResult then ReactModule.createElement(MomentsCarouselMediaProviderModule, {
 		moments = Moments,
 		activeIndex = UseStateResult1,
-		playbackActive = IsCaptureTypeMatch,
+		playbackActive = IsPlayableVideoMomentModule1,
 		mediaCornerRadius = UseTokensResult.Radius.Large,
 		handoffRef = UseRefResult2
 	}, { Carousel = Frame }) else Frame

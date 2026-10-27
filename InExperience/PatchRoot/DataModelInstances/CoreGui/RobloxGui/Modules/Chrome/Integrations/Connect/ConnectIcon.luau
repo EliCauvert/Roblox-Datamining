@@ -5,7 +5,6 @@ local FoundationModule = require(CorePackages.Packages.Foundation)
 local ReactModule = require(CorePackages.Packages.React)
 local ConstantsModule = require(Chrome.ChromeShared.Unibar.Constants)
 local UseMappedSignalFunction = require(CorePackages.Workspace.Packages.Chrome).Hooks.useMappedSignal
-local UsePartyIconModule = require(Chrome.Integrations.Party.usePartyIcon)
 local MappedSignal = require(Chrome.ChromeShared.Service.ChromeUtils).MappedSignal
 local UseTokensFunction = FoundationModule.Hooks.useTokens
 local UnibarStyle = require(CorePackages.Workspace.Packages.Chrome).UnibarStyle
@@ -13,10 +12,7 @@ local SubMenuContextModule = require(Chrome.ChromeShared.Unibar.SubMenuContext)
 local InExperienceAppChatModalModule = require(CorePackages.Workspace.Packages.AppChat.InExperienceAppChatModal)
 local FFlagTokenizeUnibarConstantsWithStyleProvider = require(Chrome.ChromeShared.Flags).FFlagTokenizeUnibarConstantsWithStyleProvider
 local FFlagEnableChatIconUnibarDropdownFixEnabled = require(CorePackages.Workspace.Packages.SharedFlags).FFlagEnableChatIconUnibarDropdownFixEnabled
-local ArgoPartyExperimentation = require(CorePackages.Workspace.Packages.SocialExperiments).ArgoPartyExperimentation
 local v1 = require(CorePackages.Workspace.Packages.AppChat.getAppChatNavbarItemConfig)()
-local Off = v1.icon.off
-local On = v1.icon.on
 local config = {
 	integrationId = "",
 	shouldShowCustomBadge = true,
@@ -24,7 +20,7 @@ local config = {
 }
 
 return function(p1)
-	-- upvalues: CryoModule (copy), config (copy), UseTokensFunction (copy), FFlagTokenizeUnibarConstantsWithStyleProvider (copy), UnibarStyle (copy), ConstantsModule (copy), ReactModule (copy), InExperienceAppChatModalModule (copy), MappedSignal (copy), UseMappedSignalFunction (copy), UsePartyIconModule (copy), On (copy), Off (copy), SubMenuContextModule (copy), FFlagEnableChatIconUnibarDropdownFixEnabled (copy), FoundationModule (copy), ArgoPartyExperimentation (copy), v1 (copy)
+	-- upvalues: CryoModule (copy), config (copy), UseTokensFunction (copy), FFlagTokenizeUnibarConstantsWithStyleProvider (copy), UnibarStyle (copy), ConstantsModule (copy), ReactModule (copy), InExperienceAppChatModalModule (copy), MappedSignal (copy), UseMappedSignalFunction (copy), SubMenuContextModule (copy), FFlagEnableChatIconUnibarDropdownFixEnabled (copy), FoundationModule (copy), v1 (copy)
 	local UnionResult = CryoModule.Dictionary.union(config, p1)
 	local UseTokensResult = UseTokensFunction()
 	local ICONSIZE = if FFlagTokenizeUnibarConstantsWithStyleProvider then UnibarStyle.use().ICON_SIZE else ConstantsModule.ICON_SIZE
@@ -84,7 +80,6 @@ return function(p1)
 		-- upvalues: InExperienceAppChatModalModule (upval)
 		return InExperienceAppChatModalModule:getVisible()
 	end)))
-	local UsePartyIconModuleResult = UsePartyIconModule(ICONSIZE, 24, if UseMappedSignalResult then On else Off)
 	local UseContextResult = ReactModule.useContext(SubMenuContextModule)
 	
 	local function _(p2)
@@ -107,67 +102,22 @@ return function(p1)
 			}
 		end) else UseTokensResult.Color.Content.Default
 	end
-	local CreateElementFunction2 = ReactModule.createElement
+	local CreateElementFunction = ReactModule.createElement
 	local View = FoundationModule.View
 	local config1 = { Size = UDim2.new(0, ICONSIZE, 0, ICONSIZE) }
-	local t = {}
-	local Element1 = nil
-	
-	if ArgoPartyExperimentation.getIsRenameEnabled() then
-		Element1 = ReactModule.createElement(FoundationModule.Icon, {
+	local config2 = {
+		Icon = ReactModule.createElement(FoundationModule.Icon, {
 			AnchorPoint = Vector2.new(0.5, 0.5),
 			Position = UDim2.fromScale(0.5, 0.5),
 			name = v1.icon,
 			variant = if UseMappedSignalResult then FoundationModule.Enums.IconVariant.Filled else FoundationModule.Enums.IconVariant.Regular,
 			style = if FFlagEnableChatIconUnibarDropdownFixEnabled then MapResult else nil
 		})
-	else
-		local CreateElementFunction1 = ReactModule.createElement
-		local Image = FoundationModule.Image
-		local config2 = {
-			AnchorPoint = Vector2.new(0.5, 0.5),
-			Position = UDim2.fromScale(0.5, 0.5),
-			Size = UsePartyIconModuleResult.size:map(function(XOffset): UDim2
-				return UDim2.fromOffset(XOffset, XOffset)
-			end)
-		}
-		local None = nil
-		
-		if UsePartyIconModuleResult.image.backgroundColor then
-			None = { Color3 = UsePartyIconModuleResult.image.backgroundColor }
-			local MapResult1 = nil
-			
-			if UseContextResult then
-				local v3 = 0
-				MapResult1 = UseContextResult:map(function(p2: number): number
-					-- upvalues: v3 (copy)
-					return v3 + (1 - v3) * (1 - p2)
-				end)
-			else
-				MapResult1 = 0
-			end
-			None.Transparency = MapResult1
-		else
-			None = UseTokensResult.Color.None
-		end
-		config2.backgroundStyle = None
-		config2.cornerRadius = UDim.new(0, UseTokensResult.Radius.Circle)
-		config2.Image = UsePartyIconModuleResult.image.thumbnail
-		local Transparency3 = UseTokensResult.Color.Content.Emphasis.Transparency
-		config2.imageStyle = {
-			Color3 = UseTokensResult.Color.Content.Emphasis.Color3,
-			Transparency = if UseContextResult then UseContextResult:map(function(p2: number): number
-				-- upvalues: Transparency3 (copy)
-				return Transparency3 + (1 - Transparency3) * (1 - p2)
-			end) else Transparency3
-		}
-		Element1 = CreateElementFunction1(Image, config2)
-	end
-	t.Icon = Element1
-	local Element = nil
+	}
+	local Badge = nil
 	
 	if Contrast1 then
-		local CreateElementFunction = ReactModule.createElement
+		local CreateElementFunction1 = ReactModule.createElement
 		local View1 = FoundationModule.View
 		local config3 = {
 			ZIndex = 2,
@@ -176,43 +126,43 @@ return function(p1)
 		local BackgroundStyle = nil
 		
 		if UnionResult.isSquadIndicatorEnabled then
-			local Transparency4 = Contrast.Transparency
+			local Transparency = Contrast.Transparency
 			BackgroundStyle = {
 				Color3 = Contrast.Color3,
-				Transparency = if UseContextResult then UseContextResult:map(function(p2: number): number
-					-- upvalues: Transparency4 (copy)
-					return Transparency4 + (1 - Transparency4) * (1 - p2)
-				end) else Transparency4
-			}
-		else
-			local Transparency = UseTokensResult.Color.System.Contrast.Transparency
-			BackgroundStyle = {
-				Color3 = UseTokensResult.Color.System.Contrast.Color3,
 				Transparency = if UseContextResult then UseContextResult:map(function(p2: number): number
 					-- upvalues: Transparency (copy)
 					return Transparency + (1 - Transparency) * (1 - p2)
 				end) else Transparency
 			}
+		else
+			local Transparency1 = UseTokensResult.Color.System.Contrast.Transparency
+			BackgroundStyle = {
+				Color3 = UseTokensResult.Color.System.Contrast.Color3,
+				Transparency = if UseContextResult then UseContextResult:map(function(p2: number): number
+					-- upvalues: Transparency1 (copy)
+					return Transparency1 + (1 - Transparency1) * (1 - p2)
+				end) else Transparency1
+			}
 		end
 		config3.backgroundStyle = BackgroundStyle
-		local Transparency1 = UseTokensResult.Color.Surface.Surface_0.Transparency
+		local Transparency3 = UseTokensResult.Color.Surface.Surface_0.Transparency
 		config3.stroke = {
 			Color = UseTokensResult.Color.Surface.Surface_0.Color3,
 			Transparency = if UseContextResult then UseContextResult:map(function(p2: number): number
-				-- upvalues: Transparency1 (copy)
-				return Transparency1 + (1 - Transparency1) * (1 - p2)
-			end) else Transparency1,
+				-- upvalues: Transparency3 (copy)
+				return Transparency3 + (1 - Transparency3) * (1 - p2)
+			end) else Transparency3,
 			Thickness = UseTokensResult.Stroke.Thicker
 		}
 		config3.tag = {
 			["anchor-top-right radius-circle size-200"] = true,
 			["stroke-thicker"] = not FFlagEnableChatIconUnibarDropdownFixEnabled
 		}
-		Element = CreateElementFunction(View1, config3)
+		Badge = CreateElementFunction1(View1, config3)
 	else
-		Element = nil
+		Badge = nil
 	end
-	t.Badge = Element
+	config2.Badge = Badge
 	
-	return CreateElementFunction2(View, config1, t)
+	return CreateElementFunction(View, config1, config2)
 end

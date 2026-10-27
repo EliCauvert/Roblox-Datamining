@@ -26,10 +26,11 @@ local SharedFlagsModule = require(Parent.SharedFlags)
 local FFlagBlockEDPClickthrough = SharedFlagsModule.FFlagBlockEDPClickthrough
 local FFlagJoinabilityCTARefactor = SharedFlagsModule.FFlagJoinabilityCTARefactor
 local FFlagDesktopGameJoinCardGamepadSupport = SharedFlagsModule.FFlagDesktopGameJoinCardGamepadSupport
+local FFlagConsoleOpenGameJoinCard = SharedFlagsModule.FFlagConsoleOpenGameJoinCard
 local UseGameJoinCardGamepadNavigationFunction = nil
 local AssignPrimaryFocusRefFunction = nil
 
-if FFlagDesktopGameJoinCardGamepadSupport then
+if FFlagDesktopGameJoinCardGamepadSupport or FFlagConsoleOpenGameJoinCard then
 	local UseGameJoinCardGamepadNavigationModule = require(GameJoinCard.Hooks.useGameJoinCardGamepadNavigation)
 	UseGameJoinCardGamepadNavigationFunction = UseGameJoinCardGamepadNavigationModule.useGameJoinCardGamepadNavigation
 	AssignPrimaryFocusRefFunction = UseGameJoinCardGamepadNavigationModule.assignPrimaryFocusRef
@@ -39,7 +40,7 @@ local _ = require(GameJoinCard.Components.Actions.Types)
 local BuildJoinCardActionsComponentModule = require(GameJoinCard.Components.Actions.buildJoinCardActionsComponent)
 
 return function(p1)
-	-- upvalues: UseTokensFunction (copy), UseScaledValueFunction (copy), UseLocalizationFunction (copy), ReactModule (copy), GetBuilderIconForCurrentPlatformFunction (copy), ViewEDPsourceValues (copy), ViewProfileSourceValues (copy), ControlState (copy), FFlagDesktopGameJoinCardGamepadSupport (copy), UseGameJoinCardGamepadNavigationFunction (ref), UseComposedRefFunction (copy), FFlagJoinabilityCTARefactor (copy), Skeleton (copy), Radius (copy), AssignPrimaryFocusRefFunction (ref), BuildJoinCardActionsComponentModule (copy), Button (copy), View (copy), Image (copy), FFlagBlockEDPClickthrough (copy), StateLayerAffordance (copy), Text (copy), Icon (copy), IconSize (copy), AgeCheckUpsellCTAModule (copy), ButtonVariant (copy), InputSize (copy), FoundationModule (copy)
+	-- upvalues: UseTokensFunction (copy), UseScaledValueFunction (copy), UseLocalizationFunction (copy), ReactModule (copy), GetBuilderIconForCurrentPlatformFunction (copy), ViewEDPsourceValues (copy), ViewProfileSourceValues (copy), ControlState (copy), FFlagConsoleOpenGameJoinCard (copy), FFlagDesktopGameJoinCardGamepadSupport (copy), UseGameJoinCardGamepadNavigationFunction (ref), UseComposedRefFunction (copy), FFlagJoinabilityCTARefactor (copy), Skeleton (copy), Radius (copy), AssignPrimaryFocusRefFunction (ref), BuildJoinCardActionsComponentModule (copy), Button (copy), View (copy), Image (copy), FFlagBlockEDPClickthrough (copy), StateLayerAffordance (copy), Text (copy), Icon (copy), IconSize (copy), AgeCheckUpsellCTAModule (copy), ButtonVariant (copy), InputSize (copy), FoundationModule (copy)
 	local UseTokensResult = UseTokensFunction()
 	local UseScaledValueResult = UseScaledValueFunction(260)
 	local UseLocalizationResult = UseLocalizationFunction({
@@ -81,10 +82,11 @@ return function(p1)
 		UseStateResult2(Hover == ControlState.Hover)
 	end, {})
 	local Text1 = if UseStateResult then `<u>{UseLocalizationResult.viewProfile}</u>` else UseLocalizationResult.viewProfile
-	local UseGameJoinCardGamepadNavigationResult = if FFlagDesktopGameJoinCardGamepadSupport then UseGameJoinCardGamepadNavigationFunction(p1.onClose, p1.isOpen ~= false) else nil
-	local PrimaryButtonFocusRef = if UseGameJoinCardGamepadNavigationResult == nil or p1.isConsole then nil else UseGameJoinCardGamepadNavigationResult.primaryButtonFocusRef
-	local RootRef = if UseGameJoinCardGamepadNavigationResult == nil or p1.isConsole then nil else UseGameJoinCardGamepadNavigationResult.rootRef
-	local UseComposedRefResult = if FFlagDesktopGameJoinCardGamepadSupport then UseComposedRefFunction(RootRef, p1.focusRootRef) else nil
+	local IsConsole = FFlagConsoleOpenGameJoinCard and p1.isConsole
+	local UseGameJoinCardGamepadNavigationResult = if FFlagDesktopGameJoinCardGamepadSupport or FFlagConsoleOpenGameJoinCard then UseGameJoinCardGamepadNavigationFunction(p1.onClose, p1.isOpen ~= false) else nil
+	local PrimaryButtonFocusRef = if UseGameJoinCardGamepadNavigationResult == nil or not FFlagDesktopGameJoinCardGamepadSupport or p1.isConsole then nil else UseGameJoinCardGamepadNavigationResult.primaryButtonFocusRef
+	local RootRef = if UseGameJoinCardGamepadNavigationResult == nil then nil elseif if p1.isConsole then IsConsole else FFlagDesktopGameJoinCardGamepadSupport then UseGameJoinCardGamepadNavigationResult.rootRef else nil
+	local UseComposedRefResult = if FFlagDesktopGameJoinCardGamepadSupport or FFlagConsoleOpenGameJoinCard then UseComposedRefFunction(RootRef, p1.focusRootRef) else nil
 	local IsAgeCheckRequired = p1.ageCheckRequired == true
 	local t = {}
 	local v1 = nil
@@ -97,7 +99,7 @@ return function(p1)
 				radius = Radius.Medium
 			})
 		else
-			t, v50 = BuildJoinCardActionsComponentModule(PrimaryButtonFocusRef and AssignPrimaryFocusRefFunction(p1.actions, PrimaryButtonFocusRef) or p1.actions, {
+			t, v52 = BuildJoinCardActionsComponentModule(PrimaryButtonFocusRef and AssignPrimaryFocusRefFunction(p1.actions, PrimaryButtonFocusRef) or p1.actions, {
 				playTogether = UseLocalizationResult.playTogether,
 				playTogetherSoon = UseLocalizationResult.playTogetherSoon,
 				differentServer = UseLocalizationResult.differentServer
@@ -140,7 +142,13 @@ return function(p1)
 				AutomaticSize = Enum.AutomaticSize.Y,
 				LayoutOrder = LayoutOrder,
 				backgroundStyle = UseTokensResult.Color.OverMedia.OverMedia_300,
-				ref = if RootRef == nil then p1.focusRootRef else UseComposedRefResult
+				ref = if RootRef == nil then p1.focusRootRef else UseComposedRefResult,
+				selectionGroup = if IsConsole then {
+					SelectionBehaviorUp = Enum.SelectionBehavior.Stop,
+					SelectionBehaviorDown = Enum.SelectionBehavior.Stop,
+					SelectionBehaviorLeft = Enum.SelectionBehavior.Stop,
+					SelectionBehaviorRight = Enum.SelectionBehavior.Stop
+				} else nil
 			}, {
 				GameInfoRow = ReactModule.createElement(View, {
 					tag = "row gap-small items-center size-full-0 auto-y align-x-left",
@@ -231,7 +239,7 @@ return function(p1)
 						}) else nil
 					})
 				}),
-				CtaContext = if FFlagJoinabilityCTARefactor and (v1 ~= nil and not p1.isConsole) then ReactModule.createElement(View, {
+				CtaContext = if FFlagJoinabilityCTARefactor and v1 ~= nil and not p1.isConsole then ReactModule.createElement(View, {
 					tag = "col align-x-left items-start gap-xxsmall size-full-0 auto-y",
 					LayoutOrder = 2
 				}, {

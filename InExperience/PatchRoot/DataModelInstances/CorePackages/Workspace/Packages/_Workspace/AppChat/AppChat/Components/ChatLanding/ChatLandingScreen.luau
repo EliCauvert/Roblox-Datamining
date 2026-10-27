@@ -15,11 +15,9 @@ local ResetForSquadLobbyForCompactModeModule = require(AppChat.Utils.resetForSqu
 local GetFFlagEnableAppChatInExperienceFunction = require(Parent.SharedFlags).GetFFlagEnableAppChatInExperience
 local FFlagEnablePartyQuickStartButton = require(Parent.SharedFlags).FFlagEnablePartyQuickStartButton
 local GetFFlagEnablePushNotificationsUpsellModalChatFunction = require(Parent.SharedFlags).GetFFlagEnablePushNotificationsUpsellModalChat
-local GetFFlagIsSquadEnabledFunction = require(Parent.SharedFlags).GetFFlagIsSquadEnabled
 local SharedFlagsModule = require(Parent.SharedFlags)
 local FFlagEnableHeaderBarButtonsUpdate = SharedFlagsModule.FFlagEnableHeaderBarButtonsUpdate
 local GetTopBarStoreModule = require(AppChat.Stores.GetTopBarStore)
-local ArgoPartyExperimentation = require(Parent.SocialExperiments).ArgoPartyExperimentation
 local FFlagAppChatIxpScreenExposureModule = require(AppChat.Flags.FFlagAppChatIxpScreenExposure)
 local FFlagAppChatIxpParallelScreenLayersModule = require(AppChat.Flags.FFlagAppChatIxpParallelScreenLayers)
 local FStringAppChatLandingConversationRowsIxpLayerModule = require(AppChat.Flags.FStringAppChatLandingConversationRowsIxpLayer)
@@ -30,7 +28,7 @@ local ChatLandingScreen = RoactModule.PureComponent:extend("ChatLandingScreen")
 ChatLandingScreen.defaultProps = { navigation = nil }
 
 function ChatLandingScreen.navigationOptions(p1)
-	-- upvalues: GetFFlagEnableAppChatInExperienceFunction (copy), FFlagEnableHeaderBarButtonsUpdate (copy), ArgoPartyExperimentation (copy), UniversalAppPolicyModule (copy), GetFFlagIsSquadEnabledFunction (copy)
+	-- upvalues: GetFFlagEnableAppChatInExperienceFunction (copy), FFlagEnableHeaderBarButtonsUpdate (copy), UniversalAppPolicyModule (copy)
 	local Navigation = p1.navigation
 	local NavigateToRootStackScreenProps = Navigation.getScreenProps("navigateToRootStack", nil)
 	local IsInExperienceScreenProps = Navigation.getScreenProps("isInExperience", false)
@@ -46,17 +44,11 @@ function ChatLandingScreen.navigationOptions(p1)
 		isRoot = true,
 		isTitleLeftAligned = true,
 		shouldBoldHeader = true,
-		headerText = if ArgoPartyExperimentation.getIsRenameEnabled() then if UniversalAppPolicyModule.getAppFeaturePolicies().getCanSeeChatTerminology() then {
+		headerText = if UniversalAppPolicyModule.getAppFeaturePolicies().getCanSeeChatTerminology() then {
 			raw = "CommonUI.Features.Label.Chat",
 			shouldLocalize = true
 		} else {
 			raw = "Feature.Squads.Label.Party",
-			shouldLocalize = true
-		} elseif GetFFlagIsSquadEnabledFunction() then {
-			raw = "Feature.Squads.Label.Party",
-			shouldLocalize = true
-		} else {
-			raw = "CommonUI.Features.Label.Chat",
 			shouldLocalize = true
 		},
 		closeButtonEnabled = IsInExperienceScreenProps1 and v1,
@@ -206,7 +198,7 @@ function ChatLandingScreen.render(p1)
 end
 
 function ChatLandingScreen.didMount(p1)
-	-- upvalues: LoggerModule (copy), GetFFlagEnableAppChatInExperienceFunction (copy), SharedFlagsModule (copy), ArgoPartyExperimentation (copy), UniversalAppPolicyModule (copy), GetFFlagIsSquadEnabledFunction (copy)
+	-- upvalues: LoggerModule (copy), GetFFlagEnableAppChatInExperienceFunction (copy), SharedFlagsModule (copy), UniversalAppPolicyModule (copy)
 	LoggerModule:info("{screen} mounted")
 	local Navigation = p1.props.navigation
 	local IsInExperienceScreenProps = Navigation.getScreenProps("isInExperience", false)
@@ -224,17 +216,11 @@ function ChatLandingScreen.didMount(p1)
 		isRoot = true,
 		isTitleLeftAligned = true,
 		shouldBoldHeader = true,
-		headerText = if ArgoPartyExperimentation.getIsRenameEnabled() then if UniversalAppPolicyModule.getAppFeaturePolicies().getCanSeeChatTerminology() then {
+		headerText = if UniversalAppPolicyModule.getAppFeaturePolicies().getCanSeeChatTerminology() then {
 			raw = "CommonUI.Features.Label.Chat",
 			shouldLocalize = true
 		} else {
 			raw = "Feature.Squads.Label.Party",
-			shouldLocalize = true
-		} elseif GetFFlagIsSquadEnabledFunction() then {
-			raw = "Feature.Squads.Label.Party",
-			shouldLocalize = true
-		} else {
-			raw = "CommonUI.Features.Label.Chat",
 			shouldLocalize = true
 		},
 		closeButtonEnabled = IsInExperienceScreenProps1 and v1,

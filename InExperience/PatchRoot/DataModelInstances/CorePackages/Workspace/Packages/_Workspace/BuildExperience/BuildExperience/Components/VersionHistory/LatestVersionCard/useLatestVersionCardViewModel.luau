@@ -66,7 +66,7 @@ return function(p1)
 	else
 		local PlaceVersion = if UseSignalStateResult then UseSignalStateResult.placeVersion else nil
 		local VersionNumber = if PlaceVersion then VersionHistoryUtilsModule.getVersionNumber(PlaceVersion) else nil
-		local NoFFlagBuildCheckGamePermissionsModule = not FFlagBuildCheckGamePermissionsModule or p1.permissions.canPreview
+		local NoFFlagBuildCheckGamePermissionsModule = not FFlagBuildCheckGamePermissionsModule or p1.permissions.canEdit
 		local NoFFlagBuildCheckGamePermissionsModule1 = not FFlagBuildCheckGamePermissionsModule or p1.permissions.canPublish
 		
 		return {

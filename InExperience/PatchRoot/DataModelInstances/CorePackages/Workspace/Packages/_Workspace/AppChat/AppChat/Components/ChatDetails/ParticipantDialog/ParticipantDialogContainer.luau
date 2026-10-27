@@ -23,7 +23,6 @@ local FocusNavigableSurfaceWrapper = FocusNavigationUtilsModule.FocusNavigableSu
 local AppFocusRoot = FocusNavigationUtilsModule.AppFocusRoot
 local FocusNavigationEventNameEnum = FocusNavigationUtilsModule.FocusNavigationEventNameEnum
 local FFlagDisableBlockAndReport = require(Parent.SharedFlags).FFlagDisableBlockAndReport
-local FFlagAppChatConsolidateTrustedFriendsModalModule = require(AppChat.Flags.FFlagAppChatConsolidateTrustedFriendsModal)
 local FFlagAppChatMigrateFriendshipStatusesModule = require(AppChat.Flags.FFlagAppChatMigrateFriendshipStatuses)
 local MemoFunction = ReactModule.memo
 local GenericDialogTypeModule = require(script.Parent.Parent.Dialogs.GenericDialogType)
@@ -56,7 +55,7 @@ local config1 = {
 }
 
 function ParticipantDialogContainer(p1)
-	-- upvalues: CryoModule (copy), config1 (copy), ReactModule (copy), BackHandlerContextModule (copy), UseNavigationFunction (copy), UseDispatchFunction (copy), UseAppPolicyModule (copy), UseSelectorFunction (copy), ConversationModule (copy), FFlagAppChatMigrateFriendshipStatusesModule (copy), UseGetFriendshipStatusFunction (copy), config (copy), NetworkingFriendsModule (copy), UseLocalizationFunction (copy), UseIsExternalNavigationAvailableModule (copy), EnumScreensModule (copy), UseTrustedFriendActionModule (copy), FocusNavigationEventNameEnum (copy), InputHandlersModule (copy), LoggerModule (copy), GenericDialogTypeModule (copy), RoactChatAnalyticsModule (copy), NotificationModalsManagerModule (copy), FFlagAppChatConsolidateTrustedFriendsModalModule (copy), Sources (copy), EnteredChatFromEntryPointFunction (copy), ChatEntryPointNames (copy), CreateConversationModule (copy), ParseCreateConversationErrorsModule (copy), FFlagDisableBlockAndReport (copy), AppFocusRoot (copy), FocusNavigableSurfaceIdentifierEnum (copy), PlayerContextualMenuWrapperModule (copy), FocusNavigableSurfaceWrapper (copy), ParticipantDialogModule (copy)
+	-- upvalues: CryoModule (copy), config1 (copy), ReactModule (copy), BackHandlerContextModule (copy), UseNavigationFunction (copy), UseDispatchFunction (copy), UseAppPolicyModule (copy), UseSelectorFunction (copy), ConversationModule (copy), FFlagAppChatMigrateFriendshipStatusesModule (copy), UseGetFriendshipStatusFunction (copy), config (copy), NetworkingFriendsModule (copy), UseLocalizationFunction (copy), UseIsExternalNavigationAvailableModule (copy), EnumScreensModule (copy), UseTrustedFriendActionModule (copy), FocusNavigationEventNameEnum (copy), InputHandlersModule (copy), LoggerModule (copy), GenericDialogTypeModule (copy), RoactChatAnalyticsModule (copy), NotificationModalsManagerModule (copy), Sources (copy), EnteredChatFromEntryPointFunction (copy), ChatEntryPointNames (copy), CreateConversationModule (copy), ParseCreateConversationErrorsModule (copy), FFlagDisableBlockAndReport (copy), AppFocusRoot (copy), FocusNavigableSurfaceIdentifierEnum (copy), PlayerContextualMenuWrapperModule (copy), FocusNavigableSurfaceWrapper (copy), ParticipantDialogModule (copy)
 	local JoinResult = CryoModule.Dictionary.join(config1, p1)
 	local UseContextResult = ReactModule.useContext(BackHandlerContextModule)
 	local UseRefResult = ReactModule.useRef(JoinResult.onDismiss)
@@ -193,7 +192,7 @@ function ParticipantDialogContainer(p1)
 			JoinResult.onDismiss
 		}),
 		openTrustedFriend = ReactModule.useCallback(function()
-			-- upvalues: Action (copy), JoinResult (copy), UseDispatchResult (copy), NetworkingFriendsModule (upval), RefetchFunction (copy), NotificationModalsManagerModule (upval), UseTrustedFriendActionModuleResult (copy), LoggerModule (upval), FFlagAppChatConsolidateTrustedFriendsModalModule (upval), UseNavigationResult (copy), EnumScreensModule (upval), Sources (upval)
+			-- upvalues: Action (copy), JoinResult (copy), UseDispatchResult (copy), NetworkingFriendsModule (upval), RefetchFunction (copy), NotificationModalsManagerModule (upval), UseTrustedFriendActionModuleResult (copy), LoggerModule (upval), UseNavigationResult (copy), EnumScreensModule (upval), Sources (upval)
 			if Action == nil then return end
 			if Action.actionType == "RemoveTrustedConnection" then
 				JoinResult.onDismiss()
@@ -215,35 +214,19 @@ function ParticipantDialogContainer(p1)
 			JoinResult.onDismiss()
 			
 			if Action.actionType == "AddIncomingTrustedConnection" then
-				local Props = {
+				UseNavigationResult.navigate(EnumScreensModule.TrustedConnectionsUpsell, {
 					userId = JoinResult.participantId,
 					onRequestAccepted = RefetchFunction
-				}
+				})
 				
-				if FFlagAppChatConsolidateTrustedFriendsModalModule then
-					UseNavigationResult.navigate(EnumScreensModule.TrustedConnectionsUpsell, Props)
-					
-					return
-				else
-					UseNavigationResult.navigate(EnumScreensModule.AppChatTrustedContactsModal, { props = Props })
-					
-					return
-				end
+				return
 			else
-				local Props1 = {
+				UseNavigationResult.navigate(EnumScreensModule.TrustedConnectionsUpsell, {
 					userId = JoinResult.participantId,
 					source = Sources.ChatDetails,
 					modalVariantOverride = ModalVariantOverride,
 					onRequestSent = RefetchFunction
-				}
-				
-				if FFlagAppChatConsolidateTrustedFriendsModalModule then
-					UseNavigationResult.navigate(EnumScreensModule.TrustedConnectionsUpsell, Props1)
-					
-					return
-				else
-					UseNavigationResult.navigate(EnumScreensModule.AppChatTrustedContactsModal, { props = Props1 })
-				end
+				})
 			end
 		end, {
 			Action, UseTrustedFriendActionModuleResult, JoinResult.participantId,

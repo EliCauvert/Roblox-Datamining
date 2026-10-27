@@ -212,7 +212,6 @@ return {
 			return {
 				id = Id,
 				description = p3.description,
-				imageAssetId = p3.imageAssetId,
 				basePriceId = p3.basePriceId,
 				priceInRobux = p3.priceInRobux
 			}
@@ -224,7 +223,6 @@ return {
 		
 		return CreatorApiHttpModule.json(CreatorApiHttpModule.mutatingNetwork(p4), "PATCH", ("%s/%s"):format(("%s/experience-subscriptions/v1/experiences/%d/experience-subscriptions"):format(CreatorApiHttpModule.baseUrl(p4), p2), Id), {
 			description = p3.description,
-			imageAssetId = p3.imageAssetId,
 			basePriceId = p3.basePriceId,
 			currencyType = p3.currencyType,
 			priceInRobux = p3.priceInRobux,

@@ -12,6 +12,7 @@ return {
 	MAX_SHOWN_STATUS_INDICATOR_COUNT = 99,
 	FLYOUT_DEFAULT_POLICY = {
 		MyLibrary = {
+			if require(Parent.SharedFlags).FFlagUserLibrary then "UserLibrary" else nil,
 			"Favorites", "ContinuePlaying",
 			if require(Parent.SharedFlags).FFlagEnableChartsInFlyout and FlyoutSidePanelIXP.isChartsInFlyoutEnabled() then "Charts" else nil,
 			"Connections", "Communities", "Inventory", "Trades", "Messages", "Blackbird",

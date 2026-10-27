@@ -15,12 +15,18 @@ local EventMap = {
 return ReactModule.memo(function(p1)
 	-- upvalues: ReactModule (copy), FocusNavigationEventNameEnum (copy), InputHandlersModule (copy), UseFocusRootFunction (copy), FocusNavigableSurfaceIdentifierEnum (copy), EventMap (copy), Sheet (copy)
 	local UseStateResult, UseStateResult2 = ReactModule.useState(false)
+	local UseRefResult = ReactModule.useRef(false)
 	ReactModule.useEffect(function()
-		-- upvalues: UseStateResult2 (copy)
+		-- upvalues: p1 (copy), UseRefResult (copy), UseStateResult2 (copy)
+		if p1.isOpen ~= false then
+			UseRefResult.current = false
+		end
 		UseStateResult2(false)
 	end, { p1.isOpen })
 	local UseResult = ReactModule.useCallback(function()
-		-- upvalues: UseStateResult2 (copy), p1 (copy)
+		-- upvalues: UseRefResult (copy), UseStateResult2 (copy), p1 (copy)
+		if UseRefResult.current then return end
+		UseRefResult.current = true
 		UseStateResult2(true)
 		
 		if p1.onClose then

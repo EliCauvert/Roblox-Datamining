@@ -63,6 +63,27 @@ local function isInviteToPlaytestDisabled(p1): boolean
 	end
 end
 
+local function omitInviteToPlaytest(Tbl)
+	local Copy = table.clone(Tbl)
+	
+	for i, value in Copy do
+		local Items = {}
+		local Flag = false
+		
+		for _, item in value.items do
+			if item.id == "invite-to-playtest" then
+				Flag = true
+			else
+				table.insert(Items, item)
+			end
+		end
+		if Flag then
+			Copy[i] = { items = Items }
+		end
+	end
+	return Copy
+end
+
 local function getPublishText(p1)
 	-- upvalues: PublishStatusModule (copy), LocalizationStringsModule (copy)
 	return if PublishStatusModule.isPublishLatest(p1.hasPublishedVersion, p1.hasPublishedTurn) then LocalizationStringsModule.BUILD_MENU_PUBLISH_LATEST else LocalizationStringsModule.BUILD_MENU_PUBLISH
@@ -132,7 +153,7 @@ local config = {
 }
 
 return function()
-	-- upvalues: LocalizationStringsModule (copy), FFlagBuildExperiencePrivateInvitesModule (copy), isShareUnavailable (copy), onShareActivated (copy), isVersionHistoryDisabled (copy), onVersionHistoryActivated (copy), isInviteToPlaytestDisabled (copy), SendBuildExperienceEventModule (copy), GetPrivatePlaytestersStoreFunction (copy), FFlagBuildExperienceDisableNonPublicStatsModule (copy), isStatsDisabled (copy), PrivacyType (copy), FFlagBuildExperienceMenuImprovementsModule (copy), isAssistantDisabled (copy), onAssistantActivated (copy), isPlaytestDisabled (copy), onPlaytestActivated (copy), getPublishText (copy), FFlagBuildExperienceAnalytics (copy), FFlagBuildExperienceManageDevProductModule (copy), SignalsModule (copy), ReactModule (copy), SignalsReactModule (copy), UniverseConfigurationModule (copy), GameConfigurationLabelsModule (copy), FFlagEnableBuildAdPromotionModule (copy), config (copy)
+	-- upvalues: LocalizationStringsModule (copy), FFlagBuildExperiencePrivateInvitesModule (copy), isShareUnavailable (copy), onShareActivated (copy), isVersionHistoryDisabled (copy), onVersionHistoryActivated (copy), isInviteToPlaytestDisabled (copy), SendBuildExperienceEventModule (copy), GetPrivatePlaytestersStoreFunction (copy), FFlagBuildExperienceDisableNonPublicStatsModule (copy), isStatsDisabled (copy), PrivacyType (copy), FFlagBuildExperienceMenuImprovementsModule (copy), isAssistantDisabled (copy), onAssistantActivated (copy), isPlaytestDisabled (copy), onPlaytestActivated (copy), getPublishText (copy), FFlagBuildExperienceAnalytics (copy), FFlagBuildExperienceManageDevProductModule (copy), SignalsModule (copy), ReactModule (copy), UniverseConfigurationModule (copy), SignalsReactModule (copy), GameConfigurationLabelsModule (copy), FFlagEnableBuildAdPromotionModule (copy), config (copy), omitInviteToPlaytest (copy)
 	local config1 = {
 		id = "settings",
 		requiredPermission = "canEdit",
@@ -234,7 +255,7 @@ return function()
 					},
 					{
 						id = "playtest",
-						requiredPermission = "canPreview",
+						requiredPermission = "canEdit",
 						text = LocalizationStringsModule.BUILD_MENU_PLAYTEST,
 						isDisabled = isPlaytestDisabled,
 						onActivated = onPlaytestActivated
@@ -275,8 +296,21 @@ return function()
 	return {
 		getItems = Signal,
 		useItems = function(p1)
-			-- upvalues: ReactModule (upval), SignalsModule (upval), FFlagBuildExperiencePrivateInvitesModule (upval), GetPrivatePlaytestersStoreFunction (upval), SignalsReactModule (upval), FFlagBuildExperienceAnalytics (upval), UniverseConfigurationModule (upval), GameConfigurationLabelsModule (upval), Signal (copy), FFlagEnableBuildAdPromotionModule (upval), FFlagBuildExperienceMenuImprovementsModule (upval), FFlagBuildExperienceDisableNonPublicStatsModule (upval), PrivacyType (upval), config5 (copy), FFlagBuildExperienceManageDevProductModule (upval), config6 (copy), config (upval), Value (ref)
+			-- upvalues: ReactModule (upval), SignalsModule (upval), FFlagBuildExperiencePrivateInvitesModule (upval), UniverseConfigurationModule (upval), SignalsReactModule (upval), GetPrivatePlaytestersStoreFunction (upval), FFlagBuildExperienceAnalytics (upval), GameConfigurationLabelsModule (upval), Signal (copy), FFlagEnableBuildAdPromotionModule (upval), FFlagBuildExperienceMenuImprovementsModule (upval), FFlagBuildExperienceDisableNonPublicStatsModule (upval), PrivacyType (upval), config5 (copy), FFlagBuildExperienceManageDevProductModule (upval), config6 (copy), config (upval), omitInviteToPlaytest (upval), Value (ref)
 			local UniverseId = if p1 == nil then nil else p1.universeId
+			local IsGroup = SignalsReactModule.useSignalState((ReactModule.useMemo(function()
+				-- upvalues: SignalsModule (upval), FFlagBuildExperiencePrivateInvitesModule (upval), UniverseId (copy), UniverseConfigurationModule (upval)
+				return SignalsModule.createComputed(function(p2)
+					-- upvalues: FFlagBuildExperiencePrivateInvitesModule (upval), UniverseId (upval), UniverseConfigurationModule (upval)
+					if FFlagBuildExperiencePrivateInvitesModule and UniverseId ~= nil then
+						local DataResult = UniverseConfigurationModule.getUniverseConfigurationStore().getAndFetchSummary(UniverseId).data(p2)
+						
+						return if DataResult == nil then nil else DataResult.creatorType
+					else
+						return nil
+					end
+				end)
+			end, { UniverseId }))) == "Group"
 			local UseSignalStateResult = if FFlagBuildExperienceAnalytics then SignalsReactModule.useSignalState((ReactModule.useMemo(function()
 				-- upvalues: SignalsModule (upval), UniverseId (copy), UniverseConfigurationModule (upval), GameConfigurationLabelsModule (upval)
 				return SignalsModule.createComputed(function(p2)
@@ -286,8 +320,9 @@ return function()
 			end, { UniverseId }))) else nil
 			local UseSignalStateResult1 = SignalsReactModule.useSignalState(Signal)
 			local IsGetUsersUserEligible: boolean = FFlagEnableBuildAdPromotionModule and (p1 ~= nil and (p1.canOpenGetUsers == true and p1.getUsersUserEligible == true))
+			local IsGroup1: boolean = FFlagBuildExperiencePrivateInvitesModule and IsGroup
 			local UseMemoResult = ReactModule.useMemo(function()
-				-- upvalues: FFlagBuildExperienceMenuImprovementsModule (upval), FFlagBuildExperienceAnalytics (upval), FFlagBuildExperienceDisableNonPublicStatsModule (upval), UseSignalStateResult (ref), PrivacyType (upval), config5 (upval), FFlagBuildExperienceManageDevProductModule (upval), config6 (upval), IsGetUsersUserEligible (copy), config (upval), FFlagBuildExperiencePrivateInvitesModule (upval), UseSignalStateResult1 (copy), Value (upval)
+				-- upvalues: FFlagBuildExperienceMenuImprovementsModule (upval), FFlagBuildExperienceAnalytics (upval), FFlagBuildExperienceDisableNonPublicStatsModule (upval), UseSignalStateResult (ref), PrivacyType (upval), config5 (upval), FFlagBuildExperienceManageDevProductModule (upval), config6 (upval), IsGetUsersUserEligible (copy), config (upval), FFlagBuildExperiencePrivateInvitesModule (upval), UseSignalStateResult1 (copy), IsGroup1 (copy), omitInviteToPlaytest (upval), Value (upval)
 				if FFlagBuildExperienceMenuImprovementsModule then
 					local List = {}
 					
@@ -307,6 +342,9 @@ return function()
 					
 					if #List > 0 then
 						table.insert(Copy, 1, { items = List })
+					end
+					if IsGroup1 then
+						Copy = omitInviteToPlaytest(Copy)
 					end
 					return Copy
 				else
@@ -333,19 +371,29 @@ return function()
 							Copy[1] = { items = Copy1 }
 						end
 					end
+					if IsGroup1 then
+						Copy = omitInviteToPlaytest(Copy)
+					end
 					return Copy
 				end
 			end, {
 				UseSignalStateResult1,
 				SignalsReactModule.useSignalState((ReactModule.useMemo(function()
-					-- upvalues: SignalsModule (upval), FFlagBuildExperiencePrivateInvitesModule (upval), UniverseId (copy), GetPrivatePlaytestersStoreFunction (upval)
+					-- upvalues: SignalsModule (upval), FFlagBuildExperiencePrivateInvitesModule (upval), UniverseId (copy), UniverseConfigurationModule (upval), GetPrivatePlaytestersStoreFunction (upval)
 					return SignalsModule.createComputed(function(p2): number
-						-- upvalues: FFlagBuildExperiencePrivateInvitesModule (upval), UniverseId (upval), GetPrivatePlaytestersStoreFunction (upval)
-						return if FFlagBuildExperiencePrivateInvitesModule and UniverseId ~= nil then #GetPrivatePlaytestersStoreFunction(false).getAndFetchInvitedPlayers(UniverseId).players(p2) else 0
+						-- upvalues: FFlagBuildExperiencePrivateInvitesModule (upval), UniverseId (upval), UniverseConfigurationModule (upval), GetPrivatePlaytestersStoreFunction (upval)
+						if FFlagBuildExperiencePrivateInvitesModule and UniverseId ~= nil then
+							local DataResult = UniverseConfigurationModule.getUniverseConfigurationStore().getAndFetchSummary(UniverseId).data(p2)
+							
+							return if DataResult == nil or DataResult.creatorType ~= "Group" then #GetPrivatePlaytestersStoreFunction(false).getAndFetchInvitedPlayers(UniverseId).players(p2) else 0
+						else
+							return 0
+						end
 					end)
 				end, { UniverseId }))),
 				UseSignalStateResult,
-				IsGetUsersUserEligible
+				IsGetUsersUserEligible,
+				IsGroup1
 			})
 			
 			return if p1 == nil then {} else UseMemoResult

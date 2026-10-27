@@ -9,7 +9,6 @@ local CreateNewChatContainerModule = require(script.Parent.CreateNewChatContaine
 local LoggerModule = require(script.Parent.Logger)
 local GetFFlagIsSquadEnabledFunction = require(Parent.SharedFlags).GetFFlagIsSquadEnabled
 local FFlagAppChatIxpScreenExposureModule = require(AppChat.Flags.FFlagAppChatIxpScreenExposure)
-local ArgoPartyExperimentation = require(Parent.SocialExperiments).ArgoPartyExperimentation
 local IXPNavigationUtilsModule = require(AppChat.Utils.IXPNavigationUtils)
 local CreateNewChatScreen = RoactModule.PureComponent:extend("CreateNewChatScreen")
 CreateNewChatScreen.defaultProps = {}
@@ -75,13 +74,13 @@ function CreateNewChatScreen.render(p1)
 end
 
 function CreateNewChatScreen.didMount(p1)
-	-- upvalues: LoggerModule (copy), GetTopBarStoreModule (copy), EnumScreensModule (copy), GetFFlagIsSquadEnabledFunction (copy), ArgoPartyExperimentation (copy), UniversalAppPolicyModule (copy)
+	-- upvalues: LoggerModule (copy), GetTopBarStoreModule (copy), EnumScreensModule (copy), GetFFlagIsSquadEnabledFunction (copy), UniversalAppPolicyModule (copy)
 	LoggerModule:info("{screen} mounted")
 	GetTopBarStoreModule(false).setScreenTopBar(EnumScreensModule.CreateNewChat, {
 		backButtonEnabled = true,
 		headerText = {
 			shouldLocalize = true,
-			raw = if GetFFlagIsSquadEnabledFunction() then if ArgoPartyExperimentation.getIsRenameEnabled() and UniversalAppPolicyModule.getAppFeaturePolicies().getCanSeeChatTerminology() then "Feature.Chat.Title.NewChat" else "Feature.Chat.Heading.PartyWithFriends" else "Feature.Chat.Heading.ChatWithConnections"
+			raw = if GetFFlagIsSquadEnabledFunction() then if UniversalAppPolicyModule.getAppFeaturePolicies().getCanSeeChatTerminology() then "Feature.Chat.Title.NewChat" else "Feature.Chat.Heading.PartyWithFriends" else "Feature.Chat.Heading.ChatWithConnections"
 		},
 		systemButtonText = if GetFFlagIsSquadEnabledFunction() then "Feature.Chat.Action.Create" else "Feature.Chat.Action.StartChatWithFriends"
 	})

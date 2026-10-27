@@ -38,6 +38,7 @@ local _ = require(MomentsCreation.Types.CreationFlowTypes)
 local _ = require(Parent.MomentsTypes)
 local TextOverlayTrashZoneModule = require(MomentsCreation.Components.TextOverlay.TextOverlayTrashZone)
 local UseOnScreenKeyboardHeightModule = require(MomentsCreation.Hooks.useOnScreenKeyboardHeight)
+local UseOnScreenKeyboardTopModule = require(MomentsCreation.Hooks.useOnScreenKeyboardTop)
 local UseCreationFlowStringsModule = require(MomentsCreation.Hooks.useCreationFlowStrings)
 local GetFFlagMomentsGenerateTextInTextOverlayModule = require(MomentsCreation.Flags.GetFFlagMomentsGenerateTextInTextOverlay)
 local MakeDefaultTextOverlayEditModule = require(MomentsCreation.Utils.makeDefaultTextOverlayEdit)
@@ -47,6 +48,7 @@ local ComputeEditorChipLayoutModule = require(MomentsCreation.Utils.computeEdito
 local IsPointOverTrashTargetModule = require(MomentsCreation.Utils.isPointOverTrashTarget)
 local PlayDragToDeleteHapticModule = require(MomentsCreation.Utils.playDragToDeleteHaptic)
 local FFlagMomentsTextOverlayChipGrowAboveKeyboard = MomentsCommonModule.Flags.FFlagMomentsTextOverlayChipGrowAboveKeyboard
+local FFlagMomentsTextOverlayToolbarWhileTypingModule = require(MomentsCreation.Flags.FFlagMomentsTextOverlayToolbarWhileTyping)
 local FFlagMomentsTextOverlayEdgeClipFix = MomentsCommonModule.Flags.FFlagMomentsTextOverlayEdgeClipFix
 local FFlagMomentsTextOverlayChipGrowWidthModule = require(MomentsCreation.Flags.FFlagMomentsTextOverlayChipGrowWidth)
 local FFlagMomentsTextOverlayModalTextFixModule = require(MomentsCreation.Flags.FFlagMomentsTextOverlayModalTextFix)
@@ -60,6 +62,45 @@ local NumberSequence1 = NumberSequence.new({
 	NumberSequenceKeypoint.new(0, 1),
 	NumberSequenceKeypoint.new(1, 0.2)
 })
+
+local function _(p1, p2, p3)
+	return p1 or p2 - p3
+end
+
+local FFlagMomentsTextOverlayToolbarWhileTypingModule1 = FFlagMomentsTextOverlayV2Redesign and (FFlagMomentsTextOverlayChipGrowAboveKeyboard and FFlagMomentsTextOverlayToolbarWhileTypingModule)
+
+local function useToolbarWhileTyping(p1, TextBoxRef)
+	-- upvalues: FFlagMomentsTextOverlayV2Redesign (copy), FFlagMomentsTextOverlayChipGrowAboveKeyboard (copy), FFlagMomentsTextOverlayToolbarWhileTypingModule (copy), UseOnScreenKeyboardTopModule (copy), ReactModule (copy), UseCallbackFunction (copy), UseRefFunction (copy), UseEffectFunction (copy)
+	local v1 = 0
+	local v2 = nil
+	local v3 = nil
+	
+	if FFlagMomentsTextOverlayV2Redesign and FFlagMomentsTextOverlayChipGrowAboveKeyboard and FFlagMomentsTextOverlayToolbarWhileTypingModule then
+		v3 = UseOnScreenKeyboardTopModule()
+		local UseStateResult2 = nil
+		v1, UseStateResult2 = ReactModule.useState(0)
+		v2 = UseCallbackFunction(function(Frame)
+			-- upvalues: UseStateResult2 (ref)
+			UseStateResult2(Frame.AbsoluteSize.Y)
+		end, {})
+		local TextOverlayStyle = if p1 == nil then nil else p1.textOverlayStyle
+		local Text = if TextOverlayStyle == nil then nil else `{tostring(TextOverlayStyle.font)}|{tostring(TextOverlayStyle.fontColor)}|{tostring(TextOverlayStyle.textXAlignment)}`
+		local UseRefResult = UseRefFunction(Text)
+		UseEffectFunction(function()
+			-- upvalues: UseRefResult (copy), Text (copy), TextBoxRef (copy)
+			local Current = UseRefResult.current
+			UseRefResult.current = Text
+			
+			if Current == nil or Text == nil or Current == Text then return end
+			local Current1 = TextBoxRef.current
+			
+			if Current1 ~= nil and Current1:IsFocused() then
+				Current1:ReleaseFocus()
+			end
+		end, { Text })
+	end
+	return v1, v2, v3
+end
 
 local function GenerateTextButton(p1)
 	-- upvalues: UseTokensFunction (copy), UseCreationFlowStringsModule (copy), UseSignalStateFunction (copy), UseCallbackFunction (copy), ReactModule (copy), View (copy), Button (copy), FoundationModule (copy), BuilderIconsModule (copy)
@@ -90,7 +131,7 @@ local function GenerateTextButton(p1)
 end
 
 return function(p1)
-	-- upvalues: UseSignalStateFunction (copy), GetScaleFunction (copy), UseMemoFunction (copy), SignalsModule (copy), CreationFlowStateModule (copy), UseRefFunction (copy), UseBindingFunction (copy), UseOnScreenKeyboardHeightModule (copy), FFlagMomentsTextOverlayModalTextFixModule (copy), FFlagMomentsTextOverlayV2Redesign (copy), ConstantsModule (copy), FFlagMomentsTextOverlayEdgeClipFix (copy), TextService (copy), FitTextOverlayFontSizeModule (copy), UseCallbackFunction (copy), GetFFlagMomentsStickerButtonFunction (copy), DashModule (copy), GetFFlagEnableMomentTextGenerationFunction (copy), FireAnalyticsEventModule (copy), EventNames (copy), MakeCreationEventFieldsModule (copy), UseDeviceInsetsFunction (copy), FFlagMomentsTextOverlayTopNavModule (copy), UseTokensFunction (copy), FFlagMomentsTextOverlayDragToDeleteRefinementModule (copy), UseCreationFlowStringsModule (copy), UseAnimatedBindingFunction (copy), UseIsMultiTouchActiveFunction (copy), UIDragDetectorFixEventPositionEnabledEngineFeature (copy), GuiService (copy), IsPointOverTrashTargetModule (copy), ReactOtterModule (copy), PlayDragToDeleteHapticModule (copy), config (copy), UseEffectFunction (copy), MakeTextOverlayEditsForEditorModule (copy), MakeDefaultTextOverlayEditModule (copy), FFlagMomentsTextOverlayChipGrowAboveKeyboard (copy), ComputeEditorChipLayoutModule (copy), FFlagMomentsTextOverlayChipGrowWidthModule (copy), ReactModule (copy), View (copy), FoundationModule (copy), TextOverlay (copy), GetFFlagMomentsGenerateTextInTextOverlayModule (copy), GenerateTextButton (copy), VerticalFontSizeSliderModule (copy), NumberSequence1 (copy), EditorTopNavModule (copy), TextOverlayToolbarModule (copy), OverlayDisplay (copy), TextOverlayDisplay (copy), TextOverlayTrashZoneModule (copy)
+	-- upvalues: UseSignalStateFunction (copy), GetScaleFunction (copy), UseMemoFunction (copy), SignalsModule (copy), CreationFlowStateModule (copy), UseRefFunction (copy), UseBindingFunction (copy), UseOnScreenKeyboardHeightModule (copy), FFlagMomentsTextOverlayToolbarWhileTypingModule1 (copy), useToolbarWhileTyping (copy), FFlagMomentsTextOverlayModalTextFixModule (copy), FFlagMomentsTextOverlayV2Redesign (copy), ConstantsModule (copy), FFlagMomentsTextOverlayEdgeClipFix (copy), TextService (copy), FitTextOverlayFontSizeModule (copy), UseCallbackFunction (copy), GetFFlagMomentsStickerButtonFunction (copy), DashModule (copy), GetFFlagEnableMomentTextGenerationFunction (copy), FireAnalyticsEventModule (copy), EventNames (copy), MakeCreationEventFieldsModule (copy), UseDeviceInsetsFunction (copy), FFlagMomentsTextOverlayTopNavModule (copy), UseTokensFunction (copy), FFlagMomentsTextOverlayDragToDeleteRefinementModule (copy), UseCreationFlowStringsModule (copy), UseAnimatedBindingFunction (copy), UseIsMultiTouchActiveFunction (copy), UIDragDetectorFixEventPositionEnabledEngineFeature (copy), GuiService (copy), IsPointOverTrashTargetModule (copy), ReactOtterModule (copy), PlayDragToDeleteHapticModule (copy), config (copy), UseEffectFunction (copy), MakeTextOverlayEditsForEditorModule (copy), MakeDefaultTextOverlayEditModule (copy), FFlagMomentsTextOverlayChipGrowAboveKeyboard (copy), ComputeEditorChipLayoutModule (copy), FFlagMomentsTextOverlayChipGrowWidthModule (copy), ReactModule (copy), View (copy), FoundationModule (copy), TextOverlay (copy), GetFFlagMomentsGenerateTextInTextOverlayModule (copy), GenerateTextButton (copy), VerticalFontSizeSliderModule (copy), NumberSequence1 (copy), EditorTopNavModule (copy), TextOverlayToolbarModule (copy), OverlayDisplay (copy), TextOverlayDisplay (copy), TextOverlayTrashZoneModule (copy)
 	local Controller = p1.controller
 	local UseSignalStateResult = UseSignalStateFunction(Controller.getStep)
 	local UseSignalStateResult1 = UseSignalStateFunction(p1.ctx.getItemSize)
@@ -112,6 +153,7 @@ return function(p1)
 	local UseRefResult1 = UseRefFunction(nil)
 	local UseBindingResult, UseBindingResult2 = UseBindingFunction(UDim2.fromOffset(0, 0))
 	local UseOnScreenKeyboardHeightModuleResult: number = UseOnScreenKeyboardHeightModule()
+	local UseToolbarWhileTypingResult, UseToolbarWhileTypingResult2, UseToolbarWhileTypingResult3 = useToolbarWhileTyping(UseSignalStateResultEntry, UseRefResult)
 	local UseSignalStateResult4 = if FFlagMomentsTextOverlayModalTextFixModule then UseSignalStateFunction(Controller.getActiveModal) else nil
 	local HasUseSignalStateResult: boolean = FFlagMomentsTextOverlayModalTextFixModule and UseSignalStateResult4 ~= nil
 	local Scale1 = if FFlagMomentsTextOverlayModalTextFixModule then if FFlagMomentsTextOverlayV2Redesign and Scale > 0 then 1 / Scale else 1 else nil
@@ -477,22 +519,26 @@ return function(p1)
 		local _UDim2 = UDim2.fromScale(0.5, 0.5)
 		local FontSize = UseMemoResult
 		local IsUseOnScreenKeyboardHeightModuleResultAbove: boolean = FFlagMomentsTextOverlayV2Redesign and (FFlagMomentsTextOverlayChipGrowAboveKeyboard and UseOnScreenKeyboardHeightModuleResult > 0)
+		local v6: number? = nil
 		
 		if IsUseOnScreenKeyboardHeightModuleResultAbove then
 			local CurrentCamera = workspace.CurrentCamera
-			local Y = if UseRefResult1.current then UseRefResult1.current.AbsolutePosition.Y else 0
+			local Y = if CurrentCamera then CurrentCamera.ViewportSize.Y else UseSignalStateResult1.Y
+			local Y1 = if UseRefResult1.current then UseRefResult1.current.AbsolutePosition.Y else 0
+			v6 = (UseToolbarWhileTypingResult3 or Y - UseOnScreenKeyboardHeightModuleResult) - Y1
 			local EditorChipLayoutModule = ComputeEditorChipLayoutModule({
 				maxChipWidth = 300,
-				keyboardGap = 48,
 				chipPadding = 12,
 				overhangFraction = 0.08,
 				text = UseSignalStateResultEntry.text,
 				font = UseSignalStateResultEntry.textOverlayStyle.font,
 				itemWidth = UseSignalStateResult1.X,
-				viewportHeight = if CurrentCamera then CurrentCamera.ViewportSize.Y else UseSignalStateResult1.Y,
+				viewportHeight = Y,
 				keyboardHeight = UseOnScreenKeyboardHeightModuleResult,
-				layerTopY = Y,
-				topMargin = if FFlagMomentsTextOverlayTopNavModule then Y + UseDeviceInsetsResult.top + v4.Padding.Medium + v4.Size.Size_1000 else 48,
+				keyboardTop = UseToolbarWhileTypingResult3,
+				layerTopY = Y1,
+				keyboardGap = if FFlagMomentsTextOverlayToolbarWhileTypingModule1 and UseToolbarWhileTypingResult > 0 then UseToolbarWhileTypingResult + 16 + 12 else 48,
+				topMargin = if FFlagMomentsTextOverlayTopNavModule then Y1 + UseDeviceInsetsResult.top + v4.Padding.Medium + v4.Size.Size_1000 else 48,
 				growWidthWithText = FFlagMomentsTextOverlayChipGrowWidthModule
 			})
 			FontSize = EditorChipLayoutModule.fontSize
@@ -544,7 +590,17 @@ return function(p1)
 				onBack = OnBack,
 				onSave = OnSave
 			}) else nil,
-			TextOverlayToolbar = if FFlagMomentsTextOverlayV2Redesign then ReactModule.createElement(TextOverlayToolbarModule, {
+			TextOverlayToolbar = if FFlagMomentsTextOverlayToolbarWhileTypingModule1 then ReactModule.createElement(View, {
+				tag = "position-top-left anchor-top-left",
+				ZIndex = 10,
+				Size = if v6 == nil then UDim2.fromScale(1, 1) else UDim2.new(1, 0, 0, v6 - 16)
+			}, {
+				Toolbar = ReactModule.createElement(TextOverlayToolbarModule, {
+					isKeyboardVisible = false,
+					controller = Controller,
+					onAbsoluteSizeChanged = UseToolbarWhileTypingResult2
+				})
+			}) elseif FFlagMomentsTextOverlayV2Redesign then ReactModule.createElement(TextOverlayToolbarModule, {
 				controller = Controller,
 				isKeyboardVisible = UseOnScreenKeyboardHeightModuleResult > 0
 			}) else nil

@@ -3,5 +3,6 @@
 return {
 	resolveField = UserProfileDataHydrationModule.resolveField,
 	updateFromHydration = UserProfileDataHydrationModule.updateFromHydration,
-	getAndFetchUserInfo = UserProfileDataHydrationModule.getAndFetchUserInfo
+	getAndFetchUserInfo = UserProfileDataHydrationModule.getAndFetchUserInfo,
+	getAndFetchUserNames = UserProfileDataHydrationModule.getAndFetchUserNames
 }

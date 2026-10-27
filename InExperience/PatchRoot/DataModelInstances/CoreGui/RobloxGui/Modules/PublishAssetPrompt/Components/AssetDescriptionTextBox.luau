@@ -16,7 +16,6 @@ local CursorKind = UIBloxModule.App.SelectionImage.CursorKind
 local ImageSetLabel = UIBloxModule.Core.ImageSet.ImageSetLabel
 local ComponentAssetsCircle17Stroke1 = UIBloxModule.App.ImageSet.Images["component_assets/circle_17_stroke_1"]
 local _Rect = Rect.new(8, 8, 8, 8)
-local GetFFlagValidateDescriptionModule = require(script.Parent.Parent.GetFFlagValidateDescription)
 local AssetDescriptionTextBox = RoactModule.PureComponent:extend("AssetDescriptionTextBox")
 AssetDescriptionTextBox.validateProps = TModule.strictInterface({
 	Size = TModule.optional(TModule.UDim2),
@@ -87,9 +86,8 @@ function AssetDescriptionTextBox.calculateNeedsRescroll(p1, p2, CaptionBody)
 end
 
 function AssetDescriptionTextBox.onTextChanged(p1, p2, p3, CaptionBody)
-	-- upvalues: GetFFlagValidateDescriptionModule (copy), FoundationFontFaceMigration (copy), GetTextSizeFunction (copy), TextService (copy)
+	-- upvalues: FoundationFontFaceMigration (copy), GetTextSizeFunction (copy), TextService (copy)
 	local Text = p2.Text
-	local Inverted: boolean = not GetFFlagValidateDescriptionModule() or Text ~= ""
 	local LastValidDescription = p1.state.lastValidDescription
 	local Length = utf8.len(utf8.nfcnormalize(Text))
 	
@@ -104,21 +102,20 @@ function AssetDescriptionTextBox.onTextChanged(p1, p2, p3, CaptionBody)
 	local ScaledRelativeSize = CaptionBody.RelativeSize * p3.Font.BaseSize
 	local _Vector2 = Vector2.new(p1.state.textBoxWidth, 10000)
 	p1:setState({
+		isDescriptionValid = true,
 		lastValidDescription = LastValidDescription,
 		assetDescription = Text,
 		descriptionLength = Length11,
-		canvasHeight = math.max(100, (if FoundationFontFaceMigration then GetTextSizeFunction(Text, ScaledRelativeSize, p3.Tokens.Typography.BodySmall.Font, _Vector2, { addTemporaryPadding = false }) else TextService:GetTextSize(Text, ScaledRelativeSize, CaptionBody.Font, _Vector2)).Y),
-		isDescriptionValid = Inverted
+		canvasHeight = math.max(100, (if FoundationFontFaceMigration then GetTextSizeFunction(Text, ScaledRelativeSize, p3.Tokens.Typography.BodySmall.Font, _Vector2, { addTemporaryPadding = false }) else TextService:GetTextSize(Text, ScaledRelativeSize, CaptionBody.Font, _Vector2)).Y)
 	})
-	p1.props.onAssetDescriptionUpdated(Text, Inverted)
+	p1.props.onAssetDescriptionUpdated(Text, true)
 end
 
 function AssetDescriptionTextBox.renderWithProviders(p1, p2, Callback)
-	-- upvalues: GetFFlagValidateDescriptionModule (copy), RoactModule (copy), ImageSetLabel (copy), ComponentAssetsCircle17Stroke1 (copy), _Rect (copy), Focusable (copy), FoundationFontFaceMigration (copy), NormalizeFontFaceFunction (copy), RobloxTranslatorModule (copy), CursorKind (copy)
+	-- upvalues: RoactModule (copy), ImageSetLabel (copy), ComponentAssetsCircle17Stroke1 (copy), _Rect (copy), Focusable (copy), FoundationFontFaceMigration (copy), NormalizeFontFaceFunction (copy), RobloxTranslatorModule (copy), CursorKind (copy)
 	local _Font = p2.Font
 	local CaptionBody = _Font.CaptionBody
 	local Theme = p2.Theme
-	local NoIsDescriptionValid: boolean = if GetFFlagValidateDescriptionModule() then not p1.state.isDescriptionValid else false
 	
 	return RoactModule.createElement("Frame", {
 		BackgroundTransparency = 1,
@@ -194,26 +191,13 @@ function AssetDescriptionTextBox.renderWithProviders(p1, p2, Callback)
 		}),
 		LengthDisplay = if p1.state.descriptionLength / 1000 > 0.9 then RoactModule.createElement("TextLabel", {
 			BackgroundTransparency = 1,
-			Size = UDim2.new(if GetFFlagValidateDescriptionModule() then 0.2 else 1, 0, 0, 15),
+			Size = UDim2.new(1, 0, 0, 15),
 			AnchorPoint = Vector2.new(1, 1),
 			Position = UDim2.fromScale(1, 1),
 			Text = p1.state.descriptionLength .. "/" .. 1000,
 			TextXAlignment = Enum.TextXAlignment.Right,
 			TextColor3 = Theme.TextDefault.Color
-		}) else nil,
-		WarningText = GetFFlagValidateDescriptionModule() and (NoIsDescriptionValid and RoactModule.createElement("TextLabel", {
-			BackgroundTransparency = 1,
-			TextWrapped = true,
-			TextSize = 12,
-			Position = UDim2.new(0, 0, 1, -15),
-			Text = RobloxTranslatorModule:FormatByKey("CoreScripts.PublishAssetPrompt.InvalidDescription"),
-			TextXAlignment = Enum.TextXAlignment.Left,
-			TextYAlignment = Enum.TextYAlignment.Top,
-			Size = UDim2.new(0.8, 0, 0, 20),
-			TextColor3 = Theme.Alert.Color,
-			Font = if FoundationFontFaceMigration then nil else _Font.Body.Font,
-			FontFace = if FoundationFontFaceMigration then NormalizeFontFaceFunction(p2.Tokens.Typography.BodyLarge.Font) else nil
-		}))
+		}) else nil
 	})
 end
 

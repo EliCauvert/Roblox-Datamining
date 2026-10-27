@@ -15,7 +15,6 @@ local ModalTelemetryModule = require(AppChat.Components.ModalTelemetry)
 local UseGetConversationFromIdModule = require(AppChat.Hooks.useGetConversationFromId)
 local UseGetOneToOneFriendIdFromConversationIdModule = require(AppChat.Hooks.useGetOneToOneFriendIdFromConversationId)
 local _ = require(AppChat.Models.ConversationChannels)
-local FFlagAppChatConsolidateTrustedFriendsModalModule = require(AppChat.Flags.FFlagAppChatConsolidateTrustedFriendsModal)
 local ConversationBannerModule = require(script.Parent.ConversationBanner)
 local config = {
 	[ConversationTopModal.AddTrustedConnection] = {
@@ -32,7 +31,7 @@ local config1 = {
 }
 
 return ReactModule.memo(function(p1)
-	-- upvalues: CryoModule (copy), config1 (copy), UseNavigationFunction (copy), config (copy), UseTelemetryModule (copy), ChatConversationTelemetryLayerModule (copy), UseGetConversationFromIdModule (copy), FFlagAppChatConsolidateTrustedFriendsModalModule (copy), UseGetOneToOneFriendIdFromConversationIdModule (copy), ReactModule (copy), ConversationTopModalTelemetryModule (copy), ModalTelemetryModule (copy), EnumScreensModule (copy), ConversationBannerModule (copy)
+	-- upvalues: CryoModule (copy), config1 (copy), UseNavigationFunction (copy), config (copy), UseTelemetryModule (copy), ChatConversationTelemetryLayerModule (copy), UseGetConversationFromIdModule (copy), UseGetOneToOneFriendIdFromConversationIdModule (copy), ReactModule (copy), ConversationTopModalTelemetryModule (copy), ModalTelemetryModule (copy), EnumScreensModule (copy), ConversationBannerModule (copy)
 	local UnionResult = CryoModule.Dictionary.union(config1, p1)
 	local UseNavigationResult = UseNavigationFunction()
 	local Entry = config[UnionResult.modalVariant]
@@ -43,7 +42,7 @@ return ReactModule.memo(function(p1)
 	if UseGetConversationFromIdModuleResult and UseGetConversationFromIdModuleResult.participants then
 		ModalContext = table.concat(UseGetConversationFromIdModuleResult.participants, ",")
 	end
-	local UseGetOneToOneFriendIdFromConversationIdModuleResult = if FFlagAppChatConsolidateTrustedFriendsModalModule then UseGetOneToOneFriendIdFromConversationIdModule(UnionResult.conversationId) else nil
+	local UseGetOneToOneFriendIdFromConversationIdModuleResult = UseGetOneToOneFriendIdFromConversationIdModule(UnionResult.conversationId)
 	ReactModule.useEffect(function()
 		-- upvalues: UseTelemetryModuleResult (copy), ConversationTopModalTelemetryModule (upval), UnionResult (copy), ModalContext (ref)
 		UseTelemetryModuleResult.emit(ConversationTopModalTelemetryModule.Events.ModalRendered, {
@@ -61,11 +60,11 @@ return ReactModule.memo(function(p1)
 		})
 	end, { UnionResult.onDismissed })
 	local UseResult1 = ReactModule.useCallback(function()
-		-- upvalues: Entry (copy), UseNavigationResult (copy), EnumScreensModule (upval), FFlagAppChatConsolidateTrustedFriendsModalModule (upval), UseGetOneToOneFriendIdFromConversationIdModuleResult (copy), UnionResult (copy), UseTelemetryModuleResult (copy), ConversationTopModalTelemetryModule (upval), ModalTelemetryModule (upval), ModalContext (ref)
+		-- upvalues: Entry (copy), UseNavigationResult (copy), EnumScreensModule (upval), UseGetOneToOneFriendIdFromConversationIdModuleResult (copy), UnionResult (copy), UseTelemetryModuleResult (copy), ConversationTopModalTelemetryModule (upval), ModalTelemetryModule (upval), ModalContext (ref)
 		if Entry then
 			UseNavigationResult.navigate(EnumScreensModule.TrustedConnectionsUpsell, {
 				isOverlay = true,
-				userId = if FFlagAppChatConsolidateTrustedFriendsModalModule then UseGetOneToOneFriendIdFromConversationIdModuleResult else nil,
+				userId = UseGetOneToOneFriendIdFromConversationIdModuleResult,
 				modalVariant = Entry.onActivatedOverlayVariant,
 				conversationId = UnionResult.conversationId
 			})

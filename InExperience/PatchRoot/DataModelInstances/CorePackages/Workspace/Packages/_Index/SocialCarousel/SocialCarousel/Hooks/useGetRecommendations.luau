@@ -5,6 +5,7 @@ local CryoModule = require(Parent.Cryo)
 local DataHydrationModule = require(Parent.DataHydration)
 local SignalsModule = require(Parent.Signals)
 local SignalsReactModule = require(Parent.SignalsReact)
+local TutilsModule = require(Parent.tutils)
 local GetDeepValueModule = require(SocialCarousel.Utils.getDeepValue)
 local ConstantsModule = require(SocialCarousel.Common.Constants)
 local RecommendationSourceEnum = require(Parent.SocialCommon).Enums.RecommendationSourceEnum
@@ -14,24 +15,26 @@ local FriendsRecommendationsStore = FriendsRecommendationsModule.FriendsRecommen
 local DataSource = FriendsRecommendationsModule.Enums.DataSource
 local FFlagMigrateFriendshipStatusesSocialCarouselModule = require(SocialCarousel.Flags.FFlagMigrateFriendshipStatusesSocialCarousel)
 local FFlagSocialCarouselMigrateRecommendations = require(Parent.SharedFlags).FFlagSocialCarouselMigrateRecommendations
+local FFlagSocialCarouselStableSelectorsModule = require(SocialCarousel.Flags.FFlagSocialCarouselStableSelectors)
 local GetResult = if FFlagMigrateFriendshipStatusesSocialCarouselModule then DataHydrationModule.Friends.FriendsStore.get() else nil
 local config = { skipFetch = true }
+local Frozen = table.freeze({})
 
-local function v17(p1, p2): boolean
+local function v20(p1, p2): boolean
 	return p1.rank < p2.rank
 end
 
 return function(p1)
-	-- upvalues: UseSelectorFunction (copy), FFlagSocialCarouselMigrateRecommendations (copy), GetDeepValueModule (copy), ConstantsModule (copy), FFlagMigrateFriendshipStatusesSocialCarouselModule (copy), RecommendationSourceEnum (copy), ReactModule (copy), CryoModule (copy), SignalsModule (copy), GetResult (copy), config (copy), SignalsReactModule (copy), FriendsRecommendationsStore (copy), DataSource (copy), v17 (copy)
+	-- upvalues: UseSelectorFunction (copy), FFlagSocialCarouselMigrateRecommendations (copy), GetDeepValueModule (copy), ConstantsModule (copy), FFlagSocialCarouselStableSelectorsModule (copy), Frozen (copy), FFlagMigrateFriendshipStatusesSocialCarouselModule (copy), RecommendationSourceEnum (copy), TutilsModule (copy), ReactModule (copy), CryoModule (copy), SignalsModule (copy), GetResult (copy), config (copy), SignalsReactModule (copy), FriendsRecommendationsStore (copy), DataSource (copy), v20 (copy)
 	local UseSelectorResult = UseSelectorFunction(function(p2)
-		-- upvalues: FFlagSocialCarouselMigrateRecommendations (upval), GetDeepValueModule (upval), ConstantsModule (upval), p1 (copy), FFlagMigrateFriendshipStatusesSocialCarouselModule (upval), RecommendationSourceEnum (upval)
+		-- upvalues: FFlagSocialCarouselMigrateRecommendations (upval), GetDeepValueModule (upval), ConstantsModule (upval), p1 (copy), FFlagSocialCarouselStableSelectorsModule (upval), Frozen (upval), FFlagMigrateFriendshipStatusesSocialCarouselModule (upval), RecommendationSourceEnum (upval)
 		return {
-			recommendationsDict = if FFlagSocialCarouselMigrateRecommendations then nil else GetDeepValueModule(p2, string.format("%s.Friends.recommendations.byUserId.%s", ConstantsModule.RODUX_KEY, p1 or "")) or {},
-			friendshipStatus = if FFlagMigrateFriendshipStatusesSocialCarouselModule then nil else GetDeepValueModule(p2, string.format("%s.Friends.friendshipStatus", ConstantsModule.RODUX_KEY)) or {},
-			friendsCarouselRecommendationIds = if FFlagSocialCarouselMigrateRecommendations then nil else GetDeepValueModule(p2, string.format("%s.Friends.recommendations.bySource.%s", ConstantsModule.RODUX_KEY, RecommendationSourceEnum.HomepageFriendsCarousel)) or {},
+			recommendationsDict = if FFlagSocialCarouselMigrateRecommendations then nil else GetDeepValueModule(p2, string.format("%s.Friends.recommendations.byUserId.%s", ConstantsModule.RODUX_KEY, p1 or "")) or (if FFlagSocialCarouselStableSelectorsModule then Frozen else {}),
+			friendshipStatus = if FFlagMigrateFriendshipStatusesSocialCarouselModule then nil else GetDeepValueModule(p2, string.format("%s.Friends.friendshipStatus", ConstantsModule.RODUX_KEY)) or (if FFlagSocialCarouselStableSelectorsModule then Frozen else {}),
+			friendsCarouselRecommendationIds = if FFlagSocialCarouselMigrateRecommendations then nil else GetDeepValueModule(p2, string.format("%s.Friends.recommendations.bySource.%s", ConstantsModule.RODUX_KEY, RecommendationSourceEnum.HomepageFriendsCarousel)) or (if FFlagSocialCarouselStableSelectorsModule then Frozen else {}),
 			hasIncomingFriendRequest = if FFlagSocialCarouselMigrateRecommendations then nil else GetDeepValueModule(p2, string.format("%s.Friends.recommendations.hasIncomingFriendRequest", ConstantsModule.RODUX_KEY))
 		}
-	end)
+	end, if FFlagSocialCarouselStableSelectorsModule then TutilsModule.shallowEqual else nil)
 	local UseMemoResult = if FFlagSocialCarouselMigrateRecommendations then nil else ReactModule.useMemo(function()
 		-- upvalues: CryoModule (upval), UseSelectorResult (copy)
 		return CryoModule.List.filter(CryoModule.Dictionary.keys(UseSelectorResult.recommendationsDict), function(p2)
@@ -102,8 +105,8 @@ return function(p1)
 		end)
 	end, if FFlagMigrateFriendshipStatusesSocialCarouselModule then {} else { UseSelectorResult.friendshipStatus }))) else nil
 	local UseMemoResult2 = if FFlagSocialCarouselMigrateRecommendations then nil else ReactModule.useMemo(function()
-		-- upvalues: CryoModule (upval), UseMemoResult (copy), UseResult (copy), v17 (upval)
-		return CryoModule.List.sort(CryoModule.List.map(UseMemoResult, UseResult), v17)
+		-- upvalues: CryoModule (upval), UseMemoResult (copy), UseResult (copy), v20 (upval)
+		return CryoModule.List.sort(CryoModule.List.map(UseMemoResult, UseResult), v20)
 	end, { UseMemoResult, UseResult })
 	
 	return if FFlagSocialCarouselMigrateRecommendations then UseSignalStateResult1 else UseMemoResult2

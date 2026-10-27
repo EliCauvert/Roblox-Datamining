@@ -5,7 +5,6 @@ local ReactModule = require(Parent.React)
 local _ = require(BuildExperience.Chat.chatTypes)
 local _ = require(BuildExperience.Stores.GetBuildOverflowMenuStore.createBuildOverflowMenuStore)
 local FFlagBuildExperienceMyCreationsLongPressMenuModule = require(BuildExperience.Flags.FFlagBuildExperienceMyCreationsLongPressMenu)
-local FFlagBuildExperienceMyCreationsUseUniverseListModule = require(BuildExperience.Flags.FFlagBuildExperienceMyCreationsUseUniverseList)
 local DescriptionWithGroupIconModule = require(BuildExperience.utils.descriptionWithGroupIcon)
 local ExperienceResultsLoadingSkeletonModule = require(script.Parent.ExperienceResultsLoadingSkeleton)
 local ExperienceRowActionsMenuModule = require(script.Parent.ExperienceRowActionsMenu)
@@ -116,7 +115,7 @@ local MemoResult = ReactModule.memo(function(Frame)
 end)
 
 return ReactModule.memo(function(p1)
-	-- upvalues: FFlagBuildExperienceMyCreationsLongPressMenuModule (copy), useRowActionsMenu (copy), FFlagBuildExperienceMyCreationsUseUniverseListModule (copy), ReactModule (copy), MemoResult (copy), ExperienceResultsLoadingSkeletonModule (copy), List (copy), ExperienceRowActionsMenuModule (copy), InputSize (copy)
+	-- upvalues: FFlagBuildExperienceMyCreationsLongPressMenuModule (copy), useRowActionsMenu (copy), ReactModule (copy), MemoResult (copy), ExperienceResultsLoadingSkeletonModule (copy), List (copy), ExperienceRowActionsMenuModule (copy), InputSize (copy)
 	local TestIdPrefix = p1.testIdPrefix or "MyCreationsTab"
 	local FirstResultLayoutOrder = p1.firstResultLayoutOrder or 1
 	local Copy = table.clone(p1.leadingItems or {})
@@ -134,7 +133,7 @@ return ReactModule.memo(function(p1)
 	
 	if p1.hasDisplayedResult and p1.hasDisplayedItems then
 		for i, item in p1.items do
-			Copy[if FFlagBuildExperienceMyCreationsUseUniverseListModule then "U" .. item.universeId else "S" .. item.sessionId] = ReactModule.createElement(MemoResult, {
+			Copy["U" .. item.universeId] = ReactModule.createElement(MemoResult, {
 				LayoutOrder = i + FirstResultLayoutOrder - 1,
 				sessionId = item.sessionId,
 				universeId = item.universeId,

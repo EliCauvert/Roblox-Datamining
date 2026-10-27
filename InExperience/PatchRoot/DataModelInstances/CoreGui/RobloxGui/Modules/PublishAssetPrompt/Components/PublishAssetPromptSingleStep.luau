@@ -38,7 +38,6 @@ local config = {
 	[Enum.AssetType.DressSkirtAccessory] = true,
 	[Enum.AssetType.HairAccessory] = true
 }
-local GetFFlagValidateDescriptionModule = require(script.Parent.Parent.GetFFlagValidateDescription)
 local SendConsentDeniedOnCancel = game:DefineFastFlag("SendConsentDeniedOnCancel", false)
 local EnableEmotePublishEngineFeature = game:GetEngineFeature("EnableEmotePublish")
 local EnableImagePublishEngineFeature = game:GetEngineFeature("EnableImagePublish")
@@ -58,7 +57,7 @@ function PublishAssetPromptSingleStep.getDefaultText(p1)
 end
 
 function PublishAssetPromptSingleStep.init(p1)
-	-- upvalues: EmoteThumbnailParametersModule (copy), ExperienceAuthService (copy), GetFFlagValidateDescriptionModule (copy), EnableEmotePublishEngineFeature (copy), RoactModule (copy)
+	-- upvalues: EmoteThumbnailParametersModule (copy), ExperienceAuthService (copy), EnableEmotePublishEngineFeature (copy), RoactModule (copy)
 	p1.assetName = p1:getDefaultText()
 	p1.assetDescription = p1:getDefaultText()
 	p1.isNameValid = true
@@ -106,9 +105,8 @@ function PublishAssetPromptSingleStep.init(p1)
 	end
 	
 	function p1.confirmAndUpload()
-		-- upvalues: p1 (copy), GetFFlagValidateDescriptionModule (upval), EnableEmotePublishEngineFeature (upval), EmoteThumbnailParametersModule (upval), ExperienceAuthService (upval)
+		-- upvalues: p1 (copy), EnableEmotePublishEngineFeature (upval), EmoteThumbnailParametersModule (upval), ExperienceAuthService (upval)
 		if not p1.isNameValid then return end
-		if GetFFlagValidateDescriptionModule() and not p1.isDescriptionValid then return end
 		local config = {
 			assetName = p1.assetName,
 			assetDescription = p1.assetDescription

@@ -307,7 +307,8 @@ config.Counters = {
 	TryOnButtonClicked = "TryOnButtonClicked",
 	GetAvatarPreview = "GetAvatarPreview",
 	BatchGetAssets = "BatchGetAssets",
-	BatchGetItemDetails = "BatchGetItemDetails"
+	BatchGetItemDetails = "BatchGetItemDetails",
+	GetAvatarBackground = "GetAvatarBackground"
 }
 
 return config

@@ -26,15 +26,13 @@ local InputHandlersModule = require(Parent1.InputHandlers)
 local _ = require(Parent1.ReactFocusNavigation)
 local FFlagEnableAppChatSnoozeMenuFocus = require(Parent1.SharedFlags).FFlagEnableAppChatSnoozeMenuFocus
 local GetFFlagAppChatInExpToastSnoozeMenuDismissFixFunction = require(Parent1.SharedFlags).GetFFlagAppChatInExpToastSnoozeMenuDismissFix
-local GetFFlagIsSquadEnabledFunction = require(Parent1.SharedFlags).GetFFlagIsSquadEnabled
 local SnoozeMenuTextXAlignment = game:DefineFastFlag("SnoozeMenuTextXAlignment", false)
 local EventMap = {
 	[Enum.KeyCode.ButtonB] = FocusNavigationEventNameEnum.NavigateBack,
 	[Enum.KeyCode.Escape] = FocusNavigationEventNameEnum.NavigateBack
 }
-local UniversalAppPolicyModule = require(Parent1.UniversalAppPolicy)
 local config = {
-	[require(Parent.type).NotificationTypeEnum.ChatNewMessage] = if require(Parent1.SocialExperiments).ArgoPartyExperimentation.getIsRenameEnabled() then if UniversalAppPolicyModule.getAppFeaturePolicies().getCanSeeChatTerminology() then "CommonUI.Features.Label.Chat" else "Feature.Squads.Label.Party" elseif GetFFlagIsSquadEnabledFunction() then "Feature.Squads.Label.Party" else "Feature.Chat.Action.StartChatWithFriends"
+	[require(Parent.type).NotificationTypeEnum.ChatNewMessage] = if require(Parent1.UniversalAppPolicy).getAppFeaturePolicies().getCanSeeChatTerminology() then "CommonUI.Features.Label.Chat" else "Feature.Squads.Label.Party"
 }
 local config1 = nil
 config1 = {

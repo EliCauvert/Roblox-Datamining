@@ -12,9 +12,10 @@ local FFlagAXSduiCatalogScrollImpressions = AvatarExperienceFlagsModule.FFlagAXS
 local FFlagAXSduiFeedPublishesBreakpoint = AvatarExperienceFlagsModule.FFlagAXSduiFeedPublishesBreakpoint
 local FFlagAXMarketplaceBreakpointMismatchCounter = AvatarExperienceFlagsModule.FFlagAXMarketplaceBreakpointMismatchCounter
 local FFlagAXSduiFeedMaintainScrollOnSeeAll = AvatarExperienceFlagsModule.FFlagAXSduiFeedMaintainScrollOnSeeAll
+local FFlagAXScrollTelemetryIntegration2 = require(Parent.SharedFlags).FFlagAXScrollTelemetryIntegration2
 
 return ReactModule.forwardRef(function(Frame, Ref)
-	-- upvalues: FFlagAXMarketplaceLoadingSkeleton (copy), ReactModule (copy), MarketplaceFeedSkeletonModule (copy), CatalogSduiEntryPointModule (copy), GetCatalogPageIdentifierModule (copy), FFlagAXSduiCatalogScrollImpressions (copy), FFlagAXSduiFeedPublishesBreakpoint (copy), FFlagAXMarketplaceBreakpointMismatchCounter (copy), CATALOGRESULTSHORIZONTALMARGIN (copy), FFlagAXSduiFeedMaintainScrollOnSeeAll (copy)
+	-- upvalues: FFlagAXMarketplaceLoadingSkeleton (copy), ReactModule (copy), MarketplaceFeedSkeletonModule (copy), CatalogSduiEntryPointModule (copy), GetCatalogPageIdentifierModule (copy), FFlagAXSduiCatalogScrollImpressions (copy), FFlagAXSduiFeedPublishesBreakpoint (copy), FFlagAXMarketplaceBreakpointMismatchCounter (copy), CATALOGRESULTSHORIZONTALMARGIN (copy), FFlagAXSduiFeedMaintainScrollOnSeeAll (copy), FFlagAXScrollTelemetryIntegration2 (copy)
 	return ReactModule.createElement(CatalogSduiEntryPointModule, {
 		context = Frame.context,
 		identifier = GetCatalogPageIdentifierModule(Frame.context),
@@ -31,6 +32,7 @@ return ReactModule.forwardRef(function(Frame, Ref)
 		} else nil,
 		scrollPositionRef = if FFlagAXSduiFeedMaintainScrollOnSeeAll then Frame.scrollPositionRef else nil,
 		scrollRestoreRef = if FFlagAXSduiFeedMaintainScrollOnSeeAll then Frame.scrollRestoreRef else nil,
+		scrollPerformanceIntervalName = if FFlagAXScrollTelemetryIntegration2 then Frame.scrollPerformanceIntervalName else nil,
 		ref = Ref
 	})
 end)

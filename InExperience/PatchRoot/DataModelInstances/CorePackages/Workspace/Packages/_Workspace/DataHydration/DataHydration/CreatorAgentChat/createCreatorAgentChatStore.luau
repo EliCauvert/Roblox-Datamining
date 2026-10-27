@@ -476,8 +476,8 @@ return function(p1)
 			experiment = if FFlagBuildExperienceModelPickerData or ExperimentOverrideModule.isEnabled() then p2.experiment else nil
 		})))
 		OnTerminalModule(RpcCallResult.state, if FFlagBuildExperienceLibrary then ActiveBySessionEntry.markAccepted else nil, function(p3, p4)
-			-- upvalues: FFlagBuildExperiencePromptFailureTelemetry (upval), FFlagBuildExperienceModelPickerData (upval), ClassifyRequestFailureModule (upval), RpcCallResult (copy), ActiveBySessionEntry (copy), GetFundingErrorModule (upval), unregisterHandle (upval)
-			local ClassifyRequestFailureModuleResult = if FFlagBuildExperiencePromptFailureTelemetry or FFlagBuildExperienceModelPickerData then ClassifyRequestFailureModule(RpcCallResult.state(false)) else nil
+			-- upvalues: FFlagBuildExperiencePromptFailureTelemetry (upval), ClassifyRequestFailureModule (upval), RpcCallResult (copy), ActiveBySessionEntry (copy), FFlagBuildExperienceModelPickerData (upval), GetFundingErrorModule (upval), unregisterHandle (upval)
+			local ClassifyRequestFailureModuleResult = if FFlagBuildExperiencePromptFailureTelemetry then ClassifyRequestFailureModule(RpcCallResult.state(false)) else nil
 			task.defer(function()
 				-- upvalues: ActiveBySessionEntry (upval), FFlagBuildExperienceModelPickerData (upval), GetFundingErrorModule (upval), RpcCallResult (upval), p3 (copy), p4 (copy), ClassifyRequestFailureModuleResult (copy), unregisterHandle (upval)
 				if ActiveBySessionEntry.isDone() then return end

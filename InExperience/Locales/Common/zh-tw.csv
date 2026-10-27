@@ -2181,6 +2181,8 @@ Feature.Build.Description.PromoteGamePaid,建立廣告，讓你的遊戲觸及�
 Feature.Build.Description.PromoteGameWithAdCampaign,透過為期 {durationDays} 天的廣告活動增加受眾，讓遊戲能被他人發現。
 Feature.Build.Description.RaiseLimitOrWait,提高每日 Robux 上限以繼續創作，或等待使用量於明天重置。
 Feature.Build.Description.RatingAgreement,發佈即表示您同意此內容分級準確無誤。
+Feature.Build.Description.RequiredRobuxForAdvanced,你至少需要 {ROBUX} Robux 才能使用進階模型繼續創作。你也可以切換回「預設」模式，或等待免費使用量重置。
+Feature.Build.Description.RequiredRobuxForDefault,你至少需要 {ROBUX} Robux 才能繼續創作，或等待免費使用量重置。
 Feature.Build.Description.RestoreLatest,此版本將成為你的最新發佈版本。
 Feature.Build.Description.RevertToVersion,確認以還原最新變更並回到 {VERSION}。
 Feature.Build.Description.ShareLatest,分享最新版本的變更內容。
@@ -2428,6 +2430,7 @@ Feature.Build.Message.BuildBusy,組建忙碌中。請稍候片刻再試。
 Feature.Build.Message.BuildConnectFailed,組建系統無法連線，請再試一次。
 Feature.Build.Message.BuildInternalError,組建系統發生問題，請再試一次。
 Feature.Build.Message.BuildResponseFailed,組建系統無法回應，請再試一次。
+Feature.Build.Message.BuildSendUnconfirmed,組建無法確認你的訊息已傳送。
 Feature.Build.Message.BuildStillWorking,正在處理。在等待期間，你可以離開 App、玩 Roblox 或開始另一項專案。
 Feature.Build.Message.BuildStopped,你已停止組建。
 Feature.Build.Message.BuildTakingLonger,處理時間比預期來得長。你可以繼續等待，或開始進行其他操作。
@@ -2533,6 +2536,7 @@ Feature.Build.Title.GameCreationDone,已完成遊戲創作
 Feature.Build.Title.GamePass,遊戲通行證
 Feature.Build.Title.GenericError,
 Feature.Build.Title.GetUsers,取得使用者
+Feature.Build.Title.InsufficientRobuxForModel,你的 Robux 不足
 Feature.Build.Title.ManagedPricingAcknowledgement,是否開啟管理定價功能？
 Feature.Build.Title.Monetization,營利化
 Feature.Build.Title.NoMonetizationProducts,開始在遊戲中賺取收入
@@ -3867,6 +3871,7 @@ Feature.Moments.Title.LeaveMomentCreation,要離開「美好時光」建立程�
 Feature.Moments.Title.MomentRemoved,「美好時光」已移除
 Feature.Moments.Title.PostInsights,貼文洞察分析
 Feature.Moments.Title.ReportPost,檢舉貼文
+Feature.Moments.Title.UnfollowConfirmationDialog,要取消追蹤 @{username} 嗎？
 Feature.Moments.Tooltip.Creation,參與體驗的所有人皆可檢視你的「美好時光」。
 Feature.Moments.Tooltip.PostInsightsBody,查看瀏覽次數、觀看時間，以及受眾對於「美好時光」的反響。
 Feature.Moments.Tooltip.PostInsightsTitle,在此查看「美好時光」深入分析
@@ -4672,6 +4677,7 @@ Feature.UniversalShareSheet.Response.SharedCustomMessage,{CUSTOM_MESSAGE} 和另
 Feature.UniversalShareSheet.Response.SharedMessage,訊息已傳送
 Feature.UniversalShareSheet.Response.SharedMultipleMessages,
 Feature.UniversalShareSheet.SharedCustomMultipleMessages,{CUSTOM_MESSAGE} 和另外 {N} 人
+Feature.UserLibrary.Label.MyLibrary,我的收藏庫
 Feature.VerificationUpsell.Action.AddPhone,新增手機號碼
 Feature.VerificationUpsell.Action.AddPhoneNumber,
 Feature.VerificationUpsell.Action.AddPhoneVoice,新增手機號碼以使用語音聊天

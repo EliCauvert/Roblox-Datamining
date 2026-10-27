@@ -4,7 +4,6 @@ local _ = require(Parent.MomentsTypes)
 local GetFFlagMomentsTTSAudioOverlayModule = require(MomentsCreation.Flags.GetFFlagMomentsTTSAudioOverlay)
 local FFlagMomentsTextOverlayV2Redesign = require(Parent.MomentsCommon).Flags.FFlagMomentsTextOverlayV2Redesign
 local FFlagMomentsCommentsCreatorControlModule = require(MomentsCreation.Flags.FFlagMomentsCommentsCreatorControl)
-local MomentsPostCtaUseCaptureUniverse = game:DefineFastFlag("MomentsPostCtaUseCaptureUniverse", false)
 
 local function _(p1)
 	return if typeof(p1) == "EnumItem" then p1.Name else p1
@@ -54,7 +53,7 @@ local function convertTextOverlay(p1)
 end
 
 return function(p1, Capture)
-	-- upvalues: FFlagMomentsCommentsCreatorControlModule (copy), convertTextOverlay (copy), GetFFlagMomentsTTSAudioOverlayModule (copy), MomentsPostCtaUseCaptureUniverse (copy), FFlagMomentsTextOverlayV2Redesign (copy)
+	-- upvalues: FFlagMomentsCommentsCreatorControlModule (copy), convertTextOverlay (copy), GetFFlagMomentsTTSAudioOverlayModule (copy), FFlagMomentsTextOverlayV2Redesign (copy)
 	local config = { caption = p1.description }
 	
 	if FFlagMomentsCommentsCreatorControlModule and p1.commentsEnabled == false then
@@ -100,12 +99,12 @@ return function(p1, Capture)
 			}
 		end
 	end
-	local UniverseIdOverride = p1.universeIdOverride or p1.universeId
-	
-	if MomentsPostCtaUseCaptureUniverse then
-		local UniverseId: number = p1.universeId
-		UniverseIdOverride = if UniverseId == nil or UniverseId <= 0 then p1.universeIdOverride else UniverseId
+	if not p1.universeIdOverride then
+		local _ = p1.universeId
 	end
+	local UniverseId: number = p1.universeId
+	local UniverseIdOverride = if UniverseId == nil or UniverseId <= 0 then p1.universeIdOverride else UniverseId
+	
 	if UniverseIdOverride and p1.placeId then
 		config.primaryCta = { experienceId = UniverseIdOverride, placeId = p1.placeId }
 	end

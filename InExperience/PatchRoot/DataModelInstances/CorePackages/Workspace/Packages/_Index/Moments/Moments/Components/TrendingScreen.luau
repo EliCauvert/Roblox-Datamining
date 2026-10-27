@@ -39,6 +39,7 @@ local CreateSignalTrackerFunction = require(Moments.SignalTracker).createSignalT
 local SharedFlagsModule = require(Parent.SharedFlags)
 local FFlagEnableArgus = SharedFlagsModule.FFlagEnableArgus
 local FFlagMomentsCreationFeatureGate = SharedFlagsModule.FFlagMomentsCreationFeatureGate
+local FFlagMomentsRenderAvatarPostsInFeed = SharedFlagsModule.FFlagMomentsRenderAvatarPostsInFeed
 local IsStudioModule = require(Parent.MomentsCommon.isStudio)
 local ReportModalCovering = require(Parent.MomentsCommon).Media.reportModalCovering
 local GetFFlagArgusStudioMockFeedModule = require(Moments.Flags.GetFFlagArgusStudioMockFeed)
@@ -65,7 +66,7 @@ local function _()
 end
 
 return function(p1)
-	-- upvalues: ReactModule (copy), MomentsLocalStorageModule (copy), MomentsLocalStorageKeysModule (copy), UseScreenBottomInsetModule (copy), UseFeedPlaybackActiveModule (copy), FFlagMomentsNavigationEventModule (copy), UseMomentsTabIsVisibleModule (copy), SignalsReactModule (copy), GetMomentsPreferencesStoreModule (copy), UseMomentsSessionFunction (copy), UseMomentsHostFunction (copy), UseMomentsGatingFunction (copy), FFlagMomentsCreationFeatureGate (copy), UseCreationEntryModule (copy), UseUploadHostModule (copy), SessionManager (copy), FunnelEventNames (copy), FireFunnelAnalyticsEventFunction (copy), IsStudioModule (copy), GetFFlagArgusStudioMockFeedModule (copy), CreateMockFeedSourceFunction (copy), CreateMomentsFeedSourceModule (copy), SignalTracker (copy), FFlagEnableArgus (copy), CreateRecommendationTelemetryFunction (copy), GetImmersiveChromeStoreModule (copy), ReportModalCovering (copy), FFlagMomentsFixRecommendationImpressionLifecycleModule (copy), NavigationDestinationTypeModule (copy), FFlagMomentsFlushDwellBeforeNavigationModule (copy), RoactNavigationModule (copy), RobloxAppEventsModule (copy), AppPage (copy), GetUploadStoreModule (copy), MomentsUpload (ref), Parent (copy), LogCreateIntentModule (copy), FireAnalyticsEventFunction (copy), EventNames (copy), TopBarModule (copy), FFlagMomentsFixFeedForDeviceSafeInsetsModule (copy), MomentsCommonModule (copy), ShouldUseDeviceSafeInsets (copy), MomentOverlayInsetContextModule (copy), FFlagMomentsFeedAboveNavBarModule (copy), View (copy), ShouldUseDeviceSafeInsets1 (copy), ConstantsModule (copy), MomentsFeedSurfaceModule (copy), MomentUnavailableDialogModule (copy), CreationFlowScreen (copy), FTUXEducationScreenModule (copy)
+	-- upvalues: ReactModule (copy), MomentsLocalStorageModule (copy), MomentsLocalStorageKeysModule (copy), UseScreenBottomInsetModule (copy), UseFeedPlaybackActiveModule (copy), FFlagMomentsNavigationEventModule (copy), UseMomentsTabIsVisibleModule (copy), SignalsReactModule (copy), GetMomentsPreferencesStoreModule (copy), UseMomentsSessionFunction (copy), UseMomentsHostFunction (copy), UseMomentsGatingFunction (copy), FFlagMomentsCreationFeatureGate (copy), UseCreationEntryModule (copy), UseUploadHostModule (copy), SessionManager (copy), FunnelEventNames (copy), FireFunnelAnalyticsEventFunction (copy), IsStudioModule (copy), GetFFlagArgusStudioMockFeedModule (copy), CreateMockFeedSourceFunction (copy), CreateMomentsFeedSourceModule (copy), SignalTracker (copy), FFlagEnableArgus (copy), CreateRecommendationTelemetryFunction (copy), GetImmersiveChromeStoreModule (copy), ReportModalCovering (copy), FFlagMomentsFixRecommendationImpressionLifecycleModule (copy), NavigationDestinationTypeModule (copy), FFlagMomentsFlushDwellBeforeNavigationModule (copy), RoactNavigationModule (copy), RobloxAppEventsModule (copy), AppPage (copy), GetUploadStoreModule (copy), MomentsUpload (ref), Parent (copy), LogCreateIntentModule (copy), FireAnalyticsEventFunction (copy), EventNames (copy), TopBarModule (copy), FFlagMomentsFixFeedForDeviceSafeInsetsModule (copy), MomentsCommonModule (copy), ShouldUseDeviceSafeInsets (copy), MomentOverlayInsetContextModule (copy), FFlagMomentsFeedAboveNavBarModule (copy), View (copy), FFlagMomentsRenderAvatarPostsInFeed (copy), ShouldUseDeviceSafeInsets1 (copy), ConstantsModule (copy), MomentsFeedSurfaceModule (copy), MomentUnavailableDialogModule (copy), CreationFlowScreen (copy), FTUXEducationScreenModule (copy)
 	local UseStateResult, UseStateResult2 = ReactModule.useState(function(): boolean
 		-- upvalues: MomentsLocalStorageModule (upval), MomentsLocalStorageKeysModule (upval)
 		return not MomentsLocalStorageModule.getField(MomentsLocalStorageKeysModule.CreateTooltipSeen)
@@ -253,7 +254,13 @@ return function(p1)
 		local UseDeviceInsetsResult = MomentsCommonModule.Hooks.useDeviceInsets()
 		YOffset = if ShouldUseDeviceSafeInsets then UseDeviceInsetsResult.top else 0
 	end
-	return ReactModule.createElement(View, { tag = "size-full bg-surface-0" }, {
+	return ReactModule.createElement(View, {
+		backgroundStyle = if FFlagMomentsRenderAvatarPostsInFeed then { Transparency = 1 } else nil,
+		tag = {
+			["size-full"] = FFlagMomentsRenderAvatarPostsInFeed,
+			["size-full bg-surface-0"] = not FFlagMomentsRenderAvatarPostsInFeed
+		}
+	}, {
 		Surface = ReactModule.createElement(MomentsFeedSurfaceModule, {
 			trackSurfaceLoad = true,
 			source = UseMemoResult,
@@ -264,9 +271,10 @@ return function(p1)
 			controllerRef = UseRefResult,
 			header = UseMemoResult2,
 			renderFeedContainer = ReactModule.useCallback(function(Feed)
-				-- upvalues: ReactModule (upval), MomentOverlayInsetContextModule (upval), UseScreenBottomInsetModuleResult (copy), FFlagMomentsFeedAboveNavBarModule (upval), View (upval), ShouldUseDeviceSafeInsets1 (upval), YOffset (ref), ConstantsModule (upval)
+				-- upvalues: ReactModule (upval), MomentOverlayInsetContextModule (upval), UseScreenBottomInsetModuleResult (copy), FFlagMomentsFeedAboveNavBarModule (upval), View (upval), FFlagMomentsRenderAvatarPostsInFeed (upval), ShouldUseDeviceSafeInsets1 (upval), YOffset (ref), ConstantsModule (upval)
 				return ReactModule.createElement(View, {
 					testId = "--moments-feed-container-full-bleed",
+					backgroundStyle = if FFlagMomentsRenderAvatarPostsInFeed then { Transparency = 1 } else nil,
 					tag = { ["size-full"] = not ShouldUseDeviceSafeInsets1 },
 					Position = if ShouldUseDeviceSafeInsets1 then UDim2.fromOffset(0, -YOffset) else nil,
 					Size = if ShouldUseDeviceSafeInsets1 then UDim2.new(1, 0, 1, YOffset) else nil,

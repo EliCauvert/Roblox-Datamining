@@ -10,6 +10,7 @@ local _ = require(MomentsCommon.Media.mediaNodeRegistry)
 local DefaultMediaNodeRegistryModule = require(MomentsCommon.Media.defaultMediaNodeRegistry)
 local FFlagMomentsVideoPermissionContextFixModule = require(MomentsCommon.Flags.FFlagMomentsVideoPermissionContextFix)
 local FFlagMomentsOptimisticProfilePending = require(Parent.SharedFlags).FFlagMomentsOptimisticProfilePending
+local FFlagMomentsRenderAvatarPostsInFeed = require(Parent.SharedFlags).FFlagMomentsRenderAvatarPostsInFeed
 local _ = require(MomentsCommon.Media.Nodes.createVideoNode)
 local _ = require(MomentsCommon.Media.Nodes.createScreenshotNode)
 local _ = require(MomentsCommon.Media.Nodes.createMusicNode)
@@ -20,7 +21,7 @@ local GetFFlagMomentsStickerButtonModule = require(MomentsCommon.Flags.GetFFlagM
 local LoopEpsilonSeconds = require(MomentsCommon.Media.Preload.preloadConstants).loopEpsilonSeconds
 
 return function(p1, p2)
-	-- upvalues: DefaultMediaNodeRegistryModule (copy), MediaRootModule (copy), CreateAudioGraphModule (copy), FFlagMomentsVideoPermissionContextFixModule (copy), FFlagMomentsOptimisticProfilePending (copy), GetFFlagMomentsStickerButtonModule (copy), CreateSignalFunction (copy), CreateComputedFunction (copy), CryoModule (copy), LoopEpsilonSeconds (copy)
+	-- upvalues: DefaultMediaNodeRegistryModule (copy), MediaRootModule (copy), CreateAudioGraphModule (copy), FFlagMomentsVideoPermissionContextFixModule (copy), FFlagMomentsRenderAvatarPostsInFeed (copy), FFlagMomentsOptimisticProfilePending (copy), GetFFlagMomentsStickerButtonModule (copy), CreateSignalFunction (copy), CreateComputedFunction (copy), CryoModule (copy), LoopEpsilonSeconds (copy)
 	local Services = p2.services
 	local Registry = p2.registry or DefaultMediaNodeRegistryModule()
 	local IsCaptureTypeMatch = p1.captureType == Enum.CaptureType.Video
@@ -77,8 +78,8 @@ return function(p1, p2)
 		local Screenshot = Registry.create("screenshot", {
 			id = "screenshot",
 			kind = "screenshot",
-			image = p1.content.Uri,
-			imageContent = if FFlagMomentsOptimisticProfilePending then p1.content else nil,
+			image = if FFlagMomentsRenderAvatarPostsInFeed and p1.isExternalBase == true then nil else p1.content.Uri,
+			imageContent = if FFlagMomentsRenderAvatarPostsInFeed and p1.isExternalBase == true then p1.content elseif FFlagMomentsOptimisticProfilePending then p1.content else nil,
 			poster = if p1.posterContent == nil then nil else p1.posterContent.Uri,
 			posterContent = if FFlagMomentsOptimisticProfilePending then p1.posterContent else nil,
 			parent = Folder
@@ -209,8 +210,8 @@ return function(p1, p2)
 	
 	for _, value2 in List do
 		local NoGetAudioSource = value2.getAudioSource == nil or value2.usesDecoder
-		local GetAudioSourceFunction = nil
 		local AudioStem = nil
+		local GetAudioSourceFunction = nil
 		
 		if not NoGetAudioSource then
 			AudioStem = value2.audioStem
@@ -224,8 +225,10 @@ return function(p1, p2)
 	local Signal1, Signal2 = CreateSignalFunction(false)
 	local Signal3, Signal2_1 = CreateSignalFunction(false)
 	local Signal4, Signal2_2 = CreateSignalFunction(false)
-	local Signal5, Signal2_3 = CreateSignalFunction(0)
-	local Signal6, Signal2_4 = CreateSignalFunction(false)
+	local Loading, Loading2 = CreateSignalFunction("Loading")
+	local Signal5, Signal2_3 = CreateSignalFunction(nil)
+	local Signal6, Signal2_4 = CreateSignalFunction(0)
+	local Signal7, Signal2_5 = CreateSignalFunction(false)
 	local Flag = false
 	local Largest = nil
 	local GetPosition = if v1 == nil then v2.getPosition else v1.getPosition
@@ -234,18 +237,24 @@ return function(p1, p2)
 		return if Signal4(p3) then "Playing" elseif Signal3(p3) then "Decoded" elseif Signal1(p3) then "Downloaded" else "Idle"
 	end)
 	local Computed1 = CreateComputedFunction(function(p3)
-		-- upvalues: v1 (ref), Signal3 (copy), Signal1 (copy), v2 (ref), Signal4 (copy), Signal6 (copy)
+		-- upvalues: v1 (ref), Signal3 (copy), Signal1 (copy), v2 (ref), FFlagMomentsRenderAvatarPostsInFeed (upval), p1 (copy), Loading (copy), Signal5 (copy), Signal4 (copy), Signal7 (copy)
 		local Resolution = nil
+		local Ready = nil
 		local FailureReason1 = nil
 		local TimeLength = nil
-		local Ready = nil
 		local Duration = nil
 		
 		if v1 == nil then
 			local v5 = v2
-			local FailureReason = v5.getFailureReason(p3)
-			Ready = if FailureReason == nil then if v5.getIsImageLoaded(p3) then "Ready" else "Loading" else "Failed"
-			FailureReason1 = FailureReason
+			
+			if FFlagMomentsRenderAvatarPostsInFeed and p1.isExternalBase == true then
+				Ready = Loading(p3)
+				FailureReason1 = Signal5(p3)
+			else
+				local FailureReason = v5.getFailureReason(p3)
+				Ready = if FailureReason == nil then if v5.getIsImageLoaded(p3) then "Ready" else "Loading" else "Failed"
+				FailureReason1 = FailureReason
+			end
 			Duration = v5.getDuration()
 			TimeLength = v5.getDuration()
 		else
@@ -262,7 +271,7 @@ return function(p1, p2)
 			duration = Duration,
 			timeLength = TimeLength,
 			isPlaying = Signal4(p3),
-			isMuted = Signal6(p3),
+			isMuted = Signal7(p3),
 			failureReason = FailureReason1
 		}
 	end, CryoModule.Dictionary.equals)
@@ -393,7 +402,7 @@ return function(p1, p2)
 	return {
 		getState = Computed1,
 		getPosition = GetPosition,
-		getUserToggleNonce = Signal5,
+		getUserToggleNonce = Signal6,
 		getVisualLayers = Signal,
 		getResourceLevel = Computed,
 		audio = {
@@ -410,10 +419,10 @@ return function(p1, p2)
 				end
 			end,
 			setMasterMuted = function(p4)
-				-- upvalues: Flag (ref), AudioGraphModule (copy), Signal2_4 (copy)
+				-- upvalues: Flag (ref), AudioGraphModule (copy), Signal2_5 (copy)
 				if not Flag then
 					AudioGraphModule.setMasterMuted(p4)
-					Signal2_4(p4)
+					Signal2_5(p4)
 					
 					return
 				end
@@ -483,7 +492,7 @@ return function(p1, p2)
 			pauseAndRemember(p4 or 2)
 		end,
 		toggle = function()
-			-- upvalues: Flag (ref), Signal4 (copy), v1 (ref), pauseAndRemember (copy), play (copy), Signal2_3 (copy), Signal5 (copy)
+			-- upvalues: Flag (ref), Signal4 (copy), v1 (ref), pauseAndRemember (copy), play (copy), Signal2_4 (copy), Signal6 (copy)
 			if Flag then return end
 			if not Signal4(false) and (v1 ~= nil and not v1.isPlaybackReady()) then return end
 			if Signal4(false) then
@@ -491,7 +500,7 @@ return function(p1, p2)
 			else
 				play()
 			end
-			Signal2_3(Signal5(false) + 1)
+			Signal2_4(Signal6(false) + 1)
 		end,
 		seek = function(p4: number)
 			-- upvalues: Flag (ref), Signal4 (copy), Computed1 (copy), List (copy)
@@ -519,7 +528,7 @@ return function(p1, p2)
 			end
 		end,
 		setActive = function(p5)
-			-- upvalues: Largest (ref), Flag (ref), AudioGraphModule (copy), Signal2_4 (copy)
+			-- upvalues: Largest (ref), Flag (ref), AudioGraphModule (copy), Signal2_5 (copy)
 			if p5 then
 				Largest = nil
 			end
@@ -527,7 +536,16 @@ return function(p1, p2)
 			
 			if not Flag then
 				AudioGraphModule.setMasterMuted(NoP14)
-				Signal2_4(NoP14)
+				Signal2_5(NoP14)
+				
+				return
+			end
+		end,
+		setExternalBaseReadiness = function(p5, p6)
+			-- upvalues: Flag (ref), FFlagMomentsRenderAvatarPostsInFeed (upval), p1 (copy), Signal2_3 (copy), Loading2 (copy)
+			if not Flag and FFlagMomentsRenderAvatarPostsInFeed and p1.isExternalBase == true then
+				Signal2_3(if p5 == "Failed" then p6 else nil)
+				Loading2(p5)
 				
 				return
 			end

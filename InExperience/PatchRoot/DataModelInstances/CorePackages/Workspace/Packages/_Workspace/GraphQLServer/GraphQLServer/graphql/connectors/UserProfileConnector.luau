@@ -3,8 +3,10 @@ local GraphQLServer = script:FindFirstAncestor("GraphQLServer")
 local Parent = GraphQLServer.Parent
 local FFlagUserProfileBetterErrorsModule = require(GraphQLServer.Flags.FFlagUserProfileBetterErrors)
 local FFlagUserProfilePlatformProfile = require(Parent.SharedFlags).FFlagUserProfilePlatformProfile
+local FFlagUserProfileMergeCachedNames = require(Parent.SharedFlags).FFlagUserProfileMergeCachedNames
 local FIntUserProfileStoreBatchSize = require(Parent.SharedFlags).FIntUserProfileStoreBatchSize
 local PlatformProfileRequestModule = require(GraphQLServer.PlatformProfileRequest)
+local FillRequestedNamesModule = require(GraphQLServer.fillRequestedNames)
 local _ = require(Parent.LuauPolyfill)
 local PromiseModule = require(Parent.Promise)
 local FetchModule = require(Parent.Fetch)
@@ -18,11 +20,11 @@ local v1 = require(Parent.UrlBuilder).UrlBuilder.new({
 })()
 
 local function fetchProfilesByIds(Entry, Fields, p1)
-	-- upvalues: Fetch (copy), PromiseModule (copy), FFlagUserProfilePlatformProfile (copy), FIntUserProfileStoreBatchSize (copy), fetchProfilesByIds (copy), PlatformProfileRequestModule (copy), v1 (copy), HttpService (copy), FFlagUserProfileBetterErrorsModule (copy), Response (copy), GraphQLError (copy)
+	-- upvalues: Fetch (copy), PromiseModule (copy), FFlagUserProfilePlatformProfile (copy), FIntUserProfileStoreBatchSize (copy), fetchProfilesByIds (copy), PlatformProfileRequestModule (copy), v1 (copy), HttpService (copy), FFlagUserProfileBetterErrorsModule (copy), Response (copy), GraphQLError (copy), FFlagUserProfileMergeCachedNames (copy), FillRequestedNamesModule (copy)
 	local Fetch1 = if p1 then p1 else Fetch
 	
 	return PromiseModule.new(function(Callback: (any) -> (), Callback1: (any) -> ())
-		-- upvalues: FFlagUserProfilePlatformProfile (upval), Entry (copy), FIntUserProfileStoreBatchSize (upval), fetchProfilesByIds (upval), Fields (copy), Fetch1 (copy), PlatformProfileRequestModule (upval), v1 (upval), HttpService (upval), FFlagUserProfileBetterErrorsModule (upval), Response (upval), GraphQLError (upval)
+		-- upvalues: FFlagUserProfilePlatformProfile (upval), Entry (copy), FIntUserProfileStoreBatchSize (upval), fetchProfilesByIds (upval), Fields (copy), Fetch1 (copy), PlatformProfileRequestModule (upval), v1 (upval), HttpService (upval), FFlagUserProfileBetterErrorsModule (upval), Response (upval), GraphQLError (upval), FFlagUserProfileMergeCachedNames (upval), FillRequestedNamesModule (upval)
 		if FFlagUserProfilePlatformProfile and FIntUserProfileStoreBatchSize < #Entry then
 			local List = {}
 			
@@ -77,6 +79,9 @@ local function fetchProfilesByIds(Entry, Fields, p1)
 				
 				if FFlagUserProfilePlatformProfile then
 					ProfileDetails = PlatformProfileRequestModule.normalizeProfiles(ProfileDetails, Fields)
+				end
+				if FFlagUserProfileMergeCachedNames then
+					ProfileDetails = FillRequestedNamesModule(ProfileDetails, Fields)
 				end
 				Callback(ProfileDetails)
 				

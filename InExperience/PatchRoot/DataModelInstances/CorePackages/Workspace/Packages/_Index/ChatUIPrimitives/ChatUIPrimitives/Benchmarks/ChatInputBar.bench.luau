@@ -1,32 +1,21 @@
 ﻿local ChatUIPrimitives = script:FindFirstAncestor("ChatUIPrimitives")
 local Parent = ChatUIPrimitives.Parent
 local ReactModule = require(Parent.React)
-local FoundationModule = require(Parent.Foundation)
-local BenchmarkFunction = require(Parent.Dev.JestBenchmark).benchmark
+local RenderFunction = require(Parent.Dev.ReactTestingLibrary).render
 local BenchmarkUtilsModule = require(Parent.Dev.BenchmarkUtils)
-local MountComponentTimesFunction = BenchmarkUtilsModule.mountComponentTimes
-local ChatInputBarViewModule = require(ChatUIPrimitives.Components.ChatInputBar.ChatInputBarView)
-
-local function inputBarProps()
-	return {
-		canLocalUserChat = true,
-		placeholderText = "Write a message",
-		onSend = function(_) end,
-		autocomplete = { commands = nil, emojis = true }
-	}
-end
-
-local function wrapped()
-	-- upvalues: ReactModule (copy), FoundationModule (copy), ChatInputBarViewModule (copy), inputBarProps (copy)
-	return ReactModule.createElement(FoundationModule.FoundationProvider, nil, ReactModule.createElement(ChatInputBarViewModule, (inputBarProps())))
-end
-
+local BenchmarkWarmFunction = BenchmarkUtilsModule.benchmarkWarm
+local BenchmarkInstanceCountFunction = BenchmarkUtilsModule.benchmarkInstanceCount
+local Element = ReactModule.createElement(require(Parent.Foundation).FoundationProvider, nil, ReactModule.createElement(require(ChatUIPrimitives.Components.ChatInputBar.ChatInputBarView), {
+	canLocalUserChat = true,
+	placeholderText = "Write a message",
+	onSend = function(_) end,
+	autocomplete = { commands = nil, emojis = true }
+}))
 BenchmarkUtilsModule.benchFile(script, function()
-	-- upvalues: BenchmarkFunction (copy), Parent (copy), wrapped (copy), MountComponentTimesFunction (copy), ReactModule (copy), FoundationModule (copy), ChatInputBarViewModule (copy), inputBarProps (copy)
-	BenchmarkFunction("Render ChatInputBarView (emoji autocomplete)", function()
-		-- upvalues: Parent (upval), wrapped (upval)
-		require(Parent.Dev.ReactTestingLibrary).render(wrapped()):unmount()
+	-- upvalues: BenchmarkWarmFunction (copy), RenderFunction (copy), Element (copy), BenchmarkInstanceCountFunction (copy)
+	BenchmarkWarmFunction("Render ChatInputBarView (emoji autocomplete)", function()
+		-- upvalues: RenderFunction (upval), Element (upval)
+		RenderFunction(Element):unmount()
 	end)
-	MountComponentTimesFunction(ReactModule.createElement(FoundationModule.FoundationProvider, nil, ReactModule.createElement(ChatInputBarViewModule, (inputBarProps()))), "ChatInputBarView", 25)
-	MountComponentTimesFunction(ReactModule.createElement(FoundationModule.FoundationProvider, nil, ReactModule.createElement(ChatInputBarViewModule, (inputBarProps()))), "ChatInputBarView", 50)
+	BenchmarkInstanceCountFunction("Mount ChatInputBarView (emoji autocomplete)", Element)
 end)

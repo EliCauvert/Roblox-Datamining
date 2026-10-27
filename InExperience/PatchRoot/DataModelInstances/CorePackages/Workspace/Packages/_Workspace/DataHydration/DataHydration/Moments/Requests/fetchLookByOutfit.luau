@@ -3,39 +3,52 @@ local Parent = script:FindFirstAncestor("DataHydration").Parent
 local HttpModule = require(Parent.Http)
 local HttpClientModule = require(Parent.HttpClient)
 local PromiseModule = require(Parent.Promise)
+local FFlagMomentsRenderAvatarPostsInFeed = require(Parent.SharedFlags).FFlagMomentsRenderAvatarPostsInFeed
 
 local function _(p1)
 	return if type(p1) == "string" and p1 ~= "" then p1 else nil
 end
 
 local function normalizeLookByOutfit(p1)
+	-- upvalues: FFlagMomentsRenderAvatarPostsInFeed (copy)
 	if type(p1) ~= "table" then
 		return nil, `Type table required, got {type(p1)}.`
-	elseif type(p1.look) ~= "table" then
-		return {}, "look normalization failed with: \"look\" is absent or not a table"
-	else
-		local Look = p1.look
-		local LookId = Look.lookId
-		
-		if type(LookId) == "string" then
-			local Name = Look.name
-			local Name1 = if type(Name) == "string" and Name ~= "" then Name else nil
-			local Description = Look.description
-			
-			return {
-				look = {
-					lookId = LookId,
-					outfitId = if type(Look.outfitId) == "number" then Look.outfitId else nil,
-					name = Name1,
-					description = if type(Description) == "string" and Description ~= "" then Description else nil,
-					totalPrice = if type(Look.totalPrice) == "number" then Look.totalPrice else nil,
-					itemCount = if type(Look.items) == "table" then #Look.items else 0
-				}
-			}, nil
-		else
-			return nil, "look normalization failed with: required field \"lookId\" is absent or not a string"
-		end
 	end
+	if type(p1.look) ~= "table" then
+		return {}, "look normalization failed with: \"look\" is absent or not a table"
+	end
+	local Look = p1.look
+	local LookId = Look.lookId
+	
+	if type(LookId) ~= "string" then
+		return nil, "look normalization failed with: required field \"lookId\" is absent or not a string"
+	end
+	local Copy = nil
+	if FFlagMomentsRenderAvatarPostsInFeed then
+		Copy = table.clone(Look)
+		Copy.lookId = LookId
+		Copy.outfitId = if type(Look.outfitId) == "number" then Look.outfitId else nil
+		local Name = Look.name
+		Copy.name = if type(Name) == "string" and Name ~= "" then Name else nil
+		local Description = Look.description
+		Copy.description = if type(Description) == "string" and Description ~= "" then Description else nil
+		Copy.totalPrice = if type(Look.totalPrice) == "number" then Look.totalPrice else nil
+		Copy.items = if type(Look.items) == "table" then Look.items else {}
+		Copy.itemCount = #Copy.items
+	else
+		local Name = Look.name
+		local Name1 = if type(Name) == "string" and Name ~= "" then Name else nil
+		local Description = Look.description
+		Copy = {
+			lookId = LookId,
+			outfitId = if type(Look.outfitId) == "number" then Look.outfitId else nil,
+			name = Name1,
+			description = if type(Description) == "string" and Description ~= "" then Description else nil,
+			totalPrice = if type(Look.totalPrice) == "number" then Look.totalPrice else nil,
+			itemCount = if type(Look.items) == "table" then #Look.items else 0
+		}
+	end
+	return { look = Copy }, nil
 end
 
 local function isLookNotFound(p1): boolean

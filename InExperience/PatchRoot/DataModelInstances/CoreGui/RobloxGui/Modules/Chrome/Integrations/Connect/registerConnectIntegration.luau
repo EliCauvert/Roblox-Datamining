@@ -18,20 +18,19 @@ local SharedFlagsModule = require(CorePackages.Workspace.Packages.SharedFlags)
 local GetFFlagIsSquadEnabledFunction = SharedFlagsModule.GetFFlagIsSquadEnabled
 local FFlagAppChatDistinctUnibarEntryPoint = SharedFlagsModule.FFlagAppChatDistinctUnibarEntryPoint
 local ChatEntryPointNames = require(CorePackages.Workspace.Packages.SocialCommon).Enums.ChatEntryPointNames
-local ArgoPartyExperimentation = require(CorePackages.Workspace.Packages.SocialExperiments).ArgoPartyExperimentation
 local NewResult = require(Chrome.ChromeShared.Service.ChromeUtils).MappedSignal.new(InExperienceAppChatModalModule.default.visibilitySignal.Event, function()
 	-- upvalues: InExperienceAppChatModalModule (copy)
 	return InExperienceAppChatModalModule:getVisible()
 end)
 
 return function(Id, InitialAvailability)
-	-- upvalues: GetFFlagIsSquadEnabledFunction (copy), FFlagAppChatDistinctUnibarEntryPoint (copy), ChatEntryPointNames (copy), ServiceModule (copy), SideSheetPlacement (copy), ArgoPartyExperimentation (copy), UniversalAppPolicyModule (copy), InExperienceAppChatModalModule (copy), ChromeIntegrationUtilsModule (copy), ResponsiveModule (copy), FocusUtils (copy), LocalStoreModule (copy), GetFStringConnectTooltipLocalStorageKeyModule (copy), NewResult (copy), ReactModule (copy), ConnectIconModule (copy), AppChatInExpUseUnibarNotification (copy), Symbol (copy), MouseIconOverrideService (copy)
+	-- upvalues: GetFFlagIsSquadEnabledFunction (copy), FFlagAppChatDistinctUnibarEntryPoint (copy), ChatEntryPointNames (copy), ServiceModule (copy), SideSheetPlacement (copy), UniversalAppPolicyModule (copy), InExperienceAppChatModalModule (copy), ChromeIntegrationUtilsModule (copy), ResponsiveModule (copy), FocusUtils (copy), LocalStoreModule (copy), GetFStringConnectTooltipLocalStorageKeyModule (copy), NewResult (copy), ReactModule (copy), ConnectIconModule (copy), AppChatInExpUseUnibarNotification (copy), Symbol (copy), MouseIconOverrideService (copy)
 	local FFlagIsSquadEnabled = Id == "connect_unibar" and GetFFlagIsSquadEnabledFunction()
 	local ChromeUnibar = if FFlagAppChatDistinctUnibarEntryPoint and Id == "connect_unibar" then ChatEntryPointNames.ChromeUnibar else nil
 	local RegisterResult = ServiceModule:register({
 		id = Id,
 		sideSheetPlacement = if Id == "connect_unibar" then SideSheetPlacement.Unibar else SideSheetPlacement.BelowFold,
-		label = if ArgoPartyExperimentation.getIsRenameEnabled() then if UniversalAppPolicyModule.getAppFeaturePolicies().getCanSeeChatTerminology() then "Feature.Chat.Title.FriendsChat" else "Feature.Squads.Label.Party" elseif GetFFlagIsSquadEnabledFunction() then "Feature.Squads.Label.Party" else "Feature.Chat.Label.RobloxChat",
+		label = if UniversalAppPolicyModule.getAppFeaturePolicies().getCanSeeChatTerminology() then "Feature.Chat.Title.FriendsChat" else "Feature.Squads.Label.Party",
 		activated = function()
 			-- upvalues: InExperienceAppChatModalModule (upval), ChromeIntegrationUtilsModule (upval), ResponsiveModule (upval), FocusUtils (upval), ChromeUnibar (copy), LocalStoreModule (upval), GetFStringConnectTooltipLocalStorageKeyModule (upval)
 			if InExperienceAppChatModalModule:getVisible() then

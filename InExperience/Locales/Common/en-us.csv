@@ -1050,7 +1050,7 @@ CoreScripts.PublishAssetPrompt.Cancel,
 CoreScripts.PublishAssetPrompt.Description,
 CoreScripts.PublishAssetPrompt.DisclaimerAvatar,I agree that this experience will submit my avatar item to moderation and upload to My Creations.
 CoreScripts.PublishAssetPrompt.DisclaimerEmote,I agree that this experience will submit my emote to moderation and upload to My Creations.
-CoreScripts.PublishAssetPrompt.DisclaimerImage,I agree that this experience will submit my image to moderation and upload to My Creations.
+CoreScripts.PublishAssetPrompt.DisclaimerImage,"I agree that this experience will submit my image to moderation and upload to My Creations. The image privacy will be set to ""Open Use"". Any creator or game can use it."
 CoreScripts.PublishAssetPrompt.DisclaimerModel,Created items will be reviewed and you may not receive a refund for rejected items that do not comply with Community Standards.
 CoreScripts.PublishAssetPrompt.InvalidDescription,Invalid Description
 CoreScripts.PublishAssetPrompt.InvalidName,Invalid Name
@@ -2171,7 +2171,10 @@ Feature.Build.Description.ManagedPricingAcknowledgement,Managed Pricing automati
 Feature.Build.Description.ManagedPricingCurrentProducts,Use Managed Pricing for all current products
 Feature.Build.Description.ManagedPricingUnavailable,Managed Pricing isn't available for this experience.
 Feature.Build.Description.NoEligibleManagedPricingProducts,No eligible products
+Feature.Build.Description.NoMonetizationDeveloperProducts,Developer Products are items players can buy again and again in your game
+Feature.Build.Description.NoMonetizationPasses,Passes let you offer players a one-time unlock in your game
 Feature.Build.Description.NoMonetizationProducts,Describe an item you want to create to start earning Robux in your game
+Feature.Build.Description.NoMonetizationSubscriptions,Subscriptions within games let you offer users recurring benefits for a monthly fee
 Feature.Build.Description.PlayAfterPublish,Choose who can play after you publish this experience.
 Feature.Build.Description.PlaytestLatest,You're playtesting your latest version. Publish it when you're ready to share.
 Feature.Build.Description.PlaytestLocked,You can start playtesting after you create your first game.
@@ -2205,9 +2208,18 @@ Feature.Build.Error.DeveloperProductPriceInvalid,"Price must be a whole number f
 Feature.Build.Error.DeveloperProductPriceRequiredForSale,Select Edit and add a price before listing a product for sale.
 Feature.Build.Error.DeveloperProductTextModerated,Roblox moderation changed this product's text. Try different wording.
 Feature.Build.Error.ManagedPricingPartialUpdate,Some products couldn't be updated.
+Feature.Build.Error.MonetizationImageFailed,The image could not be loaded. Try again.
+Feature.Build.Error.MonetizationImageInReview,The image is still being reviewed. Try again in a moment.
+Feature.Build.Error.MonetizationImagePreparing,The image is still being prepared. Try again in a moment.
+Feature.Build.Error.MonetizationImageTimedOut,The image took too long to load. Try again.
+Feature.Build.Error.MonetizationImageTooLarge,The image is larger than 5 MB.
+Feature.Build.Error.MonetizationNoUniverse,This chat isn't connected to a game.
 Feature.Build.Error.MonetizationOptionUpdate,The option couldn't be updated. Try again.
 Feature.Build.Error.MonetizationOptionsLoad,Options couldn't load. Try again.
 Feature.Build.Error.MonetizationPermissionDenied,You don't have permission to change monetization options.
+Feature.Build.Error.MonetizationPriceRequiredForRegionalPricing,Add a price to turn on regional pricing.
+Feature.Build.Error.MonetizationPriceRequiredForSale,Add a price before putting this on sale.
+Feature.Build.Error.MonetizationRateLimited,Too many requests. Try again in a moment.
 Feature.Build.Header.AccessSharing,Access & sharing
 Feature.Build.Header.AllVersions,All versions
 Feature.Build.Header.Answers,Answers
@@ -2540,7 +2552,10 @@ Feature.Build.Title.GetUsers,Get users
 Feature.Build.Title.InsufficientRobuxForModel,You don't have enough Robux
 Feature.Build.Title.ManagedPricingAcknowledgement,Turn on Managed Pricing?
 Feature.Build.Title.Monetization,Monetization
+Feature.Build.Title.NoMonetizationDeveloperProducts,You haven't created any Developer Products
+Feature.Build.Title.NoMonetizationPasses,You haven't created any Passes
 Feature.Build.Title.NoMonetizationProducts,Start earning in your game
+Feature.Build.Title.NoMonetizationSubscriptions,You haven't created any Subscriptions
 Feature.Build.Title.NoRobuxForUsage,No Robux left for Build usage
 Feature.Build.Title.PickCampaign,Pick a length
 Feature.Build.Title.Playtesters,
@@ -3100,7 +3115,6 @@ Feature.Chat.Label.ReplyChatInputPlaceholder,Reply to {DISPLAY_NAME}
 Feature.Chat.Label.ReplyToYourselfChatInputPlaceholder,Reply to yourself
 Feature.Chat.Label.ReplyingToOthers,{DISPLAY_NAME} said...
 Feature.Chat.Label.ReplyingToYourself,You said...
-Feature.Chat.Label.RobloxChat,Roblox Chat
 Feature.Chat.Label.SearchFriends,Search for friends
 Feature.Chat.Label.SearchWord,
 Feature.Chat.Label.SnoozeChatNotifications,Mute in-experience chat notifications:
@@ -3344,6 +3358,7 @@ Feature.Friends.Description.TrustedFriendsExpiredLink,Please ask your friend to 
 Feature.Friends.Description.TrustedFriendsInvalidLink,"Make sure you're logged in with the right account, then try again."
 Feature.Friends.Description.TrustedFriendsRequestModalBody,Only add people you know and trust. Manage this friend anytime from their profile.
 Feature.Friends.Description.TrustedFriendsUnavailable,The trusted friends feature is not yet available in your region.
+Feature.Friends.Description.TrustedFriendsWrongAccount,"Make sure you're signed in as @{username}, then try again."
 Feature.Friends.Description.YouCanDoMoreWithTrustedFriends,You can do more on Roblox with trusted friends. Manage this friend anytime from their profile.
 Feature.Friends.Error.AlreadyFriendError,This user is already a friend.
 Feature.Friends.Error.DefaultFriendingError,Unable to send friend request. Please try again later.
@@ -4684,6 +4699,7 @@ Feature.UniversalShareSheet.Response.SharedCustomMessage,{CUSTOM_MESSAGE} + 1 ot
 Feature.UniversalShareSheet.Response.SharedMessage,Message was sent
 Feature.UniversalShareSheet.Response.SharedMultipleMessages,Messages were sent
 Feature.UniversalShareSheet.SharedCustomMultipleMessages,{CUSTOM_MESSAGE} + {N} others
+Feature.UserLibrary.Label.MyLibrary,My Library
 Feature.VerificationUpsell.Action.AddPhone,Add Phone
 Feature.VerificationUpsell.Action.AddPhoneNumber,Add Phone Number
 Feature.VerificationUpsell.Action.AddPhoneVoice,Add Phone for Voice Chat

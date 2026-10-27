@@ -1,6 +1,4 @@
-﻿local Parent = script:FindFirstAncestor("BuildExperience").Parent
-local CreatorAgentChatModule = require(Parent.DataHydration.CreatorAgentChat)
-local FFlagBuildExperiencePinForBuild = require(Parent.SharedFlags).FFlagBuildExperiencePinForBuild
+﻿local CreatorAgentChatModule = require(script:FindFirstAncestor("BuildExperience").Parent.DataHydration.CreatorAgentChat)
 local GetCurrentExperienceProjectModule = require(script.Parent.getCurrentExperienceProject)
 local GetDefaultTemplatePlaceIdModule = require(script.Parent.getDefaultTemplatePlaceId)
 local Debug = CreatorAgentChatModule.debug
@@ -134,7 +132,7 @@ local function runSessionPromptSmoke(p2, SessionId, UniverseId)
 end
 
 return function(p3, p4, p5)
-	-- upvalues: CreatorAgentChatModule (copy), GetCurrentExperienceProjectModule (copy), GetDefaultTemplatePlaceIdModule (copy), Debug (copy), runSyncRpc (copy), FFlagBuildExperiencePinForBuild (copy), runSessionPromptSmoke (copy), buildSummary (copy)
+	-- upvalues: CreatorAgentChatModule (copy), GetCurrentExperienceProjectModule (copy), GetDefaultTemplatePlaceIdModule (copy), Debug (copy), runSyncRpc (copy), runSessionPromptSmoke (copy), buildSummary (copy)
 	local ResolveCreatorAgentAcpResult = CreatorAgentChatModule.resolveCreatorAgentAcp()
 	local List = {}
 	local CurrentExperienceProjectModule = GetCurrentExperienceProjectModule()
@@ -158,10 +156,10 @@ return function(p3, p4, p5)
 		detail = "requires universeId (game.GameId is 0 or not in an experience)",
 		elapsedMs = nil
 	} else runSyncRpc("session/new", function()
-		-- upvalues: p3 (copy), P11 (copy), P12 (copy), FFlagBuildExperiencePinForBuild (upval)
+		-- upvalues: p3 (copy), P11 (copy), P12 (copy)
 		return p3.sessionNew({
-			project = { universeId = P11, placeId = P12 },
-			application = if FFlagBuildExperiencePinForBuild then "build" else nil
+			application = "build",
+			project = { universeId = P11, placeId = P12 }
 		})
 	end, function(p6): string
 		-- upvalues: SessionId (ref)

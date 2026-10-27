@@ -2163,6 +2163,8 @@ Feature.Build.Description.PromoteGamePaid,"अपना गेम लाखो�
 Feature.Build.Description.PromoteGameWithAdCampaign,"{durationDays}-दिन के ऐड कैंपेन की मदद से, अपनी ऑडियंस बढ़ाएँ और अपने गेम को लोगों की नज़रों में लाएँ."
 Feature.Build.Description.RaiseLimitOrWait,"क्रिएट करना जारी रखने के लिए, अपनी रोज़ाना की Robux लिमिट बढ़ाएँ या कल उसके रीसेट होने का इंतज़ार करें."
 Feature.Build.Description.RatingAgreement,पब्लिश करने का मतलब है कि आपने सहमति दी है कि यह कॉन्टेंट रेटिंग सटीक है.
+Feature.Build.Description.RequiredRobuxForAdvanced,"एडवांस्ड मॉडल के साथ क्रिएट करते रहने के लिए, आपके पास कम-से-कम {ROBUX} Robux होने चाहिए. आपके पास फिर से डिफ़ॉल्ट पर स्विच करने का विकल्प भी है या फिर अपने फ़्री इस्तेमाल की लिमिट के रीसेट होने का इंतज़ार करें."
+Feature.Build.Description.RequiredRobuxForDefault,"क्रिएट करते रहने के लिए, आपके पास कम-से-कम {ROBUX} Robux होने चाहिए या फिर अपने फ़्री इस्तेमाल की लिमिट के रीसेट होने का इंतज़ार करें."
 Feature.Build.Description.RestoreLatest,यह वर्ज़न आपका सबसे हाल में पब्लिश किया गया वर्ज़न बन जाएगा.
 Feature.Build.Description.RevertToVersion,सबसे नए बदलाव को रिवर्ट करने के लिए कन्फ़र्म करें और {VERSION} पर वापस जाएँ.
 Feature.Build.Description.ShareLatest,शेयर करें कि आपके सबसे नए वर्ज़न में क्या बदला है.
@@ -2228,6 +2230,7 @@ Feature.Build.Label.DeveloperProductDescription,विवरण : {DESCRIPTION}
 Feature.Build.Label.DeveloperProductName,"नाम : ""{NAME}"""
 Feature.Build.Label.DeveloperProductPrice,कीमत : {PRICE} Robux
 Feature.Build.Label.DeveloperProductPriceUnavailable,?
+Feature.Build.Label.DeveloperProducts,डेवलपर प्रॉडक्ट्स
 Feature.Build.Label.Done,
 Feature.Build.Label.EasyPerformanceReport,आसान परफ़ॉर्मेंस रिपोर्ट
 Feature.Build.Label.Error,
@@ -2409,6 +2412,7 @@ Feature.Build.Message.BuildBusy,बिल्ड व्यस्त है. थ�
 Feature.Build.Message.BuildConnectFailed,बिल्ड कनेक्ट नहीं हो सका. फिर से कोशिश करें.
 Feature.Build.Message.BuildInternalError,बिल्ड में कोई समस्या आई. फिर से कोशिश करें.
 Feature.Build.Message.BuildResponseFailed,Build ने जवाब नहीं दिया. फिर से कोशिश करें.
+Feature.Build.Message.BuildSendUnconfirmed,'बिल्ड' यह कन्फ़र्म नहीं कर सका कि आपका मैसेज भेजा गया है या नहीं.
 Feature.Build.Message.BuildStillWorking,"इस पर काम चल रहा है. इंतज़ार करते समय ऐप से बाहर निकला जा सकता है, Roblox खेला जा सकता है या कोई दूसरा प्रोजेक्ट शुरू किया जा सकता है."
 Feature.Build.Message.BuildStopped,आपने बिल्ड रोक दिया.
 Feature.Build.Message.BuildTakingLonger,इसमें थोड़ा ज़्यादा समय लग रहा है. इंतज़ार करें या कुछ और शुरू करें.
@@ -2438,6 +2442,7 @@ Feature.Build.Message.NoAssetsFound,कोई ऐसेट नहीं मि�
 Feature.Build.Message.NoCapturesAvailable,कोई कैप्चर उपलब्ध नहीं है
 Feature.Build.Message.NoDescriptionProvided,कोई जानकारी नहीं दी गई.
 Feature.Build.Message.NoFriendsToAdd,फ़िलहाल आपके पास इनवाइट करने के लिए कोई फ़्रेंड नहीं है. पहले Roblox पर लोगों से जुड़ें.
+Feature.Build.Message.NoGamesYet,अभी तक कोई गेम नहीं.
 Feature.Build.Message.NoResults,
 Feature.Build.Message.NoSearchResultsFound,कोई सर्च रिज़ल्ट नहीं मिला
 Feature.Build.Message.NoVersionHistory,अभी तक कोई वर्ज़न हिस्ट्री नहीं है.
@@ -2513,7 +2518,9 @@ Feature.Build.Title.GameCreationDone,गेम क्रिएशन पूर�
 Feature.Build.Title.GamePass,गेम पास
 Feature.Build.Title.GenericError,
 Feature.Build.Title.GetUsers,यूज़र्स पाएँ
+Feature.Build.Title.InsufficientRobuxForModel,आपके पास पर्याप्त Robux नहीं हैं
 Feature.Build.Title.ManagedPricingAcknowledgement,'मैनेज की जा रही कीमतें' फ़ीचर चालू करना है?
+Feature.Build.Title.Monetization,मॉनेटाइज़ेशन
 Feature.Build.Title.NoMonetizationProducts,अपने गेम में कमाना शुरू करें
 Feature.Build.Title.NoRobuxForUsage,बिल्ड के इस्तेमाल के लिए कोई Robux नहीं बचा
 Feature.Build.Title.PickCampaign,अवधि चुनें
@@ -3846,6 +3853,7 @@ Feature.Moments.Title.LeaveMomentCreation,क्या आपको ‘Moment’
 Feature.Moments.Title.MomentRemoved,Moment हटा दिया गया
 Feature.Moments.Title.PostInsights,पोस्ट के बारे में इनसाइट
 Feature.Moments.Title.ReportPost,पोस्ट की रिपोर्ट करें
+Feature.Moments.Title.UnfollowConfirmationDialog,@{username} को अनफ़ॉलो करना है?
 Feature.Moments.Tooltip.Creation,एक्सपीरिएंस में मौजूद हर कोई आपके मोमेंट देख सकता है.
 Feature.Moments.Tooltip.PostInsightsBody,"व्यूज़, देखने में बिताया गया समय और यह देखें कि आपकी ऑडियंस को Moment कैसा लगा."
 Feature.Moments.Tooltip.PostInsightsTitle,आपके Moment की जानकारी यहाँ है
@@ -4652,6 +4660,7 @@ Feature.UniversalShareSheet.Response.SharedCustomMessage,{CUSTOM_MESSAGE} + 1 �
 Feature.UniversalShareSheet.Response.SharedMessage,मैसेज भेजा गया
 Feature.UniversalShareSheet.Response.SharedMultipleMessages,मैसेज भेजे गए
 Feature.UniversalShareSheet.SharedCustomMultipleMessages,{CUSTOM_MESSAGE} + {N} अन्य
+Feature.UserLibrary.Label.MyLibrary,मेरी लाइब्रेरी
 Feature.VerificationUpsell.Action.AddPhone,फ़ोन नंबर जोड़ें
 Feature.VerificationUpsell.Action.AddPhoneNumber,
 Feature.VerificationUpsell.Action.AddPhoneVoice,वॉइस चैट के लिए फ़ोन नंबर जोड़ें

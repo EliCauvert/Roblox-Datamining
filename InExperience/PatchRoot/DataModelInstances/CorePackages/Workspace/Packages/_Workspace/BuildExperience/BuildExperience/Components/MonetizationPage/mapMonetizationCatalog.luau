@@ -1,7 +1,9 @@
-﻿local Parent = script:FindFirstAncestor("BuildExperience").Parent
+﻿local BuildExperience = script:FindFirstAncestor("BuildExperience")
+local Parent = BuildExperience.Parent
 local _ = require(Parent.DataHydration.DeveloperProduct)
 local DeveloperSubscriptionModule = require(Parent.DataHydration.DeveloperSubscription)
-local _ = require(Parent.DataHydration.GamePassConfig)
+local GamePassConfigModule = require(Parent.DataHydration.GamePassConfig)
+local FFlagBuildExperienceMonetizationKindRegionalPricingModule = require(BuildExperience.Flags.FFlagBuildExperienceMonetizationKindRegionalPricing)
 local _ = require(script.Parent.MonetizationPageView)
 local MapDeveloperProductsToMonetizationProductsModule = require(script.Parent.mapDeveloperProductsToMonetizationProducts)
 local CurrencyType = DeveloperSubscriptionModule.CurrencyType
@@ -16,6 +18,7 @@ local _ = function(p1, p2)
 end
 
 local function mapGamePasses(GamePasses, p1, List)
+	-- upvalues: FFlagBuildExperienceMonetizationKindRegionalPricingModule (copy), GamePassConfigModule (copy)
 	if GamePasses == nil then return end
 	for _, gamePass in GamePasses.gamePasses do
 		local Text = tostring(gamePass.gamePassId)
@@ -31,6 +34,7 @@ local function mapGamePasses(GamePasses, p1, List)
 			priceInRobux = DefaultPriceInRobux,
 			showRobuxIcon = DefaultPriceInRobux ~= nil,
 			isForSale = gamePass.isForSale == true,
+			isManagedPricingEnabled = if FFlagBuildExperienceMonetizationKindRegionalPricingModule then GamePassConfigModule.isManagedPricingEnabled(gamePass) == true else nil,
 			isArchived = gamePass.isArchived,
 			kind = p1.gamePassType,
 			saleStatus = if gamePass.isForSale == true then p1.onSale else p1.offSale,
@@ -58,6 +62,7 @@ local function mapSubscriptions(Subscriptions, p2, List)
 			priceInRobux = PriceInRobux,
 			showRobuxIcon = PriceInRobux ~= nil,
 			isForSale = IsProductStatusTypeMatch,
+			isImmutable = developerSubscription.productStatusType == ProductStatusType.ToBeActivated or developerSubscription.productStatusType == ProductStatusType.ToBeDeactivated,
 			kind = p2.subscriptionType,
 			saleStatus = if IsProductStatusTypeMatch == nil then nil elseif IsProductStatusTypeMatch then p2.onSale else p2.offSale,
 			image = if developerSubscription.imageAssetId == nil then nil else `rbxassetid://{developerSubscription.imageAssetId}`,

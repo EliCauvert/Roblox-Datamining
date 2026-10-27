@@ -14,7 +14,6 @@ return {
 			item = UseSignalStateResult
 		})
 	end, {
-		hideWhilePending = true,
 		readiness = ViewRecyclerModule.RecyclableViewReadiness.ReadyOnCommit
 	}),
 	EndSpacerItem = ViewRecyclerModule.createPinnedItem({

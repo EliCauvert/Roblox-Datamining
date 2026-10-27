@@ -8,7 +8,6 @@ local Default = require(Parent.ExternalContentSharingProtocol).ExternalContentSh
 local LocalizationStringsModule = require(BuildExperience.LocalizationStrings)
 local ChatPermissionsContextModule = require(BuildExperience.Chat.ChatPermissionsContext)
 local _ = require(BuildExperience.Chat.chatTypes)
-local FFlagBuildExperienceCopyChatMessagesModule = require(BuildExperience.Flags.FFlagBuildExperienceCopyChatMessages)
 local FFlagBuildCheckGamePermissionsModule = require(BuildExperience.Flags.FFlagBuildCheckGamePermissions)
 local FeedbackActionModule = require(BuildExperience.Components.MessageUtilities.FeedbackAction)
 local UserFeedbackModule = require(BuildExperience.Components.MessageUtilities.UserFeedback)
@@ -56,7 +55,7 @@ local function useAgentMessageCopy(Text)
 end
 
 return function(Frame)
-	-- upvalues: FFlagBuildCheckGamePermissionsModule (copy), ReactModule (copy), ChatPermissionsContextModule (copy), FeedbackIconsModule (copy), LocalizationModule (copy), UseLocalizationFunction (copy), LocalizationStringsModule (copy), FFlagEnableTeamTestLua (copy), FFlagBuildExperienceCopyChatMessagesModule (copy), useAgentMessageCopy (copy), GetPlaytestLoadingStoreModule (copy), SignalsReactModule (copy), GetAgentRollbackRequestStoreModule (copy), Signal (copy), FeedbackActionModule (copy), SendAgentTurnFeedbackModule (copy), UserFeedbackModule (copy), AgentRollbackSnackbarModule (copy), RestoreVersionDialogModule (copy)
+	-- upvalues: FFlagBuildCheckGamePermissionsModule (copy), ReactModule (copy), ChatPermissionsContextModule (copy), FeedbackIconsModule (copy), LocalizationModule (copy), UseLocalizationFunction (copy), LocalizationStringsModule (copy), FFlagEnableTeamTestLua (copy), useAgentMessageCopy (copy), GetPlaytestLoadingStoreModule (copy), SignalsReactModule (copy), GetAgentRollbackRequestStoreModule (copy), Signal (copy), FeedbackActionModule (copy), SendAgentTurnFeedbackModule (copy), UserFeedbackModule (copy), AgentRollbackSnackbarModule (copy), RestoreVersionDialogModule (copy)
 	local NoCanEditOnBuild = false
 	
 	if FFlagBuildCheckGamePermissionsModule then
@@ -90,12 +89,9 @@ return function(Frame)
 	local UseStateResult1, UseStateResult2_1 = ReactModule.useState(false)
 	local UseStateResult3, UseStateResult2_2 = ReactModule.useState(nil)
 	local UseStateResult4, UseStateResult2_3 = ReactModule.useState("")
-	local v1 = nil
-	local Callback = nil
-	
-	if FFlagBuildExperienceCopyChatMessagesModule then
-		v1, Callback = useAgentMessageCopy(Frame.messageText)
-	end
+	local UseAgentMessageCopyResult2 = nil
+	local UseAgentMessageCopyResult
+	UseAgentMessageCopyResult, UseAgentMessageCopyResult2 = useAgentMessageCopy(Frame.messageText)
 	local UseResult = ReactModule.useCallback(function(p1): boolean
 		-- upvalues: GetPlaytestLoadingStoreModule (upval), PlaceId (copy)
 		local PlaytestLoadingStoreModule = GetPlaytestLoadingStoreModule(p1)
@@ -110,15 +106,15 @@ return function(Frame)
 		UseStateResult2_3("")
 	end, {})
 	local UseResult2 = ReactModule.useCallback(function(p1)
-		-- upvalues: TurnFeedbackIds (copy), FeedbackActionModule (upval), UseStateResult2 (copy), FFlagBuildExperienceCopyChatMessagesModule (upval), Callback (ref), SendAgentTurnFeedbackModule (upval), UseStateResult2_2 (copy)
+		-- upvalues: TurnFeedbackIds (copy), FeedbackActionModule (upval), UseStateResult2 (copy), UseAgentMessageCopyResult2 (ref), SendAgentTurnFeedbackModule (upval), UseStateResult2_2 (copy)
 		if TurnFeedbackIds == nil then return end
 		if p1.action == FeedbackActionModule.REVERT then
 			UseStateResult2(true)
 			
 			return
 		end
-		if FFlagBuildExperienceCopyChatMessagesModule and p1.action == FeedbackActionModule.COPY then
-			Callback()
+		if p1.action == FeedbackActionModule.COPY then
+			UseAgentMessageCopyResult2()
 			SendAgentTurnFeedbackModule(p1.action, TurnFeedbackIds)
 			
 			return
@@ -126,18 +122,15 @@ return function(Frame)
 			UseStateResult2_2(p1.action)
 			SendAgentTurnFeedbackModule(p1.action, TurnFeedbackIds)
 		end
-	end, {
-		TurnFeedbackIds,
-		if FFlagBuildExperienceCopyChatMessagesModule then Callback else nil
-	})
+	end, { TurnFeedbackIds, UseAgentMessageCopyResult2 })
 	
 	return if TurnFeedbackIds == nil or TurnFeedbackIds.sequenceId == nil then nil else ReactModule.createElement(ReactModule.Fragment, nil, {
 		Feedback = ReactModule.createElement(UserFeedbackModule, {
 			layoutOrder = Frame.LayoutOrder,
 			icons = FeedbackIconsModule.getFeedbackIcons({
-				includeCopy = FFlagBuildExperienceCopyChatMessagesModule and (Frame.messageText ~= nil and Frame.messageText ~= ""),
-				copyIconName = if FFlagBuildExperienceCopyChatMessagesModule then v1 else nil,
-				copyTestId = if FFlagBuildExperienceCopyChatMessagesModule then `{Frame.testId}-copy` else nil,
+				includeCopy = Frame.messageText ~= nil and Frame.messageText ~= "",
+				copyIconName = UseAgentMessageCopyResult,
+				copyTestId = `{Frame.testId}-copy`,
 				includeRevert = FeedbackIconsModule.canRevert(TurnFeedbackIds),
 				isRevertDisabled = UseSignalStateResult or (UseSignalStateResult1 or NoCanEditOnBuild),
 				isRatingDisabled = NoCanEditOnBuild

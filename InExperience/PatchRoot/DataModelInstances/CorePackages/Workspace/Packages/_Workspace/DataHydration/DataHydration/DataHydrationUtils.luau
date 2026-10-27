@@ -1,35 +1,13 @@
-﻿local Parent = script:FindFirstAncestor("DataHydration").Parent
-local Players = game:GetService("Players")
-local FFlagAddFriendsPageTrustedFriendRequestSection = require(Parent.SharedFlags).FFlagAddFriendsPageTrustedFriendRequestSection
-local FFlagFriendsRequestsMergeListsWithoutDuplicates = require(Parent.SharedFlags).FFlagFriendsRequestsMergeListsWithoutDuplicates
-local CryoModule = if FFlagAddFriendsPageTrustedFriendRequestSection or FFlagFriendsRequestsMergeListsWithoutDuplicates then require(Parent.Cryo) else nil
-
-local function mergeListsWithoutDuplicates(Tbl, p1, p2)
-	-- upvalues: CryoModule (copy)
-	if not p1 or #p1 == 0 then
-		return if Tbl then Tbl else {}
-	elseif Tbl and #Tbl ~= 0 then
-		local Set = CryoModule.List.toSet(CryoModule.List.map(Tbl, function(p3)
-			-- upvalues: p2 (copy)
-			return if p2 then p3[p2] else p3
-		end))
-		
-		return CryoModule.List.join(table.clone(Tbl), (CryoModule.List.filter(p1, function(p3): boolean
-			-- upvalues: p2 (copy), Set (copy)
-			return not Set[if p2 then p3[p2] else p3]
-		end)))
-	else
-		return p1
-	end
-end
+﻿local Players = game:GetService("Players")
+local CryoModule = require(script:FindFirstAncestor("DataHydration").Parent.Cryo)
 
 return {
-	areAllKeysPresent = function(p3, List): boolean
-		if p3 == nil or type(p3) ~= "table" then
+	areAllKeysPresent = function(p1, List): boolean
+		if p1 == nil or type(p1) ~= "table" then
 			return #List == 0
 		end
 		for _, value in List do
-			if p3[value] == nil then
+			if p1[value] == nil then
 				return false
 			end
 		end
@@ -121,5 +99,22 @@ return {
 			end
 		end
 	end,
-	mergeListsWithoutDuplicates = if FFlagAddFriendsPageTrustedFriendRequestSection or FFlagFriendsRequestsMergeListsWithoutDuplicates then mergeListsWithoutDuplicates else nil
+	mergeListsWithoutDuplicates = function(Tbl, p2, p3)
+		-- upvalues: CryoModule (copy)
+		if not p2 or #p2 == 0 then
+			return if Tbl then Tbl else {}
+		elseif Tbl and #Tbl ~= 0 then
+			local Set = CryoModule.List.toSet(CryoModule.List.map(Tbl, function(p4)
+				-- upvalues: p3 (copy)
+				return if p3 then p4[p3] else p4
+			end))
+			
+			return CryoModule.List.join(table.clone(Tbl), (CryoModule.List.filter(p2, function(p4): boolean
+				-- upvalues: p3 (copy), Set (copy)
+				return not Set[if p3 then p4[p3] else p4]
+			end)))
+		else
+			return p2
+		end
+	end
 }

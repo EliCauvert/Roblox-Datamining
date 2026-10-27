@@ -85,7 +85,15 @@ KeycodeMappingsModule[PlatformModule.Default] = {
 	LeftShift = IconModule.KeyShift,
 	RightShift = IconModule.KeyShift,
 	Space = IconModule.KeySpace,
-	Tab = IconModule.KeyTab
+	Tab = IconModule.KeyTab,
+	Thumbstick1Down = IconModule.GenericStickLDown,
+	Thumbstick1Left = IconModule.GenericStickLLeft,
+	Thumbstick1Right = IconModule.GenericStickLRight,
+	Thumbstick1Up = IconModule.GenericStickLUp,
+	Thumbstick2Down = IconModule.GenericStickRDown,
+	Thumbstick2Left = IconModule.GenericStickRLeft,
+	Thumbstick2Right = IconModule.GenericStickRRight,
+	Thumbstick2Up = IconModule.GenericStickRUp
 }
 
 return KeycodeMappingsModule

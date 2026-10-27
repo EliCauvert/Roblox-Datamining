@@ -5,12 +5,11 @@ local SignalsModule = require(Parent.Signals)
 local _ = require(Parent.MomentsTypes)
 local _ = require(MomentsCreation.Types.CreationFlowTypes)
 local UseAudioPlaybackModule = require(MomentsCreation.Hooks.useAudioPlayback)
-local GetFFlagMomentsMuteVideoAudioOnlyModule = require(MomentsCreation.Flags.GetFFlagMomentsMuteVideoAudioOnly)
 local GetFFlagMomentsTTSAudioOverlayModule = require(MomentsCreation.Flags.GetFFlagMomentsTTSAudioOverlay)
 local GetTtsDuckScalarModule = require(MomentsCreation.Audio.getTtsDuckScalar)
 
 return function(p1, p2, p3)
-	-- upvalues: ReactModule (copy), GetFFlagMomentsTTSAudioOverlayModule (copy), SignalsModule (copy), GetTtsDuckScalarModule (copy), UseAudioPlaybackModule (copy), GetFFlagMomentsMuteVideoAudioOnlyModule (copy)
+	-- upvalues: ReactModule (copy), GetFFlagMomentsTTSAudioOverlayModule (copy), SignalsModule (copy), GetTtsDuckScalarModule (copy), UseAudioPlaybackModule (copy)
 	local Playback = p1.playback
 	local UseStateResult, UseStateResult2 = ReactModule.useState((Playback.getMusic(false)))
 	local UseStateResult1, UseStateResult2_1 = ReactModule.useState(Playback.getIsMuted(false))
@@ -51,14 +50,11 @@ return function(p1, p2, p3)
 		end
 	end, { UseStateResult, UseStateResult3 })
 	ReactModule.useEffect(function()
-		-- upvalues: UseStateResult (copy), GetFFlagMomentsMuteVideoAudioOnlyModule (upval), UseStateResult1 (copy), UseAudioPlaybackModuleResult (copy)
-		if UseStateResult == nil then return end
-		if not GetFFlagMomentsMuteVideoAudioOnlyModule() and UseStateResult1 then
-			UseAudioPlaybackModuleResult.volume.mute()
+		-- upvalues: UseStateResult (copy), UseAudioPlaybackModuleResult (copy)
+		if UseStateResult ~= nil then
+			UseAudioPlaybackModuleResult.volume.unmute()
 			
 			return
-		else
-			UseAudioPlaybackModuleResult.volume.unmute()
 		end
 	end, { UseStateResult, UseStateResult1 })
 	

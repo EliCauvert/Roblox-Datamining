@@ -6,7 +6,6 @@ local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalizati
 local LocalizationStringsModule = require(BuildExperience.LocalizationStrings)
 local ChatCardPriorityModule = require(script.Parent.ChatCardEmphasis.ChatCardPriority)
 local UseChatCardEmphasisModule = require(script.Parent.ChatCardEmphasis.useChatCardEmphasis)
-local FFlagBuildExperienceDontAskAgainPushUpsellModule = require(BuildExperience.Flags.FFlagBuildExperienceDontAskAgainPushUpsell)
 local FFlagBuildExperienceChatCardEmphasisModule = require(BuildExperience.Flags.FFlagBuildExperienceChatCardEmphasis)
 local Button = FoundationModule.Button
 local Text = FoundationModule.Text
@@ -16,11 +15,10 @@ local FillBehavior = FoundationModule.Enums.FillBehavior
 local InputSize = FoundationModule.Enums.InputSize
 
 return function(Frame)
-	-- upvalues: UseLocalizationFunction (copy), LocalizationStringsModule (copy), FFlagBuildExperienceChatCardEmphasisModule (copy), UseChatCardEmphasisModule (copy), ChatCardPriorityModule (copy), ReactModule (copy), View (copy), Text (copy), Button (copy), InputSize (copy), ButtonVariant (copy), FillBehavior (copy), FFlagBuildExperienceDontAskAgainPushUpsellModule (copy)
+	-- upvalues: UseLocalizationFunction (copy), LocalizationStringsModule (copy), FFlagBuildExperienceChatCardEmphasisModule (copy), UseChatCardEmphasisModule (copy), ChatCardPriorityModule (copy), ReactModule (copy), View (copy), Text (copy), Button (copy), InputSize (copy), ButtonVariant (copy), FillBehavior (copy)
 	local UseLocalizationResult = UseLocalizationFunction({
 		disabledDescription = LocalizationStringsModule.CHAT_NOTIFICATION_DISABLED_DESCRIPTION,
 		dontAskAgain = LocalizationStringsModule.CHAT_DONT_ASK_AGAIN,
-		notNow = LocalizationStringsModule.CHAT_NOT_NOW,
 		notifyMe = LocalizationStringsModule.CHAT_NOTIFY_ME,
 		openSettings = LocalizationStringsModule.CHAT_OPEN_SETTINGS,
 		promptDescription = LocalizationStringsModule.CHAT_NOTIFICATION_PROMPT_DESCRIPTION,
@@ -61,7 +59,7 @@ return function(Frame)
 			NotNow = ReactModule.createElement(Button, {
 				LayoutOrder = 2,
 				testId = "PushNotificationsUpsellCard.NotNow",
-				text = if FFlagBuildExperienceDontAskAgainPushUpsellModule then UseLocalizationResult.dontAskAgain else UseLocalizationResult.notNow,
+				text = UseLocalizationResult.dontAskAgain,
 				size = InputSize.Small,
 				variant = ButtonVariant.Standard,
 				fillBehavior = FillBehavior.Fill,

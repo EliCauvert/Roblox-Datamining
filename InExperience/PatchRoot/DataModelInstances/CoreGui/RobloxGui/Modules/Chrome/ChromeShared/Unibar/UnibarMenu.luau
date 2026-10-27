@@ -50,11 +50,9 @@ if IsInExperienceUIVREnabled then
 	PanelType = VrSpatialUiModule.Constants.PanelType
 	NewResult = require(CorePackages.Workspace.Packages.Observable).ObservableValue.new(true)
 end
-local ArgoPartyExperimentation = require(CorePackages.Workspace.Packages.SocialExperiments).ArgoPartyExperimentation
-
 if not GetFFlagChromeCentralizedConfigurationFunction() then
 	function configureUnibar()
-		-- upvalues: BuildMenuOrderModule (copy), GetFFlagDebugEnableUnibarDummyIntegrationsFunction (copy), IsConnectUnibarEnabledModule (copy), ArgoPartyExperimentation (copy), ConstantsModule1 (copy), FFlagAppNavMyStatsTab (copy), IsInExperienceUIVREnabled (copy), IsSpatialFunction (copy), ServiceModule (copy)
+		-- upvalues: BuildMenuOrderModule (copy), GetFFlagDebugEnableUnibarDummyIntegrationsFunction (copy), IsConnectUnibarEnabledModule (copy), ConstantsModule1 (copy), FFlagAppNavMyStatsTab (copy), IsInExperienceUIVREnabled (copy), IsSpatialFunction (copy), ServiceModule (copy)
 		local MenuOrderModule = BuildMenuOrderModule()
 		local List = { "nine_dot", "chat", "toggle_mic_mute" }
 		table.insert(List, 3, "join_voice")
@@ -64,7 +62,7 @@ if not GetFFlagChromeCentralizedConfigurationFunction() then
 			table.insert(List, "dummy_window_2")
 		end
 		if IsConnectUnibarEnabledModule() then
-			table.insert(List, if ArgoPartyExperimentation.getIsRenameEnabled() then "party_entrypoint" else "connect_unibar")
+			table.insert(List, "party_entrypoint")
 		end
 		local FoundIndex: number? = table.find(List, "toggle_mic_mute")
 		

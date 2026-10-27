@@ -8,7 +8,9 @@ local ConvertApiMomentCommentsModule = require(DataHydration.Moments.Util.conver
 local FFlagMomentsStickerOverlayNormalizationModule = require(DataHydration.Moments.FFlagMomentsStickerOverlayNormalization)
 local FFlagMomentsComments = SharedFlagsModule.FFlagMomentsComments
 local FFlagMomentsCommentsIxpEnabled = SharedFlagsModule.FFlagMomentsCommentsIxpEnabled
+local FFlagProfileMomentSceneOutfitPoster = SharedFlagsModule.FFlagProfileMomentSceneOutfitPoster
 local FFlagEnableMomentsCommentReporting = SharedFlagsModule.FFlagEnableMomentsCommentReporting
+local FFlagMomentsRenderAvatarPostsInFeed = SharedFlagsModule.FFlagMomentsRenderAvatarPostsInFeed
 local MomentStatus = require(Parent.MomentsTypes).Enums.MomentStatus
 local BuilderSansMedium = Enum.Font.BuilderSansMedium
 local _Color3 = Color3.new(0, 0, 0)
@@ -202,8 +204,14 @@ local _ = function(p1): number?
 end
 
 local function convertApiMomentToMomentItem(p2)
-	-- upvalues: FFlagMomentsServeEDPVideos (copy), normalizeCaptureEdits (copy), MomentStatus (copy), FFlagEnableMomentsCommentReporting (copy), GetFFlagMomentsRenderPostAssetsModule (copy), FFlagMomentsComments (copy), FFlagMomentsCommentsIxpEnabled (copy), ConvertApiMomentCommentsModule (copy)
+	-- upvalues: FFlagMomentsRenderAvatarPostsInFeed (copy), FFlagMomentsServeEDPVideos (copy), normalizeCaptureEdits (copy), MomentStatus (copy), FFlagEnableMomentsCommentReporting (copy), GetFFlagMomentsRenderPostAssetsModule (copy), FFlagMomentsComments (copy), FFlagMomentsCommentsIxpEnabled (copy), ConvertApiMomentCommentsModule (copy), FFlagProfileMomentSceneOutfitPoster (copy)
 	local CaptionedAssetMoment = p2.captionedAssetMoment
+	local PostAssetId = if FFlagMomentsRenderAvatarPostsInFeed then if p2.postAsset == nil then nil else p2.postAsset.postAssetId else nil
+	local IsPostAssetIdAbove: boolean = FFlagMomentsRenderAvatarPostsInFeed and (if CaptionedAssetMoment == nil or CaptionedAssetMoment.captureType ~= "Avatar" then p2.entityType == "avatar" and (typeof(PostAssetId) == "number" and PostAssetId > 0) else typeof(PostAssetId) == "number" and PostAssetId > 0)
+	
+	if FFlagMomentsRenderAvatarPostsInFeed and CaptionedAssetMoment == nil and IsPostAssetIdAbove then
+		CaptionedAssetMoment = { assetId = 0, captureType = "Avatar" }
+	end
 	local Owner = p2.owner
 	local IsEdpVideo = if FFlagMomentsServeEDPVideos then p2.entityType == "edpVideo" else nil
 	local Id = if FFlagMomentsServeEDPVideos and IsEdpVideo then p2.id or (if CaptionedAssetMoment == nil or CaptionedAssetMoment.assetId == nil then nil else tostring(CaptionedAssetMoment.assetId)) else p2.entityId or p2.id
@@ -249,17 +257,17 @@ local function convertApiMomentToMomentItem(p2)
 	Metadata.placeId = if ExperienceCta == nil then nil else ExperienceCta.placeId
 	Metadata.universeId = if FFlagMomentsServeEDPVideos then Number elseif ExperienceCta == nil then nil else ExperienceCta.experienceId
 	config.metadata = Metadata
-	local EntityType = nil
+	local EntityType1 = nil
 	
 	if FFlagMomentsServeEDPVideos then
-		local EntityType1 = p2.entityType
-		EntityType = if EntityType1 == "experience" or EntityType1 == "ad" then EntityType1 elseif FFlagMomentsServeEDPVideos and EntityType1 == "edpVideo" then EntityType1 else nil
+		local EntityType = p2.entityType
+		EntityType1 = if EntityType == "experience" or EntityType == "ad" then EntityType elseif FFlagMomentsServeEDPVideos and EntityType == "edpVideo" then EntityType else nil
 	else
-		EntityType = nil
+		EntityType1 = nil
 	end
-	config.entityType = EntityType
+	config.entityType = EntityType1
 	config.momentId = Id
-	config.postAsset = if GetFFlagMomentsRenderPostAssetsModule() and p2.postAsset ~= nil and p2.postAsset.postAssetId ~= nil then { postAssetId = p2.postAsset.postAssetId } else nil
+	config.postAsset = if FFlagMomentsRenderAvatarPostsInFeed and IsPostAssetIdAbove then { isAvatar = true, postAssetId = PostAssetId } elseif GetFFlagMomentsRenderPostAssetsModule() and p2.postAsset ~= nil and p2.postAsset.postAssetId ~= nil then { postAssetId = p2.postAsset.postAssetId } else nil
 	config.recommendationMetadata = { feedItemId = FeedItemId, tracingId = p2.feedSessionId }
 	config.status = Deleted
 	
@@ -268,6 +276,14 @@ local function convertApiMomentToMomentItem(p2)
 		
 		if ConvertApiMomentCommentsModuleResult ~= nil then
 			config.comments = ConvertApiMomentCommentsModuleResult
+		end
+	end
+	if FFlagProfileMomentSceneOutfitPoster and CaptionedAssetMoment.captureType == "Avatar" then
+		config.metadata.isMomentScene = true
+		local PostAsset = p2.postAsset
+		
+		if config.postAsset == nil and PostAsset ~= nil and PostAsset.postAssetId ~= nil then
+			config.postAsset = { postAssetId = PostAsset.postAssetId }
 		end
 	end
 	return config

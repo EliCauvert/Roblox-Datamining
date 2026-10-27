@@ -17,7 +17,6 @@ local DeveloperProducts = if FFlagBuildExperienceMonetizationNativeUIModule then
 local UseCreatorCreditMenuItemFunction = require(script.Parent.useCreatorCreditMenuItem).useCreatorCreditMenuItem
 local FFlagBuildExperiencePrivateInvitesModule = require(BuildExperience.Flags.FFlagBuildExperiencePrivateInvites)
 local FFlagEnableBuildAdPromotionModule = require(BuildExperience.Flags.FFlagEnableBuildAdPromotion)
-local FFlagEnableBuildOverflowMenuForNewGamesModule = require(BuildExperience.Flags.FFlagEnableBuildOverflowMenuForNewGames)
 local FFlagBuildCheckGamePermissionsModule = require(BuildExperience.Flags.FFlagBuildCheckGamePermissions)
 local UseGamePermissionsModule = require(BuildExperience.useGamePermissions)
 local FFlagBuildExperienceReleaseFocusOnOverflowOpenModule = require(BuildExperience.Flags.FFlagBuildExperienceReleaseFocusOnOverflowOpen)
@@ -44,7 +43,7 @@ local _ = function(p1, p2)
 end
 
 return function(p1)
-	-- upvalues: UseScaledValueFunction (copy), BuildOverflowMenuWidth (copy), UseOpenWebViewFunction (copy), ReactModule (copy), FFlagBuildCheckGamePermissionsModule (copy), UseGamePermissionsModule (copy), UseExperienceShareFlowModule (copy), UseSharePublishedExperienceFunction (copy), FFlagEnableBuildAdPromotionModule (copy), UseGetAdCampaignEligibilityModule (copy), AdCampaignEligibilityUtilsModule (copy), FFlagEnableBuildOverflowMenuForNewGamesModule (copy), UseLocalizationFunction (copy), UseCreatorCreditMenuItemFunction (copy), BadgeVariant (copy), FFlagBuildExperienceReleaseFocusOnOverflowOpenModule (copy), UserInputService (copy), FFlagBuildExperienceMonetizationNativeUIModule (copy), DeveloperProducts (copy), LocalizationStringsModule (copy), ReleaseAnyFocusModule (copy), FFlagBuildExperiencePrivateInvitesModule (copy), LeaveExperienceModule (copy), VersionHistoryContainerModule (copy), Menu (copy), PopoverSide (copy), InputSize (copy), PopoverAlign (copy), IconButton (copy), ButtonVariant (copy), ExperienceShareOverlaysModule (copy), FriendsOnlyShareDialogModule (copy)
+	-- upvalues: UseScaledValueFunction (copy), BuildOverflowMenuWidth (copy), UseOpenWebViewFunction (copy), ReactModule (copy), FFlagBuildCheckGamePermissionsModule (copy), UseGamePermissionsModule (copy), UseExperienceShareFlowModule (copy), UseSharePublishedExperienceFunction (copy), FFlagEnableBuildAdPromotionModule (copy), UseGetAdCampaignEligibilityModule (copy), AdCampaignEligibilityUtilsModule (copy), UseLocalizationFunction (copy), UseCreatorCreditMenuItemFunction (copy), BadgeVariant (copy), FFlagBuildExperienceReleaseFocusOnOverflowOpenModule (copy), UserInputService (copy), FFlagBuildExperienceMonetizationNativeUIModule (copy), DeveloperProducts (copy), LocalizationStringsModule (copy), ReleaseAnyFocusModule (copy), FFlagBuildExperiencePrivateInvitesModule (copy), LeaveExperienceModule (copy), VersionHistoryContainerModule (copy), Menu (copy), PopoverSide (copy), InputSize (copy), PopoverAlign (copy), IconButton (copy), ButtonVariant (copy), ExperienceShareOverlaysModule (copy), FriendsOnlyShareDialogModule (copy)
 	local UseScaledValueResult = UseScaledValueFunction(BuildOverflowMenuWidth)
 	local UseOpenWebViewResult = UseOpenWebViewFunction()
 	local UseStateResult, UseStateResult2 = ReactModule.useState(false)
@@ -63,7 +62,7 @@ return function(p1)
 	local IsUserEligible: boolean = UseGetAdCampaignEligibilityModuleResult ~= nil and UseGetAdCampaignEligibilityModuleResult.userEligible == true
 	local IsIsUniversePublic: boolean = UseGetAdCampaignEligibilityModuleResult ~= nil and (UseGetAdCampaignEligibilityModuleResult.universeEligible == true and p1.isUniversePublic == true)
 	local FreeCreditsRemainingResult = AdCampaignEligibilityUtilsModule.freeCreditsRemaining(UseGetAdCampaignEligibilityModuleResult)
-	local HasOnOpenCreatorCreditPage1: boolean = FFlagEnableBuildOverflowMenuForNewGamesModule and (p1.target.universeId == nil and HasOnOpenCreatorCreditPage)
+	local HasOnOpenCreatorCreditPage1: boolean = p1.target.universeId == nil and HasOnOpenCreatorCreditPage
 	local IsIsDisabled: boolean = p1.isDisabled == true or p1.target.universeId == nil and not HasOnOpenCreatorCreditPage1
 	local IsHasPublishedTurn = p1.hasPublishedTurn == true
 	local UseMemoResult = ReactModule.useMemo(function()

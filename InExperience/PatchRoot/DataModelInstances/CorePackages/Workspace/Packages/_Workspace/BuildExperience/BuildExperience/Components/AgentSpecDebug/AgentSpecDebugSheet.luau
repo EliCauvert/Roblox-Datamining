@@ -1,11 +1,10 @@
-﻿local BuildExperience = script:FindFirstAncestor("BuildExperience")
-local Parent = BuildExperience.Parent
+﻿local Parent = script:FindFirstAncestor("BuildExperience").Parent
 local CreatorAgentChatModule = require(Parent.DataHydration.CreatorAgentChat)
 local FoundationModule = require(Parent.Foundation)
 local ReactModule = require(Parent.React)
 local SignalsModule = require(Parent.Signals)
 local SignalsReactModule = require(Parent.SignalsReact)
-local Sheet = if require(BuildExperience.Flags.FFlagBuildExperienceUseFoundationSheet) then FoundationModule.Sheet else require(BuildExperience.FoundationFork.Sheet)
+local Sheet = FoundationModule.Sheet
 local Button = FoundationModule.Button
 local Divider = FoundationModule.Divider
 local Icon = FoundationModule.Icon

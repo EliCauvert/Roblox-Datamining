@@ -3,7 +3,7 @@ local Parent = Groups.Parent
 local _ = require(Parent.Navigation)
 local ReactModule = require(Parent.React)
 local RoactNavigationModule = require(Parent.RoactNavigation)
-local GroupDetailPaneModule = require(Groups.Components.GroupDetailPane)
+local GroupOverviewPaneModule = require(Groups.Components.GroupOverviewPane)
 local GroupsPageModule = require(Groups.Components.GroupsPage)
 local GroupsRoutesModule = require(script.Parent.GroupsRoutes)
 
@@ -17,10 +17,10 @@ return RoactNavigationModule.createRobloxStackNavigator({
 		}
 	},
 	{
-		[GroupsRoutesModule.GroupDetailPane] = {
+		[GroupsRoutesModule.GroupOverviewPane] = {
 			screen = function(p1)
-				-- upvalues: ReactModule (copy), GroupDetailPaneModule (copy)
-				return ReactModule.createElement(GroupDetailPaneModule, { navigation = p1.navigation })
+				-- upvalues: ReactModule (copy), GroupOverviewPaneModule (copy)
+				return ReactModule.createElement(GroupOverviewPaneModule, { navigation = p1.navigation })
 			end,
 			navigationOptions = { disableBackButton = false }
 		}

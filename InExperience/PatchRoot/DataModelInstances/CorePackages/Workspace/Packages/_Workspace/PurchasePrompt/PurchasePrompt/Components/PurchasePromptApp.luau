@@ -41,7 +41,6 @@ local RequestTypeModule = require(PurchasePrompt.Enums.RequestType)
 local PromptStateModule = require(PurchasePrompt.Enums.PromptState)
 local PurchasePromptAppConditionalFocusNavigation = game:DefineFastFlag("PurchasePromptAppConditionalFocusNavigation", false)
 local PurchasePromptAppTrackRenderPerformance = game:DefineFastFlag("PurchasePromptAppTrackRenderPerformance", false)
-local PurchasePromptAppFixStyleLink = game:DefineFastFlag("PurchasePromptAppFixStyleLink", false)
 local PurchasePromptApp = Roact.Component:extend("PurchasePromptApp")
 
 function PurchasePromptApp.init(p1)
@@ -88,10 +87,10 @@ function PurchasePromptApp:renderWithStyle(p1)
 end
 
 function PurchasePromptApp.render(p1)
-	-- upvalues: ProvideRobloxLocaleModule (copy), Roact (copy), LocaleProvider (copy), LocalizationService (copy), ProductPurchaseContainerModule (copy), FFlagPurchasePromptSubtitleForTimedOptions (copy), RobuxUpsellContainerModule (copy), SubscriptionPurchaseContainerModule (copy), EventConnectionsModule (copy), GetFFlagEnableToastLiteRenderModule (copy), Toast (copy), FFlagAddCursorProviderToPurchasePromptApp (copy), PurchasePromptAppFixStyleLink (copy), SelectionCursorProvider (copy), ReactFocusNavigationModule (copy), NewResult (copy), Provider (copy), FocusRoot (copy), FocusNavigableSurfaceIdentifierEnum (copy), RoactRodux (copy), LayoutValuesProviderModule (copy), PurchasePromptPolicyModule (copy)
+	-- upvalues: ProvideRobloxLocaleModule (copy), Roact (copy), LocaleProvider (copy), LocalizationService (copy), ProductPurchaseContainerModule (copy), FFlagPurchasePromptSubtitleForTimedOptions (copy), RobuxUpsellContainerModule (copy), SubscriptionPurchaseContainerModule (copy), EventConnectionsModule (copy), GetFFlagEnableToastLiteRenderModule (copy), Toast (copy), FFlagAddCursorProviderToPurchasePromptApp (copy), SelectionCursorProvider (copy), ReactFocusNavigationModule (copy), NewResult (copy), Provider (copy), FocusRoot (copy), FocusNavigableSurfaceIdentifierEnum (copy), RoactRodux (copy), LayoutValuesProviderModule (copy), PurchasePromptPolicyModule (copy)
 	return ProvideRobloxLocaleModule(function()
-		-- upvalues: Roact (upval), LocaleProvider (upval), LocalizationService (upval), ProductPurchaseContainerModule (upval), FFlagPurchasePromptSubtitleForTimedOptions (upval), p1 (copy), RobuxUpsellContainerModule (upval), SubscriptionPurchaseContainerModule (upval), EventConnectionsModule (upval), GetFFlagEnableToastLiteRenderModule (upval), Toast (upval), FFlagAddCursorProviderToPurchasePromptApp (upval), PurchasePromptAppFixStyleLink (upval), SelectionCursorProvider (upval), ReactFocusNavigationModule (upval), NewResult (upval), Provider (upval), FocusRoot (upval), FocusNavigableSurfaceIdentifierEnum (upval), RoactRodux (upval), LayoutValuesProviderModule (upval), PurchasePromptPolicyModule (upval)
-		local Folder = {
+		-- upvalues: Roact (upval), LocaleProvider (upval), LocalizationService (upval), ProductPurchaseContainerModule (upval), FFlagPurchasePromptSubtitleForTimedOptions (upval), p1 (copy), RobuxUpsellContainerModule (upval), SubscriptionPurchaseContainerModule (upval), EventConnectionsModule (upval), GetFFlagEnableToastLiteRenderModule (upval), Toast (upval), FFlagAddCursorProviderToPurchasePromptApp (upval), SelectionCursorProvider (upval), ReactFocusNavigationModule (upval), NewResult (upval), Provider (upval), FocusRoot (upval), FocusNavigableSurfaceIdentifierEnum (upval), RoactRodux (upval), LayoutValuesProviderModule (upval), PurchasePromptPolicyModule (upval)
+		local Folder = Roact.createElement("Folder", nil, {
 			LocaleProvider = Roact.createElement(LocaleProvider, { locale = LocalizationService.RobloxLocaleId }, {
 				ProductPurchaseContainer = Roact.createElement(ProductPurchaseContainerModule, {
 					subtitleView = if FFlagPurchasePromptSubtitleForTimedOptions then p1.props.subtitleView else nil,
@@ -102,13 +101,9 @@ function PurchasePromptApp.render(p1)
 			}),
 			EventConnections = Roact.createElement(EventConnectionsModule),
 			Toast = if GetFFlagEnableToastLiteRenderModule() then Roact.createElement(Toast) else nil
-		}
-		local HasAnyActivePrompt = FFlagAddCursorProviderToPurchasePromptApp and p1:hasAnyActivePrompt()
+		})
 		
-		if PurchasePromptAppFixStyleLink then
-			Folder = Roact.createElement("Folder", nil, Folder)
-		end
-		if HasAnyActivePrompt then
+		if FFlagAddCursorProviderToPurchasePromptApp and p1:hasAnyActivePrompt() then
 			p1:trackRenderPerformance()
 			Folder = {
 				CursorProvider = Roact.createElement(SelectionCursorProvider, {}, {

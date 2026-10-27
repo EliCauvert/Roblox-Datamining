@@ -1,6 +1,4 @@
-﻿local BuildExperience = script:FindFirstAncestor("BuildExperience")
-local CreatorAgentChatModule = require(BuildExperience.Parent.DataHydration.CreatorAgentChat)
-local FFlagBuildExperienceToolResultFailureRecoveryModule = require(BuildExperience.Flags.FFlagBuildExperienceToolResultFailureRecovery)
+﻿local CreatorAgentChatModule = require(script:FindFirstAncestor("BuildExperience").Parent.DataHydration.CreatorAgentChat)
 local _ = require(script.Parent.chatTypes)
 local ChatConstantsModule = require(script.Parent.chatConstants)
 local _ = require(script.Parent.localToolOverlay)
@@ -75,7 +73,7 @@ local _ = function(p1, p2, p3)
 end
 
 return function(p1, p2, p3, Callback)
-	-- upvalues: Debug (copy), FFlagBuildExperienceToolResultFailureRecoveryModule (copy), AwaitRequestStateFunction (copy), ChatConstantsModule (copy), StudioProposePlanTool (copy), GetToolCallOrderFunction (copy)
+	-- upvalues: Debug (copy), AwaitRequestStateFunction (copy), ChatConstantsModule (copy), StudioProposePlanTool (copy), GetToolCallOrderFunction (copy)
 	local PlanFlow = nil
 	local OnPlanAcceptedImpl = nil
 	
@@ -110,8 +108,8 @@ return function(p1, p2, p3, Callback)
 		end
 	end
 	
-	local function submitPlanResult(PlanFlow1, FormatAcceptedContentResult, ResultKind, p4)
-		-- upvalues: Debug (upval), p1 (copy), FFlagBuildExperienceToolResultFailureRecoveryModule (upval), recoverFailedSubmission (copy), AwaitRequestStateFunction (upval), ChatConstantsModule (upval), p2 (copy), p3 (copy), PlanFlow (ref)
+	local function submitPlanResult(PlanFlow1, FormatAcceptedContentResult, ResultKind, FeedbackText)
+		-- upvalues: Debug (upval), p1 (copy), recoverFailedSubmission (copy), AwaitRequestStateFunction (upval), ChatConstantsModule (upval), p2 (copy), p3 (copy), PlanFlow (ref)
 		Debug.log("info", "present_plan tool_result submitting", {
 			sessionId = PlanFlow1.sessionId,
 			toolCallId = PlanFlow1.toolCallId,
@@ -127,51 +125,39 @@ return function(p1, p2, p3, Callback)
 				toolCallId = PlanFlow1.toolCallId,
 				resultKind = ResultKind
 			})
+			recoverFailedSubmission(PlanFlow1, FeedbackText, nil)
 			
-			if FFlagBuildExperienceToolResultFailureRecoveryModule then
-				recoverFailedSubmission(PlanFlow1, p4, nil)
-				
-				return
-			else
-				PlanFlow1.submitted = false
-				
-				return
-			end
+			return
+		end
+		local AwaitRequestStateResult = AwaitRequestStateFunction(SubmitActiveToolResultResult.state, os.clock() + ChatConstantsModule.CAS_RPC_TIMEOUT_SECONDS)
+		local Floored = math.floor((os.clock() - ClockTime) * 1000 + 0.5)
+		
+		if AwaitRequestStateResult.status == "succeeded" then
+			Debug.log("info", "present_plan tool_result submitted", {
+				sessionId = PlanFlow1.sessionId,
+				toolCallId = PlanFlow1.toolCallId,
+				turnId = PlanFlow1.turnId,
+				referenceId = PlanFlow1.referenceId,
+				durationMs = Floored,
+				resultKind = ResultKind
+			})
+			p2[PlanFlow1.toolCallId] = true
+			p3.markSubmitted(PlanFlow1.toolCallId)
+			p3.removePlanAction(PlanFlow1.toolCallId)
+			PlanFlow = nil
+			
+			return
 		else
-			local AwaitRequestStateResult = AwaitRequestStateFunction(SubmitActiveToolResultResult.state, os.clock() + ChatConstantsModule.CAS_RPC_TIMEOUT_SECONDS)
-			local Floored = math.floor((os.clock() - ClockTime) * 1000 + 0.5)
-			
-			if AwaitRequestStateResult.status == "succeeded" then
-				Debug.log("info", "present_plan tool_result submitted", {
-					sessionId = PlanFlow1.sessionId,
-					toolCallId = PlanFlow1.toolCallId,
-					turnId = PlanFlow1.turnId,
-					referenceId = PlanFlow1.referenceId,
-					durationMs = Floored,
-					resultKind = ResultKind
-				})
-				p2[PlanFlow1.toolCallId] = true
-				p3.markSubmitted(PlanFlow1.toolCallId)
-				p3.removePlanAction(PlanFlow1.toolCallId)
-				PlanFlow = nil
-				
-				return
-			else
-				if FFlagBuildExperienceToolResultFailureRecoveryModule then
-					recoverFailedSubmission(PlanFlow1, p4, AwaitRequestStateResult.errorCode)
-				else
-					PlanFlow1.submitted = false
-				end
-				Debug.log("warn", "present_plan tool_result submit failed", {
-					sessionId = PlanFlow1.sessionId,
-					toolCallId = PlanFlow1.toolCallId,
-					turnId = PlanFlow1.turnId,
-					referenceId = PlanFlow1.referenceId,
-					durationMs = Floored,
-					state = Debug.formatRequestState(AwaitRequestStateResult),
-					resultKind = ResultKind
-				})
-			end
+			recoverFailedSubmission(PlanFlow1, FeedbackText, AwaitRequestStateResult.errorCode)
+			Debug.log("warn", "present_plan tool_result submit failed", {
+				sessionId = PlanFlow1.sessionId,
+				toolCallId = PlanFlow1.toolCallId,
+				turnId = PlanFlow1.turnId,
+				referenceId = PlanFlow1.referenceId,
+				durationMs = Floored,
+				state = Debug.formatRequestState(AwaitRequestStateResult),
+				resultKind = ResultKind
+			})
 		end
 	end
 	
@@ -181,8 +167,8 @@ return function(p1, p2, p3, Callback)
 	end
 	
 	local _ = function(p4, p5)
-		-- upvalues: submitPlanResult (copy), StudioProposePlanTool (upval), FFlagBuildExperienceToolResultFailureRecoveryModule (upval)
-		submitPlanResult(p4, StudioProposePlanTool.formatFeedbackContent(p5), "feedback", if FFlagBuildExperienceToolResultFailureRecoveryModule then p5 else nil)
+		-- upvalues: submitPlanResult (copy), StudioProposePlanTool (upval)
+		submitPlanResult(p4, StudioProposePlanTool.formatFeedbackContent(p5), "feedback", p5)
 	end
 	
 	local function setCurrentPlanProposal(Proposal)
@@ -308,7 +294,7 @@ return function(p1, p2, p3, Callback)
 			end
 		end,
 		trySubmitComposerText = function(FeedbackText): boolean
-			-- upvalues: PlanFlow (ref), setCurrentPlanProposal (copy), submitPlanResult (copy), StudioProposePlanTool (upval), FFlagBuildExperienceToolResultFailureRecoveryModule (upval)
+			-- upvalues: PlanFlow (ref), setCurrentPlanProposal (copy), submitPlanResult (copy), StudioProposePlanTool (upval)
 			local PlanFlow1 = PlanFlow
 			
 			if PlanFlow1 == nil or PlanFlow1.submitted then
@@ -326,8 +312,8 @@ return function(p1, p2, p3, Callback)
 				}
 				setCurrentPlanProposal(PlanFlow1.proposal)
 				task.spawn(function()
-					-- upvalues: PlanFlow1 (copy), FeedbackText (copy), submitPlanResult (upval), StudioProposePlanTool (upval), FFlagBuildExperienceToolResultFailureRecoveryModule (upval)
-					submitPlanResult(PlanFlow1, StudioProposePlanTool.formatFeedbackContent(FeedbackText), "feedback", if FFlagBuildExperienceToolResultFailureRecoveryModule then FeedbackText else nil)
+					-- upvalues: PlanFlow1 (copy), FeedbackText (copy), submitPlanResult (upval), StudioProposePlanTool (upval)
+					submitPlanResult(PlanFlow1, StudioProposePlanTool.formatFeedbackContent(FeedbackText), "feedback", FeedbackText)
 				end)
 				
 				return true

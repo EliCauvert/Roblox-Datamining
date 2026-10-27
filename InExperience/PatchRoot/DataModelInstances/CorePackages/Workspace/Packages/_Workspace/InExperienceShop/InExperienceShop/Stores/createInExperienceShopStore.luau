@@ -83,7 +83,7 @@ return function()
 	local Signal6, Signal2_5 = CreateSignalFunction(false)
 	local Signal7, Signal2_6 = CreateSignalFunction(false)
 	local Signal8, Signal2_7 = CreateSignalFunction({})
-	local Signal9, Signal2_8 = CreateSignalFunction({ available = {}, active = {} })
+	local Signal9, Signal2_8 = CreateSignalFunction({ available = {}, active = {}, redeemed = {} })
 	local Signal10, Signal2_9 = CreateSignalFunction({})
 	local Signal11, Signal2_10 = CreateSignalFunction(ConstantsModule.MIN_COLUMNS)
 	local Signal12, Signal2_11 = CreateSignalFunction(nil)
@@ -315,9 +315,11 @@ return function()
 		local SignalResult = Signal9(false)
 		local Copy = table.clone(SignalResult.available)
 		local Copy1 = table.clone(SignalResult.active)
+		local Copy2 = table.clone(SignalResult.redeemed or {})
 		Copy[Key] = nil
+		Copy2[Key] = nil
 		Copy1[Key] = true
-		Signal2_8({ available = Copy, active = Copy1 })
+		Signal2_8({ available = Copy, active = Copy1, redeemed = Copy2 })
 	end
 	
 	local function redeemGamePassTrial(Key)

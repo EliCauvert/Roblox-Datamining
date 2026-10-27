@@ -1,5 +1,4 @@
-﻿local FFlagCreatorAgentChatFilterTerminalClientToolsModule = require(script.Parent.FFlagCreatorAgentChatFilterTerminalClientTools)
-local FFlagCreatorAgentChatStrictAskUserToolNameModule = require(script.Parent.FFlagCreatorAgentChatStrictAskUserToolName)
+﻿local FFlagCreatorAgentChatStrictAskUserToolNameModule = require(script.Parent.FFlagCreatorAgentChatStrictAskUserToolName)
 local _ = require(script.Parent.types)
 local HttpService = game:GetService("HttpService")
 local AskUser: string = if require(script:FindFirstAncestor("DataHydration").Parent.SharedFlags).FFlagBuildExperienceClientDataModelTools then "ask_user" else "studio_ask_user"
@@ -330,7 +329,7 @@ return {
 	},
 	extractQuestionsFromToolCall = extractQuestionsFromToolCall,
 	findQuestionsInTurnState = function(p5, p6)
-		-- upvalues: FFlagCreatorAgentChatFilterTerminalClientToolsModule (copy), getPersistedToolResultText (copy), extractQuestionsFromToolCall (copy)
+		-- upvalues: getPersistedToolResultText (copy), extractQuestionsFromToolCall (copy)
 		local List = {}
 		
 		for toolCall in p5.toolCalls do
@@ -345,7 +344,7 @@ return {
 			
 			if not IsCompleted then
 				ToolCall = p5.toolCalls[value]
-				IsCompleted = FFlagCreatorAgentChatFilterTerminalClientToolsModule and (ToolCall.status == "completed" or ToolCall.status == "failed" or ToolCall.status == "cancelled") or getPersistedToolResultText(ToolCall) ~= nil
+				IsCompleted = ToolCall.status == "completed" or ToolCall.status == "failed" or ToolCall.status == "cancelled" or getPersistedToolResultText(ToolCall) ~= nil
 			end
 			local NoExtractQuestionsFromToolCallResult: boolean = IsCompleted
 			

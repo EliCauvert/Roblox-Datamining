@@ -45,6 +45,7 @@ return function(p1)
 	return if p1.isKeyboardVisible or not FFlagMomentsTextOverlayV2Redesign then nil else ReactModule.createElement(View, {
 		tag = "col align-x-center gap-medium position-bottom-center anchor-bottom-center size-full-0 auto-y",
 		ZIndex = 10,
+		onAbsoluteSizeChanged = p1.onAbsoluteSizeChanged,
 		padding = { bottom = UDim.new(0, UseTokensResult.Padding.Large) }
 	}, {
 		IconRow = ReactModule.createElement(View, {

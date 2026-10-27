@@ -16,12 +16,38 @@ local FFlagEnableSubscriptionPurchaseFlowEventIngestModule = require(RobloxSubsc
 local FFlagEnableBuyRobuxSdui = require(Parent.SharedFlags).FFlagEnableBuyRobuxSdui
 local GetAppFeaturePoliciesFunction = require(Parent.UniversalAppPolicy).getAppFeaturePolicies
 local _ = require(RobloxSubscriptionPurchaseApp.Enums.RobloxSubscriptionFlowCompleteReason)
+local ConstantsModule = require(RobloxSubscriptionPurchaseApp.Constants)
+
+local function createProductFromParams(p1)
+	-- upvalues: ConstantsModule (copy)
+	return {
+		PeriodType = "",
+		EligibleOffers = if p1.isFreeTrial then {
+			{ Duration = 0, OfferType = "FreeTrial", PeriodType = "" }
+		} else {},
+		LocalizedPrice = { CurrencyCode = "", Nanos = 0, Units = 0 },
+		LocalizedPriceDisplayString = p1.displayPrice,
+		ProductKey = {
+			Id = p1.subscriptionProductId,
+			Type = ConstantsModule.ROBLOX_SUBSCRIPTION_PRODUCT_TYPE
+		},
+		ProductTypeDetails = {
+			RobloxSubscriptionProductDetails = {
+				FeatureConfig = {
+					IsRobuxTransferEnabled = false,
+					IsTradingEnabled = false,
+					IsUgcPublishingEnabled = false
+				}
+			}
+		}
+	}
+end
 
 return function(p1)
-	-- upvalues: RobloxSubscriptionStoreModule (copy), LogRobloxSubscriptionUpsellCounterModule (copy), RobloxSubscriptionUpsellTelemetryModule (copy), GetAppFeaturePoliciesFunction (copy), RobloxSubscriptionHeadlessOverlayControllerModule (copy), TransitionToErrorModule (copy), ErrorReasonModule (copy), PromptStateModule (copy), FFlagEnableSubscriptionPurchaseFlowEventIngestModule (copy), LogSubscriptionPurchaseFlowEventModule (copy), FFlagEnableBuyRobuxSdui (copy), PerformRobloxSubscriptionPurchaseModule (copy), CreatePaymentSessionModule (copy)
+	-- upvalues: RobloxSubscriptionStoreModule (copy), createProductFromParams (copy), LogRobloxSubscriptionUpsellCounterModule (copy), RobloxSubscriptionUpsellTelemetryModule (copy), GetAppFeaturePoliciesFunction (copy), RobloxSubscriptionHeadlessOverlayControllerModule (copy), TransitionToErrorModule (copy), ErrorReasonModule (copy), PromptStateModule (copy), FFlagEnableSubscriptionPurchaseFlowEventIngestModule (copy), LogSubscriptionPurchaseFlowEventModule (copy), FFlagEnableBuyRobuxSdui (copy), PerformRobloxSubscriptionPurchaseModule (copy), CreatePaymentSessionModule (copy)
 	local GetResult = RobloxSubscriptionStoreModule.get()
 	local EntryContext = p1.entryContext
-	GetResult.setRobloxSubscriptionProduct(p1.productDetails)
+	GetResult.setRobloxSubscriptionProduct(p1.productDetails or createProductFromParams(p1))
 	GetResult.setOnFlowComplete(p1.onFlowComplete)
 	GetResult.setPurchaseFlowOptions({
 		skipWaitingForPurchaseResult = p1.skipWaitingForPurchaseResult == true

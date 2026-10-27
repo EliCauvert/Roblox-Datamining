@@ -14,7 +14,6 @@ local LeaveGroupDialogScreenModule = require(ChatDetails.LeaveGroupDialog.LeaveG
 local ParticipantDialogScreenDeprecatedModule = require(ChatDetails.ParticipantDialog.ParticipantDialogScreenDeprecated)
 local RemoveUserDialogScreenModule = require(ChatDetails.RemoveUserDialog.RemoveUserDialogScreen)
 local AbuseReportScreenModule = require(AppChat.Components.ChatAbuseReport.AbuseReportScreen)
-local TrustedContactsModalScreenModule = require(AppChat.Components.TrustedContactsModal.TrustedContactsModalScreen)
 local MessageContextMenuScreenModule = require(AppChat.Components.ChatConversation.MessageInteraction.MessageContextMenuScreen)
 local SquadVoiceChangerOverlayModule = require(Parent.Squads.SquadVoiceChangerOverlay)
 local ChatLandingTelemetryLayerModule = require(AppChat.Telemetry.Layers.ChatLandingTelemetryLayer)
@@ -22,7 +21,6 @@ local ChatLandingTelemetryStateModule = require(AppChat.Contexts.TelemetryState.
 local ChatConversationTelemetryLayerModule = require(AppChat.Telemetry.Layers.ChatConversationTelemetryLayer)
 local ChatConversationTelemetryStateModule = require(AppChat.Contexts.TelemetryState.ChatConversationTelemetryState)
 local UseGetAndSetRefModule = require(AppChat.Hooks.useGetAndSetRef)
-local TrustedConnectionsUpsellScreenModule = require(AppChat.Components.TrustedConnectionsUpsell.TrustedConnectionsUpsellScreen)
 local TrustedFriendsUpsellScreenModule = require(AppChat.Components.TrustedFriendsUpsell.TrustedFriendsUpsellScreen)
 local GroupOSADialogScreenModule = require(AppChat.Components.OSA.GroupOSADialogScreen)
 local ChatConversation = AppChat.Components.ChatConversation
@@ -49,8 +47,6 @@ local GetFFlagIsSquadEnabledFunction = SharedFlagsModule.GetFFlagIsSquadEnabled
 local FFlagAppIaScrollAway = SharedFlagsModule.FFlagAppIaScrollAway
 local FFlagAppIaScrollAwayFixSocial = SharedFlagsModule.FFlagAppIaScrollAwayFixSocial
 local FFlagEnablePartyVoiceChangersInLua = SharedFlagsModule.FFlagEnablePartyVoiceChangersInLua
-local FFlagAppChatEnableDoubleOptIn = require(Parent.SharedFlags).FFlagAppChatEnableDoubleOptIn
-local FFlagAppChatConsolidateTrustedFriendsModalModule = require(AppChat.Flags.FFlagAppChatConsolidateTrustedFriendsModal)
 local FFlagAppChatDisableAbsorbInputSelectableModule = require(AppChat.Flags.FFlagAppChatDisableAbsorbInputSelectable)
 local FFlagAppChatConsoleFocusFixesModule = require(AppChat.Flags.FFlagAppChatConsoleFocusFixes)
 local UserGameSettings = UserSettings():GetService("UserGameSettings")
@@ -335,12 +331,6 @@ table.insert(List, {
 	}
 })
 table.insert(List, {
-	[EnumScreensModule.AppChatTrustedContactsModal] = {
-		screen = TrustedContactsModalScreenModule,
-		navigationOptions = { backButtonEnabled = true, overlayEnabled = true }
-	}
-})
-table.insert(List, {
 	[EnumScreensModule.BlockingModal] = {
 		screen = BlockingModal,
 		navigationOptions = { backButtonEnabled = true, overlayEnabled = true }
@@ -372,20 +362,17 @@ table.insert(List, {
 		}
 	}
 })
-
-if FFlagAppChatEnableDoubleOptIn or FFlagAppChatConsolidateTrustedFriendsModalModule then
-	table.insert(List, {
-		[EnumScreensModule.TrustedConnectionsUpsell] = {
-			screen = if FFlagAppChatConsolidateTrustedFriendsModalModule then TrustedFriendsUpsellScreenModule else TrustedConnectionsUpsellScreenModule,
-			navigationOptions = {
-				transparent = true,
-				overlayTransparency = 0.5,
-				backButtonEnabled = true,
-				overlayEnabled = true
-			}
+table.insert(List, {
+	[EnumScreensModule.TrustedConnectionsUpsell] = {
+		screen = TrustedFriendsUpsellScreenModule,
+		navigationOptions = {
+			transparent = true,
+			overlayTransparency = 0.5,
+			backButtonEnabled = true,
+			overlayEnabled = true
 		}
-	})
-end
+	}
+})
 table.insert(List, {
 	[EnumScreensModule.GroupOSADialog] = {
 		screen = GroupOSADialogScreenModule,

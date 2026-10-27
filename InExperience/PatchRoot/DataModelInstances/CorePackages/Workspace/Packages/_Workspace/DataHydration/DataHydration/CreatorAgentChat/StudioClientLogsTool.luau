@@ -1,5 +1,4 @@
 ﻿local HttpService = game:GetService("HttpService")
-local FFlagCreatorAgentChatFilterTerminalClientToolsModule = require(script.Parent.FFlagCreatorAgentChatFilterTerminalClientTools)
 local _ = require(script.Parent.types)
 
 local function _(Text: string): boolean
@@ -73,7 +72,7 @@ return {
 		return true
 	end,
 	findClientLogsRequestInTurnState = function(p1, p2)
-		-- upvalues: FFlagCreatorAgentChatFilterTerminalClientToolsModule (copy), getPersistedToolResultText (copy)
+		-- upvalues: getPersistedToolResultText (copy)
 		local List = {}
 		
 		for toolCall in p1.toolCalls do
@@ -87,9 +86,9 @@ return {
 			
 			if not IsCompleted then
 				ToolCall = p1.toolCalls[value]
-				IsCompleted = FFlagCreatorAgentChatFilterTerminalClientToolsModule and (ToolCall.status == "completed" or ToolCall.status == "failed" or ToolCall.status == "cancelled")
+				IsCompleted = ToolCall.status == "completed" or ToolCall.status == "failed" or ToolCall.status == "cancelled" or getPersistedToolResultText(ToolCall) ~= nil
 			end
-			if not IsCompleted and getPersistedToolResultText(ToolCall) == nil then
+			if not IsCompleted then
 				local Kind: string = ToolCall.kind
 				local IsAskForLogs: boolean = typeof(Kind) == "string" and string.lower(Kind) == "ask_for_logs"
 				

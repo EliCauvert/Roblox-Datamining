@@ -1,10 +1,7 @@
 ﻿local HttpService = game:GetService("HttpService")
 local LocalizationService = game:GetService("LocalizationService")
-local Parent = script:FindFirstAncestor("DataHydration").Parent
 local AcpProtocolModule = require(script.Parent.Acp.AcpProtocol)
-local FFlagCreatorAgentChatFilterTerminalClientToolsModule = require(script.Parent.FFlagCreatorAgentChatFilterTerminalClientTools)
-local Localization = require(Parent.RobloxAppLocales).Localization
-local FFlagBuildExperiencePinForBuild = require(Parent.SharedFlags).FFlagBuildExperiencePinForBuild
+local Localization = require(script:FindFirstAncestor("DataHydration").Parent.RobloxAppLocales).Localization
 local ParseFrameModule = require(script.Parent.Acp.parseFrame)
 local _ = require(script.Parent.types)
 local config = {
@@ -167,13 +164,13 @@ local function getSessionUpdate(p2)
 end
 
 local function classifyFrame(p2)
-	-- upvalues: getSessionUpdate (copy), FFlagBuildExperiencePinForBuild (copy), FFlagCreatorAgentChatFilterTerminalClientToolsModule (copy), config (copy)
+	-- upvalues: getSessionUpdate (copy), config (copy)
 	local SessionUpdate, SessionUpdate2, SessionUpdate3, SessionUpdate4 = getSessionUpdate(p2)
 	
 	if SessionUpdate == nil or SessionUpdate2 == nil then
 		return nil
 	end
-	if FFlagBuildExperiencePinForBuild and SessionUpdate4 ~= true then
+	if SessionUpdate4 ~= true then
 		return nil
 	end
 	if SessionUpdate.sessionUpdate == "state_change" and SessionUpdate.state == "idle" then
@@ -187,7 +184,7 @@ local function classifyFrame(p2)
 		if SessionUpdate.sessionUpdate ~= "tool_call_update" then break end
 		local Status = SessionUpdate.status
 		
-		if Status == "completed" or (Status == "failed" or FFlagCreatorAgentChatFilterTerminalClientToolsModule and Status == "cancelled") then break end
+		if Status == "completed" or (Status == "failed" or Status == "cancelled") then break end
 		local Kind: string = SessionUpdate.kind
 		local Flag = nil
 		repeat

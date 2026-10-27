@@ -4,17 +4,16 @@ local ReactModule = require(Parent.React)
 local ChatConstantsModule = require(BuildExperience.Chat.chatConstants)
 local _ = require(BuildExperience.Chat.chatTypes)
 local FFlagBuildAgentAdCampaignCardModule = require(BuildExperience.Flags.FFlagBuildAgentAdCampaignCard)
-local FFlagBuildExperienceChatHistoryLoadingSkeletonModule = require(BuildExperience.Flags.FFlagBuildExperienceChatHistoryLoadingSkeleton)
 local View = require(Parent.Foundation).View
 local ChatHistoryLoadingStateModule = require(script.Parent.ChatHistoryLoadingState)
 local ChatMessageItemModule = require(script.Parent.ChatMessageItem)
 
 return function(p1)
-	-- upvalues: FFlagBuildExperienceChatHistoryLoadingSkeletonModule (copy), ReactModule (copy), ChatHistoryLoadingStateModule (copy), View (copy), ChatMessageItemModule (copy), ChatConstantsModule (copy), FFlagBuildAgentAdCampaignCardModule (copy)
+	-- upvalues: ReactModule (copy), ChatHistoryLoadingStateModule (copy), View (copy), ChatMessageItemModule (copy), ChatConstantsModule (copy), FFlagBuildAgentAdCampaignCardModule (copy)
 	local Elements = {}
 	
 	if #p1.messages == 0 then
-		local Element = if FFlagBuildExperienceChatHistoryLoadingSkeletonModule and p1.isHistoryLoading then ReactModule.createElement(ChatHistoryLoadingStateModule) else p1.emptyState
+		local Element = if p1.isHistoryLoading then ReactModule.createElement(ChatHistoryLoadingStateModule) else p1.emptyState
 		
 		if Element ~= nil then
 			Elements.EmptyState = ReactModule.createElement(View, {

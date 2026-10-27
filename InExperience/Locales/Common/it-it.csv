@@ -2163,6 +2163,8 @@ Feature.Build.Description.PromoteGamePaid,Crea un annuncio per far conoscere il 
 Feature.Build.Description.PromoteGameWithAdCampaign,Aumenta il tuo pubblico con una campagna pubblicitaria di {durationDays} giorni e fai scoprire il tuo gioco.
 Feature.Build.Description.RaiseLimitOrWait,Aumenta il tuo limite giornaliero di Robux per continuare a creare o attendi che venga ripristinato domani.
 Feature.Build.Description.RatingAgreement,"Pubblicando, confermi che questa classificazione dei contenuti è corretta."
+Feature.Build.Description.RequiredRobuxForAdvanced,"Hai bisogno di almeno {ROBUX} Robux per continuare a creare con il modello Avanzato. Puoi acquistarli, usare il modello predefinito oppure attendere che si ricarichi il credito gratuito."
+Feature.Build.Description.RequiredRobuxForDefault,Hai bisogno di almeno {ROBUX} Robux per continuare a creare. Puoi acquistarli o attendere che si ricarichino quelli gratuiti.
 Feature.Build.Description.RestoreLatest,Questa versione diventerà la tua ultima versione pubblicata.
 Feature.Build.Description.RevertToVersion,Conferma per ripristinare l'ultima modifica e tornare a {VERSION}.
 Feature.Build.Description.ShareLatest,Condividi le modifiche apportate alla tua ultima versione.
@@ -2228,6 +2230,7 @@ Feature.Build.Label.DeveloperProductDescription,Descrizione: {DESCRIPTION}
 Feature.Build.Label.DeveloperProductName,"Nome: ""{NAME}"""
 Feature.Build.Label.DeveloperProductPrice,Prezzo: {PRICE} Robux
 Feature.Build.Label.DeveloperProductPriceUnavailable,?
+Feature.Build.Label.DeveloperProducts,Developer Product
 Feature.Build.Label.Done,Fine
 Feature.Build.Label.EasyPerformanceReport,Report sulle prestazioni semplificato
 Feature.Build.Label.Error,
@@ -2409,6 +2412,7 @@ Feature.Build.Message.BuildBusy,Build è occupato. Attendi un minuto e riprova.
 Feature.Build.Message.BuildConnectFailed,Build non è riuscito a connettersi. Riprova.
 Feature.Build.Message.BuildInternalError,Build ha riscontrato un problema. Riprova.
 Feature.Build.Message.BuildResponseFailed,Build non ha risposto. Riprova.
+Feature.Build.Message.BuildSendUnconfirmed,Build non è riuscito a confermare l'invio del tuo messaggio.
 Feature.Build.Message.BuildStillWorking,"Ci stiamo lavorando. Mentre aspetti, puoi uscire dall'app, giocare a Roblox o avviare un altro progetto."
 Feature.Build.Message.BuildStopped,Hai interrotto Build.
 Feature.Build.Message.BuildTakingLonger,L'operazione sta impiegando più tempo del previsto. Puoi continuare ad aspettare o iniziare qualcos'altro.
@@ -2438,6 +2442,7 @@ Feature.Build.Message.NoAssetsFound,Nessuna risorsa trovata.
 Feature.Build.Message.NoCapturesAvailable,Nessuno screenshot disponibile
 Feature.Build.Message.NoDescriptionProvided,Nessuna descrizione fornita.
 Feature.Build.Message.NoFriendsToAdd,Non hai ancora amici da invitare. Trova prima persone con cui connetterti su Roblox.
+Feature.Build.Message.NoGamesYet,Ancora nessun gioco.
 Feature.Build.Message.NoResults,
 Feature.Build.Message.NoSearchResultsFound,Nessun risultato di ricerca trovato
 Feature.Build.Message.NoVersionHistory,Non è ancora presente alcuna cronologia delle versioni.
@@ -2503,7 +2508,7 @@ Feature.Build.Title.ChooseModel,Scegli il tuo agente Costruisci
 Feature.Build.Title.Content,Contenuto
 Feature.Build.Title.CreateYourAd,Crea il tuo annuncio
 Feature.Build.Title.DailyRobuxReached,Limite giornaliero di Robux raggiunto
-Feature.Build.Title.DeveloperProduct,Developer Product
+Feature.Build.Title.DeveloperProduct,
 Feature.Build.Title.EditDeveloperProduct,Modifica prodotto
 Feature.Build.Title.ExperienceAudience,Pubblico dell'esperienza
 Feature.Build.Title.FreeLimitReached,Hai raggiunto il tuo limite gratuito
@@ -2513,7 +2518,9 @@ Feature.Build.Title.GameCreationDone,Creazione del gioco completata
 Feature.Build.Title.GamePass,Pass di gioco
 Feature.Build.Title.GenericError,Si è verificato un errore
 Feature.Build.Title.GetUsers,Ottieni utenti
+Feature.Build.Title.InsufficientRobuxForModel,Non hai abbastanza Robux
 Feature.Build.Title.ManagedPricingAcknowledgement,Attivare i prezzi gestiti?
+Feature.Build.Title.Monetization,Monetizzazione
 Feature.Build.Title.NoMonetizationProducts,Inizia a guadagnare nel tuo gioco
 Feature.Build.Title.NoRobuxForUsage,Nessun Robux rimasto per l'utilizzo di Build
 Feature.Build.Title.PickCampaign,Scegli una durata
@@ -3846,6 +3853,7 @@ Feature.Moments.Title.LeaveMomentCreation,Vuoi interrompere la creazione del Mom
 Feature.Moments.Title.MomentRemoved,Momento rimosso
 Feature.Moments.Title.PostInsights,Approfondimenti sui post
 Feature.Moments.Title.ReportPost,Segnala post
+Feature.Moments.Title.UnfollowConfirmationDialog,Non vuoi più seguire @{username}?
 Feature.Moments.Tooltip.Creation,Tutti i partecipanti all'esperienza possono visualizzare i tuoi Momenti.
 Feature.Moments.Tooltip.PostInsightsBody,"Controlla le visualizzazioni, il tempo di visione e l'accoglienza del Momento da parte del tuo pubblico."
 Feature.Moments.Tooltip.PostInsightsTitle,Ecco gli approfondimenti sul tuo Momento
@@ -4651,6 +4659,7 @@ Feature.UniversalShareSheet.Response.SharedCustomMessage,{CUSTOM_MESSAGE} + 1 al
 Feature.UniversalShareSheet.Response.SharedMessage,Il messaggio è stato inviato
 Feature.UniversalShareSheet.Response.SharedMultipleMessages,I messaggi sono stati inviati
 Feature.UniversalShareSheet.SharedCustomMultipleMessages,{CUSTOM_MESSAGE} + altri {N}
+Feature.UserLibrary.Label.MyLibrary,La mia libreria
 Feature.VerificationUpsell.Action.AddPhone,Aggiungi Telefono
 Feature.VerificationUpsell.Action.AddPhoneNumber,Aggiungi numero di telefono
 Feature.VerificationUpsell.Action.AddPhoneVoice,Aggiungi telefono per la chat vocale

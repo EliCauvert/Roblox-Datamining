@@ -16,7 +16,9 @@ local Media = MomentsCommonModule.Media
 local GetMomentsCapabilitiesFunction = MomentsCommonModule.Stores.GetMomentsCapabilities
 local _ = require(Parent.DataHydration.MomentsStoreTypes)
 local ToMediaItemModule = require(Parent.Moments.ToMediaItem)
-local FFlagMomentsAutoplayAmpPolicy = require(Parent.SharedFlags).FFlagMomentsAutoplayAmpPolicy
+local SharedFlagsModule = require(Parent.SharedFlags)
+local FFlagMomentsAutoplayAmpPolicy = SharedFlagsModule.FFlagMomentsAutoplayAmpPolicy
+local FFlagProfileMomentSceneOutfitPoster = SharedFlagsModule.FFlagProfileMomentSceneOutfitPoster
 local UseSignalStateFunction = require(Parent.SignalsReact).useSignalState
 
 local function _(): boolean
@@ -62,7 +64,7 @@ local function defaultCreateCoordinator(p1, MasterVolume)
 end
 
 return function(p1)
-	-- upvalues: FFlagMomentsAutoplayAmpPolicy (copy), UseSignalStateFunction (copy), GetMomentsCapabilitiesFunction (copy), ReactModule (copy), SignalsModule (copy), UserInputService (copy), AppLifecycleObserverService (ref), ToMediaItemModule (copy), defaultCreateCoordinator (copy), Media (copy)
+	-- upvalues: FFlagMomentsAutoplayAmpPolicy (copy), UseSignalStateFunction (copy), GetMomentsCapabilitiesFunction (copy), ReactModule (copy), SignalsModule (copy), UserInputService (copy), AppLifecycleObserverService (ref), ToMediaItemModule (copy), FFlagProfileMomentSceneOutfitPoster (copy), defaultCreateCoordinator (copy), Media (copy)
 	local ActiveIndex = p1.activeIndex
 	local PlaybackActive = p1.playbackActive
 	local UseSignalStateResult = if FFlagMomentsAutoplayAmpPolicy then UseSignalStateFunction(GetMomentsCapabilitiesFunction(false).getIsAutoPlayEnabled) else nil
@@ -127,7 +129,7 @@ return function(p1)
 		end
 	end, { UseMemoResult3 })
 	local UseMemoResult4 = ReactModule.useMemo(function()
-		-- upvalues: p1 (copy), ToMediaItemModule (upval)
+		-- upvalues: p1 (copy), ToMediaItemModule (upval), FFlagProfileMomentSceneOutfitPoster (upval)
 		local List = {}
 		
 		for _, moment in p1.moments do
@@ -135,6 +137,11 @@ return function(p1)
 			
 			if MediaItemModule ~= nil then
 				MediaItemModule.cornerRadius = p1.mediaCornerRadius
+				
+				if FFlagProfileMomentSceneOutfitPoster and moment.metadata.isMomentScene == true then
+					MediaItemModule.captureType = Enum.CaptureType.Screenshot
+					MediaItemModule.posterContent = nil
+				end
 				table.insert(List, MediaItemModule)
 			end
 		end

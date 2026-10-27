@@ -5,6 +5,7 @@ local UseLocalUserIdFunction = require(Parent.RobloxAppHooks).useLocalUserId
 local CryoModule = require(Parent.Cryo)
 local ReactModule = require(Parent.React)
 local ResponsiveModule = require(Parent.Responsive)
+local TutilsModule = require(Parent.tutils)
 local UseFriendsListOrderedByPresenceFunction = require(Parent.FriendsCommon).Hooks.useFriendsListOrderedByPresence
 local UsePrefetchInGameFriendsMediaFunction = require(Parent.GameJoinCard).usePrefetchInGameFriendsMedia
 local UseGetRecommendationsModule = require(SocialCarousel.Hooks.useGetRecommendations)
@@ -23,6 +24,7 @@ local FFlagEnableRecommendationsForPCGDK = require(Parent.SharedFlags).FFlagEnab
 local FFlagFixIsConsoleCheckForSocialCarousel = require(Parent.SharedFlags).FFlagFixIsConsoleCheckForSocialCarousel
 local PrefetchFriendGameMedia = game:DefineFastFlag("PrefetchFriendGameMedia", false)
 local FFlagFriendsCountDataHydrationMigrationEnabled = require(Parent.SharedFlags).FFlagFriendsCountDataHydrationMigrationEnabled
+local FFlagSocialCarouselStableSelectorsModule = require(SocialCarousel.Flags.FFlagSocialCarouselStableSelectors)
 local Tile = EnumsModule.Tile
 local TileGroup = EnumsModule.TileGroup
 local list = {
@@ -32,7 +34,7 @@ local list = {
 local config = { skipFetch = true }
 
 return function(p1, p2)
-	-- upvalues: list (copy), UseLocalUserIdFunction (copy), UseGetRecommendationsModule (copy), UseFriendsListOrderedByPresenceFunction (copy), FIntFriendsCarouselInitialFetchSize (copy), PrefetchFriendGameMedia (copy), UsePrefetchInGameFriendsMediaFunction (copy), FFlagFixIsConsoleCheckForSocialCarousel (copy), UsePreferredInputFunction (copy), ResponsiveModule (copy), FFlagEnableRecommendationsForPCGDK (copy), ThirdPartyUserService (copy), FFlagSocialCarouselShareQREnabled (copy), UseIsSpatialFunction (copy), UseSelectorFunction (copy), FFlagFriendsCountDataHydrationMigrationEnabled (copy), GetDeepValueModule (copy), ConstantsModule (copy), UseGetFriendsCountByUserIdFunction (copy), config (copy), FIntSocialCarouselShowRecsLimit (copy), ReactModule (copy), TileGroup (copy), Tile (copy), CryoModule (copy), FFlagSocialCarouselShowLoadingSkeletonModule (copy)
+	-- upvalues: list (copy), UseLocalUserIdFunction (copy), UseGetRecommendationsModule (copy), UseFriendsListOrderedByPresenceFunction (copy), FIntFriendsCarouselInitialFetchSize (copy), PrefetchFriendGameMedia (copy), UsePrefetchInGameFriendsMediaFunction (copy), FFlagFixIsConsoleCheckForSocialCarousel (copy), UsePreferredInputFunction (copy), ResponsiveModule (copy), FFlagEnableRecommendationsForPCGDK (copy), ThirdPartyUserService (copy), FFlagSocialCarouselShareQREnabled (copy), UseIsSpatialFunction (copy), UseSelectorFunction (copy), FFlagFriendsCountDataHydrationMigrationEnabled (copy), GetDeepValueModule (copy), ConstantsModule (copy), FFlagSocialCarouselStableSelectorsModule (copy), TutilsModule (copy), UseGetFriendsCountByUserIdFunction (copy), config (copy), FIntSocialCarouselShowRecsLimit (copy), ReactModule (copy), TileGroup (copy), Tile (copy), CryoModule (copy), FFlagSocialCarouselShowLoadingSkeletonModule (copy)
 	local P1 = p2 or list
 	local UseLocalUserIdResult = UseLocalUserIdFunction()
 	local UseGetRecommendationsModuleResult = UseGetRecommendationsModule(UseLocalUserIdResult)
@@ -52,7 +54,7 @@ return function(p1, p2)
 			friendCount = if FFlagFriendsCountDataHydrationMigrationEnabled then nil else GetDeepValueModule(p3, string.format("%s.Friends.countsByUserId.%s", p1 or ConstantsModule.RODUX_KEY, UseLocalUserIdResult or "")) or 0,
 			friendRequestCount = GetDeepValueModule(p3, string.format("%s.Friends.requests.receivedCount", p1 or ConstantsModule.RODUX_KEY)) or 0
 		}
-	end)
+	end, if FFlagSocialCarouselStableSelectorsModule then TutilsModule.shallowEqual else nil)
 	local UseGetFriendsCountByUserIdResult = if FFlagFriendsCountDataHydrationMigrationEnabled then UseGetFriendsCountByUserIdFunction(tostring(UseLocalUserIdResult or ""), config) or 0 else UseSelectorResult.friendCount
 	local IsUseGetFriendsCountByUserIdResultBelow: boolean = IsUsePreferredInputResultMatch and UseGetFriendsCountByUserIdResult <= FIntSocialCarouselShowRecsLimit
 	local NoIsUsePreferredInputResultMatch: boolean = UseGetFriendsCountByUserIdResult == 0 and not IsUsePreferredInputResultMatch

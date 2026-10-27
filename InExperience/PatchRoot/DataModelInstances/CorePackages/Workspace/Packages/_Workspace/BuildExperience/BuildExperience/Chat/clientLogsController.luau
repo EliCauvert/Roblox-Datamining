@@ -1,7 +1,5 @@
-﻿local BuildExperience = script:FindFirstAncestor("BuildExperience")
-local Parent = BuildExperience.Parent
+﻿local Parent = script:FindFirstAncestor("BuildExperience").Parent
 local CreatorAgentChatModule = require(Parent.DataHydration.CreatorAgentChat)
-local FFlagBuildExperiencePersistPlaytestLogsModule = require(BuildExperience.Flags.FFlagBuildExperiencePersistPlaytestLogs)
 local ChatConstantsModule = require(script.Parent.chatConstants)
 local ClientLogsCollectorModule = require(script.Parent.clientLogsCollector)
 local StudioClientLogsTool = CreatorAgentChatModule.StudioClientLogsTool
@@ -29,14 +27,14 @@ local function fetchLatestSavedVersion(PlaceId)
 end
 
 return function(p1, p2, Callback)
-	-- upvalues: Debug (copy), FFlagBuildExperiencePersistPlaytestLogsModule (copy), fetchLatestSavedVersion (copy), ClientLogsCollectorModule (copy), AwaitRequestStateFunction (copy), ChatConstantsModule (copy), StudioClientLogsTool (copy)
+	-- upvalues: Debug (copy), fetchLatestSavedVersion (copy), ClientLogsCollectorModule (copy), AwaitRequestStateFunction (copy), ChatConstantsModule (copy), StudioClientLogsTool (copy)
 	local function _()
 		-- upvalues: Callback (copy)
 		return Callback == nil or Callback()
 	end
 	
 	local function submitClientLogsResult(p3)
-		-- upvalues: Debug (upval), FFlagBuildExperiencePersistPlaytestLogsModule (upval), fetchLatestSavedVersion (upval), p1 (copy), Callback (copy), p2 (copy), ClientLogsCollectorModule (upval), AwaitRequestStateFunction (upval), ChatConstantsModule (upval)
+		-- upvalues: Debug (upval), fetchLatestSavedVersion (upval), p1 (copy), Callback (copy), p2 (copy), ClientLogsCollectorModule (upval), AwaitRequestStateFunction (upval), ChatConstantsModule (upval)
 		Debug.log("info", "ask_for_logs tool_result collecting", {
 			sessionId = p3.sessionId,
 			toolCallId = p3.toolCallId,
@@ -45,26 +43,19 @@ return function(p1, p2, Callback)
 			reason = p3.reason
 		})
 		local ClockTime = os.clock()
-		local CollectToolResultContentResult = nil
+		local LatestSavedVersion = fetchLatestSavedVersion(p1.placeId)
 		
-		if FFlagBuildExperiencePersistPlaytestLogsModule then
-			local LatestSavedVersion = fetchLatestSavedVersion(p1.placeId)
+		if Callback ~= nil and not Callback() then
+			p2[p3.toolCallId] = nil
 			
-			if Callback ~= nil and not Callback() then
-				p2[p3.toolCallId] = nil
-				
-				return
-			end
-			CollectToolResultContentResult = ClientLogsCollectorModule.collectToolResultContent({
-				universeId = p1.universeId,
-				placeId = p1.placeId,
-				minimumPlaceVersion = LatestSavedVersion
-			})
-		else
-			CollectToolResultContentResult = ClientLogsCollectorModule.collectToolResultContent()
+			return
 		end
 		local Floored = math.floor((os.clock() - ClockTime) * 1000 + 0.5)
-		local SubmitActiveToolResultResult = p1.submitActiveToolResult(CollectToolResultContentResult, false, p3.turnId, p3.referenceId)
+		local SubmitActiveToolResultResult = p1.submitActiveToolResult(ClientLogsCollectorModule.collectToolResultContent({
+			universeId = p1.universeId,
+			placeId = p1.placeId,
+			minimumPlaceVersion = LatestSavedVersion
+		}), false, p3.turnId, p3.referenceId)
 		
 		if SubmitActiveToolResultResult == nil then
 			Debug.log("warn", "ask_for_logs tool_result submit aborted (no active session)", { toolCallId = p3.toolCallId, collectDurationMs = Floored })

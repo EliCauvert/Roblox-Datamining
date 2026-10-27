@@ -35,30 +35,28 @@ return function(p1)
 		UseLocalizationResult.games,
 		UseLocalizationResult.previews
 	})
+	local UseResult = ReactModule.useCallback(function(Games)
+		-- upvalues: BUILDHOMETAB (upval), TabStore (copy)
+		if Games == BUILDHOMETAB.Games or Games == BUILDHOMETAB.Previews then
+			TabStore.setTab(Games)
+			
+			return
+		end
+	end, { TabStore })
 	local NoUseIsSearchActiveResult = not UseIsSearchActiveResult
 	local UseTabResult1 = if NoUseIsSearchActiveResult then UseTabResult else BUILDHOMETAB.Games
 	local UseBuildHomeTabsPageLayoutModuleResult = UseBuildHomeTabsPageLayoutModule({
 		tabs = UseMemoResult,
 		activeTab = UseTabResult1,
-		showTabs = NoUseIsSearchActiveResult,
-		onTabActivated = ReactModule.useCallback(function(Games)
-			-- upvalues: BUILDHOMETAB (upval), TabStore (copy)
-			if Games == BUILDHOMETAB.Games or Games == BUILDHOMETAB.Previews then
-				TabStore.setTab(Games)
-				
-				return
-			end
-		end, { TabStore })
+		showTabs = NoUseIsSearchActiveResult
 	})
 	
 	return {
 		showTabs = NoUseIsSearchActiveResult,
 		activeTab = UseTabResult1,
 		tabs = UseMemoResult,
-		onTabActivated = UseBuildHomeTabsPageLayoutModuleResult.onTabActivated,
-		layoutRef = UseBuildHomeTabsPageLayoutModuleResult.layoutRef,
-		isSliding = UseBuildHomeTabsPageLayoutModuleResult.isSliding,
-		tabOrder = UseBuildHomeTabsPageLayoutModuleResult.tabOrder,
-		onStopped = UseBuildHomeTabsPageLayoutModuleResult.onStopped
+		onTabActivated = UseResult,
+		pageOffset = UseBuildHomeTabsPageLayoutModuleResult.pageOffset,
+		tabOrder = UseBuildHomeTabsPageLayoutModuleResult.tabOrder
 	}
 end

@@ -2,6 +2,7 @@
 local Parent = DataHydration.Parent
 local _ = require(Parent.HttpClient)
 local PromiseModule = require(Parent.Promise)
+local FFlagBuildExperienceMonetizationManageKindsModule = require(DataHydration.Flags.FFlagBuildExperienceMonetizationManageKinds)
 local CreateDataCacheModule = require(DataHydration.createDataCache)
 local CreateDataResolverModule = require(DataHydration.createDataResolver)
 local CreateSingleEntityResolverModule = require(DataHydration.createSingleEntityResolver)
@@ -41,7 +42,7 @@ local function updateEntryPoint(Tbl, IsEnabled)
 end
 
 return function(p1)
-	-- upvalues: DataHydrationUtilsModule (copy), Frozen (copy), PromiseModule (copy), CreateSingleEntityResolverModule (copy), FetchMonetizationOptionsModule (copy), CreateDataCacheModule (copy), CreateDataResolverModule (copy), updateEntryPoint (copy), GetGamePassConfigStoreModule (copy)
+	-- upvalues: DataHydrationUtilsModule (copy), Frozen (copy), PromiseModule (copy), CreateSingleEntityResolverModule (copy), FetchMonetizationOptionsModule (copy), CreateDataCacheModule (copy), CreateDataResolverModule (copy), updateEntryPoint (copy), GetGamePassConfigStoreModule (copy), FFlagBuildExperienceMonetizationManageKindsModule (copy)
 	local P1 = p1 or {}
 	
 	local function logError(p2, p3)
@@ -323,9 +324,9 @@ return function(p1)
 	end
 	
 	local function refreshGamePassInventory(p4, p5, Promise, p6)
-		-- upvalues: Flag (ref), Generation (ref), GetLocalPlayerUserId (copy), P1 (copy), GetGamePassConfigStoreModule (upval)
+		-- upvalues: Flag (ref), Generation (ref), GetLocalPlayerUserId (copy), P1 (copy), GetGamePassConfigStoreModule (upval), FFlagBuildExperienceMonetizationManageKindsModule (upval)
 		return if #p5 == 0 then Promise else Promise:andThen(function(Result)
-			-- upvalues: p6 (copy), Flag (upval), Generation (upval), GetLocalPlayerUserId (upval), P1 (upval), GetGamePassConfigStoreModule (upval), p4 (copy)
+			-- upvalues: p6 (copy), Flag (upval), Generation (upval), GetLocalPlayerUserId (upval), P1 (upval), GetGamePassConfigStoreModule (upval), FFlagBuildExperienceMonetizationManageKindsModule (upval), p4 (copy)
 			if p6 == nil or (Flag or (p6.generation ~= Generation or p6.userId ~= GetLocalPlayerUserId())) then
 				return Result
 			end
@@ -337,13 +338,19 @@ return function(p1)
 					break
 				end
 			end
-			if Flag1 then
-				local v1 = (if P1.getGamePassConfigStore == nil then GetGamePassConfigStoreModule else P1.getGamePassConfigStore)()
-				v1.clear()
-				v1.fetchGamePasses(p4)
+			if not Flag1 then
+				return Result
+			end
+			local v1 = (if P1.getGamePassConfigStore == nil then GetGamePassConfigStoreModule else P1.getGamePassConfigStore)()
+			
+			if FFlagBuildExperienceMonetizationManageKindsModule then
+				v1.refetchGamePasses(p4)
 				
 				return Result
 			else
+				v1.clear()
+				v1.fetchGamePasses(p4)
+				
 				return Result
 			end
 		end)

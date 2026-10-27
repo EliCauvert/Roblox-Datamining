@@ -1,8 +1,10 @@
 ﻿local ContentProvider = game:GetService("ContentProvider")
-local Parent = script:FindFirstAncestor("Moments").Parent
+local Moments = script:FindFirstAncestor("Moments")
+local Parent = Moments.Parent
 local ReactModule = require(Parent.React)
 local ReactOtterModule = require(Parent.ReactOtter)
 local FoundationModule = require(Parent.Foundation)
+local FFlagMomentsImageWithSkeletonRetryModule = require(Moments.Flags.FFlagMomentsImageWithSkeletonRetry)
 local Image = FoundationModule.Image
 local Skeleton = FoundationModule.Skeleton
 local View = FoundationModule.View
@@ -16,7 +18,7 @@ local function _(Circle, p1): UDim
 end
 
 return ReactModule.memo(function(Frame)
-	-- upvalues: UseTokensFunction (copy), Radius (copy), ReactModule (copy), ReactOtterModule (copy), ContentProvider (copy), config (copy), View (copy), Image (copy), Skeleton (copy)
+	-- upvalues: UseTokensFunction (copy), Radius (copy), ReactModule (copy), ReactOtterModule (copy), ContentProvider (copy), config (copy), FFlagMomentsImageWithSkeletonRetryModule (copy), View (copy), Image (copy), Skeleton (copy)
 	local UseTokensResult = UseTokensFunction()
 	local Radius1 = Frame.radius or Radius.Medium
 	local Image1 = Frame.Image
@@ -29,7 +31,7 @@ return ReactModule.memo(function(Frame)
 		end
 	end)
 	ReactModule.useEffect(function()
-		-- upvalues: UseStateResult2 (copy), IsNotImageMatch (copy), Image1 (copy), UseAnimatedBindingResult2 (copy), ReactOtterModule (upval), config (upval), ContentProvider (upval)
+		-- upvalues: UseStateResult2 (copy), IsNotImageMatch (copy), Image1 (copy), UseAnimatedBindingResult2 (copy), ReactOtterModule (upval), config (upval), ContentProvider (upval), FFlagMomentsImageWithSkeletonRetryModule (upval)
 		UseStateResult2(IsNotImageMatch)
 		
 		if not IsNotImageMatch or Image1 == nil or Image1 == "" then
@@ -39,43 +41,64 @@ return ReactModule.memo(function(Frame)
 		end
 		local Flag = true
 		
-		local function _()
+		local function fadeInImage()
 			-- upvalues: Flag (ref), UseAnimatedBindingResult2 (upval), ReactOtterModule (upval), config (upval)
 			if Flag then
 				UseAnimatedBindingResult2((ReactOtterModule.spring(1, config)))
 			end
 		end
 		
-		if ContentProvider:GetAssetFetchStatus(Image1) ~= Enum.AssetFetchStatus.Success then
-			UseAnimatedBindingResult2((ReactOtterModule.instant(0)))
-			task.spawn(function()
-				-- upvalues: ContentProvider (upval), Image1 (upval), Flag (ref), UseAnimatedBindingResult2 (upval), ReactOtterModule (upval), config (upval)
-				pcall(function()
-					-- upvalues: ContentProvider (upval), Image1 (upval), Flag (upval), UseAnimatedBindingResult2 (upval), ReactOtterModule (upval), config (upval)
-					ContentProvider:PreloadAsync({ Image1 }, function(Image, AssetFetchStatus)
-						-- upvalues: Image1 (upval), Flag (upval), UseAnimatedBindingResult2 (upval), ReactOtterModule (upval), config (upval)
-						if Image == Image1 and AssetFetchStatus == Enum.AssetFetchStatus.Success and Flag then
-							UseAnimatedBindingResult2((ReactOtterModule.spring(1, config)))
-						end
-					end)
-				end)
-				
-				if ContentProvider:GetAssetFetchStatus(Image1) == Enum.AssetFetchStatus.Success and Flag then
-					UseAnimatedBindingResult2((ReactOtterModule.spring(1, config)))
-				end
-			end)
-			
+		if ContentProvider:GetAssetFetchStatus(Image1) == Enum.AssetFetchStatus.Success then
+			if Flag then
+				UseAnimatedBindingResult2((ReactOtterModule.spring(1, config)))
+			end
 			return function()
 				-- upvalues: Flag (ref)
 				Flag = false
 			end
-		end
-		if Flag then
-			UseAnimatedBindingResult2((ReactOtterModule.spring(1, config)))
-		end
-		return function()
-			-- upvalues: Flag (ref)
-			Flag = false
+		else
+			UseAnimatedBindingResult2((ReactOtterModule.instant(0)))
+			
+			if FFlagMomentsImageWithSkeletonRetryModule then
+				task.spawn(require(script.Parent.preloadImageWithRetry), Image1, {
+					isCurrent = function()
+						-- upvalues: Flag (ref)
+						return Flag
+					end,
+					onSuccess = fadeInImage,
+					onGiveUp = function()
+						-- upvalues: UseStateResult2 (upval)
+						UseStateResult2(false)
+					end
+				})
+				
+				return function()
+					-- upvalues: Flag (ref)
+					Flag = false
+				end
+			else
+				task.spawn(function()
+					-- upvalues: ContentProvider (upval), Image1 (upval), Flag (ref), UseAnimatedBindingResult2 (upval), ReactOtterModule (upval), config (upval)
+					pcall(function()
+						-- upvalues: ContentProvider (upval), Image1 (upval), Flag (upval), UseAnimatedBindingResult2 (upval), ReactOtterModule (upval), config (upval)
+						ContentProvider:PreloadAsync({ Image1 }, function(Image, AssetFetchStatus)
+							-- upvalues: Image1 (upval), Flag (upval), UseAnimatedBindingResult2 (upval), ReactOtterModule (upval), config (upval)
+							if Image == Image1 and AssetFetchStatus == Enum.AssetFetchStatus.Success and Flag then
+								UseAnimatedBindingResult2((ReactOtterModule.spring(1, config)))
+							end
+						end)
+					end)
+					
+					if ContentProvider:GetAssetFetchStatus(Image1) == Enum.AssetFetchStatus.Success and Flag then
+						UseAnimatedBindingResult2((ReactOtterModule.spring(1, config)))
+					end
+				end)
+				
+				return function()
+					-- upvalues: Flag (ref)
+					Flag = false
+				end
+			end
 		end
 	end, { Image1, IsNotImageMatch })
 	local ImageStyle = Frame.imageStyle

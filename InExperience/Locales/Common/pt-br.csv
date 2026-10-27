@@ -2429,6 +2429,7 @@ Feature.Build.Message.BuildBusy,A função Criar está indisponível. Aguarde um
 Feature.Build.Message.BuildConnectFailed,Não foi possível acessar a função Criar. Tente novamente.
 Feature.Build.Message.BuildInternalError,A função Criar encontrou um problema. Tente novamente.
 Feature.Build.Message.BuildResponseFailed,A função Criar não respondeu. Tente novamente.
+Feature.Build.Message.BuildSendUnconfirmed,A função Criar não conseguiu confirmar que sua mensagem foi enviada.
 Feature.Build.Message.BuildStillWorking,"Estamos resolvendo isso. Você pode sair do aplicativo, jogar Roblox ou iniciar outro projeto enquanto espera."
 Feature.Build.Message.BuildStopped,Você interrompeu a função Criar.
 Feature.Build.Message.BuildTakingLonger,Isso está demorando mais do que o esperado. Você pode continuar esperando ou tentar outra coisa.
@@ -3869,6 +3870,7 @@ Feature.Moments.Title.LeaveMomentCreation,Sair da criação de Momento?
 Feature.Moments.Title.MomentRemoved,Momento removido
 Feature.Moments.Title.PostInsights,Compartilhar insights
 Feature.Moments.Title.ReportPost,Denunciar publicação
+Feature.Moments.Title.UnfollowConfirmationDialog,Parar de seguir @{username}?
 Feature.Moments.Tooltip.Creation,Todos na experiência podem ver seus Momentos.
 Feature.Moments.Tooltip.PostInsightsBody,"Confira as visualizações, o tempo de visualização e como o Momento foi recebido pelo seu público."
 Feature.Moments.Tooltip.PostInsightsTitle,Seus insights do Momento estão aqui
@@ -4673,6 +4675,7 @@ Feature.UniversalShareSheet.Response.SharedCustomMessage,{CUSTOM_MESSAGE} + 1 ou
 Feature.UniversalShareSheet.Response.SharedMessage,A mensagem foi enviada
 Feature.UniversalShareSheet.Response.SharedMultipleMessages,As mensagens foram enviadas
 Feature.UniversalShareSheet.SharedCustomMultipleMessages,{CUSTOM_MESSAGE} + {N} outras pessoas
+Feature.UserLibrary.Label.MyLibrary,Minha biblioteca
 Feature.VerificationUpsell.Action.AddPhone,Adicionar telefone
 Feature.VerificationUpsell.Action.AddPhoneNumber,Adicionar número de telefone
 Feature.VerificationUpsell.Action.AddPhoneVoice,Número de telefone para o Bate-papo de voz

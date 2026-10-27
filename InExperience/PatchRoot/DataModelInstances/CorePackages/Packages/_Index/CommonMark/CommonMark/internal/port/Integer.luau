@@ -1,0 +1,1 @@
+﻿return (table.freeze({ MAX_VALUE = 2147483647 }))

@@ -13,6 +13,8 @@ local IconSize = FoundationModule.Enums.IconSize
 local FlatList = require(Parent.VirtualizedList).FlatList
 local IsFeedContentScrollableModule = require(script.Parent.isFeedContentScrollable)
 local FFlagVirtualizedFeedFooterWrapperProp = require(Parent.SharedFlags).FFlagVirtualizedFeedFooterWrapperProp
+local FFlagAXScrollTelemetryIntegration2 = require(Parent.SharedFlags).FFlagAXScrollTelemetryIntegration2
+local UseFlatListScrollPerformanceTrackerModule = require(script.Parent.useFlatListScrollPerformanceTracker)
 local ContentContainerStyle = { BackgroundTransparency = 1, BorderSizePixel = 0 }
 local Style = {
 	Selectable = false,
@@ -62,7 +64,7 @@ local _ = function(p1)
 end
 
 return ReactModule.forwardRef(function(Frame, Ref)
-	-- upvalues: FFlagAXVirtualizedFeedVerticalPadding (copy), FFlagVirtualizedFeedFooterWrapperProp (copy), ReactModule (copy), FFlagAXSduiFeedBackToTopAndNavClearance (copy), UserGameSettings (copy), IsFeedContentScrollableModule (copy), VirtualizedFeedBackToTopButton (copy), Loading (copy), IconSize (copy), View (copy), VirtualizedFeedFooterLayout (copy), FlatList (copy), ContentContainerStyle (copy), Style (copy)
+	-- upvalues: FFlagAXVirtualizedFeedVerticalPadding (copy), FFlagVirtualizedFeedFooterWrapperProp (copy), ReactModule (copy), FFlagAXScrollTelemetryIntegration2 (copy), UseFlatListScrollPerformanceTrackerModule (copy), FFlagAXSduiFeedBackToTopAndNavClearance (copy), UserGameSettings (copy), IsFeedContentScrollableModule (copy), VirtualizedFeedBackToTopButton (copy), Loading (copy), IconSize (copy), View (copy), VirtualizedFeedFooterLayout (copy), FlatList (copy), ContentContainerStyle (copy), Style (copy)
 	local HorizontalPadding = Frame.horizontalPadding or 0
 	local VerticalPadding = FFlagAXVirtualizedFeedVerticalPadding and Frame.verticalPadding or 0
 	local NoFFlagVirtualizedFeedFooterWrapperProp: boolean = not FFlagVirtualizedFeedFooterWrapperProp or Frame.shouldWrapFooter ~= false
@@ -83,6 +85,10 @@ return ReactModule.forwardRef(function(Frame, Ref)
 			end
 		end
 	end, { Frame.flatListRef })
+	
+	if FFlagAXScrollTelemetryIntegration2 then
+		UseFlatListScrollPerformanceTrackerModule(Frame.scrollPerformanceIntervalName, UseRefResult)
+	end
 	local UseStateResult, UseStateResult2 = ReactModule.useState(false)
 	local v1 = nil
 	local UseStateResult2_1 = nil

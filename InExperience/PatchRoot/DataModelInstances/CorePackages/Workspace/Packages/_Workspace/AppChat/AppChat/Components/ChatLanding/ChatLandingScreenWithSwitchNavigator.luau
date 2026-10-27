@@ -38,11 +38,9 @@ local ContextModule = require(AppChat.Contexts.ChatWideModeFocus.Context)
 local UseGetAndSetRefModule = require(AppChat.Hooks.useGetAndSetRef)
 local UseIsChatSearchAllowedModule = require(AppChat.Hooks.useIsChatSearchAllowed)
 local SharedFlagsModule = require(Parent.SharedFlags)
-local GetFFlagIsSquadEnabledFunction = SharedFlagsModule.GetFFlagIsSquadEnabled
 local GetFFlagEnableAppChatInExperienceFunction = SharedFlagsModule.GetFFlagEnableAppChatInExperience
 local AppChatFixChatLandingContainerKeyPropConflict = game:DefineFastFlag("AppChatFixChatLandingContainerKeyPropConflict", false)
 local FFlagAppChatConsoleFocusFixesModule = require(AppChat.Flags.FFlagAppChatConsoleFocusFixes)
-local ArgoPartyExperimentation = require(Parent.SocialExperiments).ArgoPartyExperimentation
 
 local function LeftContainerTelemetryProviders(p1)
 	-- upvalues: UseGetAndSetRefModule (copy), ReactModule (copy), FFlagAppChatWideAlwaysVisibleSearchBoxModule (copy), UseIsChatSearchAllowedModule (copy), ChatLandingTelemetryStateModule (copy), ChatLandingTelemetryLayerModule (copy)
@@ -383,7 +381,7 @@ function ChatLandingScreenWithSwitchNavigator.render(p1)
 end
 
 function ChatLandingScreenWithSwitchNavigator.didMount(p1)
-	-- upvalues: LoggerModule (copy), GetFFlagEnableAppChatInExperienceFunction (copy), SharedFlagsModule (copy), ArgoPartyExperimentation (copy), UniversalAppPolicyModule (copy), GetFFlagIsSquadEnabledFunction (copy), FocusBehaviorsModule (copy)
+	-- upvalues: LoggerModule (copy), GetFFlagEnableAppChatInExperienceFunction (copy), SharedFlagsModule (copy), UniversalAppPolicyModule (copy), FocusBehaviorsModule (copy)
 	LoggerModule:info("{screen} mounted")
 	local Navigation = p1.props.navigation
 	local IsInExperienceScreenProps = Navigation.getScreenProps("isInExperience", false)
@@ -401,17 +399,11 @@ function ChatLandingScreenWithSwitchNavigator.didMount(p1)
 		isRoot = true,
 		isTitleLeftAligned = true,
 		shouldBoldHeader = true,
-		headerText = if ArgoPartyExperimentation.getIsRenameEnabled() then if UniversalAppPolicyModule.getAppFeaturePolicies().getCanSeeChatTerminology() then {
+		headerText = if UniversalAppPolicyModule.getAppFeaturePolicies().getCanSeeChatTerminology() then {
 			raw = "CommonUI.Features.Label.Chat",
 			shouldLocalize = true
 		} else {
 			raw = "Feature.Squads.Label.Party",
-			shouldLocalize = true
-		} elseif GetFFlagIsSquadEnabledFunction() then {
-			raw = "Feature.Squads.Label.Party",
-			shouldLocalize = true
-		} else {
-			raw = "CommonUI.Features.Label.Chat",
 			shouldLocalize = true
 		},
 		closeButtonEnabled = IsInExperienceScreenProps1 and v1,

@@ -7,16 +7,15 @@ local ClosePlayerDropDownModule = require(Parent.Actions.ClosePlayerDropDown)
 local SetIsUsingGamepadModule = require(Parent.Actions.SetIsUsingGamepad)
 local EventConnectionModule = require(script.Parent.EventConnection)
 local UserInputServiceConnector = RoactModule.PureComponent:extend("UserInputServiceConnector")
-local PlayerListFilterInputServiceDispatches = game:DefineFastFlag("PlayerListFilterInputServiceDispatches", false)
 
 function UserInputServiceConnector.render(p1)
-	-- upvalues: RoactModule (copy), EventConnectionModule (copy), UserInputService (copy), PlayerListFilterInputServiceDispatches (copy)
+	-- upvalues: RoactModule (copy), EventConnectionModule (copy), UserInputService (copy)
 	return RoactModule.createFragment({
 		InputBeganConnection = RoactModule.createElement(EventConnectionModule, {
 			event = UserInputService.InputBegan,
 			callback = function(Input, p2)
-				-- upvalues: PlayerListFilterInputServiceDispatches (upval), p1 (copy)
-				if PlayerListFilterInputServiceDispatches and not p1.props.playerDropdownVisible then return end
+				-- upvalues: p1 (copy)
+				if not p1.props.playerDropdownVisible then return end
 				if p2 then return end
 				local UserInputType = Input.UserInputType
 				
@@ -28,10 +27,10 @@ function UserInputServiceConnector.render(p1)
 		LastInputTypeChangedConnection = RoactModule.createElement(EventConnectionModule, {
 			event = UserInputService.LastInputTypeChanged,
 			callback = function(p2)
-				-- upvalues: PlayerListFilterInputServiceDispatches (upval), p1 (copy)
+				-- upvalues: p1 (copy)
 				local HasGamepad = p2.Name:find("Gamepad") ~= nil
 				
-				if not PlayerListFilterInputServiceDispatches or HasGamepad ~= p1.props.isUsingGamepad then
+				if HasGamepad ~= p1.props.isUsingGamepad then
 					p1.props.setIsUsingGamepad(HasGamepad)
 					
 					return
@@ -41,14 +40,12 @@ function UserInputServiceConnector.render(p1)
 	})
 end
 
-local function mapStateToProps(p1)
+return RoactRoduxModule.connect(function(p1)
 	return {
 		playerDropdownVisible = p1.playerDropDown.isVisible,
 		isUsingGamepad = p1.displayOptions.isUsingGamepad
 	}
-end
-
-return RoactRoduxModule.connect(PlayerListFilterInputServiceDispatches and mapStateToProps or nil, function(Callback)
+end, function(Callback)
 	-- upvalues: ClosePlayerDropDownModule (copy), SetIsUsingGamepadModule (copy)
 	return {
 		closePlayerDropDown = function()

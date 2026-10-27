@@ -6,6 +6,7 @@ local _ = require(script.Parent.chatTypes)
 local _ = require(script.Parent.localToolOverlay)
 local CreateManageGamePassStoreModule = require(script.Parent.createManageGamePassStore)
 local CreateMonetizationToolControllerModule = require(script.Parent.createMonetizationToolController)
+local ToolControllerUtilsModule = require(script.Parent.toolControllerUtils)
 local v1 = nil
 
 local function _()
@@ -44,27 +45,37 @@ local config = {
 		end)
 	end,
 	mutate = function(p1, p2)
-		-- upvalues: v1 (ref), CreateManageGamePassStoreModule (copy), PromiseModule (copy)
+		-- upvalues: ToolControllerUtilsModule (copy), v1 (ref), CreateManageGamePassStoreModule (copy), PromiseModule (copy)
 		if p2.action == "create" then
-			if v1 == nil then
-				v1 = CreateManageGamePassStoreModule()
-			end
-			return v1.create(p1, {
-				isForSale = false,
-				name = p2.name,
-				description = p2.description,
-				priceInRobux = p2.priceInRobux
-			})
-		elseif p2.action == "update" then
-			if v1 == nil then
-				v1 = CreateManageGamePassStoreModule()
-			end
-			return v1.update(p1, p2.gamePassId, {
-				name = p2.name,
-				description = p2.description,
-				priceInRobux = p2.priceInRobux
-			})
-		elseif p2.action == "activate" then
+			return ToolControllerUtilsModule.withGeneratedImage(p2.imageAssetId, "The pass image could not be loaded. No game pass was created.", function(ImageFile)
+				-- upvalues: v1 (upval), CreateManageGamePassStoreModule (upval), p1 (copy), p2 (copy)
+				if v1 == nil then
+					v1 = CreateManageGamePassStoreModule()
+				end
+				return v1.create(p1, {
+					isForSale = false,
+					name = p2.name,
+					description = p2.description,
+					priceInRobux = p2.priceInRobux,
+					imageFile = ImageFile
+				})
+			end)
+		end
+		if p2.action == "update" then
+			return ToolControllerUtilsModule.withGeneratedImage(p2.imageAssetId, "The pass image could not be loaded. No changes were made.", function(ImageFile)
+				-- upvalues: v1 (upval), CreateManageGamePassStoreModule (upval), p1 (copy), p2 (copy)
+				if v1 == nil then
+					v1 = CreateManageGamePassStoreModule()
+				end
+				return v1.update(p1, p2.gamePassId, {
+					name = p2.name,
+					description = p2.description,
+					priceInRobux = p2.priceInRobux,
+					imageFile = ImageFile
+				})
+			end)
+		end
+		if p2.action == "activate" then
 			if v1 == nil then
 				v1 = CreateManageGamePassStoreModule()
 			end
@@ -83,6 +94,9 @@ local config = {
 	end,
 	itemIdOf = function(p1)
 		return if p1.gamePassId == nil then nil else tostring(p1.gamePassId)
+	end,
+	cardFields = function(p1)
+		return { imageAssetId = p1.imageAssetId }
 	end
 }
 

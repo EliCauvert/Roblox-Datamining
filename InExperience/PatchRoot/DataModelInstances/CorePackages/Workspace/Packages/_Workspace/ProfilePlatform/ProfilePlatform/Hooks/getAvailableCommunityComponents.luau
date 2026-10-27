@@ -7,9 +7,10 @@ local FFlagAddSocialLinksToCommunityProfile = require(Parent.SharedFlags).FFlagA
 local FFlagAddCommunityLockedToCommunityProfile = require(Parent.SharedFlags).FFlagAddCommunityLockedToCommunityProfile
 local FFlagAddEventsToCommunityProfileModule = require(ProfilePlatform.Flags.FFlagAddEventsToCommunityProfile)
 local FFlagGroupAnnouncementsSdui = require(Parent.SharedFlags).FFlagGroupAnnouncementsSdui
+local FFlagGroupForumsDiscoverySdui = require(Parent.SharedFlags).FFlagGroupForumsDiscoverySdui
 
 return function()
-	-- upvalues: EnumsModule (copy), GetSupportedActionsForProfileTypeModule (copy), FFlagAddSocialLinksToCommunityProfile (copy), FFlagAddCommunityLockedToCommunityProfile (copy), FFlagAddEventsToCommunityProfileModule (copy), FFlagGroupAnnouncementsSdui (copy)
+	-- upvalues: EnumsModule (copy), GetSupportedActionsForProfileTypeModule (copy), FFlagAddSocialLinksToCommunityProfile (copy), FFlagAddCommunityLockedToCommunityProfile (copy), FFlagAddEventsToCommunityProfileModule (copy), FFlagGroupAnnouncementsSdui (copy), FFlagGroupForumsDiscoverySdui (copy)
 	local List = {
 		{
 			component = EnumsModule.Components.CommunityProfileHeader
@@ -37,6 +38,9 @@ return function()
 	end
 	if FFlagGroupAnnouncementsSdui then
 		table.insert(List, { component = EnumsModule.Components.Announcements })
+	end
+	if FFlagGroupForumsDiscoverySdui then
+		table.insert(List, { component = EnumsModule.Components.GroupForumsDiscovery })
 	end
 	return List
 end

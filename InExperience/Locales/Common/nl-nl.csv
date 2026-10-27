@@ -1033,7 +1033,7 @@ CoreScripts.PublishAssetPrompt.Cancel,
 CoreScripts.PublishAssetPrompt.Description,
 CoreScripts.PublishAssetPrompt.DisclaimerAvatar,Ik ga ermee akkoord dat deze ervaring mijn avataritem ter moderatie indient en uploadt naar Mijn creaties.
 CoreScripts.PublishAssetPrompt.DisclaimerEmote,Ik ga ermee akkoord dat deze ervaring mijn emote ter moderatie indient en uploadt naar Mijn creaties.
-CoreScripts.PublishAssetPrompt.DisclaimerImage,Ik ga ermee akkoord dat deze ervaring mijn afbeelding ter moderatie indient en uploadt naar Mijn creaties.
+CoreScripts.PublishAssetPrompt.DisclaimerImage,Ik ga ermee akkoord dat deze ervaring mijn afbeelding ter moderatie indient en uploadt naar Mijn creaties. De privacy van de afbeelding wordt ingesteld op 'Open gebruik'. Elke creator of game kan het gebruiken.
 CoreScripts.PublishAssetPrompt.DisclaimerModel,Gemaakte items worden beoordeeld en je wordt mogelijk niet terugbetaald als afgewezen items niet voldoen aan de Communityrichtlijnen.
 CoreScripts.PublishAssetPrompt.InvalidDescription,Ongeldige beschrijving
 CoreScripts.PublishAssetPrompt.InvalidName,Ongeldige naam
@@ -2164,6 +2164,8 @@ Feature.Build.Description.PromoteGamePaid,Maak een advertentie om je spel onder 
 Feature.Build.Description.PromoteGameWithAdCampaign,Vergroot je doelgroep met een advertentiecampagne van {durationDays} dagen en zorg ervoor dat je spel wordt ontdekt.
 Feature.Build.Description.RaiseLimitOrWait,"Verhoog je dagelijkse Robux-limiet om te blijven creëren, of wacht tot deze morgen wordt gereset."
 Feature.Build.Description.RatingAgreement,"Door te publiceren, ga je ermee akkoord dat deze inhoudsbeoordeling juist is."
+Feature.Build.Description.RequiredRobuxForAdvanced,Je hebt ten minste {ROBUX} Robux nodig om content te blijven maken met het geavanceerde model. Je kunt ook terugschakelen naar standaard of wachten tot je gratis gebruikstegoed wordt gereset.
+Feature.Build.Description.RequiredRobuxForDefault,"Je hebt ten minste {ROBUX} Robux nodig om content te blijven maken, of je kunt wachten tot je gratis gebruikstegoed wordt gereset."
 Feature.Build.Description.RestoreLatest,Deze versie wordt je meest recent gepubliceerde versie.
 Feature.Build.Description.RevertToVersion,Bevestigen om de meest recente wijziging terug te zetten en terug te gaan naar {VERSION}.
 Feature.Build.Description.ShareLatest,Deel wat er is veranderd in je nieuwste versie.
@@ -2188,6 +2190,8 @@ Feature.Build.Error.ManagedPricingPartialUpdate,Sommige producten konden niet wo
 Feature.Build.Error.MonetizationOptionUpdate,De optie kon niet worden bijgewerkt. Probeer het nog een keer.
 Feature.Build.Error.MonetizationOptionsLoad,Opties konden niet worden geladen. Probeer het nog een keer.
 Feature.Build.Error.MonetizationPermissionDenied,Je hebt geen toestemming om de opties voor inkomsten genereren te wijzigen.
+Feature.Build.Error.MonetizationPriceRequiredForRegionalPricing,Voeg een prijs toe om regionale prijzen in te schakelen.
+Feature.Build.Error.MonetizationPriceRequiredForSale,Voeg een prijs toe voordat je dit te koop aanbiedt.
 Feature.Build.Header.AccessSharing,Toegang en delen
 Feature.Build.Header.AllVersions,Alle versies
 Feature.Build.Header.Answers,Antwoorden
@@ -2411,6 +2415,7 @@ Feature.Build.Message.BuildBusy,Build is bezet. Wacht even en probeer het nog ee
 Feature.Build.Message.BuildConnectFailed,Build kon geen verbinding maken. Probeer het nog een keer.
 Feature.Build.Message.BuildInternalError,Build is op een probleem gestuit. Probeer het nog een keer.
 Feature.Build.Message.BuildResponseFailed,Build reageerde niet. Probeer het nog een keer.
+Feature.Build.Message.BuildSendUnconfirmed,Build kon niet bevestigen dat je bericht is verzonden.
 Feature.Build.Message.BuildStillWorking,"We zijn ermee bezig. Je kunt de app afsluiten, Roblox spelen of een ander project starten terwijl je wacht."
 Feature.Build.Message.BuildStopped,Je hebt Build gestopt.
 Feature.Build.Message.BuildTakingLonger,Dit duurt langer dan verwacht. Je kunt blijven wachten of iets anders beginnen.
@@ -3322,6 +3327,7 @@ Feature.Friends.Description.TrustedFriendsExpiredLink,Vraag je vriend om de link
 Feature.Friends.Description.TrustedFriendsInvalidLink,Zorg ervoor dat je bent ingelogd met het juiste account en probeer het opnieuw.
 Feature.Friends.Description.TrustedFriendsRequestModalBody,Voeg alleen mensen toe die je kent en vertrouwt. Beheer deze vriend op elk moment vanuit hun profiel.
 Feature.Friends.Description.TrustedFriendsUnavailable,De functie voor vertrouwde vrienden is nog niet beschikbaar in jouw regio.
+Feature.Friends.Description.TrustedFriendsWrongAccount,Zorg dat je bent aangemeld als @{username} en probeer het dan opnieuw.
 Feature.Friends.Description.YouCanDoMoreWithTrustedFriends,Je kunt meer doen op Roblox met vertrouwde vrienden. Beheer deze vriend op elk moment vanuit hun profiel.
 Feature.Friends.Error.AlreadyFriendError,Deze gebruiker is al een vriend.
 Feature.Friends.Error.DefaultFriendingError,Kan vriendschapsverzoek niet verzenden. Probeer het later opnieuw.
@@ -3851,6 +3857,7 @@ Feature.Moments.Title.LeaveMomentCreation,Moment maken afsluiten?
 Feature.Moments.Title.MomentRemoved,
 Feature.Moments.Title.PostInsights,Postinzichten
 Feature.Moments.Title.ReportPost,Post melden
+Feature.Moments.Title.UnfollowConfirmationDialog,@{username} ontvolgen?
 Feature.Moments.Tooltip.Creation,Iedereen in de ervaring kan je momenten zien.
 Feature.Moments.Tooltip.PostInsightsBody,"Bekijk het aantal weergaven, de kijktijd en hoe het Moment bij je doelgroep is overgekomen."
 Feature.Moments.Tooltip.PostInsightsTitle,Je momentinzichten zijn hier
@@ -4656,6 +4663,7 @@ Feature.UniversalShareSheet.Response.SharedCustomMessage,{CUSTOM_MESSAGE} + 1 an
 Feature.UniversalShareSheet.Response.SharedMessage,Bericht is verzonden
 Feature.UniversalShareSheet.Response.SharedMultipleMessages,Berichten zijn verzonden
 Feature.UniversalShareSheet.SharedCustomMultipleMessages,{CUSTOM_MESSAGE} + {N} anderen
+Feature.UserLibrary.Label.MyLibrary,Mijn bibliotheek
 Feature.VerificationUpsell.Action.AddPhone,Telefoonnummer toevoegen
 Feature.VerificationUpsell.Action.AddPhoneNumber,
 Feature.VerificationUpsell.Action.AddPhoneVoice,Telefoonnummer toevoegen voor spraakchat

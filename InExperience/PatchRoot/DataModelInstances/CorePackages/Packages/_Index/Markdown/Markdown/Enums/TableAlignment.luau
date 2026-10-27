@@ -1,0 +1,1 @@
+﻿return { Left = "Left", Center = "Center", Right = "Right" }

@@ -1,8 +1,6 @@
 ﻿local BuildExperience = script:FindFirstAncestor("BuildExperience")
 local Parent = BuildExperience.Parent
 local CreatorAgentChatModule = require(Parent.DataHydration.CreatorAgentChat)
-local FFlagBuildExperienceShowThinkingAfterAskUserSubmitModule = require(BuildExperience.Flags.FFlagBuildExperienceShowThinkingAfterAskUserSubmit)
-local FFlagBuildExperienceToolResultFailureRecoveryModule = require(BuildExperience.Flags.FFlagBuildExperienceToolResultFailureRecovery)
 local FFlagBuildExperienceAnswerFormModule = require(BuildExperience.Flags.FFlagBuildExperienceAnswerForm)
 local SignalsModule = if FFlagBuildExperienceAnswerFormModule then require(Parent.Signals) else nil
 local _ = require(script.Parent.chatTypes)
@@ -148,7 +146,7 @@ local _ = function(p2, p3, GetSubmittedToolCallIds)
 end
 
 return function(p4, p5, p6, Callback)
-	-- upvalues: FFlagBuildExperienceAnswerFormModule (copy), buildOptimisticAskUserTool (copy), FFlagBuildExperienceShowThinkingAfterAskUserSubmitModule (copy), StudioAskUserTool (copy), Debug (copy), GetToolCallOrderFunction (copy), SignalsModule (copy), FFlagBuildExperienceToolResultFailureRecoveryModule (copy), AwaitRequestStateFunction (copy), ChatConstantsModule (copy), toggleOptionInSelection (copy)
+	-- upvalues: FFlagBuildExperienceAnswerFormModule (copy), buildOptimisticAskUserTool (copy), StudioAskUserTool (copy), Debug (copy), GetToolCallOrderFunction (copy), SignalsModule (copy), AwaitRequestStateFunction (copy), ChatConstantsModule (copy), toggleOptionInSelection (copy)
 	local AnswerFlow = nil
 	local OnAnswerSelectedImpl = nil
 	local OnAnswerConfirmedImpl = nil
@@ -189,27 +187,24 @@ return function(p4, p5, p6, Callback)
 	end
 	
 	local function _(p7)
-		-- upvalues: FFlagBuildExperienceAnswerFormModule (upval), p6 (copy), buildOptimisticAskUserTool (upval), FFlagBuildExperienceShowThinkingAfterAskUserSubmitModule (upval)
+		-- upvalues: FFlagBuildExperienceAnswerFormModule (upval), p6 (copy), buildOptimisticAskUserTool (upval)
 		p7.submitted = false
 		
 		if FFlagBuildExperienceAnswerFormModule then
 			p6.setAskUserTool((buildOptimisticAskUserTool(p7)))
 		end
-		if FFlagBuildExperienceShowThinkingAfterAskUserSubmitModule then
-			p6.clearSubmitted(p7.toolCallId)
-		end
+		p6.clearSubmitted(p7.toolCallId)
 	end
 	
 	local function recoverFailedSubmission(OptimisticAskUserTool, ErrorCode)
-		-- upvalues: FFlagBuildExperienceAnswerFormModule (upval), p6 (copy), buildOptimisticAskUserTool (upval), FFlagBuildExperienceShowThinkingAfterAskUserSubmitModule (upval), Callback (copy)
+		-- upvalues: FFlagBuildExperienceAnswerFormModule (upval), p6 (copy), buildOptimisticAskUserTool (upval), Callback (copy)
 		OptimisticAskUserTool.submitted = false
 		
 		if FFlagBuildExperienceAnswerFormModule then
 			p6.setAskUserTool((buildOptimisticAskUserTool(OptimisticAskUserTool)))
 		end
-		if FFlagBuildExperienceShowThinkingAfterAskUserSubmitModule then
-			p6.clearSubmitted(OptimisticAskUserTool.toolCallId)
-		end
+		p6.clearSubmitted(OptimisticAskUserTool.toolCallId)
+		
 		if Callback ~= nil then
 			local Selection = OptimisticAskUserTool.selections[OptimisticAskUserTool.currentIndex]
 			local CustomResponseText = if Selection == nil then nil else Selection.customResponseText
@@ -225,7 +220,7 @@ return function(p4, p5, p6, Callback)
 	local ToolCallId = nil
 	local v3 = false
 	
-	local function v45(p7): boolean
+	local function v43(p7): boolean
 		-- upvalues: StudioAskUserTool (upval), getSubmittedToolCallIds (copy), v3 (ref), Debug (upval), SessionId (ref), ToolCallId (ref), setCurrentAnswerStackPrompt (copy), setAnswerFlow (copy), GetToolCallOrderFunction (upval), FFlagBuildExperienceAnswerFormModule (upval), SignalsModule (upval)
 		local QuestionsInTurnState, QuestionsInTurnState2, _, QuestionsInTurnState4, QuestionsInTurnState5 = StudioAskUserTool.findQuestionsInTurnState(p7, getSubmittedToolCallIds())
 		
@@ -290,7 +285,7 @@ return function(p4, p5, p6, Callback)
 	local Flag = false
 	
 	local function submitAskUserResponses(p8)
-		-- upvalues: StudioAskUserTool (upval), Debug (upval), p4 (copy), FFlagBuildExperienceToolResultFailureRecoveryModule (upval), FFlagBuildExperienceAnswerFormModule (upval), recoverFailedSubmission (copy), p6 (copy), buildOptimisticAskUserTool (upval), FFlagBuildExperienceShowThinkingAfterAskUserSubmitModule (upval), AwaitRequestStateFunction (upval), ChatConstantsModule (upval), p5 (copy), AnswerFlow (ref)
+		-- upvalues: StudioAskUserTool (upval), Debug (upval), p4 (copy), recoverFailedSubmission (copy), AwaitRequestStateFunction (upval), ChatConstantsModule (upval), p5 (copy), p6 (copy), FFlagBuildExperienceAnswerFormModule (upval), buildOptimisticAskUserTool (upval), AnswerFlow (ref)
 		local List = {}
 		
 		for i, question in p8.questions do
@@ -317,76 +312,51 @@ return function(p4, p5, p6, Callback)
 		
 		if SubmitActiveToolResultResult == nil then
 			Debug.log("warn", "ask_user tool_result submit aborted (no active session)", { toolCallId = p8.toolCallId })
+			recoverFailedSubmission(p8, nil)
 			
-			if FFlagBuildExperienceToolResultFailureRecoveryModule or FFlagBuildExperienceAnswerFormModule then
-				recoverFailedSubmission(p8, nil)
-				
-				return
-			end
-			p8.submitted = false
-			
-			if FFlagBuildExperienceAnswerFormModule then
-				p6.setAskUserTool((buildOptimisticAskUserTool(p8)))
-			end
-			if FFlagBuildExperienceShowThinkingAfterAskUserSubmitModule then
-				p6.clearSubmitted(p8.toolCallId)
-			end
 			return
-		else
-			local AwaitRequestStateResult = AwaitRequestStateFunction(SubmitActiveToolResultResult.state, os.clock() + ChatConstantsModule.CAS_RPC_TIMEOUT_SECONDS)
-			local Floored = math.floor((os.clock() - ClockTime) * 1000 + 0.5)
+		end
+		local AwaitRequestStateResult = AwaitRequestStateFunction(SubmitActiveToolResultResult.state, os.clock() + ChatConstantsModule.CAS_RPC_TIMEOUT_SECONDS)
+		local Floored = math.floor((os.clock() - ClockTime) * 1000 + 0.5)
+		
+		if AwaitRequestStateResult.status ~= "succeeded" then
+			recoverFailedSubmission(p8, AwaitRequestStateResult.errorCode)
+			Debug.log("warn", "ask_user tool_result submit failed", {
+				sessionId = p8.sessionId,
+				toolCallId = p8.toolCallId,
+				turnId = p8.turnId,
+				referenceId = p8.referenceId,
+				durationMs = Floored,
+				state = Debug.formatRequestState(AwaitRequestStateResult)
+			})
 			
-			if AwaitRequestStateResult.status == "succeeded" then
-				Debug.log("info", "ask_user tool_result submitted", {
-					sessionId = p8.sessionId,
-					toolCallId = p8.toolCallId,
-					turnId = p8.turnId,
-					referenceId = p8.referenceId,
-					questionCount = #p8.questions,
-					durationMs = Floored
-				})
-				p5[p8.toolCallId] = true
-				p6.markSubmitted(p8.toolCallId)
-				p6.removeAnswerAction(p8.toolCallId)
-				
-				if FFlagBuildExperienceAnswerFormModule then
-					p6.setAskUserTool((buildOptimisticAskUserTool(p8, false)))
+			return
+		end
+		Debug.log("info", "ask_user tool_result submitted", {
+			sessionId = p8.sessionId,
+			toolCallId = p8.toolCallId,
+			turnId = p8.turnId,
+			referenceId = p8.referenceId,
+			questionCount = #p8.questions,
+			durationMs = Floored
+		})
+		p5[p8.toolCallId] = true
+		p6.markSubmitted(p8.toolCallId)
+		p6.removeAnswerAction(p8.toolCallId)
+		
+		if FFlagBuildExperienceAnswerFormModule then
+			p6.setAskUserTool((buildOptimisticAskUserTool(p8, false)))
+		end
+		if FFlagBuildExperienceAnswerFormModule and AnswerFlow ~= nil then
+			local Drafts = AnswerFlow.drafts
+			
+			if Drafts ~= nil then
+				for _, draft in Drafts do
+					draft.setText(nil)
 				end
-				if FFlagBuildExperienceAnswerFormModule and AnswerFlow ~= nil then
-					local Drafts = AnswerFlow.drafts
-					
-					if Drafts ~= nil then
-						for _, draft in Drafts do
-							draft.setText(nil)
-						end
-					end
-				end
-				AnswerFlow = nil
-				
-				return
-			else
-				if FFlagBuildExperienceToolResultFailureRecoveryModule or FFlagBuildExperienceAnswerFormModule then
-					recoverFailedSubmission(p8, AwaitRequestStateResult.errorCode)
-				else
-					p8.submitted = false
-					
-					if FFlagBuildExperienceAnswerFormModule then
-						p6.setAskUserTool((buildOptimisticAskUserTool(p8)))
-					end
-					if FFlagBuildExperienceShowThinkingAfterAskUserSubmitModule then
-						p6.clearSubmitted(p8.toolCallId)
-					end
-				end
-				Debug.log("warn", "ask_user tool_result submit failed", {
-					sessionId = p8.sessionId,
-					toolCallId = p8.toolCallId,
-					turnId = p8.turnId,
-					referenceId = p8.referenceId,
-					durationMs = Floored,
-					state = Debug.formatRequestState(AwaitRequestStateResult)
-				})
 			end
 		end
+		AnswerFlow = nil
 	end
 	
 	local function submitAskUserCancellation(AnswerFlow1)
@@ -435,7 +405,7 @@ return function(p4, p5, p6, Callback)
 	end
 	
 	local function commitCurrentSelectionAndAdvance(AnswerFlow)
-		-- upvalues: p6 (copy), buildOptimisticAskUserTool (upval), FFlagBuildExperienceAnswerFormModule (upval), FFlagBuildExperienceShowThinkingAfterAskUserSubmitModule (upval), submitAskUserResponses (copy)
+		-- upvalues: p6 (copy), buildOptimisticAskUserTool (upval), FFlagBuildExperienceAnswerFormModule (upval), submitAskUserResponses (copy)
 		local Flag = nil
 		if #AnswerFlow.questions <= AnswerFlow.currentIndex then
 			Flag = false
@@ -450,9 +420,7 @@ return function(p4, p5, p6, Callback)
 		if FFlagBuildExperienceAnswerFormModule then
 			p6.setAskUserTool((buildOptimisticAskUserTool(AnswerFlow)))
 		end
-		if FFlagBuildExperienceShowThinkingAfterAskUserSubmitModule then
-			p6.markSubmitted(AnswerFlow.toolCallId)
-		end
+		p6.markSubmitted(AnswerFlow.toolCallId)
 		task.spawn(function()
 			-- upvalues: submitAskUserResponses (upval), AnswerFlow (copy)
 			submitAskUserResponses(AnswerFlow)
@@ -520,7 +488,7 @@ return function(p4, p5, p6, Callback)
 	end
 	
 	local function submitCustomAnswer(AnswerFlow, Question, Text: string): boolean
-		-- upvalues: FFlagBuildExperienceAnswerFormModule (upval), Debug (upval), p6 (copy), buildOptimisticAskUserTool (upval), FFlagBuildExperienceShowThinkingAfterAskUserSubmitModule (upval), submitAskUserResponses (copy)
+		-- upvalues: FFlagBuildExperienceAnswerFormModule (upval), Debug (upval), p6 (copy), buildOptimisticAskUserTool (upval), submitAskUserResponses (copy)
 		if not FFlagBuildExperienceAnswerFormModule and Question.responseType == "multi_select" then
 			return false
 		end
@@ -555,9 +523,7 @@ return function(p4, p5, p6, Callback)
 		if FFlagBuildExperienceAnswerFormModule then
 			p6.setAskUserTool((buildOptimisticAskUserTool(AnswerFlow)))
 		end
-		if FFlagBuildExperienceShowThinkingAfterAskUserSubmitModule then
-			p6.markSubmitted(AnswerFlow.toolCallId)
-		end
+		p6.markSubmitted(AnswerFlow.toolCallId)
 		task.spawn(function()
 			-- upvalues: submitAskUserResponses (upval), AnswerFlow (copy)
 			submitAskUserResponses(AnswerFlow)
@@ -568,8 +534,8 @@ return function(p4, p5, p6, Callback)
 	
 	return {
 		syncAnswerStack = function(p9): boolean
-			-- upvalues: v45 (copy), Flag (ref)
-			if v45(p9) then
+			-- upvalues: v43 (copy), Flag (ref)
+			if v43(p9) then
 				Flag = true
 				
 				return true

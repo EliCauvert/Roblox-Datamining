@@ -6,7 +6,6 @@ local IsConnectDropdownEnabledModule = require(Chrome.Integrations.Connect.isCon
 local IsSpatialFunction = require(CorePackages.Workspace.Packages.AppCommonLib).isSpatial
 local IsTenFootInterfaceFunction = require(CorePackages.Workspace.Packages.AppCommonLib).isTenFootInterface
 local IsInExperienceUIVREnabled = require(CorePackages.Workspace.Packages.SharedExperimentDefinition).isInExperienceUIVREnabled
-local ArgoPartyExperimentation = require(CorePackages.Workspace.Packages.SocialExperiments).ArgoPartyExperimentation
 local SharedFlagsModule = require(CorePackages.Workspace.Packages.SharedFlags)
 local FFlagEnableInExperienceAvatarSwitcher = SharedFlagsModule.FFlagEnableInExperienceAvatarSwitcher
 local IsSideSheetEnabledModule = require(CorePackages.Workspace.Packages.InExperienceSideSheetUtils.isSideSheetEnabled)
@@ -28,8 +27,8 @@ local function _(p1, Key, p2)
 end
 
 return function()
-	-- upvalues: IsConnectDropdownEnabledModule (copy), FFlagRemoveFriendsChatUnibarEntrypoints (copy), ArgoPartyExperimentation (copy), FFlagExpChatCanShowFriendsTab (copy), IsSpatialFunction (copy), IsTenFootInterfaceFunction (copy), IsInExperienceUIVREnabled (copy), FFlagAddTraversalHistory (copy), FFlagIntegrateTraversalHistoryInSideSheet (copy), FFlagEnableSideSheetRobuxWidgetModule (copy), IsSideSheetEnabledModule (copy), FFlagAddInviteFriendsIntegration (copy), ConstantsModule (copy), FFlagEnableInExperienceAvatarSwitcher (copy), FFlagShowSwitchServerButton (copy), IsPioneerLaunchFunction (copy), FFlagEnableInExperienceShop (copy), InExperienceSideSheetModule (copy)
-	local Inverted: boolean = IsConnectDropdownEnabledModule() and not (FFlagRemoveFriendsChatUnibarEntrypoints and (ArgoPartyExperimentation.getIsRenameEnabled() and FFlagExpChatCanShowFriendsTab))
+	-- upvalues: IsConnectDropdownEnabledModule (copy), FFlagRemoveFriendsChatUnibarEntrypoints (copy), FFlagExpChatCanShowFriendsTab (copy), IsSpatialFunction (copy), IsTenFootInterfaceFunction (copy), IsInExperienceUIVREnabled (copy), FFlagAddTraversalHistory (copy), FFlagIntegrateTraversalHistoryInSideSheet (copy), FFlagEnableSideSheetRobuxWidgetModule (copy), IsSideSheetEnabledModule (copy), FFlagAddInviteFriendsIntegration (copy), ConstantsModule (copy), FFlagEnableInExperienceAvatarSwitcher (copy), FFlagShowSwitchServerButton (copy), IsPioneerLaunchFunction (copy), FFlagEnableInExperienceShop (copy), InExperienceSideSheetModule (copy)
+	local Inverted: boolean = IsConnectDropdownEnabledModule() and not (FFlagRemoveFriendsChatUnibarEntrypoints and FFlagExpChatCanShowFriendsTab)
 	local Inverted1: boolean = not IsSpatialFunction() and not IsTenFootInterfaceFunction()
 	local NoIsInExperienceUIVREnabled: boolean = not IsInExperienceUIVREnabled or not IsSpatialFunction()
 	local FFlagIntegrateTraversalHistoryInSideSheet1 = FFlagAddTraversalHistory and FFlagIntegrateTraversalHistoryInSideSheet

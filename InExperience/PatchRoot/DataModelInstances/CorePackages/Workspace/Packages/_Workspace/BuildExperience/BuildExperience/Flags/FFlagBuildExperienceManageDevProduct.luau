@@ -1,1 +1,1 @@
-﻿return game:DefineFastFlag("BuildExperienceManageDevProduct", false)
+﻿return require(script:FindFirstAncestor("BuildExperience").Parent.DataHydration.FFlagBuildExperienceManageDevProduct)

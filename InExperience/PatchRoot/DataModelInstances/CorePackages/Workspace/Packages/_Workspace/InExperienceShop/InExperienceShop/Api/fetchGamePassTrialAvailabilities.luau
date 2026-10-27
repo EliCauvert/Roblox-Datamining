@@ -11,12 +11,22 @@ local FetchFunction = HttpClientModule.fetch
 local AsPromiseFunction = HttpClientModule.asPromise
 
 local function emptyAvailabilities()
-	return { available = {}, active = {} }
+	return { available = {}, active = {}, redeemed = {} }
 end
 
 local function _(p1): string
 	-- upvalues: Url (copy)
 	return `{Url.APIS_URL}game-passes/v1/universes/{p1}/trial-availabilities`
+end
+
+local _ = function(p1)
+	return if typeof(p1) == "string" then DateTime.fromIsoDate(p1) else nil
+end
+
+local _ = function(p1, p2)
+	p1.available[p2] = nil
+	p1.active[p2] = nil
+	p1.redeemed[p2] = nil
 end
 
 local function parseResponse(p1)
@@ -26,11 +36,23 @@ local function parseResponse(p1)
 	for _, trialAvailability in p1.trialAvailabilities do
 		if typeof(trialAvailability) == "table" and trialAvailability.gamePassId ~= nil then
 			local Text = tostring(trialAvailability.gamePassId)
+			local Status = trialAvailability.status
 			
-			if trialAvailability.status == "Available" then
-				EmptyAvailabilitiesResult.available[Text] = true
-			elseif trialAvailability.status == "Active" then
-				EmptyAvailabilitiesResult.active[Text] = true
+			if Status == "Available" or Status == "Active" or Status == "Redeemed" then
+				EmptyAvailabilitiesResult.available[Text] = nil
+				EmptyAvailabilitiesResult.active[Text] = nil
+				EmptyAvailabilitiesResult.redeemed[Text] = nil
+				
+				if Status == "Available" then
+					EmptyAvailabilitiesResult.available[Text] = true
+				elseif Status == "Active" then
+					EmptyAvailabilitiesResult.active[Text] = true
+				else
+					local EndTime = trialAvailability.endTime
+					EmptyAvailabilitiesResult.redeemed[Text] = {
+						endTime = if typeof(EndTime) == "string" then DateTime.fromIsoDate(EndTime) else nil
+					}
+				end
 			end
 		end
 	end

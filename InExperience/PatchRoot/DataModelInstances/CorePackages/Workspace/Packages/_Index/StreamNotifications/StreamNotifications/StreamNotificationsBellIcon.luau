@@ -144,16 +144,12 @@ local function v32(p1)
 				NotificationHelper.fireEvent(EventStream, AnalyticsConstantsModule.Context.click, AnalyticsConstantsModule.EventNames.closeContent, {
 					closeMethod = AnalyticsConstantsModule.CloseMethod.bellIcon
 				})
-				
-				return
 			else
 				NotificationHelper.fireEvent(EventStream, AnalyticsConstantsModule.Context.click, AnalyticsConstantsModule.EventNames.openContent, {
 					countOfUnreadNotification = Number,
 					sendrVersion = ConstantsModule.SENDRVersion,
 					entryPoint = if FFlagStreamNotificationBellEntryPoint then p1.entryPoint else nil
 				})
-				
-				return
 			end
 		else
 			if FFlagEnableNotificationsDeeplink then
@@ -169,6 +165,9 @@ local function v32(p1)
 				sendrVersion = ConstantsModule.SENDRVersion,
 				entryPoint = if FFlagStreamNotificationBellEntryPoint then p1.entryPoint else nil
 			})
+		end
+		if p1.onActivated then
+			p1.onActivated()
 		end
 	end
 	

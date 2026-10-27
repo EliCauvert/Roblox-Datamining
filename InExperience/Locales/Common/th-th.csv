@@ -2165,6 +2165,8 @@ Feature.Build.Description.PromoteGamePaid,สร้างโฆษณาเพ�
 Feature.Build.Description.PromoteGameWithAdCampaign,เพิ่มกลุ่มเป้าหมายของคุณด้วยแคมเปญโฆษณา {durationDays} วันและทำให้เกมของคุณเป็นที่รู้จัก
 Feature.Build.Description.RaiseLimitOrWait,เพิ่มวงเงิน Robux รายวันของคุณเพื่อสร้างต่อ หรือรอให้รีเซ็ตในวันพรุ่งนี้
 Feature.Build.Description.RatingAgreement,การเผยแพร่จะถือว่าคุณยอมรับว่าการจัดระดับเนื้อหานี้ถูกต้อง
+Feature.Build.Description.RequiredRobuxForAdvanced,คุณต้องมีอย่างน้อย {ROBUX} Robux เพื่อสร้างต่อด้วยโมเดลขั้นสูง นอกจากนี้ คุณยังเปลี่ยนกลับไปใช้โหมดเริ่มต้น หรือรอให้โควต้าการใช้งานฟรีของคุณรีเซ็ตก็ได้
+Feature.Build.Description.RequiredRobuxForDefault,คุณต้องมีอย่างน้อย {ROBUX} Robux เพื่อสร้างต่อ หรือรอให้โควต้าการใช้งานฟรีของคุณรีเซ็ต
 Feature.Build.Description.RestoreLatest,เวอร์ชันนี้จะกลายเป็นเวอร์ชันที่เผยแพร่ล่าสุดของคุณ
 Feature.Build.Description.RevertToVersion,ยืนยันเพื่อย้อนการเปลี่ยนแปลงล่าสุดและกลับไปใช้เวอร์ชัน {VERSION}
 Feature.Build.Description.ShareLatest,แชร์ว่าเวอร์ชันล่าสุดของคุณมีอะไรเปลี่ยนแปลงไปบ้าง
@@ -2412,6 +2414,7 @@ Feature.Build.Message.BuildBusy,Build ยุ่งอยู่ โปรดร�
 Feature.Build.Message.BuildConnectFailed,Build เชื่อมต่อไม่ได้ โปรดลองอีกครั้ง
 Feature.Build.Message.BuildInternalError,Build ประสบปัญหา โปรดลองอีกครั้ง
 Feature.Build.Message.BuildResponseFailed,Build ไม่ตอบสนอง โปรดลองอีกครั้ง
+Feature.Build.Message.BuildSendUnconfirmed,Build ไม่สามารถยืนยันได้ว่ามีการส่งข้อความของคุณแล้ว
 Feature.Build.Message.BuildStillWorking,กำลังดำเนินการ คุณสามารถออกจากแอป เล่น Roblox หรือเริ่มโปรเจกต์อื่นระหว่างรอได้
 Feature.Build.Message.BuildStopped,คุณหยุด Build แล้ว
 Feature.Build.Message.BuildTakingLonger,ขั้นตอนนี้ใช้เวลานานกว่าที่คาดไว้ คุณจะรอต่อหรือเริ่มทำอย่างอื่นก็ได้
@@ -2517,6 +2520,7 @@ Feature.Build.Title.GameCreationDone,สร้างเกมเรียบร�
 Feature.Build.Title.GamePass,บัตรผ่านเกม
 Feature.Build.Title.GenericError,มีบางอย่างผิดปกติ
 Feature.Build.Title.GetUsers,ดึงดูดผู้ใช้
+Feature.Build.Title.InsufficientRobuxForModel,คุณมี Robux ไม่เพียงพอ
 Feature.Build.Title.ManagedPricingAcknowledgement,เปิดการตั้งราคาแบบมีการจัดการใช่ไหม?
 Feature.Build.Title.Monetization,การสร้างรายได้
 Feature.Build.Title.NoMonetizationProducts,เริ่มสร้างรายได้ในเกมของคุณ
@@ -3851,6 +3855,7 @@ Feature.Moments.Title.LeaveMomentCreation,ต้องการออกจา�
 Feature.Moments.Title.MomentRemoved,
 Feature.Moments.Title.PostInsights,ข้อมูลเชิงลึกของโพสต์
 Feature.Moments.Title.ReportPost,รายงานโพสต์
+Feature.Moments.Title.UnfollowConfirmationDialog,เลิกติดตาม @{username} ใช่ไหม?
 Feature.Moments.Tooltip.Creation,ทุกคนในประสบการณ์สามารถดูโมเมนต์ของคุณได้
 Feature.Moments.Tooltip.PostInsightsBody,ตรวจสอบยอดวิว ระยะเวลารับชม และผลตอบรับจากผู้ชมที่มีต่อโมเมนต์ของคุณ
 Feature.Moments.Tooltip.PostInsightsTitle,ข้อมูลเชิงลึกเกี่ยวกับโมเมนต์ของคุณพร้อมแล้ว
@@ -4656,6 +4661,7 @@ Feature.UniversalShareSheet.Response.SharedCustomMessage,{CUSTOM_MESSAGE} + อ�
 Feature.UniversalShareSheet.Response.SharedMessage,ส่งข้อความแล้ว
 Feature.UniversalShareSheet.Response.SharedMultipleMessages,
 Feature.UniversalShareSheet.SharedCustomMultipleMessages,{CUSTOM_MESSAGE} + อีก {N} คน
+Feature.UserLibrary.Label.MyLibrary,คลังของฉัน
 Feature.VerificationUpsell.Action.AddPhone,เพิ่มหมายเลขโทรศัพท์
 Feature.VerificationUpsell.Action.AddPhoneNumber,
 Feature.VerificationUpsell.Action.AddPhoneVoice,เพิ่มหมายเลขโทรศัพท์สำหรับการแชทด้วยเสียง

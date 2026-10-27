@@ -1,1 +1,0 @@
-﻿return (game:DefineFastFlag("SupportViewingUserProfileOnOSA1", false))

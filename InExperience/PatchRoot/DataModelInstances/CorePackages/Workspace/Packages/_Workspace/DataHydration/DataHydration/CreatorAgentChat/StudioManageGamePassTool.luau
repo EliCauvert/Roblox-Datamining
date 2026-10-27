@@ -36,7 +36,7 @@ return {
 		}
 	},
 	findRequestInTurnState = MonetizationClientToolModule.createRequestFinder("manage_game_pass"),
-	parseInput = function(p1)
+	parseInput = function(p1, p2)
 		-- upvalues: MonetizationClientToolModule (copy), list (copy), MAXIMUMSAFEINTEGER (copy), FFlagCreatorAgentChatMonetizationOneConsentModule (copy)
 		local ParseActionResult, ParseActionResult2 = MonetizationClientToolModule.parseAction(p1, list)
 		
@@ -64,6 +64,13 @@ return {
 		if p1.gamePassId ~= nil and config.gamePassId == nil then
 			return nil, ("gamePassId must be a positive integer no greater than %.0f."):format(MAXIMUMSAFEINTEGER)
 		end
+		if p2 then
+			config.imageAssetId = MonetizationClientToolModule.parsePositiveSafeInteger(p1.imageAssetId)
+			
+			if p1.imageAssetId ~= nil and config.imageAssetId == nil then
+				return nil, ("imageAssetId must be a positive integer no greater than %.0f."):format(MAXIMUMSAFEINTEGER)
+			end
+		end
 		if p1.createAndGoLive ~= nil and not FFlagCreatorAgentChatMonetizationOneConsentModule then
 			return nil, "createAndGoLive is unavailable."
 		end
@@ -76,16 +83,28 @@ return {
 		
 		if (ParseActionResult == "create" or ParseActionResult == "list") and p1.gamePassId ~= nil then
 			return nil, "gamePassId is only used to update, activate or deactivate a game pass."
-		elseif ParseActionResult ~= "create" and ParseActionResult ~= "update" and (p1.name ~= nil or p1.description ~= nil or p1.priceInRobux ~= nil) then
-			return nil, "Only create and update can set a game pass name, description or priceInRobux."
+		elseif ParseActionResult ~= "create" and ParseActionResult ~= "update" and (p1.name ~= nil or p1.description ~= nil or p1.priceInRobux ~= nil or config.imageAssetId ~= nil) then
+			local v1 = nil
+			
+			if p2 then
+				return v1, "Only create and update can set a game pass name, description, priceInRobux or imageAssetId."
+			else
+				return v1, "Only create and update can set a game pass name, description or priceInRobux."
+			end
 		elseif ParseActionResult == "create" then
 			if config.name == nil or config.name == "" or config.priceInRobux == nil then
 				return nil, "A name and priceInRobux are required to create a game pass."
 			end
 		elseif ParseActionResult ~= "list" and config.gamePassId == nil then
 			return nil, "A gamePassId is required for this action."
-		elseif ParseActionResult == "update" and config.name == nil and config.description == nil and config.priceInRobux == nil then
-			return nil, "An update needs a name, description or priceInRobux."
+		elseif ParseActionResult == "update" and config.name == nil and config.description == nil and config.priceInRobux == nil and config.imageAssetId == nil then
+			local v2 = nil
+			
+			if p2 then
+				return v2, "An update needs a name, description, priceInRobux or imageAssetId."
+			else
+				return v2, "An update needs a name, description or priceInRobux."
+			end
 		elseif ParseActionResult == "update" and config.name == "" then
 			return nil, "A game pass name cannot be empty."
 		end

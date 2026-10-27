@@ -37,7 +37,8 @@ return {
 		VirtualizedFeed = require(script.VirtualizedFeed.VirtualizedFeed)
 	},
 	Hooks = {
-		useRemainingTime = require(script.Utils.useRemainingTime)
+		useRemainingTime = require(script.Utils.useRemainingTime),
+		useFlatListScrollPerformanceTracker = require(script.VirtualizedFeed.useFlatListScrollPerformanceTracker)
 	},
 	Utils = {
 		getRemainingTime = require(script.Utils.getRemainingTime),

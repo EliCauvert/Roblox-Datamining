@@ -1,6 +1,14 @@
 ﻿local AvatarFloorPositionModule = require(script.Parent.avatarFloorPosition)
+local MomentScenesFrameCameraPadding = require(script:FindFirstAncestor("MomentScenes").Parent.SafeFlags).createGetFString("MomentScenesFrameCameraPadding", "2")
 
-local function _(p1, p2)
+local function _(): number
+	-- upvalues: MomentScenesFrameCameraPadding (copy)
+	local Number: number? = tonumber(MomentScenesFrameCameraPadding())
+	
+	return if Number == nil or Number <= 0 then 2 else Number
+end
+
+local _ = function(p1, p2)
 	return p2.Position.Y - p1.Position.Y + 0.5 * p2.Size.Y
 end
 
@@ -9,10 +17,12 @@ local function emptyFit()
 end
 
 local function distanceToFit(Vector, Degrees: number): number
+	-- upvalues: MomentScenesFrameCameraPadding (copy)
 	local RadiansRatio = math.rad(Degrees) / 2
 	local AtanResult = math.atan(math.tan(RadiansRatio) * 0.5625)
+	local Number: number? = tonumber(MomentScenesFrameCameraPadding())
 	
-	return math.max(if math.tan(RadiansRatio) > 0 then Vector.Y / 2 / math.tan(RadiansRatio) else 8, if math.tan(AtanResult) > 0 then Vector.X / 2 / math.tan(AtanResult) else 8, 1) * 1.15
+	return math.max(if math.tan(RadiansRatio) > 0 then Vector.Y / 2 / math.tan(RadiansRatio) else 8, if math.tan(AtanResult) > 0 then Vector.X / 2 / math.tan(AtanResult) else 8, 1) * (if Number == nil or Number <= 0 then 2 else Number)
 end
 
 local function fitBox(Vector, Vector1, p1)

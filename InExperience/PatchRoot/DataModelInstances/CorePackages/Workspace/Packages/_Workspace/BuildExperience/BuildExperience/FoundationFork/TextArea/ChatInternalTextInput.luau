@@ -1,10 +1,8 @@
 ﻿local Foundation = game:GetService("CorePackages").Packages._Index.Foundation.Foundation
 local Parent = Foundation.Parent
-local Parent1 = script:FindFirstAncestor("BuildExperience").Parent
 local ReactModule = require(Parent.React)
 local ReactUtilsModule = require(Parent.ReactUtils)
-local FFlagComposerControlAlignment = require(Parent1.SharedFlags).FFlagComposerControlAlignment
-local FoundationFontFaceMigration = require(Parent1.Foundation).Utility.Flags.FoundationFontFaceMigration
+local FoundationFontFaceMigration = require(script:FindFirstAncestor("BuildExperience").Parent.Foundation).Utility.Flags.FoundationFontFaceMigration
 local Components = Foundation.Components
 local IconModule = require(Components.Icon)
 local PaddingModule = require(Components.Padding)
@@ -85,7 +83,7 @@ local MemoResult = ReactModule.memo(ReactModule.forwardRef(function(p1, Ref)
 end))
 
 return ReactModule.memo(ReactModule.forwardRef(function(Tbl, p1)
-	-- upvalues: WithDefaultsModule (copy), config (copy), UseTokensModule (copy), ReactModule (copy), GetBindableValueModule (copy), UseTextInputVariantsModule (copy), FFlagComposerControlAlignment (copy), InputVariantModule (copy), UseStyleTagsModule (copy), UsePreferredInputModule (copy), UseComposerFocusLockModule (copy), GetDisabledStyleModule (copy), GetMultiLineTextHeightModule (copy), ChatTextAreaDebugModule (copy), MeasureTextLineCountModule (copy), FoundationFontFaceMigration (copy), NormalizeFontFaceModule (copy), InputFocusBehaviorModule (copy), UseComposerKeyboardConnectionsModule (copy), ControlStateModule (copy), RadiusModule (copy), TruncateTextToCursorModule (copy), UseBindableModule (copy), ReactUtilsModule (copy), ViewModule (copy), WithCommonPropsModule (copy), BlendTransparenciesModule (copy), ConstantsModule (copy), StateLayerAffordanceModule (copy), ScrollViewModule (copy), MemoResult (copy), MapBindableModule (copy), IconModule (copy)
+	-- upvalues: WithDefaultsModule (copy), config (copy), UseTokensModule (copy), ReactModule (copy), GetBindableValueModule (copy), UseTextInputVariantsModule (copy), InputVariantModule (copy), UseStyleTagsModule (copy), UsePreferredInputModule (copy), UseComposerFocusLockModule (copy), GetDisabledStyleModule (copy), GetMultiLineTextHeightModule (copy), ChatTextAreaDebugModule (copy), MeasureTextLineCountModule (copy), FoundationFontFaceMigration (copy), NormalizeFontFaceModule (copy), InputFocusBehaviorModule (copy), UseComposerKeyboardConnectionsModule (copy), ControlStateModule (copy), RadiusModule (copy), TruncateTextToCursorModule (copy), UseBindableModule (copy), ReactUtilsModule (copy), ViewModule (copy), WithCommonPropsModule (copy), BlendTransparenciesModule (copy), ConstantsModule (copy), StateLayerAffordanceModule (copy), ScrollViewModule (copy), MemoResult (copy), MapBindableModule (copy), IconModule (copy)
 	local Tbl1 = Tbl
 	
 	if Tbl.Selectable == nil then
@@ -108,9 +106,9 @@ return ReactModule.memo(ReactModule.forwardRef(function(Tbl, p1)
 	local UseStateResult1, UseStateResult2_1 = ReactModule.useState(false)
 	local UseTextInputVariantsModuleResult = UseTextInputVariantsModule(UseTokensModuleResult, WithDefaultsModuleResult.size, WithDefaultsModuleResult.variant, WithDefaultsModuleResult.radius, UseStateResult1, WithDefaultsModuleResult.hasError)
 	local Container = UseTextInputVariantsModuleResult.container
-	local XSmall = if WithDefaultsModuleResult.leadingElement == nil then if FFlagComposerControlAlignment and WithDefaultsModuleResult.trailingElement ~= nil then UseTokensModuleResult.Gap.XSmall else nil else UseTokensModuleResult.Gap.Small
+	local XSmall = if WithDefaultsModuleResult.leadingElement == nil then if WithDefaultsModuleResult.trailingElement == nil then nil else UseTokensModuleResult.Gap.XSmall else UseTokensModuleResult.Gap.Small
 	local Replaced = if XSmall == nil and WithDefaultsModuleResult.trailingElement and typeof(Container.tag) == "string" then string.gsub(Container.tag, "gap%-large", "gap-xsmall") else Container.tag
-	local Default = if FFlagComposerControlAlignment and UseStateResult1 and WithDefaultsModuleResult.variant == InputVariantModule.Standard and not WithDefaultsModuleResult.hasError then UseTokensModuleResult.Color.Stroke.Default else Container.strokeStyle
+	local Default = if UseStateResult1 and WithDefaultsModuleResult.variant == InputVariantModule.Standard and not WithDefaultsModuleResult.hasError then UseTokensModuleResult.Color.Stroke.Default else Container.strokeStyle
 	local UseStyleTagsModuleResult = UseStyleTagsModule(UseTextInputVariantsModuleResult.textBox.tag)
 	local IsDisabled = WithDefaultsModuleResult.isDisabled
 	local NoTrailingElement: boolean = WithDefaultsModuleResult.isDisabled and WithDefaultsModuleResult.trailingElement == nil
@@ -738,7 +736,7 @@ return ReactModule.memo(ReactModule.forwardRef(function(Tbl, p1)
 					ref = UseRefResult,
 					tag = `{UseStyleTagsModuleResult or ""} data-testid={WithDefaultsModuleResult.testId}--textbox`,
 					Size = if IsUseStateResultAbove then _UDim2 else nil,
-					automaticSize = if WithDefaultsModuleResult.maxLines then nil elseif HasMaxLines then if IsUseStateResultAbove and not UseStateResult3 and UseStateResult6 ~= "" then Enum.AutomaticSize.Y else nil else MapBindableModule(WithDefaultsModuleResult.text, function(p2)
+					automaticSize = if WithDefaultsModuleResult.maxLines then nil elseif HasMaxLines then if IsUseStateResultAbove and (not UseStateResult3 and UseStateResult6 ~= "") then Enum.AutomaticSize.Y else nil else MapBindableModule(WithDefaultsModuleResult.text, function(p2)
 						-- upvalues: IsUseStateResultAbove (copy), UseStateResult3 (copy)
 						return if IsUseStateResultAbove and not UseStateResult3 and p2 ~= "" then Enum.AutomaticSize.Y else nil
 					end),
@@ -750,7 +748,7 @@ return ReactModule.memo(ReactModule.forwardRef(function(Tbl, p1)
 					onInputChanged = UseResult12,
 					onInputEnded = UseResult17,
 					manualFocusRelease = if IsUsePreferredInputModuleResultMatch then WithDefaultsModuleResult.manualFocusRelease else nil,
-					shouldEmitReturnEvents = IsUsePreferredInputModuleResultMatch and WithDefaultsModuleResult.manualFocusRelease == true and WithDefaultsModuleResult.alwaysMultiLine == true or nil
+					shouldEmitReturnEvents = IsUsePreferredInputModuleResultMatch and (WithDefaultsModuleResult.manualFocusRelease == true and WithDefaultsModuleResult.alwaysMultiLine == true) or nil
 				}, {
 					DragDetector = UseMemoResult8,
 					BoundsChecker = if IsUseStateResultAbove then ReactModule.createElement(MemoResult, {

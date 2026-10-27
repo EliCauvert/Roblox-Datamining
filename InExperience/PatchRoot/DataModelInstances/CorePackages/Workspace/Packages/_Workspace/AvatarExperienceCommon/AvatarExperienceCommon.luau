@@ -35,8 +35,7 @@ return {
 			CatalogItemCardStatusIconTypeEnum = require(script.Components.CatalogItemCard.Enums.CatalogItemCardStatusIconTypeEnum),
 			ItemStatusTypeEnum = require(script.Components.CatalogItemCard.Enums.ItemStatusTypeEnum),
 			CatalogItemCard = require(script.Components.CatalogItemCard.CatalogItemCard),
-			CatalogRowItemCard = require(script.Components.CatalogRowItemCard.CatalogRowItemCard),
-			WearTimeFTUXStatusEnum = require(script.Components.CatalogItemCard.Enums.WearTimeFTUXStatusEnum)
+			CatalogRowItemCard = require(script.Components.CatalogRowItemCard.CatalogRowItemCard)
 		},
 		Filters = {
 			CheckboxButtonItem = require(script.Components.Filters.CheckboxButtonItem),

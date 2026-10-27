@@ -9,11 +9,13 @@ local Analytics = MomentsCommonModule.Analytics
 local RecommendationSource = MomentsCommonModule.Analytics.RecommendationSource
 local _ = require(Moments.SignalTracker)
 local MomentsGetMomentsTrendingStoreModule = require(Parent.DataHydration.MomentsGetMomentsTrendingStore)
+local MomentsGetPostAssetStoreModule = require(Parent.DataHydration.MomentsGetPostAssetStore)
 local _ = require(Parent.DataHydration.MomentsStoreTypes)
 local CreatePendingFeedGetterModule = require(script.Parent.createPendingFeedGetter)
 local MomentsGetMomentsUserStoreModule = require(Parent.DataHydration.MomentsGetMomentsUserStore)
 local GetLocalUserIdModule = require(Moments.Utils.getLocalUserId)
 local FetchMomentsByIdsModule = require(script.Parent.fetchMomentsByIds)
+local HydrateAvatarMomentFeedItemsModule = require(script.Parent.hydrateAvatarMomentFeedItems)
 local ShouldShowMomentInFeedModule = require(script.Parent.shouldShowMomentInFeed)
 local ReportUnavailableFeedItemModule = require(script.Parent.reportUnavailableFeedItem)
 local GetDeepLinkStoreModule = require(Moments.Stores.GetDeepLinkStore)
@@ -23,6 +25,7 @@ local GetShareCountsStoreModule = require(Moments.Stores.GetShareCountsStore)
 local FFlagMomentsOptimisticProfilePending = SharedFlagsModule.FFlagMomentsOptimisticProfilePending
 local FFlagMomentsModeratedMomentPageModule = require(Moments.Flags.FFlagMomentsModeratedMomentPage)
 local FFlagMomentsComments = SharedFlagsModule.FFlagMomentsComments
+local FFlagMomentsRenderAvatarPostsInFeed = SharedFlagsModule.FFlagMomentsRenderAvatarPostsInFeed
 local MomentsGetMomentsCommentsStoreModule = if FFlagMomentsComments then require(Parent.DataHydration.MomentsGetMomentsCommentsStore) else nil
 local MomentStatus = require(Parent.MomentsTypes).Enums.MomentStatus
 
@@ -137,7 +140,7 @@ local function loadDeepLinkedMomentsForUnavailableDialog(Callback, DeepLinkedMom
 end
 
 return function(Callback, p2)
-	-- upvalues: MomentsGetMomentsTrendingStoreModule (copy), FFlagMomentsComments (copy), MomentsGetMomentsCommentsStoreModule (copy), GetDeepLinkStoreModule (copy), defaultFetchDeepLinkedMoments (copy), FFlagMomentsOptimisticProfilePending (copy), GetLocalUserIdModule (copy), CreatePendingFeedGetterModule (copy), MomentsGetMomentsUserStoreModule (copy), RecommendationSource (copy), GetReactionsStoreModule (copy), GetShareCountsStoreModule (copy), ShouldShowMomentInFeedModule (copy), loadDeepLinkedMomentsForUnavailableDialog (copy), FFlagMomentsModeratedMomentPageModule (copy), makeUnavailableMomentItem (copy), Analytics (copy), ReportUnavailableFeedItemModule (copy)
+	-- upvalues: MomentsGetMomentsTrendingStoreModule (copy), FFlagMomentsComments (copy), MomentsGetMomentsCommentsStoreModule (copy), GetDeepLinkStoreModule (copy), defaultFetchDeepLinkedMoments (copy), FFlagMomentsOptimisticProfilePending (copy), GetLocalUserIdModule (copy), CreatePendingFeedGetterModule (copy), MomentsGetMomentsUserStoreModule (copy), RecommendationSource (copy), GetReactionsStoreModule (copy), GetShareCountsStoreModule (copy), ShouldShowMomentInFeedModule (copy), loadDeepLinkedMomentsForUnavailableDialog (copy), FFlagMomentsModeratedMomentPageModule (copy), makeUnavailableMomentItem (copy), Analytics (copy), ReportUnavailableFeedItemModule (copy), FFlagMomentsRenderAvatarPostsInFeed (copy), HydrateAvatarMomentFeedItemsModule (copy), MomentsGetPostAssetStoreModule (copy)
 	local P18 = p2 or {}
 	local MomentsGetMomentsTrendingStoreModuleResult = if P18.trendingStore == nil then MomentsGetMomentsTrendingStoreModule(false) else P18.trendingStore
 	local CommentsStore = nil
@@ -167,7 +170,7 @@ return function(Callback, p2)
 		getPendingItems = GetPendingItems,
 		recommendationSource = RecommendationSource.Trending,
 		fetchAsync = function(p3)
-			-- upvalues: CommentsStore (ref), NextCursor (ref), P18 (copy), MomentsGetMomentsTrendingStoreModuleResult (copy), Callback (copy), GetReactionsStoreModule (upval), GetShareCountsStoreModule (upval), DeepLinkStore (copy), ShouldShowMomentInFeedModule (upval), loadDeepLinkedMomentsForUnavailableDialog (upval), FetchDeepLinkedMoments (copy), DeepLinkFetchTimeoutSeconds (copy), FFlagMomentsModeratedMomentPageModule (upval), makeUnavailableMomentItem (upval), FFlagMomentsComments (upval), FFlagMomentsOptimisticProfilePending (upval), Analytics (upval), RecommendationSource (upval), ReportUnavailableFeedItemModule (upval)
+			-- upvalues: CommentsStore (ref), NextCursor (ref), P18 (copy), MomentsGetMomentsTrendingStoreModuleResult (copy), Callback (copy), GetReactionsStoreModule (upval), GetShareCountsStoreModule (upval), DeepLinkStore (copy), ShouldShowMomentInFeedModule (upval), loadDeepLinkedMomentsForUnavailableDialog (upval), FetchDeepLinkedMoments (copy), DeepLinkFetchTimeoutSeconds (copy), FFlagMomentsModeratedMomentPageModule (upval), makeUnavailableMomentItem (upval), FFlagMomentsComments (upval), FFlagMomentsOptimisticProfilePending (upval), Analytics (upval), RecommendationSource (upval), ReportUnavailableFeedItemModule (upval), FFlagMomentsRenderAvatarPostsInFeed (upval), HydrateAvatarMomentFeedItemsModule (upval), MomentsGetPostAssetStoreModule (upval)
 			local OwnerGeneration = if CommentsStore == nil then nil else CommentsStore.getOwnerGeneration(false)
 			local SignalTracker = P18.signalTracker
 			local v2, v3 = MomentsGetMomentsTrendingStoreModuleResult.getTrending(Callback(false), p3 or NextCursor, if SignalTracker then SignalTracker:getSignalsPayload() else nil):await()
@@ -242,11 +245,11 @@ return function(Callback, p2)
 							if CommentsByFeedItemId1 == nil then
 								v4 = v5
 							else
-								local V75 = v5 or {}
+								local V78 = v5 or {}
 								for i1, value1 in CommentsByFeedItemId1 do
-									V75[i1] = value1
+									V78[i1] = value1
 								end
-								v4 = V75
+								v4 = V78
 							end
 							if DeepLinkedMomentsForUnavailableDialog.reactionsByMomentId then
 								GetReactionsStoreModule(false).setBatchReactionCounts(DeepLinkedMomentsForUnavailableDialog.reactionsByMomentId)
@@ -319,6 +322,9 @@ return function(Callback, p2)
 						ReportUnavailableFeedItemModule(moment1, RecommendationSource.Trending)
 					end
 				end
+			end
+			if FFlagMomentsRenderAvatarPostsInFeed then
+				List = HydrateAvatarMomentFeedItemsModule(List, P18.postAssetStore or MomentsGetPostAssetStoreModule(false))
 			end
 			return {
 				items = List,

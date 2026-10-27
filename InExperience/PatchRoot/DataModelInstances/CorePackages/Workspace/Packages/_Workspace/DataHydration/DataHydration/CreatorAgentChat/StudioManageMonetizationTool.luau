@@ -2,6 +2,7 @@
 local MonetizationClientToolModule = require(script.Parent.monetizationClientTool)
 local FFlagCreatorAgentChatMonetizationOneConsentModule = require(script.Parent.FFlagCreatorAgentChatMonetizationOneConsent)
 local StudioManageDevProductToolModule = require(script.Parent.StudioManageDevProductTool)
+local StudioManageGamePassToolModule = require(script.Parent.StudioManageGamePassTool)
 local TOOLNAME = StudioManageDevProductToolModule.TOOL_NAME
 local MAXIMUMSAFEINTEGER = MonetizationClientToolModule.MAXIMUM_SAFE_INTEGER
 local Text = "Per-kind ranges are checked on the client: developerProduct " .. (if require(script:FindFirstAncestor("DataHydration").Parent.SharedFlags).FFlagBuildExperienceRemoveDevProductPriceCap then "at least 1" else "1 through 100") .. ", gamePass 1 through 999,999,999, subscription at least 49."
@@ -27,8 +28,7 @@ local config2 = {
 		"productId",
 		"subscriptionId",
 		"productType",
-		"cancelRenewals",
-		"imageAssetId"
+		"cancelRenewals"
 	},
 	subscription = { "productId", "gamePassId" }
 }
@@ -59,7 +59,10 @@ local config3 = {
 		-- upvalues: StudioManageDevProductToolModule (copy)
 		return StudioManageDevProductToolModule.parseManageDevProductInput(p2), nil
 	end,
-	gamePass = require(script.Parent.StudioManageGamePassTool).parseInput,
+	gamePass = function(p2)
+		-- upvalues: StudioManageGamePassToolModule (copy)
+		return StudioManageGamePassToolModule.parseInput(p2, true)
+	end,
 	subscription = require(script.Parent.StudioManageSubscriptionTool).parseInput
 }
 
