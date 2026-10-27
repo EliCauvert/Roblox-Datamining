@@ -1,789 +1,134 @@
-Version version-7aaa6838d36c4448 (2026-10-21 19:04:27 UTC)
+Version version-7062aec9dbe74b14 (2026-10-27 22:46:32 UTC)
 ============================================================
 
-Added Class AppHandle : Object [NotCreatable] [NotReplicated]
-	Added Function AppHandle:Call(name: string, args: { [string]: any }? = nil) -> string {🚧InternalTest}
-	Added Function AppHandle:Close() -> string {🚧InternalTest}
-	Added Function AppHandle:ExecuteLuau(source: string) -> string {🚧InternalTest}
-	Added Function AppHandle:RunTest(testName: string, args: { [string]: any }? = nil) -> string {🚧InternalTest}
-
-Added Class ParticipantHandle : Object [NotCreatable] [NotReplicated]
-	Added Function ParticipantHandle:Click(x: number, y: number) -> string {🚧InternalTest}
-	Added Function ParticipantHandle:InputText(text: string, enter: boolean? = false) -> string {🚧InternalTest}
-	Added Function ParticipantHandle:Launch(options: { [string]: any }? = nil) -> string {🚧InternalTest}
-	Added Function ParticipantHandle:Screenshot(name: string) -> string {🚧InternalTest}
-	Added Function ParticipantHandle:Scroll(direction: string, power: number? = 0.5) -> string {🚧InternalTest}
-	Added Function ParticipantHandle:Shutdown() -> string {🚧InternalTest}
-
-Added Class CloudClientService : Instance [NotCreatable] [Service] [NotReplicated]
-
-Added Class TestCoordinatorService : Instance [NotCreatable] [Service] [NotReplicated]
-	Added Function TestCoordinatorService:AwaitAllAsync(pendingIds: { any }) -> { any } [Yields] {🚧InternalTest}
-	Added Function TestCoordinatorService:AwaitAnyAsync(pendingIds: { any }) -> { [string]: any } [Yields] {🚧InternalTest}
-	Added Function TestCoordinatorService:AwaitSignalAsync(topic: string) -> { [string]: any } [Yields] {🚧InternalTest}
-	Added Function TestCoordinatorService:BarrierAsync(name: string, participantIds: { any }) -> () [Yields] {🚧InternalTest}
-	Added Function TestCoordinatorService:Participant(id: string) -> ParticipantHandle {🚧InternalTest}
-	Added Function TestCoordinatorService:Signal(topic: string, payload: { [string]: any }? = nil) -> () {🚧InternalTest}
-
-Added Property AudioSearchParams.MaxPageSize: number {🚧AssetRead}
-Added Property AudioSearchParams.SortType: Enum.AudioSortType {🚧AssetRead}
-Added Property WrapLayer.RotateScaleDeformationMap: Content {🚧AvatarAppearance} {✏️Plugin}
-Added Property WrapLayer.ScaleOnlyDeformationMap: Content {🚧AvatarAppearance} {✏️Plugin}
-Added Property WrapLayer.TargetShaping: number {🚧AvatarAppearance} {✏️Plugin}
-Added Property BoxHandleAdornment.DoubleSided: boolean [Hidden] {🚧Basic + UI} {🔒RobloxScript}
-Added Property ConeHandleAdornment.DoubleSided: boolean [Hidden] {🚧Basic + UI} {🔒RobloxScript}
-Added Property CylinderHandleAdornment.DoubleSided: boolean [Hidden] {🚧Basic + UI} {🔒RobloxScript}
-Added Property ImageHandleAdornment.DoubleSided: boolean [Hidden] {🚧Basic + UI} {🔒RobloxScript}
-Added Property InputAction.Editor: boolean [NotReplicated] [NotScriptable] {🚧Input} {🔒RobloxScript}
-Added Property InputBinding.Editor: boolean [NotReplicated] [NotScriptable] {🚧Input} {🔒RobloxScript}
-Added Property InputContext.Editor: boolean [NotReplicated] [NotScriptable] {🚧Input} {🔒RobloxScript}
-Added Property PyramidHandleAdornment.DoubleSided: boolean [Hidden] {🚧Basic + UI} {🔒RobloxScript}
-Added Property SphereHandleAdornment.DoubleSided: boolean [Hidden] {🚧Basic + UI} {🔒RobloxScript}
-Added Property RealtimeMedia.IsConnectionWeak: boolean [ReadOnly] {🚧InternalTest}
-
-Added Function CollectionService:GetCollections(instance: Instance) -> { any } {🚧Basic}
-Added Function ControlState:HasField(name: string) -> boolean [NotBrowsable]
-Added Function ScriptDocument:AddReadOnlyReasonsAsync(reasons: { any }) -> () [Yields] {🔒Plugin}
-Added Function ScriptDocument:GetReadOnlyReasons() -> { any } {🔒Plugin}
-Added Function ScriptDocument:IsReadOnly() -> boolean {🔒Plugin}
-Added Function ScriptDocument:RemoveReadOnlyReasonsAsync(reasons: { any }) -> () [Yields] {🔒Plugin}
-Added Function SoundService:DebugClearDetachedPlaybacks() -> () {🚧Audio} {🔒RobloxScript}
-Added Function SoundService:EnableDetachedPlaybackMetadata() -> () {🚧Audio} {🔒RobloxScript}
-Added Function SoundService:GetDetachedPlaybackData() -> { [string]: any } {🚧Audio} {🔒RobloxScript}
-Added Function TextChatService:ChatIsLoaded() -> () {🚧Chat} {🔒RobloxScript}
-Added Function VoiceChatService:lastVoiceChatSubscriptions() -> { [string]: any } {🚧Audio + Chat} {🔒RobloxScript}
-Added Function CallingService:ReceiveIncomingCall(pushPayloadJson: string) -> () {🔒RobloxScript}
-Added Function ExperienceService:IsInExperience() -> boolean {🔒RobloxScript}
-Added Function LinkingService:CreateInternalDlic(url: string, source: string) -> string? {🔒RobloxScript}
-Added Function LinkingService:DetectDlic(deeplinkId: string) -> () {🔒RobloxScript}
-Added Function VideoCaptureService:ClearMockInput() -> () {🚧InternalTest}
-Added Function VideoCaptureService:SetMockInputAsync(videoContent: Content) -> ...any [Yields] {🚧InternalTest}
-
-Added Event ContextActionService.OpenInputActionManagerSignal(selectedInputObjects: { Instance }) {🚧Input} {🔒RobloxScript}
-Added Event NotificationService.TopicSubscriptionError(eventData: { [any]: any }) {🚧Players} {🔒RobloxScript}
-Added Event NotificationService.TopicTokenExpiry(eventData: { [any]: any }) {🚧Players} {🔒RobloxScript}
-Added Event SoundService.AudioDeviceInputAdded(audioDeviceInput: AudioDeviceInput) {🚧Audio} {🔒RobloxScript}
-Added Event TextChatService.ClientToServerChatIsLoadedSignal() [Hidden] {🚧Chat} {🔒RobloxEngine}
-Added Event TextChatService.CoreMessageReceived(textChatMessage: TextChatMessage) {🚧Chat} {🔒RobloxScript}
-Added Event ProjectService.MutationFailed(operation: string, path: string, destinationPath: string, message: string) {🔒RobloxScript}
-Added Event RealtimeMedia.Disconnected(expected: boolean) {🚧InternalTest}
-
-Added Enum AudioSortType
-	Added EnumItem AudioSortType.Relevance : 1
-	Added EnumItem AudioSortType.MostUsed : 2
-	Added EnumItem AudioSortType.Trending : 3
-	Added EnumItem AudioSortType.RecentlyCreated : 4
-	Added EnumItem AudioSortType.ShortestToLongest : 5
-	Added EnumItem AudioSortType.LongestToShortest : 6
-
-Added EnumItem EasingStyle.Bezier : 11
-Added EnumItem EasingStyle.Spring : 12
-Added EnumItem FriendsCallingEndReason.NoReason : 7
-
-Added Tag [Deprecated] to Property Lighting.Technology
-
-Added Tags [Hidden] [NotScriptable] to Property AnimatedImageService.UserCreatedTracks
-
-Changed the capabilities of Property AvatarAccessoryRules.CustomAccessoryMode 
-	from: 
-	  to: {🚧AvatarAppearance}
-
-Changed the capabilities of Property AvatarAccessoryRules.CustomBackAccessoryEnabled 
-	from: 
-	  to: {🚧AvatarAppearance}
-
-Changed the capabilities of Property AvatarAccessoryRules.CustomBackAccessoryId 
-	from: 
-	  to: {🚧AvatarAppearance}
-
-Changed the capabilities of Property AvatarAccessoryRules.CustomFaceAccessoryEnabled 
-	from: 
-	  to: {🚧AvatarAppearance}
-
-Changed the capabilities of Property AvatarAccessoryRules.CustomFaceAccessoryId 
-	from: 
-	  to: {🚧AvatarAppearance}
-
-Changed the capabilities of Property AvatarAccessoryRules.CustomFrontAccessoryEnabled 
-	from: 
-	  to: {🚧AvatarAppearance}
-
-Changed the capabilities of Property AvatarAccessoryRules.CustomFrontAccessoryId 
-	from: 
-	  to: {🚧AvatarAppearance}
-
-Changed the capabilities of Property AvatarAccessoryRules.CustomHairAccessoryEnabled 
-	from: 
-	  to: {🚧AvatarAppearance}
-
-Changed the capabilities of Property AvatarAccessoryRules.CustomHairAccessoryId 
-	from: 
-	  to: {🚧AvatarAppearance}
-
-Changed the capabilities of Property AvatarAccessoryRules.CustomHeadAccessoryEnabled 
-	from: 
-	  to: {🚧AvatarAppearance}
-
-Changed the capabilities of Property AvatarAccessoryRules.CustomHeadAccessoryId 
-	from: 
-	  to: {🚧AvatarAppearance}
-
-Changed the capabilities of Property AvatarAccessoryRules.CustomNeckAccessoryEnabled 
-	from: 
-	  to: {🚧AvatarAppearance}
-
-Changed the capabilities of Property AvatarAccessoryRules.CustomNeckAccessoryId 
-	from: 
-	  to: {🚧AvatarAppearance}
-
-Changed the capabilities of Property AvatarAccessoryRules.CustomShoulderAccessoryEnabled 
-	from: 
-	  to: {🚧AvatarAppearance}
-
-Changed the capabilities of Property AvatarAccessoryRules.CustomShoulderAccessoryId 
-	from: 
-	  to: {🚧AvatarAppearance}
-
-Changed the capabilities of Property AvatarAccessoryRules.CustomWaistAccessoryEnabled 
-	from: 
-	  to: {🚧AvatarAppearance}
-
-Changed the capabilities of Property AvatarAccessoryRules.CustomWaistAccessoryId 
-	from: 
-	  to: {🚧AvatarAppearance}
-
-Changed the capabilities of Property AvatarAnimationRules.AnimationClipsMode 
-	from: 
-	  to: {🚧AvatarAppearance}
-
-Changed the capabilities of Property AvatarAnimationRules.CustomClimbAnimationEnabled 
-	from: 
-	  to: {🚧AvatarAppearance}
-
-Changed the capabilities of Property AvatarAnimationRules.CustomClimbAnimationId 
-	from: 
-	  to: {🚧AvatarAppearance}
-
-Changed the capabilities of Property AvatarAnimationRules.CustomFallAnimationEnabled 
-	from: 
-	  to: {🚧AvatarAppearance}
-
-Changed the capabilities of Property AvatarAnimationRules.CustomFallAnimationId 
-	from: 
-	  to: {🚧AvatarAppearance}
-
-Changed the capabilities of Property AvatarAnimationRules.CustomIdleAlt1AnimationEnabled 
-	from: 
-	  to: {🚧AvatarAppearance}
-
-Changed the capabilities of Property AvatarAnimationRules.CustomIdleAlt1AnimationId 
-	from: 
-	  to: {🚧AvatarAppearance}
-
-Changed the capabilities of Property AvatarAnimationRules.CustomIdleAlt2AnimationEnabled 
-	from: 
-	  to: {🚧AvatarAppearance}
-
-Changed the capabilities of Property AvatarAnimationRules.CustomIdleAlt2AnimationId 
-	from: 
-	  to: {🚧AvatarAppearance}
-
-Changed the capabilities of Property AvatarAnimationRules.CustomIdleAnimationEnabled 
-	from: 
-	  to: {🚧AvatarAppearance}
-
-Changed the capabilities of Property AvatarAnimationRules.CustomIdleAnimationId 
-	from: 
-	  to: {🚧AvatarAppearance}
-
-Changed the capabilities of Property AvatarAnimationRules.CustomJumpAnimationEnabled 
-	from: 
-	  to: {🚧AvatarAppearance}
-
-Changed the capabilities of Property AvatarAnimationRules.CustomJumpAnimationId 
-	from: 
-	  to: {🚧AvatarAppearance}
-
-Changed the capabilities of Property AvatarAnimationRules.CustomRunAnimationEnabled 
-	from: 
-	  to: {🚧AvatarAppearance}
-
-Changed the capabilities of Property AvatarAnimationRules.CustomRunAnimationId 
-	from: 
-	  to: {🚧AvatarAppearance}
-
-Changed the capabilities of Property AvatarAnimationRules.CustomSwimAnimationEnabled 
-	from: 
-	  to: {🚧AvatarAppearance}
-
-Changed the capabilities of Property AvatarAnimationRules.CustomSwimAnimationId 
-	from: 
-	  to: {🚧AvatarAppearance}
-
-Changed the capabilities of Property AvatarAnimationRules.CustomSwimIdleAnimationEnabled 
-	from: 
-	  to: {🚧AvatarAppearance}
-
-Changed the capabilities of Property AvatarAnimationRules.CustomSwimIdleAnimationId 
-	from: 
-	  to: {🚧AvatarAppearance}
-
-Changed the capabilities of Property AvatarAnimationRules.CustomWalkAnimationEnabled 
-	from: 
-	  to: {🚧AvatarAppearance}
-
-Changed the capabilities of Property AvatarAnimationRules.CustomWalkAnimationId 
-	from: 
-	  to: {🚧AvatarAppearance}
-
-Changed the capabilities of Property AvatarBodyRules.AppearanceMode 
-	from: 
-	  to: {🚧AvatarAppearance}
-
-Changed the capabilities of Property AvatarBodyRules.CustomBodyBundleId 
-	from: 
-	  to: {🚧AvatarAppearance}
-
-Changed the capabilities of Property AvatarBodyRules.CustomBodyType 
-	from: 
-	  to: {🚧AvatarAppearance}
-
-Changed the capabilities of Property AvatarBodyRules.CustomBodyTypeScale 
-	from: 
-	  to: {🚧AvatarAppearance}
-
-Changed the capabilities of Property AvatarBodyRules.CustomEyebrowEnabled 
-	from: 
-	  to: {🚧AvatarAppearance}
-
-Changed the capabilities of Property AvatarBodyRules.CustomEyebrowId 
-	from: 
-	  to: {🚧AvatarAppearance}
-
-Changed the capabilities of Property AvatarBodyRules.CustomEyelashEnabled 
-	from: 
-	  to: {🚧AvatarAppearance}
-
-Changed the capabilities of Property AvatarBodyRules.CustomEyelashId 
-	from: 
-	  to: {🚧AvatarAppearance}
-
-Changed the capabilities of Property AvatarBodyRules.CustomFaceEnabled 
-	from: 
-	  to: {🚧AvatarAppearance}
-
-Changed the capabilities of Property AvatarBodyRules.CustomFaceId 
-	from: 
-	  to: {🚧AvatarAppearance}
-
-Changed the capabilities of Property AvatarBodyRules.CustomHeadEnabled 
-	from: 
-	  to: {🚧AvatarAppearance}
-
-Changed the capabilities of Property AvatarBodyRules.CustomHeadId 
-	from: 
-	  to: {🚧AvatarAppearance}
-
-Changed the capabilities of Property AvatarBodyRules.CustomHeadScale 
-	from: 
-	  to: {🚧AvatarAppearance}
-
-Changed the capabilities of Property AvatarBodyRules.CustomHeight 
-	from: 
-	  to: {🚧AvatarAppearance}
-
-Changed the capabilities of Property AvatarBodyRules.CustomHeightScale 
-	from: 
-	  to: {🚧AvatarAppearance}
-
-Changed the capabilities of Property AvatarBodyRules.CustomLeftArmEnabled 
-	from: 
-	  to: {🚧AvatarAppearance}
-
-Changed the capabilities of Property AvatarBodyRules.CustomLeftArmId 
-	from: 
-	  to: {🚧AvatarAppearance}
-
-Changed the capabilities of Property AvatarBodyRules.CustomLeftLegEnabled 
-	from: 
-	  to: {🚧AvatarAppearance}
-
-Changed the capabilities of Property AvatarBodyRules.CustomLeftLegId 
-	from: 
-	  to: {🚧AvatarAppearance}
-
-Changed the capabilities of Property AvatarBodyRules.CustomMoodEnabled 
-	from: 
-	  to: {🚧AvatarAppearance}
-
-Changed the capabilities of Property AvatarBodyRules.CustomMoodId 
-	from: 
-	  to: {🚧AvatarAppearance}
-
-Changed the capabilities of Property AvatarBodyRules.CustomProportionsScale 
-	from: 
-	  to: {🚧AvatarAppearance}
-
-Changed the capabilities of Property AvatarBodyRules.CustomRightArmEnabled 
-	from: 
-	  to: {🚧AvatarAppearance}
-
-Changed the capabilities of Property AvatarBodyRules.CustomRightArmId 
-	from: 
-	  to: {🚧AvatarAppearance}
-
-Changed the capabilities of Property AvatarBodyRules.CustomRightLegEnabled 
-	from: 
-	  to: {🚧AvatarAppearance}
-
-Changed the capabilities of Property AvatarBodyRules.CustomRightLegId 
-	from: 
-	  to: {🚧AvatarAppearance}
-
-Changed the capabilities of Property AvatarBodyRules.CustomTorsoEnabled 
-	from: 
-	  to: {🚧AvatarAppearance}
-
-Changed the capabilities of Property AvatarBodyRules.CustomTorsoId 
-	from: 
-	  to: {🚧AvatarAppearance}
-
-Changed the capabilities of Property AvatarBodyRules.CustomWidthScale 
-	from: 
-	  to: {🚧AvatarAppearance}
-
-Changed the capabilities of Property AvatarBodyRules.KeepPlayerHead 
-	from: 
-	  to: {🚧AvatarAppearance}
-
-Changed the capabilities of Property AvatarClothingRules.CustomClassicPantsAccessoryEnabled 
-	from: 
-	  to: {🚧AvatarAppearance}
-
-Changed the capabilities of Property AvatarClothingRules.CustomClassicPantsAccessoryId 
-	from: 
-	  to: {🚧AvatarAppearance}
-
-Changed the capabilities of Property AvatarClothingRules.CustomClassicShirtsAccessoryEnabled 
-	from: 
-	  to: {🚧AvatarAppearance}
-
-Changed the capabilities of Property AvatarClothingRules.CustomClassicShirtsAccessoryId 
-	from: 
-	  to: {🚧AvatarAppearance}
-
-Changed the capabilities of Property AvatarClothingRules.CustomClassicTShirtsAccessoryEnabled 
-	from: 
-	  to: {🚧AvatarAppearance}
-
-Changed the capabilities of Property AvatarClothingRules.CustomClassicTShirtsAccessoryId 
-	from: 
-	  to: {🚧AvatarAppearance}
-
-Changed the capabilities of Property AvatarClothingRules.CustomClothingMode 
-	from: 
-	  to: {🚧AvatarAppearance}
-
-Changed the capabilities of Property AvatarClothingRules.CustomDressSkirtAccessoryEnabled 
-	from: 
-	  to: {🚧AvatarAppearance}
-
-Changed the capabilities of Property AvatarClothingRules.CustomDressSkirtAccessoryId 
-	from: 
-	  to: {🚧AvatarAppearance}
-
-Changed the capabilities of Property AvatarClothingRules.CustomJacketAccessoryEnabled 
-	from: 
-	  to: {🚧AvatarAppearance}
-
-Changed the capabilities of Property AvatarClothingRules.CustomJacketAccessoryId 
-	from: 
-	  to: {🚧AvatarAppearance}
-
-Changed the capabilities of Property AvatarClothingRules.CustomLeftShoesAccessoryEnabled 
-	from: 
-	  to: {🚧AvatarAppearance}
-
-Changed the capabilities of Property AvatarClothingRules.CustomLeftShoesAccessoryId 
-	from: 
-	  to: {🚧AvatarAppearance}
-
-Changed the capabilities of Property AvatarClothingRules.CustomPantsAccessoryEnabled 
-	from: 
-	  to: {🚧AvatarAppearance}
-
-Changed the capabilities of Property AvatarClothingRules.CustomPantsAccessoryId 
-	from: 
-	  to: {🚧AvatarAppearance}
-
-Changed the capabilities of Property AvatarClothingRules.CustomRightShoesAccessoryEnabled 
-	from: 
-	  to: {🚧AvatarAppearance}
-
-Changed the capabilities of Property AvatarClothingRules.CustomRightShoesAccessoryId 
-	from: 
-	  to: {🚧AvatarAppearance}
-
-Changed the capabilities of Property AvatarClothingRules.CustomShirtAccessoryEnabled 
-	from: 
-	  to: {🚧AvatarAppearance}
-
-Changed the capabilities of Property AvatarClothingRules.CustomShirtAccessoryId 
-	from: 
-	  to: {🚧AvatarAppearance}
-
-Changed the capabilities of Property AvatarClothingRules.CustomShortsAccessoryEnabled 
-	from: 
-	  to: {🚧AvatarAppearance}
-
-Changed the capabilities of Property AvatarClothingRules.CustomShortsAccessoryId 
-	from: 
-	  to: {🚧AvatarAppearance}
-
-Changed the capabilities of Property AvatarClothingRules.CustomSweaterAccessoryEnabled 
-	from: 
-	  to: {🚧AvatarAppearance}
-
-Changed the capabilities of Property AvatarClothingRules.CustomSweaterAccessoryId 
-	from: 
-	  to: {🚧AvatarAppearance}
-
-Changed the capabilities of Property AvatarClothingRules.CustomTShirtAccessoryEnabled 
-	from: 
-	  to: {🚧AvatarAppearance}
-
-Changed the capabilities of Property AvatarClothingRules.CustomTShirtAccessoryId 
-	from: 
-	  to: {🚧AvatarAppearance}
-
-Changed the capabilities of Property AvatarCollisionRules.LegacyCollisionMode 
-	from: 
-	  to: {🚧AvatarAppearance}
-
-Changed the capabilities of Property AvatarRules.AvatarType 
-	from: 
-	  to: {🚧AvatarAppearance}
-
-Changed the capabilities and read permissions of Property RunService.RunState 
-	from: {🚧Basic} {🔒Plugin}
-	  to: {🚧Basic + PluginOrOpenCloud} 
-
-Changed the capabilities and security of Property AvatarAccessoryRules.AccessoryMode 
-	from:  {🔒RobloxScript}
-	  to: {🚧AvatarAppearance} 
-
-Changed the capabilities and security of Property AvatarAccessoryRules.BackAccessoryOverride 
-	from:  {🔒RobloxScript}
-	  to: {🚧AvatarAppearance} 
-
-Changed the capabilities and security of Property AvatarAccessoryRules.EnableEmissives 
-	from:  {🔒RobloxScript}
-	  to: {🚧AvatarAppearance} 
-
-Changed the capabilities and security of Property AvatarAccessoryRules.EnableSound 
-	from:  {🔒RobloxScript}
-	  to: {🚧AvatarAppearance} 
-
-Changed the capabilities and security of Property AvatarAccessoryRules.EnableVFX 
-	from:  {🔒RobloxScript}
-	  to: {🚧AvatarAppearance} 
-
-Changed the capabilities and security of Property AvatarAccessoryRules.FaceAccessoryOverride 
-	from:  {🔒RobloxScript}
-	  to: {🚧AvatarAppearance} 
-
-Changed the capabilities and security of Property AvatarAccessoryRules.FrontAccessoryOverride 
-	from:  {🔒RobloxScript}
-	  to: {🚧AvatarAppearance} 
-
-Changed the capabilities and security of Property AvatarAccessoryRules.HairAccessoryOverride 
-	from:  {🔒RobloxScript}
-	  to: {🚧AvatarAppearance} 
-
-Changed the capabilities and security of Property AvatarAccessoryRules.HeadAccessoryOverride 
-	from:  {🔒RobloxScript}
-	  to: {🚧AvatarAppearance} 
-
-Changed the capabilities and security of Property AvatarAccessoryRules.LimitBounds 
-	from:  {🔒RobloxScript}
-	  to: {🚧AvatarAppearance} 
-
-Changed the capabilities and security of Property AvatarAccessoryRules.LimitMethod 
-	from:  {🔒RobloxScript}
-	  to: {🚧AvatarAppearance} 
-
-Changed the capabilities and security of Property AvatarAccessoryRules.NeckAccessoryOverride 
-	from:  {🔒RobloxScript}
-	  to: {🚧AvatarAppearance} 
-
-Changed the capabilities and security of Property AvatarAccessoryRules.ShoulderAccessoryOverride 
-	from:  {🔒RobloxScript}
-	  to: {🚧AvatarAppearance} 
-
-Changed the capabilities and security of Property AvatarAccessoryRules.WaistAccessoryOverride 
-	from:  {🔒RobloxScript}
-	  to: {🚧AvatarAppearance} 
-
-Changed the capabilities and security of Property AvatarAnimationRules.AnimationPacksMode 
-	from:  {🔒RobloxScript}
-	  to: {🚧AvatarAppearance} 
-
-Changed the capabilities and security of Property AvatarAnimationRules.ClimbAnimationOverride 
-	from:  {🔒RobloxScript}
-	  to: {🚧AvatarAppearance} 
-
-Changed the capabilities and security of Property AvatarAnimationRules.FallAnimationOverride 
-	from:  {🔒RobloxScript}
-	  to: {🚧AvatarAppearance} 
-
-Changed the capabilities and security of Property AvatarAnimationRules.IdleAltAnimationOverride 
-	from:  {🔒RobloxScript}
-	  to: {🚧AvatarAppearance} 
-
-Changed the capabilities and security of Property AvatarAnimationRules.IdleAnimationOverride 
-	from:  {🔒RobloxScript}
-	  to: {🚧AvatarAppearance} 
-
-Changed the capabilities and security of Property AvatarAnimationRules.JumpAnimationOverride 
-	from:  {🔒RobloxScript}
-	  to: {🚧AvatarAppearance} 
-
-Changed the capabilities and security of Property AvatarAnimationRules.MoodAnimationOverride 
-	from:  {🔒RobloxScript}
-	  to: {🚧AvatarAppearance} 
-
-Changed the capabilities and security of Property AvatarAnimationRules.RunAnimationOverride 
-	from:  {🔒RobloxScript}
-	  to: {🚧AvatarAppearance} 
-
-Changed the capabilities and security of Property AvatarAnimationRules.SwimAnimationOverride 
-	from:  {🔒RobloxScript}
-	  to: {🚧AvatarAppearance} 
-
-Changed the capabilities and security of Property AvatarAnimationRules.SwimIdleAnimationOverride 
-	from:  {🔒RobloxScript}
-	  to: {🚧AvatarAppearance} 
-
-Changed the capabilities and security of Property AvatarAnimationRules.WalkAnimationOverride 
-	from:  {🔒RobloxScript}
-	  to: {🚧AvatarAppearance} 
-
-Changed the capabilities and security of Property AvatarBodyRules.AvatarType 
-	from:  {🔒RobloxScript}
-	  to: {🚧AvatarAppearance} 
-
-Changed the capabilities and security of Property AvatarBodyRules.BuildMode 
-	from:  {🔒RobloxScript}
-	  to: {🚧AvatarAppearance} 
-
-Changed the capabilities and security of Property AvatarBodyRules.CustomBuildBodyType 
-	from:  {🔒RobloxScript}
-	  to: {🚧AvatarAppearance} 
-
-Changed the capabilities and security of Property AvatarBodyRules.CustomBuildHead 
-	from:  {🔒RobloxScript}
-	  to: {🚧AvatarAppearance} 
-
-Changed the capabilities and security of Property AvatarBodyRules.CustomBuildHeight 
-	from:  {🔒RobloxScript}
-	  to: {🚧AvatarAppearance} 
-
-Changed the capabilities and security of Property AvatarBodyRules.CustomBuildProportions 
-	from:  {🔒RobloxScript}
-	  to: {🚧AvatarAppearance} 
-
-Changed the capabilities and security of Property AvatarBodyRules.CustomBuildWidth 
-	from:  {🔒RobloxScript}
-	  to: {🚧AvatarAppearance} 
-
-Changed the capabilities and security of Property AvatarBodyRules.CustomWorldHeight 
-	from:  {🔒RobloxScript}
-	  to: {🚧AvatarAppearance} 
-
-Changed the capabilities and security of Property AvatarBodyRules.HeadOverride 
-	from:  {🔒RobloxScript}
-	  to: {🚧AvatarAppearance} 
-
-Changed the capabilities and security of Property AvatarBodyRules.LeftArmOverride 
-	from:  {🔒RobloxScript}
-	  to: {🚧AvatarAppearance} 
-
-Changed the capabilities and security of Property AvatarBodyRules.LeftLegOverride 
-	from:  {🔒RobloxScript}
-	  to: {🚧AvatarAppearance} 
-
-Changed the capabilities and security of Property AvatarBodyRules.RightArmOverride 
-	from:  {🔒RobloxScript}
-	  to: {🚧AvatarAppearance} 
-
-Changed the capabilities and security of Property AvatarBodyRules.RightLegOverride 
-	from:  {🔒RobloxScript}
-	  to: {🚧AvatarAppearance} 
-
-Changed the capabilities and security of Property AvatarBodyRules.ScaleMode 
-	from:  {🔒RobloxScript}
-	  to: {🚧AvatarAppearance} 
-
-Changed the capabilities and security of Property AvatarBodyRules.TorsoOverride 
-	from:  {🔒RobloxScript}
-	  to: {🚧AvatarAppearance} 
-
-Changed the capabilities and security of Property AvatarClothingRules.ClassicPantsAccessoryOverride 
-	from:  {🔒RobloxScript}
-	  to: {🚧AvatarAppearance} 
-
-Changed the capabilities and security of Property AvatarClothingRules.ClassicShirtsAccessoryOverride 
-	from:  {🔒RobloxScript}
-	  to: {🚧AvatarAppearance} 
-
-Changed the capabilities and security of Property AvatarClothingRules.ClassicTShirtsAccessoryOverride 
-	from:  {🔒RobloxScript}
-	  to: {🚧AvatarAppearance} 
-
-Changed the capabilities and security of Property AvatarClothingRules.ClothingMode 
-	from:  {🔒RobloxScript}
-	  to: {🚧AvatarAppearance} 
-
-Changed the capabilities and security of Property AvatarClothingRules.DressSkirtAccessoryOverride 
-	from:  {🔒RobloxScript}
-	  to: {🚧AvatarAppearance} 
-
-Changed the capabilities and security of Property AvatarClothingRules.JacketAccessoryOverride 
-	from:  {🔒RobloxScript}
-	  to: {🚧AvatarAppearance} 
-
-Changed the capabilities and security of Property AvatarClothingRules.LeftShoesAccessoryOverride 
-	from:  {🔒RobloxScript}
-	  to: {🚧AvatarAppearance} 
-
-Changed the capabilities and security of Property AvatarClothingRules.LimitBounds 
-	from:  {🔒RobloxScript}
-	  to: {🚧AvatarAppearance} 
-
-Changed the capabilities and security of Property AvatarClothingRules.PantsAccessoryOverride 
-	from:  {🔒RobloxScript}
-	  to: {🚧AvatarAppearance} 
-
-Changed the capabilities and security of Property AvatarClothingRules.RightShoesAccessoryOverride 
-	from:  {🔒RobloxScript}
-	  to: {🚧AvatarAppearance} 
-
-Changed the capabilities and security of Property AvatarClothingRules.ShirtAccessoryOverride 
-	from:  {🔒RobloxScript}
-	  to: {🚧AvatarAppearance} 
-
-Changed the capabilities and security of Property AvatarClothingRules.ShortsAccessoryOverride 
-	from:  {🔒RobloxScript}
-	  to: {🚧AvatarAppearance} 
-
-Changed the capabilities and security of Property AvatarClothingRules.SweaterAccessoryOverride 
-	from:  {🔒RobloxScript}
-	  to: {🚧AvatarAppearance} 
-
-Changed the capabilities and security of Property AvatarClothingRules.TShirtAccessoryOverride 
-	from:  {🔒RobloxScript}
-	  to: {🚧AvatarAppearance} 
-
-Changed the capabilities and security of Property AvatarCollisionRules.CollisionMode 
-	from:  {🔒RobloxScript}
-	  to: {🚧AvatarAppearance} 
-
-Changed the capabilities and security of Property AvatarCollisionRules.HitAndTouchDetectionMode 
-	from:  {🔒RobloxScript}
-	  to: {🚧AvatarAppearance} 
-
-Changed the capabilities and security of Property AvatarCollisionRules.SingleColliderSize 
-	from:  {🔒RobloxScript}
-	  to: {🚧AvatarAppearance} 
-
-Changed the security of Property StarterPlayer.PlaceAvatarRules 
+Added Class FeatureMatchingSession : Object [NotCreatable] [NotReplicated]
+	Added Function FeatureMatchingSession:GetChannels() -> { any } {🚧InternalTest}
+	Added Function FeatureMatchingSession:GetDimensionCount() -> number {🚧InternalTest}
+	Added Function FeatureMatchingSession:GetFeatureRow(row: number) -> buffer {🚧InternalTest}
+	Added Function FeatureMatchingSession:GetFeatureRows(rows: { any }) -> { any } {🚧InternalTest}
+	Added Function FeatureMatchingSession:GetMetadataRow(row: number) -> { [string]: any } {🚧InternalTest}
+	Added Function FeatureMatchingSession:GetRowCount() -> number {🚧InternalTest}
+	Added Function FeatureMatchingSession:GetSchemaName() -> string {🚧InternalTest}
+	Added Function FeatureMatchingSession:GetTagColumns() -> { any } {🚧InternalTest}
+	Added Function FeatureMatchingSession:StandardizeQuery(query: buffer) -> buffer {🚧InternalTest}
+
+Added Class FeatureMatchingService : Instance [NotCreatable] [Service] [NotReplicated]
+	Added Function FeatureMatchingService:CreateTable(schema: { [string]: any }, rawFeatures: any, offset: any, scale: any, metadataColumns: { [string]: any }? = nil) -> FeatureMatchingTable
+	Added Function FeatureMatchingService:Load(featureTable: FeatureMatchingTable) -> FeatureMatchingSession {🚧InternalTest}
+	Added Function FeatureMatchingService:LoadAsync(source: Content) -> FeatureMatchingSession [Yields] {🚧InternalTest}
+
+Added Class IntegrityService : Instance [NotCreatable] [Service] [NotReplicated]
+	Added Callback IntegrityService.EvaluatePlayerDeviceTrust(player: Player, measures: { [string]: any }) -> any {🚧Consequences}
+
+Added Property AvatarClothingRules.ClassicPantsOverride: number {🚧AvatarAppearance}
+Added Property AvatarClothingRules.ClassicShirtOverride: number {🚧AvatarAppearance}
+Added Property AvatarClothingRules.ClassicTShirtOverride: number {🚧AvatarAppearance}
+Added Property AvatarClothingRules.LeftShoeAccessoryOverride: number {🚧AvatarAppearance}
+Added Property AvatarClothingRules.RightShoeAccessoryOverride: number {🚧AvatarAppearance}
+Added Property AvatarCollisionRules.BodyPartsCollidableOnDeath: boolean {🚧AvatarAppearance}
+Added Property FluidForceSensor.BuoyancyForce: Vector3 [ReadOnly] {🚧Basic} {🚀SimAccess}
+Added Property FluidForceSensor.BuoyancyTorque: Vector3 [ReadOnly] {🚧Basic} {🚀SimAccess}
+Added Property TestResult.SkipReason: string [ReadOnly]
+Added Property AudioDeviceInput.Streaming: boolean [Hidden] {🚧Audio + Input} {🔒RobloxScript}
+Added Property AudioSpeechToText.Streaming: boolean [Hidden] {🚧Audio} {🔒RobloxScript}
+Added Property Humanoid.BodyPartsCollidableOnDeath: boolean [Hidden] [NotScriptable] {🔒RobloxEngine}
+Added Property Player.DeviceTrustLevel: Enum.PlayerDeviceTrustLevel [Hidden] [ReadOnly] {🚧Players}
+Added Property CloudClientService.IsCloudClient: boolean [ReadOnly] {🔒RobloxScript}
+Added Property CloudClientService.IsRobloxRealityEnvironment: boolean [ReadOnly] {🔒RobloxScript}
+Added Property CloudClientService.RobloxRealityFilterEnabled: boolean {🔒RobloxScript}
+Added Property CloudClientService.SessionTimeLimit: number [ReadOnly] {🔒RobloxScript}
+
+Added Function AnimationClipProvider:ReloadAnimationClipAsync(assetId: string) -> AnimationClip [Yields] {🚧Animation} {🔒RobloxScript}
+Added Function AssetService:GetLatestVersionUriAsync(asset: Content) -> Content [Yields] {🚧AssetRead}
+Added Function CollectionService:GetAllCollections() -> { any } {🚧Basic} {🔒RobloxScript}
+Added Function GeometryService:BakeToMeshAsync(input: Instance, options: { [string]: any }? = nil) -> MeshPart [Yields] {🚧CSG}
+Added Function MarketplaceService:PromptNativePurchaseWithContext(productId: string, context: { [string]: any }? = nil) -> () {🔒RobloxScript}
+Added Function RunService:BindToAnimationParallel(function: (...any) -> ...any, frequency: Enum.StepFrequency? = "Hz30", priority: number? = 2000) -> RBXScriptConnection {🚧Basic}
+Added Function RunService:BindToSimulationParallel(function: (...any) -> ...any, frequency: Enum.StepFrequency? = "Hz30", priority: number? = 2000) -> RBXScriptConnection {🚧Basic}
+Added Function SceneAnalysisService:GetCollisionGeometryMemoryAsync() -> { [string]: any } [Yields]
+Added Function ScriptEditorService:OpenTextDocumentDocumentAsync(textDocument: TextDocument, options: { [string]: any }? = nil) -> ...any [Yields] {🔒RobloxScript}
+Added Function TestExecutionContext:Skip(reason: string? = "") -> ()
+Added Function VoiceChatService:lastVoiceChatRemoteOperations() -> { [string]: any } {🚧Audio + Chat} {🔒RobloxScript}
+Added Function AnimatedImageService:GetAnimatedImageClipsAsync(content: Content) -> { any } [Yields] {🔒RobloxScript}
+Added Function AnimatedImageService:GetAnimatedImageFrameIndexAtTimeAsync(content: Content, clipName: string, timePosition: number) -> number [Yields] {🔒RobloxScript}
+Added Function CloudClientService:CheckEligibilityAsync(pool: string? = "") -> boolean [Yields] {🔒RobloxScript}
+Added Function CloudClientService:GetSessionElapsedTime() -> number {🔒RobloxScript}
+Added Function CloudClientService:MakeReservationAsync(placeId: number, pool: string? = "") -> string [Yields] {🔒RobloxScript}
+Added Function CloudClientService:ReleaseReservation(reservationToken: string) -> () {🔒RobloxScript}
+Added Function LinkingService:RegisterLuaUrlWithPolicy(url: string, policy: string) -> () {🔒RobloxScript}
+
+Added Event MarketplaceService.PromptNativePurchaseRequestedWithContext(userId: number, productId: string, context: { [string]: any }) [Hidden] {🔒RobloxEngine}
+Added Event Player.DeviceTrustLevelReplicated(trust: Enum.PlayerDeviceTrustLevel) [Hidden] {🚧Players} {🔒RobloxEngine}
+Added Event AnimationPlayer.Ended() {🔒RobloxScript}
+Added Event AnimationPlayer.Stopped() {🔒RobloxScript}
+Added Event CloudClientService.ReservationExpired(reservationToken: string) {🔒RobloxScript}
+
+Added Enum PlayerDeviceTrustDecision
+	Added EnumItem PlayerDeviceTrustDecision.Accept : 0
+	Added EnumItem PlayerDeviceTrustDecision.Reject : 1
+
+Added Enum PlayerDeviceTrustLevel
+	Added EnumItem PlayerDeviceTrustLevel.Pending : 0
+	Added EnumItem PlayerDeviceTrustLevel.Unknown : 1
+	Added EnumItem PlayerDeviceTrustLevel.None : 2
+	Added EnumItem PlayerDeviceTrustLevel.Standard : 3
+	Added EnumItem PlayerDeviceTrustLevel.Full : 4
+
+Added EnumItem PartType.Capsule : 5 [NotBrowsable]
+
+Added Tag [CustomLuaState] to Function EditableMesh:AddFace
+
+Added Tag [Deprecated] to Enum AvatarUnificationMode
+	Added Tag [Deprecated] to EnumItem AvatarUnificationMode.Default
+	Added Tag [Deprecated] to EnumItem AvatarUnificationMode.Disabled
+	Added Tag [Deprecated] to EnumItem AvatarUnificationMode.Enabled
+
+Added Tag [NotReplicated] to Property PhysicsActivitySensor.Position
+Added Tag [NotReplicated] to Property PhysicsActivitySensor.Size
+
+Changed the security of Class TextDocument 
+	from: {🔒Plugin}
+	  to: 
+
+Changed the capabilities and security of Property TextDocument.TextContent 
+	from:  {🔒Plugin}
+	  to: {🚧PluginOrOpenCloud} 
+
+Changed the security of Property StarterPlayer.CreateDefaultPlayerModule 
 	from: {🔒RobloxScript}
 	  to: 
 
-Changed the security of Property Studio.PluginDebuggingEnabled 
-	from: {🔒Plugin}
-	  to: {🔒RobloxScript}
+Changed the parameters of Function EditableMesh:AddFace 
+	from: (vertexIds: { any })
+	  to: (vertexIds: ...any)
 
-Changed the serialization of Property UserGameSettings.UIScaleMultiplierHundredths 
-	from: [🚫None]
-	  to: [💾|📁Serialized]
+Changed the parameters of Function ScriptEditorService:OpenTemporaryDocumentAsync 
+	from: (scriptId: string, initialContent: string)
+	  to: (scriptId: string, initialContent: string, options: { [string]: any }? = nil)
 
-Changed the serialization of Property AnimationPlayer.AnimationContent 
-	from: [🚫None]
-	  to: [💾|📁Serialized]
+Changed the parameters of Function TestService:RegisterTest 
+	from: (testName: string, options: { [string]: any }? = nil, callback: ((...any) -> ...any)?)
+	  to: (testName: string, callback: (...any) -> ...any, options: { [string]: any }? = nil)
 
-Changed the serialization of Property AnimationPlayer.AutoPlay 
-	from: [🚫None]
-	  to: [💾|📁Serialized]
+Changed the parameters of Function TestSuite:RegisterTest 
+	from: (testName: string, options: { [string]: any }? = nil, callback: ((...any) -> ...any)?)
+	  to: (testName: string, callback: (...any) -> ...any, options: { [string]: any }? = nil)
 
-Changed the serialization of Property AnimationPlayer.Enabled 
-	from: [🚫None]
-	  to: [💾|📁Serialized]
+Removed Class BulkImportService
+	Removed Function BulkImportService:LaunchBulkImport
+	Removed Function BulkImportService:ShowBulkImportView
+	Removed Event BulkImportService.AssetImported
+	Removed Event BulkImportService.BulkImportFinished
+	Removed Event BulkImportService.BulkImportStarted
 
-Changed the serialization of Property AnimationPlayer.IsPlaying 
-	from: [🚫None]
-	  to: [💾SaveOnly]
+Removed Property AvatarClothingRules.ClassicPantsAccessoryOverride
+Removed Property AvatarClothingRules.ClassicShirtsAccessoryOverride
+Removed Property AvatarClothingRules.ClassicTShirtsAccessoryOverride
+Removed Property AvatarClothingRules.LeftShoesAccessoryOverride
+Removed Property AvatarClothingRules.RightShoesAccessoryOverride
+Removed Property Part.shap
+Removed Property Player.StepIdOffset
 
-Changed the serialization of Property AnimationPlayer.Loop 
-	from: [🚫None]
-	  to: [💾|📁Serialized]
-
-Changed the serialization of Property AnimationPlayer.Speed 
-	from: [🚫None]
-	  to: [💾|📁Serialized]
-
-Changed the serialization of Property AnimationPlayer.Track 
-	from: [📁LoadOnly]
-	  to: [💾|📁Serialized]
-
-Changed the capabilities of Function AvatarAccessoryRules:willRemoveAccessory 
-	from: 
-	  to: {🚧AvatarAppearance}
-
-Changed the capabilities of Function AvatarClothingRules:WillLimitLayeredAccessoryAsync 
-	from: 
-	  to: {🚧AvatarAppearance}
-
-Changed the capabilities and security of Function RunService:IsEdit 
-	from: {🚧Basic} {🔒Plugin}
-	  to: {🚧Basic + PluginOrOpenCloud} 
-
-Changed the capabilities, security and parameters of Function Humanoid:ApplyAvatarRulesAsync 
-	from:  {🔒RobloxScript} (avatarRules: AvatarRules)
-	  to: {🚧AvatarAppearance}  (avatarRules: any)
-
-Changed the capabilities, security and parameters of Function Player:LoadCharacterWithAvatarRulesAsync 
-	from: {🚧Players} {🔒RobloxScript} (avatarRules: AvatarRules)
-	  to: {🚧AvatarAppearance + Players}  (avatarRules: any)
-
-Changed the parameters of Function Humanoid:ApplyAvatarRules 
-	from: (avatarRules: AvatarRules)
-	  to: (avatarRules: any)
-
-Changed the parameters of Function TextChatService:SendExpChatMessageClientRendered 
-	from: (textChatMessage: TextChatMessage, messageRenderedSurface: string? = "unknown", selectedChannelTab: number? = -1, textChannelWindowName: string? = "")
-	  to: (textChatMessage: TextChatMessage, messageRenderedSurface: string? = "unknown", selectedChannelTab: number? = -1, textChannelWindowName: string? = "", specialEffects: { any }? = {})
-
-Changed the parameters of Event ProjectService.ContentMapMoveRequested 
-	from: (operationId: number, fromPath: string, toPath: string, dependencyOperationIds: { any })
-	  to: (operationId: number, fromPath: string, toPath: string, dependencyOperationIds: { any }, expectedShape: number, expectedSourceKind: number)
-
-Changed the parameters of Event ProjectService.ContentMapRemovePathRequested 
-	from: (operationId: number, path: string, dependencyOperationIds: { any })
-	  to: (operationId: number, path: string, dependencyOperationIds: { any }, expectedSourceKind: number)
-
-Removed Tag [Hidden] from Property AudioPlayer.AudioContent
-Removed Tag [Hidden] from Property Sound.AudioContent
-Removed Tag [Hidden] from Property StarterPlayer.PlaceAvatarRules
-Removed Tag [Hidden] from Property AnimationPlayer.CurrentFrame
-Removed Tag [Hidden] from Property AnimationPlayer.IsPlaying
-Removed Tag [Hidden] from Property AnimationPlayer.TimePosition
-Removed Tag [NotCreatable] from Class AnimationPlayer
-Removed Tag [NotReplicated] from Class AnimatedImageService
-Removed Tag [NotReplicated] from Property AnimationPlayer.Track
-
-Removed Tags [Hidden] [NotReplicated] from Property AnimationPlayer.AnimationContent
-Removed Tags [Hidden] [NotReplicated] from Property AnimationPlayer.AutoPlay
-Removed Tags [Hidden] [NotReplicated] from Property AnimationPlayer.Enabled
-Removed Tags [Hidden] [NotReplicated] from Property AnimationPlayer.Loop
-Removed Tags [Hidden] [NotReplicated] from Property AnimationPlayer.Speed
+Removed Tag [NotBrowsable] from Class TextChannelWindow
+Removed Tag [NotScriptable] from Property Players.BanningEnabled
+Removed Tag [NotScriptable] from Property Players.UseStrafingAnimations
