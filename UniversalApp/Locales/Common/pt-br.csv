@@ -297,7 +297,6 @@ Authentication.CrossDevice.Label.Warning1,• Só insira códigos que você soli
 Authentication.CrossDevice.Label.Warning2,• Nunca insira um código de outro usuário
 Authentication.CrossDevice.Response.InvalidCode,O código que você inseriu não é válido. Verifique se você inseriu o código corretamente.
 Authentication.CrossDevice.Response.LoginFail,Falha ao entrar
-Authentication.CrossDevice.Response.LoginFailedTryAgain,Falha no login. Tente novamente
 Authentication.CrossDevice.Response.LoginSuccess,Sucesso ao entrar na conta
 Authentication.Login.Action.Apple,Apple
 Authentication.Login.Action.ConnectionError.RetryReady,Repetir
@@ -362,7 +361,6 @@ Authentication.Login.Label.ConnectionError.RetryWait,"Ocorreu um problema na com
 
 Aguarde e tente novamente."
 Authentication.Login.Label.ConnectionError.Title,Erro de conexão
-Authentication.Login.Label.DontHaveAnAccountCreateOne,Não tem uma conta? {startTag}Crie uma{endTag}
 Authentication.Login.Label.Email,
 Authentication.Login.Label.EmailAddress,Endereço de e-mail
 Authentication.Login.Label.EmailNeedsVerification,Seu e-mail precisa ser verificado
@@ -605,7 +603,7 @@ Authentication.SignUp.Response.PhoneNumberAlreadyLinked,Este número já está a
 Authentication.SignUp.Response.UsernameMustBeSetFirst,O nome de usuário deve ser definido primeiro.
 Authentication.SignUp.Subtitle.AddYourBirthday,Adicione sua data de nascimento para criar uma conta Roblox.
 Authentication.SignUp.Subtitle.YourProgressCarriesOver,Seu progresso é transferido quando você conclui a configuração.
-Authentication.SignUp.Subtitle.YoureAlmostThereClose,"Você está quase terminando. Se cancelar agora, sua conta não será criada por completo e você não poderá jogar Roblox."
+Authentication.SignUp.Subtitle.YoureAlmostThere,"Você está quase terminando. Se fechar agora, sua conta não será criada por completo e você não poderá jogar Roblox."
 Authentication.SignUp.Title,
 Authentication.TwoStepVerification.Action.Approve,Aprovar
 Authentication.TwoStepVerification.Action.ChangePassword,Alterar senha
@@ -2542,7 +2540,6 @@ Feature.Build.Label.DeveloperProductDescription,Descrição: {DESCRIPTION}
 Feature.Build.Label.DeveloperProductName,"Nome: ""{NAME}"""
 Feature.Build.Label.DeveloperProductPrice,Preço: {PRICE} Robux
 Feature.Build.Label.DeveloperProductPriceUnavailable,?
-Feature.Build.Label.DeveloperProducts,Produtos do desenvolvedor
 Feature.Build.Label.Done,Concluído
 Feature.Build.Label.EasyPerformanceReport,Relatório de desempenho fácil
 Feature.Build.Label.Error,
@@ -2753,7 +2750,6 @@ Feature.Build.Message.NoAssetsFound,Nenhum ativo encontrado.
 Feature.Build.Message.NoCapturesAvailable,Nenhuma captura disponível
 Feature.Build.Message.NoDescriptionProvided,Nenhuma descrição foi fornecida.
 Feature.Build.Message.NoFriendsToAdd,"Você ainda não tem amizades para convidar. Primeiro, encontre pessoas para se conectar no Roblox."
-Feature.Build.Message.NoGamesYet,Ainda não há jogos.
 Feature.Build.Message.NoResults,
 Feature.Build.Message.NoSearchResultsFound,Nenhum resultado de busca encontrado
 Feature.Build.Message.NoVersionHistory,Ainda não há histórico de versões.
@@ -2829,9 +2825,7 @@ Feature.Build.Title.GameCreationDone,Criação de jogo concluída
 Feature.Build.Title.GamePass,Passe de jogo
 Feature.Build.Title.GenericError,
 Feature.Build.Title.GetUsers,Obter usuários
-Feature.Build.Title.InsufficientRobuxForModel,Você não tem Robux suficiente
 Feature.Build.Title.ManagedPricingAcknowledgement,Ativar preços gerenciados?
-Feature.Build.Title.Monetization,Monetização
 Feature.Build.Title.NoMonetizationProducts,Comece a ganhar com seu jogo
 Feature.Build.Title.NoRobuxForUsage,Não há mais Robux para usar a função Criar
 Feature.Build.Title.PickCampaign,Escolha uma duração
@@ -3451,7 +3445,6 @@ Feature.ContentFeed.Timestamp.HoursAgo,Há {numHours} horas
 Feature.ContentFeed.Timestamp.MinutesAgo,Há {numMinutes} minutos
 Feature.ContentFeed.Timestamp.Now,agora
 Feature.ContentFeed.Timestamp.WeeksAgo,Há {numWeeks} semanas
-Feature.CustomForms.Label.Percent,
 Feature.DevSubs.Action.CancelSubscription,Cancelar assinatura
 Feature.DevSubs.Action.RenewSubscription,Renovar assinatura
 Feature.DevSubs.Label.ActiveSubscriptions,Assinaturas ativas
@@ -4186,7 +4179,6 @@ Feature.Moments.Action.ShowDetails,Mostrar detalhes
 Feature.Moments.Action.ShowMore,
 Feature.Moments.Action.TrimVideo,Cortar vídeo
 Feature.Moments.Action.TryAgain,
-Feature.Moments.Body.EDPMomentIPReportInstructions,"Para denunciar uma violação de PI neste Momento, continue para a página de detalhes do jogo."
 Feature.Moments.Description.CommunityStandards,Consulte as Regras da Comunidade para obter mais informações sobre o que você pode e não pode dizer.
 Feature.Moments.Description.EmptyCapturesLibrary,É aqui que você encontrará suas capturas.
 Feature.Moments.Description.GenerateTextFeedbackDisclosure,Gerado por IA. Revise antes de publicar. Você é responsável pelo que é publicado.
@@ -4314,12 +4306,11 @@ Feature.Moments.Label.WriteComment,Escrever um comentário
 Feature.Moments.Title.Comments,Comentários
 Feature.Moments.Title.CommentsWithCappedCount,Mais de {count} comentários
 Feature.Moments.Title.CommentsWithCount,{count} comentários
-Feature.Moments.Title.EDPMomentIPReportInstructions,Denunciar na página de detalhes do jogo
 Feature.Moments.Title.GenerateTextFeedbackReason,O que deu errado?
 Feature.Moments.Title.GenerateTextOptions,
 Feature.Moments.Title.LeaveMomentCreation,Sair da criação de Momento?
 Feature.Moments.Title.MomentRemoved,Momento removido
-Feature.Moments.Title.PostInsights,Compartilhar insights
+Feature.Moments.Title.PostInsights,Título do cabeçalho da página
 Feature.Moments.Title.ReportPost,Denunciar publicação
 Feature.Moments.Tooltip.PostInsightsBody,"Confira as visualizações, o tempo de visualização e como o Momento foi recebido pelo seu público."
 Feature.Moments.Tooltip.PostInsightsTitle,Seus insights do Momento estão aqui

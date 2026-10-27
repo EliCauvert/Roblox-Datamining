@@ -281,7 +281,6 @@ Authentication.CrossDevice.Label.Warning1,Inserisci solo i codici che hai richie
 Authentication.CrossDevice.Label.Warning2,Non inserire mai il codice di un altro utente
 Authentication.CrossDevice.Response.InvalidCode,Il codice inserito non era valido. Assicurati di averlo inserito correttamente.
 Authentication.CrossDevice.Response.LoginFail,Accesso fallito
-Authentication.CrossDevice.Response.LoginFailedTryAgain,Accesso non riuscito. Riprova
 Authentication.CrossDevice.Response.LoginSuccess,Accesso riuscito
 Authentication.Login.Action.Apple,Apple
 Authentication.Login.Action.ConnectionError.RetryReady,
@@ -346,7 +345,6 @@ Authentication.Login.Label.ConnectionError.RetryWait,"Siamo spiacenti, si è ver
 
 Si prega di attendere e riprovare."
 Authentication.Login.Label.ConnectionError.Title,Errore di connessione
-Authentication.Login.Label.DontHaveAnAccountCreateOne,Non hai un account? {startTag}Creane uno{endTag}
 Authentication.Login.Label.Email,
 Authentication.Login.Label.EmailAddress,Indirizzo email
 Authentication.Login.Label.EmailNeedsVerification,Devi verificare il tuo indirizzo e-mail
@@ -589,7 +587,7 @@ Authentication.SignUp.Response.PhoneNumberAlreadyLinked,Il numero è già associ
 Authentication.SignUp.Response.UsernameMustBeSetFirst,Occorre prima impostare il nome utente.
 Authentication.SignUp.Subtitle.AddYourBirthday,Aggiungi la tua data di nascita per creare il tuo account Roblox.
 Authentication.SignUp.Subtitle.YourProgressCarriesOver,I tuoi progressi verranno trasferiti quando completerai la configurazione.
-Authentication.SignUp.Subtitle.YoureAlmostThereClose,"Ci sei quasi. Se annulli ora, la creazione del tuo account resterà incompleta e non potrai giocare a Roblox."
+Authentication.SignUp.Subtitle.YoureAlmostThere,"Ci sei quasi. Se chiudi ora, la creazione del tuo account resterà incompleta e non potrai giocare a Roblox."
 Authentication.SignUp.Title,
 Authentication.TwoStepVerification.Action.Approve,Approvato
 Authentication.TwoStepVerification.Action.ChangePassword,Modifica password
@@ -3429,7 +3427,6 @@ Feature.ContentFeed.Timestamp.HoursAgo,{numHours} ore fa
 Feature.ContentFeed.Timestamp.MinutesAgo,{numMinutes} min. fa
 Feature.ContentFeed.Timestamp.Now,adesso
 Feature.ContentFeed.Timestamp.WeeksAgo,{numWeeks} sett. fa
-Feature.CustomForms.Label.Percent,
 Feature.DevSubs.Action.CancelSubscription,Annulla abbonamento
 Feature.DevSubs.Action.RenewSubscription,Rinnova abbonamento
 Feature.DevSubs.Label.ActiveSubscriptions,Abbonamenti attivi
@@ -4164,7 +4161,6 @@ Feature.Moments.Action.ShowDetails,Mostra dettagli
 Feature.Moments.Action.ShowMore,
 Feature.Moments.Action.TrimVideo,Ritaglia video
 Feature.Moments.Action.TryAgain,
-Feature.Moments.Body.EDPMomentIPReportInstructions,"Per segnalare una violazione della proprietà intellettuale in questo Momento, vai alla pagina dei dettagli del gioco."
 Feature.Moments.Description.CommunityStandards,Consulta le norme della community per saperne di più su ciò che ti è permesso dire.
 Feature.Moments.Description.EmptyCapturesLibrary,Qui è dove appariranno le tue acquisizioni.
 Feature.Moments.Description.GenerateTextFeedbackDisclosure,Generato dall'IA. Ricontrollalo prima di utilizzarlo: sei responsabile di ciò che viene pubblicato.
@@ -4292,12 +4288,11 @@ Feature.Moments.Label.WriteComment,Scrivi un commento
 Feature.Moments.Title.Comments,Commenti
 Feature.Moments.Title.CommentsWithCappedCount,Più di {count} commenti
 Feature.Moments.Title.CommentsWithCount,{count} commenti
-Feature.Moments.Title.EDPMomentIPReportInstructions,Invia una segnalazione nella pagina dei dettagli del gioco
 Feature.Moments.Title.GenerateTextFeedbackReason,Cosa è andato storto?
 Feature.Moments.Title.GenerateTextOptions,
 Feature.Moments.Title.LeaveMomentCreation,Vuoi interrompere la creazione del Momento?
 Feature.Moments.Title.MomentRemoved,Momento rimosso
-Feature.Moments.Title.PostInsights,Approfondimenti sui post
+Feature.Moments.Title.PostInsights,Titolo dell'intestazione della pagina
 Feature.Moments.Title.ReportPost,Segnala post
 Feature.Moments.Tooltip.PostInsightsBody,"Controlla le visualizzazioni, il tempo di visione e l'accoglienza del Momento da parte del tuo pubblico."
 Feature.Moments.Tooltip.PostInsightsTitle,Ecco gli approfondimenti sul tuo Momento

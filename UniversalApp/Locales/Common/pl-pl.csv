@@ -297,7 +297,6 @@ Authentication.CrossDevice.Label.Warning1,"• Wprowadzaj tylko kody, które zos
 Authentication.CrossDevice.Label.Warning2,• Nigdy nie wprowadzaj kodów innego użytkownika
 Authentication.CrossDevice.Response.InvalidCode,Wprowadzono nieprawidłowy kod. Sprawdź poprawność przy wprowadzaniu.
 Authentication.CrossDevice.Response.LoginFail,Nie udało się zalogować
-Authentication.CrossDevice.Response.LoginFailedTryAgain,Nie udało się zalogować. Spróbuj ponownie.
 Authentication.CrossDevice.Response.LoginSuccess,Zalogowano
 Authentication.Login.Action.Apple,Apple
 Authentication.Login.Action.ConnectionError.RetryReady,
@@ -362,7 +361,6 @@ Authentication.Login.Label.ConnectionError.RetryWait,"Wystąpił problem z nawi�
 
 Zaczekaj i spróbuj ponownie."
 Authentication.Login.Label.ConnectionError.Title,Błąd połączenia
-Authentication.Login.Label.DontHaveAnAccountCreateOne,Nie masz konta? {startTag}Utwórz je{endTag}
 Authentication.Login.Label.Email,
 Authentication.Login.Label.EmailAddress,
 Authentication.Login.Label.EmailNeedsVerification,Adres e-mail wymaga weryfikacji
@@ -605,7 +603,7 @@ Authentication.SignUp.Response.PhoneNumberAlreadyLinked,Numer jest już powiąza
 Authentication.SignUp.Response.UsernameMustBeSetFirst,Najpierw należy ustawić nazwę użytkownika.
 Authentication.SignUp.Subtitle.AddYourBirthday,"Dodaj datę urodzenia, aby utworzyć konto Roblox."
 Authentication.SignUp.Subtitle.YourProgressCarriesOver,Twoje postępy zostaną przeniesione po zakończeniu konfiguracji.
-Authentication.SignUp.Subtitle.YoureAlmostThereClose,"Już prawie wszystko gotowe. Jeśli anulujesz w tej chwili, Twoje konto nie zostanie w pełni utworzone i nie będziesz mieć możliwości grania na Robloxie."
+Authentication.SignUp.Subtitle.YoureAlmostThere,"Już prawie wszystko gotowe. Jeśli zamkniesz teraz, Twoje konto nie zostanie w pełni utworzone i nie będziesz mieć możliwości grania na Robloxie."
 Authentication.SignUp.Title,
 Authentication.TwoStepVerification.Action.Approve,Zatwierdź
 Authentication.TwoStepVerification.Action.ChangePassword,Zmień hasło
@@ -3447,7 +3445,6 @@ Feature.ContentFeed.Timestamp.HoursAgo,{numHours} godz. temu
 Feature.ContentFeed.Timestamp.MinutesAgo,{numMinutes} min temu
 Feature.ContentFeed.Timestamp.Now,teraz
 Feature.ContentFeed.Timestamp.WeeksAgo,{numWeeks} tyg. temu
-Feature.CustomForms.Label.Percent,
 Feature.DevSubs.Action.CancelSubscription,Anuluj subskrypcję
 Feature.DevSubs.Action.RenewSubscription,Odnów subskrypcję
 Feature.DevSubs.Label.ActiveSubscriptions,Aktywne subskrypcje
@@ -4182,7 +4179,6 @@ Feature.Moments.Action.ShowDetails,Pokaż szczegóły
 Feature.Moments.Action.ShowMore,
 Feature.Moments.Action.TrimVideo,Przytnij film
 Feature.Moments.Action.TryAgain,
-Feature.Moments.Body.EDPMomentIPReportInstructions,"Aby zgłosić naruszenie praw własności intelektualnej w tym momencie, przejdź do strony szczegółów gry."
 Feature.Moments.Description.CommunityStandards,"Zapoznaj się ze Standardami społeczności, aby uzyskać więcej informacji na temat tego, co można, a czego nie można mówić."
 Feature.Moments.Description.EmptyCapturesLibrary,Tutaj będą pojawiać się Twoje przechwycone elementy.
 Feature.Moments.Description.GenerateTextFeedbackDisclosure,Wygenerowane przez sztuczną inteligencję. Sprawdź przed opublikowaniem – ponosisz odpowiedzialność za publikowane treści.
@@ -4310,12 +4306,11 @@ Feature.Moments.Label.WriteComment,Napisz komentarz
 Feature.Moments.Title.Comments,Komentarze
 Feature.Moments.Title.CommentsWithCappedCount,Liczba komentarzy: ponad {count}
 Feature.Moments.Title.CommentsWithCount,Liczba komentarzy: {count}
-Feature.Moments.Title.EDPMomentIPReportInstructions,Zgłoś na stronie szczegółów gry
 Feature.Moments.Title.GenerateTextFeedbackReason,Co poszło nie tak?
 Feature.Moments.Title.GenerateTextOptions,
 Feature.Moments.Title.LeaveMomentCreation,Wyjść z tworzenia momentu?
 Feature.Moments.Title.MomentRemoved,
-Feature.Moments.Title.PostInsights,Dane analityczne dotyczące postów
+Feature.Moments.Title.PostInsights,Tytuł nagłówka strony
 Feature.Moments.Title.ReportPost,Zgłoś posta
 Feature.Moments.Tooltip.PostInsightsBody,"Sprawdź liczbę wyświetleń, czas oglądania i to, jak moment został odebrany przez Twoich odbiorców."
 Feature.Moments.Tooltip.PostInsightsTitle,Tutaj znajdziesz statystyki dotyczące Twojego momentu

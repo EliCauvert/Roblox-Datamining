@@ -289,7 +289,6 @@ Authentication.CrossDevice.Label.Warning1,• 只输入您请求的验证码
 Authentication.CrossDevice.Label.Warning2,• 切勿输入其他用户的验证码
 Authentication.CrossDevice.Response.InvalidCode,你输入的代码无效。请确保你的输入正确无误。
 Authentication.CrossDevice.Response.LoginFail,登录失败
-Authentication.CrossDevice.Response.LoginFailedTryAgain,登录失败。请重试
 Authentication.CrossDevice.Response.LoginSuccess,登录成功
 Authentication.Login.Action.Apple,Apple
 Authentication.Login.Action.ConnectionError.RetryReady,重试...
@@ -354,7 +353,6 @@ Authentication.Login.Label.ConnectionError.RetryWait,"抱歉，连接服务器�
 
 请稍候重试。"
 Authentication.Login.Label.ConnectionError.Title,连接错误
-Authentication.Login.Label.DontHaveAnAccountCreateOne,没有帐户？{startTag}创建一个{endTag}
 Authentication.Login.Label.Email,
 Authentication.Login.Label.EmailAddress,电子邮件地址
 Authentication.Login.Label.EmailNeedsVerification,你的电子邮件需要验证
@@ -597,7 +595,7 @@ Authentication.SignUp.Response.PhoneNumberAlreadyLinked,此号码已与另一帐
 Authentication.SignUp.Response.UsernameMustBeSetFirst,
 Authentication.SignUp.Subtitle.AddYourBirthday,添加你的生日，以创建 Roblox 帐户。
 Authentication.SignUp.Subtitle.YourProgressCarriesOver,完成设置后，你的进度会保留。
-Authentication.SignUp.Subtitle.YoureAlmostThereClose,马上就完成了。如果现在取消，你的帐户将无法完整创建，你也无法游玩 Roblox。
+Authentication.SignUp.Subtitle.YoureAlmostThere,马上就完成了。如果现在关闭页面，你的帐户将无法完整创建，你将无法玩 Roblox。
 Authentication.SignUp.Title,你好 {username}，请创建一个密码
 Authentication.TwoStepVerification.Action.Approve,批准
 Authentication.TwoStepVerification.Action.ChangePassword,更改密码
@@ -2476,8 +2474,6 @@ Feature.Build.Description.PromoteGamePaid,创建广告，让你的游戏面向�
 Feature.Build.Description.PromoteGameWithAdCampaign,通过为期 {durationDays} 天的广告活动扩大受众群体，让你的游戏被他人发现。
 Feature.Build.Description.RaiseLimitOrWait,提高你的每日 Robux 限额以继续创建，或等待限额在明天重置。
 Feature.Build.Description.RatingAgreement,发布即表示你同意此内容评级准确无误。
-Feature.Build.Description.RequiredRobuxForAdvanced,
-Feature.Build.Description.RequiredRobuxForDefault,
 Feature.Build.Description.RestoreLatest,此版本将成为你的最新发布版本。
 Feature.Build.Description.RevertToVersion,确认以还原上次更改并返回到 {VERSION}。
 Feature.Build.Description.ShareLatest,分享最新版本的变化。
@@ -2725,7 +2721,6 @@ Feature.Build.Message.BuildBusy,Build 忙碌中。请稍后重试。
 Feature.Build.Message.BuildConnectFailed,Build 无法连接。请重试。
 Feature.Build.Message.BuildInternalError,Build 遇到问题。请重试。
 Feature.Build.Message.BuildResponseFailed,Build 无法响应。请重试。
-Feature.Build.Message.BuildSendUnconfirmed,
 Feature.Build.Message.BuildStillWorking,正在处理。在等待期间，你可以离开 App、在 Roblox 中游玩或开始另一个项目。
 Feature.Build.Message.BuildStopped,你已停止 Build。
 Feature.Build.Message.BuildTakingLonger,处理时间过长。你可以继续等待，也可以开始处理其他事项。
@@ -2755,7 +2750,6 @@ Feature.Build.Message.NoAssetsFound,未找到素材。
 Feature.Build.Message.NoCapturesAvailable,无可用截图
 Feature.Build.Message.NoDescriptionProvided,没有提供描述。
 Feature.Build.Message.NoFriendsToAdd,你还没有任何可邀请的好友。请先在 Roblox 上找到要建立联系的人。
-Feature.Build.Message.NoGamesYet,暂无游戏。
 Feature.Build.Message.NoResults,
 Feature.Build.Message.NoSearchResultsFound,未找到搜索结果
 Feature.Build.Message.NoVersionHistory,暂无版本历史记录。
@@ -2831,9 +2825,8 @@ Feature.Build.Title.GameCreationDone,游戏创建已完成
 Feature.Build.Title.GamePass,游戏通行证
 Feature.Build.Title.GenericError,出错了
 Feature.Build.Title.GetUsers,获取用户
-Feature.Build.Title.InsufficientRobuxForModel,你的 Robux 不足
 Feature.Build.Title.ManagedPricingAcknowledgement,是否开启托管定价？
-Feature.Build.Title.Monetization,收益化
+Feature.Build.Title.Monetization,
 Feature.Build.Title.NoMonetizationProducts,开始在你的游戏中赚取收入
 Feature.Build.Title.NoRobuxForUsage,没有剩余的 Robux 可用于购买 Build 使用额度
 Feature.Build.Title.PickCampaign,选择时长
@@ -3451,7 +3444,6 @@ Feature.ContentFeed.Timestamp.HoursAgo,{numHours} 小时前
 Feature.ContentFeed.Timestamp.MinutesAgo,{numMinutes} 分钟前
 Feature.ContentFeed.Timestamp.Now,
 Feature.ContentFeed.Timestamp.WeeksAgo,{numWeeks} 周前
-Feature.CustomForms.Label.Percent,
 Feature.DevSubs.Action.CancelSubscription,取消订阅
 Feature.DevSubs.Action.RenewSubscription,更新订阅
 Feature.DevSubs.Label.ActiveSubscriptions,激活订阅
@@ -4185,7 +4177,7 @@ Feature.Moments.Action.ShowDetails,显示详情
 Feature.Moments.Action.ShowMore,
 Feature.Moments.Action.TrimVideo,裁剪视频
 Feature.Moments.Action.TryAgain,
-Feature.Moments.Body.EDPMomentIPReportInstructions,要举报此“精彩瞬间”中的知识产权违规行为，请继续前往游戏详情页面。
+Feature.Moments.Body.EDPMomentIPReportInstructions,
 Feature.Moments.Description.CommunityStandards,请查看《社区准则》，进一步了解关于言论的规范。
 Feature.Moments.Description.EmptyCapturesLibrary,你的截图将显示在此处。
 Feature.Moments.Description.GenerateTextFeedbackDisclosure,AI 生成的内容。发布前请自行审核，你需要对发布的内容承担责任。
@@ -4313,14 +4305,13 @@ Feature.Moments.Label.WriteComment,留下评论
 Feature.Moments.Title.Comments,评论
 Feature.Moments.Title.CommentsWithCappedCount,超过 {count} 条评论
 Feature.Moments.Title.CommentsWithCount,{count} 条评论
-Feature.Moments.Title.EDPMomentIPReportInstructions,在游戏详情页面上举报
+Feature.Moments.Title.EDPMomentIPReportInstructions,
 Feature.Moments.Title.GenerateTextFeedbackReason,内容有什么问题？
 Feature.Moments.Title.GenerateTextOptions,
 Feature.Moments.Title.LeaveMomentCreation,要离开“精彩瞬间”创建页面吗？
 Feature.Moments.Title.MomentRemoved,精彩瞬间已移除
-Feature.Moments.Title.PostInsights,发布洞见
+Feature.Moments.Title.PostInsights,页面标题
 Feature.Moments.Title.ReportPost,举报帖子
-Feature.Moments.Title.UnfollowConfirmationDialog,
 Feature.Moments.Tooltip.PostInsightsBody,查看观看次数、观看时长以及精彩瞬间在受众中的反响。
 Feature.Moments.Tooltip.PostInsightsTitle,请查看你的精彩瞬间洞察报告
 Feature.Moments.Tooltip.ShareFirstMomentBody,从截图创建精彩瞬间

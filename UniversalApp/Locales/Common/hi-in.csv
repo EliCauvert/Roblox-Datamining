@@ -280,7 +280,6 @@ Authentication.CrossDevice.Label.Warning1,"• सिर्फ़ वही क�
 Authentication.CrossDevice.Label.Warning2,• कभी भी दूसरे यूज़र का कोड न डालें
 Authentication.CrossDevice.Response.InvalidCode,"आपने जो कोड डाला है, वह अमान्य है. सही कोड डालें."
 Authentication.CrossDevice.Response.LoginFail,लॉग इन नहीं हो सका
-Authentication.CrossDevice.Response.LoginFailedTryAgain,लॉग इन नहीं किया जा सका. फिर से कोशिश करें
 Authentication.CrossDevice.Response.LoginSuccess,लॉग इन हो गया
 Authentication.Login.Action.Apple,Apple
 Authentication.Login.Action.ConnectionError.RetryReady,
@@ -345,7 +344,6 @@ Authentication.Login.Label.ConnectionError.RetryWait,"माफ़ करें,
 
 इंतज़ार के बाद, फिर से कोशिश करें."
 Authentication.Login.Label.ConnectionError.Title,कनेक्ट करने में गड़बड़ी हुई
-Authentication.Login.Label.DontHaveAnAccountCreateOne,आपके पास अकाउंट नहीं है? {startTag}एक अकाउंट बनाएँ{endTag}
 Authentication.Login.Label.Email,
 Authentication.Login.Label.EmailAddress,ईमेल पता
 Authentication.Login.Label.EmailNeedsVerification,आपके ईमेल को वेरिफ़ाई करना ज़रूरी है
@@ -588,7 +586,7 @@ Authentication.SignUp.Response.PhoneNumberAlreadyLinked,नंबर पहल�
 Authentication.SignUp.Response.UsernameMustBeSetFirst,यूज़रनेम पहले सेट किया जाना चाहिए.
 Authentication.SignUp.Subtitle.AddYourBirthday,अपना Roblox अकाउंट बनाने के लिए अपना जन्मदिन जोड़ें.
 Authentication.SignUp.Subtitle.YourProgressCarriesOver,"सेटअप पूरा करने पर, आपकी प्रोग्रेस आगे के लिए सेव हो जाती है."
-Authentication.SignUp.Subtitle.YoureAlmostThereClose,"आपका काम लगभग पूरा हो चुका है. अगर आपने अभी कैंसिल किया, तो आपका अकाउंट पूरी तरह से क्रिएट नहीं होगा और Roblox गेम्स नहीं खेले जा सकेंगे."
+Authentication.SignUp.Subtitle.YoureAlmostThere,"आपका अकाउंट लगभग तैयार हो चुका है. अगर आपने अभी बंद किया, तो आपका अकाउंट पूरी तरह से क्रिएट नहीं होगा और बिना अकाउंट के Roblox नहीं खेला जा सकेगा."
 Authentication.SignUp.Title,"हैलो {username}, पासवर्ड क्रिएट करें"
 Authentication.TwoStepVerification.Action.Approve,मंज़ूरी दें
 Authentication.TwoStepVerification.Action.ChangePassword,पासवर्ड बदलें
@@ -3427,7 +3425,6 @@ Feature.ContentFeed.Timestamp.HoursAgo,{numHours}घं. पहले
 Feature.ContentFeed.Timestamp.MinutesAgo,{numMinutes}मि. पहले
 Feature.ContentFeed.Timestamp.Now,
 Feature.ContentFeed.Timestamp.WeeksAgo,{numWeeks}हफ़्ते पहले
-Feature.CustomForms.Label.Percent,
 Feature.DevSubs.Action.CancelSubscription,सब्सक्रिप्शन कैंसिल करें
 Feature.DevSubs.Action.RenewSubscription,सब्सक्रिप्शन रिन्यू करें
 Feature.DevSubs.Label.ActiveSubscriptions,ऐक्टिव सब्सक्रिप्शंस
@@ -4162,7 +4159,6 @@ Feature.Moments.Action.ShowDetails,जानकारी दिखाएँ
 Feature.Moments.Action.ShowMore,
 Feature.Moments.Action.TrimVideo,वीडियो ट्रिम करें
 Feature.Moments.Action.TryAgain,
-Feature.Moments.Body.EDPMomentIPReportInstructions,"इस Moment में IP (बौद्धिक संपदा) उल्लंघन की रिपोर्ट करने के लिए, गेम की जानकारी वाले पेज पर जाएँ."
 Feature.Moments.Description.CommunityStandards,"क्या कहें और क्या न कहें, इस बारे में ज़्यादा जानकारी के लिए कम्यूनिटी स्टैंडर्ड देखें."
 Feature.Moments.Description.EmptyCapturesLibrary,आपके कैप्चर यहाँ दिखेंगे.
 Feature.Moments.Description.GenerateTextFeedbackDisclosure,AI से जेनरेट किया गया टेक्स्ट. पोस्ट करने से पहले रिव्यू करें — पब्लिश की गई किसी भी चीज़ के लिए आप ज़िम्मेदार हैं.
@@ -4290,12 +4286,11 @@ Feature.Moments.Label.WriteComment,कमेंट लिखें
 Feature.Moments.Title.Comments,कमेंट्स
 Feature.Moments.Title.CommentsWithCappedCount,{count}+ कमेंट्स
 Feature.Moments.Title.CommentsWithCount,{count} कमेंट्स
-Feature.Moments.Title.EDPMomentIPReportInstructions,गेम की जानकारी वाले पेज पर रिपोर्ट करें
 Feature.Moments.Title.GenerateTextFeedbackReason,क्या गड़बड़ी हुई?
 Feature.Moments.Title.GenerateTextOptions,
 Feature.Moments.Title.LeaveMomentCreation,क्या आपको ‘Moment’ क्रिएशन छोड़ना है?
 Feature.Moments.Title.MomentRemoved,Moment हटा दिया गया
-Feature.Moments.Title.PostInsights,पोस्ट के बारे में इनसाइट
+Feature.Moments.Title.PostInsights,पेज हेडर का टाइटल
 Feature.Moments.Title.ReportPost,पोस्ट की रिपोर्ट करें
 Feature.Moments.Tooltip.PostInsightsBody,"व्यूज़, देखने में बिताया गया समय और यह देखें कि आपकी ऑडियंस को Moment कैसा लगा."
 Feature.Moments.Tooltip.PostInsightsTitle,आपके Moment की जानकारी यहाँ है

@@ -298,7 +298,6 @@ Authentication.CrossDevice.Label.Warning1,• Only enter codes that you requeste
 Authentication.CrossDevice.Label.Warning2,• Never enter another user's code
 Authentication.CrossDevice.Response.InvalidCode,The code you entered was invalid. Please make sure you entered it correctly.
 Authentication.CrossDevice.Response.LoginFail,Log in Failed
-Authentication.CrossDevice.Response.LoginFailedTryAgain,Log in failed. Try again
 Authentication.CrossDevice.Response.LoginSuccess,Log in Successful
 Authentication.Login.Action.Apple,Apple
 Authentication.Login.Action.ConnectionError.RetryReady,
@@ -363,7 +362,6 @@ Authentication.Login.Label.ConnectionError.RetryWait,"Sorry, there was a problem
 
 Please wait and try again."
 Authentication.Login.Label.ConnectionError.Title,Connection Error
-Authentication.Login.Label.DontHaveAnAccountCreateOne,Don't have an account? {startTag}Create one{endTag}
 Authentication.Login.Label.Email,
 Authentication.Login.Label.EmailAddress,Email address
 Authentication.Login.Label.EmailNeedsVerification,Your email needs verification
@@ -606,7 +604,7 @@ Authentication.SignUp.Response.PhoneNumberAlreadyLinked,Number is already associ
 Authentication.SignUp.Response.UsernameMustBeSetFirst,Username must be set first.
 Authentication.SignUp.Subtitle.AddYourBirthday,Add your birthday to create your Roblox account.
 Authentication.SignUp.Subtitle.YourProgressCarriesOver,Your progress carries over when you complete setup.
-Authentication.SignUp.Subtitle.YoureAlmostThereClose,"You're almost done. If you cancel now, your account won’t be fully created and you won’t be able to play Roblox."
+Authentication.SignUp.Subtitle.YoureAlmostThere,"You're almost there. If you close now, your account won't be fully created and you won't be able to play Roblox."
 Authentication.SignUp.Title,"Hi {username}, create a password"
 Authentication.TwoStepVerification.Action.Approve,Approve
 Authentication.TwoStepVerification.Action.ChangePassword,Change Password
@@ -2484,8 +2482,6 @@ Feature.Build.Description.PromoteGamePaid,Create an ad to get your game in front
 Feature.Build.Description.PromoteGameWithAdCampaign,Boost your audience with a {durationDays}-day ad campaign and get your game discovered.
 Feature.Build.Description.RaiseLimitOrWait,"Increase your daily Robux limit to keep creating, or wait for it to reset tomorrow."
 Feature.Build.Description.RatingAgreement,"By publishing, you agree that this content rating is accurate."
-Feature.Build.Description.RequiredRobuxForAdvanced,You need at least {ROBUX} Robux to keep creating with the Advanced model. You can also switch back to Default or wait for your free usage to reset.
-Feature.Build.Description.RequiredRobuxForDefault,"You need at least {ROBUX} Robux to keep creating, or wait for your free usage to reset."
 Feature.Build.Description.RestoreLatest,This version will become your latest published version.
 Feature.Build.Description.RevertToVersion,Confirm to revert the latest change and go back to {VERSION}.
 Feature.Build.Description.ShareLatest,Share what’s changed in your latest version.
@@ -2733,7 +2729,6 @@ Feature.Build.Message.BuildBusy,Build is busy. Wait a minute and try again.
 Feature.Build.Message.BuildConnectFailed,Build couldn't connect. Try again.
 Feature.Build.Message.BuildInternalError,Build ran into a problem. Try again.
 Feature.Build.Message.BuildResponseFailed,Build couldn't respond. Try again.
-Feature.Build.Message.BuildSendUnconfirmed,Build couldn't confirm your message was sent.
 Feature.Build.Message.BuildStillWorking,"Working on it. You can leave the app, play Roblox, or start another project while you wait."
 Feature.Build.Message.BuildStopped,You stopped Build.
 Feature.Build.Message.BuildTakingLonger,This is taking longer than expected. You can keep waiting or start something else.
@@ -2763,7 +2758,6 @@ Feature.Build.Message.NoAssetsFound,No assets found.
 Feature.Build.Message.NoCapturesAvailable,No captures available
 Feature.Build.Message.NoDescriptionProvided,No description provided.
 Feature.Build.Message.NoFriendsToAdd,You don't have any friends to invite yet. Find people to connect with on Roblox first.
-Feature.Build.Message.NoGamesYet,No games yet.
 Feature.Build.Message.NoResults,
 Feature.Build.Message.NoSearchResultsFound,No search results found
 Feature.Build.Message.NoVersionHistory,No version history yet.
@@ -2839,7 +2833,6 @@ Feature.Build.Title.GameCreationDone,Completed game creation
 Feature.Build.Title.GamePass,Game Pass
 Feature.Build.Title.GenericError,
 Feature.Build.Title.GetUsers,Get users
-Feature.Build.Title.InsufficientRobuxForModel,You don't have enough Robux
 Feature.Build.Title.ManagedPricingAcknowledgement,Turn on Managed Pricing?
 Feature.Build.Title.Monetization,Monetization
 Feature.Build.Title.NoMonetizationProducts,Start earning in your game
@@ -3461,7 +3454,6 @@ Feature.ContentFeed.Timestamp.HoursAgo,{numHours}h ago
 Feature.ContentFeed.Timestamp.MinutesAgo,{numMinutes}m ago
 Feature.ContentFeed.Timestamp.Now,now
 Feature.ContentFeed.Timestamp.WeeksAgo,{numWeeks}w ago
-Feature.CustomForms.Label.Percent,
 Feature.DevSubs.Action.CancelSubscription,Cancel Subscription
 Feature.DevSubs.Action.RenewSubscription,Renew Subscription
 Feature.DevSubs.Label.ActiveSubscriptions,Active Subscriptions
@@ -4331,7 +4323,6 @@ Feature.Moments.Title.LeaveMomentCreation,Leave Moment creation?
 Feature.Moments.Title.MomentRemoved,Moment removed
 Feature.Moments.Title.PostInsights,Post insights
 Feature.Moments.Title.ReportPost,Report post
-Feature.Moments.Title.UnfollowConfirmationDialog,Unfollow @{username}?
 Feature.Moments.Tooltip.PostInsightsBody,"Check views, watch time, and how the Moment landed with your audience."
 Feature.Moments.Tooltip.PostInsightsTitle,Your Moment insights are here
 Feature.Moments.Tooltip.ShareFirstMomentBody,Create a Moment from your captures

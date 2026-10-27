@@ -1,1 +1,0 @@
-﻿return { passWithNoTests = true, testMatch = { "**/*.test" } }

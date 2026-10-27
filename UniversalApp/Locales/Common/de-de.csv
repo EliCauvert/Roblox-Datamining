@@ -297,7 +297,6 @@ Authentication.CrossDevice.Label.Warning1,"• Gib nur Codes ein, die du angefor
 Authentication.CrossDevice.Label.Warning2,• Benutze niemals den Code eines anderen Benutzers
 Authentication.CrossDevice.Response.InvalidCode,"Der Code, den du eingegeben hast, ist ungültig. Bitte überprüfe ihn noch einmal."
 Authentication.CrossDevice.Response.LoginFail,Anmeldung fehlgeschlagen
-Authentication.CrossDevice.Response.LoginFailedTryAgain,Anmeldung fehlgeschlagen. Bitte versuche es erneut.
 Authentication.CrossDevice.Response.LoginSuccess,Anmeldung erfolgreich
 Authentication.Login.Action.Apple,Apple
 Authentication.Login.Action.ConnectionError.RetryReady,Erneut
@@ -362,7 +361,6 @@ Authentication.Login.Label.ConnectionError.RetryWait,"Sorry, es gab ein Problem 
 
 Bitte warte eine Weile und versuche es erneut."
 Authentication.Login.Label.ConnectionError.Title,Verbindungsfehler
-Authentication.Login.Label.DontHaveAnAccountCreateOne,Du hast kein Konto? {startTag}Konto erstellen{endTag}
 Authentication.Login.Label.Email,
 Authentication.Login.Label.EmailAddress,
 Authentication.Login.Label.EmailNeedsVerification,Deine E-Mail-Adresse muss verifiziert werden.
@@ -605,7 +603,7 @@ Authentication.SignUp.Response.PhoneNumberAlreadyLinked,Die Nummer ist bereits e
 Authentication.SignUp.Response.UsernameMustBeSetFirst,Der Benutzername muss zuerst festgelegt werden.
 Authentication.SignUp.Subtitle.AddYourBirthday,"Gib deinen Geburtstag an, um dein Roblox-Konto zu erstellen."
 Authentication.SignUp.Subtitle.YourProgressCarriesOver,"Dein Fortschritt wird übertragen, wenn du die Einrichtung abschließt."
-Authentication.SignUp.Subtitle.YoureAlmostThereClose,"Du hast es fast geschafft. Wenn du jetzt abbrichst, wird dein Konto nicht vollständig erstellt und du kannst nicht auf Roblox spielen."
+Authentication.SignUp.Subtitle.YoureAlmostThere,"Du hast es fast geschafft. Wenn du jetzt schließt, wird dein Konto nicht vollständig erstellt und du kannst nicht auf Roblox spielen."
 Authentication.SignUp.Title,
 Authentication.TwoStepVerification.Action.Approve,Genehmigen
 Authentication.TwoStepVerification.Action.ChangePassword,Passwort ändern
@@ -3440,7 +3438,6 @@ Feature.ContentFeed.Timestamp.HoursAgo,vor {numHours} Std.
 Feature.ContentFeed.Timestamp.MinutesAgo,vor {numMinutes} Min.
 Feature.ContentFeed.Timestamp.Now,jetzt
 Feature.ContentFeed.Timestamp.WeeksAgo,vor {numWeeks} Wch.
-Feature.CustomForms.Label.Percent,
 Feature.DevSubs.Action.CancelSubscription,Abo kündigen
 Feature.DevSubs.Action.RenewSubscription,Abo verlängern
 Feature.DevSubs.Label.ActiveSubscriptions,Aktive Abos
@@ -4175,7 +4172,6 @@ Feature.Moments.Action.ShowDetails,Details anzeigen
 Feature.Moments.Action.ShowMore,
 Feature.Moments.Action.TrimVideo,Video zuschneiden
 Feature.Moments.Action.TryAgain,
-Feature.Moments.Body.EDPMomentIPReportInstructions,"Um einen Verstoß gegen das geistige Eigentum in diesem Moment zu melden, gehe weiter zur Detailseite des Spiels."
 Feature.Moments.Description.CommunityStandards,"In den Community-Regeln findest du weitere Informationen darüber, was du schreiben darfst und was nicht."
 Feature.Moments.Description.EmptyCapturesLibrary,Hier werden deine Aufnahmen angezeigt.
 Feature.Moments.Description.GenerateTextFeedbackDisclosure,"KI-generiert. Überprüfe den Inhalt vor der Veröffentlichung – du bist verantwortlich für das, was veröffentlicht wird."
@@ -4303,12 +4299,11 @@ Feature.Moments.Label.WriteComment,Verfasse einen Kommentar
 Feature.Moments.Title.Comments,Kommentare
 Feature.Moments.Title.CommentsWithCappedCount,Über {count} Kommentare
 Feature.Moments.Title.CommentsWithCount,{count} Kommentare
-Feature.Moments.Title.EDPMomentIPReportInstructions,Auf der Detailseite des Spiels melden
 Feature.Moments.Title.GenerateTextFeedbackReason,Was ist schiefgelaufen?
 Feature.Moments.Title.GenerateTextOptions,
 Feature.Moments.Title.LeaveMomentCreation,Moment-Kreation verlassen?
 Feature.Moments.Title.MomentRemoved,Moment entfernt
-Feature.Moments.Title.PostInsights,Einblicke in Posts
+Feature.Moments.Title.PostInsights,Titel der Seitenkopfzeile
 Feature.Moments.Title.ReportPost,Post melden
 Feature.Moments.Tooltip.PostInsightsBody,"Überprüfe die Aufrufe, die Wiedergabezeit und wie der Moment bei deiner Zielgruppe angekommen ist."
 Feature.Moments.Tooltip.PostInsightsTitle,Die Einblicke für deinen Moment sind da

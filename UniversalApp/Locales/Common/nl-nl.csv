@@ -280,7 +280,6 @@ Authentication.CrossDevice.Label.Warning1,• Alleen codes invoert die je zelf h
 Authentication.CrossDevice.Label.Warning2,• Nooit de code van een andere gebruiker invoert
 Authentication.CrossDevice.Response.InvalidCode,"De code die je hebt ingevoerd, was ongeldig. Zorg ervoor dat je deze correct invoert."
 Authentication.CrossDevice.Response.LoginFail,Inloggen mislukt
-Authentication.CrossDevice.Response.LoginFailedTryAgain,Inloggen is mislukt. Probeer het opnieuw.
 Authentication.CrossDevice.Response.LoginSuccess,Inloggen gelukt
 Authentication.Login.Action.Apple,Apple
 Authentication.Login.Action.ConnectionError.RetryReady,
@@ -345,7 +344,6 @@ Authentication.Login.Label.ConnectionError.RetryWait,"Sorry, er is een probleem 
 
 Wacht even en probeer het opnieuw."
 Authentication.Login.Label.ConnectionError.Title,Verbindingsfout
-Authentication.Login.Label.DontHaveAnAccountCreateOne,Heb je geen account? {startTag}Maak er een aan{endTag}
 Authentication.Login.Label.Email,
 Authentication.Login.Label.EmailAddress,E-mailadressen
 Authentication.Login.Label.EmailNeedsVerification,Je e-mailadres moet worden geverifieerd
@@ -588,7 +586,7 @@ Authentication.SignUp.Response.PhoneNumberAlreadyLinked,Het nummer is al gekoppe
 Authentication.SignUp.Response.UsernameMustBeSetFirst,Gebruikersnaam moet eerst worden ingesteld.
 Authentication.SignUp.Subtitle.AddYourBirthday,Voeg je verjaardag toe om je Roblox-account te maken.
 Authentication.SignUp.Subtitle.YourProgressCarriesOver,Je voortgang wordt overgenomen wanneer je de instelling voltooit.
-Authentication.SignUp.Subtitle.YoureAlmostThereClose,"Je bent bijna klaar. Als je nu annuleert, wordt je account niet volledig aangemaakt en kun je Roblox niet spelen."
+Authentication.SignUp.Subtitle.YoureAlmostThere,"Je bent er bijna. Als je nu afsluit, wordt je account niet volledig aangemaakt en kun je Roblox niet spelen."
 Authentication.SignUp.Title,"Hallo {username}, maak een wachtwoord aan"
 Authentication.TwoStepVerification.Action.Approve,Goedkeuren
 Authentication.TwoStepVerification.Action.ChangePassword,Wachtwoord wijzigen
@@ -2524,7 +2522,6 @@ Feature.Build.Label.DeveloperProductDescription,Beschrijving: {DESCRIPTION}
 Feature.Build.Label.DeveloperProductName,Naam: '{NAME}'
 Feature.Build.Label.DeveloperProductPrice,Prijs: {PRICE} Robux
 Feature.Build.Label.DeveloperProductPriceUnavailable,?
-Feature.Build.Label.DeveloperProducts,Ontwikkelaarsproducten
 Feature.Build.Label.Done,
 Feature.Build.Label.EasyPerformanceReport,Eenvoudig prestatierapport
 Feature.Build.Label.Error,
@@ -2735,7 +2732,6 @@ Feature.Build.Message.NoAssetsFound,Geen assets gevonden.
 Feature.Build.Message.NoCapturesAvailable,Geen opnames beschikbaar.
 Feature.Build.Message.NoDescriptionProvided,Geen beschrijving verstrekt.
 Feature.Build.Message.NoFriendsToAdd,Je hebt nog geen vrienden die je kunt uitnodigen. Leg eerst contact met mensen op Roblox.
-Feature.Build.Message.NoGamesYet,Nog geen games.
 Feature.Build.Message.NoResults,
 Feature.Build.Message.NoSearchResultsFound,Geen zoekresultaten gevonden
 Feature.Build.Message.NoVersionHistory,Nog geen versiegeschiedenis.
@@ -2811,9 +2807,7 @@ Feature.Build.Title.GameCreationDone,Spel gecreëerd
 Feature.Build.Title.GamePass,Game Pass
 Feature.Build.Title.GenericError,
 Feature.Build.Title.GetUsers,Gebruikers ophalen
-Feature.Build.Title.InsufficientRobuxForModel,Je hebt niet genoeg Robux
 Feature.Build.Title.ManagedPricingAcknowledgement,Beheerde prijzen inschakelen?
-Feature.Build.Title.Monetization,Monetisatie
 Feature.Build.Title.NoMonetizationProducts,Begin met verdienen in je spel
 Feature.Build.Title.NoRobuxForUsage,Geen Robux meer over voor Build-tegoed
 Feature.Build.Title.PickCampaign,Kies een lengte
@@ -3433,7 +3427,6 @@ Feature.ContentFeed.Timestamp.HoursAgo,{numHours} u geleden
 Feature.ContentFeed.Timestamp.MinutesAgo,{numMinutes} m geleden
 Feature.ContentFeed.Timestamp.Now,nu
 Feature.ContentFeed.Timestamp.WeeksAgo,{numWeeks} w geleden
-Feature.CustomForms.Label.Percent,
 Feature.DevSubs.Action.CancelSubscription,Abonnement annuleren
 Feature.DevSubs.Action.RenewSubscription,Abonnement verlengen
 Feature.DevSubs.Label.ActiveSubscriptions,Actieve abonnementen
@@ -4168,7 +4161,6 @@ Feature.Moments.Action.ShowDetails,Details weergeven
 Feature.Moments.Action.ShowMore,
 Feature.Moments.Action.TrimVideo,Video inkorten
 Feature.Moments.Action.TryAgain,Nog een keer proberen
-Feature.Moments.Body.EDPMomentIPReportInstructions,Ga naar de detailpagina van de game om een IP-overtreding in dit Moment te melden.
 Feature.Moments.Description.CommunityStandards,Lees de Communityrichtlijnen voor meer informatie over wat je wel en niet mag zeggen.
 Feature.Moments.Description.EmptyCapturesLibrary,Hier komen je opnames te staan.
 Feature.Moments.Description.GenerateTextFeedbackDisclosure,Door AI gegenereerd. Controleer voordat je plaatst — jij bent verantwoordelijk voor wat er wordt gepubliceerd.
@@ -4296,12 +4288,11 @@ Feature.Moments.Label.WriteComment,Schrijf een reactie
 Feature.Moments.Title.Comments,
 Feature.Moments.Title.CommentsWithCappedCount,{count}+ reacties
 Feature.Moments.Title.CommentsWithCount,{count} reacties
-Feature.Moments.Title.EDPMomentIPReportInstructions,Melden op de detailpagina van de game
 Feature.Moments.Title.GenerateTextFeedbackReason,Wat is er misgegaan?
 Feature.Moments.Title.GenerateTextOptions,
 Feature.Moments.Title.LeaveMomentCreation,Moment maken afsluiten?
 Feature.Moments.Title.MomentRemoved,
-Feature.Moments.Title.PostInsights,Postinzichten
+Feature.Moments.Title.PostInsights,Titel van paginakoptekst
 Feature.Moments.Title.ReportPost,Post melden
 Feature.Moments.Tooltip.PostInsightsBody,"Bekijk het aantal weergaven, de kijktijd en hoe het Moment bij je doelgroep is overgekomen."
 Feature.Moments.Tooltip.PostInsightsTitle,Je momentinzichten zijn hier
