@@ -31,6 +31,7 @@ local ConstantsModule = require(AvatarExperienceProfilePictureEditor.Constants)
 local TextKeysModule = require(AvatarExperienceProfilePictureEditor.Common.TextKeys)
 local SharedFlagsModule = require(Parent.SharedFlags)
 local FFlagAXEnableProfileTab = SharedFlagsModule.FFlagAXEnableProfileTab
+local FFlagSplitPaneProfileEditFillPane = SharedFlagsModule.FFlagSplitPaneProfileEditFillPane
 local FFlagEditProfileImageR15UpgradePrompt = SharedFlagsModule.FFlagEditProfileImageR15UpgradePrompt
 local EditProfileImageAnalyticsModule = require(AvatarExperienceProfilePictureEditor.Analytics.EditProfileImageAnalytics)
 
@@ -111,7 +112,7 @@ local function createStackedLayout(p1, XOffset, YOffset)
 end
 
 local function EditProfileImageBody(p1)
-	-- upvalues: UseTokensFunction (copy), UseGuiInsetFunction (copy), TextKeysModule (copy), FFlagProfileFramesUpsellFreeTrialModule (copy), UseLocalizationFunction (copy), UseEditProfileImageLayoutFunction (copy), UseEditProfileImageViewModelModule (copy), FFlagEditProfileImageR15UpgradePrompt (copy), ReactModule (copy), EditProfileImageAnalyticsModule (copy), EnumsModule (copy), RobloxPlusUpsellBanner (copy), renderFramesPlusUpsellBanner (copy), FramesPlusUpsellBarModule (copy), ConstantsModule (copy), AssetGridScrollSectionModule (copy), IconName (copy), View (copy), ExpandedEmotesGridContentModule (copy), CombinedCarouselsContentModule (copy), EditProfileImageFooterModule (copy), RotatableAvatarPreviewModule (copy), IconButton (copy), IconSize (copy), ButtonVariant (copy), FoundationModule (copy), Text (copy), createSplitLayout (copy), createStackedLayout (copy), FocusNavigatorWrapperModule (copy), RoactNavigationModule (copy), FFlagAXEnableProfileTab (copy)
+	-- upvalues: UseTokensFunction (copy), UseGuiInsetFunction (copy), TextKeysModule (copy), FFlagProfileFramesUpsellFreeTrialModule (copy), UseLocalizationFunction (copy), UseEditProfileImageLayoutFunction (copy), FFlagSplitPaneProfileEditFillPane (copy), UseEditProfileImageViewModelModule (copy), FFlagEditProfileImageR15UpgradePrompt (copy), ReactModule (copy), EditProfileImageAnalyticsModule (copy), EnumsModule (copy), RobloxPlusUpsellBanner (copy), renderFramesPlusUpsellBanner (copy), FramesPlusUpsellBarModule (copy), ConstantsModule (copy), AssetGridScrollSectionModule (copy), IconName (copy), View (copy), ExpandedEmotesGridContentModule (copy), CombinedCarouselsContentModule (copy), EditProfileImageFooterModule (copy), RotatableAvatarPreviewModule (copy), IconButton (copy), IconSize (copy), ButtonVariant (copy), FoundationModule (copy), Text (copy), createSplitLayout (copy), createStackedLayout (copy), FocusNavigatorWrapperModule (copy), RoactNavigationModule (copy), FFlagAXEnableProfileTab (copy)
 	local UseTokensResult = UseTokensFunction()
 	local UseGuiInsetResult = UseGuiInsetFunction()
 	local config = { editProfilePicture = TextKeysModule.EditProfilePicture }
@@ -123,7 +124,10 @@ local function EditProfileImageBody(p1)
 	end
 	local UseLocalizationResult = UseLocalizationFunction(config)
 	local IsShowCloseButton = p1.showCloseButton ~= false
-	local UseEditProfileImageLayoutResult = UseEditProfileImageLayoutFunction({ guiInset = UseGuiInsetResult })
+	local UseEditProfileImageLayoutResult = UseEditProfileImageLayoutFunction({
+		guiInset = UseGuiInsetResult,
+		containerSize = if FFlagSplitPaneProfileEditFillPane then p1.containerSize else nil
+	})
 	local CutoutFieldOfViewDeg = UseEditProfileImageLayoutResult.cutoutFieldOfViewDeg
 	local UseEditProfileImageViewModelModuleResult = UseEditProfileImageViewModelModule({
 		mode = p1.mode,
@@ -337,7 +341,7 @@ local function EditProfileImageBody(p1)
 end
 
 return function(p1)
-	-- upvalues: ReactModule (copy), EditProfileImageActionsContextModule (copy), EditProfileImageBody (copy)
+	-- upvalues: ReactModule (copy), EditProfileImageActionsContextModule (copy), EditProfileImageBody (copy), FFlagSplitPaneProfileEditFillPane (copy)
 	return ReactModule.createElement(EditProfileImageActionsContextModule.Provider, {
 		value = ReactModule.useMemo(function()
 			-- upvalues: p1 (copy)
@@ -360,6 +364,7 @@ return function(p1)
 		onSaveSuccess = p1.onSaveSuccess,
 		onPromptR15Upgrade = p1.onPromptR15Upgrade,
 		accountRigType = p1.accountRigType,
-		renderRecommendedEmotePurchaseFooter = p1.renderRecommendedEmotePurchaseFooter
+		renderRecommendedEmotePurchaseFooter = p1.renderRecommendedEmotePurchaseFooter,
+		containerSize = if FFlagSplitPaneProfileEditFillPane then p1.containerSize else nil
 	}))
 end

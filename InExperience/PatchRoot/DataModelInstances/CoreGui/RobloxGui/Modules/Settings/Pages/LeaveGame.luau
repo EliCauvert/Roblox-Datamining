@@ -21,11 +21,12 @@ local FoundationModule = require(CorePackages.Packages.Foundation)
 local EnabledResult = require(CorePackages.Workspace.Packages.Chrome).Enabled()
 local ServiceModule = if EnabledResult then require(RobloxGui.Modules.Chrome.Service) else nil
 local ConstantsModule = if EnabledResult then require(RobloxGui.Modules.Chrome.ChromeShared.Unibar.Constants) else nil
+local SharedFlagsModule = require(CorePackages.Workspace.Packages.SharedFlags)
 local v1 = nil
 RobloxGui:WaitForChild("Modules"):WaitForChild("TenFootInterface")
-local IsEnabled = require(RobloxGui.Modules.TenFootInterface):IsEnabled()
+local FFlagResponsiveUnitsDeprecateTenFoot = SharedFlagsModule.FFlagResponsiveUnitsDeprecateTenFoot
+local NoFFlagResponsiveUnitsDeprecateTenFoot: boolean = require(RobloxGui.Modules.TenFootInterface):IsEnabled() and not FFlagResponsiveUnitsDeprecateTenFoot
 local RbxAnalyticsServiceExposePlaySessionIdEngineFeature = game:GetEngineFeature("RbxAnalyticsServiceExposePlaySessionId")
-local SharedFlagsModule = require(CorePackages.Workspace.Packages.SharedFlags)
 local FFlagEnableConsoleExpControls = SharedFlagsModule.FFlagEnableConsoleExpControls
 local FFlagChromeShortcutRemoveRespawnOnLeavePage = SharedFlagsModule.FFlagChromeShortcutRemoveRespawnOnLeavePage
 local IsPioneerLaunchFunction = require(CorePackages.Workspace.Packages.PioneerUtils).isPioneerLaunch
@@ -44,7 +45,7 @@ local View = FoundationModule.View
 local RobloxTranslatorModule = require(CorePackages.Workspace.Packages.RobloxTranslator)
 
 local function LeaveButtonsContainer(p1)
-	-- upvalues: ReactModule (copy), UseLastInputFunction (copy), UseFocusGuiObjectFunction (copy), UseLocalizationFunction (copy), IsPioneerLaunchFunction (copy), LocalizationKeys (copy), ConstantsModule1 (copy), Input (copy), LeaveGameModule (copy), UtilityModule (copy), View (copy), IsEnabled (copy), Text (copy), Button (copy), InputSize (copy), FFlagConfirmationButtonsUseGreyButtonsModule (copy), ButtonVariant (copy)
+	-- upvalues: ReactModule (copy), UseLastInputFunction (copy), UseFocusGuiObjectFunction (copy), UseLocalizationFunction (copy), IsPioneerLaunchFunction (copy), LocalizationKeys (copy), ConstantsModule1 (copy), Input (copy), LeaveGameModule (copy), UtilityModule (copy), View (copy), NoFFlagResponsiveUnitsDeprecateTenFoot (copy), Text (copy), Button (copy), InputSize (copy), FFlagConfirmationButtonsUseGreyButtonsModule (copy), ButtonVariant (copy)
 	local UseRefResult = ReactModule.useRef(nil)
 	local UseLastInputResult = UseLastInputFunction()
 	local UseFocusGuiObjectResult = UseFocusGuiObjectFunction()
@@ -66,7 +67,7 @@ local function LeaveButtonsContainer(p1)
 	
 	return ReactModule.createElement(View, {
 		tag = "size-full-0 auto-y col",
-		Position = UDim2.new(0, 0, 0, if IsEnabled then 100 else 0)
+		Position = UDim2.new(0, 0, 0, if NoFFlagResponsiveUnitsDeprecateTenFoot then 100 else 0)
 	}, {
 		LeaveGameText = ReactModule.createElement(Text, {
 			LayoutOrder = 1,
@@ -74,9 +75,9 @@ local function LeaveButtonsContainer(p1)
 			Size = UDim2.new(1, 0, 0, if UtilityModule:IsSmallTouchScreen() then 100 else 200),
 			tag = {
 				["text-wrap"] = true,
-				["text-heading-medium"] = not UtilityModule:IsSmallTouchScreen() and not IsEnabled,
+				["text-heading-medium"] = not UtilityModule:IsSmallTouchScreen() and not NoFFlagResponsiveUnitsDeprecateTenFoot,
 				["text-heading-small"] = UtilityModule:IsSmallTouchScreen(),
-				["text-heading-large"] = IsEnabled
+				["text-heading-large"] = NoFFlagResponsiveUnitsDeprecateTenFoot
 			}
 		}),
 		LeaveButtonsContainer = ReactModule.createElement(View, {
@@ -88,7 +89,7 @@ local function LeaveButtonsContainer(p1)
 				text = UseLocalizationResult.LeaveGame,
 				size = InputSize.Large,
 				variant = if FFlagConfirmationButtonsUseGreyButtonsModule then ButtonVariant.Standard else ButtonVariant.SoftEmphasis,
-				width = UDim.new(0, if IsEnabled then 300 else 200),
+				width = UDim.new(0, if NoFFlagResponsiveUnitsDeprecateTenFoot then 300 else 200),
 				ref = UseRefResult,
 				onActivated = ReactModule.useCallback(function()
 					-- upvalues: IsPioneerLaunchFunction (upval), LeaveGameModule (upval)
@@ -106,7 +107,7 @@ local function LeaveButtonsContainer(p1)
 				text = UseLocalizationResult.DontLeaveGame,
 				size = InputSize.Large,
 				variant = ButtonVariant.Subtle,
-				width = UDim.new(0, if IsEnabled then 300 else 200),
+				width = UDim.new(0, if NoFFlagResponsiveUnitsDeprecateTenFoot then 300 else 200),
 				onActivated = ReactModule.useCallback(function()
 					-- upvalues: p1 (copy), UtilityModule (upval)
 					p1.dontLeaveFromButton(UtilityModule:IsUsingGamepad())
@@ -130,7 +131,7 @@ local function LeaveGameContainer(p1)
 end
 
 v1 = (function()
-	-- upvalues: RobloxGui (copy), RbxAnalyticsServiceExposePlaySessionIdEngineFeature (copy), RbxAnalyticsService (copy), ConstantsModule1 (copy), FFlagRefactorMenuConfirmationButtonsModule (copy), ReactRobloxModule (copy), ReactModule (copy), LeaveGameContainer (copy), IsPioneerLaunchFunction (copy), RobloxTranslatorModule (copy), LocalizationKeys (copy), CreateFunction (copy), ThemeModule (copy), IsEnabled (copy), UtilityModule (copy), LeaveGameModule (copy)
+	-- upvalues: RobloxGui (copy), RbxAnalyticsServiceExposePlaySessionIdEngineFeature (copy), RbxAnalyticsService (copy), ConstantsModule1 (copy), FFlagRefactorMenuConfirmationButtonsModule (copy), ReactRobloxModule (copy), ReactModule (copy), LeaveGameContainer (copy), IsPioneerLaunchFunction (copy), RobloxTranslatorModule (copy), LocalizationKeys (copy), CreateFunction (copy), ThemeModule (copy), NoFFlagResponsiveUnitsDeprecateTenFoot (copy), UtilityModule (copy), LeaveGameModule (copy)
 	local NewPage = require(RobloxGui.Modules.Settings.SettingsPageFactory):CreateNewPage()
 	NewPage.playsessionid = ""
 	
@@ -196,7 +197,7 @@ v1 = (function()
 		TextColor3 = Color3.new(1, 1, 1),
 		Size = UDim2.new(1, 0, 0, 200),
 		Parent = NewPage.Page,
-		Position = IsEnabled and UDim2.new(0, 0, 0, 100) or UDim2.new(0, 0, 0, 0)
+		Position = NoFFlagResponsiveUnitsDeprecateTenFoot and UDim2.new(0, 0, 0, 100) or UDim2.new(0, 0, 0, 0)
 	})
 	local Parent1 = CreateFunction("Frame")({
 		Name = "LeaveButtonContainer",
@@ -207,7 +208,7 @@ v1 = (function()
 	})
 	local _ = CreateFunction("UIGridLayout")({
 		Name = "LeavetButtonsLayout",
-		CellSize = IsEnabled and UDim2.new(0, 300, 0, 80) or UDim2.new(0, 200, 0, 50),
+		CellSize = NoFFlagResponsiveUnitsDeprecateTenFoot and UDim2.new(0, 300, 0, 80) or UDim2.new(0, 200, 0, 50),
 		CellPadding = UDim2.new(0, 20, 0, 20),
 		FillDirection = Enum.FillDirection.Horizontal,
 		HorizontalAlignment = Enum.HorizontalAlignment.Center,
@@ -219,7 +220,7 @@ v1 = (function()
 	if UtilityModule:IsSmallTouchScreen() then
 		Parent.FontSize = Enum.FontSize.Size24
 		Parent.Size = UDim2.new(1, 0, 0, 100)
-	elseif IsEnabled then
+	elseif NoFFlagResponsiveUnitsDeprecateTenFoot then
 		Parent.FontSize = Enum.FontSize.Size48
 	end
 	NewPage.LeaveGameButton = UtilityModule:MakeStyledButton("LeaveGame", if IsPioneerLaunchFunction() then RobloxTranslatorModule:FormatByKey(LocalizationKeys.QuitButton) else "Leave", nil, function()

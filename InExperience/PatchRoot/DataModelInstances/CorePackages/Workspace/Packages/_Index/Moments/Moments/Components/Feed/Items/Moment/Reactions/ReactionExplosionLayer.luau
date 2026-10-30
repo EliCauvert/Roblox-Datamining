@@ -1,8 +1,9 @@
-﻿local Parent = script:FindFirstAncestor("Moments").Parent
+﻿local Moments = script:FindFirstAncestor("Moments")
+local Parent = Moments.Parent
 local ReactModule = require(Parent.React)
 local View = require(Parent.Foundation).View
 local UseSignalStateFunction = require(Parent.SignalsReact).useSignalState
-local ReactionExplosionModule = require(script.Parent.ReactionExplosion)
+local ReactionExplosionModule = if require(Moments.Flags.FFlagMomentsUseSharedReactions) then require(Parent.Reactions.ReactionExplosion) else require(script.Parent.ReactionExplosion)
 local UseReactionEffectsFunction = require(script.Parent.ReactionEffectsContext).useReactionEffects
 local EXPLOSIONLAYERZINDEX = require(script.Parent.reactionsConstants).EXPLOSION_LAYER_ZINDEX
 local Signal = require(Parent.Signals).createSignal({})

@@ -18,7 +18,7 @@ local FocusRoot = FocusNavigationUtilsModule.FocusRoot
 local FocusNavigableSurfaceIdentifierEnum = FocusNavigationUtilsModule.FocusNavigableSurfaceIdentifierEnum
 local FocusNavigationEventNameEnum = FocusNavigationUtilsModule.FocusNavigationEventNameEnum
 local MomentMediaTile = MomentsCommonModule.Media.MomentMediaTile
-local Reaction = MomentsCommonModule.Components.Reaction
+local ReactionModule = if require(Moments.Flags.FFlagMomentsUseSharedReactions) then require(Parent.Reactions.Reaction) else MomentsCommonModule.Components.Reaction
 local ReactionSize = MomentsCommonModule.Enums.ReactionSize
 local FormFactor = MomentsCommonModule.Enums.FormFactor
 local UseDeviceInsetsFunction = MomentsCommonModule.Hooks.useDeviceInsets
@@ -178,7 +178,7 @@ local function OverviewSection(Frame)
 end
 
 local function EngagementSection(Frame)
-	-- upvalues: ReactModule (copy), View (copy), Reaction (copy), ReactionSize (copy), Text (copy), SectionHeading (copy)
+	-- upvalues: ReactModule (copy), View (copy), ReactionModule (copy), ReactionSize (copy), Text (copy), SectionHeading (copy)
 	local Elements = {}
 	
 	for LayoutOrder, reactionCount in Frame.viewProps.reactionCounts do
@@ -187,7 +187,7 @@ local function EngagementSection(Frame)
 			LayoutOrder = LayoutOrder,
 			Size = UDim2.fromOffset(38, 0)
 		}, {
-			Reaction = ReactModule.createElement(Reaction, {
+			Reaction = ReactModule.createElement(ReactionModule, {
 				LayoutOrder = 1,
 				reactionType = reactionCount.reactionType,
 				size = ReactionSize.Small

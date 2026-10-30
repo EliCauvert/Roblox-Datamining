@@ -23,9 +23,10 @@ local SharedFlagsModule = require(Parent.SharedFlags)
 local FFlagAddIEMProfilePage = SharedFlagsModule.FFlagAddIEMProfilePage
 local FFlagEnableSocialTabsPage = SharedFlagsModule.FFlagEnableSocialTabsPage
 local FFlagProfilePlatformEnableSchoolChip = SharedFlagsModule.FFlagProfilePlatformEnableSchoolChip
+local FFlagSocialTabsPageIxpEnabledModule = require(ProfilePlatform.Flags.FFlagSocialTabsPageIxpEnabled)
 
 return function(p1)
-	-- upvalues: UseProfileWrapperContextModule (copy), UseProfileAnalyticsContextModule (copy), UseAreWebViewsSupportedModule (copy), UseLocalUserIdFunction (copy), UseDynamicSizeMarginModule (copy), FFlagAddIEMProfilePage (copy), GetFFlagEnableProfileInsightsApolloMigrationFunction (copy), UseSignalProfileInsightsByUserIdFunction (copy), UseProfileInsightsByUserIdsFunction (copy), GetProfileInsightsByUserIdFromDataFunction (copy), UseSocialCountsDataModule (copy), UseSocialCountsActionsModule (copy), FFlagEnableSocialTabsPage (copy), FFlagProfilePlatformEnableSchoolChip (copy), UseSchoolChipModule (copy), ReactModule (copy), EnumsModule (copy), ChipSize (copy), ChipGroup (copy)
+	-- upvalues: UseProfileWrapperContextModule (copy), UseProfileAnalyticsContextModule (copy), UseAreWebViewsSupportedModule (copy), UseLocalUserIdFunction (copy), UseDynamicSizeMarginModule (copy), FFlagAddIEMProfilePage (copy), GetFFlagEnableProfileInsightsApolloMigrationFunction (copy), UseSignalProfileInsightsByUserIdFunction (copy), UseProfileInsightsByUserIdsFunction (copy), GetProfileInsightsByUserIdFromDataFunction (copy), UseSocialCountsDataModule (copy), UseSocialCountsActionsModule (copy), FFlagEnableSocialTabsPage (copy), FFlagSocialTabsPageIxpEnabledModule (copy), FFlagProfilePlatformEnableSchoolChip (copy), UseSchoolChipModule (copy), ReactModule (copy), EnumsModule (copy), ChipSize (copy), ChipGroup (copy)
 	local UseProfileWrapperContextModuleResult = UseProfileWrapperContextModule()
 	local UseProfileAnalyticsContextModuleResult = UseProfileAnalyticsContextModule()
 	local UseAreWebViewsSupportedModuleResult = UseAreWebViewsSupportedModule()
@@ -51,7 +52,7 @@ return function(p1)
 		table.insert(Ids, value.id)
 	end
 	local UseSocialCountsDataModuleResult = UseSocialCountsDataModule(ProfileId, IsProfileIdMatch, UseAreWebViewsSupportedModuleResult, Ids)
-	local UseSocialCountsActionsModuleResult = UseSocialCountsActionsModule(ProfileId, IsProfileIdMatch, UseProfileAnalyticsContextModuleResult, Ids, if FFlagEnableSocialTabsPage then p1.title else nil)
+	local UseSocialCountsActionsModuleResult = UseSocialCountsActionsModule(ProfileId, IsProfileIdMatch, UseProfileAnalyticsContextModuleResult, Ids, if FFlagEnableSocialTabsPage then p1.title else nil, if FFlagSocialTabsPageIxpEnabledModule then UseAreWebViewsSupportedModuleResult else nil)
 	local UseSchoolChipModuleResult = if FFlagProfilePlatformEnableSchoolChip then UseSchoolChipModule(UseProfileAnalyticsContextModuleResult) else nil
 	
 	return ReactModule.createElement("Frame", {

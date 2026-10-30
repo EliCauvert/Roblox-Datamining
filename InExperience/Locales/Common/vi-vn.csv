@@ -81,6 +81,7 @@ Authentication.Login.Action.QuickSignIn,Đăng nhập nhanh
 Authentication.Login.Action.Save,Lưu
 Authentication.Login.Button.CloseAndSwitchPlatformAccount,Thoát Roblox để chuyển tài khoản sang {platformAccountName}
 Authentication.Login.Button.UseDifferentRobloxAccount,Sử dụng tài khoản Roblox khác
+Authentication.Login.Button.XboxAccountSwitcher,Đổi tài khoản Xbox
 Authentication.Login.Error.PasskeyOnlyAccount,Tài khoản của bạn được thiết lập ở chế độ chỉ cho phép đăng nhập bằng khóa bảo mật. Hãy đăng nhập bằng khóa bảo mật hoặc tiến hành khôi phục tài khoản.
 Authentication.Login.Error.PlatformAccountConnectionFailure,Không xác minh được tài khoản trên nền tảng. Vui lòng thử lại sau.
 Authentication.Login.Heading.IncompatibleAccounts,Tài khoản không phù hợp
@@ -432,13 +433,16 @@ CommonUI.Features.Action.Continue,
 CommonUI.Features.Action.LearnMore,
 CommonUI.Features.Action.LessLowercase,ẩn bớt
 CommonUI.Features.Action.MoreLowercase,xem thêm
+CommonUI.Features.Action.OK,
 CommonUI.Features.Action.Send,
+CommonUI.Features.Action.ViewDetails,Xem chi tiết
 CommonUI.Features.Label.About,Về sản phẩm
 CommonUI.Features.Label.AcceptFriend,Chấp nhận làm bạn
 CommonUI.Features.Label.Add,Thêm
 CommonUI.Features.Label.AddConnection,Thêm Người quen
 CommonUI.Features.Label.AddConnections,
 CommonUI.Features.Label.AddFriend,Thêm bạn bè
+CommonUI.Features.Label.Avatar,Avatar
 CommonUI.Features.Label.Badges,Huy hiệu
 CommonUI.Features.Label.Charts,Bảng xếp hạng
 CommonUI.Features.Label.Chat,Trò chuyện
@@ -474,7 +478,6 @@ CommonUI.Features.Label.Sent,Đã gửi
 CommonUI.Features.Label.Settings,
 CommonUI.Features.Label.Terms,Điều khoản
 CommonUI.Features.Label.TermsOfUse,Điều khoản sử dụng
-CommonUI.Features.Label.Thanks,Cảm ơn
 CommonUI.Features.Label.TheHunt,Sự kiện Roblox
 CommonUI.Features.Label.Trades,Trao đổi
 CommonUI.Features.Label.Unchecked,Chưa được kiểm tra
@@ -653,6 +656,7 @@ CoreScripts.EmoteThumbnailEditor.Heading.EditThumbnail,Chỉnh sửa hình nhỏ
 CoreScripts.EmoteThumbnailEditor.Label.Rotation,Xoay
 CoreScripts.EmoteThumbnailEditor.Label.Time,Thời gian
 CoreScripts.FTUX.Description.WhiteMenuPlaytestMode,Menu Roblox màu trắng cho biết bạn đang chơi thử. Luôn tuân thủ Tiêu chuẩn cộng đồng của Roblox.
+CoreScripts.FTUX.Description.WhiteMenuPreviewing,Menu Roblox màu trắng cho biết bạn đang xem trò chơi này trước khi trò chơi được phát hành cho mọi người.
 CoreScripts.FTUX.Heading.CheckOutRobloxConnect,Mới: Hãy xem qua Roblox Connect!
 CoreScripts.FTUX.Heading.CheckOutRobloxParty,Mới: Hãy xem Party Roblox!
 CoreScripts.FTUX.Heading.InExperienceShop,Mua Robux trong Cửa hàng
@@ -664,6 +668,7 @@ CoreScripts.FTUX.Heading.NewTiltUpdate,Menu mới
 CoreScripts.FTUX.Heading.ReadyToPlaytest,Bạn đã sẵn sàng chơi thử chưa?
 CoreScripts.FTUX.Heading.SideSheetUpdate,Tất cả thao tác ở một nơi
 CoreScripts.FTUX.Heading.SocialOnboarding,Tính năng xã hội
+CoreScripts.FTUX.Heading.YouAreAnEarlyTester,Bạn là người chơi thử sớm
 CoreScripts.FTUX.Label.AvatarSwitcherDescription,Chuyển sang avatar bạn đã lưu bất cứ lúc nào.
 CoreScripts.FTUX.Label.ChatWithYourFriendsAnytime,Trò chuyện với bạn bè bất cứ lúc nào.
 CoreScripts.FTUX.Label.InExperienceShopDescription,Một số gói có kèm vật phẩm thưởng
@@ -1049,7 +1054,7 @@ CoreScripts.PublishAssetPrompt.Cancel,
 CoreScripts.PublishAssetPrompt.Description,
 CoreScripts.PublishAssetPrompt.DisclaimerAvatar,"Tôi đồng ý rằng trải nghiệm này sẽ gửi bộ phận của avatar để kiểm duyệt, rồi tải lên mục Sản Phẩm sáng tạo của tôi."
 CoreScripts.PublishAssetPrompt.DisclaimerEmote,Tôi đồng ý rằng trải nghiệm này sẽ gửi biểu cảm của tôi đi kiểm duyệt và tải lên Sản phẩm sáng tạo của tôi.
-CoreScripts.PublishAssetPrompt.DisclaimerImage,Tôi đồng ý rằng trải nghiệm này sẽ gửi hình ảnh của tôi đến bộ phận kiểm duyệt rồi lưu vào mục Sản phẩm sáng tạo của tôi.
+CoreScripts.PublishAssetPrompt.DisclaimerImage,"Tôi đồng ý rằng trải nghiệm này sẽ gửi hình ảnh của tôi đến bộ phận kiểm duyệt rồi tải lên mục Sản phẩm sáng tạo của tôi. Quyền riêng tư đối với hình ảnh sẽ được đặt thành ""Sử dụng rộng rãi"". Bất kỳ nhà sáng tạo hay trò chơi nào cũng có thể sử dụng hình ảnh này."
 CoreScripts.PublishAssetPrompt.DisclaimerModel,Các vật phẩm đã tạo sẽ được xem xét và bạn có thể không được hoàn tiền cho các vật phẩm bị từ chối do không tuân thủ Tiêu Chuẩn Cộng Đồng.
 CoreScripts.PublishAssetPrompt.InvalidDescription,Mô tả Không Hợp Lệ
 CoreScripts.PublishAssetPrompt.InvalidName,Tên Không Hợp Lệ
@@ -1135,15 +1140,11 @@ CoreScripts.TextChat.ChatWindow.ChatDisabled.OnlyViewSystemMessages,Hiện bạn
 CoreScripts.TextChat.ChatWindow.ChatDisabled.RegionUnavailable,Bạn chỉ có thể xem tin nhắn hệ thống tại đây. Khu vực của bạn chưa hỗ trợ tính năng trò chuyện.
 CoreScripts.TextChat.ChatWindow.ChatDisabled.SettingOff,Hiện bạn chỉ có thể xem tin nhắn hệ thống tại đây. Hãy cập nhật tùy chọn cài đặt Giao tiếp để bật tính năng trò chuyện.
 CoreScripts.TextChat.ChatWindow.ChatEnabled.ChatInRegion,Bạn chỉ có thể xem tin nhắn hệ thống và trò chuyện với người dùng trong khu vực của mình.
-CoreScripts.TextChat.ChatWindow.ChatEnabled.ChatWithAgeGroupAAndTF,Chỉ những người trong nhóm tuổi tương tự và bạn bè đáng tin cậy của bạn mới có thể trò chuyện với bạn.
 CoreScripts.TextChat.ChatWindow.ChatEnabled.ChatWithOnlinePlayers.BelowThreshold,Gửi lời chào đến tất cả những người đang chơi!
-CoreScripts.TextChat.ChatWindow.ChatEnabled.ChatWithOnlinePlayers.Local.WithCount,{RBX_COUNT} người chơi khác đang ở trong cuộc trò chuyện. Hãy gửi lời chào họ!
 CoreScripts.TextChat.ChatWindow.ChatEnabled.ChatWithOnlinePlayers.V3,👋 Gửi lời chào đến tất cả những người đang chơi vào lúc này nhé!
 CoreScripts.TextChat.ChatWindow.ChatEnabled.ChatWithTF,Chỉ bạn bè đáng tin cậy mới có thể trò chuyện với bạn.
 CoreScripts.TextChat.ChatWindow.ChatEnabled.Global2,Trò chuyện với nhiều người hơn trong trò chơi này. Chỉ những người trong nhóm tuổi tương tự mới có thể trò chuyện với bạn.
 CoreScripts.TextChat.ChatWindow.ChatEnabled.Global3,Trò chuyện với nhiều người khác trong trò chơi này!
-CoreScripts.TextChat.ChatWindow.ChatWithOnlinePlayers.Local.Friendly,✨ Cùng góp vui nào! Hãy gửi lời chào đến mọi người đang chơi lúc này nhé!
-CoreScripts.TextChat.ChatWindow.ChatWithOnlinePlayers.Local.WithCount,👋 {RBX_COUNT} người chơi đang ở trong cuộc trò chuyện. Hãy gửi lời chào nhé!
 CoreScripts.TextChat.ChatWindow.HandFreeTranscriptionFTUX,Nhấn giữ để dùng chế độ rảnh tay
 CoreScripts.TextChat.ChatWindow.RephrasedLabel,được diễn đạt lại
 CoreScripts.TextChat.ChatWindow.RephrasedReason.Description,Roblox sẽ diễn đạt lại các tin nhắn vi phạm quy tắc an toàn.
@@ -1521,7 +1522,7 @@ Feature.Avatar.Heading.AccessoryAdjustmentTitle,Điều Chỉnh Phụ Kiện
 Feature.Avatar.Heading.Active,Đang hoạt động
 Feature.Avatar.Heading.All,Tất Cả
 Feature.Avatar.Heading.Animations,Hiệu Ứng Động
-Feature.Avatar.Heading.AvatarLooksWidget,Avatar
+Feature.Avatar.Heading.AvatarLooksWidget,
 Feature.Avatar.Heading.BodyParts,Bộ Phận Thân
 Feature.Avatar.Heading.Clothing,Trang Phục
 Feature.Avatar.Heading.DeleteAssets,Xóa Tài Sản
@@ -1982,6 +1983,11 @@ Feature.AvatarSwitcher.Message.SelectAvatar,Chọn một avatar
 Feature.AvatarSwitcher.Message.SwitchingDeferred,"Bạn sẽ thấy avatar này sau lần hồi sinh tiếp theo, hoặc khi tham gia một trải nghiệm khác. Bạn có thể đổi sang avatar khác bất cứ lúc nào."
 Feature.AvatarSwitcher.Message.UnknownSupport,"Bạn vẫn có thể đổi avatar của mình, nhưng avatar có thể không hiển thị chính xác trong trải nghiệm này."
 Feature.AvatarSwitcher.Message.Unsupported,Trải nghiệm này sử dụng avatar tùy chỉnh và không hỗ trợ avatar Roblox.
+Feature.AvatarWorkshop.Action.TryAgain,
+Feature.AvatarWorkshop.Heading.AvatarWorkshop,Xưởng Avatar
+Feature.AvatarWorkshop.Message.LoadItemsError,Đã xảy ra lỗi khi tải vật phẩm của bạn.
+Feature.AvatarWorkshop.Message.LoadMoreItemsError,Không thể tải thêm vật phẩm.
+Feature.AvatarWorkshop.Message.NoItemsOwned,Bạn chưa sở hữu bất kỳ vật phẩm nào ở đây.
 Feature.BiometricChallenge.Action.Cancel,
 Feature.BiometricChallenge.Action.Continue,
 Feature.BiometricChallenge.Content.LivenessHostedPrompt,Mở trình duyệt bên ngoài và tự chụp ảnh bản thân để xác nhận bạn là người thật.
@@ -2171,7 +2177,10 @@ Feature.Build.Description.ManagedPricingAcknowledgement,Chế độ Giá đượ
 Feature.Build.Description.ManagedPricingCurrentProducts,Sử dụng chế độ Giá được quản lý cho tất cả các sản phẩm hiện tại
 Feature.Build.Description.ManagedPricingUnavailable,Hệ thống Giá được quản lý không khả dụng cho trải nghiệm này.
 Feature.Build.Description.NoEligibleManagedPricingProducts,Không có sản phẩm đủ điều kiện
+Feature.Build.Description.NoMonetizationDeveloperProducts,Sản phẩm của nhà phát triển là những vật phẩm mà người chơi có thể mua nhiều lần trong trò chơi của bạn
+Feature.Build.Description.NoMonetizationPasses,Vé là cách để bạn cho phép người chơi thanh toán một lần để mở khóa đặc quyền trong trò chơi của bạn
 Feature.Build.Description.NoMonetizationProducts,Mô tả vật phẩm bạn muốn tạo để bắt đầu kiếm Robux trong trò chơi của mình
+Feature.Build.Description.NoMonetizationSubscriptions,Gói đăng ký trong trò chơi là cách để bạn cho phép người chơi trả phí theo tháng để hưởng những lợi ích định kỳ
 Feature.Build.Description.PlayAfterPublish,Chọn đối tượng người chơi có thể tham gia sau khi bạn đăng trải nghiệm này.
 Feature.Build.Description.PlaytestLatest,Bạn đang chơi thử phiên bản mới nhất của mình. Hãy đăng phiên bản này khi bạn đã sẵn sàng chia sẻ.
 Feature.Build.Description.PlaytestLocked,Bạn có thể bắt đầu chơi thử sau khi tạo trò chơi đầu tiên.
@@ -2205,9 +2214,18 @@ Feature.Build.Error.DeveloperProductPriceInvalid,Giá phải là một số nguy
 Feature.Build.Error.DeveloperProductPriceRequiredForSale,Hãy chọn Chỉnh sửa và thêm giá trước khi đăng bán sản phẩm.
 Feature.Build.Error.DeveloperProductTextModerated,Bộ phận kiểm duyệt của Roblox đã thay đổi văn bản của sản phẩm này. Hãy thử dùng cách diễn đạt khác.
 Feature.Build.Error.ManagedPricingPartialUpdate,Không thể cập nhật một số sản phẩm.
+Feature.Build.Error.MonetizationImageFailed,Không tải được hình ảnh. Vui lòng thử lại.
+Feature.Build.Error.MonetizationImageInReview,Hình ảnh vẫn đang được xét duyệt. Vui lòng thử lại sau giây lát.
+Feature.Build.Error.MonetizationImagePreparing,Hình ảnh vẫn đang được chuẩn bị. Hãy thử lại sau giây lát.
+Feature.Build.Error.MonetizationImageTimedOut,Hình ảnh mất quá nhiều thời gian để tải. Vui lòng thử lại.
+Feature.Build.Error.MonetizationImageTooLarge,Hình ảnh lớn hơn 5 MB.
+Feature.Build.Error.MonetizationNoUniverse,Cuộc trò chuyện này không được liên kết với trò chơi nào.
 Feature.Build.Error.MonetizationOptionUpdate,Không thể cập nhật tùy chọn. Vui lòng thử lại.
 Feature.Build.Error.MonetizationOptionsLoad,Không tải được tùy chọn. Vui lòng thử lại.
 Feature.Build.Error.MonetizationPermissionDenied,Bạn không có quyền thay đổi tùy chọn kiếm tiền.
+Feature.Build.Error.MonetizationPriceRequiredForRegionalPricing,Hãy nhập giá để bật chế độ giá theo vùng.
+Feature.Build.Error.MonetizationPriceRequiredForSale,Hãy nhập giá trước khi đăng bán sản phẩm này.
+Feature.Build.Error.MonetizationRateLimited,Quá nhiều yêu cầu. Vui lòng thử lại sau giây lát.
 Feature.Build.Header.AccessSharing,Quyền truy cập và chia sẻ
 Feature.Build.Header.AllVersions,Tất cả các phiên bản
 Feature.Build.Header.Answers,Câu trả lời
@@ -2540,7 +2558,10 @@ Feature.Build.Title.GetUsers,Thu hút người dùng
 Feature.Build.Title.InsufficientRobuxForModel,Bạn không có đủ Robux
 Feature.Build.Title.ManagedPricingAcknowledgement,Mở chế độ Giá được quản lý?
 Feature.Build.Title.Monetization,Kiếm tiền
+Feature.Build.Title.NoMonetizationDeveloperProducts,Bạn chưa tạo Sản phẩm của nhà phát triển
+Feature.Build.Title.NoMonetizationPasses,Bạn chưa tạo Vé
 Feature.Build.Title.NoMonetizationProducts,Bắt đầu kiếm tiền trong trò chơi của bạn
+Feature.Build.Title.NoMonetizationSubscriptions,Bạn chưa tạo Gói đăng ký
 Feature.Build.Title.NoRobuxForUsage,Không còn Robux để sử dụng Build
 Feature.Build.Title.PickCampaign,Chọn thời lượng
 Feature.Build.Title.Playtesters,
@@ -2682,6 +2703,8 @@ Feature.Catalog.Header.InvalidOutfit,Trang Phục Không Hợp Lệ
 Feature.Catalog.Header.PostAvatar,
 Feature.Catalog.Heading.AvailableItems,Vật Phẩm Có Sẵn
 Feature.Catalog.Heading.BuyItem,
+Feature.Catalog.Heading.DescriptionLinkGoToMarketplace,Thao tác này sẽ đưa bạn đến Chợ
+Feature.Catalog.Heading.DescriptionLinkResetSearch,Thao tác này sẽ đặt lại nội dung tìm kiếm hiện tại của bạn
 Feature.Catalog.Heading.FreeItemConfirmation,Nhận Vật Phẩm
 Feature.Catalog.Heading.GoToExperience,Tham Gia Trải Nghiệm?
 Feature.Catalog.Heading.HoldingPolicy,Quy Định Nắm Giữ
@@ -2757,6 +2780,12 @@ Feature.Catalog.Label.CreatorName,Tên Nhà Sáng Tạo
 Feature.Catalog.Label.CurrentBalance,Số dư hiện tại:
 Feature.Catalog.Label.CustomizeAvatar,Tùy Chỉnh Avatar
 Feature.Catalog.Label.DeleteAvatarConfirmationPromptMessage,Bạn không thể hoàn tác hành động xóa này.
+Feature.Catalog.Label.DescriptionLinkInvalid,Đường liên kết không hợp lệ
+Feature.Catalog.Label.DescriptionLinkSearchMarketplace,Tìm kiếm trong chợ
+Feature.Catalog.Label.DescriptionLinkViewAsset,Xem tài sản
+Feature.Catalog.Label.DescriptionLinkViewBundle,Xem gói
+Feature.Catalog.Label.DescriptionLinkViewCommunity,Xem cộng đồng
+Feature.Catalog.Label.DescriptionLinkViewCommunityStore,Cửa hàng cho cộng đồng
 Feature.Catalog.Label.Details,Chi Tiết
 Feature.Catalog.Label.DynamicHeads,
 Feature.Catalog.Label.Emissive,Phát sáng
@@ -3343,6 +3372,7 @@ Feature.Friends.Description.TrustedFriendsExpiredLink,Vui lòng nhờ bạn bè 
 Feature.Friends.Description.TrustedFriendsInvalidLink,"Hãy đảm bảo bạn đã đăng nhập vào đúng tài khoản, sau đó thử lại."
 Feature.Friends.Description.TrustedFriendsRequestModalBody,Chỉ thêm những người bạn quen biết và tin tưởng. Trong hồ sơ của người bạn này có chức năng cho phép bạn quản lý họ bất cứ lúc nào.
 Feature.Friends.Description.TrustedFriendsUnavailable,Chưa hỗ trợ tính năng bạn bè đáng tin cậy ở khu vực của bạn.
+Feature.Friends.Description.TrustedFriendsWrongAccount,"Hãy đảm bảo bạn đã đăng nhập bằng tài khoản @{username}, sau đó thử lại."
 Feature.Friends.Description.YouCanDoMoreWithTrustedFriends,Bạn có thể làm nhiều việc hơn cùng bạn bè đáng tin cậy trên Roblox. Có thể quản lý người bạn này qua hồ sơ của họ bất cứ lúc nào.
 Feature.Friends.Error.AlreadyFriendError,Người dùng này đã là bạn bè rồi.
 Feature.Friends.Error.DefaultFriendingError,Không thể gửi yêu cầu kết bạn. Vui lòng thử lại sau.
@@ -3449,7 +3479,7 @@ Feature.Friends.Text.IsPlaying,đang chơi
 Feature.Friends.Text.NoConnections,"Bạn chưa thêm kết nối nào. Để bắt đầu, hãy tìm và thêm kết nối."
 Feature.Friends.Text.NoFriends,"Bạn chưa thêm bất kỳ người bạn nào. Để bắt đầu, hãy tìm và thêm bạn bè của bạn trên Roblox."
 Feature.Friends.Title.TrustedFriendsExpiredLink,Đường liên kết đã hết hạn
-Feature.Friends.Title.TrustedFriendsInvalidLink,Đường liên kết không hợp lệ
+Feature.Friends.Title.TrustedFriendsInvalidLink,
 Feature.Friends.TrustedConnection.Label.Trusted,
 Feature.Friends.TrustedFriend.AcceptTrustedRequest,Chấp nhận bạn bè đáng tin cậy
 Feature.Friends.TrustedFriend.Action.RemoveTrustedFriend,Xóa bạn bè đáng tin cậy
@@ -3541,7 +3571,7 @@ Feature.Groups.Action.NotNow,
 Feature.Groups.Action.RemovePrimary,Bỏ Làm Chính
 Feature.Groups.Action.SeeAll,
 Feature.Groups.Action.Unfollow,Hủy theo dõi
-Feature.Groups.Action.ViewGroup,Xem cộng đồng
+Feature.Groups.Action.ViewGroup,
 Feature.Groups.Description.JoinGroupPending,Yêu cầu tham gia của bạn đang chờ cộng đồng xét duyệt.
 Feature.Groups.Description.NotEligibleToJoin,Tài khoản của bạn không thể tham gia cộng đồng này.
 Feature.Groups.Description.PremiumMaxGroups,Bạn đã tham gia số lượng cộng đồng tối đa.
@@ -3647,6 +3677,7 @@ Feature.InExperienceIntervention.Description.LoseAccess,"Nếu tái phạm, bạ
 Feature.InExperienceIntervention.Description.MayLoseAccess,"Nếu lại tái phạm, bạn có thể mất quyền truy cập tài khoản của mình."
 Feature.InExperienceIntervention.Description.Mistake,Chúng tôi đã mắc lỗi?
 Feature.InExperienceIntervention.Description.PartyChatMayBeSuspended,Không được phép chia sẻ thông tin cá nhân trên Roblox. Tính năng trò chuyện của bạn có thể bị đình chỉ nếu bạn lại tiếp tục vi phạm quy tắc.
+Feature.InExperienceIntervention.Description.StartNewGameToTurnOnVoiceChat,Hãy bắt đầu trò chơi mới để bật tính năng nói chuyện.
 Feature.InExperienceIntervention.Description.TextChatMayBeSuspended,Quyền sử dụng tin nhắn văn bản của bạn có thể bị đình chỉ nếu bạn tiếp tục vi phạm quy tắc.
 Feature.InExperienceIntervention.Heading.CannotChat,Bạn không thể gửi tin nhắn trong {number} phút
 Feature.InExperienceIntervention.Heading.ChatBreaksRules,Tin nhắn văn bản của bạn đã vi phạm các quy tắc
@@ -3688,6 +3719,7 @@ Feature.InExperienceShop.Label.Timer.Minute.Singular,1 phút
 Feature.InExperienceShop.Label.Timer.Second.Plural,{number} giây
 Feature.InExperienceShop.Label.Timer.Second.Singular,1 giây
 Feature.InExperienceShop.Label.Trial,
+Feature.InExperienceShop.Label.Trialed,Đã dùng thử
 Feature.InExperienceShop.Message.RobuxPurchaseSuccess,Bạn đã mua thành công {ROBUX_AMOUNT} Robux
 Feature.Item.Label.DeleteFromInventoryConfirmUndercaseDelete,"Bạn có chắc chắn muốn xóa vĩnh viễn vật phẩm này khỏi kho? Nếu thay đổi ý định, bạn sẽ phải tự kiếm lại vật phẩm này trong một trải nghiệm."
 Feature.Item.Label.DeleteItemUndercase,Xóa vật phẩm
@@ -3795,6 +3827,7 @@ Feature.Moments.Label.ExceedsCharacterLimit,Vượt giới hạn ký tự
 Feature.Moments.Label.FeedEndBody,Xem lại sau hoặc tạo Khoảnh khắc của riêng bạn.
 Feature.Moments.Label.FeedEndTitle,Bạn đã giải quyết hết các yêu cầu đang chờ xử lý
 Feature.Moments.Label.FeedFailedToLoad,Không tải được bản tin
+Feature.Moments.Label.FeedFollowing,Đang theo dõi
 Feature.Moments.Label.FeedMyMoments,Khoảnh khắc của tôi
 Feature.Moments.Label.FeedTrending,Thịnh hành
 Feature.Moments.Label.FirstCommentInvite,Chưa có bình luận nào. Hãy là người đầu tiên bình luận!
@@ -3984,6 +4017,7 @@ Feature.PrivateServers.Action.CreatePrivateServer,Tạo Máy Chủ Riêng Tư
 Feature.PrivateServers.Action.FreeWithBlackbird,Miễn phí khi có gói Plus
 Feature.PrivateServers.Description.PrivateServerPurchaseUnavailableInStudio,Không hỗ trợ giao dịch mua máy chủ riêng tư trong Studio.
 Feature.PrivateServers.Description.VipServersNotSupported,Trò chơi này không hỗ trợ máy chủ riêng.
+Feature.PrivateServers.Label.OwnersServer,Máy chủ của {displayName}
 Feature.Profile.Action.AboutThisProfile,Về hồ sơ này
 Feature.Profile.Action.Accept,Chấp Nhận
 Feature.Profile.Action.AcceptFriends,Chấp Nhận Làm Bạn
@@ -4219,6 +4253,10 @@ Feature.ReportAbuse.Title.SelectInSceneContinueYourReport,
 Feature.ReportAbuse.Title.SelectInSceneFinishYourReport,Hoàn thành báo cáo của bạn
 Feature.ReportAbuse.Title.SelectInSceneIpReport,Cảm ơn bạn đã khởi tạo báo cáo trường hợp Vi phạm sở hữu trí tuệ
 Feature.ReportAbuse.Title.SelectInSceneThankYou,Cảm ơn bạn đã báo cáo
+Feature.RoCaptchaChallenge.Action.Cancel,
+Feature.RoCaptchaChallenge.Action.Play,
+Feature.RoCaptchaChallenge.Content.JoinChallenge,Chúng tôi nhận thấy có hoạt động bất thường trên tài khoản của bạn. Hãy chơi một trò chơi nhỏ để tiếp tục nhé.
+Feature.RoCaptchaChallenge.Title.Challenge,Hãy xác nhận rằng bạn là người thật
 Feature.RobloxSubscription.Action.JoinIn,Tham gia sau {time}
 Feature.RobloxSubscription.Action.Subscribe,Đăng ký
 Feature.RobloxSubscription.Action.TryItForFree,
@@ -4328,10 +4366,8 @@ Feature.SettingsHub.Heading.Report.ThanksForReport,Cảm ơn bạn đã báo cá
 Feature.SettingsHub.Label.AttachScreenshot,Đính Kèm Ảnh Chụp Màn Hình? (không bắt buộc)
 Feature.SettingsHub.Label.Captures,Chụp màn hình
 Feature.SettingsHub.Label.ChooseOne,Chọn Một
-Feature.SettingsHub.Label.Connect,
 Feature.SettingsHub.Label.Connected,Đã kết nối
 Feature.SettingsHub.Label.DefaultInviteMessage,Bạn có muốn mời {DisplayName} tham gia cùng bạn?
-Feature.SettingsHub.Label.Disconnect,Ngắt kết nối
 Feature.SettingsHub.Label.Disconnected,Mất kết nối
 Feature.SettingsHub.Label.DontLeaveButton,Đừng Rời Khỏi
 Feature.SettingsHub.Label.FriendsListLoadErrorMessage,Không thể tải bạn bè. Thử lại sau.
@@ -4779,8 +4815,6 @@ Feature.VirtualEvents.ShareModalCallToAction,Chia Sẻ Qua Khung Trò Chuyện..
 Feature.VirtualEvents.ShareModalLinkCopy,Sao Chép
 Feature.VirtualEvents.ShareModalTitle,Chia Sẻ Sự Kiện Này
 Feature.VirtualEvents.UnfollowEvent,Hủy Theo Dõi Sự Kiện
-Features.OnDemandAds.Get_Reward_In,Nhận phần thưởng sau
-Features.OnDemandAds.Reward_Earned,Đã cấp phần thưởng
 Features.Transfers.Action.BuyRobux,
 Features.Transfers.Action.Continue,
 Features.Transfers.Action.Ok,
@@ -5240,8 +5274,6 @@ Notifications.NotificationStream.Bundle.ShowLess,
 Notifications.NotificationStream.Bundle.ShowMoreV2,{notificationCount} thông báo khác
 Notifications.NotificationStream.Label.AllCaughtUp,Không có thông báo mới nào!
 Notifications.NotificationStream.Label.Notifications,
-Notifications.SafetyAvatarModeration.Description.NotificationTypeInExpWarnMsg,"Vui lòng thay đổi avatar. Sắp tới, người chơi có avatar vi phạm Tiêu chuẩn cộng đồng của chúng tôi sẽ bị đình chỉ tham gia trò chơi này."
-Notifications.SafetyAvatarModeration.Label.NotificationTypeInExpWarn,Avatar của bạn vi phạm quy định
 Notifications.SquadRegroupPrompt.ToastAction.Dismiss,
 Notifications.SquadRegroupPrompt.ToastAction.Join,
 Notifications.SquadRegroupPrompt.ToastLabel.ContinuePlayingTogether,Tiếp tục chơi cùng nhau

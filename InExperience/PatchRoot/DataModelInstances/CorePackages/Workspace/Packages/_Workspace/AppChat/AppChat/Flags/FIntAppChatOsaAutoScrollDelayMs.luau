@@ -1,0 +1,1 @@
+﻿return game:DefineFastInt("AppChatOsaAutoScrollDelayMs", 100)

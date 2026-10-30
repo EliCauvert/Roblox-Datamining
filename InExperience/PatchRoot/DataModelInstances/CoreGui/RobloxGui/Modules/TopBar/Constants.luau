@@ -9,14 +9,19 @@ local EnabledFunction = require(CorePackages.Workspace.Packages.Chrome).Enabled
 local ChromeShared = Parent.Chrome.ChromeShared
 local IsNewTiltIconEnabledModule = require(Parent.isNewTiltIconEnabled)
 local FFlagTopBarRefactor = require(CorePackages.Workspace.Packages.InExperienceTopBar).Flags.FFlagTopBarRefactor
+local FFlagResponsiveUnitsDeprecateTenFoot = require(CorePackages.Workspace.Packages.SharedFlags).FFlagResponsiveUnitsDeprecateTenFoot
 local IsSideSheetEnabledModule = require(CorePackages.Workspace.Packages.InExperienceSideSheetUtils.isSideSheetEnabled)
 local v1 = if EnabledFunction() then require(ChromeShared.Utility.GetStyleTokens)() else nil
 
 local function _(p1)
-	-- upvalues: TenFootInterfaceModule (copy), EnabledFunction (copy)
-	local v2: number = if TenFootInterfaceModule:IsEnabled() then 1.5 else 1
-	
-	return if EnabledFunction() then v2 * p1 else p1
+	-- upvalues: FFlagResponsiveUnitsDeprecateTenFoot (copy), TenFootInterfaceModule (copy), EnabledFunction (copy)
+	if FFlagResponsiveUnitsDeprecateTenFoot then
+		return p1
+	else
+		local v2: number = if TenFootInterfaceModule:IsEnabled() then 1.5 else 1
+		
+		return if EnabledFunction() then v2 * p1 else p1
+	end
 end
 
 local Size900 = if EnabledFunction() then v1.Size.Size_900 else 36
@@ -24,8 +29,12 @@ local SizeDelta = Size900 - 4
 local v2 = nil
 
 if EnabledFunction() then
-	local v3: number = if TenFootInterfaceModule:IsEnabled() then 1.5 else 1
-	v2 = if EnabledFunction() then v3 * 58 else 58
+	if FFlagResponsiveUnitsDeprecateTenFoot then
+		v2 = 58
+	else
+		local v3: number = if TenFootInterfaceModule:IsEnabled() then 1.5 else 1
+		v2 = if EnabledFunction() then v3 * 58 else 58
+	end
 else
 	v2 = 58
 end

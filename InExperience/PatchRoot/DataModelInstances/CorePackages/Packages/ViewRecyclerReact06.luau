@@ -1,1 +1,0 @@
-﻿return (require(script.Parent._Index["ViewRecyclerReact-31ab8d40-0.7.1"].ViewRecyclerReact))

@@ -10,35 +10,18 @@ local ReportAdPopup = require(Parent.AdGuiInteractivity).ReportAdPopup
 local Components = AdPlayer.components
 local VideoOverlayComponentModule = require(Components.VideoOverlayComponent)
 local ExitConfirmationModalComponentModule = require(Components.ExitConfirmationModalComponent)
-local FlagsModule = require(AdPlayer.Flags)
 local Frozen = table.freeze({ Loading = 1, Paused = 2, Playing = 3 })
 
 return function(p1)
-	-- upvalues: FlagsModule (copy), UseTokensFunction (copy), ReactModule (copy), Frozen (copy), RunService (copy), Components (copy), View (copy), StateLayerAffordance (copy), ExitConfirmationModalComponentModule (copy), ReportAdPopup (copy), VideoOverlayComponentModule (copy)
-	local EnableLuaRewardTimerUI = FlagsModule.GetEnableLuaRewardTimerUI()
+	-- upvalues: UseTokensFunction (copy), ReactModule (copy), Frozen (copy), RunService (copy), Components (copy), View (copy), StateLayerAffordance (copy), ExitConfirmationModalComponentModule (copy), ReportAdPopup (copy), VideoOverlayComponentModule (copy)
 	local UseTokensResult = UseTokensFunction()
 	local UseStateResult, UseStateResult2 = ReactModule.useState(0)
 	local UseBindingResult, UseBindingResult2 = ReactModule.useBinding(0)
-	local v1 = nil
-	local Callback = nil
-	
-	if EnableLuaRewardTimerUI then
-		v1, Callback = ReactModule.useBinding(0)
-	end
 	local UseStateResult1, UseStateResult2_1 = ReactModule.useState(false)
 	local UseStateResult3, UseStateResult2_2 = ReactModule.useState(false)
 	local UseStateResult4, UseStateResult2_3 = ReactModule.useState(Frozen.Loading)
-	local Ref = nil
-	local Ref1 = nil
-	
-	if EnableLuaRewardTimerUI then
-		Ref = ReactModule.createRef()
-		Ref1 = ReactModule.createRef()
-	else
-		Ref = ReactModule.useRef(nil)
-		Ref1 = ReactModule.useRef(nil)
-	end
-	local DurationNeededForReward = p1.durationNeededForReward
+	local UseRefResult = ReactModule.useRef(nil)
+	local UseRefResult1 = ReactModule.useRef(nil)
 	
 	local function dismissParentModals()
 		-- upvalues: UseStateResult2_1 (copy), UseStateResult2_2 (copy)
@@ -47,43 +30,33 @@ return function(p1)
 	end
 	
 	local function _()
-		-- upvalues: UseStateResult2_1 (copy), UseStateResult2_2 (copy), EnableLuaRewardTimerUI (copy), Ref (ref)
+		-- upvalues: UseStateResult2_1 (copy), UseStateResult2_2 (copy), UseRefResult (copy)
 		UseStateResult2_1(false)
 		UseStateResult2_2(false)
-		local Current = if EnableLuaRewardTimerUI then Ref.current else Ref:getValue()
+		local Value = UseRefResult:getValue()
 		
-		if Current then
-			Current.dismissModals()
+		if Value then
+			Value.dismissModals()
 		end
 	end
 	
 	ReactModule.useEffect(function()
-		-- upvalues: EnableLuaRewardTimerUI (copy), Ref1 (ref), UseStateResult2_3 (copy), Frozen (upval), UseStateResult2 (copy), p1 (copy), RunService (upval), UseBindingResult2 (copy), DurationNeededForReward (copy), Callback (ref)
-		local Current = nil
-		Current = if EnableLuaRewardTimerUI then Ref1.current else Ref1:getValue()
+		-- upvalues: UseRefResult1 (copy), UseStateResult2_3 (copy), Frozen (upval), UseStateResult2 (copy), p1 (copy), RunService (upval), UseBindingResult2 (copy)
+		local Value = UseRefResult1:getValue()
 		
-		if not Current.IsLoaded then
-			Current.Loaded:Wait()
+		if not Value.IsLoaded then
+			Value.Loaded:Wait()
 		end
 		UseStateResult2_3(Frozen.Playing)
-		UseStateResult2(Current.TimeLength)
-		Current.Ended:Connect(p1.onComplete)
+		UseStateResult2(Value.TimeLength)
+		Value.Ended:Connect(p1.onComplete)
 		local RenderSteppedConnection = RunService.RenderStepped:Connect(function()
-			-- upvalues: Current (ref), UseBindingResult2 (upval), EnableLuaRewardTimerUI (upval), DurationNeededForReward (upval), Callback (upval)
-			if Current.TimeLength > 0 then
-				UseBindingResult2(Current.TimePosition / Current.TimeLength)
-				
-				if EnableLuaRewardTimerUI and DurationNeededForReward then
-					if DurationNeededForReward == 0 then
-						Callback(1)
-						
-						return
-					end
-					Callback((math.min(Current.TimePosition / DurationNeededForReward, 1)))
-				end
+			-- upvalues: Value (copy), UseBindingResult2 (upval)
+			if Value.TimeLength > 0 then
+				UseBindingResult2(Value.TimePosition / Value.TimeLength)
 			end
 		end)
-		p1.onVideoFrameLoaded(Current)
+		p1.onVideoFrameLoaded(Value)
 		
 		return function()
 			-- upvalues: RenderSteppedConnection (copy)
@@ -107,7 +80,7 @@ return function(p1)
 			Video = p1.creativeAssetUrl,
 			Playing = NoUseStateResult1_1,
 			Transparency = if UseStateResult1 then 0.4 else 0,
-			ref = Ref1
+			ref = UseRefResult1
 		}, {
 			ReactModule.createElement("UIAspectRatioConstraint", {
 				AspectRatio = 1.7777777777777777,
@@ -135,12 +108,10 @@ return function(p1)
 				adInfo = p1.getReportAdInfo()
 			}),
 			videoOverlay = ReactModule.createElement(VideoOverlayComponentModule, {
-				ref = Ref,
+				ref = UseRefResult,
 				alpha = UseBindingResult,
 				totalDuration = UseStateResult,
 				parentModalOpen = UseStateResult1_1,
-				rewardWaitTime = if EnableLuaRewardTimerUI then DurationNeededForReward else nil,
-				rewardWaitAlpha = if EnableLuaRewardTimerUI then v1 else nil,
 				dismissModals = dismissParentModals,
 				parentPaused = not NoUseStateResult1_1,
 				showWhyThisAd = p1.showWhyThisAd,
@@ -155,18 +126,13 @@ return function(p1)
 					UseStateResult2_2(true)
 				end,
 				showExitConfirmationModal = function()
-					-- upvalues: FlagsModule (upval), v1 (ref), p1 (copy), UseStateResult2_1 (copy), UseStateResult2_2 (copy), EnableLuaRewardTimerUI (copy), Ref (ref)
-					if FlagsModule.GetEnableLuaRewardTimerUI() and v1:getValue() >= 1 then
-						p1.onComplete()
-						
-						return
-					end
+					-- upvalues: UseStateResult2_1 (copy), UseStateResult2_2 (copy), UseRefResult (copy)
 					UseStateResult2_1(false)
 					UseStateResult2_2(false)
-					local Current = if EnableLuaRewardTimerUI then Ref.current else Ref:getValue()
+					local Value = UseRefResult:getValue()
 					
-					if Current then
-						Current.dismissModals()
+					if Value then
+						Value.dismissModals()
 					end
 					UseStateResult2_1(true)
 				end

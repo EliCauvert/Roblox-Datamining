@@ -7,6 +7,7 @@ local NormalizeFontFaceFunction = FoundationModule.Utility.normalizeFontFace
 local FFlagExpChatEnableFriendsTab = require(Parent.SharedFlags).FFlagExpChatEnableFriendsTab
 local FFlagChatInputBarGuardInvalidUtf8 = require(Parent.SharedFlags).FFlagChatInputBarGuardInvalidUtf8
 local FoundationFontFaceMigration = FoundationModule.Utility.Flags.FoundationFontFaceMigration
+local FFlagExpChatComposerKeepTrayEntryMountedModule = require(ChatUIPrimitives.Flags.FFlagExpChatComposerKeepTrayEntryMounted)
 local GetTextLengthIfValidUtf8Module = require(script.Parent.getTextLengthIfValidUtf8)
 local ChannelChipModule = require(script.Parent.ChannelChip)
 local _ = require(ChatUIPrimitives.universal.Autocomplete.AutocompleteTypes)
@@ -283,7 +284,7 @@ local function renderLegacy(p1)
 end
 
 local function renderComposer(p1)
-	-- upvalues: ReactModule (copy), FoundationModule (copy), renderDropdown (copy), renderSideChip (copy), ReactIsModule (copy), FoundationFontFaceMigration (copy), NormalizeFontFaceFunction (copy), renderSendButton (copy), renderFallbackDisabledOverlay (copy)
+	-- upvalues: ReactModule (copy), FoundationModule (copy), renderDropdown (copy), FFlagExpChatComposerKeepTrayEntryMountedModule (copy), renderSideChip (copy), ReactIsModule (copy), FoundationFontFaceMigration (copy), NormalizeFontFaceFunction (copy), renderSendButton (copy), renderFallbackDisabledOverlay (copy)
 	local Tokens = p1.tokens
 	local Props = p1.props
 	local FontSize = Tokens.Typography.BodyMedium.FontSize
@@ -293,20 +294,24 @@ local function renderComposer(p1)
 		-- upvalues: Tokens (copy)
 		return UDim2.new(1, -(if p2 > 0 then p2 + Tokens.Size.Size_200 else 0), 0, 0)
 	end)
-	local CreateElementFunction = ReactModule.createElement
+	local CreateElementFunction4 = ReactModule.createElement
 	local View = FoundationModule.View
 	local config = { tag = "size-full-0 auto-y", ref = p1.barContainerRef }
 	local config1 = {
 		Dropdown = renderDropdown(p1),
 		TrayOverlay = p1.trayOverlay
 	}
-	local CreateElementFunction4 = ReactModule.createElement
+	local CreateElementFunction3 = ReactModule.createElement
 	local View1 = FoundationModule.View
 	local config2 = { tag = "row align-y-center gap-small size-full-0 auto-y" }
 	local config3 = {
-		LeadingButton = if p1.showLeadingAction then ReactModule.createElement(FoundationModule.View, { LayoutOrder = 1, tag = "auto-xy" }, { Action = p1.leadingAddon }) else nil
+		LeadingButton = if FFlagExpChatComposerKeepTrayEntryMountedModule then if p1.hasLeadingAction then ReactModule.createElement(FoundationModule.View, {
+			LayoutOrder = 1,
+			tag = "auto-xy",
+			Visible = p1.showLeadingAction
+		}, { Action = p1.leadingAddon }) else nil elseif p1.showLeadingAction then ReactModule.createElement(FoundationModule.View, { LayoutOrder = 1, tag = "auto-xy" }, { Action = p1.leadingAddon }) else nil
 	}
-	local CreateElementFunction3 = ReactModule.createElement
+	local CreateElementFunction2 = ReactModule.createElement
 	local View2 = FoundationModule.View
 	local config4 = {
 		LayoutOrder = 2,
@@ -325,7 +330,7 @@ local function renderComposer(p1)
 	if p1.shouldReplaceDisabledContent then
 		TextContainer = nil
 	else
-		local CreateElementFunction2 = ReactModule.createElement
+		local CreateElementFunction1 = ReactModule.createElement
 		local View3 = FoundationModule.View
 		local config6 = {
 			tag = "auto-y",
@@ -346,7 +351,7 @@ local function renderComposer(p1)
 		if p1.canChat then
 			DisabledLabel = nil
 		else
-			local CreateElementFunction1 = ReactModule.createElement
+			local CreateElementFunction = ReactModule.createElement
 			local Text = FoundationModule.Text
 			local Label = {
 				tag = "position-top-right anchor-top-right auto-y text-body-medium text-align-x-left text-truncate-end content-muted",
@@ -366,7 +371,7 @@ local function renderComposer(p1)
 				MapResult1 = TransparencyValue * 0.5 + 0.5
 			end
 			Label.TextTransparency = MapResult1
-			DisabledLabel = CreateElementFunction1(Text, Label)
+			DisabledLabel = CreateElementFunction(Text, Label)
 		end
 		config7.DisabledLabel = DisabledLabel
 		config7.TextBoxContainer = if p1.canChat then ReactModule.createElement(FoundationModule.View, {
@@ -402,7 +407,7 @@ local function renderComposer(p1)
 				Selectable = Props.selectionImageObject ~= nil or nil
 			})
 		}) else nil
-		TextContainer = CreateElementFunction2(View3, config6, config7)
+		TextContainer = CreateElementFunction1(View3, config6, config7)
 	end
 	config5.TextContainer = TextContainer
 	config5.SendButtonContainer = if NoShouldReplaceDisabledContent then ReactModule.createElement("CanvasGroup", {
@@ -420,14 +425,14 @@ local function renderComposer(p1)
 		SendButton = renderSendButton(p1)
 	}) else nil
 	config5.DisabledOverlay = renderFallbackDisabledOverlay(p1)
-	config3.InputGroup = CreateElementFunction3(View2, config4, config5)
-	config1.Container = CreateElementFunction4(View1, config2, config3)
+	config3.InputGroup = CreateElementFunction2(View2, config4, config5)
+	config1.Container = CreateElementFunction3(View1, config2, config3)
 	
-	return CreateElementFunction(View, config, config1)
+	return CreateElementFunction4(View, config, config1)
 end
 
 return ReactModule.memo(function(Props)
-	-- upvalues: FoundationModule (copy), FFlagExpChatEnableFriendsTab (copy), ReactModule (copy), ReactIsModule (copy), deriveBackgroundStyle (copy), deriveTransparency (copy), UseChatAutocompleteEngineModule (copy), UseAutocompleteSourcesModule (copy), FFlagChatInputBarGuardInvalidUtf8 (copy), GetTextLengthIfValidUtf8Module (copy), UseExpressionTrayModule (copy), ExpressionTrayViewModule (copy), renderComposer (copy), renderLegacy (copy)
+	-- upvalues: FoundationModule (copy), FFlagExpChatEnableFriendsTab (copy), ReactModule (copy), ReactIsModule (copy), deriveBackgroundStyle (copy), deriveTransparency (copy), UseChatAutocompleteEngineModule (copy), UseAutocompleteSourcesModule (copy), FFlagChatInputBarGuardInvalidUtf8 (copy), GetTextLengthIfValidUtf8Module (copy), UseExpressionTrayModule (copy), ExpressionTrayViewModule (copy), FFlagExpChatComposerKeepTrayEntryMountedModule (copy), renderComposer (copy), renderLegacy (copy)
 	local UseTokensResult = FoundationModule.Hooks.useTokens()
 	local ThemedColors = Props.themedColors
 	local SurfaceColor3 = if ThemedColors then UseTokensResult.Color.Surface.Surface_100.Color3 else UseTokensResult.DarkMode.Surface.Surface_100.Color3
@@ -632,6 +637,18 @@ return ReactModule.memo(function(Props)
 	end
 	local LeftAddon = if Element == nil then Props.leftAddon else Element
 	local HasLeftAddon = LeftAddon ~= nil
+	local NoHasDisabledOverlay: boolean = HasLeftAddon and (UseStateResult and not HasDisabledOverlay)
+	
+	if FFlagExpChatComposerKeepTrayEntryMountedModule then
+		local NoNoHasDisabledOverlay: boolean = Props.composerLayout == true and (UseExpressionTrayModuleResult ~= nil and (UseExpressionTrayModuleResult.isOpen and not NoHasDisabledOverlay))
+		local OnPressedOutside = if UseExpressionTrayModuleResult == nil then nil else UseExpressionTrayModuleResult.onPressedOutside
+		ReactModule.useEffect(function()
+			-- upvalues: NoNoHasDisabledOverlay (copy), OnPressedOutside (copy)
+			if NoNoHasDisabledOverlay and OnPressedOutside ~= nil then
+				OnPressedOutside()
+			end
+		end, { NoNoHasDisabledOverlay, OnPressedOutside })
+	end
 	assert(Props.autocomplete == nil or Props.autocompleteOptions == nil, "Pass autocomplete or autocompleteOptions, not both")
 	local config = {
 		sendButtonContainerWidth = 30,
@@ -643,7 +660,7 @@ return ReactModule.memo(function(Props)
 		isEmpty = UseStateResult,
 		isSendDisabled = UseStateResult or not CanLocalUserChat,
 		hasLeadingAction = HasLeftAddon,
-		showLeadingAction = HasLeftAddon and (UseStateResult and not HasDisabledOverlay),
+		showLeadingAction = NoHasDisabledOverlay,
 		shouldReplaceDisabledContent = HasDisabledOverlay,
 		transparencyValue = TransparencyValue,
 		textColor = EmphasisColor3,

@@ -5,10 +5,11 @@ local FoundationModule = require(Parent.Foundation)
 local FFlagDebugAppChatEnableDomLocatorsModule = require(AppChat.Flags.FFlagDebugAppChatEnableDomLocators)
 local FFlagAppChatExtendConversationListRowDividersModule = require(AppChat.Flags.FFlagAppChatExtendConversationListRowDividers)
 local FFlagAppChatRemoveConversationListDividerModule = require(AppChat.Flags.FFlagAppChatRemoveConversationListDivider)
+local FFlagAppChatAlignCustomConversationListRowChevronModule = require(AppChat.Flags.FFlagAppChatAlignCustomConversationListRowChevron)
 local UseCustomConversationListRowPresentationModule = require(script.Parent.useCustomConversationListRowPresentation)
 
 return ReactModule.memo(function(p1)
-	-- upvalues: UseCustomConversationListRowPresentationModule (copy), FoundationModule (copy), ReactModule (copy), FFlagDebugAppChatEnableDomLocatorsModule (copy), FFlagAppChatExtendConversationListRowDividersModule (copy), FFlagAppChatRemoveConversationListDividerModule (copy)
+	-- upvalues: UseCustomConversationListRowPresentationModule (copy), FoundationModule (copy), ReactModule (copy), FFlagDebugAppChatEnableDomLocatorsModule (copy), FFlagAppChatExtendConversationListRowDividersModule (copy), FFlagAppChatAlignCustomConversationListRowChevronModule (copy), FFlagAppChatRemoveConversationListDividerModule (copy)
 	local UseCustomConversationListRowPresentationModuleResult = UseCustomConversationListRowPresentationModule({
 		entryHeight = p1.entryHeight,
 		onActivated = p1.onActivated
@@ -85,8 +86,11 @@ return ReactModule.memo(function(p1)
 							})
 						}),
 						chevron = ReactModule.createElement(FoundationModule.View, {
-							tag = "row align-x-center align-y-center size-1200-full",
-							LayoutOrder = 2
+							LayoutOrder = 2,
+							tag = {
+								["row align-y-center size-0-full auto-x"] = FFlagAppChatAlignCustomConversationListRowChevronModule,
+								["row align-x-center align-y-center size-1200-full"] = not FFlagAppChatAlignCustomConversationListRowChevronModule
+							}
 						}, {
 							icon = ReactModule.createElement(FoundationModule.Icon, {
 								name = FoundationModule.Enums.IconName.ChevronLargeRight,

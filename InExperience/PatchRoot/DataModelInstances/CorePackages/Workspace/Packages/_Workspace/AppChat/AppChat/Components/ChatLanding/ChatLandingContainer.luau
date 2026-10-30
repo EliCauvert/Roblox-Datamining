@@ -11,6 +11,8 @@ local ComponentsModule = require(Parent.FriendsLanding.Components)
 local ReactModule = require(Parent.React)
 local RoactRoduxModule = require(Parent.RoactRodux)
 local SharedFlagsModule = require(Parent.SharedFlags)
+local UseThemeBackgroundFunction = require(Parent.ThemeBackground).useThemeBackground
+local FFlagAppThemeHalloween2026ChatBackgroundModule = require(AppChat.Flags.FFlagAppThemeHalloween2026ChatBackground)
 local UIBloxModule = require(Parent.UIBlox)
 local UseDispatchFunction = require(Parent.RoactUtils).Hooks.RoactRodux.useDispatch
 local UseEffectOnMountFunction = require(Parent.RoactUtils).Hooks.useEffectOnMount
@@ -122,7 +124,7 @@ local _ = function(p2)
 end
 
 function ChatLandingContainer(p2)
-	-- upvalues: CryoModule (copy), config (copy), UseAnalyticsModule (copy), UseChatPlacementContextFunction (copy), UseDispatchFunction (copy), UseIsChatEnabledModule (copy), UseIsGroupChatEnabledModule (copy), UseIsChatEnabledFromReasonModule (copy), UseIsInExperienceModule (copy), UseAppChatIsWideModeModule (copy), FFlagAppChatPerfTrackingModule (copy), FFlagAppChatMessageTTIMilestonesModule (copy), AppChatPerfTrackerModule (copy), UseIsAppLoadedModule (copy), UseAreConversationsFetchingModule (copy), UseHasConversationsModule (copy), UseIsOldestConversationFetchedModule (copy), UseLocalUserIdFunction (copy), UseNavigationFunction (copy), UseStyleFunction (copy), UseTextSizeOffsetFunction (copy), UseAnalyticsModule1 (copy), FFlagAppChatConsoleFocusFixesModule (copy), UseTokensFunction (copy), FFlagCreateConnectionsHub (copy), UseGetConversationsModule (copy), ShouldReadConversationListFromSignalsStore (copy), UseConversationListModule (copy), FFlagAppChatConversationLoadRetryModule (copy), UseSelectorFunction (copy), AppChatNetworkingModule (copy), RoduxNetworkingModule (copy), FFlagAppChatServerSideConversationSearchModule (copy), FFlagAppChatSkipSearchWhenChatDisabledModule (copy), UseConversationSearchListPropsModule (copy), FFlagAppChatSearchSessionTelemetryModule (copy), UseChatSearchSessionModule (copy), UseEffectFunction (copy), GetConversationIdsModule (copy), NewResult (copy), HttpService (copy), UsePreviousFunction (copy), FetchConversationsByPageModule (copy), ReactModule (copy), GetOtherParticipantsModule (copy), UseIsUserPendingModule (copy), ConversationChannelsModule (copy), GetConversationTitleModule (copy), UseTelemetryModule (copy), ChatLandingTelemetryLayerModule (copy), ChatLandingTelemetryStateModule (copy), UseEffectOnMountFunction (copy), ChatLandingTelemetryEventsModule (copy), UseLocalizationFunction (copy), UseCallbackFunction (copy), PartyPageCarouselExperimentation (copy), EventNamesModule (copy), Text (copy), Text1 (copy), EnumScreensModule (copy), CreateConversationModule (copy), ParseCreateConversationErrorsModule (copy), CreateConversationErrorModule (copy), UseIsExternalNavigationAvailableModule (copy), FFlagAppIaScrollAway (copy), AppNavBarModule (copy), UseCanAccessPartyModule (copy), SquadQuickStartExperimentation (copy), ChatLoadingContainerModule (copy), FoundationModule (copy), NoFriendsView (copy), EmptyStateTypeModule (copy), AppPage (copy), NoConversationsLandingModule (copy), ConversationListWithTopBarModule (copy), SignalsMigrationConfigModule (copy), FFlagEnableScrollAwayContentScrollableFix (copy), VisibilityControl (copy), GetFFlagChatTabHideGroupsLinkOnVRModule (copy), IsVRAppBuildFunction (copy), GetTopBarStoreModule (copy), ConversationGroupsEntryContainerModule (copy), UseChatIsVisibleModule (copy), FFlagAppChatVisibleIsInConversationModule (copy), GetIsInConversationForTelemetryModule (copy), FFlagSignalsNavP3hMisc (copy)
+	-- upvalues: CryoModule (copy), config (copy), UseAnalyticsModule (copy), UseChatPlacementContextFunction (copy), UseDispatchFunction (copy), UseIsChatEnabledModule (copy), UseIsGroupChatEnabledModule (copy), UseIsChatEnabledFromReasonModule (copy), UseIsInExperienceModule (copy), UseAppChatIsWideModeModule (copy), FFlagAppChatPerfTrackingModule (copy), FFlagAppChatMessageTTIMilestonesModule (copy), AppChatPerfTrackerModule (copy), UseIsAppLoadedModule (copy), UseAreConversationsFetchingModule (copy), UseHasConversationsModule (copy), UseIsOldestConversationFetchedModule (copy), UseLocalUserIdFunction (copy), UseNavigationFunction (copy), FFlagAppThemeHalloween2026ChatBackgroundModule (copy), UseThemeBackgroundFunction (copy), UseStyleFunction (copy), UseTextSizeOffsetFunction (copy), UseAnalyticsModule1 (copy), FFlagAppChatConsoleFocusFixesModule (copy), UseTokensFunction (copy), FFlagCreateConnectionsHub (copy), UseGetConversationsModule (copy), ShouldReadConversationListFromSignalsStore (copy), UseConversationListModule (copy), FFlagAppChatConversationLoadRetryModule (copy), UseSelectorFunction (copy), AppChatNetworkingModule (copy), RoduxNetworkingModule (copy), FFlagAppChatServerSideConversationSearchModule (copy), FFlagAppChatSkipSearchWhenChatDisabledModule (copy), UseConversationSearchListPropsModule (copy), FFlagAppChatSearchSessionTelemetryModule (copy), UseChatSearchSessionModule (copy), UseEffectFunction (copy), GetConversationIdsModule (copy), NewResult (copy), HttpService (copy), UsePreviousFunction (copy), FetchConversationsByPageModule (copy), ReactModule (copy), GetOtherParticipantsModule (copy), UseIsUserPendingModule (copy), ConversationChannelsModule (copy), GetConversationTitleModule (copy), UseTelemetryModule (copy), ChatLandingTelemetryLayerModule (copy), ChatLandingTelemetryStateModule (copy), UseEffectOnMountFunction (copy), ChatLandingTelemetryEventsModule (copy), UseLocalizationFunction (copy), UseCallbackFunction (copy), PartyPageCarouselExperimentation (copy), EventNamesModule (copy), Text (copy), Text1 (copy), EnumScreensModule (copy), CreateConversationModule (copy), ParseCreateConversationErrorsModule (copy), CreateConversationErrorModule (copy), UseIsExternalNavigationAvailableModule (copy), FFlagAppIaScrollAway (copy), AppNavBarModule (copy), UseCanAccessPartyModule (copy), SquadQuickStartExperimentation (copy), ChatLoadingContainerModule (copy), FoundationModule (copy), NoFriendsView (copy), EmptyStateTypeModule (copy), AppPage (copy), NoConversationsLandingModule (copy), ConversationListWithTopBarModule (copy), SignalsMigrationConfigModule (copy), FFlagEnableScrollAwayContentScrollableFix (copy), VisibilityControl (copy), GetFFlagChatTabHideGroupsLinkOnVRModule (copy), IsVRAppBuildFunction (copy), GetTopBarStoreModule (copy), ConversationGroupsEntryContainerModule (copy), UseChatIsVisibleModule (copy), FFlagAppChatVisibleIsInConversationModule (copy), GetIsInConversationForTelemetryModule (copy), FFlagSignalsNavP3hMisc (copy)
 	local JoinResult = CryoModule.Dictionary.join(config, p2)
 	local UseAnalyticsModuleResult = UseAnalyticsModule()
 	local UseChatPlacementContextResult = UseChatPlacementContextFunction()
@@ -144,6 +146,7 @@ function ChatLandingContainer(p2)
 	local UseIsOldestConversationFetchedModuleResult = UseIsOldestConversationFetchedModule()
 	local UseLocalUserIdResult = UseLocalUserIdFunction()
 	local UseNavigationResult = UseNavigationFunction()
+	local HasUseThemeBackgroundResult: boolean = if FFlagAppThemeHalloween2026ChatBackgroundModule then UseThemeBackgroundFunction() ~= nil else false
 	local UseStyleResult = UseStyleFunction()
 	local UseTextSizeOffsetResult: number = UseTextSizeOffsetFunction()
 	local UseAnalyticsModuleResult1 = UseAnalyticsModule1()
@@ -395,10 +398,11 @@ function ChatLandingContainer(p2)
 			topBarHeight = JoinResult.topBarHeight,
 			pageHeaderText = JoinResult.pageHeaderText,
 			cellHeight = NewSize,
-			topPadding = if FFlagAppIaScrollAway and ScrollAwayEnabled then JoinResult.topBarHeight else nil
+			topPadding = if FFlagAppIaScrollAway and ScrollAwayEnabled then JoinResult.topBarHeight else nil,
+			pageBackgroundTransparency = if HasUseThemeBackgroundResult then 1 else nil
 		})
 		Flag = true
-	elseif FFlagAppChatConversationLoadRetryModule and UseIsChatEnabledModuleResult and not v1 and IsEmpty and (UseIsAppLoadedModuleResult and not IsIsFetchingConversations and IsFailedMatch) then
+	elseif FFlagAppChatConversationLoadRetryModule and UseIsChatEnabledModuleResult and not v1 and IsEmpty and UseIsAppLoadedModuleResult and (not IsIsFetchingConversations and IsFailedMatch) then
 		Element1 = ReactModule.createElement(FoundationModule.Empty, {
 			text = UseLocalizationResult.conversationLoadError,
 			button = {
@@ -407,7 +411,7 @@ function ChatLandingContainer(p2)
 			}
 		})
 		Flag = true
-	elseif UseIsChatEnabledModuleResult and (v1 or not IsEmpty or (not UseIsAppLoadedModuleResult or IsIsFetchingConversations)) then
+	elseif UseIsChatEnabledModuleResult and (v1 or not IsEmpty or not UseIsAppLoadedModuleResult or IsIsFetchingConversations) then
 		Flag = true
 		Flag1 = true
 		Flag11 = true
@@ -426,6 +430,7 @@ function ChatLandingContainer(p2)
 			navigateToQuickStartSquadInviteFriends = if PartyPageCarouselExperimentation.getPartyPageCarouselEnabled() then UseCallbackResult else nil,
 			showGroupsLink = UseIsExternalNavigationAvailableModuleResult[EnumScreensModule.Groups],
 			canvasTopPadding = if FFlagAppIaScrollAway and ScrollAwayEnabled then JoinResult.topBarHeight else nil,
+			pageBackgroundTransparency = if HasUseThemeBackgroundResult then 1 else nil,
 			canAccessParty = UseCanAccessPartyModuleResult,
 			isPartyQuickStartEnabled = UseCanAccessPartyModuleResult1
 		}, t))
@@ -434,7 +439,7 @@ function ChatLandingContainer(p2)
 			BorderSizePixel = 0,
 			Size = UDim2.new(1, 0, 1, 0),
 			BackgroundColor3 = UseStyleResult.Theme.BackgroundDefault.Color,
-			BackgroundTransparency = UseStyleResult.Tokens.Color.None.Transparency
+			BackgroundTransparency = if HasUseThemeBackgroundResult then 1 else UseStyleResult.Tokens.Color.None.Transparency
 		}, {
 			NoFriendsView = ReactModule.createElement(NoFriendsView, {
 				noFriendsHeaderKey = "Feature.Chat.Label.AddFriends",

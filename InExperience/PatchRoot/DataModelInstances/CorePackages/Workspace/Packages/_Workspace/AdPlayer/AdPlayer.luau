@@ -2,7 +2,6 @@
 local CoreGui = game:GetService("CoreGui")
 local v1 = script
 local Parent = v1.Parent
-local FlagsModule = require(v1.Flags)
 local AdPlayerComponentModule = require(v1.components.AdPlayerComponent)
 local AdsDisplayOrder = require(Parent.AdGuiInteractivity).AdsDisplayOrder
 local ReactRobloxModule = require(Parent.ReactRoblox)
@@ -12,7 +11,7 @@ local BaseComponentModule = require(v1.components.BaseComponent)
 return {
 	["jest.config"] = v1["jest.config"],
 	init = function()
-		-- upvalues: AdsDisplayOrder (copy), CoreGui (copy), ReactRobloxModule (copy), AdService (copy), FlagsModule (copy), ReactModule (copy), BaseComponentModule (copy), AdPlayerComponentModule (copy)
+		-- upvalues: AdsDisplayOrder (copy), CoreGui (copy), ReactRobloxModule (copy), AdService (copy), ReactModule (copy), BaseComponentModule (copy), AdPlayerComponentModule (copy)
 		local RewardedVideoAdPlayer = Instance.new("ScreenGui")
 		RewardedVideoAdPlayer.Name = "RewardedVideoAdPlayer"
 		RewardedVideoAdPlayer.DisplayOrder = AdsDisplayOrder.AdPlayer
@@ -23,21 +22,19 @@ return {
 		local Root = ReactRobloxModule.createRoot(RewardedVideoAdPlayer)
 		
 		function AdService.onDemandVideoPlayInUI(p1)
-			-- upvalues: Root (copy), AdService (upval), FlagsModule (upval), ReactModule (upval), BaseComponentModule (upval), AdPlayerComponentModule (upval)
+			-- upvalues: Root (copy), AdService (upval), ReactModule (upval), BaseComponentModule (upval), AdPlayerComponentModule (upval)
 			local function _(p2)
 				-- upvalues: Root (upval), AdService (upval), p1 (copy)
 				Root:render(nil)
 				AdService:onDemandVideoCompleteFromUI(p2, p1.encryptedAdTrackingData, p1.encryptionMetadata, p1.rewardDetails)
 			end
 			
-			local DurationNeededForRewardMsRatio = if FlagsModule.GetEnableLuaRewardTimerUI() and p1.durationNeededForRewardMs and p1.durationNeededEnum == "Variable" then p1.durationNeededForRewardMs / 1000 else nil
 			local BindableEvent = Instance.new("BindableEvent")
 			local v2 = nil
 			Root:render(ReactModule.createElement(BaseComponentModule, {}, {
 				ReactModule.createElement(AdPlayerComponentModule, {
 					isEligible = p1.isEligible,
 					creativeAssetUrl = p1.creativeAssetUrl,
-					durationNeededForReward = if FlagsModule.GetEnableLuaRewardTimerUI() then DurationNeededForRewardMsRatio else nil,
 					onVideoFrameLoaded = function(p2)
 						-- upvalues: v2 (ref), BindableEvent (copy)
 						v2 = p2

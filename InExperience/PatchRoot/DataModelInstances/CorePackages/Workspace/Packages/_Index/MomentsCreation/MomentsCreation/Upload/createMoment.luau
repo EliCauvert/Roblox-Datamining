@@ -28,7 +28,7 @@ local function _(Tbl)
 	end
 end
 
-return function(Capture, Tbl, FeedRegistrationInfo, p1, p2)
+return function(Capture, Tbl, FeedRegistrationInfo, p1, p2): boolean
 	-- upvalues: CaptureServiceUploadUniverseIdOverrideEngineFeature (copy), v1 (copy), NormalizeMomentMetadataModule (copy), GetFFlagMomentsUseUploadPostAsyncFunction (copy), MakePostMetadataModule (copy), GetFFlagMomentsUseMomentsServiceForUploadFunction (copy), CaptureService (copy), MakeCreationEventFieldsModule (copy), FireAnalyticsEventModule (copy), EventNames (copy)
 	local Tbl1 = nil
 	if CaptureServiceUploadUniverseIdOverrideEngineFeature then
@@ -74,7 +74,7 @@ return function(Capture, Tbl, FeedRegistrationInfo, p1, p2)
 		end
 		FireAnalyticsEventModule(EventNames.EditingFlowMomentPublished, CaptureDescriptorFields)
 		
-		return
+		return true
 	else
 		local config = {
 			status = "GenericFailure",
@@ -87,5 +87,7 @@ return function(Capture, Tbl, FeedRegistrationInfo, p1, p2)
 			config[i] = value
 		end
 		FireAnalyticsEventModule(EventNames.UploadCaptureFailed, config)
+		
+		return false
 	end
 end

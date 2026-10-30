@@ -127,6 +127,15 @@ function VideoPlaybackCoordinatorModule:reset(p1, _, p2, _)
 	end
 end
 
+function VideoPlaybackCoordinatorModule:cancelPendingDwells()
+	for _, videoDwellTaskHandle in self.videoDwellTaskHandles do
+		if videoDwellTaskHandle ~= nil then
+			task.cancel(videoDwellTaskHandle)
+		end
+	end
+	self.videoDwellTaskHandles = {}
+end
+
 function VideoPlaybackCoordinatorModule:__cancelCurrentPlayback(p3, PlayingVideoItemIndex, p4, VideoAnalytics)
 	-- upvalues: ArgCheckModule (copy), Count (ref), FFlagLuaAppOneByTwoHoverIdleAutoplay (copy)
 	local CurrentPlaybackSessionStartTime: number = self.currentPlaybackSessionStartTime

@@ -1,7 +1,9 @@
-﻿local ReactModule = require(script:FindFirstAncestor("VideoUtils").Parent.React)
+﻿local Parent = script:FindFirstAncestor("VideoUtils").Parent
+local ReactModule = require(Parent.React)
+local FFlagLuaAppVideoPlayerTrimAndMusic = require(Parent.SharedFlags).FFlagLuaAppVideoPlayerTrimAndMusic
 
 return function(p1)
-	-- upvalues: ReactModule (copy)
+	-- upvalues: ReactModule (copy), FFlagLuaAppVideoPlayerTrimAndMusic (copy)
 	ReactModule.useEffect(function()
 		-- upvalues: p1 (copy)
 		local Current = if p1.videoFrameRef then p1.videoFrameRef.current else nil
@@ -17,7 +19,7 @@ return function(p1)
 	return ReactModule.createElement("VideoFrame", {
 		Size = UDim2.fromScale(1, 1),
 		Video = if p1.isPlaying then p1.video else "",
-		Playing = p1.isPlaying,
+		Playing = (not FFlagLuaAppVideoPlayerTrimAndMusic or not p1.startPaused) and p1.isPlaying,
 		Looped = p1.looped,
 		Volume = p1.volume,
 		BackgroundTransparency = 1,

@@ -12,13 +12,14 @@ local FFlagLuaAppMediaGalleryGamepadSupport = require(Parent.SharedFlags).FFlagL
 local FFlagLuaAppGameTileSelectionVideoPlayback = require(Parent.SharedFlags).FFlagLuaAppGameTileSelectionVideoPlayback
 local FFlagMediaGalleryVideoVisiblePercent = require(Parent.SharedFlags).FFlagMediaGalleryVideoVisiblePercent
 local FFlagLuaAppEdpMomentVideo = require(Parent.SharedFlags).FFlagLuaAppEdpMomentVideo
+local FFlagLuaAppVideoPlayerTrimAndMusic = require(Parent.SharedFlags).FFlagLuaAppVideoPlayerTrimAndMusic
 local GetImageUriModule = require(MediaGallery.getImageUri)
 local MediaGalleryConstantsModule = require(MediaGallery.MediaGalleryConstants)
 local FFlagLuaAppVideoLoadFailureFallback = require(Parent.SharedFlags).FFlagLuaAppVideoLoadFailureFallback
 local FFlagFixNonVisibleEdpVideoPlayback = require(Parent.SharedFlags).FFlagFixNonVisibleEdpVideoPlayback
 
 return ReactModule.memo(function(p1)
-	-- upvalues: UseTokensFunction (copy), GetImageUriModule (copy), VideoPlaybackCoordinator (copy), MediaGalleryConstantsModule (copy), FFlagMediaGalleryVideoVisiblePercent (copy), FFlagLuaAppMediaGalleryGamepadSupport (copy), ReactModule (copy), VideoPlayer (copy), FFlagLuaAppEdpMomentVideo (copy), FFlagFixNonVisibleEdpVideoPlayback (copy), FFlagLuaAppVideoLoadFailureFallback (copy), VideoPlaybackDetector (copy), FFlagLuaAppGameTileSelectionVideoPlayback (copy), VideoPlaybackDetectionMethod (copy)
+	-- upvalues: UseTokensFunction (copy), GetImageUriModule (copy), VideoPlaybackCoordinator (copy), MediaGalleryConstantsModule (copy), FFlagMediaGalleryVideoVisiblePercent (copy), FFlagLuaAppMediaGalleryGamepadSupport (copy), ReactModule (copy), VideoPlayer (copy), FFlagLuaAppEdpMomentVideo (copy), FFlagLuaAppVideoPlayerTrimAndMusic (copy), FFlagFixNonVisibleEdpVideoPlayback (copy), FFlagLuaAppVideoLoadFailureFallback (copy), VideoPlaybackDetector (copy), FFlagLuaAppGameTileSelectionVideoPlayback (copy), VideoPlaybackDetectionMethod (copy)
 	local UseTokensResult = UseTokensFunction()
 	local AssetId: string = `rbxassetid://{p1.videoId}`
 	local ImageUriModule = GetImageUriModule(p1.thumbnail or "")
@@ -65,6 +66,10 @@ return ReactModule.memo(function(p1)
 			showMuteButton = true,
 			video = AssetId,
 			accessContext = if FFlagLuaAppEdpMomentVideo then p1.videoAccessContext else nil,
+			trimStartTime = if FFlagLuaAppVideoPlayerTrimAndMusic then p1.trimStartTime else nil,
+			trimEndTime = if FFlagLuaAppVideoPlayerTrimAndMusic then p1.trimEndTime else nil,
+			musicAssetId = if FFlagLuaAppVideoPlayerTrimAndMusic then p1.musicAssetId else nil,
+			musicStartTime = if FFlagLuaAppVideoPlayerTrimAndMusic then p1.musicStartTime else nil,
 			thumbnail = ImageUriModule,
 			shouldStartPlayback = if FFlagFixNonVisibleEdpVideoPlayback then UseStateResult and (NoCurrentIndex and not p1.isMediaGalleryOccluded) else UseStateResult,
 			muted = p1.muted == nil or p1.muted,
@@ -100,7 +105,7 @@ return ReactModule.memo(function(p1)
 			}),
 			onVideoProgressChanged = OnVideoProgressChanged,
 			onVideoEnded = OnVideoEnded,
-			onVideoLoadFailed = if FFlagLuaAppVideoLoadFailureFallback and NoCurrentIndex and not p1.isMediaGalleryOccluded then p1.onVideoLoadFailed else nil,
+			onVideoLoadFailed = if FFlagLuaAppVideoLoadFailureFallback and (NoCurrentIndex and not p1.isMediaGalleryOccluded) then p1.onVideoLoadFailed else nil,
 			toggleVideoPlaybackSignal = ToggleVideoPlaybackSignal,
 			toggleMuteSignal = ToggleMuteSignal,
 			onMutedChanged = OnMutedChanged,

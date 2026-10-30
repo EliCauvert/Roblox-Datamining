@@ -21,7 +21,8 @@ return {
 		useInputBarTabNavigation = require(script.Hooks.useInputBarTabNavigation),
 		useInExperienceLocalization = require(script.Hooks.useInExperienceLocalization),
 		useLastInputGroup = require(script.Hooks.useLastInputGroup),
-		usePortalSelectionLinks = require(script.Hooks.usePortalSelectionLinks)
+		useDismissOnEscapeOrMenu = require(script.Hooks.useDismissOnEscapeOrMenu),
+		restoreSelectionIfStranded = require(script.Hooks.restoreSelectionIfStranded)
 	},
 	Telemetry = {
 		ExpChatPerfTracker = require(script.Telemetry.ExpChatPerfTracker),

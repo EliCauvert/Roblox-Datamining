@@ -1,16 +1,18 @@
 ﻿local Moments = script:FindFirstAncestor("Moments")
 local ConstantsModule = require(Moments.Constants)
 local FFlagMomentsComments = require(Moments.Parent.SharedFlags).FFlagMomentsComments
+local _ = require(script.Parent.RecommendationContentType)
+local FFlagMomentsRecommendationContentTypeModule = require(Moments.Flags.FFlagMomentsRecommendationContentType)
 local config = {
 	eventName = "RecommendationActionEvent",
 	throttlingPercentage = 10000,
 	description = "Fires on user actions in the moments platform feed",
 	backends = { "EventIngest" },
-	lastUpdated = { 26, 6, 2 }
+	lastUpdated = { 26, 10, 29 }
 }
 
 return function(p1)
-	-- upvalues: ConstantsModule (copy), config (copy), FFlagMomentsComments (copy)
+	-- upvalues: ConstantsModule (copy), FFlagMomentsRecommendationContentTypeModule (copy), config (copy), FFlagMomentsComments (copy)
 	local HttpService = game:GetService("HttpService")
 	local Guid = if p1.actionType == ConstantsModule.RecommendationActionType.Play then HttpService:GenerateGUID(false) else nil
 	game:GetService("TelemetryService"):LogEvent(config, {
@@ -30,7 +32,8 @@ return function(p1)
 			comment_text = p1.commentText,
 			comment_section_open_duration_seconds = if FFlagMomentsComments and p1.commentSectionOpenDurationSeconds ~= nil then tostring(p1.commentSectionOpenDurationSeconds) else nil,
 			action_weight = if p1.actionWeight then tostring(p1.actionWeight) else nil,
-			moments_play_intent_id = Guid
+			moments_play_intent_id = Guid,
+			content_type = if FFlagMomentsRecommendationContentTypeModule then p1.contentType else nil
 		}
 	})
 	

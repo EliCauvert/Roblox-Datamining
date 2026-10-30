@@ -321,7 +321,9 @@ function ConversationList.render(p1)
 	end else nil
 	
 	local function renderScroller(p2)
-		-- upvalues: RoactModule (upval), p1 (copy), FFlagAppIaScrollAway (upval), FFlagEnableScrollAwayContentScrollableFix (upval), BidirectionalFlatList (upval), ItemList (ref), v1 (copy), AppChatPerfChatLandingPaginationWindowSize (upval), AppChatPerfChatLandingPaginationInitialRender (upval), NewResult (upval), PromiseModule (upval), AppChatPerfChatLandingPaginationOnEndReachedUnits (upval), AppChatPerfChatLandingPaginationOnStartReachedUnits (upval), FFlagAppChatConsoleFocusFixesModule (upval)
+		-- upvalues: p1 (copy), RoactModule (upval), FFlagAppIaScrollAway (upval), FFlagEnableScrollAwayContentScrollableFix (upval), BidirectionalFlatList (upval), ItemList (ref), v1 (copy), AppChatPerfChatLandingPaginationWindowSize (upval), AppChatPerfChatLandingPaginationInitialRender (upval), NewResult (upval), PromiseModule (upval), AppChatPerfChatLandingPaginationOnEndReachedUnits (upval), AppChatPerfChatLandingPaginationOnStartReachedUnits (upval), FFlagAppChatConsoleFocusFixesModule (upval)
+		local Transparency = if p1.props.pageBackgroundTransparency == nil then p2.Tokens.Color.None.Transparency else p1.props.pageBackgroundTransparency
+		
 		return RoactModule.createElement("Frame", {
 			BackgroundTransparency = 1,
 			Size = p1.props.Size,
@@ -343,12 +345,12 @@ function ConversationList.render(p1)
 					ScrollBarThickness = 0,
 					BorderSizePixel = 0,
 					BackgroundColor3 = p2.Theme.BackgroundDefault.Color,
-					BackgroundTransparency = p2.Tokens.Color.None.Transparency
+					BackgroundTransparency = Transparency
 				},
 				contentContainerStyle = {
 					BorderSizePixel = 0,
 					BackgroundColor3 = p2.Theme.BackgroundDefault.Color,
-					BackgroundTransparency = p2.Tokens.Color.None.Transparency
+					BackgroundTransparency = Transparency
 				},
 				windowSize = AppChatPerfChatLandingPaginationWindowSize,
 				initialNumToRender = AppChatPerfChatLandingPaginationInitialRender,
@@ -407,7 +409,7 @@ function ConversationList.render(p1)
 			BorderSizePixel = 0,
 			Size = p1.props.Size,
 			BackgroundColor3 = p2.Theme.BackgroundDefault.Color,
-			BackgroundTransparency = p2.Tokens.Color.None.Transparency,
+			BackgroundTransparency = if p1.props.pageBackgroundTransparency == nil then p2.Tokens.Color.None.Transparency else p1.props.pageBackgroundTransparency,
 			LayoutOrder = p1.props.LayoutOrder
 		}) else renderScroller(p2)
 	end)

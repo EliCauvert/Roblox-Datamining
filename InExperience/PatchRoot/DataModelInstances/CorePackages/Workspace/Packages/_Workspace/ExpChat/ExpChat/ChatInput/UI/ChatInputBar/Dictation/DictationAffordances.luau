@@ -47,7 +47,7 @@ return {
 			baseTransparency = p2.defaultTransparency
 		}
 	end,
-	shouldPreventFade = function(p1)
-		return p1.isRecording or (p1.isTranscribing or p1.isListening)
+	shouldPreventFade = function(p1, p2)
+		return p1.isRecording or (p1.isTranscribing or p1.isListening and not p2)
 	end
 }

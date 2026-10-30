@@ -9,6 +9,7 @@ local UseNavigationFocusFunction = require(Parent.Navigation).useNavigationFocus
 local VideoEndReason = require(VideoUtils.Analytics.Enums).VideoEndReason
 local _ = require(VideoUtils.VideoPlaybackCoordinator)
 local _ = require(VideoUtils.ViewportVideoAutoplayController)
+local UseTargetedWinnerModule = require(VideoUtils.useTargetedWinner)
 local FFlagLuaAppOneByTwoHoverIdleAutoplay = require(Parent.SharedFlags).FFlagLuaAppOneByTwoHoverIdleAutoplay
 local FFlagLuaAppEdpMediaGalleryFullScreen = require(Parent.SharedFlags).FFlagLuaAppEdpMediaGalleryFullScreen
 local FFlagLuaAppVideoAutoplayOneByTwoConcurrentPlayback = require(Parent.SharedFlags).FFlagLuaAppVideoAutoplayOneByTwoConcurrentPlayback
@@ -16,6 +17,7 @@ local FFlagVideoPlaybackDetectorCancelPendingScanTask = require(Parent.SharedFla
 local FIntVideoPlaybackDetectorScanDebounceInMilliseconds: number = require(Parent.SharedFlags).FIntVideoPlaybackDetectorScanDebounceInMilliseconds
 local FFlagEnableOnScreenAPIIntegration = require(Parent.SharedFlags).FFlagEnableOnScreenAPIIntegration
 local UseIsRouteOnScreen = if FFlagEnableOnScreenAPIIntegration then require(Parent.RobloxAppNavigation).useIsRouteOnScreen else nil
+local FFlagLuaAppVideoViewportTargetedWinnerSubscription = require(Parent.SharedFlags).FFlagLuaAppVideoViewportTargetedWinnerSubscription
 local Signal = require(Parent.Signals).createSignal({
 	instance = nil,
 	shouldUseDwell = true,
@@ -24,7 +26,7 @@ local Signal = require(Parent.Signals).createSignal({
 local FIntVideoPlaybackDetectorScanDebounceInMillisecondsRatio = if FFlagVideoPlaybackDetectorCancelPendingScanTask then FIntVideoPlaybackDetectorScanDebounceInMilliseconds / 1000 else 0.5
 
 return function(p1)
-	-- upvalues: FFlagEnableOnScreenAPIIntegration (copy), UseIsRouteOnScreen (copy), UseNavigationFocusFunction (copy), UseSelectorFunction (copy), ReactModule (copy), FFlagLuaAppVideoAutoplayOneByTwoConcurrentPlayback (copy), SignalsReactModule (copy), Signal (copy), FFlagLuaAppOneByTwoHoverIdleAutoplay (copy), FFlagLuaAppEdpMediaGalleryFullScreen (copy), VideoEndReason (copy), AppLifecycleObserverService (copy), ExperienceService (copy), FIntVideoPlaybackDetectorScanDebounceInMillisecondsRatio (copy), FFlagVideoPlaybackDetectorCancelPendingScanTask (copy)
+	-- upvalues: FFlagEnableOnScreenAPIIntegration (copy), UseIsRouteOnScreen (copy), UseNavigationFocusFunction (copy), UseSelectorFunction (copy), ReactModule (copy), FFlagLuaAppVideoAutoplayOneByTwoConcurrentPlayback (copy), FFlagLuaAppVideoViewportTargetedWinnerSubscription (copy), UseTargetedWinnerModule (copy), SignalsReactModule (copy), Signal (copy), FFlagLuaAppOneByTwoHoverIdleAutoplay (copy), FFlagLuaAppEdpMediaGalleryFullScreen (copy), VideoEndReason (copy), AppLifecycleObserverService (copy), ExperienceService (copy), FIntVideoPlaybackDetectorScanDebounceInMillisecondsRatio (copy), FFlagVideoPlaybackDetectorCancelPendingScanTask (copy)
 	local UseIsRouteOnScreenResult = if FFlagEnableOnScreenAPIIntegration then UseIsRouteOnScreen() else UseNavigationFocusFunction()
 	local UseSelectorResult = UseSelectorFunction(function(p2)
 		return p2.ScreenSize
@@ -47,7 +49,11 @@ return function(p1)
 		UseSelectorResult2
 	})
 	local IsAdsPlaybackCoordinatorMatch = if FFlagLuaAppVideoAutoplayOneByTwoConcurrentPlayback then p1.viewportVideoAutoplayController ~= nil and p1.viewportVideoAutoplayController:getAdsPlaybackCoordinator() == p1.videoPlaybackCoordinator else nil
-	local UseSignalStateResult = SignalsReactModule.useSignalState(if FFlagLuaAppVideoAutoplayOneByTwoConcurrentPlayback and p1.viewportVideoAutoplayController then p1.viewportVideoAutoplayController:getWinnerStateForCoordinator(p1.videoPlaybackCoordinator) elseif p1.viewportVideoAutoplayController then p1.viewportVideoAutoplayController.getWinnerState else Signal)
+	
+	if FFlagLuaAppVideoViewportTargetedWinnerSubscription then
+		UseTargetedWinnerModule(p1, UseIsRouteOnScreenResult, IsAdsPlaybackCoordinatorMatch)
+	end
+	local UseSignalStateResult = SignalsReactModule.useSignalState(if FFlagLuaAppVideoAutoplayOneByTwoConcurrentPlayback and p1.viewportVideoAutoplayController and not FFlagLuaAppVideoViewportTargetedWinnerSubscription then p1.viewportVideoAutoplayController:getWinnerStateForCoordinator(p1.videoPlaybackCoordinator) elseif p1.viewportVideoAutoplayController and not FFlagLuaAppVideoViewportTargetedWinnerSubscription then p1.viewportVideoAutoplayController.getWinnerState else Signal)
 	
 	if FFlagLuaAppOneByTwoHoverIdleAutoplay then
 		ReactModule.useEffect(function()
@@ -69,10 +75,10 @@ return function(p1)
 		})
 	end
 	ReactModule.useEffect(function()
-		-- upvalues: p1 (copy), UseSignalStateResult (copy), UseIsRouteOnScreenResult (copy), FFlagLuaAppEdpMediaGalleryFullScreen (upval), FFlagLuaAppVideoAutoplayOneByTwoConcurrentPlayback (upval), IsAdsPlaybackCoordinatorMatch (copy), FFlagLuaAppOneByTwoHoverIdleAutoplay (upval), VideoEndReason (upval)
+		-- upvalues: p1 (copy), FFlagLuaAppVideoViewportTargetedWinnerSubscription (upval), UseSignalStateResult (copy), UseIsRouteOnScreenResult (copy), FFlagLuaAppEdpMediaGalleryFullScreen (upval), FFlagLuaAppVideoAutoplayOneByTwoConcurrentPlayback (upval), IsAdsPlaybackCoordinatorMatch (copy), FFlagLuaAppOneByTwoHoverIdleAutoplay (upval), VideoEndReason (upval)
 		local ViewportVideoAutoplayController = p1.viewportVideoAutoplayController
 		
-		if not ViewportVideoAutoplayController then return end
+		if FFlagLuaAppVideoViewportTargetedWinnerSubscription or not ViewportVideoAutoplayController then return end
 		local Current = p1.itemFrameRef.current
 		
 		if Current ~= nil and UseSignalStateResult.instance == Current then

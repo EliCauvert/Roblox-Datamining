@@ -30,17 +30,19 @@ local ConstantsModule = require(InExperienceShop.Constants)
 local config = {
 	freeTrial = "Feature.InExperienceShop.Label.FreeTrial",
 	trial = "Feature.InExperienceShop.Label.Trial",
-	active = "Feature.InExperienceShop.Label.Active"
+	active = "Feature.InExperienceShop.Label.Active",
+	trialed = "Feature.InExperienceShop.Label.Trialed"
 }
 
 local function TrialBadge(p1)
-	-- upvalues: UseLocalizationFunction (copy), config (copy), UseTokensFunction (copy), ReactModule (copy), Badge (copy), Enums (copy)
+	-- upvalues: UseLocalizationFunction (copy), config (copy), UseTokensFunction (copy), Enums (copy), ReactModule (copy), Badge (copy)
 	local UseLocalizationResult = UseLocalizationFunction(config)
 	local UseTokensResult = UseTokensFunction()
 	
 	return ReactModule.createElement(Badge, {
-		text = if p1.isActive then UseLocalizationResult.active else UseLocalizationResult.trial,
-		variant = if p1.isActive then Enums.BadgeVariant.Emphasis else Enums.BadgeVariant.OverMedia,
+		testId = "ShopItemTile-TrialBadge",
+		text = if p1.freeTrialStatus == "active" then UseLocalizationResult.active elseif p1.freeTrialStatus == "redeemed" then UseLocalizationResult.trialed else UseLocalizationResult.trial,
+		variant = if p1.freeTrialStatus == "active" then Enums.BadgeVariant.Emphasis else Enums.BadgeVariant.OverMedia,
 		size = Enums.BadgeSize.Small,
 		Position = UDim2.fromOffset(UseTokensResult.Gap.Small, UseTokensResult.Gap.Small)
 	})
@@ -87,7 +89,13 @@ return ReactModule.memo(function(Frame)
 		
 		return Frame.itemType == "GamePass" and Active[Frame.itemId] == true
 	end) else false
-	local NoUseSignalStateResult1_1: boolean = NoUseSignalStateResult1 or UseSignalStateResult3 and not UseSignalStateResult1
+	local UseSignalStateResult4 = if FFlagLuaAppEnableGamePassFreeTrialsModule then SignalsReactModule.useSignalState(function(p1): boolean
+		-- upvalues: UseSignalStateResult (copy), Frame (copy)
+		local Redeemed = UseSignalStateResult.getTrialAvailabilities(p1).redeemed
+		
+		return Frame.itemType == "GamePass" and Redeemed ~= nil and Redeemed[Frame.itemId] ~= nil
+	end) else false
+	local Available = if NoUseSignalStateResult1 then "available" elseif UseSignalStateResult3 and not UseSignalStateResult1 then "active" elseif UseSignalStateResult4 then "redeemed" else nil
 	local UseGamePassTrialRedemptionModuleResult = UseGamePassTrialRedemptionModule(Frame.itemId)
 	ReactModule.useEffect(function()
 		-- upvalues: FFlagEnableInExperienceShopUnifiedLoggingModule (upval), Parent (upval), InExperienceShop (upval), Frame (copy), FFlagEnableCategoryLoggingInShopModule (upval), UseRefResult (copy), SessionService (upval)
@@ -170,7 +178,7 @@ return ReactModule.memo(function(Frame)
 			Image = Frame.thumbnail,
 			ScaleType = Enum.ScaleType.Fit
 		}, {
-			TrialBadge = if NoUseSignalStateResult1_1 then ReactModule.createElement(TrialBadge, { isActive = UseSignalStateResult3 }) else nil
+			TrialBadge = if Available == nil then nil else ReactModule.createElement(TrialBadge, { freeTrialStatus = Available })
 		}),
 		TileContent = ReactModule.createElement(View, {
 			tag = "col gap-medium size-full-0 auto-y padding-medium",

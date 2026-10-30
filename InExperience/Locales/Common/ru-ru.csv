@@ -181,6 +181,7 @@ CommonUI.Features.Label.About,Сведения
 CommonUI.Features.Label.Add,Добавить
 CommonUI.Features.Label.AddConnection,Добавить контакт
 CommonUI.Features.Label.AddConnections,Добавить контакты
+CommonUI.Features.Label.Avatar,Аватар
 CommonUI.Features.Label.Badges,Значки
 CommonUI.Features.Label.Charts,Чарты
 CommonUI.Features.Label.Chat,Чат
@@ -213,7 +214,6 @@ CommonUI.Features.Label.Sent,Отправлено
 CommonUI.Features.Label.Settings,
 CommonUI.Features.Label.Terms,Условия
 CommonUI.Features.Label.TermsOfUse,Условия использования
-CommonUI.Features.Label.Thanks,Спасибо
 CommonUI.Features.Label.TheHunt,События Roblox
 CommonUI.Features.Label.Trades,Обмен
 CommonUI.Features.Label.sGroups,
@@ -2214,7 +2214,7 @@ Feature.ReportAbuse.DSAIllegal.ReportPageTitle,Сообщить о незако�
 Feature.ReportAbuse.Heading.ReportAbuse,
 Feature.ReportAbuse.Heading.ReportUsingSelectInScene,"Отправить отчёт, используя режим выделения"
 Feature.ReportAbuse.Heading.SelectInSceneErrorTitle,Ошибка: максимум 5 кругов
-Feature.ReportAbuse.Label.Avatar,Аватар
+Feature.ReportAbuse.Label.Avatar,
 Feature.ReportAbuse.Label.CategoryBullyingV2,"Агрессивное поведение, травля, дискриминация"
 Feature.ReportAbuse.Label.CategoryContent,"Недопустимый контент: место, изображение, модель"
 Feature.ReportAbuse.Label.CategoryDating,
@@ -2344,9 +2344,7 @@ Feature.SettingsHub.Heading.Report.ThanksForReport,Спасибо за сооб�
 Feature.SettingsHub.Label.AttachScreenshot,Прикрепить скриншот? (необязательно)
 Feature.SettingsHub.Label.Captures,
 Feature.SettingsHub.Label.ChooseOne,Выбери один вариант
-Feature.SettingsHub.Label.Connect,Подключиться
 Feature.SettingsHub.Label.DefaultInviteMessage,Пригласить {DisplayName} присоединиться?
-Feature.SettingsHub.Label.Disconnect,Отключиться
 Feature.SettingsHub.Label.DontLeaveButton,
 Feature.SettingsHub.Label.FriendsListLoadErrorMessage,Не удаётся загрузить друзей. Повтори попытку.
 Feature.SettingsHub.Label.GameInviteError,Не удалось отправить приглашение. Повтори попытку позже.
@@ -2497,7 +2495,7 @@ Feature.Squads.Action.Start,
 Feature.Squads.Action.Switch,
 Feature.Squads.Action.TapToStartNewParty,"Нажми, чтобы создать новую команду"
 Feature.Squads.Action.View,
-Feature.Squads.Action.VoiceErrorGeneral,
+Feature.Squads.Action.VoiceErrorGeneral,Подключиться
 Feature.Squads.Action.VoiceErrorPartyNotVoiceEligible,
 Feature.Squads.Action.VoiceErrorUserIneligible,
 Feature.Squads.Action.WaitingForParty,Ожидание команды
@@ -2681,8 +2679,6 @@ Feature.VirtualEvents.ShareModalCallToAction,Поделиться в чате...
 Feature.VirtualEvents.ShareModalLinkCopy,
 Feature.VirtualEvents.ShareModalTitle,Поделиться этим событием
 Feature.VirtualEvents.UnfollowEvent,Отписаться от события
-Features.OnDemandAds.Get_Reward_In,Получить награду через
-Features.OnDemandAds.Reward_Earned,Получена награда
 IAPExperience.BuyRobux.Alert.SuccessfulMessage,Успешная покупка Robux!
 IAPExperience.BuyRobux.Banner.Text,Robux позволяет покупать обновления для аватара или специальные способности в плейсах
 IAPExperience.BuyRobux.Banner.Title,Разблокировать Roblox

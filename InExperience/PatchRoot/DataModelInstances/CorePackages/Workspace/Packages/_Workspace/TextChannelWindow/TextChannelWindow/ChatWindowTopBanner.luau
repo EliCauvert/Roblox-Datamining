@@ -8,7 +8,8 @@ local ChatLineReportingModule = require(Parent.ChatLineReporting)
 local ChatLineReportRoot = ChatLineReportingModule.ChatLineReportRoot
 local Constants = ChatLineReportingModule.Constants
 local UseInExperienceLocalizationFunction = require(Parent.ChatUIPrimitives).Hooks.useInExperienceLocalization
-local UseReportMenuFocusNavigationModule = require(script.Parent.useReportMenuFocusNavigation)
+local UseDismissOnEscapeOrMenuFunction = require(Parent.ChatUIPrimitives).Hooks.useDismissOnEscapeOrMenu
+local ReportMenuFocusRootModule = require(script.Parent.ReportMenuFocusRoot)
 local FFlagExpChatTextChannelWindowFocusNavModule = require(script.Parent.Flags.FFlagExpChatTextChannelWindowFocusNav)
 local config = {
 	SelectionBehaviorUp = Enum.SelectionBehavior.Stop,
@@ -43,7 +44,9 @@ local function mapMessagesForReport(MessagesSignalResult, TextChannel)
 end
 
 local function TopBannerView(p1)
-	-- upvalues: ReactModule (copy), Constants (copy), Menu (copy), InputSize (copy), PopoverSide (copy), PopoverAlign (copy), config (copy), View (copy), Icon (copy), IconName (copy), IconSize (copy)
+	-- upvalues: UseDismissOnEscapeOrMenuFunction (copy), ReactModule (copy), Constants (copy), Menu (copy), InputSize (copy), PopoverSide (copy), PopoverAlign (copy), config (copy), View (copy), Icon (copy), IconName (copy), IconSize (copy)
+	UseDismissOnEscapeOrMenuFunction(p1.focusNavEnabled == true and p1.isOpen, p1.onPressedOutside)
+	
 	return ReactModule.createElement("Frame", {
 		BackgroundTransparency = 1,
 		Size = UDim2.new(1, 0, 0, Constants.TopBannerSize),
@@ -76,20 +79,7 @@ local function TopBannerView(p1)
 end
 
 local function TopBannerFocusNav(p1)
-	-- upvalues: ReactModule (copy), UseReportMenuFocusNavigationModule (copy), TopBannerView (copy)
-	local UseRefResult = ReactModule.useRef(nil)
-	local UseRefResult1 = ReactModule.useRef(nil)
-	local SetIsOpenFunction = p1.setIsOpen
-	UseReportMenuFocusNavigationModule({
-		enabled = p1.focusNavEnabled == true,
-		isOpen = p1.isOpen,
-		menuContentRef = UseRefResult,
-		triggerRef = UseRefResult1,
-		onClose = ReactModule.useCallback(function()
-			-- upvalues: SetIsOpenFunction (copy)
-			SetIsOpenFunction(false)
-		end, { SetIsOpenFunction })
-	})
+	-- upvalues: ReactModule (copy), TopBannerView (copy), ReportMenuFocusRootModule (copy)
 	local IsOpen = p1.isOpen
 	local OnOpenChangedFunction = p1.onOpenChanged
 	ReactModule.useEffect(function()
@@ -99,15 +89,24 @@ local function TopBannerFocusNav(p1)
 		end
 	end, { IsOpen, OnOpenChangedFunction })
 	
-	return ReactModule.createElement(TopBannerView, {
-		ZIndex = p1.ZIndex,
+	return ReactModule.createElement(ReportMenuFocusRootModule, {
 		isOpen = p1.isOpen,
-		items = p1.items,
-		onTriggerActivated = p1.onTriggerActivated,
-		onPressedOutside = p1.onPressedOutside,
-		focusNavEnabled = p1.focusNavEnabled,
-		menuContentRef = UseRefResult,
-		triggerRef = UseRefResult1
+		render = ReactModule.useCallback(function(p2)
+			-- upvalues: ReactModule (upval), TopBannerView (upval), p1 (copy)
+			return ReactModule.createElement(TopBannerView, {
+				ZIndex = p1.ZIndex,
+				isOpen = p1.isOpen,
+				items = p1.items,
+				onTriggerActivated = p1.onTriggerActivated,
+				onPressedOutside = p1.onPressedOutside,
+				focusNavEnabled = p1.focusNavEnabled,
+				menuContentRef = p2.containerRef,
+				triggerRef = p2.triggerRef
+			})
+		end, {
+			p1.ZIndex, p1.isOpen, p1.items, p1.onTriggerActivated, p1.onPressedOutside,
+			p1.focusNavEnabled
+		})
 	})
 end
 
@@ -153,7 +152,6 @@ return ReactModule.memo(function(p1)
 	return if FFlagExpChatTextChannelWindowFocusNavModule then ReactModule.createElement(TopBannerFocusNav, {
 		ZIndex = p1.ZIndex,
 		isOpen = UseStateResult,
-		setIsOpen = UseStateResult2,
 		items = UseMemoResult,
 		onTriggerActivated = UseResult,
 		onPressedOutside = UseResult1,

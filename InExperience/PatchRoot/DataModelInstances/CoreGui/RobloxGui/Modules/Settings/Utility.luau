@@ -33,7 +33,8 @@ local Signal = AppCommonLibModule.Signal
 local CreateFunction = AppCommonLibModule.Create
 local BuilderIconsModule = require(CorePackages1.Packages.BuilderIcons)
 local Migration = BuilderIconsModule.Migration
-local IsEnabled = require(RobloxGui.Modules:WaitForChild("TenFootInterface")):IsEnabled()
+local FFlagResponsiveUnitsDeprecateTenFoot = require(CorePackages1.Workspace.Packages.SharedFlags).FFlagResponsiveUnitsDeprecateTenFoot
+local NoFFlagResponsiveUnitsDeprecateTenFoot: boolean = require(RobloxGui.Modules:WaitForChild("TenFootInterface")):IsEnabled() and not FFlagResponsiveUnitsDeprecateTenFoot
 local Computed = SignalsModule.createComputed(function(p1): boolean
 	-- upvalues: ResponsiveModule (copy)
 	return ResponsiveModule.GetInputModeStore(p1).getLastInputType(p1) == ResponsiveModule.Input.Touch
@@ -218,8 +219,8 @@ local _ = function(): boolean
 end
 
 local _ = function()
-	-- upvalues: IsEnabled (copy)
-	return IsEnabled
+	-- upvalues: NoFFlagResponsiveUnitsDeprecateTenFoot (copy)
+	return NoFFlagResponsiveUnitsDeprecateTenFoot
 end
 
 local _ = function()
@@ -390,7 +391,7 @@ local function MakeDefaultButton(Text, Size, Callback, p5, HubRef, p6)
 end
 
 local function MakeButton(Text, Text1, Size, FunctionToBind, p5, PluginToolbarButton)
-	-- upvalues: MakeDefaultButton (copy), CreateFunction (copy), ThemeModule (copy), GuiService (copy), UserInputService (copy), IsEnabled (copy), EnablePreferredTextSizeAccessGuiServiceEngineFeature (copy)
+	-- upvalues: MakeDefaultButton (copy), CreateFunction (copy), ThemeModule (copy), GuiService (copy), UserInputService (copy), NoFFlagResponsiveUnitsDeprecateTenFoot (copy), EnablePreferredTextSizeAccessGuiServiceEngineFeature (copy)
 	local DefaultButton, DefaultButton2 = MakeDefaultButton(Text, Size, FunctionToBind, p5, PluginToolbarButton)
 	local Label = CreateFunction("TextLabel")({
 		BackgroundTransparency = 1,
@@ -414,7 +415,7 @@ local function MakeButton(Text, Text1, Size, FunctionToBind, p5, PluginToolbarBu
 	
 	if UserInputService.TouchEnabled and (_Vector2.Y < 500 or _Vector2.X < 700) then
 		Label.TextSize = ThemeModule.textSize(18)
-	elseif IsEnabled and (Text ~= "FriendStatus" and Text ~= "BlockButton") then
+	elseif NoFFlagResponsiveUnitsDeprecateTenFoot and (Text ~= "FriendStatus" and Text ~= "BlockButton") then
 		Label.TextSize = ThemeModule.textSize(36)
 	end
 	if EnablePreferredTextSizeAccessGuiServiceEngineFeature then
@@ -1006,7 +1007,7 @@ local function CreateDropDown(p5, CurrentIndex, HubRef)
 end
 
 local function CreateSelector(p7, CurrentIndex)
-	-- upvalues: CreateFunction (copy), SelectionImageObject (copy), ThemeModule (copy), ARROWCOLOR (copy), UserInputService (copy), ARROWCOLORHOVER (copy), addHoverState (copy), VRService (copy), GuiService (copy), EaseOutQuad (copy), ARROWCOLORINACTIVE (copy), IsEnabled (copy), Computed (copy), Computed1 (copy), t (copy)
+	-- upvalues: CreateFunction (copy), SelectionImageObject (copy), ThemeModule (copy), ARROWCOLOR (copy), UserInputService (copy), ARROWCOLORHOVER (copy), addHoverState (copy), VRService (copy), GuiService (copy), EaseOutQuad (copy), ARROWCOLORINACTIVE (copy), NoFFlagResponsiveUnitsDeprecateTenFoot (copy), Computed (copy), Computed1 (copy), t (copy)
 	local v2 = 0
 	local config = { HubRef = nil, SetSelectionIndex = nil }
 	
@@ -1080,18 +1081,18 @@ local function CreateSelector(p7, CurrentIndex)
 	})
 	
 	if UserInputService.PreferredInput ~= Enum.PreferredInput.Touch then
-		local function v171(Image)
+		local function v172(Image)
 			-- upvalues: ARROWCOLOR (upval)
 			Image.ImageColor3 = ARROWCOLOR
 		end
 		
-		local function v172(Image)
+		local function v173(Image)
 			-- upvalues: ARROWCOLORHOVER (upval)
 			Image.ImageColor3 = ARROWCOLORHOVER
 		end
 		
-		addHoverState(Parent, Image, v171, v172)
-		addHoverState(Parent1, Image1, v171, v172)
+		addHoverState(Parent, Image, v172, v173)
+		addHoverState(Parent1, Image1, v172, v173)
 	end
 	config.Selections = {}
 	local t1 = {}
@@ -1241,7 +1242,7 @@ local function CreateSelector(p7, CurrentIndex)
 	end
 	
 	function config:UpdateOptions(List)
-		-- upvalues: config (copy), t1 (ref), CreateFunction (upval), Parent (copy), ThemeModule (upval), IsEnabled (upval), CurrentIndex (copy), Parent1 (copy)
+		-- upvalues: config (copy), t1 (ref), CreateFunction (upval), Parent (copy), ThemeModule (upval), NoFFlagResponsiveUnitsDeprecateTenFoot (upval), CurrentIndex (copy), Parent1 (copy)
 		for _, selection in pairs(config.Selections) do
 			selection:Destroy()
 		end
@@ -1266,7 +1267,7 @@ local function CreateSelector(p7, CurrentIndex)
 				Parent = config.SelectorFrame
 			})
 			
-			if IsEnabled then
+			if NoFFlagResponsiveUnitsDeprecateTenFoot then
 				Label.TextSize = ThemeModule.textSize(36)
 			end
 			if CurrentIndex1 == CurrentIndex then
@@ -1428,8 +1429,8 @@ local function CreateSelector(p7, CurrentIndex)
 	end)
 	
 	local function onResized(_, IsXBelow)
-		-- upvalues: ThemeModule (upval), IsEnabled (upval), config (copy)
-		local TextSizeResult = if IsXBelow then ThemeModule.textSize(16) else IsEnabled and ThemeModule.textSize(36) or ThemeModule.textSize(24, "UtilityText")
+		-- upvalues: ThemeModule (upval), NoFFlagResponsiveUnitsDeprecateTenFoot (upval), config (copy)
+		local TextSizeResult = if IsXBelow then ThemeModule.textSize(16) else NoFFlagResponsiveUnitsDeprecateTenFoot and ThemeModule.textSize(36) or ThemeModule.textSize(24, "UtilityText")
 		for _, selection in pairs(config.Selections) do
 			selection.TextSize = TextSizeResult
 		end
@@ -1756,18 +1757,18 @@ local function CreateNewSlider(p9, CurrentStep, MinStep, Text, Text1)
 	})
 	
 	if UserInputService.PreferredInput ~= Enum.PreferredInput.Touch then
-		local function v235(Image)
+		local function v236(Image)
 			-- upvalues: ARROWCOLOR (upval)
 			Image.ImageColor3 = ARROWCOLOR
 		end
 		
-		local function v236(Image)
+		local function v237(Image)
 			-- upvalues: ARROWCOLORHOVER (upval)
 			Image.ImageColor3 = ARROWCOLORHOVER
 		end
 		
-		addHoverState(Parent1, v6, v235, v236)
-		addHoverState(Parent2, v7, v235, v236)
+		addHoverState(Parent1, v6, v236, v237)
+		addHoverState(Parent2, v7, v236, v237)
 	end
 	t.Steps = {}
 	local XScale = 1 / Number
@@ -2100,7 +2101,7 @@ local function CreateNewSlider(p9, CurrentStep, MinStep, Text, Text1)
 		end
 	end)
 	
-	local function v244()
+	local function v245()
 		-- upvalues: CurrentTime (ref), setCurrentStep (copy), CurrentStep1 (ref), v4 (ref)
 		if CurrentTime == nil then return end
 		if tick() - CurrentTime >= 0.2 then
@@ -2184,7 +2185,7 @@ local function CreateNewSlider(p9, CurrentStep, MinStep, Text, Text1)
 	end)
 	local Flag = false
 	GuiService.Changed:Connect(function(p12)
-		-- upvalues: GuiService (upval), t (copy), Flag (ref), CurrentTime (ref), RunService (upval), Guid (copy), v244 (copy)
+		-- upvalues: GuiService (upval), t (copy), Flag (ref), CurrentTime (ref), RunService (upval), Guid (copy), v245 (copy)
 		if p12 ~= "SelectedCoreObject" then return end
 		local SelectedCoreObject = GuiService.SelectedCoreObject
 		
@@ -2192,7 +2193,7 @@ local function CreateNewSlider(p9, CurrentStep, MinStep, Text, Text1)
 			if not Flag then
 				Flag = true
 				CurrentTime = tick()
-				RunService:BindToRenderStep(Guid, Enum.RenderPriority.Input.Value + 1, v244)
+				RunService:BindToRenderStep(Guid, Enum.RenderPriority.Input.Value + 1, v245)
 				
 				return
 			end
@@ -2210,11 +2211,11 @@ local function CreateNewSlider(p9, CurrentStep, MinStep, Text, Text1)
 	return t
 end
 
-local YOffset: number = if IsEnabled then 90 else 50
+local YOffset: number = if NoFFlagResponsiveUnitsDeprecateTenFoot then 90 else 50
 local Totals = {}
 
 local function AddNewRow(Key, Text, p12, p13, p14, Amount: number, Text1, p15, p16, Interactable)
-	-- upvalues: Totals (copy), CreateFunction (copy), YOffset (ref), SelectionImageObject (copy), ThemeModule (copy), IsEnabled (copy), GuiService (copy), t (copy), CreateNewSlider (copy), CreateSelector (copy), CreateDropDown (copy), VRService (copy), UserInputService (copy), CoreGui (copy)
+	-- upvalues: Totals (copy), CreateFunction (copy), YOffset (ref), SelectionImageObject (copy), ThemeModule (copy), NoFFlagResponsiveUnitsDeprecateTenFoot (copy), GuiService (copy), t (copy), CreateNewSlider (copy), CreateSelector (copy), CreateDropDown (copy), VRService (copy), UserInputService (copy), CoreGui (copy)
 	local YOffset1 = 0
 	local IsNotTextBox = p12 ~= "TextBox"
 	
@@ -2332,13 +2333,13 @@ local function AddNewRow(Key, Text, p12, p13, p14, Amount: number, Text1, p15, p
 		Label.Text = ""
 	end
 	local function onResized(_, p17)
-		-- upvalues: Label (ref), ThemeModule (upval), IsEnabled (upval)
+		-- upvalues: Label (ref), ThemeModule (upval), NoFFlagResponsiveUnitsDeprecateTenFoot (upval)
 		if p17 then
 			Label.TextSize = ThemeModule.textSize(16, "UtilityRow")
 			
 			return
 		else
-			Label.TextSize = IsEnabled and ThemeModule.textSize(36) or ThemeModule.textSize(24, "UtilityText")
+			Label.TextSize = NoFFlagResponsiveUnitsDeprecateTenFoot and ThemeModule.textSize(36) or ThemeModule.textSize(24, "UtilityText")
 		end
 	end
 	
@@ -2348,7 +2349,7 @@ local function AddNewRow(Key, Text, p12, p13, p14, Amount: number, Text1, p15, p
 	if _Vector2.Y > _Vector2.X then
 		Label.TextSize = ThemeModule.textSize(16, "UtilityRow")
 	else
-		Label.TextSize = IsEnabled and ThemeModule.textSize(36) or ThemeModule.textSize(24, "UtilityText")
+		Label.TextSize = NoFFlagResponsiveUnitsDeprecateTenFoot and ThemeModule.textSize(36) or ThemeModule.textSize(24, "UtilityText")
 	end
 	t[Parent] = onResized
 	local _ = if _G.__TESTEZ_RUNNING_TEST__ then Vector2.new(1024, 1024) else GuiService:GetHardwareSafeViewport()
@@ -2357,7 +2358,7 @@ local function AddNewRow(Key, Text, p12, p13, p14, Amount: number, Text1, p15, p
 	if _Vector21.Y > _Vector21.X then
 		Label.TextSize = ThemeModule.textSize(16, "UtilityRow")
 	else
-		Label.TextSize = IsEnabled and ThemeModule.textSize(36) or ThemeModule.textSize(24, "UtilityText")
+		Label.TextSize = NoFFlagResponsiveUnitsDeprecateTenFoot and ThemeModule.textSize(36) or ThemeModule.textSize(24, "UtilityText")
 	end
 	local DropDownFrame = nil
 	local Config = nil
@@ -2666,7 +2667,7 @@ local function AddNewRow(Key, Text, p12, p13, p14, Amount: number, Text1, p15, p
 end
 
 local function AddNewRowObject(Key, Text, Gui, Amount, p12)
-	-- upvalues: Totals (copy), CreateFunction (copy), YOffset (ref), SelectionImageObject (copy), ThemeModule (copy), IsEnabled (copy), t (copy), GuiService (copy), VRService (copy)
+	-- upvalues: Totals (copy), CreateFunction (copy), YOffset (ref), SelectionImageObject (copy), ThemeModule (copy), NoFFlagResponsiveUnitsDeprecateTenFoot (copy), t (copy), GuiService (copy), VRService (copy)
 	local Total = if Totals[Key] then Totals[Key] else 0
 	local Image = CreateFunction("ImageButton")({
 		BackgroundTransparency = 1,
@@ -2723,7 +2724,7 @@ local function AddNewRowObject(Key, Text, Gui, Amount, p12)
 	})
 	
 	local function onResized(_, IsXBelow)
-		-- upvalues: p12 (copy), Label (copy), ThemeModule (upval), IsEnabled (upval)
+		-- upvalues: p12 (copy), Label (copy), ThemeModule (upval), NoFFlagResponsiveUnitsDeprecateTenFoot (upval)
 		if p12 then
 			UDim2.new(0, 200, 1, 0)
 		end
@@ -2732,7 +2733,7 @@ local function AddNewRowObject(Key, Text, Gui, Amount, p12)
 			
 			return
 		else
-			Label.TextSize = IsEnabled and ThemeModule.textSize(36) or ThemeModule.textSize(24, "UtilityText")
+			Label.TextSize = NoFFlagResponsiveUnitsDeprecateTenFoot and ThemeModule.textSize(36) or ThemeModule.textSize(24, "UtilityText")
 		end
 	end
 	

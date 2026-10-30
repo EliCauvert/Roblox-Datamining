@@ -12,6 +12,7 @@ local VideoLoggerModule = require(script.Parent.Analytics.VideoLogger)
 local VideoPlayerBottomOverlayModule = require(script.Parent.VideoPlayerBottomOverlay)
 local DiscoveryEventErrorLogger = require(Parent.DiscoveryUtils).DiscoveryEventErrorLogger
 local ReportWarningFunction = require(Parent.DiscoveryAnalytics).Points.reportWarning
+local GetVideoEditsModule = require(script.Parent.getVideoEdits)
 local FFlagLuaAppEdpMediaGalleryAutoAdvance = require(Parent.SharedFlags).FFlagLuaAppEdpMediaGalleryAutoAdvance
 local FFlagLuaAppEdpMediaGalleryFullScreen = require(Parent.SharedFlags).FFlagLuaAppEdpMediaGalleryFullScreen
 local FFlagLuaAppVideoTileDisableActivation = require(Parent.SharedFlags).FFlagLuaAppVideoTileDisableActivation
@@ -22,10 +23,30 @@ local FFlagLuaAppEnableHomepageOneByTwoTile = require(Parent.SharedFlags).FFlagL
 local FFlagLuaAppSduiVideoThumbnail = require(Parent.SharedFlags).FFlagLuaAppSduiVideoThumbnail
 local FFlagLuaAppHomeMomentVideoFallback = require(Parent.SharedFlags).FFlagLuaAppHomeMomentVideoFallback
 local FFlagLuaAppVideoLoadFailureFallback = require(Parent.SharedFlags).FFlagLuaAppVideoLoadFailureFallback
+local FFlagLuaAppVideoPlayerTrimAndMusic = require(Parent.SharedFlags).FFlagLuaAppVideoPlayerTrimAndMusic
 local VideoPlayerPlaybackEndThresholdInMsRatio = game:DefineFastInt("VideoPlayerPlaybackEndThresholdInMs", 100) / 1000
 
 return function(Image)
-	-- upvalues: FFlagLuaAppEdpMediaGalleryFullScreen (copy), ReactModule (copy), FFlagLuaAppVideoLoadFailureFallback (copy), DiscoveryEventErrorLogger (copy), FFlagLuaAppEdpMediaGalleryAutoAdvance (copy), FFlagLuaAppEdpConsoleMediaGalleryVideo (copy), FFlagLuaAppEnableHomepageOneByTwoTile (copy), RunService (copy), ReportWarningFunction (copy), LoggingProtocolModule (copy), VideoLoggerModule (copy), VideoPlayerPlaybackEndThresholdInMsRatio (copy), ResponsiveModule (copy), VideoActions (copy), FFlagLuaAppMediaGalleryGamepadSupport (copy), FFlagLuaAppVideoTileDisableActivation (copy), LoadableVideoFrameModule (copy), FFlagLuaAppHomeMomentVideoFallback (copy), FFlagLuaAppSduiVideoThumbnail (copy), FFlagLuaAppVideoTileHideCenterPlayButton (copy), RoundIconButtonModule (copy), VideoPlayerBottomOverlayModule (copy)
+	-- upvalues: FFlagLuaAppVideoPlayerTrimAndMusic (copy), ReactModule (copy), GetVideoEditsModule (copy), FFlagLuaAppEdpMediaGalleryFullScreen (copy), FFlagLuaAppVideoLoadFailureFallback (copy), DiscoveryEventErrorLogger (copy), FFlagLuaAppEdpMediaGalleryAutoAdvance (copy), FFlagLuaAppEdpConsoleMediaGalleryVideo (copy), FFlagLuaAppEnableHomepageOneByTwoTile (copy), RunService (copy), ReportWarningFunction (copy), LoggingProtocolModule (copy), VideoLoggerModule (copy), VideoPlayerPlaybackEndThresholdInMsRatio (copy), ResponsiveModule (copy), VideoActions (copy), FFlagLuaAppMediaGalleryGamepadSupport (copy), FFlagLuaAppVideoTileDisableActivation (copy), LoadableVideoFrameModule (copy), FFlagLuaAppHomeMomentVideoFallback (copy), FFlagLuaAppSduiVideoThumbnail (copy), FFlagLuaAppVideoTileHideCenterPlayButton (copy), RoundIconButtonModule (copy), VideoPlayerBottomOverlayModule (copy)
+	local v1 = nil
+	local v2 = nil
+	
+	if FFlagLuaAppVideoPlayerTrimAndMusic then
+		v1, v27 = ReactModule.useMemo(function()
+			-- upvalues: GetVideoEditsModule (upval), Image (copy)
+			return GetVideoEditsModule.getVideoEdits({
+				trimStartTime = Image.trimStartTime,
+				trimEndTime = Image.trimEndTime,
+				musicAssetId = Image.musicAssetId,
+				musicStartTime = Image.musicStartTime
+			})
+		end, {
+			Image.trimStartTime,
+			Image.trimEndTime,
+			Image.musicAssetId,
+			Image.musicStartTime
+		})
+	end
 	local ShowMuteButton = Image.showMuteButton or FFlagLuaAppEdpMediaGalleryFullScreen and (Image.showPlayButton or Image.showProgressBar)
 	local UseStateResult, UseStateResult2 = ReactModule.useState(false)
 	local UseStateResult1, UseStateResult2_1 = ReactModule.useState(Image.muted)
@@ -60,6 +81,17 @@ return function(Image)
 		Image.videoAnalyticsContext,
 		Image.onVideoLoadFailed
 	}) else nil
+	
+	if FFlagLuaAppVideoPlayerTrimAndMusic then
+		local UseRefResult = ReactModule.useRef(UseResult1)
+		UseRefResult.current = UseResult1
+		ReactModule.useEffect(function()
+			-- upvalues: v2 (ref), Image (copy), UseRefResult (copy)
+			if not v2 and Image.shouldStartPlayback and UseRefResult.current then
+				UseRefResult.current("InvalidEdits")
+			end
+		end, { v2, Image.shouldStartPlayback, Image.video })
+	end
 	ReactModule.useEffect(function()
 		-- upvalues: Image (copy), UseStateResult1 (copy)
 		if Image.onMutedChanged then
@@ -83,7 +115,7 @@ return function(Image)
 			onMuteButtonActivated = UseResult2
 		} else nil
 	end, { Image.showMuteButton, UseStateResult1, UseResult2 })
-	local UseRefResult = if FFlagLuaAppEdpMediaGalleryAutoAdvance or FFlagLuaAppEdpMediaGalleryFullScreen or FFlagLuaAppEdpConsoleMediaGalleryVideo or FFlagLuaAppEnableHomepageOneByTwoTile then ReactModule.useRef(nil) else nil
+	local UseRefResult1 = if FFlagLuaAppEdpMediaGalleryAutoAdvance or FFlagLuaAppEdpMediaGalleryFullScreen or FFlagLuaAppEdpConsoleMediaGalleryVideo or FFlagLuaAppEnableHomepageOneByTwoTile then ReactModule.useRef(nil) else nil
 	local ProgressBinding = nil
 	local Callback = nil
 	
@@ -92,17 +124,23 @@ return function(Image)
 	end
 	if FFlagLuaAppEdpMediaGalleryAutoAdvance or FFlagLuaAppEdpMediaGalleryFullScreen then
 		ReactModule.useEffect(function()
-			-- upvalues: UseRefResult (ref), Image (copy), FFlagLuaAppEdpMediaGalleryAutoAdvance (upval), FFlagLuaAppEdpMediaGalleryFullScreen (upval), RunService (upval), Callback (ref)
-			local Current = UseRefResult.current
+			-- upvalues: UseRefResult1 (ref), Image (copy), FFlagLuaAppEdpMediaGalleryAutoAdvance (upval), FFlagLuaAppEdpMediaGalleryFullScreen (upval), RunService (upval), FFlagLuaAppVideoPlayerTrimAndMusic (upval), v1 (ref), GetVideoEditsModule (upval), Callback (ref)
+			local Current = UseRefResult1.current
 			
 			if Image.shouldStartPlayback and (FFlagLuaAppEdpMediaGalleryAutoAdvance and Image.onVideoProgressChanged or FFlagLuaAppEdpMediaGalleryFullScreen and Image.showProgressBar) and Current then
 				local RenderSteppedConnection = RunService.RenderStepped:Connect(function()
-					-- upvalues: FFlagLuaAppEdpMediaGalleryAutoAdvance (upval), Image (upval), Current (copy), FFlagLuaAppEdpMediaGalleryFullScreen (upval), Callback (upval)
+					-- upvalues: FFlagLuaAppVideoPlayerTrimAndMusic (upval), v1 (upval), GetVideoEditsModule (upval), Current (copy), FFlagLuaAppEdpMediaGalleryAutoAdvance (upval), Image (upval), FFlagLuaAppEdpMediaGalleryFullScreen (upval), Callback (upval)
+					local ClampedValue: number? = nil
+					
+					if FFlagLuaAppVideoPlayerTrimAndMusic and v1 and v1.trim then
+						local PlaybackRange, PlaybackRange2 = GetVideoEditsModule.getPlaybackRange(Current.TimeLength, v1.trim)
+						ClampedValue = if PlaybackRange < PlaybackRange2 then math.clamp((Current.TimePosition - PlaybackRange) / (PlaybackRange2 - PlaybackRange), 0, 1) else 0
+					end
 					if FFlagLuaAppEdpMediaGalleryAutoAdvance and Image.onVideoProgressChanged then
-						Image.onVideoProgressChanged(if Current.TimeLength > 0 then Current.TimePosition / Current.TimeLength else 0)
+						Image.onVideoProgressChanged(if FFlagLuaAppVideoPlayerTrimAndMusic and ClampedValue ~= nil then ClampedValue elseif Current.TimeLength > 0 then Current.TimePosition / Current.TimeLength else 0)
 					end
 					if FFlagLuaAppEdpMediaGalleryFullScreen and Image.showProgressBar then
-						Callback(if Current.TimeLength > 0 then Current.TimePosition / Current.TimeLength else 0)
+						Callback(if FFlagLuaAppVideoPlayerTrimAndMusic and ClampedValue ~= nil then ClampedValue elseif Current.TimeLength > 0 then Current.TimePosition / Current.TimeLength else 0)
 					end
 				end)
 				
@@ -123,14 +161,15 @@ return function(Image)
 		end, {
 			Image.shouldStartPlayback,
 			if FFlagLuaAppEdpMediaGalleryAutoAdvance then Image.onVideoProgressChanged else nil,
-			if FFlagLuaAppEdpMediaGalleryFullScreen then Image.showProgressBar else nil
+			if FFlagLuaAppEdpMediaGalleryFullScreen then Image.showProgressBar else nil,
+			if FFlagLuaAppVideoPlayerTrimAndMusic then v1 else nil
 		})
 	end
 	if FFlagLuaAppEnableHomepageOneByTwoTile then
 		ReactModule.useEffect(function()
-			-- upvalues: Image (copy), UseRefResult (ref)
+			-- upvalues: Image (copy), UseRefResult1 (ref)
 			local OnAspectRatioChangedFunction: (any) -> () = Image.onAspectRatioChanged
-			local Current = UseRefResult and UseRefResult.current
+			local Current = UseRefResult1 and UseRefResult1.current
 			
 			if not OnAspectRatioChangedFunction or not Current then return end
 			local XRatio = nil
@@ -174,8 +213,8 @@ return function(Image)
 	if FFlagLuaAppEdpMediaGalleryFullScreen or FFlagLuaAppEdpConsoleMediaGalleryVideo then
 		IsVideoPlaying, UseStateResult2_2 = ReactModule.useState(false)
 		local UseResult4 = ReactModule.useCallback(function(p1)
-			-- upvalues: UseRefResult (ref), ReportWarningFunction (upval), LoggingProtocolModule (upval), Image (copy), VideoLoggerModule (upval)
-			local Current = UseRefResult.current
+			-- upvalues: UseRefResult1 (ref), ReportWarningFunction (upval), LoggingProtocolModule (upval), Image (copy), FFlagLuaAppVideoPlayerTrimAndMusic (upval), v1 (ref), GetVideoEditsModule (upval), VideoLoggerModule (upval), UseStateResult1 (copy)
+			local Current = UseRefResult1.current
 			
 			if not Current then
 				ReportWarningFunction(LoggingProtocolModule.default, "EventLogging", "reportVideoAction requires a valid videoFrame")
@@ -195,20 +234,31 @@ return function(Image)
 					ReportWarningFunction(LoggingProtocolModule.default, "EventLogging", `reportVideoAction requires a valid {if Source then "" else "source "}{if SourceId then "" else "sourceId "}{if PlaybackSessionId then "" else "playbackSessionId"}`)
 				end
 			end
+			local v3 = nil
+			
+			if FFlagLuaAppVideoPlayerTrimAndMusic and v1 then
+				local PlaybackRange, PlaybackRange2 = GetVideoEditsModule.getPlaybackRange(Current.TimeLength, v1.trim)
+				v3 = PlaybackRange2 - PlaybackRange
+			end
 			VideoLoggerModule.reportVideoAction(p1, nil, {
 				isVisible = true,
 				videoAssetId = Image.video,
 				source = Source or "",
 				sourceId = SourceId or "",
 				playbackSessionId = PlaybackSessionId or "",
-				videoAssetDuration = Current.TimeLength,
-				isAudible = Current.Volume ~= 0,
-				volumeLevel = if Current.Volume == 0 then 0 else 1
+				videoAssetDuration = if FFlagLuaAppVideoPlayerTrimAndMusic and v3 ~= nil then v3 else Current.TimeLength,
+				isAudible = if FFlagLuaAppVideoPlayerTrimAndMusic then not UseStateResult1 else Current.Volume ~= 0,
+				volumeLevel = if FFlagLuaAppVideoPlayerTrimAndMusic then if UseStateResult1 then 0 else 1 elseif Current.Volume == 0 then 0 else 1
 			})
-		end, { Image.video, Image.videoAnalyticsContext })
+		end, {
+			Image.video,
+			Image.videoAnalyticsContext,
+			if FFlagLuaAppVideoPlayerTrimAndMusic then v1 else nil,
+			if FFlagLuaAppVideoPlayerTrimAndMusic then UseStateResult1 else nil
+		})
 		Callback1 = ReactModule.useCallback(function()
-			-- upvalues: UseRefResult (ref), IsVideoPlaying (ref), VideoPlayerPlaybackEndThresholdInMsRatio (upval)
-			local Current = UseRefResult.current
+			-- upvalues: UseRefResult1 (ref), IsVideoPlaying (ref), VideoPlayerPlaybackEndThresholdInMsRatio (upval)
+			local Current = UseRefResult1.current
 			
 			if not Current then return end
 			if IsVideoPlaying then
@@ -268,8 +318,8 @@ return function(Image)
 			return if Image.showProgressBar then { progressBinding = ProgressBinding } else nil
 		end, { Image.showProgressBar, ProgressBinding })
 		ReactModule.useEffect(function()
-			-- upvalues: UseRefResult (ref), Image (copy), UseStateResult2_2 (ref), UseResult4 (copy), VideoActions (upval)
-			local Current = UseRefResult.current
+			-- upvalues: UseRefResult1 (ref), Image (copy), UseStateResult2_2 (ref), UseResult4 (copy), VideoActions (upval)
+			local Current = UseRefResult1.current
 			
 			if Image.shouldStartPlayback and Current then
 				local PlayedConnection = Current.Played:Connect(function()
@@ -335,9 +385,10 @@ return function(Image)
 		Video = ReactModule.createElement(LoadableVideoFrameModule, {
 			video = Image.video,
 			accessContext = if FFlagLuaAppHomeMomentVideoFallback then Image.accessContext else nil,
+			edits = if FFlagLuaAppVideoPlayerTrimAndMusic then v1 else nil,
 			thumbnail = Image.thumbnail,
 			thumbnailComponentOverride = if FFlagLuaAppSduiVideoThumbnail then Image.thumbnailComponentOverride else nil,
-			shouldStartPlayback = Image.shouldStartPlayback,
+			shouldStartPlayback = Image.shouldStartPlayback and (not FFlagLuaAppVideoPlayerTrimAndMusic or v2),
 			muted = UseStateResult1,
 			looped = Image.looped,
 			ScaleType = Image.ScaleType,
@@ -346,7 +397,7 @@ return function(Image)
 			onVideoLooped = Image.onVideoLooped,
 			onVideoEnded = if FFlagLuaAppEdpMediaGalleryAutoAdvance then Image.onVideoEnded else nil,
 			onVideoLoadFailed = if FFlagLuaAppVideoLoadFailureFallback then UseResult1 else nil,
-			ref = if FFlagLuaAppEdpMediaGalleryAutoAdvance or FFlagLuaAppEdpMediaGalleryFullScreen or (FFlagLuaAppEdpConsoleMediaGalleryVideo or FFlagLuaAppEnableHomepageOneByTwoTile) then UseRefResult else nil
+			ref = if FFlagLuaAppEdpMediaGalleryAutoAdvance or FFlagLuaAppEdpMediaGalleryFullScreen or FFlagLuaAppEdpConsoleMediaGalleryVideo or FFlagLuaAppEnableHomepageOneByTwoTile then UseRefResult1 else nil
 		}),
 		PlayButton = if (FFlagLuaAppVideoTileHideCenterPlayButton or FFlagLuaAppEnableHomepageOneByTwoTile) and Image.hideCenterPlayButton then nil elseif (FFlagLuaAppEdpMediaGalleryFullScreen or FFlagLuaAppMediaGalleryGamepadSupport) and (UseStateResult and not IsVideoPlaying and (not FFlagLuaAppMediaGalleryGamepadSupport or Callback1 ~= nil)) then ReactModule.createElement(RoundIconButtonModule, {
 			icon = "play-large",

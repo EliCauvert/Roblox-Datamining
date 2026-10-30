@@ -1,18 +1,23 @@
 ﻿local CoreGui = game:GetService("CoreGui")
-local Parent = script:FindFirstAncestor("AppChat").Parent
+local AppChat = script:FindFirstAncestor("AppChat")
+local Parent = AppChat.Parent
 local CryoModule = require(Parent.Cryo)
 local ReactModule = require(Parent.React)
 local UseChatIsVisibleModule = require(script.Parent.useChatIsVisible)
 local SetTimeoutFunction = require(Parent.LuauPolyfill).setTimeout
+local GetGuiObjectBackgroundTransparencyModule = require(AppChat.Utils.getGuiObjectBackgroundTransparency)
+local FFlagAppChatGuiVisibleUsesStyledTransparencyModule = require(AppChat.Flags.FFlagAppChatGuiVisibleUsesStyledTransparency)
 local AppChatGuiVisibleBatchUpdateIntervalMs = game:DefineFastInt("AppChat.GuiVisibleBatchUpdateIntervalMs", 1000)
 
 local function getGuiObjectIsObscuredAtPosition(Frame, XDelta, YDelta): boolean
-	-- upvalues: CoreGui (copy)
+	-- upvalues: CoreGui (copy), FFlagAppChatGuiVisibleUsesStyledTransparencyModule (copy), GetGuiObjectBackgroundTransparencyModule (copy)
 	for _, Frame1 in CoreGui:GetGuiObjectsAtPosition(XDelta, YDelta) do
 		if Frame1:IsA("GuiObject") then
+			local GuiObjectBackgroundTransparencyModule = if FFlagAppChatGuiVisibleUsesStyledTransparencyModule then GetGuiObjectBackgroundTransparencyModule(Frame1) else Frame1.BackgroundTransparency
+			
 			if Frame1 == Frame then
 				return false
-			elseif Frame1.Visible ~= false and Frame1.BackgroundTransparency <= 0.95 and not Frame1:IsDescendantOf(Frame) then
+			elseif Frame1.Visible ~= false and GuiObjectBackgroundTransparencyModule <= 0.95 and not Frame1:IsDescendantOf(Frame) then
 				return true
 			end
 			continue

@@ -139,6 +139,29 @@ function createMockUserProfileStore()
 	}
 end
 
+function useMockProfileNames(List)
+	-- upvalues: config (copy)
+	local NamesByUserId = {}
+	local Flag = false
+	
+	for _, value in List do
+		local Entry = config[tostring(value)]
+		
+		if Entry then
+			NamesByUserId[Entry.id] = {
+				combinedName = Entry.combinedName,
+				username = Entry.username
+			}
+		else
+			Flag = true
+		end
+	end
+	return {
+		status = if Flag then "Failed" else "Ready",
+		namesByUserId = NamesByUserId
+	}
+end
+
 function createMockPresenceData()
 	-- upvalues: config (copy)
 	local t = {}
@@ -179,6 +202,7 @@ return {
 	USERS = config,
 	createMockUserProfile = createMockUserProfile,
 	createMockUserProfileStore = createMockUserProfileStore,
+	useMockProfileNames = useMockProfileNames,
 	createMockPresenceData = createMockPresenceData,
 	createMockApolloProfiles = createMockApolloProfiles,
 	getUserProfilesFetchData = getUserProfilesFetchData

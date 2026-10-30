@@ -1,7 +1,6 @@
 ﻿local Parent = script.Parent.Parent.Parent
 local Parent1 = Parent.Parent
 local ReactModule = require(Parent1.React)
-local SharedFlagsModule = require(Parent1.SharedFlags)
 local FoundationModule = require(Parent1.Foundation)
 local View = FoundationModule.View
 local Text = FoundationModule.Text
@@ -31,8 +30,7 @@ local UnifiedPurchaseModalTypeEnumModule = require(Parent.Enums.UnifiedPurchaseM
 local _ = require(Parent.ProductPurchase.v4.cartPricingResponseLineItem)
 local FormatNumberModule = require(Parent.Utility.formatNumber)
 local GetUpsellBadgeInfoModule = require(Parent.Utility.getUpsellBadgeInfo)
-local FFlagAXMISWithBlackbird = SharedFlagsModule.FFlagAXMISWithBlackbird
-local FFlagAXFixMISUpsellDiscountSummary = SharedFlagsModule.FFlagAXFixMISUpsellDiscountSummary
+local FFlagAXMISWithBlackbird = require(Parent1.SharedFlags).FFlagAXMISWithBlackbird
 local FFlagEnableRobuxUpsellPlusButtonExperimentModule = require(Parent.Flags.FFlagEnableRobuxUpsellPlusButtonExperiment)
 local FFlagUnifiedPurchaseFlowMarketplaceUIImprovements = require(Parent.Parent.SharedFlags).FFlagUnifiedPurchaseFlowMarketplaceUIImprovements
 local CompactUpsellModalBreakpoint = game:DefineFastInt("CompactUpsellModalBreakpoint", 400)
@@ -158,7 +156,7 @@ local function UpsellProductDetails(p1)
 end
 
 local function UnifiedRobuxUpsellModalV2(p1)
-	-- upvalues: FFlagEnableRobuxUpsellPlusButtonExperimentModule (copy), UseCartPricingModule (copy), ReactModule (copy), UseLocalizationFunction (copy), FFlagEnableUnifiedPurchaseFlowForDevSubs (copy), FFlagAXMISWithBlackbird (copy), FFlagUnifiedPurchaseFlowMarketplaceUIImprovements (copy), UnifiedPurchaseModalTypeEnumModule (copy), CompactUpsellModalBreakpoint (copy), FFlagShouldFixDevSubsFlashingTitleModule (copy), UseFocusNavigationRefsModule (copy), BuildCartPricingOfferCheckboxesModule (copy), ButtonVariant (copy), Checkbox (copy), View (copy), FFlagAXFixMISUpsellDiscountSummary (copy), ProductDetailsContainerModule (copy), Dialog (copy), DialogSize (copy), PriceSummaryModule (copy), UnifiedProductDetailsModule (copy), CartPricingLoadingModule (copy), GetFFlagIAPExperienceEnableMultiDisplayUpsellModule (copy), UpsellProductDetails (copy), ButtonGroup (copy), Orientation (copy), Enums (copy), Text (copy)
+	-- upvalues: FFlagEnableRobuxUpsellPlusButtonExperimentModule (copy), UseCartPricingModule (copy), ReactModule (copy), UseLocalizationFunction (copy), FFlagEnableUnifiedPurchaseFlowForDevSubs (copy), FFlagAXMISWithBlackbird (copy), FFlagUnifiedPurchaseFlowMarketplaceUIImprovements (copy), UnifiedPurchaseModalTypeEnumModule (copy), CompactUpsellModalBreakpoint (copy), FFlagShouldFixDevSubsFlashingTitleModule (copy), UseFocusNavigationRefsModule (copy), BuildCartPricingOfferCheckboxesModule (copy), ButtonVariant (copy), Checkbox (copy), View (copy), ProductDetailsContainerModule (copy), Dialog (copy), DialogSize (copy), PriceSummaryModule (copy), UnifiedProductDetailsModule (copy), CartPricingLoadingModule (copy), GetFFlagIAPExperienceEnableMultiDisplayUpsellModule (copy), UpsellProductDetails (copy), ButtonGroup (copy), Orientation (copy), Enums (copy), Text (copy)
 	local RobloxPlusDiscountPercentage = if FFlagEnableRobuxUpsellPlusButtonExperimentModule and type(p1.robloxPlusDiscountPercentage) == "number" then p1.robloxPlusDiscountPercentage else nil
 	local OnRobloxPlusButtonActivated = if RobloxPlusDiscountPercentage == nil then nil else p1.onRobloxPlusButtonActivated
 	local UseCartPricingModuleResult = UseCartPricingModule({
@@ -318,7 +316,6 @@ local function UnifiedRobuxUpsellModalV2(p1)
 	}))) do
 		Copy[i] = value
 	end
-	local SavingsSummaryOverride = if FFlagAXFixMISUpsellDiscountSummary then if FFlagAXFixMISUpsellDiscountSummary and p1.product.itemPrice and p1.product.itemPrice.savingsSummaryOverride then p1.product.itemPrice.savingsSummaryOverride else UseCartPricingModuleResult.cartPricingSavingsSummary elseif FFlagAXFixMISUpsellDiscountSummary and p1.product.itemPrice and p1.product.itemPrice.savingsSummaryOverride then p1.product.itemPrice.savingsSummaryOverride else nil
 	local Element = ReactModule.createElement(ProductDetailsContainerModule, {
 		purchaseModalType = p1.purchaseModalType,
 		product = UseMemoResult,
@@ -327,9 +324,9 @@ local function UnifiedRobuxUpsellModalV2(p1)
 		priceSuffix = PerMonth,
 		hideProductDetails = p1.purchaseModalType == UnifiedPurchaseModalTypeEnumModule.MultiItem,
 		hideDiscountSummary = p1.isCartPricingLoading,
-		savingsSummary = if FFlagAXFixMISUpsellDiscountSummary then SavingsSummaryOverride else UseCartPricingModuleResult.cartPricingSavingsSummary
+		savingsSummary = if p1.product.itemPrice and p1.product.itemPrice.savingsSummaryOverride then p1.product.itemPrice.savingsSummaryOverride else UseCartPricingModuleResult.cartPricingSavingsSummary
 	})
-	local CreateElementFunction3 = ReactModule.createElement
+	local CreateElementFunction1 = ReactModule.createElement
 	local Root = Dialog.Root
 	local config1 = {
 		disablePortal = false,
@@ -340,11 +337,11 @@ local function UnifiedRobuxUpsellModalV2(p1)
 	local config2 = {
 		DialogTitle = ReactModule.createElement(Dialog.Title, { text = UseStateResult1 })
 	}
-	local CreateElementFunction2 = ReactModule.createElement
+	local CreateElementFunction3 = ReactModule.createElement
 	local Content = Dialog.Content
 	local v1 = nil
 	local t = {}
-	local CreateElementFunction1 = ReactModule.createElement
+	local CreateElementFunction2 = ReactModule.createElement
 	local config3 = {
 		tag = "col align-x-center align-y-top gap-medium size-full-0 auto-y"
 	}
@@ -423,8 +420,8 @@ local function UnifiedRobuxUpsellModalV2(p1)
 		}
 	end
 	config4.UpsellSuggestions = CreateElementFunction(View, config5, config6)
-	t.ContentView = CreateElementFunction1(View, config3, config4)
-	config2.DialogContent = CreateElementFunction2(Content, v1, t)
+	t.ContentView = CreateElementFunction2(View, config3, config4)
+	config2.DialogContent = CreateElementFunction3(Content, v1, t)
 	config2.DialogActions = if OnRobloxPlusButtonActivated then ReactModule.createElement(ButtonGroup, {
 		LayoutOrder = 4,
 		orientation = Orientation.Vertical,
@@ -471,7 +468,7 @@ local function UnifiedRobuxUpsellModalV2(p1)
 		})
 	})
 	
-	return CreateElementFunction3(Root, config1, config2)
+	return CreateElementFunction1(Root, config1, config2)
 end
 
 return function(p2)

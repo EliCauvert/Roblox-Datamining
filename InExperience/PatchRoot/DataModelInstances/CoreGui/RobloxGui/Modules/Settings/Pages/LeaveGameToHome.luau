@@ -13,7 +13,8 @@ local ThemeModule = require(RobloxGui.Modules.Settings.Theme)
 local CreateFunction = require(CorePackages.Workspace.Packages.AppCommonLib).Create
 local v1 = nil
 RobloxGui:WaitForChild("Modules"):WaitForChild("TenFootInterface")
-local IsEnabled = require(RobloxGui.Modules.TenFootInterface):IsEnabled()
+local FFlagResponsiveUnitsDeprecateTenFoot = require(CorePackages.Workspace.Packages.SharedFlags).FFlagResponsiveUnitsDeprecateTenFoot
+local NoFFlagResponsiveUnitsDeprecateTenFoot: boolean = require(RobloxGui.Modules.TenFootInterface):IsEnabled() and not FFlagResponsiveUnitsDeprecateTenFoot
 local RbxAnalyticsServiceExposePlaySessionIdEngineFeature = game:GetEngineFeature("RbxAnalyticsServiceExposePlaySessionId")
 local GetFFlagEnableInGameMenuDurationLoggerModule = require(RobloxGui.Modules.Common.Flags.GetFFlagEnableInGameMenuDurationLogger)
 local CollectAnalyticsForSystemMenuFFlag = settings():GetFFlag("CollectAnalyticsForSystemMenu")
@@ -21,7 +22,7 @@ local GetDefaultQualityLevelFunction = require(CorePackages.Workspace.Packages.A
 local ConstantsModule = if CollectAnalyticsForSystemMenuFFlag then require(RobloxGui.Modules:WaitForChild("InGameMenu"):WaitForChild("Resources"):WaitForChild("Constants")) else nil
 local RobloxTranslatorModule = require(CorePackages.Workspace.Packages.RobloxTranslator)
 v1 = (function()
-	-- upvalues: RobloxGui (copy), RbxAnalyticsServiceExposePlaySessionIdEngineFeature (copy), RbxAnalyticsService (copy), GetFFlagEnableInGameMenuDurationLoggerModule (copy), PerfUtilsModule (copy), GuiService (copy), CollectAnalyticsForSystemMenuFFlag (copy), ConstantsModule (ref), LinkingProtocol (copy), DeepLinkSource (copy), RunService (copy), GetDefaultQualityLevelFunction (copy), RobloxTranslatorModule (copy), CreateFunction (copy), ThemeModule (copy), IsEnabled (copy), UtilityModule (copy)
+	-- upvalues: RobloxGui (copy), RbxAnalyticsServiceExposePlaySessionIdEngineFeature (copy), RbxAnalyticsService (copy), GetFFlagEnableInGameMenuDurationLoggerModule (copy), PerfUtilsModule (copy), GuiService (copy), CollectAnalyticsForSystemMenuFFlag (copy), ConstantsModule (ref), LinkingProtocol (copy), DeepLinkSource (copy), RunService (copy), GetDefaultQualityLevelFunction (copy), RobloxTranslatorModule (copy), CreateFunction (copy), ThemeModule (copy), NoFFlagResponsiveUnitsDeprecateTenFoot (copy), UtilityModule (copy)
 	local NewPage = require(RobloxGui.Modules.Settings.SettingsPageFactory):CreateNewPage()
 	NewPage.playsessionid = ""
 	
@@ -96,7 +97,7 @@ v1 = (function()
 		TextColor3 = Color3.new(1, 1, 1),
 		Size = UDim2.new(1, 0, 0, 200),
 		Parent = NewPage.Page,
-		Position = IsEnabled and UDim2.new(0, 0, 0, 100) or UDim2.new(0, 0, 0, 0)
+		Position = NoFFlagResponsiveUnitsDeprecateTenFoot and UDim2.new(0, 0, 0, 100) or UDim2.new(0, 0, 0, 0)
 	})
 	local Parent1 = CreateFunction("Frame")({
 		Name = "LeaveButtonContainer",
@@ -107,7 +108,7 @@ v1 = (function()
 	})
 	local _ = CreateFunction("UIGridLayout")({
 		Name = "LeavetButtonsLayout",
-		CellSize = IsEnabled and UDim2.new(0, 300, 0, 80) or UDim2.new(0, 200, 0, 50),
+		CellSize = NoFFlagResponsiveUnitsDeprecateTenFoot and UDim2.new(0, 300, 0, 80) or UDim2.new(0, 200, 0, 50),
 		CellPadding = UDim2.new(0, 20, 0, 20),
 		FillDirection = Enum.FillDirection.Horizontal,
 		HorizontalAlignment = Enum.HorizontalAlignment.Center,
@@ -119,7 +120,7 @@ v1 = (function()
 	if UtilityModule:IsSmallTouchScreen() then
 		Parent.FontSize = Enum.FontSize.Size24
 		Parent.Size = UDim2.new(1, 0, 0, 100)
-	elseif IsEnabled then
+	elseif NoFFlagResponsiveUnitsDeprecateTenFoot then
 		Parent.FontSize = Enum.FontSize.Size48
 	end
 	NewPage.LeaveGameButton = UtilityModule:MakeStyledButton("LeaveGame", "Leave", nil, NewPage.LeaveFunc)

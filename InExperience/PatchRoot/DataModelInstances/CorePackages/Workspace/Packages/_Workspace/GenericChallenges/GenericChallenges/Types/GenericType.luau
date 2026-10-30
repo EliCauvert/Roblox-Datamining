@@ -15,7 +15,8 @@ local config = {
 	PrivateAccessToken = "privateaccesstoken",
 	BlockSession = "blocksession",
 	CaptchaV2 = "captchav2",
-	Turnstile = "turnstile"
+	Turnstile = "turnstile",
+	RoCaptcha = "rocaptcha"
 }
 local v1 = require(GenericChallenges.Parent.enumerate)(script.Name, config)
 require(GenericChallenges.Utils.addRawValueMethodToEnum)(v1, config)

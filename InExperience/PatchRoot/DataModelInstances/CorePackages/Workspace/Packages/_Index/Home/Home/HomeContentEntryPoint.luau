@@ -1,4 +1,5 @@
 ﻿local AppLifecycleObserverService = game:GetService("AppLifecycleObserverService")
+local ExperienceService = game:GetService("ExperienceService")
 local Home = script:FindFirstAncestor("Home")
 local Parent = Home.Parent
 local ReactModule = require(Parent.React)
@@ -20,6 +21,7 @@ local HomePageSessionModule = require(Home.HomePageSession)
 local FFlagLuaAppAddHomeExtraTopPadding = require(Parent.SharedFlags).FFlagLuaAppAddHomeExtraTopPadding
 local FFlagLuaAppSduiVideoThumbnail = require(Parent.SharedFlags).FFlagLuaAppSduiVideoThumbnail
 local FFlagLuaAppOneByTwoHoverIdleAutoplay = require(Parent.SharedFlags).FFlagLuaAppOneByTwoHoverIdleAutoplay
+local FFlagLuaAppSduiSuppressVideoDetectorDuringScroll = require(Parent.SharedFlags).FFlagLuaAppSduiSuppressVideoDetectorDuringScroll
 local FFlagSduiDismissPromptPageScope = require(Parent.SharedFlags).FFlagSduiDismissPromptPageScope
 local FFlagAppPageShellScrollToTopFocus = require(Parent.SharedFlags).FFlagAppPageShellScrollToTopFocus
 local FFlagLuaAppsDefaultSelection = require(Parent.SharedFlags).FFlagLuaAppsDefaultSelection
@@ -39,7 +41,7 @@ local function getCommittedHomeSessionId(p1)
 end
 
 return ReactModule.memo(function(p1)
-	-- upvalues: HomeConstantsModule (copy), FFlagLuaAppAddHomeExtraTopPadding (copy), UseEntrySurfacingFunction (copy), FFlagSduiDismissPromptPageScope (copy), UsePageScopeRefFunction (copy), ReactModule (copy), SduiSharedUtilitiesModule (copy), AppPage (copy), FFlagHomePageRefetchOnDataHydrationAccountReset (copy), FetchHomePageModule (copy), Home (copy), UseHomeCollectionLayoutSyncModule (copy), FFlagLuaAppOneByTwoHoverIdleAutoplay (copy), ResponsiveModule (copy), VideoUtilsModule (copy), FFlagLuaAppSduiVideoThumbnail (copy), FFlagLuaAppSduiHomeSponsoredAdViewabilityModule (copy), SignalsReactModule (copy), getCommittedHomeSessionId (copy), UseSponsoredAdViewabilityDetectorFunction (copy), AppLifecycleObserverService (copy), SduiPageWrapperEntryPoint (copy), RefreshHomePageModule (copy), FFlagAppPageShellScrollToTopFocus (copy), FFlagLuaAppsDefaultSelection (copy), FFlagAppThemeHalloween2026HomeBackground (copy)
+	-- upvalues: HomeConstantsModule (copy), FFlagLuaAppAddHomeExtraTopPadding (copy), UseEntrySurfacingFunction (copy), FFlagSduiDismissPromptPageScope (copy), UsePageScopeRefFunction (copy), ReactModule (copy), SduiSharedUtilitiesModule (copy), AppPage (copy), FFlagHomePageRefetchOnDataHydrationAccountReset (copy), FetchHomePageModule (copy), Home (copy), UseHomeCollectionLayoutSyncModule (copy), FFlagLuaAppOneByTwoHoverIdleAutoplay (copy), ResponsiveModule (copy), VideoUtilsModule (copy), FFlagLuaAppSduiVideoThumbnail (copy), FFlagLuaAppSduiHomeSponsoredAdViewabilityModule (copy), SignalsReactModule (copy), getCommittedHomeSessionId (copy), UseSponsoredAdViewabilityDetectorFunction (copy), AppLifecycleObserverService (copy), FFlagLuaAppSduiSuppressVideoDetectorDuringScroll (copy), ExperienceService (copy), SduiPageWrapperEntryPoint (copy), RefreshHomePageModule (copy), FFlagAppPageShellScrollToTopFocus (copy), FFlagLuaAppsDefaultSelection (copy), FFlagAppThemeHalloween2026HomeBackground (copy)
 	local ConfigKey = HomeConstantsModule.ConfigKey
 	local v1 = nil
 	
@@ -85,8 +87,41 @@ return ReactModule.memo(function(p1)
 	
 	if FFlagLuaAppSduiHomeSponsoredAdViewabilityModule then
 		local UseStateResult
-		UseStateResult, v36 = ReactModule.useState(nil)
+		UseStateResult, v38 = ReactModule.useState(nil)
 		UseSponsoredAdViewabilityDetectorFunction(UseStateResult, SignalsReactModule.useSignalState(getCommittedHomeSessionId), AppLifecycleObserverService)
+	end
+	if FFlagLuaAppSduiSuppressVideoDetectorDuringScroll then
+		local IsUsePreferredInputResultMatch1 = ResponsiveModule.usePreferredInput() == ResponsiveModule.Input.Touch
+		local ViewportVideoAutoplayController = if UseFeedVideoPlaybackContextResult then UseFeedVideoPlaybackContextResult.viewportVideoAutoplayController else nil
+		ReactModule.useEffect(function()
+			-- upvalues: ViewportVideoAutoplayController (copy), IsUsePreferredInputResultMatch1 (copy), AppLifecycleObserverService (upval), VideoUtilsModule (upval), ExperienceService (upval)
+			if not ViewportVideoAutoplayController then
+				return nil
+			end
+			ViewportVideoAutoplayController:setSuppressDetectorsDuringScroll(IsUsePreferredInputResultMatch1)
+			
+			if IsUsePreferredInputResultMatch1 then
+				local OnHideConnection = AppLifecycleObserverService.OnHide:Connect(function()
+					-- upvalues: ViewportVideoAutoplayController (upval), VideoUtilsModule (upval)
+					ViewportVideoAutoplayController:reset(VideoUtilsModule.AnalyticsEnums.VideoEndReason.AppBackgrounded)
+				end)
+				local RegisterForExperienceJoinResult = ExperienceService:RegisterForExperienceJoin(function()
+					-- upvalues: ViewportVideoAutoplayController (upval), VideoUtilsModule (upval)
+					ViewportVideoAutoplayController:reset(VideoUtilsModule.AnalyticsEnums.VideoEndReason.ExperienceLaunched)
+				end)
+				
+				return function()
+					-- upvalues: OnHideConnection (copy), RegisterForExperienceJoinResult (copy)
+					OnHideConnection:Disconnect()
+					RegisterForExperienceJoinResult:Disconnect()
+				end
+			else
+				return nil
+			end
+		end, {
+			ViewportVideoAutoplayController,
+			IsUsePreferredInputResultMatch1
+		})
 	end
 	return ReactModule.createElement(SduiPageWrapperEntryPoint, {
 		ref = if FFlagLuaAppSduiHomeSponsoredAdViewabilityModule then v2 else nil,

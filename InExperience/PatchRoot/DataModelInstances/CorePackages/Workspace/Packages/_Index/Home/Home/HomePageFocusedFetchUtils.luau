@@ -5,6 +5,7 @@ local SduiSharedUtilitiesModule = require(Parent.SduiSharedUtilities)
 local SduiRequestConcurrencyPolicy = SduiSharedUtilitiesModule.SduiRequestConcurrencyPolicy
 local GetSduiApiStoreFunction = SduiSharedUtilitiesModule.getSduiApiStore
 local HomeConstantsModule = require(Home.HomeConstants)
+local FFlagSduiRefreshFeedItemIsOmissionExpected = require(Parent.SharedFlags).FFlagSduiRefreshFeedItemIsOmissionExpected
 local RequestIds = {}
 local RequestId = 0
 
@@ -99,21 +100,22 @@ local _ = function(p1, p2, p3)
 end
 
 function HomePageFocusedFetchUtils.resolve(Promise, p1)
-	-- upvalues: HomePageFocusedFetchUtils (copy), SduiCoreSystemModule (copy), HomeConstantsModule (copy)
+	-- upvalues: HomePageFocusedFetchUtils (copy), FFlagSduiRefreshFeedItemIsOmissionExpected (copy), SduiCoreSystemModule (copy), HomeConstantsModule (copy)
 	return Promise:andThen(function(): boolean
-		-- upvalues: HomePageFocusedFetchUtils (upval), p1 (copy), SduiCoreSystemModule (upval), HomeConstantsModule (upval)
+		-- upvalues: HomePageFocusedFetchUtils (upval), p1 (copy), FFlagSduiRefreshFeedItemIsOmissionExpected (upval), SduiCoreSystemModule (upval), HomeConstantsModule (upval)
 		if not HomePageFocusedFetchUtils.isCurrent(p1) then
 			return false
-		elseif p1.foundTarget then
+		end
+		if p1.foundTarget then
 			return true
-		else
+		end
+		if not FFlagSduiRefreshFeedItemIsOmissionExpected or not p1.options.isOmissionExpected then
 			p1.options.reportError(SduiCoreSystemModule.SduiErrors.SduiErrorType.InvalidFeedInResponse, {
 				name = HomeConstantsModule.ApiName,
 				message = `Focused response omitted target, topicIds: {p1.options.topicId}`
 			})
-			
-			return false
 		end
+		return false
 	end, function(p2): boolean
 		-- upvalues: HomePageFocusedFetchUtils (upval), p1 (copy), SduiCoreSystemModule (upval), HomeConstantsModule (upval)
 		if HomePageFocusedFetchUtils.isCurrent(p1) then

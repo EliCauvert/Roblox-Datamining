@@ -24,10 +24,11 @@ local FoundationModule = require(CorePackages.Packages.Foundation)
 local EnabledResult = require(CorePackages.Workspace.Packages.Chrome).Enabled()
 local ServiceModule = if EnabledResult then require(RobloxGui.Modules.Chrome.Service) else nil
 local ConstantsModule = if EnabledResult then require(RobloxGui.Modules.Chrome.ChromeShared.Unibar.Constants) else nil
+local SharedFlagsModule = require(CorePackages.Workspace.Packages.SharedFlags)
 local v1 = nil
 RobloxGui:WaitForChild("Modules"):WaitForChild("TenFootInterface")
-local IsEnabled = require(RobloxGui.Modules.TenFootInterface):IsEnabled()
-local SharedFlagsModule = require(CorePackages.Workspace.Packages.SharedFlags)
+local FFlagResponsiveUnitsDeprecateTenFoot = SharedFlagsModule.FFlagResponsiveUnitsDeprecateTenFoot
+local NoFFlagResponsiveUnitsDeprecateTenFoot: boolean = require(RobloxGui.Modules.TenFootInterface):IsEnabled() and not FFlagResponsiveUnitsDeprecateTenFoot
 local FFlagEnableConsoleExpControls = SharedFlagsModule.FFlagEnableConsoleExpControls
 local FFlagChromeShortcutRemoveLeaveOnRespawnPage = SharedFlagsModule.FFlagChromeShortcutRemoveLeaveOnRespawnPage
 local FFlagRespawnActionChromeShortcutTelemetryModule = require(RobloxGui.Modules.Chrome.Flags.FFlagRespawnActionChromeShortcutTelemetry)
@@ -44,7 +45,7 @@ local Text = FoundationModule.Text
 local View = FoundationModule.View
 
 local function ResetCharacterButtonsContainer(p1)
-	-- upvalues: ReactModule (copy), UseLastInputFunction (copy), UseFocusGuiObjectFunction (copy), UseLocalizationFunction (copy), ConstantsModule1 (copy), FFlagRenameRespawnConfirmationPage (copy), Input (copy), UtilityModule (copy), View (copy), IsEnabled (copy), Text (copy), Button (copy), InputSize (copy), FFlagConfirmationButtonsUseGreyButtonsModule (copy), ButtonVariant (copy)
+	-- upvalues: ReactModule (copy), UseLastInputFunction (copy), UseFocusGuiObjectFunction (copy), UseLocalizationFunction (copy), ConstantsModule1 (copy), FFlagRenameRespawnConfirmationPage (copy), Input (copy), UtilityModule (copy), View (copy), NoFFlagResponsiveUnitsDeprecateTenFoot (copy), Text (copy), Button (copy), InputSize (copy), FFlagConfirmationButtonsUseGreyButtonsModule (copy), ButtonVariant (copy)
 	local UseRefResult = ReactModule.useRef(nil)
 	local UseLastInputResult = UseLastInputFunction()
 	local UseFocusGuiObjectResult = UseFocusGuiObjectFunction()
@@ -66,7 +67,7 @@ local function ResetCharacterButtonsContainer(p1)
 	
 	return ReactModule.createElement(View, {
 		tag = "size-full-0 auto-y col",
-		Position = UDim2.new(0, 0, 0, if IsEnabled then 100 else 0)
+		Position = UDim2.new(0, 0, 0, if NoFFlagResponsiveUnitsDeprecateTenFoot then 100 else 0)
 	}, {
 		ResetCharacterText = ReactModule.createElement(Text, {
 			LayoutOrder = 1,
@@ -74,9 +75,9 @@ local function ResetCharacterButtonsContainer(p1)
 			Size = UDim2.new(1, 0, 0, if UtilityModule:IsSmallTouchScreen() then 100 else 200),
 			tag = {
 				["text-wrap"] = true,
-				["text-heading-medium"] = not UtilityModule:IsSmallTouchScreen() and not IsEnabled,
+				["text-heading-medium"] = not UtilityModule:IsSmallTouchScreen() and not NoFFlagResponsiveUnitsDeprecateTenFoot,
 				["text-heading-small"] = UtilityModule:IsSmallTouchScreen(),
-				["text-heading-large"] = IsEnabled
+				["text-heading-large"] = NoFFlagResponsiveUnitsDeprecateTenFoot
 			}
 		}),
 		ButtonsContainer = ReactModule.createElement(View, {
@@ -88,7 +89,7 @@ local function ResetCharacterButtonsContainer(p1)
 				text = UseLocalizationResult.ResetCharacter,
 				size = InputSize.Large,
 				variant = if FFlagConfirmationButtonsUseGreyButtonsModule then ButtonVariant.Standard else ButtonVariant.SoftEmphasis,
-				width = UDim.new(0, if IsEnabled then 300 else 200),
+				width = UDim.new(0, if NoFFlagResponsiveUnitsDeprecateTenFoot then 300 else 200),
 				ref = UseRefResult,
 				onActivated = p1.onResetFunction
 			}),
@@ -97,7 +98,7 @@ local function ResetCharacterButtonsContainer(p1)
 				text = UseLocalizationResult.DontResetCharacter,
 				size = InputSize.Large,
 				variant = ButtonVariant.Subtle,
-				width = UDim.new(0, if IsEnabled then 300 else 200),
+				width = UDim.new(0, if NoFFlagResponsiveUnitsDeprecateTenFoot then 300 else 200),
 				onActivated = ReactModule.useCallback(function()
 					-- upvalues: p1 (copy), UtilityModule (upval)
 					p1.dontResetCharFromButton(UtilityModule:IsUsingGamepad())
@@ -121,7 +122,7 @@ local function ResetCharacterContainer(p1)
 end
 
 v1 = (function()
-	-- upvalues: RobloxGui (copy), RbxAnalyticsService (copy), ConstantsModule1 (copy), FFlagRefactorMenuConfirmationButtonsModule (copy), CreateFunction (copy), FFlagRenameRespawnConfirmationPage (copy), ThemeModule (copy), IsEnabled (copy), UtilityModule (copy), Players (copy), FFlagRespawnActionChromeShortcutTelemetryModule (copy), CryoModule (copy), AvatarEditorService (copy), FFlagEnableConsoleExpControls (copy), ReactRobloxModule (copy), ReactModule (copy), ResetCharacterContainer (copy)
+	-- upvalues: RobloxGui (copy), RbxAnalyticsService (copy), ConstantsModule1 (copy), FFlagRefactorMenuConfirmationButtonsModule (copy), CreateFunction (copy), FFlagRenameRespawnConfirmationPage (copy), ThemeModule (copy), NoFFlagResponsiveUnitsDeprecateTenFoot (copy), UtilityModule (copy), Players (copy), FFlagRespawnActionChromeShortcutTelemetryModule (copy), CryoModule (copy), AvatarEditorService (copy), FFlagEnableConsoleExpControls (copy), ReactRobloxModule (copy), ReactModule (copy), ResetCharacterContainer (copy)
 	local NewPage = require(RobloxGui.Modules.Settings.SettingsPageFactory):CreateNewPage()
 	
 	function NewPage.DontResetCharFunc(IsUserInputTypeMatch)
@@ -166,7 +167,7 @@ v1 = (function()
 			TextColor3 = Color3.new(1, 1, 1),
 			Size = UDim2.new(1, 0, 0, 200),
 			Parent = NewPage.Page,
-			Position = IsEnabled and UDim2.new(0, 0, 0, 100) or UDim2.new(0, 0, 0, 0)
+			Position = NoFFlagResponsiveUnitsDeprecateTenFoot and UDim2.new(0, 0, 0, 100) or UDim2.new(0, 0, 0, 0)
 		})
 		Parent = CreateFunction("Frame")({
 			Name = "ResetButtonContainer",
@@ -177,7 +178,7 @@ v1 = (function()
 		})
 		local _ = CreateFunction("UIGridLayout")({
 			Name = "ResetButtonsLayout",
-			CellSize = IsEnabled and UDim2.new(0, 300, 0, 80) or UDim2.new(0, 200, 0, 50),
+			CellSize = NoFFlagResponsiveUnitsDeprecateTenFoot and UDim2.new(0, 300, 0, 80) or UDim2.new(0, 200, 0, 50),
 			CellPadding = UDim2.new(0, 20, 0, 20),
 			FillDirection = Enum.FillDirection.Horizontal,
 			HorizontalAlignment = Enum.HorizontalAlignment.Center,
@@ -189,11 +190,11 @@ v1 = (function()
 		if UtilityModule:IsSmallTouchScreen() then
 			Parent1.FontSize = Enum.FontSize.Size24
 			Parent1.Size = UDim2.new(1, 0, 0, 100)
-		elseif IsEnabled then
+		elseif NoFFlagResponsiveUnitsDeprecateTenFoot then
 			Parent1.FontSize = Enum.FontSize.Size48
 		end
 	end
-	local function v51(p1)
+	local function v52(p1)
 		-- upvalues: Players (upval), ConstantsModule1 (upval), FFlagRespawnActionChromeShortcutTelemetryModule (upval), CryoModule (upval), RbxAnalyticsService (upval)
 		local LocalPlayer = Players.LocalPlayer
 		
@@ -223,11 +224,11 @@ v1 = (function()
 	NewPage.ResetBindable = true
 	
 	local function OnResetFunction(p1)
-		-- upvalues: AvatarEditorService (upval), NewPage (copy), v51 (copy)
+		-- upvalues: AvatarEditorService (upval), NewPage (copy), v52 (copy)
 		AvatarEditorService:BustAvatarFetchCache()
 		
 		if NewPage.ResetBindable == true then
-			v51(p1)
+			v52(p1)
 		elseif NewPage.ResetBindable then
 			NewPage.ResetBindable:Fire()
 		end

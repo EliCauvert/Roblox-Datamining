@@ -213,6 +213,20 @@ function CrossExperienceVoiceManager:getIsBackgroundDMActive()
 	end)
 end
 
+function CrossExperienceVoiceManager:getPartyVoiceDebugStats()
+	-- upvalues: FlagsModule (copy), Promise (copy), Communication (copy), CrossExperience (copy)
+	return if FlagsModule.FFlagVoiceDebugPartyVoiceToggleEnabled then Promise.new(function(Callback, Callback1)
+		-- upvalues: Communication (upval), CrossExperience (upval)
+		Communication.execute(CrossExperience.Constants.COMMUNICATIONS.EXECUTE_GET_PARTY_VOICE_DEBUG_STATS, {}, function(p1)
+			-- upvalues: Callback (copy)
+			Callback(p1)
+		end, function()
+			-- upvalues: Callback1 (copy)
+			Callback1()
+		end)
+	end) else Promise.resolve({})
+end
+
 function CrossExperienceVoiceManager:performJoinFeasibilityCheck()
 	-- upvalues: GetFFlagEnableCrossExpVoiceMemoryCheckFunction (copy), CrossExperience (copy), FFlagFixCrossExperienceVoiceExecutePrint (copy), LoggerModule (copy)
 	if not GetFFlagEnableCrossExpVoiceMemoryCheckFunction() then

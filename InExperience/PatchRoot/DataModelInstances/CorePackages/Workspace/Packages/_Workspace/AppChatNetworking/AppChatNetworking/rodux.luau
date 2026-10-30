@@ -17,7 +17,6 @@
 	UpdateConversationTitle = require(script.UpdateConversationTitle),
 	UpdateTypingStatus = require(script.UpdateTypingStatus),
 	GetChatLandingModal = require(script.GetChatLandingModal),
-	GetConversationTopModal = require(script.GetConversationTopModal),
 	GetPendingStateModal = require(script.GetPendingStateModal),
 	RecordModalSequenceResponse = require(script.RecordModalSequenceResponse),
 	GetChatModerationStatuses = require(script.GetChatModerationStatuses),

@@ -3,8 +3,8 @@ local Parent = BuildExperience.Parent
 local ReactModule = require(Parent.React)
 local SignalsModule = require(Parent.Signals)
 local SignalsReactModule = require(Parent.SignalsReact)
-local GetExperienceAnalyticsStoreFunction = require(Parent.DataHydration.ExperienceAnalytics).getExperienceAnalyticsStore
-local DataStatus = require(Parent.DataHydration.ExperienceAnalytics).DataStatus
+local GetCreatorAnalyticsStoreFunction = require(Parent.DataHydration.CreatorAnalytics).getCreatorAnalyticsStore
+local DataStatus = require(Parent.DataHydration.CreatorAnalytics).DataStatus
 local _ = require(BuildExperience.Analytics.AnalyticsMetric)
 local _ = require(BuildExperience.Analytics.AnalyticsWindow)
 local GetMetricQueryParamsModule = require(BuildExperience.Analytics.getMetricQueryParams)
@@ -12,15 +12,15 @@ local DeriveMetricSummaryModule = require(BuildExperience.Analytics.deriveMetric
 local FFlagBuildAnalyticsCreatorHubWindowFixModule = require(BuildExperience.Flags.FFlagBuildAnalyticsCreatorHubWindowFix)
 
 return function(p1, p2, p3, p4, p5)
-	-- upvalues: ReactModule (copy), SignalsModule (copy), DataStatus (copy), GetMetricQueryParamsModule (copy), GetExperienceAnalyticsStoreFunction (copy), SignalsReactModule (copy), FFlagBuildAnalyticsCreatorHubWindowFixModule (copy), DeriveMetricSummaryModule (copy)
+	-- upvalues: ReactModule (copy), SignalsModule (copy), DataStatus (copy), GetMetricQueryParamsModule (copy), GetCreatorAnalyticsStoreFunction (copy), SignalsReactModule (copy), FFlagBuildAnalyticsCreatorHubWindowFixModule (copy), DeriveMetricSummaryModule (copy)
 	local UseSignalStateResult = SignalsReactModule.useSignalState((ReactModule.useMemo(function()
-		-- upvalues: SignalsModule (upval), p4 (copy), DataStatus (upval), GetMetricQueryParamsModule (upval), p1 (copy), p2 (copy), p3 (copy), GetExperienceAnalyticsStoreFunction (upval)
+		-- upvalues: SignalsModule (upval), p4 (copy), DataStatus (upval), GetMetricQueryParamsModule (upval), p1 (copy), p2 (copy), p3 (copy), GetCreatorAnalyticsStoreFunction (upval)
 		return SignalsModule.createComputed(function(p6)
-			-- upvalues: p4 (upval), DataStatus (upval), GetMetricQueryParamsModule (upval), p1 (upval), p2 (upval), p3 (upval), GetExperienceAnalyticsStoreFunction (upval)
+			-- upvalues: p4 (upval), DataStatus (upval), GetMetricQueryParamsModule (upval), p1 (upval), p2 (upval), p3 (upval), GetCreatorAnalyticsStoreFunction (upval)
 			if p4 == nil then
 				return { series = nil, status = DataStatus.NotReady }
 			else
-				local AndFetchMetric = GetExperienceAnalyticsStoreFunction(p6).getAndFetchMetric((GetMetricQueryParamsModule(p1, p2, p3, p4)))
+				local AndFetchMetric = GetCreatorAnalyticsStoreFunction(p6).getAndFetchMetric((GetMetricQueryParamsModule(p1, p2, p3, p4)))
 				
 				return {
 					series = AndFetchMetric.data(p6),
@@ -31,24 +31,24 @@ return function(p1, p2, p3, p4, p5)
 	end, { p1, p2, p3, p4 })))
 	local Delay = p5 or 600
 	ReactModule.useEffect(function()
-		-- upvalues: FFlagBuildAnalyticsCreatorHubWindowFixModule (upval), p4 (copy), GetMetricQueryParamsModule (upval), p1 (copy), p2 (copy), p3 (copy), Delay (copy), GetExperienceAnalyticsStoreFunction (upval)
+		-- upvalues: FFlagBuildAnalyticsCreatorHubWindowFixModule (upval), p4 (copy), GetMetricQueryParamsModule (upval), p1 (copy), p2 (copy), p3 (copy), Delay (copy), GetCreatorAnalyticsStoreFunction (upval)
 		if not FFlagBuildAnalyticsCreatorHubWindowFixModule then return end
 		if p4 == nil then return end
 		local MetricQueryParamsModule = GetMetricQueryParamsModule(p1, p2, p3, p4)
 		local DelayedThread = nil
 		
 		local function scheduleRefresh()
-			-- upvalues: DelayedThread (ref), Delay (upval), GetExperienceAnalyticsStoreFunction (upval), MetricQueryParamsModule (copy), scheduleRefresh (copy)
+			-- upvalues: DelayedThread (ref), Delay (upval), GetCreatorAnalyticsStoreFunction (upval), MetricQueryParamsModule (copy), scheduleRefresh (copy)
 			DelayedThread = task.delay(Delay, function()
-				-- upvalues: GetExperienceAnalyticsStoreFunction (upval), MetricQueryParamsModule (upval), scheduleRefresh (upval)
-				GetExperienceAnalyticsStoreFunction(false).refetchMetric(MetricQueryParamsModule)
+				-- upvalues: GetCreatorAnalyticsStoreFunction (upval), MetricQueryParamsModule (upval), scheduleRefresh (upval)
+				GetCreatorAnalyticsStoreFunction(false).refetchMetric(MetricQueryParamsModule)
 				scheduleRefresh()
 			end)
 		end
 		
 		DelayedThread = task.delay(Delay, function()
-			-- upvalues: GetExperienceAnalyticsStoreFunction (upval), MetricQueryParamsModule (copy), scheduleRefresh (copy)
-			GetExperienceAnalyticsStoreFunction(false).refetchMetric(MetricQueryParamsModule)
+			-- upvalues: GetCreatorAnalyticsStoreFunction (upval), MetricQueryParamsModule (copy), scheduleRefresh (copy)
+			GetCreatorAnalyticsStoreFunction(false).refetchMetric(MetricQueryParamsModule)
 			scheduleRefresh()
 		end)
 		

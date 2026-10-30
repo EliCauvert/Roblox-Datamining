@@ -4,6 +4,7 @@ local FoundationModule = require(Parent.Foundation)
 local ReactModule = require(Parent.React)
 local ReactOtterModule = require(Parent.ReactOtter)
 local ReactionModule = require(Reactions.Components.Reaction)
+local ReactionSizeModule = require(Reactions.Enums.ReactionSize)
 local _ = require(Reactions.Enums.ReactionType)
 local ControlState = FoundationModule.Enums.ControlState
 local View = FoundationModule.View
@@ -18,7 +19,7 @@ local function _(Frame: Frame)
 end
 
 return ReactModule.memo(function(p1)
-	-- upvalues: UseTokensFunction (copy), UsePreferencesFunction (copy), ReactModule (copy), ControlState (copy), ReactOtterModule (copy), config1 (copy), config (copy), View (copy), _Vector2 (copy), ReactionModule (copy)
+	-- upvalues: UseTokensFunction (copy), UsePreferencesFunction (copy), ReactModule (copy), ControlState (copy), ReactOtterModule (copy), config1 (copy), config (copy), View (copy), _Vector2 (copy), ReactionModule (copy), ReactionSizeModule (copy)
 	local UseTokensResult = UseTokensFunction()
 	local ReducedMotion = UsePreferencesFunction().reducedMotion
 	local UseMemoResult = ReactModule.useMemo(function()
@@ -90,7 +91,7 @@ return ReactModule.memo(function(p1)
 		testId = p1.testId
 	}, {
 		Glyph = ReactModule.createElement(View, {
-			tag = "size-600-600",
+			tag = "auto-xy",
 			ZIndex = 2,
 			Position = JoinBindingsResult:map(function(p2): UDim2
 				return UDim2.new(0.5, 0, 0.5, (1 - p2.entry) * 12 - p2.hover * 8)
@@ -103,7 +104,7 @@ return ReactModule.memo(function(p1)
 		}, {
 			Reaction = ReactModule.createElement(ReactionModule, {
 				reactionType = p1.reactionType,
-				Size = UDim2.fromScale(1, 1),
+				size = p1.reactionSize or ReactionSizeModule.Small,
 				testId = if p1.testId then `{p1.testId}--reaction` else nil
 			})
 		})

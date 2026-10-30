@@ -10,6 +10,7 @@ local AppCommonLibModule = require(Parent.AppCommonLib)
 local Signal = AppCommonLibModule.Signal
 local FFlagLuaAppMediaGalleryGamepadSupport = require(Parent.SharedFlags).FFlagLuaAppMediaGalleryGamepadSupport
 local FFlagLuaAppEdpMomentVideo = require(Parent.SharedFlags).FFlagLuaAppEdpMomentVideo
+local FFlagLuaAppVideoPlayerTrimAndMusic = require(Parent.SharedFlags).FFlagLuaAppVideoPlayerTrimAndMusic
 local ResponsiveModule = require(Parent.Responsive)
 local UseBreakpointXOrSmallerFunction = ResponsiveModule.useBreakpointXOrSmaller
 local UseLastInputFunction = ResponsiveModule.useLastInput
@@ -52,7 +53,7 @@ local function getVisibleIndices(CountItems, CurrentIndex: number)
 end
 
 return ReactModule.memo(function(Frame)
-	-- upvalues: UseTokensFunction (copy), MediaGalleryConstantsModule (copy), ReactModule (copy), IsValidIdentifierModule (copy), IsYouTubeVideoModule (copy), IsAudioPlaybackAllowedForDeviceModule (copy), EnableAudioPlaybackInApp (copy), UseSnapScrollModule (copy), getVisibleIndices (copy), Signal (copy), VideoPlaybackCoordinator (copy), FFlagLuaAppMediaGalleryGamepadSupport (copy), UseAutoAdvanceModule (copy), FFlagLuaAppVideoLoadFailureFallback (copy), UseBreakpointXOrSmallerFunction (copy), ResponsiveModule (copy), UseLastInputFunction (copy), AppCommonLibModule (copy), LuaAppMediaGalleryGamepadSupportsPagingIcons (copy), UseGamepadSupportsFunction (copy), List (copy), list (copy), UseCursorFunction (copy), CursorType (copy), UseCarouselGamepadInputModule (copy), UseTouchDragScrollModule (copy), FFlagLuaAppEdpMomentVideo (copy), MediaGalleryVideoItemModule (copy), MediaGalleryImageItemModule (copy), UserInputService (copy), MediaGalleryPageIndicatorsModule (copy), CarouselScrollButtons (copy), RoundIconButton (copy)
+	-- upvalues: UseTokensFunction (copy), MediaGalleryConstantsModule (copy), ReactModule (copy), IsValidIdentifierModule (copy), IsYouTubeVideoModule (copy), IsAudioPlaybackAllowedForDeviceModule (copy), EnableAudioPlaybackInApp (copy), UseSnapScrollModule (copy), getVisibleIndices (copy), Signal (copy), VideoPlaybackCoordinator (copy), FFlagLuaAppMediaGalleryGamepadSupport (copy), UseAutoAdvanceModule (copy), FFlagLuaAppVideoLoadFailureFallback (copy), UseBreakpointXOrSmallerFunction (copy), ResponsiveModule (copy), UseLastInputFunction (copy), AppCommonLibModule (copy), LuaAppMediaGalleryGamepadSupportsPagingIcons (copy), UseGamepadSupportsFunction (copy), List (copy), list (copy), UseCursorFunction (copy), CursorType (copy), UseCarouselGamepadInputModule (copy), UseTouchDragScrollModule (copy), FFlagLuaAppEdpMomentVideo (copy), FFlagLuaAppVideoPlayerTrimAndMusic (copy), MediaGalleryVideoItemModule (copy), MediaGalleryImageItemModule (copy), UserInputService (copy), MediaGalleryPageIndicatorsModule (copy), CarouselScrollButtons (copy), RoundIconButton (copy)
 	local UseTokensResult = UseTokensFunction()
 	local ItemPadding = Frame.itemPadding or UseTokensResult.Padding.Medium
 	local AspectRatio = Frame.aspectRatio or MediaGalleryConstantsModule.ITEM_ASPECT_RATIO
@@ -237,6 +238,10 @@ return ReactModule.memo(function(Frame)
 				local config2 = {
 					videoId = Item.videoId,
 					videoAccessContext = if FFlagLuaAppEdpMomentVideo then Item.videoAccessContext else nil,
+					trimStartTime = if FFlagLuaAppVideoPlayerTrimAndMusic then Item.trimStartTime else nil,
+					trimEndTime = if FFlagLuaAppVideoPlayerTrimAndMusic then Item.trimEndTime else nil,
+					musicAssetId = if FFlagLuaAppVideoPlayerTrimAndMusic then Item.musicAssetId else nil,
+					musicStartTime = if FFlagLuaAppVideoPlayerTrimAndMusic then Item.musicStartTime else nil,
 					attributionComponent = if FFlagLuaAppEdpMomentVideo then Item.attributionComponent else nil,
 					thumbnail = Item.imageId,
 					Size = UDim2.fromScale(1, 1),

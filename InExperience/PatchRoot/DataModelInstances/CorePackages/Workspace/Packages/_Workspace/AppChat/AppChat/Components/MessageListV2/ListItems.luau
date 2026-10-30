@@ -57,7 +57,7 @@ return {
 			if ByKey[StableKey] == nil then
 				local Entry = T1[StableKey]
 				
-				if Entry ~= nil and itemContentsEqual(Entry, v2) then
+				if Entry ~= nil and (Entry == v2 or itemContentsEqual(Entry, v2)) then
 					v2 = Entry
 				end
 				table.insert(Buffer, v2)

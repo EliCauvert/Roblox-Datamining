@@ -12,8 +12,8 @@ return {
 	beginCreationFlow = function(p1)
 		require(script.Analytics.beginCreationFlow)(p1)
 	end,
-	publishMomentWithTags = function(p1, p2, p3, p4, p5, p6)
-		return require(script.Upload.publishMomentWithTags)(p1, p2, p3, p4, p5, p6)
+	publishMomentWithTags = function(p1, p2, p3, p4, p5, p6, p7)
+		return require(script.Upload.publishMomentWithTags)(p1, p2, p3, p4, p5, p6, p7)
 	end,
 	registerAnalyticsListener = function(p1)
 		return require(script.Analytics.hostAnalyticsListener).register(p1)

@@ -1,5 +1,4 @@
 ﻿return {
-	ExpChatLocalChatEnabledMessageExperimentation = require(script.ExpChatLocalChatEnabledMessageExperimentation),
 	ExpChatPresetChatBadgeFTUXExperimentation = require(script.ExpChatPresetChatBadgeFTUXExperimentation),
 	ExpChatPresetChatAutocompleteExperimentation = require(script.ExpChatPresetChatAutocompleteExperimentation),
 	ExpChatPresetChatEmojiTabExperimentation = require(script.ExpChatPresetChatEmojiTabExperimentation),

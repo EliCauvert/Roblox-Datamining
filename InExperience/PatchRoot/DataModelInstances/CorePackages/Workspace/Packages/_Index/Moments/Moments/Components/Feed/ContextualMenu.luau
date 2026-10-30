@@ -23,6 +23,7 @@ local EventNames = MomentsCommonModule.Analytics.EventNames
 local ReportModalCovering = MomentsCommonModule.Media.reportModalCovering
 local MakeFeedActionFieldsModule = require(Moments.Analytics.makeFeedActionFields)
 local MakeRecommendationAttributionModule = require(Moments.Analytics.makeRecommendationAttribution)
+local _ = require(Moments.Analytics.RecommendationContentType)
 local ReportMomentModule = require(Moments.Moderation.reportMoment)
 local UseFeedFunction = require(Moments.Components.Feed.FeedContext).useFeed
 local UseMomentsSessionFunction = require(Moments.Stores.GetMomentsStore.MomentsSessionContext).useMomentsSession
@@ -35,6 +36,7 @@ local FFlagMomentsServeEDPVideos = SharedFlagsModule.FFlagMomentsServeEDPVideos
 local MomentsUseSmallOverflowMenu = game:DefineFastFlag("MomentsUseSmallOverflowMenu", false)
 local MomentsReportButtonAnalytics = game:DefineFastFlag("MomentsReportButtonAnalytics", false)
 local FFlagMomentsCreatorAnalyticsModule = require(Moments.Flags.FFlagMomentsCreatorAnalytics)
+local FFlagMomentsRecommendationContentTypeModule = require(Moments.Flags.FFlagMomentsRecommendationContentType)
 local GetPostInsightsPageStoreModule = require(Moments.Components.PostInsights.getPostInsightsPageStore)
 local PostInsightsStringsModule = require(Moments.Components.PostInsights.postInsightsStrings)
 local PostInsightsCoachmarkModule = require(Moments.Components.PostInsights.PostInsightsCoachmark)
@@ -57,7 +59,7 @@ local config = {
 }
 
 return function(p1)
-	-- upvalues: UseLocalizationFunction (copy), config (copy), FFlagMomentsCreatorAnalyticsModule (copy), PostInsightsStringsModule (copy), UseFeedFunction (copy), FFlagMomentsServeEDPVideos (copy), UseMomentsHostFunction (copy), UseToggleStateFunction (copy), ReactModule (copy), UseMomentsSessionFunction (copy), GetMomentsPreferencesStoreModule (copy), GetModeratedItemsStoreModule (copy), GetToastStoreModule (copy), SignalsReactModule (copy), FireAnalyticsEventFunction (copy), EventNames (copy), CheckDebugAccessModule (copy), ReportMomentModule (copy), MakeRecommendationAttributionModule (copy), SignalActionTypeModule (copy), MakeFeedActionFieldsModule (copy), MomentsReportButtonAnalytics (copy), ReportMomentsEngagementFunction (copy), GetPostFeedItemIdModule (copy), ReportModalCovering (copy), GetFFlagMomentsCoachmarkPersistenceFunction (copy), DismissPostInsightsCoachmarkModule (copy), GetPostInsightsPageStoreModule (copy), LocalPlayer (copy), FoundationModule (copy), FFlagMomentsOptimisticProfilePending (copy), Menu (copy), MomentsUseSmallOverflowMenu (copy), IconButton (copy), ThreeDotsVertical (copy), PostInsightsCoachmarkModule (copy), ReportMomentDialogModule (copy), IpReportConfirmationDialogModule (copy), Moments (copy), View (copy), SpeakerSlash (copy), Speaker (copy)
+	-- upvalues: UseLocalizationFunction (copy), config (copy), FFlagMomentsCreatorAnalyticsModule (copy), PostInsightsStringsModule (copy), UseFeedFunction (copy), FFlagMomentsServeEDPVideos (copy), UseMomentsHostFunction (copy), UseToggleStateFunction (copy), ReactModule (copy), UseMomentsSessionFunction (copy), GetMomentsPreferencesStoreModule (copy), GetModeratedItemsStoreModule (copy), GetToastStoreModule (copy), SignalsReactModule (copy), FireAnalyticsEventFunction (copy), EventNames (copy), CheckDebugAccessModule (copy), ReportMomentModule (copy), MakeRecommendationAttributionModule (copy), FFlagMomentsRecommendationContentTypeModule (copy), SignalActionTypeModule (copy), MakeFeedActionFieldsModule (copy), MomentsReportButtonAnalytics (copy), ReportMomentsEngagementFunction (copy), GetPostFeedItemIdModule (copy), ReportModalCovering (copy), GetFFlagMomentsCoachmarkPersistenceFunction (copy), DismissPostInsightsCoachmarkModule (copy), GetPostInsightsPageStoreModule (copy), LocalPlayer (copy), FoundationModule (copy), FFlagMomentsOptimisticProfilePending (copy), Menu (copy), MomentsUseSmallOverflowMenu (copy), IconButton (copy), ThreeDotsVertical (copy), PostInsightsCoachmarkModule (copy), ReportMomentDialogModule (copy), IpReportConfirmationDialogModule (copy), Moments (copy), View (copy), SpeakerSlash (copy), Speaker (copy)
 	local UseLocalizationResult = UseLocalizationFunction(config)
 	local Analytics = if FFlagMomentsCreatorAnalyticsModule then UseLocalizationFunction(PostInsightsStringsModule.MENU_KEYS).analytics else ""
 	local UseFeedResult = UseFeedFunction()
@@ -147,7 +149,7 @@ return function(p1)
 		MomentsPreferencesStoreModule.toggleFeedDebugMode
 	})
 	local UseResult6 = ReactModule.useCallback(function(p2, p3, p4)
-		-- upvalues: p1 (copy), ReportMomentModule (upval), MakeRecommendationAttributionModule (upval), UseFeedResult (copy), SignalActionTypeModule (upval), MakeFeedActionFieldsModule (upval), FireAnalyticsEventFunction (upval), EventNames (upval), ModeratedItemsStoreModule (copy), ToastStoreModule (copy), UseLocalizationResult (copy)
+		-- upvalues: p1 (copy), ReportMomentModule (upval), MakeRecommendationAttributionModule (upval), FFlagMomentsRecommendationContentTypeModule (upval), UseFeedResult (copy), SignalActionTypeModule (upval), MakeFeedActionFieldsModule (upval), FireAnalyticsEventFunction (upval), EventNames (upval), ModeratedItemsStoreModule (copy), ToastStoreModule (copy), UseLocalizationResult (copy)
 		if not p1.moment then
 			return nil
 		end
@@ -156,13 +158,13 @@ return function(p1)
 		local v5 = nil
 		
 		if not p4 then
-			v3, v4, v82 = pcall(function()
+			v3, v4, v84 = pcall(function()
 				-- upvalues: ReportMomentModule (upval), p1 (upval), p2 (copy)
 				return ReportMomentModule(p1.moment.recommendationMetadata.feedItemId, p2):await()
 			end)
 		end
 		local RecommendationMetadata = p1.moment.recommendationMetadata
-		local RecommendationAttributionModule = MakeRecommendationAttributionModule(RecommendationMetadata)
+		local RecommendationAttributionModule = MakeRecommendationAttributionModule(RecommendationMetadata, nil, if FFlagMomentsRecommendationContentTypeModule then p1.contentType else nil)
 		
 		if RecommendationAttributionModule then
 			local Success, Result = pcall(function()

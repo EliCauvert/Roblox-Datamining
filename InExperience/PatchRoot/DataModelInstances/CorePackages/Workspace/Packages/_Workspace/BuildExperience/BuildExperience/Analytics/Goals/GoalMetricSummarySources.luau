@@ -1,8 +1,8 @@
 ﻿local BuildExperience = script:FindFirstAncestor("BuildExperience")
-local ExperienceAnalyticsModule = require(BuildExperience.Parent.DataHydration.ExperienceAnalytics)
+local CreatorAnalyticsModule = require(BuildExperience.Parent.DataHydration.CreatorAnalytics)
 local DeriveMetricSummaryModule = require(BuildExperience.Analytics.deriveMetricSummary)
 local _ = require(BuildExperience.Analytics.Goals.GoalTypes)
-local MetricGranularity = ExperienceAnalyticsModule.MetricGranularity
+local MetricGranularity = CreatorAnalyticsModule.MetricGranularity
 
 local function retentionRatio(p1, DurationSeconds, EndUnixDelta, EndUnix)
 	local NewValue: number? = nil
@@ -100,13 +100,13 @@ return {
 		}
 	end,
 	firstSessionRetention = function(p4)
-		-- upvalues: ExperienceAnalyticsModule (copy), MetricGranularity (copy), retentionRatio (copy)
+		-- upvalues: CreatorAnalyticsModule (copy), MetricGranularity (copy), retentionRatio (copy)
 		local DurationSeconds = p4.durationSeconds
 		
 		return {
 			query = {
 				lookbackWindows = 2,
-				metric = ExperienceAnalyticsModule.MetricId.TotalSessionsEndedInBucket,
+				metric = CreatorAnalyticsModule.MetricId.TotalSessionsEndedInBucket,
 				granularity = MetricGranularity.OneDay,
 				breakdowns = { { dimensions = { "SessionTimeBucket" } } },
 				filters = {

@@ -7,10 +7,9 @@ local ShareSheetRowWithScrollArrowsModule = require(script.Parent.ShareSheetRowW
 local ScrollView = FoundationModule.ScrollView
 local Visibility = FoundationModule.Enums.Visibility
 local UseTokensFunction = FoundationModule.Hooks.useTokens
-local FFlagShareSheetPeoplePickerEnabledModule = require(ShareSheet.Flags.FFlagShareSheetPeoplePickerEnabled)
 
 return function(Frame)
-	-- upvalues: FFlagShareSheetScrollArrowsModule (copy), ReactModule (copy), ShareSheetRowWithScrollArrowsModule (copy), UseTokensFunction (copy), ScrollView (copy), FFlagShareSheetPeoplePickerEnabledModule (copy), Visibility (copy)
+	-- upvalues: FFlagShareSheetScrollArrowsModule (copy), ReactModule (copy), ShareSheetRowWithScrollArrowsModule (copy), UseTokensFunction (copy), ScrollView (copy), Visibility (copy)
 	if FFlagShareSheetScrollArrowsModule then
 		return ReactModule.createElement(ShareSheetRowWithScrollArrowsModule, Frame)
 	else
@@ -19,7 +18,7 @@ return function(Frame)
 		return ReactModule.createElement(ScrollView, {
 			tag = "size-full-0 auto-y",
 			LayoutOrder = Frame.LayoutOrder,
-			padding = if FFlagShareSheetPeoplePickerEnabledModule and Frame.hasHorizontalPadding == false then nil else {
+			padding = {
 				left = UDim.new(0, UseTokensResult.Padding.XLarge),
 				right = UDim.new(0, UseTokensResult.Padding.XLarge)
 			},

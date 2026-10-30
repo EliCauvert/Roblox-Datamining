@@ -42,6 +42,7 @@ return function(Callback)
 		hasIdentity = UseMemoResult.hasIdentity,
 		getIdentity = UseMessageRowContentsModuleResult.getIdentity,
 		contents = UseMessageRowContentsModuleResult.contents,
-		deliveryState = UseMemoResult.deliveryState
+		deliveryState = UseMemoResult.deliveryState,
+		replyText = UseMessageRowContentsModuleResult.replyText
 	}
 end

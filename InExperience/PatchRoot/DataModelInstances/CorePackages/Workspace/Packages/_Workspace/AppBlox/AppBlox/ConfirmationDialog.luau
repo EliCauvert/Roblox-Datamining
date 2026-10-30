@@ -14,6 +14,8 @@ local UseDefaultFocusBehaviorFunction = require(Parent.ReactFocusNavigation).use
 local SharedFlagsModule = require(Parent.SharedFlags)
 local FFlagLuaAppPlayButtonPrivatePT = SharedFlagsModule.FFlagLuaAppPlayButtonPrivatePT
 local FFlagAppBloxConfirmationDialogFocusNav = SharedFlagsModule.FFlagAppBloxConfirmationDialogFocusNav
+local FFlagAppBloxConfirmationDialogBackCloses = SharedFlagsModule.FFlagAppBloxConfirmationDialogBackCloses
+local FFlagSplitPaneUnsavedDialogAlertStyle = SharedFlagsModule.FFlagSplitPaneUnsavedDialogAlertStyle
 local EventMap = {
 	[Enum.KeyCode.ButtonB] = FocusNavigationEventNameEnum.NavigateBack,
 	[Enum.KeyCode.Escape] = FocusNavigationEventNameEnum.NavigateBack
@@ -21,7 +23,7 @@ local EventMap = {
 local FFlagEnableSplitPane = require(Parent.SharedFlags).FFlagEnableSplitPane
 
 return function(p1)
-	-- upvalues: UseLocalizationFunction (copy), FFlagAppBloxConfirmationDialogFocusNav (copy), ReactModule (copy), FocusNavigationEventNameEnum (copy), InputHandlersModule (copy), UseFocusRootFunction (copy), FocusNavigableSurfaceIdentifierEnum (copy), EventMap (copy), UseDefaultFocusBehaviorFunction (copy), FFlagLuaAppPlayButtonPrivatePT (copy), ButtonVariant (copy), Dialog (copy), FFlagEnableSplitPane (copy), Orientation (copy)
+	-- upvalues: UseLocalizationFunction (copy), FFlagAppBloxConfirmationDialogFocusNav (copy), FFlagAppBloxConfirmationDialogBackCloses (copy), ReactModule (copy), FocusNavigationEventNameEnum (copy), InputHandlersModule (copy), UseFocusRootFunction (copy), FocusNavigableSurfaceIdentifierEnum (copy), EventMap (copy), UseDefaultFocusBehaviorFunction (copy), FFlagLuaAppPlayButtonPrivatePT (copy), ButtonVariant (copy), FFlagSplitPaneUnsavedDialogAlertStyle (copy), Dialog (copy), FFlagEnableSplitPane (copy), Orientation (copy)
 	local UseLocalizationResult = UseLocalizationFunction({
 		confirmButtonText = "CommonUI.Controls.Action.Confirm",
 		cancelButtonText = "CommonUI.Controls.Action.Cancel"
@@ -30,24 +32,24 @@ return function(p1)
 	local v1 = nil
 	
 	if FFlagAppBloxConfirmationDialogFocusNav then
-		local OnCancelFunction = p1.onCancel
+		local OnClose = FFlagAppBloxConfirmationDialogBackCloses and p1.onClose or p1.onCancel
 		v1, Ref = UseDefaultFocusBehaviorFunction((UseFocusRootFunction({
 			isAutoFocusRoot = true,
 			shouldRestoreFocus = false,
 			surfaceIdentifier = FocusNavigableSurfaceIdentifierEnum.PopUp,
 			eventMap = EventMap,
 			eventHandlers = ReactModule.useMemo(function()
-				-- upvalues: FocusNavigationEventNameEnum (upval), InputHandlersModule (upval), OnCancelFunction (copy)
+				-- upvalues: FocusNavigationEventNameEnum (upval), InputHandlersModule (upval), OnClose (copy)
 				return {
 					[FocusNavigationEventNameEnum.NavigateBack] = {
 						handler = InputHandlersModule.onRelease(function(p2)
-							-- upvalues: OnCancelFunction (upval)
-							OnCancelFunction()
+							-- upvalues: OnClose (upval)
+							OnClose()
 							p2:cancel()
 						end)
 					}
 				}
-			end, { OnCancelFunction })
+			end, { OnClose })
 		})))
 	end
 	local Ref1 = v1
@@ -61,7 +63,7 @@ return function(p1)
 			ref = Ref1
 		}
 		local config1 = {
-			variant = ButtonVariant.Standard,
+			variant = if FFlagSplitPaneUnsavedDialogAlertStyle and p1.cancelButtonVariant then p1.cancelButtonVariant else ButtonVariant.Standard,
 			text = p1.cancelButtonText or UseLocalizationResult.cancelButtonText,
 			onActivated = p1.onCancel,
 			ref = if p1.hideConfirmButton then Ref1 else nil
@@ -73,7 +75,7 @@ return function(p1)
 		disablePortal = p1.disablePortal,
 		size = if FFlagLuaAppPlayButtonPrivatePT then p1.size else nil,
 		ref = Ref,
-		onClose = if FFlagEnableSplitPane and p1.onClose ~= nil then p1.onClose elseif p1.showCloseButton then p1.onCancel else nil
+		onClose = if FFlagEnableSplitPane or FFlagAppBloxConfirmationDialogBackCloses then if p1.onClose == nil then if p1.showCloseButton then p1.onCancel else nil else p1.onClose elseif p1.showCloseButton then p1.onCancel else nil
 	}, {
 		DialogTitle = ReactModule.createElement(Dialog.Title, { text = p1.title }),
 		DialogContent = ReactModule.createElement(Dialog.Content, nil, {
@@ -89,7 +91,7 @@ return function(p1)
 					ref = Ref1
 				},
 				{
-					variant = ButtonVariant.Standard,
+					variant = if FFlagSplitPaneUnsavedDialogAlertStyle and p1.cancelButtonVariant then p1.cancelButtonVariant else ButtonVariant.Standard,
 					text = p1.cancelButtonText or UseLocalizationResult.cancelButtonText,
 					onActivated = p1.onCancel
 				}

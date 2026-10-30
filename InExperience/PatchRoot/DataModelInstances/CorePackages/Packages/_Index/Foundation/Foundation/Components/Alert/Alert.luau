@@ -12,8 +12,10 @@ local FlagsModule = require(Foundation.Utility.Flags)
 local IconModule = require(Foundation.Components.Icon)
 local IconSizeModule = require(Foundation.Enums.IconSize)
 local InputSizeModule = require(Foundation.Enums.InputSize)
+local LinkModule = require(Foundation.Components.Link)
 local StateLayerAffordanceModule = require(Foundation.Enums.StateLayerAffordance)
 local TextModule = require(Foundation.Components.Text)
+local TextOverflowModule = require(Foundation.Enums.TextOverflow)
 local _ = require(Foundation.Components.Types)
 local ViewModule = require(Foundation.Components.View)
 local EscapeRichTextModule = require(Foundation.Utility.escapeRichText)
@@ -69,7 +71,7 @@ local function WrappingRichText(Frame)
 end
 
 return ReactModule.memo(ReactModule.forwardRef(function(p3, Ref)
-	-- upvalues: WithDefaultsModule (copy), config (copy), UseTokensModule (copy), config1 (copy), ReactModule (copy), Width (copy), FlagsModule (copy), UseAlertVariantsModule (copy), ButtonVariantModule (copy), AlertConstantsModule (copy), IconVariant (copy), AlertSeverityModule (copy), IsBuilderIconModule (copy), IconModule (copy), IconSizeModule (copy), ViewModule (copy), WrappingRichText (copy), TextModule (copy), EscapeRichTextModule (copy), StateLayerAffordanceModule (copy), ButtonGroupModule (copy), InputSizeModule (copy), CloseAffordanceModule (copy), CloseAffordanceVariantModule (copy), WithCommonPropsModule (copy), AlertVariantModule (copy)
+	-- upvalues: WithDefaultsModule (copy), config (copy), UseTokensModule (copy), config1 (copy), ReactModule (copy), Width (copy), FlagsModule (copy), UseAlertVariantsModule (copy), ButtonVariantModule (copy), AlertConstantsModule (copy), IconVariant (copy), AlertSeverityModule (copy), IsBuilderIconModule (copy), IconModule (copy), IconSizeModule (copy), ViewModule (copy), WrappingRichText (copy), TextModule (copy), LinkModule (copy), TextOverflowModule (copy), EscapeRichTextModule (copy), StateLayerAffordanceModule (copy), ButtonGroupModule (copy), InputSizeModule (copy), CloseAffordanceModule (copy), CloseAffordanceVariantModule (copy), WithCommonPropsModule (copy), AlertVariantModule (copy)
 	local WithDefaultsModuleResult = WithDefaultsModule(p3, config)
 	local UseTokensModuleResult = UseTokensModule()
 	local Entry = config1[WithDefaultsModuleResult.variant] or WithDefaultsModuleResult.variant
@@ -181,7 +183,20 @@ return ReactModule.memo(ReactModule.forwardRef(function(p3, Ref)
 		testId = `{WithDefaultsModuleResult.testId}--message`
 	})
 	local UseResult2 = if IsXBelow1 then nil else UseResult1
-	local Element21 = if WithDefaultsModuleResult.link then if IsXBelow1 and FlagsModule.FoundationAlertLinkWrap then ReactModule.createElement(WrappingRichText, {
+	local Element21 = if WithDefaultsModuleResult.link and FlagsModule.FoundationAlertUseLink then ReactModule.createElement(ViewModule, {
+		LayoutOrder = 3,
+		tag = UseAlertVariantsModuleResult.linkContainer.tag,
+		padding = UseAlertVariantsModuleResult.link.padding,
+		onAbsoluteSizeChanged = UseResult2
+	}, {
+		Link = ReactModule.createElement(LinkModule, {
+			hasUnderline = true,
+			text = WithDefaultsModuleResult.link.text,
+			onActivated = WithDefaultsModuleResult.link.onActivated,
+			textOverflow = if IsXBelow1 then TextOverflowModule.Wrap else TextOverflowModule.None,
+			testId = `{WithDefaultsModuleResult.testId}--link`
+		})
+	}) elseif WithDefaultsModuleResult.link then if IsXBelow1 and FlagsModule.FoundationAlertLinkWrap then ReactModule.createElement(WrappingRichText, {
 		LayoutOrder = 3,
 		slot = UseAlertVariantsModuleResult.link,
 		text = `<u>{EscapeRichTextModule(WithDefaultsModuleResult.link.text)}</u>`,

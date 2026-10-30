@@ -14,7 +14,7 @@ local FFlagBuildAnalyticsGoalsModule = require(BuildExperience.Flags.FFlagBuildA
 local Sheet = FoundationModule.Sheet
 local _ = require(BuildExperience.Analytics.AnalyticsMetric)
 local _ = require(BuildExperience.Analytics.AnalyticsWindow)
-local _ = require(Parent.DataHydration.ExperienceAnalytics)
+local _ = require(Parent.DataHydration.CreatorAnalytics)
 local MetricChartContainerModule = require(BuildExperience.Components.Analytics.Chart.MetricChartContainer)
 
 return function(p1)

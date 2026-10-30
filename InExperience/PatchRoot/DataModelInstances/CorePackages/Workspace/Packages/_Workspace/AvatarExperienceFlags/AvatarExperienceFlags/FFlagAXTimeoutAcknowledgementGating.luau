@@ -1,0 +1,4 @@
+﻿local FFlagAXUseUFRForTimeoutPromptInAppModule = require(script.Parent.FFlagAXUseUFRForTimeoutPromptInApp)
+local FFlagAXUseUFRForTimeoutPromptInExperienceModule = require(script.Parent.FFlagAXUseUFRForTimeoutPromptInExperience)
+
+return game:DefineFastFlag("AXTimeoutAcknowledgementGating", false) and (FFlagAXUseUFRForTimeoutPromptInAppModule and FFlagAXUseUFRForTimeoutPromptInExperienceModule)

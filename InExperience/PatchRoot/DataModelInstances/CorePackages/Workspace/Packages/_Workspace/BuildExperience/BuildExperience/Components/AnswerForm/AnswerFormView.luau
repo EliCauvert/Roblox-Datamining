@@ -65,7 +65,7 @@ return function(Frame)
 		placeholder = "",
 		testId = "AnswerForm.CustomInput",
 		LayoutOrder = if FFlagBuildExperienceAnswerFormModule then 1 else #Frame.options + 1,
-		text = Frame.customText,
+		text = Frame.customTextBinding or Frame.customText,
 		onChanged = Frame.onCustomChanged,
 		isDisabled = IsSubmitting,
 		width = UDim.new(1, 0),

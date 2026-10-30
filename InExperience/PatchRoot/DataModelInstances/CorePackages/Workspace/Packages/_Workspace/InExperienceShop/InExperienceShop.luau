@@ -16,5 +16,6 @@ return {
 	FFlagHideShopMenuOnFailure = require(script.Flags.FFlagHideShopMenuOnFailure),
 	FFlagCenterInExperienceShopWindow = require(script.Flags.FFlagCenterInExperienceShopWindow),
 	FFlagFixInExperienceShopCursorLock = require(script.Flags.FFlagFixInExperienceShopCursorLock),
-	FFlagExperienceShopNewIconography = require(script.Flags.FFlagExperienceShopNewIconography)
+	FFlagExperienceShopNewIconography = require(script.Flags.FFlagExperienceShopNewIconography),
+	FFlagEnableFreeTrialBlueDot = require(script.Flags.FFlagEnableFreeTrialBlueDot)
 }

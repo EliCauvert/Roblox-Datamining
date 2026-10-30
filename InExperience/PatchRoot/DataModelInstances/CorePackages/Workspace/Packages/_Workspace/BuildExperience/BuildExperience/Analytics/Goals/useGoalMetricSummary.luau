@@ -3,15 +3,15 @@ local Parent = BuildExperience.Parent
 local ReactModule = require(Parent.React)
 local SignalsModule = require(Parent.Signals)
 local SignalsReactModule = require(Parent.SignalsReact)
-local ExperienceAnalyticsModule = require(Parent.DataHydration.ExperienceAnalytics)
-local GetExperienceAnalyticsStoreFunction = ExperienceAnalyticsModule.getExperienceAnalyticsStore
-local DataStatus = ExperienceAnalyticsModule.DataStatus
+local CreatorAnalyticsModule = require(Parent.DataHydration.CreatorAnalytics)
+local GetCreatorAnalyticsStoreFunction = CreatorAnalyticsModule.getCreatorAnalyticsStore
+local DataStatus = CreatorAnalyticsModule.DataStatus
 local _ = require(BuildExperience.Analytics.AnalyticsWindow)
 local _ = require(BuildExperience.Analytics.Goals.GoalTypes)
 local FFlagBuildAnalyticsGoalsModule = require(BuildExperience.Flags.FFlagBuildAnalyticsGoals)
 
 local function toParams(UniverseId, Params, Params1, DateInfo)
-	-- upvalues: FFlagBuildAnalyticsGoalsModule (copy), ExperienceAnalyticsModule (copy)
+	-- upvalues: FFlagBuildAnalyticsGoalsModule (copy), CreatorAnalyticsModule (copy)
 	local DateInfo1: string = DateInfo
 	local EndOffsetDays: number = Params.endOffsetDays
 	
@@ -24,7 +24,7 @@ local function toParams(UniverseId, Params, Params1, DateInfo)
 	end
 	local ScaledLookbackSeconds = Params1.lookbackSeconds * (Params.lookbackWindows or 1)
 	
-	if FFlagBuildAnalyticsGoalsModule and Params.metric == ExperienceAnalyticsModule.MetricId.TotalSessionsEndedInBucket then
+	if FFlagBuildAnalyticsGoalsModule and Params.metric == CreatorAnalyticsModule.MetricId.TotalSessionsEndedInBucket then
 		ScaledLookbackSeconds -= 86400
 	end
 	return {
@@ -39,16 +39,16 @@ local function toParams(UniverseId, Params, Params1, DateInfo)
 end
 
 return function(UniverseId, p1, p2, p3)
-	-- upvalues: ReactModule (copy), SignalsModule (copy), DataStatus (copy), GetExperienceAnalyticsStoreFunction (copy), toParams (copy), SignalsReactModule (copy)
+	-- upvalues: ReactModule (copy), SignalsModule (copy), DataStatus (copy), GetCreatorAnalyticsStoreFunction (copy), toParams (copy), SignalsReactModule (copy)
 	local Query = p1.query
 	local UseSignalStateResult = SignalsReactModule.useSignalState((ReactModule.useMemo(function()
-		-- upvalues: SignalsModule (upval), p3 (copy), DataStatus (upval), GetExperienceAnalyticsStoreFunction (upval), toParams (upval), UniverseId (copy), Query (copy), p2 (copy)
+		-- upvalues: SignalsModule (upval), p3 (copy), DataStatus (upval), GetCreatorAnalyticsStoreFunction (upval), toParams (upval), UniverseId (copy), Query (copy), p2 (copy)
 		return SignalsModule.createComputed(function(p4)
-			-- upvalues: p3 (upval), DataStatus (upval), GetExperienceAnalyticsStoreFunction (upval), toParams (upval), UniverseId (upval), Query (upval), p2 (upval)
+			-- upvalues: p3 (upval), DataStatus (upval), GetCreatorAnalyticsStoreFunction (upval), toParams (upval), UniverseId (upval), Query (upval), p2 (upval)
 			if p3 == nil then
 				return { series = nil, status = DataStatus.NotReady }
 			else
-				local AndFetchMetric = GetExperienceAnalyticsStoreFunction(p4).getAndFetchMetric((toParams(UniverseId, Query, p2, p3)))
+				local AndFetchMetric = GetCreatorAnalyticsStoreFunction(p4).getAndFetchMetric((toParams(UniverseId, Query, p2, p3)))
 				
 				return {
 					series = AndFetchMetric.data(p4),

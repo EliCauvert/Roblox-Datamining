@@ -50,20 +50,14 @@ return function(Frame)
 		showShopButton = OpenAvatarLookTryOnFunction ~= nil,
 		isShopDisabled = UseSignalStateResult,
 		onShop = function()
-			-- upvalues: OpenAvatarLookTryOnFunction (copy), LookId (copy), FFlagAXEnableUnifiedLoggingAvatarMoment (upval), Data (copy), OutfitId (copy), FFlagMomentsRenderAvatarPostsInFeed (upval), Config (copy), UseAvatarLookModuleResult (copy)
+			-- upvalues: OpenAvatarLookTryOnFunction (copy), LookId (copy), FFlagAXEnableUnifiedLoggingAvatarMoment (upval), Data (copy), OutfitId (copy)
 			if OpenAvatarLookTryOnFunction ~= nil and LookId ~= nil then
 				if FFlagAXEnableUnifiedLoggingAvatarMoment then
 					OpenAvatarLookTryOnFunction(LookId, {
 						feedItemId = Data.feedItemId,
 						feedSessionId = Data.feedSessionId,
-						outfitId = OutfitId,
-						lookDetails = if FFlagMomentsRenderAvatarPostsInFeed and Config == nil then UseAvatarLookModuleResult.look else nil
+						outfitId = OutfitId
 					})
-					
-					return
-				end
-				if FFlagMomentsRenderAvatarPostsInFeed and Config == nil and UseAvatarLookModuleResult.look ~= nil then
-					OpenAvatarLookTryOnFunction(LookId, { lookDetails = UseAvatarLookModuleResult.look })
 					
 					return
 				end

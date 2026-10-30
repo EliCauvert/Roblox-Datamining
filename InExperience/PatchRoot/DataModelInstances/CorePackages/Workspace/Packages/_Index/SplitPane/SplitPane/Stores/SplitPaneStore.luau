@@ -6,6 +6,8 @@ local DisplayModule = require(Parent.Display)
 local SharedFlagsModule = require(Parent.SharedFlags)
 local SplitPaneTelemetryModule = require(script.Parent.Parent.Telemetry.SplitPaneTelemetry)
 local GetTelemetrySnapshotModule = require(script.Parent.Parent.Telemetry.getTelemetrySnapshot)
+local CreateSplitPanePreferenceModule = require(script.Parent.createSplitPanePreference)
+local EnablePersistSplitPanePreferenceFeatureModule = require(script.Parent.Parent.Flags.EnablePersistSplitPanePreferenceFeature)
 local CreateCurrentScreenOrientationSignalModule = require(script.Parent.Parent.Utils.createCurrentScreenOrientationSignal)
 local SupportPaneWidthRulesModule = require(script.Parent.Parent.Utils.supportPaneWidthRules)
 local SplitPaneVariantModule = require(script.Parent.Parent.Utils.SplitPaneVariant)
@@ -15,6 +17,7 @@ local SupportPaneMode = require(Parent.AppSplitView).Enums.SupportPaneMode
 local FFlagSplitPaneFixClassicThemeHeader = SharedFlagsModule.FFlagSplitPaneFixClassicThemeHeader
 local FFlagEnableSplitPaneTelemetry = SharedFlagsModule.FFlagEnableSplitPaneTelemetry
 local FFlagEnableSplitPaneStackFallbackFix = SharedFlagsModule.FFlagEnableSplitPaneStackFallbackFix
+local FFlagAXPauseSceneWhenSplitPaneCollapsed = SharedFlagsModule.FFlagAXPauseSceneWhenSplitPaneCollapsed
 
 local function _()
 	-- upvalues: GetRegionOverridesFunction (copy), RegionName (copy)
@@ -39,7 +42,7 @@ local v1 = nil
 local Effect1 = nil
 
 local function createSplitPaneStore()
-	-- upvalues: GetRegionOverridesFunction (copy), RegionName (copy), v1 (ref), CreateCurrentScreenOrientationSignalModule (copy), DisplayModule (copy), SupportPaneWidthRulesModule (copy), SignalsModule (copy), evaluateShouldDefaultToCollapsed (copy), SupportPaneMode (copy), FFlagEnableSplitPaneTelemetry (copy), Effect (ref), FFlagSplitPaneFixClassicThemeHeader (copy), SignalsUtilsModule (copy), FFlagEnableSplitPaneStackFallbackFix (copy), Effect1 (ref), SplitPaneTelemetryModule (copy), GetTelemetrySnapshotModule (copy)
+	-- upvalues: GetRegionOverridesFunction (copy), RegionName (copy), v1 (ref), CreateCurrentScreenOrientationSignalModule (copy), DisplayModule (copy), SupportPaneWidthRulesModule (copy), SignalsModule (copy), evaluateShouldDefaultToCollapsed (copy), EnablePersistSplitPanePreferenceFeatureModule (copy), CreateSplitPanePreferenceModule (copy), SupportPaneMode (copy), FFlagEnableSplitPaneTelemetry (copy), Effect (ref), FFlagSplitPaneFixClassicThemeHeader (copy), FFlagAXPauseSceneWhenSplitPaneCollapsed (copy), SignalsUtilsModule (copy), FFlagEnableSplitPaneStackFallbackFix (copy), Effect1 (ref), SplitPaneTelemetryModule (copy), GetTelemetrySnapshotModule (copy)
 	local RegionOverrides = if GetRegionOverridesFunction and RegionName then GetRegionOverridesFunction(RegionName.SupportRegion) else nil
 	local WidthScale = if RegionOverrides and RegionOverrides.widthScale then RegionOverrides.widthScale else 0.33
 	local MinWidth = if RegionOverrides and RegionOverrides.minWidth then RegionOverrides.minWidth else 0
@@ -61,9 +64,14 @@ local function createSplitPaneStore()
 	local Signal1, Signal2_1 = SignalsModule.createSignal(nil)
 	local Signal3, Signal2_2 = SignalsModule.createSignal(nil)
 	local Computed = SignalsModule.createComputed(evaluateShouldDefaultToCollapsed)
+	local Callback1 = nil
+	local Callback3 = nil
 	
-	local function _(p1, p2)
-		-- upvalues: Signal3 (copy), Signal1 (copy), Computed (copy), SupportPaneMode (upval)
+	if EnablePersistSplitPanePreferenceFeatureModule then
+		Callback1, Callback3 = CreateSplitPanePreferenceModule()
+	end
+	local function computeSupportPaneMode(p1, p2)
+		-- upvalues: Signal3 (copy), Signal1 (copy), EnablePersistSplitPanePreferenceFeatureModule (upval), Callback1 (ref), SupportPaneMode (upval), Computed (copy)
 		local SignalResult = Signal3(p1)
 		
 		if SignalResult ~= nil then
@@ -74,6 +82,13 @@ local function createSplitPaneStore()
 		if SignalResult1 ~= nil then
 			return SignalResult1
 		end
+		if EnablePersistSplitPanePreferenceFeatureModule then
+			local CallbackResult = Callback1(p1)
+			
+			if CallbackResult ~= nil then
+				return if CallbackResult then SupportPaneMode.Collapsed else SupportPaneMode.Normal
+			end
+		end
 		if p2 == nil then
 			p2 = Computed(p1)
 		end
@@ -81,34 +96,28 @@ local function createSplitPaneStore()
 	end
 	
 	local Computed1 = SignalsModule.createComputed(function(p1)
-		-- upvalues: FFlagEnableSplitPaneTelemetry (upval), Signal3 (copy), Signal1 (copy), Computed (copy), SupportPaneMode (upval)
+		-- upvalues: FFlagEnableSplitPaneTelemetry (upval), computeSupportPaneMode (copy), Signal3 (copy), Signal1 (copy), EnablePersistSplitPanePreferenceFeatureModule (upval), Callback1 (ref), SupportPaneMode (upval), Computed (copy)
 		if FFlagEnableSplitPaneTelemetry then
-			local v2 = nil
-			local SignalResult = Signal3(p1)
+			return (computeSupportPaneMode(p1))
+		end
+		local SignalResult = Signal3(p1)
+		
+		if SignalResult ~= nil then
+			return SignalResult
+		end
+		local SignalResult1 = Signal1(p1)
+		
+		if SignalResult1 ~= nil then
+			return SignalResult1
+		end
+		if EnablePersistSplitPanePreferenceFeatureModule then
+			local CallbackResult = Callback1(p1)
 			
-			if SignalResult ~= nil then
-				return SignalResult
-			end
-			local SignalResult1 = Signal1(p1)
-			
-			if SignalResult1 ~= nil then
-				return SignalResult1
-			end
-			if v2 == nil then
-				v2 = Computed(p1)
-			end
-			return if v2 then SupportPaneMode.Collapsed else SupportPaneMode.Normal
-		else
-			local SignalResult1 = Signal3(p1)
-			
-			if SignalResult1 == nil then
-				local SignalResult = Signal1(p1)
-				
-				return if SignalResult == nil then if Computed(p1) then SupportPaneMode.Collapsed else SupportPaneMode.Normal else SignalResult
-			else
-				return SignalResult1
+			if CallbackResult ~= nil then
+				return if CallbackResult then SupportPaneMode.Collapsed else SupportPaneMode.Normal
 			end
 		end
+		return if Computed(p1) then SupportPaneMode.Collapsed else SupportPaneMode.Normal
 	end)
 	
 	local function getSupportPaneMode(p1)
@@ -117,6 +126,17 @@ local function createSplitPaneStore()
 	end
 	
 	local Signal4, Signal2_3 = SignalsModule.createSignal(nil)
+	local Signal5, Signal2_4 = SignalsModule.createSignal(nil)
+	
+	local function setSupportPaneTopRouteMatcher(p1)
+		-- upvalues: Signal2_4 (copy)
+		Signal2_4(function()
+			-- upvalues: p1 (copy)
+			return p1
+		end)
+	end
+	
+	local Signal6, Signal2_5 = SignalsModule.createSignal(nil)
 	
 	if not FFlagEnableSplitPaneTelemetry then
 		local ComputedResult = Computed(false)
@@ -140,14 +160,20 @@ local function createSplitPaneStore()
 	local v3 = nil
 	
 	if FFlagSplitPaneFixClassicThemeHeader then
-		v2, v48 = SignalsModule.createSignal(nil)
+		v2, v56 = SignalsModule.createSignal(nil)
 	end
-	local Signal5, Signal2_4 = SignalsModule.createSignal(false)
-	local Callback1 = nil
+	local v4 = nil
+	local v5 = nil
+	
+	if FFlagAXPauseSceneWhenSplitPaneCollapsed then
+		v4, v58 = SignalsModule.createSignal(false)
+	end
+	local Signal7, Signal2_6 = SignalsModule.createSignal(false)
+	local Callback2 = nil
 	local SetIsTelemetrySessionInitialized = nil
 	
 	if FFlagEnableSplitPaneTelemetry then
-		Callback1, SetIsTelemetrySessionInitialized = SignalsUtilsModule.createSessionScopedSignal(false)
+		Callback2, SetIsTelemetrySessionInitialized = SignalsUtilsModule.createSessionScopedSignal(false)
 	end
 	local function setSupportWidth(p1)
 		-- upvalues: DisplayModule (upval), Signal2 (copy), MinWidth (copy), MaxWidth (copy)
@@ -156,8 +182,8 @@ local function createSplitPaneStore()
 	end
 	
 	local Computed3 = SignalsModule.createComputed(function(p1)
-		-- upvalues: evaluateBreakpointEnabled (copy), Signal5 (copy)
-		return evaluateBreakpointEnabled(p1) and Signal5(p1)
+		-- upvalues: evaluateBreakpointEnabled (copy), Signal7 (copy)
+		return evaluateBreakpointEnabled(p1) and Signal7(p1)
 	end)
 	local Computed4 = SignalsModule.createComputed(function(p1)
 		-- upvalues: Computed3 (copy), Computed1 (copy)
@@ -175,23 +201,23 @@ local function createSplitPaneStore()
 	end
 	
 	if FFlagEnableSplitPaneStackFallbackFix then
-		local Signal6, Signal2_5 = SignalsModule.createSignal(false)
+		local Signal8, Signal2_7 = SignalsModule.createSignal(false)
 		
 		if evaluateBreakpointEnabled(false) then
-			Signal2_5(true)
+			Signal2_7(true)
 		end
 		Effect1 = SignalsModule.createEffect(function(p1)
-			-- upvalues: evaluateBreakpointEnabled (copy), Signal2_5 (copy)
+			-- upvalues: evaluateBreakpointEnabled (copy), Signal2_7 (copy)
 			if evaluateBreakpointEnabled(p1) then
-				Signal2_5(true)
+				Signal2_7(true)
 			end
 		end)
-		GetWasSplitPaneAvailable = Signal6
+		GetWasSplitPaneAvailable = Signal8
 	end
-	local v4 = nil
-	v4 = {
+	local v6 = nil
+	v6 = {
 		getCurrentScreenOrientation = Callback,
-		getIsTelemetrySessionInitialized = Callback1,
+		getIsTelemetrySessionInitialized = Callback2,
 		setIsTelemetrySessionInitialized = SetIsTelemetrySessionInitialized,
 		getSupportWidth = Signal,
 		getSupportWidthFraction = Computed2,
@@ -216,8 +242,10 @@ local function createSplitPaneStore()
 		getIsSplitEnabled = Computed3,
 		getSupportPaneModeIfActive = Computed4,
 		getIsSplitPaneCollapsedOrNotActive = Computed5,
-		getIsSplitEligible = Signal5,
-		setIsSplitEligible = Signal2_4,
+		getHasSupportRoute = if FFlagAXPauseSceneWhenSplitPaneCollapsed then v4 else nil,
+		setHasSupportRoute = if FFlagAXPauseSceneWhenSplitPaneCollapsed then v5 else nil,
+		getIsSplitEligible = Signal7,
+		setIsSplitEligible = Signal2_6,
 		getSupportPaneMode = getSupportPaneMode,
 		getTemporarySupportPaneMode = Signal3,
 		getShouldDefaultToCollapsed = Computed,
@@ -234,74 +262,65 @@ local function createSplitPaneStore()
 			Signal2_1(nil)
 			Signal2_2(nil)
 		end,
-		toggleSupportPaneMode = function(p1)
-			-- upvalues: FFlagEnableSplitPaneTelemetry (upval), Computed5 (copy), SplitPaneTelemetryModule (upval), Computed4 (copy), Computed1 (copy), SupportPaneMode (upval), Signal3 (copy), Signal2_2 (copy), Signal2_1 (copy), Callback1 (ref), GetTelemetrySnapshotModule (upval), v4 (ref)
+		toggleSupportPaneMode = function(Collapsed)
+			-- upvalues: FFlagEnableSplitPaneTelemetry (upval), Computed5 (copy), SplitPaneTelemetryModule (upval), Computed4 (copy), Computed1 (copy), SupportPaneMode (upval), Signal3 (copy), Signal2_2 (copy), Signal2_1 (copy), EnablePersistSplitPanePreferenceFeatureModule (upval), Callback3 (ref), Callback2 (ref), GetTelemetrySnapshotModule (upval), v6 (ref)
 			local ComputedResult = if FFlagEnableSplitPaneTelemetry then Computed5(false) else nil
 			local TelemetryStateFromMode = if FFlagEnableSplitPaneTelemetry then SplitPaneTelemetryModule.getTelemetryStateFromMode(Computed4(false)) else nil
-			local Normal = if Computed1(false) == p1 then SupportPaneMode.Normal else p1
+			local Normal = if Computed1(false) == Collapsed then SupportPaneMode.Normal else Collapsed
 			
 			if Signal3(false) == nil then
 				Signal2_1(Normal)
 			else
 				Signal2_2(Normal)
 			end
-			if FFlagEnableSplitPaneTelemetry and Callback1(false) then
+			if EnablePersistSplitPanePreferenceFeatureModule and (Collapsed == SupportPaneMode.Collapsed or Collapsed == SupportPaneMode.Normal) then
+				Signal2_1(Normal)
+				Callback3(Normal == SupportPaneMode.Collapsed)
+			end
+			if FFlagEnableSplitPaneTelemetry and Callback2(false) then
 				local TelemetryStateFromMode1 = SplitPaneTelemetryModule.getTelemetryStateFromMode(Computed4(false))
 				
 				if TelemetryStateFromMode ~= TelemetryStateFromMode1 then
 					SplitPaneTelemetryModule.logStateChanged(TelemetryStateFromMode1, SplitPaneTelemetryModule.Action.Toggle)
 				end
 				if ComputedResult ~= Computed5(false) then
-					SplitPaneTelemetryModule.logSplitPaneViewChange(GetTelemetrySnapshotModule(v4, false), SplitPaneTelemetryModule.Action.Toggle)
+					SplitPaneTelemetryModule.logSplitPaneViewChange(GetTelemetrySnapshotModule(v6, false), SplitPaneTelemetryModule.Action.Toggle)
 				end
 			end
 		end,
 		getSupportPaneEntryTarget = Signal4,
-		setSupportPaneEntryTarget = Signal2_3
+		setSupportPaneEntryTarget = Signal2_3,
+		getSupportPaneTopRouteMatcher = Signal5,
+		setSupportPaneTopRouteMatcher = setSupportPaneTopRouteMatcher,
+		getSupportPaneTopRouteKey = Signal6,
+		setSupportPaneTopRouteKey = Signal2_5
 	}
 	
 	if FFlagEnableSplitPaneTelemetry then
 		local ComputedResult1 = Computed(false)
 		local EvaluateBreakpointEnabledResult = evaluateBreakpointEnabled(false)
 		Effect = SignalsModule.createEffect(function(p1)
-			-- upvalues: Computed (copy), ComputedResult1 (ref), evaluateBreakpointEnabled (copy), EvaluateBreakpointEnabledResult (ref), Signal3 (copy), Signal1 (copy), SupportPaneMode (upval), SplitPaneTelemetryModule (upval), v4 (ref), Signal2_1 (copy), Computed4 (copy), GetTelemetrySnapshotModule (upval)
+			-- upvalues: Computed (copy), ComputedResult1 (ref), evaluateBreakpointEnabled (copy), EvaluateBreakpointEnabledResult (ref), computeSupportPaneMode (copy), SplitPaneTelemetryModule (upval), v6 (ref), SupportPaneMode (upval), Signal2_1 (copy), Computed4 (copy), GetTelemetrySnapshotModule (upval)
 			local ComputedResult = Computed(p1)
 			local IsNotComputedResultMatch = ComputedResult ~= ComputedResult1
 			local EvaluateBreakpointEnabledResult1 = evaluateBreakpointEnabled(p1)
 			
 			if IsNotComputedResultMatch or EvaluateBreakpointEnabledResult1 ~= EvaluateBreakpointEnabledResult then
-				local ComputedResult2 = ComputedResult1
-				local SignalResult = Signal3(false)
-				local Collapsed = nil
-				
-				if SignalResult == nil then
-					local SignalResult1 = Signal1(false)
-					
-					if SignalResult1 == nil then
-						if ComputedResult2 == nil then
-							ComputedResult2 = Computed(false)
-						end
-						Collapsed = if ComputedResult2 then SupportPaneMode.Collapsed else SupportPaneMode.Normal
-					else
-						Collapsed = SignalResult1
-					end
-				else
-					Collapsed = SignalResult
-				end
-				local TelemetryStateFromMode = SplitPaneTelemetryModule.getTelemetryStateFromMode(if EvaluateBreakpointEnabledResult and v4.getIsSplitEligible(false) then Collapsed else nil)
-				local NoEvaluateBreakpointEnabledResult: boolean = not EvaluateBreakpointEnabledResult or (not v4.getIsSplitEligible(false) or Collapsed == SupportPaneMode.Collapsed)
+				local SupportPaneMode1 = computeSupportPaneMode(false, ComputedResult1)
+				local TelemetryStateFromMode = SplitPaneTelemetryModule.getTelemetryStateFromMode(if EvaluateBreakpointEnabledResult and v6.getIsSplitEligible(false) then SupportPaneMode1 else nil)
+				local NoEvaluateBreakpointEnabledResult: boolean = not EvaluateBreakpointEnabledResult or (not v6.getIsSplitEligible(false) or SupportPaneMode1 == SupportPaneMode.Collapsed)
 				
 				if IsNotComputedResultMatch then
 					Signal2_1(nil)
 				end
-				if v4.getIsTelemetrySessionInitialized(false) then
+				if v6.getIsTelemetrySessionInitialized(false) then
 					local TelemetryStateFromMode1 = SplitPaneTelemetryModule.getTelemetryStateFromMode(Computed4(false))
 					
 					if TelemetryStateFromMode ~= TelemetryStateFromMode1 then
 						SplitPaneTelemetryModule.logStateChanged(TelemetryStateFromMode1, SplitPaneTelemetryModule.Action.ViewportChanged)
 					end
-					if NoEvaluateBreakpointEnabledResult ~= v4.getIsSplitPaneCollapsedOrNotActive(false) then
-						SplitPaneTelemetryModule.logSplitPaneViewChange(GetTelemetrySnapshotModule(v4, false), SplitPaneTelemetryModule.Action.ViewportChanged)
+					if NoEvaluateBreakpointEnabledResult ~= v6.getIsSplitPaneCollapsedOrNotActive(false) then
+						SplitPaneTelemetryModule.logSplitPaneViewChange(GetTelemetrySnapshotModule(v6, false), SplitPaneTelemetryModule.Action.ViewportChanged)
 					end
 				end
 			end
@@ -309,7 +328,7 @@ local function createSplitPaneStore()
 			EvaluateBreakpointEnabledResult = EvaluateBreakpointEnabledResult1
 		end)
 	end
-	return v4
+	return v6
 end
 
 local v2 = nil

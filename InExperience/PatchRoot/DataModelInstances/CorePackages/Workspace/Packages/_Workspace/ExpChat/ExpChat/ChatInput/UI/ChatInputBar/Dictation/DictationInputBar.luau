@@ -3,6 +3,8 @@ local Parent = ExpChat.Parent
 local ReactModule = require(Parent.React)
 local FoundationModule = require(Parent.Foundation)
 local FFlagExpChatDictationFTUXModule = require(ExpChat.Flags.FFlagExpChatDictationFTUX)
+local FFlagExpChatContinuousDictationIdleFadeModule = require(ExpChat.Flags.FFlagExpChatContinuousDictationIdleFade)
+local FFlagExpChatContinuousDictationIdleFadeModule1 = require(ExpChat.Flags.FFlagExpChatDictationFadeOverride) and FFlagExpChatContinuousDictationIdleFadeModule
 local ConfigModule = require(ExpChat.Config)
 local ChannelChipModule = require(script.Parent.Parent.ChannelChip)
 local DictationFTUXModule = require(script.Parent.DictationFTUX)
@@ -24,7 +26,7 @@ local _ = function(p1, p2)
 end
 
 return ReactModule.memo(function(p1)
-	-- upvalues: FoundationModule (copy), UseDictationInputBarModule (copy), DictationAffordancesModule (copy), ReactModule (copy), UseDictationTextAreaModule (copy), ConfigModule (copy), StopCountdownModule (copy), ChannelChipModule (copy), DictationWaveformModule (copy), FFlagExpChatDictationFTUXModule (copy), DictationFTUXModule (copy)
+	-- upvalues: FoundationModule (copy), UseDictationInputBarModule (copy), DictationAffordancesModule (copy), ReactModule (copy), FFlagExpChatContinuousDictationIdleFadeModule1 (copy), UseDictationTextAreaModule (copy), ConfigModule (copy), StopCountdownModule (copy), ChannelChipModule (copy), DictationWaveformModule (copy), FFlagExpChatDictationFTUXModule (copy), DictationFTUXModule (copy)
 	local UseTokensResult = FoundationModule.Hooks.useTokens()
 	local UseDictationInputBarModuleResult = UseDictationInputBarModule({
 		inputText = p1.inputText,
@@ -35,6 +37,7 @@ return ReactModule.memo(function(p1)
 		targetTextChannel = p1.targetTextChannel,
 		isGlobalChatTabActive = p1.isGlobalChatTabActive,
 		onDictationActivityChanged = p1.onDictationActivityChanged,
+		onDictationStateChanged = p1.onDictationStateChanged,
 		onSendRecordingTap = p1.onSendRecordingTap,
 		onTranscriptionStaged = p1.onTranscriptionStaged
 	})
@@ -67,7 +70,7 @@ return ReactModule.memo(function(p1)
 		DeriveBackgroundColorsResult.color3,
 		DeriveBackgroundColorsResult.baseTransparency
 	})
-	local ShouldPreventFade = DictationAffordancesModule.shouldPreventFade(UseDictationInputBarModuleResult)
+	local ShouldPreventFade = DictationAffordancesModule.shouldPreventFade(UseDictationInputBarModuleResult, FFlagExpChatContinuousDictationIdleFadeModule1)
 	local UseMemoResult1 = ReactModule.useMemo(function()
 		-- upvalues: ShouldPreventFade (copy), p1 (copy)
 		return if ShouldPreventFade then p1.transparencyValue:map(function(_): number
@@ -209,6 +212,7 @@ return ReactModule.memo(function(p1)
 			isActive = UseDictationInputBarModuleResult.isRecording or UseDictationInputBarModuleResult.isListening,
 			audioDeviceInput = UseDictationInputBarModuleResult.dictation.audioDeviceInput,
 			transcribedSamplesBinding = UseDictationInputBarModuleResult.transcribedSamplesBinding,
+			transparencyValue = if UseDictationInputBarModuleResult.isListening and not ShouldPreventFade then p1.transparencyValue else nil,
 			onSample = UseDictationInputBarModuleResult.onWaveformSample
 		})
 	})

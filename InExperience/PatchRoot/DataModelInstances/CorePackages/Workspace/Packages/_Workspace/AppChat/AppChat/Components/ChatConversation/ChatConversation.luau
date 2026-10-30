@@ -38,11 +38,10 @@ local ChatConversationTelemetryEventsModule = require(script.Parent.ChatConversa
 local ChatConversationTelemetryLayerModule = require(AppChat.Telemetry.Layers.ChatConversationTelemetryLayer)
 local AppChatNewChatInputBarIxpEnabled = game:DefineFastFlag("AppChatNewChatInputBarIxpEnabled", false)
 local AppChatNewChatInputBarIxpLayer = game:DefineFastString("AppChatNewChatInputBarIxpLayer", "")
-local FFlagAppChatEnableDoubleOptIn = require(Parent.SharedFlags).FFlagAppChatEnableDoubleOptIn
 local FFlagAppChatPerfTrackingModule = require(AppChat.Flags.FFlagAppChatPerfTracking)
 local FFlagAppChatMessageTTIMilestonesModule = require(AppChat.Flags.FFlagAppChatMessageTTIMilestones)
 local AppChatPerfTrackerModule = require(AppChat.Telemetry.AppChatPerfTracker)
-local ConversationTopModalContainerModule = if FFlagAppChatEnableDoubleOptIn then require(script.Parent.ConversationTopModalContainer) else require(script.Parent.ConversationTopModalContainerDeprecated)
+local ConversationTopModalContainerModule = require(script.Parent.ConversationTopModalContainer)
 local ConversationBottomModalContainerModule = require(script.Parent.ConversationModal.ConversationBottomModalContainer)
 local ChatConversation = RoactModule.PureComponent:extend("ChatConversation")
 ChatConversation.defaultProps = {
@@ -62,7 +61,6 @@ ChatConversation.defaultProps = {
 	openViewProfile = function() end,
 	updateConversationTitle = function() end,
 	openGameDetailsPage = function() end,
-	navigateToScreen = function() end,
 	navigateToSquadLobby = function() end,
 	onChatInputBarReady = function() end,
 	viewProfileOnAvatarPressed = true,
@@ -185,13 +183,13 @@ function ChatConversation.init(p1)
 		})
 	end
 	
-	p1.onSendChat = MemoizeFunction(function(Callback1, p2, Callback3, p3, p4, Callback2, Callback, p5)
+	p1.onSendChat = MemoizeFunction(function(Callback, p2, Callback3, p3, p4, Callback1, Callback2, p5)
 		-- upvalues: NewResult (upval), FFlagAppChatPerfTrackingModule (upval), FFlagAppChatMessageTTIMilestonesModule (upval), AppChatPerfTrackerModule (upval), FFlagAppChatSignalsReplyStoreModule (upval), p1 (copy), StatusCodes (upval), SendMessageErrorModule (upval), ChatConversationTelemetryEventsModule (upval), _DateTime (upval)
 		return function(p6)
-			-- upvalues: p4 (copy), NewResult (upval), p2 (ref), Callback2 (copy), p3 (copy), Callback (copy), FFlagAppChatPerfTrackingModule (upval), FFlagAppChatMessageTTIMilestonesModule (upval), AppChatPerfTrackerModule (upval), FFlagAppChatSignalsReplyStoreModule (upval), p1 (upval), Callback1 (copy), StatusCodes (upval), Callback3 (copy), SendMessageErrorModule (upval), p5 (copy), ChatConversationTelemetryEventsModule (upval), _DateTime (upval)
+			-- upvalues: p4 (copy), NewResult (upval), p2 (ref), Callback1 (copy), p3 (copy), Callback2 (copy), FFlagAppChatPerfTrackingModule (upval), FFlagAppChatMessageTTIMilestonesModule (upval), AppChatPerfTrackerModule (upval), FFlagAppChatSignalsReplyStoreModule (upval), p1 (upval), Callback (copy), StatusCodes (upval), Callback3 (copy), SendMessageErrorModule (upval), p5 (copy), ChatConversationTelemetryEventsModule (upval), _DateTime (upval)
 			if p4 and p4.source == "friends" then
 				NewResult:info("Creating a conversation for friend conversation {} via onSendChat", p2)
-				local v1, v2 = Callback2(p2, p3):await()
+				local v1, v2 = Callback1(p2, p3):await()
 				
 				if not v1 or not v2 then
 					NewResult:error("Could not create conversation. Error: {}", (tostring(v2)))
@@ -200,7 +198,7 @@ function ChatConversation.init(p1)
 				end
 				NewResult:debug("Created conversation {} for friend conversation {} via onSendChat", v2.id, p2)
 				p2 = v2.id
-				Callback(v2.id)
+				Callback2(v2.id)
 			end
 			NewResult:info("Sending message '{}' to conversationId {} via onSendChat", p6, p2)
 			
@@ -212,7 +210,7 @@ function ChatConversation.init(p1)
 					AppChatPerfTrackerModule.start(AppChatPerfTrackerModule.Events.MessageSendToFinalRender, { conversationId = tostring(p2) })
 				end
 			end
-			local CallbackResult = Callback1(p2, p6, if FFlagAppChatSignalsReplyStoreModule and p1.props.replyingToMessageId then { id = p1.props.replyingToMessageId } elseif FFlagAppChatSignalsReplyStoreModule then nil else p1.props.replyingToMessage)
+			local CallbackResult = Callback(p2, p6, if FFlagAppChatSignalsReplyStoreModule and p1.props.replyingToMessageId then { id = p1.props.replyingToMessageId } elseif FFlagAppChatSignalsReplyStoreModule then nil else p1.props.replyingToMessage)
 			
 			if CallbackResult then
 				CallbackResult:andThen(function(Result)
@@ -472,7 +470,7 @@ function ChatConversation.willUnmount(p1)
 end
 
 function ChatConversation.render(p1)
-	-- upvalues: SignalsMigrationConfigModule (copy), RoactModule (copy), AppChat (copy), WithRoactChatAnalyticsModule (copy), WithStyleFunction (copy), WithChatPagePaddingModule (copy), KeyboardOffsetEventHandlerModule (copy), ConversationTopModalContainerModule (copy), FFlagAppChatEnableDoubleOptIn (copy), MessageListModule (copy), UserTypingIndicatorModule (copy), ReactModule (copy), FoundationModule (copy), FFlagAppChatSignalsReplyStoreModule (copy), FFlagAppChatSmartSuggestionsModule (copy), SmartSuggestionsChipRowContainerModule (copy), ReplyComposeBarContainerModule (copy), ChatConversationMoreMenuModule (copy), ChatInputBarModule (copy), ConversationBottomModalContainerModule (copy)
+	-- upvalues: SignalsMigrationConfigModule (copy), RoactModule (copy), AppChat (copy), WithRoactChatAnalyticsModule (copy), WithStyleFunction (copy), WithChatPagePaddingModule (copy), KeyboardOffsetEventHandlerModule (copy), ConversationTopModalContainerModule (copy), MessageListModule (copy), UserTypingIndicatorModule (copy), ReactModule (copy), FoundationModule (copy), FFlagAppChatSignalsReplyStoreModule (copy), FFlagAppChatSmartSuggestionsModule (copy), SmartSuggestionsChipRowContainerModule (copy), ReplyComposeBarContainerModule (copy), ChatConversationMoreMenuModule (copy), ChatInputBarModule (copy), ConversationBottomModalContainerModule (copy)
 	local DisplayNamesAvailable = #p1.props.usersTyping > 0 and p1.props.displayNamesAvailable
 	local IsFriends: boolean = if p1.props.conversation then p1.props.conversation.source == "friends" else false
 	local Text = "MessageList" .. tostring(p1.props.conversationId)
@@ -501,11 +499,11 @@ function ChatConversation.render(p1)
 	}) else nil
 	
 	return WithRoactChatAnalyticsModule(function(p2)
-		-- upvalues: WithStyleFunction (upval), WithChatPagePaddingModule (upval), p1 (copy), RoactModule (upval), KeyboardOffsetEventHandlerModule (upval), ConversationTopModalContainerModule (upval), FFlagAppChatEnableDoubleOptIn (upval), Element (copy), Text (copy), MessageListModule (upval), IsFriends (copy), DisplayNamesAvailable (copy), UserTypingIndicatorModule (upval), ReactModule (upval), FoundationModule (upval), FFlagAppChatSignalsReplyStoreModule (upval), FFlagAppChatSmartSuggestionsModule (upval), SmartSuggestionsChipRowContainerModule (upval), ReplyComposeBarContainerModule (upval), ChatConversationMoreMenuModule (upval), ChatInputBarModule (upval), ConversationBottomModalContainerModule (upval)
+		-- upvalues: WithStyleFunction (upval), WithChatPagePaddingModule (upval), p1 (copy), RoactModule (upval), KeyboardOffsetEventHandlerModule (upval), ConversationTopModalContainerModule (upval), Element (copy), Text (copy), MessageListModule (upval), IsFriends (copy), DisplayNamesAvailable (copy), UserTypingIndicatorModule (upval), ReactModule (upval), FoundationModule (upval), FFlagAppChatSignalsReplyStoreModule (upval), FFlagAppChatSmartSuggestionsModule (upval), SmartSuggestionsChipRowContainerModule (upval), ReplyComposeBarContainerModule (upval), ChatConversationMoreMenuModule (upval), ChatInputBarModule (upval), ConversationBottomModalContainerModule (upval)
 		return WithStyleFunction(function(p3)
-			-- upvalues: WithChatPagePaddingModule (upval), p1 (upval), RoactModule (upval), KeyboardOffsetEventHandlerModule (upval), ConversationTopModalContainerModule (upval), FFlagAppChatEnableDoubleOptIn (upval), Element (upval), Text (upval), MessageListModule (upval), IsFriends (upval), DisplayNamesAvailable (upval), UserTypingIndicatorModule (upval), ReactModule (upval), FoundationModule (upval), FFlagAppChatSignalsReplyStoreModule (upval), FFlagAppChatSmartSuggestionsModule (upval), SmartSuggestionsChipRowContainerModule (upval), ReplyComposeBarContainerModule (upval), ChatConversationMoreMenuModule (upval), ChatInputBarModule (upval), p2 (copy), ConversationBottomModalContainerModule (upval)
+			-- upvalues: WithChatPagePaddingModule (upval), p1 (upval), RoactModule (upval), KeyboardOffsetEventHandlerModule (upval), ConversationTopModalContainerModule (upval), Element (upval), Text (upval), MessageListModule (upval), IsFriends (upval), DisplayNamesAvailable (upval), UserTypingIndicatorModule (upval), ReactModule (upval), FoundationModule (upval), FFlagAppChatSignalsReplyStoreModule (upval), FFlagAppChatSmartSuggestionsModule (upval), SmartSuggestionsChipRowContainerModule (upval), ReplyComposeBarContainerModule (upval), ChatConversationMoreMenuModule (upval), ChatInputBarModule (upval), p2 (copy), ConversationBottomModalContainerModule (upval)
 			return WithChatPagePaddingModule(function(p4)
-				-- upvalues: p1 (upval), RoactModule (upval), p3 (copy), KeyboardOffsetEventHandlerModule (upval), ConversationTopModalContainerModule (upval), FFlagAppChatEnableDoubleOptIn (upval), Element (upval), Text (upval), MessageListModule (upval), IsFriends (upval), DisplayNamesAvailable (upval), UserTypingIndicatorModule (upval), ReactModule (upval), FoundationModule (upval), FFlagAppChatSignalsReplyStoreModule (upval), FFlagAppChatSmartSuggestionsModule (upval), SmartSuggestionsChipRowContainerModule (upval), ReplyComposeBarContainerModule (upval), ChatConversationMoreMenuModule (upval), ChatInputBarModule (upval), p2 (upval), ConversationBottomModalContainerModule (upval)
+				-- upvalues: p1 (upval), RoactModule (upval), p3 (copy), KeyboardOffsetEventHandlerModule (upval), ConversationTopModalContainerModule (upval), Element (upval), Text (upval), MessageListModule (upval), IsFriends (upval), DisplayNamesAvailable (upval), UserTypingIndicatorModule (upval), ReactModule (upval), FoundationModule (upval), FFlagAppChatSignalsReplyStoreModule (upval), FFlagAppChatSmartSuggestionsModule (upval), SmartSuggestionsChipRowContainerModule (upval), ReplyComposeBarContainerModule (upval), ChatConversationMoreMenuModule (upval), ChatInputBarModule (upval), p2 (upval), ConversationBottomModalContainerModule (upval)
 				return RoactModule.createElement("TextButton", {
 					AutoButtonColor = false,
 					BackgroundColor3 = p3.Theme.BackgroundDefault.Color,
@@ -528,9 +526,7 @@ function ChatConversation.render(p1)
 					}),
 					ConversationTopModal = RoactModule.createElement(ConversationTopModalContainerModule, {
 						layoutOrder = 1,
-						conversationId = if FFlagAppChatEnableDoubleOptIn then p1.props.conversationId else nil,
-						conversation = if FFlagAppChatEnableDoubleOptIn then nil else p1.props.conversation,
-						navigateToScreen = if FFlagAppChatEnableDoubleOptIn then nil else p1.props.navigateToScreen,
+						conversationId = p1.props.conversationId,
 						setModalHeight = p1.setBannerHeight
 					}),
 					MessageListFrame = RoactModule.createElement("Frame", {

@@ -2,6 +2,8 @@
 local ReactModule = require(Moments.Parent.React)
 local AvatarMomentContainerModule = require(script.AvatarMomentContainer)
 local _ = require(Moments.Components.Feed.FeedTypes)
+local MakeRecommendationAttributionModule = require(Moments.Analytics.makeRecommendationAttribution)
+local FFlagMomentsRecommendationContentTypeModule = require(Moments.Flags.FFlagMomentsRecommendationContentType)
 
 return {
 	{
@@ -12,13 +14,20 @@ return {
 			return if FeedItemId == nil or FeedItemId == "" then p1.moment.momentId else FeedItemId
 		end,
 		getAttribution = function(p1)
-			local RecommendationMetadata = p1.moment.recommendationMetadata
-			local FeedItemId = RecommendationMetadata.feedItemId
+			-- upvalues: FFlagMomentsRecommendationContentTypeModule (copy), MakeRecommendationAttributionModule (copy)
+			local Moment = p1.moment
 			
-			return if FeedItemId == nil or FeedItemId == "" then nil else {
-				itemId = FeedItemId,
-				tracingId = RecommendationMetadata.tracingId
-			}
+			if FFlagMomentsRecommendationContentTypeModule then
+				return MakeRecommendationAttributionModule(Moment.recommendationMetadata, Moment, "Avatar")
+			else
+				local RecommendationMetadata = Moment.recommendationMetadata
+				local FeedItemId = RecommendationMetadata.feedItemId
+				
+				return if FeedItemId == nil or FeedItemId == "" then nil else {
+					itemId = FeedItemId,
+					tracingId = RecommendationMetadata.tracingId
+				}
+			end
 		end,
 		render = function(Item, Index)
 			-- upvalues: ReactModule (copy), AvatarMomentContainerModule (copy)

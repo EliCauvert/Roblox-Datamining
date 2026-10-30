@@ -30,6 +30,29 @@ function TestHelper.render(Subject, Container, Preferences)
 	return RenderResult
 end
 
+local function TokenProbe(p1)
+	-- upvalues: FoundationModule (copy)
+	p1.onTokens((FoundationModule.Hooks.useTokens()))
+	
+	return nil
+end
+
+function TestHelper.getTokens()
+	-- upvalues: TestHelper (copy), ReactModule (copy), TokenProbe (copy)
+	local v1 = nil
+	TestHelper.runWhileMounted(TestHelper.withFoundation({
+		Probe = ReactModule.createElement(TokenProbe, {
+			onTokens = function(UseTokensResult)
+				-- upvalues: v1 (ref)
+				v1 = UseTokensResult
+			end
+		})
+	}), function() end)
+	assert(v1 ~= nil, "expected FoundationProvider to provide tokens")
+	
+	return v1
+end
+
 function TestHelper.createOverlayGui()
 	local TestOverlay = Instance.new("ScreenGui")
 	TestOverlay.Name = "TestOverlay"

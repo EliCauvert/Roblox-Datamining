@@ -127,6 +127,9 @@ return ReactModule.memo(function(p1)
 		Current.setSessionSource(SessionSource)
 		LogMomentsLayerExposureFunction(FStringMomentsExperienceJoinActionTextIxpLayerModule)
 		
+		if require(Moments.Flags.FFlagMomentsCreatorAttributionIxpEnabled) then
+			LogMomentsLayerExposureFunction(require(Moments.Flags.FStringMomentsCreatorAttributionIxpLayer))
+		end
 		if require(Moments.Flags.FFlagMomentsFeedIxpEnabled) then
 			LogMomentsLayerExposureFunction(require(Moments.Flags.FStringMomentsFeedIxpLayer))
 		end

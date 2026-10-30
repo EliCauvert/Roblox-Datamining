@@ -62,6 +62,12 @@ function BuildModeLaunchModule:set(ChatSessionId, ChatPlaceId, p1)
 	MemStorageService:SetItem("BuildExperienceLaunchData", HttpService:JSONEncode(config))
 end
 
+function BuildModeLaunchModule:clear()
+	-- upvalues: MemStorageService (copy)
+	self.cachedResult = nil
+	MemStorageService:SetItem("BuildExperienceLaunchData", "")
+end
+
 function BuildModeLaunchModule:hasBuildMode()
 	-- upvalues: FFlagBuildExperienceLibrary (copy), MemStorageService (copy), HttpService (copy)
 	if self.cachedResult ~= nil then

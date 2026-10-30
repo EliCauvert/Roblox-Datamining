@@ -46,6 +46,7 @@ local FIntAXMinSaveIntervalSeconds = game:DefineFastInt("FIntAXMinSaveIntervalSe
 local AXMaxUndoRedoHistory = game:DefineFastInt("AXMaxUndoRedoHistory", 20)
 local FFlagAXEnableManualSavingBlockingPrompt = AvatarExperienceFlagsModule.FFlagAXEnableManualSavingBlockingPrompt
 local FFlagAXBackgroundsPersistence = AvatarExperienceFlagsModule.FFlagAXBackgroundsPersistence
+local FFlagAXTimeoutAcknowledgementGating = AvatarExperienceFlagsModule.FFlagAXTimeoutAcknowledgementGating
 local config = {
 	toastMessage = "Feature.Avatar.Message.SaveThrottled",
 	isLocalized = false,
@@ -84,7 +85,7 @@ local function _(p1)
 end
 
 return function()
-	-- upvalues: UseDispatchFunction (copy), UseNavigationFunction (copy), UseSelectorSignalFunction (copy), SelectCharacterDataModule (copy), TutilsModule (copy), SelectHasAvatarDataModule (copy), UseSignalFunction (copy), ReactModule (copy), SignalsModule (copy), ShouldInsertNewHistoryEntryModule (copy), DashModule (copy), AXMaxUndoRedoHistory (copy), ShouldReplaceLastHistoryEntryModule (copy), RemoveInvalidAssetsFromCharacterDataModule (copy), AvatarExperienceCommonModule (copy), UseComputedSignalFunction (copy), SaveStatusEnumModule (copy), CheckHasChangesToSaveModule (copy), CheckCharacterDataHasTryOnItemsModule (copy), GetInvalidAssetIdsToAssetTypeIdMapModule (copy), GetAssetIdToAssetTypeIdFromHumanoidDescriptionFunction (copy), SetCurrentToastMessageFunction (copy), config2 (copy), config1 (copy), CharacterHistoryStateChangeButtonActivatedFunction (copy), config (copy), config3 (copy), PromiseModule (copy), FIntAXMinSaveIntervalSeconds (copy), BuildHumanoidDescriptionFunction (copy), GetSaveDictModule (copy), FFlagAXBackgroundsPersistence (copy), AvatarExperienceFlagsModule (copy), CryoModule (copy), SaveProfileConfigurationModule (copy), GetGearAssetIdFromEquippedAssetsFunction (copy), SaveAvatarModule (copy), FFlagAXEnableManualSavingBlockingPrompt (copy), FFlagSignalsNavP3Dispatch (copy), NavigationCommands (copy), NavigateToRouteFunction (copy), Actions (copy), AvatarScreen (copy), config4 (copy), RegisterCustomGetStateForActionFunction (copy), CustomGetStateForAction (copy)
+	-- upvalues: UseDispatchFunction (copy), UseNavigationFunction (copy), UseSelectorSignalFunction (copy), SelectCharacterDataModule (copy), TutilsModule (copy), SelectHasAvatarDataModule (copy), UseSignalFunction (copy), ReactModule (copy), SignalsModule (copy), ShouldInsertNewHistoryEntryModule (copy), DashModule (copy), AXMaxUndoRedoHistory (copy), ShouldReplaceLastHistoryEntryModule (copy), RemoveInvalidAssetsFromCharacterDataModule (copy), AvatarExperienceCommonModule (copy), UseComputedSignalFunction (copy), SaveStatusEnumModule (copy), CheckHasChangesToSaveModule (copy), CheckCharacterDataHasTryOnItemsModule (copy), GetInvalidAssetIdsToAssetTypeIdMapModule (copy), GetAssetIdToAssetTypeIdFromHumanoidDescriptionFunction (copy), SetCurrentToastMessageFunction (copy), config2 (copy), config1 (copy), CharacterHistoryStateChangeButtonActivatedFunction (copy), config (copy), config3 (copy), PromiseModule (copy), FFlagAXTimeoutAcknowledgementGating (copy), FIntAXMinSaveIntervalSeconds (copy), BuildHumanoidDescriptionFunction (copy), GetSaveDictModule (copy), FFlagAXBackgroundsPersistence (copy), AvatarExperienceFlagsModule (copy), CryoModule (copy), SaveProfileConfigurationModule (copy), GetGearAssetIdFromEquippedAssetsFunction (copy), SaveAvatarModule (copy), FFlagAXEnableManualSavingBlockingPrompt (copy), FFlagSignalsNavP3Dispatch (copy), NavigationCommands (copy), NavigateToRouteFunction (copy), Actions (copy), AvatarScreen (copy), config4 (copy), RegisterCustomGetStateForActionFunction (copy), CustomGetStateForAction (copy)
 	local UseDispatchResult = UseDispatchFunction()
 	local UseNavigationResult = UseNavigationFunction()
 	local UseSelectorSignalResult = UseSelectorSignalFunction(SelectCharacterDataModule, TutilsModule.deepEqual)
@@ -236,108 +237,112 @@ return function()
 		end
 	end, { UseSignalResult2_3, UseDispatchResult })
 	local UseResult4 = ReactModule.useCallback(function()
-		-- upvalues: PromiseModule (upval), TimeoutStatusStore (copy), UseResult3 (copy), SaveStatusEnumModule (upval), UseSignalResult (copy), UseSignalResult1 (copy), UseSignalResult3 (copy), UseSignalResult5 (copy), FIntAXMinSaveIntervalSeconds (upval), UseSignalResult2_3 (copy), UseSignalResult2_4 (copy), BuildHumanoidDescriptionFunction (upval), GetSaveDictModule (upval), FFlagAXBackgroundsPersistence (upval), AvatarExperienceFlagsModule (upval), CryoModule (upval), SaveProfileConfigurationModule (upval), UseSignalResult2_5 (copy), UseResult2 (copy), GetGearAssetIdFromEquippedAssetsFunction (upval), SaveAvatarModule (upval)
+		-- upvalues: PromiseModule (upval), TimeoutStatusStore (copy), FFlagAXTimeoutAcknowledgementGating (upval), AvatarExperienceCommonModule (upval), UseResult3 (copy), SaveStatusEnumModule (upval), UseSignalResult (copy), UseSignalResult1 (copy), UseSignalResult3 (copy), UseSignalResult5 (copy), FIntAXMinSaveIntervalSeconds (upval), UseSignalResult2_3 (copy), UseSignalResult2_4 (copy), BuildHumanoidDescriptionFunction (upval), GetSaveDictModule (upval), FFlagAXBackgroundsPersistence (upval), AvatarExperienceFlagsModule (upval), CryoModule (upval), SaveProfileConfigurationModule (upval), UseSignalResult2_5 (copy), UseResult2 (copy), GetGearAssetIdFromEquippedAssetsFunction (upval), SaveAvatarModule (upval)
 		return PromiseModule.new(function(Callback, Callback1)
-			-- upvalues: TimeoutStatusStore (upval), UseResult3 (upval), SaveStatusEnumModule (upval), UseSignalResult (upval), UseSignalResult1 (upval), UseSignalResult3 (upval), UseSignalResult5 (upval), FIntAXMinSaveIntervalSeconds (upval), UseSignalResult2_3 (upval), UseSignalResult2_4 (upval), BuildHumanoidDescriptionFunction (upval), GetSaveDictModule (upval), FFlagAXBackgroundsPersistence (upval), AvatarExperienceFlagsModule (upval), CryoModule (upval), SaveProfileConfigurationModule (upval), UseSignalResult2_5 (upval), UseResult2 (upval), GetGearAssetIdFromEquippedAssetsFunction (upval), SaveAvatarModule (upval)
-			if TimeoutStatusStore and TimeoutStatusStore.getIsTimedOut(false) then
-				UseResult3(SaveStatusEnumModule.TimedOut)
+			-- upvalues: TimeoutStatusStore (upval), FFlagAXTimeoutAcknowledgementGating (upval), AvatarExperienceCommonModule (upval), UseResult3 (upval), SaveStatusEnumModule (upval), UseSignalResult (upval), UseSignalResult1 (upval), UseSignalResult3 (upval), UseSignalResult5 (upval), FIntAXMinSaveIntervalSeconds (upval), UseSignalResult2_3 (upval), UseSignalResult2_4 (upval), BuildHumanoidDescriptionFunction (upval), GetSaveDictModule (upval), FFlagAXBackgroundsPersistence (upval), AvatarExperienceFlagsModule (upval), CryoModule (upval), SaveProfileConfigurationModule (upval), UseSignalResult2_5 (upval), UseResult2 (upval), GetGearAssetIdFromEquippedAssetsFunction (upval), SaveAvatarModule (upval)
+			if not TimeoutStatusStore or not TimeoutStatusStore.getIsTimedOut(false) then
+				local UseSignalResultResult = UseSignalResult(false)
+				local UseSignalResultResult1 = UseSignalResult1(false)
+				local UseSignalResultResult2 = UseSignalResult3(false)
+				local UseSignalResultResultEntry = UseSignalResultResult[UseSignalResultResult1]
 				
-				return
-			end
-			local UseSignalResultResult = UseSignalResult(false)
-			local UseSignalResultResult1 = UseSignalResult1(false)
-			local UseSignalResultResult2 = UseSignalResult3(false)
-			local UseSignalResultResultEntry = UseSignalResultResult[UseSignalResultResult1]
-			
-			if UseSignalResultResultEntry and UseSignalResultResult2 then
-				local UseSignalResultResult3: number = UseSignalResult5(false)
-				
-				if UseSignalResultResult3 > 0 and os.time() - UseSignalResultResult3 < FIntAXMinSaveIntervalSeconds then
-					UseResult3(SaveStatusEnumModule.Throttled)
+				if UseSignalResultResultEntry and UseSignalResultResult2 then
+					local UseSignalResultResult3: number = UseSignalResult5(false)
 					
-					return
-				end
-				UseSignalResult2_3(UseSignalResultResultEntry)
-				UseSignalResult2_4(os.time())
-				local HumanoidDescription = BuildHumanoidDescriptionFunction({
-					currentAssets = UseSignalResultResultEntry.equipped.EquippedAssets,
-					avatarScales = UseSignalResultResultEntry.equipped.AvatarScales,
-					bodyColor3s = UseSignalResultResultEntry.equipped.BodyColor3s,
-					emotesSlotInfo = UseSignalResultResultEntry.equipped.EquippedEmotes.slotInfo
-				})
-				local HumanoidRigTypeEntry = Enum.HumanoidRigType[UseSignalResultResultEntry.equipped.AvatarType]
-				local SaveDictModule = GetSaveDictModule(UseSignalResultResultEntry, UseSignalResultResult2)
-				local BackgroundAssetId = if FFlagAXBackgroundsPersistence then UseSignalResultResultEntry.equipped.BackgroundAssetId else nil
-				local HasBackgroundAssetId: boolean = SaveDictModule.Background == true and BackgroundAssetId ~= nil
-				local Config = if AvatarExperienceFlagsModule.FFlagAXProfileConfigurationMultiFieldApply then { BackgroundAssetId = BackgroundAssetId } else BackgroundAssetId
-				local Flag = false
-				
-				if FFlagAXBackgroundsPersistence then
-					SaveDictModule = CryoModule.Dictionary.join(SaveDictModule, { Background = CryoModule.None })
+					if UseSignalResultResult3 > 0 and os.time() - UseSignalResultResult3 < FIntAXMinSaveIntervalSeconds then
+						UseResult3(SaveStatusEnumModule.Throttled)
+						
+						return
+					end
+					UseSignalResult2_3(UseSignalResultResultEntry)
+					UseSignalResult2_4(os.time())
+					local HumanoidDescription = BuildHumanoidDescriptionFunction({
+						currentAssets = UseSignalResultResultEntry.equipped.EquippedAssets,
+						avatarScales = UseSignalResultResultEntry.equipped.AvatarScales,
+						bodyColor3s = UseSignalResultResultEntry.equipped.BodyColor3s,
+						emotesSlotInfo = UseSignalResultResultEntry.equipped.EquippedEmotes.slotInfo
+					})
+					local HumanoidRigTypeEntry = Enum.HumanoidRigType[UseSignalResultResultEntry.equipped.AvatarType]
+					local SaveDictModule = GetSaveDictModule(UseSignalResultResultEntry, UseSignalResultResult2)
+					local BackgroundAssetId = if FFlagAXBackgroundsPersistence then UseSignalResultResultEntry.equipped.BackgroundAssetId else nil
+					local HasBackgroundAssetId: boolean = SaveDictModule.Background == true and BackgroundAssetId ~= nil
+					local Config = if AvatarExperienceFlagsModule.FFlagAXProfileConfigurationMultiFieldApply then { BackgroundAssetId = BackgroundAssetId } else BackgroundAssetId
+					local Flag = false
 					
-					for _, value in SaveDictModule do
-						if value then
-							Flag = true
-							break
+					if FFlagAXBackgroundsPersistence then
+						SaveDictModule = CryoModule.Dictionary.join(SaveDictModule, { Background = CryoModule.None })
+						
+						for _, value in SaveDictModule do
+							if value then
+								Flag = true
+								break
+							end
 						end
 					end
-				end
-				if HasBackgroundAssetId and not Flag then
-					SaveProfileConfigurationModule(Config):andThen(function()
-						-- upvalues: UseSignalResult2_5 (upval), UseResult2 (upval), HumanoidDescription (copy), UseSignalResultResultEntry (copy), UseSignalResultResult2 (copy), SaveDictModule (ref), Callback (copy)
-						UseSignalResult2_5(false)
-						UseResult2(HumanoidDescription, HumanoidDescription, UseSignalResultResultEntry, UseSignalResultResult2, SaveDictModule)
-						Callback()
-					end):catch(function()
-						-- upvalues: UseSignalResult2_5 (upval), UseResult3 (upval), SaveStatusEnumModule (upval), Callback1 (copy)
-						UseSignalResult2_5(false)
-						UseResult3(SaveStatusEnumModule.Failure)
-						Callback1()
-					end)
-					
-					return
-				end
-				local SaveProfileConfigurationModuleResult = if HasBackgroundAssetId then SaveProfileConfigurationModule(Config) else nil
-				SaveAvatarModule(HumanoidDescription, HumanoidRigTypeEntry, SaveDictModule, (GetGearAssetIdFromEquippedAssetsFunction(UseSignalResultResultEntry.equipped.EquippedAssets))):andThen(function(Result)
-					-- upvalues: UseSignalResult2_5 (upval), UseResult2 (upval), HumanoidDescription (copy), UseSignalResultResult2 (copy), SaveDictModule (ref), Callback (copy), SaveProfileConfigurationModuleResult (copy), UseSignalResultResultEntry (copy), CryoModule (upval)
-					UseSignalResult2_5(false)
-					
-					local function _(p1)
-						-- upvalues: UseResult2 (upval), HumanoidDescription (upval), Result (copy), UseSignalResultResult2 (upval), SaveDictModule (upval), Callback (upval)
-						UseResult2(HumanoidDescription, Result.humanoidDescriptionWithValidAssets, p1, UseSignalResultResult2, SaveDictModule)
-						Callback()
-					end
-					
-					if SaveProfileConfigurationModuleResult then
-						SaveProfileConfigurationModuleResult:andThen(function()
-							-- upvalues: UseSignalResultResultEntry (upval), UseResult2 (upval), HumanoidDescription (upval), Result (copy), UseSignalResultResult2 (upval), SaveDictModule (upval), Callback (upval)
-							UseResult2(HumanoidDescription, Result.humanoidDescriptionWithValidAssets, UseSignalResultResultEntry, UseSignalResultResult2, SaveDictModule)
+					if HasBackgroundAssetId and not Flag then
+						SaveProfileConfigurationModule(Config):andThen(function()
+							-- upvalues: UseSignalResult2_5 (upval), UseResult2 (upval), HumanoidDescription (copy), UseSignalResultResultEntry (copy), UseSignalResultResult2 (copy), SaveDictModule (ref), Callback (copy)
+							UseSignalResult2_5(false)
+							UseResult2(HumanoidDescription, HumanoidDescription, UseSignalResultResultEntry, UseSignalResultResult2, SaveDictModule)
 							Callback()
-						end, function()
-							-- upvalues: CryoModule (upval), UseSignalResultResultEntry (upval), UseSignalResultResult2 (upval), UseResult2 (upval), HumanoidDescription (upval), Result (copy), SaveDictModule (upval), Callback (upval)
-							UseResult2(HumanoidDescription, Result.humanoidDescriptionWithValidAssets, CryoModule.Dictionary.join(UseSignalResultResultEntry, {
-								equipped = CryoModule.Dictionary.join(UseSignalResultResultEntry.equipped, {
-									BackgroundAssetId = if UseSignalResultResult2.equipped.BackgroundAssetId == nil then CryoModule.None else UseSignalResultResult2.equipped.BackgroundAssetId
-								})
-							}), UseSignalResultResult2, SaveDictModule)
-							Callback()
+						end):catch(function()
+							-- upvalues: UseSignalResult2_5 (upval), UseResult3 (upval), SaveStatusEnumModule (upval), Callback1 (copy)
+							UseSignalResult2_5(false)
+							UseResult3(SaveStatusEnumModule.Failure)
+							Callback1()
 						end)
 						
 						return
-					else
-						UseResult2(HumanoidDescription, Result.humanoidDescriptionWithValidAssets, UseSignalResultResultEntry, UseSignalResultResult2, SaveDictModule)
-						Callback()
 					end
-				end):catch(function(_)
-					-- upvalues: UseSignalResult2_5 (upval), TimeoutStatusStore (upval), UseResult3 (upval), SaveStatusEnumModule (upval), Callback1 (copy)
-					UseSignalResult2_5(false)
-					
-					if TimeoutStatusStore then
-						TimeoutStatusStore.fetchStatus()
-					end
-					UseResult3(SaveStatusEnumModule.Failure)
-					Callback1()
-				end)
+					local SaveProfileConfigurationModuleResult = if HasBackgroundAssetId then SaveProfileConfigurationModule(Config) else nil
+					SaveAvatarModule(HumanoidDescription, HumanoidRigTypeEntry, SaveDictModule, (GetGearAssetIdFromEquippedAssetsFunction(UseSignalResultResultEntry.equipped.EquippedAssets))):andThen(function(Result)
+						-- upvalues: UseSignalResult2_5 (upval), UseResult2 (upval), HumanoidDescription (copy), UseSignalResultResult2 (copy), SaveDictModule (ref), Callback (copy), SaveProfileConfigurationModuleResult (copy), UseSignalResultResultEntry (copy), CryoModule (upval)
+						UseSignalResult2_5(false)
+						
+						local function _(p1)
+							-- upvalues: UseResult2 (upval), HumanoidDescription (upval), Result (copy), UseSignalResultResult2 (upval), SaveDictModule (upval), Callback (upval)
+							UseResult2(HumanoidDescription, Result.humanoidDescriptionWithValidAssets, p1, UseSignalResultResult2, SaveDictModule)
+							Callback()
+						end
+						
+						if SaveProfileConfigurationModuleResult then
+							SaveProfileConfigurationModuleResult:andThen(function()
+								-- upvalues: UseSignalResultResultEntry (upval), UseResult2 (upval), HumanoidDescription (upval), Result (copy), UseSignalResultResult2 (upval), SaveDictModule (upval), Callback (upval)
+								UseResult2(HumanoidDescription, Result.humanoidDescriptionWithValidAssets, UseSignalResultResultEntry, UseSignalResultResult2, SaveDictModule)
+								Callback()
+							end, function()
+								-- upvalues: CryoModule (upval), UseSignalResultResultEntry (upval), UseSignalResultResult2 (upval), UseResult2 (upval), HumanoidDescription (upval), Result (copy), SaveDictModule (upval), Callback (upval)
+								UseResult2(HumanoidDescription, Result.humanoidDescriptionWithValidAssets, CryoModule.Dictionary.join(UseSignalResultResultEntry, {
+									equipped = CryoModule.Dictionary.join(UseSignalResultResultEntry.equipped, {
+										BackgroundAssetId = if UseSignalResultResult2.equipped.BackgroundAssetId == nil then CryoModule.None else UseSignalResultResult2.equipped.BackgroundAssetId
+									})
+								}), UseSignalResultResult2, SaveDictModule)
+								Callback()
+							end)
+							
+							return
+						else
+							UseResult2(HumanoidDescription, Result.humanoidDescriptionWithValidAssets, UseSignalResultResultEntry, UseSignalResultResult2, SaveDictModule)
+							Callback()
+						end
+					end):catch(function(_)
+						-- upvalues: UseSignalResult2_5 (upval), TimeoutStatusStore (upval), UseResult3 (upval), SaveStatusEnumModule (upval), Callback1 (copy)
+						UseSignalResult2_5(false)
+						
+						if TimeoutStatusStore then
+							TimeoutStatusStore.fetchStatus()
+						end
+						UseResult3(SaveStatusEnumModule.Failure)
+						Callback1()
+					end)
+				end
+				return
+			elseif FFlagAXTimeoutAcknowledgementGating and TimeoutStatusStore.getStatus(false).requiresAcknowledgement then
+				AvatarExperienceCommonModule.Utils.showAvatarChangeFeatureRestriction()
+				
+				return
+			else
+				UseResult3(SaveStatusEnumModule.TimedOut)
 			end
 		end)
 	end, {

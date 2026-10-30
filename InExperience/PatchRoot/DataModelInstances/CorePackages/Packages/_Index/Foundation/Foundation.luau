@@ -44,6 +44,7 @@ local Foundation = require(script.Utility.strict)({
 	List = require(script.Components.List),
 	Loading = require(script.Components.Loading),
 	Media = require(script.Components.Media),
+	Metadata = require(script.Components.Metadata),
 	Menu = require(script.Components.Menu),
 	NumberInput = require(script.Components.NumberInput),
 	OptionSelectorGroup = require(script.Components.OptionSelectorGroup),

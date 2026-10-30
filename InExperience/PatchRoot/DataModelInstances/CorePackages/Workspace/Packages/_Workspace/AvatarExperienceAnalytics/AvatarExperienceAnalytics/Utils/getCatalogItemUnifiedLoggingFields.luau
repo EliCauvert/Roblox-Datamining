@@ -7,9 +7,7 @@ local GetMarketplaceUnifiedItemTypeModule = require(AvatarExperienceAnalytics.Ut
 local GetItemSelectionActionModule = require(AvatarExperienceAnalytics.Utils.getItemSelectionAction)
 local GetTimedOptionForItemDataModule = require(AvatarExperienceAnalytics.Utils.getTimedOptionForItemData)
 local UnifiedEventLoggingUtilsModule = require(AvatarExperienceAnalytics.Utils.UnifiedEventLoggingUtils)
-local AvatarExperienceFlagsModule = require(Parent.AvatarExperienceFlags)
-local FFlagAXOrganicItemPosition = AvatarExperienceFlagsModule.FFlagAXOrganicItemPosition
-local FFlagAXEditorRecommendedItemsUnifiedImpressions = AvatarExperienceFlagsModule.FFlagAXEditorRecommendedItemsUnifiedImpressions
+local FFlagAXEditorRecommendedItemsUnifiedImpressions = require(Parent.AvatarExperienceFlags).FFlagAXEditorRecommendedItemsUnifiedImpressions
 
 local function isReadyToLog(p1): boolean
 	-- upvalues: ItemTypeEnum (copy)
@@ -46,7 +44,7 @@ local function isReadyToLog(p1): boolean
 end
 
 local function buildFields(p1)
-	-- upvalues: FFlagAXOrganicItemPosition (copy), GetMarketplaceUnifiedItemTypeModule (copy), GetItemSelectionActionModule (copy), FFlagAXEditorRecommendedItemsUnifiedImpressions (copy), UnifiedEventLoggingUtilsModule (copy), GetTimedOptionForItemDataModule (copy), CryoModule (copy)
+	-- upvalues: GetMarketplaceUnifiedItemTypeModule (copy), GetItemSelectionActionModule (copy), FFlagAXEditorRecommendedItemsUnifiedImpressions (copy), UnifiedEventLoggingUtilsModule (copy), GetTimedOptionForItemDataModule (copy), CryoModule (copy)
 	local ItemData = p1.itemData
 	local LookData = p1.lookData
 	local HydratedContent = p1.hydratedContent
@@ -60,7 +58,7 @@ local function buildFields(p1)
 		bundleType = if ItemData then ItemData.bundleType else nil,
 		gridPositionRow = p1.gridPositionRow,
 		gridPositionColumn = p1.gridPositionColumn,
-		itemPosition = if FFlagAXOrganicItemPosition then p1.itemPosition else nil
+		itemPosition = p1.itemPosition
 	}, {
 		itemType = GetMarketplaceUnifiedItemTypeModule(p1.itemType),
 		action = GetItemSelectionActionModule(p1.isSelected == true),

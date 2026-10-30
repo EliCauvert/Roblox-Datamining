@@ -1,6 +1,7 @@
 ﻿local Players = game:GetService("Players")
 local TeleportService = game:GetService("TeleportService")
 local Parent = script:FindFirstAncestor("BuildExperiencePlaytestLaunch").Parent
+local SharedFlagsModule = require(Parent.SharedFlags)
 local TeamCreateUtilsModule = require(script.Parent.teamCreateUtils)
 local BuildModeLaunchModule = require(script.Parent.BuildModeLaunch)
 local PlaytestRejoinModule = require(script.Parent.PlaytestRejoin)
@@ -8,7 +9,8 @@ local LaunchExperienceModule = require(script.Parent.launchExperience)
 local LeaveExperienceModule = require(script.Parent.leaveExperience)
 local TeleportToPlaceModule = require(script.Parent.teleportToPlace)
 local Debug = require(Parent.DataHydration.CreatorAgentChat).debug
-local FFlagBuildExperienceLibrary = require(Parent.SharedFlags).FFlagBuildExperienceLibrary
+local FFlagBuildExperienceLibrary = SharedFlagsModule.FFlagBuildExperienceLibrary
+local FFlagLuaAppPrivatePlaytestEarlyTesting = SharedFlagsModule.FFlagLuaAppPrivatePlaytestEarlyTesting
 
 local function _(p1, p2): boolean
 	return p2 ~= 0 and p2 == p1
@@ -31,7 +33,7 @@ local _ = function(p1)
 end
 
 return function(PlaceId, Source, p1): string
-	-- upvalues: Debug (copy), TeamCreateUtilsModule (copy), Players (copy), TeleportService (copy), BuildModeLaunchModule (copy), TeleportToPlaceModule (copy), FFlagBuildExperienceLibrary (copy), PlaytestRejoinModule (copy), LeaveExperienceModule (copy), LaunchExperienceModule (copy)
+	-- upvalues: Debug (copy), TeamCreateUtilsModule (copy), FFlagLuaAppPrivatePlaytestEarlyTesting (copy), Players (copy), TeleportService (copy), BuildModeLaunchModule (copy), TeleportToPlaceModule (copy), FFlagBuildExperienceLibrary (copy), PlaytestRejoinModule (copy), LeaveExperienceModule (copy), LaunchExperienceModule (copy)
 	local CurrentPlaceId = if p1 and p1.currentPlaceId ~= nil then p1.currentPlaceId else game.PlaceId
 	local IsTeamTest = if p1 then p1.isTeamTest else nil
 	local IsEarlyTesting = if p1 then p1.isEarlyTesting else nil
@@ -45,13 +47,13 @@ return function(PlaceId, Source, p1): string
 	local IsViewer = TeamCreateUtilsModule.isViewer()
 	local Callback3: boolean = CurrentPlaceId ~= 0 and CurrentPlaceId == PlaceId
 	
-	if Callback3 and not IsViewer and not IsEarlyTesting then
+	if Callback3 and not IsViewer and not (IsEarlyTesting and FFlagLuaAppPrivatePlaytestEarlyTesting) then
 		Callback3 = nil
 		
 		if p1 and p1.onTeleportFailed then
 			local OnTeleportFailedFunction = p1.onTeleportFailed
 			
-			local function v19()
+			local function v21()
 				-- upvalues: Callback3 (ref), OnTeleportFailedFunction (copy)
 				if Callback3 then
 					Callback3()
@@ -62,9 +64,9 @@ return function(PlaceId, Source, p1): string
 			
 			local LocalPlayer = Players.LocalPlayer
 			local TeleportInitFailedConnection = TeleportService.TeleportInitFailed:Connect(function(Player)
-				-- upvalues: LocalPlayer (copy), v19 (copy)
+				-- upvalues: LocalPlayer (copy), v21 (copy)
 				if Player == LocalPlayer then
-					v19()
+					v21()
 				end
 			end)
 			

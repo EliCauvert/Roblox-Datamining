@@ -1,0 +1,1 @@
+﻿return game:DefineFastFlag("AppChatMessageListV2StableRowCallbacks", false)

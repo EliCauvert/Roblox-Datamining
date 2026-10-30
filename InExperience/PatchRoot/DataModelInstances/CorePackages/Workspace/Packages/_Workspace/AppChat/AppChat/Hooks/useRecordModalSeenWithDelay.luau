@@ -9,10 +9,9 @@ local SetTimeoutFunction = LuauPolyfillModule.setTimeout
 local StatusCodes = require(Parent.Http).StatusCodes
 local LoggerModule = require(AppChat.Logger)
 local UseRecordModalSequenceResponseForConversationModule = require(AppChat.Hooks.useRecordModalSequenceResponseForConversation)
-local FFlagAppChatEnableDoubleOptIn = require(Parent.SharedFlags).FFlagAppChatEnableDoubleOptIn
 
 return function(p1)
-	-- upvalues: UseDispatchFunction (copy), ReactModule (copy), UseRecordModalSequenceResponseForConversationModule (copy), FFlagAppChatEnableDoubleOptIn (copy), AppChatNetworkingModule (copy), StatusCodes (copy), LoggerModule (copy), SetTimeoutFunction (copy), ClearTimeoutFunction (copy)
+	-- upvalues: UseDispatchFunction (copy), ReactModule (copy), UseRecordModalSequenceResponseForConversationModule (copy), AppChatNetworkingModule (copy), StatusCodes (copy), LoggerModule (copy), SetTimeoutFunction (copy), ClearTimeoutFunction (copy)
 	local UseDispatchResult = UseDispatchFunction()
 	local UseStateResult, UseStateResult2 = ReactModule.useState(false)
 	local UseRecordModalSequenceResponseForConversationModuleResult = UseRecordModalSequenceResponseForConversationModule(p1.conversationId)
@@ -23,9 +22,9 @@ return function(p1)
 		p1.modalSequence,
 		p1.modalId,
 		p1.conversationId,
-		if FFlagAppChatEnableDoubleOptIn then p1.modalVariant else nil
+		p1.modalVariant
 	})
-	local ModalId = if FFlagAppChatEnableDoubleOptIn then p1.canRecordAction and (not UseStateResult and (p1.actionToRecord and (p1.modalSequence and (p1.modalId or p1.modalVariant)))) else p1.canRecordAction and (not UseStateResult and (p1.actionToRecord and (p1.modalSequence and p1.modalId)))
+	local ModalId = p1.canRecordAction and (not UseStateResult and (p1.actionToRecord and (p1.modalSequence and (p1.modalId or p1.modalVariant))))
 	local UseResult = ReactModule.useCallback(function()
 		-- upvalues: p1 (copy), UseRecordModalSequenceResponseForConversationModuleResult (copy), UseDispatchResult (copy), AppChatNetworkingModule (upval), StatusCodes (upval), UseStateResult2 (copy), LoggerModule (upval)
 		local ActionToRecord = p1.actionToRecord;
@@ -43,7 +42,7 @@ return function(p1)
 		p1.conversationId, UseRecordModalSequenceResponseForConversationModuleResult
 	})
 	ReactModule.useEffect(function()
-		-- upvalues: ModalId (ref), p1 (copy), SetTimeoutFunction (upval), UseResult (copy), ClearTimeoutFunction (upval)
+		-- upvalues: ModalId (copy), p1 (copy), SetTimeoutFunction (upval), UseResult (copy), ClearTimeoutFunction (upval)
 		local v1 = nil
 		
 		if ModalId then

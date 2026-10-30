@@ -1,5 +1,6 @@
 ﻿return {
 	AiOverviewSentiment = require(script.AiOverviewSentiment),
+	SafetyResourceBannerAction = require(script.SafetyResourceBannerAction),
 	Context = {
 		ExperienceTile = "ExperienceTile",
 		SearchExperienceTile = "SearchExperienceTile",

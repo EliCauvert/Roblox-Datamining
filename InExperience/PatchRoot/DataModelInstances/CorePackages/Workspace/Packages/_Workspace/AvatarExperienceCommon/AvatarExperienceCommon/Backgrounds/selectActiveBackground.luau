@@ -1,5 +1,6 @@
 ﻿local AvatarExperienceCommon = script:FindFirstAncestor("AvatarExperienceCommon")
 local AvatarExperienceFlagsModule = require(AvatarExperienceCommon.Parent.AvatarExperienceFlags)
+local FFlagAXOutfitSaveSkipUnownedTryOnBackground = AvatarExperienceFlagsModule.FFlagAXOutfitSaveSkipUnownedTryOnBackground
 local AvatarBackground = require(AvatarExperienceCommon.Constants).ASSET_TYPE_NAME_TO_ID_STRING.AvatarBackground
 local NOBACKGROUNDASSETID = require(script.Parent.constants).NO_BACKGROUND_ASSET_ID
 
@@ -42,14 +43,15 @@ local function _(p1): number?
 	return nil
 end
 
-return function(p2)
-	-- upvalues: AvatarBackground (copy), AvatarExperienceFlagsModule (copy), scanTryOnForBackground (copy), NOBACKGROUNDASSETID (copy)
+return function(p2, p3)
+	-- upvalues: AvatarBackground (copy), FFlagAXOutfitSaveSkipUnownedTryOnBackground (copy), AvatarExperienceFlagsModule (copy), scanTryOnForBackground (copy), NOBACKGROUNDASSETID (copy)
 	if not AvatarBackground then
 		return nil
 	end
 	local AvatarExperience = p2 and p2.AvatarExperience or p2
+	local IsIgnoreTryOn: boolean = FFlagAXOutfitSaveSkipUnownedTryOnBackground and (p3 ~= nil and p3.ignoreTryOn == true)
 	
-	if AvatarExperienceFlagsModule.FFlagAXBackgroundsCustomizeHydration then
+	if AvatarExperienceFlagsModule.FFlagAXBackgroundsCustomizeHydration and not IsIgnoreTryOn then
 		local OutfitTryOn = AvatarExperience and (AvatarExperience.AvatarScene and AvatarExperience.AvatarScene.OutfitTryOn)
 		local ScanTryOnForBackgroundResult = scanTryOnForBackground(OutfitTryOn and OutfitTryOn.TryOnItems)
 		

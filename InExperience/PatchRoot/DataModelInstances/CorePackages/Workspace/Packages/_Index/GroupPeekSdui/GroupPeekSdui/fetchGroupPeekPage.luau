@@ -31,7 +31,10 @@ return function(Group_id, p1)
 			body = {
 				group_id = Group_id,
 				client_capabilities = ServiceContractsProtoModule.apppageplatform.shared.client_capabilities.ClientCapabilities.new({
-					enabled_capabilities = SduiCapabilities.getEnabledCapabilityNumbers({ "CAPABILITY_SUPPORTS_GROUP_ANNOUNCEMENTS" })
+					enabled_capabilities = SduiCapabilities.getEnabledCapabilityNumbers({
+						"CAPABILITY_SUPPORTS_GROUP_ANNOUNCEMENTS",
+						"CAPABILITY_SUPPORTS_GROUP_CONTENT_REACTIONS"
+					})
 				}),
 				cached_roblox_component_to_template_id = GetSduiTemplateStoreFunction().getCachedRobloxComponentToTemplateId(AppPage)
 			}

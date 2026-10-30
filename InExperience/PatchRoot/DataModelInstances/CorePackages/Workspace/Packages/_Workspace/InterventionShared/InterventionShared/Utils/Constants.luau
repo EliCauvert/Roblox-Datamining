@@ -8,7 +8,6 @@
 	UIStateActions = { ToggleNotificationDialog = "ToggleNotificationDialog" },
 	EXP_INTERV_SIGNAL_NAMESPACE = "ExperienceIntervention",
 	FEATURE_INTERV_SIGNAL_NAMESPACE = "FeatureIntervention",
-	AVATAR_VIOLATION_SIGNAL_NAMESPACE = "AvatarViolation",
 	ChatNudgeDialogSelectionGroup = "ChatNudgeCustomDialog",
 	TreatmentType = {
 		ChatNudgeToast = "nudgeToast",
@@ -22,7 +21,6 @@
 		PartyChatTimeoutDialog = "partyChatTimeoutDialog",
 		BackendDriven = "BackendDriven",
 		UniversalFeatureRestriction = "universalFeatureRestriction",
-		TemporaryAvatarKickWarning = "temporaryAvatarKickWarning",
 		DictationSafetyReminderToast = "dictationSafetyReminderToast",
 		None = "none"
 	},
@@ -93,9 +91,6 @@
 		ModeratorNoteLabel = "Feature.NotApproved.Label.ModeratorNote",
 		OkText = "Feature.AppealsPortal.Action.OK",
 		AppealsPortalTitleText = "Feature.AppealsPortal.Label.ReportAndAppeals",
-		AccountStatusTitleText = "Feature.SafetyDashboard.Heading.AccountStatus.V2",
-		AvatarKickWarningTitle = "Notifications.SafetyAvatarModeration.Label.NotificationTypeInExpWarn",
-		AvatarKickWarningDescription = "Notifications.SafetyAvatarModeration.Description.NotificationTypeInExpWarnMsg",
-		Thanks = "CommonUI.Features.Label.Thanks"
+		AccountStatusTitleText = "Feature.SafetyDashboard.Heading.AccountStatus.V2"
 	}
 }

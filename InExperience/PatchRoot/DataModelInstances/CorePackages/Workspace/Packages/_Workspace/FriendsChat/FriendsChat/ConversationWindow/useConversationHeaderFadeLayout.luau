@@ -57,6 +57,7 @@ return function(p1)
 		onHeaderAbsoluteSizeChanged = UseResult,
 		onMessageViewportAbsoluteSizeChanged = UseResult1,
 		onMessageCanvasPositionChanged = UseResult2,
+		headerHeight = UseBindingResult,
 		headerLayoutPadding = UseMemoResult,
 		contentTopPadding = UseMemoResult2,
 		messageFadeSequence = UseMemoResult3,

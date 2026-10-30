@@ -4,11 +4,10 @@ local ConversationOverlay = require(Parent.AppChatNetworking).Constants.Conversa
 local LoggerModule = require(AppChat.Logger)
 local GetDeepValue2Module = require(AppChat.Utils.getDeepValue2)
 local UseSelectorFunction = require(Parent.RoactUtils).Hooks.RoactRodux.useSelector
-local FFlagAppChatEnableDoubleOptIn = require(Parent.SharedFlags).FFlagAppChatEnableDoubleOptIn
 local config = {
 	[ConversationOverlay.TrustedConnectionCreated] = true,
-	[ConversationOverlay.AddTrustedConnectionU18] = FFlagAppChatEnableDoubleOptIn,
-	[ConversationOverlay.TrustedConnectionRequestU18] = FFlagAppChatEnableDoubleOptIn
+	[ConversationOverlay.AddTrustedConnectionU18] = true,
+	[ConversationOverlay.TrustedConnectionRequestU18] = true
 }
 
 return function(p1): boolean

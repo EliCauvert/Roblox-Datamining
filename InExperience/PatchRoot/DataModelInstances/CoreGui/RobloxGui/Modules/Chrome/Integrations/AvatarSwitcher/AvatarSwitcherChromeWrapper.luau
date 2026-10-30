@@ -10,13 +10,15 @@ local ViewportUtilModule = require(Chrome.ChromeShared.Service.ViewportUtil)
 local _ = require(Chrome.ChromeShared.Service.WindowSizeSignal)
 local ConstantsModule = require(Chrome.ChromeShared.Unibar.Constants)
 local AvatarSwitcherContainer = require(CorePackages.Workspace.Packages.AvatarSwitcher).Components.AvatarSwitcherContainer
+local FFlagAvatarWorkshopReplacesAvatarSwitcher = require(CorePackages.Workspace.Packages.SharedFlags).FFlagAvatarWorkshopReplacesAvatarSwitcher
+local AvatarWorkshopWindow = if FFlagAvatarWorkshopReplacesAvatarSwitcher then require(CorePackages.Workspace.Packages.AvatarWorkshop).Components.AvatarWorkshopWindow else nil
 
 local function _(Vector): boolean
 	return Vector.X.Offset / Vector.Y.Offset < 1.2
 end
 
 return function(p1)
-	-- upvalues: ReactModule (copy), RobloxGui (copy), GuiService (copy), UseEventConnectionFunction (copy), ViewportUtilModule (copy), FoundationModule (copy), AvatarSwitcherContainer (copy), ServiceModule (copy), ConstantsModule (copy)
+	-- upvalues: ReactModule (copy), RobloxGui (copy), GuiService (copy), UseEventConnectionFunction (copy), ViewportUtilModule (copy), FFlagAvatarWorkshopReplacesAvatarSwitcher (copy), AvatarWorkshopWindow (copy), FoundationModule (copy), ServiceModule (copy), ConstantsModule (copy), AvatarSwitcherContainer (copy)
 	local WindowSize = p1.windowSize
 	local GetResult = WindowSize:get()
 	local UseStateResult, UseStateResult2 = ReactModule.useState(GetResult.X.Offset / GetResult.Y.Offset < 1.2)
@@ -59,7 +61,20 @@ return function(p1)
 		end
 	end, { UseResult })
 	
-	return ReactModule.createElement(FoundationModule.View, {
+	return if FFlagAvatarWorkshopReplacesAvatarSwitcher and AvatarWorkshopWindow then ReactModule.createElement(FoundationModule.View, {
+		tag = {
+			["size-full"] = true,
+			["padding-x-large padding-bottom-xlarge padding-top-medium"] = UseStateResult1
+		}
+	}, {
+		AvatarWorkshopWindow = ReactModule.createElement(AvatarWorkshopWindow, {
+			verticalLayout = UseStateResult,
+			onClose = function()
+				-- upvalues: ServiceModule (upval), ConstantsModule (upval)
+				ServiceModule:toggleWindow(ConstantsModule.AVATAR_SWITCHER_ID)
+			end
+		})
+	}) else ReactModule.createElement(FoundationModule.View, {
 		tag = `size-full {if UseStateResult1 then "padding-x-large padding-top-medium padding-bottom-xlarge" else ""}`
 	}, {
 		AvatarSwitcherContainer = ReactModule.createElement(AvatarSwitcherContainer, {

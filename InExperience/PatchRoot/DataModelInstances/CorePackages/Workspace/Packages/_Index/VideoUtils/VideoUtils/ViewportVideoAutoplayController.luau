@@ -20,6 +20,9 @@ local FIntLuaAppGameTileVideoVisiblePercent = require(Parent.SharedFlags).FIntLu
 local FIntLuaAppOneByTwoTileVideoVisiblePercent = require(Parent.SharedFlags).FIntLuaAppOneByTwoTileVideoVisiblePercent
 local FFlagLuaAppOneByTwoHoverIdleAutoplay = require(Parent.SharedFlags).FFlagLuaAppOneByTwoHoverIdleAutoplay
 local FFlagLuaAppHoverIdleAutoplayDuringScroll = require(Parent.SharedFlags).FFlagLuaAppHoverIdleAutoplayDuringScroll
+local FFlagLuaAppSuppressVideoDetectorDuringScroll = require(Parent.SharedFlags).FFlagLuaAppSuppressVideoDetectorDuringScroll
+local FFlagLuaAppSuppressOneByTwoVideoDetectorDuringScroll = require(Parent.SharedFlags).FFlagLuaAppSuppressOneByTwoVideoDetectorDuringScroll
+local FFlagLuaAppSduiSuppressVideoDetectorDuringScroll = require(Parent.SharedFlags).FFlagLuaAppSduiSuppressVideoDetectorDuringScroll
 local FFlagLuaAppTileVideoKeepPlayingOnScroll = require(Parent.SharedFlags).FFlagLuaAppTileVideoKeepPlayingOnScroll
 local FFlagLuaAppVideoAutoplayFeedElection = require(Parent.SharedFlags).FFlagLuaAppVideoAutoplayFeedElection
 local FFlagLuaAppVideoAutoplayOneByTwoConcurrentPlayback = require(Parent.SharedFlags).FFlagLuaAppVideoAutoplayOneByTwoConcurrentPlayback
@@ -58,8 +61,14 @@ local ViewportVideoAutoplayController = {}
 ViewportVideoAutoplayController.__index = ViewportVideoAutoplayController
 
 function ViewportVideoAutoplayController.new(Coordinator, Enabled, Enabled1, UserIntentWithSelectiveAutoplay)
-	-- upvalues: SignalsModule (copy), config (copy), winnerStateEquals (copy), FFlagLuaAppOneByTwoHoverIdleAutoplay (copy), FFlagLuaAppVideoAutoplayFeedElection (copy), FFlagLuaAppVideoAutoplayOneByTwoConcurrentPlayback (copy), ViewportVideoAutoplayController (copy), ViewportVideoAutoplayModeModule (copy), ViewportAutoplayVideoKeyAttributeModule (copy), VideoEndReason (copy)
+	-- upvalues: SignalsModule (copy), config (copy), winnerStateEquals (copy), FFlagLuaAppSduiSuppressVideoDetectorDuringScroll (copy), FFlagLuaAppOneByTwoHoverIdleAutoplay (copy), FFlagLuaAppVideoAutoplayFeedElection (copy), FFlagLuaAppSuppressVideoDetectorDuringScroll (copy), FFlagLuaAppVideoAutoplayOneByTwoConcurrentPlayback (copy), ViewportVideoAutoplayController (copy), ViewportVideoAutoplayModeModule (copy), ViewportAutoplayVideoKeyAttributeModule (copy), VideoEndReason (copy)
 	local Signal, Signal2 = SignalsModule.createSignal(config, winnerStateEquals)
+	local v1 = nil
+	local v2 = nil
+	
+	if FFlagLuaAppSduiSuppressVideoDetectorDuringScroll then
+		v1, v33 = SignalsModule.createSignal(false)
+	end
 	local self = setmetatable({
 		isScrolling = false,
 		pendingUpdateTask = nil,
@@ -73,9 +82,12 @@ function ViewportVideoAutoplayController.new(Coordinator, Enabled, Enabled1, Use
 		preferTallestWinner = if FFlagLuaAppVideoAutoplayFeedElection then Enabled == true else false,
 		electOnNewCandidate = if FFlagLuaAppVideoAutoplayFeedElection then Enabled1 == true else false,
 		playedVideoKeys = if FFlagLuaAppOneByTwoHoverIdleAutoplay then {} else nil,
+		suppressDetectorsDuringScroll = not FFlagLuaAppSuppressVideoDetectorDuringScroll and not FFlagLuaAppSduiSuppressVideoDetectorDuringScroll and nil,
 		getWinnerState = Signal,
 		setWinnerState = Signal2,
-		isResettingPairedPlayback = not FFlagLuaAppVideoAutoplayOneByTwoConcurrentPlayback and nil
+		isResettingPairedPlayback = not FFlagLuaAppVideoAutoplayOneByTwoConcurrentPlayback and nil,
+		getDetectorsUnmounted = if FFlagLuaAppSduiSuppressVideoDetectorDuringScroll then v1 else nil,
+		setDetectorsUnmounted = if FFlagLuaAppSduiSuppressVideoDetectorDuringScroll then v2 else nil
 	}, ViewportVideoAutoplayController)
 	
 	if FFlagLuaAppVideoAutoplayOneByTwoConcurrentPlayback then
@@ -327,7 +339,7 @@ function ViewportVideoAutoplayController:setViewPortBounds(ViewPortBounds)
 		local Y = nil
 		
 		if FFlagLuaAppOneByTwoHoverIdleAutoplay and self:isUserIntentWithSelectiveAutoplay() then
-			Y, v45 = self:_selectUserIntentOrAutoplayWinner("Y", nil)
+			Y, v50 = self:_selectUserIntentOrAutoplayWinner("Y", nil)
 		else
 			Y = self:_selectWinner("Y", nil)
 		end
@@ -350,6 +362,10 @@ end
 
 function ViewportVideoAutoplayController:setWinnerLineOffsetFromTopBarPx(WinnerLineOffsetFromTopBarPx)
 	self.winnerLineOffsetFromTopBarPx = WinnerLineOffsetFromTopBarPx
+end
+
+function ViewportVideoAutoplayController:setSuppressDetectorsDuringScroll(SuppressDetectorsDuringScroll)
+	self.suppressDetectorsDuringScroll = SuppressDetectorsDuringScroll
 end
 
 function ViewportVideoAutoplayController:setFeedScopeRef(FeedScopeRef)
@@ -413,7 +429,7 @@ function ViewportVideoAutoplayController:_scheduleScrollUpdate()
 end
 
 function ViewportVideoAutoplayController:onScrollStart()
-	-- upvalues: FFlagLuaAppOneByTwoHoverIdleAutoplay (copy), FFlagLuaAppHoverIdleAutoplayDuringScroll (copy), FFlagLuaAppTileVideoKeepPlayingOnScroll (copy), VideoEndReason (copy), FFlagLuaAppVideoAutoplayOneByTwoConcurrentPlayback (copy)
+	-- upvalues: FFlagLuaAppOneByTwoHoverIdleAutoplay (copy), FFlagLuaAppHoverIdleAutoplayDuringScroll (copy), FFlagLuaAppTileVideoKeepPlayingOnScroll (copy), FFlagLuaAppSuppressVideoDetectorDuringScroll (copy), FFlagLuaAppSduiSuppressVideoDetectorDuringScroll (copy), VideoEndReason (copy), FFlagLuaAppVideoAutoplayOneByTwoConcurrentPlayback (copy), FFlagLuaAppSuppressOneByTwoVideoDetectorDuringScroll (copy)
 	self:_cancelPendingUpdate()
 	self.isScrolling = true
 	
@@ -422,18 +438,27 @@ function ViewportVideoAutoplayController:onScrollStart()
 			self:_scheduleScrollUpdate()
 		end
 		return
-	elseif not FFlagLuaAppTileVideoKeepPlayingOnScroll then
+	elseif not FFlagLuaAppTileVideoKeepPlayingOnScroll and (not FFlagLuaAppSuppressVideoDetectorDuringScroll and not FFlagLuaAppSduiSuppressVideoDetectorDuringScroll or not self.suppressDetectorsDuringScroll) then
 		self.coordinator:reset(VideoEndReason.ScrollStart)
 		self.setWinnerState({ instance = nil, shouldUseDwell = false })
 		
 		if FFlagLuaAppVideoAutoplayOneByTwoConcurrentPlayback then
 			self:_resetAdsPlayback(VideoEndReason.ScrollStart)
+			
+			return
+		end
+	elseif (FFlagLuaAppSuppressVideoDetectorDuringScroll or FFlagLuaAppSduiSuppressVideoDetectorDuringScroll) and self.suppressDetectorsDuringScroll then
+		self.coordinator:cancelPendingDwells()
+		local AdsPlaybackCoordinatorInfo = self.adsPlaybackCoordinatorInfo
+		
+		if FFlagLuaAppVideoAutoplayOneByTwoConcurrentPlayback and FFlagLuaAppSuppressOneByTwoVideoDetectorDuringScroll and AdsPlaybackCoordinatorInfo then
+			AdsPlaybackCoordinatorInfo.coordinator:cancelPendingDwells()
 		end
 	end
 end
 
 function ViewportVideoAutoplayController:onScrollSettled(p1, _, p2)
-	-- upvalues: FFlagLuaAppOneByTwoHoverIdleAutoplay (copy), FFlagLuaAppTileVideoKeepPlayingOnScroll (copy), VideoEndReason (copy), FFlagLuaAppVideoAutoplayOneByTwoConcurrentPlayback (copy)
+	-- upvalues: FFlagLuaAppOneByTwoHoverIdleAutoplay (copy), FFlagLuaAppTileVideoKeepPlayingOnScroll (copy), FFlagLuaAppSuppressVideoDetectorDuringScroll (copy), FFlagLuaAppSduiSuppressVideoDetectorDuringScroll (copy), VideoEndReason (copy), FFlagLuaAppVideoAutoplayOneByTwoConcurrentPlayback (copy)
 	self:_cancelPendingUpdate()
 	self.isScrolling = false
 	
@@ -445,10 +470,31 @@ function ViewportVideoAutoplayController:onScrollSettled(p1, _, p2)
 		
 		return
 	end
-	if FFlagLuaAppTileVideoKeepPlayingOnScroll then
+	if FFlagLuaAppTileVideoKeepPlayingOnScroll or (FFlagLuaAppSuppressVideoDetectorDuringScroll or FFlagLuaAppSduiSuppressVideoDetectorDuringScroll) and self.suppressDetectorsDuringScroll then
 		local _Instance = self.getWinnerState(false).instance
 		local SelectWinnerResult = self:_selectWinner(p1, p2)
 		
+		if (FFlagLuaAppSuppressVideoDetectorDuringScroll or FFlagLuaAppSduiSuppressVideoDetectorDuringScroll) and self.suppressDetectorsDuringScroll and SelectWinnerResult == nil and _Instance ~= nil then
+			self.pendingUpdateTask = task.defer(function()
+				-- upvalues: self (copy), p1 (copy), p2 (copy), VideoEndReason (upval), FFlagLuaAppVideoAutoplayOneByTwoConcurrentPlayback (upval)
+				self.pendingUpdateTask = nil
+				
+				if self.isScrolling then return end
+				local SelectWinnerResult = self:_selectWinner(p1, p2)
+				local _Instance = self.getWinnerState(false).instance
+				
+				if SelectWinnerResult ~= _Instance and _Instance ~= nil then
+					self.coordinator:reset(VideoEndReason.ScrollSettled)
+				end
+				self.setWinnerState({ shouldUseDwell = false, instance = SelectWinnerResult })
+				
+				if FFlagLuaAppVideoAutoplayOneByTwoConcurrentPlayback then
+					self:_applyAdsWinner(false, VideoEndReason.ScrollSettled)
+				end
+			end)
+			
+			return
+		end
 		if _Instance ~= SelectWinnerResult and _Instance ~= nil then
 			self.coordinator:reset(VideoEndReason.ScrollSettled)
 		end
@@ -484,7 +530,7 @@ function ViewportVideoAutoplayController:_resetPairedPlayback(Coordinator, Exper
 end
 
 function ViewportVideoAutoplayController:reset(p1)
-	-- upvalues: FFlagLuaAppVideoAutoplayOneByTwoConcurrentPlayback (copy), FFlagLuaAppOneByTwoHoverIdleAutoplay (copy)
+	-- upvalues: FFlagLuaAppVideoAutoplayOneByTwoConcurrentPlayback (copy), FFlagLuaAppOneByTwoHoverIdleAutoplay (copy), FFlagLuaAppSduiSuppressVideoDetectorDuringScroll (copy)
 	if FFlagLuaAppVideoAutoplayOneByTwoConcurrentPlayback then
 		self:_resetOrganicPlayback(p1)
 		self:_cancelPendingAdsUpdate()
@@ -498,6 +544,10 @@ function ViewportVideoAutoplayController:reset(p1)
 		self:_cancelScrollUpdate()
 	end
 	self.isScrolling = false
+	
+	if FFlagLuaAppSduiSuppressVideoDetectorDuringScroll then
+		self.setDetectorsUnmounted(false)
+	end
 	self.coordinator:reset(p1)
 	self.setWinnerState({
 		instance = nil,
@@ -507,13 +557,17 @@ function ViewportVideoAutoplayController:reset(p1)
 end
 
 function ViewportVideoAutoplayController:_resetOrganicPlayback(p1)
-	-- upvalues: FFlagLuaAppOneByTwoHoverIdleAutoplay (copy)
+	-- upvalues: FFlagLuaAppOneByTwoHoverIdleAutoplay (copy), FFlagLuaAppSduiSuppressVideoDetectorDuringScroll (copy)
 	self:_cancelPendingUpdate()
 	
 	if FFlagLuaAppOneByTwoHoverIdleAutoplay then
 		self:_cancelScrollUpdate()
 	end
 	self.isScrolling = false
+	
+	if FFlagLuaAppSduiSuppressVideoDetectorDuringScroll then
+		self.setDetectorsUnmounted(false)
+	end
 	self.coordinator:reset(p1)
 	self.setWinnerState({
 		instance = nil,

@@ -177,7 +177,12 @@ return {
 		[HumanoidDescription.EyelashAccessory] = true
 	},
 	MAX_MAKEUP_LAYERS = 6,
-	LOOK_TYPE = { Avatar = "Avatar", Makeup = "Makeup", Outfit = "Outfit" },
+	LOOK_TYPE = {
+		Avatar = "Avatar",
+		Makeup = "Makeup",
+		Outfit = "Outfit",
+		AvatarMoment = "AvatarMoment"
+	},
 	MIN_MAKEUP_ITEMS_FOR_LAYERING_BUTTON = 2,
 	LabelAbuseTypeMapping = LabelAbuseTypeMappingModule,
 	BODY_PART_NAME_TO_ENUM = {

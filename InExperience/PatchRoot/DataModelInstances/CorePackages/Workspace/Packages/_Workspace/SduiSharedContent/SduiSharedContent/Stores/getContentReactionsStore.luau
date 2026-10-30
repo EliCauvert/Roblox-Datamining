@@ -1,0 +1,1 @@
+﻿return require(script:FindFirstAncestor("SduiSharedContent").Parent.Signals).createComputed((require(script.Parent.createContentReactionsStore)))

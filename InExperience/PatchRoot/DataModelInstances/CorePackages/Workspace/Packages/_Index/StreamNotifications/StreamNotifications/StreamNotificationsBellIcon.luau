@@ -30,6 +30,7 @@ local RoactAppPolicy = require(Parent.UniversalAppPolicy).RoactAppPolicy
 local GetFFlagNotificationsComplianceShouldRestrictStreamFunction = SharedFlagsModule.GetFFlagNotificationsComplianceShouldRestrictStream
 local FFlagEnableNotificationsDeeplink = SharedFlagsModule.FFlagEnableNotificationsDeeplink
 local FFlagStreamNotificationBellEntryPoint = SharedFlagsModule.FFlagStreamNotificationBellEntryPoint
+local FFlagSignalsNavP3bTopBar = SharedFlagsModule.FFlagSignalsNavP3bTopBar
 local FFlagEnableHeaderBarButtonsUpdate = SharedFlagsModule.FFlagEnableHeaderBarButtonsUpdate
 local FFlagStreamNotificationDropdownSingleOwner = SharedFlagsModule.FFlagStreamNotificationDropdownSingleOwner
 local FFlagStreamNotificationDropdownFocusedOwner = SharedFlagsModule.FFlagStreamNotificationDropdownFocusedOwner
@@ -40,8 +41,8 @@ local function _(): boolean
 	return ThirdPartyUserService and (ThirdPartyUserService:IsChatRestrictionSupported() and ThirdPartyUserService.FriendCommunicationRestrictionStatus ~= Enum.ChatRestrictionStatus.NotRestricted)
 end
 
-local function v32(p1)
-	-- upvalues: ReactModule (copy), FFlagStreamNotificationDropdownSingleOwner (copy), FFlagStreamNotificationDropdownFocusedOwner (copy), HttpService (copy), StreamNotificationStoreModule (copy), FFlagEnableNotificationsDeeplink (copy), UseSignalStateFunction (copy), StreamNotificationDropdownExperimentationModule (copy), UseTokensFunction (copy), NotificationHelper (copy), EventStream (copy), AnalyticsConstantsModule (copy), ConstantsModule (copy), FFlagStreamNotificationBellEntryPoint (copy), StreamNotificationsModule (copy), GetFFlagNotificationsComplianceShouldRestrictStreamFunction (copy), ThirdPartyUserService (copy), IxpHelper (copy), GetFStringNotificationsStreamNotificationUXLayerFunction (copy), FFlagEnableHeaderBarButtonsUpdate (copy), FoundationModule (copy), IsAppNavEnabledFunction (copy), Popover (copy), PopoverSide (copy), PopoverAlign (copy), IconsCommonNotificationOff (copy), UtilityActionIcon (copy), IconButton (copy), IconSize (copy), Badge (copy), BadgeVariant (copy)
+local function v33(p1)
+	-- upvalues: ReactModule (copy), FFlagStreamNotificationDropdownSingleOwner (copy), FFlagStreamNotificationDropdownFocusedOwner (copy), HttpService (copy), StreamNotificationStoreModule (copy), FFlagEnableNotificationsDeeplink (copy), UseSignalStateFunction (copy), StreamNotificationDropdownExperimentationModule (copy), UseTokensFunction (copy), FFlagStreamNotificationBellEntryPoint (copy), FFlagSignalsNavP3bTopBar (copy), NotificationHelper (copy), EventStream (copy), AnalyticsConstantsModule (copy), ConstantsModule (copy), StreamNotificationsModule (copy), GetFFlagNotificationsComplianceShouldRestrictStreamFunction (copy), ThirdPartyUserService (copy), IxpHelper (copy), GetFStringNotificationsStreamNotificationUXLayerFunction (copy), FFlagEnableHeaderBarButtonsUpdate (copy), FoundationModule (copy), IsAppNavEnabledFunction (copy), Popover (copy), PopoverSide (copy), PopoverAlign (copy), IconsCommonNotificationOff (copy), UtilityActionIcon (copy), IconButton (copy), IconSize (copy), Badge (copy), BadgeVariant (copy)
 	local UseStateResult, UseStateResult2 = ReactModule.useState(false)
 	local Current = nil
 	
@@ -103,13 +104,18 @@ local function v32(p1)
 			UseStateResult
 		})
 	end
+	local function _()
+		-- upvalues: FFlagStreamNotificationBellEntryPoint (upval), FFlagSignalsNavP3bTopBar (upval), p1 (copy)
+		return if FFlagStreamNotificationBellEntryPoint then if FFlagSignalsNavP3bTopBar and p1.getEntryPoint then p1.getEntryPoint() else p1.entryPoint else nil
+	end
+	
 	ReactModule.useEffect(function()
-		-- upvalues: Number (copy), NotificationHelper (upval), EventStream (upval), AnalyticsConstantsModule (upval), ConstantsModule (upval), FFlagStreamNotificationBellEntryPoint (upval), p1 (copy)
+		-- upvalues: Number (copy), NotificationHelper (upval), EventStream (upval), AnalyticsConstantsModule (upval), ConstantsModule (upval), FFlagStreamNotificationBellEntryPoint (upval), FFlagSignalsNavP3bTopBar (upval), p1 (copy)
 		if Number > 0 then
 			NotificationHelper.fireEvent(EventStream, AnalyticsConstantsModule.Context.seen, AnalyticsConstantsModule.EventNames.openCTAShown, {
 				count = Number,
 				sendrVersion = ConstantsModule.SENDRVersion,
-				entryPoint = if FFlagStreamNotificationBellEntryPoint then p1.entryPoint else nil
+				entryPoint = if FFlagStreamNotificationBellEntryPoint then if FFlagSignalsNavP3bTopBar and p1.getEntryPoint then p1.getEntryPoint() else p1.entryPoint else nil
 			})
 		end
 	end, { Number })
@@ -127,7 +133,7 @@ local function v32(p1)
 	local Number1 = if IsNotFriendCommunicationRestrictionStatusMatch then nil elseif Number > 0 then Number else nil
 	
 	local function onBellActivated()
-		-- upvalues: StreamNotificationDropdownExperimentationModule (upval), IxpHelper (upval), GetFStringNotificationsStreamNotificationUXLayerFunction (upval), DropdownEnabled (copy), FFlagEnableNotificationsDeeplink (upval), FFlagStreamNotificationDropdownSingleOwner (upval), StreamNotificationStoreModule (upval), IsOpen (ref), Current (ref), UseStateResult2 (copy), NotificationHelper (upval), EventStream (upval), AnalyticsConstantsModule (upval), Number (copy), ConstantsModule (upval), FFlagStreamNotificationBellEntryPoint (upval), p1 (copy)
+		-- upvalues: StreamNotificationDropdownExperimentationModule (upval), IxpHelper (upval), GetFStringNotificationsStreamNotificationUXLayerFunction (upval), DropdownEnabled (copy), FFlagEnableNotificationsDeeplink (upval), FFlagStreamNotificationDropdownSingleOwner (upval), StreamNotificationStoreModule (upval), IsOpen (ref), Current (ref), UseStateResult2 (copy), NotificationHelper (upval), EventStream (upval), AnalyticsConstantsModule (upval), Number (copy), ConstantsModule (upval), FFlagStreamNotificationBellEntryPoint (upval), FFlagSignalsNavP3bTopBar (upval), p1 (copy)
 		StreamNotificationDropdownExperimentationModule.logExposure()
 		IxpHelper.logUserLayerExposure(GetFStringNotificationsStreamNotificationUXLayerFunction())
 		
@@ -148,7 +154,7 @@ local function v32(p1)
 				NotificationHelper.fireEvent(EventStream, AnalyticsConstantsModule.Context.click, AnalyticsConstantsModule.EventNames.openContent, {
 					countOfUnreadNotification = Number,
 					sendrVersion = ConstantsModule.SENDRVersion,
-					entryPoint = if FFlagStreamNotificationBellEntryPoint then p1.entryPoint else nil
+					entryPoint = if FFlagStreamNotificationBellEntryPoint then if FFlagSignalsNavP3bTopBar and p1.getEntryPoint then p1.getEntryPoint() else p1.entryPoint else nil
 				})
 			end
 		else
@@ -163,7 +169,7 @@ local function v32(p1)
 			NotificationHelper.fireEvent(EventStream, AnalyticsConstantsModule.Context.click, AnalyticsConstantsModule.EventNames.openContent, {
 				countOfUnreadNotification = Number,
 				sendrVersion = ConstantsModule.SENDRVersion,
-				entryPoint = if FFlagStreamNotificationBellEntryPoint then p1.entryPoint else nil
+				entryPoint = if FFlagStreamNotificationBellEntryPoint then if FFlagSignalsNavP3bTopBar and p1.getEntryPoint then p1.getEntryPoint() else p1.entryPoint else nil
 			})
 		end
 		if p1.onActivated then
@@ -270,10 +276,10 @@ local function v32(p1)
 end
 
 if GetFFlagNotificationsComplianceShouldRestrictStreamFunction() then
-	v32 = RoactAppPolicy.connect(function(p1, _)
+	v33 = RoactAppPolicy.connect(function(p1, _)
 		return {
 			shouldRestrictStream = p1.getNotificationsCanReceiveStream() or false
 		}
-	end)(v32)
+	end)(v33)
 end
-return v32
+return v33

@@ -4,11 +4,14 @@ local BuilderIconsModule = require(Parent.BuilderIcons)
 local FoundationModule = require(Parent.Foundation)
 local ReactModule = require(Parent.React)
 local HeaderBar = require(Parent.UIBlox).App.Bar.HeaderBar
+local Chip = FoundationModule.Chip
 local Coachmark = FoundationModule.Coachmark
 local IconButton = FoundationModule.IconButton
 local Text = FoundationModule.Text
 local View = FoundationModule.View
 local ButtonVariant = FoundationModule.Enums.ButtonVariant
+local ChipSize = FoundationModule.Enums.ChipSize
+local ChipVariant = FoundationModule.Enums.ChipVariant
 local InputSize = FoundationModule.Enums.InputSize
 local PlusLarge = BuilderIconsModule.Icon.PlusLarge
 local ChevronLargeLeft = BuilderIconsModule.Icon.ChevronLargeLeft
@@ -22,6 +25,28 @@ local FFlagMomentsFixFeedForDeviceSafeInsetsModule = require(Moments.Flags.FFlag
 local ShouldUseDeviceSafeInsets = require(Parent.Display).shouldUseDeviceSafeInsets
 local FFlagMomentsCreationFeatureGate = require(Parent.SharedFlags).FFlagMomentsCreationFeatureGate
 
+local function renderFeedTypeChips(FeedTypeChips)
+	-- upvalues: ReactModule (copy), Chip (copy), ChipSize (copy), ChipVariant (copy), View (copy)
+	local Elements = {}
+	
+	for LayoutOrder, feedTypeChip in FeedTypeChips do
+		Elements[`Chip_{feedTypeChip.id}`] = ReactModule.createElement(Chip, {
+			LayoutOrder = LayoutOrder,
+			text = feedTypeChip.text,
+			isChecked = feedTypeChip.isChecked,
+			onActivated = feedTypeChip.onActivated,
+			size = ChipSize.Medium,
+			variant = ChipVariant.Standard,
+			testId = `--moments-header--feed-chip--{feedTypeChip.id}`
+		})
+	end
+	return ReactModule.createElement(View, {
+		LayoutOrder = 2,
+		tag = "row align-y-center gap-small auto-xy",
+		testId = "--moments-header--feed-chips"
+	}, Elements)
+end
+
 local function renderAction(p1, Icon, OnActivated, LayoutOrder)
 	-- upvalues: ReactModule (copy), IconButton (copy), ButtonVariant (copy), InputSize (copy)
 	return ReactModule.createElement(IconButton, {
@@ -32,14 +57,15 @@ local function renderAction(p1, Icon, OnActivated, LayoutOrder)
 		onActivated = OnActivated,
 		variant = ButtonVariant.Utility,
 		size = InputSize.Medium,
-		testId = `--moments-header--actions--{p0}`
+		testId = `--moments-header--actions--{p1}`
 	})
 end
 
 return function(p1)
-	-- upvalues: renderAction (copy), ChevronLargeLeft (copy), PlusLarge (copy), ReactModule (copy), IconButton (copy), ButtonVariant (copy), InputSize (copy), NavigationMenuModule (copy), View (copy), FlyoutSidePanelIXP (copy), FlyoutLeftHeader (copy), Text (copy), FFlagMomentsCreationFeatureGate (copy), FoundationModule (copy), FFlagMomentsFtuxTooltipCreateCopyModule (copy), Coachmark (copy), HeaderBar (copy), GradientBackdrop (copy), FFlagMomentsFixFeedForDeviceSafeInsetsModule (copy), ShouldUseDeviceSafeInsets (copy), ConstantsModule (copy)
+	-- upvalues: renderAction (copy), ChevronLargeLeft (copy), PlusLarge (copy), ReactModule (copy), IconButton (copy), ButtonVariant (copy), InputSize (copy), NavigationMenuModule (copy), View (copy), renderFeedTypeChips (copy), FlyoutSidePanelIXP (copy), FlyoutLeftHeader (copy), Text (copy), FFlagMomentsCreationFeatureGate (copy), FoundationModule (copy), FFlagMomentsFtuxTooltipCreateCopyModule (copy), Coachmark (copy), HeaderBar (copy), GradientBackdrop (copy), FFlagMomentsFixFeedForDeviceSafeInsetsModule (copy), ShouldUseDeviceSafeInsets (copy), ConstantsModule (copy)
 	local RenderLeft: (() -> any)? = nil
 	local RenderRight: (() -> any)? = nil
+	local FeedTypeChips = nil
 	
 	if p1.variant == "back" then
 		RenderLeft = function()
@@ -81,6 +107,9 @@ return function(p1)
 			end
 		end
 	elseif p1.variant == "base" then
+		if p1.feedTypeChips ~= nil then
+			FeedTypeChips = renderFeedTypeChips(p1.feedTypeChips)
+		end
 		local IsFlyoutSidePanelEnabled = FlyoutSidePanelIXP.isFlyoutSidePanelEnabled()
 		local IsFlyoutSidePanelEnabled1 = p1.showInteractiveButtons and (p1.showHamburger and IsFlyoutSidePanelEnabled)
 		
@@ -151,11 +180,16 @@ return function(p1)
 			ZIndex = 2
 		}, {
 			SafeAreaContent = ReactModule.createElement(View, {
-				tag = "size-full-0 auto-y",
 				testId = "--moments-header-safe-area",
-				padding = p1.headerPadding
+				padding = p1.headerPadding,
+				tag = {
+					["size-full-0 auto-y"] = true,
+					col = FeedTypeChips ~= nil
+				}
 			}, {
+				FeedTypeChips = FeedTypeChips,
 				HeaderBarContainer = ReactModule.createElement(View, {
+					LayoutOrder = 1,
 					tag = "size-full-0 auto-y",
 					testId = "--moments-header",
 					Size = UDim2.new(1, 0, 0, p1.headerHeight)

@@ -44,7 +44,7 @@ return function(p1)
 			tag = "size-full-0 auto-y text-body-medium text-wrap text-align-x-center content-default",
 			Text = UseLocalizationResult.failedMessage
 		})
-	}) elseif Status == "Empty" then ReactModule.createElement(CenteredOverlay, { zIndex = p1.zIndex }, {
+	}) elseif Status == "Empty" and p1.emptyState ~= nil then ReactModule.createElement(CenteredOverlay, { zIndex = p1.zIndex }, { EmptyState = p1.emptyState }) elseif Status == "Empty" then ReactModule.createElement(CenteredOverlay, { zIndex = p1.zIndex }, {
 		Message = ReactModule.createElement(Text, {
 			LayoutOrder = 1,
 			tag = "size-full-0 auto-y text-body-large text-wrap text-align-x-center content-emphasis",

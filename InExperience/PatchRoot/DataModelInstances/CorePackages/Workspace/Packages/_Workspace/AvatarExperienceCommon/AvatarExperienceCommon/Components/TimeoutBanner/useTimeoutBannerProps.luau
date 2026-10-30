@@ -7,11 +7,13 @@ local UseNavigationFunction = require(Parent.Navigation).useNavigation
 local AvatarScreen = require(Parent.AvatarExperienceNavigation).Enums.AvatarScreen
 local GetTimeoutStatusStoreModule = require(AvatarExperienceCommon.Stores.TimeoutStatusStore.getTimeoutStatusStore)
 local FormatTimeoutEndTimeModule = require(AvatarExperienceCommon.Utils.formatTimeoutEndTime)
+local UseIsAvatarChangeTimeoutActiveModule = require(AvatarExperienceCommon.Hooks.useIsAvatarChangeTimeoutActive)
 local ShowAvatarChangeFeatureRestrictionModule = require(AvatarExperienceCommon.Utils.showAvatarChangeFeatureRestriction)
 local FFlagAXUseUFRForTimeoutPromptInApp = require(Parent.AvatarExperienceFlags).FFlagAXUseUFRForTimeoutPromptInApp
+local FFlagAXTimeoutAcknowledgementGating = require(Parent.AvatarExperienceFlags).FFlagAXTimeoutAcknowledgementGating
 
 return function(p1)
-	-- upvalues: GetTimeoutStatusStoreModule (copy), UseSignalStateFunction (copy), UseNavigationFunction (copy), ReactModule (copy), FormatTimeoutEndTimeModule (copy), UseLocalizationFunction (copy), AvatarScreen (copy), FFlagAXUseUFRForTimeoutPromptInApp (copy), ShowAvatarChangeFeatureRestrictionModule (copy)
+	-- upvalues: GetTimeoutStatusStoreModule (copy), UseSignalStateFunction (copy), UseNavigationFunction (copy), ReactModule (copy), FormatTimeoutEndTimeModule (copy), UseLocalizationFunction (copy), AvatarScreen (copy), FFlagAXTimeoutAcknowledgementGating (copy), UseIsAvatarChangeTimeoutActiveModule (copy), FFlagAXUseUFRForTimeoutPromptInApp (copy), ShowAvatarChangeFeatureRestrictionModule (copy)
 	local ShouldFetch = if p1 and p1.shouldFetch ~= nil then p1.shouldFetch else false
 	local NoP0 = not p1 or p1.shouldNavigateOnClick == nil or p1.shouldNavigateOnClick
 	local TimeoutStatusStoreModule = GetTimeoutStatusStoreModule()
@@ -35,14 +37,19 @@ return function(p1)
 		-- upvalues: UseNavigationResult (copy), AvatarScreen (upval)
 		UseNavigationResult.navigate(AvatarScreen.TimeoutStatusPrompt)
 	end, { UseNavigationResult })
+	local ShouldShow = UseSignalStateResult1
 	
+	if FFlagAXTimeoutAcknowledgementGating then
+		local UseIsAvatarChangeTimeoutActiveModuleResult = UseIsAvatarChangeTimeoutActiveModule()
+		ShouldShow = UseSignalStateResult1 and UseIsAvatarChangeTimeoutActiveModuleResult
+	end
 	return if FFlagAXUseUFRForTimeoutPromptInApp then {
 		messageText = UseLocalizationResult.messageText,
 		onBannerActivated = if NoP0 then ShowAvatarChangeFeatureRestrictionModule else nil,
-		shouldShow = UseSignalStateResult1
+		shouldShow = ShouldShow
 	} else {
 		messageText = UseLocalizationResult.messageText,
 		onBannerActivated = if NoP0 then UseResult else nil,
-		shouldShow = UseSignalStateResult1
+		shouldShow = ShouldShow
 	}
 end

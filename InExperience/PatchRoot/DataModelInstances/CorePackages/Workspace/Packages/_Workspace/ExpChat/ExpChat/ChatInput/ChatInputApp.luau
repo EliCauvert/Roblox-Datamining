@@ -30,8 +30,11 @@ local GetChannelTabsStoreModule = if FFlagExpChatUseChannelTabsStore then requir
 local Flags = ExpChat.Flags
 local GetFFlagUnreduxLastInputTypeChangedModule = require(Flags.getFFlagUnreduxLastInputTypeChanged)
 local FFlagExpChatDictationFadeOverrideModule = require(Flags.FFlagExpChatDictationFadeOverride)
+local FFlagExpChatContinuousDictationIdleFadeModule = require(Flags.FFlagExpChatContinuousDictationIdleFade)
 local SelectSelectedTabNameModule = require(ExpChat.selectSelectedTabName)
-local ChatInputBarModule = require(script.Parent.UI.ChatInputBar)
+local UI = script.Parent.UI
+local ChatInputBarModule = require(UI.ChatInputBar)
+local DictationStateModule = require(UI.ChatInputBar.Dictation.DictationState)
 local Localization = require(Parent.InExperienceLocales).Localization
 local CryoModule = require(Parent.Cryo)
 local ChatInputBarApp = (if GetFFlagUnreduxLastInputTypeChangedModule() then RoactModule.PureComponent else RoactModule.Component):extend("ChatInputBarApp")
@@ -118,7 +121,8 @@ function ChatInputBarApp.render(p1)
 		isChannelBarVisible = p1.props.isChannelBarVisible,
 		isGlobalChatTabActive = p1.props.isGlobalChatTabActive,
 		developerChannelTabsEnabled = p1.props.developerChannelTabsEnabled,
-		onDictationActivityChanged = p1.props.onDictationActivityChanged
+		onDictationActivityChanged = p1.props.onDictationActivityChanged,
+		onDictationStateChanged = p1.props.onDictationStateChanged
 	})
 end
 
@@ -150,8 +154,20 @@ local v1 = RoactRoduxModule.connect(function(p1)
 		developerChannelTabsEnabled = ChannelTabsConfigurationEnabled
 	}
 end, function(Callback)
-	-- upvalues: GetTransparencyStoreModule (copy), FocusChatHotKeyActivatedModule (copy), FFlagExpChatDictationFadeOverrideModule (copy), AutocompleteDropdownActivatedModule (copy), AutocompleteDropdownResultsChangedModule (copy), AutocompleteDropdownSelectionChangedModule (copy), AutocompleteDropdownTypeChangedModule (copy), AutocompleteDropdownDeactivatedModule (copy)
+	-- upvalues: GetTransparencyStoreModule (copy), FFlagExpChatDictationFadeOverrideModule (copy), FFlagExpChatContinuousDictationIdleFadeModule (copy), FocusChatHotKeyActivatedModule (copy), DictationStateModule (copy), AutocompleteDropdownActivatedModule (copy), AutocompleteDropdownResultsChangedModule (copy), AutocompleteDropdownSelectionChangedModule (copy), AutocompleteDropdownTypeChangedModule (copy), AutocompleteDropdownDeactivatedModule (copy)
 	local TransparencyStoreModule = GetTransparencyStoreModule(false)
+	local FFlagExpChatContinuousDictationIdleFadeModule1 = FFlagExpChatDictationFadeOverrideModule and FFlagExpChatContinuousDictationIdleFadeModule
+	
+	local function setDictationHold(p1)
+		-- upvalues: TransparencyStoreModule (copy)
+		if p1 then
+			TransparencyStoreModule.setDictationActive()
+			
+			return
+		else
+			TransparencyStoreModule.clearDictationActive()
+		end
+	end
 	
 	return {
 		focusChatHotKeyActivated = function()
@@ -174,9 +190,10 @@ end, function(Callback)
 			-- upvalues: TransparencyStoreModule (copy)
 			return TransparencyStoreModule.resetAllTransparency()
 		end,
-		onDictationActivityChanged = if FFlagExpChatDictationFadeOverrideModule then function(p1)
-			-- upvalues: TransparencyStoreModule (copy)
-			if p1 then
+		onDictationActivityChanged = if FFlagExpChatDictationFadeOverrideModule and not FFlagExpChatContinuousDictationIdleFadeModule1 then setDictationHold else nil,
+		onDictationStateChanged = if FFlagExpChatContinuousDictationIdleFadeModule1 then function(Recording)
+			-- upvalues: DictationStateModule (upval), TransparencyStoreModule (copy)
+			if Recording == DictationStateModule.Recording or Recording == DictationStateModule.Transcribing then
 				TransparencyStoreModule.setDictationActive()
 				
 				return
@@ -237,7 +254,7 @@ end
 
 local ResultComponentWithSignals1 = if FFlagExpChatUseChannelTabsStore then ResultComponentWithSignals else v1
 
-local function v38(p1)
+local function v41(p1)
 	-- upvalues: Localization (copy), LocalizationService (copy), FFlagEnableConsoleExpControls (copy), CryoModule (copy), ReactModule (copy), ResultComponentWithSignals1 (copy)
 	local NewResult = Localization.new(LocalizationService.RobloxLocaleId)
 	
@@ -250,4 +267,4 @@ local function v38(p1)
 	})))
 end
 
-return if MemoizeChatInputApp then ReactModule.memo(v38) else v38
+return if MemoizeChatInputApp then ReactModule.memo(v41) else v41

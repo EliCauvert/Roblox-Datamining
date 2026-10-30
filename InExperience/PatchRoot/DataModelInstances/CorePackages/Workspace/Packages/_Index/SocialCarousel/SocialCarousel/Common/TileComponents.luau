@@ -10,7 +10,7 @@ local ShareQRTileModule = require(SocialCarousel.Components.Tiles.ShareQRTile)
 local TileModule = require(SocialCarousel.BaseComponents.Tile)
 local FFlagSocialCarouselInGameTitleMarquee = require(Parent.SharedFlags).FFlagSocialCarouselInGameTitleMarquee
 
-local function renderUserTile(Item, Index, ItemSize, SelectionOrder, OnTileContentChanged, PlayStatus, OnMarqueeFinished, MarqueeRunId, OnMarqueeHover, OnMarqueeHoverEnd)
+local function renderUserTile(Item, Index, ItemSize, SelectionOrder, OnTileContentChanged, PlayStatus, OnMarqueeFinished, MarqueeRunId, OnManualMarqueeStart, OnManualMarqueeEnd, MarqueeOnFocusEnabled)
 	-- upvalues: FFlagSocialCarouselInGameTitleMarquee (copy), ReactModule (copy), UserTileModule (copy)
 	local config = {
 		item = Item,
@@ -24,8 +24,9 @@ local function renderUserTile(Item, Index, ItemSize, SelectionOrder, OnTileConte
 		config.playStatus = PlayStatus
 		config.onMarqueeFinished = OnMarqueeFinished
 		config.marqueeRunId = MarqueeRunId
-		config.onMarqueeHover = OnMarqueeHover
-		config.onMarqueeHoverEnd = OnMarqueeHoverEnd
+		config.onManualMarqueeStart = OnManualMarqueeStart
+		config.onManualMarqueeEnd = OnManualMarqueeEnd
+		config.marqueeOnFocusEnabled = MarqueeOnFocusEnabled
 	end
 	return ReactModule.createElement(UserTileModule, config)
 end

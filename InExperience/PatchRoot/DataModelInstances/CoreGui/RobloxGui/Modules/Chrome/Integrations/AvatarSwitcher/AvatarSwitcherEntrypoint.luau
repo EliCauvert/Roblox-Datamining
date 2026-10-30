@@ -14,6 +14,7 @@ local Url = require(CorePackages.Workspace.Packages.Http).Url
 local SharedFlagsModule = require(CorePackages.Workspace.Packages.SharedFlags)
 local FFlagChromeWindowSignalConstraintsToggle = SharedFlagsModule.FFlagChromeWindowSignalConstraintsToggle
 local FFlagRemoveAvatarSwitcherIfUnsupported = SharedFlagsModule.FFlagRemoveAvatarSwitcherIfUnsupported
+local FFlagAvatarWorkshopReplacesAvatarSwitcher = SharedFlagsModule.FFlagAvatarWorkshopReplacesAvatarSwitcher
 local NewResult = ChromeUtilsModule.MappedSignal.new(ServiceModule:onIntegrationStatusChanged(), function()
 	-- upvalues: ServiceModule (copy), ConstantsModule (copy)
 	return ServiceModule:isWindowOpen(ConstantsModule.AVATAR_SWITCHER_ID)
@@ -28,11 +29,11 @@ local function _()
 end
 
 local RegisterResult = ServiceModule:register({
-	label = "Feature.AvatarSwitcher.Heading.SwitchAvatar",
 	cachePosition = true,
 	draggable = true,
 	initialAvailability = if CoreGuiEnabled and not FFlagRemoveAvatarSwitcherIfUnsupported then ServiceModule.AvailabilitySignal.Available else ServiceModule.AvailabilitySignal.Unavailable,
 	id = ConstantsModule.AVATAR_SWITCHER_ID,
+	label = if FFlagAvatarWorkshopReplacesAvatarSwitcher then "CommonUI.Features.Label.Avatar" else "Feature.AvatarSwitcher.Heading.SwitchAvatar",
 	sideSheetPlacement = require(CorePackages.Workspace.Packages.Chrome).Enums.SideSheetPlacement.AboveFold,
 	activated = function(_)
 		-- upvalues: ServiceModule (copy), ConstantsModule (copy)

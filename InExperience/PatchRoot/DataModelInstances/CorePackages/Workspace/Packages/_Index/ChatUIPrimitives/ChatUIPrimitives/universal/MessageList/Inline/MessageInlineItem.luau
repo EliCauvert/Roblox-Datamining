@@ -5,6 +5,7 @@ local _ = require(Parent.Signals)
 local CreateNextOrderFunction = require(Parent.ReactUtils).createNextOrder
 local _ = require(script.Parent.Parent.groupMessages)
 local IdentityInlineModule = require(script.Parent.Parent.Parent.Identity.IdentityInline)
+local ReplyQuoteModule = require(script.Parent.Parent.Reply.ReplyQuote)
 local UseMessageInlineViewModelModule = require(script.Parent.useMessageInlineViewModel)
 local WithMessageContentModule = require(script.Parent.Parent.Parent.ContentKinds.withMessageContent)
 local config = {
@@ -14,7 +15,7 @@ local config = {
 }
 
 return function(p1)
-	-- upvalues: UseMessageInlineViewModelModule (copy), CreateNextOrderFunction (copy), config (copy), ReactModule (copy), IdentityInlineModule (copy), FoundationModule (copy)
+	-- upvalues: UseMessageInlineViewModelModule (copy), CreateNextOrderFunction (copy), config (copy), ReactModule (copy), IdentityInlineModule (copy), FoundationModule (copy), ReplyQuoteModule (copy)
 	local UseMessageInlineViewModelModuleResult = UseMessageInlineViewModelModule(p1.itemSignal)
 	local NextOrder = CreateNextOrderFunction()
 	local Elements = {}
@@ -42,5 +43,14 @@ return function(p1)
 		LayoutOrder = NextOrder()
 	}, Elements)
 	
-	return ReactModule.createElement(FoundationModule.View, { tag = "row align-x-left gap-xsmall size-full-0 auto-y" }, t)
+	return ReactModule.createElement(FoundationModule.View, { tag = "col size-full-0 auto-y" }, {
+		Reply = if UseMessageInlineViewModelModuleResult.replyText == nil then nil else ReactModule.createElement(ReplyQuoteModule.Inline, {
+			LayoutOrder = 1,
+			text = UseMessageInlineViewModelModuleResult.replyText
+		}),
+		Row = ReactModule.createElement(FoundationModule.View, {
+			tag = "row align-x-left gap-xsmall size-full-0 auto-y",
+			LayoutOrder = 2
+		}, t)
+	})
 end

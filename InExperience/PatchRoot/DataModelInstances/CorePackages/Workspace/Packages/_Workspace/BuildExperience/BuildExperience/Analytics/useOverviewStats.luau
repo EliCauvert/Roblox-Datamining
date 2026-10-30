@@ -1,5 +1,5 @@
 ﻿local BuildExperience = script:FindFirstAncestor("BuildExperience")
-local _ = require(BuildExperience.Parent.DataHydration.ExperienceAnalytics)
+local _ = require(BuildExperience.Parent.DataHydration.CreatorAnalytics)
 local AnalyticsMetricModule = require(BuildExperience.Analytics.AnalyticsMetric)
 local _ = require(BuildExperience.Analytics.AnalyticsWindow)
 local UseExperienceMetricSeriesModule = require(BuildExperience.Analytics.useExperienceMetricSeries)

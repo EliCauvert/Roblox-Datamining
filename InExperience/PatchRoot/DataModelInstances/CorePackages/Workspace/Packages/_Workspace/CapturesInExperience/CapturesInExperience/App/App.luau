@@ -53,12 +53,13 @@ local TakeCaptureModule = require(Parent.Thunks.TakeCapture)
 local _ = require(Parent.Types)
 local FFlagCapturesVideoCaptureTriggerHandlerEnabledModule = require(Parent.Flags.FFlagCapturesVideoCaptureTriggerHandlerEnabled)
 local FFlagCreateMomentsToastModule = require(Parent.Flags.FFlagCreateMomentsToast)
+local FFlagCapturesInExpReportMomentsCreationUIModule = require(Parent.Flags.FFlagCapturesInExpReportMomentsCreationUI)
 local FIntCapturesCoreGuiEventsPerMyriadModule = require(Parent.Flags.FIntCapturesCoreGuiEventsPerMyriad)
 local SSUIMetaLuaEngineFeature = game:GetEngineFeature("SSUIMetaLua")
 
 return {
 	createApp = function(p1)
-		-- upvalues: DashModule (copy), AnalyticsServiceModule (copy), AppStorageService (copy), CaptureService (copy), LocalizationService (copy), NotificationService (copy), Players (copy), RbxAnalyticsService (copy), RobloxReplicatedStorage (copy), StarterGui (copy), SetupFireEventModule (copy), ConstantsModule (copy), GetLocalUserIdModule (copy), InstallReducerModule (copy), NetworkingModule (copy), ScreenSizeModule (copy), ServerTypeModule (copy), MomentsCreationFlowModule (copy), RoduxModule (copy), RetrieveCapturesModule (copy), FFlagCreateMomentsToastModule (copy), CheckMomentsEligibilityModule (copy), MakeCaptureSavedHandlerModule (copy), FFlagCapturesVideoCaptureTriggerHandlerEnabledModule (copy), MakeVideoCaptureInProgressHandlerModule (copy), GetUserIdsFromStringModule (copy), CapturesActivatedModule (copy), CapturesDeactivatedModule (copy), ServerTypeDetectedModule (copy), MenuClosedModule (copy), MenuOpenedModule (copy), TakeCaptureModule (copy), FIntCapturesCoreGuiEventsPerMyriadModule (copy), EventNamesModule (copy), CapturesCoreGuiEnabledModule (copy), CapturesCoreGuiDisabledModule (copy), Signal (copy), SSUIMetaLuaEngineFeature (copy), OnViewportSizeChangedFunction (copy), ScreenSizeChangedModule (copy), OnToggleActivationModule (copy), MakeWrapWithProvidersModule (copy), CapturesPolicyModule (copy), RoactModule (copy), FFlagCapturesInExpUseMomentsCreationModule (copy), Parent1 (copy), MomentsCreationFlowClosedModule (copy), ReactModule (copy), CaptureManagerScreenModule (copy), CaptureOverlayModule (copy), CarouselScreenModule (copy), CaptureServicePromptsModule (copy), CapturesCoreUIModule (copy), CapturesPageModule (copy), MomentsCreationFlowScreenModule (copy)
+		-- upvalues: DashModule (copy), AnalyticsServiceModule (copy), AppStorageService (copy), CaptureService (copy), LocalizationService (copy), NotificationService (copy), Players (copy), RbxAnalyticsService (copy), RobloxReplicatedStorage (copy), StarterGui (copy), SetupFireEventModule (copy), ConstantsModule (copy), GetLocalUserIdModule (copy), InstallReducerModule (copy), NetworkingModule (copy), ScreenSizeModule (copy), ServerTypeModule (copy), MomentsCreationFlowModule (copy), RoduxModule (copy), RetrieveCapturesModule (copy), FFlagCreateMomentsToastModule (copy), CheckMomentsEligibilityModule (copy), MakeCaptureSavedHandlerModule (copy), FFlagCapturesVideoCaptureTriggerHandlerEnabledModule (copy), MakeVideoCaptureInProgressHandlerModule (copy), GetUserIdsFromStringModule (copy), CapturesActivatedModule (copy), CapturesDeactivatedModule (copy), ServerTypeDetectedModule (copy), MenuClosedModule (copy), MenuOpenedModule (copy), TakeCaptureModule (copy), FIntCapturesCoreGuiEventsPerMyriadModule (copy), EventNamesModule (copy), CapturesCoreGuiEnabledModule (copy), CapturesCoreGuiDisabledModule (copy), Signal (copy), SSUIMetaLuaEngineFeature (copy), FFlagCapturesInExpReportMomentsCreationUIModule (copy), OnViewportSizeChangedFunction (copy), ScreenSizeChangedModule (copy), OnToggleActivationModule (copy), MakeWrapWithProvidersModule (copy), CapturesPolicyModule (copy), RoactModule (copy), FFlagCapturesInExpUseMomentsCreationModule (copy), Parent1 (copy), MomentsCreationFlowClosedModule (copy), ReactModule (copy), CaptureManagerScreenModule (copy), CaptureOverlayModule (copy), CarouselScreenModule (copy), CaptureServicePromptsModule (copy), CapturesCoreUIModule (copy), CapturesPageModule (copy), MomentsCreationFlowScreenModule (copy)
 		local config = {
 			_momentsCreationFlowDestroyingConnection = nil,
 			_momentsCreationFlowHandle = nil
@@ -212,15 +213,19 @@ return {
 		
 		if SSUIMetaLuaEngineFeature then
 			pcall(function()
-				-- upvalues: config (copy), ConstantsModule (upval)
-				local SafetyService = game:GetService("SafetyService")
+				-- upvalues: JoinResult (copy), config (copy), ConstantsModule (upval), FFlagCapturesInExpReportMomentsCreationUIModule (upval)
+				local SafetyService = JoinResult.SafetyService or game:GetService("SafetyService")
 				config._store.changed:connect(function(Value, p2)
-					-- upvalues: ConstantsModule (upval), SafetyService (copy)
+					-- upvalues: ConstantsModule (upval), FFlagCapturesInExpReportMomentsCreationUIModule (upval), SafetyService (copy)
 					local Entry = Value[ConstantsModule.RoduxKey]
 					local v1 = p2[ConstantsModule.RoduxKey]
 					local IsMenuOpen = v1.IsMenuOpen or v1.Carousel and v1.Carousel.IsOpen
 					local IsMenuOpen1 = Entry.IsMenuOpen or Entry.Carousel and Entry.Carousel.IsOpen
 					
+					if FFlagCapturesInExpReportMomentsCreationUIModule then
+						IsMenuOpen = IsMenuOpen or v1.MomentsCreationFlow.IsOpen
+						IsMenuOpen1 = IsMenuOpen1 or Entry.MomentsCreationFlow.IsOpen
+					end
 					if IsMenuOpen1 and not IsMenuOpen then
 						pcall(function()
 							-- upvalues: SafetyService (upval)

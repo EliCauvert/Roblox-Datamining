@@ -9,16 +9,18 @@ local ThemeModule = require(RobloxGui.Modules.Settings.Theme)
 local AppCommonLibModule = require(CorePackages.Workspace.Packages.AppCommonLib)
 local CreateFunction = AppCommonLibModule.Create
 local Signal = AppCommonLibModule.Signal
+local SharedFlagsModule = require(CorePackages.Workspace.Packages.SharedFlags)
 RobloxGui:WaitForChild("Modules"):WaitForChild("TenFootInterface")
-local IsEnabled = require(RobloxGui.Modules.TenFootInterface):IsEnabled()
+local FFlagResponsiveUnitsDeprecateTenFoot = SharedFlagsModule.FFlagResponsiveUnitsDeprecateTenFoot
+local NoFFlagResponsiveUnitsDeprecateTenFoot: boolean = require(RobloxGui.Modules.TenFootInterface):IsEnabled() and not FFlagResponsiveUnitsDeprecateTenFoot
 local GetFFlagFixIGMTabTransitionsModule = require(script.Parent.Flags.GetFFlagFixIGMTabTransitions)
 local FFlagIEMSettingsGroupsModule = require(script.Parent.Flags.FFlagIEMSettingsGroups)
 local FFlagIEMFocusNavSupportNewButtonsModule = require(script.Parent.Flags.FFlagIEMFocusNavSupportNewButtons)
-local FFlagIEMTabFocusNav = require(CorePackages.Workspace.Packages.SharedFlags).FFlagIEMTabFocusNav
+local FFlagIEMTabFocusNav = SharedFlagsModule.FFlagIEMTabFocusNav
 local IsSideSheetEnabledModule = require(CorePackages.Workspace.Packages.InExperienceSideSheetUtils.isSideSheetEnabled)
 
 local function Initialize()
-	-- upvalues: IsSideSheetEnabledModule (copy), Signal (copy), FFlagIEMTabFocusNav (copy), CreateFunction (copy), UtilityModule (copy), IsEnabled (copy), ThemeModule (copy), GuiService (copy), FFlagIEMSettingsGroupsModule (copy), FFlagIEMFocusNavSupportNewButtonsModule (copy), CoreGui (copy), UserGameSettings (copy), GetFFlagFixIGMTabTransitionsModule (copy), TweenService (copy)
+	-- upvalues: IsSideSheetEnabledModule (copy), Signal (copy), FFlagIEMTabFocusNav (copy), CreateFunction (copy), UtilityModule (copy), NoFFlagResponsiveUnitsDeprecateTenFoot (copy), ThemeModule (copy), GuiService (copy), FFlagIEMSettingsGroupsModule (copy), FFlagIEMFocusNavSupportNewButtonsModule (copy), CoreGui (copy), UserGameSettings (copy), GetFFlagFixIGMTabTransitionsModule (copy), TweenService (copy)
 	local config = {
 		HubRef = nil,
 		LastSelectedObject = nil,
@@ -52,7 +54,7 @@ local function Initialize()
 	
 	if UtilityModule:IsSmallTouchScreen() then
 		config.TabHeader.Size = UDim2.new(0, 84, 1, 0)
-	elseif IsEnabled then
+	elseif NoFFlagResponsiveUnitsDeprecateTenFoot then
 		config.TabHeader.Size = UDim2.new(0, 220, 1, 0)
 	end
 	if FFlagIEMTabFocusNav then
@@ -111,7 +113,7 @@ local function Initialize()
 	if UtilityModule:IsSmallTouchScreen() then
 		Label1.TextSize = ThemeModule.textSize(18)
 		UITextSizeConstraint.MaxTextSize = ThemeModule.textSize(18)
-	elseif IsEnabled then
+	elseif NoFFlagResponsiveUnitsDeprecateTenFoot then
 		Label1.TextSize = ThemeModule.textSize(48)
 		UITextSizeConstraint.MaxTextSize = ThemeModule.textSize(48)
 	end
@@ -146,11 +148,11 @@ local function Initialize()
 	Label1.Size = UDim2.new(0, 0, 0, 0)
 	Label1.AutomaticSize = Enum.AutomaticSize.XY
 	UtilityModule:OnResized(config.TabHeader, function()
-		-- upvalues: config (copy), UtilityModule (upval), Label (copy), IsEnabled (upval), ThemeModule (upval), Parent (copy), Label1 (copy)
+		-- upvalues: config (copy), UtilityModule (upval), Label (copy), NoFFlagResponsiveUnitsDeprecateTenFoot (upval), ThemeModule (upval), Parent (copy), Label1 (copy)
 		if not config.TabHeader then return end
 		if UtilityModule:IsSmallTouchScreen() then
 			Label.Size = UDim2.new(0, 34, 0, 28)
-		elseif IsEnabled then
+		elseif NoFFlagResponsiveUnitsDeprecateTenFoot then
 			Label.Size = UDim2.new(0, 88, 0, 74)
 		else
 			local IconSize = ThemeModule.getIconSize(ThemeModule.IconSize.Medium)
@@ -268,7 +270,7 @@ local function Initialize()
 		config.Displaying:Fire()
 		local _UDim2 = UDim2.new(0, 0, 0, 0)
 		
-		local function v33()
+		local function v35()
 			-- upvalues: UserGameSettings (upval), Parent (copy), GetFFlagFixIGMTabTransitionsModule (upval), config (upval), _UDim2 (copy), Flag (upval)
 			if UserGameSettings.ReducedMotion then
 				Parent.InnerCanvasGroupShow.Visible = false
@@ -329,7 +331,7 @@ local function Initialize()
 			
 			return
 		else
-			config.Page:TweenPositionInternal(_UDim2, Enum.EasingDirection.In, Enum.EasingStyle.Quad, 0.1, true, v33)
+			config.Page:TweenPositionInternal(_UDim2, Enum.EasingDirection.In, Enum.EasingStyle.Quad, 0.1, true, v35)
 		end
 	end
 	
@@ -345,7 +347,7 @@ local function Initialize()
 		if config.Page.Parent then
 			local _UDim2 = UDim2.new(1 * p2, 0, 0, 0)
 			
-			local function v36()
+			local function v38()
 				-- upvalues: UserGameSettings (upval), p6 (copy), Parent (copy), config (upval), p3 (copy), Flag (upval)
 				if UserGameSettings.ReducedMotion and p6 then
 					Parent.InnerCanvasGroupHide.Visible = false
@@ -356,8 +358,8 @@ local function Initialize()
 				config.Hidden:Fire()
 			end
 			
-			local function v37()
-				-- upvalues: p4 (copy), config (upval), _UDim2 (copy), UserGameSettings (upval), p6 (copy), Parent (copy), p3 (copy), Flag (upval), TweenService (upval), v36 (copy)
+			local function v39()
+				-- upvalues: p4 (copy), config (upval), _UDim2 (copy), UserGameSettings (upval), p6 (copy), Parent (copy), p3 (copy), Flag (upval), TweenService (upval), v38 (copy)
 				if p4 then
 					config.Page.Position = _UDim2
 					
@@ -392,22 +394,22 @@ local function Initialize()
 					
 					return
 				else
-					config.Page:TweenPositionInternal(_UDim2, Enum.EasingDirection.Out, Enum.EasingStyle.Quad, 0.1, true, v36)
+					config.Page:TweenPositionInternal(_UDim2, Enum.EasingDirection.Out, Enum.EasingStyle.Quad, 0.1, true, v38)
 				end
 			end
 			
 			if p5 then
 				local OpenStateChangedCount = config.OpenStateChangedCount
 				delay(p5, function()
-					-- upvalues: OpenStateChangedCount (copy), config (upval), v37 (copy)
+					-- upvalues: OpenStateChangedCount (copy), config (upval), v39 (copy)
 					if OpenStateChangedCount == config.OpenStateChangedCount then
-						v37()
+						v39()
 					end
 				end)
 				
 				return
 			else
-				v37()
+				v39()
 			end
 		end
 	end

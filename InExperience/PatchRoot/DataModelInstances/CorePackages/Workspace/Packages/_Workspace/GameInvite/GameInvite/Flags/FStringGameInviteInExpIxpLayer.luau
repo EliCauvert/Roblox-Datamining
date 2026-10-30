@@ -1,0 +1,1 @@
+﻿return game:DefineFastString("GameInviteInExpIxpLayer", "Social.GameInvite.InExperience")

@@ -1,4 +1,5 @@
-﻿local RunService = game:GetService("RunService")
+﻿local AppStorageService = game:GetService("AppStorageService")
+local RunService = game:GetService("RunService")
 local CoreScriptsRoactCommon = script:FindFirstAncestor("CoreScriptsRoactCommon")
 local Parent = CoreScriptsRoactCommon.Parent
 local SignalsModule = require(Parent.Signals)
@@ -14,10 +15,38 @@ local FFlagAddPlaytestModeAnalyticsModule = require(CoreScriptsRoactCommon.Flags
 local FFlagPlaytestModeExcludeBuildModeModule = require(CoreScriptsRoactCommon.Flags.FFlagPlaytestModeExcludeBuildMode)
 local FFlagPlaytestModeExcludeStudioModule = require(CoreScriptsRoactCommon.Flags.FFlagPlaytestModeExcludeStudio)
 local FFlagPlaytestModeIncludeTeamTestModule = require(CoreScriptsRoactCommon.Flags.FFlagPlaytestModeIncludeTeamTest)
+local FFlagPlaytestModeTooltipOncePerWeek = require(Parent.SharedFlags).FFlagPlaytestModeTooltipOncePerWeek
+local FFlagPlaytestModeTooltipOnlyPrivateTesters = require(Parent.SharedFlags).FFlagPlaytestModeTooltipOnlyPrivateTesters
 
 return function()
-	-- upvalues: CreateSignalFunction (copy), SignalsModule (copy), GetIsPrivatePlaytesterStoreFunction (copy), GetUniverseConfigurationStoreFunction (copy), PrivacyType (copy), DebugEnablePlaytestMode (copy), FFlagPlaytestModeExcludeBuildModeModule (copy), BuildModeLaunchModule (copy), FFlagPlaytestModeIncludeTeamTestModule (copy), RunService (copy), FFlagAddPlaytestModeAnalyticsModule (copy), PlaytestModeAnalyticsModule (copy), FFlagPlaytestModeExcludeStudioModule (copy)
+	-- upvalues: CreateSignalFunction (copy), AppStorageService (copy), SignalsModule (copy), GetIsPrivatePlaytesterStoreFunction (copy), GetUniverseConfigurationStoreFunction (copy), PrivacyType (copy), DebugEnablePlaytestMode (copy), FFlagPlaytestModeExcludeBuildModeModule (copy), BuildModeLaunchModule (copy), FFlagPlaytestModeIncludeTeamTestModule (copy), RunService (copy), FFlagAddPlaytestModeAnalyticsModule (copy), PlaytestModeAnalyticsModule (copy), FFlagPlaytestModeExcludeStudioModule (copy), FFlagPlaytestModeTooltipOnlyPrivateTesters (copy), FFlagPlaytestModeTooltipOncePerWeek (copy)
 	local Signal, Signal2 = CreateSignalFunction(false)
+	
+	local function getHasTooltipCooldownExpired(): boolean
+		-- upvalues: AppStorageService (upval)
+		local Success, Result = pcall(function()
+			-- upvalues: AppStorageService (upval)
+			return AppStorageService:GetItem("PlaytestModeTooltipSeenAt")
+		end)
+		
+		if Success and type(Result) == "string" then
+			local Number: number? = tonumber(Result)
+			
+			return Number == nil or os.time() - Number >= 604800
+		else
+			return true
+		end
+	end
+	
+	local function markTooltipSeen()
+		-- upvalues: AppStorageService (upval)
+		pcall(function()
+			-- upvalues: AppStorageService (upval)
+			AppStorageService:SetItem("PlaytestModeTooltipSeenAt", (tostring(os.time())))
+			AppStorageService:Flush()
+		end)
+	end
+	
 	local Computed = SignalsModule.createComputed(function(p1): boolean
 		-- upvalues: GetIsPrivatePlaytesterStoreFunction (upval)
 		local DataResult = GetIsPrivatePlaytesterStoreFunction(p1).getAndFetch(game.GameId).data(p1)
@@ -64,6 +93,9 @@ return function()
 				return true
 			end
 		end),
-		setHasEditAccess = Signal2
+		getIsPrivatePlaytester = if FFlagPlaytestModeTooltipOnlyPrivateTesters then Computed else nil,
+		setHasEditAccess = Signal2,
+		getHasTooltipCooldownExpired = if FFlagPlaytestModeTooltipOncePerWeek then getHasTooltipCooldownExpired else nil,
+		markTooltipSeen = if FFlagPlaytestModeTooltipOncePerWeek then markTooltipSeen else nil
 	}
 end

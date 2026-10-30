@@ -53,8 +53,9 @@ end
 
 return function(p1)
 	-- upvalues: ReactModule (copy), FriendsMenuModule (copy), GameDetailsContextModule (copy), UseAppPolicyFunction (copy), User (copy), FFlagGameInviteInExpJoinCtaModule (copy), UseGameInviteJoinCardModule (copy), useJoinCtaConfig (copy), GameInviteFriendRowModule (copy), ignoreRowSelection (copy), CanShareGameInviteLinkModule (copy)
-	local Friends = ReactModule.useContext(FriendsMenuModule.FriendsListContext).friends
-	local UseContextResult = ReactModule.useContext(GameDetailsContextModule)
+	local UseContextResult = ReactModule.useContext(FriendsMenuModule.FriendsListContext)
+	local Friends = UseContextResult.friends
+	local UseContextResult1 = ReactModule.useContext(GameDetailsContextModule)
 	local UseMemoResult = ReactModule.useMemo(function()
 		-- upvalues: Friends (copy), User (upval)
 		local Entities = {}
@@ -70,7 +71,12 @@ return function(p1)
 	end, { Friends })
 	local FriendsById = UseMemoResult.friendsById
 	local UseGameInviteJoinCardModuleResult = if FFlagGameInviteInExpJoinCtaModule then UseGameInviteJoinCardModule() else nil
-	local UseJoinCtaConfigResult = if FFlagGameInviteInExpJoinCtaModule then useJoinCtaConfig(FriendsById, UseContextResult, UseGameInviteJoinCardModuleResult.open) else nil
+	local UseJoinCtaConfigResult = if FFlagGameInviteInExpJoinCtaModule then useJoinCtaConfig(FriendsById, UseContextResult1, UseGameInviteJoinCardModuleResult.open) else nil
+	local FetchMoreFriendsFunction = UseContextResult.fetchMoreFriends
+	local UseResult = ReactModule.useCallback(function()
+		-- upvalues: FetchMoreFriendsFunction (copy)
+		FetchMoreFriendsFunction()
+	end, { FetchMoreFriendsFunction })
 	
 	return {
 		layoutOrder = p1.layoutOrder,
@@ -87,7 +93,8 @@ return function(p1)
 			})
 		end, { FriendsById }),
 		onRowSelected = ignoreRowSelection,
-		showShareGameInviteLink = CanShareGameInviteLinkModule(game.GameId, UseContextResult, (UseAppPolicyFunction(function(p2)
+		onEndReached = if FetchMoreFriendsFunction and UseContextResult.searchFriendsString == "" then UseResult else nil,
+		showShareGameInviteLink = CanShareGameInviteLinkModule(game.GameId, UseContextResult1, (UseAppPolicyFunction(function(p2)
 			return p2.getExperienceInviteShareLinkEnabled()
 		end))),
 		ctaConfig = if FFlagGameInviteInExpJoinCtaModule then UseJoinCtaConfigResult else nil,

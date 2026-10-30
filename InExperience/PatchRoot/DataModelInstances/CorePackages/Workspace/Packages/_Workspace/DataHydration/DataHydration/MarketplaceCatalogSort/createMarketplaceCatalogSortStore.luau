@@ -2,12 +2,14 @@
 local Parent = DataHydration.Parent
 local PromiseModule = require(Parent.Promise)
 local SignalsModule = require(Parent.Signals)
+local SharedFlagsModule = require(Parent.SharedFlags)
 local CreateDataCacheModule = require(DataHydration.createDataCache)
 local CreateDataResolverModule = require(DataHydration.createDataResolver)
 local _ = require(DataHydration.DataHydrationTypes)
 local _ = require(script.Parent.MarketplaceCatalogSortStoreTypes)
-local FFlagMarketplaceCatalogSortTrackLastReceived = require(Parent.SharedFlags).FFlagMarketplaceCatalogSortTrackLastReceived
+local FFlagMarketplaceCatalogSortTrackLastReceived = SharedFlagsModule.FFlagMarketplaceCatalogSortTrackLastReceived
 local FFlagAXSduiNilEmptyTagIdModule = require(DataHydration.Flags.FFlagAXSduiNilEmptyTagId)
+local FFlagDataHydrationAccountReset = SharedFlagsModule.FFlagDataHydrationAccountReset
 
 local function normalizeCardFooters(CardFooters)
 	if not CardFooters then
@@ -60,14 +62,18 @@ local function clearEmptyTagId(Tbl)
 end
 
 return function()
-	-- upvalues: FFlagAXSduiNilEmptyTagIdModule (copy), CreateDataCacheModule (copy), clearEmptyTagId (copy), CreateDataResolverModule (copy), PromiseModule (copy), FFlagMarketplaceCatalogSortTrackLastReceived (copy), SignalsModule (copy), normalizeCardFooters (copy)
-	local DataCacheModule = if FFlagAXSduiNilEmptyTagIdModule then CreateDataCacheModule(nil, nil, { sanitizeItem = clearEmptyTagId }) else CreateDataCacheModule()
+	-- upvalues: FFlagAXSduiNilEmptyTagIdModule (copy), CreateDataCacheModule (copy), clearEmptyTagId (copy), FFlagDataHydrationAccountReset (copy), CreateDataResolverModule (copy), PromiseModule (copy), FFlagMarketplaceCatalogSortTrackLastReceived (copy), SignalsModule (copy), normalizeCardFooters (copy)
+	local DataCacheModule = if FFlagAXSduiNilEmptyTagIdModule then CreateDataCacheModule(nil, nil, {
+		sanitizeItem = clearEmptyTagId,
+		observeLocalUser = not FFlagDataHydrationAccountReset and nil
+	}) else CreateDataCacheModule(nil, nil, if FFlagDataHydrationAccountReset then { observeLocalUser = false } else nil)
 	local DataResolverModule = CreateDataResolverModule({
 		cache = DataCacheModule,
 		fetchFn = function(_)
 			-- upvalues: PromiseModule (upval)
 			return PromiseModule.resolve({})
-		end
+		end,
+		keepCacheOnAccountReset = if FFlagDataHydrationAccountReset then true else nil
 	})
 	local GetLastReceivedSorts = nil
 	local Callback = nil

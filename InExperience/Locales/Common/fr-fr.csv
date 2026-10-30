@@ -81,6 +81,7 @@ Authentication.Login.Action.QuickSignIn,
 Authentication.Login.Action.Save,Enregistrer
 Authentication.Login.Button.CloseAndSwitchPlatformAccount,Quitter Roblox pour changer de compte pour {platformAccountName}
 Authentication.Login.Button.UseDifferentRobloxAccount,Utiliser un compte Roblox différent
+Authentication.Login.Button.XboxAccountSwitcher,Changer de compte Xbox
 Authentication.Login.Error.PasskeyOnlyAccount,Ton compte n'a qu'un passkey configuré pour te connecter. Essaie de te connecter avec ton mot de passe ou de récupérer ton compte.
 Authentication.Login.Error.PlatformAccountConnectionFailure,Impossible de vérifier le compte de la plateforme. Réessayer plus tard.
 Authentication.Login.Heading.IncompatibleAccounts,Comptes incompatibles
@@ -432,13 +433,16 @@ CommonUI.Features.Action.Continue,
 CommonUI.Features.Action.LearnMore,
 CommonUI.Features.Action.LessLowercase,moins
 CommonUI.Features.Action.MoreLowercase,plus
+CommonUI.Features.Action.OK,
 CommonUI.Features.Action.Send,Envoyer
+CommonUI.Features.Action.ViewDetails,Voir les détails
 CommonUI.Features.Label.About,À propos de
 CommonUI.Features.Label.AcceptFriend,Accepter un(e) ami(e)
 CommonUI.Features.Label.Add,Ajouter
 CommonUI.Features.Label.AddConnection,Ajouter une connexion
 CommonUI.Features.Label.AddConnections,Ajouter des connexions
 CommonUI.Features.Label.AddFriend,Ajouter un(e) ami(e)
+CommonUI.Features.Label.Avatar,Avatar
 CommonUI.Features.Label.Badges,Badges
 CommonUI.Features.Label.Charts,Charts
 CommonUI.Features.Label.Chat,Chat
@@ -474,7 +478,6 @@ CommonUI.Features.Label.Sent,Envoyé
 CommonUI.Features.Label.Settings,
 CommonUI.Features.Label.Terms,Conditions
 CommonUI.Features.Label.TermsOfUse,Conditions d'utilisation
-CommonUI.Features.Label.Thanks,Merci
 CommonUI.Features.Label.TheHunt,Événements Roblox
 CommonUI.Features.Label.Trades,Échanges
 CommonUI.Features.Label.Unchecked,Non vérifié
@@ -653,6 +656,7 @@ CoreScripts.EmoteThumbnailEditor.Heading.EditThumbnail,Actualiser la vignette
 CoreScripts.EmoteThumbnailEditor.Label.Rotation,Rotation
 CoreScripts.EmoteThumbnailEditor.Label.Time,Temps
 CoreScripts.FTUX.Description.WhiteMenuPlaytestMode,Le menu Roblox blanc indique que tu es en mode Test de jeu. Suis toujours les Normes de la communauté Roblox.
+CoreScripts.FTUX.Description.WhiteMenuPreviewing,Le menu blanc de Roblox indique que tu prévisualises ce jeu avant qu'il ne soit accessible à tous.
 CoreScripts.FTUX.Heading.CheckOutRobloxConnect,Nouveau : Découvre Roblox Connect !
 CoreScripts.FTUX.Heading.CheckOutRobloxParty,Nouveau: Découvrez Roblox Party !
 CoreScripts.FTUX.Heading.InExperienceShop,Obtiens des Robux en boutique
@@ -664,6 +668,7 @@ CoreScripts.FTUX.Heading.NewTiltUpdate,Nouveau menu
 CoreScripts.FTUX.Heading.ReadyToPlaytest,Tu souhaites tester le jeu ?
 CoreScripts.FTUX.Heading.SideSheetUpdate,Toutes tes actions au même endroit
 CoreScripts.FTUX.Heading.SocialOnboarding,Fonctionnalités sociales
+CoreScripts.FTUX.Heading.YouAreAnEarlyTester,Tu testes le jeu en avant-première
 CoreScripts.FTUX.Label.AvatarSwitcherDescription,Passe à tes avatars enregistrés à tout moment.
 CoreScripts.FTUX.Label.ChatWithYourFriendsAnytime,Discute avec tes amis à tout moment.
 CoreScripts.FTUX.Label.InExperienceShopDescription,Certains packages incluent un item en bonus
@@ -1049,7 +1054,7 @@ CoreScripts.PublishAssetPrompt.Cancel,
 CoreScripts.PublishAssetPrompt.Description,
 CoreScripts.PublishAssetPrompt.DisclaimerAvatar,J'accepte que cette expérience soumette mon item d'avatar à la modération et l'importe dans Mes Créations.
 CoreScripts.PublishAssetPrompt.DisclaimerEmote,J'accepte que cette expérience soumette mon emote à la modération et l'importe dans Mes Créations.
-CoreScripts.PublishAssetPrompt.DisclaimerImage,J'accepte que cette expérience envoie mon image à la modération et l'importe dans Mes Créations.
+CoreScripts.PublishAssetPrompt.DisclaimerImage,J'accepte que cette expérience soumette mon image à la modération et l'importe dans Mes créations. La confidentialité de l'image sera définie sur « Utilisation libre ». Tous les créateurs et tous les jeux pourront l'utiliser.
 CoreScripts.PublishAssetPrompt.DisclaimerModel,Les articles créés seront examinés et tu ne pourras pas recevoir de remboursement pour les articles rejetés qui ne respectent pas les normes de la communauté.
 CoreScripts.PublishAssetPrompt.InvalidDescription,Description non valide
 CoreScripts.PublishAssetPrompt.InvalidName,Nom non valide
@@ -1135,15 +1140,11 @@ CoreScripts.TextChat.ChatWindow.ChatDisabled.OnlyViewSystemMessages,Seuls les me
 CoreScripts.TextChat.ChatWindow.ChatDisabled.RegionUnavailable,Seuls les messages système sont visibles ici. Le chat est indisponible dans ta région.
 CoreScripts.TextChat.ChatWindow.ChatDisabled.SettingOff,Seuls les messages système sont visibles ici. Active le chat dans tes paramètres de communication.
 CoreScripts.TextChat.ChatWindow.ChatEnabled.ChatInRegion,Tu peux voir les messages système et discuter avec les utilisateurs de ta région uniquement.
-CoreScripts.TextChat.ChatWindow.ChatEnabled.ChatWithAgeGroupAAndTF,Seules les personnes de groupes d'âge similaires et tes amis de confiance peuvent discuter avec toi.
 CoreScripts.TextChat.ChatWindow.ChatEnabled.ChatWithOnlinePlayers.BelowThreshold,Dis bonjour à tous les autres joueurs présents !
-CoreScripts.TextChat.ChatWindow.ChatEnabled.ChatWithOnlinePlayers.Local.WithCount,{RBX_COUNT} autres joueurs sont dans le chat. Dis-leur bonjour !
 CoreScripts.TextChat.ChatWindow.ChatEnabled.ChatWithOnlinePlayers.V3,👋 Dis bonjour à tous ceux qui jouent en ce moment !
 CoreScripts.TextChat.ChatWindow.ChatEnabled.ChatWithTF,Seuls tes amis de confiance peuvent discuter avec toi via le chat.
 CoreScripts.TextChat.ChatWindow.ChatEnabled.Global2,Discute avec plus de personnes dans cette expérience. Seules les personnes de groupes d'âge similaires peuvent te parler dans le chat.
 CoreScripts.TextChat.ChatWindow.ChatEnabled.Global3,Discute avec plus de monde dans ce jeu !
-CoreScripts.TextChat.ChatWindow.ChatWithOnlinePlayers.Local.Friendly,✨ Joins-toi à la fête ! Salue tous ceux qui jouent en ce moment !
-CoreScripts.TextChat.ChatWindow.ChatWithOnlinePlayers.Local.WithCount,👋 {RBX_COUNT} joueurs sont dans le chat. Dis-leur bonjour !
 CoreScripts.TextChat.ChatWindow.HandFreeTranscriptionFTUX,Maintenir enfoncé pour passer en mode mains libres
 CoreScripts.TextChat.ChatWindow.RephrasedLabel,reformulé
 CoreScripts.TextChat.ChatWindow.RephrasedReason.Description,Roblox reformule les messages qui enfreignent les règles de sécurité.
@@ -1982,6 +1983,11 @@ Feature.AvatarSwitcher.Message.SelectAvatar,Sélectionnez un avatar
 Feature.AvatarSwitcher.Message.SwitchingDeferred,"Tu verras cet avatar après ta prochaine réapparition, ou lorsque tu rejoindras une expérience. Tu peux changer d'avatar à tout moment."
 Feature.AvatarSwitcher.Message.UnknownSupport,"Tu peux toujours changer d'avatar, mais il se peut qu'il ne s'affiche pas correctement dans cette expérience."
 Feature.AvatarSwitcher.Message.Unsupported,Cette expérience fait appel à un avatar spécial et n'est pas compatible avec les avatars Roblox.
+Feature.AvatarWorkshop.Action.TryAgain,
+Feature.AvatarWorkshop.Heading.AvatarWorkshop,Atelier d'avatar
+Feature.AvatarWorkshop.Message.LoadItemsError,Une erreur est survenue lors du chargement de tes items.
+Feature.AvatarWorkshop.Message.LoadMoreItemsError,Impossible de charger plus d'items.
+Feature.AvatarWorkshop.Message.NoItemsOwned,Tu ne possèdes encore aucun item ici.
 Feature.BiometricChallenge.Action.Cancel,
 Feature.BiometricChallenge.Action.Continue,Continue
 Feature.BiometricChallenge.Content.LivenessHostedPrompt,Ouvre ton navigateur externe et prends un selfie rapide pour confirmer que tu es humain.
@@ -2171,7 +2177,10 @@ Feature.Build.Description.ManagedPricingAcknowledgement,La tarification gérée 
 Feature.Build.Description.ManagedPricingCurrentProducts,Utiliser la tarification gérée pour tous les produits actuels
 Feature.Build.Description.ManagedPricingUnavailable,La tarification gérée n'est pas disponible pour cette expérience.
 Feature.Build.Description.NoEligibleManagedPricingProducts,Aucun produit éligible
+Feature.Build.Description.NoMonetizationDeveloperProducts,Les produits développeur sont des items que les joueurs peuvent acheter à plusieurs reprises dans ton expérience
+Feature.Build.Description.NoMonetizationPasses,Les passes te permettent d'accorder aux joueurs un déblocage unique dans ton jeu
 Feature.Build.Description.NoMonetizationProducts,"Pour commencer à gagner des Robux dans ton jeu, décris l'item que tu souhaites créer"
+Feature.Build.Description.NoMonetizationSubscriptions,Les abonnements dans les jeux te permettent d'offrir aux utilisateurs des avantages récurrents moyennant des frais mensuels.
 Feature.Build.Description.PlayAfterPublish,Choisis qui pourra jouer après la publication de cette expérience.
 Feature.Build.Description.PlaytestLatest,Tu es en train de tester ta dernière version. Publie-la quand tu veux.
 Feature.Build.Description.PlaytestLocked,Crée ton premier jeu pour commencer à le tester.
@@ -2182,6 +2191,8 @@ Feature.Build.Description.PromoteGamePaid,Crée une annonce pour permettre à de
 Feature.Build.Description.PromoteGameWithAdCampaign,Booste ton audience avec une campagne publicitaire de {durationDays} jours pour faire découvrir ton jeu.
 Feature.Build.Description.RaiseLimitOrWait,"Augmente ta limite quotidienne de Robux pour continuer à créer, ou attends la réinitialisation demain."
 Feature.Build.Description.RatingAgreement,"En publiant, tu confirmes que cette classification du contenu est exacte."
+Feature.Build.Description.RequiredRobuxForAdvanced,Tu as besoin d'au moins {ROBUX} Robux pour continuer tes créations avec le modèle Avancé. Tu peux également revenir au mode par défaut ou attendre la réinitialisation de ton quota d'utilisations gratuites.
+Feature.Build.Description.RequiredRobuxForDefault,"Tu as besoin d'au moins {ROBUX} Robux pour continuer tes créations. Sinon, attends la réinitialisation de ton quota d'utilisations gratuites."
 Feature.Build.Description.RestoreLatest,Cette version deviendra ta dernière version publiée.
 Feature.Build.Description.RevertToVersion,Confirme pour annuler la dernière modification et restaurer la version {VERSION}.
 Feature.Build.Description.ShareLatest,Présente les nouveautés de cette dernière version.
@@ -2203,9 +2214,18 @@ Feature.Build.Error.DeveloperProductPriceInvalid,Le prix doit être un nombre en
 Feature.Build.Error.DeveloperProductPriceRequiredForSale,Sélectionne Modifier et ajoute un prix avant de mettre un produit en vente.
 Feature.Build.Error.DeveloperProductTextModerated,La modération de Roblox a modifié le texte de ce produit. Reformule-le.
 Feature.Build.Error.ManagedPricingPartialUpdate,Impossible de mettre à jour certains produits.
+Feature.Build.Error.MonetizationImageFailed,Impossible de charger l'image. Réessaie.
+Feature.Build.Error.MonetizationImageInReview,L'image est toujours en cours d'examen. Réessaie dans un instant.
+Feature.Build.Error.MonetizationImagePreparing,L'image est toujours en cours de préparation. Réessaie dans un instant.
+Feature.Build.Error.MonetizationImageTimedOut,Le chargement de l'image a pris trop de temps. Réessaie.
+Feature.Build.Error.MonetizationImageTooLarge,Le poids de l'image dépasse 5 Mo.
+Feature.Build.Error.MonetizationNoUniverse,Ce chat n'est pas connecté à un jeu.
 Feature.Build.Error.MonetizationOptionUpdate,Impossible de mettre à jour l'option. Réessaie.
 Feature.Build.Error.MonetizationOptionsLoad,Impossible de charger les options. Réessaie.
 Feature.Build.Error.MonetizationPermissionDenied,Tu n'as pas l'autorisation de modifier les options de monétisation.
+Feature.Build.Error.MonetizationPriceRequiredForRegionalPricing,Ajoute un prix pour activer les prix régionaux.
+Feature.Build.Error.MonetizationPriceRequiredForSale,Ajoute un prix avant de mettre cet item en vente.
+Feature.Build.Error.MonetizationRateLimited,Trop de requêtes. Réessaie dans un instant.
 Feature.Build.Header.AccessSharing,Accès et partage
 Feature.Build.Header.AllVersions,Toutes les versions
 Feature.Build.Header.Answers,Réponses
@@ -2538,7 +2558,10 @@ Feature.Build.Title.GetUsers,Obtenir des utilisateurs
 Feature.Build.Title.InsufficientRobuxForModel,
 Feature.Build.Title.ManagedPricingAcknowledgement,Activer la tarification gérée ?
 Feature.Build.Title.Monetization,Monétisation
+Feature.Build.Title.NoMonetizationDeveloperProducts,Tu n'as créé aucun produit développeur
+Feature.Build.Title.NoMonetizationPasses,Tu n'as créé aucun passe de jeu
 Feature.Build.Title.NoMonetizationProducts,Gagne de l'argent dans ton expérience
+Feature.Build.Title.NoMonetizationSubscriptions,Tu n'as créé aucun abonnement
 Feature.Build.Title.NoRobuxForUsage,Il ne reste plus de Robux pour utiliser Construire
 Feature.Build.Title.PickCampaign,Choisis une durée
 Feature.Build.Title.Playtesters,
@@ -3024,7 +3047,7 @@ Feature.Chat.Action.StartChatWithFriends,Discuter
 Feature.Chat.Action.Stay,
 Feature.Chat.Action.Translate,Traduire
 Feature.Chat.Action.UnmuteVoice,Réactiver la voix
-Feature.Chat.Action.ViewAssetDetails,Voir les détails
+Feature.Chat.Action.ViewAssetDetails,
 Feature.Chat.Description.ConversationInviteGroupCreatedOn,Groupe créé le {creation_date}
 Feature.Chat.Description.CreateUnfilteredChatCell,"Tous les membres de ce groupe seront invités, mais certains n'ont pas le droit de s'inscrire."
 Feature.Chat.Description.CreateUnfilteredChatDialog,"Avec des fonctionnalités de chat étendues, tu peux discuter sans filtres.
@@ -3341,6 +3364,7 @@ Feature.Friends.Description.TrustedFriendsExpiredLink,Demande à ton ami de te r
 Feature.Friends.Description.TrustedFriendsInvalidLink,"Vérifie que le compte connecté est le bon, puis réessaie."
 Feature.Friends.Description.TrustedFriendsRequestModalBody,N'ajoute que des personnes que tu connais et en qui tu as confiance. Tu peux gérer cet ami à tout moment depuis son profil.
 Feature.Friends.Description.TrustedFriendsUnavailable,La fonctionnalité d'amis de confiance n'est pas encore disponible dans ta région.
+Feature.Friends.Description.TrustedFriendsWrongAccount,"Vérifie que tu es connecté·e en tant que @{username}, puis réessaie."
 Feature.Friends.Description.YouCanDoMoreWithTrustedFriends,"Tu peux faire encore plus de choses sur Roblox en compagnie de tes amis de confiance. Pour gérer leur statut, il te suffit d'accéder à leur profil."
 Feature.Friends.Error.AlreadyFriendError,Cet utilisateur est déjà un ami.
 Feature.Friends.Error.DefaultFriendingError,Impossible d'envoyer la demande d'ami. Veuillez réessayer plus tard.
@@ -3645,6 +3669,7 @@ Feature.InExperienceIntervention.Description.LoseAccess,"Si cela se reproduit, t
 Feature.InExperienceIntervention.Description.MayLoseAccess,"Si tu enfreins à nouveau les règles, tu risques de perdre l'accès à ton compte."
 Feature.InExperienceIntervention.Description.Mistake,Avons-nous commis une erreur ?
 Feature.InExperienceIntervention.Description.PartyChatMayBeSuspended,Le partage d'informations personnelles n'est pas autorisé sur Roblox. Ton chat peut être suspendu si tu enfreins de nouveau les règles.
+Feature.InExperienceIntervention.Description.StartNewGameToTurnOnVoiceChat,Lance un nouveau jeu pour activer le chat vocal.
 Feature.InExperienceIntervention.Description.TextChatMayBeSuspended,Ton utilisation du chat textuel peut être suspendue si tu enfreins à nouveau les règles.
 Feature.InExperienceIntervention.Heading.CannotChat,Tu ne peux pas envoyer de chats pour {number} minutes
 Feature.InExperienceIntervention.Heading.ChatBreaksRules,Ton chat texte ne respecte pas les règles
@@ -3686,6 +3711,7 @@ Feature.InExperienceShop.Label.Timer.Minute.Singular,1 minute
 Feature.InExperienceShop.Label.Timer.Second.Plural,{number} secondes
 Feature.InExperienceShop.Label.Timer.Second.Singular,1 seconde
 Feature.InExperienceShop.Label.Trial,Essai
+Feature.InExperienceShop.Label.Trialed,Essai effectué
 Feature.InExperienceShop.Message.RobuxPurchaseSuccess,Tu as acheté {ROBUX_AMOUNT} Robux
 Feature.Item.Label.DeleteFromInventoryConfirmUndercaseDelete,"Tu confirmes vouloir supprimer définitivement cet item de ton inventaire ? Si tu changes d'avis, tu devras l'obtenir à nouveau dans une expérience."
 Feature.Item.Label.DeleteItemUndercase,Supprimer l'item
@@ -3793,6 +3819,7 @@ Feature.Moments.Label.ExceedsCharacterLimit,Dépasse la limite de caractères
 Feature.Moments.Label.FeedEndBody,Reviens plus tard ou crée ton propre moment.
 Feature.Moments.Label.FeedEndTitle,Tout est à jour
 Feature.Moments.Label.FeedFailedToLoad,Échec du chargement des actus
+Feature.Moments.Label.FeedFollowing,
 Feature.Moments.Label.FeedMyMoments,Mes moments
 Feature.Moments.Label.FeedTrending,
 Feature.Moments.Label.FirstCommentInvite,Aucun commentaire pour l'instant. Sois le premier !
@@ -3982,6 +4009,7 @@ Feature.PrivateServers.Action.CreatePrivateServer,Créer un Serveur Privé
 Feature.PrivateServers.Action.FreeWithBlackbird,Gratuit avec Plus
 Feature.PrivateServers.Description.PrivateServerPurchaseUnavailableInStudio,Studio ne prend pas en charge les achats de serveurs privés.
 Feature.PrivateServers.Description.VipServersNotSupported,Ce jeu ne prend pas en charge les serveurs privés.
+Feature.PrivateServers.Label.OwnersServer,Serveur crée par {displayName}
 Feature.Profile.Action.AboutThisProfile,À propos de ce profil
 Feature.Profile.Action.Accept,
 Feature.Profile.Action.AcceptFriends,Accepter un ami
@@ -4122,7 +4150,7 @@ Feature.ReportAbuse.Description.IpInfringementReportModal,<b>Conserve ce code pr
 Feature.ReportAbuse.Heading.ReportAbuse,Signaler un comportement abusif
 Feature.ReportAbuse.Heading.ReportUsingSelectInScene,Signaler en utilisant le mode surbrillance
 Feature.ReportAbuse.Heading.SelectInSceneErrorTitle,Erreur: Maximum 5 cercles
-Feature.ReportAbuse.Label.Avatar,Avatar
+Feature.ReportAbuse.Label.Avatar,
 Feature.ReportAbuse.Label.CantSelectSubtitle,Sélectionne « Suivant » pour signaler l'ensemble de l'expérience.
 Feature.ReportAbuse.Label.CantSelectTitle,La surbrillance ne fonctionne pas ?
 Feature.ReportAbuse.Label.CategoryBullyingV2,"Intimidation, harcèlement, Discrimination"
@@ -4217,6 +4245,10 @@ Feature.ReportAbuse.Title.SelectInSceneContinueYourReport,Poursuis ton signaleme
 Feature.ReportAbuse.Title.SelectInSceneFinishYourReport,Terminer ton signalement
 Feature.ReportAbuse.Title.SelectInSceneIpReport,Merci d'avoir commencé ton signalement d'atteinte à la propriété intellectuelle
 Feature.ReportAbuse.Title.SelectInSceneThankYou,Merci pour ton signalement
+Feature.RoCaptchaChallenge.Action.Cancel,
+Feature.RoCaptchaChallenge.Action.Play,Jouer
+Feature.RoCaptchaChallenge.Content.JoinChallenge,Nous avons détecté une activité inhabituelle sur ton compte. Joue à ce mini-jeu pour continuer.
+Feature.RoCaptchaChallenge.Title.Challenge,Vérifions que tu es bien une personne réelle.
 Feature.RobloxSubscription.Action.JoinIn,Rejoindre dans {time}
 Feature.RobloxSubscription.Action.Subscribe,S'abonner
 Feature.RobloxSubscription.Action.TryItForFree,Essayer gratuitement
@@ -4326,10 +4358,8 @@ Feature.SettingsHub.Heading.Report.ThanksForReport,Merci pour ce signalement !
 Feature.SettingsHub.Label.AttachScreenshot,Ajouter une capture d'écran ? (facultatif)
 Feature.SettingsHub.Label.Captures,
 Feature.SettingsHub.Label.ChooseOne,
-Feature.SettingsHub.Label.Connect,
 Feature.SettingsHub.Label.Connected,Connecté(e)
 Feature.SettingsHub.Label.DefaultInviteMessage,Veux-tu inviter {DisplayName} à te rejoindre ?
-Feature.SettingsHub.Label.Disconnect,Déconnexion
 Feature.SettingsHub.Label.Disconnected,Déconnecté(e)
 Feature.SettingsHub.Label.DontLeaveButton,
 Feature.SettingsHub.Label.FriendsListLoadErrorMessage,Impossible de te mettre en contact avec des amis. Réessaie plus tard.
@@ -4777,8 +4807,6 @@ Feature.VirtualEvents.ShareModalCallToAction,Partager via le tchat...
 Feature.VirtualEvents.ShareModalLinkCopy,
 Feature.VirtualEvents.ShareModalTitle,Partager cet événement
 Feature.VirtualEvents.UnfollowEvent,Ne plus suivre l'événement
-Features.OnDemandAds.Get_Reward_In,Obtenir la récompense dans
-Features.OnDemandAds.Reward_Earned,Récompense gagnée
 Features.Transfers.Action.BuyRobux,
 Features.Transfers.Action.Continue,
 Features.Transfers.Action.Ok,
@@ -5238,8 +5266,6 @@ Notifications.NotificationStream.Bundle.ShowLess,
 Notifications.NotificationStream.Bundle.ShowMoreV2,{notificationCount} de plus
 Notifications.NotificationStream.Label.AllCaughtUp,Tu es à jour !
 Notifications.NotificationStream.Label.Notifications,
-Notifications.SafetyAvatarModeration.Description.NotificationTypeInExpWarnMsg,"Merci de changer ton avatar. Bientôt, nous suspendrons de cette expérience les joueurs dont les avatars enfreignent les Normes de la communauté."
-Notifications.SafetyAvatarModeration.Label.NotificationTypeInExpWarn,Ton avatar a enfreint les règles
 Notifications.SquadRegroupPrompt.ToastAction.Dismiss,
 Notifications.SquadRegroupPrompt.ToastAction.Join,
 Notifications.SquadRegroupPrompt.ToastLabel.ContinuePlayingTogether,Continue à jouer à plusieurs

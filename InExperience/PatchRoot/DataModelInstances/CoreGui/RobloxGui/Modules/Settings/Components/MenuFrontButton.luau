@@ -7,11 +7,12 @@ local Images = UIBloxModule.App.ImageSet.Images
 local ImageSetLabel = UIBloxModule.Core.ImageSet.ImageSetLabel
 local FoundationModule = require(CorePackages.Packages.Foundation)
 local FFlagCoreUiMigrateUIBloxToFoundation = require(CorePackages.Workspace.Packages.SharedFlags).FFlagCoreUiMigrateUIBloxToFoundation
+local FFlagResponsiveUnitsDeprecateTenFoot = require(CorePackages.Workspace.Packages.SharedFlags).FFlagResponsiveUnitsDeprecateTenFoot
 local ExternalEventConnection = require(CorePackages.Workspace.Packages.RoactUtils).ExternalEventConnection
 local UtilityModule = require(RobloxGui.Modules.Settings.Utility)
 local FrontButtonControllerModule = require(RobloxGui.Modules.Settings.FrontButtonController)
 local MenuFrontButton = RoactModule.PureComponent:extend("MenuFrontButton")
-local IsEnabled = require(RobloxGui.Modules.TenFootInterface):IsEnabled()
+local NoFFlagResponsiveUnitsDeprecateTenFoot: boolean = require(RobloxGui.Modules.TenFootInterface):IsEnabled() and not FFlagResponsiveUnitsDeprecateTenFoot
 local ThemeModule = require(RobloxGui.Modules.Settings.Theme)
 local ShowTeleportHistoryFrontButton = game:DefineFastFlag("ShowTeleportHistoryFrontButton", false)
 MenuFrontButton.validateProps = TModule.strictInterface({
@@ -50,11 +51,11 @@ function MenuFrontButton.didUpdate(p1, p2)
 end
 
 function MenuFrontButton.updateViewport(p1)
-	-- upvalues: ThemeModule (copy), UtilityModule (copy), IsEnabled (copy)
-	local TextSizeResult = if UtilityModule:IsSmallTouchScreen() then ThemeModule.textSize(18) elseif IsEnabled then ThemeModule.textSize(36) else ThemeModule.textSize(24)
+	-- upvalues: ThemeModule (copy), UtilityModule (copy), NoFFlagResponsiveUnitsDeprecateTenFoot (copy)
+	local TextSizeResult = if UtilityModule:IsSmallTouchScreen() then ThemeModule.textSize(18) elseif NoFFlagResponsiveUnitsDeprecateTenFoot then ThemeModule.textSize(36) else ThemeModule.textSize(24)
 	p1.updateTextSizeConstraintBinding(TextSizeResult)
 	local IsPortrait = UtilityModule:IsPortrait()
-	local LargeButtonHeight = if IsEnabled then 120 else ThemeModule.LargeButtonHeight
+	local LargeButtonHeight = if NoFFlagResponsiveUnitsDeprecateTenFoot then 120 else ThemeModule.LargeButtonHeight
 	
 	if IsPortrait or UtilityModule:IsSmallTouchScreen() then
 		LargeButtonHeight = ThemeModule.ButtonHeight

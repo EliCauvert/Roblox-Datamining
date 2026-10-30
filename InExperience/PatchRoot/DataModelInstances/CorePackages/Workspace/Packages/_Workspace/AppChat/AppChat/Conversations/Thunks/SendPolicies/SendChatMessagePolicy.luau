@@ -15,6 +15,8 @@ local ReceivedChannelsMigrationConflictModule = require(AppChat.Conversations.Ac
 local EnumScreensModule = require(AppChat.EnumScreens)
 local GetDeepValue2Module = require(AppChat.Utils.getDeepValue2)
 local _ = require(AppChat.Models.ConversationChannels)
+local GetConversationMessageListStoreModule = require(AppChat.Stores.GetConversationMessageListStore)
+local FFlagAppChatCoalesceSendMessageWritesModule = require(AppChat.Flags.FFlagAppChatCoalesceSendMessageWrites)
 local FFlagAppChatPerfTrackingModule = require(AppChat.Flags.FFlagAppChatPerfTracking)
 local FFlagAppChatMessageTTIMilestonesModule = require(AppChat.Flags.FFlagAppChatMessageTTIMilestones)
 local AppChatPerfTrackerModule = require(AppChat.Telemetry.AppChatPerfTracker)
@@ -63,7 +65,7 @@ function self:sendingMessagePayload()
 end
 
 function self:onSuccess(p1, p2)
-	-- upvalues: NewResult (copy), FFlagAppChatPerfTrackingModule (copy), FFlagAppChatMessageTTIMilestonesModule (copy), AppChatPerfTrackerModule (copy), SentMessageModule (copy), ReceivedChatResponseModule (copy)
+	-- upvalues: NewResult (copy), FFlagAppChatPerfTrackingModule (copy), FFlagAppChatMessageTTIMilestonesModule (copy), AppChatPerfTrackerModule (copy), FFlagAppChatCoalesceSendMessageWritesModule (copy), GetConversationMessageListStoreModule (copy), SentMessageModule (copy), ReceivedChatResponseModule (copy)
 	NewResult:debug("Message sent successfully. conversationId: {} messageSendingId: {} replyingToId: {}", self.conversationId, self.messageSendingId, if self.replyingToMessage then self.replyingToMessage.id else nil)
 	
 	if FFlagAppChatPerfTrackingModule then
@@ -75,10 +77,20 @@ function self:onSuccess(p1, p2)
 			AppChatPerfTrackerModule.start(AppChatPerfTrackerModule.Events.MessageSendResponseToFinalRender, { conversationId = self.conversationId })
 		end
 	end
-	p1:dispatch(SentMessageModule(self.conversationId, self.messageSendingId))
-	p1:dispatch(ReceivedChatResponseModule(self.conversationId, p2.responseBody, self.sendingMessageStableKey))
-	
-	return p2
+	if FFlagAppChatCoalesceSendMessageWritesModule then
+		GetConversationMessageListStoreModule(false).batchMutations(function()
+			-- upvalues: p1 (copy), SentMessageModule (upval), self (copy), ReceivedChatResponseModule (upval), p2 (copy)
+			p1:dispatch(SentMessageModule(self.conversationId, self.messageSendingId))
+			p1:dispatch(ReceivedChatResponseModule(self.conversationId, p2.responseBody, self.sendingMessageStableKey))
+		end)
+		
+		return p2
+	else
+		p1:dispatch(SentMessageModule(self.conversationId, self.messageSendingId))
+		p1:dispatch(ReceivedChatResponseModule(self.conversationId, p2.responseBody, self.sendingMessageStableKey))
+		
+		return p2
+	end
 end
 
 function self:onFailure(p1, p2)

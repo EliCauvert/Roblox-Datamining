@@ -13,6 +13,7 @@ local _ = require(ExpChat.MessageEffects.MessageEffect)
 local GetMessageEffectsModule = require(ExpChat.MessageEffects.getMessageEffects)
 local FFlagEnableVerifiedBadgeStore = SharedFlagsModule.FFlagEnableVerifiedBadgeStore
 local FFlagExpChatUseChannelTabsStore = SharedFlagsModule.FFlagExpChatUseChannelTabsStore
+local FFlagExpChatReportHistoricalRenders = SharedFlagsModule.FFlagExpChatReportHistoricalRenders
 local EngineFeatureTextChatReportEmojiTelemetryEnabledModule = require(ExpChat.Flags.EngineFeatureTextChatReportEmojiTelemetryEnabled)
 local GetFFlagTextChatEnableUniverseChatTabsFunction = ExpChatSharedModule.Flags.GetFFlagTextChatEnableUniverseChatTabs
 local UseStoreFunction = require(Parent.RoactUtils).Hooks.RoactRodux.useStore
@@ -28,6 +29,7 @@ local FFlagExpChatGlobalTabDefaultModule = require(ExpChat.Flags.FFlagExpChatGlo
 local GetMessageTextModule = require(Helpers.getMessageText)
 local Flags = ExpChat.Flags
 local GetFFlagExpChatUseUpdatedMessageRenderedModule = require(Flags.getFFlagExpChatUseUpdatedMessageRendered)
+local ShouldReportMessageRenderModule = require(ExpChat.shouldReportMessageRender)
 local v1 = require(Flags.getFIntExpChatMessageRenderUserThrottlePermyriad)()
 local GetFFlagExpChatExcludeFOMORendersModule = require(Flags.getFFlagExpChatExcludeFOMORenders)
 local FFlagExpChatEnableFOMOUpsellModule = require(Flags.FFlagExpChatEnableFOMOUpsell)
@@ -75,13 +77,13 @@ local function createSlot(ChatWindowSettings)
 	local v3 = nil
 	
 	if FFlagExpChatPresetChatEnabled then
-		v2, v83 = ReactModule.createBinding(false)
+		v2, v85 = ReactModule.createBinding(false)
 	end
 	local v4 = nil
 	local v5 = nil
 	
 	if IsChatWindowEnlargeEnabledModule() then
-		v4, v85 = ReactModule.createBinding(nil)
+		v4, v87 = ReactModule.createBinding(nil)
 	end
 	Ref.current = {}
 	
@@ -144,7 +146,7 @@ local function resolvePrefixText(Text: string, Current, p1): string
 end
 
 return function(p1)
-	-- upvalues: FFlagExpChatGlobalTabDefaultModule (copy), LocalizationModule (copy), FFlagExpChatKeepV2PoolMountedModule (copy), EngineFeatureExpChatGlobalChatEngineTelemetryEnabledModule (copy), FFlagExpChatUseChannelTabsStore (copy), UseStoreFunction (copy), GetChatStatusStoreModule (copy), SignalsReactModule (copy), FFlagExpChatPresetChatEnabled (copy), FFlagExpChatTopBannerForPresetChatAccessModule (copy), GetPresetChatStoreModule (copy), ReactModule (copy), GetIsARButtonVisibleModule (copy), FIntExpChatVisibleARButtonPaddingModule (copy), FIntExpChatDefaultARButtonPaddingModule (copy), IsChatRegionLockedModule (copy), ShowChatEnabledUIModule (copy), FFlagExpChatDynamicV2PoolModule (copy), ExpChatSlotBatchSize (copy), createSlot (copy), SignalsModule (copy), FFlagEnableInExpChatRewriteModule (copy), GetRewriteDropdownStoreModule (copy), GetMessageSettingsModule (copy), GetMessageTextModule (copy), resolvePrefixText (copy), FFlagExpChatFixRateLimitedMessageRemovalModule (copy), IsChatWindowEnlargeEnabledModule (copy), GetMessageEffectsModule (copy), FFlagEnableInExpChatSummaryOnLuaForTranslatedMessageV2Module (copy), TextChatMessageChatActionTypeModule (copy), FFlagEnableVerifiedBadgeStore (copy), VerifiedBadgeDisplayStore (copy), FFlagExpChatEvictFloodcheckedFromWindowOrderModule (copy), GetFFlagExpChatUseUpdatedMessageRenderedModule (copy), ShouldSendHighFrequencyTelemetryModule (copy), v1 (copy), GetFFlagExpChatExcludeFOMORendersModule (copy), GetChannelTabsStoreModule (copy), EngineFeatureTextChatReportEmojiTelemetryEnabledModule (copy), GetChatWindowMessageEffectsModule (copy), TextChatService (copy), FFlagExpChatEnableFOMOUpsellModule (copy), FFlagExpChatEnableCrossAgeChatActivityModule (copy), Players (copy), GetResult (copy), FFlagExpChatAddWindowSettingDependencyModule (copy), GetFFlagTextChatEnableUniverseChatTabsFunction (copy), TranslatedTextMessageV2Module (copy), RewriteDropdownModule (copy)
+	-- upvalues: FFlagExpChatGlobalTabDefaultModule (copy), LocalizationModule (copy), FFlagExpChatKeepV2PoolMountedModule (copy), EngineFeatureExpChatGlobalChatEngineTelemetryEnabledModule (copy), FFlagExpChatUseChannelTabsStore (copy), UseStoreFunction (copy), GetChatStatusStoreModule (copy), SignalsReactModule (copy), FFlagExpChatPresetChatEnabled (copy), FFlagExpChatTopBannerForPresetChatAccessModule (copy), GetPresetChatStoreModule (copy), ReactModule (copy), GetIsARButtonVisibleModule (copy), FIntExpChatVisibleARButtonPaddingModule (copy), FIntExpChatDefaultARButtonPaddingModule (copy), IsChatRegionLockedModule (copy), ShowChatEnabledUIModule (copy), FFlagExpChatDynamicV2PoolModule (copy), ExpChatSlotBatchSize (copy), createSlot (copy), SignalsModule (copy), FFlagEnableInExpChatRewriteModule (copy), GetRewriteDropdownStoreModule (copy), GetMessageSettingsModule (copy), GetMessageTextModule (copy), resolvePrefixText (copy), FFlagExpChatFixRateLimitedMessageRemovalModule (copy), IsChatWindowEnlargeEnabledModule (copy), GetMessageEffectsModule (copy), FFlagEnableInExpChatSummaryOnLuaForTranslatedMessageV2Module (copy), TextChatMessageChatActionTypeModule (copy), FFlagEnableVerifiedBadgeStore (copy), VerifiedBadgeDisplayStore (copy), FFlagExpChatEvictFloodcheckedFromWindowOrderModule (copy), GetFFlagExpChatUseUpdatedMessageRenderedModule (copy), ShouldSendHighFrequencyTelemetryModule (copy), v1 (copy), GetFFlagExpChatExcludeFOMORendersModule (copy), FFlagExpChatReportHistoricalRenders (copy), ShouldReportMessageRenderModule (copy), GetChannelTabsStoreModule (copy), EngineFeatureTextChatReportEmojiTelemetryEnabledModule (copy), GetChatWindowMessageEffectsModule (copy), TextChatService (copy), FFlagExpChatEnableFOMOUpsellModule (copy), FFlagExpChatEnableCrossAgeChatActivityModule (copy), Players (copy), GetResult (copy), FFlagExpChatAddWindowSettingDependencyModule (copy), GetFFlagTextChatEnableUniverseChatTabsFunction (copy), TranslatedTextMessageV2Module (copy), RewriteDropdownModule (copy)
 	local HereLabel = if FFlagExpChatGlobalTabDefaultModule then LocalizationModule.useLocalization({ hereLabel = "CoreScripts.TextChat.ChannelTabs.Here" }).hereLabel else nil
 	local MessagesStore = p1.messagesStore
 	local Enabled = p1.enabled
@@ -195,7 +197,7 @@ return function(p1)
 	UseRefResult3.current = UseStateResult1
 	
 	local function createSlotEffects(CurrentEntry, ComponentId, MessagesStore, ChatWindowSettings, ShowTranslationButton)
-		-- upvalues: SignalsModule (upval), FFlagEnableInExpChatRewriteModule (upval), GetRewriteDropdownStoreModule (upval), GetMessageSettingsModule (upval), FFlagExpChatGlobalTabDefaultModule (upval), HereLabel (copy), GetMessageTextModule (upval), resolvePrefixText (upval), FFlagExpChatFixRateLimitedMessageRemovalModule (upval), FFlagExpChatPresetChatEnabled (upval), IsChatWindowEnlargeEnabledModule (upval), GetMessageEffectsModule (upval), FFlagEnableInExpChatSummaryOnLuaForTranslatedMessageV2Module (upval), TextChatMessageChatActionTypeModule (upval), FFlagEnableVerifiedBadgeStore (upval), VerifiedBadgeDisplayStore (upval), FFlagExpChatEvictFloodcheckedFromWindowOrderModule (upval), GetFFlagExpChatUseUpdatedMessageRenderedModule (upval), ShouldSendHighFrequencyTelemetryModule (upval), v1 (upval), GetFFlagExpChatExcludeFOMORendersModule (upval), EngineFeatureExpChatGlobalChatEngineTelemetryEnabledModule (upval), FFlagExpChatUseChannelTabsStore (upval), GetChannelTabsStoreModule (upval), UseStoreResult (copy), EngineFeatureTextChatReportEmojiTelemetryEnabledModule (upval), GetChatWindowMessageEffectsModule (upval), TextChatService (upval), FFlagExpChatEnableFOMOUpsellModule (upval), FFlagExpChatEnableCrossAgeChatActivityModule (upval), Players (upval), GetResult (upval)
+		-- upvalues: SignalsModule (upval), FFlagEnableInExpChatRewriteModule (upval), GetRewriteDropdownStoreModule (upval), GetMessageSettingsModule (upval), FFlagExpChatGlobalTabDefaultModule (upval), HereLabel (copy), GetMessageTextModule (upval), resolvePrefixText (upval), FFlagExpChatFixRateLimitedMessageRemovalModule (upval), FFlagExpChatPresetChatEnabled (upval), IsChatWindowEnlargeEnabledModule (upval), GetMessageEffectsModule (upval), FFlagEnableInExpChatSummaryOnLuaForTranslatedMessageV2Module (upval), TextChatMessageChatActionTypeModule (upval), FFlagEnableVerifiedBadgeStore (upval), VerifiedBadgeDisplayStore (upval), FFlagExpChatEvictFloodcheckedFromWindowOrderModule (upval), GetFFlagExpChatUseUpdatedMessageRenderedModule (upval), ShouldSendHighFrequencyTelemetryModule (upval), v1 (upval), GetFFlagExpChatExcludeFOMORendersModule (upval), FFlagExpChatReportHistoricalRenders (upval), ShouldReportMessageRenderModule (upval), EngineFeatureExpChatGlobalChatEngineTelemetryEnabledModule (upval), FFlagExpChatUseChannelTabsStore (upval), GetChannelTabsStoreModule (upval), UseStoreResult (copy), EngineFeatureTextChatReportEmojiTelemetryEnabledModule (upval), GetChatWindowMessageEffectsModule (upval), TextChatService (upval), FFlagExpChatEnableFOMOUpsellModule (upval), FFlagExpChatEnableCrossAgeChatActivityModule (upval), Players (upval), GetResult (upval)
 		local RegisterMessageComponentResult = MessagesStore.registerMessageComponent(ComponentId)
 		local LayoutOrderSignal = MessagesStore.getLayoutOrderSignal(ComponentId)
 		
@@ -281,13 +283,13 @@ return function(p1)
 				CurrentEntry.setLayoutOrder((LayoutOrderSignal(p2)))
 			end) else nil,
 			cleanupTelemetry = if GetFFlagExpChatUseUpdatedMessageRenderedModule() then SignalsModule.createEffect(function(p2)
-				-- upvalues: RegisterMessageComponentResult (copy), MessagesStore (copy), ShouldSendHighFrequencyTelemetryModule (upval), v1 (upval), GetFFlagExpChatExcludeFOMORendersModule (upval), EngineFeatureExpChatGlobalChatEngineTelemetryEnabledModule (upval), FFlagExpChatUseChannelTabsStore (upval), GetChannelTabsStoreModule (upval), UseStoreResult (upval), EngineFeatureTextChatReportEmojiTelemetryEnabledModule (upval), IsChatWindowEnlargeEnabledModule (upval), GetMessageSettingsModule (upval), ChatWindowSettings (copy), FFlagExpChatGlobalTabDefaultModule (upval), HereLabel (upval), GetMessageTextModule (upval), GetChatWindowMessageEffectsModule (upval), GetMessageEffectsModule (upval), TextChatService (upval)
+				-- upvalues: RegisterMessageComponentResult (copy), MessagesStore (copy), ShouldSendHighFrequencyTelemetryModule (upval), v1 (upval), GetFFlagExpChatExcludeFOMORendersModule (upval), FFlagExpChatReportHistoricalRenders (upval), ShouldReportMessageRenderModule (upval), EngineFeatureExpChatGlobalChatEngineTelemetryEnabledModule (upval), FFlagExpChatUseChannelTabsStore (upval), GetChannelTabsStoreModule (upval), UseStoreResult (upval), EngineFeatureTextChatReportEmojiTelemetryEnabledModule (upval), IsChatWindowEnlargeEnabledModule (upval), GetMessageSettingsModule (upval), ChatWindowSettings (copy), FFlagExpChatGlobalTabDefaultModule (upval), HereLabel (upval), GetMessageTextModule (upval), GetChatWindowMessageEffectsModule (upval), GetMessageEffectsModule (upval), TextChatService (upval)
 				local RegisterMessageComponentResultResult = RegisterMessageComponentResult(p2)
 				
 				if RegisterMessageComponentResultResult then
 					local v2 = MessagesStore.getMessage(RegisterMessageComponentResultResult)(false)
 					
-					if v2 and v2.textChatMessageInstance and ShouldSendHighFrequencyTelemetryModule(v1) and (not GetFFlagExpChatExcludeFOMORendersModule() or not v2.isHiddenMessage) and not v2.isHistorical then
+					if v2 and v2.textChatMessageInstance and ShouldSendHighFrequencyTelemetryModule(v1) and (not GetFFlagExpChatExcludeFOMORendersModule() or not v2.isHiddenMessage) and (if FFlagExpChatReportHistoricalRenders then ShouldReportMessageRenderModule(v2) else not v2.isHistorical) then
 						if EngineFeatureExpChatGlobalChatEngineTelemetryEnabledModule then
 							local TabIndex = -1
 							

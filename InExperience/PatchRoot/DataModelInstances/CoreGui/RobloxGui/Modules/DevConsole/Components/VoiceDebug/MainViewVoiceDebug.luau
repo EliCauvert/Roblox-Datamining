@@ -28,6 +28,8 @@ local VoiceDebugFieldMetaModule = require(script.Parent.VoiceDebugFieldMeta)
 local VoiceDebugFieldDisplayOrderModule = require(script.Parent.VoiceDebugFieldDisplayOrder)
 local GetFFlagVoiceDebugConsoleV2Module = require(script.Parent.GetFFlagVoiceDebugConsoleV2)
 local FreezeToggleModule = require(script.Parent.FreezeToggle)
+local GetFFlagVoiceDebugPartyVoiceToggleEnabledModule = require(script.Parent.GetFFlagVoiceDebugPartyVoiceToggleEnabled)
+local VoiceSourceToggleModule = require(script.Parent.VoiceSourceToggle)
 local config1 = {
 	totalConcealmentEvents = true,
 	lastPublisherAudioLevelDbov = true,
@@ -171,11 +173,25 @@ function MainViewVoiceDebug.init(p1)
 				series = p1.props.VoiceDebugData:getSeries(),
 				connectivity = p1.props.VoiceDebugData:getConnectivity(),
 				subscriptions = p1.props.VoiceDebugData:getSubscriptions(),
-				remoteOperations = p1.props.VoiceDebugData:getRemoteOperations()
+				remoteOperations = p1.props.VoiceDebugData:getRemoteOperations(),
+				source = p1.props.VoiceDebugData:getSource()
 			})
 			
 			return
 		end
+	end
+	
+	function p1.onSourceChanged(Source)
+		-- upvalues: p1 (copy)
+		p1.props.VoiceDebugData:setSource(Source)
+		p1:setState({
+			source = Source,
+			stats = p1.props.VoiceDebugData:getCurrentData(),
+			series = p1.state.frozen and p1.props.VoiceDebugData:getSeriesSnapshot() or p1.props.VoiceDebugData:getSeries(),
+			connectivity = p1.props.VoiceDebugData:getConnectivity(),
+			subscriptions = p1.props.VoiceDebugData:getSubscriptions(),
+			remoteOperations = p1.props.VoiceDebugData:getRemoteOperations()
+		})
 	end
 	
 	function p1.onFreezeToggled()
@@ -209,6 +225,7 @@ function MainViewVoiceDebug.init(p1)
 		connectivity = {},
 		subscriptions = {},
 		remoteOperations = {},
+		source = p1.props.VoiceDebugData:getSource(),
 		selectedGraphKeyByGroup = {}
 	}
 end
@@ -579,7 +596,7 @@ function MainViewVoiceDebug.renderGraphs(p2, List)
 end
 
 function MainViewVoiceDebug.render(p3)
-	-- upvalues: GetFFlagVoiceDebugConsoleV2Module (copy), Copy (copy), VoiceDebugFieldDisplayOrderModule (copy), LineGraphHeight (copy), MainRowPadding (copy), RoactModule (copy), UtilAndTabModule (copy), ConstantsModule (copy), FreezeToggleModule (copy), CollapsibleSectionModule (copy), MainViewConnectivityPanelModule (copy), MainViewSubscriptionsPanelModule (copy), MainViewRemoteOperationsPanelModule (copy), MainViewClientOperationQueuePanelModule (copy)
+	-- upvalues: GetFFlagVoiceDebugConsoleV2Module (copy), Copy (copy), VoiceDebugFieldDisplayOrderModule (copy), LineGraphHeight (copy), MainRowPadding (copy), RoactModule (copy), UtilAndTabModule (copy), ConstantsModule (copy), GetFFlagVoiceDebugPartyVoiceToggleEnabledModule (copy), VoiceSourceToggleModule (copy), FreezeToggleModule (copy), CollapsibleSectionModule (copy), MainViewConnectivityPanelModule (copy), MainViewSubscriptionsPanelModule (copy), MainViewRemoteOperationsPanelModule (copy), MainViewClientOperationQueuePanelModule (copy)
 	local Size = p3.props.size
 	local FormFactor = p3.props.formFactor
 	local TabList = p3.props.tabList
@@ -617,8 +634,13 @@ function MainViewVoiceDebug.render(p3)
 					VerticalAlignment = Enum.VerticalAlignment.Center,
 					Padding = UDim.new(0, 8)
 				}),
-				FreezeToggle = RoactModule.createElement(FreezeToggleModule, {
+				VoiceSourceToggle = GetFFlagVoiceDebugPartyVoiceToggleEnabledModule() and RoactModule.createElement(VoiceSourceToggleModule, {
 					layoutOrder = 1,
+					source = p3.state.source,
+					onSourceChanged = p3.onSourceChanged
+				}) or nil,
+				FreezeToggle = RoactModule.createElement(FreezeToggleModule, {
+					layoutOrder = 2,
 					frozen = p3.state.frozen,
 					onToggle = p3.onFreezeToggled
 				})

@@ -1,7 +1,7 @@
 ﻿local BuildExperience = script:FindFirstAncestor("BuildExperience")
 local Parent = BuildExperience.Parent
 local CryoModule = require(Parent.Cryo)
-local _ = require(Parent.DataHydration.ExperienceAnalytics)
+local _ = require(Parent.DataHydration.CreatorAnalytics)
 local _ = require(BuildExperience.Analytics.Goals.GoalTypes)
 
 local function _(p1, p2)

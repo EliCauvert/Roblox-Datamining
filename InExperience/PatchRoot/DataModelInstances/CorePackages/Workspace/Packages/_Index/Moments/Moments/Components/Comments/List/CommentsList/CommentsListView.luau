@@ -5,10 +5,9 @@ local ViewRecyclerModule = require(Parent.ViewRecycler)
 local CommentsListItemsModule = require(script.Parent.CommentsListItems)
 local CommentsListRowContextModule = require(script.Parent.CommentsListRowContext)
 local _ = require(script.Parent.Parent.Rows.CommentRowTypes)
-local FFlagViewRecyclerReact06 = require(Parent.SharedFlags).FFlagViewRecyclerReact06
 
 return function(p1)
-	-- upvalues: ReactModule (copy), FoundationModule (copy), CommentsListRowContextModule (copy), ViewRecyclerModule (copy), CommentsListItemsModule (copy), FFlagViewRecyclerReact06 (copy)
+	-- upvalues: ReactModule (copy), FoundationModule (copy), CommentsListRowContextModule (copy), ViewRecyclerModule (copy), CommentsListItemsModule (copy)
 	local _UDim = UDim.new(0, p1.rowBleed * -2)
 	
 	return ReactModule.createElement(FoundationModule.View, {
@@ -20,6 +19,7 @@ return function(p1)
 			List = ReactModule.createElement(ViewRecyclerModule.VirtualList, {
 				overscan = 2,
 				endReachedThreshold = 240,
+				autoScrollThreshold = 33,
 				data = p1.data,
 				layout = p1.layout,
 				axis = ViewRecyclerModule.Axis.Y,
@@ -28,8 +28,7 @@ return function(p1)
 				onViewportChanged = p1.onViewportChanged,
 				onContentLengthChanged = p1.onContentLengthChanged,
 				onVisibleRangeChanged = p1.onVisibleRangeChanged,
-				autoScrollOnChange = if FFlagViewRecyclerReact06 then ViewRecyclerModule.AutoScrollPolicy.WhenAtStart else p1.autoScrollOnChange,
-				autoScrollThreshold = if FFlagViewRecyclerReact06 then 33 else nil,
+				autoScrollOnChange = ViewRecyclerModule.AutoScrollPolicy.WhenAtStart,
 				scrollingFrameRef = p1.listScrollingFrameRef,
 				listRef = p1.listRef,
 				scrollingFrameProps = {

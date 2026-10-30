@@ -27,6 +27,7 @@ local FFlagEnablePurchasePayloadInExperienceShop = SharedFlagsModule.FFlagEnable
 local FFlagEnableMarketplacePurchaseDeepLinkAttribution = SharedFlagsModule.FFlagEnableMarketplacePurchaseDeepLinkAttribution
 local FFlagRefreshPriceOnRetryAfterUpsellModule = require(PurchasePrompt.Flags.FFlagRefreshPriceOnRetryAfterUpsell)
 local FFlagPurchasePromptFetchCartPricingForLooks = SharedFlagsModule.FFlagPurchasePromptFetchCartPricingForLooks
+local FFlagLuaAppsEnablePromptVIPServerPurchase = SharedFlagsModule.FFlagLuaAppsEnablePromptVIPServerPurchase
 local Replaced = string.gsub(string.gsub(game:GetService("ContentProvider").BaseUrl:lower(), "/m.", "/www."), "http:", "https:")
 local _ = string.gsub(Replaced, "https://www", "https://api")
 local Replaced1 = string.gsub(Replaced, "https://www", "https://apis")
@@ -36,7 +37,7 @@ local Replaced4 = string.gsub(Replaced, "https://www.", "https://catalog.")
 local Replaced5 = string.gsub(Replaced, "https://www.", "https://economy.")
 local Replaced6 = string.gsub(Replaced, "https://www", "https://users")
 
-local function request(Options, Callback, Callback1)
+local function request(Options, Callback1, Callback)
 	-- upvalues: DebugLogModule (copy), SerializeTableModule (copy), HttpService (copy)
 	DebugLogModule(function(): string
 		-- upvalues: Options (copy), SerializeTableModule (upval)
@@ -44,25 +45,25 @@ local function request(Options, Callback, Callback1)
 	end)
 	
 	return HttpService:RequestInternal(Options):Start(function(p1, p2)
-		-- upvalues: DebugLogModule (upval), Options (copy), SerializeTableModule (upval), HttpService (upval), Callback (copy), Callback1 (copy)
+		-- upvalues: DebugLogModule (upval), Options (copy), SerializeTableModule (upval), HttpService (upval), Callback1 (copy), Callback (copy)
 		DebugLogModule(function(): string
 			-- upvalues: Options (upval), SerializeTableModule (upval), p2 (copy)
 			return "Response " .. Options.Url .. "\n" .. SerializeTableModule(p2)
 		end)
 		
 		if not p1 then
-			Callback1((tostring(p2.StatusMessage)))
+			Callback((tostring(p2.StatusMessage)))
 			
 			return
 		end
 		local Success, Result = pcall(HttpService.JSONDecode, HttpService, p2.Body)
 		
 		if Success then
-			Callback(Result)
+			Callback1(Result)
 			
 			return
 		else
-			Callback1("Could not parse JSON.")
+			Callback("Could not parse JSON.")
 		end
 	end)
 end
@@ -491,6 +492,24 @@ local function performExperiencePurchase(p1, Input)
 	end)
 end
 
+local function performVIPServerPurchase(p1, Input)
+	-- upvalues: Replaced2 (copy), HttpService (copy), PromiseModule (copy), request (copy)
+	local config = {
+		Method = "POST",
+		Url = ("%sv1/games/vip-servers/%d"):format(Replaced2, p1),
+		Body = HttpService:JSONEncode(Input),
+		Headers = {
+			["Content-Type"] = "application/json",
+			Accept = "application/json"
+		}
+	}
+	
+	return PromiseModule.new(function(p2, p3)
+		-- upvalues: request (upval), config (copy)
+		request(config, p2, p3)
+	end)
+end
+
 local function performLookPurchase(p1, Input)
 	-- upvalues: Replaced1 (copy), HttpService (copy), PromiseModule (copy), request (copy)
 	local config = {
@@ -592,7 +611,7 @@ end
 
 return {
 	new = function()
-		-- upvalues: PromiseModule (copy), getABTestGroup (copy), getProductInfo (copy), getPlayerOwns (copy), performPurchase (copy), performPurchaseV2 (copy), GetFFlagEnableCreatorStorePurchasingCutoverModule (copy), performCreatorStorePurchase (copy), loadAssetForEquip (copy), getAccountInfo (copy), getAssetInfo (copy), getBalanceInfo (copy), getBundleDetails (copy), getProductPurchasableDetails (copy), FFlagRefreshPriceOnRetryAfterUpsellModule (copy), getCatalogItemDetails (copy), getResellers (copy), getCreatorStoreProductInfo (copy), getSubscriptionPurchaseInfo (copy), performSubscriptionPurchase (copy), getPurchaseWarning (copy), postPurchaseWarningAcknowledge (copy), checkUserPurchaseSettings (copy), getVngShopUrl (copy), performDevProductEdpPurchase (copy), getExperienceProductInfo (copy), performExperiencePurchase (copy), getUniversePrivateServerSettings (copy), performLookPurchase (copy), getUnifiedPurchaseFlowUserEligibility (copy), FFlagPurchasePromptFetchCartPricingForLooks (copy), performLookPurchaseBulkPurchase (copy), FFlagEnableUnifiedPurchaseFlowForDevSubs (copy), performDeveloperSubscriptionRobuxPurchase (copy), getSubscriptionProductInfo (copy), FFlagUnifiedPurchaseSupportRefetchingLooksAfterUpsellModule (copy), GetLookDetailsV2ProductInfo (copy), postCartPricing (copy), postInGameItemCartPricing (copy)
+		-- upvalues: PromiseModule (copy), getABTestGroup (copy), getProductInfo (copy), getPlayerOwns (copy), performPurchase (copy), performPurchaseV2 (copy), GetFFlagEnableCreatorStorePurchasingCutoverModule (copy), performCreatorStorePurchase (copy), loadAssetForEquip (copy), getAccountInfo (copy), getAssetInfo (copy), getBalanceInfo (copy), getBundleDetails (copy), getProductPurchasableDetails (copy), FFlagRefreshPriceOnRetryAfterUpsellModule (copy), getCatalogItemDetails (copy), getResellers (copy), getCreatorStoreProductInfo (copy), getSubscriptionPurchaseInfo (copy), performSubscriptionPurchase (copy), getPurchaseWarning (copy), postPurchaseWarningAcknowledge (copy), checkUserPurchaseSettings (copy), getVngShopUrl (copy), performDevProductEdpPurchase (copy), getExperienceProductInfo (copy), performExperiencePurchase (copy), getUniversePrivateServerSettings (copy), FFlagLuaAppsEnablePromptVIPServerPurchase (copy), performVIPServerPurchase (copy), performLookPurchase (copy), getUnifiedPurchaseFlowUserEligibility (copy), FFlagPurchasePromptFetchCartPricingForLooks (copy), performLookPurchaseBulkPurchase (copy), FFlagEnableUnifiedPurchaseFlowForDevSubs (copy), performDeveloperSubscriptionRobuxPurchase (copy), getSubscriptionProductInfo (copy), FFlagUnifiedPurchaseSupportRefetchingLooksAfterUpsellModule (copy), GetLookDetailsV2ProductInfo (copy), postCartPricing (copy), postInGameItemCartPricing (copy)
 		local config = {
 			getABTestGroup = PromiseModule.promisify(getABTestGroup),
 			getProductInfo = PromiseModule.promisify(getProductInfo),
@@ -619,6 +638,7 @@ return {
 			getExperienceProductInfo = PromiseModule.promisify(getExperienceProductInfo),
 			performExperiencePurchase = PromiseModule.promisify(performExperiencePurchase),
 			getUniversePrivateServerSettings = PromiseModule.promisify(getUniversePrivateServerSettings),
+			performVIPServerPurchase = if FFlagLuaAppsEnablePromptVIPServerPurchase then performVIPServerPurchase else nil,
 			performLookPurchase = PromiseModule.promisify(performLookPurchase),
 			getUnifiedPurchaseFlowUserEligibility = PromiseModule.promisify(getUnifiedPurchaseFlowUserEligibility),
 			performLookPurchaseBulkPurchase = if FFlagPurchasePromptFetchCartPricingForLooks then PromiseModule.promisify(performLookPurchaseBulkPurchase) else nil,

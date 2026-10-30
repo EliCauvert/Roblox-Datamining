@@ -47,21 +47,23 @@ local RecyclableView1 = ViewRecyclerModule.createRecyclableView(function(p1)
 	-- upvalues: ReactModule (copy), ConversationRowBindingHostModule (copy)
 	return ReactModule.createElement(ConversationRowBindingHostModule, { itemSignal = p1.itemSignal })
 end)
+local RecyclableView2 = ViewRecyclerModule.createRecyclableView(function(p1)
+	-- upvalues: SignalsReactModule (copy), selectCanvasSize (copy), ReactModule (copy), View (copy)
+	return ReactModule.createElement(View, {
+		BorderSizePixel = 0,
+		Size = SignalsReactModule.useSignalBinding(function(p2)
+			-- upvalues: selectCanvasSize (upval), p1 (copy)
+			return selectCanvasSize(p1.itemSignal(p2))
+		end),
+		backgroundStyle = SignalsReactModule.useSignalBinding(function(p2)
+			-- upvalues: p1 (copy)
+			return p1.itemSignal(p2).backgroundStyle
+		end)
+	})
+end)
 local Frozen = table.freeze({
-	[ConversationListItemKindModule.CanvasTopPadding] = ViewRecyclerModule.createRecyclableView(function(p1)
-		-- upvalues: SignalsReactModule (copy), selectCanvasSize (copy), ReactModule (copy), View (copy)
-		return ReactModule.createElement(View, {
-			BorderSizePixel = 0,
-			Size = SignalsReactModule.useSignalBinding(function(p2)
-				-- upvalues: selectCanvasSize (upval), p1 (copy)
-				return selectCanvasSize(p1.itemSignal(p2))
-			end),
-			backgroundStyle = SignalsReactModule.useSignalBinding(function(p2)
-				-- upvalues: p1 (copy)
-				return p1.itemSignal(p2).backgroundStyle
-			end)
-		})
-	end),
+	[ConversationListItemKindModule.CanvasBottomPadding] = RecyclableView2,
+	[ConversationListItemKindModule.CanvasTopPadding] = RecyclableView2,
 	[ConversationListItemKindModule.ChatLandingModal] = ViewRecyclerModule.createRecyclableView(function(_)
 		-- upvalues: ReactModule (copy), ChatLandingModalContainerModule (copy)
 		return ReactModule.createElement("Frame", {
@@ -100,6 +102,15 @@ local Frozen = table.freeze({
 })
 
 return table.freeze({
+	canvasBottomPadding = function(Height, BackgroundStyle)
+		-- upvalues: ConversationListItemKindModule (copy)
+		return {
+			id = "CanvasBottomPadding",
+			kind = ConversationListItemKindModule.CanvasBottomPadding,
+			height = Height,
+			backgroundStyle = BackgroundStyle
+		}
+	end,
 	canvasTopPadding = function(Height, BackgroundStyle)
 		-- upvalues: ConversationListItemKindModule (copy)
 		return {

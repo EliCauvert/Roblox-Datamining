@@ -1,4 +1,4 @@
-﻿local MetricGranularity = require(script:FindFirstAncestor("BuildExperience").Parent.DataHydration.ExperienceAnalytics).MetricGranularity
+﻿local MetricGranularity = require(script:FindFirstAncestor("BuildExperience").Parent.DataHydration.CreatorAnalytics).MetricGranularity
 
 local function _(p1)
 	return DateTime.fromUnixTimestamp(p1):ToIsoDate()

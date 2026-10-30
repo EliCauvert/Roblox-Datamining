@@ -16,18 +16,20 @@ local FIntBulkPurchaseEnabledCountdownMSModule = require(BulkPurchaseApp.Flags.F
 local FFlagAXAddPlusUpsellToBulkPurchaseModule = require(BulkPurchaseApp.Flags.FFlagAXAddPlusUpsellToBulkPurchase)
 local FFlagAXAddOffersToBulkPurchaseModule = require(BulkPurchaseApp.Flags.FFlagAXAddOffersToBulkPurchase)
 local FFlagAXUpdateBulkPurchaseOfferExpiryBadgeModule = require(BulkPurchaseApp.Flags.FFlagAXUpdateBulkPurchaseOfferExpiryBadge)
+local FFlagBulkPurchaseTestPurchaseHintModule = require(BulkPurchaseApp.Flags.FFlagBulkPurchaseTestPurchaseHint)
 local config = {
 	heading = "CoreScripts.BulkPurchasePrompt.RequestPrompt.PriceBox.TotalCost",
 	currentBalanceLine = "CoreScripts.BulkPurchasePrompt.RequestPrompt.PriceBox.CurrentBalance",
 	projectedBalanceLine = "CoreScripts.BulkPurchasePrompt.RequestPrompt.PriceBox.NewBalance",
 	missingRobuxLine = "CoreScripts.BulkPurchasePrompt.RequestPrompt.PriceBox.MissingRobux",
 	confirmCTA = "CoreScripts.BulkPurchasePrompt.RequestPrompt.PriceBox.ConfirmCTA",
-	buyRobuxCTA = "CoreScripts.BulkPurchasePrompt.RequestPrompt.PriceBox.BuyRobuxCTA"
+	buyRobuxCTA = "CoreScripts.BulkPurchasePrompt.RequestPrompt.PriceBox.BuyRobuxCTA",
+	testPurchaseDisclaimer = "IAPExperience.PurchasePrompt.Text.TestPurchase"
 }
 local _ = require(BulkPurchaseApp.Store.Types)
 
 return function(p1)
-	-- upvalues: UseLocalizationFunction (copy), config (copy), UseDiscountSummaryPropsModule (copy), FFlagAXAddOffersToBulkPurchaseModule (copy), UseTokensFunction (copy), ReactModule (copy), FoundationModule (copy), FFlagAXUpdateBulkPurchaseOfferExpiryBadgeModule (copy), OfferExpiryBadge (copy), View (copy), PriceBoxLineModule (copy), PriceBoxLineVariantEnumModule (copy), DiscountSummary (copy), FFlagAddTimerToBulkPurchaseBuyButtonModule (copy), FIntBulkPurchaseEnabledCountdownMSModule (copy), FFlagAXAddPlusUpsellToBulkPurchaseModule (copy), BlackbirdUpsellBanner (copy)
+	-- upvalues: UseLocalizationFunction (copy), config (copy), UseDiscountSummaryPropsModule (copy), FFlagAXAddOffersToBulkPurchaseModule (copy), UseTokensFunction (copy), ReactModule (copy), FoundationModule (copy), FFlagAXUpdateBulkPurchaseOfferExpiryBadgeModule (copy), OfferExpiryBadge (copy), View (copy), PriceBoxLineModule (copy), PriceBoxLineVariantEnumModule (copy), DiscountSummary (copy), FFlagAddTimerToBulkPurchaseBuyButtonModule (copy), FIntBulkPurchaseEnabledCountdownMSModule (copy), FFlagAXAddPlusUpsellToBulkPurchaseModule (copy), BlackbirdUpsellBanner (copy), FFlagBulkPurchaseTestPurchaseHintModule (copy)
 	local UseLocalizationResult = UseLocalizationFunction(config)
 	local UseDiscountSummaryPropsModuleResult = UseDiscountSummaryPropsModule(p1.discountInformation, p1.totalCost, if FFlagAXAddOffersToBulkPurchaseModule and p1.offerData then p1.offerData.savingsSummary else nil)
 	local UseMemoResult = nil
@@ -141,6 +143,11 @@ return function(p1)
 			LayoutOrder = 3,
 			productInfo = p1.blackbirdUpsellBannerProductInfo,
 			onActivated = p1.onBlackbirdUpsellActivated
+		}) else nil,
+		TestPurchaseDisclaimer = if FFlagBulkPurchaseTestPurchaseHintModule and p1.isTestPurchase then ReactModule.createElement(FoundationModule.Text, {
+			LayoutOrder = 4,
+			tag = "wrap size-full-0 auto-y text-caption-small text-wrap text-align-x-center",
+			Text = UseLocalizationResult.testPurchaseDisclaimer
 		}) else nil
 	})
 end

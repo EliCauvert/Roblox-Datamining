@@ -1,26 +1,29 @@
 ﻿local HttpService = game:GetService("HttpService")
 local MemStorageService = game:GetService("MemStorageService")
-local Players = game:GetService("Players")
-local FFlagUseMultipleServerIdsForSwitchServerModule = require(script:FindFirstAncestor("SwitchServer").Flags.FFlagUseMultipleServerIdsForSwitchServer)
+local SwitchServer = script:FindFirstAncestor("SwitchServer")
+local FFlagUseMultipleServerIdsForSwitchServerModule = require(SwitchServer.Flags.FFlagUseMultipleServerIdsForSwitchServer)
+local FIntSwitchServerMaxRecentServersModule = require(SwitchServer.Flags.FIntSwitchServerMaxRecentServers)
+local FIntSwitchServerRecentServerWindowSecondsModule = require(SwitchServer.Flags.FIntSwitchServerRecentServerWindowSeconds)
 local RecentServerHistoryModule = {}
 RecentServerHistoryModule.__index = RecentServerHistoryModule
 
 local function _(p1, p2): boolean
-	return p2 - p1.joinedAt <= 300
+	-- upvalues: FIntSwitchServerRecentServerWindowSecondsModule (copy)
+	return p2 - p1.joinedAt <= FIntSwitchServerRecentServerWindowSecondsModule
 end
 
-function RecentServerHistoryModule.new(Local)
+function RecentServerHistoryModule.new(_historyKey)
 	-- upvalues: RecentServerHistoryModule (copy), MemStorageService (copy), HttpService (copy)
 	local config = { _connections = {}, _historyKey = "", _history = {} }
 	
-	if Local == nil or Local == "" then
+	if _historyKey == nil or _historyKey == "" then
 		return (setmetatable(config, RecentServerHistoryModule))
 	end
+	config._historyKey = _historyKey
 	local self = setmetatable(config, RecentServerHistoryModule)
 	
 	local function initHistory()
-		-- upvalues: config (copy), Local (copy), MemStorageService (upval), HttpService (upval), self (copy)
-		config._historyKey = "RecentServerHistory" .. Local
+		-- upvalues: MemStorageService (upval), config (copy), HttpService (upval), self (copy)
 		local Item = MemStorageService:GetItem(config._historyKey)
 		
 		if Item and Item ~= "" then
@@ -49,6 +52,7 @@ function RecentServerHistoryModule.new(Local)
 end
 
 function RecentServerHistoryModule:recordServer(PlaceId, ServerId)
+	-- upvalues: FIntSwitchServerMaxRecentServersModule (copy), FIntSwitchServerRecentServerWindowSecondsModule (copy)
 	local Timestamp = os.time()
 	local List = {}
 	local config = { serverId = ServerId, joinedAt = Timestamp }
@@ -58,22 +62,25 @@ function RecentServerHistoryModule:recordServer(PlaceId, ServerId)
 		
 		return
 	end
+	table.insert(List, config)
+	
 	for _, serverEntry in self._history.serverEntries do
-		if Timestamp - serverEntry.joinedAt <= 300 then
+		if FIntSwitchServerMaxRecentServersModule <= #List then break end
+		if Timestamp - serverEntry.joinedAt <= FIntSwitchServerRecentServerWindowSecondsModule then
 			table.insert(List, serverEntry)
 		end
 	end
-	table.insert(List, 1, config)
 	self._history.serverEntries = List
 end
 
 function RecentServerHistoryModule:getRecentServerIds()
+	-- upvalues: FIntSwitchServerRecentServerWindowSecondsModule (copy)
 	local Timestamp = os.time()
 	local List = {}
 	
 	if self._history.serverEntries then
 		for _, serverEntry in self._history.serverEntries do
-			if Timestamp - serverEntry.joinedAt <= 300 then
+			if Timestamp - serverEntry.joinedAt <= FIntSwitchServerRecentServerWindowSecondsModule then
 				table.insert(List, serverEntry.serverId)
 			end
 		end
@@ -102,16 +109,8 @@ function RecentServerHistoryModule:disconnect()
 	self._connections = {}
 end
 
-local _ = function(): string
-	-- upvalues: Players (copy)
-	local UserId = Players.LocalPlayer and Players.LocalPlayer.UserId or nil
-	
-	return if UserId == nil or UserId <= 0 then "Local" else tostring(UserId)
-end
-
 if FFlagUseMultipleServerIdsForSwitchServerModule then
-	local UserId = Players.LocalPlayer and Players.LocalPlayer.UserId or nil
-	RecentServerHistoryModule.default = RecentServerHistoryModule.new(if UserId == nil or UserId <= 0 then "Local" else tostring(UserId))
+	RecentServerHistoryModule.default = RecentServerHistoryModule.new("RecentServerHistory")
 	
 	return RecentServerHistoryModule
 else

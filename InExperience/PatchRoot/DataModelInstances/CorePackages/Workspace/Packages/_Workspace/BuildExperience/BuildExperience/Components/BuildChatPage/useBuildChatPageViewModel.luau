@@ -137,7 +137,7 @@ local _ = function(p1, p2)
 	return if typeof(Name) == "string" and Name ~= "" then Name else p1
 end
 
-local function usePromptChipViewModel(p1, Target)
+local function usePromptChipViewModel(p1, Target, NoCanEditOnBuild)
 	-- upvalues: FFlagBuildEnableFTUXChipsModule (copy), FFlagBuildRequestPromptChipsOnEditModule (copy), GetBuildPromptChipsStoreModule (copy), ReactModule (copy), UseBuildPromptChipRequestsModule (copy), SignalsReactModule (copy), PromptChipsStatusModule (copy)
 	local PromptChips = {}
 	local IsPromptChipsLoading = false
@@ -155,10 +155,11 @@ local function usePromptChipViewModel(p1, Target)
 		}
 	end
 	local BuildPromptChipsStoreModule = GetBuildPromptChipsStoreModule()
+	local IsActive: boolean = FFlagBuildEnableFTUXChipsModule and (not NoCanEditOnBuild and (p1.isHistoryHydrationComplete and (not p1.isHistoryLoading and #p1.messages == 0)))
 	local UseBuildPromptChipRequestsModuleResult = UseBuildPromptChipRequestsModule(BuildPromptChipsStoreModule, {
-		isActive = #p1.messages == 0,
+		isActive = IsActive,
 		sessionKey = `{Target.universeId or 0}:{Target.placeId or 0}:{Target.sessionId or "new"}`,
-		shouldRequestInitialChips = FFlagBuildEnableFTUXChipsModule and p1.isHistoryHydrationComplete,
+		shouldRequestInitialChips = IsActive,
 		telemetryGranularity = ReactModule.useMemo(function()
 			-- upvalues: Target (copy)
 			return {
@@ -177,9 +178,8 @@ local function usePromptChipViewModel(p1, Target)
 	if FFlagBuildEnableFTUXChipsModule then
 		local UseSignalStateResult = SignalsReactModule.useSignalState(BuildPromptChipsStoreModule.getChips)
 		local UseSignalStateResult1 = SignalsReactModule.useSignalState(BuildPromptChipsStoreModule.getStatus)
-		local v1: boolean = p1.isHistoryHydrationComplete and #p1.messages == 0
-		PromptChips = if v1 then UseSignalStateResult else {}
-		IsPromptChipsLoading = v1 and UseSignalStateResult1 == PromptChipsStatusModule.PROMPT_CHIPS_STATUS.Loading
+		PromptChips = if IsActive then UseSignalStateResult else {}
+		IsPromptChipsLoading = IsActive and UseSignalStateResult1 == PromptChipsStatusModule.PROMPT_CHIPS_STATUS.Loading
 		OnPromptChipActivated = ReactModule.useCallback(function(p2)
 			-- upvalues: p1 (copy), UseBuildPromptChipRequestsModuleResult (copy), UseRefResult (copy)
 			local Value = p1.composerText:getValue()
@@ -429,7 +429,7 @@ return function(p1)
 		sendMessageWhen = not NoCanEditOnBuild
 	})
 	local IsChatEmpty = #UseChatSessionCoreModuleResult.messages == 0
-	local UsePromptChipViewModelResult = usePromptChipViewModel(UseChatSessionCoreModuleResult, p1.target)
+	local UsePromptChipViewModelResult = usePromptChipViewModel(UseChatSessionCoreModuleResult, p1.target, NoCanEditOnBuild)
 	local PromptChips = UsePromptChipViewModelResult.promptChips
 	local IsPromptChipsLoading = UsePromptChipViewModelResult.isPromptChipsLoading
 	local OnPromptChipActivated = UsePromptChipViewModelResult.onPromptChipActivated
@@ -437,16 +437,16 @@ return function(p1)
 	local UseBuildModelSelectionModuleResult = if FFlagBuildExperienceModelPickerModule then UseBuildModelSelectionModule(p1.target.universeId, p1.target.modelSelectionDraftId, p1.modelPicker, UseChatSessionCoreModuleResult.modelSessionModels, UseChatSessionCoreModuleResult.hasPreparedModelSession, UseChatSessionCoreModuleResult.internalTesting) else nil
 	
 	if FFlagBuildExperienceAnalytics then
-		local UseRefResult2 = ReactModule.useRef(false)
+		local UseRefResult1 = ReactModule.useRef(false)
 		ReactModule.useEffect(function()
-			-- upvalues: p1 (copy), UseRefResult2 (copy), UseChatSessionCoreModuleResult (copy)
+			-- upvalues: p1 (copy), UseRefResult1 (copy), UseChatSessionCoreModuleResult (copy)
 			local InitialPrompt = p1.initialPrompt
 			
-			if UseRefResult2.current or InitialPrompt == nil or InitialPrompt == "" then return end
+			if UseRefResult1.current or InitialPrompt == nil or InitialPrompt == "" then return end
 			UseChatSessionCoreModuleResult.setComposerText(InitialPrompt)
 			
 			if UseChatSessionCoreModuleResult.sendMessage() then
-				UseRefResult2.current = true
+				UseRefResult1.current = true
 			end
 		end, {
 			p1.initialPrompt,
@@ -471,7 +471,7 @@ return function(p1)
 		end
 	end
 	local NoUseStateResult7 = UseStateResult3 == PermissionsProtocol.Status.DENIED and (not UseStateResult4 and (not UseStateResult7 or UseStateResult8))
-	local UseRefResult1 = ReactModule.useRef(false)
+	local UseRefResult2 = ReactModule.useRef(false)
 	ReactModule.useEffect(function()
 		-- upvalues: BuildAppStorageKeyEngineFeature (upval), NoUseStateResult7 (copy), Flag (ref), UseChatSessionCoreModuleResult (copy), UseStateResult8 (copy), UseStateResult2_7 (copy), UseStateResult2_6 (copy), BuildAppStorageModule (upval)
 		if not BuildAppStorageKeyEngineFeature then
@@ -495,10 +495,10 @@ return function(p1)
 		UseStateResult8
 	})
 	ReactModule.useEffect(function()
-		-- upvalues: p1 (copy), UseRefResult1 (copy), UseChatSessionCoreModuleResult (copy), FFlagBuildAdUpsellModule (upval), UseRefResult (copy), UniverseConfigurationModule (upval)
+		-- upvalues: p1 (copy), UseRefResult2 (copy), UseChatSessionCoreModuleResult (copy), FFlagBuildAdUpsellModule (upval), UseRefResult (copy), UniverseConfigurationModule (upval)
 		local UniverseId = p1.target.universeId
-		local NoIsAssistantResponding: boolean = UseRefResult1.current and not UseChatSessionCoreModuleResult.isAssistantResponding
-		UseRefResult1.current = UseChatSessionCoreModuleResult.isAssistantResponding
+		local NoIsAssistantResponding: boolean = UseRefResult2.current and not UseChatSessionCoreModuleResult.isAssistantResponding
+		UseRefResult2.current = UseChatSessionCoreModuleResult.isAssistantResponding
 		
 		if not NoIsAssistantResponding or UniverseId == nil or UniverseId == 0 then
 			return function() end
@@ -573,7 +573,7 @@ return function(p1)
 	end, { UseResult9, p1.onOpenGetUsersPage }) else nil
 	local UseResult13 = if p1.onOpenGetUsersPage == nil then nil else UseResult12
 	local UseCreatorCreditChatUpsellViewModelModuleResult = UseCreatorCreditChatUpsellViewModelModule({
-		namedTier = if FFlagBuildExperienceModelPickerModule and UseBuildModelSelectionModuleResult and UseBuildModelSelectionModuleResult.selectedId == "advanced" and (not UseBuildModelSelectionModuleResult.internalTesting or not UseBuildModelSelectionModuleResult.internalTesting.isSelected) then "advanced" else nil,
+		namedTier = if FFlagBuildExperienceModelPickerModule and (UseBuildModelSelectionModuleResult and UseBuildModelSelectionModuleResult.selectedId == "advanced" and (not UseBuildModelSelectionModuleResult.internalTesting or not UseBuildModelSelectionModuleResult.internalTesting.isSelected)) then "advanced" else nil,
 		onOpenCreatorCreditPage = UseResult11,
 		outOfCreditsPromptFailureCount = if FFlagBuildExperienceModelPickerModule then if UseChatSessionCoreModuleResult.fundingFailure then UseChatSessionCoreModuleResult.fundingFailure.count else nil else UseStateResult11.count,
 		outOfCreditsPromptFailureReason = if FFlagBuildExperienceModelPickerModule then if UseChatSessionCoreModuleResult.fundingFailure then UseChatSessionCoreModuleResult.fundingFailure.reason else nil else UseStateResult11.reason,

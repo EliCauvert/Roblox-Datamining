@@ -1,1 +1,1 @@
-﻿return game:DefineFastFlag("ExpChatDictationExplicitFinish", false)
+﻿return game:DefineFastFlag("ExpChatDictationExplicitFinish2", false)

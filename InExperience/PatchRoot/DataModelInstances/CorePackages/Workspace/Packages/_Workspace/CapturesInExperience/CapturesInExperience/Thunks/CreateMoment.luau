@@ -3,16 +3,20 @@ local Parent = script.Parent.Parent
 local Parent1 = Parent.Parent
 local ToastTriggeredModule = require(Parent.Actions.ToastTriggered)
 local CapturesToastTypeModule = require(Parent.Enums.CapturesToastType)
+local FFlagCapturesInExpMomentFailedToastModule = require(Parent.Flags.FFlagCapturesInExpMomentFailedToast)
 
 if require(Parent.Flags.FFlagCapturesInExpUseMomentsCreation) then
 	local _ = require(Parent1.MomentsTypes)
 	local PublishMomentWithTagsFunction = require(Parent1.MomentsCreation).publishMomentWithTags
 	
 	return function(p1, p2, p3, p4, p5, p6)
-		-- upvalues: PublishMomentWithTagsFunction (copy), ToastTriggeredModule (copy), CapturesToastTypeModule (copy)
+		-- upvalues: FFlagCapturesInExpMomentFailedToastModule (copy), ToastTriggeredModule (copy), CapturesToastTypeModule (copy), PublishMomentWithTagsFunction (copy)
 		return function(p7)
-			-- upvalues: PublishMomentWithTagsFunction (upval), p1 (copy), p2 (copy), p3 (copy), p4 (copy), p5 (copy), p6 (copy), ToastTriggeredModule (upval), CapturesToastTypeModule (upval)
-			if PublishMomentWithTagsFunction(p1, p2, p3, p4, p5, p6) then
+			-- upvalues: FFlagCapturesInExpMomentFailedToastModule (upval), ToastTriggeredModule (upval), CapturesToastTypeModule (upval), PublishMomentWithTagsFunction (upval), p1 (copy), p2 (copy), p3 (copy), p4 (copy), p5 (copy), p6 (copy)
+			if PublishMomentWithTagsFunction(p1, p2, p3, p4, p5, p6, if FFlagCapturesInExpMomentFailedToastModule then function()
+				-- upvalues: p7 (copy), ToastTriggeredModule (upval), CapturesToastTypeModule (upval)
+				p7:dispatch(ToastTriggeredModule(CapturesToastTypeModule.MomentFailed))
+			end else nil) then
 				p7:dispatch(ToastTriggeredModule(CapturesToastTypeModule.MomentProcessing))
 			end
 		end

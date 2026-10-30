@@ -21,6 +21,7 @@ local UseCommentCapabilitiesModule = require(Moments.Components.Comments.useComm
 local FFlagMomentsActionRailNarrowWidthModule = require(Moments.Flags.FFlagMomentsActionRailNarrowWidth)
 local FFlagMomentsActionRailSpacingModule = require(Moments.Flags.FFlagMomentsActionRailSpacing)
 local FFlagMomentsCreatorAnalyticsModule = require(Moments.Flags.FFlagMomentsCreatorAnalytics)
+local FFlagMomentsRecommendationContentTypeModule = require(Moments.Flags.FFlagMomentsRecommendationContentType)
 local FFlagMomentsOptimisticProfilePending = SharedFlagsModule.FFlagMomentsOptimisticProfilePending
 local FFlagMomentsComments = SharedFlagsModule.FFlagMomentsComments
 local FFlagMomentsCommentsIxpEnabled = SharedFlagsModule.FFlagMomentsCommentsIxpEnabled
@@ -34,7 +35,7 @@ local ArrowThickToRight = BuilderIconsModule.Icon.ArrowThickToRight
 local SpeechBubbleAlignLeft = BuilderIconsModule.Icon.SpeechBubbleAlignLeft
 
 return ReactModule.memo(function(Frame)
-	-- upvalues: ReactUtilsModule (copy), MomentContextModule (copy), FFlagMomentsEngagementMetricsFeature (copy), UseSignalStateFunction (copy), GetMomentsCapabilitiesFunction (copy), FFlagMomentsReactFeatureGate (copy), UseShareMomentModule (copy), UseSignalBindingFunction (copy), FFlagMomentsComments (copy), FFlagMomentsOptimisticProfilePending (copy), UseConfigurationModule (copy), UseMomentsSessionFunction (copy), GetMomentsPreferencesStoreModule (copy), UseCommentCapabilitiesModule (copy), FFlagMomentsServeEDPVideos (copy), FFlagMomentsCommentsIxpEnabled (copy), UseCommentActionImpressionModule (copy), ReactModule (copy), ReactionButtonModule (copy), RailItemModule (copy), SpeechBubbleAlignLeft (copy), ArrowThickToRight (copy), ContextualMenuModule (copy), FFlagMomentsCreatorAnalyticsModule (copy), FFlagMomentsActionRailSpacingModule (copy), FFlagMomentsActionRailNarrowWidthModule (copy), View (copy)
+	-- upvalues: ReactUtilsModule (copy), MomentContextModule (copy), FFlagMomentsEngagementMetricsFeature (copy), UseSignalStateFunction (copy), GetMomentsCapabilitiesFunction (copy), FFlagMomentsReactFeatureGate (copy), UseShareMomentModule (copy), UseSignalBindingFunction (copy), FFlagMomentsComments (copy), FFlagMomentsOptimisticProfilePending (copy), UseConfigurationModule (copy), UseMomentsSessionFunction (copy), GetMomentsPreferencesStoreModule (copy), UseCommentCapabilitiesModule (copy), FFlagMomentsServeEDPVideos (copy), FFlagMomentsCommentsIxpEnabled (copy), UseCommentActionImpressionModule (copy), ReactModule (copy), ReactionButtonModule (copy), RailItemModule (copy), SpeechBubbleAlignLeft (copy), ArrowThickToRight (copy), ContextualMenuModule (copy), FFlagMomentsRecommendationContentTypeModule (copy), FFlagMomentsCreatorAnalyticsModule (copy), FFlagMomentsActionRailSpacingModule (copy), FFlagMomentsActionRailNarrowWidthModule (copy), View (copy)
 	local NextOrder = ReactUtilsModule.createNextOrder()
 	local UseMomentResult = MomentContextModule.useMoment()
 	local Store = UseMomentResult.store
@@ -123,6 +124,7 @@ return ReactModule.memo(function(Frame)
 			isDisabled = UseSignalStateResult1,
 			layoutOrder = NextOrder(),
 			moment = Frame.moment,
+			contentType = if FFlagMomentsRecommendationContentTypeModule then Data.contentType else nil,
 			momentStore = if FFlagMomentsCreatorAnalyticsModule then Store else nil,
 			playbackVolume = UseMemoResult
 		})

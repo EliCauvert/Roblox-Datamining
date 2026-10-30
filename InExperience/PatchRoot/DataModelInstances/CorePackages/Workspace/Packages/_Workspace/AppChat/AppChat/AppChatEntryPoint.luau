@@ -246,7 +246,7 @@ function AppChatEntryPoint(p1)
 		return UseDispatchResult(FetchLatestConversationDetailsModule(p2))
 	end, { UseDispatchResult })
 	local UseCallbackResult5 = UseCallbackFunction(function(Callback)
-		-- upvalues: UseRefResult3 (copy), JoinResult (copy), GetFFlagIsSquadEnabledFunction (upval), CryoModule (upval), FFlagAppChatShowOSAOnPageEntry (upval), NavigateWithOsaGateModule (upval), UseDispatchResult (copy), UseCallbackResult2 (copy), EnumScreensModule (upval), GetFFlagAppChatRequestedRouteModule (upval), RootedChatDetailsNavigationModule (upval), UseCallbackResult4 (copy), RoactNavigationModule (upval), FFlagAppChatPerfTrackingModule (upval), AppChatPerfTrackerModule (upval), LoggerModule (upval), UseCallbackResult11 (copy), UseCallbackResult3 (copy)
+		-- upvalues: UseRefResult3 (copy), JoinResult (copy), GetFFlagIsSquadEnabledFunction (upval), CryoModule (upval), FFlagAppChatShowOSAOnPageEntry (upval), NavigateWithOsaGateModule (upval), UseDispatchResult (copy), UseCallbackResult2 (copy), EnumScreensModule (upval), GetFFlagAppChatRequestedRouteModule (upval), RootedChatDetailsNavigationModule (upval), UseCallbackResult4 (copy), RoactNavigationModule (upval), FFlagAppChatPerfTrackingModule (upval), AppChatPerfTrackerModule (upval), UseCallbackResult11 (copy), LoggerModule (upval), UseCallbackResult3 (copy)
 		UseRefResult3.current = Callback
 		
 		if not JoinResult.updateExternalNavigationForScreen then
@@ -299,7 +299,7 @@ function AppChatEntryPoint(p1)
 			end, EnumScreensModule.ChatDetails)
 		end
 		UpdateExternalNavigationForScreenFunction(function(p2)
-			-- upvalues: FFlagAppChatShowOSAOnPageEntry (upval), NavigateWithOsaGateModule (upval), UseDispatchResult (upval), FFlagAppChatPerfTrackingModule (upval), AppChatPerfTrackerModule (upval), UseCallbackResult4 (upval), LoggerModule (upval), Callback (copy), UseCallbackResult11 (upval), UseCallbackResult3 (upval)
+			-- upvalues: FFlagAppChatShowOSAOnPageEntry (upval), NavigateWithOsaGateModule (upval), UseDispatchResult (upval), FFlagAppChatPerfTrackingModule (upval), AppChatPerfTrackerModule (upval), Callback (copy), UseCallbackResult11 (upval), UseCallbackResult4 (upval), LoggerModule (upval), UseCallbackResult3 (upval)
 			local ConversationId = p2 and p2.conversationId
 			
 			if ConversationId then
@@ -308,77 +308,68 @@ function AppChatEntryPoint(p1)
 						conversationId = ConversationId,
 						dispatch = UseDispatchResult,
 						onAccepted = function()
-							-- upvalues: FFlagAppChatPerfTrackingModule (upval), AppChatPerfTrackerModule (upval), ConversationId (copy), UseCallbackResult4 (upval), LoggerModule (upval), Callback (upval), UseCallbackResult11 (upval)
+							-- upvalues: FFlagAppChatPerfTrackingModule (upval), AppChatPerfTrackerModule (upval), ConversationId (copy), Callback (upval), UseCallbackResult11 (upval)
 							if FFlagAppChatPerfTrackingModule then
 								AppChatPerfTrackerModule.start(AppChatPerfTrackerModule.Events.ChatConversationTTI, { conversationId = ConversationId })
 							end
-							UseCallbackResult4(ConversationId):andThen(function()
-								-- upvalues: LoggerModule (upval), ConversationId (upval), Callback (upval), UseCallbackResult11 (upval)
-								LoggerModule:info("Successfully fetched conversation details for conversationId {} for external navigation", ConversationId)
-								Callback(UseCallbackResult11(ConversationId))
-							end):catch(function(Err)
-								-- upvalues: LoggerModule (upval), FFlagAppChatPerfTrackingModule (upval), AppChatPerfTrackerModule (upval), ConversationId (upval)
-								LoggerModule:warning("Error in fetchLatestConversationDetails request before navigate to conversation. error: {}", (tostring(Err)))
-								
-								if FFlagAppChatPerfTrackingModule then
-									AppChatPerfTrackerModule.cancel(AppChatPerfTrackerModule.Events.ChatConversationTTI, { conversationId = ConversationId })
-								end
-							end)
+							Callback(UseCallbackResult11(ConversationId))
 						end
 					})
-				else
+					
+					return
+				end
+				if FFlagAppChatPerfTrackingModule then
+					AppChatPerfTrackerModule.start(AppChatPerfTrackerModule.Events.ChatConversationTTI, { conversationId = ConversationId })
+				end
+				UseCallbackResult4(ConversationId):andThen(function()
+					-- upvalues: LoggerModule (upval), ConversationId (copy), Callback (upval), UseCallbackResult11 (upval)
+					LoggerModule:info("Successfully fetched conversation details for conversationId {} for external navigation", ConversationId)
+					Callback(UseCallbackResult11(ConversationId))
+				end):catch(function(Err)
+					-- upvalues: LoggerModule (upval), FFlagAppChatPerfTrackingModule (upval), AppChatPerfTrackerModule (upval), ConversationId (copy)
+					LoggerModule:warning("Error in fetchLatestConversationDetails request before navigate to conversation. error: {}", (tostring(Err)))
+					
 					if FFlagAppChatPerfTrackingModule then
-						AppChatPerfTrackerModule.start(AppChatPerfTrackerModule.Events.ChatConversationTTI, { conversationId = ConversationId })
+						AppChatPerfTrackerModule.cancel(AppChatPerfTrackerModule.Events.ChatConversationTTI, { conversationId = ConversationId })
 					end
-					UseCallbackResult4(ConversationId):andThen(function()
-						-- upvalues: LoggerModule (upval), ConversationId (copy), Callback (upval), UseCallbackResult11 (upval)
-						LoggerModule:info("Successfully fetched conversation details for conversationId {} for external navigation", ConversationId)
-						Callback(UseCallbackResult11(ConversationId))
-					end):catch(function(Err)
-						-- upvalues: LoggerModule (upval), FFlagAppChatPerfTrackingModule (upval), AppChatPerfTrackerModule (upval), ConversationId (copy)
-						LoggerModule:warning("Error in fetchLatestConversationDetails request before navigate to conversation. error: {}", (tostring(Err)))
-						
-						if FFlagAppChatPerfTrackingModule then
-							AppChatPerfTrackerModule.cancel(AppChatPerfTrackerModule.Events.ChatConversationTTI, { conversationId = ConversationId })
-						end
+				end)
+				
+				return
+			else
+				local UserId = p2 and p2.userId
+				
+				if UserId then
+					spawn(function()
+						-- upvalues: UseCallbackResult3 (upval), UserId (copy), FFlagAppChatPerfTrackingModule (upval), AppChatPerfTrackerModule (upval), LoggerModule (upval), FFlagAppChatShowOSAOnPageEntry (upval), NavigateWithOsaGateModule (upval), UseDispatchResult (upval), Callback (upval), UseCallbackResult11 (upval)
+						UseCallbackResult3(UserId):andThen(function(Result)
+							-- upvalues: FFlagAppChatPerfTrackingModule (upval), AppChatPerfTrackerModule (upval), LoggerModule (upval), UserId (upval), FFlagAppChatShowOSAOnPageEntry (upval), NavigateWithOsaGateModule (upval), UseDispatchResult (upval), Callback (upval), UseCallbackResult11 (upval)
+							if FFlagAppChatPerfTrackingModule then
+								AppChatPerfTrackerModule.start(AppChatPerfTrackerModule.Events.ChatConversationTTI, { conversationId = Result.id })
+							end
+							LoggerModule:info("Successfully fetched conversation details for userId {} for external navigation", UserId)
+							
+							if FFlagAppChatShowOSAOnPageEntry then
+								NavigateWithOsaGateModule({
+									conversationId = Result.id,
+									dispatch = UseDispatchResult,
+									onAccepted = function()
+										-- upvalues: Callback (upval), UseCallbackResult11 (upval), Result (copy)
+										Callback(UseCallbackResult11(Result.id))
+									end
+								})
+								
+								return
+							else
+								Callback(UseCallbackResult11(Result.id))
+							end
+						end):catch(function(Err)
+							-- upvalues: LoggerModule (upval)
+							LoggerModule:warning("Error in CreateConversation request before navigate to conversation. error: {}", (tostring(Err)))
+						end)
 					end)
 					
 					return
 				end
-			end
-			local UserId = p2 and p2.userId
-			
-			if UserId then
-				spawn(function()
-					-- upvalues: UseCallbackResult3 (upval), UserId (copy), FFlagAppChatPerfTrackingModule (upval), AppChatPerfTrackerModule (upval), LoggerModule (upval), FFlagAppChatShowOSAOnPageEntry (upval), NavigateWithOsaGateModule (upval), UseDispatchResult (upval), Callback (upval), UseCallbackResult11 (upval)
-					UseCallbackResult3(UserId):andThen(function(Result)
-						-- upvalues: FFlagAppChatPerfTrackingModule (upval), AppChatPerfTrackerModule (upval), LoggerModule (upval), UserId (upval), FFlagAppChatShowOSAOnPageEntry (upval), NavigateWithOsaGateModule (upval), UseDispatchResult (upval), Callback (upval), UseCallbackResult11 (upval)
-						if FFlagAppChatPerfTrackingModule then
-							AppChatPerfTrackerModule.start(AppChatPerfTrackerModule.Events.ChatConversationTTI, { conversationId = Result.id })
-						end
-						LoggerModule:info("Successfully fetched conversation details for userId {} for external navigation", UserId)
-						
-						if FFlagAppChatShowOSAOnPageEntry then
-							NavigateWithOsaGateModule({
-								conversationId = Result.id,
-								dispatch = UseDispatchResult,
-								onAccepted = function()
-									-- upvalues: Callback (upval), UseCallbackResult11 (upval), Result (copy)
-									Callback(UseCallbackResult11(Result.id))
-								end
-							})
-							
-							return
-						else
-							Callback(UseCallbackResult11(Result.id))
-						end
-					end):catch(function(Err)
-						-- upvalues: LoggerModule (upval)
-						LoggerModule:warning("Error in CreateConversation request before navigate to conversation. error: {}", (tostring(Err)))
-					end)
-				end)
-				
-				return
 			end
 		end, EnumScreensModule.ChatConversation)
 		UpdateExternalNavigationForScreenFunction(function(Params)

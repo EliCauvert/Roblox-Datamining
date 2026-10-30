@@ -1,7 +1,5 @@
-﻿local FFlagCreatorAgentChatStrictAskUserToolNameModule = require(script.Parent.FFlagCreatorAgentChatStrictAskUserToolName)
-local _ = require(script.Parent.types)
+﻿local _ = require(script.Parent.types)
 local HttpService = game:GetService("HttpService")
-local AskUser: string = if require(script:FindFirstAncestor("DataHydration").Parent.SharedFlags).FFlagBuildExperienceClientDataModelTools then "ask_user" else "studio_ask_user"
 local config = {
 	single_select = "single_select",
 	multi_select = "multi_select",
@@ -9,8 +7,7 @@ local config = {
 }
 
 local function _(Text: string): boolean
-	-- upvalues: AskUser (copy)
-	return typeof(Text) == "string" and string.lower(Text) == AskUser
+	return typeof(Text) == "string" and string.lower(Text) == "ask_user"
 end
 
 local _ = function(Entry)
@@ -64,7 +61,7 @@ local function toAnswerQuestions(Entry)
 end
 
 local function extractQuestionsFromToolCall(ToolCall)
-	-- upvalues: toAnswerQuestions (copy), AskUser (copy), FFlagCreatorAgentChatStrictAskUserToolNameModule (copy)
+	-- upvalues: toAnswerQuestions (copy)
 	local AnswerQuestions = toAnswerQuestions(ToolCall.rawInput)
 	
 	if AnswerQuestions == nil then
@@ -72,23 +69,23 @@ local function extractQuestionsFromToolCall(ToolCall)
 	end
 	local Kind: string = ToolCall.kind
 	
-	if typeof(Kind) ~= "string" or string.lower(Kind) ~= AskUser then
+	if typeof(Kind) ~= "string" or string.lower(Kind) ~= "ask_user" then
 		local Title: string = ToolCall.title
 		
-		if typeof(Title) ~= "string" or string.lower(Title) ~= AskUser then
+		if typeof(Title) ~= "string" or string.lower(Title) ~= "ask_user" then
 			local RawInput = ToolCall.rawInput
 			repeat
 				if typeof(RawInput) ~= "table" then break end
 				local Name: string = RawInput.name
 				
-				if typeof(Name) ~= "string" or string.lower(Name) ~= AskUser then
+				if typeof(Name) ~= "string" or string.lower(Name) ~= "ask_user" then
 					local ToolName: string = RawInput.toolName
 					
-					if typeof(ToolName) ~= "string" or string.lower(ToolName) ~= AskUser then continue end
+					if typeof(ToolName) ~= "string" or string.lower(ToolName) ~= "ask_user" then continue end
 				end
 				return AnswerQuestions
 			until true
-			return if FFlagCreatorAgentChatStrictAskUserToolNameModule then nil else AnswerQuestions
+			return nil
 		end
 	end
 	return AnswerQuestions
@@ -297,10 +294,10 @@ local function getToolCallOrder(p4, ToolCallId)
 end
 
 return {
+	TOOL_NAME = "ask_user",
 	CANCELLATION_TEXT = "User cancelled answering the question",
-	TOOL_NAME = AskUser,
 	LOCAL_TOOL_DEFINITION = {
-		name = AskUser,
+		name = "ask_user",
 		inputSchema = {
 			type = "array",
 			items = {

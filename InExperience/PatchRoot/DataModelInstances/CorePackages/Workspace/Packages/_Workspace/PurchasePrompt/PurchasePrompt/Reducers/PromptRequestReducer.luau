@@ -1,7 +1,9 @@
 ﻿local PurchasePrompt = script:FindFirstAncestor("PurchasePrompt")
 local Parent = PurchasePrompt.Parent
 local HttpService = game:GetService("HttpService")
+local SharedFlagsModule = require(Parent.SharedFlags)
 local RequestTypeModule = require(PurchasePrompt.Enums.RequestType)
+local FFlagLuaAppsEnablePromptVIPServerPurchase = SharedFlagsModule.FFlagLuaAppsEnablePromptVIPServerPurchase
 local FFlagStableIdempotencyKeyForProductAndGamePassModule = require(PurchasePrompt.Flags.FFlagStableIdempotencyKeyForProductAndGamePass)
 local config = { requestType = RequestTypeModule.None }
 
@@ -111,7 +113,7 @@ return (require(Parent.PurchasePromptDeps).Rodux.createReducer(config, {
 			lookId = p1.lookId
 		}
 	end,
-	[require(PurchasePrompt.Actions.RequestRobuxUpsellPurchase).name] = if require(Parent.SharedFlags).FFlagAXMISWithBlackbird then function(_, _)
+	[require(PurchasePrompt.Actions.RequestRobuxUpsellPurchase).name] = if SharedFlagsModule.FFlagAXMISWithBlackbird then function(_, _)
 		-- upvalues: RequestTypeModule (copy)
 		return { requestType = RequestTypeModule.RobuxUpsell }
 	end else nil,
@@ -124,8 +126,13 @@ return (require(Parent.PurchasePromptDeps).Rodux.createReducer(config, {
 		}
 	end,
 	[require(PurchasePrompt.Actions.RequestVIPServerPurchase).name] = function(_, _)
-		-- upvalues: RequestTypeModule (copy)
-		return { requestType = RequestTypeModule.VIPServer }
+		-- upvalues: RequestTypeModule (copy), FFlagLuaAppsEnablePromptVIPServerPurchase (copy), HttpService (copy)
+		local config = { requestType = RequestTypeModule.VIPServer }
+		
+		if FFlagLuaAppsEnablePromptVIPServerPurchase then
+			config.idempotencyKey = HttpService:GenerateGUID(false)
+		end
+		return config
 	end,
 	[require(PurchasePrompt.Actions.RefreshExpectedPrice).name] = function(Tbl, p1)
 		local Copy = table.clone(Tbl)

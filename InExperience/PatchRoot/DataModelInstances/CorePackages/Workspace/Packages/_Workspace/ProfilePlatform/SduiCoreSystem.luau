@@ -1,1 +1,1 @@
-﻿return (require(script.Parent.Parent.Parent._Index.SduiCoreSystem.SduiCoreSystem))
+﻿return (require(script.Parent.Parent.Parent._Workspace.SduiCoreSystem.SduiCoreSystem))

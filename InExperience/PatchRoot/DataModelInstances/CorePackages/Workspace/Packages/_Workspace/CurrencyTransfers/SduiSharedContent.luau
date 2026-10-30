@@ -1,1 +1,1 @@
-﻿return (require(script.Parent.Parent.Parent._Index.SduiSharedContent.SduiSharedContent))
+﻿return (require(script.Parent.Parent.Parent._Workspace.SduiSharedContent.SduiSharedContent))

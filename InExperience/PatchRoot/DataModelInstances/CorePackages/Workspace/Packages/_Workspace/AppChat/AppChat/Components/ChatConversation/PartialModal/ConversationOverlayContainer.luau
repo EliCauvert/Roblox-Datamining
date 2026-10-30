@@ -17,11 +17,10 @@ local UseRecordModalSequenceResponseForConversationModule = require(AppChat.Hook
 local UseDispatchFunction = require(Parent.RoactUtils).Hooks.RoactRodux.useDispatch
 local DismissedChatModalModule = require(AppChat.Conversations.Actions.DismissedChatModal)
 local FIntAppChatModalSeenImpressionDelayMsModule = require(AppChat.Flags.FIntAppChatModalSeenImpressionDelayMs)
-local FFlagAppChatEnableDoubleOptIn = require(Parent.SharedFlags).FFlagAppChatEnableDoubleOptIn
 local config = {
 	[ConversationOverlay.TrustedConnectionCreated] = true,
-	[ConversationOverlay.AddTrustedConnectionU18] = if FFlagAppChatEnableDoubleOptIn then true else nil,
-	[ConversationOverlay.TrustedConnectionRequestU18] = if FFlagAppChatEnableDoubleOptIn then true else nil
+	[ConversationOverlay.AddTrustedConnectionU18] = true,
+	[ConversationOverlay.TrustedConnectionRequestU18] = true
 }
 
 return ReactModule.memo(function(p1)

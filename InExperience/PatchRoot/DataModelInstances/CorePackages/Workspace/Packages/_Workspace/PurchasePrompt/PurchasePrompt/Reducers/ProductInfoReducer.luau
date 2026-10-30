@@ -4,7 +4,6 @@ local ItemTypeModule = require(PurchasePrompt.Enums.ItemType)
 local GetPreviewImageUrlModule = require(PurchasePrompt.getPreviewImageUrl)
 local FFlagEnableUnifiedPurchaseFlowForDevSubs = require(PurchasePrompt.Parent.SharedFlags).FFlagEnableUnifiedPurchaseFlowForDevSubs
 local FFlagUnifiedPurchaseOptimizeTTIMarketplace = require(PurchasePrompt.Parent.SharedFlags).FFlagUnifiedPurchaseOptimizeTTIMarketplace
-local FFlagAXFixMISUpsellDiscountSummary = require(PurchasePrompt.Parent.SharedFlags).FFlagAXFixMISUpsellDiscountSummary
 local GetFFlagFixBundlePromptThumbnailModule = require(PurchasePrompt.Flags.GetFFlagFixBundlePromptThumbnail)
 local GetFFlagEnableCreatorStorePurchasingCutoverModule = require(PurchasePrompt.Flags.GetFFlagEnableCreatorStorePurchasingCutover)
 local ProductTypeEnum = require(PurchasePrompt.types).ProductTypeEnum
@@ -14,7 +13,7 @@ local FFlagLuaAppsEnablePromptVIPServerPurchase = require(PurchasePrompt.Parent.
 
 return (require(PurchasePrompt.Parent.PurchasePromptDeps).Rodux.createReducer({}, {
 	[require(PurchasePrompt.Actions.ProductInfoReceived).name] = function(_, p1)
-		-- upvalues: FFlagUnifiedPurchaseOptimizeTTIMarketplace (copy), ConstantsModule (copy), NormalizePriceDiscountDetailsModule (copy), FFlagAXFixMISUpsellDiscountSummary (copy), GetPreviewImageUrlModule (copy), GetFFlagEnableCreatorStorePurchasingCutoverModule (copy), FFlagPurchasePromptFetchCartPricingForLooks (copy), FFlagEnableUnifiedPurchaseFlowForDevSubs (copy), ProductTypeEnum (copy), FFlagLuaAppsEnablePromptVIPServerPurchase (copy)
+		-- upvalues: FFlagUnifiedPurchaseOptimizeTTIMarketplace (copy), ConstantsModule (copy), NormalizePriceDiscountDetailsModule (copy), GetPreviewImageUrlModule (copy), GetFFlagEnableCreatorStorePurchasingCutoverModule (copy), FFlagPurchasePromptFetchCartPricingForLooks (copy), FFlagEnableUnifiedPurchaseFlowForDevSubs (copy), ProductTypeEnum (copy), FFlagLuaAppsEnablePromptVIPServerPurchase (copy)
 		local ProductInfo = p1.productInfo
 		local CollectibleItemId = ""
 		local CollectibleProductId = ""
@@ -30,7 +29,7 @@ return (require(PurchasePrompt.Parent.PurchasePromptDeps).Rodux.createReducer({}
 			basePrice = ProductInfo.UserBasePriceInRobux or (ProductInfo.BasePriceInRobux or (ProductInfo.PriceInRobux or 0)),
 			price = ProductInfo.PriceInRobux or 0,
 			priceDiscountDetails = if NormalizePriceDiscountDetailsModule then NormalizePriceDiscountDetailsModule(ProductInfo.PriceDiscountDetails) else nil,
-			savingsSummaryOverride = if FFlagAXFixMISUpsellDiscountSummary then ProductInfo.SavingsSummaryOverride else nil,
+			savingsSummaryOverride = ProductInfo.SavingsSummaryOverride,
 			premiumPrice = ProductInfo.PremiumPriceInRobux,
 			imageUrl = GetPreviewImageUrlModule(ProductInfo),
 			assetTypeId = ProductInfo.AssetTypeId,

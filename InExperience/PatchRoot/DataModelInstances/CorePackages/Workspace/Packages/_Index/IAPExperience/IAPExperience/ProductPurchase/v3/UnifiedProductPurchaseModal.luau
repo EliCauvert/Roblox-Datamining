@@ -231,7 +231,8 @@ local function UnifiedProductPurchaseModal(p1)
 				BlackbirdUpsellBanner = if p1.BlackbirdUpsellBannerProductInfo and p1.onBlackbirdUpsellActivated then ReactModule.createElement(BlackbirdUpsellBanner, {
 					LayoutOrder = 2,
 					productInfo = p1.BlackbirdUpsellBannerProductInfo,
-					onActivated = p1.onBlackbirdUpsellActivated
+					onActivated = p1.onBlackbirdUpsellActivated,
+					bannerText = if FFlagLuaAppsEnablePromptVIPServerPurchase and p1.purchaseModalType == UnifiedPurchaseModalTypeEnumModule.VIPServer then UseLocalizationResult.FreeWithPlus else nil
 				}) else nil,
 				TestPurchaseDisclaimer = if p1.isTestPurchase then ReactModule.createElement(Text, {
 					tag = "auto-y size-full-0 text-caption-small text-align-x-center text-wrap wrap",

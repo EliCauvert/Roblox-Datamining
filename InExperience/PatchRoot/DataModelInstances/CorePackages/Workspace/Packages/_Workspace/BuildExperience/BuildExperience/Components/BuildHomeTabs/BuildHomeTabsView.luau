@@ -1,9 +1,11 @@
 ﻿local BuildExperience = script:FindFirstAncestor("BuildExperience")
 local Parent = BuildExperience.Parent
+local FoundationModule = require(Parent.Foundation)
 local ReactModule = require(Parent.React)
+local FFlagBuildExperienceFoundationTabsModule = require(BuildExperience.Flags.FFlagBuildExperienceFoundationTabs)
 local BuildTabStripModule = require(BuildExperience.Components.BuildTabStrip.BuildTabStrip)
 local _ = require(script.Parent.useBuildHomeTabsViewModel)
-local View = require(Parent.Foundation).View
+local View = FoundationModule.View
 local CreateNextOrderFunction = require(Parent.ReactUtils).createNextOrder
 local BUILDHOMETAB = require(BuildExperience.Stores.GetBuildHomeTabStore.createBuildHomeTabStore).BUILD_HOME_TAB
 
@@ -12,7 +14,7 @@ local function _(p1, p2, p3)
 end
 
 return function(Frame)
-	-- upvalues: CreateNextOrderFunction (copy), ReactModule (copy), View (copy), BuildTabStripModule (copy), BUILDHOMETAB (copy)
+	-- upvalues: CreateNextOrderFunction (copy), ReactModule (copy), View (copy), FFlagBuildExperienceFoundationTabsModule (copy), FoundationModule (copy), BuildTabStripModule (copy), BUILDHOMETAB (copy)
 	local TabOrder = Frame.tabOrder
 	local PageOffset = Frame.pageOffset
 	local NextOrder = CreateNextOrderFunction()
@@ -27,7 +29,13 @@ return function(Frame)
 			LayoutOrder = NextOrder()
 		}, {
 			TabsBody = ReactModule.createElement(View, { tag = "composition-content-body col size-full-0 auto-y" }, {
-				Tabs = ReactModule.createElement(BuildTabStripModule, {
+				Tabs = if FFlagBuildExperienceFoundationTabsModule then ReactModule.createElement(FoundationModule.Tabs, {
+					testId = "BuildHomeTabs.Tabs",
+					activeTabId = Frame.activeTab,
+					onActivated = Frame.onTabActivated,
+					tabs = Frame.tabs,
+					size = FoundationModule.Enums.InputSize.Medium
+				}) else ReactModule.createElement(BuildTabStripModule, {
 					testId = "BuildHomeTabs.Tabs",
 					activeTabId = Frame.activeTab,
 					activeOffset = PageOffset,

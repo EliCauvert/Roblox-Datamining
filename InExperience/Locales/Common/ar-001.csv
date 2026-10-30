@@ -64,6 +64,7 @@ Authentication.Login.Action.QuickSignIn,
 Authentication.Login.Action.Save,حفظ
 Authentication.Login.Button.CloseAndSwitchPlatformAccount,يجب الخروج من منصة Roblox للتبديل إلى الحساب على منصة {platformAccountName}
 Authentication.Login.Button.UseDifferentRobloxAccount,استخدِم حساب Roblox مختلف
+Authentication.Login.Button.XboxAccountSwitcher,تبديل حساب Xbox
 Authentication.Login.Error.PasskeyOnlyAccount,تم إعداد حسابك لتسجيل الدخول باستخدام مفتاح مرور فقط. جرِّب تسجيل الدخول باستخدام مفتاح المرور أو استعادة حسابك.
 Authentication.Login.Error.PlatformAccountConnectionFailure,يتعذّر التحقق من حساب المنصة. يُرجى إعادة المحاولة لاحقًا.
 Authentication.Login.Heading.IncompatibleAccounts,حسابات غير متوافقة
@@ -415,13 +416,16 @@ CommonUI.Features.Action.Continue,
 CommonUI.Features.Action.LearnMore,معرفة المزيد
 CommonUI.Features.Action.LessLowercase,أقل
 CommonUI.Features.Action.MoreLowercase,المزيد
+CommonUI.Features.Action.OK,
 CommonUI.Features.Action.Send,
+CommonUI.Features.Action.ViewDetails,عرض التفاصيل
 CommonUI.Features.Label.About,حول
 CommonUI.Features.Label.AcceptFriend,قبول الصداقة
 CommonUI.Features.Label.Add,إضافة
 CommonUI.Features.Label.AddConnection,إضافة جهة اتصال
 CommonUI.Features.Label.AddConnections,إضافة جهات اتصال
 CommonUI.Features.Label.AddFriend,إضافة صديق
+CommonUI.Features.Label.Avatar,الأفاتار
 CommonUI.Features.Label.Badges,شارات
 CommonUI.Features.Label.Charts,الرائجة
 CommonUI.Features.Label.Chat,الدردشة
@@ -457,7 +461,6 @@ CommonUI.Features.Label.Sent,تم الإرسال
 CommonUI.Features.Label.Settings,
 CommonUI.Features.Label.Terms,الشروط
 CommonUI.Features.Label.TermsOfUse,شروط الاستخدام
-CommonUI.Features.Label.Thanks,شكرًا
 CommonUI.Features.Label.TheHunt,أحداث Roblox
 CommonUI.Features.Label.Trades,مهن
 CommonUI.Features.Label.Unchecked,لم يتم التحقُّق
@@ -636,6 +639,7 @@ CoreScripts.EmoteThumbnailEditor.Heading.EditThumbnail,تعديل الصورة �
 CoreScripts.EmoteThumbnailEditor.Label.Rotation,تدوير
 CoreScripts.EmoteThumbnailEditor.Label.Time,الوقت
 CoreScripts.FTUX.Description.WhiteMenuPlaytestMode,تشير القائمة البيضاء في منصّة Roblox إلى أنك في وضع اختبار اللعب. احرص دائمًا على اتِّباع معايير مجتمع Roblox.
+CoreScripts.FTUX.Description.WhiteMenuPreviewing,تشير القائمة البيضاء في منصّة Roblox إلى أنك تقوم بمعاينة هذه اللعبة قبل إتاحتها للجميع.
 CoreScripts.FTUX.Heading.CheckOutRobloxConnect,جديد: استكشف Roblox Connect.
 CoreScripts.FTUX.Heading.CheckOutRobloxParty,جديد: استكشف Roblox Party!
 CoreScripts.FTUX.Heading.InExperienceShop,احصل على عملات Robux من المتجر
@@ -647,6 +651,7 @@ CoreScripts.FTUX.Heading.NewTiltUpdate,قائمة جديدة
 CoreScripts.FTUX.Heading.ReadyToPlaytest,هل أنت جاهز لاختبار اللعب؟
 CoreScripts.FTUX.Heading.SideSheetUpdate,جميع إجراءاتك في مكان واحد
 CoreScripts.FTUX.Heading.SocialOnboarding,ميزات التواصل الاجتماعي
+CoreScripts.FTUX.Heading.YouAreAnEarlyTester,أنت مختبر لعب مبكر
 CoreScripts.FTUX.Label.AvatarSwitcherDescription,انتقل إلى الأفاتارات المحفوظة بسهولة وفي أي وقت.
 CoreScripts.FTUX.Label.ChatWithYourFriendsAnytime,دردش مع أصدقائك في أي وقت.
 CoreScripts.FTUX.Label.InExperienceShopDescription,تتضمن بعض الحزم المختارة عنصرًا إضافيًا كمكافأة
@@ -1032,7 +1037,7 @@ CoreScripts.PublishAssetPrompt.Cancel,
 CoreScripts.PublishAssetPrompt.Description,
 CoreScripts.PublishAssetPrompt.DisclaimerAvatar,"أوافق على أن هذه التجربة سوف ترسل أفاتاري إلى قسم الإشراف ثم تحميله إلى ""تصاميمي""."
 CoreScripts.PublishAssetPrompt.DisclaimerEmote,
-CoreScripts.PublishAssetPrompt.DisclaimerImage,"أوافق على أن هذه التجربة سترسل صورتي إلى قسم الإشراف وسترفعها إلى ""منتجاتي""."
+CoreScripts.PublishAssetPrompt.DisclaimerImage,"أوافق على أن هذه التجربة سترسل صورتي إلى قسم الإشراف وسترفعها إلى ""منتجاتي"". سيتم إعداد خصوصية الصورة إلى ""استخدام مفتوح"". ويمكن لأي مصمم أو لعبة استخدامها."
 CoreScripts.PublishAssetPrompt.DisclaimerModel,ستتم مراجعة العناصر التي تم إنشاؤها وقد لا نعيد لك المبلغ المدفوع مقابل العناصر التي يتم رفضها بسبب عدم توافقها مع معايير المجتمع.
 CoreScripts.PublishAssetPrompt.InvalidDescription,وصف غير صالح
 CoreScripts.PublishAssetPrompt.InvalidName,اسم غير صالح
@@ -1116,15 +1121,11 @@ CoreScripts.TextChat.ChatWindow.ChatDisabled.OnlyViewSystemMessages,يمكنك �
 CoreScripts.TextChat.ChatWindow.ChatDisabled.RegionUnavailable,يمكنك هنا عرض رسائل النظام فقط. خاصية الدردشة غير متاحة في منطقتك.
 CoreScripts.TextChat.ChatWindow.ChatDisabled.SettingOff,يمكنك هنا عرض رسائل النظام فقط. حدِّث إعدادات التواصل لتشغيل الدردشة.
 CoreScripts.TextChat.ChatWindow.ChatEnabled.ChatInRegion,يمكنك عرض رسائل النظام والدردشة مع المستخدمين في منطقتك فقط.
-CoreScripts.TextChat.ChatWindow.ChatEnabled.ChatWithAgeGroupAAndTF,يمكن فقط للأشخاص في فئات عمرية مماثلة ولأصدقائك الموثوق بهم الدردشة معك.
 CoreScripts.TextChat.ChatWindow.ChatEnabled.ChatWithOnlinePlayers.BelowThreshold,رحِّب بكل مَن يلعبون الآن!
-CoreScripts.TextChat.ChatWindow.ChatEnabled.ChatWithOnlinePlayers.Local.WithCount,يوجد {RBX_COUNT} من اللاعبين الآخرين في الدردشة. رحِّب بهم!
 CoreScripts.TextChat.ChatWindow.ChatEnabled.ChatWithOnlinePlayers.V3,👋 رحِّب بكل مَن يلعبون الآن!
 CoreScripts.TextChat.ChatWindow.ChatEnabled.ChatWithTF,يمكن فقط لأصدقائك الموثوق بهم الدردشة معك.
 CoreScripts.TextChat.ChatWindow.ChatEnabled.Global2,يمكنك الدردشة مع المزيد من الأشخاص في هذه اللعبة. يمكن فقط للأشخاص في الفئات العمرية المماثلة الدردشة معك.
 CoreScripts.TextChat.ChatWindow.ChatEnabled.Global3,يمكنك الدردشة مع المزيد من الأشخاص في هذه اللعبة!
-CoreScripts.TextChat.ChatWindow.ChatWithOnlinePlayers.Local.Friendly,✨ انضم إلى المرح! رحِّب بكل مَن يلعبون الآن!
-CoreScripts.TextChat.ChatWindow.ChatWithOnlinePlayers.Local.WithCount,👋 يوجد {RBX_COUNT} من اللاعبين في الدردشة. رحِّب بهم!
 CoreScripts.TextChat.ChatWindow.HandFreeTranscriptionFTUX,اضغط مطولًا للتحدث دون استخدام اليدين
 CoreScripts.TextChat.ChatWindow.RephrasedLabel,أُعيدت صياغتها
 CoreScripts.TextChat.ChatWindow.RephrasedReason.Description,تُعيد منصّة Roblox صياغة الرسائل التي تنتهك قواعد السلامة.
@@ -1918,6 +1919,11 @@ Feature.AvatarSwitcher.Message.SelectAvatar,حدّد أفاتارًا
 Feature.AvatarSwitcher.Message.SwitchingDeferred,سترى هذه الصورة الرمزية بعد إعادة الظهور التالية، أو عند الانضمام إلى تجربة. يمكنك التبديل إلى صورة رمزية مختلفة في أي وقت.
 Feature.AvatarSwitcher.Message.UnknownSupport,لا يزال بإمكانك تبديل الأفاتار، لكن قد لا يظهر بشكل صحيح في هذه التجربة.
 Feature.AvatarSwitcher.Message.Unsupported,تستخدم هذه التجربة أفاتارًا مخصصًا ولا تدعم أفاتارات منصة Roblox.
+Feature.AvatarWorkshop.Action.TryAgain,
+Feature.AvatarWorkshop.Heading.AvatarWorkshop,ورشة الأفاتار
+Feature.AvatarWorkshop.Message.LoadItemsError,حدث خطأ ما أثناء تحميل عناصرك.
+Feature.AvatarWorkshop.Message.LoadMoreItemsError,تعذَّر تحميل المزيد من العناصر.
+Feature.AvatarWorkshop.Message.NoItemsOwned,لا تملك أي عناصر هنا حتى الآن.
 Feature.BiometricChallenge.Action.Cancel,
 Feature.BiometricChallenge.Action.Continue,
 Feature.BiometricChallenge.Content.LivenessHostedPrompt,افتح متصفح الويب الخارجي والتقط صورة سيلفي سريعة لتأكيد أنك لست روبوتًا.
@@ -2107,7 +2113,10 @@ Feature.Build.Description.ManagedPricingAcknowledgement,يضبط التسعير 
 Feature.Build.Description.ManagedPricingCurrentProducts,استخدام التسعير المُدار لجميع المنتجات الحالية
 Feature.Build.Description.ManagedPricingUnavailable,التسعير المُدار غير متاح لهذه التجربة.
 Feature.Build.Description.NoEligibleManagedPricingProducts,لا توجد أي منتجات مؤهلة
+Feature.Build.Description.NoMonetizationDeveloperProducts,منتجات المطوّر هي عناصر يمكن للاعبين شراؤها مرارًا وتكرارًا في لعبتك
+Feature.Build.Description.NoMonetizationPasses,تتيح لك التذاكر تقديم ميزة تُفتح لمرة واحدة للاعبين في لعبتك
 Feature.Build.Description.NoMonetizationProducts,صِف عنصرًا ترغب في إنشائه لبدء كسب عملات Robux في لعبتك
+Feature.Build.Description.NoMonetizationSubscriptions,تتيح لك الاشتراكات داخل الألعاب تقديم مزايا متكررة للمستخدمين مقابل رسوم شهرية
 Feature.Build.Description.PlayAfterPublish,اختر من يمكنه اللعب بعد نشر هذه التجربة.
 Feature.Build.Description.PlaytestLatest,أنت تختبر اللعب لأحدث إصدار لديك. انشره عندما تكون مستعدًا لمشاركته.
 Feature.Build.Description.PlaytestLocked,يمكنك بدء اختبار اللعب بعد إنشاء لعبتك الأولى.
@@ -2141,9 +2150,18 @@ Feature.Build.Error.DeveloperProductPriceInvalid,"ينبغي أن يكون ال�
 Feature.Build.Error.DeveloperProductPriceRequiredForSale,"اضغط على ""تحرير"" وأضف سعرًا قبل طرح المنتج للبيع."
 Feature.Build.Error.DeveloperProductTextModerated,تم تغيير نص هذا المنتج من قِبل فريق الإشراف لدى منصّة Roblox. جرّب صياغة مختلفة.
 Feature.Build.Error.ManagedPricingPartialUpdate,تعذَّر تحديث بعض المنتجات.
+Feature.Build.Error.MonetizationImageFailed,تعذَّر تحميل الصورة. حاول مرة أخرى.
+Feature.Build.Error.MonetizationImageInReview,لا تزال الصورة قيد المراجعة. حاول مرة أخرى بعد قليل.
+Feature.Build.Error.MonetizationImagePreparing,لا تزال الصورة قيد الإعداد. حاول مرة أخرى بعد قليل.
+Feature.Build.Error.MonetizationImageTimedOut,استغرق تحميل الصورة وقتًا طويلًا. حاول مرة أخرى.
+Feature.Build.Error.MonetizationImageTooLarge,حجم الصورة أكبر من 5 ميغابايت.
+Feature.Build.Error.MonetizationNoUniverse,هذه الدردشة غير مرتبطة بأي لعبة.
 Feature.Build.Error.MonetizationOptionUpdate,تعذَّر تحديث الخيار. حاول مرة أخرى.
 Feature.Build.Error.MonetizationOptionsLoad,تعذَّر تحميل الخيارات. حاول مرة أخرى.
 Feature.Build.Error.MonetizationPermissionDenied,ليس لديك الإذن لتغيير خيارات الحصول على عائد.
+Feature.Build.Error.MonetizationPriceRequiredForRegionalPricing,أضف سعرًا لتشغيل التسعير الإقليمي.
+Feature.Build.Error.MonetizationPriceRequiredForSale,أضف سعرًا قبل طرح هذا العنصر للبيع.
+Feature.Build.Error.MonetizationRateLimited,يوجد عدد كبير جدًا من الطلبات. حاول مرة أخرى بعد قليل.
 Feature.Build.Header.AccessSharing,إمكانية الوصول والمشاركة
 Feature.Build.Header.AllVersions,جميع الإصدارات
 Feature.Build.Header.Answers,الإجابات
@@ -2476,7 +2494,10 @@ Feature.Build.Title.GetUsers,الحصول على المستخدمين
 Feature.Build.Title.InsufficientRobuxForModel,ليس لديك ما يكفي من عملات Robux
 Feature.Build.Title.ManagedPricingAcknowledgement,هل تريد تشغيل التسعير المُدار؟
 Feature.Build.Title.Monetization,التحويل إلى مصدر ربح
+Feature.Build.Title.NoMonetizationDeveloperProducts,لم تنشئ أي منتجات مطوّر بعد
+Feature.Build.Title.NoMonetizationPasses,لم تنشئ أي تذاكر
 Feature.Build.Title.NoMonetizationProducts,ابدأ الكسب في لعبتك
+Feature.Build.Title.NoMonetizationSubscriptions,لم تنشئ أي اشتراكات
 Feature.Build.Title.NoRobuxForUsage,لم يتبقَ أي عملات Robux لاستخدام ميزة Build
 Feature.Build.Title.PickCampaign,اختَر مدة
 Feature.Build.Title.Playtesters,
@@ -2618,6 +2639,8 @@ Feature.Catalog.Header.InvalidOutfit,الزيّ غير صالح
 Feature.Catalog.Header.PostAvatar,
 Feature.Catalog.Heading.AvailableItems,العناصر المتاحة
 Feature.Catalog.Heading.BuyItem,
+Feature.Catalog.Heading.DescriptionLinkGoToMarketplace,سيؤدي هذا إلى توجيهك إلى المتجر
+Feature.Catalog.Heading.DescriptionLinkResetSearch,سيؤدي هذا إلى إعادة تعيين بحثك الحالي
 Feature.Catalog.Heading.FreeItemConfirmation,احصل على العنصر
 Feature.Catalog.Heading.GoToExperience,الانضمام إلى التجربة؟
 Feature.Catalog.Heading.HoldingPolicy,سياسة الاحتجاز
@@ -2693,6 +2716,12 @@ Feature.Catalog.Label.CreatorName,اسم المصمّم
 Feature.Catalog.Label.CurrentBalance,الرصيد الحالي:
 Feature.Catalog.Label.CustomizeAvatar,تخصيص الأفاتار
 Feature.Catalog.Label.DeleteAvatarConfirmationPromptMessage,لا يمكنك التراجع عن هذا الإجراء إذا قمت بالحذف.
+Feature.Catalog.Label.DescriptionLinkInvalid,رابط غير صالح
+Feature.Catalog.Label.DescriptionLinkSearchMarketplace,البحث في المتجر
+Feature.Catalog.Label.DescriptionLinkViewAsset,عرض الأصل
+Feature.Catalog.Label.DescriptionLinkViewBundle,عرض الحزمة
+Feature.Catalog.Label.DescriptionLinkViewCommunity,عرض المجتمع
+Feature.Catalog.Label.DescriptionLinkViewCommunityStore,متجر المجتمع
 Feature.Catalog.Label.Details,
 Feature.Catalog.Label.DynamicHeads,
 Feature.Catalog.Label.Emissive,مُضيء
@@ -2962,7 +2991,7 @@ Feature.Chat.Action.StartChatWithFriends,
 Feature.Chat.Action.Stay,
 Feature.Chat.Action.Translate,ترجم
 Feature.Chat.Action.UnmuteVoice,إلغاء كتم الصوت
-Feature.Chat.Action.ViewAssetDetails,عرض التفاصيل
+Feature.Chat.Action.ViewAssetDetails,
 Feature.Chat.Description.ConversationInviteGroupCreatedOn,تم إنشاء المجموعة في {creation_date}
 Feature.Chat.Description.CreateUnfilteredChatCell,ستتم دعوة جميع أعضاء هذه المجموعة، لكن بعضهم غير مؤهل للانضمام.
 Feature.Chat.Description.CreateUnfilteredChatDialog,"بفضل ميزات الدردشة الشاملة، يمكنك الدردشة دون فلاتر.
@@ -3279,6 +3308,7 @@ Feature.Friends.Description.TrustedFriendsExpiredLink,يُرجى الطلب من
 Feature.Friends.Description.TrustedFriendsInvalidLink,تأكد من تسجيل الدخول باستخدام الحساب الصحيح، ثم حاول مرة أخرى.
 Feature.Friends.Description.TrustedFriendsRequestModalBody,أضِف الأشخاص الذين تعرفهم وتثق بهم فقط. يمكنك إدارة هذا الصديق في أي وقت من ملفه الشخصي.
 Feature.Friends.Description.TrustedFriendsUnavailable,ميزة الأصدقاء الموثوقين غير متاحة بعد في منطقتك.
+Feature.Friends.Description.TrustedFriendsWrongAccount,تأكد من تسجيل الدخول باسم @{username}، ثم حاول مرة أخرى.
 Feature.Friends.Description.YouCanDoMoreWithTrustedFriends,يمكنك الاستمتاع بالمزيد على منصّة Roblox مع الأصدقاء الموثوق بهم. يمكنك إدارة هذا الصديق في أي وقت من ملفه الشخصي.
 Feature.Friends.Error.AlreadyFriendError,هذا المستخدم صديقك بالفعل.
 Feature.Friends.Error.DefaultFriendingError,تعذَّر إرسال طلب الصداقة. يُرجى المحاولة مرة أخرى لاحقًا.
@@ -3477,7 +3507,7 @@ Feature.Groups.Action.NotNow,
 Feature.Groups.Action.RemovePrimary,إزالة الأساسي
 Feature.Groups.Action.SeeAll,مشاهدة الكل
 Feature.Groups.Action.Unfollow,إلغاء المتابعة
-Feature.Groups.Action.ViewGroup,عرض المجتمع
+Feature.Groups.Action.ViewGroup,
 Feature.Groups.Description.JoinGroupPending,طلب الانضمام إلى المجموعة قيد المراجعة من قِبل المجتمع.
 Feature.Groups.Description.NotEligibleToJoin,لا يمكن لحسابك الانضمام إلى هذا المجتمع.
 Feature.Groups.Description.PremiumMaxGroups,لقد انضممت إلى الحد الأقصى لعدد المجتمعات.
@@ -3583,6 +3613,7 @@ Feature.InExperienceIntervention.Description.LoseAccess,إذا تكرر هذا �
 Feature.InExperienceIntervention.Description.MayLoseAccess,إذا خالفت القواعد مرة أخرى، فقد يتم إيقاف حسابك.
 Feature.InExperienceIntervention.Description.Mistake,هل ارتكبنا أي خطأ؟
 Feature.InExperienceIntervention.Description.PartyChatMayBeSuspended,لا يُسمح بمشاركة المعلومات الشخصية على Roblox. قد يتم إيقاف استخدامك لخاصية الدردشة مؤقتًا إذا خالفت القواعد مرة أخرى.
+Feature.InExperienceIntervention.Description.StartNewGameToTurnOnVoiceChat,ابدأ لعبة جديدة لتشغيل المحادثة الصوتية.
 Feature.InExperienceIntervention.Description.TextChatMayBeSuspended,قد يتم إيقاف استخدامك لخاصية الدردشة النصية إذا خالفت القواعد مرة أخرى.
 Feature.InExperienceIntervention.Heading.CannotChat,لا يمكنك إرسال رسائل الدردشة لمدة {number} من الدقائق
 Feature.InExperienceIntervention.Heading.ChatBreaksRules,دردشتك النصية تخالف القواعد
@@ -3624,6 +3655,7 @@ Feature.InExperienceShop.Label.Timer.Minute.Singular,دقيقة واحدة
 Feature.InExperienceShop.Label.Timer.Second.Plural,{number} من الثواني
 Feature.InExperienceShop.Label.Timer.Second.Singular,ثانية واحدة
 Feature.InExperienceShop.Label.Trial,فترة تجريبية
+Feature.InExperienceShop.Label.Trialed,تمت تجربتها
 Feature.InExperienceShop.Message.RobuxPurchaseSuccess,لقد اشتريتَ {ROBUX_AMOUNT} من عملات Robux بنجاح
 Feature.Item.Label.DeleteFromInventoryConfirmUndercaseDelete,هل أنت متأكد من أنك تريد حذف هذا العنصر نهائيًا من المقتنيات؟ إذا غيرت رأيك، فستحتاج إلى أن تربحه مرة أخرى في التجارب.
 Feature.Item.Label.DeleteItemUndercase,حذف العنصر
@@ -3731,6 +3763,7 @@ Feature.Moments.Label.ExceedsCharacterLimit,يتجاوز الحد الأقصى �
 Feature.Moments.Label.FeedEndBody,تحقق لاحقًا أو أنشئ لحظتك الخاصة.
 Feature.Moments.Label.FeedEndTitle,لقد اطّلعت على جميع اللحظات
 Feature.Moments.Label.FeedFailedToLoad,تعذَّر تحميل الموجز
+Feature.Moments.Label.FeedFollowing,المتابَعون
 Feature.Moments.Label.FeedMyMoments,لحظاتي
 Feature.Moments.Label.FeedTrending,
 Feature.Moments.Label.FirstCommentInvite,لا توجد أي تعليقات حتى الآن. كن أول من يكتب تعليقًا!
@@ -3920,6 +3953,7 @@ Feature.PrivateServers.Action.CreatePrivateServer,إنشاء خادم خاص
 Feature.PrivateServers.Action.FreeWithBlackbird,مجانًا مع Plus
 Feature.PrivateServers.Description.PrivateServerPurchaseUnavailableInStudio,عمليات شراء الخوادم الخاصة غير مدعومة في Studio.
 Feature.PrivateServers.Description.VipServersNotSupported,لا تدعم هذه اللعبة الخوادم الخاصة.
+Feature.PrivateServers.Label.OwnersServer,خادم {displayName}
 Feature.Profile.Action.AboutThisProfile,حول هذا الملف الشخصي
 Feature.Profile.Action.Accept,
 Feature.Profile.Action.AcceptFriends,
@@ -4060,7 +4094,7 @@ Feature.ReportAbuse.Description.IpInfringementReportModal,<b>احفظ هذا ا�
 Feature.ReportAbuse.Heading.ReportAbuse,الإبلاغ عن إساءة الاستخدام
 Feature.ReportAbuse.Heading.ReportUsingSelectInScene,الإبلاغ باستخدام وضع التحديد
 Feature.ReportAbuse.Heading.SelectInSceneErrorTitle,خطأ: الحد الأقصى 5 دوائر
-Feature.ReportAbuse.Label.Avatar,الأفاتار
+Feature.ReportAbuse.Label.Avatar,
 Feature.ReportAbuse.Label.CantSelectSubtitle,"حدد ""التالي"" للإبلاغ عن التجربة بأكملها."
 Feature.ReportAbuse.Label.CantSelectTitle,هل لا يمكنك تحديد شيء معين؟
 Feature.ReportAbuse.Label.CategoryBullyingV2,تنمر وتحرش وتمييز
@@ -4155,6 +4189,10 @@ Feature.ReportAbuse.Title.SelectInSceneContinueYourReport,مواصلة إعدا�
 Feature.ReportAbuse.Title.SelectInSceneFinishYourReport,إكمال تقريرك
 Feature.ReportAbuse.Title.SelectInSceneIpReport,شكرًا لك على بدء بلاغ انتهاك الملكية الفكرية
 Feature.ReportAbuse.Title.SelectInSceneThankYou,شكرًا على التقرير
+Feature.RoCaptchaChallenge.Action.Cancel,
+Feature.RoCaptchaChallenge.Action.Play,
+Feature.RoCaptchaChallenge.Content.JoinChallenge,لاحظنا نشاطًا غير عادي على حسابك. العب لعبة سريعة للمتابعة.
+Feature.RoCaptchaChallenge.Title.Challenge,لنتأكد من أنك شخص حقيقي
 Feature.RobloxSubscription.Action.JoinIn,الانضمام بعد {time}
 Feature.RobloxSubscription.Action.Subscribe,اشتراك
 Feature.RobloxSubscription.Action.TryItForFree,جرب مجانًا
@@ -4264,10 +4302,8 @@ Feature.SettingsHub.Heading.Report.ThanksForReport,شكرًا على إرسال 
 Feature.SettingsHub.Label.AttachScreenshot,إرفاق لقطة الشاشة؟ (اختياري)
 Feature.SettingsHub.Label.Captures,
 Feature.SettingsHub.Label.ChooseOne,اختر واحدة
-Feature.SettingsHub.Label.Connect,الاتصال
 Feature.SettingsHub.Label.Connected,
 Feature.SettingsHub.Label.DefaultInviteMessage,هل تريد دعوة {DisplayName} للانضمام إليك؟
-Feature.SettingsHub.Label.Disconnect,قطع الاتصال
 Feature.SettingsHub.Label.Disconnected,
 Feature.SettingsHub.Label.DontLeaveButton,عدم المغادرة
 Feature.SettingsHub.Label.FriendsListLoadErrorMessage,تعذر تحميل الأصدقاء. حاول مرة أخرى لاحقًا.
@@ -4463,7 +4499,7 @@ Feature.Squads.Action.Start,
 Feature.Squads.Action.Switch,
 Feature.Squads.Action.TapToStartNewParty,اضغط لبدء فرقة جديدة
 Feature.Squads.Action.View,
-Feature.Squads.Action.VoiceErrorGeneral,
+Feature.Squads.Action.VoiceErrorGeneral,الاتصال
 Feature.Squads.Action.VoiceErrorPartyNotVoiceEligible,
 Feature.Squads.Action.VoiceErrorUserIneligible,
 Feature.Squads.Action.WaitingForParty,في انتظار الفرقة
@@ -4715,8 +4751,6 @@ Feature.VirtualEvents.ShareModalCallToAction,مشاركة في الدردشة...
 Feature.VirtualEvents.ShareModalLinkCopy,
 Feature.VirtualEvents.ShareModalTitle,شارك هذا الحدث
 Feature.VirtualEvents.UnfollowEvent,إلغاء متابعة الحدث
-Features.OnDemandAds.Get_Reward_In,ستحصل على مكافأة في
-Features.OnDemandAds.Reward_Earned,لقد ربحت مكافأة
 Features.Transfers.Action.BuyRobux,
 Features.Transfers.Action.Continue,
 Features.Transfers.Action.Ok,
@@ -5176,8 +5210,6 @@ Notifications.NotificationStream.Bundle.ShowLess,
 Notifications.NotificationStream.Bundle.ShowMoreV2,{notificationCount} إضافية
 Notifications.NotificationStream.Label.AllCaughtUp,لقد أتممت كل المهام!
 Notifications.NotificationStream.Label.Notifications,
-Notifications.SafetyAvatarModeration.Description.NotificationTypeInExpWarnMsg,يرجى تغيير أفاتارك. قريبًا، سيتم تعليق وصول اللاعبين الذين تخالف أفاتاراتهم معايير مجتمعنا إلى هذه اللعبة.
-Notifications.SafetyAvatarModeration.Label.NotificationTypeInExpWarn,انتهك أفاتارك القواعد
 Notifications.SquadRegroupPrompt.ToastAction.Dismiss,
 Notifications.SquadRegroupPrompt.ToastAction.Join,
 Notifications.SquadRegroupPrompt.ToastLabel.ContinuePlayingTogether,متابعة اللعب معًا

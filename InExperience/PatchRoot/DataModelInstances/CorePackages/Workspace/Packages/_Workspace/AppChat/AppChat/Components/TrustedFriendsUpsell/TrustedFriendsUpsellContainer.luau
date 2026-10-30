@@ -14,14 +14,13 @@ local ModalTelemetryModule = require(AppChat.Components.ModalTelemetry)
 local UseTelemetryModule = require(AppChat.Telemetry.useTelemetry)
 local AppTelemetryLayerModule = require(AppChat.Telemetry.Layers.AppTelemetryLayer)
 local TrustedFriendsModalEntry = require(Parent.TrustedContacts).TrustedFriendsModalEntry
-local FFlagAppChatEnableDoubleOptIn = require(Parent.SharedFlags).FFlagAppChatEnableDoubleOptIn
 local FIntUnfilteredThreadsPvDelayMsModule = require(AppChat.Flags.FIntUnfilteredThreadsPvDelayMs)
 
 return function(p1)
-	-- upvalues: UseIsAppChatVerticallyConstrainedModule (copy), UseDispatchFunction (copy), FFlagAppChatEnableDoubleOptIn (copy), UseIsInExperienceModule (copy), UseTelemetryModule (copy), AppTelemetryLayerModule (copy), ReactModule (copy), ConversationOverlayTelemetryModule (copy), SetTabBarVisibleFromChatFunction (copy), PromiseModule (copy), FIntUnfilteredThreadsPvDelayMsModule (copy), RefreshConversationUnfilteredThreadsDetailsModule (copy), ModalTelemetryModule (copy), TrustedFriendsModalEntry (copy)
+	-- upvalues: UseIsAppChatVerticallyConstrainedModule (copy), UseDispatchFunction (copy), UseIsInExperienceModule (copy), UseTelemetryModule (copy), AppTelemetryLayerModule (copy), ReactModule (copy), ConversationOverlayTelemetryModule (copy), SetTabBarVisibleFromChatFunction (copy), PromiseModule (copy), FIntUnfilteredThreadsPvDelayMsModule (copy), RefreshConversationUnfilteredThreadsDetailsModule (copy), ModalTelemetryModule (copy), TrustedFriendsModalEntry (copy)
 	local UseIsAppChatVerticallyConstrainedModuleResult = UseIsAppChatVerticallyConstrainedModule()
 	local UseDispatchResult = UseDispatchFunction()
-	local UseIsInExperienceModuleResult = if FFlagAppChatEnableDoubleOptIn then UseIsInExperienceModule() else nil
+	local UseIsInExperienceModuleResult = UseIsInExperienceModule()
 	local AnalyticsModalVariant = p1.analyticsModalVariant
 	local ConversationId = p1.conversationId
 	local UseTelemetryModuleResult = UseTelemetryModule(AppTelemetryLayerModule.Context)
@@ -43,10 +42,10 @@ return function(p1)
 		end
 	end, { UseDispatchResult })
 	local UseResult = ReactModule.useCallback(function()
-		-- upvalues: p1 (copy), ConversationId (copy), FFlagAppChatEnableDoubleOptIn (upval), PromiseModule (upval), FIntUnfilteredThreadsPvDelayMsModule (upval), UseDispatchResult (copy), RefreshConversationUnfilteredThreadsDetailsModule (upval), UseIsInExperienceModuleResult (copy)
+		-- upvalues: p1 (copy), ConversationId (copy), PromiseModule (upval), FIntUnfilteredThreadsPvDelayMsModule (upval), UseDispatchResult (copy), RefreshConversationUnfilteredThreadsDetailsModule (upval), UseIsInExperienceModuleResult (copy)
 		p1.dismissModal()
 		
-		if ConversationId ~= nil and FFlagAppChatEnableDoubleOptIn then
+		if ConversationId ~= nil then
 			PromiseModule.delay(FIntUnfilteredThreadsPvDelayMsModule / 1000):andThen(function()
 				-- upvalues: UseDispatchResult (upval), RefreshConversationUnfilteredThreadsDetailsModule (upval), ConversationId (upval), UseIsInExperienceModuleResult (upval)
 				UseDispatchResult(RefreshConversationUnfilteredThreadsDetailsModule(ConversationId, UseIsInExperienceModuleResult))

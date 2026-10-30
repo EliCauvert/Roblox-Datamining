@@ -21,7 +21,9 @@ return function(p1)
 		inactiveDestination = p1.inactiveDestination,
 		controllerRef = p1.controllerRef,
 		initialIndex = p1.initialIndex,
-		trackSurfaceLoad = p1.trackSurfaceLoad
+		trackSurfaceLoad = p1.trackSurfaceLoad,
+		emptyState = p1.emptyState,
+		caughtUpState = p1.caughtUpState
 	})
 	local RenderFeedContainerFunction = p1.renderFeedContainer
 	

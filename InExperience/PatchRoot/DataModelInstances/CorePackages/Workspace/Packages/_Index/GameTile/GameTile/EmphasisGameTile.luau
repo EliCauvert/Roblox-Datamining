@@ -44,6 +44,7 @@ local FFlagLuaAppOneByTwoHoverIdleAutoplay = require(Parent.SharedFlags).FFlagLu
 local FFlagLuaAppHomeThumbnailPrefetch = require(Parent.SharedFlags).FFlagLuaAppHomeThumbnailPrefetch
 local FFlagLuaAppEdpMediaGalleryVideoPreview = require(Parent.SharedFlags).FFlagLuaAppEdpMediaGalleryVideoPreview
 local FFlagLuaAppEmphasisGameTileVideo = require(Parent.SharedFlags).FFlagLuaAppEmphasisGameTileVideo
+local FFlagLuaAppSuppressVideoDetectorDuringScroll = require(Parent.SharedFlags).FFlagLuaAppSuppressVideoDetectorDuringScroll
 local FIntLuaAppGameTileVideoDwellTimeInSec = require(Parent.SharedFlags).FIntLuaAppGameTileVideoDwellTimeInSec
 local FIntLuaAppGameTileVideoVisiblePercent = require(Parent.SharedFlags).FIntLuaAppGameTileVideoVisiblePercent
 local FFlagLuaAppGameTileSelectionVideoPlayback = require(Parent.SharedFlags).FFlagLuaAppGameTileSelectionVideoPlayback
@@ -51,7 +52,7 @@ local FFlagMigrateGameInfoToStore = require(Parent.SharedFlags).FFlagMigrateGame
 local ResolveGameTileThumbnailUriModule = if FFlagLuaAppHomeThumbnailPrefetch then require(GameTile.resolveGameTileThumbnailUri) else nil
 
 return function(p1)
-	-- upvalues: UseDesignTokensFunction (copy), UseTokensFunction (copy), UseSelectorFunction (copy), GameInfosReducer (copy), FFlagMigrateGameInfoToStore (copy), GameHydrationReactModule (copy), UseRoactServiceFunction (copy), RoactNetworking (copy), UseDispatchFunction (copy), ReactModule (copy), ApiFetchGameDetails (copy), GetGameTileLayoutDataModule (copy), FFlagLuaAppHomeThumbnailPrefetch (copy), ResolveGameTileThumbnailUriModule (copy), ItemLayoutDataParsingUtilsModule (copy), FormatExperienceThumbnailModule (copy), GameTileViewConfigModule (copy), IsVRAppBuildFunction (copy), UseIsHoveredTileModule (copy), FFlagLuaAppEmphasisGameTileVideo (copy), VideoPlaybackCoordinator (copy), HoverTileCoordinatorModule (copy), VideoEndReason (copy), GameCollectionItemTypes (copy), SponsoredGamesRecordClickFunction (copy), AppExperienceActionRowModule (copy), GridTileTextFooterModule (copy), CreatorNameMetadataModule (copy), GameStatsModule (copy), GameTileConstantsModule (copy), ImpressionsTagUtility (copy), FFlagLuaAppGameTileSelectionVideoPlayback (copy), FFlagLuaAppEdpMediaGalleryVideoPreview (copy), UsePreferredInputFunction (copy), UseTagAsViewportAutoplayCandidateFunction (copy), FFlagLuaAppTileVideoCandidateOnly (copy), FFlagLuaAppOneByTwoHoverIdleAutoplay (copy), GameTileVideoThumbnailModule (copy), GameVideoPlaybackDetectorModule (copy), ResponsiveModule (copy), FIntLuaAppGameTileVideoDwellTimeInSec (copy), FIntLuaAppGameTileVideoVisiblePercent (copy), GetTileBadgeByPositionConfigFromEntryModule (copy), GameTileThumbnailBadgesModule (copy), GameTileViewModule (copy), UserGameSettings (copy)
+	-- upvalues: UseDesignTokensFunction (copy), UseTokensFunction (copy), UseSelectorFunction (copy), GameInfosReducer (copy), FFlagMigrateGameInfoToStore (copy), GameHydrationReactModule (copy), UseRoactServiceFunction (copy), RoactNetworking (copy), UseDispatchFunction (copy), ReactModule (copy), ApiFetchGameDetails (copy), GetGameTileLayoutDataModule (copy), FFlagLuaAppHomeThumbnailPrefetch (copy), ResolveGameTileThumbnailUriModule (copy), ItemLayoutDataParsingUtilsModule (copy), FormatExperienceThumbnailModule (copy), GameTileViewConfigModule (copy), IsVRAppBuildFunction (copy), UseIsHoveredTileModule (copy), FFlagLuaAppEmphasisGameTileVideo (copy), VideoPlaybackCoordinator (copy), HoverTileCoordinatorModule (copy), VideoEndReason (copy), GameCollectionItemTypes (copy), SponsoredGamesRecordClickFunction (copy), AppExperienceActionRowModule (copy), GridTileTextFooterModule (copy), CreatorNameMetadataModule (copy), GameStatsModule (copy), GameTileConstantsModule (copy), ImpressionsTagUtility (copy), FFlagLuaAppSuppressVideoDetectorDuringScroll (copy), FFlagLuaAppGameTileSelectionVideoPlayback (copy), FFlagLuaAppEdpMediaGalleryVideoPreview (copy), UsePreferredInputFunction (copy), UseTagAsViewportAutoplayCandidateFunction (copy), FFlagLuaAppTileVideoCandidateOnly (copy), FFlagLuaAppOneByTwoHoverIdleAutoplay (copy), GameTileVideoThumbnailModule (copy), GameVideoPlaybackDetectorModule (copy), ResponsiveModule (copy), FIntLuaAppGameTileVideoDwellTimeInSec (copy), FIntLuaAppGameTileVideoVisiblePercent (copy), GetTileBadgeByPositionConfigFromEntryModule (copy), GameTileThumbnailBadgesModule (copy), GameTileViewModule (copy), UserGameSettings (copy)
 	local UseDesignTokensResult = UseDesignTokensFunction()
 	local UseTokensResult = UseTokensFunction()
 	local UniverseId = p1.entry.universeId
@@ -307,10 +308,12 @@ return function(p1)
 	local UseResult3 = nil
 	local UseResult4 = nil
 	local IsDisablePlayback: boolean? = nil
+	local IsDisableDetectors: boolean? = nil
 	local Touch = nil
 	
 	if FFlagLuaAppEmphasisGameTileVideo then
 		IsDisablePlayback = p1.videoPlaybackContext ~= nil and p1.videoPlaybackContext.disablePlayback == true
+		IsDisableDetectors = FFlagLuaAppSuppressVideoDetectorDuringScroll and (p1.videoPlaybackContext ~= nil and p1.videoPlaybackContext.disableDetectors == true)
 		Playing, UseStateResult2_1 = ReactModule.useState(false)
 		UseResult2 = ReactModule.useCallback(function(p2)
 			-- upvalues: UseStateResult2_1 (ref)
@@ -370,7 +373,7 @@ return function(p1)
 			universeId = UniverseId,
 			videoPlaybackCoordinator = VideoPlaybackCoordinator1
 		}) else nil
-		Element1 = if HasPrimaryWideVideoAssetId and not IsDisablePlayback then ReactModule.createElement(GameVideoPlaybackDetectorModule, {
+		Element1 = if HasPrimaryWideVideoAssetId and not IsDisablePlayback and (not FFlagLuaAppSuppressVideoDetectorDuringScroll or not IsDisableDetectors) then ReactModule.createElement(GameVideoPlaybackDetectorModule, {
 			videoKey = Text,
 			itemIndex = p1.index,
 			universeId = tostring(UniverseId),

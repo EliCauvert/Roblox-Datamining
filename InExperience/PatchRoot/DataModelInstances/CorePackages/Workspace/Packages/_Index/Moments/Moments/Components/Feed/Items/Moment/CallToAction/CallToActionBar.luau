@@ -19,6 +19,7 @@ local GetMomentsPreferencesStoreModule = require(Moments.Stores.GetMomentsPrefer
 local GetFFlagMomentsAndroidTvEnabledModule = require(Moments.Flags.GetFFlagMomentsAndroidTvEnabled)
 local ImageWithSkeletonModule = require(Moments.Components.ImageWithSkeleton)
 local FeedContextModule = require(Moments.Components.Feed.FeedContext)
+local _ = require(Moments.Components.Feed.FeedTypes)
 local MomentContextModule = require(script.Parent.Parent.MomentContext)
 local GetExperienceDetailsSheetStoreModule = require(Moments.ExperienceDetailsSheet.Sheet.getExperienceDetailsSheetStore)
 local JoinButtonModule = require(Moments.ExperienceDetailsSheet.Join.JoinButton)
@@ -27,6 +28,7 @@ local MomentsFixExperienceHandleVerifiedSpacing = game:DefineFastFlag("MomentsFi
 local FFlagMomentsFixRecommendationImpressionLifecycleModule = require(Moments.Flags.FFlagMomentsFixRecommendationImpressionLifecycle)
 local FFlagMomentsUpdateExperienceActionLabelTextModule = require(Moments.Flags.FFlagMomentsUpdateExperienceActionLabelText)
 local FFlagMomentsJoinImpressionModule = require(Moments.Flags.FFlagMomentsJoinImpression)
+local FFlagMomentsFollowingFeedModule = require(Moments.Flags.FFlagMomentsFollowingFeed)
 local VerifiedBadgeModule = if MomentsFixExperienceHandleVerifiedSpacing then require(Parent.VerifiedBadges.VerifiedBadge) else nil
 local config = {
 	join = if FFlagMomentsUpdateExperienceActionLabelTextModule then "Feature.Moments.Action.Play" else "Feature.Moments.Action.Join"
@@ -34,7 +36,7 @@ local config = {
 local Character = utf8.char(57344)
 
 return ReactModule.memo(function(Frame)
-	-- upvalues: UseLocalizationFunction (copy), config (copy), UseTokensFunction (copy), MomentContextModule (copy), UseSignalStateFunction (copy), GetMomentsPreferencesStoreModule (copy), GetFFlagMomentsAndroidTvEnabledModule (copy), UseIsTvRemoteDeviceFunction (copy), UseExperienceDetailsModule (copy), FFlagMomentsServeEDPVideos (copy), UseScaledValueFunction (copy), FFlagMomentsFixRecommendationImpressionLifecycleModule (copy), FeedContextModule (copy), GetRbxThumbFunction (copy), FoundationModule (copy), MomentsFixExperienceHandleVerifiedSpacing (copy), Character (copy), ReactModule (copy), ImageWithSkeletonModule (copy), Radius (copy), View (copy), Text (copy), Skeleton (copy), VerifiedBadgeModule (copy), IconSize (copy), GetExperienceDetailsSheetStoreModule (copy), Button (copy), JoinButtonModule (copy), FFlagMomentsJoinImpressionModule (copy)
+	-- upvalues: UseLocalizationFunction (copy), config (copy), UseTokensFunction (copy), MomentContextModule (copy), UseSignalStateFunction (copy), GetMomentsPreferencesStoreModule (copy), GetFFlagMomentsAndroidTvEnabledModule (copy), UseIsTvRemoteDeviceFunction (copy), UseExperienceDetailsModule (copy), FFlagMomentsServeEDPVideos (copy), UseScaledValueFunction (copy), FFlagMomentsFixRecommendationImpressionLifecycleModule (copy), FFlagMomentsFollowingFeedModule (copy), FeedContextModule (copy), GetRbxThumbFunction (copy), FoundationModule (copy), MomentsFixExperienceHandleVerifiedSpacing (copy), Character (copy), ReactModule (copy), ImageWithSkeletonModule (copy), Radius (copy), View (copy), Text (copy), Skeleton (copy), VerifiedBadgeModule (copy), IconSize (copy), GetExperienceDetailsSheetStoreModule (copy), Button (copy), JoinButtonModule (copy), FFlagMomentsJoinImpressionModule (copy)
 	local UseLocalizationResult = UseLocalizationFunction(config)
 	local UseTokensResult = UseTokensFunction()
 	local Store = MomentContextModule.useMoment().store
@@ -51,7 +53,8 @@ return ReactModule.memo(function(Frame)
 	local RootPlaceId = if FFlagMomentsServeEDPVideos and PlaceId == 0 and UseExperienceDetailsModuleResult.rootPlaceId ~= nil then UseExperienceDetailsModuleResult.rootPlaceId else PlaceId
 	local IsRootPlaceIdMatch: boolean = FFlagMomentsServeEDPVideos and (not IsAd and (UniverseId ~= 0 and RootPlaceId == 0))
 	local UseScaledValueResult = UseScaledValueFunction(160)
-	local UseFeedOptionalResult = if FFlagMomentsFixRecommendationImpressionLifecycleModule then FeedContextModule.useFeedOptional() else nil
+	local UseFeedOptionalResult = if FFlagMomentsFixRecommendationImpressionLifecycleModule or FFlagMomentsFollowingFeedModule then FeedContextModule.useFeedOptional() else nil
+	local RecommendationSource = if FFlagMomentsFollowingFeedModule and UseFeedOptionalResult ~= nil then UseFeedOptionalResult.recommendationSource else nil
 	local IconImage = if IsAd then if Advertiser then Advertiser.iconImage else nil elseif UniverseId == 0 then GetRbxThumbFunction(FoundationModule.Enums.ThumbnailType.Asset, RootPlaceId) else GetRbxThumbFunction(FoundationModule.Enums.ThumbnailType.GameIcon, UniverseId)
 	
 	if IsAd or RootPlaceId ~= 0 or IsRootPlaceIdMatch then
@@ -71,12 +74,14 @@ return ReactModule.memo(function(Frame)
 				tag = "row align-x-left align-y-center grow gap-medium auto-y",
 				testId = "moments-experience-row",
 				onActivated = if IsAd or UseSignalStateResult1 or FFlagMomentsServeEDPVideos and RootPlaceId == 0 then nil else function()
-					-- upvalues: GetExperienceDetailsSheetStoreModule (upval), RootPlaceId (copy), UniverseId (copy), Data (copy), FFlagMomentsFixRecommendationImpressionLifecycleModule (upval), UseFeedOptionalResult (ref)
+					-- upvalues: GetExperienceDetailsSheetStoreModule (upval), RootPlaceId (copy), UniverseId (copy), Data (copy), RecommendationSource (copy), FFlagMomentsFixRecommendationImpressionLifecycleModule (upval), UseFeedOptionalResult (ref)
 					GetExperienceDetailsSheetStoreModule(false).open({
 						placeId = RootPlaceId,
 						universeId = UniverseId,
 						feedItemId = Data.feedItemId,
 						tracingId = Data.feedSessionId,
+						contentType = Data.contentType,
+						recommendationSource = RecommendationSource,
 						onBeforeJoin = if FFlagMomentsFixRecommendationImpressionLifecycleModule and UseFeedOptionalResult ~= nil then UseFeedOptionalResult.flushView else nil
 					})
 				end,
@@ -140,7 +145,9 @@ return ReactModule.memo(function(Frame)
 					placeId = RootPlaceId,
 					universeId = UniverseId,
 					feedItemId = Data.feedItemId,
-					tracingId = Data.feedSessionId
+					tracingId = Data.feedSessionId,
+					contentType = Data.contentType,
+					recommendationSource = RecommendationSource
 				},
 				text = CtaText,
 				isDisabled = UseSignalStateResult1 or not FFlagMomentsServeEDPVideos and RootPlaceId == 0,

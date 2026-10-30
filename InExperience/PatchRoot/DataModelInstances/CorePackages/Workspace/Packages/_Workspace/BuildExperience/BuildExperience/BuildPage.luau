@@ -65,6 +65,8 @@ local FFlagBuildPublishNavigationSheetModule = require(script.Parent.Flags.FFlag
 local FFlagBuildExperiencePrivateInvitesModule = require(script.Parent.Flags.FFlagBuildExperiencePrivateInvites)
 local FFlagBuildExperienceMyCreationsLongPressMenuModule = require(script.Parent.Flags.FFlagBuildExperienceMyCreationsLongPressMenu)
 local FFlagBuildExperiencePreviewsTabModule = require(script.Parent.Flags.FFlagBuildExperiencePreviewsTab)
+local FFlagAppThemeHalloween2026BuildBackgroundModule = require(script.Parent.Flags.FFlagAppThemeHalloween2026BuildBackground)
+local UseThemeBackgroundFunction = require(Parent.ThemeBackground).useThemeBackground
 local FFlagBuildWithGroupsModule = require(script.Parent.Flags.FFlagBuildWithGroups)
 local BuildHomeTabsContainerModule = if FFlagBuildExperiencePreviewsTabModule then require(script.Parent.Components.BuildHomeTabs.BuildHomeTabsContainer) else nil
 local FFlagBuildExperienceAnalytics = SharedFlagsModule.FFlagBuildExperienceAnalytics
@@ -402,7 +404,7 @@ local List = {
 	{
 		[config.BuildHome] = {
 			screen = function(p2)
-				-- upvalues: UseBuildPageLayoutModule (copy), UseNavigationFocusFunction (copy), UseLocalizationFunction (copy), LocalizationStringsModule (copy), ReactModule (copy), FFlagBuildExperienceModelPickerModule (copy), PrepareBuildModelSelectionTargetModule (copy), config (copy), FFlagBuildExperienceMyCreationsLongPressMenuModule (copy), useHomeConfigurationPages (copy), FFlagBuildAdUpsellModule (copy), GetAdsCampaignDeepLinkStoreModule (copy), SendBuildExperienceEventModule (copy), ResumeBuildChatModule (copy), GetSearchQueryStoreModule (copy), MyCreationsTabModule (copy), FullscreenPageWithSafeArea (copy), View (copy), BuildPageHeaderModule (copy), FFlagBuildExperiencePreviewsTabModule (copy), BuildHomeTabsContainerModule (copy), FFlagBuildPublishNavigationSheetModule (copy), PublishSheetControllerModule (copy)
+				-- upvalues: UseBuildPageLayoutModule (copy), UseNavigationFocusFunction (copy), UseLocalizationFunction (copy), LocalizationStringsModule (copy), ReactModule (copy), FFlagBuildExperienceModelPickerModule (copy), PrepareBuildModelSelectionTargetModule (copy), config (copy), FFlagBuildExperienceMyCreationsLongPressMenuModule (copy), useHomeConfigurationPages (copy), FFlagAppThemeHalloween2026BuildBackgroundModule (copy), UseThemeBackgroundFunction (copy), FFlagBuildAdUpsellModule (copy), GetAdsCampaignDeepLinkStoreModule (copy), SendBuildExperienceEventModule (copy), ResumeBuildChatModule (copy), GetSearchQueryStoreModule (copy), MyCreationsTabModule (copy), FullscreenPageWithSafeArea (copy), View (copy), BuildPageHeaderModule (copy), FFlagBuildExperiencePreviewsTabModule (copy), BuildHomeTabsContainerModule (copy), FFlagBuildPublishNavigationSheetModule (copy), PublishSheetControllerModule (copy)
 				local ScreenProps = p2.screenProps or {}
 				local Navigation = p2.navigation
 				local UseBuildPageLayoutModuleResult = UseBuildPageLayoutModule()
@@ -420,6 +422,7 @@ local List = {
 				end, { Navigation })
 				local UseHomeConfigurationPagesResult = if FFlagBuildExperienceMyCreationsLongPressMenuModule then useHomeConfigurationPages(Navigation) else nil
 				local PublishSheetTarget = if UseHomeConfigurationPagesResult == nil then nil else UseHomeConfigurationPagesResult.publishSheetTarget
+				local HasUseThemeBackgroundResult: boolean = if FFlagAppThemeHalloween2026BuildBackgroundModule then UseThemeBackgroundFunction() ~= nil else false
 				ReactModule.useEffect(function()
 					-- upvalues: FFlagBuildAdUpsellModule (upval), GetAdsCampaignDeepLinkStoreModule (upval), ScreenProps (copy), SendBuildExperienceEventModule (upval), ResumeBuildChatModule (upval), FallbackExperienceName (copy), UseResult (copy)
 					if FFlagBuildAdUpsellModule then
@@ -470,10 +473,15 @@ local List = {
 				return ReactModule.createElement(FullscreenPageWithSafeArea, {
 					includeStatusBar = true,
 					BackgroundColor3 = Tokens.Color.Surface.Surface_0.Color3,
-					BackgroundTransparency = Tokens.Color.Surface.Surface_0.Transparency,
+					BackgroundTransparency = if HasUseThemeBackgroundResult then 1 else Tokens.Color.Surface.Surface_0.Transparency,
 					includeBottomBar = UseBuildPageLayoutModuleResult.shouldIncludeBottomBar
 				}, {
-					Page = ReactModule.createElement(View, { tag = "col align-x-center size-full bg-surface-0" }, {
+					Page = ReactModule.createElement(View, {
+						tag = if FFlagAppThemeHalloween2026BuildBackgroundModule then {
+							["col align-x-center size-full"] = true,
+							["bg-surface-0"] = not HasUseThemeBackgroundResult
+						} else "col align-x-center size-full bg-surface-0"
+					}, {
 						Header = ReactModule.createElement(BuildPageHeaderModule, {
 							LayoutOrder = 1,
 							height = UseBuildPageLayoutModuleResult.topBarHeight,

@@ -1,6 +1,7 @@
 ﻿local Moments = script:FindFirstAncestor("Moments")
 local Parent = Moments.Parent
 local ReactModule = require(Parent.React)
+local _ = require(Moments.Enums.MomentsFeedType)
 local MomentsHeaderContainerModule = require(Moments.Components.MomentsHeader.MomentsHeaderContainer)
 local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
 local config = {
@@ -23,6 +24,8 @@ return function(p1)
 		onNavigateToMyMoments = p1.onNavigateToMyMoments,
 		title = p1.title or UseLocalizationResult.defaultTitle,
 		showTopScrim = p1.showTopScrim,
-		showHamburger = p1.showHamburger
+		showHamburger = p1.showHamburger,
+		selectedFeedType = p1.selectedFeedType,
+		onFeedTypeSelected = p1.onFeedTypeSelected
 	})
 end

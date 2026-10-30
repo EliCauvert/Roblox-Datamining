@@ -10,14 +10,16 @@ local AppAppLifecycleObserverService = require(Parent.RoactServiceTags).AppAppLi
 local UseFeedOptionalFunction = require(Moments.Components.Feed.FeedContext).useFeedOptional
 local MakeRecommendationAttributionModule = require(Moments.Analytics.makeRecommendationAttribution)
 local MakeCommentCountFieldsModule = require(Moments.Analytics.makeCommentCountFields)
+local _ = require(Moments.Analytics.RecommendationContentType)
 local FFlagMomentsCommentsCountAnalyticsModule = require(Moments.Flags.FFlagMomentsCommentsCountAnalytics)
+local FFlagMomentsRecommendationContentTypeModule = require(Moments.Flags.FFlagMomentsRecommendationContentType)
 local GetCommentsSheetStoreModule = require(script.Parent.Sheet.getCommentsSheetStore)
 local CreateCommentsRecommendationSessionModule = require(script.Parent.createCommentsRecommendationSession)
 local CreateCommentsAnalyticsSessionModule = require(script.Parent.createCommentsAnalyticsSession)
 local UseCommentCapabilitiesModule = require(script.Parent.useCommentCapabilities)
 
-return function(p1, Callback)
-	-- upvalues: UseFeedOptionalFunction (copy), UseRoactServiceFunction (copy), AppAppLifecycleObserverService (copy), GetCommentsSheetStoreModule (copy), ReactModule (copy), SignalsModule (copy), UseCommentCapabilitiesModule (copy), MakeRecommendationAttributionModule (copy), CreateCommentsRecommendationSessionModule (copy), MomentsGetMomentsCommentsStoreModule (copy), MomentsCommonModule (copy), FFlagMomentsCommentsCountAnalyticsModule (copy), MakeCommentCountFieldsModule (copy), CreateCommentsAnalyticsSessionModule (copy)
+return function(p1, Callback, p2)
+	-- upvalues: UseFeedOptionalFunction (copy), UseRoactServiceFunction (copy), AppAppLifecycleObserverService (copy), GetCommentsSheetStoreModule (copy), ReactModule (copy), SignalsModule (copy), UseCommentCapabilitiesModule (copy), MakeRecommendationAttributionModule (copy), FFlagMomentsRecommendationContentTypeModule (copy), CreateCommentsRecommendationSessionModule (copy), MomentsGetMomentsCommentsStoreModule (copy), MomentsCommonModule (copy), FFlagMomentsCommentsCountAnalyticsModule (copy), MakeCommentCountFieldsModule (copy), CreateCommentsAnalyticsSessionModule (copy)
 	local UseFeedOptionalResult = UseFeedOptionalFunction()
 	local UseRoactServiceResult = UseRoactServiceFunction(AppAppLifecycleObserverService)
 	local CommentsSheetStoreModule = GetCommentsSheetStoreModule(false)
@@ -50,11 +52,11 @@ return function(p1, Callback)
 	end, { UseRoactServiceResult, UseMemoResult })
 	ReactModule.useEffect(function()
 		-- upvalues: SignalsModule (upval), UseMemoResult (copy), CommentsSheetStoreModule (copy), UseRefResult (copy), UseRefResult1 (copy), IsPlaybackActive (copy)
-		return SignalsModule.createEffect(function(p2)
+		return SignalsModule.createEffect(function(p3)
 			-- upvalues: UseMemoResult (upval), CommentsSheetStoreModule (upval), UseRefResult (upval), UseRefResult1 (upval), IsPlaybackActive (upval)
-			local GetResult = UseMemoResult.get(p2)
-			local IsOpen = CommentsSheetStoreModule.getIsOpen(p2)
-			local OpenSessionId = CommentsSheetStoreModule.getOpenSessionId(p2)
+			local GetResult = UseMemoResult.get(p3)
+			local IsOpen = CommentsSheetStoreModule.getIsOpen(p3)
+			local OpenSessionId = CommentsSheetStoreModule.getOpenSessionId(p3)
 			local FeedItemId = CommentsSheetStoreModule.getFeedItemId(false) or ""
 			local Current = UseRefResult.current
 			local Current1 = UseRefResult1.current
@@ -103,12 +105,12 @@ return function(p1, Callback)
 	local CanRead = UseCommentCapabilitiesModule().canRead
 	
 	return ReactModule.useCallback(function()
-		-- upvalues: p1 (copy), CanRead (copy), MakeRecommendationAttributionModule (upval), UseFeedOptionalResult (copy), CreateCommentsRecommendationSessionModule (upval), Callback (copy), MomentsGetMomentsCommentsStoreModule (upval), MomentsCommonModule (upval), FFlagMomentsCommentsCountAnalyticsModule (upval), MakeCommentCountFieldsModule (upval), CreateCommentsAnalyticsSessionModule (upval), UseRefResult (copy), UseRefResult1 (copy), CommentsSheetStoreModule (copy)
+		-- upvalues: p1 (copy), CanRead (copy), MakeRecommendationAttributionModule (upval), FFlagMomentsRecommendationContentTypeModule (upval), p2 (copy), UseFeedOptionalResult (copy), CreateCommentsRecommendationSessionModule (upval), Callback (copy), MomentsGetMomentsCommentsStoreModule (upval), MomentsCommonModule (upval), FFlagMomentsCommentsCountAnalyticsModule (upval), MakeCommentCountFieldsModule (upval), CreateCommentsAnalyticsSessionModule (upval), UseRefResult (copy), UseRefResult1 (copy), CommentsSheetStoreModule (copy)
 		local FeedItemId = if p1 == nil then nil else p1.feedItemId
 		
 		if FeedItemId == nil or FeedItemId == "" or not CanRead then return end
 		local Current = nil
-		local RecommendationAttributionModule = MakeRecommendationAttributionModule(p1)
+		local RecommendationAttributionModule = MakeRecommendationAttributionModule(p1, nil, if FFlagMomentsRecommendationContentTypeModule then p2 else nil)
 		
 		if UseFeedOptionalResult ~= nil and RecommendationAttributionModule ~= nil then
 			Current = CreateCommentsRecommendationSessionModule(UseFeedOptionalResult.logAction, RecommendationAttributionModule, Callback(false))
@@ -127,10 +129,7 @@ return function(p1, Callback)
 		UseRefResult1.current = CommentsAnalyticsSessionModule
 		CommentsSheetStoreModule.open(FeedItemId, Current, CommentsAnalyticsSessionModule)
 	end, {
-		p1 or false,
-		UseFeedOptionalResult or false,
-		CommentsSheetStoreModule,
-		Callback,
-		CanRead
+		p1 or false, UseFeedOptionalResult or false, CommentsSheetStoreModule,
+		Callback, FFlagMomentsRecommendationContentTypeModule and p2 or false, CanRead
 	})
 end

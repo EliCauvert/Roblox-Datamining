@@ -99,7 +99,7 @@ return function(p1, p2)
 			UseResult(Unknown)
 			
 			if CurrentItem == nil then return end
-			if CurrentItem.kind == "endState" and UseRefResult13.current and UseRefResult10.current then
+			if (CurrentItem.kind == "endState" or CurrentItem.kind == "caughtUp") and (UseRefResult13.current and UseRefResult10.current) then
 				UseRefResult10.current(p1.getCurrentIndex(false))
 			end
 			local CurrentResult = UseRefResult8.current(CurrentItem)

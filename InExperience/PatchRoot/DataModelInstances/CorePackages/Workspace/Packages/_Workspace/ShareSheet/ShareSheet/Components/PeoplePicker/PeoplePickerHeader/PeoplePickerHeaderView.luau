@@ -12,7 +12,7 @@ local SearchInputShape = FoundationModule.Enums.SearchInputShape
 return function(p1)
 	-- upvalues: ReactModule (copy), View (copy), IconButton (copy), IconName (copy), InputSize (copy), ButtonVariant (copy), SearchInput (copy), SearchInputShape (copy)
 	return ReactModule.createElement(View, {
-		tag = "row align-y-center gap-small size-full-0 auto-y padding-y-small",
+		tag = "row align-y-center gap-xsmall size-full-0 auto-y padding-y-small padding-right-small",
 		testId = "PeoplePickerHeaderView"
 	}, {
 		Back = ReactModule.createElement(View, { tag = "auto-xy", LayoutOrder = 1 }, {

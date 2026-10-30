@@ -316,7 +316,7 @@ return function(Frame: Frame)
 		getAttribution = feedItemAttribution,
 		recommendationSource = Source.recommendationSource,
 		onItemBecameActive = UseResult2,
-		onEndStateReached = if GetFFlagMomentsNonInfiniteScrollFunction() then UseResult4 else nil,
+		onEndStateReached = if GetFFlagMomentsNonInfiniteScrollFunction() or Source.endsWithCaughtUp == true then UseResult4 else nil,
 		onViewEnded = if FFlagMomentsNavigationEventModule then UseResult3 else nil,
 		inactiveDestination = if FFlagMomentsNavigationEventModule then Frame.inactiveDestination else nil
 	})
@@ -553,7 +553,7 @@ return function(Frame: Frame)
 	local IsLoaded: boolean = NoShowNavigationBar and (UseSignalStateResult4 == "Loaded" or UseSignalStateResult4 == "LoadingMore")
 	local Element = ReactModule.createElement(FeedContext.Provider, {
 		value = ReactModule.useMemo(function()
-			-- upvalues: UseMemoResult (copy), NoActive (copy), NoActive1 (copy), FFlagMomentsRenderAvatarPostsInFeed (upval), Source (copy), Telemetry (copy), UseFeedTelemetryModuleResult (copy), ImmersiveChromeStoreModule (copy), UseResult7 (copy), UseResult5 (copy), FFlagMomentsNonInfiniteScrollEndStateFixesModule (upval), GetFFlagMomentsNonInfiniteScrollFunction (upval)
+			-- upvalues: UseMemoResult (copy), NoActive (copy), NoActive1 (copy), FFlagMomentsRenderAvatarPostsInFeed (upval), Source (copy), Telemetry (copy), UseFeedTelemetryModuleResult (copy), ImmersiveChromeStoreModule (copy), UseResult7 (copy), UseResult5 (copy), FFlagMomentsNonInfiniteScrollEndStateFixesModule (upval), GetFFlagMomentsNonInfiniteScrollFunction (upval), Frame (copy)
 			return {
 				getStatus = UseMemoResult.getStatus,
 				isActiveFeed = NoActive,
@@ -570,12 +570,13 @@ return function(Frame: Frame)
 				removeCurrentItem = UseResult7,
 				scrollToNext = UseResult5,
 				loadMoreBeyondLimit = if FFlagMomentsNonInfiniteScrollEndStateFixesModule then if GetFFlagMomentsNonInfiniteScrollFunction() then UseMemoResult.loadBeyondLimit else nil else UseMemoResult.loadBeyondLimit,
-				getCanLoadMoreBeyondLimit = if FFlagMomentsNonInfiniteScrollEndStateFixesModule then UseMemoResult.getCanLoadMoreBeyondLimit else nil
+				getCanLoadMoreBeyondLimit = if FFlagMomentsNonInfiniteScrollEndStateFixesModule then UseMemoResult.getCanLoadMoreBeyondLimit else nil,
+				caughtUpState = Frame.caughtUpState
 			}
 		end, {
 			UseMemoResult, NoActive, NoActive1, Source, Telemetry,
 			UseFeedTelemetryModuleResult.flushView, ImmersiveChromeStoreModule, UseResult7,
-			UseResult5
+			UseResult5, Frame.caughtUpState
 		})
 	}, {
 		Root = ReactModule.createElement("Frame", {
@@ -604,7 +605,8 @@ return function(Frame: Frame)
 				status = UseSignalStateResult4,
 				loadMoreFailed = UseSignalStateResult7 or FFlagMomentsOptimisticProfilePending and UseSignalStateResult6 ~= nil,
 				onRetry = UseMemoResult.retry,
-				emptyContent = Frame.emptyContent
+				emptyContent = Frame.emptyContent,
+				emptyState = Frame.emptyState
 			}),
 			NavBar = if IsLoaded then ReactModule.createElement(FeedNavigationBarModule, {
 				zIndex = 3,

@@ -48,6 +48,7 @@ return ReactModule.memo(function(p1)
 		end, {}),
 		composition = Composition,
 		pageTopPadding = p1.pageTopPadding,
-		defaultFocusRef = if FFlagSduiSettingsFocusRef then p1.defaultFocusRef else nil
+		defaultFocusRef = if FFlagSduiSettingsFocusRef then p1.defaultFocusRef else nil,
+		backgroundStyle = p1.backgroundStyle
 	})
 end)

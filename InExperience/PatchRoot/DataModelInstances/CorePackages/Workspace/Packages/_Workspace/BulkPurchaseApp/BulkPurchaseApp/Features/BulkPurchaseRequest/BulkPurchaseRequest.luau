@@ -16,6 +16,7 @@ local FFlagFixVP8143Module = require(BulkPurchaseApp.Flags.FFlagFixVP8143)
 local FFlagBulkPurchaseEnablePurchaseOptionsModule = require(BulkPurchaseApp.Flags.FFlagBulkPurchaseEnablePurchaseOptions)
 local FFlagAXAddPlusUpsellToBulkPurchaseModule = require(BulkPurchaseApp.Flags.FFlagAXAddPlusUpsellToBulkPurchase)
 local FFlagAXAddOffersToBulkPurchaseModule = require(BulkPurchaseApp.Flags.FFlagAXAddOffersToBulkPurchase)
+local FFlagBulkPurchaseTestPurchaseHintModule = require(BulkPurchaseApp.Flags.FFlagBulkPurchaseTestPurchaseHint)
 local ItemListModule = require(BulkPurchaseApp.Components.ItemList)
 local _ = require(Parent.AvatarExperienceCommon)
 local _ = require(Parent.RobloxSubscriptionPurchaseApp)
@@ -36,7 +37,7 @@ local config = {
 }
 
 return function(p1)
-	-- upvalues: UseLocalizationFunction (copy), config (copy), ReactModule (copy), LocalizationRoactContext (copy), ReactFocusNavigationModule (copy), FFlagFixVP8143Module (copy), UseDesignTokensFunction (copy), ItemStatusKeyToLocalizationKeyModule (copy), MapItemsToRowPresentationFunction (copy), FFlagBulkPurchaseEnablePurchaseOptionsModule (copy), MapOwnedItemsToRowPresentationFunction (copy), MapUnpurchasableItemsToRowPresentationFunction (copy), FullPagePromptModule (copy), FullPagePromptTwoPanelLayoutModule (copy), LineItemLayoutModule (copy), StyledTextLabel (copy), FullPagePromptScrollListModule (copy), ItemListModule (copy), DividerModule (copy), PriceBoxModule (copy), FFlagAXAddPlusUpsellToBulkPurchaseModule (copy), FFlagAXAddOffersToBulkPurchaseModule (copy)
+	-- upvalues: UseLocalizationFunction (copy), config (copy), ReactModule (copy), LocalizationRoactContext (copy), ReactFocusNavigationModule (copy), FFlagFixVP8143Module (copy), UseDesignTokensFunction (copy), ItemStatusKeyToLocalizationKeyModule (copy), MapItemsToRowPresentationFunction (copy), FFlagBulkPurchaseEnablePurchaseOptionsModule (copy), MapOwnedItemsToRowPresentationFunction (copy), MapUnpurchasableItemsToRowPresentationFunction (copy), FullPagePromptModule (copy), FullPagePromptTwoPanelLayoutModule (copy), LineItemLayoutModule (copy), StyledTextLabel (copy), FullPagePromptScrollListModule (copy), ItemListModule (copy), DividerModule (copy), PriceBoxModule (copy), FFlagAXAddPlusUpsellToBulkPurchaseModule (copy), FFlagAXAddOffersToBulkPurchaseModule (copy), FFlagBulkPurchaseTestPurchaseHintModule (copy)
 	local UseLocalizationResult = UseLocalizationFunction(config)
 	local UseContextResult = ReactModule.useContext(LocalizationRoactContext)
 	local UseDefaultFocusBehaviorResult, UseDefaultFocusBehaviorResult2 = ReactFocusNavigationModule.useDefaultFocusBehavior()
@@ -132,7 +133,8 @@ return function(p1)
 			blackbirdUpsellBannerProductInfo = if FFlagAXAddPlusUpsellToBulkPurchaseModule then p1.blackbirdUpsellBannerProductInfo else nil,
 			onBlackbirdUpsellActivated = if FFlagAXAddPlusUpsellToBulkPurchaseModule then p1.onBlackbirdUpsellActivated else nil,
 			offerData = if FFlagAXAddOffersToBulkPurchaseModule then p1.offerData else nil,
-			toggleOfferSelected = if FFlagAXAddOffersToBulkPurchaseModule then p1.toggleOfferSelected else nil
+			toggleOfferSelected = if FFlagAXAddOffersToBulkPurchaseModule then p1.toggleOfferSelected else nil,
+			isTestPurchase = if FFlagBulkPurchaseTestPurchaseHintModule then p1.isTestPurchase else nil
 		})
 	}))
 end

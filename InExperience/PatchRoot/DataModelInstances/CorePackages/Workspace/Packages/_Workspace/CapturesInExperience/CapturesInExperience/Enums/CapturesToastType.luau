@@ -5,6 +5,7 @@
 	CaptureTakenWithAction = "CaptureTakenWithAction",
 	CaptureTakenWithMomentsCTA = "CaptureTakenWithMomentsCTA",
 	None = "None",
+	MomentFailed = "MomentFailed",
 	MomentProcessing = "MomentProcessing",
 	VideoCaptureFailed = "VideoCaptureFailed",
 	VideoCaptureInitializationCapturingAlreadyError = "VideoCaptureInitializationCapturingAlreadyError",

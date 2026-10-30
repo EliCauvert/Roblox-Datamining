@@ -1,8 +1,10 @@
-﻿local Parent = script:FindFirstAncestor("AppChat").Parent
+﻿local AppChat = script:FindFirstAncestor("AppChat")
+local Parent = AppChat.Parent
 local RoactModule = require(Parent.Roact)
 local WithStyleFunction = require(Parent.UIBlox).Style.withStyle
 local ChatLoadingIndicatorModule = require(script.Parent.ChatLoadingIndicator)
 local FFlagAppIaScrollAway = require(Parent.SharedFlags).FFlagAppIaScrollAway
+local FFlagAppThemeHalloween2026ChatBackgroundModule = require(AppChat.Flags.FFlagAppThemeHalloween2026ChatBackground)
 local ChatLoadingContainer = RoactModule.PureComponent:extend("ChatLoadingContainer")
 ChatLoadingContainer.defaultProps = {
 	topBarHeight = 0,
@@ -12,15 +14,18 @@ ChatLoadingContainer.defaultProps = {
 }
 
 function ChatLoadingContainer.render(p1)
-	-- upvalues: WithStyleFunction (copy), RoactModule (copy), FFlagAppIaScrollAway (copy), ChatLoadingIndicatorModule (copy)
+	-- upvalues: WithStyleFunction (copy), RoactModule (copy), FFlagAppThemeHalloween2026ChatBackgroundModule (copy), FFlagAppIaScrollAway (copy), ChatLoadingIndicatorModule (copy)
+	local PageBackgroundTransparency = p1.props.pageBackgroundTransparency
+	
 	return WithStyleFunction(function(p2)
-		-- upvalues: RoactModule (upval), FFlagAppIaScrollAway (upval), p1 (copy), ChatLoadingIndicatorModule (upval)
+		-- upvalues: RoactModule (upval), FFlagAppThemeHalloween2026ChatBackgroundModule (upval), PageBackgroundTransparency (copy), FFlagAppIaScrollAway (upval), p1 (copy), ChatLoadingIndicatorModule (upval)
 		return RoactModule.createElement("Frame", {
 			BorderSizePixel = 0,
 			ClipsDescendants = true,
+			Name = if FFlagAppThemeHalloween2026ChatBackgroundModule then "ChatLoadingContainer" else nil,
 			Size = UDim2.new(1, 0, 1, 0),
 			BackgroundColor3 = p2.Theme.BackgroundDefault.Color,
-			BackgroundTransparency = p2.Tokens.Color.None.Transparency
+			BackgroundTransparency = if PageBackgroundTransparency == nil then p2.Tokens.Color.None.Transparency else PageBackgroundTransparency
 		}, {
 			UIListLayout = RoactModule.createElement("UIListLayout", {
 				SortOrder = Enum.SortOrder.LayoutOrder,
@@ -35,7 +40,8 @@ function ChatLoadingContainer.render(p1)
 			}, {
 				ChatLoadingIndicator = RoactModule.createElement(ChatLoadingIndicatorModule, {
 					cellHeight = p1.props.cellHeight,
-					cellWidth = p1.props.cellWidth
+					cellWidth = p1.props.cellWidth,
+					pageBackgroundTransparency = PageBackgroundTransparency
 				})
 			})
 		})

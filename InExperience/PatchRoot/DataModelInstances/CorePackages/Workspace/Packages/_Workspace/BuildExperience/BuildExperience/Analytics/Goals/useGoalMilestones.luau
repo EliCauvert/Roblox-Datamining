@@ -1,11 +1,11 @@
 ﻿local Parent = script:FindFirstAncestor("BuildExperience").Parent
 local SignalsReactModule = require(Parent.SignalsReact)
-local ExperienceAnalyticsModule = require(Parent.DataHydration.ExperienceAnalytics)
+local CreatorAnalyticsModule = require(Parent.DataHydration.CreatorAnalytics)
 local t = {}
 
 return function(p1)
-	-- upvalues: ExperienceAnalyticsModule (copy), SignalsReactModule (copy), t (copy)
-	local AndFetchGoalMilestones = ExperienceAnalyticsModule.getGoalMilestonesStore(false).getAndFetchGoalMilestones(p1)
+	-- upvalues: CreatorAnalyticsModule (copy), SignalsReactModule (copy), t (copy)
+	local AndFetchGoalMilestones = CreatorAnalyticsModule.getGoalMilestonesStore(false).getAndFetchGoalMilestones(p1)
 	local UseSignalStateResult = SignalsReactModule.useSignalState(AndFetchGoalMilestones.data)
 	local UseSignalStateResult1 = SignalsReactModule.useSignalState(AndFetchGoalMilestones.status)
 	

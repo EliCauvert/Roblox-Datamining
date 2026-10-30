@@ -4,6 +4,7 @@ local ReactModule = require(Parent.React)
 local AppCompositionModule = require(Parent.AppComposition)
 local SignalsModule = require(Parent.Signals)
 local DisplayModule = require(Parent.Display)
+local FFlagFixSplitPaneGamepadLayoutJitter = require(Parent.SharedFlags).FFlagFixSplitPaneGamepadLayoutJitter
 local PaneResizerModule = require(AppSplitView.Components.PaneResizer)
 local UseSplitViewResizeModule = require(AppSplitView.Hooks.useSplitViewResize)
 local EnumsModule = require(AppSplitView.Common.Enums)
@@ -37,10 +38,11 @@ end)
 local BackgroundStyle = { Transparency = 1 }
 
 return ReactModule.memo(function(p1)
-	-- upvalues: SignalsReactModule (copy), Computed (copy), Computed1 (copy), EnumsModule (copy), UseSplitViewResizeModule (copy), ReactModule (copy), CompositionTags (copy), CompositionStyleSheet (copy), View (copy), BackgroundStyle (copy), PaneResizerModule (copy)
+	-- upvalues: SignalsReactModule (copy), Computed (copy), Computed1 (copy), EnumsModule (copy), UseSplitViewResizeModule (copy), ReactModule (copy), CompositionTags (copy), FFlagFixSplitPaneGamepadLayoutJitter (copy), CompositionStyleSheet (copy), View (copy), BackgroundStyle (copy), PaneResizerModule (copy)
 	local UseSignalStateResult = SignalsReactModule.useSignalState(Computed)
 	local UseSignalStateResult1 = SignalsReactModule.useSignalState(Computed1)
 	local UseSignalStateResult2 = if p1.navigationPane then if p1.navigationPane.width == nil then UseSignalStateResult else p1.navigationPane.width else 0
+	local UseSignalStateResult3 = if p1.supportPane then if p1.supportPane.width == nil then UseSignalStateResult1 else p1.supportPane.width else 0
 	local SupportPaneMode = p1.supportPaneMode or EnumsModule.SupportPaneMode.Normal
 	local IsSupportPaneModeMatch = SupportPaneMode == EnumsModule.SupportPaneMode.Expanded
 	local IsSupportPaneModeMatch1 = SupportPaneMode == EnumsModule.SupportPaneMode.Collapsed
@@ -51,7 +53,7 @@ return ReactModule.memo(function(p1)
 	local HasOnSupportPaneWidthChanged: boolean = NoIsSupportPaneModeMatch2 and (p1.supportPane ~= nil and (p1.supportPane.resizable == EnumsModule.PaneResizable.Horizontal and p1.onSupportPaneWidthChanged ~= nil))
 	local UseSplitViewResizeModuleResult = UseSplitViewResizeModule({
 		navWidth = UseSignalStateResult2,
-		supportWidth = if p1.supportPane then if p1.supportPane.width == nil then UseSignalStateResult1 else p1.supportPane.width else 0,
+		supportWidth = UseSignalStateResult3,
 		variant = p1.variant or EnumsModule.SplitVariant.SplitRight,
 		hasWidthOverride = p1.supportPane ~= nil and p1.supportPane.width ~= nil,
 		onSupportPaneWidthChanged = p1.onSupportPaneWidthChanged
@@ -79,9 +81,13 @@ return ReactModule.memo(function(p1)
 	else
 		_UDim2 = UseSplitViewResizeModuleResult.supportPosition
 		_UDim2_1 = UseSplitViewResizeModuleResult.supportSize
+		
+		if FFlagFixSplitPaneGamepadLayoutJitter and _UDim2_1 == nil and SupportPaneMode == EnumsModule.SupportPaneMode.Normal and UseSignalStateResult3 > 0 then
+			_UDim2_1 = UDim2.new(0, UseSignalStateResult3, 1, 0)
+		end
 	end
 	local IsSupportResizerAbovePane = p1.supportResizerAbovePane == true
-	local ZIndex: number = if IsSupportPaneModeMatch then 4 elseif NoIsSupportPaneModeMatch2 and not HasOnSupportPaneWidthChanged and not IsSupportResizerAbovePane then 3 else 1
+	local ZIndex: number = if IsSupportPaneModeMatch then 4 elseif NoIsSupportPaneModeMatch2 and (not HasOnSupportPaneWidthChanged and not IsSupportResizerAbovePane) then 3 else 1
 	
 	return ReactModule.createElement(ReactModule.Fragment, nil, {
 		CompositionStyleSheet = ReactModule.createElement(CompositionStyleSheet),

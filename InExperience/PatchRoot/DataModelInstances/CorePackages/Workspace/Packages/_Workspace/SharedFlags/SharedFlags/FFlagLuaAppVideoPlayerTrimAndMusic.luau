@@ -1,0 +1,3 @@
+﻿local FFlagLuaAppVideoLoadFailureFallbackModule = require(script.Parent.FFlagLuaAppVideoLoadFailureFallback)
+
+return game:DefineFastFlag("LuaAppVideoPlayerTrimAndMusic", false) and FFlagLuaAppVideoLoadFailureFallbackModule

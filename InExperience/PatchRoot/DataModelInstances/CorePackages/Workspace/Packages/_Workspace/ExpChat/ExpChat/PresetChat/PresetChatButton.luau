@@ -14,12 +14,16 @@ local HasPresetEmojiModule = require(script.Parent.hasPresetEmoji)
 local SetIsPresetTrayOpenModule = require(script.Parent.Thunks.setIsPresetTrayOpen)
 local FFlagExpChatUseUnifiedTooltipStore = ExpChatSharedModule.Flags.FFlagExpChatUseUnifiedTooltipStore
 local FFlagExpChatCenterMobilePresetButtonModule = require(ExpChat.Flags.FFlagExpChatCenterMobilePresetButton)
+local FFlagExpChatPresetFullWidthButtonFixesModule = require(ExpChat.Flags.FFlagExpChatPresetFullWidthButtonFixes)
 local FFlagExpChatPresetChatCircleFaceEmojiEntryPointRolloutEnabledModule = require(ExpChat.Flags.FFlagExpChatPresetChatCircleFaceEmojiEntryPointRolloutEnabled)
 local ExpChatPresetChatEmojiTabExperimentation = require(Parent.SocialExperiments).ExpChatPresetChatEmojiTabExperimentation
 
 return ReactModule.memo(function(p1)
-	-- upvalues: ReactModule (copy), LocalizationModule (copy), GetPresetChatStoreModule (copy), SignalsReactModule (copy), FFlagExpChatPresetChatCircleFaceEmojiEntryPointRolloutEnabledModule (copy), HasPresetEmojiModule (copy), ExpChatPresetChatEmojiTabExperimentation (copy), FFlagExpChatUseUnifiedTooltipStore (copy), GetChatTooltipStoreModule (copy), SetIsPresetTrayOpenModule (copy), ExpChatSharedModule (copy), ConstantsModule (copy), FoundationModule (copy), ConfigModule (copy), PresetChatTooltipModule (copy), FFlagExpChatCenterMobilePresetButtonModule (copy)
+	-- upvalues: ReactModule (copy), FFlagExpChatPresetFullWidthButtonFixesModule (copy), LocalizationModule (copy), GetPresetChatStoreModule (copy), SignalsReactModule (copy), FFlagExpChatPresetChatCircleFaceEmojiEntryPointRolloutEnabledModule (copy), HasPresetEmojiModule (copy), ExpChatPresetChatEmojiTabExperimentation (copy), FFlagExpChatUseUnifiedTooltipStore (copy), GetChatTooltipStoreModule (copy), SetIsPresetTrayOpenModule (copy), ExpChatSharedModule (copy), ConstantsModule (copy), FoundationModule (copy), ConfigModule (copy), PresetChatTooltipModule (copy), FFlagExpChatCenterMobilePresetButtonModule (copy)
 	local UseRefResult = ReactModule.useRef(false)
+	local UseRefResult1 = if FFlagExpChatPresetFullWidthButtonFixesModule then ReactModule.useRef(nil) else nil
+	local UseRefResult2 = if FFlagExpChatPresetFullWidthButtonFixesModule then ReactModule.useRef(nil) else nil
+	local UseRefResult3 = if p1.fullWidth then UseRefResult2 else UseRefResult1
 	local UseLocalizationResult = LocalizationModule.useLocalization({
 		sendQuickWords = "CoreScripts.TextChat.Action.SendQuickWords"
 	})
@@ -53,14 +57,20 @@ return ReactModule.memo(function(p1)
 			component = ConstantsModule.Analytics.Components.PresetEntryPointButton
 		}, ExpChatSharedModule.Analytics.DefaultStandardizedFields)
 	end, { PresetChatStoreModule })
-	local Element = ReactModule.createElement(PresetChatTooltipModule, { targetTextChannel = p1.targetTextChannel }, if p1.fullWidth then ReactModule.createElement(FoundationModule.Button, {
+	local Element = ReactModule.createElement(PresetChatTooltipModule, {
+		targetTextChannel = p1.targetTextChannel,
+		anchorRef = if FFlagExpChatPresetFullWidthButtonFixesModule then UseRefResult3 else nil
+	}, if p1.fullWidth then ReactModule.createElement(FoundationModule.Button, {
+		testId = "--social-exp-chat-button-send-quick-words",
 		fillBehavior = FoundationModule.Enums.FillBehavior.Fit,
 		onActivated = UseResult,
 		text = UseLocalizationResult.sendQuickWords,
 		variant = FoundationModule.Enums.ButtonVariant.Standard,
-		width = UDim.new(1, 0)
+		width = UDim.new(1, 0),
+		ref = if FFlagExpChatPresetFullWidthButtonFixesModule then UseRefResult3 else nil
 	}) else ReactModule.createElement(FoundationModule.IconButton, {
 		isDisabled = false,
+		testId = "--social-exp-chat-iconbutton-quick-words",
 		icon = {
 			name = if IsEmojiIconEnabled then ConfigModule.PresetChat.EmojiIcon else ConfigModule.PresetChat.Icon,
 			variant = if UseSignalStateResult then ConfigModule.PresetChat.IconVariantActive else ConfigModule.PresetChat.IconVariant
@@ -68,11 +78,15 @@ return ReactModule.memo(function(p1)
 		variant = FoundationModule.Enums.ButtonVariant.Standard,
 		size = if p1.size == nil then FoundationModule.Enums.InputSize.Small else p1.size,
 		isCircular = p1.isCircular == nil or p1.isCircular,
-		onActivated = UseResult
+		onActivated = UseResult,
+		ref = if FFlagExpChatPresetFullWidthButtonFixesModule then UseRefResult3 else nil
 	}))
 	
 	return if FFlagExpChatCenterMobilePresetButtonModule and p1.addTopPadding ~= nil then ReactModule.createElement(FoundationModule.View, {
-		tag = "auto-xy",
+		tag = {
+			["size-full-0 auto-y"] = FFlagExpChatPresetFullWidthButtonFixesModule and p1.fullWidth == true,
+			["auto-xy"] = not (FFlagExpChatPresetFullWidthButtonFixesModule and p1.fullWidth == true)
+		},
 		padding = {
 			top = UDim.new(0, if p1.addTopPadding then 8 else 0),
 			bottom = UDim.new(0, 1)

@@ -571,7 +571,7 @@ end)(function(Frame)
 		if FFlagExpChatPresetChatAutocompleteEnabledModule then Frame.chatInputBarSettings.TextSize else nil,
 		if FFlagExpChatPresetChatAutocompleteAnalyticsEnabledModule then RecordPresetChosen else nil,
 		if FFlagExpChatEmojiDropdownDismissAnalyticsModule then UseRefResult7 else nil,
-		if FFlagExpChatAutocompleteDropdownRedesignModule then Frame.autocompleteDropdownReducer.results else nil
+		if FFlagExpChatAutocompleteDropdownRedesignModule then Frame.autocompleteDropdownReducer and Frame.autocompleteDropdownReducer.results else nil
 	})
 	ReactModule.useEffect(function()
 		-- upvalues: UseRefResult2 (copy), UseRefResult4 (copy), UseRefResult3 (copy), NewResult (upval)
@@ -1244,7 +1244,7 @@ end)(function(Frame)
 			PaddingTop = Frame.addTopPadding and UDim.new(0, 8) or UDim.new(0, 0),
 			PaddingBottom = UDim.new(0, 1)
 		}),
-		ChatInputBarV2 = if FFlagExpChatNewInputBarModule then if FFlagExpChatNewInputBarDictationModule and (FFlagExpChatDictation1 and CanLocalUserChat) then ReactModule.createElement(ChatInputBarV2DictationModule, {
+		ChatInputBarV2 = if FFlagExpChatNewInputBarModule then if FFlagExpChatNewInputBarDictationModule and FFlagExpChatDictation1 and CanLocalUserChat then ReactModule.createElement(ChatInputBarV2DictationModule, {
 			transparencyValue = Frame.transparencyValue,
 			sendButtonContainerWidth = Frame.sendButtonContainerWidth,
 			resetTargetChannel = Frame.resetTargetChannel,
@@ -1279,7 +1279,8 @@ end)(function(Frame)
 			inputText = UseStateResult,
 			setInputText = UseStateResult2,
 			isGlobalChatTabActive = Frame.isGlobalChatTabActive,
-			onDictationActivityChanged = Frame.onDictationActivityChanged
+			onDictationActivityChanged = Frame.onDictationActivityChanged,
+			onDictationStateChanged = Frame.onDictationStateChanged
 		}) else ReactModule.createElement(ChatInputBarV2Module, {
 			transparencyValue = Frame.transparencyValue,
 			sendButtonContainerWidth = Frame.sendButtonContainerWidth,
@@ -1348,6 +1349,7 @@ end)(function(Frame)
 			isGlobalChatTabActive = Frame.isGlobalChatTabActive,
 			developerChannelTabsEnabled = Frame.developerChannelTabsEnabled,
 			onDictationActivityChanged = Frame.onDictationActivityChanged,
+			onDictationStateChanged = Frame.onDictationStateChanged,
 			onSendActivated = UseResult,
 			onSendRecordingTap = UseResult1,
 			onTranscriptionStaged = if UseSendTelemetryModuleResult then UseSendTelemetryModuleResult.stageTranscription else nil,

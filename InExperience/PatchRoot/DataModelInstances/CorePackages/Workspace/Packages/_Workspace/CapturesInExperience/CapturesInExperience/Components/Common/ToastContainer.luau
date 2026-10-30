@@ -7,6 +7,7 @@ local ReactModule = require(Parent1.React)
 local RoactUtilsModule = require(Parent1.RoactUtils)
 local SocialStopwatchModule = require(Parent1.SocialStopwatch)
 local UIBloxModule = require(Parent1.UIBlox)
+local IconName = require(Parent1.Foundation).Enums.IconName
 local Images = UIBloxModule.App.ImageSet.Images
 local Toast = UIBloxModule.App.Dialog.Toast
 local UseAnalyticsModule = require(Parent.Analytics.useAnalytics)
@@ -19,6 +20,7 @@ local CarouselOpenedModule = require(Parent.Actions.CarouselOpened)
 local ConstantsModule = require(Parent.Constants)
 local EventNamesModule = require(Parent.Analytics.EventNames)
 local ExternalShareSourceTypeModule = require(Parent.Enums.ExternalShareSourceType)
+local GetSaveToStoragePermissionModule = require(Parent.Utils.getSaveToStoragePermission)
 local ShareCaptureModule = require(Parent.Thunks.ShareCapture)
 local StartMomentsCreationFlowModule = require(Parent.Thunks.StartMomentsCreationFlow)
 local ToastVanishedModule = require(Parent.Actions.ToastVanished)
@@ -29,15 +31,16 @@ local FFlagBuildExperienceInGameCaptureToChat = SharedFlagsModule.FFlagBuildExpe
 local FFlagMomentsCreationFeatureGate = SharedFlagsModule.FFlagMomentsCreationFeatureGate
 local GetMomentsCapabilitiesFunction = require(Parent1.MomentsCommon).Stores.GetMomentsCapabilities
 local FFlagCreateMomentsToastModule = require(Parent.Flags.FFlagCreateMomentsToast)
+local FFlagCapturesInExpMomentsToastDownloadButtonModule = require(Parent.Flags.FFlagCapturesInExpMomentsToastDownloadButton)
 local FFlagEnableCapturesGalleryRetrievalCoreScriptModule = require(Parent.Flags.FFlagEnableCapturesGalleryRetrievalCoreScript)
 local IsPlatformMatch: boolean = UserInputService:GetPlatform() == Enum.Platform.Windows or UserInputService:GetPlatform() == Enum.Platform.OSX
 
 local function _(p1): boolean
-	-- upvalues: FFlagEnableCapturesGalleryRetrievalCoreScriptModule (copy), CaptureTypeModule (copy)
+	-- upvalues: FFlagCapturesInExpMomentsToastDownloadButtonModule (copy), FFlagEnableCapturesGalleryRetrievalCoreScriptModule (copy), CaptureTypeModule (copy)
 	if p1 then
 		local CaptureInfo = p1.captureInfo
 		
-		return if CaptureInfo then if FFlagEnableCapturesGalleryRetrievalCoreScriptModule then CaptureInfo.CaptureType == Enum.CaptureType.Video else CaptureInfo.type == CaptureTypeModule.Video else false
+		return if CaptureInfo then if FFlagCapturesInExpMomentsToastDownloadButtonModule and typeof(CaptureInfo) ~= "table" then CaptureInfo.CaptureType == Enum.CaptureType.Video elseif FFlagEnableCapturesGalleryRetrievalCoreScriptModule then CaptureInfo.CaptureType == Enum.CaptureType.Video else CaptureInfo.type == CaptureTypeModule.Video else false
 	else
 		return false
 	end
@@ -48,13 +51,13 @@ local config = {
 		toastTitleKey = "captureSavedToDevice",
 		iconImage = Images["icons/status/success"],
 		onActivated = if IsPlatformMatch then function(p1, _, p2)
-			-- upvalues: EventNamesModule (copy), FFlagEnableCapturesGalleryRetrievalCoreScriptModule (copy), CaptureTypeModule (copy)
+			-- upvalues: EventNamesModule (copy), FFlagCapturesInExpMomentsToastDownloadButtonModule (copy), FFlagEnableCapturesGalleryRetrievalCoreScriptModule (copy), CaptureTypeModule (copy)
 			p1.fireEvent(EventNamesModule.CapturesSavedToDeviceToastOpenButtonActivated)
 			local IsCaptureTypeMatch = nil
 			
 			if p2 then
 				local CaptureInfo = p2.captureInfo
-				IsCaptureTypeMatch = if CaptureInfo then if FFlagEnableCapturesGalleryRetrievalCoreScriptModule then CaptureInfo.CaptureType == Enum.CaptureType.Video else CaptureInfo.type == CaptureTypeModule.Video else false
+				IsCaptureTypeMatch = if CaptureInfo then if FFlagCapturesInExpMomentsToastDownloadButtonModule and typeof(CaptureInfo) ~= "table" then CaptureInfo.CaptureType == Enum.CaptureType.Video elseif FFlagEnableCapturesGalleryRetrievalCoreScriptModule then CaptureInfo.CaptureType == Enum.CaptureType.Video else CaptureInfo.type == CaptureTypeModule.Video else false
 			else
 				IsCaptureTypeMatch = false
 			end
@@ -74,13 +77,13 @@ local config = {
 		toastTitleKey = "captureSaved",
 		iconImage = Images["icons/controls/screenshot"],
 		onActivated = function(p1, Callback: (any) -> (), p2)
-			-- upvalues: EventNamesModule (copy), FFlagEnableCapturesGalleryRetrievalCoreScriptModule (copy), CaptureTypeModule (copy), SocialStopwatchModule (copy), ShareCaptureModule (copy), ExternalShareSourceTypeModule (copy)
+			-- upvalues: EventNamesModule (copy), FFlagCapturesInExpMomentsToastDownloadButtonModule (copy), FFlagEnableCapturesGalleryRetrievalCoreScriptModule (copy), CaptureTypeModule (copy), SocialStopwatchModule (copy), ShareCaptureModule (copy), ExternalShareSourceTypeModule (copy)
 			p1.fireEvent(EventNamesModule.CapturesShareToastButtonActivated)
 			local IsCaptureTypeMatch = nil
 			
 			if p2 then
 				local CaptureInfo = p2.captureInfo
-				IsCaptureTypeMatch = if CaptureInfo then if FFlagEnableCapturesGalleryRetrievalCoreScriptModule then CaptureInfo.CaptureType == Enum.CaptureType.Video else CaptureInfo.type == CaptureTypeModule.Video else false
+				IsCaptureTypeMatch = if CaptureInfo then if FFlagCapturesInExpMomentsToastDownloadButtonModule and typeof(CaptureInfo) ~= "table" then CaptureInfo.CaptureType == Enum.CaptureType.Video elseif FFlagEnableCapturesGalleryRetrievalCoreScriptModule then CaptureInfo.CaptureType == Enum.CaptureType.Video else CaptureInfo.type == CaptureTypeModule.Video else false
 			else
 				IsCaptureTypeMatch = false
 			end
@@ -110,6 +113,11 @@ local config = {
 	},
 	[CapturesToastTypeModule.CaptureTakenWithMomentsCTA] = {
 		duration = if FFlagCreateMomentsToastModule then 5 else nil
+	},
+	[CapturesToastTypeModule.MomentFailed] = {
+		toastSubtitleKey = "momentFailedDescription",
+		toastTitleKey = "momentFailedTitle",
+		iconImage = Images["icons/status/alert"]
 	},
 	[CapturesToastTypeModule.MomentProcessing] = {},
 	[CapturesToastTypeModule.VideoCaptureFailed] = {
@@ -149,7 +157,7 @@ local config = {
 }
 
 return function(_)
-	-- upvalues: UseAnalyticsModule (copy), UseDispatchFunction (copy), UseLocalizationFunction (copy), UseSelectorFunction (copy), ConstantsModule (copy), ReactModule (copy), CapturesToastTypeModule (copy), config (copy), ToastVanishedModule (copy), FFlagBuildExperienceInGameCaptureToChat (copy), DashModule (copy), FFlagMomentsCreationFeatureGate (copy), GetMomentsCapabilitiesFunction (copy), FFlagCreateMomentsToastModule (copy), ToastControllerModule (copy), HttpService (copy), StartMomentsCreationFlowModule (copy), EventNamesModule (copy), Toast (copy)
+	-- upvalues: UseAnalyticsModule (copy), UseDispatchFunction (copy), UseLocalizationFunction (copy), UseSelectorFunction (copy), ConstantsModule (copy), ReactModule (copy), CapturesToastTypeModule (copy), config (copy), ToastVanishedModule (copy), FFlagBuildExperienceInGameCaptureToChat (copy), DashModule (copy), FFlagMomentsCreationFeatureGate (copy), GetMomentsCapabilitiesFunction (copy), FFlagCreateMomentsToastModule (copy), ToastControllerModule (copy), HttpService (copy), StartMomentsCreationFlowModule (copy), EventNamesModule (copy), FFlagCapturesInExpMomentsToastDownloadButtonModule (copy), IconName (copy), GetSaveToStoragePermissionModule (copy), Toast (copy)
 	local UseAnalyticsModuleResult = UseAnalyticsModule()
 	local UseDispatchResult = UseDispatchFunction()
 	local UseLocalizationResult = UseLocalizationFunction({
@@ -158,6 +166,8 @@ return function(_)
 		capturesEnabled = "Feature.Captures.Toast.CapturesEnabled",
 		createAction = "Feature.Captures.Action.Create",
 		discoverPostWatch = "Feature.Captures.Description.DiscoverPostWatch",
+		momentFailedDescription = "Feature.Moments.Label.MomentFailedToPostBody",
+		momentFailedTitle = "Feature.Moments.Label.MomentFailedToPostTitle",
 		momentProcessingDescription = "Feature.Captures.Description.MomentProcessing",
 		momentProcessingTitle = "Feature.Captures.Toast.MomentProcessing",
 		momentsTitle = "Feature.Captures.Toast.CreateMoment2",
@@ -235,6 +245,16 @@ return function(_)
 			end
 			UseAnalyticsModuleResult.fireEvent(EventNamesModule.CapturesCreateMomentToastButtonActivated)
 		end,
+		iconAction = if FFlagCapturesInExpMomentsToastDownloadButtonModule then {
+			icon = IconName.ArrowDownToLine,
+			onActivated = function()
+				-- upvalues: UseSelectorResult1 (copy), GetSaveToStoragePermissionModule (upval), UseDispatchResult (copy), UseAnalyticsModuleResult (copy), EventNamesModule (upval)
+				if UseSelectorResult1 and UseSelectorResult1.captureInfo then
+					GetSaveToStoragePermissionModule({ UseSelectorResult1.captureInfo }, nil, UseDispatchResult)
+				end
+				UseAnalyticsModuleResult.fireEvent(EventNamesModule.CapturesCreateMomentToastDownloadActivated)
+			end
+		} else nil,
 		onDismissed = function()
 			-- upvalues: UseDispatchResult (copy), ToastVanishedModule (upval)
 			UseDispatchResult(ToastVanishedModule())
@@ -251,6 +271,18 @@ return function(_)
 		end,
 		duration = UseMemoResult.duration,
 		show = not UseSelectorResult2
+	}) elseif UseSelectorResult == CapturesToastTypeModule.MomentFailed then ReactModule.createElement(ReactModule.Fragment, {}, {
+		[UseSelectorResult] = ReactModule.createElement(ToastControllerModule, {
+			icon = "icons/brands/moments_large",
+			title = UseResult("momentFailedTitle"),
+			text = UseResult("momentFailedDescription"),
+			onDismissed = function()
+				-- upvalues: UseDispatchResult (copy), ToastVanishedModule (upval)
+				UseDispatchResult(ToastVanishedModule())
+			end,
+			duration = UseMemoResult.duration,
+			show = not UseSelectorResult2
+		})
 	}) else ReactModule.createElement(ReactModule.Fragment, {}, {
 		[UseSelectorResult] = ReactModule.createElement(Toast, {
 			duration = UseMemoResult.duration,

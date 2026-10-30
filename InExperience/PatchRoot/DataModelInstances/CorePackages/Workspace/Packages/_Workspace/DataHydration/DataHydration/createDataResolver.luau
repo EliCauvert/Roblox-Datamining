@@ -10,13 +10,14 @@ local CreateMutationLayerModule = require(DataHydration.createMutationLayer)
 local PromiseModule = require(Parent.Promise)
 local SignalsModule = require(Parent.Signals)
 local FFlagDataHydrationAccountReset = require(Parent.SharedFlags).FFlagDataHydrationAccountReset
+local FFlagSduiReleaseSearchResultsPageState = require(Parent.SharedFlags).FFlagSduiReleaseSearchResultsPageState
 local FFlagBuildExperienceMonetizationMultiKindModule = require(DataHydration.Flags.FFlagBuildExperienceMonetizationMultiKind)
 local LuaAppDataHydrationDefaultBatchSize = game:DefineFastInt("LuaAppDataHydrationDefaultBatchSize", 50)
 local LuaAppDataHydrationQueueProcessDelaySec = game:DefineFastInt("LuaAppDataHydrationQueueProcessDelaySec", 1)
 local LuaAppDataHydrationDefaultRequestTimeoutSec = game:DefineFastInt("LuaAppDataHydrationDefaultRequestTimeoutSec", 30)
 
 return function(p1)
-	-- upvalues: LuaAppDataHydrationDefaultBatchSize (copy), LuaAppDataHydrationQueueProcessDelaySec (copy), LuaAppDataHydrationDefaultRequestTimeoutSec (copy), CreateRequestQueueModule (copy), GetLocalPlayerUserIdFunction (copy), FFlagDataHydrationAccountReset (copy), SignalsModule (copy), FFlagBuildExperienceMonetizationMultiKindModule (copy), CreateMutationLayerModule (copy), PromiseModule (copy), ObserveLocalPlayerUserIdFunction (copy), Players (copy)
+	-- upvalues: LuaAppDataHydrationDefaultBatchSize (copy), LuaAppDataHydrationQueueProcessDelaySec (copy), LuaAppDataHydrationDefaultRequestTimeoutSec (copy), CreateRequestQueueModule (copy), GetLocalPlayerUserIdFunction (copy), FFlagDataHydrationAccountReset (copy), SignalsModule (copy), FFlagBuildExperienceMonetizationMultiKindModule (copy), CreateMutationLayerModule (copy), PromiseModule (copy), ObserveLocalPlayerUserIdFunction (copy), Players (copy), FFlagSduiReleaseSearchResultsPageState (copy)
 	local NoSupportsMultiGet = p1.supportsMultiGet == nil or p1.supportsMultiGet
 	local RequestBatchSize = if p1.requestBatchSize then if NoSupportsMultiGet or p1.requestBatchSize then p1.requestBatchSize else 1 elseif NoSupportsMultiGet or p1.requestBatchSize then LuaAppDataHydrationDefaultBatchSize else 1
 	local QueueProcessDelaySec = if p1.queueProcessDelaySec then if NoSupportsMultiGet or p1.queueProcessDelaySec then p1.queueProcessDelaySec else 0 elseif NoSupportsMultiGet or p1.queueProcessDelaySec then LuaAppDataHydrationQueueProcessDelaySec else 0
@@ -551,7 +552,20 @@ return function(p1)
 		return Cache.getItem(Key)
 	end
 	
-	local function clear()
+	local function releaseItem(Key)
+		-- upvalues: RequestQueueModule (copy), t (ref), t1 (copy), Cache (copy)
+		RequestQueueModule.remove(Key)
+		
+		if t[Key] then
+			t[Key] = nil
+			t1[Key] = (t1[Key] or 0) + 1
+		end
+		if Cache.removeItem then
+			Cache.removeItem(Key)
+		end
+	end
+	
+	local function clearResolverState(IsKeepCacheOnAccountReset)
 		-- upvalues: FFlagDataHydrationAccountReset (upval), Callback1 (ref), Callback (ref), DelayedThread (ref), t (ref), RequestQueueModule (copy), MutationLayerModule (ref), p1 (copy), Cache (copy)
 		if FFlagDataHydrationAccountReset then
 			Callback1(Callback(false) + 1)
@@ -571,8 +585,9 @@ return function(p1)
 			if p1.onBeforeClear then
 				p1.onBeforeClear()
 			end
-			Cache.clear()
-			
+			if not IsKeepCacheOnAccountReset then
+				Cache.clear()
+			end
 			if p1.onClear then
 				p1.onClear()
 				
@@ -591,14 +606,19 @@ return function(p1)
 		end
 	end
 	
+	local function clear()
+		-- upvalues: clearResolverState (copy)
+		clearResolverState(false)
+	end
+	
 	local Connection = nil
 	local Callback4 = nil
 	
 	if FFlagDataHydrationAccountReset then
 		Callback4 = ObserveLocalPlayerUserIdFunction(function(p15)
-			-- upvalues: LocalPlayerUserId (ref), clear (copy), FFlagBuildExperienceMonetizationMultiKindModule (upval), Callback2 (ref), Callback3 (ref)
+			-- upvalues: LocalPlayerUserId (ref), clearResolverState (copy), p1 (copy), FFlagBuildExperienceMonetizationMultiKindModule (upval), Callback2 (ref), Callback3 (ref)
 			LocalPlayerUserId = p15
-			clear()
+			clearResolverState(p1.keepCacheOnAccountReset == true)
 			
 			if FFlagBuildExperienceMonetizationMultiKindModule then
 				Callback2(Callback3(false) + 1)
@@ -606,12 +626,12 @@ return function(p1)
 		end)
 	else
 		Connection = Players:GetPropertyChangedSignal("LocalPlayer"):Connect(function()
-			-- upvalues: GetLocalPlayerUserIdFunction (upval), LocalPlayerUserId (ref), clear (copy), FFlagBuildExperienceMonetizationMultiKindModule (upval), Callback2 (ref), Callback3 (ref)
+			-- upvalues: GetLocalPlayerUserIdFunction (upval), LocalPlayerUserId (ref), clearResolverState (copy), FFlagBuildExperienceMonetizationMultiKindModule (upval), Callback2 (ref), Callback3 (ref)
 			local LocalPlayerUserId1 = GetLocalPlayerUserIdFunction()
 			
 			if LocalPlayerUserId1 ~= LocalPlayerUserId then
 				LocalPlayerUserId = LocalPlayerUserId1
-				clear()
+				clearResolverState(false)
 				
 				if FFlagBuildExperienceMonetizationMultiKindModule then
 					Callback2(Callback3(false) + 1)
@@ -628,8 +648,9 @@ return function(p1)
 		fetchItems = fetchItems,
 		refetchItem = refetchItem,
 		isRequestInQueueOrInFlight = isRequestInQueueOrInFlight,
+		releaseItem = if FFlagSduiReleaseSearchResultsPageState then releaseItem else nil,
 		dispose = function()
-			-- upvalues: Callback4 (ref), Connection (ref), FFlagDataHydrationAccountReset (upval), clear (copy), Cache (copy)
+			-- upvalues: Callback4 (ref), Connection (ref), FFlagDataHydrationAccountReset (upval), clearResolverState (copy), Cache (copy)
 			if Callback4 then
 				Callback4()
 				Callback4 = nil
@@ -639,7 +660,7 @@ return function(p1)
 				Connection = nil
 			end
 			if FFlagDataHydrationAccountReset then
-				clear()
+				clearResolverState(false)
 			end
 			Cache.dispose()
 		end,

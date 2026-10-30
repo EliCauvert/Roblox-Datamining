@@ -1,4 +1,4 @@
-﻿local _ = require(script:FindFirstAncestor("BuildExperience").Parent.DataHydration.ExperienceAnalytics)
+﻿local _ = require(script:FindFirstAncestor("BuildExperience").Parent.DataHydration.CreatorAnalytics)
 
 return function(Text: string, p1, p2): string
 	local _, Match2, Match3, Match4, Match5 = string.match(Text, "(%d+)%-(%d+)%-(%d+)T(%d+):(%d+):%d+")

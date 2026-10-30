@@ -40,39 +40,16 @@ local function _(Title)
 	GetToastStoreModule(false).triggerToast({ text = "", title = Title })
 end
 
-local _ = function(p1)
-	-- upvalues: ViewRecyclerModule (copy)
-	local Current = p1.current
-	
-	return function(p2, p3)
-		-- upvalues: Current (ref), p1 (copy), ViewRecyclerModule (upval)
-		local Current = Current
-		Current = p1.current
-		
-		if p3.scrollOffset > 33 then
-			return false
-		end
-		for _, change in p2.changes do
-			if change.type == ViewRecyclerModule.DataSourceChangeType.Insert and change.index == 1 then
-				return ViewRecyclerModule.AutoScrollTarget.Start
-			elseif change.type == ViewRecyclerModule.DataSourceChangeType.Reset and Current ~= Current then
-				return ViewRecyclerModule.AutoScrollTarget.Start
-			end
-		end
-		return false
-	end
-end
-
-return function(p2)
+return function(p1)
 	-- upvalues: UseLocalizationFunction (copy), config (copy), Players (copy), GetCommentCollectionStoreModule (copy), ReactModule (copy), SignalsReactModule (copy), CreateExpandedCommentsStoreModule (copy), SignalsModule (copy), BuildCommentRowsModule (copy), MomentsGetMomentsCommentsStoreModule (copy), MomentsGetMomentsReactionsStoreModule (copy), MomentsResolveEmoteIdModule (copy), ReactionTypeModule (copy), UseCommentCapabilitiesModule (copy), FoundationModule (copy), ViewRecyclerModule (copy), LoadStatus (copy), CommentsListItemsModule (copy), FFlagMomentsCommentsRevealAfterMeasureModule (copy), UseCommentsListRevealModule (copy), GetCommentsListCoordinatorModule (copy), FFlagMomentsComments (copy), GetCommentsSheetStoreModule (copy), EventNames (copy), UseMomentsHostFunction (copy), FFlagMomentsCommentActionsRealtimeModule (copy), GetToastStoreModule (copy), FFlagMomentsCommentsScrollToPostedCommentModule (copy)
 	local DeleteFailed = UseLocalizationFunction(config).deleteFailed
 	local LocalPlayer = Players.LocalPlayer
 	local Name = if LocalPlayer == nil then "" else LocalPlayer.Name
 	local CommentCollectionStoreModule = GetCommentCollectionStoreModule(false)
 	local UseMemoResult = ReactModule.useMemo(function()
-		-- upvalues: CommentCollectionStoreModule (copy), p2 (copy)
-		return CommentCollectionStoreModule.getState(p2.feedItemId)
-	end, { CommentCollectionStoreModule, p2.feedItemId })
+		-- upvalues: CommentCollectionStoreModule (copy), p1 (copy)
+		return CommentCollectionStoreModule.getState(p1.feedItemId)
+	end, { CommentCollectionStoreModule, p1.feedItemId })
 	local UseSignalStateResult = SignalsReactModule.useSignalState(UseMemoResult)
 	local UseStateResult = ReactModule.useState(CreateExpandedCommentsStoreModule)
 	local GetExpandedCommentIdsFunction = UseStateResult.getExpandedCommentIds
@@ -80,12 +57,12 @@ return function(p2)
 		-- upvalues: SignalsModule (upval), UseMemoResult (copy), BuildCommentRowsModule (upval), MomentsGetMomentsCommentsStoreModule (upval), GetExpandedCommentIdsFunction (copy)
 		local v1 = nil
 		
-		return SignalsModule.createComputed(function(p3)
+		return SignalsModule.createComputed(function(p2)
 			-- upvalues: UseMemoResult (upval), BuildCommentRowsModule (upval), MomentsGetMomentsCommentsStoreModule (upval), v1 (ref), GetExpandedCommentIdsFunction (upval)
-			local CommentRowsModule = BuildCommentRowsModule(UseMemoResult(p3), function(p4)
-				-- upvalues: MomentsGetMomentsCommentsStoreModule (upval), p3 (copy)
-				return MomentsGetMomentsCommentsStoreModule(false).getCachedComment(p4).data(p3)
-			end, v1, GetExpandedCommentIdsFunction(p3))
+			local CommentRowsModule = BuildCommentRowsModule(UseMemoResult(p2), function(p3)
+				-- upvalues: MomentsGetMomentsCommentsStoreModule (upval), p2 (copy)
+				return MomentsGetMomentsCommentsStoreModule(false).getCachedComment(p3).data(p2)
+			end, v1, GetExpandedCommentIdsFunction(p2))
 			v1 = CommentRowsModule
 			
 			return CommentRowsModule
@@ -93,23 +70,23 @@ return function(p2)
 	end, { UseMemoResult, GetExpandedCommentIdsFunction })))
 	local MomentsGetMomentsCommentsStoreModuleResult = MomentsGetMomentsCommentsStoreModule(false)
 	local UseSignalStateResult2 = SignalsReactModule.useSignalState(ReactModule.useMemo(function()
-		-- upvalues: MomentsGetMomentsCommentsStoreModuleResult (copy), p2 (copy)
-		return MomentsGetMomentsCommentsStoreModuleResult.getCachedMomentComments(p2.feedItemId)
+		-- upvalues: MomentsGetMomentsCommentsStoreModuleResult (copy), p1 (copy)
+		return MomentsGetMomentsCommentsStoreModuleResult.getCachedMomentComments(p1.feedItemId)
 	end, {
 		MomentsGetMomentsCommentsStoreModuleResult,
-		p2.feedItemId
+		p1.feedItemId
 	}).data)
 	local MomentsGetMomentsReactionsStoreModuleResult = MomentsGetMomentsReactionsStoreModule(false)
 	local UseSignalStateResult3 = SignalsReactModule.useSignalState((ReactModule.useMemo(function()
 		-- upvalues: SignalsModule (upval), MomentsGetMomentsReactionsStoreModuleResult (copy), MomentsResolveEmoteIdModule (upval), ReactionTypeModule (upval)
-		return SignalsModule.createComputed(function(p3)
+		return SignalsModule.createComputed(function(p2)
 			-- upvalues: MomentsGetMomentsReactionsStoreModuleResult (upval), MomentsResolveEmoteIdModule (upval), ReactionTypeModule (upval)
 			local GetCachedEmojiCatalogFunction = MomentsGetMomentsReactionsStoreModuleResult.getCachedEmojiCatalog
 			
 			if GetCachedEmojiCatalogFunction == nil then
 				return nil
 			else
-				local CachedEmojiCatalog = GetCachedEmojiCatalogFunction(p3)
+				local CachedEmojiCatalog = GetCachedEmojiCatalogFunction(p2)
 				
 				return if CachedEmojiCatalog.source == "cache" and CachedEmojiCatalog.status == "Ready" then MomentsResolveEmoteIdModule.resolveOptionalEmoteIdForReaction(CachedEmojiCatalog.emojis, ReactionTypeModule.ThumbsUp) else nil
 			end
@@ -131,7 +108,7 @@ return function(p2)
 		end
 	end, { UseStateResult1 })
 	local LoadMoreStatus = UseSignalStateResult.loadMoreStatus
-	local IsReadOnly = p2.isReadOnly
+	local IsReadOnly = p1.isReadOnly
 	local UseMemoResult1 = ReactModule.useMemo(function()
 		-- upvalues: UseSignalStateResult1 (copy), LoadMoreStatus (copy), LoadStatus (upval), CommentsListItemsModule (upval), IsReadOnly (copy)
 		local Buffer = table.create(#UseSignalStateResult1 + 2)
@@ -154,109 +131,85 @@ return function(p2)
 			getItemKey = CommentsListItemsModule.getItemKey
 		}
 	end, { UseMemoResult1 })
-	local UseCommentsListRevealModuleResult = if FFlagMomentsCommentsRevealAfterMeasureModule then UseCommentsListRevealModule(UseStateResult1, UseMemoResult1, p2.onRevealed) else nil
-	local UseRefResult = ReactModule.useRef(nil)
-	UseRefResult.current = if UseMemoResult1[1] == nil then nil else UseMemoResult1[1].key
-	local UseMemoResult3 = ReactModule.useMemo(function()
-		-- upvalues: UseRefResult (copy), ViewRecyclerModule (upval)
-		local Current = UseRefResult.current
-		
-		return function(p3, p4)
-			-- upvalues: Current (ref), UseRefResult (copy), ViewRecyclerModule (upval)
-			local Current = Current
-			Current = UseRefResult.current
-			
-			if p4.scrollOffset > 33 then
-				return false
-			end
-			for _, change in p3.changes do
-				if change.type == ViewRecyclerModule.DataSourceChangeType.Insert and change.index == 1 then
-					return ViewRecyclerModule.AutoScrollTarget.Start
-				elseif change.type == ViewRecyclerModule.DataSourceChangeType.Reset and Current ~= Current then
-					return ViewRecyclerModule.AutoScrollTarget.Start
-				end
-			end
-			return false
-		end
-	end, {})
+	local UseCommentsListRevealModuleResult = if FFlagMomentsCommentsRevealAfterMeasureModule then UseCommentsListRevealModule(UseStateResult1, UseMemoResult1, p1.onRevealed) else nil
 	local CommentsListCoordinatorModule = GetCommentsListCoordinatorModule(false)
 	local UseResult = ReactModule.useCallback(function()
-		-- upvalues: CommentsListCoordinatorModule (copy), p2 (copy)
-		return CommentsListCoordinatorModule.loadMore(p2.feedItemId, p2.sessionId)
+		-- upvalues: CommentsListCoordinatorModule (copy), p1 (copy)
+		return CommentsListCoordinatorModule.loadMore(p1.feedItemId, p1.sessionId)
 	end, {
 		CommentsListCoordinatorModule,
-		p2.feedItemId,
-		p2.sessionId
+		p1.feedItemId,
+		p1.sessionId
 	})
 	local UseResult1 = ReactModule.useCallback(function()
 		-- upvalues: UseResult (copy)
 		UseResult()
 	end, { UseResult })
+	local UseRefResult = ReactModule.useRef(0)
 	local UseRefResult1 = ReactModule.useRef(0)
-	local UseRefResult2 = ReactModule.useRef(0)
 	local UseResult2 = ReactModule.useCallback(function()
-		-- upvalues: UseRefResult1 (copy), UseRefResult2 (copy), UseResult (copy)
-		if UseRefResult1.current > 0 and UseRefResult2.current > 0 and UseRefResult2.current <= UseRefResult1.current then
+		-- upvalues: UseRefResult (copy), UseRefResult1 (copy), UseResult (copy)
+		if UseRefResult.current > 0 and UseRefResult1.current > 0 and UseRefResult1.current <= UseRefResult.current then
 			UseResult()
 		end
 	end, { UseResult })
-	local UseResult3 = ReactModule.useCallback(function(p3)
-		-- upvalues: UseRefResult1 (copy), UseResult2 (copy)
-		UseRefResult1.current = p3.Y
+	local UseResult3 = ReactModule.useCallback(function(p2)
+		-- upvalues: UseRefResult (copy), UseResult2 (copy)
+		UseRefResult.current = p2.Y
 		UseResult2()
 	end, { UseResult2 })
 	local UseResult4 = ReactModule.useCallback(function(Current)
-		-- upvalues: UseRefResult2 (copy), UseResult2 (copy)
-		UseRefResult2.current = Current
+		-- upvalues: UseRefResult1 (copy), UseResult2 (copy)
+		UseRefResult1.current = Current
 		UseResult2()
 	end, { UseResult2 })
 	local UseResult5 = ReactModule.useCallback(function()
-		-- upvalues: CommentsListCoordinatorModule (copy), p2 (copy)
-		CommentsListCoordinatorModule.retryLoadMore(p2.feedItemId, p2.sessionId)
+		-- upvalues: CommentsListCoordinatorModule (copy), p1 (copy)
+		CommentsListCoordinatorModule.retryLoadMore(p1.feedItemId, p1.sessionId)
 	end, {
 		CommentsListCoordinatorModule,
-		p2.feedItemId,
-		p2.sessionId
+		p1.feedItemId,
+		p1.sessionId
 	})
 	local UseResult6 = ReactModule.useCallback(function()
-		-- upvalues: CommentsListCoordinatorModule (copy), p2 (copy)
-		CommentsListCoordinatorModule.retryPendingSubmission(p2.feedItemId, p2.sessionId)
+		-- upvalues: CommentsListCoordinatorModule (copy), p1 (copy)
+		CommentsListCoordinatorModule.retryPendingSubmission(p1.feedItemId, p1.sessionId)
 	end, {
 		CommentsListCoordinatorModule,
-		p2.feedItemId,
-		p2.sessionId
+		p1.feedItemId,
+		p1.sessionId
 	})
 	local UseResult7 = ReactModule.useCallback(function()
-		-- upvalues: CommentsListCoordinatorModule (copy), p2 (copy)
-		CommentsListCoordinatorModule.editPendingSubmission(p2.feedItemId, p2.sessionId)
+		-- upvalues: CommentsListCoordinatorModule (copy), p1 (copy)
+		CommentsListCoordinatorModule.editPendingSubmission(p1.feedItemId, p1.sessionId)
 	end, {
 		CommentsListCoordinatorModule,
-		p2.feedItemId,
-		p2.sessionId
+		p1.feedItemId,
+		p1.sessionId
 	})
-	local AnalyticsSession = if FFlagMomentsComments then GetCommentsSheetStoreModule(false).getAnalyticsSession(p2.feedItemId, p2.sessionId) else nil
-	local UseResult8 = ReactModule.useCallback(function(CommentId, p3, p4, p5)
-		-- upvalues: FFlagMomentsComments (upval), AnalyticsSession (copy), EventNames (upval), CommentsListCoordinatorModule (copy), p2 (copy)
+	local AnalyticsSession = if FFlagMomentsComments then GetCommentsSheetStoreModule(false).getAnalyticsSession(p1.feedItemId, p1.sessionId) else nil
+	local UseResult8 = ReactModule.useCallback(function(CommentId, p2, p3, p4)
+		-- upvalues: FFlagMomentsComments (upval), AnalyticsSession (copy), EventNames (upval), CommentsListCoordinatorModule (copy), p1 (copy)
 		if FFlagMomentsComments and AnalyticsSession ~= nil then
 			AnalyticsSession.logEvent(EventNames.MomentCommentReactButtonClicked, {
 				commentId = CommentId,
-				reactionSelected = tostring(not p5)
+				reactionSelected = tostring(not p4)
 			})
 		end
-		return if p5 then CommentsListCoordinatorModule.ensureReactionAbsent(p2.feedItemId, CommentId, p3, p4) else CommentsListCoordinatorModule.ensureReactionPresent(p2.feedItemId, CommentId, p3, p4)
+		return if p4 then CommentsListCoordinatorModule.ensureReactionAbsent(p1.feedItemId, CommentId, p2, p3) else CommentsListCoordinatorModule.ensureReactionPresent(p1.feedItemId, CommentId, p2, p3)
 	end, {
 		CommentsListCoordinatorModule,
-		p2.feedItemId,
+		p1.feedItemId,
 		AnalyticsSession
 	})
-	local UseResult9 = ReactModule.useCallback(function(p3, p4, p5)
-		-- upvalues: CommentsListCoordinatorModule (copy), p2 (copy)
-		return CommentsListCoordinatorModule.ensureReactionPresent(p2.feedItemId, p3, p4, p5)
-	end, { CommentsListCoordinatorModule, p2.feedItemId })
+	local UseResult9 = ReactModule.useCallback(function(p2, p3, p4)
+		-- upvalues: CommentsListCoordinatorModule (copy), p1 (copy)
+		return CommentsListCoordinatorModule.ensureReactionPresent(p1.feedItemId, p2, p3, p4)
+	end, { CommentsListCoordinatorModule, p1.feedItemId })
 	local UseMomentsHostResult = UseMomentsHostFunction()
 	local OpenMomentCommentReportFunction = UseMomentsHostResult.openMomentCommentReport
 	local ChannelId = UseSignalStateResult.channelId
-	local UseMemoResult4 = ReactModule.useMemo(function()
+	local UseMemoResult3 = ReactModule.useMemo(function()
 		-- upvalues: OpenMomentCommentReportFunction (copy), ChannelId (copy), FFlagMomentsComments (upval), AnalyticsSession (copy), EventNames (upval), FFlagMomentsCommentActionsRealtimeModule (upval)
 		return if OpenMomentCommentReportFunction == nil or ChannelId == nil then nil else function(CommentId, ReportedUserId)
 			-- upvalues: FFlagMomentsComments (upval), AnalyticsSession (upval), EventNames (upval), FFlagMomentsCommentActionsRealtimeModule (upval), OpenMomentCommentReportFunction (upval), ChannelId (upval)
@@ -278,46 +231,46 @@ return function(p2)
 		AnalyticsSession
 	})
 	local OpenBlockUserFunction = UseMomentsHostResult.openBlockUser
-	local UseMemoResult5 = ReactModule.useMemo(function()
-		-- upvalues: OpenBlockUserFunction (copy), FFlagMomentsCommentActionsRealtimeModule (upval), AnalyticsSession (copy), CommentsListCoordinatorModule (copy), p2 (copy), UseMemoResult4 (copy)
-		return if OpenBlockUserFunction == nil then nil else function(p3, UserId)
-			-- upvalues: OpenBlockUserFunction (upval), FFlagMomentsCommentActionsRealtimeModule (upval), AnalyticsSession (upval), CommentsListCoordinatorModule (upval), p2 (upval), UseMemoResult4 (upval)
+	local UseMemoResult4 = ReactModule.useMemo(function()
+		-- upvalues: OpenBlockUserFunction (copy), FFlagMomentsCommentActionsRealtimeModule (upval), AnalyticsSession (copy), CommentsListCoordinatorModule (copy), p1 (copy), UseMemoResult3 (copy)
+		return if OpenBlockUserFunction == nil then nil else function(p2, UserId)
+			-- upvalues: OpenBlockUserFunction (upval), FFlagMomentsCommentActionsRealtimeModule (upval), AnalyticsSession (upval), CommentsListCoordinatorModule (upval), p1 (upval), UseMemoResult3 (upval)
 			OpenBlockUserFunction({
 				userId = UserId,
 				onBlockConfirmed = function()
-					-- upvalues: FFlagMomentsCommentActionsRealtimeModule (upval), AnalyticsSession (upval), CommentsListCoordinatorModule (upval), p2 (upval), UserId (copy)
+					-- upvalues: FFlagMomentsCommentActionsRealtimeModule (upval), AnalyticsSession (upval), CommentsListCoordinatorModule (upval), p1 (upval), UserId (copy)
 					if FFlagMomentsCommentActionsRealtimeModule and AnalyticsSession ~= nil then
 						AnalyticsSession.logRealtimeEvent("MomentsCommentAuthorBlock", { status = "attempted" })
 					end
-					CommentsListCoordinatorModule.hideCommentsByAuthor(p2.feedItemId, UserId)
+					CommentsListCoordinatorModule.hideCommentsByAuthor(p1.feedItemId, UserId)
 				end,
 				onBlockFailed = function()
-					-- upvalues: FFlagMomentsCommentActionsRealtimeModule (upval), AnalyticsSession (upval), CommentsListCoordinatorModule (upval), p2 (upval), UserId (copy)
+					-- upvalues: FFlagMomentsCommentActionsRealtimeModule (upval), AnalyticsSession (upval), CommentsListCoordinatorModule (upval), p1 (upval), UserId (copy)
 					if FFlagMomentsCommentActionsRealtimeModule and AnalyticsSession ~= nil then
 						AnalyticsSession.logRealtimeEvent("MomentsCommentAuthorBlock", { status = "failed" })
 					end
-					CommentsListCoordinatorModule.restoreCommentsByAuthor(p2.feedItemId, UserId)
+					CommentsListCoordinatorModule.restoreCommentsByAuthor(p1.feedItemId, UserId)
 				end,
 				onBlockSucceeded = if FFlagMomentsCommentActionsRealtimeModule and AnalyticsSession ~= nil then function()
 					-- upvalues: AnalyticsSession (upval)
 					AnalyticsSession.logRealtimeEvent("MomentsCommentAuthorBlock", { status = "succeeded" })
 				end else nil,
-				openReportUser = if UseMemoResult4 == nil then nil else function()
-					-- upvalues: UseMemoResult4 (upval), p3 (copy), UserId (copy)
-					UseMemoResult4(p3, UserId)
+				openReportUser = if UseMemoResult3 == nil then nil else function()
+					-- upvalues: UseMemoResult3 (upval), p2 (copy), UserId (copy)
+					UseMemoResult3(p2, UserId)
 				end
 			})
 		end
 	end, {
 		OpenBlockUserFunction,
-		UseMemoResult4,
+		UseMemoResult3,
 		CommentsListCoordinatorModule,
-		p2.feedItemId,
+		p1.feedItemId,
 		AnalyticsSession
 	})
 	local UseResult10 = ReactModule.useCallback(function(CommentId)
-		-- upvalues: FFlagMomentsComments (upval), AnalyticsSession (copy), EventNames (upval), DeleteFailed (copy), GetToastStoreModule (upval), CommentsListCoordinatorModule (copy), p2 (copy)
-		return CommentsListCoordinatorModule.deleteComment(p2.feedItemId, CommentId, function()
+		-- upvalues: FFlagMomentsComments (upval), AnalyticsSession (copy), EventNames (upval), DeleteFailed (copy), GetToastStoreModule (upval), CommentsListCoordinatorModule (copy), p1 (copy)
+		return CommentsListCoordinatorModule.deleteComment(p1.feedItemId, CommentId, function()
 			-- upvalues: DeleteFailed (upval), GetToastStoreModule (upval)
 			GetToastStoreModule(false).triggerToast({ text = "", title = DeleteFailed })
 		end, if FFlagMomentsComments and AnalyticsSession ~= nil then function()
@@ -326,24 +279,24 @@ return function(p2)
 		end else nil)
 	end, {
 		CommentsListCoordinatorModule,
-		p2.feedItemId,
+		p1.feedItemId,
 		AnalyticsSession,
 		DeleteFailed
 	})
-	local UseRefResult3 = ReactModule.useRef(nil)
+	local UseRefResult2 = ReactModule.useRef(nil)
 	local ListRef = nil
 	
 	if FFlagMomentsCommentsScrollToPostedCommentModule then
-		local UseRefResult4 = ReactModule.useRef(nil)
-		ListRef = UseRefResult4
+		local UseRefResult3 = ReactModule.useRef(nil)
+		ListRef = UseRefResult3
 		local PendingSubmission = UseSignalStateResult.pendingSubmission
 		local ClientRequestId = if PendingSubmission == nil then nil else PendingSubmission.clientRequestId
-		local UseRefResult5 = ReactModule.useRef(ClientRequestId)
+		local UseRefResult4 = ReactModule.useRef(ClientRequestId)
 		ReactModule.useEffect(function()
-			-- upvalues: ClientRequestId (copy), UseRefResult5 (copy), UseRefResult4 (copy)
-			if ClientRequestId == nil or ClientRequestId == UseRefResult5.current then return end
-			UseRefResult5.current = ClientRequestId
-			local Current = UseRefResult4.current
+			-- upvalues: ClientRequestId (copy), UseRefResult4 (copy), UseRefResult3 (copy)
+			if ClientRequestId == nil or ClientRequestId == UseRefResult4.current then return end
+			UseRefResult4.current = ClientRequestId
+			local Current = UseRefResult3.current
 			
 			if Current ~= nil then
 				Current.scrollToOffset(0)
@@ -359,19 +312,19 @@ return function(p2)
 		layout = UseStateResult1,
 		rowBleed = Small,
 		row = ReactModule.useMemo(function()
-			-- upvalues: Name (copy), p2 (copy), UseSignalStateResult4 (copy), CreatorEnabled (copy), ViewerCanWrite (copy), Shift300 (copy), UseRefResult3 (copy), UseResult8 (copy), UseResult9 (copy), UseMemoResult4 (copy), UseMemoResult5 (copy), UseResult10 (copy), UseStateResult (copy), UseResult6 (copy), UseResult7 (copy), UseResult5 (copy)
+			-- upvalues: Name (copy), p1 (copy), UseSignalStateResult4 (copy), CreatorEnabled (copy), ViewerCanWrite (copy), Shift300 (copy), UseRefResult2 (copy), UseResult8 (copy), UseResult9 (copy), UseMemoResult3 (copy), UseMemoResult4 (copy), UseResult10 (copy), UseStateResult (copy), UseResult6 (copy), UseResult7 (copy), UseResult5 (copy)
 			return {
 				viewerUsername = Name,
-				feedItemId = p2.feedItemId,
+				feedItemId = p1.feedItemId,
 				thumbsUpEmoteId = UseSignalStateResult4,
 				creatorEnabled = CreatorEnabled,
 				viewerCanWrite = ViewerCanWrite,
 				avatarBackgroundStyle = Shift300,
-				scrollingFrameRef = UseRefResult3,
+				scrollingFrameRef = UseRefResult2,
 				onToggleReaction = UseResult8,
 				onAddReaction = UseResult9,
-				onReportComment = UseMemoResult4,
-				onBlockCommentAuthor = UseMemoResult5,
+				onReportComment = UseMemoResult3,
+				onBlockCommentAuthor = UseMemoResult4,
 				onDeleteComment = UseResult10,
 				onToggleCommentExpanded = UseStateResult.toggle,
 				onRetryPendingSubmission = UseResult6,
@@ -379,17 +332,16 @@ return function(p2)
 				onRetryLoadMore = UseResult5
 			}
 		end, {
-			Name, p2.feedItemId, UseSignalStateResult4, CreatorEnabled, ViewerCanWrite,
-			Shift300, UseResult8, UseResult9, UseMemoResult4, UseMemoResult5, UseResult10,
+			Name, p1.feedItemId, UseSignalStateResult4, CreatorEnabled, ViewerCanWrite,
+			Shift300, UseResult8, UseResult9, UseMemoResult3, UseMemoResult4, UseResult10,
 			UseStateResult, UseResult6, UseResult7, UseResult5
 		}),
-		listScrollingFrameRef = UseRefResult3,
+		listScrollingFrameRef = UseRefResult2,
 		listRef = ListRef,
 		isScrollingEnabled = SignalsReactModule.useSignalBinding(GetCommentsSheetStoreModule(false).getIsListScrollingEnabled),
 		onEndReached = if UseSignalStateResult.hasMore then UseResult1 else nil,
 		onViewportChanged = UseResult3,
 		onContentLengthChanged = UseResult4,
-		onVisibleRangeChanged = if UseCommentsListRevealModuleResult == nil then nil else UseCommentsListRevealModuleResult.onVisibleRangeChanged,
-		autoScrollOnChange = UseMemoResult3
+		onVisibleRangeChanged = if UseCommentsListRevealModuleResult == nil then nil else UseCommentsListRevealModuleResult.onVisibleRangeChanged
 	}
 end

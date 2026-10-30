@@ -1,3 +1,3 @@
 ﻿local FFlagExpChatNewInputBarModule = require(script.Parent.FFlagExpChatNewInputBar)
 
-return game:DefineFastFlag("ExpChatAutocompleteDropdownRedesign2", false) and FFlagExpChatNewInputBarModule
+return game:DefineFastFlag("ExpChatAutocompleteDropdownRedesign3", false) and FFlagExpChatNewInputBarModule

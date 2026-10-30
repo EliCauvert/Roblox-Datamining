@@ -9,7 +9,10 @@ local SignalsReactModule = require(CorePackages.Packages.SignalsReact)
 local FoundationModule = require(CorePackages.Packages.Foundation)
 local Default = require(RobloxGui.Modules.VoiceChat.VoiceChatServiceManager).default
 local VoiceIndicatorFuncModule = require(RobloxGui.Modules.VoiceChat.Components.VoiceIndicatorFunc)
-local FFlagProactiveVoiceRestrictionsUFR = require(CorePackages.Workspace.Packages.SharedFlags).FFlagProactiveVoiceRestrictionsUFR
+local ShowVoiceRestrictionEndedSnackbarModule = require(RobloxGui.Modules.VoiceChat.Helpers.showVoiceRestrictionEndedSnackbar)
+local SharedFlagsModule = require(CorePackages.Workspace.Packages.SharedFlags)
+local FFlagProactiveVoiceRestrictionsUFR = SharedFlagsModule.FFlagProactiveVoiceRestrictionsUFR
+local FFlagReactiveVoiceRestrictionsUFR = SharedFlagsModule.FFlagReactiveVoiceRestrictionsUFR
 local VoiceAnalyticsModule = require(RobloxGui.Modules.Settings.Analytics.VoiceAnalytics)
 local EnableChromeAudioFocusManagement = game:DefineFastFlag("EnableChromeAudioFocusManagement", false)
 local EnableChromeAudioFocusManagement1 = game:GetEngineFeature("AudioFocusManagement") and EnableChromeAudioFocusManagement
@@ -31,22 +34,26 @@ local ChromeIntegrationsToggleMic = if require(RobloxGui.Modules.Flags.GetFFlagE
 local RegisterResult = nil
 
 local function handleRestrictedActivation(): boolean
-	-- upvalues: Default (copy)
+	-- upvalues: Default (copy), FFlagReactiveVoiceRestrictionsUFR (copy), ShowVoiceRestrictionEndedSnackbarModule (copy)
 	local VoiceRestrictionState = Default:GetVoiceRestrictionState(false)
 	
 	if VoiceRestrictionState == "restricted" then
 		Default:ShowVoiceRestriction()
+	elseif FFlagReactiveVoiceRestrictionsUFR and VoiceRestrictionState == "hiddenUntilRejoin" then
+		ShowVoiceRestrictionEndedSnackbarModule()
 	end
 	return VoiceRestrictionState ~= "normal"
 end
 
 local function Activated(_)
-	-- upvalues: FFlagProactiveVoiceRestrictionsUFR (copy), Default (copy), MicConsumerRegistry (copy), NewResult1 (copy), ChromeIntegrationsToggleMic (ref)
+	-- upvalues: FFlagProactiveVoiceRestrictionsUFR (copy), Default (copy), FFlagReactiveVoiceRestrictionsUFR (copy), ShowVoiceRestrictionEndedSnackbarModule (copy), MicConsumerRegistry (copy), NewResult1 (copy), ChromeIntegrationsToggleMic (ref)
 	if FFlagProactiveVoiceRestrictionsUFR then
 		local VoiceRestrictionState = Default:GetVoiceRestrictionState(false)
 		
 		if VoiceRestrictionState == "restricted" then
 			Default:ShowVoiceRestriction()
+		elseif FFlagReactiveVoiceRestrictionsUFR and VoiceRestrictionState == "hiddenUntilRejoin" then
+			ShowVoiceRestrictionEndedSnackbarModule()
 		end
 		if VoiceRestrictionState ~= "normal" then return end
 	end
@@ -69,12 +76,14 @@ local function Activated(_)
 end
 
 local function Activated1(_)
-	-- upvalues: FFlagProactiveVoiceRestrictionsUFR (copy), Default (copy)
+	-- upvalues: FFlagProactiveVoiceRestrictionsUFR (copy), Default (copy), FFlagReactiveVoiceRestrictionsUFR (copy), ShowVoiceRestrictionEndedSnackbarModule (copy)
 	if FFlagProactiveVoiceRestrictionsUFR then
 		local VoiceRestrictionState = Default:GetVoiceRestrictionState(false)
 		
 		if VoiceRestrictionState == "restricted" then
 			Default:ShowVoiceRestriction()
+		elseif FFlagReactiveVoiceRestrictionsUFR and VoiceRestrictionState == "hiddenUntilRejoin" then
+			ShowVoiceRestrictionEndedSnackbarModule()
 		end
 		if VoiceRestrictionState ~= "normal" then return end
 	end
@@ -82,12 +91,14 @@ local function Activated1(_)
 end
 
 local function Activated2(_)
-	-- upvalues: FFlagProactiveVoiceRestrictionsUFR (copy), Default (copy)
+	-- upvalues: FFlagProactiveVoiceRestrictionsUFR (copy), Default (copy), FFlagReactiveVoiceRestrictionsUFR (copy), ShowVoiceRestrictionEndedSnackbarModule (copy)
 	if FFlagProactiveVoiceRestrictionsUFR then
 		local VoiceRestrictionState = Default:GetVoiceRestrictionState(false)
 		
 		if VoiceRestrictionState == "restricted" then
 			Default:ShowVoiceRestriction()
+		elseif FFlagReactiveVoiceRestrictionsUFR and VoiceRestrictionState == "hiddenUntilRejoin" then
+			ShowVoiceRestrictionEndedSnackbarModule()
 		end
 		if VoiceRestrictionState ~= "normal" then return end
 	end
@@ -102,7 +113,7 @@ RegisterResult = require(Chrome.Service):register({
 	isActivated = NewResult,
 	components = {
 		Icon = function(_)
-			-- upvalues: FFlagTokenizeUnibarConstantsWithStyleProvider (copy), UnibarStyle (copy), ConstantsModule (copy), FFlagEnablePlaytestModeUnibar (copy), UseIsPlaytestModeModule (copy), MicConsumerRegistry (copy), Default (copy), ReactModule (copy), FFlagProactiveVoiceRestrictionsUFR (copy), SignalsReactModule (copy), FoundationModule (copy), VoiceIndicatorFuncModule (copy), Players (copy), RedVoiceDotModule (copy)
+			-- upvalues: FFlagTokenizeUnibarConstantsWithStyleProvider (copy), UnibarStyle (copy), ConstantsModule (copy), FFlagEnablePlaytestModeUnibar (copy), UseIsPlaytestModeModule (copy), MicConsumerRegistry (copy), Default (copy), ReactModule (copy), FFlagProactiveVoiceRestrictionsUFR (copy), SignalsReactModule (copy), FoundationModule (copy), FFlagReactiveVoiceRestrictionsUFR (copy), VoiceIndicatorFuncModule (copy), Players (copy), RedVoiceDotModule (copy)
 			local ICONSIZE = if FFlagTokenizeUnibarConstantsWithStyleProvider then UnibarStyle.use().ICON_SIZE else ConstantsModule.ICON_SIZE
 			local UseIsPlaytestModeModuleResult = if FFlagEnablePlaytestModeUnibar then UseIsPlaytestModeModule() else nil
 			local MicDark: string = if FFlagEnablePlaytestModeUnibar and UseIsPlaytestModeModuleResult then "MicDark" else "MicLight"
@@ -163,6 +174,11 @@ RegisterResult = require(Chrome.Service):register({
 				Image = "icons/controls/microphoneMute",
 				imageStyle = { Transparency = 0.5 },
 				Size = UDim2.fromOffset(ICONSIZE, ICONSIZE)
+			}) elseif FFlagReactiveVoiceRestrictionsUFR and UseSignalStateResult == "hiddenUntilRejoin" then ReactModule.createElement("ImageLabel", {
+				BackgroundTransparency = 1,
+				BorderSizePixel = 0,
+				Size = UDim2.new(0, ICONSIZE, 0, ICONSIZE),
+				Image = Default:GetIcon("Muted", MicDark)
 			}) elseif ImageLabel then ImageLabel else ReactModule.createElement("Frame", {
 				BackgroundTransparency = 1,
 				Size = UDim2.new(0, ICONSIZE, 0, ICONSIZE)
@@ -187,28 +203,35 @@ local function _(p1)
 end
 
 local _ = function(): boolean
-	-- upvalues: Default (copy), RegisterResult (ref), handleRestrictedActivation (copy)
+	-- upvalues: Default (copy), RegisterResult (ref), handleRestrictedActivation (copy), FFlagReactiveVoiceRestrictionsUFR (copy)
 	if Default:GetVoiceRestrictionState(false) == "normal" then
 		return false
-	else
-		RegisterResult.activated = handleRestrictedActivation
-		RegisterResult.availability:unavailable()
-		
-		return true
 	end
+	RegisterResult.activated = handleRestrictedActivation
+	
+	if FFlagReactiveVoiceRestrictionsUFR then
+		RegisterResult.availability:pinned()
+	else
+		RegisterResult.availability:unavailable()
+	end
+	return true
 end
 
 local function observeMicPresentation()
-	-- upvalues: SignalsModule (copy), Default (copy), NewResult (copy), RegisterResult (ref), handleRestrictedActivation (copy)
+	-- upvalues: SignalsModule (copy), Default (copy), NewResult (copy), RegisterResult (ref), handleRestrictedActivation (copy), FFlagReactiveVoiceRestrictionsUFR (copy)
 	local Effect = SignalsModule.createEffect(function(p1)
-		-- upvalues: Default (upval), NewResult (upval), RegisterResult (upval), handleRestrictedActivation (upval)
+		-- upvalues: Default (upval), NewResult (upval), RegisterResult (upval), handleRestrictedActivation (upval), FFlagReactiveVoiceRestrictionsUFR (upval)
 		NewResult:set(Default:GetVoiceRestrictionState(p1) == "normal" and Default.localMuted == false)
 		
-		if Default:GetVoiceRestrictionState(false) ~= "normal" then
-			RegisterResult.activated = handleRestrictedActivation
-			RegisterResult.availability:unavailable()
+		if Default:GetVoiceRestrictionState(false) == "normal" then return end
+		RegisterResult.activated = handleRestrictedActivation
+		
+		if FFlagReactiveVoiceRestrictionsUFR then
+			RegisterResult.availability:pinned()
 			
 			return
+		else
+			RegisterResult.availability:unavailable()
 		end
 	end)
 	local EventConnection = Default.muteChanged.Event:Connect(function()
@@ -224,14 +247,19 @@ local function observeMicPresentation()
 end
 
 local function applyVoiceUIVisibility()
-	-- upvalues: FFlagProactiveVoiceRestrictionsUFR (copy), Default (copy), RegisterResult (ref), handleRestrictedActivation (copy)
+	-- upvalues: FFlagProactiveVoiceRestrictionsUFR (copy), Default (copy), RegisterResult (ref), handleRestrictedActivation (copy), FFlagReactiveVoiceRestrictionsUFR (copy)
 	if FFlagProactiveVoiceRestrictionsUFR then
 		local Flag = nil
 		if Default:GetVoiceRestrictionState(false) == "normal" then
 			Flag = false
 		else
 			RegisterResult.activated = handleRestrictedActivation
-			RegisterResult.availability:unavailable()
+			
+			if FFlagReactiveVoiceRestrictionsUFR then
+				RegisterResult.availability:pinned()
+			else
+				RegisterResult.availability:unavailable()
+			end
 			Flag = true
 		end
 		if Flag then return end
@@ -246,14 +274,19 @@ local function applyVoiceUIVisibility()
 end
 
 local function updateMicAvailabilityFromConsumers()
-	-- upvalues: FFlagProactiveVoiceRestrictionsUFR (copy), Default (copy), RegisterResult (ref), handleRestrictedActivation (copy)
+	-- upvalues: FFlagProactiveVoiceRestrictionsUFR (copy), Default (copy), RegisterResult (ref), handleRestrictedActivation (copy), FFlagReactiveVoiceRestrictionsUFR (copy)
 	if FFlagProactiveVoiceRestrictionsUFR then
 		local Flag = nil
 		if Default:GetVoiceRestrictionState(false) == "normal" then
 			Flag = false
 		else
 			RegisterResult.activated = handleRestrictedActivation
-			RegisterResult.availability:unavailable()
+			
+			if FFlagReactiveVoiceRestrictionsUFR then
+				RegisterResult.availability:pinned()
+			else
+				RegisterResult.availability:unavailable()
+			end
 			Flag = true
 		end
 		if Flag then return end
@@ -271,14 +304,19 @@ local function updateMicAvailabilityFromConsumers()
 end
 
 local function updateVoiceState(_, NewState)
-	-- upvalues: FFlagProactiveVoiceRestrictionsUFR (copy), Default (copy), RegisterResult (ref), handleRestrictedActivation (copy), EnableChromeAudioFocusManagement1 (copy), MicConsumerRegistry (copy), updateMicAvailabilityFromConsumers (copy), Activated1 (copy), Activated2 (copy), Activated (copy)
+	-- upvalues: FFlagProactiveVoiceRestrictionsUFR (copy), Default (copy), RegisterResult (ref), handleRestrictedActivation (copy), FFlagReactiveVoiceRestrictionsUFR (copy), EnableChromeAudioFocusManagement1 (copy), MicConsumerRegistry (copy), updateMicAvailabilityFromConsumers (copy), Activated1 (copy), Activated2 (copy), Activated (copy)
 	if FFlagProactiveVoiceRestrictionsUFR then
 		local Flag = nil
 		if Default:GetVoiceRestrictionState(false) == "normal" then
 			Flag = false
 		else
 			RegisterResult.activated = handleRestrictedActivation
-			RegisterResult.availability:unavailable()
+			
+			if FFlagReactiveVoiceRestrictionsUFR then
+				RegisterResult.availability:pinned()
+			else
+				RegisterResult.availability:unavailable()
+			end
 			Flag = true
 		end
 		if Flag then return end
@@ -292,7 +330,12 @@ local function updateVoiceState(_, NewState)
 						Flag = false
 					else
 						RegisterResult.activated = handleRestrictedActivation
-						RegisterResult.availability:unavailable()
+						
+						if FFlagReactiveVoiceRestrictionsUFR then
+							RegisterResult.availability:pinned()
+						else
+							RegisterResult.availability:unavailable()
+						end
 						Flag = true
 					end
 					if Flag then break end
@@ -336,7 +379,7 @@ if require(Chrome.Integrations.isVoiceChatSupported)() then
 		script.Destroying:Once((observeMicPresentation()))
 	end
 	Default:asyncInit():andThen(function()
-		-- upvalues: Default (copy), updateVoiceState (copy), EnableChromeAudioFocusManagement1 (copy), applyVoiceUIVisibility (copy), FFlagProactiveVoiceRestrictionsUFR (copy), RegisterResult (ref), handleRestrictedActivation (copy)
+		-- upvalues: Default (copy), updateVoiceState (copy), EnableChromeAudioFocusManagement1 (copy), applyVoiceUIVisibility (copy), FFlagProactiveVoiceRestrictionsUFR (copy), RegisterResult (ref), handleRestrictedActivation (copy), FFlagReactiveVoiceRestrictionsUFR (copy)
 		local Service = Default:getService()
 		
 		if Service then
@@ -353,7 +396,12 @@ if require(Chrome.Integrations.isVoiceChatSupported)() then
 						Flag = false
 					else
 						RegisterResult.activated = handleRestrictedActivation
-						RegisterResult.availability:unavailable()
+						
+						if FFlagReactiveVoiceRestrictionsUFR then
+							RegisterResult.availability:pinned()
+						else
+							RegisterResult.availability:unavailable()
+						end
 						Flag = true
 					end
 					if Flag then return end
@@ -374,7 +422,12 @@ if require(Chrome.Integrations.isVoiceChatSupported)() then
 						Flag = false
 					else
 						RegisterResult.activated = handleRestrictedActivation
-						RegisterResult.availability:unavailable()
+						
+						if FFlagReactiveVoiceRestrictionsUFR then
+							RegisterResult.availability:pinned()
+						else
+							RegisterResult.availability:unavailable()
+						end
 						Flag = true
 					end
 					if not Flag then

@@ -3,6 +3,7 @@ local Parent = InExperienceShop.Parent
 local ReactModule = require(Parent.React)
 local SignalsReactModule = require(Parent.SignalsReact)
 local FFlagEnableShopPrefetchModule = require(InExperienceShop.Flags.FFlagEnableShopPrefetch)
+local FFlagEnableFreeTrialBlueDotModule = require(InExperienceShop.Flags.FFlagEnableFreeTrialBlueDot)
 local GetInExperienceShopStoreModule = require(InExperienceShop.Stores.getInExperienceShopStore)
 local LogCounterModule = require(InExperienceShop.Internal.logCounter)
 local ShopDebugLoggerModule = require(InExperienceShop.Internal.ShopDebugLogger)
@@ -14,10 +15,10 @@ local UseShopViewModelModule = require(script.Parent.useShopViewModel)
 local Flag = false
 
 return function(p1)
-	-- upvalues: SignalsReactModule (copy), GetInExperienceShopStoreModule (copy), ReactModule (copy), FFlagEnableShopPrefetchModule (copy), Flag (ref), ShopDebugLoggerModule (copy), LogCounterModule (copy), OpenCounterModule (copy), FirstOpenCounterModule (copy), FirstOpenPrefetchHitCounterModule (copy), UseShopViewModelModule (copy), ShopViewModule (copy)
+	-- upvalues: SignalsReactModule (copy), GetInExperienceShopStoreModule (copy), ReactModule (copy), FFlagEnableShopPrefetchModule (copy), Flag (ref), ShopDebugLoggerModule (copy), LogCounterModule (copy), OpenCounterModule (copy), FirstOpenCounterModule (copy), FirstOpenPrefetchHitCounterModule (copy), FFlagEnableFreeTrialBlueDotModule (copy), InExperienceShop (copy), UseShopViewModelModule (copy), ShopViewModule (copy)
 	local UseSignalStateResult = SignalsReactModule.useSignalState(GetInExperienceShopStoreModule)
 	ReactModule.useEffect(function()
-		-- upvalues: FFlagEnableShopPrefetchModule (upval), Flag (upval), ShopDebugLoggerModule (upval), LogCounterModule (upval), OpenCounterModule (upval), FirstOpenCounterModule (upval), UseSignalStateResult (copy), FirstOpenPrefetchHitCounterModule (upval)
+		-- upvalues: FFlagEnableShopPrefetchModule (upval), Flag (upval), ShopDebugLoggerModule (upval), LogCounterModule (upval), OpenCounterModule (upval), FirstOpenCounterModule (upval), UseSignalStateResult (copy), FirstOpenPrefetchHitCounterModule (upval), FFlagEnableFreeTrialBlueDotModule (upval), InExperienceShop (upval)
 		local NoFlag: boolean = FFlagEnableShopPrefetchModule and not Flag
 		ShopDebugLoggerModule.logLazy(function(): string
 			-- upvalues: NoFlag (copy)
@@ -37,6 +38,9 @@ return function(p1)
 			if v1 then
 				LogCounterModule(FirstOpenPrefetchHitCounterModule)
 			end
+		end
+		if FFlagEnableFreeTrialBlueDotModule then
+			require(InExperienceShop.submitFreeTrialBlueDot).dismiss()
 		end
 		task.spawn(function()
 			-- upvalues: ShopDebugLoggerModule (upval), UseSignalStateResult (upval)

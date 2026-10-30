@@ -35,6 +35,7 @@ local FFlagMomentsAvatarLookTryOn = require(Parent.SharedFlags).FFlagMomentsAvat
 local FFlagMomentsRenderAvatarPostsInFeed = SharedFlagsModule.FFlagMomentsRenderAvatarPostsInFeed
 local GetFFlagMomentsDisplayWakeLockModule = require(Moments.Flags.GetFFlagMomentsDisplayWakeLock)
 local FFlagMomentsFixOverlayRemountImpressionsModule = require(Moments.Flags.FFlagMomentsFixOverlayRemountImpressions)
+local FFlagMomentsRecommendationContentTypeModule = require(Moments.Flags.FFlagMomentsRecommendationContentType)
 local UseDisplayWakeLockModule = require(Moments.Hooks.useDisplayWakeLock)
 local UseIsPlayingModule = require(Moments.Hooks.useIsPlaying)
 local UseMomentsSessionFunction = require(Moments.Stores.GetMomentsStore.MomentsSessionContext).useMomentsSession
@@ -78,7 +79,7 @@ local function OverlayInfoFrame(p1)
 end
 
 return function(p1)
-	-- upvalues: UseTokensFunction (copy), UseCompositionLayoutFunction (copy), UseDeviceInsetsFunction (copy), ReactUtilsModule (copy), MomentPushedFeedSafeAreaContextModule (copy), FFlagMomentsRenderAvatarPostsInFeed (copy), GetFFlagMomentsRenderPostAssetsModule (copy), ReactModule (copy), SignalsModule (copy), MomentsGetPostAssetStoreModule (copy), SignalsReactModule (copy), DeriveMomentFromPostModule (copy), FFlagMomentsAvatarLookTryOn (copy), UseMomentsHostFunction (copy), FFlagMomentsComments (copy), VideoLiftContainerModule (copy), UseCommentsChromeTransparencyModule (copy), UseCommentsEventsModule (copy), UseMomentsSessionFunction (copy), TopContentModule (copy), ScrubberModule (copy), AvatarActionBarModule (copy), CallToActionModule (copy), MomentLayoutModule (copy), OverlayInfoFrame (copy), MomentContextModule (copy), View (copy), Text (copy), VideoScrimModule (copy), MomentGestureLayerModule (copy), GradientBackdrop (copy), PlaybackToggleIndicatorModule (copy), ReactionExplosionLayerModule (copy), GetFFlagMomentsDisplayWakeLockModule (copy), DisplayWakeLockEffect (copy), FFlagMomentsFixOverlayRemountImpressionsModule (copy), MomentImpressionMemoryModule (copy), ReactionEffectsContextModule (copy)
+	-- upvalues: UseTokensFunction (copy), UseCompositionLayoutFunction (copy), UseDeviceInsetsFunction (copy), ReactUtilsModule (copy), MomentPushedFeedSafeAreaContextModule (copy), FFlagMomentsRenderAvatarPostsInFeed (copy), GetFFlagMomentsRenderPostAssetsModule (copy), ReactModule (copy), SignalsModule (copy), MomentsGetPostAssetStoreModule (copy), SignalsReactModule (copy), DeriveMomentFromPostModule (copy), FFlagMomentsAvatarLookTryOn (copy), UseMomentsHostFunction (copy), FFlagMomentsComments (copy), VideoLiftContainerModule (copy), UseCommentsChromeTransparencyModule (copy), UseCommentsEventsModule (copy), UseMomentsSessionFunction (copy), FFlagMomentsRecommendationContentTypeModule (copy), TopContentModule (copy), ScrubberModule (copy), AvatarActionBarModule (copy), CallToActionModule (copy), MomentLayoutModule (copy), OverlayInfoFrame (copy), MomentContextModule (copy), View (copy), Text (copy), VideoScrimModule (copy), MomentGestureLayerModule (copy), GradientBackdrop (copy), PlaybackToggleIndicatorModule (copy), ReactionExplosionLayerModule (copy), GetFFlagMomentsDisplayWakeLockModule (copy), DisplayWakeLockEffect (copy), FFlagMomentsFixOverlayRemountImpressionsModule (copy), MomentImpressionMemoryModule (copy), ReactionEffectsContextModule (copy)
 	local UseTokensResult = UseTokensFunction()
 	local UseCompositionLayoutResult = UseCompositionLayoutFunction()
 	local UseDeviceInsetsResult = UseDeviceInsetsFunction()
@@ -148,7 +149,7 @@ return function(p1)
 		MediaSurface = ReactModule.createElement(VideoLiftContainerModule, { feedItemId = Data.feedItemId }, MediaSurface)
 	end
 	local UseCommentsChromeTransparencyModuleResult = if FFlagMomentsComments and UseCommentsChromeTransparencyModule ~= nil then UseCommentsChromeTransparencyModule(Data.feedItemId) else nil
-	local UseCommentsEventsModuleResult = if FFlagMomentsComments and UseCommentsEventsModule ~= nil then UseCommentsEventsModule(if Moment == nil then nil else Moment.recommendationMetadata, UseMomentsSessionFunction().getMomentsSessionId) else nil
+	local UseCommentsEventsModuleResult = if FFlagMomentsComments and UseCommentsEventsModule ~= nil then UseCommentsEventsModule(if Moment == nil then nil else Moment.recommendationMetadata, UseMomentsSessionFunction().getMomentsSessionId, if FFlagMomentsRecommendationContentTypeModule then Data.contentType else nil) else nil
 	local UseBindingResult, UseBindingResult2 = ReactModule.useBinding(UDim2.fromScale(1, 0))
 	local ScaledXLarge = 2 * UseTokensResult.Padding.XLarge
 	local Element = ReactModule.createElement(MomentContextModule.Provider, { data = Data, dataVersion = PostName }, {

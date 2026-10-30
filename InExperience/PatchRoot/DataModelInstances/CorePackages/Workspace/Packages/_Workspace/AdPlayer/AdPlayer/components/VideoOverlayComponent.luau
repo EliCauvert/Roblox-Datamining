@@ -13,7 +13,6 @@ local Components = script:FindFirstAncestor("components")
 local AdLabelComponentModule = require(Components.AdLabelComponent)
 local LinearProgressComponentModule = require(Components.LinearProgressComponent)
 local AdDropdownMenu = require(Parent.AdGuiInteractivity).AdDropdownMenu
-local GetRewardInComponentModule = require(Components.GetRewardInComponent)
 local AdDropdownButtonDefault = FlagsModule.GetAdDropdownButtonDefault()
 local AdDropdownButtonOpen = FlagsModule.GetAdDropdownButtonOpen()
 local AdPlayerExitButton = FlagsModule.GetAdPlayerExitButton()
@@ -103,39 +102,38 @@ local function BottomContainer(p1)
 end
 
 local function BottomContainerListContainer(p1)
-	-- upvalues: FlagsModule (copy), ReactModule (copy), View (copy)
+	-- upvalues: ReactModule (copy), View (copy)
 	return ReactModule.createElement(View, {
-		Position = if FlagsModule.GetEnableLuaRewardTimerUI() then UDim2.fromOffset(0, p1.yOffset or 0) else nil,
-		tag = if FlagsModule.GetEnableLuaRewardTimerUI() then `size-full-500 row {if p1.isRightAligned then "align-x-right" else "align-x-left"} align-y-bottom gap-medium` else "size-full-500 row align-x-left align-y-center gap-medium"
+		tag = "size-full-500 row align-x-left align-y-center gap-medium"
 	}, p1.children)
 end
 
-return (ReactModule.forwardRef(function(p2, p3)
-	-- upvalues: ReactModule (copy), UseTokensFunction (copy), View (copy), StateLayerAffordance (copy), BottomContainer (copy), AdDropdownMenu (copy), BottomContainerListContainer (copy), AdLabelComponentModule (copy), AdDropdownButtonOpen (copy), AdDropdownButtonDefault (copy), FlagsModule (copy), GetRewardInComponentModule (copy), ScrimComponent (copy), LinearProgressComponentModule (copy), TimerComponent (copy), TopContainer (copy), ExitButtonComponent (copy)
+return (ReactModule.forwardRef(function(p1, p2)
+	-- upvalues: ReactModule (copy), UseTokensFunction (copy), View (copy), StateLayerAffordance (copy), BottomContainer (copy), AdDropdownMenu (copy), BottomContainerListContainer (copy), AdLabelComponentModule (copy), AdDropdownButtonOpen (copy), AdDropdownButtonDefault (copy), ScrimComponent (copy), LinearProgressComponentModule (copy), TimerComponent (copy), TopContainer (copy), ExitButtonComponent (copy)
 	local UseStateResult, UseStateResult2 = ReactModule.useState(false)
 	local UseStateResult1, UseStateResult2_1 = ReactModule.useState(false)
 	local UseTokensResult = UseTokensFunction()
 	
 	local function dismissModals()
-		-- upvalues: p2 (copy), UseStateResult2 (copy)
-		p2.setPaused(false)
-		p2.dismissModals()
+		-- upvalues: p1 (copy), UseStateResult2 (copy)
+		p1.setPaused(false)
+		p1.dismissModals()
 		UseStateResult2(false)
 	end
 	
 	local function handleToggleAdsModal()
-		-- upvalues: p2 (copy), UseStateResult2 (copy), UseStateResult (copy)
-		p2.setPaused(false)
-		p2.dismissModals()
+		-- upvalues: p1 (copy), UseStateResult2 (copy), UseStateResult (copy)
+		p1.setPaused(false)
+		p1.dismissModals()
 		UseStateResult2(false)
 		
 		if not UseStateResult then
-			p2.setPaused(true)
+			p1.setPaused(true)
 			UseStateResult2(true)
 		end
 	end
 	
-	ReactModule.useImperativeHandle(p3, function()
+	ReactModule.useImperativeHandle(p2, function()
 		-- upvalues: dismissModals (copy)
 		return { dismissModals = dismissModals }
 	end)
@@ -149,9 +147,9 @@ return (ReactModule.forwardRef(function(p2, p3)
 	return ReactModule.createElement(View, {
 		tag = "size-full",
 		onActivated = function()
-			-- upvalues: p2 (copy), UseStateResult2 (copy), UseStateResult2_1 (copy)
-			p2.setPaused(false)
-			p2.dismissModals()
+			-- upvalues: p1 (copy), UseStateResult2 (copy), UseStateResult2_1 (copy)
+			p1.setPaused(false)
+			p1.dismissModals()
 			UseStateResult2(false)
 			UseStateResult2_1(true)
 		end,
@@ -161,8 +159,8 @@ return (ReactModule.forwardRef(function(p2, p3)
 			adDropdownMenu = ReactModule.createElement(AdDropdownMenu, {
 				transparency = 0.2,
 				showDropDownMenu = UseStateResult,
-				onWhyThisAdActivated = p2.showWhyThisAd,
-				onReportAdActivated = p2.showReportAdModal,
+				onWhyThisAdActivated = p1.showWhyThisAd,
+				onReportAdActivated = p1.showReportAdModal,
 				AnchorPoint = Vector2.new(0, 1),
 				Position = UDim2.fromOffset(0, -UseTokensResult.Padding.Small)
 			}),
@@ -171,31 +169,25 @@ return (ReactModule.forwardRef(function(p2, p3)
 					Image = if UseStateResult then AdDropdownButtonOpen else AdDropdownButtonDefault,
 					handleToggleAdsModal = handleToggleAdsModal
 				})
-			}),
-			rightBottomListContainer = if FlagsModule.GetEnableLuaRewardTimerUI() then ReactModule.createElement(BottomContainerListContainer, { isRightAligned = true, yOffset = -4 }, {
-				getRewardInComponent = if p2.rewardWaitTime then ReactModule.createElement(GetRewardInComponentModule, {
-					rewardWaitTime = p2.rewardWaitTime,
-					rewardWaitAlpha = p2.rewardWaitAlpha
-				}) else nil
-			}) else nil
+			})
 		}),
 		scrim = ReactModule.createElement(ScrimComponent, {
-			showScrim = UseStateResult or (p2.parentModalOpen or UseStateResult1)
+			showScrim = UseStateResult or (p1.parentModalOpen or UseStateResult1)
 		}, {
 			fadingBottom = ReactModule.createElement(BottomContainer, {}, {
 				progressBar = ReactModule.createElement(LinearProgressComponentModule, {
-					alpha = p2.alpha,
+					alpha = p1.alpha,
 					Size = UDim2.new(1, 0, 0, 2),
 					Position = UDim2.fromScale(0.5, 1),
 					AnchorPoint = Vector2.new(0.5, 1)
 				}),
 				bottomListContainer = ReactModule.createElement(BottomContainerListContainer, {}, {
 					dummyAdLabel = ReactModule.createElement(AdLabelComponentModule, { Visible = false }),
-					timer = ReactModule.createElement(TimerComponent, { alpha = p2.alpha, totalDuration = p2.totalDuration })
+					timer = ReactModule.createElement(TimerComponent, { alpha = p1.alpha, totalDuration = p1.totalDuration })
 				})
 			}),
 			top = ReactModule.createElement(TopContainer, {}, {
-				closeButton = ReactModule.createElement(ExitButtonComponent, { showExitConfirmationModal = p2.showExitConfirmationModal })
+				closeButton = ReactModule.createElement(ExitButtonComponent, { showExitConfirmationModal = p1.showExitConfirmationModal })
 			})
 		})
 	})

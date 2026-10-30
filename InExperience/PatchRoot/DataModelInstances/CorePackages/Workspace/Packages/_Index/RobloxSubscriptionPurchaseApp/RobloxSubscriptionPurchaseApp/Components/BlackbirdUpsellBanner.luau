@@ -14,9 +14,10 @@ local UseRobloxPlusUpsellBannerNewBadgeInteractionModule = require(RobloxSubscri
 local RobloxPlusUpsellBannerCTAModule = require(script.Parent.RobloxPlusUpsellBannerCTA)
 local FFlagRobloxPlusUpsellBannerUseTryItForFreeModule = require(RobloxSubscriptionPurchaseApp.Flags.FFlagRobloxPlusUpsellBannerUseTryItForFree)
 local BoldBlackbirdUpsellBannerStroke = game:DefineFastFlag("BoldBlackbirdUpsellBannerStroke", false)
+local FFlagLuaAppsEnablePromptVIPServerPurchase = require(Parent.SharedFlags).FFlagLuaAppsEnablePromptVIPServerPurchase
 
 return function(Frame)
-	-- upvalues: UseTokensFunction (copy), UseLocalizationFunction (copy), FFlagRobloxPlusUpsellBannerUseTryItForFreeModule (copy), ReactModule (copy), FFlagSupportNewBadgeRobloxPlusModule (copy), UseRobloxPlusUpsellBannerNewBadgeInteractionModule (copy), View (copy), Icon (copy), IconName (copy), IconSize (copy), Text (copy), RobloxPlusUpsellBannerCTAModule (copy), BoldBlackbirdUpsellBannerStroke (copy)
+	-- upvalues: UseTokensFunction (copy), UseLocalizationFunction (copy), FFlagRobloxPlusUpsellBannerUseTryItForFreeModule (copy), ReactModule (copy), FFlagSupportNewBadgeRobloxPlusModule (copy), UseRobloxPlusUpsellBannerNewBadgeInteractionModule (copy), View (copy), Icon (copy), IconName (copy), IconSize (copy), Text (copy), FFlagLuaAppsEnablePromptVIPServerPurchase (copy), RobloxPlusUpsellBannerCTAModule (copy), BoldBlackbirdUpsellBannerStroke (copy)
 	local UseTokensResult = UseTokensFunction()
 	local UseLocalizationResult = UseLocalizationFunction({
 		subscribe = "Feature.RobloxSubscription.Action.Subscribe",
@@ -54,7 +55,7 @@ return function(Frame)
 				LayoutOrder = 2,
 				Size = UDim2.new(0.7, 0, 0, 0),
 				AutomaticSize = Enum.AutomaticSize.Y,
-				Text = UseLocalizationResult.bannerText
+				Text = if FFlagLuaAppsEnablePromptVIPServerPurchase and Frame.bannerText then Frame.bannerText else UseLocalizationResult.bannerText
 			})
 		}),
 		SubscribeText = if FFlagSupportNewBadgeRobloxPlusModule then nil else ReactModule.createElement(Text, {

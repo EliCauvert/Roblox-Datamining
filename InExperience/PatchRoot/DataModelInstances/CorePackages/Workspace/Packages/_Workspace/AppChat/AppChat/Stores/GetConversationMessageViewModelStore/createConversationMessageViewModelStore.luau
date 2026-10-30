@@ -2,6 +2,9 @@
 local SignalsModule = require(AppChat.Parent.Signals)
 local _ = require(AppChat.MessageData.Types)
 local EnumsModule = require(AppChat.MessageData.Enums)
+local FFlagAppChatParseMessageTimestampsOnceModule = require(AppChat.Flags.FFlagAppChatParseMessageTimestampsOnce)
+local FFlagAppChatGroupedVariantNeighbourIdsModule = require(AppChat.Flags.FFlagAppChatGroupedVariantNeighbourIds)
+local ParseIsoDateUnixMillisModule = require(AppChat.Utils.parseIsoDateUnixMillis)
 local _ = require(script.Parent.Parent.GetConversationMessageStore.createConversationMessageStore)
 local _ = require(script.Parent.Parent.GetConversationMessageListStore.createConversationMessageListStore)
 local GroupedMessageVariant = EnumsModule.GroupedMessageVariant
@@ -24,29 +27,58 @@ local _ = function(p1)
 	end
 end
 
-local _ = function(p1, p2): boolean
+local _ = function(p1)
+	-- upvalues: ParseIsoDateUnixMillisModule (copy)
+	local CreatedAtUnixMillis = p1.createdAtUnixMillis
+	
+	if CreatedAtUnixMillis == nil then
+		CreatedAtUnixMillis = ParseIsoDateUnixMillisModule(p1.created_at)
+	end
+	return if CreatedAtUnixMillis == nil then nil else math.floor(CreatedAtUnixMillis / 1000)
+end
+
+local function timeDiffExceedsThreshold(p1, p2): boolean
+	-- upvalues: FFlagAppChatParseMessageTimestampsOnceModule (copy), ParseIsoDateUnixMillisModule (copy)
 	if p1 == nil or p2 == nil then
 		return false
 	end
-	local CreatedAt = p1.created_at
-	local UnixTimestamp = nil
-	
-	if CreatedAt == nil then
-		UnixTimestamp = nil
+	local Floored = nil
+	if FFlagAppChatParseMessageTimestampsOnceModule then
+		local CreatedAtUnixMillis = p1.createdAtUnixMillis
+		
+		if CreatedAtUnixMillis == nil then
+			CreatedAtUnixMillis = ParseIsoDateUnixMillisModule(p1.created_at)
+		end
+		Floored = if CreatedAtUnixMillis == nil then nil else math.floor(CreatedAtUnixMillis / 1000)
 	else
-		local _DateTime = DateTime.fromIsoDate(CreatedAt)
-		UnixTimestamp = if _DateTime then _DateTime.UnixTimestamp else nil
+		local CreatedAt = p1.created_at
+		
+		if CreatedAt == nil then
+			Floored = nil
+		else
+			local _DateTime = DateTime.fromIsoDate(CreatedAt)
+			Floored = if _DateTime then _DateTime.UnixTimestamp else nil
+		end
 	end
-	local CreatedAt1 = p2.created_at
-	local UnixTimestamp1 = nil
-	
-	if CreatedAt1 == nil then
-		UnixTimestamp1 = nil
+	local Floored1 = nil
+	if FFlagAppChatParseMessageTimestampsOnceModule then
+		local CreatedAtUnixMillis = p2.createdAtUnixMillis
+		
+		if CreatedAtUnixMillis == nil then
+			CreatedAtUnixMillis = ParseIsoDateUnixMillisModule(p2.created_at)
+		end
+		Floored1 = if CreatedAtUnixMillis == nil then nil else math.floor(CreatedAtUnixMillis / 1000)
 	else
-		local _DateTime = DateTime.fromIsoDate(CreatedAt1)
-		UnixTimestamp1 = if _DateTime then _DateTime.UnixTimestamp else nil
+		local CreatedAt = p2.created_at
+		
+		if CreatedAt == nil then
+			Floored1 = nil
+		else
+			local _DateTime = DateTime.fromIsoDate(CreatedAt)
+			Floored1 = if _DateTime then _DateTime.UnixTimestamp else nil
+		end
 	end
-	return UnixTimestamp ~= nil and UnixTimestamp1 ~= nil and math.abs(UnixTimestamp - UnixTimestamp1) > 300
+	return Floored ~= nil and Floored1 ~= nil and math.abs(Floored - Floored1) > 300
 end
 
 local _ = function(p1): boolean
@@ -64,61 +96,8 @@ local _ = function(p1): boolean
 end
 
 local function canGroupWithAdjacent(p1, p2): boolean
-	-- upvalues: MessageType (copy), MessageVisibility (copy), MessageStatus (copy)
-	local Inverted = false
-	
-	if p2 ~= nil then
-		Inverted = p2 ~= nil and p2.type == MessageType.User
-		
-		if Inverted then
-			Inverted = false
-			
-			if p2.sender_user_id == p1.sender_user_id then
-				Inverted = not (p1 ~= nil and p1.visibility == MessageVisibility.Hidden)
-				
-				if Inverted then
-					Inverted = not (p2 ~= nil and p2.visibility == MessageVisibility.Hidden)
-					
-					if Inverted then
-						Inverted = not (p1 ~= nil and p1.status == MessageStatus.Moderated)
-						
-						if Inverted then
-							Inverted = not (p2 ~= nil and p2.status == MessageStatus.Moderated)
-							
-							if Inverted then
-								local IsMagnitudeAbove = nil
-								if p2 == nil or p1 == nil then
-									IsMagnitudeAbove = false
-								else
-									local CreatedAt = p2.created_at
-									local UnixTimestamp = nil
-									
-									if CreatedAt == nil then
-										UnixTimestamp = nil
-									else
-										local _DateTime = DateTime.fromIsoDate(CreatedAt)
-										UnixTimestamp = if _DateTime then _DateTime.UnixTimestamp else nil
-									end
-									local CreatedAt1 = p1.created_at
-									local UnixTimestamp1 = nil
-									
-									if CreatedAt1 == nil then
-										UnixTimestamp1 = nil
-									else
-										local _DateTime = DateTime.fromIsoDate(CreatedAt1)
-										UnixTimestamp1 = if _DateTime then _DateTime.UnixTimestamp else nil
-									end
-									IsMagnitudeAbove = UnixTimestamp ~= nil and UnixTimestamp1 ~= nil and math.abs(UnixTimestamp - UnixTimestamp1) > 300
-								end
-								Inverted = not IsMagnitudeAbove
-							end
-						end
-					end
-				end
-			end
-		end
-	end
-	return Inverted
+	-- upvalues: MessageType (copy), MessageVisibility (copy), MessageStatus (copy), timeDiffExceedsThreshold (copy)
+	return p2 ~= nil and (p2 ~= nil and p2.type == MessageType.User and (p2.sender_user_id == p1.sender_user_id and (not (p1 ~= nil and p1.visibility == MessageVisibility.Hidden) and (not (p2 ~= nil and p2.visibility == MessageVisibility.Hidden) and (not (p1 ~= nil and p1.status == MessageStatus.Moderated) and (not (p2 ~= nil and p2.status == MessageStatus.Moderated) and not timeDiffExceedsThreshold(p2, p1)))))))
 end
 
 local function computeGroupedVariant(p1, p2, p3)
@@ -134,14 +113,14 @@ local function computeGroupedVariant(p1, p2, p3)
 end
 
 return function(ConversationMessageStore, ConversationMessageListStore)
-	-- upvalues: SignalsModule (copy), MessageType (copy), GroupedMessageVariant (copy), computeGroupedVariant (copy)
+	-- upvalues: SignalsModule (copy), MessageType (copy), FFlagAppChatGroupedVariantNeighbourIdsModule (copy), computeGroupedVariant (copy), GroupedMessageVariant (copy)
 	local t = {}
 	
 	return {
 		conversationMessageStore = ConversationMessageStore,
 		conversationMessageListStore = ConversationMessageListStore,
 		getGroupedVariant = function(Key, Key1)
-			-- upvalues: t (copy), SignalsModule (upval), ConversationMessageStore (copy), MessageType (upval), ConversationMessageListStore (copy), GroupedMessageVariant (upval), computeGroupedVariant (upval)
+			-- upvalues: t (copy), SignalsModule (upval), ConversationMessageStore (copy), MessageType (upval), FFlagAppChatGroupedVariantNeighbourIdsModule (upval), ConversationMessageListStore (copy), computeGroupedVariant (upval), GroupedMessageVariant (upval)
 			local Entry = t[Key1]
 			
 			if Entry then
@@ -155,7 +134,7 @@ return function(ConversationMessageStore, ConversationMessageListStore)
 				t[Key1] = Entry
 			end
 			local Computed = SignalsModule.createComputed(function(p1)
-				-- upvalues: ConversationMessageStore (upval), Key (copy), MessageType (upval), ConversationMessageListStore (upval), Key1 (copy), GroupedMessageVariant (upval), computeGroupedVariant (upval)
+				-- upvalues: ConversationMessageStore (upval), Key (copy), MessageType (upval), FFlagAppChatGroupedVariantNeighbourIdsModule (upval), ConversationMessageListStore (upval), Key1 (copy), computeGroupedVariant (upval), GroupedMessageVariant (upval)
 				local MessagesResult = ConversationMessageStore.messages(p1)
 				local MessagesResultEntry = MessagesResult[Key]
 				
@@ -163,6 +142,10 @@ return function(ConversationMessageStore, ConversationMessageListStore)
 					return nil
 				elseif MessagesResultEntry == nil or MessagesResultEntry.type ~= MessageType.User then
 					return nil
+				elseif FFlagAppChatGroupedVariantNeighbourIdsModule then
+					local NeighbourIds = ConversationMessageListStore.getNeighbourIds(Key1, Key, p1)
+					
+					return (computeGroupedVariant(MessagesResultEntry, if NeighbourIds.prevId == nil then nil else MessagesResult[NeighbourIds.prevId], if NeighbourIds.nextId == nil then nil else MessagesResult[NeighbourIds.nextId]))
 				elseif ConversationMessageListStore.getIndex(Key1, Key, p1) == nil then
 					return GroupedMessageVariant.Single
 				else

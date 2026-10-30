@@ -12,11 +12,12 @@ local PresetChatButtonModule = require(script.Parent.PresetChatButton)
 local PresetChatContainerModule = require(script.Parent.PresetChatContainer)
 local SetIsPresetTrayOpenModule = require(script.Parent.Thunks.setIsPresetTrayOpen)
 local FFlagExpChatPresetChatGamepadEnabledModule = require(ExpChat.Flags.FFlagExpChatPresetChatGamepadEnabled)
+local FFlagExpChatPresetFullWidthButtonFixesModule = require(ExpChat.Flags.FFlagExpChatPresetFullWidthButtonFixes)
 local FlyOutWidth = ConfigModule.PresetTray.FlyOutWidth
 local FlyOutHeight = ConfigModule.PresetTray.FlyOutHeight
 
 return ReactModule.memo(function(p1)
-	-- upvalues: GetPresetChatStoreModule (copy), SignalsReactModule (copy), ReactModule (copy), SetIsPresetTrayOpenModule (copy), FFlagExpChatPresetChatGamepadEnabledModule (copy), UserInputService (copy), GuiService (copy), FFlagExpChatPresetTrayDismissAnalyticsModule (copy), FoundationModule (copy), PresetChatButtonModule (copy), FlyOutWidth (copy), FlyOutHeight (copy), PresetChatContainerModule (copy)
+	-- upvalues: GetPresetChatStoreModule (copy), SignalsReactModule (copy), ReactModule (copy), SetIsPresetTrayOpenModule (copy), FFlagExpChatPresetChatGamepadEnabledModule (copy), UserInputService (copy), GuiService (copy), FFlagExpChatPresetTrayDismissAnalyticsModule (copy), FoundationModule (copy), PresetChatButtonModule (copy), FFlagExpChatPresetFullWidthButtonFixesModule (copy), FlyOutWidth (copy), FlyOutHeight (copy), PresetChatContainerModule (copy)
 	local PresetChatStoreModule = GetPresetChatStoreModule(false)
 	local UseSignalStateResult = SignalsReactModule.useSignalState(PresetChatStoreModule.getIsTrayOpen)
 	local UseResult = ReactModule.useCallback(function()
@@ -76,11 +77,11 @@ return ReactModule.memo(function(p1)
 			hasArrow = false,
 			side = {
 				offset = 7,
-				position = FoundationModule.Enums.PopoverSide.Right
+				position = if FFlagExpChatPresetFullWidthButtonFixesModule and p1.fullWidthButton then FoundationModule.Enums.PopoverSide.Bottom else FoundationModule.Enums.PopoverSide.Right
 			},
 			align = {
-				offset = 3,
-				position = FoundationModule.Enums.PopoverAlign.Start
+				position = FoundationModule.Enums.PopoverAlign.Start,
+				offset = if FFlagExpChatPresetFullWidthButtonFixesModule and p1.fullWidthButton then 0 else 3
 			},
 			radius = FoundationModule.Enums.Radius.Medium,
 			onPressedOutside = UseResult

@@ -15,6 +15,8 @@ local UseTelemetryModule = require(AppChat.Telemetry.useTelemetry)
 local ChatConversationTelemetryEventsModule = require(script.Parent.ChatConversationTelemetryEvents)
 local ChatConversationTelemetryLayerModule = require(AppChat.Telemetry.Layers.ChatConversationTelemetryLayer)
 local FFlagAppChatSignalsReplyStoreModule = require(AppChat.Flags.FFlagAppChatSignalsReplyStore)
+local FFlagAppChatUseUserProfileHydrationModule = require(AppChat.Flags.FFlagAppChatUseUserProfileHydration)
+local UseProfileNameModule = require(AppChat.Hooks.useProfileName)
 local config = {
 	LayoutOrder = 3,
 	message = nil,
@@ -43,7 +45,7 @@ local function _(TargetMessageSenderId, TargetMessageId, p1)
 end
 
 function ReplyComposeBarContainer(p1)
-	-- upvalues: CryoModule (copy), config (copy), UseLocalUserIdFunction (copy), UseTelemetryModule (copy), ChatConversationTelemetryLayerModule (copy), FFlagAppChatSignalsReplyStoreModule (copy), GetReplyingToStoreModule (copy), GetConversationMessageStoreModule (copy), UseSignalStateFunction (copy), ReactModule (copy), ChatConversationTelemetryEventsModule (copy), UseSelectorFunction (copy), PopulateUserWithStateModule (copy), UserProfilesModule (copy), UseLocalizationFunction (copy), ReplyComposeBarModule (copy)
+	-- upvalues: CryoModule (copy), config (copy), UseLocalUserIdFunction (copy), UseTelemetryModule (copy), ChatConversationTelemetryLayerModule (copy), FFlagAppChatSignalsReplyStoreModule (copy), GetReplyingToStoreModule (copy), GetConversationMessageStoreModule (copy), UseSignalStateFunction (copy), ReactModule (copy), ChatConversationTelemetryEventsModule (copy), UseSelectorFunction (copy), PopulateUserWithStateModule (copy), FFlagAppChatUseUserProfileHydrationModule (copy), UseProfileNameModule (copy), UserProfilesModule (copy), UseLocalizationFunction (copy), ReplyComposeBarModule (copy)
 	local UnionResult = CryoModule.Dictionary.union(config, p1)
 	local UseLocalUserIdResult = UseLocalUserIdFunction()
 	local UseTelemetryModuleResult = UseTelemetryModule(ChatConversationTelemetryLayerModule.Context)
@@ -74,11 +76,18 @@ function ReplyComposeBarContainer(p1)
 			
 			return if User then { targetUser = PopulateUserWithStateModule(p2, User) } else {}
 		end)
-		local UseUserProfilesFetchResult = UserProfilesModule.Hooks.useUserProfilesFetch({
-			userIds = if Text then { Text } else {},
-			query = UserProfilesModule.Queries.userProfilesCombinedNameAndUsernameByUserIds
-		})
-		local DisplayName = if UseSelectorResult.targetUser and UseSelectorResult.targetUser.displayName and UseSelectorResult.targetUser.displayName ~= "" then UseSelectorResult.targetUser.displayName elseif UseUserProfilesFetchResult.data and UseUserProfilesFetchResult.data.userProfiles and UseUserProfilesFetchResult.data.userProfiles[1] and UseUserProfilesFetchResult.data.userProfiles[1].names then UserProfilesModule.Selectors.getCombinedNameFromId(UseUserProfilesFetchResult.data, Text) else UnionResult.unknownUserKey
+		local UseUserProfilesFetchResult = nil
+		local v1 = nil
+		
+		if FFlagAppChatUseUserProfileHydrationModule then
+			v1 = UseProfileNameModule(Text)
+		else
+			UseUserProfilesFetchResult = UserProfilesModule.Hooks.useUserProfilesFetch({
+				userIds = if Text then { Text } else {},
+				query = UserProfilesModule.Queries.userProfilesCombinedNameAndUsernameByUserIds
+			})
+		end
+		local DisplayName = if UseSelectorResult.targetUser and UseSelectorResult.targetUser.displayName and UseSelectorResult.targetUser.displayName ~= "" then UseSelectorResult.targetUser.displayName elseif FFlagAppChatUseUserProfileHydrationModule then v1.combinedName or UnionResult.unknownUserKey elseif UseUserProfilesFetchResult.data and UseUserProfilesFetchResult.data.userProfiles and UseUserProfilesFetchResult.data.userProfiles[1] and UseUserProfilesFetchResult.data.userProfiles[1].names then UserProfilesModule.Selectors.getCombinedNameFromId(UseUserProfilesFetchResult.data, Text) else UnionResult.unknownUserKey
 		local ReplyingToUserName = UseLocalizationFunction(if DisplayName == UnionResult.unknownUserKey then { replyingToUserName = DisplayName } else {}).replyingToUserName or DisplayName
 		local IsUseLocalUserIdResultMatch = UseLocalUserIdResult == Text
 		
@@ -115,17 +124,24 @@ function ReplyComposeBarContainer(p1)
 			
 			return function() end
 		end, {})
-		local UseSelectorResult = UseSelectorFunction(function(p2)
+		local UseSelectorResult1 = UseSelectorFunction(function(p2)
 			-- upvalues: UnionResult (copy), PopulateUserWithStateModule (upval)
 			local User = if p2 and p2.Users and UnionResult.message.senderTargetId then p2.Users[UnionResult.message.senderTargetId] else nil
 			
 			return if User then { targetUser = PopulateUserWithStateModule(p2, User) } else {}
 		end)
-		local UseUserProfilesFetchResult = UserProfilesModule.Hooks.useUserProfilesFetch({
-			userIds = { UnionResult.message.senderTargetId },
-			query = UserProfilesModule.Queries.userProfilesCombinedNameAndUsernameByUserIds
-		})
-		local DisplayName = if UseSelectorResult.targetUser and UseSelectorResult.targetUser.displayName and UseSelectorResult.targetUser.displayName ~= "" then UseSelectorResult.targetUser.displayName elseif UseUserProfilesFetchResult.data and (UseUserProfilesFetchResult.data.userProfiles and UseUserProfilesFetchResult.data.userProfiles[1] and UseUserProfilesFetchResult.data.userProfiles[1].names) then UserProfilesModule.Selectors.getCombinedNameFromId(UseUserProfilesFetchResult.data, UnionResult.message.senderTargetId) else UnionResult.unknownUserKey
+		local UseUserProfilesFetchResult1 = nil
+		local v2 = nil
+		
+		if FFlagAppChatUseUserProfileHydrationModule then
+			v2 = UseProfileNameModule(UnionResult.message.senderTargetId)
+		else
+			UseUserProfilesFetchResult1 = UserProfilesModule.Hooks.useUserProfilesFetch({
+				userIds = { UnionResult.message.senderTargetId },
+				query = UserProfilesModule.Queries.userProfilesCombinedNameAndUsernameByUserIds
+			})
+		end
+		local DisplayName = if UseSelectorResult1.targetUser and UseSelectorResult1.targetUser.displayName and UseSelectorResult1.targetUser.displayName ~= "" then UseSelectorResult1.targetUser.displayName elseif FFlagAppChatUseUserProfileHydrationModule then v2.combinedName or UnionResult.unknownUserKey elseif UseUserProfilesFetchResult1.data and UseUserProfilesFetchResult1.data.userProfiles and UseUserProfilesFetchResult1.data.userProfiles[1] and UseUserProfilesFetchResult1.data.userProfiles[1].names then UserProfilesModule.Selectors.getCombinedNameFromId(UseUserProfilesFetchResult1.data, UnionResult.message.senderTargetId) else UnionResult.unknownUserKey
 		local ReplyingToUserName = UseLocalizationFunction(if DisplayName == UnionResult.unknownUserKey then { replyingToUserName = DisplayName } else {}).replyingToUserName or DisplayName
 		local IsUseLocalUserIdResultMatch = UseLocalUserIdResult == UnionResult.message.senderTargetId
 		
@@ -138,7 +154,7 @@ function ReplyComposeBarContainer(p1)
 				}
 			}).replyingToUserText,
 			replyingToUserContent = UnionResult.message.content,
-			replyingToUserId = if IsUseLocalUserIdResultMatch or not UseSelectorResult.targetUser then nil else UnionResult.message.senderTargetId,
+			replyingToUserId = if IsUseLocalUserIdResultMatch or not UseSelectorResult1.targetUser then nil else UnionResult.message.senderTargetId,
 			onCloseActivated = ReactModule.useCallback(function()
 				-- upvalues: UseTelemetryModuleResult (copy), ChatConversationTelemetryEventsModule (upval), UnionResult (copy)
 				UseTelemetryModuleResult.emit(ChatConversationTelemetryEventsModule.ConversationInputBarReplyComposeCancelBtnActivated, getTargetMessageInfo(UnionResult.message))

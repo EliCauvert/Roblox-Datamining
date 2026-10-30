@@ -11,15 +11,16 @@ local ThemeModule = require(RobloxGui.Modules.Settings.Theme)
 local CreateFunction = require(CorePackages.Workspace.Packages.AppCommonLib).Create
 local BuilderIconsModule = require(CorePackages.Packages.BuilderIcons)
 local Uiblox = BuilderIconsModule.Migration.uiblox
+local IsInExperienceUIVREnabled = require(CorePackages.Workspace.Packages.SharedExperimentDefinition).isInExperienceUIVREnabled
+local FFlagResponsiveUnitsDeprecateTenFoot = require(CorePackages.Workspace.Packages.SharedFlags).FFlagResponsiveUnitsDeprecateTenFoot
 local v1 = nil
 RobloxGui:WaitForChild("Modules"):WaitForChild("TenFootInterface")
-local IsEnabled = require(RobloxGui.Modules.TenFootInterface):IsEnabled()
+local NoFFlagResponsiveUnitsDeprecateTenFoot: boolean = require(RobloxGui.Modules.TenFootInterface):IsEnabled() and not FFlagResponsiveUnitsDeprecateTenFoot
 local IsSpatialFunction = require(CorePackages.Workspace.Packages.AppCommonLib).isSpatial
-local IsInExperienceUIVREnabled = require(CorePackages.Workspace.Packages.SharedExperimentDefinition).isInExperienceUIVREnabled
 local NewResult = if IsInExperienceUIVREnabled then require(CorePackages.Workspace.Packages.InExperienceLocales).Localization.new(game:GetService("LocalizationService").RobloxLocaleId) else nil
 local HelpConstantsModule = if IsInExperienceUIVREnabled then require(RobloxGui.Modules.Settings.Resources.HelpConstants) else nil
 v1 = (function()
-	-- upvalues: RobloxGui (copy), IsInExperienceUIVREnabled (copy), IsSpatialFunction (copy), UserInputService (copy), CreateFunction (copy), ThemeModule (copy), RobloxTranslatorModule (copy), CachedPolicyServiceModule (copy), IsEnabled (copy), TextService (copy), UtilityModule (copy), GuiService (copy), HelpConstantsModule (copy), NewResult (ref), GameSettings (copy), Uiblox (copy), BuilderIconsModule (copy)
+	-- upvalues: RobloxGui (copy), IsInExperienceUIVREnabled (copy), IsSpatialFunction (copy), UserInputService (copy), CreateFunction (copy), ThemeModule (copy), RobloxTranslatorModule (copy), CachedPolicyServiceModule (copy), NoFFlagResponsiveUnitsDeprecateTenFoot (copy), TextService (copy), UtilityModule (copy), GuiService (copy), HelpConstantsModule (copy), NewResult (ref), GameSettings (copy), Uiblox (copy), BuilderIconsModule (copy)
 	local NewPage = require(RobloxGui.Modules.Settings.SettingsPageFactory):CreateNewPage()
 	NewPage.HelpPages = {}
 	NewPage.HelpPageContents = {}
@@ -226,7 +227,7 @@ v1 = (function()
 	end
 	
 	local function createGamepadHelp(Frame: Frame)
-		-- upvalues: NewPage (copy), CreateFunction (upval), IsEnabled (upval), ThemeModule (upval), TextService (upval), RobloxTranslatorModule (upval)
+		-- upvalues: NewPage (copy), CreateFunction (upval), NoFFlagResponsiveUnitsDeprecateTenFoot (upval), ThemeModule (upval), TextService (upval), RobloxTranslatorModule (upval)
 		local Largest = math.max(NewPage.Page.AbsoluteSize.X * 0.58, 270)
 		local _UDim2 = UDim2.new(0, Largest, 0, Largest * 0.64)
 		local Parent = CreateFunction("ImageLabel")({
@@ -239,7 +240,7 @@ v1 = (function()
 			Parent = Frame
 		})
 		Frame.Size = UDim2.new(Frame.Size.X.Scale, Frame.Size.X.Offset, 0, Parent.Size.Y.Offset + 100)
-		local FontSizeResult = IsEnabled and ThemeModule.fontSize(Enum.FontSize.Size36) or ThemeModule.fontSize(Enum.FontSize.Size24)
+		local FontSizeResult = NoFFlagResponsiveUnitsDeprecateTenFoot and ThemeModule.fontSize(Enum.FontSize.Size36) or ThemeModule.fontSize(Enum.FontSize.Size24)
 		local TextSizeResult = FontSizeResult == ThemeModule.fontSize(Enum.FontSize.Size36) and ThemeModule.textSize(36) or ThemeModule.textSize(24)
 		
 		local function createGamepadLabel(Text, Position, Size, p2)
@@ -553,13 +554,13 @@ v1 = (function()
 	end
 	
 	local function displayHelp(HelpPage)
-		-- upvalues: NewPage (copy), IsEnabled (upval), UserInputService (upval)
+		-- upvalues: NewPage (copy), NoFFlagResponsiveUnitsDeprecateTenFoot (upval), UserInputService (upval)
 		for _, helpPage in pairs(NewPage.HelpPages) do
 			if helpPage == HelpPage then
 				helpPage.Parent = NewPage.Page
 				NewPage.Page.Size = helpPage.Size
 				
-				if IsEnabled then
+				if NoFFlagResponsiveUnitsDeprecateTenFoot then
 					NewPage.Page.Size = UDim2.new(helpPage.Size.X.Scale, helpPage.Size.X.Offset, helpPage.Size.Y.Scale, 0)
 				end
 			else

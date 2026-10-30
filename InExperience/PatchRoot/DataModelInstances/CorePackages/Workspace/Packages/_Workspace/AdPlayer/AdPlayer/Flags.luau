@@ -11,8 +11,5 @@ return {
 	end,
 	GetAdDropdownButtonOpen = function()
 		return game:GetFastString("AdDropdownButtonOpen")
-	end,
-	GetEnableLuaRewardTimerUI = function()
-		return game:GetEngineFeature("EnableLuaRewardTimerUI")
 	end
 }

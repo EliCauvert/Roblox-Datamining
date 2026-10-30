@@ -16,11 +16,6 @@
 		CoreScripts = "CoreScripts",
 		UniversalApp = "UniversalApp"
 	},
-	GameInviteInviteExperimentVariant = {
-		Default = "default",
-		UxRefresh = "uxRefresh",
-		InviteLimit = "uxRefreshInviteLimit"
-	},
 	Triggers = {
 		DeveloperMultiple = "DeveloperMultiple",
 		DeveloperSingle = "DeveloperSingle",

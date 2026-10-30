@@ -11,13 +11,13 @@ local LocalizationService = game:GetService("LocalizationService")
 local LocalizationModule = require(Parent.Localization)
 local UseLocalizationFunction = LocalizationModule.Hooks.useLocalization
 local AbbreviateCountFunction = LocalizationModule.abbreviateCount
-local Reaction = MomentsCommonModule.Components.Reaction
+local ReactionModule = if require(Moments.Flags.FFlagMomentsUseSharedReactions) then require(Parent.Reactions.Reaction) else MomentsCommonModule.Components.Reaction
 local ReactionSize = MomentsCommonModule.Enums.ReactionSize
 local UseConfigurationModule = require(Moments.Hooks.useConfiguration)
 local config = { title = "Feature.Moments.Label.Reactions" }
 
 return function(p1)
-	-- upvalues: UseLocalizationFunction (copy), config (copy), UseConfigurationModule (copy), ReactModule (copy), View (copy), Reaction (copy), ReactionSize (copy), Text (copy), AbbreviateCountFunction (copy), LocalizationService (copy), Sheet (copy), FoundationModule (copy)
+	-- upvalues: UseLocalizationFunction (copy), config (copy), UseConfigurationModule (copy), ReactModule (copy), View (copy), ReactionModule (copy), ReactionSize (copy), Text (copy), AbbreviateCountFunction (copy), LocalizationService (copy), Sheet (copy), FoundationModule (copy)
 	return ReactModule.createElement(Sheet.Root, {
 		isOpen = true,
 		preferCenterSheet = true,
@@ -34,7 +34,7 @@ return function(p1)
 			ReactionsContainer = ReactModule.createElement(View, {
 				tag = "row wrap align-y-center gap-small size-full-0 auto-y padding-bottom-large"
 			}, (ReactModule.useMemo(function()
-				-- upvalues: p1 (copy), ReactModule (upval), View (upval), Reaction (upval), ReactionSize (upval), Text (upval), AbbreviateCountFunction (upval), LocalizationService (upval)
+				-- upvalues: p1 (copy), ReactModule (upval), View (upval), ReactionModule (upval), ReactionSize (upval), Text (upval), AbbreviateCountFunction (upval), LocalizationService (upval)
 				local Elements = {}
 				
 				for LayoutOrder, reactionCount in ipairs(p1.reactionCounts) do
@@ -43,7 +43,7 @@ return function(p1)
 							tag = "row align-y-center gap-xsmall auto-xy padding-xsmall",
 							LayoutOrder = LayoutOrder
 						}, {
-							Icon = ReactModule.createElement(Reaction, {
+							Icon = ReactModule.createElement(ReactionModule, {
 								layoutOrder = 1,
 								reactionType = reactionCount.reaction,
 								size = ReactionSize.XSmall

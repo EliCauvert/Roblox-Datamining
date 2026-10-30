@@ -21,9 +21,10 @@ local FFlagLuaAppEdpMediaGalleryVideoPreview = require(Parent.SharedFlags).FFlag
 local FFlagLuaAppUsePrevalidatedVideoGamePlayability = require(Parent.SharedFlags).FFlagLuaAppUsePrevalidatedVideoGamePlayability
 local FFlagLuaAppGameTileSelectionVideoPlayback = require(Parent.SharedFlags).FFlagLuaAppGameTileSelectionVideoPlayback
 local FFlagLuaAppOneByTwoHoverIdleAutoplay = require(Parent.SharedFlags).FFlagLuaAppOneByTwoHoverIdleAutoplay
+local FFlagLuaAppSuppressVideoDetectorDuringScroll = require(Parent.SharedFlags).FFlagLuaAppSuppressVideoDetectorDuringScroll
 
 return function(p1)
-	-- upvalues: UseDispatchFunction (copy), UseRoactServiceFunction (copy), RoactNetworking (copy), UseSelectorFunction (copy), FetchGamePlayabilityAndProductInfo (copy), UseIsVideoEligibleModule (copy), FFlagLuaAppUsePrevalidatedVideoGamePlayability (copy), ReactModule (copy), UseCanDevicePlayVideoPreviewFunction (copy), TileVideoBlockingConfigModule (copy), RetrievalStatus (copy), VideoEndReason (copy), FFlagLuaAppGameTileSelectionVideoPlayback (copy), FFlagLuaAppOneByTwoHoverIdleAutoplay (copy), UsePreferredInputFunction (copy), GetPlaybackDetectionMethodFunction (copy), VideoPlaybackDetector (copy), VideoPlaybackDetectionMethod (copy), FFlagLuaAppEdpMediaGalleryVideoPreview (copy)
+	-- upvalues: UseDispatchFunction (copy), UseRoactServiceFunction (copy), RoactNetworking (copy), UseSelectorFunction (copy), FetchGamePlayabilityAndProductInfo (copy), UseIsVideoEligibleModule (copy), FFlagLuaAppUsePrevalidatedVideoGamePlayability (copy), ReactModule (copy), FFlagLuaAppSuppressVideoDetectorDuringScroll (copy), UseCanDevicePlayVideoPreviewFunction (copy), TileVideoBlockingConfigModule (copy), RetrievalStatus (copy), VideoEndReason (copy), FFlagLuaAppGameTileSelectionVideoPlayback (copy), FFlagLuaAppOneByTwoHoverIdleAutoplay (copy), UsePreferredInputFunction (copy), GetPlaybackDetectionMethodFunction (copy), VideoPlaybackDetector (copy), VideoPlaybackDetectionMethod (copy), FFlagLuaAppEdpMediaGalleryVideoPreview (copy)
 	local UseDispatchResult = UseDispatchFunction()
 	local UseRoactServiceResult = UseRoactServiceFunction(RoactNetworking)
 	local UseSelectorResult = UseSelectorFunction(function(p2)
@@ -32,6 +33,7 @@ return function(p1)
 	end)
 	local UseIsVideoEligibleModuleResult = UseIsVideoEligibleModule(p1.universeId, if FFlagLuaAppUsePrevalidatedVideoGamePlayability then p1.hasPrevalidatedVideoGamePlayability else nil)
 	local UseStateResult, UseStateResult2 = ReactModule.useState(false)
+	local UseRefResult = if FFlagLuaAppSuppressVideoDetectorDuringScroll then ReactModule.useRef(false) else nil
 	local UseCanDevicePlayVideoPreviewResult = UseCanDevicePlayVideoPreviewFunction(TileVideoBlockingConfigModule, p1.universeId, p1.pageContext)
 	local PlaybackDetectionMethod = if FFlagLuaAppGameTileSelectionVideoPlayback or FFlagLuaAppOneByTwoHoverIdleAutoplay then GetPlaybackDetectionMethodFunction(UsePreferredInputFunction(), p1.isHoverSupported) else nil
 	
@@ -52,17 +54,27 @@ return function(p1)
 		videoVisiblePercent = p1.videoVisiblePercent,
 		isVideoEligible = UseIsVideoEligibleModuleResult and UseStateResult,
 		onVideoIneligible = ReactModule.useCallback(function(p2)
-			-- upvalues: p1 (copy), UseSelectorResult (copy), RetrievalStatus (upval), VideoEndReason (upval)
+			-- upvalues: FFlagLuaAppSuppressVideoDetectorDuringScroll (upval), UseIsVideoEligibleModuleResult (copy), UseRefResult (ref), p1 (copy), UseSelectorResult (copy), RetrievalStatus (upval), VideoEndReason (upval)
+			if FFlagLuaAppSuppressVideoDetectorDuringScroll and UseIsVideoEligibleModuleResult and UseRefResult.current then return end
 			if p1.videoAnalytics and UseSelectorResult == RetrievalStatus.Done then
 				p1.videoAnalytics.reportVideoEnd(p1.itemIndex, VideoEndReason.PlayabilityCheckFailed, p2, -1)
 			end
-		end, { p1.videoAnalytics, UseSelectorResult }),
+		end, {
+			p1.videoAnalytics,
+			UseSelectorResult,
+			if FFlagLuaAppSuppressVideoDetectorDuringScroll then UseIsVideoEligibleModuleResult else nil
+		}),
 		onPlaybackCandidate = ReactModule.useCallback(function()
-			-- upvalues: UseSelectorResult (copy), RetrievalStatus (upval), FFlagLuaAppUsePrevalidatedVideoGamePlayability (upval), p1 (copy), UseDispatchResult (copy), FetchGamePlayabilityAndProductInfo (upval), UseRoactServiceResult (copy), UseStateResult2 (copy), UseCanDevicePlayVideoPreviewResult (copy)
+			-- upvalues: UseSelectorResult (copy), RetrievalStatus (upval), FFlagLuaAppUsePrevalidatedVideoGamePlayability (upval), p1 (copy), UseDispatchResult (copy), FetchGamePlayabilityAndProductInfo (upval), UseRoactServiceResult (copy), UseCanDevicePlayVideoPreviewResult (copy), FFlagLuaAppSuppressVideoDetectorDuringScroll (upval), UseRefResult (ref), UseStateResult2 (copy)
 			if (UseSelectorResult == RetrievalStatus.NotStarted or UseSelectorResult == RetrievalStatus.Failed) and (not FFlagLuaAppUsePrevalidatedVideoGamePlayability or not p1.hasPrevalidatedVideoGamePlayability) then
 				UseDispatchResult(FetchGamePlayabilityAndProductInfo.Fetch(UseRoactServiceResult, p1.universeId))
 			end
-			UseStateResult2(UseCanDevicePlayVideoPreviewResult())
+			local UseCanDevicePlayVideoPreviewResultResult = UseCanDevicePlayVideoPreviewResult()
+			
+			if FFlagLuaAppSuppressVideoDetectorDuringScroll then
+				UseRefResult.current = UseCanDevicePlayVideoPreviewResultResult
+			end
+			UseStateResult2(UseCanDevicePlayVideoPreviewResultResult)
 		end, {
 			p1.universeId, UseSelectorResult, UseDispatchResult, UseRoactServiceResult,
 			UseCanDevicePlayVideoPreviewResult,

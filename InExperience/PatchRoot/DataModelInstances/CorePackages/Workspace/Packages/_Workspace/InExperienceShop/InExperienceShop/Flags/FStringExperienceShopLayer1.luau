@@ -1,0 +1,1 @@
+﻿return game:DefineFastString("ExperienceShopLayer1", "Economy.DevMoney.InExperienceShops")

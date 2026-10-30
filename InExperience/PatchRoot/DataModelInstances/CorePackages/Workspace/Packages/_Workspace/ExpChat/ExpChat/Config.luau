@@ -1,5 +1,6 @@
 ﻿local ExpChat = script:FindFirstAncestor("ExpChat")
 local Parent = ExpChat.Parent
+local Config1 = require(Parent.ExpChatShared).Config
 local Config = {
 	ChatInputBarFont = Enum.Font.BuilderSansMedium,
 	ChatInputBarFontFace = Font.new("rbxasset://fonts/families/BuilderSans.json", Enum.FontWeight.Medium, Enum.FontStyle.Normal),
@@ -27,7 +28,7 @@ local Config = {
 	ChatWindowBackgroundTransparency = 0.3,
 	ChatWindowBackgroundFadeOutTime = 3.5,
 	ChatWindowTextFadeOutTime = 30,
-	ChatWindowMessageHideRootFadeThreshold = 0.85,
+	ChatWindowMessageHideRootFadeThreshold = Config1.ChatWindowMessageHideRootFadeThreshold,
 	ChatWindowMaxWidth = 475,
 	ChatWindowMaxHeight = 275,
 	ChatWindowScrollBarThickness = 8,
@@ -52,7 +53,7 @@ local Config = {
 		BorderColor3 = Color3.fromRGB(100, 100, 100),
 		MinTabWidth = if require(ExpChat.Flags.FFlagExpChatChannelTabSizingUpdate) then 72 else 100
 	},
-	DefaultChannelNames = require(Parent.ExpChatShared).Config.DefaultChannelNames,
+	DefaultChannelNames = Config1.DefaultChannelNames,
 	MessageCharacterLimit = 200,
 	VERIFIED_EMOJI = utf8.char(57344),
 	LOCK_EMOJI = utf8.char(128274),

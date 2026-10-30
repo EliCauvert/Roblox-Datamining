@@ -7,6 +7,8 @@ local SignalsReactModule = require(Parent.SignalsReact)
 local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
 local UseChatPagePaddingModule = require(AppChat.Contexts.ChatPagePadding.useChatPagePadding)
 local ChatPlacementContextModule = require(AppChat.Contexts.ChatPlacementContext)
+local UseThemeBackgroundFunction = require(Parent.ThemeBackground).useThemeBackground
+local FFlagAppThemeHalloween2026ChatBackgroundModule = require(AppChat.Flags.FFlagAppThemeHalloween2026ChatBackground)
 local UseRelativeTimestampBindingModule = require(AppChat.Hooks.useRelativeTimestampBinding)
 local UseTelemetryModule = require(AppChat.Telemetry.useTelemetry)
 local ChatLandingTelemetryLayerModule = require(AppChat.Telemetry.Layers.ChatLandingTelemetryLayer)
@@ -26,7 +28,7 @@ local function _(p1, p2, Enabled)
 end
 
 return function(p1)
-	-- upvalues: GetConversationStoreModule (copy), GetConversationViewModelStoreModule (copy), ReactModule (copy), SignalsModule (copy), SignalsReactModule (copy), UseChatPagePaddingModule (copy), ChatPlacementContextModule (copy), UseTelemetryModule (copy), ChatLandingTelemetryLayerModule (copy), UseRelativeTimestampBindingModule (copy), UseLocalizationFunction (copy), UseGetOneToOneFriendIdFromConversationIdModule (copy), UseIsRobloxSubscriberFunction (copy), FFlagEnableBlackbirdCheck (copy), UseConversationRowActivationModule (copy), FFlagAppChatUseActivationOnFocus (copy), UseActivationOnFocusFunction (copy), ConversationFocusActivationDelaySecondsModule (copy), ReactFocusNavigationModule (copy), NormalizeConversationForTelemetryModule (copy)
+	-- upvalues: GetConversationStoreModule (copy), GetConversationViewModelStoreModule (copy), ReactModule (copy), SignalsModule (copy), SignalsReactModule (copy), UseChatPagePaddingModule (copy), ChatPlacementContextModule (copy), FFlagAppThemeHalloween2026ChatBackgroundModule (copy), UseThemeBackgroundFunction (copy), UseTelemetryModule (copy), ChatLandingTelemetryLayerModule (copy), UseRelativeTimestampBindingModule (copy), UseLocalizationFunction (copy), UseGetOneToOneFriendIdFromConversationIdModule (copy), UseIsRobloxSubscriberFunction (copy), FFlagEnableBlackbirdCheck (copy), UseConversationRowActivationModule (copy), FFlagAppChatUseActivationOnFocus (copy), UseActivationOnFocusFunction (copy), ConversationFocusActivationDelaySecondsModule (copy), ReactFocusNavigationModule (copy), NormalizeConversationForTelemetryModule (copy)
 	local ConversationStoreModule = GetConversationStoreModule(false)
 	local ConversationViewModelStoreModule = GetConversationViewModelStoreModule(false)
 	local UseMemoResult = ReactModule.useMemo(function()
@@ -66,6 +68,7 @@ return function(p1)
 	local HasUseSignalStateResult = UseSignalStateResult1 ~= nil
 	local UseChatPagePaddingModuleResult = UseChatPagePaddingModule()
 	local UseChatPlacementContextResult = ChatPlacementContextModule.useChatPlacementContext()
+	local HasUseThemeBackgroundResult: boolean = if FFlagAppThemeHalloween2026ChatBackgroundModule then UseThemeBackgroundFunction() ~= nil else false
 	local UseTelemetryModuleResult = UseTelemetryModule(ChatLandingTelemetryLayerModule.Context)
 	local UseRelativeTimestampBindingModuleResult = UseRelativeTimestampBindingModule(UseSignalStateResult9)
 	local UseLocalizationResult = UseLocalizationFunction({
@@ -157,7 +160,7 @@ return function(p1)
 		showSquadButton = UseSignalStateResult5_1,
 		showTimestamp = NoUseSignalStateResult5_1,
 		showUnread = NoUseSignalStateResult3,
-		showBackground = if p1.showBackground == nil then not ChatPlacementContextModule.isPlacementInExperience(UseChatPlacementContextResult.chatPlacement) else p1.showBackground,
+		showBackground = if p1.showBackground == nil then not ChatPlacementContextModule.isPlacementInExperience(UseChatPlacementContextResult.chatPlacement) and not HasUseThemeBackgroundResult else p1.showBackground,
 		squadLocation = UseChatPlacementContextResult.chatPlacement,
 		participants = if UseSignalStateResult == nil then nil else UseSignalStateResult.participants,
 		rowRef = UseRefResult,

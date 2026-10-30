@@ -1,1 +1,1 @@
-﻿return game:DefineFastFlag("AppChatShowOSAOnPageEntry2", false)
+﻿return game:DefineFastFlag("AppChatShowOSAOnPageEntry3", false)

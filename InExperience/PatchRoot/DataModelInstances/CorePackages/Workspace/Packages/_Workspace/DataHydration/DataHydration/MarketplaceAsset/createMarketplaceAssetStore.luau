@@ -1,5 +1,7 @@
 ﻿local DataHydration = script:FindFirstAncestor("DataHydration")
-local PromiseModule = require(DataHydration.Parent.Promise)
+local Parent = DataHydration.Parent
+local PromiseModule = require(Parent.Promise)
+local _ = require(Parent.Signals)
 local CreateDataCacheModule = require(DataHydration.createDataCache)
 local _ = require(DataHydration.DataHydrationTypes)
 local _ = require(script.Parent.MarketplaceAssetStoreTypes)
@@ -68,6 +70,18 @@ return function()
 				end,
 				status = CachedItem.status
 			}
+		end,
+		getCreatingUniverseId = function(p1)
+			-- upvalues: DataResolverModule (copy)
+			local DataFunction = DataResolverModule.getCachedItem(p1).data
+			
+			return function(p2)
+				-- upvalues: DataFunction (copy)
+				local DataResult = DataFunction(p2)
+				local CreatingUniverseId = if DataResult then DataResult.creatingUniverseId else nil
+				
+				return if typeof(CreatingUniverseId) == "number" then tostring(CreatingUniverseId) elseif typeof(CreatingUniverseId) == "string" and CreatingUniverseId ~= "" then CreatingUniverseId else nil
+			end
 		end,
 		updateMarketplaceAssetInfo = DataCacheModule.updateItem,
 		updateMarketplaceAssetInfos = DataCacheModule.updateItems,

@@ -1,5 +1,6 @@
 ﻿local PurchasePrompt = script:FindFirstAncestor("PurchasePrompt")
 local HttpService = game:GetService("HttpService")
+local Players = game:GetService("Players")
 local Parent = PurchasePrompt.Parent
 local IAPExperienceModule = require(Parent.IAPExperience)
 local IsEconomicRestrictionResponseFunction = IAPExperienceModule.Utility.isEconomicRestrictionResponse
@@ -20,6 +21,7 @@ local PerformExperiencePurchaseModule = require(PurchasePrompt.Network.performEx
 local PerformLookPurchaseModule = require(PurchasePrompt.Network.performLookPurchase)
 local PerformDeveloperSubscriptionRobuxPurchaseModule = require(PurchasePrompt.Network.performDeveloperSubscriptionRobuxPurchase)
 local PerformDeveloperSubscriptionFiatPurchaseModule = require(PurchasePrompt.Network.performDeveloperSubscriptionFiatPurchase)
+local PerformVIPServerPurchaseModule = require(PurchasePrompt.Network.performVIPServerPurchase)
 local DeriveSelectedOfferIdsFromCartPricingModule = require(PurchasePrompt.Utils.deriveSelectedOfferIdsFromCartPricing)
 local ApplyCartPricingOffersToLineItemsModule = require(PurchasePrompt.Utils.applyCartPricingOffersToLineItems)
 local SelectProductPriceModule = require(PurchasePrompt.Selectors.selectProductPrice)
@@ -28,6 +30,8 @@ local FFlagPurchasePromptFetchCartPricingForLooks = require(Parent.SharedFlags).
 local FFlagEnablePriceChangedErrorHandlingModule = require(PurchasePrompt.Flags.FFlagEnablePriceChangedErrorHandling)
 local FFlagEnableRequestLocationTypeForSduiPurchaseModule = require(PurchasePrompt.Flags.FFlagEnableRequestLocationTypeForSduiPurchase)
 local FFlagEnableSearchGameItemOwnershipUpdate = require(Parent.SharedFlags).FFlagEnableSearchGameItemOwnershipUpdate
+local FFlagLuaAppsEnablePromptVIPServerPurchase = require(Parent.SharedFlags).FFlagLuaAppsEnablePromptVIPServerPurchase
+local RobloxTranslatorModule = require(Parent.RobloxTranslator)
 local ProductPurchaseSurface = require(Parent.PurchasePromptLite).Enums.ProductPurchaseSurface
 local config = {
 	[ProductPurchaseSurface.EDP] = "ExperienceDetailPage",
@@ -70,16 +74,16 @@ local function handleGenericPurchaseError(p1, p2, Kind)
 end
 
 return function()
-	-- upvalues: ThunkModule (copy), list (copy), NetworkModule (copy), AnalyticsModule (copy), ConstantsModule (copy), FFlagEnableRequestLocationTypeForSduiPurchaseModule (copy), config (copy), HttpService (copy), PerformDevProductEdpPurchaseModule (copy), CompletePurchaseModule (copy), PromiseModule (copy), handleGenericPurchaseError (copy), FFlagEnablePriceChangedErrorHandlingModule (copy), ProductTypeEnum (copy), PerformExperiencePurchaseModule (copy), FFlagPurchasePromptFetchCartPricingForLooks (copy), SelectProductPriceModule (copy), DeriveSelectedOfferIdsFromCartPricingModule (copy), ApplyCartPricingOffersToLineItemsModule (copy), PerformLookPurchaseModule (copy), FFlagEnableUnifiedPurchaseFlowForDevSubs (copy), PerformDeveloperSubscriptionRobuxPurchaseModule (copy), PerformDeveloperSubscriptionFiatPurchaseModule (copy)
+	-- upvalues: ThunkModule (copy), list (copy), NetworkModule (copy), AnalyticsModule (copy), ConstantsModule (copy), FFlagEnableRequestLocationTypeForSduiPurchaseModule (copy), config (copy), HttpService (copy), PerformDevProductEdpPurchaseModule (copy), CompletePurchaseModule (copy), PromiseModule (copy), handleGenericPurchaseError (copy), FFlagEnablePriceChangedErrorHandlingModule (copy), ProductTypeEnum (copy), PerformExperiencePurchaseModule (copy), FFlagPurchasePromptFetchCartPricingForLooks (copy), SelectProductPriceModule (copy), DeriveSelectedOfferIdsFromCartPricingModule (copy), ApplyCartPricingOffersToLineItemsModule (copy), PerformLookPurchaseModule (copy), FFlagEnableUnifiedPurchaseFlowForDevSubs (copy), PerformDeveloperSubscriptionRobuxPurchaseModule (copy), PerformDeveloperSubscriptionFiatPurchaseModule (copy), FFlagLuaAppsEnablePromptVIPServerPurchase (copy), RobloxTranslatorModule (copy), Players (copy), PerformVIPServerPurchaseModule (copy)
 	return ThunkModule.new(script.Name, list, function(p1, p2)
-		-- upvalues: NetworkModule (upval), AnalyticsModule (upval), ConstantsModule (upval), FFlagEnableRequestLocationTypeForSduiPurchaseModule (upval), config (upval), HttpService (upval), PerformDevProductEdpPurchaseModule (upval), CompletePurchaseModule (upval), PromiseModule (upval), handleGenericPurchaseError (upval), FFlagEnablePriceChangedErrorHandlingModule (upval), ProductTypeEnum (upval), PerformExperiencePurchaseModule (upval), FFlagPurchasePromptFetchCartPricingForLooks (upval), SelectProductPriceModule (upval), DeriveSelectedOfferIdsFromCartPricingModule (upval), ApplyCartPricingOffersToLineItemsModule (upval), PerformLookPurchaseModule (upval), FFlagEnableUnifiedPurchaseFlowForDevSubs (upval), PerformDeveloperSubscriptionRobuxPurchaseModule (upval), PerformDeveloperSubscriptionFiatPurchaseModule (upval)
+		-- upvalues: NetworkModule (upval), AnalyticsModule (upval), ConstantsModule (upval), FFlagEnableRequestLocationTypeForSduiPurchaseModule (upval), config (upval), HttpService (upval), PerformDevProductEdpPurchaseModule (upval), CompletePurchaseModule (upval), PromiseModule (upval), handleGenericPurchaseError (upval), FFlagEnablePriceChangedErrorHandlingModule (upval), ProductTypeEnum (upval), PerformExperiencePurchaseModule (upval), FFlagPurchasePromptFetchCartPricingForLooks (upval), SelectProductPriceModule (upval), DeriveSelectedOfferIdsFromCartPricingModule (upval), ApplyCartPricingOffersToLineItemsModule (upval), PerformLookPurchaseModule (upval), FFlagEnableUnifiedPurchaseFlowForDevSubs (upval), PerformDeveloperSubscriptionRobuxPurchaseModule (upval), PerformDeveloperSubscriptionFiatPurchaseModule (upval), FFlagLuaAppsEnablePromptVIPServerPurchase (upval), RobloxTranslatorModule (upval), Players (upval), PerformVIPServerPurchaseModule (upval)
 		local v1 = p2[NetworkModule]
 		local v2 = p2[AnalyticsModule]
 		local State = p1:getState()
 		local ProductInfo = State.productInfo
 		local Price = ProductInfo.price
 		local ProductId = ProductInfo.productId
-		local _ = State.promptRequest
+		local PromptRequest = State.promptRequest
 		local Id = State.promptRequest.id
 		local ProductPayload = State.productPayload
 		
@@ -171,14 +175,28 @@ return function()
 					-- upvalues: handleGenericPurchaseError (upval), p1 (copy), FFlagEnablePriceChangedErrorHandlingModule (upval), ProductPayload (copy)
 					handleGenericPurchaseError(p1, Err, if FFlagEnablePriceChangedErrorHandlingModule then ProductPayload.kind else nil)
 				end)
-			elseif not FFlagEnableUnifiedPurchaseFlowForDevSubs or ProductPayload.kind ~= ProductTypeEnum.DeveloperSubscription then return end
-			local SubscriptionId = ProductPayload.subscriptionId
-			
-			return (if ProductPayload.isSubscriptionInRobux then PerformDeveloperSubscriptionRobuxPurchaseModule(v1, SubscriptionId, ProductPayload.expectedPrice) else PerformDeveloperSubscriptionFiatPurchaseModule(v1, SubscriptionId)):andThen(function()
-				-- upvalues: p1 (copy), CompletePurchaseModule (upval), PromiseModule (upval)
-				p1:dispatch(CompletePurchaseModule())
+			elseif FFlagEnableUnifiedPurchaseFlowForDevSubs and ProductPayload.kind == ProductTypeEnum.DeveloperSubscription then
+				local SubscriptionId = ProductPayload.subscriptionId
 				
-				return PromiseModule.resolve()
+				return (if ProductPayload.isSubscriptionInRobux then PerformDeveloperSubscriptionRobuxPurchaseModule(v1, SubscriptionId, ProductPayload.expectedPrice) else PerformDeveloperSubscriptionFiatPurchaseModule(v1, SubscriptionId)):andThen(function()
+					-- upvalues: p1 (copy), CompletePurchaseModule (upval), PromiseModule (upval)
+					p1:dispatch(CompletePurchaseModule())
+					
+					return PromiseModule.resolve()
+				end):catch(function(Err)
+					-- upvalues: handleGenericPurchaseError (upval), p1 (copy), FFlagEnablePriceChangedErrorHandlingModule (upval), ProductPayload (copy)
+					handleGenericPurchaseError(p1, Err, if FFlagEnablePriceChangedErrorHandlingModule then ProductPayload.kind else nil)
+				end)
+			elseif not FFlagLuaAppsEnablePromptVIPServerPurchase or ProductPayload.kind ~= ProductTypeEnum.VIPServer then return end
+			return PerformVIPServerPurchaseModule(v1, ProductPayload.universeId, {
+				name = RobloxTranslatorModule:FormatByKey("Feature.PrivateServers.Label.OwnersServer", { displayName = Players.LocalPlayer.DisplayName }),
+				expectedPrice = Price,
+				idempotencyKey = PromptRequest.idempotencyKey
+			}):andThen(function(Result)
+				-- upvalues: p1 (copy), CompletePurchaseModule (upval), PromiseModule (upval)
+				p1:dispatch(CompletePurchaseModule(Result))
+				
+				return PromiseModule.resolve(Result)
 			end):catch(function(Err)
 				-- upvalues: handleGenericPurchaseError (upval), p1 (copy), FFlagEnablePriceChangedErrorHandlingModule (upval), ProductPayload (copy)
 				handleGenericPurchaseError(p1, Err, if FFlagEnablePriceChangedErrorHandlingModule then ProductPayload.kind else nil)

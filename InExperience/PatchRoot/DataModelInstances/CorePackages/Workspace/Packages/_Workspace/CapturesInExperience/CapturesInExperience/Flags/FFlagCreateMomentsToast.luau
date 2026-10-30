@@ -1,1 +1,1 @@
-﻿return game:DefineFastFlag("CreateMomentsToast_v3", false)
+﻿return game:DefineFastFlag("CreateMomentsToast_v4", false)

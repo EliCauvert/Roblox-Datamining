@@ -1,7 +1,8 @@
 ﻿local CorePackages = game:GetService("CorePackages")
 local UserInputService = game:GetService("UserInputService")
 local RobloxGui = game:GetService("CoreGui"):WaitForChild("RobloxGui")
-local IsEnabled = require(RobloxGui.Modules.TenFootInterface):IsEnabled()
+local FFlagResponsiveUnitsDeprecateTenFoot = require(CorePackages.Workspace.Packages.SharedFlags).FFlagResponsiveUnitsDeprecateTenFoot
+local NoFFlagResponsiveUnitsDeprecateTenFoot: boolean = require(RobloxGui.Modules.TenFootInterface):IsEnabled() and not FFlagResponsiveUnitsDeprecateTenFoot
 local AppFonts = require(CorePackages.Workspace.Packages.Style).AppFonts
 local DarkTheme = require(CorePackages.Workspace.Packages.Style).Themes.DarkTheme
 local UIBloxModule = require(CorePackages.Packages.UIBlox)
@@ -52,10 +53,10 @@ local config2 = {
 		RelativeSize = config[Enum.FontSize.Size24]
 	},
 	Username = {
-		RelativeSize = if IsEnabled then config[Enum.FontSize.Size24] else config[Enum.FontSize.Size18]
+		RelativeSize = if NoFFlagResponsiveUnitsDeprecateTenFoot then config[Enum.FontSize.Size24] else config[Enum.FontSize.Size18]
 	},
 	DisplayName = {
-		RelativeSize = if IsEnabled then Enum.FontSize.Size24 else Enum.FontSize.Size18,
+		RelativeSize = if NoFFlagResponsiveUnitsDeprecateTenFoot then Enum.FontSize.Size24 else Enum.FontSize.Size18,
 		Font = AppFonts.default:getMedium()
 	},
 	Settings_Font = { Font = AppFonts.default:getDefault() },
@@ -83,7 +84,7 @@ local config2 = {
 	Utility_Row_Small_Font = { TextSize = 12.704, Font = AppFonts.default:getDefault() },
 	Utility_Row_Font = {
 		Font = AppFonts.default:getMedium(),
-		TextSize = if game:DefineFastFlag("IncreaseUtilityRowTextSizeConsole", false) and IsEnabled then 19.056 else 12.704
+		TextSize = if game:DefineFastFlag("IncreaseUtilityRowTextSizeConsole", false) and NoFFlagResponsiveUnitsDeprecateTenFoot then 19.056 else 12.704
 	},
 	Back_Button_Font = { TextSize = 19.056, Font = AppFonts.default:getSemibold() },
 	Semibold_Font = { Font = AppFonts.default:getSemibold() },

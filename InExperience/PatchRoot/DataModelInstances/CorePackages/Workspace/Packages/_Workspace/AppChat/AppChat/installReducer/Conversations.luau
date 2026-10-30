@@ -15,7 +15,6 @@ local GetFFlagAppChatPCMFixBlockingFunction = require(Parent.SharedFlags).getFFl
 local UpdateConversationReducerModule = require(script.Parent.updateConversationReducer)
 local GetOneToOneConversationIdFromFriendIdModule = require(AppChat.Utils.getOneToOneConversationIdFromFriendId)
 local GetFFlagAppChatEnableManualTranslationModule = require(AppChat.Flags.getFFlagAppChatEnableManualTranslation)
-local FFlagAppChatEnableDoubleOptIn = require(Parent.SharedFlags).FFlagAppChatEnableDoubleOptIn
 local ConstantsModule = require(AppChat.Constants)
 local config = {
 	[ConstantsModule.OptInVariant.OsaContextCard] = {
@@ -499,14 +498,14 @@ return require(Parent.Rodux).createReducer({}, {
 		end
 		return JoinResult1
 	end,
-	[require(AppChat.Conversations.Actions.ConversationModerationTypeChanged).name] = if FFlagAppChatEnableDoubleOptIn then function(p11, p12)
+	[require(AppChat.Conversations.Actions.ConversationModerationTypeChanged).name] = function(p11, p12)
 		-- upvalues: Immutable (copy)
 		local ConversationId = p12.conversationId
 		local ModerationType = p12.moderationType
 		local v3 = p11[ConversationId]
 		
 		return if v3 then Immutable.Set(p11, ConversationId, (Immutable.Set(v3, "moderationType", ModerationType))) else p11
-	end else nil,
+	end,
 	[AppChatNetworkingModule.rodux.RecordModalSequenceResponse.Succeeded.name] = function(p11, p12)
 		-- upvalues: ConstantsModule (copy), config (copy), ConversationChannelsModule (copy), Immutable (copy)
 		local PostBody = p12.postBody

@@ -14,15 +14,18 @@ local FFlagCreateConnectionsHub = require(Parent.SharedFlags).FFlagCreateConnect
 local FFlagEnableSocialTabsPage = require(Parent.SharedFlags).FFlagEnableSocialTabsPage
 local FFlagSignalsNavP3Dispatch = require(Parent.SharedFlags).FFlagSignalsNavP3Dispatch
 local NavigationCommands = if FFlagSignalsNavP3Dispatch then require(Parent.RobloxAppNavigation).NavigationCommands else nil
+local FFlagSocialTabsPageIxpEnabledModule = require(ProfilePlatform.Flags.FFlagSocialTabsPageIxpEnabled)
+local FStringSocialTabsPageIxpLayerModule = require(ProfilePlatform.Flags.FStringSocialTabsPageIxpLayer)
+local IXPServiceWrapper = if FFlagSocialTabsPageIxpEnabledModule then require(Parent.IXPServiceWrapper).IXPServiceWrapper else nil
 
-return function(ProfileId, p1, p2, MutualFriendIds, Title)
-	-- upvalues: UseDispatchFunction (copy), UseNavigationFunction (copy), FFlagEnableSocialTabsPage (copy), UseProfileFormFactorModule (copy), ReactModule (copy), AppPage (copy), EventNamesModule (copy), FFlagSignalsNavP3Dispatch (copy), NavigationCommands (copy), NavigateDownFunction (copy), Url (copy), TextKeysModule (copy), FFlagCreateConnectionsHub (copy), UrlBuilder (copy)
+return function(ProfileId, p1, p2, MutualFriendIds, Title, p3)
+	-- upvalues: UseDispatchFunction (copy), UseNavigationFunction (copy), FFlagEnableSocialTabsPage (copy), UseProfileFormFactorModule (copy), ReactModule (copy), AppPage (copy), EventNamesModule (copy), FFlagSocialTabsPageIxpEnabledModule (copy), IXPServiceWrapper (copy), FStringSocialTabsPageIxpLayerModule (copy), FFlagSignalsNavP3Dispatch (copy), NavigationCommands (copy), NavigateDownFunction (copy), Url (copy), TextKeysModule (copy), FFlagCreateConnectionsHub (copy), UrlBuilder (copy)
 	local UseDispatchResult = UseDispatchFunction()
 	local UseNavigationResult = UseNavigationFunction()
 	local NoIsFullView = if FFlagEnableSocialTabsPage then not UseProfileFormFactorModule().isFullView else nil
 	
 	return ReactModule.useMemo(function()
-		-- upvalues: MutualFriendIds (copy), AppPage (upval), p2 (copy), EventNamesModule (upval), FFlagEnableSocialTabsPage (upval), p1 (copy), ProfileId (copy), Title (copy), NoIsFullView (copy), FFlagSignalsNavP3Dispatch (upval), NavigationCommands (upval), UseDispatchResult (copy), NavigateDownFunction (upval), Url (upval), TextKeysModule (upval), FFlagCreateConnectionsHub (upval), UseNavigationResult (copy), UrlBuilder (upval)
+		-- upvalues: MutualFriendIds (copy), AppPage (upval), p2 (copy), EventNamesModule (upval), FFlagSocialTabsPageIxpEnabledModule (upval), IXPServiceWrapper (upval), FStringSocialTabsPageIxpLayerModule (upval), FFlagEnableSocialTabsPage (upval), p1 (copy), ProfileId (copy), Title (copy), NoIsFullView (copy), FFlagSignalsNavP3Dispatch (upval), NavigationCommands (upval), UseDispatchResult (copy), NavigateDownFunction (upval), Url (upval), TextKeysModule (upval), p3 (copy), FFlagCreateConnectionsHub (upval), UseNavigationResult (copy), UrlBuilder (upval)
 		local function buildTabConfig()
 			-- upvalues: MutualFriendIds (upval), AppPage (upval)
 			local List = {}
@@ -43,9 +46,12 @@ return function(ProfileId, p1, p2, MutualFriendIds, Title)
 		
 		return {
 			mutualFriendsCount = function()
-				-- upvalues: p2 (upval), EventNamesModule (upval), FFlagEnableSocialTabsPage (upval), p1 (upval), AppPage (upval), ProfileId (upval), Title (upval), buildTabConfig (copy), NoIsFullView (upval), FFlagSignalsNavP3Dispatch (upval), NavigationCommands (upval), UseDispatchResult (upval), NavigateDownFunction (upval), MutualFriendIds (upval)
+				-- upvalues: p2 (upval), EventNamesModule (upval), FFlagSocialTabsPageIxpEnabledModule (upval), IXPServiceWrapper (upval), FStringSocialTabsPageIxpLayerModule (upval), FFlagEnableSocialTabsPage (upval), p1 (upval), AppPage (upval), ProfileId (upval), Title (upval), buildTabConfig (copy), NoIsFullView (upval), FFlagSignalsNavP3Dispatch (upval), NavigationCommands (upval), UseDispatchResult (upval), NavigateDownFunction (upval), MutualFriendIds (upval)
 				p2.fireAnalyticsEvent(EventNamesModule.MutualFriendsButton)
 				
+				if FFlagSocialTabsPageIxpEnabledModule then
+					IXPServiceWrapper:LogFlagLinkedUserLayerExposure(FStringSocialTabsPageIxpLayerModule)
+				end
 				if FFlagEnableSocialTabsPage and not p1 then
 					local config1 = {
 						name = AppPage.SocialTabsPage,
@@ -118,9 +124,12 @@ return function(ProfileId, p1, p2, MutualFriendIds, Title)
 				end
 			end,
 			friendsCount = function()
-				-- upvalues: p2 (upval), EventNamesModule (upval), p1 (upval), FFlagCreateConnectionsHub (upval), UseNavigationResult (upval), AppPage (upval), FFlagSignalsNavP3Dispatch (upval), NavigationCommands (upval), UseDispatchResult (upval), NavigateDownFunction (upval), FFlagEnableSocialTabsPage (upval), ProfileId (upval), Title (upval), buildTabConfig (copy), NoIsFullView (upval), UrlBuilder (upval), TextKeysModule (upval)
+				-- upvalues: p2 (upval), EventNamesModule (upval), FFlagSocialTabsPageIxpEnabledModule (upval), p1 (upval), p3 (upval), IXPServiceWrapper (upval), FStringSocialTabsPageIxpLayerModule (upval), FFlagCreateConnectionsHub (upval), UseNavigationResult (upval), AppPage (upval), FFlagSignalsNavP3Dispatch (upval), NavigationCommands (upval), UseDispatchResult (upval), NavigateDownFunction (upval), FFlagEnableSocialTabsPage (upval), ProfileId (upval), Title (upval), buildTabConfig (copy), NoIsFullView (upval), UrlBuilder (upval), TextKeysModule (upval)
 				p2.fireAnalyticsEvent(EventNamesModule.FriendsButton)
 				
+				if FFlagSocialTabsPageIxpEnabledModule and not p1 and p3 then
+					IXPServiceWrapper:LogFlagLinkedUserLayerExposure(FStringSocialTabsPageIxpLayerModule)
+				end
 				if p1 then
 					if FFlagCreateConnectionsHub then
 						UseNavigationResult.navigate(AppPage.CoHubMyConnections)
@@ -189,6 +198,7 @@ return function(ProfileId, p1, p2, MutualFriendIds, Title)
 		ProfileId, p1, p2, UseDispatchResult, MutualFriendIds,
 		if FFlagEnableSocialTabsPage then Title or "" else nil,
 		if FFlagEnableSocialTabsPage then NoIsFullView else nil,
-		if FFlagEnableSocialTabsPage then UseNavigationResult else nil
+		if FFlagEnableSocialTabsPage then UseNavigationResult else nil,
+		if FFlagSocialTabsPageIxpEnabledModule then p3 else nil
 	})
 end

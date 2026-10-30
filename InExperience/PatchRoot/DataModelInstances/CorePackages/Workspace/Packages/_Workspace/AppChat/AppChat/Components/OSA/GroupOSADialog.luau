@@ -54,6 +54,9 @@ local SquadPromptType = require(Parent.SquadsCore.Enums).SquadPromptType
 local ShouldShowU13ChatOptInForConversationModule = require(AppChat.Utils.shouldShowU13ChatOptInForConversation)
 local FFlagAppChatEnableU13ChatOptIn = require(Parent.SharedFlags).FFlagAppChatEnableU13ChatOptIn
 local FFlagFriendsChatEnableConversationConsent = require(Parent.SharedFlags).FFlagFriendsChatEnableConversationConsent
+local FFlagAppChatUseUserProfileHydrationModule = require(AppChat.Flags.FFlagAppChatUseUserProfileHydration)
+local UseProfileNameModule = require(AppChat.Hooks.useProfileName)
+local DataStatus = require(Parent.DataHydration).DataStatus
 local AppChatGroupOsaViewDetailsUrl = game:DefineFastString("AppChatGroupOsaViewDetailsUrl", "https://en.help.roblox.com/hc/en-us/articles/360000432483-Party-chat-In-App")
 local InlineRichTextModule = require(Parent.InlineRichText)
 local Renderer = InlineRichTextModule.Renderer
@@ -79,7 +82,7 @@ local function _(p1, p2)
 end
 
 return function(p1)
-	-- upvalues: CryoModule (copy), config1 (copy), FFlagAppChatEnableU13ChatOptIn (copy), OsaContextCard (copy), UseDispatchFunction (copy), UseStoreFunction (copy), UseLocalUserIdFunction (copy), UseTokensFunction (copy), UseAppPolicyModule (copy), ReactModule (copy), IsPlaceIdAbove (copy), LinkBehavior (copy), UseEffectFunction (copy), UseTelemetryModule (copy), AppTelemetryLayerModule (copy), ConversationListOverlayTelemetryModule (copy), SquadExternalContractContext (copy), UseGetConversationFromIdModule (copy), config (copy), ShouldShowU13ChatOptInForConversationModule (copy), ConstantsModule (copy), FFlagFriendsChatEnableConversationConsent (copy), APIFunction (copy), NewResult (copy), GetConversationStoreModule (copy), ReceivedConversationModule (copy), ConversationRoduxSeedModule (copy), UseSelectorFunction (copy), GetDeepValue2Module (copy), AppChatNetworkingModule (copy), UseUserProfilesFetchFunction (copy), UserProfilesModule (copy), _DateTime (copy), GetCombinedNameFromIdFunction (copy), ConversationModule (copy), UseLocalizationFunction (copy), AppChatGroupOsaViewDetailsUrl (copy), UserRow (copy), FoundationModule (copy), BadgeVariant (copy), ModalTelemetryModule (copy), FocusNavigationEventNameEnum (copy), InputHandlersModule (copy), UseFocusRootFunction (copy), FocusNavigableSurfaceIdentifierEnum (copy), EventMap (copy), UseDefaultFocusBehaviorFunction (copy), UseLastInputFunction (copy), ResponsiveModule (copy), SquadPromptType (copy), UseRecordModalSequenceResponseForConversationModule (copy), Accept (copy), ConversationListOverlay (copy), APIFunction1 (copy), Skeleton (copy), Radius (copy), Dialog (copy), Renderer (copy), Orientation (copy), ButtonVariant (copy)
+	-- upvalues: CryoModule (copy), config1 (copy), FFlagAppChatEnableU13ChatOptIn (copy), OsaContextCard (copy), UseDispatchFunction (copy), UseStoreFunction (copy), UseLocalUserIdFunction (copy), UseTokensFunction (copy), UseAppPolicyModule (copy), ReactModule (copy), IsPlaceIdAbove (copy), LinkBehavior (copy), UseEffectFunction (copy), UseTelemetryModule (copy), AppTelemetryLayerModule (copy), ConversationListOverlayTelemetryModule (copy), SquadExternalContractContext (copy), UseGetConversationFromIdModule (copy), config (copy), ShouldShowU13ChatOptInForConversationModule (copy), ConstantsModule (copy), FFlagFriendsChatEnableConversationConsent (copy), APIFunction (copy), NewResult (copy), GetConversationStoreModule (copy), ReceivedConversationModule (copy), ConversationRoduxSeedModule (copy), UseSelectorFunction (copy), GetDeepValue2Module (copy), AppChatNetworkingModule (copy), FFlagAppChatUseUserProfileHydrationModule (copy), UseProfileNameModule (copy), UseUserProfilesFetchFunction (copy), UserProfilesModule (copy), _DateTime (copy), DataStatus (copy), GetCombinedNameFromIdFunction (copy), ConversationModule (copy), UseLocalizationFunction (copy), AppChatGroupOsaViewDetailsUrl (copy), UserRow (copy), FoundationModule (copy), BadgeVariant (copy), ModalTelemetryModule (copy), FocusNavigationEventNameEnum (copy), InputHandlersModule (copy), UseFocusRootFunction (copy), FocusNavigableSurfaceIdentifierEnum (copy), EventMap (copy), UseDefaultFocusBehaviorFunction (copy), UseLastInputFunction (copy), ResponsiveModule (copy), SquadPromptType (copy), UseRecordModalSequenceResponseForConversationModule (copy), Accept (copy), ConversationListOverlay (copy), APIFunction1 (copy), Skeleton (copy), Radius (copy), Dialog (copy), Renderer (copy), Orientation (copy), ButtonVariant (copy)
 	local UnionResult = CryoModule.Dictionary.union(config1, p1)
 	local ModalVariant = if FFlagAppChatEnableU13ChatOptIn then UnionResult.modalVariant else OsaContextCard
 	local UseDispatchResult = UseDispatchFunction()
@@ -199,10 +202,17 @@ return function(p1)
 		end
 		return nil
 	end, { UseSelectorResult })
-	local UseUserProfilesFetchResult = UseUserProfilesFetchFunction({
-		userIds = if UseMemoResult1 then { UseMemoResult1 } else {},
-		query = UserProfilesModule.Queries.userProfilesCombinedNameAndUsernameByUserIds
-	})
+	local v1 = nil
+	local v2 = nil
+	
+	if FFlagAppChatUseUserProfileHydrationModule then
+		v2 = UseProfileNameModule(UseMemoResult1)
+	else
+		v1 = UseUserProfilesFetchFunction({
+			userIds = if UseMemoResult1 then { UseMemoResult1 } else {},
+			query = UserProfilesModule.Queries.userProfilesCombinedNameAndUsernameByUserIds
+		})
+	end
 	local UseMemoResult2 = ReactModule.useMemo(function()
 		-- upvalues: UseGetConversationFromIdModuleResult1 (copy), CryoModule (upval), UseLocalUserIdResult (copy)
 		return if UseGetConversationFromIdModuleResult1 and UseGetConversationFromIdModuleResult1.participants then CryoModule.List.filter(UseGetConversationFromIdModuleResult1.participants, function(p2): boolean
@@ -213,12 +223,13 @@ return function(p1)
 		UseGetConversationFromIdModuleResult1,
 		UseLocalUserIdResult
 	})
-	local Data = if UseUserProfilesFetchResult then UseUserProfilesFetchResult.data else nil
-	local Loading = if UseUserProfilesFetchResult then UseUserProfilesFetchResult.loading else false
+	local Data = if v1 then v1.data else nil
+	local CombinedName = if FFlagAppChatUseUserProfileHydrationModule then v2.combinedName else nil
+	local NoCombinedName = if FFlagAppChatUseUserProfileHydrationModule then v2.status == DataStatus.NotReady and CombinedName == nil elseif v1 then v1.loading else false
 	local UseMemoResult3 = ReactModule.useMemo(function()
-		-- upvalues: UseMemoResult1 (copy), Data (copy), GetCombinedNameFromIdFunction (upval)
-		return if UseMemoResult1 and Data then GetCombinedNameFromIdFunction(Data, UseMemoResult1) else nil
-	end, { UseMemoResult1, Data })
+		-- upvalues: FFlagAppChatUseUserProfileHydrationModule (upval), CombinedName (copy), UseMemoResult1 (copy), Data (copy), GetCombinedNameFromIdFunction (upval)
+		return if FFlagAppChatUseUserProfileHydrationModule then CombinedName elseif UseMemoResult1 and Data then GetCombinedNameFromIdFunction(Data, UseMemoResult1) else nil
+	end, { UseMemoResult1, Data, CombinedName })
 	local IsConversationTypeMatch = UseGetConversationFromIdModuleResult1.conversationType == ConversationModule.Type.MULTI_USER_CONVERSATION
 	local UseLocalizationResult = UseLocalizationFunction({
 		titleText = "Feature.Chat.Heading.YouWereInvitedToGroup",
@@ -417,7 +428,7 @@ return function(p1)
 		UseLocalUserIdResult
 	})
 	local NoUseSelectorResult: boolean = UseGetConversationFromIdModuleResult1.source == "channels" and UseSelectorResult == nil
-	local NoUseGetConversationFromIdModuleResult = not UseGetConversationFromIdModuleResult or (NoUseSelectorResult or UseMemoResult1 ~= nil and Loading)
+	local NoUseGetConversationFromIdModuleResult = not UseGetConversationFromIdModuleResult or (NoUseSelectorResult or UseMemoResult1 ~= nil and NoCombinedName)
 	local InviterTitleText = if UseMemoResult3 then if IsConversationTypeMatch then UseLocalizationResult.inviterTitleText else UseLocalizationResult.inviterTitleTextOneToOne else UseLocalizationResult.titleText
 	local UseMemoResult5 = ReactModule.useMemo(function()
 		-- upvalues: ReactModule (upval), FoundationModule (upval), Skeleton (upval), UseTokensResult (copy), Radius (upval)

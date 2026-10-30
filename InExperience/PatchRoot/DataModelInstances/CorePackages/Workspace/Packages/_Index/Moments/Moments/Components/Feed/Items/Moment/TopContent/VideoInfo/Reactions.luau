@@ -10,7 +10,7 @@ local StateLayerAffordance = FoundationModule.Enums.StateLayerAffordance
 local UseTokensFunction = FoundationModule.Hooks.useTokens
 local UseSignalBindingFunction = SignalsReactModule.useSignalBinding
 local UseSignalStateFunction = SignalsReactModule.useSignalState
-local Reaction = MomentsCommonModule.Components.Reaction
+local ReactionModule = if require(Moments.Flags.FFlagMomentsUseSharedReactions) then require(Parent.Reactions.Reaction) else MomentsCommonModule.Components.Reaction
 local ReactionSize = MomentsCommonModule.Enums.ReactionSize
 local MomentContextModule = require(script.Parent.Parent.Parent.MomentContext)
 local ReactionsSheetModule = require(Moments.Components.ReactionsSheet)
@@ -21,7 +21,7 @@ local function _(p1: number): string
 end
 
 return ReactModule.memo(function(Frame)
-	-- upvalues: UseTokensFunction (copy), MomentContextModule (copy), ReactModule (copy), UseSignalBindingFunction (copy), UseSignalStateFunction (copy), GetColorStyleWithTransparencyModule (copy), Reaction (copy), ReactionSize (copy), View (copy), StateLayerAffordance (copy), Text (copy), ReactionsSheetModule (copy)
+	-- upvalues: UseTokensFunction (copy), MomentContextModule (copy), ReactModule (copy), UseSignalBindingFunction (copy), UseSignalStateFunction (copy), GetColorStyleWithTransparencyModule (copy), ReactionModule (copy), ReactionSize (copy), View (copy), StateLayerAffordance (copy), Text (copy), ReactionsSheetModule (copy)
 	local UseTokensResult = UseTokensFunction()
 	local UseMomentResult = MomentContextModule.useMoment()
 	local UseStateResult, UseStateResult2 = ReactModule.useState(false)
@@ -43,7 +43,7 @@ return ReactModule.memo(function(Frame)
 	local Elements = {}
 	
 	for i = 1, math.min(3, #UseSignalStateResult) do
-		Elements["Reaction" .. i] = ReactModule.createElement(Reaction, {
+		Elements["Reaction" .. i] = ReactModule.createElement(ReactionModule, {
 			LayoutOrder = i,
 			reactionType = UseSignalStateResult[i].reaction,
 			size = ReactionSize.Small,

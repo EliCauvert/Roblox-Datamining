@@ -11,7 +11,7 @@ local SduiFeatureEntryPoint = SduiSharedUtilitiesModule.SduiFeatureEntryPoint
 local UseComponentConfigFunction = SduiSharedUtilitiesModule.useComponentConfig
 local EnumsModule = require(ProfilePlatform.Common.Enums)
 local UseProfileWrapperContextModule = require(ProfilePlatform.Contexts.useProfileWrapperContext)
-local FFlagSduiCustomFormEnabled = require(Parent.SharedFlags).FFlagSduiCustomFormEnabled
+local FFlagGroupPeekEngagementTelemetry = require(Parent.SharedFlags).FFlagGroupPeekEngagementTelemetry
 local GroupPeekSduiModule = nil
 
 local function _()
@@ -28,13 +28,22 @@ local _ = function(p1, Announcements)
 end
 
 local function SectionEntry(p1)
-	-- upvalues: GroupPeekSduiModule (ref), Parent (copy), EnumsModule (copy), UseComponentConfigFunction (copy), ReactModule (copy), HorizontalPageMargin (copy), SduiFeatureEntryPoint (copy)
+	-- upvalues: GroupPeekSduiModule (ref), Parent (copy), EnumsModule (copy), UseComponentConfigFunction (copy), FFlagGroupPeekEngagementTelemetry (copy), ReactModule (copy), HorizontalPageMargin (copy), SduiFeatureEntryPoint (copy)
 	if GroupPeekSduiModule == nil then
 		GroupPeekSduiModule = require(Parent.GroupPeekSdui)
 	end
 	local GroupPeekSduiModule1 = GroupPeekSduiModule
 	local ConfigKey = GroupPeekSduiModule1.getConfigKey(p1.groupId)
 	local Announcement = if p1.section == EnumsModule.Components.Announcements then GroupPeekSduiModule1.Identifiers.Announcement else GroupPeekSduiModule1.Identifiers.ForumsDiscovery
+	local UseMemoResult = if FFlagGroupPeekEngagementTelemetry then ReactModule.useMemo(function()
+		-- upvalues: p1 (copy)
+		return {
+			locationTab = "peek",
+			pageRoute = "/peek",
+			sessionId = p1.sessionId,
+			groupId = tonumber(p1.groupId)
+		}
+	end, { p1.sessionId, p1.groupId }) else nil
 	
 	return if UseComponentConfigFunction(ConfigKey, Announcement) == nil then nil else ReactModule.createElement(HorizontalPageMargin, {
 		backgroundTransparency = 1,
@@ -48,14 +57,16 @@ local function SectionEntry(p1)
 			LayoutOrder = 1,
 			appPage = GroupPeekSduiModule1.AppPage,
 			configKey = ConfigKey,
-			identifier = Announcement
+			identifier = Announcement,
+			additionalAnalyticsData = UseMemoResult
 		})
 	})
 end
 
 return ReactModule.memo(function(p1)
-	-- upvalues: UseProfileWrapperContextModule (copy), UsePreferredInputFunction (copy), ResponsiveModule (copy), ReactModule (copy), PromiseModule (copy), GroupPeekSduiModule (ref), Parent (copy), FFlagSduiCustomFormEnabled (copy), RoactNavigationModule (copy), SectionEntry (copy)
-	local ProfileId = UseProfileWrapperContextModule().profileId
+	-- upvalues: UseProfileWrapperContextModule (copy), UsePreferredInputFunction (copy), ResponsiveModule (copy), ReactModule (copy), PromiseModule (copy), GroupPeekSduiModule (ref), Parent (copy), RoactNavigationModule (copy), SectionEntry (copy)
+	local UseProfileWrapperContextModuleResult = UseProfileWrapperContextModule()
+	local ProfileId = UseProfileWrapperContextModuleResult.profileId
 	local IsNotProfileIdMatch: boolean = not (UsePreferredInputFunction() == ResponsiveModule.Input.Directional) and (ProfileId ~= nil and ProfileId ~= "")
 	local UseResult = ReactModule.useCallback(function(p2)
 		-- upvalues: PromiseModule (upval), GroupPeekSduiModule (upval), Parent (upval), ProfileId (copy)
@@ -68,14 +79,12 @@ return ReactModule.memo(function(p1)
 		end):catch(function() end)
 	end, { ProfileId })
 	ReactModule.useEffect(function()
-		-- upvalues: IsNotProfileIdMatch (copy), FFlagSduiCustomFormEnabled (upval), GroupPeekSduiModule (upval), Parent (upval), UseResult (copy)
+		-- upvalues: IsNotProfileIdMatch (copy), GroupPeekSduiModule (upval), Parent (upval), UseResult (copy)
 		if not IsNotProfileIdMatch then return end
-		if FFlagSduiCustomFormEnabled then
-			if GroupPeekSduiModule == nil then
-				GroupPeekSduiModule = require(Parent.GroupPeekSdui)
-			end
-			GroupPeekSduiModule.registerGroupAnnouncementActions()
+		if GroupPeekSduiModule == nil then
+			GroupPeekSduiModule = require(Parent.GroupPeekSdui)
 		end
+		GroupPeekSduiModule.registerGroupAnnouncementActions()
 		UseResult(false)
 	end, { IsNotProfileIdMatch, UseResult })
 	
@@ -89,7 +98,8 @@ return ReactModule.memo(function(p1)
 		Section = ReactModule.createElement(SectionEntry, {
 			groupId = ProfileId,
 			layoutOrder = p1.layoutOrder,
-			section = p1.section
+			section = p1.section,
+			sessionId = UseProfileWrapperContextModuleResult.profileSessionId
 		})
 	}) else nil
 end)

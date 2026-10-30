@@ -70,30 +70,6 @@ return {
 		type = DiagEventTypes.Counter,
 		name = game:DefineFastString("ConversationIneligibleModalLearnMoreClickedCounter", "ConversationIneligibleModalLearnMoreClicked")
 	},
-	[EventNamesModule.ConversationPvBannerRendered] = {
-		type = DiagEventTypes.Counter,
-		name = game:DefineFastString("ConversationPvBannerRenderedCounter", "ConversationPvBannerRendered")
-	},
-	[EventNamesModule.ConversationPvBannerActionClicked] = {
-		type = DiagEventTypes.Counter,
-		name = game:DefineFastString("ConversationPvBannerActionClickedCounter", "ConversationPvBannerActionClicked")
-	},
-	[EventNamesModule.ConversationUpgradeBannerRendered] = {
-		type = DiagEventTypes.Counter,
-		name = game:DefineFastString("ConversationUpgradeBannerRenderedCounter", "ConversationUpgradeBannerRendered")
-	},
-	[EventNamesModule.ConversationUpgradeBannerActionClicked] = {
-		type = DiagEventTypes.Counter,
-		name = game:DefineFastString("ConversationUpgradeBannerActionClickedCounter", "ConversationUpgradeBannerActionClicked")
-	},
-	[EventNamesModule.ConversationLearnMoreBannerRendered] = {
-		type = DiagEventTypes.Counter,
-		name = game:DefineFastString("ConversationLearnMoreBannerRenderedCounter", "ConversationLearnMoreBannerRendered")
-	},
-	[EventNamesModule.ConversationLearnMoreBannerActionClicked] = {
-		type = DiagEventTypes.Counter,
-		name = game:DefineFastString("ConversationLearnMoreBannerActionClickedCounter", "ConversationLearnMoreBannerActionClicked")
-	},
 	[EventNamesModule.ConversationUpgradeDialogRendered] = {
 		type = DiagEventTypes.Counter,
 		name = game:DefineFastString("ConversationUpgradeDialogRenderedCounter", "ConversationUpgradeDialogRendered")

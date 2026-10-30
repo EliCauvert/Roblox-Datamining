@@ -1,7 +1,6 @@
 ﻿local FFlagAppChatConversationStoreModule = require(script.Parent.FFlagAppChatConversationStore)
 local FFlagAppChatSignalsMessageStoreModule = require(script.Parent.FFlagAppChatSignalsMessageStore)
 local FFlagAppChatIncrementalPaginationProjectionModule = require(script.Parent.FFlagAppChatIncrementalPaginationProjection)
-local FFlagViewRecyclerReact06 = require(script:FindFirstAncestor("AppChat").Parent.SharedFlags).FFlagViewRecyclerReact06
 local FFlagAppChatSignalsMessageStoreModule1 = require(script.Parent.FFlagAppChatUseFoundationConversationRow) and (FFlagAppChatConversationStoreModule and FFlagAppChatSignalsMessageStoreModule)
 local FFlagAppChatSignalsMessageStoreModule2 = require(script.Parent.FFlagAppChatReadMessageListFromSignalsStore) and FFlagAppChatSignalsMessageStoreModule
 
@@ -9,5 +8,5 @@ return {
 	shouldUseFoundationConversationRow = FFlagAppChatSignalsMessageStoreModule1,
 	shouldReadConversationListFromSignalsStore = require(script.Parent.FFlagAppChatReadConversationListFromSignalsStore) and FFlagAppChatSignalsMessageStoreModule1,
 	shouldReadMessageListFromSignalsStore = FFlagAppChatSignalsMessageStoreModule2,
-	shouldUseViewRecyclerMessageList = require(script.Parent.FFlagAppChatUseViewRecyclerMessageList) and (FFlagAppChatIncrementalPaginationProjectionModule and (FFlagAppChatSignalsMessageStoreModule2 and FFlagViewRecyclerReact06))
+	shouldUseViewRecyclerMessageList = require(script.Parent.FFlagAppChatUseViewRecyclerMessageList) and (FFlagAppChatIncrementalPaginationProjectionModule and FFlagAppChatSignalsMessageStoreModule2)
 }

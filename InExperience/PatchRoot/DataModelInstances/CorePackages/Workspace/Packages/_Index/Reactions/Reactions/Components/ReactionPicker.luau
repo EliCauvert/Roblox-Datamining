@@ -4,6 +4,7 @@ local FoundationModule = require(Parent.Foundation)
 local ReactModule = require(Parent.React)
 local ConstantsModule = require(Reactions.Constants)
 local ReactionButtonModule = require(Reactions.Components.ReactionButton)
+local _ = require(Reactions.Enums.ReactionSize)
 local _ = require(Reactions.Enums.ReactionType)
 local Radius = FoundationModule.Enums.Radius
 local View = FoundationModule.View
@@ -36,6 +37,7 @@ return function(p1)
 				reactionType = reaction,
 				isActive = SelectedReactions ~= nil and SelectedReactions[reaction] == true,
 				isHovered = p1.hoveredReaction == reaction,
+				reactionSize = p1.reactionSize,
 				buttonRef = if p1.getButtonRef then p1.getButtonRef(reaction) else nil,
 				onActivated = function(p2)
 					-- upvalues: p1 (upval), reaction (copy)
@@ -48,7 +50,7 @@ return function(p1)
 		end
 		return Elements
 	end, {
-		Reactions, SelectedReactions, p1.hoveredReaction, p1.getButtonRef,
-		p1.onReactionSelected, TestId
+		Reactions, SelectedReactions, p1.hoveredReaction, p1.reactionSize,
+		p1.getButtonRef, p1.onReactionSelected, TestId
 	})))
 end

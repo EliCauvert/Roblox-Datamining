@@ -3,12 +3,15 @@ local ReactModule = require(Parent.React)
 local AppSplitViewModule = require(Parent.AppSplitView)
 local Constants = require(Parent.NavigationRodux).Constants
 local RobloxAppEnumsModule = require(Parent.RobloxAppEnums)
+local SharedFlagsModule = require(Parent.SharedFlags)
 local SplitView = AppSplitViewModule.SplitView
 local Enums = AppSplitViewModule.Enums
 local UseSplitPaneRenderModule = require(script.Parent.Parent.Hooks.useSplitPaneRender)
 local UseSplitPaneFocusNavBridgeModule = require(script.Parent.Parent.Hooks.useSplitPaneFocusNavBridge)
-local FFlagSplitPaneEducationalTour = require(Parent.SharedFlags).FFlagSplitPaneEducationalTour
+local FFlagSplitPaneEducationalTour = SharedFlagsModule.FFlagSplitPaneEducationalTour
+local FFlagNavigationCommandHandle = SharedFlagsModule.FFlagNavigationCommandHandle
 local SplitPaneEducationalTourModule = if FFlagSplitPaneEducationalTour then require(script.Parent.SplitPaneEducationalTour) else nil
+local SupportPaneTopRoutePublisherModule = if FFlagNavigationCommandHandle then require(script.Parent.SupportPaneTopRoutePublisher) else nil
 local config = { [Constants.TempRnSwitchNavigatorName] = true }
 
 if Constants.HomeContainerName ~= nil then
@@ -51,7 +54,7 @@ local function useSupportPaneAnchorRef()
 end
 
 return function(p1)
-	-- upvalues: UseSplitPaneRenderModule (copy), ReactModule (copy), UseSplitPaneFocusNavBridgeModule (copy), FFlagSplitPaneEducationalTour (copy), useSupportPaneAnchorRef (copy), isHomeActive (copy), Enums (copy), SplitView (copy), SplitPaneEducationalTourModule (copy)
+	-- upvalues: UseSplitPaneRenderModule (copy), ReactModule (copy), UseSplitPaneFocusNavBridgeModule (copy), FFlagSplitPaneEducationalTour (copy), useSupportPaneAnchorRef (copy), FFlagNavigationCommandHandle (copy), isHomeActive (copy), Enums (copy), SplitView (copy), SupportPaneTopRoutePublisherModule (copy), SplitPaneEducationalTourModule (copy)
 	local UseSplitPaneRenderModuleResult = UseSplitPaneRenderModule(p1.screens, p1.cards, p1.paneIndices, p1.isRouteActiveOnPane)
 	local UseRefResult = ReactModule.useRef(nil)
 	UseSplitPaneFocusNavBridgeModule(UseRefResult)
@@ -63,6 +66,12 @@ return function(p1)
 		SupportPaneRef, Ref = useSupportPaneAnchorRef()
 	end
 	if UseSplitPaneRenderModuleResult.isBreakpointEnabled then
+		local State = nil
+		
+		if FFlagNavigationCommandHandle and p1.isRouteActiveOnPane and #p1.paneIndices > 0 then
+			local Screen = p1.screens[p1.paneIndices[#p1.paneIndices]]
+			State = if Screen == nil then nil else Screen.descriptor.state
+		end
 		local SupportPaneMode = UseSplitPaneRenderModuleResult.supportPaneMode
 		local IsHomeActive = IsRootAppStack and (UseSplitPaneRenderModuleResult.supportContentProps.paneCount == 0 and (not UseSplitPaneRenderModuleResult.supportContentProps.hasDetailOnTop and isHomeActive(p1.screens)))
 		local Frame = if UseSplitPaneRenderModuleResult.renderSupportContent == nil then ReactModule.createElement("Frame", {
@@ -102,6 +111,7 @@ return function(p1)
 					ref = UseRefResult
 				}, UseSplitPaneRenderModuleResult.primarySlotChildren)
 			}),
+			TopRoutePublisher = if State == nil then nil else ReactModule.createElement(SupportPaneTopRoutePublisherModule, { routeState = State }),
 			EducationalTour = if IsRootAppStack then ReactModule.createElement(SplitPaneEducationalTourModule, {
 				supportPaneRef = SupportPaneRef,
 				supportPaneMode = SupportPaneMode,

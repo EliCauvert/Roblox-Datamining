@@ -1,0 +1,1 @@
+﻿return game:DefineFastString("ApisCdnUrl", "https://apis.rbxcdn.com/")

@@ -10,9 +10,12 @@ local FFlagExpChatDictationFTUXModule = require(ExpChat.Flags.FFlagExpChatDictat
 local FFlagExpChatInputBarV2CornerAndTruncationFixModule = require(ExpChat.Flags.FFlagExpChatInputBarV2CornerAndTruncationFix)
 local FFlagExpChatComposerInputBarFigmaParityModule = require(ExpChat.Flags.FFlagExpChatComposerInputBarFigmaParity)
 local FFlagExpChatDictationStopReplacesSendModule = require(ExpChat.Flags.FFlagExpChatDictationStopReplacesSend)
+local FFlagExpChatContinuousDictationIdleFadeModule = require(ExpChat.Flags.FFlagExpChatContinuousDictationIdleFade)
+local FFlagExpChatContinuousDictationIdleFadeModule1 = require(ExpChat.Flags.FFlagExpChatDictationFadeOverride) and FFlagExpChatContinuousDictationIdleFadeModule
 local FFlagEnableConsoleExpControls = require(Parent.SharedFlags).FFlagEnableConsoleExpControls
 local ChannelChipModule = require(script.Parent.ChannelChip)
 local StopCountdownModule = require(script.Parent.StopCountdown)
+local _ = require(script.Parent.Dictation)
 local DictationFTUXModule = require(script.Parent.Dictation.DictationFTUX)
 local DictationWaveformModule = require(script.Parent.Dictation.DictationWaveform)
 local UseDictationInputBarModule = require(script.Parent.Dictation.useDictationInputBar)
@@ -24,7 +27,7 @@ local function _(p1, p2, p3)
 end
 
 return ReactModule.memo(function(p1)
-	-- upvalues: FoundationModule (copy), UseDictationInputBarModule (copy), DictationAffordancesModule (copy), ReactModule (copy), UseDictationTextAreaModule (copy), FFlagExpChatDictationStopReplacesSendModule (copy), FFlagExpChatInputBarV2CornerAndTruncationFixModule (copy), StopCountdownModule (copy), ChannelChipModule (copy), FFlagExpChatFixBackspaceNilTargetChannel (copy), ConfigModule (copy), FFlagExpChatPresetChatEnabled (copy), FFlagEnableConsoleExpControls (copy), FFlagExpChatComposerInputBarFigmaParityModule (copy), DictationWaveformModule (copy), FFlagExpChatDictationFTUXModule (copy), DictationFTUXModule (copy)
+	-- upvalues: FoundationModule (copy), UseDictationInputBarModule (copy), DictationAffordancesModule (copy), ReactModule (copy), FFlagExpChatContinuousDictationIdleFadeModule1 (copy), UseDictationTextAreaModule (copy), FFlagExpChatDictationStopReplacesSendModule (copy), FFlagExpChatInputBarV2CornerAndTruncationFixModule (copy), StopCountdownModule (copy), ChannelChipModule (copy), FFlagExpChatFixBackspaceNilTargetChannel (copy), ConfigModule (copy), FFlagExpChatPresetChatEnabled (copy), FFlagEnableConsoleExpControls (copy), FFlagExpChatComposerInputBarFigmaParityModule (copy), DictationWaveformModule (copy), FFlagExpChatDictationFTUXModule (copy), DictationFTUXModule (copy)
 	local UseTokensResult = FoundationModule.Hooks.useTokens()
 	local SetTransparencyFunction = p1.setTransparency
 	local ChatInputBarSettings = p1.chatInputBarSettings
@@ -43,6 +46,7 @@ return ReactModule.memo(function(p1)
 		targetTextChannel = p1.targetTextChannel,
 		isGlobalChatTabActive = p1.isGlobalChatTabActive,
 		onDictationActivityChanged = p1.onDictationActivityChanged,
+		onDictationStateChanged = p1.onDictationStateChanged,
 		onSendActivated = p1.onSendActivated,
 		onSendRecordingTap = p1.onSendRecordingTap,
 		onTranscriptionStaged = p1.onTranscriptionStaged
@@ -76,7 +80,7 @@ return ReactModule.memo(function(p1)
 		DeriveBackgroundColorsResult.color3,
 		DeriveBackgroundColorsResult.baseTransparency
 	})
-	local ShouldPreventFade = DictationAffordancesModule.shouldPreventFade(UseDictationInputBarModuleResult)
+	local ShouldPreventFade = DictationAffordancesModule.shouldPreventFade(UseDictationInputBarModuleResult, FFlagExpChatContinuousDictationIdleFadeModule1)
 	local UseMemoResult1 = ReactModule.useMemo(function()
 		-- upvalues: ShouldPreventFade (copy), p1 (copy)
 		return if ShouldPreventFade then p1.transparencyValue:map(function(_): number
@@ -211,6 +215,7 @@ return ReactModule.memo(function(p1)
 							isActive = UseDictationInputBarModuleResult.isRecording or UseDictationInputBarModuleResult.isListening,
 							audioDeviceInput = UseDictationInputBarModuleResult.dictation.audioDeviceInput,
 							transcribedSamplesBinding = UseDictationInputBarModuleResult.transcribedSamplesBinding,
+							transparencyValue = if UseDictationInputBarModuleResult.isListening and not ShouldPreventFade then p1.transparencyValue else nil,
 							onSample = UseDictationInputBarModuleResult.onWaveformSample
 						})
 					}),

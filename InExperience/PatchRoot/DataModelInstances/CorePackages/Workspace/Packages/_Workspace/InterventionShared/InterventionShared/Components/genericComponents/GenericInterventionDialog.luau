@@ -40,7 +40,6 @@ local UseWebViewModule = require(InterventionShared.Hooks.useWebView)
 local FFlagNavigateToSafetyDashboardForAppeals = require(Parent.SharedFlags).FFlagNavigateToSafetyDashboardForAppeals
 local FFlagUFRDialogContentCutoffFixModule = require(InterventionShared.Flags.FFlagUFRDialogContentCutoffFix)
 local FFlagUFRImprovementsModule = require(InterventionShared.Flags.FFlagUFRImprovements)
-local FFlagUFRInlineAppealLinkModule = require(InterventionShared.Flags.FFlagUFRInlineAppealLink)
 local IconsActionsAccept = require(Parent.FoundationImages).Images["icons/actions/accept"]
 
 local function _(p1)
@@ -48,7 +47,7 @@ local function _(p1)
 end
 
 return ReactModule.memo(function(p1)
-	-- upvalues: UseTokensFunction (copy), UseRefFunction (copy), UseInterventionPlacementModule (copy), UseLocalizationFunction (copy), ConstantsModule (copy), UsePreferredInputFunction (copy), ResponsiveModule (copy), FFlagNavigateToSafetyDashboardForAppeals (copy), UrlBuilder (copy), UseWebViewModule (copy), LinkingProtocol (copy), UseInterventionFocusRootModule (copy), FocusNavigableSurfaceIdentifierEnum (copy), UseEffectFunction (copy), InterventionAnalyticsModule (copy), UseCallbackFunction (copy), PostDismissInterventionModule (copy), NotificationModalsManagerModule (copy), IconsActionsAccept (copy), VRService (copy), FFlagUFRInlineAppealLinkModule (copy), ReactModule (copy), Text (copy), FFlagUFRImprovementsModule (copy), View (copy), Divider (copy), EvidenceFieldModule (copy), FFlagUFRDialogContentCutoffFixModule (copy), Badge (copy), BadgeVariant (copy), IconName (copy), IconPosition (copy), IconVariant (copy), CryoModule (copy), Button (copy), ButtonVariant (copy), ButtonSize (copy), Dialog (copy), DialogSize (copy), InterventionDialogLoadingSkeletonModule (copy), InterventionDialogFooterModule (copy)
+	-- upvalues: UseTokensFunction (copy), UseRefFunction (copy), UseInterventionPlacementModule (copy), UseLocalizationFunction (copy), ConstantsModule (copy), UsePreferredInputFunction (copy), ResponsiveModule (copy), FFlagNavigateToSafetyDashboardForAppeals (copy), UrlBuilder (copy), UseWebViewModule (copy), LinkingProtocol (copy), UseInterventionFocusRootModule (copy), FocusNavigableSurfaceIdentifierEnum (copy), UseEffectFunction (copy), InterventionAnalyticsModule (copy), UseCallbackFunction (copy), PostDismissInterventionModule (copy), NotificationModalsManagerModule (copy), IconsActionsAccept (copy), VRService (copy), ReactModule (copy), Text (copy), FFlagUFRImprovementsModule (copy), View (copy), Divider (copy), EvidenceFieldModule (copy), FFlagUFRDialogContentCutoffFixModule (copy), Badge (copy), BadgeVariant (copy), IconName (copy), IconPosition (copy), IconVariant (copy), CryoModule (copy), Button (copy), ButtonVariant (copy), ButtonSize (copy), Dialog (copy), DialogSize (copy), InterventionDialogLoadingSkeletonModule (copy), InterventionDialogFooterModule (copy)
 	local UseTokensResult = UseTokensFunction()
 	local InterventionId = p1.interventionId
 	local InterventionId1 = if InterventionId == "" then nil else InterventionId
@@ -92,8 +91,10 @@ return ReactModule.memo(function(p1)
 	local UseCallbackResult = UseCallbackFunction(function()
 		-- upvalues: p1 (copy), InterventionId1 (copy), PostDismissInterventionModule (upval), InterventionAnalyticsModule (upval), UseInterventionPlacementModuleResult (copy), UseRefResult (copy)
 		if p1.acknowledgeable and InterventionId1 then
+			local Flag = false
 			PostDismissInterventionModule(InterventionId1):andThen(function(_)
-				-- upvalues: InterventionAnalyticsModule (upval), p1 (upval), UseInterventionPlacementModuleResult (upval), UseRefResult (upval)
+				-- upvalues: Flag (ref), InterventionAnalyticsModule (upval), p1 (upval), UseInterventionPlacementModuleResult (upval), UseRefResult (upval)
+				Flag = true
 				InterventionAnalyticsModule.sendAnalyticsEvent(InterventionAnalyticsModule.TelemetryConfigs.DialogInterventionDismissSuccess, {
 					eventType = InterventionAnalyticsModule.Constants.EventTypes.DialogInterventionDismissSuccess,
 					interventionType = p1.interventionTypeForAnalytics,
@@ -108,7 +109,7 @@ return ReactModule.memo(function(p1)
 					p1.onAcknowledgementSuccess()
 				end
 			end):catch(function(Err)
-				-- upvalues: InterventionAnalyticsModule (upval), p1 (upval), UseInterventionPlacementModuleResult (upval), UseRefResult (upval)
+				-- upvalues: InterventionAnalyticsModule (upval), p1 (upval), UseInterventionPlacementModuleResult (upval), UseRefResult (upval), Flag (ref)
 				InterventionAnalyticsModule.sendAnalyticsEvent(InterventionAnalyticsModule.TelemetryConfigs.DialogInterventionDismissFailed, {
 					eventType = InterventionAnalyticsModule.Constants.EventTypes.DialogInterventionDismissFailed,
 					interventionType = p1.interventionTypeForAnalytics,
@@ -119,12 +120,17 @@ return ReactModule.memo(function(p1)
 					acknowledgeable = p1.acknowledgeable,
 					abuseVector = p1.abuseVectorForAnalytics
 				})
+				
+				if not Flag and p1.onAcknowledgementFailure then
+					p1.onAcknowledgementFailure()
+				end
 			end)
 		end
 	end, {
 		p1.acknowledgeable, InterventionId1, p1.interventionTypeForAnalytics,
 		UseInterventionPlacementModuleResult, UseRefResult.current, p1.eventId,
-		p1.abuseVectorForAnalytics, p1.onAcknowledgementSuccess
+		p1.abuseVectorForAnalytics, p1.onAcknowledgementSuccess,
+		p1.onAcknowledgementFailure
 	})
 	local UseCallbackResult1 = UseCallbackFunction(function()
 		-- upvalues: InterventionAnalyticsModule (upval), p1 (copy), UseInterventionPlacementModuleResult (copy), UseRefResult (copy), UseCallbackResult (copy)
@@ -195,7 +201,6 @@ return ReactModule.memo(function(p1)
 	})
 	local t = {}
 	local UseDetailedLayout = p1.useDetailedLayout
-	local UseDetailedLayout1 = FFlagUFRInlineAppealLinkModule and UseDetailedLayout
 	
 	if p1.bodyText and p1.bodyText ~= "" then
 		t.BodyText = ReactModule.createElement(Text, {
@@ -332,15 +337,7 @@ return ReactModule.memo(function(p1)
 			Text = DsaMessage1
 		})
 	end
-	local List = if UseDetailedLayout then {
-		{
-			variant = ButtonVariant.Emphasis,
-			size = ButtonSize.Medium,
-			text = UseLocalizationResult.OkText,
-			onActivated = UseCallbackResult1,
-			width = UDim.new(1, 0)
-		}
-	} else {
+	local Actions = {
 		{
 			variant = ButtonVariant.Emphasis,
 			size = ButtonSize.Small,
@@ -349,15 +346,6 @@ return ReactModule.memo(function(p1)
 		}
 	}
 	
-	if UseDetailedLayout and p1.isAppealable and not FFlagUFRInlineAppealLinkModule then
-		table.insert(List, {
-			variant = ButtonVariant.Standard,
-			size = ButtonSize.Medium,
-			text = UseLocalizationResult.ReportMistakeText,
-			onActivated = UseCallbackResult2,
-			width = UDim.new(1, 0)
-		})
-	end
 	return ReactModule.createElement(Dialog.Root, {
 		hasCloseButton = false,
 		size = DialogSize.Medium,
@@ -366,17 +354,14 @@ return ReactModule.memo(function(p1)
 		disablePortal = UseInterventionPlacementModuleResult ~= ConstantsModule.InterventionPlacementType.InExperience
 	}, {
 		DialogTitle = not p1.isLoading and ReactModule.createElement(Dialog.Title, { text = p1.titleText }),
-		DialogContent = ReactModule.createElement(Dialog.Content, if UseDetailedLayout1 then { LayoutOrder = 2 } else nil, if p1.isLoading then ReactModule.createElement(InterventionDialogLoadingSkeletonModule) else ReactModule.createElement(View, { tag = "size-full-0 auto-y col gap-medium" }, t)),
-		DialogFooter = not p1.isLoading and (UseDetailedLayout1 and ReactModule.createElement(InterventionDialogFooterModule, {
+		DialogContent = ReactModule.createElement(Dialog.Content, if UseDetailedLayout then { LayoutOrder = 2 } else nil, if p1.isLoading then ReactModule.createElement(InterventionDialogLoadingSkeletonModule) else ReactModule.createElement(View, { tag = "size-full-0 auto-y col gap-medium" }, t)),
+		DialogFooter = not p1.isLoading and (UseDetailedLayout and ReactModule.createElement(InterventionDialogFooterModule, {
 			ctaText = UseLocalizationResult.OkText,
 			dsaMessage = p1.dsaMessage,
 			isAppealable = p1.isAppealable,
 			onAppealActivated = UseCallbackResult2,
 			onCtaActivated = UseCallbackResult1
 		})),
-		DialogActions = not p1.isLoading and (not UseDetailedLayout1 and ReactModule.createElement(Dialog.Actions, {
-			actions = List,
-			label = if UseDetailedLayout and p1.useDetailedLayout and DsaMessage1 then DsaMessage1 else nil
-		}))
+		DialogActions = not p1.isLoading and (not UseDetailedLayout and ReactModule.createElement(Dialog.Actions, { actions = Actions }))
 	})
 end)

@@ -6,6 +6,7 @@ local InputHandlersModule = require(Parent.InputHandlers)
 local ReactModule = require(Parent.React)
 local _ = require(Parent.ReactFocusNavigation)
 local ReactionPickerModule = require(Reactions.Components.ReactionPicker)
+local _ = require(Reactions.Enums.ReactionSize)
 local _ = require(Reactions.Enums.ReactionType)
 local UsePressGesturesModule = require(Reactions.Hooks.usePressGestures)
 local UseReactionDragSelectModule = require(Reactions.Hooks.useReactionDragSelect)
@@ -79,6 +80,7 @@ return function(p1)
 				onReactionSelected = p1.onReactionSelected,
 				selectedReactions = p1.selectedReactions,
 				reactions = p1.reactions,
+				reactionSize = p1.reactionSize,
 				radius = p1.radius,
 				backgroundStyle = p1.backgroundStyle,
 				hoveredReaction = UseReactionDragSelectModuleResult.hoveredReaction,

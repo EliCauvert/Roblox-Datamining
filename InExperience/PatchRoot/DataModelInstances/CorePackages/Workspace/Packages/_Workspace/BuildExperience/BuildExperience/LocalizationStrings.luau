@@ -4,7 +4,6 @@ local FFlagBuildExperienceToolLocalizationModule = require(BuildExperience.Flags
 local SharedFlagsModule = require(BuildExperience.Parent.SharedFlags)
 local FFlagEnableShareSheet = SharedFlagsModule.FFlagEnableShareSheet
 local FFlagEnableTeamTestLua = SharedFlagsModule.FFlagEnableTeamTestLua
-local FFlagBuildExperienceClientDataModelTools = SharedFlagsModule.FFlagBuildExperienceClientDataModelTools
 
 local function formatShareExperience(p1): string
 	return `Share {p1}`
@@ -162,18 +161,17 @@ if require(BuildExperience.Flags.FFlagBuildExperienceMonetizationNativeUI) then
 		}
 	end
 end
-if FFlagBuildExperienceClientDataModelTools then
-	config.inspect_client_instance = {
-		completed = "Feature.Build.Label.ToolInspectDone",
-		failed = "Feature.Build.Label.ToolInspectFailed",
-		running = "Feature.Build.Label.ToolInspectRunning"
-	}
-	config.search_client_datamodel = {
-		completed = "Feature.Build.Label.ToolClientDMDone",
-		failed = "Feature.Build.Label.ToolClientDMFailed",
-		running = "Feature.Build.Label.ToolClientDMRunning"
-	}
-end
+config.inspect_client_instance = {
+	completed = "Feature.Build.Label.ToolInspectDone",
+	failed = "Feature.Build.Label.ToolInspectFailed",
+	running = "Feature.Build.Label.ToolInspectRunning"
+}
+config.search_client_datamodel = {
+	completed = "Feature.Build.Label.ToolClientDMDone",
+	failed = "Feature.Build.Label.ToolClientDMFailed",
+	running = "Feature.Build.Label.ToolClientDMRunning"
+}
+
 if FFlagBuildExperienceToolLocalizationModule then
 	config.ask_analytics_agent = {
 		completed = "Feature.Build.Label.ToolAnalyticsDone",

@@ -41,6 +41,7 @@ return {
 		EXECUTE_CHANGE_PARTY_VOICE_INPUT_DEVICE = "ExecutePartyVoiceInputDeviceChange",
 		EXECUTE_CHANGE_PARTY_VOICE_OUTPUT_DEVICE = "ExecutePartyVoiceOutputDeviceChange",
 		EXECUTE_GET_BACKGROUND_DM_STATE = "ExecutePartyVoiceGetBackgroundDMState",
+		EXECUTE_GET_PARTY_VOICE_DEBUG_STATS = "ExecutePartyVoiceGetDebugStats",
 		EXECUTE_PARTY_VOICE_IGNORE_LOW_MEMORY = "ExecutePartyVoiceIgnoreLowMemory"
 	},
 	EVENTS = {

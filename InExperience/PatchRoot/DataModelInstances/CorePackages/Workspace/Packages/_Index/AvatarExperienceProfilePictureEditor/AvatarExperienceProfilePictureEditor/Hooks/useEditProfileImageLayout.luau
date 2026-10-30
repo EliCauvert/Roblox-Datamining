@@ -1,9 +1,11 @@
 ﻿local AvatarExperienceProfilePictureEditor = script:FindFirstAncestor("AvatarExperienceProfilePictureEditor")
+local Parent = AvatarExperienceProfilePictureEditor.Parent
 local ConstantsModule = require(AvatarExperienceProfilePictureEditor.Constants)
 local ComputeCutoutFieldOfViewDegModule = require(AvatarExperienceProfilePictureEditor.Shared.computeCutoutFieldOfViewDeg)
-local RobloxAppHooksModule = require(AvatarExperienceProfilePictureEditor.Parent.RobloxAppHooks)
+local RobloxAppHooksModule = require(Parent.RobloxAppHooks)
 local UseDeviceOrientationFunction = RobloxAppHooksModule.useDeviceOrientation
 local UseScreenSizeFunction = RobloxAppHooksModule.useScreenSize
+local FFlagSplitPaneProfileEditFillPane = require(Parent.SharedFlags).FFlagSplitPaneProfileEditFillPane
 
 local function _(p1, p2)
 	-- upvalues: ConstantsModule (copy)
@@ -38,12 +40,25 @@ end
 
 return {
 	useEditProfileImageLayout = function(p1)
-		-- upvalues: UseDeviceOrientationFunction (copy), UseScreenSizeFunction (copy), computeEditProfileImageLayout (copy)
-		return (computeEditProfileImageLayout({
-			guiInset = p1.guiInset,
-			deviceOrientation = UseDeviceOrientationFunction(),
-			screenSize = UseScreenSizeFunction()
-		}))
+		-- upvalues: UseDeviceOrientationFunction (copy), UseScreenSizeFunction (copy), FFlagSplitPaneProfileEditFillPane (copy), computeEditProfileImageLayout (copy)
+		local UseDeviceOrientationResult = UseDeviceOrientationFunction()
+		local UseScreenSizeResult = UseScreenSizeFunction()
+		
+		if FFlagSplitPaneProfileEditFillPane then
+			local ContainerSize = p1.containerSize
+			
+			return (computeEditProfileImageLayout({
+				guiInset = p1.guiInset,
+				deviceOrientation = if ContainerSize then if ContainerSize.Y < ContainerSize.X then "Landscape" else nil else UseDeviceOrientationResult,
+				screenSize = ContainerSize or UseScreenSizeResult
+			}))
+		else
+			return (computeEditProfileImageLayout({
+				guiInset = p1.guiInset,
+				deviceOrientation = UseDeviceOrientationResult,
+				screenSize = UseScreenSizeResult
+			}))
+		end
 	end,
 	computeEditProfileImageLayout = computeEditProfileImageLayout
 }

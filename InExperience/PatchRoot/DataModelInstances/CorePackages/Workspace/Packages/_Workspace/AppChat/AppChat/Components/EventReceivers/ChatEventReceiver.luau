@@ -49,7 +49,6 @@ else
 	local _ = require(script.Parent.ChatMigrationTypes)
 	local UseChatTrustedConnectionsEventsModule = require(AppChat.Components.EventReceivers.useChatTrustedConnectionsEvents)
 	local GetFFlagDebugUnfilteredThreadsFunction = require(Parent.SharedFlags).getFFlagDebugUnfilteredThreads
-	local FFlagAppChatEnableDoubleOptIn = require(Parent.SharedFlags).FFlagAppChatEnableDoubleOptIn
 	local FFlagRemoveUnusedConnectionStateRoduxSlice = require(Parent.SharedFlags).FFlagRemoveUnusedConnectionStateRoduxSlice
 	local FFlagAppChatPresenceStoreMigrationModule = require(AppChat.Flags.FFlagAppChatPresenceStoreMigration)
 	local FFlagAppChatUseSignalsForAppLoadedModule = require(AppChat.Flags.FFlagAppChatUseSignalsForAppLoaded)
@@ -71,7 +70,7 @@ else
 	local config = { handlesAppShellNotifications = true }
 	
 	function ChatEventReceiver(p1)
-		-- upvalues: UseEffectFunction (copy), AppChatRealtime (copy), FFlagAppChatUseSignalsForAppLoadedModule (copy), UseSignalStateFunction (copy), GetAppLoadedStoreModule (copy), UseSelectorFunction (copy), UseCallbackFunction (copy), CryoModule (copy), UseLocalUserIdFunction (copy), UseIsChatEnabledModule (copy), UseIsGroupChatEnabledModule (copy), UseIsInExperienceModule (copy), UseDispatchFunction (copy), ChangedParticipantsModule (copy), FetchChatMetadataModule (copy), FetchLatestConversationDetailsModule (copy), GetAllFriendsAsyncModule (copy), FFlagAppChatPresenceStoreMigrationModule (copy), GetAllUserPresencesModule (copy), GetNewMessagesFunction (copy), FFlagAppChatPerfTrackingModule (copy), FFlagAppChatMessageTTIMilestonesModule (copy), AppChatPerfTrackerModule (copy), RoduxAliasesModule (copy), ReceivedUserTypingModule (copy), PaginateAndRefreshConversationsModule (copy), RemovedConversationModule (copy), RenamedGroupConversationModule (copy), SetConnectionStateModule (copy), config (copy), UseRefFunction (copy), UseLocalizationFunction (copy), RoactNavigationModule (copy), EnumScreensModule (copy), FormFactor (copy), FriendshipDestroyedModule (copy), ConversationModule (copy), FFlagRemoveUnusedConnectionStateRoduxSlice (copy), CommunicationChannelsTypesModule (copy), ConversationChannelsModule (copy), FriendConversationCreatedModule (copy), UseMemoFunction (copy), GetFFlagDebugUnfilteredThreadsFunction (copy), chunkAndLogString (copy), MultiGetConversationDetailsModule (copy), AppChatNetworkingModule (copy), FFlagAppChatEnableDoubleOptIn (copy), RefreshConversationUnfilteredThreadsDetailsModule (copy), UseChatTrustedConnectionsEventsModule (copy)
+		-- upvalues: UseEffectFunction (copy), AppChatRealtime (copy), FFlagAppChatUseSignalsForAppLoadedModule (copy), UseSignalStateFunction (copy), GetAppLoadedStoreModule (copy), UseSelectorFunction (copy), UseCallbackFunction (copy), CryoModule (copy), UseLocalUserIdFunction (copy), UseIsChatEnabledModule (copy), UseIsGroupChatEnabledModule (copy), UseIsInExperienceModule (copy), UseDispatchFunction (copy), ChangedParticipantsModule (copy), FetchChatMetadataModule (copy), FetchLatestConversationDetailsModule (copy), GetAllFriendsAsyncModule (copy), FFlagAppChatPresenceStoreMigrationModule (copy), GetAllUserPresencesModule (copy), GetNewMessagesFunction (copy), FFlagAppChatPerfTrackingModule (copy), FFlagAppChatMessageTTIMilestonesModule (copy), AppChatPerfTrackerModule (copy), RoduxAliasesModule (copy), ReceivedUserTypingModule (copy), PaginateAndRefreshConversationsModule (copy), RemovedConversationModule (copy), RenamedGroupConversationModule (copy), SetConnectionStateModule (copy), config (copy), UseRefFunction (copy), UseLocalizationFunction (copy), RoactNavigationModule (copy), EnumScreensModule (copy), FormFactor (copy), FriendshipDestroyedModule (copy), ConversationModule (copy), FFlagRemoveUnusedConnectionStateRoduxSlice (copy), CommunicationChannelsTypesModule (copy), ConversationChannelsModule (copy), FriendConversationCreatedModule (copy), UseMemoFunction (copy), GetFFlagDebugUnfilteredThreadsFunction (copy), chunkAndLogString (copy), MultiGetConversationDetailsModule (copy), AppChatNetworkingModule (copy), RefreshConversationUnfilteredThreadsDetailsModule (copy), UseChatTrustedConnectionsEventsModule (copy)
 		UseEffectFunction(function()
 			-- upvalues: AppChatRealtime (upval)
 			AppChatRealtime:info("ChatEventReceiver mounted")
@@ -100,22 +99,22 @@ else
 		local UseIsInExperienceModuleResult = UseIsInExperienceModule()
 		local UseDispatchResult = UseDispatchFunction()
 		
-		local function v55(p2, p3, p4, p5)
+		local function v54(p2, p3, p4, p5)
 			-- upvalues: UseDispatchResult (copy), ChangedParticipantsModule (upval)
 			UseDispatchResult(ChangedParticipantsModule(p2, p3, p4, p5))
 		end
 		
-		local function v56()
+		local function v55()
 			-- upvalues: UseDispatchResult (copy), FetchChatMetadataModule (upval)
 			return UseDispatchResult(FetchChatMetadataModule())
 		end
 		
-		local function v57(p2)
+		local function v56(p2)
 			-- upvalues: UseDispatchResult (copy), FetchLatestConversationDetailsModule (upval)
 			return UseDispatchResult(FetchLatestConversationDetailsModule(p2))
 		end
 		
-		local function v58()
+		local function v57()
 			-- upvalues: UseDispatchResult (copy), GetAllFriendsAsyncModule (upval)
 			UseDispatchResult(GetAllFriendsAsyncModule())
 		end
@@ -128,7 +127,7 @@ else
 			end)
 		end
 		
-		local function v59(p2, p3, p4)
+		local function v58(p2, p3, p4)
 			-- upvalues: UseDispatchResult (copy), GetNewMessagesFunction (upval)
 			return UseDispatchResult(GetNewMessagesFunction(p2, p3, p4))
 		end
@@ -154,22 +153,22 @@ else
 			UseDispatchResult(RoduxAliasesModule.Actions.AliasUpdated(p2, p3))
 		end
 		
-		local function v62(p2, p3)
+		local function v61(p2, p3)
 			-- upvalues: UseDispatchResult (copy), ReceivedUserTypingModule (upval)
 			UseDispatchResult(ReceivedUserTypingModule(p2, p3))
 		end
 		
-		local function v63()
+		local function v62()
 			-- upvalues: UseDispatchResult (copy), PaginateAndRefreshConversationsModule (upval)
 			UseDispatchResult(PaginateAndRefreshConversationsModule())
 		end
 		
-		local function v64(p2)
+		local function v63(p2)
 			-- upvalues: UseDispatchResult (copy), RemovedConversationModule (upval)
 			UseDispatchResult(RemovedConversationModule(p2))
 		end
 		
-		local function v65(p2, p3, p4, p5)
+		local function v64(p2, p3, p4, p5)
 			-- upvalues: UseDispatchResult (copy), RenamedGroupConversationModule (upval)
 			UseDispatchResult(RenamedGroupConversationModule(p2, p3, p4, p5))
 		end
@@ -390,7 +389,7 @@ else
 				end
 			end
 		end, {
-			UseDispatchResult, v63, UseLocalUserIdResult, UseSelectorResult1,
+			UseDispatchResult, v62, UseLocalUserIdResult, UseSelectorResult1,
 			UseSelectorResultEntry, JoinResult.rnBypassActionSignal
 		})
 		UseEffectFunction(function()
@@ -438,7 +437,7 @@ else
 			UseDispatchResult,
 			JoinResult.activeConversationId,
 			JoinResult.rnBypassActionSignal,
-			v57
+			v56
 		})
 		local UseCallbackResult2 = UseCallbackFunction(function()
 			-- upvalues: UseSignalStateResult (copy), UseDispatchResult (copy), FetchChatMetadataModule (upval), AppChatRealtime (upval), PaginateAndRefreshConversationsModule (upval), GetAllFriendsAsyncModule (upval), FFlagAppChatPresenceStoreMigrationModule (upval), Callback (copy)
@@ -465,10 +464,10 @@ else
 			end
 		end, {
 			UseSignalStateResult,
-			v63,
-			v58,
+			v62,
+			v57,
 			Callback,
-			v56
+			v55
 		})
 		UseEffectFunction(function()
 			-- upvalues: RobloxEventReceiver (copy), AppChatRealtime (upval), FFlagRemoveUnusedConnectionStateRoduxSlice (upval), UseDispatchResult (copy), SetConnectionStateModule (upval), UseRefResult1 (copy), UseRefResult (copy), UseSignalStateResult (copy), UseCallbackResult2 (copy)
@@ -617,9 +616,9 @@ else
 				end
 			end
 		end, {
-			UseLocalUserIdResult, RobloxEventReceiver, UseCallbackResult, v64,
+			UseLocalUserIdResult, RobloxEventReceiver, UseCallbackResult, v63,
 			JoinResult.activeConversationId, JoinResult.rnBypassActionSignal,
-			RemovedFromConversationToastTitle, v57, v65, v55, IsEmpty, v59, v62,
+			RemovedFromConversationToastTitle, v56, v64, v54, IsEmpty, v58, v61,
 			UseCallbackResult2
 		})
 		local UseMemoResult = UseMemoFunction(function()
@@ -629,9 +628,9 @@ else
 			end) else {}
 		end, { UseSelectorResult })
 		UseEffectFunction(function()
-			-- upvalues: RobloxEventReceiver (copy), AppChatRealtime (upval), GetFFlagDebugUnfilteredThreadsFunction (upval), chunkAndLogString (upval), CryoModule (upval), UseMemoResult (copy), UseDispatchResult (copy), MultiGetConversationDetailsModule (upval), JoinResult (copy), AppChatNetworkingModule (upval), FFlagAppChatEnableDoubleOptIn (upval), RefreshConversationUnfilteredThreadsDetailsModule (upval), UseIsInExperienceModuleResult (copy)
+			-- upvalues: RobloxEventReceiver (copy), AppChatRealtime (upval), GetFFlagDebugUnfilteredThreadsFunction (upval), chunkAndLogString (upval), CryoModule (upval), UseMemoResult (copy), UseDispatchResult (copy), MultiGetConversationDetailsModule (upval), JoinResult (copy), AppChatNetworkingModule (upval), RefreshConversationUnfilteredThreadsDetailsModule (upval), UseIsInExperienceModuleResult (copy)
 			local ChatModerationTypeEligibility = RobloxEventReceiver:observeEvent("ChatModerationTypeEligibility", function(p2, _)
-				-- upvalues: AppChatRealtime (upval), GetFFlagDebugUnfilteredThreadsFunction (upval), chunkAndLogString (upval), CryoModule (upval), UseMemoResult (upval), UseDispatchResult (upval), MultiGetConversationDetailsModule (upval), JoinResult (upval), AppChatNetworkingModule (upval), FFlagAppChatEnableDoubleOptIn (upval), RefreshConversationUnfilteredThreadsDetailsModule (upval), UseIsInExperienceModuleResult (upval)
+				-- upvalues: AppChatRealtime (upval), GetFFlagDebugUnfilteredThreadsFunction (upval), chunkAndLogString (upval), CryoModule (upval), UseMemoResult (upval), UseDispatchResult (upval), MultiGetConversationDetailsModule (upval), JoinResult (upval), AppChatNetworkingModule (upval), RefreshConversationUnfilteredThreadsDetailsModule (upval), UseIsInExperienceModuleResult (upval)
 				AppChatRealtime:debug("Received ChatModerationTypeEligibility notification")
 				local ChannelsInspected = p2.channels_inspected
 				
@@ -673,16 +672,7 @@ else
 						-- upvalues: AppChatRealtime (upval)
 						AppChatRealtime:warning("NetworkingChat failure in " .. "ChatEventReceiver->ChatModerationTypeEligibility->GetConversationsParticipantsMetadata, Status: " .. tostring(Err))
 					end)
-					
-					if FFlagAppChatEnableDoubleOptIn then
-						UseDispatchResult(RefreshConversationUnfilteredThreadsDetailsModule(JoinResult.activeConversationId, UseIsInExperienceModuleResult))
-						
-						return
-					end
-					UseDispatchResult(AppChatNetworkingModule.rodux.GetConversationTopModal.API(JoinResult.activeConversationId, UseIsInExperienceModuleResult)):catch(function(Err)
-						-- upvalues: AppChatRealtime (upval)
-						AppChatRealtime:warning("NetworkingChat failure in " .. "ChatEventReceiver->ChatModerationTypeEligibility->GetConversationTopModal, Status: " .. tostring(Err))
-					end)
+					UseDispatchResult(RefreshConversationUnfilteredThreadsDetailsModule(JoinResult.activeConversationId, UseIsInExperienceModuleResult))
 				end
 			end)
 			

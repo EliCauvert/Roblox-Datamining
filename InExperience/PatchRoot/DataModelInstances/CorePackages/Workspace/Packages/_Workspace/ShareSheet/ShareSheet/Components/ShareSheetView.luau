@@ -158,7 +158,6 @@ return function(p1)
 		}),
 		Actions = if FFlagShareSheetPeoplePickerEnabledModule then ReactModule.createElement(Sheet.Actions, nil, {
 			Footer = if HasNextEntry then ReactModule.createElement(ShareSendRowModule, {
-				hasHorizontalPadding = false,
 				shouldFillButton = false,
 				isLoading = p1.isSending,
 				label = p1.sendLabel,
@@ -166,7 +165,6 @@ return function(p1)
 				onActivated = p1.onSendActivated,
 				onFocusGained = p1.onComposerFocused
 			}) elseif IsIsPeoplePickerDisplayed then nil else ReactModule.createElement(ShareSheetActionRowModule, {
-				hasHorizontalPadding = false,
 				canShare = p1.canShareLink,
 				context = p1.context,
 				recipientSource = p1.recipientSource,

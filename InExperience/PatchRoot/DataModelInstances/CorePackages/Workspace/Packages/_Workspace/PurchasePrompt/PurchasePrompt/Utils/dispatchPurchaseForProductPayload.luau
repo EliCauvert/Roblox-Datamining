@@ -1,12 +1,14 @@
 ﻿local PurchasePrompt = script:FindFirstAncestor("PurchasePrompt")
+local SharedFlagsModule = require(PurchasePrompt.Parent.SharedFlags)
 local ProductTypeEnum = require(PurchasePrompt.types).ProductTypeEnum
 local InitiatePurchaseModule = require(PurchasePrompt.Thunks.initiatePurchase)
 local InitiateBundlePurchaseModule = require(PurchasePrompt.Thunks.initiateBundlePurchase)
 local FFlagUnifiedPurchaseSupportRefetchingLooksAfterUpsellModule = require(PurchasePrompt.Flags.FFlagUnifiedPurchaseSupportRefetchingLooksAfterUpsell)
-local FFlagAXMISWithBlackbird = require(PurchasePrompt.Parent.SharedFlags).FFlagAXMISWithBlackbird
+local FFlagAXMISWithBlackbird = SharedFlagsModule.FFlagAXMISWithBlackbird
+local FFlagLuaAppsEnablePromptVIPServerPurchase = SharedFlagsModule.FFlagLuaAppsEnablePromptVIPServerPurchase
 
 return function(Callback: (any) -> (), p1, _, p2)
-	-- upvalues: ProductTypeEnum (copy), InitiatePurchaseModule (copy), InitiateBundlePurchaseModule (copy), FFlagUnifiedPurchaseSupportRefetchingLooksAfterUpsellModule (copy), FFlagAXMISWithBlackbird (copy)
+	-- upvalues: ProductTypeEnum (copy), InitiatePurchaseModule (copy), InitiateBundlePurchaseModule (copy), FFlagUnifiedPurchaseSupportRefetchingLooksAfterUpsellModule (copy), FFlagAXMISWithBlackbird (copy), FFlagLuaAppsEnablePromptVIPServerPurchase (copy)
 	if p1.kind == ProductTypeEnum.Asset then
 		Callback(InitiatePurchaseModule(p1.id, Enum.InfoType.Asset, p1.equipIfPurchased, p1.isRobloxPurchase, p1.idempotencyKey, nil, p1.collectibleItemId, p1.collectibleItemInstanceId, p1.collectibleProductId, p1.expectedPrice, nil, p2))
 		
@@ -56,5 +58,10 @@ return function(Callback: (any) -> (), p1, _, p2)
 			iconImageAssetId = p1.iconImageAssetId,
 			displayPrice = p1.displayPrice
 		}, p2))
+		
+		return
+	end
+	if FFlagLuaAppsEnablePromptVIPServerPurchase and p1.kind == ProductTypeEnum.VIPServer then
+		Callback(InitiatePurchaseModule(p1.universeId, ProductTypeEnum.VIPServer, nil, nil, nil, nil, nil, nil, nil, nil, nil, p2))
 	end
 end

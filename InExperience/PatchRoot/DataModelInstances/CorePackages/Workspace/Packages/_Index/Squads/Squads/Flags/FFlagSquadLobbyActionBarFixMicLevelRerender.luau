@@ -1,1 +1,1 @@
-﻿return game:DefineFastFlag("SquadLobbyActionBarFixMicLevelRerender", false)
+﻿return game:DefineFastFlag("SquadLobbyActionBarFixMicLevelRerender2", false)

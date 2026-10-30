@@ -1,5 +1,5 @@
 ﻿local BuildExperience = script:FindFirstAncestor("BuildExperience")
-local MetricGranularity = require(BuildExperience.Parent.DataHydration.ExperienceAnalytics).MetricGranularity
+local MetricGranularity = require(BuildExperience.Parent.DataHydration.CreatorAnalytics).MetricGranularity
 local FillMetricSeriesGapsModule = require(BuildExperience.Analytics.fillMetricSeriesGaps)
 local config = {
 	hasData = false,

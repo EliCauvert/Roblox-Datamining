@@ -18,7 +18,7 @@ return function(Frame)
 		testId = "share-send-row",
 		tag = {
 			["col gap-medium size-full-0 auto-y"] = true,
-			["padding-x-xlarge padding-bottom-medium"] = not FFlagShareSheetPeoplePickerEnabledModule or Frame.hasHorizontalPadding ~= false
+			["padding-x-xlarge padding-bottom-medium"] = not FFlagShareSheetPeoplePickerEnabledModule
 		},
 		LayoutOrder = Frame.LayoutOrder
 	}, {

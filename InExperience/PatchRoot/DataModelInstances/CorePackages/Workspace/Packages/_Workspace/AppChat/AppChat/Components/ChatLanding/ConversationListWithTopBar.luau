@@ -227,6 +227,7 @@ function ConversationListWithTopBar.render(p1)
 				showGroupsLink = p1.props.showGroupsLink,
 				listRef = if FFlagAppChatConsoleFocusFixesModule then p1.props.listRef else nil,
 				canvasTopPadding = if FFlagAppIaScrollAway then p1.props.canvasTopPadding else nil,
+				pageBackgroundTransparency = p1.props.pageBackgroundTransparency,
 				canvasBottomPadding = if FFlagAppChatConsoleFocusFixesModule and not p1.props.isInExperience and (not FFlagEnableStickyShortcutBarOnAllPlatforms or not IsShortcutBarVisible) then p1.props.deviceSafePadding.bottom else nil,
 				scrollEnabled = if FFlagAppChatConsoleFocusFixesModule then p1.props.scrollEnabled else nil,
 				fireConversationImpressionEvent = p1.fireConversationImpressionEvent(p3),
@@ -250,12 +251,12 @@ function ConversationListWithTopBar.render(p1)
 					v3 = v2
 				else
 					Flag1 = true
-					local Success, Result = pcall(function()
+					local Success1, Result1 = pcall(function()
 						return require(script.Parent.ConversationListViewRecycler)
 					end)
 					
-					if Success then
-						v2 = Result
+					if Success1 then
+						v2 = Result1
 					end
 					v3 = v2
 				end
@@ -269,12 +270,12 @@ function ConversationListWithTopBar.render(p1)
 					v4 = v1
 				else
 					Flag = true
-					local Success1, Result1 = pcall(function()
+					local Success, Result = pcall(function()
 						return require(script.Parent.ConversationListUltimate)
 					end)
 					
-					if Success1 then
-						v1 = Result1
+					if Success then
+						v1 = Result
 					end
 					v4 = v1
 				end

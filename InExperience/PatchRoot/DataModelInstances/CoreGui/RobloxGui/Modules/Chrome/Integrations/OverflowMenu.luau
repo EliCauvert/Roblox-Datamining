@@ -12,6 +12,7 @@ local SideSheetPlacement = ChromeModule.Enums.SideSheetPlacement
 local CommonIconModule = require(Chrome.Integrations.CommonIcon)
 local CommonFtuxTooltipModule = require(Chrome.Integrations.CommonFtuxTooltip)
 local AvatarSwitcherFtuxTooltipModule = require(Chrome.Integrations.AvatarSwitcher.AvatarSwitcherFtuxTooltip)
+local RunService = game:GetService("RunService")
 local VRService = game:GetService("VRService")
 local RobloxGui = game:GetService("CoreGui"):WaitForChild("RobloxGui")
 local PlayerListManagerModule = require(RobloxGui.Modules.PlayerList.PlayerListManager)
@@ -49,13 +50,12 @@ local FFlagEnableConsoleExpControls = SharedFlagsModule.FFlagEnableConsoleExpCon
 local AppChatEnabledChromeDropdownFtuxTooltip = game:DefineFastFlag("AppChatEnabledChromeDropdownFtuxTooltip", false)
 local AvatarSwitcherFtuxTooltip = game:DefineFastFlag("AvatarSwitcherFtuxTooltip", false)
 local FFlagEnableInExperienceShop = game:DefineFastFlag("InExperienceShopFtuxTooltip", false) and SharedFlagsModule.FFlagEnableInExperienceShop
-local FFlagMenuOfferTooltip = SharedFlagsModule.FFlagMenuOfferTooltip
 local FFlagChromeNineDotActivityIndicator = SharedFlagsModule.FFlagOfferNineDotActivityIndicator and FlagsModule.FFlagChromeNineDotActivityIndicator
 local UseInExperienceOfferExposureModule = require(Chrome.Integrations.InExperienceShop.useInExperienceOfferExposure)
 local UseOfferNineDotActivityIndicatorModule = if FFlagChromeNineDotActivityIndicator then require(Chrome.Integrations.InExperienceShop.useOfferNineDotActivityIndicator) else nil
 local InExperienceShopFtuxTooltipModule = if FFlagEnableInExperienceShop then require(Chrome.Integrations.InExperienceShop.InExperienceShopFtuxTooltip) else nil
-local MenuOfferTooltipModule = if FFlagMenuOfferTooltip then require(Chrome.Integrations.InExperienceShop.MenuOfferTooltip) else nil
-local UsePublishShopAvailabilityModule = if FFlagMenuOfferTooltip or FFlagChromeNineDotActivityIndicator then require(Chrome.Integrations.InExperienceShop.usePublishShopAvailability) else nil
+local MenuOfferTooltipModule = require(Chrome.Integrations.InExperienceShop.MenuOfferTooltip)
+local UsePublishShopAvailabilityModule = require(Chrome.Integrations.InExperienceShop.usePublishShopAvailability)
 local UnibarConnectTooltipPriority = game:DefineFastInt("UnibarConnectTooltipPriority", 2000)
 local ShouldShowPlatformChatBasedOnPolicyModule = require(CorePackages.Workspace.Packages.SharedFlags).GetFFlagEnableAppChatInExperience() and (AppChatEnabledChromeDropdownFtuxTooltip and GetShouldShowPlatformChatBasedOnPolicyModule())
 local IsInExperienceUIVREnabled = require(CorePackages.Workspace.Packages.SharedExperimentDefinition).isInExperienceUIVREnabled
@@ -162,7 +162,7 @@ local NewMappedSignal2 = if FFlagEnableNewBackpack then nil else MappedSignal.ne
 	-- upvalues: BackpackScriptModule (copy)
 	return BackpackScriptModule.IsOpen
 end)
-local NewMappedSignal4 = nil
+local NewMappedSignal3 = nil
 
 if FFlagEnableNewBackpack then
 	local NewSignal = Signal.new()
@@ -172,15 +172,15 @@ if FFlagEnableNewBackpack then
 		
 		return nil
 	end)
-	NewMappedSignal4 = MappedSignal.new(NewSignal, function()
+	NewMappedSignal3 = MappedSignal.new(NewSignal, function()
 		-- upvalues: Features (copy)
 		return Features.getVisibility(Features.FeatureName.Backpack)
 	end)
 else
-	NewMappedSignal4 = NewMappedSignal2
+	NewMappedSignal3 = NewMappedSignal2
 end
 if IsSideSheetEnabledModule and FFlagSideSheetFocusNav and FFlagEnableConsoleExpControls then
-	NewMappedSignal4:connect(function(p1)
+	NewMappedSignal3:connect(function(p1)
 		-- upvalues: ServiceModule (copy)
 		ServiceModule:setHideShortcutBar("Backpack", p1)
 	end)
@@ -226,7 +226,7 @@ ChromeUtilsModule.setCoreGuiAvailability(ServiceModule:register({
 			end
 		end
 	end,
-	isActivated = NewMappedSignal4,
+	isActivated = NewMappedSignal3,
 	components = {
 		Icon = function(_)
 			-- upvalues: CommonIconModule (copy), FixInventoryFilledIcon (copy), NewMappedSignal2 (copy)
@@ -269,24 +269,24 @@ task.defer(function()
 	updateRespawn(SettingsHubModule:GetRespawnBehaviour())
 end)
 local CurrentSubMenuResult = ServiceModule:currentSubMenu()
-local NewMappedSignal3 = MappedSignal.new(CurrentSubMenuResult:signal(), function(): boolean
+local NewMappedSignal4 = MappedSignal.new(CurrentSubMenuResult:signal(), function(): boolean
 	-- upvalues: CurrentSubMenuResult (copy)
 	return CurrentSubMenuResult:get() == "nine_dot"
 end)
 
 if ServiceModule:orderAlignment():get() == Enum.HorizontalAlignment.Right then
-	NewMappedSignal3:connect(function(p1)
+	NewMappedSignal4:connect(function(p1)
 		-- upvalues: PlayerListManagerModule (copy)
 		PlayerListManagerModule:SetMinimized(p1)
 	end)
 end
 function HamburgerButton(p1)
-	-- upvalues: UseStyleFunction (copy), FFlagMenuOfferTooltip (copy), ReactModule (copy), FFlagChromeNineDotActivityIndicator (copy), UsePublishShopAvailabilityModule (ref), UseInExperienceOfferExposureModule (copy), UseOfferNineDotActivityIndicatorModule (ref), FFlagTokenizeUnibarConstantsWithStyleProvider (copy), UnibarStyle (copy), ConstantsModule (copy), NewMappedSignal3 (copy), UseMappedSignalFunction (copy), ShouldShowPlatformChatBasedOnPolicyModule (copy), CommonFtuxTooltipModule (copy), UnibarConnectTooltipPriority (copy), GetFFlagIsSquadEnabledFunction (copy), GetFStringConnectTooltipLocalStorageKeyModule (copy), GetFIntRobloxConnectFtuxShowDelayMsModule (copy), GetFIntRobloxConnectFtuxDismissDelayMsModule (copy), FFlagShowGameAgeRating (copy), UseAppPolicyFunction (copy), FFlagExperienceAgeRatingBadge (copy), MenuIconContextModule (copy), IsSideSheetEnabledModule (copy), SelectionCursorProvider (copy), MenuIconModule (copy), ImageSetLabel (copy), Images (copy), SelfieViewModule (copy), ServiceModule (copy), SELFIEVIEWID (copy), AvatarSwitcherFtuxTooltip (copy), AvatarSwitcherFtuxTooltipModule (copy), FFlagEnableInExperienceShop (copy), InExperienceShopFtuxTooltipModule (ref), MenuOfferTooltipModule (ref)
+	-- upvalues: UseStyleFunction (copy), ReactModule (copy), RunService (copy), FFlagChromeNineDotActivityIndicator (copy), UsePublishShopAvailabilityModule (copy), UseInExperienceOfferExposureModule (copy), UseOfferNineDotActivityIndicatorModule (ref), FFlagTokenizeUnibarConstantsWithStyleProvider (copy), UnibarStyle (copy), ConstantsModule (copy), NewMappedSignal4 (copy), UseMappedSignalFunction (copy), ShouldShowPlatformChatBasedOnPolicyModule (copy), CommonFtuxTooltipModule (copy), UnibarConnectTooltipPriority (copy), GetFFlagIsSquadEnabledFunction (copy), GetFStringConnectTooltipLocalStorageKeyModule (copy), GetFIntRobloxConnectFtuxShowDelayMsModule (copy), GetFIntRobloxConnectFtuxDismissDelayMsModule (copy), FFlagShowGameAgeRating (copy), UseAppPolicyFunction (copy), FFlagExperienceAgeRatingBadge (copy), MenuIconContextModule (copy), IsSideSheetEnabledModule (copy), SelectionCursorProvider (copy), MenuIconModule (copy), ImageSetLabel (copy), Images (copy), SelfieViewModule (copy), ServiceModule (copy), SELFIEVIEWID (copy), AvatarSwitcherFtuxTooltip (copy), AvatarSwitcherFtuxTooltipModule (copy), FFlagEnableInExperienceShop (copy), InExperienceShopFtuxTooltipModule (ref), MenuOfferTooltipModule (copy)
 	local ToggleTransition = p1.toggleTransition
 	local UseStyleResult = UseStyleFunction()
-	local UseRefResult = if FFlagMenuOfferTooltip then ReactModule.useRef(nil) else nil
+	local UseRefResult = ReactModule.useRef(nil)
 	
-	if FFlagMenuOfferTooltip or FFlagChromeNineDotActivityIndicator then
+	if not RunService:IsStudio() or FFlagChromeNineDotActivityIndicator then
 		UsePublishShopAvailabilityModule()
 		UseInExperienceOfferExposureModule()
 	end
@@ -304,7 +304,7 @@ function HamburgerButton(p1)
 		ICONSIZE = ConstantsModule.ICON_SIZE
 		MEDIUMICONSIZE = ConstantsModule.MEDIUM_ICON_SIZE
 	end
-	local UseMappedSignalResult = NewMappedSignal3 and UseMappedSignalFunction(NewMappedSignal3) or false
+	local UseMappedSignalResult = NewMappedSignal4 and UseMappedSignalFunction(NewMappedSignal4) or false
 	local UseAppPolicyResult = if FFlagShowGameAgeRating then UseAppPolicyFunction(function(p2)
 		return p2.getShowGameAgeRating()
 	end) else UseAppPolicyFunction(function(p2)
@@ -315,7 +315,7 @@ function HamburgerButton(p1)
 	return ReactModule.createElement("Frame", {
 		BorderSizePixel = 0,
 		Size = UDim2.new(0, ICONSIZE, 0, ICONSIZE),
-		ref = if FFlagMenuOfferTooltip then UseRefResult else nil,
+		ref = if RunService:IsStudio() then nil else UseRefResult,
 		BackgroundColor3 = UseStyleResult.Theme.BackgroundOnHover.Color,
 		BackgroundTransparency = ToggleTransition:map(function(p2): number
 			-- upvalues: UseStyleResult (copy)
@@ -379,7 +379,7 @@ function HamburgerButton(p1)
 		}) else nil,
 		if AvatarSwitcherFtuxTooltip then ReactModule.createElement(AvatarSwitcherFtuxTooltipModule, { visible = p1.visible }) else nil,
 		if FFlagEnableInExperienceShop then ReactModule.createElement(InExperienceShopFtuxTooltipModule, { visible = p1.visible }) else nil,
-		if FFlagMenuOfferTooltip then ReactModule.createElement(MenuOfferTooltipModule, { anchorRef = UseRefResult, visible = p1.visible }) else nil
+		if RunService:IsStudio() then nil else ReactModule.createElement(MenuOfferTooltipModule, { anchorRef = UseRefResult, visible = p1.visible })
 	})
 end
 
@@ -389,7 +389,7 @@ return ServiceModule:register({
 	label = if IsSideSheetEnabledModule then "CoreScripts.TopBar.RobloxMenu" else "CoreScripts.TopBar.MoreMenu",
 	sideSheetPlacement = SideSheetPlacement.None,
 	hotkeyCodes = if IsSideSheetEnabledModule then { Enum.KeyCode.Escape } else nil,
-	isActivated = NewMappedSignal3,
+	isActivated = NewMappedSignal4,
 	components = {
 		Icon = function(p1)
 			-- upvalues: ReactModule (copy)

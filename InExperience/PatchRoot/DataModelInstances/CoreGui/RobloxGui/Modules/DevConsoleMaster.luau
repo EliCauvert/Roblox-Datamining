@@ -16,7 +16,6 @@ local MainViewMemoryModule = require(Components.Memory.MainViewMemory)
 local MainViewScriptProfilerModule = require(Components.ScriptProfiler.MainViewScriptProfiler)
 local MainViewLuauHeapModule = require(Components.LuauHeap.MainViewLuauHeap)
 local MainViewVoiceChatModule = require(Components.VoiceChat.MainViewVoiceChat)
-local MainViewVoiceDebugModule = require(Components.VoiceDebug.MainViewVoiceDebug)
 local GetFFlagVoiceDebugConsoleV2Module = require(Components.VoiceDebug.GetFFlagVoiceDebugConsoleV2)
 local RCCProfilerDataCompleteListenerModule = require(Components.MicroProfiler.RCCProfilerDataCompleteListener)
 local GetClientReplicatorModule = require(DevConsole.Util.getClientReplicator)
@@ -33,7 +32,6 @@ local DevConsoleAdminSeesDevTabs = game:DefineFastFlag("DevConsoleAdminSeesDevTa
 local Default = require(CoreGui.RobloxGui.Modules.VoiceChat.VoiceChatServiceManager).default
 local v1 = false
 local config = {
-	VoiceDebug = nil,
 	Log = {
 		layoutOrder = 1,
 		hasClientServer = true,
@@ -98,6 +96,14 @@ local config2 = {
 		isEnabled = function()
 			-- upvalues: GetFFlagVoiceDebugConsoleV2Module (copy), Default (copy)
 			return not GetFFlagVoiceDebugConsoleV2Module() and (game:GetEngineFeature("VoiceChatDevConsoleTabEnabled") and (Default ~= nil and Default:canUseService()))
+		end
+	},
+	VoiceDebug = {
+		layoutOrder = 14,
+		tab = require(Components.VoiceDebug.MainViewVoiceDebug),
+		isEnabled = function()
+			-- upvalues: v1 (ref)
+			return v1
 		end
 	},
 	RequestOrchestrator = {
@@ -213,16 +219,15 @@ function Module:refreshTabList()
 end
 
 function Module.refreshVoiceDevConsoleAvailability(p1)
-	-- upvalues: GetFFlagVoiceDebugConsoleV2Module (copy), Default (copy), v1 (ref), config (copy), MainViewVoiceDebugModule (copy)
+	-- upvalues: GetFFlagVoiceDebugConsoleV2Module (copy), Default (copy), v1 (ref)
 	if not GetFFlagVoiceDebugConsoleV2Module() then return end
 	if game:GetEngineFeature("VoiceChatDevConsoleTabEnabled") and Default then
 		local function apply()
-			-- upvalues: Default (upval), v1 (upval), config (upval), MainViewVoiceDebugModule (upval), p1 (copy)
+			-- upvalues: Default (upval), v1 (upval), p1 (copy)
 			local VoiceChatAvailableResult = Default:VoiceChatAvailable()
 			
 			if VoiceChatAvailableResult ~= v1 then
 				v1 = VoiceChatAvailableResult
-				config.VoiceDebug = if v1 then { layoutOrder = 13, tab = MainViewVoiceDebugModule } else nil
 				p1:refreshTabList()
 				
 				return

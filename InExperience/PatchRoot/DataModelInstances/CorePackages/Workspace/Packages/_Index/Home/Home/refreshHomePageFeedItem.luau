@@ -5,9 +5,10 @@ local PromiseModule = require(Parent.Promise)
 local _ = require(Parent.SduiCoreSystem)
 local SduiLoadTimer = require(Parent.SduiSharedUtilities).SduiLoadTimer
 local FetchHomePageModule = require(Home.fetchHomePage)
+local FFlagSduiRefreshFeedItemIsOmissionExpected = require(Parent.SharedFlags).FFlagSduiRefreshFeedItemIsOmissionExpected
 
 return function(TopicId, FeedItemKey, RequestIntent, ReportError, p1)
-	-- upvalues: SduiLoadTimer (copy), AppPage (copy), FetchHomePageModule (copy), PromiseModule (copy)
+	-- upvalues: SduiLoadTimer (copy), AppPage (copy), FetchHomePageModule (copy), FFlagSduiRefreshFeedItemIsOmissionExpected (copy), PromiseModule (copy)
 	local LoadTimer = SduiLoadTimer.createLoadTimer(AppPage.Home)
 	LoadTimer.start("feed-item-refresh")
 	
@@ -17,7 +18,8 @@ return function(TopicId, FeedItemKey, RequestIntent, ReportError, p1)
 		focusedRefresh = {
 			topicId = TopicId,
 			feedItemKey = FeedItemKey,
-			reportError = ReportError
+			reportError = ReportError,
+			isOmissionExpected = if FFlagSduiRefreshFeedItemIsOmissionExpected then p1.isOmissionExpected else nil
 		}
 	}):andThen(function(Result)
 		-- upvalues: LoadTimer (copy)

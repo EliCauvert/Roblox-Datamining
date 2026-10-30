@@ -1,6 +1,6 @@
 ﻿local BuildExperience = script:FindFirstAncestor("BuildExperience")
 local AnalyticsKeysModule = require(BuildExperience.Analytics.AnalyticsKeys)
-local MetricGranularity = require(BuildExperience.Parent.DataHydration.ExperienceAnalytics).MetricGranularity
+local MetricGranularity = require(BuildExperience.Parent.DataHydration.CreatorAnalytics).MetricGranularity
 local WindowId = { LastWeek = "LastWeek", LastMonth = "LastMonth" }
 
 local function _(Id, LabelKey, Days: number, CreatorHubRangeType)

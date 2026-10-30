@@ -4,6 +4,7 @@ local IXPService = game:GetService("IXPService")
 local ReactModule = require(Parent.React)
 local UseCallbackFunction = ReactModule.useCallback
 local UseEffectFunction = ReactModule.useEffect
+local UseRefFunction = ReactModule.useRef
 local AppUserLayers = require(Parent.ExperimentLayers).AppUserLayers
 local ConstantsModule = require(InterventionShared.Utils.Constants)
 local DetermineAppealsStateModule = require(InterventionShared.Utils.determineAppealsState)
@@ -15,9 +16,10 @@ local UseRestrictionEndDateInfoModule = require(InterventionShared.Hooks.useRest
 local FFlagUFRAppealsAndModNoteFixModule = require(InterventionShared.Flags.FFlagUFRAppealsAndModNoteFix)
 local FFlagUFRFriendsChatIXPExposureModule = require(InterventionShared.Flags.FFlagUFRFriendsChatIXPExposure)
 local FFlagUFRImprovementsModule = require(InterventionShared.Flags.FFlagUFRImprovements)
+local FFlagUFRRunUnlessFeatureRestrictedModule = require(Parent.UniversalFeatureRestrictions.FFlagUFRRunUnlessFeatureRestricted)
 
 return ReactModule.memo(function(p1)
-	-- upvalues: FFlagUFRAppealsAndModNoteFixModule (copy), ConstantsModule (copy), DetermineUFRInterventionTypeModule (copy), UseParsedBadUtterancesModule (copy), UseRestrictionEndDateInfoModule (copy), DetermineAppealsStateModule (copy), UseEffectFunction (copy), FFlagUFRFriendsChatIXPExposureModule (copy), IXPService (copy), AppUserLayers (copy), FFlagUFRImprovementsModule (copy), UseCallbackFunction (copy), ReactModule (copy), GenericInterventionDialogModule (copy)
+	-- upvalues: FFlagUFRAppealsAndModNoteFixModule (copy), ConstantsModule (copy), DetermineUFRInterventionTypeModule (copy), UseParsedBadUtterancesModule (copy), UseRestrictionEndDateInfoModule (copy), DetermineAppealsStateModule (copy), UseEffectFunction (copy), FFlagUFRFriendsChatIXPExposureModule (copy), IXPService (copy), AppUserLayers (copy), FFlagUFRImprovementsModule (copy), FFlagUFRRunUnlessFeatureRestrictedModule (copy), UseRefFunction (copy), UseCallbackFunction (copy), ReactModule (copy), GenericInterventionDialogModule (copy)
 	local ModerationDetail = p1.moderationDetail
 	local ConsequenceTransparencyMessage = ModerationDetail.consequenceTransparencyMessage
 	local InterventionId = ModerationDetail.interventionId
@@ -46,7 +48,24 @@ return ReactModule.memo(function(p1)
 			p1.onShownCallback()
 		end
 	end, {})
+	local v1 = nil
 	
+	if FFlagUFRRunUnlessFeatureRestrictedModule then
+		local UseRefResult = UseRefFunction(false)
+		v1 = UseRefResult
+		UseEffectFunction(function()
+			-- upvalues: p1 (copy), UseRefResult (copy)
+			local OnClosedCallbackFunction = p1.onClosedCallback
+			UseRefResult.current = false
+			
+			return function()
+				-- upvalues: OnClosedCallbackFunction (copy), UseRefResult (upval)
+				if OnClosedCallbackFunction then
+					OnClosedCallbackFunction(UseRefResult.current)
+				end
+			end
+		end, { p1.onClosedCallback })
+	end
 	return ReactModule.createElement(GenericInterventionDialogModule, {
 		useDetailedLayout = true,
 		titleText = p1.titleOverride or (if FFlagUFRImprovementsModule then ModerationDetail.title or "" else "Chat suspended for 2 days"),
@@ -56,13 +75,20 @@ return ReactModule.memo(function(p1)
 		evidence = Joined,
 		violationReason = Joined1,
 		onDismiss = UseCallbackFunction(function()
-			-- upvalues: p1 (copy)
+			-- upvalues: FFlagUFRRunUnlessFeatureRestrictedModule (upval), v1 (ref), p1 (copy)
+			if FFlagUFRRunUnlessFeatureRestrictedModule and v1 then
+				v1.current = true
+			end
 			p1.onDismiss()
 			
 			if p1.onDismissCallback then
 				p1.onDismissCallback()
 			end
-		end, { p1.onDismiss, p1.onDismissCallback }),
+		end, {
+			p1.onDismiss,
+			p1.onDismissCallback,
+			if FFlagUFRRunUnlessFeatureRestrictedModule then v1 else nil
+		}),
 		dsaMessage = ConsequenceTransparencyMessage,
 		interventionId = InterventionId,
 		acknowledgeable = Acknowledgeable,
@@ -73,6 +99,7 @@ return ReactModule.memo(function(p1)
 		countdownText = UseRestrictionEndDateInfoModuleResult.countdownText,
 		onAppeal = p1.onAppeal,
 		onAcknowledgementSuccess = p1.onAcknowledgementSuccess,
+		onAcknowledgementFailure = p1.onAcknowledgementFailure,
 		shouldOpenAppealsPortal = DetermineAppealsStateModuleResult.shouldOpenAppealsPortal,
 		violationUid = if Violation then Violation.uid else nil
 	})

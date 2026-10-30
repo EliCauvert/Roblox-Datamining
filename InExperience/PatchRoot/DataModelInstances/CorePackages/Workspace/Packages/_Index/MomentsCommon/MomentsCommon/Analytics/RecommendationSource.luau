@@ -1,5 +1,6 @@
 ﻿return {
 	Trending = "Trending",
 	MyMoments = "MyMoments",
-	Profile = "Profile"
+	Profile = "Profile",
+	Following = "Following"
 }

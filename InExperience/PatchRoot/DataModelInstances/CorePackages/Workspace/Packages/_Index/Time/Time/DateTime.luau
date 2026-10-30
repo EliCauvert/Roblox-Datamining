@@ -29,6 +29,15 @@ function DateTimeModule.fromUnixTimestamp(p1: number)
 	return config
 end
 
+function DateTimeModule.fromUnixTimestampMillis(p1)
+	-- upvalues: DateTimeModule (copy)
+	assert(type(p1) == "number", "Invalid argument #1 to fromUnixTimestampMillis, expected number.")
+	local config = { dateTime = DateTime.fromUnixTimestampMillis(p1) }
+	setmetatable(config, DateTimeModule)
+	
+	return config
+end
+
 function DateTimeModule.fromIsoDate(p1)
 	-- upvalues: DateTimeModule (copy)
 	assert(type(p1) == "string", "Invalid argument #1 to DateTime.fromIsoDate, expected string.")
@@ -41,28 +50,28 @@ end
 function DateTimeModule:Format(p1, p2, p3)
 	-- upvalues: TimeZoneModule (copy), LocalizationService (copy)
 	assert(type(p1) == "string", "Invalid argument #1 to Format, expected string.")
-	local P11 = p2 or TimeZoneModule.Current
-	local P12 = p3 or LocalizationService.RobloxLocaleId
+	local P12 = p2 or TimeZoneModule.Current
+	local P13 = p3 or LocalizationService.RobloxLocaleId
 	
-	if P11 == TimeZoneModule.UTC then
-		return self.dateTime:FormatUniversalTime(p1, P12)
-	elseif P11 == TimeZoneModule.Current then
-		return self.dateTime:FormatLocalTime(p1, P12)
+	if P12 == TimeZoneModule.UTC then
+		return self.dateTime:FormatUniversalTime(p1, P13)
+	elseif P12 == TimeZoneModule.Current then
+		return self.dateTime:FormatLocalTime(p1, P13)
 	else
-		error(("Invalid TimeZone \"%s\""):format((tostring(P11))), 2)
+		error(("Invalid TimeZone \"%s\""):format((tostring(P12))), 2)
 	end
 end
 
 function DateTimeModule:GetValues(p1)
 	-- upvalues: TimeZoneModule (copy)
-	local P14 = p1 or TimeZoneModule.Current
+	local P15 = p1 or TimeZoneModule.Current
 	
-	if P14 == TimeZoneModule.UTC then
+	if P15 == TimeZoneModule.UTC then
 		return self.dateTime:ToUniversalTime()
-	elseif P14 == TimeZoneModule.Current then
+	elseif P15 == TimeZoneModule.Current then
 		return self.dateTime:ToLocalTime()
 	else
-		error(("Invalid TimeZone \"%s\""):format((tostring(P14))), 2)
+		error(("Invalid TimeZone \"%s\""):format((tostring(P15))), 2)
 	end
 end
 

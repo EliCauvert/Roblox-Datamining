@@ -13,8 +13,11 @@ local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalizati
 local GetFFlagMomentsAndroidTvEnabledModule = require(Moments.Flags.GetFFlagMomentsAndroidTvEnabled)
 local FFlagMomentsFtuxTooltipCreateCopyModule = require(Moments.Flags.FFlagMomentsFtuxTooltipCreateCopy)
 local FFlagMomentsFixFeedForDeviceSafeInsetsModule = require(Moments.Flags.FFlagMomentsFixFeedForDeviceSafeInsets)
+local FFlagMomentsFollowingFeedModule = require(Moments.Flags.FFlagMomentsFollowingFeed)
 local ShouldUseDeviceSafeInsets = require(Parent.Display).shouldUseDeviceSafeInsets
+local MomentsFeedTypeModule = require(Moments.Enums.MomentsFeedType)
 local _ = require(script.Parent.MomentsHeaderView)
+local UseTrendingFeedLabelModule = require(Moments.Hooks.useTrendingFeedLabel)
 local Analytics = MomentsCommonModule.Analytics
 local EventNames = Analytics.EventNames
 local FireAnalyticsEventFunction = Analytics.fireAnalyticsEvent
@@ -22,6 +25,7 @@ local config = {
 	title = "Feature.Moments.Tooltip.ShareFirstMomentTitle",
 	text = "Feature.Moments.Tooltip.ShareFirstMomentBody"
 }
+local config1 = { following = "Feature.Moments.Label.FeedFollowing" }
 
 local function noop() end
 
@@ -35,7 +39,7 @@ local function _()
 end
 
 return function(p1, p2, ShowHamburger)
-	-- upvalues: UseTokensFunction (copy), UseDeviceInsetsFunction (copy), UseSetDrawerVisibleFunction (copy), UseIsTvRemoteDeviceFunction (copy), UseCompositionLayoutFunction (copy), UseStatusBarHeightFunction (copy), FFlagMomentsFtuxTooltipCreateCopyModule (copy), UseLocalizationFunction (copy), config (copy), noop (copy), ReactModule (copy), FireAnalyticsEventFunction (copy), EventNames (copy), Players (copy), FFlagMomentsFixFeedForDeviceSafeInsetsModule (copy), ShouldUseDeviceSafeInsets (copy), GetFFlagMomentsAndroidTvEnabledModule (copy)
+	-- upvalues: UseTokensFunction (copy), UseDeviceInsetsFunction (copy), UseSetDrawerVisibleFunction (copy), UseIsTvRemoteDeviceFunction (copy), UseCompositionLayoutFunction (copy), UseStatusBarHeightFunction (copy), FFlagMomentsFtuxTooltipCreateCopyModule (copy), UseLocalizationFunction (copy), config (copy), FFlagMomentsFollowingFeedModule (copy), config1 (copy), UseTrendingFeedLabelModule (copy), MomentsFeedTypeModule (copy), noop (copy), ReactModule (copy), FireAnalyticsEventFunction (copy), EventNames (copy), Players (copy), FFlagMomentsFixFeedForDeviceSafeInsetsModule (copy), ShouldUseDeviceSafeInsets (copy), GetFFlagMomentsAndroidTvEnabledModule (copy)
 	local UseTokensResult = UseTokensFunction()
 	local UseDeviceInsetsResult = UseDeviceInsetsFunction()
 	local UseSetDrawerVisibleResult = UseSetDrawerVisibleFunction()
@@ -51,6 +55,37 @@ return function(p1, p2, ShowHamburger)
 		local UseLocalizationResult = UseLocalizationFunction(config)
 		Title = UseLocalizationResult.title
 		FtuxTooltipText = UseLocalizationResult.text
+	end
+	local FeedTypeChips = nil
+	
+	if FFlagMomentsFollowingFeedModule then
+		local UseLocalizationResult = UseLocalizationFunction(config1)
+		local UseTrendingFeedLabelModuleResult = UseTrendingFeedLabelModule()
+		local OnFeedTypeSelectedFunction = p1.onFeedTypeSelected
+		
+		if OnFeedTypeSelectedFunction ~= nil then
+			local SelectedFeedType = p1.selectedFeedType or MomentsFeedTypeModule.Trending
+			FeedTypeChips = {
+				{
+					id = MomentsFeedTypeModule.Trending,
+					text = UseTrendingFeedLabelModuleResult,
+					isChecked = SelectedFeedType == MomentsFeedTypeModule.Trending,
+					onActivated = function()
+						-- upvalues: OnFeedTypeSelectedFunction (copy), MomentsFeedTypeModule (upval)
+						OnFeedTypeSelectedFunction(MomentsFeedTypeModule.Trending)
+					end
+				},
+				{
+					id = MomentsFeedTypeModule.Following,
+					text = UseLocalizationResult.following,
+					isChecked = SelectedFeedType == MomentsFeedTypeModule.Following,
+					onActivated = function()
+						-- upvalues: OnFeedTypeSelectedFunction (copy), MomentsFeedTypeModule (upval)
+						OnFeedTypeSelectedFunction(MomentsFeedTypeModule.Following)
+					end
+				}
+			}
+		end
 	end
 	local OnFtuxTooltipDismissed = p1.onFtuxTooltipDismissed or noop
 	local OnCreatePressed = p1.onCreatePressed or noop
@@ -73,26 +108,37 @@ return function(p1, p2, ShowHamburger)
 		})
 		OnFtuxTooltipDismissed()
 	end, { OnFtuxTooltipDismissed })
+	local UseResult1 = ReactModule.useCallback(function()
+		-- upvalues: IsShowFtuxTooltip (copy), UseResult (copy), OnCreatePressed (copy)
+		if IsShowFtuxTooltip then
+			UseResult()
+		end
+		OnCreatePressed()
+	end, { IsShowFtuxTooltip, UseResult, OnCreatePressed })
+	local UseResult2 = ReactModule.useCallback(function()
+		-- upvalues: UseSetDrawerVisibleResult (copy)
+		UseSetDrawerVisibleResult(true)
+	end, { UseSetDrawerVisibleResult })
 	local Margin: number = UseCompositionLayoutResult.margin
+	local HeaderPadding = {
+		left = UDim.new(0, (math.max(UseDeviceInsetsResult.left, Margin))),
+		right = UDim.new(0, (math.max(UseDeviceInsetsResult.right, Margin))),
+		top = UDim.new(0, UseStatusBarHeightResult)
+	}
+	local NewTop = UseDeviceInsetsResult.top + UseTokensResult.Size.Size_2000 + UseTokensResult.Size.Size_1600
 	
+	if FeedTypeChips ~= nil then
+		NewTop += UseTokensResult.Size.Size_800
+	end
 	return {
 		layoutOrder = if p2 then nil else p1.layoutOrder,
 		variant = p1.variant,
 		showFtuxTooltip = IsShowFtuxTooltip,
 		ftuxTooltipTitle = Title,
 		ftuxTooltipText = FtuxTooltipText,
-		onCreateMomentButtonPressed = ReactModule.useCallback(function()
-			-- upvalues: IsShowFtuxTooltip (copy), UseResult (copy), OnCreatePressed (copy)
-			if IsShowFtuxTooltip then
-				UseResult()
-			end
-			OnCreatePressed()
-		end, { IsShowFtuxTooltip, UseResult, OnCreatePressed }),
+		onCreateMomentButtonPressed = UseResult1,
 		onFtuxTooltipClosed = UseResult,
-		onHamburgerPressed = ReactModule.useCallback(function()
-			-- upvalues: UseSetDrawerVisibleResult (copy)
-			UseSetDrawerVisibleResult(true)
-		end, { UseSetDrawerVisibleResult }),
+		onHamburgerPressed = UseResult2,
 		onBack = p1.onBack or noop,
 		onClose = p1.onClose or noop,
 		onNavigateToTrending = p1.onNavigateToTrending or noop,
@@ -104,13 +150,10 @@ return function(p1, p2, ShowHamburger)
 		showCreateButton = p1.onCreatePressed ~= nil,
 		showNavigationMenu = p1.onNavigateToTrending ~= nil and p1.onNavigateToMyMoments ~= nil,
 		headerHeight = Size1400,
-		headerPadding = {
-			left = UDim.new(0, (math.max(UseDeviceInsetsResult.left, Margin))),
-			right = UDim.new(0, (math.max(UseDeviceInsetsResult.right, Margin))),
-			top = UDim.new(0, UseStatusBarHeightResult)
-		},
+		headerPadding = HeaderPadding,
 		titleTextStyle = UseTokensResult.Color.Content.Emphasis,
-		scrimHeight = UseDeviceInsetsResult.top + UseTokensResult.Size.Size_2000 + UseTokensResult.Size.Size_1600,
-		scrimTopOffset = if FFlagMomentsFixFeedForDeviceSafeInsetsModule and ShouldUseDeviceSafeInsets then -UseDeviceInsetsResult.top else nil
+		scrimHeight = NewTop,
+		scrimTopOffset = if FFlagMomentsFixFeedForDeviceSafeInsetsModule and ShouldUseDeviceSafeInsets then -UseDeviceInsetsResult.top else nil,
+		feedTypeChips = FeedTypeChips
 	}
 end

@@ -24,6 +24,7 @@
 	sendSocialLinkClickEvent = require(script.sendSocialLinkClickEvent),
 	sendSocialLinksImpressionsEvent = require(script.sendSocialLinksImpressionsEvent),
 	sendOpenLeavingRobloxModalEvent = require(script.sendOpenLeavingRobloxModalEvent),
+	sendSafetyResourceBannerEvent = require(script.sendSafetyResourceBannerEvent),
 	sendRequestRefundClickEvent = require(script.sendRequestRefundClickEvent),
 	fireInExperienceDetailsPromptOpenedEvent = require(script.fireInExperienceDetailsPromptOpenedEvent),
 	fireInExperienceDetailsPromptPlayButtonClickedEvent = require(script.fireInExperienceDetailsPromptPlayButtonClickedEvent),

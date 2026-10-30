@@ -4,6 +4,7 @@ local ReactModule = require(Parent.React)
 local ReactOtterModule = require(Parent.ReactOtter)
 local Dictation = require(Parent.ExpChatShared).Logger:new("ExpChat/Dictation")
 local DictationModeModule = require(script.Parent.DictationMode)
+local DictationStateModule = require(script.Parent.DictationState)
 local DictationAnalyticsModule = require(script.Parent.DictationAnalytics)
 local FFlagExpChatDictationExplicitFinishModule = require(ExpChat.Flags.FFlagExpChatDictationExplicitFinish)
 local UseDictationAudioPipelineModule = require(script.Parent.useDictationAudioPipeline)
@@ -12,12 +13,6 @@ local RequestMicPermissionFunction = RequestMicPermissionModule.requestMicPermis
 local PermissionStatus = RequestMicPermissionModule.PermissionStatus
 local CreateSignalFunction = require(Parent.Signals).createSignal
 local UseSignalBindingFunction = require(Parent.SignalsReact).useSignalBinding
-local DictationState = {
-	Idle = "idle",
-	Recording = "recording",
-	Transcribing = "transcribing",
-	Listening = "listening"
-}
 local DictationErrorReason = {
 	PermissionDenied = "permission_denied",
 	TranscriptionFailed = "transcription_failed",
@@ -54,10 +49,10 @@ end
 return {
 	MAX_RECORDING_SECONDS = 10,
 	useDictation = function(Current)
-		-- upvalues: ReactModule (copy), CreateSignalFunction (copy), DictationState (copy), UseDictationAudioPipelineModule (copy), ReactOtterModule (copy), UseSignalBindingFunction (copy), Dictation (copy), DictationAnalyticsModule (copy), FFlagExpChatDictationExplicitFinishModule (copy), DictationErrorReason (copy), DictationModeModule (copy), config (copy), RequestMicPermissionFunction (copy), PermissionStatus (copy), formatTime (copy)
+		-- upvalues: ReactModule (copy), CreateSignalFunction (copy), DictationStateModule (copy), UseDictationAudioPipelineModule (copy), ReactOtterModule (copy), UseSignalBindingFunction (copy), Dictation (copy), DictationAnalyticsModule (copy), FFlagExpChatDictationExplicitFinishModule (copy), DictationErrorReason (copy), DictationModeModule (copy), config (copy), RequestMicPermissionFunction (copy), PermissionStatus (copy), formatTime (copy)
 		local UseMemoResult = ReactModule.useMemo(function()
-			-- upvalues: CreateSignalFunction (upval), DictationState (upval)
-			local Signal, Signal2 = CreateSignalFunction(DictationState.Idle)
+			-- upvalues: CreateSignalFunction (upval), DictationStateModule (upval)
+			local Signal, Signal2 = CreateSignalFunction(DictationStateModule.Idle)
 			
 			return { get = Signal, set = Signal2 }
 		end, {})
@@ -67,36 +62,36 @@ return {
 		local UseBindingResult, UseBindingResult2 = ReactModule.useBinding(0)
 		local UseAnimatedBindingResult, UseAnimatedBindingResult2 = ReactOtterModule.useAnimatedBinding(0)
 		local UseSignalBindingResult = UseSignalBindingFunction(function(p3): boolean
-			-- upvalues: GetFunction (copy), DictationState (upval)
-			return GetFunction(p3) == DictationState.Recording
+			-- upvalues: GetFunction (copy), DictationStateModule (upval)
+			return GetFunction(p3) == DictationStateModule.Recording
 		end)
 		local UseSignalBindingResult1 = UseSignalBindingFunction(function(p3): boolean
-			-- upvalues: GetFunction (copy), DictationState (upval)
-			return GetFunction(p3) == DictationState.Transcribing
+			-- upvalues: GetFunction (copy), DictationStateModule (upval)
+			return GetFunction(p3) == DictationStateModule.Transcribing
 		end)
 		local UseSignalBindingResult2 = UseSignalBindingFunction(function(p3): boolean
-			-- upvalues: GetFunction (copy), DictationState (upval)
+			-- upvalues: GetFunction (copy), DictationStateModule (upval)
 			local GetResult = GetFunction(p3)
 			
-			return GetResult == DictationState.Recording or GetResult == DictationState.Transcribing
+			return GetResult == DictationStateModule.Recording or GetResult == DictationStateModule.Transcribing
 		end)
 		local UseSignalBindingResult3 = UseSignalBindingFunction(function(p3): boolean
-			-- upvalues: GetFunction (copy), DictationState (upval)
-			return GetFunction(p3) == DictationState.Idle
+			-- upvalues: GetFunction (copy), DictationStateModule (upval)
+			return GetFunction(p3) == DictationStateModule.Idle
 		end)
 		local UseSignalBindingResult4 = UseSignalBindingFunction(function(p3): boolean
-			-- upvalues: GetFunction (copy), DictationState (upval)
-			return GetFunction(p3) ~= DictationState.Recording
+			-- upvalues: GetFunction (copy), DictationStateModule (upval)
+			return GetFunction(p3) ~= DictationStateModule.Recording
 		end)
 		local UseSignalBindingResult5 = UseSignalBindingFunction(function(p3): boolean
-			-- upvalues: GetFunction (copy), DictationState (upval)
-			return GetFunction(p3) == DictationState.Listening
+			-- upvalues: GetFunction (copy), DictationStateModule (upval)
+			return GetFunction(p3) == DictationStateModule.Listening
 		end)
 		local UseSignalBindingResult6 = UseSignalBindingFunction(function(p3): boolean
-			-- upvalues: GetFunction (copy), DictationState (upval)
+			-- upvalues: GetFunction (copy), DictationStateModule (upval)
 			local GetResult = GetFunction(p3)
 			
-			return GetResult == DictationState.Recording or GetResult == DictationState.Listening
+			return GetResult == DictationStateModule.Recording or GetResult == DictationStateModule.Listening
 		end)
 		local UseRefResult = ReactModule.useRef(Current)
 		UseRefResult.current = Current
@@ -107,24 +102,32 @@ return {
 		local UseRefResult5 = ReactModule.useRef(0)
 		local UseRefResult6 = ReactModule.useRef(nil)
 		
-		local function _(Listening)
-			-- upvalues: SetFunction (copy), DictationState (upval), UseRefResult1 (copy), UseRefResult (copy)
-			SetFunction(Listening)
-			local IsListeningMatch: boolean = Listening == DictationState.Recording or (Listening == DictationState.Transcribing or Listening == DictationState.Listening)
+		local function transitionTo(Idle)
+			-- upvalues: GetFunction (copy), SetFunction (copy), DictationStateModule (upval), UseRefResult1 (copy), UseRefResult (copy)
+			local GetResult = GetFunction(false)
+			SetFunction(Idle)
+			local IsIdleMatch: boolean = Idle == DictationStateModule.Recording or (Idle == DictationStateModule.Transcribing or Idle == DictationStateModule.Listening)
 			
-			if IsListeningMatch ~= UseRefResult1.current then
-				UseRefResult1.current = IsListeningMatch
+			if IsIdleMatch ~= UseRefResult1.current then
+				UseRefResult1.current = IsIdleMatch
 				local Current = UseRefResult.current
 				
 				if Current ~= nil and Current.onActivityChanged ~= nil then
-					Current.onActivityChanged(IsListeningMatch)
+					Current.onActivityChanged(IsIdleMatch)
+				end
+			end
+			if Idle ~= GetResult then
+				local Current = UseRefResult.current
+				
+				if Current ~= nil and Current.onStateChanged ~= nil then
+					Current.onStateChanged(Idle)
 				end
 			end
 		end
 		
-		local _ = function()
+		local function _(p3)
 			-- upvalues: UseDictationAudioPipelineModuleResult (copy), UseRefResult4 (copy), UseRefResult3 (copy), UseAnimatedBindingResult2 (copy), ReactOtterModule (upval)
-			UseDictationAudioPipelineModuleResult.stop()
+			UseDictationAudioPipelineModuleResult.stop(p3)
 			
 			if UseRefResult4.current then
 				pcall(task.cancel, UseRefResult4.current)
@@ -138,10 +141,10 @@ return {
 		end
 		
 		local function handleError(TranscriptionFailed, p3)
-			-- upvalues: Dictation (upval), UseRefResult6 (copy), UseDictationAudioPipelineModuleResult (copy), UseRefResult4 (copy), UseRefResult3 (copy), UseAnimatedBindingResult2 (copy), ReactOtterModule (upval), DictationState (upval), SetFunction (copy), UseRefResult1 (copy), UseRefResult (copy)
+			-- upvalues: Dictation (upval), UseRefResult6 (copy), UseDictationAudioPipelineModuleResult (copy), UseRefResult4 (copy), UseRefResult3 (copy), UseAnimatedBindingResult2 (copy), ReactOtterModule (upval), transitionTo (copy), DictationStateModule (upval), UseRefResult (copy)
 			Dictation:warning("Dictation: {} ({})", p3, TranscriptionFailed)
 			local Mode = UseRefResult6.current and UseRefResult6.current.mode or nil
-			UseDictationAudioPipelineModuleResult.stop()
+			UseDictationAudioPipelineModuleResult.stop(nil)
 			
 			if UseRefResult4.current then
 				pcall(task.cancel, UseRefResult4.current)
@@ -152,30 +155,19 @@ return {
 				UseRefResult3.current = nil
 			end
 			UseAnimatedBindingResult2(ReactOtterModule.instant(0))
-			local Idle = DictationState.Idle
-			SetFunction(Idle)
-			local IsIdleMatch: boolean = Idle == DictationState.Recording or (Idle == DictationState.Transcribing or Idle == DictationState.Listening)
+			transitionTo(DictationStateModule.Idle)
+			local Current = UseRefResult.current
 			
-			if IsIdleMatch ~= UseRefResult1.current then
-				UseRefResult1.current = IsIdleMatch
-				local Current = UseRefResult.current
-				
-				if Current ~= nil and Current.onActivityChanged ~= nil then
-					Current.onActivityChanged(IsIdleMatch)
-				end
-			end
-			local Current1 = UseRefResult.current
-			
-			if Current1 ~= nil and Current1.onError ~= nil then
-				Current1.onError(Mode, TranscriptionFailed)
+			if Current ~= nil and Current.onError ~= nil then
+				Current.onError(Mode, TranscriptionFailed)
 			end
 			UseRefResult6.current = nil
 		end
 		
 		ReactModule.useEffect(function()
-			-- upvalues: UseRefResult5 (copy), UseRefResult4 (copy), UseRefResult3 (copy)
+			-- upvalues: UseRefResult5 (copy), UseRefResult4 (copy), UseRefResult3 (copy), GetFunction (copy), DictationStateModule (upval), UseRefResult (copy)
 			return function()
-				-- upvalues: UseRefResult5 (upval), UseRefResult4 (upval), UseRefResult3 (upval)
+				-- upvalues: UseRefResult5 (upval), UseRefResult4 (upval), UseRefResult3 (upval), GetFunction (upval), DictationStateModule (upval), UseRefResult (upval)
 				UseRefResult5.current += 1
 				
 				if UseRefResult4.current then
@@ -186,8 +178,15 @@ return {
 					pcall(task.cancel, UseRefResult3.current)
 					UseRefResult3.current = nil
 				end
+				if GetFunction(false) ~= DictationStateModule.Idle then
+					local Current = UseRefResult.current
+					
+					if Current ~= nil and Current.onStateChanged ~= nil then
+						Current.onStateChanged(DictationStateModule.Idle)
+					end
+				end
 			end
-		end, {})
+		end, { GetFunction })
 		
 		local _ = function(p3, p4)
 			-- upvalues: UseRefResult6 (copy), UseRefResult (copy)
@@ -203,13 +202,16 @@ return {
 		
 		local UseRefResult7 = ReactModule.useRef(nil)
 		local UseResult = ReactModule.useCallback(function(p3)
-			-- upvalues: DictationAnalyticsModule (upval), GetFunction (copy), DictationState (upval), Dictation (upval), UseDictationAudioPipelineModuleResult (copy), UseRefResult4 (copy), UseRefResult3 (copy), UseAnimatedBindingResult2 (copy), ReactOtterModule (upval), SetFunction (copy), UseRefResult1 (copy), UseRefResult (copy), UseRefResult6 (copy), UseRefResult2 (copy), FFlagExpChatDictationExplicitFinishModule (upval), handleError (copy), DictationErrorReason (upval)
-			local P17 = p3 or DictationAnalyticsModule.TriggerTypes.UserManual
+			-- upvalues: DictationAnalyticsModule (upval), GetFunction (copy), FFlagExpChatDictationExplicitFinishModule (upval), UseRefResult5 (copy), UseDictationAudioPipelineModuleResult (copy), DictationStateModule (upval), UseRefResult4 (copy), UseRefResult3 (copy), UseAnimatedBindingResult2 (copy), ReactOtterModule (upval), transitionTo (copy), UseRefResult6 (copy), UseRefResult (copy), Dictation (upval), UseRefResult2 (copy), handleError (copy), DictationErrorReason (upval)
+			local P18 = p3 or DictationAnalyticsModule.TriggerTypes.UserManual
 			local GetResult = GetFunction(false)
 			
-			if GetResult == DictationState.Listening then
-				Dictation:debug("Dictation: exited continuous mode")
-				UseDictationAudioPipelineModuleResult.stop()
+			if FFlagExpChatDictationExplicitFinishModule and P18 == DictationAnalyticsModule.TriggerTypes.SafetyIntervention then
+				UseRefResult5.current += 1
+				UseDictationAudioPipelineModuleResult.discardPending()
+				
+				if GetResult == DictationStateModule.Recording or GetResult == DictationStateModule.Transcribing then return end
+				UseDictationAudioPipelineModuleResult.stop(true)
 				
 				if UseRefResult4.current then
 					pcall(task.cancel, UseRefResult4.current)
@@ -220,72 +222,22 @@ return {
 					UseRefResult3.current = nil
 				end
 				UseAnimatedBindingResult2(ReactOtterModule.instant(0))
-				local Idle = DictationState.Idle
-				SetFunction(Idle)
-				local IsIdleMatch: boolean = Idle == DictationState.Recording or (Idle == DictationState.Transcribing or Idle == DictationState.Listening)
+				transitionTo(DictationStateModule.Idle)
+				local Current = UseRefResult6.current
+				local Current1 = UseRefResult.current
 				
-				if IsIdleMatch ~= UseRefResult1.current then
-					UseRefResult1.current = IsIdleMatch
-					local Current = UseRefResult.current
-					
-					if Current ~= nil and Current.onActivityChanged ~= nil then
-						Current.onActivityChanged(IsIdleMatch)
-					end
-				end
-				local Current1 = UseRefResult6.current
-				local Current2 = UseRefResult.current
-				
-				if Current2 ~= nil and Current2.onRecordingStop ~= nil and Current1 ~= nil and Current1.startedAt ~= nil then
-					Current2.onRecordingStop(Current1.mode, P17, os.clock() - Current1.startedAt, nil)
+				if Current1 ~= nil and Current1.onRecordingStop ~= nil and Current ~= nil and Current.startedAt ~= nil then
+					Current1.onRecordingStop(Current.mode, P18, os.clock() - Current.startedAt, nil)
 				end
 				UseRefResult6.current = nil
 				
 				return
 			else
-				if GetResult ~= DictationState.Recording then return end
-				if UseRefResult4.current then
-					pcall(task.cancel, UseRefResult4.current)
-					UseRefResult4.current = nil
-				end
-				if UseRefResult3.current then
-					pcall(task.cancel, UseRefResult3.current)
-					UseRefResult3.current = nil
-				end
-				if UseRefResult2.current then
-					if UseDictationAudioPipelineModuleResult.audioDeviceInputRef.current then
-						UseDictationAudioPipelineModuleResult.audioDeviceInputRef.current.Muted = true
-					end
-					if FFlagExpChatDictationExplicitFinishModule and not UseDictationAudioPipelineModuleResult.finishInput() then
-						Dictation:warning("Dictation: explicit finish unavailable, waiting for muted input to end speech")
-					end
-					local Transcribing = DictationState.Transcribing
-					SetFunction(Transcribing)
-					local IsTranscribingMatch: boolean = Transcribing == DictationState.Recording or (Transcribing == DictationState.Transcribing or Transcribing == DictationState.Listening)
-					
-					if IsTranscribingMatch ~= UseRefResult1.current then
-						UseRefResult1.current = IsTranscribingMatch
-						local Current = UseRefResult.current
-						
-						if Current ~= nil and Current.onActivityChanged ~= nil then
-							Current.onActivityChanged(IsTranscribingMatch)
-						end
-					end
-					Dictation:debug("Dictation: stopped recording, waiting for transcription")
-					local Current4 = UseRefResult6.current
-					local Current5 = UseRefResult.current
-					
-					if Current5 ~= nil and Current5.onRecordingStop ~= nil and Current4 ~= nil and Current4.startedAt ~= nil then
-						Current5.onRecordingStop(Current4.mode, P17, os.clock() - Current4.startedAt, nil)
-					end
-					UseRefResult4.current = task.delay(5, function()
-						-- upvalues: handleError (upval), DictationErrorReason (upval)
-						handleError(DictationErrorReason.TranscriptionFailed, "transcription timed out")
-					end)
-					
-					return
-				else
-					Dictation:debug("Dictation: no voice activity, returning to idle")
-					UseDictationAudioPipelineModuleResult.stop()
+				local IsPMatch: boolean = FFlagExpChatDictationExplicitFinishModule and (GetResult == DictationStateModule.Listening and P18 == DictationAnalyticsModule.TriggerTypes.UserManual)
+				
+				if GetResult == DictationStateModule.Listening and not IsPMatch then
+					Dictation:debug("Dictation: exited continuous mode")
+					UseDictationAudioPipelineModuleResult.stop(true)
 					
 					if UseRefResult4.current then
 						pcall(task.cancel, UseRefResult4.current)
@@ -296,25 +248,83 @@ return {
 						UseRefResult3.current = nil
 					end
 					UseAnimatedBindingResult2(ReactOtterModule.instant(0))
-					local Idle = DictationState.Idle
-					SetFunction(Idle)
-					local IsIdleMatch: boolean = Idle == DictationState.Recording or (Idle == DictationState.Transcribing or Idle == DictationState.Listening)
-					
-					if IsIdleMatch ~= UseRefResult1.current then
-						UseRefResult1.current = IsIdleMatch
-						local Current = UseRefResult.current
-						
-						if Current ~= nil and Current.onActivityChanged ~= nil then
-							Current.onActivityChanged(IsIdleMatch)
-						end
-					end
+					transitionTo(DictationStateModule.Idle)
 					local Current = UseRefResult6.current
-					local Current3 = UseRefResult.current
+					local Current2 = UseRefResult.current
 					
-					if Current3 ~= nil and Current3.onRecordingStop ~= nil and Current ~= nil and Current.startedAt ~= nil then
-						Current3.onRecordingStop(Current.mode, P17, os.clock() - Current.startedAt, nil)
+					if Current2 ~= nil and Current2.onRecordingStop ~= nil and Current ~= nil and Current.startedAt ~= nil then
+						Current2.onRecordingStop(Current.mode, P18, os.clock() - Current.startedAt, nil)
 					end
 					UseRefResult6.current = nil
+					
+					return
+				else
+					if GetResult ~= DictationStateModule.Recording and not IsPMatch then return end
+					if UseRefResult4.current then
+						pcall(task.cancel, UseRefResult4.current)
+						UseRefResult4.current = nil
+					end
+					if UseRefResult3.current then
+						pcall(task.cancel, UseRefResult3.current)
+						UseRefResult3.current = nil
+					end
+					if UseRefResult2.current then
+						if UseDictationAudioPipelineModuleResult.audioDeviceInputRef.current then
+							UseDictationAudioPipelineModuleResult.audioDeviceInputRef.current.Muted = true
+						end
+						if FFlagExpChatDictationExplicitFinishModule and not UseDictationAudioPipelineModuleResult.finishInput() then
+							Dictation:warning("Dictation: explicit finish unavailable, waiting for muted input to end speech")
+						end
+						if IsPMatch then
+							UseDictationAudioPipelineModuleResult.drain(5)
+							transitionTo(DictationStateModule.Idle)
+							local Current = UseRefResult6.current
+							local Current5 = UseRefResult.current
+							
+							if Current5 ~= nil and (Current5.onRecordingStop ~= nil and Current ~= nil and Current.startedAt ~= nil) then
+								Current5.onRecordingStop(Current.mode, P18, os.clock() - Current.startedAt, nil)
+							end
+							UseRefResult6.current = nil
+							
+							return
+						else
+							transitionTo(DictationStateModule.Transcribing)
+							Dictation:debug("Dictation: stopped recording, waiting for transcription")
+							local Current = UseRefResult6.current
+							local Current6 = UseRefResult.current
+							
+							if Current6 ~= nil and Current6.onRecordingStop ~= nil and Current ~= nil and Current.startedAt ~= nil then
+								Current6.onRecordingStop(Current.mode, P18, os.clock() - Current.startedAt, nil)
+							end
+							UseRefResult4.current = task.delay(5, function()
+								-- upvalues: handleError (upval), DictationErrorReason (upval)
+								handleError(DictationErrorReason.TranscriptionFailed, "transcription timed out")
+							end)
+							
+							return
+						end
+					else
+						Dictation:debug("Dictation: no voice activity, returning to idle")
+						UseDictationAudioPipelineModuleResult.stop(nil)
+						
+						if UseRefResult4.current then
+							pcall(task.cancel, UseRefResult4.current)
+							UseRefResult4.current = nil
+						end
+						if UseRefResult3.current then
+							pcall(task.cancel, UseRefResult3.current)
+							UseRefResult3.current = nil
+						end
+						UseAnimatedBindingResult2(ReactOtterModule.instant(0))
+						transitionTo(DictationStateModule.Idle)
+						local Current3 = UseRefResult6.current
+						local Current4 = UseRefResult.current
+						
+						if Current4 ~= nil and Current4.onRecordingStop ~= nil and Current3 ~= nil and Current3.startedAt ~= nil then
+							Current4.onRecordingStop(Current3.mode, P18, os.clock() - Current3.startedAt, nil)
+						end
+						UseRefResult6.current = nil
+					end
 				end
 			end
 		end, { UseDictationAudioPipelineModuleResult, GetFunction })
@@ -327,33 +337,33 @@ return {
 		return {
 			getDictationState = GetFunction,
 			startDictation = ReactModule.useCallback(function(Mode)
-				-- upvalues: GetFunction (copy), DictationState (upval), UseRefResult6 (copy), UseRefResult5 (copy), UseRefResult2 (copy), UseDictationAudioPipelineModuleResult (copy), Dictation (upval), DictationAnalyticsModule (upval), UseRefResult (copy), UseRefResult4 (copy), UseRefResult3 (copy), UseAnimatedBindingResult2 (copy), ReactOtterModule (upval), SetFunction (copy), UseRefResult1 (copy), DictationModeModule (upval), handleError (copy), DictationErrorReason (upval), UseBindingResult2 (copy), config (upval), UseRefResult7 (copy), RequestMicPermissionFunction (upval), PermissionStatus (upval)
-				if GetFunction(false) == DictationState.Idle then
+				-- upvalues: GetFunction (copy), DictationStateModule (upval), UseRefResult6 (copy), UseRefResult5 (copy), UseRefResult2 (copy), UseDictationAudioPipelineModuleResult (copy), Dictation (upval), DictationAnalyticsModule (upval), UseRefResult (copy), UseRefResult4 (copy), UseRefResult3 (copy), UseAnimatedBindingResult2 (copy), ReactOtterModule (upval), transitionTo (copy), DictationModeModule (upval), handleError (copy), DictationErrorReason (upval), UseBindingResult2 (copy), config (upval), UseRefResult7 (copy), FFlagExpChatDictationExplicitFinishModule (upval), RequestMicPermissionFunction (upval), PermissionStatus (upval)
+				if GetFunction(false) == DictationStateModule.Idle then
 					UseRefResult6.current = { mode = Mode }
 					UseRefResult5.current += 1
 					local Current = UseRefResult5.current
 					
 					local function doStartStandard()
-						-- upvalues: UseRefResult2 (upval), UseDictationAudioPipelineModuleResult (upval), Dictation (upval), GetFunction (upval), DictationState (upval), DictationAnalyticsModule (upval), UseRefResult6 (upval), UseRefResult (upval), UseRefResult4 (upval), UseRefResult3 (upval), UseAnimatedBindingResult2 (upval), ReactOtterModule (upval), SetFunction (upval), UseRefResult1 (upval), DictationModeModule (upval), handleError (upval), DictationErrorReason (upval), UseBindingResult2 (upval), config (upval), UseRefResult7 (upval)
+						-- upvalues: UseRefResult2 (upval), UseDictationAudioPipelineModuleResult (upval), Dictation (upval), GetFunction (upval), DictationStateModule (upval), DictationAnalyticsModule (upval), UseRefResult6 (upval), UseRefResult (upval), UseRefResult4 (upval), UseRefResult3 (upval), UseAnimatedBindingResult2 (upval), ReactOtterModule (upval), transitionTo (upval), DictationModeModule (upval), handleError (upval), DictationErrorReason (upval), UseBindingResult2 (upval), config (upval), UseRefResult7 (upval)
 						UseRefResult2.current = false
 						local Success, Result = pcall(function()
-							-- upvalues: UseDictationAudioPipelineModuleResult (upval), Dictation (upval), GetFunction (upval), DictationState (upval), DictationAnalyticsModule (upval), UseRefResult6 (upval), UseRefResult (upval), UseRefResult4 (upval), UseRefResult3 (upval), UseAnimatedBindingResult2 (upval), ReactOtterModule (upval), SetFunction (upval), UseRefResult1 (upval), DictationModeModule (upval), UseRefResult2 (upval), handleError (upval), DictationErrorReason (upval)
+							-- upvalues: UseDictationAudioPipelineModuleResult (upval), Dictation (upval), GetFunction (upval), DictationStateModule (upval), DictationAnalyticsModule (upval), UseRefResult6 (upval), UseRefResult (upval), UseRefResult4 (upval), UseRefResult3 (upval), UseAnimatedBindingResult2 (upval), ReactOtterModule (upval), transitionTo (upval), DictationModeModule (upval), UseRefResult2 (upval), handleError (upval), DictationErrorReason (upval)
 							UseDictationAudioPipelineModuleResult.start({
 								onTranscription = function(p3)
-									-- upvalues: Dictation (upval), GetFunction (upval), DictationState (upval), DictationAnalyticsModule (upval), UseRefResult6 (upval), UseRefResult (upval), UseDictationAudioPipelineModuleResult (upval), UseRefResult4 (upval), UseRefResult3 (upval), UseAnimatedBindingResult2 (upval), ReactOtterModule (upval), SetFunction (upval), UseRefResult1 (upval), DictationModeModule (upval)
+									-- upvalues: Dictation (upval), GetFunction (upval), DictationStateModule (upval), DictationAnalyticsModule (upval), UseRefResult6 (upval), UseRefResult (upval), UseDictationAudioPipelineModuleResult (upval), UseRefResult4 (upval), UseRefResult3 (upval), UseAnimatedBindingResult2 (upval), ReactOtterModule (upval), transitionTo (upval), DictationModeModule (upval)
 									Dictation:debug("Dictation: received transcription: {}", p3)
 									
-									if GetFunction(false) == DictationState.Recording then
+									if GetFunction(false) == DictationStateModule.Recording then
 										local AutoPause = DictationAnalyticsModule.TriggerTypes.AutoPause
-										local CountP19 = #p3
+										local CountP20 = #p3
 										local Current = UseRefResult6.current
 										local Current1 = UseRefResult.current
 										
 										if Current1 ~= nil and Current1.onRecordingStop ~= nil and Current ~= nil and Current.startedAt ~= nil then
-											Current1.onRecordingStop(Current.mode, AutoPause, os.clock() - Current.startedAt, CountP19)
+											Current1.onRecordingStop(Current.mode, AutoPause, os.clock() - Current.startedAt, CountP20)
 										end
 									end
-									UseDictationAudioPipelineModuleResult.stop()
+									UseDictationAudioPipelineModuleResult.stop(nil)
 									
 									if UseRefResult4.current then
 										pcall(task.cancel, UseRefResult4.current)
@@ -364,22 +374,11 @@ return {
 										UseRefResult3.current = nil
 									end
 									UseAnimatedBindingResult2(ReactOtterModule.instant(0))
-									local Idle = DictationState.Idle
-									SetFunction(Idle)
-									local IsIdleMatch: boolean = Idle == DictationState.Recording or (Idle == DictationState.Transcribing or Idle == DictationState.Listening)
+									transitionTo(DictationStateModule.Idle)
+									local Current = UseRefResult.current
 									
-									if IsIdleMatch ~= UseRefResult1.current then
-										UseRefResult1.current = IsIdleMatch
-										local Current = UseRefResult.current
-										
-										if Current ~= nil and Current.onActivityChanged ~= nil then
-											Current.onActivityChanged(IsIdleMatch)
-										end
-									end
-									local Current2 = UseRefResult.current
-									
-									if Current2 ~= nil and Current2.onTranscription ~= nil then
-										Current2.onTranscription(p3, DictationModeModule.Standard)
+									if Current ~= nil and Current.onTranscription ~= nil then
+										Current.onTranscription(p3, DictationModeModule.Standard)
 									end
 									UseRefResult6.current = nil
 								end,
@@ -399,18 +398,8 @@ return {
 							
 							return
 						end
-						local Recording = DictationState.Recording
-						SetFunction(Recording)
-						local IsRecordingMatch: boolean = Recording == DictationState.Recording or (Recording == DictationState.Transcribing or Recording == DictationState.Listening)
+						transitionTo(DictationStateModule.Recording)
 						
-						if IsRecordingMatch ~= UseRefResult1.current then
-							UseRefResult1.current = IsRecordingMatch
-							local Current = UseRefResult.current
-							
-							if Current ~= nil and Current.onActivityChanged ~= nil then
-								Current.onActivityChanged(IsRecordingMatch)
-							end
-						end
 						if UseRefResult6.current then
 							UseRefResult6.current.startedAt = os.clock()
 						end
@@ -449,9 +438,14 @@ return {
 					end
 					
 					local function doStartContinuous()
-						-- upvalues: UseDictationAudioPipelineModuleResult (upval), Dictation (upval), UseRefResult (upval), DictationModeModule (upval), handleError (upval), DictationErrorReason (upval), DictationState (upval), SetFunction (upval), UseRefResult1 (upval), UseRefResult6 (upval), DictationAnalyticsModule (upval)
+						-- upvalues: UseRefResult6 (upval), FFlagExpChatDictationExplicitFinishModule (upval), UseRefResult2 (upval), UseDictationAudioPipelineModuleResult (upval), Dictation (upval), UseRefResult (upval), DictationModeModule (upval), handleError (upval), DictationErrorReason (upval), transitionTo (upval), DictationStateModule (upval), DictationAnalyticsModule (upval)
+						local Current = UseRefResult6.current
+						
+						if FFlagExpChatDictationExplicitFinishModule then
+							UseRefResult2.current = false
+						end
 						local Success, Result = pcall(function()
-							-- upvalues: UseDictationAudioPipelineModuleResult (upval), Dictation (upval), UseRefResult (upval), DictationModeModule (upval), handleError (upval), DictationErrorReason (upval)
+							-- upvalues: UseDictationAudioPipelineModuleResult (upval), Dictation (upval), UseRefResult (upval), DictationModeModule (upval), FFlagExpChatDictationExplicitFinishModule (upval), UseRefResult6 (upval), Current (copy), UseRefResult2 (upval), handleError (upval), DictationErrorReason (upval)
 							UseDictationAudioPipelineModuleResult.start({
 								onTranscription = function(p3)
 									-- upvalues: Dictation (upval), UseRefResult (upval), DictationModeModule (upval)
@@ -463,16 +457,24 @@ return {
 									end
 								end,
 								onSpeechStarted = function()
-									-- upvalues: UseRefResult (upval), DictationModeModule (upval)
-									local Current = UseRefResult.current
+									-- upvalues: FFlagExpChatDictationExplicitFinishModule (upval), UseRefResult6 (upval), Current (upval), UseRefResult2 (upval), UseRefResult (upval), DictationModeModule (upval)
+									if FFlagExpChatDictationExplicitFinishModule and UseRefResult6.current ~= Current then return end
+									if FFlagExpChatDictationExplicitFinishModule then
+										UseRefResult2.current = true
+									end
+									local Current1 = UseRefResult.current
 									
-									if Current ~= nil and Current.onSpeechStarted ~= nil then
-										Current.onSpeechStarted(DictationModeModule.Continuous)
+									if Current1 ~= nil and Current1.onSpeechStarted ~= nil then
+										Current1.onSpeechStarted(DictationModeModule.Continuous)
 									end
 								end,
 								onError = function(p3)
-									-- upvalues: handleError (upval), DictationErrorReason (upval)
-									handleError(DictationErrorReason.TranscriptionFailed, p3)
+									-- upvalues: FFlagExpChatDictationExplicitFinishModule (upval), UseRefResult6 (upval), Current (upval), handleError (upval), DictationErrorReason (upval)
+									if not FFlagExpChatDictationExplicitFinishModule or UseRefResult6.current == Current then
+										handleError(DictationErrorReason.TranscriptionFailed, p3)
+										
+										return
+									end
 								end
 							}, { continuous = true })
 						end)
@@ -482,25 +484,15 @@ return {
 							
 							return
 						end
-						local Listening = DictationState.Listening
-						SetFunction(Listening)
-						local IsListeningMatch: boolean = Listening == DictationState.Recording or (Listening == DictationState.Transcribing or Listening == DictationState.Listening)
+						transitionTo(DictationStateModule.Listening)
 						
-						if IsListeningMatch ~= UseRefResult1.current then
-							UseRefResult1.current = IsListeningMatch
-							local Current = UseRefResult.current
-							
-							if Current ~= nil and Current.onActivityChanged ~= nil then
-								Current.onActivityChanged(IsListeningMatch)
-							end
-						end
 						if UseRefResult6.current then
 							UseRefResult6.current.startedAt = os.clock()
 						end
-						local Current = UseRefResult.current
+						local Current1 = UseRefResult.current
 						
-						if Current and Current.onRecordingStart then
-							Current.onRecordingStart(DictationModeModule.Continuous, DictationAnalyticsModule.TriggerTypes.UserManual)
+						if Current1 and Current1.onRecordingStart then
+							Current1.onRecordingStart(DictationModeModule.Continuous, DictationAnalyticsModule.TriggerTypes.UserManual)
 						end
 						Dictation:debug("Dictation: entered continuous mode")
 					end
@@ -544,10 +536,10 @@ return {
 			end, { UseDictationAudioPipelineModuleResult, GetFunction }),
 			stopDictation = UseResult,
 			cancel = ReactModule.useCallback(function()
-				-- upvalues: Dictation (upval), UseRefResult5 (copy), UseDictationAudioPipelineModuleResult (copy), UseRefResult4 (copy), UseRefResult3 (copy), UseAnimatedBindingResult2 (copy), ReactOtterModule (upval), DictationState (upval), SetFunction (copy), UseRefResult1 (copy), UseRefResult (copy), DictationAnalyticsModule (upval), UseRefResult6 (copy)
+				-- upvalues: Dictation (upval), UseRefResult5 (copy), UseDictationAudioPipelineModuleResult (copy), UseRefResult4 (copy), UseRefResult3 (copy), UseAnimatedBindingResult2 (copy), ReactOtterModule (upval), transitionTo (copy), DictationStateModule (upval), DictationAnalyticsModule (upval), UseRefResult6 (copy), UseRefResult (copy)
 				Dictation:debug("Dictation: cancelled")
 				UseRefResult5.current += 1
-				UseDictationAudioPipelineModuleResult.stop()
+				UseDictationAudioPipelineModuleResult.stop(true)
 				
 				if UseRefResult4.current then
 					pcall(task.cancel, UseRefResult4.current)
@@ -558,24 +550,13 @@ return {
 					UseRefResult3.current = nil
 				end
 				UseAnimatedBindingResult2(ReactOtterModule.instant(0))
-				local Idle = DictationState.Idle
-				SetFunction(Idle)
-				local IsIdleMatch: boolean = Idle == DictationState.Recording or (Idle == DictationState.Transcribing or Idle == DictationState.Listening)
-				
-				if IsIdleMatch ~= UseRefResult1.current then
-					UseRefResult1.current = IsIdleMatch
-					local Current = UseRefResult.current
-					
-					if Current ~= nil and Current.onActivityChanged ~= nil then
-						Current.onActivityChanged(IsIdleMatch)
-					end
-				end
+				transitionTo(DictationStateModule.Idle)
 				local UserManual = DictationAnalyticsModule.TriggerTypes.UserManual
-				local Current1 = UseRefResult6.current
-				local Current2 = UseRefResult.current
+				local Current = UseRefResult6.current
+				local Current1 = UseRefResult.current
 				
-				if Current2 ~= nil and Current2.onRecordingStop ~= nil and Current1 ~= nil and Current1.startedAt ~= nil then
-					Current2.onRecordingStop(Current1.mode, UserManual, os.clock() - Current1.startedAt, nil)
+				if Current1 ~= nil and Current1.onRecordingStop ~= nil and Current ~= nil and Current.startedAt ~= nil then
+					Current1.onRecordingStop(Current.mode, UserManual, os.clock() - Current.startedAt, nil)
 				end
 				UseRefResult6.current = nil
 			end, {}),
@@ -600,7 +581,7 @@ return {
 			})
 		}
 	end,
-	DictationState = DictationState,
+	DictationState = DictationStateModule,
 	DictationErrorReason = DictationErrorReason,
 	formatTime = formatTime
 }

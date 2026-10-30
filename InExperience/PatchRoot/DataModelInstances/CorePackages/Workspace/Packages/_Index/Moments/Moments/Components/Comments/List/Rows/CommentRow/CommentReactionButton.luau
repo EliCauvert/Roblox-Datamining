@@ -7,12 +7,13 @@ local ReactModule = require(Parent.React)
 local ReactOtterModule = require(Parent.ReactOtter)
 local FFlagMomentsCommentRowRedesignModule = require(Moments.Flags.FFlagMomentsCommentRowRedesign)
 local GetColorStyleWithTransparencyModule = require(Moments.Utils.getColorStyleWithTransparency)
+local FFlagMomentsUseSharedReactionsModule = require(Moments.Flags.FFlagMomentsUseSharedReactions)
 local Icon = FoundationModule.Icon
 local Text = FoundationModule.Text
 local View = FoundationModule.View
 local IconSize = FoundationModule.Enums.IconSize
 local UseTokensFunction = FoundationModule.Hooks.useTokens
-local Reaction = MomentsCommonModule.Components.Reaction
+local ReactionModule = if FFlagMomentsUseSharedReactionsModule then require(Parent.Reactions.Reaction) else MomentsCommonModule.Components.Reaction
 local ReactionAssets = MomentsCommonModule.Components.ReactionAssets
 local ReactionSize = MomentsCommonModule.Enums.ReactionSize
 local ReactionType = MomentsCommonModule.Enums.ReactionType
@@ -21,7 +22,7 @@ local config1 = { frequency = 5, dampingRatio = 0.5 }
 local config2 = { frequency = 6, dampingRatio = 1 }
 
 return ReactModule.memo(function(Frame)
-	-- upvalues: UseTokensFunction (copy), ReactOtterModule (copy), ReactModule (copy), config1 (copy), config2 (copy), FFlagMomentsCommentRowRedesignModule (copy), GetColorStyleWithTransparencyModule (copy), config (copy), ReactionAssets (copy), ReactionSize (copy), View (copy), Icon (copy), BuilderIconsModule (copy), IconSize (copy), Reaction (copy), ReactionType (copy), Text (copy)
+	-- upvalues: UseTokensFunction (copy), ReactOtterModule (copy), ReactModule (copy), config1 (copy), config2 (copy), FFlagMomentsCommentRowRedesignModule (copy), GetColorStyleWithTransparencyModule (copy), config (copy), ReactionAssets (copy), ReactionSize (copy), FFlagMomentsUseSharedReactionsModule (copy), View (copy), Icon (copy), BuilderIconsModule (copy), IconSize (copy), ReactionModule (copy), ReactionType (copy), Text (copy)
 	local UseTokensResult = UseTokensFunction()
 	local ReactionName: string = `moments-comment-reaction-button-{Frame.commentId}`
 	local UseAnimatedBindingResult, UseAnimatedBindingResult2 = ReactOtterModule.useAnimatedBinding(if Frame.isReactionSelected then 1 else 0)
@@ -48,7 +49,7 @@ return ReactModule.memo(function(Frame)
 		end
 	end, { Frame.commentId, Frame.isReactionSelected })
 	local Emphasis = if FFlagMomentsCommentRowRedesignModule then UseTokensResult.Color.Content.Emphasis else UseTokensResult.Color.Content.Default
-	local SizeRatio = if FFlagMomentsCommentRowRedesignModule then UseTokensResult.Size.Size_400 / ReactionAssets.getSizePixels(ReactionSize.XSmall) else 1
+	local SizeRatio = if FFlagMomentsUseSharedReactionsModule and FFlagMomentsCommentRowRedesignModule then UseTokensResult.Size.Size_400 / UseTokensResult.Size.Size_500 elseif FFlagMomentsCommentRowRedesignModule then UseTokensResult.Size.Size_400 / ReactionAssets.getSizePixels(ReactionSize.XSmall) else 1
 	local Small = UseTokensResult.Padding.Small
 	local SmallDelta = if FFlagMomentsCommentRowRedesignModule then Small - (UseTokensResult.Size.Size_600 - UseTokensResult.Size.Size_400) / 2 else Small
 	
@@ -100,7 +101,7 @@ return ReactModule.memo(function(Frame)
 							testId = `{ReactionName}--icon`
 						})
 					}),
-					Reacted = ReactModule.createElement(Reaction, {
+					Reacted = ReactModule.createElement(ReactionModule, {
 						reactionType = ReactionType.ThumbsUp,
 						size = ReactionSize.XSmall,
 						imageStyle = UseAnimatedBindingResult:map(function(Value: number)
@@ -108,7 +109,7 @@ return ReactModule.memo(function(Frame)
 							return GetColorStyleWithTransparencyModule(config, 1 - math.clamp(Value, 0, 1))
 						end),
 						scale = UseAnimatedBindingResult:map(function(Alpha: number)
-							-- upvalues: SizeRatio (copy)
+							-- upvalues: SizeRatio (ref)
 							return math.lerp(0.6, 1, Alpha) * SizeRatio
 						end),
 						AnchorPoint = Vector2.new(0.5, 0.5),

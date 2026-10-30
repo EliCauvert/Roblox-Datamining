@@ -1,14 +1,17 @@
-﻿local ConstantsModule = require(script:FindFirstAncestor("Moments").Constants)
+﻿local Moments = script:FindFirstAncestor("Moments")
+local ConstantsModule = require(Moments.Constants)
+local _ = require(script.Parent.RecommendationContentType)
+local FFlagMomentsRecommendationContentTypeModule = require(Moments.Flags.FFlagMomentsRecommendationContentType)
 local config = {
 	eventName = "RecommendationImpressionEvent",
 	throttlingPercentage = 10000,
 	description = "Fires when a moment becomes visible in the platform feed",
 	backends = { "EventIngest" },
-	lastUpdated = { 26, 6, 2 }
+	lastUpdated = { 26, 10, 29 }
 }
 
 return function(p1)
-	-- upvalues: config (copy), ConstantsModule (copy)
+	-- upvalues: FFlagMomentsRecommendationContentTypeModule (copy), config (copy), ConstantsModule (copy)
 	game:GetService("TelemetryService"):LogEvent(config, {
 		standardizedFields = { "addSessionInfo", "addSessionId", "addOSInfo" },
 		customFields = {
@@ -24,7 +27,8 @@ return function(p1)
 			weight = tostring(p1.weight or 1),
 			departure_intent = p1.departureIntent,
 			moments_session_id = p1.momentsSessionId,
-			source_surface = ConstantsModule.SOURCE_SURFACE
+			source_surface = ConstantsModule.SOURCE_SURFACE,
+			content_type = if FFlagMomentsRecommendationContentTypeModule then p1.contentType else nil
 		}
 	})
 end

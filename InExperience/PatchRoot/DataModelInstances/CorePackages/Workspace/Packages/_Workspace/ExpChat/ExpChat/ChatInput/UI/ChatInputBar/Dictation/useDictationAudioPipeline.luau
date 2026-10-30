@@ -3,7 +3,9 @@ local Players = game:GetService("Players")
 local ExpChat = script:FindFirstAncestor("ExpChat")
 local ReactModule = require(ExpChat.Parent.React)
 local FinishDictationInputModule = require(script.Parent.finishDictationInput)
+local PrepareDictationInputModule = require(script.Parent.prepareDictationInput)
 local SetDictationUsageTypeModule = require(script.Parent.setDictationUsageType)
+local FFlagExpChatDictationExplicitFinishModule = require(ExpChat.Flags.FFlagExpChatDictationExplicitFinish)
 local EngineAudioSTTIsDictationEnabled = game:DefineFastFlag("EngineAudioSTTIsDictationEnabled", false)
 local ExpChatDictationSendUsageType = game:DefineFastFlag("ExpChatDictationSendUsageType", false)
 local FFlagExpChatDictationStreamingAudioModule = require(ExpChat.Flags.FFlagExpChatDictationStreamingAudio)
@@ -61,28 +63,72 @@ local _ = function(p1)
 	end
 end
 
+local function teardownPending(Current)
+	for i, value in Current do
+		pcall(task.cancel, value)
+		local TextConnection = i.textConnection
+		
+		if TextConnection.current then
+			TextConnection.current:Disconnect()
+			TextConnection.current = nil
+		end
+		local VadConnection = i.vadConnection
+		
+		if VadConnection.current then
+			VadConnection.current:Disconnect()
+			VadConnection.current = nil
+		end
+		local Wire = i.wire
+		
+		if Wire.current then
+			Wire.current:Destroy()
+			Wire.current = nil
+		end
+		local AudioSTT = i.audioSTT
+		
+		if AudioSTT.current then
+			AudioSTT.current:Destroy()
+			AudioSTT.current = nil
+		end
+		local AudioDeviceInput = i.audioDeviceInput
+		
+		if AudioDeviceInput.current then
+			AudioDeviceInput.current:Destroy()
+			AudioDeviceInput.current = nil
+		end
+		local Container = i.container
+		
+		if Container.current then
+			Container.current:Destroy()
+			Container.current = nil
+		end
+		Current[i] = nil
+	end
+end
+
 return function()
-	-- upvalues: ReactModule (copy), Players (copy), CoreGui (copy), FFlagExpChatDictationStreamingAudioModule (copy), EngineAudioSTTIsDictationEnabled (copy), ExpChatDictationSendUsageType (copy), SetDictationUsageTypeModule (copy), FinishDictationInputModule (copy)
+	-- upvalues: ReactModule (copy), teardownPending (copy), Players (copy), CoreGui (copy), FFlagExpChatDictationStreamingAudioModule (copy), EngineAudioSTTIsDictationEnabled (copy), ExpChatDictationSendUsageType (copy), SetDictationUsageTypeModule (copy), FFlagExpChatDictationExplicitFinishModule (copy), PrepareDictationInputModule (copy), FinishDictationInputModule (copy)
 	local UseStateResult, UseStateResult2 = ReactModule.useState(nil)
-	local UseRefResult = ReactModule.useRef(nil)
+	local UseRefResult = ReactModule.useRef({})
 	local UseRefResult1 = ReactModule.useRef(nil)
 	local UseRefResult2 = ReactModule.useRef(nil)
 	local UseRefResult3 = ReactModule.useRef(nil)
 	local UseRefResult4 = ReactModule.useRef(nil)
 	local UseRefResult5 = ReactModule.useRef(nil)
+	local UseRefResult6 = ReactModule.useRef(nil)
 	local UseMemoResult = ReactModule.useMemo(function()
-		-- upvalues: UseRefResult (copy), UseRefResult1 (copy), UseRefResult2 (copy), UseRefResult3 (copy), UseRefResult4 (copy), UseRefResult5 (copy)
+		-- upvalues: UseRefResult1 (copy), UseRefResult2 (copy), UseRefResult3 (copy), UseRefResult4 (copy), UseRefResult5 (copy), UseRefResult6 (copy)
 		return {
-			audioDeviceInput = UseRefResult,
-			audioSTT = UseRefResult1,
-			wire = UseRefResult2,
-			container = UseRefResult3,
-			textConnection = UseRefResult4,
-			vadConnection = UseRefResult5
+			audioDeviceInput = UseRefResult1,
+			audioSTT = UseRefResult2,
+			wire = UseRefResult3,
+			container = UseRefResult4,
+			textConnection = UseRefResult5,
+			vadConnection = UseRefResult6
 		}
 	end, {})
-	local UseResult = ReactModule.useCallback(function()
-		-- upvalues: UseMemoResult (copy), UseStateResult2 (copy)
+	local UseResult = ReactModule.useCallback(function(p1)
+		-- upvalues: UseMemoResult (copy), teardownPending (upval), UseRefResult (copy), UseStateResult2 (copy)
 		local TextConnection = UseMemoResult.textConnection
 		
 		if TextConnection.current then
@@ -119,10 +165,77 @@ return function()
 			Container.current:Destroy()
 			Container.current = nil
 		end
+		if p1 then
+			teardownPending(UseRefResult.current)
+		end
 		UseStateResult2(nil)
 	end, { UseMemoResult })
-	local UseResult1 = ReactModule.useCallback(function(p1, p2)
-		-- upvalues: Players (upval), UseMemoResult (copy), CoreGui (upval), FFlagExpChatDictationStreamingAudioModule (upval), EngineAudioSTTIsDictationEnabled (upval), ExpChatDictationSendUsageType (upval), SetDictationUsageTypeModule (upval), UseStateResult2 (copy)
+	local UseResult1 = ReactModule.useCallback(function(Delay)
+		-- upvalues: UseMemoResult (copy), UseRefResult (copy), UseStateResult2 (copy)
+		local config = {
+			audioDeviceInput = { current = UseMemoResult.audioDeviceInput.current },
+			audioSTT = { current = UseMemoResult.audioSTT.current },
+			wire = { current = UseMemoResult.wire.current },
+			container = { current = UseMemoResult.container.current },
+			textConnection = { current = UseMemoResult.textConnection.current },
+			vadConnection = { current = UseMemoResult.vadConnection.current }
+		}
+		UseMemoResult.audioDeviceInput.current = nil
+		UseMemoResult.audioSTT.current = nil
+		UseMemoResult.wire.current = nil
+		UseMemoResult.container.current = nil
+		UseMemoResult.textConnection.current = nil
+		UseMemoResult.vadConnection.current = nil
+		local VadConnection = config.vadConnection
+		
+		if VadConnection.current then
+			VadConnection.current:Disconnect()
+			VadConnection.current = nil
+		end
+		UseRefResult.current[config] = task.delay(Delay, function()
+			-- upvalues: UseRefResult (upval), config (copy)
+			UseRefResult.current[config] = nil
+			local TextConnection = config.textConnection
+			
+			if TextConnection.current then
+				TextConnection.current:Disconnect()
+				TextConnection.current = nil
+			end
+			local VadConnection = config.vadConnection
+			
+			if VadConnection.current then
+				VadConnection.current:Disconnect()
+				VadConnection.current = nil
+			end
+			local Wire = config.wire
+			
+			if Wire.current then
+				Wire.current:Destroy()
+				Wire.current = nil
+			end
+			local AudioSTT = config.audioSTT
+			
+			if AudioSTT.current then
+				AudioSTT.current:Destroy()
+				AudioSTT.current = nil
+			end
+			local AudioDeviceInput = config.audioDeviceInput
+			
+			if AudioDeviceInput.current then
+				AudioDeviceInput.current:Destroy()
+				AudioDeviceInput.current = nil
+			end
+			local Container = config.container
+			
+			if Container.current then
+				Container.current:Destroy()
+				Container.current = nil
+			end
+		end)
+		UseStateResult2(nil)
+	end, { UseMemoResult })
+	local UseResult2 = ReactModule.useCallback(function(p1, p2)
+		-- upvalues: Players (upval), UseMemoResult (copy), CoreGui (upval), FFlagExpChatDictationStreamingAudioModule (upval), EngineAudioSTTIsDictationEnabled (upval), ExpChatDictationSendUsageType (upval), SetDictationUsageTypeModule (upval), FFlagExpChatDictationExplicitFinishModule (upval), PrepareDictationInputModule (upval), UseStateResult2 (copy)
 		local LocalPlayer = Players.LocalPlayer
 		
 		if not LocalPlayer then
@@ -190,6 +303,9 @@ return function()
 		if ExpChatDictationSendUsageType then
 			SetDictationUsageTypeModule(AudioSpeechToText, IsContinuous)
 		end
+		if FFlagExpChatDictationExplicitFinishModule then
+			PrepareDictationInputModule(AudioSpeechToText)
+		end
 		AudioSpeechToText.Enabled = true
 		AudioSpeechToText.Parent = ExpChatDictation
 		UseMemoResult.audioSTT.current = AudioSpeechToText
@@ -224,9 +340,9 @@ return function()
 		return AudioDeviceInput1
 	end, { UseMemoResult })
 	ReactModule.useEffect(function()
-		-- upvalues: UseMemoResult (copy)
+		-- upvalues: UseMemoResult (copy), teardownPending (upval), UseRefResult (copy)
 		return function()
-			-- upvalues: UseMemoResult (upval)
+			-- upvalues: UseMemoResult (upval), teardownPending (upval), UseRefResult (upval)
 			local TextConnection = UseMemoResult.textConnection
 			
 			if TextConnection.current then
@@ -263,20 +379,32 @@ return function()
 				Container.current:Destroy()
 				Container.current = nil
 			end
+			teardownPending(UseRefResult.current)
 		end
 	end, { UseMemoResult })
 	
 	return ReactModule.useMemo(function()
-		-- upvalues: UseResult1 (copy), FinishDictationInputModule (upval), UseMemoResult (copy), UseResult (copy), UseStateResult (copy), UseRefResult (copy)
+		-- upvalues: UseResult2 (copy), FinishDictationInputModule (upval), UseMemoResult (copy), UseResult (copy), UseResult1 (copy), teardownPending (upval), UseRefResult (copy), UseStateResult (copy), UseRefResult1 (copy)
 		return {
-			start = UseResult1,
+			start = UseResult2,
 			finishInput = function()
 				-- upvalues: FinishDictationInputModule (upval), UseMemoResult (upval)
 				return FinishDictationInputModule(UseMemoResult.audioSTT.current)
 			end,
 			stop = UseResult,
+			drain = UseResult1,
+			discardPending = function()
+				-- upvalues: teardownPending (upval), UseRefResult (upval)
+				teardownPending(UseRefResult.current)
+			end,
 			audioDeviceInput = UseStateResult,
-			audioDeviceInputRef = UseRefResult
+			audioDeviceInputRef = UseRefResult1
 		}
-	end, { UseResult1, UseResult, UseStateResult, UseMemoResult })
+	end, {
+		UseResult2,
+		UseResult,
+		UseResult1,
+		UseStateResult,
+		UseMemoResult
+	})
 end

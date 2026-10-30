@@ -51,7 +51,6 @@ local GetFFlagJoinWithoutMicPermissionsFunction = require(Parent1.SharedFlags).G
 local GetFFlagBatchVoiceParticipantsUpdatesModule = require(Flags.GetFFlagBatchVoiceParticipantsUpdates)
 local GetFIntThrottleParticipantsUpdateMsModule = require(Flags.GetFIntThrottleParticipantsUpdateMs)
 local GetFFlagSeamlessVoiceFTUXFunction = require(Parent1.SharedFlags).GetFFlagSeamlessVoiceFTUX
-local GetFFlagNonVoiceFTUXFunction = require(Parent1.SharedFlags).GetFFlagNonVoiceFTUX
 local GetFFlagEnableFtuxExitOnMuteToggleModule = require(Flags.GetFFlagEnableFtuxExitOnMuteToggle)
 local GetFFlagEnableExpJoinMicPermAnalyticsModule = require(Flags.GetFFlagEnableExpJoinMicPermAnalytics)
 local GetFFlagEnableSeamlessVoiceFeatureModule = require(Flags.GetFFlagEnableSeamlessVoiceFeature)
@@ -61,7 +60,6 @@ local VoicePerformanceThrottlingIXPLayerName = game:DefineFastString("VoicePerfo
 local ThrottleParticipantsUpdateIXPLayerValue = game:DefineFastString("ThrottleParticipantsUpdateIXPLayerValue", "ThrottleParticipantsUpdate")
 local v1 = require(Flags.GetFFlagUseAudioAnalyzerForLocalMetering2)()
 local StopModerationConnectionOnLeave = game:DefineFastFlag("StopModerationConnectionOnLeave", false)
-local DisableRejoinGroupIdDoubleRead = game:DefineFastFlag("DisableRejoinGroupIdDoubleRead", false)
 local VoiceVolumeControlsApplyGameSettingsVoiceVolumeEngineFeature = game:GetEngineFeature("VoiceVolumeControlsApplyGameSettingsVoiceVolume")
 local VoiceVolumeControlsEnableVoiceVolumeEligibilityTelemetry = game:DefineFastFlag("VoiceVolumeControlsEnableVoiceVolumeEligibilityTelemetry", false)
 local v2 = require(Flags.GetFFlagVoiceVolumeControlsEnableVoiceVolumeImpressionsTelemetry)()
@@ -76,10 +74,8 @@ local GetFFlagEnableVoiceSignalFunction = require(Parent1.SharedFlags).GetFFlagE
 local GetFFlagEnableInExpPhoneVoiceUpsellEntrypointsFunction = require(Parent1.SharedFlags).GetFFlagEnableInExpPhoneVoiceUpsellEntrypoints
 local GetFFlagVoiceChatClientRewriteMasterLuaFunction = require(Parent1.SharedFlags).GetFFlagVoiceChatClientRewriteMasterLua
 local GetFFlagCheckUniversePlaceBeforeSuspendingFunction = require(Parent1.SharedFlags).GetFFlagCheckUniversePlaceBeforeSuspending
-local GetFFlagDisconnectToastClientRewriteFunction = require(Parent1.SharedFlags).GetFFlagDisconnectToastClientRewrite
 local FFlagEnablePartyVoiceChangersInLua = require(Parent1.SharedFlags).FFlagEnablePartyVoiceChangersInLua
 local FFlagSkipVoiceInTeamCreateViewerModule = require(Flags.FFlagSkipVoiceInTeamCreateViewer)
-local GetFFlagEnableVoiceUxUpdatesFunction = require(Parent1.SharedFlags).GetFFlagEnableVoiceUxUpdates
 local GetFFlagCoreMicManagerRefactorModule = require(Flags.GetFFlagCoreMicManagerRefactor)
 local GetFFlagMicConsumerRegistryModule = require(Flags.GetFFlagMicConsumerRegistry)
 local MicInputManagerModule = if GetFFlagCoreMicManagerRefactorModule() then require(script.Parent.MicInputManager) else nil
@@ -860,7 +856,7 @@ function config1:EligibleForAgeCheckToast(): boolean
 end
 
 function config1:userAndPlaceCanUseVoice()
-	-- upvalues: GetFFlagAvatarChatServiceEnabledFunction (copy), GetFFlagVoiceChatServiceManagerUseAvatarChatModule (copy), GetShowAgeVerificationOverlayModule (copy), UtilsModule (copy), AnalyticsModule (copy), NewResult (copy), GetFFlagEnableVoiceSignalFunction (copy), GetFFlagEnableInExpPhoneVoiceUpsellEntrypointsFunction (copy), ConstantsModule (copy), VOICEJOINPROGRESS (copy), GetFFlagEnableVoiceUxUpdatesFunction (copy), GetFFlagNonVoiceFTUXFunction (copy)
+	-- upvalues: GetFFlagAvatarChatServiceEnabledFunction (copy), GetFFlagVoiceChatServiceManagerUseAvatarChatModule (copy), GetShowAgeVerificationOverlayModule (copy), UtilsModule (copy), AnalyticsModule (copy), NewResult (copy), GetFFlagEnableVoiceSignalFunction (copy), GetFFlagEnableInExpPhoneVoiceUpsellEntrypointsFunction (copy), ConstantsModule (copy), VOICEJOINPROGRESS (copy)
 	if self.ThirdPartyUserService ~= nil and self.ThirdPartyUserService:IsChatRestrictionSupported() and self.ThirdPartyUserService:GetVoiceChatRestrictionStatus() ~= Enum.ChatRestrictionStatus.NotRestricted then
 		return false
 	end
@@ -890,31 +886,15 @@ function config1:userAndPlaceCanUseVoice()
 		if self:UserEligibleForInExperienceUpsell() or IsPhoneVerificationUpsellMatch then
 			self:ChangeVoiceJoinProgress(VOICEJOINPROGRESS.Suspended)
 		end
-		if GetFFlagEnableVoiceUxUpdatesFunction() then
-			local VoiceConnectCookie = self:GetVoiceConnectCookie()
-			local IsFalse: boolean = self:IsSeamlessVoice() and VoiceConnectCookie == "false"
-			
-			if self:HasSeamlessVoiceFeature(ConstantsModule.SeamlessVoiceFeatures.DeferConnection) and VoiceConnectCookie == "" or IsFalse then
-				self:ChangeVoiceJoinProgress(VOICEJOINPROGRESS.Suspended)
-			elseif self:EligibleForFaeUpsell() then
-				NewResult:debug("Suspending voice join for FAE Eligible user")
-				self:ChangeVoiceJoinProgress(VOICEJOINPROGRESS.Suspended)
-				self:SetupFAECompleteListener()
-			end
-		else
-			if GetFFlagNonVoiceFTUXFunction() and self:IsUserInFTUX() then
-				self:ChangeVoiceJoinProgress(VOICEJOINPROGRESS.Suspended)
-			end
-			if self:IsSeamlessVoice() and not self:GetVoiceConnectCookieValue() then
-				NewResult:debug("Suspending voice join due to voice connect cookie")
-				self:ChangeVoiceJoinProgress(VOICEJOINPROGRESS.Suspended)
-			elseif self:IsNewSeamlessVoiceUserDisconnect() then
-				NewResult:debug("Suspending voice join for new seamless voice user")
-				self:ChangeVoiceJoinProgress(VOICEJOINPROGRESS.Suspended)
-			elseif self:IsSeamlessVoice() and self:UserOnlyEligibleForVoice() then
-				NewResult:debug("Suspending voice join for opt-out user")
-				self:ChangeVoiceJoinProgress(VOICEJOINPROGRESS.Suspended)
-			end
+		local VoiceConnectCookie = self:GetVoiceConnectCookie()
+		local IsFalse: boolean = self:IsSeamlessVoice() and VoiceConnectCookie == "false"
+		
+		if self:HasSeamlessVoiceFeature(ConstantsModule.SeamlessVoiceFeatures.DeferConnection) and VoiceConnectCookie == "" or IsFalse then
+			self:ChangeVoiceJoinProgress(VOICEJOINPROGRESS.Suspended)
+		elseif self:EligibleForFaeUpsell() then
+			NewResult:debug("Suspending voice join for FAE Eligible user")
+			self:ChangeVoiceJoinProgress(VOICEJOINPROGRESS.Suspended)
+			self:SetupFAECompleteListener()
 		end
 		task.spawn(function()
 			-- upvalues: self (copy)
@@ -1358,7 +1338,7 @@ function config1:_updateRecentUsersInteractionData()
 end
 
 function config1:SetupParticipantListeners()
-	-- upvalues: NewResult (copy), GetFFlagClearUserFromRecentVoiceDataOnLeaveModule (copy), StringKeyFixForParticipantsTable (copy), GetFFlagFixGetPlayerByUserIdStringCastModule (copy), Players (copy), VoiceChatService (copy), FFlagEnablePartyVoiceChangersInLua (copy), GetFFlagBatchVoiceParticipantsUpdatesModule (copy), FFlagEnableVoiceChatMuteForVideoCaptures (copy), GetFFlagMicConsumerRegistryModule (copy), GetFFlagCoreMicManagerRefactorModule (copy), GetFFlagVoiceChatClientRewriteMasterLuaFunction (copy), StopModerationConnectionOnLeave (copy), DisableRejoinGroupIdDoubleRead (copy), VoiceVolumeControlsEnableVoiceVolumeEligibilityTelemetry (copy), GetFFlagDisconnectToastClientRewriteFunction (copy), v2 (copy), VoiceVolumeControlsApplyGameSettingsVoiceVolumeEngineFeature (copy), GetFFlagEnableVoiceSignalFunction (copy), VOICEJOINPROGRESS (copy), VoiceVolumeControlsEligibilityModule (copy), v1 (copy), MINVOICECHATAPIVERSIONLOCALMICACTIVITY (copy), GetFFlagLocalMutedNilFixFunction (copy), GetFFlagLuaConsumePlayerModeratedModule (copy), GetFFlagEnableVoiceReverseNudgeModule (copy), UtilsModule (copy), config (copy)
+	-- upvalues: NewResult (copy), GetFFlagClearUserFromRecentVoiceDataOnLeaveModule (copy), StringKeyFixForParticipantsTable (copy), GetFFlagFixGetPlayerByUserIdStringCastModule (copy), Players (copy), VoiceChatService (copy), FFlagEnablePartyVoiceChangersInLua (copy), GetFFlagBatchVoiceParticipantsUpdatesModule (copy), FFlagEnableVoiceChatMuteForVideoCaptures (copy), GetFFlagMicConsumerRegistryModule (copy), GetFFlagCoreMicManagerRefactorModule (copy), GetFFlagVoiceChatClientRewriteMasterLuaFunction (copy), StopModerationConnectionOnLeave (copy), VoiceVolumeControlsEnableVoiceVolumeEligibilityTelemetry (copy), v2 (copy), VoiceVolumeControlsApplyGameSettingsVoiceVolumeEngineFeature (copy), GetFFlagEnableVoiceSignalFunction (copy), VOICEJOINPROGRESS (copy), VoiceVolumeControlsEligibilityModule (copy), v1 (copy), MINVOICECHATAPIVERSIONLOCALMICACTIVITY (copy), GetFFlagLocalMutedNilFixFunction (copy), GetFFlagLuaConsumePlayerModeratedModule (copy), GetFFlagEnableVoiceReverseNudgeModule (copy), UtilsModule (copy), config (copy)
 	self:ensureInitialized("setup participant listeners")
 	
 	if not self.participants then
@@ -1448,7 +1428,7 @@ function config1:SetupParticipantListeners()
 		local FFlagCoreMicManagerRefactorModule = GetFFlagMicConsumerRegistryModule() and GetFFlagCoreMicManagerRefactorModule()
 		
 		local function onStateChanged(OldState, NewState)
-			-- upvalues: self (copy), GetFFlagVoiceChatClientRewriteMasterLuaFunction (upval), NewResult (upval), StopModerationConnectionOnLeave (upval), DisableRejoinGroupIdDoubleRead (upval), FFlagCoreMicManagerRefactorModule (copy), VoiceVolumeControlsEnableVoiceVolumeEligibilityTelemetry (upval), GetFFlagDisconnectToastClientRewriteFunction (upval), v2 (upval), VoiceVolumeControlsApplyGameSettingsVoiceVolumeEngineFeature (upval), GetFFlagEnableVoiceSignalFunction (upval), VOICEJOINPROGRESS (upval), VoiceVolumeControlsEligibilityModule (upval), VoiceChatService (upval)
+			-- upvalues: self (copy), GetFFlagVoiceChatClientRewriteMasterLuaFunction (upval), NewResult (upval), StopModerationConnectionOnLeave (upval), FFlagCoreMicManagerRefactorModule (copy), VoiceVolumeControlsEnableVoiceVolumeEligibilityTelemetry (upval), v2 (upval), VoiceVolumeControlsApplyGameSettingsVoiceVolumeEngineFeature (upval), GetFFlagEnableVoiceSignalFunction (upval), VOICEJOINPROGRESS (upval), VoiceVolumeControlsEligibilityModule (upval), VoiceChatService (upval)
 			self:emit("OnStateChanged", OldState, NewState)
 			local IsNewStateMatch = NewState == Enum.VoiceChatState.Failed
 			local IsNewStateMatch1 = NewState == Enum.VoiceChatState.Joining
@@ -1475,7 +1455,7 @@ function config1:SetupParticipantListeners()
 				self:_syncLocalAudioDeviceActive()
 			end
 			if NewState == Enum.VoiceChatState.Leaving then
-				if not DisableRejoinGroupIdDoubleRead or not self.previousGroupId then
+				if not self.previousGroupId then
 					self.previousGroupId = self.service:GetGroupId()
 				end
 				self.previousMutedState = self.service:IsPublishPaused()
@@ -1504,7 +1484,7 @@ function config1:SetupParticipantListeners()
 					if NewState == Enum.VoiceChatState.Ended then
 						NewResult:debug("State Changed to Ended from {}", OldState)
 					end
-					if not GetFFlagDisconnectToastClientRewriteFunction() or not self:IsSeamlessVoice() or self:GetVoiceConnectCookieValue() then
+					if not self:IsSeamlessVoice() or self:GetVoiceConnectCookieValue() then
 						self:emit("OnRetryRequested")
 					end
 				end
@@ -1520,7 +1500,7 @@ function config1:SetupParticipantListeners()
 				self._voiceJoinTimestampMs = DateTime.now().UnixTimestampMillis
 				self._voiceVolumeSliderEligibleAtJoin = VoiceVolumeControlsEligibilityModule.isVoiceChatVolumeSliderVisible(true, VoiceChatService.UseNewAudioApi)
 			end
-			if VoiceVolumeControlsEnableVoiceVolumeEligibilityTelemetry and (VoiceVolumeControlsApplyGameSettingsVoiceVolumeEngineFeature and (NewState == Enum.VoiceChatState.Joined and not self._voiceVolumeEligibilityReported)) then
+			if VoiceVolumeControlsEnableVoiceVolumeEligibilityTelemetry and VoiceVolumeControlsApplyGameSettingsVoiceVolumeEngineFeature and NewState == Enum.VoiceChatState.Joined and not self._voiceVolumeEligibilityReported then
 				local Success, Result = pcall(function()
 					return UserSettings():GetService("UserGameSettings").VoiceChatVolume
 				end)
@@ -1857,35 +1837,22 @@ function config1.GetVoiceConnectCookie(p4)
 end
 
 function config1.GetVoiceConnectCookieValue(p4): boolean
-	-- upvalues: GetFFlagEnableVoiceUxUpdatesFunction (copy), ConstantsModule (copy)
-	if GetFFlagEnableVoiceUxUpdatesFunction() then
-		local Success, Result = pcall(function()
-			-- upvalues: p4 (copy), ConstantsModule (upval)
-			return p4.AppStorageService:GetItem(ConstantsModule.VOICE_CONNECT_DISCONNECT_KEY_V3)
-		end)
-		
-		return not Success or Result == "true"
-	else
-		local Success1, Result1 = pcall(function()
-			-- upvalues: p4 (copy), ConstantsModule (upval)
-			return p4.AppStorageService:GetItem(ConstantsModule.VOICE_CONNECT_DISCONNECT_KEY_V2)
-		end)
-		
-		return not Success1 or Result1 == "true"
-	end
+	-- upvalues: ConstantsModule (copy)
+	local Success, Result = pcall(function()
+		-- upvalues: p4 (copy), ConstantsModule (upval)
+		return p4.AppStorageService:GetItem(ConstantsModule.VOICE_CONNECT_DISCONNECT_KEY_V3)
+	end)
+	
+	return not Success or Result == "true"
 end
 
 function config1.SetVoiceConnectCookieValue(p4, p5)
-	-- upvalues: GetFFlagEnableVoiceUxUpdatesFunction (copy), ConstantsModule (copy)
-	return if GetFFlagEnableVoiceUxUpdatesFunction() then pcall(function()
+	-- upvalues: ConstantsModule (copy)
+	return (pcall(function()
 		-- upvalues: p4 (copy), ConstantsModule (upval), p5 (copy)
 		p4.AppStorageService:SetItem(ConstantsModule.VOICE_CONNECT_DISCONNECT_KEY_V3, (tostring(p5)))
 		p4.AppStorageService:Flush()
-	end) else pcall(function()
-		-- upvalues: p4 (copy), ConstantsModule (upval), p5 (copy)
-		p4.AppStorageService:SetItem(ConstantsModule.VOICE_CONNECT_DISCONNECT_KEY_V2, (tostring(p5)))
-		p4.AppStorageService:Flush()
-	end)
+	end))
 end
 
 function config1.GetVoiceRewarmCookie(p4)

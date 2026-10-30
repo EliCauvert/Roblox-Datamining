@@ -4,16 +4,20 @@ local ReactModule = require(Parent.React)
 local FoundationModule = require(Parent.Foundation)
 local UseTokensFunction = FoundationModule.Hooks.useTokens
 local UserPresence = FoundationModule.Enums.UserPresence
+local IconSize = FoundationModule.Enums.IconSize
+local IconVariant = FoundationModule.Enums.IconVariant
+local Icon = FoundationModule.Icon
 local Image = FoundationModule.Image
 local View = FoundationModule.View
 local GetStandardSizeAvatarHeadShotRbxthumbFunction = require(Parent.UserLib).Utils.getStandardSizeAvatarHeadShotRbxthumb
 local FFlagUserTileShowShimmerWhenLoadingModule = require(UserTile.Flags.FFlagUserTileShowShimmerWhenLoading)
 local FFlagAddBackplateSupportToUserTile = require(Parent.SharedFlags).FFlagAddBackplateSupportToUserTile
+local FFlagUserTileAvatarOverlayIconModule = require(UserTile.Flags.FFlagUserTileAvatarOverlayIcon)
 local FFlagUserTileUseProfileFrameThumbnailModule = require(UserTile.Flags.FFlagUserTileUseProfileFrameThumbnail)
 local FFlagUserTileIncludeProfileFramePropModule = require(UserTile.Flags.FFlagUserTileIncludeProfileFrameProp)
 
 return function(p1)
-	-- upvalues: FFlagUserTileUseProfileFrameThumbnailModule (copy), FFlagUserTileIncludeProfileFramePropModule (copy), FFlagUserTileShowShimmerWhenLoadingModule (copy), GetStandardSizeAvatarHeadShotRbxthumbFunction (copy), UseTokensFunction (copy), ReactModule (copy), View (copy), FFlagAddBackplateSupportToUserTile (copy), Image (copy), UserPresence (copy)
+	-- upvalues: FFlagUserTileUseProfileFrameThumbnailModule (copy), FFlagUserTileIncludeProfileFramePropModule (copy), FFlagUserTileShowShimmerWhenLoadingModule (copy), GetStandardSizeAvatarHeadShotRbxthumbFunction (copy), UseTokensFunction (copy), ReactModule (copy), View (copy), FFlagAddBackplateSupportToUserTile (copy), Image (copy), FFlagUserTileAvatarOverlayIconModule (copy), Icon (copy), IconVariant (copy), IconSize (copy), UserPresence (copy)
 	local IncludeProfileFrame = FFlagUserTileUseProfileFrameThumbnailModule
 	
 	if FFlagUserTileIncludeProfileFramePropModule and p1.includeProfileFrame ~= nil then
@@ -41,7 +45,34 @@ return function(p1)
 				ZIndex = 3,
 				backgroundStyle = if p1.hover then UseTokensResult.Color.Shift.Shift_400 else UseTokensResult.Color.Shift.Shift_300,
 				Image = if FFlagUserTileShowShimmerWhenLoadingModule and p1.avatarThumbnailUrl then p1.avatarThumbnailUrl else GetStandardSizeAvatarHeadShotRbxthumbFunction(p1.userId, IncludeProfileFrame)
-			})
+			}),
+			GradientOverlay = if FFlagUserTileAvatarOverlayIconModule and p1.overlayIcon then ReactModule.createElement(View, {
+				tag = "position-center-center anchor-center-center size-full aspect-1-1 radius-circle",
+				ZIndex = 4,
+				backgroundStyle = UseTokensResult.Color.Surface.Surface_0
+			}, {
+				Gradient = ReactModule.createElement("UIGradient", {
+					Rotation = 90,
+					Transparency = NumberSequence.new({
+						NumberSequenceKeypoint.new(0, 1),
+						NumberSequenceKeypoint.new(0.6027, 1),
+						NumberSequenceKeypoint.new(0.7682, 0.53),
+						NumberSequenceKeypoint.new(1, 0)
+					})
+				}),
+				OverlayIconContainer = ReactModule.createElement(View, {
+					tag = "position-bottom-center anchor-bottom-center auto-xy padding-bottom-medium",
+					ZIndex = 5
+				}, {
+					OverlayIcon = ReactModule.createElement(Icon, {
+						ZIndex = 5,
+						name = p1.overlayIcon,
+						variant = IconVariant.Filled,
+						size = IconSize.Medium,
+						style = UseTokensResult.Color.Content.Emphasis
+					})
+				})
+			}) else nil
 		}),
 		Icon = if p1.userPresenceType == UserPresence.Active or p1.userPresenceType == UserPresence.InExperience then ReactModule.createElement(Image, {
 			tag = "bg-surface-100 radius-circle auto-xy position-absolute",
@@ -49,6 +80,7 @@ return function(p1)
 			Size = UDim2.new(0.125, 4, 0.125, 4),
 			Position = UDim2.new(0.8536, UseTokensResult.Stroke.Thicker, 0.8536, UseTokensResult.Stroke.Thicker),
 			AnchorPoint = Vector2.new(0.5, 0.5),
+			ZIndex = if FFlagUserTileAvatarOverlayIconModule then 5 else nil,
 			stroke = {
 				Thickness = UseTokensResult.Stroke.Thicker,
 				Color = UseTokensResult.Color.Surface.Surface_100.Color3

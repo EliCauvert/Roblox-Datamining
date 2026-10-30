@@ -94,7 +94,9 @@ return {
 		AdaptiveScrollingContext = require(script.Hooks.AdaptiveScrollingContext),
 		withAdaptiveScrolling = require(script.Hooks.withAdaptiveScrolling),
 		useUnifiedImpressionExposer = require(script.Hooks.useUnifiedImpressionExposer),
-		useIsDirectional = require(script.Hooks.useIsDirectional)
+		useIsDirectional = require(script.Hooks.useIsDirectional),
+		useAvatarChangeAcknowledgementPrompt = require(script.Hooks.useAvatarChangeAcknowledgementPrompt),
+		useIsAvatarChangeTimeoutActive = require(script.Hooks.useIsAvatarChangeTimeoutActive)
 	},
 	Lib = {
 		SafeAppStorageService = require(script.Lib.SafeAppStorageService)
@@ -140,6 +142,7 @@ return {
 		},
 		AXTooltipStore = require(script.Stores.AXTooltipStore),
 		getApplyingLayeredClothingStore = require(script.Stores.ApplyingLayeredClothingStore.getApplyingLayeredClothingStore),
+		getLayeredClothingCurrentSortStore = require(script.Stores.LayeredClothingCurrentSortStore.getLayeredClothingCurrentSortStore),
 		getTimeoutStatusStore = require(script.Stores.TimeoutStatusStore.getTimeoutStatusStore),
 		getAdjustmentTypeSelectedStore = require(script.Stores.AdjustmentTypeSelectedStore.getAdjustmentTypeSelectedStore),
 		getEquippedAvatarOutfitIdStore = require(script.Stores.EquippedAvatarOutfitIdStore.getEquippedAvatarOutfitIdStore)

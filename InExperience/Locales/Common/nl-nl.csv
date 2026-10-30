@@ -64,6 +64,7 @@ Authentication.Login.Action.QuickSignIn,
 Authentication.Login.Action.Save,Opslaan
 Authentication.Login.Button.CloseAndSwitchPlatformAccount,Roblox afsluiten om van account te wisselen voor {platformAccountName}
 Authentication.Login.Button.UseDifferentRobloxAccount,Een ander Roblox-account gebruiken
+Authentication.Login.Button.XboxAccountSwitcher,Van Xbox-account wisselen
 Authentication.Login.Error.PasskeyOnlyAccount,Voor je account is alleen een toegangssleutel ingesteld om je aan te melden. Probeer je aan te melden met je toegangssleutel of herstel je account.
 Authentication.Login.Error.PlatformAccountConnectionFailure,Kan platformaccount niet verifiëren. Probeer het later opnieuw.
 Authentication.Login.Heading.IncompatibleAccounts,Incompatibele accounts
@@ -416,13 +417,16 @@ CommonUI.Features.Action.Continue,
 CommonUI.Features.Action.LearnMore,
 CommonUI.Features.Action.LessLowercase,minder
 CommonUI.Features.Action.MoreLowercase,meer
+CommonUI.Features.Action.OK,OK
 CommonUI.Features.Action.Send,Sturen
+CommonUI.Features.Action.ViewDetails,Details bekijken
 CommonUI.Features.Label.About,Over
 CommonUI.Features.Label.AcceptFriend,Vriend(in) accepteren
 CommonUI.Features.Label.Add,Toevoegen
 CommonUI.Features.Label.AddConnection,Connectie toevoegen
 CommonUI.Features.Label.AddConnections,Connecties toevoegen
 CommonUI.Features.Label.AddFriend,Vriend(in) toevoegen
+CommonUI.Features.Label.Avatar,Avatar
 CommonUI.Features.Label.Badges,Badges
 CommonUI.Features.Label.Charts,Toplijsten
 CommonUI.Features.Label.Chat,Chat
@@ -458,7 +462,6 @@ CommonUI.Features.Label.Sent,Verzonden
 CommonUI.Features.Label.Settings,
 CommonUI.Features.Label.Terms,Voorwaarden
 CommonUI.Features.Label.TermsOfUse,Gebruiksvoorwaarden
-CommonUI.Features.Label.Thanks,Bedankt
 CommonUI.Features.Label.TheHunt,Roblox-evenementen
 CommonUI.Features.Label.Trades,Ruilen
 CommonUI.Features.Label.Unchecked,Niet geverifieerd
@@ -607,7 +610,7 @@ CoreScripts.BulkPurchasePrompt.RequestPrompt.PriceBox.NewBalance,Saldo na aankoo
 CoreScripts.BulkPurchasePrompt.RequestPrompt.PriceBox.TotalCost,Totaalbedrag bestelling
 CoreScripts.BulkPurchasePrompt.SuccessPrompt.Body,Je hebt met succes {itemCount} items gekocht. Je vindt deze items in je inventaris.
 CoreScripts.BulkPurchasePrompt.SuccessPrompt.Heading,
-CoreScripts.CancelUserSubscriptionPrompt.Error.ButtonText,OK
+CoreScripts.CancelUserSubscriptionPrompt.Error.ButtonText,
 CoreScripts.CancelUserSubscriptionPrompt.ErrorCancellingPrompt.Body,Er is een fout opgetreden en de abonnementsverlenging is niet geannuleerd. Probeer het nog een keer.
 CoreScripts.CancelUserSubscriptionPrompt.ErrorCancellingPrompt.Heading,Fout
 CoreScripts.CancelUserSubscriptionPrompt.ExpiringPrompt.Body,Het annuleren van je abonnement is al geslaagd. Je hoeft verder niets te doen.
@@ -637,6 +640,7 @@ CoreScripts.EmoteThumbnailEditor.Heading.EditThumbnail,Miniatuur bewerken
 CoreScripts.EmoteThumbnailEditor.Label.Rotation,Rotatie
 CoreScripts.EmoteThumbnailEditor.Label.Time,Tijd
 CoreScripts.FTUX.Description.WhiteMenuPlaytestMode,Het witte Roblox-menu geeft aan dat je aan het playtesten bent. Volg altijd de Communityrichtlijnen van Roblox.
+CoreScripts.FTUX.Description.WhiteMenuPreviewing,Het witte Roblox-menu betekent dat je een preview van de game bekijkt voordat deze voor iedereen beschikbaar is.
 CoreScripts.FTUX.Heading.CheckOutRobloxConnect,Nieuw: bekijk Roblox Connect!
 CoreScripts.FTUX.Heading.CheckOutRobloxParty,Nieuw: bekijk Roblox Party!
 CoreScripts.FTUX.Heading.InExperienceShop,Robux kopen in de winkel
@@ -648,6 +652,7 @@ CoreScripts.FTUX.Heading.NewTiltUpdate,Nieuw menu
 CoreScripts.FTUX.Heading.ReadyToPlaytest,Klaar voor een playtest?
 CoreScripts.FTUX.Heading.SideSheetUpdate,Al je acties op één plek
 CoreScripts.FTUX.Heading.SocialOnboarding,Sociale functies
+CoreScripts.FTUX.Heading.YouAreAnEarlyTester,Je bent een vroege tester
 CoreScripts.FTUX.Label.AvatarSwitcherDescription,Schakel op elk gewenst moment tussen je opgeslagen avatars.
 CoreScripts.FTUX.Label.ChatWithYourFriendsAnytime,Chat op elk gewenst moment met je vrienden.
 CoreScripts.FTUX.Label.InExperienceShopDescription,Sommige pakketten bevatten een bonusitem
@@ -1117,15 +1122,11 @@ CoreScripts.TextChat.ChatWindow.ChatDisabled.OnlyViewSystemMessages,Je kunt hier
 CoreScripts.TextChat.ChatWindow.ChatDisabled.RegionUnavailable,Je kunt hier alleen systeemberichten bekijken. De chatfunctie is niet beschikbaar in jouw regio.
 CoreScripts.TextChat.ChatWindow.ChatDisabled.SettingOff,Je kunt hier alleen systeemberichten bekijken. Werk je Communicatie-instellingen bij om chat in te schakelen.
 CoreScripts.TextChat.ChatWindow.ChatEnabled.ChatInRegion,Je kunt alleen systeemberichten bekijken en chatten met gebruikers in jouw regio.
-CoreScripts.TextChat.ChatWindow.ChatEnabled.ChatWithAgeGroupAAndTF,Alleen mensen in vergelijkbare leeftijdsgroepen en je vertrouwde vrienden kunnen met je chatten.
 CoreScripts.TextChat.ChatWindow.ChatEnabled.ChatWithOnlinePlayers.BelowThreshold,Zeg hallo tegen iedereen die nu aan het spelen is!
-CoreScripts.TextChat.ChatWindow.ChatEnabled.ChatWithOnlinePlayers.Local.WithCount,{RBX_COUNT} andere spelers zijn in de chat. Zeg hallo!
 CoreScripts.TextChat.ChatWindow.ChatEnabled.ChatWithOnlinePlayers.V3,👋 Zeg hallo tegen iedereen die nu speelt!
 CoreScripts.TextChat.ChatWindow.ChatEnabled.ChatWithTF,Alleen je vertrouwde vrienden kunnen met je chatten.
 CoreScripts.TextChat.ChatWindow.ChatEnabled.Global2,Chat met meer mensen in dit spel. Alleen mensen in vergelijkbare leeftijdsgroepen kunnen met je chatten.
 CoreScripts.TextChat.ChatWindow.ChatEnabled.Global3,Chat met meer mensen in dit spel
-CoreScripts.TextChat.ChatWindow.ChatWithOnlinePlayers.Local.Friendly,✨ Doe gezellig mee en zeg hallo tegen iedereen die nu aan het spelen is!
-CoreScripts.TextChat.ChatWindow.ChatWithOnlinePlayers.Local.WithCount,👋 {RBX_COUNT} spelers zijn in de chat. Zeg hallo!
 CoreScripts.TextChat.ChatWindow.HandFreeTranscriptionFTUX,Ingedrukt houden om handsfree te gaan
 CoreScripts.TextChat.ChatWindow.RephrasedLabel,herformuleerd
 CoreScripts.TextChat.ChatWindow.RephrasedReason.Description,Roblox herformuleert berichten die in strijd zijn met veiligheidsregels.
@@ -1964,6 +1965,11 @@ Feature.AvatarSwitcher.Message.SelectAvatar,Selecteer een avatar
 Feature.AvatarSwitcher.Message.SwitchingDeferred,Je ziet deze avatar na je volgende respawn of wanneer je deelneemt aan een ervaring. Je kunt op elk moment van avatar wisselen.
 Feature.AvatarSwitcher.Message.UnknownSupport,"Je kunt je avatar nog steeds wisselen, maar deze wordt mogelijk niet correct weergegeven in deze ervaring."
 Feature.AvatarSwitcher.Message.Unsupported,Deze ervaring maakt gebruik van een aangepaste avatar en ondersteunt geen Roblox-avatars.
+Feature.AvatarWorkshop.Action.TryAgain,
+Feature.AvatarWorkshop.Heading.AvatarWorkshop,Avatar Workshop
+Feature.AvatarWorkshop.Message.LoadItemsError,Er is iets misgegaan bij het laden van je items.
+Feature.AvatarWorkshop.Message.LoadMoreItemsError,Kan geen items meer laden.
+Feature.AvatarWorkshop.Message.NoItemsOwned,Je hebt hier nog geen items.
 Feature.BiometricChallenge.Action.Cancel,
 Feature.BiometricChallenge.Action.Continue,
 Feature.BiometricChallenge.Content.LivenessHostedPrompt,Open je externe browser en maak snel een selfie om te bevestigen dat je een mens bent.
@@ -2153,7 +2159,10 @@ Feature.Build.Description.ManagedPricingAcknowledgement,Beheerde prijzen past de
 Feature.Build.Description.ManagedPricingCurrentProducts,Beheerde prijzen gebruiken voor alle huidige producten
 Feature.Build.Description.ManagedPricingUnavailable,Beheerde prijzen zijn niet beschikbaar voor deze ervaring.
 Feature.Build.Description.NoEligibleManagedPricingProducts,Geen in aanmerking komende producten
+Feature.Build.Description.NoMonetizationDeveloperProducts,Ontwikkelaarsproducten zijn items die spelers keer op keer in je spel kunnen kopen
+Feature.Build.Description.NoMonetizationPasses,Met passen geef je spelers de sleutel tot een eenmalige ontgrendeling in je game
 Feature.Build.Description.NoMonetizationProducts,Beschrijf een item dat je wilt maken om Robux te gaan verdienen in je spel
+Feature.Build.Description.NoMonetizationSubscriptions,Met abonnementen in games kun je gebruikers vaste voordelen bieden tegen een maandelijks bedrag
 Feature.Build.Description.PlayAfterPublish,Kies wie kan spelen nadat je deze ervaring hebt gepubliceerd.
 Feature.Build.Description.PlaytestLatest,Je bent je nieuwste versie aan het testen. Publiceer deze wanneer je klaar bent om deze te delen.
 Feature.Build.Description.PlaytestLocked,Je kunt beginnen met playtesten nadat je je eerste spel hebt gemaakt.
@@ -2187,11 +2196,18 @@ Feature.Build.Error.DeveloperProductPriceInvalid,Prijs moet een geheel getal zij
 Feature.Build.Error.DeveloperProductPriceRequiredForSale,Selecteer Bewerken en voeg een prijs toe voordat je een product te koop aanbiedt.
 Feature.Build.Error.DeveloperProductTextModerated,De moderatie van Roblox heeft de tekst van dit product gewijzigd. Probeer een andere formulering.
 Feature.Build.Error.ManagedPricingPartialUpdate,Sommige producten konden niet worden bijgewerkt.
+Feature.Build.Error.MonetizationImageFailed,De afbeelding kon niet worden geladen. Probeer het nog een keer.
+Feature.Build.Error.MonetizationImageInReview,De afbeelding wordt nog beoordeeld. Probeer het later nog eens.
+Feature.Build.Error.MonetizationImagePreparing,De afbeelding wordt nog voorbereid. Probeer het later nog eens.
+Feature.Build.Error.MonetizationImageTimedOut,Het duurde te lang om de afbeelding te laden. Probeer het nog een keer.
+Feature.Build.Error.MonetizationImageTooLarge,De afbeelding is groter dan 5 MB.
+Feature.Build.Error.MonetizationNoUniverse,Deze chat is niet verbonden aan een game.
 Feature.Build.Error.MonetizationOptionUpdate,De optie kon niet worden bijgewerkt. Probeer het nog een keer.
 Feature.Build.Error.MonetizationOptionsLoad,Opties konden niet worden geladen. Probeer het nog een keer.
 Feature.Build.Error.MonetizationPermissionDenied,Je hebt geen toestemming om de opties voor inkomsten genereren te wijzigen.
 Feature.Build.Error.MonetizationPriceRequiredForRegionalPricing,Voeg een prijs toe om regionale prijzen in te schakelen.
 Feature.Build.Error.MonetizationPriceRequiredForSale,Voeg een prijs toe voordat je dit te koop aanbiedt.
+Feature.Build.Error.MonetizationRateLimited,Te veel aanvragen. Probeer het later nog eens.
 Feature.Build.Header.AccessSharing,Toegang en delen
 Feature.Build.Header.AllVersions,Alle versies
 Feature.Build.Header.Answers,Antwoorden
@@ -2524,7 +2540,10 @@ Feature.Build.Title.GetUsers,Gebruikers ophalen
 Feature.Build.Title.InsufficientRobuxForModel,Je hebt niet genoeg Robux
 Feature.Build.Title.ManagedPricingAcknowledgement,Beheerde prijzen inschakelen?
 Feature.Build.Title.Monetization,Monetisatie
+Feature.Build.Title.NoMonetizationDeveloperProducts,Je hebt nog geen ontwikkelaarsproducten gemaakt
+Feature.Build.Title.NoMonetizationPasses,Je hebt nog geen passen gemaakt
 Feature.Build.Title.NoMonetizationProducts,Begin met verdienen in je spel
+Feature.Build.Title.NoMonetizationSubscriptions,Je hebt nog geen abonnementen gemaakt
 Feature.Build.Title.NoRobuxForUsage,Geen Robux meer over voor Build-tegoed
 Feature.Build.Title.PickCampaign,Kies een lengte
 Feature.Build.Title.Playtesters,
@@ -2666,6 +2685,8 @@ Feature.Catalog.Header.InvalidOutfit,Ongeldige outfit
 Feature.Catalog.Header.PostAvatar,
 Feature.Catalog.Heading.AvailableItems,Beschikbare items
 Feature.Catalog.Heading.BuyItem,
+Feature.Catalog.Heading.DescriptionLinkGoToMarketplace,Hiermee ga je naar de Marktplaats
+Feature.Catalog.Heading.DescriptionLinkResetSearch,Hierdoor wordt je huidige zoekopdracht gereset
 Feature.Catalog.Heading.FreeItemConfirmation,Item krijgen
 Feature.Catalog.Heading.GoToExperience,Deelnemen aan de ervaring?
 Feature.Catalog.Heading.HoldingPolicy,Behoudsbeleid
@@ -2741,6 +2762,12 @@ Feature.Catalog.Label.CreatorName,Naam van maker
 Feature.Catalog.Label.CurrentBalance,Huidig saldo:
 Feature.Catalog.Label.CustomizeAvatar,
 Feature.Catalog.Label.DeleteAvatarConfirmationPromptMessage,Je kunt deze actie niet ongedaan maken als je deze verwijdert.
+Feature.Catalog.Label.DescriptionLinkInvalid,Ongeldige link
+Feature.Catalog.Label.DescriptionLinkSearchMarketplace,In Marktplaats zoeken
+Feature.Catalog.Label.DescriptionLinkViewAsset,Asset bekijken
+Feature.Catalog.Label.DescriptionLinkViewBundle,Bundel bekijken
+Feature.Catalog.Label.DescriptionLinkViewCommunity,Community bekijken
+Feature.Catalog.Label.DescriptionLinkViewCommunityStore,Communitywinkel
 Feature.Catalog.Label.Details,Details
 Feature.Catalog.Label.DynamicHeads,
 Feature.Catalog.Label.Emissive,Stralend
@@ -3010,7 +3037,7 @@ Feature.Chat.Action.StartChatWithFriends,
 Feature.Chat.Action.Stay,
 Feature.Chat.Action.Translate,Vertalen
 Feature.Chat.Action.UnmuteVoice,Dempen van de stem opheffen
-Feature.Chat.Action.ViewAssetDetails,Details bekijken
+Feature.Chat.Action.ViewAssetDetails,
 Feature.Chat.Description.ConversationInviteGroupCreatedOn,Groep is gemaakt op {creation_date} 
 Feature.Chat.Description.CreateUnfilteredChatCell,"Alle leden van deze groep worden uitgenodigd, maar sommigen komen niet in aanmerking om deel te nemen"
 Feature.Chat.Description.CreateUnfilteredChatDialog,"Met uitgebreide chatfuncties kun je chatten zonder filters.
@@ -3526,7 +3553,7 @@ Feature.Groups.Action.NotNow,
 Feature.Groups.Action.RemovePrimary,Primair verwijderen
 Feature.Groups.Action.SeeAll,
 Feature.Groups.Action.Unfollow,Ontvolgen
-Feature.Groups.Action.ViewGroup,Community bekijken
+Feature.Groups.Action.ViewGroup,
 Feature.Groups.Description.JoinGroupPending,Je lidmaatschapsverzoek is in behandeling bij de community.
 Feature.Groups.Description.NotEligibleToJoin,Je account kan geen lid worden van deze community.
 Feature.Groups.Description.PremiumMaxGroups,Je bent al lid van het maximale aantal communities.
@@ -3632,6 +3659,7 @@ Feature.InExperienceIntervention.Description.LoseAccess,"Als dit opnieuw gebeurt
 Feature.InExperienceIntervention.Description.MayLoseAccess,"Als je opnieuw de regels overtreedt, kun je de toegang tot je account verliezen."
 Feature.InExperienceIntervention.Description.Mistake,Hebben we een fout gemaakt?
 Feature.InExperienceIntervention.Description.PartyChatMayBeSuspended,Het delen van persoonlijke informatie is niet toegestaan op Roblox. Je chat kan worden opgeschort als je de regels opnieuw overtreedt.
+Feature.InExperienceIntervention.Description.StartNewGameToTurnOnVoiceChat,Start een nieuw spel om spraakchat in te schakelen.
 Feature.InExperienceIntervention.Description.TextChatMayBeSuspended,Je gebruik van de tekstchat kan worden opgeschort als je de regels opnieuw overtreedt.
 Feature.InExperienceIntervention.Heading.CannotChat,Je kunt gedurende {number} minuten geen chats versturen
 Feature.InExperienceIntervention.Heading.ChatBreaksRules,Je tekstchat overtreedt de regels
@@ -3673,6 +3701,7 @@ Feature.InExperienceShop.Label.Timer.Minute.Singular,1 minuut
 Feature.InExperienceShop.Label.Timer.Second.Plural,{number} seconden
 Feature.InExperienceShop.Label.Timer.Second.Singular,1 seconde
 Feature.InExperienceShop.Label.Trial,Proefperiode
+Feature.InExperienceShop.Label.Trialed,Proefperiode voltooid
 Feature.InExperienceShop.Message.RobuxPurchaseSuccess,Je hebt met {ROBUX_AMOUNT} Robux gekocht
 Feature.Item.Label.DeleteFromInventoryConfirmUndercaseDelete,"Weet je zeker dat je dit item permanent uit je inventaris wilt verwijderen? Als je van gedachten verandert, moet je het opnieuw verdienen in een ervaring."
 Feature.Item.Label.DeleteItemUndercase,Item verwijderen
@@ -3780,6 +3809,7 @@ Feature.Moments.Label.ExceedsCharacterLimit,Tekenlimiet overschreden
 Feature.Moments.Label.FeedEndBody,Kom later terug of maak je eigen moment.
 Feature.Moments.Label.FeedEndTitle,Je bent weer helemaal bij
 Feature.Moments.Label.FeedFailedToLoad,Feed kon niet worden geladen
+Feature.Moments.Label.FeedFollowing,
 Feature.Moments.Label.FeedMyMoments,Mijn momenten
 Feature.Moments.Label.FeedTrending,
 Feature.Moments.Label.FirstCommentInvite,Nog geen reacties. Reageer als eerste!
@@ -3969,6 +3999,7 @@ Feature.PrivateServers.Action.CreatePrivateServer,Privéserver maken
 Feature.PrivateServers.Action.FreeWithBlackbird,Gratis met Plus
 Feature.PrivateServers.Description.PrivateServerPurchaseUnavailableInStudio,Aankopen van privéservers worden niet ondersteund in Studio.
 Feature.PrivateServers.Description.VipServersNotSupported,Deze game ondersteunt geen privéservers.
+Feature.PrivateServers.Label.OwnersServer,{displayName}'s server
 Feature.Profile.Action.AboutThisProfile,Over dit profiel
 Feature.Profile.Action.Accept,
 Feature.Profile.Action.AcceptFriends,
@@ -4109,7 +4140,7 @@ Feature.ReportAbuse.Description.IpInfringementReportModal,<b>Bewaar deze code.</
 Feature.ReportAbuse.Heading.ReportAbuse,
 Feature.ReportAbuse.Heading.ReportUsingSelectInScene,Melden met de markeermodus
 Feature.ReportAbuse.Heading.SelectInSceneErrorTitle,Fout: maximaal 5 cirkels
-Feature.ReportAbuse.Label.Avatar,Avatar
+Feature.ReportAbuse.Label.Avatar,
 Feature.ReportAbuse.Label.CantSelectSubtitle,Selecteer 'Volgende' om de hele ervaring te melden.
 Feature.ReportAbuse.Label.CantSelectTitle,Kun je iets niet markeren?
 Feature.ReportAbuse.Label.CategoryBullyingV2,"Pesten, intimidatie, discriminatie"
@@ -4204,6 +4235,10 @@ Feature.ReportAbuse.Title.SelectInSceneContinueYourReport,Doorgaan met je meldin
 Feature.ReportAbuse.Title.SelectInSceneFinishYourReport,Je melding voltooien
 Feature.ReportAbuse.Title.SelectInSceneIpReport,Bedankt voor het starten van je IP-inbreukmelding
 Feature.ReportAbuse.Title.SelectInSceneThankYou,
+Feature.RoCaptchaChallenge.Action.Cancel,
+Feature.RoCaptchaChallenge.Action.Play,
+Feature.RoCaptchaChallenge.Content.JoinChallenge,We hebben ongebruikelijke activiteit op je account opgemerkt. Speel een korte game om door te gaan.
+Feature.RoCaptchaChallenge.Title.Challenge,Laten we controleren of je een echt persoon bent
 Feature.RobloxSubscription.Action.JoinIn,Doe mee over {time}
 Feature.RobloxSubscription.Action.Subscribe,Abonneren
 Feature.RobloxSubscription.Action.TryItForFree,Probeer het gratis
@@ -4313,10 +4348,8 @@ Feature.SettingsHub.Heading.Report.ThanksForReport,Bedankt voor je melding!
 Feature.SettingsHub.Label.AttachScreenshot,Schermafbeelding bijvoegen? (optioneel)
 Feature.SettingsHub.Label.Captures,
 Feature.SettingsHub.Label.ChooseOne,
-Feature.SettingsHub.Label.Connect,Verbinding maken
 Feature.SettingsHub.Label.Connected,Verbonden
 Feature.SettingsHub.Label.DefaultInviteMessage,Wil je {DisplayName} uitnodigen om met je mee te doen?
-Feature.SettingsHub.Label.Disconnect,Verbinding verbreken
 Feature.SettingsHub.Label.Disconnected,Verbinding verbroken
 Feature.SettingsHub.Label.DontLeaveButton,
 Feature.SettingsHub.Label.FriendsListLoadErrorMessage,Kan vrienden niet laden. Probeer het later opnieuw.
@@ -4512,7 +4545,7 @@ Feature.Squads.Action.Start,Starten
 Feature.Squads.Action.Switch,
 Feature.Squads.Action.TapToStartNewParty,Tik om een nieuwe party te starten
 Feature.Squads.Action.View,
-Feature.Squads.Action.VoiceErrorGeneral,
+Feature.Squads.Action.VoiceErrorGeneral,Verbinding maken
 Feature.Squads.Action.VoiceErrorPartyNotVoiceEligible,
 Feature.Squads.Action.VoiceErrorUserIneligible,
 Feature.Squads.Action.WaitingForParty,Wachten op party
@@ -4764,8 +4797,6 @@ Feature.VirtualEvents.ShareModalCallToAction,Delen via chat ...
 Feature.VirtualEvents.ShareModalLinkCopy,
 Feature.VirtualEvents.ShareModalTitle,Dit evenement delen
 Feature.VirtualEvents.UnfollowEvent,Evenement ontvolgen
-Features.OnDemandAds.Get_Reward_In,Beloning krijgen in
-Features.OnDemandAds.Reward_Earned,Beloning verdiend
 Features.Transfers.Action.BuyRobux,
 Features.Transfers.Action.Continue,
 Features.Transfers.Action.Ok,
@@ -5225,8 +5256,6 @@ Notifications.NotificationStream.Bundle.ShowLess,
 Notifications.NotificationStream.Bundle.ShowMoreV2,{notificationCount} meer
 Notifications.NotificationStream.Label.AllCaughtUp,Je bent weer helemaal bij!
 Notifications.NotificationStream.Label.Notifications,
-Notifications.SafetyAvatarModeration.Description.NotificationTypeInExpWarnMsg,"Wijzig je avatar. Binnenkort worden spelers met avatars die onze Communityrichtlijnen overtreden, geschorst voor deze game."
-Notifications.SafetyAvatarModeration.Label.NotificationTypeInExpWarn,Je avatar heeft de regels overtreden
 Notifications.SquadRegroupPrompt.ToastAction.Dismiss,
 Notifications.SquadRegroupPrompt.ToastAction.Join,
 Notifications.SquadRegroupPrompt.ToastLabel.ContinuePlayingTogether,Doorgaan met samen spelen

@@ -43,6 +43,7 @@ return function(p1)
 				entities = p1.entities,
 				renderRow = p1.renderRow,
 				onRowSelected = p1.onRowSelected,
+				onEndReached = p1.onEndReached,
 				configs = Configs,
 				ctaConfig = if FFlagGameInviteInExpJoinCtaModule then p1.ctaConfig else nil
 			})

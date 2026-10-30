@@ -7,6 +7,8 @@ local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalizati
 local SduiLoadTimer = SduiSharedUtilitiesModule.SduiLoadTimer
 local SduiPageEntryPoint = SduiSharedUtilitiesModule.SduiPageEntryPoint
 local CompositionTags = require(Parent.AppComposition).CompositionTags
+local FFlagSplitPaneBadgesSeeAllSupportRegion = require(Parent.SharedFlags).FFlagSplitPaneBadgesSeeAllSupportRegion
+local PaneHostContext = if FFlagSplitPaneBadgesSeeAllSupportRegion then require(Parent.SplitPane).PaneHostContext else nil
 local FetchBadgesSeeAllPageIfNeededModule = require(Badges.BadgesSeeAllPage.fetchBadgesSeeAllPageIfNeeded)
 local GetBadgesSeeAllPageKeyModule = require(Badges.BadgesSeeAllPage.getBadgesSeeAllPageKey)
 
@@ -15,10 +17,11 @@ local function _(p1, p2)
 end
 
 return ReactModule.memo(function(p1)
-	-- upvalues: GetBadgesSeeAllPageKeyModule (copy), UseLocalizationFunction (copy), ReactModule (copy), SduiLoadTimer (copy), FetchBadgesSeeAllPageIfNeededModule (copy), SduiPageEntryPoint (copy), CompositionTags (copy)
+	-- upvalues: GetBadgesSeeAllPageKeyModule (copy), UseLocalizationFunction (copy), FFlagSplitPaneBadgesSeeAllSupportRegion (copy), ReactModule (copy), PaneHostContext (copy), SduiLoadTimer (copy), FetchBadgesSeeAllPageIfNeededModule (copy), SduiPageEntryPoint (copy), CompositionTags (copy)
 	local UniverseId = p1.universeId or p1.navigation and p1.navigation.getParam("universeId")
 	local BadgesSeeAllPageKeyModule = GetBadgesSeeAllPageKeyModule(UniverseId)
 	local UseLocalizationResult = UseLocalizationFunction({ pageTitle = "CommonUI.Features.Label.Badges" })
+	local UseContextResult = if FFlagSplitPaneBadgesSeeAllSupportRegion then ReactModule.useContext(PaneHostContext) else nil
 	local UseMemoResult = ReactModule.useMemo(function()
 		-- upvalues: p1 (copy), SduiLoadTimer (upval)
 		return (if p1.pageTimer then p1.pageTimer else p1.navigation and p1.navigation.getParam("pageTimer")) or SduiLoadTimer.createLoadTimer("BadgesSeeAll")
@@ -43,6 +46,7 @@ return ReactModule.memo(function(p1)
 		includeNavigationHeaderBar = true,
 		configKey = BadgesSeeAllPageKeyModule,
 		pageTimer = UseMemoResult,
+		navButtonType = if FFlagSplitPaneBadgesSeeAllSupportRegion and UseContextResult ~= nil and UseContextResult.isHostCloseVisible then "none" else nil,
 		pageTitle = UseLocalizationResult.pageTitle,
 		refresh = UseResult,
 		contentTag = CompositionTags.ContentRegion.Body

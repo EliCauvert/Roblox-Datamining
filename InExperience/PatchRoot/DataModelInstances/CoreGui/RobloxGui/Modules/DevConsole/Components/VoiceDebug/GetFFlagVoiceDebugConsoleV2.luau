@@ -5,5 +5,5 @@ return function()
 	-- upvalues: VoiceDebugConsoleV2TestOverrideModule (copy)
 	local GetResult = VoiceDebugConsoleV2TestOverrideModule.get()
 	
-	return if GetResult == nil then game:GetFastFlag("VoiceDebugConsoleV2") or game:GetEngineFeature("VoiceDebugConsoleSubscriptionsPanelEnabled") else GetResult
+	return if GetResult == nil then game:GetFastFlag("VoiceDebugConsoleV2") else GetResult
 end

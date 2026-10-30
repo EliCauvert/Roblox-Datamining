@@ -12,5 +12,13 @@ return {
 	resolveInputChangedMode = function(Directional)
 		-- upvalues: ResponsiveModule (copy), SupportPaneMode (copy), SplitPaneStoreModule (copy)
 		return if Directional == ResponsiveModule.Input.Directional then SupportPaneMode.Expanded else SplitPaneStoreModule.getStore().getSupportPaneMode()
+	end,
+	expandSupportPaneIfCollapsed = function()
+		-- upvalues: SplitPaneStoreModule (copy), SupportPaneMode (copy), ResponsiveModule (copy), FFlagLuaAppSduiEdpEnabled (copy)
+		local Store = SplitPaneStoreModule.getStore()
+		
+		if Store.getSupportPaneModeIfActive(false) == SupportPaneMode.Collapsed then
+			Store.setTemporarySupportPaneMode(if ResponsiveModule.GetInputModeStore(false).getPreferredInputType(false) == ResponsiveModule.Input.Directional or not FFlagLuaAppSduiEdpEnabled then SupportPaneMode.Expanded else SupportPaneMode.Normal)
+		end
 	end
 }

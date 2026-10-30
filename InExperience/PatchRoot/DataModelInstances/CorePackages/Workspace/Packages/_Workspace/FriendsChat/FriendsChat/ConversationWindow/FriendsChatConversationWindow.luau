@@ -10,6 +10,7 @@ local _ = require(Parent.AppChat.ConversationChannels)
 local GetConversationMessageListStoreModule = require(Parent.AppChat.GetConversationMessageListStore)
 local GetConversationStoreModule = require(Parent.AppChat.GetConversationStore)
 local FFlagDebugFriendsChatModule = require(script.Parent.Parent.Flags.FFlagDebugFriendsChat)
+local FFlagFriendsChatBubbleMessagesModule = require(script.Parent.Parent.Flags.FFlagFriendsChatBubbleMessages)
 local FFlagFriendsChatConversationListFocusNav = SharedFlagsModule.FFlagFriendsChatConversationListFocusNav
 local FFlagFriendsChatOsaSystemMessage = SharedFlagsModule.FFlagFriendsChatOsaSystemMessage
 local FStringDebugFriendsChatConversationIdModule = require(script.Parent.Parent.Flags.FStringDebugFriendsChatConversationId)
@@ -17,20 +18,21 @@ local UseInterpolatedClientSettingsModule = require(Parent.ExpChatIntegration.us
 local UseChatWindowSettingsModule = require(Parent.ExpChatIntegration.useChatWindowSettings)
 local ExpChatConversationListAdapterModule = require(script.Parent.Parent.ConversationList.ExpChatConversationListAdapter)
 local FriendsChatConversationHeaderBarModule = require(script.Parent.Parent.HeaderBar.FriendsChatConversationHeaderBar)
-local FriendsChatMessageListModule = require(script.Parent.FriendsChatMessageList)
+local FriendsChatBubbleMessageListContainerModule = require(script.Parent.FriendsChatBubbleMessageListContainer)
+local FriendsChatChatWindowSlotModule = require(script.Parent.FriendsChatChatWindowSlot)
 local FriendsChatInputBarHostModule = require(script.Parent.FriendsChatInputBarHost)
 local UseFocusInputBarOnWindowEnterModule = require(script.Parent.useFocusInputBarOnWindowEnter)
 local FriendsChatOsaAcknowledgementModule = require(script.Parent.FriendsChatOsaAcknowledgement)
 local UseConversationHeaderFadeLayoutModule = require(script.Parent.useConversationHeaderFadeLayout)
 local UseConversationHeaderPropsModule = require(script.Parent.useConversationHeaderProps)
 local UseConversationModerationTypeModule = require(script.Parent.useConversationModerationType)
-local UseConversationMessagePoolModule = require(script.Parent.useConversationMessagePool)
+local UseFetchNewestMessagePageModule = require(script.Parent.useFetchNewestMessagePage)
 local ResolveFadeModule = require(script.Parent.Parent.Utils.resolveFade)
 local LayoutConstantsModule = require(FriendsChat.LayoutConstants)
 local UseFriendsChatConversationTelemetryModule = require(script.Parent.Parent.Telemetry.ChatConversation.useFriendsChatConversationTelemetry)
 
 return function(p1)
-	-- upvalues: UseChatWindowSettingsModule (copy), ReactModule (copy), UseInterpolatedClientSettingsModule (copy), FFlagDebugFriendsChatModule (copy), FStringDebugFriendsChatConversationIdModule (copy), Players (copy), ExpChatConversationListAdapterModule (copy), SignalsModule (copy), FFlagFriendsChatOsaSystemMessage (copy), GetConversationStoreModule (copy), SignalsReactModule (copy), AppChatNetworkingModule (copy), FriendsChatOsaAcknowledgementModule (copy), UseConversationHeaderPropsModule (copy), UseConversationModerationTypeModule (copy), UseConversationMessagePoolModule (copy), GetConversationMessageListStoreModule (copy), UseFriendsChatConversationTelemetryModule (copy), UseConversationHeaderFadeLayoutModule (copy), FFlagFriendsChatConversationListFocusNav (copy), UseFocusInputBarOnWindowEnterModule (copy), FriendsChatConversationHeaderBarModule (copy), ResolveFadeModule (copy), LayoutConstantsModule (copy), FriendsChatMessageListModule (copy), FriendsChatInputBarHostModule (copy)
+	-- upvalues: UseChatWindowSettingsModule (copy), ReactModule (copy), UseInterpolatedClientSettingsModule (copy), FFlagDebugFriendsChatModule (copy), FStringDebugFriendsChatConversationIdModule (copy), Players (copy), ExpChatConversationListAdapterModule (copy), SignalsModule (copy), FFlagFriendsChatOsaSystemMessage (copy), GetConversationStoreModule (copy), SignalsReactModule (copy), AppChatNetworkingModule (copy), FriendsChatOsaAcknowledgementModule (copy), UseConversationHeaderPropsModule (copy), UseConversationModerationTypeModule (copy), UseFetchNewestMessagePageModule (copy), FFlagFriendsChatBubbleMessagesModule (copy), GetConversationMessageListStoreModule (copy), UseFriendsChatConversationTelemetryModule (copy), UseConversationHeaderFadeLayoutModule (copy), FFlagFriendsChatConversationListFocusNav (copy), UseFocusInputBarOnWindowEnterModule (copy), FriendsChatConversationHeaderBarModule (copy), FriendsChatBubbleMessageListContainerModule (copy), FriendsChatChatWindowSlotModule (copy), ResolveFadeModule (copy), LayoutConstantsModule (copy), FriendsChatInputBarHostModule (copy)
 	local UseChatWindowSettingsModuleResult = UseChatWindowSettingsModule()
 	local UseMemoResult = ReactModule.useMemo(function()
 		-- upvalues: UseChatWindowSettingsModuleResult (copy)
@@ -79,14 +81,7 @@ return function(p1)
 			ExpChatConversationListAdapterModule.markConversationRead(ConversationId)
 		end
 	end, { ConversationId, IsNotConversationIdMatch })
-	local UseConversationMessagePoolModuleResult = UseConversationMessagePoolModule({
-		conversationId = ConversationId,
-		shouldReadMessages = IsNotConversationIdMatch,
-		shouldFetchMessages = NoIsFriendPlaceholder,
-		chatWindowSettings = p1.chatWindowSettings,
-		textTransparency = p1.textTransparency,
-		isSpatialUIEnabled = p1.isSpatialUIEnabled
-	})
+	local UseFetchNewestMessagePageModuleResult = UseFetchNewestMessagePageModule(ConversationId, NoIsFriendPlaceholder, FFlagFriendsChatBubbleMessagesModule)
 	local ParentLayoutOrder = p1.parentLayoutOrder or 1
 	local OnOpenDetailsFunction = p1.onOpenDetails
 	local FireInfoButtonClickedFunction = UseFriendsChatConversationTelemetryModule({
@@ -150,20 +145,33 @@ return function(p1)
 				onAbsoluteSizeChanged = UseConversationHeaderFadeLayoutModuleResult.onHeaderAbsoluteSizeChanged,
 				interactable = UseConversationHeaderFadeLayoutModuleResult.headerInteractable
 			}),
-			windowSlot = ReactModule.createElement(FriendsChatMessageListModule, {
+			windowSlot = if FFlagFriendsChatBubbleMessagesModule then ReactModule.createElement(FriendsChatBubbleMessageListContainerModule, {
 				layoutOrder = 2,
 				conversationId = ConversationId,
-				scrollViewChildrenSignal = UseConversationMessagePoolModuleResult,
-				contentTopPadding = UseConversationHeaderFadeLayoutModuleResult.contentTopPadding,
-				messageFadeSequence = UseConversationHeaderFadeLayoutModuleResult.messageFadeSequence,
-				onCanvasPositionChanged = UseConversationHeaderFadeLayoutModuleResult.onMessageCanvasPositionChanged,
-				onViewportAbsoluteSizeChanged = UseConversationHeaderFadeLayoutModuleResult.onMessageViewportAbsoluteSizeChanged,
+				hasConversationId = IsNotConversationIdMatch,
+				isRealConversation = NoIsFriendPlaceholder,
+				hasLoadedNewestPage = UseFetchNewestMessagePageModuleResult,
+				shouldOpenToOsaSystemMessage = Inverted,
+				topInset = UseConversationHeaderFadeLayoutModuleResult.headerHeight,
+				chatWindowSettings = ChatWindowSettings,
+				isSpatialUIEnabled = p1.isSpatialUIEnabled,
+				textTransparency = p1.textTransparency,
+				onHovered = p1.onHovered,
+				onUnhovered = p1.onUnhovered,
+				onAbsoluteSizeChanged = p1.onAbsoluteSizeChanged,
+				onAbsolutePositionChanged = p1.onAbsolutePositionChanged
+			}) else ReactModule.createElement(FriendsChatChatWindowSlotModule, {
+				layoutOrder = 2,
+				conversationId = ConversationId,
+				hasConversationId = IsNotConversationIdMatch,
+				fadeLayout = UseConversationHeaderFadeLayoutModuleResult,
+				hostChatWindowSettings = p1.chatWindowSettings,
 				chatWindowSettings = ChatWindowSettings,
 				transparencyValue = p1.transparencyValue,
 				textTransparency = p1.textTransparency,
 				isSpatialUIEnabled = p1.isSpatialUIEnabled,
 				isChannelBarVisible = p1.isChannelBarVisible,
-				scrollToTopOnReset = if FFlagFriendsChatOsaSystemMessage then Inverted else nil,
+				shouldOpenToOsaSystemMessage = Inverted,
 				onHovered = p1.onHovered,
 				onUnhovered = p1.onUnhovered,
 				onAbsoluteSizeChanged = p1.onAbsoluteSizeChanged,

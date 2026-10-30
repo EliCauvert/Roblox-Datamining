@@ -1,4 +1,5 @@
-﻿local Moments = script:FindFirstAncestor("Moments")
+﻿local HttpService = game:GetService("HttpService")
+local Moments = script:FindFirstAncestor("Moments")
 local Parent = Moments.Parent
 local ReactModule = require(Parent.React)
 local LaunchGameFunction = require(Parent.GameLaunch).LaunchGame
@@ -19,7 +20,7 @@ local FFlagMomentsPlayEventModule = require(Moments.Flags.FFlagMomentsPlayEvent)
 local config = { joining = ConstantsModule1.LocalizationKeys.joining }
 
 return function()
-	-- upvalues: UseLocalizationFunction (copy), config (copy), UseMomentsSessionFunction (copy), ReactModule (copy), GetMomentsPreferencesStoreModule (copy), FireAnalyticsEventFunction (copy), EventNames (copy), Analytics (copy), EmitRecommendationActionModule (copy), ConstantsModule (copy), GetToastStoreModule (copy), SessionUtilModule (copy), FFlagMomentsPlayEventModule (copy), Moments (copy), ListenForTeleportFailureModule (copy), LaunchGameFunction (copy), ConstantsModule1 (copy)
+	-- upvalues: UseLocalizationFunction (copy), config (copy), UseMomentsSessionFunction (copy), ReactModule (copy), GetMomentsPreferencesStoreModule (copy), FireAnalyticsEventFunction (copy), EventNames (copy), Analytics (copy), HttpService (copy), EmitRecommendationActionModule (copy), ConstantsModule (copy), GetToastStoreModule (copy), SessionUtilModule (copy), FFlagMomentsPlayEventModule (copy), Moments (copy), ListenForTeleportFailureModule (copy), LaunchGameFunction (copy), ConstantsModule1 (copy)
 	local UseLocalizationResult = UseLocalizationFunction(config)
 	local UseMomentsSessionResult = UseMomentsSessionFunction()
 	local UseRefResult = ReactModule.useRef(nil)
@@ -35,7 +36,7 @@ return function()
 	end, {})
 	
 	return ReactModule.useCallback(function(p1, p2, ViewId)
-		-- upvalues: GetMomentsPreferencesStoreModule (upval), UseRefResult (copy), UseMomentsSessionResult (copy), FireAnalyticsEventFunction (upval), EventNames (upval), Analytics (upval), EmitRecommendationActionModule (upval), ConstantsModule (upval), GetToastStoreModule (upval), UseLocalizationResult (copy), SessionUtilModule (upval), FFlagMomentsPlayEventModule (upval), Moments (upval), ListenForTeleportFailureModule (upval), LaunchGameFunction (upval), ConstantsModule1 (upval)
+		-- upvalues: GetMomentsPreferencesStoreModule (upval), UseRefResult (copy), UseMomentsSessionResult (copy), FireAnalyticsEventFunction (upval), EventNames (upval), Analytics (upval), HttpService (upval), EmitRecommendationActionModule (upval), ConstantsModule (upval), GetToastStoreModule (upval), UseLocalizationResult (copy), SessionUtilModule (upval), FFlagMomentsPlayEventModule (upval), Moments (upval), ListenForTeleportFailureModule (upval), LaunchGameFunction (upval), ConstantsModule1 (upval)
 		local MomentsPreferencesStoreModule = GetMomentsPreferencesStoreModule(false)
 		
 		if UseRefResult.current ~= nil then
@@ -59,22 +60,23 @@ return function()
 				destinationPlaceId = tostring(P1)
 			})
 		end
-		local EmitRecommendationActionModuleResult = EmitRecommendationActionModule({
+		local Guid = if p1.recommendationSource == Analytics.RecommendationSource.Following then HttpService:GenerateGUID(false) else EmitRecommendationActionModule({
 			itemId = FeedItemId,
 			tracingId = TracingId,
 			momentsSessionId = MomentsSessionId,
 			actionType = ConstantsModule.RecommendationActionType.Play,
-			destinationPlaceId = P1
+			destinationPlaceId = P1,
+			contentType = p1.contentType
 		})
 		GetToastStoreModule(false).triggerToast({ text = "", title = UseLocalizationResult.joining })
 		
-		if EmitRecommendationActionModuleResult then
-			SessionUtilModule.setPlayIntent(EmitRecommendationActionModuleResult)
+		if Guid then
+			SessionUtilModule.setPlayIntent(Guid)
 		end
-		if FFlagMomentsPlayEventModule and EmitRecommendationActionModuleResult ~= nil and p1.feedItemId ~= nil and p1.feedItemId ~= "" then
+		if FFlagMomentsPlayEventModule and Guid ~= nil and p1.feedItemId ~= nil and p1.feedItemId ~= "" then
 			FireAnalyticsEventFunction(EventNames.MomentsPlayEvent, require(Moments.Analytics.makeMomentsPlayFields)({
 				feedItemId = p1.feedItemId,
-				momentsPlayIntentId = EmitRecommendationActionModuleResult,
+				momentsPlayIntentId = Guid,
 				viewId = ViewId,
 				clientEventTimestampMs = DateTime.now().UnixTimestampMillis
 			}))
@@ -84,8 +86,6 @@ return function()
 			UseRefResult.current = nil
 			MomentsPreferencesStoreModule.setTeleporting(false)
 		end)
-		LaunchGameFunction(tostring(P1), ConstantsModule1.JoinReferralPage, {
-			moments_play_intent_id = EmitRecommendationActionModuleResult
-		}, nil, ConstantsModule1.JoinLaunchSource)
+		LaunchGameFunction(tostring(P1), ConstantsModule1.JoinReferralPage, { moments_play_intent_id = Guid }, nil, ConstantsModule1.JoinLaunchSource)
 	end, { UseLocalizationResult.joining, UseMomentsSessionResult })
 end

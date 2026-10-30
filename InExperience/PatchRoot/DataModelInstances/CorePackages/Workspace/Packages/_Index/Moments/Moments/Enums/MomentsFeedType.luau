@@ -1,0 +1,1 @@
+﻿return { Trending = "trending", Following = "following" }

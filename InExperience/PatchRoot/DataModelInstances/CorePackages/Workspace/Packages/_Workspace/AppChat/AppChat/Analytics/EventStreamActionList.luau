@@ -159,42 +159,6 @@ return {
 		additionalInfo = { locale = LocalizationService.RobloxLocaleId },
 		formatRulesForAdditionalInfo = { conversationId = DashModule.identity }
 	},
-	[EventNamesModule.ConversationPvBannerRendered] = {
-		context = Contexts.PlatformChat,
-		eventType = EventTypes.ConversationPvBannerRendered,
-		additionalInfo = { locale = LocalizationService.RobloxLocaleId },
-		formatRulesForAdditionalInfo = { conversationId = DashModule.identity }
-	},
-	[EventNamesModule.ConversationPvBannerActionClicked] = {
-		context = Contexts.PlatformChat,
-		eventType = EventTypes.ConversationPvBannerActionClicked,
-		additionalInfo = { locale = LocalizationService.RobloxLocaleId },
-		formatRulesForAdditionalInfo = { conversationId = DashModule.identity }
-	},
-	[EventNamesModule.ConversationUpgradeBannerRendered] = {
-		context = Contexts.PlatformChat,
-		eventType = EventTypes.ConversationUpgradeBannerRendered,
-		additionalInfo = { locale = LocalizationService.RobloxLocaleId },
-		formatRulesForAdditionalInfo = { conversationId = DashModule.identity }
-	},
-	[EventNamesModule.ConversationUpgradeBannerActionClicked] = {
-		context = Contexts.PlatformChat,
-		eventType = EventTypes.ConversationUpgradeBannerActionClicked,
-		additionalInfo = { locale = LocalizationService.RobloxLocaleId },
-		formatRulesForAdditionalInfo = { conversationId = DashModule.identity }
-	},
-	[EventNamesModule.ConversationLearnMoreBannerRendered] = {
-		context = Contexts.PlatformChat,
-		eventType = EventTypes.ConversationLearnMoreBannerRendered,
-		additionalInfo = { locale = LocalizationService.RobloxLocaleId },
-		formatRulesForAdditionalInfo = { conversationId = DashModule.identity }
-	},
-	[EventNamesModule.ConversationLearnMoreBannerActionClicked] = {
-		context = Contexts.PlatformChat,
-		eventType = EventTypes.ConversationLearnMoreBannerActionClicked,
-		additionalInfo = { locale = LocalizationService.RobloxLocaleId },
-		formatRulesForAdditionalInfo = { conversationId = DashModule.identity }
-	},
 	[EventNamesModule.ConversationUpgradeDialogRendered] = {
 		context = Contexts.PlatformChat,
 		eventType = EventTypes.ConversationUpgradeDialogRendered,

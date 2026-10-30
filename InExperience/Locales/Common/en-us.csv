@@ -81,6 +81,7 @@ Authentication.Login.Action.QuickSignIn,Quick sign-in
 Authentication.Login.Action.Save,Save
 Authentication.Login.Button.CloseAndSwitchPlatformAccount,Exit Roblox to switch account for {platformAccountName}
 Authentication.Login.Button.UseDifferentRobloxAccount,Use a different Roblox account
+Authentication.Login.Button.XboxAccountSwitcher,Switch Xbox account
 Authentication.Login.Error.PasskeyOnlyAccount,Your account only has a passkey set up for sign-in. Try signing in with your passkey or recover your account.
 Authentication.Login.Error.PlatformAccountConnectionFailure,Cannot verify platform account. Please try again later.
 Authentication.Login.Heading.IncompatibleAccounts,Incompatible Accounts
@@ -433,13 +434,16 @@ CommonUI.Features.Action.Continue,
 CommonUI.Features.Action.LearnMore,
 CommonUI.Features.Action.LessLowercase,less
 CommonUI.Features.Action.MoreLowercase,more
+CommonUI.Features.Action.OK,
 CommonUI.Features.Action.Send,Send
+CommonUI.Features.Action.ViewDetails,View details
 CommonUI.Features.Label.About,About
 CommonUI.Features.Label.AcceptFriend,Accept Friend
 CommonUI.Features.Label.Add,Add
 CommonUI.Features.Label.AddConnection,Add Connection
 CommonUI.Features.Label.AddConnections,Add Connections
 CommonUI.Features.Label.AddFriend,Add Friend
+CommonUI.Features.Label.Avatar,Avatar
 CommonUI.Features.Label.Badges,Badges
 CommonUI.Features.Label.Charts,Charts
 CommonUI.Features.Label.Chat,Chat
@@ -475,7 +479,6 @@ CommonUI.Features.Label.Sent,Sent
 CommonUI.Features.Label.Settings,
 CommonUI.Features.Label.Terms,Terms
 CommonUI.Features.Label.TermsOfUse,Terms of Use
-CommonUI.Features.Label.Thanks,Thanks
 CommonUI.Features.Label.TheHunt,Roblox Events
 CommonUI.Features.Label.Trades,Trades
 CommonUI.Features.Label.Unchecked,Unchecked
@@ -654,6 +657,7 @@ CoreScripts.EmoteThumbnailEditor.Heading.EditThumbnail,Edit thumbnail
 CoreScripts.EmoteThumbnailEditor.Label.Rotation,Rotation
 CoreScripts.EmoteThumbnailEditor.Label.Time,Time
 CoreScripts.FTUX.Description.WhiteMenuPlaytestMode,The white Roblox menu indicates that you are playtesting. Always follow Roblox Community Standards.
+CoreScripts.FTUX.Description.WhiteMenuPreviewing,The white Roblox menu means you’re previewing this game before it’s out to everyone.
 CoreScripts.FTUX.Heading.CheckOutRobloxConnect,New: Check out Roblox Connect!
 CoreScripts.FTUX.Heading.CheckOutRobloxParty,New: Check out Roblox Party!
 CoreScripts.FTUX.Heading.InExperienceShop,Get Robux in Shop
@@ -665,6 +669,7 @@ CoreScripts.FTUX.Heading.NewTiltUpdate,New menu
 CoreScripts.FTUX.Heading.ReadyToPlaytest,Ready to playtest?
 CoreScripts.FTUX.Heading.SideSheetUpdate,All your actions in one place
 CoreScripts.FTUX.Heading.SocialOnboarding,Social features
+CoreScripts.FTUX.Heading.YouAreAnEarlyTester,You're an early tester
 CoreScripts.FTUX.Label.AvatarSwitcherDescription,Switch to your saved avatars anytime.
 CoreScripts.FTUX.Label.ChatWithYourFriendsAnytime,Chat with your friends anytime.
 CoreScripts.FTUX.Label.InExperienceShopDescription,Select packages include a bonus item
@@ -1134,15 +1139,11 @@ CoreScripts.TextChat.ChatWindow.ChatDisabled.OnlyViewSystemMessages,You can only
 CoreScripts.TextChat.ChatWindow.ChatDisabled.RegionUnavailable,You can only view system messages here. Chat is not available in your region.
 CoreScripts.TextChat.ChatWindow.ChatDisabled.SettingOff,You can only view system messages here. Update your Communication settings to turn on chat.
 CoreScripts.TextChat.ChatWindow.ChatEnabled.ChatInRegion,You can view system messages and chat with users in your region only.
-CoreScripts.TextChat.ChatWindow.ChatEnabled.ChatWithAgeGroupAAndTF,Only people in similar age groups and your trusted friends can chat with you.
 CoreScripts.TextChat.ChatWindow.ChatEnabled.ChatWithOnlinePlayers.BelowThreshold,Say hi to everyone playing now!
-CoreScripts.TextChat.ChatWindow.ChatEnabled.ChatWithOnlinePlayers.Local.WithCount,{RBX_COUNT} other players are in chat. Say hi!
 CoreScripts.TextChat.ChatWindow.ChatEnabled.ChatWithOnlinePlayers.V3,👋 Say hi to everyone playing now!
 CoreScripts.TextChat.ChatWindow.ChatEnabled.ChatWithTF,Only your trusted friends can chat with you.
 CoreScripts.TextChat.ChatWindow.ChatEnabled.Global2,Chat with more people in this game. Only people in similar age groups can chat with you.
 CoreScripts.TextChat.ChatWindow.ChatEnabled.Global3,Chat with more people in this game!
-CoreScripts.TextChat.ChatWindow.ChatWithOnlinePlayers.Local.Friendly,✨ Join the fun! Say hi to everyone playing now!
-CoreScripts.TextChat.ChatWindow.ChatWithOnlinePlayers.Local.WithCount,👋 {RBX_COUNT} players are in chat. Say hi!
 CoreScripts.TextChat.ChatWindow.HandFreeTranscriptionFTUX,Hold to go hands free
 CoreScripts.TextChat.ChatWindow.RephrasedLabel,rephrased
 CoreScripts.TextChat.ChatWindow.RephrasedReason.Description,Roblox rephrases messages that break safety rules.
@@ -1982,6 +1983,11 @@ Feature.AvatarSwitcher.Message.SelectAvatar,Select an avatar
 Feature.AvatarSwitcher.Message.SwitchingDeferred,"You’ll see this avatar after your next respawn, or when you join an experience. You can switch to a different avatar anytime."
 Feature.AvatarSwitcher.Message.UnknownSupport,"You can still switch your avatar, but it may not show up correctly in this experience."
 Feature.AvatarSwitcher.Message.Unsupported,This experience uses a custom avatar and doesn’t support Roblox avatars.
+Feature.AvatarWorkshop.Action.TryAgain,Try again
+Feature.AvatarWorkshop.Heading.AvatarWorkshop,Avatar Workshop
+Feature.AvatarWorkshop.Message.LoadItemsError,Something went wrong loading your items.
+Feature.AvatarWorkshop.Message.LoadMoreItemsError,Couldn't load more items.
+Feature.AvatarWorkshop.Message.NoItemsOwned,You don't own any items here yet.
 Feature.BiometricChallenge.Action.Cancel,
 Feature.BiometricChallenge.Action.Continue,
 Feature.BiometricChallenge.Content.LivenessHostedPrompt,Open your external browser and take a quick selfie to confirm you're human.
@@ -2516,7 +2522,7 @@ Feature.Build.Notification.Title.NeedInput,Build needs your input
 Feature.Build.Placeholder.DescribeProduct,Describe what you want to sell
 Feature.Build.Placeholder.DescribeProductUpdate,Describe an update
 Feature.Build.Placeholder.InternalSpec,internal_code
-Feature.Build.Prompt.CreateDeveloperProduct,"Help me create a developer product, wire it into the game, verify and publish the changes, and make it available for purchase."
+Feature.Build.Prompt.CreateDeveloperProduct,"Review my game and suggest the best item for me to sell to earn Robux. Would a one-time purchase or an item players can buy again, like a boost, fit my game better? Explain why."
 Feature.Build.Title.AdActive,Ad campaign is active
 Feature.Build.Title.AdCampaignDuration,{durationDays}-day ad campaign
 Feature.Build.Title.AdCampaignOptionDurationShort,{durationDays}-days
@@ -2602,7 +2608,7 @@ Feature.Captures.Control.On,
 Feature.Captures.Control.StartRecordingVideo,Record Video
 Feature.Captures.Control.StopRecordingVideo,Stop Recording
 Feature.Captures.Description.AllowPhotoAccessInfo,"To save your captures, Roblox needs access to your device’s camera roll."
-Feature.Captures.Description.DiscoverPostWatch,"Discover, post, and watch epic Roblox gameplay on Moments."
+Feature.Captures.Description.DiscoverPostWatch,Share your gameplay on Moments
 Feature.Captures.Description.MomentProcessing,You can view it in Moments soon
 Feature.Captures.Description.ShareCTA,Share your capture with friends!
 Feature.Captures.Label.CaptureCounts,{numberOfCaptures} Captures
@@ -2637,7 +2643,7 @@ Feature.Captures.Title.VideoCaptureVoiceChatMutedTooltip,Voice chat is muted dur
 Feature.Captures.Toast.CaptureSaved,Capture saved
 Feature.Captures.Toast.CaptureSavedToDevice,Saved to Device
 Feature.Captures.Toast.CapturesEnabled,Captures Enabled
-Feature.Captures.Toast.CreateMoment2,Saved! Turn this into a Moment.
+Feature.Captures.Toast.CreateMoment2,Saved! Create a Moment?
 Feature.Captures.Toast.MomentProcessing,We're processing your Moment
 Feature.Captures.Toast.VideoCaptureFailed,Video capture failed to save.
 Feature.Captures.Toast.VideoCaptureInitializationCapturingAlreadyError,A video capture is already in progress
@@ -2697,6 +2703,8 @@ Feature.Catalog.Header.InvalidOutfit,Invalid Outfit
 Feature.Catalog.Header.PostAvatar,
 Feature.Catalog.Heading.AvailableItems,Available Items
 Feature.Catalog.Heading.BuyItem,
+Feature.Catalog.Heading.DescriptionLinkGoToMarketplace,This will take you to the Marketplace
+Feature.Catalog.Heading.DescriptionLinkResetSearch,This will reset your current search
 Feature.Catalog.Heading.FreeItemConfirmation,Get Item
 Feature.Catalog.Heading.GoToExperience,Join Experience?
 Feature.Catalog.Heading.HoldingPolicy,Holding Policy
@@ -2772,6 +2780,12 @@ Feature.Catalog.Label.CreatorName,Creator Name
 Feature.Catalog.Label.CurrentBalance,Current balance:
 Feature.Catalog.Label.CustomizeAvatar,Customize Avatar
 Feature.Catalog.Label.DeleteAvatarConfirmationPromptMessage,You can’t undo this action if you delete.
+Feature.Catalog.Label.DescriptionLinkInvalid,Invalid Link
+Feature.Catalog.Label.DescriptionLinkSearchMarketplace,Search Marketplace
+Feature.Catalog.Label.DescriptionLinkViewAsset,View Asset
+Feature.Catalog.Label.DescriptionLinkViewBundle,View Bundle
+Feature.Catalog.Label.DescriptionLinkViewCommunity,View Community
+Feature.Catalog.Label.DescriptionLinkViewCommunityStore,Community Store
 Feature.Catalog.Label.Details,
 Feature.Catalog.Label.DynamicHeads,
 Feature.Catalog.Label.Emissive,Emissive
@@ -3557,7 +3571,7 @@ Feature.Groups.Action.NotNow,
 Feature.Groups.Action.RemovePrimary,Remove Primary
 Feature.Groups.Action.SeeAll,
 Feature.Groups.Action.Unfollow,Unfollow
-Feature.Groups.Action.ViewGroup,View Community
+Feature.Groups.Action.ViewGroup,
 Feature.Groups.Description.JoinGroupPending,Your join request is pending review by the community.
 Feature.Groups.Description.NotEligibleToJoin,Your account cannot join this community.
 Feature.Groups.Description.PremiumMaxGroups,You have joined the maximum number of communities.
@@ -3663,6 +3677,7 @@ Feature.InExperienceIntervention.Description.LoseAccess,"If this happens again, 
 Feature.InExperienceIntervention.Description.MayLoseAccess,"If you break the rules again, you may lose access to your account."
 Feature.InExperienceIntervention.Description.Mistake,Did we make a mistake?
 Feature.InExperienceIntervention.Description.PartyChatMayBeSuspended,Sharing personal information is not allowed on Roblox. Your chat may be suspended if you break the rules again.
+Feature.InExperienceIntervention.Description.StartNewGameToTurnOnVoiceChat,Start a new game to turn on voice chat.
 Feature.InExperienceIntervention.Description.TextChatMayBeSuspended,Your text chat use may be suspended if you break the rules again.
 Feature.InExperienceIntervention.Heading.CannotChat,You cannot send chats for {number} minutes
 Feature.InExperienceIntervention.Heading.ChatBreaksRules,Your text chat breaks the rules
@@ -3704,6 +3719,7 @@ Feature.InExperienceShop.Label.Timer.Minute.Singular,1 minute
 Feature.InExperienceShop.Label.Timer.Second.Plural,{number} seconds
 Feature.InExperienceShop.Label.Timer.Second.Singular,1 second
 Feature.InExperienceShop.Label.Trial,Trial
+Feature.InExperienceShop.Label.Trialed,Trialed
 Feature.InExperienceShop.Message.RobuxPurchaseSuccess,You have successfully purchased {ROBUX_AMOUNT} Robux
 Feature.Item.Label.DeleteFromInventoryConfirmUndercaseDelete,"Are you sure you want to permanently delete this item from your inventory? If you change your mind, you'll need to earn it again in an experience."
 Feature.Item.Label.DeleteItemUndercase,Delete item
@@ -3751,10 +3767,16 @@ Feature.Moments.Action.SaveVoiceover,
 Feature.Moments.Action.ShowDetails,Show details
 Feature.Moments.Action.ShowMore,
 Feature.Moments.Action.TrimVideo,Trim Video
-Feature.Moments.Action.TryAgain,Try again
+Feature.Moments.Action.TryAgain,
+Feature.Moments.Action.ViewOtherFeed,View other feed
+Feature.Moments.Action.ViewRecommended,View recommended
+Feature.Moments.Action.ViewTrending,View trending
 Feature.Moments.Body.EDPMomentIPReportInstructions,"To report an IP violation in this Moment, continue to the game details page."
 Feature.Moments.Description.CommunityStandards,Check the Community Standards for more info on what you can and can't say.
 Feature.Moments.Description.EmptyCapturesLibrary,This is where your Captures will appear.
+Feature.Moments.Description.FollowingCaughtUpBody,You've watched all the new Moments in this feed. Switch feeds to view more.
+Feature.Moments.Description.FollowingEmptyBodyRecommended,Enjoy Moments from your favorites after you follow a few creators. View recommended to find some.
+Feature.Moments.Description.FollowingEmptyBodyTrending,Enjoy Moments from your favorites after you follow a few creators. View trending to find some.
 Feature.Moments.Description.GenerateTextFeedbackDisclosure,AI-generated. Review before posting — you're responsible for what's published.
 Feature.Moments.Description.HowToCaptureStep1,Join an Experience with Captures enabled and select the hamburger menu
 Feature.Moments.Description.HowToCaptureStep2,Enable the Capture controls
@@ -3811,9 +3833,13 @@ Feature.Moments.Label.ExceedsCharacterLimit,Exceeds character limit
 Feature.Moments.Label.FeedEndBody,Check back later or create your own Moment.
 Feature.Moments.Label.FeedEndTitle,You're all caught up
 Feature.Moments.Label.FeedFailedToLoad,Feed failed to load
+Feature.Moments.Label.FeedFollowing,
 Feature.Moments.Label.FeedMyMoments,My Moments
+Feature.Moments.Label.FeedRecommended,Recommended
 Feature.Moments.Label.FeedTrending,
 Feature.Moments.Label.FirstCommentInvite,No comments yet. Be the first to comment!
+Feature.Moments.Label.FollowingCaughtUpTitle,You're caught up for now
+Feature.Moments.Label.FollowingEmptyTitle,Follow creators to view their Moments
 Feature.Moments.Label.GameJoinConversion,Game join conversion
 Feature.Moments.Label.HowToUseCaptureTitle,How to use Capture
 Feature.Moments.Label.LinkCopied,Link copied
@@ -4000,6 +4026,7 @@ Feature.PrivateServers.Action.CreatePrivateServer,Create Private Server
 Feature.PrivateServers.Action.FreeWithBlackbird,Free with Plus
 Feature.PrivateServers.Description.PrivateServerPurchaseUnavailableInStudio,Private server purchases are not supported in Studio.
 Feature.PrivateServers.Description.VipServersNotSupported,This game doesn't support private servers.
+Feature.PrivateServers.Label.OwnersServer,{displayName}'s server
 Feature.Profile.Action.AboutThisProfile,About this profile
 Feature.Profile.Action.Accept,
 Feature.Profile.Action.AcceptFriends,
@@ -4144,7 +4171,7 @@ Feature.ReportAbuse.Heading.IpNoReportableContent,No Reportable Content
 Feature.ReportAbuse.Heading.ReportAbuse,
 Feature.ReportAbuse.Heading.ReportUsingSelectInScene,Report using highlight mode
 Feature.ReportAbuse.Heading.SelectInSceneErrorTitle,Error: Maximum 5 circles
-Feature.ReportAbuse.Label.Avatar,Avatar
+Feature.ReportAbuse.Label.Avatar,
 Feature.ReportAbuse.Label.CantSelectSubtitle,"Select ""Next"" to report the entire experience."
 Feature.ReportAbuse.Label.CantSelectTitle,Can't highlight something?
 Feature.ReportAbuse.Label.CategoryBullyingV2,"Bullying, Harassment, Discrimination"
@@ -4239,6 +4266,10 @@ Feature.ReportAbuse.Title.SelectInSceneContinueYourReport,Continue your report
 Feature.ReportAbuse.Title.SelectInSceneFinishYourReport,Finish your report
 Feature.ReportAbuse.Title.SelectInSceneIpReport,Thank you for starting your IP Infringement report
 Feature.ReportAbuse.Title.SelectInSceneThankYou,Thank you for your report
+Feature.RoCaptchaChallenge.Action.Cancel,
+Feature.RoCaptchaChallenge.Action.Play,
+Feature.RoCaptchaChallenge.Content.JoinChallenge,We noticed unusual activity on your account. Play a quick game to continue.
+Feature.RoCaptchaChallenge.Title.Challenge,Let’s make sure you’re a real person
 Feature.RobloxSubscription.Action.JoinIn,Join in {time}
 Feature.RobloxSubscription.Action.Subscribe,Subscribe
 Feature.RobloxSubscription.Action.TryItForFree,Try it for free
@@ -4348,10 +4379,8 @@ Feature.SettingsHub.Heading.Report.ThanksForReport,Thanks for your report!
 Feature.SettingsHub.Label.AttachScreenshot,Attach Screenshot? (optional)
 Feature.SettingsHub.Label.Captures,
 Feature.SettingsHub.Label.ChooseOne,Choose One
-Feature.SettingsHub.Label.Connect,Connect
 Feature.SettingsHub.Label.Connected,Connected
 Feature.SettingsHub.Label.DefaultInviteMessage,Would you like to invite {DisplayName} to join you?
-Feature.SettingsHub.Label.Disconnect,Disconnect
 Feature.SettingsHub.Label.Disconnected,Disconnected
 Feature.SettingsHub.Label.DontLeaveButton,
 Feature.SettingsHub.Label.FriendsListLoadErrorMessage,Can’t load friends. Try again later.
@@ -4547,7 +4576,7 @@ Feature.Squads.Action.Start,
 Feature.Squads.Action.Switch,
 Feature.Squads.Action.TapToStartNewParty,Tap to start a new Party
 Feature.Squads.Action.View,
-Feature.Squads.Action.VoiceErrorGeneral,
+Feature.Squads.Action.VoiceErrorGeneral,Connect
 Feature.Squads.Action.VoiceErrorPartyNotVoiceEligible,
 Feature.Squads.Action.VoiceErrorUserIneligible,
 Feature.Squads.Action.WaitingForParty,Waiting for Party
@@ -4800,8 +4829,6 @@ Feature.VirtualEvents.ShareModalCallToAction,Share via Chat...
 Feature.VirtualEvents.ShareModalLinkCopy,
 Feature.VirtualEvents.ShareModalTitle,Share This Event
 Feature.VirtualEvents.UnfollowEvent,Unfollow Event
-Features.OnDemandAds.Get_Reward_In,Get reward in
-Features.OnDemandAds.Reward_Earned,Reward Earned
 Features.Transfers.Action.BuyRobux,
 Features.Transfers.Action.Continue,
 Features.Transfers.Action.Ok,
@@ -5261,8 +5288,6 @@ Notifications.NotificationStream.Bundle.ShowLess,
 Notifications.NotificationStream.Bundle.ShowMoreV2,{notificationCount} more
 Notifications.NotificationStream.Label.AllCaughtUp,All caught up!
 Notifications.NotificationStream.Label.Notifications,
-Notifications.SafetyAvatarModeration.Description.NotificationTypeInExpWarnMsg,"Please change your avatar. Soon, players with avatars that break our Community Standards will be suspended from this game."
-Notifications.SafetyAvatarModeration.Label.NotificationTypeInExpWarn,Your avatar broke the rules
 Notifications.SquadRegroupPrompt.ToastAction.Dismiss,
 Notifications.SquadRegroupPrompt.ToastAction.Join,
 Notifications.SquadRegroupPrompt.ToastLabel.ContinuePlayingTogether,Continue playing together

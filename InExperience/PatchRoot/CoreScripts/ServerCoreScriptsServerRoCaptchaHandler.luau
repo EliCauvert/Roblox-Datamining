@@ -3,10 +3,14 @@ local HttpRbxApiService = game:GetService("HttpRbxApiService")
 local Players = game:GetService("Players")
 local ServerStorage = game:GetService("ServerStorage")
 local TeleportService = game:GetService("TeleportService")
+local CorePackages = game:GetService("CorePackages")
 local RobloxGui = game:GetService("CoreGui"):WaitForChild("RobloxGui")
-local Url = require(game:GetService("CorePackages").Workspace.Packages.CoreScriptsCommon).Url
+local Url = require(CorePackages.Workspace.Packages.CoreScriptsCommon).Url
+local PromiseModule = require(CorePackages.Packages.Promise)
 local RoCaptchaUtilsModule = require(RobloxGui.Modules.Server.RoCaptcha.RoCaptchaUtils)
 local FStringRoCaptchaUniverseIdsModule = require(RobloxGui.Modules.Common.Flags.FStringRoCaptchaUniverseIds)
+local RoCaptchaExperienceValidate = game:DefineFastFlag("RoCaptchaExperienceValidate", false)
+local RoCaptchaExperienceValidate1 = game:DefineFastFlag("RoCaptchaExperienceKick", false) and RoCaptchaExperienceValidate
 
 if game:GetService("RunService"):IsStudio() then return end
 if not RoCaptchaUtilsModule.isUniverseAllowed(FStringRoCaptchaUniverseIdsModule, game.GameId) then return end
@@ -16,6 +20,10 @@ local config = {
 	[Enum.TeleportResult.Failure] = true,
 	[Enum.TeleportResult.Flooded] = true,
 	[Enum.TeleportResult.IsTeleporting] = true
+}
+local config1 = {
+	[Enum.TeleportResult.GameEnded] = true,
+	[Enum.TeleportResult.GameFull] = true
 }
 
 local function postJson(ApiUrl, Input)
@@ -98,7 +106,8 @@ local function createSession(Player: Player)
 		teleportStartedAt = nil,
 		retryPending = false,
 		challengeId = ParseLaunchDataResult.challengeId,
-		desiredPlaceId = ParseLaunchDataResult.desiredPlaceId
+		desiredPlaceId = ParseLaunchDataResult.desiredPlaceId,
+		serverInstanceId = ParseLaunchDataResult.serverInstanceId
 	} else nil
 end
 
@@ -112,8 +121,22 @@ local _ = function(Player: Player, p3)
 	end
 end
 
+local t1 = {}
+
+local _ = function(Key, Reason, Detail)
+	-- upvalues: t (copy), t1 (copy)
+	warn("[RoCaptcha] Rejecting player, reason:", Reason, Detail)
+	t[Key] = nil
+	
+	if Key.Parent then
+		t1[Key] = { reason = Reason, detail = Detail }
+		
+		return
+	end
+end
+
 local function onPlayerAdded(Player: Player)
-	-- upvalues: createSession (copy), t (copy), withRetry (copy), postJson (copy), Text (copy)
+	-- upvalues: createSession (copy), RoCaptchaExperienceValidate1 (copy), t (copy), t1 (copy), withRetry (copy), postJson (copy), Text (copy)
 	local Session = createSession(Player)
 	
 	if Session then
@@ -141,11 +164,34 @@ local function onPlayerAdded(Player: Player)
 			
 			return
 		end
-		warn("[RoCaptcha] Kicking player, reason:", "validate_failed:" .. tostring(Validate2.failureReason))
+		if RoCaptchaExperienceValidate1 then
+			local FailureReason = Validate2.failureReason
+			warn("[RoCaptcha] Rejecting player, reason:", "validate_failed", FailureReason)
+			t[Player] = nil
+			
+			if Player.Parent then
+				t1[Player] = { reason = "validate_failed", detail = FailureReason }
+				
+				return
+			end
+			return
+		else
+			warn("[RoCaptcha] Kicking player, reason:", "validate_failed:" .. tostring(Validate2.failureReason))
+			t[Player] = nil
+			
+			if Player.Parent then
+				Player:Kick()
+			end
+			return
+		end
+	elseif RoCaptchaExperienceValidate1 then
+		warn("[RoCaptcha] Rejecting player, reason:", "invalid_launch_data", nil)
 		t[Player] = nil
 		
 		if Player.Parent then
-			Player:Kick()
+			t1[Player] = { reason = "invalid_launch_data", detail = nil }
+			
+			return
 		end
 		return
 	else
@@ -158,22 +204,92 @@ local function onPlayerAdded(Player: Player)
 	end
 end
 
-Players.PlayerAdded:Connect(onPlayerAdded)
+local NewResults = {}
+
+local _ = function(Key)
+	-- upvalues: NewResults (copy), PromiseModule (copy), onPlayerAdded (copy), t (copy), t1 (copy)
+	local NewResult = NewResults[Key]
+	
+	if not NewResult then
+		NewResult = PromiseModule.new(function(Callback: (any) -> ())
+			-- upvalues: onPlayerAdded (upval), Key (copy), t (upval), t1 (upval)
+			onPlayerAdded(Key)
+			local v2 = t[Key]
+			local v3 = t1[Key]
+			
+			if v2 and v2.state == "Ready" then
+				Callback({ valid = true })
+				
+				return
+			end
+			if v3 then
+				Callback({ valid = false, reason = v3.reason, detail = v3.detail })
+				
+				return
+			else
+				Callback({ valid = false, reason = "no_session" })
+			end
+		end)
+		NewResults[Key] = NewResult
+	end
+	return NewResult
+end
+
+local function onPlayerJoined(Player)
+	-- upvalues: RoCaptchaExperienceValidate (copy), NewResults (copy), PromiseModule (copy), onPlayerAdded (copy), t (copy), t1 (copy)
+	if not RoCaptchaExperienceValidate then
+		onPlayerAdded(Player)
+	elseif not NewResults[Player] then
+		NewResults[Player] = PromiseModule.new(function(Callback: (any) -> ())
+			-- upvalues: onPlayerAdded (upval), Player (copy), t (upval), t1 (upval)
+			onPlayerAdded(Player)
+			local v2 = t[Player]
+			local v3 = t1[Player]
+			
+			if v2 and v2.state == "Ready" then
+				Callback({ valid = true })
+				
+				return
+			end
+			if v3 then
+				Callback({ valid = false, reason = v3.reason, detail = v3.detail })
+				
+				return
+			else
+				Callback({ valid = false, reason = "no_session" })
+			end
+		end)
+		
+		return
+	end
+end
+
+Players.PlayerAdded:Connect(onPlayerJoined)
 
 for _, player in Players:GetPlayers() do
-	task.spawn(onPlayerAdded, player)
+	task.spawn(onPlayerJoined, player)
 end
 Players.PlayerRemoving:Connect(function(Player)
-	-- upvalues: t (copy)
+	-- upvalues: t (copy), NewResults (copy), t1 (copy)
 	t[Player] = nil
+	NewResults[Player] = nil
+	t1[Player] = nil
 end)
 
 local function teleportBack(Player, p3)
 	-- upvalues: TeleportService (copy)
 	p3.teleportStartedAt = os.clock()
+	local TeleportOptions = nil
+	local ServerInstanceId = p3.serverInstanceId
+	
+	if ServerInstanceId then
+		local TeleportOptions1 = Instance.new("TeleportOptions")
+		TeleportOptions1.ServerInstanceId = ServerInstanceId
+		TeleportOptions = TeleportOptions1
+	end
 	local Success, Result = pcall(function()
-		-- upvalues: TeleportService (upval), p3 (copy), Player (copy)
-		TeleportService:TeleportAsync(p3.desiredPlaceId, { Player })
+		-- upvalues: TeleportService (upval), p3 (copy), Player (copy), TeleportOptions (ref)
+		TeleportService:TeleportAsync(p3.desiredPlaceId, { Player }, TeleportOptions)
 	end)
 	
 	if not Success then
@@ -195,7 +311,7 @@ local _ = function(p3, p4)
 end
 
 TeleportService.TeleportInitFailed:Connect(function(Player: Player, TeleportResult, ErrorMessage)
-	-- upvalues: t (copy), config (copy), teleportBack (copy)
+	-- upvalues: t (copy), config1 (copy), config (copy), teleportBack (copy)
 	if not Player:IsA("Player") then return end
 	local Entry = t[Player]
 	
@@ -204,8 +320,13 @@ TeleportService.TeleportInitFailed:Connect(function(Player: Player, TeleportResu
 		
 		if TeleportStartedAt ~= nil and os.clock() - TeleportStartedAt < 30 and not Entry.retryPending then
 			warn("[RoCaptcha] TeleportInitFailed:", TeleportResult, ErrorMessage)
+			local IsEntry: boolean = Entry.serverInstanceId ~= nil and config1[TeleportResult] == true
 			
-			if not config[TeleportResult] then
+			if IsEntry then
+				warn("[RoCaptcha] Target server unavailable - falling back to any server:", TeleportResult)
+				Entry.serverInstanceId = nil
+			end
+			if not config[TeleportResult] and not IsEntry then
 				Entry.teleportStartedAt = nil
 				warn("[RoCaptcha] Teleport back failed, reason:", "teleport_failed:" .. tostring(TeleportResult))
 				
@@ -233,7 +354,7 @@ local RoCaptchaVerify = Instance.new("BindableFunction")
 RoCaptchaVerify.Name = "RoCaptchaVerify"
 
 function RoCaptchaVerify.OnInvoke(Player: Player)
-	-- upvalues: t (copy), teleportBack (copy), withRetry (copy), postJson (copy), Text (copy), Text1 (copy)
+	-- upvalues: t (copy), teleportBack (copy), withRetry (copy), postJson (copy), Text (copy), RoCaptchaExperienceValidate1 (copy), t1 (copy), Text1 (copy)
 	if typeof(Player) ~= "Instance" or not Player:IsA("Player") then
 		return { success = false, reason = "invalid_player" }
 	end
@@ -286,11 +407,21 @@ function RoCaptchaVerify.OnInvoke(Player: Player)
 		
 		return if Player.Parent then if teleportBack(Player, Entry) then { success = true } else { success = false, reason = "teleport_error" } else { success = true }
 	else
-		warn("[RoCaptcha] Kicking player, reason:", "verify_failed:" .. tostring(Verify2.failureReason))
-		t[Player] = nil
-		
-		if Player.Parent then
-			Player:Kick()
+		if RoCaptchaExperienceValidate1 then
+			local FailureReason = Verify2.failureReason
+			warn("[RoCaptcha] Rejecting player, reason:", "verify_failed", FailureReason)
+			t[Player] = nil
+			
+			if Player.Parent then
+				t1[Player] = { reason = "verify_failed", detail = FailureReason }
+			end
+		else
+			warn("[RoCaptcha] Kicking player, reason:", "verify_failed:" .. tostring(Verify2.failureReason))
+			t[Player] = nil
+			
+			if Player.Parent then
+				Player:Kick()
+			end
 		end
 		return {
 			success = false,
@@ -301,3 +432,47 @@ function RoCaptchaVerify.OnInvoke(Player: Player)
 end
 
 RoCaptchaVerify.Parent = ServerStorage
+
+if RoCaptchaExperienceValidate then
+	local RoCaptchaValidate = Instance.new("BindableFunction")
+	RoCaptchaValidate.Name = "RoCaptchaValidate"
+	
+	function RoCaptchaValidate.OnInvoke(Player: Player)
+		-- upvalues: NewResults (copy), PromiseModule (copy), onPlayerAdded (copy), t (copy), t1 (copy)
+		if typeof(Player) ~= "Instance" or not Player:IsA("Player") then
+			return { valid = false, reason = "invalid_player" }
+		end
+		if not Player.Parent then
+			return { valid = false, reason = "no_session" }
+		end
+		local NewResult = NewResults[Player]
+		
+		if not NewResult then
+			NewResult = PromiseModule.new(function(Callback: (any) -> ())
+				-- upvalues: onPlayerAdded (upval), Player (copy), t (upval), t1 (upval)
+				onPlayerAdded(Player)
+				local v2 = t[Player]
+				local v3 = t1[Player]
+				
+				if v2 and v2.state == "Ready" then
+					Callback({ valid = true })
+					
+					return
+				end
+				if v3 then
+					Callback({ valid = false, reason = v3.reason, detail = v3.detail })
+					
+					return
+				else
+					Callback({ valid = false, reason = "no_session" })
+				end
+			end)
+			NewResults[Player] = NewResult
+		end
+		local v2, v3 = NewResult:await()
+		
+		return if v2 then v3 else { valid = false, reason = "no_session" }
+	end
+	
+	RoCaptchaValidate.Parent = ServerStorage
+end

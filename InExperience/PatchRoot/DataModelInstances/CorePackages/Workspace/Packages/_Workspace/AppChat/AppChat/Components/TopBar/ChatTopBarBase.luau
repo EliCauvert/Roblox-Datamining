@@ -15,6 +15,8 @@ local FFlagAppIaScrollAway = require(Parent.SharedFlags).FFlagAppIaScrollAway
 local HeaderBar = UIBloxModule.App.Bar.HeaderBar
 local AppHeaderBarModule = require(Parent.AppHeaderBar)
 local GetTopBarStoreModule = require(AppChat.Stores.GetTopBarStore)
+local ThemeBackgroundModule = require(Parent.ThemeBackground)
+local FFlagAppThemeHalloween2026ChatBackgroundModule = require(AppChat.Flags.FFlagAppThemeHalloween2026ChatBackground)
 local UseSignalStateFunction = require(Parent.SignalsReact).useSignalState
 
 local function noOp()
@@ -22,7 +24,7 @@ local function noOp()
 end
 
 return function(p1)
-	-- upvalues: ReactModule (copy), FFlagAppChatPerfTrackingModule (copy), AppChatPerfTrackerModule (copy), GetTopBarStoreModule (copy), UseSignalStateFunction (copy), FFlagAppIaScrollAway (copy), AppHeaderBarModule (copy), UseLocalizationFunction (copy), UseStyleFunction (copy), UseTokensFunction (copy), noOp (copy), CreateBackFuncModule (copy), AppNavBarModule (copy), VisibilityControl (copy), FoundationModule (copy), HeaderBar (copy)
+	-- upvalues: ReactModule (copy), FFlagAppChatPerfTrackingModule (copy), AppChatPerfTrackerModule (copy), GetTopBarStoreModule (copy), UseSignalStateFunction (copy), FFlagAppIaScrollAway (copy), AppHeaderBarModule (copy), UseLocalizationFunction (copy), UseStyleFunction (copy), UseTokensFunction (copy), noOp (copy), CreateBackFuncModule (copy), AppNavBarModule (copy), VisibilityControl (copy), FFlagAppThemeHalloween2026ChatBackgroundModule (copy), ThemeBackgroundModule (copy), FoundationModule (copy), HeaderBar (copy)
 	ReactModule.useEffect(function()
 		-- upvalues: FFlagAppChatPerfTrackingModule (upval), AppChatPerfTrackerModule (upval)
 		if FFlagAppChatPerfTrackingModule then
@@ -82,6 +84,7 @@ return function(p1)
 		-- upvalues: TopBarHeightScreenProps (copy)
 		return UDim2.new(0, 0, 0, (p2 - 1) * (TopBarHeightScreenProps + 36))
 	end) else nil
+	local UseThemeBackgroundResult = if FFlagAppThemeHalloween2026ChatBackgroundModule then ThemeBackgroundModule.useThemeBackground() else nil
 	
 	return ReactModule.createElement(FoundationModule.View, {
 		tag = "size-full-0",
@@ -90,6 +93,7 @@ return function(p1)
 		ZIndex = if FFlagAppIaScrollAway then 2 else nil,
 		Position = if FFlagAppIaScrollAway then MapResult else nil
 	}, {
+		BackgroundSlot = if UseThemeBackgroundResult then ReactModule.createElement(ThemeBackgroundModule.ThemeBackgroundHeaderSlot) else nil,
 		headerBar = ReactModule.createElement(HeaderBar, {
 			title = if RenderCenter or p1.hideTitle then nil else HeaderText1,
 			barHeight = TopBarHeightScreenProps,
@@ -101,7 +105,7 @@ return function(p1)
 			paddingRight = UDim.new(0, if RightPaddingOverride == nil then Medium else RightPaddingOverride),
 			isTitleCentered = not IsTitleLeftAligned,
 			contentPaddingRight = UDim.new(0, 0),
-			backgroundTransparency = if FFlagAppIaScrollAway and not IsInExperienceScreenProps then nil else UseStyleResult.Tokens.Color.None.Transparency
+			backgroundTransparency = if UseThemeBackgroundResult then 1 elseif FFlagAppIaScrollAway and not IsInExperienceScreenProps then nil else UseStyleResult.Tokens.Color.None.Transparency
 		})
 	})
 end

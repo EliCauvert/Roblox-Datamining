@@ -11,6 +11,7 @@ local DecodeInlineMomentSceneModule = require(script.Parent.decodeInlineMomentSc
 local FeedContextModule = require(Moments.Components.Feed.FeedContext)
 local _ = require(Moments.Components.Feed.FeedTypes)
 local _ = require(Moments.Components.Feed.Items.Moment.MomentContext)
+local FFlagMomentsRecommendationContentTypeModule = require(Moments.Flags.FFlagMomentsRecommendationContentType)
 local _CFrame = CFrame.new(0, 2000, 0)
 
 local function _(p1)
@@ -46,7 +47,7 @@ local _ = function(p1)
 end
 
 return function(p1)
-	-- upvalues: FeedContextModule (copy), SignalsReactModule (copy), ReactModule (copy), MomentsCommonModule (copy), SignalsModule (copy), DecodeInlineMomentSceneModule (copy), Parent (copy), Workspace (copy), _CFrame (copy), RunService (copy)
+	-- upvalues: FeedContextModule (copy), SignalsReactModule (copy), ReactModule (copy), MomentsCommonModule (copy), SignalsModule (copy), DecodeInlineMomentSceneModule (copy), Parent (copy), Workspace (copy), _CFrame (copy), RunService (copy), FFlagMomentsRecommendationContentTypeModule (copy)
 	local UseFeedResult = FeedContextModule.useFeed()
 	local GetCurrentIndex = UseFeedResult.getCurrentIndex
 	assert(GetCurrentIndex ~= nil, "Avatar Moments require the flag-gated feed index")
@@ -234,7 +235,7 @@ return function(p1)
 	
 	return {
 		data = ReactModule.useMemo(function()
-			-- upvalues: Moment (copy), RecommendationMetadata (copy), p1 (copy)
+			-- upvalues: Moment (copy), RecommendationMetadata (copy), FFlagMomentsRecommendationContentTypeModule (upval), p1 (copy)
 			return {
 				kind = "avatar",
 				creatorIsVerified = nil,
@@ -245,6 +246,7 @@ return function(p1)
 				isModerated = Moment.isModerated == true,
 				feedItemId = RecommendationMetadata.feedItemId,
 				feedSessionId = RecommendationMetadata.tracingId,
+				contentType = if FFlagMomentsRecommendationContentTypeModule then "Avatar" else nil,
 				outfit = p1.item.outfit
 			}
 		end, {

@@ -3,6 +3,7 @@ local CreateLazyComponentFunction = require(Parent.RoactUtils).Components.create
 local SharedFlagsModule = require(Parent.SharedFlags)
 local FFlagEnableHomeRobloxLogo = SharedFlagsModule.FFlagEnableHomeRobloxLogo
 local FFlagEnableFlyoutOnNavRail = SharedFlagsModule.FFlagEnableFlyoutOnNavRail
+local FFlagEnableFlyoutNavRailBumperNavigation = SharedFlagsModule.FFlagEnableFlyoutNavRailBumperNavigation
 local FFlagFlyoutUseOpenHook = SharedFlagsModule.FFlagFlyoutUseOpenHook
 local FFlagSendLogOutClickTelemetry = SharedFlagsModule.FFlagSendLogOutClickTelemetry
 local FFlagCTAChangeMorePageFlyoutButtonTextIxpEnabled = SharedFlagsModule.FFlagCTAChangeMorePageFlyoutButtonTextIxpEnabled
@@ -25,7 +26,7 @@ return {
 		logCTAChangeMorePageFlyoutButtonTextExposure = if FFlagCTAChangeMorePageFlyoutButtonTextIxpEnabled then require(script.Utils.logCTAChangeMorePageFlyoutButtonTextExposure) else nil
 	},
 	Hooks = {
-		useOpenFlyoutSidePanel = if FFlagFlyoutUseOpenHook then require(script.Hooks.useOpenFlyoutSidePanel) else nil
+		useOpenFlyoutSidePanel = if FFlagEnableFlyoutNavRailBumperNavigation or FFlagFlyoutUseOpenHook then require(script.Hooks.useOpenFlyoutSidePanel) else nil
 	},
 	FlyoutScrollAwayControl = require(script.FlyoutScrollAwayControl),
 	["jest.config"] = script["jest.config"]

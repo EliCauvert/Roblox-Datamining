@@ -17,7 +17,6 @@ local GetIconFunction = require(CorePackages.Workspace.Packages.VoiceChat).Utils
 local CONTEXTID = require(CorePackages.Workspace.Packages.CrossExperience).Constants.AUDIO_FOCUS_MANAGEMENT.CEV.CONTEXT_ID
 local GetFFlagIntegratePhoneUpsellJoinVoiceFunction = require(CorePackages.Workspace.Packages.SharedFlags).GetFFlagIntegratePhoneUpsellJoinVoice
 local GetFFlagFixSeamlessVoiceIntegrationWithPrivateVoiceFunction = require(CorePackages.Workspace.Packages.SharedFlags).GetFFlagFixSeamlessVoiceIntegrationWithPrivateVoice
-local GetFFlagEnableVoiceUxUpdatesFunction = require(CorePackages.Workspace.Packages.SharedFlags).GetFFlagEnableVoiceUxUpdates
 local FFlagProactiveVoiceRestrictionsUFR = require(CorePackages.Workspace.Packages.SharedFlags).FFlagProactiveVoiceRestrictionsUFR
 local FFlagTokenizeUnibarConstantsWithStyleProvider = require(Chrome.ChromeShared.Flags).FFlagTokenizeUnibarConstantsWithStyleProvider
 local CheckShouldShowJoinVoiceInEvent = game:DefineFastFlag("CheckShouldShowJoinVoiceInEvent", false)
@@ -174,16 +173,6 @@ if IsVoiceChatSupportedModule() then
 			setAvailability(ServiceModule.AvailabilitySignal.Available)
 		end
 		Default.VoiceJoinProgressChanged.Event:Connect(HideOrShowJoinVoiceButton)
-	end
-	if not GetFFlagEnableVoiceUxUpdatesFunction() then
-		Default.showVoiceUI.Event:Connect(function()
-			-- upvalues: setAvailability (copy), ServiceModule (copy)
-			setAvailability(ServiceModule.AvailabilitySignal.Unavailable)
-		end)
-		Default.hideVoiceUI.Event:Connect(function()
-			-- upvalues: setAvailability (copy), ServiceModule (copy)
-			setAvailability(ServiceModule.AvailabilitySignal.Available)
-		end)
 	end
 end
 return RegisterResult

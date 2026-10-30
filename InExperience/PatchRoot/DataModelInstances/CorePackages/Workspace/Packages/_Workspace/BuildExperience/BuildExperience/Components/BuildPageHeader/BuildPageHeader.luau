@@ -7,6 +7,8 @@ local SignalsReactModule = require(Parent.SignalsReact)
 local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
 local LocalizationStringsModule = require(BuildExperience.LocalizationStrings)
 local FFlagEnableHomeRobloxLogo = require(Parent.SharedFlags).FFlagEnableHomeRobloxLogo
+local FFlagAppThemeHalloween2026BuildBackgroundModule = require(BuildExperience.Flags.FFlagAppThemeHalloween2026BuildBackground)
+local UseThemeBackgroundFunction = require(Parent.ThemeBackground).useThemeBackground
 local HeaderBar = require(Parent.UIBlox).App.Bar.HeaderBar
 local Button = FoundationModule.Button
 local IconButton = FoundationModule.IconButton
@@ -100,8 +102,9 @@ local function HeaderCenter(p1)
 end
 
 return function(Frame)
-	-- upvalues: UseLocalizationFunction (copy), LocalizationStringsModule (copy), FlyoutSidePanelIXP (copy), DisplayModule (copy), SignalsReactModule (copy), GetSearchQueryStoreModule (copy), ReactModule (copy), HeaderCenter (copy), View (copy), IconButton (copy), IconName (copy), InputSize (copy), ButtonVariant (copy), renderEmptyRight (copy), HeaderBar (copy), renderFlyoutLeftHeader (copy)
+	-- upvalues: UseLocalizationFunction (copy), LocalizationStringsModule (copy), FFlagAppThemeHalloween2026BuildBackgroundModule (copy), UseThemeBackgroundFunction (copy), FlyoutSidePanelIXP (copy), DisplayModule (copy), SignalsReactModule (copy), GetSearchQueryStoreModule (copy), ReactModule (copy), HeaderCenter (copy), View (copy), IconButton (copy), IconName (copy), InputSize (copy), ButtonVariant (copy), renderEmptyRight (copy), HeaderBar (copy), renderFlyoutLeftHeader (copy)
 	local Title = UseLocalizationFunction({ title = LocalizationStringsModule.BUILD_HEADER_TITLE }).title
+	local HasUseThemeBackgroundResult: boolean = if FFlagAppThemeHalloween2026BuildBackgroundModule then UseThemeBackgroundFunction() ~= nil else false
 	local IsFlyoutSidePanelEnabled = FlyoutSidePanelIXP.isFlyoutSidePanelEnabled()
 	local HasOnOpenSearch = false
 	local SearchQueryStore = nil
@@ -147,7 +150,8 @@ return function(Frame)
 						variant = ButtonVariant.Utility
 					}) else nil
 				})
-			end else renderEmptyRight
+			end else renderEmptyRight,
+			backgroundTransparency = if HasUseThemeBackgroundResult then 1 else nil
 		})
 	})
 end

@@ -1,6 +1,9 @@
-﻿local Parent = script:FindFirstAncestor("Moments").Parent
+﻿local Moments = script:FindFirstAncestor("Moments")
+local Parent = Moments.Parent
 local FoundationModule = require(Parent.Foundation)
 local ReactModule = require(Parent.React)
+local FFlagMomentsFollowingFeedModule = require(Moments.Flags.FFlagMomentsFollowingFeed)
+local UseTrendingFeedLabelModule = require(Moments.Hooks.useTrendingFeedLabel)
 local ThreeDotsHorizontal = require(Parent.BuilderIcons).Icon.ThreeDotsHorizontal
 local IconButton = FoundationModule.IconButton
 local Menu = FoundationModule.Menu
@@ -14,8 +17,9 @@ local config = {
 }
 
 return function(p1)
-	-- upvalues: UseLocalizationFunction (copy), config (copy), UseToggleStateFunction (copy), ReactModule (copy), IconButton (copy), ThreeDotsHorizontal (copy), ButtonVariant (copy), InputSize (copy), Menu (copy), FoundationModule (copy)
+	-- upvalues: UseLocalizationFunction (copy), config (copy), FFlagMomentsFollowingFeedModule (copy), UseTrendingFeedLabelModule (copy), UseToggleStateFunction (copy), ReactModule (copy), IconButton (copy), ThreeDotsHorizontal (copy), ButtonVariant (copy), InputSize (copy), Menu (copy), FoundationModule (copy)
 	local UseLocalizationResult = UseLocalizationFunction(config)
+	local UseTrendingFeedLabelModuleResult = if FFlagMomentsFollowingFeedModule then UseTrendingFeedLabelModule() else UseLocalizationResult.trending
 	local UseToggleStateResult = UseToggleStateFunction()
 	local UseResult = ReactModule.useCallback(function()
 		-- upvalues: UseToggleStateResult (copy), p1 (copy)
@@ -32,11 +36,11 @@ return function(p1)
 		align = FoundationModule.Enums.PopoverAlign.End,
 		isOpen = UseToggleStateResult.enabled,
 		items = ReactModule.useMemo(function()
-			-- upvalues: UseLocalizationResult (copy), UseResult (copy), UseResult1 (copy)
+			-- upvalues: UseTrendingFeedLabelModuleResult (ref), UseResult (copy), UseLocalizationResult (copy), UseResult1 (copy)
 			return {
 				{
 					id = "trending",
-					text = UseLocalizationResult.trending,
+					text = UseTrendingFeedLabelModuleResult,
 					onActivated = UseResult
 				},
 				{
@@ -45,7 +49,12 @@ return function(p1)
 					onActivated = UseResult1
 				}
 			}
-		end, { UseResult, UseResult1, UseLocalizationResult }),
+		end, {
+			UseResult,
+			UseResult1,
+			UseLocalizationResult,
+			UseTrendingFeedLabelModuleResult
+		}),
 		LayoutOrder = p1.layoutOrder,
 		onPressedOutside = UseToggleStateResult.disable,
 		side = FoundationModule.Enums.PopoverSide.Bottom

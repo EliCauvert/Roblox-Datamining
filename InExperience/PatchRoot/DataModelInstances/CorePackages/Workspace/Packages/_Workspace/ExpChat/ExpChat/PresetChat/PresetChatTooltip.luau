@@ -9,13 +9,14 @@ local PopoverAlign = FoundationModule.Enums.PopoverAlign
 local ExpChatSharedModule = require(Parent.ExpChatShared)
 local FFlagExpChatPresetChatEnabled = ExpChatSharedModule.Flags.FFlagExpChatPresetChatEnabled
 local FFlagExpChatUseUnifiedTooltipStore = ExpChatSharedModule.Flags.FFlagExpChatUseUnifiedTooltipStore
+local FFlagExpChatPresetFullWidthButtonFixesModule = require(ExpChat.Flags.FFlagExpChatPresetFullWidthButtonFixes)
 local ConstantsModule = require(ExpChat.PresetChat.Constants)
 local LocalizationModule = require(ExpChat.Localization)
 local GetChatTooltipStoreModule = require(ExpChat.Stores.GetChatTooltipStore)
 local UseChatTooltipLifecycleModule = require(ExpChat.ChatWindow.UI.useChatTooltipLifecycle)
 
 return ReactModule.memo(function(p1)
-	-- upvalues: FFlagExpChatPresetChatEnabled (copy), FFlagExpChatUseUnifiedTooltipStore (copy), ReactModule (copy), GetChatTooltipStoreModule (copy), SignalsReactModule (copy), UseChatTooltipLifecycleModule (copy), LocalizationModule (copy), ExpChatSharedModule (copy), ConstantsModule (copy), Coachmark (copy), PopoverSide (copy), PopoverAlign (copy)
+	-- upvalues: FFlagExpChatPresetChatEnabled (copy), FFlagExpChatUseUnifiedTooltipStore (copy), ReactModule (copy), GetChatTooltipStoreModule (copy), SignalsReactModule (copy), UseChatTooltipLifecycleModule (copy), LocalizationModule (copy), ExpChatSharedModule (copy), ConstantsModule (copy), FFlagExpChatPresetFullWidthButtonFixesModule (copy), Coachmark (copy), PopoverSide (copy), PopoverAlign (copy)
 	if FFlagExpChatPresetChatEnabled and FFlagExpChatUseUnifiedTooltipStore then
 		local UseSignalStateResult = SignalsReactModule.useSignalState(GetChatTooltipStoreModule(false).getShouldShow("PresetChatTooltip"))
 		local UseChatTooltipLifecycleModuleResult = UseChatTooltipLifecycleModule({
@@ -44,7 +45,15 @@ return ReactModule.memo(function(p1)
 			end
 		end, { UseSignalStateResult })
 		
-		return if UseSignalStateResult then ReactModule.createElement(Coachmark, {
+		return if UseSignalStateResult then if FFlagExpChatPresetFullWidthButtonFixesModule and p1.anchorRef ~= nil then ReactModule.createElement(ReactModule.Fragment, nil, p1.children, ReactModule.createElement(Coachmark, {
+			title = UseLocalizationResult.headerText,
+			text = UseLocalizationResult.bodyText,
+			isOpen = UseChatTooltipLifecycleModuleResult.isActive,
+			onClose = UseResult,
+			side = PopoverSide.Right,
+			align = PopoverAlign.Center,
+			anchorRef = p1.anchorRef
+		})) else ReactModule.createElement(Coachmark, {
 			title = UseLocalizationResult.headerText,
 			text = UseLocalizationResult.bodyText,
 			isOpen = UseChatTooltipLifecycleModuleResult.isActive,

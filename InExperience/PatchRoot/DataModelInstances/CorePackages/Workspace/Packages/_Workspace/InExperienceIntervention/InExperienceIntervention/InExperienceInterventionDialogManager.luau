@@ -10,7 +10,6 @@ local ChatTimeoutCustomDialogV2Module = require(InExperienceIntervention.Compone
 local DictationSafetyReminderToastModule = require(InExperienceIntervention.Components.DictationSafetyReminderToast)
 local PartyChatNudgeCustomDialog = require(Parent.InterventionShared).Components.PartyChatNudgeCustomDialog
 local PartyChatTimeoutCustomDialog = require(Parent.InterventionShared).Components.PartyChatTimeoutCustomDialog
-local TemporaryAvatarKickWarningDialogModule = require(Parent.InterventionShared.TemporaryAvatarKickWarningDialog)
 local UniversalFeatureRestrictionDialog = require(Parent.InterventionShared).Components.UniversalFeatureRestrictionDialog
 local CursorProvider = require(Parent.UIBlox).App.SelectionCursor.CursorProvider
 local ReactFocusNavigationModule = require(Parent.ReactFocusNavigation)
@@ -20,7 +19,6 @@ local Constants = require(Parent.InterventionShared).Utils.Constants
 local _ = require(InExperienceIntervention.Utils.Types)
 local ReportChatSuspensionDialogVisibilityModule = require(InExperienceIntervention.Utils.reportChatSuspensionDialogVisibility)
 local GetFFlagGameJoinTimeoutChatAttemptEnabledFunction = require(Parent.SharedFlags).GetFFlagGameJoinTimeoutChatAttemptEnabled
-local FFlagTemporaryAvatarKickWarningDialogModule = require(Parent.InterventionShared.FFlagTemporaryAvatarKickWarningDialog)
 local FFlagExpChatDictationContinuousSafetyReminder = require(Parent.SharedFlags).FFlagExpChatDictationContinuousSafetyReminder
 local MemoResult = ReactModule.memo(function(p1)
 	-- upvalues: ReactModule (copy), ReactFocusNavigationModule (copy), NewResult (copy), Provider (copy), CursorProvider (copy)
@@ -32,7 +30,7 @@ local MemoResult = ReactModule.memo(function(p1)
 end)
 
 function InExperienceInterventionDialogManager(p1)
-	-- upvalues: ReactModule (copy), Constants (copy), FFlagTemporaryAvatarKickWarningDialogModule (copy), FFlagExpChatDictationContinuousSafetyReminder (copy), ReportChatSuspensionDialogVisibilityModule (copy), ChatNudgeCustomDialogModule (copy), ChatTimeoutCustomDialogModule (copy), ChatNudgeToastModule (copy), ChatTimeoutToastModule (copy), GetFFlagGameJoinTimeoutChatAttemptEnabledFunction (copy), MemoResult (copy), PartyChatNudgeCustomDialog (copy), PartyChatTimeoutCustomDialog (copy), ChatTimeoutCustomDialogV2Module (copy), ChatNudgeCustomDialogV2Module (copy), UniversalFeatureRestrictionDialog (copy), DictationSafetyReminderToastModule (copy), TemporaryAvatarKickWarningDialogModule (copy)
+	-- upvalues: ReactModule (copy), Constants (copy), FFlagExpChatDictationContinuousSafetyReminder (copy), ReportChatSuspensionDialogVisibilityModule (copy), ChatNudgeCustomDialogModule (copy), ChatTimeoutCustomDialogModule (copy), ChatNudgeToastModule (copy), ChatTimeoutToastModule (copy), GetFFlagGameJoinTimeoutChatAttemptEnabledFunction (copy), MemoResult (copy), PartyChatNudgeCustomDialog (copy), PartyChatTimeoutCustomDialog (copy), ChatTimeoutCustomDialogV2Module (copy), ChatNudgeCustomDialogV2Module (copy), UniversalFeatureRestrictionDialog (copy), DictationSafetyReminderToastModule (copy)
 	local UseResult = ReactModule.useCallback(function()
 		-- upvalues: p1 (copy), Constants (upval)
 		p1.uiStateDispatch({
@@ -45,7 +43,6 @@ function InExperienceInterventionDialogManager(p1)
 	local TreatmentType = UiState.treatmentType
 	local Detail = UiState.detail
 	local Options = if Detail then Detail.options else nil
-	local Extras = if FFlagTemporaryAvatarKickWarningDialogModule and Detail then Detail.extras else nil
 	local IsShown = (not FFlagExpChatDictationContinuousSafetyReminder or TreatmentType ~= Constants.TreatmentType.DictationSafetyReminderToast) and UiState.isShown
 	ReactModule.useEffect(function()
 		-- upvalues: ReportChatSuspensionDialogVisibilityModule (upval), IsShown (ref)
@@ -117,7 +114,7 @@ function InExperienceInterventionDialogManager(p1)
 			})
 		elseif TreatmentType == Constants.TreatmentType.UniversalFeatureRestriction and Detail.moderationDetail then
 			return ReactModule.createElement(MemoResult, {}, {
-				ReactModule.createElement(UniversalFeatureRestrictionDialog, {
+				UniversalFeatureRestrictionDialog = ReactModule.createElement(UniversalFeatureRestrictionDialog, {
 					onDismiss = UseResult,
 					moderationDetail = Detail.moderationDetail,
 					abuseVector = Detail.abuseVector,
@@ -127,20 +124,13 @@ function InExperienceInterventionDialogManager(p1)
 					onAppeal = Options and Options.onAppeal,
 					onShownCallback = Options and Options.onShown,
 					onAcknowledgementSuccess = Options and Options.onAcknowledgementSuccess,
+					onAcknowledgementFailure = Options and Options.onAcknowledgementFailure,
+					onClosedCallback = Detail.onClosed,
 					analyticsEventId = Options and Options.analyticsEventId
 				})
 			})
 		elseif FFlagExpChatDictationContinuousSafetyReminder and TreatmentType == Constants.TreatmentType.DictationSafetyReminderToast then
 			return ReactModule.createElement(DictationSafetyReminderToastModule)
-		elseif FFlagTemporaryAvatarKickWarningDialogModule and TreatmentType == Constants.TreatmentType.TemporaryAvatarKickWarning then
-			return ReactModule.createElement(MemoResult, {}, {
-				ReactModule.createElement(TemporaryAvatarKickWarningDialogModule, {
-					avatarEntityId = Extras and Extras.avatarEntityId,
-					violationType = Extras and Extras.violationType,
-					placeId = Extras and Extras.placeId,
-					onDismiss = UseResult
-				})
-			})
 		end
 	end
 	return nil

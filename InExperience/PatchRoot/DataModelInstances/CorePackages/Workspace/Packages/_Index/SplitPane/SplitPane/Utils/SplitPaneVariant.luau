@@ -6,6 +6,7 @@ local FFlagSplitPaneExperimentVariants = SharedFlagsModule.FFlagSplitPaneExperim
 local FFlagSplitPaneVariantDefaultCollapsed = SharedFlagsModule.FFlagSplitPaneVariantDefaultCollapsed
 local FFlagSplitPaneVariantAvatarOnHomeOnly = SharedFlagsModule.FFlagSplitPaneVariantAvatarOnHomeOnly
 local FFlagSplitPaneVariantCollapsedAutoOpen = SharedFlagsModule.FFlagSplitPaneVariantCollapsedAutoOpen
+local FFlagSplitPaneAvatarOnlyAlwaysExpanded = SharedFlagsModule.FFlagSplitPaneAvatarOnlyAlwaysExpanded
 local config = {
 	name = "DefaultOpen",
 	defaultOpen = true,
@@ -78,6 +79,14 @@ return {
 			config4 = if FFlagSplitPaneVariantCollapsedAutoOpen then config3 elseif FFlagSplitPaneVariantAvatarOnHomeOnly then config2 elseif FFlagSplitPaneVariantDefaultCollapsed then config1 else config
 		end
 		return config4.autoExpandOnSupportOpen
+	end,
+	isSupportPaneAlwaysExpanded = function(): boolean
+		-- upvalues: Flag (ref), config (copy), FFlagSplitPaneVariantCollapsedAutoOpen (copy), config3 (copy), FFlagSplitPaneVariantAvatarOnHomeOnly (copy), config2 (copy), FFlagSplitPaneVariantDefaultCollapsed (copy), config1 (copy), config4 (ref)
+		if not Flag then
+			Flag = true
+			config4 = if FFlagSplitPaneVariantCollapsedAutoOpen then config3 elseif FFlagSplitPaneVariantAvatarOnHomeOnly then config2 elseif FFlagSplitPaneVariantDefaultCollapsed then config1 else config
+		end
+		return not config4.supportSlotEligible
 	end,
 	shouldCollapseOnSupportClose = function(): boolean
 		-- upvalues: Flag (ref), config (copy), FFlagSplitPaneVariantCollapsedAutoOpen (copy), config3 (copy), FFlagSplitPaneVariantAvatarOnHomeOnly (copy), config2 (copy), FFlagSplitPaneVariantDefaultCollapsed (copy), config1 (copy), config4 (ref)
@@ -198,6 +207,32 @@ return {
 		}
 	end,
 	getExperienceDetailSplitPaneEligibility = function()
+		-- upvalues: FFlagSplitPaneExperimentVariants (copy), FFlagSplitPaneAvatarOnlyAlwaysExpanded (copy), Flag (ref), config (copy), FFlagSplitPaneVariantCollapsedAutoOpen (copy), config3 (copy), FFlagSplitPaneVariantAvatarOnHomeOnly (copy), config2 (copy), FFlagSplitPaneVariantDefaultCollapsed (copy), config1 (copy), config4 (ref), SplitPaneSlot (copy)
+		if FFlagSplitPaneExperimentVariants and not FFlagSplitPaneAvatarOnlyAlwaysExpanded then
+			if not Flag then
+				Flag = true
+				config4 = if FFlagSplitPaneVariantCollapsedAutoOpen then config3 elseif FFlagSplitPaneVariantAvatarOnHomeOnly then config2 elseif FFlagSplitPaneVariantDefaultCollapsed then config1 else config
+			end
+			if not config4.supportSlotEligible then
+				return nil
+			end
+		end
+		return SplitPaneSlot.Support
+	end,
+	getDevStoreSeeAllSplitPaneEligibility = function()
+		-- upvalues: FFlagSplitPaneExperimentVariants (copy), Flag (ref), config (copy), FFlagSplitPaneVariantCollapsedAutoOpen (copy), config3 (copy), FFlagSplitPaneVariantAvatarOnHomeOnly (copy), config2 (copy), FFlagSplitPaneVariantDefaultCollapsed (copy), config1 (copy), config4 (ref), SplitPaneSlot (copy)
+		if FFlagSplitPaneExperimentVariants then
+			if not Flag then
+				Flag = true
+				config4 = if FFlagSplitPaneVariantCollapsedAutoOpen then config3 elseif FFlagSplitPaneVariantAvatarOnHomeOnly then config2 elseif FFlagSplitPaneVariantDefaultCollapsed then config1 else config
+			end
+			if not config4.supportSlotEligible then
+				return nil
+			end
+		end
+		return SplitPaneSlot.Support
+	end,
+	getBadgesSeeAllSplitPaneEligibility = function()
 		-- upvalues: FFlagSplitPaneExperimentVariants (copy), Flag (ref), config (copy), FFlagSplitPaneVariantCollapsedAutoOpen (copy), config3 (copy), FFlagSplitPaneVariantAvatarOnHomeOnly (copy), config2 (copy), FFlagSplitPaneVariantDefaultCollapsed (copy), config1 (copy), config4 (ref), SplitPaneSlot (copy)
 		if FFlagSplitPaneExperimentVariants then
 			if not Flag then

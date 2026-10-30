@@ -764,9 +764,9 @@ function startRenderStepped(Player)
 								local Negated = -(VectorDelta.Z + 1)
 								Camera.CFrame = Camera.CFrame:Lerp(CFrame.lookAt(CFrame.fromEulerAnglesYXZ(Rx, Ry, Rz) * (Position + Vector3.new(0, 0.105, math.floor((Negated + (if Position2.Z > 0 then math.clamp(0.5 - Position2.Z * 3, -0.5, 0.5) else 0) * Negated) * 100) / 100)), Position1), 0.5)
 							elseif CF then
-								local _Vector3_1 = Vector3.new(0, 0.105, -(VectorDelta.Z + 1))
+								local _Vector3 = Vector3.new(0, 0.105, -(VectorDelta.Z + 1))
 								local Rx1, Ry1, Rz1 = CF:ToEulerAnglesXYZ()
-								Camera.CFrame = CFrame.lookAt(CFrame.Angles(-Rx1 * 0.5, -Ry1 * 0.5, -Rz1 * 0.5) * (Position + _Vector3_1), Position1)
+								Camera.CFrame = CFrame.lookAt(CFrame.Angles(-Rx1 * 0.5, -Ry1 * 0.5, -Rz1 * 0.5) * (Position + _Vector3), Position1)
 							end
 						else
 							local _Vector3 = Vector3.new(0, Y * 0.25 - 1.25, -(VectorDelta.Z + 1) + 0.125)

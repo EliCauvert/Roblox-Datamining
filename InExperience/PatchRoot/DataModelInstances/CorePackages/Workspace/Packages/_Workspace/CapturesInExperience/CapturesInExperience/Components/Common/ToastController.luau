@@ -5,11 +5,12 @@ local FoundationModule = require(Parent.Foundation)
 local Toast = FoundationModule.Toast
 local View = FoundationModule.View
 local ButtonVariant = FoundationModule.Enums.ButtonVariant
+local ToastWithIconActionModule = require(script.Parent.ToastWithIconAction)
 local config = { dampingRatio = 1, frequency = 3 }
 local _UDim = UDim.new(0, 296)
 
 return function(p1)
-	-- upvalues: ReactModule (copy), ReactOtterModule (copy), config (copy), ButtonVariant (copy), View (copy), Toast (copy), _UDim (copy)
+	-- upvalues: ReactModule (copy), ReactOtterModule (copy), config (copy), ButtonVariant (copy), View (copy), ToastWithIconActionModule (copy), _UDim (copy), Toast (copy)
 	local UseStateResult, UseStateResult2 = ReactModule.useState(false)
 	local UseAnimatedBindingResult, UseAnimatedBindingResult2 = ReactOtterModule.useAnimatedBinding(-200, (ReactModule.useCallback(function()
 		-- upvalues: UseStateResult (copy), p1 (copy)
@@ -50,6 +51,23 @@ return function(p1)
 		end
 	end, { p1.show, p1.duration, UseResult })
 	local OnActionFunction = p1.onAction
+	local UseMemoResult = ReactModule.useMemo(function()
+		-- upvalues: p1 (copy), OnActionFunction (copy), UseResult (copy), ButtonVariant (upval)
+		return if p1.actionText then {
+			{
+				text = p1.actionText,
+				onActivated = function()
+					-- upvalues: OnActionFunction (upval), UseResult (upval)
+					if OnActionFunction then
+						OnActionFunction()
+					end
+					UseResult()
+				end,
+				variant = ButtonVariant.Emphasis
+			}
+		} else nil
+	end, { p1.actionText, OnActionFunction, UseResult })
+	local IconAction = p1.iconAction
 	
 	return ReactModule.createElement(View, {
 		tag = "size-full-0 auto-y col align-x-center anchor-top-center",
@@ -57,26 +75,24 @@ return function(p1)
 			return UDim2.new(0.5, 0, 0, YOffset)
 		end)
 	}, {
-		Toast = ReactModule.createElement(Toast, {
+		Toast = if IconAction and UseMemoResult then ReactModule.createElement(ToastWithIconActionModule, {
 			title = p1.title,
 			text = p1.text,
 			icon = p1.icon,
-			actions = ReactModule.useMemo(function()
-				-- upvalues: p1 (copy), OnActionFunction (copy), UseResult (copy), ButtonVariant (upval)
-				return if p1.actionText then {
-					{
-						text = p1.actionText,
-						onActivated = function()
-							-- upvalues: OnActionFunction (upval), UseResult (upval)
-							if OnActionFunction then
-								OnActionFunction()
-							end
-							UseResult()
-						end,
-						variant = ButtonVariant.Emphasis
-					}
-				} else nil
-			end, { p1.actionText, OnActionFunction, UseResult }),
+			actionText = UseMemoResult[1].text,
+			onAction = UseMemoResult[1].onActivated,
+			iconActionIcon = IconAction.icon,
+			onIconAction = function()
+				-- upvalues: IconAction (copy), UseResult (copy)
+				IconAction.onActivated()
+				UseResult()
+			end,
+			width = _UDim
+		}) else ReactModule.createElement(Toast, {
+			title = p1.title,
+			text = p1.text,
+			icon = p1.icon,
+			actions = UseMemoResult,
 			width = _UDim
 		})
 	})

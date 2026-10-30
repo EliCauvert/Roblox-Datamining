@@ -9,6 +9,7 @@ local FFlagMomentsRenderAvatarPostsInFeed = SharedFlagsModule.FFlagMomentsRender
 local SignalsModule = require(Parent.Signals)
 local GetReactionsStoreModule = require(Moments.Stores.GetReactionsStore)
 local GetShareCountsStoreModule = require(Moments.Stores.GetShareCountsStore)
+local _ = require(Moments.Analytics.RecommendationContentType)
 local _ = require(Moments.Stores.GetReactionsStore.createReactionsStore)
 local _ = require(Moments.Stores.GetShareCountsStore.createShareCountsStore)
 local ReactionActionModule = require(Moments.Enums.ReactionAction)

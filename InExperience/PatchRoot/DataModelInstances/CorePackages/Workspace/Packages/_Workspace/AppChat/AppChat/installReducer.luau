@@ -5,14 +5,15 @@ local FFlagAppChatPresenceStoreMigrationModule = require(AppChat.Flags.FFlagAppC
 local FFlagAppChatRemoveAliasesSliceModule = require(AppChat.Flags.FFlagAppChatRemoveAliasesSlice)
 local FFlagAppChatRemovePlaceInfosAsyncModule = require(AppChat.Flags.FFlagAppChatRemovePlaceInfosAsync)
 local FFlagAppChatUseDataHydrationForChatTimeoutsModule = require(AppChat.Flags.FFlagAppChatUseDataHydrationForChatTimeouts)
+local FFlagAppChatUseDataHydrationForPlaceInfosModule = require(AppChat.Flags.FFlagAppChatUseDataHydrationForPlaceInfos)
 local FFlagAppChatUseSignalsForAppLoadedModule = require(AppChat.Flags.FFlagAppChatUseSignalsForAppLoaded)
 local FFlagAppChatUseSignalsForExternalNavigationRequestModule = require(AppChat.Flags.FFlagAppChatUseSignalsForExternalNavigationRequest)
 local FFlagAppChatUseSignalsForLastEntryPointModule = require(AppChat.Flags.FFlagAppChatUseSignalsForLastEntryPoint)
 
 return function()
-	-- upvalues: RoduxModule (copy), Parent (copy), FFlagAppChatRemovePlaceInfosAsyncModule (copy), FFlagAppChatRemoveAliasesSliceModule (copy), FFlagAppChatUseSignalsForAppLoadedModule (copy), AppChat (copy), FFlagAppChatUseDataHydrationForChatTimeoutsModule (copy), FFlagAppChatUseSignalsForExternalNavigationRequestModule (copy), FFlagAppChatUseSignalsForLastEntryPointModule (copy), FFlagAppChatPresenceStoreMigrationModule (copy)
+	-- upvalues: RoduxModule (copy), FFlagAppChatUseDataHydrationForPlaceInfosModule (copy), Parent (copy), FFlagAppChatRemovePlaceInfosAsyncModule (copy), FFlagAppChatRemoveAliasesSliceModule (copy), FFlagAppChatUseSignalsForAppLoadedModule (copy), AppChat (copy), FFlagAppChatUseDataHydrationForChatTimeoutsModule (copy), FFlagAppChatUseSignalsForExternalNavigationRequestModule (copy), FFlagAppChatUseSignalsForLastEntryPointModule (copy), FFlagAppChatPresenceStoreMigrationModule (copy)
 	return RoduxModule.combineReducers({
-		PlaceInfos = require(Parent.PlaceInfoRodux).Reducers.PlaceInfosReducer,
+		PlaceInfos = if FFlagAppChatUseDataHydrationForPlaceInfosModule then nil else require(Parent.PlaceInfoRodux).Reducers.PlaceInfosReducer,
 		PlaceInfosAsync = if FFlagAppChatRemovePlaceInfosAsyncModule then nil else require(Parent.PlaceInfoRodux).Reducers.PlaceInfosAsyncReducer,
 		Aliases = if FFlagAppChatRemoveAliasesSliceModule then nil else require(script.Aliases),
 		AppLoaded = if FFlagAppChatUseSignalsForAppLoadedModule then nil else require(AppChat.installReducer.AppLoaded),

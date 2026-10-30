@@ -1,5 +1,4 @@
-﻿local ReactionSizeModule = require(script.Parent.Enums.ReactionSize)
-local ReactionTypeModule = require(script.Parent.Enums.ReactionType)
+﻿local ReactionTypeModule = require(script.Parent.Enums.ReactionType)
 local config = {
 	[ReactionTypeModule.ThumbsUp] = "reactions/thumbsUp",
 	[ReactionTypeModule.Heart] = "reactions/heart",
@@ -21,13 +20,7 @@ local config1 = {
 local HasFoundIndex = table.find({ 6010436773, 6010515967 }, game.GameId) ~= nil
 
 return {
-	ReactionSize = ReactionSizeModule,
-	ReactionSizePixels = {
-		[ReactionSizeModule.XSmall] = 20,
-		[ReactionSizeModule.Small] = 24,
-		[ReactionSizeModule.Medium] = 32,
-		[ReactionSizeModule.Large] = 48
-	},
+	ReactionSize = require(script.Parent.Enums.ReactionSize),
 	PossibleReactions = {
 		ReactionTypeModule.ThumbsUp, ReactionTypeModule.Heart, ReactionTypeModule.Fire,
 		ReactionTypeModule.LaughJoy, ReactionTypeModule.Wow, ReactionTypeModule.Cry,

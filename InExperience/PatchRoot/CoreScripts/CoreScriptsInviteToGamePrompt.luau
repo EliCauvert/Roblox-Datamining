@@ -12,13 +12,10 @@ local GetFFlagEnableNewInviteMenuCustomizationModule = require(Modules.Flags.Get
 local GetFFlagEnableInvitePromptLoadingStateModule = require(Modules.Flags.GetFFlagEnableInvitePromptLoadingState)
 local GetFFlagLuaInExperienceCoreScriptsGameInviteUnificationModule = require(Modules.Flags.GetFFlagLuaInExperienceCoreScriptsGameInviteUnification)
 local LuaEnableGameInviteModalInvitePromptV2 = game:DefineFastFlag("LuaEnableGameInviteModalInvitePromptV2", false)
-local IXPServiceWrapper = require(CorePackages.Workspace.Packages.IxpServiceWrapper).IXPServiceWrapper
 local Diag = require(CorePackages.Workspace.Packages.Analytics).AnalyticsReporters.Diag
 local EventStream = require(CorePackages.Workspace.Packages.Analytics).AnalyticsReporters.EventStream
 local GameInviteAnalytics = require(CorePackages.Workspace.Packages.GameInvite).GameInviteAnalytics
-local GetFStringGameInviteMenuLayerFunction = require(CorePackages.Workspace.Packages.SharedFlags).GetFStringGameInviteMenuLayer
 local GameInviteModalManager = nil
-local GameInviteInviteExperimentVariant = nil
 local GetCustomizedInvitePromptTriggerFunction = nil
 local GameInviteConstants = nil
 local GameInviteAnalyticsManager = nil
@@ -26,7 +23,6 @@ local GameInviteAnalyticsManager = nil
 if GetFFlagLuaInExperienceCoreScriptsGameInviteUnificationModule() then
 	local GameInviteModule = require(CorePackages.Workspace.Packages.GameInvite)
 	GameInviteModalManager = GameInviteModule.GameInviteModalManager
-	GameInviteInviteExperimentVariant = GameInviteModule.GameInviteInviteExperimentVariant
 	GetCustomizedInvitePromptTriggerFunction = GameInviteModule.GetCustomizedInvitePromptTrigger
 	GameInviteConstants = GameInviteModule.GameInviteConstants
 	GameInviteAnalyticsManager = GameInviteModule.GameInviteAnalyticsManager
@@ -46,16 +42,8 @@ local function _(LocalPlayer)
 end
 
 SocialService.PromptInviteRequested:Connect(function(LocalPlayer, ExperienceInviteOptions)
-	-- upvalues: GetFStringGameInviteMenuLayerFunction (copy), GetFFlagLuaInExperienceCoreScriptsGameInviteUnificationModule (copy), LuaEnableGameInviteModalInvitePromptV2 (copy), IXPServiceWrapper (copy), GameInviteInviteExperimentVariant (ref), Players (copy), GetFFlagFixSettingshubImportOrderModule (copy), SettingsHubModule (ref), Settings (copy), SocialService (copy), GameInviteModalManager (ref), GetCustomizedInvitePromptTriggerFunction (ref), GameInviteConstants (ref), GameInviteAnalyticsManager (ref), GetFFlagEnableNewInviteMenuCustomizationModule (copy), GetFFlagEnableInvitePromptLoadingStateModule (copy), WithAnalyticsResult (copy), GetCustomizedInvitePromptParamsModule (copy), ApiGetCanSendAndCanCustomizeInvitesModule (copy)
-	local v1 = false
-	local FStringGameInviteMenuLayer = GetFStringGameInviteMenuLayerFunction()
-	
+	-- upvalues: GetFFlagLuaInExperienceCoreScriptsGameInviteUnificationModule (copy), LuaEnableGameInviteModalInvitePromptV2 (copy), Players (copy), GetFFlagFixSettingshubImportOrderModule (copy), SettingsHubModule (ref), Settings (copy), SocialService (copy), GameInviteModalManager (ref), GetCustomizedInvitePromptTriggerFunction (ref), GameInviteConstants (ref), GameInviteAnalyticsManager (ref), GetFFlagEnableNewInviteMenuCustomizationModule (copy), GetFFlagEnableInvitePromptLoadingStateModule (copy), WithAnalyticsResult (copy), GetCustomizedInvitePromptParamsModule (copy), ApiGetCanSendAndCanCustomizeInvitesModule (copy)
 	if GetFFlagLuaInExperienceCoreScriptsGameInviteUnificationModule() and LuaEnableGameInviteModalInvitePromptV2 then
-		local LayerData = IXPServiceWrapper:GetLayerData(FStringGameInviteMenuLayer)
-		IXPServiceWrapper:LogUserLayerExposure(FStringGameInviteMenuLayer)
-		v1 = (LayerData and (LayerData.inExperienceGameInviteUXRefresh2023 == GameInviteInviteExperimentVariant.UxRefresh or LayerData.inExperienceGameInviteUXRefresh2023 == GameInviteInviteExperimentVariant.InviteLimit)) == true
-	end
-	if v1 then
 		if LocalPlayer ~= Players.LocalPlayer then return end
 		if GetFFlagFixSettingshubImportOrderModule() then
 			SettingsHubModule = require(Settings.SettingsHub)

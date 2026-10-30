@@ -16,6 +16,7 @@ local FoundationModule = require(Parent.Foundation)
 local ViewRecyclerModule = require(Parent.ViewRecycler)
 local View = FoundationModule.View
 local UseTokensFunction = FoundationModule.Hooks.useTokens
+local FFlagAppChatConversationListViewRecyclerConsolePropsModule = require(AppChat.Flags.FFlagAppChatConversationListViewRecyclerConsoleProps)
 local FFlagAppChatPerfTrackingModule = require(AppChat.Flags.FFlagAppChatPerfTracking)
 local AppChatPerfTrackerModule = require(AppChat.Telemetry.AppChatPerfTracker)
 local CreateScrollIntervalTrackerModule = require(AppChat.Telemetry.createScrollIntervalTracker)
@@ -26,7 +27,6 @@ local ConversationListViewRecyclerItemsModule = require(script.Parent.Conversati
 local AppChatChatLandingInitialFetchLimit = game:DefineFastInt("AppChatChatLandingInitialFetchLimit", 5)
 local FFlagAppIaScrollAway = SharedFlagsModule.FFlagAppIaScrollAway
 local FFlagFriendsChatConversationListShowScrollBar = SharedFlagsModule.FFlagFriendsChatConversationListShowScrollBar
-local FFlagViewRecyclerReact06 = SharedFlagsModule.FFlagViewRecyclerReact06
 local AppChatChatLandingInitialFetchMinimumConversations = game:DefineFastInt("AppChatChatLandingInitialFetchMinimumConversations", 30)
 local FFlagAppChatRemoveConversationListDividerIxpEnabledModule = require(AppChat.Flags.FFlagAppChatRemoveConversationListDividerIxpEnabled)
 local FStringAppChatRemoveConversationListDividerIxpLayerModule = require(AppChat.Flags.FStringAppChatRemoveConversationListDividerIxpLayer)
@@ -73,10 +73,10 @@ local function buildConversationItems(ItemList, p1)
 	return Buffer
 end
 
-local function concatItems(p2, p3)
-	local Buffer = table.create(#p2 + #p3)
-	table.move(p2, 1, #p2, 1, Buffer)
-	table.move(p3, 1, #p3, #p2 + 1, Buffer)
+local function concatItems(UseMemoResult, p2)
+	local Buffer = table.create(#UseMemoResult + #p2)
+	table.move(UseMemoResult, 1, #UseMemoResult, 1, Buffer)
+	table.move(p2, 1, #p2, #UseMemoResult + 1, Buffer)
 	
 	return Buffer
 end
@@ -95,34 +95,6 @@ local function usePresentationSignal(UseMemoResult)
 	end, { UseStateResult, UseMemoResult })
 	
 	return UseStateResult.get
-end
-
-local _ = function(p2, p3)
-	local v1 = p2[p3]
-	
-	return if v1 == nil then nil else v1.id
-end
-
-local _ = function(p2, p3, p4)
-	-- upvalues: ViewRecyclerModule (copy)
-	return function(p5, p6)
-		-- upvalues: p4 (copy), p3 (copy), ViewRecyclerModule (upval), p2 (copy)
-		local Current = p4.current
-		local Current1 = p3.current
-		p3.current = Current
-		
-		if p6.scrollOffset > 33 then
-			return false
-		end
-		for _, change in p5.changes do
-			if change.type == ViewRecyclerModule.DataSourceChangeType.Insert and change.index == p2 then
-				return ViewRecyclerModule.AutoScrollTarget.Start
-			elseif change.type == ViewRecyclerModule.DataSourceChangeType.Reset and Current1 ~= nil and Current ~= nil and Current1 ~= Current then
-				return ViewRecyclerModule.AutoScrollTarget.Start
-			end
-		end
-		return false
-	end
 end
 
 local function usePagination(JoinResult, Entry)
@@ -194,9 +166,9 @@ local function useUnderfillPagination(Callback)
 		end
 	end, { Callback })
 	
-	return ReactModule.useCallback(function(p5)
+	return ReactModule.useCallback(function(p2)
 		-- upvalues: UseRefResult (copy), UseResult (copy)
-		UseRefResult.current = p5.Y
+		UseRefResult.current = p2.Y
 		UseResult()
 	end, { UseResult }), (ReactModule.useCallback(function(Current)
 		-- upvalues: UseRefResult1 (copy), UseResult (copy)
@@ -224,9 +196,9 @@ local function useScrollTracking(Callback1, Callback)
 		UseMemoResult:fire()
 		Callback1({ CanvasPosition = Vector2.new(0, Y) })
 	end, { UseMemoResult, Callback1, Callback })
-	local UseResult1 = ReactModule.useCallback(function(p5)
+	local UseResult1 = ReactModule.useCallback(function(p2)
 		-- upvalues: UseStateResult2 (copy)
-		UseStateResult2(p5)
+		UseStateResult2(p2)
 	end, {})
 	ReactModule.useEffect(function()
 		-- upvalues: UseStateResult (copy), FFlagAppChatPerfTrackingModule (upval), UseRefResult (copy), CreateScrollIntervalTrackerModule (upval), AppChatPerfTrackerModule (upval)
@@ -330,9 +302,58 @@ local function useListData(UseMemoResult, UseMemoResult1)
 	end, { UseMemoResult2 }), UseMemoResult2
 end
 
-return ReactModule.memo(function(p5)
-	-- upvalues: CryoModule (copy), config1 (copy), UseTokensFunction (copy), usePagination (copy), useUnderfillPagination (copy), useConversationListScrollbar (copy), useScrollTracking (copy), ReactModule (copy), AppChatPerfExperimentation (copy), PartyPageCarouselExperimentation (copy), SquadQuickStartExperimentation (copy), FFlagAppChatRemoveConversationListDividerIxpEnabledModule (copy), IXPService (copy), FStringAppChatRemoveConversationListDividerIxpLayerModule (copy), FocusNavigationService (copy), CoreGui (copy), AppPage (copy), Constants (copy), Enums (copy), usePresentationSignal (copy), FFlagAppIaScrollAway (copy), ConversationListViewRecyclerItemsModule (copy), buildConversationItems (copy), useListData (copy), useMeasuredLayout (copy), ViewRecyclerModule (copy), View (copy), AppChatPerfChatLandingPaginationOnStartReachedUnits (copy), AppChatPerfChatLandingPaginationOnEndReachedUnits (copy), FFlagViewRecyclerReact06 (copy)
-	local JoinResult = CryoModule.Dictionary.join(config1, p5)
+local _ = function(p2, p3, p4)
+	-- upvalues: ReactModule (copy), concatItems (copy), ConversationListViewRecyclerItemsModule (copy)
+	return ReactModule.useMemo(function()
+		-- upvalues: p3 (copy), p2 (copy), concatItems (upval), ConversationListViewRecyclerItemsModule (upval), p4 (copy)
+		return if p3 == nil or p3 <= 0 then p2 else concatItems(p2, {
+			ConversationListViewRecyclerItemsModule.canvasBottomPadding(p3, p4)
+		})
+	end, { p2, p3, p4 })
+end
+
+local function useLegacyListRef(ListRef, p2, Callback)
+	-- upvalues: ReactModule (copy)
+	local UseMemoResult = ReactModule.useMemo(function()
+		-- upvalues: p2 (copy)
+		return if p2 then { current = nil } else nil
+	end, { p2 })
+	ReactModule.useLayoutEffect(function()
+		-- upvalues: ListRef (copy), UseMemoResult (copy)
+		if ListRef == nil then
+			return nil
+		else
+			local Config = if UseMemoResult == nil then nil else { _nativeRef = UseMemoResult }
+			ListRef.current = {
+				_listRef = {
+					_scrollRef = {
+						getNativeScrollRef = function()
+							-- upvalues: Config (copy)
+							return Config
+						end
+					}
+				}
+			}
+			
+			return function()
+				-- upvalues: ListRef (upval)
+				ListRef.current = nil
+			end
+		end
+	end, { ListRef, UseMemoResult })
+	
+	return ReactModule.useCallback(function(Current)
+		-- upvalues: UseMemoResult (copy), Callback (copy)
+		if UseMemoResult ~= nil then
+			UseMemoResult.current = Current
+		end
+		Callback(Current)
+	end, { UseMemoResult, Callback })
+end
+
+return ReactModule.memo(function(p2)
+	-- upvalues: CryoModule (copy), config1 (copy), UseTokensFunction (copy), usePagination (copy), useUnderfillPagination (copy), useConversationListScrollbar (copy), useScrollTracking (copy), ReactModule (copy), AppChatPerfExperimentation (copy), PartyPageCarouselExperimentation (copy), SquadQuickStartExperimentation (copy), FFlagAppChatRemoveConversationListDividerIxpEnabledModule (copy), IXPService (copy), FStringAppChatRemoveConversationListDividerIxpLayerModule (copy), FocusNavigationService (copy), CoreGui (copy), AppPage (copy), Constants (copy), Enums (copy), usePresentationSignal (copy), FFlagAppIaScrollAway (copy), ConversationListViewRecyclerItemsModule (copy), buildConversationItems (copy), FFlagAppChatConversationListViewRecyclerConsolePropsModule (copy), concatItems (copy), useListData (copy), useLegacyListRef (copy), useMeasuredLayout (copy), View (copy), ViewRecyclerModule (copy), AppChatPerfChatLandingPaginationOnStartReachedUnits (copy), AppChatPerfChatLandingPaginationOnEndReachedUnits (copy)
+	local JoinResult = CryoModule.Dictionary.join(config1, p2)
 	local EntryHeight = JoinResult.entryHeight
 	local ItemList = JoinResult.itemList
 	local Size = JoinResult.Size
@@ -386,9 +407,9 @@ return ReactModule.memo(function(p5)
 			scrollViewPositionChangedSignal = UseScrollTrackingResult
 		}
 	end, { JoinResult.isInExperience, UseScrollTrackingResult })
-	local UseResult = ReactModule.useCallback(function(p6)
+	local UseResult = ReactModule.useCallback(function(p3)
 		-- upvalues: NavigateToConversationFromUserIdFunction (copy)
-		NavigateToConversationFromUserIdFunction(p6.id)
+		NavigateToConversationFromUserIdFunction(p3.id)
 	end, { NavigateToConversationFromUserIdFunction })
 	local UseMemoResult1 = ReactModule.useMemo(function()
 		-- upvalues: Enums (upval), NavigateToQuickStartSquadInviteFriends (copy), UseResult (copy)
@@ -452,38 +473,25 @@ return ReactModule.memo(function(p5)
 		JoinResult.canvasTopPadding, UseTokensResult.Color.None, UseMemoResult1,
 		UseMemoResult, EntryHeight
 	})
-	local UseListDataResult, UseListDataResult2 = useListData(UseMemoResult2, (ReactModule.useMemo(function()
+	local UseMemoResult3 = ReactModule.useMemo(function()
 		-- upvalues: buildConversationItems (upval), ItemList (copy), UsePresentationSignalResult (copy)
 		return (buildConversationItems(ItemList, UsePresentationSignalResult))
-	end, { ItemList, UsePresentationSignalResult })))
+	end, { ItemList, UsePresentationSignalResult })
+	local UseMemoResult4 = UseMemoResult3
+	
+	if FFlagAppChatConversationListViewRecyclerConsolePropsModule then
+		local CanvasBottomPadding = JoinResult.canvasBottomPadding
+		local None = UseTokensResult.Color.None
+		UseMemoResult4 = ReactModule.useMemo(function()
+			-- upvalues: CanvasBottomPadding (copy), UseMemoResult3 (copy), concatItems (upval), ConversationListViewRecyclerItemsModule (upval), None (copy)
+			return if CanvasBottomPadding == nil or CanvasBottomPadding <= 0 then UseMemoResult3 else concatItems(UseMemoResult3, {
+				ConversationListViewRecyclerItemsModule.canvasBottomPadding(CanvasBottomPadding, None)
+			})
+		end, { UseMemoResult3, CanvasBottomPadding, None })
+	end
+	local UseListDataResult, UseListDataResult2 = useListData(UseMemoResult2, UseMemoResult4)
+	local UseLegacyListRefResult = if FFlagAppChatConversationListViewRecyclerConsolePropsModule then useLegacyListRef(JoinResult.listRef, #UseListDataResult2 > 0, UseScrollTrackingResult2) else UseScrollTrackingResult2
 	local UseMeasuredLayoutResult = useMeasuredLayout(EntryHeight)
-	local Index = #UseMemoResult2 + 1
-	local UseListDataResultEntry = UseListDataResult2[Index]
-	local Id = if UseListDataResultEntry == nil then nil else UseListDataResultEntry.id
-	local UseRefResult = ReactModule.useRef(Id)
-	local UseRefResult1 = ReactModule.useRef(Id)
-	UseRefResult1.current = Id
-	local UseMemoResult3 = ReactModule.useMemo(function()
-		-- upvalues: Index (copy), UseRefResult (copy), UseRefResult1 (copy), ViewRecyclerModule (upval)
-		return function(p6, p7)
-			-- upvalues: UseRefResult1 (copy), UseRefResult (copy), ViewRecyclerModule (upval), Index (copy)
-			local Current = UseRefResult1.current
-			local Current1 = UseRefResult.current
-			UseRefResult.current = Current
-			
-			if p7.scrollOffset > 33 then
-				return false
-			end
-			for _, change in p6.changes do
-				if change.type == ViewRecyclerModule.DataSourceChangeType.Insert and change.index == Index then
-					return ViewRecyclerModule.AutoScrollTarget.Start
-				elseif change.type == ViewRecyclerModule.DataSourceChangeType.Reset and Current1 ~= nil and Current ~= nil and Current1 ~= Current then
-					return ViewRecyclerModule.AutoScrollTarget.Start
-				end
-			end
-			return false
-		end
-	end, { Index })
 	
 	return if #UseListDataResult2 == 0 then ReactModule.createElement(View, {
 		BorderSizePixel = 0,
@@ -498,11 +506,12 @@ return ReactModule.memo(function(p5)
 	}, {
 		List = ReactModule.createElement(ViewRecyclerModule.VirtualList, {
 			overscan = 2,
+			autoScrollThreshold = 33,
 			data = UseListDataResult,
 			layout = UseMeasuredLayoutResult,
 			axis = ViewRecyclerModule.Axis.Y,
 			itemType = ConversationListViewRecyclerItemsModule.getItemType,
-			scrollingFrameRef = UseScrollTrackingResult2,
+			scrollingFrameRef = UseLegacyListRefResult,
 			onViewportChanged = UseUnderfillPaginationResult,
 			onContentLengthChanged = UseUnderfillPaginationResult2,
 			onScrollOffsetChanged = UseScrollTrackingResult3,
@@ -510,15 +519,15 @@ return ReactModule.memo(function(p5)
 			onEndReached = if UsePaginationResult then UsePaginationResult4 else nil,
 			startReachedThreshold = EntryHeight * AppChatPerfChatLandingPaginationOnStartReachedUnits,
 			endReachedThreshold = EntryHeight * AppChatPerfChatLandingPaginationOnEndReachedUnits,
-			autoScrollOnChange = if FFlagViewRecyclerReact06 then ViewRecyclerModule.AutoScrollPolicy.WhenAtStart else UseMemoResult3,
-			autoScrollThreshold = if FFlagViewRecyclerReact06 then 33 else nil,
+			autoScrollOnChange = ViewRecyclerModule.AutoScrollPolicy.WhenAtStart,
 			scrollingFrameProps = {
 				Name = "RCTScrollView",
 				BackgroundTransparency = 1,
 				BorderSizePixel = 0,
 				ScrollBarThickness = UseConversationListScrollbarResult.ScrollBarThickness,
 				ScrollBarImageColor3 = UseConversationListScrollbarResult.ScrollBarImageColor3,
-				ScrollBarImageTransparency = UseConversationListScrollbarResult.ScrollBarImageTransparency
+				ScrollBarImageTransparency = UseConversationListScrollbarResult.ScrollBarImageTransparency,
+				ScrollingEnabled = if FFlagAppChatConversationListViewRecyclerConsolePropsModule then JoinResult.scrollEnabled ~= false else nil
 			}
 		})
 	})

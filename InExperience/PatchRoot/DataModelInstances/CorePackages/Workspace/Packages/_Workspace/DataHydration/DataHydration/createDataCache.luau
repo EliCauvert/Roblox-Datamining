@@ -12,12 +12,13 @@ local SharedFlagsModule = require(Parent.SharedFlags)
 local FFlagMigrateGameInfoToStore = SharedFlagsModule.FFlagMigrateGameInfoToStore
 local FFlagDataHydrationAccountReset = SharedFlagsModule.FFlagDataHydrationAccountReset
 local FFlagDataHydrationStaleTime = SharedFlagsModule.FFlagDataHydrationStaleTime
+local FFlagSduiReleaseSearchResultsPageState = SharedFlagsModule.FFlagSduiReleaseSearchResultsPageState
 local FFlagDataHydrationPreserveIncompleteCatalogResultsModule = require(DataHydration.Flags.FFlagDataHydrationPreserveIncompleteCatalogResults)
 local LuaAppDefaultDataTtlSec = game:DefineFastInt("LuaAppDefaultDataTtlSec", 3600)
 local LuaAppDefaultFailedDataTtlSec = game:DefineFastInt("LuaAppDefaultFailedDataTtlSec", 60)
 
 return function(p1, p2, p3)
-	-- upvalues: LuaAppDefaultDataTtlSec (copy), LuaAppDefaultFailedDataTtlSec (copy), FFlagDataHydrationPreserveIncompleteCatalogResultsModule (copy), SignalsModule (copy), DataStatus (copy), FFlagDataHydrationStaleTime (copy), SignalsExperimentalModule (copy), CryoModule (copy), FFlagMigrateGameInfoToStore (copy), FFlagDataHydrationAccountReset (copy), GetLocalPlayerUserIdFunction (copy), ObserveLocalPlayerUserIdFunction (copy), Players (copy)
+	-- upvalues: LuaAppDefaultDataTtlSec (copy), LuaAppDefaultFailedDataTtlSec (copy), FFlagDataHydrationPreserveIncompleteCatalogResultsModule (copy), SignalsModule (copy), DataStatus (copy), FFlagDataHydrationStaleTime (copy), SignalsExperimentalModule (copy), CryoModule (copy), FFlagMigrateGameInfoToStore (copy), FFlagDataHydrationAccountReset (copy), GetLocalPlayerUserIdFunction (copy), ObserveLocalPlayerUserIdFunction (copy), Players (copy), FFlagSduiReleaseSearchResultsPageState (copy)
 	local P0 = p1 or LuaAppDefaultDataTtlSec
 	local P1 = p2 or LuaAppDefaultFailedDataTtlSec
 	local SanitizeItem = if p3 then p3.sanitizeItem else nil
@@ -226,6 +227,15 @@ return function(p1, p2, p3)
 		t2 = {}
 	end
 	
+	local function removeItem(Key)
+		-- upvalues: t (ref), t3 (ref), t2 (ref), NewClockTimes (ref), ClockTimes (ref)
+		t[Key] = nil
+		t3[Key] = nil
+		t2[Key] = nil
+		NewClockTimes[Key] = nil
+		ClockTimes[Key] = nil
+	end
+	
 	local _ = function()
 		-- upvalues: SignalsExperimentalModule (upval), NewClockTimes (ref), FFlagDataHydrationStaleTime (upval), ClockTimes (ref), t (ref), t3 (ref), t2 (ref), DataStatus (upval)
 		SignalsExperimentalModule.batch(function()
@@ -332,6 +342,7 @@ return function(p1, p2, p3)
 		markItemsAsFailed = markItemsAsFailed,
 		resetFailedItem = resetFailedItem,
 		resetFailedItems = resetFailedItems,
+		removeItem = if FFlagSduiReleaseSearchResultsPageState then removeItem else nil,
 		clear = clear,
 		dispose = function()
 			-- upvalues: FFlagDataHydrationAccountReset (upval), Callback (ref), releaseEntries (copy), Connection (ref), SignalsExperimentalModule (upval), NewClockTimes (ref), FFlagDataHydrationStaleTime (upval), ClockTimes (ref), t (ref), t3 (ref), t2 (ref), DataStatus (upval)

@@ -156,7 +156,7 @@ return {
 			-- upvalues: UseRefResult5 (copy), MarqueeEligibilityModule (upval), UseRefResult2 (copy), publishIndex (copy), UseRefResult4 (copy), UseStateResult2_2 (copy)
 			local Current1 = UseRefResult5.current
 			
-			if Current1.hoverEnabled ~= true or Current1.reducedMotion == true then return end
+			if Current1.manualMarqueeEnabled ~= true or Current1.reducedMotion == true then return end
 			local Tiles = Current1.tiles or {}
 			local v1 = nil
 			
@@ -182,7 +182,7 @@ return {
 		end, {})
 		local UseResult2 = ReactModule.useCallback(function(Current)
 			-- upvalues: UseRefResult5 (copy), UseRefResult2 (copy), UseRefResult3 (copy), UseStateResult2 (copy)
-			if UseRefResult5.current.hoverEnabled ~= true then return end
+			if UseRefResult5.current.manualMarqueeEnabled ~= true then return end
 			if UseRefResult2.current ~= Current then return end
 			UseRefResult2.current = nil
 			
@@ -283,7 +283,7 @@ return {
 				-- upvalues: UseRefResult5 (upval), UseRefResult2 (upval), UseRefResult3 (upval), UseStateResult2 (upval), MarqueeEligibilityModule (upval), publishIndex (upval), UseRefResult1 (upval)
 				local Current = UseRefResult5.current
 				
-				if Current.hoverEnabled == true then
+				if Current.manualMarqueeEnabled == true then
 					local Tiles = Current.tiles or {}
 					local Current1 = UseRefResult2.current
 					local v4 = nil
@@ -596,8 +596,8 @@ return {
 		end, {
 			p2, p3, p4, p5, Current.tileCount, Current.containerWidth,
 			Current.tileWidth, Current.columnGap, Current.tiles, Current.direction,
-			Current.reducedMotion, Current.idleSequenceEnabled, Current.hoverEnabled,
-			Current.loopsRemainingStore
+			Current.reducedMotion, Current.idleSequenceEnabled,
+			Current.manualMarqueeEnabled, Current.loopsRemainingStore
 		})
 		ReactModule.useEffect(function()
 			-- upvalues: Current (copy), SignalsModule (upval), UseRefResult6 (copy)
@@ -628,8 +628,8 @@ return {
 			isPaused = UseStateResult1,
 			loopsRemainingRef = UseRefResult1,
 			onMarqueeFinished = UseResult,
-			onMarqueeHover = UseResult1,
-			onMarqueeHoverEnd = UseResult2,
+			onManualMarqueeStart = UseResult1,
+			onManualMarqueeEnd = UseResult2,
 			marqueeRunId = UseStateResult3
 		}
 	end

@@ -151,19 +151,23 @@ return function(p1)
 				
 				return
 			end
-			if Flag1 then return end
-			if Trigger == "gameJoin" or Trigger == "removedFromVoice" then
-				p1.onError("PlayerModeratedBadState")
+			if not Flag1 then
+				if Trigger == "gameJoin" or Trigger == "removedFromVoice" then
+					p1.onError("PlayerModeratedBadState")
+					
+					return
+				end
+				if DelayedThread then
+					task.cancel(DelayedThread)
+					DelayedThread = nil
+				end
+				Flag1 = false
+				Normal2("hiddenUntilRejoin")
 				
 				return
+			elseif Trigger == "micTap" or p2.micTapped then
+				p1.showUFRRestriction(Settings, "micTap", nil)
 			end
-			if DelayedThread then
-				task.cancel(DelayedThread)
-				DelayedThread = nil
-			end
-			Flag1 = false
-			Normal2("hiddenUntilRejoin")
-			
 			return
 		else
 			if Trigger ~= "expiry" and Trigger ~= "acknowledgement" then

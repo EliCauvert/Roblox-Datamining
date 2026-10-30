@@ -1,5 +1,6 @@
 ﻿local ShareSheet = script:FindFirstAncestor("ShareSheet")
 local Parent = ShareSheet.Parent
+local FoundationModule = require(Parent.Foundation)
 local ReactModule = require(Parent.React)
 local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
 local ShareSheetItemContainerModule = require(script.Parent.ShareSheetItemContainer)
@@ -9,11 +10,12 @@ local _ = require(ShareSheet.Recipients.RecipientSource)
 local ShareSheetTelemetryModule = require(ShareSheet.telemetry.ShareSheetTelemetry)
 local CopyLinkModule = require(ShareSheet.copyLink)
 local ShareLinkModule = require(ShareSheet.shareLink)
-local IconName = require(Parent.Foundation).Enums.IconName
+local IconName = FoundationModule.Enums.IconName
+local View = FoundationModule.View
 local FFlagShareSheetPeoplePickerEnabledModule = require(ShareSheet.Flags.FFlagShareSheetPeoplePickerEnabled)
 
-return function(Frame)
-	-- upvalues: ReactModule (copy), UseLocalizationFunction (copy), CopyLinkModule (copy), ShareSheetTelemetryModule (copy), FFlagShareSheetFriendsSort (copy), ShareLinkModule (copy), ShareSheetRowModule (copy), FFlagShareSheetPeoplePickerEnabledModule (copy), ShareSheetItemContainerModule (copy), IconName (copy)
+return function(Frame: Frame)
+	-- upvalues: ReactModule (copy), UseLocalizationFunction (copy), CopyLinkModule (copy), ShareSheetTelemetryModule (copy), FFlagShareSheetFriendsSort (copy), ShareLinkModule (copy), ShareSheetItemContainerModule (copy), IconName (copy), FFlagShareSheetPeoplePickerEnabledModule (copy), View (copy), ShareSheetRowModule (copy)
 	local UseStateResult, UseStateResult2 = ReactModule.useState(false)
 	local UseRefResult = ReactModule.useRef(nil)
 	local UseLocalizationResult = UseLocalizationFunction({
@@ -75,11 +77,7 @@ return function(Frame)
 			end
 		end
 	end, {})
-	
-	return ReactModule.createElement(ShareSheetRowModule, {
-		hasHorizontalPadding = if FFlagShareSheetPeoplePickerEnabledModule then Frame.hasHorizontalPadding else nil,
-		LayoutOrder = Frame.LayoutOrder
-	}, {
+	local config = {
 		CopyLink = ReactModule.createElement(ShareSheetItemContainerModule, {
 			LayoutOrder = 1,
 			icon = if UseStateResult then IconName.Check else IconName.ChainLink,
@@ -93,5 +91,10 @@ return function(Frame)
 			label = UseLocalizationResult.share,
 			onActivated = UseResult2
 		}) else nil
-	})
+	}
+	
+	return if FFlagShareSheetPeoplePickerEnabledModule then ReactModule.createElement(View, {
+		tag = "row gap-medium size-full-0 auto-y",
+		LayoutOrder = Frame.LayoutOrder
+	}, config) else ReactModule.createElement(ShareSheetRowModule, { LayoutOrder = Frame.LayoutOrder }, config)
 end

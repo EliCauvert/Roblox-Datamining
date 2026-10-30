@@ -6,6 +6,7 @@ local FeedContextModule = require(Moments.Components.Feed.FeedContext)
 local SignalActionTypeModule = require(Moments.Enums.SignalActionType)
 local MomentContextModule = require(Moments.Components.Feed.Items.Moment.MomentContext)
 local MakeRecommendationAttributionModule = require(Moments.Analytics.makeRecommendationAttribution)
+local FFlagMomentsRecommendationContentTypeModule = require(Moments.Flags.FFlagMomentsRecommendationContentType)
 local ShareMomentModule = require(script.Parent.shareMoment)
 local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
 local config = {
@@ -15,15 +16,16 @@ local config = {
 }
 
 return function(p1)
-	-- upvalues: MomentContextModule (copy), ReactModule (copy), FeedContextModule (copy), UseLocalizationFunction (copy), config (copy), MakeRecommendationAttributionModule (copy), SignalActionTypeModule (copy), ShareMomentModule (copy)
-	local MomentId = MomentContextModule.useMoment().momentId
+	-- upvalues: MomentContextModule (copy), ReactModule (copy), FeedContextModule (copy), UseLocalizationFunction (copy), config (copy), MakeRecommendationAttributionModule (copy), FFlagMomentsRecommendationContentTypeModule (copy), SignalActionTypeModule (copy), ShareMomentModule (copy)
+	local UseMomentResult = MomentContextModule.useMoment()
+	local MomentId = UseMomentResult.momentId
 	local UseContextResult = ReactModule.useContext(FeedContextModule.FeedContext)
 	local UseLocalizationResult = UseLocalizationFunction(config)
 	
 	return {
 		onShareActivated = ReactModule.useCallback(function()
-			-- upvalues: MakeRecommendationAttributionModule (upval), p1 (copy), UseContextResult (copy), SignalActionTypeModule (upval), ShareMomentModule (upval), MomentId (copy), UseLocalizationResult (copy)
-			local RecommendationAttributionModule = MakeRecommendationAttributionModule(if p1 then p1.recommendationMetadata else nil)
+			-- upvalues: MakeRecommendationAttributionModule (upval), p1 (copy), FFlagMomentsRecommendationContentTypeModule (upval), UseMomentResult (copy), UseContextResult (copy), SignalActionTypeModule (upval), ShareMomentModule (upval), MomentId (copy), UseLocalizationResult (copy)
+			local RecommendationAttributionModule = MakeRecommendationAttributionModule(if p1 then p1.recommendationMetadata else nil, nil, if FFlagMomentsRecommendationContentTypeModule then UseMomentResult.store.getData(false).contentType else nil)
 			ShareMomentModule({
 				momentId = MomentId,
 				feedItemId = if p1 and p1.recommendationMetadata then p1.recommendationMetadata.feedItemId else nil,
@@ -39,6 +41,12 @@ return function(p1)
 					linkCopyFailed = UseLocalizationResult.linkCopyFailed
 				}
 			})
-		end, { MomentId, p1, UseContextResult, UseLocalizationResult })
+		end, {
+			MomentId,
+			p1,
+			UseContextResult,
+			UseLocalizationResult,
+			if FFlagMomentsRecommendationContentTypeModule then UseMomentResult.store else false
+		})
 	}
 end

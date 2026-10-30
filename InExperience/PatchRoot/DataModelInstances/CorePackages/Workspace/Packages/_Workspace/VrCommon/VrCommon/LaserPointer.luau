@@ -8,7 +8,6 @@ local CreateFunction = require(VrCommon.Parent.AppCommonLib).Create
 local VRUtilModule = require(VrCommon.VRUtil)
 require(VrCommon.Panel3D)
 local EnableUserInputCFrameLogging = game:DefineFastFlag("EnableUserInputCFrameLogging", false)
-local VRLaserPointerRaycastChange = game:DefineFastFlag("VRLaserPointerRaycastChange", false)
 local RenderCaptureAlwaysOnTopGuiEngineFeature = game:GetEngineFeature("RenderCaptureAlwaysOnTopGui")
 local LocalPlayer = Players.LocalPlayer
 while not LocalPlayer do
@@ -131,13 +130,13 @@ local config1 = {
 }
 local _Vector2 = Vector2.new(0, 0)
 local _Vector2_1 = Vector2.new(1, 1)
-local LaserPointerModule = {}
-LaserPointerModule.__index = LaserPointerModule
-LaserPointerModule.Mode = Mode
+local Module = {}
+Module.__index = Module
+Module.Mode = Mode
 
-function LaserPointerModule:new()
-	-- upvalues: LaserPointerModule (copy), VRService (copy), CreateFunction (copy), CoreGui (copy), config (copy), _Vector2_1 (copy), _Vector2 (copy), RenderCaptureAlwaysOnTopGuiEngineFeature (copy), GuiService (copy)
-	local self = setmetatable({}, LaserPointerModule)
+function Module:new()
+	-- upvalues: Module (copy), VRService (copy), CreateFunction (copy), CoreGui (copy), config (copy), _Vector2_1 (copy), _Vector2 (copy), RenderCaptureAlwaysOnTopGuiEngineFeature (copy), GuiService (copy)
+	local self = setmetatable({}, Module)
 	self.laserMaxDistance = VRService.LaserDistance
 	self.laserHand = 0
 	self.inputUserCFrame = Enum.UserCFrame.RightHand
@@ -310,12 +309,12 @@ function LaserPointerModule:new()
 	return self
 end
 
-function LaserPointerModule.hasAnyHandController()
+function Module.hasAnyHandController()
 	-- upvalues: VRService (copy)
 	return VRService:GetUserCFrameEnabled(Enum.UserCFrame.RightHand) or VRService:GetUserCFrameEnabled(Enum.UserCFrame.LeftHand)
 end
 
-function LaserPointerModule.getModeName(p1)
+function Module.getModeName(p1)
 	-- upvalues: Mode (copy)
 	for i, value in pairs(Mode) do
 		if p1 == value then
@@ -325,7 +324,7 @@ function LaserPointerModule.getModeName(p1)
 	return "unknown"
 end
 
-function LaserPointerModule:updateInputUserCFrame()
+function Module:updateInputUserCFrame()
 	-- upvalues: EnableUserInputCFrameLogging (copy), VRService (copy)
 	local GuiInputUserCFrame = if EnableUserInputCFrameLogging then VRService.GuiInputUserCFrame else nil
 	
@@ -345,7 +344,7 @@ function LaserPointerModule:updateInputUserCFrame()
 	end
 end
 
-function LaserPointerModule:onModeChanged(_)
+function Module:onModeChanged(_)
 	-- upvalues: VRService (copy), addPartsToGame (copy), removePartsFromGame (copy)
 	self:updateInputUserCFrame()
 	
@@ -379,7 +378,7 @@ function LaserPointerModule:onModeChanged(_)
 	end
 end
 
-function LaserPointerModule:setMode(Pointer)
+function Module:setMode(Pointer)
 	-- upvalues: Mode (copy), VRService (copy)
 	if Pointer == Mode.Disabled or Pointer == Mode.Hidden then
 		VRService.LaserPointer = Enum.VRLaserPointerMode.Disabled
@@ -396,26 +395,26 @@ function LaserPointerModule:setMode(Pointer)
 	end
 end
 
-function LaserPointerModule:setEnableAmbidexterousPointer(_) end
+function Module:setEnableAmbidexterousPointer(_) end
 
-function LaserPointerModule:calculateLaunchVelocity(p2: number, p3: number, p4: number)
+function Module:calculateLaunchVelocity(p2: number, p3: number, p4: number)
 	return -(math.sqrt(p2 / 0.7071067811865476) * p3) / math.sqrt(2 * p4 * 0.7071067811865476 + 2 * p3 * 0.7071067811865475)
 end
 
-function LaserPointerModule:isHeadMounted(): boolean
+function Module:isHeadMounted(): boolean
 	-- upvalues: VRService (copy)
 	return VRService.GuiInputUserCFrame == Enum.UserCFrame.Head
 end
 
-function LaserPointerModule:shouldForcePointer()
+function Module:shouldForcePointer()
 	return self.externalForcePointer or self.guiMenuIsOpen
 end
 
-function LaserPointerModule:setForcePointer(ExternalForcePointer)
+function Module:setForcePointer(ExternalForcePointer)
 	self.externalForcePointer = ExternalForcePointer
 end
 
-function LaserPointerModule:getNavigationOrigin(): Vector3?
+function Module:getNavigationOrigin(): Vector3?
 	-- upvalues: getLocalHumanoid (copy)
 	local LocalHumanoid = getLocalHumanoid()
 	
@@ -426,7 +425,7 @@ function LaserPointerModule:getNavigationOrigin(): Vector3?
 	return Torso.Position + Vector3.new(0, -(Torso.Size.Y / 2) - (if LocalHumanoid.RigType == Enum.HumanoidRigType.R6 then 2 else LocalHumanoid.HipHeight), 0)
 end
 
-function LaserPointerModule:horzDistanceFromCharacter(p2)
+function Module:horzDistanceFromCharacter(p2)
 	-- upvalues: LocalPlayer (ref)
 	local Character = LocalPlayer.Character
 	
@@ -439,14 +438,14 @@ function LaserPointerModule:horzDistanceFromCharacter(p2)
 	end
 end
 
-function LaserPointerModule:onNavigateAction(_, UserInputState, _)
+function Module:onNavigateAction(_, UserInputState, _)
 	-- upvalues: VRService (copy)
 	if UserInputState == Enum.UserInputState.Begin then
 		VRService:RequestNavigation(CFrame.new(self.navHitPoint, self.navHitPoint + self.navHitNormal) * CFrame.Angles(1.5707963267948966, 0, 0), self.inputUserCFrame)
 	end
 end
 
-function LaserPointerModule.setNavigationActionEnabled(p2, p3)
+function Module.setNavigationActionEnabled(p2, p3)
 	-- upvalues: ContextActionService (copy)
 	if p3 then
 		ContextActionService:BindCoreAction("LaserPointerNavigate", function(...)
@@ -460,7 +459,7 @@ function LaserPointerModule.setNavigationActionEnabled(p2, p3)
 	end
 end
 
-function LaserPointerModule:setArcLaunchParams(Angle: number, p2, p3: number, p4: number)
+function Module:setArcLaunchParams(Angle: number, p2, p3: number, p4: number)
 	local ScaledCosine = math.cos(Angle) * p2
 	local ScaledSine = math.sin(Angle) * p2
 	
@@ -473,11 +472,11 @@ function LaserPointerModule:setArcLaunchParams(Angle: number, p2, p3: number, p4
 	self.parabola.Range = p4 * 1.5
 end
 
-function LaserPointerModule:renderAsParabola(X, p2)
+function Module:renderAsParabola(X, p2)
 	self.originPart.CFrame = CFrame.new(X, X + p2 * vector.create(1, 0, 1)) * CFrame.Angles(0, 1.5707963267948966, 0)
 end
 
-function LaserPointerModule:renderAsLaser(X, Y)
+function Module:renderAsLaser(X, Y)
 	self.originPart.CFrame = CFrame.new(X, Y) * CFrame.Angles(0, 1.5707963267948966, 0)
 	self.parabola.A = 0
 	self.parabola.B = 0.000001
@@ -485,26 +484,19 @@ function LaserPointerModule:renderAsLaser(X, Y)
 	self.parabola.Range = (Y - X).magnitude
 end
 
-function LaserPointerModule:renderOffhandLaser(X, Y)
+function Module:renderOffhandLaser(X, Y)
 	self.originPartOffhand.CFrame = CFrame.new(X, Y) * CFrame.Angles(0, 1.5707963267948966, 0)
 	self.parabolaOffhand.Range = (Y - X).magnitude
 end
 
-if not VRLaserPointerRaycastChange then
-	function LaserPointerModule:getLaserHit(Origin, p2, IgnoreList)
-		local Hit, HitPosition, HitNormal, _ = workspace:FindPartOnRayWithIgnoreList(Ray.new(Origin, p2 * self.laserMaxDistance), IgnoreList)
-		
-		return Hit, HitPosition, HitNormal, (HitPosition - Origin).magnitude / math.max(self.laserMaxDistance, 0.1)
-	end
-end
-function LaserPointerModule:canNavigateTo(NavHitPart, _, NavHitNormal): boolean
+function Module:canNavigateTo(NavHitPart, _, NavHitNormal): boolean
 	-- upvalues: LocalPlayer (ref)
 	local Character = LocalPlayer.Character
 	
 	return if Character and (Character:FindFirstChild("HumanoidRootPart") and NavHitPart) then NavHitNormal.Y >= -0.000001 else false
 end
 
-function LaserPointerModule:checkHeadMountedMode(Object)
+function Module:checkHeadMountedMode(Object)
 	-- upvalues: Mode (copy), GuiService (copy)
 	if self:shouldForcePointer() then
 		self:setMode(Mode.Pointer)
@@ -522,7 +514,7 @@ function LaserPointerModule:checkHeadMountedMode(Object)
 	end
 end
 
-function LaserPointerModule:setNavigationValidState(NavigationIsValid)
+function Module:setNavigationValidState(NavigationIsValid)
 	-- upvalues: config (copy)
 	if NavigationIsValid == self.navigationIsValid then return end
 	self.navigationIsValid = NavigationIsValid
@@ -548,7 +540,7 @@ function LaserPointerModule:setNavigationValidState(NavigationIsValid)
 	end
 end
 
-function LaserPointerModule:updateNavPlop(X, NavHitNormal)
+function Module:updateNavPlop(X, NavHitNormal)
 	-- upvalues: config (copy), _Vector2_1 (copy), _Vector2 (copy)
 	local Elapsed = tick() - self.plopBallBounceStart
 	local _CFrame = CFrame.new(X, X + NavHitNormal)
@@ -593,7 +585,7 @@ function LaserPointerModule:updateNavPlop(X, NavHitNormal)
 	end
 end
 
-function LaserPointerModule:updateNavigationMode(NavHitPoint, NavHitNormal, NavHitPart)
+function Module:updateNavigationMode(NavHitPoint, NavHitNormal, NavHitPart)
 	self.navHitPoint = NavHitPoint
 	self.navHitNormal = NavHitNormal
 	self.navHitPart = NavHitPart
@@ -601,7 +593,7 @@ function LaserPointerModule:updateNavigationMode(NavHitPoint, NavHitNormal, NavH
 	self:setNavigationValidState(self:canNavigateTo(self.navHitPart, self.navHitPoint, self.navHitNormal))
 end
 
-function LaserPointerModule:showHitBallOnLaserPointer(p2)
+function Module:showHitBallOnLaserPointer(p2)
 	-- upvalues: addPartsToGame (copy), removePartsFromGame (copy)
 	if p2 then
 		if not self.showPlopBallOnPointer then
@@ -616,7 +608,7 @@ function LaserPointerModule:showHitBallOnLaserPointer(p2)
 	end
 end
 
-function LaserPointerModule:cursorInputsChanged()
+function Module:cursorInputsChanged()
 	-- upvalues: VRService (copy), VRUtilModule (copy)
 	local DidPointerHit = VRService.DidPointerHit
 	self.cursorSurfaceGui.Enabled = DidPointerHit
@@ -636,7 +628,7 @@ function LaserPointerModule:cursorInputsChanged()
 	end
 end
 
-function LaserPointerModule:updateCursor_DEPRECATED()
+function Module:updateCursor_DEPRECATED()
 	-- upvalues: VRService (copy), VRUtilModule (copy)
 	if VRService.DidPointerHit then
 		local PointerHitCFrame = VRService.PointerHitCFrame
@@ -664,7 +656,7 @@ function LaserPointerModule:updateCursor_DEPRECATED()
 	self.cursorSurfaceGui.Enabled = VRService.DidPointerHit
 end
 
-function LaserPointerModule:disableComponent()
+function Module:disableComponent()
 	-- upvalues: removePartsFromGame (copy), RenderCaptureAlwaysOnTopGuiEngineFeature (copy)
 	removePartsFromGame(self.parabola, self.parabolaOffhand, self.originPart, self.originPartOffhand, self.plopPart, self.plopBall, self.cursorPart)
 	
@@ -679,7 +671,7 @@ function LaserPointerModule:disableComponent()
 	self.connections = {}
 end
 
-function LaserPointerModule:update(_)
+function Module:update(_)
 	-- upvalues: VRService (copy), config1 (copy), LocalPlayer (ref), VRUtilModule (copy)
 	if VRService.LaserPointer == Enum.VRLaserPointerMode.Disabled then return end
 	self.parabola.Thickness = config1.ARC_THICKNESS * workspace.CurrentCamera.HeadScale
@@ -714,4 +706,4 @@ function LaserPointerModule:update(_)
 	end
 end
 
-return LaserPointerModule
+return Module

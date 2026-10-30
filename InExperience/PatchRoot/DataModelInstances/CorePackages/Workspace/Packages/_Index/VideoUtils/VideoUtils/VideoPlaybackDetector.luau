@@ -17,9 +17,11 @@ local VideoViewportPlaybackDetectorModule = require(VideoUtils.VideoViewportPlay
 local _ = require(VideoUtils.ViewportVideoAutoplayController)
 local FFlagLuaAppEdpMediaGalleryVideoPreview = require(Parent.SharedFlags).FFlagLuaAppEdpMediaGalleryVideoPreview
 local FFlagLuaAppGameTileSelectionVideoPlayback = require(Parent.SharedFlags).FFlagLuaAppGameTileSelectionVideoPlayback
+local FFlagLuaAppSuppressVideoDetectorDuringScroll = require(Parent.SharedFlags).FFlagLuaAppSuppressVideoDetectorDuringScroll
+local FFlagLuaAppSduiSuppressVideoDetectorDuringScroll = require(Parent.SharedFlags).FFlagLuaAppSduiSuppressVideoDetectorDuringScroll
 
 return function(p1)
-	-- upvalues: VideoPlaybackCoordinatorModule (copy), ReactModule (copy), FFlagLuaAppEdpMediaGalleryVideoPreview (copy), FFlagLuaAppGameTileSelectionVideoPlayback (copy), UseLastInputFunction (copy), AppLifecycleObserverService (copy), VideoEndReason (copy), ExperienceService (copy), FFlagLuaAppOneByTwoHoverIdleAutoplay (copy), VideoPlaybackDetectionMethodModule (copy), VideoViewportPlaybackDetectorModule (copy), VideoHoverPlaybackDetectorModule (copy), VideoSelectionPlaybackDetectorModule (copy), ResponsiveModule (copy)
+	-- upvalues: VideoPlaybackCoordinatorModule (copy), ReactModule (copy), FFlagLuaAppEdpMediaGalleryVideoPreview (copy), FFlagLuaAppGameTileSelectionVideoPlayback (copy), UseLastInputFunction (copy), FFlagLuaAppSuppressVideoDetectorDuringScroll (copy), FFlagLuaAppSduiSuppressVideoDetectorDuringScroll (copy), AppLifecycleObserverService (copy), VideoEndReason (copy), ExperienceService (copy), FFlagLuaAppOneByTwoHoverIdleAutoplay (copy), VideoPlaybackDetectionMethodModule (copy), VideoViewportPlaybackDetectorModule (copy), VideoHoverPlaybackDetectorModule (copy), VideoSelectionPlaybackDetectorModule (copy), ResponsiveModule (copy)
 	local VideoPlaybackCoordinator = p1.videoPlaybackCoordinator or VideoPlaybackCoordinatorModule.default
 	local UseStateResult, UseStateResult2 = ReactModule.useState(false)
 	local UseLastInputResult = if FFlagLuaAppEdpMediaGalleryVideoPreview or FFlagLuaAppGameTileSelectionVideoPlayback then nil else UseLastInputFunction()
@@ -50,8 +52,9 @@ return function(p1)
 		p1.videoAnalytics,
 		VideoPlaybackCoordinator
 	})
+	local SuppressDetectorsDuringScroll = if FFlagLuaAppSuppressVideoDetectorDuringScroll or FFlagLuaAppSduiSuppressVideoDetectorDuringScroll then p1.viewportVideoAutoplayController ~= nil and p1.viewportVideoAutoplayController.suppressDetectorsDuringScroll else nil
 	ReactModule.useEffect(function()
-		-- upvalues: p1 (copy), UseStateResult (copy), UseStateResult2 (copy), VideoPlaybackCoordinator (copy)
+		-- upvalues: p1 (copy), UseStateResult (copy), UseStateResult2 (copy), FFlagLuaAppSuppressVideoDetectorDuringScroll (upval), FFlagLuaAppSduiSuppressVideoDetectorDuringScroll (upval), SuppressDetectorsDuringScroll (copy), VideoPlaybackCoordinator (copy)
 		local function _(VideoKey)
 			-- upvalues: p1 (upval), UseStateResult (upval), UseStateResult2 (upval)
 			local IsVideoKeyMatch = VideoKey == p1.videoKey
@@ -62,6 +65,9 @@ return function(p1)
 			end
 		end
 		
+		if (FFlagLuaAppSuppressVideoDetectorDuringScroll or FFlagLuaAppSduiSuppressVideoDetectorDuringScroll) and (SuppressDetectorsDuringScroll and VideoPlaybackCoordinator.playingVideoKey ~= p1.videoKey) then
+			p1.onPlaybackChange(false)
+		end
 		local IsPlayingVideoKeyMatch = VideoPlaybackCoordinator.playingVideoKey == p1.videoKey
 		
 		if IsPlayingVideoKeyMatch ~= UseStateResult then
@@ -89,10 +95,11 @@ return function(p1)
 		p1.videoKey,
 		p1.onPlaybackChange,
 		VideoPlaybackCoordinator,
-		UseStateResult
+		UseStateResult,
+		if FFlagLuaAppSuppressVideoDetectorDuringScroll or FFlagLuaAppSduiSuppressVideoDetectorDuringScroll then SuppressDetectorsDuringScroll else nil
 	})
 	ReactModule.useEffect(function()
-		-- upvalues: p1 (copy), AppLifecycleObserverService (upval), VideoEndReason (upval), UseResult1 (copy), ExperienceService (upval)
+		-- upvalues: p1 (copy), AppLifecycleObserverService (upval), VideoEndReason (upval), UseResult1 (copy), ExperienceService (upval), FFlagLuaAppSuppressVideoDetectorDuringScroll (upval), FFlagLuaAppSduiSuppressVideoDetectorDuringScroll (upval)
 		local ViewportVideoAutoplayController = p1.viewportVideoAutoplayController
 		local Current = p1.itemFrameRef.current
 		local OnHideConnection = AppLifecycleObserverService.OnHide:Connect(function()
@@ -117,9 +124,11 @@ return function(p1)
 		end)
 		
 		return function()
-			-- upvalues: ViewportVideoAutoplayController (copy), Current (copy), VideoEndReason (upval), UseResult1 (upval), RegisterForExperienceJoinResult (ref), OnHideConnection (ref)
+			-- upvalues: ViewportVideoAutoplayController (copy), Current (copy), FFlagLuaAppSuppressVideoDetectorDuringScroll (upval), FFlagLuaAppSduiSuppressVideoDetectorDuringScroll (upval), VideoEndReason (upval), UseResult1 (upval), RegisterForExperienceJoinResult (ref), OnHideConnection (ref)
 			if ViewportVideoAutoplayController and Current then
-				ViewportVideoAutoplayController:resetIfActiveInstance(Current, VideoEndReason.Unmounted)
+				if not (if FFlagLuaAppSuppressVideoDetectorDuringScroll then ViewportVideoAutoplayController.suppressDetectorsDuringScroll and ViewportVideoAutoplayController.isScrolling else FFlagLuaAppSduiSuppressVideoDetectorDuringScroll and (ViewportVideoAutoplayController.suppressDetectorsDuringScroll and ViewportVideoAutoplayController.isScrolling)) then
+					ViewportVideoAutoplayController:resetIfActiveInstance(Current, VideoEndReason.Unmounted)
+				end
 			else
 				UseResult1(VideoEndReason.Unmounted)
 			end

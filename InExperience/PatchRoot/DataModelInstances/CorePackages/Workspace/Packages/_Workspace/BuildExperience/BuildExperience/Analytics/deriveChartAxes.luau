@@ -1,4 +1,4 @@
-﻿local _ = require(script:FindFirstAncestor("BuildExperience").Parent.DataHydration.ExperienceAnalytics)
+﻿local _ = require(script:FindFirstAncestor("BuildExperience").Parent.DataHydration.CreatorAnalytics)
 local config = {
 	minX = 0,
 	maxX = 1,

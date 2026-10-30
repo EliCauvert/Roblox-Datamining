@@ -14,6 +14,8 @@ local FFlagEditProfileImageR15UpgradePrompt = require(Parent.SharedFlags).FFlagE
 local FFlagEditProfileFramesEnabled = require(Parent.SharedFlags).FFlagEditProfileFramesEnabled
 local FFlagEditProfileFramesImpression = require(Parent.EditProfile).Flags.FFlagEditProfileFramesImpression
 local FFlagSignalsNavP3hMisc = require(Parent.SharedFlags).FFlagSignalsNavP3hMisc
+local FFlagSplitPaneProfileEditFillPane = require(Parent.SharedFlags).FFlagSplitPaneProfileEditFillPane
+local SplitPaneModule = if FFlagSplitPaneProfileEditFillPane then require(Parent.SplitPane) else nil
 local UseReportFramesImpressionModule = require(ProfilePlatform.Hooks.useReportFramesImpression)
 local View = require(Parent.Foundation).View
 local UseScreenSizeFunction = require(Parent.RobloxAppHooks).useScreenSize
@@ -25,7 +27,6 @@ local Selectors = NavigationRoduxModule.Selectors
 local GetLegacyNavigationStoreFunction = NavigationRoduxModule.GetLegacyNavigationStore
 local AppPage = require(Parent.RobloxAppEnums).AppPage
 local AXEditProfileImageFillCardHeight = game:DefineFastFlag("AXEditProfileImageFillCardHeight", false)
-local EditProfileImageSignalsNavCurrentPage = game:DefineFastFlag("EditProfileImageSignalsNavCurrentPage", false)
 
 local function _(AvatarExperienceWrapper): boolean
 	-- upvalues: AppPage (copy)
@@ -33,7 +34,7 @@ local function _(AvatarExperienceWrapper): boolean
 end
 
 return function(p1)
-	-- upvalues: UseProfileWrapperContextModule (copy), UseScreenSizeFunction (copy), UseSelectorFunction (copy), EditProfileImageSignalsNavCurrentPage (copy), FFlagSignalsNavP3hMisc (copy), ReactModule (copy), SignalsModule (copy), GetLegacyNavigationStoreFunction (copy), AppPage (copy), UseSignalStateFunction (copy), Selectors (copy), UseDispatchFunction (copy), CloseProfilePictureEditorFunction (copy), ShowEditProfileImageToast (copy), EnumsModule (copy), FFlagEditProfileImageR15UpgradePrompt (copy), FFlagEditProfileFramesImpression (copy), FFlagEditProfileFramesEnabled (copy), UseReportFramesImpressionModule (copy), Enums (copy), View (copy), AXEditProfileImageFillCardHeight (copy), EditProfileImage (copy)
+	-- upvalues: UseProfileWrapperContextModule (copy), UseScreenSizeFunction (copy), UseSelectorFunction (copy), FFlagSignalsNavP3hMisc (copy), ReactModule (copy), SignalsModule (copy), GetLegacyNavigationStoreFunction (copy), AppPage (copy), UseSignalStateFunction (copy), Selectors (copy), UseDispatchFunction (copy), FFlagSplitPaneProfileEditFillPane (copy), SplitPaneModule (copy), CloseProfilePictureEditorFunction (copy), ShowEditProfileImageToast (copy), EnumsModule (copy), FFlagEditProfileImageR15UpgradePrompt (copy), FFlagEditProfileFramesImpression (copy), FFlagEditProfileFramesEnabled (copy), UseReportFramesImpressionModule (copy), Enums (copy), View (copy), AXEditProfileImageFillCardHeight (copy), EditProfileImage (copy)
 	local UseProfileWrapperContextModuleResult = UseProfileWrapperContextModule()
 	local RenderRecommendedEmotePurchaseFooter = UseProfileWrapperContextModuleResult.renderRecommendedEmotePurchaseFooter
 	assert(RenderRecommendedEmotePurchaseFooter, "Edit Profile Image requires a host purchase-footer renderer")
@@ -41,10 +42,10 @@ return function(p1)
 	local UseSelectorResult = UseSelectorFunction(function(p2)
 		return p2.GlobalGuiInset
 	end)
-	local IsUseSelectorResultMatch = nil
+	local UseSignalStateResult = nil
 	
-	if EditProfileImageSignalsNavCurrentPage and FFlagSignalsNavP3hMisc then
-		IsUseSelectorResultMatch = UseSignalStateFunction((ReactModule.useMemo(function()
+	if FFlagSignalsNavP3hMisc then
+		UseSignalStateResult = UseSignalStateFunction((ReactModule.useMemo(function()
 			-- upvalues: SignalsModule (upval), GetLegacyNavigationStoreFunction (upval), AppPage (upval)
 			return SignalsModule.createComputed(function(p2): boolean
 				-- upvalues: GetLegacyNavigationStoreFunction (upval), AppPage (upval)
@@ -55,9 +56,23 @@ return function(p1)
 		end, {})))
 	else
 		local UseSelectorResult1 = UseSelectorFunction(Selectors.selectCurrentPageName)
-		IsUseSelectorResultMatch = UseSelectorResult1 == AppPage.AvatarExperienceWrapper or UseSelectorResult1 == AppPage.AvatarExperienceWrapperTransparent
+		UseSignalStateResult = UseSelectorResult1 == AppPage.AvatarExperienceWrapper or UseSelectorResult1 == AppPage.AvatarExperienceWrapperTransparent
 	end
 	local UseDispatchResult = UseDispatchFunction()
+	local Largest = math.max(0, UseScreenSizeResult.X - UseSelectorResult.left - UseSelectorResult.right)
+	local HasProfileSplitPaneEligibility = false
+	local v1: Vector2? = nil
+	
+	if FFlagSplitPaneProfileEditFillPane then
+		local Store = SplitPaneModule.SplitPaneStore.getStore()
+		local UseSignalStateResult1 = UseSignalStateFunction(Store.getSupportPaneModeIfActive)
+		local UseSignalStateResult2 = UseSignalStateFunction(Store.getSupportWidthFraction)
+		HasProfileSplitPaneEligibility = UseSignalStateResult1 ~= nil and SplitPaneModule.SplitPaneVariant.getProfileSplitPaneEligibility(UseSignalStateResult1) ~= nil
+		
+		if HasProfileSplitPaneEligibility then
+			v1 = Vector2.new(if UseSignalStateResult1 == SplitPaneModule.SupportPaneMode.Expanded then Largest else UseScreenSizeResult.X * UseSignalStateResult2, UseScreenSizeResult.Y)
+		end
+	end
 	local UseResult = ReactModule.useCallback(function()
 		-- upvalues: CloseProfilePictureEditorFunction (upval), p1 (copy)
 		CloseProfilePictureEditorFunction(p1.navigation)
@@ -108,11 +123,9 @@ return function(p1)
 	if FFlagEditProfileFramesImpression and FFlagEditProfileFramesEnabled then
 		UseReportFramesImpressionModule()
 	end
-	local Largest = math.max(0, UseScreenSizeResult.X - UseSelectorResult.left - UseSelectorResult.right)
-	
 	return ReactModule.createElement(View, {
 		tag = "bg-surface-0",
-		Size = if AXEditProfileImageFillCardHeight then UDim2.new(0, Largest, 1, 0) else UDim2.fromOffset(Largest, UseScreenSizeResult.Y),
+		Size = if FFlagSplitPaneProfileEditFillPane and HasProfileSplitPaneEligibility then UDim2.fromScale(1, 1) elseif AXEditProfileImageFillCardHeight then UDim2.new(0, Largest, 1, 0) else UDim2.fromOffset(Largest, UseScreenSizeResult.Y),
 		padding = { bottom = UDim.new(0, UseSelectorResult.bottom) }
 	}, {
 		Content = ReactModule.createElement(View, { tag = "size-full-full" }, {
@@ -125,10 +138,11 @@ return function(p1)
 				onShopForMoreEmotes = UseResult4,
 				onPromptR15Upgrade = UseResult5,
 				accountRigType = if FFlagEditProfileImageR15UpgradePrompt then UseProfileWrapperContextModuleResult.accountRigType else nil,
-				renderRecommendedEmotePurchaseFooter = RenderRecommendedEmotePurchaseFooter
+				renderRecommendedEmotePurchaseFooter = RenderRecommendedEmotePurchaseFooter,
+				containerSize = if FFlagSplitPaneProfileEditFillPane and HasProfileSplitPaneEligibility then v1 else nil
 			})
 		}),
-		DetailsInputBlocker = if IsUseSelectorResultMatch then ReactModule.createElement(View, {
+		DetailsInputBlocker = if UseSignalStateResult then ReactModule.createElement(View, {
 			tag = "position-top-left size-full",
 			ZIndex = 10,
 			Active = true

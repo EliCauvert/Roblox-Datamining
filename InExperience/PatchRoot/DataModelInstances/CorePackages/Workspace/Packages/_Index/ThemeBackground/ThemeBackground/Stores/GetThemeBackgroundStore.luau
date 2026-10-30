@@ -1,0 +1,1 @@
+﻿return require(script:FindFirstAncestor("ThemeBackground").Parent.Signals).createComputed((require(script.createThemeBackgroundStore)))

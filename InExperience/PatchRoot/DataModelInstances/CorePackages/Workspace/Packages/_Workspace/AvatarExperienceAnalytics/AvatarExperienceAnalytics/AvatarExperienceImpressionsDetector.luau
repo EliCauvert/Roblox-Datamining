@@ -32,6 +32,7 @@ AvatarExperienceImpressionsDetector.validateProps = TModule.strictInterface({
 	viewPortBounds = TModule.strictInterface({ min = TModule.Vector2, max = TModule.Vector2 }),
 	appPage = TModule.optional(TModule.string),
 	currentPage = TModule.optional(TModule.string),
+	pageEligible = if FFlagSignalsNavP3gAvatarExperience then TModule.optional(TModule.boolean) else nil,
 	pageFilter = TModule.optional(TModule.callback),
 	collectObjectsFunc = TModule.optional(TModule.callback),
 	filterImpressionFunc = TModule.optional(TModule.callback),
@@ -94,10 +95,12 @@ function AvatarExperienceImpressionsDetector._defaultObjectCollector(Object)
 end
 
 function AvatarExperienceImpressionsDetector._calculateImpressions(p1)
-	-- upvalues: ArgCheckModule (copy)
+	-- upvalues: FFlagSignalsNavP3gAvatarExperience (copy), ArgCheckModule (copy)
 	if not p1.isMounted then return end
 	if p1.props.pageFilter then
 		if not p1.props.pageFilter(p1.props.currentPage) then return end
+	elseif FFlagSignalsNavP3gAvatarExperience then
+		if not p1.props.pageEligible then return end
 	elseif p1.props.appPage ~= p1.props.currentPage then return end
 	local Current = p1.props.parentRef and p1.props.parentRef.current
 	
@@ -177,9 +180,9 @@ end
 if FFlagSignalsNavP3gAvatarExperience then
 	AvatarExperienceImpressionsDetector = function(p2)
 		-- upvalues: GetLegacyNavigationStore (copy), UseSignalState (copy), ReactModule (copy), AvatarExperienceImpressionsDetector (copy), CryoModule (copy)
-		return ReactModule.createElement(AvatarExperienceImpressionsDetector, CryoModule.Dictionary.union(p2, {
-			currentPage = UseSignalState(GetLegacyNavigationStore(false).getCurrentPageName)
-		}))
+		local CurrentPage = UseSignalState(GetLegacyNavigationStore(false).getCurrentPageName)
+		
+		return ReactModule.createElement(AvatarExperienceImpressionsDetector, CryoModule.Dictionary.union(p2, if p2.pageFilter then { currentPage = CurrentPage } else { pageEligible = p2.appPage == CurrentPage }))
 	end
 	
 	return AvatarExperienceImpressionsDetector

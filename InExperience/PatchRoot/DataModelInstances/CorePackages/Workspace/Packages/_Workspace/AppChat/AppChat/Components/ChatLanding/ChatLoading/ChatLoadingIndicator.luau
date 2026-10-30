@@ -84,13 +84,15 @@ end
 
 function ChatLoadingIndicator.render(p1)
 	-- upvalues: WithStyleFunction (copy), RoactModule (copy)
+	local PageBackgroundTransparency = p1.props.pageBackgroundTransparency
+	
 	return WithStyleFunction(function(p2)
-		-- upvalues: RoactModule (upval), p1 (copy)
+		-- upvalues: RoactModule (upval), PageBackgroundTransparency (copy), p1 (copy)
 		return RoactModule.createElement("Frame", {
 			BorderSizePixel = 0,
 			Size = UDim2.new(1, 0, 1, 0),
 			BackgroundColor3 = p2.Theme.BackgroundDefault.Color,
-			BackgroundTransparency = p2.Tokens.Color.None.Transparency
+			BackgroundTransparency = if PageBackgroundTransparency == nil then p2.Tokens.Color.None.Transparency else PageBackgroundTransparency
 		}, p1.allConversationPlaceholdersList())
 	end)
 end

@@ -11,6 +11,8 @@ local UseSelectorFunction = require(Parent.RoactUtils).Hooks.RoactRodux.useSelec
 local RoduxNetworkingModule = require(AppChat.Http.RoduxNetworking)
 local NewResult = require(AppChat.Logger):new(script.Name)
 local UseUserProfilesFetchFunction = UserProfilesModule.Hooks.useUserProfilesFetch
+local UseProfileNameModule = require(AppChat.Hooks.useProfileName)
+local DataStatus = require(Parent.DataHydration).DataStatus
 local GetCombinedNameFromIdFunction = UserProfilesModule.Selectors.getCombinedNameFromId
 local GetUsernameFromIdFunction = UserProfilesModule.Selectors.getUsernameFromId
 local APIFunction = AppChatNetworkingModule.rodux.GetConversationDetails.API
@@ -21,10 +23,11 @@ local UseRecordModalSequenceResponseForConversationModule = require(AppChat.Hook
 local UseDispatchFunction = require(Parent.RoactUtils).Hooks.RoactRodux.useDispatch
 local UseIsChatUserMessagesEnabledModule = require(AppChat.Hooks.useIsChatUserMessagesEnabled)
 local FFlagEnableBlackbirdCheck = require(Parent.SharedFlags).FFlagEnableBlackbirdCheck
+local FFlagAppChatUseUserProfileHydrationModule = require(AppChat.Flags.FFlagAppChatUseUserProfileHydration)
 local UseIsRobloxSubscriberFunction = UserProfilesModule.Hooks.useIsRobloxSubscriber
 
 return ReactModule.memo(function(p1)
-	-- upvalues: UseDispatchFunction (copy), UseGetOneToOneFriendIdFromConversationIdModule (copy), UseChatPagePaddingModule (copy), ReactModule (copy), UseIsChatUserMessagesEnabledModule (copy), UseIsRobloxSubscriberFunction (copy), FFlagEnableBlackbirdCheck (copy), UseUserProfilesFetchFunction (copy), UserProfilesModule (copy), UseRecordModalSequenceResponseForConversationModule (copy), UseGetConversationFromIdModule (copy), AppChatNetworkingModule (copy), UseIsGuiInChatVisibleModule (copy), UseSelectorFunction (copy), RoduxNetworkingModule (copy), APIFunction (copy), NewResult (copy), GetUsernameFromIdFunction (copy), GetCombinedNameFromIdFunction (copy), GetThumbnailsForUserIdsModule (copy), FoundationModule (copy), OsaContextCardOneToOneModule (copy)
+	-- upvalues: UseDispatchFunction (copy), UseGetOneToOneFriendIdFromConversationIdModule (copy), UseChatPagePaddingModule (copy), ReactModule (copy), UseIsChatUserMessagesEnabledModule (copy), UseIsRobloxSubscriberFunction (copy), FFlagEnableBlackbirdCheck (copy), FFlagAppChatUseUserProfileHydrationModule (copy), UseProfileNameModule (copy), UseUserProfilesFetchFunction (copy), UserProfilesModule (copy), UseRecordModalSequenceResponseForConversationModule (copy), UseGetConversationFromIdModule (copy), AppChatNetworkingModule (copy), UseIsGuiInChatVisibleModule (copy), UseSelectorFunction (copy), RoduxNetworkingModule (copy), APIFunction (copy), NewResult (copy), GetUsernameFromIdFunction (copy), GetCombinedNameFromIdFunction (copy), GetThumbnailsForUserIdsModule (copy), FoundationModule (copy), OsaContextCardOneToOneModule (copy), DataStatus (copy)
 	local UseDispatchResult = UseDispatchFunction()
 	local UseGetOneToOneFriendIdFromConversationIdModuleResult = UseGetOneToOneFriendIdFromConversationIdModule(p1.conversationId) or ""
 	local UseChatPagePaddingModuleResult = UseChatPagePaddingModule()
@@ -40,11 +43,18 @@ return ReactModule.memo(function(p1)
 	})
 	local UseIsChatUserMessagesEnabledModuleResult = UseIsChatUserMessagesEnabledModule()
 	local UseIsRobloxSubscriberResult = UseIsRobloxSubscriberFunction(if FFlagEnableBlackbirdCheck and UseGetOneToOneFriendIdFromConversationIdModuleResult ~= "" then UseGetOneToOneFriendIdFromConversationIdModuleResult else nil)
-	local UseUserProfilesFetchResult = UseUserProfilesFetchFunction({
-		overrideRetryCount = 4,
-		userIds = { UseGetOneToOneFriendIdFromConversationIdModuleResult },
-		query = UserProfilesModule.Queries.userProfilesCombinedNameAndUsernameByUserIds
-	})
+	local v1 = nil
+	local v2 = nil
+	
+	if FFlagAppChatUseUserProfileHydrationModule then
+		v2 = UseProfileNameModule(UseGetOneToOneFriendIdFromConversationIdModuleResult)
+	else
+		v1 = UseUserProfilesFetchFunction({
+			overrideRetryCount = 4,
+			userIds = { UseGetOneToOneFriendIdFromConversationIdModuleResult },
+			query = UserProfilesModule.Queries.userProfilesCombinedNameAndUsernameByUserIds
+		})
+	end
 	local UseStateResult, UseStateResult2 = ReactModule.useState(false)
 	local UseRecordModalSequenceResponseForConversationModuleResult = UseRecordModalSequenceResponseForConversationModule(p1.conversationId)
 	local UseResult = ReactModule.useCallback(function()
@@ -85,15 +95,15 @@ return ReactModule.memo(function(p1)
 		UseStateResult, UseDispatchResult, p1.conversationId
 	})
 	ReactModule.useEffect(function()
-		-- upvalues: UseUserProfilesFetchResult (copy), UseGetOneToOneFriendIdFromConversationIdModuleResult (copy), GetUsernameFromIdFunction (upval), UseStateResult2_1 (copy), UseStateResult2_2 (copy), GetCombinedNameFromIdFunction (upval)
-		if UseUserProfilesFetchResult.data and UseGetOneToOneFriendIdFromConversationIdModuleResult then
-			local UsernameFromId = GetUsernameFromIdFunction(UseUserProfilesFetchResult.data, UseGetOneToOneFriendIdFromConversationIdModuleResult)
+		-- upvalues: FFlagAppChatUseUserProfileHydrationModule (upval), v1 (ref), UseGetOneToOneFriendIdFromConversationIdModuleResult (copy), GetUsernameFromIdFunction (upval), UseStateResult2_1 (copy), UseStateResult2_2 (copy), GetCombinedNameFromIdFunction (upval)
+		if not FFlagAppChatUseUserProfileHydrationModule and v1.data and UseGetOneToOneFriendIdFromConversationIdModuleResult then
+			local UsernameFromId = GetUsernameFromIdFunction(v1.data, UseGetOneToOneFriendIdFromConversationIdModuleResult)
 			UseStateResult2_1(if UsernameFromId then "@" .. UsernameFromId else nil)
-			UseStateResult2_2(GetCombinedNameFromIdFunction(UseUserProfilesFetchResult.data, UseGetOneToOneFriendIdFromConversationIdModuleResult))
+			UseStateResult2_2(GetCombinedNameFromIdFunction(v1.data, UseGetOneToOneFriendIdFromConversationIdModuleResult))
 		end
 	end, {
-		UseUserProfilesFetchResult.data,
-		UseGetOneToOneFriendIdFromConversationIdModuleResult
+		UseGetOneToOneFriendIdFromConversationIdModuleResult,
+		if FFlagAppChatUseUserProfileHydrationModule then nil else v1.data
 	})
 	
 	return ReactModule.createElement(FoundationModule.View, {
@@ -101,14 +111,14 @@ return ReactModule.memo(function(p1)
 		padding = UseMemoResult
 	}, {
 		OsaContextCardOneToOne = ReactModule.createElement(OsaContextCardOneToOneModule, {
-			displayName = UseStateResult3,
-			username = UseStateResult1,
+			displayName = if FFlagAppChatUseUserProfileHydrationModule then v2.combinedName else UseStateResult3,
+			username = if FFlagAppChatUseUserProfileHydrationModule then if v2.username then "@" .. v2.username else nil else UseStateResult1,
 			avatarThumbnail = ReactModule.useMemo(function()
 				-- upvalues: GetThumbnailsForUserIdsModule (upval), UseGetOneToOneFriendIdFromConversationIdModuleResult (copy)
 				return GetThumbnailsForUserIdsModule({ UseGetOneToOneFriendIdFromConversationIdModuleResult })[1]
 			end, { UseGetOneToOneFriendIdFromConversationIdModuleResult }),
 			onAvatarActivated = UseResult,
-			hasError = if UseUserProfilesFetchResult.error then true else false,
+			hasError = if FFlagAppChatUseUserProfileHydrationModule then v2.status == DataStatus.Failed elseif v1.error then true else false,
 			isChatUserMessagesEnabled = UseIsChatUserMessagesEnabledModuleResult,
 			ref = UseRefResult,
 			userId = UseGetOneToOneFriendIdFromConversationIdModuleResult,

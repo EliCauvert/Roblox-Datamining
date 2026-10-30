@@ -16,7 +16,7 @@ local FFlagBackpackResponsiveUnits = require(Parent.SharedFlags).FFlagBackpackRe
 local SystemModule = require(Parent.System)
 local EnableHotbarHide = game:DefineFastFlag("EnableHotbarHide", false)
 local FFlagStudioDeviceSimVRSwitchFixes = require(Parent.SharedFlags).FFlagStudioDeviceSimVRSwitchFixes
-local Humanoid = {
+local BackpackScriptModule = {
 	OpenClose = nil,
 	IsHotbarVisible = false,
 	IsOpen = false,
@@ -60,7 +60,8 @@ local ContextActionService = game:GetService("ContextActionService")
 local VRService = game:GetService("VRService")
 local GamepadService = game:GetService("GamepadService")
 RobloxGui:WaitForChild("Modules"):WaitForChild("TenFootInterface")
-local IsEnabled = require(Modules.TenFootInterface):IsEnabled()
+local FFlagResponsiveUnitsDeprecateTenFoot = require(Parent.SharedFlags).FFlagResponsiveUnitsDeprecateTenFoot
+local NoFFlagResponsiveUnitsDeprecateTenFoot: boolean = require(RobloxGui.Modules.TenFootInterface):IsEnabled() and not FFlagResponsiveUnitsDeprecateTenFoot
 local CreateFunction = require(Parent.AppCommonLib).Create
 local GameTranslatorModule = require(Modules.GameTranslator)
 pcall(function()
@@ -69,7 +70,7 @@ pcall(function()
 end)
 local v1 = true
 
-if IsEnabled then
+if NoFFlagResponsiveUnitsDeprecateTenFoot then
 	XOffset = 100
 	Size14 = Enum.FontSize.Size24
 end
@@ -88,7 +89,7 @@ local GridLayout = nil
 local ScrollUpButton = nil
 local ScrollDownButton = nil
 local Parent1 = nil
-local Humanoid1 = nil
+local Humanoid = nil
 local Backpack = nil
 local List = {}
 local v2 = nil
@@ -110,9 +111,9 @@ local NumberOfHotbarSlots: number = if IsXBelow then 3 else 10
 local v3: number = if IsXBelow then 2 else 4
 local v4 = nil
 local v5 = nil
-Humanoid.BackpackEmpty = CreateFunction("BindableEvent")({ Name = "BackpackEmpty" })
-Humanoid.BackpackItemAdded = CreateFunction("BindableEvent")({ Name = "BackpackAdded" })
-Humanoid.BackpackItemRemoved = CreateFunction("BindableEvent")({ Name = "BackpackRemoved" })
+BackpackScriptModule.BackpackEmpty = CreateFunction("BindableEvent")({ Name = "BackpackEmpty" })
+BackpackScriptModule.BackpackItemAdded = CreateFunction("BindableEvent")({ Name = "BackpackAdded" })
+BackpackScriptModule.BackpackItemRemoved = CreateFunction("BindableEvent")({ Name = "BackpackRemoved" })
 
 local function NewGui(p1, Name)
 	-- upvalues: Size14 (ref)
@@ -152,7 +153,7 @@ local function _()
 	return nil
 end
 
-function Humanoid.IsInventoryEmpty(): boolean
+function BackpackScriptModule.IsInventoryEmpty(): boolean
 	-- upvalues: NumberOfHotbarSlots (ref), List (copy)
 	for i = NumberOfHotbarSlots + 1, #List do
 		local Entry = List[i]
@@ -169,7 +170,7 @@ local _ = function(): boolean
 end
 
 local function AdjustHotbarFrames(p1)
-	-- upvalues: Frame2 (ref), NumberOfHotbarSlots (ref), Count (ref), EnableHotbarHide (copy), List (copy), ImageButton (ref), Humanoid (copy)
+	-- upvalues: Frame2 (ref), NumberOfHotbarSlots (ref), Count (ref), EnableHotbarHide (copy), List (copy), ImageButton (ref), BackpackScriptModule (copy)
 	if not Frame2 then return end
 	local Visible = Frame2.Visible
 	local NumberOfHotbarSlots1 = Visible and NumberOfHotbarSlots or Count
@@ -211,7 +212,7 @@ local function AdjustHotbarFrames(p1)
 		Image.Visible = NoVisible
 		ImageButton.Position = UDim2.new(0.5, -15, 1, if NoP2 then -110 else -50)
 	end
-	Humanoid.IsHotbarVisible = NoP2
+	BackpackScriptModule.IsHotbarVisible = NoP2
 end
 
 local function UpdateScrollingFrameCanvasSize()
@@ -272,9 +273,9 @@ local _ = function()
 end
 
 local _ = function()
-	-- upvalues: Humanoid1 (ref), HopperBin (ref), Tbl (copy)
-	if Humanoid1 then
-		Humanoid1:UnequipTools()
+	-- upvalues: Humanoid (ref), HopperBin (ref), Tbl (copy)
+	if Humanoid then
+		Humanoid:UnequipTools()
 		
 		if HopperBin then
 			HopperBin:ToggleSelect()
@@ -285,9 +286,9 @@ local _ = function()
 end
 
 local _ = function(HopperBin1)
-	-- upvalues: Humanoid1 (ref), HopperBin (ref), Tbl (copy), Parent1 (ref)
-	if Humanoid1 then
-		Humanoid1:UnequipTools()
+	-- upvalues: Humanoid (ref), HopperBin (ref), Tbl (copy), Parent1 (ref)
+	if Humanoid then
+		Humanoid:UnequipTools()
 		
 		if HopperBin then
 			HopperBin:ToggleSelect()
@@ -312,7 +313,7 @@ local _ = function(HopperBin)
 end
 
 local function MakeSlot(Parent1, p2)
-	-- upvalues: List (copy), ScaledPreferredTransparency1 (ref), _Color3_1 (copy), _Color3 (copy), Frame1 (ref), XOffset (ref), GameTranslatorModule (copy), NumberOfHotbarSlots (ref), Frame2 (ref), Count (ref), Flag2 (ref), Flag (ref), ContextActionService (copy), v5 (ref), Tbl (copy), v2 (ref), Parent1 (ref), v4 (ref), NewGui (copy), _Color3_2 (copy), Tbl2 (copy), UpdateScrollingFrameCanvasSize (copy), Humanoid1 (ref), HopperBin (ref), Backpack (ref), _Color3_3 (copy), MakeSlot (copy), Frame3 (ref), Flag4 (ref), Tbl1 (copy), Value1 (copy), ScrollingFrame (ref)
+	-- upvalues: List (copy), ScaledPreferredTransparency1 (ref), _Color3_1 (copy), _Color3 (copy), Frame1 (ref), XOffset (ref), GameTranslatorModule (copy), NumberOfHotbarSlots (ref), Frame2 (ref), Count (ref), Flag2 (ref), Flag (ref), ContextActionService (copy), v5 (ref), Tbl (copy), v2 (ref), Parent1 (ref), v4 (ref), NewGui (copy), _Color3_2 (copy), Tbl2 (copy), UpdateScrollingFrameCanvasSize (copy), Humanoid (ref), HopperBin (ref), Backpack (ref), _Color3_3 (copy), MakeSlot (copy), Frame3 (ref), Flag4 (ref), Tbl1 (copy), Value1 (copy), ScrollingFrame (ref)
 	local P14 = p2 or #List + 1
 	local Frame = nil
 	local Frame4 = nil
@@ -579,15 +580,15 @@ local function MakeSlot(Parent1, p2)
 	end
 	
 	function config:Select(p7)
-		-- upvalues: config (copy), Parent1 (upval), Humanoid1 (upval), HopperBin (upval), Tbl (upval), Backpack (upval)
+		-- upvalues: config (copy), Parent1 (upval), Humanoid (upval), HopperBin (upval), Tbl (upval), Backpack (upval)
 		if p7 then return end
 		local Tool = config.Tool
 		
 		if Tool then
 			if not Tool or (not Tool:IsA("HopperBin") or not Tool.Active) and Tool.Parent ~= Parent1 then
 				if Tool.Parent == Backpack then
-					if Humanoid1 then
-						Humanoid1:UnequipTools()
+					if Humanoid then
+						Humanoid:UnequipTools()
 						
 						if HopperBin then
 							HopperBin:ToggleSelect()
@@ -605,8 +606,8 @@ local function MakeSlot(Parent1, p2)
 						Tool.Parent = Parent1
 					end
 				end
-			elseif Humanoid1 then
-				Humanoid1:UnequipTools()
+			elseif Humanoid then
+				Humanoid:UnequipTools()
 				
 				if HopperBin then
 					HopperBin:ToggleSelect()
@@ -673,15 +674,15 @@ local function MakeSlot(Parent1, p2)
 		end)
 		
 		function config.MoveToInventory(p7)
-			-- upvalues: config (copy), NumberOfHotbarSlots (upval), MakeSlot (upval), Frame3 (upval), Parent1 (upval), Humanoid1 (upval), HopperBin (upval), Tbl (upval), Flag4 (upval), Frame2 (upval)
+			-- upvalues: config (copy), NumberOfHotbarSlots (upval), MakeSlot (upval), Frame3 (upval), Parent1 (upval), Humanoid (upval), HopperBin (upval), Tbl (upval), Flag4 (upval), Frame2 (upval)
 			if config.Index <= NumberOfHotbarSlots then
 				local Tool = config.Tool
 				p7:Clear()
 				local Slot = MakeSlot(Frame3)
 				Slot:Fill(Tool)
 				
-				if Tool and (Tool:IsA("HopperBin") and Tool.Active or Tool.Parent == Parent1) and Humanoid1 then
-					Humanoid1:UnequipTools()
+				if Tool and (Tool:IsA("HopperBin") and Tool.Active or Tool.Parent == Parent1) and Humanoid then
+					Humanoid:UnequipTools()
 					
 					if HopperBin then
 						HopperBin:ToggleSelect()
@@ -747,7 +748,7 @@ local function MakeSlot(Parent1, p2)
 		end
 	end)
 	Frame.DragStopped:connect(function(X, Y)
-		-- upvalues: Frame4 (ref), Frame (ref), Position (ref), Parent2 (ref), ImageLabel (ref), TextLabel (ref), TextLabel1 (ref), Frame5 (ref), Tbl2 (upval), config (copy), Frame2 (upval), NumberOfHotbarSlots (upval), v8 (ref), v2 (upval), Frame1 (upval), List (upval), Parent1 (upval), Humanoid1 (upval), HopperBin (upval), Tbl (upval), Flag4 (upval)
+		-- upvalues: Frame4 (ref), Frame (ref), Position (ref), Parent2 (ref), ImageLabel (ref), TextLabel (ref), TextLabel1 (ref), Frame5 (ref), Tbl2 (upval), config (copy), Frame2 (upval), NumberOfHotbarSlots (upval), v8 (ref), v2 (upval), Frame1 (upval), List (upval), Parent1 (upval), Humanoid (upval), HopperBin (upval), Tbl (upval), Flag4 (upval)
 		if Frame4 then
 			Frame4:Destroy()
 		end
@@ -816,8 +817,8 @@ local function MakeSlot(Parent1, p2)
 						local Tool = config.Tool
 						
 						if Tool then
-							if Tool and (Tool:IsA("HopperBin") and Tool.Active or Tool.Parent == Parent1) and Humanoid1 then
-								Humanoid1:UnequipTools()
+							if Tool and (Tool:IsA("HopperBin") and Tool.Active or Tool.Parent == Parent1) and Humanoid then
+								Humanoid:UnequipTools()
 								
 								if HopperBin then
 									HopperBin:ToggleSelect()
@@ -911,7 +912,7 @@ local _ = function(Value: number)
 end
 
 local function OnChildAdded(Child: Tool)
-	-- upvalues: Frame (ref), Parent1 (ref), Humanoid1 (ref), CurrentTime (ref), HopperBin (ref), Tbl (copy), Flag1 (ref), LocalPlayer (ref), v2 (ref), MakeSlot (copy), Frame3 (ref), List (copy), Backpack (ref), AdjustHotbarFrames (copy), NumberOfHotbarSlots (ref), Frame2 (ref), Humanoid (copy)
+	-- upvalues: Frame (ref), Parent1 (ref), Humanoid (ref), CurrentTime (ref), HopperBin (ref), Tbl (copy), Flag1 (ref), LocalPlayer (ref), v2 (ref), MakeSlot (copy), Frame3 (ref), List (copy), Backpack (ref), AdjustHotbarFrames (copy), NumberOfHotbarSlots (ref), Frame2 (ref), BackpackScriptModule (copy)
 	if not Frame then return end
 	if Child:IsA("Tool") or Child:IsA("HopperBin") then
 		if Child.Parent == Parent1 then
@@ -927,8 +928,8 @@ local function OnChildAdded(Child: Tool)
 			
 			if StarterGear and StarterGear:FindFirstChild(Child.Name) then
 				Flag1 = true
-				local V65 = v2 or MakeSlot(Frame3)
-				for i = V65.Index, 1, -1 do
+				local V63 = v2 or MakeSlot(Frame3)
+				for i = V63.Index, 1, -1 do
 					local Entry1 = List[i]
 					local IDelta = i - 1
 					
@@ -953,15 +954,15 @@ local function OnChildAdded(Child: Tool)
 		if Entry then
 			Entry:UpdateEquipView()
 		else
-			local V65 = v2 or MakeSlot(Frame3)
-			V65:Fill(Child)
+			local V63 = v2 or MakeSlot(Frame3)
+			V63:Fill(Child)
 			
-			if V65.Index <= NumberOfHotbarSlots and not Frame2.Visible then
+			if V63.Index <= NumberOfHotbarSlots and not Frame2.Visible then
 				AdjustHotbarFrames()
 			end
 			if Child:IsA("HopperBin") and Child.Active then
-				if Humanoid1 then
-					Humanoid1:UnequipTools()
+				if Humanoid then
+					Humanoid:UnequipTools()
 					
 					if HopperBin then
 						HopperBin:ToggleSelect()
@@ -972,16 +973,16 @@ local function OnChildAdded(Child: Tool)
 				HopperBin = Child
 			end
 		end
-		Humanoid.BackpackItemAdded:Fire()
+		BackpackScriptModule.BackpackItemAdded:Fire()
 		
 		return
 	elseif Child:IsA("Humanoid") and Child.Parent == Parent1 then
-		Humanoid1 = Child
+		Humanoid = Child
 	end
 end
 
 local function OnChildRemoved(Child)
-	-- upvalues: Frame (ref), CurrentTime (ref), Parent1 (ref), Backpack (ref), Tbl (copy), NumberOfHotbarSlots (ref), Frame2 (ref), AdjustHotbarFrames (copy), HopperBin (ref), Humanoid (copy), List (copy)
+	-- upvalues: Frame (ref), CurrentTime (ref), Parent1 (ref), Backpack (ref), Tbl (copy), NumberOfHotbarSlots (ref), Frame2 (ref), AdjustHotbarFrames (copy), HopperBin (ref), BackpackScriptModule (copy), List (copy)
 	if not Frame then return end
 	if not Child:IsA("Tool") and not Child:IsA("HopperBin") then return end
 	CurrentTime = tick()
@@ -1002,7 +1003,7 @@ local function OnChildRemoved(Child)
 	if Child == HopperBin then
 		HopperBin = nil
 	end
-	Humanoid.BackpackItemRemoved:Fire()
+	BackpackScriptModule.BackpackItemRemoved:Fire()
 	local Flag = true
 	
 	for i = NumberOfHotbarSlots + 1, #List do
@@ -1015,7 +1016,7 @@ local function OnChildRemoved(Child)
 		break
 	end
 	if Flag then
-		Humanoid.BackpackEmpty:Fire()
+		BackpackScriptModule.BackpackEmpty:Fire()
 	end
 end
 
@@ -1055,7 +1056,7 @@ local function OnCharacterAdded(Character)
 end
 
 local function OnInputBegan(Input, GameProcessed)
-	-- upvalues: Flag3 (ref), Flag2 (ref), Value2 (copy), Tbl1 (copy), Frame2 (ref), Humanoid (copy)
+	-- upvalues: Flag3 (ref), Flag2 (ref), Value2 (copy), Tbl1 (copy), Frame2 (ref), BackpackScriptModule (copy)
 	if Input.UserInputType == Enum.UserInputType.Keyboard and not Flag3 and (Flag2 or Input.KeyCode.Value == Value2) then
 		local Entry: (any) -> () = Tbl1[Input.KeyCode.Value]
 		
@@ -1066,7 +1067,7 @@ local function OnInputBegan(Input, GameProcessed)
 	local UserInputType = Input.UserInputType
 	
 	if not GameProcessed and (UserInputType == Enum.UserInputType.MouseButton1 or UserInputType == Enum.UserInputType.Touch) and Frame2 and Frame2.Visible then
-		Humanoid.OpenClose()
+		BackpackScriptModule.OpenClose()
 	end
 end
 
@@ -1083,7 +1084,7 @@ end
 local Input = nil
 local CurrentTime1 = nil
 
-local function v107() end
+local function v105() end
 
 local _Vector2 = Vector2.new(0, 0)
 
@@ -1126,7 +1127,7 @@ local function getInputDirection(Input): Vector2
 end
 
 local _ = function(_, _, Input)
-	-- upvalues: getInputDirection (copy), NumberOfHotbarSlots (ref), List (copy), Humanoid1 (ref), HopperBin (ref), Tbl (copy)
+	-- upvalues: getInputDirection (copy), NumberOfHotbarSlots (ref), List (copy), Humanoid (ref), HopperBin (ref), Tbl (copy)
 	local InputDirection = getInputDirection(Input)
 	
 	if InputDirection == Vector2.new(0, 0) then return end
@@ -1148,8 +1149,8 @@ local _ = function(_, _, Input)
 			
 			return
 		end
-	elseif Humanoid1 then
-		Humanoid1:UnequipTools()
+	elseif Humanoid then
+		Humanoid:UnequipTools()
 		
 		if HopperBin then
 			HopperBin:ToggleSelect()
@@ -1160,13 +1161,13 @@ local _ = function(_, _, Input)
 end
 
 v5 = function(_, InputState, InputObject)
-	-- upvalues: Input (ref), CurrentTime1 (ref), Humanoid1 (ref), HopperBin (ref), Tbl (copy), NumberOfHotbarSlots (ref), List (copy), v4 (ref)
+	-- upvalues: Input (ref), CurrentTime1 (ref), Humanoid (ref), HopperBin (ref), Tbl (copy), NumberOfHotbarSlots (ref), List (copy), v4 (ref)
 	if InputState ~= Enum.UserInputState.Begin then return end
 	if not Input or (Input.KeyCode ~= Enum.KeyCode.ButtonR1 or InputObject.KeyCode ~= Enum.KeyCode.ButtonL1) and (Input.KeyCode ~= Enum.KeyCode.ButtonL1 or InputObject.KeyCode ~= Enum.KeyCode.ButtonR1) or tick() - CurrentTime1 > 0.06 then
 		Input = InputObject
 		CurrentTime1 = tick()
 		delay(0.06, function()
-			-- upvalues: Input (upval), InputObject (copy), NumberOfHotbarSlots (upval), List (upval), Humanoid1 (upval), HopperBin (upval), Tbl (upval), v4 (upval)
+			-- upvalues: Input (upval), InputObject (copy), NumberOfHotbarSlots (upval), List (upval), Humanoid (upval), HopperBin (upval), Tbl (upval), v4 (upval)
 			if Input ~= InputObject then return end
 			local Amount: number = if InputObject.KeyCode == Enum.KeyCode.ButtonL1 then -1 else 1
 			for i = 1, NumberOfHotbarSlots do
@@ -1204,8 +1205,8 @@ v5 = function(_, InputState, InputObject)
 					
 					return
 				end
-				if Humanoid1 then
-					Humanoid1:UnequipTools()
+				if Humanoid then
+					Humanoid:UnequipTools()
 					
 					if HopperBin then
 						HopperBin:ToggleSelect()
@@ -1234,8 +1235,8 @@ v5 = function(_, InputState, InputObject)
 		
 		return
 	end
-	if Humanoid1 then
-		Humanoid1:UnequipTools()
+	if Humanoid then
+		Humanoid:UnequipTools()
 		
 		if HopperBin then
 			HopperBin:ToggleSelect()
@@ -1312,9 +1313,9 @@ function changeSlot(GamepadSwapSlot)
 end
 
 function enableGamepadInventoryControl()
-	-- upvalues: Frame2 (ref), Humanoid (copy), ContextActionService (copy), v107 (copy), Frame1 (ref), GuiService (copy)
+	-- upvalues: Frame2 (ref), BackpackScriptModule (copy), ContextActionService (copy), v105 (copy), Frame1 (ref), GuiService (copy)
 	local function v228(_, InputState, _)
-		-- upvalues: Frame2 (upval), Humanoid (upval)
+		-- upvalues: Frame2 (upval), BackpackScriptModule (upval)
 		if InputState ~= Enum.UserInputState.Begin then return end
 		if getGamepadSwapSlot() then
 			local GamepadSwapSlot = getGamepadSwapSlot()
@@ -1325,11 +1326,11 @@ function enableGamepadInventoryControl()
 				return
 			end
 		elseif Frame2 and Frame2.Visible then
-			Humanoid.OpenClose()
+			BackpackScriptModule.OpenClose()
 		end
 	end
 	
-	ContextActionService:BindAction("RBXBackpackHasGamepadFocus", v107, false, Enum.UserInputType.Gamepad1)
+	ContextActionService:BindAction("RBXBackpackHasGamepadFocus", v105, false, Enum.UserInputType.Gamepad1)
 	ContextActionService:BindAction("RBXCloseInventory", v228, false, Enum.KeyCode.ButtonB, Enum.KeyCode.ButtonStart)
 	
 	if Frame1 then
@@ -1451,8 +1452,8 @@ local function MakeVRRoundButton(Name, Image)
 	return ImageButton, ImageLabel, ImageLabel1
 end
 
-function Humanoid.createGui()
-	-- upvalues: Frame (ref), NewGui (copy), FFlagMountCoreGuiBackpackModule (copy), StarterGui (copy), RobloxGui (copy), Frame1 (ref), NumberOfHotbarSlots (ref), MakeSlot (copy), v2 (ref), ImageButton (ref), Humanoid (copy), _Color3_4 (copy), CloseInventory (ref), MakeVRRoundButton (copy), Frame2 (ref), ScaledPreferredTransparency (ref), _Color3 (copy), TextButton (ref), ScrollingFrame (ref), Frame3 (ref), GridLayout (ref), XOffset (ref), ScrollUpButton (ref), ScrollDownButton (ref), UpdateBackpackLayout (copy), CreateFunction (copy), IsEnabled (copy), _Color3_5 (copy), ScaledPreferredTransparency2 (ref), InGameUnknownNamespaceBACKPACKSEARCH (ref), _Color3_2 (copy), List (copy), Flag4 (ref), UpdateScrollingFrameCanvasSize (copy), List3 (copy), Tbl1 (copy), VRService (copy), UserInputService (copy), GuiService (copy), Tbl2 (copy), AdjustHotbarFrames (copy), Flag5 (ref), config (copy), ContextActionService (copy), Value (copy), LocalPlayer (ref), Players (copy), OnCharacterAdded (copy), List1 (copy), OnInputBegan (copy), Flag3 (ref), Value2 (copy), HopperBin (ref), Humanoid1 (ref), Tbl (copy), OnUISChanged (copy), EnableHotbarHide (copy), SettingsShowSignal (copy), IsInExperienceUIVREnabled (copy), InExperienceUIVRIXP (copy), InExperienceAppChatModalModule (copy), UserGameSettings (copy), ScaledPreferredTransparency1 (ref)
+function BackpackScriptModule.createGui()
+	-- upvalues: Frame (ref), NewGui (copy), FFlagMountCoreGuiBackpackModule (copy), StarterGui (copy), RobloxGui (copy), Frame1 (ref), NumberOfHotbarSlots (ref), MakeSlot (copy), v2 (ref), ImageButton (ref), BackpackScriptModule (copy), _Color3_4 (copy), CloseInventory (ref), MakeVRRoundButton (copy), Frame2 (ref), ScaledPreferredTransparency (ref), _Color3 (copy), TextButton (ref), ScrollingFrame (ref), Frame3 (ref), GridLayout (ref), XOffset (ref), ScrollUpButton (ref), ScrollDownButton (ref), UpdateBackpackLayout (copy), CreateFunction (copy), NoFFlagResponsiveUnitsDeprecateTenFoot (copy), _Color3_5 (copy), ScaledPreferredTransparency2 (ref), InGameUnknownNamespaceBACKPACKSEARCH (ref), _Color3_2 (copy), List (copy), Flag4 (ref), UpdateScrollingFrameCanvasSize (copy), List3 (copy), Tbl1 (copy), VRService (copy), UserInputService (copy), GuiService (copy), Tbl2 (copy), AdjustHotbarFrames (copy), Flag5 (ref), config (copy), ContextActionService (copy), Value (copy), LocalPlayer (ref), Players (copy), OnCharacterAdded (copy), List1 (copy), OnInputBegan (copy), Flag3 (ref), Value2 (copy), HopperBin (ref), Humanoid (ref), Tbl (copy), OnUISChanged (copy), EnableHotbarHide (copy), SettingsShowSignal (copy), IsInExperienceUIVREnabled (copy), InExperienceUIVRIXP (copy), InExperienceAppChatModalModule (copy), UserGameSettings (copy), ScaledPreferredTransparency1 (ref)
 	Frame = NewGui("Frame", "Backpack")
 	
 	if FFlagMountCoreGuiBackpackModule then
@@ -1478,8 +1479,8 @@ function Humanoid.createGui()
 	ImageButton.Size = UDim2.new(0, 30, 0, 30)
 	ImageButton.Image = "rbxasset://textures/ui/Backpack/ScrollUpArrow.png"
 	ImageButton.MouseButton1Click:connect(function()
-		-- upvalues: Humanoid (upval)
-		Humanoid.OpenClose()
+		-- upvalues: BackpackScriptModule (upval)
+		BackpackScriptModule.OpenClose()
 	end)
 	ImageButton.SelectionGained:connect(function()
 		-- upvalues: ImageButton (upval), _Color3_4 (upval)
@@ -1495,9 +1496,9 @@ function Humanoid.createGui()
 	CloseInventory = MakeVRRoundButton("CloseInventory", "rbxasset://textures/ui/Keyboard/close_button_icon.png")
 	CloseInventory.Position = UDim2.new(0, 0, 0, -50)
 	CloseInventory.MouseButton1Click:connect(function()
-		-- upvalues: Frame2 (upval), Humanoid (upval)
+		-- upvalues: Frame2 (upval), BackpackScriptModule (upval)
 		if Frame2.Visible then
-			Humanoid.OpenClose()
+			BackpackScriptModule.OpenClose()
 		end
 	end)
 	local ImageLabel = NewGui("ImageLabel", "LeftBumper")
@@ -1578,12 +1579,12 @@ function Humanoid.createGui()
 		Name = "GamepadHintsFrame",
 		BackgroundTransparency = 1,
 		Visible = false,
-		Size = UDim2.new(0, Frame1.Size.X.Offset, 0, if IsEnabled then 95 else 60),
+		Size = UDim2.new(0, Frame1.Size.X.Offset, 0, if NoFFlagResponsiveUnitsDeprecateTenFoot then 95 else 60),
 		Parent = Frame
 	})
 	
 	local function addGamepadHint(p9, p10, Text)
-		-- upvalues: CreateFunction (upval), Frame5 (copy), IsEnabled (upval)
+		-- upvalues: CreateFunction (upval), Frame5 (copy), NoFFlagResponsiveUnitsDeprecateTenFoot (upval)
 		local Parent = CreateFunction("Frame")({
 			Name = "HintFrame",
 			BackgroundTransparency = 1,
@@ -1594,18 +1595,18 @@ function Humanoid.createGui()
 		local _ = CreateFunction("ImageLabel")({
 			Name = "HintImage",
 			BackgroundTransparency = 1,
-			Size = IsEnabled and UDim2.new(0, 90, 0, 90) or UDim2.new(0, 60, 0, 60),
-			Image = IsEnabled and p10 or p9,
+			Size = NoFFlagResponsiveUnitsDeprecateTenFoot and UDim2.new(0, 90, 0, 90) or UDim2.new(0, 60, 0, 60),
+			Image = NoFFlagResponsiveUnitsDeprecateTenFoot and p10 or p9,
 			Parent = Parent
 		})
 		local Label = CreateFunction("TextLabel")({
 			Name = "HintText",
 			BackgroundTransparency = 1,
 			TextWrapped = true,
-			Position = UDim2.new(0, if IsEnabled then 100 else 70, 0, 0),
-			Size = UDim2.new(1, -(if IsEnabled then 100 else 70), 1, 0),
+			Position = UDim2.new(0, if NoFFlagResponsiveUnitsDeprecateTenFoot then 100 else 70, 0, 0),
+			Size = UDim2.new(1, -(if NoFFlagResponsiveUnitsDeprecateTenFoot then 100 else 70), 1, 0),
 			Font = Enum.Font.SourceSansBold,
-			FontSize = IsEnabled and Enum.FontSize.Size36 or Enum.FontSize.Size24,
+			FontSize = NoFFlagResponsiveUnitsDeprecateTenFoot and Enum.FontSize.Size36 or Enum.FontSize.Size24,
 			Text = Text,
 			TextColor3 = Color3.new(1, 1, 1),
 			TextXAlignment = Enum.TextXAlignment.Left,
@@ -1617,9 +1618,9 @@ function Humanoid.createGui()
 	end
 	
 	local function resizeGamepadHintsFrame()
-		-- upvalues: Frame1 (upval), Frame2 (upval), Frame5 (copy), IsEnabled (upval)
+		-- upvalues: Frame1 (upval), Frame2 (upval), Frame5 (copy), NoFFlagResponsiveUnitsDeprecateTenFoot (upval)
 		if not Frame1 or not Frame2 then return end
-		Frame5.Size = UDim2.new(Frame1.Size.X.Scale, Frame1.Size.X.Offset, 0, if IsEnabled then 95 else 60)
+		Frame5.Size = UDim2.new(Frame1.Size.X.Scale, Frame1.Size.X.Offset, 0, if NoFFlagResponsiveUnitsDeprecateTenFoot then 95 else 60)
 		Frame5.Position = UDim2.new(Frame1.Position.X.Scale, Frame1.Position.X.Offset, Frame2.Position.Y.Scale, Frame2.Position.Y.Offset - Frame5.Size.Y.Offset)
 		local NewOffset = 0
 		local Children = Frame5:GetChildren()
@@ -1763,7 +1764,7 @@ function Humanoid.createGui()
 	TextButton1.MouseButton1Click:connect(reset)
 	TextBox.Changed:connect(onChanged)
 	TextBox.FocusLost:connect(focusLost)
-	table.insert(List3, Humanoid.StateChanged.Event:connect(function(Modal)
+	table.insert(List3, BackpackScriptModule.StateChanged.Event:connect(function(Modal)
 		-- upvalues: TextButton1 (copy), clearResults (copy), TextBox (copy), InGameUnknownNamespaceBACKPACKSEARCH (upval)
 		TextButton1.Modal = Modal
 		
@@ -1774,7 +1775,7 @@ function Humanoid.createGui()
 	end))
 	
 	Tbl1[Enum.KeyCode.Escape.Value] = function(p9)
-		-- upvalues: clearResults (copy), TextBox (copy), InGameUnknownNamespaceBACKPACKSEARCH (upval), Frame2 (upval), Humanoid (upval)
+		-- upvalues: clearResults (copy), TextBox (copy), InGameUnknownNamespaceBACKPACKSEARCH (upval), Frame2 (upval), BackpackScriptModule (upval)
 		if p9 then
 			clearResults()
 			TextBox.Text = InGameUnknownNamespaceBACKPACKSEARCH
@@ -1782,7 +1783,7 @@ function Humanoid.createGui()
 			return
 		end
 		if Frame2 and Frame2.Visible then
-			Humanoid.OpenClose()
+			BackpackScriptModule.OpenClose()
 		end
 	end
 	
@@ -1810,7 +1811,7 @@ function Humanoid.createGui()
 	end
 	
 	local function openClose()
-		-- upvalues: Frame2 (upval), Tbl2 (upval), AdjustHotbarFrames (upval), Frame1 (upval), NumberOfHotbarSlots (upval), List (upval), Flag5 (upval), config (upval), UserInputService (upval), resizeGamepadHintsFrame (copy), Frame5 (copy), ContextActionService (upval), v252 (copy), Humanoid (upval)
+		-- upvalues: Frame2 (upval), Tbl2 (upval), AdjustHotbarFrames (upval), Frame1 (upval), NumberOfHotbarSlots (upval), List (upval), Flag5 (upval), config (upval), UserInputService (upval), resizeGamepadHintsFrame (copy), Frame5 (copy), ContextActionService (upval), v252 (copy), BackpackScriptModule (upval)
 		if not Frame2 then return end
 		if not next(Tbl2) then
 			Frame2.Visible = not Frame2.Visible
@@ -1841,8 +1842,8 @@ function Humanoid.createGui()
 		else
 			ContextActionService:UnbindAction("RBXRemoveSlot")
 		end
-		Humanoid.IsOpen = Frame2.Visible
-		Humanoid.StateChanged:Fire(Frame2.Visible)
+		BackpackScriptModule.IsOpen = Frame2.Visible
+		BackpackScriptModule.StateChanged:Fire(Frame2.Visible)
 	end
 	
 	Tbl1[Value] = function()
@@ -1854,7 +1855,7 @@ function Humanoid.createGui()
 		end
 	end
 	
-	Humanoid.OpenClose = openClose
+	BackpackScriptModule.OpenClose = openClose
 	while not LocalPlayer do
 		wait()
 		LocalPlayer = Players.LocalPlayer
@@ -1879,9 +1880,9 @@ function Humanoid.createGui()
 	end))
 	
 	Tbl1[Value2] = function()
-		-- upvalues: HopperBin (upval), Humanoid1 (upval), Tbl (upval)
-		if HopperBin and Humanoid1 then
-			Humanoid1:UnequipTools()
+		-- upvalues: HopperBin (upval), Humanoid (upval), Tbl (upval)
+		if HopperBin and Humanoid then
+			Humanoid:UnequipTools()
 			
 			if HopperBin then
 				HopperBin:ToggleSelect()
@@ -1912,10 +1913,10 @@ function Humanoid.createGui()
 	
 	if EnableHotbarHide then
 		table.insert(List3, SettingsShowSignal:connect(function(p9)
-			-- upvalues: Humanoid (upval), AdjustHotbarFrames (upval)
+			-- upvalues: BackpackScriptModule (upval), AdjustHotbarFrames (upval)
 			if not p9 then
 				AdjustHotbarFrames(false)
-			elseif Humanoid.IsHotbarVisible then
+			elseif BackpackScriptModule.IsHotbarVisible then
 				AdjustHotbarFrames(true)
 				
 				return
@@ -1923,15 +1924,15 @@ function Humanoid.createGui()
 		end))
 	end
 	table.insert(List3, GuiService.MenuOpened:Connect(function()
-		-- upvalues: Humanoid (upval), IsInExperienceUIVREnabled (upval), InExperienceUIVRIXP (upval), VRService (upval)
-		if Humanoid.IsOpen and (not IsInExperienceUIVREnabled or InExperienceUIVRIXP:isMovePanelToCenter() or not VRService.VREnabled) then
-			Humanoid.OpenClose()
+		-- upvalues: BackpackScriptModule (upval), IsInExperienceUIVREnabled (upval), InExperienceUIVRIXP (upval), VRService (upval)
+		if BackpackScriptModule.IsOpen and (not IsInExperienceUIVREnabled or InExperienceUIVRIXP:isMovePanelToCenter() or not VRService.VREnabled) then
+			BackpackScriptModule.OpenClose()
 		end
 	end))
 	table.insert(List3, InExperienceAppChatModalModule.default.visibilitySignal.Event:Connect(function(p9)
-		-- upvalues: Humanoid (upval)
-		if p9 and Humanoid.IsOpen then
-			Humanoid.OpenClose()
+		-- upvalues: BackpackScriptModule (upval)
+		if p9 and BackpackScriptModule.IsOpen then
+			BackpackScriptModule.OpenClose()
 		end
 	end))
 	table.insert(List3, UserGameSettings:GetPropertyChangedSignal("PreferredTransparency"):connect(function()
@@ -1952,8 +1953,8 @@ function Humanoid.createGui()
 	end))
 end
 
-function Humanoid.destroyGui()
-	-- upvalues: List3 (copy), List2 (ref), ContextActionService (copy), List (copy), Tbl (copy), Tbl1 (copy), Tbl2 (copy), List1 (copy), Frame (ref), Frame1 (ref), ImageButton (ref), CloseInventory (ref), Frame2 (ref), TextButton (ref), ScrollingFrame (ref), Frame3 (ref), GridLayout (ref), ScrollUpButton (ref), ScrollDownButton (ref), Parent1 (ref), Humanoid1 (ref), Backpack (ref), v2 (ref), Count (ref), HopperBin (ref), Flag1 (ref), Flag2 (ref), Flag3 (ref), Flag4 (ref), Flag5 (ref), Flag (ref), CurrentTime (ref), v4 (ref), Humanoid (copy)
+function BackpackScriptModule.destroyGui()
+	-- upvalues: List3 (copy), List2 (ref), ContextActionService (copy), List (copy), Tbl (copy), Tbl1 (copy), Tbl2 (copy), List1 (copy), Frame (ref), Frame1 (ref), ImageButton (ref), CloseInventory (ref), Frame2 (ref), TextButton (ref), ScrollingFrame (ref), Frame3 (ref), GridLayout (ref), ScrollUpButton (ref), ScrollDownButton (ref), Parent1 (ref), Humanoid (ref), Backpack (ref), v2 (ref), Count (ref), HopperBin (ref), Flag1 (ref), Flag2 (ref), Flag3 (ref), Flag4 (ref), Flag5 (ref), Flag (ref), CurrentTime (ref), v4 (ref), BackpackScriptModule (copy)
 	for _, value in pairs(List3) do
 		value:disconnect()
 	end
@@ -1995,7 +1996,7 @@ function Humanoid.destroyGui()
 	ScrollUpButton = nil
 	ScrollDownButton = nil
 	Parent1 = nil
-	Humanoid1 = nil
+	Humanoid = nil
 	Backpack = nil
 	v2 = nil
 	Count = 0
@@ -2008,24 +2009,24 @@ function Humanoid.destroyGui()
 	Flag = false
 	CurrentTime = 0
 	v4 = nil
-	Humanoid.OpenClose = nil
-	Humanoid.IsOpen = false
-	Humanoid.IsHotbarVisible = false
+	BackpackScriptModule.OpenClose = nil
+	BackpackScriptModule.IsOpen = false
+	BackpackScriptModule.IsHotbarVisible = false
 end
 
-function Humanoid:TopbarEnabledChanged(TopBarCoreGuiEnabled)
+function BackpackScriptModule:TopbarEnabledChanged(TopBarCoreGuiEnabled)
 	-- upvalues: v1 (ref), setBackpackEnabled (copy), StarterGui (copy)
 	v1 = TopBarCoreGuiEnabled
 	setBackpackEnabled(StarterGui:GetCoreGuiEnabled(Enum.CoreGuiType.Backpack))
 end
 
 if FFlagTopBarSignalizeSetCores then
-	Humanoid.disposeEffect = SignalsModule.createEffect(function(p9)
-		-- upvalues: InExperienceTopBarModule (copy), Humanoid (copy)
+	BackpackScriptModule.disposeEffect = SignalsModule.createEffect(function(p9)
+		-- upvalues: InExperienceTopBarModule (copy), BackpackScriptModule (copy)
 		local GetTopBarStoreFunction = InExperienceTopBarModule.Stores.GetTopBarStore
 		
 		if GetTopBarStoreFunction then
-			Humanoid:TopbarEnabledChanged(GetTopBarStoreFunction(p9).getTopBarCoreGuiEnabled(p9))
+			BackpackScriptModule:TopbarEnabledChanged(GetTopBarStoreFunction(p9).getTopBarCoreGuiEnabled(p9))
 		end
 	end)
 end
@@ -2035,26 +2036,26 @@ local Lifecycle = Features.registerLifecycle(Features.FeatureName.Backpack, {
 	coreGuiType = Enum.CoreGuiType.Backpack
 }).lifecycle
 Lifecycle:onEnabledChanged(function(p9)
-	-- upvalues: Humanoid (copy), setBackpackEnabled (copy)
+	-- upvalues: BackpackScriptModule (copy), setBackpackEnabled (copy)
 	if p9 then
-		Humanoid.createGui()
+		BackpackScriptModule.createGui()
 	else
-		Humanoid.destroyGui()
+		BackpackScriptModule.destroyGui()
 	end
 	setBackpackEnabled(p9)
 end)
 Lifecycle:onVisibilityChanged(function(IsOpen)
-	-- upvalues: Humanoid (copy)
-	if Humanoid.OpenClose and Humanoid.IsOpen ~= IsOpen then
-		Humanoid.OpenClose()
+	-- upvalues: BackpackScriptModule (copy)
+	if BackpackScriptModule.OpenClose and BackpackScriptModule.IsOpen ~= IsOpen then
+		BackpackScriptModule.OpenClose()
 	end
-	return Humanoid.IsOpen
+	return BackpackScriptModule.IsOpen
 end)
-Humanoid.StateChanged.Event:connect(function(p9)
+BackpackScriptModule.StateChanged.Event:connect(function(p9)
 	-- upvalues: Lifecycle (copy)
 	if Lifecycle then
 		Lifecycle.setVisible(p9)
 	end
 end)
 
-return Humanoid
+return BackpackScriptModule

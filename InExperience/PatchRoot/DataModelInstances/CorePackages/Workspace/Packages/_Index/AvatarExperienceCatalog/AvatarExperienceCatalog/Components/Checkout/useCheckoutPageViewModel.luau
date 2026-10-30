@@ -56,7 +56,6 @@ local CartIdService = AvatarExperienceAnalyticsModule.Lib.CartIdService
 local AvatarExperienceFlagsModule = require(Parent.AvatarExperienceFlags)
 local FFlagAXDurablesForMIS = AvatarExperienceFlagsModule.FFlagAXDurablesForMIS
 local FFlagAXMISWithBlackbird = SharedFlagsModule.FFlagAXMISWithBlackbird
-local FFlagAXFixMISUpsellDiscountSummary = SharedFlagsModule.FFlagAXFixMISUpsellDiscountSummary
 local FFlagAXMISWithOffers = AvatarExperienceFlagsModule.FFlagAXMISWithOffers
 local FFlagAXMISOffersChip = AvatarExperienceFlagsModule.FFlagAXMISOffersChip
 local FFlagAXEnableExpiredUserLookCheckout = AvatarExperienceFlagsModule.FFlagAXEnableExpiredUserLookCheckout
@@ -134,7 +133,7 @@ local function selectUserRobux(p1)
 	return if LocalUserId and p1.UserRobux then p1.UserRobux[LocalUserId] else nil
 end
 
-local function v67(p1)
+local function v66(p1)
 	local LocalUserId = p1.LocalUserId
 	
 	return if LocalUserId and p1.Users then p1.Users[LocalUserId].hasRobloxSubscription else false
@@ -178,7 +177,7 @@ local function selectItemInfoForTryOnItems(p1)
 	return List
 end
 
-local function v69(JoinResults, DiscountedItemsFromOffers)
+local function v68(JoinResults, DiscountedItemsFromOffers)
 	-- upvalues: FFlagAXMISOffersChip (copy)
 	local List = {}
 	
@@ -196,7 +195,7 @@ local function v69(JoinResults, DiscountedItemsFromOffers)
 end
 
 return function(p2)
-	-- upvalues: Parent (copy), UseAXCatalogStoreContextModule (copy), UseNavigationFunction (copy), UseAvatarRouteFunction (copy), UseNetworkingFunction (copy), UseDispatchFunction (copy), FFlagAXMISWithOffers (copy), UseSaveOptionsStoredValuesModule (copy), UseSignalStateFunction (copy), FFlagAXMISWithBlackbird (copy), ReactModule (copy), UseSelectorFunction (copy), selectTryOnItems (copy), TutilsModule (copy), selectTryOnBodyColor3s (copy), selectTryOnBodyScales (copy), selectTryOnBodyPartColorRangeIds (copy), selectTryOnLookId (copy), FFlagAXCatalogMakeupSupport (copy), v1 (ref), FFlagAXMISEnableMultiShoppingUnifiedEvents (copy), v2 (ref), v3 (ref), selectAvatarSceneLooks (copy), selectItemInfoForTryOnItems (copy), selectShouldTryOnWithoutEquippedItems (copy), selectLocalUserId (copy), selectUserRobux (copy), v67 (copy), UseLocalizationFunction (copy), LocalizationRoactContext (copy), UseAppPolicyFunction (copy), UseNavigationFocusFunction (copy), FFlagAXEnableExpiredUserLookCheckout (copy), RobloxEventReceiver (copy), NotificationService (copy), AvatarScreen (copy), GetRobloxSubscriptionProductsFunction (copy), MutedErrorFunction (copy), UseOffersCartPricingCalculationsForCartItemsModule (copy), CryoModule (copy), Constants (copy), FFlagAXBackgroundsEquipTryOnCounters (copy), ReportBackgroundUserActionCounter (copy), UnifiedEventLogEnums (copy), SendUnifiedEventForDeferredActionFunction (copy), CartIdService (copy), FFlagAXDurablesForMIS (copy), SetSelectedTimedOptionModule (copy), v69 (copy), FIntBlackbirdUpsellMinPriceForDiscountInclusive (copy), FIntBlackbirdUpsellMaxPriceForDiscountInclusive (copy), ToastType (copy), SetCurrentToastMessageFunction (copy), GetTryOnItemsContainsOnlyMakeupTypesModule (copy), FFlagAXMISSaveWearFix (copy), SaveAsMakeupLookThunkModule (copy), SaveAsAvatarThunkModule (copy), GetTryOnItemReducerKeyFunction (copy), FFlagAXRevertEquippedAssetsAfterLayeringTryOnMakeup (copy), AvatarLastEquippedStateStore (copy), GetEquippableAssetsFromTryOnItemsModule (copy), PurchaseItemsSuccessThunkModule (copy), DiscountTypeEnum (copy), FFlagAXFixMISUpsellDiscountSummary (copy), CloseCentralOverlayFunction (copy), PromiseModule (copy), AvatarScreenProperties (copy), SendUnifiedEventsForMultiItemShoppingFunction (copy), GetUnifiedEventsForMISFunction (copy), PurchaseItemsModule (copy), MapPurchaseItemsResponseModule (copy), GetIsInsufficientRobuxErrorFunction (copy)
+	-- upvalues: Parent (copy), UseAXCatalogStoreContextModule (copy), UseNavigationFunction (copy), UseAvatarRouteFunction (copy), UseNetworkingFunction (copy), UseDispatchFunction (copy), FFlagAXMISWithOffers (copy), UseSaveOptionsStoredValuesModule (copy), UseSignalStateFunction (copy), FFlagAXMISWithBlackbird (copy), ReactModule (copy), UseSelectorFunction (copy), selectTryOnItems (copy), TutilsModule (copy), selectTryOnBodyColor3s (copy), selectTryOnBodyScales (copy), selectTryOnBodyPartColorRangeIds (copy), selectTryOnLookId (copy), FFlagAXCatalogMakeupSupport (copy), v1 (ref), FFlagAXMISEnableMultiShoppingUnifiedEvents (copy), v2 (ref), v3 (ref), selectAvatarSceneLooks (copy), selectItemInfoForTryOnItems (copy), selectShouldTryOnWithoutEquippedItems (copy), selectLocalUserId (copy), selectUserRobux (copy), v66 (copy), UseLocalizationFunction (copy), LocalizationRoactContext (copy), UseAppPolicyFunction (copy), UseNavigationFocusFunction (copy), FFlagAXEnableExpiredUserLookCheckout (copy), RobloxEventReceiver (copy), NotificationService (copy), AvatarScreen (copy), GetRobloxSubscriptionProductsFunction (copy), MutedErrorFunction (copy), UseOffersCartPricingCalculationsForCartItemsModule (copy), CryoModule (copy), Constants (copy), FFlagAXBackgroundsEquipTryOnCounters (copy), ReportBackgroundUserActionCounter (copy), UnifiedEventLogEnums (copy), SendUnifiedEventForDeferredActionFunction (copy), CartIdService (copy), FFlagAXDurablesForMIS (copy), SetSelectedTimedOptionModule (copy), v68 (copy), FIntBlackbirdUpsellMinPriceForDiscountInclusive (copy), FIntBlackbirdUpsellMaxPriceForDiscountInclusive (copy), ToastType (copy), SetCurrentToastMessageFunction (copy), GetTryOnItemsContainsOnlyMakeupTypesModule (copy), FFlagAXMISSaveWearFix (copy), SaveAsMakeupLookThunkModule (copy), SaveAsAvatarThunkModule (copy), GetTryOnItemReducerKeyFunction (copy), FFlagAXRevertEquippedAssetsAfterLayeringTryOnMakeup (copy), AvatarLastEquippedStateStore (copy), GetEquippableAssetsFromTryOnItemsModule (copy), PurchaseItemsSuccessThunkModule (copy), DiscountTypeEnum (copy), CloseCentralOverlayFunction (copy), PromiseModule (copy), AvatarScreenProperties (copy), SendUnifiedEventsForMultiItemShoppingFunction (copy), GetUnifiedEventsForMISFunction (copy), PurchaseItemsModule (copy), MapPurchaseItemsResponseModule (copy), GetIsInsufficientRobuxErrorFunction (copy)
 	local PurchasePromptLiteModule = require(Parent.PurchasePromptLite)
 	local ShoppingCartStore = UseAXCatalogStoreContextModule().shoppingCartStore
 	local UseNavigationResult = UseNavigationFunction()
@@ -211,25 +210,25 @@ return function(p2)
 	local UseSignalStateResult4 = UseSignalStateFunction(ShoppingCartStore.getPurchasableItemsTotalOriginalPriceInRobux)
 	local UseSignalStateResult5 = UseSignalStateFunction(ShoppingCartStore.getErroredItemCount)
 	local IsSaveOptionsOpen = nil
-	local Callback1 = nil
+	local Callback2 = nil
 	
 	if FFlagAXMISWithOffers then
-		IsSaveOptionsOpen, Callback1 = ReactModule.useState(false)
+		IsSaveOptionsOpen, Callback2 = ReactModule.useState(false)
 	end
 	local UseStateResult, UseStateResult2 = ReactModule.useState(not FFlagAXMISWithOffers or not UseSaveOptionsStoredValuesModuleResult or UseSaveOptionsStoredValuesModuleResult.getWearAfterPurchase())
 	local UseStateResult1, UseStateResult2_1 = ReactModule.useState(if FFlagAXMISWithOffers and UseSaveOptionsStoredValuesModuleResult then UseSaveOptionsStoredValuesModuleResult.getAddToAvatars() else false)
 	local UseStateResult3, UseStateResult2_2 = ReactModule.useState(false)
 	local v4 = nil
-	local Callback2 = nil
-	
-	if FFlagAXMISWithBlackbird then
-		v4, Callback2 = ReactModule.useState({})
-	end
-	local v5 = nil
 	local Callback = nil
 	
+	if FFlagAXMISWithBlackbird then
+		v4, Callback = ReactModule.useState({})
+	end
+	local v5 = nil
+	local Callback1 = nil
+	
 	if FFlagAXMISWithOffers then
-		v5, Callback = ReactModule.useState(false)
+		v5, Callback1 = ReactModule.useState(false)
 	end
 	local UseSelectorResult = UseSelectorFunction(selectTryOnItems, TutilsModule.deepEqual)
 	local UseSelectorResult1 = UseSelectorFunction(selectTryOnBodyColor3s, TutilsModule.deepEqual)
@@ -244,7 +243,7 @@ return function(p2)
 	local UseSelectorResult10 = UseSelectorFunction(selectShouldTryOnWithoutEquippedItems)
 	local UseSelectorResult11 = UseSelectorFunction(selectLocalUserId)
 	local UseSelectorResult12 = UseSelectorFunction(selectUserRobux)
-	local UseSelectorResult13 = if FFlagAXMISWithBlackbird then UseSelectorFunction(v67) else nil
+	local UseSelectorResult13 = if FFlagAXMISWithBlackbird then UseSelectorFunction(v66) else nil
 	local UseLocalizationResult = UseLocalizationFunction({
 		purchaseFailedTitle = "Feature.Catalog.Title.Checkout.PurchaseFailedSingular",
 		purchaseFailedUnknownError = "CoreScripts.PurchasePrompt.PurchaseFailed.UnknownFailureNoItemName",
@@ -284,14 +283,14 @@ return function(p2)
 		end
 	end
 	ReactModule.useEffect(function()
-		-- upvalues: p2 (copy), UseSelectorResult12 (copy), FFlagAXMISWithBlackbird (upval), GetRobloxSubscriptionProductsFunction (upval), Callback2 (ref), MutedErrorFunction (upval), FFlagAXEnableExpiredUserLookCheckout (upval), UseRefResult1 (ref)
+		-- upvalues: p2 (copy), UseSelectorResult12 (copy), FFlagAXMISWithBlackbird (upval), GetRobloxSubscriptionProductsFunction (upval), Callback (ref), MutedErrorFunction (upval), FFlagAXEnableExpiredUserLookCheckout (upval), UseRefResult1 (ref)
 		if p2.fetchUserRobux and not UseSelectorResult12 then
 			p2.fetchUserRobux()
 		end
 		if FFlagAXMISWithBlackbird then
 			GetRobloxSubscriptionProductsFunction():andThen(function(Result)
-				-- upvalues: Callback2 (upval)
-				Callback2(Result)
+				-- upvalues: Callback (upval)
+				Callback(Result)
 			end):catch(function(Err)
 				-- upvalues: MutedErrorFunction (upval)
 				MutedErrorFunction("CheckoutPageViewModel", "Failed to fetch Roblox subscription products: " .. tostring(Err))
@@ -313,11 +312,11 @@ return function(p2)
 		end
 	end, { UseNavigationFocusResult, p2.fetchUserRobux })
 	ReactModule.useLayoutEffect(function()
-		-- upvalues: ShoppingCartStore (copy), UseSelectorResult9 (copy), UseAppPolicyResult (copy), FFlagAXMISWithOffers (upval), Callback (ref), FFlagAXEnableExpiredUserLookCheckout (upval), UseAvatarRouteResult (copy), AvatarScreen (upval), UseNavigationResult (copy)
+		-- upvalues: ShoppingCartStore (copy), UseSelectorResult9 (copy), UseAppPolicyResult (copy), FFlagAXMISWithOffers (upval), Callback1 (ref), FFlagAXEnableExpiredUserLookCheckout (upval), UseAvatarRouteResult (copy), AvatarScreen (upval), UseNavigationResult (copy)
 		ShoppingCartStore.syncFromTryOns(UseSelectorResult9, UseAppPolicyResult)
 		
 		if FFlagAXMISWithOffers then
-			Callback(true)
+			Callback1(true)
 		end
 		local Name = if FFlagAXEnableExpiredUserLookCheckout then UseAvatarRouteResult and (UseAvatarRouteResult.current and UseAvatarRouteResult.current.name) else nil
 		
@@ -506,7 +505,7 @@ return function(p2)
 		if FFlagAXMISSaveWearFix then p2.getCombinedHumanoidDescriptionFromEquippedAndOutfitTryOn else nil
 	})
 	local UseResult4 = if FFlagAXMISWithBlackbird then ReactModule.useCallback(function()
-		-- upvalues: UseSignalStateResult1 (copy), DiscountTypeEnum (upval), FFlagAXFixMISUpsellDiscountSummary (upval), UseSignalStateResult4 (copy), UseSignalStateResult3 (copy), UseOffersCartPricingCalculationsForCartItemsModuleResult (ref), UseDispatchResult (copy), PurchasePromptLiteModule (copy), CloseCentralOverlayFunction (upval), PromiseModule (upval), UseRefResult (copy)
+		-- upvalues: UseSignalStateResult1 (copy), DiscountTypeEnum (upval), UseSignalStateResult4 (copy), UseSignalStateResult3 (copy), UseOffersCartPricingCalculationsForCartItemsModuleResult (ref), UseDispatchResult (copy), PurchasePromptLiteModule (copy), CloseCentralOverlayFunction (upval), PromiseModule (upval), UseRefResult (copy)
 		local v7 = nil
 		
 		if UseSignalStateResult1 then
@@ -519,23 +518,21 @@ return function(p2)
 		end
 		local List = {}
 		
-		if FFlagAXFixMISUpsellDiscountSummary then
-			if v7 then
-				table.insert(List, 1, {
-					Type = DiscountTypeEnum.RobloxPlusSubscription,
-					AmountInRobux = UseSignalStateResult4 - UseSignalStateResult3,
-					Percent = v7.robuxDiscountPercentage
+		if v7 then
+			table.insert(List, 1, {
+				Type = DiscountTypeEnum.RobloxPlusSubscription,
+				AmountInRobux = UseSignalStateResult4 - UseSignalStateResult3,
+				Percent = v7.robuxDiscountPercentage
+			})
+		end
+		if UseOffersCartPricingCalculationsForCartItemsModuleResult.discountSummaryEntriesFromOffers then
+			for _, discountSummaryEntriesFromOffer in UseOffersCartPricingCalculationsForCartItemsModuleResult.discountSummaryEntriesFromOffers do
+				table.insert(List, {
+					Type = discountSummaryEntriesFromOffer.type,
+					AmountInRobux = discountSummaryEntriesFromOffer.amountInRobux,
+					Percent = discountSummaryEntriesFromOffer.percent,
+					LocalizedDiscountAttribution = discountSummaryEntriesFromOffer.localizedDiscountAttribution
 				})
-			end
-			if UseOffersCartPricingCalculationsForCartItemsModuleResult.discountSummaryEntriesFromOffers then
-				for _, discountSummaryEntriesFromOffer in UseOffersCartPricingCalculationsForCartItemsModuleResult.discountSummaryEntriesFromOffers do
-					table.insert(List, {
-						Type = discountSummaryEntriesFromOffer.type,
-						AmountInRobux = discountSummaryEntriesFromOffer.amountInRobux,
-						Percent = discountSummaryEntriesFromOffer.percent,
-						LocalizedDiscountAttribution = discountSummaryEntriesFromOffer.localizedDiscountAttribution
-					})
-				end
 			end
 		end
 		UseDispatchResult(PurchasePromptLiteModule.Thunks.OpenCentralOverlayForUnifiedPurchasePrompt({
@@ -546,20 +543,14 @@ return function(p2)
 					UseDispatchResult(CloseCentralOverlayFunction())
 				end,
 				fetchProductInfo = function()
-					-- upvalues: PromiseModule (upval), FFlagAXFixMISUpsellDiscountSummary (upval), UseSignalStateResult3 (upval), UseOffersCartPricingCalculationsForCartItemsModuleResult (upval), v7 (ref), UseSignalStateResult4 (upval), List (copy)
+					-- upvalues: PromiseModule (upval), UseSignalStateResult3 (upval), UseOffersCartPricingCalculationsForCartItemsModuleResult (upval), v7 (ref), UseSignalStateResult4 (upval), List (copy)
 					return PromiseModule.resolve({
 						IsForSale = true,
 						Name = "RobuxUpsell",
-						PriceInRobux = if FFlagAXFixMISUpsellDiscountSummary then UseSignalStateResult3 - UseOffersCartPricingCalculationsForCartItemsModuleResult.totalSelectedOffersDiscount else UseSignalStateResult3,
-						SavingsSummaryOverride = if FFlagAXFixMISUpsellDiscountSummary and v7 then UseOffersCartPricingCalculationsForCartItemsModuleResult.savingsSummary else nil,
+						PriceInRobux = UseSignalStateResult3 - UseOffersCartPricingCalculationsForCartItemsModuleResult.totalSelectedOffersDiscount,
+						SavingsSummaryOverride = if v7 then UseOffersCartPricingCalculationsForCartItemsModuleResult.savingsSummary else nil,
 						BasePriceInRobux = if v7 then UseSignalStateResult4 else nil,
-						PriceDiscountDetails = if v7 then if FFlagAXFixMISUpsellDiscountSummary then List else {
-							{
-								Type = v7.discountCampaign,
-								AmountInRobux = UseSignalStateResult4 - UseSignalStateResult3,
-								Percent = v7.robuxDiscountPercentage
-							}
-						} else nil
+						PriceDiscountDetails = if v7 then List else nil
 					})
 				end
 			}
@@ -568,7 +559,7 @@ return function(p2)
 	end, {
 		UseNavigationResult, UseDispatchResult, UseSignalStateResult3,
 		UseSignalStateResult4, UseSignalStateResult1,
-		if FFlagAXFixMISUpsellDiscountSummary then UseOffersCartPricingCalculationsForCartItemsModuleResult else nil
+		UseOffersCartPricingCalculationsForCartItemsModuleResult
 	}) else ReactModule.useCallback(function()
 		-- upvalues: UseNavigationResult (copy), AvatarScreen (upval), UseRefResult (copy)
 		UseNavigationResult.navigate(AvatarScreen.InsufficientRobuxPrompt)
@@ -702,7 +693,7 @@ return function(p2)
 	return {
 		canPurchase = UseSignalStateResult2,
 		cartItems = ReactModule.useMemo(function()
-			-- upvalues: UseSignalStateResult (copy), CryoModule (upval), Constants (upval), p2 (copy), FFlagAXBackgroundsEquipTryOnCounters (upval), ReportBackgroundUserActionCounter (upval), FFlagAXMISEnableMultiShoppingUnifiedEvents (upval), UnifiedEventLogEnums (upval), SendUnifiedEventForDeferredActionFunction (upval), CartIdService (upval), FFlagAXDurablesForMIS (upval), ShoppingCartStore (copy), UseDispatchResult (copy), SetSelectedTimedOptionModule (upval), FFlagAXMISWithOffers (upval), UseOffersCartPricingCalculationsForCartItemsModuleResult (ref), v69 (upval)
+			-- upvalues: UseSignalStateResult (copy), CryoModule (upval), Constants (upval), p2 (copy), FFlagAXBackgroundsEquipTryOnCounters (upval), ReportBackgroundUserActionCounter (upval), FFlagAXMISEnableMultiShoppingUnifiedEvents (upval), UnifiedEventLogEnums (upval), SendUnifiedEventForDeferredActionFunction (upval), CartIdService (upval), FFlagAXDurablesForMIS (upval), ShoppingCartStore (copy), UseDispatchResult (copy), SetSelectedTimedOptionModule (upval), FFlagAXMISWithOffers (upval), UseOffersCartPricingCalculationsForCartItemsModuleResult (ref), v68 (upval)
 			local JoinResults = {}
 			
 			for _, value in UseSignalStateResult do
@@ -753,7 +744,7 @@ return function(p2)
 				}))
 			end
 			if FFlagAXMISWithOffers and UseOffersCartPricingCalculationsForCartItemsModuleResult.discountedItemsFromOffers and #CryoModule.Dictionary.keys(UseOffersCartPricingCalculationsForCartItemsModuleResult.discountedItemsFromOffers) > 0 then
-				JoinResults = v69(JoinResults, UseOffersCartPricingCalculationsForCartItemsModuleResult.discountedItemsFromOffers)
+				JoinResults = v68(JoinResults, UseOffersCartPricingCalculationsForCartItemsModuleResult.discountedItemsFromOffers)
 			end
 			return JoinResults
 		end, {
@@ -828,8 +819,8 @@ return function(p2)
 			if FFlagAXMISWithOffers then UseSaveOptionsStoredValuesModuleResult else nil
 		}),
 		onSaveOptionsOpenToggle = if FFlagAXMISWithOffers then ReactModule.useCallback(function()
-			-- upvalues: Callback1 (ref), IsSaveOptionsOpen (ref)
-			Callback1(not IsSaveOptionsOpen)
+			-- upvalues: Callback2 (ref), IsSaveOptionsOpen (ref)
+			Callback2(not IsSaveOptionsOpen)
 		end, { IsSaveOptionsOpen }) else nil,
 		purchasableItemsTotalPriceInRobux = if FFlagAXMISWithOffers then math.max(UseSignalStateResult3 - UseOffersCartPricingCalculationsForCartItemsModuleResult.totalSelectedOffersDiscount, 0) else UseSignalStateResult3,
 		purchasableItemsTotalOriginalPriceInRobux = UseSignalStateResult4,

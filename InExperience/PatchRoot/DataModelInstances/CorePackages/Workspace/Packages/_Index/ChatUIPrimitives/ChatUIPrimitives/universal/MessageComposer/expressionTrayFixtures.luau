@@ -1,116 +1,114 @@
 ﻿local _ = require(script:FindFirstAncestor("ChatUIPrimitives").UniversalMessage.Types)
 local ExpressionTrayFixturesModule = {
-	enabledCatalog = {
-		status = "enabled",
-		categoryGroups = {
+	quickWordsGroup = {
+		categoryGroupId = "quick-words",
+		name = "Quick Words",
+		categories = {
 			{
-				categoryGroupId = "quick-words",
-				name = "Quick Words",
-				categories = {
+				categoryId = "general",
+				name = "General",
+				items = {
 					{
-						categoryId = "general",
-						name = "General",
-						items = {
-							{
-								content = {
-									kind = "preset",
-									presetId = "good-game",
-									text = "Good game"
-								}
-							},
-							{
-								content = {
-									kind = "preset",
-									presetId = "good-luck",
-									text = "Good luck"
-								}
-							},
-							{
-								content = {
-									kind = "preset",
-									presetId = "play-again",
-									text = "Play again"
-								}
-							}
+						content = {
+							kind = "preset",
+							presetId = "good-game",
+							text = "Good game"
 						}
 					},
 					{
-						categoryId = "play-together",
-						name = "Play together",
-						items = {
-							{
-								content = {
-									kind = "preset",
-									presetId = "want-to-play",
-									text = "Want to play?"
-								}
-							},
-							{
-								content = { kind = "preset", presetId = "join-me", text = "Join me" }
-							}
+						content = {
+							kind = "preset",
+							presetId = "good-luck",
+							text = "Good luck"
+						}
+					},
+					{
+						content = {
+							kind = "preset",
+							presetId = "play-again",
+							text = "Play again"
 						}
 					}
 				}
 			},
 			{
-				categoryGroupId = "emojis",
-				name = "Emojis",
-				categories = {
+				categoryId = "play-together",
+				name = "Play together",
+				items = {
 					{
-						categoryId = "top-picks",
-						name = "Top picks",
-						items = {
-							{
-								content = {
-									kind = "emoji",
-									emojiId = "grinning-face",
-									unicode = "😀",
-									name = "grinning-face"
-								}
-							},
-							{
-								content = {
-									kind = "emoji",
-									emojiId = "waving-hand",
-									unicode = "👋",
-									name = "waving-hand"
-								}
-							},
-							{
-								content = {
-									kind = "emoji",
-									emojiId = "thumbs-up",
-									unicode = "👍",
-									name = "thumbs-up"
-								}
-							},
-							{
-								content = {
-									kind = "emoji",
-									emojiId = "party-popper",
-									unicode = "🎉",
-									name = "party-popper"
-								}
-							}
+						content = {
+							kind = "preset",
+							presetId = "want-to-play",
+							text = "Want to play?"
 						}
+					},
+					{
+						content = { kind = "preset", presetId = "join-me", text = "Join me" }
 					}
 				}
 			}
 		}
 	},
-	disabledCatalog = { status = "disabled", categoryGroups = {} }
+	emojisGroup = {
+		categoryGroupId = "emojis",
+		name = "Emojis",
+		categories = {
+			{
+				categoryId = "top-picks",
+				name = "Top picks",
+				items = {
+					{
+						content = {
+							kind = "emoji",
+							emojiId = "grinning-face",
+							unicode = "😀",
+							name = "grinning-face"
+						}
+					},
+					{
+						content = {
+							kind = "emoji",
+							emojiId = "waving-hand",
+							unicode = "👋",
+							name = "waving-hand"
+						}
+					},
+					{
+						content = {
+							kind = "emoji",
+							emojiId = "thumbs-up",
+							unicode = "👍",
+							name = "thumbs-up"
+						}
+					},
+					{
+						content = {
+							kind = "emoji",
+							emojiId = "party-popper",
+							unicode = "🎉",
+							name = "party-popper"
+						}
+					}
+				}
+			}
+		}
+	}
 }
-ExpressionTrayFixturesModule.quickWordsOnlyCatalog = {
+ExpressionTrayFixturesModule.enabledCatalog = {
 	status = "enabled",
 	categoryGroups = {
-		ExpressionTrayFixturesModule.enabledCatalog.categoryGroups[1]
+		ExpressionTrayFixturesModule.quickWordsGroup,
+		ExpressionTrayFixturesModule.emojisGroup
 	}
+}
+ExpressionTrayFixturesModule.disabledCatalog = { status = "disabled", categoryGroups = {} }
+ExpressionTrayFixturesModule.quickWordsOnlyCatalog = {
+	status = "enabled",
+	categoryGroups = { ExpressionTrayFixturesModule.quickWordsGroup }
 }
 ExpressionTrayFixturesModule.emojisOnlyCatalog = {
 	status = "enabled",
-	categoryGroups = {
-		ExpressionTrayFixturesModule.enabledCatalog.categoryGroups[2]
-	}
+	categoryGroups = { ExpressionTrayFixturesModule.emojisGroup }
 }
 
 return ExpressionTrayFixturesModule

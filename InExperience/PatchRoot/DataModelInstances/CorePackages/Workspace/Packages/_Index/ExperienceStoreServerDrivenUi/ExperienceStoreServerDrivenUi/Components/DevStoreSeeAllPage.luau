@@ -7,6 +7,8 @@ local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalizati
 local SduiLoadTimer = SduiSharedUtilitiesModule.SduiLoadTimer
 local SduiPageEntryPoint = SduiSharedUtilitiesModule.SduiPageEntryPoint
 local CompositionTags = require(Parent.AppComposition).CompositionTags
+local FFlagSplitPaneDevStoreSeeAllSupportRegion = require(Parent.SharedFlags).FFlagSplitPaneDevStoreSeeAllSupportRegion
+local PaneHostContext = if FFlagSplitPaneDevStoreSeeAllSupportRegion then require(Parent.SplitPane).PaneHostContext else nil
 local FetchDevStoreSeeAllPageIfNeededModule = require(ExperienceStoreServerDrivenUi.Api.fetchDevStoreSeeAllPageIfNeeded)
 local GetDevStoreSeeAllPageKeyModule = require(ExperienceStoreServerDrivenUi.Utils.getDevStoreSeeAllPageKey)
 
@@ -15,10 +17,11 @@ local function _(p1, p2)
 end
 
 return ReactModule.memo(function(p1)
-	-- upvalues: GetDevStoreSeeAllPageKeyModule (copy), UseLocalizationFunction (copy), ReactModule (copy), SduiLoadTimer (copy), FetchDevStoreSeeAllPageIfNeededModule (copy), SduiPageEntryPoint (copy), CompositionTags (copy)
+	-- upvalues: GetDevStoreSeeAllPageKeyModule (copy), UseLocalizationFunction (copy), FFlagSplitPaneDevStoreSeeAllSupportRegion (copy), ReactModule (copy), PaneHostContext (copy), SduiLoadTimer (copy), FetchDevStoreSeeAllPageIfNeededModule (copy), SduiPageEntryPoint (copy), CompositionTags (copy)
 	local UniverseId = p1.universeId or p1.navigation and p1.navigation.getParam("universeId")
 	local DevStoreSeeAllPageKeyModule = GetDevStoreSeeAllPageKeyModule(UniverseId)
 	local UseLocalizationResult = UseLocalizationFunction({ pageTitle = "Feature.GameDetails.Label.Store" })
+	local UseContextResult = if FFlagSplitPaneDevStoreSeeAllSupportRegion then ReactModule.useContext(PaneHostContext) else nil
 	local PageTimer = p1.pageTimer or p1.navigation and p1.navigation.getParam("pageTimer")
 	local UseMemoResult = ReactModule.useMemo(function()
 		-- upvalues: PageTimer (copy), SduiLoadTimer (upval)
@@ -44,6 +47,7 @@ return ReactModule.memo(function(p1)
 		includeNavigationHeaderBar = true,
 		configKey = DevStoreSeeAllPageKeyModule,
 		pageTimer = UseMemoResult,
+		navButtonType = if FFlagSplitPaneDevStoreSeeAllSupportRegion and UseContextResult ~= nil and UseContextResult.isHostCloseVisible then "none" else nil,
 		pageTitle = UseLocalizationResult.pageTitle,
 		refresh = UseResult,
 		contentTag = CompositionTags.ContentRegion.Body,

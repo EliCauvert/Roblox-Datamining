@@ -4,9 +4,10 @@ local Parent = ChatUIPrimitives.Parent
 local ReactModule = require(Parent.React)
 local UseDefaultFocusBehaviorFunction = require(Parent.ReactFocusNavigation).useDefaultFocusBehavior
 local RestoreSelectionIfStrandedModule = require(ChatUIPrimitives.Hooks.restoreSelectionIfStranded)
+local FFlagExpChatMemoizeExpressionTrayFocusRootRenderModule = require(ChatUIPrimitives.Flags.FFlagExpChatMemoizeExpressionTrayFocusRootRender)
 
 return function(p1)
-	-- upvalues: Parent (copy), ReactModule (copy), RestoreSelectionIfStrandedModule (copy), GuiService (copy), UseDefaultFocusBehaviorFunction (copy)
+	-- upvalues: Parent (copy), ReactModule (copy), RestoreSelectionIfStrandedModule (copy), GuiService (copy), UseDefaultFocusBehaviorFunction (copy), FFlagExpChatMemoizeExpressionTrayFocusRootRenderModule (copy)
 	local FocusNavigationUtilsModule = require(Parent.FocusNavigationUtils)
 	local UseFocusRootFunction = FocusNavigationUtilsModule.useFocusRoot
 	local FocusNavigableSurfaceIdentifierEnum = FocusNavigationUtilsModule.FocusNavigableSurfaceIdentifierEnum
@@ -28,9 +29,26 @@ return function(p1)
 		isFocusable = p1.isOpen
 	})))
 	
-	return p1.render({
-		entryButtonRef = UseRefResult,
-		defaultFocusRef = UseDefaultFocusBehaviorResult,
-		containerRef = UseDefaultFocusBehaviorResult2
-	})
+	if FFlagExpChatMemoizeExpressionTrayFocusRootRenderModule then
+		local RenderFunction = p1.render
+		
+		return ReactModule.useMemo(function()
+			-- upvalues: RenderFunction (copy), UseRefResult (copy), UseDefaultFocusBehaviorResult (copy), UseDefaultFocusBehaviorResult2 (copy)
+			return RenderFunction({
+				entryButtonRef = UseRefResult,
+				defaultFocusRef = UseDefaultFocusBehaviorResult,
+				containerRef = UseDefaultFocusBehaviorResult2
+			})
+		end, {
+			RenderFunction,
+			UseDefaultFocusBehaviorResult,
+			UseDefaultFocusBehaviorResult2
+		})
+	else
+		return p1.render({
+			entryButtonRef = UseRefResult,
+			defaultFocusRef = UseDefaultFocusBehaviorResult,
+			containerRef = UseDefaultFocusBehaviorResult2
+		})
+	end
 end

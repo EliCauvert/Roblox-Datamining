@@ -61,7 +61,8 @@ return function(p1)
 				userPresenceType = p1.userPresenceType,
 				hover = UseStateResult,
 				backplateStyle = p1.backplateStyle,
-				includeProfileFrame = p1.includeProfileFrame
+				includeProfileFrame = p1.includeProfileFrame,
+				overlayIcon = p1.overlayIcon
 			})
 		}),
 		TitleStack = ReactModule.createElement(TitleStackModule, {

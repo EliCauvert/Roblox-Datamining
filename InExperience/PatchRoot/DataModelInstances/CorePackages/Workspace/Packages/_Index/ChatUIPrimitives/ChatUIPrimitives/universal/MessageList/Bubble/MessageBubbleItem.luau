@@ -5,9 +5,11 @@ local _ = require(Parent.Signals)
 local CreateNextOrderFunction = require(Parent.ReactUtils).createNextOrder
 local _ = require(script.Parent.Parent.groupMessages)
 local BubbleAvatarModule = require(script.Parent.BubbleAvatar)
+local SizingModule = require(script.Parent.Parent.Sizing)
 local BubbleStyleContextModule = require(script.Parent.BubbleStyleContext)
 local BubbleUsernameModule = require(script.Parent.BubbleUsername)
 local BubbleViewModule = require(script.Parent.BubbleView)
+local ReplyQuoteModule = require(script.Parent.Parent.Reply.ReplyQuote)
 local GetBubbleToneModule = require(script.Parent.getBubbleTone)
 local UseMessageBubbleViewModelModule = require(script.Parent.useMessageBubbleViewModel)
 local WithMessageContentModule = require(script.Parent.Parent.Parent.ContentKinds.withMessageContent)
@@ -18,19 +20,24 @@ local config = {
 }
 
 return function(p1)
-	-- upvalues: UseMessageBubbleViewModelModule (copy), FoundationModule (copy), CreateNextOrderFunction (copy), ReactModule (copy), GetBubbleToneModule (copy), BubbleStyleContextModule (copy), config (copy), BubbleUsernameModule (copy), BubbleViewModule (copy), BubbleAvatarModule (copy)
+	-- upvalues: UseMessageBubbleViewModelModule (copy), FoundationModule (copy), SizingModule (copy), CreateNextOrderFunction (copy), ReactModule (copy), GetBubbleToneModule (copy), config (copy), ReplyQuoteModule (copy), BubbleUsernameModule (copy), BubbleViewModule (copy), BubbleAvatarModule (copy), BubbleStyleContextModule (copy)
 	local UseMessageBubbleViewModelModuleResult = UseMessageBubbleViewModelModule(p1.itemSignal)
 	local UseTokensResult = FoundationModule.Hooks.useTokens()
+	local IsCompact = SizingModule.useSizing().density == "compact"
 	local NextOrder = CreateNextOrderFunction()
+	local IsSending = UseMessageBubbleViewModelModuleResult.deliveryState == "sending"
 	local UseMemoResult = ReactModule.useMemo(function()
-		-- upvalues: GetBubbleToneModule (upval), UseMessageBubbleViewModelModuleResult (copy), UseTokensResult (copy), BubbleStyleContextModule (upval)
+		-- upvalues: GetBubbleToneModule (upval), UseMessageBubbleViewModelModuleResult (copy), UseTokensResult (copy), IsSending (copy)
+		local BubbleToneModule = GetBubbleToneModule(UseMessageBubbleViewModelModuleResult.isObservingUser, UseTokensResult, IsSending)
+		
 		return {
-			backgroundStyle = GetBubbleToneModule(UseMessageBubbleViewModelModuleResult.isObservingUser, UseTokensResult).backgroundStyle,
-			style = BubbleStyleContextModule.createBubbleStyle(UseMessageBubbleViewModelModuleResult.isObservingUser, UseTokensResult)
+			backgroundStyle = BubbleToneModule.backgroundStyle,
+			style = { textStyle = BubbleToneModule.textStyle }
 		}
 	end, {
 		UseMessageBubbleViewModelModuleResult.isObservingUser,
-		UseTokensResult
+		UseTokensResult,
+		IsSending
 	})
 	local Elements = {}
 	
@@ -46,20 +53,29 @@ return function(p1)
 	end
 	local IsRight = UseMessageBubbleViewModelModuleResult.alignment == "right"
 	local IsFirst = UseMessageBubbleViewModelModuleResult.groupPosition.isFirst
+	local NextOrder1 = CreateNextOrderFunction()
 	local t = {}
 	
+	if UseMessageBubbleViewModelModuleResult.replyText ~= nil then
+		t.Reply = ReactModule.createElement(ReplyQuoteModule.Bubble, {
+			text = UseMessageBubbleViewModelModuleResult.replyText,
+			label = UseMessageBubbleViewModelModuleResult.replyLabel,
+			isObservingUser = UseMessageBubbleViewModelModuleResult.isObservingUser,
+			LayoutOrder = NextOrder1()
+		})
+	end
 	if UseMessageBubbleViewModelModuleResult.showUsername then
 		t.Username = ReactModule.createElement(BubbleUsernameModule, {
-			LayoutOrder = 1,
 			testId = "bubble-username",
-			getIdentity = UseMessageBubbleViewModelModuleResult.getIdentity
+			getIdentity = UseMessageBubbleViewModelModuleResult.getIdentity,
+			LayoutOrder = NextOrder1()
 		})
 	end
 	t.Bubble = ReactModule.createElement(BubbleViewModule, {
-		LayoutOrder = 2,
 		testId = "message-bubble",
 		backgroundStyle = UseMemoResult.backgroundStyle,
-		cornerRadii = UseMessageBubbleViewModelModuleResult.cornerRadii
+		cornerRadii = UseMessageBubbleViewModelModuleResult.cornerRadii,
+		LayoutOrder = NextOrder1()
 	}, Elements)
 	local t1 = {}
 	
@@ -85,7 +101,9 @@ return function(p1)
 			tag = {
 				["size-full-0 auto-y"] = true,
 				["col align-x-right"] = IsRight,
-				["row align-x-left align-y-bottom gap-xsmall"] = not IsRight,
+				["row align-x-left align-y-bottom"] = not IsRight,
+				["gap-xsmall"] = not IsRight and not IsCompact,
+				["gap-xxsmall"] = not IsRight and IsCompact,
 				["padding-top-small"] = IsFirst,
 				["padding-top-xxsmall"] = not IsFirst
 			}

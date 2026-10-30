@@ -16,12 +16,15 @@ local UseMomentShareCardVideoFrameModule = require(script.Parent.useMomentShareC
 local ConstantsModule = require(AppChat.Constants)
 local FFlagAppChatMomentShareCardLoadingSkeletonsModule = require(AppChat.Flags.FFlagAppChatMomentShareCardLoadingSkeletons)
 local FFlagAppChatMomentShareCardEdgeCasesModule = require(AppChat.Flags.FFlagAppChatMomentShareCardEdgeCases)
+local FFlagAppChatUseUserProfileHydrationModule = require(AppChat.Flags.FFlagAppChatUseUserProfileHydration)
+local UseProfileNameModule = require(AppChat.Hooks.useProfileName)
+local DataStatus = require(Parent.DataHydration).DataStatus
 local UseScaledValueFunction = FoundationModule.Hooks.useScaledValue
 local UseAssetFetchStatusFunction = require(Parent.RoactUtils).Hooks.useAssetFetchStatus
 local UseTokensFunction = FoundationModule.Hooks.useTokens
 
 return function(Frame)
-	-- upvalues: UseMomentDetailsModule (copy), UseScaledValueFunction (copy), ConstantsModule (copy), UseTokensFunction (copy), FFlagAppChatMomentShareCardEdgeCasesModule (copy), UseIsMomentsViewingEligibleModule (copy), UserProfilesModule (copy), ResolveMomentShareCardMetadataTextModule (copy), UseExperienceNameModule (copy), MomentDetailsStatusModule (copy), FFlagAppChatMomentShareCardLoadingSkeletonsModule (copy), ReactModule (copy), BuildMomentShareCardMediaModule (copy), UseMomentShareCardVideoFrameModule (copy), UseAssetFetchStatusFunction (copy), GetMomentShareCardCornerRadiiModule (copy)
+	-- upvalues: UseMomentDetailsModule (copy), UseScaledValueFunction (copy), ConstantsModule (copy), UseTokensFunction (copy), FFlagAppChatMomentShareCardEdgeCasesModule (copy), UseIsMomentsViewingEligibleModule (copy), FFlagAppChatUseUserProfileHydrationModule (copy), UseProfileNameModule (copy), UserProfilesModule (copy), ResolveMomentShareCardMetadataTextModule (copy), UseExperienceNameModule (copy), MomentDetailsStatusModule (copy), DataStatus (copy), FFlagAppChatMomentShareCardLoadingSkeletonsModule (copy), ReactModule (copy), BuildMomentShareCardMediaModule (copy), UseMomentShareCardVideoFrameModule (copy), UseAssetFetchStatusFunction (copy), GetMomentShareCardCornerRadiiModule (copy)
 	local UseMomentDetailsModuleResult = UseMomentDetailsModule(Frame.momentId, Frame.targetIdType)
 	local Status = UseMomentDetailsModuleResult.status
 	local UseScaledValueResult = UseScaledValueFunction(ConstantsModule.GameCard.THUMBNAIL_WIDTH)
@@ -29,19 +32,26 @@ return function(Frame)
 	local NoFFlagAppChatMomentShareCardEdgeCasesModule = not FFlagAppChatMomentShareCardEdgeCasesModule or UseIsMomentsViewingEligibleModule()
 	local NoNoFFlagAppChatMomentShareCardEdgeCasesModule: boolean = FFlagAppChatMomentShareCardEdgeCasesModule and not NoFFlagAppChatMomentShareCardEdgeCasesModule
 	local CreatorId = UseMomentDetailsModuleResult.creatorId
-	local UseUserProfilesFetchResult = UserProfilesModule.Hooks.useUserProfilesFetch({
-		userIds = if CreatorId then { (tostring(CreatorId)) } else {},
-		query = UserProfilesModule.Queries.userProfilesCombinedNameAndUsernameByUserIds
-	})
-	local UsernameFromId = if CreatorId and UseUserProfilesFetchResult.data then UserProfilesModule.Selectors.getUsernameFromId(UseUserProfilesFetchResult.data, CreatorId) else nil
+	local UseUserProfilesFetchResult = nil
+	local v1 = nil
+	
+	if FFlagAppChatUseUserProfileHydrationModule then
+		v1 = UseProfileNameModule(if CreatorId then tostring(CreatorId) else nil)
+	else
+		UseUserProfilesFetchResult = UserProfilesModule.Hooks.useUserProfilesFetch({
+			userIds = if CreatorId then { (tostring(CreatorId)) } else {},
+			query = UserProfilesModule.Queries.userProfilesCombinedNameAndUsernameByUserIds
+		})
+	end
+	local Username = if FFlagAppChatUseUserProfileHydrationModule then v1.username elseif CreatorId and UseUserProfilesFetchResult.data then UserProfilesModule.Selectors.getUsernameFromId(UseUserProfilesFetchResult.data, CreatorId) else nil
 	local ResolveMomentShareCardMetadataTextModuleResult = ResolveMomentShareCardMetadataTextModule(UseMomentDetailsModuleResult.description, nil, nil)
 	local ResolveMomentShareCardMetadataTextModuleResult1 = ResolveMomentShareCardMetadataTextModule(nil, UseMomentDetailsModuleResult.experienceName, nil)
 	local UseExperienceNameModuleResult = UseExperienceNameModule(UseMomentDetailsModuleResult.universeId, ResolveMomentShareCardMetadataTextModuleResult == nil and ResolveMomentShareCardMetadataTextModuleResult1 == nil)
 	local ResolveMomentShareCardMetadataTextModuleResult2 = ResolveMomentShareCardMetadataTextModule(ResolveMomentShareCardMetadataTextModuleResult, ResolveMomentShareCardMetadataTextModuleResult1, UseExperienceNameModuleResult.name)
 	local IsStatusMatch = Status == MomentDetailsStatusModule.Loading
-	local IsLoading: boolean = CreatorId ~= nil and (UseUserProfilesFetchResult.loading == true or UseUserProfilesFetchResult.isRetrying == true)
-	local IsStatusMatch1: boolean = FFlagAppChatMomentShareCardLoadingSkeletonsModule and (UsernameFromId == nil and (IsStatusMatch or IsLoading))
-	local IsStatusMatch2 = FFlagAppChatMomentShareCardLoadingSkeletonsModule and (ResolveMomentShareCardMetadataTextModuleResult2 == nil and (IsStatusMatch or UseExperienceNameModuleResult.isLoading))
+	local IsStatusMatch1: boolean = if FFlagAppChatUseUserProfileHydrationModule then CreatorId ~= nil and v1.status == DataStatus.NotReady else CreatorId ~= nil and (UseUserProfilesFetchResult.loading == true or UseUserProfilesFetchResult.isRetrying == true)
+	local IsStatusMatch2: boolean = FFlagAppChatMomentShareCardLoadingSkeletonsModule and (Username == nil and (IsStatusMatch or IsStatusMatch1))
+	local IsStatusMatch3 = FFlagAppChatMomentShareCardLoadingSkeletonsModule and (ResolveMomentShareCardMetadataTextModuleResult2 == nil and (IsStatusMatch or UseExperienceNameModuleResult.isLoading))
 	local AssetId = UseMomentDetailsModuleResult.assetId
 	local CaptureType = UseMomentDetailsModuleResult.captureType
 	local AssetAccessContext = UseMomentDetailsModuleResult.assetAccessContext
@@ -78,10 +88,10 @@ return function(Frame)
 			-- upvalues: GetMomentShareCardCornerRadiiModule (upval), Frame (copy), Size500 (copy)
 			return GetMomentShareCardCornerRadiiModule(Frame.isStartOfGroup, Frame.isIncoming, Size500)
 		end, { Frame.isStartOfGroup, Frame.isIncoming, Size500 }),
-		username = UsernameFromId,
+		username = Username,
 		metadataText = ResolveMomentShareCardMetadataTextModuleResult2,
-		isUsernameLoading = IsStatusMatch1,
-		isMetadataLoading = IsStatusMatch2,
+		isUsernameLoading = IsStatusMatch2,
+		isMetadataLoading = IsStatusMatch3,
 		onActivated = ReactModule.useCallback(function()
 			-- upvalues: NoNoFFlagAppChatMomentShareCardEdgeCasesModule (copy), OpenMomentsDeepLinkFunction (copy), UseMomentDetailsModuleResult (copy), MomentDetailsStatusModule (upval), Frame (copy)
 			if NoNoFFlagAppChatMomentShareCardEdgeCasesModule then return end

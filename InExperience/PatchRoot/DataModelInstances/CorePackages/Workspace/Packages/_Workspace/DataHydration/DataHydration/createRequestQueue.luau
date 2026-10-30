@@ -1,6 +1,14 @@
-﻿return function()
+﻿local FFlagSduiReleaseSearchResultsPageState = require(script:FindFirstAncestor("DataHydration").Parent.SharedFlags).FFlagSduiReleaseSearchResultsPageState
+
+return function()
+	-- upvalues: FFlagSduiReleaseSearchResultsPageState (copy)
 	local Tbl = {}
 	local Count = 1
+	
+	local function remove(Key)
+		-- upvalues: Tbl (copy)
+		Tbl[Key] = nil
+	end
 	
 	return {
 		push = function(Key)
@@ -47,6 +55,7 @@
 			-- upvalues: Tbl (copy)
 			return Tbl[p2] ~= nil
 		end,
+		remove = if FFlagSduiReleaseSearchResultsPageState then remove else nil,
 		clear = function()
 			-- upvalues: Tbl (copy), Count (ref)
 			table.clear(Tbl)

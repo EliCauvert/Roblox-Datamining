@@ -27,7 +27,6 @@ local VRConstants = VrCompatibilityModule.VRConstants
 local VRPanelWidthIXP = VrCompatibilityModule.VRPanelWidthIXP
 local UseDispatchFunction = require(Parent.RoactUtils).Hooks.RoactRodux.useDispatch
 local NetworkImpl = require(GameInvite.GameInviteDependencies).networkImpl
-game:DefineFastFlag("LuaEnableGameInviteModal2023V5", false)
 local SharedFlagsModule = require(Parent.SharedFlags)
 local FFlagUseSignalsForGameInvitesStatus = SharedFlagsModule.FFlagUseSignalsForGameInvitesStatus
 local GetGameInvitesStatusStore = if FFlagUseSignalsForGameInvitesStatus then require(Parent.NotificationsCommon).GetGameInvitesStatusStore else nil
@@ -60,9 +59,6 @@ local CustomEventHandlers = {
 
 return function(p1)
 	-- upvalues: FFlagLuaAppForceVrAppPanelWidthRollout (copy), GetFFlagVRPanelWidthIXPEnabledFunction (copy), IxpUtilsModule (copy), VRPanelWidthIXP (copy), ReactModule (copy), RunService (copy), GameInviteConstantsModule (copy), UseDispatchFunction (copy), IsInExperienceUIVREnabled (copy), ResponsiveModule (ref), FFlagEnableInExperienceUIPCVRFix (copy), Callback (ref), FFlagUseSignalsForGameInvitesStatus (copy), GetGameInvitesStatusStore (copy), ResetUserInviteStatusModule (copy), GameInviteModalManagerModule (copy), GuiService (copy), PromiseModule (copy), RobloxReplicatedStorage (copy), GetGameNameAndDescriptionFunction (copy), NetworkImpl (copy), GameInviteModalWindowModule (copy), GameInviteContentWrapperModule (copy), GetFFlagEnableGameInviteModalVRSupportFunction (copy), VRReadyWrapper (copy), VRConstants (copy), GameInviteModalLayoutProviderModule (copy), FocusNavigableSurfaceWrapper (copy), FocusNavigableSurfaceIdentifierEnum (copy), CustomEventHandlers (copy), UIManager (ref), PanelType (ref), ReactRobloxModule (copy)
-	if not game:GetFastFlag("LuaEnableGameInviteModal2023V5") then
-		return nil
-	end
 	local UseTestVariablesResult = if FFlagLuaAppForceVrAppPanelWidthRollout or not GetFFlagVRPanelWidthIXPEnabledFunction() then nil else IxpUtilsModule.useTestVariables(VRPanelWidthIXP.VrAppPanelWidthMultiplier)
 	local UseTestVariablesResult1 = if FFlagLuaAppForceVrAppPanelWidthRollout or not GetFFlagVRPanelWidthIXPEnabledFunction() then nil else IxpUtilsModule.useTestVariables(VRPanelWidthIXP.VrAppPanelCurvature)
 	local UseStateResult, UseStateResult2 = ReactModule.useState(false)

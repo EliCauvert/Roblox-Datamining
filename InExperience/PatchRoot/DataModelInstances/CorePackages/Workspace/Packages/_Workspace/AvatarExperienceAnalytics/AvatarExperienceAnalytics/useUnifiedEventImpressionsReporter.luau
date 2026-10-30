@@ -12,9 +12,7 @@ local AvatarExperienceCommonModule = require(Parent.AvatarExperienceCommon)
 local UseSelectorSignalFunction = AvatarExperienceCommonModule.Hooks.useSelectorSignal
 local SelectSearchKeyword = AvatarExperienceCommonModule.State.Selectors.selectSearchKeyword
 local UnifiedEventLoggingUtilsModule = require(AvatarExperienceAnalytics.Utils.UnifiedEventLoggingUtils)
-local AvatarExperienceFlagsModule = require(Parent.AvatarExperienceFlags)
-local FFlagAXUnifiedImpressionsOnThumbnail = AvatarExperienceFlagsModule.FFlagAXUnifiedImpressionsOnThumbnail
-local FFlagAXFixSelectedItemIndexBleed = AvatarExperienceFlagsModule.FFlagAXFixSelectedItemIndexBleed
+local FFlagAXUnifiedImpressionsOnThumbnail = require(Parent.AvatarExperienceFlags).FFlagAXUnifiedImpressionsOnThumbnail
 local UnifiedEventLogConstantsModule = require(script.Parent.UnifiedEventLogConstants)
 
 local function selectAnalyticsMetadata(p1)
@@ -22,13 +20,13 @@ local function selectAnalyticsMetadata(p1)
 end
 
 return function(p1)
-	-- upvalues: UseAvatarRouteFunction (copy), UseSelectorSignalFunction (copy), SelectSearchKeyword (copy), selectAnalyticsMetadata (copy), ReactModule (copy), AvatarScreenProperties (copy), UnifiedEventLoggingUtilsModule (copy), UnifiedEventLogEnumsModule (copy), FFlagAXUnifiedImpressionsOnThumbnail (copy), UnifiedEventLogConstantsModule (copy), UnifiedLoggingSurface (copy), FFlagAXFixSelectedItemIndexBleed (copy), CryoModule (copy), SendUnifiedEventLogForInstanceModule (copy)
+	-- upvalues: UseAvatarRouteFunction (copy), UseSelectorSignalFunction (copy), SelectSearchKeyword (copy), selectAnalyticsMetadata (copy), ReactModule (copy), AvatarScreenProperties (copy), UnifiedEventLoggingUtilsModule (copy), UnifiedEventLogEnumsModule (copy), FFlagAXUnifiedImpressionsOnThumbnail (copy), UnifiedEventLogConstantsModule (copy), UnifiedLoggingSurface (copy), CryoModule (copy), SendUnifiedEventLogForInstanceModule (copy)
 	local UseAvatarRouteResult = UseAvatarRouteFunction()
 	local UseSelectorSignalResult = UseSelectorSignalFunction(SelectSearchKeyword)
 	local UseSelectorSignalResult1 = UseSelectorSignalFunction(selectAnalyticsMetadata)
 	
 	return ReactModule.useCallback(function(p2)
-		-- upvalues: AvatarScreenProperties (upval), UseAvatarRouteResult (copy), UnifiedEventLoggingUtilsModule (upval), UnifiedEventLogEnumsModule (upval), FFlagAXUnifiedImpressionsOnThumbnail (upval), p1 (copy), UseSelectorSignalResult (copy), UnifiedEventLogConstantsModule (upval), UnifiedLoggingSurface (upval), UseSelectorSignalResult1 (copy), FFlagAXFixSelectedItemIndexBleed (upval), CryoModule (upval), SendUnifiedEventLogForInstanceModule (upval)
+		-- upvalues: AvatarScreenProperties (upval), UseAvatarRouteResult (copy), UnifiedEventLoggingUtilsModule (upval), UnifiedEventLogEnumsModule (upval), FFlagAXUnifiedImpressionsOnThumbnail (upval), p1 (copy), UseSelectorSignalResult (copy), UnifiedEventLogConstantsModule (upval), UnifiedLoggingSurface (upval), CryoModule (upval), UseSelectorSignalResult1 (copy), SendUnifiedEventLogForInstanceModule (upval)
 		local VisibleInstance = p2.visibleInstance
 		local AvatarScreenProperty = AvatarScreenProperties[UseAvatarRouteResult.opaque.name]
 		local Flag: boolean? = nil
@@ -65,12 +63,7 @@ return function(p1)
 		if (config.surface or VisibleInstance:GetAttribute(UnifiedEventLogConstantsModule.ATTRIBUTE_PREFIX .. "surface")) ~= UnifiedLoggingSurface.SEARCH_RESULTS then
 			config.keyword = nil
 		end
-		local UseSelectorSignalResultResult = UseSelectorSignalResult1(false)
-		
-		if FFlagAXFixSelectedItemIndexBleed then
-			UseSelectorSignalResultResult = CryoModule.Dictionary.join(UseSelectorSignalResultResult, { selectedItemIndex = CryoModule.None })
-		end
-		SendUnifiedEventLogForInstanceModule(VisibleInstance, CryoModule.Dictionary.union(UseSelectorSignalResultResult, config), {
+		SendUnifiedEventLogForInstanceModule(VisibleInstance, CryoModule.Dictionary.union(CryoModule.Dictionary.join(UseSelectorSignalResult1(false), { selectedItemIndex = CryoModule.None }), config), {
 			includeScreenSize = true,
 			includeElementSizeAndPosition = true
 		})

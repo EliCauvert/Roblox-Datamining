@@ -14,14 +14,15 @@ local GetMomentsPreferencesStoreModule = require(Moments.Stores.GetMomentsPrefer
 local GetFFlagMomentsRenderPostAssetsModule = require(Parent.MomentsCommon.GetFFlagMomentsRenderPostAssets)
 local FFlagMomentsAvatarLookTryOn = SharedFlagsModule.FFlagMomentsAvatarLookTryOn
 local MakeRecommendationAttributionModule = require(Moments.Analytics.makeRecommendationAttribution)
+local FFlagMomentsRecommendationContentTypeModule = require(Moments.Flags.FFlagMomentsRecommendationContentType)
 local ToMediaItemModule = require(Moments.Components.Feed.Media.toMediaItem)
 local CommentsModule = require(Moments.Components.Comments)
 local MomentMediaView = require(Parent.MomentsCommon).Media.MomentMediaView
 local Number: number? = tonumber((require(Moments.Flags.FStringMomentsOfficialContentCreatorId)))
 
 local function momentAttribution(Moment)
-	-- upvalues: MakeRecommendationAttributionModule (copy)
-	return if Moment == nil then nil else MakeRecommendationAttributionModule(Moment.recommendationMetadata)
+	-- upvalues: MakeRecommendationAttributionModule (copy), FFlagMomentsRecommendationContentTypeModule (copy)
+	return if Moment == nil then nil else MakeRecommendationAttributionModule(Moment.recommendationMetadata, if FFlagMomentsRecommendationContentTypeModule then Moment else nil)
 end
 
 local function createMediaSurface(Moment)
@@ -51,7 +52,7 @@ return {
 			return momentAttribution(p1.moment)
 		end,
 		render = function(p1, _)
-			-- upvalues: GetFFlagMomentsRenderPostAssetsModule (copy), ToMediaItemModule (copy), ReactModule (copy), MomentMediaView (copy), GetMomentsPreferencesStoreModule (copy), FFlagMomentsAvatarLookTryOn (copy), FFlagMomentsHideOfficialContentLabel (copy), Number (copy), FFlagMomentsOptimisticProfilePending (copy), MomentsTypesModule (copy), SharedFlagsModule (copy), CommentsModule (copy), MomentItemModule (copy), createMediaSurface (copy), FFlagMomentsServeEDPVideos (copy), MomentItemSkeletonModule (copy)
+			-- upvalues: GetFFlagMomentsRenderPostAssetsModule (copy), ToMediaItemModule (copy), ReactModule (copy), MomentMediaView (copy), GetMomentsPreferencesStoreModule (copy), MakeRecommendationAttributionModule (copy), FFlagMomentsRecommendationContentTypeModule (copy), FFlagMomentsAvatarLookTryOn (copy), FFlagMomentsHideOfficialContentLabel (copy), Number (copy), FFlagMomentsOptimisticProfilePending (copy), MomentsTypesModule (copy), SharedFlagsModule (copy), CommentsModule (copy), MomentItemModule (copy), createMediaSurface (copy), FFlagMomentsServeEDPVideos (copy), MomentItemSkeletonModule (copy)
 			local Moment = p1.moment
 			
 			if Moment == nil then
@@ -73,6 +74,7 @@ return {
 				end
 			end
 			local RecommendationMetadata = Moment.recommendationMetadata
+			local RecommendationAttributionModule = if Moment == nil then nil else MakeRecommendationAttributionModule(Moment.recommendationMetadata, if FFlagMomentsRecommendationContentTypeModule then Moment else nil)
 			local Element1 = ReactModule.createElement(MomentItemModule, {
 				data = {
 					kind = "experience",
@@ -88,7 +90,8 @@ return {
 					isPending = FFlagMomentsOptimisticProfilePending and Moment.status == MomentsTypesModule.Enums.MomentStatus.Pending,
 					commentCount = if SharedFlagsModule.FFlagMomentsComments then CommentsModule.getSeededCommentCount(Moment.comments) else nil,
 					feedItemId = if RecommendationMetadata == nil then nil else RecommendationMetadata.feedItemId,
-					feedSessionId = if RecommendationMetadata == nil then nil else RecommendationMetadata.tracingId
+					feedSessionId = if RecommendationMetadata == nil then nil else RecommendationMetadata.tracingId,
+					contentType = if FFlagMomentsRecommendationContentTypeModule and RecommendationAttributionModule ~= nil then RecommendationAttributionModule.contentType else nil
 				},
 				mediaSurface = Element,
 				renderMediaSurface = if GetFFlagMomentsRenderPostAssetsModule() then createMediaSurface else nil,

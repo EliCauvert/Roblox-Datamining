@@ -6,6 +6,7 @@ local LocalizationModule = require(Parent.Localization)
 local ReactModule = require(Parent.React)
 local ResponsiveModule = require(Parent.Responsive)
 local FFlagBuildExperienceModelPickerModule = require(BuildExperience.Flags.FFlagBuildExperienceModelPicker)
+local FFlagBuildExperienceModelPickerChipHashModule = require(BuildExperience.Flags.FFlagBuildExperienceModelPickerChipHash)
 local CreatorAgentChatModule = if FFlagBuildExperienceModelPickerModule then require(Parent.DataHydration.CreatorAgentChat) else nil
 local IsEnabled = FFlagBuildExperienceModelPickerModule and CreatorAgentChatModule.experimentOverride.isEnabled()
 local SignalsModule = if IsEnabled then require(Parent.Signals) else nil
@@ -15,7 +16,7 @@ local _ = require(script.Parent.ModelPickerTypes)
 local _ = require(script.Parent.ModelPickerView)
 
 return function(Frame)
-	-- upvalues: IsEnabled (copy), LocalizationModule (copy), LocalizationStringsModule (copy), ReactModule (copy), SignalsModule (copy), CreatorAgentChatModule (copy), FFlagBuildExperienceModelPickerModule (copy), UserInputService (copy), UseClosableFocusRootModule (copy), FocusNavigationUtilsModule (copy), ResponsiveModule (copy)
+	-- upvalues: IsEnabled (copy), LocalizationModule (copy), LocalizationStringsModule (copy), ReactModule (copy), SignalsModule (copy), CreatorAgentChatModule (copy), FFlagBuildExperienceModelPickerModule (copy), UserInputService (copy), UseClosableFocusRootModule (copy), FocusNavigationUtilsModule (copy), ResponsiveModule (copy), FFlagBuildExperienceModelPickerChipHashModule (copy)
 	local InternalTesting = if IsEnabled then Frame.internalTesting else nil
 	local UseLocalizationResult = LocalizationModule.Hooks.useLocalization({
 		title = LocalizationStringsModule.MODEL_PICKER_TITLE,
@@ -147,7 +148,9 @@ return function(Frame)
 			end
 		end
 	end
-	if IsSelected then
+	if FFlagBuildExperienceModelPickerChipHashModule and IsSelected and InternalTesting then
+		Title = if InternalTesting.previewHash == "" then UseLocalizationResult.internalLabel else InternalTesting.previewHash or UseLocalizationResult.internalLabel
+	elseif IsSelected then
 		Title = UseLocalizationResult.internalLabel
 	end
 	return {

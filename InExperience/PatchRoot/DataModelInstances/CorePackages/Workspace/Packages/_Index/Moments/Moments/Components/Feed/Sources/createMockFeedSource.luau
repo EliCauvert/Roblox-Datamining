@@ -51,6 +51,7 @@ return function(p1)
 		end,
 		id = P0.id or "mock",
 		recommendationSource = P0.recommendationSource or "Trending",
+		endsWithCaughtUp = P0.endsWithCaughtUp,
 		dispose = function() end,
 		getPendingCount = function(): number
 			-- upvalues: List (copy)

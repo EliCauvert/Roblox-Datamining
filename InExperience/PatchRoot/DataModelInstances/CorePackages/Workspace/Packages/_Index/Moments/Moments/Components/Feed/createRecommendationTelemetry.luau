@@ -44,7 +44,8 @@ return function(p1)
 				tracingId = p2.tracingId or "",
 				momentsSessionId = GetMomentsSessionIdFunction(false),
 				position = p3.itemPosition,
-				durationSeconds = p3.durationSeconds
+				durationSeconds = p3.durationSeconds,
+				contentType = p2.contentType
 			})
 			
 			if SignalTracker then
@@ -75,6 +76,7 @@ return function(p1)
 					destinationPlaceId = p4.destinationPlaceId,
 					commentText = p4.commentText,
 					actionWeight = p4.actionWeight,
+					contentType = p3.contentType,
 					commentSectionOpenDurationSeconds = if FFlagMomentsComments then p4.commentSectionOpenDurationSeconds else nil
 				})
 				

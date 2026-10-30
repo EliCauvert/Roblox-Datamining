@@ -5,7 +5,6 @@ return {
 	GetCustomizedInvitePromptTrigger = require(script.utils.getCustomizedInvitePromptTrigger),
 	GameInviteModalManager = require(script.GameInviteModalManager),
 	GameInviteModal = require(script.Components.GameInviteModal),
-	GameInviteInviteExperimentVariant = require(script.GameInviteConstants).GameInviteInviteExperimentVariant,
 	GameInviteConstants = require(script.GameInviteConstants),
 	GameInviteAnalytics = require(script.analytics.GameInviteAnalytics),
 	GameInviteEvents = require(script.analytics.GameInviteEvents),

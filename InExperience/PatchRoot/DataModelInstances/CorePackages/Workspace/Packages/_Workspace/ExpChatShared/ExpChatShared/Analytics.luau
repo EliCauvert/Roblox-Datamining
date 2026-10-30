@@ -42,21 +42,32 @@ local AnalyticsModule = {
 	FireClientAnalyticsWithEventName = function(p1, p2)
 		-- upvalues: setRbxEventStream (copy)
 		setRbxEventStream("client", "experienceChat", p1, p2)
-	end,
-	reportCounter = function(CounterName, p1)
-		-- upvalues: RbxAnalyticsService1 (ref), NewResult (copy)
-		if RbxAnalyticsService1 then
-			NewResult:debug("Counter: {}", CounterName)
-			RbxAnalyticsService1:ReportCounter(CounterName, p1 or 1)
-		end
-	end,
-	ExpChatChatEnabledUserCountFetchConfig = {
-		eventName = "ExpChatChatEnabledUserCountFetch",
-		description = "Counts successful and failed attempts to fetch the local chat-enabled system message user count.",
-		links = "",
-		backends = { "RobloxTelemetryCounter" },
-		lastUpdated = { 2026, 7, 22 }
-	}
+	end
+}
+
+function AnalyticsModule.reportHistoryReplayed(ReceivedCount, KeptCount, LatencyMs)
+	-- upvalues: AnalyticsModule (copy)
+	AnalyticsModule.FireClientAnalyticsWithEventName("HistoryReplayed", {
+		receivedCount = ReceivedCount,
+		keptCount = KeptCount,
+		latencyMs = LatencyMs
+	})
+end
+
+function AnalyticsModule.reportCounter(CounterName, p1)
+	-- upvalues: RbxAnalyticsService1 (ref), NewResult (copy)
+	if RbxAnalyticsService1 then
+		NewResult:debug("Counter: {}", CounterName)
+		RbxAnalyticsService1:ReportCounter(CounterName, p1 or 1)
+	end
+end
+
+AnalyticsModule.ExpChatChatEnabledUserCountFetchConfig = {
+	eventName = "ExpChatChatEnabledUserCountFetch",
+	description = "Counts successful and failed attempts to fetch the local chat-enabled system message user count.",
+	links = "",
+	backends = { "RobloxTelemetryCounter" },
+	lastUpdated = { 2026, 7, 22 }
 }
 
 function AnalyticsModule.reportChatEnabledUserCountFetchResult(p1)

@@ -45,6 +45,7 @@ local UseIsVoiceFocusedFunction = CrossExperienceVoiceModule.Hooks.useIsVoiceFoc
 local UseIsVoiceDisconnectedFunction = CrossExperienceVoiceModule.Hooks.useIsVoiceDisconnected
 local UseBackgroundExperienceFunction = CrossExperienceVoiceModule.Hooks.useBackgroundExperience
 local UseIsActiveParticipantFunction = CrossExperienceVoiceModule.Hooks.useIsActiveParticipant
+local UseIsParticipantMutedFunction = CrossExperienceVoiceModule.Hooks.useIsParticipantMuted
 local UseVoiceStatusFunction = CrossExperienceVoiceModule.Hooks.useVoiceStatus
 local CrossExperienceVoiceManager = CrossExperienceVoiceModule.CrossExperienceVoiceManager
 local GetFFlagEnableCrossExpVoiceFunction = SharedFlags.GetFFlagEnableCrossExpVoice
@@ -288,7 +289,7 @@ local function renderToggleAudioFocusButton(p1, TooltipText, OnActivated, p2, Us
 end
 
 return function(p1)
-	-- upvalues: UseDispatchFunction (copy), UseLocalizationFunction (copy), SquadCoordinationExperienceJoinExperimentation (copy), UseTokensFunction (copy), UseCurrentSquadParentChannelIdFunction (copy), UseCurrentSquadSelectorFunction (copy), UseVoiceStatusFunction (copy), ReactModule (copy), UseAppPolicyFunction (copy), HttpService (copy), SquadLobbySessionProvider (copy), SquadExternalContractContext (copy), FFlagPartyDevAPIToRespectThirdPartySettingsEnabled (copy), EventNamesModule (copy), SquadPartySheetActionEnumModule (copy), SessionType (copy), LeaveSquadFunction (copy), SquadState (copy), FFlagSquadsEnableFoundationTestIdsModule (copy), v40 (copy), Badge (copy), BadgeVariant (copy), renderStandardImage (copy), Search (copy), Size (copy), GetFFlagEnableCrossExpVoiceFunction (copy), UseLocalUserIdFunction (copy), UseBackgroundExperienceFunction (copy), UseParticipantFunction (copy), UseIsVoiceConnectedFunction (copy), UseIsVoiceDisconnectedFunction (copy), UseIsVoiceFocusedFunction (copy), UseParticipantsFunction (copy), UseIsActiveParticipantFunction (copy), AudioFocusManagementEngineFeature (copy), CrossExperienceVoiceManager (copy), FFlagSquadLobbyActionBarFixMicLevelRerenderModule (copy), RunService (copy), renderToggleAudioFocusButton (copy), EnableCrossExpVoiceDebug (copy), getLoadingIndicatorIcon (copy), FoundationModule (copy), ConstantsModule (copy)
+	-- upvalues: UseDispatchFunction (copy), UseLocalizationFunction (copy), SquadCoordinationExperienceJoinExperimentation (copy), UseTokensFunction (copy), UseCurrentSquadParentChannelIdFunction (copy), UseCurrentSquadSelectorFunction (copy), UseVoiceStatusFunction (copy), ReactModule (copy), UseAppPolicyFunction (copy), HttpService (copy), SquadLobbySessionProvider (copy), SquadExternalContractContext (copy), FFlagPartyDevAPIToRespectThirdPartySettingsEnabled (copy), EventNamesModule (copy), SquadPartySheetActionEnumModule (copy), SessionType (copy), LeaveSquadFunction (copy), SquadState (copy), FFlagSquadsEnableFoundationTestIdsModule (copy), v40 (copy), Badge (copy), BadgeVariant (copy), renderStandardImage (copy), Search (copy), Size (copy), GetFFlagEnableCrossExpVoiceFunction (copy), UseLocalUserIdFunction (copy), UseBackgroundExperienceFunction (copy), UseParticipantFunction (copy), UseIsVoiceConnectedFunction (copy), UseIsVoiceDisconnectedFunction (copy), UseIsVoiceFocusedFunction (copy), UseParticipantsFunction (copy), UseIsActiveParticipantFunction (copy), FFlagSquadLobbyActionBarFixMicLevelRerenderModule (copy), UseIsParticipantMutedFunction (copy), AudioFocusManagementEngineFeature (copy), CrossExperienceVoiceManager (copy), RunService (copy), renderToggleAudioFocusButton (copy), EnableCrossExpVoiceDebug (copy), getLoadingIndicatorIcon (copy), FoundationModule (copy), ConstantsModule (copy)
 	local UseDispatchResult = UseDispatchFunction()
 	local UseLocalizationResult = UseLocalizationFunction({
 		audioText = "Feature.Squads.Label.Audio",
@@ -476,6 +477,7 @@ return function(p1)
 		local UseIsVoiceFocusedResult = UseIsVoiceFocusedFunction() or p1.forceIsVoiceFocused
 		local UseParticipantsResult = UseParticipantsFunction()
 		local UseIsActiveParticipantResult = UseIsActiveParticipantFunction(Number)
+		local IsUseIsParticipantMutedResult = if FFlagSquadLobbyActionBarFixMicLevelRerenderModule then UseIsParticipantMutedFunction(Number) == true else nil
 		local UseStateResult1, UseStateResult2_1 = ReactModule.useState(0)
 		local UseResult4 = ReactModule.useCallback(function(_)
 			-- upvalues: HttpService (upval), UseBackgroundExperienceResult (copy), UseParticipantResult (copy), UseParticipantsResult (copy), CrossExperienceVoiceManager (upval)
@@ -559,7 +561,8 @@ return function(p1)
 			return getLoadingIndicatorIcon(UseTokensResult, UseParticipantResult, UseIsVoiceConnectedResult, not IsNotSquadStateMatch and UseIsActiveParticipantResult, UseStateResult1)
 		end, {
 			UseIsActiveParticipantResult, IsNotSquadStateMatch, UseIsVoiceConnectedResult,
-			UseStateResult1, UseParticipantResult, UseTokensResult
+			UseStateResult1, UseParticipantResult, UseTokensResult,
+			if FFlagSquadLobbyActionBarFixMicLevelRerenderModule then IsUseIsParticipantMutedResult else nil
 		})
 		UseMemoResult6 = ReactModule.useMemo(function()
 			-- upvalues: UseIsVoiceDisconnectedResult (copy), IsNotSquadStateMatch (copy), AudioFocusManagementEngineFeature (upval), UseIsVoiceFocusedResult (copy), UseIsVoiceConnectedResult (copy), UseParticipantResult (copy), FFlagSquadsEnableFoundationTestIdsModule (upval), ReactModule (upval), v40 (upval), SquadCoordinationExperienceJoinExperimentation (upval), UseStateResult (copy), UseResult5 (copy), UseResult (copy), UseLocalizationResult (copy), renderStandardImage (upval), UseMemoResult7 (copy), UseTokensResult (copy)
@@ -590,7 +593,8 @@ return function(p1)
 			UseIsVoiceConnectedResult, UseLocalizationResult.muteMicText,
 			UseLocalizationResult.unmuteMicText,
 			if SquadCoordinationExperienceJoinExperimentation.getShouldShowFTUXOnExpPickerEnabled() then UseResult else nil,
-			UseResult5, UseParticipantResult, UseIsVoiceDisconnectedResult
+			UseResult5, UseParticipantResult, UseIsVoiceDisconnectedResult,
+			if FFlagSquadLobbyActionBarFixMicLevelRerenderModule then IsUseIsParticipantMutedResult else nil
 		})
 	end
 	return ReactModule.createElement(FoundationModule.View, {

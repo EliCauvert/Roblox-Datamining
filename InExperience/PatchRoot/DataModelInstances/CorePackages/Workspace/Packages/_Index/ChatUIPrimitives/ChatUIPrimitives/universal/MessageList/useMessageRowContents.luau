@@ -3,6 +3,7 @@ local ReactModule = require(Parent.React)
 local SignalsModule = require(Parent.Signals)
 local SignalsReactModule = require(Parent.SignalsReact)
 local _ = require(script.Parent.Parent.Types)
+local GetReplyPreviewModule = require(script.Parent.Reply.getReplyPreview)
 local _ = require(script.Parent.groupMessages)
 local UnpackContentModule = require(script.Parent.Parent.ContentKinds.unpackContent)
 
@@ -21,7 +22,7 @@ local function contentKindsKey(p1): string
 end
 
 return function(Callback)
-	-- upvalues: ReactModule (copy), SignalsModule (copy), contentKindsKey (copy), SignalsReactModule (copy), UnpackContentModule (copy)
+	-- upvalues: ReactModule (copy), SignalsModule (copy), contentKindsKey (copy), SignalsReactModule (copy), UnpackContentModule (copy), GetReplyPreviewModule (copy)
 	local UseSignalStateResult = SignalsReactModule.useSignalState((ReactModule.useMemo(function()
 		-- upvalues: SignalsModule (upval), contentKindsKey (upval), Callback (copy)
 		return SignalsModule.createComputed(function(p2)
@@ -66,6 +67,20 @@ return function(Callback)
 			end
 			return List
 		end, { Callback, UseSignalStateResult }),
-		kindsKey = UseSignalStateResult
+		kindsKey = UseSignalStateResult,
+		replyText = SignalsReactModule.useSignalState((ReactModule.useMemo(function()
+			-- upvalues: SignalsModule (upval), GetReplyPreviewModule (upval), Callback (copy)
+			return SignalsModule.createComputed(function(p2)
+				-- upvalues: GetReplyPreviewModule (upval), Callback (upval)
+				return GetReplyPreviewModule.getReplyText(Callback(p2).message)
+			end)
+		end, { Callback }))),
+		replyLabel = SignalsReactModule.useSignalState((ReactModule.useMemo(function()
+			-- upvalues: SignalsModule (upval), GetReplyPreviewModule (upval), Callback (copy)
+			return SignalsModule.createComputed(function(p2)
+				-- upvalues: GetReplyPreviewModule (upval), Callback (upval)
+				return GetReplyPreviewModule.getReplyLabel(Callback(p2).message)
+			end)
+		end, { Callback })))
 	}
 end
