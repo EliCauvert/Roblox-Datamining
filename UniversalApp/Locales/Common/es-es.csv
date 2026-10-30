@@ -297,6 +297,7 @@ Authentication.CrossDevice.Label.Warning1,• ingresar solo los códigos que sol
 Authentication.CrossDevice.Label.Warning2,• no ingresar nunca el código de otro usuario.
 Authentication.CrossDevice.Response.InvalidCode,El código ingresado no es válido. Asegúrate de que esté escrito correctamente.
 Authentication.CrossDevice.Response.LoginFail,Error al iniciar sesión
+Authentication.CrossDevice.Response.LoginFailedTryAgain,Error al iniciar sesión. Inténtalo de nuevo.
 Authentication.CrossDevice.Response.LoginSuccess,Inicio de sesión correcto
 Authentication.Login.Action.Apple,Apple
 Authentication.Login.Action.ConnectionError.RetryReady,Reintentarlo
@@ -327,6 +328,7 @@ Authentication.Login.Action.UsePasskey,Usar llave de acceso
 Authentication.Login.Action.WeChatLogin,Inicio de sesión de WeChat
 Authentication.Login.Button.CloseAndSwitchPlatformAccount,Sal de Roblox para cambiar la cuenta de {platformAccountName}
 Authentication.Login.Button.UseDifferentRobloxAccount,Usar una cuenta Roblox diferente
+Authentication.Login.Button.XboxAccountSwitcher,Cambiar cuenta de Xbox
 Authentication.Login.Description.AccountSelectorHelp,Todas sus cuentas asociadas están enumeradas aquí.
 Authentication.Login.Description.DownloadNewVersion,Esta versión de Roblox no está disponible para tu cuenta. Descarga la versión correcta para continuar.
 Authentication.Login.Description.EnterOneTimeCodeHelpV2,Ingresa el código que te acabamos de enviar a {email}
@@ -361,6 +363,7 @@ Authentication.Login.Label.ConnectionError.RetryWait,"Lo sentimos, hubo un probl
 
 Espera un momento e inténtalo de nuevo."
 Authentication.Login.Label.ConnectionError.Title,Error de conexión
+Authentication.Login.Label.DontHaveAnAccountCreateOne,¿No tienes una cuenta? {startTag}Crea una{endTag}
 Authentication.Login.Label.Email,
 Authentication.Login.Label.EmailAddress,Dirección de correo electrónico
 Authentication.Login.Label.EmailNeedsVerification,Tu correo electrónico necesita verificación
@@ -413,7 +416,7 @@ Authentication.Login.Response.Require2FA,La verificación de 2 pasos no es compa
 Authentication.Login.Response.Require2FAGeneric,La verificación obligatoria adicional no es compatible con este dispositivo. Sigue las instrucciones de la derecha para iniciar sesión de forma segura.
 Authentication.Login.Response.ServiceUnavailable,Servicio no disponible. Inténtalo de nuevo más tarde.
 Authentication.Login.Response.SomethingWentWrong,Algo salió mal. Inténtalo de nuevo más tarde.
-Authentication.Login.Response.TencentLoginFailurePleaseTryAgain,Error al iniciar sesión. Inténtalo de nuevo.
+Authentication.Login.Response.TencentLoginFailurePleaseTryAgain,
 Authentication.Login.Response.TooManyAttemptsPleaseWait,Demasiados intentos. Espera un poco.
 Authentication.Login.Response.UnableToSignIn,No se puede iniciar sesión.
 Authentication.Login.Response.UnknownError,
@@ -603,7 +606,7 @@ Authentication.SignUp.Response.PhoneNumberAlreadyLinked,El número ya está asoc
 Authentication.SignUp.Response.UsernameMustBeSetFirst,Antes debes determinar el nombre de usuario.
 Authentication.SignUp.Subtitle.AddYourBirthday,Agrega tu fecha de nacimiento para crear tu cuenta de Roblox.
 Authentication.SignUp.Subtitle.YourProgressCarriesOver,Tu progreso se transfiere cuando completas la configuración.
-Authentication.SignUp.Subtitle.YoureAlmostThere,"Ya casi terminas. Si cierras ahora, tu cuenta no se creará por completo y no podrás jugar Roblox."
+Authentication.SignUp.Subtitle.YoureAlmostThereClose,"Ya casi terminas. Si cancelas ahora, tu cuenta no se creará por completo y no podrás jugar Roblox."
 Authentication.SignUp.Title,"Hola, {username}, crea una contraseña"
 Authentication.TwoStepVerification.Action.Approve,Aprobar
 Authentication.TwoStepVerification.Action.ChangePassword,Cambiar contraseña
@@ -755,6 +758,9 @@ Common.UGCValidation.ErrorLabel.DescendantIdAnimationVersionNotSupported,"{Insta
 Common.UGCValidation.ErrorLabel.DescendantIdNotPublished,El elemento {AssetId} ({InstanceFullName}.{FieldName}) no está publicado. Publícalo e inténtalo de nuevo.
 Common.UGCValidation.ErrorLabel.DescendantIdVersionNotSupported,"{InstanceFullName}.{FieldName} usa la versión {Version} del recurso {AssetId}, pero en este momento solo se admite la versión 1. Usa la versión 1 e inténtalo de nuevo."
 Common.UGCValidation.ErrorLabel.DynamicHeadCageMisaligned,Las cabezas dinámicas en el mercado deben estar correctamente enjauladas para que los vértices de los ojos y la boca en la jaula se alineen con los vértices de la malla. Mejora tu enjaulamiento y su alineación con la malla.
+Common.UGCValidation.ErrorLabel.DynamicHeadCageMisalignedLeftEye,Los puntos de referencia del ojo izquierdo de la jaula de cabeza dinámica están desalineados con la malla. Ajusta la malla del ojo para que la malla del ojo izquierdo esté dentro del área proyectada de la malla.
+Common.UGCValidation.ErrorLabel.DynamicHeadCageMisalignedMouth,Los puntos de referencia de la boca de la jaula de cabeza dinámica están desalineados con la malla. Ajusta la jaula de la boca para que la malla de la boca esté dentro del área proyectada de la jaula.
+Common.UGCValidation.ErrorLabel.DynamicHeadCageMisalignedRightEye,Los puntos de referencia del ojo derecho de la jaula de cabeza dinámica están desalineados con la malla. Ajusta la jaula del ojo para que la malla del ojo derecho esté dentro del área proyectada de la jaula.
 Common.UGCValidation.ErrorLabel.DynamicHeadHappyNotShown,No se puede detectar la expresión de sonrisa en la cabeza dinámica. Ajusta los puntos de referencia de la jaula de la boca para que coincidan con la ubicación de la boca en la cabeza y asegúrate de que pueda mostrar la expresión de sonrisa.
 Common.UGCValidation.ErrorLabel.DynamicHeadLeftEyeNotClose,No se puede detectar la expresión de cierre del ojo izquierdo en la cabeza dinámica. Ajusta los puntos de referencia de la jaula del ojo izquierdo para que coincidan con la ubicación del ojo en la cabeza y asegúrate de que pueda cerrarse.
 Common.UGCValidation.ErrorLabel.DynamicHeadMISSINGCAGE,Las cabezas dinámicas en el mercado no tienen jaulas de cabeza. Crea una jaula de cabeza para la cabeza dinámica.
@@ -774,6 +780,13 @@ Common.UGCValidation.ErrorLabel.EmoteAnimation_MaxPartTranslationCalcFailed,No s
 Common.UGCValidation.ErrorLabel.EmoteAnimation_MaxPartTranslationMismatch,"La animación publicada especifica una traslación máxima de la parte de {taggedTranslation} studs, pero sus datos de animación calculan {calculatedTranslation} studs. Vuelve a publicar la animación."
 Common.UGCValidation.ErrorLabel.Extents_HeadBelowTorso,"La cabeza debe colocarse por encima de la parte superior del torso. El centro de la cabeza está por debajo de la parte superior del torso, lo que indica que la malla de la cabeza está colapsada o mal colocada."
 Common.UGCValidation.ErrorLabel.FaceControlsOverrideFACSNotEmpty,La propiedad InternalOverrideFACSData en FaceControls debe estar vacía al cargar.
+Common.UGCValidation.ErrorLabel.FacialFeaturePresence_EyesMissing,A la cara base le faltan las características oculares requeridas. Agrega ojos al rostro base e inténtalo de nuevo.
+Common.UGCValidation.ErrorLabel.FacialFeaturePresence_MouthMissing,La cara base necesita una boca. Agrégala e inténtalo de nuevo.
+Common.UGCValidation.ErrorLabel.FacsDeformation_HappyNotShown,No se puede detectar la expresión de felicidad. Ajusta la jaula de la boca o el Sistema de Codificación Facial de expresión de felicidad para que la malla de la boca proyectada se deforme como se espera.
+Common.UGCValidation.ErrorLabel.FacsDeformation_LeftEyeNotClose,No se puede detectar la expresión de ojo izquierdo cerrado. Ajusta la jaula del ojo izquierdo o el Sistema de Codificación Facial de cierre del ojo izquierdo para que la malla del ojo proyectada se deforme como se espera.
+Common.UGCValidation.ErrorLabel.FacsDeformation_MouthNotOpen,No se puede detectar la expresión de boca abierta. Ajusta la jaula de la boca o el FACS de boca abierta para que la malla de la boca proyectada se deforme como se espera.
+Common.UGCValidation.ErrorLabel.FacsDeformation_RightEyeNotClose,No se puede detectar la expresión de ojo derecho cerrado. Ajusta la jaula del ojo derecho o el Sistema de Codificación Facial de cierre del ojo derecho para que la malla del ojo proyectada se deforme como se espera.
+Common.UGCValidation.ErrorLabel.FacsDeformation_SadNotShown,No se puede detectar la expresión de tristeza. Ajusta la jaula de la boca o el Sistema de Codificación Facial de expresión de tristeza para que la malla de la boca proyectada se deforme como se espera.
 Common.UGCValidation.ErrorLabel.FacsExpandsHead,"Se detectó que FACs agrandó tu cabeza al {modPercent}%, pero alterar la cabeza va en contra de la política del mercado para las animaciones faciales."
 Common.UGCValidation.ErrorLabel.FacsJointCountBounded,"Las cabezas dinámicas pueden tener un máximo de {maxFacsJointCount} articulaciones del Sistema de Codificación Facial, pero esta cabeza tiene {actualJointCount}. Reduce el número de articulaciones del Sistema de Codificación Facial e inténtalo de nuevo."
 Common.UGCValidation.ErrorLabel.FacsShrinksHead,"Se detectó que FACs redujo tu cabeza al {modPercent}%, pero alterar la cabeza va en contra de la política del mercado para las animaciones faciales."
@@ -821,6 +834,7 @@ Common.UGCValidation.ErrorLabel.MeshPartBounds_TooSmall,"La malla {partName} tie
 Common.UGCValidation.ErrorLabel.MissingRequiredAttachment,El archivo adjunto {attName} debe existir exactamente una vez dentro de los elementos descendientes de {partName}.
 Common.UGCValidation.ErrorLabel.NoAttributes,'{RootInstanceName}' (o sus descendientes) contienen atributos. Debes eliminar los atributos de lo siguiente: {InstanceNameList}
 Common.UGCValidation.ErrorLabel.PropertiesNotSensible,{ClassName} “{InstancePath}” tiene propiedades no válidas: {ProblematicProperties}. Se excedió un límite de bytes mostrado (un límite de 0 significa que la propiedad debe estar vacía); cualquier otra propiedad contiene valores NaN/Inf o excede su límite de tamaño predeterminado.
+Common.UGCValidation.ErrorLabel.RenderedAnimation_RequiredExpressionsMissing,"A la animación renderizada le faltan una o más expresiones faciales requeridas (ojo cerrado, boca abierta, feliz, triste)."
 Common.UGCValidation.ErrorLabel.RigAttachmentOutOfBounds,El accesorio de rig “{AttachmentName}” en “{PartName}” debe colocarse cerca del límite de la articulación donde esta parte del cuerpo se conecta con otra adyacente. La posición actual [{CurrentPosition}] está demasiado lejos del plano de conexión. Muévelo más cerca de [{ClosestValidPosition}].
 Common.UGCValidation.ErrorLabel.SelectionCountNotOne,"Para subir un recurso a Roblox, debes seleccionar exactamente 1 instancia y el tipo de carga asociado."
 Common.UGCValidation.ErrorLabel.SerializedAssetTooLarge,Este activo es demasiado grande para subirse ({sizeBytes} bytes exceden el máximo de {maxSizeBytes} bytes). Reduce su tamaño e inténtalo de nuevo.
@@ -974,7 +988,6 @@ CommonUI.Features.Label.TencentNotice,Aviso
 CommonUI.Features.Label.Terms,Términos
 CommonUI.Features.Label.TermsOfService,Términos de servicio
 CommonUI.Features.Label.TermsOfUse,Términos de uso
-CommonUI.Features.Label.Thanks,Gracias
 CommonUI.Features.Label.TheHunt,Eventos de Roblox
 CommonUI.Features.Label.Trades,Intercambios
 CommonUI.Features.Label.Unchecked,Sin verificar
@@ -1134,15 +1147,11 @@ CoreScripts.TextChat.ChatWindow.ChatDisabled.OnlyViewSystemMessages,Aquí solo p
 CoreScripts.TextChat.ChatWindow.ChatDisabled.RegionUnavailable,Aquí solo puedes ver los mensajes del sistema. El chat no está disponible en tu región.
 CoreScripts.TextChat.ChatWindow.ChatDisabled.SettingOff,Aquí solo puedes ver los mensajes del sistema. Actualiza tu configuración de comunicación para activar el chat.
 CoreScripts.TextChat.ChatWindow.ChatEnabled.ChatInRegion,Puedes ver los mensajes del sistema y chatear con los usuarios de tu región.
-CoreScripts.TextChat.ChatWindow.ChatEnabled.ChatWithAgeGroupAAndTF,Solo las personas de grupos de edad similares y tus amigos de confianza pueden chatear contigo.
 CoreScripts.TextChat.ChatWindow.ChatEnabled.ChatWithOnlinePlayers.BelowThreshold,¡Saluda a quienes están jugando!
-CoreScripts.TextChat.ChatWindow.ChatEnabled.ChatWithOnlinePlayers.Local.WithCount,{RBX_COUNT} jugadores más están en el chat. ¡Salúdalos!
 CoreScripts.TextChat.ChatWindow.ChatEnabled.ChatWithOnlinePlayers.V3,👋 ¡Saluda a todos los que están jugando!
 CoreScripts.TextChat.ChatWindow.ChatEnabled.ChatWithTF,Solo tus Amigos de confianza pueden chatear contigo.
 CoreScripts.TextChat.ChatWindow.ChatEnabled.Global2,Chatea con más personas en este juego. Solo las personas de grupos de edad similares pueden chatear contigo.
 CoreScripts.TextChat.ChatWindow.ChatEnabled.Global3,¡Chatea con más personas en este juego!
-CoreScripts.TextChat.ChatWindow.ChatWithOnlinePlayers.Local.Friendly,✨ ¡Únete a la diversión! Saluda a todos los que están jugando.
-CoreScripts.TextChat.ChatWindow.ChatWithOnlinePlayers.Local.WithCount,👋 {RBX_COUNT} jugadores están en el chat. ¡Salúdalos!
 CoreScripts.TextChat.ChatWindow.HandFreeTranscriptionFTUX,Mantén presionado para usar manos libres
 CoreScripts.TextChat.ChatWindow.RephrasedLabel,reformulado
 CoreScripts.TextChat.ChatWindow.RephrasedReason.Description,Roblox reformula los mensajes que infringen las normas de seguridad.
@@ -1457,7 +1466,6 @@ Feature.AccountSettings.Message.Error.InvalidTwitchUrl,La URL del perfil de Twit
 Feature.AccountSettings.Message.Error.InvalidXUrl,El nombre de usuario de X no es válido.
 Feature.AccountSettings.Message.Error.InvalidYouTubeUrl,La URL de YouTube no es válida.
 Feature.AddFriends.Action.FriendAdded,Amistad añadida
-Feature.AddFriends.Action.IgnoreAll,Ignorar todas
 Feature.AddFriends.Action.IgnoreAllAltCase,Ignorar todos
 Feature.AddFriends.Action.IgnoreFriendRequest,Ignorar solicitud de amistad
 Feature.AddFriends.Action.IgnoreTrustedFriendRequest,Ignorar solicitud de amistad de confianza
@@ -2454,7 +2462,10 @@ Feature.Build.Description.ManagedPricingAcknowledgement,Los Precios gestionados 
 Feature.Build.Description.ManagedPricingCurrentProducts,Usar Precios gestionados para todos los productos actuales
 Feature.Build.Description.ManagedPricingUnavailable,Los Precios gestionados no están disponibles para esta experiencia.
 Feature.Build.Description.NoEligibleManagedPricingProducts,No hay productos elegibles
+Feature.Build.Description.NoMonetizationDeveloperProducts,Los productos para desarrolladores son artículos que los jugadores pueden comprar una y otra vez en tu juego
+Feature.Build.Description.NoMonetizationPasses,Los pases te permiten ofrecer a los jugadores acceso único a tu juego
 Feature.Build.Description.NoMonetizationProducts,Describe un artículo que quieras crear para comenzar a ganar Robux en tu juego
+Feature.Build.Description.NoMonetizationSubscriptions,Las suscripciones dentro de los juegos te permiten ofrecer a los usuarios beneficios recurrentes por una tarifa mensual
 Feature.Build.Description.PlayAfterPublish,Elige quién puede jugar después de que publiques esta experiencia.
 Feature.Build.Description.PlaytestLatest,Estás probando tu última versión. Publícala cuando tengas todo listo para compartirla.
 Feature.Build.Description.PlaytestLocked,Puedes comenzar la prueba de juego después de crear tu primer juego.
@@ -2465,6 +2476,8 @@ Feature.Build.Description.PromoteGamePaid,Crea un anuncio para mostrar tu juego 
 Feature.Build.Description.PromoteGameWithAdCampaign,Aumenta tu público con una campaña publicitaria de {durationDays} días y haz que descubran tu juego.
 Feature.Build.Description.RaiseLimitOrWait,Aumenta tu límite diario de Robux para seguir creando o espera a que se restablezca mañana.
 Feature.Build.Description.RatingAgreement,"Al publicar, aceptas que esta valoración de contenido es precisa."
+Feature.Build.Description.RequiredRobuxForAdvanced,Necesitas al menos {ROBUX} Robux para seguir creando con el modelo Avanzado. También puedes volver al modelo Predeterminado o esperar a que se restablezca tu uso gratuito.
+Feature.Build.Description.RequiredRobuxForDefault,Necesitas al menos {ROBUX} Robux para seguir creando o espera a que se restablezca tu uso gratuito.
 Feature.Build.Description.RestoreLatest,Esta versión se convertirá en su última versión publicada.
 Feature.Build.Description.RevertToVersion,Confirma para revertir el último cambio y volver a {VERSION}.
 Feature.Build.Description.ShareLatest,Comparte lo que ha cambiado en tu última versión.
@@ -2486,9 +2499,18 @@ Feature.Build.Error.DeveloperProductPriceInvalid,"El precio debe ser un número 
 Feature.Build.Error.DeveloperProductPriceRequiredForSale,Selecciona Editar y agrega un precio antes de poner un producto a la venta.
 Feature.Build.Error.DeveloperProductTextModerated,La moderación de Roblox cambió el texto de este producto. Prueba con otras palabras.
 Feature.Build.Error.ManagedPricingPartialUpdate,No pudimos actualizar algunos productos.
+Feature.Build.Error.MonetizationImageFailed,No se pudo cargar la imagen. Inténtalo de nuevo.
+Feature.Build.Error.MonetizationImageInReview,La imagen aún está en proceso de revisión. Inténtalo de nuevo en unos momentos.
+Feature.Build.Error.MonetizationImagePreparing,La imagen aún está en proceso de preparación. Inténtalo de nuevo en unos momentos.
+Feature.Build.Error.MonetizationImageTimedOut,La imagen tardó demasiado en cargarse. Inténtalo de nuevo.
+Feature.Build.Error.MonetizationImageTooLarge,La imagen pesa más de 5 MB.
+Feature.Build.Error.MonetizationNoUniverse,Este chat no está conectado a un juego.
 Feature.Build.Error.MonetizationOptionUpdate,No pudimos actualizar la opción. Inténtalo de nuevo.
 Feature.Build.Error.MonetizationOptionsLoad,No pudimos cargar las opciones. Inténtalo de nuevo.
 Feature.Build.Error.MonetizationPermissionDenied,No tienes permiso para cambiar las opciones de monetización.
+Feature.Build.Error.MonetizationPriceRequiredForRegionalPricing,Agrega un precio para activar los precios regionales.
+Feature.Build.Error.MonetizationPriceRequiredForSale,Agrega un precio antes de poner esto a la venta.
+Feature.Build.Error.MonetizationRateLimited,Demasiadas solicitudes. Inténtalo de nuevo en unos momentos.
 Feature.Build.Header.AccessSharing,Acceso y uso compartido
 Feature.Build.Header.AllVersions,Todas las versiones
 Feature.Build.Header.Answers,Respuestas
@@ -2530,6 +2552,7 @@ Feature.Build.Label.DeveloperProductDescription,Descripción: {DESCRIPTION}
 Feature.Build.Label.DeveloperProductName,"Nombre: ""{NAME}"""
 Feature.Build.Label.DeveloperProductPrice,Precio: {PRICE} Robux
 Feature.Build.Label.DeveloperProductPriceUnavailable,?
+Feature.Build.Label.DeveloperProducts,Productos del desarrollador
 Feature.Build.Label.Done,Listo
 Feature.Build.Label.EasyPerformanceReport,Informe de rendimiento sencillo
 Feature.Build.Label.Error,
@@ -2711,6 +2734,7 @@ Feature.Build.Message.BuildBusy,La compilación se está procesando. Espera un m
 Feature.Build.Message.BuildConnectFailed,No se pudo conectar la compilación. Inténtalo de nuevo.
 Feature.Build.Message.BuildInternalError,La compilación encontró un problema. Inténtalo de nuevo.
 Feature.Build.Message.BuildResponseFailed,La compilación no pudo responder. Inténtalo de nuevo.
+Feature.Build.Message.BuildSendUnconfirmed,La compilación no pudo confirmar que tu mensaje se haya enviado.
 Feature.Build.Message.BuildStillWorking,"Estamos trabajando en ello. Puedes salir de la aplicación, jugar Roblox o comenzar otro proyecto mientras esperas."
 Feature.Build.Message.BuildStopped,Detuviste la compilación.
 Feature.Build.Message.BuildTakingLonger,Esto está tardando más de lo esperado. Puedes seguir esperando o comenzar con otra cosa.
@@ -2740,6 +2764,7 @@ Feature.Build.Message.NoAssetsFound,No se encontraron recursos.
 Feature.Build.Message.NoCapturesAvailable,No hay capturas disponibles
 Feature.Build.Message.NoDescriptionProvided,No se proporcionó la descripción.
 Feature.Build.Message.NoFriendsToAdd,"Aún no tienes amistades. Primero, busca personas para añadir a Roblox."
+Feature.Build.Message.NoGamesYet,Aún no hay juegos.
 Feature.Build.Message.NoResults,
 Feature.Build.Message.NoSearchResultsFound,No se encontraron resultados de búsqueda
 Feature.Build.Message.NoVersionHistory,Aún no hay historial de versiones.
@@ -2815,8 +2840,13 @@ Feature.Build.Title.GameCreationDone,Se completó la creación del juego
 Feature.Build.Title.GamePass,Pase del juego
 Feature.Build.Title.GenericError,
 Feature.Build.Title.GetUsers,Obtener usuarios
+Feature.Build.Title.InsufficientRobuxForModel,No tienes suficientes Robux
 Feature.Build.Title.ManagedPricingAcknowledgement,¿Quieres activar Precios gestionados?
+Feature.Build.Title.Monetization,Monetización
+Feature.Build.Title.NoMonetizationDeveloperProducts,No has creado ningún producto para desarrolladores
+Feature.Build.Title.NoMonetizationPasses,No has creado ningún pase
 Feature.Build.Title.NoMonetizationProducts,Comienza a ganar en tu juego
+Feature.Build.Title.NoMonetizationSubscriptions,No has creado ninguna suscripción
 Feature.Build.Title.NoRobuxForUsage,No quedan Robux para el uso de la compilación
 Feature.Build.Title.PickCampaign,Elige una duración
 Feature.Build.Title.Playtesters,
@@ -3435,6 +3465,7 @@ Feature.ContentFeed.Timestamp.HoursAgo,Hace {numHours} h
 Feature.ContentFeed.Timestamp.MinutesAgo,Hace {numMinutes} min
 Feature.ContentFeed.Timestamp.Now,ahora
 Feature.ContentFeed.Timestamp.WeeksAgo,Hace {numWeeks} semana(s)
+Feature.CustomForms.Label.Percent,
 Feature.DevSubs.Action.CancelSubscription,Cancelar suscripción
 Feature.DevSubs.Action.RenewSubscription,Renovar suscripción
 Feature.DevSubs.Label.ActiveSubscriptions,Suscripciones activas
@@ -3617,6 +3648,7 @@ Feature.Friends.Description.TrustedFriendsExpiredLink,Pídele a tu amigo que te 
 Feature.Friends.Description.TrustedFriendsInvalidLink,Asegúrate de haber iniciado sesión con la cuenta correcta y vuelve a intentarlo.
 Feature.Friends.Description.TrustedFriendsRequestModalBody,Solo añade personas que conozcas y en las que confíes. Puedes gestionar esta amistad en cualquier momento desde su perfil.
 Feature.Friends.Description.TrustedFriendsUnavailable,La función Amigos de confianza aún no está disponible en tu región.
+Feature.Friends.Description.TrustedFriendsWrongAccount,Asegúrate de haber iniciado sesión como @{username} y vuelve a intentarlo.
 Feature.Friends.Description.YouCanDoMoreWithTrustedFriends,Puedes hacer más en Roblox con amigos de confianza. Gestiona esta amistad en cualquier momento desde su perfil.
 Feature.Friends.Error.AlreadyFriendError,Este usuario ya es una amistad.
 Feature.Friends.Error.DefaultFriendingError,No se puede enviar la solicitud de amistad. Inténtalo de nuevo más tarde.
@@ -3925,6 +3957,7 @@ Feature.Groups.Label.Follower,seguidor
 Feature.Groups.Label.FollowerCapital,Seguidor
 Feature.Groups.Label.FollowerCapitalPlural,
 Feature.Groups.Label.FollowerPlural,seguidores
+Feature.Groups.Label.FormerMember,Antiguo miembro
 Feature.Groups.Label.GroupClosed,Comunidad cerrada
 Feature.Groups.Label.GroupLocked,Se bloqueó esta comunidad
 Feature.Groups.Label.Member,Miembro
@@ -3933,6 +3966,8 @@ Feature.Groups.Label.MemberLowerCase,miembro
 Feature.Groups.Label.MemberLowerCasePlural,miembros
 Feature.Groups.Label.Owned,En posesión
 Feature.Groups.Label.PreviousNames,Nombres anteriores
+Feature.Groups.Label.Replies,respuestas
+Feature.Groups.Label.Reply,responder
 Feature.Groups.Label.SearchMyGroups,Buscar mis comunidades
 Feature.Groups.Message.BannedFromGroup,Te banearon de esta comunidad.
 Feature.Groups.Message.GroupClosed,No puedes unirte a una comunidad cerrada.
@@ -4169,6 +4204,7 @@ Feature.Moments.Action.ShowDetails,Mostrar detalles
 Feature.Moments.Action.ShowMore,
 Feature.Moments.Action.TrimVideo,Recortar video
 Feature.Moments.Action.TryAgain,Inténtalo de nuevo
+Feature.Moments.Body.EDPMomentIPReportInstructions,"Para denunciar una infracción de la PI en este Momento, continúa a la página de detalles del juego."
 Feature.Moments.Description.CommunityStandards,Consulta las Normas de la comunidad para obtener más información sobre lo que puedes y no puedes decir.
 Feature.Moments.Description.EmptyCapturesLibrary,Aquí es donde aparecerán tus Capturas.
 Feature.Moments.Description.GenerateTextFeedbackDisclosure,Generado con IA. Revísalo antes de publicarlo: tú eres responsable de que publicas.
@@ -4226,6 +4262,7 @@ Feature.Moments.Label.ExceedsCharacterLimit,Supera el límite de caracteres
 Feature.Moments.Label.FeedEndBody,Vuelve más tarde o crea tu propio Momento.
 Feature.Moments.Label.FeedEndTitle,Estás al día
 Feature.Moments.Label.FeedFailedToLoad,No se pudo cargar el feed
+Feature.Moments.Label.FeedFollowing,
 Feature.Moments.Label.FeedMyMoments,Mis Momentos
 Feature.Moments.Label.FeedTrending,
 Feature.Moments.Label.FirstCommentInvite,Aún no hay comentarios. ¡Escribe tú el primero!
@@ -4296,12 +4333,14 @@ Feature.Moments.Label.WriteComment,Escribe un comentario
 Feature.Moments.Title.Comments,Comentarios
 Feature.Moments.Title.CommentsWithCappedCount,{count}+ comentarios
 Feature.Moments.Title.CommentsWithCount,{count} comentarios
+Feature.Moments.Title.EDPMomentIPReportInstructions,Denunciar en la página de detalles del juego
 Feature.Moments.Title.GenerateTextFeedbackReason,¿Qué salió mal?
 Feature.Moments.Title.GenerateTextOptions,
 Feature.Moments.Title.LeaveMomentCreation,¿Salir de la creación de Momento?
 Feature.Moments.Title.MomentRemoved,
-Feature.Moments.Title.PostInsights,Título del encabezado de la página
+Feature.Moments.Title.PostInsights,Información de las publicaciones
 Feature.Moments.Title.ReportPost,Reportar publicación
+Feature.Moments.Title.UnfollowConfirmationDialog,¿Dejar de seguir a @{username}?
 Feature.Moments.Tooltip.PostInsightsBody,"Consulta las visualizaciones, el tiempo de visualización y cómo le fue al Momento con tu audiencia."
 Feature.Moments.Tooltip.PostInsightsTitle,Aquí está la información de tu Momento
 Feature.Moments.Tooltip.ShareFirstMomentBody,Crea un Momento a partir de tus capturas
@@ -4466,6 +4505,7 @@ Feature.NotApproved.Label.AbuseType.AccountTheft,Robo de cuenta
 Feature.NotApproved.Label.AbuseType.AdultContent,Contenido para adultos
 Feature.NotApproved.Label.AbuseType.Advertisement,Publicidad
 Feature.NotApproved.Label.AbuseType.Advertising,
+Feature.NotApproved.Label.AbuseType.AgeInappropriateMetadata,Metadatos inadecuados para la edad
 Feature.NotApproved.Label.AbuseType.AssetOwnership,Propiedad del recurso
 Feature.NotApproved.Label.AbuseType.Billing,
 Feature.NotApproved.Label.AbuseType.BlockedContent,Contenido bloqueado
@@ -4809,6 +4849,7 @@ Feature.PrivateServers.Action.CreatePrivateServer,
 Feature.PrivateServers.Action.FreeWithBlackbird,Gratis con Plus
 Feature.PrivateServers.Description.PrivateServerPurchaseUnavailableInStudio,Las compras de servidores privados no son compatibles en Studio.
 Feature.PrivateServers.Description.VipServersNotSupported,Este juego no es compatible con servidores privados.
+Feature.PrivateServers.Label.OwnersServer,Servidor de {displayName}
 Feature.Profile.Action.AboutThisProfile,Acerca de este perfil
 Feature.Profile.Action.Accept,
 Feature.Profile.Action.AcceptFriends,
@@ -5011,6 +5052,10 @@ Feature.ReportAbuse.ProblemDescription.Swearing,"Palabrotas, maldiciones o blasf
 Feature.ReportAbuse.ProblemDescription.Violence,Violencia extrema o gore
 Feature.ReportAbuse.Title.SelectInSceneContinueYourReport,Continúa con tu denuncia
 Feature.ReportAbuse.Title.SelectInSceneIpReport,Gracias por iniciar tu denuncia de infracción de propiedad intelectual
+Feature.RoCaptchaChallenge.Action.Cancel,
+Feature.RoCaptchaChallenge.Action.Play,
+Feature.RoCaptchaChallenge.Content.JoinChallenge,Detectamos actividad inusual en tu cuenta. Juega un juego rápido para continuar.
+Feature.RoCaptchaChallenge.Title.Challenge,Asegurémonos de que eres una persona real
 Feature.RobloxSubscription.Action.JoinIn,Únete en {time}
 Feature.RobloxSubscription.Action.ReferToPlus,Invita a Plus
 Feature.RobloxSubscription.Action.Subscribe,Suscribirse
@@ -5457,6 +5502,7 @@ Feature.UniversalShareSheet.Response.SharedCustomMessage,{CUSTOM_MESSAGE} + 1 m
 Feature.UniversalShareSheet.Response.SharedMessage,El mensaje se envió
 Feature.UniversalShareSheet.Response.SharedMultipleMessages,Los mensajes se enviaron
 Feature.UniversalShareSheet.SharedCustomMultipleMessages,{CUSTOM_MESSAGE} + {N} más
+Feature.UserLibrary.Label.MyLibrary,Mi biblioteca
 Feature.VerificationUpsell.Action.AddPhone,
 Feature.VerificationUpsell.Action.AddPhoneVoice,
 Feature.VerificationUpsell.Action.ChangeEmail,
@@ -5847,8 +5893,6 @@ Notifications.NotificationStream.Bundle.ShowLess,
 Notifications.NotificationStream.Bundle.ShowMoreV2,{notificationCount} más
 Notifications.NotificationStream.Label.AllCaughtUp,¡Ya estás al tanto de todo!
 Notifications.NotificationStream.Label.Notifications,
-Notifications.SafetyAvatarModeration.Description.NotificationTypeInExpWarnMsg,
-Notifications.SafetyAvatarModeration.Label.NotificationTypeInExpWarn,
 Notifications.SquadRegroupPrompt.ToastAction.Dismiss,
 Notifications.SquadRegroupPrompt.ToastAction.Join,
 Notifications.SquadRegroupPrompt.ToastLabel.ContinuePlayingTogether,Seguir jugando juntos

@@ -1,7 +1,10 @@
 ﻿local Foundation = script:FindFirstAncestor("Foundation")
 local Parent = Foundation.Parent
 local ReactModule = require(Parent.React)
+local ButtonVariantModule = require(Foundation.Enums.ButtonVariant)
+local InputSizeModule = require(Foundation.Enums.InputSize)
 local IconModule = require(Foundation.Components.Icon)
+local IconButtonModule = require(Foundation.Components.IconButton)
 local TextModule = require(Foundation.Components.Text)
 local ViewModule = require(Foundation.Components.View)
 local UseTokensModule = require(Foundation.Providers.Style.useTokens)
@@ -10,8 +13,9 @@ local UseUpsellContentVariantsModule = require(script.Parent.useUpsellContentVar
 local Icon = require(Parent.BuilderIcons).Icon
 
 return function(p1)
-	-- upvalues: UseTokensModule (copy), UseUpsellContentVariantsModule (copy), ReactModule (copy), ViewModule (copy), ThumbnailModule (copy), TextModule (copy), IconModule (copy), Icon (copy)
+	-- upvalues: UseTokensModule (copy), UseUpsellContentVariantsModule (copy), ReactModule (copy), ViewModule (copy), ThumbnailModule (copy), TextModule (copy), IconModule (copy), Icon (copy), IconButtonModule (copy), ButtonVariantModule (copy), InputSizeModule (copy)
 	local UseUpsellContentVariantsModuleResult = UseUpsellContentVariantsModule(UseTokensModule(), p1.density)
+	local HasOnActivated = p1.onActivated ~= nil
 	
 	return ReactModule.createElement(ViewModule, {
 		LayoutOrder = 1,
@@ -44,10 +48,19 @@ return function(p1)
 				testId = `{p1.testId}--description`
 			}) else nil
 		}),
-		Chevron = if p1.onActivated then ReactModule.createElement(IconModule, {
+		Chevron = if HasOnActivated then ReactModule.createElement(IconModule, {
 			LayoutOrder = 3,
 			name = Icon.ChevronSmallRight,
 			testId = `{p1.testId}--chevron`
+		}) else nil,
+		Close = if p1.onClose and not HasOnActivated then ReactModule.createElement(IconButtonModule, {
+			isCircular = true,
+			LayoutOrder = 4,
+			onActivated = p1.onClose,
+			icon = Icon.X,
+			variant = ButtonVariantModule.Utility,
+			size = InputSizeModule.Small,
+			testId = `{p1.testId}--close`
 		}) else nil
 	})
 end

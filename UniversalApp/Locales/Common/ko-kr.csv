@@ -298,6 +298,7 @@ Authentication.CrossDevice.Label.Warning1,• 직접 요청한 코드만 입력�
 Authentication.CrossDevice.Label.Warning2,• 다른 사용자의 코드를 입력하지 말 것
 Authentication.CrossDevice.Response.InvalidCode,입력한 코드가 유효하지 않습니다. 정확하게 입력했는지 다시 확인해 보세요.
 Authentication.CrossDevice.Response.LoginFail,로그인 실패
+Authentication.CrossDevice.Response.LoginFailedTryAgain,로그인에 실패했습니다. 다시 시도해 보세요.
 Authentication.CrossDevice.Response.LoginSuccess,로그인 완료
 Authentication.Login.Action.Apple,Apple
 Authentication.Login.Action.ConnectionError.RetryReady,
@@ -328,6 +329,7 @@ Authentication.Login.Action.UsePasskey,패스키 사용
 Authentication.Login.Action.WeChatLogin,WeChat 로그인
 Authentication.Login.Button.CloseAndSwitchPlatformAccount,{platformAccountName} 계정으로 전환하려면 Roblox를 종료하세요
 Authentication.Login.Button.UseDifferentRobloxAccount,다른 Roblox 계정 사용
+Authentication.Login.Button.XboxAccountSwitcher,Xbox 계정 전환
 Authentication.Login.Description.AccountSelectorHelp,연결된 모든 계정이 여기에 나열됩니다.
 Authentication.Login.Description.DownloadNewVersion,회원님의 계정에서는 Roblox의 이 버전을 이용할 수 없습니다. 계속하려면 올바른 버전을 다운로드하세요.
 Authentication.Login.Description.EnterOneTimeCodeHelpV2,{email}(으)로 방금 전송된 코드를 입력하세요
@@ -362,6 +364,7 @@ Authentication.Login.Label.ConnectionError.RetryWait,"죄송합니다. 서버에
 
 잠시 기다렸다가 다시 시도하세요."
 Authentication.Login.Label.ConnectionError.Title,연결 오류
+Authentication.Login.Label.DontHaveAnAccountCreateOne,계정이 없으신가요? {startTag}계정 만들기{endTag}
 Authentication.Login.Label.Email,
 Authentication.Login.Label.EmailAddress,이메일 주소
 Authentication.Login.Label.EmailNeedsVerification,이메일 인증이 필요합니다
@@ -604,7 +607,7 @@ Authentication.SignUp.Response.PhoneNumberAlreadyLinked,이미 다른 계정에 
 Authentication.SignUp.Response.UsernameMustBeSetFirst,먼저 사용자 이름을 설정해야 합니다.
 Authentication.SignUp.Subtitle.AddYourBirthday,Roblox 계정을 만들려면 생년월일을 입력하세요.
 Authentication.SignUp.Subtitle.YourProgressCarriesOver,설정을 완료하면 진행 상황이 이전됩니다.
-Authentication.SignUp.Subtitle.YoureAlmostThere,이제 거의 다 되었습니다. 지금 닫으면 계정이 완전히 생성되지 않아 Roblox를 플레이할 수 없습니다.
+Authentication.SignUp.Subtitle.YoureAlmostThereClose,거의 다 됐습니다! 지금 취소하면 계정이 완전히 생성되지 않아 Roblox를 플레이할 수 없습니다.
 Authentication.SignUp.Title,
 Authentication.TwoStepVerification.Action.Approve,승인
 Authentication.TwoStepVerification.Action.ChangePassword,비밀번호 변경
@@ -985,7 +988,6 @@ CommonUI.Features.Label.TencentNotice,알림
 CommonUI.Features.Label.Terms,이용 약관
 CommonUI.Features.Label.TermsOfService,서비스 약관
 CommonUI.Features.Label.TermsOfUse,
-CommonUI.Features.Label.Thanks,감사합니다
 CommonUI.Features.Label.TheHunt,Roblox 이벤트
 CommonUI.Features.Label.Trades,거래
 CommonUI.Features.Label.Unchecked,선택 해제됨
@@ -1145,15 +1147,11 @@ CoreScripts.TextChat.ChatWindow.ChatDisabled.OnlyViewSystemMessages,여기서는
 CoreScripts.TextChat.ChatWindow.ChatDisabled.RegionUnavailable,여기서는 시스템 메시지만 볼 수 있습니다. 현재 계신 지역에서는 채팅을 이용할 수 없습니다.
 CoreScripts.TextChat.ChatWindow.ChatDisabled.SettingOff,여기서는 시스템 메시지만 볼 수 있습니다. 채팅을 켜려면 커뮤니케이션 설정을 업데이트하세요.
 CoreScripts.TextChat.ChatWindow.ChatEnabled.ChatInRegion,현재 같은 지역에 있는 사용자와만 채팅하고 시스템 메시지를 볼 수 있습니다.
-CoreScripts.TextChat.ChatWindow.ChatEnabled.ChatWithAgeGroupAAndTF,비슷한 연령대의 사람들 및 신뢰할 수 있는 친구들과만 채팅할 수 있습니다.
 CoreScripts.TextChat.ChatWindow.ChatEnabled.ChatWithOnlinePlayers.BelowThreshold, 지금 플레이 중인 모든 사람에게 인사하세요!
-CoreScripts.TextChat.ChatWindow.ChatEnabled.ChatWithOnlinePlayers.Local.WithCount,다른 플레이어 {RBX_COUNT}명이 채팅에 참여하고 있어요. 인사해 보세요!
 CoreScripts.TextChat.ChatWindow.ChatEnabled.ChatWithOnlinePlayers.V3,👋 지금 플레이 중인 모든 사람에게 인사하세요!
 CoreScripts.TextChat.ChatWindow.ChatEnabled.ChatWithTF,신뢰할 수 있는 친구들과만 채팅할 수 있습니다.
 CoreScripts.TextChat.ChatWindow.ChatEnabled.Global2,이 게임에서 더 많은 사람과 채팅하세요. 연령대가 비슷한 사람과만 채팅할 수 있습니다.
 CoreScripts.TextChat.ChatWindow.ChatEnabled.Global3,이 게임에서 더 많은 사람과 채팅해 보세요!
-CoreScripts.TextChat.ChatWindow.ChatWithOnlinePlayers.Local.Friendly,✨ 지금 플레이 중인 모든 사람들과 인사를 나누며 즐거운 대화에 참여해 보세요!
-CoreScripts.TextChat.ChatWindow.ChatWithOnlinePlayers.Local.WithCount,👋 플레이어 {RBX_COUNT}명이 채팅에 참여하고 있어요. 인사해 보세요!
 CoreScripts.TextChat.ChatWindow.HandFreeTranscriptionFTUX,길게 눌러 핸즈프리 모드로 전환
 CoreScripts.TextChat.ChatWindow.RephrasedLabel,표현이 변경됨
 CoreScripts.TextChat.ChatWindow.RephrasedReason.Description,Roblox는 안전 규칙을 위반하는 메시지의 표현을 변경합니다.
@@ -1207,7 +1205,7 @@ CoreScripts.TextChat.Online.Success.Singular,
 CoreScripts.TextChat.Online.Success.Singular3,
 CoreScripts.TextChat.TeamChat.Error.NotOnTeam,팀에 소속되어 있지 않으면 팀 채팅을 이용할 수 없습니다.
 CoreScripts.TextChat.TeamChat.PrefixText,[팀]
-CoreScripts.TextChat.Toast.ModerateChatOff.Subtitle.FriendsRename,
+CoreScripts.TextChat.Toast.ModerateChatOff.Subtitle.FriendsRename,비슷한 연령대의 사람들 및 신뢰할 수 있는 친구들과만 채팅할 수 있습니다.
 CoreScripts.TextChat.Toast.ModerateChatOff.Title,읽기 전용 보기를 끄셨습니다
 CoreScripts.TextChat.Toast.ModerateChatOn.Subtitle,역할 권한에 따라 일부 메시지는 읽기 전용으로 설정됩니다.
 CoreScripts.TextChat.Toast.ModerateChatOn.Title,읽기 전용 보기를 켜셨습니다
@@ -1468,7 +1466,6 @@ Feature.AccountSettings.Message.Error.InvalidTwitchUrl,유효하지 않은 Twitc
 Feature.AccountSettings.Message.Error.InvalidXUrl,유효하지 않은 X 핸들입니다.
 Feature.AccountSettings.Message.Error.InvalidYouTubeUrl,유효하지 않은 YouTube URL입니다.
 Feature.AddFriends.Action.FriendAdded,친구 추가됨
-Feature.AddFriends.Action.IgnoreAll,전체 거절
 Feature.AddFriends.Action.IgnoreAllAltCase,모두 무시
 Feature.AddFriends.Action.IgnoreFriendRequest,친구 요청 무시
 Feature.AddFriends.Action.IgnoreTrustedFriendRequest,신뢰할 수 있는 친구 요청 무시
@@ -2465,7 +2462,10 @@ Feature.Build.Description.ManagedPricingAcknowledgement,관리형 가격은 지�
 Feature.Build.Description.ManagedPricingCurrentProducts,현재 모든 상품에 관리형 가격 책정 사용
 Feature.Build.Description.ManagedPricingUnavailable,이 체험에는 관리형 가격 책정을 이용할 수 없습니다.
 Feature.Build.Description.NoEligibleManagedPricingProducts,적격 상품 없음
+Feature.Build.Description.NoMonetizationDeveloperProducts,개발자 상품은 플레이어가 게임 내에서 반복적으로 구매할 수 있는 아이템입니다.
+Feature.Build.Description.NoMonetizationPasses,패스를 통해 플레이어에게 게임 내 일회성 잠금 해제 혜택을 제공할 수 있습니다.
 Feature.Build.Description.NoMonetizationProducts,게임 내에서 Robux를 획득하기 위해 만들고자 하는 아이템에 대해 설명해 주세요
+Feature.Build.Description.NoMonetizationSubscriptions,게임 내 구독을 통해 월간 수수료를 지불하는 사용자에게 반복적인 혜택을 제공할 수 있습니다.
 Feature.Build.Description.PlayAfterPublish,이 체험을 게시한 후 플레이할 수 있는 사람을 선택하세요.
 Feature.Build.Description.PlaytestLatest,최신 버전을 플레이테스트하고 있습니다. 공유할 준비가 되면 게시하세요.
 Feature.Build.Description.PlaytestLocked,첫 게임을 만든 후 플레이테스트를 시작할 수 있습니다.
@@ -2476,6 +2476,8 @@ Feature.Build.Description.PromoteGamePaid,광고를 만들어 수백만 명의 �
 Feature.Build.Description.PromoteGameWithAdCampaign,{durationDays}일 광고 캠페인으로 오디언스를 확대하고 게임을 홍보하세요.
 Feature.Build.Description.RaiseLimitOrWait,"계속 제작하려면 일일 Robux 한도를 늘리거나, 내일 초기화될 때까지 기다리세요."
 Feature.Build.Description.RatingAgreement,게시하면 이 콘텐츠 등급이 정확하다는 데 동의하는 것으로 간주됩니다.
+Feature.Build.Description.RequiredRobuxForAdvanced,고급 모델로 계속 제작하려면 최소 {ROBUX} Robux가 필요합니다. 기본 모드로 다시 전환하거나 무료 사용량이 재설정될 때까지 기다릴 수도 있습니다.
+Feature.Build.Description.RequiredRobuxForDefault,계속 제작하려면 최소 {ROBUX} Robux가 필요합니다. Robux를 충전하거나 무료 사용량이 재설정될 때까지 기다리세요.
 Feature.Build.Description.RestoreLatest,이 버전이 최신 게시 버전이 됩니다.
 Feature.Build.Description.RevertToVersion,확인을 눌러 최신 변경 사항을 복구하고 {VERSION} 버전으로 돌아가세요.
 Feature.Build.Description.ShareLatest,최신 버전에서 변경된 사항을 공유하세요.
@@ -2497,9 +2499,18 @@ Feature.Build.Error.DeveloperProductPriceInvalid,"가격은 1~1,000,000,000 Robu
 Feature.Build.Error.DeveloperProductPriceRequiredForSale,상품을 판매 목록에 올리기 전에 '편집'을 선택하고 가격을 추가하세요.
 Feature.Build.Error.DeveloperProductTextModerated,Roblox 규정 준수 팀이 이 제품의 텍스트를 변경했습니다. 다른 표현을 사용해 보세요.
 Feature.Build.Error.ManagedPricingPartialUpdate,일부 상품을 업데이트하지 못했습니다.
+Feature.Build.Error.MonetizationImageFailed,이미지를 불러오지 못했습니다. 다시 시도하세요.
+Feature.Build.Error.MonetizationImageInReview,이미지가 아직 검토 중입니다. 잠시 후 다시 시도해 보세요.
+Feature.Build.Error.MonetizationImagePreparing,이미지가 아직 준비 중입니다. 잠시 후 다시 시도해 보세요.
+Feature.Build.Error.MonetizationImageTimedOut,이미지를 불러오는 데 너무 오래 걸렸습니다. 다시 시도하세요.
+Feature.Build.Error.MonetizationImageTooLarge,이미지 크기가 5MB를 초과합니다.
+Feature.Build.Error.MonetizationNoUniverse,이 채팅은 게임에 연결되어 있지 않습니다.
 Feature.Build.Error.MonetizationOptionUpdate,옵션을 업데이트하지 못했습니다. 다시 시도하세요.
 Feature.Build.Error.MonetizationOptionsLoad,옵션을 불러오지 못했습니다. 다시 시도하세요.
 Feature.Build.Error.MonetizationPermissionDenied,수익 창출 옵션을 변경할 권한이 없습니다.
+Feature.Build.Error.MonetizationPriceRequiredForRegionalPricing,지역별 가격 책정을 켜려면 가격을 추가하세요.
+Feature.Build.Error.MonetizationPriceRequiredForSale,이 상품을 판매하기 전에 가격을 추가하세요.
+Feature.Build.Error.MonetizationRateLimited,요청이 너무 많습니다. 잠시 후 다시 시도해 보세요.
 Feature.Build.Header.AccessSharing,액세스 및 공유
 Feature.Build.Header.AllVersions,모든 버전
 Feature.Build.Header.Answers,답변
@@ -2541,6 +2552,7 @@ Feature.Build.Label.DeveloperProductDescription,설명: {DESCRIPTION}
 Feature.Build.Label.DeveloperProductName,"이름: ""{NAME}"""
 Feature.Build.Label.DeveloperProductPrice,가격: {PRICE} Robux
 Feature.Build.Label.DeveloperProductPriceUnavailable,?
+Feature.Build.Label.DeveloperProducts,
 Feature.Build.Label.Done,
 Feature.Build.Label.EasyPerformanceReport,간편한 성과 보고서
 Feature.Build.Label.Error,
@@ -2722,6 +2734,7 @@ Feature.Build.Message.BuildBusy,Build 사용량이 많습니다. 잠시 후 다�
 Feature.Build.Message.BuildConnectFailed,Build에 연결되지 않았습니다. 다시 시도해 보세요.
 Feature.Build.Message.BuildInternalError,Build에 문제가 발생했습니다. 다시 시도해 보세요.
 Feature.Build.Message.BuildResponseFailed,Build가 응답하지 않았습니다. 다시 시도해 보세요.
+Feature.Build.Message.BuildSendUnconfirmed,Build에서 메시지가 전송되었는지 확인할 수 없습니다.
 Feature.Build.Message.BuildStillWorking,"작업 진행 중입니다. 기다리는 동안 앱을 종료하거나, Roblox를 플레이하거나, 다른 프로젝트를 시작할 수 있습니다."
 Feature.Build.Message.BuildStopped,Build를 중단했습니다.
 Feature.Build.Message.BuildTakingLonger,예상보다 시간이 오래 걸리고 있습니다. 계속 기다리거나 다른 작업을 시작하실 수 있습니다.
@@ -2751,6 +2764,7 @@ Feature.Build.Message.NoAssetsFound,애셋을 찾을 수 없습니다.
 Feature.Build.Message.NoCapturesAvailable,사용 가능한 캡처가 없습니다.
 Feature.Build.Message.NoDescriptionProvided,설명을 입력하지 않았습니다.
 Feature.Build.Message.NoFriendsToAdd,아직 초대할 친구가 없습니다. 먼저 Roblox에서 친구를 찾아보세요.
+Feature.Build.Message.NoGamesYet,아직 게임이 없습니다.
 Feature.Build.Message.NoResults,
 Feature.Build.Message.NoSearchResultsFound,검색 결과가 없습니다
 Feature.Build.Message.NoVersionHistory,아직 버전 기록이 없습니다.
@@ -2826,8 +2840,13 @@ Feature.Build.Title.GameCreationDone,게임 제작 완료
 Feature.Build.Title.GamePass,게임패스
 Feature.Build.Title.GenericError,오류 발생
 Feature.Build.Title.GetUsers,사용자 가져오기
+Feature.Build.Title.InsufficientRobuxForModel,Robux가 부족합니다
 Feature.Build.Title.ManagedPricingAcknowledgement,관리형 가격 책정을 켜시겠습니까?
+Feature.Build.Title.Monetization,수익 창출
+Feature.Build.Title.NoMonetizationDeveloperProducts,아직 개발자 상품을 만들지 않으셨습니다.
+Feature.Build.Title.NoMonetizationPasses,아직 패스를 만들지 않으셨습니다.
 Feature.Build.Title.NoMonetizationProducts,게임 내에서 수익을 올리세요
+Feature.Build.Title.NoMonetizationSubscriptions,아직 구독을 만들지 않으셨습니다.
 Feature.Build.Title.NoRobuxForUsage,Build 사용량을 위한 Robux가 남아 있지 않음
 Feature.Build.Title.PickCampaign,기간을 선택하세요.
 Feature.Build.Title.Playtesters,
@@ -3447,6 +3466,7 @@ Feature.ContentFeed.Timestamp.HoursAgo,{numHours}시간 전
 Feature.ContentFeed.Timestamp.MinutesAgo,{numMinutes}분 전
 Feature.ContentFeed.Timestamp.Now,
 Feature.ContentFeed.Timestamp.WeeksAgo,{numWeeks}주 전
+Feature.CustomForms.Label.Percent,
 Feature.DevSubs.Action.CancelSubscription,가입 취소
 Feature.DevSubs.Action.RenewSubscription,가입 갱신
 Feature.DevSubs.Label.ActiveSubscriptions,활성화된 가입
@@ -3629,6 +3649,7 @@ Feature.Friends.Description.TrustedFriendsExpiredLink,친구에게 링크를 다
 Feature.Friends.Description.TrustedFriendsInvalidLink,올바른 계정으로 로그인했는지 확인한 다음 다시 시도하세요.
 Feature.Friends.Description.TrustedFriendsRequestModalBody,아는 사람과 신뢰할 수 있는 사람만 추가하세요. 이 친구는 언제든지 프로필에서 관리할 수 있습니다.
 Feature.Friends.Description.TrustedFriendsUnavailable,현재 계신 지역에서는 아직 신뢰할 수 있는 친구 기능을 이용할 수 없습니다.
+Feature.Friends.Description.TrustedFriendsWrongAccount,@{username} 계정으로 로그인했는지 확인한 다음 다시 시도하세요.
 Feature.Friends.Description.YouCanDoMoreWithTrustedFriends,신뢰할 수 있는 친구와 함께 Roblox에서 더 많은 것을 즐길 수 있습니다. 이 친구는 언제든지 프로필에서 관리할 수 있습니다.
 Feature.Friends.Error.AlreadyFriendError,이미 친구인 사용자입니다.
 Feature.Friends.Error.DefaultFriendingError,친구 요청을 보낼 수 없습니다. 나중에 다시 시도하세요.
@@ -3937,6 +3958,7 @@ Feature.Groups.Label.Follower,
 Feature.Groups.Label.FollowerCapital,
 Feature.Groups.Label.FollowerCapitalPlural,
 Feature.Groups.Label.FollowerPlural,
+Feature.Groups.Label.FormerMember,이전 멤버
 Feature.Groups.Label.GroupClosed,커뮤니티가 닫힘
 Feature.Groups.Label.GroupLocked,커뮤니티가 잠겼습니다
 Feature.Groups.Label.Member,
@@ -3945,6 +3967,8 @@ Feature.Groups.Label.MemberLowerCase,
 Feature.Groups.Label.MemberLowerCasePlural,
 Feature.Groups.Label.Owned,
 Feature.Groups.Label.PreviousNames,이전 이름
+Feature.Groups.Label.Replies,
+Feature.Groups.Label.Reply,
 Feature.Groups.Label.SearchMyGroups,내 커뮤니티 검색
 Feature.Groups.Message.BannedFromGroup,이 커뮤니티에서 차단되었습니다.
 Feature.Groups.Message.GroupClosed,닫힌 커뮤니티에는 가입할 수 없습니다.
@@ -4182,6 +4206,7 @@ Feature.Moments.Action.ShowDetails,세부 정보 표시
 Feature.Moments.Action.ShowMore,
 Feature.Moments.Action.TrimVideo,동영상 잘라내기
 Feature.Moments.Action.TryAgain,
+Feature.Moments.Body.EDPMomentIPReportInstructions,이 모멘트에서 지식재산권 위반을 신고하려면 게임 세부 정보 페이지로 이동하세요.
 Feature.Moments.Description.CommunityStandards,허용되는 표현과 금지되는 표현에 대한 자세한 내용은 커뮤니티 규정을 확인하세요.
 Feature.Moments.Description.EmptyCapturesLibrary,내 캡처가 표시되는 곳입니다.
 Feature.Moments.Description.GenerateTextFeedbackDisclosure,AI가 생성했습니다. 게시하기 전에 검토하세요. 게시된 내용에 대한 책임은 사용자에게 있습니다.
@@ -4239,6 +4264,7 @@ Feature.Moments.Label.ExceedsCharacterLimit,글자 수 한도 초과
 Feature.Moments.Label.FeedEndBody,나중에 다시 확인하거나 나만의 모멘트를 만들어 보세요.
 Feature.Moments.Label.FeedEndTitle,모두 확인했습니다
 Feature.Moments.Label.FeedFailedToLoad,피드를 불러오지 못했습니다.
+Feature.Moments.Label.FeedFollowing,
 Feature.Moments.Label.FeedMyMoments,내 모멘트
 Feature.Moments.Label.FeedTrending,
 Feature.Moments.Label.FirstCommentInvite,아직 코멘트가 없습니다. 가장 먼저 코멘트를 남겨 보세요!
@@ -4309,12 +4335,14 @@ Feature.Moments.Label.WriteComment,코멘트를 남기세요
 Feature.Moments.Title.Comments,코멘트
 Feature.Moments.Title.CommentsWithCappedCount,코멘트 {count}개 이상
 Feature.Moments.Title.CommentsWithCount,코멘트 {count}개
+Feature.Moments.Title.EDPMomentIPReportInstructions,게임 세부 정보 페이지에서 신고하기
 Feature.Moments.Title.GenerateTextFeedbackReason,어떤 문제가 생겼나요?
 Feature.Moments.Title.GenerateTextOptions,
 Feature.Moments.Title.LeaveMomentCreation,모멘트 만들기를 종료할까요?
 Feature.Moments.Title.MomentRemoved,
-Feature.Moments.Title.PostInsights,페이지 헤더 제목
+Feature.Moments.Title.PostInsights,게시물 인사이트
 Feature.Moments.Title.ReportPost,게시물 신고
+Feature.Moments.Title.UnfollowConfirmationDialog,@{username} 님을 언팔로우하시겠어요?
 Feature.Moments.Tooltip.PostInsightsBody,"조회수, 시청 시간, 그리고 모멘트에 대한 오디언스의 반응을 확인해 보세요."
 Feature.Moments.Tooltip.PostInsightsTitle,모멘트 인사이트를 확인하세요
 Feature.Moments.Tooltip.ShareFirstMomentBody,캡처에서 모멘트를 만드세요
@@ -4479,6 +4507,7 @@ Feature.NotApproved.Label.AbuseType.AccountTheft,계정 도난
 Feature.NotApproved.Label.AbuseType.AdultContent,성인용 콘텐츠
 Feature.NotApproved.Label.AbuseType.Advertisement,
 Feature.NotApproved.Label.AbuseType.Advertising,
+Feature.NotApproved.Label.AbuseType.AgeInappropriateMetadata,연령에 부적절한 메타데이터
 Feature.NotApproved.Label.AbuseType.AssetOwnership,애셋 소유권
 Feature.NotApproved.Label.AbuseType.Billing,비용 청구
 Feature.NotApproved.Label.AbuseType.BlockedContent,BlockedContent
@@ -4822,6 +4851,7 @@ Feature.PrivateServers.Action.CreatePrivateServer,
 Feature.PrivateServers.Action.FreeWithBlackbird,Plus로 무료 이용
 Feature.PrivateServers.Description.PrivateServerPurchaseUnavailableInStudio,Studio에서는 비공개 서버 구매가 지원되지 않습니다.
 Feature.PrivateServers.Description.VipServersNotSupported,이 게임은 비공개 서버를 지원하지 않습니다.
+Feature.PrivateServers.Label.OwnersServer,{displayName} 님의 서버
 Feature.Profile.Action.AboutThisProfile,프로필 정보
 Feature.Profile.Action.Accept,
 Feature.Profile.Action.AcceptFriends,
@@ -5024,6 +5054,10 @@ Feature.ReportAbuse.ProblemDescription.Swearing,"욕설, 저주 또는 비속어
 Feature.ReportAbuse.ProblemDescription.Violence,극단적인 폭력 또는 고어
 Feature.ReportAbuse.Title.SelectInSceneContinueYourReport,신고 계속하기
 Feature.ReportAbuse.Title.SelectInSceneIpReport,지적 재산권 침해에 대한 신고 절차를 시작해 주셔서 감사합니다
+Feature.RoCaptchaChallenge.Action.Cancel,
+Feature.RoCaptchaChallenge.Action.Play,
+Feature.RoCaptchaChallenge.Content.JoinChallenge,회원님의 계정에서 비정상적인 활동이 감지되었습니다. 계속하려면 간단한 게임을 플레이하세요.
+Feature.RoCaptchaChallenge.Title.Challenge,실제 사람이 이용 중인지 확인해 보겠습니다.
 Feature.RobloxSubscription.Action.JoinIn,{time}에 참가하기
 Feature.RobloxSubscription.Action.ReferToPlus,Plus로 초대하기
 Feature.RobloxSubscription.Action.Subscribe,
@@ -5470,6 +5504,7 @@ Feature.UniversalShareSheet.Response.SharedCustomMessage,{CUSTOM_MESSAGE} 외 1�
 Feature.UniversalShareSheet.Response.SharedMessage,메시지가 전송되었습니다.
 Feature.UniversalShareSheet.Response.SharedMultipleMessages,
 Feature.UniversalShareSheet.SharedCustomMultipleMessages,{CUSTOM_MESSAGE} 외 {N}명
+Feature.UserLibrary.Label.MyLibrary,내 라이브러리
 Feature.VerificationUpsell.Action.AddPhone,
 Feature.VerificationUpsell.Action.AddPhoneVoice,음성 채팅을 위해 휴대폰 번호 추가
 Feature.VerificationUpsell.Action.ChangeEmail,
@@ -5653,7 +5688,7 @@ IAPExperience.InsufficientRobux.Text.CurrentBalance,현재 잔액
 IAPExperience.InsufficientRobux.Text.DontHaveEnough,Robux가 부족해 이 아이템을 구매할 수 없습니다.
 IAPExperience.InsufficientRobux.Text.MissingRobux,
 IAPExperience.InsufficientRobux.Text.YouNeed,{robux}가 더 필요합니다. Robux 패키지를 추가로 구매한 후 체험으로 돌아오세요.
-IAPExperience.InsufficientRobux.Title.InsufficientRobux,Robux가 부족합니다
+IAPExperience.InsufficientRobux.Title.InsufficientRobux,
 IAPExperience.LeaveRoblox.Action.Cancel,
 IAPExperience.LeaveRoblox.Action.Continue,
 IAPExperience.LeaveRoblox.Text.ExternalWebsiteWarning,
@@ -5860,8 +5895,6 @@ Notifications.NotificationStream.Bundle.ShowLess,
 Notifications.NotificationStream.Bundle.ShowMoreV2,{notificationCount}개 더 보기
 Notifications.NotificationStream.Label.AllCaughtUp,모두 확인했습니다.
 Notifications.NotificationStream.Label.Notifications,
-Notifications.SafetyAvatarModeration.Description.NotificationTypeInExpWarnMsg,
-Notifications.SafetyAvatarModeration.Label.NotificationTypeInExpWarn,
 Notifications.SquadRegroupPrompt.ToastAction.Dismiss,
 Notifications.SquadRegroupPrompt.ToastAction.Join,
 Notifications.SquadRegroupPrompt.ToastLabel.ContinuePlayingTogether,계속 함께 플레이하기

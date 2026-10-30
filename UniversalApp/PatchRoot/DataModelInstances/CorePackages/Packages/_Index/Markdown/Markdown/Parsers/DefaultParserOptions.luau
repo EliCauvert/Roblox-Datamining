@@ -1,7 +1,28 @@
-﻿local NodeTypeModule = require(script:FindFirstAncestor("Markdown").Enums.NodeType)
+﻿local Markdown = script:FindFirstAncestor("Markdown")
+local NodeTypeModule = require(Markdown.Enums.NodeType)
 
 return {
-	inlineTags = { font = true, img = true },
+	inlineTags = if require(Markdown.Parent.MarkdownCore).Flags.FFlagMarkdownTagFallbacks then {
+		font = true,
+		img = true,
+		a = true,
+		abbr = true,
+		b = true,
+		code = true,
+		del = true,
+		em = true,
+		i = true,
+		kbd = true,
+		mark = true,
+		s = true,
+		small = true,
+		span = true,
+		strike = true,
+		strong = true,
+		sub = true,
+		sup = true,
+		u = true
+	} else { font = true, img = true },
 	nodeConfiguration = {
 		ROOT = { type = NodeTypeModule.Root },
 		LIST_ITEM = { type = NodeTypeModule.TextBlock },

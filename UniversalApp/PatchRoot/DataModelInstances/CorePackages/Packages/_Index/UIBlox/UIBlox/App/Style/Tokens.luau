@@ -31,9 +31,9 @@ return {
 			ScaledClampedValue = (if Console == ConstantsModule.DeviceType.Console then 1.5 else 1) * math.clamp(Value, 0, 1e999)
 		end
 		return {
-			Global = require(TokenGenerators.Global)(ScaledClampedValue),
-			Semantic = require(TokenGenerators.Semantic)(ScaledClampedValue),
-			Component = require(TokenGenerators.Component)(ScaledClampedValue)
+			Global = TokenGenerators.Global(ScaledClampedValue),
+			Semantic = TokenGenerators.Semantic(ScaledClampedValue),
+			Component = TokenGenerators.Component(ScaledClampedValue)
 		}
 	end,
 	Types = require(script.Types),

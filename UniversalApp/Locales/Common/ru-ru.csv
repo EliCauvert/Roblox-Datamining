@@ -555,7 +555,6 @@ CommonUI.Features.Label.TencentNotice,Уведомление
 CommonUI.Features.Label.Terms,Условия
 CommonUI.Features.Label.TermsOfService,Условия предоставления услуг
 CommonUI.Features.Label.TermsOfUse,Условия использования
-CommonUI.Features.Label.Thanks,Спасибо
 CommonUI.Features.Label.TheHunt,События Roblox
 CommonUI.Features.Label.Trades,Обмен
 CommonUI.Features.Label.VNGMigrationBody,"Чтобы продолжить пользоваться Roblox в своём регионе, загрузи новое приложение Roblox-VNG и войди в систему под именем пользователя Roblox."
@@ -854,7 +853,6 @@ Feature.AccountSettings.Message.Error.InvalidTwitchUrl,Неверная ссыл
 Feature.AccountSettings.Message.Error.InvalidXUrl,Неверный дескриптор X.
 Feature.AccountSettings.Message.Error.InvalidYouTubeUrl,Неверная ссылка на страницу YouTube.
 Feature.AddFriends.Action.FriendAdded,Друг добавлен
-Feature.AddFriends.Action.IgnoreAll,Игнорировать все
 Feature.AddFriends.Action.IgnoreFriendRequest,Игнорировать запрос дружбы
 Feature.AddFriends.Action.RequestIgnored,Запрос заблокирован
 Feature.AddFriends.Description.CameraPermissionWarning,"Доступ к камере отключён. Чтобы использовать функцию сканирования QR-кода, разреши доступ к камере, перейдя в «‎Настройки»‎ > «‎Приложения»‎ > «‎Roblox»‎"
@@ -2102,11 +2100,14 @@ Feature.Groups.Heading.SocialLinksNew,Ссылки на соцсети
 Feature.Groups.Heading.SocialMedia,Соцсети
 Feature.Groups.Heading.VerificationRequired,Требуется подтверждение аккаунта
 Feature.Groups.Label.ByOwnerWithFormat,Автор: {ownerName}
+Feature.Groups.Label.FormerMember,Бывший участник
 Feature.Groups.Label.GroupClosed,Сообщество закрыто
 Feature.Groups.Label.GroupLocked,Это сообщество было заблокировано
 Feature.Groups.Label.Member,Участник
 Feature.Groups.Label.Owned,Владелец
 Feature.Groups.Label.PreviousNames,Предыдущие имена
+Feature.Groups.Label.Replies,ответы
+Feature.Groups.Label.Reply,ответ
 Feature.Groups.Label.SearchMyGroups,Поиск по сообществам
 Feature.Groups.Message.BannedFromGroup,Тебя заблокировали в этом сообществе.
 Feature.Groups.Message.GroupClosed,Вы не можете вступить в закрытое коммьюнити.

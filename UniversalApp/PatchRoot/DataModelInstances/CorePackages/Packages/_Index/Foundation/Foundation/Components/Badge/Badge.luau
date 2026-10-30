@@ -85,7 +85,7 @@ return ReactModule.memo(ReactModule.forwardRef(function(p1, Ref)
 	end
 	return ReactModule.createElement(ViewModule, WithCommonPropsModule(WithDefaultsModuleResult, {
 		backgroundStyle = UseBadgeVariantsModuleResult.container.backgroundStyle,
-		stroke = if FlagsModule.FoundationBadgeBetaUpdate then nil else UseBadgeVariantsModuleResult.container.stroke,
+		stroke = UseBadgeVariantsModuleResult.container.stroke,
 		tag = UseBadgeVariantsModuleResult.container.tag,
 		ref = Ref
 	}), {

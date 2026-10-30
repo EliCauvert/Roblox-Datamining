@@ -40,11 +40,16 @@ return ReactModule.memo(ReactModule.forwardRef(function(p1, Ref)
 				description = WithDefaultsModuleResult.description,
 				thumbnail = p1.thumbnail,
 				onActivated = if Primary then Primary.onActivated else nil,
+				onClose = if Primary then nil else p1.onClose,
 				testId = WithDefaultsModuleResult.testId
 			})
 		}
 	else
 		local Secondary = if p1.actions then p1.actions.secondary else nil
+		
+		if p1.onClose then
+			config1.onClose = p1.onClose
+		end
 		config1.title = WithDefaultsModuleResult.title
 		config1.description = WithDefaultsModuleResult.description
 		config1.lineClamp = {

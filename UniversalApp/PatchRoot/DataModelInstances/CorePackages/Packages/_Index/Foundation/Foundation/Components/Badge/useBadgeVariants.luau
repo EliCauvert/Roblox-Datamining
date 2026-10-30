@@ -83,16 +83,29 @@ function variantsFactory(p1)
 			},
 			[BadgeVariantModule.OverMedia] = {
 				container = {
-					backgroundStyle = if FlagsModule.FoundationBadgeBetaUpdate then p1.Color.OverMedia.OverMedia_0 else p1.LightMode.Surface.Surface_100,
-					stroke = if FlagsModule.FoundationBadgeBetaUpdate then nil else {
+					backgroundStyle = if FlagsModule.FoundationBadgeOverMediaAdaptive then p1.Color.OverMedia.OverMedia_0 else p1.LightMode.Surface.Surface_100,
+					stroke = if FlagsModule.FoundationBadgeOverMediaAdaptive then nil else {
 						Color = p1.LightMode.Stroke.Default.Color3,
 						Transparency = p1.LightMode.Stroke.Default.Transparency
 					}
 				},
 				content = {
-					style = if FlagsModule.FoundationBadgeBetaUpdate then p1.Inverse.OverMedia.OverMedia_0 else p1.LightMode.Content.Emphasis
+					style = if FlagsModule.FoundationBadgeOverMediaAdaptive then p1.Inverse.OverMedia.OverMedia_0 else p1.LightMode.Content.Emphasis
 				},
-				icon = { style = p1.Inverse.OverMedia.OverMedia_0 }
+				icon = {
+					style = if FlagsModule.FoundationBadgeOverMediaAdaptive then p1.Inverse.OverMedia.OverMedia_0 else p1.LightMode.Content.Emphasis
+				}
+			},
+			[BadgeVariantModule.OverMediaWhite] = {
+				container = {
+					backgroundStyle = p1.LightMode.Surface.Surface_100,
+					stroke = {
+						Color = p1.LightMode.Stroke.Default.Color3,
+						Transparency = p1.LightMode.Stroke.Default.Transparency
+					}
+				},
+				content = { style = p1.LightMode.Content.Emphasis },
+				icon = { style = p1.LightMode.Content.Emphasis }
 			},
 			[BadgeVariantModule.Emphasis] = {
 				container = {

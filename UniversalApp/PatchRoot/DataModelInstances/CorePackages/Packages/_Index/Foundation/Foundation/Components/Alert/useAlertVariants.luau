@@ -77,7 +77,8 @@ local function variantsFactory(p1)
 		isStacked = {
 			[false] = {
 				message = { tag = "fill auto-y" },
-				link = { tag = "auto-xy" }
+				link = { tag = "auto-xy" },
+				linkContainer = { tag = "auto-xy" }
 			},
 			[true] = {
 				message = { tag = "size-full-0 auto-y" },
@@ -87,7 +88,8 @@ local function variantsFactory(p1)
 						top = UDim.new(0, p1.Size.Size_150),
 						bottom = UDim.new(0, p1.Size.Size_150)
 					}
-				}
+				},
+				linkContainer = { tag = "size-full-0 auto-y" }
 			}
 		}
 	}

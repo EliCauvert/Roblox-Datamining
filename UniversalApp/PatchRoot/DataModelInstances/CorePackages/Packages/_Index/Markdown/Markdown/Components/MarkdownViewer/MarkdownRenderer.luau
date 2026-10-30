@@ -17,7 +17,9 @@ local ImageElement = InlineLayoutModule.Components.InlineLayoutElements.ImageEle
 local HardBreakElement = InlineLayoutModule.Components.InlineLayoutElements.HardBreakElement
 local MergeContextsModule = require(Utils.mergeContexts)
 local ProcessSoftBreaksModule = require(Utils.processSoftBreaks)
+local ShouldUseTopPaddingModule = require(Utils.shouldUseTopPadding)
 local TextStyleModule = require(Utils.TextStyle)
+local MarkdownTableModule = require(script.Parent.Parent.NodeRenderers.MarkdownTable)
 local RenderInlineModule = require(script.Parent.Parent.NodeRenderers.renderInline)
 local BulletList = MarkdownCoreModule.Components.BulletList
 local GetBaseTextElementEngineTagsFunction = TextStyleModule.getBaseTextElementEngineTags
@@ -29,12 +31,13 @@ local GetNodeTypeConfigModule = require(Parent.Utils.getNodeTypeConfig)
 local IsInlineElementFunction = InlineLayoutModule.Utils.isInlineElement
 local Flags = MarkdownCoreModule.Flags
 local Flags1 = FoundationModule.Utility.Flags
+local FFlagMarkdownTables = Flags.FFlagMarkdownTables or Flags.FFlagMarkdownTagFallbacks
 local BuilderSans = Enum.Font.BuilderSans
 local _UDim2 = UDim2.fromOffset(16, 16)
 local Code = Enum.Font.Code
 local _Font = Font.new("rbxasset://fonts/families/BuilderMono.json", Enum.FontWeight.Regular, Enum.FontStyle.Normal)
 
-local function v31(p1)
+local function v34(p1)
 	print(`[Default link callback]: URL [{p1}] is clicked`)
 end
 
@@ -46,16 +49,12 @@ local function _(p1, p2)
 	return if typeof(FontFace) == "Font" then FontFace elseif FontFace then Font.fromEnum(FontFace) else Font.fromEnum(p2)
 end
 
-local _ = function(p1): boolean
-	return p1.offset ~= 0
-end
-
 local function render(JoinResult, JoinDeepResult)
-	-- upvalues: MarkdownRendererModule (copy), GetNodeTypeConfigModule (copy)
+	-- upvalues: FFlagMarkdownTables (copy), MarkdownRendererModule (copy), GetNodeTypeConfigModule (copy)
 	if not JoinResult then
 		return nil
 	end
-	local Renderer = MarkdownRendererModule.renderers[JoinResult.name]
+	local Renderer = (if FFlagMarkdownTables and JoinDeepResult.renderers then JoinDeepResult.renderers else MarkdownRendererModule.renderers)[JoinResult.name]
 	
 	if not Renderer then
 		warn(`No renderer found for node: {JoinResult.name}`)
@@ -140,6 +139,36 @@ local MemoizeResult = DashModule.memoize(function(Text)
 	end
 end)
 
+local function renderText(p3, p4)
+	-- upvalues: ProcessSoftBreaksModule (copy), GetBaseTextElementEngineTagsFunction (copy), Flags (copy), BuilderSans (copy), SelectableTextElement (copy), TextElement (copy)
+	local config = {
+		LayoutOrder = p3.index,
+		Text = ProcessSoftBreaksModule(p3.text),
+		EngineTags = GetBaseTextElementEngineTagsFunction(p4.textStyles)
+	}
+	local FontStyle = {}
+	local FontFace = nil
+	
+	if Flags.FFlagMarkdownAssistantParity then
+		FontFace = p4.textStyles.fontFace
+	else
+		local TextStyles = p4.textStyles
+		local FontFace1 = TextStyles.fontFace or TextStyles.font
+		FontFace = if typeof(FontFace1) == "Font" then FontFace1 elseif FontFace1 then Font.fromEnum(FontFace1) else Font.fromEnum(BuilderSans)
+	end
+	FontStyle.Font = FontFace
+	FontStyle.FontSize = p4.textStyles.textSize
+	config.fontStyle = FontStyle
+	config.textStyle = {
+		Color3 = if typeof(p4.textStyles.color) == "string" then Color3.fromHex(p4.textStyles.color) else p4.textStyles.color,
+		Transparency = p4.textStyles.transparency
+	}
+	config.viewTags = p4.textStyles.viewTags
+	config.tag = if Flags.FFlagMarkdownTables then p4.textStyles.textTags else nil
+	
+	return if p4.textStyles.selectable then SelectableTextElement.new(config) else TextElement.new(config)
+end
+
 local function renderHardBreak()
 	-- upvalues: HardBreakElement (copy)
 	return HardBreakElement
@@ -155,31 +184,31 @@ MarkdownRendererModule.defaultRenderers = {
 		}, (p4.processChildren(p3, p4)))
 	end,
 	HEADING = function(p3, p4)
-		-- upvalues: ReactModule (copy), View (copy), RenderInlineModule (copy), MergeContextsModule (copy)
+		-- upvalues: ReactModule (copy), View (copy), ShouldUseTopPaddingModule (copy), RenderInlineModule (copy), MergeContextsModule (copy)
 		return ReactModule.createElement(View, {
 			tag = "size-full-0 auto-y",
 			key = tostring(p3.index),
 			LayoutOrder = p3.index
 		}, {
-			UIPadding = p3.offset ~= 0 and ReactModule.createElement("UIPadding", { PaddingTop = UDim.new(0, 20) }),
+			UIPadding = ShouldUseTopPaddingModule(p3) and ReactModule.createElement("UIPadding", { PaddingTop = UDim.new(0, 20) }),
 			InlineLayout = RenderInlineModule(p3, MergeContextsModule(p4, {
 				textStyles = p4.headerStyles[math.clamp(if p3.attributes and type(p3.attributes.depth) == "number" then p3.attributes.depth else 1, 1, #p4.headerStyles)]
 			}))
 		})
 	end,
 	PARAGRAPH = function(p3, p4)
-		-- upvalues: ReactModule (copy), View (copy), RenderInlineModule (copy)
+		-- upvalues: ReactModule (copy), View (copy), ShouldUseTopPaddingModule (copy), RenderInlineModule (copy)
 		return ReactModule.createElement(View, {
 			tag = "size-full-0 auto-y",
 			key = tostring(p3.index),
 			LayoutOrder = p3.index
 		}, {
-			UIPadding = p3.offset ~= 0 and ReactModule.createElement("UIPadding", { PaddingTop = UDim.new(0, 10) }),
+			UIPadding = ShouldUseTopPaddingModule(p3) and ReactModule.createElement("UIPadding", { PaddingTop = UDim.new(0, 10) }),
 			InlineLayout = RenderInlineModule(p3, p4)
 		})
 	end,
 	CODE_BLOCK = function(p3, p4)
-		-- upvalues: Highlighter (copy), GetCodeTextStylesFunction (copy), Flags (copy), _Font (copy), Code (copy), computeLineNumbers (copy), ReactModule (copy), View (copy), FoundationModule (copy), MemoizeResult (copy), Text (copy), DashModule (copy)
+		-- upvalues: Highlighter (copy), GetCodeTextStylesFunction (copy), Flags (copy), _Font (copy), Code (copy), computeLineNumbers (copy), ReactModule (copy), View (copy), ShouldUseTopPaddingModule (copy), FoundationModule (copy), MemoizeResult (copy), Text (copy), DashModule (copy)
 		local Text1 = p3.text
 		local HighlightResult = if (if p3.attributes then p3.attributes.language else nil) == "lua" then Highlighter.highlight(Text1, p4.colorScheme) else Text1
 		local CodeTextStyles = GetCodeTextStylesFunction(p4)
@@ -225,7 +254,6 @@ MarkdownRendererModule.defaultRenderers = {
 			Text2 = computeLineNumbers(Text1)
 		end
 		local ShowCopyButton = p4.codeSettings and p4.codeSettings.showCopyButton
-		local IsNotOffsetMatch = p3.offset ~= 0
 		
 		return ReactModule.createElement(View, {
 			tag = "size-full-0 auto-y col",
@@ -235,7 +263,7 @@ MarkdownRendererModule.defaultRenderers = {
 			backgroundStyle = { Transparency = 1 }
 		}, {
 			UIPadding = ReactModule.createElement("UIPadding", {
-				PaddingTop = if IsNotOffsetMatch then UDim.new(0, 10) else nil,
+				PaddingTop = if ShouldUseTopPaddingModule(p3) then UDim.new(0, 10) else nil,
 				PaddingBottom = UDim.new(0, 10)
 			}),
 			TitleBar = if ShowCopyButton then ReactModule.createElement(FoundationModule.View, {
@@ -309,6 +337,8 @@ MarkdownRendererModule.defaultRenderers = {
 			JoinDeepResult.bold = true
 		elseif Style == "ITALIC" or Style == "ITALIC_2" then
 			JoinDeepResult.italic = true
+		elseif Style == "UNDERLINE" then
+			JoinDeepResult.underline = true
 		elseif Style == "STRIKE" then
 			JoinDeepResult.strike = true
 		elseif Style == "INLINE_CODE" then
@@ -316,34 +346,7 @@ MarkdownRendererModule.defaultRenderers = {
 		end
 		return (p4.processChildren(p3, MergeContextsModule(p4, { textStyles = JoinDeepResult })))
 	end,
-	TEXT = function(p3, p4)
-		-- upvalues: ProcessSoftBreaksModule (copy), GetBaseTextElementEngineTagsFunction (copy), Flags (copy), BuilderSans (copy), SelectableTextElement (copy), TextElement (copy)
-		local config = {
-			LayoutOrder = p3.index,
-			Text = ProcessSoftBreaksModule(p3.text),
-			EngineTags = GetBaseTextElementEngineTagsFunction(p4.textStyles)
-		}
-		local FontStyle = {}
-		local FontFace = nil
-		
-		if Flags.FFlagMarkdownAssistantParity then
-			FontFace = p4.textStyles.fontFace
-		else
-			local TextStyles = p4.textStyles
-			local FontFace1 = TextStyles.fontFace or TextStyles.font
-			FontFace = if typeof(FontFace1) == "Font" then FontFace1 elseif FontFace1 then Font.fromEnum(FontFace1) else Font.fromEnum(BuilderSans)
-		end
-		FontStyle.Font = FontFace
-		FontStyle.FontSize = p4.textStyles.textSize
-		config.fontStyle = FontStyle
-		config.textStyle = {
-			Color3 = if typeof(p4.textStyles.color) == "string" then Color3.fromHex(p4.textStyles.color) else p4.textStyles.color,
-			Transparency = p4.textStyles.transparency
-		}
-		config.viewTags = p4.textStyles.viewTags
-		
-		return if p4.textStyles.selectable then SelectableTextElement.new(config) else TextElement.new(config)
-	end,
+	TEXT = renderText,
 	LINK = function(p3, p4)
 		-- upvalues: MergeContextsModule (copy), DashModule (copy), IsInlineElementFunction (copy), HardBreakElement (copy), LinkElement (copy)
 		local Url = p3.attributes and p3.attributes.url or (p3.url or "")
@@ -359,7 +362,7 @@ MarkdownRendererModule.defaultRenderers = {
 		})
 	end,
 	LIST = function(p3, p4)
-		-- upvalues: ReactModule (copy), View (copy), render (copy), DashModule (copy), BulletList (copy), Flags (copy), BuilderSans (copy)
+		-- upvalues: ReactModule (copy), View (copy), render (copy), DashModule (copy), BulletList (copy), Flags (copy), BuilderSans (copy), ShouldUseTopPaddingModule (copy)
 		local List = {}
 		local v1 = nil
 		
@@ -415,7 +418,7 @@ MarkdownRendererModule.defaultRenderers = {
 		config.ListStyle = Label
 		
 		return CreateElementFunction(BulletList, config, {
-			UIPadding = p3.offset ~= 0 and ReactModule.createElement("UIPadding", { PaddingTop = UDim.new(0, 10) })
+			UIPadding = ShouldUseTopPaddingModule(p3) and ReactModule.createElement("UIPadding", { PaddingTop = UDim.new(0, 10) })
 		})
 	end,
 	LIST_ITEM = function(p5, p6)
@@ -427,13 +430,13 @@ MarkdownRendererModule.defaultRenderers = {
 		}, { InlineLayout = RenderInlineModule(p5, p6) })
 	end,
 	DIVIDER = function(p5)
-		-- upvalues: ReactModule (copy), View (copy), Divider (copy)
+		-- upvalues: ReactModule (copy), View (copy), ShouldUseTopPaddingModule (copy), Divider (copy)
 		return ReactModule.createElement(View, {
 			tag = "size-full-0 auto-y",
 			key = tostring(p5.index),
 			LayoutOrder = p5.index
 		}, {
-			UIPadding = p5.offset ~= 0 and ReactModule.createElement("UIPadding", { PaddingTop = UDim.new(0, 10) }),
+			UIPadding = ShouldUseTopPaddingModule(p5) and ReactModule.createElement("UIPadding", { PaddingTop = UDim.new(0, 10) }),
 			Divider = ReactModule.createElement(Divider)
 		})
 	end,
@@ -477,8 +480,17 @@ MarkdownRendererModule.defaultRenderers = {
 	LINE_BREAK = renderHardBreak
 }
 
+if Flags.FFlagMarkdownTables then
+	MarkdownRendererModule.defaultRenderers.TABLE = MarkdownTableModule.renderTable
+	MarkdownRendererModule.defaultRenderers.TABLE_ROW = MarkdownTableModule.renderTableRow
+	MarkdownRendererModule.defaultRenderers.TABLE_HEADER = MarkdownTableModule.renderTableRow
+	MarkdownRendererModule.defaultRenderers.TABLE_CELL = MarkdownTableModule.renderTableCell
+end
+if Flags.FFlagMarkdownTagFallbacks then
+	MarkdownRendererModule.defaultRenderers.ACTION = renderText
+end
 function MarkdownRendererModule.render(p5, p6)
-	-- upvalues: MarkdownRendererModule (copy), Flags (copy), NormalizeStyleFontFunction (copy), DashModule (copy), Flags1 (copy), _Font (copy), BuilderSans (copy), Code (copy), _UDim2 (copy), v31 (copy), processChildren (copy), render (copy)
+	-- upvalues: MarkdownRendererModule (copy), Flags (copy), NormalizeStyleFontFunction (copy), DashModule (copy), Flags1 (copy), _Font (copy), BuilderSans (copy), Code (copy), _UDim2 (copy), v34 (copy), processChildren (copy), FFlagMarkdownTables (copy), render (copy)
 	MarkdownRendererModule.renderers = p6.userRenderers
 	local Copy = table.clone(p6.markdownRendererProps or {})
 	local config = nil
@@ -530,10 +542,14 @@ function MarkdownRendererModule.render(p5, p6)
 		linkStyles = {
 			linkColor = `#{p6.tokens.Color.Content.Link.Color3:ToHex()}`
 		},
-		linkCallback = p6.linkCallback or v31,
+		linkCallback = p6.linkCallback or v34,
 		colorScheme = p6.colorScheme,
 		processChildren = processChildren
 	}, Copy)
+	
+	if FFlagMarkdownTables then
+		JoinDeepResult.renderers = p6.userRenderers
+	end
 	table.freeze(JoinDeepResult)
 	
 	return (render(p5, JoinDeepResult))

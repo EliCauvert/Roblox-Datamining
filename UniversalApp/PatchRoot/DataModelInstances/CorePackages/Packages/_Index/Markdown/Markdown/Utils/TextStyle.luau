@@ -32,6 +32,9 @@ return {
 				attributes = { color = p1.color }
 			})
 		end
+		if p1.underline then
+			table.insert(List, { name = InlineEngineTag.UNDERLINE, attributes = {} })
+		end
 		return List
 	end,
 	normalizeStyleFont = function(p1)

@@ -297,6 +297,7 @@ Authentication.CrossDevice.Label.Warning1,• あなたがリクエストした�
 Authentication.CrossDevice.Label.Warning2,• 他のユーザーのコードは絶対に入力しない
 Authentication.CrossDevice.Response.InvalidCode,入力したコードは無効です。正しく入力したかどうか、確認してください。
 Authentication.CrossDevice.Response.LoginFail,ログインできませんでした
+Authentication.CrossDevice.Response.LoginFailedTryAgain,ログインできませんでした。もう一度お試しください
 Authentication.CrossDevice.Response.LoginSuccess,ログインできました
 Authentication.Login.Action.Apple,Apple
 Authentication.Login.Action.ConnectionError.RetryReady,再試行する
@@ -327,6 +328,7 @@ Authentication.Login.Action.UsePasskey,パスキーを使用
 Authentication.Login.Action.WeChatLogin,WeChatログイン
 Authentication.Login.Button.CloseAndSwitchPlatformAccount,Robloxから退出して {platformAccountName} のアカウントを切り替え
 Authentication.Login.Button.UseDifferentRobloxAccount,別のRobloxアカウントを使用
+Authentication.Login.Button.XboxAccountSwitcher,Xboxアカウントを切りかえる
 Authentication.Login.Description.AccountSelectorHelp,すべての関連アカウントがここに表示されています。
 Authentication.Login.Description.DownloadNewVersion,このRobloxのバージョンは、お持ちのアカウントではご利用いただけません。続けるには正しいバージョンをダウンロードしてください。
 Authentication.Login.Description.EnterOneTimeCodeHelpV2,{email} に送信されたコードを入力
@@ -361,6 +363,7 @@ Authentication.Login.Label.ConnectionError.RetryWait,"申し訳ありません�
 
 しばらくしてからもう一度お試しください。"
 Authentication.Login.Label.ConnectionError.Title,接続エラー
+Authentication.Login.Label.DontHaveAnAccountCreateOne,アカウントをお持ちではありませんか？{startTag}作成{endTag}
 Authentication.Login.Label.Email,
 Authentication.Login.Label.EmailAddress,
 Authentication.Login.Label.EmailNeedsVerification,メール確認の手続きが必要です
@@ -603,7 +606,7 @@ Authentication.SignUp.Response.PhoneNumberAlreadyLinked,すでに他のアカウ
 Authentication.SignUp.Response.UsernameMustBeSetFirst,最初にユーザーネームを設定する必要があります。
 Authentication.SignUp.Subtitle.AddYourBirthday,Robloxアカウントを作成するには、生年月日を入力してください。
 Authentication.SignUp.Subtitle.YourProgressCarriesOver,設定を完了すると、進行状況が引き継がれます。
-Authentication.SignUp.Subtitle.YoureAlmostThere,もう少しで完了です。今閉じるとアカウントが完全に作成されず、Robloxをプレイできません。
+Authentication.SignUp.Subtitle.YoureAlmostThereClose,もう少しで完了です。今キャンセルするとアカウントが完全に作成されず、Robloxをプレイできません。
 Authentication.SignUp.Title,{username} さん、こんにちは。パスワードを作成してください
 Authentication.TwoStepVerification.Action.Approve,承認する
 Authentication.TwoStepVerification.Action.ChangePassword,パスワードの変更
@@ -984,7 +987,6 @@ CommonUI.Features.Label.TencentNotice,お知らせ
 CommonUI.Features.Label.Terms,規約
 CommonUI.Features.Label.TermsOfService,利用規約
 CommonUI.Features.Label.TermsOfUse,
-CommonUI.Features.Label.Thanks,ありがとうございます
 CommonUI.Features.Label.TheHunt,Robloxイベント
 CommonUI.Features.Label.Trades,取引
 CommonUI.Features.Label.Unchecked,未チェック
@@ -1144,15 +1146,11 @@ CoreScripts.TextChat.ChatWindow.ChatDisabled.OnlyViewSystemMessages,ここでは
 CoreScripts.TextChat.ChatWindow.ChatDisabled.RegionUnavailable,ここではシステムメッセージのみを表示できます。お住まいの地域ではチャットは利用できません。
 CoreScripts.TextChat.ChatWindow.ChatDisabled.SettingOff,ここではシステムメッセージのみを表示できます。チャットをオンにするには、コミュニケーション設定を更新してください。
 CoreScripts.TextChat.ChatWindow.ChatEnabled.ChatInRegion,システムメッセージを表示でき、お住まいの地域のユーザーとのみチャットできます。
-CoreScripts.TextChat.ChatWindow.ChatEnabled.ChatWithAgeGroupAAndTF,同じ年齢層の人、および信頼できる友達とのみチャットできます。
 CoreScripts.TextChat.ChatWindow.ChatEnabled.ChatWithOnlinePlayers.BelowThreshold,今プレイ中の全員に挨拶してみましょう！
-CoreScripts.TextChat.ChatWindow.ChatEnabled.ChatWithOnlinePlayers.Local.WithCount,その他{RBX_COUNT}人のプレイヤーがチャットに参加しています。挨拶してみましょう！
 CoreScripts.TextChat.ChatWindow.ChatEnabled.ChatWithOnlinePlayers.V3,👋今プレイ中の全員に挨拶してみましょう！
 CoreScripts.TextChat.ChatWindow.ChatEnabled.ChatWithTF,信頼できる友達とのみチャットできます。
 CoreScripts.TextChat.ChatWindow.ChatEnabled.Global2,このゲームでより多くの人とチャットしましょう。あなたとチャットできるのは、同じ年齢層の人だけです。
 CoreScripts.TextChat.ChatWindow.ChatEnabled.Global3,このゲームでより多くの人とチャットしましょう！
-CoreScripts.TextChat.ChatWindow.ChatWithOnlinePlayers.Local.Friendly,✨ 一緒に楽しもう！今プレイ中の全員に挨拶してみましょう！
-CoreScripts.TextChat.ChatWindow.ChatWithOnlinePlayers.Local.WithCount,👋 {RBX_COUNT}人のプレイヤーがチャットに参加しています。挨拶してみましょう！
 CoreScripts.TextChat.ChatWindow.HandFreeTranscriptionFTUX,長押しするとハンズフリーになります
 CoreScripts.TextChat.ChatWindow.RephrasedLabel,文章編集済み
 CoreScripts.TextChat.ChatWindow.RephrasedReason.Description,Robloxは、安全に関するルールに違反するメッセージの文章を編集します。
@@ -1206,7 +1204,7 @@ CoreScripts.TextChat.Online.Success.Singular,
 CoreScripts.TextChat.Online.Success.Singular3,その他{RBX_COUNT}人のプレイヤ—が現在オンライン中で、チャット可能です。
 CoreScripts.TextChat.TeamChat.Error.NotOnTeam,チームに所属していなければチームチャットは出来ません。
 CoreScripts.TextChat.TeamChat.PrefixText,[チーム]
-CoreScripts.TextChat.Toast.ModerateChatOff.Subtitle.FriendsRename,
+CoreScripts.TextChat.Toast.ModerateChatOff.Subtitle.FriendsRename,同じ年齢層の人、および信頼できる友達とのみチャットできます。
 CoreScripts.TextChat.Toast.ModerateChatOff.Title,読み取り専用表示がオフになっています
 CoreScripts.TextChat.Toast.ModerateChatOn.Subtitle,一部のメッセージは、役割の権限に基づいて読み取り専用です。
 CoreScripts.TextChat.Toast.ModerateChatOn.Title,読み取り専用表示がオンになっています
@@ -1467,8 +1465,7 @@ Feature.AccountSettings.Message.Error.InvalidTwitchUrl,Twitchのプロフィー�
 Feature.AccountSettings.Message.Error.InvalidXUrl,Xのユーザー名が無効です。
 Feature.AccountSettings.Message.Error.InvalidYouTubeUrl,YouTubeのURLが無効です。
 Feature.AddFriends.Action.FriendAdded,友達が追加されました
-Feature.AddFriends.Action.IgnoreAll,すべて無視する
-Feature.AddFriends.Action.IgnoreAllAltCase,
+Feature.AddFriends.Action.IgnoreAllAltCase,すべて無視する
 Feature.AddFriends.Action.IgnoreFriendRequest,友達リクエストを無視
 Feature.AddFriends.Action.IgnoreTrustedFriendRequest,信頼できる友達リクエストを無視
 Feature.AddFriends.Action.RequestIgnored,リクエストを無視しました
@@ -2464,7 +2461,10 @@ Feature.Build.Description.ManagedPricingAcknowledgement,管理価格設定では
 Feature.Build.Description.ManagedPricingCurrentProducts,現在のすべての製品に管理価格設定を使用する
 Feature.Build.Description.ManagedPricingUnavailable,このバーチャル空間では管理価格設定を利用できません。
 Feature.Build.Description.NoEligibleManagedPricingProducts,対象の製品はありません
+Feature.Build.Description.NoMonetizationDeveloperProducts,開発者製品は、プレイヤーがゲーム内で繰り返し購入できるアイテムです
+Feature.Build.Description.NoMonetizationPasses,パスを使用すると、ゲーム内でプレイヤーに1回限りのロック解除を提供できます
 Feature.Build.Description.NoMonetizationProducts,ゲーム内でRobuxを獲得するために、作成したいアイテムについて説明してください
+Feature.Build.Description.NoMonetizationSubscriptions,ゲーム内の定期購入を使用すると、月額料金でユーザーに継続的な特典を提供できます
 Feature.Build.Description.PlayAfterPublish,このバーチャル空間を公開した後、誰がプレイできるかを選択します。
 Feature.Build.Description.PlaytestLatest,最新バージョンのプレイテスト中です。シェアする準備ができたら公開してください。
 Feature.Build.Description.PlaytestLocked,プレイテストは、最初のゲームを制作した後に開始可能です。
@@ -2475,6 +2475,8 @@ Feature.Build.Description.PromoteGamePaid,広告を作成して、数百万人�
 Feature.Build.Description.PromoteGameWithAdCampaign,{durationDays}日間の広告キャンペーンでオーディエンスを拡大し、ゲームを見つけてもらいましょう。
 Feature.Build.Description.RaiseLimitOrWait,作成を続けるには、1日あたりのRobux限度額を増やすか、明日になってリセットされるのをお待ちください。
 Feature.Build.Description.RatingAgreement,公開することで、このコンテンツレーティングが正確であることに同意したものとみなされます。
+Feature.Build.Description.RequiredRobuxForAdvanced,Advanced（アドバンスド）モデルで作成を続けるには、少なくとも{ROBUX} Robuxが必要です。デフォルトに戻すか、無料使用量がリセットされるまでお待ちください。
+Feature.Build.Description.RequiredRobuxForDefault,作成を続けるには、少なくとも{ROBUX} Robuxが必要です。または、無料使用量がリセットされるまでお待ちください。
 Feature.Build.Description.RestoreLatest,このバージョンが、公開済みの最新バージョンになります。
 Feature.Build.Description.RevertToVersion,確認して最後の変更を元に戻し、{VERSION}に戻ります。
 Feature.Build.Description.ShareLatest,最新バージョンの変更内容を共有しましょう。
@@ -2496,9 +2498,18 @@ Feature.Build.Error.DeveloperProductPriceInvalid,"価格は1から1,000,000,000 
 Feature.Build.Error.DeveloperProductPriceRequiredForSale,製品を販売する前に、[編集]を選択して価格を追加してください。
 Feature.Build.Error.DeveloperProductTextModerated,Robloxの内容審査により、この製品のテキストが変更されました。別の表現を試してください。
 Feature.Build.Error.ManagedPricingPartialUpdate,一部の製品を更新できませんでした。
+Feature.Build.Error.MonetizationImageFailed,画像を読み込めませんでした。もう一度お試しください。
+Feature.Build.Error.MonetizationImageInReview,画像はまだ審査中です。しばらくしてからもう一度お試しください。
+Feature.Build.Error.MonetizationImagePreparing,画像はまだ準備中です。しばらくしてからもう一度お試しください。
+Feature.Build.Error.MonetizationImageTimedOut,画像の読み込みに時間がかかりすぎました。もう一度お試しください。
+Feature.Build.Error.MonetizationImageTooLarge,画像が5MBを超えています。
+Feature.Build.Error.MonetizationNoUniverse,このチャットはゲームに接続されていません。
 Feature.Build.Error.MonetizationOptionUpdate,オプションを更新できませんでした。もう一度お試しください。
 Feature.Build.Error.MonetizationOptionsLoad,オプションを読み込めませんでした。もう一度お試しください。
 Feature.Build.Error.MonetizationPermissionDenied,収益化オプションを変更する権限がありません。
+Feature.Build.Error.MonetizationPriceRequiredForRegionalPricing,地域別価格設定をオンにするには、価格を追加してください。
+Feature.Build.Error.MonetizationPriceRequiredForSale,販売を開始する前に価格を追加してください。
+Feature.Build.Error.MonetizationRateLimited,リクエストが多すぎます。しばらくしてからもう一度お試しください。
 Feature.Build.Header.AccessSharing,アクセスとシェア
 Feature.Build.Header.AllVersions,すべてのバージョン
 Feature.Build.Header.Answers,回答
@@ -2540,6 +2551,7 @@ Feature.Build.Label.DeveloperProductDescription,説明：{DESCRIPTION}
 Feature.Build.Label.DeveloperProductName,名前：「{NAME}」
 Feature.Build.Label.DeveloperProductPrice,価格：{PRICE} Robux
 Feature.Build.Label.DeveloperProductPriceUnavailable,?
+Feature.Build.Label.DeveloperProducts,
 Feature.Build.Label.Done,
 Feature.Build.Label.EasyPerformanceReport,わかりやすいパフォーマンスレポート
 Feature.Build.Label.Error,
@@ -2721,6 +2733,7 @@ Feature.Build.Message.BuildBusy,ビルドがビジー状態です。しばらく
 Feature.Build.Message.BuildConnectFailed,ビルドに接続できませんでした。もう一度お試しください。
 Feature.Build.Message.BuildInternalError,ビルドで問題が発生しました。もう一度お試しください。
 Feature.Build.Message.BuildResponseFailed,ビルドが応答しませんでした。もう一度お試しください。
+Feature.Build.Message.BuildSendUnconfirmed,ビルドがメッセージの送信を確認できませんでした。
 Feature.Build.Message.BuildStillWorking,処理中です。待機中でもアプリを終了したり、Robloxをプレイしたり、別のプロジェクトを開始したりできます。
 Feature.Build.Message.BuildStopped,ビルドを停止しました。
 Feature.Build.Message.BuildTakingLonger,予想よりも時間がかかっています。そのままお待ちいただくか、別の作業を開始してください。
@@ -2750,6 +2763,7 @@ Feature.Build.Message.NoAssetsFound,アセットが見つかりません。
 Feature.Build.Message.NoCapturesAvailable,添付できる切り抜きはありません
 Feature.Build.Message.NoDescriptionProvided,詳細がありません。
 Feature.Build.Message.NoFriendsToAdd,まだ招待できる友達がいません。まずはRobloxでつながる相手を見つけましょう。
+Feature.Build.Message.NoGamesYet,関連するゲームはまだありません。
 Feature.Build.Message.NoResults,
 Feature.Build.Message.NoSearchResultsFound,検索結果が見つかりませんでした
 Feature.Build.Message.NoVersionHistory,まだバージョン履歴はありません。
@@ -2825,8 +2839,13 @@ Feature.Build.Title.GameCreationDone,ゲームの作成が完了しました
 Feature.Build.Title.GamePass,ゲームパス
 Feature.Build.Title.GenericError,
 Feature.Build.Title.GetUsers,ユーザーを獲得
+Feature.Build.Title.InsufficientRobuxForModel,Robuxが不足しています
 Feature.Build.Title.ManagedPricingAcknowledgement,管理価格設定をオンにしますか？
+Feature.Build.Title.Monetization,収益化
+Feature.Build.Title.NoMonetizationDeveloperProducts,まだ開発者製品を作成していません
+Feature.Build.Title.NoMonetizationPasses,まだパスを作成していません
 Feature.Build.Title.NoMonetizationProducts,ゲーム内で収益を獲得
+Feature.Build.Title.NoMonetizationSubscriptions,まだ定期購入を作成していません
 Feature.Build.Title.NoRobuxForUsage,ビルド使用量に使えるRobuxが残っていません
 Feature.Build.Title.PickCampaign,期間を選択
 Feature.Build.Title.Playtesters,
@@ -2907,11 +2926,13 @@ Feature.Catalog.Header.InvalidOutfit,無効な衣装
 Feature.Catalog.Header.PostAvatar,
 Feature.Catalog.Heading.AvailableItems,利用可能なアイテム
 Feature.Catalog.Heading.BuyItem,アイテムを買う
+Feature.Catalog.Heading.DescriptionLinkGoToMarketplace,マーケットプレイスに移動します
+Feature.Catalog.Heading.DescriptionLinkResetSearch,現在の検索がリセットされます
 Feature.Catalog.Heading.FreeItemConfirmation,アイテムをゲット
 Feature.Catalog.Heading.GoToExperience,バーチャル空間に参加しますか？
 Feature.Catalog.Heading.HoldingPolicy,保留ポリシー
 Feature.Catalog.Heading.InExperienceOnly,バーチャル空間内で入手可
-Feature.Catalog.Heading.InsufficientFunds,Robuxが不足しています
+Feature.Catalog.Heading.InsufficientFunds,
 Feature.Catalog.Heading.ItemInfo,アイテム情報
 Feature.Catalog.Heading.ItemRemoved,アイテム削除済み
 Feature.Catalog.Heading.ItemsOnSale,販売中のアイテム
@@ -2982,6 +3003,12 @@ Feature.Catalog.Label.CreatorName,クリエーター名
 Feature.Catalog.Label.CurrentBalance,現在の残高:
 Feature.Catalog.Label.CustomizeAvatar,アバターを更新
 Feature.Catalog.Label.DeleteAvatarConfirmationPromptMessage,削除すると、この操作を元に戻せません。
+Feature.Catalog.Label.DescriptionLinkInvalid,リンクが無効です
+Feature.Catalog.Label.DescriptionLinkSearchMarketplace,マーケットプレイスをサーチ
+Feature.Catalog.Label.DescriptionLinkViewAsset,アセットを表示
+Feature.Catalog.Label.DescriptionLinkViewBundle,バンドルを表示
+Feature.Catalog.Label.DescriptionLinkViewCommunity,コミュニティを表示
+Feature.Catalog.Label.DescriptionLinkViewCommunityStore,コミュニティストア
 Feature.Catalog.Label.Details,
 Feature.Catalog.Label.DynamicHeads,
 Feature.Catalog.Label.Emissive,エミッシブ
@@ -3445,6 +3472,7 @@ Feature.ContentFeed.Timestamp.HoursAgo,{numHours}時間前
 Feature.ContentFeed.Timestamp.MinutesAgo,{numMinutes}分前
 Feature.ContentFeed.Timestamp.Now,現在
 Feature.ContentFeed.Timestamp.WeeksAgo,{numWeeks}週間前
+Feature.CustomForms.Label.Percent,
 Feature.DevSubs.Action.CancelSubscription,定期購入をキャンセル
 Feature.DevSubs.Action.RenewSubscription,定期購入を更新する
 Feature.DevSubs.Label.ActiveSubscriptions,有効期間中の定期購入
@@ -3627,6 +3655,7 @@ Feature.Friends.Description.TrustedFriendsExpiredLink,友達に再度リンク�
 Feature.Friends.Description.TrustedFriendsInvalidLink,正しいアカウントでログインしていることを確認してから、もう一度お試しください。
 Feature.Friends.Description.TrustedFriendsRequestModalBody,信頼できる知り合いのみを追加してください。友達はプロフィールからいつでも管理できます。
 Feature.Friends.Description.TrustedFriendsUnavailable,お住まいの地域では、信頼する友達機能はまだ利用できません。
+Feature.Friends.Description.TrustedFriendsWrongAccount,@{username}としてログインしていることを確認してから、もう一度お試しください。
 Feature.Friends.Description.YouCanDoMoreWithTrustedFriends,「信頼できる友達」となら、Robloxをもっと楽しめます。この「友達」は、相手のプロフィールからいつでも管理できます。
 Feature.Friends.Error.AlreadyFriendError,このユーザーはすでに友達になっています。
 Feature.Friends.Error.DefaultFriendingError,リクエストを送信できません。後でもう一度お試しください。
@@ -3744,7 +3773,7 @@ Feature.Friends.Text.IsPlaying,がプレイ中です
 Feature.Friends.Text.NoConnections,つながりをまだ追加していません。始めるにはつながりたい人を見つけて追加しましょう
 Feature.Friends.Text.NoFriends,
 Feature.Friends.Title.TrustedFriendsExpiredLink,リンクが期限切れです
-Feature.Friends.Title.TrustedFriendsInvalidLink,リンクが無効です
+Feature.Friends.Title.TrustedFriendsInvalidLink,
 Feature.Friends.TrustedConnection.Label.Trusted,信頼する
 Feature.Friends.TrustedFriend.AcceptTrustedRequest,信頼する友達を承認
 Feature.Friends.TrustedFriend.Action.RemoveTrustedFriend,信頼する友達を削除
@@ -3912,7 +3941,7 @@ Feature.Groups.Action.NotNow,
 Feature.Groups.Action.RemovePrimary,メインコミュニティを削除
 Feature.Groups.Action.SeeAll,
 Feature.Groups.Action.Unfollow,フォロー解除
-Feature.Groups.Action.ViewGroup,コミュニティを表示
+Feature.Groups.Action.ViewGroup,
 Feature.Groups.Description.JoinGroupPending,参加リクエストはコミュニティによる審査待ちです。
 Feature.Groups.Description.NotEligibleToJoin,ご利用のアカウントでは、このコミュニティに参加できません。
 Feature.Groups.Description.PremiumMaxGroups,あなたが参加したコミュニティ数が上限に達しています。
@@ -3935,6 +3964,7 @@ Feature.Groups.Label.Follower,
 Feature.Groups.Label.FollowerCapital,
 Feature.Groups.Label.FollowerCapitalPlural,
 Feature.Groups.Label.FollowerPlural,
+Feature.Groups.Label.FormerMember,元メンバー
 Feature.Groups.Label.GroupClosed,コミュニティは閉鎖されました
 Feature.Groups.Label.GroupLocked,このコミュニティはロックされています
 Feature.Groups.Label.Member,
@@ -3943,6 +3973,8 @@ Feature.Groups.Label.MemberLowerCase,
 Feature.Groups.Label.MemberLowerCasePlural,
 Feature.Groups.Label.Owned,所有中
 Feature.Groups.Label.PreviousNames,古いコミュニティ名
+Feature.Groups.Label.Replies,
+Feature.Groups.Label.Reply,
 Feature.Groups.Label.SearchMyGroups,マイコミュニティをサーチ
 Feature.Groups.Message.BannedFromGroup,あなたはこのコミュニティから追放されました。
 Feature.Groups.Message.GroupClosed,閉鎖済みのコミュニティには参加できません。
@@ -4179,6 +4211,7 @@ Feature.Moments.Action.ShowDetails,
 Feature.Moments.Action.ShowMore,
 Feature.Moments.Action.TrimVideo,ビデオをトリミング
 Feature.Moments.Action.TryAgain,もう一度試す
+Feature.Moments.Body.EDPMomentIPReportInstructions,このモーメントにおける知的財産権の侵害を報告するには、ゲームの詳細ページに進んでください。
 Feature.Moments.Description.CommunityStandards,発言できることとできないことの詳細については、コミュニティ基準を確認してください。
 Feature.Moments.Description.EmptyCapturesLibrary,ここに切り抜きが表示されます。
 Feature.Moments.Description.GenerateTextFeedbackDisclosure,AIが生成したものです。投稿前にご確認ください。公開された内容に対する責任はご自身にあります。
@@ -4236,6 +4269,7 @@ Feature.Moments.Label.ExceedsCharacterLimit,文字数制限を超過していま
 Feature.Moments.Label.FeedEndBody,後でもう一度確認するか、独自のモーメントを作成してください。
 Feature.Moments.Label.FeedEndTitle,新着のモーメントはありません
 Feature.Moments.Label.FeedFailedToLoad,ロードできませんでした
+Feature.Moments.Label.FeedFollowing,
 Feature.Moments.Label.FeedMyMoments,マイモーメント
 Feature.Moments.Label.FeedTrending,トレンド
 Feature.Moments.Label.FirstCommentInvite,まだコメントはありません。最初にコメントしましょう！
@@ -4306,12 +4340,14 @@ Feature.Moments.Label.WriteComment,コメントを書く
 Feature.Moments.Title.Comments,コメント
 Feature.Moments.Title.CommentsWithCappedCount,{count}件以上のコメント
 Feature.Moments.Title.CommentsWithCount,{count}件のコメント
+Feature.Moments.Title.EDPMomentIPReportInstructions,ゲームの詳細ページで規約違反を報告する
 Feature.Moments.Title.GenerateTextFeedbackReason,何が問題でしたか？
 Feature.Moments.Title.GenerateTextOptions,
 Feature.Moments.Title.LeaveMomentCreation,モーメント作成を退出しますか？
 Feature.Moments.Title.MomentRemoved,
-Feature.Moments.Title.PostInsights,ページヘッダーのタイトル
+Feature.Moments.Title.PostInsights,投稿のインサイト
 Feature.Moments.Title.ReportPost,投稿の規約違反を報告
+Feature.Moments.Title.UnfollowConfirmationDialog,@{username}さんのフォローを解除しますか？
 Feature.Moments.Tooltip.PostInsightsBody,視聴回数、視聴時間、モーメントに対するオーディエンスの反応を確認できます。
 Feature.Moments.Tooltip.PostInsightsTitle,モーメントのインサイトはこちら
 Feature.Moments.Tooltip.ShareFirstMomentBody,切り抜きからモーメントを作成します
@@ -4475,6 +4511,7 @@ Feature.NotApproved.Label.AbuseType.AccountTheft,アカウント窃盗
 Feature.NotApproved.Label.AbuseType.AdultContent,成人向けコンテンツ
 Feature.NotApproved.Label.AbuseType.Advertisement,
 Feature.NotApproved.Label.AbuseType.Advertising,
+Feature.NotApproved.Label.AbuseType.AgeInappropriateMetadata,年齢に不適切なメタデータ
 Feature.NotApproved.Label.AbuseType.AssetOwnership,アセットの所有権
 Feature.NotApproved.Label.AbuseType.Billing,支払い
 Feature.NotApproved.Label.AbuseType.BlockedContent,BlockedContent
@@ -4817,6 +4854,7 @@ Feature.PrivateServers.Action.CreatePrivateServer,
 Feature.PrivateServers.Action.FreeWithBlackbird,Plusで無料
 Feature.PrivateServers.Description.PrivateServerPurchaseUnavailableInStudio,Studioは、プライベートサーバーの購入には対応していません。
 Feature.PrivateServers.Description.VipServersNotSupported,このゲームはプライベートサーバーに対応していません。
+Feature.PrivateServers.Label.OwnersServer,{displayName}のサーバー
 Feature.Profile.Action.AboutThisProfile,このプロフィールについて
 Feature.Profile.Action.Accept,
 Feature.Profile.Action.AcceptFriends,友達を承認する
@@ -5019,6 +5057,10 @@ Feature.ReportAbuse.ProblemDescription.Swearing,暴言、罵り、または汚�
 Feature.ReportAbuse.ProblemDescription.Violence,極端な暴力または流血描写
 Feature.ReportAbuse.Title.SelectInSceneContinueYourReport,
 Feature.ReportAbuse.Title.SelectInSceneIpReport,知的財産侵害の報告を開始していただきありがとうございます
+Feature.RoCaptchaChallenge.Action.Cancel,
+Feature.RoCaptchaChallenge.Action.Play,
+Feature.RoCaptchaChallenge.Content.JoinChallenge,お持ちのアカウントに通常とは異なる活動が検知されました。続けるには、簡単なゲームをプレイしてください。
+Feature.RoCaptchaChallenge.Title.Challenge,ご自身が実在の人物であることを確認しましょう
 Feature.RobloxSubscription.Action.JoinIn,{time}後に参加
 Feature.RobloxSubscription.Action.ReferToPlus,Plusを紹介
 Feature.RobloxSubscription.Action.Subscribe,
@@ -5465,6 +5507,7 @@ Feature.UniversalShareSheet.Response.SharedCustomMessage,{CUSTOM_MESSAGE} + そ�
 Feature.UniversalShareSheet.Response.SharedMessage,メッセージが送信されました
 Feature.UniversalShareSheet.Response.SharedMultipleMessages,
 Feature.UniversalShareSheet.SharedCustomMultipleMessages,{CUSTOM_MESSAGE} + その他{N}件
+Feature.UserLibrary.Label.MyLibrary,マイライブラリ
 Feature.VerificationUpsell.Action.AddPhone,
 Feature.VerificationUpsell.Action.AddPhoneVoice,ボイスチャット用の電話番号を追加
 Feature.VerificationUpsell.Action.ChangeEmail,メールアドレスの変更
@@ -5855,8 +5898,6 @@ Notifications.NotificationStream.Bundle.ShowLess,
 Notifications.NotificationStream.Bundle.ShowMoreV2,あと {notificationCount}
 Notifications.NotificationStream.Label.AllCaughtUp,通知はありません。
 Notifications.NotificationStream.Label.Notifications,
-Notifications.SafetyAvatarModeration.Description.NotificationTypeInExpWarnMsg,アバターを変更してください。コミュニティ基準に違反するアバターを持つプレイヤーは、まもなくこのゲームの利用が停止されるようになります。
-Notifications.SafetyAvatarModeration.Label.NotificationTypeInExpWarn,
 Notifications.SquadRegroupPrompt.ToastAction.Dismiss,
 Notifications.SquadRegroupPrompt.ToastAction.Join,
 Notifications.SquadRegroupPrompt.ToastLabel.ContinuePlayingTogether,一緒にプレイを続ける
@@ -5887,7 +5928,7 @@ Roblox.ReferralRewards.RewardBannerModalTitle,友達紹介報酬
 Search.GlobalSearch.Action.LoadMore,
 Search.GlobalSearch.Example.SearchCatalog,カタログをサーチ
 Search.GlobalSearch.Example.SearchGames,
-Search.GlobalSearch.Example.SearchMarketplace,マーケットプレイスをサーチ
+Search.GlobalSearch.Example.SearchMarketplace,
 Search.GlobalSearch.TopResultsLabel,検索トップ
 Verification.Identity.Action.SkipVoiceChat,ボイスチャットなしで参加
 Verification.Identity.Heading.LetsChat,チャットしましょう！

@@ -101,7 +101,7 @@ return ReactModule.memo(ReactModule.forwardRef(function(p1, p2)
 				}, {
 					TabList = ReactModule.createElement(ViewModule, {
 						onAbsoluteSizeChanged = if FlagsModule.FoundationUnifiedScrimScrolling then UseResult1 else nil,
-						tag = {
+						tag = if FlagsModule.FoundationFixTabsFitGap then "row flex-y-fill auto-xy" else {
 							["row flex-y-fill auto-xy"] = true,
 							["gap-large"] = not IsFillBehaviorMatch and (Size == InputSizeModule.Small or Size == InputSizeModule.XSmall)
 						},
