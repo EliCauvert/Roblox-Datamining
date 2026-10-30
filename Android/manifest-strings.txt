@@ -13,7 +13,7 @@
 :isolate
 :personaIsolate
 16
-2.744.1081
+2.745.1142
 9.0.0
 action
 activity
@@ -178,6 +178,7 @@ com.google.firebase.components:com.google.mlkit.vision.text.internal.TextRegistr
 com.google.firebase.iid.FirebaseInstanceIdReceiver
 com.google.firebase.messaging.FirebaseMessagingService
 com.google.firebase.MESSAGING_EVENT
+com.google.firebase.provider.FirebaseInitProvider
 com.google.mlkit.common.internal.MlKitComponentDiscoveryService
 com.google.mlkit.vision.DEPENDENCIES
 com.instagram.android
@@ -190,6 +191,7 @@ com.roblox.client.captcha.ActivityFunCaptcha
 com.roblox.client.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION
 com.roblox.client.fcm.RbxFcmListenerService
 com.roblox.client.fileprovider
+com.roblox.client.firebaseinitprovider
 com.roblox.client.gmasdk.isolate.init
 com.roblox.client.gmasdk.isolate.sandbox.GmaWebViewInitializerProvider
 com.roblox.client.gmasdk.isolate.sandbox.LocalNativeAdActivity
@@ -246,7 +248,6 @@ enableOnBackInvokedCallback
 excludeFromRecents
 exported
 extractNativeLibs
-firebase_messaging_auto_init_enabled
 fitsSystemWindows
 fullBackupContent
 glEsVersion
@@ -257,6 +258,7 @@ http://schemas.android.com/apk/res/android
 https
 https://play.google.com/store
 icon
+initOrder
 intent
 intent-filter
 label

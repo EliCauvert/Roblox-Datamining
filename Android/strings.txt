@@ -103,8 +103,8 @@
 %1$s – Date de fin
 %1$s – datum ukončení
 %1$s – dátum ukončenia
-%1$s – datum završetka
-%1$s – Einddatum
+%1$s – Datum završetka
+%1$s – einddatum
 %1$s – End date
 %1$s - fecha de finalización
 %1$s – Idethi yokuphela
@@ -271,7 +271,7 @@
 %1$s ami.s a/ont visité
 %1$s Amici
 %1$s Amici comuni
-%1$s amici visitati
+%1$s Amici visitati
 %1$s amis
 %1$s amis ont visité
 %1$s amistades
@@ -579,7 +579,7 @@
 %1$s Freunde
 %1$s Freunde besucht
 %1$s Friends
-%1$s Friends visited
+%1$s Friends Visited
 %1$s fungerar inte om du inte aktiverar Google Play-tjänster.
 %1$s fungerar inte utan Google Play-tjänsterna, som inte stöds på enheten.
 %1$s fungerer ikke med mindre du slår på Google Play-tjenester.
@@ -953,7 +953,7 @@
 %1$s ngày} other %2$s ngày}}
 %1$s ngeke isebenze ngaphandle kwamasevisi e-Google Play, angasekelwa idivayisi yakho.
 %1$s Người Bạn
-%1$s Người bạn đã ghé thăm
+%1$s Người Bạn Đã Ghé Thăm
 %1$s người quen chung
 %1$s Người quen vừa mới chơi
 %1$s Người quen vừa mới chơi.
@@ -1102,7 +1102,7 @@
 %1$s telah menolak biaya bundel untuk produk komersial dengan ID %2$s
 %1$s Teman
 %1$s Teman Bersama
-%1$s teman mengunjungi
+%1$s Teman Mengunjungi
 %1$s ten problemas cos servizos de Google Play. Téntao de novo.
 %1$s terjual untuk %2$s
 %1$s tətbiqi ilə Google Play xidmətləri arasında problem var. Daha sonra yenidən cəhd edin.
@@ -2739,21 +2739,21 @@
 1 Freund
 1 Freund besucht
 1 Friend
-1 Friend Visited
+1 Friend visited
 1 gemeinsame Connection
 1 Koneksi Bersama
 1 Koneksi telah bermain baru-baru ini
 1 Koneksi telah bermain baru-baru ini.
 1 Mutual Connection
 1 Người Bạn
-1 Người bạn đã ghé thăm
+1 Người Bạn Đã Ghé Thăm
 1 người quen chung
 1 Người quen vừa mới chơi
 1 Người quen vừa mới chơi.
 1 September 2025
 1 settembre 2025
 1 Teman
-1 Teman Mengunjungi
+1 teman mengunjungi
 1 друг
 1 контакт недавно играл
 1 сентября 2025 года
@@ -2969,6 +2969,7 @@
 5 日
 5 月
 56711522248
+56711522248-1fcarhkgvhgirrt22fr0ml64mpcgcqop.apps.googleusercontent.com
 5월
 5月
 6
@@ -3013,12 +3014,11 @@
 9
 9 日
 9 月
-934438917975-j90p6ikvdvimtmct36tsnva6aeam6o07.apps.googleusercontent.com
 94% rating
 94% 评分
 99
 99+
-‎‏‎‎‎‎‎‏‎‏‏‏‎‎‎‎‎‎‏‎‎‏‎‎‎‎‏‏‏‏‏‏‏‏‎‏‎‏‏‏‎‎‎‏‏‏‏‎‎‏‎‎‏‏‎‏‎‏‏‎‎‏‎‏‏‎‎‎‏‎‎‎‎‎‎‎‏‎‎‎‎‏‎‏‎‏‎‎‎‎‏‎‎‎‎‎‎999+‎‏‎‎‏‎
+999+
 ९९९+
 ৯৯৯+
 ၉၉၉+
@@ -3134,7 +3134,7 @@ Abbonati
 Abbrechen
 Abgemeldet
 Ablaufdatum
-Ablehnen
+ABLEHNEN
 Abmelden
 Abmeldung läuft.
 Abmeldung von Konto läuft.
@@ -3212,7 +3212,7 @@ Accedi con l'e-mail
 Accedi immediatamente con il riconoscimento del viso, l'impronta digitale o il PIN.
 Accedi più velocemente con una passkey
 Accedi rapidamente alle esperienze giocate di recente
-ACCEPT
+Accept
 Accept All
 Accept Ally Request
 Accept Join Request
@@ -3233,7 +3233,7 @@ Accesso necessario
 Accesso non riuscito.
 Accesso non riuscito. Riprova.
 Accesso rapido
-Accetta
+ACCETTA
 Accetta i termini riportati qui sotto prima di proseguire.
 Accetta il rischio di perdita dell'account e disconnetti
 Accetta richiesta di adesione
@@ -3449,7 +3449,7 @@ Aggiungi/Gestisci
 Aggiunto
 Agir maintenant
 Agisci subito
-AGO
+ago
 Ago.
 Agora não
 Agora você pode usar sua identidade facial, impressão digital ou PIN do dispositivo para entrar na Roblox.
@@ -3657,7 +3657,7 @@ Alt sayfayı genişlet
 Alt மற்றும்
 Alt +
 Alt + 
-Alt+
+‎‏‎‎‎‎‎‏‎‏‏‏‎‎‎‎‎‎‏‎‎‏‎‎‎‎‏‏‏‏‏‏‏‏‏‏‏‎‏‎‏‎‎‏‎‏‏‎‎‏‏‎‏‎‏‏‎‎‎‎‎‎‎‎‎‎‏‏‏‏‏‎‏‏‏‎‏‎‎‎‏‎‏‎‎‏‏‎‎‏‏‏‏‎‏‎‎Alt+‎‏‎‎‏‎
 Alterar classificação
 Alterar descrição
 Alterar para o mês anterior
@@ -3806,7 +3806,7 @@ Anmelden ...
 Anmeldung erforderlich
 Anmeldung nicht möglich.
 Année
-ANNEHMEN
+Annehmen
 Anno
 Annonce
 Annonce inappropriée
@@ -3838,7 +3838,7 @@ Ansa per arrossegar
 Ansehen
 Ansicht am unteren Rand maximieren
 Ansicht am unteren Rand minimieren
-Answer
+‎‏‎‎‎‎‎‏‎‏‏‏‎‎‎‎‎‎‏‎‎‏‎‎‎‎‏‏‏‏‏‎‎‏‏‎‎‎‎‏‏‏‎‏‏‎‏‏‎‎‏‎‏‏‎‎‎‎‎‏‎‏‎‏‎‏‏‎‎‏‎‎‏‏‏‏‎‎‏‎‏‎‏‎‎‎‎‎‏‎‏‎‎‎Answer‎‏‎‎‏‎
 Anteprima del documento
 Anteprima immagine del profilo
 Anterior
@@ -3852,7 +3852,7 @@ Antes de prosseguir, precisamos verificar se você é humano. Preencha o formul�
 Antes de sair, por favor, adicione um endereço de e-mail de recuperação para que você não seja bloqueado.
 Antes debes determinar tu fecha de nacimiento.
 Antwoord
-ANTWORTEN
+Antworten
 Anulare
 Anulare?
 Anulați
@@ -4232,7 +4232,7 @@ Autentikasi dibatalkan oleh pengguna.
 Autentikasi Nama Sebenarnya
 Autentiseringen ble avbrutt av brukeren.
 Authenticating...
-Authentication canceled by user.
+‎‏‎‎‎‎‎‏‎‏‏‏‎‎‎‎‎‎‏‎‎‏‎‎‎‎‏‏‏‏‏‏‏‏‏‎‎‏‎‏‎‏‏‏‎‎‎‏‏‏‏‎‏‎‏‎‎‏‏‎‎‏‎‎‏‎‎‎‎‎‎‏‎‎‏‎‎‎‎‏‏‏‏‏‏‏‏‎‏‎‎‏‏‏‎‏‎Authentication canceled by user.‎‏‎‎‏‎
 Authentication cancelled by user.
 Authentification annulée par l'utilisateur.
 Authentification par nom réel
@@ -4243,7 +4243,7 @@ Authentifizierung vom Nutzer abgebrochen.
 Autorisation de la caméra
 Autoriser les déclarations ennemies
 Autorizzazione fotocamera
-Autorizzazioni app
+Autorizzazioni App
 Autres
 Autres contacts
 Autres façons d'obtenir des Robux
@@ -4304,7 +4304,7 @@ Avviso della community
 Axtarın
 Axtarış sorğusu
 Axtarış...
-ay
+Ay
 Ayar başarıyla güncellendi
 Ayar güncellenemiyor
 Ayarlar
@@ -4338,7 +4338,7 @@ Ažuriranje usluga Google Playa
 b
 Baca
 Bacheca
-Back
+back
 Back to Store
 Backup codes
 Backup-Codes
@@ -4386,7 +4386,7 @@ Bấm vào Tạo Tài Khoản đồng nghĩa với việc bạn đồng ý với
 Bấm vào Tiếp tục đồng nghĩa với việc bạn đồng ý với Điều Khoản Sử Dụng, bao gồm điều khoản trọng tài và thừa nhận Chính Sách Quyền Riêng Tư.
 Bấm vào Tôi Đồng ý nghĩa là bạn đồng ý với %1$s và %2$s.
 Bạn
-Bạn Bè
+Bạn bè
 Bạn bè của bạn vừa mới chơi
 Bạn Bè Đã Ghé Thăm
 Bạn bè đang chơi
@@ -4485,7 +4485,7 @@ Báo cáo nội dung bất hợp pháp theo Đạo luật Dịch vụ Kỹ thu�
 Báo cáo nội dung bất hợp pháp và/hoặc nội dung có hại cho trẻ em.
 Báo Cáo Quảng Cáo
 Báo cáo vật phẩm
-Báo cáo vi phạm
+Báo Cáo Vi Phạm
 Barang dan Aktivitas Ilegal dan yang Diatur
 Barang/Aktivitas Ilegal dan yang Diatur
 Barare
@@ -4895,7 +4895,7 @@ Bỏ chặn %1$s?
 Bỏ Làm Chính
 Bộ phận cơ thể: %1$s
 Bộ Phận Thân
-Bỏ Qua
+BỎ QUA
 Bỏ qua tất cả
 Bỏ Qua, Vẫn Đăng Xuất
 Boas vindas à Roblox
@@ -4917,7 +4917,7 @@ bonificación
 Bonisa imenyu yokudonsela phansi
 Bonisa iphasiwedi
 Bonjour %1$s
-bonus
+Bonus
 bônus
 Bonus item we picked for you
 Bonus öğe, envanterine eklendi.
@@ -5049,7 +5049,7 @@ Bu yardım makalesi işine yarayabilir:
 Bu, güvenli bir şekilde sohbet etmeni sağlar ve yalnızca bir dakikanı alır.
 Bu, Roblox hesabına erişimini asla kaybetmemeni sağlar.
 Buat
-Buat akun
+Buat Akun
 Buat akun di Roblox untuk mulai menyimpan progres game kamu.
 Buat akun kamu
 Buat Aset Komunitas
@@ -5203,7 +5203,7 @@ Cadastros desabilitados. Tente novamente mais tarde.
 Cadwch yn gyson.
 Çağrı Bildirimleri
 Çağrı devam ediyor
-Cài đặt
+Cài Đặt
 Cài đặt dịch vụ của Google Play
 Cài Đặt Quyền Riêng Tư
 Cài đặt quyền riêng tư của bạn không cho phép bạn đăng bài lên tường cộng đồng. Nhấn vào đây để điều chỉnh cài đặt.
@@ -5367,7 +5367,7 @@ Cari Komunitas
 Cari Kontak
 Cari pemain
 Cari Pengalaman Virtual
-Cari pengguna
+Cari Pengguna
 Cari pengguna atau pengalaman virtual
 Cari seçim: %1$s
 Cari Teman
@@ -5516,10 +5516,10 @@ Changer de propriétaire
 Changer de propriétaire ?
 Changer le propriétaire de la communauté
 Chào mừng bạn đến với Roblox
-Chấp Nhận
+CHẤP NHẬN
 Chấp Nhận Rủi Ro Mất Tài Khoản và Đăng Xuất
 Chấp Nhận Yêu Cầu Đồng Minh
-Chấp Nhận Yêu Cầu Tham Gia
+Chấp nhận yêu cầu tham gia
 Character
 Character limit exceeded %1$d of %2$d
 Characters entered %1$d of %2$d
@@ -5571,7 +5571,7 @@ Chỉ thành viên gói Builders Club mới có thể tham gia
 Chi tiết phần thưởng
 Chi tiết trải nghiệm
 Chi tiết về mục
-Chi Tiêu Quỹ Cộng Đồng
+Chi tiêu quỹ cộng đồng
 Chia Sẻ
 Chia sẻ đường liên kết
 Chia Sẻ Liên Kết Mời
@@ -5621,7 +5621,7 @@ Chọn tệp
 Chọn thời gian
 Choose a password
 Choose an account to continue
-Choose an app
+‎‏‎‎‎‎‎‏‎‏‏‏‎‎‎‎‎‎‏‎‎‏‎‎‎‎‏‏‏‏‏‎‏‏‏‏‏‎‎‎‎‎‏‏‏‎‎‏‏‎‎‏‎‏‎‎‏‏‎‏‏‎‏‏‏‏‏‏‎‎‏‎‎‏‏‎‎‏‎‏‎‎‏‎‏‎‎‎‎‎‎‎‎‎‎Choose an app‎‏‎‎‏‎
 Choose file
 Choose one of these:
 Chủ nghĩa khủng bố và chủ nghĩa cực đoan bạo lực
@@ -5694,7 +5694,7 @@ Cihazın güncel değil
 Cihazın, güncelliğini yitiriyor
 Cihazınız tərəfindən dəstəklənməyən Google Play xidmətləri olmadan %1$s tətbiqi işləməyəcək.
 Çık
-Çıkış yap
+Çıkış Yap
 Çıkış yapıldı
 Çıkış yapılıyor.
 Çıkış yapmak mı istiyorsun?
@@ -5778,7 +5778,7 @@ Codice non valido.
 Codice non valido. Riprova.
 Codice una tantum
 Codici di backup
-código de 6 dígitos
+Código de 6 dígitos
 Código de un solo uso
 Código enviado
 Código enviado.
@@ -5798,7 +5798,7 @@ Códigos de respaldo
 Çok fazla hesap oluşturdun. Lütfen daha sonra tekrar dene.
 Çok yakında
 Colgar
-Collapse
+‎‏‎‎‎‎‎‏‎‏‏‏‎‎‎‎‎‎‏‎‎‏‎‎‎‎‏‏‏‏‏‎‏‏‎‏‏‎‏‏‏‏‏‏‏‎‎‏‎‏‎‎‏‎‏‎‎‏‏‎‏‏‏‎‏‏‏‏‏‏‏‏‎‎‎‎‏‏‎‎‎‎‏‎‎‎‏‏‎‏‎‎‏‎‎Collapse‎‏‎‎‏‎
 Collapse the bottom sheet
 Collega account
 Coloque a frente de sua identidade no enquadramento. Segure o telefone a uma distância de 12 a 25 centímetros do centro da frente de sua identidade.
@@ -6104,7 +6104,7 @@ Connessione...
 Connetti
 Connettiti con gli altri per giocare, chattare ed esplorare insieme.
 Connettiti con gli amici su Roblox. I tuoi contatti saranno sincronizzati regolarmente e le partite con altri utenti Roblox saranno memorizzate per aiutarti a trovare amici. È possibile gestire questo in qualsiasi momento nelle impostazioni.
-CONNEXION
+Connexion
 Connexion en cours...
 Connexion impossible.
 Connexion nécessaire
@@ -6244,7 +6244,7 @@ Copier le lien
 Copier le lien pour partager avec les personnes que tu connais
 Copiouse a ligazón no portapapeis
 Copy
-Copy link
+‎‏‎‎‎‎‎‏‎‏‏‏‎‎‎‎‎‎‏‎‎‏‎‎‎‎‏‏‏‏‏‏‎‏‏‏‏‏‏‎‏‏‎‎‎‎‎‏‏‏‏‏‏‎‏‏‏‏‎‏‎‏‏‎‏‏‏‏‎‏‏‎‎‏‎‏‏‎‎‎‏‏‎‎‎‎‏‏‎‏‎‏‎‏‏‎Copy link‎‏‎‎‏‎
 Copy link to share with people you know
 Copyrighted Audio Removed
 Correo
@@ -6494,7 +6494,7 @@ Dacă anulați, progresul dvs. poate fi pierdut.
 Dadanma'ya hemen katıl!
 Dadurch verlierst du nie den Zugang zu deinem Roblox-Konto.
 Dæmi: %1$s
-DAFTAR
+Daftar
 Daftar anggota dipindahkan
 Daftar dengan Email
 Daftar dengan Nomor Ponsel
@@ -6556,7 +6556,7 @@ Danes %1$s
 Đang Khởi Chạy Lại Trải Nghiệm
 Đang Khởi Chạy Trải Nghiệm
 Đang kiểm tra...
-Đăng Ký
+Đăng ký
 Đăng ký & Vé
 Đăng ký bằng Điểm Credit Roblox
 Đăng ký bằng Điện thoại
@@ -6566,7 +6566,7 @@ Danes %1$s
 Đăng ký tài khoản miễn phí.
 Đăng ký theo dõi bài đăng trên diễn đàn
 Đăng ký và Nhận Nhiều Hơn
-Đăng nhập
+Đăng Nhập
 Đăng nhập bằng Google
 Đăng nhập bằng QQ
 Đăng nhập bằng tên %1$s
@@ -6730,7 +6730,7 @@ Dátum
 Datum auswählen
 Datum početka
 Datum početka – %1$s
-Datum početka – datum završetka
+Datum početka – Datum završetka
 Datum početka %1$s
 Datum ukončení
 Datum ukončení %1$s
@@ -6781,7 +6781,7 @@ Dê um nome para seu grupo de bate-papo
 Để xác minh danh tính của bạn, hãy cho phép %1$s truy cập micrô của bạn.
 Để xác minh danh tính của bạn, hãy cho phép %1$s truy cập vào vị trí của bạn.
 Để xác thực danh tính của bạn, hãy cho phép %1$s truy cập vào máy ảnh.
-Đề xuất cho bạn
+Đề Xuất Cho Bạn
 de.
 DEAKTİV
 Debates
@@ -6802,11 +6802,11 @@ Decision
 Décision
 Decisión
 Decisione
-Declina
+DECLINA
 Declina la richiesta di adesione
 Declina richiesta di alleanza
 Declina tutto
-Decline
+DECLINE
 Decline All
 Decline Ally Request
 Decline Join Request
@@ -6889,7 +6889,7 @@ Dela med
 Dela med %s
 Delen met
 Delen met %s
-delete
+Delete
 Delete Ally
 Delete Community Place
 Delete community wall posts
@@ -7119,7 +7119,7 @@ Dev server port: default is 33445
 Devam
 Devam edebilmek için şifreni sıfırlaman gerekiyor.
 Devam eden arama
-Devam et
+Devam Et
 Devam Et'e tıklayarak tahkim maddesi de dâhil olmak üzere Kullanım Koşullarını kabul etmiş ve Gizlilik Politikasını onaylamış sayılırsın.
 Devam etmeden önce lütfen aşağıdaki koşulları kabul et.
 Devam etmek için bir hesap seç
@@ -7173,7 +7173,7 @@ Dialogue Icon
 Dialoogi ikoon
 Dialoogikoon
 Dialoq ikonası
-DIC
+dic
 Dicentang
 Dicentang sebagian
 Dịch Sang %1$s
@@ -7200,7 +7200,7 @@ Die zweistufige Verifizierung ist für dein Konto deaktiviert. Bitte überprüfe
 Diễn đàn
 Dien een duidelijke foto van uw overheidsidentiteitsbewijs in.
 Dien navraag in
-Điện thoại
+Điện Thoại
 Dienst ist nicht verfügbar. Bitte versuche es später erneut.
 Diese Aktion wird auf Headset-Geräten noch nicht unterstützt. Bitte versuche es auf einem anderen Gerät.
 Diese Belohnung wird von %1$s bereitgestellt. Bitte wende dich bei Fragen oder für Support direkt an den Creator.
@@ -7759,7 +7759,7 @@ Elimina i post della bacheca della community
 Elimina il posto della community
 Elimina la aplicación del menú de aplicaciones recientes y reiníciala.
 Elimina post
-eliminar
+Eliminar
 Eliminar aliado
 Eliminar comunidad principal
 Eliminar conexión
@@ -7787,7 +7787,7 @@ Em uma experiência
 em vez disso, usar e-mail
 em vez disso, usar telefone
 Email
-E-mail
+E-Mail
 Email atau password salah.
 Email của cha mẹ
 E-mail de recuperação do responsável
@@ -7923,7 +7923,7 @@ Entdecke
 Entdecke %1$s.
 Entdecke einzigartige Artikel und zeig, wer du bist.
 Entdecken
-Enter
+enter
 Enter a %1$s to support your favorite Video Star! They will earn 5% of your purchase and you will keep the Robux you paid for.
 Enter a link to your experience
 Enter a valid date of birth
@@ -7945,7 +7945,7 @@ Entferne Bild
 Entfernen
 Entiendo
 Entra anche tu su %1$s
-ENTRAR
+Entrar
 Entrar com um recurso contra a alteração de gênero da experiência
 Entrar com um recurso contra a decisão de suspender minha experiência
 Entrar como %1$s
@@ -8184,7 +8184,7 @@ Esegui l'accesso e riprova.
 Esempio: %1$s
 Esimerkki: %1$s
 espace
-espacio
+Espacio
 espaço
 Espai
 Espandi a metà
@@ -8622,8 +8622,8 @@ Fingerabdrucksensor berühren
 Fingeraftrykshandlingen blev annulleret af brugeren.
 Fingeravtrycksåtgärden avbröts av användaren.
 Fingeravtrykk-operasjonen ble avbrutt av brukeren.
-‎‏‎‎‎‎‎‏‎‏‏‏‎‎‎‎‎‎‏‎‎‏‎‎‎‎‏‏‏‏‏‏‏‏‏‏‎‎‏‎‎‎‎‎‎‏‏‏‏‎‏‏‎‏‏‏‏‏‏‏‏‎‏‎‏‏‏‎‏‏‎‎‏‎‏‏‎‏‏‎‏‏‏‎‎‏‎‏‎‏‏‎‏‏‏‎‎Fingerprint hardware not available.‎‏‎‎‏‎
-Fingerprint operation canceled by user.
+Fingerprint hardware not available.
+‎‏‎‎‎‎‎‏‎‏‏‏‎‎‎‎‎‎‏‎‎‏‎‎‎‎‏‏‏‏‏‏‏‏‏‎‏‎‎‏‏‏‎‏‏‎‏‏‎‎‎‏‎‏‏‏‏‎‎‎‏‏‏‎‏‎‏‎‎‏‏‏‎‏‏‏‎‏‎‏‎‏‏‏‎‎‏‎‏‏‎‎‎‎‏‏‎Fingerprint operation canceled by user.‎‏‎‎‏‎
 Fingerprint operation cancelled by user.
 Fingrafarsvélbúnaður ekki til staðar.
 Finish Account Setup Before Log Out
@@ -8798,7 +8798,7 @@ Función+
 Funcionalidade não disponível. Contate o Suporte Roblox.
 Functie +
 Function மற்றும்
-‎‏‎‎‎‎‎‏‎‏‏‏‎‎‎‎‎‎‏‎‎‏‎‎‎‎‏‏‏‏‎‏‏‏‎‏‎‎‏‏‎‏‎‏‎‎‎‎‎‏‏‏‏‎‎‎‎‎‏‏‎‎‎‏‏‎‎‏‎‎‏‏‎‎‏‎‎‏‎‎‎‏‏‎‎‏‎‎‎‏‏‏‎Function+‎‏‎‎‏‎
+Function+‎
 Fundos
 Fundos da comunidade visíveis publicamente
 Fundos da comunidade:
@@ -9441,7 +9441,7 @@ Güvenli ödeme
 Güvenlik Bildirimleri
 Gwall camera. Trio eto os gwelwch yn dda.
 Gwall rhwydwaith. Gwiriwch eich cysylltiad rhyngrwyd a rhowch gynnig arall arni.
-H
+h
 Há beneficiários demais.
 Ha fényképet szeretne készíteni hatósági igazolványáról, engedélyezze a %1$s hozzáférést a kamerájához.
 Ha törli, a folyamat elveszhet.
@@ -9877,11 +9877,11 @@ Hưởng đặc quyền riêng
 Hướng dẫn Quyền Riêng tư dành cho Trẻ em
 Hủy
 Huỷ
-Hủy bỏ
+Hủy Bỏ
 Hủy Bỏ Lời Mời Bang Hội
 Hủy Bỏ Yêu Cầu
 Huy Hiệu Đã Xác Thực
-huy hiệu đã xác thực sẽ bị loại bỏ.
+Huy hiệu đã xác thực sẽ bị loại bỏ.
 Huy hiệu này giúp xác thực người đeo là một nhà sáng tạo, thương hiệu hoặc nhân vật công chúng đáng chú ý và đáng tin.
 Hủy Theo Dõi %1$s
 Hủy Theo Dõi Trải Nghiệm
@@ -10045,7 +10045,7 @@ Ignorar todos
 Ignorar tudo
 IGNORE
 Ignore All
-IGNORER
+Ignorer
 Ignorer pour l'instant
 Ignorer, se déconnecter quand même
 IGNORIEREN
@@ -10066,7 +10066,7 @@ Ikke gjenkjent
 Ikke markeret
 Iklan
 Iklan Tidak Pantas
-Iklankan Komunitas
+Iklankan komunitas
 Ikon Dialog
 Ikon for dialogboks
 Ikon Lencana Premium
@@ -10086,7 +10086,7 @@ Ikuti
 Ikuti aturan Standar Komunitas kami. Jika tidak, akunmu akan menerima lebih banyak peringatan atau penangguhan.
 il
 Il %1$s, Roblox non supporterà più OS v%2$s. Aggiorna il tuo OS a v%3$s o superiore per continuare a giocare a Roblox.
-il badge verificato verrà rimosso.
+Il badge verificato verrà rimosso.
 Il campo del nome non può essere vuoto
 Il client e il server non sono sincronizzati!
 Il contenuto è stato moderato. Messaggio non inviato.
@@ -10404,7 +10404,7 @@ Iniciando a experiência
 Iniciando sesión
 Iniciando sesión...
 Iniciando…
-INICIAR SESIÓN
+Iniciar sesión
 Iniciar sesión como %1$s
 Iniciar sesión con Google
 Iniciar sesión en %1$s
@@ -10520,7 +10520,7 @@ Intervalo inválido.
 İntihar, Kendine Zarar Verme ve Zararlı Davranışlar
 İntihar, Kendine Zarar Verme ve Zararlı Davranışlar.
 Intimidation et harcèlement
-Intro
+intro
 Introduce el código (6 dígitos)
 Introduce el código que te acabamos de enviar por correo electrónico.
 Introduce el código que te acabamos de enviar por mensaje de texto.
@@ -10561,7 +10561,7 @@ Invia richiesta di alleanza
 Invia un messaggio
 Invia una foto nitida del tuo documento d'identità.
 Inviami un codice monouso
-INVIO
+Invio
 Invio non riuscito
 Invita
 Invita a un amigo y ambos ganarán una recompensa.
@@ -10612,7 +10612,7 @@ Iphutha lamasevisi we-Google Play
 Iphutha: okungavumelekile
 İptal
 İptal ederseniz ilerlemeniz kaybolabilir.
-İptal Et
+İptal et
 İptal?
 Ir
 Ir a Detalles
@@ -11032,7 +11032,7 @@ Kapak fotoğrafı dosya biçimi veya boyutları geçersiz.
 Kapak fotoğrafı eksik.
 Kapak fotoğrafı kullanılabilir boyutlardan birinde olmalıdır: %1$s
 Kapan tanggal lahir kamu?
-KAPAT
+Kapat
 Karakter
 Karakter sınırı aşıldı %1$d / %2$d
 Karakter yang diizinkan hanya a-z, A-Z, 0-9, dan _.
@@ -11084,7 +11084,7 @@ Käufer
 Kaufvorgang läuft. Bitte versuche es später erneut.
 Kaydediliyor
 Kaydet
-Kaydol
+KAYDOL
 Kaydolma devre dışı bırakıldı. Lütfen daha sonra tekrar dene.
 Kaydolma hatası.
 Kayıt oturumunun süresi doldu. Lütfen kayıt sayfasını tekrar ziyaret et.
@@ -11226,7 +11226,7 @@ Kháng Cáo Về Việc Kiểm Duyệt Nội Dung Của Bạn
 Khansela
 Khetha amaminithi
 Khetha Ibanga
-Khetha idethi
+Khetha Idethi
 Khetha ihora
 Khetha insiza
 Khetha isikhathi
@@ -11371,7 +11371,7 @@ Kirim file log lokal kamu ke Backtrace?
 Kirim kueri
 Kirim Permintaan Sekutu
 Kirim pesan
-Kirim Ulang Kode
+Kirim ulang kode
 Kirim ulang kode dalam %1$s
 Kirimi saya kode sekali pakai melalui email
 Kirish
@@ -12050,7 +12050,7 @@ Link buferə kopyalandı
 Link copiado para a área de transferência
 Link copiado para a área de transferência.
 Link copiato negli appunti
-Link copied to clipboard
+‎‏‎‎‎‎‎‏‎‏‏‏‎‎‎‎‎‎‏‎‎‏‎‎‎‎‏‏‏‏‏‏‎‏‎‏‏‎‏‎‏‎‎‎‎‎‎‏‎‎‎‎‎‏‎‏‎‏‎‏‏‎‏‏‎‏‎‎‏‏‏‎‏‏‏‎‎‏‏‏‎‏‎‏‏‎‎‎‏‏‏‏‏‏‎‎Link copied to clipboard‎‏‎‎‏‎
 Link delen
 Link disalin ke papan klip
 Link in Zwischenablage kopiert
@@ -12144,7 +12144,7 @@ Logging out of account.
 Logging out.
 Logi sisse
 Logi sisse Google'i kontoga
-LOGIN
+Login
 Login dengan Google
 Login Diperlukan
 Login Failure. Please try again.
@@ -12619,11 +12619,11 @@ Mentés
 Menu
 Menú
 Menü
-Menu +
+MENU +
 Menú +
 Menu மற்றும்
 Menú +
-Menu+‎
+‎‏‎‎‎‎‎‏‎‏‏‏‎‎‎‎‎‎‏‎‎‏‎‎‎‎‏‏‏‏‏‏‏‏‎‎‏‏‎‎‏‎‎‏‏‏‎‎‎‎‎‎‏‏‏‎‏‏‏‏‎‎‎‎‎‏‎‎‎‏‎‏‏‏‏‎‏‎‏‏‏‎‎‎‎‏‏‏‏‎‏‏‏‏‏‎‎Menu+‎‏‎‎‏‎
 Menú+
 Menü+
 Menua +
@@ -12682,7 +12682,7 @@ Meta taustiņš +
 Meta மற்றும்
 Meta +
 Meta + 
-‎‏‎‎‎‎‎‏‎‏‏‏‎‎‎‎‎‎‏‎‎‏‎‎‎‎‏‏‏‏‏‏‎‏‏‏‎‏‎‎‎‏‎‏‏‎‏‏‎‏‏‏‎‎‎‏‎‎‎‏‎‎‎‎‏‏‏‏‎‎‏‏‎‎‏‎‎‎‎‎‏‎‏‎‎‏‎‎‏‏‏‏‏‏‎‎Meta+‎‏‎‎‏‎
+Meta+‎
 Méta+
 Metadaten der Communitykonfiguration können nicht geladen werden.
 Meta-Taste +
@@ -13065,7 +13065,7 @@ Naməlum xəta
 Namesti
 Namestitev storitev Google Play
 Namuhla %1$s
-Nâng Cấp
+Nâng cấp
 Nâng Cấp Để Tham Gia
 Nâng cấp gói Builders Club của bạn để tham gia nhiều cộng đồng hơn.
 Nâng cấp lên Roblox Premium để tham gia nhiều cộng đồng hơn.
@@ -13174,10 +13174,10 @@ Navigasi ke atas
 Navigasi ke tahun %1$d
 Navigasi ke tahun semasa %1$d
 Navigasi laman utama
-‎‏‎‎‎‎‎‏‎‏‏‏‎‎‎‎‎‎‏‎‎‏‎‎‎‎‏‏‏‏‏‏‏‏‎‏‎‎‏‎‏‏‏‏‎‎‎‏‎‎‏‎‎‏‎‏‎‎‎‎‏‏‎‏‎‏‏‎‎‏‎‎‎‏‎‏‎‏‏‏‎‏‎‎‎‎‏‏‎‏‏‏‏‏‏‎‎Navigate home‎‏‎‎‏‎
+Navigate home
 Navigate to current year %1$d
 Navigate to year %1$d
-Navigate up
+‎‏‎‎‎‎‎‏‎‏‏‏‎‎‎‎‎‎‏‎‎‏‎‎‎‎‏‏‏‏‏‏‏‏‏‏‎‏‎‎‎‏‏‎‏‎‎‎‏‏‎‎‎‏‏‏‏‎‏‎‎‎‎‏‏‎‏‏‎‏‎‎‏‎‎‏‎‎‎‎‎‎‏‎‏‎‎‎‎‏‏‏‎‎‎‎‎Navigate up‎‏‎‎‏‎
 Navigați la anul %1$d
 Navigați la anul actual %1$d
 Navigeerige praegusele aastale %1$d
@@ -13531,7 +13531,7 @@ No es posible ejecutar la aplicación %1$s sin los Servicios de Google Play, que
 No existe un miembro que tenga este rol.
 No experiences are associated with this community.
 No file chosen
-‎‏‎‎‎‎‎‏‎‏‏‏‎‎‎‎‎‎‏‎‎‏‎‎‎‎‏‏‏‏‏‏‏‏‏‎‏‎‎‎‎‏‎‏‏‏‏‎‏‏‏‏‎‎‎‎‎‏‏‏‎‎‎‏‎‎‏‏‏‏‎‎‎‏‏‏‏‎‎‏‏‎‏‎‎‏‏‏‏‏‏‎‎‎‎‎‎No fingerprints enrolled.‎‏‎‎‏‎
+No fingerprints enrolled.
 No fue posible completar la solicitud. Inténtalo de nuevo.
 No fue posible contactar al servidor: ¡Excepción SSL Handshake!
 No futuro próximo, a Roblox não vai mais suportar este dispositivo porque ele usa OpenGL ES 2.0, uma API gráfica que estamos descontinuando para suporte. Para continuar jogando na Roblox, use um dispositivo que seja compatível com %1$s.
@@ -13549,7 +13549,7 @@ No momento, esta experiência não pode ser compartilhada.
 No more friends can be added to this conversation
 No One!
 No PIN, pattern or password set.
-No PIN, pattern, or password set.
+‎‏‎‎‎‎‎‏‎‏‏‏‎‎‎‎‎‎‏‎‎‏‎‎‎‎‏‏‏‏‏‏‎‏‏‎‏‎‎‏‎‎‏‏‏‏‏‎‎‏‎‎‎‎‎‏‎‏‎‏‎‎‎‎‏‏‏‏‎‎‎‏‎‏‏‏‏‏‏‎‎‏‎‎‏‎‏‏‏‎‎‏‎‎‏‎No PIN, pattern, or password set.‎‏‎‎‏‎
 No podemos generar un nombre de usuario para ti. Introduce un nombre de usuario nuevo.
 No previous names
 No products available.
@@ -13737,7 +13737,7 @@ Nomor ponsel diperlukan.
 Nomor ponsel kamu belum terverifikasi. Log in dengan nama pengguna kamu.
 Nomor telepon tidak valid.
 Noms précédents
-NON
+Non
 Non c'è nessun proprietario della community
 Non ci sono esperienze a cui hai giocato di recente. Apri l'app Roblox per scoprirne di nuove.
 Non ci sono richieste di adesione in sospeso.
@@ -13802,7 +13802,7 @@ Not available
 Not available on this device
 Not checked
 Not everyone in this chat can see your message.
-Not Now
+Not now
 Not recognised
 Not recognized
 Not ticked
@@ -13888,7 +13888,7 @@ Nouveau nom d'utilisateur
 Nouveaux chats
 Nouvelle application disponible
 Nouvelle notification
-NOV
+nov
 Nov.
 Nova notificação
 Nova obavijest
@@ -13972,7 +13972,7 @@ Nýja útgáfu af þjónustu Google Play vantar. Hún uppfærir sig sjálf innan
 Nykyinen valinta: %1$s
 Nytt varsel
 Nyújtsa be a hivatalos személyazonosító igazolványának egyértelmű fényképét.
-o
+O
 O %1$s não é executado enquanto não atualizar os serviços do Google Play.
 O %1$s não é executado sem os serviços do Google Play, os quais estão a ser atualizados.
 O %1$s não é executado sem os Serviços do Google Play, os quais estão em falta no seu dispositivo.
@@ -14081,7 +14081,7 @@ Odaberite prijepodne ili poslijepodne
 Odaberite raspon
 Odaberite sat
 Odabir aplikacije
-Odabir datuma početka: %1$s – odabir datuma završetka: %2$s
+Odabir datuma početka: %1$s – Odabir datuma završetka: %2$s
 Odabir vremena
 Odabrani datum
 Odbaci
@@ -14116,7 +14116,7 @@ Odstranite %1$s
 Ödülünü kazanmaya çok yaklaştın! Çıkmak istediğinden emin misin?
 Odustani
 Of margar tilraunir. Reyndu aftur síðar.
-‎‏‎‎‎‎‎‏‎‏‏‏‎‎‎‎‎‎‏‎‎‏‎‎‎‎‏‏‏‏‏‏‎‏‏‏‎‏‎‏‎‎‎‎‎‏‎‎‎‏‏‏‎‏‏‎‎‏‏‎‏‏‎‏‎‎‎‎‎‏‏‎‏‎‏‏‎‏‏‏‎‎‏‎‎‏‏‎‎‏‏‏‎‏‏‎OFF‎‏‎‎‏‎
+OFF
 Öffentlich
 Offline
 Öğe Ayrıntıları
@@ -14129,7 +14129,7 @@ Ogiltigt format.
 Ogiltigt intervall.
 Ograničenje broja znakova premašuje %1$d od %2$d
 Ôi! Đã xảy ra sự cố.
-Ok
+OK
 Okänt fel
 Okay
 Oke
@@ -14152,10 +14152,10 @@ Omejitev števila znakov je presegla %1$d od %2$d
 Omhoog navigeren
 Omogočanje storitev Google Play
 Omogoči
-Omogući
-Omogućite Google Play usluge
+Omogući
+Omogućite Google Play usluge
 Omogućivanje usluga Google Playa
-‎‏‎‎‎‎‎‏‎‏‏‏‎‎‎‎‎‎‏‎‎‏‎‎‎‎‏‏‏‏‏‎‎‏‏‎‎‎‏‎‎‏‎‎‎‎‎‎‏‎‏‏‏‎‎‎‎‎‎‏‎‏‎‎‎‎‎‎‎‏‎‎‎‎‏‎‎‎‏‏‏‏‏‎‎‏‏‎‏‏‎‎‎‎ON‎‏‎‎‏‎
+ON
 Ön
 On %1$s, Roblox will no longer support OS v%2$s. Please upgrade your OS to v%3$s or higher to continue playing Roblox.
 On %1$s, Roblox will no longer support this device because it uses OpenGL ES 2.0, a graphics API which we are deprecating. To keep playing Roblox, please use a device that is compatible with %2$s.
@@ -14195,7 +14195,7 @@ Oortjie
 Opa! Conversa não disponível
 Opdater
 Opdater Google Play-tjenester
-‎‏‎‎‎‎‎‏‎‏‏‏‎‎‎‎‎‎‏‎‎‏‎‎‎‎‏‏‏‏‏‏‎‏‎‏‏‏‏‎‏‎‏‏‏‏‎‎‎‎‏‎‎‏‏‎‏‎‏‏‏‎‎‎‏‏‎‎‎‏‏‏‎‎‏‎‏‎‏‎‏‏‎‎‏‏‏‎‎‎‏‎‏‎‏‎Open in browser‎‏‎‎‏‎
+Open in browser
 Open on phone
 Openen in browser
 Openen op telefoon
@@ -14325,7 +14325,7 @@ Ou essayer une autre manière
 Où sont mes Robux ?
 Ou tente de outra maneira
 Ouh là, c'est la cohue ! Pour éviter les ralentissements, nous affichons actuellement une version épurée de ce profil. Reviens plus tard pour le consulter intégralement.
-OUI
+Oui
 Oui, annuler
 Oups ! La conversation n'est pas disponible.
 Oups ! Un problème est survenu.
@@ -14372,7 +14372,7 @@ Oyunumuzu oynadığın için teşekkürler.
 Özellik kullanılamıyor. Lütfen destek ile iletişime geç.
 Özet
 Označeno
-p
+P
 p. m.
 p.m.
 P/M
@@ -14449,7 +14449,7 @@ Panell lateral
 Panggilan
 Panggilan masuk
 Panggilan Roblox
-Panggilan sedang Berlangsung
+Panggilan sedang berlangsung
 Panggilan Wajah Memerlukan Kamera
 Panjang password minimal 8 karakter.
 Panoya kopyalandı
@@ -14649,7 +14649,7 @@ Passkeys are safer than passwords because they can't be reused or guessed by oth
 Passkeys sind sicherer als Passwörter, da sie von anderen nicht wiederverwendet oder erraten werden können.
 Passnøkkel
 Passord
-‎‏‎‎‎‎‎‏‎‏‏‏‎‎‎‎‎‎‏‎‎‏‎‎‎‎‏‏‏‏‏‏‏‏‏‏‎‏‎‎‏‎‎‎‏‎‎‎‎‎‏‏‎‎‎‏‎‎‏‎‎‏‎‏‏‎‏‏‏‎‎‏‏‎‏‎‏‎‏‏‎‏‏‏‏‏‏‏‏‎‏‎‎‎‏‏‎Password‎‏‎‎‏‎
+Password
 Password (4 letters and 2 numbers min.)
 Password (min. 4 huruf dan 2 angka)
 Password (min. 4 lettere e 2 numeri)
@@ -14931,7 +14931,7 @@ perto
 Peru
 Perundungan (Bullying) dan Pelecehan
 Përzgjidh minutat
-pesan
+Pesan
 Pesan Chat
 Pesan ini tidak dapat ditampilkan.
 Pesan ini tidak tersedia
@@ -14989,7 +14989,7 @@ Phiên bản ứng dụng này không còn khả dụng ở khu vực của bạ
 Phiên bản WeChat không được hỗ trợ
 Phiên của bạn đã hết hạn. Vui lòng đăng nhập lại.
 Phiên đăng ký đã hết hạn, vui lòng truy cập lại vào trang đăng ký.
-Phổ Biến
+Phổ biến
 Phone
 Phone Number
 PhoneNumber is required.
@@ -15666,13 +15666,13 @@ Quản trị viên cộng đồng.
 Quan trọng: Thay đổi này sẽ làm mất huy hiệu đã xác thực của bạn. Bạn chỉ có thể đổi tên hiển thị một lần trong mỗi 7 ngày.
 Quan trọng: Thay đổi này sẽ làm mất huy hiệu đã xác thực của bạn. Ngày tạo tài khoản ban đầu của bạn sẽ được dùng cho tên tài khoản mới.
 Quảng Cáo
-Quảng cáo cộng đồng
+Quảng Cáo Cộng Đồng
 Quảng Cáo Không Phù Hợp
 Quảng cáo mà bạn đang xem có thể được dựa trên các thông tin bao gồm loại thiết bị, ID thiết bị, hành vi trực tuyến, địa điểm và độ tuổi, từ đó phân phát cho bạn những quảng cáo phù hợp và liên quan. Để thay đổi Tùy chọn quảng cáo, hãy truy cập trang "Quyền riêng tư và mức độ nội dung người lớn" trong phần cài đặt tài khoản.
 Nhà quảng cáo/Bên chi trả : %1$s.
 Quantidade
 Quase lá!
-Quay Lại
+Quay lại
 Quay lại vị trí bạn đã dừng lại trong %1$s!
 Quay vào lại vào ����
 Que sont les Robux ?
@@ -15882,7 +15882,7 @@ Recommandé
 Recommandé pour toi
 Recommencez
 Recommended
-Recommended for you
+Recommended For You
 Recommended Games
 Recompensa de referência de amizade
 Recompensa ganha
@@ -15937,7 +15937,7 @@ Réessayer
 Referral Program Terms
 reformulado
 reformulé
-Refuser
+REFUSER
 Refuser la demande d'alliance
 Refuser la demande de participation
 Refuzo
@@ -15949,7 +15949,7 @@ Registrando
 Regístrate
 Regístrate con el correo electrónico
 Regístrate con el teléfono
-Registrati
+REGISTRATI
 Registrati per creare un account gratuito
 Registrazione in corso
 Registriere dich für ein kostenloses Konto.
@@ -16060,7 +16060,7 @@ Replega el full inferior
 Replied to themself
 Replied to you
 Reply
-RÉPONDRE
+Répondre
 Répondu à eux-mêmes
 Réponse erronée du serveur.
 Réponses sur le forum
@@ -16106,7 +16106,7 @@ Requisitos del sistema de Roblox
 Requisitos para entrar
 Requisitos para unirse
 Réseaux sociaux
-Resend Code
+Resend code
 Resend code in %1$ss
 Reset
 Reset Password
@@ -16263,7 +16263,7 @@ Riscatta credito Roblox
 riscritto
 Risiko des Kontoverlustes akzeptieren und abmelden
 Risorse
-Rispondi
+RISPONDI
 Risposte del forum
 Risposto a loro
 Risposto a te
@@ -16971,7 +16971,7 @@ Scopri di più
 Scopri di più sul sito esterno
 Scorri giù
 Scorri su
-Screening an incoming call
+‎‏‎‎‎‎‎‏‎‏‏‏‎‎‎‎‎‎‏‎‎‏‎‎‎‎‏‏‏‏‎‎‎‏‏‎‏‎‎‎‏‏‏‎‎‏‎‎‏‎‏‎‎‎‏‏‎‎‏‎‎‎‏‏‏‎‎‏‎‏‎‏‏‏‏‏‎‏‏‏‏‎‏‎‏‏‏‎‎‎Screening an incoming call‎‏‎‎‏‎
 Scroll Down
 Scroll ke Atas
 Scroll ke Bawah
@@ -17052,7 +17052,7 @@ Search term was filtered
 Search term was left empty.
 Search terms can be 2 to 50 characters long.
 Search Users
-Search…
+‎‏‎‎‎‎‎‏‎‏‏‏‎‎‎‎‎‎‏‎‎‏‎‎‎‎‏‏‏‏‏‏‏‏‏‎‎‏‎‎‎‎‎‎‏‎‎‎‎‎‏‏‏‎‏‏‏‎‏‏‎‏‎‎‎‏‎‎‎‏‏‏‏‏‏‎‎‎‎‏‏‏‏‏‎‏‏‏‏‎‏‏‎‏‎‎‎Search…‎‏‎‎‏‎
 Searching for Nearby Roblox users
 Sebagai subscriber Premium, kamu mendapatkan Robux 10% lebih banyak setiap kali kamu membeli paket Robux.
 Sebahagiannya ditandai
@@ -17073,7 +17073,7 @@ Security Notifications
 Sedang populer ����
 Sedang Tren di %1$s
 Sedang Tren di %1$s.
-‎‏‎‎‎‎‎‏‎‏‏‏‎‎‎‎‎‎‏‎‎‏‎‎‎‎‏‏‏‏‏‎‏‏‎‎‎‎‏‎‎‎‎‎‏‎‏‏‏‎‎‎‏‎‎‎‎‏‏‎‏‏‏‎‎‎‎‏‏‏‎‎‏‎‎‎‎‏‏‏‎‏‏‎‏‎‏‎‏‎‎‎‎‏‎See all‎‏‎‎‏‎
+See all
 See New Wall Posts
 See seade ei toeta PIN-koodi, mustrit ega parooli.
 SEES
@@ -17165,16 +17165,16 @@ Selecione um contato
 Selecione um emote para fazer uma pose com seu avatar!
 Selecione um método de pagamento
 Select a contact
-Select a payment method
+Select a Payment Method
 Select a.m. or p.m.
 Select AM or PM
 Select an emote to pose your avatar!
 Select Commit
 Select Country
-Select Date
+Select date
 Select hour
 Select minutes
-Select range
+Select Range
 Select the new community owner
 Select time
 Selectarea datei de începere: %1$s – selectarea datei de încheiere: %2$s
@@ -17330,8 +17330,8 @@ S'ha copiat l'enllaç al porta-retalls
 S'ha superat el límit de caràcters (%1$d de %2$d)
 Share
 Share Invite Link
-‎‏‎‎‎‎‎‏‎‏‏‏‎‎‎‎‎‎‏‎‎‏‎‎‎‎‏‏‏‏‏‏‏‏‏‎‎‎‏‏‎‎‏‎‏‎‎‏‏‎‏‏‏‎‎‎‎‏‎‎‏‏‎‏‎‏‎‎‎‏‏‏‏‎‏‏‎‏‎‏‎‎‏‏‏‏‏‎‎‎‎‎‎‏‎‎‎Share link‎‏‎‎‏‎
-‎‏‎‎‎‎‎‏‎‏‏‏‎‎‎‎‎‎‏‎‎‏‎‎‎‎‏‏‏‏‏‏‏‏‏‏‏‎‏‏‎‎‏‎‏‎‏‎‏‏‎‏‎‎‏‏‎‎‏‎‎‏‎‎‏‎‎‏‏‏‏‏‏‎‏‏‏‎‏‎‏‎‎‏‎‏‏‏‏‎‏‏‎‏‏‏‎Share with‎‏‎‎‏‎
+Share link
+Share with
 ‎‏‎‎‎‎‎‏‎‏‏‏‎‎‎‎‎‎‏‎‎‏‎‎‎‎‏‏‏‏‏‏‏‏‏‏‏‏‎‏‏‎‏‎‏‎‏‎‏‏‎‎‎‏‏‎‏‏‏‎‎‏‎‏‎‎‏‎‏‏‏‎‎‏‏‏‏‏‎‎‏‎‎‏‏‏‏‎‎‎‎‏‏‏‎‎‎Share with ‎‏‎‎‏‏‎%s‎‏‎‎‏‏‏‎‎‏‎‎‏‎
 Share with people you know
 Sharing Personal Information
@@ -17343,7 +17343,7 @@ Shfaq menynë me lëshim poshtë
 Shift +
 Shift மற்றும்
 Shift +
-Shift+‎
+‎Shift+‎
 Shintshela kumodi yewashi ngokufakwa kwesikhathi.
 Shintshela kumodi yokufaka umbhalo ngokufaka isikhathi.
 Shintshela kunyanga edlule
@@ -17393,7 +17393,7 @@ Sichere dir 25 % mehr Robux mit Geschenkkarten von Roblox
 Sicheren Text umschalten
 Sicherheitsbenachrichtigungen
 Şiddet İçeriği ve Vahşet
-Side sheet
+Side Sheet
 Sideark
 Sieh dir %1$s an.
 Sieh dir „%1$s“ auf Roblox an!
@@ -17429,7 +17429,7 @@ Sıfırla
 Şifreyi Sıfırla
 Şifreyi sıfırlamak için kullanıcı adını gir.
 Siga as Regras da Comunidade. Se você não fizer isso, sua conta receberá mais avisos ou suspensões.
-Sign In
+Sign in
 Sign in as %1$s
 Sign in faster with a passkey
 Sign in instantly with your face, fingerprint or PIN.
@@ -17486,7 +17486,7 @@ Simbolu taustiņš +
 Simbool+
 Şimdi Al
 Şimdi Değil
-Şimdi Dene
+Şimdi dene
 Şimdi İndir
 Şimdi Oyna
 Şimdilik atla
@@ -17721,7 +17721,7 @@ Soutenir un créateur
 Sovelluksella %1$s on ongelmia Google Play Palveluiden kanssa. Yritä uudelleen.
 Şöyle demiştin:
 Soziale Medien
-space
+Space
 spacja
 Spam
 Spara
@@ -17862,7 +17862,7 @@ sử dụng email thay để thay thế
 Sử dụng Mã Xác Nhận
 Sử dụng ngôn từ và hành vi gây hại bên ngoài Roblox
 Sử dụng: %1$s
-Sự Kiện
+Sự kiện
 Sự kiện cộng đồng Roblox
 Sự kiện của Roblox
 Sự kiện Giờ nở trứng sắp kết thúc! Hãy quay lại để không bỏ lỡ màn kết hoành tráng nhé.
@@ -17976,7 +17976,7 @@ Superiore a 18 anni
 Suporte Roblox
 Support A Star
 Suppression de l'audio protégé par des droits d'auteur
-supprimer
+Supprimer
 Supprimer %1$s
 Supprimer connexion
 Supprimer la communauté principale
@@ -18023,10 +18023,10 @@ Switch to next camera
 Switch to text input mode
 Switch to text input mode for the time input.
 Syarat Bergabung
-SYM +
+Sym +
 Sym மற்றும்
 Sym +
-‎Sym+‎
+‎‏‎‎‎‎‎‏‎‏‏‏‎‎‎‎‎‎‏‎‎‏‎‎‎‎‏‏‏‏‏‏‏‏‎‏‎‏‎‏‏‏‎‎‎‏‎‏‏‎‏‏‏‎‏‏‏‎‏‏‎‏‎‎‏‏‏‏‏‎‏‎‎‎‎‎‎‎‎‎‎‎‏‎‎‎‏‎‎‏‏‎‏‏‏‎‎Sym+‎‏‎‎‏‎
 Symbol darf nicht größer als %1$s MB sein.
 Symbol fehlt oder ist ungültig.
 Symbol + 
@@ -18116,7 +18116,7 @@ Takvim giriş moduna geç
 Takvim görünümüne geçmek için dokunun
 Tal vez más tarde
 Talep beklemede
-Talep Et
+Talep et
 Talepler
 Talesøgning
 Talesøk
@@ -18200,7 +18200,7 @@ Tạo vật phẩm avatar
 Tạo Vé
 Tap here
 Tap to enter
-Tap to switch to calendar view
+Tap to switch to Calendar view
 Tap to switch to year view
 Tape un message à envoyer.
 Tapos na
@@ -18273,7 +18273,7 @@ Teilweise aktiviert
 Tek kullanımlık kod
 Tek Seferlik Kazanç
 Tekenlimiet heeft %1$d van %2$d overschreden
-Tekrar dene
+Tekrar Dene
 Tekrar giriş yapmadığın sürece bu hesabı artık bu cihazda görmeyeceksin.
 Tekrarlayan Kazanç
 Teks telah dimoderasi.
@@ -18397,7 +18397,7 @@ Terima Semua
 Terjadi eror saat bergabung ke pengalaman virtual ini.
 Terjadi eror saat mengirim pesan kamu ke %1$s
 Terjadi eror yang tidak dikenal.
-Terjadi Eror.
+Terjadi eror.
 Terjadi eror. Coba lagi nanti.
 Terjadi eror. Coba lagi.
 Terjadi eror. Keluar dari layar Daftar lalu coba lagi.
@@ -18553,7 +18553,7 @@ The role name is too long.
 The roles description is too long.
 The search term needs to be between 2 and 50 characters
 The user does not have the necessary level of premium membership.
-The verified badge will be removed.
+the verified badge will be removed.
 Þekktist ekki
 Thêm
 Thêm Bạn Bè
@@ -18609,9 +18609,9 @@ This community does not have any allies.
 This community does not have any enemies.
 This community has been locked
 This contact does not have a phone number set.
-This device does not have a fingerprint sensor
+‎‏‎‎‎‎‎‏‎‏‏‏‎‎‎‎‎‎‏‎‎‏‎‎‎‎‏‏‏‏‏‏‏‏‎‏‎‏‏‏‏‎‎‎‎‏‏‎‏‏‏‎‏‏‎‎‏‏‏‏‏‎‎‏‏‏‎‎‏‏‎‎‎‎‎‎‎‏‏‏‏‎‏‏‏‏‎‏‎‎‏‏‏‏‏‎‎This device does not have a fingerprint sensor‎‏‎‎‏‎
 This device does not support PIN, pattern or password.
-This device does not support PIN, pattern, or password.
+‎‏‎‎‎‎‎‏‎‏‏‏‎‎‎‎‎‎‏‎‎‏‎‎‎‎‏‏‏‏‏‎‏‏‏‎‎‏‎‎‎‏‎‏‎‏‎‏‎‎‏‏‎‏‏‏‎‎‏‏‎‏‎‎‎‏‎‎‏‏‏‏‎‎‏‏‎‏‎‎‏‏‏‏‎‎‎‏‎‏‏‏‎‎‎This device does not support PIN, pattern, or password.‎‏‎‎‏‎
 This device is no longer supported by Roblox because it uses OpenGL ES 2.0, a graphics API which we deprecated. To keep playing Roblox, please use a device that is compatible with %1$s.
 This ensures that you never lose access to your Roblox account.
 This experience cannot be shared at this moment.
@@ -18658,7 +18658,7 @@ Threats, Bullying, and Harassment
 Thử %1$s.
 Thu gọn
 Thu gọn bảng dưới cùng
-Thử lại
+Thử Lại
 Thử ngay
 Thư rác
 Thực hiện lại
@@ -18763,7 +18763,7 @@ Tienes prohibido realizar esta operación.
 Tieni fermo il documento.
 Tiếp
 Tiếp theo
-Tiếp Tục
+Tiếp tục
 Tiếp tục bằng giấy tờ tùy thân
 Tiếp tục chơi
 Tiếp tục với mật khẩu
@@ -18785,11 +18785,11 @@ Tillgänglighet för Google Plays tjänster
 Tilt your head to the left.
 Tilt your head to the right.
 Tìm Bạn Bè
-Tìm hiểu thêm
+Tìm Hiểu Thêm
 Tìm hiểu thêm về trang bên ngoài
 Tìm Kiếm
 Tìm kiếm bằng giọng nói
-Tìm kiếm cộng đồng
+Tìm Kiếm Cộng Đồng
 Tìm kiếm người chơi Roblox Ở Gần
 Tìm kiếm người hoặc trải nghiệm
 Tìm kiếm trải nghiệm
@@ -18984,7 +18984,7 @@ Topluluk Geliştirme Öğesini yapılandır
 Topluluk Hedef Kitle Genişletme Bazlı Kazançları
 Topluluk kapalı
 Topluluk kapasitesine ulaştın. Yeni topluluk oluşturmadan önce lütfen bir topluluktan ayrıl.
-Topluluk kaynağı harca
+Topluluk Kaynağı harca
 Topluluk kaynağına giden gelir:
 Topluluk Kaynakları:
 Topluluk Mekânı ekle
@@ -19039,7 +19039,7 @@ Toto zariadenie nemá senzor odtlačkov prstov
 Toto zariadenie nepodporuje PIN, vzor ani heslo.
 Toto zařízení nemá snímač otisků prstů
 Toto zařízení nepodporuje kódy PIN, hesla ani gesta.
-‎‏‎‎‎‎‎‏‎‏‏‏‎‎‎‎‎‎‏‎‎‏‎‎‎‎‏‏‏‏‏‎‎‏‏‏‎‏‏‏‎‎‎‎‏‏‎‎‏‏‎‏‎‎‏‏‏‏‏‎‎‎‎‏‎‎‎‎‏‎‎‎‏‏‏‏‏‎‎‎‎‏‏‏‎‎‎‎‎‎‎‏‏‎Touch the fingerprint sensor‎‏‎‎‏‎
+Touch the fingerprint sensor
 Touch. capteur empr. digitales
 Toucher pour passer à la vue de l'année
 Toucher pour passer à la vue du calendrier
@@ -19067,7 +19067,7 @@ Traduire dans la langue d'origine
 Traduire en %1$s
 Traduzir para %1$s
 Traduzir para o idioma original
-Trải nghiệm
+Trải Nghiệm
 Trải nghiệm cộng đồng được hiển thị trên trang chủ của cộng đồng
 Trải nghiệm được yêu cầu đã đầy. Vị trí trong hàng đợi là N...
 Trải nghiệm mà tôi sở hữu
@@ -19078,7 +19078,7 @@ Trajes assombrosos, atividades enfeitiçadas e toneladas de recompensas exclusiv
 Trajes assombrosos, atividades enfeitiçadas e toneladas de recompensas exclusivas. Junte-se à Assombração agora!
 Trang bên
 Trang Bị
-Trang Chủ
+Trang chủ
 Trang phục tinh quái, các hoạt động bị nguyền rủa và vô số phần thưởng độc quyền. Tham gia The Haunt ngay!
 Trang phục tinh quái, các hoạt động bị nguyền rủa và vô số phần thưởng độc quyền. The Haunt đã bắt đầu!
 Trạng thái chứa các từ không phù hợp.
@@ -19136,7 +19136,7 @@ Tritt %1$s bei. %2$s, %3$s und 1 weitere Connection haben die Experience kürzl
 Tritt %1$s bei. 1 weitere Connection hat die Experience kürzlich gespielt.
 Trò chơi
 Trò chơi được đề xuất
-Trò Chuyện
+Trò chuyện
 Trò Chuyện Bằng Mặt Yêu Cầu Camera
 Trò chuyện với bạn bè
 Trợ giúp
@@ -19189,7 +19189,7 @@ Truy cập trang web
 Truy vấn tìm kiếm
 Trwa połączenie
 Try %1$s.
-Try Again
+Try again
 Try Now
 Try this again on a device that works with passkeys or hardware security keys. To sign in on this device, try Quick Sign-in.
 Tryck för att byta till årsvy
@@ -19220,7 +19220,7 @@ Tu as rejoint le nombre maximum de communautés.
 Tu as répondu à %1$s
 Tu as répondu à toi-même
 Tu cherches encore quelques œufs dans L'éclosion ? Trouve un set complet pour débloquer un prix exclusif.
-Từ chối
+TỪ CHỐI
 Từ chối tất cả
 Từ Chối Yêu Cầu Đồng Minh
 Từ Chối Yêu Cầu Tham Gia
@@ -19667,7 +19667,7 @@ use email instead
 Use fundos da comunidade para comprar esta função
 Use Google Wallet
 Use Google Wallet?
-Use Passkey
+Use passkey
 Use passkey instead
 Use password
 use phone instead
@@ -20150,7 +20150,7 @@ Vi phạm Nền kinh tế Roblox
 Vi phạm quyền sở hữu trí tuệ
 Viac než %1$d nových upozornení
 Více než %1$d nových oznámení
-Video
+‎‏‎‎‎‎‎‏‎‏‏‏‎‎‎‎‎‎‏‎‎‏‎‎‎‎‏‏‏‏‏‏‏‏‏‏‏‎‏‎‎‎‎‎‏‎‎‏‏‏‎‎‎‏‎‎‎‏‎‏‎‏‎‎‏‏‎‎‏‏‎‎‏‎‎‎‎‏‎‏‎‏‎‎‏‏‎‏‎‎‏‎‎‎‎‎‎Video‎‏‎‎‏‎
 Vídeo
 Vidéo
 Videó
@@ -20170,7 +20170,7 @@ View audit log
 View blocked words
 View community shout
 View community wall
-View Details
+View details
 View Participants
 View Profile
 Viga
@@ -20670,7 +20670,7 @@ Xem Người Tham Gia
 Xem nhật ký quản lý
 Xem phát tin cộng đồng
 Xem qua danh bạ để tìm bạn bè đang khám phá Roblox.
-Xem Tất Cả
+Xem tất cả
 Xem tiếp
 Xem Trước Ảnh Đại Diện
 Xem trước tài liệu
@@ -20814,7 +20814,7 @@ Yillik shaklda koʻrish uchun bosing
 Yli %1$d uutta ilmoitusta
 yn ol
 Yoğun talep nedeniyle bu deneyimde özel sunucular geçici olarak kullanım dışıdır.
-YOK
+yok
 YOK SAY
 Yon varaq
 Yönet
@@ -21005,13 +21005,12 @@ Zgjidh gamën
 Zgjidh një aplikacion
 Zgjidh orën
 Zgjidh paradite ose pasdite
-zgooglebinaryaaudiobatch4x744744
-zgooglebinaryaaudionone744744
-zgooglebinaryaaudiopowersaving744744
-zgooglebinarybuck2744
-zgooglebinarycriticalthreads744744
-zgooglebinaryemitterupdates744744
-zgooglebinarymemreduce744744
+zgooglebinarycontrol745
+zgooglebinaryfmodupgrade745
+zgooglebinarym154buck2745
+zgooglebinarym154cmake745
+zgooglebinarymimalloc745
+zgooglebinaryupdateorderfile745
 Ziehpunkt
 Ziel-Community ist ungültig oder existiert nicht
 Zijblad
@@ -22120,7 +22119,7 @@ Zwiń planszę dolną
 Не в сети
 Не вибрано
 Не вказано PIN-код, ключ або пароль.
-не выбрана
+Не выбрана
 Не двигайтесь.
 Не е поставен PIN, шема или лозинка.
 Не е разпознато
@@ -22267,7 +22266,7 @@ Zwiń planszę dolną
 Неправильное использование систем Roblox
 Неправильные данные. Проверь их и повтори попытку.
 Непредвиденная ошибка: %1$s.
-Нет
+нет
 Нет аккаунта?
 Нет доступа. Повтори попытку позже.
 Нет доступных товаров.
@@ -22796,7 +22795,7 @@ Zwiń planszę dolną
 Пример: %1$s
 Примечание: последние 300 запросов в друзья будут удалены за раз при нажатии кнопки «‎Игнорировать все»‎‎.
 Прими наши Условия использования и Политику конфиденциальности.
-Принять
+ПРИНЯТЬ
 Принять все
 Принять запрос на вступление
 Принять запрос о дружбе
